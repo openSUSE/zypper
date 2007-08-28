@@ -14,6 +14,17 @@ using namespace zypp::resfilter;
 
 extern RuntimeData gData;
 
+ZyppSearchOptions::ZyppSearchOptions()
+  : _ifilter(ALL)
+  , _match_all(true)
+  , _match_words(false)
+  , _match_exact(false)
+  , _search_descriptions(false)
+  , _case_sensitive(false)
+{
+  // _kinds stays empty
+}
+
 void ZyppSearchOptions::resolveConflicts() {
   if (matchExact()) {
     // --match-all does not make sense here
@@ -69,16 +80,17 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
   ResPool pool = _zypp->pool();
 
   // search for specific resolvable type only
-  if (_options.kind() != Resolvable::Kind())
+  if (!_options.kinds().empty())
   {
     cerr_vv << "invokeOnEachSearched(): search by type" << endl;
 
     if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
     {
       // search pool on ALL or INSTALLED
-      invokeOnEach(
-        pool.byKindBegin(_options.kind()), pool.byKindEnd(_options.kind()),
-        filter_r, pool_cb);
+      std::vector<zypp::Resolvable::Kind>::const_iterator it;
+      for (it = _options.kinds().begin(); it != _options.kinds().end(); ++it) {
+        invokeOnEach( pool.byKindBegin( *it ), pool.byKindEnd( *it ), filter_r, pool_cb );
+      }
     }
 
     if (_options.installedFilter() != ZyppSearchOptions::INSTALLED_ONLY)
@@ -88,12 +100,15 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
         // search cache on ALL or UNINSTALLED by TYPE
 
 	if (_qstrings.empty())
-	  _query.iterateResolvablesByKind( _options.kind(), cache_cb );
+        {
+	  std::vector<zypp::Resolvable::Kind>::const_iterator it;
+	  for (it = _options.kinds().begin(); it != _options.kinds().end(); ++it) {
+	    _query.iterateResolvablesByKind( *it, cache_cb );
+	  }
+        }
 	else
         {
-          std::vector<zypp::Resolvable::Kind> kinds;
-	  kinds.push_back( _options.kind() );
-          _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, (_options.matchExact() ? cache::MATCH_EXACT : cache::MATCH_SUBSTRING)|cache::MATCH_NAME, cache_cb );
+          _query.iterateResolvablesByKindsAndStrings( _options.kinds(), _qstrings, (_options.matchExact() ? cache::MATCH_EXACT : cache::MATCH_SUBSTRING)|cache::MATCH_NAME, cache_cb );
         }
       }
       catch ( const Exception & excpt_r )
@@ -110,8 +125,16 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
   // doesn't contain wildcards
   else if (_options.matchExact() && _qstrings.size() == 1 &&
       _qstrings[0].find('*') == string::npos &&
-      _qstrings[0].find('?') == string::npos) {
+      _qstrings[0].find('?') == string::npos)
+  {
     cerr_vv << "invokeOnEachSearched(): exact name match" << endl;
+
+    std::vector<zypp::Resolvable::Kind> kinds = _options.kinds();
+
+    // default to packages
+    if (kinds.empty()) {
+      kinds.push_back( ResTraits<Package>::kind );
+    }
 
     if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
     {
@@ -125,10 +148,8 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
     {
       try
       {
-      // search cache on ALL or UNINSTALLED by Kind AND Name
+        // search cache on ALL or UNINSTALLED by Kind AND Name
 
-        std::vector<zypp::Resolvable::Kind> kinds;
-	kinds.push_back( ResTraits<Package>::kind );
         _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_EXACT|cache::MATCH_NAME, cache_cb );
       }
       catch ( const Exception & excpt_r )
@@ -141,8 +162,16 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
   }
 
   // search among all resolvables
-  else {
+  else
+  {
     cerr_vv << "invokeOnEachSearched(): search among all resolvables" << endl;
+
+    std::vector<zypp::Resolvable::Kind> kinds = _options.kinds();
+
+    // default to packages
+    if (kinds.empty()) {
+      kinds.push_back( ResTraits<Package>::kind );
+    }
 
     if (_options.installedFilter() != ZyppSearchOptions::UNINSTALLED_ONLY)
     {
@@ -154,10 +183,8 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
     {
       try
       {
-      // search cache on ALL or UNINSTALLED by WILD NAME
+        // search cache on ALL or UNINSTALLED by WILD NAME
 
-        std::vector<zypp::Resolvable::Kind> kinds;
-	kinds.push_back( ResTraits<Package>::kind );
         _query.iterateResolvablesByKindsAndStrings( kinds, _qstrings, cache::MATCH_SUBSTRING|cache::MATCH_NAME, cache_cb );
       }
       catch ( const Exception & excpt_r )
@@ -178,7 +205,7 @@ ZyppSearch::invokeOnEachSearched(_Filter filter_r, _PoolCallback pool_cb, _Cache
 void ZyppSearch::cacheInstalled() {
   // don't include kind string in hash map key if search is to be restricted
   // to particular kind (to improve performance a little bit)
-  if (_options.kind() != Resolvable::Kind())
+  if (_options.kinds().size() == 1)
     _icache.setIncludeKindInKey(false);
 
   cout_v << _("Pre-caching installed resolvables matching given search criteria... ") << endl;
@@ -187,8 +214,9 @@ void ZyppSearch::cacheInstalled() {
 
   _zypp->addResolvables(tgt_resolvables, true /*installed*/);
 
-  invokeOnEachSearched(Match(_reg,_options.searchDescriptions()),
-    functorRef<bool,const zypp::PoolItem &>(_icache), functorRef<bool, const data::RecordId &, data::ResObject_Ptr>(_icache));
+  invokeOnEachSearched( Match( _reg, _options.searchDescriptions()),
+    functorRef<bool,const zypp::PoolItem &>(_icache), functorRef<bool, const data::RecordId &, data::ResObject_Ptr>(_icache)
+  );
 
   cout_v << _icache.size() << _(" out of (") <<  tgt_resolvables.size() << ")"  
     << _("cached.") << endl;
@@ -216,7 +244,7 @@ ZyppSearch::doSearch(const boost::function<bool(const PoolItem &)> & f, const zy
   
   filter = chain(filter,DuplicateFilter(_idcache));
 
-  invokeOnEachSearched(filter, f, r);
+  invokeOnEachSearched( filter, f, r );
 }
 
 //! macro for word boundary tags for regexes

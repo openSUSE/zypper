@@ -12,6 +12,7 @@
 #define ZYPPERSEARCH_H_
 
 #include <string>
+#include <vector>
 #include <boost/regex.hpp>
 #include <boost/function.hpp>
 #include <zypp/ZYpp.h>
@@ -36,12 +37,7 @@ public:
     UNINSTALLED_ONLY
   };
 
-  ZyppSearchOptions () :
-    _ifilter(ALL),
-    _match_all(true), _match_words(false), _match_exact(false),
-    _search_descriptions(false), _case_sensitive(false),
-    _kind(zypp::Resolvable::Kind())
-    {}
+  ZyppSearchOptions();
 
   void resolveConflicts();
 
@@ -52,7 +48,7 @@ public:
   bool matchExact() const { return _match_exact; }
   bool searchDescriptions() const { return _search_descriptions; }
   bool caseSensitive() const { return _case_sensitive; }
-  zypp::Resolvable::Kind kind() const { return _kind; }
+  const std::vector<zypp::Resolvable::Kind> & kinds() const { return _kinds; }
 
   void setInstalledFilter(const InsFilter ifilter) { _ifilter =  ifilter; }
   void setMatchAll(const bool match_all = true) { _match_all = match_all; }
@@ -61,7 +57,8 @@ public:
   void setMatchExact(const bool match_exact = true) { _match_exact = match_exact; }
   void setSearchDescriptions(const bool search_descriptions = true) { _search_descriptions = search_descriptions; }
   void setCaseSensitive(const bool case_sensitive = true) { _case_sensitive = case_sensitive; }
-  void setKind(const zypp::Resolvable::Kind & kind) { _kind = kind; }
+  void clearKinds( ) { _kinds.clear(); }
+  void addKind( const zypp::Resolvable::Kind & kind ) { _kinds.push_back( kind ); }
 
 private:
   InsFilter _ifilter;
@@ -70,7 +67,7 @@ private:
   bool _match_exact;
   bool _search_descriptions;
   bool _case_sensitive;
-  zypp::Resolvable::Kind _kind;
+  std::vector <zypp::Resolvable::Kind> _kinds;
 };
 
 struct GenericStringHash {
@@ -209,6 +206,8 @@ public:
 
   zypp::cache::ResolvableQuery *getQueryInstancePtr( void ) { return &_query; }
 
+  const ZyppSearchOptions &options() const { return _options; }
+
 private:
   zypp::ZYpp::Ptr & _zypp;
   const ZyppSearchOptions & _options;
@@ -267,8 +266,11 @@ struct ByInstalledCache
  */
 struct FillTable
 {
-  FillTable(Table & table, InstalledCache & icache, zypp::cache::ResolvableQuery * query) :
-    _table(&table), _icache(&icache), _query(query)
+  FillTable( Table & table, InstalledCache & icache, zypp::cache::ResolvableQuery * query, const ZyppSearchOptions &options )
+  : _table( &table )
+  , _icache( &icache )
+  , _query( query )
+  , _options( options )
   {
     TableHeader header;
 
@@ -291,51 +293,51 @@ struct FillTable
     *_table << header;
   }
 
-  bool operator()(const zypp::PoolItem & pool_item) const {
+  // PoolItem callback, called for installed resolvables
+
+  bool operator()(const zypp::PoolItem & pool_item) const
+  {
     TableRow row;
 
-    // add status to the result table
-    zypp::PoolItem inst_item = _icache->getItem(pool_item);
-    if (inst_item) {
-      // check whether the pool item is installed...
-      if (inst_item.resolvable()->edition() == pool_item.resolvable()->edition() &&
-          inst_item.resolvable()->arch() == pool_item.resolvable()->arch())
-        row << "i";
-      // ... or there's just another version of it installed
-      else
-        row << "v";
+    std::vector<zypp::Resolvable::Kind>::const_iterator it;
+    for (it = _options.kinds().begin(); it != _options.kinds().end(); ++it)
+    {
+      if (*it == pool_item.resolvable()->kind())
+      {
+        // add other fields to the result table
+        row << "i"
+	    << pool_item.resolvable()->repository().info().alias()
+            // TODO what about rug's Bundle?
+            << (gSettings.is_rug_compatible ? "" : pool_item.resolvable()->kind().asString()) 
+            << pool_item.resolvable()->name()
+            << pool_item.resolvable()->edition().asString()
+            << pool_item.resolvable()->arch().asString();
+        *_table << row;
+        break;
+      }
     }
-    // or it's not installed at all
-    else {
-      row << "";
-    }
-
-    // add other fields to the result table
-    row << pool_item.resolvable()->repository().info().alias()
-        // TODO what about rug's Bundle?
-        << (gSettings.is_rug_compatible ? "" : pool_item.resolvable()->kind().asString()) 
-        << pool_item.resolvable()->name()
-        << pool_item.resolvable()->edition().asString()
-        << pool_item.resolvable()->arch().asString();
-  
-    *_table << row;
-
     return true;
   }
 
-  bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res) {
+  // RecordId callback, called for uninstalled resolvables
+
+  bool operator()(const zypp::data::RecordId & id, const zypp::data::ResObject_Ptr res)
+  {
     TableRow row;
 
     // add status to the result table
     zypp::PoolItem inst_item = _icache->getItem( res );
-    if (inst_item) {
-      // check whether the pool item is installed...
-      if (inst_item.resolvable()->edition() == res->edition &&
-          inst_item.resolvable()->arch() == res->arch)
+    if (inst_item
+        && inst_item.resolvable()->arch() == res->arch)
+    {
+      if (inst_item.resolvable()->edition() == res->edition)
+      {
         row << "i";
-      // ... or there's just another version of it installed
+      }
       else
+      {
         row << "v";
+      }
     }
     // or it's not installed at all
     else {
@@ -357,12 +359,19 @@ struct FillTable
     return true;
   }
 
+  // the table used for output
   Table * _table;
 
+  // the cache of installed names (used for 'i'/'v'/' ' in first column)
   InstalledCache * _icache;
 
+  // the db query interface, used to retrieve additional data like the repository alias
   zypp::cache::ResolvableQuery * _query;
+
+  // the search options, contains i.e. the list of kinds to show
+  const ZyppSearchOptions & _options;
 };
+
 
 /**
  * Filter functor for Matching PoolItems' names (or also summaries and

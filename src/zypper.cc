@@ -1150,18 +1150,21 @@ int one_command(int argc, char **argv)
     if (copts.count("search-descriptions")) options.setSearchDescriptions();
     if (copts.count("case-sensitive")) options.setCaseSensitive();
 
-    if (copts.count("type")) {
-      string skind = copts["type"].front();
-      kind = string_to_kind (skind);
-      if (kind == ResObject::Kind ()) {
-        cerr << _("Unknown resolvable type ") << skind << endl;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    if (copts.count("type") > 0) {
+      options.clearKinds();
+      std::list<std::string>::const_iterator it;
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it) {
+	kind = string_to_kind( *it );
+        if (kind == ResObject::Kind()) {
+          cerr << _("Unknown resolvable type ") << *it << endl;
+          return ZYPPER_EXIT_ERR_INVALID_ARGS;
+        }
+        options.addKind( kind );
       }
-      options.setKind(kind);
     }
     else if (gSettings.is_rug_compatible) {
-      kind = ResTraits<Package>::kind;
-      options.setKind(kind);
+      options.clearKinds();
+      options.addKind( ResTraits<Package>::kind );
     }
 
     options.resolveConflicts();
@@ -1177,7 +1180,7 @@ int one_command(int argc, char **argv)
     t.style(Ascii);
 
     ZyppSearch search( God, options, arguments );
-    FillTable callback( t, search.installedCache(), search.getQueryInstancePtr() );
+    FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
 
     search.doSearch( callback, callback );
 

@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Aug 28 15:02:00 CEST 2007 - kkaempf@suse.de
+
+- allow for multiple types when searching, default to '-t package'
+  check architecture on search output,
+    different arch is always 'uninstalled'
+  (#300569#c12, partial)
+- rev 6931
+
+-------------------------------------------------------------------
 Tue Aug 28 12:50:27 CEST 2007 - duncan@suse.de
 
 - a init target at refresh to have keys available
