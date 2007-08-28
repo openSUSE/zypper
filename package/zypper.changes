@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 28 19:26:36 CEST 2007 - jkupec@suse.cz
+
+- displaying repo name instead of alias where appropriate (#304659)
+- don't display URI by default (#230335)
+- r6947
+
+-------------------------------------------------------------------
 Tue Aug 28 18:53:01 CEST 2007 - kkaempf@suse.de
 
 - Don't search disabled repos, override with --repo (#304653)
