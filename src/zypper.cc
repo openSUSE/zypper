@@ -255,6 +255,15 @@ int one_command(int argc, char **argv)
 //      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
 //      );
 
+  if ( (command == ZypperCommand::HELP) && (argc > 1) )
+  try {
+    ghelp = true;
+    command = ZypperCommand(argv[1]);
+  }
+  catch (Exception & ex) {
+    // in case of an unknown command specified to help, an exception is thrown
+  }
+
   if (command == ZypperCommand::HELP)
   {
     cout << help_commands;

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Aug 28 17:51:43 CEST 2007 - mvidner@suse.cz
+
+- "help foo" now works like "foo --help" (by Dominique Leuenberger, #299818).
+
+-------------------------------------------------------------------
 Tue Aug 28 17:40:25 CEST 2007 - kkaempf@suse.de
 
 - support "-r" (limit to repo) on search (#305384)
