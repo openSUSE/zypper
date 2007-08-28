@@ -243,21 +243,22 @@ namespace zypp
       std::string queryRepositoryAlias( const data::RecordId &repo_id );
 
       /**
-       * \short Iterate resolvables by Kind
+       * \short Query repo id by alias
        */
-      void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc );
+      data::RecordId queryRepositoryId( const std::string &repo_alias );
 
       /**
        * \short Iterate resolvables by Kinds and Strings
        * \param kinds kinds to match, will be ORed
        * \param names names to match, will be ANDed
-       * \param flags  MATCH_xxx, see above
+       * \param repos repository aliases to match, will be ORed
+       * \param flags  MATCH_xxx, see above; applied to 'names'
        * \param fnc callback to send the data to. (Will be called once per result)
        *
        * Beware: Searching for multiple strings with MATCH_EXACT will _not_ find anything, except if all strings are identical ...
        */
-      void iterateResolvablesByKindsAndStrings( const std::vector<zypp::Resolvable::Kind> & kinds,
-                  const std::vector<std::string> &strings, int flags, ProcessResolvable fnc );
+      void iterateResolvablesByKindsAndStringsAndRepos( const std::vector<zypp::Resolvable::Kind> & kinds,
+                  const std::vector<std::string> &names, int flags, const std::vector<std::string> &repos, ProcessResolvable fnc );
 
     private:
       /** Implementation. */

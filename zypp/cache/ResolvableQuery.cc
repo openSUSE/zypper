@@ -186,29 +186,34 @@ struct ResolvableQuery::Impl
     return alias;
   }
   
-  void iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc )
+  data::RecordId queryRepositoryId( const std::string &repo_alias )
   {
-    sqlite3_command cmd( _con, "select " + _fields + " from resolvables where kind=:kind;");
-    data::RecordId kind_id = _type_cache.idForKind( kind );
-    cmd.bind(":kind", kind_id);
+    long long id = 0;
+    sqlite3_command cmd( _con, "select id from repositories where alias=:alias;" );
+    cmd.bind( ":alias", repo_alias );
     sqlite3_reader reader = cmd.executereader();
-    while(reader.read())
+    while( reader.read() )
     {
-      fnc( reader.getint64(0), fromRow(reader) );
+      id = reader.getint64(0);
+      break;
     }
+    return id;
   }
   
-  void iterateResolvablesByKindsAndStrings( const std::vector<zypp::Resolvable::Kind> & kinds,
-                  const std::vector<std::string> &strings, int flags, ProcessResolvable fnc )
+  void iterateResolvablesByKindsAndStringsAndRepos( const std::vector<zypp::Resolvable::Kind> & kinds,
+                  const std::vector<std::string> &strings, int flags, const std::vector<std::string> repos, ProcessResolvable fnc )
   {
-    std::string sqlcmd( "SELECT " + _fields + " FROM resolvables WHERE (" );
+    std::string sqlcmd( "SELECT " + _fields + " FROM resolvables" );
+
     std::vector<std::string>::const_iterator it_s;
     for (it_s = strings.begin(); it_s != strings.end(); ++it_s)
     {
       std::string s( *it_s );
 
-      if (it_s != strings.begin())
-        sqlcmd += "AND";
+      if (it_s == strings.begin())
+        sqlcmd += " WHERE (";
+      else
+        sqlcmd += " AND ";
 
 //FIXME: Implement MATCH_RESSUMM and MATCH_RESDESC
 
@@ -231,19 +236,68 @@ struct ResolvableQuery::Impl
       sqlcmd += s;
       sqlcmd += "'";
     }
-    sqlcmd += ") AND kind IN (";
+
+    if (it_s != strings.begin())
+    {
+      sqlcmd += ")";
+    }
 
     std::vector<zypp::Resolvable::Kind>::const_iterator it_k;
-    for (it_k = kinds.begin(); it_k != kinds.end(); ++it_k)
+    if (!kinds.empty())
     {
-      if (it_k != kinds.begin())
-        sqlcmd += ", ";
-      char idbuf[16];
-      snprintf( idbuf, 15, "%d", (int)(_type_cache.idForKind( *it_k )) );
-      sqlcmd += idbuf;
-    }
-    sqlite3_command cmd( _con, sqlcmd + ")");
+      if (it_s == strings.begin())
+        sqlcmd += " WHERE";
+      else
+        sqlcmd += " AND";
 
+      for (it_k = kinds.begin(); it_k != kinds.end(); ++it_k)
+      {
+        if (it_k == kinds.begin())
+	  sqlcmd += " kind IN (";
+	else
+          sqlcmd += ", ";
+
+        char idbuf[16];
+        snprintf( idbuf, 15, "%d", (int)(_type_cache.idForKind( *it_k )) );
+        sqlcmd += idbuf;
+      }
+
+      if (it_k != kinds.begin())
+      {
+        sqlcmd += ")";
+      }
+    }
+
+    std::vector<std::string>::const_iterator it_r;
+    if (!repos.empty())
+    {
+      if (it_s == strings.begin()
+	  && it_k == kinds.begin())
+        sqlcmd += " WHERE";
+      else
+        sqlcmd += " AND";
+
+      for (it_r = repos.begin(); it_r != repos.end(); ++it_r)
+      {
+        if (it_r == repos.begin())
+	  sqlcmd += " (";
+	else
+          sqlcmd += " OR ";
+
+        sqlcmd += "repository_id = ";
+        char idbuf[16];
+        snprintf( idbuf, 15, "%ld", (long)(queryRepositoryId( *it_r )) );
+        sqlcmd += idbuf;
+      }
+
+      if (it_r != repos.begin())
+      {
+        sqlcmd += ")";
+      }
+    }
+
+MIL << "sqlcmd " << sqlcmd << endl;
+    sqlite3_command cmd( _con, sqlcmd );
     sqlite3_reader reader = cmd.executereader();
     while(reader.read())
     {
@@ -426,15 +480,10 @@ std::string ResolvableQuery::queryRepositoryAlias( const data::RecordId &repo_id
   return _pimpl->queryRepositoryAlias( repo_id );
 }
 
-void ResolvableQuery::iterateResolvablesByKind( zypp::Resolvable::Kind kind, ProcessResolvable fnc )
+void ResolvableQuery::iterateResolvablesByKindsAndStringsAndRepos( const std::vector<zypp::Resolvable::Kind> & kinds,
+                  const std::vector<std::string> &strings, int flags, const std::vector<std::string> &repos, ProcessResolvable fnc )
 {
-  return _pimpl->iterateResolvablesByKind( kind, fnc );
-}
-
-void ResolvableQuery::iterateResolvablesByKindsAndStrings( const std::vector<zypp::Resolvable::Kind> & kinds,
-                  const std::vector<std::string> &strings, int flags, ProcessResolvable fnc )
-{
-  _pimpl->iterateResolvablesByKindsAndStrings( kinds, strings, flags, fnc );
+  _pimpl->iterateResolvablesByKindsAndStringsAndRepos( kinds, strings, flags, repos, fnc );
 }
 //////////////////////////////////////////////////////////////////////////////
 

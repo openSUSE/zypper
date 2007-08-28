@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Aug 28 17:30:30 CEST 2007 - kkaempf@suse.de
+
+- rename ResolvableQuery::iterateResolvablesByKindsAndStrings
+  to ResolvableQuery::iterateResolvablesByKindsAndStringsAndRepos
+  in order to support query-by-repo (#305384)
+- fix iterateResolvablesByKindsAndStringsAndRepos to take any
+  number of kinds, names, or repos (#305347)
+- remove ResolvableQuery::iterateResolvablesByKind, not needed
+- version 3.19.0
+- rev 6935
+
+-------------------------------------------------------------------
 Tue Aug 28 11:27:53 CEST 2007 - duncan@suse.de
 
 - real fix for reading signature ids. (#390535).  
