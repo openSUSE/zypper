@@ -40,6 +40,7 @@ namespace zypp
 	public:
 	  Impl( const PackagesFileReader & parent_r )
 	  : BaseImpl( parent_r )
+          , _sysarch( ZConfig::instance().systemArchitecture() )
 	  {}
 
 	  virtual ~Impl()
@@ -57,7 +58,13 @@ namespace zypp
 	    ret.swap( _pkgData );
 	    _srcpkgData = 0;
 	    _data       = 0;
-	    return ret;
+            //  Filter unwanted stuff
+            if ( ret
+                 && ! ret->arch.compatibleWith( _sysarch ) )
+            {
+                return 0;
+            }
+            return ret;
 	  }
 
 	  data::SrcPackage_Ptr handoutSourcepackage()
@@ -298,6 +305,7 @@ namespace zypp
 	  data::Packagebase_Ptr   _data;
 	  data::Package_Ptr       _pkgData;
 	  data::SrcPackage_Ptr    _srcpkgData;
+          Arch                    _sysarch;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -313,7 +321,6 @@ namespace zypp
       //	METHOD TYPE : Ctor
       //
       PackagesFileReader::PackagesFileReader()
-      : _sysarch( ZConfig::instance().systemArchitecture() )
       {}
 
       ///////////////////////////////////////////////////////////////////
@@ -352,7 +359,7 @@ namespace zypp
 	    if ( _pkgConsumer )
 	    {
 	      data::Package_Ptr ptr = _pimpl->handoutPackage();
-	      if (ptr && ptr->arch.compatibleWith( _sysarch ))
+	      if ( ptr )
 		_pkgConsumer( ptr );
 	    }
 	  }
@@ -414,8 +421,8 @@ namespace zypp
 	  if ( _pkgConsumer )
 	  {
 	    data::Package_Ptr ptr = _pimpl->handoutPackage();
-	    if (ptr && ptr->arch.compatibleWith( _sysarch ))
-	      _pkgConsumer( ptr );
+            if ( ptr )
+              _pkgConsumer( ptr );
 	  }
 	}
 	else if ( _pimpl->hasSourcepackage() )
