@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 28 12:50:27 CEST 2007 - duncan@suse.de
+
+- a init target at refresh to have keys available
+  (#304672) 
+
+-------------------------------------------------------------------
 Mon Aug 27 15:10:43 CEST 2007 - jkupec@suse.cz
 
 - translations update
