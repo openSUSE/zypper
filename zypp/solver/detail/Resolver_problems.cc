@@ -891,7 +891,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		    // TranslatorExplanation %s = name requirement ...				
-		    what = str::form (_("Requirement %s cannot be fulfilled."), misc_info->capability().asString().c_str());		
+		    what = str::form (_("Requirememt %s cannot be fulfilled."), misc_info->capability().asString().c_str());		
 		    details = misc_info->message() + "\n";
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		    problems.push_back (problem);
