@@ -32,35 +32,35 @@ namespace zypp
 
   struct KeyRingReport : public callback::ReportBase
   {
-    
+
     virtual bool askUserToAcceptUnsignedFile( const std::string &file );
-    
+
     /**
      * we DONT know the key, only its id, but we have never seen it, the difference
      * with trust key is that if you dont have it, you can't import it later.
      * The answer means continue yes or no?
      */
     virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id );
-    
+
     /**
      * This basically means, we know the key, but it is not trusted, Continue
      * yes or no?. Nothing else is performed (import, etc)
      */
     virtual bool askUserToTrustKey( const PublicKey &key);
-    
-    
+
+
     /**
      * Import the key.
      * This means saving the key in the trusted database so next run it will appear as trusted.
-     * Nothing to do with trustKey, as you CAN trust a key without importing it, 
-     * basically you will be asked every time again. 
-     * There are programs who prefer to manage the trust keyring on their own and use trustKey 
+     * Nothing to do with trustKey, as you CAN trust a key without importing it,
+     * basically you will be asked every time again.
+     * There are programs who prefer to manage the trust keyring on their own and use trustKey
      * without importing it into rpm.
      */
     virtual bool askUserToImportKey( const PublicKey &key);
     virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key );
   };
-  
+
   struct KeyRingSignals : public callback::ReportBase
   {
     virtual void trustedKeyAdded( const PublicKey &/*key*/ )
@@ -87,7 +87,7 @@ namespace zypp
        /** Dtor. */
        virtual ~KeyRingException() throw() {};
    };
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing
@@ -113,31 +113,31 @@ namespace zypp
      * throw if key was not imported
      */
     void importKey( const PublicKey &key, bool trusted = false);
-    
+
     void dumpTrustedPublicKey( const std::string &id, std::ostream &stream )
     { dumpPublicKey(id, true, stream); }
-    
+
     void dumpUntrustedPublicKey( const std::string &id, std::ostream &stream )
     { dumpPublicKey(id, false, stream); }
-    
+
     void dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream );
-    
+
     /**
      * reads the public key id from a signature
      */
     std::string readSignatureKeyId( const Pathname &signature );
-    
+
     /**
      * true if the key id is trusted
      */
     bool isKeyTrusted( const std::string &id);
-    
+
     /**
      * true if the key id is knows, that means
      * at least exist on the untrusted keyring
      */
     bool isKeyKnown( const std::string &id );
-    
+
     /**
      * removes a key from the keyring.
      * If trusted is true, Remove it from trusted keyring too.
@@ -148,22 +148,22 @@ namespace zypp
      * Get a list of public keys in the keyring
      */
     std::list<PublicKey> publicKeys();
-    
+
     /**
      * Get a list of trusted public keys in the keyring
      */
     std::list<PublicKey> trustedPublicKeys();
-    
+
     /**
      * Get a list of public key ids in the keyring
      */
     std::list<std::string> publicKeyIds();
-    
+
     /**
      * Get a list of trusted public key ids in the keyring
      */
     std::list<std::string> trustedPublicKeyIds();
-    
+
     /**
      * Follows a signature verification interacting with the user.
      * The bool returned depends on user decision to trust or not.
@@ -194,7 +194,19 @@ namespace zypp
     return str;
   }
 
-  /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+
+  namespace target
+  {
+    namespace rpm
+    {
+      /** Internal connection to rpm database. Not for public use. */
+      struct KeyRingSignals : public ::zypp::KeyRingSignals
+      {};
+    }
+  }
+
+ /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_KEYRING_H
