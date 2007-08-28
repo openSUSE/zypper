@@ -308,6 +308,9 @@ namespace zypp
           case repo::DownloadResolvableReport::IGNORE:
           ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
           break;
+          case repo::DownloadResolvableReport::ABORT:
+          ZYPP_THROW(AbortRequestException("User requested to abort"));
+          break;
         default:
           break;
         }

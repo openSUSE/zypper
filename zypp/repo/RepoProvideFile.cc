@@ -17,6 +17,7 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/UserRequestException.h"
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/MediaSetAccess.h"
@@ -255,6 +256,16 @@ namespace zypp
 
           MIL << "provideFile at " << ret << endl;
           return ret;
+        }
+        catch ( const SkipRequestException &e )
+        {
+          ZYPP_CAUGHT( e );
+          ZYPP_RETHROW(e);
+        }
+        catch ( const AbortRequestException &e )
+        {
+          ZYPP_CAUGHT( e );
+          ZYPP_RETHROW(e);
         }
         catch ( const Exception &e )
         {
