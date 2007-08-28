@@ -20,7 +20,7 @@
 #include "zypper-callbacks.h"
 #include "zypper-utils.h"
 #include "zypper-sources.h"
-
+#include "zypper-misc.h"
 
 using namespace std;
 using namespace boost;
@@ -196,6 +196,8 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
 static int do_init_repos()
 {
+  // load gpg keys
+  cond_init_target ();
   RepoManager manager;
 
   string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
@@ -436,6 +438,8 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 int refresh_repos(vector<string> & arguments)
 {
+  // need gpg keys when downloading (#304672)
+  cond_init_target();
   RepoManager manager;
   list<RepoInfo> repos;
   try
