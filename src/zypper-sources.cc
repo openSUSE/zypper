@@ -302,14 +302,13 @@ int init_repos()
 
 // ----------------------------------------------------------------------------
 
-static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
+static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
 {
   Table tbl;
+
+  // header
   TableHeader th;
-  th << "#";
-  if (gSettings.is_rug_compatible) th << _("Status");
-  else th << _("Enabled") << _("Refresh");
-  th << _("Type") << _("Name") << "URI";
+  th << "#" << _("Status") << _("Type") << _("Name") << "URI";
   tbl << th;
 
   int i = 1;
@@ -318,32 +317,67 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
-    TableRow tr (gSettings.is_rug_compatible ? 5 : 6);
-    tr << str::numstring (i);
+    TableRow tr(5);
 
+    // number
+    tr << str::numstring(i);
+
+    // status
     // rug's status (active, pending => active, disabled <= enabled, disabled)
     // this is probably the closest possible compatibility arrangement
-    if (gSettings.is_rug_compatible)
-    {
-      tr << (repo.enabled() ? _("Active") : _("Disabled"));
-    }
-    // zypper status (enabled, autorefresh)
-    else
-    {
-      tr << (repo.enabled() ? _("Yes") : _("No"));
-      tr << (repo.autorefresh() ? _("Yes") : _("No"));
-    }
+    tr << (repo.enabled() ? _("Active") : _("Disabled"));
 
+    // type
     tr << repo.type().asString();
+    // name
+    tr << repo.name();
+    // url
+    tr << (*repo.baseUrlsBegin()).asString();
+
+    tbl << tr;
+    i++;
+  }
+
+  cout << tbl;
+}
+
+// ----------------------------------------------------------------------------
+
+static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
+{
+  Table tbl;
+
+  // header
+  TableHeader th;
+  th << "#" << _("Enabled") << _("Refresh") << _("Type") << _("Alias") << _("Name");
+  if (gSettings.verbosity > VERBOSITY_NORMAL)
+    th << "URI";
+  tbl << th;
+
+  int i = 1;
+
+  for (std::list<RepoInfo>::const_iterator it = repos.begin();
+       it !=  repos.end(); ++it)
+  {
+    RepoInfo repo = *it;
+    TableRow tr (gSettings.verbosity > VERBOSITY_NORMAL ? 6 : 7);
+    
+    // number
+    tr << str::numstring (i);
+    // enabled?
+    tr << (repo.enabled() ? _("Yes") : _("No"));
+    // autorefresh?
+    tr << (repo.autorefresh() ? _("Yes") : _("No"));
+    // type
+    tr << repo.type().asString();
+    // alias
     tr << repo.alias();
-    
-    for ( RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
-          uit != repo.baseUrlsEnd();
-          ++uit )
-    {
-      tr << (*uit).asString();
-    }
-    
+    // name
+    tr << repo.name();
+    // url
+    if (gSettings.verbosity > VERBOSITY_NORMAL)
+      tr << (*repo.baseUrlsBegin()).asString(); //! \todo properly handle multiple baseurls
+
     tbl << tr;
     i++;
   }
@@ -418,6 +452,9 @@ void list_repos()
       }
     }
   }
+  // print repo list the rug's way
+  else if (gSettings.is_rug_compatible)
+    print_rug_sources_list(repos);
   // print repo list as table
   else
     print_repo_list(repos);
