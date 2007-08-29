@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug 29 18:10:56 CEST 2007 - duncan@suse.de
+
+- better fix for #304200
+  use both content and media.1/media instead of only media
+- 3.20.0 
+
+-------------------------------------------------------------------
 Wed Aug 29 18:02:36 CEST 2007 - jkupec@suse.cz
 
 - treat non-filelists.xml <file> entries as file provides capabilities
