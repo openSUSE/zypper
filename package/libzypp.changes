@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 29 15:39:52 CEST 2007 - kkaempf@suse.de
+
+- don't treat normal package license as "license to confirm"
+  (#305906)
+
+-------------------------------------------------------------------
 Wed Aug 29 15:28:53 CEST 2007 - ma@suse.de
 
 - Fixed fix for #293039. Segfault due to uninitialzed data.
