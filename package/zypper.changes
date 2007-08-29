@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Aug 29 12:51:42 CEST 2007 - jkupec@suse.cz
+
+- proper fix for y/n translation (#304650)
+- r6965
+
+-------------------------------------------------------------------
+Wed Aug 29 12:43:17 CEST 2007 - jkupec@suse.cz
+
+- expect MediaException during commit (#305113)
+- r6964
+
+-------------------------------------------------------------------
 Tue Aug 28 19:26:36 CEST 2007 - jkupec@suse.cz
 
 - displaying repo name instead of alias where appropriate (#304659)
