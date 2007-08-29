@@ -35,7 +35,9 @@ Downloader::Downloader(const Pathname &path )
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
   Pathname content = media.provideFile( _path + "/content");
-  return RepoStatus(content);
+  Pathname mediafile = media.provideFile( _path + "/media.1/media" );
+
+  return RepoStatus(content) && RepoStatus(mediafile);
 }
 
 void Downloader::download( MediaSetAccess &media,

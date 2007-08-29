@@ -107,6 +107,12 @@ namespace zypp
   /** \relates RepoStatus Stream output */
   std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
 
+  /**
+   * combines 2 repostatus with a checksum based on both
+   * checksums and the newest timestamp
+   */
+  RepoStatus operator&&( const RepoStatus &lhs, const RepoStatus &rhs );
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

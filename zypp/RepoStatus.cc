@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 //#include "zypp/base/Logger.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/PathInfo.h"
@@ -111,6 +112,19 @@ namespace zypp
   Date RepoStatus::timestamp() const
   { return _pimpl->timestamp; }
   
+  RepoStatus operator&&( const RepoStatus &lhs, const RepoStatus &rhs )
+  {
+    RepoStatus result;
+    string combinedcs = (lhs.checksum() + rhs.checksum());
+    stringstream ss(combinedcs);
+    CheckSum newcs(CheckSum::sha1(ss));
+    result.setChecksum(newcs.checksum());
+    result.setTimestamp(lhs.timestamp());
+    if ( rhs.timestamp() > lhs.timestamp() )
+      result.setTimestamp(rhs.timestamp());
+    return result;
+  }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
