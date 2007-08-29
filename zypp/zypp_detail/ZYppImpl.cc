@@ -181,7 +181,9 @@ namespace zypp
     DiskUsageCounter::MountPointSet ZYppImpl::diskUsage()
     {
       if ( ! _disk_usage )
-        _disk_usage.reset(new DiskUsageCounter());
+      {
+        setPartitions( DiskUsageCounter::detectMountPoints() );
+      }
       return _disk_usage->disk_usage(pool());
     }
 
