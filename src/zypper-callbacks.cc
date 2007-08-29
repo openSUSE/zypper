@@ -126,14 +126,15 @@ int read_action_ari (int default_action) {
 bool read_bool_answer(const string & question, bool default_answer)
 {
   if (!gSettings.machine_readable)
-  	cout << CLEARLN << question
-  	<< " [" << _("y") << "/" << _("n") << "]: " << flush;
+    cout << CLEARLN << question
+    << " [" << _("yes") << "/" << _("no") << "]: "
+    << flush;
 
   // non-interactive mode: print the answer for convenience and return default
   if (gSettings.non_interactive)
   {
-  	if (!gSettings.machine_readable)
-	    cout << (default_answer ? 'y' : 'n') << endl;
+    if (!gSettings.machine_readable)
+      cout << (default_answer ? _("yes") : _("no")) << endl;
     MIL << "answer (default): " << (default_answer ? 'y' : 'n') << endl;
     return default_answer;
   }
@@ -142,36 +143,23 @@ bool read_bool_answer(const string & question, bool default_answer)
 
   string c = "";
   bool been_here_before = false;
-  while (stm.good ()
-    // TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
-    // answer in y/n prompts. This letter will appear in the "Question [y/n]"
-    // prompts and will be expected as a possible answer.
-    && c != _("y")
-    // TranslatorExplanation Uppercase 'Y' for "yes" used as an
-    // answer in y/n prompts.
-    && c != _("Y")
-    // TranslatorExplanation Lowercase 'n' for "no" used as an
-    // answer in y/n prompts. This letter will appear in the "Question [y/n]"
-    // prompts and will be expected as a possible answer.
-    && c != _("n")
-    // TranslatorExplanation Uppercase 'N' for "no" used as an
-    // answer in y/n prompts.
-    && c != _("N"))
+  while (stm.good() && rpmatch(c.c_str()) == -1)
   {
     if (been_here_before)
-      // TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
-      cerr << format(_("Invalid answer '%s', enter '%s' or '%s':"))
-          % c % _("y") % _("n") << " ";
+      cerr << format(
+          // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+          // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+          _("Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
+          % c % _("yes") % _("no") << ": ";
     c = zypp::str::getline (stm, zypp::str::TRIM);
     been_here_before = true;
   }
 
   MIL << "answer: " << c << endl;
-  if (c == _("y") || c == _("Y"))
-    return true;
-  else if (c == _("n") || c == _("N"))
-    return false;
-  else
+  int answer = rpmatch(c.c_str());
+  if (answer >= 0)
+    return answer;
+  else // in case of !stm.good()
   {
     WAR << "could not read answer, returning default: "
         << (default_answer ? 'y' : 'n') << endl;
