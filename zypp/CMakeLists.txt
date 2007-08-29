@@ -2,7 +2,7 @@
 # SOURCES                                                          #
 ####################################################################
 
-ADD_DEFINITIONS(-DLOCALEDIR=\\\"/usr/share/libzypp\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
+ADD_DEFINITIONS(-DLOCALEDIR=\\\"${CMAKE_INSTALL_PREFIX}/share/locale\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
 ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp/cache/schema/mkarray.c )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
