@@ -3,6 +3,7 @@ Wed Aug 29 15:28:53 CEST 2007 - ma@suse.de
 
 - Fixed fix for #293039. Segfault due to uninitialzed data.
 - version 3.19.3
+- revision 6980
 
 -------------------------------------------------------------------
 Wed Aug 29 15:10:20 CEST 2007 - schubi@suse.de
