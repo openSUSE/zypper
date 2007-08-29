@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 29 16:32:01 CEST 2007 - kkaempf@suse.de
+
+- the media.1/media uniquely identifies a 'susetags' repo, not
+  the content file (#304200)
+
+-------------------------------------------------------------------
 Wed Aug 29 15:42:17 CEST 2007 - jkupec@suse.cz
 
 - fixed locale dir (#304649)
