@@ -1215,15 +1215,11 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
   CapFactory capfactory;
   insertCaps( dataCollect[Dep::PROVIDES], header->tag_provides( filerequires ), capfactory );
 
-  static str::smatch what;
-  static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
-                                         str::regex::optimize|str::regex::nosubs );
-
   for (list<string>::const_iterator filename = filenames.begin();
        filename != filenames.end();
        ++filename)
   {
-    if ( str::regex_match( *filename, what, filenameRegex ) )
+    if ( capability::isInterestingFileSpec( *filename ) )
     {
       try
       {

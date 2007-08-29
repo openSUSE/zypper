@@ -197,6 +197,17 @@ const DiskUsage & PackageImpl::diskusage() const
     // lazy init
     _diskusage.reset( new DiskUsage );
     _repository->resolvableQuery().queryDiskUsage( _id, *_diskusage );
+    if ( _diskusage->empty() )
+    {
+      // No info: Creating a faked entry distributing the
+      // total package size in assumed 200 files to "/ZYPP_NO_DU_INFO"
+      //
+      // Note: Less likely that some system has a mountpoint named
+      // ZYPP_NO_DU_INFO, so the size will be accounted to '/'.
+      // but adding a faked mountpoint entry an application is able
+      // to spot and handle these faked data in a different manner.
+      _diskusage->add( "/ZYPP_NO_DU_INFO", size(), 200 );
+    }
   }
   return *_diskusage;
 }

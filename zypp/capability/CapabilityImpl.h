@@ -173,6 +173,13 @@ namespace zypp
     /** Test for a FileCap. \a name_r starts with \c "/". */
     bool isFileSpec( const std::string & name_r );
 
+    /** Test for a FileCap that is likely being REQUIRED.
+     * Files below \c /bin , \c /sbin ,  \c /lib etc. Scanning a
+     * packages filelist, an \e interesting FileCap might be worth
+     * being remembered in PROVIDES.
+    */
+    bool isInterestingFileSpec( const std::string & name_r );
+
     /** Test for a SplitCap. \a name_r constains \c ":/". */
     bool isSplitSpec( const std::string & name_r );
 

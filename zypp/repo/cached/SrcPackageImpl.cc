@@ -118,6 +118,12 @@ const DiskUsage & SrcPackageImpl::diskusage() const
     // lazy init
     _diskusage.reset( new DiskUsage );
     _repository->resolvableQuery().queryDiskUsage( _id, *_diskusage );
+    if ( _diskusage->empty() )
+    {
+      // No info: Creating a faked entry distributing the
+      // total source package size in assumed 20 files to "/usr/src/packages"
+      _diskusage->add( "/usr/src/packages", size(), 20 );
+    }
   }
   return *_diskusage;
 }

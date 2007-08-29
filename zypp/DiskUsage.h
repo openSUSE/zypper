@@ -62,7 +62,7 @@ namespace zypp
       }
 
       /**
-       * 
+       *
        **/
       const Entry & operator=( const Entry & rhs ) const {
         return rhs;
@@ -106,6 +106,10 @@ namespace zypp
       add( Entry( dirname_r, size_r, files_r ) );
     }
     /**
+     * Whether there is no entry available.
+     */
+    bool empty() const { return _dirs.empty(); }
+    /**
      * Number of entries
      **/
     unsigned size() const { return _dirs.size(); }
@@ -123,7 +127,7 @@ namespace zypp
 
     typedef EntrySet::iterator               iterator;
     typedef EntrySet::reverse_iterator       reverse_iterator;
- 
+
     /**
      * Forward iterator pointing to the first entry (if any)
      **/
@@ -140,10 +144,10 @@ namespace zypp
      * Reverse iterator pointing before the first entry.
      **/
     reverse_iterator rend() { return _dirs.rend(); }
- 
+
     typedef EntrySet::const_iterator         const_iterator;
     typedef EntrySet::const_reverse_iterator const_reverse_iterator;
- 
+
     /**
      * Forward const iterator pointing to the first entry (if any)
      **/

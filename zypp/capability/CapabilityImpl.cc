@@ -99,6 +99,16 @@ namespace zypp
       return *name_r.c_str() == '/';
     }
 
+    bool isInterestingFileSpec( const std::string & name_r )
+    {
+      static str::smatch what;
+      static const str::regex filenameRegex(
+          "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
+          str::regex::optimize|str::regex::nosubs );
+
+      return str::regex_match( name_r, what, filenameRegex );
+    }
+
     bool isSplitSpec( const std::string & name_r )
     {
       return name_r.find( ":/" ) != std::string::npos;

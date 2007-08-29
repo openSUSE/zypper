@@ -22,12 +22,16 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(FileCap)
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : FileCap
     //
     /** A \c filename matching if some Resolvable provides it.
+     *
+     * \see \ref capability::isInterestingFileSpec to test whether some
+     * filename is likely targeted by some requires, thus worth being
+     * provided.
      *
      * \todo Check whether we have to look into the Resolable filelist as well.
     */
@@ -37,7 +41,7 @@ namespace zypp
       typedef FileCap Self;
       typedef FileCap_Ptr Ptr;
       typedef FileCap_constPtr constPtr;
-      
+
       /** Ctor */
       FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
       : CapabilityImpl( refers_r )
@@ -47,7 +51,7 @@ namespace zypp
     public:
       std::string filename() const
       { return _fname; }
-      
+
       /**  */
       virtual const Kind & kind() const;
 

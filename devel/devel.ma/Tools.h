@@ -13,6 +13,7 @@
 #include <zypp/base/Counter.h>
 #include <zypp/base/Measure.h>
 
+#include <zypp/PathInfo.h>
 #include <zypp/Date.h>
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
@@ -27,6 +28,15 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 //
 
+void waitForInput()
+{
+  int i;
+  USR << "WAITING FOR INPUT!" << endl;
+  std::cin >> i;
+}
+
+///////////////////////////////////////////////////////////////////
+//
 template<class _Condition>
   struct SetTrue
   {

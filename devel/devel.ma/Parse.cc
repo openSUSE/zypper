@@ -17,6 +17,7 @@
 #include "zypp/Package.h"
 #include "zypp/Pattern.h"
 #include "zypp/Language.h"
+#include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
@@ -48,9 +49,9 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    //handle( asKind<Package>( obj_r ) );
+    handle( asKind<Package>( obj_r ) );
     //handle( asKind<Pattern>( obj_r ) );
-    handle( asKind<Product>( obj_r ) );
+    //handle( asKind<Product>( obj_r ) );
     return true;
   }
 
@@ -59,7 +60,7 @@ struct Xprint
     if ( !p )
       return;
 
-    MIL << p->mediaNr() << endl;
+    MIL << p->diskusage() << endl;
   }
 
   void handle( const Pattern_constPtr & p )
@@ -209,6 +210,52 @@ struct ConvertDbReceive : public callback::ReceiveReport<target::ScriptResolvabl
   }
 
 };
+///////////////////////////////////////////////////////////////////
+
+struct DigestReceive : public callback::ReceiveReport<DigestReport>
+{
+  DigestReceive()
+  {
+    connect();
+  }
+
+  virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
+  {
+    USR << endl;
+    return false;
+  }
+  virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
+  {
+    USR << endl;
+    return false;
+  }
+  virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
+  {
+    USR << "fle " << PathInfo(file) << endl;
+    USR << "req " << requested << endl;
+    USR << "fnd " << found << endl;
+
+    waitForInput();
+
+    return false;
+  }
+};
+
+struct KeyRingSignalsReceive : public callback::ReceiveReport<KeyRingSignals>
+{
+  KeyRingSignalsReceive()
+  {
+    connect();
+  }
+  virtual void trustedKeyAdded( const PublicKey &/*key*/ )
+  {
+    USR << endl;
+  }
+  virtual void trustedKeyRemoved( const PublicKey &/*key*/ )
+  {
+    USR << endl;
+  }
+};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -284,6 +331,9 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
+  DigestReceive foo;
+  KeyRingSignalsReceive baa;
+
   RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << repos << endl;
@@ -296,7 +346,7 @@ int main( int argc, char * argv[] )
 	.setName( "Test Repo for factory." )
 	.setEnabled( true )
 	.setAutorefresh( false )
-	.addBaseUrl( Url("ftp://dist.suse.de/install/stable-x86/") );
+	.addBaseUrl( Url("http://dist.suse.de/install/stable-x86/") );
 
     repoManager.addRepository( nrepo );
     SEC << "refreshMetadat" << endl;
@@ -318,7 +368,7 @@ int main( int argc, char * argv[] )
     if ( ! nrepo.enabled() )
       continue;
 
-    if ( ! repoManager.isCached( nrepo ) || 1 )
+    if ( ! repoManager.isCached( nrepo ) || 0 )
     {
       if ( repoManager.isCached( nrepo ) )
       {
@@ -326,7 +376,7 @@ int main( int argc, char * argv[] )
 	repoManager.cleanCache( nrepo );
       }
       SEC << "refreshMetadata" << endl;
-      repoManager.refreshMetadata( nrepo );
+      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
@@ -352,14 +402,6 @@ int main( int argc, char * argv[] )
     MIL << "Added target: " << pool << endl;
   }
 
-  Capability _cap( CapFactory().parse<Language>( "de" ) );
-  SEC << "F" << endl;
-  forEachMatchIn( pool, Dep::FRESHENS, _cap, Print() );
-  SEC << "S" << endl;
-  forEachMatchIn( pool, Dep::SUPPLEMENTS, _cap, Print() );
-  SEC << "P" << endl;
-  forEachMatchIn( pool, Dep::PROVIDES, _cap, Print() );
-  SEC << endl;
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
 

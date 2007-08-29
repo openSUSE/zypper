@@ -1,10 +1,19 @@
 -------------------------------------------------------------------
+Wed Aug 29 13:55:28 CEST 2007 - ma@suse.de
+
+- Fixed PlainDir repositories to provide real disk usage data. For
+  repomd and others that do not provide any detailed disk usage info,
+  assume the packgage size is required below "/". Peviously they were
+  treated as being empy.
+- version 3.19.2
+
+-------------------------------------------------------------------
 Wed Aug 29 13:36:42 CEST 2007 - schubi@suse.de
 
 - Add a new solver solution in the case of running in a timeout:
-  ProblemSolutionDoubleTimeout.h 
-  #Bug 302496 
-  -r 6970
+  ProblemSolutionDoubleTimeout.h
+  #Bug 302496
+- revision 6970
 
 -------------------------------------------------------------------
 Wed Aug 29 11:23:26 CEST 2007 - dmacvicar@suse.de
@@ -33,7 +42,7 @@ Tue Aug 28 17:30:30 CEST 2007 - kkaempf@suse.de
 -------------------------------------------------------------------
 Tue Aug 28 11:27:53 CEST 2007 - dmacvicar@suse.de
 
-- real fix for reading signature ids. (#390535).  
+- real fix for reading signature ids. (#390535).
 - delete metadata when removing repo (#301037).
 
 -------------------------------------------------------------------
@@ -69,7 +78,7 @@ Mon Aug 27 15:53:52 CEST 2007 - schubi@suse.de
  * Changing of filesystem whithin a workflow, cause the solver results will
    be reset if the filesystem dependencies have been changed
  Bug 271912
-- r 6901 
+- r 6901
 
 -------------------------------------------------------------------
 Sun Aug 26 15:49:27 CEST 2007 - kkaempf@suse.de
@@ -90,15 +99,15 @@ Fri Aug 24 11:52:27 CEST 2007 - dmacvicar@suse.de
   intsys mode (#297136)
 - signature and checksum verification fixes. Still pending
   problem ZYpp getting no output from gpg when running from zypper.
-  (#302059)	
+  (#302059)
 
 -------------------------------------------------------------------
 Thu Aug 23 13:51:41 CEST 2007 - schubi@suse.de
 
-- Do not strip resolvables which have the same name but different kind 
+- Do not strip resolvables which have the same name but different kind
   (ResolverInfo*)
 - Flag info NEEDEDBY correctly if it will be used by freshen/supplement
-- r 6830 
+- r 6830
 
 -------------------------------------------------------------------
 Wed Aug 22 18:58:44 CEST 2007 - mvidner@suse.cz

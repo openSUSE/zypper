@@ -45,10 +45,10 @@ static time_t recursive_timestamp( const Pathname &dir )
     ERR << "readdir " << dir << " failed" << endl;
     return 0;
   }
-  
+
   for (std::list<std::string>::const_iterator it = dircontent.begin();
        it != dircontent.end();
-       ++it) 
+       ++it)
   {
     Pathname dir_path = dir + *it;
     if ( PathInfo(dir_path).isDir())
@@ -69,7 +69,7 @@ RepoStatus dirStatus( const Pathname &dir )
   status.setChecksum(str::numstring(t));
   return status;
 }
-  
+
 data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
                                              set<string> * filerequires,
                                              const Pathname & location, data::RecordId &repoid )
@@ -81,15 +81,10 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
     WAR << "Can't make Package from SourcePackage header" << endl;
     return 0;
   }
-  
+
   data::Package_Ptr pkg = new data::Package;
-  
-//   typedef std::set<capability::CapabilityImpl::Ptr> DependencyList;
-//   typedef std::map<zypp::Dep, DependencyList>       Dependencies;
+
   pkg->name = header->tag_name();
-//   impl->setRepository( repo );
-//   if (!location.empty())
-//     impl->setLocation( location );
 
   try  {
     pkg->edition = Edition( header->tag_version(),
@@ -114,7 +109,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
     WAR << "Package " << pkg->name << " has bad architecture '" << header->tag_arch() << "'";
     return 0;
   }
-  
+
   pkg->deps[Dep::REQUIRES]    = header->tag_requires( filerequires );
   pkg->deps[Dep::PREREQUIRES] = header->tag_prerequires( filerequires );
   pkg->deps[Dep::CONFLICTS]   = header->tag_conflicts( filerequires );
@@ -128,51 +123,18 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   pkg->description            = (TranslatedText)header->tag_description();
   pkg->licenseToConfirm       = (TranslatedText)header->tag_license();
 
-//   Dependencies deps;
-  
-//    RecordId shareDataWith;
-//    std::string vendor;
-//    ByteCount installedSize;
-//    Date buildTime;
-//    DefaultIntegral<bool,false> installOnly;
-//    TranslatedText summary;
-//    TranslatedText description;
-//    TranslatedText licenseToConfirm;
-//    TranslatedText insnotify;
-//    TranslatedText delnotify;
-//    RecordId  repository;
+  pkg->repositoryLocation     = location;
 
-//      Location repositoryLocation;
-
-  pkg->repositoryLocation = location;
-
-//       std::string group;
-//       std::set<std::string> keywords;
-//       Changelog changelog;
-//       std::list<std::string> authors;
-//       std::string buildhost;
-//       std::string distribution;
-//       std::string license;
-//       std::string packager;
-//       std::string url;
-//       std::string operatingSystem;
-//       std::string prein;
-//       std::string postin;
-//       std::string preun;
-//       std::string postun;
-//   
+  header->tag_du( pkg->diskusage );
 
   list<string> filenames = header->tag_filenames();
   pkg->deps[Dep::PROVIDES] = header->tag_provides ( filerequires );
-  static str::smatch what;
-  static const str::regex filenameRegex( "/(s?bin|lib(64)?|etc)/|^/usr/(games/|share/(dict/words|magic\\.mime)$)|^/opt/gnome/games/",
-                                         str::regex::optimize|str::regex::nosubs );
 
   for (list<string>::const_iterator filename = filenames.begin();
        filename != filenames.end();
        ++filename)
   {
-    if ( str::regex_match( *filename, what, filenameRegex ) )
+    if ( capability::isInterestingFileSpec( *filename ) )
     {
       try {
         pkg->deps[Dep::PROVIDES].insert(capability::buildFile( ResTraits<Package>::kind, *filename ));
@@ -188,7 +150,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   return pkg;
 }
 
- 
+
 /** RepoParser implementation.
  * \todo Clean data on exeption.
  */
@@ -216,7 +178,7 @@ class RepoParser::Impl
 
   private: // these (and _ticks) are actually scoped per parse() run.
 };
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 //
