@@ -245,18 +245,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          // request media change, if the media is changeable and this is
-          // not just a check, otherwise just abort
-          if (checkonly || !media_mgr.isChangeable(media))
-            user = media::MediaChangeReport::ABORT;
-          else
-            user =
-              report->requestMedia (
-                Repository::noRepository,
-                media_nr,
-                reason,
-                excp.asUserString()
-              );
+          user  = checkonly ? media::MediaChangeReport::ABORT :
+            report->requestMedia (
+              Repository::noRepository,
+              media_nr,
+              reason,
+              excp.asUserString()
+            );
 
           DBG << "ProvideFile exception caught, callback answer: " << user << endl;
 
@@ -386,18 +381,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-
-          // request media change, if the media is changeable, otherwise just abort
-          if (media_mgr.isChangeable(_media))
-            user =
-              report->requestMedia(
-                Repository::noRepository,
-                media_nr,
-                reason,
-                excp.asUserString()
-              );
-          else
-            user = media::MediaChangeReport::ABORT;
+          user = report->requestMedia(Repository::noRepository,
+                                      media_nr,
+                                      reason,
+                                      excp.asUserString());
 
           DBG << "ProvideFile exception caught, callback answer: " << user << endl;
 
