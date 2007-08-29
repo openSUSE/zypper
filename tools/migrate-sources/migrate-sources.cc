@@ -35,7 +35,7 @@ struct Options
 
 static void migrate_sources( const Options &opt )
 {
-  if ( string(getenv("YAST_IS_RUNNING")) == "instsys" )
+  if ( getenv("YAST_IS_RUNNING") && (string(getenv("YAST_IS_RUNNING")) == "instsys" ))
   {
     MIL << "YaST is running in instsys. Not migrating old sources. YaST will do it." << endl;
     return;
