@@ -9,6 +9,7 @@
 #include <zypp/SrcPackage.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/solver/detail/Helper.h>
+#include <zypp/media/MediaException.h>
 
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
@@ -1384,10 +1385,18 @@ int solve_and_commit () {
 
         cerr_v << result << std::endl;
       }
+      catch ( const media::MediaException & e ) {
+        ZYPP_CAUGHT(e);
+        report_problem(e,
+            _("Problem downloading the package file from the repository:"),
+            _("Please, see the above error message to for a hint."));
+        return ZYPPER_EXIT_ERR_ZYPP;
+      }
       catch ( const Exception & excpt_r ) {
         ZYPP_CAUGHT( excpt_r );
-        
+
         // special handling for failed integrity exception
+        //! \todo fix this in libzypp
         if (excpt_r.msg().find("fails integrity check") != string::npos) {
           cerr << endl
             << _("The package integrity check failed. This may be a problem"
