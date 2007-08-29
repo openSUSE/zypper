@@ -1339,6 +1339,8 @@ Resolver::resolvePool( bool tryAllPossibilities )
 
     }
     else {
+	MIL << "!!! Have NO solution !!!" << endl;	
+#if 0 // It takes too much memory for logging. Do not use it !
 	MIL << "!!! Have NO solution !!! Additional solver information:" << endl;
 	int counter = 0;
 	for (ResolverQueueList::iterator iter = _invalid_queues.begin();
@@ -1347,10 +1349,11 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	    MIL << "-----------------------------------------------------------------" << endl;
 	    MIL << counter++ << ". failed queue:" << endl;
 	    ResolverQueue_Ptr invalid =	*iter;
-//	    invalid->context()->spewInfo (); No additional information needed here
+	    invalid->context()->spewInfo (); No additional information needed here
 	    MIL << *invalid->context() << endl;
 	    MIL << "-----------------------------------------------------------------" << endl;
 	}
+#endif
     }
 
     if (tryAllPossibilities) {
