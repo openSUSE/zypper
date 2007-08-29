@@ -246,11 +246,16 @@ namespace zypp
         return true;
       }
 
-      //! \todo xpath: //format/file (*) figure out where to store this and what's it about (in regard to filelists.xml.gz)
+      // file entries listed outside of filelists.xml to be treated
+      // like rpm:provides
+      // xpath: //format/file (*)
       if (reader_r->name() == "file")
       {
-        // file = reader_r.nodeText().asString();
-        // type = reader_r->getAttribute("type").asString();
+        // insert file dependency into the list
+        package_ptr->deps[Dep::PROVIDES].insert(
+          zypp::capability::parse(
+            ResTraits<Package>::kind,
+            reader_r.nodeText().asString()));
         return true;
       }
 

@@ -135,6 +135,7 @@ element-supplements =
 supplements =
     element-entry*
 
+# treat as 'provides' file capability
 element-file =
     element ns1:file { file }
 
