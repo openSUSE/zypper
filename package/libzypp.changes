@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Aug 29 11:23:26 CEST 2007 - dmacvicar@suse.de
+
+- bug in fix for (#292986)
+
+-------------------------------------------------------------------
 Tue Aug 28 18:48:26 CEST 2007 - dmacvicar@suse.de
 
 - (#297001) - libzypp: can't skip broken packages
