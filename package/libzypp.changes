@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 29 18:28:41 CEST 2007 - jkupec@suse.cz
+
+- reverted blocking of requestMedia from r6271 (#301710)
+- r6999
+
+-------------------------------------------------------------------
 Wed Aug 29 18:09:29 CEST 2007 - kkaempf@suse.de
 
 - prevent progress report in destructor (#299680)
