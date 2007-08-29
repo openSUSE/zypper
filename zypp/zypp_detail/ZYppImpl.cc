@@ -179,7 +179,11 @@ namespace zypp
     }
 
     DiskUsageCounter::MountPointSet ZYppImpl::diskUsage()
-    { return _disk_usage->disk_usage(pool()); }
+    {
+      if ( ! _disk_usage )
+        _disk_usage.reset(new DiskUsageCounter());
+      return _disk_usage->disk_usage(pool());
+    }
 
     void ZYppImpl::setPartitions(const DiskUsageCounter::MountPointSet &mp)
     {
@@ -420,7 +424,7 @@ namespace zypp
       {
         // noop: Someone decided to let target() throw if the ptr is NULL ;(
       }
-      
+
       int num=0;
       PathInfo locksrc( locksrcPath );
       if ( locksrc.isFile() )

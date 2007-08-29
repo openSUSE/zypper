@@ -1,8 +1,14 @@
 -------------------------------------------------------------------
+Wed Aug 29 15:28:53 CEST 2007 - ma@suse.de
+
+- Fixed fix for #293039. Segfault due to uninitialzed data.
+- version 3.19.3
+
+-------------------------------------------------------------------
 Wed Aug 29 15:10:20 CEST 2007 - schubi@suse.de
 
 - reduced too much verbosed ResolverContext logging; Bug 303971
-- r 6977 
+- r 6977
 
 -------------------------------------------------------------------
 Wed Aug 29 13:55:28 CEST 2007 - ma@suse.de

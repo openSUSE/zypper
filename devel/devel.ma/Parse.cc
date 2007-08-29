@@ -60,7 +60,7 @@ struct Xprint
     if ( !p )
       return;
 
-    MIL << p->diskusage() << endl;
+    //MIL << p->diskusage() << endl;
   }
 
   void handle( const Pattern_constPtr & p )
@@ -402,6 +402,7 @@ int main( int argc, char * argv[] )
     MIL << "Added target: " << pool << endl;
   }
 
+  INT << getZYpp()->diskUsage() << endl;
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
 
