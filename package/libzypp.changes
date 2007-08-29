@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Aug 29 13:36:42 CEST 2007 - schubi@suse.de
+
+- Add a new solver solution in the case of running in a timeout:
+  ProblemSolutionDoubleTimeout.h 
+  #Bug 302496 
+  -r 6970
+
+-------------------------------------------------------------------
 Wed Aug 29 11:23:26 CEST 2007 - dmacvicar@suse.de
 
 - bug in fix for (#292986)
