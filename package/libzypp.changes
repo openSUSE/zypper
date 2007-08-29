@@ -6,6 +6,7 @@ Wed Aug 29 13:55:28 CEST 2007 - ma@suse.de
   assume the packgage size is required below "/". Peviously they were
   treated as being empy.
 - version 3.19.2
+- revision 6972
 
 -------------------------------------------------------------------
 Wed Aug 29 13:36:42 CEST 2007 - schubi@suse.de
