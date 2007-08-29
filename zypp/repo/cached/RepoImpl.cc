@@ -64,7 +64,9 @@ RepoImpl::RepoImpl( const RepoOptions &opts )
 
 RepoImpl::~RepoImpl()
 {
+  _ticks.toMax();
   MIL << "Destroying repo '" << info().alias() << "'" << endl;
+  _ticks.noSend();
 }
 
 void read_capabilities( sqlite3_connection &con,

@@ -1,9 +1,8 @@
 -------------------------------------------------------------------
-Wed Aug 29 18:10:56 CEST 2007 - duncan@suse.de
+Wed Aug 29 18:09:29 CEST 2007 - kkaempf@suse.de
 
-- better fix for #304200
-  use both content and media.1/media instead of only media
-- 3.20.0 
+- prevent progress report in destructor (#299680)
+- r6998
 
 -------------------------------------------------------------------
 Wed Aug 29 18:02:36 CEST 2007 - jkupec@suse.cz
