@@ -602,6 +602,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/ProblemSolutionUninstall.cc
   solver/detail/ProblemSolutionUnlock.cc
   solver/detail/ProblemSolutionAllBranches.cc
+  solver/detail/ProblemSolutionDoubleTimeout.cc
   solver/detail/QueueItem.cc
   solver/detail/QueueItemBranch.cc
   solver/detail/QueueItemConflict.cc
@@ -640,6 +641,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/ProblemSolutionUninstall.h
   solver/detail/ProblemSolutionUnlock.h
   solver/detail/ProblemSolutionAllBranches.h
+  solver/detail/ProblemSolutionDoubleTimeout.h
   solver/detail/QueueItem.h
   solver/detail/QueueItemBranch.h
   solver/detail/QueueItemConflict.h

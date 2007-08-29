@@ -203,8 +203,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setTimeout (int seconds) { _timeout_seconds = seconds; }
     void setMaxSolverPasses (int count) { _maxSolverPasses = count; }
-    int timeout () { return _timeout_seconds; }
-    int maxSolverPasses () { return _maxSolverPasses; }
+    int timeout () const { return _timeout_seconds; }
+    int maxSolverPasses () const { return _maxSolverPasses; }
 
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
@@ -246,7 +246,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     const bool preferHighestVersion() { return _preferHighestVersion; }
 
     void setTryAllPossibilities (const bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
-    const bool tryAllPossibilities () { return _tryAllPossibilities; };
+    const bool tryAllPossibilities () const { return _tryAllPossibilities; };
 
     bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);

@@ -44,13 +44,21 @@ IMPL_PTR_TYPE(ProblemSolutionAllBranches);
 
 //---------------------------------------------------------------------------
 
-ProblemSolutionAllBranches::ProblemSolutionAllBranches( ResolverProblem_Ptr parent)
+ProblemSolutionAllBranches::ProblemSolutionAllBranches( ResolverProblem_Ptr parent,
+							const bool takeAll)
     : ProblemSolution (parent, "", "")
+      ,all(takeAll)
 {
-    _description = _("Make a solver run with ALL possibilities.");
-    _details = _("Regarding all resolvables with a compatible architecture.");
+    if (all) {
+	_description = _("Make a solver run with ALL possibilities.");
+	_details = _("Regarding all resolvables with a compatible architecture.");
+	addAction ( new TransactionSolutionAction (ALLBRANCHES_ON));
+    } else {
+	_description = _("Make a solver run with best architecture only.");
+	_details = _("Regarding resolvables with best architecture only.");
+	addAction ( new TransactionSolutionAction (ALLBRANCHES_OFF));	
+    }
 
-    addAction ( new TransactionSolutionAction (ALLBRANCHES));
 }
 
       ///////////////////////////////////////////////////////////////////

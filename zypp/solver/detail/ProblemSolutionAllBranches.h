@@ -43,12 +43,14 @@ namespace zypp
 	 **/
 	class ProblemSolutionAllBranches : public ProblemSolution
 	{
+	private:
+             bool all;
 	public:
 
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionAllBranches( ResolverProblem_Ptr parent);
+	    ProblemSolutionAllBranches( ResolverProblem_Ptr parent, const bool takeAll = true);
 	};
 
       ///////////////////////////////////////////////////////////////////

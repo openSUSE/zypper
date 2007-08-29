@@ -67,7 +67,9 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case INSTALL:	os << "Install"; break;
 	case REMOVE:	os << "Remove"; break;
 	case UNLOCK:	os << "Unlock"; break;
-	case ALLBRANCHES:	os << "All branches"; break;	    	    
+	case ALLBRANCHES_ON:	os << "All branches on"; break;
+	case ALLBRANCHES_OFF:	os << "All branches off"; break;	    
+	case DOUBLETIMEOUT:	os << "Double timeout"; break;
     }
     os << " ";
     os << _item;
@@ -160,9 +162,15 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
-	case ALLBRANCHES:
+	case ALLBRANCHES_ON:
 	    resolver.setTryAllPossibilities (true);
 	    break;
+	case ALLBRANCHES_OFF:
+	    resolver.setTryAllPossibilities (false);
+	    break;
+	case DOUBLETIMEOUT:
+	    resolver.setTimeout (resolver.timeout()*2);
+	    break;	    
 	default:
 	    ERR << "Wrong TransactionKind" << endl;
 	    ret = false;
