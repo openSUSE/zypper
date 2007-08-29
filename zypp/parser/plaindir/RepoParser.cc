@@ -121,7 +121,6 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   pkg->buildTime              = header->tag_buildtime();
   pkg->summary                = (TranslatedText)header->tag_summary();
   pkg->description            = (TranslatedText)header->tag_description();
-  pkg->licenseToConfirm       = (TranslatedText)header->tag_license();
 
   pkg->repositoryLocation     = location;
 
