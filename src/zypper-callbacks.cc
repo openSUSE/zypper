@@ -181,7 +181,7 @@ void report_zypp_exception(const zypp::Exception & e)
 {
   if (e.historySize())
   {
-    if (gSettings.verbosity > 2)
+    if (gSettings.verbosity > VERBOSITY_NORMAL)
     {
       // print the whole history
       cerr << e.historyAsString();
