@@ -517,6 +517,9 @@ namespace zypp
     assert_alias(info);
     assert_urls(info);
 
+    // we will throw this later if no URL checks out fine
+    RepoException rexception(_("Valid metadata not found at specified URL(s)"));
+
     // try urls one by one
     for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin(); it != info.baseUrlsEnd(); ++it )
     {
@@ -608,10 +611,16 @@ namespace zypp
       {
         ZYPP_CAUGHT(e);
         ERR << "Trying another url..." << endl;
+        
+        // remember the exception caught for the *first URL*
+        // if all other URLs fail, the rexception will be thrown with the
+        // cause of the problem of the first URL remembered
+        if (it == info.baseUrlsBegin())
+          rexception.remember(e);
       }
     } // for every url
     ERR << "No more urls..." << endl;
-    ZYPP_THROW(RepoException(_("Valid metadata not found at specified URL(s)")));
+    ZYPP_THROW(rexception);
   }
 
   ////////////////////////////////////////////////////////////////////////////
