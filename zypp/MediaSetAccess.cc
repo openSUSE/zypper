@@ -215,7 +215,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     do
     {
       // get the mediaId, but don't try to attach it here
-      media::MediaAccessId media = getMediaAccessId( media_nr);
+      media = getMediaAccessId( media_nr);
 
       try
       {
