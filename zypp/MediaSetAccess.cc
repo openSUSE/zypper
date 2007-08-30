@@ -93,13 +93,14 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
-    // get the mediaId, but don't try to attach it here
-    media::MediaAccessId media = getMediaAccessId( media_nr);
 
     bool exists = false;
 
     do
     {
+      // get the mediaId, but don't try to attach it here
+      media::MediaAccessId media = getMediaAccessId( media_nr);
+
       try
       {
         DBG << "Cheking if file " << file
@@ -141,7 +142,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          user  = media::MediaChangeReport::ABORT;
+          user = report->requestMedia (
+              _url,
+              media_nr,
+              reason,
+              excp.asUserString()
+            );
+
           DBG << "doesFileExist exception caught, callback answer: " << user << endl;
 
           if( user == media::MediaChangeReport::ABORT )
@@ -176,6 +183,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             // retry
             DBG << "Going to try again" << endl;
+            // invalidate current media access id
+            media_mgr.close(media);
+            _medias.erase(media_nr);
 
             // not attaching, media set will do that for us
             // this could generate uncaught exception (#158620)
@@ -199,11 +209,14 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
-    // get the mediaId, but don't try to attach it here
-    media::MediaAccessId media = getMediaAccessId( media_nr);
+
+    media::MediaAccessId media;
 
     do
     {
+      // get the mediaId, but don't try to attach it here
+      media::MediaAccessId media = getMediaAccessId( media_nr);
+
       try
       {
         DBG << "Going to try to provide file " << file
@@ -247,7 +260,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
           user  = checkonly ? media::MediaChangeReport::ABORT :
             report->requestMedia (
-              Repository::noRepository,
+              _url,
               media_nr,
               reason,
               excp.asUserString()
@@ -287,6 +300,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             // retry
             DBG << "Going to try again" << endl;
+            // invalidate current media access id
+            media_mgr.close(media);
+            _medias.erase(media_nr);
 
             // not attaching, media set will do that for us
             // this could generate uncaught exception (#158620)
@@ -313,11 +329,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     callback::SendReport<media::MediaChangeReport> report;
     media::MediaManager media_mgr;
+    media::MediaAccessId _media;
 
-    // get the mediaId, but don't try to attach it here
-    media::MediaAccessId _media = getMediaAccessId(media_nr);
     do
     {
+      // get the mediaId, but don't try to attach it here
+      _media = getMediaAccessId(media_nr);
+
       try
       {
         DBG << "Going to try provide direcotry " << dir
@@ -381,7 +399,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          user = report->requestMedia(Repository::noRepository,
+          user = report->requestMedia(_url,
                                       media_nr,
                                       reason,
                                       excp.asUserString());
@@ -414,6 +432,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             // retry
             DBG << "Going to try again" << endl;
+            // invalidate current media access id
+            media_mgr.close(_media);
+            _medias.erase(media_nr);
 
             // not attaching, media set will do that for us
             // this could generate uncaught exception (#158620)

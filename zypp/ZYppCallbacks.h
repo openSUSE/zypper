@@ -296,7 +296,7 @@ namespace zypp
       };
 
       virtual Action requestMedia(
-        Repository /*source*/
+        Url & /* url (I/O parameter) */
         , unsigned /*mediumNr*/
         , Error /*error*/
         , const std::string &/*description*/
