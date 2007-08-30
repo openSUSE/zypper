@@ -2,7 +2,7 @@
 Thu Aug 30 18:55:15 CEST 2007 - jkupec@suse.cz
 
 - enable changing url in requestMedia callback (#294481)
-- revision 7033
+- revision 7037
 
 -------------------------------------------------------------------
 Thu Aug 30 18:22:32 CEST 2007 - ma@suse.de
