@@ -101,6 +101,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   catch (const RepoNoAliasException & e)
   {
     ZYPP_CAUGHT(e);
+    //! \todo correct the message after 10.3 release
     cerr << format(_("No alias defined this repository.")) << endl;
     report_a_bug(cerr);
     return true; // error
