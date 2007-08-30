@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 30 18:22:32 CEST 2007 - ma@suse.de
+
+- Filter readonly mount points in DiskUsageCounter (#297405)
+- revision 7030
+
+-------------------------------------------------------------------
 Thu Aug 30 17:25:14 CEST 2007 - ma@suse.de
 
 - Safe fix for bug #299680.
