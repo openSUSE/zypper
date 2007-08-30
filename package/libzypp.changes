@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug 30 20:10:00 CEST 2007 - jkupec@suse.cz
+
+- added missing implementation of LogControl::setLineFormater()
+  (lslezak)
+- version 3.21.0
+- revision 7041
+
+-------------------------------------------------------------------
 Thu Aug 30 18:55:15 CEST 2007 - jkupec@suse.cz
 
 - enable changing url in requestMedia callback (#294481)
