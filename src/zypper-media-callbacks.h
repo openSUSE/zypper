@@ -23,8 +23,10 @@
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
 
+#include "zypper.h"
 #include "zypper-callbacks.h"
 #include "AliveCursor.h"
+#include "zypper-utils.h"
 
 using zypp::media::MediaChangeReport;
 using zypp::media::DownloadProgressReport;
@@ -36,29 +38,31 @@ namespace ZmartRecipients
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
-    virtual MediaChangeReport::Action requestMedia( Repository repo,
+    virtual MediaChangeReport::Action requestMedia( zypp::Url & url,
                                                     unsigned mediumNr,
                                                     MediaChangeReport::Error error,
                                                     const std::string & description )
     {
-      if (error == MediaChangeReport::WRONG)
+      if (is_changeable_media(url))
       {
+        cerr << endl; // may be in the middle of RepoReport or ProgressReport
+        cerr << description << endl;
+  
         // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
         // Try to check what answers does zypper accept (it always accepts y/n at least)
         // You can also have a look at the regular expressions used to check the answer here:
         // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
         std::string request = boost::str(boost::format(
             _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
-            % repo.info().name() % mediumNr);
+            % gData.current_repo.name() % mediumNr);
         if (read_bool_answer(request, false))
           return MediaChangeReport::RETRY; 
         else
           return MediaChangeReport::ABORT;
       }
-      else
-      {
-        cerr << description << endl;
-      }
+
+      // not displaying the error for non-changeable media, it will be displayed
+      // where it is caught
     }
   };
 
@@ -85,6 +89,7 @@ namespace ZmartRecipients
       return true;
     }
 
+    // not used anywhere in libzypp 3.20.0
     virtual DownloadProgressReport::Action problem( const zypp::Url & /*file*/, DownloadProgressReport::Error error, const std::string & description )
     {
       display_done ("download", cout_v);
@@ -92,10 +97,12 @@ namespace ZmartRecipients
       return DownloadProgressReport::ABORT;
     }
 
+    // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
     virtual void finish( const zypp::Url & /*file*/, Error error, const std::string & konreason )
     {
       display_done ("download", cout_v);
-      display_error (error, konreason);
+      // don't display errors here, they will be reported in media change callback
+      // display_error (error, konreason);
     }
   };
 

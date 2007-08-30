@@ -6,7 +6,6 @@
 
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/media/MediaManager.h>
 
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
@@ -36,6 +35,11 @@ extern Settings gSettings;
 
 static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
 {
+  gData.current_repo = repo;
+
+  // reset the gData.current_repo when going out of scope
+  struct Bye { ~Bye() { gData.current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
+
   try
   {
     RepoManager manager;
@@ -654,9 +658,7 @@ int add_repo(RepoInfo & repo)
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
       it != repo.baseUrlsEnd(); ++it)
   {
-    MediaManager mm; MediaAccessId id = mm.open(*it);
-    is_cd = mm.isChangeable(id);
-    mm.close(id);
+    is_cd = is_changeable_media(*it);
     if (!is_cd)
       break;
   }
@@ -670,6 +672,11 @@ int add_repo(RepoInfo & repo)
 
   try
   {
+    gData.current_repo = repo;
+
+    // reset the gData.current_repo when going out of scope
+    struct Bye { ~Bye() { gData.current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
+
     manager.addRepository(repo);
   }
   catch (const RepoAlreadyExistsException & e)
@@ -696,7 +703,7 @@ int add_repo(RepoInfo & repo)
     ZYPP_CAUGHT(e);
     report_problem(e,
         _("Problem transferring repository data from specified URL:"),
-        _("Please, check whether the specified URL is accessible."));
+        is_cd ? "" : _("Please, check whether the specified URL is accessible."));
     ERR << "Problem transferring repository data from specified URL" << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
