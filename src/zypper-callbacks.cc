@@ -185,9 +185,8 @@ void report_zypp_exception(const zypp::Exception & e)
     {
       // print the whole history
       cerr << e.historyAsString();
-      cerr << endl;
       // this exception
-      cerr << e.asUserString();
+      cerr << " - " << e.asUserString();
     }
     else
       // print the root cause only
