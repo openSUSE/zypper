@@ -1,4 +1,7 @@
 #include <fstream>
+
+#include <zypp/media/MediaManager.h>
+
 #include "zypper.h"
 
 using namespace zypp::detail;
@@ -45,4 +48,12 @@ ostream& report_a_bug (ostream& stm)
     // TranslatorExplanation remember not to translate the URL
     // unless you translate the actual page :)
              << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
+}
+
+bool is_changeable_media(const zypp::Url & url)
+{
+  media::MediaManager mm; media::MediaAccessId id = mm.open(url);
+  bool is_cd = mm.isChangeable(id);
+  mm.close(id);
+  return is_cd;
 }
