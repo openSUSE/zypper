@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 30 15:14:23 CEST 2007 - jkupec@suse.cz
+
+- correct error code for media errors in MediaCurl::doGetFileCopy()
+  affects only zypper error output, does not affect YaST
+- r7013
+
+-------------------------------------------------------------------
 Wed Aug 29 18:28:41 CEST 2007 - jkupec@suse.cz
 
 - reverted blocking of requestMedia from r6271 (#301710)
