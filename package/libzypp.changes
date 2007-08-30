@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Aug 30 15:48:03 CEST 2007 - schubi@suse.de
+
+- Bugfix: If a requirement has been fulfilled by more than one language
+  resolvables only thatone will be taken which fits to the selected
+  language.
+- r 7018 
+
+-------------------------------------------------------------------
 Thu Aug 30 15:14:23 CEST 2007 - jkupec@suse.cz
 
 - correct error code for media errors in MediaCurl::doGetFileCopy()
