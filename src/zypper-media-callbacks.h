@@ -41,19 +41,28 @@ namespace ZmartRecipients
                                                     MediaChangeReport::Error error,
                                                     const std::string & description )
     {
-      cerr << description << endl; 
-      // TranslatorExplanation translate letters 'y' and 'n' the same as you translated the [y/n] prompt. 
-      std::string request = boost::str(boost::format(
-          _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
-          % repo.info().name() % mediumNr);
-      if (read_bool_answer(request, false))
-        return MediaChangeReport::RETRY; 
+      if (error == MediaChangeReport::WRONG)
+      {
+        // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
+        // Try to check what answers does zypper accept (it always accepts y/n at least)
+        // You can also have a look at the regular expressions used to check the answer here:
+        // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
+        std::string request = boost::str(boost::format(
+            _("Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
+            % repo.info().name() % mediumNr);
+        if (read_bool_answer(request, false))
+          return MediaChangeReport::RETRY; 
+        else
+          return MediaChangeReport::ABORT;
+      }
       else
-        return MediaChangeReport::ABORT; 
+      {
+        cerr << description << endl;
+      }
     }
   };
 
-    // progress for downloading a file
+  // progress for downloading a file
   struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
   {
     virtual void start( const zypp::Url & file, zypp::Pathname localfile )
