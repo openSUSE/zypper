@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 30 18:55:15 CEST 2007 - jkupec@suse.cz
+
+- enable changing url in requestMedia callback (#294481)
+- revision 7033
+
+-------------------------------------------------------------------
 Thu Aug 30 18:22:32 CEST 2007 - ma@suse.de
 
 - Filter readonly mount points in DiskUsageCounter (#297405)
