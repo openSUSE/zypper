@@ -32,6 +32,7 @@ void display_done ( const std::string &id, ostream & out, const std::string& s);
 // newline if normal progress is on single line
 void display_done ( const std::string &id, ostream & out);
 
+//! \todo this must be rewritten as the error enums are different for some zypp callbacks
 template<typename Error>
 void display_error (Error error, const std::string& reason) {
   if (error != 0 /*NO_ERROR*/)
@@ -41,7 +42,13 @@ void display_error (Error error, const std::string& reason) {
       "", _("Not found"), _("I/O error"), _("Invalid object")
     };
     ostream& stm = std::cerr;
-    stm << error_s[error];
+
+    // error type:
+    if (error < 3)
+      stm << error_s[error];
+    else
+      stm << _("Error");
+    // description
     if (!reason.empty())
 	stm << ": " << reason;
     stm << std::endl;
