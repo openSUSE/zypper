@@ -277,6 +277,10 @@ namespace zypp
 		break;
 	      }
 	    }
+            if ( ro ) {
+	      DBG << "Filter ro mount point : " << l << std::endl;
+	      continue;
+	    }
 
 	    //
 	    // statvfs (full path!) and get the data
@@ -304,6 +308,6 @@ namespace zypp
     str << "dir:[" << obj.dir << "] [ bs: " << obj.block_size << " ts: " << obj.total_size << "]" << std::endl;
     return str;
   }
-  
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
