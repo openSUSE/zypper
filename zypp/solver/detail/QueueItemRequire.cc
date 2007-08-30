@@ -575,6 +575,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    ZYpp::Ptr z = zypp::getZYpp();
 	    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
 	    bool requested_locale_match = false;
+	    PoolItem requested_locale_item;
 	    PoolItemSet hints;			// those which supplement or enhance an installed or to-be-installed
 
 	    for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
@@ -585,26 +586,22 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		if (item.status().staysUninstalled()) {
 		    uninstalled++;
 		}
-		if (!requested_locale_match) {
-		    CapSet freshens( item->dep( Dep::FRESHENS ) );
+		CapSet freshens( item->dep( Dep::FRESHENS ) );
 
-		    // try to find a match of the locale freshens with one of the requested locales
-		    //   if we have a match, we're done.
+		// try to find a match of the locale freshens with one of the requested locales
 
-		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-			if (cit->refers() == ResTraits<Language>::kind) {
-			    string loc = cit->index();
-			    MIL << "Look for language fallback " << loc << ":" << item << endl;
-			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
-				MIL << "Locale '" << loc << "' is requested, not looking further" << endl;
-				requested_locale_match = true;
-				break;
-			    }
-			    language_freshens[loc] = item;
+		for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+		    if (cit->refers() == ResTraits<Language>::kind) {
+			string loc = cit->index();
+			MIL << "Look for language fallback " << loc << ":" << item << endl;
+			if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
+			    MIL << "Locale '" << loc << "' is requested" << endl;
+			    requested_locale_match = true;
+			    requested_locale_item = item;
 			}
+			language_freshens[loc] = item;
 		    }
 		}
-
 
 		// now check if a provider supplements or enhances an installed or to-be-installed resolvable
 
@@ -658,8 +655,28 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    {
 		MIL << "Have " << hints.size() << " hints" << endl;
 		info.providers.clear();
-		for (PoolItemSet::const_iterator it = hints.begin(); it != hints.end(); ++it)
-		    info.providers.push_back( *it );
+		for (PoolItemSet::const_iterator it = hints.begin(); it != hints.end(); ++it) {
+		    if (*it == requested_locale_item) {
+			// This is the requested language item
+			info.providers.push_back( *it );
+		    } else {
+			// go through the list of language items and check if they are exists
+			std::map<std::string,PoolItem>::const_iterator itFr;
+		    
+			for (itFr = language_freshens.begin(); itFr != language_freshens.end(); ++itFr) {
+			    if (*it == itFr->second) break;
+			}
+			if (itFr == language_freshens.end()) {
+			    // item was only in the supplements --> branch for it
+			    info.providers.push_back( *it );
+			}
+		    }
+		}
+		if (info.providers.empty()) {
+		    // they are all language items which does not fit in the required language
+		    // So take the firstone to fulfill the requirement. Should never happens
+		    info.providers.push_back( *(hints.begin()) );
+		}
 	    }
 	    else { 
 
