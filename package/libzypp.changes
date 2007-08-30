@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 30 17:25:14 CEST 2007 - ma@suse.de
+
+- Safe fix for bug #299680.
+- version 3.20.1
+
+-------------------------------------------------------------------
 Thu Aug 30 17:31:33 CEST 2007 - jkupec@suse.cz
 
 - remember the cause of the RepoException when refreshing metadata
@@ -11,7 +17,7 @@ Thu Aug 30 15:48:03 CEST 2007 - schubi@suse.de
 - Bugfix: If a requirement has been fulfilled by more than one language
   resolvables only thatone will be taken which fits to the selected
   language.
-- r 7018 
+- r 7018
 
 -------------------------------------------------------------------
 Thu Aug 30 15:14:23 CEST 2007 - jkupec@suse.cz

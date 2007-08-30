@@ -59,27 +59,20 @@ RepoImpl::RepoImpl( const RepoOptions &opts )
   , _rquery(opts.dbdir)
   , _options(opts)
 {
-
 }
 
 RepoImpl::~RepoImpl()
 {
-  _ticks.toMax();
   MIL << "Destroying repo '" << info().alias() << "'" << endl;
-  _ticks.noSend();
 }
-
-void read_capabilities( sqlite3_connection &con,
-                        map<data::RecordId, NVRAD> &nvras,
-                        ProgressData &progress );
 
 void RepoImpl::createResolvables()
 {
-  _ticks = ProgressData();
-  _ticks.sendTo(_options.readingResolvablesProgress);
-  _ticks.name(str::form(_( "Reading '%s' repository cache"), info().alias().c_str()));
-  CombinedProgressData subprogrcv(_ticks);
-  
+  ProgressData ticks;
+  ticks.sendTo(_options.readingResolvablesProgress);
+  ticks.name(str::form(_( "Reading '%s' repository cache"), info().alias().c_str()));
+  CombinedProgressData subprogrcv(ticks);
+
   debug::Measure m("create resolvables");
   CapFactory capfactory;
   try
@@ -100,7 +93,7 @@ void RepoImpl::createResolvables()
     map<data::RecordId, pair<Resolvable::Kind, NVRAD> > nvras;
 
     sqlite3_reader reader = cmd.executereader();
-    
+
     while(reader.read())
     {
       long long id = reader.getint64(0);
@@ -115,11 +108,11 @@ void RepoImpl::createResolvables()
 
     MIL << "Done reading resolvables nvra" << endl;
 
-    _ticks.tick();
+    ticks.tick();
 
-    read_capabilities( con, _options.repository_id, nvras );
+    read_capabilities( con, _options.repository_id, nvras, ticks );
 
-    _ticks.tick();
+    ticks.tick();
 
     for ( map<data::RecordId, pair<Resolvable::Kind, NVRAD> >::const_iterator it = nvras.begin(); it != nvras.end(); ++it )
     {
@@ -196,10 +189,10 @@ static CheckSum encoded_string_to_checksum( const std::string &encoded )
 
 void RepoImpl::createPatchAndDeltas()
 {
-  _ticks = ProgressData();
-  _ticks.sendTo(_options.readingPatchDeltasProgress );
-  _ticks.name(str::form(_( "Reading patch and delta rpms from '%s' repository cache"), info().alias().c_str()));
-  CombinedProgressData subprogrcv(_ticks);
+  ProgressData ticks;
+  ticks.sendTo(_options.readingPatchDeltasProgress );
+  ticks.name(str::form(_( "Reading patch and delta rpms from '%s' repository cache"), info().alias().c_str()));
+  CombinedProgressData subprogrcv(ticks);
   try
   {
     sqlite3_connection con((_options.dbdir + "zypp.db").asString().c_str());
@@ -316,7 +309,8 @@ ResolvableQuery RepoImpl::resolvableQuery()
 
 void RepoImpl::read_capabilities( sqlite3_connection &con,
                                   data::RecordId repo_id,
-                                  map<data::RecordId, pair<Resolvable::Kind, NVRAD> > &nvras )
+                                  map<data::RecordId, pair<Resolvable::Kind, NVRAD> > &nvras,
+                                  ProgressData &ticks )
 {
   CapFactory capfactory;
 
@@ -344,9 +338,9 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
   sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.pkgname, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
   sqlite3_command select_filesystem_cmd( con, "select v.refers_kind, n.name, v.dependency_type, v.resolvable_id from filesystem_capabilities v, names n, resolvables res where v.name_id=n.id and v.resolvable_id=res.id and res.repository_id=:repo_id;");
-  
+
   sqlite3_command select_split_cmd( con, "select v.refers_kind, n.name, dn.name, fn.name, v.dependency_type, v.resolvable_id from split_capabilities v, names n, resolvables res, files f, dir_names dn, file_names fn where v.name_id=n.id and v.resolvable_id=res.id and f.id=v.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and res.repository_id=:repo_id;");
-  
+
   sqlite3_command select_other_cmd( con, "select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc, resolvables res where oc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
 
@@ -354,13 +348,13 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     debug::Measure mnc("read named capabilities");
     select_named_cmd.bind(":repo_id", repo_id);
     sqlite3_reader reader = select_named_cmd.executereader();
-    
+
     // FIXME Move this logic to tick()?
     Date start(Date::now());
     while  ( reader.read() )
     {
-      _ticks.tick();
-      
+      ticks.tick();
+
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
       Rel rel = _type_cache.relationFor(reader.getint(5));
 
@@ -387,7 +381,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_file_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
       capability::FileCap *fcap = new capability::FileCap( refer, reader.getstring(1) + "/" + reader.getstring(2) );
       zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(3));
@@ -402,7 +396,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_hal_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       //select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
@@ -421,7 +415,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_modalias_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
       Rel rel = _type_cache.relationFor(reader.getint(4));
@@ -432,14 +426,14 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(mcap) ) );
     }
   }
-  
+
   {
     debug::Measure mnf("read filesystem capabilities");
     select_filesystem_cmd.bind(":repo_id", repo_id);
     sqlite3_reader reader = select_filesystem_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
       capability::FilesystemCap *fscap = new capability::FilesystemCap( refer, reader.getstring(1) );
@@ -455,7 +449,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
     sqlite3_reader reader = select_split_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
 
       capability::SplitCap *scap = new capability::SplitCap( refer, reader.getstring(1),
@@ -465,14 +459,14 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
       nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(scap) ) );
     }
   }
-  
+
   {
     debug::Measure mnf("read other capabilities");
     select_other_cmd.bind(":repo_id", repo_id);
     sqlite3_reader reader = select_other_cmd.executereader();
     while  ( reader.read() )
     {
-      _ticks.tick();
+      ticks.tick();
       //select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc;
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));

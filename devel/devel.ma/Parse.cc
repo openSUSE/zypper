@@ -4,6 +4,7 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/ProvideNumericId.h>
+#include <zypp/AutoDispose.h>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
@@ -330,6 +331,19 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  {
+    AutoDispose<int> fd( 0 );
+    SEC << fd << endl;
+    fd = ::open( "/tmp/foo", 1 );
+    SEC << fd << endl;
+
+    if ( fd == -1 )
+        ; // error report
+      else
+        fd.setDispose( ::close );
+  }
+  return 0;
 
   DigestReceive foo;
   KeyRingSignalsReceive baa;

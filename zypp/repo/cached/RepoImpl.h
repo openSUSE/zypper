@@ -79,12 +79,11 @@ namespace zypp
       private:
         void read_capabilities( sqlite3x::sqlite3_connection &con,
                                 data::RecordId repo_id,
-                                std::map<data::RecordId,
-                                std::pair<Resolvable::Kind, NVRAD> > &nvras );
+                                std::map<data::RecordId, std::pair<Resolvable::Kind, NVRAD> > &nvras,
+                                ProgressData &ticks );
         cache::CacheTypes _type_cache;
         cache::ResolvableQuery _rquery;
         RepoOptions _options;
-        ProgressData _ticks;
       public:
       };
       ///////////////////////////////////////////////////////////////////
