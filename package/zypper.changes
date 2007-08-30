@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Aug 30 20:32:56 CEST 2007 - jkupec@suse.cz
+
+- suppressing excessive output of media errors
+- prompting for media change only for changeable media
+- adapted to libzypp 3.21.0 (#294481)
+- r7043
+- 0.8.18
+
+-------------------------------------------------------------------
 Wed Aug 29 12:51:42 CEST 2007 - jkupec@suse.cz
 
 - proper fix for y/n translation (#304650)
