@@ -742,7 +742,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
       else
       {
         DBG << "callback answer: cancel" << endl;
-        report->finish(url, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.msg());
+        report->finish(url, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
         ZYPP_RETHROW(ex_r);
       }
     }
@@ -751,7 +751,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     {
       // FIXME: this will not match the first URL
       // FIXME: error number fix
-      report->finish(url, zypp::media::DownloadProgressReport::NOT_FOUND, excpt_r.msg());
+      report->finish(url, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserString());
       ZYPP_RETHROW(excpt_r);
     }
   }

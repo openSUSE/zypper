@@ -316,7 +316,8 @@ namespace zypp
           NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
           IO,		// IO error
-          ACCESS_DENIED // user authent. failed while accessing restricted file
+          ACCESS_DENIED, // user authent. failed while accessing restricted file
+          ERROR // other error
         };
 
         virtual void start( const Url &/*file*/, Pathname /*localfile*/ ) {}
