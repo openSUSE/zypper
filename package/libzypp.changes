@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 30 17:31:33 CEST 2007 - jkupec@suse.cz
+
+- remember the cause of the RepoException when refreshing metadata
+  (#301022)
+- r7023
+
+-------------------------------------------------------------------
 Thu Aug 30 15:48:03 CEST 2007 - schubi@suse.de
 
 - Bugfix: If a requirement has been fulfilled by more than one language
