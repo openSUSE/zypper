@@ -383,6 +383,9 @@ namespace zypp
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
     { LogControlImpl::instance.setLineWriter( writer_r ); }
 
+    void LogControl::setLineFormater( const shared_ptr<LineFormater> & formater_r )
+    { LogControlImpl::instance.setLineFormater( formater_r ); }
+
     void LogControl::logNothing()
     { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>() ); }
 
