@@ -5,6 +5,7 @@ Fri Aug 31 19:56:40 CEST 2007 - ma@suse.de
   Required by the UI to display packages acssociated with a patch.
   (#300612)
 - version 3.21.1
+- revision 7065
 
 -------------------------------------------------------------------
 Fri Aug 31 13:59:54 CEST 2007 - kkaempf@suse.de
