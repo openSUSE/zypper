@@ -322,7 +322,7 @@ moreDetails( ResolverContext_Ptr context, PoolItem_Ref item )
   std::list<std::string>::iterator it;
   for (it = details.begin(); it != details.end(); ++it) 
      {
-	result += "  ";
+	result += "    ";
 	result += *it;
 	result += "\n";
      }
