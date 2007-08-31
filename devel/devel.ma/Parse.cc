@@ -345,6 +345,12 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+  setenv( "ZYPP_CONF", "/Local/ROOT/zypp.conf", 1 );
+
+
+  INT << ZConfig::instance().download_use_patchrpm() << endl;
+  INT << ZConfig::instance().download_use_deltarpm() << endl;
+  return 0;
 
   DigestReceive foo;
   KeyRingSignalsReceive baa;

@@ -12,6 +12,7 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/InputStream.h"
+#include "zypp/base/String.h"
 
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppFactory.h"
@@ -31,14 +32,20 @@ namespace zypp
   //	CLASS NAME : ZConfig::Impl
   //
   /** ZConfig implementation.
+   * \todo Enrich section and entry definition by some comment
+   * (including the default setting and provide some method to
+   * write this into a sample zypp.conf.
   */
   class ZConfig::Impl
   {
     public:
       Impl()
-        : repo_add_probe(false),
-          repo_refresh_delay(10),
-          autolock_untrustedvendor(false)
+        : repo_add_probe          ( false )
+        , repo_refresh_delay      ( 10 )
+        , download_use_patchrpm   ( true )
+        , download_use_deltarpm   ( true )
+        , autolock_untrustedvendor( false )
+
       {
         MIL << "ZConfig singleton created." << endl;
 
@@ -54,21 +61,22 @@ namespace zypp
         else
         {
           MIL << confpath << " not found, using defaults instead." << endl;
+          return;
         }
-        
-        for ( IniDict::section_const_iterator sit = dict.sectionsBegin(); 
+
+        for ( IniDict::section_const_iterator sit = dict.sectionsBegin();
               sit != dict.sectionsEnd();
               ++sit )
         {
           string section(*sit);
           //MIL << section << endl;
-          for ( IniDict::entry_const_iterator it = dict.entriesBegin(*sit); 
+          for ( IniDict::entry_const_iterator it = dict.entriesBegin(*sit);
                 it != dict.entriesEnd(*sit);
                 ++it )
           {
             string entry(it->first);
             string value(it->second);
-            // DBG << (*it).first << "=" << (*it).second << endl;
+            //DBG << (*it).first << "=" << (*it).second << endl;
             if ( section == "main" )
             {
               if ( entry == "arch" )
@@ -89,41 +97,52 @@ namespace zypp
               }
               else if ( entry == "repo.add.probe" )
               {
-                repo_add_probe = (value == "1");
+                repo_add_probe = str::strToBool( value, repo_add_probe );
               }
               else if ( entry == "repo.refresh.delay" )
               {
                 str::strtonum(value, repo_refresh_delay);
               }
+              else if ( entry == "download.use_patchrpm" )
+              {
+                download_use_patchrpm = str::strToBool( value, download_use_patchrpm );
+             }
+              else if ( entry == "download.use_deltarpm" )
+              {
+                download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
+              }
             }
             else if ( section == "locking" )
             {
-              autolock_untrustedvendor = ( value == "1" );
+              autolock_untrustedvendor = str::strToBool( value, autolock_untrustedvendor );
             }
-            
+
           }
         }
-      
+
       }
 
       ~Impl()
       {}
-      
+
     public:
     parser::IniDict dict;
-    
+
     Arch cfg_arch;
-    
+
     Pathname cfg_metadata_path;
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
-    
+
     bool repo_add_probe;
     unsigned repo_refresh_delay;
-    
+
+    bool download_use_patchrpm;
+    bool download_use_deltarpm;
+
     // [locking]
     bool autolock_untrustedvendor;
-    
+
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -146,7 +165,7 @@ namespace zypp
   ZConfig::ZConfig()
   : _pimpl( new Impl )
   {
-    
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -197,19 +216,19 @@ namespace zypp
 
   Pathname ZConfig::repoMetadataPath() const
   {
-    return ( _pimpl->cfg_metadata_path.empty() 
+    return ( _pimpl->cfg_metadata_path.empty()
         ? Pathname("/var/cache/zypp/raw") : _pimpl->cfg_metadata_path );
   }
 
   Pathname ZConfig::repoCachePath() const
   {
-    return ( _pimpl->cfg_cache_path.empty() 
+    return ( _pimpl->cfg_cache_path.empty()
         ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
   }
 
   Pathname ZConfig::knownReposPath() const
   {
-    return ( _pimpl->cfg_known_repos_path.empty() 
+    return ( _pimpl->cfg_known_repos_path.empty()
         ? Pathname("/etc/zypp/repos.d") : _pimpl->cfg_known_repos_path );
   }
 
@@ -229,11 +248,17 @@ namespace zypp
     return _pimpl->repo_refresh_delay;
   }
 
+  bool ZConfig::download_use_patchrpm() const
+  { return _pimpl->download_use_patchrpm; }
+
+  bool ZConfig::download_use_deltarpm() const
+  { return _pimpl->download_use_deltarpm; }
+
   bool ZConfig::autolock_untrustedvendor() const
   {
     return _pimpl->autolock_untrustedvendor;
   }
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

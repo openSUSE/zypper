@@ -94,13 +94,23 @@ namespace zypp
        */
       unsigned repo_refresh_delay() const;
 
+      /** Whether to consider using a patchrpm when downloading a package.
+       * Config option <tt>download.use_patchrpm (true)</tt>
+      */
+      bool download_use_patchrpm() const;
+
+      /** Whether to consider using a deltarpm when downloading a package.
+       * Config option <tt>download.use_deltarpm (true)</tt>
+       */
+      bool download_use_deltarpm() const;
+
       /**
        * Whether untrusted vendor should be autolocked
        / config option
        * repo.add.probe
        */
       bool autolock_untrustedvendor() const;
-      
+
     public:
       class Impl;
       /** Dtor */
