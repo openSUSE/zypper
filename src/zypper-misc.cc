@@ -422,7 +422,7 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
   stm << _("Problem: ") << prob.description () << endl;
   det = prob.details ();
   if (!det.empty ())
-    stm << " " << det << endl;
+    stm << "  " << det << endl;
 
   int n;
   ProblemSolutionList solutions = prob.solutions ();
@@ -443,6 +443,9 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
 
   int reply;
   do {
+    // without solutions, its useless to prompt
+    if (solutions.empty()) 
+       return false;
     // input prompt
     cerr << _("number, (r)etry or (c)ancel> ") << flush;
     string reply_s = str::getline (cin, zypp::str::TRIM);
@@ -482,16 +485,12 @@ bool show_problems ()
     e = rproblems.end (),
     i;
   ProblemSolutionList todo;
-  bool no_problem = b == e;
-  if (!no_problem) {
+  if (!rproblems.empty()) {
     stm << format (_("%s Problems:")) % rproblems.size() << endl;
   }
   else {
     stm << _("Specified capability not found") << endl;
     return false;
-  }
-  for (i = b; i != e; ++i) {
-    stm << _("Problem: ") << (*i)->description () << endl;
   }
   for (i = b; i != e; ++i) {
     stm << endl;
@@ -805,6 +804,7 @@ bool resolve()
 {
   establish ();
   cout_v << _("Resolving dependencies...") << endl;
+  God->resolver()->setForceResolve( true );
   return God->resolver()->resolvePool();
 }
 
@@ -861,7 +861,7 @@ void dump_pool ()
 	|| it->status().transacts()                         // or transacts
 	|| !it->status().isUndetermined())                  // or established status
     {
-      _DEBUG( count << ": " << *it );
+      _XDEBUG( count << ": " << *it );
     }
   }
   _XDEBUG( "---------------------------------------" );

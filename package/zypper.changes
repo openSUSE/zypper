@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri Aug 31 14:07:11 CEST 2007 - kkaempf@suse.de
+
+- dont prompt for solutions if none are available.
+- dont duplicate dependency problems in output.
+- indent details by 2 blanks, resolver indents further details
+  by 4 blanks.
+- provide additional details for problems (#306240)
+- don't prompt user for every dependency (#304325)
+- don't clutter the log with pool lists.
+- r 7054
+
+-------------------------------------------------------------------
 Thu Aug 30 20:32:56 CEST 2007 - jkupec@suse.cz
 
 - suppressing excessive output of media errors
