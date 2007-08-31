@@ -1686,11 +1686,12 @@ ResolverContext::requirementIsPossible (const Capability & capability)
 
 
 bool
-ResolverContext::itemIsPossible (PoolItem_Ref item)
+ResolverContext::itemIsPossible( PoolItem_Ref item, Capability & failed )
 {
     CapSet requires = item->dep (Dep::REQUIRES);
     for (CapSet::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
 	if (! requirementIsPossible (*iter)) {
+	    failed = *iter;
 	    return false;
 	}
     }

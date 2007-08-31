@@ -44,6 +44,7 @@
 #include "zypp/solver/detail/ResolverInfoDependsOn.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/solver/detail/ResolverInfoMissingReq.h"
 #include "zypp/solver/detail/Helper.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -236,9 +237,11 @@ struct RequireProcess
 	    }
 	}
 
+        Capability failed_cap;
+
 	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! _context->isParallelInstall( provider )
-	    && _context->itemIsPossible( provider )
+	    && _context->itemIsPossible( provider, failed_cap )
 	    && ! provider.status().isLocked()
             && vendorFit
 	    && ! (provider.status().isKept()
@@ -320,6 +323,7 @@ struct NoInstallableProviders
 	ResStatus status = context->getStatus( provider );
 
 	ResolverInfoMisc_Ptr misc_info;
+        Capability failed_cap;
 
 	if (status.isToBeUninstalled()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
@@ -328,9 +332,16 @@ struct NoInstallableProviders
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 	} else if (status.isImpossible()
-		  || ! context->itemIsPossible (provider)) {
+		  || ! context->itemIsPossible( provider, failed_cap )) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
+	   if (!requirer       // user initiated the request
+	       && failed_cap != Capability::noCap)  // solver knows why it failed
+	     {
+		ResolverInfoMissingReq_Ptr missing = new ResolverInfoMissingReq( provider, failed_cap );
+		missing->flagAsImportant();
+		context->addInfo( missing );
+	     }
 	} else if (provider.status().isLocked()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
@@ -785,8 +796,9 @@ provider_done:;
 		for (UpgradesMap::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); ++iter) {
 		    PoolItem_Ref upgrade_item = iter->second;
 		    QueueItemInstall_Ptr install_item;
-
-		    if (context->itemIsPossible (upgrade_item)) {
+		    Capability failed_cap;
+		   
+		    if (context->itemIsPossible( upgrade_item, failed_cap )) {
 
 			install_item = new QueueItemInstall (pool(), upgrade_item, _soft);
 		    	install_item->setUpgrades (_requiring_item);

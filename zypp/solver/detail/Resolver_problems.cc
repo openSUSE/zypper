@@ -300,6 +300,37 @@ std::string logAdditionalInfo ( const ProblemMap &additionalInfo, const PoolItem
     return infoStr;
 }
 
+   
+static void
+moreDetailsCb( ResolverInfo_Ptr info, void *data )
+{
+  if (info->important()
+      && info->priority() >= RESOLVER_INFO_PRIORITY_USER) {
+    std::list<std::string> *details = (std::list<std::string> *)data;
+    details->push_back( info->message() );
+  }
+   
+}       
+       
+static string
+moreDetails( ResolverContext_Ptr context, PoolItem_Ref item )
+{
+  MIL << "moreDetails for " << item << endl;
+  std::list<std::string> details;
+  context->foreachInfo( item, RESOLVER_INFO_PRIORITY_USER, moreDetailsCb, &details, true, true ); //, const bool merge=true, const bool findImportant = true) const;
+  string result;
+  std::list<std::string>::iterator it;
+  for (it = details.begin(); it != details.end(); ++it) 
+     {
+	result += "  ";
+	result += *it;
+	result += "\n";
+     }
+   
+  return result;
+}
+      
+	     
 
 ResolverProblemList
 Resolver::problems (const bool ignoreValidSolution) const
@@ -905,9 +936,16 @@ Resolver::problems (const bool ignoreValidSolution) const
 	    switch (info->type()) {
 		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		    // TranslatorExplanation %s = name requirement ...				
-		    what = str::form (_("Requirememt %s cannot be fulfilled."), misc_info->capability().asString().c_str());		
+		   // TranslatorExplanation %s = name requirement ...				
+		    what = str::form (_("Requirememt %s cannot be fulfilled."), misc_info->capability().asString().c_str());
 		    details = misc_info->message() + "\n";
+		    PoolItem_Ref item = misc_info->affected();
+		    if (!item) 
+		    {
+			// user request, get more details
+			string more_details = moreDetails( context, item );
+			details += more_details;
+		    }
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		    problems.push_back (problem);
 		    problem_created = true;		

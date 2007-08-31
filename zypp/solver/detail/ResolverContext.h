@@ -272,7 +272,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 					   const PoolItem_Ref who,
 					   const Dep & capKind);
     bool requirementIsPossible (const Capability & cap);
-    bool itemIsPossible (const PoolItem_Ref item);
+    // check if its possible to install item; if not, return first failed capability via 'failed'
+    bool itemIsPossible( const PoolItem_Ref item, Capability & failed );
     bool isParallelInstall (const PoolItem_Ref item) const;
     PoolItem_Ref getParallelInstall (const PoolItem_Ref item) const;
 

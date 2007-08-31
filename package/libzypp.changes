@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 31 13:59:54 CEST 2007 - kkaempf@suse.de
+
+- enrich ResolverInfo with the reason if a user-initiated request
+  fails (#304325, #306240)
+- r 7051
+
+-------------------------------------------------------------------
 Thu Aug 30 20:10:00 CEST 2007 - jkupec@suse.cz
 
 - added missing implementation of LogControl::setLineFormater()
