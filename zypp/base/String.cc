@@ -54,6 +54,36 @@ namespace zypp
 
     /******************************************************************
      **
+     **      FUNCTION NAME : strToTrue
+     **      FUNCTION TYPE : bool
+    */
+    bool strToTrue( const std::string & str )
+    {
+      std::string t( toLower( str ) );
+      return(    t == "1"
+              || t == "yes"
+              || t == "true"
+              || t == "on"
+            );
+    }
+
+    /******************************************************************
+     **
+     **      FUNCTION NAME : strToFalse
+     **      FUNCTION TYPE : bool
+    */
+    bool strToFalse( const std::string & str )
+    {
+      std::string t( toLower( str ) );
+      return ! (    t == "0"
+                 || t == "no"
+                 || t == "false"
+                 || t == "off"
+               );
+    }
+
+    /******************************************************************
+     **
      **      FUNCTION NAME : toLower
      **      FUNCTION TYPE : std::string
     */
@@ -160,26 +190,26 @@ namespace zypp
     string gsub(const string& sData, const string& sFrom, const string& sTo)
     {
       string sNew = sData;
-      
+
       if (! sNew.empty())
       {
         string::size_type toLen = sTo.length();
         string::size_type frLen = sFrom.length();
         string::size_type loc = 0;
-        
+
         while (string::npos != (loc = sNew.find(sFrom, loc)))
         {
           sNew.replace(loc, frLen, sTo);
           loc += toLen;
-          
+
           if (loc >= sNew.length())
           break;
         }
       }
-    
+
       return sNew;
     }
-    
+
     /******************************************************************
     **
     **
