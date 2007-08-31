@@ -60,6 +60,9 @@ namespace zypp
        * \warning Computed here, usually no need to overload this.
       */
       virtual AtomList all_atoms() const PURE_VIRTUAL;
+
+    private:
+      mutable scoped_ptr<AtomList> _atomlist;
     };
     ///////////////////////////////////////////////////////////////////
 
