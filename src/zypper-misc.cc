@@ -491,6 +491,14 @@ bool show_problems ()
     stm << _("Specified capability not found") << endl;
     return false;
   }
+  // for many problems, list them shortly first
+  if (rproblems.size() > 1) 
+  {
+    for (i = b; i != e; ++i) {
+      stm << _("Problem: ") << (*i)->description () << endl;
+    }
+  }
+  // now list all problems with solution proposals
   for (i = b; i != e; ++i) {
     stm << endl;
     tribool stopnow = show_problem (*(*i), todo);
