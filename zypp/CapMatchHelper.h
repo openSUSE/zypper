@@ -146,7 +146,17 @@ namespace zypp
     {
       bool operator()( const Capability &, const Capability & ) const
       { return false; }
+      bool operator()( const Capability & ) const
+      { return false; }
     };
+  }
+
+  /** Return \c true if the CapSet contains at least one Capabilitiy
+   *  that matches.
+  */
+  inline bool hasMatches( const CapSet & lhs_r, const Capability & rhs_r )
+  {
+    return( forEachMatchIn( lhs_r, rhs_r, capmatch_detail::AlwaysFalse() ) < 0 );
   }
 
   /** Return \c true if the CapSets contain at least one pair of
