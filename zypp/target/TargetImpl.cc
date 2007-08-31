@@ -468,6 +468,7 @@ namespace zypp
 
 
       result._result = (to_install.size() - result._remaining.size());
+      MIL << "TargetImpl::commit(<pool>, " << policy_r << ") returns: " << result << endl;
       return result;
     }
 
