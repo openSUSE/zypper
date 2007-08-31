@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 31 14:35:01 CEST 2007 - jkupec@suse.cz
+
+- fixed error message of zypper ar -r (#306667)
+- r7055
+
+-------------------------------------------------------------------
 Fri Aug 31 14:07:11 CEST 2007 - kkaempf@suse.de
 
 - dont prompt for solutions if none are available.
