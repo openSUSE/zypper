@@ -784,8 +784,37 @@ int add_repo_from_file(const std::string & repo_file_url,
   //! \todo handle local .repo files, validate the URL
   Url url(repo_file_url);
   RepoManager manager;
-  list<RepoInfo> repos = readRepoFile(url);
+  list<RepoInfo> repos;
 
+  // read the repo file
+  try { repos = readRepoFile(url); }
+  catch (const media::MediaException & e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+      _("Problem accessing the file at the specified URL") + string(":"),
+      _("Please check if the URL is valid and accessible."));
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const parser::ParseException & e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+      _("Problem parsing the file at the specified URL") + string(":"),
+      // TranslatorExplanation don't translate the URL if the URL itself is not translated.
+      // Also don't translate the '.repo' string.
+      _("Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."));
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+  catch (const Exception & e)
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+      _("Problem encountered while trying to read the file at the specified URL") + string(":"));
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
+
+  // add repos
   for (list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
   {

@@ -13,7 +13,6 @@
 
 #include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
-#include <zypp/repo/RepoException.h>
 
 #include <zypp/CapFactory.h>
 
