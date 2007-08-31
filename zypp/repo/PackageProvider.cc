@@ -22,6 +22,7 @@
 #include "zypp/repo/PackageDelta.h"
 #include "zypp/detail/ImplConnect.h"
 
+#include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Repository.h"
 #include "zypp/media/MediaManager.h"
@@ -133,8 +134,17 @@ namespace zypp
       // check whether to process patch/delta rpms
       if ( MediaManager::downloads(url) )
         {
-          std::list<DeltaRpm> deltaRpms = _deltas.deltaRpms(_package);
-          std::list<PatchRpm> patchRpms = _deltas.patchRpms(_package);
+          std::list<DeltaRpm> deltaRpms;
+          if ( ZConfig::instance().download_use_deltarpm() )
+          {
+            _deltas.deltaRpms( _package ).swap( deltaRpms );
+          }
+
+          std::list<PatchRpm> patchRpms;
+          if ( ZConfig::instance().download_use_patchrpm() )
+          {
+            _deltas.patchRpms( _package ).swap( patchRpms );
+          }
 
           if ( ! ( deltaRpms.empty() && patchRpms.empty() )
                && queryInstalled() )
@@ -167,7 +177,12 @@ namespace zypp
       else
         {
           // allow patch rpm from local source
-          std::list<PatchRpm> patchRpms = _deltas.patchRpms(_package);
+          std::list<PatchRpm> patchRpms;
+          if ( ZConfig::instance().download_use_patchrpm() )
+          {
+            _deltas.patchRpms( _package ).swap( patchRpms );
+          }
+
           if ( ! patchRpms.empty() && queryInstalled() )
             {
               for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
@@ -184,7 +199,7 @@ namespace zypp
       // no patch/delta -> provide full package
       ManagedFile ret;
       OnMediaLocation loc = _package->location();
-      
+
       ProvideFilePolicy policy;
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );

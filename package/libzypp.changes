@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 31 22:10:55 CEST 2007 - ma@suse.de
+
+- Added ability to switch off use of patch and delta rpms via zypp.conf (#305864)
+   [main]
+   download.use_patchrpm = no
+   download.use_deltarpm = no
+- version 3.22.0
+
+-------------------------------------------------------------------
 Fri Aug 31 19:56:40 CEST 2007 - ma@suse.de
 
 - On demand translate patch requirements into a list of atoms.
