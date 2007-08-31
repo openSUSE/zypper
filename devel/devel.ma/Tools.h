@@ -10,6 +10,7 @@
 #include "Printing.h"
 #include "FakePool.h"
 
+#include <zypp/base/Easy.h>
 #include <zypp/base/Counter.h>
 #include <zypp/base/Measure.h>
 

@@ -34,6 +34,8 @@
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
 
+#include "zypp/ui/PatchContents.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
@@ -50,7 +52,8 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    handle( asKind<Package>( obj_r ) );
+    //handle( asKind<Package>( obj_r ) );
+    handle( asKind<Patch>( obj_r ) );
     //handle( asKind<Pattern>( obj_r ) );
     //handle( asKind<Product>( obj_r ) );
     return true;
@@ -61,7 +64,18 @@ struct Xprint
     if ( !p )
       return;
 
-    //MIL << p->diskusage() << endl;
+    MIL << p->diskusage() << endl;
+  }
+
+  void handle( const Patch_constPtr & p )
+  {
+    if ( !p )
+      return;
+
+    ui::PatchContents pc( p );
+    MIL << p << endl;
+    dumpRange( DBG << pc.size() << endl,
+               pc.begin(), pc.end() );
   }
 
   void handle( const Pattern_constPtr & p )
@@ -262,7 +276,7 @@ struct KeyRingSignalsReceive : public callback::ReceiveReport<KeyRingSignals>
 
 struct MediaChangeReceive : public callback::ReceiveReport<media::MediaChangeReport>
 {
-  virtual Action requestMedia( Repository source
+  virtual Action requestMedia( Url & source
                                , unsigned mediumNr
                                , Error error
                                , const std::string & description )
@@ -331,19 +345,6 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-
-  {
-    AutoDispose<int> fd( 0 );
-    SEC << fd << endl;
-    fd = ::open( "/tmp/foo", 1 );
-    SEC << fd << endl;
-
-    if ( fd == -1 )
-        ; // error report
-      else
-        fd.setDispose( ::close );
-  }
-  return 0;
 
   DigestReceive foo;
   KeyRingSignalsReceive baa;
