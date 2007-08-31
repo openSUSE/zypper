@@ -48,8 +48,6 @@ namespace cached
     virtual std::string category() const;
     virtual bool reboot_needed() const;
     virtual bool affects_pkg_manager() const;
-    virtual bool interactive() const;
-    virtual AtomList all_atoms() const;
 
     virtual Repository repository() const;
 

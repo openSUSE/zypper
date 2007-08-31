@@ -60,7 +60,9 @@ namespace zypp
     }
 
     PatchImplIf::AtomList PatchImplIf::all_atoms() const
-    { return AtomList(); }
+    {
+      return AtomList();
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

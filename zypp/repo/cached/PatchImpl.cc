@@ -105,9 +105,7 @@ Date PatchImpl::installtime() const
 
 std::string PatchImpl::id() const
 {
-#warning DUBIOUS ATTRIBUTE
-  return "";
-  //return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatchId() );
+  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPatchId() );
 }
 
 Date PatchImpl::timestamp() const
@@ -128,19 +126,6 @@ bool PatchImpl::reboot_needed() const
 bool PatchImpl::affects_pkg_manager() const
 {
   return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatchAffectsPkgManager() );
-}
-
-bool PatchImpl::interactive() const
-{
-#warning DUBIOUS ATTRIBUTE
-  return false;
-  //return _repository->resolvableQuery().queryBooleanAttribute( _id, cache::attrPatchInteractive() );
-}
-
-PatchImpl::AtomList PatchImpl::all_atoms() const
-{
-#warning DUBIOUS ATTRIBUTE
-  return PatchImpl::AtomList();
 }
 
 /////////////////////////////////////////////////////////////////

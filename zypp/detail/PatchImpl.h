@@ -52,8 +52,6 @@ namespace zypp
       virtual bool reboot_needed() const;
       /** Does the patch affect the package manager itself? */
       virtual bool affects_pkg_manager() const;
-      /** The list of all atoms building the patch */
-      virtual AtomList all_atoms() const;
 
     protected:
       /** Patch ID */
@@ -70,8 +68,6 @@ namespace zypp
       bool _reboot_needed;
       /** Does the patch affect the package manager itself? */
       bool _affects_pkg_manager;
-      /** The list of all atoms building the patch */
-      AtomList _atoms;
     };
     ///////////////////////////////////////////////////////////////////
 

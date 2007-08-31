@@ -27,7 +27,7 @@ namespace memory
   public:
 
     PatchImpl( repo::memory::RepoImpl::Ptr repo, data::Patch_Ptr ptr);
-    
+
     virtual TranslatedText summary() const;
     virtual TranslatedText description() const;
     virtual TranslatedText insnotify() const;
@@ -38,20 +38,19 @@ namespace memory
     virtual bool installOnly() const;
     virtual Date buildtime() const;
     virtual Date installtime() const;
-    
+
     // PATCH
     virtual std::string id() const;
     virtual Date timestamp() const;
     virtual std::string category() const;
     virtual bool reboot_needed() const;
     virtual bool affects_pkg_manager() const;
-    virtual AtomList all_atoms() const;
-       
+
     virtual Repository repository() const;
-    
+
   protected:
     repo::memory::RepoImpl::Ptr _repository;
-    
+
     //ResObject
     TranslatedText _summary;
     TranslatedText _description;
@@ -63,14 +62,13 @@ namespace memory
     bool _install_only;
     Date _buildtime;
     Date _installtime;
-    
+
     // patch
     std::string _patch_id;
     Date _timestamp;
     std::string _category;
     bool _reboot_needed;
     bool _affects_pkg_manager;
-    AtomList _atoms;
   };
   /////////////////////////////////////////////////////////////////
 } // namespace memory

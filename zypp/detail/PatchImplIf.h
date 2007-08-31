@@ -51,10 +51,14 @@ namespace zypp
       virtual bool reboot_needed() const PURE_VIRTUAL;
       /** Does the patch affect the package manager itself? */
       virtual bool affects_pkg_manager() const PURE_VIRTUAL;
-      
-      /** Is the patch installation interactive? (does it need user input?) */
+
+      /** Is the patch installation interactive? (does it need user input?)
+       * \warning Computed here, usually no need to overload this.
+      */
       virtual bool interactive() const PURE_VIRTUAL;
-      /** The list of all atoms building the patch */
+      /** The list of all atoms building the patch
+       * \warning Computed here, usually no need to overload this.
+      */
       virtual AtomList all_atoms() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////

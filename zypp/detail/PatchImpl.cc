@@ -72,10 +72,6 @@ namespace zypp
       return _affects_pkg_manager;
     }
 
-    PatchImpl::AtomList PatchImpl::all_atoms() const {
-      return _atoms;
-    }
-
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
