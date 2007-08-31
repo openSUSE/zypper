@@ -311,6 +311,7 @@ RecordId CacheStore::consumePatch( const data::RecordId & repository_id,
   // patch attributes
   appendNumericAttribute( id, attrPatchTimestamp(),         patch->timestamp );
   appendStringAttribute(  id, attrPatchCategory(),          patch->category );
+  appendStringAttribute(  id, attrPatchId(),                patch->id );
   appendBooleanAttribute( id, attrPatchRebootNeeded(),      patch->rebootNeeded );
   appendBooleanAttribute( id, attrPatchAffectsPkgManager(), patch->affectsPkgManager );
 

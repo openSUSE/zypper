@@ -65,6 +65,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     inline const Attribute & attrPatchAffectsPkgManager()      { static Attribute a("Patch","affectsPkgManager");      return a; }
     inline const Attribute & attrPatchCategory()               { static Attribute a("Patch","category");               return a; }
+    inline const Attribute & attrPatchId()                     { static Attribute a("Patch","id");                     return a; }
     inline const Attribute & attrPatchRebootNeeded()           { static Attribute a("Patch","rebootNeeded");           return a; }
     inline const Attribute & attrPatchTimestamp()              { static Attribute a("Patch","timestamp");              return a; }
     ///////////////////////////////////////////////////////////////////
