@@ -143,6 +143,10 @@ namespace zypp
     inline bool isKind( const Capability & cap )
     { return cap.kind() == capability::CapTraits<_Cap>::kind; }
 
+  template<class _Res>
+    inline bool refersTo( const Capability & cap )
+    { return cap.refers() == ResTraits<_Res>::kind; }
+
   ///////////////////////////////////////////////////////////////////
 
   /** Ordering relation used by ::CapSet. */
