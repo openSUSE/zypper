@@ -1242,7 +1242,7 @@ ResolverContext::addError (ResolverInfo_Ptr info, bool askUser)
     if (info->type() == RESOLVER_INFO_TYPE_UNINSTALL_LOCKED) {
 	for (PoolItemList::const_iterator iter = _ignoreInstalledItem.begin(); iter != _ignoreInstalledItem.end(); iter++) {
 	    if (info->affected() == *iter) {
-		DBG << "ignore keep installed: " << info->affected() << endl;
+		XXX << "ignore keep installed: " << info->affected() << endl;
 		is_error = false;
 		break;
 	    }
@@ -1656,7 +1656,7 @@ struct RequirementPossible
 		ResStatus statusInstalled = context->getStatus (installedItem);
 		if (installedItem.status().isToBeUninstalled()
 		    && installedItem.status().isByUser()){
-		    DBG << provider << " would satify the requirement but it has been selected for removing by the user." << endl;
+		    XXX << provider << " would satify the requirement but it has been selected for removing by the user." << endl;
 		    flag = false;
 		}
 	    }
@@ -1742,7 +1742,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     for (PoolItemList::const_iterator iter = _ignoreInstalledItem.begin();
 	 iter != _ignoreInstalledItem.end(); iter++) {
 	if (item == *iter) {
-	    DBG << "ignore parallel install: " << item << endl;
+	    XXX << "ignore parallel install: " << item << endl;
 	    return false;
 	}
     }
@@ -1753,7 +1753,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     info.flag = false;
     foreachMarked (dup_name_check_cb, (void *)&info);
     if (info.flag) {
-	DBG << "isParallelInstall!!(" << item << ", " << info.foundItem << ")" << endl;
+	XXX << "isParallelInstall!!(" << item << ", " << info.foundItem << ")" << endl;
     }
     return info.flag;
 }
@@ -1966,24 +1966,24 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	if (_preferHighestVersion) {
 	    // comparing versions
 	    cmp = cmpVersion;
-	    DBG << "Comparing versions returned :" << cmp << endl;
+	    XXX << "Comparing versions returned :" << cmp << endl;
 	    if (cmp == 0) { 
 		// High numbers are good... we don't want solutions containing low-priority channels.
 		// Repo priority which has been set externally
 		cmp = num_cmp (_min_priority, context->_min_priority);
-		DBG << "Comparing priority returned :" << cmp << endl;
+		XXX << "Comparing priority returned :" << cmp << endl;
 		if (cmp == 0) {
 		    // High numbers are bad.  Less churn is better.
 		    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
-		    DBG << "Comparing churn_factor returned :" << cmp << endl;
+		    XXX << "Comparing churn_factor returned :" << cmp << endl;
 		    if (cmp == 0) {		
 			// Comparing repositorys regarding the items which has to be installed
 			cmp = cmpRepo;
-			DBG << "Comparing repositorys returned :" << cmp << endl;		
+			XXX << "Comparing repositorys returned :" << cmp << endl;		
 			if (cmp == 0) {
 			    // High numbers are bad.  Bigger #s means more penalties.
 			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
-			    DBG << "Comparing other penalties returned :" << cmp << endl;			
+			    XXX << "Comparing other penalties returned :" << cmp << endl;			
 			}
 		    }
 		}
@@ -1992,23 +1992,23 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	    // less transaction will be prefered
 	    // High numbers are bad.  Less churn is better.
 	    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
-	    DBG << "Comparing churn_factor returned :" << cmp << endl;	    
+	    XXX << "Comparing churn_factor returned :" << cmp << endl;	    
 	    if (cmp == 0) { 
 		// High numbers are good... we don't want solutions containing low-priority channels.
 		// Repo priority which has been set externally
 		cmp = num_cmp (_min_priority, context->_min_priority);
-		DBG << "Comparing priority returned :" << cmp << endl;
+		XXX << "Comparing priority returned :" << cmp << endl;
 		if (cmp == 0) {
 		    cmp = cmpVersion;
-		    DBG << "Comparing versions returned :" << cmp << endl;
+		    XXX << "Comparing versions returned :" << cmp << endl;
 		    if (cmp == 0) {		
 			// Comparing repositorys regarding the items which has to be installed
 			cmp = cmpRepo;
-			DBG << "Comparing repositorys returned :" << cmp << endl;		
+			XXX << "Comparing repositorys returned :" << cmp << endl;		
 			if (cmp == 0) {
 			    // High numbers are bad.  Bigger #s means more penalties.
 			    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
-			    DBG << "Comparing other penalties returned :" << cmp << endl;			
+			    XXX << "Comparing other penalties returned :" << cmp << endl;			
 			}
 		    }
 		}

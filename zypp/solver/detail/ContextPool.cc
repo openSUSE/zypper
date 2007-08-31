@@ -44,7 +44,7 @@ void  dumpTaskList(const PoolItemList &list )
 {
     for (PoolItemList::const_iterator iter = list.begin();
 	 iter != list.end(); iter++) {
-	DBG << "          " << *iter << endl;
+	XXX << "          " << *iter << endl;
     }
 }
 

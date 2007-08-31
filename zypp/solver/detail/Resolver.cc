@@ -295,11 +295,11 @@ void  Resolver::dumpTaskList(const PoolItemList &install, const PoolItemList &re
 {
     for (PoolItemList::const_iterator iter = install.begin();
          iter != install.end(); iter++) {
-        DBG << "    to_install " << *iter << endl;
+        XXX << "    to_install " << *iter << endl;
     }
     for (PoolItemList::const_iterator iter = remove.begin();
          iter != remove.end(); iter++) {
-        DBG << "    to_remove " << *iter << endl;
+        XXX << "    to_remove " << *iter << endl;
     }
 }
 

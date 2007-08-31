@@ -398,8 +398,8 @@ Resolver::problems (const bool ignoreValidSolution) const
 
 	bool problem_created = false;
 
-	DBG << "Problem: " << *info;
-	DBG << "; Evaluate solutions..." << endl;
+	MIL << "Problem: " << *info;
+	XXX << "; Evaluate solutions..." << endl;
 	string what;
 	string details;
 

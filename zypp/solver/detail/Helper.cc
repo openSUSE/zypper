@@ -125,12 +125,10 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-        MIL << "comparing: " << endl << provider << endl << uninstalled << endl;
-        
         // is valid
         if ( ! provider.resolvable() )
         {
-          MIL << "Warning: '" << provider << "' not valid" << endl;
+          WAR << "Warning: '" << provider << "' not valid" << endl;
           return true;
         }
 
