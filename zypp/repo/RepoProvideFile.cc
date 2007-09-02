@@ -158,7 +158,7 @@ namespace zypp
           }
           else
           {
-            WAR << "No media verifier for repo '" << info.alias() << endl;
+            WAR << "No media verifier for repo '" << info.alias() << "'" << endl;
           }
         }
         else
