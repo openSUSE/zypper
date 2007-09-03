@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep  3 12:34:35 CEST 2007 - kkaempf@suse.de
+
+- make (r)etry (c)ancel answer case-insensitive (#307122)
+
+-------------------------------------------------------------------
 Fri Aug 31 14:35:01 CEST 2007 - jkupec@suse.cz
 
 - fixed error message of zypper ar -r (#306667)

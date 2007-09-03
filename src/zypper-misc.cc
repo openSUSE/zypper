@@ -1,5 +1,6 @@
 #include <fstream>
 #include <sstream>
+#include <ctype.h>
 #include <boost/format.hpp>
 #include <boost/logic/tribool_io.hpp>
 
@@ -453,6 +454,9 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
       cerr_v << "cin: " << cin.rdstate() << endl;
       return false;
     }
+    if (isupper( reply_s[0] ))
+      reply_s[0] = tolower( reply_s[0] );
+
     // translators: corresponds to (r)etry
     if (reply_s == _("r"))
       return true;
