@@ -53,7 +53,7 @@ struct Xprint
   bool operator()( const PoolItem & obj_r )
   {
     //handle( asKind<Package>( obj_r ) );
-    handle( asKind<Patch>( obj_r ) );
+    //handle( asKind<Patch>( obj_r ) );
     //handle( asKind<Pattern>( obj_r ) );
     //handle( asKind<Product>( obj_r ) );
     return true;
@@ -347,10 +347,11 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
   setenv( "ZYPP_CONF", "/Local/ROOT/zypp.conf", 1 );
 
-
-  INT << ZConfig::instance().download_use_patchrpm() << endl;
-  INT << ZConfig::instance().download_use_deltarpm() << endl;
-  return 0;
+  std::string t( "ABCD" );
+  MIL << str::toLower(t.substr(0,3)) << endl;
+  MIL << str::toLower(t.substr(0,4)) << endl;
+  MIL << str::toLower(t.substr(0,5)) << endl;
+  throw;
 
   DigestReceive foo;
   KeyRingSignalsReceive baa;
@@ -414,7 +415,7 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   SEC << pool.knownRepositoriesSize() << endl;
 
-  if ( 0 )
+  if ( 1 )
   {
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
@@ -424,6 +425,13 @@ int main( int argc, char * argv[] )
   }
 
   INT << getZYpp()->diskUsage() << endl;
+
+  {
+    Measure x("SHUTDOWN");
+    getZYpp()->removeResolvables( getZYpp()->target()->resolvables() );
+    getZYpp()->target()->reset();
+  }
+
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
 

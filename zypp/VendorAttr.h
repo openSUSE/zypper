@@ -52,6 +52,13 @@ class VendorAttr : private base::NonCopyable
      **/
     bool autoProtect( const Vendor & vendor_r ) const;
 
+    /** Return whether two vendor strings shold be treated as the same vendor.
+     * Usually the solver is allowed to automatically select a package of an
+     * equivalent vendor when updating. Replacing a package with one of a
+     * different vendor usually must be confirmed by the user.
+    */
+    bool equivalent( const Vendor & lhs, const Vendor & rhs ) const;
+
   private:
     VendorAttr();
 };

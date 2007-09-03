@@ -147,6 +147,20 @@ namespace zypp
   bool VendorAttr::autoProtect( const Vendor & vendor_r ) const
   { return( ZConfig::instance().autolock_untrustedvendor() && ! trusted( vendor_r ) ); }
 
+  bool VendorAttr::equivalent( const Vendor & lhs, const Vendor & rhs ) const
+  {
+    static const std::string defSUSE( "suse" );
+
+    if ( lhs == rhs )
+      return true;
+    // By now handcrafted equivalence definition:
+    if (    str::toLower( lhs.substr( 0, 4 ) ) == defSUSE
+         && str::toLower( rhs.substr( 0, 4 ) ) == defSUSE )
+      return true;
+
+    return false;
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
