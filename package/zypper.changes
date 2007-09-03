@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep  3 17:09:00 CEST 2007 - jkupec@suse.cz
+
+- authentication prompt implemented (#190609)
+- LOCK documention added to man page (mvidner)
+- r7093
+- 0.8.19
+
+-------------------------------------------------------------------
 Mon Sep  3 14:15:59 CEST 2007 - jkupec@suse.cz
 
 - removing rpm message improved (#307132)
