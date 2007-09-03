@@ -22,6 +22,7 @@
 #include <zypp/Repository.h>
 #include <zypp/Digest.h>
 #include <zypp/Url.h>
+#include <zypp/media/MediaUserAuth.h>
 
 #include "zypper.h"
 #include "zypper-callbacks.h"
@@ -106,6 +107,50 @@ namespace ZmartRecipients
     }
   };
 
+  struct AuthenticationReportReceiver : public zypp::callback::ReceiveReport<zypp::media::AuthenticationReport>
+  {
+    virtual bool prompt(const zypp::Url & url,
+                        const std::string & description,
+                        zypp::media::AuthData & auth_data)
+    {
+      if (gSettings.non_interactive)
+      {
+        MIL << "Non-interactive mode: aborting" << std::endl;
+        cout_vv << description << std::endl;
+        cout_vv << "Non-interactive mode: aborting" << std::endl;
+        return false;
+      }
+
+      cout << description << std::endl;
+
+      // curl authentication
+      zypp::media::CurlAuthData * auth_data_ptr =
+        dynamic_cast<zypp::media::CurlAuthData*> (&auth_data);
+      if (auth_data_ptr)
+      {
+        cout_vv << "available auth types: "
+          << auth_data_ptr->authTypeAsString() << std::endl;
+
+        cout << "User Name: ";
+        string username;
+        std::cin >> username;
+        auth_data_ptr->setUserName(username);
+
+        cout << "Password: ";
+        string password;
+        std::cin >> password;
+        if (password.empty()) return false;
+        auth_data_ptr->setPassword(password);
+
+        auth_data_ptr->setAuthType("basic,digest");
+
+        return true;
+      }
+
+      return false;
+    }
+  };
+
     ///////////////////////////////////////////////////////////////////
 }; // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
@@ -115,18 +160,21 @@ class MediaCallbacks {
   private:
     ZmartRecipients::MediaChangeReportReceiver _mediaChangeReport;
     ZmartRecipients::DownloadProgressReportReceiver _mediaDownloadReport;
+    ZmartRecipients::AuthenticationReportReceiver _mediaAuthenticationReport;
   public:
     MediaCallbacks()
     {
       MIL << "Set media callbacks.." << endl;
       _mediaChangeReport.connect();
       _mediaDownloadReport.connect();
+      _mediaAuthenticationReport.connect();
     }
 
     ~MediaCallbacks()
     {
       _mediaChangeReport.disconnect();
       _mediaDownloadReport.disconnect();
+      _mediaAuthenticationReport.disconnect();
     }
 };
 
