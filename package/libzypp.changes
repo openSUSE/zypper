@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep  3 13:56:42 CEST 2007 - schubi@suse.de
+
+- new translations added
+- rev 7083 
+
+-------------------------------------------------------------------
 Fri Aug 31 22:10:55 CEST 2007 - ma@suse.de
 
 - Added ability to switch off use of patch and delta rpms via zypp.conf (#305864)
