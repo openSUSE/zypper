@@ -9,27 +9,22 @@
 #include <zypp/base/SerialNumber.h>
 #include <zypp/PathInfo.h>
 #include <zypp/TmpPath.h>
+#include "zypp/ResPoolProxy.h"
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::ui;
 
-void chk( ResObject::constPtr p )
+bool chst( Selectable::Ptr & sel, Status status )
 {
-  MIL << p << endl;
-  DBG << p->deps() << endl;
+  DBG << "+++ " << sel << endl;
+  Status ostatus( sel->status() );
+  bool res = sel->set_status( status );
+  (res?MIL:WAR) << ostatus << " -> " << status << " ==>(" << res << ") " << sel->status() << endl;
+  DBG << "--- " << sel << endl;
+  return res;
 }
 
-namespace zypp {
-namespace filesystem {
-  void touch( const char * p )
-  {
-    static std::string w;
-    ofstream s(p);
-    s<<w<<endl;
-    w+="a";
-  }
-}
-}
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -39,38 +34,49 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ResPool pool( getZYpp()->pool() );
-  USR << pool << endl;
-
   const char *const lines[] = {
     "@ package",
     "@ installed",
     "- foo 1 1 i686",
-    "@ provides",
-    "modalias(kernel-bigsmp:pci:*provided*)",
-    "@ suplements",
-    "modalias(kernel-bigsmp:pci:*suplements*)",
+    "@ available",
+    "- foo 2 1 i686",
     "@ fin"
   };
 
-  //debug::addPool( lines, lines+(sizeof(lines)/sizeof(const char *const)) );
-  //debug::addPool( "/tmp/a" );
-  USR << pool << endl;
-  for_each( pool.begin(), pool.end(), chk );
+  debug::addPool( lines, lines+(sizeof(lines)/sizeof(const char *const)) );
 
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
-  filesystem::touch( "/etc/sysconfig/storage" );
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
-  filesystem::touch( "/etc/sysconfig/storage" );
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
-  filesystem::touch( "/etc/sysconfig/storage" );
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
-  SEC << pool.serial().serial() << endl;
+  ResPool      pool( getZYpp()->pool() );
+  ResPoolProxy uipool( getZYpp()->poolProxy() );
+
+  USR << pool << endl;
+  USR << uipool << endl;
+
+  //for_each( pool.begin(), pool.end(), Print() );
+
+  Selectable::Ptr sel( *uipool.byKindBegin<Package>() );
+
+/*    enum Status
+    {
+      S_Protected,           // Keep this unmodified ( have installedObj && S_Protected )
+      S_Taboo,               // Keep this unmodified ( have no installedObj && S_Taboo)
+      // requested by user:
+      S_Del,                 // delete  installedObj ( clears S_Protected if set )
+      S_Update,              // install candidateObj ( have installedObj, clears S_Protected if set )
+      S_Install,             // install candidateObj ( have no installedObj, clears S_Taboo if set )
+      // not requested by user:
+      S_AutoDel,             // delete  installedObj
+      S_AutoUpdate,          // install candidateObj ( have installedObj )
+      S_AutoInstall,         // install candidateObj ( have no installedObj )
+      // no modification:
+      S_KeepInstalled,       // no modification      ( have installedObj && !S_Protected, clears S_Protected if set )
+      S_NoInst,              // no modification      ( have no installedObj && !S_Taboo, clears S_Taboo if set )
+    };
+*/
+  MIL << sel << endl;
+  chst( sel, ui::S_Update );
+  chst( sel, ui::S_Install );
+  chst( sel, ui::S_Protected );
+  chst( sel, ui::S_KeepInstalled );
 
   INT << "===[END]============================================" << endl
       << endl;

@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Mon Sep  3 17:14:02 CEST 2007 - ma@suse.de
+
+- Reset transact bits when switching status from
+  "update" to "protected" (#246976)
+- version 3.22.1
+
+-------------------------------------------------------------------
 Mon Sep  3 13:56:42 CEST 2007 - schubi@suse.de
 
 - new translations added
-- rev 7083 
+- rev 7083
 
 -------------------------------------------------------------------
 Fri Aug 31 22:10:55 CEST 2007 - ma@suse.de

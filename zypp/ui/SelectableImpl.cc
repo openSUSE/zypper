@@ -126,6 +126,7 @@ namespace zypp
       bool setProtected() const
       {
 	  if ( inst ) {
+              resetTransactingCandidates();
 	      inst.status().setTransact( false, ResStatus::USER );
 	      return inst.status().setLock( true, ResStatus::USER );
 	  } else

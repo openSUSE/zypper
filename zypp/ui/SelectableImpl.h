@@ -188,7 +188,7 @@ namespace zypp
       return str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status()
                  << " (I " << obj._installedItem << ")"
                  << " (A " << obj._availableItems.size() << ")"
-                 << obj._candidate;
+                 << obj.candidateObj();
     }
 
     /////////////////////////////////////////////////////////////////
