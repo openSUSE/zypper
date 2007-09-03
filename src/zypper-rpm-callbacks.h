@@ -137,13 +137,16 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 {
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
-    display_progress ( "remove-resolvable", cout, _("Removing ") + to_string (resolvable), 0);
+    //! \todo (10.3+) use format
+    display_progress ( "remove-resolvable", cout,
+        _("Removing ") + resolvable->name() + string("-") + resolvable->edition().asString(), 0);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
     // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-    display_progress ( "remove-resolvable", cout, _("Removing ") + to_string (resolvable), value);
+    display_progress ( "remove-resolvable", cout,
+        _("Removing ") + resolvable->name() + string("-") + resolvable->edition().asString(), value);
     return true;
   }
 
@@ -177,7 +180,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
-    // TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
+    // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
     string s = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
     display_progress ( "install-resolvable", cout, s,  value);

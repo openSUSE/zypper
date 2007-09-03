@@ -746,8 +746,11 @@ int show_summary()
 
   cout << endl;
 
-  cout_n << format(_("Overall download size: %s.")) % download_size;
-  cout_n << " ";
+  if (download_size > 0)
+  {
+    cout_n << format(_("Overall download size: %s.")) % download_size;
+    cout_n << " ";
+  }
   if (new_installed_size > 0)
     // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
     cout_n << format(_("After the operation, additional %s will be used."))
