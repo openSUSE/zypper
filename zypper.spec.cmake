@@ -1,7 +1,7 @@
 #
 # spec file for package @PACKAGE@ (Version @VERSION@)
 #
-# Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
 # package are under the same license as the package itself.
 #
@@ -14,7 +14,7 @@ Name:           @PACKAGE@
 BuildRequires:  libzypp-devel > 3.20.1 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
 BuildRequires:  gcc-c++ >= 4.2 cmake >= 2.4.6 pkg-config >= 0.20
 Requires:	procps
-License:        GPL
+License:        GPL v2 or later
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
@@ -24,7 +24,7 @@ Version:        @VERSION@
 Release:        0
 Source:         @PACKAGE@-@VERSION@.tar.bz2
 Prefix:         /usr
-Url:            http://en.opensuse.org/Zypper
+URL:            http://en.opensuse.org/Zypper
 Provides:       y2pmsh 
 Obsoletes:      y2pmsh 
 
@@ -46,8 +46,9 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
-      -DCMAKE_C_FLAGS="%{optflags}" \
-      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_VERBOSE_MAKEFILE=TRUE \
+      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       ..
 
