@@ -10,88 +10,86 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 11:32+0200\n"
-"PO-Revision-Date: 2007-08-18 16:55+0100\n"
-"Last-Translator: wadim dziedzic <nikdo@aviary.pl>\n"
+"POT-Creation-Date: 2007-08-23 10:21+0200\n"
+"PO-Revision-Date: 2007-08-24 08:53+0100\n"
+"Last-Translator: wadim dziedzic <wdziedzic@aviary.pl>\n"
 "Language-Team:  <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: ../zypp/url/UrlBase.cc:150
+#: ../zypp/url/UrlBase.cc:154
 #, c-format
 msgid "Url scheme does not allow a %s"
 msgstr "Schemat URL nie zezwala na %s"
 
-#: ../zypp/url/UrlBase.cc:169
+#: ../zypp/url/UrlBase.cc:173
 #, c-format
 msgid "Invalid %s component '%s'"
 msgstr "Nieprawidłowe %s komponentu '%s'"
 
-#: ../zypp/url/UrlBase.cc:176
+#: ../zypp/url/UrlBase.cc:180
 #, c-format
 msgid "Invalid %s component"
 msgstr "Nieprawidłowe %s komponentu"
 
-#: ../zypp/url/UrlBase.cc:723
+#: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
 msgstr "Analiza parametru ścieżki nie jest obsługiwana dla tego adresu URL"
 
-#: ../zypp/url/UrlBase.cc:778
-#: ../zypp/url/UrlBase.cc:1225
+#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "Analiza zapytania nie jest obsługiwana dla tego adresu URL"
 
-#: ../zypp/url/UrlBase.cc:816
+#: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
 msgstr "Schemat URL to wymagany komponent"
 
-#: ../zypp/url/UrlBase.cc:822
+#: ../zypp/url/UrlBase.cc:826
 #, c-format
 msgid "Invalid Url scheme '%s'"
 msgstr "Nieprawidłowy schemat URL '%s'"
 
-#: ../zypp/url/UrlBase.cc:943
+#: ../zypp/url/UrlBase.cc:947
 msgid "Url scheme does not allow a username"
 msgstr "Schemat URL nie zezwala na nazwę użytkownika"
 
-#: ../zypp/url/UrlBase.cc:977
+#: ../zypp/url/UrlBase.cc:981
 msgid "Url scheme does not allow a password"
 msgstr "Schemat URL nie zezwala na hasło"
 
-#: ../zypp/url/UrlBase.cc:1006
+#: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
 msgstr "Schemat URL wymaga komponentu hosta"
 
-#: ../zypp/url/UrlBase.cc:1016
+#: ../zypp/url/UrlBase.cc:1020
 msgid "Url scheme does not allow a host component"
 msgstr "Schemat URL nie zezwala na komponent hosta"
 
-#: ../zypp/url/UrlBase.cc:1043
+#: ../zypp/url/UrlBase.cc:1047
 #, c-format
 msgid "Invalid host component '%s'"
 msgstr "Nieprawidłowy komponent hosta '%s'"
 
-#: ../zypp/url/UrlBase.cc:1064
+#: ../zypp/url/UrlBase.cc:1068
 msgid "Url scheme does not allow a port"
 msgstr "Schemat URL nie zezwala na port"
 
-#: ../zypp/url/UrlBase.cc:1075
+#: ../zypp/url/UrlBase.cc:1079
 #, c-format
 msgid "Invalid port component '%s'"
 msgstr "Nieprawidłowy komponent portu '%s'"
 
-#: ../zypp/url/UrlBase.cc:1092
+#: ../zypp/url/UrlBase.cc:1096
 msgid "Url scheme requires path name"
 msgstr "Schemat URL wymaga ścieżki"
 
-#: ../zypp/url/UrlBase.cc:1113
-#: ../zypp/url/UrlBase.cc:1127
+#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "Względna ścieżka nie jest dozwolona, jeśli usługa istnieje"
 
-#: ../zypp/url/UrlBase.cc:1180
+#: ../zypp/url/UrlBase.cc:1184
 msgid "Path Parameter parsing not supported for this URL"
 msgstr "Analiza parametru ścieżki nie jest obsługiwana dla tego URL"
 
@@ -155,13 +153,11 @@ msgstr "Wczytywanie pakietów rpm z pamięci podręcznej repozytorium \"%s\""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nieobsługiwana metoda uwierzytelniania HTTP: \"%s\""
 
-#: ../zypp/media/MediaCurl.cc:715
-#: ../zypp/media/MediaCurl.cc:784
+#: ../zypp/media/MediaCurl.cc:715 ../zypp/media/MediaCurl.cc:784
 msgid "Invalid user name or password."
 msgstr "Błędna nazwa użytkownika lub hasło."
 
-#: ../zypp/media/MediaCurl.cc:718
-#: ../zypp/media/MediaCurl.cc:787
+#: ../zypp/media/MediaCurl.cc:718 ../zypp/media/MediaCurl.cc:787
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Wymagane uwierzytelnienie dla \"%s\""
@@ -213,8 +209,7 @@ msgstr "Nie można sklonować obiektu URL"
 msgid "Invalid empty Url object reference"
 msgstr "Nieprawidłowe odwołanie pustego adresu URL"
 
-#: ../zypp/Url.cc:321
-#: ../zypp/Url.cc:335
+#: ../zypp/Url.cc:321 ../zypp/Url.cc:335
 msgid "Unable to parse Url components"
 msgstr "Analiza komponentów URL nie powiodła się"
 
@@ -224,8 +219,7 @@ msgstr "Nieznany język:"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225
-#: ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Bez kodu"
 
@@ -290,8 +284,7 @@ msgid "Akkadian"
 msgstr "akadyjski"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262
-#: ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "albański"
 
@@ -342,8 +335,7 @@ msgstr "aragoński"
 
 # AM
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284
-#: ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "ormiański"
 
@@ -448,8 +440,7 @@ msgid "Balinese"
 msgstr "balijski"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326
-#: ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "baskijski"
 
@@ -560,8 +551,7 @@ msgid "Bulgarian"
 msgstr "bułgarski"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372
-#: ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "birmański"
 
@@ -626,8 +616,7 @@ msgid "Chagatai"
 msgstr "czagatajski"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400
-#: ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "chiński"
 
@@ -737,8 +726,7 @@ msgid "Cushitic (Other)"
 msgstr "kuszyckie (inne)"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446
-#: ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "czeski"
 
@@ -813,8 +801,7 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr "średnioholenderski (ok. 1050 - 1350)"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478
-#: ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "holenderski"
 
@@ -919,8 +906,7 @@ msgid "Fon"
 msgstr "fon"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522
-#: ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "francuski"
 
@@ -970,14 +956,12 @@ msgid "Germanic (Other)"
 msgstr "germańskie (inne)"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544
-#: ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "gruziński"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548
-#: ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "niemiecki"
 
@@ -1047,8 +1031,7 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "grecki, starożytny (do 1453)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578
-#: ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "grecki, współczesny (1453 -)"
 
@@ -1153,8 +1136,7 @@ msgid "Igbo"
 msgstr "igbo"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622
-#: ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "islandzki"
 
@@ -1526,8 +1508,7 @@ msgid "Lushai"
 msgstr "Lushai"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772
-#: ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "macedoński"
 
@@ -1567,8 +1548,7 @@ msgid "Mandingo"
 msgstr "mandingo"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790
-#: ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "maoryjski"
 
@@ -1588,8 +1568,7 @@ msgid "Masai"
 msgstr "masajski"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800
-#: ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "malajski"
 
@@ -1732,8 +1711,7 @@ msgstr "neapolitański"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858
-#: ../zypp/CountryCode.cc:380
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "nauru"
 
@@ -1935,8 +1913,7 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "staroperski (ok. 600 - 400 p.n.e.)"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938
-#: ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "perski"
 
@@ -2021,8 +1998,7 @@ msgid "Romany"
 msgstr "cygański / romani"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974
-#: ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "rumuński"
 
@@ -2082,8 +2058,7 @@ msgid "Santali"
 msgstr "santali"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000
-#: ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "serbski"
 
@@ -2098,8 +2073,7 @@ msgid "Scots"
 msgstr "szkocki"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008
-#: ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "chorwacki"
 
@@ -2154,8 +2128,7 @@ msgid "Slavic (Other)"
 msgstr "słowiańskie (inne)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032
-#: ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "słowacki"
 
@@ -2355,8 +2328,7 @@ msgstr "tajski"
 
 # TW
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112
-#: ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "tybetański"
 
@@ -2379,8 +2351,7 @@ msgstr "tiv"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122
-#: ../zypp/CountryCode.cc:428
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "tokelau"
 
@@ -2456,8 +2427,7 @@ msgstr "języki ałtajskie (inne)"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152
-#: ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "tuvalu"
 
@@ -2557,8 +2527,7 @@ msgid "Washo"
 msgstr "washo"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192
-#: ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "walijski"
 
@@ -2644,8 +2613,7 @@ msgstr "zulu"
 msgid "Zuni"
 msgstr "zuni"
 
-#: ../zypp/ZYppFactory.cc:279
-#: ../zypp/ZYppFactory.cc:334
+#: ../zypp/ZYppFactory.cc:279 ../zypp/ZYppFactory.cc:334
 msgid "Software management is already running."
 msgstr "Demon zarządzania oprogramowaniem jest już uruchomiony"
 
@@ -2685,8 +2653,7 @@ msgstr "Nie można zainicjować kontekstu HAL -- demon hald nie jest uruchomiony
 msgid "Not a CDROM drive"
 msgstr "Nie jest to napęd CDROM"
 
-#: ../zypp/target/hal/HalException.h:46
-#: ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Wyjątek Hal"
@@ -2737,8 +2704,7 @@ msgstr ""
 msgid "%s install failed"
 msgstr "Instalacja %s nie powiodła się"
 
-#: ../zypp/target/rpm/RpmDb.cc:1927
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:1927 ../zypp/target/rpm/RpmDb.cc:2045
 msgid "rpm output:"
 msgstr "Wyjście rpm:"
 
@@ -2749,8 +2715,7 @@ msgstr "Wyjście rpm:"
 msgid "%s installed ok"
 msgstr "Pakiet %s poprawnie zainstalowany"
 
-#: ../zypp/target/rpm/RpmDb.cc:1936
-#: ../zypp/target/rpm/RpmDb.cc:2053
+#: ../zypp/target/rpm/RpmDb.cc:1936 ../zypp/target/rpm/RpmDb.cc:2053
 msgid "Additional rpm output:"
 msgstr "Dodatkowe wyjście rpm:"
 
@@ -2791,25 +2756,25 @@ msgid "%s replaced by %s"
 msgstr "%s zastąpiony przez %s"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:247
+#: ../zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr "%s zostanie usunięty przez użytkownika.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:252
+#: ../zypp/solver/detail/Resolver_problems.cc:267
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s zostanie usunięty przez inną aplikację. (ApplLow/ApplHigh)\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:258
+#: ../zypp/solver/detail/Resolver_problems.cc:273
 #, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "%s zostanie zainstalowany przez użytkownika.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:263
+#: ../zypp/solver/detail/Resolver_problems.cc:278
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s zostanie zainstalowany przez inną aplikację. (ApplLow/ApplHigh)\n"
@@ -2817,38 +2782,38 @@ msgstr "%s zostanie zainstalowany przez inną aplikację. (ApplLow/ApplHigh)\n"
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:322
+#: ../zypp/solver/detail/Resolver_problems.cc:337
 msgid "No valid solution found with just resolvables of best architecture."
 msgstr "Brak rozwiązania z tylko z obiektami z najlepszą architekturą."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:323
+#: ../zypp/solver/detail/Resolver_problems.cc:338
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr "W tym przebiegu pod uwagę wzięto tylko obiekty z najlepszą architekturą.\n"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:324
+#: ../zypp/solver/detail/Resolver_problems.cc:339
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 msgstr "Uwzględnienie wszystkich obiektów może dać poprawne rozwiązanie, ale wymaga czasu."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:350
+#: ../zypp/solver/detail/Resolver_problems.cc:365
 msgid "Invalid information"
 msgstr "Nieprawidłowa informacja"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:357
+#: ../zypp/solver/detail/Resolver_problems.cc:372
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s jest wymagany przez inne pakiety"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:360
+#: ../zypp/solver/detail/Resolver_problems.cc:375
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s jest wymagany przez %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:361
+#: ../zypp/solver/detail/Resolver_problems.cc:376
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2858,7 +2823,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:368
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s jest w konflikcie z innymi pakietami"
@@ -2867,14 +2832,14 @@ msgstr "%s jest w konflikcie z innymi pakietami"
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:371
+#: ../zypp/solver/detail/Resolver_problems.cc:386
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s jest w konflikcie z %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:373
+#: ../zypp/solver/detail/Resolver_problems.cc:388
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2884,24 +2849,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:402
+#: ../zypp/solver/detail/Resolver_problems.cc:417
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s dezaktualizuje inne pakiety"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:405
+#: ../zypp/solver/detail/Resolver_problems.cc:420
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s dezaktualizuje %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:407
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s dezaktualizuje:%s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:408
+#: ../zypp/solver/detail/Resolver_problems.cc:423
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2910,7 +2875,7 @@ msgstr ""
 "Te pakiety zostaną usunięte z systemu."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:416
+#: ../zypp/solver/detail/Resolver_problems.cc:431
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s zależy od innych pakietów"
@@ -2918,38 +2883,38 @@ msgstr "%s zależy od innych pakietów"
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:435
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s zależy od %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:438
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s zależy od:%s"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:429
+#: ../zypp/solver/detail/Resolver_problems.cc:444
 msgid "Child of"
 msgstr "Potomek"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:435
-#: ../zypp/solver/detail/Resolver_problems.cc:519
+#: ../zypp/solver/detail/Resolver_problems.cc:450
+#: ../zypp/solver/detail/Resolver_problems.cc:534
 #, c-format
 msgid "Cannot install %s"
 msgstr "Nie można zainstalować %s"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:437
+#: ../zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "None provides %s"
 msgstr "Żaden nie dostarcza %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:438
+#: ../zypp/solver/detail/Resolver_problems.cc:453
 msgid ""
 "\n"
 "There is no resource available which supports this requirement."
@@ -2957,31 +2922,31 @@ msgstr ""
 "\n"
 "Nie ma dostępnego zasobu, który spełniałby te wymaganie."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:446
+#: ../zypp/solver/detail/Resolver_problems.cc:461
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 msgstr "Z powodu powyżej/poniżej opisanych problemów, rozwiązanie to nie będzie mogło zaspokoić wszystkich zależności"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:457
-#: ../zypp/solver/detail/Resolver_problems.cc:831
+#: ../zypp/solver/detail/Resolver_problems.cc:472
+#: ../zypp/solver/detail/Resolver_problems.cc:854
 #, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie z %s"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:475
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nie jest zainstalowany i został oznaczony jako nie do odinstalowania"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:487
+#: ../zypp/solver/detail/Resolver_problems.cc:502
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "Nie można zainstalować %s z powodu problemów z zależnościami"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:529
-#: ../zypp/solver/detail/Resolver_problems.cc:539
+#: ../zypp/solver/detail/Resolver_problems.cc:544
+#: ../zypp/solver/detail/Resolver_problems.cc:554
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2989,8 +2954,8 @@ msgid "delete %s"
 msgstr "usuń %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:532
-#: ../zypp/solver/detail/Resolver_problems.cc:542
+#: ../zypp/solver/detail/Resolver_problems.cc:547
+#: ../zypp/solver/detail/Resolver_problems.cc:557
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -2998,118 +2963,130 @@ msgid "do not install %s"
 msgstr "nie instaluj %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:555
+#: ../zypp/solver/detail/Resolver_problems.cc:570
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s ma niespełnione wymagania"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:594
+#: ../zypp/solver/detail/Resolver_problems.cc:609
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s ma brakujące zależności"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:642
+#: ../zypp/solver/detail/Resolver_problems.cc:657
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s nie może zostać zainstalowany z powodu brakujących zależności"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:691
+#: ../zypp/solver/detail/Resolver_problems.cc:714
 #, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
 msgstr "%s spełnia zależności %s, ale zostanie odinstalowany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:701
+#: ../zypp/solver/detail/Resolver_problems.cc:724
 #, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
 msgstr "%s spełnia zależności %s, ale będzie pozostawiony"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:711
+#: ../zypp/solver/detail/Resolver_problems.cc:734
 #, c-format
 msgid "No need to install %s"
 msgstr "Nie ma potrzeby instalować %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:719
+#: ../zypp/solver/detail/Resolver_problems.cc:742
 #, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:757
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:772
-#: ../zypp/solver/detail/Resolver_problems.cc:780
+#: ../zypp/solver/detail/Resolver_problems.cc:795
+#: ../zypp/solver/detail/Resolver_problems.cc:803
 #, c-format
 msgid "%s will not be uninstalled, because it is still required"
 msgstr "%s nie zostanie odinstalowany, ponieważ jest nadal wymagany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:803
+#: ../zypp/solver/detail/Resolver_problems.cc:826
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 msgstr "%s dezaktualizuje %s, ale %s nie może zostać usunięty, ponieważ jest zablokowany."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:835
+#: ../zypp/solver/detail/Resolver_problems.cc:858
 #, c-format
 msgid "Cannot install %s, because it is conflicting"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:857
+#: ../zypp/solver/detail/Resolver_problems.cc:880
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s jest nie do odinstalowania z powodu konfliktu z %s"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:871
+#: ../zypp/solver/detail/Resolver_problems.cc:894
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr "Wymaganie %s nie może być spełnione."
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:54
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
 msgstr "Zignoruj ten wymóg tylko tutaj"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:63
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
 msgid "Generally ignore this requirement"
 msgstr "Zignoruj ten wymóg ogólnie"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:75
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #, c-format
 msgid "Install %s although it would change the architecture"
 msgstr "Zainstaluj %s pomimo, że zmieniłoby to architekturę"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:78
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:79
 #, c-format
 msgid "%s provides this dependency, but would change the architecture of the installed item"
 msgstr "%s dostarcza tę zależność, ale zmieniłby architekturę zainstalowanego elementu"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:102
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, c-format
+msgid "Install %s although it would change the vendor"
+msgstr "Zainstaluj %s pomimo, że zmieniłoby to dostawcę"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
+#, c-format
+msgid "%s provides this dependency, but would change the vendor of the installed item"
+msgstr "%s dostarcza tę zależność, ale zmieniłby dostawcę zainstalowanego elementu"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:116
 #, c-format
 msgid "Ignore this conflict of %s"
 msgstr "Zignoruj ten konflikt %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:131
 #, c-format
 msgid "Ignore the obsolete %s in %s"
 msgstr "Zignoruj dezaktualizację %s w %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:130
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:144
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "Zignoruj fakt, że %s jest już zaznaczony do instalacji"
@@ -3119,7 +3096,7 @@ msgid "Do not install or delete the resolvables concerned"
 msgstr "Nie instaluj ani nie usuwaj danych obiektów"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:738
+#: ../zypp/solver/detail/QueueItemRequire.cc:763
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "dla wymagania %s dla %s, podczas aktualizacji %s"
@@ -3370,8 +3347,14 @@ msgstr "%s dostarcza %s, ale jest zaplanowany do pozostawienia"
 msgid "%s provides %s, but has another architecture."
 msgstr "%s dostarcza %s, ale ma inną architekturę."
 
-#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:469
+#, c-format
+msgid "%s provides %s, but has another vendor (%s)."
+msgstr "%s dostarcza %s, ale ma innego dostawcę (%s)."
+
+#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:487
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "Nie można spełnić wymogu %s dla %s"
@@ -3383,7 +3366,7 @@ msgstr "Nie można spełnić wymogu %s dla %s"
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:490
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:508
 #, c-format
 msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
 msgstr "%s jest wymagany przez inny wybrany do instalacji obiekt, więc powiązanie nie będzie usunięte."
@@ -3395,7 +3378,7 @@ msgstr "%s jest wymagany przez inny wybrany do instalacji obiekt, więc powiąza
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:507
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:525
 #, c-format
 msgid "%s is required by another installed resolvable, so it won't be unlinked."
 msgstr "%s jest wymagany przez inny zainstalowany pakiet, więc powiązanie nie będzie usunięte."
@@ -3407,7 +3390,7 @@ msgstr "%s jest wymagany przez inny zainstalowany pakiet, więc powiązanie nie 
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is locked and cannot be uninstalled.
 #. TranslatorExplanation: foo is to-be-uninstalled but it is locked
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:524
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:542
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s jest zablokowany i nie może być odinstalowany."
@@ -3418,7 +3401,7 @@ msgstr "%s jest zablokowany i nie może być odinstalowany."
 #. other_capability() = conflict capability
 #. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 #. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:543
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
 msgstr "Konflikt dotyczący %s (%s) wymaga usunięcia pakietu %s planowanego do instalacji"
@@ -3429,23 +3412,23 @@ msgstr "Konflikt dotyczący %s (%s) wymaga usunięcia pakietu %s planowanego do 
 #. other_capability() = conflict capability from issuer
 #. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
 #. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:579
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "Oznaczanie %s jako nie do usunięcia z powodu konfliktów dotyczących %s"
 
 #. Translator: %s = name of package,patch
 #. TranslatorExample: from abc
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:569
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:587
 #, c-format
 msgid "from %s"
 msgstr "z %s"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:194
+#: ../zypp/solver/detail/ResolverInfo.cc:195
 msgid " Error!"
 msgstr " Błąd!"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:195
+#: ../zypp/solver/detail/ResolverInfo.cc:196
 msgid " Important!"
 msgstr " Ważne!"
 
@@ -3503,8 +3486,8 @@ msgstr "%s sugerowany przez %s"
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:72
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
 #, c-format
-msgid "%s is freshened by %s"
-msgstr "%s jest odświeżany przez %s"
+msgid "%s will be evaluated for installation (freshened) by %s"
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
@@ -3767,8 +3750,7 @@ msgstr "Wyspy Kokosowe"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255
-#: ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongo"
 
@@ -4872,42 +4854,62 @@ msgstr ""
 "Oczekiwano %s, napotkano %s\n"
 "Użyć pliku mimo wszystko?"
 
+#~ msgid "%s is freshened by %s"
+#~ msgstr "%s jest odświeżany przez %s"
+
 #~ msgid "Unable to parse Url authority"
 #~ msgstr "Analiza nadrzędnego adresu URL nie powiodła się"
+
 #~ msgid "Ignore this requirement generally"
 #~ msgstr "Zignoruj ten wymóg globalnie"
+
 #~ msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 #~ msgstr "%s jest wymagany przez inny pakiet do zainstalowania, więc powiązanie nie będzie usunięte."
+
 #~ msgid "Cannot create a file needed to perform update installation."
 #~ msgstr "Nie można utworzyć pliku wymaganego do instalacji uaktualnienia."
+
 #~ msgid "Unable to restore all sources."
 #~ msgstr "Nie udało się odtworzyć wszystkich źródeł."
+
 #~ msgid "At least one source already registered, stored sources cannot be restored."
 #~ msgstr "Przynajmniej jedno źródło jest już zarejestrowane, nie można odtworzyć przechowywanych źródeł."
+
 #~ msgid "Cannot be install %s to fulfil the dependencies of %s"
 #~ msgstr "Nie można zainstalować %s by spełnić zależności %s"
+
 #~ msgid "%s dependend on %s"
 #~ msgstr "%s zależny od %s"
+
 #~ msgid "Reading index files"
 #~ msgstr "Wczytywanie plików indeksu"
+
 #~ msgid "The signed repomd.xml file failed the signature check."
 #~ msgstr "Weryfikacja podpisu pliku repomd.xml zakończona niepowodzeniem."
+
 #~ msgid "Reading product from %s"
 #~ msgstr "Wczytywanie produktu z %s"
+
 #~ msgid "Reading filelist from %s"
 #~ msgstr "Wczytywanie listy plików z %s"
+
 #~ msgid "Reading packages from %s"
 #~ msgstr "Wczytywanie pakietów z %s"
+
 #~ msgid "Reading selection from %s"
 #~ msgstr "Wczytywanie wyboru z %s"
+
 #~ msgid "Reading pattern from %s"
 #~ msgstr "Wczytywanie wzorców z %s"
+
 #~ msgid "Reading patches index %s"
 #~ msgstr "Wczytywanie indeksu poprawek %s"
+
 #~ msgid "Reading patch %s"
 #~ msgstr "Wczytywanie poprawki %s"
+
 #~ msgid "The script file failed the checksum test."
 #~ msgstr "Niepoprawna suma kontrolna pliku skryptu."
+
 #~ msgid "Reading packages file"
 #~ msgstr "Wczytywanie pliku pakietów"
-

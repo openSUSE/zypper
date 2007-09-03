@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager-vpnc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 11:32+0200\n"
+"POT-Creation-Date: 2007-08-23 10:21+0200\n"
 "PO-Revision-Date: 2005-06-26 01:20+0200\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <www.agreeya.com>\n"
@@ -11,77 +11,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../zypp/url/UrlBase.cc:150
+#: ../zypp/url/UrlBase.cc:154
 #, c-format
 msgid "Url scheme does not allow a %s"
 msgstr "யூஆர்எல் திட்டம் %sக்கு அனுமதிப்பதில்லை"
 
-#: ../zypp/url/UrlBase.cc:169
+#: ../zypp/url/UrlBase.cc:173
 #, fuzzy, c-format
 msgid "Invalid %s component '%s'"
 msgstr "'%s' செல்லாத உறுப்பு"
 
-#: ../zypp/url/UrlBase.cc:176
+#: ../zypp/url/UrlBase.cc:180
 #, c-format
 msgid "Invalid %s component"
 msgstr "செல்லாத %s உறுப்பு"
 
-#: ../zypp/url/UrlBase.cc:723
+#: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
 msgstr "இந்த யூஆர்எல்லுக்கு பாதை அளவீடு விளக்கம் ஆதரவளிக்கப்படவில்லை"
 
-#: ../zypp/url/UrlBase.cc:778 ../zypp/url/UrlBase.cc:1225
+#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "இந்த யூஆர்எல்லுக்கு வினா வரிசை விளக்கம் ஆதரவளிக்கப்படவில்லை"
 
-#: ../zypp/url/UrlBase.cc:816
+#: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
 msgstr "யூஆர்எல் திட்டம் ஒரு தேவைப்படும் உறுப்பாகும்"
 
-#: ../zypp/url/UrlBase.cc:822
+#: ../zypp/url/UrlBase.cc:826
 #, c-format
 msgid "Invalid Url scheme '%s'"
 msgstr "செல்லாத யூஆர்எல் திட்டம் '%s'"
 
-#: ../zypp/url/UrlBase.cc:943
+#: ../zypp/url/UrlBase.cc:947
 msgid "Url scheme does not allow a username"
 msgstr "யூஆர்எல் திட்டம் பயனாளர் பெயரை அனுமதிப்பதில்லை"
 
-#: ../zypp/url/UrlBase.cc:977
+#: ../zypp/url/UrlBase.cc:981
 msgid "Url scheme does not allow a password"
 msgstr "யூஆர்எல் திட்டம் கடவுச்சொல்லை அனுமதிப்பதில்லை"
 
-#: ../zypp/url/UrlBase.cc:1006
+#: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
 msgstr "யூஆர்எல் திட்டத்திற்கு ஓர் ஆதார உறுப்பு தேவைப்படுகிறது"
 
-#: ../zypp/url/UrlBase.cc:1016
+#: ../zypp/url/UrlBase.cc:1020
 msgid "Url scheme does not allow a host component"
 msgstr "யூஆர்எல் திட்டம் ஓர் ஆதார உறுப்பை அனுமதிப்பதில்லை"
 
-#: ../zypp/url/UrlBase.cc:1043
+#: ../zypp/url/UrlBase.cc:1047
 #, c-format
 msgid "Invalid host component '%s'"
 msgstr "செல்லாத ஆதார உறுப்பு'%s'"
 
-#: ../zypp/url/UrlBase.cc:1064
+#: ../zypp/url/UrlBase.cc:1068
 msgid "Url scheme does not allow a port"
 msgstr "யூஆர்எல் திட்டம் ஒரு முணையத்தை அனுமதிப்பதில்லை"
 
-#: ../zypp/url/UrlBase.cc:1075
+#: ../zypp/url/UrlBase.cc:1079
 #, c-format
 msgid "Invalid port component '%s'"
 msgstr "செல்லாத முணைய உறுப்பு'%s'"
 
-#: ../zypp/url/UrlBase.cc:1092
+#: ../zypp/url/UrlBase.cc:1096
 msgid "Url scheme requires path name"
 msgstr "யூஆர்எல் திட்டத்திற்கு ஒரு பாதை பெயர் தேவைப்படுகிறது"
 
-#: ../zypp/url/UrlBase.cc:1113 ../zypp/url/UrlBase.cc:1127
+#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "அதிகாரம் இருக்குமானால் தொடர்புப் பாதை ஆதரவளிக்கப்படுவதில்லை"
 
-#: ../zypp/url/UrlBase.cc:1180
+#: ../zypp/url/UrlBase.cc:1184
 msgid "Path Parameter parsing not supported for this URL"
 msgstr "இந்த யூஆர்எல்லுக்கு பாதை அளவீடு விளக்கம் ஆதரவளிக்கப்படவில்லை"
 
@@ -2728,7 +2728,7 @@ msgid "%s replaced by %s"
 msgstr "%s %sஆல் மாற்றியமைக்கப்பட்டது"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:247
+#: ../zypp/solver/detail/Resolver_problems.cc:262
 #, fuzzy, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr ""
@@ -2736,19 +2736,19 @@ msgstr ""
 "இத்தீர்வுகள் அமைப்பிலிருந்து நீக்கப்படும்"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:252
+#: ../zypp/solver/detail/Resolver_problems.cc:267
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr ""
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:258
+#: ../zypp/solver/detail/Resolver_problems.cc:273
 #, fuzzy, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "அது இன்னமும் தேவைப்படுவதால், %s நீக்கப்பட மாட்டாது"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:263
+#: ../zypp/solver/detail/Resolver_problems.cc:278
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr ""
@@ -2756,38 +2756,38 @@ msgstr ""
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:322
+#: ../zypp/solver/detail/Resolver_problems.cc:337
 msgid "No valid solution found with just resolvables of best architecture."
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:323
+#: ../zypp/solver/detail/Resolver_problems.cc:338
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:324
+#: ../zypp/solver/detail/Resolver_problems.cc:339
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:350
+#: ../zypp/solver/detail/Resolver_problems.cc:365
 msgid "Invalid information"
 msgstr "செல்லாத தகவல்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:357
+#: ../zypp/solver/detail/Resolver_problems.cc:372
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "மற்ற தீர்வுகளுக்கு %s தேவைப்படுகிறது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:360
+#: ../zypp/solver/detail/Resolver_problems.cc:375
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:361
+#: ../zypp/solver/detail/Resolver_problems.cc:376
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2797,7 +2797,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:368
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s மற்ற தீர்வுகளுடன் முரண்படுகிறது"
@@ -2806,14 +2806,14 @@ msgstr "%s மற்ற தீர்வுகளுடன் முரண்ப�
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:371
+#: ../zypp/solver/detail/Resolver_problems.cc:386
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s %sஉடன் முரண்படுகிறது"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:373
+#: ../zypp/solver/detail/Resolver_problems.cc:388
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2823,24 +2823,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:402
+#: ../zypp/solver/detail/Resolver_problems.cc:417
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s மற்ற தீர்வுகளை வழக்கற்றதாக்குகிறது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:405
+#: ../zypp/solver/detail/Resolver_problems.cc:420
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:407
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது:"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:408
+#: ../zypp/solver/detail/Resolver_problems.cc:423
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2849,7 +2849,7 @@ msgstr ""
 "இத்தீர்வுகள் அமைப்பிலிருந்து நீக்கப்படும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:416
+#: ../zypp/solver/detail/Resolver_problems.cc:431
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s மற்ற தீர்வுகளை சார்ந்துள்ளது"
@@ -2857,38 +2857,38 @@ msgstr "%s மற்ற தீர்வுகளை சார்ந்துள�
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:435
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s %sஐ சார்ந்துள்ளது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:438
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s %sஐ சார்ந்துள்ளது:"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:429
+#: ../zypp/solver/detail/Resolver_problems.cc:444
 msgid "Child of"
 msgstr "இதன் உருவாக்கம்"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:435
-#: ../zypp/solver/detail/Resolver_problems.cc:519
+#: ../zypp/solver/detail/Resolver_problems.cc:450
+#: ../zypp/solver/detail/Resolver_problems.cc:534
 #, c-format
 msgid "Cannot install %s"
 msgstr "%sஐ நிறுவ முடியவில்லை"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:437
+#: ../zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "None provides %s"
 msgstr "%s யாரும் அளிப்பதில்லை"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:438
+#: ../zypp/solver/detail/Resolver_problems.cc:453
 #, fuzzy
 msgid ""
 "\n"
@@ -2897,32 +2897,32 @@ msgstr ""
 "\n"
 "இத்தேவையை பூர்த்தி செய்யும் ஆதாரம் எதுவும் இல்லை"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:446
+#: ../zypp/solver/detail/Resolver_problems.cc:461
 #, fuzzy
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 msgstr "இத்தீர்வின் மேலே மற்றும் கீழே விளக்கப்பட்டுள்ள பிரச்னைகள், அனைத்து சார்புத்தன்மைகளையும் தீர்க்கக்கூடியவை அல்ல"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:457
-#: ../zypp/solver/detail/Resolver_problems.cc:831
+#: ../zypp/solver/detail/Resolver_problems.cc:472
+#: ../zypp/solver/detail/Resolver_problems.cc:854
 #, fuzzy, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
 msgstr "%s ஐ நிறுவ இயலவில்லை ஏனெனில் அது %s உடன் முரண்படுகிறது"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:475
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s நிறுவப்படவில்லை மற்றும் அது நிறுவ இயலாததாக குறிக்கப்பட்டுள்ளது"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:487
+#: ../zypp/solver/detail/Resolver_problems.cc:502
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "சார்புத்தன்மை பிரச்னைகள் காரணமாக %s ஐ நிறுவ இயலவில்லை"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:529
-#: ../zypp/solver/detail/Resolver_problems.cc:539
+#: ../zypp/solver/detail/Resolver_problems.cc:544
+#: ../zypp/solver/detail/Resolver_problems.cc:554
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2930,8 +2930,8 @@ msgid "delete %s"
 msgstr "%s ஐ நீக்கவும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:532
-#: ../zypp/solver/detail/Resolver_problems.cc:542
+#: ../zypp/solver/detail/Resolver_problems.cc:547
+#: ../zypp/solver/detail/Resolver_problems.cc:557
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -2939,119 +2939,131 @@ msgid "do not install %s"
 msgstr "%sஐ நிறுவ வேண்டாம்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:555
+#: ../zypp/solver/detail/Resolver_problems.cc:570
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s தீர்க்கப்படாத தேவைகளைக் கொண்டுள்ளது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:594
+#: ../zypp/solver/detail/Resolver_problems.cc:609
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s காணப்படாத சார்புத்தன்மைகளைக் கொண்டுள்ளது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:642
+#: ../zypp/solver/detail/Resolver_problems.cc:657
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "காணப்படாத சார்புத்தன்மைகள் %sஐ காரணமாக நிறுவ இயலாது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:691
+#: ../zypp/solver/detail/Resolver_problems.cc:714
 #, fuzzy, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
 msgstr "%s சார்புத்தன்மைகளை %s பூர்த்தி செய்யும் ஆனால் நிறுவுதல் நீக்கப்பட்டுவிடும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:701
+#: ../zypp/solver/detail/Resolver_problems.cc:724
 #, fuzzy, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
 msgstr "%s சார்புத்தன்மைகளை %s பூர்த்தி செய்யும் ஆனால் உங்கள் அமைப்பில் வைக்கப்படும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:711
+#: ../zypp/solver/detail/Resolver_problems.cc:734
 #, c-format
 msgid "No need to install %s"
 msgstr "%sஐ நிறுவத் தேவையில்லை"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:719
+#: ../zypp/solver/detail/Resolver_problems.cc:742
 #, fuzzy, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
 msgstr "%sன் சார்புத்தன்மைகளை பூர்த்தி செய்வதற்கு %sஐ நிறுவ இயலவில்லை"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:757
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "%sன் சார்புத்தன்மைகளை பூர்த்தி செய்வதற்கு %sஐ நிறுவ இயலவில்லை"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:772
-#: ../zypp/solver/detail/Resolver_problems.cc:780
+#: ../zypp/solver/detail/Resolver_problems.cc:795
+#: ../zypp/solver/detail/Resolver_problems.cc:803
 #, fuzzy, c-format
 msgid "%s will not be uninstalled, because it is still required"
 msgstr "அது இன்னமும் தேவைப்படுவதால், %s நீக்கப்பட மாட்டாது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:803
+#: ../zypp/solver/detail/Resolver_problems.cc:826
 #, fuzzy, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 msgstr "%sஐ %s வழக்கற்றதாக்கிவிடும். ஆனால் %sஐ நீக்க முடியாது ஏனெனில் அது பூட்டப்பட்டுள்ளது."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:835
+#: ../zypp/solver/detail/Resolver_problems.cc:858
 #, fuzzy, c-format
 msgid "Cannot install %s, because it is conflicting"
 msgstr "%sஐ நிறுவ முடியாது ஏனெனில் அது முரணானது"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:857
+#: ../zypp/solver/detail/Resolver_problems.cc:880
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s உடன் உள்ள முரண்பாடு காரணமாக %sன் நிறுவுதலை நீக்க முடியாது"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:871
+#: ../zypp/solver/detail/Resolver_problems.cc:894
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr ""
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:54
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
 msgstr "இத்தேவையை இங்கேயே புறக்கணிக்கவும்"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:63
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
 #, fuzzy
 msgid "Generally ignore this requirement"
 msgstr "இத்தேவையை இங்கேயே புறக்கணிக்கவும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:75
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #, c-format
 msgid "Install %s although it would change the architecture"
 msgstr "அது கட்டமைப்பை மாற்றக்கூடுமென்றாலும் %sஐ நிறுவவும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:78
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:79
 #, fuzzy, c-format
 msgid "%s provides this dependency, but would change the architecture of the installed item"
 msgstr "இச்சார்புத்தன்மையை %s அளிக்கிறது ஆனால், நிறுவப்பட்டுள்ள பொருளின் கட்டமைப்பை மாற்றிவிடும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:102
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, fuzzy, c-format
+msgid "Install %s although it would change the vendor"
+msgstr "அது கட்டமைப்பை மாற்றக்கூடுமென்றாலும் %sஐ நிறுவவும்"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
+#, fuzzy, c-format
+msgid "%s provides this dependency, but would change the vendor of the installed item"
+msgstr "இச்சார்புத்தன்மையை %s அளிக்கிறது ஆனால், நிறுவப்பட்டுள்ள பொருளின் கட்டமைப்பை மாற்றிவிடும்"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:116
 #, c-format
 msgid "Ignore this conflict of %s"
 msgstr "%sன் முரண்பாட்டை புறக்கணிக்கவும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:131
 #, c-format
 msgid "Ignore the obsolete %s in %s"
 msgstr "%sல் உள்ள வழக்கில் இல்லாத %sஐ புறக்கணிக்கவும்"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:130
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:144
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "‍‍ஏற்கனவே நிறுவுவதற்காக அமைக்கப்பட்டுள்ள %sஐ புறக்கணிக்கவும்"
@@ -3062,7 +3074,7 @@ msgid "Do not install or delete the resolvables concerned"
 msgstr "தொடர்புள்ள தீர்வுகளை நிறுவவோ அல்லது நீக்கவோ வேண்டாம்"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:738
+#: ../zypp/solver/detail/QueueItemRequire.cc:763
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "%sஐ புதுப்பிக்கும்போது %sக்காக %s தேவைப்‍படும்போது"
@@ -3315,8 +3327,14 @@ msgstr "%s, %sஐ அளிக்கிறது, ஆனால் அது வ�
 msgid "%s provides %s, but has another architecture."
 msgstr "%s, %sஐ அளிக்கிறது, ஆனால் அதற்கு வேறொரு கட்டமைப்பு உள்ளது."
 
-#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:469
+#, fuzzy, c-format
+msgid "%s provides %s, but has another vendor (%s)."
+msgstr "%s, %sஐ அளிக்கிறது, ஆனால் அதற்கு வேறொரு கட்டமைப்பு உள்ளது."
+
+#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:487
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "%s க்கான %sன் தேவையைப் பூர்த்தி செய்ய இயலாது"
@@ -3328,7 +3346,7 @@ msgstr "%s க்கான %sன் தேவையைப் பூர்த்�
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:490
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:508
 #, fuzzy, c-format
 msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
 msgstr "மற்றொரு நிறுவப்பட்டுள்ள தீர்வுக்கு %s தேவைப்படுகிறது, எனவே அதன இணைப்பு நீக்கப்பட மாட்டாது."
@@ -3340,7 +3358,7 @@ msgstr "மற்றொரு நிறுவப்பட்டுள்ள �
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:507
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:525
 #, fuzzy, c-format
 msgid "%s is required by another installed resolvable, so it won't be unlinked."
 msgstr "மற்றொரு நிறுவப்பட்டுள்ள தீர்வுக்கு %s தேவைப்படுகிறது, எனவே அதன இணைப்பு நீக்கப்பட மாட்டாது."
@@ -3352,7 +3370,7 @@ msgstr "மற்றொரு நிறுவப்பட்டுள்ள �
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is locked and cannot be uninstalled.
 #. TranslatorExplanation: foo is to-be-uninstalled but it is locked
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:524
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:542
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s பூட்டப்பட்டுள்ளது மற்றும் அதன் நிறுவுதலை நீக்க இயலாது."
@@ -3363,7 +3381,7 @@ msgstr "%s பூட்டப்பட்டுள்ளது மற்று�
 #. other_capability() = conflict capability
 #. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 #. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:543
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
 #, fuzzy, c-format
 msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
 msgstr "%s (%s) மீதான ஒரு முரண்பாட்டிற்கு, நிறுவப்படப்போகும் %sன் நீக்கம் தேவைப்படுகிறது."
@@ -3374,23 +3392,23 @@ msgstr "%s (%s) மீதான ஒரு முரண்பாட்டிற�
 #. other_capability() = conflict capability from issuer
 #. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
 #. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:579
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "%s மீதான ஒரு முரண்பாடு காரணமாக %s நிறுவப்பட முடியாததாக குறிக்கப்பட்டுள்ளது"
 
 #. Translator: %s = name of package,patch
 #. TranslatorExample: from abc
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:569
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:587
 #, c-format
 msgid "from %s"
 msgstr "%sலிருந்து"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:194
+#: ../zypp/solver/detail/ResolverInfo.cc:195
 msgid " Error!"
 msgstr "பிழை!"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:195
+#: ../zypp/solver/detail/ResolverInfo.cc:196
 msgid " Important!"
 msgstr "முக்கியம்!"
 
@@ -3447,9 +3465,9 @@ msgstr "%s, %sக்கு தேவைப்படுகிறது"
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:72
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
-#, fuzzy, c-format
-msgid "%s is freshened by %s"
-msgstr "%s, %sக்கு தேவைப்படுகிறது"
+#, c-format
+msgid "%s will be evaluated for installation (freshened) by %s"
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
@@ -4767,6 +4785,10 @@ msgstr ""
 "%s கோப்பிற்கு செல்லாத ஒரு செக்சம் உள்ளது.\n"
 "எதிர்பார்த்தது %s, கண்டது %s\n"
 "அவ்வாறிருந்தும் அக்கோப்பை பயன்படுத்தலாமா?"
+
+#, fuzzy
+#~ msgid "%s is freshened by %s"
+#~ msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
 #~ msgid "Unable to parse Url authority"
 #~ msgstr "யூஆர்எல் அதிகாரத்தை விளக்க இயலவில்லை"

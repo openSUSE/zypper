@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 11:32+0200\n"
-"PO-Revision-Date: 2007-08-01 08:54+0800\n"
+"POT-Creation-Date: 2007-08-23 10:21+0200\n"
+"PO-Revision-Date: 2007-08-26 00:50+0800\n"
 "Last-Translator: Thruth Wang <gubotruth@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,77 +16,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/url/UrlBase.cc:150
+#: ../zypp/url/UrlBase.cc:154
 #, c-format
 msgid "Url scheme does not allow a %s"
 msgstr "URL 纲要不允许使用 %s"
 
-#: ../zypp/url/UrlBase.cc:169
+#: ../zypp/url/UrlBase.cc:173
 #, c-format
 msgid "Invalid %s component '%s'"
 msgstr "无效的 %s 组件“%s”"
 
-#: ../zypp/url/UrlBase.cc:176
+#: ../zypp/url/UrlBase.cc:180
 #, c-format
 msgid "Invalid %s component"
 msgstr "无效的 %s 组件"
 
-#: ../zypp/url/UrlBase.cc:723
+#: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
 msgstr "不支持对此 URL 的路径参数进行语法分析"
 
-#: ../zypp/url/UrlBase.cc:778 ../zypp/url/UrlBase.cc:1225
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "不支持对此 URL 的查询字符串进行语法分析"
 
-#: ../zypp/url/UrlBase.cc:816
+#: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
 msgstr "Url 模式不是必需组件"
 
-#: ../zypp/url/UrlBase.cc:822
+#: ../zypp/url/UrlBase.cc:826
 #, c-format
 msgid "Invalid Url scheme '%s'"
 msgstr "无效的 URL 纲要“%s”"
 
-#: ../zypp/url/UrlBase.cc:943
+#: ../zypp/url/UrlBase.cc:947
 msgid "Url scheme does not allow a username"
 msgstr "URL 纲要不允许使用用户名"
 
-#: ../zypp/url/UrlBase.cc:977
+#: ../zypp/url/UrlBase.cc:981
 msgid "Url scheme does not allow a password"
 msgstr "URL 纲要不允许使用口令"
 
-#: ../zypp/url/UrlBase.cc:1006
+#: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
 msgstr "URL 纲要要求有主机组件"
 
-#: ../zypp/url/UrlBase.cc:1016
+#: ../zypp/url/UrlBase.cc:1020
 msgid "Url scheme does not allow a host component"
 msgstr "URL 纲要不允许使用主机组件"
 
-#: ../zypp/url/UrlBase.cc:1043
+#: ../zypp/url/UrlBase.cc:1047
 #, c-format
 msgid "Invalid host component '%s'"
 msgstr "无效的主机组件“%s”"
 
-#: ../zypp/url/UrlBase.cc:1064
+#: ../zypp/url/UrlBase.cc:1068
 msgid "Url scheme does not allow a port"
 msgstr "URL 纲要不允许使用端口"
 
-#: ../zypp/url/UrlBase.cc:1075
+#: ../zypp/url/UrlBase.cc:1079
 #, c-format
 msgid "Invalid port component '%s'"
 msgstr "无效的端口组件“%s”"
 
-#: ../zypp/url/UrlBase.cc:1092
+#: ../zypp/url/UrlBase.cc:1096
 msgid "Url scheme requires path name"
 msgstr "URL 纲要要求有路径名"
 
-#: ../zypp/url/UrlBase.cc:1113 ../zypp/url/UrlBase.cc:1127
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "如果存在认证，则不允许相对路径"
 
-#: ../zypp/url/UrlBase.cc:1180
+#: ../zypp/url/UrlBase.cc:1184
 msgid "Path Parameter parsing not supported for this URL"
 msgstr "不支持对此 URL 的路径参数进行语法分析"
 
@@ -108,9 +110,8 @@ msgstr "无效的参数数组合并的分隔符"
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: ../zypp/base/Exception.cc:89
-#, fuzzy
 msgid "History:"
-msgstr "XF86History"
+msgstr "历史："
 
 #: ../zypp/repo/PackageProvider.cc:222
 msgid "applydeltarpm check failed."
@@ -152,11 +153,13 @@ msgstr "正在从 '%s' 安装源缓存读取补丁和增量包"
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "不支持 HTTP 认证方法 '%s'"
 
-#: ../zypp/media/MediaCurl.cc:715 ../zypp/media/MediaCurl.cc:784
+#: ../zypp/media/MediaCurl.cc:715
+#: ../zypp/media/MediaCurl.cc:784
 msgid "Invalid user name or password."
 msgstr "无效用户名或密码。"
 
-#: ../zypp/media/MediaCurl.cc:718 ../zypp/media/MediaCurl.cc:787
+#: ../zypp/media/MediaCurl.cc:718
+#: ../zypp/media/MediaCurl.cc:787
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要身份验证"
@@ -187,9 +190,9 @@ msgid "Adding repository '%s'"
 msgstr "正在添加安装源 '%s'"
 
 #: ../zypp/RepoManager.cc:1004
-#, fuzzy, c-format
+#, c-format
 msgid "Removing repository '%s'"
-msgstr "正在添加安装源 '%s'"
+msgstr "正在移除安装源 '%s'"
 
 #: ../zypp/Url.cc:112
 msgid "Invalid LDAP URL query string"
@@ -208,7 +211,8 @@ msgstr "无法克隆 URL 对象"
 msgid "Invalid empty Url object reference"
 msgstr "无效的空 URL 对象参照"
 
-#: ../zypp/Url.cc:321 ../zypp/Url.cc:335
+#: ../zypp/Url.cc:321
+#: ../zypp/Url.cc:335
 msgid "Unable to parse Url components"
 msgstr "无法对 URL 组件进行语法分析"
 
@@ -218,7 +222,8 @@ msgstr "未知语言："
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "无代码"
 
@@ -283,7 +288,8 @@ msgid "Akkadian"
 msgstr "阿卡德语"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "阿尔巴尼亚语"
 
@@ -333,7 +339,8 @@ msgid "Aragonese"
 msgstr "阿拉贡语"
 
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "亚美尼亚语"
 
@@ -433,7 +440,8 @@ msgid "Balinese"
 msgstr "巴厘语"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "巴斯克语"
 
@@ -543,7 +551,8 @@ msgid "Bulgarian"
 msgstr "保加利亚语"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "缅甸语"
 
@@ -608,7 +617,8 @@ msgid "Chagatai"
 msgstr "查加语"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "中文"
 
@@ -718,7 +728,8 @@ msgid "Cushitic (Other)"
 msgstr "库施特诸语言（其它）"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "捷克语"
 
@@ -793,7 +804,8 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr "中古荷兰语（约 1050-1350）"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "荷兰语"
 
@@ -898,7 +910,8 @@ msgid "Fon"
 msgstr "丰语"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "法语"
 
@@ -948,12 +961,14 @@ msgid "Germanic (Other)"
 msgstr "日尔曼诸语言（其它）"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "乔治亚语"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "德语"
 
@@ -1023,7 +1038,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "古希腊语（1453 以前）"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "现代希腊语 (1453-)"
 
@@ -1128,7 +1144,8 @@ msgid "Igbo"
 msgstr "伊博语"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "冰岛语"
 
@@ -1498,7 +1515,8 @@ msgid "Lushai"
 msgstr "卢萨语"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "马其顿语"
 
@@ -1538,7 +1556,8 @@ msgid "Mandingo"
 msgstr "曼丁哥语"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "毛利语"
 
@@ -1558,7 +1577,8 @@ msgid "Masai"
 msgstr "马萨伊语"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "马来语"
 
@@ -1699,7 +1719,8 @@ msgstr "那不勒斯语"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:380
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "瑙鲁语"
 
@@ -1899,7 +1920,8 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "古波斯语（约公元前 600-400）"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "波斯语"
 
@@ -1984,7 +2006,8 @@ msgid "Romany"
 msgstr "吉普赛语"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
@@ -2044,7 +2067,8 @@ msgid "Santali"
 msgstr "桑塔利语"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "塞尔维亚语"
 
@@ -2059,7 +2083,8 @@ msgid "Scots"
 msgstr "苏格兰语"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "克罗地亚语"
 
@@ -2114,7 +2139,8 @@ msgid "Slavic (Other)"
 msgstr "斯拉夫诸语言（其它）"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
@@ -2309,7 +2335,8 @@ msgid "Thai"
 msgstr "泰国语"
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "西藏语"
 
@@ -2330,7 +2357,8 @@ msgstr "蒂夫语"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:428
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "托克劳语"
 
@@ -2406,7 +2434,8 @@ msgstr "阿尔泰诸语言（其它）"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "图瓦卢语"
 
@@ -2506,7 +2535,8 @@ msgid "Washo"
 msgstr "瓦肖语"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "威尔士语"
 
@@ -2590,7 +2620,8 @@ msgstr "祖鲁语"
 msgid "Zuni"
 msgstr "祖尼语"
 
-#: ../zypp/ZYppFactory.cc:279 ../zypp/ZYppFactory.cc:334
+#: ../zypp/ZYppFactory.cc:279
+#: ../zypp/ZYppFactory.cc:334
 msgid "Software management is already running."
 msgstr "软件管理已处于运行状态。"
 
@@ -2630,7 +2661,8 @@ msgstr "无法初始化 HAL 环境 － hald 未运行？"
 msgid "Not a CDROM drive"
 msgstr "不是 CDROM 驱动器"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Hal 例外"
@@ -2681,7 +2713,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "%s 安装失败"
 
-#: ../zypp/target/rpm/RpmDb.cc:1927 ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:1927
+#: ../zypp/target/rpm/RpmDb.cc:2045
 msgid "rpm output:"
 msgstr "rpm 输出："
 
@@ -2692,7 +2725,8 @@ msgstr "rpm 输出："
 msgid "%s installed ok"
 msgstr "%s 安装成功"
 
-#: ../zypp/target/rpm/RpmDb.cc:1936 ../zypp/target/rpm/RpmDb.cc:2053
+#: ../zypp/target/rpm/RpmDb.cc:1936
+#: ../zypp/target/rpm/RpmDb.cc:2053
 msgid "Additional rpm output:"
 msgstr "其他 rpm 输出："
 
@@ -2733,25 +2767,25 @@ msgid "%s replaced by %s"
 msgstr "%s 替换为 %s"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:247
+#: ../zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr "%s 将被用户删除。\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:252
+#: ../zypp/solver/detail/Resolver_problems.cc:267
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s 将被另一个程序删除。(ApplLow/ApplHigh)\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:258
+#: ../zypp/solver/detail/Resolver_problems.cc:273
 #, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "%s 将被用户安装。\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:263
+#: ../zypp/solver/detail/Resolver_problems.cc:278
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s 将被另一个程序安装。(ApplLow/ApplHigh)\n"
@@ -2759,41 +2793,41 @@ msgstr "%s 将被另一个程序安装。(ApplLow/ApplHigh)\n"
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:322
+#: ../zypp/solver/detail/Resolver_problems.cc:337
 #, fuzzy
 msgid "No valid solution found with just resolvables of best architecture."
 msgstr "仅使用最佳架构解析项未得到有效方案。"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:323
+#: ../zypp/solver/detail/Resolver_problems.cc:338
 #, fuzzy
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr "此试例中仅使用最佳架构的可解析项。\n"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:324
+#: ../zypp/solver/detail/Resolver_problems.cc:339
 #, fuzzy
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 msgstr "使用所有可能的可解析项，费时但有效。"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:350
+#: ../zypp/solver/detail/Resolver_problems.cc:365
 msgid "Invalid information"
 msgstr "无效信息"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:357
+#: ../zypp/solver/detail/Resolver_problems.cc:372
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s 对于其它可解析项是必需的"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:360
+#: ../zypp/solver/detail/Resolver_problems.cc:375
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s 对于以下对象是必需的： %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:361
+#: ../zypp/solver/detail/Resolver_problems.cc:376
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2803,7 +2837,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:368
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s 与其它可解析项冲突"
@@ -2812,14 +2846,14 @@ msgstr "%s 与其它可解析项冲突"
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:371
+#: ../zypp/solver/detail/Resolver_problems.cc:386
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s 冲突 %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:373
+#: ../zypp/solver/detail/Resolver_problems.cc:388
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2829,24 +2863,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:402
+#: ../zypp/solver/detail/Resolver_problems.cc:417
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s 将废弃其它可解析项"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:405
+#: ../zypp/solver/detail/Resolver_problems.cc:420
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s 废弃 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:407
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s 废弃：%s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:408
+#: ../zypp/solver/detail/Resolver_problems.cc:423
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2855,7 +2889,7 @@ msgstr ""
 "将从系统删除这些可解析项。"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:416
+#: ../zypp/solver/detail/Resolver_problems.cc:431
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s 取决于其它可解析项"
@@ -2863,38 +2897,38 @@ msgstr "%s 取决于其它可解析项"
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:435
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s 依赖于 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:438
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s 依赖于：%s"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:429
+#: ../zypp/solver/detail/Resolver_problems.cc:444
 msgid "Child of"
 msgstr "子集"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:435
-#: ../zypp/solver/detail/Resolver_problems.cc:519
+#: ../zypp/solver/detail/Resolver_problems.cc:450
+#: ../zypp/solver/detail/Resolver_problems.cc:534
 #, c-format
 msgid "Cannot install %s"
 msgstr "无法安装 %s"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:437
+#: ../zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "None provides %s"
 msgstr "均不提供 %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:438
+#: ../zypp/solver/detail/Resolver_problems.cc:453
 #, fuzzy
 msgid ""
 "\n"
@@ -2903,32 +2937,32 @@ msgstr ""
 "\n"
 "没有支持此需求的资源可用。"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:446
+#: ../zypp/solver/detail/Resolver_problems.cc:461
 #, fuzzy
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 msgstr "由于上／下所述的问题，此解析将不解析所有依赖性。"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:457
-#: ../zypp/solver/detail/Resolver_problems.cc:831
+#: ../zypp/solver/detail/Resolver_problems.cc:472
+#: ../zypp/solver/detail/Resolver_problems.cc:854
 #, fuzzy, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
 msgstr "无法安装 %s，因为它与 %s 冲突"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:475
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s 未安装，且已被标记为不可安装"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:487
+#: ../zypp/solver/detail/Resolver_problems.cc:502
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "由于依赖性问题，所以无法安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:529
-#: ../zypp/solver/detail/Resolver_problems.cc:539
+#: ../zypp/solver/detail/Resolver_problems.cc:544
+#: ../zypp/solver/detail/Resolver_problems.cc:554
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2936,8 +2970,8 @@ msgid "delete %s"
 msgstr "删除 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:532
-#: ../zypp/solver/detail/Resolver_problems.cc:542
+#: ../zypp/solver/detail/Resolver_problems.cc:547
+#: ../zypp/solver/detail/Resolver_problems.cc:557
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -2945,119 +2979,131 @@ msgid "do not install %s"
 msgstr "不安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:555
+#: ../zypp/solver/detail/Resolver_problems.cc:570
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s 具有未满足的需求"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:594
+#: ../zypp/solver/detail/Resolver_problems.cc:609
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s 缺少依赖性"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:642
+#: ../zypp/solver/detail/Resolver_problems.cc:657
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "由于缺少依赖性，所以无法安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:691
+#: ../zypp/solver/detail/Resolver_problems.cc:714
 #, fuzzy, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
 msgstr "%s 将实现 %s 的依赖性，但是将会被卸装"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:701
+#: ../zypp/solver/detail/Resolver_problems.cc:724
 #, fuzzy, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
 msgstr "%s 将实现 %s 的依赖性，但是将会被保留在系统上"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:711
+#: ../zypp/solver/detail/Resolver_problems.cc:734
 #, c-format
 msgid "No need to install %s"
 msgstr "无需安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:719
+#: ../zypp/solver/detail/Resolver_problems.cc:742
 #, fuzzy, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
 msgstr "无法安装 %s 以实现 %s 的依赖性"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:757
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "无法安装 %s 以实现 %s 的依赖性"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:772
-#: ../zypp/solver/detail/Resolver_problems.cc:780
+#: ../zypp/solver/detail/Resolver_problems.cc:795
+#: ../zypp/solver/detail/Resolver_problems.cc:803
 #, fuzzy, c-format
 msgid "%s will not be uninstalled, because it is still required"
 msgstr "%s 将不卸装，原因是它仍被需要"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:803
+#: ../zypp/solver/detail/Resolver_problems.cc:826
 #, fuzzy, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 msgstr "%s 废弃 %s。但 %s 无法删除，因为它是锁定的。"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:835
+#: ../zypp/solver/detail/Resolver_problems.cc:858
 #, fuzzy, c-format
 msgid "Cannot install %s, because it is conflicting"
 msgstr "无法安装 %s，因为冲突"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:857
+#: ../zypp/solver/detail/Resolver_problems.cc:880
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s 由于与以下对象冲突所以不可卸装： %s"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:871
+#: ../zypp/solver/detail/Resolver_problems.cc:894
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr ""
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:54
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
 msgstr "仅在此忽略此需求"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:63
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
 #, fuzzy
 msgid "Generally ignore this requirement"
 msgstr "仅在此忽略此需求"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:75
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #, c-format
 msgid "Install %s although it would change the architecture"
 msgstr "尽管会改变结构，仍请安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:78
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:79
 #, fuzzy, c-format
 msgid "%s provides this dependency, but would change the architecture of the installed item"
 msgstr "%s 提供了此依赖性，但是会改变已安装项目的结构。"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:102
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, fuzzy, c-format
+msgid "Install %s although it would change the vendor"
+msgstr "尽管会改变结构，仍请安装 %s"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
+#, fuzzy, c-format
+msgid "%s provides this dependency, but would change the vendor of the installed item"
+msgstr "%s 提供了此依赖性，但是会改变已安装项目的结构。"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:116
 #, c-format
 msgid "Ignore this conflict of %s"
 msgstr "忽略 %s 的此冲突"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:131
 #, c-format
 msgid "Ignore the obsolete %s in %s"
 msgstr "忽略废弃 %s（%s 中）"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:130
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:144
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "忽略 %s 已被设置为安装的实事"
@@ -3068,7 +3114,7 @@ msgid "Do not install or delete the resolvables concerned"
 msgstr "不安装或删除相关的可解析项"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:738
+#: ../zypp/solver/detail/QueueItemRequire.cc:763
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "因为需要 %s（对于 %s）－ 在升级 %s 时"
@@ -3319,8 +3365,14 @@ msgstr "%s 提供了 %s，但是已安排将其保留。"
 msgid "%s provides %s, but has another architecture."
 msgstr "%s 提供了 %s，但它具有另一种结构。"
 
-#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:469
+#, fuzzy, c-format
+msgid "%s provides %s, but has another vendor (%s)."
+msgstr "%s 提供了 %s，但它具有另一种结构。"
+
+#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:487
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "无法满足需求\"%s\"（对于 %s）"
@@ -3332,7 +3384,7 @@ msgstr "无法满足需求\"%s\"（对于 %s）"
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:490
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:508
 #, fuzzy, c-format
 msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
 msgstr "%s 是其他已安装的可解析项所需要的，因此不会将其取消链接。"
@@ -3344,7 +3396,7 @@ msgstr "%s 是其他已安装的可解析项所需要的，因此不会将其取
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:507
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:525
 #, fuzzy, c-format
 msgid "%s is required by another installed resolvable, so it won't be unlinked."
 msgstr "%s 是其他已安装的可解析项所需要的，因此不会将其取消链接。"
@@ -3356,7 +3408,7 @@ msgstr "%s 是其他已安装的可解析项所需要的，因此不会将其取
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is locked and cannot be uninstalled.
 #. TranslatorExplanation: foo is to-be-uninstalled but it is locked
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:524
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:542
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s 已锁定，因此无法将其卸装。"
@@ -3367,7 +3419,7 @@ msgstr "%s 已锁定，因此无法将其卸装。"
 #. other_capability() = conflict capability
 #. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 #. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:543
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
 #, fuzzy, c-format
 msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
 msgstr "%s (%s) 上发生冲突，需要去除将安装的 %s"
@@ -3378,23 +3430,23 @@ msgstr "%s (%s) 上发生冲突，需要去除将安装的 %s"
 #. other_capability() = conflict capability from issuer
 #. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
 #. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:579
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "将 %s 标记为可卸载，这是由于 %s 上存在冲突"
 
 #. Translator: %s = name of package,patch
 #. TranslatorExample: from abc
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:569
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:587
 #, c-format
 msgid "from %s"
 msgstr "发件人 %s"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:194
+#: ../zypp/solver/detail/ResolverInfo.cc:195
 msgid " Error!"
 msgstr "错误！"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:195
+#: ../zypp/solver/detail/ResolverInfo.cc:196
 msgid " Important!"
 msgstr "重要信息！"
 
@@ -3453,8 +3505,8 @@ msgstr "%s 被以下对象建议： %s"
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:72
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
 #, c-format
-msgid "%s is freshened by %s"
-msgstr "%s 被以下对象刷新： %s"
+msgid "%s will be evaluated for installation (freshened) by %s"
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
@@ -3708,7 +3760,8 @@ msgstr "科科斯（基林）群岛"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:255
+#: ../zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "刚果"
 
@@ -4772,81 +4825,44 @@ msgstr ""
 "文件 %s 具有无效的校验和 。预期为 %s，得到的是 %s\n"
 "仍要使用该文件吗？"
 
+#~ msgid "%s is freshened by %s"
+#~ msgstr "%s 被以下对象刷新： %s"
 #~ msgid "Unable to parse Url authority"
 #~ msgstr "无法对 URL 授权进行语法分析"
-
 #~ msgid "Ignore this requirement generally"
 #~ msgstr "通常忽略此需求"
-
 #~ msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 #~ msgstr "%s 是其他将安装的可解析项所需要的，因此不会将其取消链接。"
-
 #~ msgid "Cannot create a file needed to perform update installation."
 #~ msgstr "无法创建执行更新安装所需要的文件。"
-
 #~ msgid "Unable to restore all sources."
 #~ msgstr "无法恢复所有源"
-
 #~ msgid "At least one source already registered, stored sources cannot be restored."
 #~ msgstr "至少已注册了一个源，保存的源无法恢复。"
-
 #~ msgid "Cannot be install %s to fulfil the dependencies of %s"
 #~ msgstr "无法安装 %s 以实现 %s 的依赖性"
-
 #~ msgid "%s dependend on %s"
 #~ msgstr "%s 依赖于 %s"
-
 #~ msgid "Reading index files"
 #~ msgstr "正在读取索引文件"
-
 #~ msgid "The signed repomd.xml file failed the signature check."
 #~ msgstr "已签名的 repomd.xml 文件未能通过签名检查。"
-
 #~ msgid "Reading product from %s"
 #~ msgstr "正在从 %s 读取产品"
-
 #~ msgid "Reading filelist from %s"
 #~ msgstr "正在从 %s 读取文件列表"
-
 #~ msgid "Reading packages from %s"
 #~ msgstr "正在从 %s 读取包"
-
 #~ msgid "Reading selection from %s"
 #~ msgstr "正在从 %s 读取选择"
-
 #~ msgid "Reading pattern from %s"
 #~ msgstr "正在从 %s 读取模式"
-
 #~ msgid "Reading patches index %s"
 #~ msgstr "正在读取增补程序索引 %s"
-
 #~ msgid "Reading patch %s"
 #~ msgstr "正在读取增补程序 %s"
-
 #~ msgid "The script file failed the checksum test."
 #~ msgstr "脚本文件未能通过校验和测试。"
-
 #~ msgid "Reading packages file"
 #~ msgstr "正在读取包文件"
 
-# progress indicator label
-#~ msgid "Reading translation: %s"
-#~ msgstr "正在读取转换： %s"
-
-#~ msgid "Package %s fails integrity check. Do you want to retry, or abort installation?"
-#~ msgstr "%s 包未能通过完整性检查。要重试下载它还是中止安装？"
-
-#~ msgid " miss checksum."
-#~ msgstr " 缺少校验和。"
-
-#~ msgid " fails checksum verification."
-#~ msgstr "检验和校验失败。"
-
-#~ msgid "Downloading %s"
-#~ msgstr "正在下载 %s"
-
-#~ msgid "Downloaded %s from %s"
-#~ msgstr "已下载 %s 来自 %s"
-
-#~ msgid "%s needed by %s"
-#~ msgstr "%s 是以下对象需要的 %s"

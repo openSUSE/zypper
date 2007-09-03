@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 11:32+0200\n"
-"PO-Revision-Date: 2007-08-18 15:46+0700\n"
+"POT-Creation-Date: 2007-08-23 10:21+0200\n"
+"PO-Revision-Date: 2007-08-24 02:30+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -19,77 +19,77 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: 0\n"
 
-#: ../zypp/url/UrlBase.cc:150
+#: ../zypp/url/UrlBase.cc:154
 #, c-format
 msgid "Url scheme does not allow a %s"
 msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត %s ទេ"
 
-#: ../zypp/url/UrlBase.cc:169
+#: ../zypp/url/UrlBase.cc:173
 #, c-format
 msgid "Invalid %s component '%s'"
 msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/url/UrlBase.cc:176
+#: ../zypp/url/UrlBase.cc:180
 #, c-format
 msgid "Invalid %s component"
 msgstr "សមាសភាគ %s មិន​ត្រឹមត្រូវ"
 
-#: ../zypp/url/UrlBase.cc:723
+#: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
 msgstr "មិនបាន​គាំទ្រ​ការញែក​ប៉ារ៉ាម៉ែត្រ​ផ្លូវ​សម្រាប់ URL នេះ​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:778 ../zypp/url/UrlBase.cc:1225
+#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្សែអក្សរ​សំណួរ​សម្រាប់ URL នេះ​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:816
+#: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
 msgstr "គ្រោងការណ៍ Url មិនមែន​ជា​សមាសភាគ​ដែល​បាន​ទាមទារ​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:822
+#: ../zypp/url/UrlBase.cc:826
 #, c-format
 msgid "Invalid Url scheme '%s'"
 msgstr "គ្រោងការណ៍ Url មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/url/UrlBase.cc:943
+#: ../zypp/url/UrlBase.cc:947
 msgid "Url scheme does not allow a username"
 msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ឈ្មោះ​អ្នកប្រើ​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:977
+#: ../zypp/url/UrlBase.cc:981
 msgid "Url scheme does not allow a password"
 msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ពាក្យ​សម្ងាត់​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:1006
+#: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
 msgstr "គ្រោងការណ៍ Url ទាមទារ​សមាសភាគ​របស់​ម៉ាស៊ីន"
 
-#: ../zypp/url/UrlBase.cc:1016
+#: ../zypp/url/UrlBase.cc:1020
 msgid "Url scheme does not allow a host component"
 msgstr "គ្រោងការណ៍ Url មិនអនុញ្ញាត​សមាសភាគ​របស់​ម៉ាស៊ីន​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:1043
+#: ../zypp/url/UrlBase.cc:1047
 #, c-format
 msgid "Invalid host component '%s'"
 msgstr "សមាសភាគ​របស់​ម៉ាស៊ីន​មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/url/UrlBase.cc:1064
+#: ../zypp/url/UrlBase.cc:1068
 msgid "Url scheme does not allow a port"
 msgstr "គ្រោងការណ៍ Url មិន​អនុញ្ញាត​ច្រក​ឡើយ"
 
-#: ../zypp/url/UrlBase.cc:1075
+#: ../zypp/url/UrlBase.cc:1079
 #, c-format
 msgid "Invalid port component '%s'"
 msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/url/UrlBase.cc:1092
+#: ../zypp/url/UrlBase.cc:1096
 msgid "Url scheme requires path name"
 msgstr "គ្រោងការណ៍ Url ទាមទារ​ឈ្មោះ​ផ្លូវ"
 
-#: ../zypp/url/UrlBase.cc:1113 ../zypp/url/UrlBase.cc:1127
+#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
 
-#: ../zypp/url/UrlBase.cc:1180
+#: ../zypp/url/UrlBase.cc:1184
 msgid "Path Parameter parsing not supported for this URL"
 msgstr "មិនបាន​គាំទ្រ​ការ​ញែក​ប៉ារ៉ាម៉ែត្រ​ផ្លូវ​សម្រាប់ URL នេះ​ឡើយ"
 
@@ -2647,9 +2647,9 @@ msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រច
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:1913
-#, fuzzy, c-format
+#, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr "rpm បាន​រក្សាទុក %s ជា %s ប៉ុន្ដែ​វា​មិន​អាច​កំណត់​ភាព​ខុសគ្នា​បាន"
+msgstr "rpm បានរ​ក្សា​ទុក %s ជា %s ប៉ុន្តែ​វា​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:1915
@@ -2663,7 +2663,7 @@ msgstr ""
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:1918
-#, fuzzy, c-format
+#, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm បាន​បង្កើត %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
@@ -2736,25 +2736,25 @@ msgid "%s replaced by %s"
 msgstr "%s បាន​ជំនួស​ដោយ %s"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:247
+#: ../zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr "%s នឹង​ត្រូវ​បាន​លុប​ដោយ​អ្នក​ប្រើ ។\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:252
+#: ../zypp/solver/detail/Resolver_problems.cc:267
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s នឹង​ត្រូវ​បានលុប​ដោយ​កម្មវិធី​ផ្សេង ។ (ApplLow/ApplHigh)\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:258
+#: ../zypp/solver/detail/Resolver_problems.cc:273
 #, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "%s នឹង​ត្រូវ​បាន​ដំឡើង​ដោយ​​អ្នក​ប្រើ ។\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:263
+#: ../zypp/solver/detail/Resolver_problems.cc:278
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s នឹង​ត្រូវ​បាន​ដំឡើង​ដោយ​កម្មវិធី​ផ្សេង ។ (ApplLow/ApplHigh)\n"
@@ -2762,41 +2762,38 @@ msgstr "%s នឹង​ត្រូវ​បាន​ដំឡើង​ដោយ
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:322
-#, fuzzy
+#: ../zypp/solver/detail/Resolver_problems.cc:337
 msgid "No valid solution found with just resolvables of best architecture."
-msgstr "រក​មិនឃើញ​ដំណោះ​ស្រាយ​ត្រឹមត្រូវ​ ដោយប្រើ​តែ​កញ្ចប់​ដំណោះស្រាយ​នៃ​ស្ថាបត្យកម្ម​ល្អបំបផុត​នោះ​ទេ ។"
+msgstr "រក​មិន​ឃើញ​ដំណោះ​ស្រាយ​ ដែល​មិន​អាច​ដោះស្រាយ​នៃ​ស្ថាបត្យកម្ម​ដ៏​ល្អ​បំផុត ។"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:323
-#, fuzzy
+#: ../zypp/solver/detail/Resolver_problems.cc:338
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr "ដោយ​ឲ្យវា​រត់​សម្រាប់​តែ​អ្វី​អាច​ដោះស្រាយ​បាន​ជា​មួយ​ស្ថាបត្យកម្ម​ដ៏​ល្អ​បំផុត​ត្រូវ​បាន​គេ​ពិចារណា ។\n"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:324
-#, fuzzy
+#: ../zypp/solver/detail/Resolver_problems.cc:339
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-msgstr "ចំពោះ​​អ្វី​អាច​ដោះស្រាយ​បានដែល​អាច​កើត​ឡើង​ទាំងអស់​​ត្រូវការ​ពេលវេលា ប៉ុន្តែ​ទទួល​បាន​លទ្ធផល​ដ៏ត្រឹមត្រូវ ។"
+msgstr "ដោយ​ទាក់ទង​ទៅ​នឹង​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ទាំង​អស់​ត្រូវ​ការ​ពេលវេលា​ ប៉ុន្តែ​អាច​ទទួល​បានលទ្ធផល​ត្រឹមត្រូវ ។"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:350
+#: ../zypp/solver/detail/Resolver_problems.cc:365
 msgid "Invalid information"
 msgstr "ព័ត៌មាន​មិន​ត្រឹមត្រូវ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:357
+#: ../zypp/solver/detail/Resolver_problems.cc:372
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះស្រាយ​ផ្សេងៗ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:360
+#: ../zypp/solver/detail/Resolver_problems.cc:375
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s ត្រូវការ​ដោយ %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:361
+#: ../zypp/solver/detail/Resolver_problems.cc:376
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2806,7 +2803,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:368
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s ប៉ះទង្គិច​ជាមួយ​កញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
@@ -2815,14 +2812,14 @@ msgstr "%s ប៉ះទង្គិច​ជាមួយ​កញ្ចប់ដ
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:371
+#: ../zypp/solver/detail/Resolver_problems.cc:386
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s ប៉ះ​ទង្គិច​ជាមួយ​នឹង %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:373
+#: ../zypp/solver/detail/Resolver_problems.cc:388
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2832,24 +2829,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:402
+#: ../zypp/solver/detail/Resolver_problems.cc:417
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s លែង​ប្រើ​កញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:405
+#: ../zypp/solver/detail/Resolver_problems.cc:420
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s លែង​ប្រើ %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:407
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s លែង​ប្រើ  ៖ %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:408
+#: ../zypp/solver/detail/Resolver_problems.cc:423
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2858,7 +2855,7 @@ msgstr ""
 "កញ្ចប់ដោះស្រាយទាំងនេះ​នឹង​ត្រូវ​បាន​លុប​ចេញ​ពី​ប្រព័ន្ធ ។"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:416
+#: ../zypp/solver/detail/Resolver_problems.cc:431
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s ផ្អែក​លើកញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
@@ -2866,72 +2863,70 @@ msgstr "%s ផ្អែក​លើកញ្ចប់ដោះស្រាយ​
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:435
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s ផ្អែកលើ %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:438
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s ផ្អែកលើ ៖ %s"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:429
+#: ../zypp/solver/detail/Resolver_problems.cc:444
 msgid "Child of"
 msgstr "កូន​របស់"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:435
-#: ../zypp/solver/detail/Resolver_problems.cc:519
+#: ../zypp/solver/detail/Resolver_problems.cc:450
+#: ../zypp/solver/detail/Resolver_problems.cc:534
 #, c-format
 msgid "Cannot install %s"
 msgstr "មិន​អាច​ដំឡើង %s"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:437
+#: ../zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "None provides %s"
 msgstr "គ្មាន​កញ្ចប់​ណា​ផ្ដល់ %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:438
-#, fuzzy
+#: ../zypp/solver/detail/Resolver_problems.cc:453
 msgid ""
 "\n"
 "There is no resource available which supports this requirement."
 msgstr ""
 "\n"
-"មិន​មាន​ធនធាន​ណា​ដែល​គាំទ្រ​តម្រូវការ​នេះ ។"
+"មិនមាន​ធនធាន​ដែល​គាំទ្រ​តម្រូវ​ការ​នេះ ។"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:446
-#, fuzzy
+#: ../zypp/solver/detail/Resolver_problems.cc:461
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-msgstr "ដោយ​សារ​តែ​មាន​បញ្ហា​ដូច​ដែល​ពិពណ៌នា​ខាងលើ/ខាងក្រោម ដំណោះស្រាយ​នេះ​មិន​អាច​ដោះស្រាយ​កញ្ចប់​ដែល​ត្រូវការ​បាន​ឡើយ"
+msgstr "ដោយ​សារ​តែ​មាន​បញ្ហា​​ដូច​បាន​ពិពណ៌នា​ខាង​លើ/ខាង​ក្រោម ដំណោះស្រាយ​នេះ​នឹង​មិន​អាច​ដោះស្រាយ​ភាព​អាស្រ័យ​ទាំងអស់​បាន​ទេ"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:457
-#: ../zypp/solver/detail/Resolver_problems.cc:831
-#, fuzzy, c-format
+#: ../zypp/solver/detail/Resolver_problems.cc:472
+#: ../zypp/solver/detail/Resolver_problems.cc:854
+#, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
-msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​កំពុង​ប៉ះ​ទង្គិច​ជាមួយនឹង %s"
+msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​ប៉ះទង្គិច​ជា​មួយ %s"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:475
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "មិន​បាន​ដំឡើង %s ឡើយ ហើយ​បាន​សម្គាល់​វា​ថា អាច​លុប​បាន"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:487
+#: ../zypp/solver/detail/Resolver_problems.cc:502
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "មិន​អាច​ដំឡើង %s ដោយ​សារ​តែមានបញ្ហា​ភាព​អាស្រ័យ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:529
-#: ../zypp/solver/detail/Resolver_problems.cc:539
+#: ../zypp/solver/detail/Resolver_problems.cc:544
+#: ../zypp/solver/detail/Resolver_problems.cc:554
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2939,8 +2934,8 @@ msgid "delete %s"
 msgstr "លុប %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:532
-#: ../zypp/solver/detail/Resolver_problems.cc:542
+#: ../zypp/solver/detail/Resolver_problems.cc:547
+#: ../zypp/solver/detail/Resolver_problems.cc:557
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -2948,139 +2943,149 @@ msgid "do not install %s"
 msgstr "កុំ​ដំឡើង %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:555
+#: ../zypp/solver/detail/Resolver_problems.cc:570
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s មាន​តម្រូវ​ការ​ដែល​មិន​បាន​បំពេញ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:594
+#: ../zypp/solver/detail/Resolver_problems.cc:609
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s មាន​ភាព​អាស្រ័យ​ដែល​បាត់"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:642
+#: ../zypp/solver/detail/Resolver_problems.cc:657
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "មិន​អាច​ដំឡើង %s បានទេ ដោយ​សារ​បាត់​ភាព​អាស្រ័យ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:691
-#, fuzzy, c-format
+#: ../zypp/solver/detail/Resolver_problems.cc:714
+#, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
-msgstr "%s បំពេញ​កញ្ចប់​តម្រូវការរបស់ %s ប៉ុន្តែនឹង​ត្រូវ​បាន​លុប"
+msgstr "%s បំពេញ​ភាព​អាស្រ័យ​របស់ %s ប៉ុន្តែ​នឹង​ត្រូវ​បានលុប"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:701
-#, fuzzy, c-format
+#: ../zypp/solver/detail/Resolver_problems.cc:724
+#, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
-msgstr "%s បំពេញ​ភាព​អាស្រ័យ​របស់ %s ប៉ុន្តែ​នឹង​ត្រូវ​បាន​ទុក​នៅ​លើ​ប្រព័ន្ធ​របស់​អ្នក"
+msgstr "%s បំពេញ​ភាពអាស្រ័យ​របស់ %s ប៉ុន្តែ​នឹង​ត្រូវ​បាន​រក្សាទុក​នៅ​ក្នុង​ប្រព័ន្ធ​របស់​អ្នក"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:711
+#: ../zypp/solver/detail/Resolver_problems.cc:734
 #, c-format
 msgid "No need to install %s"
 msgstr "មិន​ចាំបាច់​ដំឡើង %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:719
-#, fuzzy, c-format
+#: ../zypp/solver/detail/Resolver_problems.cc:742
+#, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
-msgstr "មិន​អាច​ដំឡើង %s ដើម្បី​បំពេញកញ្ចប់​តម្រូវការ​របស់ %s"
+msgstr "មិន​អាច​ដំឡើង %s ដើម្បី​បំពេញ​ភាព​អាស្រ័យ​របស់ %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:757
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "មិន​អាច​ដំឡើង %s ដើម្បី​បំពេញកញ្ចប់​តម្រូវការ​របស់ %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:772
-#: ../zypp/solver/detail/Resolver_problems.cc:780
-#, fuzzy, c-format
-msgid "%s will not be uninstalled, because it is still required"
-msgstr "មិន​អាច​លុប %s បាន ពីព្រោះ​នៅ​ត្រូវការ​វា​នៅ​ឡើយ"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/Resolver_problems.cc:795
 #: ../zypp/solver/detail/Resolver_problems.cc:803
-#, fuzzy, c-format
-msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-msgstr "%s លែង​ប្រើ %s ។ ប៉ុន្តែ​មិន​អាច​លុប %s បានទេ ពីព្រោះ​វា​ជាប់​សោរ ។"
-
-#: ../zypp/solver/detail/Resolver_problems.cc:835
-#, fuzzy, c-format
-msgid "Cannot install %s, because it is conflicting"
-msgstr "មិន​អាច​ដំឡើង %s បានទេ ពីព្រោះ​វា​កំពុង​ប៉ះ​ទង្គិច"
+#, c-format
+msgid "%s will not be uninstalled, because it is still required"
+msgstr "%s នឹង​មិន​ត្រូវ​បាន​លុប​ទេ ពីព្រោះ​វា​នៅ​តែ​ត្រូវ​ការ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:857
+#: ../zypp/solver/detail/Resolver_problems.cc:826
+#, c-format
+msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
+msgstr "%s លែងប្រើ %s ។ ប៉ុន្តែ %s មិន​អាច​ត្រូវ​បានលុប ពីព្រោះ​វា​ជាប់សោ ។"
+
+#: ../zypp/solver/detail/Resolver_problems.cc:858
+#, c-format
+msgid "Cannot install %s, because it is conflicting"
+msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​កំពុង​ប៉ះទង្គិច"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/Resolver_problems.cc:880
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "មិន​អាច​លុប %s បានទេ​ ព្រោះ​វា​ប៉ះទង្គិច​ជា​មួយ​នឹង %s"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:871
+#: ../zypp/solver/detail/Resolver_problems.cc:894
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr "មិន​អាច​បំពេញ​តម្រូវ​ការ %s"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:54
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
 msgstr "មិន​អើពើ​នឹង​តម្រូវ​ការ​នេះ​តែនៅ​ទីនេះ"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:63
-#, fuzzy
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
 msgid "Generally ignore this requirement"
-msgstr "មិន​អើពើ​នឹង​តម្រូវ​ការ​នេះ​តែនៅ​ទីនេះ"
+msgstr "ជា​ទូទៅ មិនអើពើ​តម្រូវ​កា​រនេះ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:75
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #, c-format
 msgid "Install %s although it would change the architecture"
 msgstr "ដំឡើង %s ទោះ​បីជា​វា​នឹង​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម​ក៏ដោយ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:78
-#, fuzzy, c-format
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:79
+#, c-format
 msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s ផ្ដល់​ភាព​អាស្រ័យ​នេះ ប៉ុន្តែ​នឹង​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម​របស់​ធាតុ​ដែលបាន​ដំឡើង"
+msgstr "%s ផ្ដល់​នូវ​ភាព​អាស្រ័យ​នេះ ប៉ុន្តែ​នឹង​ផ្លាស់ប្ដូរ​ស្ថាបនត្យកម្ម​របស់​ធាតុ​ដែល​បាន​ដំឡើង"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:102
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, c-format
+msgid "Install %s although it would change the vendor"
+msgstr "ដំឡើង %s ទោះ​បី​ជា​វា​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់​ក៏​ដោយ"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
+#, c-format
+msgid "%s provides this dependency, but would change the vendor of the installed item"
+msgstr "%s ផ្ដល់​ភាព​អាស្រ័យ​នេះ​ ប៉ុន្តែ​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់​របស់​ធាតុ​ដែល​បាន​ដំឡើង"
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:116
 #, c-format
 msgid "Ignore this conflict of %s"
 msgstr "មិន​អើពើ​នឹង​ការ​ប៉ះ​ទង្គិច​នៃ %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:131
 #, c-format
 msgid "Ignore the obsolete %s in %s"
 msgstr "មិន​អើពើ​នឹង​ការ​លែង​ប្រើ %s នៅ​ក្នុង %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:130
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:144
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "មិន​អើពើថា​បាន​កំណត់ %s ដើម្បី​ដំឡើង​រួចហើយ"
 
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete the resolvables concerned"
-msgstr "កុំ​ដំឡើង ឬ​លុប​កញ្ចប់​ដោះស្រាយ​ផ្ដោត"
+msgstr "កុំ​ដំឡើង ឬ​លុប​អ្វី​ដែលអាច​ដោះស្រាយ​បាន​ដែល​ទាក់ទង"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:738
+#: ../zypp/solver/detail/QueueItemRequire.cc:763
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "សម្រាប់​ការទាមទារ %s ចំពោះ %s ខណៈពេល​ធ្វើ​ឲ្យ %s ទាន់​សម័យ"
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency
 #: ../zypp/solver/detail/ResolverInfoMissingReq.cc:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s is lacking the requirement %s"
-msgstr "%s បាត់​តម្រូវការ %s"
+msgstr "%s ខ្វះ​តម្រូវ​ការ %s"
 
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
@@ -3155,16 +3160,16 @@ msgstr "សម្គាល់​កញ្ចប់​ដោះស្រាយ %s
 #. Translator: %s = name of packages,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:159
-#, fuzzy, c-format
+#, c-format
 msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-msgstr "%s ត្រូវ​បាន​កំណត់ពេល​ឲ្យ​ដំឡើង ប៉ុន្តែ​វា​មិន​អាច​ទៅ​រួច ដោយ​សារ​តែ​មាន​បញ្ហា​កញ្ចប់​ដែល​ត្រូវការ ។"
+msgstr "%s ត្រូវ​បាន​កំណត់​ពេលវេលា​ដំឡើង ប៉ុន្តែ​វា​មិនអាច​ ដោយសារ​តែ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
 #. Translator: %s = name of package,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:167
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s since it is already marked as needed to be uninstalled"
-msgstr "មិន​អាច​ដំឡើង %s ព្រោះ​វា​បាន​សម្គាល់ជា លុប"
+msgstr "មិនអាច​ដំឡើង %s ព្រោះថា​វា​ត្រូវ​បាន​សម្គាល់​ជា​ចាំបាច់​ត្រូវ​លុប"
 
 #. Translator: %s = name of patch
 #. TranslatorExplanation: A patch which is not needed (does not apply) cant be installed
@@ -3173,9 +3178,9 @@ msgstr "មិន​អាច​ដំឡើង %s ព្រោះ​វា​�
 #. TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
 #. TranslatorExplanation: package is not installed.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:179
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, because it does not apply to this system."
-msgstr "មិន​អាច​ដំឡើង %s ព្រោះ​វា​មិន​អនុវត្ត​ទៅ​ប្រព័ន្ធ​នេះ ។"
+msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​មិន​អនុវត្ត​ប្រព័ន្ធ​នេះ ។"
 
 #. affected() = item 1 which has to be installed
 #. _capability =
@@ -3183,9 +3188,9 @@ msgstr "មិន​អាច​ដំឡើង %s ព្រោះ​វា​�
 #. other_capability() =
 #. Translator: %s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:190
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, because %s is already marked as needed to for installation"
-msgstr "មិនអាច​ដំឡើង​ %s ចាប់​តាំងពី​បាន​សម្គាល់​ថា​ត្រូវ​ឲ្យ​ដំឡើង %s មក​ម្លេះ"
+msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ %s ត្រូវ​បាន​សម្គាល់​ថា​ចាំបាច់​​សម្រាប់​ដំឡើង"
 
 #. Translator: %s = name of patch,product
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:198
@@ -3251,9 +3256,9 @@ msgstr "កំពុង​រំលង %s ៖ បាន​ដំឡើង​រ
 #. TranslatorExplanation: removal of this resolvable would therefore break dependency
 #. TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:292
-#, fuzzy, c-format
+#, c-format
 msgid "There are no alternative providers of %s installed"
-msgstr "មិន​មាន​អ្នកផ្តល់​មួយ​ផ្សេង​ដែល​បានដំឡើងរបស់ %s"
+msgstr "គ្មាន​ក្រុមហ៊ុន​ផ្ដល់​ជា​ជំនួស​​របស់ %s បាន​ដំឡើង"
 
 #. Translator: 1.%s = name of package,patch....
 #. TranslatorExample: for bar
@@ -3282,9 +3287,9 @@ msgstr "មិន​មាន​អ្នក​ផ្ដល់ %s ដែល​�
 #. TranslatorExample: Upgrade to foo to avoid removing bar is not possible
 #. TranslatorExplanation: bar requires something from foo
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:341
-#, fuzzy, c-format
+#, c-format
 msgid "Upgrading to %s to avoid removing %s is not possible."
-msgstr "ធ្វើ %s ឲ្យ​ទាន់សម័យ ដើម្បី​ចៀសវាង​យក %s ចេញ មិន​អាច​ទៅរួចឡើយ ។"
+msgstr "មិន​អាច​ធ្វើ​ឲ្យ %s ប្រសើរ ដើម្បីជៀសវាងការ​​យក %s ចេញ​ ។"
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:359
@@ -3322,8 +3327,14 @@ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​ត្រូវ​បា�
 msgid "%s provides %s, but has another architecture."
 msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​មាន​ស្ថាបត្យកម្ម​ផ្សេង ។"
 
-#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:469
+#, c-format
+msgid "%s provides %s, but has another vendor (%s)."
+msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​មាន​ក្រុមហ៊ុន​លក់​ផ្សេង (%s) ។"
+
+#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:487
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "មិន​អាច​បំពេញ​តាម​តម្រូវការ %s សម្រាប់ %s"
@@ -3335,10 +3346,10 @@ msgstr "មិន​អាច​បំពេញ​តាម​តម្រូវ
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:490
-#, fuzzy, c-format
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:508
+#, c-format
 msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះស្រាយ​ផ្សេងៗ ដូច្នេះ​វា​មិន​អាច​ផ្តាច់​ចេញ​ពីគ្នា​បាន​ឡើយ ។"
+msgstr "%s ត្រូវ​បានទាមទារ​ដោយ​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ផ្សេង​ទៀត​ដែល​បាន​ជ្រើស​សម្រាប់​ដំឡើង ដូច្នេះ​វា​នឹង​មិន​ត្រូវបាន​តភ្ជាប់ទេ ។"
 
 #. affected() = provider of cap
 #. _capability =
@@ -3347,10 +3358,10 @@ msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះ
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:507
-#, fuzzy, c-format
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:525
+#, c-format
 msgid "%s is required by another installed resolvable, so it won't be unlinked."
-msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះស្រាយ​ផ្សេងៗ ដូច្នេះ​វា​មិន​អាច​ផ្តាច់​ចេញ​ពីគ្នា​បាន​ឡើយ ។"
+msgstr "%s ត្រូវ​បាន​ទាមទារ​ដោយ​អ្វី​ដែល​អាច​ដែល​អាច​ដោះស្រាយ​បាន​ផ្សេង ដូច្នេះ​វា​នឹង​មិន​ត្រូវ​បាន​តភ្ជាប់​ទេ ។"
 
 #. affected() = to-be-uninstalled resolvable which is locked
 #. _capability =
@@ -3359,7 +3370,7 @@ msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះ
 #. Translator: %s = name of package,patch,...
 #. TranslatorExample: foo is locked and cannot be uninstalled.
 #. TranslatorExplanation: foo is to-be-uninstalled but it is locked
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:524
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:542
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s ជាប់សោ និង​មិន​អាច​លុប​បាន​ឡើយ ។"
@@ -3370,10 +3381,10 @@ msgstr "%s ជាប់សោ និង​មិន​អាច​លុប​�
 #. other_capability() = conflict capability
 #. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 #. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:543
-#, fuzzy, c-format
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
+#, c-format
 msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-msgstr "ការប៉ះ​ទង្គិច​លើ %s (%s) ត្រូវការ​យក​ចេញ %s"
+msgstr "ការ​ប៉ះទង្គិច %s (%s) ទាមទារ​ឲ្យ​យក %s ចេញ ដែល​ត្រូវ​បាន​កំណត់​ពេលវេលា​សម្រាប់​ដំឡើង"
 
 #. affected() = provider of capability
 #. _capability = provided by provider
@@ -3381,23 +3392,23 @@ msgstr "ការប៉ះ​ទង្គិច​លើ %s (%s) ត្រូវ
 #. other_capability() = conflict capability from issuer
 #. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
 #. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:579
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "សម្គាល់ %s ថា អាច​លុប​បាន ដោយ​សារ​តែ​ការ​ប៉ះទង្គិចលើ %s"
 
 #. Translator: %s = name of package,patch
 #. TranslatorExample: from abc
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:569
+#: ../zypp/solver/detail/ResolverInfoMisc.cc:587
 #, c-format
 msgid "from %s"
 msgstr "ពី %s"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:194
+#: ../zypp/solver/detail/ResolverInfo.cc:195
 msgid " Error!"
 msgstr " កំហុស!"
 
-#: ../zypp/solver/detail/ResolverInfo.cc:195
+#: ../zypp/solver/detail/ResolverInfo.cc:196
 msgid " Important!"
 msgstr " សំខាន់!"
 
@@ -3428,9 +3439,8 @@ msgid "Make a solver run with ALL possibilities."
 msgstr "ធ្វើឲ្យ​អ្នក​ដោះស្រាយ​រត់​ជាមួយ​លទ្ធភាព​ទាំងអស់ ។"
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:51
-#, fuzzy
 msgid "Regarding all resolvables with a compatible architecture."
-msgstr "ចំពោះ​កញ្ចប់​ដំណោះស្រាយ​ទាំងអស់​ដែលមាន​ស្ថាបត្យកម្ម​ដែល​ឆបគ្នា ។"
+msgstr "ទាក់ទង​នឹង​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ទាំង​អស់​​ជា​មួយ​ស្ថាបត្យ​កម្ម​ដែល​ឆប​គ្នា ។"
 
 #. Translator: all.%s = name of package,patch,....
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -3456,8 +3466,8 @@ msgstr "%s ត្រូវ​បាន​ស្នើ​ដោយ %s"
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:72
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
 #, c-format
-msgid "%s is freshened by %s"
-msgstr "%s ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់​ដោយ %s"
+msgid "%s will be evaluated for installation (freshened) by %s"
+msgstr "%s នឹង​ត្រូវ​បាន​វាយ​តម្លៃ​សម្រាប់​កា​រដំឡើង (បាន​ធ្វើ​ឲ្យ​ស្រស់) ដោយ %s"
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
