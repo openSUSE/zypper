@@ -25,7 +25,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-
+#include "zypp/VendorAttr.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
@@ -221,7 +221,7 @@ struct RequireProcess
 	bool vendorFit = true;
 	if ( provider
 	     && upgrades
-	     && provider->vendor() != upgrades->vendor()) {
+	     && !VendorAttr::instance().equivalent(provider->vendor(), upgrades->vendor())) {
 	    // checking if there is already an ignore
 	    MIL << "provider " << provider << " has ANOTHER vendor '" << provider->vendor() << "' than the updated item "
 		<< upgrades << endl;
@@ -348,7 +348,7 @@ struct NoInstallableProviders
 	} else if (provider.status().isKept() && provider.status().isByUser()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_KEEP_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);	    
- 	} else	if (provider->vendor() != requirer->vendor()) {
+ 	} else	if (!VendorAttr::instance().equivalent(provider->vendor(), requirer->vendor())) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER,
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);

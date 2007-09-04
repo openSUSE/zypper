@@ -42,7 +42,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
-
+#include "zypp/VendorAttr.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResStatus.h"
@@ -213,7 +213,7 @@ struct FindProviders
     bool operator()( const CapAndItem & cai )
     {
 	PoolItem provider( cai.item );
-	if ( provider->vendor() != forItem->vendor() )
+	if ( !VendorAttr::instance().equivalent(provider->vendor(), forItem->vendor()) )
 	{
 	    MIL << "Discarding '" << provider << "' from vendor '"
 		<< provider->vendor() << "' different to uninstalled '"
@@ -361,7 +361,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	  continue;
 	}
 
-	if ( installed->vendor() != candidate->vendor() )
+	if ( !VendorAttr::instance().equivalent(installed->vendor(), candidate->vendor()) )
 	{
 	    MIL << "Discarding '" << candidate << "' from vendor '"
 		<< candidate->vendor() << "' different to uninstalled '"

@@ -27,7 +27,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-
+#include "zypp/VendorAttr.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
@@ -134,7 +134,7 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 
         if ( installed.resolvable() )
         {
-          if ( installed->vendor() != provider->vendor() )
+          if ( !VendorAttr::instance().equivalent(installed->vendor(),provider->vendor()) )
           {
             MIL << "Discarding '" << provider << "' from vendor '"
                 << provider->vendor() << "' different to uninstalled '"
