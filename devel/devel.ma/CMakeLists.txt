@@ -29,7 +29,7 @@ ADD_CUSTOM_TARGET( ma_test
 
 ## ############################################################
 
-FOREACH( loop_var ScanSource Iorder Xml Main)
+FOREACH( loop_var ScanSource Iorder Xml Main FakePool AOUT Parse Test Basic)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
@@ -38,15 +38,6 @@ FOREACH( loop_var ScanSource Iorder Xml Main)
    )
 ENDFOREACH( loop_var )
 
-
-FOREACH( loop_var AOUT Parse Test Basic)
-   ADD_EXECUTABLE( ${loop_var}
-      ${loop_var}.cc
-   )
-   TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp
-   )
-ENDFOREACH( loop_var )
 
 FOREACH( loop_var MaTest )
    ADD_EXECUTABLE( ${loop_var}
