@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep  4 12:09:10 CEST 2007 - schubi@suse.de
+
+- comparing vendor with VendorAttr::equivalent
+- revision 7103 
+
+-------------------------------------------------------------------
 Mon Sep  3 17:14:02 CEST 2007 - ma@suse.de
 
 - Reset transact bits when switching status from
