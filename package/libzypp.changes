@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Sep  5 17:52:37 CEST 2007 - schubi@suse.de
+
+- logging "reverse" NEEDED_BY in the detail description of solver
+  problems.
+- improved error message if a requiremnt is not fulfilled Bug 307743
+- Add "ignore" option to the solution if a requirement is not fulfilled
+  Bug 304276 
+- revision 7113
+
+-------------------------------------------------------------------
 Wed Sep  5 14:33:02 CEST 2007 - jkupec@suse.cz
 
 - fixed the order of operands of susetags local metadata status
