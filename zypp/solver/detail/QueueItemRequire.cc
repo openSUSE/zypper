@@ -615,7 +615,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		}
 
 		// now check if a provider supplements or enhances an installed or to-be-installed resolvable
-
 		if (hint_match( item->dep( Dep::SUPPLEMENTS ), pool() )
 		    || hint_match( item->dep( Dep::ENHANCES ), pool() ))
 		{

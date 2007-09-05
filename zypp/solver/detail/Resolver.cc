@@ -422,6 +422,13 @@ Resolver::addExtraCapability (const Capability & capability)
     _extra_caps.insert (capability);
 }
 
+void
+Resolver::removeExtraCapability (const Capability & capability)
+{
+    _extra_caps.erase (capability);
+}
+
+
 
 void
 Resolver::addExtraConflict (const Capability & capability)

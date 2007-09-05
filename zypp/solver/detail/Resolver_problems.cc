@@ -136,6 +136,16 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	collector->problems.insert (make_pair( item, info));
     } else {
 	collector->additionalInfo.insert (make_pair( item, info));
+
+	if (info->type()==RESOLVER_INFO_TYPE_NEEDED_BY) { // logging reverse needed by
+	    ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
+	    PoolItemList itemList = needed_by->items();
+	    for (PoolItemList::const_iterator iter = itemList.begin();
+		 iter != itemList.end(); ++iter)
+	    {
+		collector->additionalInfo.insert (make_pair( *iter, info));
+	    }
+	}
     }
 
     // Collicting items which are providing requirements but they
@@ -699,8 +709,13 @@ Resolver::problems (const bool ignoreValidSolution) const
 		    break;
 		case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
 		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		    // TranslatorExplanation %s = name of package, patch, selection ...				
-		    what = str::form (_("%s cannot be installed due to missing dependencies"), whoShort.c_str());		
+		    if (item.status().isInstalled()) {
+			// TranslatorExplanation %s = name of package, patch, selection ...				
+			what = str::form (_("%s has missing dependencies"), whoShort.c_str());
+		    } else {
+			// TranslatorExplanation %s = name of package, patch, selection ...
+			what = str::form (_("%s cannot be installed due to missing dependencies"), whoShort.c_str());			
+		    }
 		    details = misc_info->message() + "\n";
 		    details += logAdditionalInfo(collector.additionalInfo, item);				
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
@@ -947,6 +962,8 @@ Resolver::problems (const bool ignoreValidSolution) const
 			details += more_details;
 		    }
 		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    // ignore requirement
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, PoolItem_Ref(), misc_info->capability())); 
 		    problems.push_back (problem);
 		    problem_created = true;		
 		}

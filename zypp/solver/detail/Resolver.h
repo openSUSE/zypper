@@ -225,6 +225,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemToVerify (PoolItem_Ref item);
 
     void addExtraCapability (const Capability & capability);
+    void removeExtraCapability (const Capability & capability);
     void addExtraConflict (const Capability & capability);
 
     const CapSet extraCapability () { return _extra_caps; }

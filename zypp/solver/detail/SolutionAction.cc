@@ -181,8 +181,12 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    Dependencies dependencies = _item.resolvable()->deps();
-    CapSet depList = dependencies[Dep::CONFLICTS];    
+    Dependencies dependencies;
+    CapSet depList;
+    if (_item != PoolItem_Ref()) {    
+	dependencies = _item.resolvable()->deps();
+	depList = dependencies[Dep::CONFLICTS];
+    }
     switch (_kind) {
         case CONFLICTS:
 	    // removing conflict in both resolvables
@@ -221,7 +225,13 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    break;
         case REQUIRES:
 	    // removing the requires dependency from the item
-	    resolver.addIgnoreRequires (_item, _capability);
+	    if (_item == PoolItem_Ref()) {
+		// this was a requirement via Resolver::addExtraCapability
+		// so we have to delete it.
+		resolver.removeExtraCapability (_capability);
+	    } else {
+		resolver.addIgnoreRequires (_item, _capability);
+	    }
 	    break;
         case ARCHITECTURE:
 	    // This item is for ALL architectures available
