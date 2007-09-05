@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Sep  5 14:33:02 CEST 2007 - jkupec@suse.cz
+
+- fixed the order of operands of susetags local metadata status
+  computation which caused the YaST repositories to always get
+  refreshed (part of bug #304310)
+- revision 7107
+
+-------------------------------------------------------------------
 Tue Sep  4 12:09:10 CEST 2007 - schubi@suse.de
 
 - comparing vendor with VendorAttr::equivalent
