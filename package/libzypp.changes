@@ -14,6 +14,11 @@ Tue Sep  4 12:09:10 CEST 2007 - schubi@suse.de
 - revision 7103 
 
 -------------------------------------------------------------------
+Mon Sep  3 18:43:51 CEST 2007 - schwab@suse.de
+
+- Use $RPM_OPT_FLAGS.
+
+-------------------------------------------------------------------
 Mon Sep  3 17:14:02 CEST 2007 - ma@suse.de
 
 - Reset transact bits when switching status from

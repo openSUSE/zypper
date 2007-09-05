@@ -1,7 +1,7 @@
 #
 # spec file for package libzypp
 #
-# Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2007 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
 # package are under the same license as the package itself.
 #
@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-License:        GPL
+License:        GPL v2 or later
 Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
@@ -75,12 +75,12 @@ mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DLIB=%{_lib} \
-      -DCMAKE_C_FLAGS="%{optflags}" \
-      -DCMAKE_CXX_FLAGS="%{optflags}" \
+      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
+      -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       ..
-make %{?jobs:-j %jobs}
+make %{?jobs:-j %jobs} VERBOSE=1
 make -C doc/autodoc %{?jobs:-j %jobs}
 make -C po %{?jobs:-j %jobs} translations
 
