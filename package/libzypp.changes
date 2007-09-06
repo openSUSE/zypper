@@ -3,6 +3,8 @@ Wed Sep  6 02:24:37 CEST 2007 - dmacvicar@suse.de
 
 - Fix for bug #307163 - empty package descriptions
   a.k.a shared tag not 100% implemented
+- r 7117
+- version 3.22.3
 
 -------------------------------------------------------------------
 Wed Sep  5 17:52:37 CEST 2007 - schubi@suse.de
