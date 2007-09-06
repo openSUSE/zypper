@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep  6 18:22:36 CEST 2007 - schubi@suse.de
+
+- Error: Select two candidate with the same name while update.
+  Solution: If there is a candidate which is already selected for installation -->
+  take thatone #308082
+- r 7132
+
+-------------------------------------------------------------------
 Thu Sep  6 14:11:58 CEST 2007 - ma@suse.de
 
 - Work arround installed patterns providing an empty vendor string. (#307743)
