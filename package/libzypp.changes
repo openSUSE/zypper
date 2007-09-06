@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep  6 02:24:37 CEST 2007 - dmacvicar@suse.de
+
+- Fix for bug #307163 - empty package descriptions
+  a.k.a shared tag not 100% implemented
+
+-------------------------------------------------------------------
 Wed Sep  5 17:52:37 CEST 2007 - schubi@suse.de
 
 - logging "reverse" NEEDED_BY in the detail description of solver
