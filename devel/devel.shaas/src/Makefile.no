@@ -8,7 +8,7 @@ CXXFLAGS      = -pipe -O2 -Wall -W -fpic -D_REENTRANT  $(DEFINES)
 INCPATH       = -I/usr/include -I. -I. -I.
 LINK          = g++
 LFLAGS        = -shared -lmysqlclient
-LIBS          = $(SUBLIBS)  -L/usr/local/lib
+LIBS          = $(SUBLIBS)  -L/usr/lib
 
 ####### Output directory
 
@@ -18,7 +18,7 @@ OBJECTS_DIR   = ./
 
 SOURCES       = db.cc resolvable.h pdbtozypp.cc 
 OBJECTS       = db.o pdbtozypp.o
-OBJCOMP		  = /usr/local/lib/libzypp.so 
+OBJCOMP		  = /usr/lib/libzypp.so 
 DESTDIR       = 
 TARGET        = libpdbtozypp.so
 
@@ -44,10 +44,13 @@ first: all
 
 ####### Build rules
 
-all: Makefile $(TARGET)
+all: Makefile.no $(TARGET)
 
 $(TARGET):  $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
+
+swig:
+	swig -c++ -perl5 PdbToZypp.i
 
 install: 
 	install --mode=644 db.h /usr/include/pdbtozypp/

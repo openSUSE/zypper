@@ -11,9 +11,12 @@
 
 class PdbToZypp{
 	public:
-      typedef zypp::ResStore ResStore;
+      //typedef zypp::ResStore ResStore;
+		//PdbToZypp(zypp::ResStore  & _store);
 		PdbToZypp();
-		ResStore& getStore();
+      ~PdbToZypp();
+      void readOut();
+      zypp::ResStore getStore();
    private:
-      ResStore *store;
+      zypp::ResStore store;
 };

@@ -5,11 +5,19 @@ using namespace zypp;
 
 //Constructor
 PdbToZypp::PdbToZypp(){
+   //store = _store;
+}
 
-   store = new ResStore;
+PdbToZypp::~PdbToZypp(){
 
-	database *dbDeps = new database("lorien.suse.de", "rpmread", "***", "rpm");
-	database *dbPackages = new database("lorien.suse.de", "rpmread", "***", "package");
+}
+
+void PdbToZypp::readOut(){
+
+   //store = new ResStore;
+
+	database *dbDeps = new database("lorien.suse.de", "rpmread", "rrrrrrr", "rpm");
+	database *dbPackages = new database("lorien.suse.de", "rpmread", "rrrrrrr", "package");
 
 	if(dbPackages->connect() != 1){
 		//std::cout << "NO DB CONNECTION!!!\n";
@@ -21,7 +29,8 @@ PdbToZypp::PdbToZypp(){
 		//return 1;
 	}
 
-	dbPackages->sqlexecute("SELECT PackID, PackNameShort, PackStatus FROM Packages WHERE CDReleaseID = 10 AND PackStatus IN (0, 6, 7, 8) AND BasedOnID IS NULL");
+	//dbPackages->sqlexecute("SELECT PackID, PackNameShort, PackStatus FROM Packages WHERE CDReleaseID = 10 AND PackStatus IN (0, 6, 7, 8) AND BasedOnID IS NULL");
+	dbPackages->sqlexecute("SELECT PackID, PackNameShort, PackStatus FROM Packages WHERE CDReleaseID IN (10, 64) AND PackStatus IN (0, 6, 7, 8) OR PackStatus IS NULL AND BasedOnID IS NULL");
 
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 
@@ -74,7 +83,22 @@ PdbToZypp::PdbToZypp(){
 				for(unsigned int l = 0; l < tempVec.size(); l++)
 					packDeps.push_back(tempVec.at(l));
 
+            sqlcom = "SELECT name, DirID FROM PackFilelist WHERE DirID IN(1, 22, 24, 96, 178, 756, 1981) AND BinPackID=";
+            sqlcom.append(binPack[k].at(0));
+            dbDeps->sqlexecute(sqlcom);
+            tempVec = dbDeps->getResult();
 
+            for(unsigned int m = 0; m < tempVec.size(); m++){
+               sqlcom = "SELECT dir FROM PackFileDirs WHERE DirID=";
+               sqlcom.append(tempVec[m].at(1));
+               dbDeps->sqlexecute(sqlcom);
+               std::vector< std::vector<string> > tempVec2 = dbDeps->getResult();
+               for(unsigned int n = 0; n < tempVec2.size(); n++){
+                  string fileprov = tempVec2[n].at(0) + "/" + tempVec[m].at(0);
+                  prov.insert(factory.parse(kind, fileprov, Rel::ANY, Edition("")));
+               }
+
+            }
 			}
 
 			for(unsigned int y = 0; y < packDeps.size(); y++){
@@ -168,7 +192,7 @@ PdbToZypp::PdbToZypp(){
 			}
 		}*/
 
-		store->insert(p);
+		store.insert(p);
 	}
 
 	dbDeps->close();
@@ -176,6 +200,6 @@ PdbToZypp::PdbToZypp(){
 
 }
 
-ResStore& PdbToZypp::getStore(){
-	return *store;
+ResStore PdbToZypp::getStore(){
+	return store;
 }
