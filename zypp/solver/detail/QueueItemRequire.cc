@@ -348,7 +348,9 @@ struct NoInstallableProviders
 	} else if (provider.status().isKept() && provider.status().isByUser()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_KEEP_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);	    
- 	} else	if (!VendorAttr::instance().equivalent(provider->vendor(), requirer->vendor())) {
+ 	} else	if (provider
+		    && requirer
+		    && !VendorAttr::instance().equivalent(provider->vendor(), requirer->vendor())) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER,
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
