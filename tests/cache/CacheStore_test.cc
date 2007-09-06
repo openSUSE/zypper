@@ -387,6 +387,41 @@ void cache_write_susetags(const Pathname &repodir)
   check_tables_clean(tmpdir);
 }
 
+/**
+ * \short Test that a susetags repo reads shared attributes
+ */
+void cache_write_shared_attributes(const Pathname &repodir)
+{
+  ZConfig::instance().overrideSystemArchitecture( Arch( "x86_64" ) );
+  data::RecordId repository_id;
+  filesystem::TmpDir tmpdir;
+  string alias = "novell.com";
+  write_susetags_repo( alias, repodir, tmpdir );
+
+  ResStore dbres = get_resolvables( alias, tmpdir);;
+  //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
+  MIL << dbres.size() << " resolvables" << endl;
+
+  // 2 packages and a product
+  BOOST_CHECK_EQUAL( dbres.size(), (unsigned)3);
+  
+  for ( ResStore::const_iterator it = dbres.begin();
+        it != dbres.end();
+        ++it )
+  {
+    MIL << *it << endl;
+    if ( isKind<Package>(*it) )
+    {
+      Package::Ptr p = asKind<Package>(*it);
+      if ( (p->name() == "foo") && p->arch() == Arch("x86_64") )
+      {
+        BOOST_CHECK_EQUAL( p->description(), "foo bar");
+      }
+    }
+  }
+  check_tables_clean(tmpdir);
+}
+
 void cache_write_susetags_normal_test(const std::string &dir)
 {
   Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset";
@@ -397,6 +432,12 @@ void cache_write_susetags_gz_test(const std::string &dir)
 {
   Pathname repodir = Pathname(dir) + "/repo/susetags/data/stable-x86-subset-gz";
   cache_write_susetags(repodir);
+}
+
+void cache_write_shared_attributes_test(const std::string &dir)
+{
+  Pathname repodir = Pathname(dir) + "/repo/susetags/data/shared_attributes";
+  cache_write_shared_attributes(repodir);
 }
 
 test_suite*
@@ -437,8 +478,8 @@ init_unit_test_suite( int argc, char *argv[] )
                                  (std::string const*)params, params+1));
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
                                  (std::string const*)params, params+1));
-  //test->add(BOOST_PARAM_TEST_CASE(&cache_write_test2,
-  //                               (std::string const*)params, params+1));
+  test->add(BOOST_PARAM_TEST_CASE(&cache_write_shared_attributes_test,
+                                 (std::string const*)params, params+1));
   return test;
 }
 

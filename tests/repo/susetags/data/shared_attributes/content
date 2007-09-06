@@ -1,0 +1,30 @@
+PRODUCT openSUSE-factory
+VERSION 10.3
+DISTPRODUCT SuSE-Linux-STABLE-X86
+DISTVERSION 10.2.42-factory
+VENDOR SUSE LINUX Products GmbH, Nuernberg, Germany
+RELNOTESURL http://www.suse.com/relnotes/i386/openSUSE/FACTORY/release-notes.rpm
+ARCH.x86_64 x86_64 i686 i586 i486 i386 noarch
+ARCH.i686 i686 i586 i486 i386 noarch
+ARCH.i586 i586 i486 i386 noarch
+ARCH.i486 i486 i386 noarch
+ARCH.i386 i386 noarch
+DEFAULTBASE i586
+REQUIRES openSUSE-release = 10.3 pattern:basesystem
+PROVIDES product:openSUSE = 10.2.42
+OBSOLETES product:SUSE_LINUX product:openSUSE <= 10.2
+LINGUAS cs da de en en_GB es fi fr hu it ja km nl nb pl pt_BR zh_CN zh_TW
+SHORTLABEL FACTORY
+LABEL openSUSE FACTORY 10.3
+LABEL.de openSUSE FACTORY 10.3
+EXTRAURLS http://download.opensuse.org/distribution/10.2/repo/oss/
+OPTIONALURLS http://download.opensuse.org/distribution/10.2/repo/non-oss/ http://download.opensuse.org/distribution/10.2/repo/debug/
+DESCRDIR suse/setup/descr
+DATADIR suse
+FLAGS update
+LANGUAGE en_US
+META SHA1 cec02abacb62fce2964a787d516879822691be6e  packages
+META SHA1 2664997a3bae2679cf1395a81d54a7dd4532c276  packages.DU
+META SHA1 1c539c3fe4a8ec5fbe96ce3b559fc952124f9acd  packages.en
+
+

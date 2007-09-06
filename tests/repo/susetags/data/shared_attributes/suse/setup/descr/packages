@@ -1,0 +1,32 @@
+##----------------------------------------
+=Pkg: foo 1.0 1 i586
+=Cks: SHA1 05f0647241433d01636785fd282cc824a6527269
++Req:
+bar > 1.0
+-Req:
+=Grp: Bar
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: foo 1.0 1 src
+=Tim: 1183399094
+=Loc: 1 foo-1.0-1.i586.rpm
+=Siz: 16356019 38850584
++Aut:
+Foo Bar <foo@bar.org>
+-Aut:
+##----------------------------------------
+=Pkg: foo 1.0 1 x86_64
+=Cks: SHA1 05f0647241433d01636785fd282cc824a6527269
++Req:
+bar > 1.0
+-Req:
+=Grp: Bar
+=Lic: BSD License and BSD-like, GNU General Public License (GPL)
+=Src: foo 1.0 1 src
+=Tim: 1183399094
+=Loc: 1 foo-1.0-1.x86_64.rpm
+=Siz: 16356019 38850584
++Aut:
+Foo Bar <foo@bar.org>
+-Aut:
+=Shr: foo 1.0 1 i586
+
