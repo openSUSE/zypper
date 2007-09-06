@@ -226,13 +226,27 @@ struct FindProviders
 	    FindMap::iterator it = providers.find( provider->name() );
 
 	    if (it != providers.end()) {				// provider with same name found
-		int cmp = it->second->arch().compare( provider->arch() );
-		if (cmp < 0) {						// new provider has better arch
-		    it->second = provider;
-		}
-		else if (cmp == 0) {					// new provider has equal arch
-		    if (it->second->edition().compare( provider->edition() ) < 0) {
-			it->second = provider;				// new provider has better edition
+		if (provider.status().isToBeInstalled()
+		    || it->second.status().isToBeInstalled()) {
+
+		    if (provider.status().isToBeInstalled()
+			&& it->second.status().isToBeInstalled()) {
+			ERR << "only one should be set for installation: " << it->second << "; " << provider << endl;
+		    } else {
+			if (provider.status().isToBeInstalled()) {
+			    it->second = provider; // take thatone which is already set for installation
+			}
+		    }
+		} else {
+		    // not the same --> find better provider
+		    int cmp = it->second->arch().compare( provider->arch() );
+		    if (cmp < 0) {						// new provider has better arch
+			it->second = provider;
+		    }
+		    else if (cmp == 0) {					// new provider has equal arch
+			if (it->second->edition().compare( provider->edition() ) < 0) {
+			    it->second = provider;				// new provider has better edition
+			}
 		    }
 		}
 	    }
