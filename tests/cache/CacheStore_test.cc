@@ -415,7 +415,11 @@ void cache_write_shared_attributes(const Pathname &repodir)
       Package::Ptr p = asKind<Package>(*it);
       if ( (p->name() == "foo") && p->arch() == Arch("x86_64") )
       {
-        BOOST_CHECK_EQUAL( p->description(), "foo bar");
+        BOOST_CHECK_EQUAL( p->description(), "This is the description");
+      }
+      if ( (p->name() == "foo") && p->arch() == Arch("i586") )
+      {
+        BOOST_CHECK_EQUAL( p->description(), "This is the description");
       }
     }
   }

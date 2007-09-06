@@ -2,7 +2,6 @@
 =Pkg: foo 1.0 1 i586
 =Sum: Foo program
 +Des:
-<!-- DT:Rich -->
-<p>This package contains foo</p>
+This is the description
 -Des:
 ##----------------------------------------

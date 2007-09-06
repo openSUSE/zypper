@@ -275,7 +275,7 @@ RecordId CacheStore::consumePackage( const RecordId & repository_id,
 				     const data::Package_Ptr & package )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Package>::kind,
-      NVRA( package->name, package->edition, package->arch ), package->deps );
+      NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
   appendResObjectAttributes( id, package );
   appendPackageBaseAttributes( id, package );
 
@@ -292,7 +292,7 @@ RecordId CacheStore::consumeSourcePackage( const data::RecordId & repository_id,
                                        const data::SrcPackage_Ptr & package )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
-      NVRA( package->name, package->edition, package->arch ), package->deps );
+      NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
   appendResObjectAttributes( id, package );
 
   appendOnMediaLocation( id, attrSrcPackageLocation, package->repositoryLocation );

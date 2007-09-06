@@ -25,6 +25,7 @@ struct ResolvableQuery::Impl
   sqlite3_command_ptr _cmd_attr_tstr;
   sqlite3_command_ptr _cmd_attr_num;
   sqlite3_command_ptr _cmd_disk_usage;
+  sqlite3_command_ptr _cmd_shared_id;
 
   Impl( const Pathname &dbdir)
   : _dbdir(dbdir)
@@ -32,6 +33,8 @@ struct ResolvableQuery::Impl
   {
     _con.open((dbdir + "zypp.db").asString().c_str());
     _con.executenonquery("PRAGMA cache_size=8000;");
+
+    _cmd_shared_id.reset( new sqlite3_command( _con, "select shared_id from resolvables where id=:rid;") );
 
     _cmd_attr_tstr.reset( new sqlite3_command( _con, "select a.text, l.name from text_attributes a,types l,types t where a.weak_resolvable_id=:rid and a.lang_id=l.id and a.attr_id=t.id and l.class=:lclass and t.class=:tclass and t.name=:tname;") );
 
@@ -322,6 +325,18 @@ private:
     sqlite3_reader reader = _cmd_attr_num->executereader();
     if ( reader.read() )
       return reader.getint(0);
+    else
+    {
+      reader.close();
+      sqlite3_reader idreader = _cmd_shared_id->executereader();
+      if ( idreader.read() )
+      {
+        _cmd_shared_id->bind(":rid", record_id);
+        data::RecordId sid = idreader.getint(0);
+        idreader.close();
+        return queryNumericAttributeInternal(con, sid, klass, name, default_value);
+      }
+    }
 
     return default_value;
   }
@@ -353,7 +368,19 @@ private:
 
     if ( c>0 )
       return result;
-    
+    else
+    {
+      reader.close();
+      _cmd_shared_id->bind(":rid", record_id);
+      sqlite3_reader idreader = _cmd_shared_id->executereader();
+      if ( idreader.read() )
+      {
+        data::RecordId sid = idreader.getint(0);
+        idreader.close();
+        return queryTranslatedStringAttributeInternal(con, sid, klass, name, default_value);
+      }
+    }
+
     return default_value;
   }
 
@@ -388,7 +415,19 @@ private:
     
     if ( reader.read() )
       return reader.getstring(0);
-    
+    else
+    {
+      reader.close();
+      _cmd_shared_id->bind(":rid", record_id);
+      sqlite3_reader idreader = _cmd_shared_id->executereader();
+      if ( idreader.read() )
+      {
+        data::RecordId sid = idreader.getint(0);
+        idreader.close();
+        return queryStringAttributeTranslationInternal( con, sid, locale, klass, name, default_value );
+      }
+    }
+
     return default_value;
   }
 };
