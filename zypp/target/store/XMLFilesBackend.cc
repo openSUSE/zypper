@@ -791,6 +791,7 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -883,6 +884,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -920,6 +922,7 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -961,6 +964,7 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -1020,6 +1024,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -1173,6 +1178,7 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
@@ -1188,6 +1194,13 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
+
+    // Workaround for bug #307743:
+    // Hijack installed patterns with empty vendor.
+    if ( impl->_vendor.empty() )
+    {
+      impl->_vendor = "SUSE (assumed)";
+    }
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies( parsed, ResTraits<Pattern>::kind));
@@ -1217,6 +1230,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     impl->_install_notify = parsed.install_notify;
     impl->_delete_notify = parsed.delete_notify;
     impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_vendor = parsed.vendor;
     impl->_size = parsed.size;
     impl->_downloadSize = parsed.downloadSize;
     impl->_install_only = parsed.install_only;
