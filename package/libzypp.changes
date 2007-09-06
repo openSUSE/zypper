@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep  6 12:33:27 CEST 2007 - schubi@suse.de
+
+- Checking item before evaluating the concerning vendor. bug #307941
+- r 7119 
+
+-------------------------------------------------------------------
 Wed Sep  6 02:24:37 CEST 2007 - dmacvicar@suse.de
 
 - Fix for bug #307163 - empty package descriptions
