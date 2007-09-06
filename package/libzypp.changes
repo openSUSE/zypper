@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Thu Sep  6 14:11:58 CEST 2007 - ma@suse.de
+
+- Work arround installed patterns providing an empty vendor string. (#307743)
+- Let the solver treat vendor suse and opensuse as equivalent.
+- version 3.22.4
+
+-------------------------------------------------------------------
 Thu Sep  6 12:33:27 CEST 2007 - schubi@suse.de
 
 - Checking item before evaluating the concerning vendor. bug #307941
-- r 7119 
+- r 7119
 
 -------------------------------------------------------------------
 Wed Sep  6 02:24:37 CEST 2007 - dmacvicar@suse.de
@@ -19,7 +26,7 @@ Wed Sep  5 17:52:37 CEST 2007 - schubi@suse.de
   problems.
 - improved error message if a requiremnt is not fulfilled Bug 307743
 - Add "ignore" option to the solution if a requirement is not fulfilled
-  Bug 304276 
+  Bug 304276
 - revision 7113
 
 -------------------------------------------------------------------
@@ -35,7 +42,7 @@ Wed Sep  5 14:33:02 CEST 2007 - jkupec@suse.cz
 Tue Sep  4 12:09:10 CEST 2007 - schubi@suse.de
 
 - comparing vendor with VendorAttr::equivalent
-- revision 7103 
+- revision 7103
 
 -------------------------------------------------------------------
 Mon Sep  3 18:43:51 CEST 2007 - schwab@suse.de

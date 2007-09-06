@@ -54,8 +54,8 @@ struct Xprint
   {
     //handle( asKind<Package>( obj_r ) );
     //handle( asKind<Patch>( obj_r ) );
-    //handle( asKind<Pattern>( obj_r ) );
-    //handle( asKind<Product>( obj_r ) );
+    handle( asKind<Pattern>( obj_r ) );
+    handle( asKind<Product>( obj_r ) );
     return true;
   }
 
@@ -71,11 +71,6 @@ struct Xprint
   {
     if ( !p )
       return;
-
-    ui::PatchContents pc( p );
-    MIL << p << endl;
-    dumpRange( DBG << pc.size() << endl,
-               pc.begin(), pc.end() );
   }
 
   void handle( const Pattern_constPtr & p )
@@ -83,7 +78,10 @@ struct Xprint
     if ( !p )
       return;
 
-    MIL << p << endl;
+    if ( p->vendor().empty() )
+      ERR << p << endl;
+    else if ( p->vendor() == "SUSE (assumed)" )
+      SEC << p << endl;
   }
 
   void handle( const Product_constPtr & p )
@@ -91,8 +89,9 @@ struct Xprint
     if ( !p )
       return;
 
-    ERR << p << endl;
-    ERR << p->type() << endl;
+    USR << p << endl;
+    USR << p->vendor() << endl;
+    USR << p->type() << endl;
   }
 
   template<class _C>
@@ -329,6 +328,11 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
 
+  void Vtst( const std::string & lhs, const std::string & rhs )
+  {
+    (VendorAttr::instance().equivalent( lhs, rhs )?MIL:ERR) << lhs << " <==> "<< rhs << endl;
+
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
@@ -347,12 +351,23 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
   setenv( "ZYPP_CONF", "/Local/ROOT/zypp.conf", 1 );
 
-  std::string t( "ABCD" );
-  MIL << str::toLower(t.substr(0,3)) << endl;
-  MIL << str::toLower(t.substr(0,4)) << endl;
-  MIL << str::toLower(t.substr(0,5)) << endl;
-  throw;
-
+  Vtst( "", "" );
+  Vtst( "", "a" );
+  Vtst( "", "suse lkgjhdl" );
+  Vtst( "", "opensuse" );
+  Vtst( "a", "" );
+  Vtst( "a", "a" );
+  Vtst( "a", "suse lkgjhdl" );
+  Vtst( "a", "opensuse" );
+  Vtst( "suse", "" );
+  Vtst( "suse", "a" );
+  Vtst( "suse", "suse lkgjhdl" );
+  Vtst( "suse", "opensuse" );
+  Vtst( "opensuse fdhgdd", "" );
+  Vtst( "opensuse fdhgdd", "a" );
+  Vtst( "opensuse fdhgdd", "suse lkgjhdl" );
+  Vtst( "opensuse fdhgdd", "opensuse" );
+ throw;
   DigestReceive foo;
   KeyRingSignalsReceive baa;
 
@@ -419,19 +434,11 @@ int main( int argc, char * argv[] )
   {
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
+      //getZYpp()->initTarget( sysRoot );
+      getZYpp()->initTarget( "/" );
     }
     MIL << "Added target: " << pool << endl;
   }
-
-  INT << getZYpp()->diskUsage() << endl;
-
-  {
-    Measure x("SHUTDOWN");
-    getZYpp()->removeResolvables( getZYpp()->target()->resolvables() );
-    getZYpp()->target()->reset();
-  }
-
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
 
