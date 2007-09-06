@@ -147,18 +147,27 @@ namespace zypp
   bool VendorAttr::autoProtect( const Vendor & vendor_r ) const
   { return( ZConfig::instance().autolock_untrustedvendor() && ! trusted( vendor_r ) ); }
 
+  /** Helper: Lowercase prefix */
+  inline bool hasLcPrefix( const std::string & str_r, const std::string & pref_r )
+  { return str::toLower( str_r.substr( 0, pref_r.size() ) ) == pref_r; }
+
+  /** Helper: SuSE and equivalent vendors */
+  inline bool isSUSE( const Vendor & vnd_r )
+  {
+    static const std::string defSUSE    ( "suse" );
+    static const std::string defopenSUSE( "opensuse" );
+
+    return(    hasLcPrefix( vnd_r, defSUSE )
+            || hasLcPrefix( vnd_r, defopenSUSE ) );
+  }
+
   bool VendorAttr::equivalent( const Vendor & lhs, const Vendor & rhs ) const
   {
-    static const std::string defSUSE( "suse" );
-
-    if ( lhs == rhs )
+   if ( lhs == rhs )
       return true;
+
     // By now handcrafted equivalence definition:
-    if (    str::toLower( lhs.substr( 0, 4 ) ) == defSUSE
-         && str::toLower( rhs.substr( 0, 4 ) ) == defSUSE )
-      return true;
-
-    return false;
+    return( isSUSE( lhs ) && isSUSE( rhs ) );
   }
 
   /////////////////////////////////////////////////////////////////
