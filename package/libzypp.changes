@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep  7 13:03:48 CEST 2007 - schubi@suse.de
+
+- RequirementIsMet: return true only if ALL Atoms are NOT incomplete; Bug
+  308252
+- r 7143 
+
+-------------------------------------------------------------------
 Thu Sep  6 18:22:36 CEST 2007 - schubi@suse.de
 
 - Error: Select two candidate with the same name while update.
