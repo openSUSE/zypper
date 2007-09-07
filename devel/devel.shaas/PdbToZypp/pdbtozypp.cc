@@ -16,8 +16,8 @@ void PdbToZypp::readOut(){
 
    //store = new ResStore;
 
-	database *dbDeps = new database("lorien.suse.de", "rpmread", "rrrrrrr", "rpm");
-	database *dbPackages = new database("lorien.suse.de", "rpmread", "rrrrrrr", "package");
+	database *dbDeps = new database("lorien.suse.de", "rpmread", "Salahm1", "rpm");
+	database *dbPackages = new database("lorien.suse.de", "rpmread", "Salahm1", "package");
 
 	if(dbPackages->connect() != 1){
 		//std::cout << "NO DB CONNECTION!!!\n";

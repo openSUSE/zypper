@@ -8,7 +8,7 @@ CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT  $(DEFINES)
 INCPATH       = -I/usr/include -I. -I. -I.
 LINK          = g++
 LFLAGS        = -lpdbtozypp
-LIBS          = $(SUBLIBS)  -L/usr/local/lib
+LIBS          = $(SUBLIBS)  -L/usr/lib
 
 ####### Output directory
 
