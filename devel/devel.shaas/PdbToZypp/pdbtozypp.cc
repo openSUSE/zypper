@@ -192,12 +192,12 @@ int PdbToZypp::readOut(){
 		}*/
 
 		store.insert(p);
-      return 1;
 	}
 
 	dbDeps->close();
 	dbPackages->close();
 
+   return 1;
 }
 
 ResStore PdbToZypp::getStore(){
