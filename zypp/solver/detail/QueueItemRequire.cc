@@ -224,7 +224,7 @@ struct RequireProcess
 	     && !VendorAttr::instance().equivalent(provider->vendor(), upgrades->vendor())) {
 	    // checking if there is already an ignore
 	    MIL << "provider " << provider << " has ANOTHER vendor '" << provider->vendor() << "' than the updated item "
-		<< upgrades << endl;
+		<< upgrades << "(vendor: " << upgrades->vendor() << ")" <<  endl;
 	    PoolItemList ignore = _context->getIgnoreVendorItem();
 	    PoolItemList::iterator it;
 	    for (it = ignore.begin(); it != ignore.end(); ++it) {
