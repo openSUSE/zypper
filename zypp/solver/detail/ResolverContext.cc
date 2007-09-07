@@ -1507,6 +1507,7 @@ struct RequirementMet
     const PoolItem_Ref whoNeeds;
     const Dep cap;
     const bool installInfoFlag;
+    bool allAtomsSatisfied;
 
     RequirementMet (ResolverContext_Ptr ctx, bool *inst, const PoolItem_Ref who, const Dep & capKind, const bool instFlag)
 	: context (ctx)
@@ -1516,6 +1517,7 @@ struct RequirementMet
 	, whoNeeds( who )
 	, cap( capKind )
 	, installInfoFlag( instFlag )
+	, allAtomsSatisfied(true)
     { }
 
 
@@ -1548,13 +1550,18 @@ struct RequirementMet
 	    }
 	    info->setCapability (match, cap);
 	    context->addInfo (info);	    
+	} else {
+	    if (isKind<Atom>(provider.resolvable()) ) {
+		allAtomsSatisfied = false;
+	    }
 	}
 
 //	ERR << "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
 //	  capability << "] -> " <<  (flag ? "true" : "false") << endl;
 	
-	if ( installed // Checking as long as we have found an installed item
-	     && !*installed )
+	if ( (installed // Checking as long as we have found an installed item
+	      && !*installed)
+	     || isKind<Atom>(provider.resolvable())) // checking all Atoms
 	    return true;
 	
 	return ! flag;
@@ -1584,7 +1591,7 @@ ResolverContext::requirementIsMet (const Capability & capability,
 _XDEBUG( "ResolverContext::requirementIsMet(" << capability << ") " << (info.flag?"Y":"N") );
     if (unneeded) *unneeded = info.unneeded;
 
-    return info.flag;
+    return info.flag && info.allAtomsSatisfied;
 }
 
 //---------------------------------------------------------------------------
