@@ -11,7 +11,7 @@ class PdbToZypp{
 		//PdbToZypp(zypp::ResStore  & _store);
 		PdbToZypp();
       ~PdbToZypp();
-      void readOut();
+      int readOut();
       ResStore getStore();
    private:
       ResStore store;

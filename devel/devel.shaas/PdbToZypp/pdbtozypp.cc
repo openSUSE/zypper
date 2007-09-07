@@ -12,7 +12,7 @@ PdbToZypp::~PdbToZypp(){
 
 }
 
-void PdbToZypp::readOut(){
+int PdbToZypp::readOut(){
 
    //store = new ResStore;
 
@@ -20,16 +20,15 @@ void PdbToZypp::readOut(){
 	database *dbPackages = new database("lorien.suse.de", "rpmread", "rrrrrrr", "package");
 
 	if(dbPackages->connect() != 1){
-		//std::cout << "NO DB CONNECTION!!!\n";
-		//return 1;
+		std::cout << "NO DB CONNECTION!!!\n";
+		return 0;
 	}
 
 	if(dbDeps->connect() != 1){
-		//std::cout << "NO DB CONNECTION!!!\n";
-		//return 1;
+		std::cout << "NO DB CONNECTION!!!\n";
+		return 0;
 	}
 
-	//dbPackages->sqlexecute("SELECT PackID, PackNameShort, PackStatus FROM Packages WHERE CDReleaseID = 10 AND PackStatus IN (0, 6, 7, 8) AND BasedOnID IS NULL");
 	dbPackages->sqlexecute("SELECT PackID, PackNameShort, PackStatus FROM Packages WHERE CDReleaseID IN (10, 64) AND PackStatus IN (0, 6, 7, 8) OR PackStatus IS NULL AND BasedOnID IS NULL");
 
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
@@ -193,6 +192,7 @@ void PdbToZypp::readOut(){
 		}*/
 
 		store.insert(p);
+      return 1;
 	}
 
 	dbDeps->close();
