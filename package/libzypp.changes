@@ -4,6 +4,7 @@ Fri Sep  7 13:27:26 CEST 2007 - ma@suse.de
 - Install a sample /etc/zypp.conf. (#306615)
 - Fixed missing soversion symlink in package.
 - version 3.22.5
+- revision 7150
 
 -------------------------------------------------------------------
 Fri Sep  7 13:03:48 CEST 2007 - schubi@suse.de
