@@ -1143,6 +1143,7 @@ SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
 
 ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
 SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
+SET_TARGET_PROPERTIES( zypp PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
 ADD_DEPENDENCIES(zypp schema_header)
 # System libraries
 TARGET_LINK_LIBRARIES(zypp boost_filesystem util )

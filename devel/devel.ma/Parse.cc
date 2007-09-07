@@ -351,23 +351,6 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
   setenv( "ZYPP_CONF", "/Local/ROOT/zypp.conf", 1 );
 
-  Vtst( "", "" );
-  Vtst( "", "a" );
-  Vtst( "", "suse lkgjhdl" );
-  Vtst( "", "opensuse" );
-  Vtst( "a", "" );
-  Vtst( "a", "a" );
-  Vtst( "a", "suse lkgjhdl" );
-  Vtst( "a", "opensuse" );
-  Vtst( "suse", "" );
-  Vtst( "suse", "a" );
-  Vtst( "suse", "suse lkgjhdl" );
-  Vtst( "suse", "opensuse" );
-  Vtst( "opensuse fdhgdd", "" );
-  Vtst( "opensuse fdhgdd", "a" );
-  Vtst( "opensuse fdhgdd", "suse lkgjhdl" );
-  Vtst( "opensuse fdhgdd", "opensuse" );
- throw;
   DigestReceive foo;
   KeyRingSignalsReceive baa;
 

@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Fri Sep  7 13:27:26 CEST 2007 - ma@suse.de
+
+- Install a sample /etc/zypp.conf. (#306615)
+- Fixed missing soversion symlink in package.
+- version 3.22.5
+
+-------------------------------------------------------------------
 Fri Sep  7 13:03:48 CEST 2007 - schubi@suse.de
 
 - RequirementIsMet: return true only if ALL Atoms are NOT incomplete; Bug
   308252
-- r 7143 
+- r 7143
 
 -------------------------------------------------------------------
 Thu Sep  6 18:22:36 CEST 2007 - schubi@suse.de

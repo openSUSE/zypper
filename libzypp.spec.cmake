@@ -90,9 +90,10 @@ make -C po %{?jobs:-j %jobs} translations
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
 %suse_update_desktop_file -G "" -C "" package-manager
 make -C po install DESTDIR=$RPM_BUILD_ROOT
-# Create filelist with translatins
+# Create filelist with translations
 cd ..
 %{find_lang} zypp
 
@@ -108,13 +109,16 @@ cd ..
 
 %files -f zypp.lang
 %defattr(-,root,root)
+%dir               /etc/zypp
+%dir               /etc/zypp/repos.d
+%config(noreplace) /etc/zypp/zypp.conf
 %{prefix}/lib/zypp
 %{prefix}/share/zypp
-%{_libdir}/libzypp*so.*
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/pixmaps/package-manager-icon.png
 %{prefix}/bin/package-manager
 %{prefix}/bin/package-manager-su
+%{_libdir}/libzypp*so.*
 
 %files devel
 %defattr(-,root,root)

@@ -32,7 +32,7 @@ SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O3 -Wall" )
 ADD_DEFINITIONS( -D_FILE_OFFSET_BITS=64 )
 ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
 SET( LIBZYPP_VERSION_INFO "${LIBZYPP_SO_FIRST}.${LIBZYPP_AGE}.${LIBZYPP_PATCH}" )
-
+SET( LIBZYPP_SOVERSION_INFO "${LIBZYPP_SO_FIRST}" )
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
 SET(CPACK_PACKAGE_VENDOR "Novell Inc.")
@@ -205,6 +205,9 @@ INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkg
 
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
+
+MESSAGE(STATUS "zypp.conf will be installed in /etc/zypp")
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION /etc/zypp )
 
 ####################################################################
 # SUBDIRECTORIES                                                   #
