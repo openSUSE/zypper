@@ -95,7 +95,7 @@ namespace zypp
 		    {
 			if (inst)
 			{
-			    if (nameit->status().isInstalled())
+			    if (nameit->status().isInstalled() && !nameit->status().isToBeUninstalled())
 			    {
 				found_installed = true;
 				XXX << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
@@ -114,7 +114,7 @@ namespace zypp
 		    }
 		    else
 		    {
-			if (inst && nameit->status().isInstalled())
+			if (inst && nameit->status().isInstalled() && !nameit->status().isToBeUninstalled())
 			{
 			    // just freshen the package, don't change du statistics
 			    found_installed = true;

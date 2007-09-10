@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 10 15:50:49 CEST 2007 - lslezak@suse.cz
+
+- fixed disk usage counting of updated packages (#308362)
+
+-------------------------------------------------------------------
 Mon Sep 10 14:17:29 CEST 2007 - schubi@suse.de
 
 - Splitting packages: Take the package with the best
