@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 10 14:17:29 CEST 2007 - schubi@suse.de
+
+- Splitting packages: Take the package with the best
+  architecture,edition ONLY; Bug 308591 
+- r 7160
+
+-------------------------------------------------------------------
 Mon Sep 10 10:55:45 CEST 2007 - lslezak@suse.cz
 
 - properly report fallback disk usage size (in kB instead of bytes)
