@@ -264,7 +264,10 @@ Ignore query string in the URI
 .B repos (lr)
 List all defined repositories.
 .IP
-Following data are printed for each repository found: Enabled (whether the repository is enabled), Refresh (whether autorefresh is enabled for the repository), Type (YaST, YUM, Plaindir), Name, and URI.
+The following data are printed for each repository found: # (repository number), Enabled (whether the repository is enabled), Refresh (whether autorefresh is enabled for the repository), Type (rpm-md, yast2, plaindir), Alias (shorthand for Name), and Name. If -v global option is used, an additional URI column will be displayed containing the base URI of the repository.
+
+Repository number is a unique identifier of the repository in current repository set. If you add, remove or change a repository, the numbers may change. Beware of that when using the numbers with the repository handling commands (although not possible right now, the feature will be reimplmented soon). On the other hand, using the alias instead of the number is always safe.
+
 .TP
 .I \-e, \-\-export <FILE|->
 This option causes zypper to write repository definition of all defined
