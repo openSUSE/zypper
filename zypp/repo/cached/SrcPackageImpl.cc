@@ -122,7 +122,8 @@ const DiskUsage & SrcPackageImpl::diskusage() const
     {
       // No info: Creating a faked entry distributing the
       // total source package size in assumed 20 files to "/usr/src/packages"
-      _diskusage->add( "/usr/src/packages", size(), 20 );
+      // The reported size is in kB
+      _diskusage->add( "/usr/src/packages", size() / 1024, 20 );
     }
   }
   return *_diskusage;

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 10 10:55:45 CEST 2007 - lslezak@suse.cz
+
+- properly report fallback disk usage size (in kB instead of bytes)
+  when disk usage is not known (YUM repos) (#308475)
+
+-------------------------------------------------------------------
 Fri Sep  7 13:27:26 CEST 2007 - ma@suse.de
 
 - Install a sample /etc/zypp.conf. (#306615)
