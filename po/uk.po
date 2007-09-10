@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-23 10:21+0200\n"
+"POT-Creation-Date: 2007-09-03 13:53+0200\n"
 "PO-Revision-Date: 2007-08-23 20:52-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -114,36 +114,36 @@ msgstr "Не чинний символ сполучення масиву пар�
 msgid "History:"
 msgstr "Історія:"
 
-#: ../zypp/repo/PackageProvider.cc:222
+#: ../zypp/repo/PackageProvider.cc:237
 msgid "applydeltarpm check failed."
 msgstr "перевірка applydeltarpm зазнала невдачі."
 
-#: ../zypp/repo/PackageProvider.cc:236
+#: ../zypp/repo/PackageProvider.cc:251
 msgid "applydeltarpm failed."
 msgstr "застосування дельти rpm зазнало невдачі."
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:303
+#: ../zypp/repo/PackageProvider.cc:318
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Пакунок %s не прошов перевірку достовірності. Повторити спробу?"
 
-#: ../zypp/repo/RepoProvideFile.cc:205
+#: ../zypp/repo/RepoProvideFile.cc:206
 msgid "No url in repository."
 msgstr "В сховищі немає url."
 
 #. iteration over urls
-#: ../zypp/repo/RepoProvideFile.cc:267
+#: ../zypp/repo/RepoProvideFile.cc:278
 #, c-format
 msgid "Can't provide file %s from repository %s"
 msgstr "Неможливо надати файл %s зі сховища %s"
 
-#: ../zypp/repo/cached/RepoImpl.cc:78
+#: ../zypp/repo/cached/RepoImpl.cc:73
 #, c-format
 msgid "Reading '%s' repository cache"
 msgstr "Читання кешу сховища \"%s\""
 
-#: ../zypp/repo/cached/RepoImpl.cc:199
+#: ../zypp/repo/cached/RepoImpl.cc:194
 #, c-format
 msgid "Reading patch and delta rpms from '%s' repository cache"
 msgstr "Читання латок і дельт пакунків з кешу сховища \"%s\""
@@ -167,27 +167,28 @@ msgstr "Потрібна автентифікація для \"%s\""
 msgid "Cleaning repository '%s' cache"
 msgstr "Очищення кешу сховища \"%s\""
 
-#: ../zypp/RepoManager.cc:614
+#. we will throw this later if no URL checks out fine
+#: ../zypp/RepoManager.cc:521
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "У вказаних адресах URL не знайдено чинних метаданих"
 
-#: ../zypp/RepoManager.cc:664
+#: ../zypp/RepoManager.cc:677
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Створення кешу сховища \"%s\""
 
 #. progress.sendTo( progressrcv );
-#: ../zypp/RepoManager.cc:809
+#: ../zypp/RepoManager.cc:822
 #, c-format
 msgid "Reading repository '%s' cache"
 msgstr "Читання кешу сховища \"%s\""
 
-#: ../zypp/RepoManager.cc:899
+#: ../zypp/RepoManager.cc:912
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Додавання сховища \"%s\""
 
-#: ../zypp/RepoManager.cc:1004
+#: ../zypp/RepoManager.cc:1017
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Вилучення сховища \"%s\""
@@ -2702,19 +2703,19 @@ msgstr "Виняток Hal"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1749
+#: ../zypp/target/rpm/RpmDb.cc:1779
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Змінено конфігураційні файли для %s:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1913
+#: ../zypp/target/rpm/RpmDb.cc:1943
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm зберегла %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1915
+#: ../zypp/target/rpm/RpmDb.cc:1945
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -2724,13 +2725,13 @@ msgstr ""
 "Ось перші 25 рядків відмінностей:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1918
+#: ../zypp/target/rpm/RpmDb.cc:1948
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm створила %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1920
+#: ../zypp/target/rpm/RpmDb.cc:1950
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -2741,46 +2742,46 @@ msgstr ""
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1926
+#: ../zypp/target/rpm/RpmDb.cc:1956
 #, c-format
 msgid "%s install failed"
 msgstr "Встановлення %s зазнало невдачі"
 
-#: ../zypp/target/rpm/RpmDb.cc:1927 ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:1957 ../zypp/target/rpm/RpmDb.cc:2075
 msgid "rpm output:"
 msgstr "Вивід rpm:"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1933
+#: ../zypp/target/rpm/RpmDb.cc:1963
 #, c-format
 msgid "%s installed ok"
 msgstr "%s встановлено без помилок"
 
-#: ../zypp/target/rpm/RpmDb.cc:1936 ../zypp/target/rpm/RpmDb.cc:2053
+#: ../zypp/target/rpm/RpmDb.cc:1966 ../zypp/target/rpm/RpmDb.cc:2083
 msgid "Additional rpm output:"
 msgstr "Додатковий вивід rpm:"
 
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2044
+#: ../zypp/target/rpm/RpmDb.cc:2074
 #, c-format
 msgid "%s remove failed"
 msgstr "Вилучення %s зазнало невдачі"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2080
 #, c-format
 msgid "%s remove ok"
 msgstr "%s вилучено без помилок"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2195
+#: ../zypp/target/rpm/RpmDb.cc:2225
 #, c-format
 msgid "created backup %s"
 msgstr "створено резервну копію %s"
 
-#: ../zypp/target/TargetImpl.cc:730
+#: ../zypp/target/TargetImpl.cc:731
 msgid "Installation has been aborted as directed."
 msgstr "Встановлення перервано відповідно до вказівки."
 
@@ -2798,64 +2799,74 @@ msgid "%s replaced by %s"
 msgstr "%s замінено %s"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:262
+#: ../zypp/solver/detail/Resolver_problems.cc:263
 #, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr "%s буде вилучено користувачем.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:267
+#: ../zypp/solver/detail/Resolver_problems.cc:268
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s буде вилучено іншою програмою. (ApplLow/ApplHigh)\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:273
+#: ../zypp/solver/detail/Resolver_problems.cc:274
 #, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "%s буде встановлено користувачем.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:278
+#: ../zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s буде встановлено іншою прогамою. (ApplLow/ApplHigh)\n"
 
+#. This can be generated by a timout only
+#: ../zypp/solver/detail/Resolver_problems.cc:356
+#, c-format
+msgid "No valid solution found within %d seconds"
+msgstr ""
+
+#: ../zypp/solver/detail/Resolver_problems.cc:357
+msgid "The solver has reached a defined timout"
+msgstr ""
+
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:337
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 msgid "No valid solution found with just resolvables of best architecture."
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:338
+#: ../zypp/solver/detail/Resolver_problems.cc:384
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:339
+#: ../zypp/solver/detail/Resolver_problems.cc:385
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 msgstr ""
 
-#: ../zypp/solver/detail/Resolver_problems.cc:365
+#: ../zypp/solver/detail/Resolver_problems.cc:411
 msgid "Invalid information"
 msgstr "Не чинна інформація"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:372
+#: ../zypp/solver/detail/Resolver_problems.cc:418
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s потрібний для інших пакунків"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:375
+#: ../zypp/solver/detail/Resolver_problems.cc:421
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s потрібний для %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:376
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2865,7 +2876,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:383
+#: ../zypp/solver/detail/Resolver_problems.cc:429
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s конфліктує з іншими потрібними"
@@ -2874,14 +2885,14 @@ msgstr "%s конфліктує з іншими потрібними"
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:386
+#: ../zypp/solver/detail/Resolver_problems.cc:432
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s конфліктує з %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:388
+#: ../zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2891,24 +2902,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:417
+#: ../zypp/solver/detail/Resolver_problems.cc:463
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s робить застарілими інші потрібні"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:466
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s робить застарілим %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:422
+#: ../zypp/solver/detail/Resolver_problems.cc:468
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s робить застарілим: %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:469
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2917,7 +2928,7 @@ msgstr ""
 "Ці потрібні пакунки буде вилучено з системи."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:431
+#: ../zypp/solver/detail/Resolver_problems.cc:477
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s залежить від інших потрібних пакунків"
@@ -2925,38 +2936,38 @@ msgstr "%s залежить від інших потрібних пакункі�
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:435
+#: ../zypp/solver/detail/Resolver_problems.cc:481
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s залежить від %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:438
+#: ../zypp/solver/detail/Resolver_problems.cc:484
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s залежить від: %s"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:444
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 msgid "Child of"
 msgstr "Нащадок"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:450
-#: ../zypp/solver/detail/Resolver_problems.cc:534
+#: ../zypp/solver/detail/Resolver_problems.cc:496
+#: ../zypp/solver/detail/Resolver_problems.cc:580
 #, c-format
 msgid "Cannot install %s"
 msgstr "Неможливо встановити %s"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:452
+#: ../zypp/solver/detail/Resolver_problems.cc:498
 #, c-format
 msgid "None provides %s"
 msgstr "Ніщо не надає %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:453
+#: ../zypp/solver/detail/Resolver_problems.cc:499
 msgid ""
 "\n"
 "There is no resource available which supports this requirement."
@@ -2964,31 +2975,31 @@ msgstr ""
 "\n"
 "Нема наявного ресурсу, який підтримує цю вимогу."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:461
+#: ../zypp/solver/detail/Resolver_problems.cc:507
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 msgstr "У зв'язку з проблемами описаними вище/нижче це розв'язання не задовольнить всі залежності"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:472
-#: ../zypp/solver/detail/Resolver_problems.cc:854
+#: ../zypp/solver/detail/Resolver_problems.cc:518
+#: ../zypp/solver/detail/Resolver_problems.cc:900
 #, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
 msgstr "Неможливо встановити %s, бо він конфліктує з %s"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:490
+#: ../zypp/solver/detail/Resolver_problems.cc:536
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s не встановлений і позначений як такий, що його неможливо встановити"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:502
+#: ../zypp/solver/detail/Resolver_problems.cc:548
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "Неможливо встановити %s через проблеми залежностей"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:544
-#: ../zypp/solver/detail/Resolver_problems.cc:554
+#: ../zypp/solver/detail/Resolver_problems.cc:590
+#: ../zypp/solver/detail/Resolver_problems.cc:600
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2996,8 +3007,8 @@ msgid "delete %s"
 msgstr "вилучити %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:547
-#: ../zypp/solver/detail/Resolver_problems.cc:557
+#: ../zypp/solver/detail/Resolver_problems.cc:593
+#: ../zypp/solver/detail/Resolver_problems.cc:603
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -3005,79 +3016,79 @@ msgid "do not install %s"
 msgstr "не встановлювати %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:570
+#: ../zypp/solver/detail/Resolver_problems.cc:616
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s має вимоги, які не задоволено"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:609
+#: ../zypp/solver/detail/Resolver_problems.cc:655
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s має залежності, які не задоволено"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:657
+#: ../zypp/solver/detail/Resolver_problems.cc:703
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s неможливо встановити через залежності, які незадоволено"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:714
+#: ../zypp/solver/detail/Resolver_problems.cc:760
 #, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
 msgstr "%s задовольняє залежності %s, але його буде вилучено"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:724
+#: ../zypp/solver/detail/Resolver_problems.cc:770
 #, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
 msgstr "%s задовольняє залежності %s, але його буде залишено в системі"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:780
 #, c-format
 msgid "No need to install %s"
 msgstr "Нема потреби встановлювати %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:742
+#: ../zypp/solver/detail/Resolver_problems.cc:788
 #, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
 msgstr "Неможливо встановити %s, щоб задовольнити залежності %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:757
+#: ../zypp/solver/detail/Resolver_problems.cc:803
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Неможливо встановити %s, щоб задовольнити залежності %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:795
-#: ../zypp/solver/detail/Resolver_problems.cc:803
+#: ../zypp/solver/detail/Resolver_problems.cc:841
+#: ../zypp/solver/detail/Resolver_problems.cc:849
 #, c-format
 msgid "%s will not be uninstalled, because it is still required"
 msgstr "%s не буде вилучено, бо його ще потрібно"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:826
+#: ../zypp/solver/detail/Resolver_problems.cc:872
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 msgstr "%s робить застарілим %s. Але %s неможливо вилучити, бо він заблокований."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:858
+#: ../zypp/solver/detail/Resolver_problems.cc:904
 #, c-format
 msgid "Cannot install %s, because it is conflicting"
 msgstr "Неможливо встановити %s, бо він конфліктує"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:880
+#: ../zypp/solver/detail/Resolver_problems.cc:926
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "Неможливо встановити %s через конфлікт з %s"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:894
+#: ../zypp/solver/detail/Resolver_problems.cc:940
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr "Неможливо задовольнити вимогу %s."
@@ -3138,7 +3149,7 @@ msgid "Do not install or delete the resolvables concerned"
 msgstr "Не встановлювати і не вилучати дані пакунки"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:763
+#: ../zypp/solver/detail/QueueItemRequire.cc:791
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "потребує %s для %s, коли оновлюється %s"
@@ -3496,12 +3507,22 @@ msgstr "встановити %s"
 msgid "Install missing resolvables"
 msgstr "Встановити потрібні пакунки"
 
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:50
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:53
 msgid "Make a solver run with ALL possibilities."
 msgstr ""
 
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:51
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:54
 msgid "Regarding all resolvables with a compatible architecture."
+msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
+
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
+#, fuzzy
+msgid "Make a solver run with best architecture only."
+msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
+
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
+#, fuzzy
+msgid "Regarding resolvables with best architecture only."
 msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
 
 #. Translator: all.%s = name of package,patch,....
@@ -3553,6 +3574,14 @@ msgstr "%s доповнений пакунком %s"
 #, c-format
 msgid "%s part of %s"
 msgstr "%s частина %s"
+
+#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:50
+msgid "Double timeout"
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
+msgid "Start the next solver run with doubled timeout."
+msgstr ""
 
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
@@ -4965,4 +4994,3 @@ msgstr ""
 "Файл %s має не чинну контрольну суму.\n"
 "Очікувалась %s, знайдено %s\n"
 "Вживати попри все?"
-

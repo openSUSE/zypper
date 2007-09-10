@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-23 10:21+0200\n"
+"POT-Creation-Date: 2007-09-03 13:53+0200\n"
 "PO-Revision-Date: 2007-08-24 08:53+0100\n"
 "Last-Translator: wadim dziedzic <wdziedzic@aviary.pl>\n"
 "Language-Team:  <pl@li.org>\n"
@@ -114,36 +114,36 @@ msgstr "Nieprawidłowy znak parametru połączenia tablicy"
 msgid "History:"
 msgstr "Historia:"
 
-#: ../zypp/repo/PackageProvider.cc:222
+#: ../zypp/repo/PackageProvider.cc:237
 msgid "applydeltarpm check failed."
 msgstr "Sprawdzenie applydeltarpm zakończone niepowodzeniem."
 
-#: ../zypp/repo/PackageProvider.cc:236
+#: ../zypp/repo/PackageProvider.cc:251
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm zakończone niepowodzeniem."
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:303
+#: ../zypp/repo/PackageProvider.cc:318
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Pakiet %s nie spełnia testu integralności. Czy spróbować ponownie?"
 
-#: ../zypp/repo/RepoProvideFile.cc:205
+#: ../zypp/repo/RepoProvideFile.cc:206
 msgid "No url in repository."
 msgstr "W repozytorium nie ma żadnego adresu URL."
 
 #. iteration over urls
-#: ../zypp/repo/RepoProvideFile.cc:267
+#: ../zypp/repo/RepoProvideFile.cc:278
 #, c-format
 msgid "Can't provide file %s from repository %s"
 msgstr " Nie można pobrać pliku %s z repozytorium %s."
 
-#: ../zypp/repo/cached/RepoImpl.cc:78
+#: ../zypp/repo/cached/RepoImpl.cc:73
 #, c-format
 msgid "Reading '%s' repository cache"
 msgstr "Wczytywanie pamięci podręcznej repozytorium \"%s\""
 
-#: ../zypp/repo/cached/RepoImpl.cc:199
+#: ../zypp/repo/cached/RepoImpl.cc:194
 #, c-format
 msgid "Reading patch and delta rpms from '%s' repository cache"
 msgstr "Wczytywanie pakietów rpm z pamięci podręcznej repozytorium \"%s\""
@@ -167,27 +167,28 @@ msgstr "Wymagane uwierzytelnienie dla \"%s\""
 msgid "Cleaning repository '%s' cache"
 msgstr "Czyszczenie pamięci podręcznej repozytorium \"%s\""
 
-#: ../zypp/RepoManager.cc:614
+#. we will throw this later if no URL checks out fine
+#: ../zypp/RepoManager.cc:521
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Pod podanymi adresami URL nie znaleiono poprawnych metadanych."
 
-#: ../zypp/RepoManager.cc:664
+#: ../zypp/RepoManager.cc:677
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Budowanie pamięci podręcznej repozytorium \"%s\""
 
 #. progress.sendTo( progressrcv );
-#: ../zypp/RepoManager.cc:809
+#: ../zypp/RepoManager.cc:822
 #, c-format
 msgid "Reading repository '%s' cache"
 msgstr "Wczytywanie pamięci podręcznej repozytorium \"%s\""
 
-#: ../zypp/RepoManager.cc:899
+#: ../zypp/RepoManager.cc:912
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Dodawanie repozytorium \"%s\""
 
-#: ../zypp/RepoManager.cc:1004
+#: ../zypp/RepoManager.cc:1017
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Usuwanie repozytorium '%s'"
@@ -2660,19 +2661,19 @@ msgstr "Wyjątek Hal"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1749
+#: ../zypp/target/rpm/RpmDb.cc:1779
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Zmienione pliki konfiguracyjne dla %s:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1913
+#: ../zypp/target/rpm/RpmDb.cc:1943
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm zapisał %s jako %s, ale można było określić różnicy"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1915
+#: ../zypp/target/rpm/RpmDb.cc:1945
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -2682,13 +2683,13 @@ msgstr ""
 "Oto pierwszych 25 linii różnicy:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1918
+#: ../zypp/target/rpm/RpmDb.cc:1948
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm utworzył %s jako %s, ale można było określić różnicy"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1920
+#: ../zypp/target/rpm/RpmDb.cc:1950
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -2699,46 +2700,46 @@ msgstr ""
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1926
+#: ../zypp/target/rpm/RpmDb.cc:1956
 #, c-format
 msgid "%s install failed"
 msgstr "Instalacja %s nie powiodła się"
 
-#: ../zypp/target/rpm/RpmDb.cc:1927 ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:1957 ../zypp/target/rpm/RpmDb.cc:2075
 msgid "rpm output:"
 msgstr "Wyjście rpm:"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1933
+#: ../zypp/target/rpm/RpmDb.cc:1963
 #, c-format
 msgid "%s installed ok"
 msgstr "Pakiet %s poprawnie zainstalowany"
 
-#: ../zypp/target/rpm/RpmDb.cc:1936 ../zypp/target/rpm/RpmDb.cc:2053
+#: ../zypp/target/rpm/RpmDb.cc:1966 ../zypp/target/rpm/RpmDb.cc:2083
 msgid "Additional rpm output:"
 msgstr "Dodatkowe wyjście rpm:"
 
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2044
+#: ../zypp/target/rpm/RpmDb.cc:2074
 #, c-format
 msgid "%s remove failed"
 msgstr "Usunięcie %s nie powiodło się"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2080
 #, c-format
 msgid "%s remove ok"
 msgstr "Usunięcie %s powiodło się"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2195
+#: ../zypp/target/rpm/RpmDb.cc:2225
 #, c-format
 msgid "created backup %s"
 msgstr "utworzono zapasowy %s"
 
-#: ../zypp/target/TargetImpl.cc:730
+#: ../zypp/target/TargetImpl.cc:731
 msgid "Installation has been aborted as directed."
 msgstr "Instalacja przerwana zgodnie z życzeniem."
 
@@ -2756,64 +2757,74 @@ msgid "%s replaced by %s"
 msgstr "%s zastąpiony przez %s"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:262
+#: ../zypp/solver/detail/Resolver_problems.cc:263
 #, c-format
 msgid "%s will be deleted by the user.\n"
 msgstr "%s zostanie usunięty przez użytkownika.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:267
+#: ../zypp/solver/detail/Resolver_problems.cc:268
 #, c-format
 msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s zostanie usunięty przez inną aplikację. (ApplLow/ApplHigh)\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:273
+#: ../zypp/solver/detail/Resolver_problems.cc:274
 #, c-format
 msgid "%s will be installed by the user.\n"
 msgstr "%s zostanie zainstalowany przez użytkownika.\n"
 
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:278
+#: ../zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 msgstr "%s zostanie zainstalowany przez inną aplikację. (ApplLow/ApplHigh)\n"
 
+#. This can be generated by a timout only
+#: ../zypp/solver/detail/Resolver_problems.cc:356
+#, fuzzy, c-format
+msgid "No valid solution found within %d seconds"
+msgstr "Brak rozwiązania z tylko z obiektami z najlepszą architekturą."
+
+#: ../zypp/solver/detail/Resolver_problems.cc:357
+msgid "The solver has reached a defined timout"
+msgstr ""
+
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
 #. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:337
+#: ../zypp/solver/detail/Resolver_problems.cc:383
 msgid "No valid solution found with just resolvables of best architecture."
 msgstr "Brak rozwiązania z tylko z obiektami z najlepszą architekturą."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:338
+#: ../zypp/solver/detail/Resolver_problems.cc:384
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
 msgstr "W tym przebiegu pod uwagę wzięto tylko obiekty z najlepszą architekturą.\n"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:339
+#: ../zypp/solver/detail/Resolver_problems.cc:385
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 msgstr "Uwzględnienie wszystkich obiektów może dać poprawne rozwiązanie, ale wymaga czasu."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:365
+#: ../zypp/solver/detail/Resolver_problems.cc:411
 msgid "Invalid information"
 msgstr "Nieprawidłowa informacja"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:372
+#: ../zypp/solver/detail/Resolver_problems.cc:418
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s jest wymagany przez inne pakiety"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:375
+#: ../zypp/solver/detail/Resolver_problems.cc:421
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s jest wymagany przez %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:376
+#: ../zypp/solver/detail/Resolver_problems.cc:422
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2823,7 +2834,7 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:383
+#: ../zypp/solver/detail/Resolver_problems.cc:429
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s jest w konflikcie z innymi pakietami"
@@ -2832,14 +2843,14 @@ msgstr "%s jest w konflikcie z innymi pakietami"
 #. Translator: all.%s = name of package, patch,...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:386
+#: ../zypp/solver/detail/Resolver_problems.cc:432
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s jest w konflikcie z %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:388
+#: ../zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2849,24 +2860,24 @@ msgstr ""
 "%s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:417
+#: ../zypp/solver/detail/Resolver_problems.cc:463
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s dezaktualizuje inne pakiety"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:420
+#: ../zypp/solver/detail/Resolver_problems.cc:466
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s dezaktualizuje %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:422
+#: ../zypp/solver/detail/Resolver_problems.cc:468
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s dezaktualizuje:%s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:423
+#: ../zypp/solver/detail/Resolver_problems.cc:469
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2875,7 +2886,7 @@ msgstr ""
 "Te pakiety zostaną usunięte z systemu."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:431
+#: ../zypp/solver/detail/Resolver_problems.cc:477
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s zależy od innych pakietów"
@@ -2883,38 +2894,38 @@ msgstr "%s zależy od innych pakietów"
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names
 #. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:435
+#: ../zypp/solver/detail/Resolver_problems.cc:481
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s zależy od %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:438
+#: ../zypp/solver/detail/Resolver_problems.cc:484
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s zależy od:%s"
 
 #. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:444
+#: ../zypp/solver/detail/Resolver_problems.cc:490
 msgid "Child of"
 msgstr "Potomek"
 
 #. TranslatorExplanation %s = dependency
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:450
-#: ../zypp/solver/detail/Resolver_problems.cc:534
+#: ../zypp/solver/detail/Resolver_problems.cc:496
+#: ../zypp/solver/detail/Resolver_problems.cc:580
 #, c-format
 msgid "Cannot install %s"
 msgstr "Nie można zainstalować %s"
 
 #. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:452
+#: ../zypp/solver/detail/Resolver_problems.cc:498
 #, c-format
 msgid "None provides %s"
 msgstr "Żaden nie dostarcza %s"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:453
+#: ../zypp/solver/detail/Resolver_problems.cc:499
 msgid ""
 "\n"
 "There is no resource available which supports this requirement."
@@ -2922,31 +2933,31 @@ msgstr ""
 "\n"
 "Nie ma dostępnego zasobu, który spełniałby te wymaganie."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:461
+#: ../zypp/solver/detail/Resolver_problems.cc:507
 msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 msgstr "Z powodu powyżej/poniżej opisanych problemów, rozwiązanie to nie będzie mogło zaspokoić wszystkich zależności"
 
-#: ../zypp/solver/detail/Resolver_problems.cc:472
-#: ../zypp/solver/detail/Resolver_problems.cc:854
+#: ../zypp/solver/detail/Resolver_problems.cc:518
+#: ../zypp/solver/detail/Resolver_problems.cc:900
 #, c-format
 msgid "Cannot install %s, because it is conflicting with %s"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie z %s"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:490
+#: ../zypp/solver/detail/Resolver_problems.cc:536
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nie jest zainstalowany i został oznaczony jako nie do odinstalowania"
 
 #. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:502
+#: ../zypp/solver/detail/Resolver_problems.cc:548
 #, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "Nie można zainstalować %s z powodu problemów z zależnościami"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:544
-#: ../zypp/solver/detail/Resolver_problems.cc:554
+#: ../zypp/solver/detail/Resolver_problems.cc:590
+#: ../zypp/solver/detail/Resolver_problems.cc:600
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
 #, c-format
@@ -2954,8 +2965,8 @@ msgid "delete %s"
 msgstr "usuń %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:547
-#: ../zypp/solver/detail/Resolver_problems.cc:557
+#: ../zypp/solver/detail/Resolver_problems.cc:593
+#: ../zypp/solver/detail/Resolver_problems.cc:603
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
@@ -2963,79 +2974,79 @@ msgid "do not install %s"
 msgstr "nie instaluj %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:570
+#: ../zypp/solver/detail/Resolver_problems.cc:616
 #, c-format
 msgid "%s has unfulfilled requirements"
 msgstr "%s ma niespełnione wymagania"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:609
+#: ../zypp/solver/detail/Resolver_problems.cc:655
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s ma brakujące zależności"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:657
+#: ../zypp/solver/detail/Resolver_problems.cc:703
 #, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s nie może zostać zainstalowany z powodu brakujących zależności"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:714
+#: ../zypp/solver/detail/Resolver_problems.cc:760
 #, c-format
 msgid "%s fulfills dependencies of %s but will be uninstalled"
 msgstr "%s spełnia zależności %s, ale zostanie odinstalowany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:724
+#: ../zypp/solver/detail/Resolver_problems.cc:770
 #, c-format
 msgid "%s fulfills dependencies of %s but will be kept on your system"
 msgstr "%s spełnia zależności %s, ale będzie pozostawiony"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:734
+#: ../zypp/solver/detail/Resolver_problems.cc:780
 #, c-format
 msgid "No need to install %s"
 msgstr "Nie ma potrzeby instalować %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:742
+#: ../zypp/solver/detail/Resolver_problems.cc:788
 #, c-format
 msgid "Cannot install %s to fulfill the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:757
+#: ../zypp/solver/detail/Resolver_problems.cc:803
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:795
-#: ../zypp/solver/detail/Resolver_problems.cc:803
+#: ../zypp/solver/detail/Resolver_problems.cc:841
+#: ../zypp/solver/detail/Resolver_problems.cc:849
 #, c-format
 msgid "%s will not be uninstalled, because it is still required"
 msgstr "%s nie zostanie odinstalowany, ponieważ jest nadal wymagany"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:826
+#: ../zypp/solver/detail/Resolver_problems.cc:872
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 msgstr "%s dezaktualizuje %s, ale %s nie może zostać usunięty, ponieważ jest zablokowany."
 
-#: ../zypp/solver/detail/Resolver_problems.cc:858
+#: ../zypp/solver/detail/Resolver_problems.cc:904
 #, c-format
 msgid "Cannot install %s, because it is conflicting"
 msgstr "Nie można zainstalować %s, ponieważ jest w konflikcie"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:880
+#: ../zypp/solver/detail/Resolver_problems.cc:926
 #, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s jest nie do odinstalowania z powodu konfliktu z %s"
 
 #. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:894
+#: ../zypp/solver/detail/Resolver_problems.cc:940
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
 msgstr "Wymaganie %s nie może być spełnione."
@@ -3096,7 +3107,7 @@ msgid "Do not install or delete the resolvables concerned"
 msgstr "Nie instaluj ani nie usuwaj danych obiektów"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:763
+#: ../zypp/solver/detail/QueueItemRequire.cc:791
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "dla wymagania %s dla %s, podczas aktualizacji %s"
@@ -3454,12 +3465,22 @@ msgstr "zainstaluj %s"
 msgid "Install missing resolvables"
 msgstr "Zainstaluj brakujące pakiety"
 
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:50
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:53
 msgid "Make a solver run with ALL possibilities."
 msgstr "Uruchom rozwiązywanie z WSZYSTKIMI możliwościami"
 
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:51
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:54
 msgid "Regarding all resolvables with a compatible architecture."
+msgstr "Z uwzględnieniem wszystkich obiektów o kompatybilnej architekturze."
+
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
+#, fuzzy
+msgid "Make a solver run with best architecture only."
+msgstr "Uruchom rozwiązywanie z WSZYSTKIMI możliwościami"
+
+#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
+#, fuzzy
+msgid "Regarding resolvables with best architecture only."
 msgstr "Z uwzględnieniem wszystkich obiektów o kompatybilnej architekturze."
 
 #. Translator: all.%s = name of package,patch,....
@@ -3511,6 +3532,15 @@ msgstr "%s jest uzupełniany przez %s"
 #, c-format
 msgid "%s part of %s"
 msgstr "%s jest częścią %s"
+
+#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:50
+msgid "Double timeout"
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
+#, fuzzy
+msgid "Start the next solver run with doubled timeout."
+msgstr "Uruchom rozwiązywanie z WSZYSTKIMI możliwościami"
 
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"
