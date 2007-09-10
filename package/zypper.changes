@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 10 15:39:11 CEST 2007 - jkupec@suse.cz
+
+- report too many arguments (#307639)
+- r7164
+
+-------------------------------------------------------------------
 Mon Sep  3 17:32:33 CEST 2007 - jkupec@suse.cz
 
 - fix broken compiler flags (schwab)
