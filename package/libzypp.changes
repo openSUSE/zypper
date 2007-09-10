@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 10 16:19:05 CEST 2007 - schubi@suse.de
+
+- new translations added
+- r 7166 
+
+-------------------------------------------------------------------
 Mon Sep 10 15:50:49 CEST 2007 - lslezak@suse.cz
 
 - fixed disk usage counting of updated packages (#308362)
