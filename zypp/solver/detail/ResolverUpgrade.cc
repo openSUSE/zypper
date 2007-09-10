@@ -612,17 +612,61 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       if ( !toadd.size() ) {
 	INT << "Empty SplitPkgMap entry for " << installed << endl;
       } else {
+	FindMap candidate;  
 	for ( PoolItemOrderSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
-	  PoolItem_Ref split_candidate = *ait;
-	  MIL << " ==> ADD (splitted): " << split_candidate << endl;
-	  if ( probably_dropped
-	       && split_candidate.status().staysUninstalled()
-	       && doesObsoleteItem (split_candidate, installed))
-	  {
-	    probably_dropped = false;
-	  }
+	    PoolItem_Ref split_candidate = *ait;
+	    if ( probably_dropped
+		 && split_candidate.status().staysUninstalled()
+		 && doesObsoleteItem (split_candidate, installed))
+	    {
+		probably_dropped = false;
+	    }
+	    
+	    FindMap::iterator itcandidate = candidate.find( split_candidate->name() );
+
+	    if (itcandidate != candidate.end()) {	// split canidate with the same name found
+		if (split_candidate.status().isToBeInstalled()
+		    || itcandidate->second.status().isToBeInstalled()) {
+
+		    if (split_candidate.status().isToBeInstalled()
+			&& itcandidate->second.status().isToBeInstalled()) {
+			ERR << "only one should be set for installation: " << itcandidate->second << "; " << split_candidate << endl;
+		    } else {
+			if (split_candidate.status().isToBeInstalled()) {
+			    itcandidate->second = split_candidate; // take thatone which is already set for installation
+			}
+		    }
+		} else {
+		    // not the same --> find better provider
+		    if (itcandidate->second->arch() != installed->arch()
+			&& split_candidate->arch() == installed->arch() ) {
+			// prefer candidate which the same architecture as the installed item
+			itcandidate->second = split_candidate;			
+		    } else {
+			int cmp = itcandidate->second->arch().compare( split_candidate->arch() );
+			if (cmp < 0) {						// new provider has better arch
+			    itcandidate->second = split_candidate;						
+			}
+			else if (cmp == 0) {					// new provider has equal arch
+			    if (itcandidate->second->edition().compare( split_candidate->edition() ) < 0) {
+				itcandidate->second = split_candidate;		// new provider has better edition
+			    }
+			}
+		    }
+		}
+	    }
+	    else {
+		candidate[split_candidate->name()] = split_candidate;
+	    }
 	}
-	addSplitted[installed] = toadd;
+	
+	PoolItemOrderSet addcandidate;
+	for (FindMap::iterator itcandidate = candidate.begin() ; itcandidate != candidate.end(); itcandidate++) {
+	    addcandidate.insert(itcandidate->second);
+	    MIL << " ==> ADD (splitted): " << itcandidate->second << endl;
+	}
+	    
+	addSplitted[installed] = addcandidate;
       }
       // count stats later
     }
