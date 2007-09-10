@@ -197,6 +197,8 @@ void report_zypp_exception(const zypp::Exception & e)
   cerr << endl;
 }
 
+// ----------------------------------------------------------------------------
+
 void report_problem(const zypp::Exception & e,
                     const string & problem_desc,
                     const string & hint)
@@ -210,6 +212,16 @@ void report_problem(const zypp::Exception & e,
   // hint
   if (!hint.empty())
     cerr << hint << endl;
+}
+
+// ----------------------------------------------------------------------------
+
+void report_too_many_arguments(const string & specific_help)
+{
+  //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
+  cerr << _("Too many arguments") << '.' << endl;
+  cout_n << _("Usage") << ':' << endl;
+  cout_n << specific_help;
 }
 
 // Local Variables:

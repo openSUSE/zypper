@@ -97,4 +97,9 @@ void report_problem(const zypp::Exception & e,
                     const string & problem_desc,
                     const string & hint = "");
 
+/**
+ * 
+ */
+void report_too_many_arguments(const string & specific_help);
+
 #endif

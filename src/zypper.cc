@@ -796,6 +796,13 @@ int one_command(int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
+    // too many arguments
+    if (arguments.size() > 2)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+
     // indeterminate indicates the user has not specified the values
     tribool enabled(indeterminate); 
     tribool refresh(indeterminate);
@@ -878,7 +885,16 @@ int one_command(int argc, char **argv)
     {
       cerr << _("Required argument missing.") << endl;
       ERR << "Required argument missing." << endl;
+      cout_n << _("Usage") << ':' << endl;
       cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+
+    // too many arguments
+    //! \todo allow to specify multiple repos to delete
+    else if (arguments.size() > 1)
+    {
+      report_too_many_arguments(specific_help);
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -952,6 +968,12 @@ int one_command(int argc, char **argv)
       cout_n << specific_help;
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
+    // too many arguments
+    else if (arguments.size() > 2)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
 
 //    cond_init_target ();
     warn_if_zmd ();
@@ -990,6 +1012,12 @@ int one_command(int argc, char **argv)
       cerr << _("Alias is a required argument.") << endl;
       ERR << "Na alias argument given." << endl;
       cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+    // too many arguments
+    if (arguments.size() > 1)
+    {
+      report_too_many_arguments(specific_help);
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
@@ -1145,9 +1173,10 @@ int one_command(int argc, char **argv)
   {
     ZyppSearchOptions options;
 
-    if (ghelp) {
+    if (ghelp)
+    {
       cout << specific_help;
-      return !ghelp;
+      return ZYPPER_EXIT_OK;
     }
 
     if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
@@ -1220,9 +1249,17 @@ int one_command(int argc, char **argv)
 
   // TODO: rug summary
   else if (command == ZypperCommand::PATCH_CHECK) {
-    if (ghelp) {
+    if (ghelp)
+    {
       cout << specific_help;
-      return !ghelp;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // too many arguments
+    if (arguments.size() > 0)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_target ();
@@ -1251,9 +1288,17 @@ int one_command(int argc, char **argv)
   // --------------------------( patches )------------------------------------
 
   else if (command == ZypperCommand::SHOW_PATCHES) {
-    if (ghelp) {
+    if (ghelp)
+    {
       cout << specific_help;
-      return !ghelp;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // too many arguments
+    if (arguments.size() > 0)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_target ();
@@ -1269,10 +1314,17 @@ int one_command(int argc, char **argv)
   // --------------------------( list updates )-------------------------------
 
   else if (command == ZypperCommand::LIST_UPDATES) {
-    if (ghelp) {
-      // FIXME catalog...
+    if (ghelp)
+    {
       cout << specific_help;
-      return !ghelp;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // too many arguments
+    if (arguments.size() > 0)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     string skind = copts.count("type")?  copts["type"].front() :
@@ -1307,8 +1359,11 @@ int one_command(int argc, char **argv)
   // -----------------( xml list updates and patches )------------------------
 
   else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
-
-    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
 
     cond_init_target ();
     int initret = init_repos();
@@ -1330,13 +1385,24 @@ int one_command(int argc, char **argv)
   // -----------------------------( update )----------------------------------
 
   else if (command == ZypperCommand::UPDATE) {
-    if (ghelp) { cout << specific_help; return !ghelp; }
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for updating packages.") << endl;
       return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
+    // too many arguments
+    if (arguments.size() > 0)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     // rug compatibility code
@@ -1396,9 +1462,19 @@ int one_command(int argc, char **argv)
 
   else if (command == ZypperCommand::INFO ||
            command == ZypperCommand::RUG_PATCH_INFO) {
-    if (ghelp || arguments.size() == 0) {
-      cerr << specific_help;
-      return !ghelp;
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    if (arguments.size() < 1)
+    {
+      cerr << _("Required argument missing.") << endl;
+      ERR << "Required argument missing." << endl;
+      cout_n << _("Usage") << ':' << endl;
+      cout_n << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
 
     cond_init_target ();
