@@ -10,6 +10,14 @@ ELSE ( DEFINED  LIB )
   SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}" )
 ENDIF ( DEFINED  LIB )
 MESSAGE(STATUS "Libraries will be installed in ${LIB_INSTALL_DIR}" )
+
+# system configuration dir (etc)
+
+IF( NOT DEFINED SYSCONFDIR )
+  SET( SYSCONFDIR /etc )
+ENDIF( NOT DEFINED SYSCONFDIR )
+MESSAGE(STATUS "Config files will be installed in ${SYSCONFDIR}" )
+
 ####################################################################
 # CONFIGURATION                                                    #
 ####################################################################
@@ -206,8 +214,8 @@ INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkg
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
-MESSAGE(STATUS "zypp.conf will be installed in /etc/zypp")
-INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION /etc/zypp )
+MESSAGE(STATUS "zypp.conf will be installed in ${SYSCONFDIR}/zypp")
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
 
 ####################################################################
 # SUBDIRECTORIES                                                   #
