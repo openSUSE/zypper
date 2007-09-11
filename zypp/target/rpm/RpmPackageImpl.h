@@ -85,7 +85,7 @@ public:
   /** */
   virtual std::string type() const;
   /** */
-  virtual const DiskUsage & diskUsage() const;
+  virtual const DiskUsage & diskusage() const;
   /** */
   virtual Repository repository() const;
 

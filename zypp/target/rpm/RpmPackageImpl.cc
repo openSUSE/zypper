@@ -56,6 +56,7 @@ RPMPackageImpl::RPMPackageImpl(
   // we know we are reading english.
   _description.setText(data->tag_description(), Locale("en"));
   data->tag_du(_disk_usage);
+  SEC << _disk_usage << endl;
   _location.setDownloadSize(data->tag_archivesize());
 }
 
@@ -199,7 +200,7 @@ std::string RPMPackageImpl::type() const
 }
 
 /** */
-const DiskUsage & RPMPackageImpl::diskUsage() const
+const DiskUsage & RPMPackageImpl::diskusage() const
 {
   return _disk_usage;
 }

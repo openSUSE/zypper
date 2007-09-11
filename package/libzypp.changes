@@ -4,6 +4,7 @@ Tue Sep 11 14:54:44 CEST 2007 - ma@suse.de
 - Don't fail if a product is deleted multiple times (e.g. due to
   obsoletes and an explicit deleted request). (#308746)
 - version 3.22.7
+- revision 7184
 
 -------------------------------------------------------------------
 Tue Sep 11 13:52:47 CEST 2007 - jkupec@suse.cz

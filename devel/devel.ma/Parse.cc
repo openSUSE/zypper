@@ -35,11 +35,12 @@
 #include "zypp/RepoInfo.h"
 
 #include "zypp/ui/PatchContents.h"
+#include "zypp/ResPoolProxy.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
-
+using namespace zypp::ui;
 using zypp::parser::TagParser;
 
 ///////////////////////////////////////////////////////////////////
@@ -48,14 +49,44 @@ static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 
+template<class _Res>
+Selectable::Ptr getSel( const std::string & name_r )
+{
+  ResPoolProxy uipool( getZYpp()->poolProxy() );
+  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
+  {
+    if ( (*it)->name() == name_r )
+      return (*it);
+  }
+  return 0;
+}
+
+void dbgDu( Selectable::Ptr sel )
+{
+  if ( sel->installedPoolItem() )
+  {
+    DBG << "i: " << sel->installedPoolItem() << endl
+        << sel->installedPoolItem()->diskusage() << endl;
+  }
+  if ( sel->candidatePoolItem() )
+  {
+    DBG << "c: " << sel->candidatePoolItem() << endl
+        << sel->candidatePoolItem()->diskusage() << endl;
+  }
+  INT << sel << endl
+      << getZYpp()->diskUsage() << endl;
+}
+
+///////////////////////////////////////////////////////////////////
+
 struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    //handle( asKind<Package>( obj_r ) );
-    //handle( asKind<Patch>( obj_r ) );
-    handle( asKind<Pattern>( obj_r ) );
-    handle( asKind<Product>( obj_r ) );
+     handle( asKind<Package>( obj_r ) );
+//     handle( asKind<Patch>( obj_r ) );
+//     handle( asKind<Pattern>( obj_r ) );
+//     handle( asKind<Product>( obj_r ) );
     return true;
   }
 
@@ -64,6 +95,7 @@ struct Xprint
     if ( !p )
       return;
 
+    WAR << p->size() << endl;
     MIL << p->diskusage() << endl;
   }
 
@@ -424,6 +456,25 @@ int main( int argc, char * argv[] )
   }
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
+
+  DiskUsageCounter::MountPointSet fakePart;
+  fakePart.insert( DiskUsageCounter::MountPoint( "/", 1024, 10240, 5120, 0LL, false ) );
+  getZYpp()->setPartitions( fakePart );
+
+  USR << getZYpp()->getPartitions() << endl;
+  INT << getZYpp()->diskUsage() << endl;
+
+  Selectable::Ptr sel( getSel<Package>( "rpm" ) );
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_Del ) << endl;
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_Update ) << endl;
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_KeepInstalled ) << endl;
+  dbgDu( sel );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
