@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 11 16:11:20 CEST 2007 - dmacvicar@suse.de
+
+- restore deltas and patch rpms from the cache (#309124)
+- 3.22.8
+
+-------------------------------------------------------------------
 Tue Sep 11 14:54:44 CEST 2007 - ma@suse.de
 
 - Don't fail if a product is deleted multiple times (e.g. due to
