@@ -488,13 +488,17 @@ bool show_problems ()
     e = rproblems.end (),
     i;
   ProblemSolutionList todo;
-  if (!rproblems.empty()) {
+
+  // display the number of problems
+  if (rproblems.size() > 1) { 
     stm << format (_("%s Problems:")) % rproblems.size() << endl;
   }
-  else {
+  else if (rproblems.empty()) {
+    // should not happen! If solve() failed at least one problem must be set!
     stm << _("Specified capability not found") << endl;
     return false;
   }
+
   // for many problems, list them shortly first
   if (rproblems.size() > 1) 
   {
