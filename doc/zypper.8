@@ -299,7 +299,7 @@ Disable auto-refresh for the repository.
 .B refresh (ref) [alias|#] ...
 Refresh repositories specified by their alias or number. If no repositories are specified, all enabled repositories will be refreshed.
 .IP
-Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into an sqlite database (/var/cache/zypp/zypp.db).
+See also METADATA REFRESH POLICY section for more details.
 .TP
 .I \-f, \-\-force
 Force a complete refresh of specified repositories. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.
@@ -349,6 +349,18 @@ Ignore GPG check failures and continue. If a GPG issue occurs when using this op
 .I \-R, \-\-root <dir>
 Operates on a different root directory.
 
+.SH "METADATA REFRESH POLICY"
+.LP
+Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working on the up-to-date metadata.
+.LP
+Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into an sqlite database (/var/cache/zypp/zypp.db).
+.LP
+The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBautorefresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBautorefresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
+.LP
+The status of the repository metadata is checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
+.LP
+To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp config file (/etc/zypp/zypp.conf). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.
+
 .SH "LOCKS"
 .LP
 The file
@@ -377,6 +389,9 @@ kde* < 3.5
 .TP
 .B /etc/zypp/repos.d
 Directory containing repository configuration (*.repo) files. You can use the \fBrepo\fR commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing \fBzypper refresh\fR is strongly recommended.
+.TP
+.B /etc/zypp/zypp.conf
+ZYpp configuration file.
 .TP
 .B /etc/zypp/locks
 File with package lock definitions, see the section LOCKS.
