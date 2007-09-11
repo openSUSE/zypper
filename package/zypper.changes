@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Sep 11 13:04:04 CEST 2007 - jkupec@suse.cz
+
+- always display name instead of alias (except for the renamerepo
+   command, which works with alias) (#308669)
+- don't display the number of problems if only one found (#304283)
+- r7194
+
+-------------------------------------------------------------------
 Tue Sep 11 10:58:16 CEST 2007 - jkupec@suse.cz
 
 - translations update
