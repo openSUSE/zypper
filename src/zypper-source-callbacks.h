@@ -260,7 +260,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
 
   void display_step( int value )
   {
-    display_progress ( "repo", cout, "(" + _repo.info().alias() + ") " + _task , value);
+    display_progress ( "repo", cout, "(" + _repo.info().name() + ") " + _task , value);
   }
 
   virtual bool progress( int value )

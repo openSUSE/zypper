@@ -1624,7 +1624,7 @@ int main(int argc, char **argv)
     }
   } say_goodbye __attribute__ ((__unused__));
 
-	// set locale
+  // set locale
   setlocale (LC_ALL, "");
   bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);

@@ -567,7 +567,7 @@ void show_summary_resolvable_list(const string & label,
     cout_v << "-" << res->edition() << "." << res->arch();
     // plus repo providing this package
     if (res->repository() != Repository::noRepository)
-      cout_v << "  (" << res->repository().info().alias() << ")";
+      cout_v << "  (" << res->repository().info().name() << ")";
     // new line after each package in the verbose mode
     cout_v << endl;
   }
@@ -923,7 +923,7 @@ void show_patches()
     Patch::constPtr patch = asKind<Patch>(res);
 
     TableRow tr;
-    tr << patch->repository().info().alias ();
+    tr << patch->repository().info().name();
     tr << res->name () << res->edition ().asString();
     tr << patch->category();
     tr << string_status (it->status ());
@@ -1043,7 +1043,7 @@ void list_patch_updates(bool best_effort)
 
       if (true) {
 	TableRow tr (cols);
-	tr << patch->repository().info().alias ();
+	tr << patch->repository().info().name();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
@@ -1199,7 +1199,7 @@ void list_updates( const ResObject::Kind &kind, bool best_effort )
       TableRow tr (cols);
       tr << "v";
       if (!hide_repo) {
-	tr << res->repository().info().alias();
+	tr << res->repository().info().name();
       }
       if (gSettings.is_rug_compatible)
 	tr << "";		// Bundle

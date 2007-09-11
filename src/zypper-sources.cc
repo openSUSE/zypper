@@ -49,7 +49,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
       // check whether libzypp indicates a refresh is needed, and if so,
       // print a message
       cout_v << format(
-          _("Checking whether to refresh metadata for %s")) % repo.alias()
+          _("Checking whether to refresh metadata for %s")) % repo.name()
           << endl;
       for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
           it != repo.baseUrlsEnd(); ++it)
@@ -58,14 +58,14 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
         {
           if (manager.checkIfToRefreshMetadata(repo, *it))
           {
-            cout_n << format(_("Refreshing '%s'")) % repo.alias();
+            cout_n << format(_("Refreshing '%s'")) % repo.name();
             if (command == ZypperCommand::REFRESH && copts.count("force"))
               cout_n << " " << _("(forced)");
             cout_n << endl;
           }
           else if (command == ZypperCommand::REFRESH)
           {
-            cout_n << format(_("Repository '%s' is up to date.")) % repo.alias() << endl;
+            cout_n << format(_("Repository '%s' is up to date.")) % repo.name() << endl;
           }
           break; // don't check all the urls, just the first succussfull.
         }
@@ -85,7 +85,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   catch (const MediaException & e)
   {
     report_problem(e,
-        boost::str(format(_("Problem downloading files from '%s'.")) % repo.alias()),
+        boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
         _("Please, see the above error message to for a hint."));
 
     return true; // error
@@ -93,12 +93,12 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   catch (const RepoNoUrlException & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << format(_("No URLs defined for '%s'.")) % repo.alias() << endl;
+    cerr << format(_("No URLs defined for '%s'.")) % repo.name() << endl;
     if (!repo.filepath().empty())
       cerr << format(
           // TranslatorExplanation the first %s is a .repo file path
           _("Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
-          % repo.filepath() % repo.alias() << endl;
+          % repo.filepath() % repo.name() << endl;
 
     return true; // error
   }
@@ -114,7 +114,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
-        boost::str(format(_("Repository '%s' is invalid.")) % repo.alias()),
+        boost::str(format(_("Repository '%s' is invalid.")) % repo.name()),
         _("Please, check if the URLs defined for this repository are pointing to a valid repository."));
 
     return true; // error
@@ -123,9 +123,9 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
-        boost::str(format(_("Error downloading metadata for '%s':")) % repo.alias()));
+        boost::str(format(_("Error downloading metadata for '%s':")) % repo.name()));
     // log untranslated message
-    ERR << format("Error reading repository '%s':") % repo.alias() << endl;
+    ERR << format("Error reading repository '%s':") % repo.name() << endl;
 
     return true; // error
   }
@@ -163,7 +163,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
     ZYPP_CAUGHT(e);
 
     report_problem(e,
-        boost::str(format(_("Error parsing metadata for '%s':")) % repo.alias()),
+        boost::str(format(_("Error parsing metadata for '%s':")) % repo.name()),
         // TranslatorExplanation Don't translate the URL unless it is translated, too
         _("This may be caused by invalid metadata in the repository,"
           " or by a bug in the metadata parser. In the latter case,"
@@ -171,7 +171,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
           " instructions at http://en.opensuse.org/Zypper#Troubleshooting"));
 
     // log untranslated message
-    ERR << format("Error parsing metadata for '%s':") % repo.alias() << endl;
+    ERR << format("Error parsing metadata for '%s':") % repo.name() << endl;
 
     return true; // error
   }
@@ -179,7 +179,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
-        boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.alias()));
+        boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.name()));
     // this should not happend and is probably a bug, rethrowing
     ZYPP_RETHROW(e);
   }
@@ -240,14 +240,14 @@ static int do_init_repos()
        it !=  gData.repos.end(); ++it)
   {
     RepoInfo repo(*it);
-    MIL << "checking if to refresh " << repo.alias() << endl;
+    MIL << "checking if to refresh " << repo.name() << endl;
 
     //! \todo honor command line options/commands
     bool do_refresh = repo.enabled() && repo.autorefresh(); 
 
     if (do_refresh)
     {
-      MIL << "calling refresh for " << repo.alias() << endl;
+      MIL << "calling refresh for " << repo.name() << endl;
 
       // handle root user differently
       if (geteuid() == 0)
@@ -255,9 +255,9 @@ static int do_init_repos()
         if (refresh_raw_metadata(repo, false) || build_cache(repo, false))
         {
           cerr << format(_("Disabling repository '%s' because of the above error."))
-              % repo.alias() << endl;
+              % repo.name() << endl;
           ERR << format("Disabling repository '%s' because of the above error.")
-              % repo.alias() << endl;
+              % repo.name() << endl;
 
           it->setEnabled(false);
         }
@@ -273,11 +273,11 @@ static int do_init_repos()
         {
           cout << format(_(
               "Repository '%s' is out-of-date. You can run 'zypper refresh'"
-              " as root to update it.")) % repo.alias()
+              " as root to update it.")) % repo.name()
             << endl;
 
           string nonroot =
-            "We're running as non-root, skipping refresh of " + repo.alias(); 
+            "We're running as non-root, skipping refresh of " + repo.name(); 
           MIL << nonroot << endl;
           cout_vv << nonroot << endl;
         }
@@ -548,7 +548,7 @@ int refresh_repos(vector<string> & arguments)
     if (!repo.enabled())
     {
       string msg = boost::str(
-        format(_("Skipping disabled repository '%s'")) % repo.alias());
+        format(_("Skipping disabled repository '%s'")) % repo.name());
 
       if (argc)
         cerr << msg << endl;
@@ -585,9 +585,9 @@ int refresh_repos(vector<string> & arguments)
     if (error)
     {
       cerr << format(_("Skipping repository '%s' because of the above error."))
-          % repo.alias() << endl;
+          % repo.name() << endl;
       ERR << format("Skipping repository '%s' because of the above error.")
-          % repo.alias() << endl;
+          % repo.name() << endl;
       error_count++;
     }
   }
@@ -684,7 +684,7 @@ int add_repo(RepoInfo & repo)
     ZYPP_CAUGHT(e);
     cerr << format(_("Repository named '%s' already exists. Please, use another alias."))
         % repo.alias() << endl;
-    ERR << "Repository named '%s' already exists." << endl;
+    ERR << "Repository named '" << repo.alias() << "' already exists." << endl;
     return ZYPPER_EXIT_ERR_ZYPP;
   }
   catch (const RepoUnknownTypeException & e)
@@ -714,7 +714,7 @@ int add_repo(RepoInfo & repo)
     return ZYPPER_EXIT_ERR_BUG;
   }
 
-  cout << format(_("Repository '%s' successfully added")) % repo.alias();
+  cout << format(_("Repository '%s' successfully added")) % repo.name();
   cout_n << ":";
   cout << endl;
 
@@ -737,13 +737,13 @@ int add_repo(RepoInfo & repo)
 
   if(is_cd)
   {
-    cout_n << format(_("Reading data from '%s' media")) % repo.alias() << endl;
+    cout_n << format(_("Reading data from '%s' media")) % repo.name() << endl;
     bool error = refresh_raw_metadata(repo, false);
     if (!error)
       error = build_cache(repo, false);
     if (error)
     {
-      cerr << format(_("Problem reading data from '%s' media")) % repo.alias() << endl;
+      cerr << format(_("Problem reading data from '%s' media")) % repo.name() << endl;
       cerr << _("Please, check if your installation media is valid and readable.") << endl;
       return ZYPPER_EXIT_ERR_ZYPP;
     }
@@ -867,8 +867,8 @@ static bool do_remove_repo(const RepoInfo & repoinfo)
   try
   {
     manager.removeRepository(repoinfo);
-    cout << format(_("Repository %s has been removed.")) % repoinfo.alias() << endl;
-    MIL << format("Repository %s has been removed.") % repoinfo.alias() << endl;
+    cout << format(_("Repository %s has been removed.")) % repoinfo.name() << endl;
+    MIL << format("Repository %s has been removed.") % repoinfo.name() << endl;
   }
   catch (const repo::RepoNotFoundException & ex)
   {
@@ -1045,22 +1045,22 @@ void load_repo_resolvables(bool to_pool)
       if ( manager.metadataStatus(repo).empty() )
       {
         cout_v << format(_("Retrieving repository '%s' data..."))
-                         % repo.alias() << endl;
+                         % repo.name() << endl;
         error = refresh_raw_metadata(repo, false);
       }
 
       if (!error && !manager.isCached(repo))
       {
         cout_v << format(_("Repository '%s' not cached. Caching..."))
-                         % repo.alias() << endl;
+                         % repo.name() << endl;
         error = build_cache(repo, false);
       }
 
       if (error)
       {
-        cerr << format(_("Problem loading data from '%s'")) % repo.alias() << endl;
+        cerr << format(_("Problem loading data from '%s'")) % repo.name() << endl;
         cerr << format(_("Resolvables from '%s' not loaded because of error."))
-            % repo.alias() << endl;
+            % repo.name() << endl;
         continue;
       }
 
@@ -1077,10 +1077,10 @@ void load_repo_resolvables(bool to_pool)
     {
       ZYPP_CAUGHT(e);
       report_problem(e,
-          boost::str(format(_("Problem loading data from '%s'")) % repo.alias()),
+          boost::str(format(_("Problem loading data from '%s'")) % repo.name()),
           _("Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."));
       cerr << format(_("Resolvables from '%s' not loaded because of error."))
-                      % repo.alias() << endl;
+                      % repo.name() << endl;
     }
   }
 }
