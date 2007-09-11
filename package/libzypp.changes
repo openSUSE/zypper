@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep 11 13:52:47 CEST 2007 - jkupec@suse.cz
+
+- SYSCONFDIR variable added for modifying /etc 
+
+-------------------------------------------------------------------
 Tue Sep 11 12:18:11 CEST 2007 - schubi@suse.de
 
 - uninstallable resolvable -->suggested solution: delete; Bug 308164
