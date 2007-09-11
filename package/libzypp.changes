@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 11 17:25:35 CEST 2007 - schubi@suse.de
+
+- Update: rename language packages --> take that package which fits to the
+  selected language Bug 308098
+- r 7919 
+
+-------------------------------------------------------------------
 Tue Sep 11 16:11:20 CEST 2007 - dmacvicar@suse.de
 
 - restore deltas and patch rpms from the cache (#309124)
