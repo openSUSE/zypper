@@ -29,7 +29,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
 
-
+using std::endl;
 using std::string;
 
 ///////////////////////////////////////////////////////////////////
@@ -292,10 +292,9 @@ namespace zypp
     */
     inline int _Log_Result( const int res, const char * rclass = "errno" )
     {
+      MIL << endl;
       if ( res )
-        WAR << " FAILED: " << rclass << " " << res << std::endl;
-      else
-        DBG << std::endl;
+        WAR << " FAILED: " << rclass << " " << res << endl;
       return res;
     }
 
@@ -306,7 +305,7 @@ namespace zypp
     //
     int mkdir( const Pathname & path, unsigned mode )
     {
-      DBG << "mkdir " << path << ' ' << str::octstring( mode );
+      MIL << "mkdir " << path << ' ' << str::octstring( mode );
       if ( ::mkdir( path.asString().c_str(), mode ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -334,20 +333,26 @@ namespace zypp
       else
         lastpos=1;
 
-      //    DBG << "about to create " << spath << endl;
+      //    MIL << "about to create " << spath << endl;
       while((pos = spath.find('/',lastpos)) != string::npos )
         {
           string dir = spath.substr(0,pos);
           ret = ::mkdir(dir.c_str(), mode);
           if(ret == -1)
+          {
+            // ignore errors about already existing directorys
+            if(errno == EEXIST)
+              ret=0;
+            else
             {
-              // ignore errors about already existing directorys
-              if(errno == EEXIST)
-                ret=0;
-              else
-                ret=errno;
+              ret=errno;
+              WAR << " FAILED: mkdir " << path << ' ' << str::octstring( mode ) << " errno " << ret << endl;
             }
-          //	DBG << "creating directory " << dir << (ret?" failed":" succeeded") << endl;
+          }
+          else
+          {
+            MIL << "mkdir " << path << ' ' << str::octstring( mode );
+          }
           lastpos = pos+1;
         }
       return ret;
@@ -360,7 +365,7 @@ namespace zypp
     //
     int rmdir( const Pathname & path )
     {
-      DBG << "rmdir " << path;
+      MIL << "rmdir " << path;
       if ( ::rmdir( path.asString().c_str() ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -374,7 +379,7 @@ namespace zypp
     //
     int recursive_rmdir( const Pathname & path )
     {
-      DBG << "recursive_rmdir " << path << ' ';
+      MIL << "recursive_rmdir " << path << ' ';
       PathInfo p( path );
 
       if ( !p.isExist() ) {
@@ -392,7 +397,7 @@ namespace zypp
         }
       catch ( boost::filesystem::filesystem_error & excpt )
         {
-          WAR << " FAILED: " << excpt.what() << std::endl;
+          WAR << " FAILED: " << excpt.what() << endl;
           return -1;
         }
 
@@ -406,7 +411,7 @@ namespace zypp
     //
     int clean_dir( const Pathname & path )
     {
-      DBG << "clean_dir " << path << ' ';
+      MIL << "clean_dir " << path << ' ';
       PathInfo p( path );
 
       if ( !p.isExist() ) {
@@ -420,7 +425,7 @@ namespace zypp
       string cmd( str::form( "cd '%s' && rm -rf --preserve-root -- *", path.asString().c_str() ) );
       ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
       for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        DBG << "  " << output;
+        MIL << "  " << output;
       }
       int ret = prog.close();
       return _Log_Result( ret, "returned" );
@@ -433,7 +438,7 @@ namespace zypp
     //
     int copy_dir( const Pathname & srcpath, const Pathname & destpath )
     {
-      DBG << "copy_dir " << srcpath << " -> " << destpath << ' ';
+      MIL << "copy_dir " << srcpath << " -> " << destpath << ' ';
 
       PathInfo sp( srcpath );
       if ( !sp.isDir() ) {
@@ -461,7 +466,7 @@ namespace zypp
       };
       ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
       for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        DBG << "  " << output;
+        MIL << "  " << output;
       }
       int ret = prog.close();
       return _Log_Result( ret, "returned" );
@@ -474,7 +479,7 @@ namespace zypp
     //
     int copy_dir_content(const Pathname & srcpath, const Pathname & destpath)
     {
-      DBG << "copy_dir " << srcpath << " -> " << destpath << ' ';
+      MIL << "copy_dir " << srcpath << " -> " << destpath << ' ';
 
       PathInfo sp( srcpath );
       if ( !sp.isDir() ) {
@@ -502,7 +507,7 @@ namespace zypp
       };
       ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
       for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        DBG << "  " << output;
+        MIL << "  " << output;
       }
       int ret = prog.close();
       return _Log_Result( ret, "returned" );
@@ -518,7 +523,7 @@ namespace zypp
     {
       retlist.clear();
 
-      DBG << "readdir " << path << ' ';
+      MIL << "readdir " << path << ' ';
 
       DIR * dir = ::opendir( path.asString().c_str() );
       if ( ! dir ) {
@@ -624,7 +629,7 @@ namespace zypp
     //
     int unlink( const Pathname & path )
     {
-      DBG << "unlink " << path;
+      MIL << "unlink " << path;
       if ( ::unlink( path.asString().c_str() ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -638,7 +643,7 @@ namespace zypp
     //
     int rename( const Pathname & oldpath, const Pathname & newpath )
     {
-      DBG << "rename " << oldpath << " -> " << newpath;
+      MIL << "rename " << oldpath << " -> " << newpath;
       if ( ::rename( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -652,7 +657,7 @@ namespace zypp
     //
     int copy( const Pathname & file, const Pathname & dest )
     {
-      DBG << "copy " << file << " -> " << dest << ' ';
+      MIL << "copy " << file << " -> " << dest << ' ';
 
       PathInfo sp( file );
       if ( !sp.isFile() ) {
@@ -673,7 +678,7 @@ namespace zypp
       };
       ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
       for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        DBG << "  " << output;
+        MIL << "  " << output;
       }
       int ret = prog.close();
       return _Log_Result( ret, "returned" );
@@ -686,7 +691,7 @@ namespace zypp
     //
     int symlink( const Pathname & oldpath, const Pathname & newpath )
     {
-      DBG << "symlink " << newpath << " -> " << oldpath;
+      MIL << "symlink " << newpath << " -> " << oldpath;
       if ( ::symlink( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -700,7 +705,7 @@ namespace zypp
     //
     int hardlink( const Pathname & oldpath, const Pathname & newpath )
     {
-      DBG << "hardlink " << newpath << " -> " << oldpath;
+      MIL << "hardlink " << newpath << " -> " << oldpath;
       if ( ::link( oldpath.asString().c_str(), newpath.asString().c_str() ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -714,7 +719,7 @@ namespace zypp
     //
     int copy_file2dir( const Pathname & file, const Pathname & dest )
     {
-      DBG << "copy_file2dir " << file << " -> " << dest << ' ';
+      MIL << "copy_file2dir " << file << " -> " << dest << ' ';
 
       PathInfo sp( file );
       if ( !sp.isFile() ) {
@@ -735,7 +740,7 @@ namespace zypp
       };
       ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
       for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-        DBG << "  " << output;
+        MIL << "  " << output;
       }
       int ret = prog.close();
       return _Log_Result( ret, "returned" );
@@ -816,7 +821,7 @@ namespace zypp
     //
     int chmod( const Pathname & path, mode_t mode )
     {
-      DBG << "chmod " << path << ' ' << str::octstring( mode );
+      MIL << "chmod " << path << ' ' << str::octstring( mode );
       if ( ::chmod( path.asString().c_str(), mode ) == -1 ) {
         return _Log_Result( errno );
       }
@@ -886,7 +891,7 @@ namespace zypp
     //
     int touch (const Pathname & path)
     {
-      DBG << "touch " << path << std::endl;
+      MIL << "touch " << path;
       struct ::utimbuf times;
       times.actime = ::time( 0 );
       times.modtime = ::time( 0 );
