@@ -700,6 +700,7 @@ int show_summary()
       it != toupgrade.end(); ++it)
   {
     string title = boost::str(format(_PL(
+        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
         "The following %s is going to be upgraded:",
         "The following %s are going to be upgraded:",
         it->second.size()
@@ -712,7 +713,9 @@ int show_summary()
       it != todowngrade.end(); ++it)
   {
     string title = boost::str(format(_PL(
+        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
         "The following %s is going to be downgraded:",
+        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
         "The following %s are going to be downgraded:",
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
@@ -724,7 +727,9 @@ int show_summary()
       it != toinstall.end(); ++it)
   {
     string title = boost::str(format(_PL(
+        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
         "The following NEW %s is going to be installed:",
+        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
         "The following NEW %s are going to be installed:",
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
@@ -736,7 +741,9 @@ int show_summary()
       it != toremove.end(); ++it)
   {
     string title = boost::str(format(_PL(
+        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
         "The following %s is going to be REMOVED:",
+        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
         "The following %s are going to be REMOVED:",
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
@@ -755,6 +762,10 @@ int show_summary()
     // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
     cout_n << format(_("After the operation, additional %s will be used."))
         % new_installed_size.asString(0,1,1);
+  //! \todo uncomment the following for bug #309112
+  /*
+  else if (new_installed_size == 0)
+    cout_n << _("No additional space will be used or freed after the operation.");*/
   else
   {
     // get the absolute size
@@ -768,6 +779,7 @@ int show_summary()
 
   return retv;
 }
+
 /*
 std::string calculate_token()
 {
