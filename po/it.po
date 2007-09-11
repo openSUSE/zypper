@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-31 15:19+0200\n"
-"PO-Revision-Date: 2007-09-06 19:40+0100\n"
+"POT-Creation-Date: 2007-09-11 11:12+0200\n"
+"PO-Revision-Date: 2007-09-11 13:57+0100\n"
 "Last-Translator: Alberto Passalacqua <alberto.passalacqua@tin.it>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Nessun file di sommario per %s."
 #: ../src/zypper-keyring-callbacks.h:136
 #: ../src/zypper-keyring-callbacks.h:144
 #: ../src/zypper-keyring-callbacks.h:163
-#: ../src/zypper-misc.cc:1371
+#: ../src/zypper-misc.cc:1402
 msgid "Continue?"
 msgstr "Continuare?"
 
@@ -106,184 +106,291 @@ msgstr "Ignora verifica del sommario fallita per %s (Era atteso %s, è stato tro
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "Verifica del sommario fallita per %s. Era atteso %s, è stato trovato %s."
 
-#: ../src/zypper-misc.cc:41
+#: ../src/zypper-misc.cc:42
 msgid "Initializing Target"
 msgstr "Inizializzazione della destinazione in corso"
 
-#: ../src/zypper-misc.cc:270
+#: ../src/zypper-misc.cc:83
+msgid "package"
+msgid_plural "packages"
+msgstr[0] "pacchetto"
+msgstr[1] "pacchetti"
+
+#: ../src/zypper-misc.cc:85
+msgid "selection"
+msgid_plural "selections"
+msgstr[0] "selezione"
+msgstr[1] "selezioni"
+
+#: ../src/zypper-misc.cc:87
+msgid "pattern"
+msgid_plural "patterns"
+msgstr[0] "modello"
+msgstr[1] "modelli"
+
+#: ../src/zypper-misc.cc:89
+msgid "product"
+msgid_plural "product"
+msgstr[0] "prodotto"
+msgstr[1] "prodotti"
+
+#: ../src/zypper-misc.cc:91
+msgid "patch"
+msgid_plural "patches"
+msgstr[0] "patch"
+msgstr[1] "patch"
+
+#: ../src/zypper-misc.cc:93
+msgid "script"
+msgid_plural "scripts"
+msgstr[0] "script"
+msgstr[1] "script"
+
+#: ../src/zypper-misc.cc:95
+msgid "message"
+msgid_plural "messages"
+msgstr[0] "messaggio"
+msgstr[1] "messaggi"
+
+#: ../src/zypper-misc.cc:97
+msgid "language"
+msgid_plural "languages"
+msgstr[0] "lingua"
+msgstr[1] "lingue"
+
+#: ../src/zypper-misc.cc:99
+msgid "atom"
+msgid_plural "atoms"
+msgstr[0] "atomo"
+msgstr[1] "atomi"
+
+#: ../src/zypper-misc.cc:101
+msgid "system"
+msgid_plural "systems"
+msgstr[0] "sistema"
+msgstr[1] "sistemi"
+
+#: ../src/zypper-misc.cc:103
+msgid "srcpackage"
+msgid_plural "srcpackages"
+msgstr[0] "pacchetto src"
+msgstr[1] "pacchetti src"
+
+#. default
+#: ../src/zypper-misc.cc:105
+msgid "resolvable"
+msgid_plural "resolvables"
+msgstr[0] "Risolubile"
+msgstr[1] "Risolubili"
+
+#: ../src/zypper-misc.cc:271
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "Impossibile analizzare sintatticamente la capacità '%s'."
 
 #. TranslatorExplanation e.g. "package 'pornview' not found"
-#: ../src/zypper-misc.cc:294
+#: ../src/zypper-misc.cc:295
 #, c-format
 msgid "%s '%s' not found"
 msgstr "%s '%s' non trovato"
 
-#: ../src/zypper-misc.cc:303
+#: ../src/zypper-misc.cc:304
 #, c-format
 msgid "skipping %s '%s' (already installed)"
 msgstr "Esclusione di %s '%s' (già installato)"
 
-#: ../src/zypper-misc.cc:309
+#: ../src/zypper-misc.cc:310
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "Impossibile aggiungere '%s' all’elenco dei pacchetti da installare."
 
-#: ../src/zypper-misc.cc:329
+#: ../src/zypper-misc.cc:330
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Impossibile aggiungere '%s' all’elenco dei pacchetti da installare."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:355
+#: ../src/zypper-misc.cc:356
 #: ../src/zypper-callbacks.h:42
 msgid "Not found"
 msgstr "Non trovato"
 
-#: ../src/zypper-misc.cc:421
+#: ../src/zypper-misc.cc:422
+#: ../src/zypper-misc.cc:506
 msgid "Problem: "
 msgstr "Problema:"
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/zypper-misc.cc:434
+#: ../src/zypper-misc.cc:435
 #, c-format
 msgid " Solution %d: "
 msgstr "Soluzione %d:"
 
 #. input prompt
-#: ../src/zypper-misc.cc:449
+#: ../src/zypper-misc.cc:450
 msgid "number, (r)etry or (c)ancel> "
 msgstr "numero, (r)iprova o (c)ancella>"
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:457
+#: ../src/zypper-misc.cc:461
 msgid "r"
 msgstr "r"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:460
+#: ../src/zypper-misc.cc:464
 msgid "c"
 msgstr "c"
 
-#: ../src/zypper-misc.cc:466
+#: ../src/zypper-misc.cc:470
 #, c-format
 msgid "Applying solution %s"
 msgstr "Applicazione della soluzione %s"
 
-#: ../src/zypper-misc.cc:488
+#: ../src/zypper-misc.cc:494
 #, c-format
 msgid "%s Problems:"
 msgstr "%s Problemi:"
 
-#: ../src/zypper-misc.cc:491
+#. should not happen! If solve() failed at least one problem must be set!
+#: ../src/zypper-misc.cc:498
 msgid "Specified capability not found"
 msgstr "La capacità specificata non è stata trovata"
 
-#: ../src/zypper-misc.cc:621
-#: ../src/zypper-misc.cc:623
+#: ../src/zypper-misc.cc:637
+#: ../src/zypper-misc.cc:639
 msgid "Nothing to do."
 msgstr "Nessuna operazione da eseguire."
 
-#: ../src/zypper-misc.cc:737
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:708
+#, c-format
+msgid "The following %s is going to be upgraded:"
+msgid_plural "The following %s are going to be upgraded:"
+msgstr[0] "Il %s seguente sarà aggiornato:"
+msgstr[1] "I %s seguenti saranno aggiornati:"
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:721
+#, c-format
+msgid "The following %s is going to be downgraded:"
+msgid_plural "The following %s are going to be downgraded:"
+msgstr[0] "Il %s pacchetto sarà scaricato:"
+msgstr[1] "I %s seguenti saranno scaricati:"
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:735
+#, c-format
+msgid "The following NEW %s is going to be installed:"
+msgid_plural "The following NEW %s are going to be installed:"
+msgstr[0] "Il seguente NUOVO %s sarà installato:"
+msgstr[1] "I seguenti NUOVI %s saranno installati:"
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:749
+#, c-format
+msgid "The following %s is going to be REMOVED:"
+msgid_plural "The following %s are going to be REMOVED:"
+msgstr[0] "Il %s seguente sarà RIMOSSO:"
+msgstr[1] "I %s seguenti saranno RIMOSSI:"
+
+#: ../src/zypper-misc.cc:762
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Dimensione complessiva del download: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:741
+#: ../src/zypper-misc.cc:767
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "Dopo l'operazione, sarà utilizzato %s addizionale."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:749
+#: ../src/zypper-misc.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "Dopo l'operazione saranno liberati %s."
 
-#: ../src/zypper-misc.cc:796
+#: ../src/zypper-misc.cc:827
 #, c-format
 msgid "%s items locked"
 msgstr "elementi %s bloccati"
 
-#: ../src/zypper-misc.cc:797
+#: ../src/zypper-misc.cc:828
 msgid "Establishing status of aggregates"
 msgstr "Definizione dello stato dei componenti aggregati"
 
-#: ../src/zypper-misc.cc:805
+#: ../src/zypper-misc.cc:836
 msgid "Resolving dependencies..."
 msgstr "Risoluzione delle dipendenze in corso…"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/zypper-misc.cc:831
+#: ../src/zypper-misc.cc:862
 #, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "%d patch richieste (%d patch di sicurezza)"
 
-#: ../src/zypper-misc.cc:840
+#: ../src/zypper-misc.cc:871
 #: ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "installato"
 
-#: ../src/zypper-misc.cc:840
+#: ../src/zypper-misc.cc:871
 #: ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "disinstallato"
 
-#: ../src/zypper-misc.cc:842
+#: ../src/zypper-misc.cc:873
 #: ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "Non più applicabile"
 
-#: ../src/zypper-misc.cc:842
+#: ../src/zypper-misc.cc:873
 #: ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "Non applicabile"
 
-#: ../src/zypper-misc.cc:844
+#: ../src/zypper-misc.cc:875
 #: ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "Applicato"
 
-#: ../src/zypper-misc.cc:844
+#: ../src/zypper-misc.cc:875
 #: ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "Non necessario"
 
-#: ../src/zypper-misc.cc:846
+#: ../src/zypper-misc.cc:877
 #: ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "Danneggiato"
 
-#: ../src/zypper-misc.cc:846
+#: ../src/zypper-misc.cc:877
 #: ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "Necessario"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:848
+#: ../src/zypper-misc.cc:879
 msgid "error"
 msgstr "errore"
 
-#: ../src/zypper-misc.cc:877
-#: ../src/zypper-misc.cc:997
-#: ../src/zypper-misc.cc:1146
+#: ../src/zypper-misc.cc:908
+#: ../src/zypper-misc.cc:1028
+#: ../src/zypper-misc.cc:1177
 #: ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "Catalogo:"
 
-#: ../src/zypper-misc.cc:877
-#: ../src/zypper-misc.cc:997
-#: ../src/zypper-misc.cc:1146
+#: ../src/zypper-misc.cc:908
+#: ../src/zypper-misc.cc:1028
+#: ../src/zypper-misc.cc:1177
 #: ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "Sorgente di installazione:"
 
-#: ../src/zypper-misc.cc:878
-#: ../src/zypper-misc.cc:998
-#: ../src/zypper-misc.cc:1152
+#: ../src/zypper-misc.cc:909
+#: ../src/zypper-misc.cc:1029
+#: ../src/zypper-misc.cc:1183
 #: ../src/zypper-sources.cc:316
 #: ../src/zypper-sources.cc:357
 #: ../src/zypper-search.h:299
@@ -291,29 +398,29 @@ msgid "Name"
 msgstr "Nome"
 
 #. best_effort does not know version or arch yet
-#: ../src/zypper-misc.cc:878
-#: ../src/zypper-misc.cc:998
-#: ../src/zypper-misc.cc:1154
+#: ../src/zypper-misc.cc:909
+#: ../src/zypper-misc.cc:1029
+#: ../src/zypper-misc.cc:1185
 #: ../src/zypper-search.h:299
 msgid "Version"
 msgstr "Versione"
 
-#: ../src/zypper-misc.cc:878
-#: ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:909
+#: ../src/zypper-misc.cc:1029
 msgid "Category"
 msgstr "Categoria"
 
-#: ../src/zypper-misc.cc:878
-#: ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:909
+#: ../src/zypper-misc.cc:1029
 #: ../src/zypper-sources.cc:316
 msgid "Status"
 msgstr "Stato"
 
-#: ../src/zypper-misc.cc:904
+#: ../src/zypper-misc.cc:935
 msgid "No needed patches found."
 msgstr "Nessuna patch necessaria trovata."
 
-#: ../src/zypper-misc.cc:1032
+#: ../src/zypper-misc.cc:1063
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -321,25 +428,25 @@ msgstr ""
 "AVVISO: questi aggiornamenti riguardano solo il programma di aggiornamento.\n"
 "Sono tuttavia disponibili anche altri aggiornamenti.\n"
 
-#: ../src/zypper-misc.cc:1042
-#: ../src/zypper-misc.cc:1188
+#: ../src/zypper-misc.cc:1073
+#: ../src/zypper-misc.cc:1219
 msgid "No updates found."
 msgstr "Nessun aggiornamento trovato."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:1144
+#: ../src/zypper-misc.cc:1175
 #: ../src/zypper-search.h:286
 msgid "S"
 msgstr "S"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:1149
+#: ../src/zypper-misc.cc:1180
 #: ../src/zypper-search.h:295
 msgid "Bundle"
 msgstr "Pacchetto"
 
-#: ../src/zypper-misc.cc:1154
+#: ../src/zypper-misc.cc:1185
 #: ../src/zypper-search.h:299
 msgid "Arch"
 msgstr "Arch."
@@ -347,26 +454,26 @@ msgstr "Arch."
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:1312
+#: ../src/zypper-misc.cc:1343
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "AVVISO: %s è interattivo e verrà ignorato."
 
-#: ../src/zypper-misc.cc:1375
+#: ../src/zypper-misc.cc:1406
 msgid "committing"
 msgstr "commit"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: ../src/zypper-misc.cc:1390
+#: ../src/zypper-misc.cc:1421
 msgid "Problem downloading the package file from the repository:"
 msgstr "Si è verificato un problema scaricando il file del pacchetto dalla sorgente di installazione:"
 
-#: ../src/zypper-misc.cc:1391
+#: ../src/zypper-misc.cc:1422
 #: ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
 msgstr "Per favore, vedere il messaggio di errore precedente per un suggerimento."
 
-#: ../src/zypper-misc.cc:1401
+#: ../src/zypper-misc.cc:1432
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -382,63 +489,63 @@ msgstr ""
 " – utilizzare un altro supporto di installazione (se ad es. quello in uso è danneggiato)\n"
 " – utilizzare un’altra sorgente di installazione"
 
-#: ../src/zypper-misc.cc:1421
+#: ../src/zypper-misc.cc:1452
 msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
 msgstr "Una delle patch installate richiede di riavviare il computer. Riavviarlo il più presto possibile."
 
-#: ../src/zypper-misc.cc:1424
+#: ../src/zypper-misc.cc:1455
 msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "ATTENZIONE: Una delle patch installate richiede di riavviare il computer. Riavviarlo il più presto possibile."
 
-#: ../src/zypper-misc.cc:1430
+#: ../src/zypper-misc.cc:1461
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "ATTENZIONE: una delle patch installate riguarda il gestore pacchetti. Pertanto, è necessario riavviarlo prima di eseguire le operazioni successive."
 
-#: ../src/zypper-misc.cc:1456
+#: ../src/zypper-misc.cc:1487
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Accetta automaticamente la licenza di %s %s."
 
-#: ../src/zypper-misc.cc:1467
+#: ../src/zypper-misc.cc:1498
 #, c-format
 msgid "%s %s license:"
 msgstr "%s %s licenza:"
 
-#: ../src/zypper-misc.cc:1471
+#: ../src/zypper-misc.cc:1502
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "Per installare questo pacchetto, è necessario accettare i termini del contratto di licenza. Continuare?"
 
-#: ../src/zypper-misc.cc:1482
+#: ../src/zypper-misc.cc:1513
 msgid "Aborting installation due to the need for license(s) confirmation."
 msgstr "Installazione interrotta a causa della necessità di conferma di una o più licenze."
 
 #. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:1486
+#: ../src/zypper-misc.cc:1517
 msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
 msgstr "Per favore, riavviare l'operazione in modalità interattiva e conferma l'accettazione delle licenze richieste, oppure usa l'opzione --auto-agree-with-licenses."
 
-#: ../src/zypper-misc.cc:1497
+#: ../src/zypper-misc.cc:1528
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Interruzione dell’installazione a causa di un disaccordo dell’utente con la licenza %s %s."
 
-#: ../src/zypper-misc.cc:1567
+#: ../src/zypper-misc.cc:1598
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "Installazione dei pacchetti sorgente %s-%s"
 
-#: ../src/zypper-misc.cc:1575
+#: ../src/zypper-misc.cc:1606
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Il pacchetto sorgente %s-%s è stato installato con successo."
 
-#: ../src/zypper-misc.cc:1581
+#: ../src/zypper-misc.cc:1612
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Si è verificato un problema durante l'installazione del pacchetto sorgente %s-%s:"
 
-#: ../src/zypper-misc.cc:1589
+#: ../src/zypper-misc.cc:1620
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Pacchetto sorgente '%s' non trovato."
@@ -880,6 +987,17 @@ msgstr "no"
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
 msgstr "Risposta non valida '%s'. Inserire 'y' per '%s' o 'n' per '%s' se null'altro funziona"
 
+#. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
+#: ../src/zypper-callbacks.cc:222
+msgid "Too many arguments"
+msgstr "Troppi argomenti"
+
+#: ../src/zypper-callbacks.cc:223
+#: ../src/zypper.cc:888
+#: ../src/zypper.cc:1475
+msgid "Usage"
+msgstr "Uso"
+
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
 msgstr "Opzione sconosciuta"
@@ -1014,7 +1132,7 @@ msgid "This is a bug, please file a bug report against zypper."
 msgstr "Questo è un bug. Compilare un rapporto relativo ai bug in zypper."
 
 #: ../src/zypper.cc:76
-#: ../src/zypper.cc:899
+#: ../src/zypper.cc:915
 msgid "Given URL is invalid."
 msgstr "L'URL fornito non è valido."
 
@@ -1527,103 +1645,104 @@ msgstr ""
 "      +@@@@#` "
 
 #: ../src/zypper.cc:795
-#: ../src/zypper.cc:873
-#: ../src/zypper.cc:944
-#: ../src/zypper.cc:984
+#: ../src/zypper.cc:880
+#: ../src/zypper.cc:960
+#: ../src/zypper.cc:1006
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Per modificare le sorgenti di installazione del sistema sono necessari i privilegi di utente root."
 
-#: ../src/zypper.cc:822
-#: ../src/zypper.cc:950
+#: ../src/zypper.cc:829
+#: ../src/zypper.cc:966
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "Troppi pochi argomento. E' necessario inserire almeno l'URL e l'alias."
 
-#: ../src/zypper.cc:854
+#: ../src/zypper.cc:861
 msgid "Specified type is not a valid repository type:"
 msgstr "Il tipo specificato non è un tipo valido di sorgente di installazione:"
 
-#: ../src/zypper.cc:855
+#: ../src/zypper.cc:862
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "Vedere 'zypper -h addrepo' o 'man zypper' per ottenere una lista dei tipi conosciuti di sorgente di installazione."
 
-#: ../src/zypper.cc:879
+#: ../src/zypper.cc:886
+#: ../src/zypper.cc:1473
 msgid "Required argument missing."
 msgstr "Mancano degli argomenti richiesti."
 
-#: ../src/zypper.cc:892
+#: ../src/zypper.cc:908
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "Sorgente di installazione non trovata tramite l'alias, tentativo di rimozione in corso tramite URL..."
 
-#: ../src/zypper.cc:925
+#: ../src/zypper.cc:941
 msgid "Repository not found by given alias or URL."
 msgstr "Sorgente di installazione non trovata tramite l'alias o l'URL."
 
-#: ../src/zypper.cc:990
+#: ../src/zypper.cc:1012
 msgid "Alias is a required argument."
 msgstr "L'alias è un argomento richiesto."
 
-#: ../src/zypper.cc:1012
+#: ../src/zypper.cc:1040
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Per aggiornare le sorgenti di installazione del sistema sono necessari i privilegi dell'utente root."
 
-#: ../src/zypper.cc:1049
+#: ../src/zypper.cc:1077
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Per visualizzare le origini del sistema sono necessari i privilegi dell'utente root."
 
-#: ../src/zypper.cc:1063
-#: ../src/zypper.cc:1282
-#: ../src/zypper.cc:1355
+#: ../src/zypper.cc:1091
+#: ../src/zypper.cc:1334
+#: ../src/zypper.cc:1421
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Tipo di risolubile sconosciuto: %s"
 
-#: ../src/zypper.cc:1081
+#: ../src/zypper.cc:1109
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Attenzione: Nessuna sorgente di installazione definita. Si opererà solo con i risolubili installati. Nulla potrà essere installato."
 
-#: ../src/zypper.cc:1101
-#: ../src/zypper.cc:1380
+#: ../src/zypper.cc:1129
+#: ../src/zypper.cc:1446
 msgid "Generating solver test case..."
 msgstr "Generazione del caso di prova del risolutore..."
 
-#: ../src/zypper.cc:1103
-#: ../src/zypper.cc:1382
+#: ../src/zypper.cc:1131
+#: ../src/zypper.cc:1448
 msgid "Solver test case generated successfully."
 msgstr "Generazione del caso di prova del risolutore avvenuta con successo."
 
-#: ../src/zypper.cc:1106
-#: ../src/zypper.cc:1384
+#: ../src/zypper.cc:1134
+#: ../src/zypper.cc:1450
 msgid "Error creating the solver test case."
 msgstr "Errore durante la creazione del caso di prova per il risolutore."
 
-#: ../src/zypper.cc:1128
+#: ../src/zypper.cc:1156
 msgid "Source package name is a required argument."
 msgstr "Il nome del pacchetto sorgente è richiesto come parametro."
 
-#: ../src/zypper.cc:1169
+#: ../src/zypper.cc:1198
 msgid "Unknown resolvable type "
 msgstr "Tipo di risolvibile sconosciuto"
 
-#: ../src/zypper.cc:1206
+#: ../src/zypper.cc:1235
 msgid "No resolvables found."
 msgstr "Nessun risolubile trovato."
 
 #. 'rug' is the name of a program and must not be translated
 #. 'best-effort' is a program parameter and can not be translated
-#: ../src/zypper.cc:1292
-#: ../src/zypper.cc:1365
+#: ../src/zypper.cc:1344
+#: ../src/zypper.cc:1431
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "Esecuzione in emulazione 'rug', impossibile utilizzare il metodo 'best-effort' per l'aggiornamento."
 
-#: ../src/zypper.cc:1338
+#: ../src/zypper.cc:1397
 msgid "Root privileges are required for updating packages."
 msgstr "Per aggiornare i pacchetti sono necessari i privilegi dell'utente root."
 
-#: ../src/zypper.cc:1441
+#: ../src/zypper.cc:1517
 msgid "Unexpected exception."
 msgstr "Eccezione imprevista."
 
-#: ../src/zypper.cc:1526
+#: ../src/zypper.cc:1602
 msgid "You already are running zypper's shell."
 msgstr "Zypper è già in esecuzione in una shell."
 
@@ -1655,13 +1774,13 @@ msgstr "Oggetto non valido"
 msgid "Error"
 msgstr "Errore"
 
-#: ../src/zypper-media-callbacks.h:56
+#: ../src/zypper-media-callbacks.h:57
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Per favore, inserire il supporto [%s] # %d e premere 's' per continuare o 'n' per annullare l'operazione."
 
-#: ../src/zypper-media-callbacks.h:76
-#: ../src/zypper-media-callbacks.h:82
+#: ../src/zypper-media-callbacks.h:77
+#: ../src/zypper-media-callbacks.h:83
 msgid "Downloading: "
 msgstr "Download:"
 
@@ -1712,35 +1831,34 @@ msgstr "Esecuzione: %s  (%s, %s)"
 msgid "Reading installed packages"
 msgstr "Lettura dei pacchetti installati"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-#: ../src/zypper-rpm-callbacks.h:140
-#: ../src/zypper-rpm-callbacks.h:146
+#: ../src/zypper-rpm-callbacks.h:142
+#: ../src/zypper-rpm-callbacks.h:149
 msgid "Removing "
 msgstr "Rimozione"
 
-#: ../src/zypper-rpm-callbacks.h:152
+#: ../src/zypper-rpm-callbacks.h:155
 #, c-format
 msgid "Removal of %s failed:"
 msgstr "Rimozione di %s fallita:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
-#: ../src/zypper-rpm-callbacks.h:167
+#: ../src/zypper-rpm-callbacks.h:170
 msgid "(with --nodeps)"
 msgstr "(con --nodeps)"
 
-#: ../src/zypper-rpm-callbacks.h:167
+#: ../src/zypper-rpm-callbacks.h:170
 msgid "(with --nodeps --force)"
 msgstr "(con --nodeps --force)"
 
 # TLABEL modules/inst_target_part.ycp:680
-#. TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
-#: ../src/zypper-rpm-callbacks.h:181
-#: ../src/zypper-rpm-callbacks.h:191
+#. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+#: ../src/zypper-rpm-callbacks.h:184
+#: ../src/zypper-rpm-callbacks.h:194
 #, c-format
 msgid "Installing: %s-%s"
 msgstr "Installazione di: %s-%s"
 
-#: ../src/zypper-rpm-callbacks.h:212
+#: ../src/zypper-rpm-callbacks.h:215
 #, c-format
 msgid "Installation of %s failed:"
 msgstr "Installazione di %s fallita:"

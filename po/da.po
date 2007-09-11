@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-31 15:19+0200\n"
+"POT-Creation-Date: 2007-09-11 11:12+0200\n"
 "PO-Revision-Date: 2007-09-07 14:15+0200\n"
 "Last-Translator: Martin Schlander <suse@linuxin.dk>\n"
 "Language-Team:  <opensuse-translation@opensuse.org>\n"
@@ -85,7 +85,7 @@ msgstr "Ingen oversigt for fil %s."
 
 #. there are resolvables to install/uninstall
 #: ../src/zypper-keyring-callbacks.h:136 ../src/zypper-keyring-callbacks.h:144
-#: ../src/zypper-keyring-callbacks.h:163 ../src/zypper-misc.cc:1371
+#: ../src/zypper-keyring-callbacks.h:163 ../src/zypper-misc.cc:1402
 msgid "Continue?"
 msgstr "Fortsæt?"
 
@@ -105,194 +105,303 @@ msgstr "Ignorerer mislykket oversigts-verifikation for %s (forventede %s, fandt 
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "Oversigts-verifikation mislykkedes for %s. Forventede %s, fandt %s."
 
-#: ../src/zypper-misc.cc:41
+#: ../src/zypper-misc.cc:42
 msgid "Initializing Target"
 msgstr "Initialiserer målet"
 
-#: ../src/zypper-misc.cc:270
+#: ../src/zypper-misc.cc:83
+msgid "package"
+msgid_plural "packages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:85
+msgid "selection"
+msgid_plural "selections"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:87
+msgid "pattern"
+msgid_plural "patterns"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:89
+msgid "product"
+msgid_plural "product"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:91
+msgid "patch"
+msgid_plural "patches"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:93
+#, fuzzy
+msgid "script"
+msgid_plural "scripts"
+msgstr[0] "Beskrivelse: "
+msgstr[1] "Beskrivelse: "
+
+#: ../src/zypper-misc.cc:95
+msgid "message"
+msgid_plural "messages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:97
+msgid "language"
+msgid_plural "languages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:99
+msgid "atom"
+msgid_plural "atoms"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:101
+msgid "system"
+msgid_plural "systems"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:103
+msgid "srcpackage"
+msgid_plural "srcpackages"
+msgstr[0] ""
+msgstr[1] ""
+
+#
+#. default
+#: ../src/zypper-misc.cc:105
+#, fuzzy
+msgid "resolvable"
+msgid_plural "resolvables"
+msgstr[0] "(%s resolvables)"
+msgstr[1] "(%s resolvables)"
+
+#: ../src/zypper-misc.cc:271
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "Kan ikke kapabilitet '%s'."
 
 #. TranslatorExplanation e.g. "package 'pornview' not found"
-#: ../src/zypper-misc.cc:294
+#: ../src/zypper-misc.cc:295
 #, c-format
 msgid "%s '%s' not found"
 msgstr "%s '%s' blev ikke fundet"
 
-#: ../src/zypper-misc.cc:303
+#: ../src/zypper-misc.cc:304
 #, c-format
 msgid "skipping %s '%s' (already installed)"
 msgstr "Springer over %s'%s' (der allerede er installeret)"
 
-#: ../src/zypper-misc.cc:309
+#: ../src/zypper-misc.cc:310
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "Det mislykkedes at tilføje '%s' til listen over pakker der skal installeres."
 
-#: ../src/zypper-misc.cc:329
+#: ../src/zypper-misc.cc:330
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Det mislykkedes at tilføje '%s' til listen over pakker der skal slettes."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:42
+#: ../src/zypper-misc.cc:356 ../src/zypper-callbacks.h:42
 msgid "Not found"
 msgstr "Ikke fundet"
 
-#: ../src/zypper-misc.cc:421
+#: ../src/zypper-misc.cc:422 ../src/zypper-misc.cc:506
 msgid "Problem: "
 msgstr "Problem: "
 
 #. TranslatorExplanation %d is the solution number
-#: ../src/zypper-misc.cc:434
+#: ../src/zypper-misc.cc:435
 #, c-format
 msgid " Solution %d: "
 msgstr " Løsning %d: "
 
 #. input prompt
-#: ../src/zypper-misc.cc:449
+#: ../src/zypper-misc.cc:450
 msgid "number, (r)etry or (c)ancel> "
 msgstr "tal, (f)orsøg igen eller (a)nullér> "
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:457
+#: ../src/zypper-misc.cc:461
 msgid "r"
 msgstr "f"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:460
+#: ../src/zypper-misc.cc:464
 msgid "c"
 msgstr "a"
 
-#: ../src/zypper-misc.cc:466
+#: ../src/zypper-misc.cc:470
 #, c-format
 msgid "Applying solution %s"
 msgstr "Udfører løsning %s"
 
-#: ../src/zypper-misc.cc:488
+#: ../src/zypper-misc.cc:494
 #, c-format
 msgid "%s Problems:"
 msgstr "%s problemer:"
 
-#: ../src/zypper-misc.cc:491
+#. should not happen! If solve() failed at least one problem must be set!
+#: ../src/zypper-misc.cc:498
 msgid "Specified capability not found"
 msgstr "Angivet kapabilitet ikke fundet"
 
-#: ../src/zypper-misc.cc:621 ../src/zypper-misc.cc:623
+#: ../src/zypper-misc.cc:637 ../src/zypper-misc.cc:639
 msgid "Nothing to do."
 msgstr "Intet at gøre."
 
-#: ../src/zypper-misc.cc:737
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:708
+#, c-format
+msgid "The following %s is going to be upgraded:"
+msgid_plural "The following %s are going to be upgraded:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:721
+#, c-format
+msgid "The following %s is going to be downgraded:"
+msgid_plural "The following %s are going to be downgraded:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:735
+#, c-format
+msgid "The following NEW %s is going to be installed:"
+msgid_plural "The following NEW %s are going to be installed:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. TranslatorExplanation %s is a "package", "patch", "pattern", etc
+#: ../src/zypper-misc.cc:749
+#, c-format
+msgid "The following %s is going to be REMOVED:"
+msgid_plural "The following %s are going to be REMOVED:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/zypper-misc.cc:762
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Samlet downloadstørrelse: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:741
+#: ../src/zypper-misc.cc:767
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "Efter transaktionen vil yderligere %s blive brugt."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:749
+#: ../src/zypper-misc.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "Efter transaktionen vil %s være frigjort."
 
-#: ../src/zypper-misc.cc:796
+#: ../src/zypper-misc.cc:827
 #, c-format
 msgid "%s items locked"
 msgstr "%s elementer er låst"
 
-#: ../src/zypper-misc.cc:797
+#: ../src/zypper-misc.cc:828
 msgid "Establishing status of aggregates"
 msgstr "Fastslår status af sammenfatninger"
 
-#: ../src/zypper-misc.cc:805
+#: ../src/zypper-misc.cc:836
 msgid "Resolving dependencies..."
 msgstr "Løser afhængigheder..."
 
-#: ../src/zypper-misc.cc:831
+#: ../src/zypper-misc.cc:862
 #, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "%d rettelser nødvendige (%d sikkerhedsrettelser)"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:871 ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "Installeret"
 
 #
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:871 ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "Afinstalleret"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:873 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "Ikke længere anvendelig"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:873 ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "Ikke anvendelig"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:875 ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "Anvendt"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:875 ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "Ikke nødvendig"
 
-#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:877 ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "Brudt"
 
-#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:877 ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "Nødvendig"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:848
+#: ../src/zypper-misc.cc:879
 msgid "error"
 msgstr "fejl"
 
-#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
-#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:908 ../src/zypper-misc.cc:1028
+#: ../src/zypper-misc.cc:1177 ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "Katalog: "
 
-#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
-#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:908 ../src/zypper-misc.cc:1028
+#: ../src/zypper-misc.cc:1177 ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "Softwarekilde: "
 
-#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
-#: ../src/zypper-misc.cc:1152 ../src/zypper-sources.cc:316
+#: ../src/zypper-misc.cc:909 ../src/zypper-misc.cc:1029
+#: ../src/zypper-misc.cc:1183 ../src/zypper-sources.cc:316
 #: ../src/zypper-sources.cc:357 ../src/zypper-search.h:299
 msgid "Name"
 msgstr "Navn"
 
 #. best_effort does not know version or arch yet
-#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
-#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
+#: ../src/zypper-misc.cc:909 ../src/zypper-misc.cc:1029
+#: ../src/zypper-misc.cc:1185 ../src/zypper-search.h:299
 msgid "Version"
 msgstr "Version"
 
-#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:909 ../src/zypper-misc.cc:1029
 msgid "Category"
 msgstr "Kategori"
 
-#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:909 ../src/zypper-misc.cc:1029
 #: ../src/zypper-sources.cc:316
 msgid "Status"
 msgstr "Status"
 
 #
-#: ../src/zypper-misc.cc:904
+#: ../src/zypper-misc.cc:935
 msgid "No needed patches found."
 msgstr "Ingen nødvendige rettelser fundet."
 
-#: ../src/zypper-misc.cc:1032
+#: ../src/zypper-misc.cc:1063
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -301,46 +410,46 @@ msgstr ""
 "Der er andre tilgængelige også.\n"
 
 #
-#: ../src/zypper-misc.cc:1042 ../src/zypper-misc.cc:1188
+#: ../src/zypper-misc.cc:1073 ../src/zypper-misc.cc:1219
 msgid "No updates found."
 msgstr "Ingen opdateringer fundet."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:1144 ../src/zypper-search.h:286
+#: ../src/zypper-misc.cc:1175 ../src/zypper-search.h:286
 msgid "S"
 msgstr "S"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:1149 ../src/zypper-search.h:295
+#: ../src/zypper-misc.cc:1180 ../src/zypper-search.h:295
 msgid "Bundle"
 msgstr "Bundt"
 
-#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
+#: ../src/zypper-misc.cc:1185 ../src/zypper-search.h:299
 msgid "Arch"
 msgstr "Arkitektur"
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:1312
+#: ../src/zypper-misc.cc:1343
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "ADVARSEL: %s er interaktiv, undladt."
 
-#: ../src/zypper-misc.cc:1375
+#: ../src/zypper-misc.cc:1406
 msgid "committing"
 msgstr "udfører"
 
-#: ../src/zypper-misc.cc:1390
+#: ../src/zypper-misc.cc:1421
 msgid "Problem downloading the package file from the repository:"
 msgstr "Problem med download af pakke-filen fra softwarekilden:"
 
-#: ../src/zypper-misc.cc:1391 ../src/zypper-sources.cc:89
+#: ../src/zypper-misc.cc:1422 ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
 msgstr "Se venligst fejlmeddelelsen ovenfor for at få et vink."
 
-#: ../src/zypper-misc.cc:1401
+#: ../src/zypper-misc.cc:1432
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -356,63 +465,63 @@ msgstr ""
 "- brug et andet installationsmedie ( f.eks. hvis det er beskadiget)\n"
 "- brug en anden softwarekilde"
 
-#: ../src/zypper-misc.cc:1421
+#: ../src/zypper-misc.cc:1452
 msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
 msgstr "En af de installerede rettelser kræver genstart af din maskine. Gør det venligst så snart som muligt."
 
-#: ../src/zypper-misc.cc:1424
+#: ../src/zypper-misc.cc:1455
 msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "ADVARSEL: En af de installerede rettelser kræver genstart af din maskine. Gør det venligst så snart som muligt."
 
-#: ../src/zypper-misc.cc:1430
+#: ../src/zypper-misc.cc:1461
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "ADVARSEL: En af de installerede rettelser påvirker selve pakkehåndteringen, derfor kræves den genstartet før udførsel af yderligere transaktioner."
 
-#: ../src/zypper-misc.cc:1456
+#: ../src/zypper-misc.cc:1487
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Automatisk accept af %s %s licensaftale."
 
-#: ../src/zypper-misc.cc:1467
+#: ../src/zypper-misc.cc:1498
 #, c-format
 msgid "%s %s license:"
 msgstr "%s %s licensaftale:"
 
-#: ../src/zypper-misc.cc:1471
+#: ../src/zypper-misc.cc:1502
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "For at installere denne pakke, må du acceptere betingelserne for ovenstående licensaftale. Ønsker du at fortsætte?"
 
-#: ../src/zypper-misc.cc:1482
+#: ../src/zypper-misc.cc:1513
 msgid "Aborting installation due to the need for license(s) confirmation."
 msgstr "Afbryder installationen fordi der kræves licensbekræftelse."
 
 #. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:1486
+#: ../src/zypper-misc.cc:1517
 msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
 msgstr "Genstart venligst transaktionen i interaktiv tilstand og bekræft at du er indforstået med påkrævede licensaftale(r), eller anvend valgmuligheden --auto-agree-with-licenses."
 
-#: ../src/zypper-misc.cc:1497
+#: ../src/zypper-misc.cc:1528
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Afbryder installationen fordi bruger ikke er indforstået med %s %s licensaftale."
 
-#: ../src/zypper-misc.cc:1567
+#: ../src/zypper-misc.cc:1598
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "Installerer kildepakke %s-%s"
 
-#: ../src/zypper-misc.cc:1575
+#: ../src/zypper-misc.cc:1606
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Installation af kildepakke %s-%s gennemført."
 
-#: ../src/zypper-misc.cc:1581
+#: ../src/zypper-misc.cc:1612
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problem med installation af kildepakke %s-%s:"
 
-#: ../src/zypper-misc.cc:1589
+#: ../src/zypper-misc.cc:1620
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Kildepakken '%s' blev ikke fundet."
@@ -835,6 +944,15 @@ msgstr "nej"
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
 msgstr "Ugyldigt svar '%s'. Tast 'y' for '%s' eller 'n' for '%s' hvis intet andet virker for dig"
 
+#. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
+#: ../src/zypper-callbacks.cc:222
+msgid "Too many arguments"
+msgstr ""
+
+#: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
+msgid "Usage"
+msgstr ""
+
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
 msgstr "Ukendt 'valgmulighed "
@@ -962,7 +1080,7 @@ msgstr "er ikke et gyldig regulært udtryk: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Dette er en fejl. Udfyld venligst en fejlrapport mod zypper."
 
-#: ../src/zypper.cc:76 ../src/zypper.cc:899
+#: ../src/zypper.cc:76 ../src/zypper.cc:915
 msgid "Given URL is invalid."
 msgstr "Den givne URL er ugyldig."
 
@@ -1476,96 +1594,96 @@ msgstr ""
 "    #@@@@@@@@#                                       \n"
 "      +@@@@#` "
 
-#: ../src/zypper.cc:795 ../src/zypper.cc:873 ../src/zypper.cc:944
-#: ../src/zypper.cc:984
+#: ../src/zypper.cc:795 ../src/zypper.cc:880 ../src/zypper.cc:960
+#: ../src/zypper.cc:1006
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Der kræves root-rettigheder for at ændre systemets softwarekilder."
 
-#: ../src/zypper.cc:822 ../src/zypper.cc:950
+#: ../src/zypper.cc:829 ../src/zypper.cc:966
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "For få argumenter. Der kræves mindst URL og alias."
 
-#: ../src/zypper.cc:854
+#: ../src/zypper.cc:861
 msgid "Specified type is not a valid repository type:"
 msgstr "Den specificerede type er ikke en gyldig type af softwarekilde:"
 
-#: ../src/zypper.cc:855
+#: ../src/zypper.cc:862
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "Se 'zypper -h addrepo' eller man zypper for at få en liste over kendte typer af softwarekilder."
 
-#: ../src/zypper.cc:879
+#: ../src/zypper.cc:886 ../src/zypper.cc:1473
 msgid "Required argument missing."
 msgstr "Krævet argument mangler."
 
-#: ../src/zypper.cc:892
+#: ../src/zypper.cc:908
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "Softwarekilde er ikke fundet ved alias, prøver at slette ved brug af URL..."
 
-#: ../src/zypper.cc:925
+#: ../src/zypper.cc:941
 msgid "Repository not found by given alias or URL."
 msgstr "Softwarekilde ikke fundet ved givet alias eller URL."
 
-#: ../src/zypper.cc:990
+#: ../src/zypper.cc:1012
 msgid "Alias is a required argument."
 msgstr "Alias er et krævet argument."
 
-#: ../src/zypper.cc:1012
+#: ../src/zypper.cc:1040
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Der kræves root-rettigheder for at genopfriske systemets softwarekilder."
 
-#: ../src/zypper.cc:1049
+#: ../src/zypper.cc:1077
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Der kræves root-rettigheder for at installere eller afinstallere pakker."
 
-#: ../src/zypper.cc:1063 ../src/zypper.cc:1282 ../src/zypper.cc:1355
+#: ../src/zypper.cc:1091 ../src/zypper.cc:1334 ../src/zypper.cc:1421
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Ukendt resolvable-type: %s"
 
-#: ../src/zypper.cc:1081
+#: ../src/zypper.cc:1109
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Advarsel: Ingen softwarekilder defineret. Der anvendes kun installerede resolvables. Det er ikke muligt at installere noget."
 
-#: ../src/zypper.cc:1101 ../src/zypper.cc:1380
+#: ../src/zypper.cc:1129 ../src/zypper.cc:1446
 msgid "Generating solver test case..."
 msgstr "Genererer solver-test-case..."
 
-#: ../src/zypper.cc:1103 ../src/zypper.cc:1382
+#: ../src/zypper.cc:1131 ../src/zypper.cc:1448
 msgid "Solver test case generated successfully."
 msgstr "Generering af solver-test-case gennemført."
 
-#: ../src/zypper.cc:1106 ../src/zypper.cc:1384
+#: ../src/zypper.cc:1134 ../src/zypper.cc:1450
 msgid "Error creating the solver test case."
 msgstr "Fejl under oprettelse af solver-test-case."
 
-#: ../src/zypper.cc:1128
+#: ../src/zypper.cc:1156
 msgid "Source package name is a required argument."
 msgstr "Kildepakkens navn er et påkrævet argument."
 
-#: ../src/zypper.cc:1169
+#: ../src/zypper.cc:1198
 msgid "Unknown resolvable type "
 msgstr "Ukendt resolvable-type"
 
 #
-#: ../src/zypper.cc:1206
+#: ../src/zypper.cc:1235
 msgid "No resolvables found."
 msgstr "Ingen resolvables fundet."
 
 #. 'rug' is the name of a program and must not be translated
 #. 'best-effort' is a program parameter and can not be translated
-#: ../src/zypper.cc:1292 ../src/zypper.cc:1365
+#: ../src/zypper.cc:1344 ../src/zypper.cc:1431
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "Kører som 'rug'. Kan ikke bruge 'så godt som muligt'-tilgang til opdatering."
 
-#: ../src/zypper.cc:1338
+#: ../src/zypper.cc:1397
 msgid "Root privileges are required for updating packages."
 msgstr "Der kræves root-rettigheder for at opdatere pakker."
 
-#: ../src/zypper.cc:1441
+#: ../src/zypper.cc:1517
 msgid "Unexpected exception."
 msgstr "Uventet undtagelse."
 
-#: ../src/zypper.cc:1526
+#: ../src/zypper.cc:1602
 msgid "You already are running zypper's shell."
 msgstr "Du kører allerede zyppers skal."
 
@@ -1597,12 +1715,12 @@ msgstr "Ugyldigt objekt"
 msgid "Error"
 msgstr "Fejl"
 
-#: ../src/zypper-media-callbacks.h:56
+#: ../src/zypper-media-callbacks.h:57
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Indsæt venligst mediet [%s] # %d og tast 'j' for at fortsætte eller 'n' for at afbryde operationen."
 
-#: ../src/zypper-media-callbacks.h:76 ../src/zypper-media-callbacks.h:82
+#: ../src/zypper-media-callbacks.h:77 ../src/zypper-media-callbacks.h:83
 msgid "Downloading: "
 msgstr "Downloader: "
 
@@ -1652,32 +1770,31 @@ msgstr "Kører: %s  (%s,%s)"
 msgid "Reading installed packages"
 msgstr "Læser installerede pakker"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-#: ../src/zypper-rpm-callbacks.h:140 ../src/zypper-rpm-callbacks.h:146
+#: ../src/zypper-rpm-callbacks.h:142 ../src/zypper-rpm-callbacks.h:149
 msgid "Removing "
 msgstr "Fjerner "
 
-#: ../src/zypper-rpm-callbacks.h:152
+#: ../src/zypper-rpm-callbacks.h:155
 #, c-format
 msgid "Removal of %s failed:"
 msgstr "Fjernelse af %s fejlede"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
-#: ../src/zypper-rpm-callbacks.h:167
+#: ../src/zypper-rpm-callbacks.h:170
 msgid "(with --nodeps)"
 msgstr "(med --nodeps)"
 
-#: ../src/zypper-rpm-callbacks.h:167
+#: ../src/zypper-rpm-callbacks.h:170
 msgid "(with --nodeps --force)"
 msgstr "(med --nodeps --force)"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
-#: ../src/zypper-rpm-callbacks.h:181 ../src/zypper-rpm-callbacks.h:191
+#. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+#: ../src/zypper-rpm-callbacks.h:184 ../src/zypper-rpm-callbacks.h:194
 #, c-format
 msgid "Installing: %s-%s"
 msgstr "Installerer: %s-%s"
 
-#: ../src/zypper-rpm-callbacks.h:212
+#: ../src/zypper-rpm-callbacks.h:215
 #, c-format
 msgid "Installation of %s failed:"
 msgstr "Installation af %s fejlede:"
@@ -1689,4 +1806,3 @@ msgstr "Katalog"
 #: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Softwarekilde"
-
