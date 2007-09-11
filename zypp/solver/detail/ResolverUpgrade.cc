@@ -776,6 +776,60 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	}
       }
     }
+    
+    if ( guess ) {
+	// Checking if the selected provider depends on language, if yes try to find out the
+	// correct language package
+	bool requested_locale_match = false;
+	CapSet freshens( guess->dep( Dep::FRESHENS ) );
+
+	// is this a language package ?
+	for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+	    if (cit->refers() == ResTraits<Language>::kind) {
+		requested_locale_match = true;
+		break;
+	    }
+	}
+
+	if (requested_locale_match) {
+	    // searching the best language
+	    PoolItemOrderSet & gset( it->second );
+	    requested_locale_match = false;	    
+
+	    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
+		PoolItem_Ref item (*git);
+
+		if ( item.status().isToBeInstalled()) {
+		    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
+		    if ( ! doesObsoleteItem (item, it->first ) ) {
+			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+		    }
+		    guess = PoolItem_Ref();
+		    break;
+		} else {
+		    freshens = item->dep( Dep::FRESHENS );
+		    ZYpp::Ptr z = zypp::getZYpp();
+		    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
+
+		    // try to find a match of the locale freshens with one of the requested locales
+
+		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+			if (cit->refers() == ResTraits<Language>::kind) {
+			    string loc = cit->index();
+			    MIL << "Look for language fallback " << loc << ":" << item << endl;
+			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
+				MIL << "Locale '" << loc << "' is requested" << endl;
+				requested_locale_match = true;
+				guess = item;
+				break;
+			    }
+			}
+		    }
+		}
+		if (requested_locale_match) break;
+	    }
+	}
+    }
 
     if ( guess ) {
       guess.status().setToBeInstalled( ResStatus::APPL_HIGH );
