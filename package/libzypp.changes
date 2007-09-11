@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 11 12:18:11 CEST 2007 - schubi@suse.de
+
+- uninstallable resolvable -->suggested solution: delete; Bug 308164
+- r 7177 
+
+-------------------------------------------------------------------
 Mon Sep 10 16:19:05 CEST 2007 - schubi@suse.de
 
 - new translations added
