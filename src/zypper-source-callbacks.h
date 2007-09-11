@@ -217,11 +217,6 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 {
   void tick( const zypp::ProgressData &data )
   {
-    // verbosity filter
-    // don't display anything, if verbosity is not >= than limit_to_verbosity
-    if (gSettings.verbosity < gData.limit_to_verbosity)
-      return;
-
     if ( data.reportAlive() )
       display_tick (zypp::str::numstring(data.numericId()), cout, data.name() );
     else
@@ -230,17 +225,11 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
   
   virtual void start( const zypp::ProgressData &data )
   {
-    if (gSettings.verbosity < gData.limit_to_verbosity)
-      return;
-
     tick(data);
   }
   
   virtual bool progress( const zypp::ProgressData &data )
   {
-    if (gSettings.verbosity < gData.limit_to_verbosity)
-      return true;
-
     tick(data);
     return true;
   }
@@ -254,9 +243,6 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 
   virtual void finish( const zypp::ProgressData &data )
   {
-    if (gSettings.verbosity < gData.limit_to_verbosity)
-      return;
-
     display_done(zypp::str::numstring(data.numericId()), cout, data.name() );
   }
 };
