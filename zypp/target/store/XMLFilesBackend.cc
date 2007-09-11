@@ -47,9 +47,6 @@
 #include <zypp/ZYpp.h>
 #include <zypp/PathInfo.h>
 
-#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
-#include "boost/filesystem/fstream.hpp"    // ditto
-
 #include "XMLFilesBackend.h"
 #include "serialize.h"
 
@@ -59,7 +56,6 @@
 using std::endl;
 using std::string;
 using std::list;
-using namespace boost::filesystem;
 using namespace zypp;
 using namespace zypp::filesystem;
 
@@ -258,7 +254,7 @@ XMLFilesBackend::isBackendInitialized() const
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    bool isthere = exists(dirForResolvableKind(kind));
+    bool isthere = PathInfo( dirForResolvableKind(kind) ).isExist();
     ok = ok && isthere;
   }
 
@@ -266,12 +262,12 @@ XMLFilesBackend::isBackendInitialized() const
   for ( it_kinds = d->kinds_flags.begin() ; it_kinds != d->kinds_flags.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    bool isthere = exists(dirForResolvableKindFlags(kind));
+    bool isthere = PathInfo( dirForResolvableKindFlags(kind) ).isExist();
     ok = ok && isthere;
   }
 
   // named flags
-  bool nmthere = exists(dirForNamedFlags());
+  bool nmthere = PathInfo( dirForNamedFlags() ).isExist();
   ok = ok && nmthere;
 
   return ok;
@@ -328,25 +324,19 @@ void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
 std::string
 XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 {
-  std::string dir;
-  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname(resolvableKindToString(kind, true)) ).asString();
-  return dir;
+  return Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname(resolvableKindToString(kind, true)) ).asString();
 }
 
 std::string
 XMLFilesBackend::dirForResolvableKindFlags( Resolvable::Kind kind ) const
 {
-  std::string dir;
-  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("flags") + Pathname(resolvableKindToString(kind, true)) ).asString();
-  return dir;
+  return Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("flags") + Pathname(resolvableKindToString(kind, true)) ).asString();
 }
 
 std::string
 XMLFilesBackend::dirForNamedFlags() const
 {
-  std::string dir;
-  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("named-flags")).asString();
-  return dir;
+  return Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("named-flags")).asString();
 }
 
 std::string
@@ -385,7 +375,7 @@ XMLFilesBackend::fileNameForResolvable( ResObject::constPtr resolvable ) const
 std::string
 XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 {
-  return path( path(dirForResolvable(resolvable)) / path(fileNameForResolvable(resolvable))).string();
+  return( Pathname( dirForResolvable(resolvable) ) / fileNameForResolvable(resolvable) ).asString();
 }
 
 std::string
@@ -393,14 +383,14 @@ XMLFilesBackend::fullPathForNamedFlags( const std::string &key ) const
 {
   std::stringstream key_stream(key);
   std::string key_encoded = Digest::digest("MD5", key_stream);
-  return path( path(dirForNamedFlags()) / path(key_encoded)).string();
+  return( Pathname( dirForNamedFlags() ) / key_encoded ).asString();
 }
 
 std::string
 XMLFilesBackend::fullPathForResolvableFlags( ResObject::constPtr resolvable ) const
 {
   // flags are in a hidden file with the same name
-  return path( path(dirForResolvableFlags(resolvable)) / path(fileNameForResolvable(resolvable))).string();
+  return( Pathname( dirForResolvableFlags(resolvable) ) / fileNameForResolvable(resolvable) ).asString();
 }
 
 void
@@ -520,7 +510,7 @@ XMLFilesBackend::flagsFromFile( const std::string &filename ) const
 {
   std::set<std::string> _flags;
   // do we have previous saved flags?
-  if (!exists(path(filename)))
+  if ( ! PathInfo( filename ).isExist() )
     return _flags;
 
   std::ifstream file(filename.c_str());
@@ -593,8 +583,8 @@ XMLFilesBackend::deleteFileObject( const Pathname &filename ) const
 {
   try
   {
-    int ret = filesystem::unlink(Pathname(filename));
-    if ( ret != 0 )
+    int ret = filesystem::unlink( filename );
+    if ( ret != 0 && ret != ENOENT )
     {
       ERR << "Error removing resolvable file " << filename << std::endl;
       ZYPP_THROW(Exception("Error deleting " + filename.asString()));

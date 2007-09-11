@@ -1,19 +1,26 @@
 -------------------------------------------------------------------
+Tue Sep 11 14:54:44 CEST 2007 - ma@suse.de
+
+- Don't fail if a product is deleted multiple times (e.g. due to
+  obsoletes and an explicit deleted request). (#308746)
+- version 3.22.7
+
+-------------------------------------------------------------------
 Tue Sep 11 13:52:47 CEST 2007 - jkupec@suse.cz
 
-- SYSCONFDIR variable added for modifying /etc 
+- SYSCONFDIR variable added for modifying /etc
 
 -------------------------------------------------------------------
 Tue Sep 11 12:18:11 CEST 2007 - schubi@suse.de
 
 - uninstallable resolvable -->suggested solution: delete; Bug 308164
-- r 7177 
+- r 7177
 
 -------------------------------------------------------------------
 Mon Sep 10 16:19:05 CEST 2007 - schubi@suse.de
 
 - new translations added
-- r 7166 
+- r 7166
 - version 3.22.6
 
 -------------------------------------------------------------------
@@ -25,7 +32,7 @@ Mon Sep 10 15:50:49 CEST 2007 - lslezak@suse.cz
 Mon Sep 10 14:17:29 CEST 2007 - schubi@suse.de
 
 - Splitting packages: Take the package with the best
-  architecture,edition ONLY; Bug 308591 
+  architecture,edition ONLY; Bug 308591
 - r 7160
 
 -------------------------------------------------------------------
