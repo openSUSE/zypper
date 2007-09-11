@@ -174,19 +174,6 @@ void RepoImpl::createResolvables()
   //extract_packages_from_directory( _store, thePath, selfRepositoryRef(), true );
 }
 
-static CheckSum encoded_string_to_checksum( const std::string &encoded )
-{
-  vector<string> words;
-  if ( str::split( encoded, std::back_inserter(words), ":" ) != 2 )
-  {
-    return CheckSum();
-  }
-  else
-  {
-    return CheckSum( words[0], words[1] );
-  }
-}
-
 void RepoImpl::createPatchAndDeltas()
 {
   ProgressData ticks;
@@ -201,8 +188,8 @@ void RepoImpl::createPatchAndDeltas()
     con.executenonquery("BEGIN;");
 
     string pp_query =
-   //     0       1          2         3        4            5
-    "SELECT id, media_nr, location, checksum, download_size, build_time "
+   //     0       1          2         3        4              5 
+    "SELECT id, media_nr, location, checksum, checksum_type, download_size, build_time "
     "FROM patch_packages WHERE repository_id=:repository_id;";
 
     string pp_bv_query =
@@ -210,92 +197,101 @@ void RepoImpl::createPatchAndDeltas()
     "FROM patch_packages_baseversions WHERE patch_package_id = :patch_package_id";
 
     string delta_query =
-    //       0     1      2          3        4         5              6                      7                      8                 9                     10
-    "SELECT id, media_nr, location, checksum, download_size, build_time,  baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, baseversion_build_time "
+    //       0     1        2          3        4               5              6                      7                      8                 9                     10  11
+    "SELECT id, media_nr, location, checksum, checksum_type, download_size, build_time,  baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, baseversion_checksum_type, baseversion_build_time "
     //    11
     ", baseversion_sequence_info "
     "FROM delta_packages WHERE repository_id=:repository_id;";
-
-    // bind the master repo id to the query
-    sqlite3_command deltas_cmd( con, delta_query);
-    deltas_cmd.bind(":repository_id", _options.repository_id);
-    sqlite3_reader reader = deltas_cmd.executereader();
-    while ( reader.read() )
+    
     {
-      zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
-
-      string checksum_string(reader.getstring(3));
-      CheckSum checksum = encoded_string_to_checksum(checksum_string);
-      if ( checksum.empty() )
+      // bind the master repo id to the query
+      sqlite3_command deltas_cmd( con, delta_query);
+      deltas_cmd.bind(":repository_id", _options.repository_id);
+      sqlite3_reader reader = deltas_cmd.executereader();
+      while ( reader.read() )
       {
-        ERR << "Wrong checksum for delta, skipping..." << endl;
-        continue;
+        zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
+  
+        string checksum_string(reader.getstring(3));
+        CheckSum checksum(reader.getstring(4), reader.getstring(3));
+        if ( checksum.empty() )
+        {
+          ERR << "Wrong checksum for delta, skipping..." << endl;
+          continue;
+        }
+        on_media.setChecksum(checksum);
+        on_media.setDownloadSize(reader.getint(5));
+  
+        packagedelta::DeltaRpm::BaseVersion baseversion;
+        baseversion.setEdition( Edition(reader.getstring(7), reader.getstring(8), reader.getstring(9) ) );
+  
+        checksum = CheckSum(reader.getstring(11), reader.getstring(10));
+        if ( checksum.empty() )
+        {
+          ERR << "Wrong checksum for delta, skipping..." << endl;
+          continue;
+        }
+        baseversion.setChecksum(checksum);
+        baseversion.setBuildtime(reader.getint(12));
+        baseversion.setSequenceinfo(reader.getstring(13));
+  
+        zypp::packagedelta::DeltaRpm delta;
+        delta.setLocation( on_media );
+        delta.setBaseversion( baseversion );
+        delta.setBuildtime(reader.getint(6));
+  
+        _deltaRpms.push_back(delta);
       }
-      on_media.setChecksum(checksum);
-      on_media.setDownloadSize(reader.getint(4));
-
-      packagedelta::DeltaRpm::BaseVersion baseversion;
-      baseversion.setEdition( Edition(reader.getstring(6), reader.getstring(7), reader.getstring(8) ) );
-
-      checksum_string = reader.getstring(9);
-      checksum = encoded_string_to_checksum(checksum_string);
-      if ( checksum.empty() )
-      {
-        ERR << "Wrong checksum for delta, skipping..." << endl;
-        continue;
-      }
-      baseversion.setChecksum(checksum);
-      baseversion.setBuildtime(reader.getint(10));
-      baseversion.setSequenceinfo(reader.getstring(11));
-
-      zypp::packagedelta::DeltaRpm delta;
-      delta.setLocation( on_media );
-      delta.setBaseversion( baseversion );
-      delta.setBuildtime(reader.getint(5));
-
-      _deltaRpms.push_back(delta);
+      reader.close();
     }
-
-    // patch rpms
-    // bind the master package id to the query
-    // bind the master repo id to the query
-    sqlite3_command pp_cmd( con, pp_query);
-    sqlite3_command pp_bv_cmd( con, pp_bv_query);
-    pp_cmd.bind(":repository_id", _options.repository_id);
-    reader = pp_cmd.executereader();
-
-    while ( reader.read() )
     {
-      long long patch_package_id = reader.getint64(0);
-
-      zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
-
-      string checksum_string(reader.getstring(3));
-      CheckSum checksum = encoded_string_to_checksum(checksum_string);
-      if ( checksum.empty() )
+      // patch rpms
+      // bind the master package id to the query
+      // bind the master repo id to the query
+      sqlite3_command pp_cmd( con, pp_query);
+      sqlite3_command pp_bv_cmd( con, pp_bv_query);
+      pp_cmd.bind(":repository_id", _options.repository_id);
+      sqlite3_reader reader = pp_cmd.executereader();
+  
+      while ( reader.read() )
       {
-        ERR << "Wrong checksum for delta, skipping..." << endl;
-        continue;
+        //MIL << "Addining patch rpm " << endl;
+        long long patch_package_id = reader.getint64(0);
+  
+        zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
+  
+        CheckSum checksum(reader.getstring(4), reader.getstring(3));
+        if ( checksum.empty() )
+        {
+          ERR << "Wrong checksum for delta, skipping..." << endl;
+          continue;
+        }
+        on_media.setChecksum(checksum);
+        on_media.setDownloadSize(reader.getint(5));
+  
+        zypp::packagedelta::PatchRpm patch;
+        patch.setLocation( on_media );
+        patch.setBuildtime(reader.getint(6));
+  
+        pp_bv_cmd.bind( ":patch_package_id", patch_package_id );
+  
+        sqlite3_reader bv_reader = pp_bv_cmd.executereader();
+        while (bv_reader.read())
+        {
+          //MIL << "  * Adding baseversion " << endl;
+          packagedelta::PatchRpm::BaseVersion baseversion = packagedelta::PatchRpm::BaseVersion( bv_reader.getstring(0) , bv_reader.getstring(1), bv_reader.getint(2) );
+          patch.addBaseversion(baseversion);
+        }
+  
+        bv_reader.close();
+        
+        _patchRpms.push_back(patch);        
       }
-      on_media.setChecksum(checksum);
-      on_media.setDownloadSize(reader.getint(4));
-
-      zypp::packagedelta::PatchRpm patch;
-      patch.setLocation( on_media );
-      patch.setBuildtime(reader.getint(5));
-
-      pp_bv_cmd.bind( ":patch_package_id", patch_package_id );
-
-      sqlite3_reader bv_reader = pp_bv_cmd.executereader();
-      while (bv_reader.read())
-      {
-        packagedelta::PatchRpm::BaseVersion baseversion = packagedelta::PatchRpm::BaseVersion( bv_reader.getstring(0) , bv_reader.getstring(1), bv_reader.getint(2) );
-        patch.addBaseversion(baseversion);
-      }
-
-      _patchRpms.push_back(patch);
+      reader.close();
+      MIL << _patchRpms.size() << " patch rpms read." << endl;
     }
-    con.resetprogresshandler();
+    //con.resetprogresshandler();
+    con.close();
   }
   catch(exception &ex) {
       cerr << "Exception Occured: " << ex.what() << endl;

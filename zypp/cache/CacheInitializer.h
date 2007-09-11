@@ -19,7 +19,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
-#define ZYPP_CACHE_SCHEMA_VERSION 1004
+#define ZYPP_CACHE_SCHEMA_VERSION 1005
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -11,6 +11,7 @@ IMPL_PTR_TYPE(RepositoryImpl)
 
 RepositoryImpl::RepositoryImpl( const RepoInfo &info )
   : _restore_lazy_initialized(false),
+    _deltas_lazy_initialized(false),
     _info(info)
 {
 
@@ -54,13 +55,23 @@ void RepositoryImpl::createPatchAndDeltas()
 const std::list<packagedelta::PatchRpm> &
 RepositoryImpl::patchRpms() const
 {
+  if ( ! _deltas_lazy_initialized )
+  {
+    const_cast<RepositoryImpl*>(this)->createPatchAndDeltas();
+    const_cast<RepositoryImpl*>(this)->_deltas_lazy_initialized = true;
+  }
   return _patchRpms;
 }
 
 const std::list<packagedelta::DeltaRpm> &
 RepositoryImpl::deltaRpms() const
 {
-    return _deltaRpms;
+  if ( ! _deltas_lazy_initialized )
+  {
+    const_cast<RepositoryImpl*>(this)->createPatchAndDeltas();
+    const_cast<RepositoryImpl*>(this)->_deltas_lazy_initialized = true;
+  }
+  return _deltaRpms;
 }
 
 } } // ns

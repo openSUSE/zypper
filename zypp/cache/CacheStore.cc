@@ -122,13 +122,13 @@ struct CacheStore::Impl
     count_shared_cmd.reset( new sqlite3_command( con, "select count(id) from resolvables where shared_id=:rid;" ));
 
     insert_patchrpm_cmd.reset( new sqlite3_command (con,
-      "insert into patch_packages (repository_id, media_nr, location, checksum, download_size, build_time) "
-      "values (:repository_id, :media_nr, :location, :checksum, :download_size, :build_time);" ));
+      "insert into patch_packages (repository_id, media_nr, location, checksum, checksum_type, download_size, build_time) "
+      "values (:repository_id, :media_nr, :location, :checksum, :checksum_type, :download_size, :build_time);" ));
     insert_deltarpm_cmd.reset( new sqlite3_command (con,
-      "insert into delta_packages (repository_id, media_nr, location, checksum, download_size, build_time, "
+      "insert into delta_packages (repository_id, media_nr, location, checksum, checksum_type, download_size, build_time, "
         "baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, "
         "baseversion_build_time, baseversion_sequence_info) "
-      "values (:repository_id, :media_nr, :location, :checksum, :download_size, :build_time, "
+      "values (:repository_id, :media_nr, :location, :checksum, :checksum_type, :download_size, :build_time, "
         ":baseversion_version, :baseversion_release, :baseversion_epoch, :baseversion_checksum, "
         ":baseversion_build_time, :baseversion_sequence_info);" ));
     append_patch_baseversion_cmd.reset( new sqlite3_command (con,
@@ -747,6 +747,7 @@ RecordId CacheStore::appendPatchRpm(const zypp::data::RecordId &repository_id, c
   _pimpl->insert_patchrpm_cmd->bind(":repository_id", repository_id);
   _pimpl->insert_patchrpm_cmd->bind(":location", prpm->location.filename().asString());
   _pimpl->insert_patchrpm_cmd->bind(":checksum", prpm->location.checksum().checksum());
+  _pimpl->insert_patchrpm_cmd->bind(":checksum_type", prpm->location.checksum().type());
   //! \todo checksum type
   _pimpl->insert_patchrpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(prpm->location.downloadSize()));
   _pimpl->insert_patchrpm_cmd->bind(":build_time", prpm->buildTime.asSeconds());
@@ -777,6 +778,8 @@ RecordId CacheStore::appendDeltaRpm(const zypp::data::RecordId &repository_id, c
   _pimpl->insert_deltarpm_cmd->bind(":repository_id", repository_id);
   _pimpl->insert_deltarpm_cmd->bind(":location", drpm->location.filename().asString());
   _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.checksum().checksum());
+  _pimpl->insert_deltarpm_cmd->bind(":checksum", drpm->location.checksum().checksum());
+  _pimpl->insert_deltarpm_cmd->bind(":checksum_type", drpm->location.checksum().type());
   //! \todo checksum type
   _pimpl->insert_deltarpm_cmd->bind(":download_size", static_cast<ByteCount::SizeType>(drpm->location.downloadSize()));
   _pimpl->insert_deltarpm_cmd->bind(":build_time", drpm->buildTime.asSeconds());

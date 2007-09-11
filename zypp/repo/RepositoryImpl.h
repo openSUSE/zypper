@@ -77,6 +77,8 @@ namespace zypp
       std::list<packagedelta::DeltaRpm> _deltaRpms;
     private:
       bool _restore_lazy_initialized;
+      bool _deltas_lazy_initialized;
+     
       RepoInfo _info;
     };
   }

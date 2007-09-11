@@ -444,6 +444,32 @@ void cache_write_shared_attributes_test(const std::string &dir)
   cache_write_shared_attributes(repodir);
 }
 
+/**
+ * \short Test that a yum repo wrtes and reads back patch and delta rpm information
+ */
+void cache_delta_rpm_test(const string &dir)
+{
+  Pathname repodir = Pathname(dir) + "/repo/yum/data/10.2-updates-subset";
+  filesystem::TmpDir tmpdir;
+  string alias = "novell.com";
+  write_yum_repo( alias, repodir, tmpdir );
+
+  data::RecordId repository_id;
+  {
+    cache::CacheStore store(tmpdir.path());
+    repository_id = store.lookupOrAppendRepository(alias);
+  }
+  
+  cached::RepoImpl *repositoryImpl = new cached::RepoImpl( cached::RepoOptions( RepoInfo(),
+                                                           tmpdir.path(),
+                                                           repository_id ));
+  // 22 packages and 6 patches
+  BOOST_CHECK_EQUAL( repositoryImpl->resolvables().size(), 42 );
+  // 19 patch rpms
+  BOOST_CHECK_EQUAL( repositoryImpl->patchRpms().size(), 19 );
+  //check_tables_clean(tmpdir);
+}
+
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
@@ -483,6 +509,10 @@ init_unit_test_suite( int argc, char *argv[] )
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_gz_test,
                                  (std::string const*)params, params+1));
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_shared_attributes_test,
+                                 (std::string const*)params, params+1));
+  
+  // test for delta and patch rpms
+  test->add(BOOST_PARAM_TEST_CASE(&cache_delta_rpm_test,
                                  (std::string const*)params, params+1));
   return test;
 }

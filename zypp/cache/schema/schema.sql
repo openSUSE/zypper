@@ -169,12 +169,14 @@ CREATE TABLE delta_packages (
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
+  , checksum_type TEXT
   , download_size INTEGER
   , build_time INTEGER
   , baseversion_version TEXT
   , baseversion_release TEXT
   , baseversion_epoch INTEGER
   , baseversion_checksum TEXT
+  , baseversion_checksum_type TEXT
   , baseversion_build_time INTEGER
   , baseversion_sequence_info TEXT
   , repository_id INTEGER REFERENCES repositories(id)
@@ -186,6 +188,7 @@ CREATE TABLE patch_packages (
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
+  , checksum_type TEXT
   , download_size INTEGER
   , build_time INTEGER
   , repository_id INTEGER REFERENCES repositories(id)
