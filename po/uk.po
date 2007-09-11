@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 15:18+0200\n"
+"POT-Creation-Date: 2007-08-31 15:19+0200\n"
 "PO-Revision-Date: 2007-08-19 19:21-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
@@ -56,37 +56,49 @@ msgstr "Хочете довіряти ідентифікатору ключа %s
 
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
 msgstr ""
 
-#: ../src/zypper-keyring-callbacks.h:119
-#, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+#: ../src/zypper-keyring-callbacks.h:113
+msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 
-#: ../src/zypper-keyring-callbacks.h:133
+#: ../src/zypper-keyring-callbacks.h:120
+#, fuzzy, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr "Перевірка дайджесту для %s зазнала невдачі. Очікувалось %s, знайдено %s."
+
+#: ../src/zypper-keyring-callbacks.h:123
+msgid "Warning: This might be caused by a malicious change in the file!"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:125
+msgid "Continuing is risky! Continue anyway?"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:136
 #, c-format
 msgid "No digest for file %s."
 msgstr "Нема дайджесту для файла %s."
 
 # continue button label
 #. there are resolvables to install/uninstall
-#: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
-#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:1369
+#: ../src/zypper-keyring-callbacks.h:136 ../src/zypper-keyring-callbacks.h:144
+#: ../src/zypper-keyring-callbacks.h:163 ../src/zypper-misc.cc:1371
 msgid "Continue?"
 msgstr "Продовжити?"
 
-#: ../src/zypper-keyring-callbacks.h:140
+#: ../src/zypper-keyring-callbacks.h:143
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "Невідомий дайджест %s для файла %s."
 
-#: ../src/zypper-keyring-callbacks.h:153
+#: ../src/zypper-keyring-callbacks.h:156
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr ""
 
-#: ../src/zypper-keyring-callbacks.h:159
+#: ../src/zypper-keyring-callbacks.h:162
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "Перевірка дайджесту для %s зазнала невдачі. Очікувалось %s, знайдено %s."
@@ -122,11 +134,11 @@ msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Не вдалось додати \"%s\" до списку пакунків для вилучення."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:41
+#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:42
 msgid "Not found"
 msgstr "Не знайдено"
 
-#: ../src/zypper-misc.cc:421 ../src/zypper-misc.cc:493
+#: ../src/zypper-misc.cc:421
 msgid "Problem: "
 msgstr "Проблема: "
 
@@ -137,146 +149,146 @@ msgid " Solution %d: "
 msgstr " Вирішення %d: "
 
 #. input prompt
-#: ../src/zypper-misc.cc:446
+#: ../src/zypper-misc.cc:449
 msgid "number, (r)etry or (c)ancel> "
 msgstr "номер, (r)повторно або (c)cкасувати> "
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:454
+#: ../src/zypper-misc.cc:457
 msgid "r"
 msgstr "п"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:457
+#: ../src/zypper-misc.cc:460
 msgid "c"
 msgstr "с"
 
-#: ../src/zypper-misc.cc:463
+#: ../src/zypper-misc.cc:466
 #, c-format
 msgid "Applying solution %s"
 msgstr "Застосування рішення %s"
 
-#: ../src/zypper-misc.cc:486
+#: ../src/zypper-misc.cc:488
 #, c-format
 msgid "%s Problems:"
 msgstr "Проблеми %s:"
 
-#: ../src/zypper-misc.cc:489
+#: ../src/zypper-misc.cc:491
 msgid "Specified capability not found"
 msgstr "Вказану функціональність не знайдено"
 
-#: ../src/zypper-misc.cc:620 ../src/zypper-misc.cc:622
+#: ../src/zypper-misc.cc:621 ../src/zypper-misc.cc:623
 msgid "Nothing to do."
 msgstr "Нема що робити."
 
-#: ../src/zypper-misc.cc:736
+#: ../src/zypper-misc.cc:737
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Загальний розмір звантаження: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:740
+#: ../src/zypper-misc.cc:741
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "Після дії, буде додатково вжито %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:748
+#: ../src/zypper-misc.cc:749
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "Після дії, %s буде вивільнено."
 
-#: ../src/zypper-misc.cc:795
+#: ../src/zypper-misc.cc:796
 #, c-format
 msgid "%s items locked"
 msgstr "%s елементів заблоковано"
 
-#: ../src/zypper-misc.cc:796
+#: ../src/zypper-misc.cc:797
 msgid "Establishing status of aggregates"
 msgstr "Встановлюється стан агрегованого"
 
-#: ../src/zypper-misc.cc:804
+#: ../src/zypper-misc.cc:805
 msgid "Resolving dependencies..."
 msgstr "Розв'язання залежностей..."
 
-#: ../src/zypper-misc.cc:829
+#: ../src/zypper-misc.cc:831
 #, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "%d потрібно латок (%d латки безпеки)"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "Встановлені"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "Прибрані"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "Більш не підходить"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "Не стосується"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "Застосовано"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "Не потрібні"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "Поламані"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "Потрібні"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:846
+#: ../src/zypper-misc.cc:848
 msgid "error"
 msgstr "помилка"
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "Каталог: "
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "Сховище: "
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1150 ../src/zypper-sources.cc:310
-#: ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1152 ../src/zypper-sources.cc:316
+#: ../src/zypper-sources.cc:357 ../src/zypper-search.h:299
 msgid "Name"
 msgstr "Назва"
 
 #. best_effort does not know version or arch yet
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Version"
 msgstr "Версія"
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
 msgid "Category"
 msgstr "Категорія"
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-sources.cc:308
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-sources.cc:316
 msgid "Status"
 msgstr "Стан"
 
-#: ../src/zypper-misc.cc:902
+#: ../src/zypper-misc.cc:904
 msgid "No needed patches found."
 msgstr "Не знайдено потрібних латок."
 
-#: ../src/zypper-misc.cc:1030
+#: ../src/zypper-misc.cc:1032
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -284,38 +296,47 @@ msgstr ""
 "УВАГА: Ці оновлення стосуються тільки програми оновлення.\n"
 "Але є також інші оновлення.\n"
 
-#: ../src/zypper-misc.cc:1040 ../src/zypper-misc.cc:1186
+#: ../src/zypper-misc.cc:1042 ../src/zypper-misc.cc:1188
 msgid "No updates found."
 msgstr "Не знайдено оновлень."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:1142 ../src/zypper-search.h:259
+#: ../src/zypper-misc.cc:1144 ../src/zypper-search.h:286
 msgid "S"
 msgstr "S"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:1147 ../src/zypper-search.h:268
+#: ../src/zypper-misc.cc:1149 ../src/zypper-search.h:295
 msgid "Bundle"
 msgstr "Збірка"
 
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Arch"
 msgstr "Арх."
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:1310
+#: ../src/zypper-misc.cc:1312
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "УВАГА: %s є інтерактивною, пропускається."
 
-#: ../src/zypper-misc.cc:1373
+#: ../src/zypper-misc.cc:1375
 msgid "committing"
 msgstr "передається"
 
-#: ../src/zypper-misc.cc:1391
+#: ../src/zypper-misc.cc:1390
+#, fuzzy
+msgid "Problem downloading the package file from the repository:"
+msgstr "Проблема зі звантаженням файлів з \"%s\"."
+
+#: ../src/zypper-misc.cc:1391 ../src/zypper-sources.cc:89
+msgid "Please, see the above error message to for a hint."
+msgstr "Будь ласка, див. повідомлення про помилку для підказки."
+
+#: ../src/zypper-misc.cc:1401
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -331,402 +352,434 @@ msgstr ""
 "- замініть носій встановлення (якщо пошкоджений)\n"
 "- скористайтесь іншим сховищем"
 
-#: ../src/zypper-misc.cc:1411
+#: ../src/zypper-misc.cc:1421
 msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
 msgstr "Одна з встановлених латок потребує перезапуску вашого комп'ютера. Будь ласка, зробіть це якомога швидше."
 
-#: ../src/zypper-misc.cc:1414
+#: ../src/zypper-misc.cc:1424
 msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "Одна з встановлених латок потребує перезапуску вашого комп'ютера. Будь ласка, зробіть це якомога швидше."
 
-#: ../src/zypper-misc.cc:1420
+#: ../src/zypper-misc.cc:1430
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "Одна з встановлених латок стосується самого менеджера пакунків, і тому потрібний перезапуск перед наступними діями."
 
-#: ../src/zypper-misc.cc:1446
+#: ../src/zypper-misc.cc:1456
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Автоматично погоджується з ліцензією %s %s."
 
-#: ../src/zypper-misc.cc:1457
+#: ../src/zypper-misc.cc:1467
 #, c-format
 msgid "%s %s license:"
 msgstr "Ліцензія %s %s:"
 
-#: ../src/zypper-misc.cc:1461
+#: ../src/zypper-misc.cc:1471
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "Щоб встановити цей пакунок, ви мусите погодитись з умовами цієї ліцензії. Продовжити?"
 
-#: ../src/zypper-misc.cc:1472
+#: ../src/zypper-misc.cc:1482
 msgid "Aborting installation due to the need for license(s) confirmation."
 msgstr "Встановлення переривається, бо потрібно прийняти ліцензію(ї)."
 
 #. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:1476
+#: ../src/zypper-misc.cc:1486
 msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
 msgstr "Будь ласка, перезапустіть дію в інтерактивному режимі й погодьтесь з потрібними ліцензіями або скористайтесь параметром --auto-agree-with-licenses."
 
-#: ../src/zypper-misc.cc:1487
+#: ../src/zypper-misc.cc:1497
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Встановлення переривається, бо користувач не погодився з ліцензією %s %s."
 
-#: ../src/zypper-misc.cc:1557
+#: ../src/zypper-misc.cc:1567
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "Встановлення пакунка джерела %s-%s"
 
-#: ../src/zypper-misc.cc:1565
+#: ../src/zypper-misc.cc:1575
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Пакунок джерела %s-%s було успішно встановлено."
 
-#: ../src/zypper-misc.cc:1571
+#: ../src/zypper-misc.cc:1581
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Проблема з встановленням пакунка джерела %s-%s:"
 
-#: ../src/zypper-misc.cc:1579
+#: ../src/zypper-misc.cc:1589
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Пакунок джерела \"%s\" не знайдено."
 
-#: ../src/zypper-sources.cc:48
+#: ../src/zypper-sources.cc:52
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Перевірка чи освіжати метадані для %s"
 
-#: ../src/zypper-sources.cc:57
+#: ../src/zypper-sources.cc:61
 #, c-format
 msgid "Refreshing '%s'"
 msgstr "Освіження \"%s\""
 
-#: ../src/zypper-sources.cc:59
+#: ../src/zypper-sources.cc:63
 msgid "(forced)"
 msgstr "(примусово)"
 
-#: ../src/zypper-sources.cc:64
+#: ../src/zypper-sources.cc:68
 #, c-format
 msgid "Repository '%s' is up to date."
 msgstr "Сховище \"%s\" не потребує оновлення."
 
-#: ../src/zypper-sources.cc:76
+#: ../src/zypper-sources.cc:80
 msgid "Forcing raw metadata refresh"
 msgstr "Примусове освіження сирих метаданих"
 
-#: ../src/zypper-sources.cc:84
+#: ../src/zypper-sources.cc:88
 #, c-format
 msgid "Problem downloading files from '%s'."
 msgstr "Проблема зі звантаженням файлів з \"%s\"."
 
-#: ../src/zypper-sources.cc:85
-msgid "Please, see the above error message to for a hint."
-msgstr "Будь ласка, див. повідомлення про помилку для підказки."
-
-#: ../src/zypper-sources.cc:92
+#: ../src/zypper-sources.cc:96
 #, c-format
 msgid "No URLs defined for '%s'."
 msgstr "Не визначено жодної адреси URLs для \"%s\"."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: ../src/zypper-sources.cc:96
+#: ../src/zypper-sources.cc:100
 #, c-format
 msgid "Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."
 msgstr "Будь ласка, додайте один або декілька записів базових URL (baseurl=URL) до %s для сховища \"%s\"."
 
-#: ../src/zypper-sources.cc:104
+#. ! \todo correct the message after 10.3 release
+#: ../src/zypper-sources.cc:109
 msgid "No alias defined this repository."
 msgstr "Для цього сховища нема псевдоніму."
 
-#: ../src/zypper-sources.cc:112
+#: ../src/zypper-sources.cc:117
 #, c-format
 msgid "Repository '%s' is invalid."
 msgstr "Сховище \"%s\" - не чинне."
 
-#: ../src/zypper-sources.cc:113
+#: ../src/zypper-sources.cc:118
 msgid "Please, check if the URLs defined for this repository are pointing to a valid repository."
 msgstr ""
 
-#: ../src/zypper-sources.cc:121
+#: ../src/zypper-sources.cc:126
 #, c-format
 msgid "Error downloading metadata for '%s':"
 msgstr "Помилка звантаження матаданих \"%s\":"
 
-#: ../src/zypper-sources.cc:148
+#: ../src/zypper-sources.cc:153
 msgid "Forcing building of repository cache"
 msgstr "Примусово створюється кеш сховища"
 
-#: ../src/zypper-sources.cc:161
+#: ../src/zypper-sources.cc:166
 #, c-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Помилка аналізу метаданих для \"%s\":"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: ../src/zypper-sources.cc:163
+#: ../src/zypper-sources.cc:168
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by folowing instructions at http://en.opensuse.org/Zypper#Troubleshooting"
 msgstr ""
 
-#: ../src/zypper-sources.cc:177
+#: ../src/zypper-sources.cc:182
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Метадані сховища \"%s\" не знайдено в локальному кешу."
 
-#: ../src/zypper-sources.cc:185
+#: ../src/zypper-sources.cc:190
 msgid "Error building the cache database:"
 msgstr "Помилка створення кешу бази даних:"
 
-#: ../src/zypper-sources.cc:215
+#: ../src/zypper-sources.cc:222
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "Не знайдено сховище \"%s\"."
 
-#: ../src/zypper-sources.cc:221
+#: ../src/zypper-sources.cc:228
 #, c-format
 msgid "Error reading repository description file for '%s'."
 msgstr "Помилка читання файла опису сховища \"%s\"."
 
-#: ../src/zypper-sources.cc:223
+#: ../src/zypper-sources.cc:230
 msgid "Reason: "
 msgstr "Причина: "
 
-#: ../src/zypper-sources.cc:250
+#: ../src/zypper-sources.cc:257
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "Вимкнення сховища \"%s\" через помилку вище."
 
-#: ../src/zypper-sources.cc:268
+#: ../src/zypper-sources.cc:275
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
 msgstr "Сховище \"%s\" - застаріле. Щоб його освіжити, можете виконати \"zypper refresh\"."
 
-#. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/zypper-sources.cc:309 ../src/zypper-sources.cc:681
-msgid "Enabled"
-msgstr "Увімкнено"
-
-#: ../src/zypper-sources.cc:309
-msgid "Refresh"
-msgstr "Оновити"
-
-#: ../src/zypper-sources.cc:310 ../src/zypper-search.h:270
+#: ../src/zypper-sources.cc:316 ../src/zypper-sources.cc:357
+#: ../src/zypper-search.h:297
 msgid "Type"
 msgstr "Тип"
 
-#: ../src/zypper-sources.cc:326
+#. status
+#. rug's status (active, pending => active, disabled <= enabled, disabled)
+#. this is probably the closest possible compatibility arrangement
+#: ../src/zypper-sources.cc:333
 msgid "Active"
 msgstr "Активний"
 
-#: ../src/zypper-sources.cc:326
+#: ../src/zypper-sources.cc:333
 msgid "Disabled"
 msgstr "Вимкнено"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/zypper-sources.cc:357 ../src/zypper-sources.cc:730
+msgid "Enabled"
+msgstr "Увімкнено"
+
+#: ../src/zypper-sources.cc:357
+msgid "Refresh"
+msgstr "Оновити"
+
+#: ../src/zypper-sources.cc:357
+msgid "Alias"
+msgstr "Псевдонім"
+
+#. enabled?
+#. autorefresh?
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
 msgstr "Так"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "No"
 msgstr "Ні"
 
-#: ../src/zypper-sources.cc:350
+#: ../src/zypper-sources.cc:391
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Не визначено жодного сховища. Вживайте команду \"zypper addrepo\", щоб додати одне і більше сховищ."
 
-#: ../src/zypper-sources.cc:383 ../src/zypper-sources.cc:449
+#: ../src/zypper-sources.cc:424 ../src/zypper-sources.cc:495
 msgid "Error reading repositories:"
 msgstr "Помилка читання сховищ:"
 
-#: ../src/zypper-sources.cc:405
+#: ../src/zypper-sources.cc:446
 #, c-format
 msgid "Can't open %s for writing. Maybe you don't have write permissions?"
 msgstr "Не вдається відкрити %s для запису. Можливо ви не маєте прав запису?"
 
-#: ../src/zypper-sources.cc:413
+#: ../src/zypper-sources.cc:454
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "Сховища було успішно експортовано до %s."
 
-#: ../src/zypper-sources.cc:505
+#: ../src/zypper-sources.cc:551
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Пропускається вимкнене сховище \"%s\""
 
-#: ../src/zypper-sources.cc:541
+#: ../src/zypper-sources.cc:587
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Пропускається сховище \"%s\" через цю помилку."
 
-#: ../src/zypper-sources.cc:554
+#: ../src/zypper-sources.cc:600
 #, c-format
 msgid "Repository '%s' not found by its alias or number."
 msgstr "Сховище \"%s\" не знайдено за його псевдонімом або номером."
 
-#: ../src/zypper-sources.cc:559
+#: ../src/zypper-sources.cc:605
 msgid "Use 'zypper repos' to get the list of defined repositories."
 msgstr "Вживайте \"zypper repos\", щоб отримати список визначених сховищ."
 
-#: ../src/zypper-sources.cc:566
+#: ../src/zypper-sources.cc:612
 msgid "Specified repositories are not enabled or defined."
 msgstr "Вказані сховища не увімкнено або не визначено."
 
-#: ../src/zypper-sources.cc:568
+#: ../src/zypper-sources.cc:614
 msgid "There are no enabled repositories defined."
 msgstr "Немає визначених увімкнених сховищ."
 
-#: ../src/zypper-sources.cc:571
+#: ../src/zypper-sources.cc:617
 msgid "Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories."
 msgstr "Для додавання або освіження сховищ вживайте команди \"zypper addrepo\" і \"zypper modifyrepo\"."
 
-#: ../src/zypper-sources.cc:575
+#: ../src/zypper-sources.cc:621
 msgid "Could not refresh the repositories because of errors."
 msgstr "Через помилки не вдалось освіжити сховища."
 
-#: ../src/zypper-sources.cc:577
+#: ../src/zypper-sources.cc:623
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Деякі сховища не було освіжено через помилку."
 
-#: ../src/zypper-sources.cc:579
+#: ../src/zypper-sources.cc:625
 msgid "Specified repositories have been refreshed."
 msgstr "Вказані сховища було освіжено."
 
-#: ../src/zypper-sources.cc:581
+#: ../src/zypper-sources.cc:627
 msgid "All repositories have been refreshed."
 msgstr "Всі сховища було освіжено."
 
-#: ../src/zypper-sources.cc:623
+#: ../src/zypper-sources.cc:667
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Це змінний носій тільки для читання (КД/DVD), автоосвіження буде вимкнено."
 
-#: ../src/zypper-sources.cc:636
+#: ../src/zypper-sources.cc:685
 #, c-format
 msgid "Repository named '%s' already exists. Please, use another alias."
 msgstr "Вже існує сховище з назвою \"%s\". Будь ласка, введіть іншу назву."
 
-#: ../src/zypper-sources.cc:644
+#: ../src/zypper-sources.cc:693
 msgid "Can't find a valid repository at given location:"
 msgstr "Не вдається знайти в цьому місці чинне сховище:"
 
-#: ../src/zypper-sources.cc:645
+#: ../src/zypper-sources.cc:694
 msgid "Could not determine the type of the repository. Please, check if the defined URLs (see below) point to a valid repository:"
 msgstr "Не вдалося визначити тип сховища. Будь ласка, перевірте чи вказані адреси URL (див. нижче) вказують на чинне сховище:"
 
-#: ../src/zypper-sources.cc:656
+#: ../src/zypper-sources.cc:705
 msgid "Problem transferring repository data from specified URL:"
 msgstr "Помилка перенесення даних сховища з вказаної адреси URL:"
 
-#: ../src/zypper-sources.cc:657
+#: ../src/zypper-sources.cc:706
 msgid "Please, check whether the specified URL is accessible."
 msgstr "Будь ласка, перевірте чи доступна вказана адреса URL."
 
-#: ../src/zypper-sources.cc:664
+#: ../src/zypper-sources.cc:713
 msgid "Unknown problem when adding repository:"
 msgstr "Виникла невідома проблема при додаванні сховища:"
 
-#: ../src/zypper-sources.cc:668
+#: ../src/zypper-sources.cc:717
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "Сховище \"%s\" успішно додано"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:732
 msgid "Autorefresh"
 msgstr "Автоосвіження"
 
-#: ../src/zypper-sources.cc:691
+#: ../src/zypper-sources.cc:740
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "Читання даних з носія \"%s\""
 
-#: ../src/zypper-sources.cc:697
+#: ../src/zypper-sources.cc:746
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "Проблема з читанням даних з носія \"%s\"."
 
-#: ../src/zypper-sources.cc:698
+#: ../src/zypper-sources.cc:747
 msgid "Please, check if your installation media is valid and readable."
 msgstr "Перевірте чи ваш носій встановлення чинний і з нього можна читати."
 
-#: ../src/zypper-sources.cc:792
+#: ../src/zypper-sources.cc:795
+#, fuzzy
+msgid "Problem accessing the file at the specified URL"
+msgstr "Помилка перенесення даних сховища з вказаної адреси URL:"
+
+#: ../src/zypper-sources.cc:796
+#, fuzzy
+msgid "Please check if the URL is valid and accessible."
+msgstr "Будь ласка, перевірте чи доступна вказана адреса URL."
+
+#: ../src/zypper-sources.cc:803
+#, fuzzy
+msgid "Problem parsing the file at the specified URL"
+msgstr "Помилка перенесення даних сховища з вказаної адреси URL:"
+
+#. TranslatorExplanation don't translate the URL if the URL itself is not translated.
+#. Also don't translate the '.repo' string.
+#: ../src/zypper-sources.cc:806
+msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
+msgstr ""
+
+#: ../src/zypper-sources.cc:813
+msgid "Problem encountered while trying to read the file at the specified URL"
+msgstr ""
+
+#: ../src/zypper-sources.cc:870
 #, c-format
 msgid "Repository %s has been removed."
 msgstr "Сховище %s було вилучено."
 
-#: ../src/zypper-sources.cc:844
+#: ../src/zypper-sources.cc:922
 #, c-format
 msgid "Repository %s renamed to %s"
 msgstr "Сховище %s перейменоване на %s"
 
-#: ../src/zypper-sources.cc:849 ../src/zypper-sources.cc:926
+#: ../src/zypper-sources.cc:927 ../src/zypper-sources.cc:1004
 #, c-format
 msgid "Repository %s not found."
 msgstr "Сховище %s не знайдено."
 
-#: ../src/zypper-sources.cc:854 ../src/zypper-sources.cc:931
+#: ../src/zypper-sources.cc:932 ../src/zypper-sources.cc:1009
 msgid "Error while modifying the repository:"
 msgstr "Помилка зміни сховища:"
 
-#: ../src/zypper-sources.cc:856 ../src/zypper-sources.cc:933
+#: ../src/zypper-sources.cc:934 ../src/zypper-sources.cc:1011
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "Сховище %s буде залишене без змін."
 
-#: ../src/zypper-sources.cc:870
+#: ../src/zypper-sources.cc:948
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
 msgstr "%s вживається разом з %s, що суперечить одне одному. Цю властивість буде залишено без зміни."
 
-#: ../src/zypper-sources.cc:921
+#: ../src/zypper-sources.cc:999
 #, c-format
 msgid "Repository %s has been sucessfully modified."
 msgstr "Сховище %s успішно змінено."
 
-#: ../src/zypper-sources.cc:969
+#: ../src/zypper-sources.cc:1047
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Отримання даних сховища \"%s\"..."
 
-#: ../src/zypper-sources.cc:976
+#: ../src/zypper-sources.cc:1054
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Не скешовано сховище \"%s\". Триває кешування..."
 
-#: ../src/zypper-sources.cc:983 ../src/zypper-sources.cc:1002
+#: ../src/zypper-sources.cc:1061 ../src/zypper-sources.cc:1080
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Проблема завантаження даних з \"%s\""
 
-#: ../src/zypper-sources.cc:984 ../src/zypper-sources.cc:1004
+#: ../src/zypper-sources.cc:1062 ../src/zypper-sources.cc:1082
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Потрібні пакунки з \"%s\" не завантажено через помилку."
 
-#: ../src/zypper-sources.cc:991
+#: ../src/zypper-sources.cc:1069
 #, c-format
 msgid "(%d resolvables found)"
 msgstr "(%d знайдено потрібних пакунків)"
 
-#: ../src/zypper-sources.cc:1003
+#: ../src/zypper-sources.cc:1081
 msgid "Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."
 msgstr "Спробуйте \"zypper refresh\" або, навіть, перед цим вилучіть /var/cache/zypp/zypp.db."
 
-#: ../src/zypper-sources.cc:1015
+#: ../src/zypper-sources.cc:1093
 msgid "Reading RPM database..."
 msgstr "Читання бази даних RPM..."
 
-#: ../src/zypper-sources.cc:1022
+#: ../src/zypper-sources.cc:1100
 #, c-format
 msgid "(%s resolvables)"
 msgstr "(%s потрібних пакунків)"
 
 #. list name, exact match
-#: ../src/zypper-sources.cc:1110
+#: ../src/zypper-sources.cc:1188
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -764,41 +817,22 @@ msgstr "(A) перервати, (R) повторити спробу, (I) ігн�
 msgid "Invalid answer. Choose letter a, r, or i."
 msgstr "Не чинна відповідь. Виберіть літеру a, r, або i."
 
-#. TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:148 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:171
-msgid "y"
-msgstr "т"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "yes"
+msgstr "так"
 
-#. TranslatorExplanation Uppercase 'Y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:152 ../src/zypper-callbacks.cc:171
-msgid "Y"
-msgstr "Т"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "no"
+msgstr "ні"
 
-#. TranslatorExplanation Lowercase 'n' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:156 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:173
-msgid "n"
-msgstr "н"
-
-#. TranslatorExplanation Uppercase 'N' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:160 ../src/zypper-callbacks.cc:173
-msgid "N"
-msgstr "Н"
-
-#. TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
-#: ../src/zypper-callbacks.cc:164
+#. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+#. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+#: ../src/zypper-callbacks.cc:152
 #, c-format
-msgid "Invalid answer '%s', enter '%s' or '%s':"
-msgstr "Не чинна відповідь \"%s\", введіть \"%s\", або \"%s\":"
+msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
+msgstr ""
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -901,64 +935,39 @@ msgstr "Надає:"
 msgid "Requires:"
 msgstr "Потребує:"
 
-#: ../src/zypper-search.cc:42
+#: ../src/zypper-search.cc:85
 msgid "No repositories configured. Please add at least one repository using 'zypper addrepo' command before using the search."
 msgstr "Не налаштовано жодного сховища. Будь ласка, додайте принаймні одне сховище за допомогою команди \"zypper addrepo\", перш ніж вживати пошук."
 
-#: ../src/zypper-search.cc:182
+#: ../src/zypper-search.cc:232
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr "Запис в кеш встановлених потрібних пакунків, які відповідають даним критеріям... "
 
-#: ../src/zypper-search.cc:191
+#: ../src/zypper-search.cc:242
 msgid " out of ("
 msgstr " немає ("
 
-#: ../src/zypper-search.cc:192
+#: ../src/zypper-search.cc:243
 msgid "cached."
 msgstr "в кешу."
 
-#: ../src/zypper-search.cc:293
+#: ../src/zypper-search.cc:344
 msgid " is not a valid regular expression: \""
 msgstr " не є чинним формальним виразом: \""
 
-#: ../src/zypper-search.cc:295
+#: ../src/zypper-search.cc:346
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Це вада в коді, будь ласка, напишіть звіт про помилку в програмі zypper."
 
-#: ../src/zypper.cc:73 ../src/zypper.cc:887
+#: ../src/zypper.cc:76 ../src/zypper.cc:899
 msgid "Given URL is invalid."
 msgstr "Дана адреса URL не є чинною."
 
-#: ../src/zypper.cc:110
-#, fuzzy
-msgid ""
-"  Options:\n"
-"\t--help, -h\t\tHelp.\n"
-"\t--version, -V\t\tOutput the version number.\n"
-"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
-"\t--verbose, -v\t\tIncrease verbosity.\n"
-"\t--terse, -t\t\tTerse output for machine consumption.\n"
-"\t--table-style, -s\tTable style (integer).\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
-"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-"\t--root, -R <dir>\tOperate on a different root directory.\n"
-msgstr ""
-"  Параметри:\n"
-"\t--help, -h\t\tДовідка\n"
-"\t--version, -V\t\tПоказати номер версії\n"
-"\t--verbose, -v\t\tЗбільшити багатослівність\n"
-"\t--terse, -t\t\tОбмежений вивід для споживання машиною\n"
-"\t--table-style, -s\tВ стилі таблиці (ціле число)\n"
-"\t--rug-compatible, -r\tУвімкнути сумісність з rug\n"
-"\t--non-interactive\tНічого не питати, автоматично вживати типові відповіді. (в стадії розробки)\n"
-"\t--root, -R <dir>\tПрацювати в іншому кореневому каталозі\n"
-
-#: ../src/zypper.cc:123
+#: ../src/zypper.cc:84
 #, fuzzy
 msgid ""
 "  Commands:\n"
-"\thelp\t\t\tHelp\n"
+"\thelp, ?\t\t\tHelp\n"
 "\tshell, sh\t\tAccept multiple commands at once\n"
 "\tinstall, in\t\tInstall packages or resolvables\n"
 "\tremove, rm\t\tRemove packages or resolvables\n"
@@ -996,28 +1005,53 @@ msgstr ""
 "\tinfo, if\t\tПоказати повну інформацію про пакунки\n"
 "\tpatch-info\t\tПоказати повну інформацію про латки\n"
 
-#: ../src/zypper.cc:164
+#: ../src/zypper.cc:136
+#, fuzzy
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+msgstr ""
+"  Параметри:\n"
+"\t--help, -h\t\tДовідка\n"
+"\t--version, -V\t\tПоказати номер версії\n"
+"\t--verbose, -v\t\tЗбільшити багатослівність\n"
+"\t--terse, -t\t\tОбмежений вивід для споживання машиною\n"
+"\t--table-style, -s\tВ стилі таблиці (ціле число)\n"
+"\t--rug-compatible, -r\tУвімкнути сумісність з rug\n"
+"\t--non-interactive\tНічого не питати, автоматично вживати типові відповіді. (в стадії розробки)\n"
+"\t--root, -R <dir>\tПрацювати в іншому кореневому каталозі\n"
+
+#: ../src/zypper.cc:167
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Багатослівність: %d"
 
-#: ../src/zypper.cc:170
+#: ../src/zypper.cc:173
 msgid "Entering non-interactive mode."
 msgstr "Початок не-інтерактивного режиму."
 
-#: ../src/zypper.cc:176
+#: ../src/zypper.cc:179
 msgid "Entering no-gpg-checks mode."
 msgstr "Початок режиму без-перевірки-gpg."
 
-#: ../src/zypper.cc:186
+#: ../src/zypper.cc:189
 msgid "Invalid table style "
 msgstr "Непридатний стиль таблиці "
 
-#: ../src/zypper.cc:231
+#: ../src/zypper.cc:234
 msgid "Try -h for help."
 msgstr "Введіть -h для довідки."
 
-#: ../src/zypper.cc:281
+#: ../src/zypper.cc:293
 msgid ""
 "install (in) [options] <capability> ...\n"
 "\n"
@@ -1032,7 +1066,7 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging\n"
 msgstr ""
 
-#: ../src/zypper.cc:310
+#: ../src/zypper.cc:322
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -1045,7 +1079,7 @@ msgid ""
 "    --debug-solver Create solver test case for debugging\n"
 msgstr ""
 
-#: ../src/zypper.cc:329
+#: ../src/zypper.cc:341
 #, fuzzy
 msgid ""
 "source-install (si) <name> ...\n"
@@ -1058,7 +1092,7 @@ msgstr ""
 "\n"
 "Оновити (освіжити інформацію) всі джерела встановлення системи.\n"
 
-#: ../src/zypper.cc:349
+#: ../src/zypper.cc:361
 #, fuzzy
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -1081,7 +1115,7 @@ msgstr ""
 "\t--disabled,-d\t\tДодати службу як вимкнену\n"
 "\t--no-refresh,-n\t\tНе оновлювати метадані автоматично\n"
 
-#: ../src/zypper.cc:368
+#: ../src/zypper.cc:380
 msgid ""
 "repos (lr)\n"
 "\n"
@@ -1091,7 +1125,7 @@ msgid ""
 "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
 msgstr ""
 
-#: ../src/zypper.cc:385
+#: ../src/zypper.cc:397
 msgid ""
 "removerepo (rr) [options] <alias|URL>\n"
 "\n"
@@ -1102,7 +1136,7 @@ msgid ""
 "    --loose-query\tIgnore query string in the URL\n"
 msgstr ""
 
-#: ../src/zypper.cc:401
+#: ../src/zypper.cc:413
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
@@ -1116,7 +1150,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/zypper.cc:419
+#: ../src/zypper.cc:431
 msgid ""
 "modifyrepo (mr) <options> <alias>\n"
 "\n"
@@ -1138,7 +1172,7 @@ msgstr ""
 "-a, --enable-autorefresh  Увімкнути автоосвіження сховища\n"
 "    --disable-autorefresh Вимкнути автоосвіження сховища\n"
 
-#: ../src/zypper.cc:442
+#: ../src/zypper.cc:454
 msgid ""
 "refresh (ref) [alias|#] ...\n"
 "\n"
@@ -1152,7 +1186,7 @@ msgid ""
 "-D, --download-only     Only download raw metadata, don't build the database\n"
 msgstr ""
 
-#: ../src/zypper.cc:467
+#: ../src/zypper.cc:479
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -1164,7 +1198,7 @@ msgid ""
 "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
 msgstr ""
 
-#: ../src/zypper.cc:494
+#: ../src/zypper.cc:506
 msgid ""
 "update (up) [options]\n"
 "\n"
@@ -1181,7 +1215,7 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging\n"
 msgstr ""
 
-#: ../src/zypper.cc:533
+#: ../src/zypper.cc:545
 #, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
@@ -1225,7 +1259,7 @@ msgstr ""
 "\n"
 "Також можна вживати шаблони заміни * і ? для пошуку в рядках.\n"
 
-#: ../src/zypper.cc:565
+#: ../src/zypper.cc:577
 msgid ""
 "patch-check\n"
 "\n"
@@ -1243,7 +1277,7 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім>  Перевіряти наявність латок тільки у сховищі вказаному псевдонімом .\n"
 
-#: ../src/zypper.cc:584
+#: ../src/zypper.cc:596
 msgid ""
 "patches\n"
 "\n"
@@ -1261,7 +1295,7 @@ msgstr ""
 "\n"
 "-r, --repo <псевдонім>  Перевіряти наявність латок тільки у сховищі вказаному псевдонімом .\n"
 
-#: ../src/zypper.cc:603
+#: ../src/zypper.cc:615
 msgid ""
 "info <name> ...\n"
 "\n"
@@ -1279,7 +1313,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias>  Працювати тільки зі сховищами, які вказано псевдонімом.\n"
 
-#: ../src/zypper.cc:621
+#: ../src/zypper.cc:633
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
@@ -1293,7 +1327,7 @@ msgstr ""
 "\n"
 "Це псевдонім для сумісності rug з \"zypper info -t patch\"\n"
 
-#: ../src/zypper.cc:635
+#: ../src/zypper.cc:647
 msgid ""
 "moo\n"
 "\n"
@@ -1307,7 +1341,7 @@ msgstr ""
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
-#: ../src/zypper.cc:650
+#: ../src/zypper.cc:662
 msgid ""
 "xml-updates\n"
 "\n"
@@ -1324,24 +1358,24 @@ msgstr ""
 "-r, --repo <alias>  Працювати тільки з оновленнями зі сховища,\n"
 "псевдонім якого вказано.\n"
 
-#: ../src/zypper.cc:670
+#: ../src/zypper.cc:682
 msgid "Non-option program arguments: "
 msgstr "Аргументи програми (не-параметри): "
 
-#: ../src/zypper.cc:693
+#: ../src/zypper.cc:705
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Сховища вимкнено, буде вживатись тільки база даних встановлених пакунків."
 
-#: ../src/zypper.cc:705
+#: ../src/zypper.cc:717
 msgid "Ignoring installed resolvables..."
 msgstr "Ігнорування встановлених потрібних пакунків..."
 
-#: ../src/zypper.cc:730
+#: ../src/zypper.cc:742
 msgid "A ZYpp transaction is already in progress. This means, there is another application using the libzypp library for package management running. All such applications must be closed before using this command."
 msgstr "Вже виконується транзакція ZYpp. Це означає, що виконується інша програма, яка вживає бібліотеку libzypp для керування пакунками. Всі такі програми потрібно закрити, перш ніж зможете вживати цю команду."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/zypper.cc:755
+#: ../src/zypper.cc:767
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -1351,105 +1385,105 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/zypper.cc:783 ../src/zypper.cc:861 ../src/zypper.cc:932
-#: ../src/zypper.cc:972
+#: ../src/zypper.cc:795 ../src/zypper.cc:873 ../src/zypper.cc:944
+#: ../src/zypper.cc:984
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Для зміни системних сховищ потрібні привілеї адміністратора."
 
-#: ../src/zypper.cc:810 ../src/zypper.cc:938
+#: ../src/zypper.cc:822 ../src/zypper.cc:950
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "Замало аргументів. Потрібні, принаймні, адреса URL і псевдонім."
 
-#: ../src/zypper.cc:842
+#: ../src/zypper.cc:854
 msgid "Specified type is not a valid repository type:"
 msgstr "Вказаний тип не є чинним типом сховища:"
 
-#: ../src/zypper.cc:843
+#: ../src/zypper.cc:855
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "Щоб отримати список відомих типів сховищ, скористайтесь \"zypper -h addrepo\" або \"man zypper\"."
 
-#: ../src/zypper.cc:867
+#: ../src/zypper.cc:879
 msgid "Required argument missing."
 msgstr "Потрібний аргумент відсутній."
 
-#: ../src/zypper.cc:880
+#: ../src/zypper.cc:892
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "Сховище не знайдено за даним псевдонімом, спроба вилучення за адресою URL..."
 
-#: ../src/zypper.cc:913
+#: ../src/zypper.cc:925
 msgid "Repository not found by given alias or URL."
 msgstr "Сховище не знайдено за даним псевдонімом або адресою URL."
 
-#: ../src/zypper.cc:978
+#: ../src/zypper.cc:990
 msgid "Alias is a required argument."
 msgstr "Псевдонім - це потрібний аргумент."
 
-#: ../src/zypper.cc:1000
+#: ../src/zypper.cc:1012
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Для освіження системних сховищ потрібні привілеї адміністратора."
 
-#: ../src/zypper.cc:1037
+#: ../src/zypper.cc:1049
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Для встановлення і вилучення пакунків потрібні привілеї адміністратора."
 
-#: ../src/zypper.cc:1051 ../src/zypper.cc:1259 ../src/zypper.cc:1332
+#: ../src/zypper.cc:1063 ../src/zypper.cc:1282 ../src/zypper.cc:1355
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Невідомий тип потрібного пакунка: %s"
 
-#: ../src/zypper.cc:1069
+#: ../src/zypper.cc:1081
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Увага: немає визначених сховищ. Дії тільки з встановленими потрібними пакунками. Нічого неможливо встановити."
 
-#: ../src/zypper.cc:1089 ../src/zypper.cc:1357
+#: ../src/zypper.cc:1101 ../src/zypper.cc:1380
 msgid "Generating solver test case..."
 msgstr "Створення тесту..."
 
-#: ../src/zypper.cc:1091 ../src/zypper.cc:1359
+#: ../src/zypper.cc:1103 ../src/zypper.cc:1382
 msgid "Solver test case generated successfully."
 msgstr "Тест створено успішно."
 
-#: ../src/zypper.cc:1094 ../src/zypper.cc:1361
+#: ../src/zypper.cc:1106 ../src/zypper.cc:1384
 msgid "Error creating the solver test case."
 msgstr "Помилка створення тесту."
 
-#: ../src/zypper.cc:1116
+#: ../src/zypper.cc:1128
 msgid "Source package name is a required argument."
 msgstr "Назва пакунка джерела - це потрібний аргумент."
 
-#: ../src/zypper.cc:1155
+#: ../src/zypper.cc:1169
 msgid "Unknown resolvable type "
 msgstr "Невідомий тип потрібного пакунка "
 
-#: ../src/zypper.cc:1183
+#: ../src/zypper.cc:1206
 msgid "No resolvables found."
 msgstr "Не знайдено пакунків для вирішення."
 
 #. 'rug' is the name of a program and must not be translated
 #. 'best-effort' is a program parameter and can not be translated
-#: ../src/zypper.cc:1269 ../src/zypper.cc:1342
+#: ../src/zypper.cc:1292 ../src/zypper.cc:1365
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "Виконується як \"rug\", до оновлення неможливий підхід як \"best-effort\"."
 
-#: ../src/zypper.cc:1315
+#: ../src/zypper.cc:1338
 msgid "Root privileges are required for updating packages."
 msgstr "Для оновлення пакунків потрібні привілеї адміністратора."
 
-#: ../src/zypper.cc:1411
+#: ../src/zypper.cc:1441
 msgid "Unexpected exception."
 msgstr "Непередбачений виняток."
 
-#: ../src/zypper.cc:1497
+#: ../src/zypper.cc:1526
 msgid "You already are running zypper's shell."
 msgstr "У вас вже запущено оболонку zypper."
 
-#: ../src/zypper-utils.cc:44
+#: ../src/zypper-utils.cc:47
 msgid "Please file a bug report about this."
 msgstr "Будь ласка, надішліть про це звіт про помилку."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
-#: ../src/zypper-utils.cc:47
+#: ../src/zypper-utils.cc:50
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Див. http://en.opensuse.org/Zypper#Troubleshooting для допомоги."
 
@@ -1459,20 +1493,24 @@ msgid "Unknown command '%s'"
 msgstr "Невідома команда \"%s\""
 
 # error box title
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "I/O error"
 msgstr "Помилка вводу/виводу"
 
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "Invalid object"
 msgstr "Не чинний об'єкт"
 
-#: ../src/zypper-media-callbacks.h:47
+#: ../src/zypper-callbacks.h:50
+msgid "Error"
+msgstr "Помилка"
+
+#: ../src/zypper-media-callbacks.h:56
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Будь ласка, вставте носій [%s] # %d і введіть \"т\", щоб продовжити або \"н\", щоб скасувати дію."
 
-#: ../src/zypper-media-callbacks.h:63 ../src/zypper-media-callbacks.h:69
+#: ../src/zypper-media-callbacks.h:76 ../src/zypper-media-callbacks.h:82
 msgid "Downloading: "
 msgstr "Звантаження зазнало: "
 
@@ -1551,11 +1589,25 @@ msgstr "Встановлення: %s-%s"
 msgid "Installation of %s failed:"
 msgstr "Встановлення %s зазнало невдачі:"
 
-#: ../src/zypper-search.h:262
+#: ../src/zypper-search.h:289
 msgid "Catalog"
 msgstr "Каталог"
 
-#: ../src/zypper-search.h:264
+#: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Сховище"
 
+#~ msgid "y"
+#~ msgstr "т"
+
+#~ msgid "Y"
+#~ msgstr "Т"
+
+#~ msgid "n"
+#~ msgstr "н"
+
+#~ msgid "N"
+#~ msgstr "Н"
+
+#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
+#~ msgstr "Не чинна відповідь \"%s\", введіть \"%s\", або \"%s\":"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 15:18+0200\n"
+"POT-Creation-Date: 2007-08-31 15:19+0200\n"
 "PO-Revision-Date: 2005-03-09 13:54+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -34,6 +34,7 @@ msgid "Import key %s to trusted keyring?"
 msgstr "匯入金鑰 %s 到信任的金鑰圈？"
 
 #: ../src/zypper-keyring-callbacks.h:66
+#, c-format
 msgid "Warning: Accepting file %s signed with an unknown key %s."
 msgstr "警告：將接受檔案 %s，此檔案使用未知的金鑰 %s 簽名。 "
 
@@ -53,37 +54,51 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "您要信任金鑰 ID %s，%s，指紋 %s 嗎"
 
 #: ../src/zypper-keyring-callbacks.h:110
-#, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+#, fuzzy, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
 msgstr "警告：忽略 %s 的簽名驗證錯誤(以公共金鑰 ID %s，%s，指紋 %s)！請再次確認檔案並非遭到惡意的修改！"
 
-#: ../src/zypper-keyring-callbacks.h:119
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-msgstr "%s 的簽名驗證錯誤(以公共金鑰 ID %s，%s，指紋 %s)！警告：這可能是因為檔案遭到惡意的修改！繼續進行將有風險！無論如何要繼續嗎？"
+#: ../src/zypper-keyring-callbacks.h:113
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
 
-#: ../src/zypper-keyring-callbacks.h:133
+#: ../src/zypper-keyring-callbacks.h:120
+#, fuzzy, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr "%s 的摘要確認失敗。期望 %s，找到 %s。"
+
+#: ../src/zypper-keyring-callbacks.h:123
+msgid "Warning: This might be caused by a malicious change in the file!"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:125
+#, fuzzy
+msgid "Continuing is risky! Continue anyway?"
+msgstr "還是要繼續嗎 "
+
+#: ../src/zypper-keyring-callbacks.h:136
 #, c-format
 msgid "No digest for file %s."
 msgstr "檔案 %s 無摘要。"
 
 # internal key used: Ok
 #. there are resolvables to install/uninstall
-#: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
-#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:1369
+#: ../src/zypper-keyring-callbacks.h:136 ../src/zypper-keyring-callbacks.h:144
+#: ../src/zypper-keyring-callbacks.h:163 ../src/zypper-misc.cc:1371
 msgid "Continue?"
 msgstr "要繼續嗎？"
 
-#: ../src/zypper-keyring-callbacks.h:140
+#: ../src/zypper-keyring-callbacks.h:143
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明摘要 %s (檔案 %s)。"
 
-#: ../src/zypper-keyring-callbacks.h:153
+#: ../src/zypper-keyring-callbacks.h:156
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr "忽略 %s 的摘要驗證失敗(期望 %s，找到 %s)。"
 
-#: ../src/zypper-keyring-callbacks.h:159
+#: ../src/zypper-keyring-callbacks.h:162
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "%s 的摘要確認失敗。期望 %s，找到 %s。"
@@ -93,6 +108,7 @@ msgid "Initializing Target"
 msgstr "啟始化目標"
 
 #: ../src/zypper-misc.cc:270
+#, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "無法剖析相容性 '%s'。"
 
@@ -118,11 +134,11 @@ msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "無法將 '%s' 新增到要移除的套件清單中。"
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:41
+#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:42
 msgid "Not found"
 msgstr "找不到"
 
-#: ../src/zypper-misc.cc:421 ../src/zypper-misc.cc:493
+#: ../src/zypper-misc.cc:421
 msgid "Problem: "
 msgstr "問題： "
 
@@ -133,143 +149,146 @@ msgid " Solution %d: "
 msgstr "解決方案 %d："
 
 #. input prompt
-#: ../src/zypper-misc.cc:446
+#: ../src/zypper-misc.cc:449
 msgid "number, (r)etry or (c)ancel> "
 msgstr "數字，重試(r)或取消(c)> "
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:454
+#: ../src/zypper-misc.cc:457
 msgid "r"
 msgstr "r"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:457
+#: ../src/zypper-misc.cc:460
 msgid "c"
 msgstr "c"
 
-#: ../src/zypper-misc.cc:463
+#: ../src/zypper-misc.cc:466
 #, c-format
 msgid "Applying solution %s"
 msgstr "套用解決方案 %s"
 
-#: ../src/zypper-misc.cc:486
+#: ../src/zypper-misc.cc:488
 #, c-format
 msgid "%s Problems:"
 msgstr "%s 問題"
 
-#: ../src/zypper-misc.cc:489
+#: ../src/zypper-misc.cc:491
 msgid "Specified capability not found"
 msgstr "找不到指定的相容性"
 
-#: ../src/zypper-misc.cc:620 ../src/zypper-misc.cc:622
+#: ../src/zypper-misc.cc:621 ../src/zypper-misc.cc:623
 msgid "Nothing to do."
 msgstr "無執行動作。"
 
-#: ../src/zypper-misc.cc:736
+#: ../src/zypper-misc.cc:737
+#, fuzzy, c-format
 msgid "Overall download size: %s."
 msgstr "全部下載大小： %1。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:740
+#: ../src/zypper-misc.cc:741
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "完成操作後，將增加 %s 的使用。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:748
+#: ../src/zypper-misc.cc:749
+#, c-format
 msgid "After the operation, %s will be freed."
 msgstr "完成操作後，將釋出 %s。"
 
-#: ../src/zypper-misc.cc:795
+#: ../src/zypper-misc.cc:796
 #, c-format
 msgid "%s items locked"
 msgstr "%s 項目鎖定"
 
-#: ../src/zypper-misc.cc:796
+#: ../src/zypper-misc.cc:797
 msgid "Establishing status of aggregates"
 msgstr "正在建立整合狀態"
 
-#: ../src/zypper-misc.cc:804
+#: ../src/zypper-misc.cc:805
 msgid "Resolving dependencies..."
 msgstr "正在解析相依性..."
 
-#: ../src/zypper-misc.cc:829
+#: ../src/zypper-misc.cc:831
+#, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "需要 %d 個修補程式(%d 個安全性修正)"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "已安裝"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "已解除安裝"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "不再適用"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "不適用"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "已套用"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "不需要"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "已損毀"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "需要"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:846
+#: ../src/zypper-misc.cc:848
 msgid "error"
 msgstr "錯誤"
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "目錄："
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "套件庫： "
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1150 ../src/zypper-sources.cc:310
-#: ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1152 ../src/zypper-sources.cc:316
+#: ../src/zypper-sources.cc:357 ../src/zypper-search.h:299
 msgid "Name"
 msgstr "名稱"
 
 #. best_effort does not know version or arch yet
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Version"
 msgstr "版本"
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
 msgid "Category"
 msgstr "分類"
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-sources.cc:308
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-sources.cc:316
 msgid "Status"
 msgstr "狀態"
 
-#: ../src/zypper-misc.cc:902
+#: ../src/zypper-misc.cc:904
 msgid "No needed patches found."
 msgstr "沒有需要的修補程式。"
 
-#: ../src/zypper-misc.cc:1030
+#: ../src/zypper-misc.cc:1032
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -277,38 +296,47 @@ msgstr ""
 "警告： 這些是只影響更新程式本身的更新。\n"
 "還有其他的更新。\n"
 
-#: ../src/zypper-misc.cc:1040 ../src/zypper-misc.cc:1186
+#: ../src/zypper-misc.cc:1042 ../src/zypper-misc.cc:1188
 msgid "No updates found."
 msgstr "沒有發現更新。"
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:1142 ../src/zypper-search.h:259
+#: ../src/zypper-misc.cc:1144 ../src/zypper-search.h:286
 msgid "S"
 msgstr "S"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:1147 ../src/zypper-search.h:268
+#: ../src/zypper-misc.cc:1149 ../src/zypper-search.h:295
 msgid "Bundle"
 msgstr "配套"
 
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Arch"
 msgstr "結構"
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:1310
+#: ../src/zypper-misc.cc:1312
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "警告： %s 是互動模式，略過。"
 
-#: ../src/zypper-misc.cc:1373
+#: ../src/zypper-misc.cc:1375
 msgid "committing"
 msgstr "提交"
 
-#: ../src/zypper-misc.cc:1391
+#: ../src/zypper-misc.cc:1390
+#, fuzzy
+msgid "Problem downloading the package file from the repository:"
+msgstr "從 '%s' 下載檔案出現問題。"
+
+#: ../src/zypper-misc.cc:1391 ../src/zypper-sources.cc:89
+msgid "Please, see the above error message to for a hint."
+msgstr "請檢視上面的錯誤訊息以獲得提示。"
+
+#: ../src/zypper-misc.cc:1401
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -324,374 +352,434 @@ msgstr ""
 " – 使用另一個安裝媒體 (例如媒體損壞時)\n"
 " – 使用另一個套件庫"
 
-#: ../src/zypper-misc.cc:1411
+#: ../src/zypper-misc.cc:1421
 msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
 msgstr "其中一個安裝的修補程式需要重新啟動您的機器。 請盡快重新啟動電腦。"
 
-#: ../src/zypper-misc.cc:1414
+#: ../src/zypper-misc.cc:1424
 msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "警告： 其中一個安裝的修補程式需要重新啟動您的機器。 請盡快重新啟動電腦。"
 
-#: ../src/zypper-misc.cc:1420
+#: ../src/zypper-misc.cc:1430
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "警告： 其中一個安裝的修補程式會影響套件管理員本身，因此必須重新啟動，才能執行下一個作業。"
 
-#: ../src/zypper-misc.cc:1446
+#: ../src/zypper-misc.cc:1456
+#, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "自動同意 %s %s 授權。"
 
-#: ../src/zypper-misc.cc:1457
+#: ../src/zypper-misc.cc:1467
+#, c-format
 msgid "%s %s license:"
 msgstr "%s %s 授權："
 
-#: ../src/zypper-misc.cc:1461
+#: ../src/zypper-misc.cc:1471
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "若要安裝此套件，您必須接受上述授權條款。 要繼續嗎？"
 
-#: ../src/zypper-misc.cc:1472
+#: ../src/zypper-misc.cc:1482
 msgid "Aborting installation due to the need for license(s) confirmation."
 msgstr "因為必須確認授權條款，所以中止安裝。"
 
 #. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:1476
+#: ../src/zypper-misc.cc:1486
 msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
 msgstr "請在互動模式中重新啟動作業，並確認您同意授權合約，或使用 --auto-agree-with-licenses 的選項。"
 
-#: ../src/zypper-misc.cc:1487
+#: ../src/zypper-misc.cc:1497
+#, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "中止安裝，因為使用者不接受 %s %s 授權。"
 
-#: ../src/zypper-misc.cc:1557
+#: ../src/zypper-misc.cc:1567
+#, c-format
 msgid "Installing source package %s-%s"
 msgstr "正在安裝來源套件 %s-%s"
 
-#: ../src/zypper-misc.cc:1565
+#: ../src/zypper-misc.cc:1575
+#, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "來源套件 %s-%s 已成功安裝。"
 
-#: ../src/zypper-misc.cc:1571
+#: ../src/zypper-misc.cc:1581
+#, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "安裝來源套件 %s-%s 發生問題："
 
-#: ../src/zypper-misc.cc:1579
+#: ../src/zypper-misc.cc:1589
+#, c-format
 msgid "Source package '%s' not found."
 msgstr "找不到來源套件 '%s'。"
 
-#: ../src/zypper-sources.cc:48
+#: ../src/zypper-sources.cc:52
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "檢查是否需要重新整理 %s 的中繼資訊"
 
-#: ../src/zypper-sources.cc:57
+#: ../src/zypper-sources.cc:61
+#, c-format
 msgid "Refreshing '%s'"
 msgstr "正在重新整理 '%s'"
 
-#: ../src/zypper-sources.cc:59
+#: ../src/zypper-sources.cc:63
 msgid "(forced)"
 msgstr "(強迫)"
 
-#: ../src/zypper-sources.cc:64
+#: ../src/zypper-sources.cc:68
+#, c-format
 msgid "Repository '%s' is up to date."
 msgstr "套件庫 '%s' 已是最新狀態。"
 
-#: ../src/zypper-sources.cc:76
+#: ../src/zypper-sources.cc:80
 msgid "Forcing raw metadata refresh"
 msgstr "強迫不完整的中繼資料重新整理"
 
-#: ../src/zypper-sources.cc:84
+#: ../src/zypper-sources.cc:88
+#, c-format
 msgid "Problem downloading files from '%s'."
 msgstr "從 '%s' 下載檔案出現問題。"
 
-#: ../src/zypper-sources.cc:85
-msgid "Please, see the above error message to for a hint."
-msgstr "請檢視上面的錯誤訊息以獲得提示。"
-
-#: ../src/zypper-sources.cc:92
+#: ../src/zypper-sources.cc:96
+#, c-format
 msgid "No URLs defined for '%s'."
 msgstr "'%s' 沒有定義 URL。"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: ../src/zypper-sources.cc:96
+#: ../src/zypper-sources.cc:100
 #, c-format
 msgid "Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."
 msgstr "請加入一個或數個基礎 URL (baseurl=URL) 到 %s 提供套件庫 '%s' 使用。"
 
-#: ../src/zypper-sources.cc:104
+#. ! \todo correct the message after 10.3 release
+#: ../src/zypper-sources.cc:109
 msgid "No alias defined this repository."
 msgstr "這個套件庫未定義別名。"
 
-#: ../src/zypper-sources.cc:112
+#: ../src/zypper-sources.cc:117
+#, c-format
 msgid "Repository '%s' is invalid."
 msgstr "套件庫 '%s' 不適用。"
 
-#: ../src/zypper-sources.cc:113
+#: ../src/zypper-sources.cc:118
 msgid "Please, check if the URLs defined for this repository are pointing to a valid repository."
 msgstr "請檢查此套件庫定義的 URL 是否指向可用的套件庫。"
 
-#: ../src/zypper-sources.cc:121
+#: ../src/zypper-sources.cc:126
+#, c-format
 msgid "Error downloading metadata for '%s':"
 msgstr "從 '%s' 下載中繼資料發生錯誤："
 
-#: ../src/zypper-sources.cc:148
+#: ../src/zypper-sources.cc:153
 msgid "Forcing building of repository cache"
 msgstr "強迫建立套件庫快取"
 
-#: ../src/zypper-sources.cc:161
+#: ../src/zypper-sources.cc:166
+#, c-format
 msgid "Error parsing metadata for '%s':"
 msgstr "分析 '%s' 的中繼資料發生錯誤："
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: ../src/zypper-sources.cc:163
+#: ../src/zypper-sources.cc:168
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by folowing instructions at http://en.opensuse.org/Zypper#Troubleshooting"
 msgstr "這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器的錯誤。若是後者的情形(或您懷疑是)請參考 http://en.opensuse.org/Zypper#Troubleshooting 的指引發出錯誤回報。"
 
-#: ../src/zypper-sources.cc:177
+#: ../src/zypper-sources.cc:182
+#, c-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "在本機快取中找不到套件庫 '%s' 的中繼資訊。"
 
-#: ../src/zypper-sources.cc:185
+#: ../src/zypper-sources.cc:190
 msgid "Error building the cache database:"
 msgstr "建立快取資料庫時發生錯誤："
 
-#: ../src/zypper-sources.cc:215
+#: ../src/zypper-sources.cc:222
+#, c-format
 msgid "Repository '%s' not found."
 msgstr "找不到套件庫 '%s'。"
 
-#: ../src/zypper-sources.cc:221
+#: ../src/zypper-sources.cc:228
+#, c-format
 msgid "Error reading repository description file for '%s'."
 msgstr "讀取套件庫 '%s' 的描述檔時發生錯誤。"
 
-#: ../src/zypper-sources.cc:223
+#: ../src/zypper-sources.cc:230
 msgid "Reason: "
 msgstr "理由： "
 
-#: ../src/zypper-sources.cc:250
+#: ../src/zypper-sources.cc:257
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "因以上的錯誤停用套件庫 '%s'。"
 
-#: ../src/zypper-sources.cc:268
+#: ../src/zypper-sources.cc:275
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
 msgstr "套件庫 '%s' 已過期。您可以用 root 執行 'zypper refresh' 來更新它。"
 
-#. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/zypper-sources.cc:309 ../src/zypper-sources.cc:681
-msgid "Enabled"
-msgstr "已啟用"
-
-#: ../src/zypper-sources.cc:309
-msgid "Refresh"
-msgstr "重新整理"
-
-#: ../src/zypper-sources.cc:310 ../src/zypper-search.h:270
+#: ../src/zypper-sources.cc:316 ../src/zypper-sources.cc:357
+#: ../src/zypper-search.h:297
 msgid "Type"
 msgstr "類型"
 
-#: ../src/zypper-sources.cc:326
+#. status
+#. rug's status (active, pending => active, disabled <= enabled, disabled)
+#. this is probably the closest possible compatibility arrangement
+#: ../src/zypper-sources.cc:333
 msgid "Active"
 msgstr "作用中"
 
-#: ../src/zypper-sources.cc:326
+#: ../src/zypper-sources.cc:333
 msgid "Disabled"
 msgstr "已停用"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/zypper-sources.cc:357 ../src/zypper-sources.cc:730
+msgid "Enabled"
+msgstr "已啟用"
+
+#: ../src/zypper-sources.cc:357
+msgid "Refresh"
+msgstr "重新整理"
+
+#: ../src/zypper-sources.cc:357
+msgid "Alias"
+msgstr "別名"
+
+#. enabled?
+#. autorefresh?
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
 msgstr "是"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "No"
 msgstr "否"
 
-#: ../src/zypper-sources.cc:350
+#: ../src/zypper-sources.cc:391
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "尚未定義套件庫。請用 'zypper addrepo' 命令來加入套件庫。"
 
-#: ../src/zypper-sources.cc:383 ../src/zypper-sources.cc:449
+#: ../src/zypper-sources.cc:424 ../src/zypper-sources.cc:495
 msgid "Error reading repositories:"
 msgstr "讀取套件庫發生錯誤："
 
-#: ../src/zypper-sources.cc:405
+#: ../src/zypper-sources.cc:446
 #, c-format
 msgid "Can't open %s for writing. Maybe you don't have write permissions?"
 msgstr "無法開啟寫入 %s 。可能您沒有寫入的權限？"
 
-#: ../src/zypper-sources.cc:413
+#: ../src/zypper-sources.cc:454
+#, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "套件庫已成功匯出到 %s。"
 
-#: ../src/zypper-sources.cc:505
+#: ../src/zypper-sources.cc:551
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "跳過已停用的套件庫 '%s'"
 
-#: ../src/zypper-sources.cc:541
+#: ../src/zypper-sources.cc:587
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "因以上的錯誤跳過套件庫 '%s'。"
 
-#: ../src/zypper-sources.cc:554
+#: ../src/zypper-sources.cc:600
+#, c-format
 msgid "Repository '%s' not found by its alias or number."
 msgstr "無法由它的別名或編號找到套件庫 '%s'。"
 
-#: ../src/zypper-sources.cc:559
+#: ../src/zypper-sources.cc:605
 msgid "Use 'zypper repos' to get the list of defined repositories."
 msgstr "請用 'zypper repos' 取得已定義的套件庫清單。"
 
-#: ../src/zypper-sources.cc:566
+#: ../src/zypper-sources.cc:612
 msgid "Specified repositories are not enabled or defined."
 msgstr "指定的套件庫尚未啟用或定義。"
 
-#: ../src/zypper-sources.cc:568
+#: ../src/zypper-sources.cc:614
 msgid "There are no enabled repositories defined."
 msgstr "尚未定義已啟用的套件庫。"
 
-#: ../src/zypper-sources.cc:571
+#: ../src/zypper-sources.cc:617
 msgid "Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories."
 msgstr "請用 'zypper addrepo' 或 'zypper modifyrepo' 命令來加入或啟用套件庫。"
 
-#: ../src/zypper-sources.cc:575
+#: ../src/zypper-sources.cc:621
 msgid "Could not refresh the repositories because of errors."
 msgstr "因發生錯誤無法重新整理套件庫。"
 
-#: ../src/zypper-sources.cc:577
+#: ../src/zypper-sources.cc:623
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "因發生錯誤，某些套件庫尚未被重新整理。"
 
-#: ../src/zypper-sources.cc:579
+#: ../src/zypper-sources.cc:625
 msgid "Specified repositories have been refreshed."
 msgstr "指定的套件庫已重新整理。"
 
-#: ../src/zypper-sources.cc:581
+#: ../src/zypper-sources.cc:627
 msgid "All repositories have been refreshed."
 msgstr "所有套件庫已重新整理。"
 
-#: ../src/zypper-sources.cc:623
+#: ../src/zypper-sources.cc:667
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "這是一個會改變的唯讀媒體 (CD/DVD)，停用自動重新整理。"
 
-#: ../src/zypper-sources.cc:636
+#: ../src/zypper-sources.cc:685
+#, c-format
 msgid "Repository named '%s' already exists. Please, use another alias."
 msgstr "套件庫名稱 '%s' 已存在。請使用其他的別名。"
 
-#: ../src/zypper-sources.cc:644
+#: ../src/zypper-sources.cc:693
 msgid "Can't find a valid repository at given location:"
 msgstr "在指定的位置找不到適用的套件庫："
 
-#: ../src/zypper-sources.cc:645
+#: ../src/zypper-sources.cc:694
 msgid "Could not determine the type of the repository. Please, check if the defined URLs (see below) point to a valid repository:"
 msgstr "無法決定套件庫的類型。請檢查是否定義的 URL (參看下方) 真的指向一個可用的套件庫："
 
-#: ../src/zypper-sources.cc:656
+#: ../src/zypper-sources.cc:705
 msgid "Problem transferring repository data from specified URL:"
 msgstr "由指定的 URL 傳輸套件庫資料時發生錯誤："
 
-#: ../src/zypper-sources.cc:657
+#: ../src/zypper-sources.cc:706
 msgid "Please, check whether the specified URL is accessible."
 msgstr "請檢查指定的 URL 是否可存取。"
 
-#: ../src/zypper-sources.cc:664
+#: ../src/zypper-sources.cc:713
 msgid "Unknown problem when adding repository:"
 msgstr "新增套件庫時發生未知的問題："
 
-#: ../src/zypper-sources.cc:668
+#: ../src/zypper-sources.cc:717
+#, c-format
 msgid "Repository '%s' successfully added"
 msgstr "已成功新增套件庫 '%s'"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:732
 msgid "Autorefresh"
 msgstr "自動重新整理"
 
-#: ../src/zypper-sources.cc:691
+#: ../src/zypper-sources.cc:740
+#, c-format
 msgid "Reading data from '%s' media"
 msgstr "正在從媒體 '%s' 讀取資料"
 
-#: ../src/zypper-sources.cc:697
+#: ../src/zypper-sources.cc:746
+#, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "從媒體 '%s' 讀取資料發生問題"
 
-#: ../src/zypper-sources.cc:698
+#: ../src/zypper-sources.cc:747
 msgid "Please, check if your installation media is valid and readable."
 msgstr "請檢查您的安裝媒體是否適用與可存取。"
 
-#: ../src/zypper-sources.cc:792
+#: ../src/zypper-sources.cc:795
+#, fuzzy
+msgid "Problem accessing the file at the specified URL"
+msgstr "由指定的 URL 傳輸套件庫資料時發生錯誤："
+
+#: ../src/zypper-sources.cc:796
+#, fuzzy
+msgid "Please check if the URL is valid and accessible."
+msgstr "請檢查指定的 URL 是否可存取。"
+
+#: ../src/zypper-sources.cc:803
+#, fuzzy
+msgid "Problem parsing the file at the specified URL"
+msgstr "由指定的 URL 傳輸套件庫資料時發生錯誤："
+
+#. TranslatorExplanation don't translate the URL if the URL itself is not translated.
+#. Also don't translate the '.repo' string.
+#: ../src/zypper-sources.cc:806
+msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
+msgstr ""
+
+#: ../src/zypper-sources.cc:813
+msgid "Problem encountered while trying to read the file at the specified URL"
+msgstr ""
+
+#: ../src/zypper-sources.cc:870
+#, c-format
 msgid "Repository %s has been removed."
 msgstr "套件庫 %s 已經被移除。"
 
-#: ../src/zypper-sources.cc:844
+#: ../src/zypper-sources.cc:922
 #, c-format
 msgid "Repository %s renamed to %s"
 msgstr "套件庫 %s 已改名為 %s"
 
-#: ../src/zypper-sources.cc:849 ../src/zypper-sources.cc:926
+#: ../src/zypper-sources.cc:927 ../src/zypper-sources.cc:1004
+#, c-format
 msgid "Repository %s not found."
 msgstr "找不到套件庫 %s。"
 
-#: ../src/zypper-sources.cc:854 ../src/zypper-sources.cc:931
+#: ../src/zypper-sources.cc:932 ../src/zypper-sources.cc:1009
 msgid "Error while modifying the repository:"
 msgstr "修改套件庫時發生錯誤："
 
-#: ../src/zypper-sources.cc:856 ../src/zypper-sources.cc:933
+#: ../src/zypper-sources.cc:934 ../src/zypper-sources.cc:1011
+#, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "套件庫 %s 維持不變。"
 
-#: ../src/zypper-sources.cc:870
+#: ../src/zypper-sources.cc:948
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
 msgstr "%s 和 %s 一起使用，而這兩個是彼此衝突的。這個性質將維持不變。"
 
-#: ../src/zypper-sources.cc:921
+#: ../src/zypper-sources.cc:999
+#, c-format
 msgid "Repository %s has been sucessfully modified."
 msgstr "套件庫 %s 已成功修改。"
 
-#: ../src/zypper-sources.cc:969
+#: ../src/zypper-sources.cc:1047
+#, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "正在讀取套件庫 %s..."
 
-#: ../src/zypper-sources.cc:976
+#: ../src/zypper-sources.cc:1054
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "套件庫 '%s' 沒有快取。快取中..."
 
-#: ../src/zypper-sources.cc:983 ../src/zypper-sources.cc:1002
+#: ../src/zypper-sources.cc:1061 ../src/zypper-sources.cc:1080
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "從 '%s' 載入資料有問題"
 
-#: ../src/zypper-sources.cc:984 ../src/zypper-sources.cc:1004
+#: ../src/zypper-sources.cc:1062 ../src/zypper-sources.cc:1082
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "因為錯誤，由 '%s' 提供的解決方案無法載入。"
 
-#: ../src/zypper-sources.cc:991
+#: ../src/zypper-sources.cc:1069
 #, c-format
 msgid "(%d resolvables found)"
 msgstr "(找到 %d 解決方案)"
 
-#: ../src/zypper-sources.cc:1003
+#: ../src/zypper-sources.cc:1081
 msgid "Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."
 msgstr "請試試 'zypper refresh' ，或執行前先移除 /var/cache/zypp/zypp.db 。"
 
-#: ../src/zypper-sources.cc:1015
+#: ../src/zypper-sources.cc:1093
 msgid "Reading RPM database..."
 msgstr "正在讀取 RPM 資料庫..."
 
-#: ../src/zypper-sources.cc:1022
+#: ../src/zypper-sources.cc:1100
 #, c-format
 msgid "(%s resolvables)"
 msgstr "(%s 解決方案)"
 
 #. list name, exact match
-#: ../src/zypper-sources.cc:1110
+#: ../src/zypper-sources.cc:1188
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -706,6 +794,7 @@ msgid "The updater could not access the package manager engine. This usually hap
 msgstr "更新程式無法存取套件管理員引擎。 當另一個應用程式 (例如 YaST) 同時間也在使用更新程式時，就會發生這種情況。 請關閉其他應用程式並再次檢查更新。"
 
 #: ../src/zypp-checkpatches.cc:185
+#, c-format
 msgid ""
 "Couldn't restore repository.\n"
 "Detail: %s"
@@ -726,41 +815,22 @@ msgstr "(A)中止、(R)重試、(I)忽略？"
 msgid "Invalid answer. Choose letter a, r, or i."
 msgstr "不適用的答案。請由 a 、 r 或 i 3個字母中選擇。"
 
-#. TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:148 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:171
-msgid "y"
-msgstr "y"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "yes"
+msgstr "是"
 
-#. TranslatorExplanation Uppercase 'Y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:152 ../src/zypper-callbacks.cc:171
-msgid "Y"
-msgstr "Y"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "no"
+msgstr "否"
 
-#. TranslatorExplanation Lowercase 'n' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:156 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:173
-msgid "n"
-msgstr "n"
-
-#. TranslatorExplanation Uppercase 'N' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:160 ../src/zypper-callbacks.cc:173
-msgid "N"
-msgstr "N"
-
-#. TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
-#: ../src/zypper-callbacks.cc:164
+#. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+#. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+#: ../src/zypper-callbacks.cc:152
 #, c-format
-msgid "Invalid answer '%s', enter '%s' or '%s':"
-msgstr "不適用的答案 '%s'，請輸入 '%s' 或 '%s'："
+msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
+msgstr ""
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -772,12 +842,14 @@ msgstr "遺失引數"
 
 #. TranslatorExplanation E.g. "package zypper not found."
 #: ../src/zypper-info.cc:52
+#, c-format
 msgid "%s %s not found."
 msgstr "找不到 %s %s 。"
 
 #. print info
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: ../src/zypper-info.cc:58
+#, c-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的資訊："
 
@@ -861,64 +933,39 @@ msgstr "提供："
 msgid "Requires:"
 msgstr "需要："
 
-#: ../src/zypper-search.cc:42
+#: ../src/zypper-search.cc:85
 msgid "No repositories configured. Please add at least one repository using 'zypper addrepo' command before using the search."
 msgstr "沒有已設定完成的套件庫。在您使用搜尋前，請使用 'zypper addrepo' 命令至少加入一個套件庫。"
 
-#: ../src/zypper-search.cc:182
+#: ../src/zypper-search.cc:232
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr "正在預先快取符合特定搜尋條件的安裝可解析檔..."
 
-#: ../src/zypper-search.cc:191
+#: ../src/zypper-search.cc:242
 msgid " out of ("
 msgstr "總共 ("
 
-#: ../src/zypper-search.cc:192
+#: ../src/zypper-search.cc:243
 msgid "cached."
 msgstr "已快取。"
 
-#: ../src/zypper-search.cc:293
+#: ../src/zypper-search.cc:344
 msgid " is not a valid regular expression: \""
 msgstr "不是有效的正規表示式： \""
 
-#: ../src/zypper-search.cc:295
+#: ../src/zypper-search.cc:346
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "這是一個錯誤，請將此提報到 zipper 的錯誤回報中。"
 
-#: ../src/zypper.cc:73 ../src/zypper.cc:887
+#: ../src/zypper.cc:76 ../src/zypper.cc:899
 msgid "Given URL is invalid."
 msgstr "指定的 URL 無效。"
 
-#: ../src/zypper.cc:110
-msgid ""
-"  Options:\n"
-"\t--help, -h\t\tHelp.\n"
-"\t--version, -V\t\tOutput the version number.\n"
-"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
-"\t--verbose, -v\t\tIncrease verbosity.\n"
-"\t--terse, -t\t\tTerse output for machine consumption.\n"
-"\t--table-style, -s\tTable style (integer).\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
-"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-"\t--root, -R <dir>\tOperate on a different root directory.\n"
-msgstr ""
-"  選項：\n"
-"\t--help， -h\t\t幫助訊息。\n"
-"\t--version， -V\t\t輸出版本編號。\n"
-"\t--quiet， -q\t\t隱藏一般輸出，僅印出錯誤訊息。\n"
-"\t--verbose， -v\t\t增加詳細度。\n"
-"\t--terse， -t\t\t簡潔輸出給機器使用。\n"
-"\t--table-style， -s\t表格樣式(整數)。\n"
-"\t--rug-compatible， -r\t開啟 rug 相容性。\n"
-"\t--non-interactive， -n\t不問任何事，自動使用預設的答案。\n"
-"\t--no-gpg-checks\t\t忽略 GPG 檢查錯誤並繼續。\n"
-"\t--root， -R <目錄>\t在不同的根目錄下操作。\n"
- 
-#: ../src/zypper.cc:123
+#: ../src/zypper.cc:84
+#, fuzzy
 msgid ""
 "  Commands:\n"
-"\thelp\t\t\tHelp\n"
+"\thelp, ?\t\t\tHelp\n"
 "\tshell, sh\t\tAccept multiple commands at once\n"
 "\tinstall, in\t\tInstall packages or resolvables\n"
 "\tremove, rm\t\tRemove packages or resolvables\n"
@@ -958,28 +1005,55 @@ msgstr ""
 "\tinfo， if\t\t顯示套件的完整資訊\n"
 "\tpatch-info\t\t顯示修補程式的完整資訊\n"
 "\tsource-install， si\t安裝來源套件\n"
- 
-#: ../src/zypper.cc:164
+
+#: ../src/zypper.cc:136
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+msgstr ""
+"  選項：\n"
+"\t--help， -h\t\t幫助訊息。\n"
+"\t--version， -V\t\t輸出版本編號。\n"
+"\t--quiet， -q\t\t隱藏一般輸出，僅印出錯誤訊息。\n"
+"\t--verbose， -v\t\t增加詳細度。\n"
+"\t--terse， -t\t\t簡潔輸出給機器使用。\n"
+"\t--table-style， -s\t表格樣式(整數)。\n"
+"\t--rug-compatible， -r\t開啟 rug 相容性。\n"
+"\t--non-interactive， -n\t不問任何事，自動使用預設的答案。\n"
+"\t--no-gpg-checks\t\t忽略 GPG 檢查錯誤並繼續。\n"
+"\t--root， -R <目錄>\t在不同的根目錄下操作。\n"
+
+#: ../src/zypper.cc:167
+#, c-format
 msgid "Verbosity: %d"
 msgstr "詳細： %d"
 
-#: ../src/zypper.cc:170
+#: ../src/zypper.cc:173
 msgid "Entering non-interactive mode."
 msgstr "進入非互動模式。"
 
-#: ../src/zypper.cc:176
+#: ../src/zypper.cc:179
 msgid "Entering no-gpg-checks mode."
 msgstr "進入忽略 GPG 檢查模式。"
 
-#: ../src/zypper.cc:186
+#: ../src/zypper.cc:189
 msgid "Invalid table style "
 msgstr "無效的表格樣式"
 
-#: ../src/zypper.cc:231
+#: ../src/zypper.cc:234
 msgid "Try -h for help."
 msgstr "請嘗試以 -h 叫出說明"
 
-#: ../src/zypper.cc:281
+#: ../src/zypper.cc:293
 msgid ""
 "install (in) [options] <capability> ...\n"
 "\n"
@@ -1005,7 +1079,7 @@ msgstr ""
 "                                請參閱 'man zypper' 以獲得多資訊。\n"
 "    --debug-solver              建立解決測試案例來偵錯\n"
 
-#: ../src/zypper.cc:310
+#: ../src/zypper.cc:322
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -1027,7 +1101,7 @@ msgstr ""
 "-n, --name                      單用名稱來選取解決方案，而不依照相容性\n"
 "    --debug-solver              建立解決測試案例來偵錯\n"
 
-#: ../src/zypper.cc:329
+#: ../src/zypper.cc:341
 msgid ""
 "source-install (si) <name> ...\n"
 "\n"
@@ -1041,7 +1115,7 @@ msgstr ""
 "\n"
 "這個指令沒有其他的選項。\n"
 
-#: ../src/zypper.cc:349
+#: ../src/zypper.cc:361
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
@@ -1063,7 +1137,7 @@ msgstr ""
 "-d, --disabled          新增套件庫且將它設為停用\n"
 "-n, --no-refresh        新增套件庫且將它設為停用自動重新整理\n"
 
-#: ../src/zypper.cc:368
+#: ../src/zypper.cc:380
 msgid ""
 "repos (lr)\n"
 "\n"
@@ -1079,7 +1153,7 @@ msgstr ""
 "  指令選項：\n"
 "-e, --export <檔案.repo>  匯出所有已定義的套件庫成一個本機的 .repo 檔\n"
 
-#: ../src/zypper.cc:385
+#: ../src/zypper.cc:397
 msgid ""
 "removerepo (rr) [options] <alias|URL>\n"
 "\n"
@@ -1097,7 +1171,7 @@ msgstr ""
 "    --loose-auth\t忽略 URL 中的使用者認證資料\n"
 "    --loose-query\t忽略 URL 中的查詢字串\n"
 
-#: ../src/zypper.cc:401
+#: ../src/zypper.cc:413
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
@@ -1111,7 +1185,7 @@ msgstr ""
 "\n"
 "本指令沒有其他選項。\n"
 
-#: ../src/zypper.cc:419
+#: ../src/zypper.cc:431
 msgid ""
 "modifyrepo (mr) <options> <alias>\n"
 "\n"
@@ -1133,7 +1207,7 @@ msgstr ""
 "-a, --enable-autorefresh  啟用該套件庫的自動重新整理\n"
 "    --disable-autorefresh 停用該套件庫的自動重新整理\n"
 
-#: ../src/zypper.cc:442
+#: ../src/zypper.cc:454
 msgid ""
 "refresh (ref) [alias|#] ...\n"
 "\n"
@@ -1157,7 +1231,7 @@ msgstr ""
 "-B, --build-only        僅建立資料庫，不下載中繼資料。\n"
 "-D, --download-only     僅下載新的中繼資料，不建立資料庫\n"
 
-#: ../src/zypper.cc:467
+#: ../src/zypper.cc:479
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -1177,7 +1251,7 @@ msgstr ""
 "-r, --repo <別名>   僅列出指定別名套件庫中的更新。\n"
 "    --best-effort   盡最大努力來趨近最新狀態，更新到比最新版本還低些的也可以接受。\n"
 
-#: ../src/zypper.cc:494
+#: ../src/zypper.cc:506
 msgid ""
 "update (up) [options]\n"
 "\n"
@@ -1205,7 +1279,7 @@ msgstr ""
 "    --best-effort               盡最大努力來趨近最新狀態，更新到比最新版本還低些的也可以接受。\n"
 "    --debug-solver              建立解決測試案例來偵錯\n"
 
-#: ../src/zypper.cc:533
+#: ../src/zypper.cc:545
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -1249,7 +1323,7 @@ msgstr ""
 " \n"
 "* 和 ? 萬用字元也可以用在搜尋字串中。\n"
 
-#: ../src/zypper.cc:565
+#: ../src/zypper.cc:577
 msgid ""
 "patch-check\n"
 "\n"
@@ -1267,7 +1341,7 @@ msgstr ""
 "\n"
 "-r, --repo <別名>   僅檢查指定別名套件庫中的修補程式。\n"
 
-#: ../src/zypper.cc:584
+#: ../src/zypper.cc:596
 msgid ""
 "patches\n"
 "\n"
@@ -1285,7 +1359,7 @@ msgstr ""
 "\n"
 "-r, --repo <別名>   僅列出指定別名套件庫中的修補程式。\n"
 
-#: ../src/zypper.cc:603
+#: ../src/zypper.cc:615
 msgid ""
 "info <name> ...\n"
 "\n"
@@ -1303,7 +1377,7 @@ msgstr ""
 "\n"
 "-r, --repo <別名>   僅針對指定別名的套件庫工作。\n"
 
-#: ../src/zypper.cc:621
+#: ../src/zypper.cc:633
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
@@ -1317,7 +1391,7 @@ msgstr ""
 "\n"
 "這是一個 rug 相容的別名，就是 'zypper info -t patch'\n"
 
-#: ../src/zypper.cc:635
+#: ../src/zypper.cc:647
 msgid ""
 "moo\n"
 "\n"
@@ -1331,7 +1405,7 @@ msgstr ""
 "\n"
 "本指令沒有其他選項。\n"
 
-#: ../src/zypper.cc:650
+#: ../src/zypper.cc:662
 msgid ""
 "xml-updates\n"
 "\n"
@@ -1347,24 +1421,24 @@ msgstr ""
 "  指令選項：\n"
 "-r, --repo <別名>   僅針對指定別名的套件庫工作。\n"
 
-#: ../src/zypper.cc:670
+#: ../src/zypper.cc:682
 msgid "Non-option program arguments: "
 msgstr "非選項程式引數："
 
-#: ../src/zypper.cc:693
+#: ../src/zypper.cc:705
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "套件庫已停用，僅使用已安裝套件的資料庫。"
 
-#: ../src/zypper.cc:705
+#: ../src/zypper.cc:717
 msgid "Ignoring installed resolvables..."
 msgstr "忽略已安裝的解決方案..."
 
-#: ../src/zypper.cc:730
+#: ../src/zypper.cc:742
 msgid "A ZYpp transaction is already in progress. This means, there is another application using the libzypp library for package management running. All such applications must be closed before using this command."
 msgstr "有一個 ZYpp 的業務正在執行中。這表示有別的使用 libzypp 套件管理程式庫的應用程式正在執行中。在您執行這個命令之前，所有這類應用程式都要先關閉。"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/zypper.cc:755
+#: ../src/zypper.cc:767
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -1374,126 +1448,132 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/zypper.cc:783 ../src/zypper.cc:861 ../src/zypper.cc:932
-#: ../src/zypper.cc:972
+#: ../src/zypper.cc:795 ../src/zypper.cc:873 ../src/zypper.cc:944
+#: ../src/zypper.cc:984
 msgid "Root privileges are required for modifying system repositories."
 msgstr "需要有 Root 權限才能修改系統套件庫。"
 
-#: ../src/zypper.cc:810 ../src/zypper.cc:938
+#: ../src/zypper.cc:822 ../src/zypper.cc:950
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "參數過少。至少要有 URL 和別名。"
 
-#: ../src/zypper.cc:842
+#: ../src/zypper.cc:854
 msgid "Specified type is not a valid repository type:"
 msgstr "指定的類型不是適用的套件庫類型："
 
-#: ../src/zypper.cc:843
+#: ../src/zypper.cc:855
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "參閱 'zypper -h addrepo' 或 man zypper 取得已知的套件庫類型。"
 
-#: ../src/zypper.cc:867
+#: ../src/zypper.cc:879
 msgid "Required argument missing."
 msgstr "缺少需要的參數。"
 
-#: ../src/zypper.cc:880
+#: ../src/zypper.cc:892
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "找不到該別名的套件庫，嘗試用 URL..."
 
-#: ../src/zypper.cc:913
+#: ../src/zypper.cc:925
 msgid "Repository not found by given alias or URL."
 msgstr "找不到指定別名或 URL 的套件庫。"
 
-#: ../src/zypper.cc:978
+#: ../src/zypper.cc:990
 msgid "Alias is a required argument."
 msgstr "別名為必要的參數。"
 
-#: ../src/zypper.cc:1000
+#: ../src/zypper.cc:1012
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "需要有 Root 權限才能重新整理系統套件庫。"
 
-#: ../src/zypper.cc:1037
+#: ../src/zypper.cc:1049
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "需要有 Root 權限才能安裝或移除套件。"
 
-#: ../src/zypper.cc:1051 ../src/zypper.cc:1259 ../src/zypper.cc:1332
+#: ../src/zypper.cc:1063 ../src/zypper.cc:1282 ../src/zypper.cc:1355
+#, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "不明的解決方案類型： %s"
 
-#: ../src/zypper.cc:1069
+#: ../src/zypper.cc:1081
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "警告：沒有已定義的套件庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
 
-#: ../src/zypper.cc:1089 ../src/zypper.cc:1357
+#: ../src/zypper.cc:1101 ../src/zypper.cc:1380
 msgid "Generating solver test case..."
 msgstr "正在產生解決測試方案..."
 
-#: ../src/zypper.cc:1091 ../src/zypper.cc:1359
+#: ../src/zypper.cc:1103 ../src/zypper.cc:1382
 msgid "Solver test case generated successfully."
 msgstr "產生解決測試方案成功。"
 
-#: ../src/zypper.cc:1094 ../src/zypper.cc:1361
+#: ../src/zypper.cc:1106 ../src/zypper.cc:1384
 msgid "Error creating the solver test case."
 msgstr "建立解決測試方案時發生錯誤。"
 
-#: ../src/zypper.cc:1116
+#: ../src/zypper.cc:1128
 msgid "Source package name is a required argument."
 msgstr "來源套件的名稱為必要的參數。"
 
-#: ../src/zypper.cc:1155
+#: ../src/zypper.cc:1169
 msgid "Unknown resolvable type "
 msgstr "不明的解決方案類型"
 
-#: ../src/zypper.cc:1183
+#: ../src/zypper.cc:1206
 msgid "No resolvables found."
 msgstr "未發現解決方案。"
 
 #. 'rug' is the name of a program and must not be translated
 #. 'best-effort' is a program parameter and can not be translated
-#: ../src/zypper.cc:1269 ../src/zypper.cc:1342
+#: ../src/zypper.cc:1292 ../src/zypper.cc:1365
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "就如 'rug' 一般執行，無法進行 'best-effort' 趨近完全更新。"
 
-#: ../src/zypper.cc:1315
+#: ../src/zypper.cc:1338
 msgid "Root privileges are required for updating packages."
 msgstr "需要有 Root 權限才能更新套件。"
 
-#: ../src/zypper.cc:1411
+#: ../src/zypper.cc:1441
 msgid "Unexpected exception."
 msgstr "非預期的例外。"
 
-#: ../src/zypper.cc:1497
+#: ../src/zypper.cc:1526
 msgid "You already are running zypper's shell."
 msgstr "您已經正在執行 zypper's shell。"
 
-#: ../src/zypper-utils.cc:44
+#: ../src/zypper-utils.cc:47
 msgid "Please file a bug report about this."
 msgstr "請提出本問題的錯誤報告。"
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
-#: ../src/zypper-utils.cc:47
+#: ../src/zypper-utils.cc:50
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "如需指示，請參閱 http://en.opensuse.org/Zypper#Troubleshooting。"
 
 #: ../src/zypper-command.cc:92
+#, c-format
 msgid "Unknown command '%s'"
 msgstr "未知的指令 '%s'"
 
 # error box title
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "I/O error"
 msgstr "I/O 錯誤"
 
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "Invalid object"
 msgstr "無效的物件"
 
-#: ../src/zypper-media-callbacks.h:47
+#: ../src/zypper-callbacks.h:50
+msgid "Error"
+msgstr "錯誤"
+
+#: ../src/zypper-media-callbacks.h:56
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "請放入媒體 [%s] # %d 然後鍵入 'y' 繼續，或 'n' 以取消此操作。"
 
-#: ../src/zypper-media-callbacks.h:63 ../src/zypper-media-callbacks.h:69
+#: ../src/zypper-media-callbacks.h:76 ../src/zypper-media-callbacks.h:82
 msgid "Downloading: "
 msgstr "正在下載： "
 
@@ -1517,6 +1597,7 @@ msgid "Applying patch rpm"
 msgstr "正在套用修補程式 rpm"
 
 #: ../src/zypper-source-callbacks.h:179
+#, c-format
 msgid "Downloading %s %s-%s.%s"
 msgstr "正在下載 %s %s-%s.%s"
 
@@ -1547,6 +1628,7 @@ msgid "Removing "
 msgstr "正在移除 "
 
 #: ../src/zypper-rpm-callbacks.h:152
+#, c-format
 msgid "Removal of %s failed:"
 msgstr "移除 %s 失敗："
 
@@ -1561,20 +1643,40 @@ msgstr "(with --nodeps --force)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing [42%]"
 #: ../src/zypper-rpm-callbacks.h:181 ../src/zypper-rpm-callbacks.h:191
+#, c-format
 msgid "Installing: %s-%s"
 msgstr "正在安裝： %s-%s"
 
 #: ../src/zypper-rpm-callbacks.h:212
+#, c-format
 msgid "Installation of %s failed:"
 msgstr "安裝 %s 失敗："
 
-#: ../src/zypper-search.h:262
+#: ../src/zypper-search.h:289
 msgid "Catalog"
 msgstr "目錄"
 
-#: ../src/zypper-search.h:264
+#: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "套件庫"
+
+#~ msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+#~ msgstr "%s 的簽名驗證錯誤(以公共金鑰 ID %s，%s，指紋 %s)！警告：這可能是因為檔案遭到惡意的修改！繼續進行將有風險！無論如何要繼續嗎？"
+
+#~ msgid "y"
+#~ msgstr "y"
+
+#~ msgid "Y"
+#~ msgstr "Y"
+
+#~ msgid "n"
+#~ msgstr "n"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
+#~ msgstr "不適用的答案 '%s'，請輸入 '%s' 或 '%s'："
 
 #~ msgid "Summary:"
 #~ msgstr "摘要："
@@ -1710,9 +1812,6 @@ msgstr "套件庫"
 
 #~ msgid "Cleaning cache..."
 #~ msgstr "起始快取..."
-
-#~ msgid "Continuing anyway"
-#~ msgstr "還是要繼續嗎 "
 
 #~ msgid "removing source "
 #~ msgstr "正在移除來源"

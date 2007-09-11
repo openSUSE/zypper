@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-17 15:18+0200\n"
+"POT-Creation-Date: 2007-08-31 15:19+0200\n"
 "PO-Revision-Date: 2007-08-22 22:48+0200\n"
 "Last-Translator: Rinse de Vries <rinsedevries@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
@@ -55,37 +55,50 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "Wilt u de sleutel-id %s, %s, vingerafdruk %s vertrouwen?"
 
 #: ../src/zypper-keyring-callbacks.h:110
-#, c-format
-msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Double-check this is not caused by some malicious changes in the file!"
+#, fuzzy, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
 msgstr "Waarschuwing: mislukte ondertekeningverificatie wordt genegeerd voor %s met publieke sleutel-id %s, %s, vingerafdruk %s!. Controleer goed of dit niet wordt veroorzaakt door kwaadaardige wijzigingen in het bestand!"
 
-#: ../src/zypper-keyring-callbacks.h:119
-#, c-format
-msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-msgstr "Ondertekenverificatie mislukt voor %s met publieke-sleutel-id %s, %s, vingerafdruk %s. Waarschuwing: dit kan zijn veroorzaakt door een kwaadaardige wijziging in het bestand! Doorgaan is riskant! Wilt u toch doorgaan?"
+#: ../src/zypper-keyring-callbacks.h:113
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
 
-#: ../src/zypper-keyring-callbacks.h:133
+#: ../src/zypper-keyring-callbacks.h:120
+#, fuzzy, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
+msgstr "Verificatie van de samenvatting is mislukt voor %s. %s werd verwacht, %s werd gevonden."
+
+#: ../src/zypper-keyring-callbacks.h:123
+msgid "Warning: This might be caused by a malicious change in the file!"
+msgstr ""
+
+#: ../src/zypper-keyring-callbacks.h:125
+#, fuzzy
+msgid "Continuing is risky! Continue anyway?"
+msgstr "Toch doorgaan"
+
+#: ../src/zypper-keyring-callbacks.h:136
 #, c-format
 msgid "No digest for file %s."
 msgstr "Geen samenvatting voor bestand %s."
 
 #. there are resolvables to install/uninstall
-#: ../src/zypper-keyring-callbacks.h:133 ../src/zypper-keyring-callbacks.h:141
-#: ../src/zypper-keyring-callbacks.h:160 ../src/zypper-misc.cc:1369
+#: ../src/zypper-keyring-callbacks.h:136 ../src/zypper-keyring-callbacks.h:144
+#: ../src/zypper-keyring-callbacks.h:163 ../src/zypper-misc.cc:1371
 msgid "Continue?"
 msgstr "Doorgaan?"
 
-#: ../src/zypper-keyring-callbacks.h:140
+#: ../src/zypper-keyring-callbacks.h:143
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "Onbekende samenvatting %s voor bestand %s."
 
-#: ../src/zypper-keyring-callbacks.h:153
+#: ../src/zypper-keyring-callbacks.h:156
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr "Mislukte verificatie voor samenvatting wordt genegeerd voor %s (%s werd verwacht, %s is gevonden)."
 
-#: ../src/zypper-keyring-callbacks.h:159
+#: ../src/zypper-keyring-callbacks.h:162
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "Verificatie van de samenvatting is mislukt voor %s. %s werd verwacht, %s werd gevonden."
@@ -121,11 +134,11 @@ msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "Kon '%s' niet toevoegen aan de lijst met te verwijderen pakketten."
 
 #. TranslatorExplanation These are reasons for various failures.
-#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:41
+#: ../src/zypper-misc.cc:355 ../src/zypper-callbacks.h:42
 msgid "Not found"
 msgstr "Niet gevonden"
 
-#: ../src/zypper-misc.cc:421 ../src/zypper-misc.cc:493
+#: ../src/zypper-misc.cc:421
 msgid "Problem: "
 msgstr "Probleem: "
 
@@ -136,148 +149,148 @@ msgid " Solution %d: "
 msgstr " Oplossing %d: "
 
 #. input prompt
-#: ../src/zypper-misc.cc:446
+#: ../src/zypper-misc.cc:449
 msgid "number, (r)etry or (c)ancel> "
 msgstr "getal, (o)pnieuw of (a)nnuleren > "
 
 #. translators: corresponds to (r)etry
-#: ../src/zypper-misc.cc:454
+#: ../src/zypper-misc.cc:457
 msgid "r"
 msgstr "o"
 
 #. translators: corresponds to (c)ancel
-#: ../src/zypper-misc.cc:457
+#: ../src/zypper-misc.cc:460
 msgid "c"
 msgstr "a"
 
-#: ../src/zypper-misc.cc:463
+#: ../src/zypper-misc.cc:466
 #, c-format
 msgid "Applying solution %s"
 msgstr "Oplossing %s wordt toegepast"
 
-#: ../src/zypper-misc.cc:486
+#: ../src/zypper-misc.cc:488
 #, c-format
 msgid "%s Problems:"
 msgstr "%s problemen:"
 
-#: ../src/zypper-misc.cc:489
+#: ../src/zypper-misc.cc:491
 msgid "Specified capability not found"
 msgstr "Opgegeven capaciteit is niet gevonden"
 
-#: ../src/zypper-misc.cc:620 ../src/zypper-misc.cc:622
+#: ../src/zypper-misc.cc:621 ../src/zypper-misc.cc:623
 msgid "Nothing to do."
 msgstr "Niets te doen."
 
-#: ../src/zypper-misc.cc:736
+#: ../src/zypper-misc.cc:737
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Totale downloadgrootte: %s"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:740
+#: ../src/zypper-misc.cc:741
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "Na de operatie zal aanvullend %s worden gebruikt."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:748
+#: ../src/zypper-misc.cc:749
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "Na de operatie zal %s worden vrijgemaakt."
 
-#: ../src/zypper-misc.cc:795
+#: ../src/zypper-misc.cc:796
 #, c-format
 msgid "%s items locked"
 msgstr "%s items vergrendeld"
 
-#: ../src/zypper-misc.cc:796
+#: ../src/zypper-misc.cc:797
 msgid "Establishing status of aggregates"
 msgstr "Status van samenstellingen vaststellen"
 
-#: ../src/zypper-misc.cc:804
+#: ../src/zypper-misc.cc:805
 msgid "Resolving dependencies..."
 msgstr "Afhankelijkheden oplossen..."
 
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:947
-#: ../src/zypper-misc.cc:829
+#: ../src/zypper-misc.cc:831
 #, c-format
 msgid "%d patches needed (%d security patches)"
 msgstr "%d patches nodig (%d veiligheidspatches)"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
-#: ../src/zypper-misc.cc:838 ../src/zypper-info.cc:148
+#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:148
 msgid "Uninstalled"
 msgstr "Niet geïnstalleerd"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "No Longer Applicable"
 msgstr "Niet langer van toepassing"
 
-#: ../src/zypper-misc.cc:840 ../src/zypper-info.cc:150
+#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:150
 msgid "Not Applicable"
 msgstr "Niet toepasbaar"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Applied"
 msgstr "Toegepast"
 
-#: ../src/zypper-misc.cc:842 ../src/zypper-info.cc:152
+#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:152
 msgid "Not Needed"
 msgstr "Niet nodig"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Broken"
 msgstr "Gebroken"
 
-#: ../src/zypper-misc.cc:844 ../src/zypper-info.cc:154
+#: ../src/zypper-misc.cc:846 ../src/zypper-info.cc:154
 msgid "Needed"
 msgstr "Nodig"
 
 #. if ResStatus interface changes
-#: ../src/zypper-misc.cc:846
+#: ../src/zypper-misc.cc:848
 msgid "error"
 msgstr "fout"
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Catalog: "
 msgstr "Catalogus: "
 
-#: ../src/zypper-misc.cc:875 ../src/zypper-misc.cc:995
-#: ../src/zypper-misc.cc:1144 ../src/zypper-info.cc:92
+#: ../src/zypper-misc.cc:877 ../src/zypper-misc.cc:997
+#: ../src/zypper-misc.cc:1146 ../src/zypper-info.cc:92
 msgid "Repository: "
 msgstr "Installatiebron: "
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1150 ../src/zypper-sources.cc:310
-#: ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1152 ../src/zypper-sources.cc:316
+#: ../src/zypper-sources.cc:357 ../src/zypper-search.h:299
 msgid "Name"
 msgstr "Naam"
 
 #. best_effort does not know version or arch yet
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Version"
 msgstr "Versie"
 
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
 msgid "Category"
 msgstr "Categorie"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:754
-#: ../src/zypper-misc.cc:876 ../src/zypper-misc.cc:996
-#: ../src/zypper-sources.cc:308
+#: ../src/zypper-misc.cc:878 ../src/zypper-misc.cc:998
+#: ../src/zypper-sources.cc:316
 msgid "Status"
 msgstr "Status"
 
-#: ../src/zypper-misc.cc:902
+#: ../src/zypper-misc.cc:904
 msgid "No needed patches found."
 msgstr "Geen noodzakelijke patches gevonden."
 
-#: ../src/zypper-misc.cc:1030
+#: ../src/zypper-misc.cc:1032
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
 "There are others available too.\n"
@@ -285,38 +298,47 @@ msgstr ""
 "WAARSCHUWING: dit zijn alleen de opwaarderingen die betrekking hebben op het opwaardeerprogramma zelf.\n"
 "Er zijn ook andere opwaarderingen beschikbaar.\n"
 
-#: ../src/zypper-misc.cc:1040 ../src/zypper-misc.cc:1186
+#: ../src/zypper-misc.cc:1042 ../src/zypper-misc.cc:1188
 msgid "No updates found."
 msgstr "Geen opwaarderingen gevonden."
 
 #. TranslatorExplanation S stands for Status
 #. TranslatorExplanation S as Status
-#: ../src/zypper-misc.cc:1142 ../src/zypper-search.h:259
+#: ../src/zypper-misc.cc:1144 ../src/zypper-search.h:286
 msgid "S"
 msgstr "S"
 
 #. TranslatorExplanation This is Bundle in as used in rug.
-#: ../src/zypper-misc.cc:1147 ../src/zypper-search.h:268
+#: ../src/zypper-misc.cc:1149 ../src/zypper-search.h:295
 msgid "Bundle"
 msgstr "Bundel"
 
-#: ../src/zypper-misc.cc:1152 ../src/zypper-search.h:272
+#: ../src/zypper-misc.cc:1154 ../src/zypper-search.h:299
 msgid "Arch"
 msgstr "Arch"
 
 #. Skipping a patch because it is interactive and
 #. --skip-interactive is requested. %s is a name of a
 #. patch
-#: ../src/zypper-misc.cc:1310
+#: ../src/zypper-misc.cc:1312
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "WAARSCHUWING: %s is interactief, overgeslagen."
 
-#: ../src/zypper-misc.cc:1373
+#: ../src/zypper-misc.cc:1375
 msgid "committing"
 msgstr "toewijzen"
 
-#: ../src/zypper-misc.cc:1391
+#: ../src/zypper-misc.cc:1390
+#, fuzzy
+msgid "Problem downloading the package file from the repository:"
+msgstr "Probleem bij downloaden van bestanden van '%s'"
+
+#: ../src/zypper-misc.cc:1391 ../src/zypper-sources.cc:89
+msgid "Please, see the above error message to for a hint."
+msgstr "Zie bovenstaande foutmelding voor een hint."
+
+#: ../src/zypper-misc.cc:1401
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -332,402 +354,435 @@ msgstr ""
 " - gebruik een ander installatiemedium (bijvoorbeeld bij beschadiging)\n"
 " - gebruik een andere installatiebron"
 
-#: ../src/zypper-misc.cc:1411
+#: ../src/zypper-misc.cc:1421
 msgid "One of installed patches requires reboot of your machine. Please, do it as soon as possible."
 msgstr "Een van de geïnstalleerde patches vereist dat u de computer opnieuw opstart. Doe dit zo snel mogelijk."
 
-#: ../src/zypper-misc.cc:1414
+#: ../src/zypper-misc.cc:1424
 msgid "WARNING: One of installed patches requires a reboot of your machine. Please do it as soon as possible."
 msgstr "WAARSCHUWING: een van de geïnstalleerde patches vereist dat u de computer opnieuw opstart. Doe dit zo snel mogelijk."
 
-#: ../src/zypper-misc.cc:1420
+#: ../src/zypper-misc.cc:1430
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "WAARSCHUWING: een van de geïnstalleerde patches is van invloed op het pakketbeheer zelf. Opnieuw starten is daarom vereist voordat de volgende operaties worden uitgevoerd."
 
-#: ../src/zypper-misc.cc:1446
+#: ../src/zypper-misc.cc:1456
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Gaat automatisch akkoord met licentie van %s %s."
 
-#: ../src/zypper-misc.cc:1457
+#: ../src/zypper-misc.cc:1467
 #, c-format
 msgid "%s %s license:"
 msgstr "%s %s licentie:"
 
-#: ../src/zypper-misc.cc:1461
+#: ../src/zypper-misc.cc:1471
 msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
 msgstr "Als u dit pakket wilt installeren dient u akkoord te gaan met de voorwaarden van de bovenstaande licentie. Doorgaan?"
 
-#: ../src/zypper-misc.cc:1472
+#: ../src/zypper-misc.cc:1482
 msgid "Aborting installation due to the need for license(s) confirmation."
 msgstr "Installatie wordt afgebroken omdat de licentie(s) moet(en) worden bevestigd."
 
 #. TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:1476
+#: ../src/zypper-misc.cc:1486
 msgid "Please, restart the operation in interactive mode and confirm your agreement with required license(s), or use the --auto-agree-with-licenses option."
 msgstr "Start a.u.b. de bewerking opnieuw in de interactieve modus en ga akkoord met de vereiste licentie(s) of gebruik de optie --auto-agree-with-licenses."
 
-#: ../src/zypper-misc.cc:1487
+#: ../src/zypper-misc.cc:1497
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met %s %s licentie."
 
-#: ../src/zypper-misc.cc:1557
+#: ../src/zypper-misc.cc:1567
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "Bronpakket %s-%s wordt geïnstalleerd"
 
-#: ../src/zypper-misc.cc:1565
+#: ../src/zypper-misc.cc:1575
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Bronpakket %s-%s is geïnstalleerd."
 
-#: ../src/zypper-misc.cc:1571
+#: ../src/zypper-misc.cc:1581
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Probleem bij installeren van bronpakket %s-%s:"
 
-#: ../src/zypper-misc.cc:1579
+#: ../src/zypper-misc.cc:1589
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "Bronpakket '%s' niet gevonden."
 
-#: ../src/zypper-sources.cc:48
+#: ../src/zypper-sources.cc:52
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Controleert of vernieuwen van metadata voor %s noodzakelijk is"
 
-#: ../src/zypper-sources.cc:57
+#: ../src/zypper-sources.cc:61
 #, c-format
 msgid "Refreshing '%s'"
 msgstr "Vernieuwt '%s'"
 
-#: ../src/zypper-sources.cc:59
+#: ../src/zypper-sources.cc:63
 msgid "(forced)"
 msgstr "(geforceerd)"
 
-#: ../src/zypper-sources.cc:64
+#: ../src/zypper-sources.cc:68
 #, c-format
 msgid "Repository '%s' is up to date."
 msgstr "Installatiebron '%s' is actueel."
 
-#: ../src/zypper-sources.cc:76
+#: ../src/zypper-sources.cc:80
 msgid "Forcing raw metadata refresh"
 msgstr "Rauwe metadata-vernieuwing forceren"
 
-#: ../src/zypper-sources.cc:84
+#: ../src/zypper-sources.cc:88
 #, c-format
 msgid "Problem downloading files from '%s'."
 msgstr "Probleem bij downloaden van bestanden van '%s'"
 
-#: ../src/zypper-sources.cc:85
-msgid "Please, see the above error message to for a hint."
-msgstr "Zie bovenstaande foutmelding voor een hint."
-
-#: ../src/zypper-sources.cc:92
+#: ../src/zypper-sources.cc:96
 #, c-format
 msgid "No URLs defined for '%s'."
 msgstr "Geen URL-adressen gedefinieerd voor '%s'."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: ../src/zypper-sources.cc:96
+#: ../src/zypper-sources.cc:100
 #, c-format
 msgid "Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."
 msgstr "Voeg één of meer basis-URL-adressen (baseurl=URL-adres) toe aan %s voor bron '%s'."
 
-#: ../src/zypper-sources.cc:104
+#. ! \todo correct the message after 10.3 release
+#: ../src/zypper-sources.cc:109
 msgid "No alias defined this repository."
 msgstr "Geen alias definieert deze bron."
 
-#: ../src/zypper-sources.cc:112
+#: ../src/zypper-sources.cc:117
 #, c-format
 msgid "Repository '%s' is invalid."
 msgstr "Installatiebron %s is ongeldig."
 
-#: ../src/zypper-sources.cc:113
+#: ../src/zypper-sources.cc:118
 msgid "Please, check if the URLs defined for this repository are pointing to a valid repository."
 msgstr "Controleer of de gedefinieerde URL-adressen voor deze bron wijzen naar een geldige installatiebron."
 
-#: ../src/zypper-sources.cc:121
+#: ../src/zypper-sources.cc:126
 #, c-format
 msgid "Error downloading metadata for '%s':"
 msgstr "Probleem bij downloaden van metadata voor '%s'."
 
-#: ../src/zypper-sources.cc:148
+#: ../src/zypper-sources.cc:153
 msgid "Forcing building of repository cache"
 msgstr "Bouwen van broncache forceren"
 
-#: ../src/zypper-sources.cc:161
+#: ../src/zypper-sources.cc:166
 #, c-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Fout bij analyseren van metadata voor '%s'."
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: ../src/zypper-sources.cc:163
+#: ../src/zypper-sources.cc:168
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by folowing instructions at http://en.opensuse.org/Zypper#Troubleshooting"
 msgstr "Dit kan worden veroorzaakt door ongeldige metadata in de bron of door een fout in de metadata-parser. In het laatste geval, rapporteer de fout door de instructies op webpagina http://en.opensuse.org/Zypper#Troubleshooting op te volgen."
 
-#: ../src/zypper-sources.cc:177
+#: ../src/zypper-sources.cc:182
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Bron-metadata voor '%s' niet gevonden in de lokale cache."
 
-#: ../src/zypper-sources.cc:185
+#: ../src/zypper-sources.cc:190
 msgid "Error building the cache database:"
 msgstr "Fout bij bouwen van cache-database:"
 
-#: ../src/zypper-sources.cc:215
+#: ../src/zypper-sources.cc:222
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "Installatiebron '%s' is niet gevonden."
 
-#: ../src/zypper-sources.cc:221
+#: ../src/zypper-sources.cc:228
 #, c-format
 msgid "Error reading repository description file for '%s'."
 msgstr "Fout bij lezen van bestand met beschrijving van installatiebron '%s'."
 
-#: ../src/zypper-sources.cc:223
+#: ../src/zypper-sources.cc:230
 msgid "Reason: "
 msgstr "Reden: "
 
-#: ../src/zypper-sources.cc:250
+#: ../src/zypper-sources.cc:257
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
 msgstr "Schakelt installatiebron '%s' uit vanwege bovengenoemde fout."
 
-#: ../src/zypper-sources.cc:268
+#: ../src/zypper-sources.cc:275
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
 msgstr "Bron '%s' is niet actueel. U kunt als root  'zypper refresh' draaien om deze bij te werken."
 
-#. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/zypper-sources.cc:309 ../src/zypper-sources.cc:681
-msgid "Enabled"
-msgstr "Ingeschakeld"
-
-#: ../src/zypper-sources.cc:309
-msgid "Refresh"
-msgstr "Vernieuwen"
-
-#: ../src/zypper-sources.cc:310 ../src/zypper-search.h:270
+#: ../src/zypper-sources.cc:316 ../src/zypper-sources.cc:357
+#: ../src/zypper-search.h:297
 msgid "Type"
 msgstr "Type"
 
-#: ../src/zypper-sources.cc:326
+#. status
+#. rug's status (active, pending => active, disabled <= enabled, disabled)
+#. this is probably the closest possible compatibility arrangement
+#: ../src/zypper-sources.cc:333
 msgid "Active"
 msgstr "Actief"
 
-#: ../src/zypper-sources.cc:326
+#: ../src/zypper-sources.cc:333
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/zypper-sources.cc:357 ../src/zypper-sources.cc:730
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: ../src/zypper-sources.cc:357
+msgid "Refresh"
+msgstr "Vernieuwen"
+
+# ../../db/printers.ycp.noloc:1270
+#: ../src/zypper-sources.cc:357
+msgid "Alias"
+msgstr "Alias"
+
+#. enabled?
+#. autorefresh?
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "Yes"
 msgstr "Ja"
 
-#: ../src/zypper-sources.cc:331 ../src/zypper-sources.cc:332
-#: ../src/zypper-sources.cc:681 ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:373 ../src/zypper-sources.cc:375
+#: ../src/zypper-sources.cc:730 ../src/zypper-sources.cc:732
 #: ../src/zypper-info.cc:160 ../src/zypper-info.cc:166
 #: ../src/zypper-info.cc:168
 msgid "No"
 msgstr "Nee"
 
-#: ../src/zypper-sources.cc:350
+#: ../src/zypper-sources.cc:391
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Geen installatiebronnen opgegeven. Gebruik het commando 'zypper addrepo' om één of meer bronnen toe te voegen."
 
-#: ../src/zypper-sources.cc:383 ../src/zypper-sources.cc:449
+#: ../src/zypper-sources.cc:424 ../src/zypper-sources.cc:495
 msgid "Error reading repositories:"
 msgstr "Fout bij lezen van installatiebronnen:"
 
-#: ../src/zypper-sources.cc:405
+#: ../src/zypper-sources.cc:446
 #, c-format
 msgid "Can't open %s for writing. Maybe you don't have write permissions?"
 msgstr "Kan %s niet opslaan. Heeft u schrijfrechten voor het bestand?"
 
-#: ../src/zypper-sources.cc:413
+#: ../src/zypper-sources.cc:454
 #, c-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "De bronnen zijn met succes geëxporteerd naar %s."
 
-#: ../src/zypper-sources.cc:505
+#: ../src/zypper-sources.cc:551
 #, c-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Slaat uitgeschakelde installatiebron '%s' over"
 
-#: ../src/zypper-sources.cc:541
+#: ../src/zypper-sources.cc:587
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Slaat installatiebron '%s' over vanwege bovengenoemde fout."
 
-#: ../src/zypper-sources.cc:554
+#: ../src/zypper-sources.cc:600
 #, c-format
 msgid "Repository '%s' not found by its alias or number."
 msgstr "Bron '%s' is niet gevonden aan de hand van opgegeven alias of nummer."
 
-#: ../src/zypper-sources.cc:559
+#: ../src/zypper-sources.cc:605
 msgid "Use 'zypper repos' to get the list of defined repositories."
 msgstr "Gebruik 'zypper repos' voor een lijst met gedefinieerde installatiebronnen."
 
-#: ../src/zypper-sources.cc:566
+#: ../src/zypper-sources.cc:612
 msgid "Specified repositories are not enabled or defined."
 msgstr "Opgegeven bronnen zijn niet geactiveerd of niet gedefinieerd."
 
-#: ../src/zypper-sources.cc:568
+#: ../src/zypper-sources.cc:614
 msgid "There are no enabled repositories defined."
 msgstr "Er zijn geen geactiveerde bronnen gedefinieerd."
 
-#: ../src/zypper-sources.cc:571
+#: ../src/zypper-sources.cc:617
 msgid "Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories."
 msgstr "Gebruik het commando 'zypper addrepo' of 'zypper modifyrepo'  om bronnen toe te voegen of te activeren."
 
-#: ../src/zypper-sources.cc:575
+#: ../src/zypper-sources.cc:621
 msgid "Could not refresh the repositories because of errors."
 msgstr "Kon vanwege fouten de installatiebronnen niet vernieuwen."
 
-#: ../src/zypper-sources.cc:577
+#: ../src/zypper-sources.cc:623
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Enkele installatiebronnen zijn vanwege fouten niet vernieuwd."
 
-#: ../src/zypper-sources.cc:579
+#: ../src/zypper-sources.cc:625
 msgid "Specified repositories have been refreshed."
 msgstr "De opgegeven installatiebronnen zijn vernieuwd."
 
-#: ../src/zypper-sources.cc:581
+#: ../src/zypper-sources.cc:627
 msgid "All repositories have been refreshed."
 msgstr "Alle installatiebronnen zijn vernieuwd."
 
-#: ../src/zypper-sources.cc:623
+#: ../src/zypper-sources.cc:667
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Dit is een verwisselbaar alleen-lezen medium (cd/dvd). Automatisch vernieuwen wordt daarom uitgeschakeld."
 
-#: ../src/zypper-sources.cc:636
+#: ../src/zypper-sources.cc:685
 #, c-format
 msgid "Repository named '%s' already exists. Please, use another alias."
 msgstr "Er bestaat al een bron met de naam '%s'. Kies a.u.b. een andere alias."
 
-#: ../src/zypper-sources.cc:644
+#: ../src/zypper-sources.cc:693
 msgid "Can't find a valid repository at given location:"
 msgstr "Kan geen geldige installatiebron vinden op de opgegeven locatie:"
 
-#: ../src/zypper-sources.cc:645
+#: ../src/zypper-sources.cc:694
 msgid "Could not determine the type of the repository. Please, check if the defined URLs (see below) point to a valid repository:"
 msgstr "Kon het type installatiebron niet bepalen. Controleer of de gedefinieerde URL-adressen (zie hieronder) naar een geldige bron verwijzen."
 
-#: ../src/zypper-sources.cc:656
+#: ../src/zypper-sources.cc:705
 msgid "Problem transferring repository data from specified URL:"
 msgstr "Probleem bij het overdragen van brongegevens van opgegeven URL-adres:"
 
-#: ../src/zypper-sources.cc:657
+#: ../src/zypper-sources.cc:706
 msgid "Please, check whether the specified URL is accessible."
 msgstr "Controleer of het opgegeven URL-adres toegankelijk is."
 
-#: ../src/zypper-sources.cc:664
+#: ../src/zypper-sources.cc:713
 msgid "Unknown problem when adding repository:"
 msgstr "Onbekend probleem bij toevoegen van installatiebron."
 
-#: ../src/zypper-sources.cc:668
+#: ../src/zypper-sources.cc:717
 #, c-format
 msgid "Repository '%s' successfully added"
 msgstr "Installatiebron '%s' is met succes toegevoegd:"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
-#: ../src/zypper-sources.cc:683
+#: ../src/zypper-sources.cc:732
 msgid "Autorefresh"
 msgstr "Autovernieuwen"
 
-#: ../src/zypper-sources.cc:691
+#: ../src/zypper-sources.cc:740
 #, c-format
 msgid "Reading data from '%s' media"
 msgstr "Leest gegevens van medium '%s"
 
-#: ../src/zypper-sources.cc:697
+#: ../src/zypper-sources.cc:746
 #, c-format
 msgid "Problem reading data from '%s' media"
 msgstr "Probleem bij lezen van gegevens van '%s' medium"
 
-#: ../src/zypper-sources.cc:698
+#: ../src/zypper-sources.cc:747
 msgid "Please, check if your installation media is valid and readable."
 msgstr "Controleer of uw installatiemedium geldig en leesbaar is."
 
-#: ../src/zypper-sources.cc:792
+#: ../src/zypper-sources.cc:795
+#, fuzzy
+msgid "Problem accessing the file at the specified URL"
+msgstr "Probleem bij het overdragen van brongegevens van opgegeven URL-adres."
+
+#: ../src/zypper-sources.cc:796
+#, fuzzy
+msgid "Please check if the URL is valid and accessible."
+msgstr "Controleer of het opgegeven URL-adres toegankelijk is."
+
+#: ../src/zypper-sources.cc:803
+#, fuzzy
+msgid "Problem parsing the file at the specified URL"
+msgstr "Probleem bij het overdragen van brongegevens van opgegeven URL-adres."
+
+#. TranslatorExplanation don't translate the URL if the URL itself is not translated.
+#. Also don't translate the '.repo' string.
+#: ../src/zypper-sources.cc:806
+msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
+msgstr ""
+
+#: ../src/zypper-sources.cc:813
+msgid "Problem encountered while trying to read the file at the specified URL"
+msgstr ""
+
+#: ../src/zypper-sources.cc:870
 #, c-format
 msgid "Repository %s has been removed."
 msgstr "Installatiebron %s is verwijderd."
 
-#: ../src/zypper-sources.cc:844
+#: ../src/zypper-sources.cc:922
 #, c-format
 msgid "Repository %s renamed to %s"
 msgstr "Installatiebron %s is hernoemd naar %s"
 
-#: ../src/zypper-sources.cc:849 ../src/zypper-sources.cc:926
+#: ../src/zypper-sources.cc:927 ../src/zypper-sources.cc:1004
 #, c-format
 msgid "Repository %s not found."
 msgstr "Installatiebron %s is niet gevonden."
 
-#: ../src/zypper-sources.cc:854 ../src/zypper-sources.cc:931
+#: ../src/zypper-sources.cc:932 ../src/zypper-sources.cc:1009
 msgid "Error while modifying the repository:"
 msgstr "Fout bij het wijzigen van de installatiebron:"
 
-#: ../src/zypper-sources.cc:856 ../src/zypper-sources.cc:933
+#: ../src/zypper-sources.cc:934 ../src/zypper-sources.cc:1011
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "Installatiebron %s wordt ongewijzigd gelaten."
 
-#: ../src/zypper-sources.cc:870
+#: ../src/zypper-sources.cc:948
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
 msgstr "%s is samen met %s gebruikt, terwijl ze elkaar tegenspreken. Deze bron zal niet worden gewijzigd."
 
-#: ../src/zypper-sources.cc:921
+#: ../src/zypper-sources.cc:999
 #, c-format
 msgid "Repository %s has been sucessfully modified."
 msgstr "Installatiebron %s is met succes gewijzigd."
 
-#: ../src/zypper-sources.cc:969
+#: ../src/zypper-sources.cc:1047
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Gegevens van installatiebron '%s' wordt opgehaald..."
 
-#: ../src/zypper-sources.cc:976
+#: ../src/zypper-sources.cc:1054
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Bron '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
 
-#: ../src/zypper-sources.cc:983 ../src/zypper-sources.cc:1002
+#: ../src/zypper-sources.cc:1061 ../src/zypper-sources.cc:1080
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Probleem bij laden van gegevens van '%s'"
 
-#: ../src/zypper-sources.cc:984 ../src/zypper-sources.cc:1004
+#: ../src/zypper-sources.cc:1062 ../src/zypper-sources.cc:1082
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 
-#: ../src/zypper-sources.cc:991
+#: ../src/zypper-sources.cc:1069
 #, c-format
 msgid "(%d resolvables found)"
 msgstr "(%d oplosbare pakketten gevonden)"
 
-#: ../src/zypper-sources.cc:1003
+#: ../src/zypper-sources.cc:1081
 msgid "Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."
 msgstr "Probeer 'zypper refresh' of zelfs /var/cache/zypp/zypp.db voordat u het doet."
 
-#: ../src/zypper-sources.cc:1015
+#: ../src/zypper-sources.cc:1093
 msgid "Reading RPM database..."
 msgstr "RPM-database wordt gelezen..."
 
-#: ../src/zypper-sources.cc:1022
+#: ../src/zypper-sources.cc:1100
 #, c-format
 msgid "(%s resolvables)"
 msgstr "(%s oplosbare pakketten)"
 
 #. list name, exact match
-#: ../src/zypper-sources.cc:1110
+#: ../src/zypper-sources.cc:1188
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -763,41 +818,22 @@ msgstr "(A)fbreken, Opnieuw (r), Negeren (i)?"
 msgid "Invalid answer. Choose letter a, r, or i."
 msgstr "Onjuist antwoord. Kies letter a, r of i."
 
-#. TranslatorExplanation This is a Lowercase 'y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:148 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:171
-msgid "y"
-msgstr "j"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "yes"
+msgstr "ja"
 
-#. TranslatorExplanation Uppercase 'Y' for "yes" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:152 ../src/zypper-callbacks.cc:171
-msgid "Y"
-msgstr "J"
+#: ../src/zypper-callbacks.cc:130 ../src/zypper-callbacks.cc:137
+#: ../src/zypper-callbacks.cc:153
+msgid "no"
+msgstr "nee"
 
-#. TranslatorExplanation Lowercase 'n' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:156 ../src/zypper-callbacks.cc:165
-#: ../src/zypper-callbacks.cc:173
-msgid "n"
-msgstr "N"
-
-#. TranslatorExplanation Uppercase 'N' for "no" used as an
-#. answer in y/n prompts. Translate to the same letter as you translated
-#. it in the "[y/n]" string!.
-#: ../src/zypper-callbacks.cc:160 ../src/zypper-callbacks.cc:173
-msgid "N"
-msgstr "N"
-
-#. TranslatorExplanation Example: Invalid answer 'x', enter 'y' or 'n':
-#: ../src/zypper-callbacks.cc:164
+#. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+#. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+#: ../src/zypper-callbacks.cc:152
 #, c-format
-msgid "Invalid answer '%s', enter '%s' or '%s':"
-msgstr "Onjuist antwoord '%s'. Kies '%s' of '%s'."
+msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
+msgstr ""
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -902,64 +938,39 @@ msgstr "Levert:"
 msgid "Requires:"
 msgstr "Benodigd:"
 
-#: ../src/zypper-search.cc:42
+#: ../src/zypper-search.cc:85
 msgid "No repositories configured. Please add at least one repository using 'zypper addrepo' command before using the search."
 msgstr "Er zijn geen bronnen geconfigureerd. Voeg tenminste één bron toe met behulp van het commando 'zypper addrepo' voordat u een zoekopdracht uitvoert."
 
-#: ../src/zypper-search.cc:182
+#: ../src/zypper-search.cc:232
 msgid "Pre-caching installed resolvables matching given search criteria... "
 msgstr "Oplosbare pakketten die vóór het opslaan in de cache zijn geïnstalleerd, overeenkomend met opgegeven zoekcriteria..."
 
-#: ../src/zypper-search.cc:191
+#: ../src/zypper-search.cc:242
 msgid " out of ("
 msgstr " van ("
 
-#: ../src/zypper-search.cc:192
+#: ../src/zypper-search.cc:243
 msgid "cached."
 msgstr "in cache geplaatst."
 
-#: ../src/zypper-search.cc:293
+#: ../src/zypper-search.cc:344
 msgid " is not a valid regular expression: \""
 msgstr " is geen geldige reguliere expressie: \""
 
-#: ../src/zypper-search.cc:295
+#: ../src/zypper-search.cc:346
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Dit is een bug, stuur een bugrapport in voor zypper."
 
-#: ../src/zypper.cc:73 ../src/zypper.cc:887
+#: ../src/zypper.cc:76 ../src/zypper.cc:899
 msgid "Given URL is invalid."
 msgstr "Opgegeven URL-adres is ongeldig."
 
-#: ../src/zypper.cc:110
-msgid ""
-"  Options:\n"
-"\t--help, -h\t\tHelp.\n"
-"\t--version, -V\t\tOutput the version number.\n"
-"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
-"\t--verbose, -v\t\tIncrease verbosity.\n"
-"\t--terse, -t\t\tTerse output for machine consumption.\n"
-"\t--table-style, -s\tTable style (integer).\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
-"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-"\t--root, -R <dir>\tOperate on a different root directory.\n"
-msgstr ""
-"  Opties:\n"
-"\t--help, -h\t\tHelp\n"
-" \t--version, -V\t\ttoon versienummer\n"
-"\t--quiet, -q\t\tonderdruk normale uitvoer, toon alleen foutmeldingen.\n"
-" \t--verbose, -v\t\ttoon meer uitvoer\n"
-" \t--terse, -t\t\tbeknopte uitvoer voor machineverbruik\n"
-" \t--table-style, -s\ttabelstijl (heel getal)\n"
-" \t--rug-compatible, -r\tschakel Rug-compatibiliteit in\n"
-" \t--non-interactive\tvraag niets, gebruik automatisch standaardantwoorden.\n"
-"\t--no-gpg-checks\t\tnegeer fouten bij GPG-controles en ga door.\n"
-"\t--root, -R <dir>\twerk vanuit een andere hoofddirectory.\n"
-
-#: ../src/zypper.cc:123
+#: ../src/zypper.cc:84
+#, fuzzy
 msgid ""
 "  Commands:\n"
-"\thelp\t\t\tHelp\n"
+"\thelp, ?\t\t\tHelp\n"
 "\tshell, sh\t\tAccept multiple commands at once\n"
 "\tinstall, in\t\tInstall packages or resolvables\n"
 "\tremove, rm\t\tRemove packages or resolvables\n"
@@ -1000,28 +1011,54 @@ msgstr ""
 " \tpatch-info\t\ttoon informatie voor patches\n"
 "\tsource-install, si\tinstalleer een bronpakket\n"
 
-#: ../src/zypper.cc:164
+#: ../src/zypper.cc:136
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--terse, -t\t\tTerse output for machine consumption.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+msgstr ""
+"  Opties:\n"
+"\t--help, -h\t\tHelp\n"
+" \t--version, -V\t\ttoon versienummer\n"
+"\t--quiet, -q\t\tonderdruk normale uitvoer, toon alleen foutmeldingen.\n"
+" \t--verbose, -v\t\ttoon meer uitvoer\n"
+" \t--terse, -t\t\tbeknopte uitvoer voor machineverbruik\n"
+" \t--table-style, -s\ttabelstijl (heel getal)\n"
+" \t--rug-compatible, -r\tschakel Rug-compatibiliteit in\n"
+" \t--non-interactive\tvraag niets, gebruik automatisch standaardantwoorden.\n"
+"\t--no-gpg-checks\t\tnegeer fouten bij GPG-controles en ga door.\n"
+"\t--root, -R <dir>\twerk vanuit een andere hoofddirectory.\n"
+
+#: ../src/zypper.cc:167
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Uitgebreidheid: %d"
 
-#: ../src/zypper.cc:170
+#: ../src/zypper.cc:173
 msgid "Entering non-interactive mode."
 msgstr "Niet-interactieve modus wordt geactiveerd."
 
-#: ../src/zypper.cc:176
+#: ../src/zypper.cc:179
 msgid "Entering no-gpg-checks mode."
 msgstr "Modus zonder GPG-controles wordt geactiveerd."
 
-#: ../src/zypper.cc:186
+#: ../src/zypper.cc:189
 msgid "Invalid table style "
 msgstr "Ongeldige tabelstijl"
 
-#: ../src/zypper.cc:231
+#: ../src/zypper.cc:234
 msgid "Try -h for help."
 msgstr "Probeer -h voor informatie over het gebruik."
 
-#: ../src/zypper.cc:281
+#: ../src/zypper.cc:293
 msgid ""
 "install (in) [options] <capability> ...\n"
 "\n"
@@ -1047,7 +1084,7 @@ msgstr ""
 "                                Zie 'man zypper' voor meer details.\n"
 "    --debug-solver              Voer een test uit voor foutopsporing\n"
 
-#: ../src/zypper.cc:310
+#: ../src/zypper.cc:322
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -1069,7 +1106,7 @@ msgstr ""
 "-n, --name         Selecteer oplosbaren op naam, niet op capaciteit\n"
 "    --debug-solver  Voer een test uit voor foutopsporing\n"
 
-#: ../src/zypper.cc:329
+#: ../src/zypper.cc:341
 msgid ""
 "source-install (si) <name> ...\n"
 "\n"
@@ -1083,7 +1120,7 @@ msgstr ""
 "\n"
 "Dit commando heeft geen aanvullende opties.\n"
 
-#: ../src/zypper.cc:349
+#: ../src/zypper.cc:361
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
@@ -1105,7 +1142,7 @@ msgstr ""
 "--disabled,-d        voeg de bron toe als uitgeschakeld\n"
 "--no-refresh,-n       voeg de bron toe met automatisch vernieuwen uitgeschakeld\n"
 
-#: ../src/zypper.cc:368
+#: ../src/zypper.cc:380
 msgid ""
 "repos (lr)\n"
 "\n"
@@ -1121,7 +1158,7 @@ msgstr ""
 "Commando-opties:\n"
 "-e, --export <BESTAND.repo>  exporteer alle gedefinieerde bronnen als één lokaal .repo-bestand\n"
 
-#: ../src/zypper.cc:385
+#: ../src/zypper.cc:397
 msgid ""
 "removerepo (rr) [options] <alias|URL>\n"
 "\n"
@@ -1138,7 +1175,7 @@ msgstr ""
 "--loose-auth\tnegeer authenticatiegegevens in het URL-adres\n"
 "--loose-query\tnegeer de query-tekenreeks in het URL-adres\n"
 
-#: ../src/zypper.cc:401
+#: ../src/zypper.cc:413
 msgid ""
 "renamerepo [options] <alias> <new-alias>\n"
 "\n"
@@ -1151,7 +1188,7 @@ msgstr ""
 "Wijs een nieuwe alias toe aan de bron die is opgegeven door alias.\n"
 "Dit commando heeft geen aanvullende opties.\n"
 
-#: ../src/zypper.cc:419
+#: ../src/zypper.cc:431
 msgid ""
 "modifyrepo (mr) <options> <alias>\n"
 "\n"
@@ -1165,14 +1202,15 @@ msgid ""
 msgstr ""
 "modifyrepo (mr) <opties> <alias>\n"
 "\n"
-"Wijzig de eigenschappen van de bron die is opgegeven door alias.\n\n"
+"Wijzig de eigenschappen van de bron die is opgegeven door alias.\n"
+"\n"
 "\n"
 "--disable,-d\t\tschakel de bron uit (maar verwijder deze niet)\n"
 "--enable,-e\t\tactiveer een uitgeschakelde bron\n"
 "--enable-autorefresh,-a\tactiveer het automatisch vernieuwen van de bron\n"
 "--disable-autorefresh\tschakel het automatisch vernieuwen van de bron uit\n"
 
-#: ../src/zypper.cc:442
+#: ../src/zypper.cc:454
 msgid ""
 "refresh (ref) [alias|#] ...\n"
 "\n"
@@ -1196,7 +1234,7 @@ msgstr ""
 "-B, --build-only        bouw alleen de database, download geen metadata.\n"
 "-D, --download-only     download alleen rauwe metadata, bouw de database niet.\n"
 
-#: ../src/zypper.cc:467
+#: ../src/zypper.cc:479
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -1216,7 +1254,7 @@ msgstr ""
 "-r, --repo <alias>   som alleen opwaarderingen op van de bron die is gespecificeerd door de alias.\n"
 "    --best-effort   gebruik bij het opwaarderen een benadering die het best-mogelijke resultaat probeert te geven, waarbij lagere versies dan het allernieuwste ook acceptabel zijn..\n"
 
-#: ../src/zypper.cc:494
+#: ../src/zypper.cc:506
 msgid ""
 "update (up) [options]\n"
 "\n"
@@ -1237,16 +1275,16 @@ msgstr ""
 "Waardeer alle geïnstalleerde oplosbren op naar nieuwere versies, wanneer mogelijk.\n"
 "\n"
 "Commando-opties:\n"
-"\n\n"
+"\n"
+"\n"
 "-t, --type <type>               type oplosbare (package, patch, pattern, product) (standaard: patch)\n"
 "-r, --repo <alias>              beperk opwaarderingen tot de bron gespecificeerd door de alias\n"
 "    --skip-interactive          sla interactieve opwaarderingen over\n"
-"-l, --auto-agree-with-licenses  zeg automatisch ja op licenties van derden die daar om vragen."
-"                                Zie man zypper voor meer informatie.\n"
+"-l, --auto-agree-with-licenses  zeg automatisch ja op licenties van derden die daar om vragen.                                Zie man zypper voor meer informatie.\n"
 "    --best-effort   gebruik bij het opwaarderen een benadering die het best-mogelijke resultaat probeert te geven, waarbij lagere versies dan het allernieuwste ook acceptabel zijn..\n"
 "    --debug-solver              voer een test uit voor foutopsporing\n"
 
-#: ../src/zypper.cc:533
+#: ../src/zypper.cc:545
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -1290,7 +1328,7 @@ msgstr ""
 " \n"
 " De jokertekens * en ? kunnen ook worden gebruikt binnen zoektermen.\n"
 
-#: ../src/zypper.cc:565
+#: ../src/zypper.cc:577
 msgid ""
 "patch-check\n"
 "\n"
@@ -1308,7 +1346,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias> controleer alleen op patches in de bron gespecificeerd door de alias.\n"
 
-#: ../src/zypper.cc:584
+#: ../src/zypper.cc:596
 msgid ""
 "patches\n"
 "\n"
@@ -1326,7 +1364,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias> controleer alleen op patches in de bron gespecificeerd door de alias.\n"
 
-#: ../src/zypper.cc:603
+#: ../src/zypper.cc:615
 msgid ""
 "info <name> ...\n"
 "\n"
@@ -1344,7 +1382,7 @@ msgstr ""
 "\n"
 "-r, --repo <alias> controleer alleen op patches in de bron gespecificeerd door de alias.\n"
 
-#: ../src/zypper.cc:621
+#: ../src/zypper.cc:633
 msgid ""
 "patch-info <patchname> ...\n"
 "\n"
@@ -1358,7 +1396,7 @@ msgstr ""
 "\n"
 "Dit commando is een alias voor 'zypper info -t patch' en bedoelt voor compatibiliteit met rug.\n"
 
-#: ../src/zypper.cc:635
+#: ../src/zypper.cc:647
 msgid ""
 "moo\n"
 "\n"
@@ -1372,7 +1410,7 @@ msgstr ""
 "\n"
 "Dit commando heeft geen aanvullende opties.\n"
 
-#: ../src/zypper.cc:650
+#: ../src/zypper.cc:662
 msgid ""
 "xml-updates\n"
 "\n"
@@ -1388,24 +1426,24 @@ msgstr ""
 "Commando-opties:\n"
 "-r, --repo <alias>  werk alleen met opwaarderingen uit de bron die is gespecificeerd door alias.\n"
 
-#: ../src/zypper.cc:670
+#: ../src/zypper.cc:682
 msgid "Non-option program arguments: "
 msgstr "Programma-argumenten die geen optie zijn: "
 
-#: ../src/zypper.cc:693
+#: ../src/zypper.cc:705
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Bronnen uitgeschakeld, gebruikt alleen de database van geïnstalleerde pakketten."
 
-#: ../src/zypper.cc:705
+#: ../src/zypper.cc:717
 msgid "Ignoring installed resolvables..."
 msgstr "Negeert geïnstalleerde oplosbare pakketten..."
 
-#: ../src/zypper.cc:730
+#: ../src/zypper.cc:742
 msgid "A ZYpp transaction is already in progress. This means, there is another application using the libzypp library for package management running. All such applications must be closed before using this command."
 msgstr "Er is al een Zypp-transactie gaande. Dit betekent dat er een ander programma draait dat de bibliotheek libzypp gebruikt voor pakketbeheer. Al dit soort programma's dienen te worden afgesloten voordat u dit commando kunt gebruiken."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/zypper.cc:755
+#: ../src/zypper.cc:767
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -1415,105 +1453,105 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/zypper.cc:783 ../src/zypper.cc:861 ../src/zypper.cc:932
-#: ../src/zypper.cc:972
+#: ../src/zypper.cc:795 ../src/zypper.cc:873 ../src/zypper.cc:944
+#: ../src/zypper.cc:984
 msgid "Root privileges are required for modifying system repositories."
 msgstr "Er zijn root-privileges nodig om de systeembronnen te wijzigen."
 
-#: ../src/zypper.cc:810 ../src/zypper.cc:938
+#: ../src/zypper.cc:822 ../src/zypper.cc:950
 msgid "Too few arguments. At least URL and alias are required."
 msgstr "Onvoldoende argumenten. Er is tenminste één URL-adres en alias nodig."
 
-#: ../src/zypper.cc:842
+#: ../src/zypper.cc:854
 msgid "Specified type is not a valid repository type:"
 msgstr "Gespecificeerd type is geen geldig brontype:"
 
-#: ../src/zypper.cc:843
+#: ../src/zypper.cc:855
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "Zie 'zypper -h addrepo' of man zypper voor een lijst met bekende brontypen."
 
-#: ../src/zypper.cc:867
+#: ../src/zypper.cc:879
 msgid "Required argument missing."
 msgstr "Vereist argument ontbreekt."
 
-#: ../src/zypper.cc:880
+#: ../src/zypper.cc:892
 msgid "Repository not found by alias, trying delete by URL..."
 msgstr "Bron niet gevonden aan de hand van de alias, probeert nu te verwijderen op URL-adres..."
 
-#: ../src/zypper.cc:913
+#: ../src/zypper.cc:925
 msgid "Repository not found by given alias or URL."
 msgstr "Bron niet gevonden aan de hand van opgegeven alias of URL-adres"
 
-#: ../src/zypper.cc:978
+#: ../src/zypper.cc:990
 msgid "Alias is a required argument."
 msgstr "Alias is een vereist argument."
 
-#: ../src/zypper.cc:1000
+#: ../src/zypper.cc:1012
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "Er zijn root-privileges vereist voor het vernieuwen van de systeeminstallatiebronnen."
 
-#: ../src/zypper.cc:1037
+#: ../src/zypper.cc:1049
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Er zijn root-privileges vereist voor het installeren en deïnstalleren van pakketten."
 
-#: ../src/zypper.cc:1051 ../src/zypper.cc:1259 ../src/zypper.cc:1332
+#: ../src/zypper.cc:1063 ../src/zypper.cc:1282 ../src/zypper.cc:1355
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Onbekend type oplosbare: %s"
 
-#: ../src/zypper.cc:1069
+#: ../src/zypper.cc:1081
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Waarschuwing: geen bronnen gedefinieerd. Er wordt nu alleen gewerkt met de geïnstalleerde oplosbare pakketten. Er kan niets worden geïnstalleerd."
 
-#: ../src/zypper.cc:1089 ../src/zypper.cc:1357
+#: ../src/zypper.cc:1101 ../src/zypper.cc:1380
 msgid "Generating solver test case..."
 msgstr "Genereert een test..."
 
-#: ../src/zypper.cc:1091 ../src/zypper.cc:1359
+#: ../src/zypper.cc:1103 ../src/zypper.cc:1382
 msgid "Solver test case generated successfully."
 msgstr "Test is met succes gegenereerd."
 
-#: ../src/zypper.cc:1094 ../src/zypper.cc:1361
+#: ../src/zypper.cc:1106 ../src/zypper.cc:1384
 msgid "Error creating the solver test case."
 msgstr "Fout bij genereren van test."
 
-#: ../src/zypper.cc:1116
+#: ../src/zypper.cc:1128
 msgid "Source package name is a required argument."
 msgstr "Naam van bronpakket is een vereist argument."
 
-#: ../src/zypper.cc:1155
+#: ../src/zypper.cc:1169
 msgid "Unknown resolvable type "
 msgstr "Onbekend type oplosbaar pakket"
 
-#: ../src/zypper.cc:1183
+#: ../src/zypper.cc:1206
 msgid "No resolvables found."
 msgstr "Geen oplosbaren gevonden."
 
 #. 'rug' is the name of a program and must not be translated
 #. 'best-effort' is a program parameter and can not be translated
-#: ../src/zypper.cc:1269 ../src/zypper.cc:1342
+#: ../src/zypper.cc:1292 ../src/zypper.cc:1365
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "Draaiend als 'rug' kan het argument 'best-effort' niet worden gebruikt bij het opwaarderen."
 
-#: ../src/zypper.cc:1315
+#: ../src/zypper.cc:1338
 msgid "Root privileges are required for updating packages."
 msgstr "Er zijn root-privileges vereist voor het bijwerken van pakketten."
 
-#: ../src/zypper.cc:1411
+#: ../src/zypper.cc:1441
 msgid "Unexpected exception."
 msgstr "Onverwachte uitzondering."
 
-#: ../src/zypper.cc:1497
+#: ../src/zypper.cc:1526
 msgid "You already are running zypper's shell."
 msgstr "U draait al een shell van zypper."
 
-#: ../src/zypper-utils.cc:44
+#: ../src/zypper-utils.cc:47
 msgid "Please file a bug report about this."
 msgstr "Maak een foutenrapport om dit te melden."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
-#: ../src/zypper-utils.cc:47
+#: ../src/zypper-utils.cc:50
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Zie http://en.opensuse.org/Zypper#Troubleshooting voor instructies."
 
@@ -1523,20 +1561,24 @@ msgid "Unknown command '%s'"
 msgstr "Onbekend commando '%s'"
 
 # error box title
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "I/O error"
 msgstr "I/O-fout"
 
-#: ../src/zypper-callbacks.h:41
+#: ../src/zypper-callbacks.h:42
 msgid "Invalid object"
 msgstr "Ongeldig object"
 
-#: ../src/zypper-media-callbacks.h:47
+#: ../src/zypper-callbacks.h:50
+msgid "Error"
+msgstr "Fout"
+
+#: ../src/zypper-media-callbacks.h:56
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
 msgstr "Plaats medium [%s] # %d en typ 'y' om verder te gaan of 'n' om de operatie te annuleren."
 
-#: ../src/zypper-media-callbacks.h:63 ../src/zypper-media-callbacks.h:69
+#: ../src/zypper-media-callbacks.h:76 ../src/zypper-media-callbacks.h:82
 msgid "Downloading: "
 msgstr "Downloadt: "
 
@@ -1615,11 +1657,28 @@ msgstr "Installeert %s-%s"
 msgid "Installation of %s failed:"
 msgstr "Installatie van %s is mislukt:"
 
-#: ../src/zypper-search.h:262
+#: ../src/zypper-search.h:289
 msgid "Catalog"
 msgstr "Catalogus"
 
-#: ../src/zypper-search.h:264
+#: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Installatiebron"
 
+#~ msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+#~ msgstr "Ondertekenverificatie mislukt voor %s met publieke-sleutel-id %s, %s, vingerafdruk %s. Waarschuwing: dit kan zijn veroorzaakt door een kwaadaardige wijziging in het bestand! Doorgaan is riskant! Wilt u toch doorgaan?"
+
+#~ msgid "y"
+#~ msgstr "j"
+
+#~ msgid "Y"
+#~ msgstr "J"
+
+#~ msgid "n"
+#~ msgstr "N"
+
+#~ msgid "N"
+#~ msgstr "N"
+
+#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
+#~ msgstr "Onjuist antwoord '%s'. Kies '%s' of '%s'."
