@@ -546,7 +546,7 @@ Resolver::problems (const bool ignoreValidSolution) const
 			details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str()) + "\n";
 			details += logAdditionalInfo(collector.additionalInfo, item);		    
 			ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-			problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
+			problem->addSolution (new ProblemSolutionUninstall (problem, item)); // Uninstall resolvable 
 			problems.push_back (problem);
 			problem_created = true;
 		    }
