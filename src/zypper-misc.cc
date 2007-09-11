@@ -1404,11 +1404,15 @@ int solve_and_commit () {
       if (!confirm_licenses()) return ZYPPER_EXIT_OK;
 
       cerr_v << _("committing") << endl;
-      
+
       try {
-        // FIXME do resync if in shell mode, how
-        // do I know if in shell mode?
+        //! \todo fix the media reporting correctly
+        gData.show_media_progress_hack = true;
+
+        // FIXME do resync if in shell mode, how do I know if in shell mode?
         ZYppCommitResult result = God->commit( ZYppCommitPolicy().syncPoolAfterCommit(false) );
+
+        gData.show_media_progress_hack = false; 
 
         if (!result._errors.empty())
           retv = ZYPPER_EXIT_ERR_ZYPP;

@@ -93,7 +93,7 @@ struct Error
 struct RuntimeData
 {
   RuntimeData()
-    : patches_count(0), security_patches_count(0), limit_to_verbosity(0)
+    : patches_count(0), security_patches_count(0), show_media_progress_hack(false)
   {}
 
   std::list<Error> errors;
@@ -106,26 +106,9 @@ struct RuntimeData
   zypp::ResStore target_resolvables;
   zypp::RepoInfo current_repo;
 
-  /**
-   * Limit output to and above specified verbosity level.
-   * 
-   * Use this variable to control whether to print the output or not,
-   * wherever the desired verbosity level is variable. Then set the limit
-   * before the code where the output is generated and reset it afterwards:
-   * 
-   * <code>
-   * 
-   * // set verbosity limit
-   * gData.limit_to_verbosity = VERBOSITY_MEDIUM;
-   * 
-   * ... code generating the output but respecting the verbosity limit goes here ...
-   * 
-   * // restore verbosity limit
-   * gData.limit_to_verbosity = VERBOSITY_NORMAL;
-   * 
-   * </code> 
-   */
-  int limit_to_verbosity;
+  // hack to enable media progress reporting in the commit phase in normal
+  // output level
+  bool show_media_progress_hack;
 };
 
 extern RuntimeData gData;
