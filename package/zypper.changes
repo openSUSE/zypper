@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 11 10:58:16 CEST 2007 - jkupec@suse.cz
+
+- translations update
+- man page update
+- r7174
+
+-------------------------------------------------------------------
 Mon Sep 10 15:39:11 CEST 2007 - jkupec@suse.cz
 
 - report too many arguments (#307639)
