@@ -58,7 +58,21 @@ namespace zypp
      */
     class RepoNoUrlException : public RepoException
     {
-    
+      public:
+      RepoNoUrlException()
+      {}
+      
+      RepoNoUrlException( const RepoInfo &info)
+        : _info(info)
+      {}
+      
+      ~RepoNoUrlException() throw()
+      {}
+      
+      RepoInfo info()
+      { return _info; }
+    private:
+      RepoInfo _info;
     };
     
     /**

@@ -191,7 +191,7 @@ namespace zypp
                                               const OnMediaLocation & loc_r,
                                               const ProvideFilePolicy & policy_r )
     {
-      MIL << "provideFile " << loc_r << endl;
+      MIL << loc_r << endl;
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
       // and redirect download progress triggers to call the ProvideFilePolicy
       // callback.
@@ -202,14 +202,23 @@ namespace zypp
 
       Url url;
       RepoInfo info = repo_r.info();
+      
+      RepoException repo_excpt(str::form(_("Can't provide file %s from repository %s"),
+                               loc_r.filename().c_str(),
+                               info.alias().c_str() ) );
+      
       if ( info.baseUrlsEmpty() )
-        ZYPP_THROW(Exception(_("No url in repository.")));
-
+      {
+        repo_excpt.remember(RepoException(_("No url in repository.")));
+        ZYPP_THROW(repo_excpt);
+      }
+      
       for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
             it != info.baseUrlsEnd();
-            ++it )
+            /* incremented in the loop */ )
       {
         url = *it;
+        ++it;
         try
         {
           MIL << "Providing file of repo '" << info.alias()
@@ -270,15 +279,15 @@ namespace zypp
         catch ( const Exception &e )
         {
           ZYPP_CAUGHT( e );
+          
+          repo_excpt.remember(e);
+          
           WAR << "Trying next url" << endl;
           continue;
         }
       } // iteration over urls
 
-      ZYPP_THROW(Exception(str::form(_("Can't provide file %s from repository %s"),
-                                       loc_r.filename().c_str(),
-                                       info.alias().c_str() ) ) );
-
+      ZYPP_THROW(repo_excpt);
       return ManagedFile(); // not reached
     }
 
