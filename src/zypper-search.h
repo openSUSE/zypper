@@ -21,6 +21,7 @@
 #include <zypp/RepoManager.h>
 
 #include "zypper.h"
+#include "zypper-utils.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 
@@ -316,7 +317,8 @@ struct FillTable
         row << "i"
 	    << pool_item.resolvable()->repository().info().name()
             // TODO what about rug's Bundle?
-            << (gSettings.is_rug_compatible ? "" : pool_item.resolvable()->kind().asString()) 
+            << (gSettings.is_rug_compatible ?
+                "" : kind_to_string_localized(pool_item.resolvable()->kind(), 1))
             << pool_item.resolvable()->name()
             << pool_item.resolvable()->edition().asString()
             << pool_item.resolvable()->arch().asString();
@@ -357,7 +359,8 @@ struct FillTable
     // add other fields to the result table
     row << alias
         // TODO what about rug's Bundle?
-        << (gSettings.is_rug_compatible ? "" : res->kind.asString())
+        << (gSettings.is_rug_compatible ?
+            "" : kind_to_string_localized(res->kind, 1))
         << res->name
         << res->edition.asString()
         << res->arch.asString();

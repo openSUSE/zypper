@@ -20,6 +20,7 @@
 #include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zypper.h"
+#include "zypper-utils.h"
 #include "zypper-getopt.h"
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
@@ -76,35 +77,6 @@ ResObject::Kind string_to_kind (const string &skind)
   // not recognized
   return empty;
 }
-
-string kind_to_string_localized(const KindOf<Resolvable> & kind, unsigned long count)
-{
-  if (kind == ResTraits<Package>::kind.asString())
-    return _PL("package", "packages", count);
-  if (kind == ResTraits<Selection>::kind.asString())
-    return _PL("selection", "selections", count);
-  if (kind == ResTraits<Pattern>::kind.asString())
-    return _PL("pattern", "patterns", count);
-  if (kind == ResTraits<Product>::kind.asString())
-    return _PL("product", "product", count);
-  if (kind == ResTraits<Patch>::kind.asString())
-    return _PL("patch", "patches", count);
-  if (kind == ResTraits<Script>::kind.asString())
-    return _PL("script", "scripts", count);
-  if (kind == ResTraits<Message>::kind.asString())
-    return _PL("message", "messages", count);
-  if (kind == ResTraits<Language>::kind.asString())
-    return _PL("language", "languages", count);
-  if (kind == ResTraits<Atom>::kind.asString())
-    return _PL("atom", "atoms", count);
-  if (kind == ResTraits<SystemResObject>::kind.asString())
-    return _PL("system", "systems", count);
-  if (kind == ResTraits<SrcPackage>::kind.asString())
-    return _PL("srcpackage", "srcpackages", count);
-  // default
-  return _PL("resolvable", "resolvables", count);
-}
-
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 bool ProvideProcess::operator()( const PoolItem& provider )
@@ -292,7 +264,7 @@ void mark_for_install( const ResObject::Kind &kind,
   cout_vv << "... done" << endl;
   if (!installer.item) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
-    cerr << format(_("%s '%s' not found")) % kind % name << endl;
+    cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
     WAR << format("%s '%s' not found") % kind % name << endl;
 
     return;
@@ -301,7 +273,7 @@ void mark_for_install( const ResObject::Kind &kind,
   if (installer.installed_item &&
       installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
       installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
-    cout_n << format(_("skipping %s '%s' (already installed)")) % kind.asString() % name << endl;
+    cout_n << format(_("skipping %s '%s' (already installed)")) % kind_to_string_localized(kind,1) % name << endl;
   }
   else {
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
@@ -353,7 +325,8 @@ void mark_for_uninstall( const ResObject::Kind &kind,
 		);
   cerr_vv << "... done" << endl;
   if (!deleter.found) {
-    cerr << _("Not found") << endl;
+    // TranslatorExplanation e.g. "package 'pornview' not found"
+    cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
     return; //error?
   }
 }
@@ -1489,7 +1462,8 @@ bool confirm_licenses()
         // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 			  if (!gSettings.machine_readable)
         	cout << format(_("Automatically agreeing with %s %s license."))
-	            % it->resolvable()->name() % it->resolvable()->kind().asString()
+	            % it->resolvable()->name()
+	            % kind_to_string_localized(it->resolvable()->kind(),1)
 	            << endl;
 
         MIL << format("Automatically agreeing with %s %s license.")
@@ -1499,8 +1473,8 @@ bool confirm_licenses()
         continue;
       }
 
-      cout << format(_("%s %s license:"))
-          % it->resolvable()->name() % it->resolvable()->kind().asString()
+      cout << format(_("%s %s license:")) % it->resolvable()->name()
+                % kind_to_string_localized(it->resolvable()->kind(), 1)
         << it->resolvable()->licenseToConfirm() << endl;
 
       string question = _("In order to install this package, you must agree"
@@ -1530,7 +1504,8 @@ bool confirm_licenses()
             // TranslatorExplanation e.g. "... with flash package license."
           cout << format(
               _("Aborting installation due to user disagreement with %s %s license."))
-                % it->resolvable()->name() % it->resolvable()->kind().asString()
+                % it->resolvable()->name()
+                % kind_to_string_localized(it->resolvable()->kind(), 1)
               << endl;
             MIL << "License(s) NOT confirmed (interactive)" << endl;
         }

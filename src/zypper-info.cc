@@ -9,6 +9,7 @@
 #include <zypp/Patch.h>
 
 #include "zypper.h"
+#include "zypper-utils.h"
 #include "zypper-misc.h"
 
 using namespace std;
@@ -49,13 +50,15 @@ void printInfo(const ZypperCommand & command, const vector<string> & arguments) 
 
     if (!installer.item) {
       // TranslatorExplanation E.g. "package zypper not found."
-      cout << "\n" << format(_("%s %s not found.")) % kind.asString() % *nameit
+      cout << "\n" << format(_("%s %s not found."))
+          % kind_to_string_localized(kind, 1) % *nameit
           << endl;
     }
     else {
       // print info
       // TranslatorExplanation E.g. "Information for package zypper:"
-      cout << endl << format(_("Information for %s %s:")) % kind.asString() % *nameit;
+      cout << endl << format(_("Information for %s %s:"))
+          % kind_to_string_localized(kind, 1) % *nameit;
 
       cout << endl << endl;
 

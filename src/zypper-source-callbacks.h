@@ -25,7 +25,7 @@
 
 #include "zypper.h"
 #include "zypper-callbacks.h"
-
+#include "zypper-utils.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -177,7 +177,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     _url = url;
 
     cout_n << boost::format(_("Downloading %s %s-%s.%s"))
-        % _resolvable_ptr->kind() % _resolvable_ptr->name()
+        % kind_to_string_localized(_resolvable_ptr->kind(), 1)
+        % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
 
 // grr, bad class??
