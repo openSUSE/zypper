@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 12 15:48:41 CEST 2007 - schubi@suse.de
+
+- Regarding keep state while recycle old valid solver results. Bug 286889
+- r 7209 
+
+-------------------------------------------------------------------
 Wed Sep 12 12:24:49 CEST 2007 - jkupec@suse.cz
 
 - report 100% progress on finishing RPM removal (bug #309431)
