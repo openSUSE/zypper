@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Sep 12 14:23:41 CEST 2007 - jkupec@suse.cz
+
+- display localized resolvable kind in various texts
+
+-------------------------------------------------------------------
 Wed Sep 12 11:40:35 CEST 2007 - jkupec@suse.cz
 
 - displaying the file download progress during commit phase
