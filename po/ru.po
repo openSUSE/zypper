@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-09 12:04+0400\n"
-"Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
+"POT-Creation-Date: 2007-09-11 15:12+0200\n"
+"PO-Revision-Date: 2007-09-12 15:33+0400\n"
+"Last-Translator: Aleksey Osipov <aliks-os@yandex.ru>\n"
 "Language-Team:  <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n%10==1 && n%100!=11 ? 0 : 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../src/zypper-keyring-callbacks.h:40
@@ -110,101 +110,77 @@ msgid "Initializing Target"
 msgstr "Инициализация цели"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакет"
-msgstr[1] "пакет"
-msgstr[2] "пакет"
+msgstr[1] "пакеты"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
 msgstr[0] "выбор"
-msgstr[1] "выбор"
-msgstr[2] "выбор"
+msgstr[1] "выборы"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "образец"
-msgstr[1] "образец"
-msgstr[2] "образец"
+msgstr[0] "шаблон"
+msgstr[1] "шаблоны"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
-msgstr[1] "продукт"
-msgstr[2] "продукт"
+msgstr[1] "продукты"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "обновление"
-msgstr[1] "обновление"
-msgstr[2] "обновление"
+msgstr[1] "обновления"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
-msgstr[0] "скрипт"
-msgstr[1] "скрипт"
-msgstr[2] "скрипт"
+msgstr[0] "сценарий"
+msgstr[1] "сценарии"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "сообщение"
-msgstr[1] "сообщение"
-msgstr[2] "сообщение"
+msgstr[1] "сообщения"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "язык: "
-msgstr[1] "язык: "
-msgstr[2] "язык: "
+msgstr[0] "язык"
+msgstr[1] "языки"
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "атом"
-msgstr[1] "атом"
-msgstr[2] "атом"
+msgstr[1] "атомы"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "система"
-msgstr[1] "система"
-msgstr[2] "система"
+msgstr[1] "системы"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "пакет"
-msgstr[1] "пакет"
-msgstr[2] "пакет"
+msgstr[0] "пакет с исходным кодом"
+msgstr[1] "пакеты с исходным кодом"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Объект разрешения зависимостей"
-msgstr[1] "Объект разрешения зависимостей"
-msgstr[2] "Объект разрешения зависимостей"
+msgstr[0] "объект разрешения зависимостей"
+msgstr[1] "объекты разрешения зависимостей"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -285,39 +261,35 @@ msgstr "Нечего выполнять."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "Будут обновлены следующие пакеты:"
-msgstr[1] "Будут обновлены следующие пакеты:"
-msgstr[2] "Будут обновлены следующие пакеты:"
+msgstr[0] "Будет обновлено следующее: %s:"
+msgstr[1] "Будут обновлены следующие %s:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "Будут загружены следующие пакеты:"
-msgstr[1] "Будут загружены следующие пакеты:"
-msgstr[2] "Будут загружены следующие пакеты:"
+msgstr[0] "Будет обновлено до более старой версии следующее: %s:"
+msgstr[1] "Будет обновлены до более старой версии следующие %s:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "Будут установлены следующие сборки:"
-msgstr[1] "Будут установлены следующие сборки:"
-msgstr[2] "Будут установлены следующие сборки:"
+msgstr[0] "Будет установлено следующее: %s:"
+msgstr[1] "Будут установлены следующие %s:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Будет УДАЛЕНО следующее: %s:"
+msgstr[1] "Будут УДАЛЕНЫ следующие %s:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -972,14 +944,12 @@ msgstr "Недопустимый ответ '%s'. Если ничего друг
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
-msgstr "Слишком много аргументов."
+msgstr "Слишком много аргументов"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "Сообщение"
+msgstr "Использование"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1811,3 +1781,4 @@ msgstr "Каталог"
 #: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Репозитарий"
+

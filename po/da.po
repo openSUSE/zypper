@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-07 14:15+0200\n"
+"PO-Revision-Date: 2007-09-12 14:21+0200\n"
 "Last-Translator: Martin Schlander <suse@linuxin.dk>\n"
-"Language-Team:  <opensuse-translation@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: KAider 0.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/zypper-keyring-callbacks.h:40
@@ -112,78 +112,75 @@ msgstr "Initialiserer målet"
 #: ../src/zypper-misc.cc:83
 msgid "package"
 msgid_plural "packages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "pakke"
+msgstr[1] "pakker"
 
 #: ../src/zypper-misc.cc:85
 msgid "selection"
 msgid_plural "selections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "udvalg"
+msgstr[1] "udvalg"
 
 #: ../src/zypper-misc.cc:87
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "mønster"
+msgstr[1] "mønstre"
 
 #: ../src/zypper-misc.cc:89
 msgid "product"
 msgid_plural "product"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "produkt"
+msgstr[1] "produkter"
 
 #: ../src/zypper-misc.cc:91
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "rettelse"
+msgstr[1] "rettelser"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
-msgstr[0] "Beskrivelse: "
-msgstr[1] "Beskrivelse: "
+msgstr[0] "script"
+msgstr[1] "scripts"
 
 #: ../src/zypper-misc.cc:95
 msgid "message"
 msgid_plural "messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "besked"
+msgstr[1] "beskeder"
 
 #: ../src/zypper-misc.cc:97
 msgid "language"
 msgid_plural "languages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "sprog"
+msgstr[1] "sprog"
 
 #: ../src/zypper-misc.cc:99
 msgid "atom"
 msgid_plural "atoms"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "atom"
+msgstr[1] "atomer"
 
 #: ../src/zypper-misc.cc:101
 msgid "system"
 msgid_plural "systems"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "system"
+msgstr[1] "systemer"
 
 #: ../src/zypper-misc.cc:103
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "kildekodepakke"
+msgstr[1] "kildekodepakker"
 
-#
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "(%s resolvables)"
-msgstr[1] "(%s resolvables)"
+msgstr[0] "resolvable"
+msgstr[1] "resolvables"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -265,32 +262,32 @@ msgstr "Intet at gøre."
 #, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende %s vil blive opgraderet:"
+msgstr[1] "Følgende %s vil blive opgraderet:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
 #, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende %s vil blive nedgraderet:"
+msgstr[1] "Følgende %s vil blive nedgraderet:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
 #, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende NYE %s vil blive installeret:"
+msgstr[1] "Følgende NYE %s vil blive installeret:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende %s vil blive SLETTET:"
+msgstr[1] "Følgende %s vil blive SLETTET:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -947,11 +944,11 @@ msgstr "Ugyldigt svar '%s'. Tast 'y' for '%s' eller 'n' for '%s' hvis intet ande
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
 msgid "Too many arguments"
-msgstr ""
+msgstr "For mange argumenter"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
 msgid "Usage"
-msgstr ""
+msgstr "Brug"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1806,3 +1803,4 @@ msgstr "Katalog"
 #: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Softwarekilde"
+
