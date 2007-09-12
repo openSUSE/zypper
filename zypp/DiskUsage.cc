@@ -29,8 +29,8 @@ namespace zypp
     iterator fst = begin();
     for ( ; fst != end() && !fst->isBelow( ret ); ++fst )
       ; // seek 1st equal or below
- 
-    bool found = false; 
+
+    bool found = false;
     if ( fst != end() ) {
       iterator lst = fst;
       found = true;
@@ -50,7 +50,7 @@ namespace zypp
 	{
 	    dname.insert(dname.begin(), '/');
 	}
-	    
+
 	Entry tmp( dname );
 
 	tmp._size = ret._size;
@@ -73,7 +73,7 @@ namespace zypp
 	    }
 	}
     }
-  
+
     return ret;
   }
 

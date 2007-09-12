@@ -22,7 +22,7 @@ namespace zypp
   class DiskUsage {
   public:
     /**
-    * @short Holds data about how much space will be needed per directory
+    * @short Holds data about how much space will be needed per directory.
     **/
     struct Entry {
       Entry() : _size(0), _files(0) {};
@@ -30,8 +30,15 @@ namespace zypp
               const unsigned size_r = 0,
               const unsigned files_r = 0)
       : path(path_r), _size(size_r), _files(files_r)
-      {}
-      const std::string path;
+      {
+        // assert leading and trailing '/'
+        if ( ! path.empty() )
+        {
+          if ( *path.begin() != '/' ) path.insert( path.begin(), '/' );
+          if ( *path.rbegin() != '/' ) path.insert( path.end(), '/' );
+        }
+      }
+      std::string path;
       mutable unsigned _size;
       mutable unsigned _files;
       friend std::ostream & operator<<( std::ostream & str, const Entry & obj );
@@ -61,12 +68,6 @@ namespace zypp
         return  isBelow( Entry( dirname_r ) );
       }
 
-      /**
-       *
-       **/
-      const Entry & operator=( const Entry & rhs ) const {
-        return rhs;
-      }
       /**
        * Numerical operation based on size and files values.
        **/
