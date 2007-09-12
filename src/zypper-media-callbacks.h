@@ -72,7 +72,7 @@ namespace ZmartRecipients
   {
     virtual void start( const zypp::Url & file, zypp::Pathname localfile )
     {
-      if (gSettings.verbosity == VERBOSITY_MEDIUM)
+      if (gSettings.verbosity == VERBOSITY_MEDIUM || gData.show_media_progress_hack)
       {
         cout << CLEARLN << _("Downloading: ")
           << zypp::Pathname(file.getPathName()).basename()
@@ -86,14 +86,20 @@ namespace ZmartRecipients
 
     virtual bool progress(int value, const zypp::Url & /*file*/)
     {
-      display_progress ("download", cout_v, "Downloading", value);
+      if (gData.show_media_progress_hack)
+        display_progress ("download", cout, "Downloading", value);
+      else
+        display_progress ("download", cout_v, "Downloading", value);
       return true;
     }
 
     // not used anywhere in libzypp 3.20.0
     virtual DownloadProgressReport::Action problem( const zypp::Url & /*file*/, DownloadProgressReport::Error error, const std::string & description )
     {
-      display_done ("download", cout_v);
+      if (gData.show_media_progress_hack)
+        display_done ("download", cout);
+      else
+        display_done ("download", cout_v);
       display_error (error, description);
       return DownloadProgressReport::ABORT;
     }
@@ -101,7 +107,10 @@ namespace ZmartRecipients
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
     virtual void finish( const zypp::Url & /*file*/, Error error, const std::string & konreason )
     {
-      display_done ("download", cout_v);
+      if (gData.show_media_progress_hack)
+        display_done ("download", cout);
+      else
+        display_done ("download", cout_v);
       // don't display errors here, they will be reported in media change callback
       // display_error (error, konreason);
     }
