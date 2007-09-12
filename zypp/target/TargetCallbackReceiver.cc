@@ -159,6 +159,7 @@ namespace zypp
         /** Finish operation in case of success */
         void RpmRemovePackageReceiver::finish()
 	{
+            _report->progress( 100, _resolvable );
 	    _report->finish( _resolvable, rpm::RemoveResolvableReport::NO_ERROR, std::string() );
 	}
 
