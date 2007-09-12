@@ -277,7 +277,7 @@ int one_command(int argc, char **argv)
       {"type",                      required_argument, 0, 't'},
       // the default (ignored)
       {"name",                      no_argument,       0, 'n'},
-      {"capability",                no_argument,       0, 'n'},
+      {"capability",                no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm",                no_argument,       0, 'y'}, 
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -315,7 +315,7 @@ int one_command(int argc, char **argv)
       {"type",       required_argument, 0, 't'},
       // the default (ignored)
       {"name",       no_argument,       0, 'n'},
-      {"capability", no_argument,       0, 'n'},
+      {"capability", no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
