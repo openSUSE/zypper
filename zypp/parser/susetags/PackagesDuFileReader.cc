@@ -146,7 +146,7 @@ namespace zypp
                   if ( pos != std::string::npos )
                   {
                     // found 'level' number of '/'es.
-                    skip = ( entry.path[pos] != '\0' );
+                    skip = ( entry.path[pos+1] != '\0' );
                   }
                   else
                   {
