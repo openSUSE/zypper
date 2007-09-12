@@ -70,8 +70,9 @@ void check_kdelibs3_package( Package::Ptr p )
   BOOST_CHECK_EQUAL( p->location().medianr(), (unsigned)1);
   BOOST_CHECK_EQUAL( p->size(), 38850584);
   BOOST_CHECK_EQUAL( p->location().downloadSize(), 16356019);
-  
-  BOOST_CHECK_EQUAL( p->diskusage().size(), (unsigned) 181);
+
+  //BOOST_CHECK_EQUAL( p->diskusage().size(), (unsigned) 181); // all entries
+  BOOST_CHECK_EQUAL( p->diskusage().size(), (unsigned) 7); // limited to level 3 "/a/b/"
   for ( DiskUsage::iterator it = p->diskusage().begin();
         it !=  p->diskusage().end();
         ++it )
@@ -123,27 +124,27 @@ void check_factory_product( Product::Ptr p )
   BOOST_CHECK_EQUAL( p->distributionName(), "SuSE-Linux-STABLE-X86" );
   BOOST_CHECK_EQUAL( p->distributionEdition(), Edition("10.2.42-factory") );
   BOOST_CHECK_EQUAL( p->summary(), "openSUSE FACTORY 10.3" );
-  
+
   BOOST_CHECK_EQUAL( p->releaseNotesUrl(), Url("http://www.suse.com/relnotes/i386/openSUSE/FACTORY/release-notes.rpm") );
-  
+
   list<Url>::const_iterator it;
   list<Url> urls;
-  
+
   BOOST_CHECK_EQUAL( urls.size(), (unsigned)0 );
-  
+
   urls = p->extraUrls();
   it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/oss/"));
   BOOST_CHECK_EQUAL( p->extraUrls().size(), (unsigned)1 );
   BOOST_CHECK( it != urls.end() );
-  
+
   urls = p->optionalUrls();
   BOOST_CHECK_EQUAL( urls.size(), (unsigned)2 );
-  
+
   it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/non-oss/"));
   BOOST_CHECK( it != urls.end() );
   it = find( urls.begin(), urls.end(), Url("http://download.opensuse.org/distribution/10.2/repo/debug/"));
   BOOST_CHECK( it != urls.end() );
-  
+
   for ( it = urls.begin();
         it != urls.end();
         ++it )
@@ -404,7 +405,7 @@ void cache_write_shared_attributes(const Pathname &repodir)
 
   // 2 packages and a product
   BOOST_CHECK_EQUAL( dbres.size(), (unsigned)3);
-  
+
   for ( ResStore::const_iterator it = dbres.begin();
         it != dbres.end();
         ++it )
@@ -459,7 +460,7 @@ void cache_delta_rpm_test(const string &dir)
     cache::CacheStore store(tmpdir.path());
     repository_id = store.lookupOrAppendRepository(alias);
   }
-  
+
   cached::RepoImpl *repositoryImpl = new cached::RepoImpl( cached::RepoOptions( RepoInfo(),
                                                            tmpdir.path(),
                                                            repository_id ));
@@ -501,7 +502,7 @@ init_unit_test_suite( int argc, char *argv[] )
 //   mounts.insert( DiskUsageCounter::MountPoint("/opt/kde3/share/mimelnk/video") );
 //   mounts.insert( DiskUsageCounter::MountPoint("/foo") );
 //   mounts.insert( DiskUsageCounter::MountPoint("/bar") );
-  
+
   getZYpp()->setPartitions(mounts);
 
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_susetags_normal_test,
@@ -510,7 +511,7 @@ init_unit_test_suite( int argc, char *argv[] )
                                  (std::string const*)params, params+1));
   test->add(BOOST_PARAM_TEST_CASE(&cache_write_shared_attributes_test,
                                  (std::string const*)params, params+1));
-  
+
   // test for delta and patch rpms
   test->add(BOOST_PARAM_TEST_CASE(&cache_delta_rpm_test,
                                  (std::string const*)params, params+1));
