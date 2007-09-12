@@ -16,6 +16,7 @@
 #include <set>
 #include <vector>
 
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
 
@@ -887,7 +888,19 @@ DiskUsage & RpmHeader::tag_du( DiskUsage & dudata_r ) const
     entries.resize( dirnames.size() );
     for ( unsigned i = 0; i < dirnames.size(); ++i )
     {
-      entries[i] = DiskUsage::Entry(dirnames[i]);
+      entries[i] = DiskUsage::Entry( dirnames[i] );
+
+      // cut off deeper directory levels in DiskUsage::Entry
+      unsigned level             = 3; // number of '/' incl. a trailing one
+      std::string::size_type pos = 0; // we know rpm stores absolute pathnames
+      while ( --level && pos != std::string::npos )
+      {
+        pos = entries[i].path.find( "/", pos+1 );
+      }
+      if ( pos != std::string::npos )
+      {
+        entries[i].path.erase( pos+1 );
+      }
     }
 
     for ( unsigned i = 0; i < basenames.size(); ++ i )
@@ -898,7 +911,7 @@ DiskUsage & RpmHeader::tag_du( DiskUsage & dudata_r ) const
         if ( trace.insert( filedevices[i], fileinodes[i] ) )
         {
           // Count full 1K blocks
-          entries[dirindexes[i]]._size += ByteCount( filesizes[i] ).fillBlock();
+          entries[dirindexes[i]]._size += ByteCount( filesizes[i] ).blocks( ByteCount::K );
           ++(entries[dirindexes[i]]._files);
         }
         // else: hardlink; already counted this device/inode
@@ -906,15 +919,35 @@ DiskUsage & RpmHeader::tag_du( DiskUsage & dudata_r ) const
     }
 
     ///////////////////////////////////////////////////////////////////
-    // Crreate and collect by index Entries. DevInoTrace is used to
-    // filter out hardliks ( different name but same device and inode ).
+    // Collect all enties. We first unify the duplicate entries that
+    // were created by cutting off deeper levels. Then the size of each
+    // directory must also be added to each of it's parent directories.
     ///////////////////////////////////////////////////////////////////
+    DiskUsage tmpdata;
     for ( unsigned i = 0; i < entries.size(); ++i )
     {
       if ( entries[i]._size )
-      {
-        dudata_r.add( entries[i] );
-      }
+        tmpdata.add( entries[i] );
+    }
+
+    for_( it, tmpdata.begin(), tmpdata.end() )
+    {
+      DiskUsage::Entry ent( *it );
+
+      do {
+        dudata_r.add( ent );
+        if ( ent.path.size() <= 1 ) // "" or "/"
+          break;
+
+        // set path to parent dir. Note that DiskUsage::Entry
+        // has leading and trailing '/' on pathnmes.
+        std::string::size_type rstart = ent.path.size() - 2;           // trailing '/' !
+        std::string::size_type lpos   = ent.path.rfind( '/', rstart ); // one but last '/'
+        if ( lpos == std::string::npos )
+          break;
+
+        ent.path.erase( lpos + 1 );
+      } while( true );
     }
   }
   return dudata_r;
