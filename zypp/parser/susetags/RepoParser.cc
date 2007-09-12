@@ -214,19 +214,19 @@ namespace zypp
 	  */
 	  Pathname assertMandatoryFile( const Pathname & file_r, bool lookgz = true ) const
 	  {
-      if ( lookgz )
-      {
-        PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
-        if ( !gzinputfile.isFile() )
-        {
-          WAR << _reporoot << ": Skip gz required file (will look for non-gz): " <<  file_r.extend(".gz").asString() << endl;
-        }
-        else
-        {
-          return gzinputfile.path();
-        }
-      }
-	    PathInfo inputfile( _reporoot / file_r );
+            if ( lookgz )
+            {
+              PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
+              if ( !gzinputfile.isFile() )
+              {
+                WAR << _reporoot << ": Skip gz required file (will look for non-gz): " <<  file_r.extend(".gz").asString() << endl;
+              }
+              else
+              {
+                return gzinputfile.path();
+              }
+            }
+            PathInfo inputfile( _reporoot / file_r );
 	    if ( ! inputfile.isFile() )
 	    {
 	      ZYPP_THROW( ParseException( _reporoot.asString() + ": " + _("Required file is missing: ") + file_r.asString() ) );
@@ -239,22 +239,22 @@ namespace zypp
 	  */
  	  Pathname getOptionalFile( const Pathname & file_r, bool lookgz = true  ) const
 	  {
-      if ( lookgz )
-      {
-        PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
-        if ( !gzinputfile.isFile() )
-        {
-          WAR << _reporoot << ": Skip optional file: " <<  file_r.extend(".gz").asString() << endl;
-        }
-        else
-        {
-          return gzinputfile.path();
-        }
-      }
-	    PathInfo inputfile( _reporoot / file_r );
+            if ( lookgz )
+            {
+              PathInfo gzinputfile( _reporoot / (file_r.extend(".gz")) );
+              if ( !gzinputfile.isFile() )
+              {
+                //WAR << _reporoot << ": Skip optional file: " <<  file_r.extend(".gz").asString() << endl;
+              }
+              else
+              {
+                return gzinputfile.path();
+              }
+            }
+            PathInfo inputfile( _reporoot / file_r );
 	    if ( ! inputfile.isFile() )
 	    {
-	      WAR << _reporoot << ": Skip optional file: " <<  file_r.asString() << endl;
+	      //WAR << _reporoot << ": Skip optional file: " <<  file_r.asString() << endl;
 	      return Pathname();
 	    }
 	    return inputfile.path();
@@ -287,19 +287,19 @@ namespace zypp
 		  return true; // got it
 	      }
 
-        if ( it->first == (searchFor+".gz") )
-        {
-          // got it
-          PathInfo inputfile( _reporoot / _descrdir / (searchFor+".gz") );
-          if ( ! inputfile.isFile() )
-          {
-            WAR << "Known and desired file is not on disk: " << inputfile << endl;
-          }
-          else
-            return true; // got it
-        }
-      }
-	    return false; // not found
+              if ( it->first == (searchFor+".gz") )
+              {
+                // got it
+                PathInfo inputfile( _reporoot / _descrdir / (searchFor+".gz") );
+                if ( ! inputfile.isFile() )
+                {
+                  WAR << "Known and desired file is not on disk: " << inputfile << endl;
+                }
+                else
+                  return true; // got it
+              }
+            }
+            return false; // not found
 	  }
 
 	  /** Take care translations for \a locale_r or an appropriate
@@ -361,7 +361,7 @@ namespace zypp
 	    data::RecordId ret = _idMap[key_r];
 	    if ( ret == data::noRecordId )
 	    {
-	      WAR << "No record id for " << key_r << endl;
+	      //WAR << "No record id for " << key_r << endl;
 	    }
 	    return ret;
 	  }
