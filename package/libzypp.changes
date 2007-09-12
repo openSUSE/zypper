@@ -5,6 +5,7 @@ Wed Sep 12 18:48:00 CEST 2007 - ma@suse.de
   now provide more detailed disk usage information.
   Yum metadata don't, so we book the package size to '/'. (#308362)
 - version 3.23.0
+- revision 7225
 
 -------------------------------------------------------------------
 Wed Sep 12 15:48:41 CEST 2007 - schubi@suse.de
