@@ -151,6 +151,7 @@ Resolver::reset (bool resetValidResults, bool keepExtras )
     _items_to_remove.clear();
     _items_to_verify.clear();
     _items_to_establish.clear();
+    _items_to_keep.clear();
 
     if (!keepExtras) {
       _extra_caps.clear();
@@ -374,6 +375,12 @@ Resolver::addPoolItemToLockUninstalled (PoolItem_Ref item)
     _items_to_lockUninstalled.unique ();
 }
 
+void
+Resolver::addPoolItemToKepp (PoolItem_Ref item)
+{
+    _items_to_keep.push_back (item);
+    _items_to_keep.unique ();	        
+}
 
 void
 Resolver::addPoolItemToEstablish (PoolItem_Ref item)
@@ -1221,6 +1228,12 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
             resolver.addPoolItemToLockUninstalled (item);
         }
 
+        if (status.isKept()
+            && !by_solver) {
+	    // collecting all keep states
+	    resolver.addPoolItemToKepp (item);
+	}
+
 	return true;
     }
 };
@@ -1237,9 +1250,11 @@ show_pool( ResPool pool )
 
 	if (!full_pool_shown					// show item if not shown all before
 	    || it->status().transacts()				// or transacts
+	    || it->status().isKept()
+	    || it->status().isLocked()
 	    || !it->status().isUndetermined())			// or established status
 	{
-	    _DEBUG( count << ": " << *it );
+	    _XDEBUG( count << ": " << *it );
 	}
     }
     _XDEBUG( "---------------------------------------" );
@@ -1312,13 +1327,19 @@ Resolver::resolvePool( bool tryAllPossibilities )
     invokeOnEach ( _pool.begin(), _pool.end(),
                    resfilter::ByLock( ),                        // collect locks from Pool to resolver queue
                    functor::functorRef<bool,PoolItem>(info) );
+
+    invokeOnEach ( _pool.begin(), _pool.end(),
+                   resfilter::ByKeep( ),                        // collect keeps from Pool to resolver queue
+                   functor::functorRef<bool,PoolItem>(info) );    
+    
     // List of installing/removing items of the complete run (not regarding a recycled solver run)
     PoolItemList _completeItems_to_install = _items_to_install;
     PoolItemList _completeItems_to_remove = _items_to_remove;
     PoolItemList _completeItems_to_lockUninstalled = _items_to_lockUninstalled;
+    PoolItemList _completeItems_to_keep = _items_to_keep;
 
     // We have to find a valid context in order to recycle it.
-    saveContext = contextPool.findContext (_items_to_install, _items_to_remove, _items_to_lockUninstalled);
+    saveContext = contextPool.findContext (_items_to_install, _items_to_remove, _items_to_lockUninstalled, _items_to_keep);
     // _items_to_install, _items_to_remove contains addition items which has been selected but are
     // not solved with that context. They will be solved now.
     // If we have not found any former fitting context, saveContext is NULL. So the solver
@@ -1342,7 +1363,9 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	show_pool( _pool );
 #endif
         // insert best_context in ContextPool for further solver runs
-        contextPool.addContext( solution,_completeItems_to_install, _completeItems_to_remove, _completeItems_to_lockUninstalled);
+        contextPool.addContext( solution,_completeItems_to_install, _completeItems_to_remove,
+				_completeItems_to_lockUninstalled,
+				_completeItems_to_keep);
 
     }
     else {

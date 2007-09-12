@@ -108,6 +108,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItemList _userDeleteItems;
     PoolItemList _userInstallItems;
     PoolItemList _userLockUninstalledItems;
+    PoolItemList _userKeepItems;    
 
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
@@ -199,9 +200,11 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void setUserDeleteItems ( const PoolItemList & deleteItems) { _userDeleteItems = deleteItems; }
     void setUserInstallItems ( const PoolItemList& installItems) { _userInstallItems = installItems; }
     void setUserLockUninstalledItems ( const PoolItemList& lockItems) { _userLockUninstalledItems = lockItems; }
+    void setUserKeepItems ( const PoolItemList& keepItems) { _userKeepItems = keepItems; }    
     PoolItemList userDeleteItems () { return _userDeleteItems; }
     PoolItemList userInstallItems () { return _userInstallItems; }
     PoolItemList userLockUninstalledItems () { return _userLockUninstalledItems; }
+    PoolItemList userKeepItems () { return _userKeepItems; }    
     
     // ---------------------------------- methods
 

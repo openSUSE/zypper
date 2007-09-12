@@ -110,6 +110,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_verify;
     PoolItemList _items_to_lockUninstalled;
+    PoolItemList _items_to_keep;    
 
     // pool of valid contexts which are "recycled" in order to fasten the solver
     ContextPool contextPool;
@@ -216,6 +217,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
     void addPoolItemToLockUninstalled (PoolItem_Ref item);
+    void addPoolItemToKepp (PoolItem_Ref item);
 
     void addPoolItemToRemove (PoolItem_Ref item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);

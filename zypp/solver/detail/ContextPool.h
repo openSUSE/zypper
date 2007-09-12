@@ -94,12 +94,14 @@ class ContextPool : public base::ReferenceCounted, private base::NonCopyable {
      * @param installItems List of items which are selected by the user
      * @param deleteItems List of items which are selected by the user
      * @param lockUninstalledItems List of items which are selected by the user
+     * @param keepItems List of items which are selected by the user
      *
      * */         
     void addContext (ResolverContext_Ptr context,
 		     const PoolItemList & installItems,
 		     const PoolItemList & deleteItems,
-		     const PoolItemList & lockUninstalledItems);
+		     const PoolItemList & lockUninstalledItems,
+		     const PoolItemList & keepItems);
     /** 
      * Find a solver result in order to use it for the next solver run.
      *
@@ -107,11 +109,13 @@ class ContextPool : public base::ReferenceCounted, private base::NonCopyable {
      * @param installItems List of items which are selected by the user
      * @param deleteItems List of items which are selected by the user
      * @param lockUninstalledItems List of items which are selected by the user
+     * @param keepItems List of items which are selected by the user     
      * @return solver context
      * */             
     ResolverContext_Ptr findContext (PoolItemList & installItems,
 				     PoolItemList & deleteItems,
-				     const PoolItemList & lockUninstalledItems);
+				     const PoolItemList & lockUninstalledItems,
+				     const PoolItemList & keepItems);
 
     /** 
      * Delete all sucessful solver run.

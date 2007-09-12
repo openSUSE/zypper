@@ -338,6 +338,16 @@ namespace zypp
       }
     };
 
+    /** Select PoolItem by keep. */
+    struct ByKeep : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isKept();
+      }
+    };
+      
+
 
     ///////////////////////////////////////////////////////////////////
 

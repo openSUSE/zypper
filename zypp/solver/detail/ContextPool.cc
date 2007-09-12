@@ -80,7 +80,8 @@ ContextPool::~ContextPool()
 void ContextPool::addContext (ResolverContext_Ptr context,
 			      const PoolItemList & installItems,
 			      const PoolItemList & deleteItems,
-			      const PoolItemList & lockUninstalledItems)
+			      const PoolItemList & lockUninstalledItems,
+			      const PoolItemList & keepItems)
 {
     if ((installItems.size() == 0
 	&& deleteItems.size() == 0)
@@ -93,7 +94,8 @@ void ContextPool::addContext (ResolverContext_Ptr context,
     
     new_context->setUserInstallItems (installItems);
     new_context->setUserDeleteItems (deleteItems);
-    new_context->setUserLockUninstalledItems (lockUninstalledItems);    
+    new_context->setUserLockUninstalledItems (lockUninstalledItems);
+    new_context->setUserKeepItems (keepItems);    
     
     if (contextList.size() <= 0) {
 	contextList.push_front (new_context);
@@ -156,6 +158,23 @@ void ContextPool::addContext (ResolverContext_Ptr context,
 		    }
 		}
 	    }
+
+	    // checking keep items
+	    left = (*it)->userKeepItems();
+	    right = context->userKeepItems();
+	    if (left.size() != right.size())
+		continue;
+	    found = true;	    
+	    for (PoolItemList::iterator itleft = left.begin();
+		 (itleft != left.end()) && found ; ++itleft) {
+		found = false;
+		for (PoolItemList::iterator itright = right.begin(); itright != right.end(); ++itright) {
+		    if (*itleft == *itright) {
+			found = true;
+			break;
+		    }
+		}
+	    }
 	    
 	    if (found) {
 		exists = true;
@@ -186,7 +205,9 @@ void ContextPool::addContext (ResolverContext_Ptr context,
     _XDEBUG("   deleted:");
     dumpTaskList (new_context->userDeleteItems());
     _XDEBUG("   locked:");
-    dumpTaskList (new_context->userLockUninstalledItems());    
+    dumpTaskList (new_context->userLockUninstalledItems());
+    _XDEBUG("   keep:");
+    dumpTaskList (new_context->userKeepItems());    
 #if 0
     _XDEBUG("CONTEXT : " << endl << *new_context );
 #endif
@@ -207,7 +228,8 @@ void ContextPool::addContext (ResolverContext_Ptr context,
 
 ResolverContext_Ptr ContextPool::findContext (PoolItemList & installItems,
 					      PoolItemList & deleteItems,
-					      const PoolItemList & lockUninstalledItems)
+					      const PoolItemList & lockUninstalledItems,
+					      const PoolItemList & keepItems)
 {
     // searching for context with same entries
     int counter = 1;
@@ -215,7 +237,8 @@ ResolverContext_Ptr ContextPool::findContext (PoolItemList & installItems,
 
 	PoolItemList contextInstall = (*it)->userInstallItems();
 	PoolItemList contextDelete = (*it)->userDeleteItems();
-	PoolItemList contextLockUninstalled = (*it)->userLockUninstalledItems();		
+	PoolItemList contextLockUninstalled = (*it)->userLockUninstalledItems();
+	PoolItemList contextKeep = (*it)->userKeepItems();			
 	
 	_XDEBUG("ContextPool::findContext() trying " << counter++ << ". of " <<  contextList.size() );	
 	_XDEBUG("   comparing");
@@ -225,6 +248,9 @@ ResolverContext_Ptr ContextPool::findContext (PoolItemList & installItems,
 	dumpTaskList (contextDelete);
 	_XDEBUG("      lockedUninstalled:");	
 	dumpTaskList (contextLockUninstalled);
+	_XDEBUG("      keep:");	
+	dumpTaskList (contextKeep);
+	
 	
 	_XDEBUG("   with needed");
 	_XDEBUG("      installed:");
@@ -233,10 +259,13 @@ ResolverContext_Ptr ContextPool::findContext (PoolItemList & installItems,
 	dumpTaskList (deleteItems);
 	_XDEBUG("      lockedUninstalled:");	
 	dumpTaskList (lockUninstalledItems);
+	_XDEBUG("      keep:");	
+	dumpTaskList (keepItems);
 	
 	if (contextInstall.size() > installItems.size()
 	    || contextDelete.size() > deleteItems.size()
-	    || contextLockUninstalled.size() != lockUninstalledItems.size())
+	    || contextLockUninstalled.size() != lockUninstalledItems.size()
+	    || contextKeep.size() != keepItems.size())
 	    continue; // cannot fit at all
 
 	bool found = true;	    	
@@ -256,6 +285,21 @@ ResolverContext_Ptr ContextPool::findContext (PoolItemList & installItems,
 	    }
 	}
 	if (!found) continue;
+
+	// check if the keep items are the same.
+	// If not --> try the next context
+	for (PoolItemList::iterator itContext = contextKeep.begin();
+	     (itContext != contextKeep.end()) && found; ++itContext) {
+	    found = false;
+	    for (PoolItemList::const_iterator itInstall = keepItems.begin();
+		 itInstall != keepItems.end(); ++itInstall) {
+		if (*itContext == *itInstall) {
+		    found = true;
+		    break;
+		}
+	    }
+	}
+	if (!found) continue;	
 
 	// checking items which will be installed
 	PoolItemList addInsItems = installItems;
