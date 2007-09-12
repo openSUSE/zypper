@@ -83,7 +83,7 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-     handle( asKind<Package>( obj_r ) );
+//      handle( asKind<Package>( obj_r ) );
 //     handle( asKind<Patch>( obj_r ) );
 //     handle( asKind<Pattern>( obj_r ) );
 //     handle( asKind<Product>( obj_r ) );
@@ -372,6 +372,19 @@ namespace zypp
 
 using namespace zypp;
 
+void tt( std::string dd )
+{
+  unsigned level = 3;
+  std::string::size_type pos = dd.find( "/" );
+  while ( --level && pos != std::string::npos )
+  {
+    pos = dd.find( "/", pos+1 );
+  }
+  if ( pos != std::string::npos )
+    dd.erase( pos+1 );
+  DBG << dd << "\t" << level << " " << pos << endl;
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -385,6 +398,19 @@ int main( int argc, char * argv[] )
 
   DigestReceive foo;
   KeyRingSignalsReceive baa;
+
+  DiskUsageCounter::MountPointSet fakePart;
+  fakePart.insert( DiskUsageCounter::MountPoint( "/",        1024, 10240, 5120, 0LL, false ) );
+//   fakePart.insert( DiskUsageCounter::MountPoint( "/usr",     1024, 10240, 5120, 0LL, false ) );
+  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/lib", 1024, 10240, 5120, 0LL, false ) );
+  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/bin", 1024, 10240, 5120, 0LL, false ) );
+  getZYpp()->setPartitions( fakePart );
+
+  ResPool pool( getZYpp()->pool() );
+  vdumpPoolStats( USR << "Initial pool:" << endl,
+		  pool.begin(),
+		  pool.end() ) << endl;
+
 
   RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
   RepoInfoList repos = repoManager.knownRepositories();
@@ -408,11 +434,6 @@ int main( int argc, char * argv[] )
     SEC << "------" << endl;
     repos = repoManager.knownRepositories();
   }
-
-  ResPool pool( getZYpp()->pool() );
-  vdumpPoolStats( USR << "Initial pool:" << endl,
-		  pool.begin(),
-		  pool.end() ) << endl;
 
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
@@ -448,7 +469,7 @@ int main( int argc, char * argv[] )
   if ( 1 )
   {
     {
-      zypp::base::LogControl::TmpLineWriter shutUp;
+       zypp::base::LogControl::TmpLineWriter shutUp;
       //getZYpp()->initTarget( sysRoot );
       getZYpp()->initTarget( "/" );
     }
@@ -456,10 +477,6 @@ int main( int argc, char * argv[] )
   }
 
   std::for_each( pool.begin(), pool.end(), Xprint() );
-
-  DiskUsageCounter::MountPointSet fakePart;
-  fakePart.insert( DiskUsageCounter::MountPoint( "/", 1024, 10240, 5120, 0LL, false ) );
-  getZYpp()->setPartitions( fakePart );
 
   USR << getZYpp()->getPartitions() << endl;
   INT << getZYpp()->diskUsage() << endl;
@@ -471,12 +488,31 @@ int main( int argc, char * argv[] )
   dbgDu( sel );
 
   MIL << sel->set_status( ui::S_Update ) << endl;
+//   sel->installedPoolItem().status().setTransact( true, ResStatus::SOLVER );
   dbgDu( sel );
 
   MIL << sel->set_status( ui::S_KeepInstalled ) << endl;
   dbgDu( sel );
 
-  ///////////////////////////////////////////////////////////////////
+  sel = getSel<Package>( "balsa" );
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_Install ) << endl;
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_NoInst ) << endl;
+  dbgDu( sel );
+
+  sel = getSel<Package>( "libtunepimp" );
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_Del ) << endl;
+  dbgDu( sel );
+
+  MIL << sel->set_status( ui::S_KeepInstalled ) << endl;
+  dbgDu( sel );
+
+ ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
