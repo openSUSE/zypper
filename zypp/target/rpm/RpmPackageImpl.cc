@@ -56,7 +56,6 @@ RPMPackageImpl::RPMPackageImpl(
   // we know we are reading english.
   _description.setText(data->tag_description(), Locale("en"));
   data->tag_du(_disk_usage);
-  SEC << _disk_usage << endl;
   _location.setDownloadSize(data->tag_archivesize());
 }
 
