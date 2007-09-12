@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Sep 12 11:40:35 CEST 2007 - jkupec@suse.cz
+
+- make package selection by name (--name) the default for
+  install/remove commands (due to many bug reports)
+- --capability added to install/remove commands to select packages
+  by capability
+- r7198
+
+-------------------------------------------------------------------
 Tue Sep 11 13:04:04 CEST 2007 - jkupec@suse.cz
 
 - always display name instead of alias (except for the renamerepo
