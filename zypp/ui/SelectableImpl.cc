@@ -94,7 +94,15 @@ namespace zypp
           {
 	      if ( inst ) {
 		  inst.status().setTransact( false, ResStatus::USER );
-		  inst.status().setLock( false, ResStatus::USER );
+		  inst.status().setLock    ( false, ResStatus::USER );
+                  if ( ! cand->installOnly() )
+                  {
+                    // This is what the solver most probabely will do.
+                    // If we are wrong the solver will correct it. But
+                    // this way we will get a better disk usage result,
+                    // even if no autosolving is on.
+                    inst.status().setTransact( true,  ResStatus::SOLVER );
+                  }
 	      }
               unlockCandidates();
 	      return cand.status().setTransact( true, ResStatus::USER );
