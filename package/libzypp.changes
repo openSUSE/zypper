@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 12 12:24:49 CEST 2007 - jkupec@suse.cz
+
+- report 100% progress on finishing RPM removal (bug #309431)
+- revision 7200
+
+-------------------------------------------------------------------
 Tue Sep 11 17:25:35 CEST 2007 - schubi@suse.de
 
 - Update: rename language packages --> take that package which fits to the
