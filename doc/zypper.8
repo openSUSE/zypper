@@ -47,15 +47,20 @@ A resolvable is a package, patch, pattern, language, or a product.
 Displays full info for the specified packages.
 
 .TP
-.B install (in) [options] <capability> ...
-Install or update resolvables.
+.B install (in) [options] <name> ...
+.TP
+.B install (in) [options] --capability <capability> ...
+Install or update packages or other resolvables.
 
-Capability is: NAME, or "NAME[OP<EDITION>]", where OP is < <= = >= > and
+The resolvables can be selected by their name or by a capability they provide.
+
+Capability is: NAME, or "NAME[OP<EDITION>]", where OP is <, <=, =, >=, or > and
 EDITION is VERSION[-RELEASE], for example: zypper=0.8.8-2.
 
-Names are not only package names but any symbols provided by packages:
-/bin/vi, libcurl.so.3, perl(Time::ParseDate). Just remember to quote to protect the
-special characters from the shell, for example: zypper\\>0.8.10 or 'zypper>0.8.10'
+The NAME component of a capability is not only a package name but any symbol
+provided by packages: /bin/vi, libcurl.so.3, perl(Time::ParseDate).
+Just remember to quote to protect the special characters from the shell,
+for example: zypper\\>0.8.10 or 'zypper>0.8.10'
 
 If EDITION is not specified, the newest available version will be installed.
 This also means that if the package is already installed and newer versions
@@ -69,7 +74,10 @@ Install resolvables only from the repository specified by the alias.
 Type of resolvable (default: package)
 .TP
 .I \-n, \-\-name
-Select resolvables by older method, considering just names, not capabilities.
+Select resolvables by their name (default).
+.TP
+.I \-n, \-\-capability
+Select resolvables by capabilities.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
@@ -100,10 +108,14 @@ See also the NOTE at
 .BR update .
 
 .TP
-.B remove (rm) <capability> ...
-Remove resolvables.
-.PP
-Capability is usually a plain name, for details see the install command.
+.B remove (rm) [options] <name> ...
+.TP
+.B remove (rm) [options] --capability <capability> ...
+Remove packages or other resolvables.
+
+The resolvables can be selected by their name or by a capability they provide.
+For details see the install command
+
 .TP
 \fI\-r, \-\-repo\fR <alias>
 Operate only with resolvables from repository specified by alias.
@@ -112,16 +124,19 @@ Operate only with resolvables from repository specified by alias.
 Type of resolvable (default: package)
 .TP
 .I \-n, \-\-name
-Select resolvables by older method, considering just names, not capabilities.
+Select resolvables by their name (default).
+.TP
+.I \-n, \-\-capability
+Select resolvables by capabilities.
 .TP
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 
 .TP
 .B update (up) [options]
-Update all installed resolvables with newer versions, where applicable. To
-update individual packages, use zypper install <name> (see documentation of
-the install command for details).
+Update all installed packages or other resolvables with patches or their
+newer versions, where applicable. To update individual packages, use zypper
+install <name> (see documentation of the install command for details).
 
 .TP
 \fI\-t, -\-type\fR <resolvable_type>

@@ -274,8 +274,10 @@ int one_command(int argc, char **argv)
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
-      {"type",	                    required_argument, 0, 't'},
-      {"name",			    no_argument,       0, 'n'},
+      {"type",                      required_argument, 0, 't'},
+      // the default (ignored)
+      {"name",                      no_argument,       0, 'n'},
+      {"capability",                no_argument,       0, 'n'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm",                no_argument,       0, 'y'}, 
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -289,6 +291,7 @@ int one_command(int argc, char **argv)
     // TranslatorExplanation don't translate the resolvable types
     // (package, patch, pattern, product) or at least leave also their
     // originals, since they are expected untranslated on the command line
+    //! \todo document --capability after 10.3 is out
     specific_help = _(
       "install (in) [options] <capability> ...\n"
       "\n"
@@ -310,7 +313,9 @@ int one_command(int argc, char **argv)
       // rug compatibility option, we have --repo
       {"catalog",    required_argument, 0, 'c'},
       {"type",       required_argument, 0, 't'},
-      {"name",	     no_argument,       0, 'n'},
+      // the default (ignored)
+      {"name",       no_argument,       0, 'n'},
+      {"capability", no_argument,       0, 'n'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
@@ -318,6 +323,7 @@ int one_command(int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
+    //! \todo document --capability after 10.3 is out
     specific_help = _(
       "remove (rm) [options] <capability> ...\n"
       "\n"
@@ -1115,12 +1121,15 @@ int one_command(int argc, char **argv)
     cond_load_resolvables();
 
     bool install_not_remove = command == ZypperCommand::INSTALL;
-    bool just_name = copts.count("name"); // compatibility method
-    for ( vector<string>::const_iterator it = arguments.begin(); it != arguments.end(); ++it ) {
-      if (just_name)
-	mark_by_name (install_not_remove, kind, *it);
+    bool by_capability = false; // install by name by default
+    if (copts.count("capability"))
+      by_capability = true;
+    for ( vector<string>::const_iterator it = arguments.begin();
+          it != arguments.end(); ++it ) {
+      if (by_capability)
+        mark_by_capability (install_not_remove, kind, *it);
       else
-	mark_by_capability (install_not_remove, kind, *it);
+        mark_by_name (install_not_remove, kind, *it);
     }
 
     if (copts.count("debug-solver"))
