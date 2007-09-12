@@ -27,6 +27,7 @@
 
 #include "zypp/repo/SUSEMediaVerifier.h"
 #include "zypp/repo/RepoException.h"
+#include "zypp/FileChecker.h"
 
 using std::endl;
 using std::set;
@@ -257,7 +258,7 @@ namespace zypp
               err << "]";
 
               if ( policy_r.failOnChecksumError() )
-                ZYPP_THROW( Exception( err.str() ) );
+                ZYPP_THROW( FileCheckException( err.str() ) );
               else
                 WAR << "NO failOnChecksumError: " << err.str() << endl;
             }
