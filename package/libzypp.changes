@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 13 11:30:47 CEST 2007 - duncan@suse.de
+
+- Throw specific exceptions during commit (#308511)
+- 3.23.1
+
+-------------------------------------------------------------------
 Wed Sep 12 18:48:00 CEST 2007 - ma@suse.de
 
 - Various disk space calculation fixes. Susetags, plaindir and rpmdb
