@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 13 13:02:39 CEST 2007 - lslezak@suse.cz
+
+- ZYppImpl::getPartitions() - don't return the current partitioning
+  when the partitioning hasn't been set - fixes DU parsing in
+  inst-sys (#308659)
+
+-------------------------------------------------------------------
 Thu Sep 13 11:30:47 CEST 2007 - duncan@suse.de
 
 - Throw specific exceptions during commit (#308511)
