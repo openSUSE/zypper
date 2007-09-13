@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2006-05-31 14:44\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
+"PO-Revision-Date: 2007-09-10 10:56-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,8 @@ msgstr "Componente inválido %s"
 msgid "Path parameter parsing not supported for this URL"
 msgstr "A análise de parâmetros de caminho não é suportada para este URL"
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "A análise de strings de consulta não é suportada para este URL"
 
@@ -84,7 +85,8 @@ msgstr "Componente de porta inválido '%s'"
 msgid "Url scheme requires path name"
 msgstr "O esquema de Url requer nome de caminho"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "Caminho relativo não permitido se existir autoridade"
 
@@ -110,9 +112,8 @@ msgstr "Caractere separador de integração de matriz de parâmetros inválido"
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: ../zypp/base/Exception.cc:89
-#, fuzzy
 msgid "History:"
-msgstr "XF86History"
+msgstr "Histórico"
 
 #: ../zypp/repo/PackageProvider.cc:237
 msgid "applydeltarpm check failed."
@@ -154,12 +155,14 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:715 ../zypp/media/MediaCurl.cc:784
+#: ../zypp/media/MediaCurl.cc:715
+#: ../zypp/media/MediaCurl.cc:784
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "Senha de CA inválida."
 
-#: ../zypp/media/MediaCurl.cc:718 ../zypp/media/MediaCurl.cc:787
+#: ../zypp/media/MediaCurl.cc:718
+#: ../zypp/media/MediaCurl.cc:787
 #, fuzzy, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autenticação Necessária"
@@ -212,7 +215,8 @@ msgstr "Impossível clonar objeto Url"
 msgid "Invalid empty Url object reference"
 msgstr "Referência a objeto Url vazio inválida"
 
-#: ../zypp/Url.cc:321 ../zypp/Url.cc:335
+#: ../zypp/Url.cc:321
+#: ../zypp/Url.cc:335
 msgid "Unable to parse Url components"
 msgstr "Impossível analisar os componentes do Url"
 
@@ -222,7 +226,8 @@ msgstr "Idioma desconhecido:"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Sem Código"
 
@@ -287,7 +292,8 @@ msgid "Akkadian"
 msgstr "Acadiano"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "Albanês"
 
@@ -337,7 +343,8 @@ msgid "Aragonese"
 msgstr "Aragonês"
 
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "Armênio"
 
@@ -437,7 +444,8 @@ msgid "Balinese"
 msgstr "Balinês"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "Basco"
 
@@ -547,7 +555,8 @@ msgid "Bulgarian"
 msgstr "Búlgaro"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "Birmanês"
 
@@ -612,7 +621,8 @@ msgid "Chagatai"
 msgstr "Chagatai"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "Chinês"
 
@@ -722,7 +732,8 @@ msgid "Cushitic (Other)"
 msgstr "Cuchita (Outros)"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "Tcheco"
 
@@ -797,7 +808,8 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr "Holandês Medieval (aprox. 1050-1350)"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "Holandês"
 
@@ -902,7 +914,8 @@ msgid "Fon"
 msgstr "Fon"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "Francês"
 
@@ -952,12 +965,14 @@ msgid "Germanic (Other)"
 msgstr "Germânico (Outros)"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "Georgiano"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "Alemão"
 
@@ -1027,7 +1042,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "Grego Antigo (até 1453)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "Grego Moderno (1453-Presente)"
 
@@ -1132,7 +1148,8 @@ msgid "Igbo"
 msgstr "Ibo"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "Islandês"
 
@@ -1502,7 +1519,8 @@ msgid "Lushai"
 msgstr "Lushai"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "Macedônio"
 
@@ -1542,7 +1560,8 @@ msgid "Mandingo"
 msgstr "Mandinga"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "Maori"
 
@@ -1562,7 +1581,8 @@ msgid "Masai"
 msgstr "Massai"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "Malaio"
 
@@ -1703,7 +1723,8 @@ msgstr "Napolitano"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:380
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "Nauruano"
 
@@ -1903,7 +1924,8 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "Persa Antigo (aprox. 600-400 A.C.)"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "Persa"
 
@@ -1988,7 +2010,8 @@ msgid "Romany"
 msgstr "Romani"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "Romeno"
 
@@ -2048,7 +2071,8 @@ msgid "Santali"
 msgstr "Santali"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "Sérvio"
 
@@ -2063,7 +2087,8 @@ msgid "Scots"
 msgstr "Escocês"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "Croata"
 
@@ -2118,7 +2143,8 @@ msgid "Slavic (Other)"
 msgstr "Eslavo (Outros)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "Eslovaco"
 
@@ -2313,7 +2339,8 @@ msgid "Thai"
 msgstr "Tai"
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "Tibetano"
 
@@ -2334,7 +2361,8 @@ msgstr "Tiv"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:428
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -2410,7 +2438,8 @@ msgstr "Altaico (Outros)"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "Tuvaluano"
 
@@ -2510,7 +2539,8 @@ msgid "Washo"
 msgstr "Washo"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "Galês"
 
@@ -2594,7 +2624,8 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zunhi"
 
-#: ../zypp/ZYppFactory.cc:279 ../zypp/ZYppFactory.cc:334
+#: ../zypp/ZYppFactory.cc:279
+#: ../zypp/ZYppFactory.cc:334
 msgid "Software management is already running."
 msgstr "Gerenciamento de software já em execução."
 
@@ -2634,7 +2665,8 @@ msgstr "Impossível inicializar contexto HAL -- hald não está em execução?"
 msgid "Not a CDROM drive"
 msgstr "Não é uma unidade de CDROM"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Exceção de Hal"
@@ -2685,7 +2717,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "Falha na instalação de %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1957 ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:1957
+#: ../zypp/target/rpm/RpmDb.cc:2075
 msgid "rpm output:"
 msgstr "saída de rpm:"
 
@@ -2696,7 +2729,8 @@ msgstr "saída de rpm:"
 msgid "%s installed ok"
 msgstr "%s instalado com êxito"
 
-#: ../zypp/target/rpm/RpmDb.cc:1966 ../zypp/target/rpm/RpmDb.cc:2083
+#: ../zypp/target/rpm/RpmDb.cc:1966
+#: ../zypp/target/rpm/RpmDb.cc:2083
 msgid "Additional rpm output:"
 msgstr "Saída de rpm adicional:"
 
@@ -3755,7 +3789,8 @@ msgstr "Ilhas Cocos (Keeling)"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:255
+#: ../zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "Congo"
 
@@ -4823,83 +4858,59 @@ msgstr ""
 #, fuzzy
 #~ msgid "%s is freshened by %s"
 #~ msgstr "%s é necessário a %s"
-
 #~ msgid "Unable to parse Url authority"
 #~ msgstr "Impossível analisar a autoridade do Url"
-
 #~ msgid "Ignore this requirement generally"
 #~ msgstr "Ignorar este requisito genericamente"
-
 #~ msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 #~ msgstr "%s é necessário a outro resolvível a ser instalado; por isso, não será desvinculado."
-
 #~ msgid "Cannot create a file needed to perform update installation."
 #~ msgstr "Impossível criar um arquivo necessário para executar a atualização da instalação."
-
 #~ msgid "Unable to restore all sources."
 #~ msgstr "Não é possível restaurar todas as fontes."
-
 #~ msgid "At least one source already registered, stored sources cannot be restored."
 #~ msgstr "Pelo menos uma fonte já registrada, as fontes armazenadas não podem ser restauradas."
-
 #~ msgid "Cannot be install %s to fulfil the dependencies of %s"
 #~ msgstr "Não é possível instalar %s para preencher as dependências de %s"
-
 #~ msgid "%s dependend on %s"
 #~ msgstr "%s dependente de %s"
-
 #~ msgid "Reading index files"
 #~ msgstr "Lendo os arquivos de índice"
-
 #~ msgid "The signed repomd.xml file failed the signature check."
 #~ msgstr "Falha do arquivo repomd.xml assinado na verificação de assinatura."
-
 #~ msgid "Reading product from %s"
 #~ msgstr "Lendo o produto a partir de %s"
-
 #~ msgid "Reading filelist from %s"
 #~ msgstr "Lendo a lista de arquivos a partir de %s"
-
 #~ msgid "Reading packages from %s"
 #~ msgstr "Lendo pacotes a partir de %s"
-
 #~ msgid "Reading selection from %s"
 #~ msgstr "Lendo a seleção a partir de %s"
-
 #~ msgid "Reading pattern from %s"
 #~ msgstr "Lendo o padrão a partir de %s"
-
 #~ msgid "Reading patches index %s"
 #~ msgstr "Lendo o índice de patches %s"
-
 #~ msgid "Reading patch %s"
 #~ msgstr "Lendo o patch %s"
-
 #~ msgid "The script file failed the checksum test."
 #~ msgstr "Falha do arquivo de script no teste de checksum."
-
 #~ msgid "Reading packages file"
 #~ msgstr "Lendo o arquivo de pacotes"
 
 # progress indicator label
 #~ msgid "Reading translation: %s"
 #~ msgstr "Lendo a tradução: %s"
-
 #, fuzzy
 #~ msgid "Package %s fails integrity check. Do you want to retry, or abort installation?"
 #~ msgstr "Falha na verificação de integridade do pacote %s. Deseja repetir o download ou interromper a instalação?"
-
 #~ msgid " miss checksum."
 #~ msgstr " checksum ausente."
-
 #~ msgid " fails checksum verification."
 #~ msgstr " falha na verificação do checksum."
-
 #~ msgid "Downloading %s"
 #~ msgstr "Fazendo o download de %s"
-
 #~ msgid "Downloaded %s from %s"
 #~ msgstr "Foi feito o download de %s a partir de %s"
-
 #~ msgid "%s needed by %s"
 #~ msgstr "%s exigido por %s"
+

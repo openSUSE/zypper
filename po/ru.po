@@ -148,12 +148,12 @@ msgstr "Не удается предоставить файл %s из репоз
 #: ../zypp/repo/cached/RepoImpl.cc:73
 #, c-format
 msgid "Reading '%s' repository cache"
-msgstr "Читается кэш репозитария '%s'"
+msgstr "Читается кеш репозитария '%s'"
 
 #: ../zypp/repo/cached/RepoImpl.cc:194
 #, c-format
 msgid "Reading patch and delta rpms from '%s' repository cache"
-msgstr "Читаются исправления и delta rpm из '%s' кэша репозитария"
+msgstr "Читаются исправления и delta rpm из '%s' кеша репозитария"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -172,7 +172,7 @@ msgstr "Необходима аутентификация для '%s'"
 #: ../zypp/RepoManager.cc:115
 #, c-format
 msgid "Cleaning repository '%s' cache"
-msgstr "Очищается кэш репозитария '%s'"
+msgstr "Очищается кеш репозитария '%s'"
 
 #. we will throw this later if no URL checks out fine
 #: ../zypp/RepoManager.cc:521
@@ -182,13 +182,13 @@ msgstr "Действующие метаданные не найдены по у�
 #: ../zypp/RepoManager.cc:677
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr "Собирается кэш репозитария '%s'"
+msgstr "Собирается кеш репозитария '%s'"
 
 #. progress.sendTo( progressrcv );
 #: ../zypp/RepoManager.cc:822
 #, c-format
 msgid "Reading repository '%s' cache"
-msgstr "Читается кэш репозитария '%s'"
+msgstr "Читается кеш репозитария '%s'"
 
 #: ../zypp/RepoManager.cc:912
 #, c-format
