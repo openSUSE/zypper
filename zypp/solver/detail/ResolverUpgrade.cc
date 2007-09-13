@@ -612,7 +612,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       if ( !toadd.size() ) {
 	INT << "Empty SplitPkgMap entry for " << installed << endl;
       } else {
-	FindMap candidate;  
+	FindMap candidate;
 	for ( PoolItemOrderSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
 	    PoolItem_Ref split_candidate = *ait;
 	    if ( probably_dropped
@@ -621,7 +621,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    {
 		probably_dropped = false;
 	    }
-	    
+
 	    FindMap::iterator itcandidate = candidate.find( split_candidate->name() );
 
 	    if (itcandidate != candidate.end()) {	// split canidate with the same name found
@@ -641,11 +641,11 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		    if (itcandidate->second->arch() != installed->arch()
 			&& split_candidate->arch() == installed->arch() ) {
 			// prefer candidate which the same architecture as the installed item
-			itcandidate->second = split_candidate;			
+			itcandidate->second = split_candidate;
 		    } else {
 			int cmp = itcandidate->second->arch().compare( split_candidate->arch() );
 			if (cmp < 0) {						// new provider has better arch
-			    itcandidate->second = split_candidate;						
+			    itcandidate->second = split_candidate;
 			}
 			else if (cmp == 0) {					// new provider has equal arch
 			    if (itcandidate->second->edition().compare( split_candidate->edition() ) < 0) {
@@ -659,13 +659,13 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		candidate[split_candidate->name()] = split_candidate;
 	    }
 	}
-	
+
 	PoolItemOrderSet addcandidate;
 	for (FindMap::iterator itcandidate = candidate.begin() ; itcandidate != candidate.end(); itcandidate++) {
 	    addcandidate.insert(itcandidate->second);
 	    MIL << " ==> ADD (splitted): " << itcandidate->second << endl;
 	}
-	    
+
 	addSplitted[installed] = addcandidate;
       }
       // count stats later
@@ -676,7 +676,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     ///////////////////////////////////////////////////////////////////
 
     if ( probably_dropped ) {
-      if ( opt_stats_r.delete_unmaintained ) {
+      if ( opt_stats_r.delete_unmaintained
+           && VendorAttr::instance().equivalent( installed->vendor(), "suse" ) ) {
 	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
       ++opt_stats_r.chk_dropped;
@@ -776,7 +777,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	}
       }
     }
-    
+
     if ( guess ) {
 	// Checking if the selected provider depends on language, if yes try to find out the
 	// correct language package
@@ -794,7 +795,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if (requested_locale_match) {
 	    // searching the best language
 	    PoolItemOrderSet & gset( it->second );
-	    requested_locale_match = false;	    
+	    requested_locale_match = false;
 
 	    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
 		PoolItem_Ref item (*git);

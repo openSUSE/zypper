@@ -48,6 +48,35 @@ using zypp::parser::TagParser;
 static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
+bool queryInstalledEditionHelper( const std::string & name_r,
+                                  const Edition &     ed_r,
+                                  const Arch &        arch_r ) const
+{
+  INT << name_r << "-" << ed_r <<< "." < arch_r << endl;
+  return false;
+}
+
+ManagedFile repoProvidePackage( const PoolItem & pi )
+{
+  ResPool _pool( getZYpp()->pool() );
+  repo::RepoMediaAccess _access;
+
+  // Redirect PackageProvider queries for installed editions
+  // (in case of patch/delta rpm processing) to rpmDb.
+  repo::PackageProviderPolicy packageProviderPolicy;
+  packageProviderPolicy.queryInstalledCB( queryInstalledEditionHelper );
+
+  Package::constPtr p = asKind<Package>(pi.resolvable());
+
+  // Build a repository list for repos
+  // contributing to the pool
+  std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
+  repo::DeltaCandidates deltas(repos);
+  repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
+  return pkgProvider.providePackage();
+}
+
+///////////////////////////////////////////////////////////////////
 
 template<class _Res>
 Selectable::Ptr getSel( const std::string & name_r )
@@ -60,6 +89,36 @@ Selectable::Ptr getSel( const std::string & name_r )
   }
   return 0;
 }
+
+template<class _Res>
+Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
+{
+  ResPoolProxy uipool( getZYpp()->poolProxy() );
+  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
+  {
+    if ( (*it)->name() == name_r )
+      return (*it);
+  }
+  return 0;
+}
+template<class _Res>
+Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r )
+{
+  return getPi<_Res>( name_r, Edition(), Arch() );
+}
+template<class _Res>
+Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r )
+{
+  return getPi<_Res>( name_r, ed_r, Arch() );
+}
+template<class _Res>
+Selectable::Ptr getPi( const std::string & name_r, const Arch & arch_r )
+{
+  return getPi<_Res>( name_r, Edition(), arch_r );
+}
+
+
+
 
 void dbgDu( Selectable::Ptr sel )
 {
@@ -78,12 +137,12 @@ void dbgDu( Selectable::Ptr sel )
 }
 
 ///////////////////////////////////////////////////////////////////
-
+RepoProvidePackage repoProvidePackage( access, pool_r);
 struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-//      handle( asKind<Package>( obj_r ) );
+//     handle( asKind<Package>( obj_r ) );
 //     handle( asKind<Patch>( obj_r ) );
 //     handle( asKind<Pattern>( obj_r ) );
 //     handle( asKind<Product>( obj_r ) );
@@ -476,41 +535,11 @@ int main( int argc, char * argv[] )
     MIL << "Added target: " << pool << endl;
   }
 
-  std::for_each( pool.begin(), pool.end(), Xprint() );
+  //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-  USR << getZYpp()->getPartitions() << endl;
-  INT << getZYpp()->diskUsage() << endl;
+  PoolItem pi(
 
-  Selectable::Ptr sel( getSel<Package>( "rpm" ) );
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_Del ) << endl;
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_Update ) << endl;
-//   sel->installedPoolItem().status().setTransact( true, ResStatus::SOLVER );
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_KeepInstalled ) << endl;
-  dbgDu( sel );
-
-  sel = getSel<Package>( "balsa" );
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_Install ) << endl;
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_NoInst ) << endl;
-  dbgDu( sel );
-
-  sel = getSel<Package>( "libtunepimp" );
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_Del ) << endl;
-  dbgDu( sel );
-
-  MIL << sel->set_status( ui::S_KeepInstalled ) << endl;
-  dbgDu( sel );
+  ManagedFile
 
  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

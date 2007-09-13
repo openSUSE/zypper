@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 13 17:59:55 CEST 2007 - ma@suse.de
+
+- On update do not delete unmaintained non-SuSE packages.
+- version 3.23.2
+
+-------------------------------------------------------------------
 Thu Sep 13 13:02:39 CEST 2007 - lslezak@suse.cz
 
 - ZYppImpl::getPartitions() - don't return the current partitioning
