@@ -6,7 +6,7 @@ Thu Sep 13 13:02:39 CEST 2007 - lslezak@suse.cz
   inst-sys (#308659)
 
 -------------------------------------------------------------------
-Thu Sep 13 11:30:47 CEST 2007 - duncan@suse.de
+Thu Sep 13 11:30:47 CEST 2007 - dmacvicar@suse.de
 
 - Throw specific exceptions during commit (#308511)
 - 3.23.1
