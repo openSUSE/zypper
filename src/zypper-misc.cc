@@ -1371,7 +1371,7 @@ int solve_and_commit () {
 
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
   int retv = show_summary();
-
+  bool was_installed = false;
   if (retv >= 0) { // there are resolvables to install/uninstall
     if (read_bool_answer(_("Continue?"), true)) {
 
@@ -1385,6 +1385,7 @@ int solve_and_commit () {
 
         // FIXME do resync if in shell mode, how do I know if in shell mode?
         ZYppCommitResult result = God->commit( ZYppCommitPolicy().syncPoolAfterCommit(false) );
+        was_installed = true;
 
         gData.show_media_progress_hack = false; 
 
@@ -1427,21 +1428,24 @@ int solve_and_commit () {
 
   if (retv < 0)
     retv = ZYPPER_EXIT_OK;
-  else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
+  else if (was_installed)
   {
-    if (gSettings.machine_readable)
-      cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
-          " your machine. Please, do it as soon as possible.") << "</message>" << endl;
-    else
-      cout << _("WARNING: One of installed patches requires a reboot of"
-          " your machine. Please do it as soon as possible.") << endl;
-  }
-  else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
-  {
-    if (!gSettings.machine_readable)
-      cout << _("WARNING: One of installed patches affects the package"
-          " manager itself, thus it requires its restart before executing"
-          " any further operations.") << endl;
+    if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
+    {
+      if (gSettings.machine_readable)
+        cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
+            " your machine. Please, do it as soon as possible.") << "</message>" << endl;
+      else
+        cout << _("WARNING: One of installed patches requires a reboot of"
+            " your machine. Please do it as soon as possible.") << endl;
+    }
+    else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
+    {
+      if (!gSettings.machine_readable)
+        cout << _("WARNING: One of installed patches affects the package"
+            " manager itself, thus it requires its restart before executing"
+            " any further operations.") << endl;
+    }
   }
 
   return retv;
