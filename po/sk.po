@@ -1,17 +1,15 @@
-# translation of zypper.sk.po to Slovak
 # Slovak language translation of zypper messages.
 #
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
 # Ján Kupec <jkupec@suse.cz>, 2007.
-# Jan Kupec <jkupec@suse.cz>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.sk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-12 14:53+0200\n"
-"Last-Translator: Jan Kupec <jkupec@suse.cz>\n"
+"PO-Revision-Date: 2007-09-14 15:12+0200\n"
+"Last-Translator:  <jkupec@suse.cz>\n"
 "Language-Team: Slovak\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -621,24 +619,23 @@ msgid "Repository '%s' not found."
 msgstr "Repositár '%s' nebol nájdený."
 
 #: ../src/zypper-sources.cc:228
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading repository description file for '%s'."
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "Chyba pri čítaní popisného súboru repozitára '%s'."
 
 #: ../src/zypper-sources.cc:230
-#, fuzzy
 msgid "Reason: "
-msgstr "Verzia: "
+msgstr "Dôvod: "
 
 #: ../src/zypper-sources.cc:257
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr ""
+msgstr "Dočasne vypínam repozitár '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/zypper-sources.cc:275
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr ""
+msgstr "Repozitár '%s' nie je aktuálny. Aktualizovať ho môžete pomocou príkazu 'zypper refresh'."
 
 #: ../src/zypper-sources.cc:316 ../src/zypper-sources.cc:357
 #: ../src/zypper-search.h:297
@@ -673,7 +670,7 @@ msgstr "Obnoviť"
 # printers.ycp.noloc:1270
 #: ../src/zypper-sources.cc:357
 msgid "Alias"
-msgstr "alias"
+msgstr "Alias"
 
 #. enabled?
 #. autorefresh?
@@ -693,255 +690,242 @@ msgstr "Nie"
 
 #: ../src/zypper-sources.cc:391
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr ""
+msgstr "Nie sú definované žiadne repozitáre. Pridajte jeden alebo viac repozitárov pomocou príkazu 'zypper addrepo'."
 
 #: ../src/zypper-sources.cc:424 ../src/zypper-sources.cc:495
-#, fuzzy
 msgid "Error reading repositories:"
-msgstr "Chyba pri čítaní sektoru %u."
+msgstr "Chyba pri čítaní repozitárov:"
 
 #: ../src/zypper-sources.cc:446
 #, c-format
 msgid "Can't open %s for writing. Maybe you don't have write permissions?"
-msgstr ""
+msgstr "Nemôžem otvoriť súbor '%s' pre zápis. Pravdepodobne nemáte práva na zápis."
 
 #: ../src/zypper-sources.cc:454
-#, fuzzy, c-format
+#, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "Všetky repozitáre boli úspešne vyexportované do súboru '%s'."
 
 #: ../src/zypper-sources.cc:551
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr ""
+msgstr "Vynechávam vypnutý repozitár '%s'"
 
 #: ../src/zypper-sources.cc:587
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr ""
+msgstr "Vynechávam repozitára '%s' kvôli vyššie uvedenej chybe."
 
 #: ../src/zypper-sources.cc:600
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' not found by its alias or number."
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "Repozitár '%s' nebol nájdený podľa zadaného aliasu ani čísla."
 
 #: ../src/zypper-sources.cc:605
 msgid "Use 'zypper repos' to get the list of defined repositories."
-msgstr ""
+msgstr "Pre získanie zoznamu definovaných repozitárov použite príkaz 'zypper repos'."
 
 #: ../src/zypper-sources.cc:612
 msgid "Specified repositories are not enabled or defined."
-msgstr ""
+msgstr "Zadané repozitáre sú buď vypnuté alebo nie sú definované."
 
 #: ../src/zypper-sources.cc:614
-#, fuzzy
 msgid "There are no enabled repositories defined."
-msgstr "Nie sú k dispozícii žiadne nainštalovateľné balíčky, ktoré by poskytovali %s"
+msgstr "Nie sú definované žiadne zapnuté repozitáre."
 
 #: ../src/zypper-sources.cc:617
 msgid "Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories."
-msgstr ""
+msgstr "Použite príkaz 'zypper addrepo' alebo 'zypper modifyrepo' pre pridanie alebo zapnutie repozitárov."
 
 #: ../src/zypper-sources.cc:621
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
+msgstr "Nepodarilo sa aktualizovať repozitáre kvôli vyššie uvedenej chybe."
 
 #: ../src/zypper-sources.cc:623
-#, fuzzy
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "Niektoré repozitáre neboli aktualizované kvôli chybe."
 
 #: ../src/zypper-sources.cc:625
-#, fuzzy
 msgid "Specified repositories have been refreshed."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "Zadané repozitáre boli úspešne aktualizované."
 
 #: ../src/zypper-sources.cc:627
-#, fuzzy
 msgid "All repositories have been refreshed."
-msgstr "Všetky systémové zdroje boli obnovené."
+msgstr "Všetky repozitáre boli úspešne aktualizované."
 
 #: ../src/zypper-sources.cc:667
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr ""
+msgstr "Toto je vymeniteľné médium len na čítanie (CD/DVD), vypínam automatickú aktualizáciu (autorefresh)."
 
 #: ../src/zypper-sources.cc:685
 #, c-format
 msgid "Repository named '%s' already exists. Please, use another alias."
-msgstr ""
+msgstr "Repozitár s aliasom '%s' už existuje. Prosím, použite iný alias."
 
 #: ../src/zypper-sources.cc:693
 msgid "Can't find a valid repository at given location:"
-msgstr ""
+msgstr "Nemôžem nájsť platný repozitár na zadanej adrese:"
 
 #: ../src/zypper-sources.cc:694
 msgid "Could not determine the type of the repository. Please, check if the defined URLs (see below) point to a valid repository:"
-msgstr ""
+msgstr "Nemôžem určiť typ repozitára. Prosím overte, či definované URL adresy (viď nižšie) ukazujú na platný repozitár:"
 
 #: ../src/zypper-sources.cc:705
-#, fuzzy
 msgid "Problem transferring repository data from specified URL:"
-msgstr "Čítam metadáta z "
+msgstr "Problém pri prenášaní údajov repozitára zo zadanej URL adresy:"
 
 #: ../src/zypper-sources.cc:706
 msgid "Please, check whether the specified URL is accessible."
-msgstr ""
+msgstr "Prosím overte, či je zadaná URL adresa prístupná."
 
 #: ../src/zypper-sources.cc:713
-#, fuzzy
 msgid "Unknown problem when adding repository:"
-msgstr "Čítam metadáta z "
+msgstr "Neznáma chyba pri pridávaní repozitára:"
 
 #: ../src/zypper-sources.cc:717
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr ""
+msgstr "Repositár '%s' bol úspešne pridaný"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/zypper-sources.cc:732
-#, fuzzy
 msgid "Autorefresh"
-msgstr "Automatické obnovenie"
+msgstr "Autoaktualizácia"
 
 #: ../src/zypper-sources.cc:740
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data from '%s' media"
-msgstr "Načítavam produkt z %s"
+msgstr "Čítam údaje z média '%s'."
 
 #: ../src/zypper-sources.cc:746
-#, fuzzy, c-format
+#, c-format
 msgid "Problem reading data from '%s' media"
-msgstr "Načítavam produkt z %s"
+msgstr "Problém pri čítaní údajov z média '%s'."
 
 #: ../src/zypper-sources.cc:747
 msgid "Please, check if your installation media is valid and readable."
-msgstr ""
+msgstr "Prosím, overte či sú vaše inštalačné médiá správne a čitateľné."
 
 #: ../src/zypper-sources.cc:795
-#, fuzzy
 msgid "Problem accessing the file at the specified URL"
-msgstr "Čítam metadáta z "
+msgstr "Problém pri prístupe k súboru na zadanej URL adrese"
 
 #: ../src/zypper-sources.cc:796
 msgid "Please check if the URL is valid and accessible."
-msgstr ""
+msgstr "Prosím overte, či je zadaná URL adresa platná a prístupná."
 
 #: ../src/zypper-sources.cc:803
-#, fuzzy
 msgid "Problem parsing the file at the specified URL"
-msgstr "Čítam metadáta z "
+msgstr "Problém pri analyzovaní súboru na zadanej URL adrese."
 
 #. TranslatorExplanation don't translate the URL if the URL itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/zypper-sources.cc:806
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr ""
+msgstr "Overte či zadaný súbor je vo formáte .repo. Informácie o .repo súboroch nájdete na http://en.opensuse.org/Standards/RepoInfo."
 
 #: ../src/zypper-sources.cc:813
 msgid "Problem encountered while trying to read the file at the specified URL"
-msgstr ""
+msgstr "Chyba pri čítaní súboru na zadanej URL adrese."
 
 #: ../src/zypper-sources.cc:870
 #, c-format
 msgid "Repository %s has been removed."
-msgstr ""
+msgstr "Repozitár '%s' bol odstránený."
 
 #: ../src/zypper-sources.cc:922
 #, c-format
 msgid "Repository %s renamed to %s"
-msgstr ""
+msgstr "Repozitár '%s' bol premenovaný na '%s'."
 
 #: ../src/zypper-sources.cc:927 ../src/zypper-sources.cc:1004
-#, fuzzy, c-format
+#, c-format
 msgid "Repository %s not found."
-msgstr "Hostiteľ %s nebol nájdený."
+msgstr "Repozitár '%s' nebol nájdený."
 
 #: ../src/zypper-sources.cc:932 ../src/zypper-sources.cc:1009
-#, fuzzy
 msgid "Error while modifying the repository:"
-msgstr "Chyba pri obnovovaní zdroja: "
+msgstr "Chyba pri zmene repozitára:"
 
 #: ../src/zypper-sources.cc:934 ../src/zypper-sources.cc:1011
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Pridávam zdroje"
+msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
 
 #: ../src/zypper-sources.cc:948
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr ""
+msgstr "'%s' a '%s' si navzájom odporujú. Ponechávam túto vlastnosť bez zmeny."
 
 #: ../src/zypper-sources.cc:999
 #, c-format
 msgid "Repository %s has been sucessfully modified."
-msgstr ""
+msgstr "Repozitár '%s' bol úspešne zmenený."
 
 #: ../src/zypper-sources.cc:1047
-#, fuzzy, c-format
+#, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Pridávam zdroje"
+msgstr "Načítavam údaje repozitára '%s'..."
 
 #: ../src/zypper-sources.cc:1054
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr ""
+msgstr "Repozitár '%s' nemá vytvorenú cache databázu. Vytváram..."
 
 #: ../src/zypper-sources.cc:1061 ../src/zypper-sources.cc:1080
-#, fuzzy, c-format
+#, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Načítavam produkt z %s"
+msgstr "Problém pri sťahovaní údajov z '%s'"
 
 #: ../src/zypper-sources.cc:1062 ../src/zypper-sources.cc:1082
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr ""
+msgstr "Balíčky z repozitára '%s' neboli kvôli chybe načítané."
 
 #: ../src/zypper-sources.cc:1069
-#, fuzzy, c-format
+#, c-format
 msgid "(%d resolvables found)"
-msgstr " balíčkov."
+msgstr "(%d balíčkov)"
 
 #: ../src/zypper-sources.cc:1081
 msgid "Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."
-msgstr ""
+msgstr "Skúste spustiť 'zypper refresh' alebo vymazať /var/cache/zypp/zypp.db."
 
 #: ../src/zypper-sources.cc:1093
-#, fuzzy
 msgid "Reading RPM database..."
 msgstr "Čítam RPM databázu..."
 
 #: ../src/zypper-sources.cc:1100
-#, fuzzy, c-format
+#, c-format
 msgid "(%s resolvables)"
-msgstr " balíčkov."
+msgstr "(%s balíčkov)"
 
 #. list name, exact match
 #: ../src/zypper-sources.cc:1188
-#, fuzzy
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that.\n"
-msgstr "POZOR: tento príkaz nesynchronizuje zmeny so ZENworks."
+msgstr ""
+"Bola zistená prítomnosť ZMD (ZENworks Management Daemon).\n"
+"POZOR: tento príkaz nesynchronizuje zmeny so ZENworks. Pre tento účel použite rug alebo yast2.\n"
 
 #: ../src/zypp-checkpatches.cc:125
-#, fuzzy
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
-msgstr "Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva ak už máte spustenú iný aplikáciu, ktorá túto knižnicu používa. Prosím, zavrite ostatné aplikácie a skúste znova."
+msgstr "Program nemá prístup ku knižnici pre správu balíčkov. Toto sa zvyčajne stáva ak už máte spustenú iný aplikáciu (napr. YaST, ďalší zypper), ktorá túto knižnicu používa. Prosím, zavrite ostatné aplikácie a skúste znova."
 
 #: ../src/zypp-checkpatches.cc:185
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't restore repository.\n"
 "Detail: %s"
 msgstr ""
-"Nie je možné načítať zdroj \n"
+"Nie je možné načítať repozitár.\n"
 "Podrobnosti: %s"
 
 #: ../src/zypp-checkpatches.cc:235
-#, fuzzy
 msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
-msgstr "Nie sú definované žiadne aktualizačné zdroje. Prosím, pridajte jeden alebo viacero zdrojov, ak chcete byť upozorňovaní na aktualizácie."
+msgstr "Nie sú definované žiadne aktualizačné repozitáre. Prosím, pridajte jeden alebo viacero repozitárov, ak chcete byť upozorňovaní na aktualizácie."
 
 #. TranslatorExplanation don't translate letters in parentheses!! (yet)
 #: ../src/zypper-callbacks.cc:83
@@ -1180,26 +1164,25 @@ msgstr ""
 "\t--root, -R <dir>\tPracuj na odlišnom koreňovom adresári.\n"
 
 #: ../src/zypper.cc:167
-#, fuzzy, c-format
+#, c-format
 msgid "Verbosity: %d"
-msgstr "Úroveň podrobnosti výstupu "
+msgstr "Úroveň podrobnosti výstupu: %d"
 
 #: ../src/zypper.cc:173
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "Zapínam neinteraktívny mód."
 
 #: ../src/zypper.cc:179
 msgid "Entering no-gpg-checks mode."
-msgstr ""
+msgstr "Zapínam ignorovanie overovania GPG podpisov."
 
 #: ../src/zypper.cc:189
 msgid "Invalid table style "
 msgstr "Nesprávny typ tabuľky "
 
 #: ../src/zypper.cc:234
-#, fuzzy
 msgid "Try -h for help."
-msgstr "Skús -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
+msgstr "Skúste -h pre zobrazenie nápovede. Pri použití voľby -h za konkrétnym príkazom sa zobrazí nápoveda k tomuto príkazu."
 
 #: ../src/zypper.cc:293
 msgid ""
@@ -1215,6 +1198,19 @@ msgid ""
 "                                See 'man zypper' for more details.\n"
 "    --debug-solver              Create solver test case for debugging\n"
 msgstr ""
+"install (in) [options] <názov> ...\n"
+"install (in) [options] --capability <kapabilita> ...\n"
+"\n"
+"Nainštaluj balíčky alebo iné typy objektov so zadanými názvami alebo kapabilitami.Kapabilita je NÁZOV[OP<VERZIA>], kde OP je <, <=, =, >=, >.\n"
+"\n"
+"  Možnosti príkazu:\n"
+"-r, --repo <alias>              Inštaluj iba balíčky zo zadaného repozitára.\n"
+"-t, --type <typ>               Typ balíčka (package, patch, pattern, product) (prednastavený typ: package)\n"
+"-n, --name                      Vyber balíčky podľa názvu (prednastavená možnosť)\n"
+"-C, --capabiltiy                Vyber balíčky podľa kapability\n"
+"-l, --auto-agree-with-licenses  Automaticky potrď súhlas s licenciami tretích strán.\n"
+"                                Pozrite 'man zypper' kvôli ďalším informáciám..\n"
+"    --debug-solver              Vytvor testovací prípad pre ladenie solveru závislostí.\n"
 
 #: ../src/zypper.cc:322
 msgid ""
@@ -1228,6 +1224,17 @@ msgid ""
 "-n, --name         Select resolvables by plain name, not by capability\n"
 "    --debug-solver Create solver test case for debugging\n"
 msgstr ""
+"remove (rm) [options] <názov> ...\n"
+"remove (rm) [options] --capability <kapabilita> ...\n"
+"\n"
+"Odstráň balíčky alebo iné typy objektov so zadanými názvami alebo kapabilitami. Kapabilita je NÁZOV[OP<VERZIA>], kde OP je <, <=, =, >=, >.\n"
+"\n"
+"  Možnosti príkazu:\n"
+"-r, --repo <alias>              Inštaluj iba balíčky zo zadaného repozitára.\n"
+"-t, --type <typ>                Typ balíčka (package, patch, pattern, product) (prednastavený typ: package)\n"
+"-n, --name                      Vyber balíčky podľa názvu (prednastavená možnosť)\n"
+"-C, --capabiltiy                Vyber balíčky podľa kapability\n"
+"    --debug-solver              Vytvor testovací prípad pre ladenie solveru závislostí.\n"
 
 #: ../src/zypper.cc:341
 #, fuzzy

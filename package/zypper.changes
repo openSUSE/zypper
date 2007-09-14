@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 14 17:06:39 CEST 2007 - jkupec@suse.cz
+
+- don't warn about reboot or restart if the action has been cancelled
+  (#257520)
+- translations update
+- r7250
+
+-------------------------------------------------------------------
 Thu Sep 13 11:28:41 CEST 2007 - dmacvicar@suse.de
 
 - Show reason of commit error (#308511) 
