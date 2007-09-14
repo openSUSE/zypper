@@ -3,6 +3,7 @@ Fri Sep 14 22:57:54 CEST 2007 - ma@suse.de
 
 - Enable using patch and delta rpms. (#309124)
 - version 3.24.0
+- revision 7253
 
 -------------------------------------------------------------------
 Thu Sep 13 17:59:55 CEST 2007 - ma@suse.de
