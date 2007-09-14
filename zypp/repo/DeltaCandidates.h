@@ -42,7 +42,7 @@ namespace zypp
       class Impl;
 
     public:
-      /** 
+      /**
        * \short Creates a candidate calculator
        * \param repos Set of repositories providing patch and delta packages
        * \param installed_callback Will be used to ask if a package is installed or not
@@ -51,11 +51,9 @@ namespace zypp
       /** Dtor */
       ~DeltaCandidates();
 
-      
+
       std::list<packagedelta::PatchRpm> patchRpms(const Package::constPtr & package) const;
       std::list<packagedelta::DeltaRpm> deltaRpms(const Package::constPtr & package) const;
-      
-    public:
 
     private:
       /** Pointer to implementation */
@@ -65,6 +63,19 @@ namespace zypp
 
     /** \relates DeltaCandidates Stream output */
     std::ostream & operator<<( std::ostream & str, const DeltaCandidates & obj );
+
+    ///////////////////////////////////////////////////////////////////
+
+    /** \relates DeltaCandidates Convenient construction. */
+    template<class RepositoryIter>
+    inline DeltaCandidates makeDeltaCandidates( RepositoryIter begin_r, RepositoryIter end_r )
+    { return DeltaCandidates( std::list<Repository>( begin_r, end_r ) ); }
+
+    /** \relates DeltaCandidates Convenient construction. */
+    template<class RepositoryContainer>
+    inline DeltaCandidates makeDeltaCandidates( const RepositoryContainer & cont_r )
+    { return makeDeltaCandidates( cont_r.begin(), cont_r.end() ); }
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace repo
