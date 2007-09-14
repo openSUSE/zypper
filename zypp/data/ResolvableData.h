@@ -368,18 +368,16 @@ namespace data
   {
     // Base <patchrpm>/<deltarpm> element attributes
 
-    Arch attr_arch;
-    std::string attr_filename;
-    std::string attr_md5sum;
-    ByteCount attr_downloadSize;
-    Date attr_buildTime;
-
-    // Shared RPM data
-
+    std::string     name;     // target rpm name
+    Edition         edition;  // target rpm edition
+    Arch            arch;     // target rpm architecture
     OnMediaLocation location;
-    Date buildTime;
-    Date fileTime;
-    ByteCount archiveSize; // ??
+    Date            buildTime;
+    Date            fileTime;
+    ByteCount       archiveSize; // ??
+    protected:
+      /** Overload to realize std::ostream & operator\<\<. */
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
   };
 
   DEFINE_PTR_TYPE(PatchRpm);

@@ -59,9 +59,16 @@ bool queryInstalledEditionHelper( const std::string & name_r,
                                   const Edition &     ed_r,
                                   const Arch &        arch_r )
 {
-  INT << name_r << "-" << ed_r << "." << arch_r << endl;
+  if ( ed_r == Edition::noedition )
+    return true;
+  if ( name_r == "kernel-default" && ed_r == Edition("2.6.22.5-10") )
+    return true;
+  if ( name_r == "update-test-affects-package-manager" && ed_r == Edition("1.1-6") )
+    return true;
+
   return false;
 }
+
 
 ManagedFile repoProvidePackage( const PoolItem & pi )
 {
@@ -528,7 +535,8 @@ int main( int argc, char * argv[] )
 	repoManager.cleanCache( nrepo );
       }
       SEC << "refreshMetadata" << endl;
-      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+      //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+      repoManager.refreshMetadata( nrepo );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
@@ -545,7 +553,7 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   SEC << pool.knownRepositoriesSize() << endl;
 
-  if ( 1 )
+  if ( 0 )
   {
     {
        zypp::base::LogControl::TmpLineWriter shutUp;
@@ -563,9 +571,14 @@ int main( int argc, char * argv[] )
   DBG << "patch: " << deltas.patchRpms(0).size() << " " << deltas.patchRpms(0) << endl;
   DBG << "delta: " << deltas.deltaRpms(0).size() << " " << deltas.deltaRpms(0) << endl;
 
-
-  PoolItem pi( getPi<Package>( "kernel-default" ) );
+  PoolItem pi( getPi<Package>( "kernel-default", Edition("2.6.22.5-12") ) );
   USR << pi << endl;
+  USR << repoProvidePackage( pi ) << endl;
+
+  pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
+  USR << pi << endl;
+  USR << repoProvidePackage( pi ) << endl;
+
 
  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

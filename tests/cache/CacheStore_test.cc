@@ -467,7 +467,8 @@ void cache_delta_rpm_test(const string &dir)
   // 22 packages and 6 patches
   BOOST_CHECK_EQUAL( repositoryImpl->resolvables().size(), 42 );
   // 19 patch rpms
-  BOOST_CHECK_EQUAL( repositoryImpl->patchRpms().size(), 19 );
+  // but only 13 are compatible with x86_64_
+  BOOST_CHECK_EQUAL( repositoryImpl->patchRpms().size(), 13 );
   //check_tables_clean(tmpdir);
 }
 

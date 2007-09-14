@@ -187,59 +187,62 @@ void RepoImpl::createPatchAndDeltas()
     con.executenonquery("PRAGMA cache_size=8000;");
     con.executenonquery("BEGIN;");
 
-    string pp_query =
-   //     0       1          2         3        4              5 
-    "SELECT id, media_nr, location, checksum, checksum_type, download_size, build_time "
-    "FROM patch_packages WHERE repository_id=:repository_id;";
+    // Refer to the enum when retrieving the data from reader.
 
-    string pp_bv_query =
-    "SELECT version, release, epoch "
-    "FROM patch_packages_baseversions WHERE patch_package_id = :patch_package_id";
+    enum pp_query_val {    pp_id, pp_name, pp_version, pp_release, pp_epoch, pp_arch, pp_media_nr, pp_location, pp_checksum, pp_checksum_type, pp_download_size, pp_build_time };
+    string pp_query = "SELECT id,    name,    version,    release,    epoch,    arch,    media_nr,    location,    checksum,    checksum_type,    download_size,    build_time "
 
-    string delta_query =
-    //       0     1        2          3        4               5              6                      7                      8                 9                     10  11
-    "SELECT id, media_nr, location, checksum, checksum_type, download_size, build_time,  baseversion_version, baseversion_release, baseversion_epoch, baseversion_checksum, baseversion_checksum_type, baseversion_build_time "
-    //    11
-    ", baseversion_sequence_info "
-    "FROM delta_packages WHERE repository_id=:repository_id;";
-    
+                      "FROM patch_packages WHERE repository_id=:repository_id;";
+
+    enum pp_bv_query_val { pp_bv_version, pp_bv_release, pp_bv_epoch };
+    string pp_bv_query = "SELECT version,       release,       epoch "
+
+                         "FROM patch_packages_baseversions WHERE patch_package_id = :patch_package_id";
+
+    enum dp_query_val {    dp_id, dp_name, dp_version, dp_release, dp_epoch, dp_arch, dp_media_nr, dp_location, dp_checksum, dp_checksum_type, dp_download_size, dp_build_time,  dp_baseversion_version, dp_baseversion_release, dp_baseversion_epoch, dp_baseversion_checksum, dp_baseversion_checksum_type, dp_baseversion_build_time, dp_baseversion_sequence_info };
+    string dp_query = "SELECT id,    name,    version,    release,    epoch,    arch,    media_nr,    location,    checksum,    checksum_type,    download_size,    build_time,     baseversion_version,    baseversion_release,    baseversion_epoch,    baseversion_checksum,    baseversion_checksum_type,    baseversion_build_time,    baseversion_sequence_info "
+
+                      "FROM delta_packages WHERE repository_id=:repository_id;";
+
     {
       // bind the master repo id to the query
-      sqlite3_command deltas_cmd( con, delta_query);
+      sqlite3_command deltas_cmd( con, dp_query);
       deltas_cmd.bind(":repository_id", _options.repository_id);
       sqlite3_reader reader = deltas_cmd.executereader();
       while ( reader.read() )
       {
-        zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
-  
-        string checksum_string(reader.getstring(3));
-        CheckSum checksum(reader.getstring(4), reader.getstring(3));
+        zypp::OnMediaLocation on_media( reader.getstring(dp_location), reader.getint(dp_media_nr) );
+
+        CheckSum checksum(reader.getstring(dp_checksum_type), reader.getstring(dp_checksum));
         if ( checksum.empty() )
         {
           ERR << "Wrong checksum for delta, skipping..." << endl;
           continue;
         }
         on_media.setChecksum(checksum);
-        on_media.setDownloadSize(reader.getint(5));
-  
+        on_media.setDownloadSize(reader.getint(dp_download_size));
+
         packagedelta::DeltaRpm::BaseVersion baseversion;
-        baseversion.setEdition( Edition(reader.getstring(7), reader.getstring(8), reader.getstring(9) ) );
-  
-        checksum = CheckSum(reader.getstring(11), reader.getstring(10));
+        baseversion.setEdition( Edition(reader.getstring(dp_baseversion_version), reader.getstring(dp_baseversion_release), reader.getstring(dp_baseversion_epoch) ) );
+
+        checksum = CheckSum(reader.getstring(dp_baseversion_checksum_type), reader.getstring(dp_baseversion_checksum));
         if ( checksum.empty() )
         {
           ERR << "Wrong checksum for delta, skipping..." << endl;
           continue;
         }
         baseversion.setChecksum(checksum);
-        baseversion.setBuildtime(reader.getint(12));
-        baseversion.setSequenceinfo(reader.getstring(13));
-  
+        baseversion.setBuildtime(reader.getint(dp_baseversion_build_time));
+        baseversion.setSequenceinfo(reader.getstring(dp_baseversion_sequence_info));
+
         zypp::packagedelta::DeltaRpm delta;
+        delta.setName   ( reader.getstring(dp_name) );
+        delta.setEdition( Edition( reader.getstring(dp_version), reader.getstring(dp_release), reader.getint(dp_epoch) ) );
+        delta.setArch   ( _type_cache.archFor( reader.getint(dp_arch) ) );
         delta.setLocation( on_media );
         delta.setBaseversion( baseversion );
-        delta.setBuildtime(reader.getint(6));
-  
+        delta.setBuildtime(reader.getint(dp_build_time));
+
         _deltaRpms.push_back(delta);
       }
       reader.close();
@@ -252,40 +255,45 @@ void RepoImpl::createPatchAndDeltas()
       sqlite3_command pp_bv_cmd( con, pp_bv_query);
       pp_cmd.bind(":repository_id", _options.repository_id);
       sqlite3_reader reader = pp_cmd.executereader();
-  
+
       while ( reader.read() )
       {
         //MIL << "Addining patch rpm " << endl;
-        long long patch_package_id = reader.getint64(0);
-  
-        zypp::OnMediaLocation on_media( reader.getstring(2), reader.getint(1) );
-  
-        CheckSum checksum(reader.getstring(4), reader.getstring(3));
+        long long patch_package_id = reader.getint64(pp_id);
+
+        zypp::OnMediaLocation on_media( reader.getstring(pp_location), reader.getint(pp_media_nr) );
+
+        CheckSum checksum(reader.getstring(pp_checksum_type), reader.getstring(pp_checksum));
         if ( checksum.empty() )
         {
           ERR << "Wrong checksum for delta, skipping..." << endl;
           continue;
         }
         on_media.setChecksum(checksum);
-        on_media.setDownloadSize(reader.getint(5));
-  
+        on_media.setDownloadSize(reader.getint(pp_download_size));
+
         zypp::packagedelta::PatchRpm patch;
+        patch.setName   ( reader.getstring(pp_name) );
+        patch.setEdition( Edition( reader.getstring(pp_version), reader.getstring(pp_release), reader.getint(pp_epoch) ) );
+        patch.setArch   ( _type_cache.archFor( reader.getint(pp_arch) ) );
         patch.setLocation( on_media );
-        patch.setBuildtime(reader.getint(6));
-  
+        patch.setBuildtime(reader.getint(pp_build_time));
+
         pp_bv_cmd.bind( ":patch_package_id", patch_package_id );
-  
+
         sqlite3_reader bv_reader = pp_bv_cmd.executereader();
         while (bv_reader.read())
         {
           //MIL << "  * Adding baseversion " << endl;
-          packagedelta::PatchRpm::BaseVersion baseversion = packagedelta::PatchRpm::BaseVersion( bv_reader.getstring(0) , bv_reader.getstring(1), bv_reader.getint(2) );
+          packagedelta::PatchRpm::BaseVersion baseversion = packagedelta::PatchRpm::BaseVersion( bv_reader.getstring(pp_bv_version) ,
+                                                                                                 bv_reader.getstring(pp_bv_release),
+                                                                                                 bv_reader.getint(pp_bv_epoch) );
           patch.addBaseversion(baseversion);
         }
-  
+
         bv_reader.close();
-        
-        _patchRpms.push_back(patch);        
+
+        _patchRpms.push_back(patch);
       }
       reader.close();
       MIL << _patchRpms.size() << " patch rpms read." << endl;

@@ -27,18 +27,18 @@ namespace zypp
     {
 
     public:
-      
+
       Impl( const std::list<Repository> & repos )
         : repos(repos)
       {
-      
+
       }
 
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
       /** clone for RWCOW_pointer */
       Impl * clone() const
       { return new Impl( *this ); }
-      
+
       std::list<Repository> repos;
     };
     ///////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ namespace zypp
     std::list<PatchRpm> DeltaCandidates::patchRpms(const Package::constPtr & package ) const
     {
       std::list<PatchRpm> candidates;
-      
+
       // query all repos
       for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end();
@@ -71,17 +71,22 @@ namespace zypp
               dit != candidates_in_repo.end();
               ++dit )
         {
-          PatchRpm delta(*dit);
-          candidates.push_back(delta);
+          if ( ! package
+               || (    package->name()    == dit->name()
+                    && package->edition() == dit->edition()
+                    && package->arch()    == dit->arch() ) )
+          {
+            candidates.push_back( *dit );
+          }
         }
       }
       return candidates;
     }
-    
+
     std::list<DeltaRpm> DeltaCandidates::deltaRpms(const Package::constPtr & package) const
     {
       std::list<DeltaRpm> candidates;
-      
+
       // query all repos
       for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end();
@@ -93,13 +98,18 @@ namespace zypp
               dit != candidates_in_repo.end();
               ++dit )
         {
-          DeltaRpm delta(*dit);
-          candidates.push_back(delta);
+           if ( ! package
+               || (    package->name()    == dit->name()
+                    && package->edition() == dit->edition()
+                    && package->arch()    == dit->arch() ) )
+          {
+            candidates.push_back( *dit );
+          }
         }
       }
       return candidates;
     }
-    
+
     std::ostream & operator<<( std::ostream & str, const DeltaCandidates & obj )
     {
       return str << *obj._pimpl;

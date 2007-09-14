@@ -16,6 +16,7 @@
 #include "zypp/parser/yum/PatchFileReader.h"
 #include "zypp/parser/yum/FileReaderBaseImpl.h"
 
+#include "zypp/ZConfig.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser::yum"
@@ -481,8 +482,16 @@ namespace zypp
         data::PatchRpm_Ptr tmp;
         tmp.swap(_patchrpm);
         data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
-        if (patom_ptr)
+        if (patom_ptr && patom_ptr->arch.compatibleWith( ZConfig::instance().systemArchitecture() ))
+        {
+          // Patch and delta rpms are standalone objects.
+          // We must store the target packages NVRA.
+          // We don't store incompatible archs.
+          tmp->name    = patom_ptr->name;
+          tmp->edition = patom_ptr->edition;
+          tmp->arch    = patom_ptr->arch;
           patom_ptr->patchRpms.insert(tmp);
+        }
         toParentTag();
         return true;
       }
@@ -493,8 +502,16 @@ namespace zypp
         data::DeltaRpm_Ptr tmp;
         tmp.swap(_deltarpm);
         data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
-        if (patom_ptr)
+        if (patom_ptr && patom_ptr->arch.compatibleWith( ZConfig::instance().systemArchitecture() ))
+        {
+          // Patch and delta rpms are standalone objects.
+          // We must store the target packages NVRA.
+          // We don't store incompatible archs.
+          tmp->name    = patom_ptr->name;
+          tmp->edition = patom_ptr->edition;
+          tmp->arch    = patom_ptr->arch;
           patom_ptr->deltaRpms.insert(tmp);
+        }
         toParentTag();
         return true;
       }

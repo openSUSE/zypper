@@ -166,6 +166,11 @@ CREATE TABLE locks (
 
 CREATE TABLE delta_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , name TEXT
+  , version TEXT
+  , release TEXT
+  , epoch INTEGER
+  , arch INTEGER REFERENCES types(id)
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
@@ -185,6 +190,11 @@ CREATE INDEX delta_package_repository_id ON delta_packages(repository_id);
 
 CREATE TABLE patch_packages (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
+  , name TEXT
+  , version TEXT
+  , release TEXT
+  , epoch INTEGER
+  , arch INTEGER REFERENCES types(id)
   , media_nr INTEGER
   , location TEXT
   , checksum TEXT
@@ -319,7 +329,7 @@ CREATE TRIGGER remove_resolvables
     DELETE FROM file_capabilities WHERE resolvable_id = old.id;
     DELETE FROM split_capabilities WHERE resolvable_id = old.id;
     DELETE FROM other_capabilities WHERE resolvable_id = old.id;
-    
+
     DELETE FROM text_attributes  WHERE weak_resolvable_id = old.id;
     DELETE FROM numeric_attributes  WHERE weak_resolvable_id = old.id;
     DELETE FROM resolvable_disk_usage WHERE resolvable_id = old.id;

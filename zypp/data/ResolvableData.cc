@@ -49,5 +49,12 @@ std::ostream & ResObject::dumpOn( std::ostream & str ) const
 //       << "  enhances:" << endl << enhances << endl
 }
 
+
+std::ostream & RpmBase::dumpOn( std::ostream & str ) const
+{
+  str << "Patch/Delta[ " << name << " " << edition << " " << arch << " ]";
+  return str;
+}
+
 } // namespace cache
 } // namespace zypp

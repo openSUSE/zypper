@@ -28,7 +28,8 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const PatchRpm & obj )
     {
       str
-      << "PatchRpm(" << obj.location()
+      << "PatchRpm[" << obj.name() << "-" << obj.edition() << "." << obj.arch()
+      << "](" << obj.location()
       << '|' << obj.buildtime()
       << '|';
       return dumpRangeLine( str, obj.baseversions().begin(), obj.baseversions().end() )
@@ -38,7 +39,8 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const DeltaRpm & obj )
     {
       return str
-      << "DeltaRpm(" << obj.location()
+      << "DeltaRpm[" << obj.name() << "-" << obj.edition() << "." << obj.arch()
+      << "](" << obj.location()
       << '|' << obj.buildtime()
       << '|' << obj.baseversion().edition()
       << ',' << obj.baseversion().buildtime()

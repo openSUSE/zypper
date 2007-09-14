@@ -17,6 +17,7 @@
 
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Edition.h"
+#include "zypp/Arch.h"
 #include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -28,6 +29,7 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
+    /** \todo cheap copy! (switch to RWCOW) */
     class PatchRpm
     {
     public:
@@ -39,17 +41,29 @@ namespace zypp
       {}
 
     public:
+      /** \name Target package ident. */
+      //@{
+      const std::string &     name()         const { return _name; }
+      const Edition &         edition()      const { return _edition; }
+      const Arch &            arch()         const { return _arch; }
+      //@}
       const OnMediaLocation & location()     const { return _location; }
       const BaseVersions &    baseversions() const { return _baseversions; }
       const Date &            buildtime()    const { return _buildtime;}
 
     public:
+      PatchRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
+      PatchRpm & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
+      PatchRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
       PatchRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
       PatchRpm & setBaseversions( const BaseVersions & val_r ){ _baseversions = val_r; return *this; }
       PatchRpm & addBaseversion( const BaseVersion & val_r )  { _baseversions.push_back( val_r ); return *this; }
       PatchRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
 
     private:
+      std::string     _name;
+      Edition         _edition;
+      Arch            _arch;
       OnMediaLocation _location;
       BaseVersions    _baseversions;
       Date            _buildtime;
@@ -60,6 +74,7 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
+    /** \todo cheap copy! (switch to RWCOW) */
     class DeltaRpm
     {
     public:
@@ -95,16 +110,28 @@ namespace zypp
       {}
 
     public:
+      /** \name Target package ident. */
+      //@{
+      const std::string &     name()         const { return _name; }
+      const Edition &         edition()      const { return _edition; }
+      const Arch &            arch()         const { return _arch; }
+      //@}
       const OnMediaLocation & location()     const { return _location; }
       const BaseVersion &     baseversion()  const { return _baseversion; }
       const Date &            buildtime()    const { return _buildtime;}
 
     public:
+      DeltaRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
+      DeltaRpm & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
+      DeltaRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
       DeltaRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
       DeltaRpm & setBaseversion( const BaseVersion & val_r )  { _baseversion = val_r; return *this; }
       DeltaRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
 
     private:
+      std::string     _name;
+      Edition         _edition;
+      Arch            _arch;
       OnMediaLocation _location;
       BaseVersion     _baseversion;
       Date            _buildtime;
