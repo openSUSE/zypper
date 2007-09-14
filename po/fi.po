@@ -1,4 +1,4 @@
-# translation of zypper.po to Suomi
+# translation of zypper.fi.po to Suomi
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -6,12 +6,13 @@
 #
 # Jyri Palokangas <jmp@netti.fi>, 2007.
 # Jyri Palokangas <jmp@opensuse.fi>, 2007.
+# Sami Vento <sami.vento@opensuse.fi>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-08-25 15:22+0300\n"
+"PO-Revision-Date: 2007-09-13 23:07+0300\n"
 "Last-Translator: Jyri Palokangas <jmp@opensuse.fi>\n"
 "Language-Team: Suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -56,26 +57,26 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "Luotetaanko avaimeen %s, %s, tunnus %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
-msgstr "Varoitus: %s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s! Tämä ei johdu pahanlaatuisista muutoksista tiedostossa!"
+msgstr "Varoitus: Ohitetaan %s joka ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s!"
 
 #: ../src/zypper-keyring-callbacks.h:113
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Varmista että tämä ei johdu pahantahtoisista muutoksista tiedostossa!"
 
 #: ../src/zypper-keyring-callbacks.h:120
-#, fuzzy, c-format
+#, c-format
 msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
-msgstr "%s koostetarkistus epäonnistui. Odotettiin %s, saatiin %s."
+msgstr "Allekirjoituksen %s tarkistus epäonnistui, julkinen avain %s, %s tunniste %s."
 
 #: ../src/zypper-keyring-callbacks.h:123
 msgid "Warning: This might be caused by a malicious change in the file!"
-msgstr ""
+msgstr "Varoitus: Tämä voi johtua pahantahtoisesta muutoksesta tiedostossa!"
 
 #: ../src/zypper-keyring-callbacks.h:125
 msgid "Continuing is risky! Continue anyway?"
-msgstr ""
+msgstr "Jatkaminen on riskialtista! Jatketaanko siitä välittämättä?"
 
 #: ../src/zypper-keyring-callbacks.h:136
 #, c-format
@@ -108,89 +109,77 @@ msgid "Initializing Target"
 msgstr "Alustetaan kohdetta"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "paketti"
-msgstr[1] "paketti"
+msgstr[1] "paketit"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
 msgstr[0] "esivalinta"
-msgstr[1] "esivalinta"
+msgstr[1] "esivalinnat"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "käyttötarkoitus"
-msgstr[1] "käyttötarkoitus"
+msgstr[0] "ohjelmistoryhmä"
+msgstr[1] "ohjelmistoryhmät"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "tuote"
-msgstr[1] "tuote"
+msgstr[1] "tuotteet"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "korjaa"
-msgstr[1] "korjaa"
+msgstr[0] "korjaus"
+msgstr[1] "korjaukset"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
 msgstr[0] "komentojono"
-msgstr[1] "komentojono"
+msgstr[1] "komentojonot"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "sanoma"
-msgstr[1] "sanoma"
+msgstr[1] "sanomat"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "kieli: "
-msgstr[1] "kieli: "
+msgstr[0] "kieli"
+msgstr[1] "kielet"
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "atomi"
-msgstr[1] "atomi"
+msgstr[1] "atomit"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "järjestelmä"
-msgstr[1] "järjestelmä"
+msgstr[1] "järjestelmät"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "paketti: "
-msgstr[1] "paketti: "
+msgstr[0] "lähdepaketti"
+msgstr[1] "lähdepaketit"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Resolvable"
-msgstr[1] "Resolvable"
+msgstr[0] "osa"
+msgstr[1] "osaa"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -269,35 +258,35 @@ msgstr "Ei mitään tehtävää."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "Seuraavat paketit päivitetään:"
-msgstr[1] "Seuraavat paketit päivitetään:"
+msgstr[0] "Seuraava %s päivitetään:"
+msgstr[1] "Seuraavat %s päivitetään:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "Seuraavat paketit ladataan:"
-msgstr[1] "Seuraavat paketit ladataan:"
+msgstr[0] "Seuraava %s vaihdetaan vanhempaan versioon:"
+msgstr[1] "Seuraavat %s vaihdetaan vanhempiin versioihin:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "Seuraavat pakettiniput asennetaan:"
-msgstr[1] "Seuraavat pakettiniput asennetaan:"
+msgstr[0] "Seuraava UUSI %s asennetaan:"
+msgstr[1] "Seuraavat UUDET %s asennetaan:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraava %s POISTETAAN:"
+msgstr[1] "Seuraavat %s POISTETAAN:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -446,9 +435,8 @@ msgid "committing"
 msgstr "suoritetaan"
 
 #: ../src/zypper-misc.cc:1421
-#, fuzzy
 msgid "Problem downloading the package file from the repository:"
-msgstr "Ongelma ladattaessa tietoja kohteesta '%s'."
+msgstr "Ongelma ladattaessa pakettitiedostoa asennuslähteestä:"
 
 #: ../src/zypper-misc.cc:1422 ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
@@ -801,29 +789,26 @@ msgid "Please, check if your installation media is valid and readable."
 msgstr "Tarkista, että asennusmedia on oikeellinen ja luettavissa."
 
 #: ../src/zypper-sources.cc:795
-#, fuzzy
 msgid "Problem accessing the file at the specified URL"
-msgstr "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URL-osoitteesta."
+msgstr "Ongelma luettaessa tiedostoa määritellystä verkko-osoitteesta."
 
 #: ../src/zypper-sources.cc:796
-#, fuzzy
 msgid "Please check if the URL is valid and accessible."
-msgstr "Tarkista, että määritelty URL on saatavissa."
+msgstr "Tarkista, että määritetty verkko-osoite on kelpaava ja käytettävissä."
 
 #: ../src/zypper-sources.cc:803
-#, fuzzy
 msgid "Problem parsing the file at the specified URL"
-msgstr "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URL-osoitteesta."
+msgstr "Ongelma koostettaessa tiedostoa määritellystä verkko-osoitteesta."
 
 #. TranslatorExplanation don't translate the URL if the URL itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/zypper-sources.cc:806
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr ""
+msgstr "Onko se .repo tiedosto? katso lisätietoja osoitteesta http://en.opensuse.org/Standards/RepoInfo ."
 
 #: ../src/zypper-sources.cc:813
 msgid "Problem encountered while trying to read the file at the specified URL"
-msgstr ""
+msgstr "Tapahtui virhe yritettäessä lukea tiedostoa määritetystä verkko-osoitteesta"
 
 #: ../src/zypper-sources.cc:870
 #, c-format
@@ -949,18 +934,16 @@ msgstr "ei"
 #: ../src/zypper-callbacks.cc:152
 #, c-format
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
-msgstr ""
+msgstr "Vastaus '%s' ei kelpaa. Jos muu ei toimi anna 'y' -> '%s' tai 'n' -> '%s' sijasta"
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
 msgstr "Liian monta argumenttia."
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "osage"
+msgstr "Käyttö"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1092,7 +1075,6 @@ msgid "Given URL is invalid."
 msgstr "Verkko-osoite ei kelpaa."
 
 #: ../src/zypper.cc:84
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tHelp\n"
@@ -1116,15 +1098,16 @@ msgid ""
 "\tsource-install, si\tInstall a source package\n"
 msgstr ""
 "  Komennot:\n"
-"\thelp\t\t\tOhje\n"
+"\thelp, ?\t\t\tOhje\n"
 " \tshell, sh\t\tHyväksy useita komentoja kerralla\n"
 " \tinstall, in\t\tAsenna paketteja tai muita osia\n"
 " \tremove, rm\t\tPoista paketteja tai muita osia\n"
 " \tsearch, se\t\tHae ohjelmistoryhmiä vastaavia paketteja\n"
-" \trepos, lr\t\tNäytä luettelo asennuslähteistä\n"
+" \trepos, lr\t\tNäytä luettelo määritetyistä asennuslähteistä\n"
 " \taddrepo, ar\t\tLisää uusi asennuslähde\n"
 " \tremoverepo, rr\t\tPoista asennuslähde\n"
 " \trenamerepo, nr\t\tNimeä asennuslähde uudelleen\n"
+"\tmodifyrepo, mr\t\tMuokkaa määritettyä asennuslähdettä\n"
 " \trefresh, ref\t\tPäivitä kaikki asennuslähteet\n"
 " \tpatch-check, pchk\tTarkista saatavilla olevat päivitykset\n"
 " \tpatches, pch\t\tNäytä luettelo korjauksista\n"
@@ -1687,7 +1670,7 @@ msgstr "I/O-virhe"
 
 #: ../src/zypper-callbacks.h:42
 msgid "Invalid object"
-msgstr "Epäkelpo objekti."
+msgstr "Virheellinen objekti."
 
 #: ../src/zypper-callbacks.h:50
 msgid "Error"
@@ -1784,20 +1767,3 @@ msgstr "Luettelo"
 msgid "Repository"
 msgstr "Asennuslähde"
 
-#~ msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-#~ msgstr "%s ei läpäissyt aitoustarkistusta julkisella avaimella %s, %s, tunniste %s. Varoitus: Tämä saattaa johtua pahanlaatuisista muutoksista tiedostossa ja jatkaminen saattaa johtaa ongelmiin! Jatketaanko silti?"
-
-#~ msgid "y"
-#~ msgstr "k"
-
-#~ msgid "Y"
-#~ msgstr "K"
-
-#~ msgid "n"
-#~ msgstr "e"
-
-#~ msgid "N"
-#~ msgstr "E"
-
-#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
-#~ msgstr "Virheellinen vastaus '%s'. Valitse '%s' tai '%s':"

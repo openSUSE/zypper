@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-07 08:58+0700\n"
+"PO-Revision-Date: 2007-09-13 08:06+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
@@ -107,89 +107,54 @@ msgid "Initializing Target"
 msgstr "ចាប់ផ្ដើម​គោលដៅ"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
-msgid_plural "packages"
-msgstr[0] "កញ្ចប់"
-msgstr[1] "កញ្ចប់"
+msgstr "កញ្ចប់"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
-msgid_plural "selections"
-msgstr[0] "ការជ្រើស​រើស"
-msgstr[1] "ការជ្រើស​រើស"
+msgstr "ការជ្រើស​រើស"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
-msgid_plural "patterns"
-msgstr[0] "លំនាំ"
-msgstr[1] "លំនាំ"
+msgstr "លំនាំ"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
-msgid_plural "product"
-msgstr[0] "ផលិតផល"
-msgstr[1] "ផលិតផល"
+msgstr "ផលិតផល"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
-msgid_plural "patches"
-msgstr[0] "បំណះ"
-msgstr[1] "បំណះ"
+msgstr "បំណះ"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
-msgid_plural "scripts"
-msgstr[0] "ស្គ្រីប"
-msgstr[1] "ស្គ្រីប"
+msgstr "ស្គ្រីប"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
-msgid_plural "messages"
-msgstr[0] "សារ"
-msgstr[1] "សារ"
+msgstr "សារ"
 
 # label for language selection
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
-msgid_plural "languages"
-msgstr[0] "ភាសា"
-msgstr[1] "ភាសា"
+msgstr "ភាសា"
 
 #: ../src/zypper-misc.cc:99
 msgid "atom"
-msgid_plural "atoms"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "អាតូម"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
-msgid_plural "systems"
-msgstr[0] "ប្រព័ន្ធ"
-msgstr[1] "ប្រព័ន្ធ"
+msgstr "ប្រព័ន្ធ"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
-msgid_plural "srcpackages"
-msgstr[0] "កញ្ចប់"
-msgstr[1] "កញ្ចប់"
+msgstr "srcpackage"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
-msgid_plural "resolvables"
-msgstr[0] "កញ្ចប់​ដោះស្រាយ"
-msgstr[1] "កញ្ចប់​ដោះស្រាយ"
+msgstr "កញ្ចប់​ដោះស្រាយ"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -270,33 +235,25 @@ msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
 #: ../src/zypper-misc.cc:708
 #, c-format
 msgid "The following %s is going to be upgraded:"
-msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%s ដូច​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង ៖"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
 #, c-format
 msgid "The following %s is going to be downgraded:"
-msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%s ដូច​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ប្រសើរឡើង ៖"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
 #, c-format
 msgid "The following NEW %s is going to be installed:"
-msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%s ថ្មី​ដូច​ខាង​ក្រោម​នេះ​នឹង​ត្រូវ​បាន​ដំឡើង ៖"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
-msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "%s ដូច​ខាង​ក្រោម នឹង​ក្លាយ​ជា REMOVED ៖"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -947,14 +904,12 @@ msgstr "ចម្លើយ​មិន​ត្រឹមត្រូវ '%s' �
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
-msgstr "copy ត្រូវការ​អាគុយម៉ង់ ២"
+msgstr "មាន​អាគុយ​ម៉ង់​ច្រើន​ពេក"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "សារ"
+msgstr "កា​រប្រើ"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1781,3 +1736,4 @@ msgstr "កាតាឡុក"
 #: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "ឃ្លាំង"
+

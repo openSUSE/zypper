@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-07 09:18+0200\n"
+"PO-Revision-Date: 2007-09-13 09:38+0200\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,89 +110,77 @@ msgid "Initializing Target"
 msgstr "Cél inicializálása"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "csomag"
-msgstr[1] "csomag"
+msgstr[1] "csomagok"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
 msgstr[0] "kiválasztás"
-msgstr[1] "kiválasztás"
+msgstr[1] "kiválasztások"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "minta"
-msgstr[1] "minta"
+msgstr[1] "minták"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "termék"
 msgstr[1] "termék"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "javítás"
-msgstr[1] "javítás"
+msgstr[1] "javítások"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
 msgstr[0] "parancsfájl"
-msgstr[1] "parancsfájl"
+msgstr[1] "parancsfájlok"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "üzenet"
-msgstr[1] "üzenet"
+msgstr[1] "üzenetek"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "nyelv: "
-msgstr[1] "nyelv: "
+msgstr[0] "nyelv"
+msgstr[1] "nyelvek"
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "atom"
-msgstr[1] "atom"
+msgstr[1] "atomok"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "rendszer"
-msgstr[1] "rendszer"
+msgstr[1] "rendszerek"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "csomag: "
-msgstr[1] "csomag: "
+msgstr[0] "forráscsomag"
+msgstr[1] "forráscsomagok"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Feloldható"
-msgstr[1] "Feloldható"
+msgstr[0] "feloldható"
+msgstr[1] "feloldhatók"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -272,35 +260,35 @@ msgstr "Nincs teendő."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "Az alábbi csomagok kerülnek frissítésre:"
-msgstr[1] "Az alábbi csomagok kerülnek frissítésre:"
+msgstr[0] "Az alábbi %s kerül frissítésre:"
+msgstr[1] "Az alábbi %s kerülnek frissítésre:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "Az alábbi csomagok kerülnek letöltésre:"
-msgstr[1] "Az alábbi csomagok kerülnek letöltésre:"
+msgstr[0] "Az alábbi %s kerül letöltésre:"
+msgstr[1] "Az alábbi %s kerülnek letöltésre:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "A következő kötegek kerülnek telepítésre:"
-msgstr[1] "A következő kötegek kerülnek telepítésre:"
+msgstr[0] "A következő új %s kerül telepítésre:"
+msgstr[1] "A következő új %s kerülnek telepítésre:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő %s kerül eltávolításra:"
+msgstr[1] "A következő %s kerülnek eltávolításra:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -953,14 +941,12 @@ msgstr "Hibás válasz: '%s'. Válassza az 'y'-t az '%s'-hez vagy az 'n'-t a '%s
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
-msgstr "Túl sok paraméter."
+msgstr "Túl sok paraméter"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "osage"
+msgstr "Használat"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1791,3 +1777,4 @@ msgstr "Katalógus"
 #: ../src/zypper-search.h:291
 msgid "Repository"
 msgstr "Telepítési forrás"
+
