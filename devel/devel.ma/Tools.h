@@ -109,56 +109,10 @@ inline RepoManager makeRepoManager( const Pathname & mgrdir_r )
   RepoManagerOptions mgropt;
   mgropt.repoCachePath    = mgrdir_r/"cache";
   mgropt.repoRawCachePath = mgrdir_r/"raw_cache";
-  mgropt.knownReposPath   = mgrdir_r/"repos";
+  mgropt.knownReposPath   = mgrdir_r;
 
   return RepoManager( mgropt );
 }
 
 ///////////////////////////////////////////////////////////////////
-
-inline Repository createSource( const Url & url_r, const std::string & alias_r = std::string() )
-{
-  Repository ret;
-#if 0
-  Measure x( "createSource: " + url_r.asString() );
-  try
-    {
-      std::string alias( alias_r.empty() ? Date::now().asSeconds() : alias_r );
-      try
-        {
-          ret = SourceFactory().createFrom( url_r, "/", alias );
-        }
-      catch ( const source::SourceUnknownTypeException & )
-        {
-          ret = SourceFactory().createFrom( "Plaindir", url_r, "/", alias, "", false, true );
-        }
-    }
-  catch ( const Exception & )
-    {
-      return Repository::noSource;
-    }
-  x.start( "parseSource: " + url_r.asString() );
-  {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    ret.resolvables();
-  }
-  x.stop();
-  MIL << "Content " << ret << "{" << endl;
-  rstats( ret.resolvables() );
-  MIL << "}" << endl;
-#endif
-  return ret;
-}
-inline Repository createSource( const std::string & url_r, const std::string & alias_r = std::string() )
-{
-  try
-    {
-      return createSource( Url(url_r), alias_r );
-    }
-  catch ( const Exception & )
-    {
-      return Repository::noRepository;
-    }
-}
-
 #endif // Tools_h

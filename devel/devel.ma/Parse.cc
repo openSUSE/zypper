@@ -20,6 +20,7 @@
 #include "zypp/Language.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
+#include "zypp/ManagedFile.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
@@ -33,6 +34,8 @@
 #include "zypp/cache/CacheStore.h"
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
+
+#include "zypp/repo/PackageProvider.h"
 
 #include "zypp/ui/PatchContents.h"
 #include "zypp/ResPoolProxy.h"
@@ -48,11 +51,15 @@ using zypp::parser::TagParser;
 static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+
 bool queryInstalledEditionHelper( const std::string & name_r,
                                   const Edition &     ed_r,
-                                  const Arch &        arch_r ) const
+                                  const Arch &        arch_r )
 {
-  INT << name_r << "-" << ed_r <<< "." < arch_r << endl;
+  INT << name_r << "-" << ed_r << "." << arch_r << endl;
   return false;
 }
 
@@ -70,12 +77,15 @@ ManagedFile repoProvidePackage( const PoolItem & pi )
 
   // Build a repository list for repos
   // contributing to the pool
-  std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
-  repo::DeltaCandidates deltas(repos);
+  repo::DeltaCandidates deltas( repo::makeDeltaCandidates( _pool.knownRepositoriesBegin(),
+                                                           _pool.knownRepositoriesEnd() ) );
   repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
   return pkgProvider.providePackage();
 }
 
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
 template<class _Res>
@@ -91,28 +101,38 @@ Selectable::Ptr getSel( const std::string & name_r )
 }
 
 template<class _Res>
-Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
+PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
 {
-  ResPoolProxy uipool( getZYpp()->poolProxy() );
-  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
+  PoolItem ret;
+  ResPool pool( getZYpp()->pool() );
+  for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
   {
-    if ( (*it)->name() == name_r )
-      return (*it);
+    if ( !ret && isKind<_Res>( (*it).resolvable() )
+         && ( ed_r == Edition() || ed_r == (*it)->edition() )
+         && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
+    {
+      ret = (*it);
+      MIL << "    ->" << *it << endl;
+    }
+    else
+    {
+      DBG << "     ?" << *it << endl;
+    }
   }
-  return 0;
+  return ret;
 }
 template<class _Res>
-Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r )
+PoolItem getPi( const std::string & name_r )
 {
   return getPi<_Res>( name_r, Edition(), Arch() );
 }
 template<class _Res>
-Selectable::Ptr getPi( const std::string & name_r, const Edition & ed_r )
+PoolItem getPi( const std::string & name_r, const Edition & ed_r )
 {
   return getPi<_Res>( name_r, ed_r, Arch() );
 }
 template<class _Res>
-Selectable::Ptr getPi( const std::string & name_r, const Arch & arch_r )
+PoolItem getPi( const std::string & name_r, const Arch & arch_r )
 {
   return getPi<_Res>( name_r, Edition(), arch_r );
 }
@@ -137,7 +157,7 @@ void dbgDu( Selectable::Ptr sel )
 }
 
 ///////////////////////////////////////////////////////////////////
-RepoProvidePackage repoProvidePackage( access, pool_r);
+
 struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
@@ -537,9 +557,15 @@ int main( int argc, char * argv[] )
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-  PoolItem pi(
+  repo::DeltaCandidates deltas( repo::makeDeltaCandidates( pool.knownRepositoriesBegin(),
+                                                           pool.knownRepositoriesEnd() ) );
 
-  ManagedFile
+  DBG << "patch: " << deltas.patchRpms(0).size() << " " << deltas.patchRpms(0) << endl;
+  DBG << "delta: " << deltas.deltaRpms(0).size() << " " << deltas.deltaRpms(0) << endl;
+
+
+  PoolItem pi( getPi<Package>( "kernel-default" ) );
+  USR << pi << endl;
 
  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
