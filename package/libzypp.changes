@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 17 15:22:47 CEST 2007 - schubi@suse.de
+
+-Bugfix in vendor change of a required resolvable (Correct error message)
+ Bug 310455
+- r 7262 
+
+-------------------------------------------------------------------
 Mon Sep 17 12:36:28 CEST 2007 - lslezak@suse.cz
 
 - fixed DU parsing in inst-sys (#308659)
