@@ -311,11 +311,13 @@ struct NoInstallableProviders
 {
     PoolItem_Ref requirer;
     ResolverContext_Ptr context;
+    ResPool pool;    
 
     bool operator()( const CapAndItem cai)
     {
 	PoolItem provider = cai.item;
 	Capability match = cai.cap;
+	PoolItem_Ref upgrades = Helper::findInstalledItem (pool, provider);	
 
 	string msg_str;
 	//const Capability match;
@@ -349,10 +351,10 @@ struct NoInstallableProviders
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_KEEP_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);	    
  	} else	if (provider
-		    && requirer
-		    && !VendorAttr::instance().equivalent(provider->vendor(), requirer->vendor())) {
+		    && upgrades
+		    && !VendorAttr::instance().equivalent(provider->vendor(), upgrades->vendor())) {		    
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_VENDOR_PROVIDER,
-								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
+								   upgrades, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 	}
 	else if (provider->arch().compatibleWith( context->architecture() )) {
@@ -742,6 +744,7 @@ provider_done:;
 	    NoInstallableProviders info;
 	    info.requirer = _requiring_item;
 	    info.context = context;
+	    info.pool = pool();
 
 	    // Maybe we can add some extra info on why none of the providers are suitable.
 
