@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Mon Sep 17 15:51:04 CEST 2007 - ma@suse.de
+
+- Improve estimated diskusage while there is no valid
+  solver result. (#325617)
+- version 3.24.1
+
+-------------------------------------------------------------------
 Mon Sep 17 15:22:47 CEST 2007 - schubi@suse.de
 
 -Bugfix in vendor change of a required resolvable (Correct error message)
  Bug 310455
-- r 7262 
+- r 7262
 
 -------------------------------------------------------------------
 Mon Sep 17 12:36:28 CEST 2007 - lslezak@suse.cz

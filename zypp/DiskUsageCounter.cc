@@ -30,7 +30,43 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
+
+    inline void addDu( DiskUsageCounter::MountPointSet & result_r, DiskUsage & du_r )
+    {
+      // traverse mountpoints in reverse order. This is done beacuse
+      // DiskUsage::extract computes the mountpoint size, and then
+      // removes the entry. So we must process leaves first.
+      for_( mpit, result_r.rbegin(), result_r.rend() )
+      {
+        // Extract usage for the mount point
+        DiskUsage::Entry entry = du_r.extract( mpit->dir );
+        // Adjust the data.
+        mpit->pkg_size += entry._size;
+      }
+    }
+
+    inline void delDu( DiskUsageCounter::MountPointSet & result_r, DiskUsage & du_r )
+    {
+      // traverse mountpoints in reverse order. This is done beacuse
+      // DiskUsage::extract computes the mountpoint size, and then
+      // removes the entry. So we must process leaves first.
+      for_( mpit, result_r.rbegin(), result_r.rend() )
+      {
+        // Extract usage for the mount point
+        DiskUsage::Entry entry = du_r.extract( mpit->dir );
+        // Adjust the data.
+        mpit->pkg_size -= entry._size;
+      }
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+ DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
   {
     DiskUsageCounter::MountPointSet result = mps;
 
@@ -59,23 +95,36 @@ namespace zypp
       if ( ! it->status().transacts() )
         continue;
 
-      // traverse mountpoints in reverse order. This is done beacuse
-      // DiskUsage::extract computes the mountpoint size, and then
-      // removes the entry. So we must process leaves first.
-      for_( mpit, result.rbegin(), result.rend() )
+      // Adjust the data.
+      if ( it->status().isUninstalled() )
       {
-        // Extract usage for the mount point
-        DiskUsage::Entry entry = du.extract( mpit->dir );
+        // an uninstalled item gets installed:
+        addDu( result, du );
 
-        // Adjust the data.
-        if ( it->status().isInstalled() )
+        // While there is no valid solver result, items to update
+        // are selected, but installed old versions are not yet
+        // deselected. We try to compensate this:
+        if ( ! (*it)->installOnly() )
         {
-          mpit->pkg_size -= entry._size;
+          // Item to update -> check the installed ones.
+          for_( nit, pool_r.byNameBegin((*it)->name()), pool_r.byNameEnd((*it)->name()) )
+          {                                          // same name
+            if (    (*nit)->kind() == (*it)->kind()  // same kind
+                 && nit->status().staysInstalled() ) // and unselected installed
+            {
+              DiskUsage ndu( (*nit)->diskusage() );
+              if ( ! ndu.empty() )
+              {
+                delDu( result, ndu );
+              }
+            }
+          }
         }
-        else
-        {
-          mpit->pkg_size += entry._size;
-        }
+      }
+      else
+      {
+        // an installed item gets deleted:
+        delDu( result, du );
       }
     }
     return result;
