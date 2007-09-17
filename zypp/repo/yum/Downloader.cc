@@ -57,10 +57,17 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc,
 {
   MIL << dtype << " : " << loc << endl;
 
+  //! \todo do this through a ZConfig call so that it is always in sync with parser
   // skip other
   if ( dtype == ResourceType::OTHER )
   {
     MIL << "Skipping other.xml" << endl;
+    return true;
+  }
+  // skip filelists
+  if ( dtype == ResourceType::FILELISTS )
+  {
+    MIL << "Skipping filelists.xml.gz" << endl;
     return true;
   }
 
