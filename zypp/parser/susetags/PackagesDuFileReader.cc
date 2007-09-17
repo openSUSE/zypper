@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <cstdlib>
 #include "zypp/base/Easy.h"
 #include "zypp/base/Regex.h"
 #include "zypp/base/Logger.h"
@@ -133,7 +134,8 @@ namespace zypp
                                         str::strtonum<unsigned>(what[2]) + str::strtonum<unsigned>(what[3]),
                                         str::strtonum<unsigned>(what[4]) + str::strtonum<unsigned>(what[5]) );
 
-                if ( _mounts.empty() )
+		// the partitioning is not known or we are running in instsys (see #308659)
+                if ( _mounts.empty() || (getenv("YAST_IS_RUNNING") && (std::string(getenv("YAST_IS_RUNNING")) == "instsys" )))
                 {
                   // if no mount information, cut off deeper directory
                   // levels in DiskUsage::Entry to reduce data size.

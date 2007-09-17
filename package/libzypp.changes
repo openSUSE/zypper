@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 17 12:36:28 CEST 2007 - lslezak@suse.cz
+
+- fixed DU parsing in inst-sys (#308659)
+- revision 7256
+
+-------------------------------------------------------------------
 Fri Sep 14 22:57:54 CEST 2007 - ma@suse.de
 
 - Enable using patch and delta rpms. (#309124)

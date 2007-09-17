@@ -198,7 +198,7 @@ namespace zypp
       if (_disk_usage)
         return _disk_usage->getMountPoints();
       else
-        return DiskUsageCounter::MountPointSet();
+        return DiskUsageCounter::detectMountPoints();
     }
 
     //------------------------------------------------------------------------
