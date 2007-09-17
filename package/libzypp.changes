@@ -1,9 +1,15 @@
 -------------------------------------------------------------------
+Mon Sep 17 16:33:14 CEST 2007 - jkupec@suse.cz
+
+- don't download filelists.xml.gz (#307105)
+- version 3.24.1
+- revision 7269
+
+-------------------------------------------------------------------
 Mon Sep 17 15:51:04 CEST 2007 - ma@suse.de
 
 - Improve estimated diskusage while there is no valid
   solver result. (#325617)
-- version 3.24.1
 - revision 7266
 
 -------------------------------------------------------------------
