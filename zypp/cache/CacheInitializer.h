@@ -19,7 +19,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
-#define ZYPP_CACHE_SCHEMA_VERSION 1005
+#define ZYPP_CACHE_SCHEMA_VERSION 1006
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -51,7 +51,7 @@ namespace zypp
        * and was just initialized with success
        */
       bool justInitialized() const;
-      
+
       /**
        * \short Has the cache been reinitialized?
        *
@@ -60,7 +60,7 @@ namespace zypp
        * was reinitialized in order to get the new schema
        */
       bool justReinitialized() const;
-      
+
     protected:
       bool tablesCreated() const;
 			void createTables();
