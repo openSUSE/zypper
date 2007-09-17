@@ -544,7 +544,10 @@ int one_command(const string& command, int argc, char **argv)
   
   // here come commands that need the lock
   try {
-    if (command == "service-list" || command == "sl")
+    const char *roh = getenv("ZYPP_READONLY_HACK");
+    if (roh != NULL && roh[0] == '1')
+      zypp_readonly_hack::IWantIt ();
+    else if (command == "service-list" || command == "sl")
       zypp_readonly_hack::IWantIt (); // #247001
 
     God = zypp::getZYpp();
