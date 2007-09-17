@@ -40,7 +40,7 @@ void yum_download_test(const string &dir)
   
   const char* files[] =
   {
-    "filelists.xml.gz",
+//    "filelists.xml.gz",
 //    "other.xml.gz",
     "patches.xml",
     "patch-fetchmsttfonts.sh-2333.xml",
