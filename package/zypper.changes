@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 17 17:52:30 CEST 2007 - jkupec@suse.cz
+
+- translations update
+- r7273
+
+-------------------------------------------------------------------
 Fri Sep 14 17:06:39 CEST 2007 - jkupec@suse.cz
 
 - don't warn about reboot or restart if the action has been cancelled

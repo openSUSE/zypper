@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper.nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-08-17 22:54+0200\n"
+"PO-Revision-Date: 2007-09-17 14:22+0200\n"
 "Last-Translator: Rune Nordbøe Skillingstad <rune@skillingstad.no>\n"
 "Language-Team: Norwegian\n"
 "MIME-Version: 1.0\n"
@@ -55,26 +55,26 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "Vil du importere nøkkel-ID %s, %s med fingeravtrykk %s"
 
 #: ../src/zypper-keyring-callbacks.h:110
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
-msgstr "Advarsel: Problemer med å overse signaturkontroll av %s med den offentlige nøkkelen %s, %s med fingeravtrykk %s! Dobbelsjekk at dette ikke er på grunn av ondsinnet endringer i filen!"
+msgstr "Advarsel: Problemer med å overse signaturkontroll av %s med den offentlige nøkkelen %s, %s med fingeravtrykk %s!"
 
 #: ../src/zypper-keyring-callbacks.h:113
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Dobbelsjekk at dette ikke er på grunn av ondsinnet endringer i filen!"
 
 #: ../src/zypper-keyring-callbacks.h:120
-#, fuzzy, c-format
+#, c-format
 msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
-msgstr "Mislykket sammendragskontroll for %s. Forventet %s, fant %s."
+msgstr "Mislykket signaturkontroll for %s med offentlig nøkkel %s, %s, fingeravtrykk %s."
 
 #: ../src/zypper-keyring-callbacks.h:123
 msgid "Warning: This might be caused by a malicious change in the file!"
-msgstr ""
+msgstr "Advarsel: Dette kan være på grunn av ondsinnet endringer i filen!"
 
 #: ../src/zypper-keyring-callbacks.h:125
 msgid "Continuing is risky! Continue anyway?"
-msgstr ""
+msgstr "Å fortsette kan være skummelt! Fortsett likevel?"
 
 #: ../src/zypper-keyring-callbacks.h:136
 #, c-format
@@ -107,88 +107,76 @@ msgid "Initializing Target"
 msgstr "Initialiserer mål"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakke"
 msgstr[1] "pakke"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
 msgstr[0] "utvalg"
 msgstr[1] "utvalg"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "mønster"
 msgstr[1] "mønster"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkt"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "patch"
+msgstr[0] "lapp"
 msgstr[1] "patch"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
 msgstr[0] "skript"
 msgstr[1] "skript"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "melding"
 msgstr[1] "melding"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "Språk: "
+msgstr[0] "språk"
 msgstr[1] "Språk: "
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "atom"
 msgstr[1] "atom"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "system"
 msgstr[1] "system"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "pakke"
+msgstr[0] "kildepakke"
 msgstr[1] "pakke"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Nødvendig pakke"
+msgstr[0] "nødvendig pakke"
 msgstr[1] "Nødvendig pakke"
 
 #: ../src/zypper-misc.cc:271
@@ -268,35 +256,35 @@ msgstr "Ingenting å gjøre."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "Følgende pakker vil bli oppgradert:"
-msgstr[1] "Følgende pakker vil bli oppgradert:"
+msgstr[0] "Følgende %s vil bli oppgradert:"
+msgstr[1] "Følgende %s vil bli oppgradert:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "Følgende pakker vil bli lastet ned:"
-msgstr[1] "Følgende pakker vil bli lastet ned:"
+msgstr[0] "Følgende %s vil bli nedgradert:"
+msgstr[1] "Følgende %s vil bli lastet ned:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "Følgende samlinger vil bli installert:"
-msgstr[1] "Følgende samlinger vil bli installert:"
+msgstr[0] "Følgende NYE %s vil bli installert:"
+msgstr[1] "Følgende NYE %s vil bli installert:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende %s vil bli FJERNET:"
+msgstr[1] "Følgende %s vil bli FJERNET:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -445,9 +433,8 @@ msgid "committing"
 msgstr "skriver"
 
 #: ../src/zypper-misc.cc:1421
-#, fuzzy
 msgid "Problem downloading the package file from the repository:"
-msgstr "Kunne ikke laste filer fra '%s'."
+msgstr "Problemer med å laste ned pakken fra arkivet:"
 
 #: ../src/zypper-misc.cc:1422 ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
@@ -799,29 +786,26 @@ msgid "Please, check if your installation media is valid and readable."
 msgstr "Undersøk om installasjonsmediumet er gyldig og lesbart."
 
 #: ../src/zypper-sources.cc:795
-#, fuzzy
 msgid "Problem accessing the file at the specified URL"
-msgstr "Problemer med overføring av arkivdata fra angitte nettadresse."
+msgstr "Problemer med hente filen med den angitte URL"
 
 #: ../src/zypper-sources.cc:796
-#, fuzzy
 msgid "Please check if the URL is valid and accessible."
-msgstr "Undersøk om angitte nettadresse er tilgjengelig."
+msgstr "Undersøk om angitte nettadresse er gyldig og tilgjengelig."
 
 #: ../src/zypper-sources.cc:803
-#, fuzzy
 msgid "Problem parsing the file at the specified URL"
-msgstr "Problemer med overføring av arkivdata fra angitte nettadresse."
+msgstr "Problemer med tolke filen på med den angitte URL"
 
 #. TranslatorExplanation don't translate the URL if the URL itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/zypper-sources.cc:806
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr ""
+msgstr "Er det en .repo-fil? Se http://en.opensuse.org/Standards/RepoInfo for mer info."
 
 #: ../src/zypper-sources.cc:813
 msgid "Problem encountered while trying to read the file at the specified URL"
-msgstr ""
+msgstr "Det oppstod problemer med å lese filen med den angitte URL"
 
 #: ../src/zypper-sources.cc:870
 #, c-format
@@ -947,18 +931,16 @@ msgstr "nei"
 #: ../src/zypper-callbacks.cc:152
 #, c-format
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
-msgstr ""
+msgstr "Ugyldig svar '%s'. Trykk 'y' for '%s' eller 'n' for '%s' om ingenting annet virker for deg"
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
-msgstr "For mange argumenter."
+msgstr "For mange argumenter"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "Osage"
+msgstr "Bruk"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1090,7 +1072,6 @@ msgid "Given URL is invalid."
 msgstr "Nettadressen er ugyldig."
 
 #: ../src/zypper.cc:84
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tHelp\n"
@@ -1115,23 +1096,23 @@ msgid ""
 msgstr ""
 "  Kommandoer:\n"
 "\thelp\t\t\tHjelp\n"
-" \tshell, sh\t\tGodta flere kommandoer samtidig\n"
-" \tinstall, in\t\tInstaller pakker eller nødvendige ressurser\n"
-" \tremove, rm\t\tFjern pakker eller nødvendige ressurser\n"
-" \tsearch, se\t\tSøk etter pakker som samsvarer med et mønster\n"
-" \trepos, lr\t\tListe over alle definerte arkiv.\n"
-" \taddrepo, ar\t\tLegg til et arkiv\n"
-" \tremoverepo, rr\t\tFjerne et arkiv\n"
-" \trenamerepo, nr\t\tGi nytt navn til et arkiv\n"
-" \tmodifyrepo, mr\t\tEndre et arkiv\n"
-" \trefresh, ref\t\tOppdater alle arkiv\n"
-" \tpatch-check, pchk\tSøk etter pakkeoppdateringer\n"
-" \tpatches, pch\t\tVis liste over pakkeoppdateringer\n"
-" \tlist-updates, lu\tVis liste over oppdateringer\n"
-" \txml-updates, xu\t\tVis liste over pakkeoppdateringer i XML-format\n"
-" \tupdate, up\t\tOppdater pakker\n"
-" \tinfo, if\t\tVis full informasjon for pakker\n"
-" \tpatch-info\t\tVis full informasjon for pakkeoppdateringer\n"
+"\tshell, sh\t\tGodta flere kommandoer samtidig\n"
+"\tinstall, in\t\tInstaller pakker eller nødvendige ressurser\n"
+"\tremove, rm\t\tFjern pakker eller nødvendige ressurser\n"
+"\tsearch, se\t\tSøk etter pakker som samsvarer med et mønster\n"
+"\trepos, lr\t\tListe over alle definerte arkiv.\n"
+"\taddrepo, ar\t\tLegg til et arkiv\n"
+"\tremoverepo, rr\t\tFjerne et arkiv\n"
+"\trenamerepo, nr\t\tGi nytt navn til et arkiv\n"
+"\tmodifyrepo, mr\t\tEndre et arkiv\n"
+"\trefresh, ref\t\tOppdater alle arkiv\n"
+"\tpatch-check, pchk\tSøk etter pakkeoppdateringer\n"
+"\tpatches, pch\t\tVis liste over pakkeoppdateringer\n"
+"\tlist-updates, lu\tVis liste over oppdateringer\n"
+"\txml-updates, xu\t\tVis liste over pakkeoppdateringer i XML-format\n"
+"\tupdate, up\t\tOppdater pakker\n"
+"\tinfo, if\t\tVis full informasjon for pakker\n"
+"\tpatch-info\t\tVis full informasjon for pakkeoppdateringer\n"
 "\tsource-install, si\tInstaller en kildekodepakke\n"
 
 #: ../src/zypper.cc:136
@@ -1812,20 +1793,3 @@ msgstr "Katalog"
 msgid "Repository"
 msgstr "Arkiv"
 
-#~ msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-#~ msgstr "Feil ved signaturkontroll av %s med den offentlige nøkkelen %s, %s og fingeravtrykk %s. Advarsel: det kan være på grunn av ondsinnet endring av innholdet i filen. Å fortsette kan være farlig! Vil du likevel fortsette?"
-
-#~ msgid "y"
-#~ msgstr "j"
-
-#~ msgid "Y"
-#~ msgstr "J"
-
-#~ msgid "n"
-#~ msgstr "n"
-
-#~ msgid "N"
-#~ msgstr "N"
-
-#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
-#~ msgstr "Ugyldig svar '%s'. Bruk bokstavene '%s' eller '%s':"
