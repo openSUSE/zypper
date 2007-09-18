@@ -288,11 +288,11 @@ int one_command(int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    // TranslatorExplanation don't translate the resolvable types
-    // (package, patch, pattern, product) or at least leave also their
-    // originals, since they are expected untranslated on the command line
     //! \todo document --capability after 10.3 is out
     specific_help = _(
+      // TranslatorExplanation don't translate the resolvable types
+      // (package, patch, pattern, product) or at least leave also their
+      // originals, since they are expected untranslated on the command line
       "install (in) [options] <capability> ...\n"
       "\n"
       "Install resolvables with specified capabilities. A capability is"
@@ -325,6 +325,8 @@ int one_command(int argc, char **argv)
     specific_options = remove_options;
     //! \todo document --capability after 10.3 is out
     specific_help = _(
+      // TranslatorExplanation don't translate the resolvable types
+      // (see the install command comment) 
       "remove (rm) [options] <capability> ...\n"
       "\n"
       "Remove resolvables with specified capabilities. A capability is"
@@ -482,6 +484,8 @@ int one_command(int argc, char **argv)
     };
     specific_options = list_updates_options;
     specific_help = _(
+      // TranslatorExplanation don't translate the resolvable types
+      // (see the install command comment) 
       "list-updates [options]\n"
       "\n"
       "List all available updates\n"
@@ -509,6 +513,8 @@ int one_command(int argc, char **argv)
     };
     specific_options = update_options;
     specific_help = _(
+      // TranslatorExplanation don't translate the resolvable types
+      // (see the install command comment) 
       "update (up) [options]\n"
       "\n"
       "Update all installed resolvables with newer versions, where applicable.\n"
@@ -548,6 +554,8 @@ int one_command(int argc, char **argv)
     };
     specific_options = search_options;
     specific_help = _(
+      // TranslatorExplanation don't translate the resolvable types
+      // (see the install command comment) 
       "search [options] [querystring...]\n"
       "\n"
       "Search for packages matching given search strings\n"
@@ -617,6 +625,7 @@ int one_command(int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = info_options;
+    //! \todo -t option is missing (10.3+)
     specific_help = _(
       "info <name> ...\n"
       "\n"
