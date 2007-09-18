@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-08-22 22:48+0200\n"
+"PO-Revision-Date: 2007-09-17 23:42+0200\n"
 "Last-Translator: Rinse de Vries <rinsedevries@kde.nl>\n"
 "Language-Team: Nederlands <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,27 +55,26 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "Wilt u de sleutel-id %s, %s, vingerafdruk %s vertrouwen?"
 
 #: ../src/zypper-keyring-callbacks.h:110
-#, fuzzy, c-format
+#, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
-msgstr "Waarschuwing: mislukte ondertekeningverificatie wordt genegeerd voor %s met publieke sleutel-id %s, %s, vingerafdruk %s!. Controleer goed of dit niet wordt veroorzaakt door kwaadaardige wijzigingen in het bestand!"
+msgstr "Waarschuwing: mislukte ondertekeningverificatie wordt genegeerd voor %s met publieke sleutel-id %s, %s, vingerafdruk %s!"
 
 #: ../src/zypper-keyring-callbacks.h:113
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Controleer goed of dit niet wordt veroorzaakt door kwaadwillende wijzigingen in het bestand!"
 
 #: ../src/zypper-keyring-callbacks.h:120
-#, fuzzy, c-format
+#, c-format
 msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
-msgstr "Verificatie van de samenvatting is mislukt voor %s. %s werd verwacht, %s werd gevonden."
+msgstr "Verificatie van de ondertekening is mislukt voor %s met publieke sleutel-id %s, %s, vingerafdruk %s"
 
 #: ../src/zypper-keyring-callbacks.h:123
 msgid "Warning: This might be caused by a malicious change in the file!"
-msgstr ""
+msgstr "Waarschuwing: dit kan worden veroorzaakt door een kwaadwillende wijziging in het bestand!"
 
 #: ../src/zypper-keyring-callbacks.h:125
-#, fuzzy
 msgid "Continuing is risky! Continue anyway?"
-msgstr "Toch doorgaan"
+msgstr "Doorgaan is riskant! Toch doorgaan?"
 
 #: ../src/zypper-keyring-callbacks.h:136
 #, c-format
@@ -108,89 +107,77 @@ msgid "Initializing Target"
 msgstr "Doel initialiseren"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakket"
-msgstr[1] "pakket"
+msgstr[1] "pakketten"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
 msgstr[0] "selectie"
-msgstr[1] "selectie"
+msgstr[1] "selecties"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "patroon"
-msgstr[1] "patroon"
+msgstr[1] "patronen"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "product"
-msgstr[1] "product"
+msgstr[1] "producten"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "wijzigingen aanbrengen"
-msgstr[1] "wijzigingen aanbrengen"
+msgstr[0] ""
+msgstr[1] "patches"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
 msgstr[0] "script"
-msgstr[1] "script"
+msgstr[1] "scripts"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "bericht"
-msgstr[1] "bericht"
+msgstr[1] "berichten"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "taal: "
-msgstr[1] "taal: "
+msgstr[0] "taal"
+msgstr[1] "talen"
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "atom"
-msgstr[1] "atom"
+msgstr[1] "atoms"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "systeem"
-msgstr[1] "systeem"
+msgstr[1] "systemen"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "pakket"
-msgstr[1] "pakket"
+msgstr[0] "bronpakket"
+msgstr[1] "bronpakketten"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Oplosbaar"
-msgstr[1] "Oplosbaar"
+msgstr[0] "oplosbare"
+msgstr[1] "oplosbaren"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -269,35 +256,35 @@ msgstr "Niets te doen."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "De volgende pakketten zullen worden opgewaardeerd:"
-msgstr[1] "De volgende pakketten zullen worden opgewaardeerd:"
+msgstr[0] "Het volgende %s zal worden opgewaardeerd:"
+msgstr[1] "De volgende %s zullen worden opgewaardeerd:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "De volgende pakketten zullen worden gedownload:"
-msgstr[1] "De volgende pakketten zullen worden gedownload:"
+msgstr[0] "Het volgende %s zal neerwaarts worden opgewaardeerd:"
+msgstr[1] "De volgende %s zullen neerwaarts worden opgewaardeerd:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "De volgende bundels zullen worden geïnstalleerd:"
-msgstr[1] "De volgende bundels zullen worden geïnstalleerd:"
+msgstr[0] "Het volgende NIEUWE %s zal worden geïnstalleerd:"
+msgstr[1] "De volgende NIEUWE %s zullen worden geïnstalleerd:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Het volgende %s zal worden VERWIJDERD"
+msgstr[1] "De volgende %s zullen worden VERWIJDERD"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -448,9 +435,8 @@ msgid "committing"
 msgstr "toewijzen"
 
 #: ../src/zypper-misc.cc:1421
-#, fuzzy
 msgid "Problem downloading the package file from the repository:"
-msgstr "Probleem bij downloaden van bestanden van '%s'"
+msgstr "Probleem bij downloaden van pakketbestand van de installatiebron:"
 
 #: ../src/zypper-misc.cc:1422 ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
@@ -803,29 +789,26 @@ msgid "Please, check if your installation media is valid and readable."
 msgstr "Controleer of uw installatiemedium geldig en leesbaar is."
 
 #: ../src/zypper-sources.cc:795
-#, fuzzy
 msgid "Problem accessing the file at the specified URL"
-msgstr "Probleem bij het overdragen van brongegevens van opgegeven URL-adres."
+msgstr "Probleem bij toegang tot het bestand op de opgegeven URL"
 
 #: ../src/zypper-sources.cc:796
-#, fuzzy
 msgid "Please check if the URL is valid and accessible."
-msgstr "Controleer of het opgegeven URL-adres toegankelijk is."
+msgstr "Controleer of het opgegeven URL-adres juist en toegankelijk is."
 
 #: ../src/zypper-sources.cc:803
-#, fuzzy
 msgid "Problem parsing the file at the specified URL"
-msgstr "Probleem bij het overdragen van brongegevens van opgegeven URL-adres."
+msgstr "Probleem bij het analyseren van het bestand op de opgegeven URL"
 
 #. TranslatorExplanation don't translate the URL if the URL itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/zypper-sources.cc:806
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr ""
+msgstr "Is het een .repo-bestand? zie http://nl.opensuse.org/Standards/RepoInfo voor details."
 
 #: ../src/zypper-sources.cc:813
 msgid "Problem encountered while trying to read the file at the specified URL"
-msgstr ""
+msgstr "Probleem bij het lezen van het bestand op de opgegeven URL"
 
 #: ../src/zypper-sources.cc:870
 #, c-format
@@ -951,19 +934,17 @@ msgstr "nee"
 #: ../src/zypper-callbacks.cc:152
 #, c-format
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
-msgstr ""
+msgstr "Ongeldig antwoord '%s'. Voer 'y' in voor '%s' of 'n' voor '%s' als niets anders voor u werkt"
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:764
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
 msgstr "Teveel argumenten."
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "Osaags"
+msgstr "Gebruik"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1097,7 +1078,6 @@ msgid "Given URL is invalid."
 msgstr "Opgegeven URL-adres is ongeldig."
 
 #: ../src/zypper.cc:84
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tHelp\n"
@@ -1794,20 +1774,3 @@ msgstr "Catalogus"
 msgid "Repository"
 msgstr "Installatiebron"
 
-#~ msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: This might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
-#~ msgstr "Ondertekenverificatie mislukt voor %s met publieke-sleutel-id %s, %s, vingerafdruk %s. Waarschuwing: dit kan zijn veroorzaakt door een kwaadaardige wijziging in het bestand! Doorgaan is riskant! Wilt u toch doorgaan?"
-
-#~ msgid "y"
-#~ msgstr "j"
-
-#~ msgid "Y"
-#~ msgstr "J"
-
-#~ msgid "n"
-#~ msgstr "N"
-
-#~ msgid "N"
-#~ msgstr "N"
-
-#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
-#~ msgstr "Onjuist antwoord '%s'. Kies '%s' of '%s'."
