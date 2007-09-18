@@ -1,12 +1,13 @@
 /* A setuid-root wrapper for zypper refresh repositories */
 
-/* setgid and umask */
+/* setgid, umask and open */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <grp.h>
+#include <fcntl.h>
 /* clearenv */
 #include <stdlib.h>
-/* chdir, execl, setuid */
+/* chdir, execl, setuid, exit */
 #include <unistd.h>
 /* perror */
 #include <stdio.h>
@@ -19,7 +20,20 @@ const char *arg2 = "--terse";
 const char *arg3 = "-q";
 const char *arg4 = "xu";
 
-int main (void) {
+int main (void)
+{
+    /* see http://rechner.lst.de/~okir/blackhats/node41.html */
+    while (1) {
+	int fd;
+	fd = open("/dev/null", O_RDWR);
+	if (fd < 0)
+	    return WRAPPER_ERROR;
+	if (fd > 2) {
+	    close(fd);
+	    break;
+	}
+    }
+
     /* cd / to avoid NFS problems */
     if (chdir ("/")) {
 	perror ("chdir");

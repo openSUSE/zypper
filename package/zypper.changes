@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Tue Sep 18 17:48:16 CEST 2007 - aschnell@suse.de
 
-- call setgid and umask in zypp-checkpatches-wrapper (bug #325556)
+- call setgid and umask and check file-descriptors 0, 1 and 2 in
+  zypp-checkpatches-wrapper (bug #325556)
 
 -------------------------------------------------------------------
 Tue Sep 18 13:02:21 CEST 2007 - dmacvicar@suse.de
