@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 18 13:02:21 CEST 2007 - dmacvicar@suse.de
+
+- fix (#309267) reinstalling already installed resolvables
+  (adds --force option)
+- 0.8.22
+
+-------------------------------------------------------------------
 Mon Sep 17 17:52:30 CEST 2007 - jkupec@suse.cz
 
 - translations update
