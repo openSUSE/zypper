@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Sep 18 14:01:02 CEST 2007 - schubi@suse.de
+
+- Do not regarding requirements for packages which will be deleted in the
+  same solver run. Bug 310618
+- r 7292 
+- version 3.24.2
+
+-------------------------------------------------------------------
 Mon Sep 17 16:33:14 CEST 2007 - jkupec@suse.cz
 
 - don't download filelists.xml.gz (#307105)
