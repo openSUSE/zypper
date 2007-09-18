@@ -273,15 +273,27 @@ void mark_for_install( const ResObject::Kind &kind,
 
   if (installer.installed_item &&
       installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
-      installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch()) {
+      installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch() &&
+      ( ! copts.count("force") ) )
+  {
+    // if it is needed install anyway, even if it is installed
+    if ( installer.item.status().isNeeded() )
+    {
+      installer.item.status().setTransact( true, zypp::ResStatus::USER );
+    }
+    
     cout_n << format(_("skipping %s '%s' (already installed)")) % kind_to_string_localized(kind,1) % name << endl;
   }
   else {
+    
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
     bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
-    if (!result) {
-      cerr << format(_("Failed to add '%s' to the list of packages to be installed.")) % name << endl;
-      ERR << "Could not set " << name << " as to-be-installed" << endl;
+    if (!result)
+    {
+      // this is because the resolvable is installed and we are forcing.
+      installer.item.status().setTransact( true, zypp::ResStatus::USER );
+      //cerr << format(_("Failed to add '%s' to the list of packages to be installed.")) % name << endl;
+      //ERR << "Could not set " << name << " as to-be-installed" << endl;
     }
   }
 }

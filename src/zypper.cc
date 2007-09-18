@@ -277,6 +277,7 @@ int one_command(int argc, char **argv)
       {"type",                      required_argument, 0, 't'},
       // the default (ignored)
       {"name",                      no_argument,       0, 'n'},
+      {"force",                     no_argument,       0, 'f'},
       {"capability",                no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
       {"no-confirm",                no_argument,       0, 'y'}, 
@@ -302,6 +303,7 @@ int one_command(int argc, char **argv)
       "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
+      "-f, --force                     Install even if the item is already installed (reinstall)\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
@@ -1077,6 +1079,8 @@ int one_command(int argc, char **argv)
         gSettings.license_auto_agree = true;
     }
 
+    
+    
     if (command == ZypperCommand::REMOVE) {
       if (ghelp || arguments.size() < 1) {
         cerr << specific_help;
