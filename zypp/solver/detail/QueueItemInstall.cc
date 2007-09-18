@@ -288,6 +288,12 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     /* Log which item need this install */
 
     if (_needed_by) {
+	
+	ResStatus neededStatus = context->getStatus(_needed_by);
+	if (neededStatus.isToBeUninstalled()) {
+	    _XDEBUG( _needed_by << " will be uninstalled. So the requirement is not needed anymore");
+	    return true;
+	}
 
 	ResolverInfoNeededBy_Ptr info;
 
