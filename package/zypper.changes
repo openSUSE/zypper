@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep 18 17:48:16 CEST 2007 - aschnell@suse.de
+
+- call setgid and umask in zypp-checkpatches-wrapper (bug #325556)
+
+-------------------------------------------------------------------
 Tue Sep 18 13:02:21 CEST 2007 - dmacvicar@suse.de
 
 - fix (#309267) reinstalling already installed resolvables
@@ -23,7 +28,7 @@ Fri Sep 14 17:06:39 CEST 2007 - jkupec@suse.cz
 -------------------------------------------------------------------
 Thu Sep 13 11:28:41 CEST 2007 - dmacvicar@suse.de
 
-- Show reason of commit error (#308511) 
+- Show reason of commit error (#308511)
 - 0.8.20
 
 -------------------------------------------------------------------
@@ -177,7 +182,7 @@ Tue Aug 28 15:02:00 CEST 2007 - kkaempf@suse.de
 Tue Aug 28 12:50:27 CEST 2007 - dmacvicar@suse.de
 
 - a init target at refresh to have keys available
-  (#304672) 
+  (#304672)
 - rev 6928
 
 -------------------------------------------------------------------
@@ -208,13 +213,13 @@ Thu Aug 23 10:22:14 CEST 2007 - mvidner@suse.cz
 Tue Aug 21 15:07:29 CEST 2007 - dmacvicar@suse.de
 
 - fix invalid capability creation (#301690)
-- 0.8.15 
+- 0.8.15
 
 -------------------------------------------------------------------
 Tue Aug 21 13:47:09 CEST 2007 - tgoettlicher@suse.de
 
 - unification and clean up of XML output
-- r6787 
+- r6787
 
 -------------------------------------------------------------------
 Mon Aug 20 22:50:14 CEST 2007 - mls@suse.de
@@ -355,7 +360,7 @@ Tue Aug  7 16:04:45 CEST 2007 - jkupec@suse.cz
 
 - fixed zypper to complain when given an invalid answer in y/n prompt
   (#232250) plus made the answer translatable.
-- r6507 
+- r6507
 
 -------------------------------------------------------------------
 Mon Aug  6 18:17:31 CEST 2007 - jkupec@suse.cz
@@ -422,13 +427,13 @@ Fri Aug  3 16:33:09 CEST 2007 - dmacvicar@suse.de
 Fri Aug  3 13:56:19 CEST 2007 - tgoettlicher@suse.de
 
 - removed installnotify from xml output
-- r6433 
+- r6433
 
 -------------------------------------------------------------------
 Fri Aug  3 10:57:36 CEST 2007 - tgoettlicher@suse.de
 
 - renamed resolvabletype to kind in xml output
-- r6413 
+- r6413
 
 -------------------------------------------------------------------
 Fri Aug  3 10:22:06 CEST 2007 - tgoettlicher@suse.de
@@ -440,12 +445,12 @@ Fri Aug  3 10:22:06 CEST 2007 - tgoettlicher@suse.de
 Thu Aug  2 18:44:07 CEST 2007 - dmacvicar@suse.de
 
 - added xml output in terse mode
-- r6406 
+- r6406
 
 -------------------------------------------------------------------
 Thu Aug  2 16:10:56 CEST 2007 - tgoettlicher@suse.de
 
-- added xml error message to zypp-checkpatches-wrapper 
+- added xml error message to zypp-checkpatches-wrapper
 - r6395
 
 -------------------------------------------------------------------
@@ -460,7 +465,7 @@ Wed Aug 1 14:09:00 CEST 2007 - tgoettlicher@suse.de
 
 - added --non-interactive --terse to zypp-checkpatches-wrapper
 - added to machine_readable to zypper-callbacks
-- r6359 
+- r6359
 
 -------------------------------------------------------------------
 Wed Aug 1 11:18:00 CEST 2007 - tgoettlicher@suse.de
@@ -468,7 +473,7 @@ Wed Aug 1 11:18:00 CEST 2007 - tgoettlicher@suse.de
 - option xu only shows affect-package-manager patches when available
    because they have top priority
 - added installnotify message to xml
-- r6356 
+- r6356
 
 -------------------------------------------------------------------
 Tue Jul 31 13:42:25 CEST 2007 - jkupec@suse.cz
@@ -479,7 +484,7 @@ Tue Jul 31 13:42:25 CEST 2007 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Jul 31 11:15:46 CEST 2007 - schubi@suse.de
 
-- Removed keepExtra parameter in resolvePool; Bug 294727 
+- Removed keepExtra parameter in resolvePool; Bug 294727
 - r6323
 
 -------------------------------------------------------------------
@@ -512,7 +517,7 @@ Mon Jul 30 14:27:25 CEST 2007 - jkupec@suse.cz
 
 - output functions for progress reporting now take ostream as argument
 - made some progress displayed by default. This will need more tuning.
-- missing files added to .spec file 
+- missing files added to .spec file
 - r6285
 - 0.8.5
 
@@ -1018,7 +1023,7 @@ Tue Oct 31 21:41:56 CET 2006 - mvidner@suse.cz
 -------------------------------------------------------------------
 Sun Oct 29 02:27:24 CEST 2006 - ro@suse.de
 
-- add missing return value 
+- add missing return value
 - also use RPM_OPT_FLAGS for C source
 
 -------------------------------------------------------------------
