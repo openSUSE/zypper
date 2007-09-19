@@ -1,8 +1,15 @@
 -------------------------------------------------------------------
+Wed Sep 19 17:45:12 CEST 2007 - schubi@suse.de
+
+- Update: Do not set an item to installation if there has been already set
+  one for installation which has the same NVA. Bug  326286
+- version 3.24.3
+- r 7311 
+
+-------------------------------------------------------------------
 Wed Sep 19 14:19:49 CEST 2007 - ma@suse.de
 
 - Enable package cache during commit. (#326249)
-- version 3.24.3
 - revision 7309
 
 -------------------------------------------------------------------
