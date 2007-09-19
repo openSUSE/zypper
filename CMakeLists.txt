@@ -59,6 +59,7 @@ SET (CPACK_SOURCE_IGNORE_FILES
 "\\\\.project"
 "\\\\.cproject"
 # other
+"/build/"
 "/_build/"
 )
 
