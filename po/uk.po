@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-08-19 19:21-0700\n"
+"PO-Revision-Date: 2007-09-18 22:03-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -64,17 +64,17 @@ msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 
 #: ../src/zypper-keyring-callbacks.h:120
-#, fuzzy, c-format
+#, c-format
 msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s."
-msgstr "Перевірка дайджесту для %s зазнала невдачі. Очікувалось %s, знайдено %s."
+msgstr "Перевірка підпису для %s з ІД відкритого ключа %s, %s, дайджестом %s зазнала невдачі."
 
 #: ../src/zypper-keyring-callbacks.h:123
 msgid "Warning: This might be caused by a malicious change in the file!"
-msgstr ""
+msgstr "Увага: це може бути спричинене зловмисною зміною в файлі!"
 
 #: ../src/zypper-keyring-callbacks.h:125
 msgid "Continuing is risky! Continue anyway?"
-msgstr ""
+msgstr "Ризиковано продовжувати! Продовжити, попри все?"
 
 #: ../src/zypper-keyring-callbacks.h:136
 #, c-format
@@ -96,7 +96,7 @@ msgstr "Невідомий дайджест %s для файла %s."
 #: ../src/zypper-keyring-callbacks.h:156
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr ""
+msgstr "Ігнорується невдала перевірка дайджесту %s (очікувалось %s, знайдено %s)."
 
 #: ../src/zypper-keyring-callbacks.h:162
 #, c-format
@@ -108,101 +108,89 @@ msgid "Initializing Target"
 msgstr "Започаткування цілі"
 
 #: ../src/zypper-misc.cc:83
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакунок"
-msgstr[1] "пакунок"
-msgstr[2] "пакунок"
+msgstr[1] "пакунки"
+msgstr[2] "пакунків"
 
 #: ../src/zypper-misc.cc:85
-#, fuzzy
 msgid "selection"
 msgid_plural "selections"
-msgstr[0] "вибір"
-msgstr[1] "вибір"
-msgstr[2] "вибір"
+msgstr[0] "вибрана"
+msgstr[1] "вибрані"
+msgstr[2] "вибраних"
 
 #: ../src/zypper-misc.cc:87
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "взірець"
-msgstr[1] "взірець"
-msgstr[2] "взірець"
+msgstr[0] "шаблон"
+msgstr[1] "шаблони"
+msgstr[2] "шаблонів"
 
 #: ../src/zypper-misc.cc:89
-#, fuzzy
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
-msgstr[1] "продукт"
-msgstr[2] "продукт"
+msgstr[1] "продукти"
+msgstr[2] "продуктів"
 
 #: ../src/zypper-misc.cc:91
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "латка"
-msgstr[1] "латка"
-msgstr[2] "латка"
+msgstr[1] "латки"
+msgstr[2] "латок"
 
 #: ../src/zypper-misc.cc:93
-#, fuzzy
 msgid "script"
 msgid_plural "scripts"
 msgstr[0] "скрипт"
-msgstr[1] "скрипт"
-msgstr[2] "скрипт"
+msgstr[1] "скрипти"
+msgstr[2] "скриптів"
 
 #: ../src/zypper-misc.cc:95
-#, fuzzy
 msgid "message"
 msgid_plural "messages"
 msgstr[0] "повідомлення"
 msgstr[1] "повідомлення"
-msgstr[2] "повідомлення"
+msgstr[2] "повідомлень"
 
 #: ../src/zypper-misc.cc:97
-#, fuzzy
 msgid "language"
 msgid_plural "languages"
-msgstr[0] "мова: "
-msgstr[1] "мова: "
-msgstr[2] "мова: "
+msgstr[0] "мова"
+msgstr[1] "мови"
+msgstr[2] "мов"
 
 #: ../src/zypper-misc.cc:99
-#, fuzzy
 msgid "atom"
 msgid_plural "atoms"
 msgstr[0] "атом"
-msgstr[1] "атом"
-msgstr[2] "атом"
+msgstr[1] "атоми"
+msgstr[2] "атомів"
 
 #: ../src/zypper-misc.cc:101
-#, fuzzy
 msgid "system"
 msgid_plural "systems"
 msgstr[0] "система"
-msgstr[1] "система"
-msgstr[2] "система"
+msgstr[1] "системи"
+msgstr[2] "систем"
 
 #: ../src/zypper-misc.cc:103
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "пакунок"
-msgstr[1] "пакунок"
-msgstr[2] "пакунок"
+msgstr[0] "джерельний пакунок"
+msgstr[1] "джерельні пакунки"
+msgstr[2] "джерельних пакунків"
 
 #. default
 #: ../src/zypper-misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Потрібні"
-msgstr[1] "Потрібні"
-msgstr[2] "Потрібні"
+msgstr[0] "потрібний"
+msgstr[1] "потрібні"
+msgstr[2] "потрібних"
 
 #: ../src/zypper-misc.cc:271
 #, c-format
@@ -281,21 +269,21 @@ msgstr "Нема що робити."
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:708
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be upgraded:"
 msgid_plural "The following %s are going to be upgraded:"
-msgstr[0] "Будуть оновлені наступні пакунки:"
-msgstr[1] "Будуть оновлені наступні пакунки:"
-msgstr[2] "Будуть оновлені наступні пакунки:"
+msgstr[0] "Буде оновлено %s:"
+msgstr[1] "Будуть оновлені %s:"
+msgstr[2] "Будуть оновлені %s:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:721
-#, fuzzy, c-format
+#, c-format
 msgid "The following %s is going to be downgraded:"
 msgid_plural "The following %s are going to be downgraded:"
-msgstr[0] "Будуть звантажені наступні пакунки:"
-msgstr[1] "Будуть звантажені наступні пакунки:"
-msgstr[2] "Будуть звантажені наступні пакунки:"
+msgstr[0] "Буде повернено до старішої версії %s:"
+msgstr[1] "Будуть повернені до старішої версії %s:"
+msgstr[2] "Будуть повернені до старішої версії %s:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
@@ -462,9 +450,8 @@ msgid "committing"
 msgstr "передається"
 
 #: ../src/zypper-misc.cc:1421
-#, fuzzy
 msgid "Problem downloading the package file from the repository:"
-msgstr "Проблема зі звантаженням файлів з \"%s\"."
+msgstr "Проблема зі звантаженням файла пакунка зі сховища:"
 
 #: ../src/zypper-misc.cc:1422 ../src/zypper-sources.cc:89
 msgid "Please, see the above error message to for a hint."
@@ -816,29 +803,26 @@ msgid "Please, check if your installation media is valid and readable."
 msgstr "Перевірте чи ваш носій встановлення чинний і з нього можна читати."
 
 #: ../src/zypper-sources.cc:795
-#, fuzzy
 msgid "Problem accessing the file at the specified URL"
-msgstr "Помилка перенесення даних сховища з вказаної адреси URL:"
+msgstr "Помилка доступу до файла за вказаною адресою URL"
 
 #: ../src/zypper-sources.cc:796
-#, fuzzy
 msgid "Please check if the URL is valid and accessible."
-msgstr "Будь ласка, перевірте чи доступна вказана адреса URL."
+msgstr "Будь ласка, перевірте чи чинна і доступна вказана адреса URL."
 
 #: ../src/zypper-sources.cc:803
-#, fuzzy
 msgid "Problem parsing the file at the specified URL"
-msgstr "Помилка перенесення даних сховища з вказаної адреси URL:"
+msgstr "Помилка аналізу файла за вказаною адресою URL"
 
 #. TranslatorExplanation don't translate the URL if the URL itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/zypper-sources.cc:806
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr ""
+msgstr "Чи це файл .repo? Для подробиць дивіться http://en.opensuse.org/Standards/RepoInfo."
 
 #: ../src/zypper-sources.cc:813
 msgid "Problem encountered while trying to read the file at the specified URL"
-msgstr ""
+msgstr "Трапилась проблема під час спроби читання файла за вказаною адресою URL"
 
 #: ../src/zypper-sources.cc:870
 #, c-format
@@ -924,7 +908,6 @@ msgstr ""
 "Для цього скористайтесь rug або yast2.\n"
 
 #: ../src/zypp-checkpatches.cc:125
-#, fuzzy
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
 msgstr "Програма оновлення не змогла отримати доступ до рушія керування пакунками. Це трапляється, коли інша програма (напр., YaST) одночасно їх використовує. Будь ласка, закрийте інші програми і знову перевірте чи є оновлення."
 
@@ -938,9 +921,8 @@ msgstr ""
 "Подробиці: %s"
 
 #: ../src/zypp-checkpatches.cc:235
-#, fuzzy
 msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
-msgstr "Немає визначених джерел оновлення. Будь ласка, додайте одне або декілька джерел, щоб отримувати сповіщення про наявні оновлення."
+msgstr "Немає визначених сховищ оновлення. Будь ласка, додайте одне або декілька сховищ, щоб отримувати сповіщення про наявні оновлення."
 
 #. TranslatorExplanation don't translate letters in parentheses!! (yet)
 #: ../src/zypper-callbacks.cc:83
@@ -966,18 +948,16 @@ msgstr "ні"
 #: ../src/zypper-callbacks.cc:152
 #, c-format
 msgid "Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"
-msgstr ""
+msgstr "Не чинна відповідь \"%s\". Введіть \"y\" для \"%s\" або \"n\" для \"%s\", якщо ніщо інше не допомагає"
 
 #. ! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
 #: ../src/zypper-callbacks.cc:222
-#, fuzzy
 msgid "Too many arguments"
-msgstr "Забагато аргументів."
+msgstr "Забагато аргументів"
 
 #: ../src/zypper-callbacks.cc:223 ../src/zypper.cc:888 ../src/zypper.cc:1475
-#, fuzzy
 msgid "Usage"
-msgstr "Осаге"
+msgstr "Вжиток"
 
 #: ../src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -1109,7 +1089,6 @@ msgid "Given URL is invalid."
 msgstr "Дана адреса URL не є чинною."
 
 #: ../src/zypper.cc:84
-#, fuzzy
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tHelp\n"
@@ -1133,25 +1112,27 @@ msgid ""
 "\tsource-install, si\tInstall a source package\n"
 msgstr ""
 "  Команди:\n"
-"\thelp\t\t\tДовідка\n"
+"\thelp, ?\t\t\tДовідка\n"
 "\tshell, sh\t\tПриймати декілька команд нараз\n"
 "\tinstall, in\t\tВстановити пакунки чи потрібні для розв'язання пакунки\n"
 "\tremove, rm\t\tВилучити пакунки або потрібні для розв'язання пакунки\n"
 "\tsearch, se\t\tШукати за пакунками, які задовольняють шаблон\n"
-"\tservice-list, sl\tСписок служб, які відомі як джерела встановлення\n"
-"\tservice-add, sa\t\tДодати нову службу\n"
-"\tservice-delete, sd\tВилучити службу\n"
-"\tservice-rename, sr\tПерейменувати службу\n"
+"\trepos, lr\t\tСписок всіх визначених сховищ.\n"
+"\taddrepo, ar\t\tДодати нове сховище\n"
+"\tremoverepo, rr\t\tВилучити вказане сховище\n"
+"\trenamerepo, nr\t\tПерейменувати вказане сховище\n"
+"\tmodifyrepo, mr\t\tЗмінити вказане сховище\n"
 "\trefresh, ref\t\tОновити всі джерела встановлення\n"
 "\tpatch-check, pchk\tПеревірити наявність латок\n"
 "\tpatches, pch\t\tПоказати список латок\n"
 "\tlist-updates, lu\tПоказати список оновлень\n"
+"\txml-updates, xu\t\tСписок оновлень і латок в форматі xml\n"
 "\tupdate, up\t\tОновити пакунки\n"
 "\tinfo, if\t\tПоказати повну інформацію про пакунки\n"
 "\tpatch-info\t\tПоказати повну інформацію про латки\n"
+"\tsource-install, si\tВстановити джерельний пакунок\n"
 
 #: ../src/zypper.cc:136
-#, fuzzy
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -1168,11 +1149,13 @@ msgstr ""
 "  Параметри:\n"
 "\t--help, -h\t\tДовідка\n"
 "\t--version, -V\t\tПоказати номер версії\n"
+"\t--quiet, -q\t\tДрукувати тільки повідомлення про помилки.\n"
 "\t--verbose, -v\t\tЗбільшити багатослівність\n"
 "\t--terse, -t\t\tОбмежений вивід для споживання машиною\n"
 "\t--table-style, -s\tВ стилі таблиці (ціле число)\n"
 "\t--rug-compatible, -r\tУвімкнути сумісність з rug\n"
 "\t--non-interactive\tНічого не питати, автоматично вживати типові відповіді. (в стадії розробки)\n"
+"\t--no-gpg-checks\t\tІгнорувати невдачі перевірки GPG і продовжити.\n"
 "\t--root, -R <dir>\tПрацювати в іншому кореневому каталозі\n"
 
 #: ../src/zypper.cc:167
@@ -1225,7 +1208,6 @@ msgid ""
 msgstr ""
 
 #: ../src/zypper.cc:341
-#, fuzzy
 msgid ""
 "source-install (si) <name> ...\n"
 "\n"
@@ -1233,9 +1215,6 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"zypper refresh\n"
-"\n"
-"Оновити (освіжити інформацію) всі джерела встановлення системи.\n"
 
 #: ../src/zypper.cc:361
 #, fuzzy
@@ -1269,6 +1248,12 @@ msgid ""
 "  Command options:\n"
 "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
 msgstr ""
+"repos (lr)\n"
+"\n"
+"Список всіх визначених сховищ.\n"
+"\n"
+"  Параметри команди:\n"
+"-e, --export <FILE.repo>  Експортувати всі визначені сховища як окремий локальний файл .repo\n"
 
 #: ../src/zypper.cc:397
 msgid ""
@@ -1741,17 +1726,3 @@ msgstr "Каталог"
 msgid "Repository"
 msgstr "Сховище"
 
-#~ msgid "y"
-#~ msgstr "т"
-
-#~ msgid "Y"
-#~ msgstr "Т"
-
-#~ msgid "n"
-#~ msgstr "н"
-
-#~ msgid "N"
-#~ msgstr "Н"
-
-#~ msgid "Invalid answer '%s', enter '%s' or '%s':"
-#~ msgstr "Не чинна відповідь \"%s\", введіть \"%s\", або \"%s\":"
