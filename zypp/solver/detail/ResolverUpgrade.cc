@@ -192,9 +192,7 @@ Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
     return doesObsoleteCapability (candidate, installedCap);
 }
 
-
 //-----------------------------------------------------------------------------
-
 
 // find best available providers for installed name
 
@@ -258,6 +256,50 @@ struct FindProviders
     }
 };
 
+
+//-----------------------------------------------------------------------------
+
+// Selecting item for installation
+
+class LookForSelected : public resfilter::PoolItemFilterFunctor
+{
+  public:
+    bool found;
+    PoolItem_Ref candidate;
+    
+    LookForSelected (PoolItem_Ref can)
+	: candidate (can),
+	found (false)
+    { }
+
+    bool operator()( PoolItem_Ref item )
+    {
+	if (item.status().isToBeInstalled()
+	    && item->edition() == candidate->edition()
+	    && item->arch() == candidate->arch()) {
+	    MIL << item << " is already selected for installation --> ignoring" << endl;	    
+	    found = true;
+	    return false; // stop here
+	}
+	return true;
+    }
+};
+
+bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
+    LookForSelected info(item);
+
+    invokeOnEach( pool.byNameBegin (item->name()),
+		  pool.byNameEnd (item->name()),
+		  functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
+				  resfilter::ByKind (item->kind())),		// equal kind
+		  functor::functorRef<bool,PoolItem> (info) );
+    if (info.found) {
+	MIL << "   ---> " << item << " will be ignoring" << endl;
+	return true;
+    } else {
+	return item.status().setToBeInstalled( ResStatus::APPL_HIGH );
+    }
+}	
 
 //-----------------------------------------------------------------------------
 
@@ -521,8 +563,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
       if ( ! candidate.status().isToBeInstalled() ) {
 	int cmp = installed->edition().compare( candidate->edition() );
-	if ( cmp < 0 ) {						// new edition
-	  candidate.status().setToBeInstalled( ResStatus::APPL_HIGH );
+	if ( cmp < 0 ) {   // new edition
+	  setForInstallation (_pool,candidate);
 	  MIL << " ==> INSTALL (new version): " << candidate << endl;
 	  ++opt_stats_r.chk_to_update;
 	} else {							// older or equal edition
@@ -534,8 +576,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	  {
 	    MIL << " ==> (keep installed)" << candidate << endl;	// keep installed
 	    ++opt_stats_r.chk_to_keep_installed;
-	  } else {							// older and downgrade allowed
-	    candidate.status().setToBeInstalled( ResStatus::APPL_HIGH );
+	  } else {// older and downgrade allowed
+	    setForInstallation (_pool, candidate);
 	    MIL << " ==> INSTALL (SuSE version downgrade): " << candidate << endl;
 	    ++opt_stats_r.chk_to_downgrade;
 	  }
@@ -702,7 +744,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
       PoolItem_Ref provider (*sit);
 
-      if (provider.status().setToBeInstalled( ResStatus::APPL_HIGH )) {
+      if (setForInstallation (_pool, provider)) {
 	++opt_stats_r.chk_replaced;
       }
 
@@ -734,7 +776,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    if (!already_installed
 		|| already_installed->edition().compare( item->edition() ) != 0 )
 	    {
-		if (item.status().setToBeInstalled( ResStatus::APPL_HIGH )) {
+		if (setForInstallation (_pool, item)) {
 		    ++opt_stats_r.chk_add_split;
 		}
 	    }
@@ -833,7 +875,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     }
 
     if ( guess ) {
-      guess.status().setToBeInstalled( ResStatus::APPL_HIGH );
+      setForInstallation (_pool, guess);
       MIL << " ==> REPLACED by: (pass 2: guessed): " << guess << endl;
       if ( ! doesObsoleteItem (guess, it->first ) ) {
 	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
