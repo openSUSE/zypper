@@ -66,10 +66,10 @@ namespace zypp
     {
       if ( pi->mediaNr() == 0 ) // no media access at all
         return false;
-      //std::string scheme( pi->source().url().getScheme() );
-      //return ( scheme == "dvd" || scheme == "cd" );
-#warning "FIX CommitPackageCacheReadAhead::onInteractiveMedia"
-      return false;
+      if ( pi->repository().info().baseUrlsEmpty() )
+        return false; // no Url - should actually not happen
+      std::string scheme( pi->repository().info().baseUrlsBegin()->getScheme() );
+      return ( scheme == "dvd" || scheme == "cd" );
     }
 
     ///////////////////////////////////////////////////////////////////

@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Wed Sep 19 14:19:49 CEST 2007 - ma@suse.de
+
+- Enable package cache during commit. (#326249)
+- version 3.24.2
+- revision 7309
+
+-------------------------------------------------------------------
 Tue Sep 18 14:01:02 CEST 2007 - schubi@suse.de
 
 - Do not regarding requirements for packages which will be deleted in the
   same solver run. Bug 310618
-- r 7292 
+- r 7292
 - version 3.24.2
 
 -------------------------------------------------------------------
