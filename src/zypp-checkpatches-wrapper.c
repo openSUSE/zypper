@@ -24,8 +24,7 @@ int main (void)
 {
     /* see http://rechner.lst.de/~okir/blackhats/node41.html */
     while (1) {
-	int fd;
-	fd = open("/dev/null", O_RDWR);
+	int fd = open("/dev/null", O_RDWR);
 	if (fd < 0)
 	    return WRAPPER_ERROR;
 	if (fd > 2) {
@@ -33,6 +32,11 @@ int main (void)
 	    break;
 	}
     }
+
+    /* see http://rechner.lst.de/~okir/blackhats/node35.html */
+    int fd = getdtablesize();
+    while (fd-- > 2)
+        close(fd);
 
     /* cd / to avoid NFS problems */
     if (chdir ("/")) {
