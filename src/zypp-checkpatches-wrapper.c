@@ -68,29 +68,6 @@ int main (void)
 
     umask(0022);
 
-
-
-    /* check if stdout/stderr file descriptors are open */
-    while (1) {
-        int     fd;
-
-        fd = open("/dev/null", O_RDWR);
-        if (fd < 0)
-	{
-		fprintf (stdout, "<?xml version='1.0'?>\n");
-		fprintf (stdout, "<stream>\n");
-		fprintf (stdout, "<message type=\"error\">stdout/stderr file descriptores are not open</message>\n");
-		fprintf (stdout, "</stream>\n");
-        	return(WRAPPER_ERROR);
-	}
-        if (fd > 2) {
-            close(fd);
-            break;
-        }
-    }
-
-
-
     /* execute the real application */
     execl (app, app, arg1, arg2, arg3, arg4, (char *) NULL);
 
