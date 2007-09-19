@@ -2,7 +2,7 @@
 Wed Sep 19 14:19:49 CEST 2007 - ma@suse.de
 
 - Enable package cache during commit. (#326249)
-- version 3.24.2
+- version 3.24.3
 - revision 7309
 
 -------------------------------------------------------------------
