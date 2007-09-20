@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 20 17:37:30 CEST 2007 - jkupec@suse.cz
+
+- don't probe the repository type upon saving if disabled (#326769)
+- revision 7319
+
+-------------------------------------------------------------------
 Thu Sep 20 15:19:53 CEST 2007 - ma@suse.de
 
 - Avoid calling rpm repeatedly in case of an error. This is fault-prone,
