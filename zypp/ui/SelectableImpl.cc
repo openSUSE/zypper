@@ -65,8 +65,7 @@ namespace zypp
         for ( availableItem_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
-            if ( (*it).status().transacts() )
-              (*it).status().setTransact( false, ResStatus::USER );
+            (*it).status().setTransact( false, ResStatus::USER );
           }
       }
       void unlockCandidates() const

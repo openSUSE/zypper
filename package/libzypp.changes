@@ -1,10 +1,18 @@
 -------------------------------------------------------------------
+Thu Sep 20 11:00:04 CEST 2007 - ma@suse.de
+
+- If a package is deselected by user, apply this soft lock to all
+  available versions of this package.
+- version 3.24.4
+- revision 7316
+
+-------------------------------------------------------------------
 Wed Sep 19 17:45:12 CEST 2007 - schubi@suse.de
 
 - Update: Do not set an item to installation if there has been already set
   one for installation which has the same NVA. Bug  326286
 - version 3.24.3
-- r 7311 
+- r 7311
 
 -------------------------------------------------------------------
 Wed Sep 19 14:19:49 CEST 2007 - ma@suse.de
