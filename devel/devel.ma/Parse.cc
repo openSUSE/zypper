@@ -308,6 +308,11 @@ bool solve( bool establish = false )
   return true;
 }
 
+bool install()
+{
+  SEC << getZYpp()->commit( ZYppCommitPolicy() ) << endl;
+}
+
 ///////////////////////////////////////////////////////////////////
 
 struct ConvertDbReceive : public callback::ReceiveReport<target::ScriptResolvableReport>
@@ -553,32 +558,22 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   SEC << pool.knownRepositoriesSize() << endl;
 
-  if ( 0 )
+  if ( 1 )
   {
     {
-       zypp::base::LogControl::TmpLineWriter shutUp;
-      //getZYpp()->initTarget( sysRoot );
-      getZYpp()->initTarget( "/" );
+      zypp::base::LogControl::TmpLineWriter shutUp;
+      getZYpp()->initTarget( sysRoot );
+      //getZYpp()->initTarget( "/" );
     }
     MIL << "Added target: " << pool << endl;
   }
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
-
-  repo::DeltaCandidates deltas( repo::makeDeltaCandidates( pool.knownRepositoriesBegin(),
-                                                           pool.knownRepositoriesEnd() ) );
-
-  DBG << "patch: " << deltas.patchRpms(0).size() << " " << deltas.patchRpms(0) << endl;
-  DBG << "delta: " << deltas.deltaRpms(0).size() << " " << deltas.deltaRpms(0) << endl;
-
-  PoolItem pi( getPi<Package>( "kernel-default", Edition("2.6.22.5-12") ) );
+  PoolItem pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
   USR << pi << endl;
-  USR << repoProvidePackage( pi ) << endl;
+  pi.status().setTransact( true, ResStatus::USER );
 
-  pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
-  USR << pi << endl;
-  USR << repoProvidePackage( pi ) << endl;
-
+  //install();
 
  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

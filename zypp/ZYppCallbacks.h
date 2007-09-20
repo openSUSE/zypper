@@ -24,12 +24,12 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  
+
   struct ProgressReport : public callback::ReportBase
   {
     virtual void start( const ProgressData &/*task*/ )
     {}
-    
+
     virtual bool progress( const ProgressData &/*task*/ )
     { return true; }
 
@@ -46,7 +46,7 @@ namespace zypp
 
   struct ProgressReportAdaptor
   {
-    
+
     ProgressReportAdaptor( const ProgressData::ReceiverFnc &fnc,
                            callback::SendReport<ProgressReport> &report )
       : _fnc(fnc)
@@ -54,7 +54,7 @@ namespace zypp
       , _first(true)
     {
     }
-    
+
     bool operator()( const ProgressData &progress )
     {
       if ( _first )
@@ -62,27 +62,27 @@ namespace zypp
         _report->start(progress);
         _first = false;
       }
-      
+
       _report->progress(progress);
       bool value = true;
       if ( _fnc )
         value = _fnc(progress);
-      
-      
+
+
       if ( progress.finalReport() )
       {
         _report->finish(progress);
       }
       return value;
     }
-    
+
     ProgressData::ReceiverFnc _fnc;
     callback::SendReport<ProgressReport> &_report;
     bool _first;
   };
-  
+
   ////////////////////////////////////////////////////////////////////////////
-  
+
   namespace repo
   {
     // progress for downloading a resolvable
@@ -343,7 +343,7 @@ namespace zypp
     {
       /**
        * Prompt for authentication data.
-       * 
+       *
        * \param url       URL which required the authentication
        * \param msg       prompt text
        * \param auth_data input/output object for handling authentication
@@ -425,6 +425,7 @@ namespace zypp
         };
 
         // the level of RPM pushing
+        /** \deprecated We fortunately no longer do 3 attempts. */
         enum RpmLevel {
             RPM,
             RPM_NODEPS,

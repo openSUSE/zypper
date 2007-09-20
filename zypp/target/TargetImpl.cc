@@ -519,78 +519,50 @@ namespace zypp
             progress.connect();
             bool success = true;
             unsigned flags = 0;
+            // Why force and nodeps?
+            //
+            // Because zypp builds the transaction and the resolver asserts that
+            // everything is fine.
+            // We use rpm just to unpack and register the package in the database.
+            // We do this step by step, so rpm is not aware of the bigger context.
+            // So we turn off rpms internal checks, because we do it inside zypp.
+            flags |= rpm::RpmDb::RPMINST_NODEPS;
+            flags |= rpm::RpmDb::RPMINST_FORCE;
+            //
             if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
             if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
             if (policy_r.rpmNoSignature()) flags |= rpm::RpmDb::RPMINST_NOSIGNATURE;
 
             try
             {
-              progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
+              progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
               rpm().installPackage( localfile, flags );
 
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
                 progress.disconnect();
+                success = false;
                 abort = true;
                 break;
               }
-
             }
             catch (Exception & excpt_r)
             {
               ZYPP_CAUGHT(excpt_r);
-              WAR << "Install failed, retrying with --nodeps" << endl;
-              if (policy_r.dryRun())
+              if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
                 progress.disconnect();
                 break;
               }
-
-              try
-              {
-                progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
-                flags |= rpm::RpmDb::RPMINST_NODEPS;
-                rpm().installPackage( localfile, flags );
-
-                if ( progress.aborted() )
-                {
-                  WAR << "commit aborted by the user" << endl;
-                  abort = true;
-                  progress.disconnect();
-                  break;
-                }
-              }
-              catch (Exception & excpt_r)
-              {
-                ZYPP_CAUGHT(excpt_r);
-                WAR << "Install failed again, retrying with --force --nodeps" << endl;
-
-                try
-                {
-                  progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-                  flags |= rpm::RpmDb::RPMINST_FORCE;
-                  rpm().installPackage( localfile, flags );
-                }
-                catch (Exception & excpt_r)
-                {
-                  remaining.push_back( *it );
-                  success = false;
-                  ZYPP_CAUGHT(excpt_r);
-                }
-
-                if ( progress.aborted() )
-                {
-                  WAR << "commit aborted by the user" << endl;
-                  abort = true;
-                  progress.disconnect();
-                  break;
-                }
-              }
+              // else
+              WAR << "Install failed" << endl;
+              remaining.push_back( *it );
+              success = false;
             }
-            if (success
-                && !policy_r.dryRun())
+
+            if ( success && !policy_r.dryRun() )
             {
               it->status().resetTransact( ResStatus::USER );
             }

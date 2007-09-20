@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 20 15:19:53 CEST 2007 - ma@suse.de
+
+- Avoid calling rpm repeatedly in case of an error. This is fault-prone,
+  esp. if the error occurred executing the packages post-install script.
+- version 3.24.5
+- revision 7317
+
+-------------------------------------------------------------------
 Thu Sep 20 11:00:04 CEST 2007 - ma@suse.de
 
 - If a package is deselected by user, apply this soft lock to all
