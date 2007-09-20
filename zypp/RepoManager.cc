@@ -923,10 +923,13 @@ namespace zypp
     }
 
     RepoInfo tosave = info;
-    
+
     // check the first url for now
-    if ( ZConfig::instance().repo_add_probe() || ( tosave.type() == RepoType::NONE ) )
+    if ( ZConfig::instance().repo_add_probe()
+        || ( tosave.type() == RepoType::NONE && tosave.enabled()) )
     {
+      DBG << "unknown repository type, probing" << endl;
+
       RepoType probedtype;
       probedtype = probe(*tosave.baseUrlsBegin());
       if ( tosave.baseUrlsSize() > 0 )
@@ -937,7 +940,7 @@ namespace zypp
           tosave.setType(probedtype);
       }
     }
-    
+
     progress.set(50);
 
     // assert the directory exists
