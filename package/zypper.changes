@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 20 15:38:53 CEST 2007 - jkupec@suse.cz
+
+- gcc build requires decreased to gcc 4.1
+
+-------------------------------------------------------------------
 Wed Sep 19 09:33:25 CEST 2007 - aschnell@suse.de
 
 - close file-descriptors > 2 in zypp-checkpatches-wrapper (bug
