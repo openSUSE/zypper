@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 21 16:45:18 CEST 2007 - jkupec@suse.cz
+
+- fix zypper refresh exit status (#326694)
+- translations update
+- r7333
+- 0.8.23
+
+-------------------------------------------------------------------
 Thu Sep 20 15:38:53 CEST 2007 - jkupec@suse.cz
 
 - gcc build requires decreased to gcc 4.1
