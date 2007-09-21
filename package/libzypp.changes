@@ -2,6 +2,7 @@
 Thu Sep 20 17:37:30 CEST 2007 - jkupec@suse.cz
 
 - don't probe the repository type upon saving if disabled (#326769)
+- version 3.24.6
 - revision 7319
 
 -------------------------------------------------------------------
