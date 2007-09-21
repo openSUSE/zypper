@@ -63,7 +63,7 @@ QueueItemGroup::~QueueItemGroup()
 //---------------------------------------------------------------------------
 
 bool
-QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
+QueueItemGroup::process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & new_items)
 {
     _DEBUG( "QueueItemGroup::process" );
 

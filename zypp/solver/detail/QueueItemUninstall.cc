@@ -314,7 +314,7 @@ struct UninstallItem
 
 
 bool
-QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
+QueueItemUninstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil)
 {
     ResStatus status = context->getStatus(_item);
 

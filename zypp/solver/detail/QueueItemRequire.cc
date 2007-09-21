@@ -491,7 +491,8 @@ hint_match( const CapSet & cset, ResPool pool )
 //----------------------------------------------------------------------------
 
 bool
-QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
+QueueItemRequire::process (const QueueItemList & mainQueue,
+			   ResolverContext_Ptr context, QueueItemList & new_items)
 {
     _XDEBUG("QueueItemRequire::process(" << *this << ")");
 

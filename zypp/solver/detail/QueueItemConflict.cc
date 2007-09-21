@@ -325,7 +325,7 @@ struct ConflictProcess
 
 
 bool
-QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
+QueueItemConflict::process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & new_items)
 {
     _XDEBUG("QueueItemConflict::process(" << *this << ")");
 

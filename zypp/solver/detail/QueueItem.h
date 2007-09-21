@@ -113,7 +113,7 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
     bool isUninstall (void) const { return _type == QUEUE_ITEM_TYPE_UNINSTALL; }
     bool isEstablish (void) const { return _type == QUEUE_ITEM_TYPE_ESTABLISH; }
 
-    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil) = 0;
+    virtual bool process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil) = 0;
     virtual QueueItem_Ptr copy (void) const = 0;
     virtual int cmp (QueueItem_constPtr item) const = 0;
     int compare (QueueItem_constPtr item) const { return CMP(_type, item->_type); }

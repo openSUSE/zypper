@@ -129,7 +129,7 @@ QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
 //---------------------------------------------------------------------------
 
 bool
-QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
+QueueItemBranch::process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil)
 {
     _XDEBUG("QueueItemBranch::process(" << *this << ")");
 
@@ -165,7 +165,7 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 	/* If we just have one possible item, process it. */
 
 	QueueItem_Ptr item = live_branches.front();
-	did_something = item->process (context, qil);
+	did_something = item->process (mainQueue, context, qil);
 
 	/* Set the item pointer to NULL inside of our original branch
 	   item, since our call to rc_queue_item_process is now

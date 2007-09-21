@@ -94,10 +94,11 @@ class QueueItemUninstall : public QueueItem {
     void setDueToObsolete (const PoolItem_Ref item)
 	{ _due_to_obsolete = true; _obsoletes_item = item; }
     void setUnlink (void);
+    PoolItem_Ref deletedItem(void) const        { return _item; }    
 
     // ---------------------------------- methods
 
-    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual bool process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil);
     virtual QueueItem_Ptr copy (void) const;
     virtual int cmp (QueueItem_constPtr item) const;
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }

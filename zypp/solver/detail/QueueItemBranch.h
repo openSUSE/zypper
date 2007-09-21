@@ -73,7 +73,7 @@ class QueueItemBranch : public QueueItem {
 
     // ---------------------------------- methods
 
-    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual bool process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil);
     virtual QueueItem_Ptr copy (void) const;
     virtual int cmp (QueueItem_constPtr item) const;
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }

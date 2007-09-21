@@ -228,7 +228,7 @@ ResolverQueue::processOnce ()
 	    _XDEBUG( "=====> 1st pass: [" << *qitem << "]");
 	    QueueItemList::iterator next = iter; ++next;
 	    if (qitem && qitem->priority() == max_priority) {
-		if (qitem->process (_context, new_qitems)) {
+		if (qitem->process (_qitems, _context, new_qitems)) {
 		    did_something_recently = true;
 		}
 		_qitems.erase (iter);

@@ -672,16 +672,6 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 	else {
 	    setStatus (item, ResStatus::needed);
 	}
-
-	return true;
-    }
-
-    // if something installed goes 'incomplete' outside of the establishing call, its always an error
-
-    if (status.staysInstalled()) {
-	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
-	return false;
     }
 
     return true;

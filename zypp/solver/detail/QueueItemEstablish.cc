@@ -25,6 +25,7 @@
 #include "zypp/solver/detail/QueueItemInstall.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemConflict.h"
+#include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/ResolverContext.h"
@@ -95,7 +96,7 @@ QueueItemEstablish::isSatisfied (ResolverContext_Ptr context) const
 
 
 bool
-QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
+QueueItemEstablish::process (const QueueItemList & mainQueue, ResolverContext_Ptr context, QueueItemList & qil)
 {
     _XDEBUG("QueueItemEstablish::process(" << *this << ")");
 
@@ -241,6 +242,30 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    {
 		_XDEBUG("Atom/Patch/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
 		context->incomplete( _item, _other_penalty );
+
+                // if something installed goes 'incomplete' outside of the establishing call, its always an error
+                if ( status.staysInstalled()
+                     &&!context->establishing()) {
+
+                    // last check if the item will be deleted.
+                    // (check the queue, if there is a delete request)
+                    QueueItemList::const_iterator iterQueue;
+                    for (iterQueue = mainQueue.begin(); iterQueue != mainQueue.end(); iterQueue++) {
+                        QueueItem_Ptr qitem = *iterQueue;
+                        if (qitem->isUninstall()) {
+                            QueueItemUninstall_Ptr uninstall = dynamic_pointer_cast<QueueItemUninstall>(qitem);
+                            if (uninstall->deletedItem() == _item) {
+                                _DEBUG(_item << " will be uninstalled later. So, we do not have to inform the user.");
+                                break;
+                            }
+                        }
+                    }
+
+                    if (iterQueue == mainQueue.end()) {
+                        ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
+                        context->addError (misc_info);
+                    }
+                }
 	    }
 	    else {
 		_XDEBUG("Transacted " << _item << " has unfulfilled requirement " << *iter << " -> leave");
