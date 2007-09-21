@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep 17 13:49:18 CEST 2007 - jkupec@suse.cz
+
+- ignore the ZYpp lock if ZYPP_READONLY_HACK=1 env. var. is set
+  (#310581)
+- r7260
+- 0.6.20
+
+-------------------------------------------------------------------
 Tue Aug 21 15:17:15 CEST 2007 - mvidner@suse.cz
 
 - Require a bugfixed libzypp for --root (#301843).
