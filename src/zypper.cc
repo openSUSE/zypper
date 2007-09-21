@@ -1058,7 +1058,7 @@ int one_command(int argc, char **argv)
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
 
-    refresh_repos(arguments);
+    return refresh_repos(arguments);
   }
 
   // --------------------------( remove/install )-----------------------------

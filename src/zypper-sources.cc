@@ -618,13 +618,21 @@ int refresh_repos(vector<string> & arguments)
       << endl;
   }
   else if (error_count == enabled_repo_count)
+  {
     cerr << _("Could not refresh the repositories because of errors.") << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
   else if (error_count)
+  {
     cerr << _("Some of the repositories have not been refreshed because of an error.") << endl;
+    return ZYPPER_EXIT_ERR_ZYPP;
+  }
   else if (argc)
     cout << _("Specified repositories have been refreshed.") << endl;
   else
     cout << _("All repositories have been refreshed.") << endl;
+
+  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
