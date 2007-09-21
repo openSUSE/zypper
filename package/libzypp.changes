@@ -3,6 +3,7 @@ Fri Sep 21 15:50:30 CEST 2007 - schubi@suse.de
 
 - Checking the queue if an item will be deleted. If yes, the requirements
   are not needed anymore. Bug 326384
+- version 3.24.7
 - r 7329 
 
 -------------------------------------------------------------------
