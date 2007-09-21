@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-15 18:01+0200\n"
+"PO-Revision-Date: 2007-09-21 13:50+0200\n"
 "Last-Translator: Stephan Kulow <coolo@kde.org>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -528,7 +528,7 @@ msgstr "(erzwungen)"
 
 #: ../src/zypper-sources.cc:68
 msgid "Repository '%s' is up to date."
-msgstr "Repository '%s' ist nicht aktuell."
+msgstr "Repository '%s' ist aktuell."
 
 #: ../src/zypper-sources.cc:80
 msgid "Forcing raw metadata refresh"
@@ -716,8 +716,9 @@ msgid "All repositories have been refreshed."
 msgstr "Alle Repositories wurden aktualisiert."
 
 #: ../src/zypper-sources.cc:667
+#, fuzzy
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr ""
+msgstr "Dies ist ein nicht-beschreibbares Wechselmedium (CD/DVD), disabling autorefresh."
 
 #: ../src/zypper-sources.cc:685
 msgid "Repository named '%s' already exists. Please, use another alias."
@@ -1590,7 +1591,7 @@ msgstr "Fehler"
 #: ../src/zypper-media-callbacks.h:57
 #, c-format
 msgid "Please insert media [%s] # %d and type 'y' to continue or 'n' to cancel the operation."
-msgstr ""
+msgstr "Legen Sie Medium [%s] # %d ein und drücken Sie 'y' um fortzufahren oder 'n' um die Operation abzubrechen."
 
 #: ../src/zypper-media-callbacks.h:77 ../src/zypper-media-callbacks.h:83
 msgid "Downloading: "
