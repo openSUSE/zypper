@@ -301,6 +301,13 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+  Pathname RepoManager::metadataPath( const RepoInfo &info ) const
+  {
+    return rawcache_path_for_repoinfo(_pimpl->options, info );
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+      
   RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
   {
     Pathname rawpath = rawcache_path_for_repoinfo( _pimpl->options, info );

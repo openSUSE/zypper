@@ -161,6 +161,19 @@ namespace zypp
     bool checkIfToRefreshMetadata( const RepoInfo &info,
                                    const Url &url,
                                    RawMetadataRefreshPolicy policy = RefreshIfNeeded);
+    
+    /**
+     * \short Path where the metadata is downloaded and kept
+     *
+     * Given a repoinfo, tells where \ref RepoManager will download
+     * and keep the raw metadata.
+     *
+     * \param info Repository information
+     *
+     * \throws repo::RepoNoAliasException if can't figure an alias
+     */
+    Pathname metadataPath( const RepoInfo &info ) const;
+    
    /**
     * \short Refresh local raw cache
     *

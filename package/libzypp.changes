@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Sep 24 16:10:32 CEST 2007 - dmacvicar@suse.de
+
+- provide a way to retrieve the metadata path. Used for 
+  installation, which incorrectly creates a repository in
+  cache without adding it first, so metadata path is not
+  set and therefore it is not possible to setup a media
+  verifier on installation. Part of fix for (#293428)
+- 3.25.0
+
+-------------------------------------------------------------------
 Mon Sep 24 15:48:47 CEST 2007 - schubi@suse.de
 
 - If more than one resolvables provide a requirements and have different

@@ -115,8 +115,9 @@ namespace zypp
       {
         RepoInfo info = repo.info();
         // set a verifier if the repository has it
+         
         Pathname mediafile = info.metadataPath() + "/media.1/media";
-        if ( ! mediafile.empty() )
+        if ( ! info.metadataPath().empty() )
         {
           if ( PathInfo(mediafile).isExist() )
           {
@@ -159,12 +160,12 @@ namespace zypp
           }
           else
           {
-            WAR << "No media verifier for repo '" << info.alias() << "'" << endl;
+            WAR << "No media verifier for repo '" << info.alias() << "' media/media.1 does not exist in '" << info.metadataPath() << "'" << endl;
           }
         }
         else
         {
-          MIL << "Unknown metadata path for repo '" << info.alias() << "'. Can't set media verifier."<< endl;
+          WAR << "'" << info.alias() << "' metadata path is empty. Can't set verifier. Probably this repository does not come from RepoManager." << endl;
         }
       }
 
