@@ -541,6 +541,29 @@ QueueItemRequire::process (const QueueItemList & mainQueue,
 
 	_XDEBUG("Look for providers of " << _capability);
 
+	if (!context->tryAllPossibilities()) {
+	    // If there is one item with the better architecture than the others-->take it
+	    PoolItem_Ref bestItem = PoolItem_Ref();
+	    PoolItemList::iterator it;
+	    for (it = info.providers.begin();
+		 it != info.providers.end(); it++) {
+		 if (bestItem == PoolItem_Ref()) {
+		     bestItem = *it;
+		 } else if (bestItem->arch().compare( (*it)->arch() ) < 0) {	// better arch
+		     _XDEBUG("Taking only one provider with the best architecture --> ignoring e.g. " << bestItem);		     
+		     bestItem = *it;
+		     break;
+		 }
+	    }
+	    if (it != info.providers.end()) {
+		// found one with better architecture --> take it;
+		info.providers.clear();
+		info.providers.push_front(bestItem);
+		context->setSkippedPossibilities( true ); // Flag that there are other possibilities		
+		_XDEBUG("Taking only one provider with the best architecture: " << bestItem);
+	    }
+	}
+
 	num_providers = info.providers.size();
 
 	_XDEBUG( "requirement is met by " << num_providers << " resolvable");
