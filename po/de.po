@@ -2877,7 +2877,7 @@ msgstr "%s hängt von anderen auflösbaren Objekten ab"
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s depends on %s"
-msgstr "%s hängig von %s ab"
+msgstr "%s hängt von %s ab"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/Resolver_problems.cc:484

@@ -1,4 +1,4 @@
-# translation of zypp.fi.po to Suomi
+# translation of zypp.po to Suomi
 # translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -12,10 +12,10 @@
 # Sami Vento <sami.vento@opensuse.fi>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.fi\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-09-13 23:08+0300\n"
+"PO-Revision-Date: 2007-09-19 21:41+0300\n"
 "Last-Translator: Jyri Palokangas <jmp@opensuse.fi>\n"
 "Language-Team: Suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2739,7 +2739,7 @@ msgid ""
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 "rpm tallensi tiedoston %s tiedostona %s.\n"
-"Tässä on ensimmäiset 25 vaihtunutta riviä:\n"
+"Tässä ensimmäiset 25 muuttunutta riviä:\n"
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:1948
@@ -2862,7 +2862,7 @@ msgstr "Tällä ajolla harkitaan ainoastaan parhaiten soveltuvan arkkitehtuuria.
 
 #: ../zypp/solver/detail/Resolver_problems.cc:385
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-msgstr "Tarkastelemalla kaikkia mahdollisia vaihtoehtoja voidaan löytää sopiva ratkaisu, mutta se vie aikaa."
+msgstr "Sopiva ratkaisu voidaan löytää käymällä läpi kaikki mahdolliset vaihtoehdot, mikä kuitenkin vie aikaa."
 
 #: ../zypp/solver/detail/Resolver_problems.cc:411
 msgid "Invalid information"

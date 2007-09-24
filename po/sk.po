@@ -7,6 +7,7 @@
 # Jan Kupec <jkupec@suse.cz>, 2007.
 # Stanislav Visnovsky <visnovsky@kde.org>, 2003.
 # Milan Hromada <mhromada@elas.sk>, 2000.
+# Ján Kupec <jkupec@suse.cz>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
@@ -14,7 +15,7 @@ msgstr ""
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
 "PO-Revision-Date: 2007-09-15 19:06+0200\n"
 "Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
-"Language-Team: Slovak\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,12 +144,12 @@ msgstr "Nepodarilo sa poskytnúť súbor %s z repozitára %s"
 #: ../zypp/repo/cached/RepoImpl.cc:73
 #, c-format
 msgid "Reading '%s' repository cache"
-msgstr "Načítavam cache pre repozitár '%s'"
+msgstr "Načítavam medzipamäť pre repozitár '%s'"
 
 #: ../zypp/repo/cached/RepoImpl.cc:194
 #, c-format
 msgid "Reading patch and delta rpms from '%s' repository cache"
-msgstr "Načítavam inromácie o patch a delta rpm súboroch z cache repozitára '%s'"
+msgstr "Načítavam informácie o záplatách a delta rpm súboroch z medzipamäte repozitára '%s'"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -167,7 +168,7 @@ msgstr "'%s' vyžaduje autentifikáciu"
 #: ../zypp/RepoManager.cc:115
 #, c-format
 msgid "Cleaning repository '%s' cache"
-msgstr "Čistím cache repozitára '%s'"
+msgstr "Čistím medzipamäť repozitára '%s'"
 
 #. we will throw this later if no URL checks out fine
 #: ../zypp/RepoManager.cc:521
@@ -177,13 +178,13 @@ msgstr "Na zadanej URL adrese neboli nájdené platné metadáta"
 #: ../zypp/RepoManager.cc:677
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr "Vytváram cache repozitára '%s'"
+msgstr "Vytváram medzipamäť repozitára '%s'"
 
 #. progress.sendTo( progressrcv );
 #: ../zypp/RepoManager.cc:822
 #, c-format
 msgid "Reading repository '%s' cache"
-msgstr "Načítavam cache repozitára '%s'"
+msgstr "Načítavam medzipamäť repozitára '%s'"
 
 #: ../zypp/RepoManager.cc:912
 #, c-format
@@ -2940,7 +2941,7 @@ msgstr "%s nahrádza %s"
 #: ../zypp/solver/detail/Resolver_problems.cc:468
 #, c-format
 msgid "%s obsoletes:%s"
-msgstr "%s nahrádza: %s"
+msgstr "%s nahradzuje: %s"
 
 #: ../zypp/solver/detail/Resolver_problems.cc:469
 msgid ""

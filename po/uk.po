@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-08-23 20:52-0700\n"
+"PO-Revision-Date: 2007-09-18 20:33-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -2830,7 +2830,7 @@ msgstr ""
 
 #: ../zypp/solver/detail/Resolver_problems.cc:357
 msgid "The solver has reached a defined timout"
-msgstr ""
+msgstr "Тайм-аут сервера"
 
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
@@ -3516,14 +3516,12 @@ msgid "Regarding all resolvables with a compatible architecture."
 msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
-#, fuzzy
 msgid "Make a solver run with best architecture only."
-msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
+msgstr ""
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
-#, fuzzy
 msgid "Regarding resolvables with best architecture only."
-msgstr "Відносно всіх потрібних пакунків з сумісною архітектурою."
+msgstr ""
 
 #. Translator: all.%s = name of package,patch,....
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -3577,7 +3575,7 @@ msgstr "%s частина %s"
 
 #: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:50
 msgid "Double timeout"
-msgstr ""
+msgstr "Подвійний тайм-аут"
 
 #: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
 msgid "Start the next solver run with doubled timeout."
@@ -4994,3 +4992,4 @@ msgstr ""
 "Файл %s має не чинну контрольну суму.\n"
 "Очікувалась %s, знайдено %s\n"
 "Вживати попри все?"
+
