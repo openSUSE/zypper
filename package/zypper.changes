@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 20 15:37:46 CEST 2007 - aschnell@suse.de
+
+- close file-descriptors > 2, call setgid and umask and check
+  file-descriptors 0, 1 and 2 in zypp-checkpatches-wrapper (bug
+  #325556)
+
+-------------------------------------------------------------------
 Mon Sep 17 13:49:18 CEST 2007 - jkupec@suse.cz
 
 - ignore the ZYpp lock if ZYPP_READONLY_HACK=1 env. var. is set
@@ -163,7 +170,7 @@ Mon Dec 18 15:59:43 CET 2006 - dmacvicar@suse.de
 
 - Show a better message when we can't acquire the lock
   (#227073)
-- r4814 
+- r4814
 
 -------------------------------------------------------------------
 Mon Dec 18 15:30:49 CET 2006 - dmacvicar@suse.de
@@ -171,7 +178,7 @@ Mon Dec 18 15:30:49 CET 2006 - dmacvicar@suse.de
 - report error if no update sources are configured (#226067)
 - filter duplicate patches from different sources (#223844)
 - mark some strings for translation.
-- r4812 
+- r4812
 
 -------------------------------------------------------------------
 Mon Dec 18 13:30:10 CET 2006 - jkupec@suse.cz
@@ -368,7 +375,7 @@ Tue Oct 31 21:41:56 CET 2006 - mvidner@suse.cz
 -------------------------------------------------------------------
 Sun Oct 29 02:27:24 CEST 2006 - ro@suse.de
 
-- add missing return value 
+- add missing return value
 - also use RPM_OPT_FLAGS for C source
 
 -------------------------------------------------------------------
