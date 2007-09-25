@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 25 17:59:22 CEST 2007 - jkupec@suse.cz
+
+- report malformed URLs correctly in zypper addrepo (#325660)
+- make compiler happy about /* withing comments
+- r7374
+
+-------------------------------------------------------------------
 Fri Sep 21 16:45:18 CEST 2007 - jkupec@suse.cz
 
 - fix zypper refresh exit status (#326694)
