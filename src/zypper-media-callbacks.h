@@ -64,6 +64,7 @@ namespace ZmartRecipients
 
       // not displaying the error for non-changeable media, it will be displayed
       // where it is caught
+      return MediaChangeReport::ABORT;
     }
   };
 
