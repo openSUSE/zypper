@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Install Software
-Exec=package-manager %F
+Exec=package-manager --install %F
 Icon=package-manager-icon
 Terminal=false
 Type=Application
