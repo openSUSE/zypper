@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 25 13:34:59 CEST 2007 - jkupec@suse.cz
+
+- german translation update
+- r7362
+
+-------------------------------------------------------------------
 Fri Sep 21 16:45:18 CEST 2007 - jkupec@suse.cz
 
 - fix zypper refresh exit status (#326694)
