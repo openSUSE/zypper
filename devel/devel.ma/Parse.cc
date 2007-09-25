@@ -169,6 +169,9 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
+    if ( obj_r.status().isLocked() )
+      SEC << obj_r << endl;
+
 //     handle( asKind<Package>( obj_r ) );
 //     handle( asKind<Patch>( obj_r ) );
 //     handle( asKind<Pattern>( obj_r ) );
@@ -311,6 +314,7 @@ bool solve( bool establish = false )
 bool install()
 {
   SEC << getZYpp()->commit( ZYppCommitPolicy() ) << endl;
+  return true;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -568,10 +572,11 @@ int main( int argc, char * argv[] )
     MIL << "Added target: " << pool << endl;
   }
 
-  //std::for_each( pool.begin(), pool.end(), Xprint() );
-  PoolItem pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
-  USR << pi << endl;
-  pi.status().setTransact( true, ResStatus::USER );
+  std::for_each( pool.begin(), pool.end(), Xprint() );
+
+  //PoolItem pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
+  //USR << pi << endl;
+  //pi.status().setTransact( true, ResStatus::USER );
 
   //install();
 
