@@ -603,6 +603,12 @@ namespace zypp
       release(MediaAccessId accessId, bool eject = false);
 
       /**
+       * Release all attached media.
+       */
+      void
+      releaseAll();
+
+      /**
        * Disconnect a remote media.
        *
        * This is useful for media which e.g. holds open a connection

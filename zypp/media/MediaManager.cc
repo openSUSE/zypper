@@ -685,6 +685,43 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
+    MediaManager::releaseAll()
+    {
+      MutexLock glock(g_Mutex);
+
+      MIL << "Releasing all attached media" << std::endl;
+
+      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
+      for( ; m != m_impl->mediaMap.end(); ++m)
+      {
+        if( m->second.handler->dependsOnParent())
+          continue;
+
+        try
+        {
+          if(m->second.handler->isAttached())
+          {
+            DBG << "Releasing media id " << m->first << std::endl;
+            m->second.desired  = false;
+            m->second.handler->release(false);
+          }
+          else
+          {
+            DBG << "Media id " << m->first << " not attached " << std::endl;
+          }
+        }
+        catch(const MediaException & e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Failed to release media id " << m->first << std::endl;
+        }
+      }
+
+      MIL << "Exit" << std::endl;
+    }
+
+    // ---------------------------------------------------------------
+    void
     MediaManager::disconnect(MediaAccessId accessId)
     {
       MutexLock glock(g_Mutex);

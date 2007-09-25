@@ -166,17 +166,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if ( user == media::MediaChangeReport::EJECT )
           {
             DBG << "Eject: try to release" << endl;
-            try
-            {
-              //zypp::SourceManager::sourceManager()->releaseAllSources();
-            }
-            catch (const zypp::Exception& excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              ERR << "Failed to release all sources" << endl;
-            }
+            media_mgr.releaseAll();
             media_mgr.release (media, true); // one more release needed for eject
-            // FIXME: this will not work, probably
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -283,17 +274,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if ( user == media::MediaChangeReport::EJECT )
           {
             DBG << "Eject: try to release" << endl;
-            try
-            {
-              //zypp::SourceManager::sourceManager()->releaseAllSources();
-            }
-            catch (const zypp::Exception& excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              ERR << "Failed to release all sources" << endl;
-            }
+            media_mgr.releaseAll();
             media_mgr.release (media, true); // one more release needed for eject
-            // FIXME: this will not work, probably
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -414,18 +396,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if (user == media::MediaChangeReport::EJECT)
           {
             DBG << "Eject: try to release" << endl;
-            try
-            {
-              //! \todo do we need replacement for this at all?
-              // zypp::SourceManager::sourceManager()->releaseAllSources();
-            }
-            catch (const zypp::Exception& excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              ERR << "Failed to release all sources" << endl;
-            }
+            media_mgr.releaseAll();
             media_mgr.release (_media, true); // one more release needed for eject
-            // FIXME: this will not work, probably
           }
           else if (user == media::MediaChangeReport::RETRY ||
               user == media::MediaChangeReport::CHANGE_URL)
