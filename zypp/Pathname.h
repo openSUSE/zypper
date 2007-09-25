@@ -39,7 +39,7 @@ namespace zypp
      *
      * \todo Add support for handling extensions incl. stripping
      * extensions from basename (basename("/path/foo.baa", ".baa") ==> "foo")
-     * \todo Review. Maybe use COW pimpl, ckeck storage.
+     * \todo Review. Maybe use COW pimpl, check storage.
      * \todo \b EXPLICIT ctors.
     */
     class Pathname

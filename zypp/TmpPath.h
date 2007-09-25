@@ -57,7 +57,7 @@ namespace zypp {
 
         /**
          * Test whether the Pathname is valid (i.e. not empty. NOT whether
-         * it realy denotes an existing file or directory).
+         * it really denotes an existing file or directory).
          **/
         operator const void *const() const;
 
