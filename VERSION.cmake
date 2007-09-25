@@ -1,3 +1,8 @@
+-------------------------------------------------------------------
+Tue Sep 25 18:03:32 CEST 2007 - jkupec@suse.cz
+
+- 
+
 # ==========
 # Versioning
 # ==========
@@ -19,5 +24,5 @@
 #
 
 SET(VERSION_MAJOR "0")
-SET(VERSION_MINOR "8")
-SET(VERSION_PATCH "23")
+SET(VERSION_MINOR "9")
+SET(VERSION_PATCH "0")
