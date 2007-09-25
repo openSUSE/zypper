@@ -1132,7 +1132,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
   cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore (gSettings.root_dir, true /*use_cache*//*);
+  manager->restore (gSettings.root_dir, true use_cache*//*);
 
   Source_Ref src;
 
@@ -1190,7 +1190,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
   }
 
   cerr_vv << "Storing source data" << endl;
-  manager->store( gSettings.root_dir, true /*metadata_cache*//* );
+  manager->store( gSettings.root_dir, true metadata_cache*//* );
 }
 */
 // ----------------------------------------------------------------------------

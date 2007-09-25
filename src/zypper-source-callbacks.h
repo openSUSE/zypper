@@ -39,7 +39,7 @@ namespace ZmartRecipients
         cout << "Determining " << url << " source type..." << endl;
       }
       
-      virtual void failedProbe( const zypp::Url &/*url*//*, const std::string & type )
+      virtual void failedProbe( const zypp::Url & url*//*, const std::string & type )
       {
         cout << ".. not " << type << endl;
       }
@@ -49,7 +49,7 @@ namespace ZmartRecipients
         cout << url << " is type " << type << endl;
       }
       
-      virtual void finish(const zypp::Url &/*url*//*, Error error, const std::string & reason )
+      virtual void finish(const zypp::Url & url*//*, Error error, const std::string & reason )
       {
         if ( error == INVALID )
         {
@@ -58,10 +58,10 @@ namespace ZmartRecipients
         }
       }
 
-      virtual bool progress(const zypp::Url &/*url*//*, int /*value*//*)
+      virtual bool progress(const zypp::Url & url*//*, int value*//*)
       { return true; }
 
-      virtual Action problem( const zypp::Url &/*url*//*, Error error, const std::string & description )
+      virtual Action problem( const zypp::Url & url*//*, Error error, const std::string & description )
       {
 	display_done ();
 	display_error (error, description);
