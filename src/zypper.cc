@@ -61,24 +61,6 @@ KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
 
 
-/**
- * Constructor wrapper catching exceptions,
- * returning an empty one on error.
- */
-Url make_url (const string & url_s) {
-  Url u;
-
-  try {
-    u = Url( (url_s[0] == '/') ? string("dir:") + url_s : url_s );
-  }
-  catch ( const Exception & excpt_r ) {
-    ZYPP_CAUGHT( excpt_r );
-    cerr << _("Given URL is invalid.") << endl;
-    cerr << excpt_r.asUserString() << endl;
-  }
-  return u;
-}
-
 bool ghelp = false;
   static string help_commands = _(
     "  Commands:\n"
@@ -848,28 +830,22 @@ int one_command(int argc, char **argv)
         cout_n << specific_help;
         return ZYPPER_EXIT_ERR_INVALID_ARGS;
       }
-  
+
       Url url = make_url (arguments[0]);
-      if (!url.isValid()) //! \todo error message
+      if (!url.isValid())
         return ZYPPER_EXIT_ERR_INVALID_ARGS;
-  
-      string alias;
-      if (arguments.size() > 1)
-        alias = arguments[1];
-      //! \todo use timestamp as alias, if no alias was given?
-      if (alias.empty ())
-        alias = url.asString();
-  
+
       // by default, enable the repo and set autorefresh
       if (indeterminate(enabled)) enabled = true;
       if (indeterminate(refresh)) refresh = true;
-  
+
       warn_if_zmd();
-  
+
       // load gpg keys
       cond_init_target ();
-  
-      return add_repo_by_url(url, alias, type, enabled, refresh);
+
+      return add_repo_by_url(
+          url, arguments[1]/*alias*/, type, enabled, refresh);
     }
     catch (const repo::RepoUnknownTypeException & e)
     {

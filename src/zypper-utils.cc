@@ -52,9 +52,20 @@ ostream& report_a_bug (ostream& stm)
 
 bool is_changeable_media(const zypp::Url & url)
 {
-  media::MediaManager mm; media::MediaAccessId id = mm.open(url);
-  bool is_cd = mm.isChangeable(id);
-  mm.close(id);
+  bool is_cd = false;
+  try
+  {
+    media::MediaManager mm;
+    media::MediaAccessId id = mm.open(url);
+    is_cd = mm.isChangeable(id);
+    mm.close(id);
+  }
+  catch (const media::MediaException & e)
+  {
+    ZYPP_CAUGHT(e);
+    WAR << "Could not determine if the URL points to a changeable media" << endl;
+  }
+
   return is_cd;
 }
 
@@ -86,4 +97,20 @@ string kind_to_string_localized(const KindOf<Resolvable> & kind, unsigned long c
     return _PL("srcpackage", "srcpackages", count);
   // default
   return _PL("resolvable", "resolvables", count);
+}
+
+// ----------------------------------------------------------------------------
+
+Url make_url (const string & url_s) {
+  Url u;
+
+  try {
+    u = Url( (url_s[0] == '/') ? string("dir:") + url_s : url_s );
+  }
+  catch ( const Exception & excpt_r ) {
+    ZYPP_CAUGHT( excpt_r );
+    cerr << _("Given URL is invalid.") << endl;
+    cerr << excpt_r.asUserString() << endl;
+  }
+  return u;
 }

@@ -661,7 +661,7 @@ static
 int add_repo(RepoInfo & repo)
 {
   RepoManager manager;
-  
+
   bool is_cd = true;
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
       it != repo.baseUrlsEnd(); ++it)
@@ -675,6 +675,7 @@ int add_repo(RepoInfo & repo)
     cout_v << _("This is a changeable read-only media (CD/DVD), disabling autorefresh.") << endl; 
     repo.setAutorefresh(false);
   }
+
 
   MIL << "Going to add repository: " << repo << endl;
 
@@ -766,20 +767,23 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
                      const string & type,
                      tribool enabled, tribool autorefresh)
 {
+  MIL << "going to add repository by url (alias=" << alias << ", url=" << url
+      << ")" << endl;
+
   RepoManager manager;
   RepoInfo repo;
-  
+
   if ( ! type.empty() )
     repo.setType(RepoType(type));
-  
+
   repo.setAlias(alias.empty() ? timestamp() : alias);
   repo.addBaseUrl(url);
-  
+
   if ( !indeterminate(enabled) )
     repo.setEnabled((enabled == true));
   if ( !indeterminate(autorefresh) )
     repo.setAutorefresh((autorefresh == true));
-    
+
   return add_repo(repo);
 }
 
@@ -790,7 +794,10 @@ int add_repo_from_file(const std::string & repo_file_url,
                        tribool enabled, tribool autorefresh)
 {
   //! \todo handle local .repo files, validate the URL
-  Url url(repo_file_url);
+  Url url = make_url(repo_file_url);
+  if (!url.isValid())
+    return ZYPPER_EXIT_ERR_INVALID_ARGS;
+
   RepoManager manager;
   list<RepoInfo> repos;
 
