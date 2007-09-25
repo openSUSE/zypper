@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Sep 25 11:08:13 CEST 2007 - jkupec@suse.cz
+
+- release all attached media before attempting to eject (#293428)
+- fixed parsing of --proxy-user parameter of .curlrc (#309139)
+- revision 7352
+- version 2.26.0
+
+-------------------------------------------------------------------
 Mon Sep 24 16:10:32 CEST 2007 - dmacvicar@suse.de
 
 - provide a way to retrieve the metadata path. Used for 
