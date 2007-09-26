@@ -21,6 +21,8 @@
 
 #include <sstream>
 
+#include "zypp/CapFactory.h"
+#include "zypp/CapMatch.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -541,29 +543,6 @@ QueueItemRequire::process (const QueueItemList & mainQueue,
 
 	_XDEBUG("Look for providers of " << _capability);
 
-	if (!context->tryAllPossibilities()) {
-	    // If there is one item with the better architecture than the others-->take it
-	    PoolItem_Ref bestItem = PoolItem_Ref();
-	    PoolItemList::iterator it;
-	    for (it = info.providers.begin();
-		 it != info.providers.end(); it++) {
-		 if (bestItem == PoolItem_Ref()) {
-		     bestItem = *it;
-		 } else if (bestItem->arch().compare( (*it)->arch() ) < 0) {	// better arch
-		     _XDEBUG("Taking only one provider with the best architecture --> ignoring e.g. " << bestItem);		     
-		     bestItem = *it;
-		     break;
-		 }
-	    }
-	    if (it != info.providers.end()) {
-		// found one with better architecture --> take it;
-		info.providers.clear();
-		info.providers.push_front(bestItem);
-		context->setSkippedPossibilities( true ); // Flag that there are other possibilities		
-		_XDEBUG("Taking only one provider with the best architecture: " << bestItem);
-	    }
-	}
-
 	num_providers = info.providers.size();
 
 	_XDEBUG( "requirement is met by " << num_providers << " resolvable");
@@ -726,7 +705,7 @@ QueueItemRequire::process (const QueueItemList & mainQueue,
 		&& uninstalled > 0)
 	    {
 		PoolItemList::iterator next;
-		for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
+		for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end();) {
 		    next = it; ++next;
 		    if (it->status().staysUninstalled()) {
 			MIL << "Not considering " << *it << endl;
@@ -735,6 +714,46 @@ QueueItemRequire::process (const QueueItemList & mainQueue,
 		    it = next;
 		}
 	    }
+	    }
+
+	    if (!context->tryAllPossibilities()) {
+		// Evaluate the best architecture of the providers
+		Arch bestArch = Arch(); // is noarch
+		PoolItemList::iterator it;
+		for (it = info.providers.begin();
+		     it != info.providers.end(); it++) {
+		    if (bestArch.compare( (*it)->arch() ) < 0) {	// better arch
+			bestArch = (*it)->arch();
+		    }	
+		}
+		
+		// filter out all resolvables which have worser architecture, are NOT noarch
+		// and have not the same name as the requirement. The last one is needed
+		// for updating packages via patch/atoms.
+		PoolItemList::iterator next;	    
+		for (it = info.providers.begin();
+		     it != info.providers.end();) {
+
+		    bool nameFit = false;
+		    CapFactory factory;		    
+		    if (isKind<capability::NamedCap>( _capability ) ) {
+			Capability capTest =  factory.parse ( (*it)->kind(), (*it)->name(), Rel::ANY, Edition::noedition );
+			if (capTest.matches (_capability) == CapMatch::yes) {
+			    nameFit = true;
+			    _XDEBUG("Required Capability " << _capability << " has the same name as the provider:" << *it);
+			    _XDEBUG("    --> do not trow away althout it could have the wrong architecture");
+			}
+		    }
+		    
+		    next = it; ++next;
+		    if ((*it)->arch() != bestArch
+			&& (*it)->arch() != Arch_noarch
+			&& !nameFit) {
+			_XDEBUG("Kicking " << *it << " due best architecture " << bestArch);
+			info.providers.erase( it );
+		    }
+		    it = next;
+		}
 	    }
 
 	    num_providers = info.providers.size();
