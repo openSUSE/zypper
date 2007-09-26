@@ -383,8 +383,10 @@ To delay the up-to-date check (and thus the automatic refresh) for a certain num
 .LP
 The file
 .B /etc/zypp/locks
-can contain a list of packages to be locked. These will not be updated
-or removed by the solver.
+can contain a list of packages to be locked. Installed packages which match one
+of the items in this list will not be updated or removed by the solver.
+Similarly, those matching packages which have not yet been installed, will not be
+considered for installation. 
 
 Empty lines and lines beginning with \fB#\fR are ignored. Each line is of the form
 "\fIPATTERN \fR[ \fIOP EDITION \fR]"
