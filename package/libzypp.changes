@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Sep 26 11:08:14 CEST 2007 - schubi@suse.de
+
+- QueuItemRequire: Filter out all provider which have worser architecture, 
+  are NOT noarch and have not the same name as the requirement. The
+  last one is needed for updating packages via patch/atoms.
+  Bug 328081
+- Revert changes of r 7340 
+- r 7386
+
+-------------------------------------------------------------------
 Tue Sep 25 15:51:34 CEST 2007 - ma@suse.de
 
 - Add missing '--install' parameter in desktop file. (#308640)
