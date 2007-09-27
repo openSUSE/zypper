@@ -137,7 +137,7 @@ static std::string xml_escape( const std::string &text )
 
 /**
  * Stops iterations on first item and stores edition of the found item.
- * 
+ *
  * If no item has been found, the \ref found variable is set to false.
  */
 struct VersionGetter
@@ -158,7 +158,7 @@ struct VersionGetter
 /**
  * Stops iterations on first item having revision newer than edition passed in
  * contructor. Stores the edition of the found item.
- * 
+ *
  * If no item has been found, the \ref found variable is set to false.
  */
 struct NewerVersionGetter
@@ -190,7 +190,7 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
     // transform to NAME[ OP <EDITION>] (add spaces)
     string new_capstr = capstr;
     cout_vv << "capstr: " << capstr << endl;
-    int op_pos = capstr.find_first_of("<>=");
+    string::size_type op_pos = capstr.find_first_of("<>=");
     if (op_pos != string::npos)
     {
       new_capstr.insert(op_pos, " ");
@@ -281,11 +281,11 @@ void mark_for_install( const ResObject::Kind &kind,
     {
       installer.item.status().setTransact( true, zypp::ResStatus::USER );
     }
-    
+
     cout_n << format(_("skipping %s '%s' (already installed)")) % kind_to_string_localized(kind,1) % name << endl;
   }
   else {
-    
+
     // TODO don't use setToBeInstalled for this purpose but higher level solver API
     bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     if (!result)
@@ -373,7 +373,7 @@ void mark_by_capability (bool install_not_delete,
 			 const string &capstr )
 {
   Capability cap = safe_parse_cap (kind, capstr);
-  
+
   if (cap != Capability::noCap) {
     cout_vv << "Capability: " << cap << endl;
 
@@ -430,7 +430,7 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
   int reply;
   do {
     // without solutions, its useless to prompt
-    if (solutions.empty()) 
+    if (solutions.empty())
        return false;
     // input prompt
     cerr << _("number, (r)etry or (c)ancel> ") << flush;
@@ -476,7 +476,7 @@ bool show_problems ()
   ProblemSolutionList todo;
 
   // display the number of problems
-  if (rproblems.size() > 1) { 
+  if (rproblems.size() > 1) {
     stm << format (_("%s Problems:")) % rproblems.size() << endl;
   }
   else if (rproblems.empty()) {
@@ -486,7 +486,7 @@ bool show_problems ()
   }
 
   // for many problems, list them shortly first
-  if (rproblems.size() > 1) 
+  if (rproblems.size() > 1)
   {
     for (i = b; i != e; ++i) {
       stm << _("Problem: ") << (*i)->description () << endl;
@@ -576,7 +576,7 @@ int show_summary()
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
 
-  
+
   KindToResObjectSet to_be_installed;
   KindToResObjectSet to_be_removed;
 
@@ -591,7 +591,7 @@ int show_summary()
       if (it->resolvable()->kind() == ResTraits<Patch>::kind)
       {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
-        
+
         // set return value to 'reboot needed'
         if (patch->reboot_needed())
           retv = ZYPPER_EXIT_INF_REBOOT_NEEDED;
@@ -659,13 +659,13 @@ int show_summary()
             todowngrade[res->kind()].insert(res);
 
           new_installed_size += res->size() - (*rmit)->size();
-          
+
           to_be_removed[res->kind()].erase(*rmit);
           upgrade_downgrade = true;
           break;
         }
       }
-      
+
       if (!upgrade_downgrade)
       {
         toinstall[res->kind()].insert(res);
@@ -761,7 +761,7 @@ int show_summary()
     // get the absolute size
     ByteCount abs;
     abs = (-new_installed_size);
-    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K 
+    // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
     cout_n << format(_("After the operation, %s will be freed."))
         % abs.asString(0,1,1);
   }
@@ -775,34 +775,34 @@ std::string calculate_token()
 {
   SourceManager_Ptr manager;
   manager = SourceManager::sourceManager();
-  
+
   std::string token;
   stringstream token_stream;
   for ( std::list<Source_Ref>::iterator it = gData.sources.begin(); it !=  gData.sources.end(); ++it )
   {
     Source_Ref src = *it;
-    
+
 //     if ( gSettings.disable_system_sources == SourcesFromSystem )
 //     {
 //       if ( gSettings.output_type == OutputTypeNice )
 //         cout << "Refreshing source " <<  src.alias() << endl;
 //       src.refresh();
 //     }
-    
+
     token_stream << "[" << src.alias() << "| " << src.url() << src.timestamp() << "]";
-    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;  
+    MIL << "Source: " << src.alias() << " from " << src.timestamp() << std::endl;
   }
 
   token_stream << "[" << "target" << "| " << God->target()->timestamp() << "]";
-  
+
   //static std::string digest(const std::string& name, std::istream& is
   token = Digest::digest("sha1", token_stream);
-  
+
   //if ( gSettings.output_type == OutputTypeSimple )
   //  cout << token;
-  
+
   MIL << "new token [" << token << "]" << " previous: [" << gSettings.previous_token << "] previous code: " << gSettings.previous_code << std::endl;
-  
+
   return token;
 }
 */
@@ -872,7 +872,7 @@ void dump_pool ()
 
   _XDEBUG( "---------------------------------------" );
   for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
-    
+
     if (!full_pool_shown                                    // show item if not shown all before
 	|| it->status().transacts()                         // or transacts
 	|| !it->status().isUndetermined())                  // or established status
@@ -929,7 +929,7 @@ void show_patches()
 bool xml_list_patches ()
 {
   // returns true if affects_pkg_manager patches are availble
-  
+
   bool pkg_mgr_available = false;
 
 
@@ -959,10 +959,10 @@ bool xml_list_patches ()
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-		
+
     patchcount++;
 
-    if ( it->status().isNeeded()) 
+    if ( it->status().isNeeded())
     {
       Patch::constPtr patch = asKind<Patch>(res);
       if (pkg_mgr_available && patch->affects_pkg_manager()  ||
@@ -986,7 +986,7 @@ bool xml_list_patches ()
           cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
           cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
         }
-  
+
         cout << " </update>" << endl;
       }
     }
@@ -1048,7 +1048,7 @@ void list_patch_updates(bool best_effort)
     if (!tbl.empty ()) {
       cerr << _("WARNING: These are only the updates affecting the updater itself.\n"
 		"There are others available too.\n") << flush;
-		
+
     }
     tbl = pm_tbl;
   }
@@ -1079,7 +1079,7 @@ public:
 	      // or a better edition than candidate
 	      || best->edition().compare( provider->edition() ) < 0))
       {
-	best = provider;	// store 
+	best = provider;	// store
       }
       return true;		// keep going
     }
@@ -1160,7 +1160,7 @@ void list_updates( const ResObject::Kind &kind, bool best_effort )
     // TranslatorExplanation S stands for Status
     th << _("S");
     if (!hide_repo) {
-      th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: ")); 
+      th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "));
     }
     if (gSettings.is_rug_compatible) {
       th << _("Bundle");
@@ -1235,7 +1235,7 @@ findInstalledItem( PoolItem_Ref item )
 
   invokeOnEach( pool.byNameBegin( item->name() ),
 		pool.byNameEnd( item->name() ),
-		// get installed, equal kind 
+		// get installed, equal kind
 		functor::chain (
 		  resfilter::ByInstalled (),
 		  resfilter::ByKind( item->kind() ) ),
@@ -1289,7 +1289,7 @@ void xml_list_updates()
     cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
     cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
     cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
-    
+
     if ( res->repository() != Repository::noRepository )
     {
     	cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
@@ -1399,7 +1399,7 @@ int solve_and_commit () {
         ZYppCommitResult result = God->commit( ZYppCommitPolicy().syncPoolAfterCommit(false) );
         was_installed = true;
 
-        gData.show_media_progress_hack = false; 
+        gData.show_media_progress_hack = false;
 
         if (!result._errors.empty())
           retv = ZYPPER_EXIT_ERR_ZYPP;
@@ -1467,7 +1467,7 @@ int solve_and_commit () {
 // - make this more user-friendly e.g. show only license name and
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
-// - after negative answer, call solve_and_commit() again 
+// - after negative answer, call solve_and_commit() again
 bool confirm_licenses()
 {
   bool confirmed = true;
@@ -1573,15 +1573,15 @@ int source_install(std::vector<std::string> & arguments)
 {
   /*
    * Workflow:
-   * 
-   * 1. load repo resolvables (to gData.repo_resolvables) 
+   *
+   * 1. load repo resolvables (to gData.repo_resolvables)
    * 2. interate all SrcPackage resolvables with specified name
    * 3. find the latest version or version satisfying specification.
    * 4. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
   int ret = ZYPPER_EXIT_OK;
-  
+
   for (vector<string>::const_iterator it = arguments.begin();
        it != arguments.end(); ++it)
   {
@@ -1592,17 +1592,17 @@ int source_install(std::vector<std::string> & arguments)
         resfilter::ByName(*it),
         resfilter::ByKind(ResTraits<SrcPackage>::kind)),
         FindSrcPackage(srcpkg));
-  
+
     if (srcpkg)
     {
       cout << format(_("Installing source package %s-%s"))
           % srcpkg->name() % srcpkg->edition() << endl;
       MIL << "Going to install srcpackage: " << srcpkg << endl;
-  
+
       try
       {
         God->installSrcPackage(srcpkg);
-        
+
         cout << format(_("Source package %s-%s successfully installed."))
             % srcpkg->name() % srcpkg->edition() << endl;
       }
@@ -1612,7 +1612,7 @@ int source_install(std::vector<std::string> & arguments)
         cerr << format(_("Problem installing source package %s-%s:"))
             % srcpkg->name() % srcpkg->edition() << endl;
         cerr << ex.asUserString() << endl;
-  
+
         ret = ZYPPER_EXIT_ERR_ZYPP;
       }
     }
