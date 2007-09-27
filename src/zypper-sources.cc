@@ -130,7 +130,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
     return true; // error
   }
 
-  return false; // no error 
+  return false; // no error
 }
 
 // ---------------------------------------------------------------------------
@@ -206,7 +206,7 @@ static int do_init_repos()
   RepoManager manager;
 
   string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
-  
+
   // rug compatibility
   //! \todo support repo #
   if (specific_repo.empty())
@@ -243,7 +243,7 @@ static int do_init_repos()
     MIL << "checking if to refresh " << repo.name() << endl;
 
     //! \todo honor command line options/commands
-    bool do_refresh = repo.enabled() && repo.autorefresh(); 
+    bool do_refresh = repo.enabled() && repo.autorefresh();
 
     if (do_refresh)
     {
@@ -268,7 +268,7 @@ static int do_init_repos()
         try { manager.refreshMetadata(repo, RepoManager::RefreshIfNeeded); }
         // any exception thrown means zypp attempted to refresh the repo
         // i.e. it is out-of-date. Thus, just display refresh hint for non-root
-        // user 
+        // user
         catch (const Exception & ex)
         {
           cout << format(_(
@@ -277,7 +277,7 @@ static int do_init_repos()
             << endl;
 
           string nonroot =
-            "We're running as non-root, skipping refresh of " + repo.name(); 
+            "We're running as non-root, skipping refresh of " + repo.name();
           MIL << nonroot << endl;
           cout_vv << nonroot << endl;
         }
@@ -293,7 +293,7 @@ static int do_init_repos()
 int init_repos()
 {
   static bool done = false;
-  //! \todo this has to be done so that it works in zypper shell 
+  //! \todo this has to be done so that it works in zypper shell
   if (done)
     return ZYPPER_EXIT_OK;
 
@@ -303,6 +303,7 @@ int init_repos()
   }
 
   done = true;
+  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
@@ -366,7 +367,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
   {
     RepoInfo repo = *it;
     TableRow tr (gSettings.verbosity > VERBOSITY_NORMAL ? 6 : 7);
-    
+
     // number
     tr << str::numstring (i);
     // enabled?
@@ -509,7 +510,7 @@ int refresh_repos(vector<string> & arguments)
     if (argc)
     {
       bool specified_found = false;
-      
+
       // search for the repo alias among arguments
       for (vector<string>::iterator it = arguments.begin();
           it != arguments.end(); ++it)
@@ -519,7 +520,7 @@ int refresh_repos(vector<string> & arguments)
           arguments.erase(it);
           break;
         }
-      
+
       // search for the repo number among arguments
       if (!specified_found)
         for (vector<string>::iterator it = arguments.begin();
@@ -527,7 +528,7 @@ int refresh_repos(vector<string> & arguments)
         {
           unsigned tmp = 0;
           safe_lexical_cast (*it, tmp);
-          if (tmp == repo_number) 
+          if (tmp == repo_number)
           {
             specified_found = true;
             arguments.erase(it);
@@ -574,7 +575,7 @@ int refresh_repos(vector<string> & arguments)
 
     if (!(error || copts.count("download-only")))
     {
-      bool force_build = 
+      bool force_build =
         copts.count("force") || copts.count("force-build");
 
       MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
@@ -672,7 +673,7 @@ int add_repo(RepoInfo & repo)
   }
   if (is_cd)
   {
-    cout_v << _("This is a changeable read-only media (CD/DVD), disabling autorefresh.") << endl; 
+    cout_v << _("This is a changeable read-only media (CD/DVD), disabling autorefresh.") << endl;
     repo.setAutorefresh(false);
   }
 
@@ -736,7 +737,7 @@ int add_repo(RepoInfo & repo)
   else
   {
     // TranslatorExplanation used as e.g. "Enabled: Yes"
-    cout_n << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl; 
+    cout_n << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
     cout_n << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
     cout_n << "URL: " << *repo.baseUrlsBegin() << endl;
@@ -940,7 +941,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
   catch (const RepoNotFoundException & ex)
   {
     cerr << format(_("Repository %s not found.")) % alias << endl;
-    ERR << "Repo " << alias << " not found" << endl; 
+    ERR << "Repo " << alias << " not found" << endl;
   }
   catch (const Exception & ex)
   {
@@ -972,7 +973,7 @@ void modify_repo(const string & alias)
     if (enable)
     {
       cerr << format(msg_contradition) % "--enable" % "--disable" << endl;
-      
+
       enable = indeterminate;
     }
     else
@@ -1017,7 +1018,7 @@ void modify_repo(const string & alias)
   catch (const RepoNotFoundException & ex)
   {
     cerr << format(_("Repository %s not found.")) % alias << endl;
-    ERR << "Repo " << alias << " not found" << endl; 
+    ERR << "Repo " << alias << " not found" << endl;
   }
   catch (const Exception & ex)
   {
@@ -1032,7 +1033,7 @@ void modify_repo(const string & alias)
 // ---------------------------------------------------------------------------
 
 void cond_load_resolvables(bool to_pool)
-{       
+{
   load_repo_resolvables(to_pool);
   if (!gSettings.disable_system_resolvables && to_pool)
     load_target_resolvables();
@@ -1053,7 +1054,7 @@ void load_repo_resolvables(bool to_pool)
     if (! it->enabled())
       continue;     // #217297
 
-    try 
+    try
     {
       bool error = false;
       // if there is no metadata locally
@@ -1108,7 +1109,7 @@ void load_target_resolvables(bool to_pool)
     cout_n << _("Reading RPM database...");
   MIL << "Going to read RPM database" << endl;
 
-  ResStore tgt_resolvables(God->target()->resolvables());  
+  ResStore tgt_resolvables(God->target()->resolvables());
 
   if (!gSettings.machine_readable)
   {
