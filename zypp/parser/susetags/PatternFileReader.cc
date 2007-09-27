@@ -287,14 +287,25 @@ namespace zypp
 	  // start new data
 	  _pimpl->consumePat( tag_r );
 	}
-	else if TAGFWD( Sum );
-	else if TAGFWD( Vis );
-	else if TAGFWD( Cat );
-	else if TAGFWD( Ico );
-	else if TAGFWD( Ord );
-	else if TAGFWD( Ver );
-	else
-	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
+        else
+        {
+          if ( _pimpl->hasData() )
+          {
+            if TAGFWD( Sum );
+            else if TAGFWD( Vis );
+            else if TAGFWD( Cat );
+            else if TAGFWD( Ico );
+            else if TAGFWD( Ord );
+            else
+            { WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
+          }
+          else
+          {
+            if TAGFWD( Ver );
+            else
+            { WAR << errPrefix( tag_r, "Unknown header tag" ) << endl; }
+          }
+        }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -304,31 +315,36 @@ namespace zypp
       //
       void PatternFileReader::consume( const MultiTagPtr & tag_r )
       {
-	if TAGFWD( Req );
-	else if TAGFWD( Prq );
-	else if TAGFWD( Prv );
-	else if TAGFWD( Con );
-	else if TAGFWD( Obs );
-	else if TAGFWD( Rec );
-	else if TAGFWD( Fre );
-	else if TAGFWD( Enh );
-	else if TAGFWD( Sug );
-	else if TAGFWD( Sup );
-	// package related dependencies
-	else if TAGFWD( Prq ); // requires
-	else if TAGFWD( Pcn ); // conflicts
-	else if TAGFWD( Pob ); // obsoletes
-	else if TAGFWD( Prc ); // recommends
-	else if TAGFWD( Pfr ); // freshens
-	else if TAGFWD( Pen ); // enhances
-	else if TAGFWD( Psg ); // suggests
-	else if TAGFWD( Psp ); // supplements
-	//
-	else if TAGFWD( Des );
-	else if TAGFWD( Inc ); // UI hint: includes
-	else if TAGFWD( Ext ); // UI hint: extends
-	else
-	{ WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
+        if ( _pimpl->hasData() )
+        {
+          if TAGFWD( Req );
+          else if TAGFWD( Prq );
+          else if TAGFWD( Prv );
+          else if TAGFWD( Con );
+          else if TAGFWD( Obs );
+          else if TAGFWD( Rec );
+          else if TAGFWD( Fre );
+          else if TAGFWD( Enh );
+          else if TAGFWD( Sug );
+          else if TAGFWD( Sup );
+	  // package related dependencies
+          else if TAGFWD( Prq ); // requires
+          else if TAGFWD( Pcn ); // conflicts
+          else if TAGFWD( Pob ); // obsoletes
+          else if TAGFWD( Prc ); // recommends
+          else if TAGFWD( Pfr ); // freshens
+          else if TAGFWD( Pen ); // enhances
+          else if TAGFWD( Psg ); // suggests
+          else if TAGFWD( Psp ); // supplements
+          //
+          else if TAGFWD( Des );
+          else if TAGFWD( Inc ); // UI hint: includes
+          else if TAGFWD( Ext ); // UI hint: extends
+          else
+          { WAR << errPrefix( tag_r, "Unknown tag" ) << endl; }
+        }
+        else
+        { WAR << errPrefix( tag_r, "Unknown header tag" ) << endl; }
       }
 
       ///////////////////////////////////////////////////////////////////
