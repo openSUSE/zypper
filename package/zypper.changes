@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Sep 28 15:10:35 CEST 2007 - ma@suse.de
+
+- Attempt to fix memory corruption in zypper (#305196).
+  The memory corruption occurres on ppc only, and only if compiled
+  with -O2. Although it is likely to be a gcc bug, the current code
+  seems to be less affected.
+- r7405
+- 0.8.24
+
+-------------------------------------------------------------------
 Tue Sep 25 13:34:59 CEST 2007 - jkupec@suse.cz
 
 - german translation update
