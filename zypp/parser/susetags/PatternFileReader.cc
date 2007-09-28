@@ -318,7 +318,6 @@ namespace zypp
         if ( _pimpl->hasData() )
         {
           if TAGFWD( Req );
-          else if TAGFWD( Prq );
           else if TAGFWD( Prv );
           else if TAGFWD( Con );
           else if TAGFWD( Obs );
