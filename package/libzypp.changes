@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep 28 18:40:59 CEST 2007 - schubi@suse.de
+
+- Resolvertestcase:
+  - log Repository info
+  - set keep state in the testcase
+  - handle vendor
+- r 4707
+
+-------------------------------------------------------------------
 Thu Sep 27 17:13:14 CEST 2007 - ma@suse.de
 
 - Fixed pattern parser SEGV on broken pattern files. (#328546)
