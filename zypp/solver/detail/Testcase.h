@@ -20,6 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/CapSet.h"
+#include "zypp/ResPool.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -51,7 +52,7 @@ template<>
 std::string helixXML( const Dependencies &dep );
 	
 template<> 
-std::string helixXML( const Resolvable::constPtr &resolvable );
+std::string helixXML( const PoolItem_Ref &item );
 
 
 ///////////////////////////////////////////////////////////////////
@@ -71,7 +72,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
     HelixResolvable (const std::string & path);
     ~HelixResolvable ();
 
-    void addResolvable (const Resolvable::constPtr &resolvable);
+    void addResolvable (const PoolItem_Ref item);
     std::string filename () { return dumpFile; }
 };
 
@@ -101,7 +102,8 @@ class  HelixControl {
     ~HelixControl ();
 
     void installResolvable (const ResObject::constPtr &resObject);
-    void lockResolvable (const ResObject::constPtr &resObject);    
+    void lockResolvable (const ResObject::constPtr &resObject);
+    void keepResolvable (const ResObject::constPtr &resObject);        
     void deleteResolvable (const ResObject::constPtr &resObject);
     void addDependencies (const CapSet &capRequire, const CapSet &capConflict);
     std::string filename () { return dumpFile; }
