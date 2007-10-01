@@ -67,7 +67,8 @@ namespace zypp
           if ( klass == "kind" )
             _kind_cache[id] = Resolvable::Kind(name);
           if ( klass == "deptype" )
-            _deptype_cache[id] = name;
+	    /* As Dep has no default ctor we can't use the [] accessor.  */
+	    _deptype_cache.insert (make_pair (id, Dep(name)));
         }
         
         MIL << "archs: " << _arch_cache.size() << endl;
@@ -130,9 +131,9 @@ namespace zypp
     
     Dep CacheTypes::deptypeFor( const data::RecordId &id )
     {
-      std::map<data::RecordId, string>::const_iterator it;
+      std::map<data::RecordId, Dep>::const_iterator it;
       if ( (it = _deptype_cache.find(id) ) != _deptype_cache.end() )
-        return Dep(it->second);
+        return it->second;
       else
       {
         ERR << "deptype: " << id << endl;
@@ -142,10 +143,10 @@ namespace zypp
 
     data::RecordId CacheTypes::idForDeptype( const Dep & dep )
     {
-      std::map<data::RecordId, string>::const_iterator it;
+      std::map<data::RecordId, Dep>::const_iterator it;
       for ( it = _deptype_cache.begin(); it != _deptype_cache.end(); ++it )
       {
-        if ( dep.asString() == it->second )
+        if ( dep == it->second )
 	  return it->first;
       }
       ZYPP_THROW(Exception("Inconsistent deptype"));   

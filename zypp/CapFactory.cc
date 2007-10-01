@@ -38,7 +38,8 @@ namespace
   {
     size_t operator() ( const CapabilityImpl::Ptr & p ) const
     {
-      return __gnu_cxx::hash<const char*>()( p->encode().c_str() );
+      //return __gnu_cxx::hash<const char*>()( p->encode().c_str() );
+      return p->hash();
     }
   };
 
@@ -46,9 +47,10 @@ namespace
   {
     bool operator() ( const CapabilityImpl::Ptr & lhs, const CapabilityImpl::Ptr & rhs ) const
     {
-      return (    lhs->encode() == rhs->encode()
-               && lhs->kind()   == rhs->kind()
-               && lhs->refers() == rhs->refers() );
+      return ::zypp::capability::exactly_same_caps_p (lhs, rhs);
+      /*return (    lhs->refers() == rhs->refers()
+      	       && lhs->kind()   == rhs->kind()
+	       && lhs->encode() == rhs->encode() );*/
     }
   };
 

@@ -9,6 +9,8 @@
 /** \file zypp/capability/VersionedCap.cc
  *
 */
+#include <iostream>
+#include <ext/hash_fun.h>
 #include "zypp/capability/VersionedCap.h"
 
 using namespace std;
@@ -21,7 +23,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(VersionedCap)
-    
+
     std::string VersionedCap::encode() const
     {
       std::string ret( name() );
@@ -32,6 +34,13 @@ namespace zypp
           ret += " ";
           ret += _range.value.asString();
         }
+      return ret;
+    }
+
+    size_t VersionedCap::hash() const
+    {
+      size_t ret = __gnu_cxx::hash<const char*>()( name().c_str() );
+      ret ^= __gnu_cxx::hash<const char*>()( _range.value.version().c_str() );
       return ret;
     }
 

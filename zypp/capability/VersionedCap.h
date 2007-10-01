@@ -22,7 +22,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     DEFINE_PTR_TYPE(VersionedCap)
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : VersionedCap
@@ -35,7 +35,7 @@ namespace zypp
     {
       public:
       typedef VersionedCap Self;
-      
+
       /** Ctor */
       VersionedCap( const Resolvable::Kind & refers_r,
                     const std::string & name_r,
@@ -55,6 +55,8 @@ namespace zypp
       virtual Rel op() const;
       /** Edition. */
       virtual Edition edition () const;
+
+      virtual size_t hash() const;
 
     protected:
       /** Implementation dependent value. */

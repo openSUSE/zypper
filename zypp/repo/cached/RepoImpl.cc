@@ -333,7 +333,7 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 //
 //     }
 //   }
-  sqlite3_command select_named_cmd( con, "select v.refers_kind, n.name, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from named_capabilities v, names n, resolvables res where v.name_id=n.id and v.resolvable_id=res.id and res.repository_id=:repo_id;");
+  sqlite3_command select_named_cmd( con, "select v.refers_kind, v.name_id, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from named_capabilities v, resolvables res where res.repository_id=:repo_id and v.resolvable_id=res.id;");
 
   sqlite3_command select_file_cmd( con, "select fc.refers_kind, dn.name, fn.name, fc.dependency_type, fc.resolvable_id from file_capabilities fc, files f, dir_names dn, file_names fn, resolvables res where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and fc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
@@ -348,6 +348,16 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
   sqlite3_command select_other_cmd( con, "select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc, resolvables res where oc.resolvable_id=res.id and res.repository_id=:repo_id;");
 
 
+  std::map<int,std::string> namemap;
+  sqlite3_command get_names_cmd( con, "select id,name from names;" );
+  {
+    sqlite3_reader reader = get_names_cmd.executereader();
+    while  ( reader.read() )
+    {
+      namemap[reader.getint(0)] = reader.getstring(1);
+    }
+  }
+
   {
     debug::Measure mnc("read named capabilities");
     select_named_cmd.bind(":repo_id", repo_id);
@@ -355,27 +365,59 @@ void RepoImpl::read_capabilities( sqlite3_connection &con,
 
     // FIXME Move this logic to tick()?
     Date start(Date::now());
+    Capability oldcap;
+    Resolvable::Kind oldrefer;
+    Rel oldrel;
+    //std::string oldname;
+    int oldname = -1;
+    std::string oldver, oldrelease;
+    int oldepoch = 0;
+
+
     while  ( reader.read() )
     {
       ticks.tick();
 
       Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
+      int name = reader.getint(1);
       Rel rel = _type_cache.relationFor(reader.getint(5));
-
-      data::RecordId rid = reader.getint64(7);
 
       if ( rel == zypp::Rel::NONE )
       {
-        capability::NamedCap *ncap = new capability::NamedCap( refer, reader.getstring(1) );
-        zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));
-        nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(ncap) ) );
+        if (oldname != name || rel != oldrel || refer!=oldrefer)
+	{
+	  oldrel = rel;
+	  oldrefer = refer;
+	  oldname = name;
+          capability::NamedCap *ncap = new capability::NamedCap( refer, namemap[name] );
+	  oldcap = capfactory.fromImpl ( capability::CapabilityImpl::Ptr(ncap) );
+	}
       }
       else
       {
-        capability::VersionedCap *vcap = new capability::VersionedCap( refer, reader.getstring(1), /* rel */ rel, Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) ) );
-        zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));
-        nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(vcap) ) );
+	std::string ver = reader.getstring(2);
+	std::string release = reader.getstring(3);
+	int epoch = reader.getint(4);
+        if (oldname != name || rel != oldrel || refer!=oldrefer
+	    || oldver != ver
+	    || oldrelease != release
+	    || oldepoch != epoch)
+	{
+	  oldrel = rel;
+	  oldrefer = refer;
+	  oldname = name;
+	  oldver = ver;
+	  oldrelease = release;
+	  oldepoch = epoch;
+
+          capability::VersionedCap *vcap = new capability::VersionedCap( refer, namemap[name], /* rel */ rel, Edition( ver, release, epoch ) );
+	  oldcap = capfactory.fromImpl( capability::CapabilityImpl::Ptr(vcap) );
+	}
       }
+
+      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));
+      data::RecordId rid = reader.getint64(7);
+      nvras[rid].second[deptype].insert(oldcap);
     }
   }
 

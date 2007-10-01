@@ -21,7 +21,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(NamedCap)
-    
+
     const CapabilityImpl::Kind & NamedCap::kind() const
     { return CapTraits<Self>::kind; }
 
@@ -34,6 +34,27 @@ namespace zypp
                   && range().overlaps( namedrhs->range() ) );
         }
       return false;
+    }
+
+    bool NamedCap::same( const CapabilityImpl_constPtr & rhs ) const
+    {
+      intrusive_ptr<const Self> namedrhs( asKind<Self>(rhs) );
+      if ( ! ( namedrhs && sameRefers( namedrhs ) ) )
+        return false;
+
+      if ( name() != namedrhs->name() )
+        return false;
+
+      const Edition::MatchRange & myrange( range() );
+      const Edition::MatchRange & otherrange( namedrhs->range() );
+
+      if ( myrange.op != otherrange.op )
+        return false;
+
+      if ( myrange.op == Rel::ANY ) // ANY ==> editions are irrelevant
+        return true;
+
+      return( myrange.value == otherrange.value );
     }
 
     std::string NamedCap::encode() const

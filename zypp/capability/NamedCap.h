@@ -36,7 +36,7 @@ namespace zypp
       typedef NamedCap Self;
       typedef NamedCap_Ptr Ptr;
       typedef NamedCap_constPtr constPtr;
-      
+
       /** Ctor */
       NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
       : CapabilityImpl( refers_r )
@@ -62,6 +62,8 @@ namespace zypp
       /** The edition (defaults to Edition::noedition) */
       virtual Edition edition() const
       { return Edition::noedition; }
+
+      virtual bool same( const CapabilityImpl_constPtr & rhs ) const;
 
     protected:
       /**  Rel::ANY. */

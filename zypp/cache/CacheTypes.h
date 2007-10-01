@@ -136,7 +136,7 @@ namespace zypp
       
       std::map<data::RecordId, Rel> _rel_cache;
       std::map<data::RecordId, Resolvable::Kind> _kind_cache;
-      std::map<data::RecordId, std::string> _deptype_cache;
+      std::map<data::RecordId, Dep> _deptype_cache;
       std::map<data::RecordId, Arch> _arch_cache;
       Pathname _dbdir;
     };

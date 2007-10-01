@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <ext/hash_fun.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Regex.h"
@@ -44,6 +45,18 @@ namespace zypp
     bool CapabilityImpl::capImplOrderLess( const constPtr & rhs ) const
     {
       return encode() < rhs->encode();
+    }
+
+    std::size_t CapabilityImpl::hash() const
+    {
+      std::size_t ret = __gnu_cxx::hash<const char*>()( encode().c_str() );
+      return ret;
+    }
+
+    bool CapabilityImpl::same (const constPtr &rhs) const
+    {
+      /* refers and kind are known to be the same */
+      return encode() == rhs->encode();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -167,11 +180,14 @@ namespace zypp
       }
 
       //split:   name:/absolute/path
-      static const str::regex  rx( "([^/]*):(/.*)" );
-      str::smatch what;
-      if( str::regex_match( name_r, what, rx ) )
+      if (isSplitSpec (name_r))
       {
-        return new capability::SplitCap( refers_r, what[1], what[2] );
+        static const str::regex  rx( "([^/]*):(/.*)" );
+        str::smatch what;
+        if( str::regex_match( name_r, what, rx ) )
+        {
+          return new capability::SplitCap( refers_r, what[1], what[2] );
+        }
       }
 
       //name:    name
@@ -292,7 +308,8 @@ namespace zypp
       // improve regex!
       static const str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
       str::smatch what;
-      if( str::regex_match( strval_r,what, rx ) )
+      if( strval_r.find(' ') != std::string::npos
+	  && str::regex_match( strval_r,what, rx ) )
         {
           Rel op;
           Edition edition;

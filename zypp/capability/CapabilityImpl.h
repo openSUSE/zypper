@@ -110,6 +110,9 @@ namespace zypp
       virtual std::string index() const
       { return encode(); }
 
+      virtual size_t hash() const;
+      virtual bool same (const constPtr &rhs) const;
+
     public:
       /** Solver hack. */
       struct SplitInfo
@@ -317,6 +320,14 @@ namespace zypp
     };
 
     typedef std::set<CapabilityImpl::Ptr> CapabilityImplPtrSet;
+
+    inline bool exactly_same_caps_p (const CapabilityImpl::constPtr & lhs,
+			      const CapabilityImpl::constPtr & rhs )
+    {
+      return (   lhs->refers() == rhs->refers()
+      	      && lhs->kind() == rhs->kind()
+	      && lhs->same(rhs) );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
