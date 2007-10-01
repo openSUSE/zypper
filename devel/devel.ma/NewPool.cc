@@ -95,6 +95,27 @@ ManagedFile repoProvidePackage( const PoolItem & pi )
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 
+namespace zypp
+{
+  template <class _LIterator, class _RIterator, class _Function>
+      inline int invokeOnEach( _LIterator lbegin_r, _LIterator lend_r,
+                               _RIterator rbegin_r, _RIterator rend_r,
+                               _Function fnc_r )
+      {
+        int cnt = 0;
+        for ( _LIterator lit = lbegin_r; lit != lend_r; ++lit )
+        {
+          for ( _RIterator rit = rbegin_r; rit != rend_r; ++rit )
+          {
+            ++cnt;
+            if ( ! fnc_r( *lit, *rit ) )
+              return -cnt;
+          }
+        }
+        return cnt;
+      }
+}
+
 template<class _Res>
 Selectable::Ptr getSel( const std::string & name_r )
 {
@@ -143,9 +164,6 @@ PoolItem getPi( const std::string & name_r, const Arch & arch_r )
 {
   return getPi<_Res>( name_r, Edition(), arch_r );
 }
-
-
-
 
 void dbgDu( Selectable::Ptr sel )
 {
@@ -375,9 +393,6 @@ struct DigestReceive : public callback::ReceiveReport<DigestReport>
     USR << "fle " << PathInfo(file) << endl;
     USR << "req " << requested << endl;
     USR << "fnd " << found << endl;
-
-    waitForInput();
-
     return false;
   }
 };
@@ -425,60 +440,24 @@ namespace container
     { return cont.find( val ) != cont.end(); }
 }
 
-///////////////////////////////////////////////////////////////////
-
-struct AddResolvables
+struct Xverscmp
 {
-  bool operator()( const Repository & src ) const
+  Xverscmp( ostream * outs_r = 0 )
+  : _outs( outs_r )
+  {}
+
+  bool operator()( const Edition & lhs, const Edition & rhs )
   {
-    getZYpp()->addResolvables( src.resolvables() );
+    if ( _outs )
+    {
+      int res = lhs.compare( rhs );
+      (*_outs) << lhs << " <> " << rhs << " = " << res << endl;
+    }
     return true;
   }
+
+  ostream * _outs;
 };
-
-///////////////////////////////////////////////////////////////////
-
-
-std::ostream & operator<<( std::ostream & str, const iostr::EachLine & obj )
-{
-  str << "(" << obj.valid() << ")[" << obj.lineNo() << "|" << obj.lineStart() << "]{" << *obj << "}";
-  return str;
-
-}
-
-///////////////////////////////////////////////////////////////////
-
-#define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG; IT != END; ++IT )
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-
-  void Vtst( const std::string & lhs, const std::string & rhs )
-  {
-    (VendorAttr::instance().equivalent( lhs, rhs )?MIL:ERR) << lhs << " <==> "<< rhs << endl;
-
-  }
-
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
-using namespace zypp;
-
-void tt( std::string dd )
-{
-  unsigned level = 3;
-  std::string::size_type pos = dd.find( "/" );
-  while ( --level && pos != std::string::npos )
-  {
-    pos = dd.find( "/", pos+1 );
-  }
-  if ( pos != std::string::npos )
-    dd.erase( pos+1 );
-  DBG << dd << "\t" << level << " " << pos << endl;
-}
 
 /******************************************************************
 **
@@ -489,71 +468,18 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-  setenv( "ZYPP_CONF", "/Local/ROOT/zypp.conf", 1 );
 
-  DigestReceive foo;
-  KeyRingSignalsReceive baa;
+  setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
 
-  DiskUsageCounter::MountPointSet fakePart;
-  fakePart.insert( DiskUsageCounter::MountPoint( "/",        1024, 10240, 5120, 0LL, false ) );
-//   fakePart.insert( DiskUsageCounter::MountPoint( "/usr",     1024, 10240, 5120, 0LL, false ) );
-  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/lib", 1024, 10240, 5120, 0LL, false ) );
-  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/bin", 1024, 10240, 5120, 0LL, false ) );
-  getZYpp()->setPartitions( fakePart );
-
-  ResPool pool( getZYpp()->pool() );
-  vdumpPoolStats( USR << "Initial pool:" << endl,
-		  pool.begin(),
-		  pool.end() ) << endl;
-
-#if 0
-  RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
-
+  RepoManager repoManager( makeRepoManager( sysRoot ) );
   RepoInfoList repos = repoManager.knownRepositories();
-  SEC << "/Local/ROOT " << repos << endl;
-
-
-  RepoManager oldrepoManager( makeRepoManager( "/Local/ROOT/mnt" ) );
-
-  RepoInfoList oldrepos = oldrepoManager.knownRepositories();
-  SEC << "/Local/ROOT/mnt " << oldrepos << endl;
-
-  for_( it, oldrepos.begin(), oldrepos.end() )
-  {
-    std::string oldalias( it->alias() );
-    oldrepoManager.modifyRepository( oldalias, it->setEnabled( false ).setAlias( "foo" ) );
-  }
-
-  oldrepos = oldrepoManager.knownRepositories();
-  SEC << "/Local/ROOT/mnt " << oldrepos << endl;
-
-
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-  if ( repos.empty() )
-  {
-    RepoInfo nrepo;
-    nrepo
-	.setAlias( "factorytest" )
-	.setName( "Test Repo for factory." )
-	.setEnabled( true )
-	.setAutorefresh( false )
-	.addBaseUrl( Url("http://dist.suse.de/install/stable-x86/") );
-
-    repoManager.addRepository( nrepo );
-    SEC << "refreshMetadat" << endl;
-    repoManager.refreshMetadata( nrepo );
-    SEC << "buildCache" << endl;
-    repoManager.buildCache( nrepo );
-    SEC << "------" << endl;
-    repos = repoManager.knownRepositories();
-  }
+  // SEC << "/Local/ROOT " << repos << endl;
 
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
     RepoInfo & nrepo( *it );
+    SEC << nrepo << endl;
+
     if ( ! nrepo.enabled() )
       continue;
 
@@ -565,43 +491,54 @@ int main( int argc, char * argv[] )
 	repoManager.cleanCache( nrepo );
       }
       SEC << "refreshMetadata" << endl;
-      //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
-      repoManager.refreshMetadata( nrepo );
+      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
 
-    SEC << nrepo << endl;
+    SEC << "createFromCache" << endl;
     Repository nrep( repoManager.createFromCache( nrepo ) );
     const zypp::ResStore & store( nrep.resolvables() );
-
-    dumpPoolStats( SEC << "Store: " << endl,
-		   store.begin(), store.end() ) << endl;
+    dumpPoolStats( SEC << "Store: " << endl, store.begin(), store.end() ) << endl;
     getZYpp()->addResolvables( store );
   }
 
-  USR << "pool: " << pool << endl;
-  SEC << pool.knownRepositoriesSize() << endl;
-#endif
   if ( 1 )
   {
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
-      //getZYpp()->initTarget( sysRoot );
-      getZYpp()->initTarget( "/" );
+      getZYpp()->initTarget( sysRoot );
+      //getZYpp()->initTarget( "/" );
     }
-    MIL << "Added target: " << pool << endl;
+    SEC << "Added target " << endl;
+    dumpPoolStats( SEC << "Store: " << endl,
+                   getZYpp()->target()->resolvables().begin(),
+                   getZYpp()->target()->resolvables().end() ) << endl;
   }
 
-  cerr << getZYpp()->getRequestedLocales() << endl;
+  ResPool pool( getZYpp()->pool() );
+  USR << "pool: " << pool << endl;
+
+  {
+    Measure x( "Cross pool edition compare" );
+    //ofstream out( "verscmp.new" );
+
+    std::set<Edition> editions;
+    for_( it, pool.begin(), pool.end() )
+    {
+      editions.insert( (*it)->edition() );
+    }
+    SEC << "Num Editions " << editions.size() << endl;
+    for ( unsigned i = 5; i; --i )
+    {
+      Measure x( "pass " );
+      invokeOnEach( editions.begin(), editions.end(),
+                    editions.begin(), editions.end(),
+                    Xverscmp() );
+    }
+  }
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
-
-  //PoolItem pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
-  //USR << pi << endl;
-  //pi.status().setTransact( true, ResStatus::USER );
-
-  //install();
 
  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
