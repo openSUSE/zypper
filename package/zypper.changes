@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct  2 09:58:31 CEST 2007 - mvidner@suse.cz
+
+- Fixed misalignment in localized tables (#328918).
+- 0.9.0
+
+-------------------------------------------------------------------
 Tue Sep 25 17:59:22 CEST 2007 - jkupec@suse.cz
 
 - report malformed URLs correctly in zypper addrepo (#325660)
