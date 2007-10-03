@@ -271,8 +271,6 @@ int one_command(int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    //! \todo document --capability and --force after 10.3 is out
-    //  "-f, --force                     Install even if the item is already installed (reinstall)\n"
     specific_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (package, patch, pattern, product) or at least leave also their
@@ -286,9 +284,11 @@ int one_command(int argc, char **argv)
       "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
+      "-C, --capability                Select resolvables by capability\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
+      "-f, --force                     Install even if the item is already installed (reinstall)\n"
     );
   }
   else if (command == ZypperCommand::REMOVE) {
@@ -307,7 +307,6 @@ int one_command(int argc, char **argv)
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    //! \todo document --capability after 10.3 is out
     specific_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (see the install command comment) 
@@ -320,6 +319,7 @@ int one_command(int argc, char **argv)
       "-r, --repo <alias> Operate only with resolvables from repository specified by alias.\n"
       "-t, --type <type>  Type of resolvable (package, patch, pattern, product) (default: package)\n"
       "-n, --name         Select resolvables by plain name, not by capability\n"
+      "-C, --capability   Select resolvables by capability\n"
       "    --debug-solver Create solver test case for debugging\n"  
     );
   }
