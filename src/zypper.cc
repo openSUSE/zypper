@@ -367,6 +367,9 @@ int one_command(const string& command, int argc, char **argv)
       {"type",		   required_argument, 0, 't'},
       {"no-confirm", no_argument,       0, 'y'},
       {"skip-interactive", no_argument, 0, 0},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      // rug compatibility, we have --auto-agree-with-licenses
+      {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -376,6 +379,8 @@ int one_command(const string& command, int argc, char **argv)
       "\t--type,-t\t\tType of resolvable (default: patch)\n"
       "\t--no-confirm,-y\t\tDo not require user confirmation\n"
       "\t--skip-interactive\t\tSkip interactive updates\n"
+      "\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n"
+      "\t\t\t\t\tSee man zypper for more details.\n"
       );
   }
   else if (command == "search" || command == "se") {
