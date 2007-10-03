@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct  3 17:05:48 CEST 2007 - jkupec@suse.cz
+
+- missing --auto-agree-with-licenses option added to 'update'
+  command (#298731)
+- r7429
+- 0.6.21
+
+-------------------------------------------------------------------
 Thu Sep 20 15:37:46 CEST 2007 - aschnell@suse.de
 
 - close file-descriptors > 2, call setgid and umask and check
