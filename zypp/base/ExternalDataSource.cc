@@ -20,6 +20,8 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <iostream>
+#include <stdlib.h>
+#include <string.h>
 
 #include <string>
 

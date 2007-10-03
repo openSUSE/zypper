@@ -137,7 +137,7 @@ namespace zypp
     /** \ref compare functor.
      * \see \ref RelCompare.
     */
-    typedef Compare<Edition> Compare;
+    typedef Compare<Edition> CompareEd;
 
     /** \ref Edition \ref Range based on \ref Compare.
      * \see \ref RelCompare.

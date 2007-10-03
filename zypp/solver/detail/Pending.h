@@ -25,6 +25,7 @@
 #include <iosfwd>
 #include <list>
 #include <string>
+#include <string.h>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"

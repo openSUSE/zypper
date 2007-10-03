@@ -16,6 +16,7 @@
 #include <iosfwd>
 #include <list>
 #include <stdexcept>
+#include <string.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
