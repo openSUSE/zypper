@@ -153,7 +153,7 @@ class InstallOrder
 	 * */
 	const PoolItemList getTopSorted() const;
 
-	const void printAdj (std::ostream & os, bool reversed = false) const;
+	void printAdj (std::ostream & os, bool reversed = false) const;
 };
 
 ///////////////////////////////////////////////////////////////////

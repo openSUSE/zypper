@@ -54,7 +54,7 @@ namespace zypp
 
     explicit ResourceType(const std::string & strval_r);
 
-    const Type toEnum() const { return _type; }
+    Type toEnum() const { return _type; }
     
     ResourceType::Type parse(const std::string & strval_r);
 

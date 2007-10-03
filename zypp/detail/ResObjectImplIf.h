@@ -124,7 +124,7 @@ namespace zypp
       { return _backRef; }
 
       /** Access to Resolvable data if connected. */
-      const Resolvable *const self() const
+      const Resolvable * self() const
       { return _backRef; }
 
     private:

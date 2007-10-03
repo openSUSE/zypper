@@ -94,7 +94,7 @@ namespace zypp
 	  // ---------------------------------- accessors
 
 	  const PoolItem_Ref item() const { return _item; }
-	  const TransactionKind action() const { return _action; }
+	  TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
 	    virtual bool execute(Resolver & resolver) const;

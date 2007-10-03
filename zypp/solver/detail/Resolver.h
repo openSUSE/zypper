@@ -245,12 +245,12 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addIgnoreVendorItem (const PoolItem_Ref item);    
 
     void setForceResolve (const bool force) { _forceResolve = force; }
-    const bool forceResolve() { return _forceResolve; }
+    bool forceResolve() { return _forceResolve; }
     void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
-    const bool preferHighestVersion() { return _preferHighestVersion; }
+    bool preferHighestVersion() { return _preferHighestVersion; }
 
     void setTryAllPossibilities (const bool tryAllPossibilities) { _tryAllPossibilities = tryAllPossibilities; }
-    const bool tryAllPossibilities () const { return _tryAllPossibilities; };
+    bool tryAllPossibilities () const { return _tryAllPossibilities; };
 
     bool verifySystem (bool considerNewHardware = false);
     void establishState (ResolverContext_Ptr context = NULL);

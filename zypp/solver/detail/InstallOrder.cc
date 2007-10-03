@@ -66,7 +66,7 @@ InstallOrder::InstallOrder( const ResPool & pool, const PoolItemSet & toinstall,
 
 //-----------------------------------------------------------------------------
 
-const void
+void
 InstallOrder::printAdj (std::ostream& os, bool reversed) const
 {
     const Graph& g = (reversed ? _rgraph : _graph);

@@ -126,10 +126,10 @@ namespace zypp {
 
     ///////////////////////////////////////////////////////////////////
     //
-    //      METHOD NAME : TmpPath::operator const void *const
+    //      METHOD NAME : TmpPath::operator const void *
     //      METHOD TYPE :
     //
-    TmpPath::operator const void *const() const
+    TmpPath::operator const void * () const
     {
       return _impl.get();
     }

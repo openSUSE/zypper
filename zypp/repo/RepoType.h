@@ -45,7 +45,7 @@ namespace zypp
 
     explicit RepoType(const std::string & strval_r);
 
-    const Type toEnum() const { return _type; }
+    Type toEnum() const { return _type; }
 
     RepoType::Type parse(const std::string & strval_r);
 

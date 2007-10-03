@@ -133,7 +133,7 @@ namespace zypp
       { return _node; }
 
       /** */
-      const Node *const operator->() const
+      const Node * operator->() const
       { return &_node; }
 
     public:

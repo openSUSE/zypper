@@ -57,7 +57,7 @@ namespace zypp
                  OnDelete ondelete_r           = NOFREE );
 
       /** Access the <tt>xmlChar *</tt>. */
-      const xmlChar *const get() const
+      const xmlChar * get() const
       {
         if ( ! _xmlstr )
           return NULL;
@@ -65,11 +65,11 @@ namespace zypp
       }
 
       /** Implicit conversion to <tt>xmlChar *</tt>. */
-      operator const xmlChar *const() const
+      operator const xmlChar * () const
       { return get(); }
 
-      /** Explicit conversion to <tt>const char *const</tt>. */
-      const char *const c_str() const
+      /** Explicit conversion to <tt>const char *</tt>. */
+      const char * c_str() const
       { return reinterpret_cast<const char *const>(get()); }
 
       /** Explicit conversion to <tt>std::string</tt>. */

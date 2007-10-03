@@ -187,15 +187,15 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     const PoolItemList getIgnoreVendorItem() const { return _ignoreVendorItem; }
     
     void setForceResolve (const bool force) { _forceResolve = force; }
-    const bool forceResolve() { return _forceResolve; }
+    bool forceResolve() { return _forceResolve; }
 
     void setEstablishContext (const ResolverContext_Ptr establish_context) { _establish_context = establish_context; }
 
     void setPreferHighestVersion (const bool highestVersion) { _preferHighestVersion = highestVersion; }
-    const bool preferHighestVersion() { return _preferHighestVersion; }  
+    bool preferHighestVersion() { return _preferHighestVersion; }  
 
     void setUpgradeMode (const bool upgrade) { _upgradeMode = upgrade; }
-    const bool upgradeMode() { return _upgradeMode; }
+    bool upgradeMode() { return _upgradeMode; }
 
     void setUserDeleteItems ( const PoolItemList & deleteItems) { _userDeleteItems = deleteItems; }
     void setUserInstallItems ( const PoolItemList& installItems) { _userInstallItems = installItems; }

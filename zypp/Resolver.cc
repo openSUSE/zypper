@@ -88,11 +88,11 @@ namespace zypp
   { _pimpl->setArchitecture( arch ); }
   void Resolver::setForceResolve( const bool force )
   { _pimpl->setForceResolve( force ); }
-  const bool Resolver::forceResolve()
+  bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
     void Resolver::setPreferHighestVersion( const bool highestVersion )
   { _pimpl->setPreferHighestVersion( highestVersion ); }
-  const bool Resolver::preferHighestVersion()
+  bool Resolver::preferHighestVersion()
   { return _pimpl->preferHighestVersion(); }
   bool Resolver::transactResObject( ResObject::constPtr robj, bool install)
   { return _pimpl->transactResObject( robj, install ); }

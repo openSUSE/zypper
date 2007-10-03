@@ -195,14 +195,14 @@ namespace zypp
      * This behaviour is favourited by ZMD.
      **/
     void setForceResolve (const bool force);
-    const bool forceResolve();
+    bool forceResolve();
 
     /**      
      * Prefer the result with the newest version if there are more solver
      * results. 
      **/
     void setPreferHighestVersion (const bool highestVersion);
-    const bool preferHighestVersion();      
+    bool preferHighestVersion();      
 
     /**
      * transact a single ResObject
