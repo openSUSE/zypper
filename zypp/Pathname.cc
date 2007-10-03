@@ -145,8 +145,8 @@ namespace zypp
       // check for prefix
       if (    name_t.length() >= 2
            && name_t[1] == ':'
-           && (    'a' <= name_t[0] && name_t[0] <= 'z'
-                || 'A' <= name_t[0] && name_t[0] <= 'Z' ) ) {
+           && (    ( 'a' <= name_t[0] && name_t[0] <= 'z' )
+                || ( 'A' <= name_t[0] && name_t[0] <= 'Z' ) ) ) {
         Tprfx  = name_t.substr( 0, 2 );
         prfx_i = 2;
         R_pci += 2;

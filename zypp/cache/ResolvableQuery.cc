@@ -221,7 +221,7 @@ struct ResolvableQuery::Impl
 //FIXME: Implement MATCH_RESSUMM and MATCH_RESDESC
 
       sqlcmd += " name ";
-      if (flags & MATCH_WILDCARDS == 0)
+      if ((flags & MATCH_WILDCARDS) == 0)
       {
         sqlcmd += "=";
       }

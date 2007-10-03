@@ -268,8 +268,8 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
     PoolItem_Ref candidate;
     
     LookForSelected (PoolItem_Ref can)
-	: candidate (can),
-	found (false)
+	: found (false),
+	candidate (can)
     { }
 
     bool operator()( PoolItem_Ref item )
