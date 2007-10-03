@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct  3 13:37:57 CEST 2007 - mvidner@suse.cz
+
+- Fixed compilation errors with GCC 4.3 by adding missing includes
+  and renaming templates: MaxBits to MaxBitsT, Mask to MaskT,
+  Compare<Edition> to CompareEd.
+- r7426
+
+-------------------------------------------------------------------
 Mon Oct  1 20:29:36 CEST 2007 - ma@suse.de
 
 - Incorporated patch from Michael Matz to speedup cache reading.
