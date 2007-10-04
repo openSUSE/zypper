@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct  4 14:22:31 CEST 2007 - mvidner@suse.cz
+
+- Renamed templates back because proper qualification makes it work
+  too.
+- 4.1.0
+
+-------------------------------------------------------------------
 Thu Oct 04 11:23:19 CEST 2007 - aschnell@suse.de
 
 - only look for repositories in file ending ".repo" (bug #294779)

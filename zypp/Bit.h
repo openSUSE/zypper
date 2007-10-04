@@ -48,7 +48,7 @@ namespace zypp
 
     /** Number of bits available in \a _IntT. */
     template<class _IntT>
-      struct MaxBitsT
+      struct MaxBits
       {
         typedef _IntT IntT;
         static const unsigned value = (sizeof(IntT)*8);
@@ -58,8 +58,8 @@ namespace zypp
     template<class _IntT>
       inline std::string asString( _IntT val, char zero = '0', char one = '1' )
       {
-        std::string s( MaxBitsT<_IntT>::value, zero );
-        for( unsigned i = MaxBitsT<_IntT>::value; i; )
+        std::string s( MaxBits<_IntT>::value, zero );
+        for( unsigned i = MaxBits<_IntT>::value; i; )
           {
             --i;
             if ( val & (_IntT)1 )
@@ -71,7 +71,7 @@ namespace zypp
 
     /** A bitmaks of \a _size 1-bits starting at bit \a _begin. */
     template<class _IntT, unsigned _begin, unsigned _size>
-      struct MaskT
+      struct Mask
       {
         typedef _IntT IntT;
         static const IntT value    = bit_detail::Gen1Bits<IntT,_size>::value << _begin;
@@ -83,8 +83,8 @@ namespace zypp
       struct Range
       {
         typedef _IntT IntT;
-        typedef MaxBitsT<IntT>          MaxBits;
-        typedef MaskT<IntT,_begin,_size> Mask;
+        typedef zypp::bit::MaxBits<IntT>           MaxBits;
+        typedef zypp::bit::Mask<IntT,_begin,_size> Mask;
 
         static const unsigned begin  = _begin;
         static const unsigned size   = _size;
@@ -158,7 +158,7 @@ namespace zypp
      * \endcode
     */
     template<class _IntT>
-      class BitField  : public Range<_IntT, 0, MaxBitsT<_IntT>::value>
+      class BitField  : public Range<_IntT, 0, MaxBits<_IntT>::value>
                       , private base::SafeBool<BitField<_IntT> >
       {
         typedef typename base::SafeBool<BitField<_IntT> >::bool_type bool_type;
