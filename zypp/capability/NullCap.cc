@@ -11,8 +11,6 @@
 */
 #include "zypp/capability/NullCap.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -20,18 +18,13 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    CapabilityImpl_Ptr NullCap::_instance;
-
-    ///////////////////////////////////////////////////////////////////
-
     NullCap::NullCap()
     : CapabilityImpl( Resolvable::Kind() ) // no Kind!
     {}
 
     CapabilityImpl_Ptr NullCap::instance()
     {
-      if ( ! _instance )
-        _instance = new NullCap;
+      static CapabilityImpl_Ptr _instance( new NullCap );
       return _instance;
     }
 

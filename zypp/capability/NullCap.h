@@ -56,10 +56,6 @@ namespace zypp
 
       /** Empty string. */
       virtual std::string encode() const;
-
-    private:
-      /** Singleton */
-      static CapabilityImpl_Ptr _instance;
     };
     ///////////////////////////////////////////////////////////////////
 
