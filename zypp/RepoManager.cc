@@ -18,6 +18,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Function.h"
+#include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 
@@ -175,9 +176,10 @@ namespace zypp
     if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
 
+    str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
     for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
-      if (it->extension() == ".repo")
+      if (str::regex_match(it->extension(), allowedRepoExt))
       {
         list<RepoInfo> tmp = repositories_in_file( *it );
         repos.insert( repos.end(), tmp.begin(), tmp.end() );
