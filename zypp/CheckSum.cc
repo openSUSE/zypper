@@ -11,6 +11,7 @@
 */
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 
 #include "zypp/CheckSum.h"
@@ -43,15 +44,15 @@ namespace zypp
   , _checksum( checksum )
   {
     switch ( checksum.size() )
-      {
+    {
       case 64:
         if ( _type == sha256Type() )
           return;
         if ( _type.empty() || _type == shaType() )
-          {
-            _type = sha256Type();
-            return;
-          }
+        {
+          _type = sha256Type();
+          return;
+        }
         // else: dubious
         break;
 
@@ -59,10 +60,10 @@ namespace zypp
         if ( _type == sha1Type() )
           return;
         if ( _type.empty() || _type == shaType() )
-          {
-            _type = sha1Type();
-            return;
-          }
+        {
+          _type = sha1Type();
+          return;
+        }
         // else: dubious
         break;
 
@@ -70,10 +71,10 @@ namespace zypp
         if (  _type == md5Type() )
           return;
         if ( _type.empty() )
-          {
-            _type = md5Type();
-            return;
-          }
+        {
+          _type = md5Type();
+          return;
+        }
         // else: dubious
         break;
 
@@ -83,16 +84,28 @@ namespace zypp
 
       default:
         if ( _type.empty() )
-          {
-            WAR << "Can't determine type of " << checksum.size() << " byte checksum '" << _checksum << "'" << endl;
-            return;
-          }
+        {
+          WAR << "Can't determine type of " << checksum.size() << " byte checksum '" << _checksum << "'" << endl;
+          return;
+        }
         // else: dubious
         break;
-      }
+    }
 
-    // dubious
-    WAR << "Dubious type '" << _type << "' for " << checksum.size() << " byte checksum '" << _checksum << "'" << endl;
+    // dubious: Throw on malformed known types, otherwise log a warning.
+    std::string msg = str::form ( _("Dubious type '%s' for %u byte checksum '%s'"),
+                                  _type.c_str(), checksum.size(), _checksum.c_str() );
+    if (    _type == md5Type()
+         || _type == shaType()
+         || _type == sha1Type()
+         || _type == sha256Type() )
+    {
+      ZYPP_THROW( CheckSumException( msg ) );
+    }
+    else
+    {
+      WAR << msg << endl;
+    }
   }
 
   CheckSum::CheckSum( const std::string & type_r, std::istream & input_r )
@@ -116,7 +129,7 @@ namespace zypp
 
   bool CheckSum::empty() const
   { return (checksum().empty() || type().empty()); }
-  
+
   std::ostream & operator<<( std::ostream & str, const CheckSum & obj )
   {
     if ( obj.checksum().empty() )

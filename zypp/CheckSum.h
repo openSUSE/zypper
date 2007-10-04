@@ -15,19 +15,26 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  struct CheckSumException : public Exception
+  {
+    CheckSumException( const std::string & msg )
+      : Exception( msg )
+    {}
+  };
 
   class CheckSum
   {
   public:
     /**
      * Creates a checksum for algorithm \param type
-     * \throws if the checksum is invalid and can't be constructed
+     * \throws CheckSumException if the checksum is invalid and can't be constructed
      */
     CheckSum( const std::string & type, const std::string & checksum);
     CheckSum( const std::string & type, std::istream & input_r );
