@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct 04 11:23:19 CEST 2007 - aschnell@suse.de
+
+- only look for repositories in file ending ".repo" (bug #294779)
+
+-------------------------------------------------------------------
 Wed Oct  3 13:37:57 CEST 2007 - mvidner@suse.cz
 
 - Fixed compilation errors with GCC 4.3 by adding missing includes

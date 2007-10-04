@@ -162,7 +162,7 @@ namespace zypp
   /**
    * \short List of RepoInfo's from a directory
    *
-   * Goes trough every file in a directory and adds all
+   * Goes trough every file ending with ".repo" in a directory and adds all
    * RepoInfo's contained in that file.
    *
    * \param dir pathname of the directory to read.
@@ -177,11 +177,14 @@ namespace zypp
 
     for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
-      list<RepoInfo> tmp = repositories_in_file( *it );
-      repos.insert( repos.end(), tmp.begin(), tmp.end() );
+      if (it->extension() == ".repo")
+      {
+        list<RepoInfo> tmp = repositories_in_file( *it );
+        repos.insert( repos.end(), tmp.begin(), tmp.end() );
 
-      //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
-      //MIL << "ok" << endl;
+        //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
+        //MIL << "ok" << endl;
+      }
     }
     return repos;
   }
