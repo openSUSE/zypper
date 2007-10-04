@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 16:31:58 CEST 2007 - ma@suse.de
+
+- Throw constructing malformed checksums. (#189096)
+- revision 7441
+
+-------------------------------------------------------------------
 Thu Oct  4 14:22:31 CEST 2007 - mvidner@suse.cz
 
 - Renamed templates back because proper qualification makes it work
