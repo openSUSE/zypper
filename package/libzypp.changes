@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Oct 05 10:35:47 CEST 2007 - aschnell@suse.de
+
+- filter architecture in plaindir parser (bug #330791)
+
+-------------------------------------------------------------------
 Thu Oct  4 16:31:58 CEST 2007 - ma@suse.de
 
 - Throw constructing malformed checksums. (#189096)

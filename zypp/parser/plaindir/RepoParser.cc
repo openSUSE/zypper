@@ -161,6 +161,7 @@ class RepoParser::Impl
           const ProgressData::ReceiverFnc & fnc_r )
     : _repositoryId( repositoryId_r )
     , _consumer( consumer_r )
+    , _sysarch( ZConfig::instance().systemArchitecture() )
     {
       _ticks.sendTo( fnc_r );
     }
@@ -174,6 +175,7 @@ class RepoParser::Impl
     data::RecordId                 _repositoryId;
     data::ResolvableDataConsumer & _consumer;
     ProgressData                   _ticks;
+    Arch			   _sysarch;
 
   private: // these (and _ticks) are actually scoped per parse() run.
 };
@@ -246,8 +248,15 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 #warning FIX creation of Package from src.rpm header
       data::Package_Ptr package = makePackageDataFromHeader( header, NULL, *it, _repositoryId );
       if (package != NULL) {
-        DBG << "Adding package " << *package << endl;
-        _consumer.consumePackage( _repositoryId, package );
+	if (package->arch.compatibleWith(_sysarch))
+	{
+	  DBG << "Adding package " << *package << endl;
+	  _consumer.consumePackage( _repositoryId, package );
+	}
+	else
+	{
+	  DBG << "Ignoring package " << *package << endl;
+	}
       }
     }
   }
