@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Oct  6 18:20:01 CEST 2007 - jkupec@suse.cz
+
+- correctly translate the command list (help text) (#327487)
+- r7460
+
+-------------------------------------------------------------------
 Sat Oct  6 12:16:37 CEST 2007 - jkupec@suse.cz
 
 - don't check if to refresh cd/dvd repos even on user request
