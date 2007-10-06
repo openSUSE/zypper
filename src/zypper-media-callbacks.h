@@ -54,7 +54,7 @@ namespace ZmartRecipients
         // You can also have a look at the regular expressions used to check the answer here:
         // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
         std::string request = boost::str(boost::format(
-            _("Please insert medium [%s] # %d and type 'y' to continue or 'n' to cancel the operation."))
+            _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
             % gData.current_repo.name() % mediumNr);
         if (read_bool_answer(request, false))
           return MediaChangeReport::RETRY; 
