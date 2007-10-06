@@ -1497,9 +1497,8 @@ bool confirm_licenses()
                 % kind_to_string_localized(it->resolvable()->kind(), 1)
         << it->resolvable()->licenseToConfirm() << endl;
 
-      //! \todo fix the spelling (10.3)
       string question = _("In order to install this package, you must agree"
-        " to terms of the above licencse. Continue?");
+        " to terms of the above license. Continue?");
 
       if (!read_bool_answer(question, gSettings.license_auto_agree))
       {
