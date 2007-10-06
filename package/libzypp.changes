@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sat Oct  6 16:37:11 CEST 2007 - jkupec@suse.cz
+
+- special cdrom detection code for SCSI / Virtual CDROMs on iSeries
+  removed - should be correctly detected by HAL now
+  (#167629, #163971)
+- r7452
+
+-------------------------------------------------------------------
 Fri Oct 05 10:35:47 CEST 2007 - aschnell@suse.de
 
 - filter architecture in plaindir parser (bug #330791)
