@@ -1,10 +1,11 @@
 -------------------------------------------------------------------
 Sat Oct  6 16:37:11 CEST 2007 - jkupec@suse.cz
-
+- do not download the same file multiple times in one attach sessionn
+  (#307098), r7456
 - special cdrom detection code for SCSI / Virtual CDROMs on iSeries
   removed - should be correctly detected by HAL now
-  (#167629, #163971)
-- r7452
+  (#167629, #163971), r7452
+- version 4.1.1
 
 -------------------------------------------------------------------
 Fri Oct 05 10:35:47 CEST 2007 - aschnell@suse.de
