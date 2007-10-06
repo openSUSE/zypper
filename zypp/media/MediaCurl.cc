@@ -1100,6 +1100,10 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
     }
 
+    // set IFMODSINCE time condition (no download if not modified)
+    curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_IFMODSINCE);
+    curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, PathInfo(target).mtime());
+
     string destNew = target.asString() + ".new.zypp.XXXXXX";
     char *buf = ::strdup( destNew.c_str());
     if( !buf)
@@ -1299,16 +1303,48 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 #endif // DETECT_DIR_INDEX
 
-    if ( ::fchmod( ::fileno(file), filesystem::applyUmaskTo( 0644 ) ) )
+    long httpReturnCode = 0;
+    CURLcode infoRet = curl_easy_getinfo(_curl,
+                                         CURLINFO_RESPONSE_CODE,
+                                         &httpReturnCode);
+    bool modified = true;
+    if (infoRet == CURLE_OK)
     {
-      ERR << "Failed to chmod file " << destNew << endl;
+      DBG << "HTTP response: " + str::numstring(httpReturnCode);
+      if ( httpReturnCode == 304 ) // not modified
+      {
+        DBG << " Not modified.";
+        modified = false;
+      }
+      DBG << endl;
     }
-    ::fclose( file );
+    else
+    {
+      WAR << "Could not get the reponse code." << endl;
+    }
 
-    if ( rename( destNew, dest ) != 0 ) {
-      ERR << "Rename failed" << endl;
-      ZYPP_THROW(MediaWriteException(dest));
+    if (modified || infoRet != CURLE_OK)
+    {
+      // apply umask
+      if ( ::fchmod( ::fileno(file), filesystem::applyUmaskTo( 0644 ) ) )
+      {
+        ERR << "Failed to chmod file " << destNew << endl;
+      }
+      ::fclose( file );
+
+      // move the temp file into dest
+      if ( rename( destNew, dest ) != 0 ) {
+        ERR << "Rename failed" << endl;
+        ZYPP_THROW(MediaWriteException(dest));
+      }
     }
+    else
+    {
+      // close and remove the temp file
+      ::fclose( file );
+      filesystem::unlink( destNew );
+    }
+
     DBG << "done: " << PathInfo(dest) << endl;
 }
 
