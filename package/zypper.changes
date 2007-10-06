@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Oct  6 12:16:37 CEST 2007 - jkupec@suse.cz
+
+- don't check if to refresh cd/dvd repos even on user request
+  unless forced
+- r7449
+
+-------------------------------------------------------------------
 Tue Oct  2 09:58:31 CEST 2007 - mvidner@suse.cz
 
 - Fixed misalignment in localized tables (#328918).
