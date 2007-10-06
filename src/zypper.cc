@@ -62,29 +62,6 @@ DigestCallbacks digest_callbacks;
 
 
 bool ghelp = false;
-  static string help_commands = _(
-    "  Commands:\n"
-    "\thelp, ?\t\t\tHelp\n"
-    "\tshell, sh\t\tAccept multiple commands at once\n"
-    "\tinstall, in\t\tInstall packages or resolvables\n"
-    "\tremove, rm\t\tRemove packages or resolvables\n"
-    "\tsearch, se\t\tSearch for packages matching a pattern\n"
-    "\trepos, lr\t\tList all defined repositories.\n"
-    "\taddrepo, ar\t\tAdd a new repository\n"
-    "\tremoverepo, rr\t\tRemove specified repository\n"
-    "\trenamerepo, nr\t\tRename specified repository\n"
-    "\tmodifyrepo, mr\t\tModify specified repository\n"
-    "\trefresh, ref\t\tRefresh all repositories\n"
-    "\tpatch-check, pchk\tCheck for patches\n"
-    "\tpatches, pch\t\tList patches\n"
-    "\tlist-updates, lu\tList updates\n"
-    "\txml-updates, xu\t\tList updates and patches in xml format\n"
-    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
-    "\tinfo, if\t\tShow full information for packages\n"
-    "\tpatch-info\t\tShow full information for patches\n"
-    "\tsource-install, si\tInstall a source package\n"
-    "");
-
 
 /*
  * parses global options, returns the command
@@ -183,8 +160,30 @@ void process_globals(int argc, char **argv)
     cout << endl;
   }
 
-  // get command
+  static string help_commands = _(
+    "  Commands:\n"
+    "\thelp, ?\t\t\tHelp\n"
+    "\tshell, sh\t\tAccept multiple commands at once\n"
+    "\tinstall, in\t\tInstall packages or resolvables\n"
+    "\tremove, rm\t\tRemove packages or resolvables\n"
+    "\tsearch, se\t\tSearch for packages matching a pattern\n"
+    "\trepos, lr\t\tList all defined repositories.\n"
+    "\taddrepo, ar\t\tAdd a new repository\n"
+    "\tremoverepo, rr\t\tRemove specified repository\n"
+    "\trenamerepo, nr\t\tRename specified repository\n"
+    "\tmodifyrepo, mr\t\tModify specified repository\n"
+    "\trefresh, ref\t\tRefresh all repositories\n"
+    "\tpatch-check, pchk\tCheck for patches\n"
+    "\tpatches, pch\t\tList patches\n"
+    "\tlist-updates, lu\tList updates\n"
+    "\txml-updates, xu\t\tList updates and patches in xml format\n"
+    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+    "\tinfo, if\t\tShow full information for packages\n"
+    "\tpatch-info\t\tShow full information for patches\n"
+    "\tsource-install, si\tInstall a source package\n"
+    "");
 
+  // get command
   try
   {
     if (optind < argc)
@@ -249,7 +248,8 @@ int one_command(int argc, char **argv)
 
   if (command == ZypperCommand::HELP)
   {
-    cout << help_commands;
+    cout << _("Type 'zypper help' to get a list of global options and commands.") << endl;
+    cout << _("Type 'zypper help <command>' to get a command-specific help.") << endl;
   }
   else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
