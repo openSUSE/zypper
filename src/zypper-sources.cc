@@ -560,12 +560,24 @@ int refresh_repos(vector<string> & arguments)
       continue;
     }
 
+
     // do the refresh
+    
+    // raw metadata refresh
     bool error = false;
     if (!copts.count("build-only"))
     {
       bool force_download =
         copts.count("force") || copts.count("force-download");
+
+      // without this a cd is required to be present in the drive on each refresh
+      // (or more 'refresh needed' check)
+      bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
+      if (!force_download && is_cd)
+      {
+        MIL << "Skipping refresh of a changeable read-only media." << endl;
+        continue;
+      }
 
       MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
           << endl;
@@ -573,6 +585,7 @@ int refresh_repos(vector<string> & arguments)
       error = refresh_raw_metadata(repo, force_download);
     }
 
+    // db rebuild
     if (!(error || copts.count("download-only")))
     {
       bool force_build =
@@ -657,7 +670,6 @@ std::string timestamp ()
 
 // ----------------------------------------------------------------------------
 
-//! \todo handle zypp exceptions
 static
 int add_repo(RepoInfo & repo)
 {
