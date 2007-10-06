@@ -67,43 +67,6 @@ using namespace std;
 namespace zypp {
   namespace media {
 
-    namespace {
-
-      bool isNewDevice(const std::list<MediaSource> &devices,
-                       const MediaSource            &media)
-      {
-	std::list<MediaSource>::const_iterator d( devices.begin());
-	for( ; d != devices.end(); ++d)
-	{
-	  if( media.equals( *d))
-	    return false;
-	}
-	return true;
-      }
-
-      inline Pathname get_sysfs_path()
-      {
-	Pathname sysfs_path;
-	if(::getuid() == ::geteuid() && ::getgid() == ::getegid())
-	{
-	  const char *env = ::getenv("SYSFS_PATH");
-	  if( env && *env)
-	  {
-	    sysfs_path = env;
-	    if( PathInfo(sysfs_path, PathInfo::LSTAT).isDir())
-	      return sysfs_path;
-	  }
-	}
-	sysfs_path = "/sys";
-	if( PathInfo(sysfs_path, PathInfo::LSTAT).isDir())
-	  return sysfs_path;
-	else
-	  return Pathname();
-      }
-
-    }
-
-
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : MediaCD
@@ -385,75 +348,6 @@ namespace zypp {
 	ZYPP_CAUGHT(e);
       }
 
-      //
-      // Bug #163971
-      // Hal does not include SCSI / Virtual CDROMs on iSeries ...
-      //
-      // Hmm... always? We can't detect DVD here.
-      if( detected.empty())
-      {
-	Pathname    sysfs_path( get_sysfs_path());
-	if(sysfs_path.empty())
-	  return detected;
-
-	std::string sys_name;
-	std::string dev_name;
-
-	// SCSI cdrom devices (/dev/sr0, ...)
-	sys_name = sysfs_path.cat("block/sr").asString();
-	dev_name = "/dev/sr";
-	DBG << "Collecting SCSI CD-ROM devices ("
-	    << dev_name << "X)" << std::endl;
-	for(size_t i=0; i < 16; i++)
-	{
-	  PathInfo sys_info(sys_name + str::numstring(i));
-	  PathInfo dev_info(dev_name + str::numstring(i));
-	  if( sys_info.isDir() && dev_info.isBlk())
-	  {
-	    // Hmm.. how to check if it supports DVDs?
-	    MediaSource media("cdrom", dev_info.asString(),
-	                               dev_info.major(),
-	                               dev_info.minor());
-	    if( isNewDevice(detected, media))
-	    {
-	      DBG << "Found SCSI CDROM "
-	          << media.asString()
-	          << std::endl;
-	      detected.push_back(media);
-	    }
-	  }
-	}
-
-	// IBM iSeries virtual CD-ROM devices (how many?)
-#if powerpc
-	sys_name = sysfs_path.cat("block/iseries!vcd").asString();
-	dev_name = "/dev/iseries/vcd";
-	DBG << "Collecting iSeries virtual CD-ROM devices ("
-	    << dev_name << "X)" << std::endl;
-	for(size_t i=0; i < 8; i++)
-	{
-	  char drive_letter = 'a' + i;
-	  PathInfo sys_info(sys_name + drive_letter);
-	  PathInfo dev_info(dev_name + drive_letter);
-	  if( sys_info.isDir() && dev_info.isBlk())
-	  {
-	    // Hmm.. how to check if it supports DVDs?
-	    MediaSource media("cdrom", dev_info.asString(),
-	                               dev_info.major(),
-	                               dev_info.minor());
-	    if( isNewDevice(detected, media))
-	    {
-	      DBG << "Found iSeries virtual CDROM "
-	          << media.asString()
-	          << std::endl;
-	      detected.push_back(media);
-	    }
-	  }
-	}
-#endif // powerpc
-
-	// Other device types?
-      }
       return detected;
     }
 
