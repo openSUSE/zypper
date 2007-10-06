@@ -34,11 +34,6 @@
 #include <linux/cdrom.h>
 
 /*
-** verify devices names as late as possible (while attach)
-*/
-#define  DELAYED_VERIFY          1
-
-/*
 ** try umount of foreign (user/automounter) media on eject
 **   0 = don't force, 1 = automounted only, 2 == all
 */
@@ -99,12 +94,6 @@ namespace zypp {
 	ZYPP_THROW(MediaUnsupportedUrlSchemeException(_url));
       }
 
-#if !DELAYED_VERIFY
-      DeviceList detected( detectDevices(
-	url_r.getScheme() == "dvd" ? true : false
-      ));
-#endif
-
       string devices = _url.getQueryParam("devices");
       if (!devices.empty())
       {
@@ -116,38 +105,9 @@ namespace zypp {
     	    string device = devices.substr(0,pos);
     	    if (!device.empty())
     	    {
-#if DELAYED_VERIFY
 	      MediaSource media("cdrom", device, 0, 0);
 	      _devices.push_back( media);
 	       DBG << "use device (delayed verify)" << device << endl;
-#else
-	      bool is_ok = false;
-	      PathInfo dinfo(device);
-	      if( dinfo.isBlk())
-	      {
-		MediaSource media("cdrom", device, dinfo.major(),
-	                                           dinfo.minor());
-	        DeviceList::const_iterator d( detected.begin());
-	        for( ; d != detected.end(); ++d)
-	        {
-	          if( media.equals( *d))
-		  {
-		    is_ok = true;
-	            _devices.push_back( *d);
-    		    DBG << "use device " << device << endl;
-		  }
-	        }
-	      }
-
-	      if( !is_ok)
-	      {
-	        ERR << "Device " << device << " is not acceptable "
-	            << "for " << _url.getScheme() << std::endl;
-	        ZYPP_THROW(MediaBadUrlException(_url,
-		  "Invalid device name in URL devices argument"
-		));
-	      }
-#endif
     	    }
     	    if (pos!=string::npos)
     		devices=devices.substr(pos+1);
@@ -157,38 +117,8 @@ namespace zypp {
       }
       else
       {
-#if DELAYED_VERIFY
     	DBG << "going to use on-demand device list" << endl;
 	return;
-#else
-    	DBG << "going to use default device list" << endl;
-    	//default is /dev/cdrom; for dvd: /dev/dvd if it exists
-        string device( "/dev/cdrom" );
-    	if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() ) {
-    	  device = "/dev/dvd";
-    	}
-
-	PathInfo dinfo(device);
-	if( dinfo.isBlk())
-	{
-	  MediaSource media("cdrom", device, dinfo.major(), dinfo.minor());
-
-	  DeviceList::const_iterator d( detected.begin());
-	  for( ; d != detected.end(); ++d)
-	  {
-	    // /dev/cdrom or /dev/dvd to the front
-	    if( media.equals( *d))
-	      _devices.push_front( *d);
-	    else
-	      _devices.push_back( *d);
-	  }
-	}
-	else
-	{
-	  // no /dev/cdrom or /dev/dvd link
-	  _devices = detected;
-	}
-#endif
       }
 
       if( _devices.empty())
@@ -366,7 +296,6 @@ namespace zypp {
       if (next && _lastdev == -1)
 	ZYPP_THROW(MediaNotSupportedException(url()));
 
-#if DELAYED_VERIFY
       DeviceList detected( detectDevices(
 	_url.getScheme() == "dvd" ? true : false
       ));
@@ -401,7 +330,6 @@ namespace zypp {
 	  _devices = detected;
 	}
       }
-#endif
 
       Mount mount;
       string mountpoint = attachPoint().asString();
@@ -438,7 +366,6 @@ namespace zypp {
 
         _lastdev_tried = count;
 
-#if DELAYED_VERIFY
 	MediaSource temp( *it);
 	bool        valid=false;
 	PathInfo    dinfo(temp.name);
@@ -463,9 +390,6 @@ namespace zypp {
     		continue;
 	}
 	MediaSourceRef media( new MediaSource(temp));
-#else
-	MediaSourceRef media( new MediaSource( *it));
-#endif
 
 	AttachedMedia ret( findAttachedMedia( media));
 
@@ -681,7 +605,7 @@ namespace zypp {
     {
       bool ejected=false;
       if ( !isAttached()) {	// no device mounted in this instance
-#if DELAYED_VERIFY
+
 	DeviceList detected( detectDevices(
 	  _url.getScheme() == "dvd" ? true : false
 	));
@@ -716,12 +640,11 @@ namespace zypp {
 	    _devices = detected;
 	  }
 	}
-#endif
 
 	DeviceList::iterator it;
 	for( it = _devices.begin(); it != _devices.end(); ++it ) {
 	  MediaSourceRef media( new MediaSource( *it));
-#if DELAYED_VERIFY
+
 	  bool        valid=false;
 	  PathInfo    dinfo(media->name);
 	  if( dinfo.isBlk())
@@ -744,7 +667,6 @@ namespace zypp {
 	    DBG << "skipping invalid device: " << it->name << endl;
 	    continue;
 	  }
-#endif
 
 	  // FIXME: we have also to check if it is mounted in the system
 	  AttachedMedia ret( findAttachedMedia( media));
