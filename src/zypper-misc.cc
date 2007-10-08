@@ -965,7 +965,7 @@ bool xml_list_patches ()
     if ( it->status().isNeeded())
     {
       Patch::constPtr patch = asKind<Patch>(res);
-      if (pkg_mgr_available && patch->affects_pkg_manager()  ||
+      if ((pkg_mgr_available && patch->affects_pkg_manager())  ||
 	!pkg_mgr_available )
       {
         cout << " <update ";

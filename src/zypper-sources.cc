@@ -869,7 +869,7 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 }
 
 // ----------------------------------------------------------------------------
-
+/*
 static
 bool looks_like_url (const string& s) {
   static bool schemes_shown = false;
@@ -887,7 +887,7 @@ bool looks_like_url (const string& s) {
   }
   return false;
 }
-
+*/
 static bool do_remove_repo(const RepoInfo & repoinfo)
 {
   RepoManager manager;
@@ -970,7 +970,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
 void modify_repo(const string & alias)
 {
   // tell whether currenlty processed options are contradicting each other
-  bool contradiction = false;
+  // bool contradiction = false;
   // TranslatorExplanation speaking of two mutually contradicting command line options
   string msg_contradition =
     _("%s used together with %s, which contradict each other."
