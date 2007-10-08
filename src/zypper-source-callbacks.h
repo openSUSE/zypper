@@ -250,23 +250,22 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 
 
 struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::RepoReport>
-{     
-  virtual void start( zypp::Repository repo, const std::string & task )
+{
+  virtual void start(const zypp::ProgressData & pd, const zypp::RepoInfo repo)
   {
-    _task = task;
     _repo = repo;
-    
-    display_step(0);
+
+    display_step(pd);
   }
 
-  void display_step( int value )
+  void display_step(const zypp::ProgressData & pd)
   {
-    display_progress ( "repo", cout, "(" + _repo.info().name() + ") " + _task , value);
+    display_progress("repo", cout, "(" + _repo.name() + ") " + pd.name(), pd.val());
   }
 
-  virtual bool progress( int value )
+  virtual bool progress(const zypp::ProgressData & pd)
   {
-    display_step(value);
+    display_step(pd);
     return true;
   }
   
@@ -288,8 +287,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     display_error (error, reason);
   }
 
-  std::string _task;
-  zypp::Repository _repo;
+  zypp::RepoInfo _repo;
 };
     ///////////////////////////////////////////////////////////////////
 }; // namespace ZmartRecipients
