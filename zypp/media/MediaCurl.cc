@@ -578,10 +578,12 @@ void MediaCurl::attachTo (bool next)
         if( h_info.isDir()  && h_info.owner() == getuid() &&
             c_info.isFile() && c_info.owner() == getuid())
         {
-                map<string,string> rc_data = base::sysconfig::read( curlrcFile );
+          //! \todo FIXME adjust to .curlrc syntax: = and -- are optional!#
 
-                map<string,string>::const_iterator it = rc_data.find("--proxy-user");
-                if (it != rc_data.end())
+          map<string,string> rc_data = base::sysconfig::read( curlrcFile );
+
+          map<string,string>::const_iterator it = rc_data.find("--proxy-user");
+          if (it != rc_data.end())
             _proxyuserpwd = it->second;
 
           DBG << "got proxy userpwd (--proxy-user) from ~/culrc" << endl;
