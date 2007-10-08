@@ -486,6 +486,9 @@ int one_command(int argc, char **argv)
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
       {"type",		            required_argument, 0, 't'},
+      // rug compatibility option, we have global --non-interactive
+      // note: rug used this uption only to auto-answer the 'continue with install?' prompt.
+      {"no-confirm",                no_argument,       0, 'y'},
       {"skip-interactive",          no_argument,       0, 0},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
