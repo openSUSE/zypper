@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct  8 14:34:25 CEST 2007 - jkupec@suse.cz
+
+- missing -y option added to the update command (rug-compatibility)
+  (#331632)
+- r7465
+
+-------------------------------------------------------------------
 Sat Oct  6 18:20:01 CEST 2007 - jkupec@suse.cz
 
 - correctly translate the command list (help text) (#327487)
