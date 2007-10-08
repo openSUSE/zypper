@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+
 #include "zypper-tabulator.h"
 using namespace std;
 #include <wchar.h>

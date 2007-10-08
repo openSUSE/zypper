@@ -1,6 +1,8 @@
 #ifndef ZYPPER_H
 #define ZYPPER_H
 
+#include <libintl.h>
+
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>

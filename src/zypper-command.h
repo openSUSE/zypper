@@ -77,7 +77,7 @@ struct ZypperCommand
 
   explicit ZypperCommand(const std::string & strval_r);
   
-  const Command toEnum() const { return _command; }
+  Command toEnum() const { return _command; }
 
   ZypperCommand::Command parse(const std::string & strval_r);
 
