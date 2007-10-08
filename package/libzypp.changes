@@ -1,6 +1,6 @@
 -------------------------------------------------------------------
 Sat Oct  6 16:37:11 CEST 2007 - jkupec@suse.cz
-- do not download the same file multiple times in one attach sessionn
+- do not download the same file multiple times in one attach session
   (#307098), r7456
 - special cdrom detection code for SCSI / Virtual CDROMs on iSeries
   removed - should be correctly detected by HAL now
