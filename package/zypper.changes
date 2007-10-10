@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 10 13:48:33 CEST 2007 - jkupec@suse.cz
+
+- translations update
+
+-------------------------------------------------------------------
 Fri Sep 28 15:10:35 CEST 2007 - ma@suse.de
 
 - Attempt to fix memory corruption in zypper (#305196).
