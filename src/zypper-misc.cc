@@ -190,7 +190,7 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
     // transform to NAME[ OP <EDITION>] (add spaces)
     string new_capstr = capstr;
     cout_vv << "capstr: " << capstr << endl;
-    int op_pos = capstr.find_first_of("<>=");
+    string::size_type op_pos = capstr.find_first_of("<>=");
     if (op_pos != string::npos)
     {
       new_capstr.insert(op_pos, " ");

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "zypper-tabulator.h"
 using namespace std;
+#include <wchar.h>
 
 TableStyle Table::defaultStyle = Ascii;
 
@@ -18,6 +19,50 @@ const char * lines[][3] = {
   { "\xE2\x94\x83", "\xE2\x94\x80", "\xE2\x95\x82"}, ///< v heavy, h light
   { "\xE2\x95\x91", "\xE2\x94\x80", "\xE2\x95\xAB"}, ///< v double, h light
 };
+
+// A non-ASCII string has 3 different lengths:
+// - bytes
+// - characters (non-ASCII ones have multiple bytes in UTF-8)
+// - columns (Chinese characters are 2 columns wide)
+// In #328918 see how confusing these leads to misalignment.
+
+// return the number of columns in str, or -1 if there's an error
+static
+int string_to_columns_e (const string& str) {
+  // from smpppd.src.rpm/format.cc, thanks arvin
+
+  const char* ptr = str.c_str ();
+  size_t s_bytes = str.length ();
+  int s_cols = 0;
+
+  mbstate_t shift_state;
+  memset (&shift_state, 0, sizeof (shift_state));
+
+  wchar_t wc;
+  size_t c_bytes;
+
+  // mbrtowc produces one wide character from a multibyte string
+  while ((c_bytes = mbrtowc (&wc, ptr, s_bytes, &shift_state)) > 0) {
+    if (c_bytes >= (size_t) -2) // incomplete (-2) or invalid (-1) sequence
+      return -1;
+
+    s_cols += wcwidth (wc);
+
+    s_bytes -= c_bytes;
+    ptr += c_bytes;
+  }
+
+  return s_cols;
+}
+
+static
+unsigned string_to_columns (const string& str) {
+  int c = string_to_columns_e (str);
+  if (c < 0)
+    return str.length();	// fallback if there was an error
+  else
+    return (unsigned) c;
+}
 
 void TableRow::add (const string& s) {
   _columns.push_back (s);
@@ -58,8 +103,10 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     }
     seen_first = true;
 
-    stream.width (widths[c]);
+//    stream.width (widths[c]);// that does not work with multibyte chars
     stream << *i;
+    stream.width (widths[c] - string_to_columns (*i));
+    stream << "";
   }
   stream << endl;
 }
@@ -86,8 +133,8 @@ void Table::updateColWidths (const TableRow& tr) {
     _max_width.resize (_max_col + 1);
 
     unsigned &max = _max_width[c];
-    // FIXME: i18n: screen columns
-    unsigned cur = i->length();
+    unsigned cur = string_to_columns (*i);
+
     if (max < cur)
       max = cur;
   }

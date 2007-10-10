@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.7.0" "zypper" "System Tools"
+.TH "zypper" "8" "0.8.25" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -79,7 +79,7 @@ Select resolvables by their name (default).
 .I \-f, \-\-force
 Install even if the item is already installed (reinstall)
 .TP
-.I \-n, \-\-capability
+.I \-C, \-\-capability
 Select resolvables by capabilities.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
@@ -129,7 +129,7 @@ Type of resolvable (default: package)
 .I \-n, \-\-name
 Select resolvables by their name (default).
 .TP
-.I \-n, \-\-capability
+.I \-C, \-\-capability
 Select resolvables by capabilities.
 .TP
 .I      \-\-debug\-solver
@@ -383,8 +383,10 @@ To delay the up-to-date check (and thus the automatic refresh) for a certain num
 .LP
 The file
 .B /etc/zypp/locks
-can contain a list of packages to be locked. These will not be updated
-or removed by the solver.
+can contain a list of packages to be locked. Installed packages which match one
+of the items in this list will not be updated or removed by the solver.
+Similarly, those matching packages which have not yet been installed, will not be
+considered for installation. 
 
 Empty lines and lines beginning with \fB#\fR are ignored. Each line is of the form
 "\fIPATTERN \fR[ \fIOP EDITION \fR]"

@@ -52,9 +52,21 @@ ostream& report_a_bug (ostream& stm)
 
 bool is_changeable_media(const zypp::Url & url)
 {
-  media::MediaManager mm; media::MediaAccessId id = mm.open(url);
-  bool is_cd = mm.isChangeable(id);
-  mm.close(id);
+  MIL << "Checking if this is a changeable medium" << endl;
+  bool is_cd = false;
+  try
+  {
+    media::MediaManager mm;
+    media::MediaAccessId id = mm.open(url);
+    is_cd = mm.isChangeable(id);
+    mm.close(id);
+  }
+  catch (const media::MediaException & e)
+  {
+    ZYPP_CAUGHT(e);
+    WAR << "Could not determine if the URL points to a changeable medium" << endl;
+  }
+
   return is_cd;
 }
 

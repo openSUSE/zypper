@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
-Wed Oct 10 13:48:33 CEST 2007 - jkupec@suse.cz
-
+Tue Sep 25 17:59:22 CEST 2007 - jkupec@suse.cz
+- missing -y option added to the update command (#331632)
+- Fixed misalignment in localized tables (#328918) (mvidner).
+- correctly translate the command list (#327487)
+- don't check if to refresh cd/dvd repos even on user request unless forced
+- man page updated
 - translations update
+- r7479
+- 0.8.25
 
 -------------------------------------------------------------------
 Fri Sep 28 15:10:35 CEST 2007 - ma@suse.de
