@@ -230,7 +230,7 @@ msgstr "Lösung %d: "
 #. input prompt
 #: ../src/zypper-misc.cc:450
 msgid "number, (r)etry or (c)ancel> "
-msgstr "zahl, (w)iederholen oder (a)bbrechen> "
+msgstr "Zahl eingeben, (w)iederholen oder (a)bbrechen> "
 
 #. translators: corresponds to (r)etry
 #: ../src/zypper-misc.cc:461

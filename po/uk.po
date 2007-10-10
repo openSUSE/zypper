@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-11 11:12+0200\n"
-"PO-Revision-Date: 2007-09-18 22:03-0700\n"
+"PO-Revision-Date: 2007-10-02 21:26-0700\n"
 "Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -57,11 +57,11 @@ msgstr "Хочете довіряти ідентифікатору ключа %s
 #: ../src/zypper-keyring-callbacks.h:110
 #, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!"
-msgstr ""
+msgstr "Увага: ігнорується невдала перевірка підпису %s з ІД відкритого ключа %s, %s, дайджест %s!"
 
 #: ../src/zypper-keyring-callbacks.h:113
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Перевірте чи це не спричинено якимись зловмисними змінами у файлі!"
 
 #: ../src/zypper-keyring-callbacks.h:120
 #, c-format
@@ -287,21 +287,21 @@ msgstr[2] "Будуть повернені до старішої версії %s
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:735
-#, fuzzy, c-format
+#, c-format
 msgid "The following NEW %s is going to be installed:"
 msgid_plural "The following NEW %s are going to be installed:"
-msgstr[0] "Буде встановлено наступні збірки:"
-msgstr[1] "Буде встановлено наступні збірки:"
-msgstr[2] "Буде встановлено наступні збірки:"
+msgstr[0] "Буде встановлено наступне %s нове:"
+msgstr[1] "Буде встановлено наступні %s нові:"
+msgstr[2] "Буде встановлено наступні %s нових:"
 
 #. TranslatorExplanation %s is a "package", "patch", "pattern", etc
 #: ../src/zypper-misc.cc:749
 #, c-format
 msgid "The following %s is going to be REMOVED:"
 msgid_plural "The following %s are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Буде ВИЛУЧЕНО %s наступне:"
+msgstr[1] "Буде ВИЛУЧЕНО %s наступні:"
+msgstr[2] "Буде ВИЛУЧЕНО %s наступних:"
 
 #: ../src/zypper-misc.cc:762
 #, c-format
@@ -585,7 +585,7 @@ msgstr "Сховище \"%s\" - не чинне."
 
 #: ../src/zypper-sources.cc:118
 msgid "Please, check if the URLs defined for this repository are pointing to a valid repository."
-msgstr ""
+msgstr "Перевірте чи адреси URL, які визначені для цього сховища вказують на чинне сховище."
 
 #: ../src/zypper-sources.cc:126
 #, c-format
@@ -604,7 +604,7 @@ msgstr "Помилка аналізу метаданих для \"%s\":"
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/zypper-sources.cc:168
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by folowing instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr ""
+msgstr "Це може трапитись через не чинні метадані в сховищі або через помилку в аналізаторі метаданих. В останньому випадку або, якщо ви непевні, будь ласка, надішліть звіт про помилку як вказано на http://en.opensuse.org/Zypper#Troubleshooting"
 
 #: ../src/zypper-sources.cc:182
 #, c-format
@@ -1215,9 +1215,13 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"source-install (si) <назва> ...\n"
+"\n"
+"Встановити джерельні пакунки згідно вказаних назв.\n"
+"\n"
+"Ця команда має додаткові параметри.\n"
 
 #: ../src/zypper.cc:361
-#, fuzzy
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "\n"
@@ -1229,15 +1233,14 @@ msgid ""
 "-d, --disabled          Add the repository as disabled\n"
 "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
 msgstr ""
-"service-add [параметри] URI [псевдонім]\n"
+"addrepo (ar)  [параметри] URI [псевдонім]\n"
 "\n"
-"Додати службу (джерело встановлення) до системи.\n"
+"Додати до системи сховище, вказавши адресу URL. Доступ через псевдонім\n"
 "  Параметри команди:\n"
-"\t--repo,-r <FILE.repo>\tПрочитати адресу URL і псевдонім з файла\n"
-"\t\t\t\t(навіть, віддаленого)\n"
-"\t--type,-t <TYPE>\tТип сховища (YaST, YUM або Plaindir)\n"
-"\t--disabled,-d\t\tДодати службу як вимкнену\n"
-"\t--no-refresh,-n\t\tНе оновлювати метадані автоматично\n"
+"-r, --repo <FILE.repo>  Прочитати URL і псевдонім з файла (навіть, віддаленого)\n"
+"-t, --type <TYPE>        Тип сховища (yast2, rpm-md або plaindir)\n"
+"-d, --disabled               Додати сховище як вимкнене\n"
+"-n, --no-refresh           Додати сховище з вимкненим освіженням\n"
 
 #: ../src/zypper.cc:380
 msgid ""
@@ -1346,7 +1349,6 @@ msgid ""
 msgstr ""
 
 #: ../src/zypper.cc:545
-#, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -1369,21 +1371,21 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"zypper [глобальні параметри] search [параметри] [рядок запиту...]\n"
+"search [параметри] [рядок запиту...]\n"
 "\n"
 "'search' - Шукати за пакунками, які збігаються з даними рядками пошуку\n"
 "\n"
 "  Параметри команди:\n"
-"    --match-all            Шукати за збігом до всіх рядків пошуку (типовий)\n"
-"    --match-any            Шукати за збігом до будь-якого рядка пошуку\n"
-"    --match-substrings     Збіг з рядками пошуку може включати частини слів (типовий)\n"
-"    --match-words          Збіг з рядками пошуку може включати тільки цілі слова\n"
+"    --match-all                Шукати за збігом до всіх рядків пошуку (типовий)\n"
+"    --match-any             Шукати за збігом до будь-якого рядка пошуку\n"
+"    --match-substrings  Збіг з рядками пошуку може включати частини слів (типовий)\n"
+"    --match-words         Збіг з рядками пошуку може включати тільки цілі слова\n"
 "    --match-exact          Шукає за точною назвою пакунка\n"
 "-d, --search-descriptions  Також шукати в описах і зведеннях пакунків.\n"
-"-c, --case-sensitive       Шукати з врахуванням реєстру літер.\n"
-"-i, --installed-only       Шукати тільки серед пакунків, які встановлені.\n"
-"-u, --uninstalled-only     Показувати тільки пакунки, які ще не встановлені.\n"
-"-t, --type                 Шукати тільки серед пакунків певного типу.\n"
+"-c, --case-sensitive           Шукати з врахуванням реєстру літер.\n"
+"-i, --installed-only              Шукати тільки серед пакунків, які встановлені.\n"
+"-u, --uninstalled-only        Показати тільки пакунки, які ще не встановлені.\n"
+"-t, --type <type>               Шукати тільки серед пакунків вказано типу.\n"
 "    --sort-by-name         Впорядкувати пакунки за назвою (типовий).\n"
 "    --sort-by-catalog      Впорядкувати пакунки за каталогом (джерело).\n"
 "\n"
