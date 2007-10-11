@@ -14,7 +14,12 @@ MESSAGE(STATUS "Libraries will be installed in ${LIB_INSTALL_DIR}" )
 # system configuration dir (etc)
 
 IF( NOT DEFINED SYSCONFDIR )
-  SET( SYSCONFDIR /etc )
+  IF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
+    # if installing in usr, set sysconfg to etc
+    SET( SYSCONFDIR /etc )
+  ELSE ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
+    SET ( SYSCONFDIR "${CMAKE_INSTALL_PREFIX}/etc" )
+  ENDIF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
 ENDIF( NOT DEFINED SYSCONFDIR )
 MESSAGE(STATUS "Config files will be installed in ${SYSCONFDIR}" )
 
