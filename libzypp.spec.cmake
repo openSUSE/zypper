@@ -24,7 +24,7 @@ Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
-BuildRequires:  sqlite sqlite-devel
+BuildRequires:  sqlite sqlite-devel libsatsolver-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libxml2-devel rpm-devel gettext-devel
 BuildRequires:	update-desktop-files
 Requires:       gpg2
