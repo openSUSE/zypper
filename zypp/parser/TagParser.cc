@@ -126,7 +126,7 @@ namespace zypp
     std::string TagParser::errPrefix( const MultiTagPtr & tag_r,
 				      const std::string & msg_r ) const
     {
-      return str::form( "%s:%u:+%s (@%u) | %s",
+      return str::form( "%s:%u:+%s (@%lu) | %s",
 			_inputname.c_str(),
 			tag_r->lineNo,
 			tag_r->asString().c_str(),
