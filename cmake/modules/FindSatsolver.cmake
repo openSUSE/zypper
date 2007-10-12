@@ -12,11 +12,19 @@ FIND_PATH(SATSOLVER_INCLUDE_DIR satsolver/solvable.h
 	/usr/local/include
 )
 
-FIND_LIBRARY(SATSOLVER_LIBRARY NAMES satsolver0
+FIND_FILE(SATSOLVER_LIBRARY libsatsolver.la
 	PATHS
-	/usr/lib
-	/usr/local/lib
+        /usr/lib64
+        /usr/local/lib64
+        /usr/lib
+        /usr/local/lib
 )
+
+#FIND_LIBRARY(SATSOLVER_LIBRARY NAMES satsolver
+#	PATHS
+#	/usr/lib
+#	/usr/local/lib
+#)
 
 if(SATSOLVER_INCLUDE_DIR AND SATSOLVER_LIBRARY)
    MESSAGE( STATUS "satsolver found: includes in ${SATSOLVER_INCLUDE_DIR}, library in ${SATSOLVER_LIBRARY}")
