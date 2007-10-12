@@ -78,19 +78,17 @@ struct modalias_list {
 };
 
 /*
- * If the device identified by /sys/bus/BUS/devices/DEVICE has a
- * module aliases, remember that alias on the linked modalias list
- * passed in in ARG.
+ * If DIR/FILE/modalias exists, remember this modalias on the linked modalias list
+ * passed in in ARG. Never returns an error.
  */
 static int
-iterate_devices(const char *dir, const char *file, void *arg)
+read_modalias(const char *dir, const char *file, void *arg)
 {
 	char path[PATH_MAX];
 	int fd;
 	ssize_t len;
 	char modalias[PATH_MAX];
 	struct modalias_list **list = (struct modalias_list **)arg, *entry;
-	int ret = 0;
 
 	snprintf(path, sizeof(path), "%s/%s/modalias", dir, file);
 	if ((fd = open(path, O_RDONLY)) == -1)
@@ -102,13 +100,10 @@ iterate_devices(const char *dir, const char *file, void *arg)
 		len--;
 	modalias[len] = 0;
 
-	if ((entry = (struct modalias_list *)malloc(sizeof(*entry))) == NULL) {
-		ret = -1;
+	if ((entry = (struct modalias_list *)malloc(sizeof(*entry))) == NULL)
 		goto out;
-	}
 	if ((entry->modalias = strdup(modalias)) == NULL) {
 	        free(entry);
-		ret = -1;
 		goto out;
 	}
 	entry->next = *list;
@@ -126,12 +121,29 @@ out:
  * the linked modalias list passed in in ARG.
  */
 static int
-iterate_busses(const char *dir, const char *file, void *arg)
+iterate_bus(const char *dir, const char *file, void *arg)
 {
 	char path[PATH_MAX];
 
 	snprintf(path, sizeof(path), "%s/%s/devices", dir, file);
-	(void) foreach_file(path, iterate_devices, arg);
+	(void) foreach_file(path, read_modalias, arg);
+
+	return 0;
+}
+
+/*
+ * Iterate over all devices in a class (/sys/class/CLASS/<*>)
+ * and remembers all module aliases for those devices on
+ * the linked modalias list passed in in ARG.
+ */
+static int
+iterate_class(const char *dir, const char *file, void *arg)
+{
+	char path[PATH_MAX];
+
+	snprintf(path, sizeof(path), "%s/%s", dir, file);
+	(void) foreach_file(path, read_modalias, arg);
+
 	return 0;
 }
 
@@ -148,12 +160,19 @@ struct Modalias::Impl
     Impl()
 	: _modaliases(0)
     {
-	foreach_file( "/sys/bus", iterate_busses, &_modaliases );
+	const char *dir;
 	char path[PATH_MAX];
-	const char *dir = getenv("ZYPP_MODALIAS_SYSFS");
-	snprintf(path, sizeof(path), "%s/bus", dir ? dir : "/sys");
-	DBG << "Using /sys path : " << path << endl;
-	foreach_file( path, iterate_busses, &_modaliases );
+
+	dir = getenv("ZYPP_MODALIAS_SYSFS");
+	if (!dir)
+		dir = "/sys";
+	DBG << "Using /sys directory : " << dir << endl;
+
+	snprintf(path, sizeof(path), "%s/bus", dir);
+	foreach_file( path, iterate_bus, &_modaliases );
+
+	snprintf(path, sizeof(path), "%s/class", dir);
+	foreach_file( path, iterate_class, &_modaliases );
     }
 
     /** Dtor. */

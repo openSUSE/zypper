@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 15:47:37 CEST 2007 - ma@suse.de
+
+- SMBIOS DMI modalias matching added (#333152)
+- revision 7494
+
+-------------------------------------------------------------------
 Sat Oct  6 16:37:11 CEST 2007 - jkupec@suse.cz
 - do not download the same file multiple times in one attach session
   (#307098), r7456
