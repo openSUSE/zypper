@@ -673,6 +673,19 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/solver/detail
 )
 
+SET( zypp_sat_SRCS
+  sat/SATResolver.cc
+)
+
+SET( zypp_sat_HEADERS
+  sat/SATResolver.cc
+)
+
+INSTALL(  FILES
+  ${zypp_sat_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat
+)
+
 SET( zypp_target_SRCS
   target/CommitLog.cc
   target/CommitPackageCache.cc
@@ -1057,6 +1070,7 @@ ${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
+${zypp_sat_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_thread_SRCS}
@@ -1084,6 +1098,7 @@ ${zypp_target_hal_HEADERS}
 ${zypp_media_proxyinfo_HEADERS}
 ${zypp_base_HEADERS}
 ${zypp_solver_detail_HEADERS}
+${zypp_sat_HEADERS}
 ${zypp_target_store_HEADERS}
 ${zypp_url_HEADERS}
 ${zypp_HEADERS}
@@ -1126,6 +1141,7 @@ SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_source_yum_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_base_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_solver_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_store_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_url_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_source_SRCS} )
