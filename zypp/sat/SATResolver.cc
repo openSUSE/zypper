@@ -73,8 +73,9 @@ SATResolver::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-SATResolver::SATResolver (const ResPool & pool)
+SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     : _pool (pool)
+    , _SATPool (SATPool) 
     , _timeout_seconds (0)
     , _maxSolverPasses (0)
     , _testing (false)

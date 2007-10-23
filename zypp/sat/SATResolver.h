@@ -36,6 +36,7 @@
 #include "zypp/ProblemSolution.h"
 extern "C" {
 #include "satsolver/solver.h"
+#include "satsolver/pool.h"
 }
 
 
@@ -58,7 +59,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
     ResPool _pool;
-
+    Pool *_SATPool;
+    
     unsigned _timeout_seconds;
     unsigned _maxSolverPasses;
     bool _testing;
@@ -74,7 +76,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
   public:
 
-    SATResolver (const ResPool & pool);
+    SATResolver (const ResPool & pool, Pool *SATPool);
     virtual ~SATResolver();
 
     // ---------------------------------- I/O
