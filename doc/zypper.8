@@ -366,6 +366,18 @@ Ignore GPG check failures and continue. If a GPG issue occurs when using this op
 .TP
 .I \-R, \-\-root <dir>
 Operates on a different root directory.
+.TP
+.I \-D, \-\-reposd\-dir <dir>
+Use the specified directory to look for the repository definition (*.repo) files.
+The default value is /etc/zypp/repos.d.
+.TP
+.I \-D, \-\-cache\-dir <dir>
+Use an alternative directory to look for the repository meta-data cache database file (zypp.db).
+The default value is /var/cache/zypp. 
+.TP
+.I \-D, \-\-raw\-cache\-dir <dir>
+Use the specified directory for storing raw copies of repository meta-data files.
+The default value is /var/cache/zypp/raw.
 
 .SH "METADATA REFRESH POLICY"
 .LP
@@ -408,7 +420,11 @@ kde* < 3.5
 .SH "FILES"
 .TP
 .B /etc/zypp/repos.d
-Directory containing repository configuration (*.repo) files. You can use the \fBrepo\fR commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing \fBzypper refresh\fR is strongly recommended.
+Directory containing repository definition (*.repo) files.
+You can use the \fBrepo\fR commands to manipulate these files, or you can edit
+them yourself. In either case, after doing the modifications, executing
+\fBzypper refresh\fR is strongly recommended.
+Use the \-\-reposd\-dir global option to use an alternative directory for this purpose. 
 .TP
 .B /etc/zypp/zypp.conf
 ZYpp configuration file.
@@ -418,9 +434,12 @@ File with package lock definitions, see the section LOCKS.
 .TP
 .B /var/cache/zypp/raw
 Directory for storing raw metadata contained in repositories.
+Use the \-\-raw\-cache\-dir global option to use an alternative directory for this purpose.
 .TP
 .B /var/cache/zypp/zypp.db
 Sqlite database file containing pre-parsed metadata of all repositories.
+Use the \-\-cache\-dir global option to use an alternative directory
+for the zypp.db file.
 .TP
 .B ~/.zypper_history
 Command history for the shell.

@@ -82,10 +82,9 @@ void process_globals(int argc, char **argv)
     {"non-interactive", no_argument,       0, 'n'},
     {"no-gpg-checks",   no_argument,       0,  0 },
     {"root",            required_argument, 0, 'R'},
-    {"cache-dir",       required_argument, 0, 'C'},
     {"reposd-dir",      required_argument, 0, 'D'},
+    {"cache-dir",       required_argument, 0, 'C'},
     {"raw-cache-dir",   required_argument, 0,  0 },
-    {"zypp-dirs",       required_argument, 0, 'Z'},
     {"opt",             optional_argument, 0, 'o'},
     {"disable-system-resolvables", optional_argument, 0, 'o'},
     {0, 0, 0, 0}
@@ -106,7 +105,11 @@ void process_globals(int argc, char **argv)
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-    "\t--root, -R <dir>\tOperate on a different root directory.\n");
+    "\t--root, -R <dir>\tOperate on a different root directory.\n"
+    "\t--reposd-dir, D <dir>\tUse alternative repository definition files directory.\n"
+    "\t--cache-dir, C <dir>\tUse alternative meta-data cache database directory.\n"
+    "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
+  );
 
   if (gopts.count("rug-compatible"))
     gSettings.is_rug_compatible = true;
@@ -156,12 +159,12 @@ void process_globals(int argc, char **argv)
     gSettings.root_dir = gopts["root"].front();
   }
 
-  if (gopts.count("cache-dir")) {
-    gSettings.rm_options.repoCachePath = gopts["cache-dir"].front();
-  }
-
   if (gopts.count("reposd-dir")) {
     gSettings.rm_options.knownReposPath = gopts["reposd-dir"].front();
+  }
+
+  if (gopts.count("cache-dir")) {
+    gSettings.rm_options.repoCachePath = gopts["cache-dir"].front();
   }
 
   if (gopts.count("raw-cache-dir")) {
