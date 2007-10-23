@@ -11,7 +11,6 @@
 #include <zypp/Locale.h>
 #include <zypp/ZYpp.h>
 #include <zypp/ZYppFactory.h>
-#include <zypp/RepoManager.h>
 #include <zypp/base/Logger.h>
 #include <zypp/Digest.h>
 #include <zypp/target/store/xml_escape_parser.hpp>

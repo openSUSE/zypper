@@ -80,8 +80,12 @@ void process_globals(int argc, char **argv)
     {"table-style",     required_argument, 0, 's'},
     {"rug-compatible",  no_argument,       0, 'r'},
     {"non-interactive", no_argument,       0, 'n'},
-    {"no-gpg-checks",   no_argument,       0, 0},
+    {"no-gpg-checks",   no_argument,       0,  0 },
     {"root",            required_argument, 0, 'R'},
+    {"cache-dir",       required_argument, 0, 'C'},
+    {"reposd-dir",      required_argument, 0, 'D'},
+    {"raw-cache-dir",   required_argument, 0,  0 },
+    {"zypp-dirs",       required_argument, 0, 'Z'},
     {"opt",             optional_argument, 0, 'o'},
     {"disable-system-resolvables", optional_argument, 0, 'o'},
     {0, 0, 0, 0}
@@ -150,6 +154,18 @@ void process_globals(int argc, char **argv)
 
   if (gopts.count("root")) {
     gSettings.root_dir = gopts["root"].front();
+  }
+
+  if (gopts.count("cache-dir")) {
+    gSettings.rm_options.repoCachePath = gopts["cache-dir"].front();
+  }
+
+  if (gopts.count("reposd-dir")) {
+    gSettings.rm_options.knownReposPath = gopts["reposd-dir"].front();
+  }
+
+  if (gopts.count("raw-cache-dir")) {
+    gSettings.rm_options.repoRawCachePath = gopts["raw-cache-dir"].front();
   }
 
   // testing option

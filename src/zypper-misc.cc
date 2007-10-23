@@ -13,7 +13,6 @@
 #include <zypp/media/MediaException.h>
 #include <zypp/FileChecker.h>
 
-#include <zypp/RepoManager.h>
 #include <zypp/RepoInfo.h>
 
 #include <zypp/CapFactory.h>

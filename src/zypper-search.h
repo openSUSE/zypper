@@ -226,8 +226,6 @@ private:
   InstalledCache _icache;
   IdCache _idcache;
 
-  zypp::RepoManagerOptions _manager_options;
-
   zypp::cache::ResolvableQuery _query;
 
   void setupRegexp();

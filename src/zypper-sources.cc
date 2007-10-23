@@ -42,7 +42,7 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
 
   try
   {
-    RepoManager manager;
+    RepoManager manager(gSettings.rm_options);
 
     if (!force_download)
     {
@@ -154,7 +154,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
   try
   {
-    RepoManager manager;
+    RepoManager manager(gSettings.rm_options);
     manager.buildCache(repo, force_build ?
       RepoManager::BuildForced : RepoManager::BuildIfNeeded);
   }
@@ -203,7 +203,7 @@ static int do_init_repos()
 {
   // load gpg keys
   cond_init_target ();
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
 
   string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
 
@@ -412,7 +412,7 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 
 void list_repos()
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   list<RepoInfo> repos;
 
   try
@@ -483,7 +483,7 @@ int refresh_repos(vector<string> & arguments)
 {
   // need gpg keys when downloading (#304672)
   cond_init_target();
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   list<RepoInfo> repos;
   try
   {
@@ -673,7 +673,7 @@ std::string timestamp ()
 static
 int add_repo(RepoInfo & repo)
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
 
   bool is_cd = true;
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
@@ -783,7 +783,7 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
 
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   RepoInfo repo;
 
   if ( ! type.empty() )
@@ -811,7 +811,7 @@ int add_repo_from_file(const std::string & repo_file_url,
   if (!url.isValid())
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
 
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   list<RepoInfo> repos;
 
   // read the repo file
@@ -890,7 +890,7 @@ bool looks_like_url (const string& s) {
 */
 static bool do_remove_repo(const RepoInfo & repoinfo)
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   bool found = true;
   try
   {
@@ -911,7 +911,7 @@ static bool do_remove_repo(const RepoInfo & repoinfo)
 
 bool remove_repo( const std::string &alias )
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   RepoInfo info;
   info.setAlias(alias);
 
@@ -920,7 +920,7 @@ bool remove_repo( const std::string &alias )
 
 bool remove_repo(const Url & url, const url::ViewOption & urlview)
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
   bool found = true;
   try
   {
@@ -939,7 +939,7 @@ bool remove_repo(const Url & url, const url::ViewOption & urlview)
 
 void rename_repo(const std::string & alias, const std::string & newalias)
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
 
   try
   {
@@ -1013,7 +1013,7 @@ void modify_repo(const string & alias)
 
   try
   {
-    RepoManager manager;
+    RepoManager manager(gSettings.rm_options);
     RepoInfo repo(manager.getRepositoryInfo(alias));
 
     if (!indeterminate(enable))
@@ -1055,7 +1055,7 @@ void cond_load_resolvables(bool to_pool)
 
 void load_repo_resolvables(bool to_pool)
 {
-  RepoManager manager;
+  RepoManager manager(gSettings.rm_options);
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)

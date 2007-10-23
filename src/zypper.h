@@ -14,6 +14,7 @@
 #include <zypp/Digest.h>
 #include <zypp/CapFactory.h>
 #include <zypp/RepoInfo.h>
+#include <zypp/RepoManager.h>
 
 #include "zypper-command.h"
 
@@ -82,6 +83,7 @@ struct Settings
   bool license_auto_agree;
   bool machine_readable;
   std::string root_dir;
+  zypp::RepoManagerOptions rm_options;
 };
 
 struct Error

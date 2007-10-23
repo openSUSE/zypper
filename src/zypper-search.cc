@@ -29,7 +29,7 @@ ZyppSearchOptions::ZyppSearchOptions()
   // check for disabled repos and limit list of repos accordingly.
   //   "-r/--repo" will override this
   try {
-    RepoManager manager;
+    RepoManager manager(gSettings.rm_options);
     std::list<zypp::RepoInfo> known_repos = manager.knownRepositories();
     std::list<zypp::RepoInfo>::const_iterator it_r;
     for (it_r = known_repos.begin(); it_r != known_repos.end(); ++it_r)
@@ -77,7 +77,7 @@ ZyppSearch::ZyppSearch (
     const ZyppSearchOptions & options,
     const vector<string> qstrings
     ) :
-    _zypp(zypp), _options(options), _qstrings(qstrings), _query( _manager_options.repoCachePath ) {
+    _zypp(zypp), _options(options), _qstrings(qstrings), _query( gSettings.rm_options.repoCachePath ) {
 
 #if 0	// we don't search the pool but iterate on the cache directly, hence no repos needed
   // no repos warning
