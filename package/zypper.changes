@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 24 17:29:04 CEST 2007 - jkupec@suse.cz
+- fixed service-delete for unreachable sources (#280117)
+- 0.6.100
+
+-------------------------------------------------------------------
 Wed Oct  3 17:05:48 CEST 2007 - jkupec@suse.cz
 
 - missing --auto-agree-with-licenses option added to 'update'
