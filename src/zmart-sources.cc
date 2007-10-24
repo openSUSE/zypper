@@ -1,7 +1,7 @@
-
 #include "zmart.h"
 #include "zmart-sources.h"
 #include "zypper-tabulator.h"
+#include "zypper-callbacks.h"
 
 #include <fstream>
 #include <boost/format.hpp>
@@ -318,22 +318,99 @@ void remove_source( const std::string& anystring )
 {
   cerr_vv << "Constructing SourceManager" << endl;
   SourceManager_Ptr manager = SourceManager::sourceManager();
+ 
   cerr_vv << "Restoring SourceManager" << endl;
+  bool success = true;
+  std::set<std::string> _broken_sources;
   try {
     manager->restore (gSettings.root_dir, true /*use_cache*/);
-    }
+  }
+  catch (const zypp::FailedSourcesRestoreException& ex)
+  {
+    ZYPP_CAUGHT (ex);
+    _broken_sources = ex.aliases();
+    success = false;
+  }
   catch (const Exception & ex) {
     // so what if sources cannot be restored
     // we want to delete anyway
     ZYPP_CAUGHT (ex);
     cerr << ex.asUserString () << endl
 	 << _("Continuing anyway") << endl;
+    success = false;
   }
 
   SourceManager::SourceId sid = 0;
   safe_lexical_cast (anystring, sid);
+
+  if (!success)
+  {
+    if (sid > 0 || looks_like_url (anystring))
+    {
+      cerr << "Broken sources found. Cannot remove sources by ID or URL. Please use alias instead." << endl;
+      return;
+    }
+
+    zypp::storage::PersistentStorage store;
+    store.init( gSettings.root_dir );
+    list<source::SourceInfo> known_sources = store.storedSources();
+
+    bool is_known = false;
+    for (list<source::SourceInfo>::const_iterator it = known_sources.begin();
+          it != known_sources.end(); ++it)
+      if(it->alias() == anystring)
+      {
+        is_known = true;
+        break;
+      }
+
+    if (is_known)
+    {
+      try
+      {
+        cout_v << format(_("Removing source '%s'")) % anystring << endl;
+        store.deleteSource( anystring );
+        _broken_sources.erase( anystring );
+        cout << format(_("Source '%s' removed.")) % anystring << endl;
+      }
+      catch( const zypp::Exception& excpt )
+      {
+        cerr << format(_("Failed to remove source '%s':")) % anystring << endl;
+      }
+    }
+    else
+    {
+      cerr << format (_("Source %s not found.")) % anystring << endl;
+    }
+
+    if (_broken_sources.size() == 0)
+      return;
+
+    // offer to remove the broken sources
+    for (set<string>::const_iterator it = _broken_sources.begin();
+         it != _broken_sources.end(); ++it)
+    {
+      string prompt = boost::str(format(_("'%s' is broken or not accessible. Do you wish to remove it?")) % *it);
+      if(read_bool_answer(prompt, false))
+      {
+        try
+        {
+          cout_v << format(_("Removing source '%s'")) % *it << endl;
+          store.deleteSource( *it );
+          cout << format(_("Source '%s' removed.")) % *it << endl;
+        }
+        catch( const zypp::Exception& excpt )
+        {
+          cerr << format(_("Failed to remove source '%s':")) % *it << endl;
+        }
+      }
+    }
+
+    return;
+  }
+
   if (sid > 0) {
-    cerr_v << _("removing source ") << sid << endl;
+    cerr_v << _("Removing source ") << sid << endl;
     try {
       manager->findSource (sid);
     }
