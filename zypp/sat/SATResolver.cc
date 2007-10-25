@@ -558,11 +558,11 @@ SATResolver::resolvePool()
 
       // getting source
       s = _SATPool->solvables + i;
-      Source *source = pool_source(_SATPool, s);
-
+      Source *source = s->source;
       PoolItem_Ref poolItem;
       string kindName(id2str(_SATPool, s->name));
       std::vector<std::string> nameVector;
+      
       // expect "<kind>::<name>"
       unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
       
@@ -596,7 +596,7 @@ SATResolver::resolvePool()
 
       // getting source
       s = _SATPool->solvables + p;
-      Source *source = pool_source(_SATPool, s);
+      Source *source = s->source;
 
       PoolItem_Ref poolItem;
       string kindName(id2str(_SATPool, s->name));
