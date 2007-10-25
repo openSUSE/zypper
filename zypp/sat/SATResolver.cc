@@ -20,8 +20,9 @@
  */
 
 #include "zypp/solver/detail/Helper.h"
-
+#include "zypp/base/String.h"
 #include "zypp/CapSet.h"
+#include "zypp/ResStatus.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -181,7 +182,7 @@ SATResolver::addPoolItemToKepp (PoolItem_Ref item)
 // if data != NULL, set as APPL_LOW (from establishPool())
 
 static void
-solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
+solution_to_pool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
         _XDEBUG("solution_to_pool(" << item << ") is already in the pool --> skip");
@@ -191,20 +192,20 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
     triggeredSolution.insert(item);
 
     // resetting transaction only
-    item.status().resetTransact((data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
+    item.status().resetTransact (causer);
 
     bool r;
 
     if (status.isToBeInstalled()) {
-	r = item.status().setToBeInstalled( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
+	r = item.status().setToBeInstalled (causer);
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalledDueToUpgrade()) {
-	r = item.status().setToBeUninstalledDueToUpgrade( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
+	r = item.status().setToBeUninstalledDueToUpgrade (causer);
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") upgrade !" << r);
     }
     else if (status.isToBeUninstalled()) {
-	r = item.status().setToBeUninstalled( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
+	r = item.status().setToBeUninstalled (causer);
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
@@ -225,9 +226,138 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
     return;
 }
 
-
+//----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // resolvePool
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------
+// Helper functions for the ZYPP-Pool
+//----------------------------------------------------------------------------
+
+
+Resolvable::Kind
+string2kind (const std::string & str)
+{
+    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
+    if (!str.empty()) {
+	if (str == "package") {
+	    // empty
+	}
+	else if (str == "patch") {
+	    kind = ResTraits<zypp::Patch>::kind;
+	}
+	else if (str == "atom") {
+	    kind = ResTraits<zypp::Atom>::kind;
+	}
+	else if (str == "pattern") {
+	    kind = ResTraits<zypp::Pattern>::kind;
+	}
+	else if (str == "selection") {
+	    kind = ResTraits<zypp::Selection>::kind;
+	}
+	else if (str == "script") {
+	    kind = ResTraits<zypp::Script>::kind;
+	}
+	else if (str == "message") {
+	    kind = ResTraits<zypp::Message>::kind;
+	}
+	else if (str == "product") {
+	    kind = ResTraits<zypp::Product>::kind;
+	}
+	else if (str == "language") {
+	    kind = ResTraits<zypp::Language>::kind;
+	}
+	else {
+	    ERR << "get_poolItem unknown kind '" << str << "'" << endl;
+	}
+    }
+    return kind;
+}
+
+
+struct FindPackage : public resfilter::ResObjectFilterFunctor
+{
+    PoolItem_Ref poolItem;
+    Resolvable::Kind kind;
+    bool edition_set;
+    Edition edition;
+    bool arch_set;
+    Arch arch;
+
+    FindPackage (Resolvable::Kind k, const string & e, const string & a)
+	: kind (k)
+	, edition_set( !e.empty() )
+	, edition( e )
+	, arch_set( !a.empty() )
+	, arch( a )
+    {
+    }
+
+    bool operator()( PoolItem_Ref p)
+    {
+	if (arch_set && arch != p->arch()) {				// if arch requested, force this arch
+	    return true;
+	}
+
+	if (edition_set) {
+	    if (p->edition().compare( edition ) == 0) {			// if edition requested, force this edition
+		poolItem = p;
+		return false;
+	    }
+	    return true;
+	}
+
+	if (!poolItem							// none yet
+	    || (poolItem->arch().compare( p->arch() ) < 0)		// new has better arch
+	    || (poolItem->edition().compare( p->edition() ) < 0))	// new has better edition
+	{
+	    poolItem = p;
+	}
+	return true;
+    }
+};
+
+
+static PoolItem_Ref
+get_poolItem (const ResPool & pool, const string & source_alias, const string & package_name, const string & kind_name = "", const string & edition = "",  const string & arch = "")
+{
+    PoolItem_Ref poolItem;
+    Resolvable::Kind kind = string2kind (kind_name);
+
+    try {
+	FindPackage info (kind, edition, arch);
+
+	invokeOnEach( pool.byNameBegin( package_name ),
+		      pool.byNameEnd( package_name ),
+		      functor::chain( resfilter::ByRepository(source_alias), resfilter::ByKind (kind) ),
+		      functor::functorRef<bool,PoolItem> (info) );
+
+	poolItem = info.poolItem;
+        if (!poolItem) {
+            // try to find the resolvable over all channel. This is useful for e.g. languages
+            invokeOnEach( pool.byNameBegin( package_name ),
+                          pool.byNameEnd( package_name ),
+                          resfilter::ByKind (kind),
+                          functor::functorRef<bool,PoolItem> (info) );
+            poolItem = info.poolItem;
+        }
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT (excpt_r);
+	ERR << "Can't find kind[" << kind_name << "]:'" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	if (kind_name.empty())
+	    ERR << "Please specify kind=\"...\" in the <install.../> request." << endl;
+	return poolItem;
+    }
+
+    if (!poolItem) {
+	ERR << "Can't find kind: " << kind << ":'" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
+    }
+
+    return poolItem;
+}
 
 struct CollectTransact : public resfilter::PoolItemFilterFunctor
 {
@@ -282,8 +412,6 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	return true;
     }
 };
-
-
 
 //------------------------------------------------------------------------------------------------------------
 // Helper functions for the SAT-Pool
@@ -416,22 +544,90 @@ SATResolver::resolvePool()
 
     // Solve !
     solve( solv, &(trials) );
-    // clean up
 
-    solver_free(solv);
-    queuefree( &(trials) );
+    // copying solution back to zypp pool
+    //-----------------------------------------
+    Id p;
+    Solvable *s;
+  
+    /* solvables to be erased */
+    for (int i = solv->system->start; i < solv->system->start + solv->system->nsolvables; i++)
+    {
+      if (solv->decisionmap[i] > 0)
+	continue;
 
-    
-    bool have_solution;// = resolveDependencies (saveContext);             // resolve !
+      // getting source
+      s = _SATPool->solvables + i;
+      Source *source = pool_source(_SATPool, s);
 
-    if (have_solution) {					// copy solution back to pool
-	MIL << "Have solution, copying back to pool" << endl;
-//	solution->foreachMarked (solution_to_pool, NULL);
-    } else {
-	MIL << "!!! Have NO solution !!!" << endl;	
+      PoolItem_Ref poolItem;
+      string kindName(id2str(_SATPool, s->name));
+      std::vector<std::string> nameVector;
+      // expect "<kind>::<name>"
+      unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
+      
+      if ( count == 3 ) {
+	  PoolItem_Ref poolItem = get_poolItem (_pool,
+						source ? string(source_name(source)) : "",
+						nameVector[2], // name
+						nameVector[0], // kind,
+						string(id2str(_SATPool, s->evr)),
+						string(id2str(_SATPool, s->arch)));
+	  if (poolItem) {
+	      ResStatus status;
+	      status.isToBeUninstalled();
+	      solution_to_pool (poolItem, status, ResStatus::SOLVER);
+	  } else {
+	      ERR << kindName << " not found in ZYPP pool." << endl;
+	  }
+      } else {
+	  ERR << "Cannot split " << kindName << " correctly." << endl;
+      }
     }
 
-    return have_solution;
+    /*  solvables to be installed */
+    for (int i = 0; i < solv->decisionq.count; i++)
+    {
+      p = solv->decisionq.elements[i];
+      if (p < 0)
+	continue;
+      if (p >= solv->system->start && p < solv->system->start + solv->system->nsolvables)
+	continue;
+
+      // getting source
+      s = _SATPool->solvables + p;
+      Source *source = pool_source(_SATPool, s);
+
+      PoolItem_Ref poolItem;
+      string kindName(id2str(_SATPool, s->name));
+      std::vector<std::string> nameVector;
+      // expect "<kind>::<name>"
+      unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
+      
+      if ( count == 3 ) {
+	  PoolItem_Ref poolItem = get_poolItem (_pool,
+						source ? string(source_name(source)) : "",
+						nameVector[2], // name
+						nameVector[0], // kind,
+						string(id2str(_SATPool, s->evr)),
+						string(id2str(_SATPool, s->arch)));
+	  if (poolItem) {
+	      ResStatus status;
+	      status.isToBeInstalled();
+	      solution_to_pool (poolItem, status, ResStatus::SOLVER);
+	  } else {
+	      ERR << kindName << " not found in ZYPP pool." << endl;
+	  }
+      } else {
+	  ERR << "Cannot split " << kindName << " correctly." << endl;
+      }
+    }
+
+    // clean up
+    solver_free(solv);
+    queuefree( &(trials) );
+    
+    return true;
 }
 
 
