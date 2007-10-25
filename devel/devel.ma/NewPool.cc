@@ -440,25 +440,6 @@ namespace container
     { return cont.find( val ) != cont.end(); }
 }
 
-struct Xverscmp
-{
-  Xverscmp( ostream * outs_r = 0 )
-  : _outs( outs_r )
-  {}
-
-  bool operator()( const Edition & lhs, const Edition & rhs )
-  {
-    if ( _outs )
-    {
-      int res = lhs.compare( rhs );
-      (*_outs) << lhs << " <> " << rhs << " = " << res << endl;
-    }
-    return true;
-  }
-
-  ostream * _outs;
-};
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -468,6 +449,7 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+  zypp::base::LogControl::instance().logNothing();
 
   setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
 
@@ -475,6 +457,7 @@ int main( int argc, char * argv[] )
   RepoInfoList repos = repoManager.knownRepositories();
   // SEC << "/Local/ROOT " << repos << endl;
 
+  // launch repos
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
     RepoInfo & nrepo( *it );
@@ -490,28 +473,52 @@ int main( int argc, char * argv[] )
 	SEC << "cleanCache" << endl;
 	repoManager.cleanCache( nrepo );
       }
-      SEC << "refreshMetadata" << endl;
-      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+      //SEC << "refreshMetadata" << endl;
+      //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
-
-    SEC << "createFromCache" << endl;
-    Repository nrep( repoManager.createFromCache( nrepo ) );
-    const zypp::ResStore & store( nrep.resolvables() );
-    dumpPoolStats( SEC << "Store: " << endl, store.begin(), store.end() ) << endl;
-    getZYpp()->addResolvables( store );
   }
 
-  if ( 1 )
+  // create from cache:
+  std::list<Repository> repositories;
+
   {
+    Measure x( "CREATE FROM CACHE" );
+    for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+    {
+      RepoInfo & nrepo( *it );
+      if ( ! nrepo.enabled() )
+        continue;
+
+      Measure x( "CREATE FROM CACHE "+nrepo.alias() );
+      Repository nrep( repoManager.createFromCache( nrepo ) );
+      const zypp::ResStore & store( nrep.resolvables() );
+      repositories.push_back( nrep );
+    }
+  }
+
+  // load pool:
+  {
+    Measure x( "LOAD POOL" );
+    for_( it, repositories.begin(), repositories.end() )
+    {
+      Measure x( "LOAD POOL "+(*it).info().alias() );
+      const zypp::ResStore & store( (*it).resolvables() );
+      getZYpp()->addResolvables( store );
+    }
+  }
+
+
+  if ( 0 )
+  {
+    Measure x( "INIT TARGET" );
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
       getZYpp()->initTarget( sysRoot );
       //getZYpp()->initTarget( "/" );
     }
-    SEC << "Added target " << endl;
-    dumpPoolStats( SEC << "Store: " << endl,
+    dumpPoolStats( SEC << "TargetStore: " << endl,
                    getZYpp()->target()->resolvables().begin(),
                    getZYpp()->target()->resolvables().end() ) << endl;
   }
@@ -520,22 +527,6 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
 
   {
-    Measure x( "Cross pool edition compare" );
-    //ofstream out( "verscmp.new" );
-
-    std::set<Edition> editions;
-    for_( it, pool.begin(), pool.end() )
-    {
-      editions.insert( (*it)->edition() );
-    }
-    SEC << "Num Editions " << editions.size() << endl;
-    for ( unsigned i = 5; i; --i )
-    {
-      Measure x( "pass " );
-      invokeOnEach( editions.begin(), editions.end(),
-                    editions.begin(), editions.end(),
-                    Xverscmp() );
-    }
   }
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );

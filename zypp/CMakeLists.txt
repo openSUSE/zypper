@@ -674,11 +674,13 @@ INSTALL(  FILES
 )
 
 SET( zypp_sat_SRCS
+#  sat/Pool.cc
   sat/SATResolver.cc
 )
 
 SET( zypp_sat_HEADERS
-  sat/SATResolver.cc
+#  sat/Pool.h
+  sat/SATResolver.h
 )
 
 INSTALL(  FILES
@@ -1128,6 +1130,7 @@ SET_LOGGROUP( "zypp" ${zypp_lib_SRCS} )
 
 # override some defaults
 SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
+SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_rpm_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
@@ -1174,7 +1177,7 @@ TARGET_LINK_LIBRARIES(zypp ${CURL_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${LIBXML_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${SQLITE_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp satsolver )
+TARGET_LINK_LIBRARIES(zypp ${SATSOLVER_LIBRARY} )
 
 INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 

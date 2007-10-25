@@ -8,23 +8,17 @@ set(SATSOLVER_LIBRARY)
 set(SATSOLVER_INCLUDE_DIR)
 
 FIND_PATH(SATSOLVER_INCLUDE_DIR satsolver/solvable.h
-	/usr/include
+	${CMAKE_INSTALL_PREFIX}/include
 	/usr/local/include
+	/usr/include
 )
 
-FIND_FILE(SATSOLVER_LIBRARY libsatsolver.la
+FIND_LIBRARY(SATSOLVER_LIBRARY NAMES satsolver
 	PATHS
-        /usr/lib64
-        /usr/local/lib64
-        /usr/lib
-        /usr/local/lib
+	${CMAKE_INSTALL_PREFIX}/lib
+	/usr/local/lib
+	/usr/lib
 )
-
-#FIND_LIBRARY(SATSOLVER_LIBRARY NAMES satsolver
-#	PATHS
-#	/usr/lib
-#	/usr/local/lib
-#)
 
 if(SATSOLVER_INCLUDE_DIR AND SATSOLVER_LIBRARY)
    MESSAGE( STATUS "satsolver found: includes in ${SATSOLVER_INCLUDE_DIR}, library in ${SATSOLVER_LIBRARY}")
