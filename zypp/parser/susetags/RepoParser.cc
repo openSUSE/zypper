@@ -447,40 +447,44 @@ namespace zypp
 
         // Start with packages
         {
-          Pathname inputfile( assertMandatoryFile( _descrdir / "packages" ) );
-          PackagesFileReader reader;
-          reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
-          reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
-
-          CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
-          reader.parse( inputfile, progress );
-        }
-
-        // Now process packages.lang. Always parse 'en'.
-	// At least packages.en is mandatory, because the file might
-	// contain license texts.
-	assertMandatoryFile( _descrdir / "packages.en" );
-	parseLocaleIf( Locale("en") );
-	// For each wanted locale at least
-	// some fallback, if locale is not present.
-	parseLocaleIf( ZConfig::instance().textLocale() );
-
-        // Now process packages.DU.
-        //if ( 0 ) // remove the if to enable, but leave the {} around.
-        {
-          Pathname inputfile( getOptionalFile( _descrdir / "packages.DU" ) );
-	  if ( ! inputfile.empty() )
+	  // Even the packages file is optional, see e.g. bug #309235
+          Pathname inputfile( getOptionalFile( _descrdir / "packages" ) );
+	  if (!inputfile.empty())
 	  {
-	    PackagesDuFileReader reader;
-	    reader.setPkgConsumer( bind( &Impl::consumePkgDu, this, _1 ) );
-	    reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgDu, this, _1 ) );
+	    PackagesFileReader reader;
+	    reader.setPkgConsumer( bind( &Impl::consumePkg, this, _1 ) );
+	    reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkg, this, _1 ) );
 
 	    CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
 	    reader.parse( inputfile, progress );
+
+	    // Now process packages.lang. Always parse 'en'.
+	    // At least packages.en is mandatory if packages exists, because the
+	    // file might contain license texts.
+	    assertMandatoryFile( _descrdir / "packages.en" );
+	    parseLocaleIf( Locale("en") );
+	    // For each wanted locale at least
+	    // some fallback, if locale is not present.
+	    parseLocaleIf( ZConfig::instance().textLocale() );
+
+	    // Now process packages.DU.
+	    //if ( 0 ) // remove the if to enable, but leave the {} around.
+	    {
+	      Pathname inputfile( getOptionalFile( _descrdir / "packages.DU" ) );
+	      if ( ! inputfile.empty() )
+	      {
+		PackagesDuFileReader reader;
+		reader.setPkgConsumer( bind( &Impl::consumePkgDu, this, _1 ) );
+		reader.setSrcPkgConsumer( bind( &Impl::consumeSrcPkgDu, this, _1 ) );
+
+		CombinedProgressData progress( _ticks, PathInfo(inputfile).size() );
+		reader.parse( inputfile, progress );
+	      }
+	    }
 	  }
 	}
 
-        // Now process the rest of RepoIndex
+	// Now process the rest of RepoIndex
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
 	      it != _repoIndex->metaFileChecksums.end(); ++it )
         {

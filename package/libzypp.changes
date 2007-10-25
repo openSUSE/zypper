@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 25 16:29:24 CEST 2007 - aschnell@suse.de
+
+- allow non-existing "packages" file in susetags parser (bug
+  #309235)
+
+-------------------------------------------------------------------
 Fri Oct 12 15:47:37 CEST 2007 - ma@suse.de
 
 - SMBIOS DMI modalias matching added (#333152)
