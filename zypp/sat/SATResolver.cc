@@ -31,6 +31,10 @@
 #include "zypp/CapFilters.h"
 #include "zypp/sat/SATResolver.h"
 
+extern "C" {
+#include "satsolver/source_solv.h"
+#include "satsolver/poolarch.h"
+}
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -281,6 +285,64 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 
 
 
+//------------------------------------------------------------------------------------------------------------
+// Helper functions for the SAT-Pool
+//------------------------------------------------------------------------------------------------------------
+
+// find solvable id by name and source
+//   If source != NULL, find there
+//   else find in pool (available packages)
+//
+
+static Id
+select_solvable( Pool *pool,
+		 const PoolItem_Ref item)
+{
+    Id id, archid;
+    int end;
+
+    string packageName = str::form (_("%s:%s"),
+				    item->kind().asString().c_str(),
+				    item->name().c_str()
+				    );	
+
+    string repoName = item->repository().info().alias();
+
+    // Searching concerning source
+    Source *source = NULL;
+    for (int i = 0; i < pool->nsources; i++)
+    {
+	string compName(source_name(pool->sources[i]));
+	if (repoName == compName) {
+	    source = pool->sources[i];
+	    break;
+	}
+    }
+  
+    id = str2id( pool, packageName.c_str(), 0 );
+    if (id == ID_NULL) {
+	return id;
+    }
+    archid = ID_NULL;
+    archid = str2id( pool, item->arch().asString().c_str(), 0 );
+    if (archid == ID_NULL) {
+	return ID_NULL;
+    }
+    
+    end = source ? source->start + source->nsolvables : pool->nsolvables;
+    for (int i = source ? source->start : 1 ; i < end; i++)
+    {
+	if (archid && pool->solvables[i].arch != archid)
+	    continue;
+	if (pool->solvables[i].name == id)
+	    return i;
+    }
+
+    return ID_NULL;
+}
+
+
+
 //  This function loops over the pool and grabs
 //  all item.status().transacts() and item.status().byUser()
 //  It clears all previous bySolver() states also
@@ -309,16 +371,55 @@ SATResolver::resolvePool()
     invokeOnEach ( _pool.begin(), _pool.end(),
                    resfilter::ByKeep( ),                        // collect keeps from Pool to resolver queue
                    functor::functorRef<bool,PoolItem>(info) );    
-    
+
+    Queue trials;    
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
 
+	Id id = select_solvable( _SATPool, *iter );
+	if (id == ID_NULL) {
+	    ERR << "Install: " << *iter << " not found" << endl;
+	}
+	queuepush( &(trials), SOLVER_INSTALL_SOLVABLE );
+        queuepush( &(trials), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-
+	string packageName = str::form (_("%s:%s"),
+					iter->resolvable()->kind().asString().c_str(),
+					iter->resolvable()->name().c_str()
+					);	
+	Id id = str2id( _SATPool, packageName.c_str(), 1 );
+	queuepush( &(trials), SOLVER_ERASE_SOLVABLE_NAME );
+	queuepush( &(trials), id);
     }
+
+    // Searching concerning system source
+    Source *systemSource = NULL;
+    for (int i = 0; i < _SATPool->nsources; i++)
+    {
+	string compName(source_name(_SATPool->sources[i]));
+	if (compName == "system") {
+	    systemSource = _SATPool->sources[i];
+	    break;
+	}
+    }
+    
+    Solver *solv = solver_create( _SATPool, systemSource );
+    solv->fixsystem = false;
+    solv->updatesystem = false;
+    solv->allowdowngrade = false;
+    solv->allowuninstall = false;
+    solv->noupdateprovide = false;
+    _SATPool->verbose = true;
+
+    // Solve !
+    solve( solv, &(trials) );
+    // clean up
+
+    solver_free(solv);
+    queuefree( &(trials) );
 
     
     bool have_solution;// = resolveDependencies (saveContext);             // resolve !
