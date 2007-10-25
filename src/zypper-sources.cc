@@ -167,7 +167,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
         // TranslatorExplanation Don't translate the URL unless it is translated, too
         _("This may be caused by invalid metadata in the repository,"
           " or by a bug in the metadata parser. In the latter case,"
-          " or if in doubt, please, file a bug report by folowing"
+          " or if in doubt, please, file a bug report by following"
           " instructions at http://en.opensuse.org/Zypper#Troubleshooting"));
 
     // log untranslated message
@@ -562,7 +562,7 @@ int refresh_repos(vector<string> & arguments)
 
 
     // do the refresh
-    
+
     // raw metadata refresh
     bool error = false;
     if (!copts.count("build-only"))
