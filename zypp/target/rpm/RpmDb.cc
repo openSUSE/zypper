@@ -1188,7 +1188,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
   {
     ZYPP_CAUGHT( excpt_r );
     WAR << "Package " << name << " has bad edition '"
-    << (header->tag_epoch().empty()?"":(header->tag_epoch()+":"))
+    << (header->tag_epoch()==0?"":(header->tag_epoch()+":"))
     << header->tag_version()
     << (header->tag_release().empty()?"":(string("-") + header->tag_release())) << "'";
     return pptr;

@@ -94,7 +94,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT( excpt_r );
     WAR << "Package " << pkg->name << " has bad edition '"
-    << (header->tag_epoch().empty()?"":(header->tag_epoch()+":"))
+    << (header->tag_epoch()==0?"":(header->tag_epoch()+":"))
     << header->tag_version()
     << (header->tag_release().empty()?"":(string("-") + header->tag_release())) << "'";
     return 0;

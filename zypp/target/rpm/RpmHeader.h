@@ -92,7 +92,7 @@ public:
 public:
 
   std::string tag_name()    const;
-  std::string tag_epoch()   const;
+  int tag_epoch()           const;
   std::string tag_version() const;
   std::string tag_release() const;
   std::string tag_arch()    const;

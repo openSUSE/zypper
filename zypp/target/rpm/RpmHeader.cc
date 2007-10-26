@@ -135,7 +135,7 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
 ostream & RpmHeader::dumpOn( ostream & str ) const
 {
   return BinHeader::dumpOn( str ) << '{' << tag_name() << "-"
-         << (tag_epoch().empty()?"":(tag_epoch()+":"))
+         << (tag_epoch()==0?"":(tag_epoch()+":"))
          << tag_version()
          << (tag_release().empty()?"":(string("-")+tag_release()))
          << ( isSrc() ? ".src}" : "}");
@@ -170,13 +170,13 @@ string RpmHeader::tag_name() const
 //
 //
 //        METHOD NAME : RpmHeader::tag_epoch
-//        METHOD TYPE : string
+//        METHOD TYPE : int
 //
 //        DESCRIPTION :
 //
-string RpmHeader::tag_epoch() const
+int RpmHeader::tag_epoch() const
 {
-  return string_val ( RPMTAG_EPOCH );
+  return int_val ( RPMTAG_EPOCH );
 }
 
 ///////////////////////////////////////////////////////////////////

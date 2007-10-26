@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Oct 26 15:12:24 CEST 2007 - aschnell@suse.de
+
+- fixed retrieval of epoch from rpmdb (bug #246680)
+
+-------------------------------------------------------------------
 Thu Oct 25 16:29:24 CEST 2007 - aschnell@suse.de
 
 - allow non-existing "packages" file in susetags parser (bug
