@@ -1321,10 +1321,10 @@ void mark_patch_updates( bool skip_interactive )
 	  Patch::constPtr patch = asKind<Patch>(res);
 	  if (attempt == 1 || patch->affects_pkg_manager ()) {
 	    // #221476
-	    if (skip_interactive && patch->interactive()) {
-	      // Skipping a patch because it is interactive and
-	      // --skip-interactive is requested. %s is a name of a
-	      // patch
+	    if (skip_interactive && (patch->interactive() || !patch->licenseToConfirm().empty())) {
+	      // Skipping a patch because it is marked as interactive or has
+	      // license to confirm and --skip-interactive is requested.
+	      // TranslatorExplanation %s is the name of a patch
 	      cerr << format (_("WARNING: %s is interactive, skipped."))
 		% res << endl;
 	    }
