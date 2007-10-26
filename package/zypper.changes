@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Fri Oct 26 15:54:37 CEST 2007 - jkupec@suse.cz
+
+- --root now adapts also repos.d and cache dirs
+- require an absolute path for --root (#335609)
+- proper return value for help
+- r7662
+- 0.9.1
+
+-------------------------------------------------------------------
+Fri Oct 26 14:04:16 CEST 2007 - jkupec@suse.cz
+
+- when --skip-interactive is specified, skip also patches having a
+  license to confirm, even if they are not marked as interactive
+  (#236360)
+- r7646
+
+-------------------------------------------------------------------
 Tue Oct 23 14:57:23 CEST 2007 - jkupec@suse.cz
 
 - --reposd-dir, --cache-dir, and --raw-cache-dir global options
