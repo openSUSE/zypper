@@ -159,7 +159,10 @@ int process_globals(int argc, char **argv)
     gSettings.root_dir = gopts["root"].front();
     Pathname tmp(gSettings.root_dir);
     if (!tmp.absolute())
+    {
+      cerr << _("The path specified in the --root option must be absolute.") << endl;
       return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
 
     DBG << "root dir = " << gSettings.root_dir << endl;
     gSettings.rm_options.knownReposPath = gSettings.root_dir
@@ -710,88 +713,92 @@ int one_command(int argc, char **argv)
     );
   }
 
-  // parse command options
-  copts = parse_options (argc, argv, specific_options);
-  if (copts.count("_unknown"))
-    return ZYPPER_EXIT_ERR_SYNTAX;
-
-  // treat --help command option like global --help option from now on
-  // i.e. when used together with command to print command specific help
-  ghelp = ghelp || copts.count("help");
-
   vector<string> arguments;
-  if (optind < argc) {
-    cout_v << _("Non-option program arguments: ");
-    while (optind < argc) {
-      string argument = argv[optind++];
-      cout_v << "'" << argument << "' ";
-      arguments.push_back (argument);
+
+  // parse command options
+  if (!ghelp)
+  {
+    copts = parse_options (argc, argv, specific_options);
+    if (copts.count("_unknown"))
+      return ZYPPER_EXIT_ERR_SYNTAX;
+
+    // treat --help command option like global --help option from now on
+    // i.e. when used together with command to print command specific help
+    ghelp = ghelp || copts.count("help");
+  
+    if (optind < argc) {
+      cout_v << _("Non-option program arguments: ");
+      while (optind < argc) {
+        string argument = argv[optind++];
+        cout_v << "'" << argument << "' ";
+        arguments.push_back (argument);
+      }
+      cout_v << endl;
     }
-    cout_v << endl;
-  }
-
-  // === process options ===
-
-  if (gopts.count("terse")) 
-  {
-    gSettings.machine_readable = true;
-    cout << "<?xml version='1.0'?>" << endl;
-    cout << "<stream>" << endl;
-  }
-
-  if (gopts.count("disable-repositories") ||
-      gopts.count("disable-system-sources"))
-  {
-    MIL << "Repositories disabled, using target only." << endl;
-    cout_n <<
-        _("Repositories disabled, using the database of installed packages only.")
-        << endl;
-    gSettings.disable_system_sources = true;
-  }
-  else
-  {
-    MIL << "System sources enabled" << endl;
-  }
-
-  if (gopts.count("disable-system-resolvables"))
-  {
-    MIL << "System resolvables disabled" << endl;
-    cout_v << _("Ignoring installed resolvables...") << endl;
-    gSettings.disable_system_resolvables = true;
-  }
-
-  if (gopts.count("source")) {
-    list<string> sources = gopts["source"];
-    for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
+  
+    // === process options ===
+  
+    if (gopts.count("terse")) 
     {
-      Url url = make_url (*it);
-      if (!url.isValid())
-	return ZYPPER_EXIT_ERR_INVALID_ARGS;
-      gSettings.additional_sources.push_back(url); 
+      gSettings.machine_readable = true;
+      cout << "<?xml version='1.0'?>" << endl;
+      cout << "<stream>" << endl;
     }
-  }
-
-  // here come commands that need the lock
-  try {
-    if (command == ZypperCommand::LIST_REPOS)
-      zypp_readonly_hack::IWantIt (); // #247001, #302152
-
-    God = zypp::getZYpp();
-  }
-  catch (Exception & excpt_r) {
-    ZYPP_CAUGHT (excpt_r);
-    ERR  << "A ZYpp transaction is already in progress." << endl;
-    string msg = _("A ZYpp transaction is already in progress."
-        " This means, there is another application using the libzypp library for"
-        " package management running. All such applications must be closed before"
-        " using this command.");
-
-    if ( gSettings.machine_readable )
-      cout << "<message type=\"error\">" << msg  << "</message>" <<  endl;
+  
+    if (gopts.count("disable-repositories") ||
+        gopts.count("disable-system-sources"))
+    {
+      MIL << "Repositories disabled, using target only." << endl;
+      cout_n <<
+          _("Repositories disabled, using the database of installed packages only.")
+          << endl;
+      gSettings.disable_system_sources = true;
+    }
     else
-      cerr << msg << endl;
-
-    return ZYPPER_EXIT_ERR_ZYPP;
+    {
+      MIL << "System sources enabled" << endl;
+    }
+  
+    if (gopts.count("disable-system-resolvables"))
+    {
+      MIL << "System resolvables disabled" << endl;
+      cout_v << _("Ignoring installed resolvables...") << endl;
+      gSettings.disable_system_resolvables = true;
+    }
+  
+    if (gopts.count("source")) {
+      list<string> sources = gopts["source"];
+      for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
+      {
+        Url url = make_url (*it);
+        if (!url.isValid())
+  	return ZYPPER_EXIT_ERR_INVALID_ARGS;
+        gSettings.additional_sources.push_back(url); 
+      }
+    }
+  
+    // here come commands that need the lock
+    try {
+      if (command == ZypperCommand::LIST_REPOS)
+        zypp_readonly_hack::IWantIt (); // #247001, #302152
+  
+      God = zypp::getZYpp();
+    }
+    catch (Exception & excpt_r) {
+      ZYPP_CAUGHT (excpt_r);
+      ERR  << "A ZYpp transaction is already in progress." << endl;
+      string msg = _("A ZYpp transaction is already in progress."
+          " This means, there is another application using the libzypp library for"
+          " package management running. All such applications must be closed before"
+          " using this command.");
+  
+      if ( gSettings.machine_readable )
+        cout << "<message type=\"error\">" << msg  << "</message>" <<  endl;
+      else
+        cerr << msg << endl;
+  
+      return ZYPPER_EXIT_ERR_ZYPP;
+    }
   }
 
   ResObject::Kind kind;
@@ -1690,7 +1697,12 @@ int main(int argc, char **argv)
     return ZYPPER_EXIT_OK;
 
   case ZypperCommand::NONE_e:
-    return ZYPPER_EXIT_ERR_SYNTAX;
+  {
+    if (ghelp)
+      return ZYPPER_EXIT_OK;
+    else
+      return ZYPPER_EXIT_ERR_SYNTAX;
+  }
 
   default:
     return safe_one_command(argc, argv);
