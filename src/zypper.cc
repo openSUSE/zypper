@@ -69,7 +69,7 @@ bool ghelp = false;
  * \returns ZypperCommand object representing the command or ZypperCommand::NONE
  *          if an unknown command has been given. 
  */
-void process_globals(int argc, char **argv)
+int process_globals(int argc, char **argv)
 {
   static struct option global_options[] = {
     {"help",            no_argument,       0, 'h'},
@@ -93,7 +93,7 @@ void process_globals(int argc, char **argv)
   // parse global options
   gopts = parse_options (argc, argv, global_options);
   if (gopts.count("_unknown"))
-    return;
+    return ZYPPER_EXIT_ERR_SYNTAX;
 
   static string help_global_options = _("  Options:\n"
     "\t--help, -h\t\tHelp.\n"
@@ -157,6 +157,17 @@ void process_globals(int argc, char **argv)
 
   if (gopts.count("root")) {
     gSettings.root_dir = gopts["root"].front();
+    Pathname tmp(gSettings.root_dir);
+    if (!tmp.absolute())
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+
+    DBG << "root dir = " << gSettings.root_dir << endl;
+    gSettings.rm_options.knownReposPath = gSettings.root_dir
+      + gSettings.rm_options.knownReposPath;
+    gSettings.rm_options.repoCachePath = gSettings.root_dir
+      + gSettings.rm_options.repoCachePath;
+    gSettings.rm_options.repoRawCachePath = gSettings.root_dir
+      + gSettings.rm_options.repoRawCachePath;
   }
 
   if (gopts.count("reposd-dir")) {
@@ -170,6 +181,10 @@ void process_globals(int argc, char **argv)
   if (gopts.count("raw-cache-dir")) {
     gSettings.rm_options.repoRawCachePath = gopts["raw-cache-dir"].front();
   }
+
+  DBG << "repos.d dir = " << gSettings.rm_options.knownReposPath << endl;
+  DBG << "cache dir = " << gSettings.rm_options.repoCachePath << endl;
+  DBG << "raw cache dir = " << gSettings.rm_options.repoRawCachePath << endl;
 
   // testing option
   if (gopts.count("opt")) {
@@ -231,8 +246,13 @@ void process_globals(int argc, char **argv)
     else if (gopts.count("version"))
       cout << PACKAGE " " VERSION << endl;
     else
+    {
       cerr << _("Try -h for help.") << endl;
+      return ZYPPER_EXIT_ERR_SYNTAX;
+    }
   }
+
+  return ZYPPER_EXIT_OK;
 }
 
 /// process one command from the OS shell or the zypper shell
@@ -269,6 +289,7 @@ int one_command(int argc, char **argv)
   {
     cout << _("Type 'zypper help' to get a list of global options and commands.") << endl;
     cout << _("Type 'zypper help <command>' to get a command-specific help.") << endl;
+    return ZYPPER_EXIT_OK;
   }
   else if (command == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
@@ -1658,7 +1679,10 @@ int main(int argc, char **argv)
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
 
   // parse global options and the command
-  process_globals (argc, argv);
+  int ret = process_globals (argc, argv);
+  if (ret != ZYPPER_EXIT_OK)
+    return ret;
+
   switch(command.toEnum())
   {
   case ZypperCommand::SHELL_e:
