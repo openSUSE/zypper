@@ -431,8 +431,8 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
     // without solutions, its useless to prompt
     if (solutions.empty())
        return false;
-    // input prompt
-    cerr << _("number, (r)etry or (c)ancel> ") << flush;
+    // TranslatorExplanation: dependency problem solution input prompt
+    cerr << _("Choose the number, (s)kip, (r)etry or (c)ancel> ") << flush;
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {
@@ -448,11 +448,14 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
     // translators: corresponds to (c)ancel
     else if (reply_s == _("c"))
       return false;
+    // translators: corresponds to (s)kip
+    else if (reply_s == _("s"))
+      return indeterminate; // continue with next problem
 
     str::strtonum (reply_s, reply);
   } while (reply <= 0 || reply >= n);
 
-  cerr << format (_("Applying solution %s")) % reply << endl;
+  cout_n << format (_("Applying solution %s")) % reply << endl;
   ProblemSolutionList::iterator reply_i = solutions.begin ();
   advance (reply_i, reply - 1);
   todo.push_back (*reply_i);
@@ -502,7 +505,10 @@ bool show_problems ()
   }
 
   if (retry)
+  {
+    cout_n << _("Resolving dependencies...") << endl;
     resolver->applySolutions (todo);
+  }
   return retry;
 }
 
