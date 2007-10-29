@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 29 17:02:04 CET 2007 - jkupec@suse.cz
+
+- (s)kip option added to the dependency problem resolution prompt
+- r7689
+
+-------------------------------------------------------------------
 Fri Oct 26 15:54:37 CEST 2007 - jkupec@suse.cz
 
 - --root now adapts also repos.d and cache dirs
