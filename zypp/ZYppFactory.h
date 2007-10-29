@@ -24,7 +24,10 @@ namespace zypp
   class ZYppFactoryException : public Exception
   {
   public:
-    ZYppFactoryException( const std::string & msg_r );
+    ZYppFactoryException( const std::string & msg_r, pid_t locker_pid );
+    pid_t locker_pid() const { return _locker_pid; }
+  private:
+    pid_t _locker_pid;
   };
 
   ///////////////////////////////////////////////////////////////////
