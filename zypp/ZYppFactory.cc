@@ -281,7 +281,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   ZYppFactoryException::ZYppFactoryException( const std::string & msg_r, pid_t locker_pid )
-    : Exception(N_("Software management is already running.")),
+    : Exception(msg_r),
       _locker_pid (locker_pid)
   {}
 
