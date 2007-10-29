@@ -33,7 +33,7 @@
 #include "zypp/sat/SATResolver.h"
 
 extern "C" {
-#include "satsolver/source_solv.h"
+#include "satsolver/repo_solv.h"
 #include "satsolver/poolarch.h"
 }
 
@@ -80,7 +80,7 @@ SATResolver::dumpOn( std::ostream & os ) const
 
 SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     : _pool (pool)
-    , _SATPool (SATPool) 
+    , _SATPool (SATPool)
     , _timeout_seconds (0)
     , _maxSolverPasses (0)
     , _testing (false)
@@ -172,7 +172,7 @@ void
 SATResolver::addPoolItemToKepp (PoolItem_Ref item)
 {
     _items_to_keep.push_back (item);
-    _items_to_keep.unique ();	        
+    _items_to_keep.unique ();
 }
 
 
@@ -321,7 +321,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
 
 static PoolItem_Ref
-get_poolItem (const ResPool & pool, const string & source_alias, const string & package_name, const string & kind_name = "", const string & edition = "",  const string & arch = "")
+get_poolItem (const ResPool & pool, const string & repo_alias, const string & package_name, const string & kind_name = "", const string & edition = "",  const string & arch = "")
 {
     PoolItem_Ref poolItem;
     Resolvable::Kind kind = string2kind (kind_name);
@@ -331,7 +331,7 @@ get_poolItem (const ResPool & pool, const string & source_alias, const string & 
 
 	invokeOnEach( pool.byNameBegin( package_name ),
 		      pool.byNameEnd( package_name ),
-		      functor::chain( resfilter::ByRepository(source_alias), resfilter::ByKind (kind) ),
+		      functor::chain( resfilter::ByRepository(repo_alias), resfilter::ByKind (kind) ),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
@@ -346,14 +346,14 @@ get_poolItem (const ResPool & pool, const string & source_alias, const string & 
     }
     catch (Exception & excpt_r) {
 	ZYPP_CAUGHT (excpt_r);
-	ERR << "Can't find kind[" << kind_name << "]:'" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	ERR << "Can't find kind[" << kind_name << "]:'" << package_name << "': repo '" << repo_alias << "' not defined" << endl;
 	if (kind_name.empty())
 	    ERR << "Please specify kind=\"...\" in the <install.../> request." << endl;
 	return poolItem;
     }
 
     if (!poolItem) {
-	ERR << "Can't find kind: " << kind << ":'" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
+	ERR << "Can't find kind: " << kind << ":'" << package_name << "' in repo '" << repo_alias << "': no such name/kind" << endl;
     }
 
     return poolItem;
@@ -417,8 +417,8 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 // Helper functions for the SAT-Pool
 //------------------------------------------------------------------------------------------------------------
 
-// find solvable id by name and source
-//   If source != NULL, find there
+// find solvable id by name and repo
+//   If repo != NULL, find there
 //   else find in pool (available packages)
 //
 
@@ -432,21 +432,21 @@ select_solvable( Pool *pool,
     string packageName = str::form (_("%s:%s"),
 				    item->kind().asString().c_str(),
 				    item->name().c_str()
-				    );	
+				    );
 
     string repoName = item->repository().info().alias();
 
-    // Searching concerning source
-    Source *source = NULL;
-    for (int i = 0; i < pool->nsources; i++)
+    // Searching concerning repo
+    Repo *repo = NULL;
+    for (int i = 0; i < pool->nrepos; i++)
     {
-	string compName(source_name(pool->sources[i]));
+	string compName(repo_name(pool->repos[i]));
 	if (repoName == compName) {
-	    source = pool->sources[i];
+	    repo = pool->repos[i];
 	    break;
 	}
     }
-  
+
     id = str2id( pool, packageName.c_str(), 0 );
     if (id == ID_NULL) {
 	return id;
@@ -456,9 +456,9 @@ select_solvable( Pool *pool,
     if (archid == ID_NULL) {
 	return ID_NULL;
     }
-    
-    end = source ? source->start + source->nsolvables : pool->nsolvables;
-    for (int i = source ? source->start : 1 ; i < end; i++)
+
+    end = repo ? repo->start + repo->nsolvables : pool->nsolvables;
+    for (int i = repo ? repo->start : 1 ; i < end; i++)
     {
 	if (archid && pool->solvables[i].arch != archid)
 	    continue;
@@ -498,9 +498,9 @@ SATResolver::resolvePool()
 
     invokeOnEach ( _pool.begin(), _pool.end(),
                    resfilter::ByKeep( ),                        // collect keeps from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );    
+                   functor::functorRef<bool,PoolItem>(info) );
 
-    Queue trials;    
+    Queue trials;
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
@@ -509,32 +509,32 @@ SATResolver::resolvePool()
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
-	queuepush( &(trials), SOLVER_INSTALL_SOLVABLE );
-        queuepush( &(trials), id );
+	queue_push( &(trials), SOLVER_INSTALL_SOLVABLE );
+        queue_push( &(trials), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	string packageName = str::form (_("%s:%s"),
 					iter->resolvable()->kind().asString().c_str(),
 					iter->resolvable()->name().c_str()
-					);	
+					);
 	Id id = str2id( _SATPool, packageName.c_str(), 1 );
-	queuepush( &(trials), SOLVER_ERASE_SOLVABLE_NAME );
-	queuepush( &(trials), id);
+	queue_push( &(trials), SOLVER_ERASE_SOLVABLE_NAME );
+	queue_push( &(trials), id);
     }
 
-    // Searching concerning system source
-    Source *systemSource = NULL;
-    for (int i = 0; i < _SATPool->nsources; i++)
+    // Searching concerning system repo
+    Repo *systemRepo = NULL;
+    for (int i = 0; i < _SATPool->nrepos; i++)
     {
-	string compName(source_name(_SATPool->sources[i]));
+	string compName(repo_name(_SATPool->repos[i]));
 	if (compName == "system") {
-	    systemSource = _SATPool->sources[i];
+	    systemRepo = _SATPool->repos[i];
 	    break;
 	}
     }
-    
-    Solver *solv = solver_create( _SATPool, systemSource );
+
+    Solver *solv = solver_create( _SATPool, systemRepo );
     solv->fixsystem = false;
     solv->updatesystem = false;
     solv->allowdowngrade = false;
@@ -549,26 +549,26 @@ SATResolver::resolvePool()
     //-----------------------------------------
     Id p;
     Solvable *s;
-  
+
     /* solvables to be erased */
     for (int i = solv->system->start; i < solv->system->start + solv->system->nsolvables; i++)
     {
       if (solv->decisionmap[i] > 0)
 	continue;
 
-      // getting source
+      // getting repo
       s = _SATPool->solvables + i;
-      Source *source = s->source;
+      Repo *repo = s->repo;
       PoolItem_Ref poolItem;
       string kindName(id2str(_SATPool, s->name));
       std::vector<std::string> nameVector;
-      
+
       // expect "<kind>::<name>"
       unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-      
+
       if ( count == 3 ) {
 	  PoolItem_Ref poolItem = get_poolItem (_pool,
-						source ? string(source_name(source)) : "",
+						repo ? string(repo_name(repo)) : "",
 						nameVector[2], // name
 						nameVector[0], // kind,
 						string(id2str(_SATPool, s->evr)),
@@ -594,19 +594,19 @@ SATResolver::resolvePool()
       if (p >= solv->system->start && p < solv->system->start + solv->system->nsolvables)
 	continue;
 
-      // getting source
+      // getting repo
       s = _SATPool->solvables + p;
-      Source *source = s->source;
+      Repo *repo = s->repo;
 
       PoolItem_Ref poolItem;
       string kindName(id2str(_SATPool, s->name));
       std::vector<std::string> nameVector;
       // expect "<kind>::<name>"
       unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-      
+
       if ( count == 3 ) {
 	  PoolItem_Ref poolItem = get_poolItem (_pool,
-						source ? string(source_name(source)) : "",
+						repo ? string(repo_name(repo)) : "",
 						nameVector[2], // name
 						nameVector[0], // kind,
 						string(id2str(_SATPool, s->evr)),
@@ -625,8 +625,8 @@ SATResolver::resolvePool()
 
     // clean up
     solver_free(solv);
-    queuefree( &(trials) );
-    
+    queue_free( &(trials) );
+
     return true;
 }
 

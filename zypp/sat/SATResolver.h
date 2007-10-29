@@ -60,7 +60,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
   private:
     ResPool _pool;
     Pool *_SATPool;
-    
+
     unsigned _timeout_seconds;
     unsigned _maxSolverPasses;
     bool _testing;
@@ -72,7 +72,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lockUninstalled;
-    PoolItemList _items_to_keep;    
+    PoolItemList _items_to_keep;
 
   public:
 
@@ -114,7 +114,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void addPoolItemToRemove (PoolItem_Ref item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
-    
+
 };
 
 ///////////////////////////////////////////////////////////////////
