@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.9.0" "zypper" "System Tools"
+.TH "zypper" "8" "0.9.2" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -6,7 +6,9 @@ zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] 
 zypper \fI\-\-help\fR [\fBcommand\fR]
 .SH "DESCRIPTION"
 .LP
-zypper is a command\-line interface to ZYpp system management library. It can be used to install, update, remove software, manage repositories, perform various searches, and more.
+zypper is a command\-line interface to ZYpp system management library.
+It can be used to install, update, remove software, manage repositories, perform
+various searches, and more.
 
 .SH "COMMANDS"
 .LP
@@ -365,7 +367,12 @@ Switches to non-interactive mode. In this mode zypper doesn't ask user to type a
 Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with causion, as you can easily overlook security problems by using it.
 .TP
 .I \-R, \-\-root <dir>
-Operates on a different root directory.
+Operates on a different root directory. This option influences the location
+of the repos.d directory and the meta-data cache directory and also causes rpm
+to be run with the --root option to do the actual installation or removal of
+packages. Note that the ZYpp lock is still created in the original system,
+as well as temporary files. See also the FILES section.
+
 .TP
 .I \-D, \-\-reposd\-dir <dir>
 Use the specified directory to look for the repository definition (*.repo) files.
@@ -424,7 +431,10 @@ Directory containing repository definition (*.repo) files.
 You can use the \fBrepo\fR commands to manipulate these files, or you can edit
 them yourself. In either case, after doing the modifications, executing
 \fBzypper refresh\fR is strongly recommended.
-Use the \-\-reposd\-dir global option to use an alternative directory for this purpose. 
+
+You can use the \-\-reposd\-dir global option to use an alternative directory
+for this purpose or the \-\-root option to make this directory relative to the
+specified root directory.
 .TP
 .B /etc/zypp/zypp.conf
 ZYpp configuration file.
@@ -434,12 +444,15 @@ File with package lock definitions, see the section LOCKS.
 .TP
 .B /var/cache/zypp/raw
 Directory for storing raw metadata contained in repositories.
-Use the \-\-raw\-cache\-dir global option to use an alternative directory for this purpose.
+Use the \-\-raw\-cache\-dir global option to use an alternative directory
+for this purpose or the \-\-root option to make this directory relative to the
+specified root directory.
 .TP
 .B /var/cache/zypp/zypp.db
 Sqlite database file containing pre-parsed metadata of all repositories.
 Use the \-\-cache\-dir global option to use an alternative directory
-for the zypp.db file.
+for the zypp.db file or the \-\-root option to make its default location
+relative to the specified root directory.
 .TP
 .B ~/.zypper_history
 Command history for the shell.
