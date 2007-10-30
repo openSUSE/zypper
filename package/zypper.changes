@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 30 15:24:17 CET 2007 - jkupec@suse.cz
+
+- supress progress output when --quiet
+- r7703
+
+-------------------------------------------------------------------
 Mon Oct 29 17:02:04 CET 2007 - jkupec@suse.cz
 
 - (s)kip option added to the dependency problem resolution prompt
