@@ -114,7 +114,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     // this is called too often. relax a bit.
     static int last = -1;
     if (last != value)
-      display_progress ( "read-installed-packages", cout, _("Reading installed packages"), value);
+      display_progress ( "read-installed-packages", cout_n, _("Reading installed packages"), value);
     last = value;
     return true;
   }
@@ -126,7 +126,7 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 
   virtual void finish( Error error, const std::string & reason )
   {
-    display_done ("read-installed-packages", cout);
+    display_done ("read-installed-packages", cout_n);
     display_error (error, reason);
   }
 };
@@ -145,7 +145,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
     // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-    display_progress ( "remove-resolvable", cout,
+    display_progress ( "remove-resolvable", cout_n,
         _("Removing ") + resolvable->name() + string("-") + resolvable->edition().asString(), value);
     return true;
   }
@@ -183,7 +183,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
     string s = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
-    display_progress ( "install-resolvable", cout, s,  value);
+    display_progress ( "install-resolvable", cout_n, s,  value);
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )

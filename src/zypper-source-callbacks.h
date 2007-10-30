@@ -219,9 +219,9 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
   void tick( const zypp::ProgressData &data )
   {
     if ( data.reportAlive() )
-      display_tick (zypp::str::numstring(data.numericId()), cout, data.name() );
+      display_tick (zypp::str::numstring(data.numericId()), cout_n, data.name() );
     else
-      display_progress ( zypp::str::numstring(data.numericId()), cout, data.name() , data.val() );
+      display_progress ( zypp::str::numstring(data.numericId()), cout_n, data.name() , data.val() );
   }
   
   virtual void start( const zypp::ProgressData &data )
@@ -244,7 +244,7 @@ struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::Prog
 
   virtual void finish( const zypp::ProgressData &data )
   {
-    display_done(zypp::str::numstring(data.numericId()), cout, data.name() );
+    display_done(zypp::str::numstring(data.numericId()), cout_n, data.name() );
   }
 };
 
@@ -260,7 +260,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
 
   void display_step(const zypp::ProgressData & pd)
   {
-    display_progress("repo", cout, "(" + _repo.name() + ") " + pd.name(), pd.val());
+    display_progress("repo", cout_n, "(" + _repo.name() + ") " + pd.name(), pd.val());
   }
 
   virtual bool progress(const zypp::ProgressData & pd)
@@ -271,7 +271,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   
   virtual Action problem( zypp::Repository /*repo*/, Error error, const std::string & description )
   {
-    display_done ("repo", cout);
+    display_done ("repo", cout_n);
     display_error (error, description);
     return (Action) read_action_ari (ABORT);
   }
@@ -281,9 +281,9 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     display_step(100);
     // many of these, avoid newline
     if (boost::algorithm::starts_with (task, "Reading patch"))
-      cout << '\r' << flush;
+      cout_n << '\r' << flush;
     else
-      display_done ("repo", cout);
+      display_done ("repo", cout_n);
     display_error (error, reason);
   }
 
