@@ -337,8 +337,10 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-        ZYPP_THROW( ZYppFactoryException(N_("Software management is already running."),
-					 globalLock.locker_pid()) );
+	string t = str::form(N_("System management is locked by the application with pid %d. "
+				"Please close this application before trying again."),
+			     globalLock.locker_pid());
+	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid()));
       }
       else
       {
