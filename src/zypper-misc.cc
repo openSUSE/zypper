@@ -4,6 +4,8 @@
 #include <boost/format.hpp>
 #include <boost/logic/tribool_io.hpp>
 
+#include <zypp/ZYppFactory.h>
+
 #include <zypp/Edition.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>

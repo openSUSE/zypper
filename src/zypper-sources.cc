@@ -4,6 +4,7 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include <zypp/ZYpp.h>
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
 

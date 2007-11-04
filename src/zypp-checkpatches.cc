@@ -20,7 +20,6 @@
 #include <zypp/PathInfo.h>
 
 #include "checkpatches-keyring-callbacks.h"
-//#include "zypper.h"
 #include "zypper-updates.h"
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP

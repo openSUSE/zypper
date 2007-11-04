@@ -20,7 +20,9 @@
 
 #include <boost/logic/tribool.hpp>
 
-#include <zypp/base/Logger.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/base/LogControl.h>
+
 #include "zypp/base/UserRequestException.h"
 #include <zypp/repo/RepoException.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
@@ -39,6 +41,10 @@
 #include "zypper-getopt.h"
 #include "zypper-command.h"
 #include "zypper-utils.h"
+
+#define ZYPPER_LOG "/var/log/zypper.log"
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 
 using namespace std;
 using namespace zypp;

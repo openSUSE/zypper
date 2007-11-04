@@ -3,24 +3,12 @@
 
 #include <libintl.h>
 
-#include <zypp/base/LogControl.h>
 #include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/Locale.h>
-#include <zypp/ZYpp.h>
-#include <zypp/ZYppFactory.h>
 #include <zypp/ResStore.h>
-#include <zypp/base/String.h>
-#include <zypp/Digest.h>
-#include <zypp/CapFactory.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/RepoManager.h>
 
 #include "zypper-command.h"
-
-#define ZYPPER_LOG "/var/log/zypper.log"
-#undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 
 // ===== exit codes ======
 
