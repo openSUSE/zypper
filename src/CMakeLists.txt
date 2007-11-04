@@ -7,7 +7,7 @@ SET (zypper_HEADERS
   zypper.h
   zypper-command.h
   zypper-getopt.h
-  zypper-sources.h
+  zypper-repos.h
   zypper-misc.h
   zypper-utils.h
   zypper-search.h
@@ -17,14 +17,14 @@ SET (zypper_HEADERS
   zypper-keyring-callbacks.h
   zypper-media-callbacks.h
   zypper-rpm-callbacks.h
-  zypper-source-callbacks.h
+  zypper-repo-callbacks.h
 )
 
 SET( zypper_SRCS
   zypper.cc
   zypper-command.cc
   zypper-getopt.cc
-  zypper-sources.cc
+  zypper-repos.cc
   zypper-misc.cc
   zypper-utils.cc
   zypper-search.cc

@@ -19,7 +19,7 @@
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"
 #include "zypper-utils.h"
-#include "zypper-sources.h"
+#include "zypper-repos.h"
 #include "zypper-misc.h"
 
 using namespace std;

@@ -3,10 +3,10 @@
 
 #include <libintl.h>
 
-#include <zypp/base/Logger.h>
-#include <zypp/ResStore.h>
-#include <zypp/RepoInfo.h>
-#include <zypp/RepoManager.h>
+#include "zypp/base/Logger.h"
+#include "zypp/ResStore.h"
+#include "zypp/RepoInfo.h"
+#include "zypp/RepoManager.h"
 
 #include "zypper-command.h"
 

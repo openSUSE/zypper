@@ -1,7 +1,7 @@
 #include "zypper-search.h"
 
 #include "zypper.h"
-#include "zypper-sources.h"
+#include "zypper-repos.h"
 #include "zypper-misc.h"
 
 #include <zypp/base/Algorithm.h>

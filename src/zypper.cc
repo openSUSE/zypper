@@ -28,12 +28,12 @@
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
 #include "zypper.h"
-#include "zypper-sources.h"
+#include "zypper-repos.h"
 #include "zypper-misc.h"
 
 #include "zypper-rpm-callbacks.h"
 #include "zypper-keyring-callbacks.h"
-#include "zypper-source-callbacks.h"
+#include "zypper-repo-callbacks.h"
 #include "zypper-media-callbacks.h"
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
