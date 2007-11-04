@@ -4,12 +4,8 @@
 #include <ostream>
 #include <string>
 
-#include <zypp/Pathname.h>
 #include <zypp/Url.h>
 #include <zypp/Resolvable.h>
-
-std::string read_line_from_file( const zypp::Pathname &file );
-void write_line_to_file( const zypp::Pathname &file, const std::string &line );
 
 /**
  * Write a suggestion to report a bug to the specified stream.

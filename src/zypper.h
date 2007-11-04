@@ -18,7 +18,7 @@
 
 #include "zypper-command.h"
 
-#define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
+#define ZYPPER_LOG "/var/log/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 

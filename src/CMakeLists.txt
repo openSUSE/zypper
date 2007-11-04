@@ -44,7 +44,7 @@ INSTALL(
   RUNTIME DESTINATION ${INSTALL_PREFIX}/bin
 )
 
-ADD_EXECUTABLE( zypp-checkpatches zypp-checkpatches.cc zypper-updates.cc zypper-utils.cc )
+ADD_EXECUTABLE( zypp-checkpatches zypp-checkpatches.cc zypper-updates.cc )
 TARGET_LINK_LIBRARIES( zypp-checkpatches ${ZYPP_LIBRARY} )
 
 INSTALL(

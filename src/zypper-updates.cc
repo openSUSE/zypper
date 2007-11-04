@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,17 +14,44 @@
 #include <zypp/Digest.h>
 #include <zypp/target/store/xml_escape_parser.hpp>
 
-#include "zypper.h"
 #include "zypper-updates.h"
-#include "zypper-utils.h"
 
 using namespace std;
 using namespace zypp;
 
-extern ZYpp::Ptr God;
-extern RuntimeData gData;
-extern Settings gSettings;
+extern std::list<zypp::RepoInfo> repos;
 extern std::list<Error> errors;
+
+string read_line_from_file( const Pathname &file )
+{
+  string buffer;
+  string token;
+  std::ifstream is(file.asString().c_str());
+  if ( is.good() )
+  {
+    while(is && !is.eof())
+    {
+      getline(is, buffer);
+      token += buffer;
+    }
+    is.close();
+  }
+  return token;
+ }
+
+// ----------------------------------------------------------------------------
+
+void write_line_to_file( const Pathname &file, const std::string &line )
+{
+  std::ofstream os(file.asString().c_str());
+  if ( os.good() )
+  {
+    os << line << endl;;
+  }
+  os.close();
+}
+
+// ----------------------------------------------------------------------------
 
 Edition read_old_version()
 {
@@ -85,7 +111,7 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
   out << " </errors>" << std::endl;
   
   out << " <update-sources>" << std::endl;
-  for ( std::list<RepoInfo>::const_iterator it = gData.repos.begin(); it != gData.repos.end(); ++it )
+  for ( std::list<RepoInfo>::const_iterator it = repos.begin(); it != repos.end(); ++it )
   {
     out << "  <source url=\"" << *(it->baseUrlsBegin()) << "\" alias=\"" << it->alias() << "\"/>" << std::endl;
   }

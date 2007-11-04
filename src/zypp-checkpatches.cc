@@ -20,7 +20,7 @@
 #include <zypp/PathInfo.h>
 
 #include "checkpatches-keyring-callbacks.h"
-#include "zypper.h"
+//#include "zypper.h"
 #include "zypper-updates.h"
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -35,8 +35,7 @@ using namespace zypp;
 using namespace boost;
 
 ZYpp::Ptr God;
-RuntimeData gData;
-Settings gSettings;
+std::list<zypp::RepoInfo> repos;
 std::list<Error> errors;
 
 ostream no_stream(NULL);
@@ -176,7 +175,7 @@ int main(int argc, char **argv)
 
       MIL << "repository: " << it->alias() << std::endl; //" from " << src.timestamp() << std::endl;
 
-      gData.repos.push_back(*it);
+      repos.push_back(*it);
     }
     catch (const Exception &excpt_r )
     {
@@ -224,13 +223,13 @@ int main(int argc, char **argv)
     MIL << "System has changed, recalculation of updates needed" << endl;
   }
   
-  for ( std::list<RepoInfo>::const_iterator it = gData.repos.begin(); it != gData.repos.end(); ++it )
+  for ( std::list<RepoInfo>::const_iterator it = repos.begin(); it != repos.end(); ++it )
   {
     Repository repository = manager.createFromCache(*it);
     God->addResolvables(repository.resolvables());
   }
 
-  if ( gData.repos.size() == 0 )
+  if ( repos.size() == 0 )
   {
     errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
   }
