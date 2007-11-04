@@ -19,6 +19,16 @@
 #define XML_FILE_VERSION "/var/lib/zypp/cache/updates_xml_version"
 #define RESULT_FILE "/var/lib/zypp/cache/updates_result.xml"
 
+struct Error
+{
+  Error( const std::string &desc )
+  : description(desc)
+  {}
+  std::string description;
+};
+
+extern std::list<Error> errors;
+
 std::string read_old_token();
 void save_token( const std::string &token );
 zypp::Edition read_old_version();

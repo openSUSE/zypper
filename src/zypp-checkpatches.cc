@@ -37,6 +37,7 @@ using namespace boost;
 ZYpp::Ptr God;
 RuntimeData gData;
 Settings gSettings;
+std::list<Error> errors;
 
 ostream no_stream(NULL);
 
@@ -89,7 +90,7 @@ namespace utils
 
 int exit_with_error( const std::string &error_str )
 {
-  gData.errors.push_back(Error(error_str));
+  errors.push_back(Error(error_str));
     
   std::ofstream os(RESULT_FILE);
   if ( os.good() )
@@ -181,7 +182,7 @@ int main(int argc, char **argv)
     {
       // TranslatorExplanation %s = detailed low level (unstranslated) error message
       string error = excpt_r.msg();
-      gData.errors.push_back(str::form(_("Couldn't restore repository.\nDetail: %s"), error.c_str()));
+      errors.push_back(str::form(_("Couldn't restore repository.\nDetail: %s"), error.c_str()));
     }
   }
 
@@ -231,7 +232,7 @@ int main(int argc, char **argv)
 
   if ( gData.repos.size() == 0 )
   {
-    gData.errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
+    errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
   }
 
   God->addResolvables( God->target()->resolvables(), true);

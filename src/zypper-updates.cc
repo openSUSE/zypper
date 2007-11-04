@@ -25,6 +25,7 @@ using namespace zypp;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 extern Settings gSettings;
+extern std::list<Error> errors;
 
 Edition read_old_version()
 {
@@ -59,7 +60,7 @@ void render_error( const Edition &version, std::ostream &out )
   out << "<?xml version='1.0'?>" << std::endl;
   out << "<update-status version=\"" << version.asString() << "\">" << std::endl;
   out << " <errors>" << std::endl;
-  for ( std::list<Error>::const_iterator it = gData.errors.begin(); it != gData.errors.end(); ++it )
+  for ( std::list<Error>::const_iterator it = errors.begin(); it != errors.end(); ++it )
   {
     out << "   <error>" << xml_escape(it->description) << "</error>" << endl;
   }
@@ -77,7 +78,7 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
   
   //out << " <metadata token=\"" << token << "\"/>" << std::endl;
   out << " <errors>" << std::endl;
-  for ( std::list<Error>::const_iterator it = gData.errors.begin(); it != gData.errors.end(); ++it )
+  for ( std::list<Error>::const_iterator it = errors.begin(); it != errors.end(); ++it )
   {
     out << " <error>" << xml_escape(it->description) << "</error>" << endl;
   }

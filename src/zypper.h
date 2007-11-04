@@ -21,7 +21,6 @@
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
-#define RANDOM_TOKEN "sad987432JJDJD948394DDDxxx22"
 
 // ===== exit codes ======
 
@@ -46,7 +45,7 @@
 struct Settings
 {
   Settings()
-  : previous_token(RANDOM_TOKEN),
+  :
   verbosity(0),  
   previous_code(-1),
   disable_system_sources(false),
@@ -60,7 +59,6 @@ struct Settings
   {}
 
   std::list<zypp::Url> additional_sources;
-  std::string previous_token;
 
   /**
    * Level of the amount of output.
@@ -86,21 +84,12 @@ struct Settings
   zypp::RepoManagerOptions rm_options;
 };
 
-struct Error
-{
-  Error( const std::string &desc )
-  : description(desc)
-  {}
-  std::string description;
-};
-
 struct RuntimeData
 {
   RuntimeData()
     : patches_count(0), security_patches_count(0), show_media_progress_hack(false)
   {}
 
-  std::list<Error> errors;
   std::list<zypp::RepoInfo> repos;
   int patches_count;
   int security_patches_count;
