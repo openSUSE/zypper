@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Nov  5 15:22:33 CET 2007 - ma@suse.de
+
+- Don't mark failed patch scripts as installed. (#327523)
+- version 4.1.2
+- revision 7744
+
+-------------------------------------------------------------------
 Fri Oct 26 15:12:24 CEST 2007 - aschnell@suse.de
 
 - fixed retrieval of epoch from rpmdb (bug #246680)

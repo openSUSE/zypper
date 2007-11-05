@@ -65,7 +65,8 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
       void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
                                 Script::constPtr script_r,
-                                bool do_r )
+                                bool do_r,
+                                storage::PersistentStorage & storage_r )
       {
         MIL << "Execute script " << script_r << endl;
         if ( ! script_r )
@@ -98,7 +99,7 @@ namespace zypp
           ZYPP_THROW(Exception(err.str()));
         }
 
-        filesystem::chmod( localfile, S_IRUSR|S_IXUSR );	// "r-x------"
+        filesystem::chmod( localfile, S_IRUSR|S_IWUSR|S_IXUSR );	// "rwx------"
         ExternalProgram prog( localfile->asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {
@@ -112,24 +113,31 @@ namespace zypp
         int exitCode = prog.close();
         if ( exitCode != 0 )
         {
+          storage_r.setObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
           std::ostringstream err;
           err << "Script failed with exit code " << exitCode;
           report->problem( err.str() );
           ZYPP_THROW(Exception(err.str()));
+        }
+        else if ( storage_r.doesObjectHasFlag( script_r, "SCRIPT_EXEC_FAILED" ) )
+        {
+          storage_r.removeObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
         }
 
         report->finish();
         return;
       }
 
-      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
+      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r,
+                                   storage::PersistentStorage & storage_r )
       {
-        ExecuteScriptHelper( access_r, script_r, true );
+        ExecuteScriptHelper( access_r, script_r, true, storage_r );
       }
 
-      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
+      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r,
+                                     storage::PersistentStorage & storage_r )
       {
-        ExecuteScriptHelper( access_r, script_r, false );
+        ExecuteScriptHelper( access_r, script_r, false, storage_r );
       }
       /////////////////////////////////////////////////////////////////
     } // namespace
@@ -619,7 +627,7 @@ namespace zypp
                 }
                 else if (isKind<Script>(it->resolvable()))
                 {
-                  ExecuteDoScript( access, asKind<Script>(it->resolvable()) );
+                  ExecuteDoScript( access, asKind<Script>(it->resolvable()), _storage );
                 }
                 else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
                 {
@@ -662,7 +670,7 @@ namespace zypp
                 }
                 else if (isKind<Script>(it->resolvable()))
                 {
-                  ExecuteUndoScript( access, asKind<Script>(it->resolvable()) );
+                  ExecuteUndoScript( access, asKind<Script>(it->resolvable()), _storage );
                 }
                 else
                 {

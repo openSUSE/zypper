@@ -174,7 +174,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds_flags.insert(ResTraits<zypp::Package>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
-  //d->kinds.insert(ResTraits<zypp::Script>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Script>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Selection>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Product>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Pattern>::kind);
@@ -832,7 +832,12 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
         {
           XMLPatchScriptData_Ptr script_data = dynamic_pointer_cast<XMLPatchScriptData>(*it);
           atom = createScript(*script_data);
-          impl->_atoms.push_back(atom);
+          if ( doesObjectHasFlag( atom, "SCRIPT_EXEC_FAILED" ) )
+          {
+            WAR << "Patch script not yet successfully executed: " << atom << endl;
+          } else {
+            impl->_atoms.push_back(atom);
+          }
           break;
         }
         default:
