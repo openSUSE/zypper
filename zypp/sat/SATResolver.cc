@@ -551,7 +551,7 @@ SATResolver::resolvePool()
     Solvable *s;
 
     /* solvables to be erased */
-    for (int i = solv->system->start; i < solv->system->start + solv->system->nsolvables; i++)
+    for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
     {
       if (solv->decisionmap[i] > 0)
 	continue;
@@ -591,7 +591,7 @@ SATResolver::resolvePool()
       p = solv->decisionq.elements[i];
       if (p < 0)
 	continue;
-      if (p >= solv->system->start && p < solv->system->start + solv->system->nsolvables)
+      if (p >= solv->installed->start && p < solv->installed->start + solv->installed->nsolvables)
 	continue;
 
       // getting repo
