@@ -6,5 +6,5 @@ Icon=package-manager-icon
 Terminal=false
 Type=Application
 Categories=PackageManager;
-MimeType=application/x-rpm
+MimeType=application/x-rpm;
 StartupNotify=true
