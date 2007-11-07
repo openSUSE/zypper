@@ -603,6 +603,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/ProblemSolutionUnlock.cc
   solver/detail/ProblemSolutionAllBranches.cc
   solver/detail/ProblemSolutionDoubleTimeout.cc
+  solver/detail/ProblemSolutionCombi.cc
   solver/detail/QueueItem.cc
   solver/detail/QueueItemBranch.cc
   solver/detail/QueueItemConflict.cc
@@ -642,6 +643,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/ProblemSolutionUnlock.h
   solver/detail/ProblemSolutionAllBranches.h
   solver/detail/ProblemSolutionDoubleTimeout.h
+  solver/detail/ProblemSolutionCombi.h
   solver/detail/QueueItem.h
   solver/detail/QueueItemBranch.h
   solver/detail/QueueItemConflict.h
@@ -662,7 +664,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/ResolverInfoNeededBy.h
   solver/detail/ResolverInfoObsoletes.h
   solver/detail/ResolverQueue.h
-  solver/detail/SolutionAction.h
+  solver/detail/SoluytionAction.h
   solver/detail/Testcase.h
   solver/detail/Types.h
   solver/detail/ContextPool.h
