@@ -60,6 +60,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
   private:
     ResPool _pool;
     Pool *_SATPool;
+    Solver *solv;
+    Queue jobQueue;
 
     unsigned _timeout_seconds;
     unsigned _maxSolverPasses;
@@ -97,8 +99,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool resolvePool();
 
-//    ResolverProblemList problems () const;
-//    void applySolutions (const ProblemSolutionList &solutions);
+    ResolverProblemList problems () const;
+    void applySolutions (const ProblemSolutionList &solutions);
 
     Arch architecture() const { return _architecture; }
     void setArchitecture( const Arch & arch) { _architecture = arch; }
