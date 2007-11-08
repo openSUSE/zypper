@@ -664,7 +664,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/ResolverInfoNeededBy.h
   solver/detail/ResolverInfoObsoletes.h
   solver/detail/ResolverQueue.h
-  solver/detail/SoluytionAction.h
+  solver/detail/SolutionAction.h
   solver/detail/Testcase.h
   solver/detail/Types.h
   solver/detail/ContextPool.h
