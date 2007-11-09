@@ -35,7 +35,6 @@ struct Settings
   Settings()
   :
   verbosity(0),  
-  previous_code(-1),
   disable_system_sources(false),
   disable_system_resolvables(false),
   is_rug_compatible(false),
@@ -59,7 +58,6 @@ struct Settings
    * </ul>
    */
   int verbosity;
-  int previous_code;
   std::string command;
   bool disable_system_sources;
   bool disable_system_resolvables;
