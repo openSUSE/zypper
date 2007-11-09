@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Nov  9 15:20:12 CET 2007 - jkupec@suse.cz
+
+- made force-resolution solver mode off by default
+  (but still on when running in the rug compatibility mode)
+- --force-resolution option added to in, rm, and up commands
+  to control the setting (#337370)
+- r7773
+
+-------------------------------------------------------------------
 Tue Oct 30 15:24:17 CET 2007 - jkupec@suse.cz
 
 - supress progress output when --quiet (#335305, #336333)
