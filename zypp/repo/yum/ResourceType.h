@@ -22,10 +22,11 @@ namespace zypp
 
 
   /**
-   * 
+   *
    */
   struct ResourceType
   {
+    static const ResourceType NONE; // unknown
     static const ResourceType REPOMD;
     static const ResourceType PRIMARY;
     static const ResourceType OTHER;
@@ -55,7 +56,7 @@ namespace zypp
     explicit ResourceType(const std::string & strval_r);
 
     Type toEnum() const { return _type; }
-    
+
     ResourceType::Type parse(const std::string & strval_r);
 
     const std::string & asString() const;

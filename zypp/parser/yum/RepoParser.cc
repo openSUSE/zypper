@@ -7,7 +7,7 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/parser/yum/RepoParser.cc
- * YUM repository metadata parser implementation. 
+ * YUM repository metadata parser implementation.
  */
 #include <iostream>
 
@@ -103,7 +103,7 @@ namespace zypp
      *
      * \param package_r pointer to package data
      */
-    bool primary_CB(const data::Packagebase_Ptr & package_r); 
+    bool primary_CB(const data::Packagebase_Ptr & package_r);
 
     /**
      * Callback for processing data returned from \ref PatchesFileReader.
@@ -322,7 +322,7 @@ namespace zypp
      MIL << "Total files size: " << totalsize << endl;
     _ticks.range(totalsize);
     _ticks.toMin();
-    
+
     doJobs(cache_dir);
 
     _ticks.toMax();
@@ -338,10 +338,10 @@ namespace zypp
       RepoParserJob job = *it;
       // FIXME better way to do progress here?
       int jobsize = PathInfo(cache_dir + job.filename()).size();
-    
-      MIL << "going to parse " << job.type() << " file " 
+
+      MIL << "going to parse " << job.type() << " file "
           << job.filename() << " (" << jobsize << " bytes)" << endl;
-      
+
       switch(job.type().toEnum())
       {
         // parse primary.xml.gz
@@ -431,7 +431,7 @@ namespace zypp
           break;
         }
 
-        case ResourceType::PRODUCTS_e:
+        case ResourceType::PRODUCT_e:
         {
           ProductFileReader(
             cache_dir + job.filename(),

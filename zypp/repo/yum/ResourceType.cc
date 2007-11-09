@@ -22,6 +22,7 @@ namespace zypp
 
   static std::map<std::string,ResourceType::Type> _table;
 
+  const ResourceType ResourceType::NONE(ResourceType::NONE_e);
   const ResourceType ResourceType::REPOMD(ResourceType::REPOMD_e);
   const ResourceType ResourceType::PRIMARY(ResourceType::PRIMARY_e);
   const ResourceType ResourceType::OTHER(ResourceType::OTHER_e);
@@ -29,7 +30,7 @@ namespace zypp
   const ResourceType ResourceType::GROUP(ResourceType::GROUP_e);
   const ResourceType ResourceType::PATCHES(ResourceType::PATCHES_e);
   const ResourceType ResourceType::PATCH(ResourceType::PATCH_e);
-  const ResourceType ResourceType::PRODUCTS(ResourceType::PRODUCTS_e);
+  const ResourceType ResourceType::PRODUCT(ResourceType::PRODUCT_e);
   const ResourceType ResourceType::PATTERNS(ResourceType::PATTERNS_e);
 
 
@@ -49,7 +50,7 @@ namespace zypp
       _table["group"] = ResourceType::GROUP_e;
       _table["patches"] = ResourceType::PATCHES_e;
       _table["patch"] = ResourceType::PATCH_e;
-      _table["products"] = ResourceType::PRODUCTS_e;
+      _table["product"] = ResourceType::PRODUCT_e;
       _table["patterns"] = ResourceType::PATTERNS_e;
       _table["NONE"] = _table["none"] = ResourceType::NONE_e;
     }
@@ -58,8 +59,7 @@ namespace zypp
       = _table.find(strval_r);
     if (it == _table.end())
     {
-      ZYPP_THROW(Exception(
-        "ResourceType parse: illegal string value '" + strval_r + "'"));
+      return ResourceType::NONE_e;
     }
     return it->second;
   }
@@ -78,7 +78,7 @@ namespace zypp
       _table[GROUP_e]   = "group";
       _table[PATCHES_e]   = "patches";
       _table[PATCH_e]  = "patch";
-      _table[PRODUCTS_e]  = "products";
+      _table[PRODUCT_e]  = "product";
       _table[PATTERNS_e]  = "patterns";
       _table[NONE_e] = "NONE";
     }
