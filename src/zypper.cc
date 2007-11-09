@@ -311,11 +311,12 @@ int one_command(int argc, char **argv)
       {"force",                     no_argument,       0, 'f'},
       {"capability",                no_argument,       0, 'C'},
       // rug compatibility, we have global --non-interactive
-      {"no-confirm",                no_argument,       0, 'y'}, 
+      {"no-confirm",                no_argument,       0, 'y'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"debug-solver",              no_argument,       0, 0},
+      {"force-resolution",          no_argument,       0, 'R'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -334,10 +335,11 @@ int one_command(int argc, char **argv)
       "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
       "-C, --capability                Select resolvables by capability\n"
+      "-f, --force                     Install even if the item is already installed (reinstall)\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
-      "-f, --force                     Install even if the item is already installed (reinstall)\n"
+      "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
   }
   else if (command == ZypperCommand::REMOVE) {
@@ -352,6 +354,7 @@ int one_command(int argc, char **argv)
       // rug compatibility, we have global --non-interactive
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
+      {"force-resolution", no_argument, 0, 'R'},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -365,11 +368,12 @@ int one_command(int argc, char **argv)
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias> Operate only with resolvables from repository specified by alias.\n"
-      "-t, --type <type>  Type of resolvable (package, patch, pattern, product) (default: package)\n"
-      "-n, --name         Select resolvables by plain name, not by capability\n"
-      "-C, --capability   Select resolvables by capability\n"
-      "    --debug-solver Create solver test case for debugging\n"  
+      "-r, --repo <alias>     Operate only with resolvables from repository specified by alias.\n"
+      "-t, --type <type>      Type of resolvable (package, patch, pattern, product) (default: package)\n"
+      "-n, --name             Select resolvables by plain name, not by capability\n"
+      "-C, --capability       Select resolvables by capability\n"
+      "    --debug-solver     Create solver test case for debugging\n"  
+      "-R, --force-resolution Force the solver to find a solution (even agressive)\n"
     );
   }
   else if (command == ZypperCommand::SRC_INSTALL) {
@@ -544,6 +548,7 @@ int one_command(int argc, char **argv)
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
+      {"force-resolution",          no_argument,       0, 'R'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -563,7 +568,8 @@ int one_command(int argc, char **argv)
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
-      "    --debug-solver              Create solver test case for debugging\n"  
+      "    --debug-solver              Create solver test case for debugging\n"
+      "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
   }
   else if (command == ZypperCommand::SEARCH) {

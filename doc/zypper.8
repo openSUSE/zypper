@@ -84,6 +84,9 @@ Install even if the item is already installed (reinstall)
 .I \-C, \-\-capability
 Select resolvables by capabilities.
 .TP
+.I \-f, --force
+Install the package even if it is already installed (reinstall).
+.TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
@@ -92,6 +95,10 @@ Create solver test case for debugging. Use this option, if you think the
 dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
 directory to your bug report. To use this option, simply add it to the problematic
 install or remove command. 
+.TP
+.I \-R, \-\-force\-resolution
+Force the solver to find a solution, even if it would mean removing all packages
+with unfulfilled requirements.
 
 .TP
 .B source-install (si) <name> ...
@@ -136,6 +143,10 @@ Select resolvables by capabilities.
 .TP
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
+.TP
+.I \-R, \-\-force\-resolution
+Force the solver to find a solution, even if it would mean removing all packages
+with unfulfilled requirements.
 
 .TP
 .B update (up) [options]
@@ -157,6 +168,13 @@ confirmed.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I      \-\-debug\-solver
+Create solver test case for debugging. See the install command for details.
+.TP
+.I \-R, \-\-force\-resolution
+Force the solver to find a solution, even if it would mean removing all packages
+with unfulfilled requirements.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
@@ -534,6 +552,10 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .TP
 .I      \-\-agree\-to\-third\-party\-licenses
 This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
+.TP
+.I \-R, \-\-force\-resolution
+This option is not available in rug and zypper uses the 'force-resolution'
+solver mode by default when running rug in compatible mode.
 .RE
 
 .TP
@@ -543,6 +565,10 @@ zypper remove (rm)
 .TP
 .I \-y, \-\-no\-confirm
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
+.TP
+.I \-R, \-\-force\-resolution
+This option is not available in rug and zypper uses the 'force-resolution'
+solver mode by default when running rug in compatible mode.
 .RE
 
 .TP
@@ -555,6 +581,10 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .TP
 .I      \-\-agree\-to\-third\-party\-licenses
 This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
+.TP
+.I \-R, \-\-force\-resolution
+This option is not available in rug and zypper uses the 'force-resolution'
+solver mode by default when running rug in compatible mode.
 .RE
 
 .TP
@@ -564,6 +594,7 @@ zypper search (se)
 \fI    \-\-sort\-by\-catalog\fR
 Sort resolvables by catalog, not by name. This option is an alias to zypper's
 \-\-sort\-by\-repo option.
+
 
 .SS Other Compatibility Notes
 

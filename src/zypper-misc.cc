@@ -827,7 +827,8 @@ bool resolve()
 {
   establish ();
   cout_v << _("Resolving dependencies...") << endl;
-  God->resolver()->setForceResolve( true );
+  God->resolver()->setForceResolve(
+      gSettings.is_rug_compatible ? true : copts.count("force-resolution") );
   return God->resolver()->resolvePool();
 }
 
