@@ -34,7 +34,7 @@ namespace zypp
     static const ResourceType GROUP;
     static const ResourceType PATCHES; // suse extension
     static const ResourceType PATCH;   // suse extension
-    static const ResourceType PRODUCTS; // suse extension
+    static const ResourceType PRODUCT; // suse extension
     static const ResourceType PATTERNS; // suse extension
 
     enum Type
@@ -47,7 +47,7 @@ namespace zypp
       GROUP_e,
       PATCHES_e,
       PATCH_e,
-      PRODUCTS_e,
+      PRODUCT_e,
       PATTERNS_e
     };
 
