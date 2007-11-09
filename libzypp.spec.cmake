@@ -115,7 +115,10 @@ cd ..
 %{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
-%{prefix}/share/pixmaps/package-manager-icon.png
+%{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
+%{prefix}/share/icons/hicolor/16x16/apps/package-manager-icon.png
+%{prefix}/share/icons/hicolor/32x32/apps/package-manager-icon.png
+%{prefix}/share/icons/hicolor/48x48/apps/package-manager-icon.png
 %{prefix}/bin/package-manager
 %{prefix}/bin/package-manager-su
 %{_libdir}/libzypp*so.*
