@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Nov 12 17:43:12 CET 2007 - jkupec@suse.cz
+
+- dist-upgrade added (experimental) FATE #302460
+- r7786
+- 0.9.2
+
+-------------------------------------------------------------------
 Fri Nov  9 15:20:12 CET 2007 - jkupec@suse.cz
 
 - made force-resolution solver mode off by default
