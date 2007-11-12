@@ -183,6 +183,23 @@ packages for which there is a better version instead, select \fI--type
 package\fR which is also the default in rug compatibility mode.
 
 .TP
+.B dist-upgrade (dup) [options]
+Perform a distribution upgrade. This command performs an update of all packages
+with a special resolver algorithm which takes care of package splits, pattern
+and product updates, etc.
+
+.TP
+\fI\-r, \-\-repo\fR <alias>
+Limit updates to repository specified by alias.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+.TP
+.I      \-\-debug\-solver
+Create solver test case for debugging. See the install command for details.
+
+
+.TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
 Search for resolvables matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
 .IP

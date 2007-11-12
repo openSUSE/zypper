@@ -572,6 +572,28 @@ int one_command(int argc, char **argv)
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
   }
+  else if (command == ZypperCommand::DIST_UPGRADE) {
+    static struct option dupdate_options[] = {
+      {"repo",                      required_argument, 0, 'r'},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      {"debug-solver",              no_argument,       0, 0},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = dupdate_options;
+    specific_help = _(
+      "dist-upgrade (dup) [options]\n"
+      "\n"
+      "Perform a distribution upgrade.\n"
+      "\n"
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias>              Limit the upgrade to the repository specified by the alias.\n"
+      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+      "                                See man zypper for more details.\n"
+      "    --debug-solver              Create solver test case for debugging\n"
+    );
+  }
   else if (command == ZypperCommand::SEARCH) {
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
@@ -1500,6 +1522,58 @@ int one_command(int argc, char **argv)
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
     mark_updates( kind, skip_interactive, best_effort );
 
+
+    if (copts.count("debug-solver"))
+    {
+      cout_n << _("Generating solver test case...") << endl;
+      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
+        cout_n << _("Solver test case generated successfully.") << endl;
+      else
+        cerr << _("Error creating the solver test case.") << endl;
+    }
+    // commit
+    // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
+    // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
+    else
+      return solve_and_commit();
+
+    return ZYPPER_EXIT_OK; 
+  }
+
+  // ----------------------------( dist-upgrade )------------------------------
+
+  else if (command == ZypperCommand::DIST_UPGRADE) {
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for performing a distribution upgrade.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+
+    // too many arguments
+    if (arguments.size() > 0)
+    {
+      report_too_many_arguments(specific_help);
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    }
+
+    if (copts.count("auto-agree-with-licenses"))
+      gSettings.license_auto_agree = true;
+
+    cond_init_target ();
+    int initret = init_repos();
+    if (initret != ZYPPER_EXIT_OK)
+      return initret;
+    cond_load_resolvables ();
+    establish ();
+    zypp::UpgradeStatistics opt_stats;
+    God->resolver()->doUpgrade(opt_stats);
 
     if (copts.count("debug-solver"))
     {
