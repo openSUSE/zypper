@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 13 13:40:03 CET 2007 - schubi@suse.de
+
+- fixes for new gcc
+- version 4.1.3
+- r7788 
+
+-------------------------------------------------------------------
 Mon Nov  5 15:22:33 CET 2007 - ma@suse.de
 
 - Don't mark failed patch scripts as installed. (#327523)
