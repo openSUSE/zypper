@@ -13,6 +13,11 @@ Mon Nov  5 15:22:33 CET 2007 - ma@suse.de
 - revision 7744
 
 -------------------------------------------------------------------
+Wed Oct 31 09:19:59 CET 2007 - dmueller@suse.de
+
+- update rpmlint suppression
+
+-------------------------------------------------------------------
 Fri Oct 26 15:12:24 CEST 2007 - aschnell@suse.de
 
 - fixed retrieval of epoch from rpmdb (bug #246680)
