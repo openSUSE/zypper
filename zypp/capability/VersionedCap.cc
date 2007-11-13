@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-#include <ext/hash_fun.h>
+#include "zypp/base/Hash.h"
 #include "zypp/capability/VersionedCap.h"
 
 using namespace std;

@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-#include <ext/hash_fun.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Regex.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Hash.h"
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/Capabilities.h"
 
@@ -49,7 +49,7 @@ namespace zypp
 
     std::size_t CapabilityImpl::hash() const
     {
-      std::size_t ret = __gnu_cxx::hash<const char*>()( encode().c_str() );
+      std::size_t ret = __gnu_cxx::__stl_hash_string( encode().c_str() );
       return ret;
     }
 
