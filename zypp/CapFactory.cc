@@ -15,7 +15,6 @@
 #include <map>
 
 #include <ext/hash_set>
-#include <ext/hash_fun.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"

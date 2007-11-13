@@ -16,7 +16,6 @@
 
 #include <ext/hash_set>
 #include <ext/hash_map>
-#include <ext/hash_fun.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace __gnu_cxx
