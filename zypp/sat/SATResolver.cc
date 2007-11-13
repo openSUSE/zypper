@@ -695,7 +695,7 @@ SATResolver::problems () const
 		if (problem + j < problems.elements + i)
 		    continue;
 	    }
-	    refine_suggestion(solv, problem, v, &solution);
+//	    refine_suggestion(solv, problem, v, &solution);
 	    
 	    ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
 	    
@@ -864,7 +864,7 @@ SATResolver::problems () const
 				    << " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
 				gotone = 1;
 			    }
-			    if (!solv->allowarchchange && s->name == sd->name && archchanges(pool, sd, s))
+			    if (!solv->allowarchchange && s->name == sd->name )//&& archchanges(pool, sd, s))
 			    {
 				MIL << "- allow architecture change of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
 				    << " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
