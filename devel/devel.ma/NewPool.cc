@@ -40,6 +40,9 @@
 #include "zypp/ui/PatchContents.h"
 #include "zypp/ResPoolProxy.h"
 
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/Repo.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
@@ -116,54 +119,6 @@ namespace zypp
       }
 }
 
-template<class _Res>
-Selectable::Ptr getSel( const std::string & name_r )
-{
-  ResPoolProxy uipool( getZYpp()->poolProxy() );
-  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
-  {
-    if ( (*it)->name() == name_r )
-      return (*it);
-  }
-  return 0;
-}
-
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
-{
-  PoolItem ret;
-  ResPool pool( getZYpp()->pool() );
-  for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
-  {
-    if ( !ret && isKind<_Res>( (*it).resolvable() )
-         && ( ed_r == Edition() || ed_r == (*it)->edition() )
-         && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
-    {
-      ret = (*it);
-      MIL << "    ->" << *it << endl;
-    }
-    else
-    {
-      DBG << "     ?" << *it << endl;
-    }
-  }
-  return ret;
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r )
-{
-  return getPi<_Res>( name_r, Edition(), Arch() );
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Edition & ed_r )
-{
-  return getPi<_Res>( name_r, ed_r, Arch() );
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Arch & arch_r )
-{
-  return getPi<_Res>( name_r, Edition(), arch_r );
-}
 
 void dbgDu( Selectable::Ptr sel )
 {
@@ -439,6 +394,7 @@ namespace container
     bool isIn( const std::set<_Tp> & cont, const typename std::set<_Tp>::value_type & val )
     { return cont.find( val ) != cont.end(); }
 }
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -449,7 +405,31 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
+
+  zypp::sat::Pool satpool;
+  MIL << satpool << endl;
+  DBG << satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) << endl;
+  MIL << satpool << endl;
+  DBG << satpool.addRepoSolv( "1234567890.solv" ) << endl;
+  MIL << satpool << endl;
+  DBG << satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) << endl;
+  MIL << satpool << endl;
+
+  for_( it, satpool.reposBegin(), satpool.reposEnd() )
+  {
+    WAR << *it << endl;
+    for_( sit, it->solvablesBegin(), it->solvablesEnd() )
+      MIL << *sit << endl;
+  }
+
+
+  satpool.t();
+
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
+  return 0;
 
   setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
 
@@ -473,8 +453,8 @@ int main( int argc, char * argv[] )
 	SEC << "cleanCache" << endl;
 	repoManager.cleanCache( nrepo );
       }
-      //SEC << "refreshMetadata" << endl;
-      //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+      SEC << "refreshMetadata" << endl;
+      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
       SEC << "buildCache" << endl;
       repoManager.buildCache( nrepo );
     }
@@ -526,12 +506,13 @@ int main( int argc, char * argv[] )
   ResPool pool( getZYpp()->pool() );
   USR << "pool: " << pool << endl;
 
-  {
-  }
-
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
- ///////////////////////////////////////////////////////////////////
+  //sat::detail::PoolImpl satpool;
+  //sat::Pool satpool;
+  //MIL << satpool << endl;
+
+  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;

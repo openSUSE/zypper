@@ -19,6 +19,9 @@
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
 
+#include "zypp/ResPool.h"
+#include "zypp/ResPoolProxy.h"
+
 #include <zypp/Repository.h>
 #include <zypp/RepoManager.h>
 
@@ -116,6 +119,57 @@ inline RepoManager makeRepoManager( const Pathname & mgrdir_r )
   mgropt.knownReposPath   = mgrdir_r/"repos.d/";
 
   return RepoManager( mgropt );
+}
+
+///////////////////////////////////////////////////////////////////
+
+template<class _Res>
+ui::Selectable::Ptr getSel( const std::string & name_r )
+{
+  ResPoolProxy uipool( getZYpp()->poolProxy() );
+  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
+  {
+    if ( (*it)->name() == name_r )
+      return (*it);
+  }
+  return 0;
+}
+
+template<class _Res>
+PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
+{
+  PoolItem ret;
+  ResPool pool( getZYpp()->pool() );
+  for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
+  {
+    if ( !ret && isKind<_Res>( (*it).resolvable() )
+         && ( ed_r == Edition() || ed_r == (*it)->edition() )
+         && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
+    {
+      ret = (*it);
+      MIL << "    ->" << *it << endl;
+    }
+    else
+    {
+      DBG << "     ?" << *it << endl;
+    }
+  }
+  return ret;
+}
+template<class _Res>
+PoolItem getPi( const std::string & name_r )
+{
+  return getPi<_Res>( name_r, Edition(), Arch() );
+}
+template<class _Res>
+PoolItem getPi( const std::string & name_r, const Edition & ed_r )
+{
+  return getPi<_Res>( name_r, ed_r, Arch() );
+}
+template<class _Res>
+PoolItem getPi( const std::string & name_r, const Arch & arch_r )
+{
+  return getPi<_Res>( name_r, Edition(), arch_r );
 }
 
 ///////////////////////////////////////////////////////////////////
