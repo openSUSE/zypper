@@ -1,1 +1,1 @@
-addFilter("libzypp shlib-policy-name-error")
+addFilter("libzypp.* shlib-policy-name-error")
