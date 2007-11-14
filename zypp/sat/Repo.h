@@ -16,6 +16,8 @@
 
 #include "zypp/base/SafeBool.h"
 
+#include "zypp/Pathname.h"
+
 #include "zypp/sat/Solvable.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -57,6 +59,12 @@ namespace zypp
         unsigned solvablesSize() const;
         SolvableIterator solvablesBegin() const;
         SolvableIterator solvablesEnd() const;
+
+      public:
+        /** Load Solvables from a solv-file.
+         * \throws Exception if loading the solv-file fails.
+         */
+        void addSolv( const Pathname & file_r );
 
       public:
         /** Expert backdoor. */

@@ -18,7 +18,6 @@
 #include "zypp/base/Iterator.h"
 
 #include "zypp/AutoDispose.h"
-#include "zypp/Pathname.h"
 
 #include "zypp/sat/Repo.h"
 
@@ -56,12 +55,19 @@ namespace zypp
         SolvableIterator solvablesBegin() const;
         SolvableIterator solvablesEnd() const;
 
-        void t() const;
-
       public:
-        Repo addRepoSolv( const Pathname & file_r );
+        /** Add new empty \ref Repo named \c name_r.
+         * \throws Exception if \ref Repo with named \c name_r exists.
+         */
+        Repo addRepo( const std::string & name_r );
 
-      private:
+        /** Add new \ref Repo from solv-file.
+         * \c name_r defaults to the solvfiles basename.
+         * \throws Exception from \ref Pool::addRepo or \ref Repo::addSolv
+         */
+        Repo addRepoSolv( const Pathname & file_r, const std::string & name_r = std::string() );
+
+     private:
         /** Explicitly shared sat-pool. */
         AutoDispose< ::_Pool *> _raii;
         /** Convenient access. */
@@ -71,7 +77,50 @@ namespace zypp
 
     /** \relates Pool Stream output */
     std::ostream & operator<<( std::ostream & str, const Pool & obj );
+#if 0
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : TempRepo
+    //
+    /** Maintain a temporary \ref Repo.
+     * Any included temporary \ref Repo is removed from the \ref Prool
+     * upon destruction. This may ease convenient and exception safe
+     * creation of repos.
+     * \code
+     * {
+     *   TempRepo tmp( pool.addRepo( "newrepo" ) );
+     *
+     *   // Exceptions when loading Solvables into "newrepo"
+     *   // may bypass, and "newrepo" will be removed from
+     *   // the pool.
+     *
+     *   if ( keep )
+     *   {
+     *     // If you decide to keep "newrepo", simply
+     *     // clear TempRepo to prevent removal.
+     *     tmp.reset();
+     *   }
+     * }
+     * \endcode
+    */
+    class TempRepo : private base::NonCopyable
+    {
+      public:
+        TempRepo( const Repo & repo_r )
+        : _repo( repo_r )
+        {}
 
+        ~TempRepo()
+        {
+          if ( _repo )
+            _repo.
+        }
+
+      private:
+        Repo _repo;
+    };
+    ///////////////////////////////////////////////////////////////////
+#endif
     /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////

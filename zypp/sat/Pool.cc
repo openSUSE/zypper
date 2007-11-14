@@ -12,13 +12,9 @@
 
 extern "C"
 {
-#include <stdio.h>
-#include <satsolver/repo_solv.h>
 #include <satsolver/pool.h>
 }
-#include <cstdio>
 #include <iostream>
-#include <set>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
@@ -33,12 +29,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : Pool
-    //
-    ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -84,32 +74,26 @@ namespace zypp
     { return SolvableIterator( _pool.solvables+_pool.nsolvables ); }
 
 
-    void Pool::t() const
+    Repo Pool::addRepo( const std::string & name_r )
     {
-      if ( _pool.nrepos )
-      {
-        SEC << (void*)(*_pool.repos)<< Repo( *_pool.repos ) << " " << (*_pool.repos)->name << std::endl;
-      }
-      else
-      {
-        SEC << "NOREPO" << std::endl;
-      }
-
+#warning Implement name check
+      return ::repo_create( &_pool, name_r.c_str() );
     }
 
-    Repo Pool::addRepoSolv( const Pathname & file_r )
+    Repo Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
     {
-      AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
-      if ( file == NULL )
+      Repo repo( addRepo( name_r.empty() ? file_r.basename() : name_r ) );
+      try
       {
-        file.resetDispose();
-        return Repo();
+        repo.addSolv( file_r );
       }
-
-#warning Workaround sat-repo not doing strdup on name.
-      // simply spend a static array of reponames
-      static std::set<std::string> _reponames;
-      return ::pool_addrepo_solv( &_pool, file, _reponames.insert( file_r.asString() ).first->c_str() );
+      catch ( ... )
+      {
+#warning use RAII to avoid cleanup catch
+        ::repo_free( repo.get() );
+        throw;
+      }
+      return repo;
     }
 
     /******************************************************************
@@ -122,7 +106,6 @@ namespace zypp
       return str << "sat::pool(){"
           << obj.reposSize() << "repos|"
           << obj.solvablesSize() << "slov}";
-
     }
 
     /////////////////////////////////////////////////////////////////
