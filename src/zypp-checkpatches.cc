@@ -15,6 +15,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <libintl.h>
+
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/RepoManager.h>
 #include <zypp/PathInfo.h>
