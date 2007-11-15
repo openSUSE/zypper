@@ -108,8 +108,13 @@ namespace zypp
       : _pimpl( new Impl( value_type() ) )
       {}
 
+      /** Ctor taking dispose function and using default constructed value. */
+      explicit AutoDispose( const Dispose & dispose_r )
+      : _pimpl( new Impl( value_type(), dispose_r ) )
+      {}
+
       /** Ctor taking value and no dispose function. */
-      AutoDispose( param_type value_r )
+      explicit AutoDispose( param_type value_r )
       : _pimpl( new Impl( value_r ) )
       {}
 
