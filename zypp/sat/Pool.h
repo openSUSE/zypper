@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/Iterator.h"
 
 #include "zypp/AutoDispose.h"
@@ -47,27 +48,49 @@ namespace zypp
         ~Pool();
 
       public:
+        bool reposEmpty() const;
         unsigned reposSize() const;
         RepoIterator reposBegin() const;
         RepoIterator reposEnd() const;
 
+        /** Return a \ref Repo named \c name_r.
+         * It a such a \ref Repo does not already exist
+         * a new empty \ref Repo is created.
+         */
+        Repo reposInsert( const std::string & name_r );
+
+        /** Find a \ref Repo named \c name_r.
+         * Returns \ref norepo if there is no such \ref Repo.
+         */
+        Repo reposFind( const std::string & name_r ) const;
+
+        /** Remove a \ref Repo named \c name_r. */
+        void reposErase( const std::string & name_r )
+        { reposErase( reposFind( name_r ) ); }
+        /** \overload */
+        void reposErase( Repo repo_r )
+        { repo_r.eraseFromPool(); }
+
+      public:
+        /** Functor removing \ref Repo from it's \ref Pool. */
+        struct EraseRepo;
+
+        /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
+         * In case of an exception the \ref Repo is removed from the \ref Pool.
+         * \throws Exception if loading the solv-file fails.
+        */
+        Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
+        /** \overload Using the files basename as \ref Repo name. */
+        Repo addRepoSolv( const Pathname & file_r )
+        { return addRepoSolv( file_r, file_r.basename() ); }
+
+      public:
+        bool solvablesEmpty() const;
         unsigned solvablesSize() const;
         SolvableIterator solvablesBegin() const;
         SolvableIterator solvablesEnd() const;
 
-      public:
-        /** Add new empty \ref Repo named \c name_r.
-         * \throws Exception if \ref Repo with named \c name_r exists.
-         */
-        Repo addRepo( const std::string & name_r );
-
-        /** Add new \ref Repo from solv-file.
-         * \c name_r defaults to the solvfiles basename.
-         * \throws Exception from \ref Pool::addRepo or \ref Repo::addSolv
-         */
-        Repo addRepoSolv( const Pathname & file_r, const std::string & name_r = std::string() );
-
-     private:
+      private:
         /** Explicitly shared sat-pool. */
         AutoDispose< ::_Pool *> _raii;
         /** Convenient access. */
@@ -77,50 +100,45 @@ namespace zypp
 
     /** \relates Pool Stream output */
     std::ostream & operator<<( std::ostream & str, const Pool & obj );
-#if 0
+
+    ///////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : TempRepo
+    //	CLASS NAME : Pool::EraseRepo
     //
-    /** Maintain a temporary \ref Repo.
-     * Any included temporary \ref Repo is removed from the \ref Prool
-     * upon destruction. This may ease convenient and exception safe
-     * creation of repos.
+    /** Functor removing \ref Repo from it's \ref Pool.
+     * E.g. used as dispose function in. \ref AutoDispose
+     * to provide a convenient and exception safe temporary
+     * \ref Repo.
      * \code
-     * {
-     *   TempRepo tmp( pool.addRepo( "newrepo" ) );
-     *
-     *   // Exceptions when loading Solvables into "newrepo"
-     *   // may bypass, and "newrepo" will be removed from
-     *   // the pool.
-     *
-     *   if ( keep )
-     *   {
-     *     // If you decide to keep "newrepo", simply
-     *     // clear TempRepo to prevent removal.
-     *     tmp.reset();
-     *   }
-     * }
+     *  sat::Pool satpool;
+     *  MIL << "1 " << satpool << endl;
+     *  {
+     *    AutoDispose<sat::Repo> tmprepo( (sat::Pool::EraseRepo()) );
+     *    *tmprepo = satpool.reposInsert( "A" );
+     *    tmprepo->addSolv( "sl10.1-beta7-packages.solv" );
+     *    DBG << "2 " << satpool << endl;
+     *    // Calling 'tmprepo.resetDispose();' here
+     *    // would keep the Repo.
+     *  }
+     *  MIL << "3 " << satpool << endl;
      * \endcode
-    */
-    class TempRepo : private base::NonCopyable
+     * \code
+     * 1 sat::pool(){0repos|2slov}
+     * 2 sat::pool(){1repos|2612slov}
+     * 3 sat::pool(){0repos|2slov}
+     * \endcode
+     * Leaving the block without calling <tt>tmprepo.resetDispose();</tt>
+     * before, will automatically remove the \ref Repo from it's \ref Pool.
+     */
+    struct Pool::EraseRepo
     {
-      public:
-        TempRepo( const Repo & repo_r )
-        : _repo( repo_r )
-        {}
-
-        ~TempRepo()
-        {
-          if ( _repo )
-            _repo.
-        }
-
-      private:
-        Repo _repo;
+      void operator()( Repo repo_r ) const
+      { repo_r.eraseFromPool(); }
     };
     ///////////////////////////////////////////////////////////////////
-#endif
+
     /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////

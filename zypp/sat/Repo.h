@@ -54,14 +54,22 @@ namespace zypp
 
       public:
         /** The repos name (alias?). */
-        const char * name() const;
+        std::string name() const;
+
+        bool solvablesEmpty() const;
 
         unsigned solvablesSize() const;
+
         SolvableIterator solvablesBegin() const;
+
         SolvableIterator solvablesEnd() const;
 
       public:
-        /** Load Solvables from a solv-file.
+        /** Remove this \ref Repo from it's \ref Pool. */
+        void eraseFromPool();
+
+      public:
+        /** Load \ref Solvables from a solv-file.
          * \throws Exception if loading the solv-file fails.
          */
         void addSolv( const Pathname & file_r );

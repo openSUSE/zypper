@@ -2,6 +2,7 @@
 
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Exception.h>
+#include <zypp/base/Gettext.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
@@ -396,6 +397,12 @@ namespace container
 }
 ///////////////////////////////////////////////////////////////////
 
+struct AI
+{};
+struct AA
+{
+  RW_pointer<AI> _impl;
+};
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -408,11 +415,10 @@ int main( int argc, char * argv[] )
 
   zypp::sat::Pool satpool;
   MIL << satpool << endl;
-  DBG << satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) << endl;
-  MIL << satpool << endl;
-  DBG << satpool.addRepoSolv( "1234567890.solv" ) << endl;
-  MIL << satpool << endl;
-  DBG << satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) << endl;
+  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Print() );
+
+  satpool.addRepoSolv( "sl10.1-beta7-packages.solv" );
+  satpool.addRepoSolv( "sl10.1-beta7-selections.solv" );
   MIL << satpool << endl;
 
   for_( it, satpool.reposBegin(), satpool.reposEnd() )
@@ -421,10 +427,6 @@ int main( int argc, char * argv[] )
     for_( sit, it->solvablesBegin(), it->solvablesEnd() )
       MIL << *sit << endl;
   }
-
-
-  satpool.t();
-
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

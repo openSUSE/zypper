@@ -36,10 +36,16 @@ namespace zypp
 
     const Repo Repo::norepo( NULL );
 
-    const char * Repo::name() const
+    std::string Repo::name() const
     {
-      if ( ! _repo ) return "";
+      if ( ! _repo || ! _repo->name ) return std::string();
       return _repo->name;
+    }
+
+    bool Repo::solvablesEmpty() const
+    {
+      if ( ! _repo ) return true;
+      return _repo->nsolvables;
     }
 
     unsigned Repo::solvablesSize() const
@@ -60,15 +66,24 @@ namespace zypp
       return SolvableIterator( _repo->pool->solvables+_repo->start+_repo->nsolvables );
     }
 
+    void Repo::eraseFromPool()
+    {
+      if ( ! _repo ) return;
+      ::repo_free( _repo, /*reuseids*/false );
+    }
+
     void Repo::addSolv( const Pathname & file_r )
     {
-#warning add ecxception in repo_add_solv
+      if ( ! _repo )
+      {
+        ZYPP_THROW( Exception( "Can't add solvables to noepo." ) );
+      }
+
       AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
       if ( file == NULL )
       {
         file.resetDispose();
-        throw;
-        //return Repo();
+        ZYPP_THROW( Exception( "Can't read solv-file "+file_r.asString() ) );
       }
 
       ::repo_add_solv( _repo, file );
@@ -87,6 +102,7 @@ namespace zypp
       return str << "sat::repo(" << obj.name() << ")"
           << "{"
           << obj.solvablesSize()
+          << ' ' << obj.get()->start << ' ' << obj.get()->end << ' '
           << (obj.get()->start < 0      ? "_START_":"")
           << (obj.get()->nsolvables < 0 ?"_NUMSOLV_":"")
           <<"}";

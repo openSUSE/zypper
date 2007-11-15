@@ -16,6 +16,7 @@ extern "C"
 }
 #include <iostream>
 
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
@@ -54,6 +55,9 @@ namespace zypp
     Pool::~Pool()
     {}
 
+    bool Pool::reposEmpty() const
+    { return _pool.nrepos; }
+
     unsigned Pool::reposSize() const
     { return _pool.nrepos; }
 
@@ -64,6 +68,9 @@ namespace zypp
     { return make_transform_iterator( _pool.repos+_pool.nrepos, detail::mkRepo() ); }
 
 
+    bool Pool::solvablesEmpty() const
+    { return _pool.nsolvables;}
+
     unsigned Pool::solvablesSize() const
     { return _pool.nsolvables;}
 
@@ -73,27 +80,34 @@ namespace zypp
     SolvableIterator Pool::solvablesEnd() const
     { return SolvableIterator( _pool.solvables+_pool.nsolvables ); }
 
-
-    Repo Pool::addRepo( const std::string & name_r )
+    Repo Pool::reposInsert( const std::string & name_r )
     {
-#warning Implement name check
+      Repo ret( reposFind( name_r ) );
+      if ( ret )
+        return ret;
       return ::repo_create( &_pool, name_r.c_str() );
+    }
+
+    Repo Pool::reposFind( const std::string & name_r ) const
+    {
+      for_( it, reposBegin(), reposEnd() )
+      {
+        if ( name_r == it->name() )
+          return *it;
+      }
+      return Repo();
     }
 
     Repo Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
     {
-      Repo repo( addRepo( name_r.empty() ? file_r.basename() : name_r ) );
-      try
-      {
-        repo.addSolv( file_r );
-      }
-      catch ( ... )
-      {
-#warning use RAII to avoid cleanup catch
-        ::repo_free( repo.get() );
-        throw;
-      }
-      return repo;
+      // Using a temporay repo! (The additional parenthesis are required.)
+      AutoDispose<Repo> tmprepo( (EraseRepo()) );
+      *tmprepo = reposInsert( name_r );
+      tmprepo->addSolv( file_r );
+
+      // no exceptions so we keep it:
+      tmprepo.resetDispose();
+      return tmprepo;
     }
 
     /******************************************************************
