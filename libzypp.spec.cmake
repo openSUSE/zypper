@@ -26,7 +26,7 @@ Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
 BuildRequires:  sqlite sqlite-devel libsatsolver-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libxml2-devel rpm-devel gettext-devel
-BuildRequires:	update-desktop-files
+BuildRequires:	update-desktop-files hicolor-icon-theme
 Requires:       gpg2
 
 %description
