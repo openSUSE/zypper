@@ -20,11 +20,11 @@
 
 #include <boost/logic/tribool.hpp>
 
-#include <zypp/ZYppFactory.h>
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/base/UserRequestException.h"
-#include <zypp/repo/RepoException.h>
-#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+#include "zypp/repo/RepoException.h"
+#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 
 #include "zypper-main.h"
 #include "zypper.h"

@@ -15,10 +15,10 @@
 #include <vector>
 #include <boost/regex.hpp>
 #include <boost/function.hpp>
-#include <zypp/ZYpp.h>
-#include <zypp/base/Hash.h>
-#include <zypp/cache/ResolvableQuery.h>
-#include <zypp/RepoManager.h>
+#include "zypp/ZYpp.h"
+#include "zypp/base/Hash.h"
+#include "zypp/cache/ResolvableQuery.h"
+#include "zypp/RepoManager.h"
 
 #include "zypper.h"
 #include "zypper-main.h"

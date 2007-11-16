@@ -13,8 +13,8 @@
 #include <iostream>
 #include <string>
 
-#include <zypp/Resolvable.h>
-#include <zypp/base/Exception.h>
+#include "zypp/Resolvable.h"
+#include "zypp/base/Exception.h"
 
 #include "zypper.h"
 

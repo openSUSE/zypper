@@ -15,14 +15,14 @@
 #include "zypp/ResObject.h"
 #include "zypp/Edition.h"
 
-#include <zypp/base/LogControl.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/Locale.h>
-#include <zypp/ZYpp.h>
-#include <zypp/ZYppFactory.h>
-#include <zypp/ResStore.h>
-#include <zypp/RepoInfo.h>
+#include "zypp/base/LogControl.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/Locale.h"
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/ResStore.h"
+#include "zypp/RepoInfo.h"
 
 #define ZYPP_CHECKPATCHES_LOG "/var/log/zypper.log"
 #define TOKEN_FILE "/var/lib/zypp/cache/updates_token"

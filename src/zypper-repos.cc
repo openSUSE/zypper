@@ -4,16 +4,16 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include <zypp/ZYpp.h>
+#include "zypp/ZYpp.h"
 #include "zypp/base/Logger.h"
-#include <zypp/target/store/PersistentStorage.h>
-#include <zypp/base/IOStream.h>
+#include "zypp/target/store/PersistentStorage.h"
+#include "zypp/base/IOStream.h"
 
-#include <zypp/RepoManager.h>
-#include <zypp/RepoInfo.h>
-#include <zypp/repo/RepoException.h>
-#include <zypp/parser/ParseException.h>
-#include <zypp/media/MediaException.h>
+#include "zypp/RepoManager.h"
+#include "zypp/RepoInfo.h"
+#include "zypp/repo/RepoException.h"
+#include "zypp/parser/ParseException.h"
+#include "zypp/media/MediaException.h"
 
 #include "zypper.h"
 #include "zypper-main.h"

@@ -3,16 +3,16 @@
 #include <sstream>
 #include <streambuf>
 
-#include <zypp/Patch.h>
-#include <zypp/base/LogControl.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/Locale.h>
-#include <zypp/ZYpp.h>
-#include <zypp/ZYppFactory.h>
-#include <zypp/base/Logger.h>
-#include <zypp/Digest.h>
-#include <zypp/target/store/xml_escape_parser.hpp>
+#include "zypp/Patch.h"
+#include "zypp/base/LogControl.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/Locale.h"
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/base/Logger.h"
+#include "zypp/Digest.h"
+#include "zypp/target/store/xml_escape_parser.hpp"
 
 #include "zypper-updates.h"
 

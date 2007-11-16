@@ -5,9 +5,9 @@
 #include "zypper-repos.h"
 #include "zypper-misc.h"
 
-#include <zypp/base/Algorithm.h>
-#include <zypp/RepoManager.h>
-#include <zypp/RepoInfo.h>
+#include "zypp/base/Algorithm.h"
+#include "zypp/RepoManager.h"
+#include "zypp/RepoInfo.h"
 
 using namespace std;
 using namespace boost;

@@ -16,11 +16,11 @@
 #include <stdlib.h>
 #include <iostream>
 
-#include <zypp/base/Logger.h>
-#include <zypp/ZYppCallbacks.h>
-#include <zypp/Pathname.h>
-#include <zypp/KeyRing.h>
-#include <zypp/Digest.h>
+#include "zypp/base/Logger.h"
+#include "zypp/ZYppCallbacks.h"
+#include "zypp/Pathname.h"
+#include "zypp/KeyRing.h"
+#include "zypp/Digest.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {

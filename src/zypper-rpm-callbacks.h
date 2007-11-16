@@ -15,10 +15,10 @@
 
 #include <boost/format.hpp>
 
-#include <zypp/base/Logger.h>
-#include <zypp/ZYppCallbacks.h>
-#include <zypp/Package.h>
-//#include <zypp/target/rpm/RpmCallbacks.h>
+#include "zypp/base/Logger.h"
+#include "zypp/ZYppCallbacks.h"
+#include "zypp/Package.h"
+//#include "zypp/target/rpm/RpmCallbacks.h"
 
 #include "zypper-callbacks.h"
 #include "AliveCursor.h"

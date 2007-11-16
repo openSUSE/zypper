@@ -4,9 +4,9 @@
 
 #include <boost/format.hpp>
 
-#include <zypp/ZYpp.h>
-#include <zypp/base/Algorithm.h>
-#include <zypp/Patch.h>
+#include "zypp/ZYpp.h"
+#include "zypp/base/Algorithm.h"
+#include "zypp/Patch.h"
 
 #include "zypper.h"
 #include "zypper-main.h"

@@ -17,9 +17,9 @@
 
 #include <libintl.h>
 
-#include <zypp/target/store/PersistentStorage.h>
-#include <zypp/RepoManager.h>
-#include <zypp/PathInfo.h>
+#include "zypp/target/store/PersistentStorage.h"
+#include "zypp/RepoManager.h"
+#include "zypp/PathInfo.h"
 
 #include "checkpatches-keyring-callbacks.h"
 #include "zypper-updates.h"

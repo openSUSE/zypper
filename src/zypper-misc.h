@@ -11,8 +11,8 @@
 #define ZMART_MISC_H
 
 #include <string>
-#include <zypp/ResObject.h>
-#include <zypp/PoolItem.h>
+#include "zypp/ResObject.h"
+#include "zypp/PoolItem.h"
 
 #include "zypper-tabulator.h"
 

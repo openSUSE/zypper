@@ -2,8 +2,8 @@
 
 #include <boost/format.hpp>
 
-#include <zypp/Locale.h>
-#include <zypp/base/Exception.h>
+#include "zypp/Locale.h"
+#include "zypp/base/Exception.h"
 
 #include "zypper-command.h"
 

@@ -4,23 +4,23 @@
 #include <boost/format.hpp>
 #include <boost/logic/tribool_io.hpp>
 
-#include <zypp/ZYppFactory.h>
+#include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 
-#include <zypp/Edition.h>
-#include <zypp/Patch.h>
-#include <zypp/Package.h>
-#include <zypp/SrcPackage.h>
-#include <zypp/base/Algorithm.h>
-#include <zypp/solver/detail/Helper.h>
-#include <zypp/media/MediaException.h>
-#include <zypp/FileChecker.h>
+#include "zypp/Edition.h"
+#include "zypp/Patch.h"
+#include "zypp/Package.h"
+#include "zypp/SrcPackage.h"
+#include "zypp/base/Algorithm.h"
+#include "zypp/solver/detail/Helper.h"
+#include "zypp/media/MediaException.h"
+#include "zypp/FileChecker.h"
 
-#include <zypp/RepoInfo.h>
+#include "zypp/RepoInfo.h"
 
-#include <zypp/CapFactory.h>
+#include "zypp/CapFactory.h"
 
-#include <zypp/target/store/xml_escape_parser.hpp>
+#include "zypp/target/store/xml_escape_parser.hpp"
 
 #include "zypper.h"
 #include "zypper-main.h"

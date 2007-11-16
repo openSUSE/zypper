@@ -3,7 +3,7 @@
 
 #include <boost/logic/tribool.hpp>
 
-#include <zypp/Url.h>
+#include "zypp/Url.h"
 
 /**
  * Reads known enabled repositories and stores them in gData.
