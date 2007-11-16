@@ -1121,29 +1121,23 @@ int one_command(int argc, char **argv)
   else if (command == ZypperCommand::INSTALL ||
            command == ZypperCommand::REMOVE)
   {
-    if (command == ZypperCommand::INSTALL) {
-      if (ghelp || arguments.size() < 1) {
-        cerr << specific_help;
-        return !ghelp;
-      }
-
-      gData.packages_to_install = arguments;
-
-      if (copts.count("auto-agree-with-licenses")
-          || copts.count("agree-to-third-party-licenses"))
-        gSettings.license_auto_agree = true;
+    if (ghelp)
+    {
+      cout << specific_help;
+      return ZYPPER_EXIT_OK;
     }
 
-    
-    
-    if (command == ZypperCommand::REMOVE) {
-      if (ghelp || arguments.size() < 1) {
-        cerr << specific_help;
-        return !ghelp;
-      }
-
-      gData.packages_to_uninstall = arguments;
+    if (arguments.size() < 1)
+    {
+      cerr << _("Too few arguments.");
+      cerr << " " << _("At least one package name is required.") << endl << endl;
+      cerr << specific_help;
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
     }
+
+    if (copts.count("auto-agree-with-licenses")
+        || copts.count("agree-to-third-party-licenses"))
+      gSettings.license_auto_agree = true;
 
     // check root user
     if (geteuid() != 0)

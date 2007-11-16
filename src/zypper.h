@@ -61,8 +61,6 @@ struct RuntimeData
   std::list<zypp::RepoInfo> repos;
   int patches_count;
   int security_patches_count;
-  std::vector<std::string> packages_to_install;
-  std::vector<std::string> packages_to_uninstall; 
   zypp::ResStore repo_resolvables;
   zypp::ResStore target_resolvables;
   zypp::RepoInfo current_repo;
