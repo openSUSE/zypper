@@ -21,12 +21,12 @@
 #include <boost/logic/tribool.hpp>
 
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/LogControl.h>
 
 #include "zypp/base/UserRequestException.h"
 #include <zypp/repo/RepoException.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
+#include "zypper-main.h"
 #include "zypper.h"
 #include "zypper-repos.h"
 #include "zypper-misc.h"
@@ -42,10 +42,6 @@
 #include "zypper-command.h"
 #include "zypper-utils.h"
 
-#define ZYPPER_LOG "/var/log/zypper.log"
-#undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
-
 using namespace std;
 using namespace zypp;
 using namespace zypp::detail;
@@ -57,6 +53,7 @@ Settings gSettings;
 parsed_opts gopts; // global options
 parsed_opts copts; // command options
 ZypperCommand command(ZypperCommand::NONE);
+bool ghelp = false;
 
 ostream no_stream(NULL);
 
@@ -66,8 +63,6 @@ MediaCallbacks media_callbacks;
 KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
 
-
-bool ghelp = false;
 
 /*
  * parses global options, returns the command
@@ -1691,6 +1686,8 @@ string readline_getline ()
 
 void command_shell ()
 {
+  gSettings.in_shell = true;
+
   string histfile;
   try {
     Pathname p (getenv ("HOME"));
@@ -1746,56 +1743,6 @@ void command_shell ()
 
   if (!histfile.empty ())
     write_history (histfile.c_str ());
-}
-
-// ----------------------------------------------------------------------------
-
-int main(int argc, char **argv)
-{
-  struct Bye {
-    ~Bye() {
-      cerr_vv << "Exiting main()" << endl;
-    }
-  } say_goodbye __attribute__ ((__unused__));
-
-  // set locale
-  setlocale (LC_ALL, "");
-  bindtextdomain (PACKAGE, LOCALEDIR);
-  textdomain (PACKAGE);
-
-  // logging
-  const char *logfile = getenv("ZYPP_LOGFILE");
-  if (logfile == NULL)
-    logfile = ZYPPER_LOG;
-  zypp::base::LogControl::instance().logfile( logfile );
-
-  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
-
-  // parse global options and the command
-  int ret = process_globals (argc, argv);
-  if (ret != ZYPPER_EXIT_OK)
-    return ret;
-
-  switch(command.toEnum())
-  {
-  case ZypperCommand::SHELL_e:
-    command_shell();
-    return ZYPPER_EXIT_OK;
-
-  case ZypperCommand::NONE_e:
-  {
-    if (ghelp)
-      return ZYPPER_EXIT_OK;
-    else
-      return ZYPPER_EXIT_ERR_SYNTAX;
-  }
-
-  default:
-    return safe_one_command(argc, argv);
-  }
-
-  cerr_v << "This line should never be reached." << endl;
-  return ZYPPER_EXIT_ERR_BUG;
 }
 
 // Local Variables:

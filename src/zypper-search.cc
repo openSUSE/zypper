@@ -1,6 +1,7 @@
 #include "zypper-search.h"
 
 #include "zypper.h"
+#include "zypper-main.h"
 #include "zypper-repos.h"
 #include "zypper-misc.h"
 

@@ -9,6 +9,7 @@
 #include <zypp/Patch.h>
 
 #include "zypper.h"
+#include "zypper-main.h"
 #include "zypper-utils.h"
 #include "zypper-misc.h"
 

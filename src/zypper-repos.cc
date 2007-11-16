@@ -5,6 +5,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include <zypp/ZYpp.h>
+#include "zypp/base/Logger.h"
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/base/IOStream.h>
 
@@ -15,6 +16,7 @@
 #include <zypp/media/MediaException.h>
 
 #include "zypper.h"
+#include "zypper-main.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 #include "zypper-callbacks.h"

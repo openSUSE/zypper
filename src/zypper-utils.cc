@@ -1,10 +1,11 @@
-#include <zypp/media/MediaManager.h>
+#include "zypp/base/Logger.h"
+#include "zypp/media/MediaManager.h"
 
-#include "zypper.h"
+#include "zypper-main.h"
+#include "zypper-utils.h"
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::detail;
 
 /// tell the user to report a bug, and how
 // (multiline, with endls)

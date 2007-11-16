@@ -5,6 +5,7 @@
 #include <boost/logic/tribool_io.hpp>
 
 #include <zypp/ZYppFactory.h>
+#include "zypp/base/Logger.h"
 
 #include <zypp/Edition.h>
 #include <zypp/Patch.h>
@@ -22,6 +23,7 @@
 #include <zypp/target/store/xml_escape_parser.hpp>
 
 #include "zypper.h"
+#include "zypper-main.h"
 #include "zypper-utils.h"
 #include "zypper-getopt.h"
 #include "zypper-misc.h"

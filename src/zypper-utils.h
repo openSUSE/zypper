@@ -4,8 +4,8 @@
 #include <ostream>
 #include <string>
 
-#include <zypp/Url.h>
-#include <zypp/Resolvable.h>
+#include "zypp/Url.h"
+#include "zypp/Resolvable.h"
 
 /**
  * Write a suggestion to report a bug to the specified stream.

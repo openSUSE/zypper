@@ -5,6 +5,7 @@ ADD_DEFINITIONS (
 
 SET (zypper_HEADERS
   zypper.h
+  zypper-main.h
   zypper-command.h
   zypper-getopt.h
   zypper-repos.h
@@ -22,6 +23,7 @@ SET (zypper_HEADERS
 
 SET( zypper_SRCS
   zypper.cc
+  zypper-main.cc
   zypper-command.cc
   zypper-getopt.cc
   zypper-repos.cc

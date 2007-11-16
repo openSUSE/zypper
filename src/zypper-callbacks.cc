@@ -3,8 +3,11 @@
 
 #include <boost/format.hpp>
 
+#include "zypp/base/Logger.h"
+
 #include "AliveCursor.h"
 #include "zypper.h"
+#include "zypper-main.h"
 
 using namespace std;
 using namespace boost;

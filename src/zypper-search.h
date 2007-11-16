@@ -21,6 +21,7 @@
 #include <zypp/RepoManager.h>
 
 #include "zypper.h"
+#include "zypper-main.h"
 #include "zypper-utils.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
