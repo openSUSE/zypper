@@ -70,9 +70,19 @@ namespace zypp
       }
       ::setlocale( LC_TIME, needLocale.c_str() );
     }
+    else
+    {
+      // no need to change the locale
+      thisLocale.clear();
+    }
 
     if ( ! strftime( buf, 1024, format_r.c_str(), localtime( &_date ) ) )
       *buf = '\0';
+
+    if ( ! thisLocale.empty() )
+    {
+      ::setlocale( LC_TIME, thisLocale.c_str() );
+    }
 
     return buf;
   }
