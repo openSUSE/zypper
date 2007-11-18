@@ -13,6 +13,7 @@
 extern "C"
 {
 #include <satsolver/pool.h>
+#include <satsolver/repo.h>
 }
 #include <iostream>
 
