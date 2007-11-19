@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 19 15:18:57 CET 2007 - tgoettlicher@suse.de
+
+- preserve lang in zypp-checkpatches-wrapper (#333882)
+- r7864
+
+-------------------------------------------------------------------
 Mon Nov 12 17:43:12 CET 2007 - jkupec@suse.cz
 
 - dist-upgrade added (experimental) FATE #302460
