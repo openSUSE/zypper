@@ -20,6 +20,8 @@ const char *arg2 = "--terse";
 const char *arg3 = "-q";
 const char *arg4 = "xu";
 
+char *lang = NULL;
+
 int main (void)
 {
     /* see http://rechner.lst.de/~okir/blackhats/node41.html */
@@ -43,12 +45,18 @@ int main (void)
 	perror ("chdir");
 	return WRAPPER_ERROR;
     }
+
+    /* save language */
+    lang = getenv("LANG");
+
     /* do not look at argv... done */
     /* clear environment */
     if (clearenv ()) {
 	fprintf (stderr, "clearenv failed\n");
 	return WRAPPER_ERROR;
     }
+
+
     /* set minimal environment... done */
     /* prevent the user from sending signals */
 
@@ -71,6 +79,10 @@ int main (void)
     }
 
     umask(0022);
+
+    /* set language */
+    if (lang != NULL)
+	setenv("LANG", lang, 1);
 
     /* execute the real application */
     execl (app, app, arg1, arg2, arg3, arg4, (char *) NULL);
