@@ -390,8 +390,8 @@ Resolver::problems (const bool ignoreValidSolution) const
     if (!_tryAllPossibilities       // a second run with ALL possibilities has not been tried 
 	&& skippedPossibilities) { // possible other solutions skipped
 	// give the user an additional solution for trying all branches
-	string what = _("No valid solution found with just resolvables of best architecture.");
-	string details = _("With this run only resolvables with the best architecture have been regarded.\n");
+	string what = _("No valid solution found with just resolvables which suitalbe best suitable for your system.");
+	string details = _("With this run only resolvables with the best fit have been regarded.\n");
 	details = details + _("Regarding all possible resolvables takes time, but can come to a valid result.");
 	ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 	problem->addSolution (new ProblemSolutionAllBranches (problem));

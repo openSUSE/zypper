@@ -1546,8 +1546,8 @@ struct RequirementMet
 	    }
 	}
 
-//	ERR << "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
-//	  capability << "] -> " <<  (flag ? "true" : "false") << endl;
+//	_XDEBUG( "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
+//	  "] -> " <<  (flag ? "true" : "false") );
 	
 	if ( (installed // Checking as long as we have found an installed item
 	      && !*installed)
