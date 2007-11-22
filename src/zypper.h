@@ -1,6 +1,9 @@
 #ifndef ZYPPER_H
 #define ZYPPER_H
 
+#include <string>
+#include <vector>
+
 #include "zypp/ResStore.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
@@ -23,14 +26,15 @@ public:
   void doCommand();
 
   // setters & getters
-  parsed_opts gOpts() { return _gopts; }
-  parsed_opts cOpts() { return _copts; }
-  ZypperCommand command() { return _command; }
-  int exitCode() { return _exit_code; }
+  const parsed_opts & gOpts() const { return _gopts; }
+  const parsed_opts & cOpts() const { return _copts; }
+  const ZypperCommand & command() const { return _command; }
+  const std::string & commandHelp() const { return _command_help; }
+  int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
-  bool runningShell() { return _running_shell; }
-  bool runningHelp() { return _running_help; }
-  
+  bool runningShell() const { return _running_shell; }
+  bool runningHelp() const { return _running_help; }
+
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; } 
 
@@ -42,6 +46,8 @@ private:
   parsed_opts   _gopts;
   parsed_opts   _copts;
   ZypperCommand _command;
+  std::vector<std::string> _arguments;
+  std::string _command_help;
 
   int   _exit_code;
   bool  _running_shell;

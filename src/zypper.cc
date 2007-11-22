@@ -57,7 +57,8 @@ bool ghelp = false;
 Zypper::Zypper()
   : _argc(0), _argv(NULL),
     _command(ZypperCommand::NONE),
-    _exit_code(ZYPPER_EXIT_OK), _running_shell(false)
+    _exit_code(ZYPPER_EXIT_OK), _running_shell(false),
+    _sh_argc(0), _sh_argv(NULL)
 {
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
 }
@@ -111,6 +112,8 @@ int Zypper::main(int argc, char ** argv)
  */
 void Zypper::processGlobalOptions()
 {
+  MIL << "START" << endl;
+
   static struct option global_options[] = {
     {"help",            no_argument,       0, 'h'},
     {"verbose",         no_argument,       0, 'v'},
@@ -233,6 +236,47 @@ void Zypper::processGlobalOptions()
   DBG << "cache dir = " << gSettings.rm_options.repoCachePath << endl;
   DBG << "raw cache dir = " << gSettings.rm_options.repoRawCachePath << endl;
 
+  if (gopts.count("terse")) 
+  {
+    gSettings.machine_readable = true;
+    cout << "<?xml version='1.0'?>" << endl;
+    cout << "<stream>" << endl;
+  }
+
+  if (gopts.count("disable-repositories") ||
+      gopts.count("disable-system-sources"))
+  {
+    MIL << "Repositories disabled, using target only." << endl;
+    cout_n <<
+        _("Repositories disabled, using the database of installed packages only.")
+        << endl;
+    gSettings.disable_system_sources = true;
+  }
+  else
+  {
+    MIL << "System sources enabled" << endl;
+  }
+
+  if (gopts.count("disable-system-resolvables"))
+  {
+    MIL << "System resolvables disabled" << endl;
+    cout_v << _("Ignoring installed resolvables...") << endl;
+    gSettings.disable_system_resolvables = true;
+  }
+
+  if (gopts.count("source"))
+  {
+    list<string> sources = gopts["source"];
+    for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
+    {
+      Url url = make_url (*it);
+      if (!url.isValid())
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+      gSettings.additional_sources.push_back(url); 
+    }
+  }
+
   // testing option
   if (gopts.count("opt")) {
     cout << "Opt arg: ";
@@ -301,11 +345,15 @@ void Zypper::processGlobalOptions()
   }
 
   _exit_code = ZYPPER_EXIT_OK;
+
+  MIL << "DONE" << endl;
 }
 
 
 void Zypper::commandShell()
 {
+  MIL << "Entering the shell" << endl;
+
   _running_shell = true;
 
   string histfile;
@@ -363,6 +411,8 @@ void Zypper::commandShell()
 
   if (!histfile.empty ())
     write_history (histfile.c_str ());
+
+  MIL << "Leaving the shell" << endl;
 }
 
 
@@ -372,6 +422,7 @@ void Zypper::safeDoCommand()
 {
   try
   {
+    processCommandOptions();
     doCommand();
     ::command = _command = ZypperCommand::NONE;
   }
@@ -394,14 +445,13 @@ void Zypper::safeDoCommand()
     cout << "</stream>" << endl;
 }
 
-/// process one command from the OS shell or the zypper shell
-void Zypper::doCommand()
+// === command-specific options ===
+void Zypper::processCommandOptions()
 {
-  // === command-specific options ===
+  MIL << "START" << endl;
 
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
-  string specific_help;
 
 /*  string help_global_source_options = _(
       "  Repository options:\n"
@@ -418,20 +468,24 @@ void Zypper::doCommand()
   if ( (command() == ZypperCommand::HELP) && (argc() > 1) )
   try {
     ghelp = true;
-    command() = ZypperCommand(argv()[1]);
+    _command = ZypperCommand(argv()[1]);
   }
   catch (Exception & ex) {
     // in case of an unknown command specified to help, an exception is thrown
   }
 
-  if (command() == ZypperCommand::HELP)
+  switch (command().toEnum())
+  {
+
+  case ZypperCommand::HELP_e:
   {
     cout << _("Type 'zypper help' to get a list of global options and commands.") << endl;
     cout << _("Type 'zypper help <command>' to get a command-specific help.") << endl;
-    setExitCode(ZYPPER_EXIT_OK);
-    return;
+    break;
   }
-  else if (command() == ZypperCommand::INSTALL) {
+
+  case ZypperCommand::INSTALL_e:
+  {
     static struct option install_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -452,7 +506,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    specific_help = _(
+    _command_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (package, patch, pattern, product) or at least leave also their
       // originals, since they are expected untranslated on the command line
@@ -472,8 +526,11 @@ void Zypper::doCommand()
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::REMOVE) {
+
+  case ZypperCommand::REMOVE_e:
+  {
     static struct option remove_options[] = {
       {"repo",       required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -490,7 +547,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    specific_help = _(
+    _command_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (see the install command comment) 
       "remove (rm) [options] <capability> ...\n"
@@ -506,22 +563,28 @@ void Zypper::doCommand()
       "    --debug-solver     Create solver test case for debugging\n"  
       "-R, --force-resolution Force the solver to find a solution (even agressive)\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::SRC_INSTALL) {
+  
+  case ZypperCommand::SRC_INSTALL_e:
+  {
     static struct option src_install_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = src_install_options;
-    specific_help = _(
+    _command_help = _(
       "source-install (si) <name> ...\n"
       "\n"
       "Install source packages specified by their names.\n"
       "\n"
       "This command has no additional options.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::ADD_REPO) {
+
+  case ZypperCommand::ADD_REPO_e:
+  {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disabled", no_argument, 0, 'd'},
@@ -533,7 +596,7 @@ void Zypper::doCommand()
     specific_options = service_add_options;
     // TranslatorExplanation don't translate the repo types (well, the plaindir)
     // since they must be used in their original shape
-    specific_help = _(
+    _command_help = _(
       "addrepo (ar) [options] <URI> <alias>\n"
       "\n"
       "Add repository specified by URI to the system and assing the specified alias to it.\n"
@@ -544,15 +607,18 @@ void Zypper::doCommand()
       "-d, --disabled          Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::LIST_REPOS) {
+
+  case ZypperCommand::LIST_REPOS_e:
+  {
     static struct option service_list_options[] = {
       {"export", required_argument, 0, 'e'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
-    specific_help = _(
+    _command_help = _(
       "repos (lr)\n"
       "\n"
       "List all defined repositories.\n"
@@ -560,8 +626,11 @@ void Zypper::doCommand()
       "  Command options:\n"
       "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::REMOVE_REPO) {
+
+  case ZypperCommand::REMOVE_REPO_e:
+  {
     static struct option service_delete_options[] = {
       {"help", no_argument, 0, 'h'},
       {"loose-auth", no_argument, 0, 0},
@@ -569,7 +638,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = service_delete_options;
-    specific_help = _(
+    _command_help = _(
       "removerepo (rr) [options] <alias|URL>\n"
       "\n"
       "Remove repository specified by alias or URL.\n"
@@ -578,22 +647,28 @@ void Zypper::doCommand()
       "    --loose-auth\tIgnore user authentication data in the URL\n"
       "    --loose-query\tIgnore query string in the URL\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::RENAME_REPO) {
+
+  case ZypperCommand::RENAME_REPO_e:
+  {
     static struct option service_rename_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = service_rename_options;
-    specific_help = _(
+    _command_help = _(
       "renamerepo [options] <alias> <new-alias>\n"
       "\n"
       "Assign new alias to the repository specified by alias.\n"
       "\n"
       "This command has no additional options.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::MODIFY_REPO) {
+
+  case ZypperCommand::MODIFY_REPO_e:
+  {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
       {"disable", no_argument, 0, 'd'},
@@ -603,7 +678,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
-    specific_help = _(
+    _command_help = _(
       "modifyrepo (mr) <options> <alias>\n"
       "\n"
       "Modify properties of the repository specified by alias.\n"
@@ -614,8 +689,11 @@ void Zypper::doCommand()
       "-a, --enable-autorefresh  Enable auto-refresh of the repository\n"
       "    --disable-autorefresh Disable auto-refresh of the repository\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::REFRESH) {
+
+  case ZypperCommand::REFRESH_e:
+  {
     static struct option refresh_options[] = {
       {"force", no_argument, 0, 'f'},
       {"force-build", no_argument, 0, 'b'},
@@ -626,7 +704,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = refresh_options;
-    specific_help = _(
+    _command_help = _(
       "refresh (ref) [alias|#] ...\n"
       "\n"
       "Refresh repositories specified by their alias or number."
@@ -639,8 +717,11 @@ void Zypper::doCommand()
       "-B, --build-only        Only build the database, don't download metadata.\n"
       "-D, --download-only     Only download raw metadata, don't build the database\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::LIST_UPDATES) {
+
+  case ZypperCommand::LIST_UPDATES_e:
+  {
     static struct option list_updates_options[] = {
       {"repo",        required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -651,7 +732,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-    specific_help = _(
+    _command_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (see the install command comment) 
       "list-updates [options]\n"
@@ -663,13 +744,16 @@ void Zypper::doCommand()
       "-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
       "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::UPDATE) {
+  
+  case ZypperCommand::UPDATE_e:
+  {
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog",                   required_argument, 0, 'c'},
-      {"type",		            required_argument, 0, 't'},
+      {"type",                      required_argument, 0, 't'},
       // rug compatibility option, we have global --non-interactive
       // note: rug used this uption only to auto-answer the 'continue with install?' prompt.
       {"no-confirm",                no_argument,       0, 'y'},
@@ -684,7 +768,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    specific_help = _(
+    _command_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (see the install command comment) 
       "update (up) [options]\n"
@@ -702,8 +786,11 @@ void Zypper::doCommand()
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::DIST_UPGRADE) {
+
+  case ZypperCommand::DIST_UPGRADE_e:
+  {
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -712,7 +799,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = dupdate_options;
-    specific_help = _(
+    _command_help = _(
       "dist-upgrade (dup) [options]\n"
       "\n"
       "Perform a distribution upgrade.\n"
@@ -724,8 +811,11 @@ void Zypper::doCommand()
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::SEARCH) {
+
+  case ZypperCommand::SEARCH_e:
+  {
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
@@ -748,7 +838,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = search_options;
-    specific_help = _(
+    _command_help = _(
       // TranslatorExplanation don't translate the resolvable types
       // (see the install command comment) 
       "search [options] [querystring...]\n"
@@ -772,8 +862,11 @@ void Zypper::doCommand()
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::PATCH_CHECK) {
+
+  case ZypperCommand::PATCH_CHECK_e:
+  {
     static struct option patch_check_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -782,7 +875,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = patch_check_options;
-    specific_help = _(
+    _command_help = _(
       "patch-check\n"
       "\n"
       "Check for available patches\n"
@@ -791,8 +884,11 @@ void Zypper::doCommand()
       "\n"
       "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::SHOW_PATCHES) {
+
+  case ZypperCommand::SHOW_PATCHES_e:
+  {
     static struct option patches_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -801,7 +897,7 @@ void Zypper::doCommand()
       {0, 0, 0, 0}
     };
     specific_options = patches_options;
-    specific_help = _(
+    _command_help = _(
       "patches\n"
       "\n"
       "List all available patches\n"
@@ -810,8 +906,11 @@ void Zypper::doCommand()
       "\n"
       "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::INFO) {
+
+  case ZypperCommand::INFO_e:
+  {
     static struct option info_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -821,7 +920,7 @@ void Zypper::doCommand()
     };
     specific_options = info_options;
     //! \todo -t option is missing (10.3+)
-    specific_help = _(
+    _command_help = _(
       "info <name> ...\n"
       "\n"
       "Show full information for packages\n"
@@ -830,45 +929,54 @@ void Zypper::doCommand()
       "\n"
       "-r, --repo <alias>  Work only with the repository specified by the alias.\n"
     );
+    break;
   }
+
   // rug compatibility command, we have zypper info [-t <res_type>]
-  else if (command() == ZypperCommand::RUG_PATCH_INFO) {
+  case ZypperCommand::RUG_PATCH_INFO_e:
+  {
     static struct option patch_info_options[] = {
       {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = patch_info_options;
-    specific_help = _(
+    _command_help = _(
       "patch-info <patchname> ...\n"
       "\n"
       "Show detailed information for patches\n"
       "\n"
       "This is a rug compatibility alias for 'zypper info -t patch'\n"
     );
+    break;
   }
-  else if (command() == ZypperCommand::MOO) {
+
+  case ZypperCommand::MOO_e:
+  {
     static struct option moo_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = moo_options;
-    specific_help = _(
+    _command_help = _(
       "moo\n"
       "\n"
       "Show an animal\n"
       "\n"
       "This command has no additional options.\n"
       );
+    break;
   }
-  else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+
+  case ZypperCommand::XML_LIST_UPDATES_PATCHES_e:
+  {
     static struct option xml_updates_options[] = {
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = xml_updates_options;
-    specific_help = _(
+    _command_help = _(
       "xml-updates\n"
       "\n"
       "Show updates and patches in xml format\n"
@@ -876,9 +984,16 @@ void Zypper::doCommand()
       "  Command options:\n"
       "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
     );
+    break;
   }
 
-  vector<string> arguments;
+  default:
+  {
+    ERR << "Unknown or unexpected command" << endl;
+    //report_problem("Unexpected program flow.","");
+    report_a_bug(cerr);
+  }
+  }
 
   // parse command options
   if (!ghelp)
@@ -887,65 +1002,26 @@ void Zypper::doCommand()
     if (copts.count("_unknown"))
     {
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+      ERR << "Unknown command, returning." << endl;
       return;
     }
+
+    MIL << "Done parsing options." << endl;
 
     // treat --help command option like global --help option from now on
     // i.e. when used together with command to print command specific help
     ghelp = ghelp || copts.count("help");
-  
+
     if (optind < argc()) {
       cout_v << _("Non-option program arguments: ");
       while (optind < argc()) {
         string argument = argv()[optind++];
         cout_v << "'" << argument << "' ";
-        arguments.push_back (argument);
+        _arguments.push_back (argument);
       }
       cout_v << endl;
     }
 
-    // === process options ===
-  
-    if (gopts.count("terse")) 
-    {
-      gSettings.machine_readable = true;
-      cout << "<?xml version='1.0'?>" << endl;
-      cout << "<stream>" << endl;
-    }
-  
-    if (gopts.count("disable-repositories") ||
-        gopts.count("disable-system-sources"))
-    {
-      MIL << "Repositories disabled, using target only." << endl;
-      cout_n <<
-          _("Repositories disabled, using the database of installed packages only.")
-          << endl;
-      gSettings.disable_system_sources = true;
-    }
-    else
-    {
-      MIL << "System sources enabled" << endl;
-    }
-  
-    if (gopts.count("disable-system-resolvables"))
-    {
-      MIL << "System resolvables disabled" << endl;
-      cout_v << _("Ignoring installed resolvables...") << endl;
-      gSettings.disable_system_resolvables = true;
-    }
-  
-    if (gopts.count("source")) {
-      list<string> sources = gopts["source"];
-      for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
-      {
-        Url url = make_url (*it);
-        if (!url.isValid())
-  	setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-        return;
-        gSettings.additional_sources.push_back(url); 
-      }
-    }
-  
     // here come commands that need the lock
     try {
       if (command() == ZypperCommand::LIST_REPOS)
@@ -971,6 +1047,12 @@ void Zypper::doCommand()
     }
   }
 
+  MIL << "Done " << endl;
+}
+
+/// process one command from the OS shell or the zypper shell
+void Zypper::doCommand()
+{
   ResObject::Kind kind;
 
 
@@ -980,7 +1062,7 @@ void Zypper::doCommand()
 
   if (command() == ZypperCommand::MOO)
   {
-    if (ghelp) { cout << specific_help << endl; return; }
+    if (ghelp) { cout << _command_help << endl; return; }
 
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     cout_n << _("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_") << endl;
@@ -991,7 +1073,7 @@ void Zypper::doCommand()
   
   else if (command() == ZypperCommand::LIST_REPOS)
   {
-    if (ghelp) { cout << specific_help << endl; return; }
+    if (ghelp) { cout << _command_help << endl; return; }
     // if (ghelp) display_command_help()
 
     list_repos();
@@ -1004,7 +1086,7 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);return;
     }
 
@@ -1016,9 +1098,9 @@ void Zypper::doCommand()
     }
 
     // too many arguments
-    if (arguments.size() > 2)
+    if (_arguments.size() > 2)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
@@ -1044,15 +1126,15 @@ void Zypper::doCommand()
       string type = copts.count("type") ? copts["type"].front() : "";
   
       // display help message if insufficient info was given
-      if (arguments.size() < 2)
+      if (_arguments.size() < 2)
       {
         cerr << _("Too few arguments. At least URL and alias are required.") << endl;
         ERR << "Too few arguments. At least URL and alias are required." << endl;
-        cout_n << specific_help;
+        cout_n << _command_help;
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
       }
 
-      Url url = make_url (arguments[0]);
+      Url url = make_url (_arguments[0]);
       if (!url.isValid())
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
 
@@ -1066,7 +1148,7 @@ void Zypper::doCommand()
       cond_init_target ();
 
       setExitCode(add_repo_by_url(
-          url, arguments[1]/*alias*/, type, enabled, refresh));
+          url, _arguments[1]/*alias*/, type, enabled, refresh));
       return;
     }
     catch (const repo::RepoUnknownTypeException & e)
@@ -1086,7 +1168,7 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);return;
     }
 
@@ -1097,26 +1179,26 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);return;
     }
 
-    if (arguments.size() < 1)
+    if (_arguments.size() < 1)
     {
       cerr << _("Required argument missing.") << endl;
       ERR << "Required argument missing." << endl;
       cout_n << _("Usage") << ':' << endl;
-      cout_n << specific_help;
+      cout_n << _command_help;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
     // too many arguments
     //! \todo allow to specify multiple repos to delete
-    else if (arguments.size() > 1)
+    else if (_arguments.size() > 1)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
     warn_if_zmd ();
 
-    bool found = remove_repo(arguments[0]);
+    bool found = remove_repo(_arguments[0]);
     if (found)
     {
       setExitCode(ZYPPER_EXIT_OK);
@@ -1127,7 +1209,7 @@ void Zypper::doCommand()
     cout_v << _("Repository not found by alias, trying delete by URL...") << endl;
 
     Url url;
-    try { url = Url (arguments[0]); }
+    try { url = Url (_arguments[0]); }
     catch ( const Exception & excpt_r )
     {
       ZYPP_CAUGHT( excpt_r );
@@ -1170,7 +1252,7 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1183,18 +1265,18 @@ void Zypper::doCommand()
       return;
     }
 
-    if (arguments.size() < 2)
+    if (_arguments.size() < 2)
     {
       cerr << _("Too few arguments. At least URL and alias are required.") << endl;
       ERR << "Too few arguments. At least URL and alias are required." << endl;
-      cout_n << specific_help;
+      cout_n << _command_help;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
     // too many arguments
-    else if (arguments.size() > 2)
+    else if (_arguments.size() > 2)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1203,7 +1285,7 @@ void Zypper::doCommand()
     warn_if_zmd ();
     try {
       // also stores it
-      rename_repo(arguments[0], arguments[1]);
+      rename_repo(_arguments[0], _arguments[1]);
     }
     catch ( const Exception & excpt_r )
     {
@@ -1222,7 +1304,7 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1235,23 +1317,23 @@ void Zypper::doCommand()
       return;
     }
 
-    if (arguments.size() < 1)
+    if (_arguments.size() < 1)
     {
       cerr << _("Alias is a required argument.") << endl;
       ERR << "Na alias argument given." << endl;
-      cout_n << specific_help;
+      cout_n << _command_help;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
     // too many arguments
-    if (arguments.size() > 1)
+    if (_arguments.size() > 1)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
 
-    modify_repo(arguments[0]);
+    modify_repo(_arguments[0]);
   }
 
   // --------------------------( refresh )------------------------------------
@@ -1260,7 +1342,7 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1273,7 +1355,7 @@ void Zypper::doCommand()
       return;
     }
 
-    setExitCode(refresh_repos(arguments));
+    setExitCode(refresh_repos(_arguments));
     return;
   }
 
@@ -1284,16 +1366,16 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
-    if (arguments.size() < 1)
+    if (_arguments.size() < 1)
     {
       cerr << _("Too few arguments.");
       cerr << " " << _("At least one package name is required.") << endl << endl;
-      cerr << specific_help;
+      cerr << _command_help;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1354,8 +1436,8 @@ void Zypper::doCommand()
     bool by_capability = false; // install by name by default
     if (copts.count("capability"))
       by_capability = true;
-    for ( vector<string>::const_iterator it = arguments.begin();
-          it != arguments.end(); ++it ) {
+    for ( vector<string>::const_iterator it = _arguments.begin();
+          it != _arguments.end(); ++it ) {
       if (by_capability)
         mark_by_capability (install_not_remove, kind, *it);
       else
@@ -1391,12 +1473,12 @@ void Zypper::doCommand()
   {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
-    if (arguments.size() < 1)
+    if (_arguments.size() < 1)
     {
       cerr << _("Source package name is a required argument.") << endl;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
@@ -1413,7 +1495,7 @@ void Zypper::doCommand()
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(false /* don't load to pool */);
 
-    setExitCode(source_install(arguments));
+    setExitCode(source_install(_arguments));
     return;
   }
 
@@ -1425,7 +1507,7 @@ void Zypper::doCommand()
 
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1481,7 +1563,7 @@ void Zypper::doCommand()
     Table t;
     t.style(Ascii);
 
-    ZyppSearch search( God, options, arguments );
+    ZyppSearch search( God, options, _arguments );
     FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
 
     search.doSearch( callback, callback );
@@ -1507,15 +1589,15 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::PATCH_CHECK) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
     // too many arguments
-    if (arguments.size() > 0)
+    if (_arguments.size() > 0)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1558,15 +1640,15 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::SHOW_PATCHES) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
     // too many arguments
-    if (arguments.size() > 0)
+    if (_arguments.size() > 0)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1590,15 +1672,15 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::LIST_UPDATES) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
     // too many arguments
-    if (arguments.size() > 0)
+    if (_arguments.size() > 0)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1642,7 +1724,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1673,7 +1755,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::UPDATE) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1687,9 +1769,9 @@ void Zypper::doCommand()
     }
 
     // too many arguments
-    if (arguments.size() > 0)
+    if (_arguments.size() > 0)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1760,7 +1842,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::DIST_UPGRADE) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
@@ -1774,9 +1856,9 @@ void Zypper::doCommand()
     }
 
     // too many arguments
-    if (arguments.size() > 0)
+    if (_arguments.size() > 0)
     {
-      report_too_many_arguments(specific_help);
+      report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1823,17 +1905,17 @@ void Zypper::doCommand()
            command() == ZypperCommand::RUG_PATCH_INFO) {
     if (ghelp)
     {
-      cout << specific_help;
+      cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
-    if (arguments.size() < 1)
+    if (_arguments.size() < 1)
     {
       cerr << _("Required argument missing.") << endl;
       ERR << "Required argument missing." << endl;
       cout_n << _("Usage") << ':' << endl;
-      cout_n << specific_help;
+      cout_n << _command_help;
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -1848,7 +1930,7 @@ void Zypper::doCommand()
     cond_load_resolvables ();
     establish ();
 
-    printInfo(command(),arguments);
+    printInfo(command(),_arguments);
 
     setExitCode(ZYPPER_EXIT_OK);
     return;
