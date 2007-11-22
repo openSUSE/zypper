@@ -6,11 +6,20 @@
 #include "zypper-main.h"
 #include "zypper.h"
 
-#define ZYPPER_LOG "/var/log/zypper.log"
-#undef  ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
+#include "zypper-rpm-callbacks.h"
+#include "zypper-keyring-callbacks.h"
+#include "zypper-repo-callbacks.h"
+#include "zypper-media-callbacks.h"
 
 using namespace std;
+
+ostream no_stream(NULL);
+
+RpmCallbacks rpm_callbacks;
+SourceCallbacks source_callbacks;
+MediaCallbacks media_callbacks;
+KeyRingCallbacks keyring_callbacks;
+DigestCallbacks digest_callbacks;
 
 int main(int argc, char **argv)
 {
@@ -31,31 +40,6 @@ int main(int argc, char **argv)
     logfile = ZYPPER_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
 
-  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
-
-  // parse global options and the command
-  int ret = process_globals (argc, argv);
-  if (ret != ZYPPER_EXIT_OK)
-    return ret;
-
-  switch(command.toEnum())
-  {
-  case ZypperCommand::SHELL_e:
-    command_shell();
-    return ZYPPER_EXIT_OK;
-
-  case ZypperCommand::NONE_e:
-  {
-    if (ghelp)
-      return ZYPPER_EXIT_OK;
-    else
-      return ZYPPER_EXIT_ERR_SYNTAX;
-  }
-
-  default:
-    return safe_one_command(argc, argv);
-  }
-
-  cerr_v << "This line should never be reached." << endl;
-  return ZYPPER_EXIT_ERR_BUG;
+  Zypper zypper;
+  return zypper.main(argc, argv);
 }

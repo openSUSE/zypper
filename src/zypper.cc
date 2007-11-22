@@ -15,12 +15,13 @@
 #include <iterator>
 
 #include <unistd.h>
-#include <readline/readline.h>
 #include <readline/history.h>
 
 #include <boost/logic/tribool.hpp>
+#include <boost/format.hpp>
 
 #include "zypp/ZYppFactory.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/base/UserRequestException.h"
 #include "zypp/repo/RepoException.h"
@@ -31,16 +32,13 @@
 #include "zypper-repos.h"
 #include "zypper-misc.h"
 
-#include "zypper-rpm-callbacks.h"
-#include "zypper-keyring-callbacks.h"
-#include "zypper-repo-callbacks.h"
-#include "zypper-media-callbacks.h"
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
 #include "zypper-info.h"
 #include "zypper-getopt.h"
 #include "zypper-command.h"
 #include "zypper-utils.h"
+#include "zypper-callbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -55,14 +53,55 @@ parsed_opts copts; // command options
 ZypperCommand command(ZypperCommand::NONE);
 bool ghelp = false;
 
-ostream no_stream(NULL);
 
-RpmCallbacks rpm_callbacks;
-SourceCallbacks source_callbacks;
-MediaCallbacks media_callbacks;
-KeyRingCallbacks keyring_callbacks;
-DigestCallbacks digest_callbacks;
+Zypper::Zypper()
+  : _argc(0), _argv(NULL),
+    _command(ZypperCommand::NONE),
+    _exit_code(ZYPPER_EXIT_OK), _running_shell(false)
+{
+  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
+}
 
+
+Zypper::~Zypper()
+{
+  MIL << "Bye!" << endl;
+}
+
+
+int Zypper::main(int argc, char ** argv)
+{
+  _argc = argc;
+  _argv = argv;
+
+  // parse global options and the command
+  processGlobalOptions();
+  if (exitCode() != ZYPPER_EXIT_OK)
+    return exitCode();
+
+  switch(command().toEnum())
+  {
+  case ZypperCommand::SHELL_e:
+    commandShell();
+    return ZYPPER_EXIT_OK;
+
+  case ZypperCommand::NONE_e:
+  {
+    if (ghelp)
+      return ZYPPER_EXIT_OK;
+    else
+      return ZYPPER_EXIT_ERR_SYNTAX;
+  }
+
+  default:
+    safeDoCommand();
+    return exitCode();
+  }
+
+  WAR << "This line should never be reached." << endl;
+
+  return exitCode();
+}
 
 /*
  * parses global options, returns the command
@@ -70,7 +109,7 @@ DigestCallbacks digest_callbacks;
  * \returns ZypperCommand object representing the command or ZypperCommand::NONE
  *          if an unknown command has been given. 
  */
-int process_globals(int argc, char **argv)
+void Zypper::processGlobalOptions()
 {
   static struct option global_options[] = {
     {"help",            no_argument,       0, 'h'},
@@ -92,9 +131,12 @@ int process_globals(int argc, char **argv)
   };
 
   // parse global options
-  gopts = parse_options (argc, argv, global_options);
-  if (gopts.count("_unknown"))
-    return ZYPPER_EXIT_ERR_SYNTAX;
+  gopts = _gopts = parse_options (_argc, _argv, global_options);
+  if (gOpts().count("_unknown"))
+  {
+    _exit_code = ZYPPER_EXIT_ERR_SYNTAX;
+    return;
+  }
 
   static string help_global_options = _("  Options:\n"
     "\t--help, -h\t\tHelp.\n"
@@ -162,7 +204,8 @@ int process_globals(int argc, char **argv)
     if (!tmp.absolute())
     {
       cerr << _("The path specified in the --root option must be absolute.") << endl;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      _exit_code = ZYPPER_EXIT_ERR_INVALID_ARGS;
+      return;
     }
 
     DBG << "root dir = " << gSettings.root_dir << endl;
@@ -194,7 +237,7 @@ int process_globals(int argc, char **argv)
   if (gopts.count("opt")) {
     cout << "Opt arg: ";
     std::copy (gopts["opt"].begin(), gopts["opt"].end(),
-	       ostream_iterator<string> (cout, ", "));
+               ostream_iterator<string> (cout, ", "));
     cout << endl;
   }
 
@@ -224,26 +267,26 @@ int process_globals(int argc, char **argv)
   // get command
   try
   {
-    if (optind < argc)
-      command = ZypperCommand(argv[optind++]);
+    if (optind < _argc)
+      ::command = _command = ZypperCommand(_argv[optind++]);
 
-    if (command == ZypperCommand::HELP)
+    if (_command == ZypperCommand::HELP)
     {
       ghelp = true;
-      if (optind < argc)
-        command = ZypperCommand(argv[optind++]);
+      if (optind < _argc)
+        _command = ZypperCommand(_argv[optind++]);
       else
-        command = ZypperCommand::NONE;
+        _command = ZypperCommand::NONE;
     }
   }
   // exception from command parsing
   catch (Exception & e)
   {
     cerr << e.msg() << endl;
-    command = ZypperCommand::NONE;
+    _command = ZypperCommand::NONE;
   }
 
-  if (command == ZypperCommand::NONE)
+  if (_command == ZypperCommand::NONE)
   {
     if (ghelp)
       cout << help_global_options << endl << help_commands;
@@ -252,15 +295,107 @@ int process_globals(int argc, char **argv)
     else
     {
       cerr << _("Try -h for help.") << endl;
-      return ZYPPER_EXIT_ERR_SYNTAX;
+      _exit_code = ZYPPER_EXIT_ERR_SYNTAX;
+      return;
     }
   }
 
-  return ZYPPER_EXIT_OK;
+  _exit_code = ZYPPER_EXIT_OK;
+}
+
+
+void Zypper::commandShell()
+{
+  _running_shell = true;
+
+  string histfile;
+  try {
+    Pathname p (getenv ("HOME"));
+    p /= ".zypper_history";
+    histfile = p.asString ();
+  } catch (...) {
+    // no history
+  }
+  using_history ();
+  if (!histfile.empty ())
+    read_history (histfile.c_str ());
+
+  bool loop = true;
+  while (loop) {
+    // reset globals
+    ghelp = false;
+    
+    // read a line
+    string line = readline_getline ();
+    cerr_vv << "Got: " << line << endl;
+    // reset optind etc
+    optind = 0;
+    // split it up and create sh_argc, sh_argv
+    Args args(line);
+    _sh_argc = args.argc();
+    _sh_argv = args.argv();
+
+    string command_str = _sh_argv[0] ? _sh_argv[0] : "";
+
+    if (command_str == "\004") // ^D
+    {
+      loop = false;
+      cout << endl; // print newline after ^D
+    }
+    else
+    {
+      try
+      {
+        ::command = _command = ZypperCommand(command_str);
+        if (_command == ZypperCommand::SHELL_QUIT)
+          loop = false;
+        else if (_command == ZypperCommand::SHELL)
+          cout << _("You already are running zypper's shell.") << endl;
+        else
+          safeDoCommand();
+      }
+      catch (Exception & e)
+      {
+        cerr << e.msg() <<  endl;
+      }
+    }
+  }
+
+  if (!histfile.empty ())
+    write_history (histfile.c_str ());
+}
+
+
+/// process one command from the OS shell or the zypper shell
+// catch unexpected exceptions and tell the user to report a bug (#224216)
+void Zypper::safeDoCommand()
+{
+  try
+  {
+    doCommand();
+    ::command = _command = ZypperCommand::NONE;
+  }
+  catch (const AbortRequestException & ex)
+  {
+    ZYPP_CAUGHT(ex);
+
+    //cerr << _("User requested to abort.") << endl;
+    cerr << ex.asUserString() << endl;
+  }
+  catch (const Exception & ex) {
+    ZYPP_CAUGHT(ex);
+
+    cerr << _("Unexpected exception.") << endl;
+    cerr << ex.asUserString() << endl;
+        report_a_bug(cerr);
+  }
+
+  if ( gSettings.machine_readable )
+    cout << "</stream>" << endl;
 }
 
 /// process one command from the OS shell or the zypper shell
-int one_command(int argc, char **argv)
+void Zypper::doCommand()
 {
   // === command-specific options ===
 
@@ -280,22 +415,23 @@ int one_command(int argc, char **argv)
 //      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
 //      );
 
-  if ( (command == ZypperCommand::HELP) && (argc > 1) )
+  if ( (command() == ZypperCommand::HELP) && (argc() > 1) )
   try {
     ghelp = true;
-    command = ZypperCommand(argv[1]);
+    command() = ZypperCommand(argv()[1]);
   }
   catch (Exception & ex) {
     // in case of an unknown command specified to help, an exception is thrown
   }
 
-  if (command == ZypperCommand::HELP)
+  if (command() == ZypperCommand::HELP)
   {
     cout << _("Type 'zypper help' to get a list of global options and commands.") << endl;
     cout << _("Type 'zypper help <command>' to get a command-specific help.") << endl;
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
-  else if (command == ZypperCommand::INSTALL) {
+  else if (command() == ZypperCommand::INSTALL) {
     static struct option install_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -337,7 +473,7 @@ int one_command(int argc, char **argv)
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
   }
-  else if (command == ZypperCommand::REMOVE) {
+  else if (command() == ZypperCommand::REMOVE) {
     static struct option remove_options[] = {
       {"repo",       required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -371,7 +507,7 @@ int one_command(int argc, char **argv)
       "-R, --force-resolution Force the solver to find a solution (even agressive)\n"
     );
   }
-  else if (command == ZypperCommand::SRC_INSTALL) {
+  else if (command() == ZypperCommand::SRC_INSTALL) {
     static struct option src_install_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -385,7 +521,7 @@ int one_command(int argc, char **argv)
       "This command has no additional options.\n"
     );
   }
-  else if (command == ZypperCommand::ADD_REPO) {
+  else if (command() == ZypperCommand::ADD_REPO) {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disabled", no_argument, 0, 'd'},
@@ -409,7 +545,7 @@ int one_command(int argc, char **argv)
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
     );
   }
-  else if (command == ZypperCommand::LIST_REPOS) {
+  else if (command() == ZypperCommand::LIST_REPOS) {
     static struct option service_list_options[] = {
       {"export", required_argument, 0, 'e'},
       {"help", no_argument, 0, 'h'},
@@ -425,7 +561,7 @@ int one_command(int argc, char **argv)
       "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
     );
   }
-  else if (command == ZypperCommand::REMOVE_REPO) {
+  else if (command() == ZypperCommand::REMOVE_REPO) {
     static struct option service_delete_options[] = {
       {"help", no_argument, 0, 'h'},
       {"loose-auth", no_argument, 0, 0},
@@ -443,7 +579,7 @@ int one_command(int argc, char **argv)
       "    --loose-query\tIgnore query string in the URL\n"
     );
   }
-  else if (command == ZypperCommand::RENAME_REPO) {
+  else if (command() == ZypperCommand::RENAME_REPO) {
     static struct option service_rename_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -457,7 +593,7 @@ int one_command(int argc, char **argv)
       "This command has no additional options.\n"
     );
   }
-  else if (command == ZypperCommand::MODIFY_REPO) {
+  else if (command() == ZypperCommand::MODIFY_REPO) {
     static struct option service_modify_options[] = {
       {"help", no_argument, 0, 'h'},
       {"disable", no_argument, 0, 'd'},
@@ -479,7 +615,7 @@ int one_command(int argc, char **argv)
       "    --disable-autorefresh Disable auto-refresh of the repository\n"
     );
   }
-  else if (command == ZypperCommand::REFRESH) {
+  else if (command() == ZypperCommand::REFRESH) {
     static struct option refresh_options[] = {
       {"force", no_argument, 0, 'f'},
       {"force-build", no_argument, 0, 'b'},
@@ -504,7 +640,7 @@ int one_command(int argc, char **argv)
       "-D, --download-only     Only download raw metadata, don't build the database\n"
     );
   }
-  else if (command == ZypperCommand::LIST_UPDATES) {
+  else if (command() == ZypperCommand::LIST_UPDATES) {
     static struct option list_updates_options[] = {
       {"repo",        required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -528,7 +664,7 @@ int one_command(int argc, char **argv)
       "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
     );
   }
-  else if (command == ZypperCommand::UPDATE) {
+  else if (command() == ZypperCommand::UPDATE) {
     static struct option update_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -567,7 +703,7 @@ int one_command(int argc, char **argv)
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
     );
   }
-  else if (command == ZypperCommand::DIST_UPGRADE) {
+  else if (command() == ZypperCommand::DIST_UPGRADE) {
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
@@ -589,7 +725,7 @@ int one_command(int argc, char **argv)
       "    --debug-solver              Create solver test case for debugging\n"
     );
   }
-  else if (command == ZypperCommand::SEARCH) {
+  else if (command() == ZypperCommand::SEARCH) {
     static struct option search_options[] = {
       {"installed-only", no_argument, 0, 'i'},
       {"uninstalled-only", no_argument, 0, 'u'},
@@ -637,7 +773,7 @@ int one_command(int argc, char **argv)
       "* and ? wildcards can also be used within search strings.\n"
     );
   }
-  else if (command == ZypperCommand::PATCH_CHECK) {
+  else if (command() == ZypperCommand::PATCH_CHECK) {
     static struct option patch_check_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -656,7 +792,7 @@ int one_command(int argc, char **argv)
       "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
   }
-  else if (command == ZypperCommand::SHOW_PATCHES) {
+  else if (command() == ZypperCommand::SHOW_PATCHES) {
     static struct option patches_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -675,7 +811,7 @@ int one_command(int argc, char **argv)
       "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
     );
   }
-  else if (command == ZypperCommand::INFO) {
+  else if (command() == ZypperCommand::INFO) {
     static struct option info_options[] = {
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
@@ -696,7 +832,7 @@ int one_command(int argc, char **argv)
     );
   }
   // rug compatibility command, we have zypper info [-t <res_type>]
-  else if (command == ZypperCommand::RUG_PATCH_INFO) {
+  else if (command() == ZypperCommand::RUG_PATCH_INFO) {
     static struct option patch_info_options[] = {
       {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
@@ -711,7 +847,7 @@ int one_command(int argc, char **argv)
       "This is a rug compatibility alias for 'zypper info -t patch'\n"
     );
   }
-  else if (command == ZypperCommand::MOO) {
+  else if (command() == ZypperCommand::MOO) {
     static struct option moo_options[] = {
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -725,7 +861,7 @@ int one_command(int argc, char **argv)
       "This command has no additional options.\n"
       );
   }
-  else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+  else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
     static struct option xml_updates_options[] = {
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
@@ -747,24 +883,27 @@ int one_command(int argc, char **argv)
   // parse command options
   if (!ghelp)
   {
-    copts = parse_options (argc, argv, specific_options);
+    ::copts = _copts = parse_options (argc(), argv(), specific_options);
     if (copts.count("_unknown"))
-      return ZYPPER_EXIT_ERR_SYNTAX;
+    {
+      setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+      return;
+    }
 
     // treat --help command option like global --help option from now on
     // i.e. when used together with command to print command specific help
     ghelp = ghelp || copts.count("help");
   
-    if (optind < argc) {
+    if (optind < argc()) {
       cout_v << _("Non-option program arguments: ");
-      while (optind < argc) {
-        string argument = argv[optind++];
+      while (optind < argc()) {
+        string argument = argv()[optind++];
         cout_v << "'" << argument << "' ";
         arguments.push_back (argument);
       }
       cout_v << endl;
     }
-  
+
     // === process options ===
   
     if (gopts.count("terse")) 
@@ -801,14 +940,15 @@ int one_command(int argc, char **argv)
       {
         Url url = make_url (*it);
         if (!url.isValid())
-  	return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  	setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
         gSettings.additional_sources.push_back(url); 
       }
     }
   
     // here come commands that need the lock
     try {
-      if (command == ZypperCommand::LIST_REPOS)
+      if (command() == ZypperCommand::LIST_REPOS)
         zypp_readonly_hack::IWantIt (); // #247001, #302152
   
       God = zypp::getZYpp();
@@ -826,7 +966,8 @@ int one_command(int argc, char **argv)
       else
         cerr << msg << endl;
   
-      return ZYPPER_EXIT_ERR_ZYPP;
+      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      return;
     }
   }
 
@@ -837,48 +978,48 @@ int one_command(int argc, char **argv)
 
   // --------------------------( moo )----------------------------------------
 
-  if (command == ZypperCommand::MOO)
+  if (command() == ZypperCommand::MOO)
   {
-    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+    if (ghelp) { cout << specific_help << endl; return; }
 
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     cout_n << _("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_") << endl;
-    return ZYPPER_EXIT_OK;
+    return;
   }
 
   // --------------------------( repo list )----------------------------------
   
-  else if (command == ZypperCommand::LIST_REPOS)
+  else if (command() == ZypperCommand::LIST_REPOS)
   {
-    if (ghelp) { cout << specific_help << endl; return !ghelp; }
+    if (ghelp) { cout << specific_help << endl; return; }
     // if (ghelp) display_command_help()
 
     list_repos();
-    return ZYPPER_EXIT_OK;
+    return;
   }
 
   // --------------------------( addrepo )------------------------------------
   
-  else if (command == ZypperCommand::ADD_REPO)
+  else if (command() == ZypperCommand::ADD_REPO)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);return;
     }
 
     // too many arguments
     if (arguments.size() > 2)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
     // indeterminate indicates the user has not specified the values
@@ -895,7 +1036,8 @@ int one_command(int argc, char **argv)
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        return add_repo_from_file(copts["repo"].front(), enabled, refresh);
+        setExitCode(add_repo_from_file(copts["repo"].front(), enabled, refresh));
+        return;
       }
   
       // force specific repository type. Validation is done in add_repo_by_url()
@@ -907,12 +1049,12 @@ int one_command(int argc, char **argv)
         cerr << _("Too few arguments. At least URL and alias are required.") << endl;
         ERR << "Too few arguments. At least URL and alias are required." << endl;
         cout_n << specific_help;
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
       }
 
       Url url = make_url (arguments[0]);
       if (!url.isValid())
-        return ZYPPER_EXIT_ERR_INVALID_ARGS;
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
 
       // by default, enable the repo and set autorefresh
       if (indeterminate(enabled)) enabled = true;
@@ -923,8 +1065,9 @@ int one_command(int argc, char **argv)
       // load gpg keys
       cond_init_target ();
 
-      return add_repo_by_url(
-          url, arguments[1]/*alias*/, type, enabled, refresh);
+      setExitCode(add_repo_by_url(
+          url, arguments[1]/*alias*/, type, enabled, refresh));
+      return;
     }
     catch (const repo::RepoUnknownTypeException & e)
     {
@@ -932,25 +1075,26 @@ int one_command(int argc, char **argv)
       report_problem(e,
           _("Specified type is not a valid repository type:"),
           _("See 'zypper -h addrepo' or man zypper to get a list of known repository types."));
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
   }
 
   // --------------------------( delete repo )--------------------------------
 
-  else if (command == ZypperCommand::REMOVE_REPO)
+  else if (command() == ZypperCommand::REMOVE_REPO)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);return;
     }
 
     if (arguments.size() < 1)
@@ -959,7 +1103,7 @@ int one_command(int argc, char **argv)
       ERR << "Required argument missing." << endl;
       cout_n << _("Usage") << ':' << endl;
       cout_n << specific_help;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
     // too many arguments
@@ -967,14 +1111,17 @@ int one_command(int argc, char **argv)
     else if (arguments.size() > 1)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
     }
 
     warn_if_zmd ();
 
     bool found = remove_repo(arguments[0]);
     if (found)
-      return ZYPPER_EXIT_OK;
+    {
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
+    }
 
     MIL << "Repository not found by alias, trying delete by URL" << endl;
     cout_v << _("Repository not found by alias, trying delete by URL...") << endl;
@@ -1013,24 +1160,27 @@ int one_command(int argc, char **argv)
       cerr << _("Repository not found by given alias or URL.") << endl;
     }
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // --------------------------( rename repo )--------------------------------
 
-  else if (command == ZypperCommand::RENAME_REPO)
+  else if (command() == ZypperCommand::RENAME_REPO)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     if (arguments.size() < 2)
@@ -1038,13 +1188,15 @@ int one_command(int argc, char **argv)
       cerr << _("Too few arguments. At least URL and alias are required.") << endl;
       ERR << "Too few arguments. At least URL and alias are required." << endl;
       cout_n << specific_help;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
     // too many arguments
     else if (arguments.size() > 2)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
 //    cond_init_target ();
@@ -1056,27 +1208,31 @@ int one_command(int argc, char **argv)
     catch ( const Exception & excpt_r )
     {
       cerr << excpt_r.asUserString() << endl;
-      return ZYPPER_EXIT_ERR_ZYPP;
+      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      return;
     }
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // --------------------------( modify repo )--------------------------------
 
-  else if (command == ZypperCommand::MODIFY_REPO)
+  else if (command() == ZypperCommand::MODIFY_REPO)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     if (arguments.size() < 1)
@@ -1084,13 +1240,15 @@ int one_command(int argc, char **argv)
       cerr << _("Alias is a required argument.") << endl;
       ERR << "Na alias argument given." << endl;
       cout_n << specific_help;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
     // too many arguments
     if (arguments.size() > 1)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     modify_repo(arguments[0]);
@@ -1098,33 +1256,37 @@ int one_command(int argc, char **argv)
 
   // --------------------------( refresh )------------------------------------
 
-  else if (command == ZypperCommand::REFRESH)
+  else if (command() == ZypperCommand::REFRESH)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for refreshing system repositories.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
-    return refresh_repos(arguments);
+    setExitCode(refresh_repos(arguments));
+    return;
   }
 
   // --------------------------( remove/install )-----------------------------
 
-  else if (command == ZypperCommand::INSTALL ||
-           command == ZypperCommand::REMOVE)
+  else if (command() == ZypperCommand::INSTALL ||
+           command() == ZypperCommand::REMOVE)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     if (arguments.size() < 1)
@@ -1132,7 +1294,8 @@ int one_command(int argc, char **argv)
       cerr << _("Too few arguments.");
       cerr << " " << _("At least one package name is required.") << endl << endl;
       cerr << specific_help;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     if (copts.count("auto-agree-with-licenses")
@@ -1143,7 +1306,8 @@ int one_command(int argc, char **argv)
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for installing or uninstalling packages.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     // rug compatibility code
@@ -1157,12 +1321,16 @@ int one_command(int argc, char **argv)
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
       cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
 
     //! \todo support temporary additional repos
     /*
@@ -1182,7 +1350,7 @@ int one_command(int argc, char **argv)
     cond_init_target ();
     cond_load_resolvables();
 
-    bool install_not_remove = command == ZypperCommand::INSTALL;
+    bool install_not_remove = command() == ZypperCommand::INSTALL;
     bool by_capability = false; // install by name by default
     if (copts.count("capability"))
       by_capability = true;
@@ -1203,51 +1371,63 @@ int one_command(int argc, char **argv)
       else
       {
         cerr << _("Error creating the solver test case.") << endl;
-        return ZYPPER_EXIT_ERR_ZYPP;
+        setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
       }
     }
     else
-      return solve_and_commit ();
+    {
+      setExitCode(solve_and_commit());
+      return;
+    }
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // -------------------( source install )------------------------------------
 
-  else if (command == ZypperCommand::SRC_INSTALL)
+  else if (command() == ZypperCommand::SRC_INSTALL)
   {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     if (arguments.size() < 1)
     {
       cerr << _("Source package name is a required argument.") << endl;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_init_target();
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(false /* don't load to pool */);
 
-    return source_install(arguments);
+    setExitCode(source_install(arguments));
+    return;
   }
 
   // --------------------------( search )-------------------------------------
 
-  else if (command == ZypperCommand::SEARCH)
+  else if (command() == ZypperCommand::SEARCH)
   {
     ZyppSearchOptions options;
 
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
@@ -1267,7 +1447,8 @@ int one_command(int argc, char **argv)
 	kind = string_to_kind( *it );
         if (kind == ResObject::Kind()) {
           cerr << _("Unknown resolvable type ") << *it << endl;
-          return ZYPPER_EXIT_ERR_INVALID_ARGS;
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
         }
         options.addKind( kind );
       }
@@ -1289,7 +1470,10 @@ int one_command(int argc, char **argv)
 
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_init_target();         // calls ZYpp::initializeTarget("/");
     
     establish();
@@ -1313,31 +1497,37 @@ int one_command(int argc, char **argv)
       cout << t;
     }
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // --------------------------( patch check )--------------------------------
 
   // TODO: rug summary
-  else if (command == ZypperCommand::PATCH_CHECK) {
+  else if (command() == ZypperCommand::PATCH_CHECK) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // too many arguments
     if (arguments.size() > 0)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     cond_init_target ();
 
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
 
     // TODO additional_sources
     // TODO warn_no_sources
@@ -1350,60 +1540,76 @@ int one_command(int argc, char **argv)
     patch_check ();
 
     if (gData.security_patches_count > 0)
-      return ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED;
+    {
+      setExitCode(ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED);
+      return;
+    }
     if (gData.patches_count > 0)
-      return ZYPPER_EXIT_INF_UPDATE_NEEDED;
-    return ZYPPER_EXIT_OK;
+    {
+      setExitCode(ZYPPER_EXIT_INF_UPDATE_NEEDED);
+      return;
+    }
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // --------------------------( patches )------------------------------------
 
-  else if (command == ZypperCommand::SHOW_PATCHES) {
+  else if (command() == ZypperCommand::SHOW_PATCHES) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // too many arguments
     if (arguments.size() > 0)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables();
     establish ();
     show_patches ();
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // --------------------------( list updates )-------------------------------
 
-  else if (command == ZypperCommand::LIST_UPDATES) {
+  else if (command() == ZypperCommand::LIST_UPDATES) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // too many arguments
     if (arguments.size() > 0)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     string skind = copts.count("type")?  copts["type"].front() :
       gSettings.is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-	cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
-	return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     bool best_effort = copts.count( "best-effort" ); 
@@ -1417,29 +1623,37 @@ int one_command(int argc, char **argv)
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables();
     establish ();
 
     list_updates( kind, best_effort );
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
 
   // -----------------( xml list updates and patches )------------------------
 
-  else if (command == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+  else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables();
     establish ();
 
@@ -1450,30 +1664,34 @@ int one_command(int argc, char **argv)
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // -----------------------------( update )----------------------------------
 
-  else if (command == ZypperCommand::UPDATE) {
+  else if (command() == ZypperCommand::UPDATE) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for updating packages.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     // too many arguments
     if (arguments.size() > 0)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     // rug compatibility code
@@ -1490,7 +1708,8 @@ int one_command(int argc, char **argv)
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
-	return ZYPPER_EXIT_ERR_INVALID_ARGS;
+	setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+	return;
     }
 
     bool best_effort = copts.count( "best-effort" ); 
@@ -1504,7 +1723,10 @@ int one_command(int argc, char **argv)
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables ();
     establish ();
 
@@ -1524,32 +1746,39 @@ int one_command(int argc, char **argv)
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
     else
-      return solve_and_commit();
+    {
+      setExitCode(solve_and_commit());
+      return;
+    }
 
-    return ZYPPER_EXIT_OK; 
+    setExitCode(ZYPPER_EXIT_OK);
+    return; 
   }
 
   // ----------------------------( dist-upgrade )------------------------------
 
-  else if (command == ZypperCommand::DIST_UPGRADE) {
+  else if (command() == ZypperCommand::DIST_UPGRADE) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for performing a distribution upgrade.") << endl;
-      return ZYPPER_EXIT_ERR_PRIVILEGES;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     // too many arguments
     if (arguments.size() > 0)
     {
       report_too_many_arguments(specific_help);
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     if (copts.count("auto-agree-with-licenses"))
@@ -1558,7 +1787,10 @@ int one_command(int argc, char **argv)
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables ();
     establish ();
     zypp::UpgradeStatistics opt_stats;
@@ -1576,19 +1808,24 @@ int one_command(int argc, char **argv)
     // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
     else
-      return solve_and_commit();
+    {
+      setExitCode(solve_and_commit());
+      return;
+    }
 
-    return ZYPPER_EXIT_OK; 
+    setExitCode(ZYPPER_EXIT_OK);
+    return; 
   }
 
   // -----------------------------( info )------------------------------------
 
-  else if (command == ZypperCommand::INFO ||
-           command == ZypperCommand::RUG_PATCH_INFO) {
+  else if (command() == ZypperCommand::INFO ||
+           command() == ZypperCommand::RUG_PATCH_INFO) {
     if (ghelp)
     {
       cout << specific_help;
-      return ZYPPER_EXIT_OK;
+      setExitCode(ZYPPER_EXIT_OK);
+      return;
     }
 
     if (arguments.size() < 1)
@@ -1597,146 +1834,28 @@ int one_command(int argc, char **argv)
       ERR << "Required argument missing." << endl;
       cout_n << _("Usage") << ':' << endl;
       cout_n << specific_help;
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     cond_init_target ();
     int initret = init_repos();
     if (initret != ZYPPER_EXIT_OK)
-      return initret;
+    {
+      setExitCode(initret);
+      return;
+    }
     cond_load_resolvables ();
     establish ();
 
-    printInfo(command,arguments);
+    printInfo(command(),arguments);
 
-    return ZYPPER_EXIT_OK;
+    setExitCode(ZYPPER_EXIT_OK);
+    return;
   }
 
   // if the program reaches this line, something went wrong
-  return ZYPPER_EXIT_ERR_BUG;
-}
-
-// ----------------------------------------------------------------------------
-
-/// process one command from the OS shell or the zypper shell
-// catch unexpected exceptions and tell the user to report a bug (#224216)
-int safe_one_command(int argc, char **argv)
-{
-  int ret = ZYPPER_EXIT_ERR_BUG;
-  try {
-    ret = one_command (argc, argv);
-    command = ZypperCommand::NONE;
-  }
-  catch (const AbortRequestException & ex)
-  {
-    ZYPP_CAUGHT(ex);
-
-    //cerr << _("User requested to abort.") << endl;
-    cerr << ex.asUserString() << endl;
-  }
-  catch (const Exception & ex) {
-    ZYPP_CAUGHT(ex);
-
-   	cerr << _("Unexpected exception.") << endl;
-    cerr << ex.asUserString() << endl;
-   	report_a_bug(cerr);
-  }
-	if ( gSettings.machine_readable )
-  	cout << "</stream>" << endl;
-
-  return ret;
-}
-
-// ----------------------------------------------------------------------------
-
-// Read a string. "\004" (^D) on EOF.
-string readline_getline ()
-{
-  // A static variable for holding the line.
-  static char *line_read = NULL;
-
-  /* If the buffer has already been allocated,
-     return the memory to the free pool. */
-  if (line_read) {
-    free (line_read);
-    line_read = NULL;
-  }
-
-  /* Get a line from the user. */
-  line_read = readline ("zypper> ");
-
-  /* If the line has any text in it,
-     save it on the history. */
-  if (line_read && *line_read)
-    add_history (line_read);
-
-  if (line_read)
-    return line_read;
-  else
-    return "\004";
-}
-
-// ----------------------------------------------------------------------------
-
-void command_shell ()
-{
-  gSettings.in_shell = true;
-
-  string histfile;
-  try {
-    Pathname p (getenv ("HOME"));
-    p /= ".zypper_history";
-    histfile = p.asString ();
-  } catch (...) {
-    // no history
-  }
-  using_history ();
-  if (!histfile.empty ())
-    read_history (histfile.c_str ());
-
-  bool loop = true;
-  while (loop) {
-    // reset globals
-    ghelp = false;
-    
-    // read a line
-    string line = readline_getline ();
-    cerr_vv << "Got: " << line << endl;
-    // reset optind etc
-    optind = 0;
-    // split it up and create sh_argc, sh_argv
-    Args args(line);
-    int sh_argc = args.argc ();
-    char **sh_argv = args.argv ();
-
-    string command_str = sh_argv[0]? sh_argv[0]: "";
-
-    if (command_str == "\004") // ^D
-    {
-      loop = false;
-      cout << endl; // print newline after ^D
-    }
-    else
-    {
-      try
-      {
-	command = ZypperCommand(command_str);
-        if (command == ZypperCommand::SHELL_QUIT)
-          loop = false;
-        else if (command == ZypperCommand::SHELL)
-          cout << _("You already are running zypper's shell.") << endl;
-        else
-          safe_one_command (sh_argc, sh_argv);
-      }
-      catch (Exception & e)
-      {
-        cerr << e.msg() <<  endl;
-      }
-    }
-  }
-
-  if (!histfile.empty ())
-    write_history (histfile.c_str ());
+  setExitCode(ZYPPER_EXIT_ERR_BUG);
 }
 
 // Local Variables:

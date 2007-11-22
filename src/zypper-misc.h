@@ -73,11 +73,6 @@ void list_updates( const zypp::ResObject::Kind &kind, bool best_effort );
 void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive, bool best_effort );
 
 /**
- * 
- */
-void usage(int argc, char **argv);
-
-/**
  * Runs solver on the pool, asks to choose solution of eventual problems
  * (when run interactively) and commits the result.
  * 

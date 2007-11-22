@@ -6,6 +6,50 @@
 #include "zypp/RepoManager.h"
 
 #include "zypper-command.h"
+#include "zypper-getopt.h"
+
+class Zypper
+{
+public:
+
+  Zypper();
+  ~Zypper();
+
+  int main(int argc, char ** argv);
+  void processGlobalOptions();
+  void processCommandOptions();
+  void commandShell();
+  void safeDoCommand();
+  void doCommand();
+
+  // setters & getters
+  parsed_opts gOpts() { return _gopts; }
+  parsed_opts cOpts() { return _copts; }
+  ZypperCommand command() { return _command; }
+  int exitCode() { return _exit_code; }
+  void setExitCode(int exit) { _exit_code = exit; } 
+  bool runningShell() { return _running_shell; }
+  bool runningHelp() { return _running_help; }
+  
+  int argc() { return _running_shell ? _sh_argc : _argc; } 
+  char ** argv() { return _running_shell ? _sh_argv : _argv; } 
+
+private:
+
+  int     _argc;
+  char ** _argv;
+
+  parsed_opts   _gopts;
+  parsed_opts   _copts;
+  ZypperCommand _command;
+
+  int   _exit_code;
+  bool  _running_shell;
+  bool  _running_help;
+
+  int _sh_argc;
+  char **_sh_argv;
+};
 
 /**
  * Structure for holding various start-up setting.
@@ -75,10 +119,6 @@ extern Settings gSettings;
 extern std::ostream no_stream;
 extern ZypperCommand command;
 extern bool ghelp;
-
-void command_shell ();
-int safe_one_command(int argc, char **argv);
-int process_globals(int argc, char **argv);
 
 #endif /*ZYPPER_H*/
 

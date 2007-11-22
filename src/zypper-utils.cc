@@ -1,3 +1,7 @@
+#include <fstream>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaManager.h"
 
@@ -6,6 +10,33 @@
 
 using namespace std;
 using namespace zypp;
+
+// Read a string. "\004" (^D) on EOF.
+string readline_getline()
+{
+  // A static variable for holding the line.
+  static char *line_read = NULL;
+
+  /* If the buffer has already been allocated,
+     return the memory to the free pool. */
+  if (line_read) {
+    free (line_read);
+    line_read = NULL;
+  }
+
+  /* Get a line from the user. */
+  line_read = readline ("zypper> ");
+
+  /* If the line has any text in it,
+     save it on the history. */
+  if (line_read && *line_read)
+    add_history (line_read);
+
+  if (line_read)
+    return line_read;
+  else
+    return "\004";
+}
 
 /// tell the user to report a bug, and how
 // (multiline, with endls)

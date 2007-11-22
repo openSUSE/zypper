@@ -65,4 +65,9 @@
 #define _(MSG) ::gettext(MSG)
 #define _PL(MSG1,MSG2,N) ::ngettext(MSG1,MSG2,N)
 
+// libzypp logger settings
+#define ZYPPER_LOG "/var/log/zypper.log"
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
+
 #endif /*ZYPPERMAIN_H_*/
