@@ -186,7 +186,9 @@ struct NewerVersionGetter
 };
 
 // on error print a message and return noCap
-Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
+Capability safe_parse_cap (const Zypper & zypper,
+                           const ResObject::Kind &kind, const string & capstr)
+{
   Capability cap;
   try {
     // expect named caps as NAME[OP<EDITION>]
@@ -208,7 +210,7 @@ Capability safe_parse_cap (const ResObject::Kind &kind, const string & capstr) {
     // if we are about to install stuff and
     // if this is not a candidate for a versioned capability, take it like
     // a package name and check if it is already installed
-    else if (command == ZypperCommand::INSTALL)
+    else if (zypper.command() == ZypperCommand::INSTALL)
     {
       using namespace zypp::functor;
       using namespace zypp::resfilter;
@@ -371,11 +373,12 @@ bool mark_by_name_edition (...)
 
 */
 
-void mark_by_capability (bool install_not_delete,
+void mark_by_capability (const Zypper & zypper,
+                         bool install_not_delete,
 			 const ResObject::Kind &kind,
 			 const string &capstr )
 {
-  Capability cap = safe_parse_cap (kind, capstr);
+  Capability cap = safe_parse_cap (zypper, kind, capstr);
 
   if (cap != Capability::noCap) {
     cout_vv << "Capability: " << cap << endl;

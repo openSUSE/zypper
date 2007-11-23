@@ -39,6 +39,7 @@ public:
   char ** argv() { return _running_shell ? _sh_argv : _argv; } 
 
 private:
+  void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value) { _running_shell = value; }
   void setRunningHelp(bool value) { _running_help = value; }
 
@@ -125,7 +126,6 @@ struct RuntimeData
 extern RuntimeData gData;
 extern Settings gSettings;
 extern std::ostream no_stream;
-extern ZypperCommand command;
 
 #endif /*ZYPPER_H*/
 

@@ -50,7 +50,6 @@ RuntimeData gData;
 Settings gSettings;
 parsed_opts gopts; // global options
 parsed_opts copts; // command options
-ZypperCommand command(ZypperCommand::NONE);
 
 
 Zypper::Zypper()
@@ -311,25 +310,25 @@ void Zypper::processGlobalOptions()
   try
   {
     if (optind < _argc)
-      ::command = _command = ZypperCommand(_argv[optind++]);
+      setCommand(ZypperCommand(_argv[optind++]));
 
-    if (_command == ZypperCommand::HELP)
+    if (command() == ZypperCommand::HELP)
     {
       setRunningHelp(true);
       if (optind < _argc)
-        _command = ZypperCommand(_argv[optind++]);
+        setCommand(ZypperCommand(_argv[optind++]));
       else
-        _command = ZypperCommand::NONE;
+        setCommand(ZypperCommand::NONE);
     }
   }
   // exception from command parsing
   catch (Exception & e)
   {
     cerr << e.msg() << endl;
-    _command = ZypperCommand::NONE;
+    setCommand(ZypperCommand::NONE);
   }
 
-  if (_command == ZypperCommand::NONE)
+  if (command() == ZypperCommand::NONE)
   {
     if (runningHelp())
       cout << help_global_options << endl << help_commands;
@@ -338,12 +337,12 @@ void Zypper::processGlobalOptions()
     else
     {
       cerr << _("Try -h for help.") << endl;
-      _exit_code = ZYPPER_EXIT_ERR_SYNTAX;
+      setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
       return;
     }
   }
 
-  _exit_code = ZYPPER_EXIT_OK;
+  setExitCode(ZYPPER_EXIT_OK);
 
   MIL << "DONE" << endl;
 }
@@ -353,7 +352,7 @@ void Zypper::commandShell()
 {
   MIL << "Entering the shell" << endl;
 
-  _running_shell = true;
+  setRunningShell(true);
 
   string histfile;
   try {
@@ -393,10 +392,10 @@ void Zypper::commandShell()
     {
       try
       {
-        ::command = _command = ZypperCommand(command_str);
-        if (_command == ZypperCommand::SHELL_QUIT)
+        setCommand(ZypperCommand(command_str));
+        if (command() == ZypperCommand::SHELL_QUIT)
           loop = false;
-        else if (_command == ZypperCommand::SHELL)
+        else if (command() == ZypperCommand::SHELL)
           cout << _("You already are running zypper's shell.") << endl;
         else
           safeDoCommand();
@@ -412,6 +411,7 @@ void Zypper::commandShell()
     write_history (histfile.c_str ());
 
   MIL << "Leaving the shell" << endl;
+  setRunningShell(false);
 }
 
 
@@ -423,7 +423,7 @@ void Zypper::safeDoCommand()
   {
     processCommandOptions();
     doCommand();
-    ::command = _command = ZypperCommand::NONE;
+    setCommand(ZypperCommand::NONE);
   }
   catch (const AbortRequestException & ex)
   {
@@ -467,7 +467,7 @@ void Zypper::processCommandOptions()
   if ( (command() == ZypperCommand::HELP) && (argc() > 1) )
   try {
     setRunningHelp(true);
-    _command = ZypperCommand(argv()[1]);
+    setCommand(ZypperCommand(argv()[1]));
   }
   catch (Exception & ex) {
     // in case of an unknown command specified to help, an exception is thrown
@@ -1117,7 +1117,7 @@ void Zypper::doCommand()
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        setExitCode(add_repo_from_file(copts["repo"].front(), enabled, refresh));
+        setExitCode(add_repo_from_file(*this,copts["repo"].front(), enabled, refresh));
         return;
       }
   
@@ -1146,7 +1146,7 @@ void Zypper::doCommand()
       // load gpg keys
       cond_init_target ();
 
-      setExitCode(add_repo_by_url(
+      setExitCode(add_repo_by_url(*this,
           url, _arguments[1]/*alias*/, type, enabled, refresh));
       return;
     }
@@ -1354,7 +1354,7 @@ void Zypper::doCommand()
       return;
     }
 
-    setExitCode(refresh_repos(_arguments));
+    setExitCode(refresh_repos(*this, _arguments));
     return;
   }
 
@@ -1406,7 +1406,7 @@ void Zypper::doCommand()
       return;
     }
 
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
@@ -1429,7 +1429,7 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    cond_load_resolvables();
+    cond_load_resolvables(*this);
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
     bool by_capability = false; // install by name by default
@@ -1438,7 +1438,7 @@ void Zypper::doCommand()
     for ( vector<string>::const_iterator it = _arguments.begin();
           it != _arguments.end(); ++it ) {
       if (by_capability)
-        mark_by_capability (install_not_remove, kind, *it);
+        mark_by_capability (*this, install_not_remove, kind, *it);
       else
         mark_by_name (install_not_remove, kind, *it);
     }
@@ -1484,7 +1484,7 @@ void Zypper::doCommand()
       return;
     }
 
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
@@ -1492,7 +1492,7 @@ void Zypper::doCommand()
     }
     cond_init_target();
     // load only repo resolvables, we don't need the installed ones
-    load_repo_resolvables(false /* don't load to pool */);
+    load_repo_resolvables(*this, false /* don't load to pool */);
 
     setExitCode(source_install(_arguments));
     return;
@@ -1549,7 +1549,7 @@ void Zypper::doCommand()
 
     options.resolveConflicts();
 
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
@@ -1603,7 +1603,7 @@ void Zypper::doCommand()
 
     cond_init_target ();
 
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
@@ -1615,7 +1615,7 @@ void Zypper::doCommand()
     // TODO calc token?
 
     // now load resolvables:
-    cond_load_resolvables();
+    cond_load_resolvables(*this);
 
     establish ();
     patch_check ();
@@ -1653,13 +1653,13 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables();
+    cond_load_resolvables(*this);
     establish ();
     show_patches ();
     setExitCode(ZYPPER_EXIT_OK);
@@ -1702,13 +1702,13 @@ void Zypper::doCommand()
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables();
+    cond_load_resolvables(*this);
     establish ();
 
     list_updates( kind, best_effort );
@@ -1729,13 +1729,13 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables();
+    cond_load_resolvables(*this);
     establish ();
 
     cout << "<update-status version=\"0.6\">" << endl;
@@ -1802,13 +1802,13 @@ void Zypper::doCommand()
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables ();
+    cond_load_resolvables(*this);
     establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
@@ -1866,13 +1866,13 @@ void Zypper::doCommand()
       gSettings.license_auto_agree = true;
 
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables ();
+    cond_load_resolvables(*this);
     establish ();
     zypp::UpgradeStatistics opt_stats;
     God->resolver()->doUpgrade(opt_stats);
@@ -1920,13 +1920,13 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos();
+    int initret = init_repos(*this);
     if (initret != ZYPPER_EXIT_OK)
     {
       setExitCode(initret);
       return;
     }
-    cond_load_resolvables ();
+    cond_load_resolvables(*this);
     establish ();
 
     printInfo(command(),_arguments);

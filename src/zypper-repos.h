@@ -5,6 +5,8 @@
 
 #include "zypp/Url.h"
 
+#include "zypper.h"
+
 /**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
@@ -12,7 +14,7 @@
  * \return ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
  *         ZYPPER_EXIT_ERR_ZYPP on error, ZYPPER_EXIT_OK otherwise.
  */
-int init_repos();
+int init_repos(const Zypper & zypper);
 
 /**
  * List defined repositories.
@@ -22,7 +24,7 @@ void list_repos();
 /**
  * Refresh all enabled repositories.
  */
-int refresh_repos(std::vector<std::string> & arguments);
+int refresh_repos(const Zypper & zypper, std::vector<std::string> & arguments);
 
 
 /**
@@ -36,10 +38,12 @@ int refresh_repos(std::vector<std::string> & arguments);
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_by_url( const zypp::Url & url,
-                      const std::string & alias,
-                      const std::string & type = "",
-                      boost::tribool enabled = boost::indeterminate, boost::tribool autorefresh = boost::indeterminate);
+int add_repo_by_url(const Zypper & zypper,
+                    const zypp::Url & url,
+                    const std::string & alias,
+                    const std::string & type = "",
+                    boost::tribool enabled = boost::indeterminate,
+                    boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -52,8 +56,10 @@ int add_repo_by_url( const zypp::Url & url,
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_from_file(const std::string & repo_file_url,
-                       boost::tribool enabled = boost::indeterminate, boost::tribool autorefresh = boost::indeterminate);
+int add_repo_from_file(const Zypper & zypper,
+                       const std::string & repo_file_url,
+                       boost::tribool enabled = boost::indeterminate,
+                       boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * Delte repository specified by \a alias.
@@ -85,7 +91,7 @@ void modify_repo(const std::string & alias);
  * \see load_repo_resolvables(bool)
  * \see load_target_resolvables(bool)
  */
-void cond_load_resolvables(bool to_pool = true);
+void cond_load_resolvables(const Zypper & zypper, bool to_pool = true);
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
@@ -103,7 +109,7 @@ void load_target_resolvables(bool to_pool = true);
  *        <tt>false</tt> they will be stored in \ref gData.repo_resolvables
  *        (global ResStore vector).
  */
-void load_repo_resolvables(bool to_pool = true);
+void load_repo_resolvables(const Zypper & zypper, bool to_pool = true);
 
 
 /**

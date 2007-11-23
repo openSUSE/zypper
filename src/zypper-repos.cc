@@ -36,7 +36,9 @@ extern RuntimeData gData;
 extern Settings gSettings;
 
 
-static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
+static bool refresh_raw_metadata(const Zypper & zypper,
+                                 const RepoInfo & repo,
+                                 bool force_download)
 {
   gData.current_repo = repo;
 
@@ -62,11 +64,12 @@ static bool refresh_raw_metadata(const RepoInfo & repo, bool force_download)
           if (manager.checkIfToRefreshMetadata(repo, *it))
           {
             cout_n << format(_("Refreshing '%s'")) % repo.name();
-            if (command == ZypperCommand::REFRESH && copts.count("force"))
+            if (zypper.command() == ZypperCommand::REFRESH &&
+                zypper.cOpts().count("force"))
               cout_n << " " << _("(forced)");
             cout_n << endl;
           }
-          else if (command == ZypperCommand::REFRESH)
+          else if (zypper.command() == ZypperCommand::REFRESH)
           {
             cout_n << format(_("Repository '%s' is up to date.")) % repo.name() << endl;
           }
@@ -202,7 +205,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
 // ---------------------------------------------------------------------------
 
-static int do_init_repos()
+static int do_init_repos(const Zypper & zypper)
 {
   // load gpg keys
   cond_init_target ();
@@ -255,7 +258,7 @@ static int do_init_repos()
       // handle root user differently
       if (geteuid() == 0)
       {
-        if (refresh_raw_metadata(repo, false) || build_cache(repo, false))
+        if (refresh_raw_metadata(zypper, repo, false) || build_cache(repo, false))
         {
           cerr << format(_("Disabling repository '%s' because of the above error."))
               % repo.name() << endl;
@@ -293,7 +296,7 @@ static int do_init_repos()
 
 // ----------------------------------------------------------------------------
 
-int init_repos()
+int init_repos(const Zypper & zypper)
 {
   static bool done = false;
   //! \todo this has to be done so that it works in zypper shell
@@ -302,7 +305,7 @@ int init_repos()
 
   if ( !gSettings.disable_system_sources )
   {
-    return do_init_repos();
+    return do_init_repos(zypper);
   }
 
   done = true;
@@ -482,7 +485,7 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 // ----------------------------------------------------------------------------
 
-int refresh_repos(vector<string> & arguments)
+int refresh_repos(const Zypper & zypper, vector<string> & arguments)
 {
   // need gpg keys when downloading (#304672)
   cond_init_target();
@@ -585,7 +588,7 @@ int refresh_repos(vector<string> & arguments)
       MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
           << endl;
 
-      error = refresh_raw_metadata(repo, force_download);
+      error = refresh_raw_metadata(zypper, repo, force_download);
     }
 
     // db rebuild
@@ -674,7 +677,7 @@ std::string timestamp ()
 // ----------------------------------------------------------------------------
 
 static
-int add_repo(RepoInfo & repo)
+int add_repo(const Zypper & zypper, RepoInfo & repo)
 {
   RepoManager manager(gSettings.rm_options);
 
@@ -763,7 +766,7 @@ int add_repo(RepoInfo & repo)
   if(is_cd)
   {
     cout_n << format(_("Reading data from '%s' media")) % repo.name() << endl;
-    bool error = refresh_raw_metadata(repo, false);
+    bool error = refresh_raw_metadata(zypper, repo, false);
     if (!error)
       error = build_cache(repo, false);
     if (error)
@@ -779,7 +782,8 @@ int add_repo(RepoInfo & repo)
 
 // ----------------------------------------------------------------------------
 
-int add_repo_by_url( const zypp::Url & url, const string & alias,
+int add_repo_by_url( const Zypper & zypper,
+                     const zypp::Url & url, const string & alias,
                      const string & type,
                      tribool enabled, tribool autorefresh)
 {
@@ -800,13 +804,14 @@ int add_repo_by_url( const zypp::Url & url, const string & alias,
   if ( !indeterminate(autorefresh) )
     repo.setAutorefresh((autorefresh == true));
 
-  return add_repo(repo);
+  return add_repo(zypper, repo);
 }
 
 // ----------------------------------------------------------------------------
 
 //! \todo handle zypp exceptions
-int add_repo_from_file(const std::string & repo_file_url,
+int add_repo_from_file(const Zypper & zypper,
+                       const std::string & repo_file_url,
                        tribool enabled, tribool autorefresh)
 {
   //! \todo handle local .repo files, validate the URL
@@ -857,7 +862,7 @@ int add_repo_from_file(const std::string & repo_file_url,
     if ( !indeterminate(autorefresh) )
       repo.setAutorefresh((autorefresh == true));
     MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
-    add_repo(repo);
+    add_repo(zypper, repo);
   }
 
   return ZYPPER_EXIT_OK;
@@ -1047,16 +1052,16 @@ void modify_repo(const string & alias)
 
 // ---------------------------------------------------------------------------
 
-void cond_load_resolvables(bool to_pool)
+void cond_load_resolvables(const Zypper & zypper, bool to_pool)
 {
-  load_repo_resolvables(to_pool);
+  load_repo_resolvables(zypper, to_pool);
   if (!gSettings.disable_system_resolvables && to_pool)
     load_target_resolvables();
 }
 
 // ---------------------------------------------------------------------------
 
-void load_repo_resolvables(bool to_pool)
+void load_repo_resolvables(const Zypper & zypper, bool to_pool)
 {
   RepoManager manager(gSettings.rm_options);
 
@@ -1077,7 +1082,7 @@ void load_repo_resolvables(bool to_pool)
       {
         cout_v << format(_("Retrieving repository '%s' data..."))
                          % repo.name() << endl;
-        error = refresh_raw_metadata(repo, false);
+        error = refresh_raw_metadata(zypper, repo, false);
       }
 
       if (!error && !manager.isCached(repo))
