@@ -11,10 +11,11 @@
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
  * 
- * \return ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
- *         ZYPPER_EXIT_ERR_ZYPP on error, ZYPPER_EXIT_OK otherwise.
+ * sets exit status to
+ *  - ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
+ *  - ZYPPER_EXIT_ERR_ZYPP on error
  */
-int init_repos(const Zypper & zypper);
+void init_repos(Zypper & zypper);
 
 /**
  * List defined repositories.

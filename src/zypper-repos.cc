@@ -205,7 +205,7 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 
 // ---------------------------------------------------------------------------
 
-static int do_init_repos(const Zypper & zypper)
+static void do_init_repos(Zypper & zypper)
 {
   // load gpg keys
   cond_init_target ();
@@ -227,7 +227,8 @@ static int do_init_repos(const Zypper & zypper)
     {
       cerr << format(_("Repository '%s' not found.")) % specific_repo << endl;
       ERR << specific_repo << " not found";
-      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
     catch (const Exception & ex)
     {
@@ -235,7 +236,8 @@ static int do_init_repos(const Zypper & zypper)
           % specific_repo << endl;
       cerr_v << _("Reason: ") << ex.asUserString() << endl;
       ZYPP_CAUGHT(ex);
-      return ZYPPER_EXIT_ERR_ZYPP;
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      return;
     }
   }
   else
@@ -290,26 +292,23 @@ static int do_init_repos(const Zypper & zypper)
       }
     }
   }
-
-  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
 
-int init_repos(const Zypper & zypper)
+void init_repos(Zypper & zypper)
 {
   static bool done = false;
   //! \todo this has to be done so that it works in zypper shell
   if (done)
-    return ZYPPER_EXIT_OK;
+    return;
 
   if ( !gSettings.disable_system_sources )
   {
-    return do_init_repos(zypper);
+    do_init_repos(zypper);
   }
 
   done = true;
-  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------

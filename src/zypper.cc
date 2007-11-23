@@ -1406,12 +1406,9 @@ void Zypper::doCommand()
       return;
     }
 
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
 
     //! \todo support temporary additional repos
     /*
@@ -1484,12 +1481,10 @@ void Zypper::doCommand()
       return;
     }
 
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
+
     cond_init_target();
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(*this, false /* don't load to pool */);
@@ -1549,12 +1544,10 @@ void Zypper::doCommand()
 
     options.resolveConflicts();
 
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
+
     cond_init_target();         // calls ZYpp::initializeTarget("/");
     
     establish();
@@ -1603,12 +1596,9 @@ void Zypper::doCommand()
 
     cond_init_target ();
 
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
 
     // TODO additional_sources
     // TODO warn_no_sources
@@ -1653,12 +1643,9 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
     show_patches ();
@@ -1702,12 +1689,9 @@ void Zypper::doCommand()
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
 
@@ -1729,12 +1713,9 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
 
@@ -1802,12 +1783,9 @@ void Zypper::doCommand()
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
 
@@ -1866,12 +1844,9 @@ void Zypper::doCommand()
       gSettings.license_auto_agree = true;
 
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
     zypp::UpgradeStatistics opt_stats;
@@ -1920,12 +1895,9 @@ void Zypper::doCommand()
     }
 
     cond_init_target ();
-    int initret = init_repos(*this);
-    if (initret != ZYPPER_EXIT_OK)
-    {
-      setExitCode(initret);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    }
     cond_load_resolvables(*this);
     establish ();
 
