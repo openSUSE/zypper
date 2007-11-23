@@ -545,7 +545,7 @@ SATResolver::resolvePool()
     _SATPool->verbose = true;
 
     // Solve !
-    solve( solv, &(jobQueue) );
+    solver_solve( solv, &(jobQueue) );
 
     // copying solution back to zypp pool
     //-----------------------------------------
@@ -640,271 +640,375 @@ SATResolver::resolvePool()
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
+string
+conflictsString(Solver *solv, Solvable *s, Id pc)
+{
+    Pool *pool = solv->pool;
+    Solvable *sc = pool->solvables + pc;
+    Id p, *pp, con, *conp, obs, *obsp;
+    string ret;
 
+    if (s->conflicts) {
+	conp = s->repo->idarraydata + s->conflicts;
+	while ((con = *conp++) != 0) {
+	    FOR_PROVIDES(p, pp, con) {
+		if (p != pc)
+		    continue;
+		ret = str::form("packags %s conflicts with %s, which is provided by %s\n", solvable2str(pool, s), dep2str(pool, con), solvable2str(pool, sc));
+	    }
+	}
+    }
+    if (s->obsoletes && (!solv->installed || s->repo != solv->installed)) {
+	obsp = s->repo->idarraydata + s->obsoletes;
+	while ((obs = *obsp++) != 0) {
+	    FOR_PROVIDES(p, pp, obs) {
+		if (p != pc)
+		    continue;
+		ret += str::form("packags %s obsolets %s, which is provided by %s\n", solvable2str(pool, s), dep2str(pool, obs), solvable2str(pool, sc));
+	    }
+	}
+    }
+    return ret;
+}
+
+
+string
+probleminfoString(Solver *solv, const Queue *job, Id problem)
+{
+  Pool *pool = solv->pool;
+  Rule *r;
+  Solvable *s;
+  Id p, d, rn;
+  Id idx = solv->problems.elements[problem - 1];
+  string ret;
+
+  rn = solv->learnt_pool.elements[idx];
+  if (rn < 0) {
+      p = rn;		/* fake a negative assertion rule */
+      r = 0;
+  } else {
+      r = solv->rules + rn;
+      p = r->p;
+  }
+
+  if (!r || r->w2 == 0) {
+      Id req, *reqp, *dp;
+      int count = 0;
+
+      /* assertions */
+      if (p == -SYSTEMSOLVABLE)	{
+          Id ji, what;
+
+	  /* we tried to deinstall the system solvable. must be a job. */
+	  if (rn < solv->jobrules || rn >= solv->systemrules)
+	      abort();
+	  ji = solv->ruletojob.elements[rn - solv->jobrules];
+	  what = job->elements[ji + 1];
+	  switch (job->elements[ji]) {
+	      case SOLVER_INSTALL_SOLVABLE_NAME:
+		  ret = str::form ("no solvable exists with name %s\n", dep2str(pool, what));
+		  break;
+	      case SOLVER_INSTALL_SOLVABLE_PROVIDES:
+		  ret = str::form ("no solvable provides %s\n", dep2str(pool, what));
+		  break;
+	      default:
+		  ret = str::form ("unknown  job\n");
+	  }
+	  return ret;
+      }
+      if (p > 0 && solv->learnt_pool.elements[idx + 1] == -p) {
+	  /* we conflicted with a direct rpm assertion */
+	  /* print other rule */
+	  p = -p;
+	  rn = 0;
+      }
+      if (rn >= solv->jobrules) {
+	  ret += "some job/system/learnt rule\n";
+	  return ret;
+      }
+      if (p >= 0)
+	  abort();
+      /* negative assertion, i.e. package is not installable */
+      s = pool->solvables + (-p);
+      if (s->requires) {
+	  reqp = s->repo->idarraydata + s->requires;
+	  while ((req = *reqp++) != 0) {
+	      if (req == SOLVABLE_PREREQMARKER)
+		  continue;
+	      dp = pool_whatprovides(pool, req);
+	      if (*dp)
+		  continue;
+	      ret += str::form ("package %s requires %s, but no package provides it\n", solvable2str(pool, s), dep2str(pool, req));
+	      count++;
+	  }
+      }
+      if (!count)
+	  ret += str::form ("package %s is not installable\n", solvable2str(pool, s));
+      return ret;
+  }
+
+  if (rn >= solv->learntrules) {
+      /* learnt rule, ignore for now */
+      ret += str::form ("some learnt rule...\n");
+//      printrule(solv, r);
+      return ret;
+  }
+  if (rn >= solv->systemrules) {
+      /* system rule, ignore for now */
+      ret += str::form ("some system rule...\n");
+//      printrule(solv, r);
+      return ret;
+  }
+  if (rn >= solv->jobrules) {
+      /* job rule, ignore for now */
+      ret += str::form ("some job rule...\n");
+//      printrule(solv, r);
+      return ret;
+  }
+  /* only rpm rules left... */
+  p = r->p;
+  d = r->d;
+  if (p >= 0)
+    abort();
+  if (d == 0 && r->w2 < 0) {
+      Solvable *sp, *sd;
+      d = r->w2;
+      sp = pool->solvables + (-p);
+      sd = pool->solvables + (-d);
+      if (sp->name == sd->name) {
+	  ret += str::form ("cannot install both %s and %s\n", solvable2str(pool, sp), solvable2str(pool, sd));
+      } else {
+	  ret += conflictsString (solv, pool->solvables + (-p), -d);
+	  ret += conflictsString (solv, pool->solvables + (-d), -p);
+      }
+  } else {
+      /* find requires of p that corresponds with our rule */
+      Id req, *reqp, *dp;
+      s = pool->solvables + (-p);
+      reqp = s->repo->idarraydata + s->requires;
+      while ((req = *reqp++) != 0) {
+	  if (req == SOLVABLE_PREREQMARKER)
+	      continue;
+	  dp = pool_whatprovides(pool, req);
+          if (d == 0) {
+	      if (*dp == r->w2 && dp[1] == 0)
+		  break;
+	  }
+	  else if (dp - pool->whatprovidesdata == d)
+	      break;
+      }
+      if (!req) {
+	  ret += str::form ("req not found\n");
+      }
+      ret += str::form ("package %s requires %s, but none of its providers can be installed\n", solvable2str(pool, s), dep2str(pool, req));
+  }
+  return ret;
+}
 
 ResolverProblemList
 SATResolver::problems () const
 {
     ResolverProblemList resolverProblems;
-    if (solv && solv->problems.count)
-    {
-	Queue problems;
-	Queue solution;
-	Id *problem;
-	Id why, what;
-	int j, ji, pcnt, i;
-	Rule *r;
-	Solvable *s;
-	Pool *pool = solv->pool;	
+    if (solv && solv->problems.count) {
+	Pool *pool = solv->pool;
+	int pcnt;
+	Id p, rp, what;
+	Id problem, solution, element;
+	Solvable *s, *sd;
 
-	queue_clone(&problems, &solv->problems);
-	queue_init(&solution);
 	MIL << "Encountered problems! Here are the solutions:\n" << endl;
-	problem = problems.elements;
 	pcnt = 1;
-	MIL << "Problem " <<  pcnt << ":" << endl;
-	MIL << "====================================" << endl;
-	string whatString = str::form (_("Problem %d:"), pcnt);
-	ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");		
-	
-	for (i = 0; i < problems.count; i++)
-	{
-	    Id v = problems.elements[i];
-	    if (v == 0)
-	    {
-		if (i + 1 == problems.count)
-		    break;
-		// save old problem
-		resolverProblems.push_back (resolverProblem);
-		MIL << "Problem " <<  ++pcnt << ":" << endl;
-		MIL << "====================================" << endl;
-		// generate new problem
-		string what = str::form (_("Problem %d:"), pcnt);
-		resolverProblem = new ResolverProblem (what, "");		
-		problem = problems.elements + i + 1;
-		continue;
-	    }
-	    if (v >= solv->jobrules && v < solv->systemrules)
-	    {
-		ji = solv->ruletojob.elements[v - solv->jobrules];
-		for (j = 0; ; j++)
-		{
-		    if (problem[j] >= solv->jobrules && problem[j] < solv->systemrules && ji == solv->ruletojob.elements[problem[j] - solv->jobrules])
-			break;
-		}
-		if (problem + j < problems.elements + i)
-		    continue;
-	    }
-//	    refine_suggestion(solv, problem, v, &solution);
-	    
-	    ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
-	    
-	    for (j = 0; j < solution.count; j++)
-	    {
-		r = solv->rules + solution.elements[j];
-		why = solution.elements[j];
-#if 0
-		printrule(solv, r);
-#endif
-		if (why >= solv->jobrules && why < solv->systemrules)
-		{
-		    ji = solv->ruletojob.elements[why - solv->jobrules];
-		    what = jobQueue.elements[ji + 1];
-		    switch (jobQueue.elements[ji])
-		    {
-			case SOLVER_INSTALL_SOLVABLE: {
-			    s = pool->solvables + what;
-			    std::vector<std::string> nameVector;
-			    string kindName(id2str(_SATPool, s->name));			    
-
-			    // expect "<kind>::<name>"
-			    unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-			    PoolItem_Ref poolItem;
-			    if (count >= 2) {
-				poolItem = get_poolItem (_pool,
-							 s->repo ? string(repo_name(s->repo)) : "", //repo
-							 nameVector[1], // name
-							 nameVector[0], // kind,
-							 string(id2str(_SATPool, s->evr)),
-							 string(id2str(_SATPool, s->arch)));
-			    }
-			    if (poolItem) {
-				if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
-				    problemSolution->addSingleAction (poolItem, REMOVE);
-				    MIL << "- do not keep " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					"  installed" << endl;
-				} else {
-				    problemSolution->addSingleAction (poolItem, KEEP);
-				    MIL << "- do not install " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					endl;
-				}
-			    } else {
-				ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s->name) << "-"
-				    <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
-			    }
-			}
-			    break;
-			case SOLVER_ERASE_SOLVABLE: {
-			    s = pool->solvables + what;
-			    std::vector<std::string> nameVector;
-			    string kindName(id2str(_SATPool, s->name));			    
-
-			    // expect "<kind>::<name>"
-			    unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-			    PoolItem_Ref poolItem;
-			    
-			    if (count >= 2) {
-				poolItem = get_poolItem (_pool,
-							 s->repo ? string(repo_name(s->repo)) : "", //repo
-							 nameVector[1], // name
-							 nameVector[0], // kind,
-							 string(id2str(_SATPool, s->evr)),
-							 string(id2str(_SATPool, s->arch)));
-			    }
-			    if (poolItem) {
-				if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
-				    problemSolution->addSingleAction (poolItem, KEEP);
-				    MIL << "- do not deinstall " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					endl;
-				} else {
-				    problemSolution->addSingleAction (poolItem, INSTALL);
-				    MIL << "- do not forbid installation of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "."
-					<< id2str(pool, s->arch) <<  endl;
-				}
-			    } else {
-				ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
-				    id2str(pool, s->arch) << endl;
-			    }
-			}
-			    break;
-			case SOLVER_INSTALL_SOLVABLE_NAME:
-			    MIL << "- do not install "<<  id2str(pool, what) << endl;;
-			    ERR << "No valid solution available" << endl;
-			    break;
-			case SOLVER_ERASE_SOLVABLE_NAME:
-			    MIL << "- do not deinstall " << id2str(pool, what) << endl;
-			    ERR << "No valid solution available" << endl;
-			    break;
-			case SOLVER_INSTALL_SOLVABLE_PROVIDES:
-			    MIL << "- do not install a solvable providing " <<  dep2str(pool, what) << endl;
-			    ERR << "No valid solution available" << endl;			    
-			    break;
-			case SOLVER_ERASE_SOLVABLE_PROVIDES:
-			    MIL << "- do not deinstall all solvables providing " << dep2str(pool, what) << endl;
-			    ERR << "No valid solution available" << endl;			    
-			    break;
-			case SOLVER_INSTALL_SOLVABLE_UPDATE:
-			    s = pool->solvables + what;
-			    MIL << "- do not install most recent version of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr)
-				<< "." <<  id2str(pool, s->arch) << endl;			    
-			    ERR << "No valid solution available" << endl;			    
-			    break;
-			default:
-			    MIL << "- do something different" << endl;
-			    ERR << "No valid solution available" << endl;			    
-			    break;
-		    }
-		}
-		else if (why >= solv->systemrules && why < solv->weakrules)
-		{
-		    Solvable *sd = 0;
-		    s = pool->solvables + solv->installed->start + (why - solv->systemrules);
-		    if (solv->weaksystemrules && solv->weaksystemrules[why - solv->systemrules])
-		    {
-			Id *dp = pool->whatprovidesdata + solv->weaksystemrules[why - solv->systemrules];
-			for (; *dp; dp++)
+	problem = 0;
+	while ((problem = solver_next_problem(solv, problem)) != 0) {
+	    MIL << "Problem " <<  pcnt << ":" << endl;
+	    MIL << "====================================" << endl;
+	    string whatString = probleminfoString(solv, &jobQueue, problem);
+	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");		
+	    solution = 0;
+	    while ((solution = solver_next_solution(solv, problem, solution)) != 0) {
+		element = 0;
+		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
+		while ((element = solver_next_solutionelement(solv, problem, solution, element, &p, &rp)) != 0) {
+		    if (p == 0) {
+			/* job, rp is index into job queue */	
+			what = jobQueue.elements[rp];
+			switch (jobQueue.elements[rp-1])
 			{
-			    if (*dp >= solv->installed->start && *dp < solv->installed->start + solv->installed->nsolvables)
-				continue;
-			    if (solv->decisionmap[*dp] > 0)
-			    {
-				sd = pool->solvables + *dp;
+			    case SOLVER_INSTALL_SOLVABLE: {
+				s = pool->solvables + what;
+				std::vector<std::string> nameVector;
+				string kindName(id2str(_SATPool, s->name));			    
+
+				// expect "<kind>::<name>"
+				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
+				PoolItem_Ref poolItem;
+				if (count >= 2) {
+				    poolItem = get_poolItem (_pool,
+							     s->repo ? string(repo_name(s->repo)) : "", //repo
+							     nameVector[1], // name
+							     nameVector[0], // kind,
+							     string(id2str(_SATPool, s->evr)),
+							     string(id2str(_SATPool, s->arch)));
+				}
+				if (poolItem) {
+				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
+					problemSolution->addSingleAction (poolItem, REMOVE);
+					MIL << "- do not keep " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
+					    "  installed" << endl;
+				    } else {
+					problemSolution->addSingleAction (poolItem, KEEP);
+					MIL << "- do not install " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
+					    endl;
+				    }
+				} else {
+				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s->name) << "-"
+					<<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
+				}
+			    }
 				break;
+			    case SOLVER_ERASE_SOLVABLE: {
+				s = pool->solvables + what;
+				std::vector<std::string> nameVector;
+				string kindName(id2str(_SATPool, s->name));			    
+
+				// expect "<kind>::<name>"
+				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
+				PoolItem_Ref poolItem;
+			    
+				if (count >= 2) {
+				    poolItem = get_poolItem (_pool,
+							     s->repo ? string(repo_name(s->repo)) : "", //repo
+							     nameVector[1], // name
+							     nameVector[0], // kind,
+							     string(id2str(_SATPool, s->evr)),
+							     string(id2str(_SATPool, s->arch)));
+				}
+				if (poolItem) {
+				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
+					problemSolution->addSingleAction (poolItem, KEEP);
+					MIL << "- do not deinstall " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
+					    endl;
+				    } else {
+					problemSolution->addSingleAction (poolItem, INSTALL);
+					MIL << "- do not forbid installation of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "."
+					    << id2str(pool, s->arch) <<  endl;
+				    }
+				} else {
+				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
+					id2str(pool, s->arch) << endl;
+				}
 			    }
+				break;
+			    case SOLVER_INSTALL_SOLVABLE_NAME:
+				MIL << "- do not install "<<  id2str(pool, what) << endl;;
+				ERR << "No valid solution available" << endl;
+				break;
+			    case SOLVER_ERASE_SOLVABLE_NAME:
+				MIL << "- do not deinstall " << id2str(pool, what) << endl;
+				ERR << "No valid solution available" << endl;
+				break;
+			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
+				MIL << "- do not install a solvable providing " <<  dep2str(pool, what) << endl;
+				ERR << "No valid solution available" << endl;			    
+				break;
+			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
+				MIL << "- do not deinstall all solvables providing " << dep2str(pool, what) << endl;
+				ERR << "No valid solution available" << endl;			    
+				break;
+			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
+				s = pool->solvables + what;
+				MIL << "- do not install most recent version of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr)
+				    << "." <<  id2str(pool, s->arch) << endl;			    
+				ERR << "No valid solution available" << endl;			    
+				break;
+			    default:
+				MIL << "- do something different" << endl;
+				ERR << "No valid solution available" << endl;			    
+				break;
 			}
-		    }
+		    } else {
+			/* policy, replace p with rp */
+			s = pool->solvables + p;
+			sd = rp ? pool->solvables + rp : 0;
 
-		    std::vector<std::string> nameVector;
-		    string kindNameFrom(id2str(_SATPool, s->name));			    
-		    // expect "<kind>::<name>"
-		    unsigned count = str::split( kindNameFrom, std::back_inserter(nameVector), ":" );
-		    PoolItem_Ref itemFrom;
-
-		    if (count >= 2) {
-			itemFrom = get_poolItem (_pool,
-						 s->repo ? string(repo_name(s->repo)) : "", //repo
-						 nameVector[1], // name
-						 nameVector[0], // kind,
-						 string(id2str(_SATPool, s->evr)),
-						 string(id2str(_SATPool, s->arch)));
-		    }
-		    if (sd)
-		    {
-			int gotone = 0;
-
-			string kindNameTo(id2str(_SATPool, sd->name));			    
+			std::vector<std::string> nameVector;
+			string kindNameFrom(id2str(_SATPool, s->name));			    
 			// expect "<kind>::<name>"
-			count = str::split( kindNameTo, std::back_inserter(nameVector), ":" );
-			PoolItem_Ref itemTo;
+			unsigned count = str::split( kindNameFrom, std::back_inserter(nameVector), ":" );
+			PoolItem_Ref itemFrom;
+
 			if (count >= 2) {
-			    itemTo = get_poolItem (_pool,
-						   sd->repo ? string(repo_name(s->repo)) : "", //repo
-						   nameVector[1], // name
-						   nameVector[0], // kind,
-						   string(id2str(_SATPool, sd->evr)),
-						   string(id2str(_SATPool, sd->arch)));
+			    itemFrom = get_poolItem (_pool,
+						     s->repo ? string(repo_name(s->repo)) : "", //repo
+						     nameVector[1], // name
+						     nameVector[0], // kind,
+						     string(id2str(_SATPool, s->evr)),
+						     string(id2str(_SATPool, s->arch)));
 			}
-			if (itemFrom && itemTo) {
-			    problemSolution->addSingleAction (itemTo, INSTALL);
-			    problemSolution->addSingleAction (itemFrom, REMOVE);				
 			
-			    if (evrcmp(pool, sd->evr, s->evr) < 0)
-			    {
-				MIL << "- allow downgrade of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				    << " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
-				gotone = 1;
+			if (sd)
+			{
+			    int gotone = 0;
+
+			    string kindNameTo(id2str(_SATPool, sd->name));			    
+			    // expect "<kind>::<name>"
+			    count = str::split( kindNameTo, std::back_inserter(nameVector), ":" );
+			    PoolItem_Ref itemTo;
+			    if (count >= 2) {
+				itemTo = get_poolItem (_pool,
+						       sd->repo ? string(repo_name(s->repo)) : "", //repo
+						       nameVector[1], // name
+						       nameVector[0], // kind,
+						       string(id2str(_SATPool, sd->evr)),
+						       string(id2str(_SATPool, sd->arch)));
 			    }
-			    if (!solv->allowarchchange && s->name == sd->name )//&& archchanges(pool, sd, s))
-			    {
-				MIL << "- allow architecture change of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				    << " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
-				gotone = 1;
+			    if (itemFrom && itemTo) {
+				problemSolution->addSingleAction (itemTo, INSTALL);
+				problemSolution->addSingleAction (itemFrom, REMOVE);				
+			
+				if (evrcmp(pool, sd->evr, s->evr) < 0)
+				{
+				    MIL << "- allow downgrade of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
+					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    gotone = 1;
+				}
+				if (!solv->allowarchchange && s->name == sd->name )//&& archchanges(pool, sd, s))
+				{
+				    MIL << "- allow architecture change of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
+					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    gotone = 1;
+				}
+				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && pool_vendor2mask(pool, s->vendor) && (pool_vendor2mask(pool, s->vendor) & pool_vendor2mask(pool, sd->vendor)) == 0)
+				{
+				    MIL << "- allow vendor change of " << id2str(pool, s->vendor) << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
+					<< " to " << string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ") << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    gotone = 1;
+				}
+				if (!gotone) {
+				    MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
+					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				}
+			    } else {
+				ERR << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
+				    << " or "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << " not found" << endl;
 			    }
-			    if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && pool_vendor2mask(pool, s->vendor) && (pool_vendor2mask(pool, s->vendor) & pool_vendor2mask(pool, sd->vendor)) == 0)
-			    {
-				MIL << "- allow vendor change of " << id2str(pool, s->vendor) << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				    << " to " << string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ") << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
-				gotone = 1;
-			    }
-			    if (!gotone) {
-				MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				    << " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
-			    }
-			} else {
-			    ERR << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				<< " or "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << " not found" << endl;
 			}
-		    }
-		    else
-		    {
-			if (itemFrom) {
-			    problemSolution->addSingleAction (itemFrom, REMOVE);
-			    MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
+			else
+			{
+			    if (itemFrom) {
+				problemSolution->addSingleAction (itemFrom, REMOVE);
+				MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
+			    }
 			}
 		    }
 		}
+		resolverProblem->addSolution (problemSolution);
+		MIL << "------------------------------------" << endl;
 	    }
-	    resolverProblem->addSolution (problemSolution);
-	    MIL << "------------------------------------" << endl;
+	    // save problem
+	    resolverProblems.push_back (resolverProblem);
 	}
-	
-	// save last problem
-	resolverProblems.push_back (resolverProblem);
-	
-	queue_free(&solution);
-	queue_free(&problems);
     }
-    
     return resolverProblems;
 }
 
@@ -923,7 +1027,7 @@ SATResolver::applySolutions (const ProblemSolutionList & solutions)
 
 
 ///////////////////////////////////////////////////////////////////
-    };// namespace detail
+};// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
   };// namespace solver
