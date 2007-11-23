@@ -39,6 +39,10 @@ public:
   char ** argv() { return _running_shell ? _sh_argv : _argv; } 
 
 private:
+  void setRunningShell(bool value) { _running_shell = value; }
+  void setRunningHelp(bool value) { _running_help = value; }
+
+private:
 
   int     _argc;
   char ** _argv;
@@ -72,11 +76,10 @@ struct Settings
   no_gpg_checks(false),
   license_auto_agree(false),
   machine_readable(false),
-  root_dir("/"),
-  in_shell(false)
+  root_dir("/")
   {}
 
-  std::list<zypp::Url> additional_sources;
+//  std::list<zypp::Url> additional_sources;
 
   /**
    * Level of the amount of output.
@@ -99,7 +102,6 @@ struct Settings
   bool machine_readable;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
-  bool in_shell;
 };
 
 struct RuntimeData
@@ -124,7 +126,6 @@ extern RuntimeData gData;
 extern Settings gSettings;
 extern std::ostream no_stream;
 extern ZypperCommand command;
-extern bool ghelp;
 
 #endif /*ZYPPER_H*/
 

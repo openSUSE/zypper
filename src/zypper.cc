@@ -51,7 +51,6 @@ Settings gSettings;
 parsed_opts gopts; // global options
 parsed_opts copts; // command options
 ZypperCommand command(ZypperCommand::NONE);
-bool ghelp = false;
 
 
 Zypper::Zypper()
@@ -88,7 +87,7 @@ int Zypper::main(int argc, char ** argv)
 
   case ZypperCommand::NONE_e:
   {
-    if (ghelp)
+    if (runningHelp())
       return ZYPPER_EXIT_OK;
     else
       return ZYPPER_EXIT_ERR_SYNTAX;
@@ -137,7 +136,7 @@ void Zypper::processGlobalOptions()
   gopts = _gopts = parse_options (_argc, _argv, global_options);
   if (gOpts().count("_unknown"))
   {
-    _exit_code = ZYPPER_EXIT_ERR_SYNTAX;
+    setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
     return;
   }
 
@@ -167,7 +166,7 @@ void Zypper::processGlobalOptions()
   // $0 help
   // $0 help command
   if (gopts.count("help"))
-    ghelp = true;
+    setRunningHelp(true);
 
   if (gopts.count("quiet")) {
     gSettings.verbosity = -1;
@@ -263,7 +262,7 @@ void Zypper::processGlobalOptions()
     cout_v << _("Ignoring installed resolvables...") << endl;
     gSettings.disable_system_resolvables = true;
   }
-
+/*
   if (gopts.count("source"))
   {
     list<string> sources = gopts["source"];
@@ -276,7 +275,7 @@ void Zypper::processGlobalOptions()
       gSettings.additional_sources.push_back(url); 
     }
   }
-
+*/
   // testing option
   if (gopts.count("opt")) {
     cout << "Opt arg: ";
@@ -316,7 +315,7 @@ void Zypper::processGlobalOptions()
 
     if (_command == ZypperCommand::HELP)
     {
-      ghelp = true;
+      setRunningHelp(true);
       if (optind < _argc)
         _command = ZypperCommand(_argv[optind++]);
       else
@@ -332,7 +331,7 @@ void Zypper::processGlobalOptions()
 
   if (_command == ZypperCommand::NONE)
   {
-    if (ghelp)
+    if (runningHelp())
       cout << help_global_options << endl << help_commands;
     else if (gopts.count("version"))
       cout << PACKAGE " " VERSION << endl;
@@ -371,8 +370,8 @@ void Zypper::commandShell()
   bool loop = true;
   while (loop) {
     // reset globals
-    ghelp = false;
-    
+    setRunningHelp(false);
+
     // read a line
     string line = readline_getline ();
     cerr_vv << "Got: " << line << endl;
@@ -467,7 +466,7 @@ void Zypper::processCommandOptions()
 
   if ( (command() == ZypperCommand::HELP) && (argc() > 1) )
   try {
-    ghelp = true;
+    setRunningHelp(true);
     _command = ZypperCommand(argv()[1]);
   }
   catch (Exception & ex) {
@@ -996,7 +995,7 @@ void Zypper::processCommandOptions()
   }
 
   // parse command options
-  if (!ghelp)
+  if (!runningHelp())
   {
     ::copts = _copts = parse_options (argc(), argv(), specific_options);
     if (copts.count("_unknown"))
@@ -1010,7 +1009,7 @@ void Zypper::processCommandOptions()
 
     // treat --help command option like global --help option from now on
     // i.e. when used together with command to print command specific help
-    ghelp = ghelp || copts.count("help");
+    setRunningHelp(runningHelp() || copts.count("help"));
 
     if (optind < argc()) {
       cout_v << _("Non-option program arguments: ");
@@ -1062,7 +1061,7 @@ void Zypper::doCommand()
 
   if (command() == ZypperCommand::MOO)
   {
-    if (ghelp) { cout << _command_help << endl; return; }
+    if (runningHelp()) { cout << _command_help << endl; return; }
 
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     cout_n << _("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_") << endl;
@@ -1073,8 +1072,8 @@ void Zypper::doCommand()
   
   else if (command() == ZypperCommand::LIST_REPOS)
   {
-    if (ghelp) { cout << _command_help << endl; return; }
-    // if (ghelp) display_command_help()
+    if (runningHelp()) { cout << _command_help << endl; return; }
+    // if (runningHelp()) display_command_help()
 
     list_repos();
     return;
@@ -1084,7 +1083,7 @@ void Zypper::doCommand()
   
   else if (command() == ZypperCommand::ADD_REPO)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);return;
@@ -1166,7 +1165,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::REMOVE_REPO)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);return;
@@ -1250,7 +1249,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::RENAME_REPO)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1302,7 +1301,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::MODIFY_REPO)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1340,7 +1339,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::REFRESH)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1364,7 +1363,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::INSTALL ||
            command() == ZypperCommand::REMOVE)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1471,7 +1470,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::SRC_INSTALL)
   {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1505,7 +1504,7 @@ void Zypper::doCommand()
   {
     ZyppSearchOptions options;
 
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1587,7 +1586,7 @@ void Zypper::doCommand()
 
   // TODO: rug summary
   else if (command() == ZypperCommand::PATCH_CHECK) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1638,7 +1637,7 @@ void Zypper::doCommand()
   // --------------------------( patches )------------------------------------
 
   else if (command() == ZypperCommand::SHOW_PATCHES) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1670,7 +1669,7 @@ void Zypper::doCommand()
   // --------------------------( list updates )-------------------------------
 
   else if (command() == ZypperCommand::LIST_UPDATES) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1722,7 +1721,7 @@ void Zypper::doCommand()
   // -----------------( xml list updates and patches )------------------------
 
   else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1753,7 +1752,7 @@ void Zypper::doCommand()
   // -----------------------------( update )----------------------------------
 
   else if (command() == ZypperCommand::UPDATE) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1840,7 +1839,7 @@ void Zypper::doCommand()
   // ----------------------------( dist-upgrade )------------------------------
 
   else if (command() == ZypperCommand::DIST_UPGRADE) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
@@ -1903,7 +1902,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::INFO ||
            command() == ZypperCommand::RUG_PATCH_INFO) {
-    if (ghelp)
+    if (runningHelp())
     {
       cout << _command_help;
       setExitCode(ZYPPER_EXIT_OK);
