@@ -66,9 +66,9 @@ private:
 /**
  * Structure for holding various start-up setting.
  */
-struct Settings
+struct GlobalOptions
 {
-  Settings()
+  GlobalOptions()
   :
   verbosity(0),  
   disable_system_sources(false),
@@ -94,13 +94,12 @@ struct Settings
    * </ul>
    */
   int verbosity;
-  std::string command;
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool is_rug_compatible;
   bool non_interactive;
   bool no_gpg_checks;
-  bool license_auto_agree;
+  bool license_auto_agree; // TODO move to commandOptions
   bool machine_readable;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
@@ -125,7 +124,7 @@ struct RuntimeData
 };
 
 extern RuntimeData gData;
-extern Settings gSettings;
+extern GlobalOptions gSettings;
 extern std::ostream no_stream;
 
 #endif /*ZYPPER_H*/

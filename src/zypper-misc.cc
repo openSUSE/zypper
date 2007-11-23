@@ -37,7 +37,7 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
-extern Settings gSettings;
+extern GlobalOptions gSettings;
 
 
 void cond_init_target () {

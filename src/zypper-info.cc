@@ -18,7 +18,7 @@ using namespace zypp;
 using boost::format;
 
 extern ZYpp::Ptr God;
-extern Settings gSettings;
+extern GlobalOptions gSettings;
 
 /**
  * 

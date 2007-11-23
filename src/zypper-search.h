@@ -26,7 +26,7 @@
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 
-extern Settings gSettings;
+extern GlobalOptions gSettings;
 
 /**
  * Represents zypper search options.

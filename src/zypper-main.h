@@ -29,7 +29,7 @@
  * Macro to filter output above the current verbosity level.
  *
  * \see Output Macros
- * \see Settings::verbosity
+ * \see GlobalOptions::verbosity
  */
 #define COND_STREAM(STREAM,LEVEL) ((gSettings.verbosity >= LEVEL) ? STREAM : no_stream)
 

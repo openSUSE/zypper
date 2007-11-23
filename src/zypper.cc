@@ -47,7 +47,7 @@ using namespace boost;
 
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
-Settings gSettings;
+GlobalOptions gSettings;
 parsed_opts copts; // command options
 
 

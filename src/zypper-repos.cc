@@ -33,7 +33,7 @@ using namespace zypp::parser;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
-extern Settings gSettings;
+extern GlobalOptions gSettings;
 
 
 static bool refresh_raw_metadata(const Zypper & zypper,
