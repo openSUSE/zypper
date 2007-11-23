@@ -22,8 +22,13 @@ extern "C"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/Pathname.h"
+#include "zypp/AutoDispose.h"
+
+#include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/sat/Solvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -32,61 +37,60 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Pool::Pool
-    //	METHOD TYPE : Ctor
-    //
-    Pool::Pool()
-      : _raii( ::pool_create(), ::pool_free )
-      , _pool( *_raii.value() )
-    {
-      if ( _raii == NULL )
-      {
-        _raii.resetDispose(); // no call to ::pool_free
-        ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
-      }
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Pool::~Pool
-    //	METHOD TYPE : Dtor
-    //
-    Pool::~Pool()
-    {}
+    ::_Pool * Pool::get() const
+    { return myPool().getPool(); }
 
     bool Pool::reposEmpty() const
-    { return _pool.nrepos; }
+    { return myPool()->nrepos; }
 
     unsigned Pool::reposSize() const
-    { return _pool.nrepos; }
+    { return myPool()->nrepos; }
 
-    RepoIterator Pool::reposBegin() const
-    { return make_transform_iterator( _pool.repos, detail::mkRepo() ); }
+    Pool::RepoIterator Pool::reposBegin() const
+    { return RepoIterator( myPool()->repos ); }
 
-    RepoIterator Pool::reposEnd() const
-    { return make_transform_iterator( _pool.repos+_pool.nrepos, detail::mkRepo() ); }
+    Pool::RepoIterator Pool::reposEnd() const
+    { return RepoIterator( myPool()->repos+myPool()->nrepos ); }
 
 
     bool Pool::solvablesEmpty() const
-    { return _pool.nsolvables;}
+    {
+      // return myPool()->nsolvables;
+      // nsolvables is the array size including
+      // invalid Solvables.
+      for_( it, reposBegin(), reposEnd() )
+      {
+        if ( ! it->solvablesEmpty() )
+          return false;
+      }
+      return true;
+    }
 
     unsigned Pool::solvablesSize() const
-    { return _pool.nsolvables;}
+    {
+      // return myPool()->nsolvables;
+      // nsolvables is the array size including
+      // invalid Solvables.
+      unsigned ret = 0;
+      for_( it, reposBegin(), reposEnd() )
+      {
+        ret += it->solvablesSize();
+      }
+      return ret;
+    }
 
-    SolvableIterator Pool::solvablesBegin() const
-    { return SolvableIterator( _pool.solvables ); }
+    Pool::SolvableIterator Pool::solvablesBegin() const
+    { return SolvableIterator( myPool().getFirstId() ); }
 
-    SolvableIterator Pool::solvablesEnd() const
-    { return SolvableIterator( _pool.solvables+_pool.nsolvables ); }
+    Pool::SolvableIterator Pool::solvablesEnd() const
+    { return SolvableIterator(); }
 
     Repo Pool::reposInsert( const std::string & name_r )
     {
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
-      return ::repo_create( &_pool, name_r.c_str() );
+      return Repo( ::repo_create( get(), name_r.c_str() ) );
     }
 
     Repo Pool::reposFind( const std::string & name_r ) const
@@ -99,16 +103,26 @@ namespace zypp
       return Repo();
     }
 
+    void Pool::reposErase( const std::string & name_r )
+    {
+      reposFind( name_r ).eraseFromPool();
+    }
+
     Repo Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
     {
       // Using a temporay repo! (The additional parenthesis are required.)
-      AutoDispose<Repo> tmprepo( (EraseRepo()) );
+      AutoDispose<Repo> tmprepo( (Repo::EraseFromPool()) );
       *tmprepo = reposInsert( name_r );
       tmprepo->addSolv( file_r );
 
       // no exceptions so we keep it:
       tmprepo.resetDispose();
       return tmprepo;
+    }
+
+    Repo Pool::addRepoSolv( const Pathname & file_r )
+    {
+      return addRepoSolv( file_r, file_r.basename() );
     }
 
     /******************************************************************

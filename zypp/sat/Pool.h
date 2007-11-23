@@ -14,22 +14,14 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Iterator.h"
+#include "zypp/sat/detail/PoolMember.h"
 
-#include "zypp/AutoDispose.h"
-
-#include "zypp/sat/Repo.h"
-
-///////////////////////////////////////////////////////////////////
-extern "C"
-{
-struct _Pool;
-}
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class Pathname;
+
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
@@ -38,19 +30,36 @@ namespace zypp
     //
     //	CLASS NAME : Pool
     //
-    /** */
-    class Pool
+    /** Global sat-pool.
+     *
+     * Explicitly shared singleton \ref Pool::instance.
+     */
+    class Pool : protected detail::PoolMember
     {
       public:
-        /** Default ctor */
-        Pool();
-        /** Dtor */
-        ~Pool();
+        typedef detail::SolvableIterator SolvableIterator;
+        typedef detail::RepoIterator     RepoIterator;
 
       public:
+        /** Singleton ctor. */
+        static Pool instance()
+        { return Pool(); }
+
+        /** Ctor from \ref PoolMember. */
+        Pool( const detail::PoolMember & )
+        {}
+
+      public:
+        /** Whether \ref Pool contains repos. */
         bool reposEmpty() const;
+
+        /** Number of repos in \ref Pool. */
         unsigned reposSize() const;
+
+        /** Iterator to the first \ref Repo. */
         RepoIterator reposBegin() const;
+
+        /** Iterator behind the last \ref Repo. */
         RepoIterator reposEnd() const;
 
         /** Return a \ref Repo named \c name_r.
@@ -64,80 +73,53 @@ namespace zypp
          */
         Repo reposFind( const std::string & name_r ) const;
 
-        /** Remove a \ref Repo named \c name_r. */
-        void reposErase( const std::string & name_r )
-        { reposErase( reposFind( name_r ) ); }
-        /** \overload */
-        void reposErase( Repo repo_r )
-        { repo_r.eraseFromPool(); }
+        /** Remove a \ref Repo named \c name_r.
+         * \see \ref Repo::eraseFromPool
+         */
+        void reposErase( const std::string & name_r );
 
       public:
-        /** Functor removing \ref Repo from it's \ref Pool. */
-        struct EraseRepo;
-
         /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
          * In case of an exception the \ref Repo is removed from the \ref Pool.
          * \throws Exception if loading the solv-file fails.
+         * \see \ref Repo::EraseFromPool
         */
         Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
         /** \overload Using the files basename as \ref Repo name. */
-        Repo addRepoSolv( const Pathname & file_r )
-        { return addRepoSolv( file_r, file_r.basename() ); }
+        Repo addRepoSolv( const Pathname & file_r );
 
       public:
+        /** Whether \ref Pool contains solvables. */
         bool solvablesEmpty() const;
+
+        /** Number of solvables in \ref Pool. */
         unsigned solvablesSize() const;
+
+        /** Iterator to the first \ref Solvable. */
         SolvableIterator solvablesBegin() const;
+
+        /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
+      public:
+        /** Expert backdoor. */
+        ::_Pool * get() const;
       private:
-        /** Explicitly shared sat-pool. */
-        AutoDispose< ::_Pool *> _raii;
-        /** Convenient access. */
-        ::_Pool & _pool;
+        /** Default ctor */
+        Pool() {}
     };
     ///////////////////////////////////////////////////////////////////
 
     /** \relates Pool Stream output */
     std::ostream & operator<<( std::ostream & str, const Pool & obj );
 
-    ///////////////////////////////////////////////////////////////////
+    /** \relates Pool */
+    inline bool operator==( const Pool & lhs, const Pool & rhs )
+    { return lhs.get() == rhs.get(); }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : Pool::EraseRepo
-    //
-    /** Functor removing \ref Repo from it's \ref Pool.
-     * E.g. used as dispose function in. \ref AutoDispose
-     * to provide a convenient and exception safe temporary
-     * \ref Repo.
-     * \code
-     *  sat::Pool satpool;
-     *  MIL << "1 " << satpool << endl;
-     *  {
-     *    AutoDispose<sat::Repo> tmprepo( (sat::Pool::EraseRepo()) );
-     *    *tmprepo = satpool.reposInsert( "A" );
-     *    tmprepo->addSolv( "sl10.1-beta7-packages.solv" );
-     *    DBG << "2 " << satpool << endl;
-     *    // Calling 'tmprepo.resetDispose();' here
-     *    // would keep the Repo.
-     *  }
-     *  MIL << "3 " << satpool << endl;
-     * \endcode
-     * \code
-     * 1 sat::pool(){0repos|2slov}
-     * 2 sat::pool(){1repos|2612slov}
-     * 3 sat::pool(){0repos|2slov}
-     * \endcode
-     * Leaving the block without calling <tt>tmprepo.resetDispose();</tt>
-     * before, will automatically remove the \ref Repo from it's \ref Pool.
-     */
-    struct Pool::EraseRepo
-    {
-      void operator()( Repo repo_r ) const
-      { repo_r.eraseFromPool(); }
-    };
-    ///////////////////////////////////////////////////////////////////
+    /** \relates Pool */
+    inline bool operator!=( const Pool & lhs, const Pool & rhs )
+    { return lhs.get() != rhs.get(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat

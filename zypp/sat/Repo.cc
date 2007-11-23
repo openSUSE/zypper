@@ -9,12 +9,6 @@
 /** \file	zypp/sat/Repo.cc
  *
 */
-extern "C"
-{
-#include <satsolver/pool.h>
-#include <satsolver/repo.h>
-#include <satsolver/repo_solv.h>
-}
 #include <iostream>
 
 #include "zypp/base/Logger.h"
@@ -22,8 +16,11 @@ extern "C"
 #include "zypp/base/Exception.h"
 
 #include "zypp/AutoDispose.h"
+#include "zypp/Pathname.h"
 
+#include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/sat/Solvable.h"
 
 using std::endl;
 
@@ -34,50 +31,69 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const Repo Repo::norepo( NULL );
+    const Repo Repo::norepo;
+
+    /////////////////////////////////////////////////////////////////
+
+    ::_Repo * Repo::get() const
+    { return myPool().getRepo( _id ); }
+
+#define NO_REPO_RETURN( VAL ) \
+    ::_Repo * _repo( get() ); \
+    if ( ! _repo ) return VAL
+
+#define NO_REPO_THROW( VAL ) \
+    ::_Repo * _repo( get() ); \
+    if ( ! _repo ) ZYPP_THROW( VAL )
 
     std::string Repo::name() const
     {
-      if ( ! _repo || ! _repo->name ) return std::string();
+      NO_REPO_RETURN( std::string() );
+      if ( ! _repo->name ) return std::string();
       return _repo->name;
     }
 
     bool Repo::solvablesEmpty() const
     {
-      if ( ! _repo ) return true;
+      NO_REPO_RETURN( true );
       return _repo->nsolvables;
     }
 
     unsigned Repo::solvablesSize() const
     {
-      if ( ! _repo ) return 0;
+      NO_REPO_RETURN( 0 );
       return _repo->nsolvables;
     }
 
-    SolvableIterator Repo::solvablesBegin() const
+    Repo::SolvableIterator Repo::solvablesBegin() const
     {
-      if ( ! _repo ) return SolvableIterator();
-      return SolvableIterator( _repo->pool->solvables+_repo->start );
+      NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
+                                            detail::SolvableIterator(),
+                                            detail::SolvableIterator() ) );
+      return make_filter_iterator( detail::ByRepo( *this ),
+                                   detail::SolvableIterator(_repo->start),
+                                   detail::SolvableIterator(_repo->end) );
     }
 
-    SolvableIterator Repo::solvablesEnd() const
+    Repo::SolvableIterator Repo::solvablesEnd() const
     {
-      if ( ! _repo ) return SolvableIterator();
-      return SolvableIterator( _repo->pool->solvables+_repo->start+_repo->nsolvables );
+      NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
+                                            detail::SolvableIterator(),
+                                            detail::SolvableIterator() ) );
+      return make_filter_iterator(detail::ByRepo( *this ),
+                                  detail::SolvableIterator(_repo->end),
+                                  detail::SolvableIterator(_repo->end) );
     }
 
     void Repo::eraseFromPool()
     {
-      if ( ! _repo ) return;
-      ::repo_free( _repo, /*reuseids*/false );
+      NO_REPO_RETURN();
+      ::repo_free( _repo, /*reuseids*/true );
     }
 
     void Repo::addSolv( const Pathname & file_r )
     {
-      if ( ! _repo )
-      {
-        ZYPP_THROW( Exception( "Can't add solvables to noepo." ) );
-      }
+      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
 
       AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
       if ( file == NULL )
@@ -87,6 +103,18 @@ namespace zypp
       }
 
       ::repo_add_solv( _repo, file );
+    }
+
+    detail::SolvableIdType Repo::addSolvable()
+    {
+      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
+      return ::repo_add_solvable( _repo );
+    }
+
+    detail::SolvableIdType Repo::addSolvables( unsigned count_r )
+    {
+      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
+      return ::repo_add_solvable_block( _repo, count_r );
     }
 
     /******************************************************************

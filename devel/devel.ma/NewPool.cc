@@ -43,6 +43,8 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/sat/Solvable.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 using namespace std;
 using namespace zypp;
@@ -397,12 +399,17 @@ namespace container
 }
 ///////////////////////////////////////////////////////////////////
 
-struct AI
-{};
-struct AA
+void itCmp( const sat::Pool::SolvableIterator & l, const sat::Pool::SolvableIterator & r )
 {
-  RW_pointer<AI> _impl;
-};
+  SEC << *l << " - " << *r << endl;
+  INT << "== " << (l==r) << endl;
+  INT << "!= " << (l!=r) << endl;
+}
+
+bool isTrue()  { return true; }
+bool isFalse() { return false; }
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -413,21 +420,40 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
-  zypp::sat::Pool satpool;
-  MIL << satpool << endl;
-  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Print() );
 
+  sat::Pool satpool( sat::Pool::instance() );
+
+  //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
+  sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
+  MIL << satpool << endl;
+  std::for_each( s.solvablesBegin(), s.solvablesEnd(), Print() );
+
+  // r.eraseFromPool();
+  // MIL << satpool << endl;
+  //MIL << s << endl;
+  //std::for_each( s.solvablesBegin(), s.solvablesEnd(), Print() );
+
+
+#if 0
   satpool.addRepoSolv( "sl10.1-beta7-packages.solv" );
   satpool.addRepoSolv( "sl10.1-beta7-selections.solv" );
   MIL << satpool << endl;
 
+  sat::Repo outdated( satpool.reposFind( "sl10.1-beta7-packages.solv" ) );
+  satpool.reposErase( "sl10.1-beta7-packages.solv" );
+
+  WAR << outdated << endl;
+  for_( sit, outdated.solvablesBegin(), outdated.solvablesEnd() )
+      MIL << *sit << endl;
+
+  if ( 0 )
   for_( it, satpool.reposBegin(), satpool.reposEnd() )
   {
     WAR << *it << endl;
     for_( sit, it->solvablesBegin(), it->solvablesEnd() )
       MIL << *sit << endl;
   }
-
+#endif
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();

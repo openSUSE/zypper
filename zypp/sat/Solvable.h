@@ -15,21 +15,15 @@
 #include <iosfwd>
 
 #include "zypp/base/SafeBool.h"
-#include "zypp/base/Iterator.h"
 
-///////////////////////////////////////////////////////////////////
-extern "C"
-{
-struct _Solvable;
-}
+#include "zypp/sat/detail/PoolMember.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
-
-    class Repo;
 
     class PoolId : private base::SafeBool<PoolId>
     {
@@ -68,13 +62,17 @@ namespace zypp
     //	CLASS NAME : Solvable
     //
     /** */
-    class Solvable : private base::SafeBool<Solvable>
+    class Solvable : protected detail::PoolMember,
+                     private base::SafeBool<Solvable>
     {
       public:
-        /** Ctor defaults to \ref nosolvable.*/
-        Solvable( ::_Solvable * solvable_r = NULL )
-        : _solvable( solvable_r )
-        {}
+        /** Default ctor creates \ref nosolvable.*/
+        Solvable()
+        : _id( detail::noSolvableId ) {}
+
+        /** \ref PoolImpl ctor. */
+        explicit Solvable( detail::SolvableIdType id_r )
+        : _id( id_r ) {}
 
       public:
         /** Represents no \ref Solvable. */
@@ -100,13 +98,20 @@ namespace zypp
         const char * vendorStr() const { return string( vendor() ); }
 
       public:
+        /** Return next Solvable in \ref Pool (or \ref nosolvable). */
+        Solvable nextInPool() const;
+        /** Return next Solvable in \ref Repo (or \ref nosolvable). */
+        Solvable nextInRepo() const;
+      public:
         /** Expert backdoor. */
-        ::_Solvable * get() const { return _solvable; }
+        ::_Solvable * get() const;
+        /** Expert backdoor. */
+        detail::SolvableIdType id() const { return _id; }
       private:
         friend base::SafeBool<Solvable>::operator bool_type() const;
-        bool boolTest() const { return _solvable; }
+        bool boolTest() const { return get(); }
       private:
-        ::_Solvable * _solvable;
+        detail::SolvableIdType _id;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -122,35 +127,51 @@ namespace zypp
     { return lhs.get() != rhs.get(); }
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : SolvableIterator
-    //
-    /** */
-    class SolvableIterator : public boost::iterator_adaptor<
-                                      SolvableIterator                  // Derived
-                                      , ::_Solvable *                   // Base
-                                      , Solvable                        // Value
-                                      , boost::forward_traversal_tag    // CategoryOrTraversal
-                                      , Solvable                        // Reference
-                                    >
-    {
-      public:
-        SolvableIterator()
-        : SolvableIterator::iterator_adaptor_( 0 )
-        {}
+    namespace detail
+    { /////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : SolvableIterator
+      //
+      /** */
+      class SolvableIterator : public boost::iterator_adaptor<
+          SolvableIterator                   // Derived
+          , ::_Solvable*                     // Base
+          , Solvable                         // Value
+          , boost::single_pass_traversal_tag // CategoryOrTraversal
+          , Solvable                         // Reference
+          >
+      {
+        public:
+          SolvableIterator()
+          : SolvableIterator::iterator_adaptor_( 0 )
+          {}
 
-        explicit SolvableIterator( ::_Solvable * p )
-        : SolvableIterator::iterator_adaptor_( p )
-        {}
+          explicit SolvableIterator( const Solvable & val_r )
+          : SolvableIterator::iterator_adaptor_( 0 )
+          { assignVal( val_r ); }
 
-      private:
-        friend class boost::iterator_core_access;
+          explicit SolvableIterator( SolvableIdType id_r )
+          : SolvableIterator::iterator_adaptor_( 0 )
+          { assignVal( Solvable( id_r ) ); }
 
-        void increment();
+        private:
+          friend class boost::iterator_core_access;
 
-        Solvable dereference() const
-        { return base(); }
-    };
+          void increment()
+          { assignVal( _val.nextInPool() ); }
+
+          Solvable dereference() const
+          { return _val; }
+
+          void assignVal( const Solvable & val_r )
+          { _val = val_r; base_reference() = _val.get(); }
+
+          Solvable _val;
+      };
+      ///////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
+    } // namespace detail
     ///////////////////////////////////////////////////////////////////
 
    /////////////////////////////////////////////////////////////////

@@ -676,6 +676,7 @@ INSTALL(  FILES
 )
 
 SET( zypp_sat_SRCS
+  sat/detail/PoolImpl.cc
   sat/Pool.cc
   sat/Repo.cc
   sat/Solvable.cc
@@ -683,6 +684,8 @@ SET( zypp_sat_SRCS
 )
 
 SET( zypp_sat_HEADERS
+  sat/detail/PoolMember.h
+  sat/detail/PoolImpl.h
   sat/Pool.h
   sat/Repo.h
   sat/Solvable.h
