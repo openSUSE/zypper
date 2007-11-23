@@ -48,7 +48,6 @@ using namespace boost;
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
 Settings gSettings;
-parsed_opts gopts; // global options
 parsed_opts copts; // command options
 
 
@@ -132,7 +131,7 @@ void Zypper::processGlobalOptions()
   };
 
   // parse global options
-  gopts = _gopts = parse_options (_argc, _argv, global_options);
+  _gopts = parse_options (_argc, _argv, global_options);
   if (gOpts().count("_unknown"))
   {
     setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
@@ -155,7 +154,9 @@ void Zypper::processGlobalOptions()
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
   );
 
-  if (gopts.count("rug-compatible"))
+  parsed_opts::const_iterator it;
+
+  if (gOpts().count("rug-compatible"))
     gSettings.is_rug_compatible = true;
 
   // Help is parsed by setting the help flag for a command, which may be empty
@@ -164,43 +165,45 @@ void Zypper::processGlobalOptions()
   // The help command is eaten and transformed to the help option
   // $0 help
   // $0 help command
-  if (gopts.count("help"))
+  if (gOpts().count("help"))
     setRunningHelp(true);
 
-  if (gopts.count("quiet")) {
+  if (gOpts().count("quiet")) {
     gSettings.verbosity = -1;
     DBG << "Verbosity " << gSettings.verbosity << endl;
   }
 
-  if (gopts.count("verbose")) {
-    gSettings.verbosity += gopts["verbose"].size();
+  if ((it = gOpts().find("verbose")) != gOpts().end()) {
+    gSettings.verbosity += it->second.size(); 
+
+//    gSettings.verbosity += gOpts()["verbose"].size();
     cout << format(_("Verbosity: %d")) % gSettings.verbosity << endl;
     DBG << "Verbosity " << gSettings.verbosity << endl;
   }
 
-  if (gopts.count("non-interactive")) {
+  if (gOpts().count("non-interactive")) {
     gSettings.non_interactive = true;
     cout_n << _("Entering non-interactive mode.") << endl;
     MIL << "Entering non-interactive mode" << endl;
   }
 
-  if (gopts.count("no-gpg-checks")) {
+  if (gOpts().count("no-gpg-checks")) {
     gSettings.no_gpg_checks = true;
     cout_n << _("Entering no-gpg-checks mode.") << endl;
     MIL << "Entering no-gpg-checks mode" << endl;
   }
 
-  if (gopts.count("table-style")) {
+  if ((it = gOpts().find("table-style")) != gOpts().end()) {
     unsigned s;
-    str::strtonum (gopts["table-style"].front(), s);
+    str::strtonum (it->second.front(), s);
     if (s < _End)
       Table::defaultStyle = (TableStyle) s;
     else
       cerr << _("Invalid table style ") << s << endl;
   }
 
-  if (gopts.count("root")) {
-    gSettings.root_dir = gopts["root"].front();
+  if ((it = gOpts().find("root")) != gOpts().end()) {
+    gSettings.root_dir = it->second.front();
     Pathname tmp(gSettings.root_dir);
     if (!tmp.absolute())
     {
@@ -218,31 +221,31 @@ void Zypper::processGlobalOptions()
       + gSettings.rm_options.repoRawCachePath;
   }
 
-  if (gopts.count("reposd-dir")) {
-    gSettings.rm_options.knownReposPath = gopts["reposd-dir"].front();
+  if ((it = gOpts().find("reposd-dir")) != gOpts().end()) {
+    gSettings.rm_options.knownReposPath = it->second.front();
   }
 
-  if (gopts.count("cache-dir")) {
-    gSettings.rm_options.repoCachePath = gopts["cache-dir"].front();
+  if ((it = gOpts().find("cache-dir")) != gOpts().end()) {
+    gSettings.rm_options.repoCachePath = it->second.front();
   }
 
-  if (gopts.count("raw-cache-dir")) {
-    gSettings.rm_options.repoRawCachePath = gopts["raw-cache-dir"].front();
+  if ((it = gOpts().find("raw-cache-dir")) != gOpts().end()) {
+    gSettings.rm_options.repoRawCachePath = it->second.front();
   }
 
   DBG << "repos.d dir = " << gSettings.rm_options.knownReposPath << endl;
   DBG << "cache dir = " << gSettings.rm_options.repoCachePath << endl;
   DBG << "raw cache dir = " << gSettings.rm_options.repoRawCachePath << endl;
 
-  if (gopts.count("terse")) 
+  if (gOpts().count("terse")) 
   {
     gSettings.machine_readable = true;
     cout << "<?xml version='1.0'?>" << endl;
     cout << "<stream>" << endl;
   }
 
-  if (gopts.count("disable-repositories") ||
-      gopts.count("disable-system-sources"))
+  if (gOpts().count("disable-repositories") ||
+      gOpts().count("disable-system-sources"))
   {
     MIL << "Repositories disabled, using target only." << endl;
     cout_n <<
@@ -255,16 +258,16 @@ void Zypper::processGlobalOptions()
     MIL << "System sources enabled" << endl;
   }
 
-  if (gopts.count("disable-system-resolvables"))
+  if (gOpts().count("disable-system-resolvables"))
   {
     MIL << "System resolvables disabled" << endl;
     cout_v << _("Ignoring installed resolvables...") << endl;
     gSettings.disable_system_resolvables = true;
   }
 /*
-  if (gopts.count("source"))
+  if (gOpts().count("source"))
   {
-    list<string> sources = gopts["source"];
+    list<string> sources = gOpts()["source"];
     for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
     {
       Url url = make_url (*it);
@@ -276,9 +279,9 @@ void Zypper::processGlobalOptions()
   }
 */
   // testing option
-  if (gopts.count("opt")) {
+  if ((it = gOpts().find("opt")) != gOpts().end()) {
     cout << "Opt arg: ";
-    std::copy (gopts["opt"].begin(), gopts["opt"].end(),
+    std::copy (it->second.begin(), it->second.end(),
                ostream_iterator<string> (cout, ", "));
     cout << endl;
   }
@@ -332,7 +335,7 @@ void Zypper::processGlobalOptions()
   {
     if (runningHelp())
       cout << help_global_options << endl << help_commands;
-    else if (gopts.count("version"))
+    else if (gOpts().count("version"))
       cout << PACKAGE " " VERSION << endl;
     else
     {

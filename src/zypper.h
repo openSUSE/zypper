@@ -19,11 +19,6 @@ public:
   ~Zypper();
 
   int main(int argc, char ** argv);
-  void processGlobalOptions();
-  void processCommandOptions();
-  void commandShell();
-  void safeDoCommand();
-  void doCommand();
 
   // setters & getters
   const parsed_opts & gOpts() const { return _gopts; }
@@ -39,6 +34,12 @@ public:
   char ** argv() { return _running_shell ? _sh_argv : _argv; } 
 
 private:
+  void processGlobalOptions();
+  void processCommandOptions();
+  void commandShell();
+  void safeDoCommand();
+  void doCommand();
+
   void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value) { _running_shell = value; }
   void setRunningHelp(bool value) { _running_help = value; }

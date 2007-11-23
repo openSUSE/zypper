@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 {
   struct Bye {
     ~Bye() {
-      cerr_vv << "Exiting main()" << endl;
+      MIL << "Exiting main()" << endl;
     }
   } say_goodbye __attribute__ ((__unused__));
 
