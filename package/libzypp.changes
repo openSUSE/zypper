@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 26 13:19:34 CET 2007 - ma@suse.de
+
+- Fix missing packages in patch content list. (#340896)
+- revision 7925
+
+-------------------------------------------------------------------
 Fri Nov 16 12:46:39 CET 2007 - coolo@suse.de
 
 - fix build
