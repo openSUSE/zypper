@@ -11,60 +11,8 @@
 #include "zypper-command.h"
 #include "zypper-getopt.h"
 
-class Zypper
-{
-public:
-
-  Zypper();
-  ~Zypper();
-
-  int main(int argc, char ** argv);
-
-  // setters & getters
-  const parsed_opts & gOpts() const { return _gopts; }
-  const parsed_opts & cOpts() const { return _copts; }
-  const ZypperCommand & command() const { return _command; }
-  const std::string & commandHelp() const { return _command_help; }
-  int exitCode() const { return _exit_code; }
-  void setExitCode(int exit) { _exit_code = exit; } 
-  bool runningShell() const { return _running_shell; }
-  bool runningHelp() const { return _running_help; }
-
-  int argc() { return _running_shell ? _sh_argc : _argc; } 
-  char ** argv() { return _running_shell ? _sh_argv : _argv; } 
-
-private:
-  void processGlobalOptions();
-  void processCommandOptions();
-  void commandShell();
-  void safeDoCommand();
-  void doCommand();
-
-  void setCommand(const ZypperCommand & command) { _command = command; }
-  void setRunningShell(bool value) { _running_shell = value; }
-  void setRunningHelp(bool value) { _running_help = value; }
-
-private:
-
-  int     _argc;
-  char ** _argv;
-
-  parsed_opts   _gopts;
-  parsed_opts   _copts;
-  ZypperCommand _command;
-  std::vector<std::string> _arguments;
-  std::string _command_help;
-
-  int   _exit_code;
-  bool  _running_shell;
-  bool  _running_help;
-
-  int _sh_argc;
-  char **_sh_argv;
-};
-
 /**
- * Structure for holding various start-up setting.
+ * Structure for holding global options.
  */
 struct GlobalOptions
 {
@@ -103,6 +51,60 @@ struct GlobalOptions
   bool machine_readable;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
+};
+
+
+class Zypper
+{
+public:
+
+  Zypper();
+  ~Zypper();
+
+  int main(int argc, char ** argv);
+
+  // setters & getters
+  const GlobalOptions & globalOpts() const { return _gopts; }
+  const parsed_opts & cOpts() const { return _copts; }
+  const ZypperCommand & command() const { return _command; }
+  const std::string & commandHelp() const { return _command_help; }
+  int exitCode() const { return _exit_code; }
+  void setExitCode(int exit) { _exit_code = exit; } 
+  bool runningShell() const { return _running_shell; }
+  bool runningHelp() const { return _running_help; }
+
+  int argc() { return _running_shell ? _sh_argc : _argc; } 
+  char ** argv() { return _running_shell ? _sh_argv : _argv; } 
+
+private:
+  void processGlobalOptions();
+  void processCommandOptions();
+  void commandShell();
+  void safeDoCommand();
+  void doCommand();
+
+  void setCommand(const ZypperCommand & command) { _command = command; }
+  void setRunningShell(bool value) { _running_shell = value; }
+  void setRunningHelp(bool value) { _running_help = value; }
+
+private:
+
+  int     _argc;
+  char ** _argv;
+
+  GlobalOptions _gopts;
+  parsed_opts   _copts;
+  ZypperCommand _command;
+  std::vector<std::string> _arguments;
+  std::string _command_help;
+
+  int   _exit_code;
+  bool  _running_shell;
+  bool  _running_help;
+
+  int _sh_argc;
+  char **_sh_argv;
+
 };
 
 struct RuntimeData
