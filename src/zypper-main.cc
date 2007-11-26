@@ -40,6 +40,5 @@ int main(int argc, char **argv)
     logfile = ZYPPER_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
 
-  Zypper zypper;
-  return zypper.main(argc, argv);
+  return Zypper::instance()->main(argc, argv);
 }

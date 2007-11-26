@@ -47,9 +47,9 @@ using namespace boost;
 
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
-GlobalOptions gSettings;
 parsed_opts copts; // command options
 
+IMPL_PTR_TYPE(Zypper);
 
 Zypper::Zypper()
   : _argc(0), _argv(NULL),
@@ -64,6 +64,16 @@ Zypper::Zypper()
 Zypper::~Zypper()
 {
   MIL << "Bye!" << endl;
+}
+
+Zypper_Ptr Zypper::instance()
+{
+  static Zypper_Ptr _instance;
+  
+  if (!_instance)
+    _instance = new Zypper();
+
+  return _instance;
 }
 
 
@@ -157,7 +167,7 @@ void Zypper::processGlobalOptions()
   parsed_opts::const_iterator it;
 
   if (gopts.count("rug-compatible"))
-    gSettings.is_rug_compatible = true;
+    _gopts.is_rug_compatible = true;
 
   // Help is parsed by setting the help flag for a command, which may be empty
   // $0 -h,--help
@@ -169,26 +179,26 @@ void Zypper::processGlobalOptions()
     setRunningHelp(true);
 
   if (gopts.count("quiet")) {
-    gSettings.verbosity = -1;
-    DBG << "Verbosity " << gSettings.verbosity << endl;
+    _gopts.verbosity = -1;
+    DBG << "Verbosity " << _gopts.verbosity << endl;
   }
 
   if ((it = gopts.find("verbose")) != gopts.end()) {
-    gSettings.verbosity += it->second.size(); 
+    _gopts.verbosity += it->second.size(); 
 
-//    gSettings.verbosity += gopts["verbose"].size();
-    cout << format(_("Verbosity: %d")) % gSettings.verbosity << endl;
-    DBG << "Verbosity " << gSettings.verbosity << endl;
+//    _gopts.verbosity += gopts["verbose"].size();
+    cout << format(_("Verbosity: %d")) % _gopts.verbosity << endl;
+    DBG << "Verbosity " << _gopts.verbosity << endl;
   }
 
   if (gopts.count("non-interactive")) {
-    gSettings.non_interactive = true;
+    _gopts.non_interactive = true;
     cout_n << _("Entering non-interactive mode.") << endl;
     MIL << "Entering non-interactive mode" << endl;
   }
 
   if (gopts.count("no-gpg-checks")) {
-    gSettings.no_gpg_checks = true;
+    _gopts.no_gpg_checks = true;
     cout_n << _("Entering no-gpg-checks mode.") << endl;
     MIL << "Entering no-gpg-checks mode" << endl;
   }
@@ -203,8 +213,8 @@ void Zypper::processGlobalOptions()
   }
 
   if ((it = gopts.find("root")) != gopts.end()) {
-    gSettings.root_dir = it->second.front();
-    Pathname tmp(gSettings.root_dir);
+    _gopts.root_dir = it->second.front();
+    Pathname tmp(_gopts.root_dir);
     if (!tmp.absolute())
     {
       cerr << _("The path specified in the --root option must be absolute.") << endl;
@@ -212,34 +222,34 @@ void Zypper::processGlobalOptions()
       return;
     }
 
-    DBG << "root dir = " << gSettings.root_dir << endl;
-    gSettings.rm_options.knownReposPath = gSettings.root_dir
-      + gSettings.rm_options.knownReposPath;
-    gSettings.rm_options.repoCachePath = gSettings.root_dir
-      + gSettings.rm_options.repoCachePath;
-    gSettings.rm_options.repoRawCachePath = gSettings.root_dir
-      + gSettings.rm_options.repoRawCachePath;
+    DBG << "root dir = " << _gopts.root_dir << endl;
+    _gopts.rm_options.knownReposPath = _gopts.root_dir
+      + _gopts.rm_options.knownReposPath;
+    _gopts.rm_options.repoCachePath = _gopts.root_dir
+      + _gopts.rm_options.repoCachePath;
+    _gopts.rm_options.repoRawCachePath = _gopts.root_dir
+      + _gopts.rm_options.repoRawCachePath;
   }
 
   if ((it = gopts.find("reposd-dir")) != gopts.end()) {
-    gSettings.rm_options.knownReposPath = it->second.front();
+    _gopts.rm_options.knownReposPath = it->second.front();
   }
 
   if ((it = gopts.find("cache-dir")) != gopts.end()) {
-    gSettings.rm_options.repoCachePath = it->second.front();
+    _gopts.rm_options.repoCachePath = it->second.front();
   }
 
   if ((it = gopts.find("raw-cache-dir")) != gopts.end()) {
-    gSettings.rm_options.repoRawCachePath = it->second.front();
+    _gopts.rm_options.repoRawCachePath = it->second.front();
   }
 
-  DBG << "repos.d dir = " << gSettings.rm_options.knownReposPath << endl;
-  DBG << "cache dir = " << gSettings.rm_options.repoCachePath << endl;
-  DBG << "raw cache dir = " << gSettings.rm_options.repoRawCachePath << endl;
+  DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
+  DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
+  DBG << "raw cache dir = " << _gopts.rm_options.repoRawCachePath << endl;
 
   if (gopts.count("terse")) 
   {
-    gSettings.machine_readable = true;
+    _gopts.machine_readable = true;
     cout << "<?xml version='1.0'?>" << endl;
     cout << "<stream>" << endl;
   }
@@ -251,7 +261,7 @@ void Zypper::processGlobalOptions()
     cout_n <<
         _("Repositories disabled, using the database of installed packages only.")
         << endl;
-    gSettings.disable_system_sources = true;
+    _gopts.disable_system_sources = true;
   }
   else
   {
@@ -262,7 +272,7 @@ void Zypper::processGlobalOptions()
   {
     MIL << "System resolvables disabled" << endl;
     cout_v << _("Ignoring installed resolvables...") << endl;
-    gSettings.disable_system_resolvables = true;
+    _gopts.disable_system_resolvables = true;
   }
 /*
   if (gopts.count("source"))
@@ -274,7 +284,7 @@ void Zypper::processGlobalOptions()
       if (!url.isValid())
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
-      gSettings.additional_sources.push_back(url); 
+      _gopts.additional_sources.push_back(url); 
     }
   }
 */
@@ -443,7 +453,7 @@ void Zypper::safeDoCommand()
         report_a_bug(cerr);
   }
 
-  if ( gSettings.machine_readable )
+  if ( globalOpts().machine_readable )
     cout << "</stream>" << endl;
 }
 
@@ -1039,7 +1049,7 @@ void Zypper::processCommandOptions()
           " package management running. All such applications must be closed before"
           " using this command.");
   
-      if ( gSettings.machine_readable )
+      if ( globalOpts().machine_readable )
         cout << "<message type=\"error\">" << msg  << "</message>" <<  endl;
       else
         cerr << msg << endl;
@@ -1078,7 +1088,7 @@ void Zypper::doCommand()
     if (runningHelp()) { cout << _command_help << endl; return; }
     // if (runningHelp()) display_command_help()
 
-    list_repos();
+    list_repos(*this);
     return;
   }
 
@@ -1147,7 +1157,7 @@ void Zypper::doCommand()
       warn_if_zmd();
 
       // load gpg keys
-      cond_init_target ();
+      cond_init_target(*this);
 
       setExitCode(add_repo_by_url(*this,
           url, _arguments[1]/*alias*/, type, enabled, refresh));
@@ -1200,7 +1210,7 @@ void Zypper::doCommand()
 
     warn_if_zmd ();
 
-    bool found = remove_repo(_arguments[0]);
+    bool found = remove_repo(*this, _arguments[0]);
     if (found)
     {
       setExitCode(ZYPPER_EXIT_OK);
@@ -1233,7 +1243,7 @@ void Zypper::doCommand()
       if (copts.count("loose-query"))
         urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
-      found = remove_repo(url, urlview);
+      found = remove_repo(*this, url, urlview);
     }
     else
       found = false;
@@ -1283,11 +1293,11 @@ void Zypper::doCommand()
       return;
     }
 
-//    cond_init_target ();
+//    cond_init_target(*this);
     warn_if_zmd ();
     try {
       // also stores it
-      rename_repo(_arguments[0], _arguments[1]);
+      rename_repo(*this, _arguments[0], _arguments[1]);
     }
     catch ( const Exception & excpt_r )
     {
@@ -1335,7 +1345,7 @@ void Zypper::doCommand()
       return;
     }
 
-    modify_repo(_arguments[0]);
+    modify_repo(*this, _arguments[0]);
   }
 
   // --------------------------( refresh )------------------------------------
@@ -1384,7 +1394,7 @@ void Zypper::doCommand()
 
     if (copts.count("auto-agree-with-licenses")
         || copts.count("agree-to-third-party-licenses"))
-      gSettings.license_auto_agree = true;
+      _cmdopts.license_auto_agree = true;
 
     // check root user
     if (geteuid() != 0)
@@ -1397,7 +1407,7 @@ void Zypper::doCommand()
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
-      gSettings.non_interactive = true;
+      _gopts.non_interactive = true;
 
 
     // read resolvable type
@@ -1415,7 +1425,7 @@ void Zypper::doCommand()
 
     //! \todo support temporary additional repos
     /*
-    for ( std::list<Url>::const_iterator it = gSettings.additional_sources.begin(); it != gSettings.additional_sources.end(); ++it )
+    for ( std::list<Url>::const_iterator it = globalOpts().additional_sources.begin(); it != globalOpts().additional_sources.end(); ++it )
     {
       include_source_by_url( *it );
     }
@@ -1428,7 +1438,7 @@ void Zypper::doCommand()
           " Nothing can be installed.") << endl;
     }
 
-    cond_init_target ();
+    cond_init_target(*this);
     cond_load_resolvables(*this);
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
@@ -1458,11 +1468,9 @@ void Zypper::doCommand()
     }
     else
     {
-      setExitCode(solve_and_commit());
-      return;
+      solve_and_commit(*this);
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 
@@ -1488,7 +1496,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    cond_init_target();
+    cond_init_target(*this);
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(*this, false /* don't load to pool */);
 
@@ -1509,7 +1517,7 @@ void Zypper::doCommand()
       return;
     }
 
-    if (gSettings.disable_system_resolvables || copts.count("uninstalled-only"))
+    if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
       options.setInstalledFilter(ZyppSearchOptions::UNINSTALLED_ONLY);
 
     if (copts.count("installed-only")) options.setInstalledFilter(ZyppSearchOptions::INSTALLED_ONLY);
@@ -1532,7 +1540,7 @@ void Zypper::doCommand()
         options.addKind( kind );
       }
     }
-    else if (gSettings.is_rug_compatible) {
+    else if (globalOpts().is_rug_compatible) {
       options.clearKinds();
       options.addKind( ResTraits<Package>::kind );
     }
@@ -1551,7 +1559,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    cond_init_target();         // calls ZYpp::initializeTarget("/");
+    cond_init_target(*this);
     
     establish();
 
@@ -1597,7 +1605,7 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target ();
+    cond_init_target(*this);
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -1645,14 +1653,14 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
-    show_patches ();
-    setExitCode(ZYPPER_EXIT_OK);
+    establish();
+    show_patches(*this);
+
     return;
   }
 
@@ -1675,7 +1683,7 @@ void Zypper::doCommand()
     }
 
     string skind = copts.count("type")?  copts["type"].front() :
-      gSettings.is_rug_compatible? "package" : "patch";
+      globalOpts().is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
       cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
@@ -1685,20 +1693,20 @@ void Zypper::doCommand()
 
     bool best_effort = copts.count( "best-effort" ); 
 
-    if (gSettings.is_rug_compatible && best_effort) {
+    if (globalOpts().is_rug_compatible && best_effort) {
 	best_effort = false;
 	// 'rug' is the name of a program and must not be translated
 	// 'best-effort' is a program parameter and can not be translated
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
     establish ();
 
-    list_updates( kind, best_effort );
+    list_updates(*this, kind, best_effort );
 
     setExitCode(ZYPPER_EXIT_OK);
     return;
@@ -1715,7 +1723,7 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -1762,14 +1770,14 @@ void Zypper::doCommand()
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
-      gSettings.non_interactive = true;
+      _gopts.non_interactive = true;
 
     if (copts.count("auto-agree-with-licenses")
         || copts.count("agree-to-third-party-licenses"))
-      gSettings.license_auto_agree = true;
+      _cmdopts.license_auto_agree = true;
 
     string skind = copts.count("type")?  copts["type"].front() :
-      gSettings.is_rug_compatible? "package" : "patch";
+      globalOpts().is_rug_compatible? "package" : "patch";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
 	cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
@@ -1779,20 +1787,20 @@ void Zypper::doCommand()
 
     bool best_effort = copts.count( "best-effort" ); 
 
-    if (gSettings.is_rug_compatible && best_effort) {
+    if (globalOpts().is_rug_compatible && best_effort) {
 	best_effort = false;
 	// 'rug' is the name of a program and must not be translated
 	// 'best-effort' is a program parameter and can not be translated
 	cerr << _("Running as 'rug', can't do 'best-effort' approach to update.") << endl;
     }
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
     establish ();
 
-    bool skip_interactive = copts.count("skip-interactive") || gSettings.non_interactive;
+    bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
     mark_updates( kind, skip_interactive, best_effort );
 
 
@@ -1809,11 +1817,9 @@ void Zypper::doCommand()
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
     else
     {
-      setExitCode(solve_and_commit());
-      return;
+      solve_and_commit(*this);
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return; 
   }
 
@@ -1844,9 +1850,9 @@ void Zypper::doCommand()
     }
 
     if (copts.count("auto-agree-with-licenses"))
-      gSettings.license_auto_agree = true;
+      _cmdopts.license_auto_agree = true;
 
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -1868,11 +1874,9 @@ void Zypper::doCommand()
     // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
     else
     {
-      setExitCode(solve_and_commit());
-      return;
+      solve_and_commit(*this);
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return; 
   }
 
@@ -1897,14 +1901,14 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target ();
+    cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
     establish ();
 
-    printInfo(command(),_arguments);
+    printInfo(*this);
 
     setExitCode(ZYPPER_EXIT_OK);
     return;

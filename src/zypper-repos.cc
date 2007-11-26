@@ -33,7 +33,6 @@ using namespace zypp::parser;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
-extern GlobalOptions gSettings;
 
 
 static bool refresh_raw_metadata(const Zypper & zypper,
@@ -47,7 +46,7 @@ static bool refresh_raw_metadata(const Zypper & zypper,
 
   try
   {
-    RepoManager manager(gSettings.rm_options);
+    RepoManager manager(zypper.globalOpts().rm_options);
 
     if (!force_download)
     {
@@ -153,14 +152,14 @@ bool build_cache_callback(const ProgressData & pd)
   return true;
 }
 */
-static bool build_cache(const RepoInfo &repo, bool force_build)
+static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 {
   if (force_build)
     cout << _("Forcing building of repository cache") << endl;
 
   try
   {
-    RepoManager manager(gSettings.rm_options);
+    RepoManager manager(zypper.globalOpts().rm_options);
     manager.buildCache(repo, force_build ?
       RepoManager::BuildForced : RepoManager::BuildIfNeeded);
   }
@@ -208,8 +207,8 @@ static bool build_cache(const RepoInfo &repo, bool force_build)
 static void do_init_repos(Zypper & zypper)
 {
   // load gpg keys
-  cond_init_target ();
-  RepoManager manager(gSettings.rm_options);
+  cond_init_target(zypper);
+  RepoManager manager(zypper.globalOpts().rm_options);
 
   string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
 
@@ -260,7 +259,8 @@ static void do_init_repos(Zypper & zypper)
       // handle root user differently
       if (geteuid() == 0)
       {
-        if (refresh_raw_metadata(zypper, repo, false) || build_cache(repo, false))
+        if (refresh_raw_metadata(zypper, repo, false)
+            || build_cache(zypper, repo, false))
         {
           cerr << format(_("Disabling repository '%s' because of the above error."))
               % repo.name() << endl;
@@ -303,7 +303,7 @@ void init_repos(Zypper & zypper)
   if (done)
     return;
 
-  if ( !gSettings.disable_system_sources )
+  if ( !zypper.globalOpts().disable_system_sources )
   {
     do_init_repos(zypper);
   }
@@ -354,14 +354,15 @@ static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
 
 // ----------------------------------------------------------------------------
 
-static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
+static void print_repo_list(const Zypper & zypper,
+                            const std::list<zypp::RepoInfo> &repos )
 {
   Table tbl;
 
   // header
   TableHeader th;
   th << "#" << _("Enabled") << _("Refresh") << _("Type") << _("Alias") << _("Name");
-  if (gSettings.verbosity > VERBOSITY_NORMAL)
+  if (zypper.globalOpts().verbosity > VERBOSITY_NORMAL)
     th << "URI";
   tbl << th;
 
@@ -371,7 +372,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
-    TableRow tr (gSettings.verbosity > VERBOSITY_NORMAL ? 6 : 7);
+    TableRow tr (zypper.globalOpts().verbosity > VERBOSITY_NORMAL ? 6 : 7);
 
     // number
     tr << str::numstring (i);
@@ -386,7 +387,7 @@ static void print_repo_list( const std::list<zypp::RepoInfo> &repos )
     // name
     tr << repo.name();
     // url
-    if (gSettings.verbosity > VERBOSITY_NORMAL)
+    if (zypper.globalOpts().verbosity > VERBOSITY_NORMAL)
       tr << (*repo.baseUrlsBegin()).asString(); //! \todo properly handle multiple baseurls
 
     tbl << tr;
@@ -415,9 +416,9 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 
 // ----------------------------------------------------------------------------
 
-void list_repos()
+void list_repos(Zypper & zypper)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> repos;
 
   try
@@ -464,11 +465,11 @@ void list_repos()
     }
   }
   // print repo list the rug's way
-  else if (gSettings.is_rug_compatible)
+  else if (zypper.globalOpts().is_rug_compatible)
     print_rug_sources_list(repos);
   // print repo list as table
   else
-    print_repo_list(repos);
+    print_repo_list(zypper, repos);
 }
 
 // ----------------------------------------------------------------------------
@@ -484,11 +485,11 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 // ----------------------------------------------------------------------------
 
-int refresh_repos(const Zypper & zypper, vector<string> & arguments)
+int refresh_repos(Zypper & zypper, vector<string> & arguments)
 {
   // need gpg keys when downloading (#304672)
-  cond_init_target();
-  RepoManager manager(gSettings.rm_options);
+  cond_init_target(zypper);
+  RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> repos;
   try
   {
@@ -598,7 +599,7 @@ int refresh_repos(const Zypper & zypper, vector<string> & arguments)
 
       MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
 
-      error = build_cache(repo, force_build);
+      error = build_cache(zypper, repo, force_build);
     }
 
     if (error)
@@ -676,9 +677,9 @@ std::string timestamp ()
 // ----------------------------------------------------------------------------
 
 static
-int add_repo(const Zypper & zypper, RepoInfo & repo)
+int add_repo(Zypper & zypper, RepoInfo & repo)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
 
   bool is_cd = true;
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
@@ -745,7 +746,7 @@ int add_repo(const Zypper & zypper, RepoInfo & repo)
   cout_n << ":";
   cout << endl;
 
-  if (gSettings.is_rug_compatible)
+  if (zypper.globalOpts().is_rug_compatible)
   {
     cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
     cout_n << ( repo.autorefresh() ? "* " : "  " );
@@ -767,7 +768,7 @@ int add_repo(const Zypper & zypper, RepoInfo & repo)
     cout_n << format(_("Reading data from '%s' media")) % repo.name() << endl;
     bool error = refresh_raw_metadata(zypper, repo, false);
     if (!error)
-      error = build_cache(repo, false);
+      error = build_cache(zypper, repo, false);
     if (error)
     {
       cerr << format(_("Problem reading data from '%s' media")) % repo.name() << endl;
@@ -781,7 +782,7 @@ int add_repo(const Zypper & zypper, RepoInfo & repo)
 
 // ----------------------------------------------------------------------------
 
-int add_repo_by_url( const Zypper & zypper,
+int add_repo_by_url( Zypper & zypper,
                      const zypp::Url & url, const string & alias,
                      const string & type,
                      tribool enabled, tribool autorefresh)
@@ -789,7 +790,7 @@ int add_repo_by_url( const Zypper & zypper,
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
 
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
   RepoInfo repo;
 
   if ( ! type.empty() )
@@ -809,7 +810,7 @@ int add_repo_by_url( const Zypper & zypper,
 // ----------------------------------------------------------------------------
 
 //! \todo handle zypp exceptions
-int add_repo_from_file(const Zypper & zypper,
+int add_repo_from_file( Zypper & zypper,
                        const std::string & repo_file_url,
                        tribool enabled, tribool autorefresh)
 {
@@ -818,7 +819,7 @@ int add_repo_from_file(const Zypper & zypper,
   if (!url.isValid())
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
 
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> repos;
 
   // read the repo file
@@ -895,9 +896,9 @@ bool looks_like_url (const string& s) {
   return false;
 }
 */
-static bool do_remove_repo(const RepoInfo & repoinfo)
+static bool do_remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
   bool found = true;
   try
   {
@@ -916,23 +917,22 @@ static bool do_remove_repo(const RepoInfo & repoinfo)
 
 // ----------------------------------------------------------------------------
 
-bool remove_repo( const std::string &alias )
+bool remove_repo(Zypper & zypper, const std::string &alias )
 {
-  RepoManager manager(gSettings.rm_options);
   RepoInfo info;
   info.setAlias(alias);
 
-  return do_remove_repo(info);
+  return do_remove_repo(zypper, info);
 }
 
-bool remove_repo(const Url & url, const url::ViewOption & urlview)
+bool remove_repo(Zypper & zypper, const Url & url, const url::ViewOption & urlview)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
   bool found = true;
   try
   {
     RepoInfo info = manager.getRepositoryInfo(url, urlview);
-    found = do_remove_repo(info);
+    found = do_remove_repo(zypper, info);
   }
   catch (const repo::RepoNotFoundException & ex)
   {
@@ -944,9 +944,10 @@ bool remove_repo(const Url & url, const url::ViewOption & urlview)
 
 // ----------------------------------------------------------------------------
 
-void rename_repo(const std::string & alias, const std::string & newalias)
+void rename_repo(Zypper & zypper,
+                 const std::string & alias, const std::string & newalias)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
 
   try
   {
@@ -974,7 +975,7 @@ void rename_repo(const std::string & alias, const std::string & newalias)
 
 // ----------------------------------------------------------------------------
 
-void modify_repo(const string & alias)
+void modify_repo(Zypper & zypper, const string & alias)
 {
   // tell whether currenlty processed options are contradicting each other
   // bool contradiction = false;
@@ -1020,7 +1021,7 @@ void modify_repo(const string & alias)
 
   try
   {
-    RepoManager manager(gSettings.rm_options);
+    RepoManager manager(zypper.globalOpts().rm_options);
     RepoInfo repo(manager.getRepositoryInfo(alias));
 
     if (!indeterminate(enable))
@@ -1051,18 +1052,18 @@ void modify_repo(const string & alias)
 
 // ---------------------------------------------------------------------------
 
-void cond_load_resolvables(const Zypper & zypper, bool to_pool)
+void cond_load_resolvables(Zypper & zypper, bool to_pool)
 {
   load_repo_resolvables(zypper, to_pool);
-  if (!gSettings.disable_system_resolvables && to_pool)
-    load_target_resolvables();
+  if (!zypper.globalOpts().disable_system_resolvables && to_pool)
+    load_target_resolvables(zypper);
 }
 
 // ---------------------------------------------------------------------------
 
-void load_repo_resolvables(const Zypper & zypper, bool to_pool)
+void load_repo_resolvables(Zypper & zypper, bool to_pool)
 {
-  RepoManager manager(gSettings.rm_options);
+  RepoManager manager(zypper.globalOpts().rm_options);
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
@@ -1088,7 +1089,7 @@ void load_repo_resolvables(const Zypper & zypper, bool to_pool)
       {
         cout_v << format(_("Repository '%s' not cached. Caching..."))
                          % repo.name() << endl;
-        error = build_cache(repo, false);
+        error = build_cache(zypper, repo, false);
       }
 
       if (error)
@@ -1122,15 +1123,15 @@ void load_repo_resolvables(const Zypper & zypper, bool to_pool)
 
 // ---------------------------------------------------------------------------
 
-void load_target_resolvables(bool to_pool)
+void load_target_resolvables(Zypper & zypper, bool to_pool)
 {
-  if (!gSettings.machine_readable)
+  if (!zypper.globalOpts().machine_readable)
     cout_n << _("Reading RPM database...");
   MIL << "Going to read RPM database" << endl;
 
   ResStore tgt_resolvables(God->target()->resolvables());
 
-  if (!gSettings.machine_readable)
+  if (!zypper.globalOpts().machine_readable)
   {
     cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
     cout_n << endl;

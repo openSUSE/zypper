@@ -26,7 +26,6 @@
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
 
-extern GlobalOptions gSettings;
 
 /**
  * Represents zypper search options.
@@ -279,18 +278,19 @@ struct FillTable
   , _icache( &icache )
   , _query( query )
   , _options( options )
+  , _gopts(Zypper::instance()->globalOpts())
   {
     TableHeader header;
 
     // TranslatorExplanation S as Status
     header << _("S");
 
-    if (gSettings.is_rug_compatible)
+    if (_gopts.is_rug_compatible)
       header << _("Catalog");
     else
       header << _("Repository");
 
-    if (gSettings.is_rug_compatible)
+    if (_gopts.is_rug_compatible)
       // TranslatorExplanation This is Bundle in as used in rug.
       header << _("Bundle");
     else
@@ -316,7 +316,7 @@ struct FillTable
         row << "i"
 	    << pool_item.resolvable()->repository().info().name()
             // TODO what about rug's Bundle?
-            << (gSettings.is_rug_compatible ?
+            << (_gopts.is_rug_compatible ?
                 "" : kind_to_string_localized(pool_item.resolvable()->kind(), 1))
             << pool_item.resolvable()->name()
             << pool_item.resolvable()->edition().asString()
@@ -358,7 +358,7 @@ struct FillTable
     // add other fields to the result table
     row << alias
         // TODO what about rug's Bundle?
-        << (gSettings.is_rug_compatible ?
+        << (_gopts.is_rug_compatible ?
             "" : kind_to_string_localized(res->kind, 1))
         << res->name
         << res->edition.asString()
@@ -380,6 +380,8 @@ struct FillTable
 
   // the search options, contains i.e. the list of kinds to show
   const ZyppSearchOptions & _options;
+
+  const GlobalOptions & _gopts;
 };
 
 

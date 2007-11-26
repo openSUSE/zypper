@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include "zypp/ResStore.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
@@ -24,7 +28,6 @@ struct GlobalOptions
   is_rug_compatible(false),
   non_interactive(false),
   no_gpg_checks(false),
-  license_auto_agree(false),
   machine_readable(false),
   root_dir("/")
   {}
@@ -47,27 +50,39 @@ struct GlobalOptions
   bool is_rug_compatible;
   bool non_interactive;
   bool no_gpg_checks;
-  bool license_auto_agree; // TODO move to commandOptions
   bool machine_readable;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
 };
 
 
-class Zypper
+struct CommandOptions
+{
+  CommandOptions()
+    :
+  license_auto_agree(false)
+  {}
+
+  bool license_auto_agree;
+};
+
+
+DEFINE_PTR_TYPE(Zypper);
+
+class Zypper : public zypp::base::ReferenceCounted, private zypp::base::NonCopyable
 {
 public:
-
-  Zypper();
-  ~Zypper();
+  static Zypper_Ptr instance(); 
 
   int main(int argc, char ** argv);
 
   // setters & getters
   const GlobalOptions & globalOpts() const { return _gopts; }
+  const CommandOptions & cmdOpts() const { return _cmdopts; }
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
+  const std::vector<std::string> & arguments() const { return _arguments; }
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
@@ -77,6 +92,9 @@ public:
   char ** argv() { return _running_shell ? _sh_argv : _argv; } 
 
 private:
+  Zypper();
+  ~Zypper();
+
   void processGlobalOptions();
   void processCommandOptions();
   void commandShell();
@@ -93,6 +111,7 @@ private:
   char ** _argv;
 
   GlobalOptions _gopts;
+  CommandOptions _cmdopts;
   parsed_opts   _copts;
   ZypperCommand _command;
   std::vector<std::string> _arguments;
@@ -104,8 +123,8 @@ private:
 
   int _sh_argc;
   char **_sh_argv;
-
 };
+
 
 struct RuntimeData
 {
@@ -126,7 +145,6 @@ struct RuntimeData
 };
 
 extern RuntimeData gData;
-extern GlobalOptions gSettings;
 extern std::ostream no_stream;
 
 #endif /*ZYPPER_H*/

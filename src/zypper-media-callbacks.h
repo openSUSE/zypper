@@ -71,17 +71,20 @@ namespace ZmartRecipients
   // progress for downloading a file
   struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
   {
+    DownloadProgressReportReceiver() : _gopts(Zypper::instance()->globalOpts())
+    {}
+
     virtual void start( const zypp::Url & file, zypp::Pathname localfile )
     {
-      if (gSettings.verbosity < VERBOSITY_NORMAL)
+      if (_gopts.verbosity < VERBOSITY_NORMAL)
         return;
-      else if (gSettings.verbosity == VERBOSITY_MEDIUM || gData.show_media_progress_hack)
+      else if (_gopts.verbosity == VERBOSITY_MEDIUM || gData.show_media_progress_hack)
       {
         cout << CLEARLN << _("Downloading: ")
           << zypp::Pathname(file.getPathName()).basename()
           << std::endl;
       }
-      else if (gSettings.verbosity >= VERBOSITY_HIGH)
+      else if (_gopts.verbosity >= VERBOSITY_HIGH)
       {
         cout  << CLEARLN << _("Downloading: ") << file << std::endl;
       }
@@ -89,7 +92,7 @@ namespace ZmartRecipients
 
     virtual bool progress(int value, const zypp::Url & /*file*/)
     {
-      if (gSettings.verbosity < VERBOSITY_NORMAL)
+      if (_gopts.verbosity < VERBOSITY_NORMAL)
         return true;
       if (gData.show_media_progress_hack)
         display_progress ("download", cout, "Downloading", value);
@@ -101,7 +104,7 @@ namespace ZmartRecipients
     // not used anywhere in libzypp 3.20.0
     virtual DownloadProgressReport::Action problem( const zypp::Url & /*file*/, DownloadProgressReport::Error error, const std::string & description )
     {
-      if (gSettings.verbosity >= VERBOSITY_NORMAL)
+      if (_gopts.verbosity >= VERBOSITY_NORMAL)
       {
         if (gData.show_media_progress_hack)
           display_done ("download", cout_n);
@@ -115,7 +118,7 @@ namespace ZmartRecipients
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
     virtual void finish( const zypp::Url & /*file*/, Error error, const std::string & konreason )
     {
-      if (gSettings.verbosity < VERBOSITY_NORMAL)
+      if (_gopts.verbosity < VERBOSITY_NORMAL)
         return;
       else if (gData.show_media_progress_hack)
         display_done ("download", cout);
@@ -124,7 +127,11 @@ namespace ZmartRecipients
       // don't display errors here, they will be reported in media change callback
       // display_error (error, konreason);
     }
+    
+  private:
+    const GlobalOptions & _gopts;
   };
+
 
   struct AuthenticationReportReceiver : public zypp::callback::ReceiveReport<zypp::media::AuthenticationReport>
   {
@@ -132,7 +139,7 @@ namespace ZmartRecipients
                         const std::string & description,
                         zypp::media::AuthData & auth_data)
     {
-      if (gSettings.non_interactive)
+      if (Zypper::instance()->globalOpts().non_interactive)
       {
         MIL << "Non-interactive mode: aborting" << std::endl;
         cout_vv << description << std::endl;

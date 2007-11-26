@@ -19,7 +19,7 @@
 /**
  * Initialize rpm database on target, if not already initialized. 
  */
-void cond_init_target();
+void cond_init_target(Zypper & zypper);
 
 /// Parse a capability string. On error print a message and return noCap
 zypp::Capability safe_parse_cap (const Zypper & zypper,
@@ -40,13 +40,13 @@ void mark_by_capability (const Zypper & zypper,
 			 const zypp::ResObject::Kind &kind,
 			 const std::string &capstr );
 
-int show_summary();
+int show_summary(Zypper & zypper);
 //std::string calculate_token();
 
-void establish ();
-bool resolve();
-void dump_pool ();
-void show_patches();
+void establish();
+bool resolve(const Zypper & zypper);
+void dump_pool();
+void show_patches(const Zypper & zypper);
 bool xml_list_patches();
 void xml_list_updates();
 
@@ -65,7 +65,9 @@ void patch_check();
  * \param kind  resolvable type
  * \param best_effort
  */
-void list_updates( const zypp::ResObject::Kind &kind, bool best_effort );
+void list_updates(const Zypper & zypper,
+                  const zypp::ResObject::Kind &kind,
+                  bool best_effort);
 
 /**
  * \param kind  resolvable type
@@ -83,7 +85,7 @@ void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive, boo
  *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
  *  
  */
-int solve_and_commit ();
+void solve_and_commit(Zypper & zypper);
 
 /**
  * Loops through resolvables, checking if there is license to confirm. When
@@ -92,7 +94,7 @@ int solve_and_commit ();
  * 
  * \returns true if all licenses have been confirmed, false otherwise.  
  */
-bool confirm_licenses();
+bool confirm_licenses(Zypper & zypper);
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess

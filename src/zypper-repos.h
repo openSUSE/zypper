@@ -20,12 +20,12 @@ void init_repos(Zypper & zypper);
 /**
  * List defined repositories.
  */
-void list_repos();
+void list_repos(Zypper & zypper);
 
 /**
  * Refresh all enabled repositories.
  */
-int refresh_repos(const Zypper & zypper, std::vector<std::string> & arguments);
+int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
 
 
 /**
@@ -39,7 +39,7 @@ int refresh_repos(const Zypper & zypper, std::vector<std::string> & arguments);
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_by_url(const Zypper & zypper,
+int add_repo_by_url(Zypper & zypper,
                     const zypp::Url & url,
                     const std::string & alias,
                     const std::string & type = "",
@@ -57,7 +57,7 @@ int add_repo_by_url(const Zypper & zypper,
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_from_file(const Zypper & zypper,
+int add_repo_from_file(Zypper & zypper,
                        const std::string & repo_file_url,
                        boost::tribool enabled = boost::indeterminate,
                        boost::tribool autorefresh = boost::indeterminate);
@@ -65,21 +65,23 @@ int add_repo_from_file(const Zypper & zypper,
 /**
  * Delte repository specified by \a alias.
  */
-bool remove_repo( const std::string &alias );
+bool remove_repo(Zypper & zypper, const std::string &alias );
 
-bool remove_repo( const zypp::Url & url, const zypp::url::ViewOption & urlview );
+bool remove_repo(Zypper & zypper,
+                 const zypp::Url & url, const zypp::url::ViewOption & urlview);
 
 /**
  * Rename repository specified by \a alias to \a newalias.
  */
-void rename_repo(const std::string & alias, const std::string & newalias);
+void rename_repo(Zypper & zypper,
+                 const std::string & alias, const std::string & newalias);
 
 /**
  * Modify repository properties.
  * 
  * \param alias repository alias
  */
-void modify_repo(const std::string & alias);
+void modify_repo(Zypper & zypper, const std::string & alias);
 
 
 /**
@@ -92,7 +94,7 @@ void modify_repo(const std::string & alias);
  * \see load_repo_resolvables(bool)
  * \see load_target_resolvables(bool)
  */
-void cond_load_resolvables(const Zypper & zypper, bool to_pool = true);
+void cond_load_resolvables(Zypper & zypper, bool to_pool = true);
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
@@ -101,7 +103,7 @@ void cond_load_resolvables(const Zypper & zypper, bool to_pool = true);
  *        <tt>false</tt> they will be stored \ref gData.target_resolvables
  *        (global ResStore variable).
  */
-void load_target_resolvables(bool to_pool = true);
+void load_target_resolvables(Zypper & zypper, bool to_pool = true);
 
 /**
  * Reads resolvables from the repository sqlite cache. 
@@ -110,7 +112,7 @@ void load_target_resolvables(bool to_pool = true);
  *        <tt>false</tt> they will be stored in \ref gData.repo_resolvables
  *        (global ResStore vector).
  */
-void load_repo_resolvables(const Zypper & zypper, bool to_pool = true);
+void load_repo_resolvables(Zypper & zypper, bool to_pool = true);
 
 
 /**

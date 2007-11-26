@@ -20,6 +20,7 @@
 #include "zypp/Package.h"
 //#include "zypp/target/rpm/RpmCallbacks.h"
 
+#include "zypper.h"
 #include "zypper-callbacks.h"
 #include "AliveCursor.h"
 
@@ -35,7 +36,8 @@ struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   virtual void show( zypp::Message::constPtr message )
   {
-    if ( !gSettings.machine_readable )
+    
+    if ( !Zypper::instance()->globalOpts().machine_readable )
     {
       cout_v << message << endl; // [message]important-msg-1.0-1
       cout_n << message->text() << endl;

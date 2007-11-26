@@ -18,22 +18,26 @@ using namespace zypp;
 using boost::format;
 
 extern ZYpp::Ptr God;
-extern GlobalOptions gSettings;
+
 
 /**
  * 
  */
-void printInfo(const ZypperCommand & command, const vector<string> & arguments) {
+void printInfo(const Zypper & zypper)
+{
   Resolvable::Kind kind;
-  if (command == ZypperCommand::INFO) kind =  ResTraits<Package>::kind;
-  else if (command == ZypperCommand::RUG_PATCH_INFO) kind = ResTraits<Patch>::kind;
+  if (zypper.command() == ZypperCommand::INFO)
+    kind =  ResTraits<Package>::kind;
+  else if (zypper.command() == ZypperCommand::RUG_PATCH_INFO)
+    kind = ResTraits<Patch>::kind;
 
   ResPool pool = God->pool();
 
   cout << endl;
 
-  for(vector<string>::const_iterator nameit = arguments.begin();
-      nameit != arguments.end(); ++nameit ) {
+  for(vector<string>::const_iterator nameit = zypper.arguments().begin();
+      nameit != zypper.arguments().end(); ++nameit )
+  {
 
     // find the resolvable among installed 
     PoolItem installed;
@@ -63,10 +67,10 @@ void printInfo(const ZypperCommand & command, const vector<string> & arguments) 
 
       cout << endl << endl;
 
-      if (command == ZypperCommand::INFO)
-        printPkgInfo(installer.item,installed);
-      else if (command == ZypperCommand::RUG_PATCH_INFO)
-        printPatchInfo(installer.item,installed);
+      if (zypper.command() == ZypperCommand::INFO)
+        printPkgInfo(zypper, installer.item,installed);
+      else if (zypper.command() == ZypperCommand::RUG_PATCH_INFO)
+        printPatchInfo(zypper, installer.item,installed);
     }
   }
 }
@@ -91,9 +95,10 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 </pre>
  *
  */
-void printPkgInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
-
-  cout << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+void printPkgInfo(const Zypper & zypper,
+                  const PoolItem & pool_item, const PoolItem & ins_pool_item)
+{
+  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
   cout << _("Name: ") << pool_item.resolvable()->name() << endl;
   cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
@@ -141,7 +146,7 @@ atom: xv = 3.10a-1091.2
 </pre>
  * 
  */
-void printPatchInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) {
+void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const PoolItem & ins_pool_item) {
   cout << _("Name: ") << pool_item.resolvable()->name() << endl;
   cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
   cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;
@@ -163,7 +168,7 @@ void printPatchInfo(const PoolItem & pool_item, const PoolItem & ins_pool_item) 
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
   cout << _("Reboot Required: ") << (patch->reboot_needed() ? _("Yes") : _("No")) << endl;
 
-  if (!gSettings.is_rug_compatible)
+  if (!zypper.globalOpts().is_rug_compatible)
     cout << _("Package Manager Restart Required") << ": ";
   else
     cout << _("Restart Required: ");

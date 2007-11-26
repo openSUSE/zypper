@@ -31,7 +31,7 @@
  * \see Output Macros
  * \see GlobalOptions::verbosity
  */
-#define COND_STREAM(STREAM,LEVEL) ((gSettings.verbosity >= LEVEL) ? STREAM : no_stream)
+#define COND_STREAM(STREAM,LEVEL) ((Zypper::instance()->globalOpts().verbosity >= LEVEL) ? STREAM : no_stream)
 
 /** \name Output Macros
  * Alway use these macros to produce output so that the verbosity options

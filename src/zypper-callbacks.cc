@@ -15,7 +15,7 @@ using namespace boost;
 void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
 
-  if (gSettings.machine_readable)
+  if (Zypper::instance()->globalOpts().machine_readable)
   {
     cout << "<progress id=\"" << id << "\" type=\"percentage\" value=\"" << percent << "\" name=\"" << s << "\"/>" << endl;
     return;
@@ -36,7 +36,7 @@ void display_progress ( const std::string &id, ostream & out, const string& s, i
 void display_tick ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
-  if (gSettings.machine_readable)
+  if (Zypper::instance()->globalOpts().machine_readable)
   {
     cout << "<progress id=\"" << id << "\" type=\"tick\" value=\"" << -1 << "\" name=\"" << s << "\"/>" << endl;
     return;
@@ -52,7 +52,7 @@ void display_tick ( const std::string &id, ostream & out, const string& s) {
 void display_done ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
-  if (gSettings.machine_readable)
+  if (Zypper::instance()->globalOpts().machine_readable)
   {
     cout << "<progress id=\"" << id << "\" type=\"done\" name=\"" << s << "\"/>" << endl;
     return;
@@ -67,7 +67,7 @@ void display_done ( const std::string &id, ostream & out, const string& s) {
 
 void display_done (const std::string &id, ostream & out) {
 
-  if (gSettings.machine_readable)
+  if (Zypper::instance()->globalOpts().machine_readable)
   {
     display_done( id, cout, "");
     return;
@@ -91,7 +91,7 @@ int read_action_ari (int default_action) {
   }
 
   // non-interactive mode
-  if (gSettings.non_interactive) {
+  if (Zypper::instance()->globalOpts().non_interactive) {
       char c;
       switch (default_action) {
 	  case 0: c = 'a'; break;
@@ -128,15 +128,16 @@ int read_action_ari (int default_action) {
 
 bool read_bool_answer(const string & question, bool default_answer)
 {
-  if (!gSettings.machine_readable)
+  const GlobalOptions & gopts = Zypper::instance()->globalOpts();
+  if (!gopts.machine_readable)
     cout << CLEARLN << question
     << " [" << _("yes") << "/" << _("no") << "]: "
     << flush;
 
   // non-interactive mode: print the answer for convenience and return default
-  if (gSettings.non_interactive)
+  if (gopts.non_interactive)
   {
-    if (!gSettings.machine_readable)
+    if (!gopts.machine_readable)
       cout << (default_answer ? _("yes") : _("no")) << endl;
     MIL << "answer (default): " << (default_answer ? 'y' : 'n') << endl;
     return default_answer;
@@ -184,7 +185,7 @@ void report_zypp_exception(const zypp::Exception & e)
 {
   if (e.historySize())
   {
-    if (gSettings.verbosity > VERBOSITY_NORMAL)
+    if (Zypper::instance()->globalOpts().verbosity > VERBOSITY_NORMAL)
     {
       // print the whole history
       cerr << e.historyAsString();

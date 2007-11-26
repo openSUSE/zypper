@@ -37,15 +37,14 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
-extern GlobalOptions gSettings;
 
 
-void cond_init_target () {
+void cond_init_target (Zypper & zypper) {
   static bool done = false;
   //! \todo do this so that it works in zypper shell
   if (!done) {
     cout_v << _("Initializing Target") << endl;
-    God->initializeTarget(gSettings.root_dir);
+    God->initializeTarget(zypper.globalOpts().root_dir);
     done = true;
   }
 }
@@ -407,7 +406,8 @@ ostream& operator << (ostream & stm, ios::iostate state)
 }
 
 //! @return true to retry solving now, false to cancel, indeterminate to continue
-tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
+tribool show_problem (Zypper & zypper,
+                      const ResolverProblem & prob, ProblemSolutionList & todo)
 {
   ostream& stm = cerr;
   string det;
@@ -430,7 +430,7 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
       stm << "  " << det << endl;
   }
 
-  if (gSettings.non_interactive)
+  if (zypper.globalOpts().non_interactive)
     return false;
 
   int reply;
@@ -472,7 +472,7 @@ tribool show_problem (const ResolverProblem & prob, ProblemSolutionList & todo)
 }
 
 // return true to retry solving, false to cancel transaction
-bool show_problems ()
+bool show_problems(Zypper & zypper)
 {
   bool retry = true;
   ostream& stm = cerr;
@@ -504,7 +504,7 @@ bool show_problems ()
   // now list all problems with solution proposals
   for (i = b; i != e; ++i) {
     stm << endl;
-    tribool stopnow = show_problem (*(*i), todo);
+    tribool stopnow = show_problem(zypper, *(*i), todo);
     if (! indeterminate (stopnow)) {
       retry = stopnow == true;
       break;
@@ -522,7 +522,8 @@ bool show_problems ()
 typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResObjectSet;
 
 void show_summary_resolvable_list(const string & label,
-                                  KindToResObjectSet::const_iterator it)
+                                  KindToResObjectSet::const_iterator it,
+                                  int verbosity)
 {
   cout << endl << label << endl;
 
@@ -543,7 +544,7 @@ void show_summary_resolvable_list(const string & label,
   {
     ResObject::constPtr res(*resit);
 
-    if (gSettings.verbosity == VERBOSITY_NORMAL)
+    if (verbosity == VERBOSITY_NORMAL)
     {
       // watch the terminal widht
       if (cols_written == 0)
@@ -560,7 +561,7 @@ void show_summary_resolvable_list(const string & label,
       cout << INDENT;
 
     // resolvable name
-    cout << res->name() << (gSettings.verbosity ? "" : " ");
+    cout << res->name() << (verbosity ? "" : " ");
     // plus edition and architecture for verbose output
     cout_v << "-" << res->edition() << "." << res->arch();
     // plus repo providing this package
@@ -570,7 +571,7 @@ void show_summary_resolvable_list(const string & label,
     cout_v << endl;
   }
 
-  if (gSettings.verbosity == VERBOSITY_NORMAL)
+  if (verbosity == VERBOSITY_NORMAL)
     cout << endl;
 }
 
@@ -581,7 +582,7 @@ void show_summary_resolvable_list(const string & label,
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int show_summary()
+int show_summary(Zypper & zypper)
 {
   int retv = -1; // nothing to do;
 
@@ -631,7 +632,7 @@ int show_summary()
 
   if (retv == -1)
   {
-    if (gSettings.machine_readable)
+    if (zypper.globalOpts().machine_readable)
       cout << "<message type=\"warning\">" << _("Nothing to do.") << "</message>" << endl;
     else
       cout << _("Nothing to do.") << endl;
@@ -640,7 +641,7 @@ int show_summary()
   }
 
   // no output for machines for now
-  if (gSettings.machine_readable)
+  if (zypper.globalOpts().machine_readable)
     return retv;
 
   KindToResObjectSet toinstall;
@@ -708,7 +709,7 @@ int show_summary()
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
 
-    show_summary_resolvable_list(title, it);
+    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
   }
 
   for (KindToResObjectSet::const_iterator it = todowngrade.begin();
@@ -722,7 +723,7 @@ int show_summary()
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
 
-    show_summary_resolvable_list(title, it);
+    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
   }
 
   for (KindToResObjectSet::const_iterator it = toinstall.begin();
@@ -736,7 +737,7 @@ int show_summary()
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
 
-    show_summary_resolvable_list(title, it);
+    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
   }
 
   for (KindToResObjectSet::const_iterator it = toremove.begin();
@@ -750,7 +751,7 @@ int show_summary()
         it->second.size()
     )) % kind_to_string_localized(it->first, it->second.size()));
 
-    show_summary_resolvable_list(title, it);
+    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
   }
 
   cout << endl;
@@ -828,12 +829,12 @@ void establish ()
   dump_pool ();
 }
 
-bool resolve()
+bool resolve(const Zypper & zypper)
 {
   establish ();
   cout_v << _("Resolving dependencies...") << endl;
   God->resolver()->setForceResolve(
-      gSettings.is_rug_compatible ? true : copts.count("force-resolution") );
+      zypper.globalOpts().is_rug_compatible ? true : copts.count("force-resolution") );
   return God->resolver()->resolvePool();
 }
 
@@ -898,13 +899,13 @@ void dump_pool ()
 }
 
 // patches
-void show_patches()
+void show_patches(const Zypper & zypper)
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
   TableHeader th;
-  th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+  th << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
      << _("Name") << _("Version") << _("Category") << _("Status");
   tbl << th;
 
@@ -1017,14 +1018,14 @@ bool xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-void list_patch_updates(bool best_effort)
+void list_patch_updates(const Zypper & zypper, bool best_effort)
 {
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
   TableHeader th;
   unsigned cols;
 
-  th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+  th << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
      << _("Name") << _("Version") << _("Category") << _("Status");
   cols = 5;
   tbl << th;
@@ -1155,11 +1156,11 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
 
 // ----------------------------------------------------------------------------
 
-void list_updates( const ResObject::Kind &kind, bool best_effort )
+void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
   if (k_is_patch)
-    list_patch_updates( best_effort );
+    list_patch_updates(zypper, best_effort );
   else {
     Table tbl;
 
@@ -1173,9 +1174,9 @@ void list_updates( const ResObject::Kind &kind, bool best_effort )
     // TranslatorExplanation S stands for Status
     th << _("S");
     if (!hide_repo) {
-      th << (gSettings.is_rug_compatible ? _("Catalog: ") : _("Repository: "));
+      th << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "));
     }
-    if (gSettings.is_rug_compatible) {
+    if (zypper.globalOpts().is_rug_compatible) {
       th << _("Bundle");
     }
     name_col = th.cols();
@@ -1200,7 +1201,7 @@ void list_updates( const ResObject::Kind &kind, bool best_effort )
       if (!hide_repo) {
 	tr << res->repository().info().name();
       }
-      if (gSettings.is_rug_compatible)
+      if (zypper.globalOpts().is_rug_compatible)
 	tr << "";		// Bundle
       tr << res->name ();
 
@@ -1380,27 +1381,29 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive, bool best
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int solve_and_commit () {
+void solve_and_commit (Zypper & zypper)
+{
   while (true) {
-    bool success = resolve();
+    bool success = resolve(zypper);
     if (success)
       break;
 
-    success = show_problems ();
+    success = show_problems(zypper);
     if (! success) {
       // TODO cancel transaction?
-      return ZYPPER_EXIT_ERR_ZYPP; // #242736
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
+      return;
     }
   }
 
 
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-  int retv = show_summary();
+  int retv = show_summary(zypper);
   bool was_installed = false;
   if (retv >= 0) { // there are resolvables to install/uninstall
     if (read_bool_answer(_("Continue?"), true)) {
 
-      if (!confirm_licenses()) return ZYPPER_EXIT_OK;
+      if (!confirm_licenses(zypper)) return;
 
       cerr_v << _("committing") << endl;
 
@@ -1424,14 +1427,16 @@ int solve_and_commit () {
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
             _("Please, see the above error message to for a hint."));
-        return ZYPPER_EXIT_ERR_ZYPP;
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
       }
       catch ( const zypp::repo::RepoException & e ) {
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
             _("Please, see the above error message to for a hint."));
-        return ZYPPER_EXIT_ERR_ZYPP;
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
       }
       catch ( const zypp::FileCheckException & e ) {
         ZYPP_CAUGHT(e);
@@ -1442,7 +1447,8 @@ int solve_and_commit () {
             "- refresh the repositories using 'zypper refresh'\n"
             "- use another installation medium (if e.g. damaged)\n"
             "- use another repository"));
-        return ZYPPER_EXIT_ERR_ZYPP;
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
       }
       catch ( const Exception & excpt_r ) {
         ZYPP_CAUGHT( excpt_r );
@@ -1457,7 +1463,7 @@ int solve_and_commit () {
   {
     if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
     {
-      if (gSettings.machine_readable)
+      if (zypper.globalOpts().machine_readable)
         cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
             " your machine. Please, do it as soon as possible.") << "</message>" << endl;
       else
@@ -1466,14 +1472,14 @@ int solve_and_commit () {
     }
     else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
     {
-      if (!gSettings.machine_readable)
+      if (!zypper.globalOpts().machine_readable)
         cout << _("WARNING: One of installed patches affects the package"
             " manager itself, thus it requires its restart before executing"
             " any further operations.") << endl;
     }
   }
 
-  return retv;
+  zypper.setExitCode(retv);
 }
 
 // TODO confirm licenses
@@ -1481,7 +1487,7 @@ int solve_and_commit () {
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
 // - after negative answer, call solve_and_commit() again
-bool confirm_licenses()
+bool confirm_licenses(Zypper & zypper)
 {
   bool confirmed = true;
 
@@ -1490,10 +1496,10 @@ bool confirm_licenses()
     if (it->status().isToBeInstalled() &&
         !it->resolvable()->licenseToConfirm().empty())
     {
-      if (gSettings.license_auto_agree)
+      if (zypper.cmdOpts().license_auto_agree)
       {
         // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-			  if (!gSettings.machine_readable)
+			  if (!zypper.globalOpts().machine_readable)
         	cout << format(_("Automatically agreeing with %s %s license."))
 	            % it->resolvable()->name()
 	            % kind_to_string_localized(it->resolvable()->kind(),1)
@@ -1513,11 +1519,11 @@ bool confirm_licenses()
       string question = _("In order to install this package, you must agree"
         " to terms of the above license. Continue?");
 
-      if (!read_bool_answer(question, gSettings.license_auto_agree))
+      if (!read_bool_answer(question, zypper.cmdOpts().license_auto_agree))
       {
         confirmed = false;
 
-        if (gSettings.non_interactive)
+        if (zypper.globalOpts().non_interactive)
         {
           //! \todo do this with _PL()
           cout << endl <<

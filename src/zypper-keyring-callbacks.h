@@ -32,9 +32,11 @@ namespace zypp {
     ///////////////////////////////////////////////////////////////////
     struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
     {
+      KeyRingReceive() : _gopts(Zypper::instance()->globalOpts()) {}
+
       virtual bool askUserToAcceptUnsignedFile( const std::string &file )
       {
-        if (gSettings.no_gpg_checks)
+        if (_gopts.no_gpg_checks)
         {
           MIL << "Accepting unsigned file (" << file << ")" << endl;
           cout_v << boost::format(_("Warning: Accepting an unsigned file %s.")) % file;
@@ -59,7 +61,7 @@ namespace zypp {
 
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
       {
-        if (gSettings.no_gpg_checks)
+        if (_gopts.no_gpg_checks)
         {
           MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
           cout_n << boost::format(
@@ -79,7 +81,7 @@ namespace zypp {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
-        if (gSettings.no_gpg_checks)
+        if (_gopts.no_gpg_checks)
         {
           MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
               % keyid % keyname % fingerprint << endl;
@@ -100,7 +102,7 @@ namespace zypp {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
-        if (gSettings.no_gpg_checks)
+        if (_gopts.no_gpg_checks)
         {
           MIL << boost::format(
               "Ignoring failed signature verification for %s"
@@ -126,15 +128,20 @@ namespace zypp {
             % file % keyid % keyname % fingerprint);
         return read_bool_answer(question, false);
       }
+
+    private:
+      const GlobalOptions & _gopts;
     };
 
     struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
     {
+      DigestReceive() : _gopts(Zypper::instance()->globalOpts()) {}
+
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
 	std::string question = boost::str(boost::format(
 	    _("No digest for file %s.")) % file) + " " + _("Continue?");
-        return read_bool_answer(question, gSettings.no_gpg_checks);
+        return read_bool_answer(question, _gopts.no_gpg_checks);
       }
 
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
@@ -142,12 +149,12 @@ namespace zypp {
         std::string question = boost::str(boost::format(
             _("Unknown digest %s for file %s.")) %name % file) + " " +
             _("Continue?");
-        return read_bool_answer(question, gSettings.no_gpg_checks);
+        return read_bool_answer(question, _gopts.no_gpg_checks);
       }
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-        if (gSettings.no_gpg_checks)
+        if (_gopts.no_gpg_checks)
         {
           WAR << boost::format(
               "Ignoring failed digest verification for %s (expected %s, found %s).")
@@ -163,6 +170,9 @@ namespace zypp {
 	    % file.basename() % requested % found) + " " + _("Continue?");
         return read_bool_answer(question, false);
       }
+
+    private:
+      const GlobalOptions & _gopts;
     };
 
     ///////////////////////////////////////////////////////////////////
