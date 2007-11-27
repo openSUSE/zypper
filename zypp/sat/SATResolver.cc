@@ -31,6 +31,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/sat/SATResolver.h"
+#include "zypp/sat/Solvable.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
 extern "C" {
@@ -361,6 +362,18 @@ get_poolItem (const ResPool & pool, const string & repo_alias, const string & pa
     return poolItem;
 }
 
+//------------------------------------------------------------------------------------------------------------
+//  This function loops over the pool and grabs
+//  all item.status().transacts() and item.status().byUser()
+//  It clears all previous bySolver() states also
+//
+//  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
+//  Every toBeUninstalled is passed to zypp::solver:detail::Resolver.addPoolItemToRemove()
+//
+//  Solver results must be written back to the pool.
+//------------------------------------------------------------------------------------------------------------
+
+
 struct CollectTransact : public resfilter::PoolItemFilterFunctor
 {
     SATResolver & resolver;
@@ -415,72 +428,12 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     }
 };
 
-//------------------------------------------------------------------------------------------------------------
-// Helper functions for the SAT-Pool
-//------------------------------------------------------------------------------------------------------------
 
-// find solvable id by name and repo
-//   If repo != NULL, find there
-//   else find in pool (available packages)
-//
-
-static Id
-select_solvable( Pool *pool,
-		 const PoolItem_Ref item)
-{
-    Id id, archid;
-    int end;
-
-    string packageName = str::form (_("%s:%s"),
-				    item->kind().asString().c_str(),
-				    item->name().c_str()
-				    );
-
-    string repoName = item->repository().info().alias();
-
-    // Searching concerning repo
-    Repo *repo = NULL;
-    for (int i = 0; i < pool->nrepos; i++)
-    {
-	string compName(repo_name(pool->repos[i]));
-	if (repoName == compName) {
-	    repo = pool->repos[i];
-	    break;
-	}
-    }
-
-    id = str2id( pool, packageName.c_str(), 0 );
-    if (id == ID_NULL) {
-	return id;
-    }
-    archid = ID_NULL;
-    archid = str2id( pool, item->arch().asString().c_str(), 0 );
-    if (archid == ID_NULL) {
-	return ID_NULL;
-    }
-
-    end = repo ? repo->start + repo->nsolvables : pool->nsolvables;
-    for (int i = repo ? repo->start : 1 ; i < end; i++)
-    {
-	if (archid && pool->solvables[i].arch != archid)
-	    continue;
-	if (pool->solvables[i].name == id)
-	    return i;
-    }
-
-    return ID_NULL;
-}
-
-
-
-//  This function loops over the pool and grabs
-//  all item.status().transacts() and item.status().byUser()
-//  It clears all previous bySolver() states also
-//
-//  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
-//  Every toBeUninstalled is passed to zypp::solver:detail::Resolver.addPoolItemToRemove()
-//
-//  Solver results must be written back to the pool.
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+// solving.....
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 
 
 bool
@@ -505,7 +458,7 @@ SATResolver::resolvePool()
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
 
-	Id id = select_solvable( _SATPool, *iter );
+	Id id = iter->satSolvable().id(); 
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
