@@ -63,12 +63,16 @@ namespace zypp
     */
     const SerialNumber & serial() const;
 
+    /** Wheter in sync with sat-pool. */
+    bool satSynced() const;
+    /** Sync with sat-pool. */
+    void satSync() const;
+
+  public:
     /**  */
     bool empty() const;
     /**  */
     size_type size() const;
-
-  public:
 
     /** \name Iterate through all ResObjects (all kinds). */
     //@{

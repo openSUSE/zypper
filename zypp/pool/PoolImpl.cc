@@ -10,14 +10,18 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/capability/FilesystemCap.h"
+#include "zypp/base/Measure.h"
 
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"
 #include "zypp/CapSet.h"
 #include "zypp/Package.h"
 #include "zypp/VendorAttr.h"
+
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/Repo.h"
 
 using std::endl;
 
@@ -218,6 +222,48 @@ namespace zypp
         const_cast<PoolImpl*>(this)->_serial.setDirty(); // propagate changed /etc/sysconfig/storage
       }
       return _serial;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : PoolImpl::satSync
+    //	METHOD TYPE : void
+    //
+    void PoolImpl::satSync() const
+    {
+      if ( satSynced() )
+      {
+        MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
+        return;
+      }
+
+      debug::Measure mnf( "Sync changes to sat-pool..." );
+      MIL << "Pool: " << _serial << ": Sync changes to sat-pool... " << _satSyncRequired << endl;
+
+      std::map<std::string, std::list<PoolItem> > todo;
+      for_( it, begin(), end() )
+      {
+        if ( ! (*it).satSolvable() )
+        {
+          todo[(*it)->repository().info().alias()].push_back( *it );
+        }
+      }
+
+      DBG << "Update missing repos... " << todo.size() << endl;
+      for_( it, todo.begin(), todo.end() )
+      {
+        DBG << "Update " << it->first << ": " << it->second.size() << endl;
+        sat::Repo repo( sat::Pool::instance().reposInsert( it->first ) );
+        sat::Solvable first( repo.addSolvables( it->second.size() ) );
+        DBG << " starting at " << first << endl;
+        for_( pit, it->second.begin(), it->second.end() )
+        {
+          // *pit to sat::Solvable
+        }
+      }
+
+      //_satSyncRequired.remember( _serial );
+      //MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
     }
 
     /******************************************************************

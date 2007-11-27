@@ -327,11 +327,20 @@ namespace zypp
        * (Resolvables or Dependencies) changes. */
       const SerialNumber & serial() const;
 
+      /** Wheter in sync with sat-pool. */
+      bool satSynced() const
+      { return _satSyncRequired.isClean( _serial ); }
+
+      /** Sync with sat-pool. */
+      void satSync() const;
+
     private:
       /** Serial number. */
       SerialNumber        _serial;
       /** Watch for changes in /etc/sysconfig/storage. */
       SerialNumberWatcher _watchFilesystemSysconfigStorage;
+      /** Watch for changes in /etc/sysconfig/storage. */
+      SerialNumberWatcher _satSyncRequired;
 
     public:
       ContainerT   _store;

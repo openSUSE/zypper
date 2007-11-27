@@ -40,6 +40,9 @@ namespace zypp
     ::_Pool * Pool::get() const
     { return myPool().getPool(); }
 
+    const SerialNumber & Pool::serial() const
+    { return myPool().serial(); }
+
     bool Pool::reposEmpty() const
     { return myPool()->nrepos; }
 
@@ -51,7 +54,6 @@ namespace zypp
 
     Pool::RepoIterator Pool::reposEnd() const
     { return RepoIterator( myPool()->repos+myPool()->nrepos ); }
-
 
     bool Pool::solvablesEmpty() const
     {
@@ -90,6 +92,7 @@ namespace zypp
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
+      myPool().setDirty();
       return Repo( ::repo_create( get(), name_r.c_str() ) );
     }
 
@@ -132,7 +135,7 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const Pool & obj )
     {
-      return str << "sat::pool(){"
+      return str << "sat::pool(" << obj.serial() << "){"
           << obj.reposSize() << "repos|"
           << obj.solvablesSize() << "slov}";
     }

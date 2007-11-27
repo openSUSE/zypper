@@ -25,38 +25,6 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    class PoolId : private base::SafeBool<PoolId>
-    {
-      public:
-        PoolId() : _id( 0 ) {}
-        PoolId( int id_r ) : _id( id_r ) {}
-        static const PoolId noid;
-        /** Evaluate \ref PoolId in a boolean context (\c != \c 0). */
-        using base::SafeBool<PoolId>::operator bool_type;
-        int get() const { return _id; }
-      private:
-        friend base::SafeBool<PoolId>::operator bool_type() const;
-        bool boolTest() const { return _id; }
-      private:
-        int _id;
-    };
-
-    /** \relates PoolId Stream output */
-    std::ostream & operator<<( std::ostream & str, const PoolId & obj );
-
-    /** \relates PoolId */
-    inline bool operator==( const PoolId & lhs, const PoolId & rhs )
-    { return lhs.get() == rhs.get(); }
-
-    /** \relates PoolId */
-    inline bool operator!=( const PoolId & lhs, const PoolId & rhs )
-    { return lhs.get() != rhs.get(); }
-
-    typedef PoolId NameId;
-    typedef PoolId EvrId;
-    typedef PoolId ArchId;
-    typedef PoolId VendorId;
-
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Solvable
@@ -90,14 +58,6 @@ namespace zypp
         Repo repo() const;
 
       public:
-        const char * string( const PoolId & id_r ) const;
-
-        const char * nameStr() const { return string( name() ); }
-        const char * evrStr() const { return string( evr() ); }
-        const char * archStr() const { return string( arch() ); }
-        const char * vendorStr() const { return string( vendor() ); }
-
-      public:
         /** Return next Solvable in \ref Pool (or \ref nosolvable). */
         Solvable nextInPool() const;
         /** Return next Solvable in \ref Repo (or \ref nosolvable). */
@@ -125,6 +85,10 @@ namespace zypp
     /** \relates Solvable */
     inline bool operator!=( const Solvable & lhs, const Solvable & rhs )
     { return lhs.get() != rhs.get(); }
+
+    /** \relates Solvable */
+    inline bool operator<( const Solvable & lhs, const Solvable & rhs )
+    { return lhs.get() < rhs.get(); }
 
     ///////////////////////////////////////////////////////////////////
     namespace detail

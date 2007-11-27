@@ -21,6 +21,7 @@ extern "C"
 #include <iosfwd>
 
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/SerialNumber.h"
 
 #include "zypp/sat/detail/PoolMember.h"
 
@@ -51,6 +52,14 @@ namespace zypp
           /** Pointer style access forwarded to sat-pool. */
           ::_Pool * operator->()
           { return _pool; }
+
+        public:
+          /** Serial number changing whenever the content changes. */
+          const SerialNumber & serial() const
+          { return _serial; }
+          /** */
+          void setDirty()
+          { _serial.setDirty(); }
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */
@@ -104,7 +113,10 @@ namespace zypp
           }
 
        private:
-          ::_Pool * _pool;
+         /** sat-pool. */
+         ::_Pool * _pool;
+         /** Serial number. */
+         SerialNumber _serial;
       };
       ///////////////////////////////////////////////////////////////////
 

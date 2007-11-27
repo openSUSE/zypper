@@ -50,6 +50,10 @@ namespace zypp
         {}
 
       public:
+        /***/
+        const SerialNumber & serial() const;
+
+      public:
         /** Whether \ref Pool contains repos. */
         bool reposEmpty() const;
 

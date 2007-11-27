@@ -64,6 +64,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  bool ResPool::satSynced() const
+  {  return _pimpl->satSynced(); }
+
+  void ResPool::satSync() const
+  {  return _pimpl->satSync(); }
+
   bool ResPool::empty() const
   { return _pimpl->empty(); }
 

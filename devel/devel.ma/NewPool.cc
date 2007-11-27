@@ -423,43 +423,18 @@ int main( int argc, char * argv[] )
 
   sat::Pool satpool( sat::Pool::instance() );
 
-  //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
-  sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
-  MIL << satpool << endl;
-  std::for_each( s.solvablesBegin(), s.solvablesEnd(), Print() );
-
-  // r.eraseFromPool();
-  // MIL << satpool << endl;
-  //MIL << s << endl;
-  //std::for_each( s.solvablesBegin(), s.solvablesEnd(), Print() );
-
-
 #if 0
-  satpool.addRepoSolv( "sl10.1-beta7-packages.solv" );
-  satpool.addRepoSolv( "sl10.1-beta7-selections.solv" );
-  MIL << satpool << endl;
-
-  sat::Repo outdated( satpool.reposFind( "sl10.1-beta7-packages.solv" ) );
-  satpool.reposErase( "sl10.1-beta7-packages.solv" );
-
-  WAR << outdated << endl;
-  for_( sit, outdated.solvablesBegin(), outdated.solvablesEnd() )
-      MIL << *sit << endl;
-
-  if ( 0 )
-  for_( it, satpool.reposBegin(), satpool.reposEnd() )
-  {
-    WAR << *it << endl;
-    for_( sit, it->solvablesBegin(), it->solvablesEnd() )
-      MIL << *sit << endl;
-  }
-#endif
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
+#endif
 
   setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
+
+  ResPool pool( getZYpp()->pool() );
+  USR << "pool: " << pool << endl;
+  pool.satSync();
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
   RepoInfoList repos = repoManager.knownRepositories();
@@ -518,7 +493,7 @@ int main( int argc, char * argv[] )
   }
 
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -531,8 +506,8 @@ int main( int argc, char * argv[] )
                    getZYpp()->target()->resolvables().end() ) << endl;
   }
 
-  ResPool pool( getZYpp()->pool() );
   USR << "pool: " << pool << endl;
+  pool.satSync();
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 

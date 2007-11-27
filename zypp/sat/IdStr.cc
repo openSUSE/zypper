@@ -6,19 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/Solvable.cc
+/** \file	zypp/sat/IdStr.cc
  *
 */
 #include <iostream>
-
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
+//#include "zypp/base/Logger.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/IdStr.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/Repo.h"
 
 using std::endl;
 
@@ -29,47 +24,18 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const Solvable Solvable::nosolvable;
+    static const IdStr::IdStr Null( STRID_NULL );
 
     /////////////////////////////////////////////////////////////////
 
-    ::_Solvable * Solvable::get() const
-    { return myPool().getSolvable( _id ); }
-
-    Solvable Solvable::nextInPool() const
-    { return Solvable( myPool().getNextId( _id ) ); }
-
-#define NO_SOLVABLE_RETURN( VAL ) \
-    ::_Solvable * _solvable( get() ); \
-    if ( ! _solvable ) return VAL
-
-    NameId Solvable::name() const
+    const char * IdStr::c_str() const
     {
-      NO_SOLVABLE_RETURN( NameId() );
-      return NameId( _solvable->name ); }
-
-    EvrId Solvable::evr() const
-    {
-      NO_SOLVABLE_RETURN( EvrId() );
-      return EvrId( _solvable->evr );
+      return ::id2str( myPool().getPool(), _id );
     }
 
-    ArchId Solvable::arch() const
+    std::string IdStr::string() const
     {
-      NO_SOLVABLE_RETURN( ArchId() );
-      return ArchId( _solvable->arch );
-    }
-
-    VendorId Solvable::vendor() const
-    {
-      NO_SOLVABLE_RETURN( VendorId() );
-      return VendorId( _solvable->vendor );
-    }
-
-    Repo Solvable::repo() const
-    {
-      NO_SOLVABLE_RETURN( Repo::norepo );
-      return Repo( _solvable->repo );
+      return ::id2str( myPool().getPool(), _id );
     }
 
     /******************************************************************
@@ -77,13 +43,9 @@ namespace zypp
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
-    std::ostream & operator<<( std::ostream & str, const Solvable & obj )
+    std::ostream & operator<<( std::ostream & str, const IdStr & obj )
     {
-      if ( ! obj )
-        return str << "sat::solvable()";
-
-      return str << "sat::solvable(" << obj.id() << "|" << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
-          << obj.repo().name() << "}";
+      return str << obj.c_str();
     }
 
     /////////////////////////////////////////////////////////////////
