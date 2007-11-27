@@ -83,13 +83,19 @@ public:
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
   const std::vector<std::string> & arguments() const { return _arguments; }
+  /** Check whether is exiting (has entered the exit path). \see _exiting */
+  int exiting() const { return _exiting; }
+  /** Tell zypper to enter the exit path \see _exiting */
+  void exit(bool value = true) { _exiting = value; } 
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
   bool runningHelp() const { return _running_help; }
 
   int argc() { return _running_shell ? _sh_argc : _argc; } 
-  char ** argv() { return _running_shell ? _sh_argv : _argv; } 
+  char ** argv() { return _running_shell ? _sh_argv : _argv; }
+  
+  void print_unknown_command_hint();
 
 private:
   Zypper();
@@ -117,6 +123,10 @@ private:
   std::vector<std::string> _arguments;
   std::string _command_help;
 
+  /** Indicates that zypper is exiting through exit checkers like
+   * <tt>if (zypper.exiting()) return;</tt>. To be used for SIGINT or SIGTERM
+   * handling */
+  bool  _exiting;
   int   _exit_code;
   bool  _running_shell;
   bool  _running_help;

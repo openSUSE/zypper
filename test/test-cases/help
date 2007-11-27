@@ -1,0 +1,44 @@
+- zypper help
+  show list of global options and list of commands
+
+- zypper help help
+- zypper help -h
+  show usage hint for the help command
+
+- zypper help unknown-command
+  show 'unknown command' message
+  show unknown command hint
+
+- zypper help command
+- zypper -h command
+- zypper command -h
+  show command specific help text
+
+- zypper unknown-option help
+  show unknown option message
+  show unknown option hint
+
+- zypper unknown-command help
+  show 'unknown command' message
+  show unknown command hint
+
+in shell
+
+- help
+  show list of global options and list of commands
+
+- help help
+- help -h
+  show usage hint for the help command
+
+- help unknown-command
+  show 'unknown command' message
+  show unknown command hint
+
+- help command
+- command -h
+  show command specific help text
+
+- unknown-command help
+  show 'unknown command' message
+  show unknown command hint
