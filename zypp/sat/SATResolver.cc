@@ -38,7 +38,6 @@ extern "C" {
 #include "satsolver/poolarch.h"
 #include "satsolver/evr.h"
 #include "satsolver/poolvendor.h"
-#include "satsolver/sat_debug.h"            
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -79,12 +78,6 @@ SATResolver::dumpOn( std::ostream & os ) const
     return os << "<resolver/>";
 }
 
-void logSat (char *logString)
-{
-    MIL << logString;
-}
-	
-
 //---------------------------------------------------------------------------
 
 SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
@@ -99,10 +92,6 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _architecture( zypp_detail::defaultArchitecture() )
 
 {
-    // initialialize logging
-    sat_set_debug( getenv("ZYPP_FULLLOG") ? DEBUG_5 : ERROR,
-		   1 ); // logging linenumer, function,....
-    sat_set_debugCallback (logSat);
 }
 
 
@@ -832,21 +821,21 @@ SATResolver::problems () const
 	    MIL << "Problem " <<  pcnt << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string whatString = probleminfoString(solv, &jobQueue, problem);
-	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");		
+	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");
 	    solution = 0;
 	    while ((solution = solver_next_solution(solv, problem, solution)) != 0) {
 		element = 0;
 		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
 		while ((element = solver_next_solutionelement(solv, problem, solution, element, &p, &rp)) != 0) {
 		    if (p == 0) {
-			/* job, rp is index into job queue */	
+			/* job, rp is index into job queue */
 			what = jobQueue.elements[rp];
 			switch (jobQueue.elements[rp-1])
 			{
 			    case SOLVER_INSTALL_SOLVABLE: {
 				s = pool->solvables + what;
 				std::vector<std::string> nameVector;
-				string kindName(id2str(_SATPool, s->name));			    
+				string kindName(id2str(_SATPool, s->name));
 
 				// expect "<kind>::<name>"
 				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
@@ -878,12 +867,12 @@ SATResolver::problems () const
 			    case SOLVER_ERASE_SOLVABLE: {
 				s = pool->solvables + what;
 				std::vector<std::string> nameVector;
-				string kindName(id2str(_SATPool, s->name));			    
+				string kindName(id2str(_SATPool, s->name));
 
 				// expect "<kind>::<name>"
 				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
 				PoolItem_Ref poolItem;
-			    
+
 				if (count >= 2) {
 				    poolItem = get_poolItem (_pool,
 							     s->repo ? string(repo_name(s->repo)) : "", //repo
@@ -918,21 +907,21 @@ SATResolver::problems () const
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
 				MIL << "- do not install a solvable providing " <<  dep2str(pool, what) << endl;
-				ERR << "No valid solution available" << endl;			    
+				ERR << "No valid solution available" << endl;
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
 				MIL << "- do not deinstall all solvables providing " << dep2str(pool, what) << endl;
-				ERR << "No valid solution available" << endl;			    
+				ERR << "No valid solution available" << endl;
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
 				s = pool->solvables + what;
 				MIL << "- do not install most recent version of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr)
-				    << "." <<  id2str(pool, s->arch) << endl;			    
-				ERR << "No valid solution available" << endl;			    
+				    << "." <<  id2str(pool, s->arch) << endl;
+				ERR << "No valid solution available" << endl;
 				break;
 			    default:
 				MIL << "- do something different" << endl;
-				ERR << "No valid solution available" << endl;			    
+				ERR << "No valid solution available" << endl;
 				break;
 			}
 		    } else {
@@ -941,7 +930,7 @@ SATResolver::problems () const
 			sd = rp ? pool->solvables + rp : 0;
 
 			std::vector<std::string> nameVector;
-			string kindNameFrom(id2str(_SATPool, s->name));			    
+			string kindNameFrom(id2str(_SATPool, s->name));
 			// expect "<kind>::<name>"
 			unsigned count = str::split( kindNameFrom, std::back_inserter(nameVector), ":" );
 			PoolItem_Ref itemFrom;
@@ -954,12 +943,12 @@ SATResolver::problems () const
 						     string(id2str(_SATPool, s->evr)),
 						     string(id2str(_SATPool, s->arch)));
 			}
-			
+
 			if (sd)
 			{
 			    int gotone = 0;
 
-			    string kindNameTo(id2str(_SATPool, sd->name));			    
+			    string kindNameTo(id2str(_SATPool, sd->name));
 			    // expect "<kind>::<name>"
 			    count = str::split( kindNameTo, std::back_inserter(nameVector), ":" );
 			    PoolItem_Ref itemTo;
@@ -973,8 +962,8 @@ SATResolver::problems () const
 			    }
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
-				problemSolution->addSingleAction (itemFrom, REMOVE);				
-			
+				problemSolution->addSingleAction (itemFrom, REMOVE);
+
 				if (evrcmp(pool, sd->evr, s->evr) < 0)
 				{
 				    MIL << "- allow downgrade of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
@@ -1030,7 +1019,7 @@ SATResolver::applySolutions (const ProblemSolutionList & solutions)
 	Resolver dummyResolver(_pool);
 	if (!solution->apply (dummyResolver))
 	    break;
-    }    
+    }
 }
 
 

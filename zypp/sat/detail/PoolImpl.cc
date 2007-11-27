@@ -14,6 +14,7 @@ extern "C"
 #include <satsolver/solvable.h>
 #include <satsolver/repo.h>
 #include <satsolver/pool.h>
+#include <satsolver/sat_debug.h>
 }
 
 #include <iostream>
@@ -25,7 +26,7 @@ extern "C"
 
 using std::endl;
 
-///////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
@@ -34,6 +35,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
+
+      void logSat( char *logString )
+      {
+        _MIL("satsolver") << logString;
+      }
 
       ///////////////////////////////////////////////////////////////////
       //
@@ -58,6 +64,10 @@ namespace zypp
         {
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
         }
+        // initialialize logging
+        bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
+        ::sat_set_debug( verbose ? DEBUG_5 : ERROR, 1 ); // logging linenumer, function,....
+        ::sat_set_debugCallback( logSat );
       }
 
       ///////////////////////////////////////////////////////////////////
