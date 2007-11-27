@@ -108,7 +108,6 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const PoolItem_Ref::Impl & obj )
   {
     str << obj.status();
-    str << obj.satSolvable();
     if (obj.resolvable())
 	str << *obj.resolvable();
     else
