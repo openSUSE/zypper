@@ -37,7 +37,8 @@ extern "C" {
 #include "satsolver/repo_solv.h"
 #include "satsolver/poolarch.h"
 #include "satsolver/evr.h"
-#include "satsolver/poolvendor.h"        
+#include "satsolver/poolvendor.h"
+#include "satsolver/sat_debug.h"            
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -78,6 +79,11 @@ SATResolver::dumpOn( std::ostream & os ) const
     return os << "<resolver/>";
 }
 
+void logSat (char *logString)
+{
+    MIL << logString;
+}
+	
 
 //---------------------------------------------------------------------------
 
@@ -93,7 +99,10 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _architecture( zypp_detail::defaultArchitecture() )
 
 {
-
+    // initialialize logging
+    sat_set_debug( getenv("ZYPP_FULLLOG") ? DEBUG_5 : ERROR,
+		   1 ); // logging linenumer, function,....
+    sat_set_debugCallback (logSat);
 }
 
 
