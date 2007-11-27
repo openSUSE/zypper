@@ -280,88 +280,6 @@ string2kind (const std::string & str)
 }
 
 
-struct FindPackage : public resfilter::ResObjectFilterFunctor
-{
-    PoolItem_Ref poolItem;
-    Resolvable::Kind kind;
-    bool edition_set;
-    Edition edition;
-    bool arch_set;
-    Arch arch;
-
-    FindPackage (Resolvable::Kind k, const string & e, const string & a)
-	: kind (k)
-	, edition_set( !e.empty() )
-	, edition( e )
-	, arch_set( !a.empty() )
-	, arch( a )
-    {
-    }
-
-    bool operator()( PoolItem_Ref p)
-    {
-	if (arch_set && arch != p->arch()) {				// if arch requested, force this arch
-	    return true;
-	}
-
-	if (edition_set) {
-	    if (p->edition().compare( edition ) == 0) {			// if edition requested, force this edition
-		poolItem = p;
-		return false;
-	    }
-	    return true;
-	}
-
-	if (!poolItem							// none yet
-	    || (poolItem->arch().compare( p->arch() ) < 0)		// new has better arch
-	    || (poolItem->edition().compare( p->edition() ) < 0))	// new has better edition
-	{
-	    poolItem = p;
-	}
-	return true;
-    }
-};
-
-
-static PoolItem_Ref
-get_poolItem (const ResPool & pool, const string & repo_alias, const string & package_name, const string & kind_name = "", const string & edition = "",  const string & arch = "")
-{
-    PoolItem_Ref poolItem;
-    Resolvable::Kind kind = string2kind (kind_name);
-
-    try {
-	FindPackage info (kind, edition, arch);
-
-	invokeOnEach( pool.byNameBegin( package_name ),
-		      pool.byNameEnd( package_name ),
-		      functor::chain( resfilter::ByRepository(repo_alias), resfilter::ByKind (kind) ),
-		      functor::functorRef<bool,PoolItem> (info) );
-
-	poolItem = info.poolItem;
-        if (!poolItem) {
-            // try to find the resolvable over all channel. This is useful for e.g. languages
-            invokeOnEach( pool.byNameBegin( package_name ),
-                          pool.byNameEnd( package_name ),
-                          resfilter::ByKind (kind),
-                          functor::functorRef<bool,PoolItem> (info) );
-            poolItem = info.poolItem;
-        }
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT (excpt_r);
-	ERR << "Can't find kind[" << kind_name << "]:'" << package_name << "': repo '" << repo_alias << "' not defined" << endl;
-	if (kind_name.empty())
-	    ERR << "Please specify kind=\"...\" in the <install.../> request." << endl;
-	return poolItem;
-    }
-
-    if (!poolItem) {
-	ERR << "Can't find kind: " << kind << ":'" << package_name << "' in repo '" << repo_alias << "': no such name/kind" << endl;
-    }
-
-    return poolItem;
-}
-
 //------------------------------------------------------------------------------------------------------------
 //  This function loops over the pool and grabs
 //  all item.status().transacts() and item.status().byUser()
@@ -501,7 +419,6 @@ SATResolver::resolvePool()
     // copying solution back to zypp pool
     //-----------------------------------------
     Id p;
-    Solvable *s;
 
     /* solvables to be erased */
     for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
@@ -509,32 +426,13 @@ SATResolver::resolvePool()
       if (solv->decisionmap[i] > 0)
 	continue;
 
-      // getting repo
-      s = _SATPool->solvables + i;
-      Repo *repo = s->repo;
-      PoolItem_Ref poolItem;
-      string kindName(id2str(_SATPool, s->name));
-      std::vector<std::string> nameVector;
-
-      // expect "<kind>::<name>"
-      unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-
-      if ( count == 3 ) {
-	  PoolItem_Ref poolItem = get_poolItem (_pool,
-						repo ? string(repo_name(repo)) : "",
-						nameVector[2], // name
-						nameVector[0], // kind,
-						string(id2str(_SATPool, s->evr)),
-						string(id2str(_SATPool, s->arch)));
-	  if (poolItem) {
-	      ResStatus status;
-	      status.isToBeUninstalled();
-	      solution_to_pool (poolItem, status, ResStatus::SOLVER);
-	  } else {
-	      ERR << kindName << " not found in ZYPP pool." << endl;
-	  }
+      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i)); 
+      if (poolItem) {
+	  ResStatus status;
+	  status.isToBeUninstalled();
+	  solution_to_pool (poolItem, status, ResStatus::SOLVER);
       } else {
-	  ERR << "Cannot split " << kindName << " correctly." << endl;
+	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
     }
 
@@ -547,32 +445,13 @@ SATResolver::resolvePool()
       if (p >= solv->installed->start && p < solv->installed->start + solv->installed->nsolvables)
 	continue;
 
-      // getting repo
-      s = _SATPool->solvables + p;
-      Repo *repo = s->repo;
-
-      PoolItem_Ref poolItem;
-      string kindName(id2str(_SATPool, s->name));
-      std::vector<std::string> nameVector;
-      // expect "<kind>::<name>"
-      unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-
-      if ( count == 3 ) {
-	  PoolItem_Ref poolItem = get_poolItem (_pool,
-						repo ? string(repo_name(repo)) : "",
-						nameVector[2], // name
-						nameVector[0], // kind,
-						string(id2str(_SATPool, s->evr)),
-						string(id2str(_SATPool, s->arch)));
-	  if (poolItem) {
-	      ResStatus status;
-	      status.isToBeInstalled();
-	      solution_to_pool (poolItem, status, ResStatus::SOLVER);
-	  } else {
-	      ERR << kindName << " not found in ZYPP pool." << endl;
-	  }
+      PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+      if (poolItem) {
+	  ResStatus status;
+	  status.isToBeInstalled();
+	  solution_to_pool (poolItem, status, ResStatus::SOLVER);
       } else {
-	  ERR << "Cannot split " << kindName << " correctly." << endl;
+	      ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
     }
 
@@ -787,20 +666,7 @@ SATResolver::problems () const
 			{
 			    case SOLVER_INSTALL_SOLVABLE: {
 				s = pool->solvables + what;
-				std::vector<std::string> nameVector;
-				string kindName(id2str(_SATPool, s->name));
-
-				// expect "<kind>::<name>"
-				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-				PoolItem_Ref poolItem;
-				if (count >= 2) {
-				    poolItem = get_poolItem (_pool,
-							     s->repo ? string(repo_name(s->repo)) : "", //repo
-							     nameVector[1], // name
-							     nameVector[0], // kind,
-							     string(id2str(_SATPool, s->evr)),
-							     string(id2str(_SATPool, s->arch)));
-				}
+				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
 				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
@@ -819,21 +685,7 @@ SATResolver::problems () const
 				break;
 			    case SOLVER_ERASE_SOLVABLE: {
 				s = pool->solvables + what;
-				std::vector<std::string> nameVector;
-				string kindName(id2str(_SATPool, s->name));
-
-				// expect "<kind>::<name>"
-				unsigned count = str::split( kindName, std::back_inserter(nameVector), ":" );
-				PoolItem_Ref poolItem;
-
-				if (count >= 2) {
-				    poolItem = get_poolItem (_pool,
-							     s->repo ? string(repo_name(s->repo)) : "", //repo
-							     nameVector[1], // name
-							     nameVector[0], // kind,
-							     string(id2str(_SATPool, s->evr)),
-							     string(id2str(_SATPool, s->arch)));
-				}
+				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
 				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
 					problemSolution->addSingleAction (poolItem, KEEP);
@@ -881,38 +733,13 @@ SATResolver::problems () const
 			/* policy, replace p with rp */
 			s = pool->solvables + p;
 			sd = rp ? pool->solvables + rp : 0;
-
-			std::vector<std::string> nameVector;
-			string kindNameFrom(id2str(_SATPool, s->name));
-			// expect "<kind>::<name>"
-			unsigned count = str::split( kindNameFrom, std::back_inserter(nameVector), ":" );
-			PoolItem_Ref itemFrom;
-
-			if (count >= 2) {
-			    itemFrom = get_poolItem (_pool,
-						     s->repo ? string(repo_name(s->repo)) : "", //repo
-						     nameVector[1], // name
-						     nameVector[0], // kind,
-						     string(id2str(_SATPool, s->evr)),
-						     string(id2str(_SATPool, s->arch)));
-			}
-
-			if (sd)
+			
+			PoolItem_Ref itemFrom = _pool.find (sat::Solvable(p));
+			if (rp)
 			{
 			    int gotone = 0;
 
-			    string kindNameTo(id2str(_SATPool, sd->name));
-			    // expect "<kind>::<name>"
-			    count = str::split( kindNameTo, std::back_inserter(nameVector), ":" );
-			    PoolItem_Ref itemTo;
-			    if (count >= 2) {
-				itemTo = get_poolItem (_pool,
-						       sd->repo ? string(repo_name(s->repo)) : "", //repo
-						       nameVector[1], // name
-						       nameVector[0], // kind,
-						       string(id2str(_SATPool, sd->evr)),
-						       string(id2str(_SATPool, sd->arch)));
-			    }
+			    PoolItem_Ref itemTo = _pool.find (sat::Solvable(rp));
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
