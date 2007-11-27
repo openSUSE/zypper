@@ -334,6 +334,13 @@ namespace zypp
       /** Sync with sat-pool. */
       void satSync() const;
 
+      /** Return the corresponding \ref PoolItem.
+       * Pool and sat pool should be in sync. Returns an empty
+       * \ref PoolItem if there is no corresponding \ref PoolItem.
+       * \see \ref PoolItem::satSolvable.
+       */
+      PoolItem find( const sat::Solvable & slv_r ) const;
+
     private:
       /** Serial number. */
       SerialNumber        _serial;

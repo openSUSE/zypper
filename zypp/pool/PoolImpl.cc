@@ -266,6 +266,24 @@ namespace zypp
       //MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : PoolImpl::satSync
+    //	METHOD TYPE : void
+    //
+    PoolItem PoolImpl::find( const sat::Solvable & slv_r ) const
+    {
+      if ( slv_r )
+      {
+        for_( it, begin(), end() )
+        {
+          if ( (*it).satSolvable() == slv_r )
+            return *it;
+        }
+      }
+      return PoolItem();
+    }
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<
