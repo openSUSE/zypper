@@ -46,6 +46,8 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
+#include <boost/mpl/int.hpp>
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
