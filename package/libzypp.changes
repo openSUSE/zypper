@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Nov 28 15:12:33 CET 2007 - aschnell@suse.de
+
+- make IniParser more strict (bug #306697)
+
+-------------------------------------------------------------------
 Mon Nov 26 13:19:34 CET 2007 - ma@suse.de
 
 - Fix missing packages in patch content list. (#340896)

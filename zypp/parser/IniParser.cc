@@ -95,8 +95,17 @@ void IniParser::parse( const InputStream & input_r, const ProgressData::Receiver
     if (pos != std::string::npos)
     {
       std::string key = str::rtrim(trimmed.substr(0, pos));
+      if(key.find_first_of(" \t") != std::string::npos) {
+	std::string msg = str::form("%s: Key in line %d contains whitespace", _inputname.c_str(), line.lineNo());
+	ZYPP_THROW(ParseException(msg));
+      }
       std::string value = str::ltrim(trimmed.substr(pos+1));
       consume( _current_section, key, value);
+    }
+    else
+    {
+      std::string msg = str::form("%s: Line %d is missing '=' sign", _inputname.c_str(), line.lineNo());
+      ZYPP_THROW(ParseException(msg));
     }
 
     // set progress and allow cancel
