@@ -270,11 +270,10 @@ namespace zypp
           (*pit).rememberSatSolvable( cur );
           cur = cur.nextInRepo();
         }
-        break;
       }
 
-      //_satSyncRequired.remember( _serial );
-      //MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
+      _satSyncRequired.remember( _serial );
+      MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
