@@ -585,6 +585,12 @@ int one_command(const string& command, int argc, char **argv)
       return !ghelp;
     }
 
+    if ( geteuid() != 0 )
+    {
+      cerr << _("Root privileges are required for viewing system sources.") << endl;
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+    
     list_system_sources();
     return ZYPPER_EXIT_OK;
   }
@@ -1072,17 +1078,9 @@ int main(int argc, char **argv)
   if (logfile == NULL)
     logfile = ZYPP_CHECKPATCHES_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
-
+  
   // parse global options and the command
   string command = process_globals (argc, argv);
-
-  // except for help, quit if not root (#344515)
-  if (!ghelp && geteuid() != 0 )
-  {
-    cerr << _("Root privileges are required for running zypper.") << endl;
-    return ZYPPER_EXIT_ERR_PRIVILEGES;
-  }
-
   int ret = 0;
   if (command == "shell" || command == "sh")
     command_shell ();
