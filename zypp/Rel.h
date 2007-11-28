@@ -59,8 +59,19 @@ namespace zypp
 
     /** Enumarators provided \b only for use \ref inSwitch statement.
      * \see inSwitch
+     * \note Enumarator values also correspond to the values libsatsolver
+     * uses to encode these relations.
     */
-    enum for_use_in_switch { EQ_e, NE_e, LT_e, LE_e, GT_e, GE_e, ANY_e, NONE_e };
+    enum for_use_in_switch {
+      NONE_e = 0U,
+      GT_e   = 1U,
+      EQ_e   = 2U,
+      LT_e   = 4U,
+      GE_e   = GT_e|EQ_e,
+      LE_e   = LT_e|EQ_e,
+      NE_e   = GT_e|LT_e,
+      ANY_e  = GT_e|EQ_e|LT_e,
+    };
 
     /** DefaultCtor ANY. */
     Rel()
@@ -79,6 +90,12 @@ namespace zypp
     */
     explicit
     Rel( const std::string & strval_r );
+
+    /** Ctor from bits. */
+    explicit
+    Rel( unsigned bits_r )
+    : _op( for_use_in_switch(bits_r & ANY_e) )
+    {}
 
     /** String representation of relational operator.
      * \return "==", "!=", "<", "<=", ">", ">=", "ANY" or "NONE"
@@ -105,6 +122,10 @@ namespace zypp
      * \endcode
     */
     for_use_in_switch inSwitch() const
+    { return _op; }
+
+    /** Enumarator values suitable for libsatsolver. */
+    unsigned bits() const
     { return _op; }
 
   private:
