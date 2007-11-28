@@ -382,16 +382,14 @@ SATResolver::resolvePool()
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
+	MIL << "Install " << *iter << " with the SAT-Pool ID: " << id << endl;
 	queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );
         queue_push( &(jobQueue), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-	string packageName = str::form (_("%s:%s"),
-					iter->resolvable()->kind().asString().c_str(),
-					iter->resolvable()->name().c_str()
-					);
-	Id id = str2id( _SATPool, packageName.c_str(), 1 );
+	Id id = iter->satSolvable().id(); 
+	MIL << "Delete " << *iter << " with the SAT-Pool ID: " << id << endl;	
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(jobQueue), id);
     }
@@ -416,8 +414,10 @@ SATResolver::resolvePool()
     _SATPool->verbose = true;
 
     // Solve !
+    MIL << "Starting solving...." << endl;
     solver_solve( solv, &(jobQueue) );
-
+    MIL << "....Solver end" << endl;
+    
     // copying solution back to zypp pool
     //-----------------------------------------
     Id p;

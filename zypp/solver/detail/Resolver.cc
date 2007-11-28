@@ -18,6 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+#include <boost/static_assert.hpp>
 
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
@@ -26,7 +27,6 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
@@ -36,8 +36,8 @@
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/capability/FilesystemCap.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/Solvable.h"
 #include "zypp/sat/SATResolver.h"
-
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -1289,6 +1289,12 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	// syncing with sat pool
 	sat::Pool satPool( sat::Pool::instance() );
 	_pool.satSync();
+	MIL << "------SAT-Pool------" << endl;
+	for (sat::Pool::SolvableIterator i = satPool.solvablesBegin();
+	     i != satPool.solvablesEnd(); i++ ) {
+	    MIL << *i << " ID: " << i->id() << endl;
+	}
+	MIL << "------SAT-Pool end------" << endl;	
 	
 	SATResolver satResolver(_pool, satPool.get());
 	return satResolver.resolvePool();
