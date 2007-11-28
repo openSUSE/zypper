@@ -17,6 +17,7 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/IdStr.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

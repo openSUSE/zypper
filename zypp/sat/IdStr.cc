@@ -24,9 +24,18 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    static const IdStr::IdStr Null( STRID_NULL );
+    const IdStr IdStr::Null( unsigned(STRID_NULL) );
+    const IdStr IdStr::Empty( unsigned(STRID_EMPTY) );
 
     /////////////////////////////////////////////////////////////////
+
+    IdStr::IdStr( const char * str_r )
+      : _id( ::stringpool_str2id( &myPool()->ss, str_r, true ) )
+    {}
+
+    IdStr::IdStr( const std::string & str_r )
+      : _id( ::stringpool_str2id( &myPool()->ss, str_r.c_str(), true ) )
+    {}
 
     const char * IdStr::c_str() const
     {

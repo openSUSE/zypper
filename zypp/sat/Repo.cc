@@ -94,13 +94,13 @@ namespace zypp
 
     void Repo::addSolv( const Pathname & file_r )
     {
-      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
 
       AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
       if ( file == NULL )
       {
         file.resetDispose();
-        ZYPP_THROW( Exception( "Can't read solv-file "+file_r.asString() ) );
+        ZYPP_THROW( Exception( _("Can't read solv-file: ")+file_r.asString() ) );
       }
 
       myPool().setDirty();
@@ -109,14 +109,14 @@ namespace zypp
 
     detail::SolvableIdType Repo::addSolvable()
     {
-      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
       myPool().setDirty();
       return ::repo_add_solvable( _repo );
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )
     {
-      NO_REPO_THROW( Exception( "Can't add solvables to noepo." ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
       myPool().setDirty();
       return ::repo_add_solvable_block( _repo, count_r );
     }

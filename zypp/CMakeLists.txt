@@ -577,6 +577,7 @@ SET( zypp_pool_SRCS
   pool/GetResolvablesToInsDel.cc
   pool/PoolImpl.cc
   pool/PoolStats.cc
+  pool/Res2Sat.cc
 )
 
 SET( zypp_pool_HEADERS

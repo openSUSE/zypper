@@ -36,12 +36,26 @@ namespace zypp
     ::_Solvable * Solvable::get() const
     { return myPool().getSolvable( _id ); }
 
-    Solvable Solvable::nextInPool() const
-    { return Solvable( myPool().getNextId( _id ) ); }
-
 #define NO_SOLVABLE_RETURN( VAL ) \
     ::_Solvable * _solvable( get() ); \
     if ( ! _solvable ) return VAL
+
+    Solvable Solvable::nextInPool() const
+    { return Solvable( myPool().getNextId( _id ) ); }
+
+    Solvable Solvable::nextInRepo() const
+    {
+      NO_SOLVABLE_RETURN( nosolvable );
+      for ( detail::SolvableIdType next = _id+1; next < unsigned(_solvable->repo->end); ++next )
+      {
+        ::_Solvable * nextS( myPool().getSolvable( next ) );
+        if ( nextS &&  nextS->repo == _solvable->repo )
+        {
+          return Solvable( next );
+        }
+      }
+      return nosolvable;
+    }
 
     NameId Solvable::name() const
     {

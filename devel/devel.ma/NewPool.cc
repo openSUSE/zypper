@@ -409,6 +409,13 @@ void itCmp( const sat::Pool::SolvableIterator & l, const sat::Pool::SolvableIter
 bool isTrue()  { return true; }
 bool isFalse() { return false; }
 
+void dumpIdStr()
+{
+  for ( unsigned i = 0; i < 30; ++i )
+  {
+    DBG << i << '\t' << sat::IdStr( i ) << endl;
+  }
+}
 
 /******************************************************************
 **
@@ -424,6 +431,11 @@ int main( int argc, char * argv[] )
   sat::Pool satpool( sat::Pool::instance() );
 
 #if 0
+  //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
+  sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
+
+  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Print() );
+
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();

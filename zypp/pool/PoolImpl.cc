@@ -38,6 +38,8 @@ namespace zypp
   namespace pool
   { /////////////////////////////////////////////////////////////////
 
+    void pi2sat( const PoolItem & pi_r, sat::Solvable & slv_r );
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : NameHash::NameHash
@@ -240,6 +242,7 @@ namespace zypp
       debug::Measure mnf( "Sync changes to sat-pool..." );
       MIL << "Pool: " << _serial << ": Sync changes to sat-pool... " << _satSyncRequired << endl;
 
+      // collect unsynced PoolItems per repository.
       std::map<std::string, std::list<PoolItem> > todo;
       for_( it, begin(), end() )
       {
@@ -249,17 +252,25 @@ namespace zypp
         }
       }
 
+      // add the missing PoolItems.
       DBG << "Update missing repos... " << todo.size() << endl;
+      void res2sat( const ResObject::constPtr & res_r, sat::Solvable & slv_r );
+
       for_( it, todo.begin(), todo.end() )
       {
-        DBG << "Update " << it->first << ": " << it->second.size() << endl;
+        DBG << "Update repo " << it->first << ": " << it->second.size() << endl;
         sat::Repo repo( sat::Pool::instance().reposInsert( it->first ) );
         sat::Solvable first( repo.addSolvables( it->second.size() ) );
         DBG << " starting at " << first << endl;
+
+        sat::Solvable cur( first );
         for_( pit, it->second.begin(), it->second.end() )
         {
-          // *pit to sat::Solvable
+          res2sat( *pit, cur );
+          (*pit).rememberSatSolvable( cur );
+          cur = cur.nextInRepo();
         }
+        break;
       }
 
       //_satSyncRequired.remember( _serial );
@@ -268,8 +279,8 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : PoolImpl::satSync
-    //	METHOD TYPE : void
+    //	METHOD NAME : PoolImpl::find
+    //	METHOD TYPE : PoolItem
     //
     PoolItem PoolImpl::find( const sat::Solvable & slv_r ) const
     {

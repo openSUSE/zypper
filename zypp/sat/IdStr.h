@@ -28,25 +28,47 @@ namespace zypp
     //
     //	CLASS NAME : IdStr
     //
-    /** */
+    /** Access to the sat-pools string space.
+     * Construction from string will place a copy of the string in the
+     * string space, if it is not already present.
+    */
     class IdStr: protected detail::PoolMember
     {
       friend std::ostream & operator<<( std::ostream & str, const IdStr & obj );
 
       public:
-        IdStr() : _id( 0 ) {}
-        explicit IdStr( int id_r ) : _id( id_r ) {}
+        /** Default ctor, empty string. */
+        IdStr() : _id( Empty.id() ) {}
+        /** Ctor from id. */
+        explicit IdStr( unsigned id_r ) : _id( id_r ) {}
+        /** Ctor from string. */
         explicit IdStr( const char * str_r );
+        /** Ctor from string. */
         explicit IdStr( const std::string & str_r );
       public:
+        /** No or Null string. */
         static const IdStr Null;
+        /** Empty string. */
+        static const IdStr::IdStr Empty;
       public:
+        bool empty() const
+        { return( _id == Empty.id() ); }
+
+      public:
+        /** Conversion to <tt>const char *</tt> */
         const char * c_str() const;
+        /** Conversion to <tt>std::string</tt> */
         std::string string() const;
+        /** \overload */
+        std::string asString() const
+        { return string(); }
+
       public:
-        int get() const { return _id; }
+        /** Expert backdoor. */
+        unsigned id() const
+        { return _id; }
       private:
-        int _id;
+        unsigned _id;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -55,11 +77,11 @@ namespace zypp
 
     /** \relates IdStr */
     inline bool operator==( const IdStr & lhs, const IdStr & rhs )
-    { return lhs.get() == rhs.get(); }
+    { return lhs.id() == rhs.id(); }
 
     /** \relates IdStr */
     inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
-    { return lhs.get() != rhs.get(); }
+    { return lhs.id() != rhs.id(); }
 
 
     /////////////////////////////////////////////////////////////////
