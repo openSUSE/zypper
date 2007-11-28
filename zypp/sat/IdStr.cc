@@ -30,11 +30,11 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
 
     IdStr::IdStr( const char * str_r )
-      : _id( ::stringpool_str2id( &myPool()->ss, str_r, true ) )
+      : _id( ::str2id( myPool().getPool(), str_r, true ) )
     {}
 
     IdStr::IdStr( const std::string & str_r )
-      : _id( ::stringpool_str2id( &myPool()->ss, str_r.c_str(), true ) )
+      : _id( ::str2id( myPool().getPool(), str_r.c_str(), true ) )
     {}
 
     const char * IdStr::c_str() const

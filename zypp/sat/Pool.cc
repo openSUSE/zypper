@@ -43,6 +43,12 @@ namespace zypp
     const SerialNumber & Pool::serial() const
     { return myPool().serial(); }
 
+    void Pool::setDirty()
+    { return myPool().setDirty(); }
+
+    void Pool::prepare()
+    { return myPool().prepare(); }
+
     bool Pool::reposEmpty() const
     { return myPool()->nrepos; }
 

@@ -273,7 +273,9 @@ namespace zypp
       }
 
       _satSyncRequired.remember( _serial );
+      sat::Pool::instance().prepare();
       MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
+      MIL << "sat::Pool: " << sat::Pool::instance() << endl;
     }
 
     ///////////////////////////////////////////////////////////////////

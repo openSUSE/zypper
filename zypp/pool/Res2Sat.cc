@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <boost/mpl/int.hpp>
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/LogTools.h"
@@ -26,6 +27,8 @@
 #include "zypp/sat/Repo.h"
 
 using std::endl;
+
+
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,14 +48,19 @@ namespace zypp
 
       inline void store( ::Offset & where_r, ::_Solvable * slv_r, const Dependencies & dep_r, Dep which_r )
       {
+        enum SatIsRreq {
+          ISRREQ_NORMAL      = 0,
+          ISRREQ_REQUIRES    = 1,
+          ISRREQ_PREREQUIRES = 2
+        };
         const CapSet & caps( dep_r[which_r] );
         if ( caps.empty() )
           return;
 
         for_( it, caps.begin(), caps.end() )
         {
-          // check PREREQUIRES later
-          int isreq = ( which_r == Dep::REQUIRES ? 1 : 0 );
+          // checking PREREQUIRES later
+          SatIsRreq isreq = ( which_r == Dep::REQUIRES ? ISRREQ_REQUIRES : ISRREQ_NORMAL );
 
           std::string name;
           Rel         op;
@@ -71,29 +79,26 @@ namespace zypp
             name = (*it).asString();
           }
 
-          sat::IdStr nid;
+          ::Id nid = 0;
           if ( refersTo<Package>( *it ) )
           {
-            nid = sat::IdStr( name );
+            store( nid, name );
           }
           else
           {
-            nid = sat::IdStr( str::form( "%s:%s",
-                                         (*it).refers().asString().c_str(),
-                                         name.c_str() ) );
+            store( nid, str::form( "%s:%s",
+                                   (*it).refers().asString().c_str(),
+                                   name.c_str() ) );
           }
 
           if ( op != Rel::ANY && ed != Edition::noedition )
           {
             sat::IdStr eid( ed.asString() );
 #warning TBD calc rel and prereqcheck
-            ::Id rid = ::rel2id( slv_r->repo->pool, nid.id(), eid.id(), REL_EQ, true );
-            where_r = ::repo_addid_dep( slv_r->repo, where_r, rid, isreq );
+            nid = ::rel2id( slv_r->repo->pool, nid, eid.id(), op.bits(), true );
           }
-          else
-          {
-            where_r = ::repo_addid_dep( slv_r->repo, where_r, nid.id(), isreq );
-          }
+
+          where_r = ::repo_addid_dep( slv_r->repo, where_r, nid, isreq );
         }
       }
 

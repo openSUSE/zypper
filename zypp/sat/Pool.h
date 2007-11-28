@@ -51,8 +51,14 @@ namespace zypp
         {}
 
       public:
-        /***/
+        /** */
         const SerialNumber & serial() const;
+
+        /** Invalidate housekeeping data (e.g. whatprovides). */
+        void setDirty();
+
+        /** Update housekeeping data (e.g. whatprovides). */
+        void prepare();
 
       public:
         /** Whether \ref Pool contains repos. */

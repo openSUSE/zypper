@@ -57,9 +57,23 @@ namespace zypp
           /** Serial number changing whenever the content changes. */
           const SerialNumber & serial() const
           { return _serial; }
-          /** */
+
+          /** Invalidate housekeeping data (e.g. whatprovides).
+          */
           void setDirty()
           { _serial.setDirty(); }
+
+          /** Update housekeeping data (e.g. whatprovides).
+           * \todo actually requires a watcher.
+          */
+          void prepare()
+          {
+            if ( _serial.dirty() )
+            {
+              ::pool_createwhatprovides( _pool );
+              _serial.serial();
+            }
+          }
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */

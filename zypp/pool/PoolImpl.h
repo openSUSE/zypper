@@ -346,7 +346,7 @@ namespace zypp
       SerialNumber        _serial;
       /** Watch for changes in /etc/sysconfig/storage. */
       SerialNumberWatcher _watchFilesystemSysconfigStorage;
-      /** Watch for changes in /etc/sysconfig/storage. */
+      /** Watch for changes \c _serial. */
       SerialNumberWatcher _satSyncRequired;
 
     public:
