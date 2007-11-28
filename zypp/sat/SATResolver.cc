@@ -185,10 +185,10 @@ SATResolver::addPoolItemToKepp (PoolItem_Ref item)
 // if data != NULL, set as APPL_LOW (from establishPool())
 
 static void
-solution_to_pool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
+SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
-        _XDEBUG("solution_to_pool(" << item << ") is already in the pool --> skip");
+        _XDEBUG("SATSolutionToPool(" << item << ") is already in the pool --> skip");
         return;
     }
 
@@ -201,30 +201,30 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, const ResStatus::
 
     if (status.isToBeInstalled()) {
 	r = item.status().setToBeInstalled (causer);
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalledDueToUpgrade()) {
 	r = item.status().setToBeUninstalledDueToUpgrade (causer);
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") upgrade !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") upgrade !" << r);
     }
     else if (status.isToBeUninstalled()) {
 	r = item.status().setToBeUninstalled (causer);
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
 	     || status.isNeeded()) {
 	r = item.status().setIncomplete();
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") incomplete !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") incomplete !" << r);
     }
     else if (status.isUnneeded()) {
 	r = item.status().setUnneeded();
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") unneeded !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") unneeded !" << r);
     }
     else if (status.isSatisfied()) {
 	r = item.status().setSatisfied();
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") satisfied !" << r);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") satisfied !" << r);
     } else {
-	_XDEBUG("solution_to_pool(" << item << ", " << status << ") unchanged !");
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") unchanged !");
     }
     return;
 }
@@ -292,18 +292,18 @@ string2kind (const std::string & str)
 //------------------------------------------------------------------------------------------------------------
 
 
-struct CollectTransact : public resfilter::PoolItemFilterFunctor
+struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 {
     SATResolver & resolver;
 
-    CollectTransact (SATResolver & r)
+    SATCollectTransact (SATResolver & r)
 	: resolver (r)
     { }
 
     bool operator()( PoolItem_Ref item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
-	_XDEBUG( "CollectTransact(" << item << ")" );
+	_XDEBUG( "SATCollectTransact(" << item << ")" );
 	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
 	if (by_solver) {
@@ -357,9 +357,11 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 bool
 SATResolver::resolvePool()
 {
-    CollectTransact info (*this);
+    SATCollectTransact info (*this);
 
     MIL << "SATResolver::resolvePool()" << endl;
+
+    queue_init( &jobQueue );  
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
@@ -430,7 +432,7 @@ SATResolver::resolvePool()
       if (poolItem) {
 	  ResStatus status;
 	  status.isToBeUninstalled();
-	  solution_to_pool (poolItem, status, ResStatus::SOLVER);
+	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
       } else {
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
@@ -449,7 +451,7 @@ SATResolver::resolvePool()
       if (poolItem) {
 	  ResStatus status;
 	  status.isToBeInstalled();
-	  solution_to_pool (poolItem, status, ResStatus::SOLVER);
+	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
       } else {
 	      ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
@@ -471,7 +473,7 @@ SATResolver::resolvePool()
 //----------------------------------------------------------------------------
 
 string
-conflictsString(Solver *solv, Solvable *s, Id pc)
+SATconflictsString(Solver *solv, Solvable *s, Id pc)
 {
     Pool *pool = solv->pool;
     Solvable *sc = pool->solvables + pc;
@@ -503,7 +505,7 @@ conflictsString(Solver *solv, Solvable *s, Id pc)
 
 
 string
-probleminfoString(Solver *solv, const Queue *job, Id problem)
+SATprobleminfoString(Solver *solv, const Queue *job, Id problem)
 {
   Pool *pool = solv->pool;
   Rule *r;
@@ -608,8 +610,8 @@ probleminfoString(Solver *solv, const Queue *job, Id problem)
       if (sp->name == sd->name) {
 	  ret += str::form ("cannot install both %s and %s\n", solvable2str(pool, sp), solvable2str(pool, sd));
       } else {
-	  ret += conflictsString (solv, pool->solvables + (-p), -d);
-	  ret += conflictsString (solv, pool->solvables + (-d), -p);
+	  ret += SATconflictsString (solv, pool->solvables + (-p), -d);
+	  ret += SATconflictsString (solv, pool->solvables + (-d), -p);
       }
   } else {
       /* find requires of p that corresponds with our rule */
@@ -652,7 +654,7 @@ SATResolver::problems () const
 	while ((problem = solver_next_problem(solv, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt << ":" << endl;
 	    MIL << "====================================" << endl;
-	    string whatString = probleminfoString(solv, &jobQueue, problem);
+	    string whatString = SATprobleminfoString(solv, &jobQueue, problem);
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");
 	    solution = 0;
 	    while ((solution = solver_next_solution(solv, problem, solution)) != 0) {

@@ -35,6 +35,8 @@
 #include "zypp/SystemResObject.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/capability/FilesystemCap.h"
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/SATResolver.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -1280,6 +1282,18 @@ show_pool( ResPool pool )
 bool
 Resolver::resolvePool( bool tryAllPossibilities )
 {
+
+    // Solving with the satsolver
+    if ( getenv("ZYPP_SAT_SOLVER") ) {
+	MIL << "-------------- Calling SAT Solver -------------------" << endl;	
+	// syncing with sat pool
+	sat::Pool satPool( sat::Pool::instance() );
+	_pool.satSync();
+	
+	SATResolver satResolver(_pool, satPool.get());
+	return satResolver.resolvePool();
+    }
+    
     ResolverContext_Ptr saveContext = _best_context;
     CollectTransact info (*this);
 
