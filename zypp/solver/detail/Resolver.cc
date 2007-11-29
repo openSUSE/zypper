@@ -1289,12 +1289,14 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	// syncing with sat pool
 	sat::Pool satPool( sat::Pool::instance() );
 	_pool.satSync();
+#if 0
 	MIL << "------SAT-Pool------" << endl;
 	for (sat::Pool::SolvableIterator i = satPool.solvablesBegin();
 	     i != satPool.solvablesEnd(); i++ ) {
 	    MIL << *i << " ID: " << i->id() << endl;
 	}
-	MIL << "------SAT-Pool end------" << endl;	
+	MIL << "------SAT-Pool end------" << endl;
+#endif
 	
 	SATResolver satResolver(_pool, satPool.get());
 	return satResolver.resolvePool();

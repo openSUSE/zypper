@@ -31,7 +31,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/sat/SATResolver.h"
-#include "zypp/sat/Solvable.h"
+#include "zypp/sat/Pool.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
 extern "C" {
@@ -187,10 +187,12 @@ SATResolver::addPoolItemToKepp (PoolItem_Ref item)
 static void
 SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
+#if 0
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
         _XDEBUG("SATSolutionToPool(" << item << ") is already in the pool --> skip");
         return;
     }
+#endif
 
     triggeredSolution.insert(item);
 
@@ -394,18 +396,7 @@ SATResolver::resolvePool()
 	queue_push( &(jobQueue), id);
     }
 
-    // Searching concerning system repo
-    Repo *systemRepo = NULL;
-    for (int i = 0; i < _SATPool->nrepos; i++)
-    {
-	string compName(repo_name(_SATPool->repos[i]));
-	if (compName == "system") {
-	    systemRepo = _SATPool->repos[i];
-	    break;
-	}
-    }
-
-    solv = solver_create( _SATPool, systemRepo );
+    solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     solv->fixsystem = false;
     solv->updatesystem = false;
     solv->allowdowngrade = false;
@@ -419,7 +410,6 @@ SATResolver::resolvePool()
     
     // copying solution back to zypp pool
     //-----------------------------------------
-    Id p;
 
     /* solvables to be erased */
     for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
@@ -429,9 +419,7 @@ SATResolver::resolvePool()
 
       PoolItem_Ref poolItem = _pool.find (sat::Solvable(i)); 
       if (poolItem) {
-	  ResStatus status;
-	  status.isToBeUninstalled();
-	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
+	  SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
       } else {
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
@@ -440,19 +428,18 @@ SATResolver::resolvePool()
     /*  solvables to be installed */
     for (int i = 0; i < solv->decisionq.count; i++)
     {
+      Id p;
       p = solv->decisionq.elements[i];
-      if (p < 0)
+      if (p < 0 || !sat::Solvable(p))
 	continue;
-      if (p >= solv->installed->start && p < solv->installed->start + solv->installed->nsolvables)
+      if (sat::Solvable(p).repo().get() == solv->installed)
 	continue;
 
       PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
-	  ResStatus status;
-	  status.isToBeInstalled();
-	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
+	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
       } else {
-	      ERR << "id " << p << " not found in ZYPP pool." << endl;
+	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
     }
 
