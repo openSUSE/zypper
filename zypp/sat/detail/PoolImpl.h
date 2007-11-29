@@ -16,6 +16,7 @@ extern "C"
 #include <satsolver/pool.h>
 #include <satsolver/repo.h>
 #include <satsolver/solvable.h>
+#include <satsolver/poolarch.h>
 #include <satsolver/repo_solv.h>
 }
 #include <iosfwd>
@@ -126,11 +127,11 @@ namespace zypp
             return noSolvableId;
           }
 
-       private:
-         /** sat-pool. */
-         ::_Pool * _pool;
-         /** Serial number. */
-         SerialNumber _serial;
+        private:
+          /** sat-pool. */
+          ::_Pool * _pool;
+          /** Serial number. */
+          SerialNumber _serial;
       };
       ///////////////////////////////////////////////////////////////////
 

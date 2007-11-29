@@ -9,17 +9,13 @@
 /** \file	zypp/sat/detail/PoolImpl.cc
  *
 */
-extern "C"
-{
-#include <satsolver/solvable.h>
-#include <satsolver/repo.h>
-#include <satsolver/pool.h>
-}
-
 #include <iostream>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
+
+#include "zypp/ZConfig.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 
@@ -37,10 +33,10 @@ namespace zypp
 
       void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
-	  if ((type & (SAT_FATAL|SAT_ERROR)) == 0) {
-	      _MIL("satsolver") << logString;
-	  } else {
+	  if ((type & (SAT_FATAL|SAT_ERROR))) {
 	      _ERR("satsolver") << logString;
+	  } else {
+	      _DBG("satsolver") << logString;
 	  }
       }
 
@@ -69,8 +65,11 @@ namespace zypp
         }
         // initialialize logging
         bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
-        ::pool_setdebuglevel (_pool, verbose ? 5 : 2); 
-        ::pool_setdebugcallback(_pool, logSat, NULL );
+        ::pool_setdebuglevel( _pool, verbose ? 5 : 2 );
+        ::pool_setdebugcallback( _pool, logSat, NULL );
+
+        // set pool architecture
+        ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
       }
 
       ///////////////////////////////////////////////////////////////////
