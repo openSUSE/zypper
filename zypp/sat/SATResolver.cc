@@ -411,7 +411,6 @@ SATResolver::resolvePool()
     solv->allowdowngrade = false;
     solv->allowuninstall = false;
     solv->noupdateprovide = false;
-    _SATPool->verbose = true;
 
     // Solve !
     MIL << "Starting solving...." << endl;
