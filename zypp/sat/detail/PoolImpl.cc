@@ -14,7 +14,6 @@ extern "C"
 #include <satsolver/solvable.h>
 #include <satsolver/repo.h>
 #include <satsolver/pool.h>
-#include <satsolver/sat_debug.h>
 }
 
 #include <iostream>
@@ -36,9 +35,13 @@ namespace zypp
     namespace detail
     { /////////////////////////////////////////////////////////////////
 
-      void logSat( char *logString )
+      void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
-        _MIL("satsolver") << logString;
+	  if ((type & (SAT_FATAL|SAT_ERROR)) == 0) {
+	      _MIL("satsolver") << logString;
+	  } else {
+	      _DBG("satsolver") << logString;
+	  }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -66,8 +69,8 @@ namespace zypp
         }
         // initialialize logging
         bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
-        ::sat_set_debug( verbose ? DEBUG_5 : ERROR, 1 ); // logging linenumer, function,....
-        ::sat_set_debugCallback( logSat );
+        ::pool_setdebuglevel (_pool, verbose ? 5 : 0 ); 
+        ::pool_setdebugcallback(_pool, logSat, NULL );
       }
 
       ///////////////////////////////////////////////////////////////////
