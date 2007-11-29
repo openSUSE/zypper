@@ -411,6 +411,11 @@ SATResolver::resolvePool()
     // copying solution back to zypp pool
     //-----------------------------------------
 
+    if (solv->problems.count > 0 )
+    {
+	ERR << "Solverrun finished with an ERROR" << endl;	
+	return false;
+    }
     /* solvables to be erased */
     for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
     {

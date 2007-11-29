@@ -110,6 +110,7 @@ void assertSystemResObjectInPool()
 
 Resolver::Resolver (const ResPool & pool)
     : _pool (pool)
+    , _satResolver (NULL)
     , _poolchanged( _pool.serial() )
     , _timeout_seconds (0)
     , _maxSolverPasses (0)
@@ -1284,11 +1285,14 @@ Resolver::resolvePool( bool tryAllPossibilities )
 {
 
     // Solving with the satsolver
-    if ( getenv("ZYPP_SAT_SOLVER") ) {
-	MIL << "-------------- Calling SAT Solver -------------------" << endl;	
-	// syncing with sat pool
-	sat::Pool satPool( sat::Pool::instance() );
-	_pool.satSync();
+    if ( getenv("ZYPP_SAT_SOLVER")) {
+	MIL << "-------------- Calling SAT Solver -------------------" << endl;
+	if ( !_satResolver ) { 
+	    // syncing with sat pool
+	    sat::Pool satPool( sat::Pool::instance() );
+	    _pool.satSync();
+	    _satResolver = new SATResolver(_pool, satPool.get());
+	}
 #if 0
 	MIL << "------SAT-Pool------" << endl;
 	for (sat::Pool::SolvableIterator i = satPool.solvablesBegin();
@@ -1297,9 +1301,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	}
 	MIL << "------SAT-Pool end------" << endl;
 #endif
-	
-	SATResolver satResolver(_pool, satPool.get());
-	return satResolver.resolvePool();
+	return _satResolver->resolvePool();
     }
     
     ResolverContext_Ptr saveContext = _best_context;

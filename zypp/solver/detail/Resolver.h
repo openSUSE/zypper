@@ -42,7 +42,6 @@
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
 #include "zypp/UpgradeStatistics.h"
-
 #include "zypp/CapSet.h"
 
 
@@ -56,6 +55,10 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
+    class SATResolver;
+
+
+	
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ItemCapKind
@@ -89,6 +92,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
     ResPool _pool;
+    SATResolver *_satResolver;
     SerialNumberWatcher _poolchanged;
 
     unsigned _timeout_seconds;

@@ -42,6 +42,7 @@
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/solver/detail/ResolverInfoObsoletes.h"
+#include "zypp/sat/SATResolver.h"
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
@@ -345,6 +346,9 @@ moreDetails( ResolverContext_Ptr context, PoolItem_Ref item )
 ResolverProblemList
 Resolver::problems (const bool ignoreValidSolution) const
 {
+    if ( getenv("ZYPP_SAT_SOLVER") && _satResolver )
+	return _satResolver->problems();
+	    
     ResolverProblemList problems;
 
     MIL << "Resolver::problems(" << (ignoreValidSolution ? "ignoreValidSolution": "") << ")" << endl;
