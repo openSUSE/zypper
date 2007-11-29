@@ -244,11 +244,15 @@ namespace zypp
 
       // collect unsynced PoolItems per repository.
       std::map<std::string, std::list<PoolItem> > todo;
+      const std::string & systemRepoName( sat::Pool::instance().systemRepoName() );
       for_( it, begin(), end() )
       {
         if ( ! (*it).satSolvable() )
         {
-          todo[(*it)->repository().info().alias()].push_back( *it );
+          if ( (*it).status().isInstalled() )
+            todo[systemRepoName].push_back( *it );
+          else
+            todo[(*it)->repository().info().alias()].push_back( *it );
         }
       }
 
@@ -259,7 +263,7 @@ namespace zypp
       for_( it, todo.begin(), todo.end() )
       {
         DBG << "Update repo " << it->first << ": " << it->second.size() << endl;
-        sat::Repo repo( sat::Pool::instance().reposInsert( it->first ) );
+        sat::Repo repo( sat::Pool::instance().reposInsert( it->first.empty() ? "@Builtin" : it->first ) );
         sat::Solvable first( repo.addSolvables( it->second.size() ) );
         DBG << " starting at " << first << endl;
 
