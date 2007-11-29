@@ -56,6 +56,9 @@ namespace zypp
         /** Evaluate \ref Repo in a boolean context (\c != \c norepo). */
         using base::SafeBool<Repo>::operator bool_type;
 
+        /** Return whether this is the system repo. */
+        bool isSystemRepo() const;
+
       public:
         /** The repos name (alias?). */
         std::string name() const;

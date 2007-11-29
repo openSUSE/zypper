@@ -20,7 +20,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Repo.h"
-#include "zypp/sat/Solvable.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -45,6 +45,12 @@ namespace zypp
 #define NO_REPO_THROW( VAL ) \
     ::_Repo * _repo( get() ); \
     if ( ! _repo ) ZYPP_THROW( VAL )
+
+    bool Repo::isSystemRepo() const
+    {
+      NO_REPO_RETURN( false );
+      return( Pool::systemRepoName() == _repo->name );
+    }
 
     std::string Repo::name() const
     {

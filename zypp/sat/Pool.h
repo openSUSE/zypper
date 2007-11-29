@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/Repo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -87,7 +88,16 @@ namespace zypp
         /** Remove a \ref Repo named \c name_r.
          * \see \ref Repo::eraseFromPool
          */
-        void reposErase( const std::string & name_r );
+        void reposErase( const std::string & name_r )
+        { reposFind( name_r ).eraseFromPool(); }
+
+      public:
+        /** Reserved system repo name \c @System. */
+        static const std::string & systemRepoName();
+
+        /** Return the system repo. */
+        Repo systemRepo()
+        { return reposInsert( systemRepoName() ); }
 
       public:
         /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
@@ -97,7 +107,8 @@ namespace zypp
         */
         Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
         /** \overload Using the files basename as \ref Repo name. */
-        Repo addRepoSolv( const Pathname & file_r );
+        Repo addRepoSolv( const Pathname & file_r )
+        { return addRepoSolv( file_r, file_r.basename() ); }
 
       public:
         /** Whether \ref Pool contains solvables. */

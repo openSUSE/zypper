@@ -37,6 +37,12 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    const std::string & Pool::systemRepoName()
+    {
+      static const std::string _val( "@System" );
+      return _val;
+    }
+
     ::_Pool * Pool::get() const
     { return myPool().getPool(); }
 
@@ -112,11 +118,6 @@ namespace zypp
       return Repo();
     }
 
-    void Pool::reposErase( const std::string & name_r )
-    {
-      reposFind( name_r ).eraseFromPool();
-    }
-
     Repo Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
     {
       // Using a temporay repo! (The additional parenthesis are required.)
@@ -127,11 +128,6 @@ namespace zypp
       // no exceptions so we keep it:
       tmprepo.resetDispose();
       return tmprepo;
-    }
-
-    Repo Pool::addRepoSolv( const Pathname & file_r )
-    {
-      return addRepoSolv( file_r, file_r.basename() );
     }
 
     /******************************************************************

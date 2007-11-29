@@ -50,12 +50,16 @@ namespace zypp
         /** Evaluate \ref Solvable in a boolean context (\c != \c nosolvable). */
         using base::SafeBool<Solvable>::operator bool_type;
 
+        /** Return whether this \ref Solvable belongs to the system repo. */
+        bool isSystem() const;
+
       public:
         NameId   name() const;
         EvrId    evr() const;
         ArchId   arch() const;
         VendorId vendor() const;
 
+      public:
         Repo repo() const;
 
       public:

@@ -57,6 +57,9 @@ namespace zypp
       return nosolvable;
     }
 
+    bool Solvable::isSystem() const
+    { return repo().isSystemRepo(); }
+
     NameId Solvable::name() const
     {
       NO_SOLVABLE_RETURN( NameId() );
@@ -96,7 +99,8 @@ namespace zypp
       if ( ! obj )
         return str << "sat::solvable()";
 
-      return str << "sat::solvable(" << obj.id() << "|" << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
+      return str << "sat::solvable(" << obj.id() << "|"
+          << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
     }
 
