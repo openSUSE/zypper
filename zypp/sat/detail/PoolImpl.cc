@@ -40,7 +40,7 @@ namespace zypp
 	  if ((type & (SAT_FATAL|SAT_ERROR)) == 0) {
 	      _MIL("satsolver") << logString;
 	  } else {
-	      _DBG("satsolver") << logString;
+	      _ERR("satsolver") << logString;
 	  }
       }
 
@@ -69,7 +69,7 @@ namespace zypp
         }
         // initialialize logging
         bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
-        ::pool_setdebuglevel (_pool, verbose ? SAT_DEBUG_SCHUBI : SAT_DEBUG_STATS); 
+        ::pool_setdebuglevel (_pool, verbose ? 5 : 2); 
         ::pool_setdebugcallback(_pool, logSat, NULL );
       }
 
