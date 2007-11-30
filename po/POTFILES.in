@@ -1,7 +1,9 @@
 # List of source files which contain translatable strings.
+../src/zypper-main.cc
+../src/zypper-main.h
 ../src/zypper-keyring-callbacks.h
 ../src/zypper-misc.cc
-../src/zypper-sources.cc
+../src/zypper-repos.cc
 ../src/zypper.h
 ../src/zypp-checkpatches.cc
 ../src/zypper-callbacks.cc
@@ -10,7 +12,7 @@
 ../src/zypper-search.cc
 ../src/zypper.cc
 ../src/zypper-tabulator.h
-../src/zypper-sources.h
+../src/zypper-repos.h
 ../src/AliveCursor.h
 ../src/zypper-info.h
 ../src/zypper-misc.h
@@ -22,7 +24,7 @@
 ../src/zypp-checkpatches-wrapper.c
 ../src/zypper-utils.h
 ../src/zypper-media-callbacks.h
-../src/zypper-source-callbacks.h
+../src/zypper-repo-callbacks.h
 ../src/zypper-updates.cc
 ../src/zypper-command.h
 ../src/zypper-rpm-callbacks.h
