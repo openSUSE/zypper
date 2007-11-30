@@ -574,10 +574,9 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    _command_help = _(
-      // TranslatorExplanation don't translate the resolvable types
-      // (package, patch, pattern, product) or at least leave also their
-      // originals, since they are expected untranslated on the command line
+    _command_help = boost::str(format(_(
+      // TranslatorExplanation the first %s = "package, patch, pattern, product"
+      //  and the second %s = "package"
       "install (in) [options] <capability> ...\n"
       "\n"
       "Install resolvables with specified capabilities. A capability is"
@@ -585,7 +584,8 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
-      "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: package)\n"
+      "-t, --type <type>               Type of resolvable (%s)\n"
+      "                                Default: %s\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
       "-C, --capability                Select resolvables by capability\n"
       "-f, --force                     Install even if the item is already installed (reinstall)\n"
@@ -593,7 +593,7 @@ void Zypper::processCommandOptions()
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution          Force the solver to find a solution (even agressive)\n"
-    );
+    )) % "package, patch, pattern, product" % "package");
     break;
   }
 
@@ -615,9 +615,9 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    _command_help = _(
-      // TranslatorExplanation don't translate the resolvable types
-      // (see the install command comment) 
+    _command_help = boost::str(format(_(
+      // TranslatorExplanation the first %s = "package, patch, pattern, product"
+      //  and the second %s = "package"
       "remove (rm) [options] <capability> ...\n"
       "\n"
       "Remove resolvables with specified capabilities. A capability is"
@@ -625,12 +625,13 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias>     Operate only with resolvables from repository specified by alias.\n"
-      "-t, --type <type>      Type of resolvable (package, patch, pattern, product) (default: package)\n"
+      "-t, --type <type>      Type of resolvable (%s)\n"
+      "                       Default: %s\n"
       "-n, --name             Select resolvables by plain name, not by capability\n"
       "-C, --capability       Select resolvables by capability\n"
       "    --debug-solver     Create solver test case for debugging\n"  
       "-R, --force-resolution Force the solver to find a solution (even agressive)\n"
-    );
+    )) % "package, patch, pattern, product" % "package");
     break;
   }
   
@@ -662,19 +663,18 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
-    // TranslatorExplanation don't translate the repo types (well, the plaindir)
-    // since they must be used in their original shape
-    _command_help = _(
+    _command_help = boost::str(format(_(
+      // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
       "addrepo (ar) [options] <URI> <alias>\n"
       "\n"
       "Add repository specified by URI to the system and assing the specified alias to it.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
-      "-t, --type <TYPE>       Type of repository (yast2, rpm-md, or plaindir)\n"
+      "-t, --type <TYPE>       Type of repository (%s)\n"
       "-d, --disabled          Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
-    );
+    )) % "yast2, rpm-md, plaindir");
     break;
   }
 
@@ -800,21 +800,22 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-    _command_help = _(
-      // TranslatorExplanation don't translate the resolvable types
-      // (see the install command comment) 
+    _command_help = boost::str(format(_(
+      // TranslatorExplanation the first %s = "package, patch, pattern, product"
+      //  and the second %s = "patch"
       "list-updates [options]\n"
       "\n"
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>   Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+      "-t, --type <type>   Type of resolvable (%s)\n"
+      "                    Default: %s\n"
       "-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
       "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
-    );
+    )) % "package, patch, pattern, product" % "patch");
     break;
   }
-  
+
   case ZypperCommand::UPDATE_e:
   {
     static struct option update_options[] = {
