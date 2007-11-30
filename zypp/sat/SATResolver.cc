@@ -363,7 +363,16 @@ SATResolver::resolvePool()
 
     MIL << "SATResolver::resolvePool()" << endl;
 
-    queue_init( &jobQueue );  
+    if (solv) {
+	// remove old stuff
+	solver_free(solv);
+	solv = NULL;
+	queue_free( &(jobQueue) );
+    }
+
+    queue_init( &jobQueue );
+    _items_to_install.clear();
+    _items_to_remove.clear();
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
@@ -392,7 +401,7 @@ SATResolver::resolvePool()
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	Id id = iter->satSolvable().id(); 
 	MIL << "Delete " << *iter << " with the SAT-Pool ID: " << id << endl;	
-	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
+	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE );
 	queue_push( &(jobQueue), id);
     }
 
