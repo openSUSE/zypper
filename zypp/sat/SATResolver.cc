@@ -463,173 +463,62 @@ SATResolver::resolvePool()
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
-string
-SATconflictsString(Solver *solv, Solvable *s, Id pc)
+
+std::string SATResolver::SATprobleminfoString(Id problem)
 {
-    Pool *pool = solv->pool;
-    Solvable *sc = pool->solvables + pc;
-    Id p, *pp, con, *conp, obs, *obsp;
-    string ret;
-
-    if (s->conflicts) {
-	conp = s->repo->idarraydata + s->conflicts;
-	while ((con = *conp++) != 0) {
-	    FOR_PROVIDES(p, pp, con) {
-		if (p != pc)
-		    continue;
-		ret = str::form("packags %s conflicts with %s, which is provided by %s\n", solvable2str(pool, s), dep2str(pool, con), solvable2str(pool, sc));
-	    }
-	}
-    }
-    if (s->obsoletes && (!solv->installed || s->repo != solv->installed)) {
-	obsp = s->repo->idarraydata + s->obsoletes;
-	while ((obs = *obsp++) != 0) {
-	    FOR_PROVIDES(p, pp, obs) {
-		if (p != pc)
-		    continue;
-		ret += str::form("packags %s obsolets %s, which is provided by %s\n", solvable2str(pool, s), dep2str(pool, obs), solvable2str(pool, sc));
-	    }
-	}
-    }
-    return ret;
-}
-
-
-string
-SATprobleminfoString(Solver *solv, const Queue *job, Id problem)
-{
-  Pool *pool = solv->pool;
-  Rule *r;
-  Solvable *s;
-  Id p, d, rn;
-  Id idx = solv->problems.elements[problem - 1];
   string ret;
+  Pool *pool = solv->pool;
+  Id probr;
+  Id dep, source, target;
+  Solvable *s, *s2;
 
-  rn = solv->learnt_pool.elements[idx];
-  if (rn < 0) {
-      p = rn;		/* fake a negative assertion rule */
-      r = 0;
-  } else {
-      r = solv->rules + rn;
-      p = r->p;
-  }
-
-  if (!r || r->w2 == 0) {
-      Id req, *reqp, *dp;
-      int count = 0;
-
-      /* assertions */
-      if (p == -SYSTEMSOLVABLE)	{
-          Id ji, what;
-
-	  /* we tried to deinstall the system solvable. must be a job. */
-	  if (rn < solv->jobrules || rn >= solv->systemrules)
-	      abort();
-	  ji = solv->ruletojob.elements[rn - solv->jobrules];
-	  what = job->elements[ji + 1];
-	  switch (job->elements[ji]) {
-	      case SOLVER_INSTALL_SOLVABLE_NAME:
-		  ret = str::form ("no solvable exists with name %s\n", dep2str(pool, what));
-		  break;
-	      case SOLVER_INSTALL_SOLVABLE_PROVIDES:
-		  ret = str::form ("no solvable provides %s\n", dep2str(pool, what));
-		  break;
-	      default:
-		  ret = str::form ("unknown  job\n");
-	  }
-	  return ret;
-      }
-      if (p > 0 && solv->learnt_pool.elements[idx + 1] == -p) {
-	  /* we conflicted with a direct rpm assertion */
-	  /* print other rule */
-	  p = -p;
-	  rn = 0;
-      }
-      if (rn >= solv->jobrules) {
-	  ret += "some job/system/learnt rule\n";
-	  return ret;
-      }
-      if (p >= 0)
-	  abort();
-      /* negative assertion, i.e. package is not installable */
-      s = pool->solvables + (-p);
-      if (s->requires) {
-	  reqp = s->repo->idarraydata + s->requires;
-	  while ((req = *reqp++) != 0) {
-	      if (req == SOLVABLE_PREREQMARKER)
-		  continue;
-	      dp = pool_whatprovides(pool, req);
-	      if (*dp)
-		  continue;
-	      ret += str::form ("package %s requires %s, but no package provides it\n", solvable2str(pool, s), dep2str(pool, req));
-	      count++;
-	  }
-      }
-      if (!count)
-	  ret += str::form ("package %s is not installable\n", solvable2str(pool, s));
-      return ret;
+  probr = solver_findproblemrule(solv, problem);
+  switch (solver_problemruleinfo(solv, &(jobQueue), probr, &dep, &source, &target))
+  {
+      case SOLVER_PROBLEM_UPDATE_RULE:
+	  s = pool_id2solvable(pool, source);
+	  ret = str::form ("problem with installed package %s\n", solvable2str(pool, s));
+	  break;
+      case SOLVER_PROBLEM_JOB_RULE:
+	  ret = str::form ("conflicting requests\n");
+	  break;
+      case SOLVER_PROBLEM_JOB_NOTHING_PROVIDES_DEP:
+	  ret = str::form ("nothing provides requested %s\n", dep2str(pool, dep));
+	  break;
+      case SOLVER_PROBLEM_NOT_INSTALLABLE:
+	  s = pool_id2solvable(pool, source);
+	  ret = str::form ("package %s is not installable\n", solvable2str(pool, s));
+	  break;
+      case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
+	  s = pool_id2solvable(pool, source);
+	  ret = str::form ("nothing provides %s needed by %s\n", dep2str(pool, dep), solvable2str(pool, s));
+	  break;
+      case SOLVER_PROBLEM_SAME_NAME:
+	  s = pool_id2solvable(pool, source);
+	  s2 = pool_id2solvable(pool, target);
+	  ret = str::form ("cannot install both %s and %s\n", solvable2str(pool, s), solvable2str(pool, s2));
+	  break;
+      case SOLVER_PROBLEM_PACKAGE_CONFLICT:
+	  s = pool_id2solvable(pool, source);
+	  s2 = pool_id2solvable(pool, target);
+	  ret = str::form ("package %s conflicts with %s provided by %s\n", solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  break;
+      case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
+	  s = pool_id2solvable(pool, source);
+	  s2 = pool_id2solvable(pool, target);
+	  ret = str::form ("package %s obsoletes %s provided by %s\n", solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  break;
+      case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
+	  s = pool_id2solvable(pool, source);
+	  ret = str::form ("package %s requires %s, but none of the providers can be installed\n", solvable2str(pool, s), dep2str(pool, dep));
+	  break;
   }
 
-  if (rn >= solv->learntrules) {
-      /* learnt rule, ignore for now */
-      ret += str::form ("some learnt rule...\n");
-//      printrule(solv, r);
-      return ret;
-  }
-  if (rn >= solv->systemrules) {
-      /* system rule, ignore for now */
-      ret += str::form ("some system rule...\n");
-//      printrule(solv, r);
-      return ret;
-  }
-  if (rn >= solv->jobrules) {
-      /* job rule, ignore for now */
-      ret += str::form ("some job rule...\n");
-//      printrule(solv, r);
-      return ret;
-  }
-  /* only rpm rules left... */
-  p = r->p;
-  d = r->d;
-  if (p >= 0)
-    abort();
-  if (d == 0 && r->w2 < 0) {
-      Solvable *sp, *sd;
-      d = r->w2;
-      sp = pool->solvables + (-p);
-      sd = pool->solvables + (-d);
-      if (sp->name == sd->name) {
-	  ret += str::form ("cannot install both %s and %s\n", solvable2str(pool, sp), solvable2str(pool, sd));
-      } else {
-	  ret += SATconflictsString (solv, pool->solvables + (-p), -d);
-	  ret += SATconflictsString (solv, pool->solvables + (-d), -p);
-      }
-  } else {
-      /* find requires of p that corresponds with our rule */
-      Id req, *reqp, *dp;
-      s = pool->solvables + (-p);
-      reqp = s->repo->idarraydata + s->requires;
-      while ((req = *reqp++) != 0) {
-	  if (req == SOLVABLE_PREREQMARKER)
-	      continue;
-	  dp = pool_whatprovides(pool, req);
-          if (d == 0) {
-	      if (*dp == r->w2 && dp[1] == 0)
-		  break;
-	  }
-	  else if (dp - pool->whatprovidesdata == d)
-	      break;
-      }
-      if (!req) {
-	  ret += str::form ("req not found\n");
-      }
-      ret += str::form ("package %s requires %s, but none of its providers can be installed\n", solvable2str(pool, s), dep2str(pool, req));
-  }
   return ret;
 }
 
 ResolverProblemList
-SATResolver::problems () const
+SATResolver::problems ()
 {
     ResolverProblemList resolverProblems;
     if (solv && solv->problems.count) {
@@ -645,7 +534,7 @@ SATResolver::problems () const
 	while ((problem = solver_next_problem(solv, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt << ":" << endl;
 	    MIL << "====================================" << endl;
-	    string whatString = SATprobleminfoString(solv, &jobQueue, problem);
+	    string whatString = SATprobleminfoString(problem);
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");
 	    solution = 0;
 	    while ((solution = solver_next_solution(solv, problem, solution)) != 0) {

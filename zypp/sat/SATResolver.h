@@ -75,6 +75,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lockUninstalled;
     PoolItemList _items_to_keep;
+    
+    // ---------------------------------- methods
+    std::string SATprobleminfoString (Id problem);
 
   public:
 
@@ -87,9 +90,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     friend std::ostream& operator<<(std::ostream& str, const SATResolver & obj)
     { return obj.dumpOn (str); }
 
-
     // ---------------------------------- methods
-
     void setTimeout (int seconds) { _timeout_seconds = seconds; }
     void setMaxSolverPasses (int count) { _maxSolverPasses = count; }
     int timeout () const { return _timeout_seconds; }
@@ -99,7 +100,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool resolvePool();
 
-    ResolverProblemList problems () const;
+    ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
 
     Arch architecture() const { return _architecture; }
