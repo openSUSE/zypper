@@ -402,9 +402,6 @@ void Zypper::commandShell()
     read_history (histfile.c_str ());
 
   while (true) {
-    // reset globals
-    setRunningHelp(false);
-
     // read a line
     string line = readline_getline ();
     cerr_vv << "Got: " << line << endl;
@@ -439,8 +436,7 @@ void Zypper::commandShell()
       print_unknown_command_hint();
     }
     
-    if (exiting())
-      return;
+    shellCleanup();
   }
 
   if (!histfile.empty ())
@@ -448,6 +444,36 @@ void Zypper::commandShell()
 
   MIL << "Leaving the shell" << endl;
   setRunningShell(false);
+}
+
+void Zypper::shellCleanup()
+{
+  // clear any previous arguments 
+  _arguments.clear();
+  // clear command options
+  if (!_copts.empty())
+  {
+    _copts.clear();
+    _cmdopts = CommandOptions();
+  }
+  // clear the command
+  _command = ZypperCommand::NONE;
+  // clear command help text
+  _command_help.clear();
+  // reset help flag
+  setRunningHelp(false);
+  // reset the exitting flag
+  exit(false);
+  // ... and the exit code does not matter in the shell
+
+  // gData
+  gData.current_repo = RepoInfo();
+
+  // TODO:
+  // gData.repos re-read after repo operations or modify/remove these very repoinfos 
+  // gData.repo_resolvables re-read only after certain repo operations (all?)
+  // gData.target_resolvables re-read only after installation/removal/update
+  // call target commit refresh pool after installation/removal/update (#328855)
 }
 
 

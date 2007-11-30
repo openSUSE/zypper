@@ -104,6 +104,7 @@ private:
   void processGlobalOptions();
   void processCommandOptions();
   void commandShell();
+  void shellCleanup();
   void safeDoCommand();
   void doCommand();
 
