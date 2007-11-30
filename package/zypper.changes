@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 30 16:29:00 CET 2007 - jkupec@suse.cz
+
+- avoiding unwanted translation of zypper keywords (#343335)
+- r7994
+
+-------------------------------------------------------------------
 Fri Nov 30 13:06:31 CET 2007 - jkupec@suse.cz
 
 - fixed some unsufficient permission exceptions for non-root
