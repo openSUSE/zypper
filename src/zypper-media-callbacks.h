@@ -49,11 +49,11 @@ namespace ZmartRecipients
         cerr << endl; // may be in the middle of RepoReport or ProgressReport
         cerr << description << endl;
   
-        // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
-        // Try to check what answers does zypper accept (it always accepts y/n at least)
-        // You can also have a look at the regular expressions used to check the answer here:
-        // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
         std::string request = boost::str(boost::format(
+            // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
+            // Try to check what answers does zypper accept (it always accepts y/n at least)
+            // You can also have a look at the regular expressions used to check the answer here:
+            // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
             _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
             % gData.current_repo.name() % mediumNr);
         if (read_bool_answer(request, false))
