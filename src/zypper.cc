@@ -473,7 +473,12 @@ void Zypper::safeDoCommand()
     //cerr << _("User requested to abort.") << endl;
     cerr << ex.asUserString() << endl;
   }
-  catch (const Exception & ex) {
+  catch (const ExitRequestException & e)
+  {
+    cout_vv << "Caught exit request:" << endl << e.msg() << endl; 
+  }
+  catch (const Exception & ex)
+  {
     ZYPP_CAUGHT(ex);
 
     cerr << _("Unexpected exception.") << endl;
@@ -1617,23 +1622,33 @@ void Zypper::doCommand()
     Table t;
     t.style(Ascii);
 
-    ZyppSearch search( God, options, _arguments );
-    FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
-
-    search.doSearch( callback, callback );
-
-    if (t.empty())
-      cout << _("No resolvables found.") << endl;
-    else {
-      cout << endl;
-      if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
-        t.sort(1);
-      else
-        t.sort(3); // sort by name
-      cout << t;
+    try
+    {
+      ZyppSearch search( God, options, _arguments );
+      FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
+  
+      search.doSearch( callback, callback );
+  
+      if (t.empty())
+        cout << _("No resolvables found.") << endl;
+      else {
+        cout << endl;
+        if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+          t.sort(1);
+        else
+          t.sort(3); // sort by name
+        cout << t;
+      }
+    }
+    catch (const Exception & e)
+    {
+      report_problem(e,
+        _("Problem occurred initializing or executing the search query") + string(":"),
+        string(_("See the above message for a hint.")) + " " +
+          _("Running 'zypper refresh' as root might resolve the problem."));
+      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 

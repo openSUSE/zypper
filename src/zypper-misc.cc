@@ -44,7 +44,24 @@ void cond_init_target (Zypper & zypper) {
   //! \todo do this so that it works in zypper shell
   if (!done) {
     cout_v << _("Initializing Target") << endl;
-    God->initializeTarget(zypper.globalOpts().root_dir);
+
+    try
+    {
+      God->initializeTarget(zypper.globalOpts().root_dir);
+    }
+    catch (const Exception & e)
+    {
+      report_problem(e,
+        _("Target initialization failed:"),
+        geteuid() != 0 ?
+          _("Running 'zypper refresh' as root might resolve the problem."):""
+      );
+
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      throw ExitRequestException(
+        "Target initialization failed: " + e.msg());
+    }
+
     done = true;
   }
 }

@@ -157,6 +157,17 @@ struct RuntimeData
 extern RuntimeData gData;
 extern std::ostream no_stream;
 
+class ExitRequestException
+{
+public:
+  ExitRequestException(const std::string & msg = "") : _msg(msg) {}
+  ~ExitRequestException() {}
+
+  const std::string & msg() const { return _msg; }
+private:
+  std::string _msg;
+};
+
 #endif /*ZYPPER_H*/
 
 // Local Variables:

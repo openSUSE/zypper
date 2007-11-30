@@ -204,8 +204,14 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 
 // ---------------------------------------------------------------------------
 
+/**
+ * Fill gData.repositories with active repos (enabled or specified) and refresh
+ * if autorefresh is on.
+ */
 static void do_init_repos(Zypper & zypper)
 {
+  MIL << "Going to initialize repositories." << endl;
+
   // load gpg keys
   cond_init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
@@ -288,6 +294,48 @@ static void do_init_repos(Zypper & zypper)
             "We're running as non-root, skipping refresh of " + repo.name();
           MIL << nonroot << endl;
           cout_vv << nonroot << endl;
+        }
+      }
+    }
+    // even if refresh is not required, try to build the sqlite cache
+    // for the case of non-existing cache
+    else if (repo.enabled())
+    {
+      // handle root user differently
+      if (geteuid() == 0)
+      {
+        if (build_cache(zypper, repo, false))
+        {
+          cerr << format(_("Disabling repository '%s' because of the above error."))
+              % repo.name() << endl;
+          ERR << format("Disabling repository '%s' because of the above error.")
+              % repo.name() << endl;
+
+          it->setEnabled(false);
+        }
+      }
+      // non-root user
+      else
+      {
+        // if error is returned, it means zypp attempted to build the sqlite
+        // cache for the repo and failed because writing is not allowed for
+        // non-root Thus, just display refresh hint for non-root user.
+        if (build_cache(zypper, repo, false))
+        {
+          cout << format(_(
+              "The cache database needs to be built for the '%s' repository."
+              " You can run 'zypper refresh' as root to do this.")) % repo.name()
+            << endl;
+
+          string nonroot =
+            "We're running as non-root, skipping building of " + repo.name() + "cache";
+          MIL << nonroot << endl;
+          cout_vv << nonroot << endl;
+
+          cerr << format(_("Disabling repository '%s'."))
+              % repo.name() << endl << endl;
+          ERR << "Disabling repository '" << repo.name() << "'" << endl;
+          it->setEnabled(false);
         }
       }
     }
