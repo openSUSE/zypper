@@ -39,6 +39,7 @@ extern "C" {
 #include "satsolver/poolarch.h"
 #include "satsolver/evr.h"
 #include "satsolver/poolvendor.h"
+#include "satsolver/policy.h"    
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -399,9 +400,9 @@ SATResolver::resolvePool()
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-	Id id = iter->satSolvable().id(); 
-	MIL << "Delete " << *iter << " with the SAT-Pool ID: " << id << endl;	
-	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE );
+	Id id = str2id( _SATPool, (*iter)->name().c_str(), 0 );
+	MIL << "Delete " << *iter << " with the string ID: " << id << endl;	
+	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(jobQueue), id);
     }
 
@@ -559,7 +560,7 @@ SATResolver::problems ()
 				s = pool->solvables + what;
 				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
-				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
+				    if (solv->installed && s->repo == solv->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
 					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s) );
 					MIL << description << endl;
@@ -580,7 +581,7 @@ SATResolver::problems ()
 				s = pool->solvables + what;
 				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
-				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
+				    if (solv->installed && s->repo == solv->installed) {				    
 					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("do not deinstall %s"), solvable2str(pool, s));
 					MIL << description << endl;
@@ -639,22 +640,21 @@ SATResolver::problems ()
 				problemSolution->addSingleAction (itemTo, INSTALL);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
 
-				if (evrcmp(pool, sd->evr, s->evr) < 0)
+				if (evrcmp(pool, s->evr, sd->evr) > 0)
 				{
 				    string description = str::form (_("allow downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->setDescription (description);				    
 				    gotone = 1;
 				}
-				if (!solv->allowarchchange && s->name == sd->name )//&& archchanges(pool, sd, s))
+				if (!solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(pool, s, sd))				
 				{
 				    string description = str::form (_("allow architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->setDescription (description);				    
 				    gotone = 1;
 				}
-				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && pool_vendor2mask(pool, s->vendor)
-				    && (pool_vendor2mask(pool, s->vendor) & pool_vendor2mask(pool, sd->vendor)) == 0)
+				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(pool, s, sd))				
 				{
 				    string description = str::form (_("allow vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
 								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));
