@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 30 14:20:34 CET 2007 - schubi@suse.de
+
+- Enable SAT solver via environment variable ZYPP_SAT_SOLVER.
+  e.g.: ZYPP_SAT_SOLVER=1 zypper install foo
+- version 4.1.4
+- revision 7990 
+
+-------------------------------------------------------------------
 Wed Nov 28 15:12:33 CET 2007 - aschnell@suse.de
 
 - make IniParser more strict (bug #306697)
