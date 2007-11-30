@@ -401,8 +401,7 @@ void Zypper::commandShell()
   if (!histfile.empty ())
     read_history (histfile.c_str ());
 
-  bool loop = true;
-  while (loop) {
+  while (true) {
     // reset globals
     setRunningHelp(false);
 
@@ -420,26 +419,24 @@ void Zypper::commandShell()
 
     if (command_str == "\004") // ^D
     {
-      loop = false;
       cout << endl; // print newline after ^D
+      break;
     }
-    else
+
+    try
     {
-      try
-      {
-        setCommand(ZypperCommand(command_str));
-        if (command() == ZypperCommand::SHELL_QUIT)
-          loop = false;
-        else if (command() == ZypperCommand::SHELL)
-          cout << _("You already are running zypper's shell.") << endl;
-        else
-          safeDoCommand();
-      }
-      catch (Exception & e)
-      {
-        cerr << e.msg() <<  endl;
-        print_unknown_command_hint();
-      }
+      setCommand(ZypperCommand(command_str));
+      if (command() == ZypperCommand::SHELL_QUIT)
+        break;
+      else if (command() == ZypperCommand::SHELL)
+        cout << _("You already are running zypper's shell.") << endl;
+      else
+        safeDoCommand();
+    }
+    catch (Exception & e)
+    {
+      cerr << e.msg() <<  endl;
+      print_unknown_command_hint();
     }
     
     if (exiting())
