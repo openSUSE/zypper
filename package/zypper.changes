@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 30 13:06:31 CET 2007 - jkupec@suse.cz
+
+- fixed some unsufficient permission exceptions for non-root
+  (#344938)
+- r7988
+
+-------------------------------------------------------------------
 Tue Nov 27 17:33:08 CET 2007 - jkupec@suse.cz
 
 - fixed help invocation (#337406)
