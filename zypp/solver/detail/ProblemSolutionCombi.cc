@@ -53,13 +53,19 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     _details = "";
 }
 
-void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action)
+void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action,
+					    const std::string description)
 {
-    addAction ( new TransactionSolutionAction (item, REMOVE));
+    TransactionSolutionAction  *actionTransact = new TransactionSolutionAction(item, action);
+    addAction (actionTransact);
 
-    ostringstream details;
-    details << _actions;    
-    _description += details.str();
+    if (description.size() == 0) {
+	ostringstream details;
+	details << *actionTransact;
+	_details += details.str();
+    } else {
+	_details += description;
+    }
 }
 
       ///////////////////////////////////////////////////////////////////

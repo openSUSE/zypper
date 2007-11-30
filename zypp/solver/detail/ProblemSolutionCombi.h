@@ -22,6 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 
+#include <string>
 #include "zypp/ProblemSolution.h"
 #include "zypp/solver/detail/Types.h"
 
@@ -52,7 +53,11 @@ namespace zypp
 	    /**
 	     * Add a single action
 	     */
-	    void addSingleAction( PoolItem_Ref item, const TransactionKind action);
+	    void addSingleAction( PoolItem_Ref item, const TransactionKind action, const std::string description = "");
+	    /**
+	     * Set description text
+	     */
+	    void setDescription( const std::string description) { _description = description; };	    
 	};
 
       ///////////////////////////////////////////////////////////////////

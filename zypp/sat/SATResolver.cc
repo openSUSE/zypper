@@ -477,40 +477,40 @@ std::string SATResolver::SATprobleminfoString(Id problem)
   {
       case SOLVER_PROBLEM_UPDATE_RULE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form ("problem with installed package %s\n", solvable2str(pool, s));
+	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s));
 	  break;
       case SOLVER_PROBLEM_JOB_RULE:
-	  ret = str::form ("conflicting requests\n");
+	  ret = str::form (_("conflicting requests"));
 	  break;
       case SOLVER_PROBLEM_JOB_NOTHING_PROVIDES_DEP:
-	  ret = str::form ("nothing provides requested %s\n", dep2str(pool, dep));
+	  ret = str::form (_("nothing provides requested %s"), dep2str(pool, dep));
 	  break;
       case SOLVER_PROBLEM_NOT_INSTALLABLE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form ("package %s is not installable\n", solvable2str(pool, s));
+	  ret = str::form (_("package %s is not installable"), solvable2str(pool, s));
 	  break;
       case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form ("nothing provides %s needed by %s\n", dep2str(pool, dep), solvable2str(pool, s));
+	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), solvable2str(pool, s));
 	  break;
       case SOLVER_PROBLEM_SAME_NAME:
 	  s = pool_id2solvable(pool, source);
 	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form ("cannot install both %s and %s\n", solvable2str(pool, s), solvable2str(pool, s2));
+	  ret = str::form (_("cannot install both %s and %s"), solvable2str(pool, s), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_PACKAGE_CONFLICT:
 	  s = pool_id2solvable(pool, source);
 	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form ("package %s conflicts with %s provided by %s\n", solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  ret = str::form (_("package %s conflicts with %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
 	  s = pool_id2solvable(pool, source);
 	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form ("package %s obsoletes %s provided by %s\n", solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  ret = str::form (_("package %s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form ("package %s requires %s, but none of the providers can be installed\n", solvable2str(pool, s), dep2str(pool, dep));
+	  ret = str::form (_("package %s requires %s, but none of the providers can be installed"), solvable2str(pool, s), dep2str(pool, dep));
 	  break;
   }
 
@@ -552,12 +552,14 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					MIL << "- do not keep " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					    "  installed" << endl;
+					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s) );
+					MIL << description << endl;
+					problemSolution->setDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					MIL << "- do not install " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					    endl;
+					string description = str::form (_("do not install %s"), solvable2str(pool, s));
+					MIL << description << endl;
+					problemSolution->setDescription (description);
 				    }
 				} else {
 				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s->name) << "-"
@@ -571,12 +573,14 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (what >= solv->installed->start && what < solv->installed->start + solv->installed->nsolvables) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					MIL << "- do not deinstall " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) <<
-					    endl;
+					string description = str::form (_("do not deinstall %s"), solvable2str(pool, s));
+					MIL << description << endl;
+					problemSolution->setDescription (description);					
 				    } else {
 					problemSolution->addSingleAction (poolItem, INSTALL);
-					MIL << "- do not forbid installation of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "."
-					    << id2str(pool, s->arch) <<  endl;
+					string description = str::form (_("do not forbid installation of %s"), solvable2str(pool, s));
+					MIL << description << endl;
+					problemSolution->setDescription (description);					
 				    }
 				} else {
 				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
@@ -628,25 +632,31 @@ SATResolver::problems ()
 
 				if (evrcmp(pool, sd->evr, s->evr) < 0)
 				{
-				    MIL << "- allow downgrade of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    string description = str::form (_("allow downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    MIL << description << endl;
+				    problemSolution->setDescription (description);				    
 				    gotone = 1;
 				}
 				if (!solv->allowarchchange && s->name == sd->name )//&& archchanges(pool, sd, s))
 				{
-				    MIL << "- allow architecture change of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    string description = str::form (_("allow architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    MIL << description << endl;
+				    problemSolution->setDescription (description);				    
 				    gotone = 1;
 				}
-				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && pool_vendor2mask(pool, s->vendor) && (pool_vendor2mask(pool, s->vendor) & pool_vendor2mask(pool, sd->vendor)) == 0)
+				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && pool_vendor2mask(pool, s->vendor)
+				    && (pool_vendor2mask(pool, s->vendor) & pool_vendor2mask(pool, sd->vendor)) == 0)
 				{
-				    MIL << "- allow vendor change of " << id2str(pool, s->vendor) << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-					<< " to " << string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ") << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    string description = str::form (_("allow vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
+								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));
+				    MIL << description << endl;
+				    problemSolution->setDescription (description);				    
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-					<< " to "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << endl;
+				    string description = str::form (_("allow replacement of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    MIL << description << endl;
+				    problemSolution->setDescription (description);				    
 				}
 			    } else {
 				ERR << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
@@ -656,8 +666,10 @@ SATResolver::problems ()
 			else
 			{
 			    if (itemFrom) {
+				string description = str::form (_("allow replacement of %s"), solvable2str(pool, s));
+				MIL << description << endl;
+				problemSolution->setDescription (description);				    				
 				problemSolution->addSingleAction (itemFrom, REMOVE);
-				MIL << "- allow replacement of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
 			    }
 			}
 		    }
