@@ -352,9 +352,7 @@ void init_repos(Zypper & zypper)
     return;
 
   if ( !zypper.globalOpts().disable_system_sources )
-  {
     do_init_repos(zypper);
-  }
 
   done = true;
 }
@@ -1102,9 +1100,17 @@ void modify_repo(Zypper & zypper, const string & alias)
 
 void cond_load_resolvables(Zypper & zypper, bool to_pool)
 {
+  static bool done = false;
+  // don't call this fuction more than once for a single ZYpp instance
+  // (e.g. in shell)
+  if (done)
+    return;
+
   load_repo_resolvables(zypper, to_pool);
   if (!zypper.globalOpts().disable_system_resolvables && to_pool)
     load_target_resolvables(zypper);
+
+  done = true;
 }
 
 // ---------------------------------------------------------------------------
