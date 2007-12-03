@@ -57,7 +57,7 @@ namespace zypp
 	    /**
 	     * Set description text
 	     */
-	    void setDescription( const std::string description) { _description = description; };	    
+	    void addDescription( const std::string description);	    
 	};
 
       ///////////////////////////////////////////////////////////////////

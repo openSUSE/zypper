@@ -68,6 +68,13 @@ void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const Transaction
     }
 }
 
+void ProblemSolutionCombi::addDescription( const std::string description)
+{
+    if ( _description.size() > 0)
+	_description += "\n";
+    _description += description;
+}
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
