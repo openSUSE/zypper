@@ -361,7 +361,6 @@ bool
 SATResolver::resolvePool()
 {
     SATCollectTransact info (*this);
-
     MIL << "SATResolver::resolvePool()" << endl;
 
     if (solv) {
@@ -405,8 +404,9 @@ SATResolver::resolvePool()
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(jobQueue), id);
     }
-
     solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    sat::Pool::instance().setDirty();
+    sat::Pool::instance().prepare();
     solv->fixsystem = false;
     solv->updatesystem = false;
     solv->allowdowngrade = false;
