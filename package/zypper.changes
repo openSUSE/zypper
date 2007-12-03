@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Dec  3 18:19:21 CET 2007 - jkupec@suse.cz
+
+- new defaults for the force-resolution solver mode:
+  'on' by default in the interactive mode,
+  'off' by default in the non-interactive.
+  'on' is the default for rug-compatible mode (even non-interact.).
+  And finally, if the --force-resolve <on|off> is specified, it
+  takes preference.
+- r8011
+- 0.9.3
+
+-------------------------------------------------------------------
 Fri Nov 30 16:29:00 CET 2007 - jkupec@suse.cz
 
 - avoiding unwanted translation of zypper keywords (#343335)
