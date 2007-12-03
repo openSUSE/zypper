@@ -96,9 +96,13 @@ dependencies were not solved all right and attach the resulting /var/log/zypper.
 directory to your bug report. To use this option, simply add it to the problematic
 install or remove command. 
 .TP
-.I \-R, \-\-force\-resolution
-Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements.
+.I \-R, \-\-force\-resolution <on|off>
+If 'on' is specified the solver is forced to find a solution, even if it would
+mean removing all packages with unfulfilled requirements. Otherwise it reports
+a dependency problem and prompt the user to resolve it manually.
+
+The default value is 'on' in the interactive mode and 'off' in the
+non-interactive mode. If this option is specified, it takes the preference.
 
 .TP
 .B source-install (si) <name> ...
@@ -570,9 +574,11 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .I      \-\-agree\-to\-third\-party\-licenses
 This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .TP
-.I \-R, \-\-force\-resolution
+.I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode.
+solver mode by default when running rug in compatible mode. However, it is
+possible to turn the forcing of resolution off using this option even in
+rug-compatible mode.
 .RE
 
 .TP
@@ -583,9 +589,11 @@ zypper remove (rm)
 .I \-y, \-\-no\-confirm
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
 .TP
-.I \-R, \-\-force\-resolution
+.I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode.
+solver mode by default when running rug in compatible mode. However, it is
+possible to turn the forcing of resolution off using this option even in
+rug-compatible mode.
 .RE
 
 .TP
@@ -599,9 +607,11 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .I      \-\-agree\-to\-third\-party\-licenses
 This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .TP
-.I \-R, \-\-force\-resolution
+.I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode.
+solver mode by default when running rug in compatible mode. However, it is
+possible to turn the forcing of resolution off using this option even in
+rug-compatible mode.
 .RE
 
 .TP

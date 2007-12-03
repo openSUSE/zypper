@@ -2,6 +2,7 @@
 #include <sstream>
 #include <ctype.h>
 #include <boost/format.hpp>
+#include <boost/logic/tribool.hpp>
 #include <boost/logic/tribool_io.hpp>
 
 #include "zypp/ZYppFactory.h"
@@ -848,10 +849,49 @@ void establish ()
 
 bool resolve(const Zypper & zypper)
 {
-  establish ();
+  establish();
+
+  // --force-resolution command line parameter value
+  tribool force_resolution = indeterminate;
+  vector<string>::size_type count = copts.count("force-resolution");
+  if (count)
+  {
+    string value = copts["force-resolution"].front();
+    if (value == "on" || value == "true" || value == "1" || value == "yes")
+      force_resolution = true;
+    else if (value == "off" || value == "false" || value == "0" || value == "no")
+      force_resolution = false;
+    else
+    {
+      cerr << format(_("Invalid value '%s' of the %s parameter"))
+          % value % "force-resolution" << endl;
+      cerr << format(_("Valid values are '%s' and '%s'")) % "on" % "off" << endl;
+    }
+
+    if (count > 1)
+      cout << format(_("Considering only the first value of the %s parameter, ignoring the rest"))
+          % "force-resolution" << endl;
+  }
+
+  // if --force-resolution was not specified on the command line, force
+  // the resolution by default, don't force it only in non-interactive mode
+  // and not rug_compatible mode
+  if (indeterminate(force_resolution))
+  {
+    if (zypper.globalOpts().non_interactive &&
+        !zypper.globalOpts().is_rug_compatible)
+      force_resolution = false;
+    else
+      force_resolution = true;
+  }
+
+  DBG << "force resolution: " << force_resolution << endl;
+  cout_v << _("Force resolution:") << " " <<
+      (force_resolution ? _("Yes") : _("No")) << endl;
+  God->resolver()->setForceResolve( force_resolution );
+
   cout_v << _("Resolving dependencies...") << endl;
-  God->resolver()->setForceResolve(
-      zypper.globalOpts().is_rug_compatible ? true : copts.count("force-resolution") );
+  DBG << "Calling the solver..." << endl; 
   return God->resolver()->resolvePool();
 }
 
