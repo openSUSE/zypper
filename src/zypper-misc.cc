@@ -1428,8 +1428,8 @@ void solve_and_commit (Zypper & zypper)
         //! \todo fix the media reporting correctly
         gData.show_media_progress_hack = true;
 
-        // FIXME do resync if in shell mode, how do I know if in shell mode?
-        ZYppCommitResult result = God->commit( ZYppCommitPolicy().syncPoolAfterCommit(false) );
+        ZYppCommitResult result = God->commit(
+            ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
         was_installed = true;
 
         gData.show_media_progress_hack = false;
