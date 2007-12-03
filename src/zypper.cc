@@ -54,7 +54,8 @@ IMPL_PTR_TYPE(Zypper);
 Zypper::Zypper()
   : _argc(0), _argv(NULL),
     _command(ZypperCommand::NONE),
-    _exiting(false), _exit_code(ZYPPER_EXIT_OK), _running_shell(false),
+    _exiting(false), _exit_code(ZYPPER_EXIT_OK),
+    _running_shell(false), _running_help(false),
     _sh_argc(0), _sh_argv(NULL)
 {
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
