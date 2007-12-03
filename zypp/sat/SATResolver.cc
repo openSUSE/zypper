@@ -473,6 +473,27 @@ SATResolver::resolvePool()
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
+//----------------------------------------------------------------------------
+// helper function
+//----------------------------------------------------------------------------
+
+struct FindPackage : public resfilter::ResObjectFilterFunctor
+{
+    ProblemSolutionCombi *problemSolution;
+    TransactionKind action;
+    FindPackage (ProblemSolutionCombi *p, const TransactionKind act)
+       : problemSolution (p)
+	 , action (act)
+    {
+    }
+
+    bool operator()( PoolItem_Ref p)
+    {
+	problemSolution->addSingleAction (p, action);	
+	return true;
+    }
+};
+
 
 std::string SATResolver::SATprobleminfoString(Id problem)
 {
@@ -599,26 +620,80 @@ SATResolver::problems ()
 			    }
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
-				MIL << "- do not install "<<  id2str(pool, what) << endl;;
-				ERR << "No valid solution available" << endl;
+				{
+				FindPackage info (problemSolution, KEEP);
+				string package_name (id2str(pool, what));				
+				invokeOnEach( _pool.byNameBegin( package_name ),
+					      _pool.byNameEnd( package_name ),
+					      resfilter::ByUninstalled (),
+					      functor::functorRef<bool,PoolItem> (info) );
+				string description = str::form (_("do not install %s"), id2str(pool, what));
+				MIL << description << endl;
+				problemSolution->setDescription (description);
+				}
 				break;
 			    case SOLVER_ERASE_SOLVABLE_NAME:
-				MIL << "- do not deinstall " << id2str(pool, what) << endl;
-				ERR << "No valid solution available" << endl;
+				{
+				FindPackage info (problemSolution, KEEP);
+				string package_name (id2str(pool, what));
+				invokeOnEach( _pool.byNameBegin( package_name ),
+					      _pool.byNameEnd( package_name ),
+					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
+							      resfilter::ByTransact ()),			// will be deinstalled
+					      functor::functorRef<bool,PoolItem> (info) );
+				string description = str::form (_("do not deinstall %s"), id2str(pool, what));
+				MIL << description << endl;
+				problemSolution->setDescription (description);
+				}
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
-				MIL << "- do not install a solvable providing " <<  dep2str(pool, what) << endl;
-				ERR << "No valid solution available" << endl;
+				{
+				Id p, *pp;				
+				FOR_PROVIDES(p, pp, what);
+				{
+				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    if (poolItem.status().isToBeInstalled()
+					|| poolItem.status().staysUninstalled())
+					problemSolution->addSingleAction (poolItem, KEEP);   
+				}
+				string description = str::form (_("do not install a solvable providing %s"), dep2str(pool, what));
+				MIL << description << endl;
+				problemSolution->setDescription (description);
+				}
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
-				MIL << "- do not deinstall all solvables providing " << dep2str(pool, what) << endl;
-				ERR << "No valid solution available" << endl;
+				{
+				Id p, *pp;				
+				FOR_PROVIDES(p, pp, what);
+				{
+				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    if (poolItem.status().isToBeUninstalled()
+					|| poolItem.status().staysInstalled())
+					problemSolution->addSingleAction (poolItem, KEEP);   
+				}
+				string description = str::form (_("do not deinstall all solvables providing %s"), dep2str(pool, what));
+				MIL << description << endl;
+				problemSolution->setDescription (description);
+				}
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
-				s = pool->solvables + what;
-				MIL << "- do not install most recent version of " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr)
-				    << "." <<  id2str(pool, s->arch) << endl;
-				ERR << "No valid solution available" << endl;
+				{
+				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				s = pool->solvables + what;				
+				if (poolItem) {
+				    if (solv->installed && s->repo == solv->installed) {				    
+					problemSolution->addSingleAction (poolItem, KEEP);
+					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s));
+					MIL << description << endl;
+					problemSolution->setDescription (description);					
+				    } else {
+					ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE " << poolItem << " is not selected for installation" << endl;
+				    }
+				} else {
+				    ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
+					id2str(pool, s->arch) << endl;
+				}
+				}
 				break;
 			    default:
 				MIL << "- do something different" << endl;
