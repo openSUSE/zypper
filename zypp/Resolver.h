@@ -212,7 +212,8 @@ namespace zypp
      * (More or less a 'single step' resolver call)
      *
      * returns false if requirements are not all fulfillable
-     *
+     * 
+     * Is obsolete; use resolvePool() instead
      */
     bool transactResObject( ResObject::constPtr robj, bool install = true);
 
@@ -225,6 +226,7 @@ namespace zypp
      *
      * returns false if any transactResObject() call returned false.
      *
+     * Is obsolete; use resolvePool() instead     
      */
     bool transactResKind( Resolvable::Kind kind );
 
@@ -235,6 +237,7 @@ namespace zypp
      * It will only reset states which have an equal or
      * lower causer
      *
+     * Is obsolete; use resolvePool() instead     
      */
     void transactReset( ResStatus::TransactByValue causer );
 
@@ -248,7 +251,31 @@ namespace zypp
      * Adding additional conflict
      *
      */
-    void addConflict (const Capability & capability);      
+    void addConflict (const Capability & capability);
+
+    /**
+     * Remove additional requirement
+     *
+     */
+    void removeRequire (const Capability & capability);
+
+    /**
+     * Remove additional conflict
+     *
+     */
+    void removeConflict (const Capability & capability);
+
+    /**
+     * Get additional requirement
+     *
+     */      
+    const CapSet getRequire ();
+      
+    /**
+     * Get additional conflict
+     *
+     */            
+    const CapSet getConflict();
       
     /**
      * Setting solver timeout

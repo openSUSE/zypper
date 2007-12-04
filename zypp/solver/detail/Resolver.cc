@@ -439,11 +439,17 @@ Resolver::removeExtraCapability (const Capability & capability)
 }
 
 
-
 void
 Resolver::addExtraConflict (const Capability & capability)
 {
     _extra_conflicts.insert (capability);
+}
+
+
+void
+Resolver::removeExtraConflict (const Capability & capability)
+{
+    _extra_conflicts.erase (capability);
 }
 
 

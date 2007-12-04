@@ -234,6 +234,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addExtraCapability (const Capability & capability);
     void removeExtraCapability (const Capability & capability);
     void addExtraConflict (const Capability & capability);
+    void removeExtraConflict (const Capability & capability);    
 
     const CapSet extraCapability () { return _extra_caps; }
     const CapSet extraConflicts () { return _extra_conflicts; }

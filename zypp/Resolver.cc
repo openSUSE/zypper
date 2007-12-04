@@ -103,7 +103,15 @@ namespace zypp
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraCapability( capability ); }
   void Resolver::addConflict (const Capability & capability)
-  { _pimpl->addExtraConflict( capability ); }          
+  { _pimpl->addExtraConflict( capability ); }
+  void Resolver::removeRequire (const Capability & capability)
+  { _pimpl->removeExtraCapability( capability ); }
+  void Resolver::removeConflict (const Capability & capability)
+  { _pimpl->removeExtraConflict( capability ); }
+  const CapSet Resolver::getRequire ()
+  { _pimpl->extraCapability();}
+  const CapSet Resolver::getConflict ()
+  { _pimpl->extraConflicts();}      
   std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
   void Resolver::setTimeout( int seconds )
