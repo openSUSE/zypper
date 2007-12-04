@@ -428,6 +428,8 @@ void Zypper::commandShell()
         break;
       else if (command() == ZypperCommand::SHELL)
         cout << _("You already are running zypper's shell.") << endl;
+      else if (command() == ZypperCommand::NONE)
+        print_unknown_command_hint();
       else
         safeDoCommand();
     }
@@ -436,7 +438,7 @@ void Zypper::commandShell()
       cerr << e.msg() <<  endl;
       print_unknown_command_hint();
     }
-    
+
     shellCleanup();
   }
 
@@ -1083,7 +1085,7 @@ void Zypper::processCommandOptions()
   default:
   {
     ERR << "Unknown or unexpected command" << endl;
-    //report_problem("Unexpected program flow.","");
+    cerr << _("Unexpected program flow") << "." << endl;
     report_a_bug(cerr);
   }
   }
