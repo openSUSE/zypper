@@ -1134,9 +1134,9 @@ void Zypper::processCommandOptions()
         cout << "<message type=\"error\">" << msg  << "</message>" <<  endl;
       else
         cerr << msg << endl;
-  
+
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      return;
+      throw (ExitRequestException("ZYpp locked"));
     }
   }
 
