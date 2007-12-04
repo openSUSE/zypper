@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  4 11:39:29 CET 2007 - jkupec@suse.cz
+
+- removed some unnecessary boost dependencies (dmueller) (#344941)
+- fixed crashing if couldn't acquire ZYpp lock
+
+-------------------------------------------------------------------
 Mon Dec  3 18:19:21 CET 2007 - jkupec@suse.cz
 
 - new defaults for the force-resolution solver mode:
