@@ -36,7 +36,7 @@ namespace zypp
 	  if ((type & (SAT_FATAL|SAT_ERROR))) {
 	      _ERR("satsolver") << logString;
 	  } else {
-	      _DBG("satsolver") << logString;
+	      _MIL("satsolver") << logString;
 	  }
       }
 
