@@ -53,26 +53,28 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     _details = "";
 }
 
-void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action,
-					    const std::string description)
+void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action)
 {
-    TransactionSolutionAction  *actionTransact = new TransactionSolutionAction(item, action);
-    addAction (actionTransact);
-
-    if (description.size() == 0) {
-	ostringstream details;
-	details << *actionTransact;
-	_details += details.str();
-    } else {
-	_details += description;
-    }
+    addAction (new TransactionSolutionAction(item, action));
 }
 
 void ProblemSolutionCombi::addDescription( const std::string description)
 {
-    if ( _description.size() > 0)
-	_description += "\n";
-    _description += description;
+    if ( _description.size() == 0
+	 && _details.size() == 0) {
+	 // first entry
+	_description = description;
+    } else {
+	if ( _description.size() > 0
+	     && _details.size() == 0) {
+	    // second entry
+	    _details = _description;
+	    _description = _("Following actions will be done:");
+	}
+	// all other
+	_details += "\n";
+	_details += description;	
+    }
 }
 
       ///////////////////////////////////////////////////////////////////

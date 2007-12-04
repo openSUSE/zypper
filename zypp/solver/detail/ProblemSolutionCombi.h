@@ -53,7 +53,7 @@ namespace zypp
 	    /**
 	     * Add a single action
 	     */
-	    void addSingleAction( PoolItem_Ref item, const TransactionKind action, const std::string description = "");
+	    void addSingleAction( PoolItem_Ref item, const TransactionKind action);
 	    /**
 	     * Set description text
 	     */
