@@ -13,10 +13,10 @@
 
 #include <string>
 #include <vector>
-#include <boost/regex.hpp>
 #include <boost/function.hpp>
 #include "zypp/ZYpp.h"
 #include "zypp/base/Hash.h"
+#include "zypp/base/Regex.h"
 #include "zypp/cache/ResolvableQuery.h"
 #include "zypp/RepoManager.h"
 
@@ -221,7 +221,7 @@ private:
   zypp::ZYpp::Ptr & _zypp;
   const ZyppSearchOptions & _options;
   const std::vector<std::string> _qstrings;
-  boost::regex _reg;
+  zypp::str::regex _reg;
 
   InstalledCache _icache;
   IdCache _idcache;
@@ -390,10 +390,10 @@ struct FillTable
  * descriptions) with a regex created according to search criteria.
  */
 struct Match {
-  const boost::regex * _regex;
+  const zypp::str::regex * _regex;
   const bool _search_descs;
 
-  Match(const boost::regex & regex, bool search_descriptions = false) :
+  Match(const zypp::str::regex & regex, bool search_descriptions = false) :
     _regex(&regex), _search_descs(search_descriptions)
     {}
 

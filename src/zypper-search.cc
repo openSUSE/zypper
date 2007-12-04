@@ -333,18 +333,18 @@ void ZyppSearch::setupRegexp() {
   cout_vv << "using regex: " << regstr << endl;
 
   // regex flags
-  unsigned int flags = boost::regex::normal;
+  unsigned int flags = zypp::str::regex::normal;
   if (!_options.caseSensitive())
-    flags |= boost::regex_constants::icase;
+    flags |= zypp::str::regex::icase;
 
   // create regex object
   try {
      _reg.assign(regstr, flags);
   }
-  catch (regex_error & e) {
+  catch (zypp::str::regex_error & e) {
     cerr << "ZyppSearch::setupRegexp(): " << regstr
       << _(" is not a valid regular expression: \"")
-      << e.what() << "\"" << endl;
+      << regstr << "\"" << endl;
     cerr << _("This is a bug, please file a bug report against zypper.") << endl;
     exit(1);
   }
@@ -354,19 +354,23 @@ void ZyppSearch::setupRegexp() {
  * Converts '*' and '?' wildcards within str into their regex equivalents.
  */
 string ZyppSearch::wildcards2regex(const string & str) const {
-  string regexed;
+  string regexed = str;
 
-  regex all("\\*"); // regex to search for '*'
-  regex one("\\?"); // regex to search for '?'
-  string r_all(".*"); // regex equivalent of '*'
-  string r_one(".");  // regex equivalent of '?'
+  zypp::str::regex all("\\*"); // regex to search for '*'
+  zypp::str::regex one("\\?"); // regex to search for '?'
+  std::string r_all(".*"); // regex equivalent of '*'
+  std::string r_one(".");  // regex equivalent of '?'
+  std::string::size_type pos;
 
   // replace all "*" in input with ".*"
-  regexed = regex_replace(str, all, r_all);
-  cerr_vv << "wildcards2regex: " << str << " -> " << regexed;
+  for (pos = 0; (pos = regexed.find("*", pos)) != std::string::npos; pos+=2)
+    regexed = regexed.replace(pos, 1, r_all);
+  cerr_vv << "wildcards2regex: " << str << " -> " << regexed << std::endl;
 
   // replace all "?" in input with "."
-  regexed = regex_replace(regexed, one, r_one);
+  for (pos = 0; (pos = regexed.find('?', pos)) != std::string::npos; ++pos)
+    regexed = regexed.replace(pos, 1, r_one);
+
   cerr_vv << " -> " << regexed << endl;
 
   return regexed;
