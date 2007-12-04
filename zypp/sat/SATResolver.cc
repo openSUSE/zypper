@@ -719,28 +719,28 @@ SATResolver::problems ()
 
 				if (evrcmp(pool, s->evr, sd->evr) > 0)
 				{
-				    string description = str::form (_("allow downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);				    
 				    gotone = 1;
 				}
 				if (!solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(pool, s, sd))				
 				{
-				    string description = str::form (_("allow architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);				    
 				    gotone = 1;
 				}
 				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(pool, s, sd))				
 				{
-				    string description = str::form (_("allow vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
+				    string description = str::form (_("vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
 								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);				    
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    string description = str::form (_("allow replacement of %s with %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("replacement of %s with %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);				    
 				}
@@ -752,7 +752,7 @@ SATResolver::problems ()
 			else
 			{
 			    if (itemFrom) {
-				string description = str::form (_("allow deinstallation of %s"), solvable2str(pool, s));
+				string description = str::form (_("deinstallation of %s"), solvable2str(pool, s));
 				MIL << description << endl;
 				problemSolution->addDescription (description);				    				
 				problemSolution->addSingleAction (itemFrom, REMOVE);
