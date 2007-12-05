@@ -451,6 +451,20 @@ void Zypper::commandShell()
 
 void Zypper::shellCleanup()
 {
+  MIL << "Cleaning up for the next command." << endl;
+
+  switch(command().toEnum())
+  {
+  case ZypperCommand::INSTALL_e:
+  case ZypperCommand::REMOVE_e:
+  //case Zyppercommand::UPDATE_e: TODO once the update will take arguments
+  {
+    remove_selections(*this);
+    break;
+  }
+  default:;
+  }
+
   // clear any previous arguments 
   _arguments.clear();
   // clear command options
@@ -490,7 +504,6 @@ void Zypper::safeDoCommand()
     if (exiting())
       return;
     doCommand();
-    setCommand(ZypperCommand::NONE);
   }
   catch (const AbortRequestException & ex)
   {

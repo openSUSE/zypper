@@ -412,6 +412,47 @@ void mark_by_capability (const Zypper & zypper,
   }
 }
 
+// ----------------------------------------------------------------------------
+
+void remove_selections(Zypper & zypper)
+{
+  MIL << "Removing user selections from the solver pool" << endl;
+
+  DBG << "Removing user setToBeInstalled()/Removed()" << endl;
+
+  // iterate pool, searching for ResStatus::isByUser()
+  // TODO optimize: remember user selections and iterate by name
+  // TODO optimize: it seems this is actually needed only if the selection was
+  //      not committed (user has chosen not to continue)
+  const ResPool & pool = God->pool();
+  cout << "pool size" << pool.size() << endl;
+  for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it)
+    if (it->status().isByUser())
+    {
+      DBG << "Removing user setToBeInstalled()/Removed()" << endl;
+      it->status().resetTransact(zypp::ResStatus::USER);
+    }
+
+  DBG << "Removing user addRequire() addConflict()" << endl;
+
+  Resolver_Ptr solver = God->resolver();
+  CapSet capSet = solver->getConflict();
+  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    DBG << "removing conflict: " << (*it) << endl;
+    solver->removeConflict(*it);
+  }
+  capSet = solver->getRequire();
+  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+  {
+    DBG << "removing require: " << (*it) << endl;
+    solver->removeRequire(*it);
+  }
+
+  MIL << "DONE" << endl;
+}
+
+// ----------------------------------------------------------------------------
 
 // debugging
 static

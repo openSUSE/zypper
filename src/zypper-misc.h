@@ -40,6 +40,12 @@ void mark_by_capability (const Zypper & zypper,
 			 const zypp::ResObject::Kind &kind,
 			 const std::string &capstr );
 
+/**
+ * Reset all selections made by mark_* methods. Needed in the shell to reset
+ * selections after the install and remove commands.
+ */
+void remove_selections(Zypper & zypper);
+
 int show_summary(Zypper & zypper);
 //std::string calculate_token();
 
