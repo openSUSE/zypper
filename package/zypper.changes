@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Dec  5 13:36:48 CET 2007 - jkupec@suse.cz
+
+- reset user selections after install/remove in the zypper shell
+- r8028
+- forgotten changelog for 0.9.3 r8008 - sync pool after commit when
+  in shell (re-read installed resolvables)
+
+-------------------------------------------------------------------
 Tue Dec  4 11:39:29 CET 2007 - jkupec@suse.cz
 
 - removed some unnecessary boost dependencies (dmueller) (#344941)
