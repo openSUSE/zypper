@@ -109,9 +109,9 @@ namespace zypp
   void Resolver::removeConflict (const Capability & capability)
   { _pimpl->removeExtraConflict( capability ); }
   const CapSet Resolver::getRequire ()
-  { _pimpl->extraCapability();}
+  { return _pimpl->extraCapability();}
   const CapSet Resolver::getConflict ()
-  { _pimpl->extraConflicts();}      
+  { return _pimpl->extraConflicts();}      
   std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
   void Resolver::setTimeout( int seconds )
