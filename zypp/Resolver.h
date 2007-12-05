@@ -254,29 +254,29 @@ namespace zypp
     void addConflict (const Capability & capability);
 
     /**
-     * Remove additional requirement
+     * Remove the additional requirement set by \ref addRequire(Capability).
      *
      */
     void removeRequire (const Capability & capability);
 
     /**
-     * Remove additional conflict
+     * Remove the additional conflict set by \ref addConflict(Capability).
      *
      */
     void removeConflict (const Capability & capability);
 
     /**
-     * Get additional requirement
+     * Get all the additional requirements set by \ref addRequire(Capability).
      *
      */      
     const CapSet getRequire ();
       
     /**
-     * Get additional conflict
+     * Get all the additional conflicts set by \ref addConflict(Capability).
      *
      */            
     const CapSet getConflict();
-      
+
     /**
      * Setting solver timeout
      *
