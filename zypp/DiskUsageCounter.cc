@@ -85,15 +85,15 @@ namespace zypp
     // iterate through all items
     for_( it, pool_r.begin(), pool_r.end() )
     {
+      // skip items that do not transact
+      if ( ! it->status().transacts() )
+        continue;
+
       DiskUsage du( (*it)->diskusage() );
 
       // skip items without du info
       if ( du.empty() )
         continue; // or find some substitute info
-
-      // skip items that do not transact
-      if ( ! it->status().transacts() )
-        continue;
 
       // Adjust the data.
       if ( it->status().isUninstalled() )
