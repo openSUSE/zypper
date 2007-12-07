@@ -377,6 +377,38 @@ namespace zypp
     //	METHOD NAME : recursive_rmdir
     //	METHOD TYPE : int
     //
+    static int recursive_rmdir_1( const Pathname & dir )
+    {
+      DIR * dp;
+      struct dirent * d;
+
+      if ( ! (dp = opendir( dir.c_str() )) )
+        return _Log_Result( errno );
+
+      while ( (d = readdir(dp)) )
+      {
+        std::string direntry = d->d_name;
+        if ( direntry == "." || direntry == ".." )
+          continue;
+        Pathname new_path( dir / d->d_name );
+
+        struct stat st;
+        if ( ! lstat( new_path.c_str(), &st ) )
+        {
+          if ( S_ISDIR( st.st_mode ) )
+            recursive_rmdir_1( new_path );
+          else
+            ::unlink( new_path.c_str() );
+        }
+      }
+      closedir( dp );
+
+      if ( ::rmdir( dir.c_str() ) < 0 )
+        return _Log_Result( errno );
+
+      return _Log_Result( 0 );
+    }
+    ///////////////////////////////////////////////////////////////////
     int recursive_rmdir( const Pathname & path )
     {
       MIL << "recursive_rmdir " << path << ' ';
@@ -390,18 +422,7 @@ namespace zypp
         return _Log_Result( ENOTDIR );
       }
 
-      try
-        {
-          boost::filesystem::path bp( path.asString(), boost::filesystem::native );
-          boost::filesystem::remove_all( bp );
-        }
-      catch ( boost::filesystem::filesystem_error & excpt )
-        {
-          WAR << " FAILED: " << excpt.what() << endl;
-          return -1;
-        }
-
-      return _Log_Result( 0 );
+      return recursive_rmdir_1( path );
     }
 
     ///////////////////////////////////////////////////////////////////
