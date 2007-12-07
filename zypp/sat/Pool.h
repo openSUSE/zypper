@@ -107,8 +107,7 @@ namespace zypp
         */
         Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
         /** \overload Using the files basename as \ref Repo name. */
-        Repo addRepoSolv( const Pathname & file_r )
-        { return addRepoSolv( file_r, file_r.basename() ); }
+        Repo addRepoSolv( const Pathname & file_r );
 
       public:
         /** Whether \ref Pool contains solvables. */

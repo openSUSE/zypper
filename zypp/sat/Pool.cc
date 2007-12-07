@@ -130,6 +130,9 @@ namespace zypp
       return tmprepo;
     }
 
+    Repo Pool::addRepoSolv( const Pathname & file_r )
+    { return addRepoSolv( file_r, file_r.basename() ); }
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

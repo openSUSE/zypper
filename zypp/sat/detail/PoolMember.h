@@ -29,6 +29,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     class IdStr;
+    class IdRel;
     class Solvable;
     class Repo;
     class Pool;
@@ -63,7 +64,13 @@ namespace zypp
     namespace detail
     { /////////////////////////////////////////////////////////////////
 
-      /** Id type to connect \ref Solvable and sat-solvable. */
+      /** Generic Id type. */
+      typedef int IdType;
+      static const IdType noId( 0 );
+
+      /** Id type to connect \ref Solvable and sat-solvable.
+       * Indext into solvable array.
+      */
       typedef unsigned SolvableIdType;
       /** Id to denote \ref Solvable::nosolvable. */
       static const SolvableIdType noSolvableId( 0 );
@@ -91,6 +98,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
+    typedef IdStr KindId;
     typedef IdStr NameId;
     typedef IdStr EvrId;
     typedef IdStr ArchId;

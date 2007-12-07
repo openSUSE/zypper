@@ -147,55 +147,9 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    if ( obj_r.status().isLocked() )
-      SEC << obj_r << endl;
+    MIL << obj_r << endl;
+    DBG << " -> " << obj_r .satSolvable() << endl;
 
-//     handle( asKind<Package>( obj_r ) );
-//     handle( asKind<Patch>( obj_r ) );
-//     handle( asKind<Pattern>( obj_r ) );
-//     handle( asKind<Product>( obj_r ) );
-    return true;
-  }
-
-  void handle( const Package_constPtr & p )
-  {
-    if ( !p )
-      return;
-
-    WAR << p->size() << endl;
-    MIL << p->diskusage() << endl;
-  }
-
-  void handle( const Patch_constPtr & p )
-  {
-    if ( !p )
-      return;
-  }
-
-  void handle( const Pattern_constPtr & p )
-  {
-    if ( !p )
-      return;
-
-    if ( p->vendor().empty() )
-      ERR << p << endl;
-    else if ( p->vendor() == "SUSE (assumed)" )
-      SEC << p << endl;
-  }
-
-  void handle( const Product_constPtr & p )
-  {
-    if ( !p )
-      return;
-
-    USR << p << endl;
-    USR << p->vendor() << endl;
-    USR << p->type() << endl;
-  }
-
-  template<class _C>
-  bool operator()( const _C & obj_r )
-  {
     return true;
   }
 };
@@ -413,7 +367,7 @@ bool isFalse() { return false; }
 
 void dumpIdStr()
 {
-  for ( unsigned i = 0; i < 30; ++i )
+  for ( int i = -3; i < 30; ++i )
   {
     DBG << i << '\t' << sat::IdStr( i ) << endl;
   }
@@ -428,7 +382,6 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-
 
   sat::Pool satpool( sat::Pool::instance() );
 
@@ -522,6 +475,7 @@ int main( int argc, char * argv[] )
 
   USR << "pool: " << pool << endl;
   pool.satSync();
+
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 

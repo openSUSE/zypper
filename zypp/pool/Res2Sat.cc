@@ -56,16 +56,19 @@ namespace zypp
         const CapSet & caps( dep_r[which_r] );
         if ( caps.empty() )
           return;
+        const CapSet & prereq( dep_r[Dep::PREREQUIRES] );
 
         for_( it, caps.begin(), caps.end() )
         {
-          // checking PREREQUIRES later
-          SatIsRreq isreq = ( which_r == Dep::REQUIRES ? ISRREQ_REQUIRES : ISRREQ_NORMAL );
+          SatIsRreq isreq = ISRREQ_NORMAL;
+          if ( which_r == Dep::REQUIRES )
+          {
+            isreq = ( prereq.find( *it ) != prereq.end() ) ? ISRREQ_PREREQUIRES : ISRREQ_REQUIRES;
+          }
 
           std::string name;
           Rel         op;
           Edition     ed;
-
           using capability::VersionedCap;
           VersionedCap::constPtr vercap = capability::asKind<VersionedCap>(*it);
           if ( vercap )
@@ -79,26 +82,19 @@ namespace zypp
             name = (*it).asString();
           }
 
-          ::Id nid = 0;
+          sat::IdRel rel;
           if ( refersTo<Package>( *it ) )
           {
-            store( nid, name );
+            rel = sat::IdRel( name, op, ed );
           }
           else
           {
-            store( nid, str::form( "%s:%s",
-                                   (*it).refers().asString().c_str(),
-                                   name.c_str() ) );
+#warning glue kind
+            // non-packages prefixed by kind
+            rel = sat::IdRel( name, op, ed, sat::KindId( (*it).refers().asString().c_str() ) );
           }
 
-          if ( op != Rel::ANY && ed != Edition::noedition )
-          {
-            sat::IdStr eid( ed.asString() );
-#warning TBD calc rel and prereqcheck
-            nid = ::rel2id( slv_r->repo->pool, nid, eid.id(), op.bits(), true );
-          }
-
-          where_r = ::repo_addid_dep( slv_r->repo, where_r, nid, isreq );
+          where_r = ::repo_addid_dep( slv_r->repo, where_r, rel.id(), isreq );
         }
       }
 
@@ -122,6 +118,7 @@ namespace zypp
       }
       else
       {
+        // non-packages prefixed by kind
         store( slv->name, str::form( "%s:%s",
                                      res_r->kind().asString().c_str(),
                                      res_r->name().c_str() ) );
@@ -133,14 +130,12 @@ namespace zypp
       store( slv->provides,    slv, res_r->deps(), Dep::PROVIDES );
       store( slv->obsoletes,   slv, res_r->deps(), Dep::OBSOLETES );
       store( slv->conflicts,   slv, res_r->deps(), Dep::CONFLICTS );
-      store( slv->requires,    slv, res_r->deps(), Dep::REQUIRES );
+      store( slv->requires,    slv, res_r->deps(), Dep::REQUIRES ); // incl. PREREQIRES
       store( slv->recommends,  slv, res_r->deps(), Dep::RECOMMENDS );
       store( slv->suggests,    slv, res_r->deps(), Dep::SUGGESTS );
       store( slv->supplements, slv, res_r->deps(), Dep::SUPPLEMENTS );
       store( slv->enhances,    slv, res_r->deps(), Dep::ENHANCES );
       store( slv->freshens,    slv, res_r->deps(), Dep::FRESHENS );
-
-      //DBG << "  " << res_r << " -> " << slv_r << endl;
     }
 
     /////////////////////////////////////////////////////////////////

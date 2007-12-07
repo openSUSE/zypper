@@ -14,6 +14,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/IdStr.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -24,18 +25,21 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const IdStr IdStr::Null( unsigned(STRID_NULL) );
-    const IdStr IdStr::Empty( unsigned(STRID_EMPTY) );
+    const IdStr IdStr::Null( STRID_NULL );
+    const IdStr IdStr::Empty( STRID_EMPTY );
 
     /////////////////////////////////////////////////////////////////
 
     IdStr::IdStr( const char * str_r )
-      : _id( ::str2id( myPool().getPool(), str_r, true ) )
+      : _id( ::str2id( myPool().getPool(), str_r, /*create*/true ) )
     {}
 
     IdStr::IdStr( const std::string & str_r )
-      : _id( ::str2id( myPool().getPool(), str_r.c_str(), true ) )
+      : _id( ::str2id( myPool().getPool(), str_r.c_str(), /*create*/true ) )
     {}
+
+    unsigned IdStr::size() const
+    { return ::strlen( c_str() ); }
 
     const char * IdStr::c_str() const
     {

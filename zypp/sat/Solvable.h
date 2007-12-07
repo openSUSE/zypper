@@ -18,6 +18,7 @@
 
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/IdStr.h"
+#include "zypp/sat/IdRel.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
