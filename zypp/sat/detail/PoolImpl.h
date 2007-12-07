@@ -71,7 +71,8 @@ namespace zypp
           {
             if ( _serial.dirty() )
             {
-              ::pool_createwhatprovides( _pool );
+              // sat solver claims to handle this on it's own:
+              //::pool_createwhatprovides( _pool );
               _serial.serial();
             }
           }
