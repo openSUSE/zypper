@@ -91,6 +91,11 @@ namespace zypp
     explicit
     Rel( const std::string & strval_r );
 
+    /** Ctor from string (non-throwing).
+     * Illegal string values resolve to \c default_r
+    */
+    Rel( const std::string & strval_r, const Rel & default_r );
+
     /** Ctor from bits. */
     explicit
     Rel( unsigned bits_r )

@@ -22,34 +22,46 @@ namespace zypp
 
   namespace
   {
-
     std::map<std::string,Rel::for_use_in_switch> _table;
+
+    std::map<std::string,Rel::for_use_in_switch>::const_iterator findStr( const std::string & strval_r )
+    {
+      if ( _table.empty() )
+      {
+        // initialize it
+        _table["EQ"]   = _table["eq"]  = _table["=="]    = _table["="] = Rel::EQ_e;
+        _table["NE"]   = _table["ne"]  = _table["!="]                  = Rel::NE_e;
+        _table["LT"]   = _table["lt"]  = _table["<"]                   = Rel::LT_e;
+        _table["LE"]   = _table["le"]  = _table["lte"]  = _table["<="] = Rel::LE_e;
+        _table["GT"]   = _table["gt"]  = _table[">"]                   = Rel::GT_e;
+        _table["GE"]   = _table["ge"]  = _table["gte"]  = _table[">="] = Rel::GE_e;
+        _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""]  = Rel::ANY_e;
+        _table["NONE"] = _table["none"]                                = Rel::NONE_e;
+      }
+
+      return _table.find( strval_r );
+    }
 
     Rel::for_use_in_switch parse( const std::string & strval_r )
     {
-      if ( _table.empty() )
-        {
-          // initialize it
-          _table["EQ"]   = _table["eq"]  = _table["=="]    = _table["="] = Rel::EQ_e;
-          _table["NE"]   = _table["ne"]  = _table["!="]                  = Rel::NE_e;
-          _table["LT"]   = _table["lt"]  = _table["<"]                   = Rel::LT_e;
-          _table["LE"]   = _table["le"]  = _table["lte"]  = _table["<="] = Rel::LE_e;
-          _table["GT"]   = _table["gt"]  = _table[">"]                   = Rel::GT_e;
-          _table["GE"]   = _table["ge"]  = _table["gte"]  = _table[">="] = Rel::GE_e;
-          _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""]  = Rel::ANY_e;
-          _table["NONE"] = _table["none"]                                = Rel::NONE_e;
-        }
-
-      std::map<std::string,Rel::for_use_in_switch>::const_iterator it
-      = _table.find( strval_r );
+      std::map<std::string,Rel::for_use_in_switch>::const_iterator it = findStr( strval_r );
       if ( it == _table.end() )
-        {
-          ZYPP_THROW( Exception("Rel parse: illegal string value '"+strval_r+"'") );
-        }
+      {
+        ZYPP_THROW( Exception("Rel parse: illegal string value '"+strval_r+"'") );
+      }
+      return it->second;
+    }
+
+    Rel::for_use_in_switch parse( const std::string & strval_r, const Rel & default_r )
+    {
+      std::map<std::string,Rel::for_use_in_switch>::const_iterator it = findStr( strval_r );
+      if ( it == _table.end() )
+      {
+        return default_r.inSwitch();
+      }
       return it->second;
     }
   }
-
   ///////////////////////////////////////////////////////////////////
 
   const Rel Rel::EQ( Rel::EQ_e );
@@ -68,6 +80,10 @@ namespace zypp
   //
   Rel::Rel( const std::string & strval_r )
   : _op( parse( strval_r ) )
+  {}
+
+  Rel::Rel( const std::string & strval_r, const Rel & default_r )
+  : _op( parse( strval_r, default_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
