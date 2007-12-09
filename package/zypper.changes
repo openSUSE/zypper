@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Dec  9 18:21:50 CET 2007 - jkupec@suse.cz
+
+- --type added for the 'info' command
+- 'quit' command help added
+- r8084
+
+-------------------------------------------------------------------
 Sun Dec  9 14:02:10 CET 2007 - jkupec@suse.cz
 
 - fixed the install command in the shell (#345004)
@@ -16,6 +23,7 @@ Sun Dec  9 11:54:08 CET 2007 - jkupec@suse.cz
 Wed Dec  5 13:36:48 CET 2007 - jkupec@suse.cz
 
 - reset user selections after install/remove in the zypper shell
+  (#288740)
 - r8028
 - forgotten changelog for 0.9.3 r8008 - sync pool after commit when
   in shell (re-read installed resolvables)
