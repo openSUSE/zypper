@@ -1,0 +1,17 @@
+- zypper info
+  Show 'required argument missing' message.
+  Show info command help.
+
+- zypper info foo
+  show info for package foo
+
+- zypper info -t type foo
+  show info for resolvable foo of the specified type
+
+- zypper info non-existent
+  show 'package non-existent not found' message
+
+- zypper info -t type non-existent
+  show '"type" non-existent not found' message
+
+TODO add patch-info, and info options
