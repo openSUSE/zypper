@@ -484,7 +484,8 @@ void Zypper::shellCleanup()
   setRunningHelp(false);
   // reset the exitting flag
   exit(false);
-  // ... and the exit code does not matter in the shell
+  // ... and the exit code
+  setExitCode(ZYPPER_EXIT_OK);
 
   // gData
   gData.current_repo = RepoInfo();

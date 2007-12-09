@@ -1112,11 +1112,14 @@ void cond_load_resolvables(Zypper & zypper, bool to_pool)
   if (done)
     return;
 
+  MIL << "Going to load resolvables" << endl;
+
   load_repo_resolvables(zypper, to_pool);
   if (!zypper.globalOpts().disable_system_resolvables && to_pool)
     load_target_resolvables(zypper);
 
   done = true;
+  MIL << "Done loading resolvables" << endl;
 }
 
 // ---------------------------------------------------------------------------

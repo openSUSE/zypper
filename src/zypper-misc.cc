@@ -425,7 +425,7 @@ void remove_selections(Zypper & zypper)
   // TODO optimize: it seems this is actually needed only if the selection was
   //      not committed (user has chosen not to continue)
   const ResPool & pool = God->pool();
-  cout << "pool size" << pool.size() << endl;
+
   for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it)
     if (it->status().isByUser())
     {
@@ -1481,6 +1481,8 @@ void mark_updates( const ResObject::Kind &kind, bool skip_interactive, bool best
  */
 void solve_and_commit (Zypper & zypper)
 {
+  MIL << "solving..." << endl;
+
   while (true) {
     bool success = resolve(zypper);
     if (success)
@@ -1504,6 +1506,7 @@ void solve_and_commit (Zypper & zypper)
       if (!confirm_licenses(zypper)) return;
 
       cerr_v << _("committing") << endl;
+      MIL << "committing..." << endl;
 
       try {
         //! \todo fix the media reporting correctly
