@@ -828,7 +828,7 @@ int add_repo(Zypper & zypper, RepoInfo & repo)
 
 // ----------------------------------------------------------------------------
 
-int add_repo_by_url( Zypper & zypper,
+void add_repo_by_url( Zypper & zypper,
                      const zypp::Url & url, const string & alias,
                      const string & type,
                      tribool enabled, tribool autorefresh)
@@ -850,20 +850,23 @@ int add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(autorefresh) )
     repo.setAutorefresh((autorefresh == true));
 
-  return add_repo(zypper, repo);
+  zypper.setExitCode(add_repo(zypper, repo));
 }
 
 // ----------------------------------------------------------------------------
 
 //! \todo handle zypp exceptions
-int add_repo_from_file( Zypper & zypper,
-                       const std::string & repo_file_url,
-                       tribool enabled, tribool autorefresh)
+void add_repo_from_file( Zypper & zypper,
+                         const std::string & repo_file_url,
+                         tribool enabled, tribool autorefresh)
 {
   //! \todo handle local .repo files, validate the URL
   Url url = make_url(repo_file_url);
   if (!url.isValid())
-    return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  {
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    return;
+  }
 
   RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> repos;
@@ -876,7 +879,8 @@ int add_repo_from_file( Zypper & zypper,
     report_problem(e,
       _("Problem accessing the file at the specified URL") + string(":"),
       _("Please check if the URL is valid and accessible."));
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   catch (const parser::ParseException & e)
   {
@@ -886,14 +890,16 @@ int add_repo_from_file( Zypper & zypper,
       // TranslatorExplanation don't translate the URL if the URL itself is not translated.
       // Also don't translate the '.repo' string.
       _("Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."));
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
       _("Problem encountered while trying to read the file at the specified URL") + string(":"));
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
 
   // add repos
@@ -911,7 +917,7 @@ int add_repo_from_file( Zypper & zypper,
     add_repo(zypper, repo);
   }
 
-  return ZYPPER_EXIT_OK;
+  return;
 }
 
 // ----------------------------------------------------------------------------

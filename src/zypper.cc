@@ -1161,6 +1161,7 @@ void Zypper::processCommandOptions()
 /// process one command from the OS shell or the zypper shell
 void Zypper::doCommand()
 {
+  MIL << "Going to process command " << command().toEnum() << endl;
   ResObject::Kind kind;
 
 
@@ -1195,21 +1196,23 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);return;
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);return;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     // too many arguments
     if (_arguments.size() > 2)
     {
       report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     // indeterminate indicates the user has not specified the values
@@ -1226,7 +1229,7 @@ void Zypper::doCommand()
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        setExitCode(add_repo_from_file(*this,copts["repo"].front(), enabled, refresh));
+        add_repo_from_file(*this,copts["repo"].front(), enabled, refresh);
         return;
       }
   
@@ -1239,12 +1242,16 @@ void Zypper::doCommand()
         cerr << _("Too few arguments. At least URL and alias are required.") << endl;
         ERR << "Too few arguments. At least URL and alias are required." << endl;
         cout_n << _command_help;
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
       }
 
       Url url = make_url (_arguments[0]);
       if (!url.isValid())
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
+      {
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
 
       // by default, enable the repo and set autorefresh
       if (indeterminate(enabled)) enabled = true;
@@ -1255,9 +1262,8 @@ void Zypper::doCommand()
       // load gpg keys
       cond_init_target(*this);
 
-      setExitCode(add_repo_by_url(*this,
-          url, _arguments[1]/*alias*/, type, enabled, refresh));
-      return;
+      add_repo_by_url(
+          *this, url, _arguments[1]/*alias*/, type, enabled, refresh);
     }
     catch (const repo::RepoUnknownTypeException & e)
     {
@@ -1266,8 +1272,9 @@ void Zypper::doCommand()
           _("Specified type is not a valid repository type:"),
           _("See 'zypper -h addrepo' or man zypper to get a list of known repository types."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
     }
+
+    return;
   }
 
   // --------------------------( delete repo )--------------------------------
@@ -1277,14 +1284,15 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);return;
+      return;
     }
 
     // check root user
     if (geteuid() != 0)
     {
       cerr << _("Root privileges are required for modifying system repositories.") << endl;
-      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);return;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
     }
 
     if (_arguments.size() < 1)
@@ -1293,7 +1301,8 @@ void Zypper::doCommand()
       ERR << "Required argument missing." << endl;
       cout_n << _("Usage") << ':' << endl;
       cout_n << _command_help;
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     // too many arguments
@@ -1301,17 +1310,15 @@ void Zypper::doCommand()
     else if (_arguments.size() > 1)
     {
       report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);return;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     warn_if_zmd ();
 
     bool found = remove_repo(*this, _arguments[0]);
     if (found)
-    {
-      setExitCode(ZYPPER_EXIT_OK);
       return;
-    }
 
     MIL << "Repository not found by alias, trying delete by URL" << endl;
     cout_v << _("Repository not found by alias, trying delete by URL...") << endl;
@@ -1350,7 +1357,6 @@ void Zypper::doCommand()
       cerr << _("Repository not found by given alias or URL.") << endl;
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 
@@ -1361,7 +1367,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1402,7 +1407,6 @@ void Zypper::doCommand()
       return;
     }
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 
@@ -1413,7 +1417,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1451,7 +1454,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1475,7 +1477,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1577,7 +1578,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1609,7 +1609,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1699,7 +1698,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1737,7 +1735,7 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_INF_UPDATE_NEEDED);
       return;
     }
-    setExitCode(ZYPPER_EXIT_OK);
+
     return;
   }
 
@@ -1747,7 +1745,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1776,7 +1773,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1814,7 +1810,6 @@ void Zypper::doCommand()
 
     list_updates(*this, kind, best_effort );
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 
@@ -1825,7 +1820,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1843,7 +1837,6 @@ void Zypper::doCommand()
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 
@@ -1853,7 +1846,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1935,7 +1927,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -1993,7 +1984,6 @@ void Zypper::doCommand()
     if (runningHelp())
     {
       cout << _command_help;
-      setExitCode(ZYPPER_EXIT_OK);
       return;
     }
 
@@ -2016,7 +2006,6 @@ void Zypper::doCommand()
 
     printInfo(*this);
 
-    setExitCode(ZYPPER_EXIT_OK);
     return;
   }
 

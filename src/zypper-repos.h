@@ -39,12 +39,12 @@ int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_by_url(Zypper & zypper,
-                    const zypp::Url & url,
-                    const std::string & alias,
-                    const std::string & type = "",
-                    boost::tribool enabled = boost::indeterminate,
-                    boost::tribool autorefresh = boost::indeterminate);
+void add_repo_by_url(Zypper & zypper,
+                     const zypp::Url & url,
+                     const std::string & alias,
+                     const std::string & type = "",
+                     boost::tribool enabled = boost::indeterminate,
+                     boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -57,10 +57,10 @@ int add_repo_by_url(Zypper & zypper,
  * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
  *         ZYPPER_EXIT_OK otherwise
  */
-int add_repo_from_file(Zypper & zypper,
-                       const std::string & repo_file_url,
-                       boost::tribool enabled = boost::indeterminate,
-                       boost::tribool autorefresh = boost::indeterminate);
+void add_repo_from_file(Zypper & zypper,
+                        const std::string & repo_file_url,
+                        boost::tribool enabled = boost::indeterminate,
+                        boost::tribool autorefresh = boost::indeterminate);
 
 /**
  * Delte repository specified by \a alias.
