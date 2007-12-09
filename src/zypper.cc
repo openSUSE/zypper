@@ -881,16 +881,17 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    _command_help = _(
-      // TranslatorExplanation don't translate the resolvable types
-      // (see the install command comment) 
+    _command_help = boost::str(format(_(
+      // TranslatorExplanation the first %s = "package, patch, pattern, product"
+      //  and the second %s = "patch"
       "update (up) [options]\n"
       "\n"
       "Update all installed resolvables with newer versions, where applicable.\n"
       "\n"
       "  Command options:\n"
       "\n"
-      "-t, --type <type>               Type of resolvable (package, patch, pattern, product) (default: patch)\n"
+      "-t, --type <type>               Type of resolvable (%s)\n"
+      "                                Default: %s\n"
       "-r, --repo <alias>              Limit updates to the repository specified by the alias.\n"
       "    --skip-interactive          Skip interactive updates\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
@@ -898,7 +899,7 @@ void Zypper::processCommandOptions()
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
-    );
+    )) % "package, patch, pattern, product" % "patch");
     break;
   }
 
@@ -1025,6 +1026,7 @@ void Zypper::processCommandOptions()
   case ZypperCommand::INFO_e:
   {
     static struct option info_options[] = {
+      {"type", required_argument, 0, 't'},
       {"repo", required_argument, 0, 'r'},
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
@@ -1032,16 +1034,18 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = info_options;
-    //! \todo -t option is missing (10.3+)
-    _command_help = _(
-      "info <name> ...\n"
-      "\n"
-      "Show full information for packages\n"
-      "\n"
-      "  Command options:\n"
-      "\n"
-      "-r, --repo <alias>  Work only with the repository specified by the alias.\n"
-    );
+    _command_help =
+      string(
+      _("info <name> ...\n"
+        "\n"
+        "Show full information for packages")) + "\n"
+        "\n" +
+      _("  Command options:") + "\n" +
+      _("-r, --repo <alias>  Work only with the repository specified by the alias.") + "\n" +
+      boost::str(format(
+      _("-t, --type <type>   Type of resolvable (%s)\n"
+        "                    Default: %s")) % "package, patch, pattern, product" % "package") + "\n"; 
+
     break;
   }
 
@@ -2019,6 +2023,23 @@ void Zypper::doCommand()
       return;
     }
 
+    switch (command().toEnum())
+    {
+    case ZypperCommand::RUG_PATCH_INFO_e:
+      kind =  ResTraits<Patch>::kind;
+      break;
+    default:
+    case ZypperCommand::INFO_e:
+      // read resolvable type
+      string skind = copts.count("type")?  copts["type"].front() : "package";
+      kind = string_to_kind (skind);
+      if (kind == ResObject::Kind ()) {
+        cerr << format(_("Unknown resolvable type: %s")) % skind << endl;
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+    }
+
     cond_init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -2026,7 +2047,7 @@ void Zypper::doCommand()
     cond_load_resolvables(*this);
     establish ();
 
-    printInfo(*this);
+    printInfo(*this, kind);
 
     return;
   }

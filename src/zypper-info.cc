@@ -23,14 +23,8 @@ extern ZYpp::Ptr God;
 /**
  * 
  */
-void printInfo(const Zypper & zypper)
+void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
 {
-  Resolvable::Kind kind;
-  if (zypper.command() == ZypperCommand::INFO)
-    kind =  ResTraits<Package>::kind;
-  else if (zypper.command() == ZypperCommand::RUG_PATCH_INFO)
-    kind = ResTraits<Patch>::kind;
-
   ResPool pool = God->pool();
 
   cout << endl;
@@ -67,9 +61,9 @@ void printInfo(const Zypper & zypper)
 
       cout << endl << endl;
 
-      if (zypper.command() == ZypperCommand::INFO)
+      if (kind == ResTraits<Package>::kind)
         printPkgInfo(zypper, installer.item,installed);
-      else if (zypper.command() == ZypperCommand::RUG_PATCH_INFO)
+      else if (kind == ResTraits<Patch>::kind)
         printPatchInfo(zypper, installer.item,installed);
     }
   }

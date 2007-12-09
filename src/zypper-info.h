@@ -2,10 +2,11 @@
 #define ZYPPERINFO_H_
 
 #include "zypp/PoolItem.h"
+#include "zypp/Resolvable.h"
 
 #include "zypper.h"
 
-void printInfo(const Zypper & zypper);
+void printInfo(const Zypper & zypper, const zypp::Resolvable::Kind & kind);
 
 void printPkgInfo(const Zypper & zypper,
                   const zypp::PoolItem & pool_item,
