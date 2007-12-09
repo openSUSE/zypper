@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Dec  9 14:02:10 CET 2007 - jkupec@suse.cz
+
+- fixed the install command in the shell (#345004)
+- r8080
+
+-------------------------------------------------------------------
 Sun Dec  9 11:54:08 CET 2007 - jkupec@suse.cz
 
 - fixed addrepo command (#346797)
