@@ -54,7 +54,7 @@ IMPL_PTR_TYPE(Zypper);
 Zypper::Zypper()
   : _argc(0), _argv(NULL),
     _command(ZypperCommand::NONE),
-    _exiting(false), _exit_code(ZYPPER_EXIT_OK),
+    _exit_code(ZYPPER_EXIT_OK),
     _running_shell(false), _running_help(false),
     _sh_argc(0), _sh_argv(NULL)
 {
@@ -84,9 +84,12 @@ int Zypper::main(int argc, char ** argv)
   _argv = argv;
 
   // parse global options and the command
-  processGlobalOptions();
-  if (this->exiting())
+  try { processGlobalOptions(); }
+  catch (const ExitRequestException & e)
+  {
+    MIL << "Caught exit request:" << endl << e.msg() << endl;
     return exitCode();
+  }
 
   switch(command().toEnum())
   {
@@ -360,14 +363,14 @@ void Zypper::processGlobalOptions()
         {
           cout << e.asUserString() << endl;
           print_unknown_command_hint();
-          this->exit();
+          ZYPP_THROW(ExitRequestException("help provided"));
         }
       }
     }
     else
     {
       print_main_help();
-      this->exit();
+      ZYPP_THROW(ExitRequestException("help provided"));
     }
   }
   else if (command() == ZypperCommand::NONE)
@@ -482,8 +485,6 @@ void Zypper::shellCleanup()
   _command_help.clear();
   // reset help flag
   setRunningHelp(false);
-  // reset the exitting flag
-  exit(false);
   // ... and the exit code
   setExitCode(ZYPPER_EXIT_OK);
 
@@ -505,7 +506,7 @@ void Zypper::safeDoCommand()
   try
   {
     processCommandOptions();
-    if (exiting() || command() == ZypperCommand::NONE)
+    if (command() == ZypperCommand::NONE)
       return;
     doCommand();
   }
@@ -518,7 +519,7 @@ void Zypper::safeDoCommand()
   }
   catch (const ExitRequestException & e)
   {
-    cout_vv << "Caught exit request:" << endl << e.msg() << endl; 
+    MIL << "Caught exit request:" << endl << e.msg() << endl; 
   }
   catch (const Exception & ex)
   {
@@ -1095,6 +1096,23 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::SHELL_QUIT_e:
+  {
+    static struct option quit_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = quit_options;
+    _command_help = _(
+      "quit (exit, ^D)\n"
+      "\n"
+      "Quit the current zypper shell.\n"
+      "\n"
+      "This command has no additional options.\n"
     );
     break;
   }
@@ -2009,6 +2027,18 @@ void Zypper::doCommand()
     establish ();
 
     printInfo(*this);
+
+    return;
+  }
+
+  else if (command() == ZypperCommand::SHELL_QUIT)
+  {
+    if (runningHelp())
+      cout << _command_help;
+    else if (!runningShell())
+      cout << _("This command only makes sense in the zypper shell.") << endl;
+    else
+      cout << "oops, you wanted to quit, didn't you?" << endl;
 
     return;
   }
