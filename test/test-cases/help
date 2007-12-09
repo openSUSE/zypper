@@ -1,4 +1,6 @@
+- zypper
 - zypper help
+- zypper -h
   show list of global options and list of commands
 
 - zypper help help
@@ -23,6 +25,9 @@
   show unknown command hint
 
 in shell
+
+- empty line entered
+  show unknown command hint
 
 - help
   show list of global options and list of commands

@@ -334,17 +334,18 @@ void Zypper::processGlobalOptions()
   }
 
   // get command
-  try
+  if (optind < _argc)
   {
-    if (optind < _argc)
-      setCommand(ZypperCommand(_argv[optind++]));
+    try { setCommand(ZypperCommand(_argv[optind++])); }
+    // exception from command parsing
+    catch (Exception & e)
+    {
+      cerr << e.asUserString() << endl;
+      //setCommand(ZypperCommand::NONE);
+    }
   }
-  // exception from command parsing
-  catch (Exception & e)
-  {
-    cerr << e.asUserString() << endl;
-    setCommand(ZypperCommand::NONE);
-  }
+  else
+    setRunningHelp();
 
   if (command() == ZypperCommand::HELP)
   {
@@ -371,7 +372,9 @@ void Zypper::processGlobalOptions()
   }
   else if (command() == ZypperCommand::NONE)
   {
-    if (gopts.count("version"))
+    if (runningHelp())
+      print_main_help();
+    else if (gopts.count("version"))
       cout << PACKAGE " " VERSION << endl;
     else
     {
@@ -501,7 +504,7 @@ void Zypper::safeDoCommand()
   try
   {
     processCommandOptions();
-    if (exiting())
+    if (exiting() || command() == ZypperCommand::NONE)
       return;
     doCommand();
   }
