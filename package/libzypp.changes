@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec 10 12:46:26 CET 2007 - ma@suse.de
+
+- Log more details about zypp lock owner. (#294094)
+- revision 8088
+
+-------------------------------------------------------------------
 Fri Dec  7 15:47:53 CET 2007 - ma@suse.de
 
 - Remove runtime dependency for libboost_filesystem (#345773)

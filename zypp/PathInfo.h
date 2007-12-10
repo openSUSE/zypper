@@ -567,6 +567,21 @@ namespace zypp
     int hardlink( const Pathname & oldpath, const Pathname & newpath );
 
     /**
+     * Like '::readlink'. Return the contents of the symbolic link
+     * \a symlink_r via \a target_r.
+     *
+     * @return 0 on success, errno on failure.
+     */
+    int readlink( const Pathname & symlink_r, Pathname & target_r );
+    /** \overload Return an empty Pathname on error. */
+    inline Pathname readlink( const Pathname & symlink_r )
+    {
+      Pathname target;
+      readlink( symlink_r, target );
+      return target;
+    }
+
+    /**
      * Like 'cp file dest'. Copy file to dest dir.
      *
      * @return 0 on success, EINVAL if file is not a file, ENOTDIR if dest

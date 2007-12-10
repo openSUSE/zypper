@@ -9,16 +9,16 @@
 /** \file	zypp/ZYppFactory.cc
  *
 */
-
+extern "C"
+{
 #include <sys/file.h>
-#include <cstdio>
-#include <unistd.h>
-#include <fstream>
+}
 #include <iostream>
-#include <sstream>
+#include <fstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/IOStream.h"
 #include "zypp/PathInfo.h"
 
 #include "zypp/ZYppFactory.h"
@@ -28,7 +28,6 @@
 #define ZYPP_LOCK_FILE "/var/run/zypp.pid"
 
 using std::endl;
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -163,14 +162,29 @@ namespace zypp
       closeLockFile();
     }
 
-    bool isProcessRunning(pid_t pid)
+    bool isProcessRunning(pid_t pid_r)
     {
-    // it is another program, not me, see if it is still running
-      stringstream ss;
-      ss << "/proc/" << pid << "/status";
-      Pathname procfile = Pathname(ss.str());
-      MIL << "Checking " << procfile << " to determine if pid is running: " << pid << std::endl;
-      bool still_running = PathInfo(procfile).isExist();
+      // it is another program, not me, see if it is still running
+      Pathname procdir( "/proc"/str::numstring(pid_r) );
+
+      PathInfo status( procdir/"status" );
+      MIL << "Checking " <<  status << endl;
+      bool still_running = status.isExist();
+
+      if ( still_running )
+      {
+        Pathname p( procdir/"exe" );
+        MIL << p << " -> " << filesystem::readlink( p ) << endl;
+
+        p = procdir/"cmdline";
+        MIL << p << ": ";
+        std::ifstream infile( p.c_str() );
+        for( iostr::EachLine in( infile ); in; in.next() )
+        {
+          MIL << *in << endl;
+        }
+      }
+
       return still_running;
     }
 
@@ -337,9 +351,9 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-	string t = str::form(N_("System management is locked by the application with pid %d. "
-				"Please close this application before trying again."),
-			     globalLock.locker_pid());
+	std::string t = str::form(N_("System management is locked by the application with pid %d. "
+                                  "Please close this application before trying again."),
+                                  globalLock.locker_pid());
 	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid()));
       }
       else

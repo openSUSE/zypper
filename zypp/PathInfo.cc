@@ -735,6 +735,27 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	METHOD NAME : readlink
+    //	METHOD TYPE : int
+    //
+    int readlink( const Pathname & symlink_r, Pathname & target_r )
+    {
+      static const ssize_t bufsiz = 2047;
+      static char buf[bufsiz+1];
+      ssize_t ret = ::readlink( symlink_r.c_str(), buf, bufsiz );
+      if ( ret == -1 )
+      {
+        target_r = Pathname();
+        MIL << "readlink " << symlink_r;
+        return _Log_Result( errno );
+      }
+      buf[ret] = '\0';
+      target_r = buf;
+      return 0;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : copy_file2dir
     //	METHOD TYPE : int
     //

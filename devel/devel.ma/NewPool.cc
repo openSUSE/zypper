@@ -476,6 +476,7 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   pool.satSync();
 
+  waitForInput();
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
