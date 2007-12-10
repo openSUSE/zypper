@@ -151,12 +151,18 @@ void print_main_help()
     "\tlist-updates, lu\tList updates\n"
     "\txml-updates, xu\t\tList updates and patches in xml format\n"
     "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+    "\tdist-upgrade, dup\tPerform a distribution upgrade\n"
     "\tinfo, if\t\tShow full information for packages\n"
     "\tpatch-info\t\tShow full information for patches\n"
     "\tsource-install, si\tInstall a source package\n"
     "");
+  
+  static string help_usage = _(
+    "  Usage:\n"
+    "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+  );
 
-  cout << help_global_options << endl << help_commands;
+  cout << help_usage << endl << help_global_options << endl << help_commands;
 }
 
 void Zypper::print_unknown_command_hint()
