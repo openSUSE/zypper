@@ -39,7 +39,7 @@ extern "C" {
 #include "satsolver/poolarch.h"
 #include "satsolver/evr.h"
 #include "satsolver/poolvendor.h"
-#include "satsolver/policy.h"    
+#include "satsolver/policy.h"
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -389,7 +389,7 @@ SATResolver::resolvePool()
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
 
-	Id id = iter->satSolvable().id(); 
+	Id id = iter->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
@@ -400,7 +400,7 @@ SATResolver::resolvePool()
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
-	MIL << "Delete " << *iter << " with the string ID: " << s->name << endl;	
+	MIL << "Delete " << *iter << " with the string ID: " << s->name << endl;
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(jobQueue), s->name);
     }
@@ -417,13 +417,13 @@ SATResolver::resolvePool()
     MIL << "Starting solving...." << endl;
     solver_solve( solv, &(jobQueue) );
     MIL << "....Solver end" << endl;
-    
+
     // copying solution back to zypp pool
     //-----------------------------------------
 
     if (solv->problems.count > 0 )
     {
-	ERR << "Solverrun finished with an ERROR" << endl;	
+	ERR << "Solverrun finished with an ERROR" << endl;
 	return false;
     }
     /* solvables to be erased */
@@ -432,7 +432,7 @@ SATResolver::resolvePool()
       if (solv->decisionmap[i] > 0)
 	continue;
 
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i)); 
+      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
       if (poolItem) {
 	  SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
       } else {
@@ -489,7 +489,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
     bool operator()( PoolItem_Ref p)
     {
-	problemSolution->addSingleAction (p, action);	
+	problemSolution->addSingleAction (p, action);
 	return true;
     }
 };
@@ -604,16 +604,16 @@ SATResolver::problems ()
 				s = pool->solvables + what;
 				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
-				    if (solv->installed && s->repo == solv->installed) {				    
+				    if (solv->installed && s->repo == solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("do not deinstall %s"), solvable2str(pool, s));
 					MIL << description << endl;
-					problemSolution->addDescription (description);					
+					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, INSTALL);
 					string description = str::form (_("do not forbid installation of %s"), solvable2str(pool, s));
 					MIL << description << endl;
-					problemSolution->addDescription (description);					
+					problemSolution->addDescription (description);
 				    }
 				} else {
 				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
@@ -624,7 +624,7 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
 				{
 				FindPackage info (problemSolution, KEEP);
-				string package_name (id2str(pool, what));				
+				string package_name (id2str(pool, what));
 				invokeOnEach( _pool.byNameBegin( package_name ),
 					      _pool.byNameEnd( package_name ),
 					      resfilter::ByUninstalled (),
@@ -650,13 +650,13 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
 				{
-				Id p, *pp;				
+				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
 				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeInstalled()
 					|| poolItem.status().staysUninstalled())
-					problemSolution->addSingleAction (poolItem, KEEP);   
+					problemSolution->addSingleAction (poolItem, KEEP);
 				}
 				string description = str::form (_("do not install a solvable providing %s"), dep2str(pool, what));
 				MIL << description << endl;
@@ -665,13 +665,13 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
 				{
-				Id p, *pp;				
+				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
 				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeUninstalled()
 					|| poolItem.status().staysInstalled())
-					problemSolution->addSingleAction (poolItem, KEEP);   
+					problemSolution->addSingleAction (poolItem, KEEP);
 				}
 				string description = str::form (_("do not deinstall all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
@@ -681,13 +681,13 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
 				{
 				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
-				s = pool->solvables + what;				
+				s = pool->solvables + what;
 				if (poolItem) {
-				    if (solv->installed && s->repo == solv->installed) {				    
+				    if (solv->installed && s->repo == solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s));
 					MIL << description << endl;
-					problemSolution->addDescription (description);					
+					problemSolution->addDescription (description);
 				    } else {
 					ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE " << poolItem << " is not selected for installation" << endl;
 				    }
@@ -706,7 +706,7 @@ SATResolver::problems ()
 			/* policy, replace p with rp */
 			s = pool->solvables + p;
 			sd = rp ? pool->solvables + rp : 0;
-			
+
 			PoolItem_Ref itemFrom = _pool.find (sat::Solvable(p));
 			if (rp)
 			{
@@ -717,32 +717,32 @@ SATResolver::problems ()
 				problemSolution->addSingleAction (itemTo, INSTALL);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
 
-				if (evrcmp(pool, s->evr, sd->evr) > 0)
+				if (evrcmp(pool, s->evr, sd->evr, EVRCMP_COMPARE ) > 0)
 				{
 				    string description = str::form (_("downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
-				    problemSolution->addDescription (description);				    
+				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(pool, s, sd))				
+				if (!solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(pool, s, sd))
 				{
 				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
-				    problemSolution->addDescription (description);				    
+				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(pool, s, sd))				
+				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(pool, s, sd))
 				{
 				    string description = str::form (_("vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
 								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));
 				    MIL << description << endl;
-				    problemSolution->addDescription (description);				    
+				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if (!gotone) {
 				    string description = str::form (_("replacement of %s with %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
-				    problemSolution->addDescription (description);				    
+				    problemSolution->addDescription (description);
 				}
 			    } else {
 				ERR << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
@@ -754,7 +754,7 @@ SATResolver::problems ()
 			    if (itemFrom) {
 				string description = str::form (_("deinstallation of %s"), solvable2str(pool, s));
 				MIL << description << endl;
-				problemSolution->addDescription (description);				    				
+				problemSolution->addDescription (description);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
 			    }
 			}
