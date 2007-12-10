@@ -103,16 +103,16 @@ namespace zypp
     inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
     { return ! ( lhs == rhs ); }
     /** \overload */
-    inline bool operator==( const IdStr & lhs, const char * rhs )
+    inline bool operator!=( const IdStr & lhs, const char * rhs )
     { return ! ( lhs == rhs ); }
     /** \overload */
-    inline bool operator==( const IdStr & lhs, const std::string & rhs )
+    inline bool operator!=( const IdStr & lhs, const std::string & rhs )
     { return ! ( lhs == rhs ); }
     /** \overload */
-    inline bool operator==( const char * lhs, const IdStr & rhs )
+    inline bool operator!=( const char * lhs, const IdStr & rhs )
     { return ! ( lhs == rhs ); }
     /** \overload */
-    inline bool operator==( const std::string & lhs, const IdStr & rhs )
+    inline bool operator!=( const std::string & lhs, const IdStr & rhs )
     { return ! ( lhs == rhs ); }
 
     /////////////////////////////////////////////////////////////////
