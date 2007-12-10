@@ -46,16 +46,18 @@ namespace zypp
         explicit IdStr( const char * str_r );
         /** Ctor from string. */
         explicit IdStr( const std::string & str_r );
-        /** Evaluate in a boolean context (\c != \c Null). */
+        /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
         using base::SafeBool<IdStr>::operator bool_type;
       public:
-        /** No or Null string. */
+        /** No or Null string ( Id \c 0 ). */
         static const IdStr Null;
         /** Empty string. */
         static const IdStr Empty;
       public:
+        /** Whether string is empty. */
         bool empty() const
         { return( _id == Empty.id() ); }
+        /** the strings size. */
         unsigned size() const;
       public:
         /** Conversion to <tt>const char *</tt> */
@@ -84,11 +86,34 @@ namespace zypp
     /** \relates IdStr */
     inline bool operator==( const IdStr & lhs, const IdStr & rhs )
     { return lhs.id() == rhs.id(); }
+    /** \overload */
+    inline bool operator==( const IdStr & lhs, const char * rhs )
+    { if ( ! rhs ) return( ! lhs ); return( ::strcmp( lhs.c_str(), rhs ) == 0 ); }
+    /** \overload */
+    inline bool operator==( const IdStr & lhs, const std::string & rhs )
+    { return( lhs == rhs.c_str() ); }
+    /** \overload */
+    inline bool operator==( const char * lhs, const IdStr & rhs )
+    { return( rhs == lhs ); }
+    /** \overload */
+    inline bool operator==( const std::string & lhs, const IdStr & rhs )
+    { return( rhs == lhs ); }
 
     /** \relates IdStr */
     inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
-    { return lhs.id() != rhs.id(); }
-
+    { return ! ( lhs == rhs ); }
+    /** \overload */
+    inline bool operator==( const IdStr & lhs, const char * rhs )
+    { return ! ( lhs == rhs ); }
+    /** \overload */
+    inline bool operator==( const IdStr & lhs, const std::string & rhs )
+    { return ! ( lhs == rhs ); }
+    /** \overload */
+    inline bool operator==( const char * lhs, const IdStr & rhs )
+    { return ! ( lhs == rhs ); }
+    /** \overload */
+    inline bool operator==( const std::string & lhs, const IdStr & rhs )
+    { return ! ( lhs == rhs ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat

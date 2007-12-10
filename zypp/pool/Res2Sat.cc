@@ -109,7 +109,7 @@ namespace zypp
       if ( ! ( res_r && slv ) )
       {
         INT << res_r << " -> " << slv_r << endl;
-        ZYPP_THROW( Exception( _("Can't store data in NULL objlect") ) );
+        ZYPP_THROW( Exception( _("Can't store data in NULL object") ) );
       }
 
       if ( isKind<Package>( res_r ) )
