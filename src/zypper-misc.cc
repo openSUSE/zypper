@@ -304,7 +304,7 @@ void mark_for_install( const ResObject::Kind &kind,
       installer.item.status().setTransact( true, zypp::ResStatus::USER );
     }
 
-    cout_n << format(_("skipping %s '%s' (already installed)")) % kind_to_string_localized(kind,1) % name << endl;
+    cout_n << format(_("skipping %s '%s' (the newest version already installed)")) % kind_to_string_localized(kind,1) % name << endl;
   }
   else {
 
