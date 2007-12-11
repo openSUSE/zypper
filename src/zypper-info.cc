@@ -20,6 +20,20 @@ using boost::format;
 extern ZYpp::Ptr God;
 
 
+void printNVA(const ResObject::constPtr & res)
+{
+  cout << _("Name: ") << res->name() << endl;
+  cout << _("Version: ") << res->edition().asString() << endl;
+  cout << _("Arch: ") << res->arch().asString() << endl;
+}
+
+void printSummaryDesc(const ResObject::constPtr & res)
+{
+  cout << _("Summary: ") << res->summary() << endl;
+  cout << _("Description: ") << endl;
+  cout << res->description() << endl;
+}
+
 /**
  * 
  */
@@ -62,9 +76,14 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
       cout << endl << endl;
 
       if (kind == ResTraits<Package>::kind)
-        printPkgInfo(zypper, installer.item,installed);
+        printPkgInfo(zypper, installer.item, installed);
       else if (kind == ResTraits<Patch>::kind)
-        printPatchInfo(zypper, installer.item,installed);
+        printPatchInfo(zypper, installer.item, installed);
+      else if (kind == ResTraits<Pattern>::kind)
+        printPatternInfo(zypper, installer.item, installed);
+      else
+        // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
+        cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
     }
   }
 }
@@ -94,9 +113,9 @@ void printPkgInfo(const Zypper & zypper,
 {
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
-  cout << _("Name: ") << pool_item.resolvable()->name() << endl;
-  cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
-  cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;
+
+  printNVA(pool_item.resolvable());
+
   cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
 
   cout << _("Status: ");
@@ -111,9 +130,8 @@ void printPkgInfo(const Zypper & zypper,
     cout << _("not installed") << endl;
 
   cout << _("Installed Size: ") << pool_item.resolvable()->size().asString() << endl;
-  cout << _("Summary: ") << pool_item.resolvable()->summary() << endl;
-  cout << _("Description: ") << endl;
-  cout << pool_item.resolvable()->description() << endl;
+
+  printSummaryDesc(pool_item.resolvable());
 }
 
 /**
@@ -141,10 +159,8 @@ atom: xv = 3.10a-1091.2
  * 
  */
 void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const PoolItem & ins_pool_item) {
-  cout << _("Name: ") << pool_item.resolvable()->name() << endl;
-  cout << _("Version: ") << pool_item.resolvable()->edition().asString() << endl;
-  cout << _("Arch: ") << pool_item.resolvable()->arch().asString() << endl;
-  
+  printNVA(pool_item.resolvable());
+
   cout << _("Status: "); // TODO debug
   bool i = ins_pool_item ? true : false;
   if (pool_item.status().isUndetermined ())
@@ -169,8 +185,8 @@ void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const Poo
   cout << (patch->affects_pkg_manager() ? _("Yes") : _("No")) << endl;
 
   cout << _("Interactive: ") << (patch->interactive() ? _("Yes") : _("No")) << endl;
-  cout << _("Summary: ") << pool_item.resolvable()->summary() << endl;
-  cout << _("Description: ") << pool_item.resolvable()->description() << endl;
+
+  printSummaryDesc(pool_item.resolvable());
 
   cout << _("Provides:") << endl;
   CapSet capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
@@ -184,6 +200,38 @@ void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const Poo
     cout << it->refers().asString() << ": " << it->asString() << endl;
   }
 }
+
+/**
+ * Print pattern information.
+ * <p>
+ * Generates output like this:
+<pre>
+Information for pattern sw_management:
+
+Catalog: factory
+Name: sw_management
+Version: 11.0-2
+Arch: x86_64
+Installed: Yes
+Summary: Software Management
+Description:
+This pattern provides a graphical application and a command line tool for keeping your system up to date.
+</pre>
+ *
+ */
+void printPatternInfo(const Zypper & zypper,
+                      const PoolItem & pool_item, const PoolItem & ins_pool_item)
+{
+  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+       << pool_item.resolvable()->repository().info().name() << endl;
+
+  printNVA(pool_item.resolvable());
+
+  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+  
+  printSummaryDesc(pool_item.resolvable());
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:

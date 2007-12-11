@@ -16,4 +16,8 @@ void printPatchInfo(const Zypper & zypper,
                     const zypp::PoolItem & pool_item,
                     const zypp::PoolItem & ins_pool_item);
 
+void printPatternInfo(const Zypper & zypper,
+                      const zypp::PoolItem & pool_item,
+                      const zypp::PoolItem & ins_pool_item);
+
 #endif /*ZYPPERINFO_H_*/
