@@ -262,8 +262,10 @@ void printProductInfo(const Zypper & zypper,
   printNVA(pool_item.resolvable());
 
   Product::constPtr product = asKind<Product>(pool_item.resolvable());
-  cout << _("Category: ") << product->category() << endl;
+  cout << _("Category: ") << product->type() << endl;
   cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+  cout << _("Short Name: ") << product->shortName() << endl;
+  cout << _("Long Name: ") << product->longName() << endl;
 
   printSummaryDesc(pool_item.resolvable());
 }
