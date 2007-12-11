@@ -46,14 +46,15 @@ A resolvable is a package, patch, pattern, language, or a product.
 
 .TP
 .B info (if) <name> ...
-Displays full info for the specified packages.
+Displays full info for the specified packages or other resolvables.
 
 .TP
 .I \-r, \-\-repo <alias>
 Work only with the repository specified by the alias.
 .TP
 .I \-t, \-\-type <type>
-Type of resolvable (default: package)
+Type of resolvable (default: package). Currently supported resolvable types for
+the info command are: package, patch, pattern, product.
 
 .TP
 .B install (in) [options] <name> ...
@@ -280,13 +281,6 @@ installed and not applicable ones.
 .I \-r, \-\-repo <alias>
 Check for patches only in the repository specified by the alias.
 
-.TP
-.B patch-info <name> ...
-Displays full info for the specified patches.
-.TP
-.I \-r, \-\-repo <alias>
-Work only with the repository specified by the alias.
- 
 .SS Repository Management
 
 .PP
@@ -629,6 +623,23 @@ zypper search (se)
 Sort resolvables by catalog, not by name. This option is an alias to zypper's
 \-\-sort\-by\-repo option.
 
+.SS Patch Management Commands
+
+.TP
+.I rug patch-info
+zypper info -t patch
+
+.SS Pattern Management Commands
+
+.TP
+.I rug pattern-info
+zypper info -t pattern
+
+.SS Product Management Commands
+
+.TP
+.I rug product-info
+zypper info -t product
 
 .SS Other Compatibility Notes
 

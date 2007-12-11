@@ -1,9 +1,10 @@
-0.9.0
-
-- implement all rug commands (where it has sense)
-- clean up and improve output, add --silent mode, sort normal, verbose
-  and debug output.
-- refresh - show progress on default output, verbose progress with -v
+0.9.x
+- move -vv output to zypper.log, leave only normal and verbose output levels
+- xml output for all (or most of the) commands
+- xml input (feed a xml with operation specification to zypper)
+- implement all rug commands (where it makes sense)
+- system consistency verification command
+- install plain local or remote .rpm files
 
 
 NOT SCHEDULED
@@ -28,15 +29,10 @@ Patches
 
 Packages
 
-- upgrade
-  = Resolver::doUpgrade
 - install
 	--force-install option
 - just download, not install. compare to YOU: do not delete after installing
 
-Patterns
-
-- zypper pattern-info
 
 
 Cool Stuff
