@@ -29,7 +29,8 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     class IdStr;
-    class IdRel;
+    class Capability;
+    class Capabilities;
     class Solvable;
     class Repo;
     class Pool;

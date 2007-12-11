@@ -67,7 +67,30 @@ namespace zypp
         /** \overload */
         std::string asString() const
         { return string(); }
+      public:
+        /** Compare IdStr returning <tt>-1,0,1</tt>. */
+        int compare( const IdStr & rhs ) const;
+        /** \overload */
+        int compare( const char * rhs ) const;
+        /** \overload */
+        int compare( const std::string & rhs ) const
+        { return compare( rhs.c_str() ); }
 
+        /** Compare IdStr returning <tt>-1,0,1</tt>. */
+        static int compare( const IdStr & lhs, const IdStr & rhs )
+        { return lhs.compare( rhs ); }
+        /** \overload */
+        static int compare( const IdStr & lhs, const char * rhs )
+        { return lhs.compare( rhs ); }
+        /** \overload */
+        static int compare( const IdStr & lhs, const std::string & rhs )
+        { return lhs.compare( rhs ); }
+        /** \overload */
+        static int compare( const char * lhs, const IdStr & rhs )
+        { return -rhs.compare( lhs ); }
+        /** \overload */
+        static int compare( const std::string & lhs, const IdStr & rhs )
+        { return -rhs.compare( lhs ); }
       public:
         /** Expert backdoor. */
         detail::IdType id() const
@@ -83,39 +106,103 @@ namespace zypp
     /** \relates IdStr Stream output */
     std::ostream & operator<<( std::ostream & str, const IdStr & obj );
 
-    /** \relates IdStr */
+    /** \relates IdStr Equal */
     inline bool operator==( const IdStr & lhs, const IdStr & rhs )
     { return lhs.id() == rhs.id(); }
     /** \overload */
     inline bool operator==( const IdStr & lhs, const char * rhs )
-    { if ( ! rhs ) return( ! lhs ); return( ::strcmp( lhs.c_str(), rhs ) == 0 ); }
+    { return IdStr::compare( lhs, rhs ) == 0; }
     /** \overload */
     inline bool operator==( const IdStr & lhs, const std::string & rhs )
-    { return( lhs == rhs.c_str() ); }
+    { return IdStr::compare( lhs, rhs ) == 0; }
     /** \overload */
     inline bool operator==( const char * lhs, const IdStr & rhs )
-    { return( rhs == lhs ); }
+    { return IdStr::compare( lhs, rhs ) == 0; }
     /** \overload */
     inline bool operator==( const std::string & lhs, const IdStr & rhs )
-    { return( rhs == lhs ); }
+    { return IdStr::compare( lhs, rhs ) == 0; }
 
-    /** \relates IdStr */
+    /** \relates IdStr NotEqual */
     inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
-    { return ! ( lhs == rhs ); }
+    { return lhs.id() != rhs.id(); }
     /** \overload */
     inline bool operator!=( const IdStr & lhs, const char * rhs )
-    { return ! ( lhs == rhs ); }
+    { return IdStr::compare( lhs, rhs ) != 0; }
     /** \overload */
     inline bool operator!=( const IdStr & lhs, const std::string & rhs )
-    { return ! ( lhs == rhs ); }
+    { return IdStr::compare( lhs, rhs ) != 0; }
     /** \overload */
     inline bool operator!=( const char * lhs, const IdStr & rhs )
-    { return ! ( lhs == rhs ); }
+    { return IdStr::compare( lhs, rhs ) != 0; }
     /** \overload */
     inline bool operator!=( const std::string & lhs, const IdStr & rhs )
-    { return ! ( lhs == rhs ); }
+    { return IdStr::compare( lhs, rhs ) != 0; }
 
-    /////////////////////////////////////////////////////////////////
+    /** \relates IdStr Less */
+    inline bool operator<( const IdStr & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) < 0; }
+    /** \overload */
+    inline bool operator<( const IdStr & lhs, const char * rhs )
+    { return IdStr::compare( lhs, rhs ) < 0; }
+    /** \overload */
+    inline bool operator<( const IdStr & lhs, const std::string & rhs )
+    { return IdStr::compare( lhs, rhs ) < 0; }
+    /** \overload */
+    inline bool operator<( const char * lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) < 0; }
+    /** \overload */
+    inline bool operator<( const std::string & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) < 0; }
+
+    /** \relates IdStr LessEqual*/
+    inline bool operator<=( const IdStr & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) <= 0; }
+    /** \overload */
+    inline bool operator<=( const IdStr & lhs, const char * rhs )
+    { return IdStr::compare( lhs, rhs ) <= 0; }
+    /** \overload */
+    inline bool operator<=( const IdStr & lhs, const std::string & rhs )
+    { return IdStr::compare( lhs, rhs ) <= 0; }
+    /** \overload */
+    inline bool operator<=( const char * lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) <= 0; }
+    /** \overload */
+    inline bool operator<=( const std::string & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) <= 0; }
+
+     /** \relates IdStr Greater */
+    inline bool operator>( const IdStr & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) > 0; }
+    /** \overload */
+    inline bool operator>( const IdStr & lhs, const char * rhs )
+    { return IdStr::compare( lhs, rhs ) > 0; }
+    /** \overload */
+    inline bool operator>( const IdStr & lhs, const std::string & rhs )
+    { return IdStr::compare( lhs, rhs ) > 0; }
+    /** \overload */
+    inline bool operator>( const char * lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) > 0; }
+    /** \overload */
+    inline bool operator>( const std::string & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) > 0; }
+
+    /** \relates IdStr GreaterEqual*/
+    inline bool operator>=( const IdStr & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) >= 0; }
+    /** \overload */
+    inline bool operator>=( const IdStr & lhs, const char * rhs )
+    { return IdStr::compare( lhs, rhs ) >= 0; }
+    /** \overload */
+    inline bool operator>=( const IdStr & lhs, const std::string & rhs )
+    { return IdStr::compare( lhs, rhs ) >= 0; }
+    /** \overload */
+    inline bool operator>=( const char * lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) >= 0; }
+    /** \overload */
+    inline bool operator>=( const std::string & lhs, const IdStr & rhs )
+    { return IdStr::compare( lhs, rhs ) >= 0; }
+
+   /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////

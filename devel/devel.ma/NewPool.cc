@@ -152,6 +152,12 @@ struct Xprint
 
     return true;
   }
+
+  bool operator()( const sat::Solvable & obj_r )
+  {
+    dumpOn( MIL, obj_r ) << endl;
+    return true;
+  }
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -373,6 +379,12 @@ void dumpIdStr()
   }
 }
 
+void ttt( const char * lhs, const char * rhs )
+{
+  DBG << lhs << " <=> " << rhs << " --> " << ::strcmp( lhs, rhs ) << endl;
+}
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -385,11 +397,12 @@ int main( int argc, char * argv[] )
 
   sat::Pool satpool( sat::Pool::instance() );
 
-#if 0
+#if 1
   //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
-  sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
+  //sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
+  sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
 
-  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Print() );
+  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

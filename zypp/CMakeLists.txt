@@ -682,7 +682,8 @@ SET( zypp_sat_SRCS
   sat/Repo.cc
   sat/Solvable.cc
   sat/IdStr.cc
-  sat/IdRel.cc
+  sat/Capability.cc
+  sat/Capabilities.cc
   sat/SATResolver.cc
 )
 
@@ -693,7 +694,8 @@ SET( zypp_sat_HEADERS
   sat/Repo.h
   sat/Solvable.h
   sat/IdStr.h
-  sat/IdRel.h
+  sat/Capability.h
+  sat/Capabilities.h
   sat/SATResolver.h
 )
 

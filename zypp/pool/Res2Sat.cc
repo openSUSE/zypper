@@ -82,16 +82,17 @@ namespace zypp
             name = (*it).asString();
           }
 
-          sat::IdRel rel;
+          sat::Capability rel;
           if ( refersTo<Package>( *it ) )
           {
-            rel = sat::IdRel( name, op, ed );
+            rel = sat::Capability( name, op, ed );
           }
           else
           {
 #warning glue kind
             // non-packages prefixed by kind
-            rel = sat::IdRel( name, op, ed, sat::KindId( (*it).refers().asString().c_str() ) );
+            rel = sat::Capability( name, op, ed,
+                              sat::KindId( (*it).refers().asString().c_str() ) );
           }
 
           where_r = ::repo_addid_dep( slv_r->repo, where_r, rel.id(), isreq );

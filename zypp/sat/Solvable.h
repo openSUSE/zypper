@@ -17,8 +17,11 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/Capabilities.h"
+#include "zypp/sat/Capability.h"
 #include "zypp/sat/IdStr.h"
-#include "zypp/sat/IdRel.h"
+
+#include "zypp/Dep.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -54,6 +57,9 @@ namespace zypp
         /** Return whether this \ref Solvable belongs to the system repo. */
         bool isSystem() const;
 
+        /** The \ref Repository this \ref Solvable belongs to. */
+        Repo repo() const;
+
       public:
         NameId   name() const;
         EvrId    evr() const;
@@ -61,13 +67,15 @@ namespace zypp
         VendorId vendor() const;
 
       public:
-        Repo repo() const;
+        /** Access to the \ref Solvable dependencies. */
+        Capabilities operator[]( Dep idx_r ) const;
 
       public:
         /** Return next Solvable in \ref Pool (or \ref nosolvable). */
         Solvable nextInPool() const;
         /** Return next Solvable in \ref Repo (or \ref nosolvable). */
         Solvable nextInRepo() const;
+
       public:
         /** Expert backdoor. */
         ::_Solvable * get() const;
@@ -83,6 +91,9 @@ namespace zypp
 
     /** \relates Solvable Stream output */
     std::ostream & operator<<( std::ostream & str, const Solvable & obj );
+
+    /** \relates Solvable More verbose stream output including dependencies */
+    std::ostream & dumpOn( std::ostream & str, const Solvable & obj );
 
     /** \relates Solvable */
     inline bool operator==( const Solvable & lhs, const Solvable & rhs )

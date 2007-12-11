@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/IdRel.cc
+/** \file	zypp/sat/Capability.cc
  *
 */
 #include <iostream>
@@ -20,7 +20,7 @@
 #include "zypp/Edition.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/IdRel.h"
+#include "zypp/sat/Capability.h"
 #include "zypp/sat/Pool.h"
 
 using std::endl;
@@ -97,38 +97,34 @@ namespace zypp
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
-    const IdRel IdRel::Null( STRID_NULL );
+    const Capability Capability::Null( STRID_NULL );
 
     /////////////////////////////////////////////////////////////////
 
-    IdRel::IdRel( const char * str_r, const KindId & kind_r  )
+    Capability::Capability( const char * str_r, const KindId & kind_r  )
       : _id( relFromStr( myPool().getPool(), str_r, kind_r ) )
     {}
 
-    IdRel::IdRel( const std::string & str_r, const KindId & kind_r  )
+    Capability::Capability( const std::string & str_r, const KindId & kind_r  )
       : _id( relFromStr( myPool().getPool(), str_r.c_str(), kind_r ) )
     {}
 
-    IdRel::IdRel( const std::string & name_r, Rel op_r, const Edition & ed_r, const KindId & kind_r )
+    Capability::Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const KindId & kind_r )
       : _id( relFromStr( myPool().getPool(), name_r, op_r, ed_r, kind_r ) )
     {}
 
-    const char * IdRel::c_str() const
-    {
-      return ::dep2str( myPool().getPool(), _id );
-    }
+    const char * Capability::c_str() const
+    { return ::dep2str( myPool().getPool(), _id ); }
 
-    std::string IdRel::string() const
-    {
-      return ::dep2str( myPool().getPool(), _id );
-    }
+    std::string Capability::string() const
+    { return ::dep2str( myPool().getPool(), _id ); }
 
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
-    std::ostream & operator<<( std::ostream & str, const IdRel & obj )
+    std::ostream & operator<<( std::ostream & str, const Capability & obj )
     {
       return str << obj.c_str();
     }

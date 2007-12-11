@@ -42,16 +42,36 @@ namespace zypp
     { return ::strlen( c_str() ); }
 
     const char * IdStr::c_str() const
-    {
-      return ::id2str( myPool().getPool(), _id );
-    }
+    { return ::id2str( myPool().getPool(), _id ); }
 
     std::string IdStr::string() const
+    { return ::id2str( myPool().getPool(), _id ); }
+
+    int IdStr::compare( const IdStr & rhs ) const
     {
-      return ::id2str( myPool().getPool(), _id );
+      if ( _id == rhs._id )
+        return 0;
+      // Explicitly handle IdStr::Null because
+      // it's string representation is "<NULL>"
+      // and not something less than "".
+      if ( ! _id )
+        return -1;
+      if ( ! rhs._id )
+        return 1;
+      return ::strcmp( c_str(), rhs.c_str() );
     }
 
-    /******************************************************************
+    int IdStr::compare( const char * rhs ) const
+    {
+      // Explicitly handle IdStr::Null == (const char *)0
+      if ( ! _id )
+        return rhs ? -1 : 0;
+      if ( ! rhs )
+        return _id ? 1 : 0;
+      return ::strcmp( c_str(), rhs );
+    }
+
+   /******************************************************************
     **
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &

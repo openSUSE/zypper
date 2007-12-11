@@ -49,12 +49,18 @@ namespace zypp
       for ( detail::SolvableIdType next = _id+1; next < unsigned(_solvable->repo->end); ++next )
       {
         ::_Solvable * nextS( myPool().getSolvable( next ) );
-        if ( nextS &&  nextS->repo == _solvable->repo )
+        if ( nextS && nextS->repo == _solvable->repo )
         {
           return Solvable( next );
         }
       }
       return nosolvable;
+    }
+
+    Repo Solvable::repo() const
+    {
+      NO_SOLVABLE_RETURN( Repo::norepo );
+      return Repo( _solvable->repo );
     }
 
     bool Solvable::isSystem() const
@@ -83,10 +89,26 @@ namespace zypp
       return VendorId( _solvable->vendor );
     }
 
-    Repo Solvable::repo() const
+    Capabilities Solvable::operator[]( Dep idx_r ) const
     {
-      NO_SOLVABLE_RETURN( Repo::norepo );
-      return Repo( _solvable->repo );
+      NO_SOLVABLE_RETURN( Capabilities() );
+      ::Offset offs = 0;
+      switch( idx_r.inSwitch() )
+      {
+        case Dep::PROVIDES_e:    offs = _solvable->provides;    break;
+        case Dep::PREREQUIRES_e: break; // not yet handled.
+        case Dep::REQUIRES_e:    offs = _solvable->requires;    break;
+        case Dep::CONFLICTS_e:   offs = _solvable->conflicts;   break;
+        case Dep::OBSOLETES_e:   offs = _solvable->obsoletes;   break;
+        case Dep::RECOMMENDS_e:  offs = _solvable->recommends;  break;
+        case Dep::SUGGESTS_e:    offs = _solvable->suggests;    break;
+        case Dep::FRESHENS_e:    offs = _solvable->freshens;    break;
+        case Dep::ENHANCES_e:    offs = _solvable->enhances;    break;
+        case Dep::SUPPLEMENTS_e: offs = _solvable->supplements; break;
+      }
+      if ( ! offs )
+        return Capabilities();
+      return Capabilities( _solvable->repo->idarraydata + offs );
     }
 
     /******************************************************************
@@ -102,6 +124,32 @@ namespace zypp
       return str << "sat::solvable(" << obj.id() << "|"
           << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
+    }
+
+    /******************************************************************
+    **
+    **	FUNCTION NAME : dumpOn
+    **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & dumpOn( std::ostream & str, const Solvable & obj )
+    {
+      str << obj;
+      if ( obj )
+      {
+#define OUTS(X) if ( ! obj[Dep::X].empty() ) str << endl << " " #X " " << obj[Dep::PROVIDES]
+        OUTS(PROVIDES);
+        OUTS(PREREQUIRES);
+        OUTS(REQUIRES);
+        OUTS(CONFLICTS);
+        OUTS(OBSOLETES);
+        OUTS(RECOMMENDS);
+        OUTS(SUGGESTS);
+        OUTS(FRESHENS);
+        OUTS(ENHANCES);
+        OUTS(SUPPLEMENTS);
+#undef OUTS
+      }
+      return str;
     }
 
     /////////////////////////////////////////////////////////////////
