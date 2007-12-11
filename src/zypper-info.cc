@@ -7,6 +7,7 @@
 #include "zypp/ZYpp.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/Patch.h"
+#include "zypp/Product.h"
 
 #include "zypper.h"
 #include "zypper-main.h"
@@ -81,6 +82,8 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
         printPatchInfo(zypper, installer.item, installed);
       else if (kind == ResTraits<Pattern>::kind)
         printPatternInfo(zypper, installer.item, installed);
+      else if (kind == ResTraits<Product>::kind)
+        printProductInfo(zypper, installer.item, installed);
       else
         // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
         cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
@@ -229,6 +232,39 @@ void printPatternInfo(const Zypper & zypper,
 
   cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
   
+  printSummaryDesc(pool_item.resolvable());
+}
+
+/**
+ * Print product information.
+ * <p>
+ * Generates output like this:
+<pre>
+Information for product openSUSE-factory:
+
+Repository: factory
+Name: openSUSE-factory
+Version: 11.0
+Arch: x86_64
+Category: base
+Installed: No
+Summary: openSUSE FACTORY 11.0
+Description:
+</pre>
+ *
+ */
+void printProductInfo(const Zypper & zypper,
+                      const PoolItem & pool_item, const PoolItem & ins_pool_item)
+{
+  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+       << pool_item.resolvable()->repository().info().name() << endl;
+
+  printNVA(pool_item.resolvable());
+
+  Product::constPtr product = asKind<Product>(pool_item.resolvable());
+  cout << _("Category: ") << product->category() << endl;
+  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+
   printSummaryDesc(pool_item.resolvable());
 }
 
