@@ -41,6 +41,7 @@ struct ZypperCommand
   /** name rug commands */
   //!@{
   static const ZypperCommand RUG_PATCH_INFO;
+  static const ZypperCommand RUG_PATTERN_INFO;
   //!@}
 
   enum Command
@@ -73,6 +74,7 @@ struct ZypperCommand
     NONE_e,
 
     RUG_PATCH_INFO_e,
+    RUG_PATTERN_INFO_e
   };
 
   ZypperCommand(Command command) : _command(command) {}

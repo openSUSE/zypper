@@ -1074,6 +1074,25 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  // rug compatibility command, we have zypper info [-t <res_type>]
+  case ZypperCommand::RUG_PATTERN_INFO_e:
+  {
+    static struct option patch_info_options[] = {
+      {"catalog", required_argument, 0, 'c'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = patch_info_options;
+    _command_help = _(
+      "pattern-info <pattern_name> ...\n"
+      "\n"
+      "Show detailed information for patterns\n"
+      "\n"
+      "This is a rug compatibility alias for 'zypper info -t pattern'\n"
+    );
+    break;
+  }
+
   case ZypperCommand::MOO_e:
   {
     static struct option moo_options[] = {
@@ -2012,7 +2031,8 @@ void Zypper::doCommand()
   // -----------------------------( info )------------------------------------
 
   else if (command() == ZypperCommand::INFO ||
-           command() == ZypperCommand::RUG_PATCH_INFO) {
+           command() == ZypperCommand::RUG_PATCH_INFO ||
+           command() == ZypperCommand::RUG_PATTERN_INFO) {
     if (runningHelp())
     {
       cout << _command_help;
@@ -2033,6 +2053,9 @@ void Zypper::doCommand()
     {
     case ZypperCommand::RUG_PATCH_INFO_e:
       kind =  ResTraits<Patch>::kind;
+      break;
+    case ZypperCommand::RUG_PATTERN_INFO_e:
+      kind =  ResTraits<Pattern>::kind;
       break;
     default:
     case ZypperCommand::INFO_e:

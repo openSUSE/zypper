@@ -44,6 +44,7 @@ const ZypperCommand ZypperCommand::MOO(ZypperCommand::MOO_e);
 
 
 const ZypperCommand ZypperCommand::RUG_PATCH_INFO(ZypperCommand::RUG_PATCH_INFO_e);
+const ZypperCommand ZypperCommand::RUG_PATTERN_INFO(ZypperCommand::RUG_PATTERN_INFO_e);
 
 
 ZypperCommand::ZypperCommand(const std::string & strval_r)
@@ -84,6 +85,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
 
     // rug commands doable with zypper commands
     _table["patch-info"] = ZypperCommand::RUG_PATCH_INFO_e;
+    _table["pattern-info"] = ZypperCommand::RUG_PATTERN_INFO_e;
   }
 
   std::map<std::string,ZypperCommand::Command>::const_iterator it
