@@ -26,6 +26,7 @@ void printNVA(const ResObject::constPtr & res)
   cout << _("Name: ") << res->name() << endl;
   cout << _("Version: ") << res->edition().asString() << endl;
   cout << _("Arch: ") << res->arch().asString() << endl;
+  cout << _("Vendor: ") << res->vendor() << endl;
 }
 
 void printSummaryDesc(const ResObject::constPtr & res)
