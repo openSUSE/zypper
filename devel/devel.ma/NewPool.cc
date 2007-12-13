@@ -384,6 +384,30 @@ void ttt( const char * lhs, const char * rhs )
   DBG << lhs << " <=> " << rhs << " --> " << ::strcmp( lhs, rhs ) << endl;
 }
 
+namespace filter
+{
+  template <class _MemFun, class _Value>
+  class HasValue
+  {
+    public:
+      HasValue( _MemFun fun_r, _Value val_r )
+      : _fun( fun_r ), _val( val_r )
+      {}
+      template <class _Tp>
+      bool operator()( const _Tp & obj_r ) const
+      { return( _fun && (obj_r.*_fun)() == _val ); }
+    private:
+      _MemFun _fun;
+      _Value  _val;
+  };
+
+  template <class _MemFun, class _Value>
+  HasValue<_MemFun, _Value> byValue( _MemFun fun_r, _Value val_r )
+  { return HasValue<_MemFun, _Value>( fun_r, val_r ); }
+}
+
+
+
 
 /******************************************************************
 **
@@ -402,7 +426,29 @@ int main( int argc, char * argv[] )
   //sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
   sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
 
-  std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Xprint() );
+  sat::Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
+  MIL << r << endl;
+  sat::Capabilities::const_iterator it = r.begin();
+  DBG << *it << endl;
+  it = ++r.begin();
+  DBG << *it << endl;
+
+  if ( 1 )
+  std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
+                                       satpool.solvablesBegin(), satpool.solvablesEnd() ),
+                 make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
+                                       satpool.solvablesEnd(), satpool.solvablesEnd() ),
+                 Xprint() );
+
+  // make_filter_iterator(detail::ByRepo( *this ),
+  // Repo.cc-                                  detail::SolvableIterator(_repo->end),
+  // Repo.cc-                                  detail::SolvableIterator(_repo->end) );
+
+
+//   DBG << satpool.solvablesBegin()->name() << endl;
+//   DBG << (*satpool.solvablesBegin())[Dep::PROVIDES] << endl;
+
+  //std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

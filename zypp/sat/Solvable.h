@@ -61,14 +61,32 @@ namespace zypp
         Repo repo() const;
 
       public:
-        NameId   name() const;
-        EvrId    evr() const;
-        ArchId   arch() const;
+        NameId   name()   const;
+        EvrId    evr()    const;
+        ArchId   arch()   const;
         VendorId vendor() const;
 
       public:
-        /** Access to the \ref Solvable dependencies. */
-        Capabilities operator[]( Dep idx_r ) const;
+
+        /** \name Access to the \ref Solvable dependencies.
+         *
+         * \note Prerequires are a subset of requires.
+         */
+        //@{
+        Capabilities operator[]( Dep which_r ) const;
+
+        Capabilities provides()    const;
+        Capabilities requires()    const;
+        Capabilities conflicts()   const;
+        Capabilities obsoletes()   const;
+        Capabilities recommends()  const;
+        Capabilities suggests()    const;
+        Capabilities freshens()    const;
+        Capabilities enhances()    const;
+        Capabilities supplements() const;
+        Capabilities prerequires() const;
+        //@}
+
 
       public:
         /** Return next Solvable in \ref Pool (or \ref nosolvable). */

@@ -69,6 +69,13 @@ namespace zypp
       typedef int IdType;
       static const IdType noId( 0 );
 
+      /** Internal ids satlib includes in dependencies. */
+      static const IdType solvablePrereqMarker( 16 ); // MPL check in PoolImpl.cc
+      static const IdType solvableFileMarker  ( 17 ); // MPL check in PoolImpl.cc
+      /** Test for internal ids satlib includes in dependencies. */
+      inline bool isDepMarkerId( IdType id_r )
+      { return( id_r == solvablePrereqMarker || id_r == solvableFileMarker ); }
+
       /** Id type to connect \ref Solvable and sat-solvable.
        * Indext into solvable array.
       */

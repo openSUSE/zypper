@@ -196,6 +196,7 @@ namespace zypp
         public:
           ByRepo( const Repo & repo_r ) : _repo( repo_r ) {}
           ByRepo( RepoIdType id_r ) : _repo( id_r ) {}
+          ByRepo() {}
 
           bool operator()( const Solvable & slv_r ) const
           { return slv_r.repo() == _repo; }

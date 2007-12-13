@@ -29,7 +29,10 @@ namespace zypp
     //	CLASS NAME : Capabilities
     //
     /** Container of \ref Capability (currently read only).
-     * \todo PREREQ iteration
+     *
+     * \note satsolver dependency lists may include internal ids
+     * which must be skipped on iteration or size calculation
+     * (\see \ref detail::isDepMarkerId).
      */
     class Capabilities
     {
@@ -37,19 +40,26 @@ namespace zypp
         typedef Capability value_type;
         typedef unsigned   size_type;
 
+        enum Mode { SKIP_TO_INTERNAL };
+
       public:
         /** Default ctor */
         Capabilities()
         : _begin( 0 )
         {}
 
-        /** Ctor from Id pointer (for \ref Solvable). */
+        /** Ctor from Id pointer (friend \ref Solvable). */
         explicit
         Capabilities( const detail::IdType * base_r )
         : _begin( base_r )
         {}
 
-      public:
+         /** Ctor from Id pointer (friend \ref Solvable).
+          * Jump behind skip_r (e.g. behind prereqMarker).
+         */
+        Capabilities( const detail::IdType * base_r, detail::IdType skip_r );
+
+     public:
         /** Whether the container is empty. */
         bool empty() const
         { return ! ( _begin && *_begin ); }
@@ -95,23 +105,32 @@ namespace zypp
 
         explicit const_iterator( const detail::IdType * _idx )
         : const_iterator::iterator_adaptor_( _idx )
-        {}
+        { assignVal(); }
 
       private:
         friend class boost::iterator_core_access;
 
         reference dereference() const
-        { return (_val = Capability( *base() )); }
+        { return _val; }
 
         template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
         { // NULL pointer is eqal pointer to Id 0
-          return ( base() == rhs.base()
-                   || ( !base()     && !*rhs.base() )
-                   || ( !rhs.base() && !*base()     ) );
+          return ( base() == rhs.base() // includes both NULL...
+                   || ( !rhs.base() && !*base()     )
+                   || ( !base()     && !*rhs.base() ) );
+        }
+
+        void increment()
+        { // jump over satsolvers internal ids.
+          if ( detail::isDepMarkerId( *(++base_reference()) ) ) ++base_reference();
+          assignVal();
         }
 
       private:
+        void assignVal()
+        { _val = ( base() ) ? Capability( *base() ) : Capability::Null; }
+
         mutable Capability _val;
     };
     ///////////////////////////////////////////////////////////////////

@@ -63,6 +63,7 @@ namespace zypp
       public:
         /** No or Null \ref Capability. */
         static const Capability Null;
+
       public:
         /** Conversion to <tt>const char *</tt> */
         const char * c_str() const;

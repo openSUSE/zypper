@@ -56,3 +56,12 @@
 /** \ref BOOST */
 namespace boost {}
 ////////////////////////////////////////////////////////////////////////////////
+/** \defgroup SATSOLVER Satsolver interface.
+ * Interface to sat-pool and sat-solver.
+ */
+ namespace zypp 
+ {
+ 	/** \ref SATSOLVER */
+ 	namespace sat {}
+ }
+

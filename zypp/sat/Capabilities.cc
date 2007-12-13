@@ -22,16 +22,42 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+  
+    Capabilities:: Capabilities( const detail::IdType * base_r, detail::IdType skip_r )
+    : _begin( base_r )
+    {
+      if ( ! _begin )
+        return;
+
+      if ( skip_r )
+      {
+        for ( const detail::IdType * end = _begin; *end; ++end )
+	{
+          if ( *end == skip_r )
+          {
+	    _begin = end+1;
+	    return;
+	  }
+        }
+      }
+      // skipp all ==> empty
+      _begin = 0;
+    }
+
 
     Capabilities::size_type Capabilities::size() const
     {
       if ( ! _begin )
         return 0;
 
-      const detail::IdType * end = _begin;
-      for ( ; *end; ++end )
-        ;/*NOOP*/
-      return end - _begin;
+      // jump over satsolvers internal ids.
+      Capabilities::size_type ret = 0;
+      for ( const detail::IdType * end = _begin; *end; ++end )
+      {
+        if ( ! detail::isDepMarkerId( *end ) )
+          ++ret;
+      }
+      return ret;
     }
 
     /******************************************************************

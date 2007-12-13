@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <boost/mpl/int.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
@@ -30,6 +31,12 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
+
+      // MPL checks for satlib constants we redefine:
+      BOOST_MPL_ASSERT_RELATION( solvablePrereqMarker, ==, SOLVABLE_PREREQMARKER );
+      BOOST_MPL_ASSERT_RELATION( solvableFileMarker,   ==, SOLVABLE_FILEMARKER );
+
+      /////////////////////////////////////////////////////////////////
 
       void logSat( struct _Pool *, void *data, int type, const char *logString )
       {

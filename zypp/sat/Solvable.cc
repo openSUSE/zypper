@@ -89,14 +89,13 @@ namespace zypp
       return VendorId( _solvable->vendor );
     }
 
-    Capabilities Solvable::operator[]( Dep idx_r ) const
+    Capabilities Solvable::operator[]( Dep which_r ) const
     {
       NO_SOLVABLE_RETURN( Capabilities() );
       ::Offset offs = 0;
-      switch( idx_r.inSwitch() )
+      switch( which_r.inSwitch() )
       {
         case Dep::PROVIDES_e:    offs = _solvable->provides;    break;
-        case Dep::PREREQUIRES_e: break; // not yet handled.
         case Dep::REQUIRES_e:    offs = _solvable->requires;    break;
         case Dep::CONFLICTS_e:   offs = _solvable->conflicts;   break;
         case Dep::OBSOLETES_e:   offs = _solvable->obsoletes;   break;
@@ -105,10 +104,18 @@ namespace zypp
         case Dep::FRESHENS_e:    offs = _solvable->freshens;    break;
         case Dep::ENHANCES_e:    offs = _solvable->enhances;    break;
         case Dep::SUPPLEMENTS_e: offs = _solvable->supplements; break;
+
+        case Dep::PREREQUIRES_e:
+          // prerequires are a subset of requires
+          if ( (offs = _solvable->requires) )
+            return Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker );
+          else
+            return Capabilities();
+          break;
       }
-      if ( ! offs )
-        return Capabilities();
-      return Capabilities( _solvable->repo->idarraydata + offs );
+
+      return offs ? Capabilities( _solvable->repo->idarraydata + offs )
+                  : Capabilities();
     }
 
     /******************************************************************
@@ -136,7 +143,7 @@ namespace zypp
       str << obj;
       if ( obj )
       {
-#define OUTS(X) if ( ! obj[Dep::X].empty() ) str << endl << " " #X " " << obj[Dep::PROVIDES]
+#define OUTS(X) if ( ! obj[Dep::X].empty() ) str << endl << " " #X " " << obj[Dep::X]
         OUTS(PROVIDES);
         OUTS(PREREQUIRES);
         OUTS(REQUIRES);
