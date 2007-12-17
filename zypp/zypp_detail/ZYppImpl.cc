@@ -51,7 +51,7 @@ namespace zypp
               if ( envstr != "POSIX" && envstr != "C" )
                 {
                   Locale lang( envlang );
-                  if ( lang != Locale::noCode )
+                  if ( ! lang.code().empty() )
                     {
                       ret = lang;
                       break;

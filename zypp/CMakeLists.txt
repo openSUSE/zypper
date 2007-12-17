@@ -12,7 +12,6 @@ ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD CO
 
 SET( zypp_SRCS
   ZConfig.cc
-  LanguageCode.cc
   Arch.cc
   Atom.cc
   ByteCount.cc
@@ -21,13 +20,11 @@ SET( zypp_SRCS
   CapMatch.cc
   CapSet.cc
   CheckSum.cc
-  CountryCode.cc
   Date.cc
   Dep.cc
   Dependencies.cc
   Edition.cc
   Language.cc
-  Locale.cc
   NVR.cc
   NVRA.cc
   NVRAD.cc
@@ -88,6 +85,9 @@ SET( zypp_SRCS
   RepoManager.cc
   MediaProducts.cc
   Locks.cc
+  LanguageCode.cc
+  CountryCode.cc
+  Locale.cc
 )
 
 SET( zypp_HEADERS
