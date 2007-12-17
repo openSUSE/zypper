@@ -1,9 +1,9 @@
 -------------------------------------------------------------------
 Mon Dec 17 13:47:44 CET 2007 - ma@suse.de
 
--
+- Fixed default text locale detection not to use static variables. (#346872)
 - version 4.1.6
-- revision
+- revision 8116
 
 -------------------------------------------------------------------
 Mon Dec 10 12:46:26 CET 2007 - ma@suse.de
