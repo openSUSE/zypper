@@ -17,28 +17,28 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   template<>
-    const ResolvableTraits::KindType ResTraits<Package>   ::kind( "Package" );
+    const ResKind ResTraits<Package>   ::kind( "Package" );
   template<>
-    const ResolvableTraits::KindType ResTraits<SrcPackage>::kind( "SrcPackage" );
+    const ResKind ResTraits<SrcPackage>::kind( "SrcPackage" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Selection> ::kind( "Selection" );
+    const ResKind ResTraits<Selection> ::kind( "Selection" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Pattern>   ::kind( "Pattern" );
+    const ResKind ResTraits<Pattern>   ::kind( "Pattern" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Product>   ::kind( "Product" );
+    const ResKind ResTraits<Product>   ::kind( "Product" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Patch>     ::kind( "Patch" );
+    const ResKind ResTraits<Patch>     ::kind( "Patch" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Script>    ::kind( "Script" );
+    const ResKind ResTraits<Script>    ::kind( "Script" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Message>   ::kind( "Message" );
+    const ResKind ResTraits<Message>   ::kind( "Message" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Language>  ::kind( "Language" );
+    const ResKind ResTraits<Language>  ::kind( "Language" );
   template<>
-    const ResolvableTraits::KindType ResTraits<Atom>	  ::kind( "Atom" );
+    const ResKind ResTraits<Atom>      ::kind( "Atom" );
 
   template<>
-    const ResolvableTraits::KindType ResTraits<SystemResObject>::kind( "System" );
+    const ResKind ResTraits<SystemResObject>::kind( "System" );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

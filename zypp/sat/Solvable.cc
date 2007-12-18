@@ -66,12 +66,40 @@ namespace zypp
     bool Solvable::isSystem() const
     { return repo().isSystemRepo(); }
 
-    NameId Solvable::name() const
+    IdStr Solvable::ident() const
     {
-      NO_SOLVABLE_RETURN( NameId() );
-      return NameId( _solvable->name ); }
+      NO_SOLVABLE_RETURN( IdStr() );
+      return IdStr( _solvable->name );
+    }
 
-    EvrId Solvable::evr() const
+    ResKind Solvable::kind() const
+    {
+      NO_SOLVABLE_RETURN( ResKind() );
+      if ( _kind.empty() )
+      {
+        switch ( _solvable->arch )
+        {
+          case ARCH_SRC:
+          case ARCH_NOSRC:
+            _kind = resKind<SrcPackage>();
+            break;
+
+          default:
+#warning FIX KindId calc or index
+            break;
+        }
+      }
+      return _kind;
+    }
+
+    std::string Solvable::name() const
+    {
+#warning FIX Name skip kind or own Id
+      NO_SOLVABLE_RETURN( std::string() );
+      return ident().string();
+    }
+
+    EvrId Solvable::edition() const
     {
       NO_SOLVABLE_RETURN( EvrId() );
       return EvrId( _solvable->evr );
@@ -80,6 +108,13 @@ namespace zypp
     ArchId Solvable::arch() const
     {
       NO_SOLVABLE_RETURN( ArchId() );
+      switch ( _solvable->arch )
+      {
+        case ARCH_SRC:
+        case ARCH_NOSRC:
+          return ArchId( ARCH_NOARCH );
+          break;
+      }
       return ArchId( _solvable->arch );
     }
 
@@ -129,7 +164,7 @@ namespace zypp
         return str << "sat::solvable()";
 
       return str << "sat::solvable(" << obj.id() << "|"
-          << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
+          << obj.ident() << '-' << obj.edition() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
     }
 

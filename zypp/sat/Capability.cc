@@ -34,11 +34,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
-      detail::IdType relFromStr( ::_Pool * pool_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const KindId & kind_r )
+      detail::IdType relFromStr( ::_Pool * pool_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
       {
         detail::IdType nid( detail::noId );
 #warning Add or not kind package
-        if ( ! kind_r )
+        if ( kind_r.empty() || isKind<Package>( kind_r ) )
         {
           nid = IdStr( name_r ).id();
         }
@@ -59,7 +59,7 @@ namespace zypp
         return nid;
       }
 
-      detail::IdType relFromStr( ::_Pool * pool_r, const std::string & str_r, const KindId & kind_r )
+      detail::IdType relFromStr( ::_Pool * pool_r, const std::string & str_r, const ResKind & kind_r )
       {
         // strval_r has at least two words which could make 'op edition'?
         // improve regex!
@@ -101,15 +101,15 @@ namespace zypp
 
     /////////////////////////////////////////////////////////////////
 
-    Capability::Capability( const char * str_r, const KindId & kind_r  )
+    Capability::Capability( const char * str_r, const ResKind & kind_r  )
       : _id( relFromStr( myPool().getPool(), str_r, kind_r ) )
     {}
 
-    Capability::Capability( const std::string & str_r, const KindId & kind_r  )
+    Capability::Capability( const std::string & str_r, const ResKind & kind_r  )
       : _id( relFromStr( myPool().getPool(), str_r.c_str(), kind_r ) )
     {}
 
-    Capability::Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const KindId & kind_r )
+    Capability::Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
       : _id( relFromStr( myPool().getPool(), name_r, op_r, ed_r, kind_r ) )
     {}
 

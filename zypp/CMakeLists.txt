@@ -11,8 +11,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql )
 
 SET( zypp_SRCS
-  ZConfig.cc
-  Arch.cc
   Atom.cc
   ByteCount.cc
   Capability.cc
@@ -85,6 +83,8 @@ SET( zypp_SRCS
   RepoManager.cc
   MediaProducts.cc
   Locks.cc
+  ZConfig.cc
+  Arch.cc
   LanguageCode.cc
   CountryCode.cc
   Locale.cc

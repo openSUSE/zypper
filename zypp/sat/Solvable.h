@@ -21,6 +21,8 @@
 #include "zypp/sat/Capability.h"
 #include "zypp/sat/IdStr.h"
 
+#include "zypp/ResTraits.h"
+#include "zypp/Edition.h"
 #include "zypp/Dep.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -34,7 +36,18 @@ namespace zypp
     //
     //	CLASS NAME : Solvable
     //
-    /** */
+    /** A \ref Solvable object within the sat \ref Pool.
+     *
+     * \note Unfortunately libsatsolver combines the objects kind and
+     * name in a single identifier \c "pattern:kde_multimedia",
+     * \b except for packages and source packes. They are not prefixed
+     * by any kind string. Instead the architecture is abused to store
+     * \c "src" and \c "nosrc" values.
+     *
+     * \ref Solvable will hide this inconsistency by treating source
+     * packages as an own kind of solvable and map their arch to
+     * \ref Arch_noarch.
+     */
     class Solvable : protected detail::PoolMember,
                      private base::SafeBool<Solvable>
     {
@@ -61,10 +74,12 @@ namespace zypp
         Repo repo() const;
 
       public:
-        NameId   name()   const;
-        EvrId    evr()    const;
-        ArchId   arch()   const;
-        VendorId vendor() const;
+        IdStr        ident()   const;
+        ResKind      kind()    const;
+        std::string  name()    const;
+        EvrId        edition() const;
+        ArchId       arch()    const;
+        VendorId     vendor()  const;
 
       public:
 
@@ -104,6 +119,7 @@ namespace zypp
         bool boolTest() const { return get(); }
       private:
         detail::SolvableIdType _id;
+        mutable ResKind _kind; // lazy init
     };
     ///////////////////////////////////////////////////////////////////
 

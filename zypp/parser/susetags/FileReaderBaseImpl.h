@@ -34,7 +34,7 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      inline std::string makeSharedIdent( ResolvableTraits::KindType kind_r,
+      inline std::string makeSharedIdent( ResKind kind_r,
 					  const std::string & name_r,
 					  const Edition & edition_r,
 					  const Arch & arch_r )
@@ -77,7 +77,7 @@ namespace zypp
 	    }
 
 	    capability::CapabilityImpl::Ptr get( const std::string & line_r,
-		                                 ResolvableTraits::KindType refers_r )
+		                                 ResKind refers_r )
 	    {
 	      capability::CapabilityImpl::Ptr & ret( _cache[refers_r][line_r] );
 	      if ( ! ret )
@@ -88,7 +88,7 @@ namespace zypp
 	    }
 
 	    private:
-	      std::map<ResolvableTraits::KindType, std::map<std::string, capability::CapabilityImpl::Ptr> > _cache;
+	      std::map<ResKind, std::map<std::string, capability::CapabilityImpl::Ptr> > _cache;
 	  };
 
 	public:
@@ -101,7 +101,7 @@ namespace zypp
 	  }
 
 	  void depAddLine( const std::string & line_r,
-			   ResolvableTraits::KindType refers_r,
+			   ResKind refers_r,
 			   data::DependencyList & deps_r )
 	  {
 	    deps_r.insert( _depcache.get( line_r, refers_r ) );
@@ -116,7 +116,7 @@ namespace zypp
 	  }
 
 	  void depParse( const MultiTagPtr & tag_r,
-			 ResolvableTraits::KindType refers_r,
+			 ResKind refers_r,
 			 data::DependencyList & deps_r )
 	  {
 	    std::for_each( tag_r->value.begin(),

@@ -20,6 +20,8 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/IdStr.h"
 
+#include "zypp/ResTraits.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -43,23 +45,28 @@ namespace zypp
       public:
         /** Default ctor, no capability. */
         Capability() : _id( Null.id() ) {}
+
         /** Ctor from id. */
         explicit Capability( detail::IdType id_r ) : _id( id_r ) {}
+
         /** Ctor from string.
          * If no \c kind_r is provided, the \ref Capability refers to a \c package.
          */
-        explicit Capability( const char * str_r, const KindId & kind_r = KindId::Null );
+        explicit Capability( const char * str_r, const ResKind & kind_r = ResKind() );
+
         /** Ctor from string.
          * If no \c kind_r is provided, the \ref Capability refers to a \c package.
          */
-        explicit Capability( const std::string & str_r, const KindId & kind_r = KindId::Null );
+        explicit Capability( const std::string & str_r, const ResKind & kind_r = ResKind() );
+
         /** Ctor from <tt>name op edition</tt>.
          * If no \c kind_r is provided, the \ref Capability refers to a \c package.
          */
-        Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const KindId & kind_r = KindId::Null );
+        Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r = ResKind() );
 
         /** Evaluate in a boolean context (\c != \c Null). */
         using base::SafeBool<Capability>::operator bool_type;
+
       public:
         /** No or Null \ref Capability. */
         static const Capability Null;
@@ -67,8 +74,10 @@ namespace zypp
       public:
         /** Conversion to <tt>const char *</tt> */
         const char * c_str() const;
+
         /** Conversion to <tt>std::string</tt> */
         std::string string() const;
+
         /** \overload */
         std::string asString() const
         { return string(); }

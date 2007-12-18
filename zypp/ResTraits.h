@@ -63,41 +63,71 @@ namespace zypp
   DEFINE_PTR_TYPE( SystemResObject );
   //@}
 
-  /** Base of ResTraits. Defines the Resolvable::Kind type. */
-  struct ResolvableTraits
-  {
-    typedef KindOf<Resolvable>  KindType;
-  };
+  /** The Resolvables Kind type. */
+  typedef KindOf<Resolvable>            ResKind;
 
   /** ResTraits. Defines common types and the Kind value. */
   template<typename _Res>
-    struct ResTraits : public ResolvableTraits
+    struct ResTraits
     {
+      typedef ResKind                   KindType;
       typedef intrusive_ptr<_Res>       PtrType;
       typedef intrusive_ptr<const _Res> constPtrType;
 
-      static const KindType kind;
+      static const ResKind              kind;
     };
 
   /** ResTraits specialisation for Resolvable.
    * Resolvable is common base and has no Kind value.
-  */
+   */
   template<>
-    struct ResTraits<Resolvable> : public ResolvableTraits
+    struct ResTraits<Resolvable>
     {
+      typedef ResKind                         KindType;
       typedef intrusive_ptr<Resolvable>       PtrType;
       typedef intrusive_ptr<const Resolvable> constPtrType;
     };
 
   /** ResTraits specialisation for ResObject.
    * ResObject is common base and has no Kind value.
-  */
+   */
   template<>
-    struct ResTraits<ResObject> : public ResolvableTraits
+    struct ResTraits<ResObject>
     {
+      typedef ResKind                        KindType;
       typedef intrusive_ptr<ResObject>       PtrType;
       typedef intrusive_ptr<const ResObject> constPtrType;
     };
+
+  /** Convenient access to well known ResKinds.
+   * \code
+   * ResKind packagekind = ResTraits<Package>::kind;
+   * ResKind packagekind = resKind<Package>();
+   * \endcode
+  */
+  template<typename _Res>
+    inline ResKind resKind() { return ResTraits<_Res>::kind; }
+
+  /** Convenient test for ResKinds.
+   * \code
+   * ResKind value;
+   * if ( ResTraits<Package>::kind == value )
+   * if ( resKind<Package>() == value )
+   * if ( isKind<Package>( value ) )
+   * \endcode
+   */
+  template<typename _Res>
+    inline bool isKind( const ResKind & val_r )
+    { return( resKind<_Res>() == val_r ); }
+  /** \overload */
+  template<typename _Res>
+    inline bool isKind( const std::string & val_r )
+    { return( resKind<_Res>() == val_r ); }
+  /** \overload */
+  template<typename _Res>
+    inline bool isKind( const char * val_r )
+    { return( resKind<_Res>() == val_r ); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

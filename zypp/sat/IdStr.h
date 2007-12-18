@@ -68,6 +68,10 @@ namespace zypp
         std::string asString() const
         { return string(); }
       public:
+        /** Fast compare equal. */
+        bool compareEQ( const IdStr & rhs ) const
+        { return( _id == rhs.id() ); }
+
         /** Compare IdStr returning <tt>-1,0,1</tt>. */
         int compare( const IdStr & rhs ) const;
         /** \overload */
@@ -108,7 +112,7 @@ namespace zypp
 
     /** \relates IdStr Equal */
     inline bool operator==( const IdStr & lhs, const IdStr & rhs )
-    { return lhs.id() == rhs.id(); }
+    { return lhs.compareEQ( rhs ); }
     /** \overload */
     inline bool operator==( const IdStr & lhs, const char * rhs )
     { return IdStr::compare( lhs, rhs ) == 0; }
@@ -124,7 +128,7 @@ namespace zypp
 
     /** \relates IdStr NotEqual */
     inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
-    { return lhs.id() != rhs.id(); }
+    { return ! lhs.compareEQ( rhs ); }
     /** \overload */
     inline bool operator!=( const IdStr & lhs, const char * rhs )
     { return IdStr::compare( lhs, rhs ) != 0; }
