@@ -11,7 +11,7 @@
 #define ZYPP_REPO_VARIABLES_H_
 
 #include <iosfwd>
-#include<string>
+#include <string>
 
 #include "zypp/Url.h"
 
@@ -28,7 +28,7 @@ namespace zypp
   struct RepoVariablesStringReplacer : public std::unary_function<std::string, std::string>
   {
     RepoVariablesStringReplacer();
-    
+
     std::string operator()( const std::string &value ) const;
 
     ~RepoVariablesStringReplacer();
@@ -42,12 +42,12 @@ namespace zypp
   struct RepoVariablesUrlReplacer : public std::unary_function<Url, Url>
   {
     RepoVariablesUrlReplacer();
-    
+
     Url operator()( const Url &url ) const;
-    
+
     ~RepoVariablesUrlReplacer();
   };
-  
+
   } // ns repo
 } // ns zypp
 

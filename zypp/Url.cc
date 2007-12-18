@@ -9,6 +9,7 @@
 /**
  * \file zypp/Url.cc
  */
+
 #include <zypp/Url.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
@@ -804,12 +805,12 @@ namespace zypp
   {
     return (lhs.asCompleteString() == rhs.asCompleteString());
   }
-  
+
   bool operator!=( const Url &lhs, const Url &rhs )
   {
     return (lhs.asCompleteString() != rhs.asCompleteString());
   }
-  
+
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////

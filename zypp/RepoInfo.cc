@@ -191,7 +191,7 @@ namespace zypp
     {
       return alias();
     }
-    
+
     repo::RepoVariablesStringReplacer replacer;
     return replacer(_pimpl->name);
   }

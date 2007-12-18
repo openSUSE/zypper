@@ -11,7 +11,7 @@
 #define ZYPP_REPO_TYPE_H_
 
 #include <iosfwd>
-#include<string>
+#include <string>
 
 namespace zypp
 {

@@ -1320,7 +1320,7 @@ namespace zypp
         {
           struct in6_addr ip;
           std::string temp( host.substr(1, host.size()-2));
-          
+
           return inet_pton(AF_INET6, temp.c_str(), &ip) > 0;
         }
         else
