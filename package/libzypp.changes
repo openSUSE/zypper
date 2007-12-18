@@ -2,6 +2,7 @@
 Tue Dec 18 12:28:22 CET 2007 - aschnell@suse.de
 
 - fixed password handling in URLs (bug #347273)
+- revision 8118
 
 -------------------------------------------------------------------
 Mon Dec 17 13:47:44 CET 2007 - ma@suse.de
