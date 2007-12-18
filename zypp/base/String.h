@@ -302,11 +302,36 @@ namespace zypp
      * \todo improve
     */
     std::string toLower( const std::string & s );
+    /** \overload */
+    inline std::string toLower( const char * s )
+    { return( s ? toLower( std::string(s) ) : std::string() ); }
 
     /** Return uppercase version of \a s
      * \todo improve
     */
     std::string toUpper( const std::string & s );
+    /** \overload */
+    inline std::string toUpper( const char * s )
+    { return( s ? toUpper( std::string(s) ) : std::string() ); }
+    //@}
+
+
+    /** \name Case insensitive comparison. */
+    //@{
+    inline int compareCI( const char * lhs, const char * rhs )
+    {
+      if ( lhs == rhs )
+        return 0;
+      if ( ! ( lhs && rhs ) )
+        return( lhs ? 1 : -1 );
+      return ::strcasecmp( lhs, rhs );
+    }
+    inline int compareCI( const std::string & lhs, const std::string & rhs )
+    { return compareCI( lhs.c_str(), rhs.c_str() ); }
+    inline int compareCI( const char * lhs, const std::string & rhs )
+    { return compareCI( lhs, rhs.c_str() ); }
+    inline int compareCI( const std::string & lhs, const char * rhs )
+    { return compareCI( lhs.c_str(), rhs ); }
     //@}
 
     ///////////////////////////////////////////////////////////////////
