@@ -582,6 +582,20 @@ namespace zypp
     }
 
     /**
+     * Recursively follows the symlink pointed to by \a path_r and returns
+     * the Pathname to the real file or directory pointed to by the link.
+     * 
+     * There is a recursion limit of 256 iterations to protect against a cyclic
+     * link.
+     *
+     * @return Pathname of the file or directory pointed to by the given link
+     *   if it is a valid link. If \a path_r is not a link, an exact copy of
+     *   it is returned. If \a path_r is a broken or a cyclic link, an empty
+     *   Pathname is returned and the event logged.
+     */ 
+    Pathname expandlink( const Pathname & path_r );
+
+    /**
      * Like 'cp file dest'. Copy file to dest dir.
      *
      * @return 0 on success, EINVAL if file is not a file, ENOTDIR if dest
