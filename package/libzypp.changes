@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan  2 18:24:34 CET 2008 - jkupec@suse.cz
+
+- Pathname zypp::filesystem::expandlink(const Pathname &) added
+- if the provided file is a symlink, expand it (#274651) (this
+  probably won't work for schemes other than file/dir and cd/dvd)
+- revision 8179
+
+-------------------------------------------------------------------
 Tue Dec 18 12:28:22 CET 2007 - aschnell@suse.de
 
 - fixed password handling in URLs (bug #347273)

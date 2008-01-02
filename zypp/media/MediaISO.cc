@@ -173,6 +173,8 @@ namespace zypp
 	ZYPP_THROW(e3);
       }
 
+      // if the provided file is a symlink, expand it (#274651)
+      // (this will probably work only for file/dir and cd/dvd schemes)
       Pathname isofile = expandlink(manager.localPath(_parentId, _isofile));
       if( isofile.empty() || !PathInfo(isofile).isFile())
       {
