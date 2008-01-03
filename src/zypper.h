@@ -104,6 +104,7 @@ private:
   void shellCleanup();
   void safeDoCommand();
   void doCommand();
+  void cleanup();
 
   void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value = true) { _running_shell = value; }
@@ -137,6 +138,7 @@ struct RuntimeData
   {}
 
   std::list<zypp::RepoInfo> repos;
+  std::list<zypp::RepoInfo> additional_repos;
   int patches_count;
   int security_patches_count;
   zypp::ResStore repo_resolvables;

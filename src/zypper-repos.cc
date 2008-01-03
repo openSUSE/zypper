@@ -91,7 +91,7 @@ static bool refresh_raw_metadata(const Zypper & zypper,
   {
     report_problem(e,
         boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
-        _("Please, see the above error message to for a hint."));
+        _("Please see the above error message to for a hint."));
 
     return true; // error
   }
@@ -102,7 +102,7 @@ static bool refresh_raw_metadata(const Zypper & zypper,
     if (!repo.filepath().empty())
       cerr << format(
           // TranslatorExplanation the first %s is a .repo file path
-          _("Please, add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
+          _("Please add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
           % repo.filepath() % repo.name() << endl;
 
     return true; // error
@@ -120,7 +120,7 @@ static bool refresh_raw_metadata(const Zypper & zypper,
     ZYPP_CAUGHT(e);
     report_problem(e,
         boost::str(format(_("Repository '%s' is invalid.")) % repo.name()),
-        _("Please, check if the URLs defined for this repository are pointing to a valid repository."));
+        _("Please check if the URLs defined for this repository are pointing to a valid repository."));
 
     return true; // error
   }
@@ -248,6 +248,16 @@ static void do_init_repos(Zypper & zypper)
   else
     gData.repos = manager.knownRepositories();
 
+  // additional repositories (--plus-repo)
+  if (!gData.additional_repos.empty())
+  {
+    for (list<RepoInfo>::iterator it = gData.additional_repos.begin();
+        it != gData.additional_repos.end(); ++it)
+    {
+      add_repo(zypper, *it);
+      gData.repos.push_back(*it);
+    }
+  }
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
@@ -478,6 +488,12 @@ void list_repos(Zypper & zypper)
          << e.asUserString() << endl;
     exit(ZYPPER_EXIT_ERR_ZYPP);
   }
+
+  // add the additional repos specified with the --plus-repo to the list
+  if (!gData.additional_repos.empty())
+    repos.insert(repos.end(),
+        gData.additional_repos.begin(),
+        gData.additional_repos.end());
 
   // export to file or stdout in repo file format
   if (copts.count("export"))
@@ -722,8 +738,7 @@ std::string timestamp ()
 
 // ----------------------------------------------------------------------------
 
-static
-int add_repo(Zypper & zypper, RepoInfo & repo)
+void add_repo(Zypper & zypper, RepoInfo & repo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
 
@@ -756,36 +771,40 @@ int add_repo(Zypper & zypper, RepoInfo & repo)
   catch (const RepoAlreadyExistsException & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << format(_("Repository named '%s' already exists. Please, use another alias."))
+    cerr << format(_("Repository named '%s' already exists. Please use another alias."))
         % repo.alias() << endl;
     ERR << "Repository named '" << repo.alias() << "' already exists." << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   catch (const RepoUnknownTypeException & e)
   {
     ZYPP_CAUGHT(e);
     cerr << _("Can't find a valid repository at given location:") << endl;
     cerr << _("Could not determine the type of the repository."
-        " Please, check if the defined URLs (see below) point to a valid repository:");
+        " Please check if the defined URLs (see below) point to a valid repository:");
     for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
         uit != repo.baseUrlsEnd(); ++uit)
       cerr << (*uit) << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   catch (const RepoException & e)
   {
     ZYPP_CAUGHT(e);
     report_problem(e,
         _("Problem transferring repository data from specified URL:"),
-        is_cd ? "" : _("Please, check whether the specified URL is accessible."));
+        is_cd ? "" : _("Please check whether the specified URL is accessible."));
     ERR << "Problem transferring repository data from specified URL" << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
     report_problem(e, _("Unknown problem when adding repository:"));
-    return ZYPPER_EXIT_ERR_BUG;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_BUG);
+    return;
   }
 
   cout << format(_("Repository '%s' successfully added")) % repo.name();
@@ -818,12 +837,11 @@ int add_repo(Zypper & zypper, RepoInfo & repo)
     if (error)
     {
       cerr << format(_("Problem reading data from '%s' media")) % repo.name() << endl;
-      cerr << _("Please, check if your installation media is valid and readable.") << endl;
-      return ZYPPER_EXIT_ERR_ZYPP;
+      cerr << _("Please check if your installation media is valid and readable.") << endl;
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      return;
     }
   }
-
-  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
@@ -850,7 +868,7 @@ void add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(autorefresh) )
     repo.setAutorefresh((autorefresh == true));
 
-  zypper.setExitCode(add_repo(zypper, repo));
+  add_repo(zypper, repo);
 }
 
 // ----------------------------------------------------------------------------
@@ -929,25 +947,7 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 }
 
 // ----------------------------------------------------------------------------
-/*
-static
-bool looks_like_url (const string& s) {
-  static bool schemes_shown = false;
-  if (!schemes_shown) {
-    cerr_vv << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
-    schemes_shown = true;
-  }
 
-  string::size_type pos = s.find (':');
-  if (pos != string::npos) {
-    string scheme (s, 0, pos);
-    if (Url::isRegisteredScheme (scheme)) {
-      return true;
-    }
-  }
-  return false;
-}
-*/
 static bool do_remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);

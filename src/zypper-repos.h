@@ -36,8 +36,6 @@ int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
  * \param type
  * \param enabled     Whether the repo should be enabled   
  * \param autorefresh Whether the repo should have autorefresh turned on
- * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
- *         ZYPPER_EXIT_OK otherwise
  */
 void add_repo_by_url(Zypper & zypper,
                      const zypp::Url & url,
@@ -54,13 +52,16 @@ void add_repo_by_url(Zypper & zypper,
  * \param repo_file_url Valid URL of the repo file.
  * \param enabled     Whether the repo should be enabled   
  * \param autorefresh Whether the repo should have autorefresh turned on
- * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
- *         ZYPPER_EXIT_OK otherwise
  */
 void add_repo_from_file(Zypper & zypper,
                         const std::string & repo_file_url,
                         boost::tribool enabled = boost::indeterminate,
                         boost::tribool autorefresh = boost::indeterminate);
+
+/**
+ * Add repository specified by \repo to system repositories. 
+ */
+void add_repo(Zypper & zypper, zypp::RepoInfo & repo);
 
 /**
  * Delte repository specified by \a alias.

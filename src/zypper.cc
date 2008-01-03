@@ -95,7 +95,8 @@ int Zypper::main(int argc, char ** argv)
   {
   case ZypperCommand::SHELL_e:
     commandShell();
-    return ZYPPER_EXIT_OK;
+    cleanup();
+    return exitCode();
 
   case ZypperCommand::NONE_e:
   {
@@ -107,6 +108,7 @@ int Zypper::main(int argc, char ** argv)
 
   default:
     safeDoCommand();
+    cleanup();
     return exitCode();
   }
 
@@ -131,6 +133,7 @@ void print_main_help()
     "\t--reposd-dir, D <dir>\tUse alternative repository definition files directory.\n"
     "\t--cache-dir, C <dir>\tUse alternative meta-data cache database directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
+    "\t--plus-repo, p <URI|file>\tUse an additional repository\n"
   );
 
   static string help_commands = _(
@@ -197,6 +200,7 @@ void Zypper::processGlobalOptions()
     {"reposd-dir",      required_argument, 0, 'D'},
     {"cache-dir",       required_argument, 0, 'C'},
     {"raw-cache-dir",   required_argument, 0,  0 },
+    {"plus-repo",       required_argument, 0, 'p'},
     {"opt",             optional_argument, 0, 'o'},
     {"disable-system-resolvables", optional_argument, 0, 'o'},
     {0, 0, 0, 0}
@@ -320,20 +324,7 @@ void Zypper::processGlobalOptions()
     cout_v << _("Ignoring installed resolvables...") << endl;
     _gopts.disable_system_resolvables = true;
   }
-/*
-  if (gopts.count("source"))
-  {
-    list<string> sources = gopts["source"];
-    for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
-    {
-      Url url = make_url (*it);
-      if (!url.isValid())
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-      _gopts.additional_sources.push_back(url); 
-    }
-  }
-*/
+
   // testing option
   if ((it = gopts.find("opt")) != gopts.end()) {
     cout << "Opt arg: ";
@@ -389,6 +380,48 @@ void Zypper::processGlobalOptions()
     {
       print_unknown_command_hint();
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+    }
+  }
+
+  // additional repositories
+  if (gopts.count("plus-repo") || gopts.count("source"))
+  {
+    if (command() == ZypperCommand::ADD_REPO ||
+        command() == ZypperCommand::REMOVE_REPO ||
+        command() == ZypperCommand::MODIFY_REPO ||
+        command() == ZypperCommand::RENAME_REPO ||
+        command() == ZypperCommand::REFRESH)
+    {
+      cout << _("The --plus-repo option has no effect here, ignoring.") << endl;
+    }
+    else
+    {
+      list<string> repos = gopts["plus-repo"];
+      if (repos.empty())
+        repos = gopts["sources"];
+  
+      int count = 1;
+      for (list<string>::const_iterator it = repos.begin();
+          it != repos.end(); ++it)
+      {
+        Url url = make_url (*it);
+        if (!url.isValid())
+        {
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+
+        RepoInfo repo;
+        repo.addBaseUrl(url);
+        repo.setEnabled(true);
+        repo.setAutorefresh(true);
+        repo.setAlias(boost::str(format("tmp%d") % count));
+        repo.setName(url.asString());
+
+        gData.additional_repos.push_back(repo);
+        DBG << "got additional repo: " << url << endl;
+        count++;
+      }
     }
   }
 
@@ -2118,6 +2151,16 @@ void Zypper::doCommand()
 
   // if the program reaches this line, something went wrong
   setExitCode(ZYPPER_EXIT_ERR_BUG);
+}
+
+void Zypper::cleanup()
+{
+  MIL << "START" << endl;
+
+  // remove the additional repositories specified by --plus-repo
+  for (list<RepoInfo>::const_iterator it = gData.additional_repos.begin();
+         it != gData.additional_repos.end(); ++it)
+    remove_repo(*this, it->alias());
 }
 
 // Local Variables:
