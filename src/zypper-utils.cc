@@ -1,9 +1,11 @@
 #include <fstream>
+#include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaManager.h"
+#include "zypp/Pathname.h"
 
 #include "zypper-main.h"
 #include "zypper-utils.h"
@@ -100,11 +102,63 @@ string kind_to_string_localized(const KindOf<Resolvable> & kind, unsigned long c
 
 // ----------------------------------------------------------------------------
 
-Url make_url (const string & url_s) {
+static
+bool looks_like_url (const string& s)
+{
+/*
+  static bool schemes_shown = false;
+  if (!schemes_shown) {
+    DBG << "Registered schemes: " << Url::getRegisteredSchemes () << endl;
+    schemes_shown = true;
+  }
+*/
+  string::size_type pos = s.find (':');
+  if (pos != string::npos) {
+    string scheme (s, 0, pos);
+    if (Url::isRegisteredScheme (scheme)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// ----------------------------------------------------------------------------
+
+Url make_url (const string & url_s)
+{
   Url u;
+  string urlstr(url_s);
+
+  if (!url_s.empty() && !looks_like_url(url_s))
+  {
+    DBG << "'" << url_s << "' does not look like a URL, trying to treat it like a local path" << endl;
+
+    Pathname path;
+    // make an url from absolute path
+    if (url_s[0] == '/')
+      path = url_s;
+    // make absolute path url from relative path
+    else
+    {
+      char buf[PATH_MAX];
+      if (getcwd(buf, PATH_MAX) != NULL)
+      {
+        DBG <<  "current working directory: " << buf << endl;
+        path = string(buf) + "/" + url_s;
+      }
+    }
+
+    if (PathInfo(path).isExist())
+    {
+      urlstr = "dir:" + path.absolutename().asString();
+      DBG <<  "resulting url: " << urlstr << endl;
+    }
+    else
+      DBG << "specified local path does not exist or is not accessible" << endl;
+  }
 
   try {
-    u = Url( (url_s[0] == '/') ? string("dir:") + url_s : url_s );
+    u = Url(urlstr);
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
