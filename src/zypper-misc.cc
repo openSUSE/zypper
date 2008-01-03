@@ -1527,7 +1527,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please, see the above error message to for a hint."));
+            _("Please see the above error message to for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
@@ -1535,7 +1535,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please, see the above error message to for a hint."));
+            _("Please see the above error message to for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
@@ -1566,7 +1566,7 @@ void solve_and_commit (Zypper & zypper)
     {
       if (zypper.globalOpts().machine_readable)
         cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
-            " your machine. Please, do it as soon as possible.") << "</message>" << endl;
+            " your machine. Please do it as soon as possible.") << "</message>" << endl;
       else
         cout << _("WARNING: One of installed patches requires a reboot of"
             " your machine. Please do it as soon as possible.") << endl;
@@ -1632,7 +1632,7 @@ bool confirm_licenses(Zypper & zypper)
               " license(s) confirmation.") << " ";
           // TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
           // it is a command line option
-          cout << _("Please, restart the operation in interactive"
+          cout << _("Please restart the operation in interactive"
               " mode and confirm your agreement with required license(s),"
               " or use the --auto-agree-with-licenses option.")
             << endl;
