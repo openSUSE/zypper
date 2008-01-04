@@ -128,20 +128,20 @@ void print_main_help(const Zypper & zypper)
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
-    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-    "\t--root, -R <dir>\tOperate on a different root directory.\n"
-    "\t--reposd-dir, D <dir>\tUse alternative repository definition files directory.\n"
-    "\t--cache-dir, C <dir>\tUse alternative meta-data cache database directory.\n"
+    "\t--reposd-dir, -D <dir>\tUse alternative repository definition files directory.\n"
+    "\t--cache-dir, -C <dir>\tUse alternative meta-data cache database directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
   );
   
   static string help_global_source_options = _(
-    "  Repository Options:\n"
+    "\tRepository Options:\n"
+    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--plus-repo, -p <URI>\tUse an additional repository\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
-      "\t--plus-repo, p <URI|file>  Use an additional repository\n"
   );
 
-  static string help_global_target_options = _("  Target Options:\n"
+  static string help_global_target_options = _("\tTarget Options:\n"
+    "\t--root, -R <dir>\tOperate on a different root directory.\n"
     "\t--disable-system-resolvables  Do not read installed resolvables\n"
   );
 
