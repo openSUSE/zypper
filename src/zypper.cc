@@ -117,9 +117,9 @@ int Zypper::main(int argc, char ** argv)
   return exitCode();
 }
 
-void print_main_help()
+void print_main_help(const Zypper & zypper)
 {
-  static string help_global_options = _("  Options:\n"
+  static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
@@ -133,7 +133,16 @@ void print_main_help()
     "\t--reposd-dir, D <dir>\tUse alternative repository definition files directory.\n"
     "\t--cache-dir, C <dir>\tUse alternative meta-data cache database directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
-    "\t--plus-repo, p <URI|file>\tUse an additional repository\n"
+  );
+  
+  static string help_global_source_options = _(
+    "  Repository Options:\n"
+    "\t--disable-repositories\tDo not read meta-data from repositories.\n"
+      "\t--plus-repo, p <URI|file>  Use an additional repository\n"
+  );
+
+  static string help_global_target_options = _("  Target Options:\n"
+    "\t--disable-system-resolvables  Do not read installed resolvables\n"
   );
 
   static string help_commands = _(
@@ -165,15 +174,30 @@ void print_main_help()
     "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
   );
 
-  cout << help_usage << endl << help_global_options << endl << help_commands;
+  cout
+    << help_usage << endl
+    << help_global_options << endl
+    << help_global_source_options << endl
+    << help_global_target_options << endl
+    << help_commands << endl;
+
+  print_command_help_hint(zypper);
 }
 
-void Zypper::print_unknown_command_hint()
+void print_unknown_command_hint(const Zypper & zypper)
 {
   // TranslatorExplanation %s is "help" or "zypper help" depending on whether
   // zypper shell is running or not
   cout << format(_("Type '%s' to get a list of global options and commands."))
-    % (runningShell() ? "help" : "zypper help") << endl;
+    % (zypper.runningShell() ? "help" : "zypper help") << endl;
+}
+
+void print_command_help_hint(const Zypper & zypper)
+{
+  // TranslatorExplanation %s is "help" or "zypper help" depending on whether
+  // zypper shell is running or not
+  cout << format(_("Type '%s' to get a command-specific help."))
+    % (zypper.runningShell() ? "help <command>" : "zypper help <command>") << endl;
 }
 
 /*
@@ -187,22 +211,25 @@ void Zypper::processGlobalOptions()
   MIL << "START" << endl;
 
   static struct option global_options[] = {
-    {"help",            no_argument,       0, 'h'},
-    {"verbose",         no_argument,       0, 'v'},
-    {"quiet",           no_argument,       0, 'q'},
-    {"version",         no_argument,       0, 'V'},
-    {"terse",           no_argument,       0, 't'},
-    {"table-style",     required_argument, 0, 's'},
-    {"rug-compatible",  no_argument,       0, 'r'},
-    {"non-interactive", no_argument,       0, 'n'},
-    {"no-gpg-checks",   no_argument,       0,  0 },
-    {"root",            required_argument, 0, 'R'},
-    {"reposd-dir",      required_argument, 0, 'D'},
-    {"cache-dir",       required_argument, 0, 'C'},
-    {"raw-cache-dir",   required_argument, 0,  0 },
-    {"plus-repo",       required_argument, 0, 'p'},
-    {"opt",             optional_argument, 0, 'o'},
-    {"disable-system-resolvables", optional_argument, 0, 'o'},
+    {"help",                       no_argument,       0, 'h'},
+    {"verbose",                    no_argument,       0, 'v'},
+    {"quiet",                      no_argument,       0, 'q'},
+    {"version",                    no_argument,       0, 'V'},
+    {"terse",                      no_argument,       0, 't'},
+    {"table-style",                required_argument, 0, 's'},
+    {"rug-compatible",             no_argument,       0, 'r'},
+    {"non-interactive",            no_argument,       0, 'n'},
+    {"no-gpg-checks",              no_argument,       0,  0 },
+    {"root",                       required_argument, 0, 'R'},
+    {"reposd-dir",                 required_argument, 0, 'D'},
+    {"cache-dir",                  required_argument, 0, 'C'},
+    {"raw-cache-dir",              required_argument, 0,  0 },
+    {"opt",                        optional_argument, 0, 'o'},
+    // TARGET OPTIONS
+    {"disable-system-resolvables", no_argument,       0,  0 },
+    // SOURCE OPTIONS
+    {"plus-repo",                  required_argument, 0, 'p'},
+    {"disable-repositories",       no_argument,       0,  0 },
     {0, 0, 0, 0}
   };
 
@@ -304,24 +331,23 @@ void Zypper::processGlobalOptions()
     cout << "<stream>" << endl;
   }
 
-  if (gopts.count("disable-repositories") ||
-      gopts.count("disable-system-sources"))
+  if (gopts.count("disable-repositories"))
   {
     MIL << "Repositories disabled, using target only." << endl;
-    cout_n <<
+    cout <<
         _("Repositories disabled, using the database of installed packages only.")
         << endl;
     _gopts.disable_system_sources = true;
   }
   else
   {
-    MIL << "System sources enabled" << endl;
+    MIL << "Repositories enabled" << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
   {
     MIL << "System resolvables disabled" << endl;
-    cout_v << _("Ignoring installed resolvables...") << endl;
+    cout << _("Ignoring installed resolvables.") << endl;
     _gopts.disable_system_resolvables = true;
   }
 
@@ -359,32 +385,32 @@ void Zypper::processGlobalOptions()
         if (!arg.empty() && arg != "-h" && arg != "--help")
         {
           cout << e.asUserString() << endl;
-          print_unknown_command_hint();
+          print_unknown_command_hint(*this);
           ZYPP_THROW(ExitRequestException("help provided"));
         }
       }
     }
     else
     {
-      print_main_help();
+      print_main_help(*this);
       ZYPP_THROW(ExitRequestException("help provided"));
     }
   }
   else if (command() == ZypperCommand::NONE)
   {
     if (runningHelp())
-      print_main_help();
+      print_main_help(*this);
     else if (gopts.count("version"))
       cout << PACKAGE " " VERSION << endl;
     else
     {
-      print_unknown_command_hint();
+      print_unknown_command_hint(*this);
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
     }
   }
 
   // additional repositories
-  if (gopts.count("plus-repo") || gopts.count("source"))
+  if (gopts.count("plus-repo"))
   {
     if (command() == ZypperCommand::ADD_REPO ||
         command() == ZypperCommand::REMOVE_REPO ||
@@ -392,14 +418,14 @@ void Zypper::processGlobalOptions()
         command() == ZypperCommand::RENAME_REPO ||
         command() == ZypperCommand::REFRESH)
     {
-      cout << _("The --plus-repo option has no effect here, ignoring.") << endl;
+      // TranslatorExplanation The %s is "--plus-repo"
+      cout << format(_("The %s option has no effect here, ignoring."))
+          % "--plus-repo" << endl;
     }
     else
     {
       list<string> repos = gopts["plus-repo"];
-      if (repos.empty())
-        repos = gopts["sources"];
-  
+
       int count = 1;
       for (list<string>::const_iterator it = repos.begin();
           it != repos.end(); ++it)
@@ -474,14 +500,14 @@ void Zypper::commandShell()
       else if (command() == ZypperCommand::SHELL)
         cout << _("You already are running zypper's shell.") << endl;
       else if (command() == ZypperCommand::NONE)
-        print_unknown_command_hint();
+        print_unknown_command_hint(*this);
       else
         safeDoCommand();
     }
     catch (Exception & e)
     {
       cerr << e.msg() <<  endl;
-      print_unknown_command_hint();
+      print_unknown_command_hint(*this);
     }
 
     shellCleanup();
@@ -581,18 +607,6 @@ void Zypper::processCommandOptions()
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
 
-/*  string help_global_source_options = _(
-      "  Repository options:\n"
-      "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
-      "\t--plus-repo <URI|.repo>\t\tRead additional repository\n" //! \todo additional repo
-      );*/
-//! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
-//! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
-
-//  string help_global_target_options = _("  Target options:\n"
-//      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
-//      );
-
   // this could be done in the processGlobalOptions() if there was no
   // zypper shell
   if (command() == ZypperCommand::HELP)
@@ -609,14 +623,14 @@ void Zypper::processCommandOptions()
         if (!cmd.empty() && cmd != "-h" && cmd != "--help")
         {
           cout << ex.asUserString() << endl;
-          print_unknown_command_hint();
+          print_unknown_command_hint(*this);
           return;
         }
       }
     }
     else
     {
-      print_main_help();
+      print_main_help(*this);
       return;
     }
   }
@@ -627,11 +641,8 @@ void Zypper::processCommandOptions()
   // print help on help
   case ZypperCommand::HELP_e:
   {
-    print_unknown_command_hint();
-    // TranslatorExplanation %s is "help" or "zypper help" depending on whether
-    // zypper shell is running or not
-    cout << format(_("Type '%s' to get a command-specific help."))
-      % (runningShell() ? "help <command>" : "zypper help <command>") << endl;
+    print_unknown_command_hint(*this);
+    print_command_help_hint(*this);
     break;
   }
 

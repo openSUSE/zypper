@@ -92,8 +92,6 @@ public:
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
   
-  void print_unknown_command_hint();
-
 private:
   Zypper();
   ~Zypper();
@@ -130,6 +128,9 @@ private:
   char **_sh_argv;
 };
 
+void print_main_help(const Zypper & zypper);
+void print_unknown_command_hint(const Zypper & zypper);
+void print_command_help_hint(const Zypper & zypper);
 
 struct RuntimeData
 {
