@@ -2171,7 +2171,7 @@ void Zypper::cleanup()
   // remove the additional repositories specified by --plus-repo
   for (list<RepoInfo>::const_iterator it = gData.additional_repos.begin();
          it != gData.additional_repos.end(); ++it)
-    remove_repo(*this, it->alias());
+    remove_repo(*this, *it);
 }
 
 // Local Variables:

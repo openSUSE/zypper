@@ -948,15 +948,15 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 
 // ----------------------------------------------------------------------------
 
-static bool do_remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
+bool remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
   bool found = true;
   try
   {
     manager.removeRepository(repoinfo);
-    cout << format(_("Repository %s has been removed.")) % repoinfo.name() << endl;
-    MIL << format("Repository %s has been removed.") % repoinfo.name() << endl;
+    cout << format(_("Repository '%s' has been removed.")) % repoinfo.name() << endl;
+    MIL << format("Repository '%s' has been removed.") % repoinfo.name() << endl;
   }
   catch (const repo::RepoNotFoundException & ex)
   {
@@ -971,10 +971,14 @@ static bool do_remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 
 bool remove_repo(Zypper & zypper, const std::string &alias )
 {
-  RepoInfo info;
-  info.setAlias(alias);
+  list<RepoInfo> repos =
+    RepoManager(zypper.globalOpts().rm_options).knownRepositories();
+  for (list<RepoInfo>::const_iterator it = repos.begin();
+      it != repos.end(); ++it)
+    if (it->alias() == alias)
+      return remove_repo(zypper, *it);
 
-  return do_remove_repo(zypper, info);
+  return false;
 }
 
 bool remove_repo(Zypper & zypper, const Url & url, const url::ViewOption & urlview)
@@ -984,7 +988,7 @@ bool remove_repo(Zypper & zypper, const Url & url, const url::ViewOption & urlvi
   try
   {
     RepoInfo info = manager.getRepositoryInfo(url, urlview);
-    found = do_remove_repo(zypper, info);
+    found = remove_repo(zypper, info);
   }
   catch (const repo::RepoNotFoundException & ex)
   {
