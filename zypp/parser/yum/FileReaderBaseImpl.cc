@@ -315,7 +315,7 @@ namespace zypp
     if (reader_r->nodeType() == XML_READER_TYPE_ELEMENT)
     {
       // xpath: //format/*/rpm:entry | //format/suse-freshens/suse:entry (+)
-      if (reader_r->name() == "rpm:entry" | reader_r->name() == "suse:entry")
+      if (reader_r->name() == "rpm:entry" || reader_r->name() == "suse:entry")
       {
         if (!_expect_rpm_entry)
           ZYPP_THROW(ParseException("rpm:entry found when not expected"));
