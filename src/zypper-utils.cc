@@ -72,29 +72,29 @@ bool is_changeable_media(const zypp::Url & url)
 
 // ----------------------------------------------------------------------------
 
-string kind_to_string_localized(const KindOf<Resolvable> & kind, unsigned long count)
+string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long count)
 {
-  if (kind == ResTraits<Package>::kind.asString())
+  if (kind == ResTraits<Package>::kind)
     return _PL("package", "packages", count);
-  if (kind == ResTraits<Selection>::kind.asString())
+  if (kind == ResTraits<Selection>::kind)
     return _PL("selection", "selections", count);
-  if (kind == ResTraits<Pattern>::kind.asString())
+  if (kind == ResTraits<Pattern>::kind)
     return _PL("pattern", "patterns", count);
-  if (kind == ResTraits<Product>::kind.asString())
+  if (kind == ResTraits<Product>::kind)
     return _PL("product", "product", count);
-  if (kind == ResTraits<Patch>::kind.asString())
+  if (kind == ResTraits<Patch>::kind)
     return _PL("patch", "patches", count);
-  if (kind == ResTraits<Script>::kind.asString())
+  if (kind == ResTraits<Script>::kind)
     return _PL("script", "scripts", count);
-  if (kind == ResTraits<Message>::kind.asString())
+  if (kind == ResTraits<Message>::kind)
     return _PL("message", "messages", count);
-  if (kind == ResTraits<Language>::kind.asString())
+  if (kind == ResTraits<Language>::kind)
     return _PL("language", "languages", count);
-  if (kind == ResTraits<Atom>::kind.asString())
+  if (kind == ResTraits<Atom>::kind)
     return _PL("atom", "atoms", count);
-  if (kind == ResTraits<SystemResObject>::kind.asString())
+  if (kind == ResTraits<SystemResObject>::kind)
     return _PL("system", "systems", count);
-  if (kind == ResTraits<SrcPackage>::kind.asString())
+  if (kind == ResTraits<SrcPackage>::kind)
     return _PL("srcpackage", "srcpackages", count);
   // default
   return _PL("resolvable", "resolvables", count);

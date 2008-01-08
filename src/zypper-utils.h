@@ -17,7 +17,7 @@ std::ostream & report_a_bug (std::ostream& stm);
 bool is_changeable_media(const zypp::Url & url);
 
 std::string kind_to_string_localized(
-    const zypp::KindOf<zypp::Resolvable> & kind, unsigned long count);
+    const zypp::Resolvable::Kind & kind, unsigned long count);
 
 /**
  * Constructor wrapper catching exceptions,

@@ -578,7 +578,7 @@ bool show_problems(Zypper & zypper)
   return retry;
 }
 
-typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResObjectSet;
+typedef map<Resolvable::Kind,set<ResObject::constPtr> > KindToResObjectSet;
 
 void show_summary_resolvable_list(const string & label,
                                   KindToResObjectSet::const_iterator it,
@@ -932,7 +932,7 @@ bool resolve(const Zypper & zypper)
   God->resolver()->setForceResolve( force_resolution );
 
   cout_v << _("Resolving dependencies...") << endl;
-  DBG << "Calling the solver..." << endl; 
+  DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
 }
 
