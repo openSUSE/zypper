@@ -329,36 +329,23 @@ static void do_init_repos(Zypper & zypper)
   cond_init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
 
-  string specific_repo = copts.count("repo") ? copts["repo"].front() : "";
-
+  // get repositories specified with --repo or --catalog
+  list<string> not_found;
+  parsed_opts::const_iterator it;
+  if ((it = copts.find("repo")) != copts.end())
+    get_repos(zypper, it->second.begin(), it->second.end(), gData.repos, not_found);
   // rug compatibility
-  //! \todo support repo #
-  if (specific_repo.empty())
-    specific_repo = copts.count("catalog") ? copts["catalog"].front() : "";
-
-  if (!specific_repo.empty())
+  if ((it = copts.find("catalog")) != copts.end())
+    get_repos(zypper, it->second.begin(), it->second.end(), gData.repos, not_found);
+  if (!not_found.empty())
   {
-    MIL << "--repo set to '" << specific_repo
-        << "'. Going to operate on this repo only." << endl;
-    try { gData.repos.push_back(manager.getRepositoryInfo(specific_repo)); }
-    catch (const repo::RepoNotFoundException & ex)
-    {
-      cerr << format(_("Repository '%s' not found.")) % specific_repo << endl;
-      ERR << specific_repo << " not found";
-      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-    catch (const Exception & ex)
-    {
-      cerr << format(_("Error reading repository description file for '%s'."))
-          % specific_repo << endl;
-      cerr_v << _("Reason: ") << ex.asUserString() << endl;
-      ZYPP_CAUGHT(ex);
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      return;
-    }
+    report_unknown_repos(not_found);
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    return;
   }
-  else
+
+  // if no repository was specified on the command line, use all known repos
+  if (gData.repos.empty())
     gData.repos = manager.knownRepositories();
 
   // additional repositories (--plus-repo)
