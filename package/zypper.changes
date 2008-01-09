@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jan  9 17:51:20 CET 2008 - jkupec@suse.cz
+
+- - support # and URI as well as alias in --repo (#298312)
+- multiple --repo allowed now in all commands supporting the option
+- --repo for refresh (less surprises for users)
+- r8249:8250
+
+-------------------------------------------------------------------
 Fri Jan  4 12:54:19 CET 2008 - jkupec@suse.cz
 
 - new global options: --plus-repo, --disable-repositories,
