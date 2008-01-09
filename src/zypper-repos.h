@@ -25,7 +25,7 @@ void list_repos(Zypper & zypper);
 /**
  * Refresh all enabled repositories.
  */
-int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
+void refresh_repos(Zypper & zypper);
 
 
 /**

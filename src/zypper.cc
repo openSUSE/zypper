@@ -571,7 +571,7 @@ void Zypper::safeDoCommand()
   try
   {
     processCommandOptions();
-    if (command() == ZypperCommand::NONE)
+    if (command() == ZypperCommand::NONE || exitCode())
       return;
     doCommand();
   }
@@ -862,6 +862,7 @@ void Zypper::processCommandOptions()
       {"force-download", no_argument, 0, 'd'},
       {"build-only", no_argument, 0, 'B'},
       {"download-only", no_argument, 0, 'D'},
+      {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -873,11 +874,12 @@ void Zypper::processCommandOptions()
       " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
       "  Command options:\n"
-      "-f, --force             Force a complete refresh\n"
-      "-b, --force-build       Force rebuild of the database\n"
-      "-d, --force-download    Force download of raw metadata\n"
-      "-B, --build-only        Only build the database, don't download metadata.\n"
-      "-D, --download-only     Only download raw metadata, don't build the database\n"
+      "-f, --force              Force a complete refresh\n"
+      "-b, --force-build        Force rebuild of the database\n"
+      "-d, --force-download     Force download of raw metadata\n"
+      "-B, --build-only         Only build the database, don't download metadata.\n"
+      "-D, --download-only      Only download raw metadata, don't build the database\n"
+      "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
     );
     break;
   }
@@ -1224,7 +1226,7 @@ void Zypper::processCommandOptions()
     if (copts.count("_unknown"))
     {
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
-      ERR << "Unknown command, returning." << endl;
+      ERR << "Unknown option, returning." << endl;
       return;
     }
 
@@ -1579,7 +1581,7 @@ void Zypper::doCommand()
       return;
     }
 
-    setExitCode(refresh_repos(*this, _arguments));
+    refresh_repos(*this);
     return;
   }
 

@@ -34,6 +34,18 @@ using namespace zypp::parser;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 
+// ----------------------------------------------------------------------------
+
+template <typename Target, typename Source>
+void safe_lexical_cast (Source s, Target &tr) {
+  try {
+    tr = boost::lexical_cast<Target> (s);
+  }
+  catch (boost::bad_lexical_cast &) {
+  }
+}
+
+// ----------------------------------------------------------------------------
 
 static bool refresh_raw_metadata(const Zypper & zypper,
                                  const RepoInfo & repo,
@@ -200,6 +212,107 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   }
 
   return false; // no error
+}
+
+// ---------------------------------------------------------------------------
+
+/**
+ * Try to find RepoInfo counterparts among known repositories by alias, number,
+ * or URI, based on the list of strings given as the iterator range \a being and
+ * \a end. Matching RepoInfos will be added to \a repos and those with no match
+ * will be added to \a not_found.
+ */
+template<typename T>
+void get_repos(Zypper & zypper,
+               const T & begin, const T & end,
+               list<RepoInfo> & repos, list<string> & not_found)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  list<RepoInfo> known = manager.knownRepositories();
+
+  for (T it = begin; it != end; ++it)
+  {
+    RepoInfo repo;
+
+    // can i find it by alias, #, or the url, in that order?
+    unsigned int number = 1; // repo number
+    for (list<RepoInfo>::const_iterator known_it = known.begin();
+        known_it != known.end(); ++known_it, number++)
+    {
+      unsigned int tmp = 0;
+      safe_lexical_cast (*it, tmp); // try to make an int out of the string
+
+      try
+      {
+        if (known_it->alias() == *it ||
+            tmp == number ||
+            find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(*it))
+              != known_it->baseUrlsEnd())
+        {
+          repo = *known_it;
+          break;
+        }
+      }
+      catch(const url::UrlException &){}
+    } // END for all known repos
+
+    // no match found
+    if (repo.alias().empty())
+    {
+      not_found.push_back(*it);
+      continue;
+    }
+
+    // repo found
+    // is it a duplicate? compare by alias and URIs
+    //! \todo operator== in RepoInfo? 
+    bool duplicate = false;
+    for (list<RepoInfo>::const_iterator repo_it = repos.begin();
+        repo_it != repos.end(); ++repo_it)
+    {
+      bool equals = true;
+      
+      // alias
+      if (repo_it->alias() != repo.alias())
+        equals = false;
+
+      if (equals)
+      {
+        // URIs (all of them)
+        for (RepoInfo::urls_const_iterator urlit = repo_it->baseUrlsBegin();
+            urlit != repo_it->baseUrlsEnd(); ++urlit)
+          try {
+            if (find(repo.baseUrlsBegin(),repo.baseUrlsEnd(),Url(*it))
+                != repo.baseUrlsEnd())
+              equals = false;
+          }
+          catch(const url::UrlException &){}
+      }
+
+      if (equals)
+        duplicate = true;
+    } // END for all found so far
+
+    if (!duplicate)
+      repos.push_back(repo);
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+/**
+ * Say "Repository %s not found" for all strings in \a not_found list.
+ */
+static void report_unknown_repos(list<string> not_found)
+{
+  for (list<string>::iterator it = not_found.begin();
+      it != not_found.end(); ++it)
+    cerr << format(_("Repository '%s' not found by its alias, number, or URI."))
+      % *it << endl;
+
+  if (!not_found.empty())
+    cout_n << _("Use 'zypper repos' to get the list of defined repositories.")
+      << endl;
 }
 
 // ---------------------------------------------------------------------------
@@ -536,22 +649,12 @@ void list_repos(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-template <typename Target, typename Source>
-void safe_lexical_cast (Source s, Target &tr) {
-  try {
-    tr = boost::lexical_cast<Target> (s);
-  }
-  catch (boost::bad_lexical_cast &) {
-  }
-}
-
-// ----------------------------------------------------------------------------
-
-int refresh_repos(Zypper & zypper, vector<string> & arguments)
+void refresh_repos(Zypper & zypper)
 {
   // need gpg keys when downloading (#304672)
   cond_init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
+
   list<RepoInfo> repos;
   try
   {
@@ -562,135 +665,125 @@ int refresh_repos(Zypper & zypper, vector<string> & arguments)
     ZYPP_CAUGHT(e);
     report_problem(e,
         _("Error reading repositories:"));
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
+
+  // get the list of repos specified on the command line ...
+  list<RepoInfo> specified;
+  list<string> not_found;
+  // ...as command arguments
+  get_repos(zypper, zypper.arguments().begin(), zypper.arguments().end(),
+      specified, not_found);
+  // ...as --repo options
+  parsed_opts::const_iterator tmp1;
+  if ((tmp1 = copts.find("repo")) != copts.end())
+    get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
+  report_unknown_repos(not_found);
+
+  cout_v << _("Specified repositories: ");
+  for (list<RepoInfo>::const_iterator it = specified.begin();
+      it != specified.end(); ++it)
+    cout_v << it->alias() << " ";
+  cout_v << endl;
 
   unsigned error_count = 0;
   unsigned enabled_repo_count = repos.size();
-  unsigned repo_number = 0;
-  unsigned argc = arguments.size();
-  for (std::list<RepoInfo>::iterator it = repos.begin();
-       it !=  repos.end(); ++it)
+
+  if (!specified.empty() || not_found.empty())
   {
-    RepoInfo repo(*it);
-    repo_number++;
-
-    if (argc)
+    for (std::list<RepoInfo>::iterator it = repos.begin();
+         it !=  repos.end(); ++it)
     {
-      bool specified_found = false;
-
-      // search for the repo alias among arguments
-      for (vector<string>::iterator it = arguments.begin();
-          it != arguments.end(); ++it)
-        if ((*it) == repo.alias())
-        {
-          specified_found = true;
-          arguments.erase(it);
-          break;
-        }
-
-      // search for the repo number among arguments
-      if (!specified_found)
-        for (vector<string>::iterator it = arguments.begin();
-            it != arguments.end(); ++it)
-        {
-          unsigned tmp = 0;
-          safe_lexical_cast (*it, tmp);
-          if (tmp == repo_number)
+      RepoInfo repo(*it);
+  
+      if (!specified.empty())
+      {
+        bool found = false;
+        for (list<RepoInfo>::const_iterator it = specified.begin();
+            it != specified.end(); ++it)
+          if (it->alias() == repo.alias())
           {
-            specified_found = true;
-            arguments.erase(it);
+            found = true;
             break;
           }
+  
+        if (!found)
+        {
+          DBG << repo.alias() << "(#" << ") not specified,"
+              << " skipping." << endl;
+          enabled_repo_count--;
+          continue;
         }
-
-      if (!specified_found)
+      }
+  
+      // skip disabled repos
+      if (!repo.enabled())
       {
-        DBG << repo.alias() << "(#" << repo_number << ") not specified,"
-            << " skipping." << endl;
+        string msg = boost::str(
+          format(_("Skipping disabled repository '%s'")) % repo.name());
+  
+        if (specified.empty())
+          cout_v << msg << endl;
+        else
+          cerr << msg << endl;
+  
         enabled_repo_count--;
         continue;
       }
-    }
-
-    // skip disabled repos
-    if (!repo.enabled())
-    {
-      string msg = boost::str(
-        format(_("Skipping disabled repository '%s'")) % repo.name());
-
-      if (argc)
-        cerr << msg << endl;
-      else
-        cout_v << msg << endl;
-
-      enabled_repo_count--;
-      continue;
-    }
-
-
-    // do the refresh
-
-    // raw metadata refresh
-    bool error = false;
-    if (!copts.count("build-only"))
-    {
-      bool force_download =
-        copts.count("force") || copts.count("force-download");
-
-      // without this a cd is required to be present in the drive on each refresh
-      // (or more 'refresh needed' check)
-      bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
-      if (!force_download && is_cd)
+  
+      // do the refresh
+  
+      // raw metadata refresh
+      bool error = false;
+      if (!copts.count("build-only"))
       {
-        MIL << "Skipping refresh of a changeable read-only media." << endl;
-        continue;
+        bool force_download =
+          copts.count("force") || copts.count("force-download");
+  
+        // without this a cd is required to be present in the drive on each refresh
+        // (or more 'refresh needed' check)
+        bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
+        if (!force_download && is_cd)
+        {
+          MIL << "Skipping refresh of a changeable read-only media." << endl;
+          continue;
+        }
+  
+        MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
+            << endl;
+  
+        error = refresh_raw_metadata(zypper, repo, force_download);
       }
-
-      MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
-          << endl;
-
-      error = refresh_raw_metadata(zypper, repo, force_download);
-    }
-
-    // db rebuild
-    if (!(error || copts.count("download-only")))
-    {
-      bool force_build =
-        copts.count("force") || copts.count("force-build");
-
-      MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
-
-      error = build_cache(zypper, repo, force_build);
-    }
-
-    if (error)
-    {
-      cerr << format(_("Skipping repository '%s' because of the above error."))
-          % repo.name() << endl;
-      ERR << format("Skipping repository '%s' because of the above error.")
-          % repo.name() << endl;
-      error_count++;
+  
+      // db rebuild
+      if (!(error || copts.count("download-only")))
+      {
+        bool force_build =
+          copts.count("force") || copts.count("force-build");
+  
+        MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
+  
+        error = build_cache(zypper, repo, force_build);
+      }
+  
+      if (error)
+      {
+        cerr << format(_("Skipping repository '%s' because of the above error."))
+            % repo.name() << endl;
+        ERR << format("Skipping repository '%s' because of the above error.")
+            % repo.name() << endl;
+        error_count++;
+      }
     }
   }
-
-  // the rest of arguments are those not found, complain to the user
-  bool show_hint = arguments.size();
-  for (vector<string>::iterator it = arguments.begin();
-      it != arguments.end();)
-  {
-    cerr << format(_("Repository '%s' not found by its alias or number.")) % *it
-      << endl;
-    it = arguments.erase(it);
-  }
-  if (show_hint)
-    cout_n << _("Use 'zypper repos' to get the list of defined repositories.")
-      << endl;
+  else
+    enabled_repo_count = 0;
 
   // print the result message
   if (enabled_repo_count == 0)
   {
-    if (argc)
+    if (!specified.empty() || !not_found.empty())
       cerr << _("Specified repositories are not enabled or defined.");
     else
       cerr << _("There are no enabled repositories defined.");
@@ -702,19 +795,19 @@ int refresh_repos(Zypper & zypper, vector<string> & arguments)
   else if (error_count == enabled_repo_count)
   {
     cerr << _("Could not refresh the repositories because of errors.") << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
   else if (error_count)
   {
     cerr << _("Some of the repositories have not been refreshed because of an error.") << endl;
-    return ZYPPER_EXIT_ERR_ZYPP;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
   }
-  else if (argc)
+  else if (!specified.empty())
     cout << _("Specified repositories have been refreshed.") << endl;
   else
     cout << _("All repositories have been refreshed.") << endl;
-
-  return ZYPPER_EXIT_OK;
 }
 
 // ----------------------------------------------------------------------------
