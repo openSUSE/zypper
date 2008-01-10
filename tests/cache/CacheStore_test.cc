@@ -27,6 +27,7 @@
 #include "zypp/Pattern.h"
 #include "zypp/Product.h"
 #include "zypp/Patch.h"
+#include "zypp/Script.h"
 #include "zypp/DiskUsageCounter.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
@@ -292,6 +293,38 @@ ResStore get_resolvables( const string &alias,
 }
 
 /**
+ * \short Lookup first resolvable matching kind, name, edition, arch (empty value is wildcard)
+ */
+template<class _Res, class _Iterator>
+typename _Res::Ptr lookupResolvable( _Iterator begin_r, _Iterator end_r,
+                                     const std::string & name_r,
+                                     const Edition & edition_r = Edition(""),
+                                     const Arch & arch_r = Arch("") )
+{
+  for( _Iterator it = begin_r; it != end_r; ++it )
+  {
+    if ( isKind<_Res>(*it)
+         && ( name_r.empty()           || (*it)->name()    == name_r )
+         && ( edition_r == Edition("") || (*it)->edition() == edition_r )
+         && ( arch_r == Arch("")       || (*it)->arch()    == arch_r ) )
+    {
+      return asKind<_Res>(*it);
+    }
+  }
+  return 0;
+}
+
+/**
+ * \short Lookup first resolvable matching kind, name, edition, arch (empty string is wildcard)
+ */
+template<class _Res, class _Iterator>
+typename _Res::Ptr lookupResolvable( _Iterator begin_r, _Iterator end_r,
+                                     const std::string & name_r,
+                                     const std::string & edition_r,
+                                     const std::string & arch_r = std::string() )
+{ return lookupResolvable<_Res>( begin_r, end_r, name_r, Edition(edition_r), Arch(arch_r) ); }
+
+/**
  * \short Test that a yum repo is cached and restored
  */
 void cache_write_yum_test(const string &dir)
@@ -302,27 +335,29 @@ void cache_write_yum_test(const string &dir)
   string alias = "novell.com";
   write_yum_repo( alias, repodir, tmpdir );
 
-  ResStore dbres = get_resolvables( alias, tmpdir);;;
+  ResStore dbres = get_resolvables( alias, tmpdir);
   //read_resolvables( alias, tmpdir, std::inserter(dbres, dbres.end()));
   MIL << dbres.size() << " resolvables" << endl;
   BOOST_CHECK_EQUAL( dbres.size(), (unsigned)35);
 
-  bool found_glabels_i586 = false;
-  for ( ResStore::const_iterator it = dbres.begin();
-        it != dbres.end();
-        ++it )
   {
-    if ( isKind<Package>(*it) )
-    {
-      Package::Ptr p = asKind<Package>(*it);
-      if ( (p->name() == "glabels") && p->arch() == Arch("i586") )
-      {
-        found_glabels_i586 = true;
-        check_glabels_package(p);
-      }
-    }
+    Package::Ptr p( lookupResolvable<Package>( dbres.begin(), dbres.end(), "glabels", "", "i586" ) );
+    if ( p )
+      check_glabels_package(p);
+    else
+      BOOST_CHECK_MESSAGE( false, "Package glabels i586 should be in cache");
   }
-  BOOST_CHECK_MESSAGE( found_glabels_i586, "Package glabels i586 should be in cache");
+
+  {
+    Script::Ptr s( lookupResolvable<Script>( dbres.begin(), dbres.end(), "fetchmsttfonts.sh-2333-patch-fetchmsttfonts.sh-2" ) );
+    if ( s )
+    {
+      BOOST_CHECK( ! s->doScriptInlined().empty() );
+      BOOST_CHECK( s->undoScriptInlined().empty() );
+    }
+    else
+      BOOST_CHECK_MESSAGE( false, "Scrtipt fetchmsttfonts.sh-2333-patch-fetchmsttfonts.sh-2 should be in cache");
+  }
 
   check_tables_clean(tmpdir);
 }
