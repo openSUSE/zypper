@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jan 10 16:50:26 CET 2008 - schubi@suse.de
+
+- Enabled SAT solver via default. (removed ZYPP_SAT_SOLVER)
+  ZYPP_RC_SOLVER=1 will enable the old RedCapet solver 
+- Revision 8255
+- Version 4.1.7
+
+-------------------------------------------------------------------
 Wed Jan  2 18:24:34 CET 2008 - jkupec@suse.cz
 
 - Pathname zypp::filesystem::expandlink(const Pathname &) added
