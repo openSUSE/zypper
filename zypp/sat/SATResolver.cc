@@ -357,6 +357,29 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 //----------------------------------------------------------------------------
 
 
+class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
+{
+  public:
+    bool is_updated;
+
+    CheckIfUpdate()
+	: is_updated( false )
+    {}
+
+    // check this item will be installed
+
+    bool operator()( PoolItem_Ref item )
+    {
+	if (item.status().isToBeInstalled())	
+	{
+	    is_updated = true;
+	    return false;
+	}
+	return true;
+    }
+};
+
+
 bool
 SATResolver::resolvePool()
 {
@@ -426,19 +449,6 @@ SATResolver::resolvePool()
 	ERR << "Solverrun finished with an ERROR" << endl;
 	return false;
     }
-    /* solvables to be erased */
-    for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
-    {
-      if (solv->decisionmap[i] > 0)
-	continue;
-
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
-      if (poolItem) {
-	  SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
-      } else {
-	  ERR << "id " << i << " not found in ZYPP pool." << endl;
-      }
-    }
 
     /*  solvables to be installed */
     for (int i = 0; i < solv->decisionq.count; i++)
@@ -455,6 +465,32 @@ SATResolver::resolvePool()
 	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
+      }
+    }
+
+    /* solvables to be erased */
+    for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
+    {
+      if (solv->decisionmap[i] > 0)
+	continue;
+
+      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
+      if (poolItem) {
+	  // Check if this is an update
+	  CheckIfUpdate info;	  
+	  invokeOnEach( _pool.byNameBegin( poolItem->name() ),
+			_pool.byNameEnd( poolItem->name() ),
+			functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
+					resfilter::ByKind( poolItem->kind() ) ),	// equal kind
+			functor::functorRef<bool,PoolItem> (info) );
+	  
+	  if (info.is_updated) {
+	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
+	  } else {
+	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
+	  }
+      } else {
+	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
     }
 
