@@ -346,7 +346,7 @@ moreDetails( ResolverContext_Ptr context, PoolItem_Ref item )
 ResolverProblemList
 Resolver::problems (const bool ignoreValidSolution) const
 {
-    if ( getenv("ZYPP_SAT_SOLVER") && _satResolver )
+    if ( !getenv("ZYPP_RC_SOLVER") && _satResolver )
 	return _satResolver->problems();
 	    
     ResolverProblemList problems;

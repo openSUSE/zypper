@@ -1291,7 +1291,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
 {
 
     // Solving with the satsolver
-    if ( getenv("ZYPP_SAT_SOLVER")) {
+    if ( !getenv("ZYPP_RC_SOLVER")) {
 	MIL << "-------------- Calling SAT Solver -------------------" << endl;
 	if ( !_satResolver ) { 
 	    // syncing with sat pool
