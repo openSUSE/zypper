@@ -37,8 +37,7 @@ namespace zypp
       detail::IdType relFromStr( ::_Pool * pool_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
       {
         detail::IdType nid( detail::noId );
-#warning Add or not kind package
-        if ( kind_r.empty() || isKind<Package>( kind_r ) )
+        if ( ! kind_r || kind_r == ResKind::package )
         {
           nid = IdStr( name_r ).id();
         }

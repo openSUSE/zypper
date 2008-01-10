@@ -14,6 +14,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/KindOf.h"
+#include "zypp/ResKind.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -63,10 +64,7 @@ namespace zypp
   DEFINE_PTR_TYPE( SystemResObject );
   //@}
 
-  /** The Resolvables Kind type. */
-  typedef KindOf<Resolvable>            ResKind;
-
-  /** ResTraits. Defines common types and the Kind value. */
+  /** ResTraits. Defines common types and the ResKind value. */
   template<typename _Res>
     struct ResTraits
     {

@@ -38,6 +38,18 @@ namespace zypp
     //	CLASS NAME : Capability
     //
     /** A sat capability.
+     *
+     * If a certain \ref ResKind is specified upon construction, the
+     * capabilities name part is prefixed accordingly:
+     * \code
+     * Capability( "foo" )                   ==> 'foo'
+     * Capability( "foo", ResKind::package ) ==> 'foo'
+     * Capability( "foo", ResKind::pattern ) ==> 'pattern:foo'
+     * Capability( "pattern:foo" )           ==> 'pattern:foo'
+     * // avoid this:
+     * Capability( "pattern:foo", ResKind::pattern ) ==> 'pattern:pattern:foo'
+     * \endcode
+     *
     */
     class Capability: protected detail::PoolMember,
                       private base::SafeBool<Capability>
@@ -49,20 +61,14 @@ namespace zypp
         /** Ctor from id. */
         explicit Capability( detail::IdType id_r ) : _id( id_r ) {}
 
-        /** Ctor from string.
-         * If no \c kind_r is provided, the \ref Capability refers to a \c package.
-         */
-        explicit Capability( const char * str_r, const ResKind & kind_r = ResKind() );
+        /** Ctor from string. */
+        explicit Capability( const char * str_r, const ResKind & prefix_r = ResKind() );
 
-        /** Ctor from string.
-         * If no \c kind_r is provided, the \ref Capability refers to a \c package.
-         */
-        explicit Capability( const std::string & str_r, const ResKind & kind_r = ResKind() );
+        /** Ctor from string. */
+        explicit Capability( const std::string & str_r, const ResKind & prefix_r = ResKind() );
 
-        /** Ctor from <tt>name op edition</tt>.
-         * If no \c kind_r is provided, the \ref Capability refers to a \c package.
-         */
-        Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r = ResKind() );
+        /** Ctor from <tt>name op edition</tt>. */
+        Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
 
         /** Evaluate in a boolean context (\c != \c Null). */
         using base::SafeBool<Capability>::operator bool_type;

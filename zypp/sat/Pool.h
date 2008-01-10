@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 
+#include "zypp/Pathname.h"
+
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Repo.h"
 
@@ -21,7 +23,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Pathname;
   class SerialNumber;
 
   ///////////////////////////////////////////////////////////////////

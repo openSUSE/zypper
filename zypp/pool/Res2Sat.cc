@@ -50,8 +50,8 @@ namespace zypp
       {
         enum SatIsRreq {
           ISRREQ_NORMAL      = 0,
-          ISRREQ_REQUIRES    = 1,
-          ISRREQ_PREREQUIRES = 2
+          ISRREQ_REQUIRES    = -sat::detail::solvablePrereqMarker,
+          ISRREQ_PREREQUIRES = sat::detail::solvablePrereqMarker
         };
         const CapSet & caps( dep_r[which_r] );
         if ( caps.empty() )

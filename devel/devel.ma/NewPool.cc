@@ -45,6 +45,7 @@
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/IdStrType.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -406,8 +407,63 @@ namespace filter
   { return HasValue<_MemFun, _Value>( fun_r, val_r ); }
 }
 
+namespace zypp
+{
+  namespace sat
+  {
 
 
+  } // namespace sat
+
+  namespace par
+  {
+    class Foo : public sat::IdStrType<Foo>
+    {
+      public:
+        Foo() {}
+        explicit Foo( sat::detail::IdType id_r )   : _str( str::toLower(sat::IdStr(id_r).c_str()) ) {}
+        explicit Foo( const sat::IdStr & idstr_r ) : _str( str::toLower(idstr_r.c_str()) ) {}
+        explicit Foo( const char * cstr_r )        : _str( str::toLower(cstr_r) ) {}
+        explicit Foo( const std::string & str_r )  : _str( str::toLower(str_r) ) {}
+      private:
+        int _doDompareC( const char * rhs )  const
+        { return str::compareCI( _str.c_str(), rhs ); }
+      private:
+        friend class sat::IdStrType<Foo>;
+        sat::IdStr _str;
+    };
+
+  } // namespace par
+}
+
+template <class L>
+struct _TestO { _TestO( const L & lhs ) : _lhs( lhs ) {} const L & _lhs; };
+
+template <class L>
+std::ostream & operator<<( std::ostream & str, const _TestO<L> & obj )
+{ const L & lhs( obj._lhs); return str << (lhs?'_':'*') << (lhs.empty()?'e':'_') << "'" << lhs << "'"; }
+
+template <class L>
+_TestO<L> testO( const L & lhs )
+{ return _TestO<L>( lhs ); }
+
+
+template <class L, class R>
+void testCMP( const L & lhs, const R & rhs )
+{
+  MIL << "LHS " << testO(lhs) << endl;
+  MIL << "RHS " << rhs << endl;
+
+#define OUTS(S) DBG << #S << ": " << (S) << endl
+  OUTS( lhs.compare(rhs) );
+  OUTS( lhs != rhs );
+  OUTS( lhs <  rhs );
+  OUTS( lhs <= rhs );
+  OUTS( lhs == rhs );
+  OUTS( lhs >= rhs );
+  OUTS( lhs >  rhs );
+#undef OUTS
+}
 
 /******************************************************************
 **
@@ -421,10 +477,9 @@ int main( int argc, char * argv[] )
 
   sat::Pool satpool( sat::Pool::instance() );
 
-#if 1
-  //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
-  //sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
-  sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
+#if 0
+  sat::Repo s( satpool.addRepoSolv( "10.3.solv" ) );
+  //sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
 
   sat::Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
   MIL << r << endl;
@@ -434,11 +489,20 @@ int main( int argc, char * argv[] )
   DBG << *it << endl;
 
   if ( 1 )
-  std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                       satpool.solvablesBegin(), satpool.solvablesEnd() ),
-                 make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                       satpool.solvablesEnd(), satpool.solvablesEnd() ),
-                 Xprint() );
+  {
+    std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
+                                         satpool.solvablesBegin(), satpool.solvablesEnd() ),
+                   make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
+                                         satpool.solvablesEnd(), satpool.solvablesEnd() ),
+                   Xprint() );
+    std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "pattern:yast2_install_wf" ),
+                                         satpool.solvablesBegin(), satpool.solvablesEnd() ),
+                   make_filter_iterator( filter::byValue( &sat::Solvable::name, "pattern:yast2_install_wf" ),
+                                         satpool.solvablesEnd(), satpool.solvablesEnd() ),
+                   Xprint() );
+  }
+
+
 
   // make_filter_iterator(detail::ByRepo( *this ),
   // Repo.cc-                                  detail::SolvableIterator(_repo->end),
@@ -519,7 +583,7 @@ int main( int argc, char * argv[] )
   }
 
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -535,13 +599,14 @@ int main( int argc, char * argv[] )
   USR << "pool: " << pool << endl;
   pool.satSync();
 
-  waitForInput();
-
+  //waitForInput();
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-  //sat::detail::PoolImpl satpool;
-  //sat::Pool satpool;
-  //MIL << satpool << endl;
+  MIL << satpool << endl;
+  for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
+  {
+    dumpOn( MIL, *it );
+  }
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

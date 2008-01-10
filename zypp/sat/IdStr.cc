@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include <boost/mpl/int.hpp>
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/IdStr.h"
@@ -25,7 +25,12 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const IdStr IdStr::Null( STRID_NULL );
+    // MPL checks for satlib constants we explicity use in
+    // the header file.
+    BOOST_MPL_ASSERT_RELATION( 0, ==, STRID_NULL );
+    BOOST_MPL_ASSERT_RELATION( 1, ==, STRID_EMPTY );
+
+    const IdStr IdStr::Null ( STRID_NULL );
     const IdStr IdStr::Empty( STRID_EMPTY );
 
     /////////////////////////////////////////////////////////////////
@@ -42,18 +47,13 @@ namespace zypp
     { return ::strlen( c_str() ); }
 
     const char * IdStr::c_str() const
-    { return ::id2str( myPool().getPool(), _id ); }
-
-    std::string IdStr::string() const
-    { return ::id2str( myPool().getPool(), _id ); }
+    { return _id ? ::id2str( myPool().getPool(), _id ) : ""; }
 
     int IdStr::compare( const IdStr & rhs ) const
     {
       if ( _id == rhs._id )
         return 0;
-      // Explicitly handle IdStr::Null because
-      // it's string representation is "<NULL>"
-      // and not something less than "".
+      // Explicitly handle IdStr::Null < ""
       if ( ! _id )
         return -1;
       if ( ! rhs._id )

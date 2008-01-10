@@ -22,7 +22,6 @@ extern "C"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
-#include "zypp/Pathname.h"
 #include "zypp/AutoDispose.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
@@ -142,7 +141,7 @@ namespace zypp
     {
       return str << "sat::pool(" << obj.serial() << "){"
           << obj.reposSize() << "repos|"
-	  << obj.solvablesSize() << "slov}" << "whatprovides *"<< obj.get()->whatprovides;
+	  << obj.solvablesSize() << "slov}";
     }
 
     /////////////////////////////////////////////////////////////////

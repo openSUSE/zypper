@@ -47,6 +47,8 @@ namespace zypp
      * \ref Solvable will hide this inconsistency by treating source
      * packages as an own kind of solvable and map their arch to
      * \ref Arch_noarch.
+     *
+     *
      */
     class Solvable : protected detail::PoolMember,
                      private base::SafeBool<Solvable>
@@ -74,12 +76,12 @@ namespace zypp
         Repo repo() const;
 
       public:
-        IdStr        ident()   const;
-        ResKind      kind()    const;
-        std::string  name()    const;
-        EvrId        edition() const;
-        ArchId       arch()    const;
-        VendorId     vendor()  const;
+        IdStr        ident()    const;
+        ResKind      kind()     const;
+        std::string  name()     const;
+        EvrId        edition()  const;
+        ArchId       arch()     const;
+        VendorId     vendor()   const;
 
       public:
 
@@ -102,7 +104,6 @@ namespace zypp
         Capabilities prerequires() const;
         //@}
 
-
       public:
         /** Return next Solvable in \ref Pool (or \ref nosolvable). */
         Solvable nextInPool() const;
@@ -119,7 +120,6 @@ namespace zypp
         bool boolTest() const { return get(); }
       private:
         detail::SolvableIdType _id;
-        mutable ResKind _kind; // lazy init
     };
     ///////////////////////////////////////////////////////////////////
 

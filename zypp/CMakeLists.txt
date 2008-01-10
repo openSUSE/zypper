@@ -31,7 +31,6 @@ SET( zypp_SRCS
   ResObject.cc
   SystemResObject.cc
   Resolvable.cc
-  ResTraits.cc
   ResStatus.cc
   ResStore.cc
   PoolItem.cc
@@ -83,6 +82,7 @@ SET( zypp_SRCS
   RepoManager.cc
   MediaProducts.cc
   Locks.cc
+  ResKind.cc
   ZConfig.cc
   Arch.cc
   LanguageCode.cc
@@ -148,6 +148,7 @@ SET( zypp_HEADERS
   Range.h
   Rel.h
   RelCompare.h
+  ResKind.h
   ResFilters.h
   ResObject.h
   ResPool.h

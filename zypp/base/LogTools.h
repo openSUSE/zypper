@@ -349,6 +349,30 @@ namespace zypp
     return str << ret;
   }
 
+  ///////////////////////////////////////////////////////////////////
+  // iomanipulator: str << dump(val) << ...
+  // calls:         std::ostream & dumpOn( std::ostream & str, const Type & obj )
+  ///////////////////////////////////////////////////////////////////
+
+  namespace detail
+  {
+    template<class _Tp>
+    struct Dump
+    {
+      Dump( const _Tp & obj_r ) : _obj( obj_r ) {}
+      const _Tp & _obj;
+    };
+
+    template<class _Tp>
+    std::ostream & operator<<( std::ostream & str, const Dump<_Tp> & obj )
+    { return dumpOn( str, obj._obj ); }
+  }
+
+  template<class _Tp>
+  detail::Dump<_Tp> dump( const _Tp & obj_r )
+  { return detail::Dump<_Tp>(obj_r); }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

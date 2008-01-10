@@ -75,28 +75,54 @@ namespace zypp
     ResKind Solvable::kind() const
     {
       NO_SOLVABLE_RETURN( ResKind() );
-      if ( _kind.empty() )
+      // detect srcpackages by 'arch'
+      switch ( _solvable->arch )
       {
-        switch ( _solvable->arch )
-        {
-          case ARCH_SRC:
-          case ARCH_NOSRC:
-            _kind = resKind<SrcPackage>();
-            break;
+        case ARCH_SRC:
+        case ARCH_NOSRC:
+          return ResKind::srcpackage;
+          break;
+      }
 
-          default:
-#warning FIX KindId calc or index
-            break;
+      const char * ident = IdStr( _solvable->name ).c_str();
+      const char * sep = ::strchr( ident, ':' );
+
+      // no ':' in package names (hopefully)
+      if ( ! sep )
+        return ResKind::package;
+
+      // quick check for well known kinds
+      if ( sep-ident >= 4 )
+      {
+        switch ( ident[3] )
+        {
+#define OUTS(K,S) if ( ::strncmp( ident, ResKind::K.c_str(), S ) ) return ResKind::K
+          //             ----v
+          case 'c': OUTS( patch, 5 );       break;
+          case 'd': OUTS( product, 7 );     break;
+          case 'e': OUTS( selection, 9 );   break;
+          case 'g': OUTS( language, 8 );    break;
+          case 'i': OUTS( script, 6 );      break;
+          case 'k': OUTS( package, 7 );     break;
+          case 'm': OUTS( atom, 4 );        break;
+          case 'p': OUTS( srcpackage, 10 ); break;
+          case 's': OUTS( message, 7 );     break;
+          case 't': OUTS( pattern, 7 );
+                    OUTS( system, 6 );      break;
+#undef OUTS
         }
       }
-      return _kind;
+
+      // an unknown kind
+      return ResKind( std::string( ident, sep-ident ) );
     }
 
     std::string Solvable::name() const
     {
-#warning FIX Name skip kind or own Id
       NO_SOLVABLE_RETURN( std::string() );
-      return ident().string();
+      const char * ident = IdStr( _solvable->name ).c_str();
+      const char * sep = ::strchr( ident, ':' );
+      return( sep ? sep+1 : ident );
     }
 
     EvrId Solvable::edition() const
@@ -164,7 +190,7 @@ namespace zypp
         return str << "sat::solvable()";
 
       return str << "sat::solvable(" << obj.id() << "|"
-          << obj.ident() << '-' << obj.edition() << '.' << obj.arch() << "){"
+          << obj.kind() << ':' << obj.name() << '-' << obj.edition() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
     }
 
