@@ -27,6 +27,8 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 
+#include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
+
 #include "zypper-main.h"
 #include "zypper.h"
 #include "zypper-repos.h"
@@ -1632,17 +1634,82 @@ void Zypper::doCommand()
       return;
     }
 
+    bool install_not_remove = command() == ZypperCommand::INSTALL;
+
+    // check for rpm files among the arguments
+    list<string> rpms_files_caps;
+    if (install_not_remove)
+    {
+      for (vector<string>::iterator it = _arguments.begin();
+            it != _arguments.end(); )
+      {
+        if (looks_like_rpm_file(*it))
+        {
+          DBG << *it << " looks like rpm file" << endl;
+          // download the rpm into the cache
+          //! \todo do we want this or a tmp dir? What about the files cached before?
+          //! \todo optimize: don't mount the same media multiple times for each rpm
+          Pathname rpmpath = cache_rpm(*it);
+
+          if (rpmpath.empty())
+          {
+            cerr << format(_("Problem with the RPM file specified as %s, skipping."))
+              % *it << endl;
+          }
+          else
+          {
+            using target::rpm::RpmHeader;
+            // rpm header (need name-version-release)
+            RpmHeader::constPtr header =
+              RpmHeader::readPackage(rpmpath, RpmHeader::NOSIGNATURE);
+            if (header)
+            {
+              string nvrcap =
+                header->tag_name() + "=" +
+                header->tag_version() + "-" +
+                header->tag_release(); 
+              DBG << "rpm package capability: " << nvrcap << endl;
+  
+              // store the rpm file capability string (name=version-release) 
+              rpms_files_caps.push_back(nvrcap);
+            }
+            else
+            {
+              cerr << format(
+                _("Problem reading the RPM header of %s. Is it an RPM file?"))
+                  % *it << endl;
+            }
+          }
+
+          // remove this rpm argument 
+          it = _arguments.erase(it);
+        }
+        else
+          ++it;
+      }
+    }
+
+    // if there were some rpm files, add the rpm cache as a temporary plaindir repo 
+    if (!rpms_files_caps.empty())
+    {
+      // add a plaindir repo
+      RepoInfo repo;
+      repo.setType(repo::RepoType::RPMPLAINDIR);
+      repo.addBaseUrl(Url("dir:///var/cache/zypp/RPMS"));
+      repo.setEnabled(true);
+      repo.setAutorefresh(true);
+      repo.setAlias("_tmpRPMcache_");
+      repo.setName(_("RPM files cache"));
+
+      gData.additional_repos.push_back(repo);
+    }
+
+    //! \todo quit here if the argument list remains empty after founding only invalid rpm args
+    
+    // prepare repositories
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-
-    //! \todo support temporary additional repos
-    /*
-    for ( std::list<Url>::const_iterator it = globalOpts().additional_sources.begin(); it != globalOpts().additional_sources.end(); ++it )
-    {
-      include_source_by_url( *it );
-    }
-    */
 
     if ( gData.repos.empty() )
     {
@@ -1651,21 +1718,31 @@ void Zypper::doCommand()
           " Nothing can be installed.") << endl;
     }
 
+    // prepare target
     cond_init_target(*this);
+    // load metadata
     cond_load_resolvables(*this);
 
-    bool install_not_remove = command() == ZypperCommand::INSTALL;
+    // mark resolvables for installation/removal
     bool by_capability = false; // install by name by default
+    //! \todo install by capability by default in the future (need to improve its output)
     if (copts.count("capability"))
       by_capability = true;
     for ( vector<string>::const_iterator it = _arguments.begin();
-          it != _arguments.end(); ++it ) {
+          it != _arguments.end(); ++it )
+    {
       if (by_capability)
         mark_by_capability (*this, install_not_remove, kind, *it);
       else
         mark_by_name (install_not_remove, kind, *it);
     }
 
+    // rpm files
+    for ( list<string>::const_iterator it = rpms_files_caps.begin();
+          it != rpms_files_caps.end(); ++it )
+      mark_by_capability (*this, true, kind, *it);
+
+    // solve dependencies
     if (copts.count("debug-solver"))
     {
       establish();

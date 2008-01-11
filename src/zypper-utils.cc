@@ -9,6 +9,7 @@
 
 #include "zypper-main.h"
 #include "zypper-utils.h"
+#include "zypper-callbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -40,6 +41,8 @@ string readline_getline()
     return "\004";
 }
 
+// ----------------------------------------------------------------------------
+
 /// tell the user to report a bug, and how
 // (multiline, with endls)
 ostream& report_a_bug (ostream& stm)
@@ -49,6 +52,8 @@ ostream& report_a_bug (ostream& stm)
     // unless you translate the actual page :)
              << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.") << endl;
 }
+
+// ----------------------------------------------------------------------------
 
 bool is_changeable_media(const zypp::Url & url)
 {
@@ -102,7 +107,6 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
 
 // ----------------------------------------------------------------------------
 
-static
 bool looks_like_url (const string& s)
 {
 /*
@@ -166,4 +170,60 @@ Url make_url (const string & url_s)
     cerr << excpt_r.asUserString() << endl;
   }
   return u;
+}
+
+// ----------------------------------------------------------------------------
+
+bool looks_like_rpm_file(const std::string & s)
+{
+  if (s.rfind(".rpm") == s.size() - 4 ||
+      s.find("./") == 0 ||
+      s.find("../") == 0 ||
+      s.find("/") == 0)
+    return true;
+
+  return false;
+}
+
+// ----------------------------------------------------------------------------
+
+Pathname cache_rpm(const string & rpm_uri_str)
+{
+  Url rpmurl = make_url(rpm_uri_str);
+  Pathname rpmpath(rpmurl.getPathName());
+  rpmurl.setPathName(rpmpath.dirname().asString()); // directory
+  rpmpath = rpmpath.basename(); // rpm file name
+
+  try
+  {
+    media::MediaManager mm;
+    media::MediaAccessId mid = mm.open(rpmurl);
+    mm.attachDesiredMedia(mid);
+  
+    mm.provideFile(mid, rpmpath.basename());
+    Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());
+    Pathname cachedrpmpath = "/var/cache/zypp/RPMS/"; 
+    filesystem::assert_dir(cachedrpmpath);
+    bool error =
+      filesystem::copy(localrpmpath, cachedrpmpath / localrpmpath.basename());
+  
+    mm.release(mid);
+    mm.close(mid);
+
+    if (error)
+    {
+      cerr << _("Problem copying the specified RPM file to the cache directory.")
+        << endl << _("Perhaps you are running out of disk space.") << endl; 
+      return Pathname();
+    }
+    return cachedrpmpath / localrpmpath.basename();
+  }
+  catch (const Exception & e)
+  {
+    report_problem(e,
+        _("Problem downloading the specified RPM file."),
+        _("Please check whether the file is accessible."));
+  }
+
+  return Pathname();
 }
