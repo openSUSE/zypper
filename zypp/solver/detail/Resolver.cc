@@ -545,6 +545,11 @@ Resolver::verifySystem (bool considerNewHardware)
 {
     UndoTransact resetting (ResStatus::APPL_HIGH);
 
+    if ( !getenv("ZYPP_RC_SOLVER")) {
+	WAR << "Will currently not be supported by the SAT-solver" << endl;
+	return true;
+    }
+
     _DEBUG ("Resolver::verifySystem() " << (considerNewHardware ? "consider new hardware":""));
 
     invokeOnEach ( _pool.begin(), _pool.end(),
@@ -718,6 +723,11 @@ Resolver::establishPool ()
 {
     MIL << "Resolver::establishPool()" << endl;
 
+    if ( !getenv("ZYPP_RC_SOLVER")) {
+	WAR << "Will not be supported by the SAT-solver" << endl;
+	return true;
+    }
+
     establishState ();						// establish !
     ResolverContext_Ptr solution = bestContext();
 
@@ -844,6 +854,11 @@ Resolver::freshenPool (bool resetAfterSolve)
 {
     MIL << "Resolver::freshenPool()" << endl;
 
+    if ( !getenv("ZYPP_RC_SOLVER")) {
+	WAR << "Will not be supported by the SAT-solver" << endl;
+	return true;
+    }
+
     freshenState (NULL, resetAfterSolve);	// establish all packages with freshens; (NULL)= no initial context
     ResolverContext_Ptr solution = bestContext();
 
@@ -884,6 +899,10 @@ struct FileSystemEstablishItem
 bool
 Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
+    if ( !getenv("ZYPP_RC_SOLVER")) {
+	WAR << "Will not be supported by the SAT-solver; use resolvepool instead" << endl;
+	return false;
+    }
 
     time_t t_start, t_now;
 
