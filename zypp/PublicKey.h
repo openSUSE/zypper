@@ -55,7 +55,10 @@ namespace zypp
       Pathname _keyfile;
   };
   
-  
+
+  // forward declaration of class Date  
+  class Date;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : PublicKey
@@ -88,6 +91,18 @@ namespace zypp
     std::string id() const;
     std::string name() const;
     std::string fingerprint() const;
+
+    /**
+     * Date when the key was created (time is 00:00:00)
+     */    
+    Date created() const;
+
+    /**
+     * Date when the key expires (time is 00:00:00)
+     * If the key never expires the date is Date() (i.e. 0 seconds since the epoch (1.1.1970))
+     */
+    Date expires() const;
+
     Pathname path() const; 
     
     bool operator==( PublicKey b ) const;
