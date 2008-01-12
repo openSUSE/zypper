@@ -642,7 +642,7 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (solv->installed && s->repo == solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not deinstall %s"), solvable2str(pool, s));
+					string description = str::form (_("keep %s"), solvable2str(pool, s));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
@@ -679,7 +679,7 @@ SATResolver::problems ()
 					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
 							      resfilter::ByTransact ()),			// will be deinstalled
 					      functor::functorRef<bool,PoolItem> (info) );
-				string description = str::form (_("do not deinstall %s"), id2str(pool, what));
+				string description = str::form (_("keep %s"), id2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -709,7 +709,7 @@ SATResolver::problems ()
 					|| poolItem.status().staysInstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
 				}
-				string description = str::form (_("do not deinstall all solvables providing %s"), dep2str(pool, what));
+				string description = str::form (_("keep all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
