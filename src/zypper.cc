@@ -673,9 +673,10 @@ void Zypper::processCommandOptions()
     _command_help = boost::str(format(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
-      "install (in) [options] <capability> ...\n"
+      "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
-      "Install resolvables with specified capabilities. A capability is"
+      "Install resolvables with specified capabilities or RPM files with"
+      " specified location. A capability is"
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
