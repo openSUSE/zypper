@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jan 14 17:11:15 CET 2008 - schubi@suse.de
+
+- Textchanges
+- reduced logging in SAT-solver
+- ordering solutions
+- version 4.1.8
+- revision 8276 
+
+-------------------------------------------------------------------
 Thu Jan 10 16:50:26 CET 2008 - schubi@suse.de
 
 - Enabled SAT solver via default. (removed ZYPP_SAT_SOLVER)
