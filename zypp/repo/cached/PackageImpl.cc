@@ -234,7 +234,7 @@ std::string PackageImpl::sourcePkgName() const
 
 Edition PackageImpl::sourcePkgEdition() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageSourcePkgEdition() );
+  return Edition( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrPackageSourcePkgEdition() ) );
 }
 
 /////////////////////////////////////////////////////////////////

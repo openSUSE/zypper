@@ -31,11 +31,11 @@ namespace zypp
      * the operations an \ref IdStr does. (incl. conversion to string types,
      * comparison with string types and stream output).
      *
-     * To disable any comparison, declare (but do not define) \ref _doDompareC
+     * To disable any comparison, declare (but do not define) \ref _doCompareC
      * in your class. If you need a different than the default lexicographical
-     * order, write your own \ref _doDompareC. If you can provide optimized
+     * order, write your own \ref _doCompareC. If you can provide optimized
      * comparison against IdStr or your class itself, \b additionally provide
-     * _doDompareI, and/or _doDompareD.
+     * _doCompareI, and/or _doCompareD.
      *
      * \code
      *    class CaseCmp : public sat::IdStrType<CaseCmp>
@@ -54,7 +54,7 @@ namespace zypp
      *        NoCaseCmp() {}
      *        explicit NoCaseCmp( const char * cstr_r ) : _str( cstr_r )  {}
      *      private:
-     *        int _doDompareC( const char * rhs )  const
+     *        int _doCompareC( const char * rhs )  const
      *        { return ::strcasecmp( _str.c_str(), rhs ); }
      *      private:
      *        friend class sat::IdStrType<NoCaseCmp>;
@@ -97,16 +97,16 @@ namespace zypp
         using base::SafeBool<Derived>::operator bool_type;
 
       public:
-        int compare( const Derived & rhs )     const { return self()._doDompareD( rhs ); }
-        int compare( const IdStrType & rhs )   const { return self()._doDompareD( rhs.self() ); }
-        int compare( const IdStr & rhs )       const { return self()._doDompareI( rhs ); }
-        int compare( const char * rhs )        const { return self()._doDompareC( rhs ); }
-        int compare( const std::string & rhs ) const { return self()._doDompareC( rhs.c_str() ); }
+        int compare( const Derived & rhs )     const { return self()._doCompareD( rhs ); }
+        int compare( const IdStrType & rhs )   const { return self()._doCompareD( rhs.self() ); }
+        int compare( const IdStr & rhs )       const { return self()._doCompareI( rhs ); }
+        int compare( const char * rhs )        const { return self()._doCompareC( rhs ); }
+        int compare( const std::string & rhs ) const { return self()._doCompareC( rhs.c_str() ); }
 
       private:
-        int _doDompareD( const Derived & rhs ) const { return self()._doDompareI( rhs.idStr() ); }
-        int _doDompareI( const IdStr & rhs )   const { return idStr().compareEQ( rhs ) ? true : self()._doDompareC( rhs.c_str() ); }
-        int _doDompareC( const char * rhs )    const { return idStr().compare( rhs ); }
+        int _doCompareD( const Derived & rhs ) const { return self()._doCompareI( rhs.idStr() ); }
+        int _doCompareI( const IdStr & rhs )   const { return idStr().compareEQ( rhs ) ? 0 : self()._doCompareC( rhs.c_str() ); }
+        int _doCompareC( const char * rhs )    const { return idStr().compare( rhs ); }
 
         friend base::SafeBool<Derived>::operator bool_type() const;
         bool boolTest() const { return ! empty(); }

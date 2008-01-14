@@ -167,7 +167,7 @@ namespace zypp
       // xpath: /products/product/distribution-edition (+)
       if (reader_r->name() == "distribution-edition")
       {
-        _product->distributionEdition = reader_r.nodeText().asString();
+        _product->distributionEdition = Edition( reader_r.nodeText().asString() );
         return true;
       }
 

@@ -150,7 +150,7 @@ std::string ProductImpl::distributionName() const
 
 Edition ProductImpl::distributionEdition() const
 {
-  return _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductDistributionEdition() );
+  return Edition( _repository->resolvableQuery().queryStringAttribute( _id, cache::attrProductDistributionEdition() ) );
 }
 
 /////////////////////////////////////////////////////////////////

@@ -1029,7 +1029,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_type = parsed.type;
     impl->_short_name = parsed.short_name;
     impl->_dist_name = parsed.dist_name;
-    impl->_dist_version = parsed.dist_version;
+    impl->_dist_version = Edition( parsed.dist_version );
 
     if ( parsed.releasenotesurl.size() > 0 )
       impl->_release_notes_url = parsed.releasenotesurl;

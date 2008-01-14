@@ -36,6 +36,9 @@ namespace zypp
     public:
       /** \name Some builtin ResKind constants. */
       //@{
+      /** Value representing \c nokind (<tt>""</tt>)*/
+      static const ResKind nokind;
+
       static const ResKind atom;
       static const ResKind language;
       static const ResKind message;
@@ -50,14 +53,16 @@ namespace zypp
       //@}
 
     public:
+      /** Default ctor: \ref nokind */
       ResKind() {}
+      /** Ctor taking kind as string. */
       explicit ResKind( sat::detail::IdType id_r )   : _str( str::toLower(sat::IdStr(id_r).c_str()) ) {}
       explicit ResKind( const sat::IdStr & idstr_r ) : _str( str::toLower(idstr_r.c_str()) ) {}
       explicit ResKind( const char * cstr_r )        : _str( str::toLower(cstr_r) ) {}
       explicit ResKind( const std::string & str_r )  : _str( str::toLower(str_r) ) {}
 
     private:
-      int _doDompareC( const char * rhs )  const
+      int _doCompareC( const char * rhs )  const
       { return str::compareCI( _str.c_str(), rhs ); }
 
     private:

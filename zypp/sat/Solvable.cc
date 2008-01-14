@@ -125,10 +125,10 @@ namespace zypp
       return( sep ? sep+1 : ident );
     }
 
-    EvrId Solvable::edition() const
+    Edition Solvable::edition() const
     {
-      NO_SOLVABLE_RETURN( EvrId() );
-      return EvrId( _solvable->evr );
+      NO_SOLVABLE_RETURN( Edition() );
+      return Edition( _solvable->evr );
     }
 
     ArchId Solvable::arch() const

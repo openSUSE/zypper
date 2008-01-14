@@ -79,7 +79,7 @@ namespace zypp
         IdStr        ident()    const;
         ResKind      kind()     const;
         std::string  name()     const;
-        EvrId        edition()  const;
+        Edition      edition()  const;
         ArchId       arch()     const;
         VendorId     vendor()   const;
 

@@ -26,8 +26,6 @@ extern "C"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Pool.h"
-#include "zypp/sat/Repo.h"
-#include "zypp/sat/Solvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
