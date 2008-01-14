@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Mon Jan 14 16:14:22 CET 2008 - jkupec@suse.cz
+
+- ability to install plain RPM files whose locations are specified
+  in the install command arguments (FATE #302151, bug #230223).
+- r8261:8274
+- 0.9.5
+
+-------------------------------------------------------------------
 Wed Jan  9 17:51:20 CET 2008 - jkupec@suse.cz
 
-- - support # and URI as well as alias in --repo (#298312)
+- support # and URI as well as alias in --repo (#298312)
 - multiple --repo allowed now in all commands supporting the option
 - --repo for refresh (less surprises for users)
 - r8249:8250
