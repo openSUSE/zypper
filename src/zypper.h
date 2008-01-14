@@ -16,6 +16,10 @@
 #include "zypper-command.h"
 #include "zypper-getopt.h"
 
+/** directory for storing manually installed (zypper install foo.rpm) RPM files
+ */
+#define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
+
 /**
  * Structure for holding global options.
  */

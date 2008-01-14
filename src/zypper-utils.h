@@ -42,12 +42,13 @@ bool looks_like_url (const std::string& s);
 bool looks_like_rpm_file(const std::string & s);
 
 /**
- * Download the RPM file specified by \a rpm_uri_str and copy it into zypp
- * cache dir.
+ * Download the RPM file specified by \a rpm_uri_str and copy it into
+ * \a cache_dir.
  * 
  * \return The local Pathname of the file in the cache on success, empty
  *      Pathname if a problem occurs. 
  */
-zypp::Pathname cache_rpm(const std::string & rpm_uri_str);
+zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
+                         const std::string & cache_dir);
 
 #endif /*ZYPPER_UTILS_H*/

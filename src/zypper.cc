@@ -1649,7 +1649,9 @@ void Zypper::doCommand()
           // download the rpm into the cache
           //! \todo do we want this or a tmp dir? What about the files cached before?
           //! \todo optimize: don't mount the same media multiple times for each rpm
-          Pathname rpmpath = cache_rpm(*it);
+          Pathname rpmpath = cache_rpm(*it, 
+              (_gopts.root_dir != "/" ? _gopts.root_dir : "")
+              + ZYPPER_RPM_CACHE_DIR);
 
           if (rpmpath.empty())
           {
@@ -1695,7 +1697,9 @@ void Zypper::doCommand()
       // add a plaindir repo
       RepoInfo repo;
       repo.setType(repo::RepoType::RPMPLAINDIR);
-      repo.addBaseUrl(Url("dir:///var/cache/zypp/RPMS"));
+      repo.addBaseUrl(Url("dir://"
+          + (_gopts.root_dir != "/" ? _gopts.root_dir : "")
+          + ZYPPER_RPM_CACHE_DIR));
       repo.setEnabled(true);
       repo.setAutorefresh(true);
       repo.setAlias("_tmpRPMcache_");
@@ -1705,7 +1709,7 @@ void Zypper::doCommand()
     }
 
     //! \todo quit here if the argument list remains empty after founding only invalid rpm args
-    
+
     // prepare repositories
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)

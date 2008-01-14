@@ -187,7 +187,7 @@ bool looks_like_rpm_file(const std::string & s)
 
 // ----------------------------------------------------------------------------
 
-Pathname cache_rpm(const string & rpm_uri_str)
+Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
 {
   Url rpmurl = make_url(rpm_uri_str);
   Pathname rpmpath(rpmurl.getPathName());
@@ -202,7 +202,7 @@ Pathname cache_rpm(const string & rpm_uri_str)
   
     mm.provideFile(mid, rpmpath.basename());
     Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());
-    Pathname cachedrpmpath = "/var/cache/zypp/RPMS/"; 
+    Pathname cachedrpmpath = cache_dir;
     filesystem::assert_dir(cachedrpmpath);
     bool error =
       filesystem::copy(localrpmpath, cachedrpmpath / localrpmpath.basename());
