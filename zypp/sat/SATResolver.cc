@@ -554,7 +554,7 @@ std::string SATResolver::SATprobleminfoString(Id problem)
 	  break;
       case SOLVER_PROBLEM_NOT_INSTALLABLE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("package %s is not installable"), solvable2str(pool, s));
+	  ret = str::form (_("%s is not installable"), solvable2str(pool, s));
 	  break;
       case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
 	  s = pool_id2solvable(pool, source);
@@ -568,16 +568,16 @@ std::string SATResolver::SATprobleminfoString(Id problem)
       case SOLVER_PROBLEM_PACKAGE_CONFLICT:
 	  s = pool_id2solvable(pool, source);
 	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form (_("package %s conflicts with %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  ret = str::form (_("%s conflicts with %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
 	  s = pool_id2solvable(pool, source);
 	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form (_("package %s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("package %s requires %s, but none of the providers can be installed"), solvable2str(pool, s), dep2str(pool, dep));
+	  ret = str::form (_("%s requires %s, but none of the providers can be installed"), solvable2str(pool, s), dep2str(pool, dep));
 	  break;
   }
 
