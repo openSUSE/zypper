@@ -796,7 +796,8 @@ SATResolver::problems ()
 			}
 		    }
 		}
-		resolverProblem->addSolution (problemSolution);
+		resolverProblem->addSolution (problemSolution,
+					      problemSolution->actionCount() > 1 ? true : false); // Solutions with more than 1 action will be shown first.
 		MIL << "------------------------------------" << endl;
 	    }
 	    // save problem

@@ -44,6 +44,8 @@ namespace zypp
 	 **/
 	class ProblemSolutionCombi : public ProblemSolution
 	{
+        protected:
+	    int actNumber; // number of actions
 	public:
 
 	    /**
@@ -54,10 +56,17 @@ namespace zypp
 	     * Add a single action
 	     */
 	    void addSingleAction( PoolItem_Ref item, const TransactionKind action);
+
+	    /**
+	     * returns the number of actions
+	     */
+	    int actionCount() { return actNumber;}
+	    
 	    /**
 	     * Set description text
 	     */
-	    void addDescription( const std::string description);	    
+	    void addDescription( const std::string description);
+
 	};
 
       ///////////////////////////////////////////////////////////////////
