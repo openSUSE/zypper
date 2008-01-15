@@ -52,7 +52,7 @@ namespace zypp
   /** \relates RepoStatus::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoStatus::Impl & obj )
   {
-    return str << "RepoStatus::Impl";
+    return str << obj.checksum << " " << obj.timestamp;
   }
 
   ///////////////////////////////////////////////////////////////////

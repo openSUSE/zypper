@@ -42,6 +42,7 @@
 #include "zypp/ZYppCallbacks.h"
 
 #include "satsolver/pool.h"
+#include "satsolver/repo.h"
 #include "satsolver/repo_solv.h"
 
 using namespace std;
@@ -665,7 +666,10 @@ namespace zypp
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
-    cache::SolvStore store(_pimpl->options.repoCachePath);
+    Pathname base = _pimpl->options.repoCachePath + Pathname(info.alias());
+    Pathname solvfile = base.extend(".solv");
+
+    //cache::SolvStore store(_pimpl->options.repoCachePath);
 
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
@@ -674,11 +678,11 @@ namespace zypp
     }
 
     bool needs_cleaning = false;
-    if ( store.isCached( info.alias() ) )
+    if ( isCached( info ) )
     {
       MIL << info.alias() << " is already cached." << endl;
-      data::RecordId id = store.lookupRepository(info.alias());
-      RepoStatus cache_status = store.repositoryStatus(info.alias());
+      //data::RecordId id = store.lookupRepository(info.alias());
+      RepoStatus cache_status = cacheStatus(info);
 
       if ( cache_status.checksum() == raw_metadata_status.checksum() )
       {
@@ -702,17 +706,18 @@ namespace zypp
 
     if (needs_cleaning)
     {
-      Pathname name = _pimpl->options.repoCachePath;
-      data::RecordId id = store.lookupRepository(info.alias());
-      ostringstream os;
-      os << id.get();
-      name += os.str() + ".solv";
-      unlink (name);
-      cleanCacheInternal( store, info);
+//       Pathname name = _pimpl->options.repoCachePath;
+//       //data::RecordId id = store.lookupRepository(info.alias());
+//       ostringstream os;
+//       os << id.get();
+//       name += os.str() + ".solv";
+//       unlink (name);
+//       cleanCacheInternal( store, info);
+      cleanCache(info);
     }
 
     MIL << info.alias() << " building cache..." << endl;
-    data::RecordId id = store.lookupOrAppendRepository(info.alias());
+    //data::RecordId id = store.lookupOrAppendRepository(info.alias());
     // do we have type?
     repo::RepoType repokind = info.type();
 
@@ -733,12 +738,8 @@ namespace zypp
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
       {
-        Pathname name = _pimpl->options.repoCachePath;
-	ostringstream os;
-	os << id.get();
-	name += os.str() + ".solv";
         string cmd = "repo2solv.sh \"";
-	cmd += rawpath.asString() + "\" > " + name.asString();
+	cmd += rawpath.asString() + "\" > " + solvfile.asString();
 	int ret = system (cmd.c_str());
         if (WIFEXITED (ret) && WEXITSTATUS (ret) != 0)
 	  ZYPP_THROW(RepoUnknownTypeException());
@@ -747,7 +748,7 @@ namespace zypp
       default:
       break;
     }
-    
+#if 0
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
@@ -768,6 +769,7 @@ namespace zypp
         // no error
       }
       break;
+#endif
 #if 0
       case RepoType::RPMPLAINDIR_e :
       {
@@ -780,16 +782,16 @@ namespace zypp
         parser.parse(url.getPathName());
       }
       break;
-#endif
+
       default:
         ZYPP_THROW(RepoUnknownTypeException());
     }
-
+#endif
     // update timestamp and checksum
-    store.updateRepositoryStatus(id, raw_metadata_status);
-
+    //store.updateRepositoryStatus(id, raw_metadata_status);
+    setCacheStatus(info.alias(), raw_metadata_status);
     MIL << "Commit cache.." << endl;
-    store.commit();
+    //store.commit();
     //progress.toMax();
   }
 
@@ -862,7 +864,41 @@ namespace zypp
   RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
   {
     Pathname name = _pimpl->options.repoCachePath;
-    return RepoStatus(name + Pathname(info.alias()).extend(".solv"));
+    RepoStatus status;
+    Pathname base = _pimpl->options.repoCachePath + name + Pathname(info.alias());
+    Pathname solvfile = base.extend(".solv");
+    Pathname cookiefile = base.extend(".cookie");
+
+    std::ifstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+
+    std::string buffer;
+    while(file && !file.eof()) {
+      getline(file, buffer);
+    }
+
+    std::vector<std::string> words;
+    if ( str::split( buffer, std::back_inserter(words) ) != 2 )
+      ZYPP_THROW (Exception( "corrupt file " + cookiefile.asString() ) );
+
+    status.setTimestamp(Date(str::strtonum<time_t>(words[1])));
+    status.setChecksum(words[0]);
+    return status;
+  }
+
+  void RepoManager::setCacheStatus( const string &alias, const RepoStatus &status )
+  {
+    Pathname base = _pimpl->options.repoCachePath + alias + Pathname(alias);
+    Pathname cookiefile = base.extend(".cookie");
+
+    std::ofstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+    file << status;
+    file.close();
   }
 
   map<data::RecordId, Repo *> repo2solv;

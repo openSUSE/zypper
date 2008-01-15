@@ -374,7 +374,7 @@ namespace zypp
 
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
-    RepoStatus cacheStatus( const RepoInfo &info );
+    void setCacheStatus( const std::string &alias, const RepoStatus &status );
     
     /**
      * Update timestamp of repository index file for the specified repository \a info.

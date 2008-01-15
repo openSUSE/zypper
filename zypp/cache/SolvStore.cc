@@ -570,7 +570,7 @@ RecordId SolvStore::lookupOrAppendRepository( const string &alias )
   if (it == _pimpl->_name2repoid.end())
   {
     _pimpl->_name2repoid[alias] = ++_pimpl->_last_repoid;
-    _pimpl->_id2repo[_pimpl->_last_repoid] = repo_create(_pimpl->_pool, alias.c_str());
+    //_pimpl->_id2repo[_pimpl->_last_repoid] = ::repo_create(_pimpl->_pool, alias.c_str());
   }
   return _pimpl->_name2repoid[alias];
 }
