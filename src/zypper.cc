@@ -372,7 +372,7 @@ void Zypper::processGlobalOptions()
       //setCommand(ZypperCommand::NONE);
     }
   }
-  else
+  else if (!gopts.count("version"))
     setRunningHelp();
 
   if (command() == ZypperCommand::HELP)
