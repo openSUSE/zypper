@@ -903,7 +903,12 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     cout_n << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
     cout_n << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
-    cout_n << "URL: " << *repo.baseUrlsBegin() << endl;
+
+    cout_n << "URL:";
+    for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
+        uit != repo.baseUrlsEnd(); uit++)
+      cout_n << " " << *uit;
+    cout_n << endl;
   }
 
   MIL << "Repository successfully added: " << repo << endl;
@@ -1006,12 +1011,25 @@ void add_repo_from_file( Zypper & zypper,
   {
     RepoInfo repo = *it;
 
+    if(repo.alias().empty())
+    {
+      cerr << _("A repository with no alias defined found in the file, skipping.") << endl;
+      continue;
+    }
+
+    if(repo.baseUrlsEmpty())
+    {
+      cerr << format(_("Repository '%s' has no URL defined, skipping.")) % repo.name() << endl;
+      continue;
+    }
+
     MIL << "enabled: " << enabled << " autorefresh: " << autorefresh << endl;
     if ( !indeterminate(enabled) )
       repo.setEnabled((enabled == true));
     if ( !indeterminate(autorefresh) )
       repo.setAutorefresh((autorefresh == true));
     MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
+
     add_repo(zypper, repo);
   }
 
