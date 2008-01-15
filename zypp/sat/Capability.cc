@@ -39,12 +39,12 @@ namespace zypp
         detail::IdType nid( detail::noId );
         if ( ! kind_r || kind_r == ResKind::package )
         {
-          nid = IdStr( name_r ).id();
+          nid = IdString( name_r ).id();
         }
         else
         {
           // non-packages prefixed by kind
-          nid = IdStr( str::form( "%s:%s",
+          nid = IdString( str::form( "%s:%s",
                                   kind_r.c_str(),
                                   name_r.c_str() ) ).id();
         }
@@ -52,7 +52,7 @@ namespace zypp
         if ( op_r != Rel::ANY && ed_r != Edition::noedition )
         {
 #warning glue edition
-          nid = ::rel2id( pool_r, nid, IdStr( ed_r.asString() ).id(), op_r.bits(), /*create*/true );
+          nid = ::rel2id( pool_r, nid, IdString( ed_r.asString() ).id(), op_r.bits(), /*create*/true );
         }
 
         return nid;

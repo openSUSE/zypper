@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/String.h"
-#include "zypp/sat/IdStr.h"
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +37,7 @@ namespace zypp
      * identification. Comparison against string values is always case insensitive.
     */
     template<class _Tp>
-    class KindOf : private sat::IdStr
+    class KindOf : private IdString
     {
       public:
         /** DefaultCtor: empty string */
@@ -48,29 +48,29 @@ namespace zypp
          */
         explicit
             KindOf( const std::string & value_r )
-        : sat::IdStr( str::toLower(value_r) )
+        : IdString( str::toLower(value_r) )
         {}
         /** Dtor */
         ~KindOf()
         {}
       public:
-        sat::IdStr::empty;
-        sat::IdStr::size;
-        sat::IdStr::c_str;
-        sat::IdStr::string;
-        sat::IdStr::asString;
+        IdString::empty;
+        IdString::size;
+        IdString::c_str;
+        IdString::string;
+        IdString::asString;
       public:
         /** Fast compare equal. */
         bool compareEQ( const KindOf & rhs ) const
-        { return sat::IdStr::compareEQ( rhs ); }
+        { return IdString::compareEQ( rhs ); }
 
         /** Compare KindOf returning <tt>-1,0,1</tt>. */
         int compare( const KindOf & rhs ) const
-        { return sat::IdStr::compare( rhs ); }
+        { return IdString::compare( rhs ); }
         /** \overload Remember to compare case insensitive. */
-        int compare( const IdStr & rhs ) const
+        int compare( const IdString & rhs ) const
         {
-          if ( sat::IdStr::compareEQ( rhs ) )
+          if ( IdString::compareEQ( rhs ) )
             return 0;
           return str::compareCI( c_str(), rhs.c_str() );
         }
@@ -81,7 +81,7 @@ namespace zypp
         int compare( const std::string & rhs ) const
         { return str::compareCI( c_str(), rhs ); }
       public:
-        sat::IdStr::id;
+        IdString::id;
     };
     ///////////////////////////////////////////////////////////////////
 

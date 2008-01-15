@@ -18,8 +18,8 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/IdStr.h"
 
+#include "zypp/IdString.h"
 #include "zypp/ResTraits.h"
 
 ///////////////////////////////////////////////////////////////////

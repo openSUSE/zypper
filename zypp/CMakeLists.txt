@@ -187,6 +187,8 @@ SET( zypp_HEADERS
   RepoManager.h
   MediaProducts.h
   Locks.h
+  IdString.h
+  IdStringType.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -682,7 +684,7 @@ SET( zypp_sat_SRCS
   sat/Pool.cc
   sat/Repo.cc
   sat/Solvable.cc
-  sat/IdStr.cc
+  sat/IdString.cc
   sat/Capability.cc
   sat/Capabilities.cc
   sat/SATResolver.cc
@@ -694,7 +696,8 @@ SET( zypp_sat_HEADERS
   sat/Pool.h
   sat/Repo.h
   sat/Solvable.h
-  sat/IdStr.h
+  sat/IdString.h
+  sat/IdStringType.h
   sat/Capability.h
   sat/Capabilities.h
   sat/SATResolver.h

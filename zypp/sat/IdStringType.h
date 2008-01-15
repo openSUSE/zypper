@@ -6,35 +6,32 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/IdStrType.h
+/** \file	zypp/IdStringType.h
  *
 */
-#ifndef ZYPP_SAT_IDSTRTYPE_H
-#define ZYPP_SAT_IDSTRTYPE_H
+#ifndef ZYPP_IDSTRINGTYPE_H
+#define ZYPP_IDSTRINGTYPE_H
 
-#include "zypp/sat/IdStr.h"
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace sat
-  { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : IdStrType<Derived>
+    //	CLASS NAME : IdStringType<Derived>
     //
-    /** Base class for creating \ref IdStr based types.
+    /** Base class for creating \ref IdString based types.
      *
-     * Just by deriving from \ref IdStrType a class provides all
-     * the operations an \ref IdStr does. (incl. conversion to string types,
+     * Just by deriving from \ref IdStringType a class provides all
+     * the operations an \ref IdString does. (incl. conversion to string types,
      * comparison of string types and stream output).
      *
      * To disable any comparison, declare (but do not define) \ref _doCompare
      * in your class.
      * \code
-     * class NoCompare : : public sat::IdStrType<NoCompare>
+     * class NoCompare : public IdStringType<NoCompare>
      * {
      *   private:
       *   static int _doCompare( const char * lhs,  const char * rhs );
@@ -47,18 +44,18 @@ namespace zypp
      *
      * \code
      *    // uses default lexicographical order
-     *    class CaseCmp : public sat::IdStrType<CaseCmp>
+     *    class CaseCmp : public IdStringType<CaseCmp>
      *    {
      *      public:
      *        CaseCmp() {}
      *        explicit CaseCmp( const char * cstr_r ) : _str( cstr_r )  {}
      *      private:
-     *        friend class sat::IdStrType<CaseCmp>;
-     *        sat::IdStr _str;
+     *        friend class IdStringType<CaseCmp>;
+     *        IdString _str;
      *    };
      *
      *    // uses case insensitive comparison order
-     *    class NoCaseCmp : public sat::IdStrType<NoCaseCmp>
+     *    class NoCaseCmp : public IdStringType<NoCaseCmp>
      *    {
      *      public:
      *        NoCaseCmp() {}
@@ -71,8 +68,8 @@ namespace zypp
      *          return( lhs ? 1 : -1 );
      *        }
      *      private:
-     *        friend class sat::IdStrType<NoCaseCmp>;
-     *        sat::IdStr _str;
+     *        friend class IdStringType<NoCaseCmp>;
+     *        IdString _str;
      *    };
      *
      *    CaseCmp   ca( "a" );
@@ -85,20 +82,20 @@ namespace zypp
      * \ingroup g_CRTP
     */
     template <class Derived>
-    class IdStrType : private base::SafeBool<Derived>
+    class IdStringType : private base::SafeBool<Derived>
     {
       typedef typename base::SafeBool<Derived>::bool_type bool_type;
 
       protected:
-        IdStrType() {}
-        IdStrType(const IdStrType &) {}
-        void operator=(const IdStrType &) {}
+        IdStringType() {}
+        IdStringType(const IdStringType &) {}
+        void operator=(const IdStringType &) {}
 
       private:
         const Derived & self() const { return *static_cast<const Derived*>( this ); }
 
       public:
-        const IdStr & idStr()       const { return self()._str; }
+        const IdString & idStr()    const { return self()._str; }
 
         bool          empty()       const { return idStr().empty(); }
         unsigned      size()        const { return idStr().size(); }
@@ -112,32 +109,32 @@ namespace zypp
 
       public:
         static int compare( const Derived & lhs,    const Derived & rhs )      { return compare( lhs.idStr(), rhs.idStr() ); }
-        static int compare( const Derived & lhs,    const IdStr & rhs )        { return compare( lhs.idStr(), rhs ); }
+        static int compare( const Derived & lhs,    const IdString & rhs )     { return compare( lhs.idStr(), rhs ); }
         static int compare( const Derived & lhs,    const std::string & rhs )  { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
         static int compare( const Derived & lhs,    const char * rhs )         { return Derived::_doCompare( lhs.c_str(), rhs );}
 
-        static int compare( const IdStr & lhs,       const Derived & rhs )     { return compare( lhs, rhs.idStr() ); }
-        static int compare( const IdStr & lhs,       const IdStr & rhs )       { return lhs.compareEQ( rhs ) ? 0 :
+        static int compare( const IdString & lhs,   const Derived & rhs )      { return compare( lhs, rhs.idStr() ); }
+        static int compare( const IdString & lhs,   const IdString & rhs )     { return lhs.compareEQ( rhs ) ? 0 :
                                                                                         Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-        static int compare( const IdStr & lhs,       const std::string & rhs ) { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
-        static int compare( const IdStr & lhs,       const char * rhs )        { return Derived::_doCompare( lhs.c_str(), rhs ); }
+        static int compare( const IdString & lhs,   const std::string & rhs )  { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const IdString & lhs,   const char * rhs )         { return Derived::_doCompare( lhs.c_str(), rhs ); }
 
         static int compare( const std::string & lhs, const Derived & rhs )     { return Derived::_doCompare( lhs.c_str(), rhs.c_str() );}
-        static int compare( const std::string & lhs, const IdStr & rhs )       { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const std::string & lhs, const IdString & rhs )    { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
         static int compare( const std::string & lhs, const std::string & rhs ) { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
         static int compare( const std::string & lhs, const char * rhs )        { return Derived::_doCompare( lhs.c_str(), rhs ); }
 
         static int compare( const char * lhs,        const Derived & rhs )     { return Derived::_doCompare( lhs, rhs.c_str() );}
-        static int compare( const char * lhs,        const IdStr & rhs )       { return Derived::_doCompare( lhs, rhs.c_str() ); }
+        static int compare( const char * lhs,        const IdString & rhs )    { return Derived::_doCompare( lhs, rhs.c_str() ); }
         static int compare( const char * lhs,        const std::string & rhs ) { return Derived::_doCompare( lhs, rhs.c_str() ); }
         static int compare( const char * lhs,        const char * rhs )        { return Derived::_doCompare( lhs, rhs ); }
 
       public:
-        int compare( const Derived & rhs )     const { return compare( idStr(), rhs.idStr() ); }
-        int compare( const IdStrType & rhs )   const { return compare( idStr(), rhs.idStr() ); }
-        int compare( const IdStr & rhs )       const { return compare( idStr(), rhs ); }
-        int compare( const std::string & rhs ) const { return Derived::_doCompare( c_str(), rhs.c_str() ); }
-        int compare( const char * rhs )        const { return Derived::_doCompare( c_str(), rhs ); }
+        int compare( const Derived & rhs )      const { return compare( idStr(), rhs.idStr() ); }
+        int compare( const IdStringType & rhs ) const { return compare( idStr(), rhs.idStr() ); }
+        int compare( const IdString & rhs )     const { return compare( idStr(), rhs ); }
+        int compare( const std::string & rhs )  const { return Derived::_doCompare( c_str(), rhs.c_str() ); }
+        int compare( const char * rhs )         const { return Derived::_doCompare( c_str(), rhs ); }
 
       private:
         static int _doCompare( const char * lhs,  const char * rhs )
@@ -154,189 +151,186 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates IdStrType Stream output */
+    /** \relates IdStringType Stream output */
     template <class Derived>
-    inline std::ostream & operator<<( std::ostream & str, const IdStrType<Derived> & obj )
+    inline std::ostream & operator<<( std::ostream & str, const IdStringType<Derived> & obj )
     { return str << obj.c_str(); }
 
-    /** \relates IdStrType Equal */
+    /** \relates IdStringType Equal */
     template <class Derived>
-    inline bool operator==( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator==( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.idStr().compareEQ( rhs.idStr() ); }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator==( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) == 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator==( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) == 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator==( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) == 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator==( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) == 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator==( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) == 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator==( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator==( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) == 0; }
 
-    /** \relates IdStrType NotEqual */
+    /** \relates IdStringType NotEqual */
     template <class Derived>
-    inline bool operator!=( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator!=( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.idStr().compareEQ( rhs.idStr() ); }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator!=( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) != 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator!=( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) != 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator!=( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) != 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator!=( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) != 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator!=( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) != 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator!=( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator!=( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) != 0; }
 
-    /** \relates IdStrType Less */
+    /** \relates IdStringType Less */
     template <class Derived>
-    inline bool operator<( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator<( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator<( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator<( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) >= 0; }
 
-    /** \relates IdStrType LessEqual */
+    /** \relates IdStringType LessEqual */
     template <class Derived>
-    inline bool operator<=( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<=( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator<=( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator<=( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator<=( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<=( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<=( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator<=( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator<=( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) > 0; }
 
-    /** \relates IdStrType Greater */
+    /** \relates IdStringType Greater */
     template <class Derived>
-    inline bool operator>( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator>( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator>( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator>( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) <= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) <= 0; }
 
-    /** \relates IdStrType GreaterEqual */
+    /** \relates IdStringType GreaterEqual */
     template <class Derived>
-    inline bool operator>=( const IdStrType<Derived> & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>=( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const IdStrType<Derived> & lhs, const IdStr & rhs )
+    inline bool operator>=( const IdStringType<Derived> & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const IdStrType<Derived> & lhs, const char * rhs )
+    inline bool operator>=( const IdStringType<Derived> & lhs, const char * rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const IdStrType<Derived> & lhs, const std::string & rhs )
+    inline bool operator>=( const IdStringType<Derived> & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const IdStr & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>=( const IdString & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const char * lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>=( const char * lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) < 0; }
     /** \overload */
     template <class Derived>
-    inline bool operator>=( const std::string & lhs, const IdStrType<Derived> & rhs )
+    inline bool operator>=( const std::string & lhs, const IdStringType<Derived> & rhs )
     { return rhs.compare( lhs ) < 0; }
 
-   /////////////////////////////////////////////////////////////////
-  } // namespace sat
-  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SAT_IDSTRTYPE_H
+#endif // ZYPP_IDSTRINGTYPE_H

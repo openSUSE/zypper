@@ -43,7 +43,7 @@ namespace zypp
 
       inline void store( ::Id & where_r, const::std::string & str_r )
       {
-        where_r = sat::IdStr( str_r ).id();
+        where_r = IdString( str_r ).id();
       }
 
       inline void store( ::Offset & where_r, ::_Solvable * slv_r, const Dependencies & dep_r, Dep which_r )

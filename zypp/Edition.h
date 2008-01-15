@@ -16,7 +16,7 @@
 #include <string>
 #include <functional>
 
-#include "zypp/sat/IdStrType.h"
+#include "zypp/IdStringType.h"
 #include "zypp/RelCompare.h"
 #include "zypp/Range.h"
 
@@ -57,7 +57,7 @@ namespace zypp
    *
    * \ingroup g_BackendSpecific
   */
-  class Edition : public sat::IdStrType<Edition>
+  class Edition : public IdStringType<Edition>
   {
     public:
       /** Type of an epoch. */
@@ -77,10 +77,10 @@ namespace zypp
       Edition() {}
 
       /** Ctor taking edition as string. */
-      explicit Edition( sat::detail::IdType id_r )   : _str( sat::IdStr(id_r).c_str() ) {}
-      explicit Edition( const sat::IdStr & idstr_r ) : _str( idstr_r.c_str() ) {}
-      explicit Edition( const std::string & str_r )  : _str( str_r ) {}
-      explicit Edition( const char * cstr_r )        : _str( cstr_r ) {}
+      explicit Edition( sat::detail::IdType id_r )  : _str( IdString(id_r).c_str() ) {}
+      explicit Edition( const IdString & idstr_r )  : _str( idstr_r.c_str() ) {}
+      explicit Edition( const std::string & str_r ) : _str( str_r ) {}
+      explicit Edition( const char * cstr_r )       : _str( cstr_r ) {}
 
       /** Ctor taking \a version_r, \a release_r and optional \a epoch_r */
       Edition( const std::string & version_r,
@@ -119,29 +119,29 @@ namespace zypp
        *  version/release strings as \c ANY.
        */
       //@{
-      static int match( const Edition & lhs,    const Edition & rhs )      { return match( lhs.idStr(), rhs.idStr() ); }
-      static int match( const Edition & lhs,    const IdStr & rhs )        { return match( lhs.idStr(), rhs ); }
-      static int match( const Edition & lhs,    const std::string & rhs )  { return _doMatch( lhs.c_str(), rhs.c_str() ); }
-      static int match( const Edition & lhs,    const char * rhs )         { return _doMatch( lhs.c_str(), rhs );}
+      static int match( const Edition & lhs,     const Edition & rhs )     { return match( lhs.idStr(), rhs.idStr() ); }
+      static int match( const Edition & lhs,     const IdString & rhs )    { return match( lhs.idStr(), rhs ); }
+      static int match( const Edition & lhs,     const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const Edition & lhs,     const char * rhs )        { return _doMatch( lhs.c_str(), rhs );}
 
-      static int match( const IdStr & lhs,       const Edition & rhs )     { return match( lhs, rhs.idStr() ); }
-      static int match( const IdStr & lhs,       const IdStr & rhs )       { return lhs.compareEQ( rhs ) ? 0 :
+      static int match( const IdString & lhs,    const Edition & rhs )     { return match( lhs, rhs.idStr() ); }
+      static int match( const IdString & lhs,    const IdString & rhs )    { return lhs.compareEQ( rhs ) ? 0 :
                                                                                     _doMatch( lhs.c_str(), rhs.c_str() ); }
-      static int match( const IdStr & lhs,       const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
-      static int match( const IdStr & lhs,       const char * rhs )        { return _doMatch( lhs.c_str(), rhs ); }
+      static int match( const IdString & lhs,    const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const IdString & lhs,    const char * rhs )        { return _doMatch( lhs.c_str(), rhs ); }
 
       static int match( const std::string & lhs, const Edition & rhs )     { return _doMatch( lhs.c_str(), rhs.c_str() );}
-      static int match( const std::string & lhs, const IdStr & rhs )       { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const std::string & lhs, const IdString & rhs )    { return _doMatch( lhs.c_str(), rhs.c_str() ); }
       static int match( const std::string & lhs, const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
       static int match( const std::string & lhs, const char * rhs )        { return _doMatch( lhs.c_str(), rhs ); }
 
       static int match( const char * lhs,        const Edition & rhs )     { return _doMatch( lhs, rhs.c_str() );}
-      static int match( const char * lhs,        const IdStr & rhs )       { return _doMatch( lhs, rhs.c_str() ); }
+      static int match( const char * lhs,        const IdString & rhs )    { return _doMatch( lhs, rhs.c_str() ); }
       static int match( const char * lhs,        const std::string & rhs ) { return _doMatch( lhs, rhs.c_str() ); }
       static int match( const char * lhs,        const char * rhs )        { return _doMatch( lhs, rhs ); }
 
       int match( const Edition & rhs )     const { return match( idStr(), rhs.idStr() ); }
-      int match( const IdStr & rhs )       const { return match( idStr(), rhs ); }
+      int match( const IdString & rhs )    const { return match( idStr(), rhs ); }
       int match( const std::string & rhs ) const { return _doMatch( c_str(), rhs.c_str() ); }
       int match( const char * rhs )        const { return _doMatch( c_str(), rhs ); }
       //@}
@@ -165,8 +165,8 @@ namespace zypp
       static int _doMatch( const char * lhs,  const char * rhs );
 
     private:
-      friend class sat::IdStrType<Edition>;
-      sat::IdStr _str;
+      friend class IdStringType<Edition>;
+      IdString _str;
   };
   ///////////////////////////////////////////////////////////////////
 

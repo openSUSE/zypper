@@ -16,7 +16,6 @@
 #include "zypp/base/Exception.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/IdStr.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Repo.h"
 
@@ -66,10 +65,10 @@ namespace zypp
     bool Solvable::isSystem() const
     { return repo().isSystemRepo(); }
 
-    IdStr Solvable::ident() const
+    IdString Solvable::ident() const
     {
-      NO_SOLVABLE_RETURN( IdStr() );
-      return IdStr( _solvable->name );
+      NO_SOLVABLE_RETURN( IdString() );
+      return IdString( _solvable->name );
     }
 
     ResKind Solvable::kind() const
@@ -84,7 +83,7 @@ namespace zypp
           break;
       }
 
-      const char * ident = IdStr( _solvable->name ).c_str();
+      const char * ident = IdString( _solvable->name ).c_str();
       const char * sep = ::strchr( ident, ':' );
 
       // no ':' in package names (hopefully)
@@ -120,7 +119,7 @@ namespace zypp
     std::string Solvable::name() const
     {
       NO_SOLVABLE_RETURN( std::string() );
-      const char * ident = IdStr( _solvable->name ).c_str();
+      const char * ident = IdString( _solvable->name ).c_str();
       const char * sep = ::strchr( ident, ':' );
       return( sep ? sep+1 : ident );
     }
@@ -141,14 +140,14 @@ namespace zypp
           return Arch_noarch; //ArchId( ARCH_NOARCH );
           break;
       }
-      return Arch( IdStr(_solvable->arch).asString() );
+      return Arch( IdString(_solvable->arch).asString() );
       //return ArchId( _solvable->arch );
     }
 
-    IdStr Solvable::vendor() const
+    IdString Solvable::vendor() const
     {
-      NO_SOLVABLE_RETURN( IdStr() );
-      return IdStr( _solvable->vendor );
+      NO_SOLVABLE_RETURN( IdString() );
+      return IdString( _solvable->vendor );
     }
 
     Capabilities Solvable::operator[]( Dep which_r ) const

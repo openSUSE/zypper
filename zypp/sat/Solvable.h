@@ -19,9 +19,9 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Capabilities.h"
 #include "zypp/sat/Capability.h"
-#include "zypp/sat/IdStr.h"
 
 #include "zypp/ResTraits.h"
+#include "zypp/IdString.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Dep.h"
@@ -77,14 +77,14 @@ namespace zypp
         Repo repo() const;
 
       public:
-        IdStr        ident()    const;
+        IdString        ident()    const;
 
         ResKind      kind()     const;
         std::string  name()     const;
         Edition      edition()  const;
         Arch         arch()     const;
 
-        IdStr        vendor()   const;
+        IdString        vendor()   const;
 
       public:
 

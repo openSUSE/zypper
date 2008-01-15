@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/IdStr.h
+/** \file	zypp/sat/IdString.h
  *
 */
 #ifndef ZYPP_SAT_IDSTR_H
@@ -22,48 +22,44 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace sat
-  { /////////////////////////////////////////////////////////////////
-
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : IdStr
+    //	CLASS NAME : IdString
     //
     /** Access to the sat-pools string space.
      *
      * Construction from string will place a copy of the string in the
      * string space, if it is not already present.
      *
-     * While comparison differs between \ref IdStr::Null and \ref IdStr::Empty
+     * While comparison differs between \ref IdString::Null and \ref IdString::Empty
      * ( \c NULL and \c "" ), both are represented by an empty string \c "".
     */
-    class IdStr: protected detail::PoolMember,
-                 private base::SafeBool<IdStr>
+    class IdString: protected sat::detail::PoolMember,
+                    private base::SafeBool<IdString>
     {
       public:
         /** Default ctor, empty string. */
-        IdStr() : _id( 1 ) {}
+        IdString() : _id( 1 ) {}
 
         /** Ctor from id. */
-        explicit IdStr( detail::IdType id_r ) : _id( id_r ) {}
+        explicit IdString( sat::detail::IdType id_r ) : _id( id_r ) {}
 
         /** Ctor from string. */
-        explicit IdStr( const char * str_r );
+        explicit IdString( const char * str_r );
 
         /** Ctor from string. */
-        explicit IdStr( const std::string & str_r );
+        explicit IdString( const std::string & str_r );
 
       public:
         /** No or Null string ( Id \c 0 ). */
-        static const IdStr Null;
+        static const IdString Null;
 
         /** Empty string. */
-        static const IdStr Empty;
+        static const IdString Empty;
 
       public:
         /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
-        using base::SafeBool<IdStr>::operator bool_type;
+        using base::SafeBool<IdString>::operator bool_type;
 
         /** Whether the string is empty.
          * This is true for \ref Null and \ref Empty.
@@ -88,11 +84,11 @@ namespace zypp
 
       public:
         /** Fast compare equal. */
-        bool compareEQ( const IdStr & rhs ) const
+        bool compareEQ( const IdString & rhs ) const
         { return( _id == rhs.id() ); }
 
-        /** Compare IdStr returning <tt>-1,0,1</tt>. */
-        int compare( const IdStr & rhs ) const;
+        /** Compare IdString returning <tt>-1,0,1</tt>. */
+        int compare( const IdString & rhs ) const;
 
         /** \overload */
         int compare( const char * rhs ) const;
@@ -103,121 +99,114 @@ namespace zypp
 
       public:
         /** Expert backdoor. */
-        detail::IdType id() const
+        sat::detail::IdType id() const
         { return _id; }
       private:
-        friend base::SafeBool<IdStr>::operator bool_type() const;
+        friend base::SafeBool<IdString>::operator bool_type() const;
         bool boolTest() const { return _id; }
       private:
-        detail::IdType _id;
+        sat::detail::IdType _id;
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates IdStr Stream output */
-    std::ostream & operator<<( std::ostream & str, const IdStr & obj );
+    /** \relates IdString Stream output */
+    std::ostream & operator<<( std::ostream & str, const IdString & obj );
 
-    /** \relates IdStr Equal */
-    inline bool operator==( const IdStr & lhs, const IdStr & rhs )
+    /** \relates IdString Equal */
+    inline bool operator==( const IdString & lhs, const IdString & rhs )
     { return lhs.compareEQ( rhs ); }
     /** \overload */
-    inline bool operator==( const IdStr & lhs, const char * rhs )
+    inline bool operator==( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) == 0; }
     /** \overload */
-    inline bool operator==( const IdStr & lhs, const std::string & rhs )
+    inline bool operator==( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) == 0; }
     /** \overload */
-    inline bool operator==( const char * lhs, const IdStr & rhs )
+    inline bool operator==( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) == 0; }
     /** \overload */
-    inline bool operator==( const std::string & lhs, const IdStr & rhs )
+    inline bool operator==( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) == 0; }
 
-    /** \relates IdStr NotEqual */
-    inline bool operator!=( const IdStr & lhs, const IdStr & rhs )
+    /** \relates IdString NotEqual */
+    inline bool operator!=( const IdString & lhs, const IdString & rhs )
     { return ! lhs.compareEQ( rhs ); }
     /** \overload */
-    inline bool operator!=( const IdStr & lhs, const char * rhs )
+    inline bool operator!=( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) != 0; }
     /** \overload */
-    inline bool operator!=( const IdStr & lhs, const std::string & rhs )
+    inline bool operator!=( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) != 0; }
     /** \overload */
-    inline bool operator!=( const char * lhs, const IdStr & rhs )
+    inline bool operator!=( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) != 0; }
     /** \overload */
-    inline bool operator!=( const std::string & lhs, const IdStr & rhs )
+    inline bool operator!=( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) != 0; }
 
-    /** \relates IdStr Less */
-    inline bool operator<( const IdStr & lhs, const IdStr & rhs )
+    /** \relates IdString Less */
+    inline bool operator<( const IdString & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
-    inline bool operator<( const IdStr & lhs, const char * rhs )
+    inline bool operator<( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
-    inline bool operator<( const IdStr & lhs, const std::string & rhs )
+    inline bool operator<( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) < 0; }
     /** \overload */
-    inline bool operator<( const char * lhs, const IdStr & rhs )
+    inline bool operator<( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) >= 0; }
     /** \overload */
-    inline bool operator<( const std::string & lhs, const IdStr & rhs )
+    inline bool operator<( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) >= 0; }
 
-    /** \relates IdStr LessEqual*/
-    inline bool operator<=( const IdStr & lhs, const IdStr & rhs )
+    /** \relates IdString LessEqual*/
+    inline bool operator<=( const IdString & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
-    inline bool operator<=( const IdStr & lhs, const char * rhs )
+    inline bool operator<=( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
-    inline bool operator<=( const IdStr & lhs, const std::string & rhs )
+    inline bool operator<=( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) <= 0; }
     /** \overload */
-    inline bool operator<=( const char * lhs, const IdStr & rhs )
+    inline bool operator<=( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) > 0; }
     /** \overload */
-    inline bool operator<=( const std::string & lhs, const IdStr & rhs )
+    inline bool operator<=( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) > 0; }
 
-     /** \relates IdStr Greater */
-    inline bool operator>( const IdStr & lhs, const IdStr & rhs )
+     /** \relates IdString Greater */
+    inline bool operator>( const IdString & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
-    inline bool operator>( const IdStr & lhs, const char * rhs )
+    inline bool operator>( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
-    inline bool operator>( const IdStr & lhs, const std::string & rhs )
+    inline bool operator>( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) > 0; }
     /** \overload */
-    inline bool operator>( const char * lhs, const IdStr & rhs )
+    inline bool operator>( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) <= 0; }
     /** \overload */
-    inline bool operator>( const std::string & lhs, const IdStr & rhs )
+    inline bool operator>( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) <= 0; }
 
-    /** \relates IdStr GreaterEqual */
-    inline bool operator>=( const IdStr & lhs, const IdStr & rhs )
+    /** \relates IdString GreaterEqual */
+    inline bool operator>=( const IdString & lhs, const IdString & rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
-    inline bool operator>=( const IdStr & lhs, const char * rhs )
+    inline bool operator>=( const IdString & lhs, const char * rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
-    inline bool operator>=( const IdStr & lhs, const std::string & rhs )
+    inline bool operator>=( const IdString & lhs, const std::string & rhs )
     { return lhs.compare( rhs ) >= 0; }
     /** \overload */
-    inline bool operator>=( const char * lhs, const IdStr & rhs )
+    inline bool operator>=( const char * lhs, const IdString & rhs )
     { return rhs.compare( lhs ) < 0; }
     /** \overload */
-    inline bool operator>=( const std::string & lhs, const IdStr & rhs )
+    inline bool operator>=( const std::string & lhs, const IdString & rhs )
     { return rhs.compare( lhs ) < 0; }
-
-   /////////////////////////////////////////////////////////////////
-  } // namespace sat
-  ///////////////////////////////////////////////////////////////////
-
-  /** Drag into namespace zypp*/
-  using sat::IdStr;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

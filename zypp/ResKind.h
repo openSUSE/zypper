@@ -16,7 +16,7 @@
 #include <string>
 
 #include "zypp/base/String.h"
-#include "zypp/sat/IdStrType.h"
+#include "zypp/IdStringType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,7 +31,7 @@ namespace zypp
    * Comparison against string values is always case
    * insensitive.
    */
-  class ResKind : public sat::IdStrType<ResKind>
+  class ResKind : public IdStringType<ResKind>
   {
     public:
       /** \name Some builtin ResKind constants. */
@@ -57,10 +57,10 @@ namespace zypp
       ResKind() {}
 
       /** Ctor taking kind as string. */
-      explicit ResKind( sat::detail::IdType id_r )   : _str( str::toLower(sat::IdStr(id_r).c_str()) ) {}
-      explicit ResKind( const sat::IdStr & idstr_r ) : _str( str::toLower(idstr_r.c_str()) ) {}
-      explicit ResKind( const std::string & str_r )  : _str( str::toLower(str_r) ) {}
-      explicit ResKind( const char * cstr_r )        : _str( str::toLower(cstr_r) ) {}
+      explicit ResKind( sat::detail::IdType id_r )  : _str( str::toLower(IdString(id_r).c_str()) ) {}
+      explicit ResKind( const IdString & idstr_r )  : _str( str::toLower(idstr_r.c_str()) ) {}
+      explicit ResKind( const std::string & str_r ) : _str( str::toLower(str_r) ) {}
+      explicit ResKind( const char * cstr_r )       : _str( str::toLower(cstr_r) ) {}
 
     private:
       static int _doCompare( const char * lhs,  const char * rhs )
@@ -71,8 +71,8 @@ namespace zypp
       }
 
     private:
-      friend class sat::IdStrType<ResKind>;
-      sat::IdStr _str;
+      friend class IdStringType<ResKind>;
+      IdString _str;
   };
 
   /////////////////////////////////////////////////////////////////
