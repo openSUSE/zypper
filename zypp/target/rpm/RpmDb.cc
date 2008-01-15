@@ -103,7 +103,19 @@ struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
   }
 
   virtual void trustedKeyRemoved( const PublicKey &key  )
-  {}
+  {
+    MIL << "Trusted key removed from zypp Keyring. Removing..." << endl;
+
+    // remove the key from rpm
+    try
+    {
+      _rpmdb.removePubkey( key );
+    }
+    catch (RpmException &e)
+    {
+      ERR << "Could not remove key " << key.id() << " (" << key.name() << ") from rpm database" << endl;
+    }
+  }
 
   RpmDb &_rpmdb;
 };
@@ -1037,6 +1049,80 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   else
   {
     MIL << "Key " << pubkey_r << " imported in rpm trusted keyring." << endl;
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : RpmDb::removePubkey
+//	METHOD TYPE : PMError
+//
+void RpmDb::removePubkey( const PublicKey & pubkey_r )
+{
+  FAILIFNOTINITIALIZED;
+
+  // check if the key is in the rpm database and just
+  // return if it does not.
+  set<Edition> rpm_keys = pubkeyEditions();
+
+  // search the key
+  set<Edition>::const_iterator found_edition = rpm_keys.end();
+
+  for ( set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
+  {
+    string id = str::toUpper( (*it).version() );
+    string keyshortid = pubkey_r.id().substr(8,8);
+    MIL << "Comparing '" << id << "' to '" << keyshortid << "'" << endl;
+    if ( id == keyshortid )
+    {
+	found_edition = it;
+	break;
+    }
+  }
+
+  // the key does not exist, cannot be removed
+  if (found_edition == rpm_keys.end())
+  {
+      WAR << "Key " << pubkey_r.id() << " is not in rpm db" << endl;
+      return;
+  }
+
+  string rpm_name("gpg-pubkey-" + found_edition->asString());
+
+  RpmArgVec opts;
+  opts.push_back ( "-e" );
+  opts.push_back ( "--" );
+  opts.push_back ( rpm_name.c_str() );
+
+  // don't call modifyDatabase because it would remove the old
+  // rpm3 database, if the current database is a temporary one.
+  // But do invalidate packages list.
+  _packages._valid = false;
+  run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
+
+  string line;
+  while ( systemReadLine( line ) )
+  {
+    if ( line.substr( 0, 6 ) == "error:" )
+    {
+      WAR << line << endl;
+    }
+    else
+    {
+      DBG << line << endl;
+    }
+  }
+
+  int rpm_status = systemStatus();
+
+  if ( rpm_status != 0 )
+  {
+    ZYPP_THROW(RpmSubprocessException(string("Failed to remove public key ") + pubkey_r.asString() + string(": rpm returned  ") + str::numstring(rpm_status)));
+  }
+  else
+  {
+    MIL << "Key " << pubkey_r << " has been removed from RPM trusted keyring" << endl;
   }
 }
 

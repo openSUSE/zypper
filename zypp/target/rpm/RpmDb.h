@@ -220,6 +220,14 @@ public:
   void importPubkey( const PublicKey & pubkey_r );
 
   /**
+   * Remove a public key from the rpm database
+   *
+   * \throws RpmException
+   *
+   **/
+  void removePubkey( const PublicKey & pubkey_r );
+
+  /**
    * Return the long ids of all installed public keys.
    **/
   std::list<PublicKey> pubkeys() const;

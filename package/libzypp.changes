@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jan 15 14:56:21 CET 2008 - lslezak@suse.cz
+
+- added RpmDb::removePubkey(), call it from
+  KeyRing::Impl::deleteKey() - remove the GPG key from RPM when it
+  is removed from the trusted keyring
+- revision 8288
+
+-------------------------------------------------------------------
 Mon Jan 14 17:11:15 CET 2008 - schubi@suse.de
 
 - Textchanges
