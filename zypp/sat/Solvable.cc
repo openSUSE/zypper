@@ -131,23 +131,24 @@ namespace zypp
       return Edition( _solvable->evr );
     }
 
-    ArchId Solvable::arch() const
+    Arch Solvable::arch() const
     {
-      NO_SOLVABLE_RETURN( ArchId() );
+      NO_SOLVABLE_RETURN( Arch_noarch ); //ArchId() );
       switch ( _solvable->arch )
       {
         case ARCH_SRC:
         case ARCH_NOSRC:
-          return ArchId( ARCH_NOARCH );
+          return Arch_noarch; //ArchId( ARCH_NOARCH );
           break;
       }
-      return ArchId( _solvable->arch );
+      return Arch( IdStr(_solvable->arch).asString() );
+      //return ArchId( _solvable->arch );
     }
 
-    VendorId Solvable::vendor() const
+    IdStr Solvable::vendor() const
     {
-      NO_SOLVABLE_RETURN( VendorId() );
-      return VendorId( _solvable->vendor );
+      NO_SOLVABLE_RETURN( IdStr() );
+      return IdStr( _solvable->vendor );
     }
 
     Capabilities Solvable::operator[]( Dep which_r ) const

@@ -23,6 +23,7 @@
 
 #include "zypp/ResTraits.h"
 #include "zypp/Edition.h"
+#include "zypp/Arch.h"
 #include "zypp/Dep.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -77,11 +78,13 @@ namespace zypp
 
       public:
         IdStr        ident()    const;
+
         ResKind      kind()     const;
         std::string  name()     const;
         Edition      edition()  const;
-        ArchId       arch()     const;
-        VendorId     vendor()   const;
+        Arch         arch()     const;
+
+        IdStr        vendor()   const;
 
       public:
 
