@@ -338,7 +338,7 @@ namespace zypp
 	  }
 	  else if ( key == "VERSION" )
 	  {
-	    _pimpl->product().edition = Edition( value );
+	    _pimpl->product().edition = value;
 	  }
 	  else if ( key == "ARCH" )
 	  {
