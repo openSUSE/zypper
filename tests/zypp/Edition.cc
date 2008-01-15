@@ -16,8 +16,6 @@ using namespace zypp;
 
 void edition_test()
 {
-  BOOST_CHECK_THROW( Edition(string("A::foo--foo")), exception );
-  
   Edition _ed1 ("1");
   Edition _ed2 ("1.1");
   Edition _ed3 ("1:1");
@@ -33,6 +31,10 @@ void edition_test()
   BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", "1"));
   BOOST_CHECK_EQUAL(_ed3, Edition ("1", "", 1));
   BOOST_CHECK_EQUAL(_ed4, Edition ("1", "1", 2));
+
+  BOOST_CHECK_EQUAL( Edition::compare("1:1-1","2:1-1"), -1 );
+  BOOST_CHECK_EQUAL( Edition::compare("2:1-1","2:1-1"), 0 );
+  BOOST_CHECK_EQUAL( Edition::compare("3:1-1","2:1-1"), 1 );
 }
 
 test_suite*

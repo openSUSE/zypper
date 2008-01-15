@@ -605,7 +605,8 @@ int main( int argc, char * argv[] )
   MIL << satpool << endl;
   for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
   {
-    dumpOn( MIL, *it );
+    MIL << *it << endl;
+    //MIL << dump(*it) << endl;
   }
 
   ///////////////////////////////////////////////////////////////////

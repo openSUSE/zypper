@@ -22,10 +22,14 @@ void dotest()
   BOOST_CHECK_EQUAL( ResKind("FOO").asString(), "foo" );
   // Caseinsensitive comparison
   BOOST_CHECK_EQUAL( ResKind("FOO"), ResKind("foo") );
+  BOOST_CHECK_EQUAL( ResKind("FOO"), string("Foo") );
+  BOOST_CHECK_EQUAL( ResKind("FOO"), "Foo" );
   BOOST_CHECK_EQUAL( ResKind("FOO"), string("foo") );
   BOOST_CHECK_EQUAL( ResKind("FOO"), "foo" );
   BOOST_CHECK_EQUAL( string("foo"), ResKind("FOO") );
   BOOST_CHECK_EQUAL( "foo", ResKind("FOO") );
+
+  BOOST_CHECK_EQUAL( ResKind::compare( "FOO", "foo" ), 0 );
 
 }
 test_suite * init_unit_test_suite( int, char * [] )
