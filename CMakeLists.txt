@@ -20,21 +20,16 @@ ENDIF( DEFINED CMAKE_INSTALL_PREFIX )
 # system configuration dir (etc)
 
 IF( NOT DEFINED SYSCONFDIR )
-  IF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
-    # if installing in usr, set sysconfg to etc
     SET( SYSCONFDIR /etc )
-  ELSE ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
-    SET ( SYSCONFDIR "${CMAKE_INSTALL_PREFIX}/etc" )
-  ENDIF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
 ENDIF( NOT DEFINED SYSCONFDIR )
-MESSAGE(STATUS "Config files will be installed in ${SYSCONFDIR}" )
+MESSAGE( "** Config files will be installed in ${SYSCONFDIR}" )
 
 # system configuration dir (etc)
 
 IF( NOT DEFINED MANDIR )
-  SET( MANDIR ${CMAKE_INSTALL_PREFIX}/share/man )
+  SET( MANDIR ${INSTALL_PREFIX}/share/man )
 ENDIF( NOT DEFINED MANDIR )
-
+MESSAGE( "** Manual files will be installed in ${MANDIR}" )
 
 # PACKAGE
 
