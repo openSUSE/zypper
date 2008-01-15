@@ -917,7 +917,8 @@ SET( zypp_cache_SRCS
   cache/Attribute.cc
   cache/CacheTypes.cc
   cache/ResolvableQuery.cc
-  cache/CacheStore.cc
+  #cache/CacheStore.cc
+  cache/SolvStore.cc
   cache/CacheFSCK.cc
   cache/Utils.cc
 )
@@ -928,7 +929,8 @@ SET( zypp_cache_HEADERS
   cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheException.h
-  cache/CacheStore.h
+  #cache/CacheStore.h
+  cache/SolvStore.h
   cache/CacheFSCK.h
   cache/ResolvableQuery.h
   cache/Utils.h

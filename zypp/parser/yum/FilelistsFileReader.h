@@ -19,6 +19,8 @@
 
 #include "zypp/ProgressData.h"
 
+#include "zypp/parser/yum/FileReaderBase.h"
+
 namespace zypp
 {
   namespace parser
@@ -42,7 +44,7 @@ namespace zypp
    *                        bind(&SomeClass::callbackfunc, &SomeClassInstance, _1, _2));
    * \endcode
    */
-  class FilelistsFileReader : private base::NonCopyable
+  class FilelistsFileReader : FileReaderBase
   {
   public:
     /**

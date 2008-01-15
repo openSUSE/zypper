@@ -14,6 +14,7 @@
 #include "zypp/base/UserRequestException.h"
 
 #include "zypp/parser/yum/FilelistsFileReader.h"
+#include "zypp/parser/yum/FileReaderBaseImpl.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser::yum"
@@ -33,7 +34,7 @@ namespace zypp
   //
   //  CLASS NAME : FilelistsFileReader::Impl
   //
-  class FilelistsFileReader::Impl : private base::NonCopyable
+  class FilelistsFileReader::Impl  : public BaseImpl
   {
   public:
     Impl(
@@ -130,7 +131,7 @@ namespace zypp
         _filenames.clear();
 
         _resolvable->name = reader_r->getAttribute("name").asString();
-        _resolvable->arch = Arch(reader_r->getAttribute("arch").asString());
+        _resolvable->arch = reader_r->getAttribute("arch").asString();
 
         return true;
       }
@@ -138,9 +139,7 @@ namespace zypp
       // xpath: /filelists/package/version
       if (reader_r->name() == "version")
       {
-        _resolvable->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        editionStringFromAttrs( reader_r,  _resolvable->edition );
         return true;
       }
 

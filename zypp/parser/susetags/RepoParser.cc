@@ -116,7 +116,7 @@ namespace zypp
 	    idMapAdd( makeSharedIdent( ResTraits<SrcPackage>::kind,
 		                       data_r->name,
 				       data_r->edition,
-				       data_r->arch ),
+				       data_r->arch),
 		      newid );
           }
 

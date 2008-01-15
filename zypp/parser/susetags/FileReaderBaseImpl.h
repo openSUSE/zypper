@@ -36,16 +36,16 @@ namespace zypp
 
       inline std::string makeSharedIdent( ResKind kind_r,
 					  const std::string & name_r,
-					  const Edition & edition_r,
-					  const Arch & arch_r )
+					  const std::string & edition_r,
+					  const std::string & arch_r )
       {
 	std::string ret( kind_r.asString() );
 	ret += ":";
 	ret += name_r;
 	ret += "-";
-	ret += edition_r.asString();
+	ret += edition_r;
 	ret += ".";
-	ret += arch_r.asString();
+	ret += arch_r;
 	return ret;
       }
 

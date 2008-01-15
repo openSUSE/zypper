@@ -16,8 +16,10 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/data/ResolvableData.h"
 #include "zypp/base/Function.h"
-
 #include "zypp/ProgressData.h"
+
+#include "zypp/parser/yum/FileReaderBase.h"
+
 
 namespace zypp
 {
@@ -42,7 +44,7 @@ namespace zypp
    *                        bind(&SomeClass::callbackfunc, &SomeClassInstance, _1, _2));
    * \endcode
    */
-  class OtherFileReader : private base::NonCopyable
+  class OtherFileReader : FileReaderBase
   {
   public:
     /**

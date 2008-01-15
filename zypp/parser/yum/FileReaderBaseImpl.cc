@@ -81,16 +81,17 @@ namespace zypp
           // package_ptr will point to a SrcPackage from now on
           package_ptr.swap(srcpkg);
         }
-        package_ptr->arch = Arch(arch);
+        package_ptr->arch.swap(arch);
         return true;
       }
 
       // xpath: //package/version
       if (reader_r->name() == "version")
       {
-        package_ptr->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        if (reader_r->getAttribute("epoch").asString().empty());
+          package_ptr->edition += (reader_r->getAttribute("epoch").asString()+":");
+        
+        package_ptr->edition += ( reader_r->getAttribute("ver").asString() + "-" + reader_r->getAttribute("rel").asString() );
         return true;
       }
 
@@ -188,6 +189,17 @@ namespace zypp
     return true;
   }
 
+  bool FileReaderBase::BaseImpl::editionStringFromAttrs( xml::Reader & reader_r, string &edition )
+  {
+    string result;
+    if ( ! reader_r->getAttribute("epoch").asString().empty() )
+      result += (reader_r->getAttribute("epoch").asString() + ":");
+
+    result += reader_r->getAttribute("ver").asString();
+    result += ( "-" + reader_r->getAttribute("ver").asString());
+    result.swap(edition);
+    return true;
+  }
 
   // --------------( consume <format> tag )------------------------------------
 

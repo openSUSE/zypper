@@ -78,8 +78,8 @@ struct ResolvableQuery::Impl
     // see _fields definition above for the getXXX() numbers
 
     ptr->name = reader.getstring(1);
-    ptr->edition = Edition( reader.getstring(2), reader.getstring(3), reader.getint(4));
-    ptr->arch = _type_cache.archFor(reader.getint(5));
+    //ptr->edition = reader.getstring(2) reader.getstring(3), );
+    ptr->arch = _type_cache.archFor(reader.getint(5)).asString();
     ptr->kind = _type_cache.kindFor( reader.getint(6) );
     ptr->repository = reader.getint( 12 );
 

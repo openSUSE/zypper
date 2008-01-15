@@ -64,9 +64,9 @@ namespace data
       /** Name */
       std::string name;
       /** Edition */
-      Edition edition;
+      std::string edition;
       /** Architecture */
-      Arch arch;
+      std::string arch;
       /** Dependencies */
       Dependencies deps;
   };

@@ -150,7 +150,7 @@ namespace zypp
       if (reader_r->name() == "package")
       {
         if (_package && _callback
-	    && _package->arch.compatibleWith( _sysarch ))
+	    && Arch(_package->arch).compatibleWith( _sysarch ))
 	{
           _callback(handoutPackage());
 	}

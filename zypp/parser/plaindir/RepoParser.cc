@@ -87,9 +87,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
   pkg->name = header->tag_name();
 
   try  {
-    pkg->edition = Edition( header->tag_version(),
-                            header->tag_release(),
-                            header->tag_epoch());
+    pkg->edition = header->tag_epoch() + ":" + header->tag_version() + "-" +                  header->tag_release();
   }
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT( excpt_r );
@@ -102,7 +100,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 
   Arch arch;
   try {
-    pkg->arch = Arch( header->tag_arch() );
+    pkg->arch = header->tag_arch();
   }
   catch (Exception & excpt_r) {
     ZYPP_CAUGHT( excpt_r );
@@ -248,7 +246,7 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 #warning FIX creation of Package from src.rpm header
       data::Package_Ptr package = makePackageDataFromHeader( header, NULL, *it, _repositoryId );
       if (package != NULL) {
-	if (package->arch.compatibleWith(_sysarch))
+	if (Arch(package->arch).compatibleWith(_sysarch))
 	{
 	  DBG << "Adding package " << *package << endl;
 	  _consumer.consumePackage( _repositoryId, package );

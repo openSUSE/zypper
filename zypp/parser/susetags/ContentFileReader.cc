@@ -346,10 +346,10 @@ namespace zypp
 	    // ARCH.xxx tag is better than the current product arch
 	    // and still compatible with the sysarch.
 	    Arch carch( modifier );
-	    if ( Arch::compare( _pimpl->product().arch, carch ) < 0
+	    if ( Arch::compare( Arch(_pimpl->product().arch), carch ) < 0
 		 &&  carch.compatibleWith( sysarch ) )
 	    {
-	      _pimpl->product().arch = carch;
+	      _pimpl->product().arch = modifier;
 	    }
 	  }
 	  else if ( key == "DISTPRODUCT" )

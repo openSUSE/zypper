@@ -120,6 +120,8 @@ namespace zypp
     bool consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r);
 
 
+    bool editionStringFromAttrs( xml::Reader & reader_r, std::string &edition );
+
   public:
     /** Appends \a tag to \ref _tagpath. */
     void tag(const Tag tag) { _tagpath.append(tag); }
