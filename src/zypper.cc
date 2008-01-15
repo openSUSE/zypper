@@ -680,7 +680,7 @@ void Zypper::processCommandOptions()
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>        Install resolvables only from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
@@ -721,7 +721,7 @@ void Zypper::processCommandOptions()
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>              Operate only with resolvables from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>        Operate only with resolvables from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
@@ -907,10 +907,12 @@ void Zypper::processCommandOptions()
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>   Type of resolvable (%s)\n"
-      "                    Default: %s\n"
-      "-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
-      "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
+      "-t, --type <type>         Type of resolvable (%s)\n"
+      "                          Default: %s\n"
+      "-r, --repo <alias|#|URI>  List only updates from the repository specified by the alias.\n"
+      "    --best-effort         Do a 'best effort' approach to update, updates to\n"
+      "                          a lower than latest-and-greatest version are\n"
+      "                          also acceptable.\n"
     )) % "package, patch, pattern, product" % "patch");
     break;
   }
@@ -947,7 +949,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
-      "-r, --repo <alias>              Limit updates to the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>        Limit updates to the repository specified by the alias.\n"
       "    --skip-interactive          Skip interactive updates\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
@@ -975,7 +977,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>              Limit the upgrade to the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>        Limit the upgrade to the repository specified by the alias.\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
@@ -1051,7 +1053,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
     );
     break;
   }
@@ -1073,7 +1075,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
     );
     break;
   }
@@ -1096,10 +1098,11 @@ void Zypper::processCommandOptions()
         "Show full information for packages")) + "\n"
         "\n" +
       _("  Command options:") + "\n" +
-      _("-r, --repo <alias>  Work only with the repository specified by the alias.") + "\n" +
+      _("-r, --repo <alias|#|URI>  Work only with the repository specified by the alias.") + "\n" +
       boost::str(format(
-      _("-t, --type <type>   Type of resolvable (%s)\n"
-        "                    Default: %s")) % "package, patch, pattern, product" % "package") + "\n"; 
+      _("-t, --type <type>         Type of resolvable (%s)\n"
+        "                          Default: %s"))
+          % "package, patch, pattern, product" % "package") + "\n"; 
 
     break;
   }
@@ -1192,7 +1195,7 @@ void Zypper::processCommandOptions()
       "Show updates and patches in xml format\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>  Work only with updates from repository specified by alias.\n"
     );
     break;
   }
