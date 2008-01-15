@@ -29,6 +29,8 @@
 #include "zypp/ProgressData.h"
 #include "zypp/cache/Attribute.h"
 
+#include "satsolver/solvable.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -225,6 +227,7 @@ namespace zypp
 				      const data::Packagebase_Ptr & data_r );
       //@}
       public:
+
       /**
        * Appends a resolvable to the store.
        *
@@ -756,6 +759,35 @@ namespace zypp
        * be returned.
        */
       data::RecordId lookupOrAppendFileName( const std::string &name );
+
+    protected:
+
+       /**
+       * Appends a solvable to the store.
+       *
+       * You have to specify with \a kind of resolvable are you inserting
+       * and its \c _NVRA (name version release and architecture ).
+       * Optionaly you can pass a list of \c CapabilityImpl::Ptr
+       * as dependencies for the resolvable.
+       *
+       * You have to specify the RecordId for the repository owning
+       * this resolvable. Yuu can obtain it with
+       * \ref lookupOrAppendRepository
+       *
+       * You can create those \a deps using \ref capability::parse
+       * functions, or the build methods to create specific types
+       * of capabilities:
+       * \ref capability::buildVersioned for \c VersionedCap
+       * \ref capability::buildNamed for \c NamedCap
+       * etc.
+       *
+       * Once the resolvable is inserted, you will get back the id
+       * if it in the store. Which you can use for later adding
+       * other properties.
+       *
+       */
+      ::_Solvable* appendResolvable( const data::RecordId &repository_id,
+                                     const data::Resolvable_Ptr &res );
 
     protected:
       /**

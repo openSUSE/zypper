@@ -349,6 +349,32 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
   appendTranslatedStringAttribute( resolvable_id, attrResObjectDelnotify(),        data_r->delnotify );
 }
 
+::_Solvable* SolvStore::appendResolvable( const data::RecordId &repository_id,
+                                          const data::Resolvable_Ptr &res )
+{
+  Repo *repo;
+  map<RecordId, Repo*>::const_iterator it = _pimpl->_id2repo.find(repository_id);
+  if ( it == _pimpl->_id2repo.end() )
+  {
+    // throw
+  }
+  repo = it->second;
+
+  Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(repo));
+  s->evr = str2id(_pimpl->_pool, res->edition.c_str(), 1);
+//   s->provides = adddep(pool, pd, s->provides, atts, 0);
+// 
+//   s->name = str2id(pool, nvra.name.c_str(), 1);
+//   s->arch = str2id(pool, nvra.arch.c_str(), 1);
+//   s->vendor = str2id(pool, nvra.vendor.c_str(), 1);
+// 
+//   if (!s->arch)
+//     s->arch = ARCH_NOARCH;
+
+  return s;
+}
+
+
 RecordId SolvStore::appendResolvable( const RecordId &repository_id,
                                        const Resolvable::Kind &kind,
                                        const _NVRA &nvra,
@@ -544,6 +570,7 @@ RecordId SolvStore::lookupOrAppendRepository( const string &alias )
   if (it == _pimpl->_name2repoid.end())
   {
     _pimpl->_name2repoid[alias] = ++_pimpl->_last_repoid;
+    _pimpl->_id2repo[_pimpl->_last_repoid] = repo_create(_pimpl->_pool, alias.c_str());
   }
   return _pimpl->_name2repoid[alias];
 }
