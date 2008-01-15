@@ -1326,7 +1326,7 @@ Resolver::resolvePool( bool tryAllPossibilities )
 	}
 	MIL << "------SAT-Pool end------" << endl;
 #endif
-	return _satResolver->resolvePool();
+	return _satResolver->resolvePool (_extra_caps, _extra_conflicts);
     }
     
     ResolverContext_Ptr saveContext = _best_context;

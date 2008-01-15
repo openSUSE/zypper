@@ -34,6 +34,7 @@
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
+#include "zypp/CapSet.h"
 extern "C" {
 #include "satsolver/solver.h"
 #include "satsolver/pool.h"
@@ -98,7 +99,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
 
-    bool resolvePool();
+    bool resolvePool(const CapSet & requires_caps,
+		     const CapSet & conflict_caps);
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);

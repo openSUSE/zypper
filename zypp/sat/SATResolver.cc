@@ -381,7 +381,8 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
 
 bool
-SATResolver::resolvePool()
+SATResolver::resolvePool(const CapSet & requires_caps,
+			 const CapSet & conflict_caps)
 {
     SATCollectTransact info (*this);
     MIL << "SATResolver::resolvePool()" << endl;
@@ -427,6 +428,19 @@ SATResolver::resolvePool()
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(jobQueue), s->name);
     }
+
+    for (CapSet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
+	queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
+	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ) );
+	MIL << "Requires " << iter->asString() << endl;
+    }
+
+    for (CapSet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
+	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
+	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ));
+	MIL << "Conflicts " << iter->asString() << endl;	
+    }
+    
     solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     sat::Pool::instance().setDirty();
     sat::Pool::instance().prepare();
