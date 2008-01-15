@@ -77,14 +77,14 @@ namespace zypp
         Repo repo() const;
 
       public:
-        IdString        ident()    const;
+        IdString     ident()    const;
 
         ResKind      kind()     const;
         std::string  name()     const;
         Edition      edition()  const;
         Arch         arch()     const;
 
-        IdString        vendor()   const;
+        IdString     vendor()   const;
 
       public:
 
