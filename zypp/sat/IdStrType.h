@@ -29,15 +29,24 @@ namespace zypp
      *
      * Just by deriving from \ref IdStrType a class provides all
      * the operations an \ref IdStr does. (incl. conversion to string types,
-     * comparison with string types and stream output).
+     * comparison of string types and stream output).
      *
-     * To disable any comparison, declare (but do not define) \ref _doCompareC
-     * in your class. If you need a different than the default lexicographical
-     * order, write your own \ref _doCompareC. If you can provide optimized
-     * comparison against IdStr or your class itself, \b additionally provide
-     * _doCompareI, and/or _doCompareD.
+     * To disable any comparison, declare (but do not define) \ref _doCompare
+     * in your class.
+     * \code
+     * class NoCompare : : public sat::IdStrType<NoCompare>
+     * {
+     *   private:
+      *   static int _doCompare( const char * lhs,  const char * rhs );
+     *
+     * };
+     * \endcode
+     *
+     * If you need a different than the default lexicographical
+     * order, write your own \ref _doCompare.
      *
      * \code
+     *    // uses default lexicographical order
      *    class CaseCmp : public sat::IdStrType<CaseCmp>
      *    {
      *      public:
@@ -48,14 +57,19 @@ namespace zypp
      *        sat::IdStr _str;
      *    };
      *
+     *    // uses case insensitive comparison order
      *    class NoCaseCmp : public sat::IdStrType<NoCaseCmp>
      *    {
      *      public:
      *        NoCaseCmp() {}
      *        explicit NoCaseCmp( const char * cstr_r ) : _str( cstr_r )  {}
      *      private:
-     *        int _doCompareC( const char * rhs )  const
-     *        { return ::strcasecmp( _str.c_str(), rhs ); }
+     *        static int _doCompare( const char * lhs,  const char * rhs )
+     *        {
+     *          if ( lhs == rhs ) return 0;
+     *          if ( lhs && rhs ) return ::strcasecmp( lhs, rhs );
+     *          return( lhs ? 1 : -1 );
+     *        }
      *      private:
      *        friend class sat::IdStrType<NoCaseCmp>;
      *        sat::IdStr _str;
@@ -97,16 +111,43 @@ namespace zypp
         using base::SafeBool<Derived>::operator bool_type;
 
       public:
-        int compare( const Derived & rhs )     const { return self()._doCompareD( rhs ); }
-        int compare( const IdStrType & rhs )   const { return self()._doCompareD( rhs.self() ); }
-        int compare( const IdStr & rhs )       const { return self()._doCompareI( rhs ); }
-        int compare( const char * rhs )        const { return self()._doCompareC( rhs ); }
-        int compare( const std::string & rhs ) const { return self()._doCompareC( rhs.c_str() ); }
+        static int compare( const Derived & lhs,    const Derived & rhs )      { return compare( lhs.idStr(), rhs.idStr() ); }
+        static int compare( const Derived & lhs,    const IdStr & rhs )        { return compare( lhs.idStr(), rhs ); }
+        static int compare( const Derived & lhs,    const std::string & rhs )  { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const Derived & lhs,    const char * rhs )         { return Derived::_doCompare( lhs.c_str(), rhs );}
+
+        static int compare( const IdStr & lhs,       const Derived & rhs )     { return compare( lhs, rhs.idStr() ); }
+        static int compare( const IdStr & lhs,       const IdStr & rhs )       { return lhs.compareEQ( rhs ) ? 0 :
+                                                                                        Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const IdStr & lhs,       const std::string & rhs ) { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const IdStr & lhs,       const char * rhs )        { return Derived::_doCompare( lhs.c_str(), rhs ); }
+
+        static int compare( const std::string & lhs, const Derived & rhs )     { return Derived::_doCompare( lhs.c_str(), rhs.c_str() );}
+        static int compare( const std::string & lhs, const IdStr & rhs )       { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const std::string & lhs, const std::string & rhs ) { return Derived::_doCompare( lhs.c_str(), rhs.c_str() ); }
+        static int compare( const std::string & lhs, const char * rhs )        { return Derived::_doCompare( lhs.c_str(), rhs ); }
+
+        static int compare( const char * lhs,        const Derived & rhs )     { return Derived::_doCompare( lhs, rhs.c_str() );}
+        static int compare( const char * lhs,        const IdStr & rhs )       { return Derived::_doCompare( lhs, rhs.c_str() ); }
+        static int compare( const char * lhs,        const std::string & rhs ) { return Derived::_doCompare( lhs, rhs.c_str() ); }
+        static int compare( const char * lhs,        const char * rhs )        { return Derived::_doCompare( lhs, rhs ); }
+
+      public:
+        int compare( const Derived & rhs )     const { return compare( idStr(), rhs.idStr() ); }
+        int compare( const IdStrType & rhs )   const { return compare( idStr(), rhs.idStr() ); }
+        int compare( const IdStr & rhs )       const { return compare( idStr(), rhs ); }
+        int compare( const std::string & rhs ) const { return Derived::_doCompare( c_str(), rhs.c_str() ); }
+        int compare( const char * rhs )        const { return Derived::_doCompare( c_str(), rhs ); }
 
       private:
-        int _doCompareD( const Derived & rhs ) const { return self()._doCompareI( rhs.idStr() ); }
-        int _doCompareI( const IdStr & rhs )   const { return idStr().compareEQ( rhs ) ? 0 : self()._doCompareC( rhs.c_str() ); }
-        int _doCompareC( const char * rhs )    const { return idStr().compare( rhs ); }
+        static int _doCompare( const char * lhs,  const char * rhs )
+        {
+          if ( lhs == rhs ) return 0;
+          if ( lhs && rhs ) return ::strcmp( lhs, rhs );
+          return( lhs ? 1 : -1 );
+        }
+
+      private:
 
         friend base::SafeBool<Derived>::operator bool_type() const;
         bool boolTest() const { return ! empty(); }

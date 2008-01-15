@@ -1091,11 +1091,11 @@ ${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
-${zypp_sat_SRCS}
 ${zypp_ui_SRCS}
-${zypp_zypp_detail_SRCS}
 ${zypp_thread_SRCS}
 ${zypp_SRCS}
+${zypp_zypp_detail_SRCS}
+${zypp_sat_SRCS}
 ${zypp_base_SRCS}
 )
 

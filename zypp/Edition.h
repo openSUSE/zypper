@@ -79,8 +79,8 @@ namespace zypp
       /** Ctor taking edition as string. */
       explicit Edition( sat::detail::IdType id_r )   : _str( sat::IdStr(id_r).c_str() ) {}
       explicit Edition( const sat::IdStr & idstr_r ) : _str( idstr_r.c_str() ) {}
-      explicit Edition( const char * cstr_r )        : _str( cstr_r ) {}
       explicit Edition( const std::string & str_r )  : _str( str_r ) {}
+      explicit Edition( const char * cstr_r )        : _str( cstr_r ) {}
 
       /** Ctor taking \a version_r, \a release_r and optional \a epoch_r */
       Edition( const std::string & version_r,
@@ -97,25 +97,12 @@ namespace zypp
       epoch_t epoch() const;
 
       /** Version */
-      const std::string & version() const;
+      std::string version() const;
 
       /** Release */
-      const std::string & release() const;
+      std::string release() const;
 
     public:
-      /** */
-      using sat::IdStrType<Edition>::compare;
-
-      /** Compare two Editions returning <tt>-1,0,1</tt>.
-       * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>.
-       *
-       * \attention An empty version or release string is not treated
-       * specialy. It's the least possible value. If you want an empty
-       * string treated as \c ANY, use \ref match.
-       */
-      static int compare( const Edition & lhs, const Edition & rhs )
-      { return lhs.compare( rhs ); }
-
       /** \ref compare functor.
        * \see \ref RelCompare.
        */
@@ -127,20 +114,37 @@ namespace zypp
       typedef Range<Edition> CompareRange;
 
     public:
-      /** Match two Editions returning <tt>-1,0,1</tt>, treating empty
+      /** \name Match two Editions
+       *  Match two Editions returning <tt>-1,0,1</tt>, treating empty
        *  version/release strings as \c ANY.
        */
-      int match( const Edition & rhs )     const { return _doMatchI( rhs.idStr() ); }
-      int match( const sat::IdStr & rhs )  const { return _doMatchI( rhs ); }
-      int match( const char * rhs )        const { return _doMatchC( rhs ); }
-      int match( const std::string & rhs ) const { return _doMatchC( rhs.c_str() ); }
+      //@{
+      static int match( const Edition & lhs,    const Edition & rhs )      { return match( lhs.idStr(), rhs.idStr() ); }
+      static int match( const Edition & lhs,    const IdStr & rhs )        { return match( lhs.idStr(), rhs ); }
+      static int match( const Edition & lhs,    const std::string & rhs )  { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const Edition & lhs,    const char * rhs )         { return _doMatch( lhs.c_str(), rhs );}
 
-      /** Match two Editions returning <tt>-1,0,1</tt>, treating empty
-       *  version/release strings as \c ANY.
-       * \return <tt>-1,0,1</tt> if editions match <tt>\<,==,\></tt>.
-       */
-      static int match( const Edition & lhs, const Edition & rhs )
-      { return lhs.match( rhs ); }
+      static int match( const IdStr & lhs,       const Edition & rhs )     { return match( lhs, rhs.idStr() ); }
+      static int match( const IdStr & lhs,       const IdStr & rhs )       { return lhs.compareEQ( rhs ) ? 0 :
+                                                                                    _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const IdStr & lhs,       const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const IdStr & lhs,       const char * rhs )        { return _doMatch( lhs.c_str(), rhs ); }
+
+      static int match( const std::string & lhs, const Edition & rhs )     { return _doMatch( lhs.c_str(), rhs.c_str() );}
+      static int match( const std::string & lhs, const IdStr & rhs )       { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const std::string & lhs, const std::string & rhs ) { return _doMatch( lhs.c_str(), rhs.c_str() ); }
+      static int match( const std::string & lhs, const char * rhs )        { return _doMatch( lhs.c_str(), rhs ); }
+
+      static int match( const char * lhs,        const Edition & rhs )     { return _doMatch( lhs, rhs.c_str() );}
+      static int match( const char * lhs,        const IdStr & rhs )       { return _doMatch( lhs, rhs.c_str() ); }
+      static int match( const char * lhs,        const std::string & rhs ) { return _doMatch( lhs, rhs.c_str() ); }
+      static int match( const char * lhs,        const char * rhs )        { return _doMatch( lhs, rhs ); }
+
+      int match( const Edition & rhs )     const { return match( idStr(), rhs.idStr() ); }
+      int match( const IdStr & rhs )       const { return match( idStr(), rhs ); }
+      int match( const std::string & rhs ) const { return _doMatch( c_str(), rhs.c_str() ); }
+      int match( const char * rhs )        const { return _doMatch( c_str(), rhs ); }
+      //@}
 
       /** \ref match functor.
        * \see \ref RelCompare.
@@ -157,9 +161,8 @@ namespace zypp
       typedef Range<Edition, Match> MatchRange;
 
     private:
-      int _doCompareC( const char * rhs )     const;
-      int _doMatchI( const sat::IdStr & rhs ) const { return idStr().compareEQ( rhs ) ? 0 : _doMatchC( rhs.c_str() ); }
-      int _doMatchC( const char * rhs )       const;
+      static int _doCompare( const char * lhs,  const char * rhs );
+      static int _doMatch( const char * lhs,  const char * rhs );
 
     private:
       friend class sat::IdStrType<Edition>;

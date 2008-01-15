@@ -74,7 +74,7 @@ namespace zypp
     return 0;
   }
 
-  const std::string & Edition::version() const
+  std::string Edition::version() const
   {
     const char * str( c_str() );
     const char * sep = str;
@@ -90,7 +90,7 @@ namespace zypp
     return str;
   }
 
-  const std::string & Edition::release() const
+  std::string Edition::release() const
   {
     const char * str( c_str() );
     const char * sep = ::strrchr( str, '-' );
@@ -100,16 +100,18 @@ namespace zypp
     return std::string();
   }
 
-  int Edition::_doCompareC( const char * rhs ) const
+  int Edition::_doCompare( const char * lhs,  const char * rhs )
   {
-    return ::evrcmp_str( sat::Pool::instance().get(),
-                         c_str(), rhs, EVRCMP_COMPARE );
+    if ( lhs == rhs ) return 0;
+    if ( lhs && rhs ) return ::evrcmp_str( sat::Pool::instance().get(), lhs, rhs, EVRCMP_COMPARE );
+    return( lhs ? 1 : -1 );
   }
 
-  int Edition::_doMatchC( const char * rhs )  const
+  int Edition::_doMatch( const char * lhs,  const char * rhs )
   {
-    return ::evrcmp_str( sat::Pool::instance().get(),
-                         c_str(), rhs, EVRCMP_MATCH );
+    if ( lhs == rhs ) return 0;
+    if ( lhs && rhs ) return ::evrcmp_str( sat::Pool::instance().get(), lhs, rhs, EVRCMP_MATCH );
+    return( lhs ? 1 : -1 );
   }
 
   /////////////////////////////////////////////////////////////////
