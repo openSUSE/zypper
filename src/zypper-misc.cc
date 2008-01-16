@@ -1505,16 +1505,30 @@ void solve_and_commit (Zypper & zypper)
 
       if (!confirm_licenses(zypper)) return;
 
-      cerr_v << _("committing") << endl;
-      MIL << "committing..." << endl;
-
       try {
         //! \todo fix the media reporting correctly
         gData.show_media_progress_hack = true;
 
-        ZYppCommitResult result = God->commit(
+        cerr_v << _("committing"); MIL << "committing...";
+
+        ZYppCommitResult result;
+        if (copts.count("dry-run"))
+        {
+          cerr_v << " " << _("(dry run)") << endl; MIL << "(dry run)";
+
+          result = God->commit(ZYppCommitPolicy().dryRun(true));
+        }
+        else
+        {
+          cerr_v << endl; // endl after 'committing'
+
+          result = God->commit(
             ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-        was_installed = true;
+
+          was_installed = true;
+        }
+
+        MIL << endl << "DONE" << endl;
 
         gData.show_media_progress_hack = false;
 
