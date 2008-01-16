@@ -865,7 +865,7 @@ namespace zypp
   {
     Pathname name = _pimpl->options.repoCachePath;
     RepoStatus status;
-    Pathname base = _pimpl->options.repoCachePath + name + Pathname(info.alias());
+    Pathname base = _pimpl->options.repoCachePath + Pathname(info.alias());
     Pathname solvfile = base.extend(".solv");
     Pathname cookiefile = base.extend(".cookie");
 
@@ -890,7 +890,7 @@ namespace zypp
 
   void RepoManager::setCacheStatus( const string &alias, const RepoStatus &status )
   {
-    Pathname base = _pimpl->options.repoCachePath + alias + Pathname(alias);
+    Pathname base = _pimpl->options.repoCachePath + alias;
     Pathname cookiefile = base.extend(".cookie");
 
     std::ofstream file(cookiefile.c_str());

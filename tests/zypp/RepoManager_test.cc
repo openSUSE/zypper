@@ -85,19 +85,35 @@ void repomanager_test( const string &dir )
   // the file should not exist anymore
   BOOST_CHECK( ! PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
   
-  // for now skip creation
-  return;
-  
-  RepoInfo repo(repos.front());
 
-  // we have no metadata yet so this should throw
-  BOOST_CHECK_THROW( manager.buildCache(repo),
-                     RepoMetadataException );
+  // let test cache creation
+
+  RepoInfo repo;
+  repo.setAlias("foo");
+  //Url repourl("dir:" + string(TESTS_SRC_DIR) + "/repo/yum/data/10.2-updates-subset");
+  Url repourl("dir:/mounts/dist/install/stable-x86/suse");
+  //BOOST_CHECK_MESSAGE(0, repourl.asString());
+  repo.setBaseUrl(repourl);
+
+  KeyRingTestReceiver keyring_callbacks;
+  KeyRingTestSignalReceiver receiver;
+  
+  // disable sgnature checking
+  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptVerFailed(true);
+  keyring_callbacks.answerAcceptUnknownKey(true);
 
   manager.refreshMetadata(repo);
   
   BOOST_CHECK_MESSAGE( ! manager.isCached(repo),
                        "Repo is not yet cached" );
+  manager.buildCache(repo);
+
+  // we have no metadata yet so this should throw
+  //BOOST_CHECK_THROW( manager.buildCache(repo),
+  //                   RepoMetadataException );
+
+  return;
 
   Repository repository;
 
@@ -107,9 +123,14 @@ void repomanager_test( const string &dir )
 
   MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
   manager.buildCache(repo);
+
+  // the solv file should exists now
+  Pathname solvfile = (opts.repoCachePath + repo.alias()).extend(".solv");
+  BOOST_CHECK_MESSAGE( !PathInfo(solvfile).isExist(), "Solv file is created after caching");
+
   repository = manager.createFromCache(repo);
   
-   BOOST_CHECK_MESSAGE( manager.isCached(repo),
+  BOOST_CHECK_MESSAGE( manager.isCached(repo),
                        "Repo is cached" );
 
   ResStore store = repository.resolvables();
