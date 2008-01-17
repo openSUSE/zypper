@@ -488,7 +488,16 @@ namespace zypp
 	for ( RepoIndex::FileChecksumMap::const_iterator it = _repoIndex->metaFileChecksums.begin();
 	      it != _repoIndex->metaFileChecksums.end(); ++it )
         {
-          if ( isPatternFile( it->first ) )
+	  Pathname inputfile;
+	  inputfile = "";
+	  
+	  if ( it->first == "patterns.pat"
+	       || it->first == "patterns.pat.gz" )
+	  {
+	    // read all patterns in one go
+	    inputfile = getOptionalFile( _descrdir / it->first, false /*filename already contains .gz */ );
+	  }
+	  else if ( isPatternFile( it->first ) )
           {
             // *** see also zypp/repo/susetags/Downloader.cc ***
 
@@ -525,16 +534,16 @@ namespace zypp
                 // keep .pat file if it doesn't contain an recognizable arch
               }
             }
+	    inputfile = getOptionalFile( _descrdir / it->first, false /*filename already contains .gz */ );
 
-	    Pathname inputfile( getOptionalFile( _descrdir / it->first, false /*filename already contains .gz */ ) );
-	    if ( ! inputfile.empty() )
-	    {
-	      PatternFileReader reader;
-	      reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
-              CombinedProgressData progress( _ticks, PathInfo(inputfile).size()  );
-	      reader.parse( inputfile, progress );
-	    }
           }
+	  if ( ! inputfile.empty() )
+	  {
+	    PatternFileReader reader;
+	    reader.setConsumer( bind( &Impl::consumePat, this, _1 ) );
+            CombinedProgressData progress( _ticks, PathInfo(inputfile).size()  );
+	    reader.parse( inputfile, progress );
+	  }
         }
 
         // Done

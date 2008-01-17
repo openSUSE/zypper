@@ -120,6 +120,11 @@ void Downloader::download( MediaSetAccess &media,
         }
       }
     }
+    else if ( it->first == "patterns.pat"
+              || it->first == "patterns.pat.gz" )
+    {
+      // take all patterns in one go
+    }
     else if ( str::endsWith( it->first, ".pat" ) 
               || str::endsWith( it->first, ".pat.gz" ) )
     {

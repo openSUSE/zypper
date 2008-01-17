@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jan 17 12:03:10 CET 2008 - kkaempf@suse.de
+
+- support 'patterns.pat' and 'patterns.pat.gz' to read all
+  patterns in one go.
+- rev 8309
+
+-------------------------------------------------------------------
 Tue Jan 15 14:56:21 CET 2008 - lslezak@suse.cz
 
 - added RpmDb::removePubkey(), call it from
