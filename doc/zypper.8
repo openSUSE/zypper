@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.9.5" "zypper" "System Tools"
+.TH "zypper" "8" "0.9.6" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -122,6 +122,10 @@ a dependency problem and prompt the user to resolve it manually.
 
 The default value is 'on' in the interactive mode and 'off' in the
 non-interactive mode. If this option is specified, it takes the preference.
+.TP
+.I \-D, \-\-dry\-run
+Test the installation, do not actually install any package. This option will
+add the \-\-test option to the rpm commands run by the install command.
 
 .TP
 .B source-install (si) <name> ...
@@ -170,6 +174,10 @@ Create solver test case for debugging. See the install command for details.
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
 with unfulfilled requirements.
+.TP
+.I \-D, \-\-dry\-run
+Test the removal of packages, do not actually remove anything. This option will
+add the \-\-test option to the rpm commands run by the remove command.
 
 .TP
 .B update (up) [options]
@@ -198,6 +206,10 @@ Create solver test case for debugging. See the install command for details.
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
 with unfulfilled requirements.
+.TP
+.I \-D, \-\-dry\-run
+Test the update, do not actually install or update any package. This option will
+add the \-\-test option to the rpm commands run by the update command.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
@@ -220,7 +232,10 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 .TP
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
-
+.TP
+.I \-D, \-\-dry\-run
+Test the upgrade, do not actually install or update any package. This option will
+add the \-\-test option to the rpm commands run by the dist-upgrade command.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...

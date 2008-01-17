@@ -666,7 +666,7 @@ void Zypper::processCommandOptions()
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
-      {"dry-run",                   no_argument,       0, 'd'},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -691,7 +691,7 @@ void Zypper::processCommandOptions()
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
-      "-d, --dry-run                   Test the installation, do not actually install\n"
+      "-D, --dry-run                   Test the installation, do not actually install\n"
     )) % "package, patch, pattern, product" % "package");
     break;
   }
@@ -710,7 +710,7 @@ void Zypper::processCommandOptions()
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
       {"force-resolution", required_argument, 0, 'R'},
-      {"dry-run",    no_argument,       0, 'd'},
+      {"dry-run",    no_argument,       0, 'D'},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -731,7 +731,7 @@ void Zypper::processCommandOptions()
       "-C, --capability                Select resolvables by capability\n"
       "    --debug-solver              Create solver test case for debugging\n"  
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
-      "-d, --dry-run                   Test the removal, do not actually remove\n"
+      "-D, --dry-run                   Test the removal, do not actually remove\n"
     )) % "package, patch, pattern, product" % "package");
     break;
   }
@@ -938,7 +938,7 @@ void Zypper::processCommandOptions()
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
-      {"dry-run",                   no_argument,       0, 'd'},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -961,7 +961,7 @@ void Zypper::processCommandOptions()
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
-      "-d, --dry-run                   Test the update, do not actually update\n"
+      "-D, --dry-run                   Test the update, do not actually update\n"
     )) % "package, patch, pattern, product" % "patch");
     break;
   }
@@ -972,7 +972,7 @@ void Zypper::processCommandOptions()
       {"repo",                      required_argument, 0, 'r'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0, 0},
-      {"dry-run",                   no_argument,       0, 'd'},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -988,7 +988,7 @@ void Zypper::processCommandOptions()
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
-      "-d, --dry-run                   Test the upgrade, do not actually upgrade\n"
+      "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
     );
     break;
   }
