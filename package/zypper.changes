@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 17 14:22:56 CET 2008 - jkupec@suse.cz
+
+- --dry-run for in, rm, up, and dup (#350736)
+- r8306:8311
+
+-------------------------------------------------------------------
 Mon Jan 14 16:14:22 CET 2008 - jkupec@suse.cz
 
 - ability to install plain RPM files whose locations are specified
