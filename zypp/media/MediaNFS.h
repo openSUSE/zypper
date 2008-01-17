@@ -15,9 +15,13 @@
 #include "zypp/media/MediaHandler.h"
 
 /**
- * Value of nfs mount minor timeout in tenths of a second.
+ * Value of NFS mount minor timeout (passed to <code>timeo</code> option
+ * of the NFS mount) in tenths of a second.
+ *
+ * The value of 300 should give a major timeout after 3.5 minutes
+ * for UDP and 1.5 minutes for TCP. (#350309)
  */
-#define NFS_MOUNT_TIMEOUT 10
+#define NFS_MOUNT_TIMEOUT 300
 
 namespace zypp {
   namespace media {
