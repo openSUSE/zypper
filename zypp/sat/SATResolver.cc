@@ -166,17 +166,10 @@ SATResolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 }
 
 void
-SATResolver::addPoolItemToLockUninstalled (PoolItem_Ref item)
+SATResolver::addPoolItemToLock (PoolItem_Ref item)
 {
-    _items_to_lockUninstalled.push_back (item);
-    _items_to_lockUninstalled.unique ();
-}
-
-void
-SATResolver::addPoolItemToKepp (PoolItem_Ref item)
-{
-    _items_to_keep.push_back (item);
-    _items_to_keep.unique ();
+    _items_to_lock.push_back (item);
+    _items_to_lock.unique ();
 }
 
 
@@ -333,17 +326,11 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	}
 
         if (status.isLocked()
-            && status.isUninstalled()) {
-            // This item could be selected by solver in a former run. Now it
-            // is locked. So we will have to evaluate a new solver run.
-            resolver.addPoolItemToLockUninstalled (item);
+            || (status.isKept()
+		&& !by_solver)) {
+            resolver.addPoolItemToLock (item);
         }
 
-        if (status.isKept()
-            && !by_solver) {
-	    // collecting all keep states
-	    resolver.addPoolItemToKepp (item);
-	}
 
 	return true;
     }
@@ -397,6 +384,7 @@ SATResolver::resolvePool(const CapSet & requires_caps,
     queue_init( &jobQueue );
     _items_to_install.clear();
     _items_to_remove.clear();
+    _items_to_lock.clear();    
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
@@ -439,6 +427,20 @@ SATResolver::resolvePool(const CapSet & requires_caps,
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
 	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ));
 	MIL << "Conflicts " << iter->asString() << endl;	
+    }
+
+    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
+	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
+	Id id = iter->satSolvable().id();
+	if (iter->status().isInstalled()) {
+	    MIL << "Lock installed item " << *iter << " with the string ID: " << s->name << endl;
+	    queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );	    
+	    queue_push( &(jobQueue), id );
+	} else {
+	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << s->name << endl;
+	    queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(jobQueue), id );
+	}
     }
     
     solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
