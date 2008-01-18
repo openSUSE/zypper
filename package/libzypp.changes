@@ -3,6 +3,7 @@ Fri Jan 18 12:19:09 CET 2008 - coolo@suse.de
 
 - always buildrequire openssl-devel 
 - replacing strange utf-8 chars in changelog
+- revision 8317
 
 -------------------------------------------------------------------
 Thu Jan 17 15:07:52 CET 2008 - jkupec@suse.cz
