@@ -18,13 +18,9 @@
 #include <boost/logic/tribool.hpp>
 
 #include "zypp/base/Logger.h"
-#include "zypp/CapFactory.h"
 #include "zypp/Url.h"
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/ImplConnect.h"
-#include "zypp/detail/ResObjectImplIf.h"
-#include "zypp/detail/SelectionImplIf.h"
 #include "zypp/repo/ScriptProvider.h"
 
 #include "serialize.h"
@@ -125,18 +121,20 @@ string toXML( const Arch &arch )
 template<>
 string toXML( const Capability &cap )
 {
+#warning FIX WRITING AND READING CAPABILITY (incl old format)
   stringstream out;
-  CapFactory factory;
+  //CapFactory factory;
+  //out << "<capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</capability>" << endl;
+  out << "<capability>" <<  cap << "</capability>" << endl; // wrong !
 
-  out << "<capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</capability>" << endl;
   return out.str();
 }
 
 template<>
-string toXML( const CapSet &caps )
+string toXML( const Capabilities &caps )
 {
   stringstream out;
-  CapSet::iterator it = caps.begin();
+  Capabilities::const_iterator it = caps.begin();
   for ( ; it != caps.end(); ++it)
   {
     out << toXML((*it));
@@ -190,16 +188,15 @@ template<>
 string toXML( const ResObject::constPtr &obj )
 {
   stringstream out;
-
+#warning FIX WRITING AND READING TRANSLATED TEXTS
   // access implementation
-  detail::ResImplTraits<ResObject::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(pipp->summary(), "summary");
-  out << translatedTextToXML(pipp->description(), "description");
+  //detail::ResImplTraits<ResObject::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
+  //out << translatedTextToXML(pipp->summary(), "summary");
+  //out << translatedTextToXML(pipp->description(), "description");
 
-  out << translatedTextToXML(pipp->insnotify(), "install-notify");
-  out << translatedTextToXML(pipp->delnotify(), "delete-notify");
-  //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << endl;
-  out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
+  //out << translatedTextToXML(pipp->insnotify(), "install-notify");
+  //out << translatedTextToXML(pipp->delnotify(), "delete-notify");
+  //out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << endl;
   out << "  <size>" << static_cast<ByteCount::SizeType>(obj->size()) << "</size>" << endl;
   out << "  <archive-size>" << static_cast<ByteCount::SizeType>(obj->downloadSize()) << "</archive-size>" << endl;
@@ -335,13 +332,14 @@ string toXML( const Product::constPtr &obj )
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
   out << "<product version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->type()) << "\">" << endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
-  #warning "FIXME description and displayname of products"
+#warning "FIXME description and displayname of products"
 
   out << toXML(static_cast<ResObject::constPtr>(obj));
 
+#warning FIX WRITING AND READING TRANSLATED TEXTS
   // access implementation
-  detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(pipp->shortName(), "shortname");
+//   detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
+//   out << translatedTextToXML(pipp->shortName(), "shortname");
 
   out << "  <distribution-name>" << xml_escape(obj->distributionName()) << "</distribution-name>" << endl;
   out << "  <distribution-edition>" << xml_escape(obj->distributionEdition().asString()) << "</distribution-edition>" << endl;

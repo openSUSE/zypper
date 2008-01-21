@@ -13,10 +13,7 @@ ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD CO
 SET( zypp_SRCS
   Atom.cc
   ByteCount.cc
-  Capability.cc
-  CapFactory.cc
   CapMatch.cc
-  CapSet.cc
   CheckSum.cc
   Date.cc
   Dep.cc
@@ -29,7 +26,6 @@ SET( zypp_SRCS
   Range.cc
   Rel.cc
   ResObject.cc
-  SystemResObject.cc
   Resolvable.cc
   ResStatus.cc
   ResStore.cc
@@ -99,13 +95,11 @@ SET( zypp_HEADERS
   ByteCount.h
   Callback.h
   CapAndItem.h
-  CapFactory.h
   CapFilters.h
   CapMatch.h
   CapMatchHelper.h
-  CapSet.h
-  CapSetFwd.h
   Capability.h
+  Capabilities.h
   Changelog.h
   CheckSum.h
   CountryCode.h
@@ -166,7 +160,6 @@ SET( zypp_HEADERS
   SilentCallbacks.h
   SrcPackage.h
   SysContent.h
-  SystemResObject.h
   Target.h
   TmpPath.h
   TranslatedText.h
@@ -261,40 +254,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/base
 )
 
-SET( zypp_capability_SRCS
-  capability/CapTraits.cc
-  capability/CapabilityImpl.cc
-  capability/FileCap.cc
-  capability/HalCap.cc
-  capability/ModaliasCap.cc
-  capability/FilesystemCap.cc
-  capability/NamedCap.cc
-  capability/NullCap.cc
-  capability/SplitCap.cc
-  capability/VersionedCap.cc
-)
-
-SET( zypp_capability_HEADERS
-  capability/CapTraits.h
-  capability/Capabilities.h
-  capability/CapabilityImpl.h
-  capability/ConditionalCap.h
-  capability/FileCap.h
-  capability/HalCap.h
-  capability/ModaliasCap.h
-  capability/FilesystemCap.h
-  capability/NamedCap.h
-  capability/NullCap.h
-  capability/OrCap.h
-  capability/SplitCap.h
-  capability/VersionedCap.h
-)
-
-INSTALL(  FILES
-  ${zypp_capability_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/capability
-)
-
 SET( zypp_data_SRCS
   data/ResolvableData.cc
   data/RecordId.cc
@@ -310,60 +269,6 @@ SET( zypp_data_HEADERS
 INSTALL(  FILES
   ${zypp_data_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/data
-)
-
-SET( zypp_detail_SRCS
-  detail/AtomImpl.cc
-  detail/AtomImplIf.cc
-  detail/MessageImpl.cc
-  detail/MessageImplIf.cc
-  detail/PackageImpl.cc
-  detail/PackageImplIf.cc
-  detail/PatchImpl.cc
-  detail/PatchImplIf.cc
-  detail/PatternImpl.cc
-  detail/PatternImplIf.cc
-  detail/ProductImpl.cc
-  detail/ProductImplIf.cc
-  detail/ResObjectImplIf.cc
-  detail/ResolvableImpl.cc
-  detail/ScriptImpl.cc
-  detail/ScriptImplIf.cc
-  detail/SelectionImpl.cc
-  detail/SelectionImplIf.cc
-  detail/SrcPackageImpl.cc
-  detail/SrcPackageImplIf.cc
-)
-
-SET( zypp_detail_HEADERS
-  detail/AtomImpl.h
-  detail/AtomImplIf.h
-  detail/ImplConnect.h
-  detail/MessageImpl.h
-  detail/MessageImplIf.h
-  detail/PackageImpl.h
-  detail/PackageImplIf.h
-  detail/PatchImpl.h
-  detail/PatchImplIf.h
-  detail/PatternImpl.h
-  detail/PatternImplIf.h
-  detail/ProductImpl.h
-  detail/ProductImplIf.h
-  detail/ResImplTraits.h
-  detail/ResObjectFactory.h
-  detail/ResObjectImplIf.h
-  detail/ResolvableImpl.h
-  detail/ScriptImpl.h
-  detail/ScriptImplIf.h
-  detail/SelectionImpl.h
-  detail/SelectionImplIf.h
-  detail/SrcPackageImpl.h
-  detail/SrcPackageImplIf.h
-)
-
-INSTALL(  FILES
-  ${zypp_detail_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/detail
 )
 
 SET( zypp_media_SRCS
@@ -580,7 +485,6 @@ SET( zypp_pool_SRCS
   pool/GetResolvablesToInsDel.cc
   pool/PoolImpl.cc
   pool/PoolStats.cc
-  pool/Res2Sat.cc
 )
 
 SET( zypp_pool_HEADERS
@@ -768,7 +672,6 @@ SET( zypp_target_rpm_SRCS
   target/rpm/RpmDb.cc
   target/rpm/RpmException.cc
   target/rpm/RpmHeader.cc
-  target/rpm/RpmPackageImpl.cc
   target/rpm/librpmDb.cc
   target/rpm/librpmDb.cv3.cc
 )
@@ -779,7 +682,6 @@ SET( zypp_target_rpm_HEADERS
   target/rpm/RpmDb.h
   target/rpm/RpmException.h
   target/rpm/RpmHeader.h
-  target/rpm/RpmPackageImpl.h
   target/rpm/librpm.h
   target/rpm/librpmDb.h
 )
@@ -809,31 +711,6 @@ SET( zypp_target_store_HEADERS
 INSTALL(  FILES
   ${zypp_target_store_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/store
-)
-
-SET( zypp_target_store_xml_SRCS
-  target/store/xml/XMLAtomImpl.cc
-  target/store/xml/XMLMessageImpl.cc
-  target/store/xml/XMLPatchImpl.cc
-  target/store/xml/XMLPatternImpl.cc
-  target/store/xml/XMLProductImpl.cc
-  target/store/xml/XMLScriptImpl.cc
-  target/store/xml/XMLSelectionImpl.cc
-)
-
-SET( zypp_target_store_xml_HEADERS
-  target/store/xml/XMLAtomImpl.h
-  target/store/xml/XMLMessageImpl.h
-  target/store/xml/XMLPatchImpl.h
-  target/store/xml/XMLPatternImpl.h
-  target/store/xml/XMLProductImpl.h
-  target/store/xml/XMLScriptImpl.h
-  target/store/xml/XMLSelectionImpl.h
-)
-
-INSTALL(  FILES
-  ${zypp_target_store_xml_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/store/xml
 )
 
 SET( zypp_thread_SRCS
@@ -1003,26 +880,10 @@ INSTALL( FILES
 
 SET( zypp_repo_cached_SRCS
   repo/cached/RepoImpl.cc
-  repo/cached/PackageImpl.cc
-  repo/cached/SrcPackageImpl.cc
-  repo/cached/PatchImpl.cc
-  repo/cached/PatternImpl.cc
-  repo/cached/ProductImpl.cc
-  repo/cached/MessageImpl.cc
-  repo/cached/ScriptImpl.cc
-  repo/cached/AtomImpl.cc
 )
 
 SET( zypp_repo_cached_HEADERS
   repo/cached/RepoImpl.h
-  repo/cached/PackageImpl.h
-  repo/cached/SrcPackageImpl.h
-  repo/cached/PatchImpl.h
-  repo/cached/PatternImpl.h
-  repo/cached/ProductImpl.h
-  repo/cached/MessageImpl.h
-  repo/cached/ScriptImpl.h
-  repo/cached/AtomImpl.h
 )
 
 SET( zypp_repo_yum_SRCS
@@ -1043,32 +904,7 @@ SET( zypp_repo_susetags_HEADERS
   repo/susetags/Downloader.h
 )
 
-
-SET( zypp_repo_data_SRCS
-  repo/memory/ScriptImpl.cc
-  repo/memory/MessageImpl.cc
-  repo/memory/PackageImpl.cc
-  repo/memory/PatternImpl.cc
-  repo/memory/ProductImpl.cc
-  repo/memory/PatchImpl.cc
-  repo/memory/RepoImpl.cc
-  repo/memory/AtomImpl.cc
-  repo/memory/SrcPackageImpl.cc
-)
-
-SET( zypp_repo_data_HEADERS
-  repo/memory/PackageImpl.h
-  repo/memory/PatternImpl.h
-  repo/memory/ProductImpl.h
-  repo/memory/PatchImpl.h
-  repo/memory/RepoImpl.h
-  repo/memory/AtomImpl.h
-  repo/memory/SrcPackageImpl.h
-)
-
 SET( zypp_lib_SRCS
-${zypp_detail_SRCS}
-${zypp_capability_SRCS}
 ${zypp_cache_SRCS}
 ${zypp_cache_sqlite3x_SRCS}
 ${zypp_pool_SRCS}
@@ -1078,7 +914,6 @@ ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
 ${zypp_parser_plaindir_SRCS}
 ${zypp_parser_SRCS}
-${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
@@ -1087,13 +922,12 @@ ${zypp_repo_cached_SRCS}
 ${zypp_repo_yum_SRCS}
 ${zypp_repo_susetags_SRCS}
 ${zypp_repo_data_SRCS}
-${zypp_target_store_xml_SRCS}
 ${zypp_target_store_SRCS}
 ${zypp_target_rpm_SRCS}
 ${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
-${zypp_solver_detail_SRCS}
+#${zypp_solver_detail_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_thread_SRCS}
 ${zypp_SRCS}
@@ -1103,7 +937,6 @@ ${zypp_base_SRCS}
 )
 
 SET( zypp_lib_HEADERS
-${zypp_target_store_xml_HEADERS}
 ${zypp_target_rpm_HEADERS}
 ${zypp_parser_tagfile_HEADERS}
 ${zypp_parser_susetags_HEADERS}
@@ -1111,12 +944,10 @@ ${zypp_parser_yum_HEADERS}
 ${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
 ${zypp_parser_HEADERS}
-${zypp_capability_HEADERS}
 ${zypp_cache_HEADERS}
 ${zypp_cache_sqlite3x_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_parser_xmlstore_HEADERS}
-${zypp_data_HEADERS}
 ${zypp_media_HEADERS}
 ${zypp_target_hal_HEADERS}
 ${zypp_media_proxyinfo_HEADERS}
@@ -1132,7 +963,6 @@ ${zypp_repo_HEADERS}
 ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
-${zypp_detail_HEADERS}
 ${zypp_pool_HEADERS}
 )
 
@@ -1151,7 +981,6 @@ ENDMACRO( SET_LOGGROUP )
 SET_LOGGROUP( "zypp" ${zypp_lib_SRCS} )
 
 # override some defaults
-SET_LOGGROUP( "xmlstore" ${zypp_target_store_xml_SRCS} )
 SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_rpm_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
@@ -1178,7 +1007,6 @@ SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_modalias_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_detail_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_pool_SRCS} )
 
 

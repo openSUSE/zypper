@@ -35,7 +35,7 @@
 
 /-*/
 
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/capability/SplitCap.h"
 
 #include "zypp/base/Logger.h"
@@ -444,8 +444,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     MIL << "installed " << installed << ", candidate " << candidate << endl;
 
     // remember any splitprovides to packages actually installed.
-    CapSet caps = candidate->dep (Dep::PROVIDES);
-    for (CapSet::iterator cit = caps.begin(); cit != caps.end(); ++cit ) {
+    Capabilities caps = candidate->dep (Dep::PROVIDES);
+    for (Capabilities::iterator cit = caps.begin(); cit != caps.end(); ++cit ) {
 	if (isKind<capability::SplitCap>( *cit ) ) {
 
 	    capability::CapabilityImpl::SplitInfo splitinfo = capability::CapabilityImpl::getSplitInfo( *cit );
@@ -824,10 +824,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	// Checking if the selected provider depends on language, if yes try to find out the
 	// correct language package
 	bool requested_locale_match = false;
-	CapSet freshens( guess->dep( Dep::FRESHENS ) );
+	Capabilities freshens( guess->dep( Dep::FRESHENS ) );
 
 	// is this a language package ?
-	for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+	for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
 	    if (cit->refers() == ResTraits<Language>::kind) {
 		requested_locale_match = true;
 		break;
@@ -856,7 +856,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
 		    // try to find a match of the locale freshens with one of the requested locales
 
-		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+		    for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
 			if (cit->refers() == ResTraits<Language>::kind) {
 			    string loc = cit->index();
 			    MIL << "Look for language fallback " << loc << ":" << item << endl;

@@ -20,7 +20,7 @@
  */
 
 #include "zypp/CapFactory.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/CapMatch.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"

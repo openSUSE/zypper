@@ -13,7 +13,7 @@
 #define ZYPP_CAPMATCH_H
 
 #include <iosfwd>
-
+#include "zypp/base/Deprecated.h"
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -32,9 +32,9 @@ namespace zypp
    *   ( !CapMatch::irrelevant )     == CapMatch::irrelevant // true
    * \endcode
   */
-  class CapMatch
+  class ZYPP_DEPRECATED CapMatch
   {
-    enum Result { NOMATCH, MATCH, IRRELEVANT };
+    enum ZYPP_DEPRECATED Result { NOMATCH, MATCH, IRRELEVANT };
 
   public:
 
@@ -42,9 +42,9 @@ namespace zypp
     : _result( val_r ? MATCH : NOMATCH )
     {}
 
-    static const CapMatch yes;
-    static const CapMatch no;
-    static const CapMatch irrelevant;
+    static ZYPP_DEPRECATED const CapMatch yes;
+    static ZYPP_DEPRECATED const CapMatch no;
+    static ZYPP_DEPRECATED const CapMatch irrelevant;
 
     friend bool operator==( const CapMatch & lhs, const CapMatch & rhs )
     { return lhs._result == rhs._result; }

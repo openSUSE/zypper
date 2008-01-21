@@ -54,7 +54,7 @@ namespace zypp
     typedef pool::PoolTraits::const_iterator	         const_iterator;
     typedef pool::PoolTraits::byName_iterator            byName_iterator;
     typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-    typedef pool::PoolTraits::AdditionalCapSet		 AdditionalCapSet;
+    typedef pool::PoolTraits::AdditionalCapabilities		 AdditionalCapabilities;
     typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
   public:
@@ -69,12 +69,6 @@ namespace zypp
      * Dependencies).
     */
     const SerialNumber & serial() const;
-
-    /** Wheter in sync with sat-pool. */
-    bool satSynced() const;
-
-    /** Sync with sat-pool. */
-    void satSync() const;
 
     /** Return the corresponding \ref PoolItem.
      * Pool and sat pool should be in sync. Returns an empty
@@ -162,54 +156,54 @@ namespace zypp
     *  "foo1" which has a greater version than 1.0:
     *
     *  \code
-    *  CapSet capset;
+    *  Capabilities capset;
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
     *
     *  // The user is setting this capablility
-    *  ResPool::AdditionalCapSet aCapSet;
-    *  aCapSet[ResStatus::USER] = capset;
+    *  ResPool::AdditionalCapabilities aCapabilities;
+    *  aCapabilities[ResStatus::USER] = capset;
     *
-    *  setAdditionalRequire( aCapSet );
+    *  setAdditionalRequire( aCapabilities );
     *  \endcode
     */
-   void setAdditionalRequire( const AdditionalCapSet & capset ) const;
-   AdditionalCapSet & additionalRequire() const;
+   void setAdditionalRequire( const AdditionalCapabilities & capset ) const;
+   AdditionalCapabilities & additionalRequire() const;
 
    /**
     *  Handling additional conflicts. E.G. do not install anything which provides "foo":
     *
     *  \code75
-    *  CapSet capset;
+    *  Capabilities capset;
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
     *
     *  // The user is setting this capablility
-    *  ResPool::AdditionalCapSet aCapSet;
-    *  aCapSet[ResStatus::USER] = capset;
+    *  ResPool::AdditionalCapabilities aCapabilities;
+    *  aCapabilities[ResStatus::USER] = capset;
     *
-    *  setAdditionalConflict( aCapSet );
+    *  setAdditionalConflict( aCapabilities );
     *  \endcode
     */
-   void setAdditionalConflict( const AdditionalCapSet & capset ) const;
-   AdditionalCapSet & additionaConflict() const;
+   void setAdditionalConflict( const AdditionalCapabilities & capset ) const;
+   AdditionalCapabilities & additionaConflict() const;
 
    /**
     *  Handling additional provides. This is used for ignoring a requirement.
     *  e.G. Do ignore the requirement "foo":
     *
     *  \code
-    *  CapSet capset;
+    *  Capabilities capset;
     *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
     *
     *  // The user is setting this capablility
-    *  ResPool::AdditionalCapSet aCapSet;
-    *  aCapSet[ResStatus::USER] = capset;
+    *  ResPool::AdditionalCapabilities aCapabilities;
+    *  aCapabilities[ResStatus::USER] = capset;
     *
-    *  setAdditionalProvide( aCapSet );
+    *  setAdditionalProvide( aCapabilities );
     *  \endcode
     */
-   void setAdditionalProvide( const AdditionalCapSet & capset ) const;
-   AdditionalCapSet & additionaProvide() const;
+   void setAdditionalProvide( const AdditionalCapabilities & capset ) const;
+   AdditionalCapabilities & additionaProvide() const;
 
   private:
     /** */

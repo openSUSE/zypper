@@ -16,7 +16,6 @@
 #include <string>
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/ProductImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,7 +32,6 @@ namespace zypp
   class Product : public ResObject
   {
   public:
-    typedef detail::ProductImplIf    Impl;
     typedef Product                  Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -42,9 +40,6 @@ namespace zypp
   public:
     /** Get the product type (base, add-on) */
     std::string type() const;
-    /** \deprecated Use \ref type. */
-    std::string category() const ZYPP_DEPRECATED
-    { return type(); }
 
     /** Get the vendor of the product */
     Label vendor() const;
@@ -88,15 +83,9 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Product( const NVRAD & nvrad_r );
+    Product( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Product();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

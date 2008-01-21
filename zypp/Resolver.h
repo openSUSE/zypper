@@ -269,13 +269,13 @@ namespace zypp
      * Get all the additional requirements set by \ref addRequire(Capability).
      *
      */      
-    const CapSet getRequire ();
+    const Capabilities getRequire ();
       
     /**
      * Get all the additional conflicts set by \ref addConflict(Capability).
      *
      */            
-    const CapSet getConflict();
+    const Capabilities getConflict();
 
     /**
      * Setting solver timeout

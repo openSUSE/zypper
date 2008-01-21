@@ -14,6 +14,7 @@
 
 #include "zypp/NVRA.h"
 #include "zypp/Dependencies.h"
+#include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -69,7 +70,7 @@ namespace zypp
 
   /** \relates NVRAD Stream output */
   std::ostream & operator<<( std::ostream & str, const NVRAD & obj );
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

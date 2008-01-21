@@ -36,16 +36,16 @@ namespace zypp
 
       inline std::string makeSharedIdent( ResKind kind_r,
 					  const std::string & name_r,
-					  const std::string & edition_r,
-					  const std::string & arch_r )
+					  Edition edition_r,
+					  Arch arch_r )
       {
 	std::string ret( kind_r.asString() );
 	ret += ":";
 	ret += name_r;
 	ret += "-";
-	ret += edition_r;
+	ret += edition_r.asString();
 	ret += ".";
-	ret += arch_r;
+	ret += arch_r.asString();
 	return ret;
       }
 
@@ -64,34 +64,6 @@ namespace zypp
 	  {}
 
 	public:
-	  /** Parsing Capabilities from string is quite expensive. So we
-	   * maintain a little chache to check whether we already parsed some
-	   * raw string. If so, we can reuse the result.
-	   */
-	  struct CapImplCache
-	  {
-	    template<class _Res>
-	    capability::CapabilityImpl::Ptr get( const std::string & line_r )
-	    {
-	      return get( line_r, ResTraits<_Res>::kind );
-	    }
-
-	    capability::CapabilityImpl::Ptr get( const std::string & line_r,
-		                                 ResKind refers_r )
-	    {
-	      capability::CapabilityImpl::Ptr & ret( _cache[refers_r][line_r] );
-	      if ( ! ret )
-	      {
-		ret = capability::parse( refers_r, line_r );
-	      }
-	      return ret;
-	    }
-
-	    private:
-	      std::map<ResKind, std::map<std::string, capability::CapabilityImpl::Ptr> > _cache;
-	  };
-
-	public:
 
 	  template<class _Res>
 	  void depAddLine( const std::string & line_r,
@@ -104,7 +76,7 @@ namespace zypp
 			   ResKind refers_r,
 			   data::DependencyList & deps_r )
 	  {
-	    deps_r.insert( _depcache.get( line_r, refers_r ) );
+	    deps_r.insert( Capability( line_r, refers_r ) );
 	  }
 
 
@@ -135,7 +107,6 @@ namespace zypp
 
 	private:
 	  const FileReaderBase & _parent;
-	  CapImplCache           _depcache;
       };
       ///////////////////////////////////////////////////////////////////
 

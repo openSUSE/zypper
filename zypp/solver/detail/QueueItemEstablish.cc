@@ -33,7 +33,7 @@
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -115,7 +115,7 @@ QueueItemEstablish::process (const QueueItemList & mainQueue, ResolverContext_Pt
 
     _item.status().setUndetermined();		// reset any previous establish state
 
-    CapSet freshens = _item->dep(Dep::FRESHENS);
+    Capabilities freshens = _item->dep(Dep::FRESHENS);
 
     _XDEBUG("simple establish of " << _item << " with " << freshens.size() << " freshens");
 
@@ -125,7 +125,7 @@ QueueItemEstablish::process (const QueueItemList & mainQueue, ResolverContext_Pt
 
     /* Loop through all freshen dependencies. If one is satisfied, queue the _item for installation.  */
 
-    CapSet::const_iterator iter;
+    Capabilities::const_iterator iter;
     for (iter = freshens.begin(); iter != freshens.end(); iter++) {
 	const Capability cap = *iter;
         bool dummy1, dummy2;
@@ -150,9 +150,9 @@ QueueItemEstablish::process (const QueueItemList & mainQueue, ResolverContext_Pt
     }
     else {							// installed or no freshens or triggered freshens
 
-	CapSet supplements = _item->dep(Dep::SUPPLEMENTS);
+	Capabilities supplements = _item->dep(Dep::SUPPLEMENTS);
 	if (supplements.size() != 0) {					// if we have supplements, they must _also_ trigger
-	    CapSet::const_iterator iter;
+	    Capabilities::const_iterator iter;
 	    for (iter = supplements.begin(); iter != supplements.end(); iter++) {
 		const Capability cap = *iter;
                 bool dummy1, dummy2;                
@@ -196,7 +196,7 @@ QueueItemEstablish::process (const QueueItemList & mainQueue, ResolverContext_Pt
 	//  'state modifier' accordingly.
 
 
-	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
+	Capabilities requires = _item->dep(Dep::REQUIRES);			// check requirements
 	Capability missing;
 	bool all_unneeded = true;					// check if all are met because of unneeded
 	for (iter = requires.begin(); iter != requires.end(); iter++) {

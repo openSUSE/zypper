@@ -64,12 +64,6 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  bool ResPool::satSynced() const
-  {  return _pimpl->satSynced(); }
-
-  void ResPool::satSync() const
-  {  return _pimpl->satSync(); }
-
   bool ResPool::empty() const
   { return _pimpl->empty(); }
 
@@ -106,19 +100,19 @@ namespace zypp
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
   { return _pimpl->knownRepositories().end(); }
 
-  void ResPool::setAdditionalRequire( const AdditionalCapSet & capset ) const
+  void ResPool::setAdditionalRequire( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalRequire( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionalRequire() const
+  ResPool::AdditionalCapabilities & ResPool::additionalRequire() const
   { return _pimpl->additionalRequire(); }
 
-  void ResPool::setAdditionalConflict( const AdditionalCapSet & capset ) const
+  void ResPool::setAdditionalConflict( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalConflict( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionaConflict() const
+  ResPool::AdditionalCapabilities & ResPool::additionaConflict() const
   { return _pimpl->additionaConflict(); }
 
-  void ResPool::setAdditionalProvide( const AdditionalCapSet & capset ) const
+  void ResPool::setAdditionalProvide( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalProvide( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionaProvide() const
+  ResPool::AdditionalCapabilities & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
 
   const SerialNumber & ResPool::serial() const

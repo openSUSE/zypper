@@ -11,28 +11,13 @@
 */
 #include "zypp/Language.h"
 #include "zypp/TranslatedText.h"
-#include "zypp/CapFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //  CLASS NAME : LanguageImpl
-    //
-    /** Exposition only. */
-    class LanguageImpl : public LanguageImplIf
-    {
-    public:
-      LanguageImpl( const Locale & locale_r )
-      : _locale( locale_r )
-      {}
-
+#warning Check overloaded attributes
+#if 0
     public:
       virtual TranslatedText summary() const
       { return TranslatedText( _locale.name() ); }
@@ -42,26 +27,17 @@ namespace zypp
 
     private:
        Locale _locale;
-    };
-    ///////////////////////////////////////////////////////////////////
-
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-
+#endif
 
   IMPL_PTR_TYPE(Language);
 
-
-
-  ///////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Language::Language
   //	METHOD TYPE : Ctor
   //
-  Language::Language( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Language::Language( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -74,6 +50,9 @@ namespace zypp
 
   Language::Ptr Language::installedInstance( const Locale & locale_r )
   {
+#warning FIX CREATION OF LANGUAGE RESOLVABLES
+    return 0;
+#if 0
     static std::map<Locale,Ptr> _ptrmap;
     Ptr ret( _ptrmap[locale_r] );
     if ( ! ret )
@@ -92,10 +71,14 @@ namespace zypp
         ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
+#endif
   }
 
   Language::Ptr Language::availableInstance( const Locale & locale_r )
   {
+#warning FIX CREATION OF LANGUAGE RESOLVABLES
+    return 0;
+#if 0
     static std::map<Locale,Ptr> _ptrmap;
     Ptr ret( _ptrmap[locale_r] );
     if ( ! ret )
@@ -114,8 +97,9 @@ namespace zypp
         ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
+#endif
   }
 
   /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
+  // namespace zypp
+}///////////////////////////////////////////////////////////////////

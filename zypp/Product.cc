@@ -9,11 +9,7 @@
 /** \file zypp/Product.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Product.h"
-
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,8 +22,8 @@ namespace zypp
   //	METHOD NAME : Product::Product
   //	METHOD TYPE : Ctor
   //
-  Product::Product( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Product::Product( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -45,39 +41,39 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string Product::type() const
-  { return pimpl().type(); }
+  { return std::string(); }
 
   Label Product::vendor() const
-  { return pimpl().vendor(); }
+  { return Label(); }
 
   Url Product::releaseNotesUrl() const
-  { return pimpl().releaseNotesUrl(); }
+  { return Url(); }
 
   std::list<Url> Product::updateUrls() const
-  { return pimpl().updateUrls(); }
+  { return std::list<Url>(); }
 
   std::list<Url> Product::extraUrls() const
-  { return pimpl().extraUrls(); }
+  { return std::list<Url>(); }
 
   std::list<Url> Product::optionalUrls() const
-  { return pimpl().optionalUrls(); }
+  { return std::list<Url>(); }
 
   std::list<std::string> Product::flags() const
-  { return pimpl().flags(); }
+  { return std::list<std::string>(); }
 
   /** */
   Label Product::shortName() const
-  { return pimpl().shortName().text(); }
+  { return Label(); }
 
   /** */
   Label Product::longName() const
   { return summary(); }
 
   std::string Product::distributionName() const
-  { return pimpl().distributionName(); }
+  { return std::string(); }
 
   Edition Product::distributionEdition() const
-  { return pimpl().distributionEdition(); }
+  { return Edition(); }
 
 
   /////////////////////////////////////////////////////////////////

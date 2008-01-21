@@ -31,7 +31,7 @@
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/ResolverContext.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -135,15 +135,15 @@ ResolverQueue::addPoolItemToVerify (PoolItem_Ref poolItem)
     if (poolItem.status().staysInstalled()
 	|| poolItem.status().isToBeInstalled()) {
 	// regarding only items which will on the system after commit
-	CapSet requires = poolItem->dep (Dep::REQUIRES);
-	for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); ++iter) {
+	Capabilities requires = poolItem->dep (Dep::REQUIRES);
+	for (Capabilities::const_iterator iter = requires.begin(); iter != requires.end(); ++iter) {
 	    QueueItemRequire_Ptr qitem = new QueueItemRequire (_context->pool(), *iter);
 	    qitem->addPoolItem (poolItem);
 	    addItem (qitem);
 	}
 
-	CapSet conflicts = poolItem->dep (Dep::CONFLICTS);
-	for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); ++iter) {
+	Capabilities conflicts = poolItem->dep (Dep::CONFLICTS);
+	for (Capabilities::const_iterator iter = conflicts.begin(); iter != conflicts.end(); ++iter) {
 	    QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), *iter, poolItem);
 	    addItem (qitem);
 	}

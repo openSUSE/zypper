@@ -10,8 +10,7 @@
  *
 */
 #include "zypp/Message.h"
-
-using namespace std;
+#include "zypp/Message.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -24,8 +23,8 @@ namespace zypp
   //	METHOD NAME : Message::Message
   //	METHOD TYPE : Ctor
   //
-  Message::Message( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Message::Message( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -43,11 +42,12 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   TranslatedText Message::text() const
-  { return pimpl().text(); }
+  { return TranslatedText(); }
 
   /** Patch the message belongs to - if any */
-  Patch::constPtr Message::patch() const
-  { return pimpl().patch(); }
+  ResTraits<Patch>::constPtrType Message::patch() const
+  { return ResTraits<Patch>::constPtrType(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

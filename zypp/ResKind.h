@@ -49,7 +49,6 @@ namespace zypp
       static const ResKind script;
       static const ResKind selection;
       static const ResKind srcpackage;
-      static const ResKind system;
       //@}
 
     public:
@@ -61,6 +60,17 @@ namespace zypp
       explicit ResKind( const IdString & idstr_r )  : _str( str::toLower(idstr_r.c_str()) ) {}
       explicit ResKind( const std::string & str_r ) : _str( str::toLower(str_r) ) {}
       explicit ResKind( const char * cstr_r )       : _str( str::toLower(cstr_r) ) {}
+
+    public:
+      /** Return the satsolver identifier for name.
+       * Libsatsolver combines the objects kind and name in a single
+       * identifier \c "pattern:kde_multimedia", \b except for packages
+       * and source packes. They are not prefixed by any kind string.
+      */
+      static std::string satIdent( const ResKind & refers_r, const std::string & name_r );
+      /** \overload */
+      std::string satIdent( const std::string & name_r ) const
+      { return satIdent( *this, name_r ); }
 
     private:
       static int _doCompare( const char * lhs,  const char * rhs )

@@ -11,12 +11,9 @@
 */
 #include <iostream>
 #include "zypp/base/LogTools.h"
-#include "zypp/capability/FilesystemCap.h"
-#include "zypp/base/Measure.h"
 
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"
-#include "zypp/CapSet.h"
 #include "zypp/Package.h"
 #include "zypp/VendorAttr.h"
 
@@ -114,8 +111,8 @@ namespace zypp
     static void
     storeInsert( CapHash::ContainerT & store_r, const PoolItem & item_r, Dep cap_r )
     {
-      CapSet caps = item_r->dep( cap_r );
-      for (CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic) {
+      Capabilities caps = item_r->dep( cap_r );
+      for (Capabilities::const_iterator ic = caps.begin(); ic != caps.end(); ++ic) {
 	store_r[cap_r][ic->index()].push_back( CapAndItem( *ic, item_r ) );
       }
     }
@@ -136,9 +133,9 @@ namespace zypp
     static void
     storeDelete( PoolTraits::DepCapItemContainerT & store_r, const PoolItem & item_r, Dep cap_r )
     {
-      CapSet caps = item_r->dep( cap_r );
+      Capabilities caps = item_r->dep( cap_r );
 //XXX << "storeDelete(" << item_r << ")" << endl;
-      for ( CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic )
+      for ( Capabilities::const_iterator ic = caps.begin(); ic != caps.end(); ++ic )
         {
           PoolTraits::CapItemContainerT & capitems = store_r[cap_r][ic->index()];
           for ( PoolTraits::CapItemContainerT::iterator pos = capitems.begin(); pos != capitems.end(); /**/ )
@@ -201,7 +198,6 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     PoolImpl::PoolImpl()
-      : _watchFilesystemSysconfigStorage( capability::FilesystemCap::sysconfigStorageSerial() )
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -211,76 +207,6 @@ namespace zypp
     //
     PoolImpl::~PoolImpl()
     {}
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : PoolImpl::serial
-    //	METHOD TYPE : SerialNumber
-    //
-    const SerialNumber & PoolImpl::serial() const
-    {
-      if ( _watchFilesystemSysconfigStorage.remember( capability::FilesystemCap::sysconfigStorageSerial() ) )
-      {
-        const_cast<PoolImpl*>(this)->_serial.setDirty(); // propagate changed /etc/sysconfig/storage
-      }
-      return _serial;
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : PoolImpl::satSync
-    //	METHOD TYPE : void
-    //
-    void PoolImpl::satSync() const
-    {
-      if ( satSynced() )
-      {
-        MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
-        return;
-      }
-
-      debug::Measure mnf( "Sync changes to sat-pool..." );
-      MIL << "Pool: " << _serial << ": Sync changes to sat-pool... " << _satSyncRequired << endl;
-
-      // collect unsynced PoolItems per repository.
-      std::map<std::string, std::list<PoolItem> > todo;
-      const std::string & systemRepoName( sat::Pool::instance().systemRepoName() );
-      for_( it, begin(), end() )
-      {
-        if ( ! (*it).satSolvable() )
-        {
-          if ( (*it).status().isInstalled() )
-            todo[systemRepoName].push_back( *it );
-          else
-            todo[(*it)->repository().info().alias()].push_back( *it );
-        }
-      }
-
-      // add the missing PoolItems.
-      DBG << "Update missing repos... " << todo.size() << endl;
-      void res2sat( const ResObject::constPtr & res_r, sat::Solvable & slv_r );
-
-      for_( it, todo.begin(), todo.end() )
-      {
-        DBG << "Update repo " << it->first << ": " << it->second.size() << endl;
-        sat::Repo repo( sat::Pool::instance().reposInsert( it->first.empty() ? "@Builtin" : it->first ) );
-        sat::Solvable first( repo.addSolvables( it->second.size() ) );
-        DBG << " starting at " << first << endl;
-
-        sat::Solvable cur( first );
-        for_( pit, it->second.begin(), it->second.end() )
-        {
-          res2sat( *pit, cur );
-          (*pit).rememberSatSolvable( cur );
-          cur = cur.nextInRepo();
-        }
-      }
-
-      _satSyncRequired.remember( _serial );
-      sat::Pool::instance().prepare();
-      MIL << "Pool: " << _serial << ": In sync with sat-pool " << _satSyncRequired << endl;
-      MIL << "sat::Pool: " << sat::Pool::instance() << endl;
-    }
 
     ///////////////////////////////////////////////////////////////////
     //

@@ -178,9 +178,9 @@ namespace zypp
 
 		if ( obj )
 		{
-		    CapSet freshens = obj->dep( Dep::FRESHENS );
+		    Capabilities freshens = obj->dep( Dep::FRESHENS );
 
-		    for ( CapSet::const_iterator cap_it = freshens.begin();
+		    for ( Capabilities::const_iterator cap_it = freshens.begin();
 			  cap_it != freshens.end();
 			  ++cap_it )
 		    {

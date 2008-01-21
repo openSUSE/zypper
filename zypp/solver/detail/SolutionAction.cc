@@ -23,7 +23,7 @@
 
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/Dependencies.h"
 
@@ -182,7 +182,7 @@ bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
     Dependencies dependencies;
-    CapSet depList;
+    Capabilities depList;
     if (_item != PoolItem_Ref()) {    
 	dependencies = _item.resolvable()->deps();
 	depList = dependencies[Dep::CONFLICTS];
@@ -190,7 +190,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
     switch (_kind) {
         case CONFLICTS:
 	    // removing conflict in both resolvables
-	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_item, _capability);
@@ -198,7 +198,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    }
 	    // Obsoletes are conflicts too
 	    depList = dependencies[Dep::OBSOLETES];
-	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
@@ -207,7 +207,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    
 	    dependencies = _otherItem.resolvable()->deps();
 	    depList = dependencies[Dep::CONFLICTS];
-	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
@@ -215,7 +215,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    }
 	    // Obsoletes are conflicts too	    
 	    depList = dependencies[Dep::OBSOLETES];
-	    for (CapSet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);

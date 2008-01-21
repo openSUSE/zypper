@@ -22,7 +22,7 @@
 
 #include <values.h>
 
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -1685,8 +1685,8 @@ ResolverContext::requirementIsPossible (const Capability & capability)
 bool
 ResolverContext::itemIsPossible( PoolItem_Ref item, Capability & failed )
 {
-    CapSet requires = item->dep (Dep::REQUIRES);
-    for (CapSet::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
+    Capabilities requires = item->dep (Dep::REQUIRES);
+    for (Capabilities::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
 	if (! requirementIsPossible (*iter)) {
 	    failed = *iter;
 	    return false;

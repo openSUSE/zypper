@@ -10,9 +10,6 @@
  *
 */
 #include "zypp/SrcPackage.h"
-#include "zypp/base/Exception.h"
-
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,8 +22,8 @@ namespace zypp
   //	METHOD NAME : SrcPackage::SrcPackage
   //	METHOD TYPE : Ctor
   //
-  SrcPackage::SrcPackage( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  SrcPackage::SrcPackage( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -44,7 +41,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   OnMediaLocation SrcPackage::location() const
-  { return pimpl().location(); }
+  { return OnMediaLocation(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

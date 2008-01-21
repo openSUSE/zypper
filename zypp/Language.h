@@ -22,26 +22,6 @@ namespace zypp
   DEFINE_PTR_TYPE(Language);
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //  CLASS NAME : LanguageImplIf
-    //
-    /** Exposition only. */
-    class LanguageImplIf : public ResObjectImplIf
-    {
-    public:
-      typedef Language ResType;
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Language
   //
@@ -50,7 +30,6 @@ namespace zypp
   class Language : public ResObject
   {
   public:
-    typedef detail::LanguageImplIf   Impl;
     typedef Language                 Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -63,15 +42,9 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Language( const NVRAD & nvrad_r );
+    Language( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Language();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

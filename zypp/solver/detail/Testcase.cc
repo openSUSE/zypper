@@ -120,10 +120,10 @@ std::string helixXML( const Capability &cap )
 }
 
 template<> 
-std::string helixXML( const CapSet &caps )
+std::string helixXML( const Capabilities &caps )
 {
     stringstream str;
-    CapSet::iterator it = caps.begin();
+    Capabilities::iterator it = caps.begin();
     str << endl;
     for ( ; it != caps.end(); ++it)
     {
@@ -432,13 +432,13 @@ void HelixControl::deleteResolvable(const ResObject::constPtr &resObject)
 	  << " name=\"" << resObject->name() << "\"" << "/>" << endl;    
 }
 
-void HelixControl::addDependencies (const CapSet & capRequire, const CapSet & capConflict)
+void HelixControl::addDependencies (const Capabilities & capRequire, const Capabilities & capConflict)
 {
-    for (CapSet::const_iterator iter = capRequire.begin(); iter != capRequire.end(); iter++) {
+    for (Capabilities::const_iterator iter = capRequire.begin(); iter != capRequire.end(); iter++) {
 	*file << "<addRequire " << " kind=\"" << toLower (iter->kind().asString()) << "\""
 	  << " name=\"" << iter->asString() << "\"" << "/>" << endl;    
     }
-    for (CapSet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
+    for (Capabilities::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
 	*file << "<addConflict " << " kind=\"" << toLower (iter->kind().asString()) << "\""
 	  << " name=\"" << iter->asString() << "\"" << "/>" << endl;    
     }    

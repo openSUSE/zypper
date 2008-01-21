@@ -9,12 +9,8 @@
 /** \file	zypp/Selection.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Selection.h"
 #include "zypp/TranslatedText.h"
-
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -27,8 +23,8 @@ namespace zypp
   //	METHOD NAME : Selection::Selection
   //	METHOD TYPE : Ctor
   //
-  Selection::Selection( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Selection::Selection( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -47,26 +43,18 @@ namespace zypp
 
     /** selection category */
     Label Selection::category() const
-    {
-	return pimpl().category();
-    }
+    { return Label(); }
 
     /** selection visibility (for hidden selections) */
     bool Selection::visible() const
-    {
-	return pimpl().visible();
-    }
+    { return true; }
 
     /** selection presentation order */
     Label Selection::order() const
-    {
-	return pimpl().order();
-    }
+    { return Label(); }
 
     const std::set<std::string> Selection::install_packages( const Locale & lang) const
-    {
-      return pimpl().install_packages();
-    }
+    { return std::set<std::string>(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -18,8 +18,6 @@ extern "C"
 #include "zypp/Edition.h"
 #include "zypp/sat/Pool.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -56,9 +54,21 @@ namespace zypp
   : _str( makeevrstr( version_r, release_r, epoch_r ) )
   {}
 
+  Edition::Edition( const char * version_r,
+                    const char * release_r,
+                    epoch_t epoch_r )
+  : _str( makeevrstr( version_r, release_r, epoch_r ) )
+  {}
+
   Edition::Edition( const std::string & version_r,
                     const std::string & release_r,
                     const std::string & epoch_r )
+  : _str( makeevrstr( version_r, release_r, str::strtonum<epoch_t>( epoch_r ) ) )
+  {}
+
+  Edition::Edition( const char * version_r,
+                    const char * release_r,
+                    const char * epoch_r )
   : _str( makeevrstr( version_r, release_r, str::strtonum<epoch_t>( epoch_r ) ) )
   {}
 

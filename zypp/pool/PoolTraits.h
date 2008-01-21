@@ -100,8 +100,8 @@ namespace zypp
       typedef PoolImplInserter           Inserter;
       typedef PoolImplDeleter            Deleter;
 
-      /** Map of CapSet and "who" has set it*/
-      typedef std::map<ResStatus::TransactByValue,CapSet>		AdditionalCapSet;
+      /** Map of Capabilities and "who" has set it*/
+      typedef std::map<ResStatus::TransactByValue,Capabilities>		AdditionalCapabilities;
 
     };
     ///////////////////////////////////////////////////////////////////

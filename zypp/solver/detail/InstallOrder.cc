@@ -156,8 +156,8 @@ InstallOrder::setInstalled( const PoolItemList & rl )
 bool
 InstallOrder::doesProvide( const Capability requirement, PoolItem_Ref item ) const
 {
-    CapSet::const_iterator pend = item->dep( Dep::PROVIDES ).end();
-    for( CapSet::const_iterator pit = item->dep( Dep::PROVIDES ).begin(); pit != pend; ++pit) {
+    Capabilities::const_iterator pend = item->dep( Dep::PROVIDES ).end();
+    for( Capabilities::const_iterator pit = item->dep( Dep::PROVIDES ).begin(); pit != pend; ++pit) {
 	if( pit->matches( requirement ) == CapMatch::yes ) {
 	    return item;
 	}
@@ -227,7 +227,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     _rdfstime++;
 
     // items prereq
-    CapSet prq( item->dep(Dep::PREREQUIRES) );
+    Capabilities prq( item->dep(Dep::PREREQUIRES) );
     // an installed items prereq (in case they are reqired for uninstall scripts)
     NameKindProxy nkp( _pool, item->name(), item->kind() );
     if ( ! nkp.installedEmpty() )
@@ -237,7 +237,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     }
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first
-    for (CapSet::const_iterator it = prq.begin(); it != prq.end(); ++it)
+    for (Capabilities::const_iterator it = prq.begin(); it != prq.end(); ++it)
     {
 	requires.push_back(*it);
     }
@@ -246,7 +246,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     // as early as possible. Some stuff depends on it (e.g. registration).
     if ( ! isKind<Product>( item.resolvable() ) )
       {
-        for (CapSet::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
+        for (Capabilities::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
           {
             requires.push_back(*it);
           }

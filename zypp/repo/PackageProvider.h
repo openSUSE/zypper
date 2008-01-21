@@ -67,7 +67,6 @@ namespace zypp
       typedef shared_ptr<void>                                       ScopedGuard;
       typedef callback::SendReport<repo::DownloadResolvableReport> Report;
 
-      typedef detail::ResImplTraits<Package::Impl>::constPtr PackageImpl_constPtr;
       typedef packagedelta::DeltaRpm                         DeltaRpm;
       typedef packagedelta::PatchRpm                         PatchRpm;
 
@@ -104,11 +103,10 @@ namespace zypp
     private:
       PackageProviderPolicy      _policy;
       Package::constPtr          _package;
-      PackageImpl_constPtr       _implPtr;
       mutable bool               _retry;
       mutable shared_ptr<Report> _report;
-      DeltaCandidates _deltas;
-      RepoMediaAccess &_access;
+      DeltaCandidates            _deltas;
+      RepoMediaAccess &          _access;
     };
     ///////////////////////////////////////////////////////////////////
 

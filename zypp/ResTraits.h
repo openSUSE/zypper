@@ -60,8 +60,6 @@ namespace zypp
   DEFINE_PTR_TYPE( Script );
   DEFINE_PTR_TYPE( Message );
   DEFINE_PTR_TYPE( Language );
-
-  DEFINE_PTR_TYPE( SystemResObject );
   //@}
 
   /** ResTraits. Defines common types and the ResKind value. */

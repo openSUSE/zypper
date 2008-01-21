@@ -26,13 +26,13 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class IdString;
+  class Capability;
+  class Capabilities;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    class Capability;
-    class Capabilities;
     class Solvable;
     class Repo;
     class Pool;
@@ -70,6 +70,7 @@ namespace zypp
       /** Generic Id type. */
       typedef int IdType;
       static const IdType noId( 0 );
+      static const IdType emptyId( 1 );
 
       /** Internal ids satlib includes in dependencies. */
       static const IdType solvablePrereqMarker( 16 ); // MPL check in PoolImpl.cc

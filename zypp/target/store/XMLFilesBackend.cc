@@ -9,6 +9,8 @@
 /** \file	zypp/target/store/XMLFilesBackend.cc
 *
 */
+#warning NEED XMLFilesBackend TO SolvFile fix
+#if 0
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
@@ -21,14 +23,6 @@
 #include "zypp/CapFactory.h"
 #include "zypp/Digest.h"
 #include "zypp/ExternalProgram.h"
-
-#include "zypp/target/store/xml/XMLPatchImpl.h"
-#include "zypp/target/store/xml/XMLMessageImpl.h"
-#include "zypp/target/store/xml/XMLScriptImpl.h"
-#include "zypp/target/store/xml/XMLSelectionImpl.h"
-#include "zypp/target/store/xml/XMLProductImpl.h"
-#include "zypp/target/store/xml/XMLPatternImpl.h"
-#include "zypp/target/store/xml/XMLAtomImpl.h"
 
 #include "zypp/parser/xmlstore/XMLProductParser.h"
 #include "zypp/parser/xmlstore/XMLPatternParser.h"
@@ -1350,3 +1344,4 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif

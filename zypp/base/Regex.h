@@ -29,14 +29,37 @@ namespace zypp
   namespace str
   { /////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    /** \defgroup ZYPP_STR_REGEX Regular expressions
+     *
+     * Namespace zypp::str regular expressions \b using the
+     * boost regex library
+     * \url http://www.boost.org/libs/regex/doc/index.html.
+     *
+     * \li \c regex
+     * \li \c regex_match
+     * \li \c regex_search
+     * \li \c regex_replace
+     * \li \c match_results
+     * \li \c cmatch
+     * \li \c wcmatch
+     * \li \c smatch
+     * \li \c wsmatch
+    */
+
     typedef Exception regex_error;
-    
+
     class smatch;
     class regex;
-    
-    bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
-    bool regex_match(const std::string& s,  const regex& regex);
-    
+
+    bool regex_match(const char * s, str::smatch& matches, const regex& regex);
+    inline bool regex_match(const std::string& s, str::smatch& matches, const regex& regex)
+    { return regex_match( s.c_str(), matches, regex ); }
+
+    bool regex_match(const char * s, const regex& regex);
+    inline bool regex_match(const std::string& s, const regex& regex)
+    { return regex_match( s.c_str(), regex ); }
+
     class regex {
     public:
 
@@ -48,17 +71,17 @@ namespace zypp
         match_extended = REG_EXTENDED,
         normal = 1<<16
       };
-  
+
       regex();
       regex(const std::string& s,int flags = match_extended);
       ~regex() throw();
 
       void assign(const std::string& s,int flags = match_extended);
-      
+
     private:
       friend class smatch;
-      friend bool regex_match(const std::string& s, str::smatch& matches, const regex& regex);
-      friend bool regex_match(const std::string& s,  const regex& regex);
+      friend bool regex_match(const char * s, str::smatch& matches, const regex& regex);
+      friend bool regex_match(const char * s,  const regex& regex);
       regex_t m_preg;
       bool m_valid;
     };
@@ -75,7 +98,7 @@ namespace zypp
       regmatch_t pmatch[12];
     };
 
-    
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace str

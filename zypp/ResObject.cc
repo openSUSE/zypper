@@ -11,9 +11,6 @@
 */
 #include "zypp/ResObject.h"
 #include "zypp/Repository.h"
-#include "zypp/detail/ResObjectImplIf.h"
-
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,9 +23,8 @@ namespace zypp
   //	METHOD NAME : ResObject::ResObject
   //	METHOD TYPE : Ctor
   //
-  ResObject::ResObject( const Kind & kind_r,
-                        const NVRAD & nvrad_r )
-  : Resolvable( kind_r, nvrad_r )
+  ResObject::ResObject( const sat::Solvable & solvable_r )
+  : Resolvable( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -57,46 +53,49 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   Text ResObject::summary() const
-  { return pimpl().summary().text(); }
+  { return Text(); }
 
   Text ResObject::description() const
-  { return pimpl().description().text(); }
+  { return Text(); }
 
   Text ResObject::insnotify() const
-  { return pimpl().insnotify().text(); }
+  { return Text(); }
 
   Text ResObject::delnotify() const
-  { return pimpl().delnotify().text(); }
+  { return Text(); }
 
   License ResObject::licenseToConfirm() const
-  { return pimpl().licenseToConfirm().text(); }
+  { return License(); }
 
   Vendor ResObject::vendor() const
-  { return pimpl().vendor(); }
+  { return Vendor(); }
 
   ByteCount ResObject::size() const
-  { return pimpl().size(); }
+  { return ByteCount(); }
 
   Repository ResObject::repository() const
-  { return pimpl().repository(); }
+  { return Repository(); }
 
   ByteCount ResObject::downloadSize() const
-  { return pimpl().downloadSize(); }
+  { return ByteCount(); }
 
   unsigned ResObject::mediaNr() const
-  { return pimpl().mediaNr(); }
+  { return 0; }
 
   bool ResObject::installOnly() const
-  { return pimpl().installOnly(); }
+  { return false; }
 
   Date ResObject::buildtime() const
-  { return pimpl().buildtime(); }
+  { return Date(); }
 
   Date ResObject::installtime() const
-  { return pimpl().installtime(); }
+  { return Date(); }
 
   const DiskUsage & ResObject::diskusage() const
-  { return pimpl().diskusage(); }
+  {
+    static DiskUsage _du;
+    return _du;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

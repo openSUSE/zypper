@@ -102,10 +102,10 @@ namespace zypp
 	      ++_c_pkg;
 	      _data = _pkgData = new data::Package;
 	      _srcpkgData = 0;
-	      _data->arch = words[3];
+	      _data->arch = Arch( words[3] );
 	    }
 	    _data->name    = words[0];
-	    _data->edition = words[1] + "-" + words[2];
+	    _data->edition = Edition( words[1], words[2] );
 	  }
 
 	  /** Consume =Cks:. */
@@ -167,7 +167,7 @@ namespace zypp
 	    switch ( str::split( tag_r->value, std::back_inserter(words) ) )
 	    {
 	      case 2: // [medianr filename]
-		_data->repositoryLocation.setLocation( Pathname(_data->arch) / words[1],
+		_data->repositoryLocation.setLocation( Pathname(_data->arch.string()) / words[1],
                                                        str::strtonum<unsigned>(words[0]) );
 		break;
 
@@ -210,15 +210,15 @@ namespace zypp
 	    {
 	      _data->sharedDataTag = makeSharedIdent( ResTraits<SrcPackage>::kind,
 		                                      words[0],
-						      words[1] + "-" + words[2],
-						      "" );
+						      Edition( words[1], words[2] ),
+						      Arch_noarch );
 	    }
 	    else
 	    {
 	      _data->sharedDataTag = makeSharedIdent( ResTraits<Package>::kind,
 		                                      words[0],
-						      words[1] + "-" + words[2],
-						      words[3] );
+						      Edition( words[1], words[2] ),
+						      Arch( words[3] ) );
 	    }
 	  }
 

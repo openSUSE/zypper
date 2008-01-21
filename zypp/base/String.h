@@ -81,24 +81,6 @@ namespace zypp
     };
 
     ///////////////////////////////////////////////////////////////////
-    /** \defgroup ZYPP_STR_REGEX Regular expressions
-     *
-     * Namespace zypp::str regular expressions \b using the
-     * boost regex library
-     * \url http://www.boost.org/libs/regex/doc/index.html.
-     *
-     * \li \c regex
-     * \li \c regex_match
-     * \li \c regex_search
-     * \li \c regex_replace
-     * \li \c match_results
-     * \li \c cmatch
-     * \li \c wcmatch
-     * \li \c smatch
-     * \li \c wsmatch
-    */
-
-    ///////////////////////////////////////////////////////////////////
     /** \name String representation of number.
      *
      * Optional second argument sets the minimal string width (' ' padded).

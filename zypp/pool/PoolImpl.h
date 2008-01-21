@@ -17,6 +17,8 @@
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/SerialNumber.h"
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ZYppFactory.h"
@@ -33,11 +35,11 @@ namespace zypp
     //	CLASS NAME : NameHash
     //
     /** */
-    class NameHash
+    class ZYPP_DEPRECATED NameHash
     {
     public:
       /** Default ctor */
-      NameHash();
+      NameHash() ZYPP_DEPRECATED;
       /** Dtor */
       ~NameHash();
 
@@ -105,7 +107,7 @@ namespace zypp
     {
     public:
       /** Default ctor */
-      CapHash();
+      CapHash() ZYPP_DEPRECATED;
       /** Dtor */
       ~CapHash();
 
@@ -192,7 +194,7 @@ namespace zypp
     typedef PoolTraits::size_type		size_type;
     typedef PoolTraits::Inserter		Inserter;
     typedef PoolTraits::Deleter			Deleter;
-    typedef PoolTraits::AdditionalCapSet 	AdditionalCapSet;
+    typedef PoolTraits::AdditionalCapabilities 	AdditionalCapabilities;
     typedef PoolTraits::RepoContainerT          KnownRepositories;
 
     public:
@@ -244,9 +246,9 @@ namespace zypp
        *
        *  setAdditionalRequire( capset );
        */
-	void setAdditionalRequire( const AdditionalCapSet & capset ) const
+	void setAdditionalRequire( const AdditionalCapabilities & capset ) const
 	    { _additionalRequire = capset; }
-	AdditionalCapSet & additionalRequire() const
+	AdditionalCapabilities & additionalRequire() const
 	    { return _additionalRequire; }
 
        /**
@@ -257,9 +259,9 @@ namespace zypp
 	*
 	*  setAdditionalConflict( capset );
 	*/
-	void setAdditionalConflict( const AdditionalCapSet & capset ) const
+	void setAdditionalConflict( const AdditionalCapabilities & capset ) const
 	    { _additionaConflict = capset; }
-	AdditionalCapSet & additionaConflict() const
+	AdditionalCapabilities & additionaConflict() const
 	    { return _additionaConflict; }
 
 	/**
@@ -271,9 +273,9 @@ namespace zypp
 	 *
 	 *  setAdditionalProvide( cap );
 	 */
-	void setAdditionalProvide( const AdditionalCapSet & capset ) const
+	void setAdditionalProvide( const AdditionalCapabilities & capset ) const
 	    { _additionaProvide = capset; }
-	AdditionalCapSet & additionaProvide() const
+	AdditionalCapabilities & additionaProvide() const
 	    { return _additionaProvide; }
 
       /** */
@@ -325,14 +327,8 @@ namespace zypp
     public:
       /** Serial number changing whenever the content
        * (Resolvables or Dependencies) changes. */
-      const SerialNumber & serial() const;
-
-      /** Wheter in sync with sat-pool. */
-      bool satSynced() const
-      { return _satSyncRequired.isClean( _serial ); }
-
-      /** Sync with sat-pool. */
-      void satSync() const;
+      const SerialNumber & serial() const
+      { return _serial; }
 
       /** Return the corresponding \ref PoolItem.
        * Pool and sat pool should be in sync. Returns an empty
@@ -343,19 +339,15 @@ namespace zypp
 
     private:
       /** Serial number. */
-      SerialNumber        _serial;
-      /** Watch for changes in /etc/sysconfig/storage. */
-      SerialNumberWatcher _watchFilesystemSysconfigStorage;
-      /** Watch for changes \c _serial. */
-      SerialNumberWatcher _satSyncRequired;
+      SerialNumber _serial;
 
     public:
       ContainerT   _store;
       NameHash     _namehash;
       CapHash      _caphash;
-      mutable AdditionalCapSet _additionalRequire;
-      mutable AdditionalCapSet _additionaConflict;
-      mutable AdditionalCapSet _additionaProvide;
+      mutable AdditionalCapabilities _additionalRequire;
+      mutable AdditionalCapabilities _additionaConflict;
+      mutable AdditionalCapabilities _additionaProvide;
 
     public:
       ResPoolProxy proxy( ResPool self ) const

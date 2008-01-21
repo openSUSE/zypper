@@ -42,7 +42,7 @@
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
 #include "zypp/UpgradeStatistics.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -126,8 +126,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ItemCapKindMap _isInstalledBy;
     ItemCapKindMap _installs;
 
-    CapSet _extra_caps;
-    CapSet _extra_conflicts;
+    Capabilities _extra_caps;
+    Capabilities _extra_conflicts;
 
     //typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
 
@@ -236,8 +236,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addExtraConflict (const Capability & capability);
     void removeExtraConflict (const Capability & capability);    
 
-    const CapSet extraCapability () { return _extra_caps; }
-    const CapSet extraConflicts () { return _extra_conflicts; }
+    const Capabilities extraCapability () { return _extra_caps; }
+    const Capabilities extraConflicts () { return _extra_conflicts; }
 
     void addIgnoreConflict (const PoolItem_Ref item,
 			    const Capability & capability);

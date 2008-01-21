@@ -43,6 +43,9 @@ namespace zypp
   public:
     /** String representation of Arch. */
     const std::string & asString() const;
+    /** \overload */
+    const std::string & string() const
+    { return asString(); }
 
     /** Test for an empty Arch (this is "", not Arch_noarch). */
     bool empty() const

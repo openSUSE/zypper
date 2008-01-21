@@ -17,14 +17,14 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/Capabilities.h"
-#include "zypp/sat/Capability.h"
 
 #include "zypp/ResTraits.h"
 #include "zypp/IdString.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Dep.h"
+#include "zypp/Capabilities.h"
+#include "zypp/Capability.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -77,6 +77,10 @@ namespace zypp
         Repo repo() const;
 
       public:
+        /** The identifier.
+         * This is the solvables \ref name, \b except for packages and
+         * source packes, prefixed by it's \ref kind.
+         */
         IdString     ident()    const;
 
         ResKind      kind()     const;

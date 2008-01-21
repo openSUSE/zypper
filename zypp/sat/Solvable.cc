@@ -106,8 +106,7 @@ namespace zypp
           case 'm': OUTS( atom, 4 );        break;
           case 'p': OUTS( srcpackage, 10 ); break;
           case 's': OUTS( message, 7 );     break;
-          case 't': OUTS( pattern, 7 );
-                    OUTS( system, 6 );      break;
+          case 't': OUTS( pattern, 7 );     break;
 #undef OUTS
         }
       }
@@ -188,7 +187,7 @@ namespace zypp
     {
       if ( ! obj )
         return str << "sat::solvable()";
-
+#warning SWITCH TO IDENT INSTEAD OF KIND:NAME after tests
       return str << "sat::solvable(" << obj.id() << "|"
           << obj.kind() << ':' << obj.name() << '-' << obj.edition() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";

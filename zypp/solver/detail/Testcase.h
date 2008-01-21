@@ -19,7 +19,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/ResPool.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ template<>
 std::string helixXML( const Capability &cap );
 
 template<> 
-std::string helixXML( const CapSet &caps );
+std::string helixXML( const Capabilities &caps );
 
 template<> 
 std::string helixXML( const Dependencies &dep );
@@ -105,7 +105,7 @@ class  HelixControl {
     void lockResolvable (const ResObject::constPtr &resObject);
     void keepResolvable (const ResObject::constPtr &resObject);        
     void deleteResolvable (const ResObject::constPtr &resObject);
-    void addDependencies (const CapSet &capRequire, const CapSet &capConflict);
+    void addDependencies (const Capabilities &capRequire, const Capabilities &capConflict);
     std::string filename () { return dumpFile; }
 };
 	

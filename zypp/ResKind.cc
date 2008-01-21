@@ -11,6 +11,8 @@
 */
 #include <iostream>
 
+#include "zypp/base/String.h"
+
 #include "zypp/ResKind.h"
 #include "zypp/ResTraits.h"
 
@@ -30,7 +32,6 @@ namespace zypp
   const ResKind ResKind::script    ( "script" );
   const ResKind ResKind::selection ( "selection" );
   const ResKind ResKind::srcpackage( "srcpackage" );
-  const ResKind ResKind::system    ( "system" );
 
   template<>
     const ResKind ResTraits<Atom>      ::kind( ResKind::atom );
@@ -52,8 +53,13 @@ namespace zypp
     const ResKind ResTraits<Selection> ::kind( ResKind::selection );
   template<>
     const ResKind ResTraits<SrcPackage>::kind( ResKind::srcpackage );
-  template<>
-    const ResKind ResTraits<SystemResObject>::kind( ResKind::system );
+
+  std::string ResKind::satIdent( const ResKind & refers_r, const std::string & name_r )
+  {
+    if ( ! refers_r || refers_r == package || refers_r == srcpackage )
+      return name_r;
+    return str::form( "%s:%s", refers_r.c_str(), name_r.c_str() );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

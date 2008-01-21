@@ -28,7 +28,7 @@
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

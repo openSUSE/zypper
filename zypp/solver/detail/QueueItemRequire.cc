@@ -23,7 +23,7 @@
 
 #include "zypp/CapFactory.h"
 #include "zypp/CapMatch.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -475,11 +475,11 @@ codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
 // check if we have a match for a (supplements/enhances) hint
 
 static bool
-hint_match( const CapSet & cset, ResPool pool )
+hint_match( const Capabilities & cset, ResPool pool )
 {
     HintItem info;
     
-    for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+    for (Capabilities::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
 	Dep dep( Dep::PROVIDES );
 	invokeOnEach( pool.byCapabilityIndexBegin( cit->index(), dep ),
 		      pool.byCapabilityIndexEnd( cit->index(), dep ),
@@ -604,11 +604,11 @@ QueueItemRequire::process (const QueueItemList & mainQueue,
 		if (item.status().staysUninstalled()) {
 		    uninstalled++;
 		}
-		CapSet freshens( item->dep( Dep::FRESHENS ) );
+		Capabilities freshens( item->dep( Dep::FRESHENS ) );
 
 		// try to find a match of the locale freshens with one of the requested locales
 
-		for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+		for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
 		    if (cit->refers() == ResTraits<Language>::kind) {
 			string loc = cit->index();
 			MIL << "Look for language fallback " << loc << ":" << item << endl;
@@ -861,8 +861,8 @@ provider_done:;
 			//   FIXME: should we also look at conflicts here?
 
 			if (explore_uninstall_branch) {
-			    CapSet requires = upgrade_item->dep (Dep::REQUIRES);
-			    CapSet::const_iterator iter = requires.begin();
+			    Capabilities requires = upgrade_item->dep (Dep::REQUIRES);
+			    Capabilities::const_iterator iter = requires.begin();
 			    for (; iter != requires.end(); iter++) {
 				const Capability req = *iter;
 				if (! context->requirementIsMet (req, upgrade_item, Dep::REQUIRES)) {

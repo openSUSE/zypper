@@ -21,7 +21,6 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/data/ResolvableData.h"
-#include "zypp/CapFactory.h"
 
 #include "zypp/ZConfig.h"
 
@@ -131,48 +130,25 @@ namespace zypp
 	    for ( std::list<std::string>::const_iterator it = words.begin();
 		  it != words.end(); ++it )
 	    {
-	      Resolvable::Kind kind( ResTraits<Package>::kind );
+              std::string name( *it );
 
-	      std::string name = *it;
-	      std::string::size_type colon = name.find( ":" );
-	      if ( colon != std::string::npos )
-	      {
-		std::string skind( name, 0, colon );
-		name.erase( 0, colon+1 );
+              // check for '[op edition]':
+              std::list<std::string>::const_iterator next = it;
+              if ( ++next != words.end()
+                   && (*next).find_first_of( "<>=" ) != std::string::npos )
+              {
+                std::string op = *next;
+                if ( ++next != words.end() )
+                {
+                  // Add the 'name op edition' dependency
+                  deplist_r.insert( Capability( name, op, *next ) );
+                  it = next;
+                  continue;
+                }
+              }
 
-		if ( skind == ResTraits<Pattern>::kind )
-		  kind = ResTraits<Pattern>::kind;
-		else if ( skind == ResTraits<Patch>::kind )
-		  kind = ResTraits<Patch>::kind;
-		else if ( skind == ResTraits<Product>::kind )
-		  kind = ResTraits<Product>::kind;
-		else if ( skind == ResTraits<Selection>::kind )
-		  kind = ResTraits<Selection>::kind;
-		else if ( skind != ResTraits<Package>::kind )
-		{
-		  // colon but no kind ==> colon in a name
-		  name = skind + ":" + name;
-		}
-	      }
-
-	      // check for Rel:
-	      std::list<std::string>::const_iterator next = it;
-	      if ( ++next != words.end()
-	           && (*next).find_first_of( "<>=" ) != std::string::npos )
-	      {
-		std::string op = *next;
-		if ( ++next != words.end() )
-		{
-		  name += " ";
-		  name += op;
-		  name += " ";
-		  name += *next;
-		  it = next;
-		}
-	      }
-
-	      // Add the dependency
-	      deplist_r.insert( capability::parse( kind, name ) );
+	      // Add the 'name' dependency
+	      deplist_r.insert( Capability( name, Capability::PARSED ) );
 	    }
 	  }
 
@@ -338,7 +314,7 @@ namespace zypp
 	  }
 	  else if ( key == "VERSION" )
 	  {
-	    _pimpl->product().edition = value;
+	    _pimpl->product().edition = Edition( value );
 	  }
 	  else if ( key == "ARCH" )
 	  {
@@ -349,7 +325,7 @@ namespace zypp
 	    if ( Arch::compare( Arch(_pimpl->product().arch), carch ) < 0
 		 &&  carch.compatibleWith( sysarch ) )
 	    {
-	      _pimpl->product().arch = modifier;
+	      _pimpl->product().arch = Arch( modifier );
 	    }
 	  }
 	  else if ( key == "DISTPRODUCT" )
@@ -524,10 +500,10 @@ namespace zypp
 	  if ( ! _pimpl->product().distributionName.empty() )
 	  {
 	    _pimpl->product().deps[Dep::PROVIDES].insert(
-		capability::parse( ResTraits<Product>::kind,
-				   _pimpl->product().distributionName,
-				   Rel::EQ,
-				   _pimpl->product().distributionEdition ) );
+		Capability( _pimpl->product().distributionName,
+                            Rel::EQ,
+                            _pimpl->product().distributionEdition,
+                            ResKind::product ) );
 	  }
 	}
 	if ( ! ticks.toMax() )

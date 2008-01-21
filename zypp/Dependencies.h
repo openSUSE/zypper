@@ -16,7 +16,7 @@
 #include <map>
 
 #include "zypp/Dep.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capability.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,18 +26,18 @@ namespace zypp
   //
   //	CLASS NAME : Dependencies
   //
-  /** Helper keeping CapSet for all kinds of dependencies.
+  /** Helper keeping CapabilitySet for all kinds of dependencies.
   */
-  struct Dependencies
+  struct ZYPP_DEPRECATED Dependencies
   {
-    CapSet & operator[]( Dep idx_r )
+    CapabilitySet & operator[]( Dep idx_r )
     { return _capsets[idx_r]; }
 
-    const CapSet & operator[]( Dep idx_r ) const
-    { return const_cast<std::map<Dep,CapSet>&>(_capsets)[idx_r]; }
+    const CapabilitySet & operator[]( Dep idx_r ) const
+    { return const_cast<std::map<Dep,CapabilitySet>&>(_capsets)[idx_r]; }
 
   private:
-    std::map<Dep,CapSet> _capsets;
+    std::map<Dep,CapabilitySet> _capsets;
   };
   ///////////////////////////////////////////////////////////////////
 

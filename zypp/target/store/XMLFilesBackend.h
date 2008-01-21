@@ -11,9 +11,10 @@
 */
 #ifndef DEVEL_DEVEL_DMACVICAR_XMLFILESBACKEND_H
 #define DEVEL_DEVEL_DMACVICAR_XMLFILESBACKEND_H
-
+#if 0
 #include <iosfwd>
 
+#include "zypp/NVR.h"
 #include "zypp/Atom.h"
 #include "zypp/Message.h"
 #include "zypp/Patch.h"
@@ -65,9 +66,9 @@ public:
     * initialize the storage backend
     */
   virtual void initBackend();
-  
+
   virtual Date timestamp() const;
-  
+
   /**
     * Stores a Resolvable in the active backend.
     */
@@ -111,20 +112,20 @@ public:
   protected:
   void writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &pflags );
   void writeFlags( const std::string &key, const std::set<std::string> &pflags );
-  
+
   void writeFlagsInFile( const std::string &filename, const std::set<std::string> &pflags );
   std::set<std::string> flagsFromFile( const std::string &filename ) const;
-  
+
   void updateTimestamp() const;
 
   protected:
-  
+
   /**
    * delete a path in the database, only used by deleteObject
    * and workarounds
    */
   void deleteFileObject( const Pathname &filename ) const;
-  
+
   /**
     * Directory where the xml file is stored (for the given resolvable)
     */
@@ -133,19 +134,19 @@ public:
     * Directory where the flags are stored (for the given resolvable)
     */
   std::string dirForResolvableFlags( ResObject::constPtr resolvable ) const;
-  
+
   /**
     * Encoded filename for a resolvable NVR. Does not take kind into account.
     */
   std::string fileNameForNVR( const zypp::NVR &nvr ) const;
-  
+
   /**
     * Encoded filename for a resolvable. Does not take kind into account.
     */
   std::string fileNameForResolvable( ResObject::constPtr resolvable ) const;
   /**
     * Encoded filename for resolvable flags. Does not take kind into account.
-    */  
+    */
   std::string fullPathForResolvableFlags( ResObject::constPtr resolvable ) const;
   /**
     * dir for named flags
@@ -184,11 +185,11 @@ public:
   Pattern::Ptr createPattern( const zypp::parser::xmlstore::XMLPatternData & parsed ) const;
   Atom::Ptr createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & parsed ) const;
   Language::Ptr createLanguage( const zypp::parser::xmlstore::XMLLanguageData & parsed ) const;
-  
+
   Dependencies createDependencies( const zypp::parser::xmlstore::XMLResObjectData & parsed, const Resolvable::Kind my_kind ) const;
-  
+
   Capability createCapability(const XMLDependency & dep, const Resolvable::Kind & my_kind) const;
-  
+
   private:
   class Private;
   Private *d;
@@ -203,4 +204,5 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj );
 /////////////////////////////////////////////////////////////////
 } // namespace devel
 ///////////////////////////////////////////////////////////////////
+#endif
 #endif // DEVEL_DEVEL_DMACVICAR_SQLITEBACKEND_H

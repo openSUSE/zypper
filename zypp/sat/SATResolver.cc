@@ -21,7 +21,7 @@
 
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/ResStatus.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"

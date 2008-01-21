@@ -23,7 +23,7 @@
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
 
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -774,14 +774,14 @@ struct FreshenState
 
     bool operator()( PoolItem_Ref item)
     {
-	CapSet freshens( item->dep( Dep::FRESHENS ) );
+	Capabilities freshens( item->dep( Dep::FRESHENS ) );
 	if (!freshens.empty()) {
 	    addToFreshen( item, itemmap );
 	}
 	else {					// if no freshens, look at supplements
 	    // Also regarding supplements e.g. in order to recognize
 	    // modalias dependencies. Bug #163140
-	    CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
+	    Capabilities supplements( item->dep( Dep::SUPPLEMENTS ) );
 	    if (!supplements.empty()) {
 		addToFreshen( item, itemmap );
 	    }
@@ -944,11 +944,11 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     // adding "external" provides, the the requirements will be ignored
     IgnoreMap ignoreRequires = _ignoreRequires;
-    ResPool::AdditionalCapSet additionalCapSet = pool().additionaProvide();
-    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
-	 it != additionalCapSet.end(); it++) {
-	CapSet cset = it->second;
-	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+    ResPool::AdditionalCapabilities additionalCapabilities = pool().additionaProvide();
+    for (ResPool::AdditionalCapabilities::const_iterator it = additionalCapabilities.begin();
+	 it != additionalCapabilities.end(); it++) {
+	Capabilities cset = it->second;
+	for (Capabilities::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
 	    ignoreRequires.insert(make_pair(PoolItem_Ref(), *cit));
 	}
     }
@@ -1012,30 +1012,30 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addPoolItemToEstablish (*iter);
     }
 
-    for (CapSet::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
+    for (Capabilities::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
 	initial_queue->addExtraCapability (*iter);
     }
 
     // adding "external" requires
-    additionalCapSet = pool().additionalRequire();
-    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
-	 it != additionalCapSet.end(); it++) {
-	CapSet cset = it->second;
-	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+    additionalCapabilities = pool().additionalRequire();
+    for (ResPool::AdditionalCapabilities::const_iterator it = additionalCapabilities.begin();
+	 it != additionalCapabilities.end(); it++) {
+	Capabilities cset = it->second;
+	for (Capabilities::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
 	    initial_queue->addExtraCapability (*cit);
 	}
     }
 
-    for (CapSet::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
+    for (Capabilities::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
 	initial_queue->addExtraConflict (*iter);
     }
 
     // adding "external" conflicts
-    additionalCapSet = pool().additionaConflict();
-    for (ResPool::AdditionalCapSet::const_iterator it = additionalCapSet.begin();
-	 it != additionalCapSet.end(); it++) {
-	CapSet cset = it->second;
-	for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+    additionalCapabilities = pool().additionaConflict();
+    for (ResPool::AdditionalCapabilities::const_iterator it = additionalCapabilities.begin();
+	 it != additionalCapabilities.end(); it++) {
+	Capabilities cset = it->second;
+	for (Capabilities::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
 	    initial_queue->addExtraConflict (*cit);
 	}
     }

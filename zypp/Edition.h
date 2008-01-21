@@ -86,11 +86,19 @@ namespace zypp
       Edition( const std::string & version_r,
                const std::string & release_r,
                epoch_t epoch_r = noepoch );
+      /** \overload */
+      Edition( const char * version_r,
+               const char * release_r,
+               epoch_t epoch_r = noepoch );
 
       /** Ctor taking \a version_r, \a release_r and optional \a epoch_r as string. */
       Edition( const std::string & version_r,
                const std::string & release_r,
                const std::string & epoch_r );
+      /** \overload */
+      Edition( const char * version_r,
+               const char * release_r,
+               const char * epoch_r );
 
     public:
       /** Epoch */

@@ -50,7 +50,7 @@ namespace zypp
         return; // ---> nothing to do
 
       // build obsoletes from instlist_r
-      CapSet obsoletes;
+      std::set<Capability> obsoletes;
       for ( GetResolvablesToInsDel::PoolItemList::const_iterator it = instlist_r.begin();
             it != instlist_r.end(); ++it )
         {
@@ -69,11 +69,11 @@ namespace zypp
           PoolItem_Ref ipkg( *it );
           bool delayPkg = false;
           // ...check whether an obsoletes....
-          for ( CapSet::iterator obs = obsoletes.begin();
+          for ( std::set<Capability>::iterator obs = obsoletes.begin();
                 ! delayPkg && obs != obsoletes.end(); ++obs )
             {
               // ...matches anything provided by the package?
-              for ( CapSet::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
+              for ( Capabilities::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
                     prov != ipkg->dep(Dep::PROVIDES).end(); ++prov )
                 {
                   if ( obs->matches( *prov ) == CapMatch::yes )

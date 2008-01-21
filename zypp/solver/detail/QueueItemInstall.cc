@@ -20,7 +20,7 @@
  */
 
 #include "zypp/CapFactory.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/Package.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -429,11 +429,11 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 
 	/* Construct require items for each of the item's requires that is still unsatisfied. */
 
-	CapSet caps;
+	Capabilities caps;
 
 	caps = _item->dep (Dep::REQUIRES);
 
-	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+	for (Capabilities::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
 	    _XDEBUG("this requires " << cap);
@@ -451,7 +451,7 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 
 	caps = _item->dep (Dep::RECOMMENDS);
 
-	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+	for (Capabilities::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
 	    _XDEBUG("this recommends " << cap);
@@ -468,7 +468,7 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 	/* Construct conflict items for each of the item's conflicts. */
 
 	caps = _item->dep (Dep::CONFLICTS);
-	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+	for (Capabilities::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 	    _XDEBUG("this conflicts with '" << cap << "'");
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item );
@@ -482,7 +482,7 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 	caps = _item->dep (Dep::OBSOLETES);
 	IgnoreMap ignoreMap = context->getIgnoreObsoletes();
 	
-	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+	for (Capabilities::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 	    bool found = false;
 	    for (IgnoreMap::iterator it = ignoreMap.begin();
@@ -515,7 +515,7 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 	caps = _item->dep (Dep::PROVIDES);
 	bool ignored = false;
 
-	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+	for (Capabilities::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 
 	    /* Construct establish items for each of those which
@@ -556,11 +556,11 @@ QueueItemInstall::process (const QueueItemList & mainQueue, ResolverContext_Ptr 
 
 	for (EstablishMap::iterator firstIt = establish.establishmap.begin(); firstIt != establish.establishmap.end(); ++firstIt) {
 	    bool conflictFound = false;
-	    CapSet provides = firstIt->second.resolvable()->deps()[Dep::PROVIDES];
+	    Capabilities provides = firstIt->second.resolvable()->deps()[Dep::PROVIDES];
 	    // It is useless to establish items which are conflicting with eachother. So they will
 	    // be filtered out. bug 243595
 	    for (EstablishMap::iterator secondIt = firstIt; secondIt != establish.establishmap.end() && !conflictFound; ++secondIt) {
-		CapSet conflicts = secondIt->second.resolvable()->deps()[Dep::CONFLICTS];
+		Capabilities conflicts = secondIt->second.resolvable()->deps()[Dep::CONFLICTS];
 		if (hasMatches (provides,conflicts)) {
 		    conflictFound = true;
 		    _XDEBUG("Do not establish " << firstIt->second << " cause it is conflicting with " << secondIt->second );

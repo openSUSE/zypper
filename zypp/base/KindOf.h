@@ -57,7 +57,6 @@ namespace zypp
         IdString::empty;
         IdString::size;
         IdString::c_str;
-        IdString::string;
         IdString::asString;
       public:
         /** Fast compare equal. */

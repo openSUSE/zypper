@@ -13,7 +13,6 @@
 #define ZYPP_SELECTION_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/SelectionImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,7 +29,6 @@ namespace zypp
   class Selection : public ResObject
   {
   public:
-    typedef detail::SelectionImplIf  Impl;
     typedef Selection                Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -52,15 +50,9 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Selection( const NVRAD & nvrad_r );
+    Selection( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Selection();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

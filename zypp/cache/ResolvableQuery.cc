@@ -44,7 +44,7 @@ struct ResolvableQuery::Impl
     _cmd_attr_num.reset( new sqlite3_command( _con, "select a.value from numeric_attributes a,types t where a.weak_resolvable_id=:rid and a.attr_id=t.id and t.class=:tclass and t.name=:tname;"));
 
     _cmd_disk_usage.reset( new sqlite3_command( _con, "select d.name,du.size,du.files from resolvable_disk_usage du,dir_names d where du.resolvable_id=:rid and du.dir_name_id=d.id;"));
-    
+
     MIL << "Creating Resolvable query impl" << endl;
     //         0   1     2        3        4      5     6     7               8             9             10          11            12
     _fields = "id, name, version, release, epoch, arch, kind, installed_size, archive_size, install_only, build_time, install_time, repository_id";
@@ -78,8 +78,8 @@ struct ResolvableQuery::Impl
     // see _fields definition above for the getXXX() numbers
 
     ptr->name = reader.getstring(1);
-    //ptr->edition = reader.getstring(2) reader.getstring(3), );
-    ptr->arch = _type_cache.archFor(reader.getint(5)).asString();
+    ptr->edition = Edition( reader.getstring(2), reader.getstring(3), reader.getint(4) );
+    ptr->arch = _type_cache.archFor(reader.getint(5));
     ptr->kind = _type_cache.kindFor( reader.getint(6) );
     ptr->repository = reader.getint( 12 );
 
@@ -88,7 +88,7 @@ struct ResolvableQuery::Impl
     return ptr;
   }
 
-  
+
   void query( const data::RecordId &id,
                   ProcessResolvable fnc )
   {
@@ -104,8 +104,8 @@ struct ResolvableQuery::Impl
 
   void query( const std::string &s,
               ProcessResolvable fnc  )
-  {  
-    
+  {
+
     sqlite3_command cmd( _con, "select " + _fields + " from resolvables where name like :name;");
     cmd.bind( ":name", regex2sql( s ) );
     sqlite3_reader reader = cmd.executereader();
@@ -152,7 +152,7 @@ struct ResolvableQuery::Impl
   {
     return ( queryNumericAttributeInternal( _con, record_id, klass, name, default_value) > 0 );
   }
-      
+
   int queryNumericAttribute( const data::RecordId &record_id,
                              const std::string &klass,
                              const std::string &name,
@@ -188,7 +188,7 @@ struct ResolvableQuery::Impl
     }
     return alias;
   }
-  
+
   data::RecordId queryRepositoryId( const std::string &repo_alias )
   {
     long long id = 0;
@@ -202,7 +202,7 @@ struct ResolvableQuery::Impl
     }
     return id;
   }
-  
+
   void iterateResolvablesByKindsAndStringsAndRepos( const std::vector<zypp::Resolvable::Kind> & kinds,
                   const std::vector<std::string> &strings, int flags, const std::vector<std::string> repos, ProcessResolvable fnc )
   {
@@ -340,7 +340,7 @@ private:
 
     return default_value;
   }
-  
+
   TranslatedText queryTranslatedStringAttributeInternal( sqlite3_connection &con,
                                                          const data::RecordId &record_id,
                                                          const std::string &klass,
@@ -358,7 +358,7 @@ private:
 
     TranslatedText result;
     sqlite3_reader reader = _cmd_attr_tstr->executereader();
-    
+
     int c = 0;
     while(reader.read())
     {
@@ -412,7 +412,7 @@ private:
     _cmd_attr_str->bind(":tname", name);
 
     sqlite3_reader reader = _cmd_attr_str->executereader();
-    
+
     if ( reader.read() )
       return reader.getstring(0);
     else

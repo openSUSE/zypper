@@ -11,8 +11,6 @@
 */
 #include "zypp/Script.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -24,8 +22,8 @@ namespace zypp
   //	METHOD NAME : Script::Script
   //	METHOD TYPE : Ctor
   //
-  Script::Script( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Script::Script( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -43,22 +41,22 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   bool Script::doAvailable() const
-  { return pimpl().doAvailable(); }
+  { return false; }
 
   std::string Script::doScriptInlined() const
-  { return pimpl().doScriptInlined(); }
+  { return std::string(); }
 
   OnMediaLocation Script::doScriptLocation() const
-  { return pimpl().doScriptLocation(); }
+  { return OnMediaLocation(); }
 
   bool Script::undoAvailable() const
-  { return pimpl().undoAvailable(); }
+  { return false; }
 
   std::string Script::undoScriptInlined() const
-  { return pimpl().undoScriptInlined(); }
+  { return std::string(); }
 
   OnMediaLocation Script::undoScriptLocation() const
-  { return pimpl().undoScriptLocation(); }
+  { return OnMediaLocation(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

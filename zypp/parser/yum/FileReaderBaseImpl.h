@@ -50,24 +50,24 @@ namespace zypp
 
     /**
      * Lightweight object for remembering currently processed tag.
-     * 
+     *
      * Usage:
-     * 
+     *
      * - call \ref append() on opening tag
      * - use \ref contains() to check if the given tag is being processed
      * - call \ref remove() on closing tag
-     * 
+     *
      * \note the above works only if the path elements are unique. To support
      *   also non-unique elements, an equals() method will need to be implemented
      *   and used instead of \ref contains().
-     * 
+     *
      * \note tags you want to use with TagPath must be enumerated in \ref Tag
      * enum.
      */
     struct TagPath
     {
       typedef std::list<Tag> TagList;
-      
+
       void append(const Tag tag) { path.push_back(tag); }
       void remove() { if (!path.empty()) path.pop_back(); }
       unsigned depth() const { return path.size(); }
@@ -105,7 +105,7 @@ namespace zypp
 
     /**
      * Function for processing all <code>format</code> tag subtree nodes.
-     * 
+     *
      * \return true if the package node or current subnode has been consumed
      *         (no further processing is required), false otherwise.
      */
@@ -113,14 +113,16 @@ namespace zypp
 
     /**
      * Processes RPM dependency tags (rpm:entry, rpm:requires, ...).
-     * 
+     *
      * \return true if a dependency tag has been encountered, false otherwise.
      * \throws ParseException if a serious error is encountered while parsing
      */
     bool consumeDependency(xml::Reader & reader_r, data::Dependencies & deps_r);
 
-
-    bool editionStringFromAttrs( xml::Reader & reader_r, std::string &edition );
+    void editionStringFromAttrs( xml::Reader & reader_r, Edition & edition ) const
+    { edition = Edition( reader_r->getAttribute("ver").asString(),
+                         reader_r->getAttribute("rel").asString(),
+                         reader_r->getAttribute("epoch").asString() ); }
 
   public:
     /** Appends \a tag to \ref _tagpath. */
@@ -137,7 +139,7 @@ namespace zypp
 
 
   private:
-    /** Used to remember the tag beeing currently processed. */ 
+    /** Used to remember the tag beeing currently processed. */
     TagPath _tagpath;
 
     /**

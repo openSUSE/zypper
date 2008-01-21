@@ -109,10 +109,10 @@ namespace zypp
 	      ++_c_pkg;
 	      _data = _pkgData = new data::Package;
 	      _srcpkgData = 0;
-	      _data->arch = words[3];
+	      _data->arch = Arch( words[3] );
 	    }
 	    _data->name    = words[0];
-	    _data->edition = words[1] + "-" + words[2];
+	    _data->edition = Edition( words[1], words[2] );
 	  }
 
 

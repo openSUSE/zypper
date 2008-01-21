@@ -20,10 +20,9 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/repo/RepositoryImpl.h"
 #include "zypp/ResStore.h"
-#include "zypp/cache/sqlite3x/sqlite3x.hpp"
+#include "zypp/RepoInfo.h"
 #include "zypp/cache/CacheTypes.h"
 #include "zypp/cache/ResolvableQuery.h"
-#include "zypp/RepoInfo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -77,14 +76,9 @@ namespace zypp
 
         cache::ResolvableQuery resolvableQuery();
       private:
-        void read_capabilities( sqlite3x::sqlite3_connection &con,
-                                data::RecordId repo_id,
-                                std::map<data::RecordId, std::pair<Resolvable::Kind, NVRAD> > &nvras,
-                                ProgressData &ticks );
         cache::CacheTypes _type_cache;
         cache::ResolvableQuery _rquery;
         RepoOptions _options;
-      public:
       };
       ///////////////////////////////////////////////////////////////////
 

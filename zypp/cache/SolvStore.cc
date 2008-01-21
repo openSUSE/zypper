@@ -16,7 +16,6 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::capability;
 using namespace zypp::cache;
 using zypp::data::RecordId;
 
@@ -147,7 +146,7 @@ RecordId SolvStore::consumePackage( const RecordId & repository_id,
 				     const data::Package_Ptr & package )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Package>::kind,
-      _NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
+                                  NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
   appendResObjectAttributes( id, package );
   appendPackageBaseAttributes( id, package );
 
@@ -164,7 +163,7 @@ RecordId SolvStore::consumeSourcePackage( const data::RecordId & repository_id,
                                        const data::SrcPackage_Ptr & package )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
-      _NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
+      NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
   appendResObjectAttributes( id, package );
 
   appendOnMediaLocation( id, attrSrcPackageLocation, package->repositoryLocation );
@@ -176,7 +175,7 @@ RecordId SolvStore::consumePatch( const data::RecordId & repository_id,
 {
   RecordId id = appendResolvable(
       repository_id, ResTraits<Patch>::kind,
-      _NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
+      NVRA( patch->name, patch->edition, patch->arch ), patch->deps );
 
   appendResObjectAttributes( id, patch );
 
@@ -230,7 +229,7 @@ RecordId SolvStore::consumePackageAtom( const data::RecordId & repository_id,
                                      const data::PackageAtom_Ptr & atom )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind,
-      _NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
+      NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
   appendResObjectAttributes( id, atom );
   appendPackageBaseAttributes( id, atom );
 
@@ -248,7 +247,7 @@ RecordId SolvStore::consumeMessage( const data::RecordId & repository_id,
                                  const data::Message_Ptr & message )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind,
-      _NVRA( message->name, message->edition, message->arch ), message->deps );
+      NVRA( message->name, message->edition, message->arch ), message->deps );
   appendResObjectAttributes( id, message );
 
   appendTranslatedStringAttribute( id, attrMessageText(), message->text );
@@ -259,7 +258,7 @@ RecordId SolvStore::consumeScript( const data::RecordId & repository_id,
                                 const data::Script_Ptr & script )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind,
-      _NVRA( script->name, script->edition, script->arch ), script->deps );
+      NVRA( script->name, script->edition, script->arch ), script->deps );
   appendResObjectAttributes( id, script );
 
   appendStringAttribute( id, attrScriptDoScript(), script->doScript );
@@ -273,7 +272,7 @@ RecordId SolvStore::consumePattern( const data::RecordId & repository_id,
                                      const data::Pattern_Ptr & pattern )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind,
-      _NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
+      NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
   appendResObjectAttributes( id, pattern );
 
   appendBooleanAttribute( id, attrPatternIsDefault(), pattern->isDefault );
@@ -294,7 +293,7 @@ RecordId SolvStore::consumeProduct( const data::RecordId & repository_id,
                                  const data::Product_Ptr & product )
 {
   RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind,
-      _NVRA( product->name, product->edition, product->arch ), product->deps );
+      NVRA( product->name, product->edition, product->arch ), product->deps );
   appendResObjectAttributes( id, product );
 
   appendStringAttribute( id, attrProductType(), product->type );
@@ -363,11 +362,11 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
   Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(repo));
   s->evr = str2id(_pimpl->_pool, res->edition.c_str(), 1);
 //   s->provides = adddep(pool, pd, s->provides, atts, 0);
-// 
+//
 //   s->name = str2id(pool, nvra.name.c_str(), 1);
 //   s->arch = str2id(pool, nvra.arch.c_str(), 1);
 //   s->vendor = str2id(pool, nvra.vendor.c_str(), 1);
-// 
+//
 //   if (!s->arch)
 //     s->arch = ARCH_NOARCH;
 
@@ -377,7 +376,7 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
 
 RecordId SolvStore::appendResolvable( const RecordId &repository_id,
                                        const Resolvable::Kind &kind,
-                                       const _NVRA &nvra,
+                                       const NVRA &nvra,
                                        const data::Dependencies &deps )
 {
   return appendResolvable( repository_id,
@@ -390,7 +389,7 @@ RecordId SolvStore::appendResolvable( const RecordId &repository_id,
 data::RecordId
     SolvStore::appendResolvable( const data::RecordId &repository_id,
                                   const Resolvable::Kind &kind,
-                                  const _NVRA &nvra,
+                                  const NVRA &nvra,
                                   const data::Dependencies &deps,
                                   const data::RecordId &shared_id )
 {
@@ -398,28 +397,28 @@ data::RecordId
 //   Solvable *s = pool_id2solvable(pool, repo_add_solvable(pd->repo));
 //   s->evr = makeevr_atts(pool, pd, atts);
 //   s->provides = adddep(pool, pd, s->provides, atts, 0);
-// 
+//
 //   s->name = str2id(pool, nvra.name.c_str(), 1);
 //   s->arch = str2id(pool, nvra.arch.c_str(), 1);
 //   s->vendor = str2id(pool, nvra.vendor.c_str(), 1);
-// 
+//
 //   if (!s->arch)
 //     s->arch = ARCH_NOARCH;
-// 
+//
 //   if (s->arch != ARCH_SRC && s->arch != ARCH_NOSRC)
 //     s->provides = repo_addid_dep(pd->repo, s->provides, rel2id(pool, s->name, s->evr, REL_EQ, 1), 0);
-//   
+//
 //    s->supplements = repo_fix_legacy(pd->repo, s->provides, s->supplements);
 
   // file
   //id = str2id(pool, pd->content, 1);
   //s->provides = repo_addid(pd->repo, s->provides, id);
 
- 
+
 //   long long id = _pimpl->con.insertid();
-// 
+//
 //   appendDependencies( id, deps );
- 
+
   return 0;
 }
 
@@ -431,7 +430,7 @@ void SolvStore::appendDependencies( const RecordId &resolvable_id, const data::D
   }
 }
 
-void SolvStore::appendDependencyList( const RecordId &resolvable_id, zypp::Dep deptype, const data::DependencyList &caps )
+void SolvStore::appendDependencyList( const RecordId &resolvable_id, Dep deptype, const data::DependencyList &caps )
 {
   for ( data::DependencyList::const_iterator it = caps.begin(); it != caps.end(); ++it )
   {
@@ -439,100 +438,10 @@ void SolvStore::appendDependencyList( const RecordId &resolvable_id, zypp::Dep d
   }
 }
 
-void SolvStore::appendDependency( const RecordId &resolvable_id, zypp::Dep deptype, capability::CapabilityImpl::Ptr cap )
+void SolvStore::appendDependency( const RecordId &resolvable_id, Dep deptype, Capability cap )
 {
-  if ( cap == 0 )
-  {
-    DBG << "invalid capability" << endl;
-    return;
-  }
-
-  if ( capability::isKind<NamedCap>(cap) )
-  {
-      appendNamedDependency( resolvable_id, deptype, capability::asKind<NamedCap>(cap) );
-  }
-  else if ( capability::isKind<FileCap>(cap) )
-  {
-    appendFileDependency( resolvable_id, deptype, capability::asKind<FileCap>(cap) );
-    return;
-  }
-  else if ( capability::isKind<ModaliasCap>(cap) )
-  {
-      appendModaliasDependency( resolvable_id, deptype, capability::asKind<ModaliasCap>(cap) );
-  }
-  else if ( capability::isKind<HalCap>(cap) )
-  {
-      appendHalDependency( resolvable_id, deptype, capability::asKind<HalCap>(cap) );
-  }
-  else if ( capability::isKind<FilesystemCap>(cap) )
-  {
-      appendFilesystemDependency( resolvable_id, deptype, capability::asKind<FilesystemCap>(cap) );
-  }
-  else if ( capability::isKind<SplitCap>(cap) )
-  {
-      appendSplitDependency( resolvable_id, deptype, capability::asKind<SplitCap>(cap) );
-  }
-  else
-  {
-      appendUnknownDependency( resolvable_id, deptype, cap );
-  }
-}
-
-
-void SolvStore::appendNamedDependency( const RecordId &resolvable_id, zypp::Dep deptype, capability::NamedCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("bad versioned dep"));
-  
-}
-
-void SolvStore::appendModaliasDependency( const RecordId &resolvable_id,
-                                                 zypp::Dep deptype,
-                                                 capability::ModaliasCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("Null modalias capability"));
-}
-
-void SolvStore::appendHalDependency( const RecordId &resolvable_id,
-                                                 zypp::Dep deptype,
-                                                 capability::HalCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("Null HAL capability"));
-}
-
-void SolvStore::appendFileDependency( const RecordId &resolvable_id, zypp::Dep deptype,
-                                       capability::FileCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("Null file capability"));
-}
-
-void SolvStore::appendFilesystemDependency( const data::RecordId &resolvable_id,
-                                             zypp::Dep deptype,
-                                             capability::FilesystemCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("bad versioned dep"));
-}
-
-
-void SolvStore::appendSplitDependency( const data::RecordId &resolvable_id,
-                                        zypp::Dep deptype,
-                                        capability::SplitCap::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("bad versioned dep"));
-  //DBG << "versioned : " << cap << endl;
-}
-
-void SolvStore::appendUnknownDependency( const RecordId &resolvable_id,
-                                               zypp::Dep deptype,
-                                               capability::CapabilityImpl::Ptr cap )
-{
-  if ( !cap )
-    ZYPP_THROW(Exception("Null unknown capability"));
+#warning MIGRATE TO SAT
+  // create capability from data
 }
 
 

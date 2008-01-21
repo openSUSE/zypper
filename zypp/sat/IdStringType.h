@@ -100,7 +100,6 @@ namespace zypp
       bool          empty()       const { return idStr().empty(); }
       unsigned      size()        const { return idStr().size(); }
       const char *  c_str()       const { return idStr().c_str(); }
-      std::string   string()      const { return idStr().string(); }
       std::string   asString()    const { return idStr().asString(); }
 
     public:

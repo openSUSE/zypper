@@ -28,7 +28,7 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 
 #include "zypp/solver/detail/Types.h"
 

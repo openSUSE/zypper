@@ -14,23 +14,18 @@
 
 #include "zypp/base/Deprecated.h"
 
-#include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Resolvable.h"
-#include "zypp/TranslatedText.h"
 #include "zypp/NeedAType.h"
 #include "zypp/Date.h"
+#include "zypp/ByteCount.h"
+#include "zypp/DiskUsage.h"
+#include "zypp/Repository.h"
+#include "zypp/TranslatedText.h"
 #include "zypp/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  namespace detail {
-    class ImplConnect;
-    class ResObjectImplIf;
-  }
-
-  class Repository;
-  class ByteCount;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -40,11 +35,12 @@ namespace zypp
    * Interface base for resolvable objects (common data).
    * That is, all data not needed for solving, but common
    * across all Resolvable kinds.
+   *
+   * \see \ref makeResObject for how to construct ResObjects.
   */
   class ResObject : public Resolvable
   {
   public:
-    typedef detail::ResObjectImplIf  Impl;
     typedef ResObject                Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -143,22 +139,33 @@ namespace zypp
 
   protected:
     /** Ctor */
-    ResObject( const Kind & kind_r,
-               const NVRAD & nvrad_r );
+    ResObject( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~ResObject();
-
     /** Helper for stream output */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-  private:
-    friend class detail::ImplConnect;
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
+
+  /** Create \ref ResObject from \ref sat::Solvable.
+   *
+   * This function creates the apropriate kind of ResObject
+   * depending on the sat::Solvables kind, and returns a smart
+   * pointer to it.
+   *
+   * If the sat::Solvables kind is not convertible, a NULL
+   * pointer is returned.
+   *
+   * \code
+   * sat::Solvable s;
+   * ResObject::Ptr p( makeResObject( s ) );
+   * if ( p )
+   * {
+   *
+   * }
+   * \endcode
+  */
+  inline ResObject::Ptr makeResObject( const sat::Solvable & solvable_r ) { return 0; }
 
   /** Convert ResObject::Ptr into Ptr of a certain Kind.
    * \return \c NULL iff \a p is \c NULL or points to a Resolvable

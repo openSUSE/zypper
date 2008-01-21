@@ -13,7 +13,6 @@
 #define ZYPP_ATOM_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/AtomImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,22 +25,15 @@ namespace zypp
   class Atom : public ResObject
   {
   public:
-    typedef detail::AtomImplIf       Impl;
     typedef Atom                     Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
 
   protected:
-    Atom( const NVRAD & nvrad_r );
+    Atom( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Atom();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

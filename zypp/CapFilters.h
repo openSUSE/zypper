@@ -12,6 +12,7 @@
 #ifndef ZYPP_CAPFILTERS_H
 #define ZYPP_CAPFILTERS_H
 
+#include "zypp/base/Deprecated.h"
 #include "zypp/base/Functional.h"
 #include "zypp/Capability.h"
 #include "zypp/ResObject.h"
@@ -32,38 +33,38 @@ namespace zypp
     typedef std::unary_function<Capability, bool> CapabilityFilterFunctor;
 
     /** */
-    struct ByRefers : public CapabilityFilterFunctor
+    struct ZYPP_DEPRECATED ByRefers : public CapabilityFilterFunctor
     {
-      bool operator()( const Capability & c ) const
+      ZYPP_DEPRECATED bool operator()( const Capability & c ) const
       {
-        return c.refers() == _refers;
+        return false; //c.refers() == _refers;
       }
 
-      ByRefers( Resolvable::Kind refers_r )
+      ZYPP_DEPRECATED ByRefers( Resolvable::Kind refers_r )
       : _refers( refers_r )
       {}
-      ByRefers( ResObject::constPtr p )
+      ZYPP_DEPRECATED ByRefers( ResObject::constPtr p )
       : _refers( p->kind() )
       {}
-      ByRefers( const Capability & cap_r )
-      : _refers( cap_r.refers() )
+      ZYPP_DEPRECATED ByRefers( const Capability & cap_r )
+      //: _refers( cap_r.refers() )
       {}
       Resolvable::Kind _refers;
     };
 
     /** */
-    struct ByIndex : public CapabilityFilterFunctor
+    struct ZYPP_DEPRECATED ByIndex : public CapabilityFilterFunctor
     {
-      bool operator()( const Capability & c ) const
+      ZYPP_DEPRECATED bool operator()( const Capability & c ) const
       {
-        return c.index() == _index;
+        return false; //c.index() == _index;
       }
 
-      ByIndex( const std::string & index_r )
+      ZYPP_DEPRECATED ByIndex( const std::string & index_r )
       : _index( index_r )
       {}
-      ByIndex( const Capability & cap_r )
-      : _index( cap_r.index() )
+      ZYPP_DEPRECATED ByIndex( const Capability & cap_r )
+      //: _index( cap_r.index() )
       {}
       std::string _index;
     };

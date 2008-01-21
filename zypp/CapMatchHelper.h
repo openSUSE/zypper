@@ -46,24 +46,23 @@ namespace zypp
   */
   //@{
 
-  /** Algorithm invoking \c action_r on each \ref CapSet entry
+  /** Algorithm invoking \c action_r on each \ref Capabilities entry
    * that matches a given \ref Capability.
   */
-  inline int forEachMatchIn( CapSet::const_iterator begin_r,
-                             CapSet::const_iterator end_r,
+  inline int forEachMatchIn( Capabilities::const_iterator begin_r,
+                             Capabilities::const_iterator end_r,
                              const Capability & lhs_r,
                              function<bool(const Capability &)> action_r )
   {
-    std::string index( lhs_r.index() );
     return invokeOnEach( begin_r, end_r,
                          MatchesCapability( lhs_r ), // filter
                          action_r );
   }
 
-  /** Algorithm invoking \c action_r on each \ref CapSet entry
+  /** Algorithm invoking \c action_r on each \ref Capabilities entry
    * that matches a given \ref Capability.
   */
-  inline int forEachMatchIn( const CapSet & capset_r,
+  inline int forEachMatchIn( const Capabilities & capset_r,
                              const Capability & lhs_r,
                              function<bool(const Capability &)> action_r )
   {
@@ -92,29 +91,33 @@ namespace zypp
                              const Capability & lhs_r,
                              function<bool(const CapAndItem &)> action_r )
   {
+#warning FIX BROKEN BROKEN POOL byCapabilityIndex
+    return -1;
+#if 0
     std::string index( lhs_r.index() );
     return invokeOnEach( pool_r.byCapabilityIndexBegin( index, dep_r ),
                          pool_r.byCapabilityIndexEnd( index, dep_r ),
                          MatchesCapability( lhs_r ), // filter
                          action_r );
+#endif
   }
 
 
   ///////////////////////////////////////////////////////////////////
 
   /** Functor invoking \c action_r on each matching \ref Capability
-   *  in a \ref CapSet.
+   *  in a \ref Capabilities.
    *
    * Functor is provided to ease using \ref forEachMatchIn as action
-   * in other algorithms (nested loop over two CapSets).
+   * in other algorithms (nested loop over two Capabilitiess).
   */
-  class ForEachMatchInCapSet
+  class ForEachMatchInCapabilities
   {
   public:
     typedef function<bool(const Capability &, const Capability &)> Action;
 
   public:
-    ForEachMatchInCapSet( const CapSet & set_r, const Action & action_r )
+    ForEachMatchInCapabilities( const Capabilities & set_r, const Action & action_r )
     : _set( set_r )
     , _action( action_r )
     {}
@@ -126,18 +129,18 @@ namespace zypp
     }
 
   private:
-    const CapSet & _set;
+    const Capabilities & _set;
     Action         _action;
   };
 
   /** Invoke \c action_r on each matching pair of Capabilities within
-   * two CapSets. */
-  inline int forEachMatchIn( const CapSet & lhs_r,
-                             const CapSet & rhs_r,
+   * two Capabilitiess. */
+  inline int forEachMatchIn( const Capabilities & lhs_r,
+                             const Capabilities & rhs_r,
                              function<bool(const Capability &, const Capability &)> action_r )
   {
     return invokeOnEach( lhs_r.begin(), lhs_r.end(),
-                         ForEachMatchInCapSet( rhs_r, action_r ) );
+                         ForEachMatchInCapabilities( rhs_r, action_r ) );
   }
   ///////////////////////////////////////////////////////////////////
 
@@ -151,18 +154,18 @@ namespace zypp
     };
   }
 
-  /** Return \c true if the CapSet contains at least one Capabilitiy
+  /** Return \c true if the Capabilities contains at least one Capabilitiy
    *  that matches.
   */
-  inline bool hasMatches( const CapSet & lhs_r, const Capability & rhs_r )
+  inline bool hasMatches( const Capabilities & lhs_r, const Capability & rhs_r )
   {
     return( forEachMatchIn( lhs_r, rhs_r, capmatch_detail::AlwaysFalse() ) < 0 );
   }
 
-  /** Return \c true if the CapSets contain at least one pair of
+  /** Return \c true if the Capabilitiess contain at least one pair of
    *  Capabilities that match.
   */
-  inline bool hasMatches( const CapSet & lhs_r, const CapSet & rhs_r )
+  inline bool hasMatches( const Capabilities & lhs_r, const Capabilities & rhs_r )
   {
     return( forEachMatchIn( lhs_r, rhs_r, capmatch_detail::AlwaysFalse() ) < 0 );
   }

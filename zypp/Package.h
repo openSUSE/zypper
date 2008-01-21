@@ -13,7 +13,8 @@
 #define ZYPP_PACKAGE_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/PackageImplIf.h"
+#include "zypp/PackageKeyword.h"
+#include "zypp/Changelog.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,7 +31,6 @@ namespace zypp
   class Package : public ResObject
   {
   public:
-    typedef detail::PackageImplIf    Impl;
     typedef Package                  Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -98,15 +98,9 @@ namespace zypp
     OnMediaLocation location() const;
 
   protected:
-    Package( const NVRAD & nvrad_r );
+    Package( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Package();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

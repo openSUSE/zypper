@@ -131,7 +131,7 @@ namespace zypp
         _filenames.clear();
 
         _resolvable->name = reader_r->getAttribute("name").asString();
-        _resolvable->arch = reader_r->getAttribute("arch").asString();
+        _resolvable->arch = Arch( reader_r->getAttribute("arch").asString() );
 
         return true;
       }
@@ -139,7 +139,7 @@ namespace zypp
       // xpath: /filelists/package/version
       if (reader_r->name() == "version")
       {
-        editionStringFromAttrs( reader_r,  _resolvable->edition );
+        editionStringFromAttrs( reader_r, _resolvable->edition );
         return true;
       }
 

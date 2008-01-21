@@ -13,23 +13,17 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
-#include "zypp/capability/CapabilityImpl.h"
-#include "zypp/capability/Capabilities.h"
 
 #include "zypp/data/ResolvableDataConsumer.h"
 #include "zypp/data/RecordId.h"
 
-#include "zypp/base/PtrTypes.h"
+#include "zypp/NVRA.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ProgressData.h"
 #include "zypp/cache/Attribute.h"
-
-#include "satsolver/solvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,20 +31,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace cache
   { /////////////////////////////////////////////////////////////////
-
-    struct _NVRA
-    {
-      _NVRA( const std::string p_name = std::string(),
-             const std::string p_version = std::string(),
-             const std::string p_release = std::string(),
-             const std::string p_arch = std::string() )
-        : name(p_name), version(p_version), release(p_release), arch(p_arch)
-      {}
-      std::string name;
-      std::string version;
-      std::string release;
-      std::string arch;
-    };
 
     /**
      * The cache store caches resolvable data.
@@ -198,7 +178,7 @@ namespace zypp
        */
       virtual data::RecordId consumeFilelist( const data::RecordId & resolvable_id,
 					      const data::Filenames & filenames );
-      
+
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
        *
@@ -232,7 +212,7 @@ namespace zypp
        * Appends a resolvable to the store.
        *
        * You have to specify with \a kind of resolvable are you inserting
-       * and its \c _NVRA (name version release and architecture ).
+       * and its \c NVRA (name version release and architecture ).
        * Optionaly you can pass a list of \c CapabilityImpl::Ptr
        * as dependencies for the resolvable.
        *
@@ -254,7 +234,7 @@ namespace zypp
        */
       data::RecordId appendResolvable( const data::RecordId &repository_id,
                                        const Resolvable::Kind &kind,
-                                       const _NVRA &nvra,
+                                       const NVRA &nvra,
                                        const data::Dependencies &deps );
 
       /**
@@ -269,7 +249,7 @@ namespace zypp
        */
       data::RecordId appendResolvable( const data::RecordId &repository_id,
                                        const Resolvable::Kind &kind,
-                                       const _NVRA &nvra,
+                                       const NVRA &nvra,
                                        const data::Dependencies &deps,
                                        const data::RecordId &shared_id );
       /**
@@ -299,9 +279,8 @@ namespace zypp
        * FIXME should it \throw if the resolvable does not exist?
        */
       void appendDependencyList( const data::RecordId &resolvable_id,
-                                 zypp::Dep deptype,
+                                 Dep deptype,
                                  const data::DependencyList &dlist );
-
       /**
        * Adds a dependency to the store.
        *
@@ -315,139 +294,8 @@ namespace zypp
        * FIXME should it \throw if the resolvable does not exist?
        */
       void appendDependency( const data::RecordId &resolvable_id,
-                             zypp::Dep deptype,
-                             capability::CapabilityImpl::Ptr cap );
-
-      /**
-       * Adds a Named dependency to the store.
-       *
-       * A \ref NamedCap::Ptr \a dlist to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the named capability using either
-       * \ref capability::parse or \ref capability::buildNamed
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendNamedDependency( const data::RecordId &, zypp::Dep,
-                                  capability::NamedCap::Ptr);
-
-      /**
-       * Adds a file dependency to the store.
-       *
-       * A \ref FileCap::Ptr \a dlist to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the file capability using either
-       * \ref capability::parse or \ref capability::buildFile
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendFileDependency( const data::RecordId &, zypp::Dep,
-                                 capability::FileCap::Ptr);
-
-      /**
-       * Adds a Modalias dependency to the store.
-       *
-       * A \ref ModaliasCap::Ptr \a cap to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the modalias capability using either
-       * \ref capability::parse or \ref capability::buildModalias
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendModaliasDependency( const data::RecordId &resolvable_id,
-                                     zypp::Dep deptype,
-                                     capability::ModaliasCap::Ptr cap);
-
-      /**
-       * Adds a Hal dependency to the store.
-       *
-       * A \ref HalCap::Ptr \a cap to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the modalias capability using either
-       * \ref capability::parse or \ref capability::buildHal
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendHalDependency( const data::RecordId &resolvable_id,
-                                      zypp::Dep deptype,
-                                      capability::HalCap::Ptr cap );
-
-      /**
-       * Adds a Filesystem dependency to the store.
-       *
-       * A \ref FilesystemCap::Ptr \a cap to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the filesystem capability using either
-       * \ref capability::parse or \ref capability::buildFilesystem
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendFilesystemDependency( const data::RecordId &resolvable_id,
-                                       zypp::Dep deptype,
-                                       capability::FilesystemCap::Ptr cap );
-      
-      /**
-       * Adds a split dependency to the store.
-       *
-       * A \ref SplitCap::Ptr \a cap to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the filesystem capability using either
-       * \ref capability::parse or \ref capability::buildSplit
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendSplitDependency( const data::RecordId &resolvable_id,
-                                  zypp::Dep deptype,
-                                  capability::SplitCap::Ptr cap );
-      
-      /**
-       * Adds a unknown dependency to the store.
-       *
-       * A \ref Capability::Ptr \a cap to be specified. Among
-       * which type of dependency \ref zypp::Dep it is as
-       * the \a deptype argument.
-       *
-       * \a resolvable_id is the resolvable Id in the SolvStore
-       * that will own the capability
-       *
-       * You can create the capability using either
-       * \ref capability::parse
-       *
-       * FIXME should it \throw if the resolvable does not exist?
-       */
-      void appendUnknownDependency( const data::RecordId &resolvable_id,
-                                    zypp::Dep deptype,
-                                    capability::CapabilityImpl::Ptr cap );
+                             Dep deptype,
+                             Capability cap );
 
       /**
        * Insert patch RPM data into <tt>patch_packages</tt> table.
@@ -766,7 +614,7 @@ namespace zypp
        * Appends a solvable to the store.
        *
        * You have to specify with \a kind of resolvable are you inserting
-       * and its \c _NVRA (name version release and architecture ).
+       * and its \c NVRA (name version release and architecture ).
        * Optionaly you can pass a list of \c CapabilityImpl::Ptr
        * as dependencies for the resolvable.
        *

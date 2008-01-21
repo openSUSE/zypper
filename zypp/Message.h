@@ -13,7 +13,6 @@
 #define ZYPP_MESSAGE_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/MessageImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,7 +27,6 @@ namespace zypp
   class Message : public ResObject
   {
   public:
-    typedef detail::MessageImplIf           Impl;
     typedef Message                         Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -38,18 +36,12 @@ namespace zypp
     /** Get the text of the message */
     TranslatedText text() const;
     /** Patch the message belongs to - if any */
-    Patch::constPtr patch() const;
+    ResTraits<Patch>::constPtrType patch() const;
 
   protected:
-    Message( const NVRAD & nvrad_r );
+    Message( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Message();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

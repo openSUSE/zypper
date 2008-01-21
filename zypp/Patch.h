@@ -13,7 +13,6 @@
 #define ZYPP_PATCH_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/PatchImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -32,14 +31,13 @@ namespace zypp
   class Patch : public ResObject
   {
   public:
-    typedef detail::PatchImplIf      Impl;
     typedef Patch                    Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    typedef Impl::AtomList AtomList;
+    typedef std::list<ResObject::Ptr> AtomList;
 
   public:
     /** Patch ID */
@@ -57,22 +55,11 @@ namespace zypp
     /** Is the patch installation interactive? (does it need user input?) */
     bool interactive() const;
 
-
-    void mark_atoms_to_freshen(bool freshen) ZYPP_DEPRECATED;
-    bool any_atom_selected() ZYPP_DEPRECATED;
-    void select() ZYPP_DEPRECATED;
-
   protected:
     /** Ctor */
-    Patch( const NVRAD & nvrad_r );
+    Patch( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Patch();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

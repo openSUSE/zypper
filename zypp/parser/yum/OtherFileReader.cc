@@ -132,7 +132,7 @@ namespace zypp
         _changelog.clear();
 
         _resolvable->name = reader_r->getAttribute("name").asString();
-        _resolvable->arch = reader_r->getAttribute("arch").asString();
+        _resolvable->arch = Arch( reader_r->getAttribute("arch").asString() );
 
         return true;
       }

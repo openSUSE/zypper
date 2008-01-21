@@ -13,32 +13,11 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Measure.h"
-#include "zypp/capability/Capabilities.h"
-#include "zypp/cache/ResolvableQuery.h"
-#include "zypp/detail/ResImplTraits.h"
-#include "zypp/CapFactory.h"
-
-#include "zypp/Package.h"
-#include "zypp/SrcPackage.h"
-#include "zypp/Product.h"
-#include "zypp/Pattern.h"
-#include "zypp/Patch.h"
-#include "zypp/Message.h"
-#include "zypp/Script.h"
-#include "zypp/Atom.h"
-
 #include "zypp/repo/cached/RepoImpl.h"
-#include "zypp/repo/cached/PackageImpl.h"
-#include "zypp/repo/cached/SrcPackageImpl.h"
-#include "zypp/repo/cached/ProductImpl.h"
-#include "zypp/repo/cached/PatternImpl.h"
-#include "zypp/repo/cached/PatchImpl.h"
-#include "zypp/repo/cached/MessageImpl.h"
-#include "zypp/repo/cached/ScriptImpl.h"
-#include "zypp/repo/cached/AtomImpl.h"
+#include "zypp/cache/ResolvableQuery.h"
 #include "zypp/cache/CacheAttributes.h"
+#include "zypp/cache/sqlite3x/sqlite3x.hpp"
 
-using namespace zypp::detail;
 using namespace zypp::cache;
 using namespace std;
 using namespace sqlite3x;
@@ -68,6 +47,8 @@ RepoImpl::~RepoImpl()
 
 void RepoImpl::createResolvables()
 {
+#warning IMPLEMENT REPOIMPL::CREATERESOLVABLES
+#if 0
   ProgressData ticks;
   ticks.sendTo(_options.readingResolvablesProgress);
   ticks.name(str::form(_( "Reading '%s' repository cache"), info().alias().c_str()));
@@ -172,6 +153,7 @@ void RepoImpl::createResolvables()
       cerr << "Exception Occured: " << ex.what() << endl;
    }
   //extract_packages_from_directory( _store, thePath, selfRepositoryRef(), true );
+#endif
 }
 
 void RepoImpl::createPatchAndDeltas()
@@ -311,233 +293,12 @@ ResolvableQuery RepoImpl::resolvableQuery()
   return _rquery;
 }
 
-void RepoImpl::read_capabilities( sqlite3_connection &con,
-                                  data::RecordId repo_id,
-                                  map<data::RecordId, pair<Resolvable::Kind, NVRAD> > &nvras,
-                                  ProgressData &ticks )
-{
-  CapFactory capfactory;
-
-
-  // precompile statements
-
-
-
-//   map<data::RecordId, capability::CapabilityImpl::Ptr> named_caps;
-//   sqlite3_command select_named_cmd( con, "select v.id, c.refers_kind, n.name, v.version, v.release, v.epoch, v.relation named_capabilities v, capabilities c, names n where v.name_id=n.id and c.id=ncc.capability_id and ncc.named_capability_id=v.id;");
-//   {
-//     debug::Measure mnc("read named capabilities");
-//     sqlite3_reader reader = select_named_cmd.executereader();
-//     while  ( reader.read() )
-//     {
-//
-//     }
-//   }
-  sqlite3_command select_named_cmd( con, "select v.refers_kind, v.name_id, v.version, v.release, v.epoch, v.relation, v.dependency_type, v.resolvable_id from named_capabilities v, resolvables res where res.repository_id=:repo_id and v.resolvable_id=res.id;");
-
-  sqlite3_command select_file_cmd( con, "select fc.refers_kind, dn.name, fn.name, fc.dependency_type, fc.resolvable_id from file_capabilities fc, files f, dir_names dn, file_names fn, resolvables res where f.id=fc.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and fc.resolvable_id=res.id and res.repository_id=:repo_id;");
-
-  sqlite3_command select_hal_cmd( con, "select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc, resolvables res where hc.resolvable_id=res.id and res.repository_id=:repo_id;");
-
-  sqlite3_command select_modalias_cmd( con, "select mc.refers_kind, mc.name, mc.pkgname, mc.value, mc.relation, mc.dependency_type, mc.resolvable_id from modalias_capabilities mc, resolvables res where mc.resolvable_id=res.id and res.repository_id=:repo_id;");
-
-  sqlite3_command select_filesystem_cmd( con, "select v.refers_kind, n.name, v.dependency_type, v.resolvable_id from filesystem_capabilities v, names n, resolvables res where v.name_id=n.id and v.resolvable_id=res.id and res.repository_id=:repo_id;");
-
-  sqlite3_command select_split_cmd( con, "select v.refers_kind, n.name, dn.name, fn.name, v.dependency_type, v.resolvable_id from split_capabilities v, names n, resolvables res, files f, dir_names dn, file_names fn where v.name_id=n.id and v.resolvable_id=res.id and f.id=v.file_id and f.dir_name_id=dn.id and f.file_name_id=fn.id and res.repository_id=:repo_id;");
-
-  sqlite3_command select_other_cmd( con, "select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc, resolvables res where oc.resolvable_id=res.id and res.repository_id=:repo_id;");
-
-
-  std::map<int,std::string> namemap;
-  sqlite3_command get_names_cmd( con, "select id,name from names;" );
-  {
-    sqlite3_reader reader = get_names_cmd.executereader();
-    while  ( reader.read() )
-    {
-      namemap[reader.getint(0)] = reader.getstring(1);
-    }
-  }
-
-  {
-    debug::Measure mnc("read named capabilities");
-    select_named_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_named_cmd.executereader();
-
-    // FIXME Move this logic to tick()?
-    Date start(Date::now());
-    Capability oldcap;
-    Resolvable::Kind oldrefer;
-    Rel oldrel;
-    //std::string oldname;
-    int oldname = -1;
-    std::string oldver, oldrelease;
-    int oldepoch = 0;
-
-
-    while  ( reader.read() )
-    {
-      ticks.tick();
-
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-      int name = reader.getint(1);
-      Rel rel = _type_cache.relationFor(reader.getint(5));
-
-      if ( rel == zypp::Rel::NONE )
-      {
-        if (oldname != name || rel != oldrel || refer!=oldrefer)
-	{
-	  oldrel = rel;
-	  oldrefer = refer;
-	  oldname = name;
-          capability::NamedCap *ncap = new capability::NamedCap( refer, namemap[name] );
-	  oldcap = capfactory.fromImpl ( capability::CapabilityImpl::Ptr(ncap) );
-	}
-      }
-      else
-      {
-	std::string ver = reader.getstring(2);
-	std::string release = reader.getstring(3);
-	int epoch = reader.getint(4);
-        if (oldname != name || rel != oldrel || refer!=oldrefer
-	    || oldver != ver
-	    || oldrelease != release
-	    || oldepoch != epoch)
-	{
-	  oldrel = rel;
-	  oldrefer = refer;
-	  oldname = name;
-	  oldver = ver;
-	  oldrelease = release;
-	  oldepoch = epoch;
-
-          capability::VersionedCap *vcap = new capability::VersionedCap( refer, namemap[name], /* rel */ rel, Edition( ver, release, epoch ) );
-	  oldcap = capfactory.fromImpl( capability::CapabilityImpl::Ptr(vcap) );
-	}
-      }
-
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(6));
-      data::RecordId rid = reader.getint64(7);
-      nvras[rid].second[deptype].insert(oldcap);
-    }
-  }
-
-  {
-    debug::Measure mnf("read file capabilities");
-    select_file_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_file_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-      capability::FileCap *fcap = new capability::FileCap( refer, reader.getstring(1) + "/" + reader.getstring(2) );
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(3));
-      data::RecordId rid = reader.getint64(4);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fcap) ) );
-    }
-  }
-
-  {
-    debug::Measure mnf("read hal capabilities");
-    select_hal_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_hal_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      //select hc.refers_kind, hc.name, hc.value, hc.relation, hc.dependency_type, hc.resolvable_id from hal_capabilities hc
-
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-
-      Rel rel = _type_cache.relationFor(reader.getint(3));
-      capability::HalCap *hcap = new capability::HalCap( refer, reader.getstring(1), rel, reader.getstring(2) );
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
-      data::RecordId rid = reader.getint64(5);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(hcap) ) );
-    }
-  }
-
-  {
-    debug::Measure mnf("read modalias capabilities");
-    select_modalias_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_modalias_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-
-      Rel rel = _type_cache.relationFor(reader.getint(4));
-      capability::ModaliasCap *mcap = new capability::ModaliasCap( refer, reader.getstring(1), rel, reader.getstring(3) );
-      mcap->setPkgname(reader.getstring(2));
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(5));
-      data::RecordId rid = reader.getint64(6);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(mcap) ) );
-    }
-  }
-
-  {
-    debug::Measure mnf("read filesystem capabilities");
-    select_filesystem_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_filesystem_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-
-      capability::FilesystemCap *fscap = new capability::FilesystemCap( refer, reader.getstring(1) );
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(2));
-      data::RecordId rid = reader.getint64(3);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(fscap) ) );
-    }
-  }
-
-  {
-    debug::Measure mnf("read split capabilities");
-    select_split_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_split_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-
-      capability::SplitCap *scap = new capability::SplitCap( refer, reader.getstring(1),
-                                                             reader.getstring(2) + "/" + reader.getstring(3) );
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(4));
-      data::RecordId rid = reader.getint64(5);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl( capability::CapabilityImpl::Ptr(scap) ) );
-    }
-  }
-
-  {
-    debug::Measure mnf("read other capabilities");
-    select_other_cmd.bind(":repo_id", repo_id);
-    sqlite3_reader reader = select_other_cmd.executereader();
-    while  ( reader.read() )
-    {
-      ticks.tick();
-      //select oc.refers_kind, oc.value, oc.dependency_type, oc.resolvable_id from other_capabilities oc;
-
-      Resolvable::Kind refer = _type_cache.kindFor(reader.getint(0));
-      capability::CapabilityImpl::Ptr cap = capability::parse( refer, reader.getstring(1));
-
-      if ( !cap )
-      {
-        ERR << "Invalid capability " <<  reader.getstring(1) << endl;
-      }
-
-      zypp::Dep deptype = _type_cache.deptypeFor(reader.getint(2));
-      data::RecordId rid = reader.getint64(3);
-      nvras[rid].second[deptype].insert( capfactory.fromImpl(cap) );
-    }
-  }
-
-  MIL << nvras.size() << " capabilities" << endl;
-}
-
 
 /////////////////////////////////////////////////////////////////
-} // namespace plaindir
+} // namespace cached
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
-} // namespace repository
+} // namespace repo
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 } // namespace zypp

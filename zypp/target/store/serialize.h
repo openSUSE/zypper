@@ -29,9 +29,6 @@
 #include <zypp/Selection.h>
 #include <zypp/Product.h>
 #include <zypp/Edition.h>
-#include <zypp/CapSet.h>
-
-#include <zypp/Capability.h>
 
 #define SERIALIZER_VERSION "2.0"
 
@@ -45,19 +42,19 @@ namespace storage
 template<class T>
 std::string toXML( const T &obj ); //undefined
 
-template<> 
+template<>
 std::string toXML( const Edition &edition );
 
-template<> 
+template<>
 std::string toXML( const Arch &arch );
 
-template<> 
+template<>
 std::string toXML( const Capability &cap );
 
-template<> 
-std::string toXML( const CapSet &caps );
+template<>
+std::string toXML( const Capabilities &caps );
 
-template<> 
+template<>
 std::string toXML( const Dependencies &dep );
 
 /**
@@ -65,13 +62,13 @@ std::string toXML( const Dependencies &dep );
  * NOTE: This wont serialize child classes properties
  * Use castedToXML for that.
  */
-template<> 
+template<>
 std::string toXML( const Resolvable::constPtr &obj );
 
 /**
  * Serialize ResObject properties
  */
-template<> 
+template<>
 std::string toXML( const ResObject::constPtr &obj );
 
 /**
@@ -89,31 +86,31 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
  */
 std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural = false );
 
-template<> 
+template<>
 std::string toXML( const Package::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Script::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Message::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Patch::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Atom::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Pattern::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Selection::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Product::constPtr &obj );
 
-template<> 
+template<>
 std::string toXML( const Language::constPtr &obj );
 
 /////////////////////////////////////////////////////////////////

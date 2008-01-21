@@ -19,7 +19,7 @@
  * 02111-1307, USA.
  */
 
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -353,8 +353,8 @@ QueueItemUninstall::process (const QueueItemList & mainQueue, ResolverContext_Pt
 	    // look at the provides of the to-be-uninstalled resolvable and
 	    //   check if anyone (installed) needs it
 
-	    CapSet provides = _item->dep(Dep::PROVIDES);
-	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
+	    Capabilities provides = _item->dep(Dep::PROVIDES);
+	    for (Capabilities::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
 
 		//world()->foreachRequiringPoolItem (*iter, unlink_check_cb, &info);
 
@@ -414,9 +414,9 @@ QueueItemUninstall::process (const QueueItemList & mainQueue, ResolverContext_Pt
 	// we're uninstalling an installed item
 	//   loop over all its provides and check if any installed item requires
 	//   one of these provides
-	CapSet provides = _item->dep(Dep::PROVIDES);
+	Capabilities provides = _item->dep(Dep::PROVIDES);
 
-	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
+	for (Capabilities::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
 	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
 
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
@@ -474,8 +474,8 @@ QueueItemUninstall::process (const QueueItemList & mainQueue, ResolverContext_Pt
 	    goto finished;
 	}
 
-	CapSet recomments = _item->dep (Dep::RECOMMENDS);
-	for (CapSet::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
+	Capabilities recomments = _item->dep (Dep::RECOMMENDS);
+	for (Capabilities::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
 	    const Capability cap = *iter;
 	    _XDEBUG("this recommends " << cap);
 	    ProvidesItem provides( pool(), qil, true ); // soft	    

@@ -17,7 +17,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Bit.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -373,7 +373,6 @@ namespace zypp
 
     return ret;
   }
-
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

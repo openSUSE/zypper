@@ -40,7 +40,7 @@ namespace zypp
   {
     public:
       /** Default ctor, empty string. */
-      IdString() : _id( 1 ) {}
+      IdString() : _id( sat::detail::emptyId ) {}
 
       /** Ctor from id. */
       explicit IdString( sat::detail::IdType id_r ) : _id( id_r ) {}
@@ -66,7 +66,7 @@ namespace zypp
        * This is true for \ref Null and \ref Empty.
        */
       bool empty() const
-      { return( _id == 1 || _id == 0 ); }
+      { return( _id == sat::detail::emptyId || _id == sat::detail::noId ); }
 
       /** The strings size. */
       unsigned size() const;
@@ -76,10 +76,6 @@ namespace zypp
       const char * c_str() const;
 
       /** Conversion to <tt>std::string</tt> */
-      std::string string() const
-      { return c_str(); }
-
-      /** \overload */
       std::string asString() const
       { return c_str(); }
 

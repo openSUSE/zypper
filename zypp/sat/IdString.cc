@@ -23,13 +23,8 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  // MPL checks for satlib constants we explicity use in
-  // the header file.
-  BOOST_MPL_ASSERT_RELATION( 0, ==, STRID_NULL );
-  BOOST_MPL_ASSERT_RELATION( 1, ==, STRID_EMPTY );
-
-  const IdString IdString::Null ( STRID_NULL );
-  const IdString IdString::Empty( STRID_EMPTY );
+  const IdString IdString::Null ( sat::detail::noId );
+  const IdString IdString::Empty( sat::detail::emptyId );
 
   /////////////////////////////////////////////////////////////////
 

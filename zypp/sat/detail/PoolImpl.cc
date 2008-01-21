@@ -33,6 +33,9 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       // MPL checks for satlib constants we redefine:
+      BOOST_MPL_ASSERT_RELATION( noId,                 ==, STRID_NULL );
+      BOOST_MPL_ASSERT_RELATION( emptyId,              ==, STRID_EMPTY );
+
       BOOST_MPL_ASSERT_RELATION( solvablePrereqMarker, ==, SOLVABLE_PREREQMARKER );
       BOOST_MPL_ASSERT_RELATION( solvableFileMarker,   ==, SOLVABLE_FILEMARKER );
 

@@ -102,10 +102,17 @@ namespace zypp
     : _op( for_use_in_switch(bits_r & ANY_e) )
     {}
 
+    /** Test whether \a bits_r is a valid \ref Rel (no extra bits set). */
+    static bool isRel( unsigned bits_r )
+    { return (bits_r & ANY_e) == bits_r; }
+
     /** String representation of relational operator.
      * \return "==", "!=", "<", "<=", ">", ">=", "ANY" or "NONE"
     */
     const std::string & asString() const;
+    /** \overload */
+    const char * c_str() const
+    { return asString().c_str(); }
 
     /** Enumarator provided for use in \c switch statement.
      * The sole reason for providing enum \ref for_use_in_switch is,
