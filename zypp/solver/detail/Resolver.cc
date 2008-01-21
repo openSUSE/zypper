@@ -34,6 +34,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/SystemResObject.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/solver/detail/Testcase.h"
 #include "zypp/capability/FilesystemCap.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
@@ -1312,6 +1313,13 @@ Resolver::resolvePool( bool tryAllPossibilities )
     // Solving with the satsolver
     if ( !getenv("ZYPP_RC_SOLVER")) {
 	MIL << "-------------- Calling SAT Solver -------------------" << endl;
+	
+	// create testcase (only tasks will be written)
+	Testcase testcase("/var/log/YaST2/autotestcase");
+	testcase.createTestcase (*this,
+				 false,  // do not dump pool
+				 false); // do not run solver while generating testcase   
+	
 	if ( !_satResolver ) { 
 	    // syncing with sat pool
 	    sat::Pool satPool( sat::Pool::instance() );
