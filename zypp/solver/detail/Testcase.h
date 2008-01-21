@@ -128,7 +128,8 @@ class Testcase {
     Testcase ();    
     ~Testcase ();
 
-    bool createTestcase (Resolver & resolver);
+    bool createTestcase (Resolver & resolver, bool dumpPool = true, bool runSolver = true);
+    bool createTestcasePool(const ResPool &pool);
 
 };
 
