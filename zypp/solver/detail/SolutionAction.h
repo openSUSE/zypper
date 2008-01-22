@@ -67,10 +67,7 @@ namespace zypp
 	    KEEP,
 	    INSTALL,
 	    REMOVE,
-	    UNLOCK,
-	    ALLBRANCHES_ON,
-	    ALLBRANCHES_OFF,	    
-	    DOUBLETIMEOUT
+	    UNLOCK
 	} TransactionKind;
 
 

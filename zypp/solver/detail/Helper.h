@@ -29,7 +29,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Capabilities.h"
-
+#include "zypp/base/String.h"
 #include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -74,6 +74,10 @@ class Helper {
 
     // for item, check if this is the 'best' uninstalled (best arch, best version) item
     static bool isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item);
+
+    // Human readable item
+    static std::string itemToString (PoolItem_Ref item, bool shortVersion=false);
+    static std::string capToString (const Capability & capability);
 
     friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);
 

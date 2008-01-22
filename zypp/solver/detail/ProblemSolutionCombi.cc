@@ -28,7 +28,6 @@
 #include "zypp/base/Gettext.h"
 
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
-#include "zypp/solver/detail/ResolverInfo.h"
 
 using namespace std;
 

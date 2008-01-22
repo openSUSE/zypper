@@ -67,9 +67,6 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case INSTALL:	os << "Install"; break;
 	case REMOVE:	os << "Remove"; break;
 	case UNLOCK:	os << "Unlock"; break;
-	case ALLBRANCHES_ON:	os << "All branches on"; break;
-	case ALLBRANCHES_OFF:	os << "All branches off"; break;	    
-	case DOUBLETIMEOUT:	os << "Double timeout"; break;
     }
     os << " ";
     os << _item;
@@ -162,15 +159,6 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
-	case ALLBRANCHES_ON:
-	    resolver.setTryAllPossibilities (true);
-	    break;
-	case ALLBRANCHES_OFF:
-	    resolver.setTryAllPossibilities (false);
-	    break;
-	case DOUBLETIMEOUT:
-	    resolver.setTimeout (resolver.timeout()*2);
-	    break;	    
 	default:
 	    ERR << "Wrong TransactionKind" << endl;
 	    ret = false;
@@ -182,7 +170,7 @@ bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
     Dependencies dependencies;
-    Capabilities depList;
+    CapabilitySet depList;
     if (_item != PoolItem_Ref()) {    
 	dependencies = _item.resolvable()->deps();
 	depList = dependencies[Dep::CONFLICTS];
@@ -190,7 +178,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
     switch (_kind) {
         case CONFLICTS:
 	    // removing conflict in both resolvables
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_item, _capability);
@@ -198,7 +186,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    }
 	    // Obsoletes are conflicts too
 	    depList = dependencies[Dep::OBSOLETES];
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
@@ -207,7 +195,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    
 	    dependencies = _otherItem.resolvable()->deps();
 	    depList = dependencies[Dep::CONFLICTS];
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
@@ -215,7 +203,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    }
 	    // Obsoletes are conflicts too	    
 	    depList = dependencies[Dep::OBSOLETES];
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
@@ -228,7 +216,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    if (_item == PoolItem_Ref()) {
 		// this was a requirement via Resolver::addExtraCapability
 		// so we have to delete it.
-		resolver.removeExtraCapability (_capability);
+		resolver.removeExtraRequires (_capability);
 	    } else {
 		resolver.addIgnoreRequires (_item, _capability);
 	    }

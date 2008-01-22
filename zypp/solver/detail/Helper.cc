@@ -20,9 +20,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+#include <sstream>
 
 #include "zypp/solver/detail/Helper.h"
-
 #include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -257,6 +257,41 @@ Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
 
     _XDEBUG("Helper::isBestUninstalledItem(" << item << ") => " << info.is_best);
     return info.is_best;
+}
+
+std::string
+Helper::itemToString (PoolItem_Ref item, bool shortVersion)
+{
+    ostringstream os;
+    if (!item) return "";
+
+    if (item->kind() != ResTraits<zypp::Package>::kind)
+	os << item->kind() << ':';
+    os  << item->name();
+    if (!shortVersion) {
+	os << '-' << item->edition();
+	if (item->arch() != "") {
+	    os << '.' << item->arch();
+	}
+	Repository s = item->repository();
+	if (s) {
+	    string alias = s.info().alias();
+	    if (!alias.empty()
+		&& alias != "@system")
+	    {
+		os << '[' << s.info().alias() << ']';
+	    }
+	}
+    }
+    return os.str();
+}
+
+std::string
+Helper::capToString (const Capability & capability)
+{
+    ostringstream os;
+    os << capability.asString();
+    return os.str();
 }
 
 
