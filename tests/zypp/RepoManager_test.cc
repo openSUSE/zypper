@@ -90,8 +90,8 @@ void repomanager_test( const string &dir )
 
   RepoInfo repo;
   repo.setAlias("foo");
-  //Url repourl("dir:" + string(TESTS_SRC_DIR) + "/repo/yum/data/10.2-updates-subset");
-  Url repourl("dir:/mounts/dist/install/stable-x86/suse");
+  Url repourl("dir:" + string(TESTS_SRC_DIR) + "/repo/yum/data/10.2-updates-subset");
+  //Url repourl("dir:/mounts/dist/install/stable-x86/suse");
   //BOOST_CHECK_MESSAGE(0, repourl.asString());
   repo.setBaseUrl(repourl);
 
@@ -103,36 +103,45 @@ void repomanager_test( const string &dir )
   keyring_callbacks.answerAcceptVerFailed(true);
   keyring_callbacks.answerAcceptUnknownKey(true);
 
+  // we have no metadata yet so this should throw
+  BOOST_CHECK_THROW( manager.buildCache(repo),
+                     RepoMetadataException );
+
+  // now refresh the metadata
   manager.refreshMetadata(repo);
   
   BOOST_CHECK_MESSAGE( ! manager.isCached(repo),
                        "Repo is not yet cached" );
-  manager.buildCache(repo);
-
-  // we have no metadata yet so this should throw
-  //BOOST_CHECK_THROW( manager.buildCache(repo),
-  //                   RepoMetadataException );
-
-  return;
-
-  Repository repository;
 
   // it is not cached, this should throw
   BOOST_CHECK_THROW( manager.createFromCache(repo),
                      RepoNotCachedException );
 
-  MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
+  // now cache should build normally
   manager.buildCache(repo);
 
-  // the solv file should exists now
-  Pathname solvfile = (opts.repoCachePath + repo.alias()).extend(".solv");
-  BOOST_CHECK_MESSAGE( !PathInfo(solvfile).isExist(), "Solv file is created after caching");
+   // the solv file should exists now
+  Pathname base = (opts.repoCachePath + repo.alias());
+  Pathname solvfile = base.extend(".solv");
+  Pathname cookiefile = base.extend(".cookie");
+  BOOST_CHECK_MESSAGE( PathInfo(solvfile).isExist(), "Solv file is created after caching: " + solvfile.asString());
+  BOOST_CHECK_MESSAGE( PathInfo(cookiefile).isExist(), "Cookie file is created after caching: " + cookiefile.asString());
 
+  BOOST_CHECK_MESSAGE( manager.isCached(repo),
+                       "Repo is cached now" );
+
+  MIL << "Repo already in cache, clean cache"<< endl;
+  manager.cleanCache(repo);
+
+  BOOST_CHECK_MESSAGE( !manager.isCached(repo),
+                       "Repo cache was just deleted, should not be cached now" );
+
+  return;
+
+  Repository repository;
   repository = manager.createFromCache(repo);
   
-  BOOST_CHECK_MESSAGE( manager.isCached(repo),
-                       "Repo is cached" );
-
+  
   ResStore store = repository.resolvables();
   MIL << store.size() << " resolvables" << endl;
   

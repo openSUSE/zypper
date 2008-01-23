@@ -31,6 +31,7 @@
 //#include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
+#include "zypp/ExternalProgram.h"
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
@@ -41,6 +42,7 @@
 
 #include "zypp/ZYppCallbacks.h"
 
+#include "sat/Pool.h"
 #include "satsolver/pool.h"
 #include "satsolver/repo.h"
 #include "satsolver/repo_solv.h"
@@ -666,7 +668,7 @@ namespace zypp
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
-    Pathname base = _pimpl->options.repoCachePath + Pathname(info.alias());
+    Pathname base = _pimpl->options.repoCachePath + info.alias();
     Pathname solvfile = base.extend(".solv");
 
     //cache::SolvStore store(_pimpl->options.repoCachePath);
@@ -732,20 +734,35 @@ namespace zypp
       break;
     }
 
+<<<<<<< HEAD:zypp/RepoManager.cc
 
+=======
+    MIL << "repo type is " << repokind << endl;
+    
+>>>>>>> by now the repomanager returns an invalid repo
+but loads the solv file in the global pool
+(should this be automatic?):zypp/RepoManager.cc
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
       {
-        string cmd = "repo2solv.sh \"";
-	cmd += rawpath.asString() + "\" > " + solvfile.asString();
-	int ret = system (cmd.c_str());
-        if (WIFEXITED (ret) && WEXITSTATUS (ret) != 0)
-	  ZYPP_THROW(RepoUnknownTypeException());
+//         string cmd = "repo2solv.sh \"";
+// 	cmd += rawpath.asString() + "\" > " + solvfile.asString();
+// 	int ret = system (cmd.c_str());
+//         if (WIFEXITED (ret) && WEXITSTATUS (ret) != 0)
+// 	  ZYPP_THROW(RepoUnknownTypeException());
+        MIL << "Executing solv converter" << endl;
+        string cmd( str::form( "/usr/bin/repo2solv.sh \"%s\" > %s", rawpath.asString().c_str(), solvfile.asString().c_str() ) );
+        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+        for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+          MIL << "  " << output;
+        }
+        int ret = prog.close();
       }
       break;
       default:
+        ZYPP_THROW(Exception("Unhandled repostory type"));
       break;
     }
 #if 0
@@ -863,9 +880,8 @@ namespace zypp
 
   RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
   {
-    Pathname name = _pimpl->options.repoCachePath;
     RepoStatus status;
-    Pathname base = _pimpl->options.repoCachePath + Pathname(info.alias());
+    Pathname base = _pimpl->options.repoCachePath + info.alias();
     Pathname solvfile = base.extend(".solv");
     Pathname cookiefile = base.extend(".cookie");
 
@@ -918,17 +934,30 @@ namespace zypp
 
     MIL << "Repository " << info.alias() << " is cached" << endl;
 
-    //sat::Pool satpool( sat::Pool::instance() );
+    sat::Pool satpool( sat::Pool::instance() );
 
+<<<<<<< HEAD:zypp/RepoManager.cc
     //Pathname name = _pimpl->options.repoCachePath + Pathname(info.alias()).extend(".solv");
 
+=======
+    Pathname solvfile = (_pimpl->options.repoCachePath + info.alias()).extend(".solv");
+      
+>>>>>>> by now the repomanager returns an invalid repo
+but loads the solv file in the global pool
+(should this be automatic?):zypp/RepoManager.cc
     try
     {
-      //satpool.addRepoSolv(name);
+      satpool.addRepoSolv(solvfile, info.alias());
     }
     catch ( const Exception &e )
     {
+<<<<<<< HEAD:zypp/RepoManager.cc
 
+=======
+      ZYPP_RETHROW(e);
+>>>>>>> by now the repomanager returns an invalid repo
+but loads the solv file in the global pool
+(should this be automatic?):zypp/RepoManager.cc
     }
 
     CombinedProgressData subprogrcv(progress);
@@ -1183,7 +1212,8 @@ namespace zypp
         CombinedProgressData subprogrcv(progress, 70);
         CombinedProgressData cleansubprogrcv(progress, 30);
         // now delete it from cache
-        cleanCache( todelete, subprogrcv);
+        if ( isCached(todelete) )
+          cleanCache( todelete, subprogrcv);
         // now delete metadata (#301037)
         cleanMetadata( todelete, cleansubprogrcv);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
