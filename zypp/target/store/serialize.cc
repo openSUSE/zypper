@@ -143,6 +143,18 @@ string toXML( const Capabilities &caps )
 }
 
 template<>
+string toXML( const CapabilitySet &caps )
+{
+  stringstream out;
+  CapabilitySet::const_iterator it = caps.begin();
+  for ( ; it != caps.end(); ++it)
+  {
+    out << toXML((*it));
+  }
+  return out.str();
+}
+
+template<>
 string toXML( const Dependencies &dep )
 {
   stringstream out;

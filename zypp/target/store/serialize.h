@@ -55,6 +55,9 @@ template<>
 std::string toXML( const Capabilities &caps );
 
 template<>
+std::string toXML( const CapabilitySet &caps );    
+
+template<>
 std::string toXML( const Dependencies &dep );
 
 /**

@@ -120,6 +120,21 @@ std::string helixXML( const Capabilities &caps )
 }
 
 template<> 
+std::string helixXML( const CapabilitySet &caps )
+{
+    stringstream str;
+    CapabilitySet::const_iterator it = caps.begin();
+    str << endl;
+    for ( ; it != caps.end(); ++it)
+    {
+	str << TAB2 << helixXML((*it));
+    }
+    str << TAB;
+    return str.str();
+}
+
+
+template<> 
 std::string helixXML( const Dependencies &dep )
 {
     stringstream str;
