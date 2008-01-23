@@ -98,8 +98,6 @@ SET( zypp_HEADERS
   CapFilters.h
   CapMatch.h
   CapMatchHelper.h
-  Capability.h
-  Capabilities.h
   Changelog.h
   CheckSum.h
   CountryCode.h
@@ -180,8 +178,6 @@ SET( zypp_HEADERS
   RepoManager.h
   MediaProducts.h
   Locks.h
-  IdString.h
-  IdStringType.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -540,9 +536,9 @@ SET( zypp_sat_SRCS
   sat/Pool.cc
   sat/Repo.cc
   sat/Solvable.cc
-  sat/IdString.cc
-  sat/Capability.cc
-  sat/Capabilities.cc
+  IdString.cc
+  Capability.cc
+  Capabilities.cc
   sat/SATResolver.cc
 )
 
@@ -552,10 +548,10 @@ SET( zypp_sat_HEADERS
   sat/Pool.h
   sat/Repo.h
   sat/Solvable.h
-  sat/IdString.h
-  sat/IdStringType.h
-  sat/Capability.h
-  sat/Capabilities.h
+  IdString.h
+  IdStringType.h
+  Capability.h
+  Capabilities.h
   sat/SATResolver.h
 )
 

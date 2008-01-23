@@ -40,7 +40,7 @@
 #include "zypp/ProblemSolution.h"
 #include "zypp/UpgradeStatistics.h"
 #include "zypp/Capabilities.h"
-#include "zypp/sat/Capability.h"
+#include "zypp/Capability.h"
 
 
 /////////////////////////////////////////////////////////////////////////
