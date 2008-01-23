@@ -124,8 +124,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void addPoolItemToVerify (PoolItem_Ref item);
 
-    void addExtraRequires (const Capability & capability);
-    void removeExtraRequires (const Capability & capability);
+    void addExtraRequire (const Capability & capability);
+    void removeExtraRequire (const Capability & capability);
     void addExtraConflict (const Capability & capability);
     void removeExtraConflict (const Capability & capability);    
 
@@ -149,6 +149,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolvePool();
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r ) {return;}; // FIXME
+    PoolItemList problematicUpdateItems( void ) const { return _update_items; }
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);

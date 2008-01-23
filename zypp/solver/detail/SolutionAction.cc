@@ -216,7 +216,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    if (_item == PoolItem_Ref()) {
 		// this was a requirement via Resolver::addExtraCapability
 		// so we have to delete it.
-		resolver.removeExtraRequires (_capability);
+		resolver.removeExtraRequire (_capability);
 	    } else {
 		resolver.addIgnoreRequires (_item, _capability);
 	    }

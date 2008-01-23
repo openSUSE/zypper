@@ -501,81 +501,33 @@ INSTALL(  FILES
 
 SET( zypp_solver_detail_SRCS
   solver/detail/Helper.cc
-  solver/detail/Importance.cc
-  solver/detail/InstallOrder.cc
-  solver/detail/Pending.cc
+#  solver/detail/InstallOrder.cc
   solver/detail/ProblemSolutionIgnore.cc
   solver/detail/ProblemSolutionInstall.cc
   solver/detail/ProblemSolutionKeep.cc
   solver/detail/ProblemSolutionUninstall.cc
   solver/detail/ProblemSolutionUnlock.cc
-  solver/detail/ProblemSolutionAllBranches.cc
-  solver/detail/ProblemSolutionDoubleTimeout.cc
   solver/detail/ProblemSolutionCombi.cc
-  solver/detail/QueueItem.cc
-  solver/detail/QueueItemBranch.cc
-  solver/detail/QueueItemConflict.cc
-  solver/detail/QueueItemEstablish.cc
-  solver/detail/QueueItemGroup.cc
-  solver/detail/QueueItemInstall.cc
-  solver/detail/QueueItemRequire.cc
-  solver/detail/QueueItemUninstall.cc
   solver/detail/Resolver.cc
-  solver/detail/ResolverContext.cc
-  solver/detail/ResolverInfo.cc
-  solver/detail/ResolverInfoChildOf.cc
-  solver/detail/ResolverInfoConflictsWith.cc
-  solver/detail/ResolverInfoContainer.cc
-  solver/detail/ResolverInfoDependsOn.cc
-  solver/detail/ResolverInfoMisc.cc
-  solver/detail/ResolverInfoMissingReq.cc
-  solver/detail/ResolverInfoNeededBy.cc
-  solver/detail/ResolverInfoObsoletes.cc
-  solver/detail/ResolverQueue.cc
-  solver/detail/ResolverUpgrade.cc
+#  solver/detail/ResolverUpgrade.cc
   solver/detail/Resolver_problems.cc
   solver/detail/SolutionAction.cc
   solver/detail/Testcase.cc
-  solver/detail/ContextPool.cc
 )
 
 SET( zypp_solver_detail_HEADERS
   solver/detail/Helper.h
-  solver/detail/Importance.h
-  solver/detail/InstallOrder.h
-  solver/detail/Pending.h
+#  solver/detail/InstallOrder.h
   solver/detail/ProblemSolutionIgnore.h
   solver/detail/ProblemSolutionInstall.h
   solver/detail/ProblemSolutionKeep.h
   solver/detail/ProblemSolutionUninstall.h
   solver/detail/ProblemSolutionUnlock.h
-  solver/detail/ProblemSolutionAllBranches.h
-  solver/detail/ProblemSolutionDoubleTimeout.h
   solver/detail/ProblemSolutionCombi.h
-  solver/detail/QueueItem.h
-  solver/detail/QueueItemBranch.h
-  solver/detail/QueueItemConflict.h
-  solver/detail/QueueItemEstablish.h
-  solver/detail/QueueItemGroup.h
-  solver/detail/QueueItemInstall.h
-  solver/detail/QueueItemRequire.h
-  solver/detail/QueueItemUninstall.h
   solver/detail/Resolver.h
-  solver/detail/ResolverContext.h
-  solver/detail/ResolverInfo.h
-  solver/detail/ResolverInfoChildOf.h
-  solver/detail/ResolverInfoConflictsWith.h
-  solver/detail/ResolverInfoContainer.h
-  solver/detail/ResolverInfoDependsOn.h
-  solver/detail/ResolverInfoMisc.h
-  solver/detail/ResolverInfoMissingReq.h
-  solver/detail/ResolverInfoNeededBy.h
-  solver/detail/ResolverInfoObsoletes.h
-  solver/detail/ResolverQueue.h
   solver/detail/SolutionAction.h
   solver/detail/Testcase.h
   solver/detail/Types.h
-  solver/detail/ContextPool.h
 )
 
 INSTALL(  FILES
@@ -927,7 +879,7 @@ ${zypp_target_rpm_SRCS}
 ${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
-#${zypp_solver_detail_SRCS}
+${zypp_solver_detail_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_thread_SRCS}
 ${zypp_SRCS}

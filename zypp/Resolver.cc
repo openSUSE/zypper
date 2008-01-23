@@ -57,78 +57,39 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
   bool Resolver::verifySystem ()
-  { return _pimpl->verifySystem(false); }
-  bool Resolver::verifySystem (bool considerNewHardware)
-  { return _pimpl->verifySystem(considerNewHardware); }
-  bool Resolver::establishPool ()
-  { return _pimpl->establishPool(); }
-  bool Resolver::freshenPool ()
-  { return _pimpl->freshenPool(); }
+  { return _pimpl->verifySystem(); }
   bool Resolver::resolvePool ()
-  { return _pimpl->resolvePool( false ); }// do not try all possibilities 
-  bool Resolver::resolvePool( bool tryAllPossibilities)
-  { return _pimpl->resolvePool( tryAllPossibilities); }
-  bool Resolver::resolveDependencies( void )
-  { return _pimpl->resolveDependencies( ); }
+  { return _pimpl->resolvePool(); }
   void Resolver::undo()
   { _pimpl->undo(); }
-  solver::detail::ResolverContext_Ptr Resolver::context (void) const
-  { return _pimpl->context(); }
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
-  std::list<std::string> Resolver::problemDescription( void ) const
-  { return _pimpl->problemDescription (); }    
   void Resolver::applySolutions( const ProblemSolutionList & solutions )
   { _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   { _pimpl->doUpgrade(opt_stats_r); }
-  Arch Resolver::architecture() const
-  { return _pimpl->architecture(); }
-  void Resolver::setArchitecture( const Arch & arch )
-  { _pimpl->setArchitecture( arch ); }
   void Resolver::setForceResolve( const bool force )
   { _pimpl->setForceResolve( force ); }
   bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
-    void Resolver::setPreferHighestVersion( const bool highestVersion )
-  { _pimpl->setPreferHighestVersion( highestVersion ); }
-  bool Resolver::preferHighestVersion()
-  { return _pimpl->preferHighestVersion(); }
-  bool Resolver::transactResObject( ResObject::constPtr robj, bool install)
-  { return _pimpl->transactResObject( robj, install ); }
-  bool Resolver::transactResKind( Resolvable::Kind kind )
-  { return _pimpl->transactResKind( kind ); }
-  void Resolver::transactReset( ResStatus::TransactByValue causer )
-  { _pimpl->transactReset( causer ); }
+  
   void Resolver::addRequire (const Capability & capability)
-  { _pimpl->addExtraCapability( capability ); }
+  { _pimpl->addExtraRequire( capability ); }
   void Resolver::addConflict (const Capability & capability)
   { _pimpl->addExtraConflict( capability ); }
   void Resolver::removeRequire (const Capability & capability)
-  { _pimpl->removeExtraCapability( capability ); }
+  { _pimpl->removeExtraRequire( capability ); }
   void Resolver::removeConflict (const Capability & capability)
   { _pimpl->removeExtraConflict( capability ); }
-  const Capabilities Resolver::getRequire ()
-  { return _pimpl->extraCapability();}
-  const Capabilities Resolver::getConflict ()
+  const CapabilitySet Resolver::getRequire ()
+  { return _pimpl->extraRequires();}
+  const CapabilitySet Resolver::getConflict ()
   { return _pimpl->extraConflicts();}      
   std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
-  void Resolver::setTimeout( int seconds )
-  { _pimpl->setTimeout( seconds ); }
-  void Resolver::setMaxSolverPasses (int count)
-  { _pimpl->setMaxSolverPasses( count ); }
-  int Resolver::timeout()
-  { return _pimpl->timeout(); }
-  int Resolver::maxSolverPasses()
-  { return _pimpl->maxSolverPasses(); }
   bool Resolver::createSolverTestcase (const std::string & dumpPath)
   { solver::detail::Testcase testcase (dumpPath);
     return testcase.createTestcase(*_pimpl);}
-  const solver::detail::ItemCapKindList Resolver::isInstalledBy (const PoolItem_Ref item)
-  { return _pimpl->isInstalledBy (item); }
-  const solver::detail::ItemCapKindList Resolver::installs (const PoolItem_Ref item)
-  { return _pimpl->installs (item); }
 
 
   /////////////////////////////////////////////////////////////////

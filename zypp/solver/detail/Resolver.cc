@@ -106,13 +106,13 @@ Resolver::addPoolItemToVerify (PoolItem_Ref item)
 
 
 void
-Resolver::addExtraRequires (const Capability & capability)
+Resolver::addExtraRequire (const Capability & capability)
 {
     _extra_requires.insert (capability);
 }
 
 void
-Resolver::removeExtraRequires (const Capability & capability)
+Resolver::removeExtraRequire (const Capability & capability)
 {
     _extra_requires.erase (capability);
 }
