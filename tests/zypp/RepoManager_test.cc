@@ -136,7 +136,8 @@ void repomanager_test( const string &dir )
   BOOST_CHECK_MESSAGE( !manager.isCached(repo),
                        "Repo cache was just deleted, should not be cached now" );
 
-  return;
+  // now cache should build normally
+  manager.buildCache(repo);
 
   Repository repository;
   repository = manager.createFromCache(repo);
@@ -145,7 +146,7 @@ void repomanager_test( const string &dir )
   ResStore store = repository.resolvables();
   MIL << store.size() << " resolvables" << endl;
   
-  manager.refreshMetadata(repo);
+  //manager.refreshMetadata(repo);
 
   if ( manager.isCached(repo ) )
   {

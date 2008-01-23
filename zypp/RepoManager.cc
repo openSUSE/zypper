@@ -28,7 +28,7 @@
 #include "zypp/RepoManager.h"
 
 #include "zypp/cache/SolvStore.h"
-//#include "zypp/repo/cached/RepoImpl.h"
+#include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
@@ -928,30 +928,18 @@ namespace zypp
 
     MIL << "Repository " << info.alias() << " is cached" << endl;
 
-    sat::Pool satpool( sat::Pool::instance() );
-
-    Pathname solvfile = (_pimpl->options.repoCachePath + info.alias()).extend(".solv");
-      
-    try
-    {
-      satpool.addRepoSolv(solvfile, info.alias());
-    }
-    catch ( const Exception &e )
-    {
-      ZYPP_RETHROW(e);
-    }
-
     CombinedProgressData subprogrcv(progress);
 
-//     repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath, id );
-//     opts.readingResolvablesProgress = subprogrcv;
-//     //opts.repo = repo;
-//     repo::cached::RepoImpl::Ptr repoimpl =
-//         new repo::cached::RepoImpl( opts );
-//
-//     repoimpl->resolvables();
+    repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath );
+    opts.readingResolvablesProgress = subprogrcv;
+    //opts.repo = repo;
+    repo::cached::RepoImpl::Ptr repoimpl =
+         new repo::cached::RepoImpl( opts );
+
+    repoimpl->resolvables();
     // read the resolvables from cache
     return Repository::noRepository;
+    return Repository(repoimpl);
   }
 
   ////////////////////////////////////////////////////////////////////////////

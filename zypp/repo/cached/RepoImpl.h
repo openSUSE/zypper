@@ -37,20 +37,17 @@ namespace zypp
       struct RepoOptions
       {
         RepoOptions( const RepoInfo &repoinfo_,
-                     const Pathname &dbdir_,
-                     const data::RecordId &repository_id_ )
+                     const Pathname &solvdir_ )
 
           : repoinfo(repoinfo_)
-          , dbdir(dbdir_)
-          , repository_id(repository_id_)
+          , solvdir(solvdir_)
         {}
 
 
         ProgressData::ReceiverFnc readingResolvablesProgress;
         ProgressData::ReceiverFnc readingPatchDeltasProgress;
         RepoInfo repoinfo;
-        Pathname dbdir;
-        data::RecordId repository_id;
+        Pathname solvdir;
       };
 
       /**
@@ -76,7 +73,6 @@ namespace zypp
 
         cache::ResolvableQuery resolvableQuery();
       private:
-        cache::CacheTypes _type_cache;
         cache::ResolvableQuery _rquery;
         RepoOptions _options;
       };

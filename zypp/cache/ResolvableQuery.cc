@@ -437,7 +437,7 @@ private:
 //////////////////////////////////////////////////////////////////////////////
 
 ResolvableQuery::ResolvableQuery( const Pathname &dbdir)
-  : _pimpl(new Impl(dbdir))
+  : _pimpl(/*new Impl(dbdir)*/)
 {
   //MIL << "Creating Resolvable query" << endl;
 }

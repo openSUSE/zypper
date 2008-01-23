@@ -1,6 +1,6 @@
-ADD_EXECUTABLE(CacheInitializer CacheInitializer_test.cc)
-TARGET_LINK_LIBRARIES(CacheInitializer boost_unit_test_framework )
-TARGET_LINK_LIBRARIES(CacheInitializer zypp )
+#ADD_EXECUTABLE(CacheInitializer CacheInitializer_test.cc)
+#TARGET_LINK_LIBRARIES(CacheInitializer boost_unit_test_framework )
+#TARGET_LINK_LIBRARIES(CacheInitializer zypp )
 
 #ADD_EXECUTABLE(CacheStore CacheStore_test.cc SimplePackagesParser.cc)
 #TARGET_LINK_LIBRARIES(CacheStore boost_unit_test_framework )
@@ -10,7 +10,7 @@ TARGET_LINK_LIBRARIES(CacheInitializer zypp )
 #TARGET_LINK_LIBRARIES(CacheQuery boost_unit_test_framework )
 #TARGET_LINK_LIBRARIES(CacheQuery zypp )
 
-ADD_TEST(CacheInitializer ${CMAKE_CURRENT_BINARY_DIR}/CacheInitializer ${CMAKE_CURRENT_SOURCE_DIR}/data )
+#ADD_TEST(CacheInitializer ${CMAKE_CURRENT_BINARY_DIR}/CacheInitializer ${CMAKE_CURRENT_SOURCE_DIR}/data )
 #ADD_TEST(CacheStore ${CMAKE_CURRENT_BINARY_DIR}/CacheStore ${CMAKE_SOURCE_DIR}/tests )
 
 # run this test against a YUM repo

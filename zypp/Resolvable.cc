@@ -35,6 +35,14 @@ namespace zypp
   Resolvable::~Resolvable()
   {}
 
+  std::ostream & Resolvable::dumpOn( std::ostream & str ) const
+  {
+    //::dumpOn( str, *(sat::Solvable*)(this) );
+    //return str << sat::Solvable::dumpOn(str);
+    return str;
+  }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
