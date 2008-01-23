@@ -411,7 +411,6 @@ namespace zypp
     void ZYppImpl::setArchitecture( const Arch & arch )
     {
 	_architecture = arch;
-	if (_resolver) _resolver->setArchitecture( arch );
     }
 
     //------------------------------------------------------------------------
