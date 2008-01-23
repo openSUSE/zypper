@@ -66,7 +66,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool _pool;
     SATResolver *_satResolver;
     SerialNumberWatcher _poolchanged;
-
+    bool _testing;
 
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_verify;
@@ -148,7 +148,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool verifySystem ();
     bool resolvePool();
 
-    void doUpgrade( zypp::UpgradeStatistics & opt_stats_r ) {return;}; // FIXME
+    void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const { return _update_items; }
 
     ResolverProblemList problems () const;
@@ -158,6 +158,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void undo(void);
 
     void reset (bool keepExtras = false );
+
+    bool testing(void) const { return _testing; }
+    void setTesting( bool testing ) { _testing = testing; }    
 
 };
 

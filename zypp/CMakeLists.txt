@@ -497,7 +497,7 @@ INSTALL(  FILES
 
 SET( zypp_solver_detail_SRCS
   solver/detail/Helper.cc
-#  solver/detail/InstallOrder.cc
+  solver/detail/InstallOrder.cc
   solver/detail/ProblemSolutionIgnore.cc
   solver/detail/ProblemSolutionInstall.cc
   solver/detail/ProblemSolutionKeep.cc
@@ -505,7 +505,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/ProblemSolutionUnlock.cc
   solver/detail/ProblemSolutionCombi.cc
   solver/detail/Resolver.cc
-#  solver/detail/ResolverUpgrade.cc
+  solver/detail/ResolverUpgrade.cc
   solver/detail/Resolver_problems.cc
   solver/detail/SolutionAction.cc
   solver/detail/Testcase.cc
@@ -513,7 +513,7 @@ SET( zypp_solver_detail_SRCS
 
 SET( zypp_solver_detail_HEADERS
   solver/detail/Helper.h
-#  solver/detail/InstallOrder.h
+  solver/detail/InstallOrder.h
   solver/detail/ProblemSolutionIgnore.h
   solver/detail/ProblemSolutionInstall.h
   solver/detail/ProblemSolutionKeep.h

@@ -102,9 +102,6 @@ InstallOrder::computeNextSet()
 	if (it->second.order == 0
 	    && it->second.item)			// the default Nodes constructor leaves this empty
 	{
-	    if (isKind<SystemResObject>( it->second.item.resolvable() ))
-		continue;
-
 	    XXX << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
 
 	    newlist.push_back(it->second.item);
@@ -227,7 +224,8 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     _rdfstime++;
 
     // items prereq
-    Capabilities prq( item->dep(Dep::PREREQUIRES) );
+    Dependencies dependencies = item->deps();
+    CapabilitySet prq = dependencies[Dep::PREREQUIRES];
     // an installed items prereq (in case they are reqired for uninstall scripts)
     NameKindProxy nkp( _pool, item->name(), item->kind() );
     if ( ! nkp.installedEmpty() )
@@ -237,7 +235,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     }
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first
-    for (Capabilities::const_iterator it = prq.begin(); it != prq.end(); ++it)
+    for (CapabilitySet::const_iterator it = prq.begin(); it != prq.end(); ++it)
     {
 	requires.push_back(*it);
     }

@@ -36,8 +36,6 @@
 /-*/
 
 #include "zypp/Capabilities.h"
-#include "zypp/capability/SplitCap.h"
-
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -49,17 +47,12 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Capability.h"
-#include "zypp/CapFactory.h"
 #include "zypp/VendorAttr.h"
 #include "zypp/Package.h"
-
-#include "zypp/capability/CapabilityImpl.h"
 #include "zypp/ZYppFactory.h"
-
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
-
 #include "zypp/Target.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -74,8 +67,6 @@ namespace zypp
 
 using namespace std;
 using namespace zypp;
-using zypp::capability::SplitCap;
-
 
 /** Order on AvialableItemSet.
  * \li best Arch
@@ -186,9 +177,7 @@ Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap
 bool
 Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
 {
-    CapFactory factory;
-    Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
-
+    Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
     return doesObsoleteCapability (candidate, installedCap);
 }
 
@@ -311,21 +300,15 @@ bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
 //
 //	DESCRIPTION : go through all installed (but not yet touched by user)
 //		packages and look for update candidates
-//		handle splitprovides and replaced and dropped
 //
 void
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
   typedef map<PoolItem_Ref,PoolItem_Ref> CandidateMap;
-  typedef intrusive_ptr<const SplitCap> SplitCapPtr;
-  typedef map<PoolItem_Ref,PoolItemOrderSet> SplitMap;
   typedef map<PoolItem_Ref,PoolItemOrderSet> TodoMap;
 
   CandidateMap candidatemap;
 
-  SplitMap    splitmap;
-  TodoMap     applyingSplits;
-  TodoMap     addSplitted;
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
 
@@ -358,8 +341,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   // Reset all auto states and build PoolItemOrderSet of available candidates
   // (those that do not belong to PoolItems set to delete).
   //
-  // On the fly remember splitprovides and afterwards check, which
-  // of them do apply.
   ///////////////////////////////////////////////////////////////////
   PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
 
@@ -442,32 +423,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     available.insert( candidate );
 
     MIL << "installed " << installed << ", candidate " << candidate << endl;
-
-    // remember any splitprovides to packages actually installed.
-    Capabilities caps = candidate->dep (Dep::PROVIDES);
-    for (Capabilities::iterator cit = caps.begin(); cit != caps.end(); ++cit ) {
-	if (isKind<capability::SplitCap>( *cit ) ) {
-
-	    capability::CapabilityImpl::SplitInfo splitinfo = capability::CapabilityImpl::getSplitInfo( *cit );
-
-	    PoolItem splititem = Helper::findInstalledByNameAndKind (_pool, splitinfo.name, ResTraits<zypp::Package>::kind);
-            MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splititem:" << splititem << endl;
-	    if (splititem) {
-		if (target) {
-		    ResObject::constPtr robj = target->whoOwnsFile( splitinfo.path );
-                    if (robj)
-                      MIL << "whoOwnsFile(): " << *robj << endl;
-		    if (robj
-			&& robj->name() == splitinfo.name)
-		    {
-                      MIL << "split matched !" << endl;
-			splitmap[splititem].insert( candidate );
-		    }
-		}
-	    }
-	}
-    }
-
   } // iterate over the complete pool
 
   // reset all seen (for next run)
@@ -478,26 +433,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   MIL << "doUpgrade: " << opt_stats_r.pre_todel  << " packages tagged to delete" << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_nocand << " packages without candidate (foreign, replaced or dropped)" << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_avcand << " packages available for update" << endl;
-
-  MIL << "doUpgrade: going to check " << splitmap.size() << " probably splitted packages" << endl;
-  {
-    ///////////////////////////////////////////////////////////////////
-    // splitmap entries are gouped by PoolItems (we know this). So get the
-    // filelist as a new PoolItem occures, and use it for consecutive entries.
-    //
-    // On the fly build SplitPkgMap from splits that do apply (i.e. file is
-    // in PoolItems's filelist). The way splitmap was created, candidates added
-    // are not initially tagged to delete!
-    ///////////////////////////////////////////////////////////////////
-
-    PoolItem_Ref citem;
-
-    for ( SplitMap::iterator it = splitmap.begin(); it != splitmap.end(); ++it ) {
-	applyingSplits[it->first].insert( it->second.begin(), it->second.end() );
-	_DEBUG("  split count for " << it->first->name() << " now " << applyingSplits[it->first].size());
-    }
-    splitmap.clear();
-  }
 
   ///////////////////////////////////////////////////////////////////
   // Now iterate installed packages, not selected to delete, and
@@ -595,8 +530,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // Remember new package for 2nd pass.
 
       Dep dep (Dep::PROVIDES);
-      CapFactory factory;
-      Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::GE, installed->edition() );
+      Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());      
 
       FindProviders info(installed);
 
@@ -622,9 +556,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	      MIL << " only resolvable with other vendor found ==> do nothing" << endl;
 	  } else {
 	      MIL << " ==> (dropped)" << endl;
-	      // wait untill splits are processed. Might be a split obsoletes
-	      // this one (i.e. package replaced but not provided by new one).
-	      // otherwise it's finaly dropped.
 	      probably_dropped = true;
 	  }
 	break;
@@ -644,74 +575,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
     }	// no candidate
 
-    ///////////////////////////////////////////////////////////////////
-    // anyway check for packages split off
-    ///////////////////////////////////////////////////////////////////
-
-    TodoMap::iterator sit = applyingSplits.find( installed );
-    if ( sit != applyingSplits.end() ) {
-      PoolItemOrderSet & toadd( sit->second );
-      if ( !toadd.size() ) {
-	INT << "Empty SplitPkgMap entry for " << installed << endl;
-      } else {
-	FindMap candidate;
-	for ( PoolItemOrderSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
-	    PoolItem_Ref split_candidate = *ait;
-	    if ( probably_dropped
-		 && split_candidate.status().staysUninstalled()
-		 && doesObsoleteItem (split_candidate, installed))
-	    {
-		probably_dropped = false;
-	    }
-
-	    FindMap::iterator itcandidate = candidate.find( split_candidate->name() );
-
-	    if (itcandidate != candidate.end()) {	// split canidate with the same name found
-		if (split_candidate.status().isToBeInstalled()
-		    || itcandidate->second.status().isToBeInstalled()) {
-
-		    if (split_candidate.status().isToBeInstalled()
-			&& itcandidate->second.status().isToBeInstalled()) {
-			ERR << "only one should be set for installation: " << itcandidate->second << "; " << split_candidate << endl;
-		    } else {
-			if (split_candidate.status().isToBeInstalled()) {
-			    itcandidate->second = split_candidate; // take thatone which is already set for installation
-			}
-		    }
-		} else {
-		    // not the same --> find better provider
-		    if (itcandidate->second->arch() != installed->arch()
-			&& split_candidate->arch() == installed->arch() ) {
-			// prefer candidate which the same architecture as the installed item
-			itcandidate->second = split_candidate;
-		    } else {
-			int cmp = itcandidate->second->arch().compare( split_candidate->arch() );
-			if (cmp < 0) {						// new provider has better arch
-			    itcandidate->second = split_candidate;
-			}
-			else if (cmp == 0) {					// new provider has equal arch
-			    if (itcandidate->second->edition().compare( split_candidate->edition() ) < 0) {
-				itcandidate->second = split_candidate;		// new provider has better edition
-			    }
-			}
-		    }
-		}
-	    }
-	    else {
-		candidate[split_candidate->name()] = split_candidate;
-	    }
-	}
-
-	PoolItemOrderSet addcandidate;
-	for (FindMap::iterator itcandidate = candidate.begin() ; itcandidate != candidate.end(); itcandidate++) {
-	    addcandidate.insert(itcandidate->second);
-	    MIL << " ==> ADD (splitted): " << itcandidate->second << endl;
-	}
-
-	addSplitted[installed] = addcandidate;
-      }
-      // count stats later
-    }
 
     ///////////////////////////////////////////////////////////////////
     // now handle dropped package
@@ -757,35 +620,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   }
 
-  // look at the split providers
-
-  for ( TodoMap::iterator it = addSplitted.begin(); it != addSplitted.end(); ++it ) {
-
-    PoolItemOrderSet & tset( it->second );
-    PoolItem_Ref lastItem = PoolItem_Ref();
-
-    for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
-	if (!lastItem
-	    || compareByN ( lastItem.resolvable(), sit->resolvable()) != 0) // do not install packages with the same NVR and other architecture
-	{
-	    PoolItem_Ref item( *sit );
-
-	    // only install split if its actually a different edition
-
-	    PoolItem_Ref already_installed = Helper::findInstalledItem( _pool, item );
-	    if (!already_installed
-		|| already_installed->edition().compare( item->edition() ) != 0 )
-	    {
-		if (setForInstallation (_pool, item)) {
-		    ++opt_stats_r.chk_add_split;
-		}
-	    }
-	}
-	lastItem = *sit;
-    }
-
-  }
-
   // look at the ones with multiple providers
 
   for ( TodoMap::iterator it = addMultiProvided.begin(); it != addMultiProvided.end(); ++it ) {
@@ -795,29 +629,29 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     PoolItemOrderSet & gset( it->second );
 
     for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-      PoolItem_Ref item (*git);
+	PoolItem_Ref item (*git);
 
-      if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
-	guess = item;
+	if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
+	    guess = item;
 
-      if ( item.status().isToBeInstalled()) {
-	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
-	if ( ! doesObsoleteItem (item, it->first ) ) {
-	  it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+	if ( item.status().isToBeInstalled()) {
+	    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
+	    if ( ! doesObsoleteItem (item, it->first ) ) {
+		it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+	    }
+	    guess = PoolItem_Ref();
+	    break;
+	} else {
+	    // Be prepared to guess.
+	    // Most common situation for guessing is something like:
+	    //   qt-devel
+	    //   qt-devel-experimental
+	    //   qt-devel-japanese
+	    // That's why currently the shortest package name wins.
+	    if ( !guess || guess->name().size() > item->name().size() ) {
+		guess = item;
+	    }
 	}
-	guess = PoolItem_Ref();
-	break;
-      } else {
-	// Be prepared to guess.
-	// Most common situation for guessing is something like:
-	//   qt-devel
-	//   qt-devel-experimental
-	//   qt-devel-japanese
-	// That's why currently the shortest package name wins.
-	if ( !guess || guess->name().size() > item->name().size() ) {
-	  guess = item;
-	}
-      }
     }
 
     if ( guess ) {
@@ -828,7 +662,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
 	// is this a language package ?
 	for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-	    if (cit->refers() == ResTraits<Language>::kind) {
+	    string citName = cit->asString();
+	    if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
 		requested_locale_match = true;
 		break;
 	    }
@@ -857,7 +692,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		    // try to find a match of the locale freshens with one of the requested locales
 
 		    for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-			if (cit->refers() == ResTraits<Language>::kind) {
+			string citName = cit->asString();
+			if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
 			    string loc = cit->index();
 			    MIL << "Look for language fallback " << loc << ":" << item << endl;
 			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
