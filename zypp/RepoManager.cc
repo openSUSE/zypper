@@ -734,14 +734,8 @@ namespace zypp
       break;
     }
 
-<<<<<<< HEAD:zypp/RepoManager.cc
-
-=======
     MIL << "repo type is " << repokind << endl;
     
->>>>>>> by now the repomanager returns an invalid repo
-but loads the solv file in the global pool
-(should this be automatic?):zypp/RepoManager.cc
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
@@ -936,28 +930,15 @@ but loads the solv file in the global pool
 
     sat::Pool satpool( sat::Pool::instance() );
 
-<<<<<<< HEAD:zypp/RepoManager.cc
-    //Pathname name = _pimpl->options.repoCachePath + Pathname(info.alias()).extend(".solv");
-
-=======
     Pathname solvfile = (_pimpl->options.repoCachePath + info.alias()).extend(".solv");
       
->>>>>>> by now the repomanager returns an invalid repo
-but loads the solv file in the global pool
-(should this be automatic?):zypp/RepoManager.cc
     try
     {
       satpool.addRepoSolv(solvfile, info.alias());
     }
     catch ( const Exception &e )
     {
-<<<<<<< HEAD:zypp/RepoManager.cc
-
-=======
       ZYPP_RETHROW(e);
->>>>>>> by now the repomanager returns an invalid repo
-but loads the solv file in the global pool
-(should this be automatic?):zypp/RepoManager.cc
     }
 
     CombinedProgressData subprogrcv(progress);
