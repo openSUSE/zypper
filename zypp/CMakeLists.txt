@@ -745,7 +745,6 @@ SET( zypp_cache_SRCS
   cache/Attribute.cc
   cache/CacheTypes.cc
   cache/ResolvableQuery.cc
-  #cache/CacheStore.cc
   cache/SolvStore.cc
   cache/CacheFSCK.cc
   cache/Utils.cc
@@ -757,7 +756,6 @@ SET( zypp_cache_HEADERS
   cache/CacheTypes.h
   cache/CacheInitializer.h
   cache/CacheException.h
-  #cache/CacheStore.h
   cache/SolvStore.h
   cache/CacheFSCK.h
   cache/ResolvableQuery.h
@@ -862,6 +860,7 @@ ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
 ${zypp_parser_plaindir_SRCS}
 ${zypp_parser_SRCS}
+${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
@@ -892,6 +891,7 @@ ${zypp_parser_yum_HEADERS}
 ${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
 ${zypp_parser_HEADERS}
+${zypp_data_HEADERS}
 ${zypp_cache_HEADERS}
 ${zypp_cache_sqlite3x_HEADERS}
 ${zypp_ui_HEADERS}
