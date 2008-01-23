@@ -203,7 +203,7 @@ Testcase::~Testcase()
 {
 }
 
-bool Testcase::createTestcase(Resolver & resolver)
+bool Testcase::createTestcasePool(const ResPool &pool)
 {
     PathInfo path (dumpPath);
 
@@ -221,13 +221,60 @@ bool Testcase::createTestcase(Resolver & resolver)
 	zypp::filesystem::clean_dir (dumpPath);
     }
     
-    zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-    zypp::base::LogControl::TmpExcessive excessive;
+    RepositoryTable		repoTable;
+    HelixResolvable 	system (dumpPath + "/solver-system.xml");    
 
-    resolver.reset(true); // true = resetting all valid solverresults
-    resolver.resolvePool();
+    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
+    {
+	Resolvable::constPtr res = it->resolvable();
 
-    zypp::base::LogControl::instance().logfile( "/var/log/YaST2/y2log" );    
+	if ( it->status().isInstalled() ) {
+	    // system channel
+	    system.addResolvable (*it);
+	} else {
+	    // repo channels
+	    ResObject::constPtr repoItem = it->resolvable();
+	    Repository repo  = repoItem->repository();
+	    if (repoTable.find (repo) == repoTable.end()) {
+		repoTable[repo] = new HelixResolvable(dumpPath + "/"
+						      + numstring(repo.numericId())
+						      + "-package.xml");
+	    }
+	    repoTable[repo]->addResolvable (*it);
+	}
+    }	
+    return true;
+}
+
+
+bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
+{
+    PathInfo path (dumpPath);
+
+    if ( !path.isExist() ) {
+	if (zypp::filesystem::mkdir (dumpPath)!=0) {
+	    ERR << "Cannot create directory " << dumpPath << endl;
+	    return false;
+	}
+    } else {
+	if (!path.isDir()) {
+	    ERR << dumpPath << " is not a directory." << endl;
+	    return false;
+	}
+	// remove old stuff if pool will be dump
+	if (dumpPool)	
+	    zypp::filesystem::clean_dir (dumpPath);
+    }
+
+    if (runSolver) {    
+	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
+	zypp::base::LogControl::TmpExcessive excessive;
+
+	resolver.reset(true); // true = resetting all valid solverresults
+	resolver.resolvePool();
+
+	zypp::base::LogControl::instance().logfile( "/var/log/YaST2/y2log" );
+    }
 
     ResPool pool 	= resolver.pool();
     RepositoryTable		repoTable;
@@ -236,7 +283,10 @@ bool Testcase::createTestcase(Resolver & resolver)
     PoolItemList 	items_locked;
     PoolItemList 	items_keep;    
     PoolItemList	language;
-    HelixResolvable 	system (dumpPath + "/solver-system.xml");    
+    HelixResolvable_Ptr	system = NULL;
+
+    if (dumpPool)
+	system = new HelixResolvable(dumpPath + "/solver-system.xml");    
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
     {
@@ -248,19 +298,21 @@ bool Testcase::createTestcase(Resolver & resolver)
 		language.push_back (*it);		
 	    }
 	} else {
-	    if ( it->status().isInstalled() ) {
+	    if ( system && it->status().isInstalled() ) {
 		// system channel
-		system.addResolvable (*it);
+		system->addResolvable (*it);
 	    } else {
 		// repo channels
 		ResObject::constPtr repoItem = it->resolvable();
 		Repository repo  = repoItem->repository();
-		if (repoTable.find (repo) == repoTable.end()) {
-		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							  + numstring(repo.numericId())
-							  + "-package.xml");
+		if (dumpPool) {
+		    if (repoTable.find (repo) == repoTable.end()) {
+			repoTable[repo] = new HelixResolvable(dumpPath + "/"
+							      + numstring(repo.numericId())
+							      + "-package.xml");
+		    }
+		    repoTable[repo]->addResolvable (*it);
 		}
-		repoTable[repo]->addResolvable (*it);
 	    }
 	
 	    if ( it->status().isToBeInstalled()
@@ -279,7 +331,6 @@ bool Testcase::createTestcase(Resolver & resolver)
 		 && !(it->status().isBySolver())) {
 		items_locked.push_back (*it);
 	    }
-	    
 	}
     }
 
