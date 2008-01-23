@@ -936,9 +936,10 @@ namespace zypp
     repo::cached::RepoImpl::Ptr repoimpl =
          new repo::cached::RepoImpl( opts );
 
+    //repoimpl->createResolvables();
     repoimpl->resolvables();
     // read the resolvables from cache
-    return Repository::noRepository;
+    //return Repository::noRepository;
     return Repository(repoimpl);
   }
 

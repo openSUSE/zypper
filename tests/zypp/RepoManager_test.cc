@@ -146,6 +146,14 @@ void repomanager_test( const string &dir )
   ResStore store = repository.resolvables();
   MIL << store.size() << " resolvables" << endl;
   
+  BOOST_CHECK_EQUAL( store.size(), 47 );
+
+  ResStore::const_iterator it = store.begin();
+  for ( ; it != store.end(); ++it )
+  {
+    MIL << *it << endl;
+  }
+
   //manager.refreshMetadata(repo);
 
   if ( manager.isCached(repo ) )
