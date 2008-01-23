@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 23 11:16:50 CET 2008 - ma@suse.de
+
+- Consider LC_MESSAGES instead of LC_CTYPE to determine the default
+  text locale.
+
+-------------------------------------------------------------------
 Tue Dec 18 12:28:22 CET 2007 - aschnell@suse.de
 
 - fixed password handling in URLs (bug #347273)

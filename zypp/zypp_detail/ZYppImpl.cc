@@ -37,10 +37,27 @@ namespace zypp
   namespace zypp_detail
   { /////////////////////////////////////////////////////////////////
 
+    /** The locale to be used for texts and messages.
+     *
+     * For the encoding to be used the preference is
+     *
+     *    LC_ALL, LC_CTYPE, LANG
+     *
+     * For the language of the messages to be used, the preference is
+     *
+     *    LANGUAGE, LC_ALL, LC_MESSAGES, LANG
+     *
+     * Note that LANGUAGE can contain more than one locale name, it can be
+     * a list of locale names like for example
+     *
+     *    LANGUAGE=ja_JP.UTF-8:de_DE.UTF-8:fr_FR.UTF-8
+
+     * \todo Support dynamic fallbacklists defined by LANGUAGE
+     */
     inline Locale defaultTextLocale()
     {
       Locale ret( "en" );
-      const char * envlist[] = { "LC_ALL", "LC_CTYPE", "LANG", NULL };
+      const char * envlist[] = { "LC_ALL", "LC_MESSAGES", "LANG", NULL };
       for ( const char ** envvar = envlist; *envvar; ++envvar )
         {
 	  const char * envlang = getenv( *envvar );
