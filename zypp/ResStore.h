@@ -27,9 +27,9 @@ namespace zypp
   //
   //	CLASS NAME : ResStore
   //
-  /**
+  /** \todo obsolete and remove this class.
   */
-  class ResStore
+  class ZYPP_DEPRECATED ResStore
   {
     friend std::ostream & operator<<( std::ostream & str, const ResStore & obj );
 
@@ -39,10 +39,10 @@ namespace zypp
 
     /** Type of Resolvable provided by ResStore. */
     typedef ResObject                ResT;
-    
+
   private:
     typedef std::set<ResT::Ptr>      StorageT;
-    
+
   public:
     typedef StorageT::value_type     value_type;
     typedef StorageT::const_reference const_reference;
@@ -82,11 +82,11 @@ namespace zypp
     /**  */
     iterator insert( const ResT::Ptr & ptr_r )
     { return store().insert( ptr_r ).first; }
-    
+
     /**  */
     iterator insert( iterator position, const value_type &v )
     { return store().insert( position, v ); }
-    
+
     /**  */
     template <class _InputIterator>
       void insert( _InputIterator first_r, _InputIterator last_r )

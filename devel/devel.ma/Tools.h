@@ -19,9 +19,9 @@
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResPoolProxy.h"
-
 #include <zypp/Repository.h>
 #include <zypp/RepoManager.h>
 

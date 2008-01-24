@@ -7,9 +7,7 @@
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
-#include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
-#include <zypp/CapMatchHelper.h>
 
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/NVRAD.h"
@@ -25,14 +23,6 @@
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
-#include "zypp/parser/TagParser.h"
-#include "zypp/parser/susetags/PackagesFileReader.h"
-#include "zypp/parser/susetags/PackagesLangFileReader.h"
-#include "zypp/parser/susetags/PatternFileReader.h"
-#include "zypp/parser/susetags/ContentFileReader.h"
-#include "zypp/parser/susetags/RepoIndex.h"
-#include "zypp/parser/susetags/RepoParser.h"
-#include "zypp/cache/CacheStore.h"
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
 
@@ -44,8 +34,6 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/IdStrType.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -53,7 +41,6 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::ui;
-using zypp::parser::TagParser;
 
 ///////////////////////////////////////////////////////////////////
 
@@ -149,7 +136,7 @@ struct Xprint
   bool operator()( const PoolItem & obj_r )
   {
     MIL << obj_r << endl;
-    DBG << " -> " << obj_r .satSolvable() << endl;
+    DBG << " -> " << obj_r->satSolvable() << endl;
 
     return true;
   }
@@ -219,23 +206,8 @@ inline bool g( const NameKindProxy & nkp, Arch arch = Arch() )
 
 ///////////////////////////////////////////////////////////////////
 
-bool solve( bool establish = false )
+bool solve()
 {
-  if ( establish )
-  {
-    bool eres = false;
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      eres = getZYpp()->resolver()->establishPool();
-    }
-    if ( ! eres )
-    {
-      ERR << "establish " << eres << endl;
-      return false;
-    }
-    MIL << "establish " << eres << endl;
-  }
-
   bool rres = false;
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
@@ -376,7 +348,7 @@ void dumpIdStr()
 {
   for ( int i = -3; i < 30; ++i )
   {
-    DBG << i << '\t' << sat::IdStr( i ) << endl;
+    DBG << i << '\t' << IdString( i ) << endl;
   }
 }
 
@@ -409,31 +381,6 @@ namespace filter
 
 namespace zypp
 {
-  namespace sat
-  {
-
-
-  } // namespace sat
-
-  namespace par
-  {
-    class Foo : public sat::IdStrType<Foo>
-    {
-      public:
-        Foo() {}
-        explicit Foo( sat::detail::IdType id_r )   : _str( str::toLower(sat::IdStr(id_r).c_str()) ) {}
-        explicit Foo( const sat::IdStr & idstr_r ) : _str( str::toLower(idstr_r.c_str()) ) {}
-        explicit Foo( const char * cstr_r )        : _str( str::toLower(cstr_r) ) {}
-        explicit Foo( const std::string & str_r )  : _str( str::toLower(str_r) ) {}
-      private:
-        int _doDompareC( const char * rhs )  const
-        { return str::compareCI( _str.c_str(), rhs ); }
-      private:
-        friend class sat::IdStrType<Foo>;
-        sat::IdStr _str;
-    };
-
-  } // namespace par
 }
 
 template <class L>
@@ -446,7 +393,6 @@ std::ostream & operator<<( std::ostream & str, const _TestO<L> & obj )
 template <class L>
 _TestO<L> testO( const L & lhs )
 { return _TestO<L>( lhs ); }
-
 
 template <class L, class R>
 void testCMP( const L & lhs, const R & rhs )
@@ -477,13 +423,16 @@ int main( int argc, char * argv[] )
 
   sat::Pool satpool( sat::Pool::instance() );
 
-#if 0
+  Patch::Ptr p = make<Patch>( sat::Solvable(23) );
+  WAR << p << endl;
+
+#if 1
   sat::Repo s( satpool.addRepoSolv( "10.3.solv" ) );
   //sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
 
-  sat::Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
+  Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
   MIL << r << endl;
-  sat::Capabilities::const_iterator it = r.begin();
+  Capabilities::const_iterator it = r.begin();
   DBG << *it << endl;
   it = ++r.begin();
   DBG << *it << endl;
@@ -524,7 +473,6 @@ int main( int argc, char * argv[] )
 
   ResPool pool( getZYpp()->pool() );
   USR << "pool: " << pool << endl;
-  pool.satSync();
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
   RepoInfoList repos = repoManager.knownRepositories();
@@ -597,7 +545,6 @@ int main( int argc, char * argv[] )
   }
 
   USR << "pool: " << pool << endl;
-  pool.satSync();
 
   //waitForInput();
   //std::for_each( pool.begin(), pool.end(), Xprint() );

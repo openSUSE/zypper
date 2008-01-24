@@ -219,7 +219,7 @@ namespace zypp
       {
         for_( it, begin(), end() )
         {
-          if ( (*it).satSolvable() == slv_r )
+          if ( (*it)->satSolvable() == slv_r )
             return *it;
         }
       }

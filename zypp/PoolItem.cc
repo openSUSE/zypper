@@ -16,8 +16,6 @@
 #include "zypp/Package.h"
 #include "zypp/VendorAttr.h"
 
-#include "zypp/sat/Solvable.h"
-
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -60,16 +58,9 @@ namespace zypp
 
     bool autoprotect() const;
 
-    const sat::Solvable & satSolvable() const
-    { return _satSolvable; }
-
-    void rememberSatSolvable( const sat::Solvable & slv_r ) const
-    { _satSolvable = slv_r; }
-
   private:
     mutable ResStatus     _status;
     ResObject::constPtr   _resolvable;
-    mutable sat::Solvable _satSolvable;
 
     /** \name Poor man's save/restore state.
      * \todo There may be better save/restore state strategies.
@@ -191,12 +182,6 @@ namespace zypp
 
   bool PoolItem_Ref::sameState() const
   { return _pimpl->sameState(); }
-
-  const sat::Solvable & PoolItem_Ref::satSolvable() const
-  { return _pimpl->satSolvable(); }
-
-  void PoolItem_Ref::rememberSatSolvable( const sat::Solvable & slv_r ) const
-  { _pimpl->rememberSatSolvable( slv_r ); }
 
   /******************************************************************
    **

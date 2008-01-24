@@ -357,7 +357,7 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref item )
     {
-	if (item.status().isToBeInstalled())	
+	if (item.status().isToBeInstalled())
 	{
 	    is_updated = true;
 	    return false;
@@ -384,7 +384,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     queue_init( &jobQueue );
     _items_to_install.clear();
     _items_to_remove.clear();
-    _items_to_lock.clear();    
+    _items_to_lock.clear();
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
@@ -401,7 +401,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
 
-	Id id = iter->satSolvable().id();
+	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
@@ -411,38 +411,37 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
-	MIL << "Delete " << *iter << " with the string ID: " << s->name << endl;
+        sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
+	MIL << "Delete " << *iter << " with the string ID: " << ident << endl;
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
-	queue_push( &(jobQueue), s->name);
+	queue_push( &(jobQueue), ident);
     }
 
     for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
 	queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
-	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ) );
-	MIL << "Requires " << iter->asString() << endl;
+	queue_push( &(jobQueue), iter->id() );
+	MIL << "Requires " << *iter << endl;
     }
 
     for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
 	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
-	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ));
-	MIL << "Conflicts " << iter->asString() << endl;	
+	queue_push( &(jobQueue), iter->id() );
+	MIL << "Conflicts " << *iter << endl;
     }
 
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
-	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
-	Id id = iter->satSolvable().id();
+        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Lock installed item " << *iter << " with the string ID: " << s->name << endl;
-	    queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );	    
-	    queue_push( &(jobQueue), id );
+	    MIL << "Lock installed item " << *iter << " with the string ID: " << ident << endl;
+	    queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(jobQueue), ident );
 	} else {
-	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << s->name << endl;
+	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << ident << endl;
 	    queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE );
-	    queue_push( &(jobQueue), id );
+	    queue_push( &(jobQueue), ident );
 	}
     }
-    
+
     solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     sat::Pool::instance().setDirty();
     sat::Pool::instance().prepare();
@@ -493,13 +492,13 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
       if (poolItem) {
 	  // Check if this is an update
-	  CheckIfUpdate info;	  
+	  CheckIfUpdate info;
 	  invokeOnEach( _pool.byNameBegin( poolItem->name() ),
 			_pool.byNameEnd( poolItem->name() ),
 			functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 					resfilter::ByKind( poolItem->kind() ) ),	// equal kind
 			functor::functorRef<bool,PoolItem> (info) );
-	  
+
 	  if (info.is_updated) {
 	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
 	  } else {
