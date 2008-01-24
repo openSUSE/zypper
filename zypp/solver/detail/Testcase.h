@@ -21,6 +21,7 @@
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/Capabilities.h"
 #include "zypp/ResPool.h"
+#include "zypp/base/GzStream.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -69,7 +70,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
 
   private:
     std::string dumpFile; // Path of the generated testcase
-    std::ofstream *file;    
+    ofgzstream *file;    
 
   public:
     HelixResolvable (const std::string & path);
@@ -132,8 +133,6 @@ class Testcase {
     ~Testcase ();
 
     bool createTestcase (Resolver & resolver, bool dumpPool = true, bool runSolver = true);
-    bool createTestcasePool(const ResPool &pool);    
-
 };
 
 

@@ -22,6 +22,7 @@
 
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
+#include "zypp/solver/detail/Testcase.h"
 
 #include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
@@ -292,6 +293,8 @@ Resolver::resolvePool()
 	if ( !_satResolver ) {
 	    sat::Pool satPool( sat::Pool::instance() );
 	    _satResolver = new SATResolver(_pool, satPool.get());
+	    Testcase testcase("/var/log/YaST/autoTestcase");
+	    testcase.createTestcase (*this, true, false); // create pool, do not solver
 	}
 #if 0
 	MIL << "------SAT-Pool------" << endl;

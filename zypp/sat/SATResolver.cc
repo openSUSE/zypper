@@ -33,7 +33,6 @@
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
-#include "zypp/solver/detail/Testcase.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -95,8 +94,6 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _architecture( zypp_detail::defaultArchitecture() )
 
 {
-    Testcase testcase("/var/log/YaST2/autotestcase");
-    testcase.createTestcasePool (pool); // dump pool to testcase
 }
 
 

@@ -53,6 +53,7 @@
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/Testcase.h"
 #include "zypp/Target.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -329,6 +330,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     << "(silent_downgrades:" << (opt_stats_r.silent_downgrades?"yes":"no") << ")"
     << "(keep_installed_patches:" << (opt_stats_r.keep_installed_patches?"yes":"no") << ")"
     << endl;
+
+  // create a testcase for the updating system
+  Testcase testcase("/var/log/updateTestcase");
+  testcase.createTestcase (*this, true, false); // create pool, do not solver  
 
   _update_items.clear();
   {
