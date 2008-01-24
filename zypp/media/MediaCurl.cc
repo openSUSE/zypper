@@ -23,6 +23,7 @@
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/MediaUserAuth.h"
+#include "zypp/media/CurlConfig.h"
 #include "zypp/thread/Once.h"
 #include <cstdlib>
 #include <sys/types.h>
@@ -219,6 +220,9 @@ void MediaCurl::attachTo (bool next)
 
   if ( !_url.isValid() )
     ZYPP_THROW(MediaBadUrlException(_url));
+
+  CurlConfig curlconf;
+  CurlConfig::parseConfig(curlconf); // parse ~/.curlrc
 
   curl_version_info_data *curl_info = NULL;
   curl_info = curl_version_info(CURLVERSION_NOW);
@@ -560,39 +564,17 @@ void MediaCurl::attachTo (bool next)
     _proxyuserpwd = _url.getQueryParam( "proxyuser" );
 
     if ( ! _proxyuserpwd.empty() ) {
-
       string proxypassword( _url.getQueryParam( "proxypassword" ) );
       if ( ! proxypassword.empty() ) {
         _proxyuserpwd += ":" + proxypassword;
       }
-
     } else {
-      char *home = getenv("HOME");
-      if( home && *home)
+      if (curlconf.proxyuserpwd.empty())
+        DBG << "~/.curlrc does not contain the proxy-user option" << endl;
+      else
       {
-              Pathname curlrcFile = string( home ) + string( "/.curlrc" );
-
-        PathInfo h_info(string(home), PathInfo::LSTAT);
-        PathInfo c_info(curlrcFile,   PathInfo::LSTAT);
-
-        if( h_info.isDir()  && h_info.owner() == getuid() &&
-            c_info.isFile() && c_info.owner() == getuid())
-        {
-          //! \todo FIXME adjust to .curlrc syntax: = and -- are optional!#
-
-          map<string,string> rc_data = base::sysconfig::read( curlrcFile );
-
-          map<string,string>::const_iterator it = rc_data.find("--proxy-user");
-          if (it != rc_data.end())
-            _proxyuserpwd = it->second;
-
-          DBG << "got proxy userpwd (--proxy-user) from ~/culrc" << endl;
-        }
-        else
-        {
-          WAR << "Not allowed to parse '" << curlrcFile
-              << "': bad file owner" << std::endl;
-        }
+        _proxyuserpwd = curlconf.proxyuserpwd;
+        DBG << "using proxy-user from ~/.curlrc" << endl;
       }
     }
 
