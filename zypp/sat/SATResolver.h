@@ -34,6 +34,7 @@
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
+#include "zypp/Capability.h"
 extern "C" {
 #include "satsolver/solver.h"
 #include "satsolver/pool.h"
@@ -73,8 +74,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
-    PoolItemList _items_to_lockUninstalled;
-    PoolItemList _items_to_keep;
+    PoolItemList _items_to_lock;
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem);
@@ -98,7 +98,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
 
-    bool resolvePool();
+    bool resolvePool(const CapabilitySet & requires_caps,
+		     const CapabilitySet & conflict_caps);
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
@@ -112,8 +113,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemToInstall (PoolItem_Ref item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
-    void addPoolItemToLockUninstalled (PoolItem_Ref item);
-    void addPoolItemToKepp (PoolItem_Ref item);
+    void addPoolItemToLock (PoolItem_Ref item);
 
     void addPoolItemToRemove (PoolItem_Ref item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);

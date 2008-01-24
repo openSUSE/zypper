@@ -47,6 +47,7 @@ IMPL_PTR_TYPE(ProblemSolutionCombi);
 
 ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     : ProblemSolution (parent, "", "")
+      , actNumber(0)
 {
     _description = "";
     _details = "";
@@ -55,6 +56,7 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
 void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action)
 {
     addAction (new TransactionSolutionAction(item, action));
+    actNumber++;
 }
 
 void ProblemSolutionCombi::addDescription( const std::string description)

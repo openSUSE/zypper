@@ -101,9 +101,14 @@ ResolverProblem::solutions() const
  **/
 
 void
-ResolverProblem::addSolution( ProblemSolution_Ptr solution )
+ResolverProblem::addSolution( ProblemSolution_Ptr solution,
+			      bool inFront )
 {
-    _solutions.push_back (solution);
+    if (inFront) {
+	_solutions.push_front (solution);
+    } else {
+	_solutions.push_back (solution);
+    }
 }
 
 void

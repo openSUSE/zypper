@@ -301,7 +301,7 @@ Resolver::resolvePool()
 	}
 	MIL << "------SAT-Pool end------" << endl;
 #endif
-	return _satResolver->resolvePool();
+	return _satResolver->resolvePool(_extra_requires, _extra_conflicts);
 }
 
 
