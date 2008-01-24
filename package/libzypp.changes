@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 24 18:26:47 CET 2008 - jkupec@suse.cz
+
+- read .curlrc more robustly to obtain user-proxy (#330351)
+- revision 8368
+
+-------------------------------------------------------------------
 Fri Jan 18 12:19:09 CET 2008 - coolo@suse.de
 
 - always buildrequire openssl-devel 
