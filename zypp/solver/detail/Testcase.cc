@@ -243,7 +243,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     HelixResolvable_Ptr	system = NULL;
 
     if (dumpPool)
-	system = new HelixResolvable(dumpPath + "/solver-system.xml");    
+	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");    
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
     {
@@ -266,7 +266,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 		    if (repoTable.find (repo) == repoTable.end()) {
 			repoTable[repo] = new HelixResolvable(dumpPath + "/"
 							      + numstring(repo.numericId())
-							      + "-package.xml");
+							      + "-package.xml.gz");
 		    }
 		    repoTable[repo]->addResolvable (*it);
 		}
@@ -378,7 +378,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << " -->" << endl;
 	
 	*file << TAB << "<channel file=\"" << numstring(repo.numericId())
-	      << "-package.xml\" name=\"" << numstring(repo.numericId())
+	      << "-package.xml.gz\" name=\"" << numstring(repo.numericId())
 	      << "\" />" << endl << endl;
     }
     for (PoolItemList::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
