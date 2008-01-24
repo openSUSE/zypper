@@ -68,9 +68,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     SerialNumberWatcher _poolchanged;
     bool _testing;
 
-    // list populated by calls to addPoolItemTo*()
-    PoolItemList _items_to_verify;
-
     // list of problematic items after doUpgrade()
     PoolItemList _update_items;
 
@@ -99,7 +96,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                         // have unfulfilled requirements.
                         // This behaviour is favourited by ZMD
     bool _upgradeMode;  // Resolver has been called with doUpgrade
-                                //if there are more solver results.
+    bool _verifying;    // The system will be checked
 
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
@@ -121,8 +118,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
-
-    void addPoolItemToVerify (PoolItem_Ref item);
 
     void addExtraRequire (const Capability & capability);
     void removeExtraRequire (const Capability & capability);

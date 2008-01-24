@@ -64,10 +64,12 @@ Resolver::dumpOn( std::ostream & os ) const
 //---------------------------------------------------------------------------
 
 Resolver::Resolver (const ResPool & pool)
-    : _pool (pool)
-    , _satResolver (NULL)
-    , _poolchanged( _pool.serial() )
-    , _forceResolve (false)
+    : _pool(pool)
+    , _satResolver(NULL)
+    , _poolchanged(_pool.serial() )
+    , _forceResolve(false)
+    , _upgradeMode(false)
+    , _verifying(false)
 
 {
 
@@ -89,22 +91,13 @@ Resolver::pool (void) const
 void
 Resolver::reset (bool keepExtras )
 {
-    _items_to_verify.clear();
+    _verifying = false;    
 
     if (!keepExtras) {
       _extra_requires.clear();
       _extra_conflicts.clear();
     }
 }
-
-
-void
-Resolver::addPoolItemToVerify (PoolItem_Ref item)
-{
-
-    _items_to_verify.push_back (item);
-}
-
 
 void
 Resolver::addExtraRequire (const Capability & capability)
@@ -201,55 +194,20 @@ struct DoTransact : public resfilter::PoolItemFilterFunctor
 };
 
 
-struct VerifySystem : public resfilter::PoolItemFilterFunctor
-{
-    Resolver & resolver;
-
-    VerifySystem (Resolver & r)
-	: resolver (r)
-    { }
-
-    bool operator()( PoolItem_Ref provider )
-    {
-	resolver.addPoolItemToVerify (provider);
-	return true;
-    }
-};
-
 bool
 Resolver::verifySystem ()
 {
     UndoTransact resetting (ResStatus::APPL_HIGH);
 
     _DEBUG ("Resolver::verifySystem() ");
+    
+    _verifying = true;    
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// Resetting all transcations
 		   functor::functorRef<bool,PoolItem>(resetting) );
 
-    VerifySystem info (*this);
-
-    invokeOnEach( pool().byKindBegin( ResTraits<Package>::kind ),
-		  pool().byKindEnd( ResTraits<Package>::kind ),
-		  resfilter::ByInstalled ( ),
-		  functor::functorRef<bool,PoolItem>(info) );
-
-    invokeOnEach( pool().byKindBegin( ResTraits<Pattern>::kind ),
-		  pool().byKindEnd( ResTraits<Pattern>::kind ),
-		  resfilter::ByInstalled ( ),
-		  functor::functorRef<bool,PoolItem>(info) );
-
-// FIXME setting verify mode
-#if 0    
-    bool success = resolveDependencies (); // do solve only
-
-    DoTransact setting (ResStatus::APPL_HIGH);
-
-    invokeOnEach ( _pool.begin(), _pool.end(),
-		   resfilter::ByTransact( ),
-		   functor::functorRef<bool,PoolItem>(setting) );
-#endif
-    return true; // FIXME success
+    return resolvePool();
 }
 
 
@@ -304,6 +262,29 @@ Resolver::resolvePool()
 	}
 	MIL << "------SAT-Pool end------" << endl;
 #endif
+	_satResolver->setFixsystem(false);
+	_satResolver->setAllowdowngrade(false);
+	_satResolver->setAllowarchchange(false);
+	_satResolver->setAllowvendorchange(false);
+	_satResolver->setAllowuninstall(false);
+	_satResolver->setUpdatesystem(false);
+	_satResolver->setAllowvirtualconflicts(false);
+	_satResolver->setNoupdateprovide(true);
+	_satResolver->setDosplitprovides(false);
+	
+	if (_upgradeMode) {
+	    _satResolver->setAllowdowngrade(true);
+	    _satResolver->setAllowarchchange(true);
+	    _satResolver->setUpdatesystem(true);
+	    _satResolver->setDosplitprovides(true);   
+	}
+
+	if (_forceResolve)
+	    _satResolver->setAllowuninstall(true);
+
+	if (_verifying)
+	    _satResolver->setFixsystem(true);
+	
 	return _satResolver->resolvePool(_extra_requires, _extra_conflicts);
 }
 

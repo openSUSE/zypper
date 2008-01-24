@@ -64,7 +64,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     Solver *_solv;
     Queue _jobQueue;
 
-
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;

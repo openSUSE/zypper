@@ -436,11 +436,6 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     sat::Pool::instance().setDirty();
     sat::Pool::instance().prepare();
-    _solv->fixsystem = false;
-    _solv->updatesystem = false;
-    _solv->allowdowngrade = false;
-    _solv->allowuninstall = false;
-    _solv->noupdateprovide = false;
 
     // Solve !
     MIL << "Starting solving...." << endl;
