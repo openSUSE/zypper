@@ -299,19 +299,19 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  language);
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
-	control.installResolvable (iter->resolvable());	
+	control.installResolvable (iter->resolvable(), iter->status());	
     }
 
     for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
-	control.lockResolvable (iter->resolvable());	
+	control.lockResolvable (iter->resolvable(), iter->status());	
     }
     
     for (PoolItemList::const_iterator iter = items_keep.begin(); iter != items_keep.end(); iter++) {
-	control.keepResolvable (iter->resolvable());	
+	control.keepResolvable (iter->resolvable(), iter->status());	
     }
 
     for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
-	control.deleteResolvable (iter->resolvable());	
+	control.deleteResolvable (iter->resolvable(), iter->status());	
     }
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
@@ -404,38 +404,47 @@ HelixControl::~HelixControl()
 	  << "</test>" << endl;
 }
 
-void HelixControl::installResolvable(const ResObject::constPtr &resObject)
+void HelixControl::installResolvable(const ResObject::constPtr &resObject,
+				     const ResStatus &status)
 {
     Repository repo  = resObject->repository();
     *file << "<install channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
+	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
+	  << " status=\"" << status << "\"" 
 	  << "/>" << endl;
 }
 
-void HelixControl::lockResolvable(const ResObject::constPtr &resObject)
+void HelixControl::lockResolvable(const ResObject::constPtr &resObject,
+				  const ResStatus &status)
 {
     Repository repo  = resObject->repository();
     *file << "<lock channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
+	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
+	  << " status=\"" << status << "\"" 	
 	  << "/>" << endl;
 }
 
-void HelixControl::keepResolvable(const ResObject::constPtr &resObject)
+void HelixControl::keepResolvable(const ResObject::constPtr &resObject,
+				  const ResStatus &status)
 {
     Repository repo  = resObject->repository();
     *file << "<keep channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
-	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\"" 
+	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
+	  << " status=\"" << status << "\"" 	
 	  << "/>" << endl;
 }
     
-void HelixControl::deleteResolvable(const ResObject::constPtr &resObject)
+void HelixControl::deleteResolvable(const ResObject::constPtr &resObject,
+				    const ResStatus &status)
 {
     Repository repo  = resObject->repository();    
     *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
-	  << " name=\"" << resObject->name() << "\"" << "/>" << endl;    
+	  << " name=\"" << resObject->name() << "\""
+	  << " status=\"" << status << "\"" 
+	  << "/>" << endl;    
 }
 
 void HelixControl::addDependencies (const CapabilitySet & capRequire, const CapabilitySet & capConflict)
