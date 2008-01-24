@@ -40,6 +40,8 @@ namespace zypp
     OnMediaLocation location() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
+    /** Ctor */
     SrcPackage( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~SrcPackage();

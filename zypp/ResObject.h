@@ -96,13 +96,6 @@ namespace zypp
     ByteCount downloadSize() const;
 
     /**
-     * \short Download size
-     * \deprecated Use downloadSize()
-     */
-    ZYPP_DEPRECATED ByteCount archivesize() const
-    { return downloadSize(); }
-
-    /**
      * Source providing this resolvable
      */
     Repository repository() const;
@@ -159,13 +152,30 @@ namespace zypp
    * \code
    * sat::Solvable s;
    * ResObject::Ptr p( makeResObject( s ) );
-   * if ( p )
-   * {
-   *
-   * }
+   * ResObject::Ptr q( make<ResObject>( s ) );
+   * Package::Ptr   pkg( make<Package>( s ) );
    * \endcode
   */
-  inline ResObject::Ptr makeResObject( const sat::Solvable & solvable_r ) { return 0; }
+  ResObject::Ptr makeResObject( const sat::Solvable & solvable_r );
+
+  /** Directly create a certain kind of ResObject from \ref sat::Solvable.
+   *
+   * If the sat::Solvables kind is not appropriate, a NULL
+   * pointer is returned.
+    * \code
+   * sat::Solvable s;
+   * ResObject::Ptr p( makeResObject( s ) );
+   * ResObject::Ptr q( make<ResObject>( s ) );
+   * Package::Ptr   pkg( make<Package>( s ) );
+   * \endcode
+  */
+  template<class _Res>
+  inline typename ResTraits<_Res>::PtrType make( const sat::Solvable & solvable_r )
+  { return( isKind<_Res>( solvable_r ) ? new _Res( solvable_r ) : 0 ); }
+  /** \overload Specialisation for ResObject autodetecting the kind of resolvable. */
+  template<>
+  inline ResObject::Ptr make<ResObject>( const sat::Solvable & solvable_r )
+  { return makeResObject( solvable_r ); }
 
   /** Convert ResObject::Ptr into Ptr of a certain Kind.
    * \return \c NULL iff \a p is \c NULL or points to a Resolvable
@@ -176,12 +186,12 @@ namespace zypp
    * \endcode
   */
   template<class _Res>
-    inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
-    { return dynamic_pointer_cast<_Res>(p); }
+  inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
+  { return dynamic_pointer_cast<_Res>(p); }
 
   template<class _Res>
-    inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
-    { return dynamic_pointer_cast<const _Res>(p); }
+  inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
+  { return dynamic_pointer_cast<const _Res>(p); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

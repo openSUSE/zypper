@@ -60,6 +60,7 @@ namespace zypp
     OnMediaLocation undoScriptLocation() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
     Script( const sat::Solvable & solvable_r );
     /** Dtor */

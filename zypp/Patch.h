@@ -56,6 +56,7 @@ namespace zypp
     bool interactive() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
     Patch( const sat::Solvable & solvable_r );
     /** Dtor */

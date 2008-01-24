@@ -166,7 +166,6 @@ string toXML( const Dependencies &dep )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << endl;
   if ( dep[Dep::OBSOLETES].size() > 0 )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << endl;
-  // why the YUM tag is freshen without s????
   if ( dep[Dep::FRESHENS].size() > 0 )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << endl;
   if ( dep[Dep::REQUIRES].size() > 0 )

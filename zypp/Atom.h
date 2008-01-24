@@ -31,6 +31,8 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
+    /** Ctor */
     Atom( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Atom();

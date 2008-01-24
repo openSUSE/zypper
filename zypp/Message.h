@@ -39,6 +39,8 @@ namespace zypp
     ResTraits<Patch>::constPtrType patch() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
+    /** Ctor */
     Message( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Message();

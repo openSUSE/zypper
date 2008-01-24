@@ -41,6 +41,7 @@ namespace zypp
     static Ptr availableInstance( const Locale & locale_r );
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
     Language( const sat::Solvable & solvable_r );
     /** Dtor */

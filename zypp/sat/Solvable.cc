@@ -115,6 +115,30 @@ namespace zypp
       return ResKind( std::string( ident, sep-ident ) );
     }
 
+    bool Solvable::isKind( const ResKind & kind_r ) const
+    {
+      NO_SOLVABLE_RETURN( false );
+
+      // detect srcpackages by 'arch'
+      if ( kind_r == ResKind::srcpackage )
+      {
+        return( _solvable->arch == ARCH_SRC || _solvable->arch == ARCH_NOSRC );
+      }
+
+      // no ':' in package names (hopefully)
+      const char * ident = IdString( _solvable->name ).c_str();
+      if ( kind_r == ResKind::package )
+      {
+        return( ::strchr( ident, ':' ) == 0 );
+      }
+
+      // look for a 'kind:' prefix
+      const char * kind = kind_r.c_str();
+      unsigned     ksize = ::strlen( kind );
+      return( ::strncmp( ident, kind, ksize ) == 0
+              && ident[ksize] == ':' );
+    }
+
     std::string Solvable::name() const
     {
       NO_SOLVABLE_RETURN( std::string() );

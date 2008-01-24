@@ -82,6 +82,7 @@ namespace zypp
     Edition distributionEdition() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
     Product( const sat::Solvable & solvable_r );
     /** Dtor */

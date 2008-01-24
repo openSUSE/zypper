@@ -84,6 +84,9 @@ namespace zypp
         IdString     ident()    const;
 
         ResKind      kind()     const;
+        /** Test whether a Solvable is of a certain \ref ResKind. */
+        bool         isKind( const ResKind & kind_r ) const;
+
         std::string  name()     const;
         Edition      edition()  const;
         Arch         arch()     const;
@@ -199,6 +202,12 @@ namespace zypp
    /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates sat::Solvable Test whether a \ref sat::Solvable is of a certain Kind. */
+  template<class _Res>
+  inline bool isKind( const sat::Solvable & solvable_r )
+  { return solvable_r.isKind( ResTraits<_Res>::kind ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

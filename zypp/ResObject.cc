@@ -42,8 +42,7 @@ namespace zypp
   //
   std::ostream & ResObject::dumpOn( std::ostream & str ) const
   {
-    str << "[S" << repository().numericId() << ":" << mediaNr() << "]";
-    return Resolvable::dumpOn( str );
+    return Resolvable::dumpOn( str << "[S" << repository().numericId() << ":" << mediaNr() << "]" );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -95,6 +94,34 @@ namespace zypp
   {
     static DiskUsage _du;
     return _du;
+  }
+
+   /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+
+#include "zypp/ResObjects.h"
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+
+  ResObject::Ptr makeResObject( const sat::Solvable & solvable_r )
+  {
+    ResKind kind( solvable_r.kind() );
+#define OUTS(X)  if ( kind == ResTraits<X>::kind ) return make<X>( solvable_r );
+    OUTS( Atom );
+    OUTS( Language );
+    OUTS( Message );
+    OUTS( Package );
+    OUTS( Patch );
+    OUTS( Pattern );
+    OUTS( Product );
+    OUTS( Script );
+    OUTS( Selection );
+    OUTS( SrcPackage );
+#undef OUTS
+    return 0;
   }
 
   /////////////////////////////////////////////////////////////////

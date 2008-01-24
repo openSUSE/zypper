@@ -58,6 +58,7 @@ namespace zypp
     const Capabilities & extends() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
     Pattern( const sat::Solvable & solvable_r );
     /** Dtor */
