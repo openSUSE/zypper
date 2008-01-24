@@ -1658,6 +1658,10 @@ void Zypper::doCommand()
         if (looks_like_rpm_file(*it))
         {
           DBG << *it << " looks like rpm file" << endl;
+          cout_v << format(
+              _("'%s' looks like an RPM file. Will try to download it.")) % *it
+            << endl;
+
           // download the rpm into the cache
           //! \todo do we want this or a tmp dir? What about the files cached before?
           //! \todo optimize: don't mount the same media multiple times for each rpm
@@ -1667,7 +1671,7 @@ void Zypper::doCommand()
 
           if (rpmpath.empty())
           {
-            cerr << format(_("Problem with the RPM file specified as %s, skipping."))
+            cerr << format(_("Problem with the RPM file specified as '%s', skipping."))
               % *it << endl;
           }
           else
@@ -1718,6 +1722,13 @@ void Zypper::doCommand()
       repo.setName(_("RPM files cache"));
 
       gData.additional_repos.push_back(repo);
+    }
+    // no rpms and no other arguments either
+    else if (_arguments.empty())
+    {
+      cout << _("No valid arguments specified.") << endl;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
     }
 
     //! \todo quit here if the argument list remains empty after founding only invalid rpm args

@@ -166,19 +166,23 @@ Url make_url (const string & url_s)
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
-    cerr << _("Given URL is invalid.") << endl;
-    cerr << excpt_r.asUserString() << endl;
+    cerr << _("Given URL is invalid") << ": " << urlstr
+         << " (" << excpt_r.asUserString() << ")" << endl;
   }
   return u;
 }
 
 // ----------------------------------------------------------------------------
 
-bool looks_like_rpm_file(const std::string & s)
+bool looks_like_rpm_file(const string & s)
 {
-  if (s.rfind(".rpm") == s.size() - 4 ||
-      s.find("./") == 0 ||
-      s.find("../") == 0 ||
+  // don't even bother to check strings shorter than 4 chars.
+  if (s.size() <= 4)
+    return false;
+
+  if (s.rfind(".rpm") == s.size() - 4 || // ends with .rpm
+      s.find("./") == 0 ||               // starts with ./, ../, or / indicating
+      s.find("../") == 0 ||              //  a local path
       s.find("/") == 0)
     return true;
 
@@ -221,7 +225,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   catch (const Exception & e)
   {
     report_problem(e,
-        _("Problem downloading the specified RPM file."),
+        _("Problem downloading the specified RPM file") + string(":"),
         _("Please check whether the file is accessible."));
   }
 
