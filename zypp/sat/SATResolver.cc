@@ -695,7 +695,7 @@ SATResolver::problems ()
 					|| poolItem.status().staysUninstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
 				}
-				string description = str::form (_("do not install a solvable providing %s"), dep2str(pool, what));
+				string description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -710,7 +710,7 @@ SATResolver::problems ()
 					|| poolItem.status().staysInstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
 				}
-				string description = str::form (_("keep all solvables providing %s"), dep2str(pool, what));
+				string description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
