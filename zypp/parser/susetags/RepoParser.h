@@ -71,7 +71,7 @@ namespace zypp
         * \param consumer_r consumer of parsed data
         * \param fnc_r progress reporting function
 	*/
-	RepoParser( const data::RecordId & repositoryId_r,
+	RepoParser( const std::string &repositoryId_r,
 		    data::ResolvableDataConsumer & consumer_r,
 		    const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
         /** Dtor */

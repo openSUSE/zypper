@@ -71,7 +71,7 @@ namespace zypp
   public:
     /** CTOR */
     Impl(
-      const data::RecordId & repository_id,
+      const std::string &repo_id,
       data::ResolvableDataConsumer & consumer,
       const RepoParserOpts & options = RepoParserOpts(),
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()
@@ -158,7 +158,7 @@ namespace zypp
 
   private:
     /** ID of the repository record in the DB (repositories.id) */
-    data::RecordId _repository_id;
+    string _repository_id;
 
     /** Object for processing the read data */
     data::ResolvableDataConsumer & _consumer;
@@ -176,7 +176,7 @@ namespace zypp
 
 
   RepoParser::Impl::Impl(
-      const data::RecordId & repository_id,
+      const std::string & repository_id,
       data::ResolvableDataConsumer & consumer,
       const RepoParserOpts & options,
       const ProgressData::ReceiverFnc & progress)
@@ -460,7 +460,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   RepoParser::RepoParser(
-      const data::RecordId & repository_id,
+      const std::string & repository_id,
       data::ResolvableDataConsumer & consumer,
       const RepoParserOpts & options,
       const ProgressData::ReceiverFnc & progress)

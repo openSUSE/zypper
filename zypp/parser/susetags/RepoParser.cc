@@ -53,7 +53,7 @@ namespace zypp
       class RepoParser::Impl
       {
 	public:
-	  Impl( const data::RecordId & repositoryId_r,
+	  Impl( const std::string & repositoryId_r,
 		data::ResolvableDataConsumer & consumer_r,
 		const ProgressData::ReceiverFnc & fnc_r )
 	  : _repositoryId( repositoryId_r )
@@ -367,7 +367,7 @@ namespace zypp
 	  }
 
 	private:
-	  data::RecordId                 _repositoryId;
+	  std::string                    _repositoryId;
 	  data::ResolvableDataConsumer & _consumer;
 	  ProgressData                   _ticks;
 
@@ -558,7 +558,7 @@ namespace zypp
       //	METHOD NAME : RepoParser::RepoParser
       //	METHOD TYPE : Ctor
       //
-      RepoParser::RepoParser( const data::RecordId & repositoryId_r,
+      RepoParser::RepoParser( const std::string & repositoryId_r,
 			      data::ResolvableDataConsumer & consumer_r,
 			      const ProgressData::ReceiverFnc & fnc_r )
       : _pimpl( new Impl( repositoryId_r, consumer_r, fnc_r ) )

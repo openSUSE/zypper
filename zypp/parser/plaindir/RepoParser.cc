@@ -72,7 +72,7 @@ RepoStatus dirStatus( const Pathname &dir )
 
 data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
                                              set<string> * filerequires,
-                                             const Pathname & location, data::RecordId &repoid )
+                                             const Pathname & location, std::string &repoid )
 {
   if ( ! header )
     return 0;
@@ -130,7 +130,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 class RepoParser::Impl
 {
   public:
-    Impl( const data::RecordId & repositoryId_r,
+    Impl( const std::string & repositoryId_r,
           data::ResolvableDataConsumer & consumer_r,
           const ProgressData::ReceiverFnc & fnc_r )
     : _repositoryId( repositoryId_r )
@@ -146,7 +146,7 @@ class RepoParser::Impl
   public:
 
   private:
-    data::RecordId                 _repositoryId;
+    std::string                 _repositoryId;
     data::ResolvableDataConsumer & _consumer;
     ProgressData                   _ticks;
     Arch			   _sysarch;
@@ -247,7 +247,7 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 //	METHOD NAME : RepoParser::RepoParser
 //	METHOD TYPE : Ctor
 //
-RepoParser::RepoParser( const data::RecordId & repositoryId_r,
+RepoParser::RepoParser( const std::string & repositoryId_r,
                         data::ResolvableDataConsumer & consumer_r,
                         const ProgressData::ReceiverFnc & fnc_r )
 : _pimpl( new Impl( repositoryId_r, consumer_r, fnc_r ) )

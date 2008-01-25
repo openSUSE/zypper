@@ -127,11 +127,10 @@ namespace zypp
       return;
 
     MIL << info.alias() << " cleaning cache..." << endl;
-    data::RecordId id = store.lookupRepository(info.alias());
-
+    
     CombinedProgressData subprogrcv(progress);
 
-    store.cleanRepository(id, subprogrcv);
+    store.cleanRepository(info.alias(), subprogrcv);
   }
 
   ////////////////////////////////////////////////////////////////////////////
