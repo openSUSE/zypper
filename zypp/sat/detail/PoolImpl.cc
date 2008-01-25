@@ -19,6 +19,7 @@
 #include "zypp/ZConfig.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/Capability.h"
 
 using std::endl;
 
@@ -32,14 +33,20 @@ namespace zypp
     namespace detail
     { /////////////////////////////////////////////////////////////////
 
-      // MPL checks for satlib constants we redefine:
+      // MPL checks for satlib constants we redefine to avoid
+      // includes and defines.
       BOOST_MPL_ASSERT_RELATION( noId,                 ==, STRID_NULL );
       BOOST_MPL_ASSERT_RELATION( emptyId,              ==, STRID_EMPTY );
 
       BOOST_MPL_ASSERT_RELATION( solvablePrereqMarker, ==, SOLVABLE_PREREQMARKER );
       BOOST_MPL_ASSERT_RELATION( solvableFileMarker,   ==, SOLVABLE_FILEMARKER );
 
-      /////////////////////////////////////////////////////////////////
+      BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_AND,       ==, REL_AND );
+      BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_OR,        ==, REL_OR );
+      BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_WITH,      ==, REL_WITH );
+      BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_NAMESPACE, ==, REL_NAMESPACE );
+
+     /////////////////////////////////////////////////////////////////
 
       void logSat( struct _Pool *, void *data, int type, const char *logString )
       {

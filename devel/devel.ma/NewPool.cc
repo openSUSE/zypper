@@ -34,6 +34,7 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -423,13 +424,21 @@ int main( int argc, char * argv[] )
 
   sat::Pool satpool( sat::Pool::instance() );
 
-  Patch::Ptr p = make<Patch>( sat::Solvable(23) );
-  WAR << p << endl;
-
 #if 1
   sat::Repo s( satpool.addRepoSolv( "10.3.solv" ) );
   //sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
 
+  Capability lc( "foo <= 13" );
+  Capability rc( "Baa > 5" );
+  int nid = ::rel2id( satpool.get(), lc.id(), rc.id(), 16, /*create*/true );
+  Capability t( nid );
+  INT << lc << endl;
+  INT << rc << endl;
+  INT << t << endl;
+  INT << dump(t) << endl;
+
+  if ( 0 )
+  {
   Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
   MIL << r << endl;
   Capabilities::const_iterator it = r.begin();
@@ -437,7 +446,18 @@ int main( int argc, char * argv[] )
   it = ++r.begin();
   DBG << *it << endl;
 
-  if ( 1 )
+
+
+  r = (*satpool.solvablesBegin())[Dep::REQUIRES];
+  for_( it, r.begin(), r.end() )
+  {
+    if ( it.tagged() )
+      WAR << *it << " (is prereq)" << endl;
+    else
+      MIL << dump(*it) << endl;
+  }
+  }
+  if ( 0 )
   {
     std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
                                          satpool.solvablesBegin(), satpool.solvablesEnd() ),

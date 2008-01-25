@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/Capability.h"
 
@@ -104,6 +105,26 @@ namespace zypp
       : const_iterator::iterator_adaptor_( _idx )
       { assignVal(); }
 
+    public:
+      /** Return \c true if the \ref Capability is \c tagged.
+       * The meaning of \c tagged depends on the kind of dependency you
+       * are processing. It is a hint that the iteratir skipped some
+       * internal marker, indicating that subsequent cabailities have
+       * a special property. Within a \ref Solvables requirements e.g.
+       * the pre-requirements are tagged.
+       * \code
+       * Capabilities req( solvable.requires() );
+       * for_( it, req.begin(), req.end() )
+       * {
+       *   if ( it.tagged() )
+       *     cout << *it << " (is prereq)" << endl;
+       *   else
+       *     cout << *it << endl;
+       * }
+       * \endcode
+      */
+      bool tagged() const { return _tagged; }
+
     private:
       friend class boost::iterator_core_access;
 
@@ -120,7 +141,11 @@ namespace zypp
 
           void increment()
           { // jump over satsolvers internal ids.
-            if ( sat::detail::isDepMarkerId( *(++base_reference()) ) ) ++base_reference();
+            if ( sat::detail::isDepMarkerId( *(++base_reference()) ) )
+            {
+              _tagged = true;
+              ++base_reference();
+            }
             assignVal();
           }
 
@@ -129,6 +154,7 @@ namespace zypp
       { _val = ( base() ) ? Capability( *base() ) : Capability::Null; }
 
       mutable Capability _val;
+      DefaultIntegral<bool,false> _tagged;
   };
   ///////////////////////////////////////////////////////////////////
 

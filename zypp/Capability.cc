@@ -93,31 +93,6 @@ namespace zypp
       return relFromStr( pool_r, name, op, ed, kind_r );
     }
 
-    // By now restrict matching to plain 'name [op edition]'
-    struct CapHelp : protected sat::detail::PoolMember
-    {
-      CapHelp( sat::detail::IdType id_r )
-      : _name( id_r )
-      {
-        if ( ISRELDEP(id_r) )
-        {
-          ::Reldep * rd = GETRELDEP( myPool().getPool(), id_r );
-          if ( ! Rel::isRel( rd->flags ) || ISRELDEP(rd->name) || ISRELDEP(rd->evr) )
-            _op = Rel::NONE;
-          else
-          {
-            _name = IdString( rd->name );
-            _op   = Rel( rd->flags );
-            _ed   = Edition( rd->evr );
-          }
-        }
-      }
-
-      IdString _name;
-      Rel      _op;
-      Edition  _ed;
-    };
-
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
@@ -168,22 +143,23 @@ namespace zypp
     if ( lhs == rhs )
       return true;
 
-    CapHelp l( lhs );
-    if ( l._op == Rel::NONE )
+    CapDetail l( lhs );
+    if ( ! l.isSimple() )
       return false;
 
-    CapHelp r( rhs );
-    if ( r._op == Rel::NONE )
+    CapDetail r( rhs );
+    if ( r.isSimple() )
       return false;
 
-    if ( l._name != r._name )
+    if ( l.name() != r.name() )
       return false;
 
-    if ( l._op == Rel::ANY || r._op == Rel::ANY )
+    if ( l.isNamed() || r.isNamed() )
       return true;
 
-    return overlaps( Edition::MatchRange( l._op, l._ed ),
-                     Edition::MatchRange( r._op, r._ed ) );
+    // both are versioned:
+    return overlaps( Edition::MatchRange( l.op(), l.ed() ),
+                     Edition::MatchRange( r.op(), r.ed() ) );
   }
 
   bool Capability::isInterestingFileSpec( const char * name_r )
@@ -204,6 +180,88 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
     return str << obj.c_str();
+  }
+
+  std::ostream & dumpOn( std::ostream & str, const Capability & obj )
+  {
+    return str << obj.detail();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : CapDetail
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  void CapDetail::_init()
+  {
+    // : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 )
+
+    if ( !_lhs )
+      return; // NOCAP
+
+    if ( ! ISRELDEP(_lhs) )
+    {
+      _kind = NAMED;
+      return;
+    }
+
+    ::Reldep * rd = GETRELDEP( myPool().getPool(), _lhs );
+    _lhs  = rd->name;
+    _rhs  = rd->evr;
+    _flag = rd->flags;
+
+    _kind = Rel::isRel( _flag ) ? VERSIONED : EXPRESSION;
+  }
+
+  /******************************************************************
+  **
+  **	FUNCTION NAME : operator<<
+  **	FUNCTION TYPE : std::ostream &
+  */
+  std::ostream & operator<<( std::ostream & str, const CapDetail & obj )
+  {
+    switch ( obj.kind() )
+    {
+      case CapDetail::NOCAP:
+        return str << "<NoCap>";
+        break;
+      case CapDetail::NAMED:
+        return str << obj.name();
+        break;
+      case CapDetail::VERSIONED:
+        return str << obj.name() << " " << obj.op() << " " << obj.ed();
+        break;
+      case CapDetail::EXPRESSION:
+        return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
+        break;
+    }
+    return str <<  "<UnknownCap>";
+  }
+
+  std::ostream & operator<<( std::ostream & str, CapDetail::Kind obj )
+  {
+    switch ( obj )
+    {
+      case CapDetail::NOCAP:      return str << "NoCap"; break;
+      case CapDetail::NAMED:      return str << "NamedCap"; break;
+      case CapDetail::VERSIONED:  return str << "VersionedCap"; break;
+      case CapDetail::EXPRESSION: return str << "CapExpression"; break;
+    }
+    return str << "UnknownCap";
+  }
+
+  std::ostream & operator<<( std::ostream & str, CapDetail::CapRel obj )
+  {
+    switch ( obj )
+    {
+      case CapDetail::REL_NONE:      return str << "NoCapRel"; break;
+      case CapDetail::CAP_AND:       return str << "AND"; break;
+      case CapDetail::CAP_OR:        return str << "OR"; break;
+      case CapDetail::CAP_WITH:      return str << "WITH"; break;
+      case CapDetail::CAP_NAMESPACE: return str << "NAMESPACE"; break;
+   }
+    return str << "UnknownCapRel";
   }
 
   /////////////////////////////////////////////////////////////////

@@ -187,7 +187,7 @@ namespace zypp
   /** \relates IdStringType NotEqual */
   template <class Derived>
   inline bool operator!=( const IdStringType<Derived> & lhs, const IdStringType<Derived> & rhs )
-  { return lhs.idStr().compareEQ( rhs.idStr() ); }
+  { return ! lhs.idStr().compareEQ( rhs.idStr() ); }
   /** \overload */
   template <class Derived>
   inline bool operator!=( const IdStringType<Derived> & lhs, const IdString & rhs )

@@ -16,11 +16,12 @@
 #include <set>
 
 #include "zypp/base/SafeBool.h"
-#include "zypp/base/Deprecated.h"
 
 #include "zypp/sat/detail/PoolMember.h"
 
 #include "zypp/IdString.h"
+#include "zypp/Edition.h"
+#include "zypp/Rel.h"
 #include "zypp/ResTraits.h"
 
 #include "zypp/CapMatch.h"
@@ -29,9 +30,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Rel;
-  class Edition;
   class Capability;
+  class CapDetail;
 
   typedef std::set<Capability> CapabilitySet;
 
@@ -51,7 +51,6 @@ namespace zypp
      * // avoid this:
    * Capability( "pattern:foo", ResKind::pattern ) ==> 'pattern:pattern:foo'
    * \endcode
-   *
    */
   class Capability: protected sat::detail::PoolMember,
   private base::SafeBool<Capability>
@@ -118,9 +117,13 @@ namespace zypp
       { return string(); }
 
     public:
-      /** \name Match two Capabilities
+      /** Helper providing more detailed information about a \ref Capability. */
+      CapDetail detail() const;
+
+    public:
+      /** \name Match two simple Capabilities
        * \todo check whether we must promote string to Capability in order to match.
-      */
+       */
       //@{
       static bool matches( const Capability & lhs,  const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
       static bool matches( const Capability & lhs,  const IdString & rhs )       { return _doMatch( lhs.id(), rhs.id() ); }
@@ -184,6 +187,9 @@ namespace zypp
   /** \relates Capability Stream output */
   std::ostream & operator<<( std::ostream & str, const Capability & obj );
 
+  /** \relates Capability Detailed stream output */
+  std::ostream & dumpOn( std::ostream & str, const Capability & obj );
+
   /** \relates Capability */
   inline bool operator==( const Capability & lhs, const Capability & rhs )
   { return lhs.id() == rhs.id(); }
@@ -195,6 +201,92 @@ namespace zypp
   /** \relates Capability Arbitrary order. */
   inline bool operator<( const Capability & lhs, const Capability & rhs )
   { return lhs.id() < rhs.id(); }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : CapDetail
+  //
+  /** Helper providing more detailed information about a \ref Capability.
+   */
+  class CapDetail: protected sat::detail::PoolMember
+  {
+    public:
+      enum Kind
+      {
+        NOCAP      = 0x00,
+        NAMED      = 0x01,
+        VERSIONED  = 0x02,
+        EXPRESSION = 0x04
+      };
+
+      /** Enum values corresponding with libsatsolver defines.
+       * MPL check in PoolImpl.cc
+      */
+      enum CapRel
+      {
+        REL_NONE      = 0,
+        CAP_AND       = 16,
+        CAP_OR        = 17,
+        CAP_WITH      = 18,
+        CAP_NAMESPACE = 19
+      };
+
+    public:
+      CapDetail()
+      : _kind( NOCAP ), _lhs( 0 ), _rhs( 0 ), _flag( 0 )
+      {}
+      explicit CapDetail( const Capability & cap_r )
+      : _kind( NOCAP ), _lhs( cap_r.id() ), _rhs( 0 ), _flag( 0 )
+      { _init(); }
+      explicit CapDetail( sat::detail::IdType id_r )
+      : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 )
+      { _init(); }
+
+    public:
+      Kind kind()         const { return _kind; }
+      bool isNull()       const { return _kind == NOCAP; }
+      bool isNamed()      const { return _kind == NAMED; }
+      bool isVersioned()  const { return _kind == VERSIONED; }
+      bool isSimple()     const { return _kind & (NAMED|VERSIONED); }
+      bool isExpression() const { return _kind == EXPRESSION; }
+
+      /** \name Is simple: <tt>name [op edition]</tt> */
+      //@{
+      IdString name()     const { return isSimple()    ? IdString( _lhs ) : IdString(); }
+      Rel      op()       const { return isVersioned() ? Rel( _flag )     : Rel::ANY; }
+      Edition  ed()       const { return isVersioned() ? Edition( _rhs )  : Edition(); }
+      //@}
+
+      /** \name Is expression <tt>cap op cap</tt> */
+      //@{
+      Capability lhs()    const { return isExpression() ? Capability( _lhs ) : Capability::Null; }
+      CapRel     capRel() const { return isExpression() ? CapRel(_flag)      : REL_NONE; }
+      Capability rhs()    const { return isExpression() ? Capability( _rhs ) : Capability::Null; }
+     //@}
+
+    private:
+      void _init();
+    private:
+      Kind                _kind;
+      sat::detail::IdType _lhs;
+      sat::detail::IdType _rhs;
+      unsigned            _flag;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates CapDetail Stream output */
+  std::ostream & operator<<( std::ostream & str, const CapDetail & obj );
+
+  /** \relates CapDetail Stream output */
+  std::ostream & operator<<( std::ostream & str, CapDetail::Kind obj );
+
+  /** \relates CapDetail Stream output */
+  std::ostream & operator<<( std::ostream & str, CapDetail::CapRel obj );
+
+  ///////////////////////////////////////////////////////////////////
+
+  inline CapDetail Capability::detail() const
+  { return CapDetail( _id ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
