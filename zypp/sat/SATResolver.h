@@ -97,9 +97,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     int maxSolverPasses () const { return _maxSolverPasses; }
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
+	
 
     bool resolvePool(const CapSet & requires_caps,
-		     const CapSet & conflict_caps);
+		     const CapSet & conflict_caps,
+		     const bool updgradeMode);
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);

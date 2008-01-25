@@ -372,7 +372,8 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
 bool
 SATResolver::resolvePool(const CapSet & requires_caps,
-			 const CapSet & conflict_caps)
+			 const CapSet & conflict_caps,
+			 const bool updgradeMode)
 {
     SATCollectTransact info (*this);
     MIL << "SATResolver::resolvePool()" << endl;
@@ -450,10 +451,20 @@ SATResolver::resolvePool(const CapSet & requires_caps,
     sat::Pool::instance().setDirty();
     sat::Pool::instance().prepare();
     solv->fixsystem = false;
-    solv->updatesystem = false;
-    solv->allowdowngrade = false;
+    solv->noupdateprovide = true;	
+    
+    if (updgradeMode) {
+	MIL << "setting Upgrade Mode" << endl;
+	solv->updatesystem = true;
+	solv->allowdowngrade = true;
+    } else {
+	MIL << "setting NONE Upgrade Mode" << endl;	
+	solv->updatesystem = false;
+	solv->allowdowngrade = false;
+    }
+
+    solv->allowarchchange = true;
     solv->allowuninstall = false;
-    solv->noupdateprovide = false;
 
     // Solve !
     MIL << "Starting solving...." << endl;
