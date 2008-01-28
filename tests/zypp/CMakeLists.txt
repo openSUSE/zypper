@@ -1,3 +1,6 @@
+# source:     ${loop_var}_test.cc
+# executable: ${loop_var}_test
+# test:       ${loop_var}_test
 FOREACH( loop_var ResKind)
    ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
    TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp boost_unit_test_framework )
@@ -17,8 +20,8 @@ TARGET_LINK_LIBRARIES(RWPtr zypp)
 ADD_EXECUTABLE(Edition Edition.cc)
 TARGET_LINK_LIBRARIES(Edition zypp boost_unit_test_framework )
 
-#ADD_EXECUTABLE(Capabilities Capabilities.cc)
-#TARGET_LINK_LIBRARIES(Capabilities zypp boost_unit_test_framework )
+ADD_EXECUTABLE(Capabilities Capabilities.cc)
+TARGET_LINK_LIBRARIES(Capabilities zypp boost_unit_test_framework )
 
 ADD_EXECUTABLE(PtrTypes PtrTypes.cc)
 TARGET_LINK_LIBRARIES(PtrTypes zypp  )
