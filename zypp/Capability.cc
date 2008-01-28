@@ -131,31 +131,50 @@ namespace zypp
   {}
 
   const char * Capability::c_str() const
-  { return ::dep2str( myPool().getPool(), _id ); }
+  { return( _id ? ::dep2str( myPool().getPool(), _id ) : "" ); }
 
-  std::string Capability::string() const
-  { return ::dep2str( myPool().getPool(), _id ); }
-
-  bool Capability::_doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs )
+  CapMatch Capability::_doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs )
   {
 #warning MIGRATE TO SAT
 #warning TESTCASE
     if ( lhs == rhs )
-      return true;
+      return CapMatch::yes;
 
     CapDetail l( lhs );
-    if ( ! l.isSimple() )
-      return false;
-
     CapDetail r( rhs );
-    if ( r.isSimple() )
-      return false;
 
+    switch ( l.kind() )
+    {
+      case CapDetail::NOCAP:
+        return( r.kind() == CapDetail::NOCAP ); // NOCAP matches NOCAP only
+        break;
+      case CapDetail::EXPRESSION:
+        return CapMatch::irrelevant;
+        break;
+      case CapDetail::NAMED:
+      case CapDetail::VERSIONED:
+        break;
+    }
+
+    switch ( r.kind() )
+    {
+      case CapDetail::NOCAP:
+        return CapMatch::no; // match case handled above
+        break;
+      case CapDetail::EXPRESSION:
+        return CapMatch::irrelevant;
+        break;
+      case CapDetail::NAMED:
+      case CapDetail::VERSIONED:
+        break;
+    }
+    // comparing two simple caps:
     if ( l.name() != r.name() )
-      return false;
+      return CapMatch::no;
 
+    // isNamed matches ANY edition:
     if ( l.isNamed() || r.isNamed() )
-      return true;
+      return CapMatch::yes;
 
     // both are versioned:
     return overlaps( Edition::MatchRange( l.op(), l.ed() ),
@@ -197,7 +216,7 @@ namespace zypp
   {
     // : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 )
 
-    if ( !_lhs )
+    if ( _lhs == sat::detail::emptyId || _lhs == sat::detail::noId )
       return; // NOCAP
 
     if ( ! ISRELDEP(_lhs) )

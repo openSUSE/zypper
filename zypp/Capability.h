@@ -16,6 +16,7 @@
 #include <set>
 
 #include "zypp/base/SafeBool.h"
+#include "zypp/base/Deprecated.h"
 
 #include "zypp/sat/detail/PoolMember.h"
 
@@ -57,7 +58,7 @@ namespace zypp
   {
     public:
       // legacy
-      ZYPP_DEPRECATED std::string index() const { return std::string(); }
+      std::string index() const ZYPP_DEPRECATED;
 
     public:
       enum CtorFlag { PARSED, UNPARSED };
@@ -109,53 +110,58 @@ namespace zypp
       /** Conversion to <tt>const char *</tt> */
       const char * c_str() const;
 
-      /** Conversion to <tt>std::string</tt> */
-      std::string string() const;
-
       /** \overload */
       std::string asString() const
-      { return string(); }
+      { return c_str(); }
 
     public:
       /** Helper providing more detailed information about a \ref Capability. */
       CapDetail detail() const;
 
     public:
-      /** \name Match two simple Capabilities
+      /** \name Match two simple capabilities.
+       *
+       * Two simple capabilities match if they have the same \c name
+       * and their \c edition ranges overlap. Where no edition matches
+       * ANY edition. \see \ref Edition::match.
+       *
+       * If a capability expression is involved, \ref matches returns
+       * \ref CapMatch::irrelevant.
+       *
        * \todo check whether we must promote string to Capability in order to match.
        */
       //@{
-      static bool matches( const Capability & lhs,  const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
-      static bool matches( const Capability & lhs,  const IdString & rhs )       { return _doMatch( lhs.id(), rhs.id() ); }
-      static bool matches( const Capability & lhs,  const std::string & rhs )    { return _doMatch( lhs.id(), Capability(rhs).id() ); }
-      static bool matches( const Capability & lhs,  const char * rhs )           { return _doMatch( lhs.id(), Capability(rhs).id() );}
+      static CapMatch matches( const Capability & lhs,  const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
+      static CapMatch matches( const Capability & lhs,  const IdString & rhs )       { return _doMatch( lhs.id(), rhs.id() ); }
+      static CapMatch matches( const Capability & lhs,  const std::string & rhs )    { return _doMatch( lhs.id(), Capability(rhs).id() ); }
+      static CapMatch matches( const Capability & lhs,  const char * rhs )           { return _doMatch( lhs.id(), Capability(rhs).id() );}
 
-      static bool matches( const IdString & lhs,    const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
-      static bool matches( const IdString & lhs,    const IdString & rhs )       { return _doMatch( lhs.id(), rhs.id() ); }
-      static bool matches( const IdString & lhs,    const std::string & rhs )    { return _doMatch( lhs.id(), Capability(rhs).id() ); }
-      static bool matches( const IdString & lhs,    const char * rhs )           { return _doMatch( lhs.id(), Capability(rhs).id() ); }
+      static CapMatch matches( const IdString & lhs,    const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
+      static CapMatch matches( const IdString & lhs,    const IdString & rhs )       { return _doMatch( lhs.id(), rhs.id() ); }
+      static CapMatch matches( const IdString & lhs,    const std::string & rhs )    { return _doMatch( lhs.id(), Capability(rhs).id() ); }
+      static CapMatch matches( const IdString & lhs,    const char * rhs )           { return _doMatch( lhs.id(), Capability(rhs).id() ); }
 
-      static bool matches( const std::string & lhs, const Capability & rhs )     { return _doMatch( Capability(lhs).id(), rhs.id() );}
-      static bool matches( const std::string & lhs, const IdString & rhs )       { return _doMatch( Capability(lhs).id(), rhs.id() ); }
-      static bool matches( const std::string & lhs, const std::string & rhs )    { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
-      static bool matches( const std::string & lhs, const char * rhs )           { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
+      static CapMatch matches( const std::string & lhs, const Capability & rhs )     { return _doMatch( Capability(lhs).id(), rhs.id() );}
+      static CapMatch matches( const std::string & lhs, const IdString & rhs )       { return _doMatch( Capability(lhs).id(), rhs.id() ); }
+      static CapMatch matches( const std::string & lhs, const std::string & rhs )    { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
+      static CapMatch matches( const std::string & lhs, const char * rhs )           { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
 
-      static bool matches( const char * lhs,        const Capability & rhs )     { return _doMatch( Capability(lhs).id(), rhs.id() );}
-      static bool matches( const char * lhs,        const IdString & rhs )       { return _doMatch( Capability(lhs).id(), rhs.id() ); }
-      static bool matches( const char * lhs,        const std::string & rhs )    { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
-      static bool matches( const char * lhs,        const char * rhs )           { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
+      static CapMatch matches( const char * lhs,        const Capability & rhs )     { return _doMatch( Capability(lhs).id(), rhs.id() );}
+      static CapMatch matches( const char * lhs,        const IdString & rhs )       { return _doMatch( Capability(lhs).id(), rhs.id() ); }
+      static CapMatch matches( const char * lhs,        const std::string & rhs )    { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
+      static CapMatch matches( const char * lhs,        const char * rhs )           { return _doMatch( Capability(lhs).id(), Capability(rhs).id() ); }
 
-      bool matches( const Capability & rhs )  const { return _doMatch( id(), rhs.id() ); }
-      bool matches( const IdString & rhs )    const { return _doMatch( id(), rhs.id() ); }
-      bool matches( const std::string & rhs ) const { return _doMatch( id(), Capability(rhs).id() ); }
-      bool matches( const char * rhs )        const { return _doMatch( id(), Capability(rhs).id() ); }
+      CapMatch matches( const Capability & rhs )  const { return _doMatch( id(), rhs.id() ); }
+      CapMatch matches( const IdString & rhs )    const { return _doMatch( id(), rhs.id() ); }
+      CapMatch matches( const std::string & rhs ) const { return _doMatch( id(), Capability(rhs).id() ); }
+      CapMatch matches( const char * rhs )        const { return _doMatch( id(), Capability(rhs).id() ); }
       //@}
 
       /** \ref matches functor.
        */
-      struct Matches: public std::binary_function<Capability,Capability,bool>
+      struct Matches: public std::binary_function<Capability,Capability,CapMatch>
       {
-        bool operator()( const Capability & lhs, const Capability & rhs ) const
+        CapMatch operator()( const Capability & lhs, const Capability & rhs ) const
         { return Capability::matches( lhs, rhs ); }
       };
 
@@ -175,7 +181,7 @@ namespace zypp
       { return _id; }
     private:
       /** Match two Capabilities */
-      static bool _doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs );
+      static CapMatch _doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs );
     private:
       friend base::SafeBool<Capability>::operator bool_type() const;
       bool boolTest() const { return ! empty(); }
@@ -285,8 +291,13 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  inline CapDetail Capability::detail() const
-  { return CapDetail( _id ); }
+  inline CapDetail Capability::detail() const { return CapDetail( _id ); }
+
+  inline std::string Capability::index() const
+  {
+    CapDetail cap( _id );
+    return( cap.isSimple() ? cap.name().asString() : std::string() );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
