@@ -43,14 +43,14 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-	
+
 #define TAB "\t"
 #define TAB2 "\t\t"
-	
+
 using namespace std;
 using namespace zypp::str;
 
-IMPL_PTR_TYPE(HelixResolvable);	
+IMPL_PTR_TYPE(HelixResolvable);
 
 static std::string xml_escape( const std::string &text )
 {
@@ -72,11 +72,11 @@ static std::string xml_tag_enclose( const std::string &text, const std::string &
   return result;
 }
 
-	
+
 template<class T>
 std::string helixXML( const T &obj ); //undefined
 
-template<> 
+template<>
 std::string helixXML( const Edition &edition )
 {
     stringstream str;
@@ -84,28 +84,28 @@ std::string helixXML( const Edition &edition )
     if (!edition.release().empty())
 	str << xml_tag_enclose(edition.release(), "release");
     if (edition.epoch() != Edition::noepoch)
-	str << xml_tag_enclose(numstring(edition.epoch()), "epoch");    
+	str << xml_tag_enclose(numstring(edition.epoch()), "epoch");
     return str.str();
 }
 
-template<> 
+template<>
 std::string helixXML( const Arch &arch )
 {
     stringstream str;
-    str << xml_tag_enclose(arch.asString(), "arch");        
-    return str.str();    
+    str << xml_tag_enclose(arch.asString(), "arch");
+    return str.str();
 }
 
-template<> 
+template<>
 std::string helixXML( const Capability &cap )
 {
     stringstream str;
     str << "<dep name='" << xml_escape(cap.asString()) << "'  />" << endl;
-	
-    return str.str();    
+
+    return str.str();
 }
 
-template<> 
+template<>
 std::string helixXML( const Capabilities &caps )
 {
     stringstream str;
@@ -119,7 +119,7 @@ std::string helixXML( const Capabilities &caps )
     return str.str();
 }
 
-template<> 
+template<>
 std::string helixXML( const CapabilitySet &caps )
 {
     stringstream str;
@@ -134,7 +134,7 @@ std::string helixXML( const CapabilitySet &caps )
 }
 
 
-template<> 
+template<>
 std::string helixXML( const Dependencies &dep )
 {
     stringstream str;
@@ -147,7 +147,7 @@ std::string helixXML( const Dependencies &dep )
     if ( dep[Dep::FRESHENS].size() > 0 )
 	str << TAB << xml_tag_enclose(helixXML(dep[Dep::FRESHENS]), "freshens") << endl;
     if ( dep[Dep::REQUIRES].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::REQUIRES]), "requires") << endl;  
+	str << TAB << xml_tag_enclose(helixXML(dep[Dep::REQUIRES]), "requires") << endl;
     if ( dep[Dep::RECOMMENDS].size() > 0 )
 	str << TAB << xml_tag_enclose(helixXML(dep[Dep::RECOMMENDS]), "recommends") << endl;
     if ( dep[Dep::ENHANCES].size() > 0 )
@@ -156,7 +156,16 @@ std::string helixXML( const Dependencies &dep )
 	str << TAB << xml_tag_enclose(helixXML(dep[Dep::SUPPLEMENTS]), "supplements") << endl;
     if ( dep[Dep::SUGGESTS].size() > 0 )
 	str << TAB << xml_tag_enclose(helixXML(dep[Dep::SUGGESTS]), "suggests") << endl;
-    return str.str();    
+    return str.str();
+}
+
+inline string helixXML( const Resolvable::constPtr &obj, Dep deptag_r )
+{
+  stringstream out;
+  Capabilities caps( obj->dep(deptag_r) );
+  if ( ! caps.empty() )
+    out << "    " << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
+  return out.str();
 }
 
 std::string helixXML( const PoolItem_Ref &item )
@@ -167,29 +176,38 @@ std::string helixXML( const PoolItem_Ref &item )
       // language dependencies will be written in another part
       return str.str();
   }
-  
+
   str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
   str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;
-  str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;    
+  str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;
   if ( isKind<Package>(resolvable) ) {
       str << TAB << "<history>" << endl << TAB << "<update>" << endl;
       str << TAB2 << helixXML (resolvable->arch()) << endl;
-      str << TAB2 << helixXML (resolvable->edition()) << endl;      
+      str << TAB2 << helixXML (resolvable->edition()) << endl;
       str << TAB << "</update>" << endl << TAB << "</history>" << endl;
   } else {
-      str << TAB << helixXML (resolvable->arch()) << endl;      
-      str << TAB << helixXML (resolvable->edition()) << endl;            
+      str << TAB << helixXML (resolvable->arch()) << endl;
+      str << TAB << helixXML (resolvable->edition()) << endl;
   }
-  str << helixXML (resolvable->deps());              
+  str << helixXML( resolvable, Dep::PROVIDES);
+  str << helixXML( resolvable, Dep::PREREQUIRES);
+  str << helixXML( resolvable, Dep::CONFLICTS);
+  str << helixXML( resolvable, Dep::OBSOLETES);
+  str << helixXML( resolvable, Dep::FRESHENS);
+  str << helixXML( resolvable, Dep::REQUIRES);
+  str << helixXML( resolvable, Dep::RECOMMENDS);
+  str << helixXML( resolvable, Dep::ENHANCES);
+  str << helixXML( resolvable, Dep::SUPPLEMENTS);
+  str << helixXML( resolvable, Dep::SUGGESTS);
 
-  str << "</" << toLower (resolvable->kind().asString()) << ">" << endl;  
+  str << "</" << toLower (resolvable->kind().asString()) << ">" << endl;
   return str.str();
 }
 
 //---------------------------------------------------------------------------
 
 Testcase::Testcase()
-    :dumpPath("/var/log/YaST2/solverTestcase")    
+    :dumpPath("/var/log/YaST2/solverTestcase")
 {
 }
 
@@ -197,7 +215,7 @@ Testcase::Testcase(const std::string & path)
     :dumpPath(path)
 {
 }
-	
+
 
 Testcase::~Testcase()
 {
@@ -219,11 +237,11 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 	    return false;
 	}
 	// remove old stuff if pool will be dump
-	if (dumpPool)	
+	if (dumpPool)
 	    zypp::filesystem::clean_dir (dumpPath);
     }
 
-    if (runSolver) {    
+    if (runSolver) {
 	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
 	zypp::base::LogControl::TmpExcessive excessive;
 
@@ -238,12 +256,12 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     PoolItemList	items_to_install;
     PoolItemList 	items_to_remove;
     PoolItemList 	items_locked;
-    PoolItemList 	items_keep;    
+    PoolItemList 	items_keep;
     PoolItemList	language;
     HelixResolvable_Ptr	system = NULL;
 
     if (dumpPool)
-	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");    
+	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
     {
@@ -252,7 +270,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 	if (isKind<Language>(res)) {
 	    if ( it->status().isInstalled()
 		 || it->status().isToBeInstalled()) {
-		language.push_back (*it);		
+		language.push_back (*it);
 	    }
 	} else {
 	    if ( system && it->status().isInstalled() ) {
@@ -271,7 +289,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 		    repoTable[repo]->addResolvable (*it);
 		}
 	    }
-	
+
 	    if ( it->status().isToBeInstalled()
 		 && !(it->status().isBySolver())) {
 		items_to_install.push_back (*it);
@@ -279,7 +297,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 	    if ( it->status().isKept()
 		 && !(it->status().isBySolver())) {
 		items_keep.push_back (*it);
-	    }	    
+	    }
 	    if ( it->status().isToBeUninstalled()
 		 && !(it->status().isBySolver())) {
 		items_to_remove.push_back (*it);
@@ -299,19 +317,19 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  language);
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
-	control.installResolvable (iter->resolvable(), iter->status());	
+	control.installResolvable (iter->resolvable(), iter->status());
     }
 
     for (PoolItemList::const_iterator iter = items_locked.begin(); iter != items_locked.end(); iter++) {
-	control.lockResolvable (iter->resolvable(), iter->status());	
+	control.lockResolvable (iter->resolvable(), iter->status());
     }
-    
+
     for (PoolItemList::const_iterator iter = items_keep.begin(); iter != items_keep.end(); iter++) {
-	control.keepResolvable (iter->resolvable(), iter->status());	
+	control.keepResolvable (iter->resolvable(), iter->status());
     }
 
     for (PoolItemList::const_iterator iter = items_to_remove.begin(); iter != items_to_remove.end(); iter++) {
-	control.deleteResolvable (iter->resolvable(), iter->status());	
+	control.deleteResolvable (iter->resolvable(), iter->status());
     }
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
@@ -322,7 +340,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 //---------------------------------------------------------------------------
 
 HelixResolvable::HelixResolvable(const std::string & path)
-    :dumpFile (path)    
+    :dumpFile (path)
 {
     file = new ofgzstream(path.c_str());
     if (!file) {
@@ -336,7 +354,7 @@ HelixResolvable::~HelixResolvable()
 {
     *file << "</subchannel></channel>" << endl;
 }
-    
+
 
 void HelixResolvable::addResolvable(const PoolItem_Ref item)
 {
@@ -350,7 +368,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const Arch & systemArchitecture,
 			   const PoolItemList &languages,
 			   const std::string & systemPath)
-    :dumpFile (controlPath) 
+    :dumpFile (controlPath)
 {
     file = new ofstream(controlPath.c_str());
     if (!file) {
@@ -372,11 +390,11 @@ HelixControl::HelixControl(const std::string & controlPath,
 	      ++itUrl )
 	{
 	    *file << TAB << "- url         : " << *itUrl << endl;
-	}	
+	}
 	*file << TAB << "- path        : " << repo.info().path() << endl;
-	*file << TAB << "- type        : " << repo.info().type() << endl;	
+	*file << TAB << "- type        : " << repo.info().type() << endl;
 	*file << TAB << " -->" << endl;
-	
+
 	*file << TAB << "<channel file=\"" << numstring(repo.numericId())
 	      << "-package.xml.gz\" name=\"" << numstring(repo.numericId())
 	      << "\" />" << endl << endl;
@@ -384,7 +402,7 @@ HelixControl::HelixControl(const std::string & controlPath,
     for (PoolItemList::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
 	*file << TAB << "<locale name=\"" <<  iter->resolvable()->name()
 	      << "\" />" << endl;
-    }    
+    }
     *file << "</setup>" << endl
 	  << "<trial>" << endl
 	  << "<showpool all=\"yes\"/>" << endl
@@ -411,7 +429,7 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject,
     *file << "<install channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\"" 
+	  << " status=\"" << status << "\""
 	  << "/>" << endl;
 }
 
@@ -422,7 +440,7 @@ void HelixControl::lockResolvable(const ResObject::constPtr &resObject,
     *file << "<lock channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\"" 	
+	  << " status=\"" << status << "\""
 	  << "/>" << endl;
 }
 
@@ -433,28 +451,28 @@ void HelixControl::keepResolvable(const ResObject::constPtr &resObject,
     *file << "<keep channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
-	  << " status=\"" << status << "\"" 	
+	  << " status=\"" << status << "\""
 	  << "/>" << endl;
 }
-    
+
 void HelixControl::deleteResolvable(const ResObject::constPtr &resObject,
 				    const ResStatus &status)
 {
-    Repository repo  = resObject->repository();    
+    Repository repo  = resObject->repository();
     *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\""
-	  << " status=\"" << status << "\"" 
-	  << "/>" << endl;    
+	  << " status=\"" << status << "\""
+	  << "/>" << endl;
 }
 
 void HelixControl::addDependencies (const CapabilitySet & capRequire, const CapabilitySet & capConflict)
 {
     for (CapabilitySet::const_iterator iter = capRequire.begin(); iter != capRequire.end(); iter++) {
-	*file << "<addRequire " <<  " name=\"" << iter->asString() << "\"" << "/>" << endl;    
+	*file << "<addRequire " <<  " name=\"" << iter->asString() << "\"" << "/>" << endl;
     }
     for (CapabilitySet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
-	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;    
-    }    
+	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
+    }
 }
 
 

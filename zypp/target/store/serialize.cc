@@ -158,28 +158,37 @@ template<>
 string toXML( const Dependencies &dep )
 {
   stringstream out;
-  if ( dep[Dep::PROVIDES].size() > 0 )
+  if ( ! dep[Dep::PROVIDES].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << endl;
-  if ( dep[Dep::PREREQUIRES].size() > 0 )
+  if ( ! dep[Dep::PREREQUIRES].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << endl;
-  if ( dep[Dep::CONFLICTS].size() > 0 )
+  if ( ! dep[Dep::CONFLICTS].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << endl;
-  if ( dep[Dep::OBSOLETES].size() > 0 )
+  if ( ! dep[Dep::OBSOLETES].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << endl;
-  if ( dep[Dep::FRESHENS].size() > 0 )
+  if ( ! dep[Dep::FRESHENS].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << endl;
-  if ( dep[Dep::REQUIRES].size() > 0 )
+  if ( ! dep[Dep::REQUIRES].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << endl;
-  if ( dep[Dep::RECOMMENDS].size() > 0 )
+  if ( ! dep[Dep::RECOMMENDS].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << endl;
-  if ( dep[Dep::ENHANCES].size() > 0 )
+  if ( ! dep[Dep::ENHANCES].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "enhances") << endl;
-  if ( dep[Dep::SUPPLEMENTS].size() > 0 )
+  if ( ! dep[Dep::SUPPLEMENTS].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "supplements") << endl;
-  if ( dep[Dep::SUGGESTS].size() > 0 )
+  if ( ! dep[Dep::SUGGESTS].empty() )
     out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << endl;
   return out.str();
 
+}
+
+inline string toXML( const Resolvable::constPtr &obj, Dep deptag_r )
+{
+  stringstream out;
+  Capabilities caps( obj->dep(deptag_r) );
+  if ( ! caps.empty() )
+    out << "    " << xml_tag_enclose(toXML(caps), deptag_r.asString()) << endl;
+  return out.str();
 }
 
 template<>
@@ -191,7 +200,16 @@ string toXML( const Resolvable::constPtr &obj )
   // is this shared? uh
   out << "  " << toXML(obj->edition()) << endl;
   out << "  " << toXML(obj->arch()) << endl;
-  out << "  " << toXML(obj->deps()) << endl;
+  out << "  " << toXML( obj, Dep::PROVIDES);
+  out << "  " << toXML( obj, Dep::PREREQUIRES);
+  out << "  " << toXML( obj, Dep::CONFLICTS);
+  out << "  " << toXML( obj, Dep::OBSOLETES);
+  out << "  " << toXML( obj, Dep::FRESHENS);
+  out << "  " << toXML( obj, Dep::REQUIRES);
+  out << "  " << toXML( obj, Dep::RECOMMENDS);
+  out << "  " << toXML( obj, Dep::ENHANCES);
+  out << "  " << toXML( obj, Dep::SUPPLEMENTS);
+  out << "  " << toXML( obj, Dep::SUGGESTS);
   return out.str();
 }
 

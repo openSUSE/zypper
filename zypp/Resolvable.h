@@ -79,11 +79,6 @@ namespace zypp
     using sat::Solvable::prerequires;
     //@}
 
-    ZYPP_DEPRECATED const Dependencies & deps() const
-    { static Dependencies _x; return _x; }
-    ZYPP_DEPRECATED void injectProvides( const Capability & cap_r ) {}
-    ZYPP_DEPRECATED void injectRequires( const Capability & cap_r ) {}
-
   public:
     const sat::Solvable & satSolvable() const { return *this; }
 

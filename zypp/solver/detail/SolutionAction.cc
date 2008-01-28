@@ -110,11 +110,11 @@ InjectSolutionAction::dumpOn( ostream& os ) const
 	case OBSOLETES: os << "Obsoletes"; break;
 	case INSTALLED: os << "Installed"; break;
 	case ARCHITECTURE: os << "Architecture"; break;
-	case VENDOR: os << "Vendor"; break;	    	    
+	case VENDOR: os << "Vendor"; break;
 	default: os << "Wrong kind"; break;
     }
     os << " ";
-    os << _item;	    
+    os << _item;
     os << endl;
     return os;
 }
@@ -132,7 +132,7 @@ SolutionAction::dumpOn( std::ostream & os ) const
 }
 
 
-bool 
+bool
 TransactionSolutionAction::execute(Resolver & resolver) const
 {
     bool ret = true;
@@ -149,11 +149,11 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	case REMOVE:
 	    if (_item.status().isToBeInstalled()) {
 		_item.status().setTransact (false,ResStatus::USER);
-		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again		
+		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again
 	    } else if (_item.status().isInstalled())
 		_item.status().setToBeUninstalled (ResStatus::USER);
 	    else
-		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again		
+		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again
 	    break;
 	case UNLOCK:
 	    ret = _item.status().setLock (false, ResStatus::USER);
@@ -169,47 +169,44 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    Dependencies dependencies;
-    CapabilitySet depList;
-    if (_item != PoolItem_Ref()) {    
-	dependencies = _item.resolvable()->deps();
-	depList = dependencies[Dep::CONFLICTS];
+    Capabilities depList;
+    if (_item != PoolItem_Ref()) {
+	depList = _item.resolvable()->dep(Dep::CONFLICTS);
     }
     switch (_kind) {
         case CONFLICTS:
 	    // removing conflict in both resolvables
-	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_item, _capability);
 		}
 	    }
 	    // Obsoletes are conflicts too
-	    depList = dependencies[Dep::OBSOLETES];
-	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    depList = _item.resolvable()->dep(Dep::OBSOLETES);
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
 	    }
-	    
-	    dependencies = _otherItem.resolvable()->deps();
-	    depList = dependencies[Dep::CONFLICTS];
-	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+
+	    depList = _otherItem.resolvable()->dep(Dep::CONFLICTS);
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
 	    }
-	    // Obsoletes are conflicts too	    
-	    depList = dependencies[Dep::OBSOLETES];
-	    for (CapabilitySet::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
+	    // Obsoletes are conflicts too
+	    depList = _otherItem.resolvable()->dep(Dep::OBSOLETES);
+	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
 		if (iter->matches (_capability) == CapMatch::yes )
 		{
 		    resolver.addIgnoreConflict (_otherItem, _capability);
 		}
 	    }
-	    
+
 	    break;
         case REQUIRES:
 	    // removing the requires dependency from the item
@@ -228,11 +225,11 @@ InjectSolutionAction::execute(Resolver & resolver) const
         case VENDOR:
 	    // This item is for ALL vendor available
 	    resolver.addIgnoreVendorItem (_item);
-	    break;	    	    
+	    break;
         case OBSOLETES:
 	    // removing the obsoletes dependency from the item
 	    resolver.addIgnoreObsoletes (_otherItem, _capability);
-	    break;	    
+	    break;
         case INSTALLED:
 	    // ignoring already installed items
 	    resolver.addIgnoreInstalledItem (_item);

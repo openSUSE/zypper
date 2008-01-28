@@ -224,8 +224,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     _rdfstime++;
 
     // items prereq
-    Dependencies dependencies = item->deps();
-    CapabilitySet prq = dependencies[Dep::PREREQUIRES];
+    CapabilitySet prq( item->dep(Dep::PREREQUIRES).begin(), item->dep(Dep::PREREQUIRES).end() );
     // an installed items prereq (in case they are reqired for uninstall scripts)
     NameKindProxy nkp( _pool, item->name(), item->kind() );
     if ( ! nkp.installedEmpty() )

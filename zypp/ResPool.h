@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/ResFilters.h"
@@ -58,6 +60,9 @@ namespace zypp
     typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
   public:
+    /** Singleton ctor. */
+    //static ResPool instance();
+
     /** Default ctor: empty pool */
     ResPool();
     /** Dtor */
@@ -217,7 +222,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \todo rename class and eliminate typedef. */
-  typedef ResPool ResPool_Ref;
+  typedef ResPool ZYPP_DEPRECATED ResPool_Ref;
 
   ///////////////////////////////////////////////////////////////////
 

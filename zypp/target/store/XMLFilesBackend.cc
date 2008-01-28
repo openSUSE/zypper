@@ -839,7 +839,10 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
       }
       // the patch should depends on its atoms, so we inject a requires on the just created atom resolvable
       Capability cap( _f.parse(atom->kind(), atom->name(), Rel::EQ, atom->edition() ));
+#warning CANT INJECTD DEPENDENCIES HERE ANYMORE
+#if 0
       patch->injectRequires(cap);
+#endif
     }
     return patch;
   }
