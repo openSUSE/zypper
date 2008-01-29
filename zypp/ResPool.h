@@ -15,29 +15,25 @@
 #include <iosfwd>
 
 #include "zypp/base/Deprecated.h"
+#include "zypp/base/Iterator.h"
 
 #include "zypp/pool/PoolTraits.h"
-#include "zypp/base/Iterator.h"
 #include "zypp/ResFilters.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace sat
-  { /////////////////////////////////////////////////////////////////
-    class Solvable;
-    /////////////////////////////////////////////////////////////////
-  } // namespace sat
-  ///////////////////////////////////////////////////////////////////
 
   class SerialNumber;
+  class ResPoolProxy;
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResPool
   //
-  /** Access to ResObject pool.
+  /** Global ResObject pool.
+   *
+   * Explicitly shared singleton.
    *
    * \note Filter iterators provided by ResPool are intended to
    * operate on internal index tables for faster access. If the
@@ -56,17 +52,16 @@ namespace zypp
     typedef pool::PoolTraits::const_iterator	         const_iterator;
     typedef pool::PoolTraits::byName_iterator            byName_iterator;
     typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-    typedef pool::PoolTraits::AdditionalCapabilities		 AdditionalCapabilities;
+    typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
     typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
   public:
     /** Singleton ctor. */
-    //static ResPool instance();
+    static ResPool instance()
+    { return ResPool(); }
 
-    /** Default ctor: empty pool */
-    ResPool();
-    /** Dtor */
-    ~ResPool();
+    /** preliminary */
+    ResPoolProxy proxy() const;
 
   public:
     /** The pools serial number. Changing whenever the
@@ -211,17 +206,17 @@ namespace zypp
    AdditionalCapabilities & additionaProvide() const;
 
   private:
-    /** */
-    friend class ResPoolManager;
     /** Ctor */
     ResPool( pool::PoolTraits::Impl_constPtr impl_r );
+    /** Default ctor */
+    ResPool();
   private:
     /** Const access to implementation. */
     pool::PoolTraits::Impl_constPtr _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \todo rename class and eliminate typedef. */
+  /** \relates ResPool \todo remove deprecated typedef. */
   typedef ResPool ZYPP_DEPRECATED ResPool_Ref;
 
   ///////////////////////////////////////////////////////////////////
@@ -232,4 +227,7 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+#include "zypp/ResPoolProxy.h"
+
 #endif // ZYPP_RESPOOL_H

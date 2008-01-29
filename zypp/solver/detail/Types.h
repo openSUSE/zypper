@@ -48,8 +48,8 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef std::list<PoolItem_Ref> PoolItemList;
-typedef std::set<PoolItem_Ref> PoolItemSet;
+typedef std::list<PoolItem> PoolItemList;
+typedef std::set<PoolItem> PoolItemSet;
       
 DEFINE_PTR_TYPE(Resolver);
 

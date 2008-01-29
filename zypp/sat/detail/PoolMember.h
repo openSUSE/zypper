@@ -81,12 +81,12 @@ namespace zypp
       inline bool isDepMarkerId( IdType id_r )
       { return( id_r == solvablePrereqMarker || id_r == solvableFileMarker ); }
 
-
       /** Id type to connect \ref Solvable and sat-solvable.
        * Indext into solvable array.
       */
       typedef unsigned SolvableIdType;
-      /** Id to denote \ref Solvable::nosolvable. */
+      typedef SolvableIdType size_type;
+     /** Id to denote \ref Solvable::nosolvable. */
       static const SolvableIdType noSolvableId( 0 );
 
       /** Id type to connect \ref Repo and sat-repo. */

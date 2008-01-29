@@ -15,7 +15,6 @@
 #include <iosfwd>
 
 #include "zypp/TmpPath.h"
-#include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
 #include "zypp/Locale.h"
@@ -48,16 +47,13 @@ namespace zypp
       /** Dtor */
       ~ZYppImpl();
 
-    private:
-      void removeInstalledResolvables ();
-
     public:
       /** */
       ResPool pool() const
-      { return _pool.accessor(); }
+      { return ResPool::instance(); }
 
       ResPoolProxy poolProxy() const
-      { return _pool.proxy(); }
+      { return ResPool::instance().proxy(); }
 
       /** */
       KeyRing_Ptr keyRing() const
@@ -66,10 +62,6 @@ namespace zypp
 
       Resolver_Ptr resolver() const
       { return _resolver; }
-
-      void addResolvables (const ResStore& store, bool installed = false);
-
-      void removeResolvables (const ResStore& store);
 
     public:
       /** \todo Signal locale change. */
@@ -83,12 +75,6 @@ namespace zypp
        * true, just init the target, dont populate store or pool
        */
       void initializeTarget(const Pathname & root);
-
-      /**
-       * \throws Exception
-       * if commit_only == true, just init the target, dont populate store or pool
-       */
-      ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only);
 
       /**
        * \throws Exception
@@ -147,12 +133,10 @@ namespace zypp
       DiskUsageCounter::MountPointSet getPartitions() const;
 
     public:
-        
+
       int applyLocks();
-      
+
     private:
-      /** */
-      ResPoolManager _pool;
       /** */
       Target_Ptr _target;
       /** */

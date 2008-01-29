@@ -54,7 +54,7 @@ namespace zypp
       for ( GetResolvablesToInsDel::PoolItemList::const_iterator it = instlist_r.begin();
             it != instlist_r.end(); ++it )
         {
-          PoolItem_Ref item( *it );
+          PoolItem item( *it );
           obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
         }
       if ( obsoletes.size() == 0 )
@@ -66,7 +66,7 @@ namespace zypp
       for ( GetResolvablesToInsDel::PoolItemList::iterator it = deleteList_r.begin();
             it != deleteList_r.end(); ++it )
         {
-          PoolItem_Ref ipkg( *it );
+          PoolItem ipkg( *it );
           bool delayPkg = false;
           // ...check whether an obsoletes....
           for ( std::set<Capability>::iterator obs = obsoletes.begin();
@@ -102,7 +102,7 @@ namespace zypp
     //
     GetResolvablesToInsDel::GetResolvablesToInsDel( ResPool pool_r, Order order_r )
     {
-      typedef std::set<PoolItem_Ref> PoolItemSet;
+      typedef std::set<PoolItem> PoolItemSet;
 
       PoolItemList & dellist_r( _toDelete );
       PoolItemList & instlist_r( _toInstall );

@@ -65,7 +65,7 @@ namespace zypp
       return _repo->nsolvables;
     }
 
-    unsigned Repo::solvablesSize() const
+    Repo::size_type Repo::solvablesSize() const
     {
       NO_REPO_RETURN( 0 );
       return _repo->nsolvables;

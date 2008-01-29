@@ -53,7 +53,7 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     _details = "";
 }
 
-void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action)
+void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind action)
 {
     addAction (new TransactionSolutionAction(item, action));
     actNumber++;

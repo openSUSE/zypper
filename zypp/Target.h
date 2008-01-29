@@ -51,7 +51,7 @@ namespace zypp
   public:
     typedef target::TargetImpl  Impl;
     typedef intrusive_ptr<Impl> Impl_Ptr;
-    typedef std::list<PoolItem_Ref> PoolItemList;
+    typedef std::list<PoolItem> PoolItemList;
 
   public:
 

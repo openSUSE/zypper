@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/zypp_detail/ZYppImpl.h"
@@ -81,23 +81,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::addResolvables (const ResStore& store, bool installed)
-  {
-    _pimpl->addResolvables (store, installed);
-  }
-
-  void ZYpp::removeResolvables (const ResStore& store)
-  {
-    _pimpl->removeResolvables (store);
-  }
-
-  ///////////////////////////////////////////////////////////////////
-
   Target_Ptr ZYpp::target() const
   { return _pimpl->target(); }
-
-  void ZYpp::initTarget(const Pathname & root, bool commit_only )
-  { _pimpl->initTarget(root, commit_only); }
 
   void ZYpp::initializeTarget(const Pathname & root)
   { _pimpl->initializeTarget(root); }

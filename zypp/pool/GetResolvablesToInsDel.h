@@ -36,7 +36,7 @@ namespace zypp
      */
     struct GetResolvablesToInsDel
     {
-      typedef std::list<PoolItem_Ref> PoolItemList;
+      typedef std::list<PoolItem> PoolItemList;
 
       /** Influences the sequence of sources and media proscessed.
        * If true prefer a better source, otherwise a better media.

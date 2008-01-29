@@ -12,9 +12,10 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
+#include "zypp/base/SerialNumber.h"
+
 #include "zypp/ResPool.h"
 #include "zypp/pool/PoolImpl.h"
-#include "zypp/base/SerialNumber.h"
 
 using std::endl;
 
@@ -52,17 +53,12 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::~ResPool
-  //	METHOD TYPE : Dtor
-  //
-  ResPool::~ResPool()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
   // Forward to impementation:
   //
   ///////////////////////////////////////////////////////////////////
+
+  ResPoolProxy ResPool::proxy() const
+  { return _pimpl->proxy( *this ); }
 
   bool ResPool::empty() const
   { return _pimpl->empty(); }

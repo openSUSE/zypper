@@ -49,7 +49,7 @@ IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);
 //---------------------------------------------------------------------------
 
 ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-							      PoolItem_Ref item,
+							      PoolItem item,
 							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
@@ -70,7 +70,7 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 }
 
 ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
-								  PoolItem_Ref item)
+								  PoolItem item)
     : ProblemSolution (parent, "", "")
 {
         // TranslatorExplanation %s = name of package, patch, selection ...
@@ -83,7 +83,7 @@ ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverPr
 }
 
 ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
-							  PoolItem_Ref item)
+							  PoolItem item)
     : ProblemSolution (parent, "", "")
 {
         // TranslatorExplanation %s = name of package, patch, selection ...
@@ -96,9 +96,9 @@ ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr pa
 }
 	
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
-								PoolItem_Ref otherItem)
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
@@ -108,7 +108,7 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 }
 
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
 								PoolItemList itemList)
     : ProblemSolution (parent, "", "")
@@ -123,9 +123,9 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 }
 
 ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
-								PoolItem_Ref otherItem)
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
@@ -137,8 +137,8 @@ ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_
 
 
 ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
-								PoolItem_Ref otherItem)
+								PoolItem item,
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...

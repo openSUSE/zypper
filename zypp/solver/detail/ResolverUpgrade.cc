@@ -74,14 +74,14 @@ using namespace zypp;
  * \li best Edition
  * \li ResObject::constPtr as fallback.
 */
-struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
+struct AVOrder : public std::binary_function<PoolItem,PoolItem,bool>
 {
     // NOTE: operator() provides LESS semantics to order the set.
     // So LESS means 'prior in set'. We want 'better' archs and
     // 'better' editions at the beginning of the set. So we return
     // TRUE if (lhs > rhs)!
     //
-    bool operator()( const PoolItem_Ref lhs, const PoolItem_Ref rhs ) const
+    bool operator()( const PoolItem lhs, const PoolItem rhs ) const
         {
 	    int res = lhs->arch().compare( rhs->arch() );
 	    if ( res )
@@ -97,7 +97,7 @@ struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
         }
 };
 
-typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
+typedef std::set<PoolItem, AVOrder> PoolItemOrderSet;
 
 
 
@@ -108,7 +108,7 @@ typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
 // newer.
 
 static bool
-downgrade_allowed( PoolItem_Ref installed, PoolItem_Ref candidate, bool silent_downgrades )
+downgrade_allowed( PoolItem installed, PoolItem candidate, bool silent_downgrades )
 {
     if (installed.status().isLocked()) {
 	MIL << "Installed " << installed << " is locked, not upgrading" << endl;
@@ -159,7 +159,7 @@ struct FindObsoletes
 // does the candidate obsolete the capability ?
 
 bool
-Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap)
+Resolver::doesObsoleteCapability (PoolItem candidate, const Capability & cap)
 {
     _DEBUG("doesObsoleteCapability " << candidate << ", " << cap);
 
@@ -176,7 +176,7 @@ Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap
 
 
 bool
-Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
+Resolver::doesObsoleteItem (PoolItem candidate, PoolItem installed)
 {
     Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
     return doesObsoleteCapability (candidate, installedCap);
@@ -186,7 +186,7 @@ Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
 
 // find best available providers for installed name
 
-typedef map<string, PoolItem_Ref> FindMap;
+typedef map<string, PoolItem> FindMap;
 
 struct FindProviders
 {
@@ -255,14 +255,14 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
 {
   public:
     bool found;
-    PoolItem_Ref candidate;
+    PoolItem candidate;
     
-    LookForSelected (PoolItem_Ref can)
+    LookForSelected (PoolItem can)
 	: found (false),
 	candidate (can)
     { }
 
-    bool operator()( PoolItem_Ref item )
+    bool operator()( PoolItem item )
     {
 	if (item.status().isToBeInstalled()
 	    && item->edition() == candidate->edition()
@@ -275,7 +275,7 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
     }
 };
 
-bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
+bool setForInstallation (const ResPool &pool, PoolItem item) {
     LookForSelected info(item);
 
     invokeOnEach( pool.byNameBegin (item->name()),
@@ -305,8 +305,8 @@ bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
 void
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
-  typedef map<PoolItem_Ref,PoolItem_Ref> CandidateMap;
-  typedef map<PoolItem_Ref,PoolItemOrderSet> TodoMap;
+  typedef map<PoolItem,PoolItem> CandidateMap;
+  typedef map<PoolItem,PoolItemOrderSet> TodoMap;
 
   CandidateMap candidatemap;
 
@@ -350,9 +350,9 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
-    PoolItem_Ref item = *it;
-    PoolItem_Ref candidate;
-    PoolItem_Ref installed;
+    PoolItem item = *it;
+    PoolItem candidate;
+    PoolItem installed;
 
     if ( item.status().isToBeUninstalled() ) {
       MIL << "doUpgrade available: SKIP to delete " << item << endl;
@@ -449,7 +449,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
 
-    PoolItem_Ref installed(*it);
+    PoolItem installed(*it);
     ResStatus status (installed.status());
 
     if ( ! status.staysInstalled() ) {
@@ -499,7 +499,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     ///////////////////////////////////////////////////////////////////
     if ( cand_it != candidatemap.end() ) {
 
-      PoolItem_Ref candidate (cand_it->second);
+      PoolItem candidate (cand_it->second);
 
       if ( ! candidate.status().isToBeInstalled() ) {
 	int cmp = installed->edition().compare( candidate->edition() );
@@ -610,7 +610,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     PoolItemOrderSet & tset( it->second );		// these are the providers (well, just one)
 
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
-      PoolItem_Ref provider (*sit);
+      PoolItem provider (*sit);
 
       if (setForInstallation (_pool, provider)) {
 	++opt_stats_r.chk_replaced;
@@ -630,11 +630,11 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   for ( TodoMap::iterator it = addMultiProvided.begin(); it != addMultiProvided.end(); ++it ) {
     MIL << "GET ONE OUT OF " << it->second.size() << " for " << it->first << endl;
 
-    PoolItem_Ref guess;
+    PoolItem guess;
     PoolItemOrderSet & gset( it->second );
 
     for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-	PoolItem_Ref item (*git);
+	PoolItem item (*git);
 
 	if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
 	    guess = item;
@@ -644,7 +644,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    if ( ! doesObsoleteItem (item, it->first ) ) {
 		it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 	    }
-	    guess = PoolItem_Ref();
+	    guess = PoolItem();
 	    break;
 	} else {
 	    // Be prepared to guess.
@@ -680,14 +680,14 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    requested_locale_match = false;
 
 	    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-		PoolItem_Ref item (*git);
+		PoolItem item (*git);
 
 		if ( item.status().isToBeInstalled()) {
 		    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
 		    if ( ! doesObsoleteItem (item, it->first ) ) {
 			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 		    }
-		    guess = PoolItem_Ref();
+		    guess = PoolItem();
 		    break;
 		} else {
 		    freshens = item->dep( Dep::FRESHENS );

@@ -60,9 +60,9 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 class LookFor : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref item;
+    PoolItem item;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	item = provider;
 	return false;				// stop here, we found it
@@ -72,7 +72,7 @@ class LookFor : public resfilter::PoolItemFilterFunctor
 
 // just find installed item with same kind/name as item
 
-PoolItem_Ref
+PoolItem
 Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
@@ -90,7 +90,7 @@ Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, c
 
 // just find uninstalled item with same kind/name as item
 
-PoolItem_Ref
+PoolItem
 Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
@@ -109,8 +109,8 @@ Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name,
 // just find installed item with same kind/name as item
 // does *NOT* check edition
 
-PoolItem_Ref
-Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
+PoolItem
+Helper::findInstalledItem (const ResPool & pool, PoolItem item)
 {
     return findInstalledByNameAndKind (pool, item->name(), item->kind() );
 }
@@ -120,10 +120,10 @@ Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 class LookForUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref uninstalled;
-    PoolItem_Ref installed;
+    PoolItem uninstalled;
+    PoolItem installed;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
         // is valid
         if ( ! provider.resolvable() )
@@ -158,8 +158,8 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 // just find best (according to edition) uninstalled item with same kind/name as item
 // *DOES* check edition
 
-PoolItem_Ref
-Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
+PoolItem
+Helper::findUpdateItem (const ResPool & pool, PoolItem item)
 {
     LookForUpdate info;
     info.installed = item;
@@ -181,9 +181,9 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 class LookForReinstall : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref uninstalled;
+    PoolItem uninstalled;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	if (provider.status().isLocked()) {
 	    return true; // search next
@@ -195,8 +195,8 @@ class LookForReinstall : public resfilter::PoolItemFilterFunctor
 };
 
 
-PoolItem_Ref
-Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
+PoolItem
+Helper::findReinstallItem (const ResPool & pool, PoolItem item)
 {
     LookForReinstall info;
 
@@ -216,17 +216,17 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 class CheckIfBest : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref _item;
+    PoolItem _item;
     bool is_best;
 
-    CheckIfBest( PoolItem_Ref item )
+    CheckIfBest( PoolItem item )
 	: _item( item )
 	, is_best( true )		// assume we already have the best
     {}
 
     // check if provider is better. If yes, end the search.
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	int archcmp = _item->arch().compare( provider->arch() );
 	if (((archcmp < 0) 							// provider has a better architecture
@@ -245,7 +245,7 @@ class CheckIfBest : public resfilter::PoolItemFilterFunctor
 // check if the given item is the best one of the pool
 
 bool
-Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
+Helper::isBestUninstalledItem (const ResPool & pool, PoolItem item)
 {
     CheckIfBest info( item );
 
@@ -260,7 +260,7 @@ Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
 }
 
 std::string
-Helper::itemToString (PoolItem_Ref item, bool shortVersion)
+Helper::itemToString (PoolItem item, bool shortVersion)
 {
     ostringstream os;
     if (!item) return "";

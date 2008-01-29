@@ -124,40 +124,40 @@ Resolver::removeExtraConflict (const Capability & capability)
 }
 
 void
-Resolver::addIgnoreConflict (const PoolItem_Ref item,
+Resolver::addIgnoreConflict (const PoolItem item,
 		   const Capability & capability)
 {
     _ignoreConflicts.insert(make_pair(item, capability));
 }
 
 void
-Resolver::addIgnoreRequires (const PoolItem_Ref item,
+Resolver::addIgnoreRequires (const PoolItem item,
 			     const Capability & capability)
 {
     _ignoreRequires.insert(make_pair(item, capability));
 }
 
 void
-Resolver::addIgnoreObsoletes (const PoolItem_Ref item,
+Resolver::addIgnoreObsoletes (const PoolItem item,
 			      const Capability & capability)
 {
     _ignoreObsoletes.insert(make_pair(item, capability));
 }
 
 void
-Resolver::addIgnoreInstalledItem (const PoolItem_Ref item)
+Resolver::addIgnoreInstalledItem (const PoolItem item)
 {
     _ignoreInstalledItem.push_back (item);
 }
 
 void
-Resolver::addIgnoreArchitectureItem (const PoolItem_Ref item)
+Resolver::addIgnoreArchitectureItem (const PoolItem item)
 {
     _ignoreArchitectureItem.push_back (item);
 }
 
 void
-Resolver::addIgnoreVendorItem (const PoolItem_Ref item)
+Resolver::addIgnoreVendorItem (const PoolItem item)
 {
     _ignoreVendorItem.push_back (item);
 }
@@ -171,7 +171,7 @@ struct UndoTransact : public resfilter::PoolItemFilterFunctor
 	:resStatus(status)
     { }
 
-    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    bool operator()( PoolItem item )		// only transacts() items go here
     {
 	item.status().resetTransact( resStatus );// clear any solver/establish transactions
 	return true;
@@ -186,7 +186,7 @@ struct DoTransact : public resfilter::PoolItemFilterFunctor
 	:resStatus(status)
     { }
 
-    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    bool operator()( PoolItem item )		// only transacts() items go here
     {
 	item.status().setTransact( true, resStatus );
 	return true;

@@ -102,7 +102,7 @@ SATResolver::pool (void) const
 
 
 void
-SATResolver::addPoolItemToInstall (PoolItem_Ref item)
+SATResolver::addPoolItemToInstall (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_remove.begin();
@@ -130,7 +130,7 @@ SATResolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 
 
 void
-SATResolver::addPoolItemToRemove (PoolItem_Ref item)
+SATResolver::addPoolItemToRemove (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_install.begin();
@@ -157,7 +157,7 @@ SATResolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 }
 
 void
-SATResolver::addPoolItemToLock (PoolItem_Ref item)
+SATResolver::addPoolItemToLock (PoolItem item)
 {
     _items_to_lock.push_back (item);
     _items_to_lock.unique ();
@@ -170,7 +170,7 @@ SATResolver::addPoolItemToLock (PoolItem_Ref item)
 // if data != NULL, set as APPL_LOW (from establishPool())
 
 static void
-SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
+SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
 #if 0
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
@@ -287,7 +287,7 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	: resolver (r)
     { }
 
-    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    bool operator()( PoolItem item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
 	_XDEBUG( "SATCollectTransact(" << item << ")" );
@@ -306,7 +306,7 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	    resolver.addPoolItemToRemove(item);		// -> remove !
 	}
 	if (status.isIncomplete()) {			// incomplete (re-install needed)
-	    PoolItem_Ref reinstall = Helper::findReinstallItem (resolver.pool(), item);
+	    PoolItem reinstall = Helper::findReinstallItem (resolver.pool(), item);
 	    if (reinstall) {
 		MIL << "Reinstall " << reinstall << " for incomplete " << item << endl;
 		resolver.addPoolItemToInstall(reinstall);	// -> install!
@@ -346,7 +346,7 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
     // check this item will be installed
 
-    bool operator()( PoolItem_Ref item )
+    bool operator()( PoolItem item )
     {
 	if (item.status().isToBeInstalled())
 	{
@@ -390,7 +390,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
                    functor::functorRef<bool,PoolItem>(info) );
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-	PoolItem_Ref r = *iter;
+	PoolItem r = *iter;
 
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
@@ -461,7 +461,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       if (sat::Solvable(p).repo().get() == _solv->installed)
 	continue;
 
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+      PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
 	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
       } else {
@@ -475,7 +475,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       if (_solv->decisionmap[i] > 0)
 	continue;
 
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
+      PoolItem poolItem = _pool.find (sat::Solvable(i));
       if (poolItem) {
 	  // Check if this is an update
 	  CheckIfUpdate info;
@@ -524,7 +524,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
     {
     }
 
-    bool operator()( PoolItem_Ref p)
+    bool operator()( PoolItem p)
     {
 	problemSolution->addSingleAction (p, action);
 	return true;
@@ -618,7 +618,7 @@ SATResolver::problems ()
 			{
 			    case SOLVER_INSTALL_SOLVABLE: {
 				s = pool->solvables + what;
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
 				    if (_solv->installed && s->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
@@ -639,7 +639,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE: {
 				s = pool->solvables + what;
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
 				    if (_solv->installed && s->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
@@ -690,7 +690,7 @@ SATResolver::problems ()
 				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
-				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    PoolItem poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeInstalled()
 					|| poolItem.status().staysUninstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
@@ -705,7 +705,7 @@ SATResolver::problems ()
 				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
-				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    PoolItem poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeUninstalled()
 					|| poolItem.status().staysInstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
@@ -717,7 +717,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
 				{
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				s = pool->solvables + what;
 				if (poolItem) {
 				    if (_solv->installed && s->repo == _solv->installed) {
@@ -744,12 +744,12 @@ SATResolver::problems ()
 			s = pool->solvables + p;
 			sd = rp ? pool->solvables + rp : 0;
 
-			PoolItem_Ref itemFrom = _pool.find (sat::Solvable(p));
+			PoolItem itemFrom = _pool.find (sat::Solvable(p));
 			if (rp)
 			{
 			    int gotone = 0;
 
-			    PoolItem_Ref itemTo = _pool.find (sat::Solvable(rp));
+			    PoolItem itemTo = _pool.find (sat::Solvable(rp));
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
 				problemSolution->addSingleAction (itemFrom, REMOVE);

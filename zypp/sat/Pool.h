@@ -42,6 +42,7 @@ namespace zypp
       public:
         typedef detail::SolvableIterator SolvableIterator;
         typedef detail::RepoIterator     RepoIterator;
+        typedef detail::size_type        size_type;
 
       public:
         /** Singleton ctor. */
@@ -67,7 +68,7 @@ namespace zypp
         bool reposEmpty() const;
 
         /** Number of repos in \ref Pool. */
-        unsigned reposSize() const;
+        size_type reposSize() const;
 
         /** Iterator to the first \ref Repo. */
         RepoIterator reposBegin() const;
@@ -115,7 +116,7 @@ namespace zypp
         bool solvablesEmpty() const;
 
         /** Number of solvables in \ref Pool. */
-        unsigned solvablesSize() const;
+        size_type solvablesSize() const;
 
         /** Iterator to the first \ref Solvable. */
         SolvableIterator solvablesBegin() const;

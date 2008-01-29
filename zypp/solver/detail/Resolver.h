@@ -74,7 +74,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
     
-    typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
+    typedef std::multimap<PoolItem,Capability> IgnoreMap;
 
     // These conflict should be ignored of the concering item
     IgnoreMap _ignoreConflicts;
@@ -99,8 +99,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _verifying;    // The system will be checked
 
     // helpers
-    bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
-    bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
+    bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
+    bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 
 
   public:
@@ -127,15 +127,15 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     const CapabilitySet extraRequires () { return _extra_requires; }
     const CapabilitySet extraConflicts () { return _extra_conflicts; }
 
-    void addIgnoreConflict (const PoolItem_Ref item,
+    void addIgnoreConflict (const PoolItem item,
 			    const Capability & capability);
-    void addIgnoreRequires (const PoolItem_Ref item,
+    void addIgnoreRequires (const PoolItem item,
 			    const Capability & capability);
-    void addIgnoreObsoletes (const PoolItem_Ref item,
+    void addIgnoreObsoletes (const PoolItem item,
 			     const Capability & capability);
-    void addIgnoreInstalledItem (const PoolItem_Ref item);
-    void addIgnoreArchitectureItem (const PoolItem_Ref item);
-    void addIgnoreVendorItem (const PoolItem_Ref item);    
+    void addIgnoreInstalledItem (const PoolItem item);
+    void addIgnoreArchitectureItem (const PoolItem item);
+    void addIgnoreVendorItem (const PoolItem item);    
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     bool forceResolve() { return _forceResolve; }

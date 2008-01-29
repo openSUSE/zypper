@@ -56,7 +56,7 @@ template<>
 std::string helixXML( const Dependencies &dep );
 	
 template<> 
-std::string helixXML( const PoolItem_Ref &item );
+std::string helixXML( const PoolItem &item );
 
 
 ///////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
     HelixResolvable (const std::string & path);
     ~HelixResolvable ();
 
-    void addResolvable (const PoolItem_Ref item);
+    void addResolvable (const PoolItem item);
     std::string filename () { return dumpFile; }
 };
 

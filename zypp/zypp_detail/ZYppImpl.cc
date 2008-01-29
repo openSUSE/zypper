@@ -145,9 +145,8 @@ namespace zypp
     //
     ZYppImpl::ZYppImpl()
     : _textLocale( defaultTextLocale() )
-    , _pool()
     , _target(0)
-    , _resolver( new Resolver(_pool.accessor()) )
+    , _resolver( new Resolver( ResPool::instance()) )
     , _architecture( defaultArchitecture() )
     {
       MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -169,30 +168,6 @@ namespace zypp
 
     //------------------------------------------------------------------------
     // add/remove resolvables
-
-    void ZYppImpl::addResolvables (const ResStore& store, bool installed)
-    {
-	_pool.insert(store.begin(), store.end(), installed);
-    }
-
-    void ZYppImpl::removeResolvables (const ResStore& store)
-    {
-        for (ResStore::iterator it = store.begin(); it != store.end(); ++it)
-	{
-    	    _pool.erase(*it);
-	}
-    }
-
-    void ZYppImpl::removeInstalledResolvables ()
-    {
-        for (ResPool::const_iterator it = pool().begin(); it != pool().end();)
-	{
-	    ResPool::const_iterator next = it; ++next;
-	    if (it->status().isInstalled())
-		_pool.erase( *it );
-	    it = next;
-	}
-    }
 
     DiskUsageCounter::MountPointSet ZYppImpl::diskUsage()
     {
@@ -235,35 +210,22 @@ namespace zypp
 	    MIL << "Repeated call to initializeTarget()" << endl;
 	    return;
 	}
+#warning NEED SOME NEW WAY TO INDICATE NEDD OF TARGET RELOAD
+#if 0
 	removeInstalledResolvables( );
+#endif
       }
       _target = new Target( root );
       _target->enableStorage( root );
     }
-
-    void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
-    {
-      MIL << "initTarget( " << root << ", " << commit_only << ")" << endl;
-      if (_target) {
-        if (_target->root() == root) {
-          MIL << "Repeated call to initTarget()" << endl;
-          return;
-        }
-        removeInstalledResolvables( );
-      }
-      _target = new Target( root );
-      _target->enableStorage( root );
-      if (!commit_only)
-      {
-        addResolvables( _target->resolvables(), true );
-      }
-    }
-
 
     void ZYppImpl::finishTarget()
     {
+#warning NEED SOME NEW WAY TO UNLOAD THE POOL
+#if 0
       if (_target)
 	removeInstalledResolvables();
+#endif
       _target = 0;
     }
 
@@ -290,12 +252,15 @@ namespace zypp
         // target->resolvables(). Actually the target should do this without
         // foreign help.
         _target->reset();
+#warning NEED SOME NEW WAY TO INDICATE NEDD OF TARGET RELOAD
+#if 0
 	removeInstalledResolvables();
         if ( policy_r.syncPoolAfterCommit() )
           {
             // reload new status from target
             addResolvables( _target->resolvables(), true );
           }
+#endif
       }
 
       MIL << "Commit (" << policy_r << ") returned: "
@@ -316,7 +281,9 @@ namespace zypp
     /** */
     void ZYppImpl::setRequestedLocales( const LocaleSet & locales_r )
     {
-      ResPool mpool( pool() );
+#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
+#if 0
+     ResPool mpool( ResPool::instance() );
       // assert all requested are available
       for ( LocaleSet::const_iterator it = locales_r.begin();
             it != locales_r.end(); ++it )
@@ -365,19 +332,23 @@ namespace zypp
                 select.availableBegin()->status().resetTransact( ResStatus::USER );
             }
         }
+#endif
     }
 
     /** */
     ZYppImpl::LocaleSet ZYppImpl::getAvailableLocales() const
     {
       ZYpp::LocaleSet ret;
-      ResPool mpool( pool() );
+#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
+#if 0
+      ResPool mpool( ResPool::instance() );
       for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
             it != mpool.byKindEnd<Language>(); ++it )
         {
           if ( (*it).status().isUninstalled() ) // available!
             ret.insert( Locale( (*it)->name() ) );
         }
+#endif
       return ret;
     }
 
@@ -385,7 +356,9 @@ namespace zypp
     ZYppImpl::LocaleSet ZYppImpl::getRequestedLocales() const
     {
       ZYpp::LocaleSet ret;
-      ResPool mpool( pool() );
+#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
+#if 0
+     ResPool mpool( ResPool::instance() );
       for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
             it != mpool.byKindEnd<Language>(); ++it )
         {
@@ -397,12 +370,16 @@ namespace zypp
                     && select.availableBegin()->status().getTransactValue() == ResStatus::TRANSACT )
             ret.insert( Locale( (*it)->name() ) );
         }
+#endif
       return ret;
     }
 
     void ZYppImpl::availableLocale( const Locale & locale_r )
     {
+#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
+#if 0
       _pool.insert( Language::availableInstance( locale_r ) );
+#endif
     }
 
     //------------------------------------------------------------------------

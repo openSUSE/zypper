@@ -33,7 +33,6 @@ SET( zypp_SRCS
   ResPool.cc
   NameKindProxy.cc
   ResPoolProxy.cc
-  ResPoolManager.cc
   Resolver.cc
   ResolverProblem.cc
   ProblemSolution.cc
@@ -145,7 +144,6 @@ SET( zypp_HEADERS
   ResObject.h
   ResObjectsh
   ResPool.h
-  ResPoolManager.h
   ResPoolProxy.h
   ResStatus.h
   ResStore.h
@@ -156,7 +154,6 @@ SET( zypp_HEADERS
   Script.h
   Selection.h
   Signature.h
-  SilentCallbacks.h
   SrcPackage.h
   SysContent.h
   Target.h

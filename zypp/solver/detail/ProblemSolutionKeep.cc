@@ -46,7 +46,7 @@ IMPL_PTR_TYPE(ProblemSolutionKeep);
 //---------------------------------------------------------------------------
 
 ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
-						PoolItem_Ref item )
+						PoolItem item )
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
@@ -66,7 +66,7 @@ ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {
-	PoolItem_Ref item = *iter;
+	PoolItem item = *iter;
 	addAction ( new TransactionSolutionAction (item, KEEP));
     }
 

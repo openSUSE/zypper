@@ -24,10 +24,10 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : PoolItem_Ref::Impl
+  //	CLASS NAME : PoolItem::Impl
   //
-  /** PoolItem_Ref implementation. */
-  struct PoolItem_Ref::Impl
+  /** PoolItem implementation. */
+  struct PoolItem::Impl
   {
     Impl()
     {}
@@ -94,8 +94,8 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates PoolItem_Ref::Impl Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const PoolItem_Ref::Impl & obj )
+  /** \relates PoolItem::Impl Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const PoolItem::Impl & obj )
   {
     str << obj.status();
     if (obj.resolvable())
@@ -105,7 +105,7 @@ namespace zypp
     return str;
   }
 
-  inline bool PoolItem_Ref::Impl::autoprotect() const
+  inline bool PoolItem::Impl::autoprotect() const
   {
     if ( _status.isInstalled()
          && isKind<Package>( _resolvable )
@@ -120,43 +120,43 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : PoolItem_Ref
+  //	CLASS NAME : PoolItem
   //
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : PoolItem_Ref::PoolItem_Ref
+  //	METHOD NAME : PoolItem::PoolItem
   //	METHOD TYPE : Ctor
   //
-  PoolItem_Ref::PoolItem_Ref()
+  PoolItem::PoolItem()
   : _pimpl( Impl::nullimpl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : PoolItem_Ref::PoolItem_Ref
+  //	METHOD NAME : PoolItem::PoolItem
   //	METHOD TYPE : Ctor
   //
-  PoolItem_Ref::PoolItem_Ref( ResObject::constPtr res_r )
+  PoolItem::PoolItem( ResObject::constPtr res_r )
   : _pimpl( new Impl( res_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : PoolItem_Ref::PoolItem_Ref
+  //	METHOD NAME : PoolItem::PoolItem
   //	METHOD TYPE : Ctor
   //
-  PoolItem_Ref::PoolItem_Ref( ResObject::constPtr res_r, const ResStatus & status_r )
+  PoolItem::PoolItem( ResObject::constPtr res_r, const ResStatus & status_r )
   : _pimpl( new Impl( res_r, status_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : PoolItem_Ref::~PoolItem_Ref
+  //	METHOD NAME : PoolItem::~PoolItem
   //	METHOD TYPE : Dtor
   //
-  PoolItem_Ref::~PoolItem_Ref()
+  PoolItem::~PoolItem()
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -165,22 +165,22 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ResStatus & PoolItem_Ref::status() const
+  ResStatus & PoolItem::status() const
   { return _pimpl->status(); }
 
-  ResStatus & PoolItem_Ref::statusReset() const
+  ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
 
-  ResObject::constPtr PoolItem_Ref::resolvable() const
+  ResObject::constPtr PoolItem::resolvable() const
   { return _pimpl->resolvable(); }
 
-  void PoolItem_Ref::saveState() const
+  void PoolItem::saveState() const
   { _pimpl->saveState(); }
 
-  void PoolItem_Ref::restoreState() const
+  void PoolItem::restoreState() const
   { _pimpl->restoreState(); }
 
-  bool PoolItem_Ref::sameState() const
+  bool PoolItem::sameState() const
   { return _pimpl->sameState(); }
 
   /******************************************************************
@@ -188,7 +188,7 @@ namespace zypp
    **	FUNCTION NAME : operator<<
    **	FUNCTION TYPE : std::ostream &
   */
-  std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj )
+  std::ostream & operator<<( std::ostream & str, const PoolItem & obj )
   {
     return str << *obj._pimpl;
   }

@@ -29,7 +29,7 @@ namespace zypp
   //	CLASS NAME : ResPoolProxy
   //
   /**
-   * \todo Make it a _Ref.
+   * \todo integrate it into ResPool
   */
   class ResPoolProxy
   {
@@ -52,7 +52,7 @@ namespace zypp
     /** Default ctor: no pool */
     ResPoolProxy();
     /** Ctor */
-    ResPoolProxy( ResPool_Ref pool_r );
+    ResPoolProxy( ResPool pool_r ) ZYPP_DEPRECATED;
     /** Dtor */
     ~ResPoolProxy();
 

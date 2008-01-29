@@ -25,42 +25,42 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : PoolItem_Ref
+  //	CLASS NAME : PoolItem
   //
   /** Reference to a PoolItem connecting ResObject and ResStatus.
    *
    * The "real" PoolItem is usg. somewhere in the ResPool. This is
    * a reference to it. All copies made will reference (and modify)
-   * the same PoolItem. All changes via a PoolItem_Ref are immediately
+   * the same PoolItem. All changes via a PoolItem are immediately
    * visible in all copies (now COW).
    *
-   * \note Constness: Like pointer types, a <tt>const PoolItem_Ref</tt>
+   * \note Constness: Like pointer types, a <tt>const PoolItem</tt>
    * does \b not refer to a <tt>const PoolItem</tt>. The reference is
    * \c const, i.e. you can't change the refered PoolItem. The PoolItem
    * (i.e. the status) is always mutable.
    *
   */
-  class PoolItem_Ref
+  class PoolItem
   {
-    friend std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );
+    friend std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
   public:
-    /** Implementation  */
+    /** Implementation */
     class Impl;
 
   public:
     /** Default ctor for use in std::container. */
-    PoolItem_Ref();
+    PoolItem();
 
     /** Ctor */
     explicit
-    PoolItem_Ref( ResObject::constPtr res_r );
+    PoolItem( ResObject::constPtr res_r );
 
     /** Ctor */
-    PoolItem_Ref( ResObject::constPtr res_r, const ResStatus & status_r );
+    PoolItem( ResObject::constPtr res_r, const ResStatus & status_r );
 
     /** Dtor */
-    ~PoolItem_Ref();
+    ~PoolItem();
 
   public:
     /** Returns the current status. */
@@ -106,34 +106,35 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  typedef PoolItem_Ref PoolItem;
+  /** \relates PoolItem \todo remove deprecated typedef. */
+  typedef PoolItem ZYPP_DEPRECATED PoolItem_Ref;
 
-  /** \relates PoolItem_Ref Stream output */
-  std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );
+  /** \relates PoolItem Stream output */
+  std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
-  /** \relates PoolItem_Ref */
-  inline bool operator==( const PoolItem_Ref & lhs, const PoolItem_Ref & rhs )
+  /** \relates PoolItem */
+  inline bool operator==( const PoolItem & lhs, const PoolItem & rhs )
   { return lhs.resolvable() == rhs.resolvable(); }
 
-  /** \relates PoolItem_Ref */
-  inline bool operator==( const PoolItem_Ref & lhs, const ResObject::constPtr & rhs )
+  /** \relates PoolItem */
+  inline bool operator==( const PoolItem & lhs, const ResObject::constPtr & rhs )
   { return lhs.resolvable() == rhs; }
 
-  /** \relates PoolItem_Ref */
-  inline bool operator==( const ResObject::constPtr & lhs, const PoolItem_Ref & rhs )
+  /** \relates PoolItem */
+  inline bool operator==( const ResObject::constPtr & lhs, const PoolItem & rhs )
   { return lhs == rhs.resolvable(); }
 
 
-  /** \relates PoolItem_Ref */
-  inline bool operator!=( const PoolItem_Ref & lhs, const PoolItem_Ref & rhs )
+  /** \relates PoolItem */
+  inline bool operator!=( const PoolItem & lhs, const PoolItem & rhs )
   { return ! (lhs==rhs); }
 
-  /** \relates PoolItem_Ref */
-  inline bool operator!=( const PoolItem_Ref & lhs, const ResObject::constPtr & rhs )
+  /** \relates PoolItem */
+  inline bool operator!=( const PoolItem & lhs, const ResObject::constPtr & rhs )
   { return ! (lhs==rhs); }
 
-  /** \relates PoolItem_Ref */
-  inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem_Ref & rhs )
+  /** \relates PoolItem */
+  inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem & rhs )
   { return ! (lhs==rhs); }
 
   /////////////////////////////////////////////////////////////////
@@ -143,9 +144,9 @@ namespace zypp
 namespace std
 { /////////////////////////////////////////////////////////////////
 
-  /** \relates zypp::PoolItem_Ref Order in std::container follows ResObject::constPtr.*/
+  /** \relates zypp::PoolItem Order in std::container follows ResObject::constPtr.*/
   template<>
-    inline bool less<zypp::PoolItem_Ref>::operator()( const zypp::PoolItem_Ref & lhs, const zypp::PoolItem_Ref & rhs ) const
+    inline bool less<zypp::PoolItem>::operator()( const zypp::PoolItem & lhs, const zypp::PoolItem & rhs ) const
     { return lhs.resolvable() < rhs.resolvable(); }
 
   /////////////////////////////////////////////////////////////////

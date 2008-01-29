@@ -35,7 +35,7 @@ namespace zypp
     : _result(0)
     {}
 
-    typedef std::list<PoolItem_Ref> PoolItemList;
+    typedef std::list<PoolItem> PoolItemList;
 
     /**
      * number of committed resolvables

@@ -44,7 +44,7 @@ namespace zypp
 IMPL_PTR_TYPE(ProblemSolutionUninstall);
 
 //---------------------------------------------------------------------------
-ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem_Ref item,
+ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem item,
 			  const std::string & descr,
 			  const std::string & detail)
     : ProblemSolution (parent, descr, detail)
@@ -55,7 +55,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent, 
 	
 
 ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
-						    PoolItem_Ref item)
+						    PoolItem item)
     : ProblemSolution (parent, "", "")
 {
     ResStatus status = item.status();
@@ -82,7 +82,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {
-	PoolItem_Ref item = *iter;
+	PoolItem item = *iter;
 	addAction ( new TransactionSolutionAction (item, REMOVE));
     }
     

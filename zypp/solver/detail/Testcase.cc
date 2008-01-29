@@ -168,7 +168,7 @@ inline string helixXML( const Resolvable::constPtr &obj, Dep deptag_r )
   return out.str();
 }
 
-std::string helixXML( const PoolItem_Ref &item )
+std::string helixXML( const PoolItem &item )
 {
   const Resolvable::constPtr resolvable = item.resolvable();
   stringstream str;
@@ -356,7 +356,7 @@ HelixResolvable::~HelixResolvable()
 }
 
 
-void HelixResolvable::addResolvable(const PoolItem_Ref item)
+void HelixResolvable::addResolvable(const PoolItem item)
 {
     *file << helixXML (item);
 }

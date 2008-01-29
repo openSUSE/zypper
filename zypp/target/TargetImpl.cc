@@ -635,9 +635,9 @@ namespace zypp
                   if (true) // !installOnly - only on Package?!
                   {
                     // this would delete the same item over and over
-                    //for (PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it); old; )
+                    //for (PoolItem old = Helper::findInstalledItem (pool_r, *it); old; )
 #warning REMOVE ALL OLD VERSIONS AND NOT JUST ONE
-                    PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it);
+                    PoolItem old = Helper::findInstalledItem (pool_r, *it);
                     if (old)
                     {
                       _storage.deleteObject(old.resolvable());

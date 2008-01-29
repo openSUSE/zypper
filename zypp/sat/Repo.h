@@ -39,6 +39,7 @@ namespace zypp
     {
       public:
         typedef filter_iterator<detail::ByRepo, detail::SolvableIterator> SolvableIterator;
+        typedef detail::size_type size_type;
 
       public:
         /** Default ctor creates \ref norepo.*/
@@ -67,7 +68,7 @@ namespace zypp
         bool solvablesEmpty() const;
 
         /** Number of solvables in \ref Repo. */
-        unsigned solvablesSize() const;
+        size_type solvablesSize() const;
 
         /** Iterator to the first \ref Solvable. */
         SolvableIterator solvablesBegin() const;

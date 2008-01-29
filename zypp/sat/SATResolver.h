@@ -102,12 +102,12 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
 
-    void addPoolItemToInstall (PoolItem_Ref item);
+    void addPoolItemToInstall (PoolItem item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
-    void addPoolItemToLock (PoolItem_Ref item);
+    void addPoolItemToLock (PoolItem item);
 
-    void addPoolItemToRemove (PoolItem_Ref item);
+    void addPoolItemToRemove (PoolItem item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
 
     bool fixsystem () const {return _fixsystem;}

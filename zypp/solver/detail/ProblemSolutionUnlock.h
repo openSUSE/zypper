@@ -47,7 +47,7 @@ namespace zypp
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItem_Ref item);
+	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItem item);
 	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItemList & itemlist);
 	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, const ResPool & pool);	    
 	};

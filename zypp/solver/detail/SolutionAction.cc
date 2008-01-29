@@ -170,7 +170,7 @@ bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
     Capabilities depList;
-    if (_item != PoolItem_Ref()) {
+    if (_item != PoolItem()) {
 	depList = _item.resolvable()->dep(Dep::CONFLICTS);
     }
     switch (_kind) {
@@ -210,7 +210,7 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    break;
         case REQUIRES:
 	    // removing the requires dependency from the item
-	    if (_item == PoolItem_Ref()) {
+	    if (_item == PoolItem()) {
 		// this was a requirement via Resolver::addExtraCapability
 		// so we have to delete it.
 		resolver.removeExtraRequire (_capability);

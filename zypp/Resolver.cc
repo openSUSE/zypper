@@ -85,7 +85,7 @@ namespace zypp
   { return _pimpl->extraRequires();}
   const CapabilitySet Resolver::getConflict ()
   { return _pimpl->extraConflicts();}      
-  std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
+  std::list<PoolItem> Resolver::problematicUpdateItems( void ) const
   { return _pimpl->problematicUpdateItems(); }
   bool Resolver::createSolverTestcase (const std::string & dumpPath)
   { solver::detail::Testcase testcase (dumpPath);

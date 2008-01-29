@@ -61,8 +61,8 @@ namespace zypp
   public:
 
     /**
-     * Access to the main resolvable pool
-     * \ref zypp::ResPool
+     * Access to the global resolvable pool.
+     * Same as \ref zypp::ResPool::instance
      */
     ResPool pool() const;
 
@@ -71,10 +71,6 @@ namespace zypp
      * same kind and name.
     */
     ResPoolProxy poolProxy() const;
-
-    void addResolvables (const ResStore& store, bool installed = false);
-
-    void removeResolvables (const ResStore& store);
 
     DiskUsageCounter::MountPointSet diskUsage();
 
@@ -93,12 +89,6 @@ namespace zypp
      * just init the target, dont populate store or pool
      */
     void initializeTarget(const Pathname & root);
-
-    /**
-     * \throws Exception
-     * if commit_only == true, just init the target, dont populate store or pool
-     */
-    ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only = false);
 
     /**
      * \throws Exception
@@ -175,15 +165,15 @@ namespace zypp
     void setArchitecture( const Arch & arch );
 
   public:
-    
-   /** 
+
+   /**
     * \short Apply persistant locks to current pool.
     * Call this before solving
     *
     * \returns Number of items locked
     */
    int applyLocks();
-      
+
   protected:
     /** Dtor */
     virtual ~ZYpp();

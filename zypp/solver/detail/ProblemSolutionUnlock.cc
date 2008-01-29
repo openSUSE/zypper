@@ -55,7 +55,7 @@ struct LockReset : public resfilter::PoolItemFilterFunctor
 	: _problemSolutionUnlock( solution )
     { }
 
-    bool operator()( PoolItem_Ref item )
+    bool operator()( PoolItem item )
     {
 	_problemSolutionUnlock.addAction ( new TransactionSolutionAction (item, UNLOCK));	
 	return true;
@@ -76,7 +76,7 @@ ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
 }
 	
 ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
-					      PoolItem_Ref item)
+					      PoolItem item)
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...	

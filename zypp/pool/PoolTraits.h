@@ -16,9 +16,6 @@
 #include <map>
 
 #include "zypp/PoolItem.h"
-#include "zypp/Capability.h"
-#include "zypp/Dep.h"
-#include "zypp/ResStatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

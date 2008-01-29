@@ -48,11 +48,11 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
+					    PoolItem item,
 					    const Capability & capability,
-					    PoolItem_Ref otherItem);
+					    PoolItem otherItem);
 	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
+					    PoolItem item,
 					    const Capability & capability,
 					    PoolItemList itemList);	    
 	};
@@ -65,7 +65,7 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItem_Ref item,
+					   PoolItem item,
 					   const Capability & capability);
 	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
 					   PoolItemList itemList,
@@ -80,7 +80,7 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
-					       PoolItem_Ref item);
+					       PoolItem item);
 	};
 
 	class ProblemSolutionIgnoreVendor : public ProblemSolution
@@ -91,7 +91,7 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
-					 PoolItem_Ref item);
+					 PoolItem item);
 	};		
 
 	class ProblemSolutionIgnoreObsoletes : public ProblemSolution
@@ -102,9 +102,9 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
+					    PoolItem item,
 					    const Capability & capability,
-					    PoolItem_Ref otherItem);	    
+					    PoolItem otherItem);	    
 	};
 
 	class ProblemSolutionIgnoreInstalled : public ProblemSolution
@@ -115,8 +115,8 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
-					    PoolItem_Ref otherItem);  
+					    PoolItem item,
+					    PoolItem otherItem);  
 	};
 	
 

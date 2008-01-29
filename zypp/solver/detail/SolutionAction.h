@@ -74,7 +74,7 @@ namespace zypp
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
-	    TransactionSolutionAction( PoolItem_Ref item,
+	    TransactionSolutionAction( PoolItem item,
 				       TransactionKind action )
 		: SolutionAction(),
 		  _item( item ), _action( action ) {}
@@ -90,7 +90,7 @@ namespace zypp
 
 	  // ---------------------------------- accessors
 
-	  const PoolItem_Ref item() const { return _item; }
+	  const PoolItem item() const { return _item; }
 	  TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
@@ -98,7 +98,7 @@ namespace zypp
 
 	protected:
 
-	    PoolItem_Ref _item;
+	    PoolItem _item;
 	    const TransactionKind _action;
 	};
 
@@ -129,23 +129,23 @@ namespace zypp
 	{
 	public:
 
-	    InjectSolutionAction( PoolItem_Ref item,
+	    InjectSolutionAction( PoolItem item,
 				  const Capability & capability,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
 		  _item( item ), _capability( capability ),
 		  _kind( kind ), _otherItem() {}
 
-	    InjectSolutionAction( PoolItem_Ref item,
+	    InjectSolutionAction( PoolItem item,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
 		  _item( item ), _capability(),
 		  _kind( kind ), _otherItem() {}
 
-	    InjectSolutionAction( PoolItem_Ref item,
+	    InjectSolutionAction( PoolItem item,
 				  const Capability & capability,
 				  const InjectSolutionKind & kind,
-				  PoolItem_Ref otherItem)
+				  PoolItem otherItem)
 		: SolutionAction(),
 		  _item( item ), _capability( capability ),
 		  _kind( kind ), _otherItem( otherItem ) {}
@@ -157,16 +157,16 @@ namespace zypp
 
 	  // ---------------------------------- accessors
 	    const Capability & capability() const { return _capability; };
-	    const PoolItem_Ref item() const { return _item; }
+	    const PoolItem item() const { return _item; }
 
 	  // ---------------------------------- methods
 	    virtual bool execute(Resolver & resolver) const;
 
 	protected:
-	    PoolItem_Ref _item;
+	    PoolItem _item;
 	    const Capability _capability;
 	    const InjectSolutionKind _kind;
-	    PoolItem_Ref _otherItem;
+	    PoolItem _otherItem;
 	};
 
 

@@ -55,7 +55,7 @@ namespace zypp
     bool Pool::reposEmpty() const
     { return myPool()->nrepos; }
 
-    unsigned Pool::reposSize() const
+    Pool::size_type Pool::reposSize() const
     { return myPool()->nrepos; }
 
     Pool::RepoIterator Pool::reposBegin() const
@@ -77,12 +77,12 @@ namespace zypp
       return true;
     }
 
-    unsigned Pool::solvablesSize() const
+    Pool::size_type Pool::solvablesSize() const
     {
-      // return myPool()->nsolvables;
+      // Do not return myPool()->nsolvables;
       // nsolvables is the array size including
       // invalid Solvables.
-      unsigned ret = 0;
+      size_type ret = 0;
       for_( it, reposBegin(), reposEnd() )
       {
         ret += it->solvablesSize();

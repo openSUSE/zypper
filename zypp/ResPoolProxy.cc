@@ -28,38 +28,38 @@ namespace zypp
   /** Tem. friend of PoolItem */
   struct PoolItemSaver
   {
-    void saveState( ResPool_Ref pool_r )
+    void saveState( ResPool pool_r )
     {
       std::for_each( pool_r.begin(), pool_r.end(),
                      std::mem_fun_ref(&PoolItem::saveState) );
     }
 
-    void saveState( ResPool_Ref pool_r, const ResObject::Kind & kind_r )
+    void saveState( ResPool pool_r, const ResObject::Kind & kind_r )
     {
       std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
                      std::mem_fun_ref(&PoolItem::saveState) );
     }
 
-    void restoreState( ResPool_Ref pool_r )
+    void restoreState( ResPool pool_r )
     {
       std::for_each( pool_r.begin(), pool_r.end(),
                      std::mem_fun_ref(&PoolItem::restoreState) );
     }
 
-    void restoreState( ResPool_Ref pool_r, const ResObject::Kind & kind_r )
+    void restoreState( ResPool pool_r, const ResObject::Kind & kind_r )
     {
       std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
                      std::mem_fun_ref(&PoolItem::restoreState) );
     }
 
-    bool diffState( ResPool_Ref pool_r ) const
+    bool diffState( ResPool pool_r ) const
     {
       // return whether some PoolItem::sameState reported \c false.
       return( invokeOnEach( pool_r.begin(), pool_r.end(),
                             std::mem_fun_ref(&PoolItem::sameState) ) < 0 );
     }
 
-    bool diffState( ResPool_Ref pool_r, const ResObject::Kind & kind_r ) const
+    bool diffState( ResPool pool_r, const ResObject::Kind & kind_r ) const
     {
       // return whether some PoolItem::sameState reported \c false.
       return( invokeOnEach( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
@@ -150,12 +150,12 @@ namespace zypp
   {
   public:
     Impl()
+    :_pool( ResPool::instance() )
     {}
 
-    Impl( ResPool_Ref pool_r )
+    Impl( ResPool pool_r )
     : _pool( pool_r )
     {
-
       SelPoolHelper collect;
       std::for_each( _pool.begin(), _pool.end(),
                      functor::functorRef<void,ResPool::Item>( collect ) );
@@ -207,7 +207,7 @@ namespace zypp
     { return PoolItemSaver().diffState( _pool, kind_r ); }
 
   private:
-    ResPool_Ref _pool;
+    ResPool _pool;
     mutable SelectablePool _selPool;
 
   public:
@@ -246,7 +246,7 @@ namespace zypp
   //	METHOD NAME : ResPoolProxy::ResPoolProxy
   //	METHOD TYPE : Ctor
   //
-  ResPoolProxy::ResPoolProxy( ResPool_Ref pool_r )
+  ResPoolProxy::ResPoolProxy( ResPool pool_r )
   : _pimpl( new Impl( pool_r ) )
   {}
 

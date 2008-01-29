@@ -103,7 +103,7 @@ struct ItemLockerFunc
 
   bool operator()( const CapAndItem &cai_r )
   {
-    PoolItem_Ref item(cai_r.item);
+    PoolItem item(cai_r.item);
     MIL << "Locking " << cai_r.item << "(matched by " << _lock_str << ")" << endl;
     item.status().setLock( true, ResStatus::USER);
     return true;

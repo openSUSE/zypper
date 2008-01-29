@@ -96,7 +96,7 @@ namespace zypp
      * Return the list of problematic update items
      * i.e. locked ones (due to foreign vendor)
      **/
-    std::list<PoolItem_Ref> problematicUpdateItems( void ) const;
+    std::list<PoolItem> problematicUpdateItems( void ) const;
 
     /**
      * Return the dependency problems found by the last call to
