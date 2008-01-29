@@ -118,19 +118,19 @@ namespace zypp
                                   const RepoInfo &info,
                                   const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() )
   {
-    ProgressData progress;
-    callback::SendReport<ProgressReport> report;
-    progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-    progress.name(str::form(_("Cleaning repository '%s' cache"), info.name().c_str()));
-
-    if ( !store.isCached(info.alias()) )
-      return;
-
-    MIL << info.alias() << " cleaning cache..." << endl;
-    
-    CombinedProgressData subprogrcv(progress);
-
-    store.cleanRepository(info.alias(), subprogrcv);
+//     ProgressData progress;
+//     callback::SendReport<ProgressReport> report;
+//     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
+//     progress.name(str::form(_("Cleaning repository '%s' cache"), info.name().c_str()));
+// 
+//     if ( !store.isCached(info.alias()) )
+//       return;
+// 
+//     MIL << info.alias() << " cleaning cache..." << endl;
+//     
+//     CombinedProgressData subprogrcv(progress);
+// 
+//     store.cleanRepository(info.alias(), subprogrcv);
   }
 
   ////////////////////////////////////////////////////////////////////////////

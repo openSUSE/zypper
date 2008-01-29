@@ -12,7 +12,6 @@
 #include "zypp/cache/CacheAttributes.h"
 
 #include "satsolver/repo.h"
-#include "satsolver/attr_store.h"
 
 using namespace std;
 using namespace zypp;
@@ -51,13 +50,14 @@ namespace cache
 
 struct SolvStore::Impl
 {
-  Impl( const Pathname &solvdir )
+  Impl( const Pathname &solvdir, const string &alias )
   : name_cache_hits(0)
   , dir_cache_hits(0)
   , _cachedir(solvdir)
   {
     _pool = pool_create();
-    _attr = new_store(_pool);
+    _repo = repo_create(_pool, alias.c_str() ); 
+    _repodata = repo_add_repodata(_repo);
     
     _attr_package_authors = str2id(_pool, "package:authors", 1);
     _attr_package_description = str2id(_pool, "package:description", 1);
@@ -80,9 +80,9 @@ struct SolvStore::Impl
     _attr_package_time = str2id(_pool, "package:time", 1);
   }
 
-  Impl()
+  Impl( const std::string &alias)
   {
-    Impl( getZYpp()->homePath() );
+    Impl( getZYpp()->homePath(), alias );
   }
 
   ~Impl()
@@ -98,11 +98,10 @@ struct SolvStore::Impl
   int dir_cache_hits;
 
   _Pool *_pool;
+  _Repo *_repo;
 
-  map<string,Repo*> _repoid2repo;
-  
   Pathname _cachedir;
-  Attrstore *_attr;
+  Repodata *_repodata;
 
   Id _attr_package_authors;
   Id _attr_package_description;
@@ -126,14 +125,14 @@ struct SolvStore::Impl
 };
 
 
-SolvStore::SolvStore( const Pathname &solvdir )
-  : _pimpl( new Impl(solvdir) )
+SolvStore::SolvStore( const Pathname &solvdir, const string &alias )
+  : _pimpl( new Impl(solvdir, alias) )
 {
 
 }
 
-SolvStore::SolvStore()
-    : _pimpl( new Impl() )
+SolvStore::SolvStore( const std::string &alias )
+    : _pimpl( new Impl(alias) )
 {
 
 }
@@ -402,16 +401,8 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
 _Solvable* SolvStore::appendResolvable( const std::string & repository_id,
                                           const data::Resolvable_Ptr &res )
 {
-  Repo *repo;
-  map<string, Repo*>::const_iterator it = _pimpl->_repoid2repo.find(repository_id);
-  if ( it == _pimpl->_repoid2repo.end() )
-  {
-    // throw
-  }
-  repo = it->second;
-
   //Id
-  _Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(repo));
+  _Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(_pimpl->_repo));
   s->evr = str2id(_pimpl->_pool, res->edition.c_str(), 1);
 //   s->provides = adddep(pool, pd, s->provides, atts, 0);
 //
@@ -453,11 +444,6 @@ void SolvStore::cleanRepository( const std::string &alias,
 RepoStatus SolvStore::repositoryStatus( const string &alias )
 {
   return RepoStatus();
-}
-
-bool SolvStore::isCached( const string &alias )
-{
-  return _pimpl->_repoid2repo.find(alias) != _pimpl->_repoid2repo.end();
 }
 
 }

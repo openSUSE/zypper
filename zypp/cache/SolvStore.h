@@ -51,7 +51,7 @@ namespace zypp
     {
     public:
 
-      SolvStore();
+      SolvStore( const std::string &alias );
       virtual ~SolvStore();
 
       /**
@@ -63,7 +63,7 @@ namespace zypp
        * The data will be saved in the directory specified in
        * \a dbdir. \a dbdir must exist.
        */
-      SolvStore( const Pathname &solvdir );
+      SolvStore( const Pathname &solvdir, const std::string &alias );
 
       /**
        * Commit the changes.
@@ -285,7 +285,7 @@ namespace zypp
 
       RepoStatus repositoryStatus( const std::string &alias );
 
-      bool isCached( const std::string &alias );
+      //bool isCached( const std::string &alias );
 
     private:
       /** Implementation. */
