@@ -93,14 +93,13 @@ namespace zypp
 
     void Repo::eraseFromPool()
     {
-      NO_REPO_RETURN();
-      myPool().setDirty();
-      ::repo_free( _repo, /*reuseids*/false );
+      myPool().deleteRepo( _id );
+      _id = detail::noRepoId;
     }
 
     void Repo::addSolv( const Pathname & file_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
 
       AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
       if ( file == NULL )
@@ -115,14 +114,14 @@ namespace zypp
 
     detail::SolvableIdType Repo::addSolvable()
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
       myPool().setDirty();
       return ::repo_add_solvable( _repo );
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
       myPool().setDirty();
       return ::repo_add_solvable_block( _repo, count_r );
     }

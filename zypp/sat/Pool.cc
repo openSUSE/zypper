@@ -101,8 +101,7 @@ namespace zypp
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
-      myPool().setDirty();
-      return Repo( ::repo_create( get(), name_r.c_str() ) );
+      return Repo( myPool().createRepo( name_r ) );
     }
 
     Repo Pool::reposFind( const std::string & name_r ) const

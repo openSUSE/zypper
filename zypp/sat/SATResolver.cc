@@ -83,7 +83,7 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _allowvirtualconflicts(false)
     , _noupdateprovide(false)
     , _dosplitprovides(false)
-    
+
 {
 }
 
@@ -761,14 +761,14 @@ SATResolver::problems ()
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!_solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(pool, s, sd))
+				if (!_solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(_solv, s, sd))
 				{
 				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!_solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(pool, s, sd))
+				if (!_solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(_solv, s, sd))
 				{
 				    string description = str::form (_("vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
 								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));

@@ -23,7 +23,6 @@ extern "C"
 
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
-
 #include "zypp/sat/detail/PoolMember.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -51,8 +50,8 @@ namespace zypp
           ~PoolImpl();
 
           /** Pointer style access forwarded to sat-pool. */
-          ::_Pool * operator->()
-          { return _pool; }
+           ::_Pool * operator->()
+           { return _pool; }
 
         public:
           /** Serial number changing whenever the content changes. */
@@ -76,6 +75,29 @@ namespace zypp
               _serial.serial();
             }
           }
+
+        public:
+          /** \name Actions invalidating housekeeping data.
+            */
+          //@{
+          /** Creating a new repo named \a name_r. */
+          RepoIdType createRepo( const std::string & name_r )
+          {
+            setDirty();
+            return ::repo_create( _pool, name_r.c_str() );
+          }
+
+          /** Creating a new repo named \a name_r. */
+          void deleteRepo( RepoIdType id_r )
+          {
+            ::_Repo * todel( getRepo( id_r ) );
+            if ( todel )
+            {
+              setDirty();
+              ::repo_free( todel, /*reuseids*/false );
+            }
+          }
+          //@}
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */
