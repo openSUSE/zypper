@@ -112,7 +112,8 @@ namespace zypp
             pos == value.size() - 1 ? value.size() - 2 : value.size() - 1);
 
           // replace special characters:
-          while ((pos = value.find('\\')) != string::npos)
+          pos = 0;
+          while ((pos = value.find('\\', pos)) != string::npos)
           {
             switch(value[pos+1])
             {
@@ -127,6 +128,9 @@ namespace zypp
               break;
             case 'v':
               value = value.replace(pos, 2, "\v");
+              break;
+            case '\\':
+              value = value.erase(pos++, 1);
               break;
             default:;
               value = value.erase(pos, 1);
