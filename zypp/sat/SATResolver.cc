@@ -434,7 +434,6 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
-    sat::Pool::instance().setDirty();
     sat::Pool::instance().prepare();
 
     // Solve !
