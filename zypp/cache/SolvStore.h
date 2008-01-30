@@ -263,11 +263,11 @@ namespace zypp
        * to avoid some duplication across types.
        */
       //@{
-      void appendResObjectAttributes( const data::RecordId &rid,
+      void appendResObjectAttributes( Id id,
                                       const data::ResObject_Ptr & res );
 
-      void appendPackageBaseAttributes(const data::RecordId & pkgid,
-                                       const data::Packagebase_Ptr & package);
+      void appendPackageBaseAttributes( Id id,
+                                        const data::Packagebase_Ptr & package);
       //@}
 
       void cleanRepository( const std::string &alias,

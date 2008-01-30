@@ -58,9 +58,18 @@ struct SolvStore::Impl
     _pool = pool_create();
     _repo = repo_create(_pool, alias.c_str() ); 
     _repodata = repo_add_repodata(_repo);
-    
+   
+    //_attr_resobject_summary = str2id(_pool, "summary");
+    //_attr_resobject_description = str2id(_pool, "description");
+    _attr_resobject_installedSize = str2id(_pool, "installedSize", 1);
+    _attr_resobject_buildTime = str2id(_pool, "buildTime", 1);
+    _attr_resobject_installOnly = str2id(_pool, "installOnly", 1);
+    _attr_resobject_vendor = str2id(_pool, "vendor", 1);
+    _attr_resobject_insnotify = str2id(_pool, "insnotify", 1);
+    _attr_resobject_delnotify = str2id(_pool, "delnotify", 1);
+    // license to confirm, insnotify, delnotify
+ 
     _attr_package_authors = str2id(_pool, "package:authors", 1);
-    _attr_package_description = str2id(_pool, "package:description", 1);
     _attr_package_diskusage = str2id(_pool, "package:diskusage", 1);
     _attr_package_downloadsize = str2id(_pool, "package:downloadsize", 1);
     _attr_package_eula = str2id(_pool, "package:eula", 1);
@@ -76,7 +85,6 @@ struct SolvStore::Impl
     _attr_package_nosource = str2id(_pool, "package:nosource", 1);
     _attr_package_source = str2id(_pool, "package:source", 1);
     _attr_package_sourceid = str2id(_pool, "package:sourceid", 1);
-    _attr_package_summary = str2id(_pool, "package:summary", 1);
     _attr_package_time = str2id(_pool, "package:time", 1);
   }
 
@@ -102,6 +110,13 @@ struct SolvStore::Impl
 
   Pathname _cachedir;
   Repodata *_repodata;
+
+  Id _attr_resobject_installedSize;
+  Id _attr_resobject_buildTime;
+  Id _attr_resobject_installOnly;
+  Id _attr_resobject_vendor;
+  Id _attr_resobject_delnotify; 
+  Id _attr_resobject_insnotify;
 
   Id _attr_package_authors;
   Id _attr_package_description;
@@ -147,10 +162,11 @@ void SolvStore::commit()
   // NOOP
 }
 
-void SolvStore::appendResObjectAttributes( const data::RecordId &rid,
-                                            const data::ResObject_Ptr & res )
+void SolvStore::appendResObjectAttributes( Id rid,
+                                           const data::ResObject_Ptr & res )
 {
-  
+  repodata_set_str(_pimpl->_repodata, rid, _pimpl->_attr_resobject_insnotify, res->insnotify.c_str());
+  repodata_set_str(_pimpl->_repodata, rid, _pimpl->_attr_resobject_delnotify, res->delnotify.c_str());
 //   appendTranslatedStringAttribute( rid, attrResObjectDescription(), res->description );
 //   appendTranslatedStringAttribute( rid, attrResObjectSummary(), res->summary );
 //   appendNumericAttribute( rid, attrResObjectInstalledSize(), res->installedSize );
@@ -163,8 +179,8 @@ void SolvStore::appendResObjectAttributes( const data::RecordId &rid,
 }
 
 
-void SolvStore::appendPackageBaseAttributes( const RecordId & pkgid,
-                                              const data::Packagebase_Ptr & package )
+void SolvStore::appendPackageBaseAttributes( Id rid,
+                                             const data::Packagebase_Ptr & package )
 {
     
 //   appendStringAttribute( pkgid, attrPackageBuildhost(), package->buildhost );
