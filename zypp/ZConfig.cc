@@ -255,7 +255,7 @@ namespace zypp
   Pathname ZConfig::vendorPath() const
   {
     return ( _pimpl->cfg_vendor_path.empty()
-        ? Pathname("/etc/zypp/vondors.d") : _pimpl->cfg_vendor_path );      
+        ? Pathname("/etc/zypp/vendors.d") : _pimpl->cfg_vendor_path );      
   }
 
   /////////////////////////////////////////////////////////////////
