@@ -29,14 +29,14 @@ namespace data
     ResolvableDataConsumer();
     virtual ~ResolvableDataConsumer();
 
-    virtual data::RecordId consumePackage      ( const std::string & repository_id, const data::Package_Ptr & ) = 0;
-    virtual data::RecordId consumeSourcePackage( const std::string & repository_id, const data::SrcPackage_Ptr & ) = 0;
-    virtual data::RecordId consumeProduct      ( const std::string & repository_id, const data::Product_Ptr & ) = 0;
-    virtual data::RecordId consumePatch        ( const std::string & repository_id, const data::Patch_Ptr & ) = 0;
-    virtual data::RecordId consumePackageAtom  ( const std::string & repository_id, const data::PackageAtom_Ptr & ) = 0;
-    virtual data::RecordId consumeMessage      ( const std::string & repository_id, const data::Message_Ptr & ) = 0;
-    virtual data::RecordId consumeScript       ( const std::string & repository_id, const data::Script_Ptr & ) = 0;
-    virtual data::RecordId consumePattern      ( const std::string & repository_id, const data::Pattern_Ptr & ) = 0;
+    virtual data::RecordId consumePackage      ( const data::Package_Ptr & ) = 0;
+    virtual data::RecordId consumeSourcePackage( const data::SrcPackage_Ptr & ) = 0;
+    virtual data::RecordId consumeProduct      ( const data::Product_Ptr & ) = 0;
+    virtual data::RecordId consumePatch        ( const data::Patch_Ptr & ) = 0;
+    virtual data::RecordId consumePackageAtom  ( const data::PackageAtom_Ptr & ) = 0;
+    virtual data::RecordId consumeMessage      ( const data::Message_Ptr & ) = 0;
+    virtual data::RecordId consumeScript       ( const data::Script_Ptr & ) = 0;
+    virtual data::RecordId consumePattern      ( const data::Pattern_Ptr & ) = 0;
 
     virtual data::RecordId consumeChangelog    ( const data::RecordId & resolvable_id, const Changelog & ) = 0;
     virtual data::RecordId consumeFilelist     ( const data::RecordId & resolvable_id, const data::Filenames & ) = 0;

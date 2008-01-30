@@ -206,9 +206,9 @@ namespace zypp
   {
     data::Package_Ptr pkg = dynamic_pointer_cast<data::Package>(package_r);
     if (pkg)
-      _consumer.consumePackage(_repository_id, pkg);
+      _consumer.consumePackage(pkg);
     else
-      _consumer.consumeSourcePackage(_repository_id, dynamic_pointer_cast<data::SrcPackage>(package_r));
+      _consumer.consumeSourcePackage(dynamic_pointer_cast<data::SrcPackage>(package_r));
 
 /*    MIL << "got package "
       << package.name << package.edition << " "
@@ -236,7 +236,7 @@ namespace zypp
 
   bool RepoParser::Impl::patch_CB(const data::Patch_Ptr & patch)
   {
-    _consumer.consumePatch( _repository_id, patch );
+    _consumer.consumePatch( patch );
 
     MIL << "got patch "
       << patch->name << patch->edition << " "
@@ -284,7 +284,7 @@ namespace zypp
 
   bool RepoParser::Impl::pattern_CB(const data::Pattern_Ptr & product_ptr)
   {
-    _consumer.consumePattern(_repository_id, product_ptr);
+    _consumer.consumePattern(product_ptr);
 
     MIL << "got pattern " << product_ptr->name << endl;
 
@@ -295,7 +295,7 @@ namespace zypp
 
   bool RepoParser::Impl::product_CB(const data::Product_Ptr & product_ptr)
   {
-    _consumer.consumeProduct(_repository_id, product_ptr);
+    _consumer.consumeProduct(product_ptr);
 
     MIL << "got product " << product_ptr->name
         << "-" << product_ptr->edition << endl;

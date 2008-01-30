@@ -79,8 +79,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param package Package data
       */
-      virtual data::RecordId consumePackage(const std::string &repo_id,
-					    const data::Package_Ptr & package);
+      virtual data::RecordId consumePackage(const data::Package_Ptr & package);
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -89,8 +88,7 @@ namespace zypp
        * \param catalog_id ownership.
        * \param srcpackage Source package data
       */
-      virtual data::RecordId consumeSourcePackage( const std::string &repo_id,
-	                                           const data::SrcPackage_Ptr & srcpackage );
+      virtual data::RecordId consumeSourcePackage( const data::SrcPackage_Ptr & srcpackage );
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -99,8 +97,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param patch Patch data
       */
-      virtual data::RecordId consumePatch( const std::string &repo_id,
-					   const data::Patch_Ptr & patch );
+      virtual data::RecordId consumePatch( const data::Patch_Ptr & patch );
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface.
@@ -114,8 +111,7 @@ namespace zypp
        * \note this is somewhat specific to current YUM patch metadata design
        *       and may change (to consumeAtom(data::RecordId,data::Atom)).
        */
-      virtual data::RecordId consumePackageAtom( const std::string &repo_id,
-	                                         const data::PackageAtom_Ptr & atom );
+      virtual data::RecordId consumePackageAtom( const data::PackageAtom_Ptr & atom );
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -124,8 +120,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param message Message data
       */
-      virtual data::RecordId consumeMessage( const std::string &repo_id,
-					     const data::Message_Ptr & message);
+      virtual data::RecordId consumeMessage( const data::Message_Ptr & message);
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -134,8 +129,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param script Script data
       */
-      virtual data::RecordId consumeScript( const std::string & repo_id,
-					    const data::Script_Ptr & script);
+      virtual data::RecordId consumeScript( const data::Script_Ptr & script);
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -144,8 +138,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual data::RecordId consumePattern( const std::string & repo_id,
-					     const data::Pattern_Ptr & pattern );
+      virtual data::RecordId consumePattern( const data::Pattern_Ptr & pattern );
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -154,8 +147,7 @@ namespace zypp
        * \param repository_id ownership.
        * \param pattern Pattern data
       */
-      virtual data::RecordId consumeProduct( const std::string &repo_id,
-					     const data::Product_Ptr & product );
+      virtual data::RecordId consumeProduct( const data::Product_Ptr & product );
 
       /**
        * Implementation of the \ref ResolvableDataConsumer interface
@@ -243,8 +235,7 @@ namespace zypp
        * \param prpm The patch RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendPatchRpm( const std::string &repo_id,
-                                     const data::PatchRpm_Ptr & prpm);
+      data::RecordId appendPatchRpm( const data::PatchRpm_Ptr & prpm);
 
 
       /**
@@ -253,8 +244,7 @@ namespace zypp
        * \param drpm The delta RPM object to insert.
        * \return Record ID of the newly inserted record.
        */
-      data::RecordId appendDeltaRpm( const std::string &repo_id,
-                                     const data::DeltaRpm_Ptr & drpm);
+      data::RecordId appendDeltaRpm( const data::DeltaRpm_Ptr & drpm);
 
 
       /**

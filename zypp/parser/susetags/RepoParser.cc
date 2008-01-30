@@ -81,7 +81,7 @@ namespace zypp
 	    ++_stats.prod;
 	    _prodData = data_r;
 	    _defaultVendor = data_r->vendor;
-	    _consumer.consumeProduct( _repositoryId, data_r );
+	    _consumer.consumeProduct( data_r );
 	  }
 
 	  ///////////////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ namespace zypp
 	    resolveSharedDataTag( data_r );
 
 	    ++_stats.pack;
-	    data::RecordId newid = _consumer.consumePackage( _repositoryId, data_r );
+	    data::RecordId newid = _consumer.consumePackage( data_r );
 
 	    // remember for later reference
 	    idMapAdd( makeSharedIdent( ResTraits<Package>::kind,
@@ -110,7 +110,7 @@ namespace zypp
 	    resolveSharedDataTag( data_r );
 
 	    ++_stats.srcp;
-	    data::RecordId newid = _consumer.consumeSourcePackage( _repositoryId, data_r );
+	    data::RecordId newid = _consumer.consumeSourcePackage( data_r );
 
 	    // remember for later reference
 	    idMapAdd( makeSharedIdent( ResTraits<SrcPackage>::kind,
@@ -178,7 +178,7 @@ namespace zypp
             //SEC << "[Pattern]" << data_r << endl;
 	    fixVendor( data_r );
 	    ++_stats.patt;
-	    _consumer.consumePattern( _repositoryId, data_r );
+	    _consumer.consumePattern( data_r );
           }
 	  //@}
 

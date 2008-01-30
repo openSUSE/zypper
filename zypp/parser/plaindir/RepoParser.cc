@@ -225,7 +225,7 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 	if (Arch(package->arch).compatibleWith(_sysarch))
 	{
 	  DBG << "Adding package " << *package << endl;
-	  _consumer.consumePackage( _repositoryId, package );
+	  _consumer.consumePackage( package );
 	}
 	else
 	{

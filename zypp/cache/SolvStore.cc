@@ -184,8 +184,7 @@ void SolvStore::appendPackageBaseAttributes( const RecordId & pkgid,
 //   appendOnMediaLocation( pkgid, attrPackageLocation, package->repositoryLocation );
 }
 
-RecordId SolvStore::consumePackage( const std::string & repository_id,
-				     const data::Package_Ptr & package )
+RecordId SolvStore::consumePackage( const data::Package_Ptr & package )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<Package>::kind,
 //                                   NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
@@ -202,8 +201,7 @@ RecordId SolvStore::consumePackage( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumeSourcePackage( const std::string & repository_id,
-                                       const data::SrcPackage_Ptr & package )
+RecordId SolvStore::consumeSourcePackage( const data::SrcPackage_Ptr & package )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<SrcPackage>::kind,
 //       NVRA( package->name, package->edition, package->arch ), package->deps, package->shareDataWith );
@@ -214,8 +212,7 @@ RecordId SolvStore::consumeSourcePackage( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumePatch( const std::string & repository_id,
-                               const data::Patch_Ptr & patch)
+RecordId SolvStore::consumePatch( const data::Patch_Ptr & patch)
 {/*
   RecordId id = appendResolvable(
       repository_id, ResTraits<Patch>::kind,
@@ -270,8 +267,7 @@ RecordId SolvStore::consumePatch( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumePackageAtom( const std::string & repository_id,
-                                     const data::PackageAtom_Ptr & atom )
+RecordId SolvStore::consumePackageAtom( const data::PackageAtom_Ptr & atom )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<Atom>::kind,
 //       NVRA( atom->name, atom->edition, atom->arch ), atom->deps );
@@ -289,8 +285,7 @@ RecordId SolvStore::consumePackageAtom( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumeMessage( const std::string & repository_id,
-                                 const data::Message_Ptr & message )
+RecordId SolvStore::consumeMessage( const data::Message_Ptr & message )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<Message>::kind,
 //       NVRA( message->name, message->edition, message->arch ), message->deps );
@@ -301,8 +296,7 @@ RecordId SolvStore::consumeMessage( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumeScript( const std::string & repository_id,
-                                const data::Script_Ptr & script )
+RecordId SolvStore::consumeScript( const data::Script_Ptr & script )
 {
   //RecordId id = appendResolvable( repository_id, ResTraits<Script>::kind,
       //NVRA( script->name, script->edition, script->arch ), script->deps );
@@ -316,8 +310,7 @@ RecordId SolvStore::consumeScript( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumePattern( const std::string & repository_id,
-                                     const data::Pattern_Ptr & pattern )
+RecordId SolvStore::consumePattern( const data::Pattern_Ptr & pattern )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<Pattern>::kind,
 //       NVRA( pattern->name, pattern->edition, pattern->arch ), pattern->deps );
@@ -338,8 +331,7 @@ RecordId SolvStore::consumePattern( const std::string & repository_id,
   return 0;
 }
 
-RecordId SolvStore::consumeProduct( const std::string & repository_id,
-                                 const data::Product_Ptr & product )
+RecordId SolvStore::consumeProduct( const data::Product_Ptr & product )
 {
 //   RecordId id = appendResolvable( repository_id, ResTraits<Product>::kind,
 //       NVRA( product->name, product->edition, product->arch ), product->deps );
@@ -418,7 +410,7 @@ _Solvable* SolvStore::appendResolvable( const std::string & repository_id,
 
 
 /** \todo lookupOrAppend ? */
-RecordId SolvStore::appendPatchRpm( const std::string & repository_id, const data::PatchRpm_Ptr & prpm)
+RecordId SolvStore::appendPatchRpm( const data::PatchRpm_Ptr & prpm)
 {
   RecordId id;
 return id;
@@ -426,7 +418,7 @@ return id;
 
 
 /** \todo lookupOrAppend ? */
-RecordId SolvStore::appendDeltaRpm( const std::string & repository_id, const data::DeltaRpm_Ptr & drpm)
+RecordId SolvStore::appendDeltaRpm( const data::DeltaRpm_Ptr & drpm)
 {
   RecordId id;
   return id;
