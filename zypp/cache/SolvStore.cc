@@ -11,7 +11,10 @@
 #include "zypp/cache/CacheException.h"
 #include "zypp/cache/CacheAttributes.h"
 
-#include "satsolver/repo.h"
+extern "C"
+{
+#include <satsolver/repo.h>
+}
 
 using namespace std;
 using namespace zypp;
@@ -56,7 +59,7 @@ struct SolvStore::Impl
   , _cachedir(solvdir)
   {
     _pool = pool_create();
-    _repo = repo_create(_pool, alias.c_str() ); 
+    _repo = ::repo_create(_pool, alias.c_str() ); 
     _repodata = repo_add_repodata(_repo);
    
     //_attr_resobject_summary = str2id(_pool, "summary");
