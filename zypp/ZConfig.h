@@ -105,11 +105,9 @@ namespace zypp
       bool download_use_deltarpm() const;
 
       /**
-       * Whether untrusted vendor should be autolocked
-       / config option
-       * repo.add.probe
+       * Directory for equivalent vendor definitions
        */
-      bool autolock_untrustedvendor() const;
+      Pathname vendorPath() const;
 
     public:
       class Impl;

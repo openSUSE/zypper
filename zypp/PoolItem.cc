@@ -37,26 +37,13 @@ namespace zypp
     : _status( status_r )
     , _resolvable( res_r )
     {
-      autoprotect();
     }
 
     ResStatus & status() const
     { return _status; }
 
-    ResStatus & statusReset() const
-    {
-      if ( ! autoprotect() )
-        {
-          _status.setLock( false, zypp::ResStatus::USER );
-          _status.resetTransact( zypp::ResStatus::USER );
-        }
-      return _status;
-    }
-
     ResObject::constPtr resolvable() const
     { return _resolvable; }
-
-    bool autoprotect() const;
 
   private:
     mutable ResStatus     _status;
@@ -103,19 +90,6 @@ namespace zypp
     else
 	str << "(NULL)";
     return str;
-  }
-
-  inline bool PoolItem::Impl::autoprotect() const
-  {
-    if ( _status.isInstalled()
-         && isKind<Package>( _resolvable )
-         && VendorAttr::instance().autoProtect( _resolvable->vendor() ) )
-      {
-        _status.setLock( true, zypp::ResStatus::USER );
-        MIL << "Protect vendor '" << _resolvable->vendor() << "' " << *this << endl;
-        return true;
-      }
-    return false;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -167,9 +141,6 @@ namespace zypp
 
   ResStatus & PoolItem::status() const
   { return _pimpl->status(); }
-
-  ResStatus & PoolItem::statusReset() const
-  { return _pimpl->statusReset(); }
 
   ResObject::constPtr PoolItem::resolvable() const
   { return _pimpl->resolvable(); }

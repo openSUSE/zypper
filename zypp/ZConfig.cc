@@ -44,7 +44,6 @@ namespace zypp
         , repo_refresh_delay      ( 10 )
         , download_use_patchrpm   ( true )
         , download_use_deltarpm   ( true )
-        , autolock_untrustedvendor( false )
 
       {
         MIL << "ZConfig singleton created." << endl;
@@ -112,9 +111,9 @@ namespace zypp
                 download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
               }
             }
-            else if ( section == "locking" )
+            else if ( section == "vendordir" )
             {
-              autolock_untrustedvendor = str::strToBool( value, autolock_untrustedvendor );
+              cfg_vendor_path = Pathname(value);
             }
 
           }
@@ -133,6 +132,7 @@ namespace zypp
     Pathname cfg_metadata_path;
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
+    Pathname cfg_vendor_path;      
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
@@ -140,8 +140,6 @@ namespace zypp
     bool download_use_patchrpm;
     bool download_use_deltarpm;
 
-    // [locking]
-    bool autolock_untrustedvendor;
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -254,9 +252,10 @@ namespace zypp
   bool ZConfig::download_use_deltarpm() const
   { return _pimpl->download_use_deltarpm; }
 
-  bool ZConfig::autolock_untrustedvendor() const
+  Pathname ZConfig::vendorPath() const
   {
-    return _pimpl->autolock_untrustedvendor;
+    return ( _pimpl->cfg_vendor_path.empty()
+        ? Pathname("/etc/zypp/vondors.d") : _pimpl->cfg_vendor_path );      
   }
 
   /////////////////////////////////////////////////////////////////

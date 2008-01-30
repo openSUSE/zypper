@@ -126,7 +126,7 @@ downgrade_allowed( PoolItem installed, PoolItem candidate, bool silent_downgrade
       DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
 
     if (cpkg
-	&& VendorAttr::instance().isKnown( cpkg->vendor() ) )
+	&& VendorAttr::instance().equivalent( ipkg->vendor(), cpkg->vendor() ) )
     {
 	if ( silent_downgrades )
 	    return true;
