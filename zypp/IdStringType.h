@@ -82,7 +82,8 @@ namespace zypp
    * \ingroup g_CRTP
    */
   template <class Derived>
-  class IdStringType : private base::SafeBool<Derived>
+  class IdStringType : protected sat::detail::PoolMember,
+                       private base::SafeBool<Derived>
   {
     typedef typename base::SafeBool<Derived>::bool_type bool_type;
 

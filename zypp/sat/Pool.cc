@@ -43,11 +43,11 @@ namespace zypp
     ::_Pool * Pool::get() const
     { return myPool().getPool(); }
 
+    Pool::size_type Pool::capacity() const
+    { return myPool()->nsolvables; }
+
     const SerialNumber & Pool::serial() const
     { return myPool().serial(); }
-
-    void Pool::setDirty()
-    { return myPool().setDirty(); }
 
     void Pool::prepare()
     { return myPool().prepare(); }
@@ -101,7 +101,7 @@ namespace zypp
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
-      return Repo( myPool().createRepo( name_r ) );
+      return Repo( myPool()._createRepo( name_r ) );
     }
 
     Repo Pool::reposFind( const std::string & name_r ) const
@@ -136,7 +136,8 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const Pool & obj )
     {
-      return str << "sat::pool(" << obj.serial() << "){"
+      return str << "sat::pool(" << obj.serial() << ")["
+          << obj.capacity() << "]{"
           << obj.reposSize() << "repos|"
 	  << obj.solvablesSize() << "slov}";
     }

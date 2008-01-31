@@ -35,8 +35,8 @@ namespace zypp
    * While comparison differs between \ref IdString::Null and \ref IdString::Empty
    * ( \c NULL and \c "" ), both are represented by an empty string \c "".
    */
-  class IdString: protected sat::detail::PoolMember,
-  private base::SafeBool<IdString>
+  class IdString : protected sat::detail::PoolMember,
+                   private base::SafeBool<IdString>
   {
     public:
       /** Default ctor, empty string. */

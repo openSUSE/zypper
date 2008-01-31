@@ -84,16 +84,22 @@ namespace zypp
         struct EraseFromPool;
 
       public:
+        /** \name Repo content manipulating methods.
+         * \todo maybe a separate Repo/Solvable content manip interface
+         * provided by the pool.
+         */
+        //@{
         /** Load \ref Solvables from a solv-file.
          * \throws Exception if loading the solv-file fails.
          */
         void addSolv( const Pathname & file_r );
 
-        /** Add a new empt \ref Solvable to this \ref Repo. */
-        detail::SolvableIdType addSolvable();
-
         /** Add \c count_r new empty \ref Solvable to this \ref Repo. */
         detail::SolvableIdType addSolvables( unsigned count_r );
+        /** \overload Add only one new \ref Solvable. */
+        detail::SolvableIdType addSolvable()
+        { return addSolvables( 1 ); }
+        //@}
 
       public:
         /** Expert backdoor. */

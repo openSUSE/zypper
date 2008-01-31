@@ -55,7 +55,8 @@ namespace zypp
     std::string Repo::name() const
     {
       NO_REPO_RETURN( std::string() );
-      if ( ! _repo->name ) return std::string();
+      if ( ! _repo->name )
+        return std::string();
       return _repo->name;
     }
 
@@ -93,7 +94,8 @@ namespace zypp
 
     void Repo::eraseFromPool()
     {
-      myPool().deleteRepo( _id );
+      NO_REPO_RETURN();
+      myPool()._deleteRepo( _repo );
       _id = detail::noRepoId;
     }
 
@@ -108,22 +110,13 @@ namespace zypp
         ZYPP_THROW( Exception( _("Can't read solv-file: ")+file_r.asString() ) );
       }
 
-      myPool().setDirty();
-      ::repo_add_solv( _repo, file );
-    }
-
-    detail::SolvableIdType Repo::addSolvable()
-    {
-      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
-      myPool().setDirty();
-      return ::repo_add_solvable( _repo );
+      myPool()._addSolv( _repo, file );
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )
     {
       NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
-      myPool().setDirty();
-      return ::repo_add_solvable_block( _repo, count_r );
+      return myPool()._addSolvables( _repo, count_r );
     }
 
     /******************************************************************

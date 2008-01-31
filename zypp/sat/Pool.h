@@ -54,13 +54,13 @@ namespace zypp
         {}
 
       public:
-        /** */
+        /** Internal array size for stats only. */
+        size_type capacity() const;
+
+        /** Housekeeping data serial number. */
         const SerialNumber & serial() const;
 
-        /** Invalidate housekeeping data (e.g. whatprovides). */
-        void setDirty();
-
-        /** Update housekeeping data (e.g. whatprovides). */
+        /** Update housekeeping data if necessary (e.g. whatprovides). */
         void prepare();
 
       public:

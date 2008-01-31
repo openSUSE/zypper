@@ -58,44 +58,48 @@ namespace zypp
           const SerialNumber & serial() const
           { return _serial; }
 
-          /** Invalidate housekeeping data (e.g. whatprovides).
-          */
-          void setDirty()
-          { _serial.setDirty(); }
 
           /** Update housekeeping data (e.g. whatprovides).
            * \todo actually requires a watcher.
           */
-          void prepare()
-          {
-            if ( _serial.dirty() )
-            {
-              // sat solver claims to handle this on it's own:
-              //::pool_createwhatprovides( _pool );
-              _serial.serial();
-            }
-          }
+          void prepare();
+
+        private:
+          /** Invalidate housekeeping data (e.g. whatprovides).
+          */
+          void setDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
 
         public:
           /** \name Actions invalidating housekeeping data.
-            */
+           *
+           * All methods expect valid arguments being passed.
+           */
           //@{
           /** Creating a new repo named \a name_r. */
-          RepoIdType createRepo( const std::string & name_r )
+          RepoIdType _createRepo( const std::string & name_r )
           {
-            setDirty();
+            setDirty(__FUNCTION__, name_r.c_str() );
             return ::repo_create( _pool, name_r.c_str() );
           }
 
           /** Creating a new repo named \a name_r. */
-          void deleteRepo( RepoIdType id_r )
+          void _deleteRepo( ::_Repo * repo_r )
           {
-            ::_Repo * todel( getRepo( id_r ) );
-            if ( todel )
-            {
-              setDirty();
-              ::repo_free( todel, /*reuseids*/false );
-            }
+            setDirty(__FUNCTION__, repo_r->name );
+            ::repo_free( repo_r, /*reuseids*/false );
+          }
+
+          /** Adding solv file to a repo. */
+          void _addSolv( ::_Repo * repo_r, FILE * file_r )
+          {
+            setDirty(__FUNCTION__, repo_r->name );
+            ::repo_add_solv( repo_r , file_r  );
+          }
+          /** Adding Solvables to a repo. */
+          detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r )
+          {
+            setDirty(__FUNCTION__, repo_r->name );
+            return ::repo_add_solvable_block( repo_r, count_r );
           }
           //@}
 
@@ -155,6 +159,7 @@ namespace zypp
           ::_Pool * _pool;
           /** Serial number. */
           SerialNumber _serial;
+
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -167,4 +172,5 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#define POOL_SETDIRTY
 #endif // ZYPP_SAT_DETAIL_POOLIMPL_H

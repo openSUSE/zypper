@@ -211,9 +211,10 @@ namespace zypp
     {
       if ( ! obj )
         return str << "sat::solvable()";
-#warning SWITCH TO IDENT INSTEAD OF KIND:NAME after tests
+
       return str << "sat::solvable(" << obj.id() << "|"
-          << obj.kind() << ':' << obj.name() << '-' << obj.edition() << '.' << obj.arch() << "){"
+          << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()
+          << '-' << obj.edition() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
     }
 

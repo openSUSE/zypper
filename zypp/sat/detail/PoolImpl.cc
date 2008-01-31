@@ -23,6 +23,9 @@
 
 using std::endl;
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::satpool"
+
 // ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -86,7 +89,7 @@ namespace zypp
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
         // set pool architecture
-        ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
+        //::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -97,6 +100,28 @@ namespace zypp
       PoolImpl::~PoolImpl()
       {
         ::pool_free( _pool );
+      }
+
+      void PoolImpl::setDirty( const char * a1, const char * a2, const char * a3 )
+      {
+        if ( a1 )
+        {
+          if      ( a3 ) DBG << a1 << " " << a2 << " " << a3 << endl;
+          else if ( a2 ) DBG << a1 << " " << a2 << endl;
+          else           DBG << a1 << endl;
+        }
+        _serial.setDirty();
+      }
+
+      void PoolImpl::prepare()
+      {
+        if ( _serial.dirty() )
+        {
+           // sat solver claims to handle this on it's own:
+           ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
+           ::pool_createwhatprovides( _pool );
+           _serial.serial();
+        }
       }
 
       /////////////////////////////////////////////////////////////////
