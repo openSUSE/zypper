@@ -223,7 +223,7 @@ namespace zypp
       unsigned int rhsID = 0;
       Vendor lhs = str::toLower (lVendor);
       Vendor rhs = str::toLower (rVendor);
-      
+
       if ( lhs == rhs )
 	  return true;
 
@@ -256,8 +256,7 @@ namespace zypp
 	      }
 	  }
       }
-      
-      return( lhsID && rhsID && lhsID == lhsID  );
+      return( lhsID && rhsID && lhsID == rhsID  );
   }
 
   /////////////////////////////////////////////////////////////////
