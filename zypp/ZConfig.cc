@@ -51,6 +51,7 @@ namespace zypp
 	// ZYPP_CONF might override /etc/zypp/zypp.conf
 
         const char *env_confpath = getenv( "ZYPP_CONF" );
+
         Pathname confpath( env_confpath ? env_confpath : "/etc/zypp/zypp.conf" );
         if ( PathInfo(confpath).isExist())
         {
@@ -106,19 +107,17 @@ namespace zypp
               {
                 download_use_patchrpm = str::strToBool( value, download_use_patchrpm );
              }
-              else if ( entry == "download.use_deltarpm" )
-              {
+             else if ( entry == "download.use_deltarpm" )
+             {
                 download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
-              }
+             }
+             else if ( entry == "vendordir" )
+             {
+                cfg_vendor_path = Pathname(value);
+             }
             }
-            else if ( section == "vendordir" )
-            {
-              cfg_vendor_path = Pathname(value);
-            }
-
           }
         }
-
       }
 
       ~Impl()

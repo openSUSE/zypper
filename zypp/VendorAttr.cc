@@ -107,7 +107,7 @@ namespace zypp
   VendorAttr::VendorAttr ()
   {
       vendorGroupCounter = 1; 
-
+      Pathname xxx = ZConfig::instance().repoCachePath();
       Pathname vendorPath (ZConfig::instance().vendorPath());
       try
       {
@@ -126,18 +126,24 @@ namespace zypp
       //checking if suse,opensuse has been defined. If not create entries
       if (_vendorMap.find("suse") != _vendorMap.end()) {
 	  if (_vendorMap.find("opensuse") == _vendorMap.end()) {
-	      _vendorMap["opensuse"] = ++vendorGroupCounter;
+	      _vendorMap["opensuse"] = vendorGroupCounter;
 	  }
       } else {
 	  if (_vendorMap.find("opensuse") == _vendorMap.end()) {
 	      // both are not available. Create one group with suse,opensuse
-	      _vendorMap["opensuse"] = ++vendorGroupCounter;
+	      _vendorMap["opensuse"] = vendorGroupCounter;
 	      _vendorMap["suse"] = vendorGroupCounter;	    
 	  } else {
-	      _vendorMap["suse"] = ++vendorGroupCounter;
+	      _vendorMap["suse"] = vendorGroupCounter;
 	  }
       }
-      
+
+      MIL << "Equivalent vendors:" << endl;
+      for (VendorMap::iterator it = _vendorMap.begin();
+	   it != _vendorMap.end();
+	   it ++) {
+	  MIL << "   " << it->first << " (group " << it->second << ")" << endl;
+      }      
   }
 
   bool VendorAttr::addVendorFile( const Pathname & filename ) const
@@ -179,13 +185,6 @@ namespace zypp
 	      }
 	  }
       }
-
-      MIL << "Equivalent vendors:" << endl;
-      for (VendorMap::iterator it = _vendorMap.begin();
-	   it != _vendorMap.end();
-	   it ++) {
-	  MIL << "   " << it->first << "(group " << it->second << ")" << endl;
-      }      
       
       return true;
   }
@@ -218,13 +217,15 @@ namespace zypp
   }
     
 
-  bool VendorAttr::equivalent( const Vendor & lhs, const Vendor & rhs ) const
+  bool VendorAttr::equivalent( const Vendor & lVendor, const Vendor & rVendor ) const
   {
-      if ( lhs == rhs )
-	  return true;
-
       unsigned int lhsID = 0;
       unsigned int rhsID = 0;
+      Vendor lhs = str::toLower (lVendor);
+      Vendor rhs = str::toLower (rVendor);
+      
+      if ( lhs == rhs )
+	  return true;
 
       if (_matchMap.find(lhs) != _matchMap.end()) {
 	  lhsID = _matchMap[lhs];
@@ -255,8 +256,8 @@ namespace zypp
 	      }
 	  }
       }
-   
-      return( lhsID == lhsID );
+      
+      return( lhsID && rhsID && lhsID == lhsID  );
   }
 
   /////////////////////////////////////////////////////////////////

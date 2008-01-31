@@ -44,7 +44,7 @@ class VendorAttr : private base::NonCopyable
      * equivalent vendor when updating. Replacing a package with one of a
      * different vendor usually must be confirmed by the user.
     */
-    bool equivalent( const Vendor & lhs, const Vendor & rhs ) const;
+    bool equivalent( const Vendor & lVendor, const Vendor & rVendor ) const;
 
   private:
     VendorAttr();

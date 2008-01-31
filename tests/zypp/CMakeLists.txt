@@ -65,6 +65,9 @@ TARGET_LINK_LIBRARIES( RepoInfo zypp boost_unit_test_framework )
 ADD_EXECUTABLE( ProgressData ProgressData_test.cc )
 TARGET_LINK_LIBRARIES( ProgressData zypp boost_unit_test_framework )
 
+ADD_EXECUTABLE(Vendor1 Vendor1.cc)
+TARGET_LINK_LIBRARIES(Vendor1 zypp boost_unit_test_framework )
+
 ADD_TEST(ArchTest ${CMAKE_CURRENT_BINARY_DIR}/Arch)
 ADD_TEST(UrlTest ${CMAKE_CURRENT_BINARY_DIR}/Url)
 ADD_TEST(Edition ${CMAKE_CURRENT_BINARY_DIR}/Edition)
@@ -83,3 +86,4 @@ ADD_TEST(RepoManagerTest ${CMAKE_CURRENT_BINARY_DIR}/RepoManager ${CMAKE_CURRENT
 ADD_TEST(RepoInfoTest ${CMAKE_CURRENT_BINARY_DIR}/RepoInfo ${CMAKE_CURRENT_SOURCE_DIR}/data/RepoInfo)
 ADD_TEST(FetcherTest ${CMAKE_CURRENT_BINARY_DIR}/Fetcher)
 ADD_TEST(ProgressData_test ${CMAKE_CURRENT_BINARY_DIR}/ProgressData)
+ADD_TEST(Vendor1Test ${CMAKE_CURRENT_BINARY_DIR}/Vendor1)
