@@ -142,7 +142,7 @@ SET( zypp_HEADERS
   ResKind.h
   ResFilters.h
   ResObject.h
-  ResObjectsh
+  ResObjects.h
   ResPool.h
   ResPoolProxy.h
   ResStatus.h
