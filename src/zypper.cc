@@ -92,6 +92,12 @@ int Zypper::main(int argc, char ** argv)
     MIL << "Caught exit request:" << endl << e.msg() << endl;
     return exitCode();
   }
+  
+  if (runningHelp())
+  {
+    safeDoCommand();
+    return exitCode();
+  }
 
   switch(command().toEnum())
   {
@@ -101,12 +107,7 @@ int Zypper::main(int argc, char ** argv)
     return exitCode();
 
   case ZypperCommand::NONE_e:
-  {
-    if (runningHelp())
-      return ZYPPER_EXIT_OK;
-    else
-      return ZYPPER_EXIT_ERR_SYNTAX;
-  }
+    return ZYPPER_EXIT_ERR_SYNTAX;
 
   default:
     safeDoCommand();
@@ -408,6 +409,21 @@ void Zypper::processGlobalOptions()
     {
       print_unknown_command_hint(*this);
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+    }
+  }
+  else if (command() == ZypperCommand::SHELL && optind < _argc)
+  {
+    string arg = _argv[optind++];
+    if (!arg.empty())
+    {
+      if (arg == "-h" || arg == "--help")
+        setRunningHelp(true);
+      else
+      {
+        report_too_many_arguments("shell\n");
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        ZYPP_THROW(ExitRequestException("help provided"));
+      }
     }
   }
 
@@ -1219,6 +1235,23 @@ void Zypper::processCommandOptions()
       "quit (exit, ^D)\n"
       "\n"
       "Quit the current zypper shell.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::SHELL_e:
+  {
+    static struct option quit_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = quit_options;
+    _command_help = _(
+      "shell\n"
+      "\n"
+      "Enter the zypper command shell.\n"
       "\n"
       "This command has no additional options.\n"
     );
@@ -2262,6 +2295,17 @@ void Zypper::doCommand()
       cout << _("This command only makes sense in the zypper shell.") << endl;
     else
       cout << "oops, you wanted to quit, didn't you?" << endl;
+
+    return;
+  }
+
+  else if (command() == ZypperCommand::SHELL)
+  {
+    if (!runningHelp())
+      WAR << "this command should not be reached when not running help."
+          " Printing the help anyway." << endl;
+
+    cout << _command_help;
 
     return;
   }
