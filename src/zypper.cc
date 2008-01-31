@@ -515,8 +515,6 @@ void Zypper::commandShell()
       setCommand(ZypperCommand(command_str));
       if (command() == ZypperCommand::SHELL_QUIT)
         break;
-      else if (command() == ZypperCommand::SHELL)
-        cout << _("You already are running zypper's shell.") << endl;
       else if (command() == ZypperCommand::NONE)
         print_unknown_command_hint(*this);
       else
@@ -2301,11 +2299,15 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::SHELL)
   {
-    if (!runningHelp())
-      WAR << "this command should not be reached when not running help."
-          " Printing the help anyway." << endl;
-
-    cout << _command_help;
+    if (runningHelp())
+      cout << _command_help;
+    else if (runningShell())
+      cout << _("You already are running zypper's shell.") << endl;
+    else
+    {
+      cerr << _("Unexpected program flow") << "." << endl;
+      report_a_bug(cerr);
+    }
 
     return;
   }
