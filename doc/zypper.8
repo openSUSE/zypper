@@ -458,6 +458,11 @@ at the end. You can specify this option multiple times.
 Do not read meta-data from repositories. This option will prevent loading of
 resolvables from repositories, thus making zypper work only with the installed
 resolvables (if \-\-disable\-system\-resolvables was not specified).
+.TP
+.I \-\-no\-refresh
+Do not auto-refresh repositories (ignore the autorefresh setting). Useful to save
+time when doing operations like search, if there is not a need to have
+a completely up to date meta-data.
 .LP
 Target Options:
 .TP

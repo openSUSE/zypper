@@ -1636,8 +1636,8 @@ void Zypper::doCommand()
     }
     
     if (globalOpts().no_refresh)
-      cout << format(_("The '%s' option has no effect here.")) % "--no-refresh"
-           << endl;
+      cout << format(_("The '%s' global option has no effect here."))
+        % "--no-refresh" << endl;
 
     refresh_repos(*this);
     return;
