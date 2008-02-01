@@ -365,8 +365,10 @@ static void do_init_repos(Zypper & zypper)
     RepoInfo repo(*it);
     MIL << "checking if to refresh " << repo.name() << endl;
 
-    //! \todo honor command line options/commands
-    bool do_refresh = repo.enabled() && repo.autorefresh();
+    bool do_refresh =
+      repo.enabled() &&
+      repo.autorefresh() &&
+      !zypper.globalOpts().no_refresh;
 
     if (do_refresh)
     {

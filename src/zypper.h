@@ -34,6 +34,7 @@ struct GlobalOptions
   non_interactive(false),
   no_gpg_checks(false),
   machine_readable(false),
+  no_refresh(false),
   root_dir("/")
   {}
 
@@ -56,6 +57,8 @@ struct GlobalOptions
   bool non_interactive;
   bool no_gpg_checks;
   bool machine_readable;
+  /** Whether to disable autorefresh. */
+  bool no_refresh;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
 };

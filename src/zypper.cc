@@ -141,6 +141,7 @@ void print_main_help(const Zypper & zypper)
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
+    "\t--no-refresh\tDo not refresh the repositories.\n"
   );
 
   static string help_global_target_options = _("\tTarget Options:\n"
@@ -230,9 +231,10 @@ void Zypper::processGlobalOptions()
     {"opt",                        optional_argument, 0, 'o'},
     // TARGET OPTIONS
     {"disable-system-resolvables", no_argument,       0,  0 },
-    // SOURCE OPTIONS
+    // REPO OPTIONS
     {"plus-repo",                  required_argument, 0, 'p'},
     {"disable-repositories",       no_argument,       0,  0 },
+    {"no-refresh",                 no_argument,       0,  0 },
     {0, 0, 0, 0}
   };
 
@@ -345,6 +347,13 @@ void Zypper::processGlobalOptions()
   else
   {
     MIL << "Repositories enabled" << endl;
+  }
+
+  if (gopts.count("no-refresh"))
+  {
+    _gopts.no_refresh = true;
+    cout_v << _("Autorefresh disabled.") << endl;
+    MIL << "Autorefresh disabled." << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
@@ -1625,6 +1634,10 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
+    
+    if (globalOpts().no_refresh)
+      cout << format(_("The '%s' option has no effect here.")) % "--no-refresh"
+           << endl;
 
     refresh_repos(*this);
     return;
