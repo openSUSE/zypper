@@ -105,6 +105,16 @@ namespace zypp
     return status;
   }
 
+  void RepoStatus::saveToCookieFile( const Pathname &cookiefile )
+  {
+    std::ofstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+    file << *(this);
+    file.close();
+  }
+
   RepoStatus::RepoStatus( const Pathname &path )
     : _pimpl( new Impl() )
   {
