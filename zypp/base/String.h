@@ -21,6 +21,74 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  /** Convenience \c char* constructible from \c std::string and \c char*,
+   *  it maps \c (char*)0 to an empty string.
+   *
+   * \code
+   * bool hasPrefix( const std::string & str_r, const std::string & prefix_r )
+   * { return( ::strncmp( str_r.c_str(), prefix_r.c_str(), prefix_r.size() ) == 0 ); }
+   * \endcode
+   *
+   * Called with a plain \c char* as argument, the \c std::string is created form
+   * for nothing. The implementation actually does not use the \c std::string.
+   *
+   * Best would be to implement \c hasPrefix for each combination of \c char*
+   * and \c std::string arguments:
+   *
+   * \code
+   * bool hasPrefix( const std::string & str_r, const std::string & prefix_r )
+   * { return( ::strncmp( str_r.c_str(), prefix_r.c_str(), prefix_r.size() ) == 0 ); }
+   *
+   * bool hasPrefix( const std::string & str_r, const char * prefix_r )
+   * { return( !prefix_r || ::strncmp( str_r.c_str(), prefix_r, ::strlen(prefix_r) ) == 0 ); }
+   *
+   * bool hasPrefix( const char * str_r, const std::string & prefix_r )
+   * { return( str_r ? ::strncmp( str_r, prefix_r.c_str(), prefix_r.size() ) == 0 : prefix_r.empty() ); }
+   *
+   * bool hasPrefix( const char * str_r, const char * prefix_r )
+   * { return( str && prefix_r ? ::strncmp( str_r, prefix_r, ::strlen(prefix_r) ) == 0
+   *                           : !((str_r && *str_r) || (prefix_r && *prefix_r)); }
+   * \endcode
+   *
+   * This is where \ref C_Str can help. Constructible from \c std::string and \c char*,
+   * it \e reduces the \c std::string to it's \c char*. At the same time it converts
+   * \c (char*)0 into an \c "" string.
+   *
+   * \code
+   * bool hasPrefix( const C_Str & str_r, const C_Str & prefix_r )
+   * { return( ::strncmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
+   * \endcode
+   */
+  class C_Str
+  {
+    public:
+      typedef std::string::size_type size_type;
+
+    public:
+      C_Str()                            : _val( 0 ),             _sze( 0 ) {}
+      C_Str( char * c_str_r )            : _val( c_str_r ),       _sze( std::string::npos ) {}
+      C_Str( const char * c_str_r )      : _val( c_str_r ),       _sze( std::string::npos ) {}
+      C_Str( const std::string & str_r ) : _val( str_r.c_str() ), _sze( str_r.size() ) {}
+
+    public:
+      bool      isNull()       const { return !_val; }
+      bool      empty()        const { return !(_val && *_val); }
+      size_type size()         const
+      {
+        if ( _sze == std::string::npos )
+        { _sze = _val ? ::strlen( _val ) : 0; }
+        return _sze;
+      };
+
+      operator const char *() const { return c_str(); }
+      const char * c_str()    const { return _val ? _val : ""; }
+
+    private:
+      const char *const _val;
+      mutable size_type _sze;
+  };
+
   ///////////////////////////////////////////////////////////////////
   /** String related utilities and \ref ZYPP_STR_REGEX.
    \see \ref ZYPP_STR_REGEX
@@ -165,25 +233,25 @@ namespace zypp
      * \endcode
     */
     template<typename _It>
-      _It strtonum( const std::string & str );
+      _It strtonum( const C_Str & str );
 
     template<>
-      inline short              strtonum( const std::string & str ) { return ::strtol  ( str.c_str(), NULL, 0 ); }
+      inline short              strtonum( const C_Str & str ) { return ::strtol  ( str, NULL, 0 ); }
     template<>
-      inline int                strtonum( const std::string & str ) { return ::strtol  ( str.c_str(), NULL, 0 ); }
+      inline int                strtonum( const C_Str & str ) { return ::strtol  ( str, NULL, 0 ); }
     template<>
-      inline long               strtonum( const std::string & str ) { return ::strtol  ( str.c_str(), NULL, 0 ); }
+      inline long               strtonum( const C_Str & str ) { return ::strtol  ( str, NULL, 0 ); }
     template<>
-      inline long long          strtonum( const std::string & str ) { return ::strtoll ( str.c_str(), NULL, 0 ); }
+      inline long long          strtonum( const C_Str & str ) { return ::strtoll ( str, NULL, 0 ); }
 
     template<>
-      inline unsigned short     strtonum( const std::string & str ) { return ::strtoul ( str.c_str(), NULL, 0 ); }
+      inline unsigned short     strtonum( const C_Str & str ) { return ::strtoul ( str, NULL, 0 ); }
     template<>
-      inline unsigned           strtonum( const std::string & str ) { return ::strtoul ( str.c_str(), NULL, 0 ); }
+      inline unsigned           strtonum( const C_Str & str ) { return ::strtoul ( str, NULL, 0 ); }
     template<>
-      inline unsigned long      strtonum( const std::string & str ) { return ::strtoul ( str.c_str(), NULL, 0 ); }
+      inline unsigned long      strtonum( const C_Str & str ) { return ::strtoul ( str, NULL, 0 ); }
     template<>
-      inline unsigned long long strtonum( const std::string & str ) { return ::strtoull( str.c_str(), NULL, 0 ); }
+      inline unsigned long long strtonum( const C_Str & str ) { return ::strtoull( str, NULL, 0 ); }
 
     /** String to integer type detemined 2nd function arg \a i.
      * \code
@@ -191,7 +259,7 @@ namespace zypp
      * \endcode
     */
     template<typename _It>
-      inline _It strtonum( const std::string & str, _It & i )
+      inline _It strtonum( const C_Str & str, _It & i )
       { return i = strtonum<_It>( str ); }
     //@}
 
@@ -200,16 +268,16 @@ namespace zypp
     */
     //@{
     /** Return \c true if str is <tt>1, true, yes, on</tt>. */
-    bool strToTrue( const std::string & str );
+    bool strToTrue( const C_Str & str );
 
     /** Return \c false if str is <tt>0, false, no, off</tt>. */
-    bool strToFalse( const std::string & str );
+    bool strToFalse( const C_Str & str );
 
     /** Parse \c str into a bool depending on the default value.
      * If the \c default is true, look for a legal \c false string.
      * If the \c default is false, look for a legal \c true string.
     */
-    inline bool strToBool( const std::string & str, bool default_r )
+    inline bool strToBool( const C_Str & str, bool default_r )
     { return( default_r ? strToFalse( str ) : strToTrue( str ) ); }
     //@}
 
@@ -226,25 +294,25 @@ namespace zypp
      *
     */
     template<class _OutputIterator>
-      unsigned split( const std::string & line_r,
-                      _OutputIterator     result_r,
-                      const std::string & sepchars_r = " \t" )
+      unsigned split( const C_Str &   line_r,
+                      _OutputIterator result_r,
+                      const C_Str &   sepchars_r = " \t" )
       {
-        const char * beg = line_r.c_str();
+        const char * beg = line_r;
         const char * cur = beg;
         // skip leading sepchars
-        while ( sepchars_r.find( *cur ) != std::string::npos )
+        while ( ::strchr( sepchars_r, *cur ) )
           ++cur;
         unsigned ret = 0;
         for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
           {
             // skip non sepchars
-            while( *cur && sepchars_r.find( *cur ) == std::string::npos )
+            while( *cur && !::strchr( sepchars_r, *cur ) )
               ++cur;
             // build string
             *result_r = std::string( beg, cur-beg );
             // skip sepchars
-            while ( cur != beg && sepchars_r.find( *cur ) != std::string::npos )
+            while ( cur != beg && ::strchr( sepchars_r, *cur ) )
               ++cur;
           }
         return ret;
@@ -257,7 +325,7 @@ namespace zypp
     /** Join strings using separator \a sep_r (defaults to BLANK). */
     template <class _Iterator>
       std::string join( _Iterator begin, _Iterator end,
-                        const std::string & sep_r = " " )
+                        const C_Str & sep_r = " " )
       {
         std::string res;
         for ( _Iterator iter = begin; iter != end; ++ iter )
@@ -272,7 +340,7 @@ namespace zypp
     /** Join strings using separator \a sep_r (defaults to BLANK). */
     template <class _Container>
       std::string join( const _Container & cont_r,
-                        const std::string & sep_r = " " )
+                        const C_Str & sep_r = " " )
       { return join( cont_r.begin(), cont_r.end(), sep_r ); }
     //@}
 
@@ -300,20 +368,12 @@ namespace zypp
 
     /** \name Case insensitive comparison. */
     //@{
-    inline int compareCI( const char * lhs, const char * rhs )
+    inline int compareCI( const C_Str & lhs, const C_Str & rhs )
     {
       if ( lhs == rhs )
         return 0;
-      if ( ! ( lhs && rhs ) )
-        return( lhs ? 1 : -1 );
       return ::strcasecmp( lhs, rhs );
     }
-    inline int compareCI( const std::string & lhs, const std::string & rhs )
-    { return compareCI( lhs.c_str(), rhs.c_str() ); }
-    inline int compareCI( const char * lhs, const std::string & rhs )
-    { return compareCI( lhs, rhs.c_str() ); }
-    inline int compareCI( const std::string & lhs, const char * rhs )
-    { return compareCI( lhs.c_str(), rhs ); }
     //@}
 
     ///////////////////////////////////////////////////////////////////
@@ -329,7 +389,7 @@ namespace zypp
       TRIM    = (L_TRIM|R_TRIM)
     };
 
-    std::string  trim( const std::string & s, const Trim trim_r = TRIM );
+    std::string trim( const std::string & s, const Trim trim_r = TRIM );
 
     inline std::string ltrim( const std::string & s )
     { return trim( s, L_TRIM ); }
@@ -361,13 +421,13 @@ namespace zypp
     /** \name String prefix handling.
      */
     //@{
-    /** Return whether \a str_r has prefix \a prefix_r. */
-    inline bool hasPrefix( const std::string & str_r, const std::string & prefix_r )
-    { return( str_r.substr( 0, prefix_r.size() ) == prefix_r ); }
+   /** Return whether \a str_r has prefix \a prefix_r. */
+    inline bool hasPrefix( const C_Str & str_r, const C_Str & prefix_r )
+    { return( ::strncmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
 
     /** Strip a \a prefix_r from \a str_r and return the resulting string. */
-    inline std::string stripPrefix( const std::string & str_r, const std::string & prefix_r )
-    { return( hasPrefix( str_r, prefix_r ) ? str_r.substr( prefix_r.size() ) : str_r ); }
+    inline std::string stripPrefix( const C_Str & str_r, const C_Str & prefix_r )
+    { return( hasPrefix( str_r, prefix_r ) ? str_r + prefix_r.size() : str_r.c_str() ); }
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace str
