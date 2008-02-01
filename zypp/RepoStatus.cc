@@ -105,7 +105,7 @@ namespace zypp
     return status;
   }
 
-  void RepoStatus::saveToCookieFile( const Pathname &cookiefile )
+  void RepoStatus::saveToCookieFile( const Pathname &cookiefile ) const
   {
     std::ofstream file(cookiefile.c_str());
     if (!file) {

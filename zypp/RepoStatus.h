@@ -52,7 +52,7 @@ namespace zypp
      * save the status information to a cookie file
      * \throws Exception if the file can't be saved
      */
-    void saveToCookieFile( const Pathname &path );
+    void saveToCookieFile( const Pathname &path ) const;
 
     /**
      * Checksum of the repository.
