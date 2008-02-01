@@ -873,28 +873,11 @@ namespace zypp
 
   RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
   {
-    RepoStatus status;
+    
     Pathname base = _pimpl->options.repoCachePath + info.alias();
-    Pathname solvfile = base.extend(".solv");
     Pathname cookiefile = base.extend(".cookie");
 
-    std::ifstream file(cookiefile.c_str());
-    if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
-    }
-
-    std::string buffer;
-    while(file && !file.eof()) {
-      getline(file, buffer);
-    }
-
-    std::vector<std::string> words;
-    if ( str::split( buffer, std::back_inserter(words) ) != 2 )
-      ZYPP_THROW (Exception( "corrupt file " + cookiefile.asString() ) );
-
-    status.setTimestamp(Date(str::strtonum<time_t>(words[1])));
-    status.setChecksum(words[0]);
-    return status;
+    return RepoStatus::fromCookieFile(cookiefile);
   }
 
   void RepoManager::setCacheStatus( const string &alias, const RepoStatus &status )

@@ -11,7 +11,11 @@
 */
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
 //#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/PathInfo.h"
 
@@ -77,6 +81,29 @@ namespace zypp
   //
   RepoStatus::~RepoStatus()
   {}
+
+  RepoStatus RepoStatus::fromCookieFile( const Pathname &cookiefile )
+  {
+    RepoStatus status;
+    
+    std::ifstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+
+    std::string buffer;
+    while(file && !file.eof()) {
+      getline(file, buffer);
+    }
+
+    std::vector<std::string> words;
+    if ( str::split( buffer, std::back_inserter(words) ) != 2 )
+      ZYPP_THROW (Exception( "bad cookie file " + cookiefile.asString() ) );
+
+    status.setTimestamp(Date(str::strtonum<time_t>(words[1])));
+    status.setChecksum(words[0]);
+    return status;
+  }
 
   RepoStatus::RepoStatus( const Pathname &path )
     : _pimpl( new Impl() )
