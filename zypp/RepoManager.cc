@@ -885,12 +885,7 @@ namespace zypp
     Pathname base = _pimpl->options.repoCachePath + alias;
     Pathname cookiefile = base.extend(".cookie");
 
-    std::ofstream file(cookiefile.c_str());
-    if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
-    }
-    file << status;
-    file.close();
+    status.saveToCookieFile(cookiefile);
   }
 
   map<data::RecordId, Repo *> repo2solv;
