@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Feb  1 18:25:17 CET 2008 - jkupec@suse.cz
+
+- --no-refresh global option added (bnc #356741)
+- fixed renaming to an existing alias (bnc #228216)
+- r8436
+- 0.9.6
+
+-------------------------------------------------------------------
 Thu Jan 31 13:17:57 CET 2008 - jkupec@suse.cz
 
 - fixed zypper help shell (bnc #357262)
