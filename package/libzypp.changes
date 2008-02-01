@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  1 17:45:07 CET 2008 - jkupec@suse.cz
+
+- fixed renaming a repo to an existing one (bnc #228216)
+- revision 8431
+
+-------------------------------------------------------------------
 Thu Jan 24 18:26:47 CET 2008 - jkupec@suse.cz
 
 - read .curlrc more robustly to obtain user-proxy (#330351)
