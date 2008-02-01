@@ -396,15 +396,15 @@ void SolvStore::appendStringAttribute( Id resolvable_id,
                                        const std::string &value )
 {
   // don't bother with writing if the string is empty
-  if (value.empty()) return;
-  add_attr_string (_pimpl->_attr, resolvable_id, attrid, value.c_str());
+  //if (value.empty()) return;
+  //add_attr_string (_pimpl->_attr, resolvable_id, attrid, value.c_str());
 }
 
 void SolvStore::appendNumericAttribute( Id resolvable_id,
                                         Id attrid,
                                         int value )
 {
-  add_attr_int (_pimpl->_attr, resolvable_id, attrid, value);
+  //add_attr_int (_pimpl->_attr, resolvable_id, attrid, value);
 }
 
 RecordId SolvStore::consumeChangelog( const data::RecordId &resolvable_id,
@@ -449,21 +449,8 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
 Id SolvStore::appendResolvable( const std::string & repository_id,
                                 const data::Resolvable_Ptr &res )
 {
-<<<<<<< HEAD:zypp/cache/SolvStore.cc
-  //Id
-  _Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(_pimpl->_repo));
-=======
-  Repo *repo;
-  map<string, Repo*>::const_iterator it = _pimpl->_repoid2repo.find(repository_id);
-  if ( it == _pimpl->_repoid2repo.end() )
-  {
-    // throw
-  }
-  repo = it->second;
-
-  Id sid = repo_add_solvable(repo);
+  Id sid = repo_add_solvable(_pimpl->_repo);
   _Solvable *s = pool_id2solvable(_pimpl->_pool, sid);
->>>>>>> More work in attributes:zypp/cache/SolvStore.cc
   s->evr = str2id(_pimpl->_pool, res->edition.c_str(), 1);
   //s->provides = adddep(pool, pd, s->provides, atts, 0);
 //
