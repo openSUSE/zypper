@@ -1109,19 +1109,25 @@ void rename_repo(Zypper & zypper,
     repo.setAlias(newalias);
     manager.modifyRepository(alias, repo);
 
-    cout << format(_("Repository %s renamed to %s")) % alias % repo.alias() << endl;
-    MIL << format("Repository %s renamed to %s") % alias % repo.alias() << endl;
+    cout << format(_("Repository '%s' renamed to '%s'")) % alias % repo.alias() << endl;
+    MIL << format("Repository '%s' renamed to '%s'") % alias % repo.alias() << endl;
   }
   catch (const RepoNotFoundException & ex)
   {
-    cerr << format(_("Repository %s not found.")) % alias << endl;
+    cerr << format(_("Repository '%s' not found.")) % alias << endl;
     ERR << "Repo " << alias << " not found" << endl;
+  }
+  catch (const RepoAlreadyExistsException & ex)
+  {
+    cerr << format(_(
+        "Repository named '%s' already exists. Please use another alias."))
+      % newalias << endl;
   }
   catch (const Exception & ex)
   {
     cerr << _("Error while modifying the repository:") << endl;
     cerr << ex.asUserString() << endl;
-    cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
+    cerr << format(_("Leaving repository '%s' unchanged.")) % alias << endl;
 
     ERR << "Error while modifying the repository:" << ex.asUserString() << endl;
   }
