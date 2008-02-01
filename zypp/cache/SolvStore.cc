@@ -142,7 +142,6 @@ struct SolvStore::Impl
   Id _attr_package_time;
 };
 
-
 SolvStore::SolvStore( const Pathname &solvdir, const string &alias )
   : _pimpl( new Impl(solvdir, alias) )
 {
@@ -370,6 +369,44 @@ RecordId SolvStore::consumeProduct( const data::Product_Ptr & product )
   return 0;
 }
 
+void SolvStore::appendTranslatedStringAttribute( Id resolvable_id,
+                                                 const std::string &attrname,
+                                                 const TranslatedText &text )
+{
+  set<Locale> locales = text.locales();
+  for ( set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it )
+  {
+    appendStringAttributeTranslation( resolvable_id, *it, attrname, text.text(*it) );
+  }
+}
+
+
+void SolvStore::appendStringAttributeTranslation( Id resolvable_id,
+                                                  const Locale &locale,
+                                                  const std::string &attrname,
+                                                  const std::string &text )
+{
+  // don't bother with writing if the string is empty
+  if (text.empty()) return;
+  appendStringAttribute( resolvable_id, str2id(_pimpl->_pool, (attrname + "." + locale.code()).c_str(), 1), text );
+}
+
+void SolvStore::appendStringAttribute( Id resolvable_id,
+                                       Id attrid,
+                                       const std::string &value )
+{
+  // don't bother with writing if the string is empty
+  if (value.empty()) return;
+  add_attr_string (_pimpl->_attr, resolvable_id, attrid, value.c_str());
+}
+
+void SolvStore::appendNumericAttribute( Id resolvable_id,
+                                        Id attrid,
+                                        int value )
+{
+  add_attr_int (_pimpl->_attr, resolvable_id, attrid, value);
+}
+
 RecordId SolvStore::consumeChangelog( const data::RecordId &resolvable_id,
                                    const Changelog & changelog )
 {
@@ -409,13 +446,26 @@ void SolvStore::updatePackageLang( const data::RecordId & resolvable_id,
 //   appendTranslatedStringAttribute( resolvable_id, attrResObjectDelnotify(),        data_r->delnotify );
 }
 
-_Solvable* SolvStore::appendResolvable( const std::string & repository_id,
-                                          const data::Resolvable_Ptr &res )
+Id SolvStore::appendResolvable( const std::string & repository_id,
+                                const data::Resolvable_Ptr &res )
 {
+<<<<<<< HEAD:zypp/cache/SolvStore.cc
   //Id
   _Solvable *s = pool_id2solvable(_pimpl->_pool, repo_add_solvable(_pimpl->_repo));
+=======
+  Repo *repo;
+  map<string, Repo*>::const_iterator it = _pimpl->_repoid2repo.find(repository_id);
+  if ( it == _pimpl->_repoid2repo.end() )
+  {
+    // throw
+  }
+  repo = it->second;
+
+  Id sid = repo_add_solvable(repo);
+  _Solvable *s = pool_id2solvable(_pimpl->_pool, sid);
+>>>>>>> More work in attributes:zypp/cache/SolvStore.cc
   s->evr = str2id(_pimpl->_pool, res->edition.c_str(), 1);
-//   s->provides = adddep(pool, pd, s->provides, atts, 0);
+  //s->provides = adddep(pool, pd, s->provides, atts, 0);
 //
 //   s->name = str2id(pool, nvra.name.c_str(), 1);
 //   s->arch = str2id(pool, nvra.arch.c_str(), 1);
@@ -424,7 +474,7 @@ _Solvable* SolvStore::appendResolvable( const std::string & repository_id,
 //   if (!s->arch)
 //     s->arch = ARCH_NOARCH;
 
-  return s;
+  return sid;
 }
 
 

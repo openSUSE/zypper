@@ -226,8 +226,8 @@ namespace zypp
        * other properties.
        *
        */
-       _Solvable* appendResolvable( const std::string &repo_id,
-                                       const data::Resolvable_Ptr &res );
+       Id appendResolvable( const std::string &repo_id,
+                            const data::Resolvable_Ptr &res );
 
       /**
        * Insert patch RPM data into <tt>patch_packages</tt> table.
@@ -277,6 +277,22 @@ namespace zypp
 
       //bool isCached( const std::string &alias );
 
+    private:
+
+      void appendTranslatedStringAttribute( Id resolvable_id,
+                                            const std::string &attrname,
+                                            const TranslatedText &text );
+      void appendStringAttributeTranslation( Id resolvable_id,
+                                             const Locale &locale,
+                                             const std::string &attrname,
+                                             const std::string &text );
+      void appendStringAttribute( Id resolvable_id,
+                                  Id attrid,
+                                  const std::string &value );
+
+      void appendNumericAttribute( Id resolvable_id,
+                                   Id attrid,
+                                   int value );
     private:
       /** Implementation. */
       class Impl;
