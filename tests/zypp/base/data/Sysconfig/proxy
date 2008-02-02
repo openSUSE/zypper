@@ -1,0 +1,51 @@
+## Path:	Network/Proxy
+## Description:	
+## Type:	yesno
+## Default:	no
+## Config:      kde,profiles
+#
+# Enable a generation of the proxy settings to the profile.
+# This setting allows to turn the proxy on and off while
+# preserving the particular proxy setup.
+# 
+PROXY_ENABLED="no"
+
+## Type:	string
+## Default:	""
+#
+# Some programs (e.g. lynx, arena and wget) support proxies, if set in
+# the environment.  SuSEconfig can add these environment variables to
+# /etc/SuSEconfig/* (sourced by /etc/profile etc.) -
+# See http://portal.suse.com/sdb/en/1998/01/lynx_proxy.html for more details.
+# Example: HTTP_PROXY="http://proxy.provider.de:3128/"
+HTTP_PROXY=""
+
+## Type:	string
+## Default:	""
+#
+# Some programs (e.g. lynx, arena and wget) support proxies, if set in
+# the environment.  SuSEconfig can add these environment variables to
+# /etc/SuSEconfig/* (sourced by /etc/profile etc.) -
+# this setting is for https connections
+HTTPS_PROXY=""
+
+## Type:	string
+## Default:	""
+#
+# Example: FTP_PROXY="http://proxy.provider.de:3128/"
+#
+FTP_PROXY=""
+
+## Type:	string
+## Default:	""
+#
+# Example: GOPHER_PROXY="http://proxy.provider.de:3128/"
+#
+GOPHER_PROXY=""
+
+## Type:	string(localhost)
+## Default:	localhost
+#
+# Example: NO_PROXY="www.me.de, do.main, localhost"
+#
+NO_PROXY="localhost, 127.0.0.1"

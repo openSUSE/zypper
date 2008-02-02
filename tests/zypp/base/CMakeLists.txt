@@ -1,0 +1,5 @@
+FOREACH(  loop_var Sysconfig )
+   ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
+   TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp boost_unit_test_framework )
+   ADD_TEST( ${loop_var}_test ${CMAKE_CURRENT_BINARY_DIR}/${loop_var}_test)
+ENDFOREACH( loop_var )

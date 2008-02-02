@@ -11,88 +11,93 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql )
 
 SET( zypp_SRCS
+  Arch.cc
   Atom.cc
   ByteCount.cc
+  Capabilities.cc
+  Capability.cc
   CapMatch.cc
+  Changelog.cc
   CheckSum.cc
+  CountryCode.cc
   Date.cc
   Dep.cc
   Dependencies.cc
+  Digest.cc
+  DiskUsage.cc
+  DiskUsageCounter.cc
+  dummy.cc
   Edition.cc
+  ExternalProgram.cc
+  Fetcher.cc
+  FileChecker.cc
+  IdString.cc
+  KeyRing.cc
   Language.cc
-  NVR.cc
+  LanguageCode.cc
+  Locale.cc
+  Locks.cc
+  MediaProducts.cc
+  MediaSetAccess.cc
+  Message.cc
+  NameKindProxy.cc
   NVRA.cc
   NVRAD.cc
+  NVR.cc
+  OnMediaLocation.cc
+  Package.cc
+  Patch.cc
+  PathInfo.cc
+  Pathname.cc
+  Pattern.cc
+  PoolItem.cc
+  ProblemSolution.cc
+  Product.cc
+  ProgressData.cc
+  ProvideFilePolicy.cc
+  PublicKey.cc
   Range.cc
   Rel.cc
+  RepoInfo.cc
+  RepoManager.cc
+  Repository.cc
+  RepoStatus.cc
+  ResKind.cc
   ResObject.cc
   Resolvable.cc
-  ResStatus.cc
-  ResStore.cc
-  PoolItem.cc
-  ResPool.cc
-  NameKindProxy.cc
-  ResPoolProxy.cc
   Resolver.cc
   ResolverProblem.cc
-  ProblemSolution.cc
-  Package.cc
-  Pathname.cc
-  ProgressData.cc
+  ResPool.cc
+  ResPoolProxy.cc
+  ResStatus.cc
+  ResStore.cc
+  Script.cc
+  Selection.cc
+  Signature.cc
   SrcPackage.cc
   SysContent.cc
   Target.cc
-  Selection.cc
-  Pattern.cc
-  Message.cc
-  Script.cc
-  Patch.cc
-  Product.cc
-  Changelog.cc
-  ExternalProgram.cc
-  PathInfo.cc
-  Digest.cc
-  Url.cc
   TmpPath.cc
-  DiskUsage.cc
-  DiskUsageCounter.cc
-  VendorAttr.cc
+  TranslatedText.cc
   UpgradeStatistics.cc
+  Url.cc
+  VendorAttr.cc
+  ZConfig.cc
   ZYpp.cc
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
-  TranslatedText.cc
   ZYppFactory.cc
-  PublicKey.cc
-  Signature.cc
-  KeyRing.cc
-  MediaSetAccess.cc
-  ProvideFilePolicy.cc
-  OnMediaLocation.cc
-  Fetcher.cc
-  FileChecker.cc
-  Repository.cc
-  RepoInfo.cc
-  RepoStatus.cc
-  RepoManager.cc
-  MediaProducts.cc
-  Locks.cc
-  ResKind.cc
-  ZConfig.cc
-  Arch.cc
-  LanguageCode.cc
-  CountryCode.cc
-  Locale.cc
 )
 
 SET( zypp_HEADERS
-  ZConfig.h
   Arch.h
   Atom.h
   AutoDispose.h
   Bit.h
   ByteCount.h
   Callback.h
+  Capabilities.h
+  Capability.h
   CapAndItem.h
   CapFilters.h
   CapMatch.h
@@ -101,56 +106,65 @@ SET( zypp_HEADERS
   CheckSum.h
   CountryCode.h
   Date.h
-  Dep.h
   Dependencies.h
+  Dep.h
   Digest.h
-  DiskUsage.h
   DiskUsageCounter.h
+  DiskUsage.h
   Edition.h
   ExternalProgram.h
   Fetcher.h
-  KVMap.h
+  FileChecker.h
+  IdString.h
+  IdStringType.h
   KeyRing.h
-  Language.h
+  KVMap.h
   LanguageCode.h
+  Language.h
   Locale.h
+  Locks.h
   ManagedFile.h
+  MediaProducts.h
   MediaSetAccess.h
   Message.h
-  NVR.h
-  NVRA.h
-  NVRAD.h
   NameKindProxy.h
   NeedAType.h
+  NVRAD.h
+  NVRA.h
+  NVR.h
   OnMediaLocation.h
   Package.h
   PackageKeyword.h
   Patch.h
   PathInfo.h
   Pathname.h
-  ProgressData.h
   Pattern.h
   PoolItem.h
   ProblemSolution.h
   ProblemTypes.h
   Product.h
+  ProgressData.h
   ProvideFilePolicy.h
   PublicKey.h
   Range.h
-  Rel.h
   RelCompare.h
-  ResKind.h
+  Rel.h
+  RepoInfo.h
+  RepoManager.h
+  Repository.h
+  RepoStatus.h
   ResFilters.h
+  ResKind.h
   ResObject.h
   ResObjects.h
+  Resolvable.h
+  Resolver.h
+  ResolverProblem.h
   ResPool.h
   ResPoolProxy.h
   ResStatus.h
   ResStore.h
   ResTraits.h
-  Resolvable.h
-  Resolver.h
-  ResolverProblem.h
   Script.h
   Selection.h
   Signature.h
@@ -163,19 +177,13 @@ SET( zypp_HEADERS
   UpgradeStatistics.h
   Url.h
   VendorAttr.h
-  ZYpp.h
+  ZConfig.h
   ZYppCallbacks.h
   ZYppCommit.h
   ZYppCommitPolicy.h
   ZYppCommitResult.h
   ZYppFactory.h
-  FileChecker.h
-  Repository.h
-  RepoInfo.h
-  RepoStatus.h
-  RepoManager.h
-  MediaProducts.h
-  Locks.h
+  ZYpp.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -530,26 +538,16 @@ INSTALL(  FILES
 )
 
 SET( zypp_sat_SRCS
-  sat/detail/PoolImpl.cc
   sat/Pool.cc
   sat/Repo.cc
   sat/Solvable.cc
-  IdString.cc
-  Capability.cc
-  Capabilities.cc
   sat/SATResolver.cc
 )
 
 SET( zypp_sat_HEADERS
-  sat/detail/PoolMember.h
-  sat/detail/PoolImpl.h
   sat/Pool.h
   sat/Repo.h
   sat/Solvable.h
-  IdString.h
-  IdStringType.h
-  Capability.h
-  Capabilities.h
   sat/SATResolver.h
 )
 
@@ -557,6 +555,21 @@ INSTALL(  FILES
   ${zypp_sat_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat
 )
+
+SET( zypp_sat_detail_SRCS
+  sat/detail/PoolImpl.cc
+)
+
+SET( zypp_sat_detail_HEADERS
+  sat/detail/PoolMember.h
+  sat/detail/PoolImpl.h
+)
+
+INSTALL(  FILES
+  ${zypp_sat_detail_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat/detail
+)
+
 
 SET( zypp_target_SRCS
   target/CommitLog.cc
@@ -878,6 +891,7 @@ ${zypp_thread_SRCS}
 ${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_sat_SRCS}
+${zypp_sat_detail_SRCS}
 ${zypp_base_SRCS}
 )
 
@@ -900,6 +914,7 @@ ${zypp_media_proxyinfo_HEADERS}
 ${zypp_base_HEADERS}
 ${zypp_solver_detail_HEADERS}
 ${zypp_sat_HEADERS}
+${zypp_sat_detail_HEADERS}
 ${zypp_target_store_HEADERS}
 ${zypp_url_HEADERS}
 ${zypp_HEADERS}

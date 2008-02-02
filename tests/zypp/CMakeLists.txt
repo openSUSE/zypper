@@ -1,6 +1,8 @@
 # source:     ${loop_var}_test.cc
 # executable: ${loop_var}_test
 # test:       ${loop_var}_test
+ADD_SUBDIRECTORY(base)
+
 FOREACH( loop_var ResKind)
    ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
    TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp boost_unit_test_framework )
