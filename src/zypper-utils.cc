@@ -97,8 +97,8 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
     return _PL("language", "languages", count);
   if (kind == ResTraits<Atom>::kind)
     return _PL("atom", "atoms", count);
-  if (kind == ResTraits<SystemResObject>::kind)
-    return _PL("system", "systems", count);
+//   if (kind == ResTraits<SystemResObject>::kind)
+//     return _PL("system", "systems", count);
   if (kind == ResTraits<SrcPackage>::kind)
     return _PL("srcpackage", "srcpackages", count);
   // default

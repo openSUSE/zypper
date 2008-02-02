@@ -19,7 +19,7 @@
 
 #include "zypp/RepoInfo.h"
 
-#include "zypp/CapFactory.h"
+//#include "zypp/CapFactory.h"
 
 #include "zypp/target/store/xml_escape_parser.hpp"
 
@@ -30,7 +30,7 @@
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
 
-using namespace zypp::detail;
+//using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
@@ -91,8 +91,8 @@ ResObject::Kind string_to_kind (const string &skind)
     return ResTraits<Language>::kind;
   if (lskind == "atom")
     return ResTraits<Atom>::kind;
-  if (lskind == "system")
-    return ResTraits<SystemResObject>::kind;
+//   if (lskind == "system")
+//     return ResTraits<SystemResObject>::kind;
   if (lskind == "srcpackage")
     return ResTraits<SrcPackage>::kind;
   // not recognized
@@ -258,8 +258,7 @@ Capability safe_parse_cap (const Zypper & zypper,
         }
       }
     }
-
-    cap = CapFactory().parse (kind, new_capstr);
+    cap = Capability( new_capstr.c_str(), kind );
   }
   catch (const Exception& e) {
     ZYPP_CAUGHT(e);
@@ -397,7 +396,7 @@ void mark_by_capability (const Zypper & zypper,
 {
   Capability cap = safe_parse_cap (zypper, kind, capstr);
 
-  if (cap != Capability::noCap) {
+  if (cap.empty()) {
     cout_vv << "Capability: " << cap << endl;
 
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
@@ -436,18 +435,19 @@ void remove_selections(Zypper & zypper)
   DBG << "Removing user addRequire() addConflict()" << endl;
 
   Resolver_Ptr solver = God->resolver();
-  CapSet capSet = solver->getConflict();
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-  {
-    DBG << "removing conflict: " << (*it) << endl;
-    solver->removeConflict(*it);
-  }
-  capSet = solver->getRequire();
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-  {
-    DBG << "removing require: " << (*it) << endl;
-    solver->removeRequire(*it);
-  }
+  // FIXME port this
+//   CapSet capSet = solver->getConflict();
+//   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+//   {
+//     DBG << "removing conflict: " << (*it) << endl;
+//     solver->removeConflict(*it);
+//   }
+//   capSet = solver->getRequire();
+//   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+//   {
+//     DBG << "removing require: " << (*it) << endl;
+//     solver->removeRequire(*it);
+//   }
 
   MIL << "DONE" << endl;
 }
@@ -884,7 +884,7 @@ void establish ()
   int locks = God->applyLocks();
   cout_v <<  format(_("%s items locked")) % locks << endl;
   cout_v << _("Establishing status of aggregates") << endl;
-  God->resolver()->establishPool();
+  //God->resolver()->establishPool();
   dump_pool ();
 }
 
@@ -1370,8 +1370,7 @@ bool require_item_update (const PoolItem& pi) {
 
   // require anything greater than the installed version
   try {
-    Capability cap;
-    cap = CapFactory().parse( installed->kind(), installed->name(), Rel::GT, installed->edition() );
+    Capability  cap( installed->name(), Rel::GT, installed->edition(), installed->kind() );
     resolver->addRequire( cap );
   }
   catch (const Exception& e) {

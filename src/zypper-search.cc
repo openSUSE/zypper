@@ -233,16 +233,17 @@ void ZyppSearch::cacheInstalled() {
 
   cout_v << _("Pre-caching installed resolvables matching given search criteria... ") << endl;
 
-  ResStore tgt_resolvables(_zypp->target()->resolvables());
+  _zypp->target()->load();
+  //ResStore tgt_resolvables(_zypp->target()->resolvables());
 
-  _zypp->addResolvables(tgt_resolvables, true /*installed*/);
+  //_zypp->addResolvables(tgt_resolvables, true /*installed*/);
 
   invokeOnEachSearched( Match( _reg, _options.searchDescriptions()),
     functorRef<bool,const zypp::PoolItem &>(_icache), functorRef<bool, const data::RecordId &, data::ResObject_Ptr>(_icache)
   );
 
-  cout_v << _icache.size() << _(" out of (") <<  tgt_resolvables.size() << ")"  
-    << _("cached.") << endl;
+  //cout_v << _icache.size() << _(" out of (") <<  tgt_resolvables.size() << ")"  
+  //  << _("cached.") << endl;
 }
 
 /** PUBLIC

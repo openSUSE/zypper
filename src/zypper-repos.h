@@ -89,33 +89,22 @@ void modify_repo(Zypper & zypper, const std::string & alias);
 
 /**
  * Load both repository and target resolvables.
- * 
- * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
- *        <tt>false</tt> they will be stored in \ref gData.repo_resolvalbes
- *        and \ref gData.target_resolvables (global ResStore vector).
- * 
+ *
  * \see load_repo_resolvables(bool)
  * \see load_target_resolvables(bool)
  */
-void cond_load_resolvables(Zypper & zypper, bool to_pool = true);
+void cond_load_resolvables(Zypper & zypper);
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
  * 
- * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
- *        <tt>false</tt> they will be stored \ref gData.target_resolvables
- *        (global ResStore variable).
  */
-void load_target_resolvables(Zypper & zypper, bool to_pool = true);
+void load_target_resolvables(Zypper & zypper);
 
 /**
- * Reads resolvables from the repository sqlite cache. 
- * 
- * \param to_pool If <tt>true</tt>, the resolvables are added to the pool, if
- *        <tt>false</tt> they will be stored in \ref gData.repo_resolvables
- *        (global ResStore vector).
+ * Reads resolvables from the repository solv cache. 
  */
-void load_repo_resolvables(Zypper & zypper, bool to_pool = true);
+void load_repo_resolvables(Zypper & zypper);
 
 
 /**

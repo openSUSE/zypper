@@ -1214,7 +1214,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 
 // ---------------------------------------------------------------------------
 
-void cond_load_resolvables(Zypper & zypper, bool to_pool)
+void cond_load_resolvables(Zypper & zypper)
 {
   static bool done = false;
   // don't call this fuction more than once for a single ZYpp instance
@@ -1224,8 +1224,8 @@ void cond_load_resolvables(Zypper & zypper, bool to_pool)
 
   MIL << "Going to load resolvables" << endl;
 
-  load_repo_resolvables(zypper, to_pool);
-  if (!zypper.globalOpts().disable_system_resolvables && to_pool)
+  load_repo_resolvables(zypper);
+  if (!zypper.globalOpts().disable_system_resolvables)
     load_target_resolvables(zypper);
 
   done = true;
@@ -1234,7 +1234,7 @@ void cond_load_resolvables(Zypper & zypper, bool to_pool)
 
 // ---------------------------------------------------------------------------
 
-void load_repo_resolvables(Zypper & zypper, bool to_pool)
+void load_repo_resolvables(Zypper & zypper)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
 
@@ -1276,11 +1276,6 @@ void load_repo_resolvables(Zypper & zypper, bool to_pool)
       Repository repository(manager.createFromCache(repo));
       ResStore store = repository.resolvables();
       cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
-
-      if (to_pool)
-        God->addResolvables(store);
-      else
-        gData.repo_resolvables.insert(store.begin(), store.end());
     }
     catch (const Exception & e)
     {
@@ -1296,25 +1291,25 @@ void load_repo_resolvables(Zypper & zypper, bool to_pool)
 
 // ---------------------------------------------------------------------------
 
-void load_target_resolvables(Zypper & zypper, bool to_pool)
+void load_target_resolvables(Zypper & zypper)
 {
   if (!zypper.globalOpts().machine_readable)
     cout_n << _("Reading RPM database...");
   MIL << "Going to read RPM database" << endl;
 
-  ResStore tgt_resolvables(God->target()->resolvables());
+  God->target()->load();
 
   if (!zypper.globalOpts().machine_readable)
   {
-    cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
+    //cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
     cout_n << endl;
   }
-  DBG << tgt_resolvables.size() << " resolvables read";
+  //DBG << tgt_resolvables.size() << " resolvables read";
 
-  if (to_pool)
-    God->addResolvables(tgt_resolvables, true /*installed*/);
-  else
-    gData.target_resolvables = tgt_resolvables;
+  //if (to_pool)
+  //  God->addResolvables(tgt_resolvables, true /*installed*/);
+  //else
+  //  gData.target_resolvables = tgt_resolvables;
 }
 
 // ---------------------------------------------------------------------------

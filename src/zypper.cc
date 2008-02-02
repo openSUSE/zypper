@@ -44,7 +44,7 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::detail;
+//using namespace zypp::detail;
 using namespace boost;
 
 ZYpp::Ptr God = NULL;
@@ -1858,7 +1858,7 @@ void Zypper::doCommand()
 
     cond_init_target(*this);
     // load only repo resolvables, we don't need the installed ones
-    load_repo_resolvables(*this, false /* don't load to pool */);
+    load_repo_resolvables(*this);
 
     setExitCode(source_install(_arguments));
     return;
