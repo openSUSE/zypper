@@ -69,6 +69,8 @@ namespace zypp
       /** Null implementation */
       static TargetImpl_Ptr nullimpl();
 
+      void load();
+
     public:
 
       /** All resolvables in the target. */

@@ -58,6 +58,11 @@ namespace zypp
     /** All resolvables provided by the target. */
     const ResStore & resolvables();
     
+    /**
+     * load resolvables into the pool
+     */
+    void load();
+
     /** 
      * reload the target in future calls if
      * needed.

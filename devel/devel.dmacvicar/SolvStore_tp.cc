@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
       filesystem::TmpDir solvdir;
-      zypp::cache::SolvStore store(solvdir.path());
+      zypp::cache::SolvStore store(solvdir.path(), "foo");
       
       Measure cap_insert_timer("Insert Capabilities");
       parser::yum::RepoParser parser("foo", store);

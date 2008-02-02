@@ -21,6 +21,8 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/UserRequestException.h"
 
+#include "zypp/ZConfig.h"
+
 #include "zypp/PoolItem.h"
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
@@ -31,6 +33,8 @@
 #include "zypp/Script.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
+#include "zypp/RepoStatus.h"
+#include "zypp/ExternalProgram.h"
 
 #include "zypp/CapMatchHelper.h"
 #include "zypp/ResFilters.h"
@@ -48,10 +52,15 @@
 #include "zypp/repo/ScriptProvider.h"
 #include "zypp/repo/SrcPackageProvider.h"
 
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/Repo.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::resfilter;
 using zypp::solver::detail::Helper;
+
+#define ZYPP_DB ( "/var/lib/zypp/db/" )
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -65,8 +74,7 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
       void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
                                 Script::constPtr script_r,
-                                bool do_r,
-                                storage::PersistentStorage & storage_r )
+                                bool do_r )
       {
         MIL << "Execute script " << script_r << endl;
         if ( ! script_r )
@@ -111,6 +119,7 @@ namespace zypp
         }
 
         int exitCode = prog.close();
+        /* FIXME
         if ( exitCode != 0 )
         {
           storage_r.setObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
@@ -123,21 +132,19 @@ namespace zypp
         {
           storage_r.removeObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
         }
-
+        */
         report->finish();
         return;
       }
 
-      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r,
-                                   storage::PersistentStorage & storage_r )
+      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
       {
-        ExecuteScriptHelper( access_r, script_r, true, storage_r );
+        ExecuteScriptHelper( access_r, script_r, true );
       }
 
-      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r,
-                                     storage::PersistentStorage & storage_r )
+      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
       {
-        ExecuteScriptHelper( access_r, script_r, false, storage_r );
+        ExecuteScriptHelper( access_r, script_r, false );
       }
       /////////////////////////////////////////////////////////////////
     } // namespace
@@ -150,10 +157,8 @@ namespace zypp
       /** Helper removing obsoleted non-Package from store. */
       struct StorageRemoveObsoleted
       {
-        StorageRemoveObsoleted( storage::PersistentStorage & storage_r,
-                                const PoolItem & byPoolitem_r )
-        : _storage( storage_r )
-        , _byPoolitem( byPoolitem_r )
+        StorageRemoveObsoleted(const PoolItem & byPoolitem_r )
+        : _byPoolitem( byPoolitem_r )
         {}
 
         bool operator()( const PoolItem & poolitem_r ) const
@@ -170,7 +175,7 @@ namespace zypp
 
           try
             {
-              _storage.deleteObject( poolitem_r.resolvable() );
+               // delete poolitem_r.resolvable()
                MIL<< "Obsoleted: " << poolitem_r << " (by " << _byPoolitem << ")" << endl;
             }
           catch ( Exception & excpt_r )
@@ -183,7 +188,6 @@ namespace zypp
         }
 
       private:
-        storage::PersistentStorage & _storage;
         const PoolItem               _byPoolitem;
       };
 
@@ -192,13 +196,11 @@ namespace zypp
       * Scan \a pool_r for items obsoleted \a byPoolitem_r and remove them from
       * \a storage_r.
       */
-      void obsoleteMatchesFromStorage( storage::PersistentStorage & storage_r,
-                                       const ResPool & pool_r,
+      void obsoleteMatchesFromStorage( const ResPool & pool_r,
                                        const PoolItem & byPoolitem_r )
       {
         forEachPoolItemMatchedBy( pool_r, byPoolitem_r, Dep::OBSOLETES,
-                                  OncePerPoolItem( StorageRemoveObsoleted( storage_r,
-                                                                           byPoolitem_r ) ) );
+                                  OncePerPoolItem( StorageRemoveObsoleted( byPoolitem_r ) ) );
       }
 
       /////////////////////////////////////////////////////////////////
@@ -301,11 +303,49 @@ namespace zypp
       return _storage_enabled;
     }
 
+    void TargetImpl::load()
+    {
+      Pathname rpmsolv = _root + ZConfig::instance().repoCachePath() + "_rpm.solv";
+      Pathname rpmsolvcookie = rpmsolv.extend(".cookie");
+      bool build_rpm_solv = true;
+      // lets see if the rpm solv cache exists
+
+      RepoStatus rpmstatus(_root + "/var/lib/rpm/Packages");
+      if ( PathInfo(rpmsolv).isExist() )
+      {
+        // see the status of the cache
+        MIL << "Read cookie: " << rpmsolvcookie << endl;
+        RepoStatus status = RepoStatus::fromCookieFile(rpmsolvcookie);
+        MIL << "Read cookie: " << rpmsolvcookie << " done" << endl;
+        // now compare it with the rpm database
+        if ( status.checksum() == rpmstatus.checksum() )
+          build_rpm_solv = false;
+      }
+      
+      if ( build_rpm_solv )
+      {
+         MIL << "Executing solv converter" << endl;
+        // FIXME add root to rpmdb2solv
+        string cmd( str::form( "/usr/bin/rpmdb2solv > %s", rpmsolv.asString().c_str() ) );
+        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+        for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+          MIL << "  " << output;
+        }
+        int ret = prog.close();
+        if ( ret != 0 )
+          ZYPP_THROW(Exception("Failed to cache rpm database"));
+        rpmstatus.saveToCookieFile(rpmsolvcookie);
+      }
+
+      //now add the repos to the pool
+      MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
+      sat::Repo system = sat::Pool::instance().reposInsert(sat::Pool::instance().systemRepoName());
+      system.addSolv(rpmsolv);
+      MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
+    }
 
     void TargetImpl::enableStorage(const Pathname &root_r)
     {
-      _storage.init(root_r);
-      _storage_enabled = true;
     }
 
     Pathname TargetImpl::root() const
@@ -315,40 +355,7 @@ namespace zypp
 
     void TargetImpl::loadKindResolvables( const Resolvable::Kind kind )
     {
-      // if this kind is already loaded, return
-      if ( _resstore_loaded[kind] )
-        return;
-
-      if ( kind == ResTraits<zypp::Package>::kind )
-      {
-        std::list<Package::Ptr> packages = _rpm.getPackages();
-        for (std::list<Package::Ptr>::const_iterator it = packages.begin();
-             it != packages.end();
-             it++)
-        {
-          _store.insert(*it);
-        }
-        _resstore_loaded[kind] = true;
-      }
-      else
-      {
-        if ( isStorageEnabled() )
-        {
-          // resolvables stored in the zypp storage database
-          std::list<ResObject::Ptr> resolvables = _storage.storedObjects(kind);
-          for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
-               it != resolvables.end();
-               it++)
-          {
-            _store.insert(*it);
-          }
-        }
-        else
-        {
-          WAR << "storage target not enabled" << std::endl;
-        }
-        _resstore_loaded[kind] = true;
-      } // end switch
+      // FIXME remove this
     }
 
     ResStore::resfilter_const_iterator TargetImpl::byKindBegin( const ResObject::Kind & kind_r ) const
@@ -369,25 +376,12 @@ namespace zypp
 
     const ResStore & TargetImpl::resolvables()
     {
-      loadKindResolvables( ResTraits<zypp::Patch>::kind );
-      loadKindResolvables( ResTraits<zypp::Selection>::kind );
-      loadKindResolvables( ResTraits<zypp::Pattern>::kind );
-      loadKindResolvables( ResTraits<zypp::Product>::kind );
-      loadKindResolvables( ResTraits<zypp::Language>::kind );
-      loadKindResolvables( ResTraits<zypp::Package>::kind );
       return _store;
     }
 
     void TargetImpl::reset()
     {
-      // make this smarter later
-      _store.clear();
-      _resstore_loaded[ResTraits<zypp::Patch>::kind] = false;
-      _resstore_loaded[ResTraits<zypp::Selection>::kind] = false;
-      _resstore_loaded[ResTraits<zypp::Pattern>::kind] = false;
-      _resstore_loaded[ResTraits<zypp::Product>::kind] = false;
-      _resstore_loaded[ResTraits<zypp::Language>::kind] = false;
-      _resstore_loaded[ResTraits<zypp::Package>::kind] = false;
+      // FIXME remove
     }
 
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
@@ -604,92 +598,85 @@ namespace zypp
         }
         else if (!policy_r.dryRun()) // other resolvables (non-Package)
         {
-          if ( isStorageEnabled() )
+          if (it->status().isToBeInstalled())
           {
-            if (it->status().isToBeInstalled())
+            // Process OBSOLETES and remove them from store.
+            obsoleteMatchesFromStorage( pool_r, *it );
+
+            bool success = false;
+            try
             {
-              // Process OBSOLETES and remove them from store.
-              obsoleteMatchesFromStorage( _storage, pool_r, *it );
-
-              bool success = false;
-              try
+              if (isKind<Message>(it->resolvable()))
               {
-                if (isKind<Message>(it->resolvable()))
-                {
-                  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
-                  std::string text = m->text().asString();
+                Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
+                std::string text = m->text().asString();
 
-                  callback::SendReport<target::MessageResolvableReport> report;
+                callback::SendReport<target::MessageResolvableReport> report;
 
-                  report->show( m );
+                report->show( m );
 
-                  MIL << "Displaying the text '" << text << "'" << endl;
-                }
-                else if (isKind<Script>(it->resolvable()))
+                MIL << "Displaying the text '" << text << "'" << endl;
+              }
+              else if (isKind<Script>(it->resolvable()))
+              {
+                ExecuteDoScript( access, asKind<Script>(it->resolvable()));
+              }
+              else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
+              {
+                // #160792 do not just add, also remove older versions
+                if (true) // !installOnly - only on Package?!
                 {
-                  ExecuteDoScript( access, asKind<Script>(it->resolvable()), _storage );
-                }
-                else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
-                {
-                  // #160792 do not just add, also remove older versions
-                  if (true) // !installOnly - only on Package?!
+                  // this would delete the same item over and over
+                  //for (PoolItem old = Helper::findInstalledItem (pool_r, *it); old; )
+                  #warning REMOVE ALL OLD VERSIONS AND NOT JUST ONE
+                  PoolItem old = Helper::findInstalledItem (pool_r, *it);
+                  if (old)
                   {
-                    // this would delete the same item over and over
-                    //for (PoolItem old = Helper::findInstalledItem (pool_r, *it); old; )
-#warning REMOVE ALL OLD VERSIONS AND NOT JUST ONE
-                    PoolItem old = Helper::findInstalledItem (pool_r, *it);
-                    if (old)
-                    {
-                      _storage.deleteObject(old.resolvable());
-                    }
+                    // FIXME _storage.deleteObject(old.resolvable());
                   }
-                  _storage.storeObject(it->resolvable());
                 }
-                success = true;
+                // FIXME _storage.storeObject(it->resolvable());
               }
-              catch (Exception & excpt_r)
-              {
-                ZYPP_CAUGHT(excpt_r);
-                WAR << "Install of Resolvable from storage failed" << endl;
-              }
-              if (success)
-                it->status().resetTransact( ResStatus::USER );
+              success = true;
             }
-            else
-            {					// isToBeUninstalled
-              bool success = false;
-              try
-              {
-                if (isKind<Atom>(it->resolvable()))
-                {
-                  DBG << "Uninstalling atom - no-op" << endl;
-                }
-                else if (isKind<Message>(it->resolvable()))
-                {
-                  DBG << "Uninstalling message - no-op" << endl;
-                }
-                else if (isKind<Script>(it->resolvable()))
-                {
-                  ExecuteUndoScript( access, asKind<Script>(it->resolvable()), _storage );
-                }
-                else
-                {
-                  _storage.deleteObject(it->resolvable());
-                }
-                success = true;
-              }
-              catch (Exception & excpt_r)
-              {
-                ZYPP_CAUGHT(excpt_r);
-                WAR << "Uninstall of Resolvable from storage failed" << endl;
-              }
-              if (success)
-                it->status().resetTransact( ResStatus::USER );
+            catch (Exception & excpt_r)
+            {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Install of Resolvable from storage failed" << endl;
             }
+            if (success)
+              it->status().resetTransact( ResStatus::USER );
           }
           else
-          {
-            WAR << "storage target disabled" << std::endl;
+          {					// isToBeUninstalled
+            bool success = false;
+            try
+            {
+              if (isKind<Atom>(it->resolvable()))
+              {
+                DBG << "Uninstalling atom - no-op" << endl;
+              }
+              else if (isKind<Message>(it->resolvable()))
+              {
+                DBG << "Uninstalling message - no-op" << endl;
+              }
+              else if (isKind<Script>(it->resolvable()))
+              {
+                ExecuteUndoScript( access, asKind<Script>(it->resolvable()));
+              }
+              else
+              {
+                //FIXME _storage.deleteObject(it->resolvable());
+              }
+              success = true;
+            }
+            catch (Exception & excpt_r)
+            {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Uninstall of Resolvable from storage failed" << endl;
+            }
+            if (success)
+              it->status().resetTransact( ResStatus::USER );
           }
 
         }  // other resolvables
@@ -755,9 +742,12 @@ namespace zypp
 
       ts_rpm = _rpm.timestamp();
 
-      if ( isStorageEnabled() )
-        ts_store = _storage.timestamp();
-
+      PathInfo store_info = PathInfo( _root + Pathname(ZYPP_DB) + "_store.solv" );
+      if (store_info.isExist() )
+        ts_store = Date(store_info.mtime());
+      else
+         ts_store = Date::now();
+      
       if ( ts_rpm > ts_store )
       {
         return ts_rpm;

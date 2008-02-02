@@ -41,7 +41,7 @@ int main(int argc, char **argv)
       {
         cout << *it << endl;
         Repository repo = manager.createFromCache(*it);
-        z->addResolvables(repo.resolvables());
+        //z->addResolvables(repo.resolvables());
       }
 
       ResPool pool(z->pool());

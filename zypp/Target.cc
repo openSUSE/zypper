@@ -64,6 +64,9 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  void Target::load()
+  { _pimpl->load(); }
+
   const ResStore & Target::resolvables()
   { return _pimpl->resolvables(); }
 

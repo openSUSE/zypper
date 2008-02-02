@@ -12,8 +12,8 @@ TARGET_LINK_LIBRARIES(mediaaccess  zypp )
 ADD_EXECUTABLE(solvstore SolvStore_tp.cc)
 TARGET_LINK_LIBRARIES(solvstore zypp )
 
-#ADD_EXECUTABLE(testbed testbed.cc)
-#TARGET_LINK_LIBRARIES(testbed  zypp )
+ADD_EXECUTABLE(testbed testbed.cc)
+TARGET_LINK_LIBRARIES(testbed  zypp )
 
 #ADD_EXECUTABLE(yum-downloader YUMDownloader_tp.cc)
 #TARGET_LINK_LIBRARIES(yum-downloader  zypp )

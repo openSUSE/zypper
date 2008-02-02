@@ -56,7 +56,7 @@ namespace zypp
   /** \relates RepoStatus::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoStatus::Impl & obj )
   {
-    return str << obj.checksum << " " << obj.timestamp;
+    return str << obj.checksum << " " << (time_t) obj.timestamp;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -92,16 +92,10 @@ namespace zypp
     }
 
     std::string buffer;
-    while(file && !file.eof()) {
-      getline(file, buffer);
-    }
-
-    std::vector<std::string> words;
-    if ( str::split( buffer, std::back_inserter(words) ) != 2 )
-      ZYPP_THROW (Exception( "bad cookie file " + cookiefile.asString() ) );
-
-    status.setTimestamp(Date(str::strtonum<time_t>(words[1])));
-    status.setChecksum(words[0]);
+    file >> buffer;
+    status.setChecksum(buffer);
+    file >> buffer;
+    status.setTimestamp(Date(str::strtonum<time_t>(buffer)));
     return status;
   }
 
@@ -111,7 +105,7 @@ namespace zypp
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
     }
-    file << *(this);
+    file << this->checksum() << " " << (int) this->timestamp() << endl << endl;
     file.close();
   }
 
