@@ -216,7 +216,6 @@ namespace zypp
 #endif
       }
       _target = new Target( root );
-      _target->enableStorage( root );
     }
 
     void ZYppImpl::finishTarget()

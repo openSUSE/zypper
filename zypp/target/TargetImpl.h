@@ -73,9 +73,6 @@ namespace zypp
 
     public:
 
-      /** All resolvables in the target. */
-      const ResStore & resolvables();
-
       /**
        * load resolvables of certain kind in the internal store
        * and return a iterator
@@ -104,10 +101,6 @@ namespace zypp
         srcremaining_r.swap( res._srcremaining );
         return res._result;
       }
-
-      /** enables the storage target */
-      bool isStorageEnabled() const;
-      void enableStorage(const Pathname &root_r);
 
       /** Commit ordered changes
        *  @param pool_r only needed for #160792
@@ -151,18 +144,12 @@ namespace zypp
      void reset();
 
     protected:
-      void loadKindResolvables( const Resolvable::Kind kind );
       /** All resolvables provided by the target. */
       ResStore _store;
       /** Path to the target */
       Pathname _root;
       /** RPM database */
       rpm::RpmDb _rpm;
-#ifndef STORAGE_DISABLED
-      zypp::storage::PersistentStorage _storage;
-      bool _storage_enabled;
-      std::map< const Resolvable::Kind, DefaultFalseBool> _resstore_loaded;
-#endif
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;

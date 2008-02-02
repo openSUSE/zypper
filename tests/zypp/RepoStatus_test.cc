@@ -16,7 +16,6 @@ using namespace boost::unit_test::log;
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
-using namespace zypp::repo;
 
 void repostatus_test()
 {

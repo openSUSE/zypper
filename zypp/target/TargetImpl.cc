@@ -281,7 +281,7 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     TargetImpl::TargetImpl(const Pathname & root_r)
-    : _root(root_r), _storage_enabled(false)
+    : _root(root_r)
     {
       _rpm.initDatabase(root_r);
       MIL << "Initialized target on " << _root << endl;
@@ -296,11 +296,6 @@ namespace zypp
     {
       _rpm.closeDatabase();
       MIL << "Targets closed" << endl;
-    }
-
-    bool TargetImpl::isStorageEnabled() const
-    {
-      return _storage_enabled;
     }
 
     void TargetImpl::load()
@@ -344,24 +339,14 @@ namespace zypp
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
     }
 
-    void TargetImpl::enableStorage(const Pathname &root_r)
-    {
-    }
-
     Pathname TargetImpl::root() const
     {
       return _root;
     }
 
-    void TargetImpl::loadKindResolvables( const Resolvable::Kind kind )
-    {
-      // FIXME remove this
-    }
-
     ResStore::resfilter_const_iterator TargetImpl::byKindBegin( const ResObject::Kind & kind_r ) const
     {
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
-      ptr->loadKindResolvables(kind_r);
       resfilter::ResFilter filter = ByKind(kind_r);
       return make_filter_iterator( filter, _store.begin(), _store.end() );
     }
@@ -369,14 +354,8 @@ namespace zypp
     ResStore::resfilter_const_iterator TargetImpl::byKindEnd( const ResObject::Kind & kind_r  ) const
     {
       TargetImpl *ptr = const_cast<TargetImpl *>(this);
-      ptr->loadKindResolvables(kind_r);
       resfilter::ResFilter filter = ByKind(kind_r);
       return make_filter_iterator( filter, _store.end(), _store.end() );
-    }
-
-    const ResStore & TargetImpl::resolvables()
-    {
-      return _store;
     }
 
     void TargetImpl::reset()

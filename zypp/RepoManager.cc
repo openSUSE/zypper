@@ -740,11 +740,6 @@ namespace zypp
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
       {
-//         string cmd = "repo2solv.sh \"";
-// 	cmd += rawpath.asString() + "\" > " + solvfile.asString();
-// 	int ret = system (cmd.c_str());
-//         if (WIFEXITED (ret) && WEXITSTATUS (ret) != 0)
-// 	  ZYPP_THROW(RepoUnknownTypeException());
         MIL << "Executing solv converter" << endl;
         string cmd( str::form( "/usr/bin/repo2solv.sh \"%s\" > %s", rawpath.asString().c_str(), solvfile.asString().c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
@@ -752,6 +747,8 @@ namespace zypp
           MIL << "  " << output;
         }
         int ret = prog.close();
+        if ( ret != 0 )
+          ZYPP_THROW(RepoUnknownTypeException());
       }
       break;
       default:

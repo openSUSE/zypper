@@ -67,9 +67,6 @@ namespace zypp
   void Target::load()
   { _pimpl->load(); }
 
-  const ResStore & Target::resolvables()
-  { return _pimpl->resolvables(); }
-
   ResStore::resfilter_const_iterator Target::byKindBegin( const ResObject::Kind & kind_r  ) const
   { return _pimpl->byKindBegin( kind_r ); }
   
@@ -78,15 +75,6 @@ namespace zypp
   
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
-
-#ifndef STORAGE_DISABLED
-      /** enables the storage target */
-  bool Target::isStorageEnabled() const
-  { return _pimpl->isStorageEnabled(); }
-
-  void Target::enableStorage(const Pathname &root_r)
-  { _pimpl->enableStorage(root_r); }
-#endif
 
   Pathname Target::root() const
   { return _pimpl->root(); }
