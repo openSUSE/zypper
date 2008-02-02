@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.9.4" "zypper" "System Tools"
+.TH "zypper" "8" "0.9.6" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -57,9 +57,9 @@ Type of resolvable (default: package). Currently supported resolvable types for
 the info command are: package, patch, pattern, product.
 
 .TP
-.B install (in) [options] <name> ...
+.B install (in) [options] <name|rpm_file_uri> ...
 .TP
-.B install (in) [options] --capability <capability> ...
+.B install (in) [options] --capability <capability|rpm_file_uri> ...
 Install or update packages or other resolvables.
 
 The resolvables can be selected by their name or by a capability they provide.
@@ -74,7 +74,18 @@ for example: zypper\\>0.8.10 or 'zypper>0.8.10'
 
 If EDITION is not specified, the newest available version will be installed.
 This also means that if the package is already installed and newer versions
-are available, it will get upgraded to the newest one. 
+are available, it will get upgraded to the newest one.
+
+Zypper is also able to install plain RPM files while trying to satisfy their
+dependencies using packages from defined repositories. You can install a plain
+RPM file by specifying its location in the install command arguments either
+as a local path or an URI. E.g.:
+
+\fB$ zypper install ~/rpms/foo.rpm http://some.site/bar.rpm\fR
+
+Zypper will download the files into its cache directory (/var/cache/zypper/RPMS),
+add this directory as a temporary \fBplaindir\fR repository and mark the
+respective resolvables for installation.
 
 .TP
 \fI\-r, \-\-repo\fR <alias>
@@ -111,6 +122,10 @@ a dependency problem and prompt the user to resolve it manually.
 
 The default value is 'on' in the interactive mode and 'off' in the
 non-interactive mode. If this option is specified, it takes the preference.
+.TP
+.I \-D, \-\-dry\-run
+Test the installation, do not actually install any package. This option will
+add the \-\-test option to the rpm commands run by the install command.
 
 .TP
 .B source-install (si) <name> ...
@@ -159,6 +174,10 @@ Create solver test case for debugging. See the install command for details.
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
 with unfulfilled requirements.
+.TP
+.I \-D, \-\-dry\-run
+Test the removal of packages, do not actually remove anything. This option will
+add the \-\-test option to the rpm commands run by the remove command.
 
 .TP
 .B update (up) [options]
@@ -187,6 +206,10 @@ Create solver test case for debugging. See the install command for details.
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
 with unfulfilled requirements.
+.TP
+.I \-D, \-\-dry\-run
+Test the update, do not actually install or update any package. This option will
+add the \-\-test option to the rpm commands run by the update command.
 
 .B NOTE:
 Zypper prefers to update only those packages for which a patch
@@ -209,7 +232,10 @@ Automatically say 'yes' to third party license confirmation prompt. By using thi
 .TP
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
-
+.TP
+.I \-D, \-\-dry\-run
+Test the upgrade, do not actually install or update any package. This option will
+add the \-\-test option to the rpm commands run by the dist-upgrade command.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
@@ -403,8 +429,42 @@ Turns on rug compatibility. See section COMPATIBILITY WITH RUG for details.
 .I \-n, \-\-non\-interactive
 Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
 .TP
+.I \-D, \-\-reposd\-dir <dir>
+Use the specified directory to look for the repository definition (*.repo) files.
+The default value is /etc/zypp/repos.d.
+.TP
+.I \-C, \-\-cache\-dir <dir>
+Use an alternative directory to look for the repository meta-data cache database file (zypp.db).
+The default value is /var/cache/zypp. 
+.TP
+.I    \-\-raw\-cache\-dir <dir>
+Use the specified directory for storing raw copies of repository meta-data files.
+The default value is /var/cache/zypp/raw.
+.LP
+Repository Options:
+.TP
 .I      \-\-no\-gpg\-checks
-Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with causion, as you can easily overlook security problems by using it.
+Ignore GPG check failures and continue. If a GPG issue occurs when using this
+option zypper prints and logs a warning and automatically continues without
+interrupting the operation. Use this option with causion, as you can easily
+overlook security problems by using it.
+.TP
+.I \-p, \-\-plus\-repo <URI>
+Use an additional repository for this operation. The repository aliased tmp#
+and named by the specified URI will be added for this operation and removed
+at the end. You can specify this option multiple times.
+.TP
+.I \-\-disable\-repositories
+Do not read meta-data from repositories. This option will prevent loading of
+resolvables from repositories, thus making zypper work only with the installed
+resolvables (if \-\-disable\-system\-resolvables was not specified).
+.TP
+.I \-\-no\-refresh
+Do not auto-refresh repositories (ignore the autorefresh setting). Useful to save
+time when doing operations like search, if there is not a need to have
+a completely up to date meta-data.
+.LP
+Target Options:
 .TP
 .I \-R, \-\-root <dir>
 Operates on a different root directory. This option influences the location
@@ -412,19 +472,11 @@ of the repos.d directory and the meta-data cache directory and also causes rpm
 to be run with the --root option to do the actual installation or removal of
 packages. Note that the ZYpp lock is still created in the original system,
 as well as temporary files. See also the FILES section.
-
 .TP
-.I \-D, \-\-reposd\-dir <dir>
-Use the specified directory to look for the repository definition (*.repo) files.
-The default value is /etc/zypp/repos.d.
-.TP
-.I \-D, \-\-cache\-dir <dir>
-Use an alternative directory to look for the repository meta-data cache database file (zypp.db).
-The default value is /var/cache/zypp. 
-.TP
-.I \-D, \-\-raw\-cache\-dir <dir>
-Use the specified directory for storing raw copies of repository meta-data files.
-The default value is /var/cache/zypp/raw.
+.I \-\-disable\-system\-resolvables
+This option servers mainly for testing purposes. It will cause zypper to act
+as if there were no packages installed in the system. Use with causion as you
+can damage your system using this option. 
 
 .SH "METADATA REFRESH POLICY"
 .LP

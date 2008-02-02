@@ -1,7 +1,9 @@
 ADD_DEFINITIONS (
   -DPACKAGE=\\\"${PACKAGE}\\\"
-  -DLOCALEDIR=\\\"${CMAKE_INSTALL_PREFIX}/share/locale\\\"
+  -DLOCALEDIR=\\\"${INSTALL_PREFIX}/share/locale\\\"
 )
+
+MESSAGE ( "** Locale dir is ${INSTALL_PREFIX}/share/locale" )
 
 SET (zypper_HEADERS
   zypper.h
@@ -46,6 +48,8 @@ INSTALL(
   RUNTIME DESTINATION ${INSTALL_PREFIX}/bin
 )
 
+MESSAGE ( "** ZYpper binary will be installed in ${INSTALL_PREFIX}/bin" )
+
 ADD_EXECUTABLE( zypp-checkpatches zypp-checkpatches.cc zypper-updates.cc )
 TARGET_LINK_LIBRARIES( zypp-checkpatches ${ZYPP_LIBRARY} )
 
@@ -63,7 +67,7 @@ INSTALL(
 )
 
 
-# logrotate config file
+# installation_sources script 
 INSTALL(
   PROGRAMS installation_sources
   DESTINATION ${INSTALL_PREFIX}/bin

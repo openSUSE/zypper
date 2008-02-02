@@ -27,6 +27,8 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 
+#include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
+
 #include "zypper-main.h"
 #include "zypper.h"
 #include "zypper-repos.h"
@@ -90,23 +92,26 @@ int Zypper::main(int argc, char ** argv)
     MIL << "Caught exit request:" << endl << e.msg() << endl;
     return exitCode();
   }
+  
+  if (runningHelp())
+  {
+    safeDoCommand();
+    return exitCode();
+  }
 
   switch(command().toEnum())
   {
   case ZypperCommand::SHELL_e:
     commandShell();
-    return ZYPPER_EXIT_OK;
+    cleanup();
+    return exitCode();
 
   case ZypperCommand::NONE_e:
-  {
-    if (runningHelp())
-      return ZYPPER_EXIT_OK;
-    else
-      return ZYPPER_EXIT_ERR_SYNTAX;
-  }
+    return ZYPPER_EXIT_ERR_SYNTAX;
 
   default:
     safeDoCommand();
+    cleanup();
     return exitCode();
   }
 
@@ -115,9 +120,9 @@ int Zypper::main(int argc, char ** argv)
   return exitCode();
 }
 
-void print_main_help()
+void print_main_help(const Zypper & zypper)
 {
-  static string help_global_options = _("  Options:\n"
+  static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
@@ -126,11 +131,22 @@ void print_main_help()
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
-    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
-    "\t--root, -R <dir>\tOperate on a different root directory.\n"
-    "\t--reposd-dir, D <dir>\tUse alternative repository definition files directory.\n"
-    "\t--cache-dir, C <dir>\tUse alternative meta-data cache database directory.\n"
+    "\t--reposd-dir, -D <dir>\tUse alternative repository definition files directory.\n"
+    "\t--cache-dir, -C <dir>\tUse alternative meta-data cache database directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory\n"
+  );
+  
+  static string help_global_source_options = _(
+    "\tRepository Options:\n"
+    "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+    "\t--plus-repo, -p <URI>\tUse an additional repository\n"
+    "\t--disable-repositories\tDo not read meta-data from repositories.\n"
+    "\t--no-refresh\tDo not refresh the repositories.\n"
+  );
+
+  static string help_global_target_options = _("\tTarget Options:\n"
+    "\t--root, -R <dir>\tOperate on a different root directory.\n"
+    "\t--disable-system-resolvables  Do not read installed resolvables\n"
   );
 
   static string help_commands = _(
@@ -162,15 +178,30 @@ void print_main_help()
     "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
   );
 
-  cout << help_usage << endl << help_global_options << endl << help_commands;
+  cout
+    << help_usage << endl
+    << help_global_options << endl
+    << help_global_source_options << endl
+    << help_global_target_options << endl
+    << help_commands << endl;
+
+  print_command_help_hint(zypper);
 }
 
-void Zypper::print_unknown_command_hint()
+void print_unknown_command_hint(const Zypper & zypper)
 {
   // TranslatorExplanation %s is "help" or "zypper help" depending on whether
   // zypper shell is running or not
   cout << format(_("Type '%s' to get a list of global options and commands."))
-    % (runningShell() ? "help" : "zypper help") << endl;
+    % (zypper.runningShell() ? "help" : "zypper help") << endl;
+}
+
+void print_command_help_hint(const Zypper & zypper)
+{
+  // TranslatorExplanation %s is "help" or "zypper help" depending on whether
+  // zypper shell is running or not
+  cout << format(_("Type '%s' to get a command-specific help."))
+    % (zypper.runningShell() ? "help <command>" : "zypper help <command>") << endl;
 }
 
 /*
@@ -184,21 +215,26 @@ void Zypper::processGlobalOptions()
   MIL << "START" << endl;
 
   static struct option global_options[] = {
-    {"help",            no_argument,       0, 'h'},
-    {"verbose",         no_argument,       0, 'v'},
-    {"quiet",           no_argument,       0, 'q'},
-    {"version",         no_argument,       0, 'V'},
-    {"terse",           no_argument,       0, 't'},
-    {"table-style",     required_argument, 0, 's'},
-    {"rug-compatible",  no_argument,       0, 'r'},
-    {"non-interactive", no_argument,       0, 'n'},
-    {"no-gpg-checks",   no_argument,       0,  0 },
-    {"root",            required_argument, 0, 'R'},
-    {"reposd-dir",      required_argument, 0, 'D'},
-    {"cache-dir",       required_argument, 0, 'C'},
-    {"raw-cache-dir",   required_argument, 0,  0 },
-    {"opt",             optional_argument, 0, 'o'},
-    {"disable-system-resolvables", optional_argument, 0, 'o'},
+    {"help",                       no_argument,       0, 'h'},
+    {"verbose",                    no_argument,       0, 'v'},
+    {"quiet",                      no_argument,       0, 'q'},
+    {"version",                    no_argument,       0, 'V'},
+    {"terse",                      no_argument,       0, 't'},
+    {"table-style",                required_argument, 0, 's'},
+    {"rug-compatible",             no_argument,       0, 'r'},
+    {"non-interactive",            no_argument,       0, 'n'},
+    {"no-gpg-checks",              no_argument,       0,  0 },
+    {"root",                       required_argument, 0, 'R'},
+    {"reposd-dir",                 required_argument, 0, 'D'},
+    {"cache-dir",                  required_argument, 0, 'C'},
+    {"raw-cache-dir",              required_argument, 0,  0 },
+    {"opt",                        optional_argument, 0, 'o'},
+    // TARGET OPTIONS
+    {"disable-system-resolvables", no_argument,       0,  0 },
+    // REPO OPTIONS
+    {"plus-repo",                  required_argument, 0, 'p'},
+    {"disable-repositories",       no_argument,       0,  0 },
+    {"no-refresh",                 no_argument,       0,  0 },
     {0, 0, 0, 0}
   };
 
@@ -300,40 +336,33 @@ void Zypper::processGlobalOptions()
     cout << "<stream>" << endl;
   }
 
-  if (gopts.count("disable-repositories") ||
-      gopts.count("disable-system-sources"))
+  if (gopts.count("disable-repositories"))
   {
     MIL << "Repositories disabled, using target only." << endl;
-    cout_n <<
+    cout <<
         _("Repositories disabled, using the database of installed packages only.")
         << endl;
     _gopts.disable_system_sources = true;
   }
   else
   {
-    MIL << "System sources enabled" << endl;
+    MIL << "Repositories enabled" << endl;
+  }
+
+  if (gopts.count("no-refresh"))
+  {
+    _gopts.no_refresh = true;
+    cout_v << _("Autorefresh disabled.") << endl;
+    MIL << "Autorefresh disabled." << endl;
   }
 
   if (gopts.count("disable-system-resolvables"))
   {
     MIL << "System resolvables disabled" << endl;
-    cout_v << _("Ignoring installed resolvables...") << endl;
+    cout << _("Ignoring installed resolvables.") << endl;
     _gopts.disable_system_resolvables = true;
   }
-/*
-  if (gopts.count("source"))
-  {
-    list<string> sources = gopts["source"];
-    for (list<string>::const_iterator it = sources.begin(); it != sources.end(); ++it )
-    {
-      Url url = make_url (*it);
-      if (!url.isValid())
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-      _gopts.additional_sources.push_back(url); 
-    }
-  }
-*/
+
   // testing option
   if ((it = gopts.find("opt")) != gopts.end()) {
     cout << "Opt arg: ";
@@ -353,7 +382,7 @@ void Zypper::processGlobalOptions()
       //setCommand(ZypperCommand::NONE);
     }
   }
-  else
+  else if (!gopts.count("version"))
     setRunningHelp();
 
   if (command() == ZypperCommand::HELP)
@@ -368,27 +397,84 @@ void Zypper::processGlobalOptions()
         if (!arg.empty() && arg != "-h" && arg != "--help")
         {
           cout << e.asUserString() << endl;
-          print_unknown_command_hint();
+          print_unknown_command_hint(*this);
           ZYPP_THROW(ExitRequestException("help provided"));
         }
       }
     }
     else
     {
-      print_main_help();
+      print_main_help(*this);
       ZYPP_THROW(ExitRequestException("help provided"));
     }
   }
   else if (command() == ZypperCommand::NONE)
   {
     if (runningHelp())
-      print_main_help();
+      print_main_help(*this);
     else if (gopts.count("version"))
       cout << PACKAGE " " VERSION << endl;
     else
     {
-      print_unknown_command_hint();
+      print_unknown_command_hint(*this);
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
+    }
+  }
+  else if (command() == ZypperCommand::SHELL && optind < _argc)
+  {
+    string arg = _argv[optind++];
+    if (!arg.empty())
+    {
+      if (arg == "-h" || arg == "--help")
+        setRunningHelp(true);
+      else
+      {
+        report_too_many_arguments("shell\n");
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        ZYPP_THROW(ExitRequestException("help provided"));
+      }
+    }
+  }
+
+  // additional repositories
+  if (gopts.count("plus-repo"))
+  {
+    if (command() == ZypperCommand::ADD_REPO ||
+        command() == ZypperCommand::REMOVE_REPO ||
+        command() == ZypperCommand::MODIFY_REPO ||
+        command() == ZypperCommand::RENAME_REPO ||
+        command() == ZypperCommand::REFRESH)
+    {
+      // TranslatorExplanation The %s is "--plus-repo"
+      cout << format(_("The %s option has no effect here, ignoring."))
+          % "--plus-repo" << endl;
+    }
+    else
+    {
+      list<string> repos = gopts["plus-repo"];
+
+      int count = 1;
+      for (list<string>::const_iterator it = repos.begin();
+          it != repos.end(); ++it)
+      {
+        Url url = make_url (*it);
+        if (!url.isValid())
+        {
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+
+        RepoInfo repo;
+        repo.addBaseUrl(url);
+        repo.setEnabled(true);
+        repo.setAutorefresh(true);
+        repo.setAlias(boost::str(format("tmp%d") % count));
+        repo.setName(url.asString());
+
+        gData.additional_repos.push_back(repo);
+        DBG << "got additional repo: " << url << endl;
+        count++;
+      }
     }
   }
 
@@ -438,17 +524,15 @@ void Zypper::commandShell()
       setCommand(ZypperCommand(command_str));
       if (command() == ZypperCommand::SHELL_QUIT)
         break;
-      else if (command() == ZypperCommand::SHELL)
-        cout << _("You already are running zypper's shell.") << endl;
       else if (command() == ZypperCommand::NONE)
-        print_unknown_command_hint();
+        print_unknown_command_hint(*this);
       else
         safeDoCommand();
     }
     catch (Exception & e)
     {
       cerr << e.msg() <<  endl;
-      print_unknown_command_hint();
+      print_unknown_command_hint(*this);
     }
 
     shellCleanup();
@@ -512,7 +596,7 @@ void Zypper::safeDoCommand()
   try
   {
     processCommandOptions();
-    if (command() == ZypperCommand::NONE)
+    if (command() == ZypperCommand::NONE || exitCode())
       return;
     doCommand();
   }
@@ -548,18 +632,6 @@ void Zypper::processCommandOptions()
   struct option no_options = {0, 0, 0, 0};
   struct option *specific_options = &no_options;
 
-/*  string help_global_source_options = _(
-      "  Repository options:\n"
-      "\t--disable-repositories, -D\t\tDo not read data from defined repositories.\n"
-      "\t--plus-repo <URI|.repo>\t\tRead additional repository\n" //! \todo additional repo
-      );*/
-//! \todo preserve for rug comp.  "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
-//! \todo preserve for rug comp.  "\t--source, -S\t\tRead additional source\n"
-
-//  string help_global_target_options = _("  Target options:\n"
-//      "\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
-//      );
-
   // this could be done in the processGlobalOptions() if there was no
   // zypper shell
   if (command() == ZypperCommand::HELP)
@@ -576,14 +648,14 @@ void Zypper::processCommandOptions()
         if (!cmd.empty() && cmd != "-h" && cmd != "--help")
         {
           cout << ex.asUserString() << endl;
-          print_unknown_command_hint();
+          print_unknown_command_hint(*this);
           return;
         }
       }
     }
     else
     {
-      print_main_help();
+      print_main_help(*this);
       return;
     }
   }
@@ -594,11 +666,8 @@ void Zypper::processCommandOptions()
   // print help on help
   case ZypperCommand::HELP_e:
   {
-    print_unknown_command_hint();
-    // TranslatorExplanation %s is "help" or "zypper help" depending on whether
-    // zypper shell is running or not
-    cout << format(_("Type '%s' to get a command-specific help."))
-      % (runningShell() ? "help <command>" : "zypper help <command>") << endl;
+    print_unknown_command_hint(*this);
+    print_command_help_hint(*this);
     break;
   }
 
@@ -620,6 +689,7 @@ void Zypper::processCommandOptions()
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -627,13 +697,14 @@ void Zypper::processCommandOptions()
     _command_help = boost::str(format(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
-      "install (in) [options] <capability> ...\n"
+      "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
-      "Install resolvables with specified capabilities. A capability is"
+      "Install resolvables with specified capabilities or RPM files with"
+      " specified location. A capability is"
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>              Install resolvables only from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>        Install resolvables only from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
@@ -643,6 +714,7 @@ void Zypper::processCommandOptions()
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-D, --dry-run                   Test the installation, do not actually install\n"
     )) % "package, patch, pattern, product" % "package");
     break;
   }
@@ -661,6 +733,7 @@ void Zypper::processCommandOptions()
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
       {"force-resolution", required_argument, 0, 'R'},
+      {"dry-run",    no_argument,       0, 'D'},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -674,13 +747,14 @@ void Zypper::processCommandOptions()
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>              Operate only with resolvables from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>        Operate only with resolvables from repository specified by alias.\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
       "-n, --name                      Select resolvables by plain name, not by capability\n"
       "-C, --capability                Select resolvables by capability\n"
       "    --debug-solver              Create solver test case for debugging\n"  
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-D, --dry-run                   Test the removal, do not actually remove\n"
     )) % "package, patch, pattern, product" % "package");
     break;
   }
@@ -818,6 +892,7 @@ void Zypper::processCommandOptions()
       {"force-download", no_argument, 0, 'd'},
       {"build-only", no_argument, 0, 'B'},
       {"download-only", no_argument, 0, 'D'},
+      {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -829,11 +904,12 @@ void Zypper::processCommandOptions()
       " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
       "  Command options:\n"
-      "-f, --force             Force a complete refresh\n"
-      "-b, --force-build       Force rebuild of the database\n"
-      "-d, --force-download    Force download of raw metadata\n"
-      "-B, --build-only        Only build the database, don't download metadata.\n"
-      "-D, --download-only     Only download raw metadata, don't build the database\n"
+      "-f, --force              Force a complete refresh\n"
+      "-b, --force-build        Force rebuild of the database\n"
+      "-d, --force-download     Force download of raw metadata\n"
+      "-B, --build-only         Only build the database, don't download metadata.\n"
+      "-D, --download-only      Only download raw metadata, don't build the database\n"
+      "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
     );
     break;
   }
@@ -858,10 +934,12 @@ void Zypper::processCommandOptions()
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>   Type of resolvable (%s)\n"
-      "                    Default: %s\n"
-      "-r, --repo <alias>  List only updates from the repository specified by the alias.\n"
-      "    --best-effort   Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable.\n"
+      "-t, --type <type>         Type of resolvable (%s)\n"
+      "                          Default: %s\n"
+      "-r, --repo <alias|#|URI>  List only updates from the repository specified by the alias.\n"
+      "    --best-effort         Do a 'best effort' approach to update, updates to\n"
+      "                          a lower than latest-and-greatest version are\n"
+      "                          also acceptable.\n"
     )) % "package, patch, pattern, product" % "patch");
     break;
   }
@@ -883,6 +961,7 @@ void Zypper::processCommandOptions()
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -898,13 +977,14 @@ void Zypper::processCommandOptions()
       "\n"
       "-t, --type <type>               Type of resolvable (%s)\n"
       "                                Default: %s\n"
-      "-r, --repo <alias>              Limit updates to the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>        Limit updates to the repository specified by the alias.\n"
       "    --skip-interactive          Skip interactive updates\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-D, --dry-run                   Test the update, do not actually update\n"
     )) % "package, patch, pattern, product" % "patch");
     break;
   }
@@ -915,6 +995,7 @@ void Zypper::processCommandOptions()
       {"repo",                      required_argument, 0, 'r'},
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0, 0},
+      {"dry-run",                   no_argument,       0, 'D'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -926,10 +1007,11 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>              Limit the upgrade to the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>        Limit the upgrade to the repository specified by the alias.\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
+      "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
     );
     break;
   }
@@ -1002,7 +1084,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
     );
     break;
   }
@@ -1024,7 +1106,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
     );
     break;
   }
@@ -1047,10 +1129,11 @@ void Zypper::processCommandOptions()
         "Show full information for packages")) + "\n"
         "\n" +
       _("  Command options:") + "\n" +
-      _("-r, --repo <alias>  Work only with the repository specified by the alias.") + "\n" +
+      _("-r, --repo <alias|#|URI>  Work only with the repository specified by the alias.") + "\n" +
       boost::str(format(
-      _("-t, --type <type>   Type of resolvable (%s)\n"
-        "                    Default: %s")) % "package, patch, pattern, product" % "package") + "\n"; 
+      _("-t, --type <type>         Type of resolvable (%s)\n"
+        "                          Default: %s"))
+          % "package, patch, pattern, product" % "package") + "\n"; 
 
     break;
   }
@@ -1143,7 +1226,7 @@ void Zypper::processCommandOptions()
       "Show updates and patches in xml format\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias>  Work only with updates from repository specified by alias.\n"
+      "-r, --repo <alias|#|URI>  Work only with updates from repository specified by alias.\n"
     );
     break;
   }
@@ -1165,6 +1248,23 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::SHELL_e:
+  {
+    static struct option quit_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = quit_options;
+    _command_help = _(
+      "shell\n"
+      "\n"
+      "Enter the zypper command shell.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
   default:
   {
     ERR << "Unknown or unexpected command" << endl;
@@ -1180,7 +1280,7 @@ void Zypper::processCommandOptions()
     if (copts.count("_unknown"))
     {
       setExitCode(ZYPPER_EXIT_ERR_SYNTAX);
-      ERR << "Unknown command, returning." << endl;
+      ERR << "Unknown option, returning." << endl;
       return;
     }
 
@@ -1534,8 +1634,12 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
+    
+    if (globalOpts().no_refresh)
+      cout << format(_("The '%s' global option has no effect here."))
+        % "--no-refresh" << endl;
 
-    setExitCode(refresh_repos(*this, _arguments));
+    refresh_repos(*this);
     return;
   }
 
@@ -1586,17 +1690,97 @@ void Zypper::doCommand()
       return;
     }
 
+    bool install_not_remove = command() == ZypperCommand::INSTALL;
+
+    // check for rpm files among the arguments
+    list<string> rpms_files_caps;
+    if (install_not_remove)
+    {
+      for (vector<string>::iterator it = _arguments.begin();
+            it != _arguments.end(); )
+      {
+        if (looks_like_rpm_file(*it))
+        {
+          DBG << *it << " looks like rpm file" << endl;
+          cout_v << format(
+              _("'%s' looks like an RPM file. Will try to download it.")) % *it
+            << endl;
+
+          // download the rpm into the cache
+          //! \todo do we want this or a tmp dir? What about the files cached before?
+          //! \todo optimize: don't mount the same media multiple times for each rpm
+          Pathname rpmpath = cache_rpm(*it, 
+              (_gopts.root_dir != "/" ? _gopts.root_dir : "")
+              + ZYPPER_RPM_CACHE_DIR);
+
+          if (rpmpath.empty())
+          {
+            cerr << format(_("Problem with the RPM file specified as '%s', skipping."))
+              % *it << endl;
+          }
+          else
+          {
+            using target::rpm::RpmHeader;
+            // rpm header (need name-version-release)
+            RpmHeader::constPtr header =
+              RpmHeader::readPackage(rpmpath, RpmHeader::NOSIGNATURE);
+            if (header)
+            {
+              string nvrcap =
+                header->tag_name() + "=" +
+                header->tag_version() + "-" +
+                header->tag_release(); 
+              DBG << "rpm package capability: " << nvrcap << endl;
+  
+              // store the rpm file capability string (name=version-release) 
+              rpms_files_caps.push_back(nvrcap);
+            }
+            else
+            {
+              cerr << format(
+                _("Problem reading the RPM header of %s. Is it an RPM file?"))
+                  % *it << endl;
+            }
+          }
+
+          // remove this rpm argument 
+          it = _arguments.erase(it);
+        }
+        else
+          ++it;
+      }
+    }
+
+    // if there were some rpm files, add the rpm cache as a temporary plaindir repo 
+    if (!rpms_files_caps.empty())
+    {
+      // add a plaindir repo
+      RepoInfo repo;
+      repo.setType(repo::RepoType::RPMPLAINDIR);
+      repo.addBaseUrl(Url("dir://"
+          + (_gopts.root_dir != "/" ? _gopts.root_dir : "")
+          + ZYPPER_RPM_CACHE_DIR));
+      repo.setEnabled(true);
+      repo.setAutorefresh(true);
+      repo.setAlias("_tmpRPMcache_");
+      repo.setName(_("RPM files cache"));
+
+      gData.additional_repos.push_back(repo);
+    }
+    // no rpms and no other arguments either
+    else if (_arguments.empty())
+    {
+      cout << _("No valid arguments specified.") << endl;
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    //! \todo quit here if the argument list remains empty after founding only invalid rpm args
+
+    // prepare repositories
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-
-    //! \todo support temporary additional repos
-    /*
-    for ( std::list<Url>::const_iterator it = globalOpts().additional_sources.begin(); it != globalOpts().additional_sources.end(); ++it )
-    {
-      include_source_by_url( *it );
-    }
-    */
 
     if ( gData.repos.empty() )
     {
@@ -1605,21 +1789,31 @@ void Zypper::doCommand()
           " Nothing can be installed.") << endl;
     }
 
+    // prepare target
     cond_init_target(*this);
+    // load metadata
     cond_load_resolvables(*this);
 
-    bool install_not_remove = command() == ZypperCommand::INSTALL;
+    // mark resolvables for installation/removal
     bool by_capability = false; // install by name by default
+    //! \todo install by capability by default in the future (need to improve its output)
     if (copts.count("capability"))
       by_capability = true;
     for ( vector<string>::const_iterator it = _arguments.begin();
-          it != _arguments.end(); ++it ) {
+          it != _arguments.end(); ++it )
+    {
       if (by_capability)
         mark_by_capability (*this, install_not_remove, kind, *it);
       else
         mark_by_name (install_not_remove, kind, *it);
     }
 
+    // rpm files
+    for ( list<string>::const_iterator it = rpms_files_caps.begin();
+          it != rpms_files_caps.end(); ++it )
+      mark_by_capability (*this, true, kind, *it);
+
+    // solve dependencies
     if (copts.count("debug-solver"))
     {
       establish();
@@ -2116,8 +2310,33 @@ void Zypper::doCommand()
     return;
   }
 
+  else if (command() == ZypperCommand::SHELL)
+  {
+    if (runningHelp())
+      cout << _command_help;
+    else if (runningShell())
+      cout << _("You already are running zypper's shell.") << endl;
+    else
+    {
+      cerr << _("Unexpected program flow") << "." << endl;
+      report_a_bug(cerr);
+    }
+
+    return;
+  }
+
   // if the program reaches this line, something went wrong
   setExitCode(ZYPPER_EXIT_ERR_BUG);
+}
+
+void Zypper::cleanup()
+{
+  MIL << "START" << endl;
+
+  // remove the additional repositories specified by --plus-repo
+  for (list<RepoInfo>::const_iterator it = gData.additional_repos.begin();
+         it != gData.additional_repos.end(); ++it)
+    remove_repo(*this, *it);
 }
 
 // Local Variables:

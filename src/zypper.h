@@ -16,6 +16,10 @@
 #include "zypper-command.h"
 #include "zypper-getopt.h"
 
+/** directory for storing manually installed (zypper install foo.rpm) RPM files
+ */
+#define ZYPPER_RPM_CACHE_DIR "/var/cache/zypper/RPMS"
+
 /**
  * Structure for holding global options.
  */
@@ -30,6 +34,7 @@ struct GlobalOptions
   non_interactive(false),
   no_gpg_checks(false),
   machine_readable(false),
+  no_refresh(false),
   root_dir("/")
   {}
 
@@ -52,6 +57,8 @@ struct GlobalOptions
   bool non_interactive;
   bool no_gpg_checks;
   bool machine_readable;
+  /** Whether to disable autorefresh. */
+  bool no_refresh;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
 };
@@ -92,8 +99,6 @@ public:
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
   
-  void print_unknown_command_hint();
-
 private:
   Zypper();
   ~Zypper();
@@ -104,6 +109,7 @@ private:
   void shellCleanup();
   void safeDoCommand();
   void doCommand();
+  void cleanup();
 
   void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value = true) { _running_shell = value; }
@@ -129,6 +135,9 @@ private:
   char **_sh_argv;
 };
 
+void print_main_help(const Zypper & zypper);
+void print_unknown_command_hint(const Zypper & zypper);
+void print_command_help_hint(const Zypper & zypper);
 
 struct RuntimeData
 {
@@ -137,6 +146,7 @@ struct RuntimeData
   {}
 
   std::list<zypp::RepoInfo> repos;
+  std::list<zypp::RepoInfo> additional_repos;
   int patches_count;
   int security_patches_count;
   zypp::ResStore repo_resolvables;

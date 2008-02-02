@@ -25,7 +25,7 @@ void list_repos(Zypper & zypper);
 /**
  * Refresh all enabled repositories.
  */
-int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
+void refresh_repos(Zypper & zypper);
 
 
 /**
@@ -36,8 +36,6 @@ int refresh_repos(Zypper & zypper, std::vector<std::string> & arguments);
  * \param type
  * \param enabled     Whether the repo should be enabled   
  * \param autorefresh Whether the repo should have autorefresh turned on
- * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
- *         ZYPPER_EXIT_OK otherwise
  */
 void add_repo_by_url(Zypper & zypper,
                      const zypp::Url & url,
@@ -54,8 +52,6 @@ void add_repo_by_url(Zypper & zypper,
  * \param repo_file_url Valid URL of the repo file.
  * \param enabled     Whether the repo should be enabled   
  * \param autorefresh Whether the repo should have autorefresh turned on
- * \return ZYPPER_EXIT_ERR_ZYPP on unexpected zypp exception,
- *         ZYPPER_EXIT_OK otherwise
  */
 void add_repo_from_file(Zypper & zypper,
                         const std::string & repo_file_url,
@@ -63,12 +59,19 @@ void add_repo_from_file(Zypper & zypper,
                         boost::tribool autorefresh = boost::indeterminate);
 
 /**
- * Delte repository specified by \a alias.
+ * Add repository specified by \repo to system repositories. 
+ */
+void add_repo(Zypper & zypper, zypp::RepoInfo & repo);
+
+/**
+ * Remove repository specified by \a alias.
  */
 bool remove_repo(Zypper & zypper, const std::string &alias );
 
 bool remove_repo(Zypper & zypper,
                  const zypp::Url & url, const zypp::url::ViewOption & urlview);
+
+bool remove_repo(Zypper & zypper, const zypp::RepoInfo & repoinfo);
 
 /**
  * Rename repository specified by \a alias to \a newalias.

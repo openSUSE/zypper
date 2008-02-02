@@ -578,7 +578,7 @@ bool show_problems(Zypper & zypper)
   return retry;
 }
 
-typedef map<KindOf<Resolvable>,set<ResObject::constPtr> > KindToResObjectSet;
+typedef map<Resolvable::Kind,set<ResObject::constPtr> > KindToResObjectSet;
 
 void show_summary_resolvable_list(const string & label,
                                   KindToResObjectSet::const_iterator it,
@@ -932,7 +932,7 @@ bool resolve(const Zypper & zypper)
   God->resolver()->setForceResolve( force_resolution );
 
   cout_v << _("Resolving dependencies...") << endl;
-  DBG << "Calling the solver..." << endl; 
+  DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
 }
 
@@ -1505,16 +1505,30 @@ void solve_and_commit (Zypper & zypper)
 
       if (!confirm_licenses(zypper)) return;
 
-      cerr_v << _("committing") << endl;
-      MIL << "committing..." << endl;
-
       try {
         //! \todo fix the media reporting correctly
         gData.show_media_progress_hack = true;
 
-        ZYppCommitResult result = God->commit(
+        cerr_v << _("committing"); MIL << "committing...";
+
+        ZYppCommitResult result;
+        if (copts.count("dry-run"))
+        {
+          cerr_v << " " << _("(dry run)") << endl; MIL << "(dry run)";
+
+          result = God->commit(ZYppCommitPolicy().dryRun(true));
+        }
+        else
+        {
+          cerr_v << endl; // endl after 'committing'
+
+          result = God->commit(
             ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-        was_installed = true;
+
+          was_installed = true;
+        }
+
+        MIL << endl << "DONE" << endl;
 
         gData.show_media_progress_hack = false;
 
@@ -1527,7 +1541,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please, see the above error message to for a hint."));
+            _("Please see the above error message to for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
@@ -1535,7 +1549,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please, see the above error message to for a hint."));
+            _("Please see the above error message to for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
@@ -1566,7 +1580,7 @@ void solve_and_commit (Zypper & zypper)
     {
       if (zypper.globalOpts().machine_readable)
         cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
-            " your machine. Please, do it as soon as possible.") << "</message>" << endl;
+            " your machine. Please do it as soon as possible.") << "</message>" << endl;
       else
         cout << _("WARNING: One of installed patches requires a reboot of"
             " your machine. Please do it as soon as possible.") << endl;
@@ -1632,7 +1646,7 @@ bool confirm_licenses(Zypper & zypper)
               " license(s) confirmation.") << " ";
           // TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
           // it is a command line option
-          cout << _("Please, restart the operation in interactive"
+          cout << _("Please restart the operation in interactive"
               " mode and confirm your agreement with required license(s),"
               " or use the --auto-agree-with-licenses option.")
             << endl;
