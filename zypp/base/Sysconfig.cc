@@ -68,7 +68,7 @@ namespace zypp {
 	  } // not comment
 
 	} // while getline
-
+  MIL << "done reading '" << _path << "'" << endl;
 	return ret;
       }
 

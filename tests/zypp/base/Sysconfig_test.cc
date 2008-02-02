@@ -29,8 +29,9 @@ void sysconfig_test( const string &dir )
   Pathname file = Pathname(dir) + "proxy";
   map<string,string> values = zypp::base::sysconfig::read(file);
   BOOST_CHECK_EQUAL( values.size(), 6 );
-  
-
+  BOOST_CHECK_EQUAL( values["PROXY_ENABLED"], "no");
+  BOOST_CHECK_EQUAL( values["GOPHER_PROXY"], "");
+  BOOST_CHECK_EQUAL( values["NO_PROXY"], "localhost, 127.0.0.1");
 }
 
 test_suite*
