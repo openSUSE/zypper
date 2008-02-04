@@ -48,28 +48,23 @@ RepoImpl::~RepoImpl()
 void RepoImpl::createResolvables()
 {
     sat::Pool satpool( sat::Pool::instance() );
+
     Pathname solvfile = (_options.solvdir + _options.repoinfo.alias()).extend(".solv");
-
-    satpool.addRepoSolv(solvfile, _options.repoinfo.alias() );
-
-    MIL << satpool << endl;
-    
-    sat::Repo repo = satpool.reposFind( _options.repoinfo.alias() );
-    sat::Repo::SolvableIterator it;
+    sat::Repo repo = satpool.addRepoSolv(solvfile, _options.repoinfo.alias() );
 
     if ( repo != sat::Repo::norepo )
     {
+      sat::Repo::SolvableIterator it;
       for ( it = repo.solvablesBegin(); it != repo.solvablesEnd(); ++it )
       {
         _store.insert( makeResObject(*it) );
-        MIL << *it << endl;
       }
     }
 }
 
 void RepoImpl::createPatchAndDeltas()
 {
-  
+
 }
 
 ResolvableQuery RepoImpl::resolvableQuery()
