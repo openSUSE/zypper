@@ -301,7 +301,7 @@ namespace zypp
         const char * beg = line_r;
         const char * cur = beg;
         // skip leading sepchars
-        while ( ::strchr( sepchars_r, *cur ) )
+        while ( *cur && ::strchr( sepchars_r, *cur ) )
           ++cur;
         unsigned ret = 0;
         for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
@@ -312,7 +312,7 @@ namespace zypp
             // build string
             *result_r = std::string( beg, cur-beg );
             // skip sepchars
-            while ( cur != beg && ::strchr( sepchars_r, *cur ) )
+            while ( *cur && ::strchr( sepchars_r, *cur ) )
               ++cur;
           }
         return ret;
