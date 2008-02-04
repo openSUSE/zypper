@@ -98,12 +98,6 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::setTextLocale( const Locale & textLocale_r )
-  { _pimpl->setTextLocale( textLocale_r ); }
-
-  Locale ZYpp::getTextLocale() const
-  { return _pimpl->getTextLocale(); }
-
   void ZYpp::setRequestedLocales( const LocaleSet & locales_r )
   { _pimpl->setRequestedLocales( locales_r ); }
 
@@ -115,12 +109,6 @@ namespace zypp
 
   void ZYpp::availableLocale( const Locale & locale_r )
   { _pimpl->availableLocale( locale_r ); }
-
-  Arch ZYpp::architecture() const
-  { return _pimpl->architecture(); }
-
-  void ZYpp::setArchitecture( const Arch & arch )
-  { _pimpl->setArchitecture( arch ); }
 
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }

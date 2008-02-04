@@ -10,10 +10,7 @@
  *
 */
 
-#include <sys/utsname.h>
-#include <unistd.h>
 #include <iostream>
-#include <fstream>
 #include "zypp/TmpPath.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -37,123 +34,16 @@ namespace zypp
   namespace zypp_detail
   { /////////////////////////////////////////////////////////////////
 
-    /** The locale to be used for texts and messages.
-     *
-     * For the encoding to be used the preference is
-     *
-     *    LC_ALL, LC_CTYPE, LANG
-     *
-     * For the language of the messages to be used, the preference is
-     *
-     *    LANGUAGE, LC_ALL, LC_MESSAGES, LANG
-     *
-     * Note that LANGUAGE can contain more than one locale name, it can be
-     * a list of locale names like for example
-     *
-     *    LANGUAGE=ja_JP.UTF-8:de_DE.UTF-8:fr_FR.UTF-8
-
-     * \todo Support dynamic fallbacklists defined by LANGUAGE
-     */
-    inline Locale defaultTextLocale()
-    {
-      Locale ret( "en" );
-      const char * envlist[] = { "LC_ALL", "LC_MESSAGES", "LANG", NULL };
-      for ( const char ** envvar = envlist; *envvar; ++envvar )
-        {
-	  const char * envlang = getenv( *envvar );
-          if ( envlang )
-            {
-              std::string envstr( envlang );
-              if ( envstr != "POSIX" && envstr != "C" )
-                {
-                  Locale lang( envlang );
-                  if ( ! lang.code().empty() )
-                    {
-                      ret = lang;
-                      break;
-                    }
-                }
-            }
-        }
-      return ret;
-    }
-
-    Arch defaultArchitecture()
-    {
-      Arch architecture;
-
-      // detect the true architecture
-      struct utsname buf;
-      if ( uname( &buf ) < 0 )
-        {
-          ERR << "Can't determine system architecture" << endl;
-        }
-      else
-        {
-          architecture = Arch( buf.machine );
-          DBG << "uname architecture is '" << buf.machine << "'" << endl;
-
-          // some CPUs report i686 but dont implement cx8 and cmov
-          // check for both flags in /proc/cpuinfo and downgrade
-          // to i586 if either is missing (cf bug #18885)
-
-          if ( architecture == Arch_i686 )
-            {
-              std::ifstream cpuinfo( "/proc/cpuinfo" );
-              if ( !cpuinfo )
-                {
-                  ERR << "Cant open /proc/cpuinfo" << endl;
-                }
-              else
-                {
-                  char infoline[1024];
-                  while ( cpuinfo.good() )
-                    {
-                      if ( !cpuinfo.getline( infoline, 1024, '\n' ) )
-                        {
-                          if ( cpuinfo.eof() )
-                            break;
-                        }
-                      if ( strncmp( infoline, "flags", 5 ) == 0 )
-                        {
-                          std::string flagsline( infoline );
-                          if ( flagsline.find( "cx8" ) == std::string::npos
-                               || flagsline.find( "cmov" ) == std::string::npos )
-                            {
-                              architecture = Arch_i586;
-                              DBG << "CPU lacks 'cx8' or 'cmov': architecture downgraded to '" << architecture << "'" << endl;
-                            }
-                          break;
-                        } // flags found
-                    } // read proc/cpuinfo
-                } // proc/cpuinfo opened
-            } // i686 extra flags check
-        }
-
-      if ( getenv( "ZYPP_TESTSUITE_FAKE_ARCH" ) )
-      {
-        architecture = Arch( getenv( "ZYPP_TESTSUITE_FAKE_ARCH" ) );
-        WAR << "ZYPP_TESTSUITE_FAKE_ARCH: Setting fake system architecture for test purpuses to: '" << architecture << "'" << endl;
-      }
-
-      return architecture;
-    }
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : ZYppImpl::ZYppImpl
     //	METHOD TYPE : Constructor
     //
     ZYppImpl::ZYppImpl()
-    : _textLocale( defaultTextLocale() )
-    , _target(0)
+    : _target(0)
     , _resolver( new Resolver( ResPool::instance()) )
-    , _architecture( defaultArchitecture() )
     {
-      MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
-      MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
-      MIL << "System architecture is '" << _architecture << "'" << endl;
-
-      MIL << "initializing keyring..." << std::endl;
+      MIL << "Initializing keyring..." << std::endl;
       //_keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
       _keyring = new KeyRing(tmpPath());
     }
@@ -379,14 +269,6 @@ namespace zypp
 #if 0
       _pool.insert( Language::availableInstance( locale_r ) );
 #endif
-    }
-
-    //------------------------------------------------------------------------
-    // architecture
-
-    void ZYppImpl::setArchitecture( const Arch & arch )
-    {
-	_architecture = arch;
     }
 
     //------------------------------------------------------------------------

@@ -17,8 +17,10 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
-
 #include "zypp/base/Deprecated.h"
+
+#include "zypp/ZConfig.h"
+
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
 
@@ -118,12 +120,18 @@ namespace zypp
   public:
     /** Set the preferred locale for translated labels, descriptions,
      *  etc. passed to the UI.
+     * \deprecated Use ZConfig diretcly.
      */
-    void setTextLocale( const Locale & textLocale_r );
-    /** */
-    Locale getTextLocale() const;
+    ZYPP_DEPRECATED void setTextLocale( const Locale & textLocale_r )
+    { ZConfig::instance().setTextLocale( textLocale_r ); }
+    /** \deprecated Use ZConfig diretcly. */
+    ZYPP_DEPRECATED Locale getTextLocale() const
+    { return ZConfig::instance().textLocale(); }
 
   public:
+    /** \name move to pool
+    */
+    //@{
     typedef std::set<Locale> LocaleSet;
     /** Set the requested locales.
      * Languages to be supported by the system, e.g. language specific
@@ -146,6 +154,7 @@ namespace zypp
      * internal use only
      **/
     void availableLocale( const Locale & locale_r );
+    //@}
 
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
@@ -157,12 +166,18 @@ namespace zypp
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
 
-    /** Get the system architecture.   */
-    Arch architecture() const;
+    /** Get the system architecture.
+      * \deprecated Use ZConfig diretcly.
+    */
+    ZYPP_DEPRECATED Arch architecture() const
+    { return ZConfig::instance().systemArchitecture(); }
     /** Set the system architecture.
-	This should be used for testing/debugging only since the Target backend
-	won't be able to install incompatible packages ;-)   */
-    void setArchitecture( const Arch & arch );
+     * This should be used for testing/debugging only since the Target backend
+     * won't be able to install incompatible packages ;-)
+     * \deprecated Use ZConfig diretcly.
+    */
+    ZYPP_DEPRECATED void setArchitecture( const Arch & arch )
+    { ZConfig::instance().setSystemArchitecture( arch ); }
 
   public:
 

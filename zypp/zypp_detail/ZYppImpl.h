@@ -88,16 +88,6 @@ namespace zypp
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
     public:
-      /** \todo Signal locale change. */
-      void setTextLocale( const Locale & textLocale_r )
-      { _textLocale = textLocale_r; }
-      /** */
-      Locale getTextLocale() const
-      { return _textLocale; }
-    private:
-      Locale _textLocale;
-
-    public:
       typedef std::set<Locale> LocaleSet;
       /** */
       void setRequestedLocales( const LocaleSet & locales_r );
@@ -110,14 +100,6 @@ namespace zypp
       void availableLocale( const Locale & locale_r );
 
     public:
-      /** Get the system architecture.   */
-      Arch architecture() const
-      { return _architecture; }
-      /** Set the system architecture.
-	  This should be used for testing/debugging only since the Target backend
-	  won't be able to install incompatible packages ;-)   */
-      void setArchitecture( const Arch & arch );
-
       /** Get the path where zypp related plugins store persistent data and caches   */
       Pathname homePath() const;
 
@@ -143,8 +125,6 @@ namespace zypp
       Resolver_Ptr _resolver;
 
       KeyRing_Ptr _keyring;
-      /** */
-      Arch _architecture;
       /** */
       Pathname _home_path;
       /** defined mount points, used for disk usage counting */
