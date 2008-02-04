@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  4 11:44:08 CET 2008 - jkupec@suse.cz
+
+- new exit code 104 ZYPPER_EXIT_INF_CAP_NOT_FOUND (#358326)
+- r8451
+
+-------------------------------------------------------------------
 Fri Feb  1 18:25:17 CET 2008 - jkupec@suse.cz
 
 - --no-refresh global option added (bnc #356741)
