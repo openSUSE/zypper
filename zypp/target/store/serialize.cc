@@ -294,37 +294,6 @@ string toXML( const Message::constPtr &obj )
 }
 
 template<>
-string toXML( const Language::constPtr &obj )
-{
-  stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-  out << "<language version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
-  out << toXML(static_cast<ResObject::constPtr>(obj));
-  out << "</language>" << endl;
-  return out.str();
-}
-
-
-template<>
-string toXML( const Selection::constPtr &obj )
-{
-  stringstream out;
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
-  out << "<pattern version=\"" << SERIALIZER_VERSION << "\" xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << endl;
-
-  out << toXML(static_cast<Resolvable::constPtr>(obj)) << endl;
-  out << toXML(static_cast<ResObject::constPtr>(obj));
-
-  //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << endl;
-  out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << endl;
-  out << "  <category>" << xml_escape(obj->category()) << "</category>" << endl;
-  out << "  <icon></icon>" << endl;
-  out << "</pattern>" << endl;
-  return out.str();
-}
-
-template<>
 string toXML( const Atom::constPtr &obj )
 {
   stringstream out;
@@ -430,10 +399,6 @@ string castedToXML( const Resolvable::constPtr &resolvable )
      out << toXML(asKind<const Product>(resolvable)) << endl;
   if ( isKind<Pattern>(resolvable) )
      out << toXML(asKind<const Pattern>(resolvable)) << endl;
-  if ( isKind<Selection>(resolvable) )
-     out << toXML(asKind<const Selection>(resolvable)) << endl;
-  if ( isKind<Language>(resolvable) )
-    out << toXML(asKind<const Language>(resolvable)) << endl;
   return out.str();
 }
 

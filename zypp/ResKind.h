@@ -40,14 +40,12 @@ namespace zypp
       static const ResKind nokind;
 
       static const ResKind atom;
-      static const ResKind language;
       static const ResKind message;
       static const ResKind package;
       static const ResKind patch;
       static const ResKind pattern;
       static const ResKind product;
       static const ResKind script;
-      static const ResKind selection;
       static const ResKind srcpackage;
       //@}
 

@@ -20,7 +20,6 @@
 #include "zypp/target/TargetImpl.h"
 #include "zypp/ZYpp.h"
 #include "zypp/NVRAD.h"
-#include "zypp/Language.h"
 #include "zypp/DiskUsageCounter.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/Locks.h"

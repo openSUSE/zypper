@@ -99,8 +99,6 @@ namespace zypp
           //             ----v
           case 'c': OUTS( patch, 5 );       break;
           case 'd': OUTS( product, 7 );     break;
-          case 'e': OUTS( selection, 9 );   break;
-          case 'g': OUTS( language, 8 );    break;
           case 'i': OUTS( script, 6 );      break;
           case 'k': OUTS( package, 7 );     break;
           case 'm': OUTS( atom, 4 );        break;

@@ -15,14 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/NVR.h"
-#include "zypp/Atom.h"
-#include "zypp/Message.h"
-#include "zypp/Patch.h"
-#include "zypp/Script.h"
-#include "zypp/Product.h"
-#include "zypp/Selection.h"
-#include "zypp/Pattern.h"
-#include "zypp/Language.h"
+#include "zypp/ResObjects.h"
 
 #include "zypp/parser/xmlstore/XMLParserData.h"
 
@@ -181,10 +174,8 @@ public:
   Message::Ptr createMessage( const zypp::parser::xmlstore::XMLPatchMessageData & parsed ) const;
   Script::Ptr createScript(const zypp::parser::xmlstore::XMLPatchScriptData & parsed ) const;
   Product::Ptr createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const;
-  Selection::Ptr createSelection( const zypp::parser::xmlstore::XMLPatternData & parsed ) const;
   Pattern::Ptr createPattern( const zypp::parser::xmlstore::XMLPatternData & parsed ) const;
   Atom::Ptr createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & parsed ) const;
-  Language::Ptr createLanguage( const zypp::parser::xmlstore::XMLLanguageData & parsed ) const;
 
   Dependencies createDependencies( const zypp::parser::xmlstore::XMLResObjectData & parsed, const Resolvable::Kind my_kind ) const;
 

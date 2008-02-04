@@ -33,7 +33,6 @@ SET( zypp_SRCS
   FileChecker.cc
   IdString.cc
   KeyRing.cc
-  Language.cc
   LanguageCode.cc
   Locale.cc
   Locks.cc
@@ -72,7 +71,6 @@ SET( zypp_SRCS
   ResStatus.cc
   ResStore.cc
   Script.cc
-  Selection.cc
   Signature.cc
   SrcPackage.cc
   SysContent.cc
@@ -120,7 +118,6 @@ SET( zypp_HEADERS
   KeyRing.h
   KVMap.h
   LanguageCode.h
-  Language.h
   Locale.h
   Locks.h
   ManagedFile.h
@@ -166,7 +163,6 @@ SET( zypp_HEADERS
   ResStore.h
   ResTraits.h
   Script.h
-  Selection.h
   Signature.h
   SrcPackage.h
   SysContent.h

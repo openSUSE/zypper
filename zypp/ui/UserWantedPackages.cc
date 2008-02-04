@@ -19,12 +19,8 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ui/Selectable.h"
-#include "zypp/ResObject.h"
-#include "zypp/Package.h"
-#include "zypp/Selection.h"
-#include "zypp/Pattern.h"
-#include "zypp/Language.h"
-#include "zypp/Patch.h"
+
+#include "zypp/ResObjects.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
 
@@ -48,8 +44,8 @@ namespace zypp
 	static inline PoolProxyIterator pkgBegin()		{ return poolProxyBegin<Package>();	}
 	static inline PoolProxyIterator pkgEnd()		{ return poolProxyEnd<Package>();	}
 
-	static inline PoolProxyIterator langBegin()		{ return poolProxyBegin<Language>();	}
-	static inline PoolProxyIterator langEnd()		{ return poolProxyEnd<Language>();	}
+// 	static inline PoolProxyIterator langBegin()		{ return poolProxyBegin<Language>();	}
+// 	static inline PoolProxyIterator langEnd()		{ return poolProxyEnd<Language>();	}
 
 	static inline PoolProxyIterator patchesBegin()		{ return poolProxyBegin<Patch>();	}
 	static inline PoolProxyIterator patchesEnd()		{ return poolProxyEnd<Patch>();		}
@@ -64,9 +60,8 @@ namespace zypp
 	static void addDirectlySelectedPackages	( set<string> & pkgNames );
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames );
 
-	static void addSelectionPackages	( set<string> & pkgNames );
 	static void addPatternPackages		( set<string> & pkgNames );
-	static void addLanguagePackages		( set<string> & pkgNames );
+ 	static void addLanguagePackages		( set<string> & pkgNames );
 	static void addPatchPackages		( set<string> & pkgNames );
 
 
@@ -78,7 +73,6 @@ namespace zypp
 	    DBG << "Collecting packages the user explicitly asked for" << endl;
 
 	    addDirectlySelectedPackages	( pkgNames );
-	    addSelectionPackages	( pkgNames );
 	    addPatternPackages		( pkgNames );
 	    addLanguagePackages		( pkgNames );
 	    addPatchPackages		( pkgNames );
@@ -108,12 +102,6 @@ namespace zypp
 
 
 
-	static void addSelectionPackages( set<string> & pkgNames )
-	{
-	    addPkgSetPackages<Selection>( pkgNames );
-	}
-
-
 	static void addPatternPackages( set<string> & pkgNames )
 	{
 	    addPkgSetPackages<Pattern>( pkgNames );
@@ -121,7 +109,7 @@ namespace zypp
 
 
 	/**
-	 * Template to handle Selections and Patterns
+	 * Template to handle Patterns
 	 **/
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames )
 	{
@@ -129,9 +117,9 @@ namespace zypp
 		  it != poolProxyEnd<PkgSet_T>();
 		  ++it )
 	    {
-		// Take all pkg sets (selections or patterns) into account that
+		// Take all pkg sets (patterns) into account that
 		// will be transacted, no matter if the user explicitly asked
-		// for that pkg set or if the selection is required by another
+		// for that pkg set or if the patterns is required by another
 		// pkg set of the same class
 
 		typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*it)->theObj() );
@@ -148,9 +136,10 @@ namespace zypp
 	}
 
 
-
 	static void addLanguagePackages( set<string> & pkgNames )
 	{
+#warning NO MORE LANGUAGE RESOLVABLE
+#if 0
 	    // Build a set of all languages that are to be transacted
 
 	    set<string> wantedLanguages;
@@ -189,6 +178,7 @@ namespace zypp
 		    }
 		}
 	    }
+#endif
 	}
 
 

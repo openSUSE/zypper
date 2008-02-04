@@ -166,11 +166,6 @@ std::string helixXML( const PoolItem &item )
 {
   const Resolvable::constPtr resolvable = item.resolvable();
   stringstream str;
-  if ( isKind<Language>(resolvable) ) {
-      // language dependencies will be written in another part
-      return str.str();
-  }
-
   str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
   str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;
   str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;
@@ -261,12 +256,17 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     {
 	Resolvable::constPtr res = it->resolvable();
 
+#warning NO MORE LANGUAGE RESOLVABLE
+        // - use pools list of requested locales and pass it as 'LocaleList language'
+        // - restore the list via Pool::setRequestedLocales.
+#if 0
 	if (isKind<Language>(res)) {
 	    if ( it->status().isInstalled()
 		 || it->status().isToBeInstalled()) {
 		language.push_back (*it);
 	    }
 	} else {
+#endif
 	    if ( system && it->status().isInstalled() ) {
 		// system channel
 		system->addResolvable (*it);
@@ -300,7 +300,6 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 		 && !(it->status().isBySolver())) {
 		items_locked.push_back (*it);
 	    }
-	}
     }
 
     // writing control file "*-test.xml"

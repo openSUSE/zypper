@@ -29,13 +29,10 @@ namespace zypp
 	 *
 	 * - The user wanted to transact the pkg directly
 	 *
-	 * - Pkg is part of a selection the user wanted to transact
 	 * - Pkg is part of a pattern   the user wanted to transact
 	 * - Pkg is part of a language  the user wanted to transact
+         *   (? No more transacting Languages)
 	 * - Pkg is part of a patch     the user wanted to transact
-	 *
-	 * - Pkg is part of a selection that is required by a selection the
-	 *   user wanted to transact
 	 *
 	 * - Pkg is part of a pattern that is required by a pattern the
 	 *   user wanted to transact

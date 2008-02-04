@@ -27,7 +27,6 @@
 #include "zypp/parser/xmlstore/XMLProductParser.h"
 #include "zypp/parser/xmlstore/XMLPatternParser.h"
 #include "zypp/parser/xmlstore/XMLPatchParser.h"
-#include "zypp/parser/xmlstore/XMLLanguageParser.h"
 
 #include <iostream>
 #include <fstream>
@@ -159,20 +158,16 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
   //d->kinds.insert(ResTraits<zypp::Script>::kind);
-  d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
-  d->kinds.insert(ResTraits<zypp::Language>::kind);
 
   // types of resolvables stored (supported)
   d->kinds_flags.insert(ResTraits<zypp::Package>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Script>::kind);
-  d->kinds_flags.insert(ResTraits<zypp::Selection>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Product>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Pattern>::kind);
-  d->kinds_flags.insert(ResTraits<zypp::Language>::kind);
 
 
   // check if the db exists
@@ -654,30 +649,12 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
       break;
     }
   }
-  else if ( kind == ResTraits<zypp::Selection>::kind )
-  {
-    XMLPatternParser iter(res_file,"");
-    for (; !iter.atEnd(); ++iter)
-    {
-      resolvables.push_back(createSelection(**iter));
-      break;
-    }
-  }
   else if ( kind == ResTraits<zypp::Pattern>::kind )
   {
     XMLPatternParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
       resolvables.push_back(createPattern(**iter));
-      break;
-    }
-  }
-  else if ( kind == ResTraits<zypp::Language>::kind )
-  {
-    XMLLanguageParser iter(res_file,"");
-    for (; !iter.atEnd(); ++iter)
-    {
-      resolvables.push_back(createLanguage(**iter));
       break;
     }
   }
@@ -983,24 +960,6 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   return 0L;
 }
 
-Language::Ptr
-XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData & parsed ) const
-{
-  try
-  {
-    return Language::installedInstance( Locale(parsed.name) );
-  }
-  catch (const Exception & excpt_r)
-  {
-    ZYPP_CAUGHT(excpt_r);
-    Exception nexcpt("Cannot create language object");
-    nexcpt.remember(excpt_r);
-    ZYPP_THROW(nexcpt);
-  }
-  return 0L;
-}
-
-
 Product::Ptr
 XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const
 {
@@ -1209,49 +1168,6 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
   return 0L;
 }
 
-Selection::Ptr
-XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData & parsed ) const
-{
-  try
-  {
-    detail::ResImplTraits<XMLSelectionImpl>::Ptr impl(new XMLSelectionImpl());
-
-    impl->_summary = parsed.summary;
-    impl->_description = parsed.summary;
-
-    impl->_install_notify = parsed.install_notify;
-    impl->_delete_notify = parsed.delete_notify;
-    impl->_license_to_confirm = parsed.license_to_confirm;
-    impl->_vendor = parsed.vendor;
-    impl->_size = parsed.size;
-    impl->_downloadSize = parsed.downloadSize;
-    impl->_install_only = parsed.install_only;
-    impl->_build_time = parsed.build_time;
-    impl->_install_time = parsed.install_time;
-
-    impl->_visible = parsed.userVisible;
-    impl->_name = parsed.name;
-    //impl->_default = ((parsed.default_ == "false" ) ? false : true );
-    impl->_category = parsed.category;
-
-    Arch arch;
-    if (!parsed.arch.empty())
-      arch = Arch(parsed.arch);
-
-    // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies( parsed, ResTraits<Pattern>::kind));
-    Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
-    return selection;
-  }
-  catch (const Exception & excpt_r)
-  {
-    ZYPP_CAUGHT(excpt_r);
-    Exception nexcpt("Cannot create installation selection object");
-    nexcpt.remember(excpt_r);
-    ZYPP_THROW(nexcpt);
-  }
-  return 0L;
-}
 
 Dependencies
 XMLFilesBackend::createDependencies( const zypp::parser::xmlstore::XMLResObjectData & parsed, const Resolvable::Kind my_kind ) const

@@ -61,14 +61,14 @@ static PoolItemSet triggeredSolution;   // only the latest state of an item is i
                                         // for the pool. Documents already inserted items.
 
 //---------------------------------------------------------------------------
-// Callbacks for SAT policies	
+// Callbacks for SAT policies
 //---------------------------------------------------------------------------
-	
+
 int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
     DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
     return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
 }
-	
+
 //---------------------------------------------------------------------------
 
 std::ostream &
@@ -235,46 +235,6 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 //----------------------------------------------------------------------------
 // Helper functions for the ZYPP-Pool
 //----------------------------------------------------------------------------
-
-
-Resolvable::Kind
-string2kind (const std::string & str)
-{
-    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
-    if (!str.empty()) {
-	if (str == "package") {
-	    // empty
-	}
-	else if (str == "patch") {
-	    kind = ResTraits<zypp::Patch>::kind;
-	}
-	else if (str == "atom") {
-	    kind = ResTraits<zypp::Atom>::kind;
-	}
-	else if (str == "pattern") {
-	    kind = ResTraits<zypp::Pattern>::kind;
-	}
-	else if (str == "selection") {
-	    kind = ResTraits<zypp::Selection>::kind;
-	}
-	else if (str == "script") {
-	    kind = ResTraits<zypp::Script>::kind;
-	}
-	else if (str == "message") {
-	    kind = ResTraits<zypp::Message>::kind;
-	}
-	else if (str == "product") {
-	    kind = ResTraits<zypp::Product>::kind;
-	}
-	else if (str == "language") {
-	    kind = ResTraits<zypp::Language>::kind;
-	}
-	else {
-	    ERR << "string2kind unknown kind '" << str << "'" << endl;
-	}
-    }
-    return kind;
-}
 
 
 //------------------------------------------------------------------------------------------------------------

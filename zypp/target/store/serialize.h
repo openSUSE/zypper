@@ -17,18 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "Backend.h"
 
-#include <zypp/Message.h>
-#include <zypp/Resolvable.h>
-#include <zypp/Patch.h>
-#include <zypp/Package.h>
-#include <zypp/Script.h>
-#include <zypp/Atom.h>
-#include <zypp/Message.h>
-#include <zypp/Language.h>
-#include <zypp/Pattern.h>
-#include <zypp/Selection.h>
-#include <zypp/Product.h>
-#include <zypp/Edition.h>
+#include <zypp/ResObjects.h>
 
 #define SERIALIZER_VERSION "2.0"
 
@@ -55,7 +44,7 @@ template<>
 std::string toXML( const Capabilities &caps );
 
 template<>
-std::string toXML( const CapabilitySet &caps );    
+std::string toXML( const CapabilitySet &caps );
 
 template<>
 std::string toXML( const Dependencies &dep );
@@ -108,13 +97,7 @@ template<>
 std::string toXML( const Pattern::constPtr &obj );
 
 template<>
-std::string toXML( const Selection::constPtr &obj );
-
-template<>
 std::string toXML( const Product::constPtr &obj );
-
-template<>
-std::string toXML( const Language::constPtr &obj );
 
 /////////////////////////////////////////////////////////////////
 } // namespace storage

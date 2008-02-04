@@ -24,14 +24,7 @@
 #include "zypp/ZConfig.h"
 
 #include "zypp/PoolItem.h"
-#include "zypp/Resolvable.h"
-#include "zypp/ResObject.h"
-#include "zypp/Package.h"
-#include "zypp/SrcPackage.h"
-#include "zypp/Pattern.h"
-#include "zypp/Selection.h"
-#include "zypp/Script.h"
-#include "zypp/Message.h"
+#include "zypp/ResObjects.h"
 #include "zypp/Url.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ExternalProgram.h"
@@ -316,7 +309,7 @@ namespace zypp
         if ( status.checksum() == rpmstatus.checksum() )
           build_rpm_solv = false;
       }
-      
+
       if ( build_rpm_solv )
       {
          MIL << "Executing solv converter" << endl;
@@ -726,7 +719,7 @@ namespace zypp
         ts_store = Date(store_info.mtime());
       else
          ts_store = Date::now();
-      
+
       if ( ts_rpm > ts_store )
       {
         return ts_rpm;
