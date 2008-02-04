@@ -90,7 +90,9 @@ namespace zypp
          */
         //@{
         /** Load \ref Solvables from a solv-file.
+         * In case of an exception the repo remains in the \ref Pool.
          * \throws Exception if loading the solv-file fails.
+         * \see \ref Pool::addRepoSolv and \ref Repo::EraseFromPool
          */
         void addSolv( const Pathname & file_r );
 
@@ -130,6 +132,7 @@ namespace zypp
     //	CLASS NAME : Repo::EraseFromPool
     //
     /** Functor removing \ref Repo from it's \ref Pool.
+     *
      * E.g. used as dispose function in. \ref AutoDispose
      * to provide a convenient and exception safe temporary
      * \ref Repo.

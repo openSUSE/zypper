@@ -99,6 +99,7 @@ namespace zypp
       _id = detail::noRepoId;
     }
 
+#warning NEED POOL MANIP EXEPTIONS
     void Repo::addSolv( const Pathname & file_r )
     {
       NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
@@ -107,10 +108,13 @@ namespace zypp
       if ( file == NULL )
       {
         file.resetDispose();
-        ZYPP_THROW( Exception( _("Can't read solv-file: ")+file_r.asString() ) );
+        ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
       }
 
-      myPool()._addSolv( _repo, file );
+      if ( myPool()._addSolv( _repo, file ) != 0 )
+      {
+        ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
+      }
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )
