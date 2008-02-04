@@ -17,6 +17,7 @@
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
+#include "zypp/ZConfig.h"
 #include "zypp/PathInfo.h"
 #include "zypp/Product.h"
 #include "zypp/Package.h"
@@ -30,13 +31,6 @@
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
-
-  namespace zypp_detail
-  { /////////////////////////////////////////////////////////////////
-    Arch defaultArchitecture();
-    /////////////////////////////////////////////////////////////////
-  } // namespace zypp_detail
-  ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -313,7 +307,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     HelixControl control (dumpPath + "/solver-test.xml",
 			  repoTable,
-			  zypp_detail::defaultArchitecture(),
+			  ZConfig::instance().systemArchitecture(),
 			  language);
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
