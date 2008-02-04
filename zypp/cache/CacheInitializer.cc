@@ -15,7 +15,6 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Measure.h"
 #include "zypp/cache/CacheInitializer.h"
-#include "zypp/target/store/PersistentStorage.h"
 #include "zypp/cache/Utils.h"
 #include "zypp/PathInfo.h"
 #include "sqlite-schema.h"

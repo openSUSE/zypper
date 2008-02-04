@@ -419,32 +419,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xml
 )
 
-SET( zypp_parser_xmlstore_SRCS
-  parser/xmlstore/XMLLanguageParser.cc
-  parser/xmlstore/XMLParserData.cc
-  parser/xmlstore/XMLPatchParser.cc
-  parser/xmlstore/XMLPatternParser.cc
-  parser/xmlstore/XMLProductParser.cc
-  parser/xmlstore/XMLResObjectParser.cc
-  parser/xmlstore/XMLSourceCacheParser.cc
-)
-
-SET( zypp_parser_xmlstore_HEADERS
-  parser/xmlstore/XMLLanguageParser.h
-  parser/xmlstore/XMLParserData.h
-  parser/xmlstore/XMLPatchParser.h
-  parser/xmlstore/XMLPatternParser.h
-  parser/xmlstore/XMLProductParser.h
-  parser/xmlstore/XMLResObjectParser.h
-  parser/xmlstore/XMLSourceCacheParser.h
-  parser/xmlstore/schemanames.h
-)
-
-INSTALL(  FILES
-  ${zypp_parser_xmlstore_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xmlstore
-)
-
 SET( zypp_parser_yum_SRCS
   parser/yum/RepoParser.cc
   parser/yum/FileReaderBaseImpl.cc
@@ -646,28 +620,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/rpm
 )
 
-SET( zypp_target_store_SRCS
-  target/store/Backend.cc
-  target/store/PersistentStorage.cc
-  target/store/XMLFilesBackend.cc
-  target/store/serialize.cc
-  target/store/xml_escape_parser.cpp
-)
-
-SET( zypp_target_store_HEADERS
-  target/store/Backend.h
-  target/store/PersistentStorage.h
-  target/store/XMLFilesBackend.h
-  target/store/parser_utils.hpp
-  target/store/serialize.h
-  target/store/xml_escape_parser.hpp
-)
-
-INSTALL(  FILES
-  ${zypp_target_store_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/store
-)
-
 SET( zypp_thread_SRCS
   thread/Mutex.cc
 )
@@ -862,7 +814,6 @@ ${zypp_cache_SRCS}
 ${zypp_cache_sqlite3x_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
-${zypp_parser_xmlstore_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
 ${zypp_parser_plaindir_SRCS}
@@ -876,7 +827,6 @@ ${zypp_repo_cached_SRCS}
 ${zypp_repo_yum_SRCS}
 ${zypp_repo_susetags_SRCS}
 ${zypp_repo_data_SRCS}
-${zypp_target_store_SRCS}
 ${zypp_target_rpm_SRCS}
 ${zypp_target_hal_SRCS}
 ${zypp_target_modalias_SRCS}
@@ -903,7 +853,6 @@ ${zypp_data_HEADERS}
 ${zypp_cache_HEADERS}
 ${zypp_cache_sqlite3x_HEADERS}
 ${zypp_ui_HEADERS}
-${zypp_parser_xmlstore_HEADERS}
 ${zypp_media_HEADERS}
 ${zypp_target_hal_HEADERS}
 ${zypp_media_proxyinfo_HEADERS}
@@ -911,7 +860,6 @@ ${zypp_base_HEADERS}
 ${zypp_solver_detail_HEADERS}
 ${zypp_sat_HEADERS}
 ${zypp_sat_detail_HEADERS}
-${zypp_target_store_HEADERS}
 ${zypp_url_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
@@ -943,7 +891,6 @@ SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_ui_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_parser_xmlstore_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_data_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_media_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_hal_SRCS} )
@@ -953,7 +900,6 @@ SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_base_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_solver_detail_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_sat_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_target_store_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_url_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_source_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_SRCS} )
@@ -991,6 +937,3 @@ INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 # install XML schemas
 FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng )
 INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
-
-FILE( GLOB XMLSTORE_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/xmlstore/schema/*.rng )
-INSTALL(FILES ${XMLSTORE_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/xmlstore" )

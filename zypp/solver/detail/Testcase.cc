@@ -22,7 +22,7 @@
 #include "zypp/Product.h"
 #include "zypp/Package.h"
 #include "zypp/Edition.h"
-#include "zypp/target/store/xml_escape_parser.hpp"
+#include "zypp/parser/xml_escape_parser.hpp"
 #include "zypp/base/String.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Capabilities.h"
