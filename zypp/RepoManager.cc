@@ -32,6 +32,7 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/ManagedFile.h"
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
@@ -122,14 +123,14 @@ namespace zypp
 //     callback::SendReport<ProgressReport> report;
 //     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
 //     progress.name(str::form(_("Cleaning repository '%s' cache"), info.name().c_str()));
-// 
+//
 //     if ( !store.isCached(info.alias()) )
 //       return;
-// 
+//
 //     MIL << info.alias() << " cleaning cache..." << endl;
-//     
+//
 //     CombinedProgressData subprogrcv(progress);
-// 
+//
 //     store.cleanRepository(info.alias(), subprogrcv);
   }
 
@@ -734,14 +735,17 @@ namespace zypp
     }
 
     MIL << "repo type is " << repokind << endl;
-    
+
     switch ( repokind.toEnum() )
     {
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
       {
         MIL << "Executing solv converter" << endl;
-        string cmd( str::form( "/usr/bin/repo2solv.sh \"%s\" > %s", rawpath.asString().c_str(), solvfile.asString().c_str() ) );
+        // Take care we unlink the solvfile on exception
+        ManagedFile guard( solvfile, filesystem::unlink );
+
+        string cmd( str::form( "/repo2solv.sh \"%s\" > '%s'", rawpath.c_str(), solvfile.c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
@@ -749,6 +753,9 @@ namespace zypp
         int ret = prog.close();
         if ( ret != 0 )
           ZYPP_THROW(RepoUnknownTypeException());
+
+        // We keep it.
+        guard.resetDispose();
       }
       break;
       default:
@@ -870,7 +877,7 @@ namespace zypp
 
   RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
   {
-    
+
     Pathname base = _pimpl->options.repoCachePath + info.alias();
     Pathname cookiefile = base.extend(".cookie");
 
