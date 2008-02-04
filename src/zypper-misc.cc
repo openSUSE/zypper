@@ -262,6 +262,7 @@ Capability safe_parse_cap (const Zypper & zypper,
     cap = CapFactory().parse (kind, new_capstr);
   }
   catch (const Exception& e) {
+    //! \todo check this handling (should we fail or set a special exit code?)
     ZYPP_CAUGHT(e);
     cerr << format (_("Cannot parse capability '%s'.")) % capstr << endl;
   }
@@ -271,8 +272,9 @@ Capability safe_parse_cap (const Zypper & zypper,
 // this does only resolvables with this _name_.
 // we could also act on _provides_
 // TODO edition, arch
-void mark_for_install( const ResObject::Kind &kind,
-		       const std::string &name )
+void mark_for_install(Zypper & zypper,
+                      const ResObject::Kind &kind,
+		      const std::string &name)
 {
   const ResPool &pool = God->pool();
   // name and kind match:
@@ -289,7 +291,7 @@ void mark_for_install( const ResObject::Kind &kind,
     // TranslatorExplanation e.g. "package 'pornview' not found"
     cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
     WAR << format("%s '%s' not found") % kind % name << endl;
-
+    zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
   }
 
@@ -344,8 +346,9 @@ struct DeleteProcess
 };
 
 // mark all matches
-void mark_for_uninstall( const ResObject::Kind &kind,
-			 const std::string &name )
+void mark_for_uninstall(Zypper & zypper,
+                        const ResObject::Kind &kind,
+			const std::string &name)
 {
   const ResPool &pool = God->pool();
   // name and kind match:
@@ -362,18 +365,20 @@ void mark_for_uninstall( const ResObject::Kind &kind,
   if (!deleter.found) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
     cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
-    return; //error?
+    zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+    return;
   }
 }
 
-void mark_by_name (bool install_not_delete,
+void mark_by_name (Zypper & zypper,
+                   bool install_not_remove,
 		   const ResObject::Kind &kind,
 		   const string &name )
 {
-  if (install_not_delete)
-    mark_for_install(kind, name);
+  if (install_not_remove)
+    mark_for_install(zypper, kind, name);
   else
-    mark_for_uninstall(kind, name);
+    mark_for_uninstall(zypper, kind, name);
 }
 
 // don't try NAME-EDITION yet, could be confused by
@@ -391,7 +396,7 @@ bool mark_by_name_edition (...)
 */
 
 void mark_by_capability (const Zypper & zypper,
-                         bool install_not_delete,
+                         bool install_not_remove,
 			 const ResObject::Kind &kind,
 			 const string &capstr )
 {
@@ -401,7 +406,7 @@ void mark_by_capability (const Zypper & zypper,
     cout_vv << "Capability: " << cap << endl;
 
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
-    if (install_not_delete) {
+    if (install_not_remove) {
       cerr_vv << "Adding requirement " << cap << endl;
       resolver->addRequire (cap);
     }
@@ -550,10 +555,12 @@ bool show_problems(Zypper & zypper)
   else if (rproblems.empty()) {
     // should not happen! If solve() failed at least one problem must be set!
     stm << _("Specified capability not found") << endl;
+    zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return false;
   }
 
   // for many problems, list them shortly first
+  //! \todo handle resolver problems caused by --capability mode arguments specially to give proper output (bnc #337007)
   if (rproblems.size() > 1)
   {
     for (i = b; i != e; ++i) {
@@ -1594,7 +1601,8 @@ void solve_and_commit (Zypper & zypper)
     }
   }
 
-  zypper.setExitCode(retv);
+  if (zypper.exitCode() == ZYPPER_EXIT_OK) // don't overwrite previously set exit code
+    zypper.setExitCode(retv);
 }
 
 // TODO confirm licenses

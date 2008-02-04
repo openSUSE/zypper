@@ -27,18 +27,23 @@ zypp::Capability safe_parse_cap (const Zypper & zypper,
 				 const std::string &capstr);
 
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
-void mark_for_install( const zypp::ResObject::Kind &kind,
-		       const std::string &name );
-void mark_for_uninstall( const zypp::ResObject::Kind &kind,
-			 const std::string &name );
+void mark_for_install(Zypper & zypper,
+                      const zypp::ResObject::Kind &kind,
+		      const std::string &name);
 
-void mark_by_name (bool install_not_delete,
+void mark_for_uninstall(Zypper & zypper,
+                        const zypp::ResObject::Kind &kind,
+			const std::string &name);
+
+void mark_by_name (Zypper & zypper,
+                   bool install_not_remove,
 		   const zypp::ResObject::Kind &kind,
-		   const std::string &name );
+		   const std::string &name);
+
 void mark_by_capability (const Zypper & zypper,
-                         bool install_not_delete,
+                         bool install_not_remove,
 			 const zypp::ResObject::Kind &kind,
-			 const std::string &capstr );
+			 const std::string &capstr);
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset

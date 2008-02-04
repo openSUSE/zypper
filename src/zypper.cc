@@ -68,7 +68,7 @@ Zypper::~Zypper()
 {
   MIL << "Bye!" << endl;
 }
-
+ 
 Zypper_Ptr Zypper::instance()
 {
   static Zypper_Ptr _instance;
@@ -1805,7 +1805,7 @@ void Zypper::doCommand()
       if (by_capability)
         mark_by_capability (*this, install_not_remove, kind, *it);
       else
-        mark_by_name (install_not_remove, kind, *it);
+        mark_by_name (*this, install_not_remove, kind, *it);
     }
 
     // rpm files
