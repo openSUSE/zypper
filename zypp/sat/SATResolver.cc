@@ -23,6 +23,7 @@
 #include "zypp/base/String.h"
 #include "zypp/Capability.h"
 #include "zypp/ResStatus.h"
+#include "zypp/VendorAttr.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -60,7 +61,15 @@ static PoolItemSet triggeredSolution;   // only the latest state of an item is i
                                         // for the pool. Documents already inserted items.
 
 //---------------------------------------------------------------------------
-
+// Callbacks for SAT policies	
+//---------------------------------------------------------------------------
+	
+int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
+    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
+    return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
+}
+	
+//---------------------------------------------------------------------------
 
 std::ostream &
 SATResolver::dumpOn( std::ostream & os ) const
@@ -93,6 +102,7 @@ SATResolver::~SATResolver()
 }
 
 //---------------------------------------------------------------------------
+
 
 ResPool
 SATResolver::pool (void) const
@@ -434,6 +444,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    _solv->vendorCheckCb = &vendorCheck;
     sat::Pool::instance().prepare();
 
     // Solve !
