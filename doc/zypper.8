@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.9.6" "zypper" "System Tools"
+.TH "zypper" "8" "0.9.7" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -582,7 +582,11 @@ Returned after a successfull installation of a patch which requires reboot of co
 .TP
 103 - ZYPPER_EXIT_INF_RESTART_NEEDED
 Returned after a successfull installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. zypper update) needs to be executed once again to install any remaining patches.
-
+.TP
+104 - ZYPPER_EXIT_INF_CAP_NOT_FOUND
+Returned by the \fBinstall\fR and the \fBremove\fR command in case any of the
+arguments does not match any of the available (or installed) resolvable names
+or other capabilities.
 
 .SH "COMPATIBILITY WITH RUG"
 .LP
