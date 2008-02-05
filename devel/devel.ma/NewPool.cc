@@ -4,6 +4,7 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/LogTools.h>
+#include <zypp/base/Debug.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
@@ -14,9 +15,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
-#include "zypp/Package.h"
-#include "zypp/Pattern.h"
-#include "zypp/Language.h"
+#include "zypp/ResObjects.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
 #include "zypp/ManagedFile.h"
@@ -35,6 +34,8 @@
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/detail/PoolImpl.h"
+
+#include <zypp/base/GzStream.h>
 
 #include <boost/mpl/int.hpp>
 
@@ -418,85 +419,17 @@ void testCMP( const L & lhs, const R & rhs )
 **      FUNCTION TYPE : int
 */
 int main( int argc, char * argv[] )
-{
+try {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-
-  sat::Pool satpool( sat::Pool::instance() );
-
-#if 1
-  sat::Repo s( satpool.addRepoSolv( "10.3.solv" ) );
-  //sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
-
-  Capability lc( "foo <= 13" );
-  Capability rc( "Baa > 5" );
-  int nid = ::rel2id( satpool.get(), lc.id(), rc.id(), 16, /*create*/true );
-  Capability t( nid );
-  INT << lc << endl;
-  INT << rc << endl;
-  INT << t << endl;
-  INT << dump(t) << endl;
-
-  if ( 0 )
-  {
-  Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
-  MIL << r << endl;
-  Capabilities::const_iterator it = r.begin();
-  DBG << *it << endl;
-  it = ++r.begin();
-  DBG << *it << endl;
-
-
-
-  r = (*satpool.solvablesBegin())[Dep::REQUIRES];
-  for_( it, r.begin(), r.end() )
-  {
-    if ( it.tagged() )
-      WAR << *it << " (is prereq)" << endl;
-    else
-      MIL << dump(*it) << endl;
-  }
-  }
-  if ( 0 )
-  {
-    std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                         satpool.solvablesBegin(), satpool.solvablesEnd() ),
-                   make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                         satpool.solvablesEnd(), satpool.solvablesEnd() ),
-                   Xprint() );
-    std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "pattern:yast2_install_wf" ),
-                                         satpool.solvablesBegin(), satpool.solvablesEnd() ),
-                   make_filter_iterator( filter::byValue( &sat::Solvable::name, "pattern:yast2_install_wf" ),
-                                         satpool.solvablesEnd(), satpool.solvablesEnd() ),
-                   Xprint() );
-  }
-
-
-
-  // make_filter_iterator(detail::ByRepo( *this ),
-  // Repo.cc-                                  detail::SolvableIterator(_repo->end),
-  // Repo.cc-                                  detail::SolvableIterator(_repo->end) );
-
-
-//   DBG << satpool.solvablesBegin()->name() << endl;
-//   DBG << (*satpool.solvablesBegin())[Dep::PROVIDES] << endl;
-
-  //std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Xprint() );
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-#endif
-
   setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
 
-  ResPool pool( getZYpp()->pool() );
+  sat::Pool satpool( sat::Pool::instance() );
+  ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
   RepoInfoList repos = repoManager.knownRepositories();
-  // SEC << "/Local/ROOT " << repos << endl;
 
   // launch repos
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
@@ -507,7 +440,7 @@ int main( int argc, char * argv[] )
     if ( ! nrepo.enabled() )
       continue;
 
-    if ( ! repoManager.isCached( nrepo ) || 0 )
+    if ( ! repoManager.isCached( nrepo ) || /*force*/false )
     {
       if ( repoManager.isCached( nrepo ) )
       {
@@ -522,8 +455,6 @@ int main( int argc, char * argv[] )
   }
 
   // create from cache:
-  std::list<Repository> repositories;
-
   {
     Measure x( "CREATE FROM CACHE" );
     for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
@@ -533,52 +464,42 @@ int main( int argc, char * argv[] )
         continue;
 
       Measure x( "CREATE FROM CACHE "+nrepo.alias() );
-      Repository nrep( repoManager.createFromCache( nrepo ) );
-      const zypp::ResStore & store( nrep.resolvables() );
-      repositories.push_back( nrep );
+      repoManager.loadFromCache( nrepo );
+      USR << "pool: " << pool << endl;
     }
   }
 
-  // load pool:
-  {
-    Measure x( "LOAD POOL" );
-    for_( it, repositories.begin(), repositories.end() )
-    {
-      Measure x( "LOAD POOL "+(*it).info().alias() );
-      const zypp::ResStore & store( (*it).resolvables() );
-      getZYpp()->addResolvables( store );
-    }
-  }
-
-
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
-      //getZYpp()->initTarget( "/" );
+//       zypp::base::LogControl::TmpLineWriter shutUp;
+      getZYpp()->initializeTarget( sysRoot );
+      getZYpp()->target()->load();
     }
-    dumpPoolStats( SEC << "TargetStore: " << endl,
-                   getZYpp()->target()->resolvables().begin(),
-                   getZYpp()->target()->resolvables().end() ) << endl;
   }
 
+  MIL << satpool << endl;
   USR << "pool: " << pool << endl;
+
+  vdumpPoolStats( USR << "Pool:"<< endl,
+                  pool.begin(), pool.end() ) << endl;
+
 
   //waitForInput();
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-  MIL << satpool << endl;
-  for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
-  {
-    MIL << *it << endl;
-    //MIL << dump(*it) << endl;
-  }
+//   for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
+//   {
+//     MIL << *it << endl;
+//     //MIL << dump(*it) << endl;
+//   }
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
 }
+catch (...)
+{}
 

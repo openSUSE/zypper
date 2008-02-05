@@ -71,7 +71,7 @@ template<class _Condition>
 struct PrintPoolItem
 {
   void operator()( const PoolItem & pi ) const
-  { USR << pi << " (" << pi.resolvable().get() << ")" <<endl; }
+  { USR << pi << endl; }
 };
 
 template <class _Iterator>
