@@ -18,6 +18,7 @@
 #include "zypp/base/Iterator.h"
 
 #include "zypp/pool/PoolTraits.h"
+#include "zypp/PoolItem.h"
 #include "zypp/ResFilters.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -46,19 +47,18 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const ResPool & obj );
 
   public:
-    /** \ref zypp::pool::PoolItem */
-    typedef pool::PoolTraits::Item		         Item;
+    /** \ref PoolItem */
+    typedef PoolItem				         value_type;
     typedef pool::PoolTraits::size_type		         size_type;
     typedef pool::PoolTraits::const_iterator	         const_iterator;
-    typedef pool::PoolTraits::byName_iterator            byName_iterator;
+
     typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
     typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
     typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
   public:
     /** Singleton ctor. */
-    static ResPool instance()
-    { return ResPool(); }
+    static ResPool instance();
 
     /** preliminary */
     ResPoolProxy proxy() const;
@@ -69,13 +69,6 @@ namespace zypp
      * Dependencies).
     */
     const SerialNumber & serial() const;
-
-    /** Return the corresponding \ref PoolItem.
-     * Pool and sat pool should be in sync. Returns an empty
-     * \ref PoolItem if there is no corresponding \ref PoolItem.
-     * \see \ref PoolItem::satSolvable.
-    */
-    PoolItem find( const sat::Solvable & slv_r ) const;
 
   public:
     /**  */
@@ -92,33 +85,45 @@ namespace zypp
     //@}
 
   public:
+    /** Return the corresponding \ref PoolItem.
+     * Pool and sat pool should be in sync. Returns an empty
+     * \ref PoolItem if there is no corresponding \ref PoolItem.
+     * \see \ref PoolItem::satSolvable.
+    */
+    PoolItem find( const sat::Solvable & slv_r ) const;
+
+  public:
     /** \name Iterate through all ResObjects of a certain kind. */
     //@{
     typedef zypp::resfilter::ByKind ByKind;
     typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
 
-    byKind_iterator byKindBegin( const ResObject::Kind & kind_r ) const
+    byKind_iterator byKindBegin( const ResKind & kind_r ) const
     { return make_filter_begin( ByKind(kind_r), *this ); }
 
     template<class _Res>
-      byKind_iterator byKindBegin() const
-      { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
+    byKind_iterator byKindBegin() const
+    { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
 
-
-    byKind_iterator byKindEnd( const ResObject::Kind & kind_r ) const
+    byKind_iterator byKindEnd( const ResKind & kind_r ) const
     { return make_filter_end( ByKind(kind_r), *this ); }
 
     template<class _Res>
-      byKind_iterator byKindEnd() const
-      { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+    byKind_iterator byKindEnd() const
+    { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
     //@}
 
   public:
     /** \name Iterate through all ResObjects with a certain name (all kinds). */
     //@{
-    byName_iterator byNameBegin( const std::string & name_r ) const;
+    typedef zypp::resfilter::ByName ByName;
+    typedef filter_iterator<ByName,const_iterator> byName_iterator;
 
-    byName_iterator byNameEnd( const std::string & name_r ) const;
+    byName_iterator byNameBegin( const std::string & name_r ) const
+    { return make_filter_begin( ByName(name_r), *this ); }
+
+    byName_iterator byNameEnd( const std::string & name_r ) const
+    { return make_filter_end( ByName(name_r), *this ); }
     //@}
 
  public:
@@ -208,17 +213,9 @@ namespace zypp
   private:
     /** Ctor */
     ResPool( pool::PoolTraits::Impl_constPtr impl_r );
-    /** Default ctor */
-    ResPool();
-  private:
     /** Const access to implementation. */
     pool::PoolTraits::Impl_constPtr _pimpl;
   };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ResPool \todo remove deprecated typedef. */
-  typedef ResPool ZYPP_DEPRECATED ResPool_Ref;
-
   ///////////////////////////////////////////////////////////////////
 
   /** \relates ResPool Stream output */

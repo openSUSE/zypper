@@ -91,15 +91,11 @@ namespace zypp
                              const Capability & lhs_r,
                              function<bool(const CapAndItem &)> action_r )
   {
-#warning FIX BROKEN BROKEN POOL byCapabilityIndex
-    return -1;
-#if 0
     std::string index( lhs_r.index() );
     return invokeOnEach( pool_r.byCapabilityIndexBegin( index, dep_r ),
                          pool_r.byCapabilityIndexEnd( index, dep_r ),
                          MatchesCapability( lhs_r ), // filter
                          action_r );
-#endif
   }
 
 

@@ -69,10 +69,10 @@ namespace zypp
 
   struct SelPoolHelper
   {
-    typedef std::set<ResPool::Item>         ItemC;
+    typedef std::set<PoolItem>         ItemC;
     struct SelC
     {
-      void add( ResPool::Item it )
+      void add( PoolItem it )
       {
         if ( it.status().isInstalled() )
           installed.insert( it );
@@ -88,7 +88,7 @@ namespace zypp
     KindC _kinds;
 
     /** collect from a pool */
-    void operator()( ResPool::Item it )
+    void operator()( PoolItem it )
     {
       _kinds[it->kind()][it->name()].add( it );
     }
@@ -158,7 +158,7 @@ namespace zypp
     {
       SelPoolHelper collect;
       std::for_each( _pool.begin(), _pool.end(),
-                     functor::functorRef<void,ResPool::Item>( collect ) );
+                     functor::functorRef<void,PoolItem>( collect ) );
       collect.feed( _selPool );
     }
 

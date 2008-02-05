@@ -23,6 +23,11 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace pool
+  {
+    class PoolImpl;
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : PoolItem
@@ -44,67 +49,63 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
 
-  public:
-    /** Implementation */
-    class Impl;
+    public:
+      /** Implementation */
+      class Impl;
 
-  public:
-    /** Default ctor for use in std::container. */
-    PoolItem();
+    public:
+      /** Default ctor for use in std::container. */
+      PoolItem();
 
-    /** Ctor */
-    explicit
-    PoolItem( ResObject::constPtr res_r );
+      /** Dtor */
+      ~PoolItem();
 
-    /** Ctor */
-    PoolItem( ResObject::constPtr res_r, const ResStatus & status_r );
+    public:
+      /** Returns the current status. */
+      ResStatus & status() const;
 
-    /** Dtor */
-    ~PoolItem();
+      /** Returns the ResObject::constPtr.
+       * \see \ref operator->
+       */
+      ResObject::constPtr resolvable() const;
 
-  public:
-    /** Returns the current status. */
-    ResStatus & status() const;
+      sat::Solvable satSolvable() const
+      { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::nosolvable; }
 
-    /** Returns the ResObject::constPtr.
-     * \see \ref operator->
-    */
-    ResObject::constPtr resolvable() const;
+    public:
+      /** Implicit conversion into ResObject::constPtr to
+       *  support query filters operating on ResObject.
+       */
+      operator ResObject::constPtr() const
+      { return resolvable(); }
 
-  public:
-    /** Implicit conversion into ResObject::constPtr to
-     *  support query filters operating on ResObject.
-    */
-    operator ResObject::constPtr() const
-    { return resolvable(); }
+      /** Forward \c -> access to ResObject. */
+      ResObject::constPtr operator->() const
+      { return resolvable(); }
 
-    /** Forward \c -> access to ResObject. */
-    ResObject::constPtr operator->() const
-    { return resolvable(); }
+      /** Conversion to bool to allow pointer style tests
+       *  for nonNULL \ref resolvable. */
+      operator ResObject::constPtr::unspecified_bool_type() const
+      { return resolvable(); }
 
-    /** Conversion to bool to allow pointer style tests
-     *  for nonNULL \ref resolvable. */
-    operator ResObject::constPtr::unspecified_bool_type() const
-    { return resolvable(); }
+    private:
+      friend class pool::PoolImpl;
+      /** ctor */
+      explicit PoolItem( const sat::Solvable & solvable_r );
+      /** Pointer to implementation */
+      RW_pointer<Impl> _pimpl;
 
-  private:
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
-
-  private:
-    /** \name tmp hack for save/restore state. */
-    /** \todo get rid of it. */
-    //@{
-    friend class PoolItemSaver;
-    void saveState() const;
-    void restoreState() const;
-    bool sameState() const;
-    //@}
+    private:
+      /** \name tmp hack for save/restore state. */
+      /** \todo get rid of it. */
+      //@{
+      friend class PoolItemSaver;
+      void saveState() const;
+      void restoreState() const;
+      bool sameState() const;
+      //@}
   };
   ///////////////////////////////////////////////////////////////////
-
-  /** \relates PoolItem \todo remove deprecated typedef. */
-  typedef PoolItem ZYPP_DEPRECATED PoolItem_Ref;
 
   /** \relates PoolItem Stream output */
   std::ostream & operator<<( std::ostream & str, const PoolItem & obj );

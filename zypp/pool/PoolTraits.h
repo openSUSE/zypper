@@ -15,7 +15,10 @@
 #include <set>
 #include <map>
 
+#include "zypp/base/Iterator.h"
+
 #include "zypp/PoolItem.h"
+#include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,30 +33,6 @@ namespace zypp
 
     class PoolImpl;
 
-    /**  */
-    struct PoolImplInserter
-    {
-      void operator()( ResObject::constPtr ptr_r );
-
-      PoolImplInserter( PoolImpl & poolImpl_r, bool installed_r )
-      : _poolImpl( poolImpl_r )
-      , _installed( installed_r )
-      {}
-      PoolImpl & _poolImpl;
-      bool       _installed;
-    };
-
-    /**  */
-    struct PoolImplDeleter
-    {
-      void operator()( ResObject::constPtr ptr_r );
-
-      PoolImplDeleter( PoolImpl & poolImpl_r )
-      : _poolImpl( poolImpl_r )
-      {}
-      PoolImpl & _poolImpl;
-    };
-
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PoolTraits
@@ -62,19 +41,12 @@ namespace zypp
     struct PoolTraits
     {
     public:
-      /** */
-      typedef PoolItem				Item;
-
+      typedef sat::detail::SolvableIdType		SolvableIdType;
       /** pure items  */
-      typedef std::set<Item>				ItemContainerT;
-      typedef ItemContainerT::iterator			iterator;
-      typedef ItemContainerT::const_iterator		const_iterator;
+      typedef std::map<sat::Solvable,PoolItem>		ItemContainerT;
+      typedef MapKVIteratorTraits<ItemContainerT>::Value_const_iterator
+          						const_iterator;
       typedef ItemContainerT::size_type			size_type;
-
-      // internal organization
-      typedef std::map<std::string,ItemContainerT>	NameItemContainerT;
-      /** hashed by name */
-      typedef ItemContainerT::const_iterator            byName_iterator;
 
       // internal organization
       typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs
@@ -94,8 +66,6 @@ namespace zypp
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
       typedef shared_ptr<const PoolImpl> Impl_constPtr;
-      typedef PoolImplInserter           Inserter;
-      typedef PoolImplDeleter            Deleter;
 
       /** Map of Capabilities and "who" has set it*/
       typedef std::map<ResStatus::TransactByValue,Capabilities>		AdditionalCapabilities;

@@ -23,24 +23,16 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  namespace
-  {
-    /** the empty pool used by ResPool::ResPool() */
-    pool::PoolTraits::Impl_constPtr noPool()
-    {
-      static pool::PoolTraits::Impl_constPtr _noPool( new pool::PoolImpl );
-      return _noPool;
-    }
-  }
-
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::ResPool
-  //	METHOD TYPE : Ctor
+  //	METHOD NAME : ResPool::instance
+  //	METHOD TYPE : ResPool
   //
-  ResPool::ResPool()
-  : _pimpl( noPool() )
-  {}
+  ResPool ResPool::instance()
+  {
+    static ResPool _val( pool::PoolTraits::Impl_constPtr( new pool::PoolImpl ) );
+    return _val;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -60,11 +52,11 @@ namespace zypp
   ResPoolProxy ResPool::proxy() const
   { return _pimpl->proxy( *this ); }
 
+  const SerialNumber & ResPool::serial() const
+  { return _pimpl->serial(); }
+
   bool ResPool::empty() const
   { return _pimpl->empty(); }
-
-  PoolItem ResPool::find( const sat::Solvable & slv_r ) const
-  { return _pimpl->find( slv_r ); }
 
   ResPool::size_type ResPool::size() const
   { return _pimpl->size(); }
@@ -75,17 +67,16 @@ namespace zypp
   ResPool::const_iterator ResPool::end() const
   { return _pimpl->end(); }
 
-  ResPool::byName_iterator ResPool::byNameBegin( const std::string & name_r ) const
-  { return _pimpl->_namehash.begin( name_r ); }
 
-  ResPool::byName_iterator ResPool::byNameEnd( const std::string & name_r ) const
-  { return _pimpl->_namehash.end( name_r ); }
+  PoolItem ResPool::find( const sat::Solvable & slv_r ) const
+  { return _pimpl->find( slv_r ); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphash.begin( index_r, depType_r ); }
+  { return _pimpl->_caphashfake.begin(); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphash.end( index_r, depType_r ); }
+  { return _pimpl->_caphashfake.end(); }
+
 
   ResPool::size_type ResPool::knownRepositoriesSize() const
   { return _pimpl->knownRepositories().size(); }
@@ -95,6 +86,7 @@ namespace zypp
 
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
   { return _pimpl->knownRepositories().end(); }
+
 
   void ResPool::setAdditionalRequire( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalRequire( capset ); }
@@ -110,9 +102,6 @@ namespace zypp
   { _pimpl->setAdditionalProvide( capset ); }
   ResPool::AdditionalCapabilities & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
-
-  const SerialNumber & ResPool::serial() const
-  { return _pimpl->serial(); }
 
   /******************************************************************
   **

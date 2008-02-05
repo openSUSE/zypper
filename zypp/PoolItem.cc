@@ -33,7 +33,7 @@ namespace zypp
     {}
 
     Impl( ResObject::constPtr res_r,
-          const ResStatus & status_r = ResStatus() )
+          const ResStatus & status_r )
     : _status( status_r )
     , _resolvable( res_r )
     {
@@ -112,17 +112,8 @@ namespace zypp
   //	METHOD NAME : PoolItem::PoolItem
   //	METHOD TYPE : Ctor
   //
-  PoolItem::PoolItem( ResObject::constPtr res_r )
-  : _pimpl( new Impl( res_r ) )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : PoolItem::PoolItem
-  //	METHOD TYPE : Ctor
-  //
-  PoolItem::PoolItem( ResObject::constPtr res_r, const ResStatus & status_r )
-  : _pimpl( new Impl( res_r, status_r ) )
+  PoolItem::PoolItem( const sat::Solvable & solvable_r )
+  : _pimpl( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
