@@ -745,7 +745,7 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
-        string cmd( str::form( "repo2solv.sh \"%s\" > '%s'", rawpath.c_str(), solvfile.c_str() ) );
+        string cmd( str::form( "/usr/bin/repo2solv.sh \"%s\" > '%s'", rawpath.c_str(), solvfile.c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;

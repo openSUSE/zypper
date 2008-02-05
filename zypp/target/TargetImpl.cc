@@ -294,7 +294,7 @@ namespace zypp
     void TargetImpl::load()
     {
       Pathname rpmsolv = _root + ZConfig::instance().repoCachePath() + "_rpm.solv";
-      Pathname rpmsolvcookie = rpmsolv.extend(".cookie");
+      Pathname rpmsolvcookie = _root + ZConfig::instance().repoCachePath() + "_rpm.cookie";
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
@@ -302,19 +302,29 @@ namespace zypp
       if ( PathInfo(rpmsolv).isExist() )
       {
         // see the status of the cache
-        MIL << "Read cookie: " << rpmsolvcookie << endl;
-        RepoStatus status = RepoStatus::fromCookieFile(rpmsolvcookie);
-        MIL << "Read cookie: " << rpmsolvcookie << " done" << endl;
-        // now compare it with the rpm database
-        if ( status.checksum() == rpmstatus.checksum() )
-          build_rpm_solv = false;
+        PathInfo cookie( rpmsolvcookie );
+        MIL << "Read cookie: " << cookie << endl;
+        if ( cookie.isExist() )
+        {
+          RepoStatus status = RepoStatus::fromCookieFile(rpmsolvcookie);
+          // now compare it with the rpm database
+          if ( status.checksum() == rpmstatus.checksum() )
+            build_rpm_solv = false;
+          MIL << "Read cookie: " << rpmsolvcookie << " says: "
+              << (build_rpm_solv ? "outdated" : "uptodate") << endl;
+        }
       }
 
       if ( build_rpm_solv )
       {
          MIL << "Executing solv converter" << endl;
+         // Take care we unlink the solvfile on exception
+         ManagedFile guard( rpmsolv, filesystem::unlink );
+         ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
+
+#warning FIXME add root to rpmdb2solv
         // FIXME add root to rpmdb2solv
-        string cmd( str::form( "/usr/bin/rpmdb2solv > %s", rpmsolv.asString().c_str() ) );
+        string cmd( str::form( "/usr/bin/rpmdb2solv > '%s'", rpmsolv.c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
@@ -322,7 +332,12 @@ namespace zypp
         int ret = prog.close();
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to cache rpm database"));
+
         rpmstatus.saveToCookieFile(rpmsolvcookie);
+
+        // We keep it.
+        guard.resetDispose();
+        guardcookie.resetDispose();
       }
 
       //now add the repos to the pool
