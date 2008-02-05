@@ -629,7 +629,7 @@ SATResolver::problems ()
 	pcnt = 1;
 	problem = 0;
 	while ((problem = solver_next_problem(solv, problem)) != 0) {
-	    MIL << "Problem " <<  pcnt << ":" << endl;
+	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string whatString = SATprobleminfoString(problem);
 	    MIL << whatString << endl;
@@ -781,7 +781,6 @@ SATResolver::problems ()
 			    PoolItem_Ref itemTo = _pool.find (sat::Solvable(rp));
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
-				problemSolution->addSingleAction (itemFrom, REMOVE);
 
 				if (evrcmp(pool, s->evr, sd->evr, EVRCMP_COMPARE ) > 0)
 				{
