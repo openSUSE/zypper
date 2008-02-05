@@ -64,7 +64,7 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const PoolImpl & obj )
     {
-      return dumpPoolStats( str << "ResPool ",
+      return dumpPoolStats( str << "ResPool " << obj.satpool() << endl << "  ",
                             obj.begin(), obj.end() );
     }
 

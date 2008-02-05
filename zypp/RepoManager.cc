@@ -892,7 +892,15 @@ namespace zypp
     status.saveToCookieFile(cookiefile);
   }
 
+#warning whats this map for
   map<data::RecordId, Repo *> repo2solv;
+
+  void RepoManager::loadFromCache( const RepoInfo &info,
+                                   const ProgressData::ReceiverFnc & progressrcv )
+  {
+    assert_alias(info);
+    loadFromCache( info.alias(), progressrcv );
+  }
 
   void RepoManager::loadFromCache( const std::string &alias,
                                    const ProgressData::ReceiverFnc & progressrcv )
@@ -900,14 +908,14 @@ namespace zypp
     sat::Pool satpool( sat::Pool::instance() );
 
     Pathname solvfile = (_pimpl->options.repoCachePath + alias).extend(".solv");
-    
+
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException());
-    
+
     sat::Repo repo = satpool.addRepoSolv(solvfile, alias );
   }
-      
-  
+
+
   ////////////////////////////////////////////////////////////////////////////
 
   /**

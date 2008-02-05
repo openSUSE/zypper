@@ -34,7 +34,7 @@ namespace zypp
    /**
     * Parses \a repo_file and returns a list of \ref RepoInfo objects
     * corresponding to repositories found within the file.
-    * 
+    *
     * \param repo_file Valid URL of the repo file.
     * \return found list<RepoInfo>
     *
@@ -51,7 +51,7 @@ namespace zypp
   struct RepoManagerOptions
   {
     RepoManagerOptions();
-    
+
     Pathname repoCachePath;
     Pathname repoRawCachePath;
     Pathname knownReposPath;
@@ -73,22 +73,22 @@ namespace zypp
    RepoManager( const RepoManagerOptions &options = RepoManagerOptions() );
    /** Dtor */
     ~RepoManager();
-    
+
     enum RawMetadataRefreshPolicy
     {
       RefreshIfNeeded,
       RefreshForced
     };
-    
+
     enum CacheBuildPolicy
     {
       BuildIfNeeded,
       BuildForced
     };
-    
+
     enum RepoRemovePolicy
     {
-      
+
     };
 
    /**
@@ -122,9 +122,9 @@ namespace zypp
      * This method checks the status against the specified url only. If more
      * baseurls are defined for in the RepoInfo, each one must be check
      * individually. Example:
-     * 
+     *
      * <code>
-     * 
+     *
      * RepoInfo info;
      * // try urls one by one
      * for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
@@ -136,7 +136,7 @@ namespace zypp
      *     // if the check fails for this url, it throws, so another url will be checked
      *     if (!checkIfToRefreshMetadata(info, *it, policy))
      *       return;
-     *     
+     *
      *     // do the actual refresh
      *   }
      *   catch (const Exception & e)
@@ -145,23 +145,23 @@ namespace zypp
      *     ERR << *it << " doesn't look good. Trying another url." << endl;
      *   }
      * } // for all urls
-     * 
+     *
      * handle("No more URLs.");
-     * 
+     *
      * </code>
-     * 
+     *
      * \param info
      * \param url
      * \param policy
      * \throws RepoUnknownTypeException
      * \throws repo::RepoNoAliasException if can't figure an alias
      * \throws Exception on unknown error
-     *  
+     *
      */
     bool checkIfToRefreshMetadata( const RepoInfo &info,
                                    const Url &url,
                                    RawMetadataRefreshPolicy policy = RefreshIfNeeded);
-    
+
     /**
      * \short Path where the metadata is downloaded and kept
      *
@@ -173,7 +173,7 @@ namespace zypp
      * \throws repo::RepoNoAliasException if can't figure an alias
      */
     Pathname metadataPath( const RepoInfo &info ) const;
-    
+
    /**
     * \short Refresh local raw cache
     *
@@ -186,12 +186,12 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias
     * \throws repo::RepoUnknownTypeException if the metadata is unknown
     * \throws repo::RepoException if the repository is invalid
-    *         (no valid metadata found at any of baseurls) 
+    *         (no valid metadata found at any of baseurls)
     */
    void refreshMetadata( const RepoInfo &info,
                          RawMetadataRefreshPolicy policy = RefreshIfNeeded,
                          const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-   
+
    /**
     * \short Clean local metadata
     *
@@ -217,7 +217,7 @@ namespace zypp
     *
     * \note the local metadata must be valid.
     *
-    * \throws repo::RepoNoAliasException if can't figure 
+    * \throws repo::RepoNoAliasException if can't figure
     *     an alias to look in cache
     * \throws repo::RepoMetadataException if the metadata
     *     is not enough to build a cache (empty, incorrect, or
@@ -244,15 +244,15 @@ namespace zypp
     */
    void cleanCache( const RepoInfo &info,
                     const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-   
+
    /**
     * \short Whether a repository exists in cache
     *
     * \param RepoInfo to be checked.
     */
     bool isCached( const RepoInfo &info ) const;
-   
-    
+
+
     /**
     * \short Load resolvables into the pool
     *
@@ -262,6 +262,9 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throw RepoNotCachedException When the source is not cached.
     */
+   void loadFromCache( const RepoInfo &info,
+                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+   /** \overload */
    void loadFromCache( const std::string &alias,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
@@ -271,14 +274,14 @@ namespace zypp
     * \todo FIXME Should this be private?
     */
    repo::RepoType probe( const Url &url ) const;
-   
-   
+
+
    /**
     * \short Adds a repository to the list of known repositories.
     *
-    * 
     *
-    * \throws repo::RepoAlreadyExistsException If the repo clash some 
+    *
+    * \throws repo::RepoAlreadyExistsException If the repo clash some
     *         unique attribute like alias
     * \throws RepoUnknownType If repository type can't be determined
     * \throws RepoException If the access to the url fails (while probing).
@@ -286,12 +289,12 @@ namespace zypp
     */
    void addRepository( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-   
+
    /**
     * \short Adds repositores from a repo file to the list of known repositories.
     * \param url Url of the repo file
-    * 
-    * \throws repo::RepoAlreadyExistsException If the repo clash some 
+    *
+    * \throws repo::RepoAlreadyExistsException If the repo clash some
     * unique attribute like alias
     *
     * \throws RepoAlreadyExistsException
@@ -310,7 +313,7 @@ namespace zypp
      */
     void removeRepository( const RepoInfo & info,
                            const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-    
+
     /**
      * \short Modify repository attributes
      *
@@ -337,7 +340,7 @@ namespace zypp
      */
     RepoInfo getRepositoryInfo( const std::string &alias,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-    
+
     /**
      * \short Find repository info by URL.
      *
@@ -364,10 +367,10 @@ namespace zypp
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     void setCacheStatus( const std::string &alias, const RepoStatus &status );
-    
+
     /**
      * Update timestamp of repository index file for the specified repository \a info.
-     * Used in \ref checkIfToRefreshMetadata() for repo.refresh.delay feature. 
+     * Used in \ref checkIfToRefreshMetadata() for repo.refresh.delay feature.
      */
     void touchIndexFile(const RepoInfo & info);
 
