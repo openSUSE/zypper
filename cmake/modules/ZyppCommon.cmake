@@ -38,38 +38,6 @@ MESSAGE( "** Manual files will be installed in ${MANDIR}" )
 # CONFIGURATION                                                    #
 ####################################################################
 
-# The following components are regex's to match anywhere (unless anchored)
-# in absolute path + filename to find files or directories to be excluded
-# from source tarball.
-SET (CPACK_SOURCE_IGNORE_FILES
-#svn files
-"\\\\.svn/"
-"\\\\.cvsignore$"
-# temporary files
-"\\\\.swp$"
-# backup files
-"~$"
-# eclipse files
-"\\\\.cdtproject$"
-"\\\\.cproject$"
-"\\\\.project$"
-"\\\\.settings/"
-# others
-"\\\\.#"
-"/#"
-"/build/"
-"/_build/"
-"/\\\\.git/"
-# used before
-"/CVS/"
-"/\\\\.libs/"
-"/\\\\.deps/"
-"\\\\.o$"
-"\\\\.lo$"
-"\\\\.la$"
-"Makefile\\\\.in$"
-)
-
 SET( DOC_INSTALL_DIR
    "${CMAKE_INSTALL_PREFIX}/share/doc/packages/${PACKAGE}"
    CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
@@ -107,23 +75,72 @@ ENDMACRO(PKGCONFGFILE)
 # INSTALL                                                          #
 ####################################################################
 
-ADD_CUSTOM_TARGET( svncheck
-  COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
-)
+MACRO(GENERATE_PACKAGING PACKAGE VERSION)
 
-SET( AUTOBUILD_COMMAND
-  COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/package/*.tar.bz2
-  COMMAND ${CMAKE_MAKE_PROGRAM} package_source
-  COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
-  COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
-  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
-)
+  # The following components are regex's to match anywhere (unless anchored)
+  # in absolute path + filename to find files or directories to be excluded
+  # from source tarball.
+  SET (CPACK_SOURCE_IGNORE_FILES
+  #svn files
+  "\\\\.svn/"
+  "\\\\.cvsignore$"
+  # temporary files
+  "\\\\.swp$"
+  # backup files
+  "~$"
+  # eclipse files
+  "\\\\.cdtproject$"
+  "\\\\.cproject$"
+  "\\\\.project$"
+  "\\\\.settings/"
+  # others
+  "\\\\.#"
+  "/#"
+  "/build/"
+  "/_build/"
+  "/\\\\.git/"
+  # used before
+  "/CVS/"
+  "/\\\\.libs/"
+  "/\\\\.deps/"
+  "\\\\.o$"
+  "\\\\.lo$"
+  "\\\\.la$"
+  "Makefile\\\\.in$"
+  )
 
-ADD_CUSTOM_TARGET( srcpackage_local
-  ${AUTOBUILD_COMMAND}
-)
+  #SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
+  SET(CPACK_PACKAGE_VENDOR "Novell Inc.")
+  #SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
+  #SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
+  #SET(CPACK_PACKAGE_VERSION_MAJOR ${version_major})
+  #SET(CPACK_PACKAGE_VERSION_MINOR ${version_minor})
+  #SET(CPACK_PACKAGE_VERSION_PATCH ${version_patch})
+  SET( CPACK_GENERATOR "TBZ2")
+  SET( CPACK_SOURCE_GENERATOR "TBZ2")
+  SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
+  INCLUDE(CPack)
+  
+  SPECFILE()
+  
+  ADD_CUSTOM_TARGET( svncheck
+    COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
+  )
 
-ADD_CUSTOM_TARGET( srcpackage
-  COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
-  ${AUTOBUILD_COMMAND}
-)
+  SET( AUTOBUILD_COMMAND
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/package/*.tar.bz2
+    COMMAND ${CMAKE_MAKE_PROGRAM} package_source
+    COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
+    COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
+  )
+  
+  ADD_CUSTOM_TARGET( srcpackage_local
+    ${AUTOBUILD_COMMAND}
+  )
+  
+  ADD_CUSTOM_TARGET( srcpackage
+    COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
+    ${AUTOBUILD_COMMAND}
+  )
+ENDMACRO(GENERATE_PACKAGING)

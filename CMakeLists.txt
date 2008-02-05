@@ -21,16 +21,7 @@ ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
 SET( LIBZYPP_VERSION_INFO "${LIBZYPP_SO_FIRST}.${LIBZYPP_AGE}.${LIBZYPP_PATCH}" )
 SET( LIBZYPP_SOVERSION_INFO "${LIBZYPP_SO_FIRST}" )
 
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
-SET(CPACK_PACKAGE_VENDOR "Novell Inc.")
-#SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
-#SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
-SET(CPACK_PACKAGE_VERSION_MAJOR ${LIBZYPP_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${LIBZYPP_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${LIBZYPP_PATCH})
-SET( CPACK_GENERATOR "TBZ2")
-SET( CPACK_SOURCE_GENERATOR "TBZ2")
-SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
+GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
 INCLUDE(CPack)
 
@@ -124,20 +115,6 @@ ENDIF ( NOT DOXYGEN )
 MESSAGE(STATUS "soname: ${LIBZYPP_VERSION_INFO}")
 MESSAGE(STATUS "version: ${VERSION}")
 
-####################################################################
-# RPM SPEC                                                         #
-####################################################################
-
-MACRO(SPECFILE)
-  MESSAGE(STATUS "Writing spec file...")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
-  MESSAGE(STATUS "I hate you rpm-lint...!!!")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/package/libzypp-rpmlint.cmake ${CMAKE_BINARY_DIR}/package/libzypp-rpmlintrc @ONLY)
-ENDMACRO(SPECFILE)
-
-SPECFILE()
-
-#PKGCONFIGFILE()
 
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
