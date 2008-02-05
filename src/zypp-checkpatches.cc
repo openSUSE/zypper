@@ -225,10 +225,8 @@ int main(int argc, char **argv)
   
   for ( std::list<RepoInfo>::const_iterator it = repos.begin(); it != repos.end(); ++it )
   {
-    Repository repository = manager.createFromCache(*it);
-    // FIXME fow now this will add repository resolvables
-    repository.resolvables();
-    //God->addResolvables();
+    // load into the pool
+    manager.loadFromCache(it->alias());
   }
 
   if ( repos.size() == 0 )
@@ -236,11 +234,8 @@ int main(int argc, char **argv)
     errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
   }
 
+  // load into the pool
   God->target()->load();
-  //God->addResolvables( God->target()->resolvables(), true);
-  
-  // FIXME no need to establish?
-  //God->resolver()->establishPool();
   
   int count = 0;
   int security_count = 0;

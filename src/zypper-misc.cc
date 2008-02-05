@@ -19,7 +19,7 @@
 
 #include "zypp/RepoInfo.h"
 
-//#include "zypp/CapFactory.h"
+#include "zypp/Capabilities.h"
 
 #include "zypp/target/store/xml_escape_parser.hpp"
 
@@ -75,8 +75,6 @@ ResObject::Kind string_to_kind (const string &skind)
   string lskind = str::toLower (skind);
   if (lskind == "package")
     return ResTraits<Package>::kind;
-  if (lskind == "selection")
-    return ResTraits<Selection>::kind;
   if (lskind == "pattern")
     return ResTraits<Pattern>::kind;
   if (lskind == "product")
@@ -87,8 +85,6 @@ ResObject::Kind string_to_kind (const string &skind)
     return ResTraits<Script>::kind;
   if (lskind == "message")
     return ResTraits<Message>::kind;
-  if (lskind == "language")
-    return ResTraits<Language>::kind;
   if (lskind == "atom")
     return ResTraits<Atom>::kind;
 //   if (lskind == "system")

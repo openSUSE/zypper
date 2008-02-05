@@ -81,8 +81,6 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
 {
   if (kind == ResTraits<Package>::kind)
     return _PL("package", "packages", count);
-  if (kind == ResTraits<Selection>::kind)
-    return _PL("selection", "selections", count);
   if (kind == ResTraits<Pattern>::kind)
     return _PL("pattern", "patterns", count);
   if (kind == ResTraits<Product>::kind)
@@ -93,8 +91,6 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
     return _PL("script", "scripts", count);
   if (kind == ResTraits<Message>::kind)
     return _PL("message", "messages", count);
-  if (kind == ResTraits<Language>::kind)
-    return _PL("language", "languages", count);
   if (kind == ResTraits<Atom>::kind)
     return _PL("atom", "atoms", count);
 //   if (kind == ResTraits<SystemResObject>::kind)

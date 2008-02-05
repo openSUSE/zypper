@@ -1273,9 +1273,8 @@ void load_repo_resolvables(Zypper & zypper)
         continue;
       }
 
-      Repository repository(manager.createFromCache(repo));
-      ResStore store = repository.resolvables();
-      cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
+      manager.loadFromCache(repo.alias());
+      //cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
     }
     catch (const Exception & e)
     {
