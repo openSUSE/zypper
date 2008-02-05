@@ -894,36 +894,20 @@ namespace zypp
 
   map<data::RecordId, Repo *> repo2solv;
 
-  Repository RepoManager::createFromCache( const RepoInfo &info,
-                                           const ProgressData::ReceiverFnc & progressrcv )
+  void RepoManager::loadFromCache( const std::string &alias,
+                                   const ProgressData::ReceiverFnc & progressrcv )
   {
-    callback::SendReport<ProgressReport> report;
-    ProgressData progress;
-    progress.sendTo(ProgressReportAdaptor( progressrcv, report ));
-    //progress.sendTo( progressrcv );
-    progress.name(str::form(_("Reading repository '%s' cache"), info.name().c_str()));
+    sat::Pool satpool( sat::Pool::instance() );
 
-    //_pimpl->options.repoCachePath
-    if ( ! isCached( info ) )
+    Pathname solvfile = (_pimpl->options.repoCachePath + alias).extend(".solv");
+    
+    if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException());
-
-    MIL << "Repository " << info.alias() << " is cached" << endl;
-
-    CombinedProgressData subprogrcv(progress);
-
-    repo::cached::RepoOptions opts( info, _pimpl->options.repoCachePath );
-    opts.readingResolvablesProgress = subprogrcv;
-    //opts.repo = repo;
-    repo::cached::RepoImpl::Ptr repoimpl =
-         new repo::cached::RepoImpl( opts );
-
-    //repoimpl->createResolvables();
-    repoimpl->resolvables();
-    // read the resolvables from cache
-    //return Repository::noRepository;
-    return Repository(repoimpl);
+    
+    sat::Repo repo = satpool.addRepoSolv(solvfile, alias );
   }
-
+      
+  
   ////////////////////////////////////////////////////////////////////////////
 
   /**

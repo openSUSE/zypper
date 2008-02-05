@@ -252,8 +252,9 @@ namespace zypp
     */
     bool isCached( const RepoInfo &info ) const;
    
-   /**
-    * \short Create a repository object from the cache data
+    
+    /**
+    * \short Load resolvables into the pool
     *
     * Creating from cache requires that the repository is
     * refreshed (metadata downloaded) and cached
@@ -261,20 +262,8 @@ namespace zypp
     * \throws repo::RepoNoAliasException if can't figure an alias to look in cache
     * \throw RepoNotCachedException When the source is not cached.
     */
-   Repository createFromCache( const RepoInfo &info,
-                               const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-
-   /**
-    * \short Create a repository object from raw metadata
-    *
-    * Creating from cache requires that the repository is
-    * refreshed (metadata downloaded)
-    *
-    * \throw Exception If there are errors parsing the
-    * raw metadata
-    */
-   Repository createFromMetadata( const RepoInfo &info,
-                                  const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+   void loadFromCache( const std::string &alias,
+                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
     * \short Probe repo metadata type.
