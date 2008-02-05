@@ -6,43 +6,28 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Resolvable.cc
+/** \file	zypp/SolvAttr.cc
  *
 */
-#include "zypp/Resolvable.h"
-#include "zypp/ResObject.h"
-             
+#include <iostream>
+
+#include "zypp/base/String.h"
+
+#include "zypp/sat/SolvAttr.h"
+
+using std::endl;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+namespace sat
+{ /////////////////////////////////////////////////////////////////
 
-  IMPL_PTR_TYPE(Resolvable);
+  const SolvAttr SolvAttr::summary      ( "summary" );
+  const SolvAttr SolvAttr::description  ( "description" );
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Resolvable::Resolvable
-  //	METHOD TYPE : Ctor
-  //
-  Resolvable::Resolvable( const sat::Solvable & solvable_r )
-  : sat::Solvable( solvable_r )
-  {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Resolvable::~Resolvable
-  //	METHOD TYPE : Dtor
-  //
-  Resolvable::~Resolvable()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Resolvable::dumpOn
-  //	METHOD TYPE : std::ostream &
-  //
-  std::ostream & Resolvable::dumpOn( std::ostream & str ) const
-  { return str << satSolvable(); }
-
+} // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

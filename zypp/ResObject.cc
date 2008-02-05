@@ -11,6 +11,24 @@
 */
 #include "zypp/ResObject.h"
 #include "zypp/Repository.h"
+#include "zypp/sat/SolvAttr.h"
+extern "C"
+{
+#include "satsolver/repo.h"
+}
+
+class SearchQuery
+{
+  void search(Repo *repo, Id p, Id key, const char *match, int flags)
+  {
+    repo_search( repo, p, key, match, flags, SearchQuery::repo_search_cb, (void*) this);
+  }
+  
+  static int repo_search_cb(void *cbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
+  {
+    SearchQuery *q = (SearchQuery *) cbdata;
+  }
+};
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -101,7 +119,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 #include "zypp/ResObjects.h"
-
+             
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
