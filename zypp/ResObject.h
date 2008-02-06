@@ -95,10 +95,15 @@ namespace zypp
     /** Size of the rpm package. */
     ByteCount downloadSize() const;
 
-    /**
-     * Source providing this resolvable
+     /** \ref RepoInfo associated with the repository
+      *  providing this resolvable.
+      */
+    RepoInfo repoInfo() const;
+
+    /** \deprecated \ref repoInfo is provided directly.
      */
-    Repository repository() const;
+    ZYPP_DEPRECATED Repository repository() const
+    { return Repository( repoInfo() ); }
 
     /**
      * Media number where the resolvable is located
@@ -108,6 +113,8 @@ namespace zypp
 
     /**
      * \TODO FIXME what is this?
+     * Flag in the metadata indicating this should be
+     * installed unsing '-i' (not -U).
      */
     bool installOnly() const;
 

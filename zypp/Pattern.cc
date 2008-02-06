@@ -91,11 +91,18 @@ namespace zypp
   return std::set<std::string>();
   }
 
-  const Capabilities & Pattern::includes() const
-  { return Capabilities(); }
+#warning implement PATTERN::INSTALL_PACKAGES
+ const Capabilities & Pattern::includes() const
+  {
+    static Capabilities _val;
+    return _val;
+  }
 
   const Capabilities & Pattern::extends() const
-  { return Capabilities(); }
+  {
+    static Capabilities _val;
+    return _val;
+  }
 
 
   /////////////////////////////////////////////////////////////////

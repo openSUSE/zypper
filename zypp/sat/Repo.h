@@ -61,7 +61,7 @@ namespace zypp
         bool isSystemRepo() const;
 
       public:
-        /** The repos name (alias?). */
+        /** The repos name (alias). */
         std::string name() const;
 
         /** Whether \ref Repo contains solvables. */
@@ -77,6 +77,20 @@ namespace zypp
         SolvableIterator solvablesEnd() const;
 
       public:
+        /** Return any associated \ref RepoInfo. */
+        RepoInfo info() const;
+
+        /** Set \ref RepoInfo for this repository.
+         * \throws Exception if this is \ref norepo
+         * \throws Exception if the \ref RepoInfo::alias
+         *         does not match the \ref Repo::name.
+        */
+        void setInfo( const RepoInfo & info_r );
+
+         /** Remove any \ref RepoInfo set for this repository. */
+        void clearInfo();
+
+     public:
         /** Remove this \ref Repo from it's \ref Pool. */
         void eraseFromPool();
 
@@ -91,6 +105,7 @@ namespace zypp
         //@{
         /** Load \ref Solvables from a solv-file.
          * In case of an exception the repo remains in the \ref Pool.
+         * \throws Exception if this is \ref norepo
          * \throws Exception if loading the solv-file fails.
          * \see \ref Pool::addRepoSolv and \ref Repo::EraseFromPool
          */

@@ -92,6 +92,29 @@ namespace zypp
                                   detail::SolvableIterator(_repo->end) );
     }
 
+    RepoInfo Repo::info() const
+    {
+      NO_REPO_RETURN( RepoInfo() );
+      return myPool().repoInfo( _repo );
+    }
+
+    void Repo::setInfo( const RepoInfo & info_r )
+    {
+      NO_REPO_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
+      if ( info_r.alias() != name() )
+      {
+        ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
+                    info_r.alias().c_str(), name().c_str() ) ) );
+      }
+      myPool().setRepoInfo( _repo, info_r );
+    }
+
+    void Repo::clearInfo()
+    {
+      NO_REPO_RETURN();
+      myPool().setRepoInfo( _repo, RepoInfo() );
+    }
+
     void Repo::eraseFromPool()
     {
       NO_REPO_RETURN();

@@ -29,7 +29,6 @@
 #include "zypp/RepoManager.h"
 
 #include "zypp/cache/SolvStore.h"
-#include "zypp/repo/cached/RepoImpl.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
@@ -38,7 +37,6 @@
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/parser/yum/RepoParser.h"
-//#include "zypp/parser/plaindir/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/susetags/RepoParser.h"
 
@@ -907,7 +905,7 @@ namespace zypp
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException());
 
-    sat::Repo repo = satpool.addRepoSolv(solvfile, alias );
+    sat::Repo repo = satpool.addRepoSolv(solvfile, info);
   }
 
   ////////////////////////////////////////////////////////////////////////////

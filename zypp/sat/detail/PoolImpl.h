@@ -24,6 +24,7 @@ extern "C"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/RepoInfo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -87,6 +88,7 @@ namespace zypp
           {
             setDirty(__FUNCTION__, repo_r->name );
             ::repo_free( repo_r, /*reuseids*/false );
+            eraseRepoInfo( repo_r );
           }
 
           /** Adding solv file to a repo. */
@@ -154,12 +156,24 @@ namespace zypp
             return noSolvableId;
           }
 
+        public:
+          /** */
+          const RepoInfo & repoInfo( RepoIdType id_r )
+          { return _repoinfos[id_r]; }
+          /** */
+          void setRepoInfo( RepoIdType id_r, const RepoInfo & info_r )
+          { _repoinfos[id_r] = info_r; }
+          /** */
+          void eraseRepoInfo( RepoIdType id_r )
+          { _repoinfos.erase( id_r ); }
+
         private:
           /** sat-pool. */
           ::_Pool * _pool;
           /** Serial number. */
           SerialNumber _serial;
-
+          /** Additional \ref RepoInfo. */
+          std::map<RepoIdType,RepoInfo> _repoinfos;
       };
       ///////////////////////////////////////////////////////////////////
 

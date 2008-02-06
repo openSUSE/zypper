@@ -20,7 +20,6 @@
 #include "zypp/parser/plaindir/RepoParser.h"
 #include "zypp/parser/ParseException.h"
 #include "zypp/PathInfo.h"
-#include "zypp/ResStore.h"
 #include "zypp/ZConfig.h"
 
 using namespace std;

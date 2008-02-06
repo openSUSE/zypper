@@ -53,6 +53,8 @@ namespace zypp
   public:
     /** Whether this represents a valid- or no-solvable. */
     using sat::Solvable::operator bool_type;
+    /** Whether this represents an installed solvable. */
+    using sat::Solvable::isSystem;
 
     using sat::Solvable::ident;
 

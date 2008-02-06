@@ -352,20 +352,6 @@ namespace zypp
       return _root;
     }
 
-    ResStore::resfilter_const_iterator TargetImpl::byKindBegin( const ResObject::Kind & kind_r ) const
-    {
-      TargetImpl *ptr = const_cast<TargetImpl *>(this);
-      resfilter::ResFilter filter = ByKind(kind_r);
-      return make_filter_iterator( filter, _store.begin(), _store.end() );
-    }
-
-    ResStore::resfilter_const_iterator TargetImpl::byKindEnd( const ResObject::Kind & kind_r  ) const
-    {
-      TargetImpl *ptr = const_cast<TargetImpl *>(this);
-      resfilter::ResFilter filter = ByKind(kind_r);
-      return make_filter_iterator( filter, _store.end(), _store.end() );
-    }
-
     void TargetImpl::reset()
     {
       // FIXME remove
@@ -695,24 +681,6 @@ namespace zypp
     bool TargetImpl::providesFile (const std::string & path_str, const std::string & name_str) const
     {
       return _rpm.hasFile(path_str, name_str);
-    }
-
-    /** Return the resolvable which provides path_str (rpm -qf)
-    return NULL if no resolvable provides this file  */
-    ResObject::constPtr TargetImpl::whoOwnsFile (const std::string & path_str) const
-    {
-      string name = _rpm.whoOwnsFile (path_str);
-      if (name.empty())
-        return NULL;
-
-      for (ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it)
-      {
-        if ((*it)->name() == name)
-        {
-          return *it;
-        }
-      }
-      return NULL;
     }
 
     /** Set the log file for target */

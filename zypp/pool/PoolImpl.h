@@ -223,6 +223,8 @@ namespace zypp
                 }
               }
             }
+
+            _storeDirty = false;
           }
           return _store;
         }

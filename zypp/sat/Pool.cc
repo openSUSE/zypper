@@ -101,7 +101,18 @@ namespace zypp
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
-      return Repo( myPool()._createRepo( name_r ) );
+
+      ret = Repo( myPool()._createRepo( name_r ) );
+      if ( name_r == systemRepoName() )
+      {
+        // autoprovide (dummy) RepoInfo
+        ret.setInfo( RepoInfo()
+                     .setAlias( name_r )
+                     .setName( name_r )
+                     .setAutorefresh( true )
+                     .setEnabled( true ) );
+      }
+      return ret;
     }
 
     Repo Pool::reposFind( const std::string & name_r ) const
@@ -128,6 +139,14 @@ namespace zypp
 
     Repo Pool::addRepoSolv( const Pathname & file_r )
     { return addRepoSolv( file_r, file_r.basename() ); }
+
+    Repo Pool::addRepoSolv( const Pathname & file_r, const RepoInfo & info_r )
+    {
+      Repo ret( addRepoSolv( file_r, info_r.alias() ) );
+      ret.setInfo( info_r );
+      return ret;
+    }
+
 
     /******************************************************************
     **

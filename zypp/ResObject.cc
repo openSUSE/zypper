@@ -45,7 +45,7 @@ class SearchQuery
   {
     repo_search( repo, p, key, match, flags, SearchQuery::repo_search_cb, (void*) this);
   }
-  
+
   static int repo_search_cb(void *cbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
   {
     cout << "found attribute" << endl;
@@ -67,7 +67,7 @@ class SearchQuery
     }
     return 1;
   }
-  
+
   sat::Solvable _solvable;
   std::string _result;
 };
@@ -132,13 +132,13 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::vendor ); }
 
   ByteCount ResObject::size() const
-  {  return lookupNumAttribute( sat::SolvAttr::size ); }
-
-  Repository ResObject::repository() const
-  { return Repository(); }
+  { return lookupNumAttribute( sat::SolvAttr::size ); }
 
   ByteCount ResObject::downloadSize() const
-  {  return lookupNumAttribute( sat::SolvAttr::downloadsize ); }
+  { return lookupNumAttribute( sat::SolvAttr::downloadsize ); }
+
+  RepoInfo ResObject::repoInfo() const
+  { return repo().info(); }
 
   unsigned ResObject::mediaNr() const
   { return 1; }
@@ -163,7 +163,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 #include "zypp/ResObjects.h"
-             
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////

@@ -69,8 +69,6 @@ namespace zypp
     RepoInfo();
     ~RepoInfo();
 
-    typedef unsigned long NumericId;
-
     /**
      * unique identifier for this source. If not specified
      * It should be generated from the base url.
@@ -116,12 +114,12 @@ namespace zypp
      * If empty, the base url will be used.
      */
     Url mirrorListUrl() const;
-    
+
     typedef std::set<Url> url_set;
     //typedef url_set::const_iterator urls_const_iterator;
     typedef url_set::size_type      urls_size_type;
     typedef transform_iterator<repo::RepoVariablesUrlReplacer, url_set::const_iterator> urls_const_iterator;
-    
+
     /**
      * iterator that points at begin of repository urls
      */

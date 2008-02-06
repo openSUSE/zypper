@@ -24,6 +24,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class SerialNumber;
+  class RepoInfo;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
@@ -102,6 +103,8 @@ namespace zypp
         { return reposInsert( systemRepoName() ); }
 
       public:
+
+      public:
         /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
          * In case of an exception the \ref Repo is removed from the \ref Pool.
          * \throws Exception if loading the solv-file fails.
@@ -110,6 +113,10 @@ namespace zypp
         Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
         /** \overload Using the files basename as \ref Repo name. */
         Repo addRepoSolv( const Pathname & file_r );
+        /** \overload Using the \ref RepoInfo::alias \ref Repo name.
+         * Additionally stores the \ref RepoInfo. \See \ref Prool::setInfo.
+        */
+        Repo addRepoSolv( const Pathname & file_r, const RepoInfo & info_r );
 
       public:
         /** Whether \ref Pool contains solvables. */

@@ -69,7 +69,6 @@ SET( zypp_SRCS
   ResPool.cc
   ResPoolProxy.cc
   ResStatus.cc
-  ResStore.cc
   Script.cc
   Signature.cc
   SrcPackage.cc
@@ -160,7 +159,6 @@ SET( zypp_HEADERS
   ResPool.h
   ResPoolProxy.h
   ResStatus.h
-  ResStore.h
   ResTraits.h
   Script.h
   Signature.h
@@ -787,14 +785,6 @@ INSTALL( FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/repo
 )
 
-SET( zypp_repo_cached_SRCS
-  repo/cached/RepoImpl.cc
-)
-
-SET( zypp_repo_cached_HEADERS
-  repo/cached/RepoImpl.h
-)
-
 SET( zypp_repo_yum_SRCS
   repo/yum/Downloader.cc
   repo/yum/ResourceType.cc
@@ -827,7 +817,6 @@ ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
 ${zypp_repo_SRCS}
-${zypp_repo_cached_SRCS}
 ${zypp_repo_yum_SRCS}
 ${zypp_repo_susetags_SRCS}
 ${zypp_repo_data_SRCS}

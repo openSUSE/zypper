@@ -7,14 +7,11 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/SafeBool.h"
-//#include "zypp/ResStore.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/PackageDelta.h"
 
 namespace zypp
 {
-  class ResStore;
-
   namespace repo
   {
     DEFINE_PTR_TYPE(RepositoryImpl);
@@ -43,6 +40,11 @@ namespace zypp
     explicit
     Repository( const Impl_Ptr & impl_r );
 
+     /** \short Factory ctor taking a RepositoryImpl.
+      */
+    explicit
+    Repository( const RepoInfo & info_r );
+
     /**
      * A dummy Repository (Id \c 0) providing nothing, doing nothing.
     */
@@ -58,11 +60,6 @@ namespace zypp
 
     /** Runtime unique numeric Repository Id. */
     NumericId numericId() const;
-
-    /**
-     * \short Get the resolvables for repo
-     */
-    const ResStore & resolvables() const;
 
     /**
      * \short Repository info used to create this repository

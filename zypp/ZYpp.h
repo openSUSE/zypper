@@ -41,7 +41,6 @@ namespace zypp
   class ZYppFactory;
   class ResPool;
   class ResPoolProxy;
-  class ResStore;
   class Locale;
   class KeyRing;
 
