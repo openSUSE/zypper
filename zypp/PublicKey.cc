@@ -20,6 +20,9 @@
 #include "zypp/PathInfo.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
+#include "zypp/Date.h"
+
+#include <ctime>
 
 using std::endl;
 
@@ -66,6 +69,12 @@ namespace zypp
     
     std::string fingerprint() const
     { return _fingerprint; }
+
+    Date created() const
+    { return _created; }
+
+    Date expires() const
+    { return _expires; }
     
     Pathname path() const
     { 
@@ -74,6 +83,38 @@ namespace zypp
     }
     
     protected:
+
+      // create Date from a string in format YYYY-MM-DD
+      Date createDate(const std::string &datestr)
+      {
+	// empty input
+	if (datestr.empty())
+	{
+	    return Date();
+	}
+
+	tm date;
+
+	try
+	{
+	    // set the date
+	    date.tm_year = str::strtonum<int>(std::string(datestr, 0, 4)) - 1900; // years since 1900
+	    date.tm_mon = str::strtonum<int>(std::string(datestr, 5, 2)) - 1;     // months since January
+	    date.tm_mday = str::strtonum<int>(std::string(datestr, 9, 2));        // day
+	}
+	catch(...)
+	{
+	    WAR << "Cannot parse date string: " << datestr << std::endl;
+	    return Date();
+	}
+
+	// reset time (set 00:00:00)
+	date.tm_sec = date.tm_min = date.tm_hour = 0;
+
+	time_t time_epoch = ::mktime(&date);
+
+	return Date(time_epoch);
+     }
       
      void readFromFile( const Pathname &keyfile)
      {
@@ -125,6 +166,9 @@ namespace zypp
             {
               _id = what[5];
               _name = what[10];
+
+	      _created = createDate(what[6]);
+	      _expires = createDate(what[7]);
             //return key;
             }
             else if ( what[1] == "fpr" )
@@ -146,6 +190,8 @@ namespace zypp
     std::string _fingerprint;
     std::string _data;
     filesystem::TmpFile _data_file;
+    Date _created;
+    Date _expires;
     //Pathname _data_file;
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -197,6 +243,12 @@ namespace zypp
     
   std::string PublicKey::fingerprint() const
   { return _pimpl->fingerprint(); }
+
+  Date PublicKey::created() const
+  { return _pimpl->created(); }
+
+  Date PublicKey::expires() const
+  { return _pimpl->expires(); }
   
   Pathname PublicKey::path() const
   { return _pimpl->path(); }

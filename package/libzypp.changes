@@ -5,6 +5,13 @@ Wed Jan 23 11:16:50 CET 2008 - ma@suse.de
   text locale.
 
 -------------------------------------------------------------------
+Tue Jan 15 14:56:21 CET 2008 - lslezak@suse.cz
+
+- added RpmDb::removePubkey(), call it from
+  KeyRing::Impl::deleteKey() - remove the GPG key from RPM when it
+  is removed from the trusted keyring
+
+-------------------------------------------------------------------
 Tue Dec 18 12:28:22 CET 2007 - aschnell@suse.de
 
 - fixed password handling in URLs (bug #347273)

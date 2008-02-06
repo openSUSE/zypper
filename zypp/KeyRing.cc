@@ -176,7 +176,23 @@ namespace zypp
 
   void KeyRing::Impl::deleteKey( const string &id, bool trusted)
   {
+    PublicKey key;
+
+    if (trusted)
+    {
+	key = exportKey(id, trustedKeyRing());
+    }
+
     deleteKey( id, trusted ? trustedKeyRing() : generalKeyRing() );
+
+    if ( trusted )
+    {
+      callback::SendReport<target::rpm::KeyRingSignals> rpmdbEmitSignal;
+      callback::SendReport<KeyRingSignals> emitSignal;
+
+      rpmdbEmitSignal->trustedKeyRemoved( key );
+      emitSignal->trustedKeyRemoved( key );
+    }
   }
 
   list<PublicKey> KeyRing::Impl::publicKeys()
