@@ -6,6 +6,7 @@
 // ===== exit codes ======
 
 #define ZYPPER_EXIT_OK                     0
+
 // errors
 #define ZYPPER_EXIT_ERR_BUG                1 // undetermined error
 #define ZYPPER_EXIT_ERR_SYNTAX             2 // syntax error, e.g. zypper instal, zypper in --unknown option
@@ -19,6 +20,7 @@
 #define ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED  101 // security update needed
 #define ZYPPER_EXIT_INF_REBOOT_NEEDED      102 // reboot needed after install/upgrade 
 #define ZYPPER_EXIT_INF_RESTART_NEEDED     103 // restart of package manager itself needed
+#define ZYPPER_EXIT_INF_CAP_NOT_FOUND      104 // given capability not found (for install/remove)
 
 
 #define VERBOSITY_NORMAL 0
