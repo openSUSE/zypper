@@ -264,10 +264,6 @@ namespace zypp
     */
    void loadFromCache( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-   /** \overload */
-   void loadFromCache( const std::string &alias,
-                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-
    /**
     * \short Probe repo metadata type.
     *

@@ -21,8 +21,6 @@ TARGET_LINK_LIBRARIES(testbed  zypp )
 # ADD_EXECUTABLE(yum-reader YUMReader_tp.cc)
 # TARGET_LINK_LIBRARIES(yum-reader  zypp )
 
-ADD_EXECUTABLE(cachedsource CachedSource_tp.cc)
-TARGET_LINK_LIBRARIES(cachedsource  zypp )
 
 ADD_EXECUTABLE(repomanager RepositoryManager_tp.cc)
 TARGET_LINK_LIBRARIES(repomanager zypp )

@@ -71,6 +71,17 @@ namespace zypp
       return IdString( _solvable->name );
     }
 
+    std::string Solvable::lookupStrAttribute( const SolvAttr &attr ) const
+    {
+      const char *s = repo_lookup_str(this->get(), attr.idStr().id());
+      return s ? s : std::string();
+    }
+
+    int Solvable::lookupNumAttribute( const SolvAttr &attr ) const
+    {
+      return repo_lookup_num(this->get(), attr.idStr().id());
+    }
+
     ResKind Solvable::kind() const
     {
       NO_SOLVABLE_RETURN( ResKind() );

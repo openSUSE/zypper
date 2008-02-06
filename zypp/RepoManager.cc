@@ -15,6 +15,7 @@
 #include <fstream>
 #include <sstream>
 #include <list>
+#include <map>
 #include <algorithm>
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
@@ -249,6 +250,8 @@ namespace zypp
     }
 
     RepoManagerOptions options;
+
+    map<string, RepoInfo> _repoinfos;
 
   public:
     /** Offer default Impl. */
@@ -892,20 +895,12 @@ namespace zypp
     status.saveToCookieFile(cookiefile);
   }
 
-#warning whats this map for
-  map<data::RecordId, Repo *> repo2solv;
-
   void RepoManager::loadFromCache( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    loadFromCache( info.alias(), progressrcv );
-  }
-
-  void RepoManager::loadFromCache( const std::string &alias,
-                                   const ProgressData::ReceiverFnc & progressrcv )
-  {
     sat::Pool satpool( sat::Pool::instance() );
+    string alias = info.alias();
 
     Pathname solvfile = (_pimpl->options.repoCachePath + alias).extend(".solv");
 
@@ -914,7 +909,6 @@ namespace zypp
 
     sat::Repo repo = satpool.addRepoSolv(solvfile, alias );
   }
-
 
   ////////////////////////////////////////////////////////////////////////////
 

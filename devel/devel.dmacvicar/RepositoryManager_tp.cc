@@ -10,7 +10,6 @@
 #include <zypp/ZYppFactory.h>
 
 #include "zypp/Product.h"
-#include "zypp/detail/PackageImplIf.h"
 #include "zypp/Package.h"
 #include "zypp/RepoInfo.h"
 
@@ -40,7 +39,7 @@ int main(int argc, char **argv)
       for ( RepoInfoList::const_iterator it = repos.begin(); it != repos.end(); ++it )
       {
         cout << *it << endl;
-        Repository repo = manager.createFromCache(*it);
+        manager.loadFromCache(it->alias());
         //z->addResolvables(repo.resolvables());
       }
 

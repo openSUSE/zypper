@@ -43,6 +43,12 @@ namespace sat
       static const SolvAttr noAttr;
       static const SolvAttr summary;
       static const SolvAttr description;
+      static const SolvAttr insnotify;
+      static const SolvAttr delnotify;
+      static const SolvAttr vendor;
+      static const SolvAttr license;
+      static const SolvAttr size;
+      static const SolvAttr downloadsize;
       //@}
 
     public:

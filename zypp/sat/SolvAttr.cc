@@ -25,7 +25,12 @@ namespace sat
 
   const SolvAttr SolvAttr::summary      ( "summary" );
   const SolvAttr SolvAttr::description  ( "description" );
-
+  const SolvAttr SolvAttr::insnotify    ( "insnotify" );
+  const SolvAttr SolvAttr::delnotify    ( "delnotify" );
+  const SolvAttr SolvAttr::vendor       ( "vendor" );
+  const SolvAttr SolvAttr::license      ( "license" );
+  const SolvAttr SolvAttr::size         ( "size" );
+  const SolvAttr SolvAttr::downloadsize ( "downloadsize" );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////

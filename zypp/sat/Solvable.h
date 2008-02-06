@@ -17,6 +17,7 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/SolvAttr.h"
 
 #include "zypp/ResTraits.h"
 #include "zypp/IdString.h"
@@ -75,6 +76,20 @@ namespace zypp
 
         /** The \ref Repository this \ref Solvable belongs to. */
         Repo repo() const;
+
+      public:
+
+        /**
+         * returns the string attribute value for \ref attr
+         * or an empty string if it does not exists.
+         */
+        std::string lookupStrAttribute( const SolvAttr &attr ) const;
+
+        /**
+         * returns the numeric attribute value for \ref attr
+         * or 0 if it does not exists.
+         */
+        int lookupNumAttribute( const SolvAttr &attr ) const;
 
       public:
         /** The identifier.
