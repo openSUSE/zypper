@@ -104,7 +104,11 @@ namespace zypp
   { return std::list<std::string>(); }
 
   OnMediaLocation Package::location() const
-  { return OnMediaLocation(); }
+  {
+    OnMediaLocation loc;
+    loc.setLocation(lookupStrAttribute( sat::SolvAttr::mediafile ));
+    return loc;
+  }
 
   std::string Package::sourcePkgName() const
   { return std::string(); }

@@ -49,6 +49,11 @@ namespace sat
       static const SolvAttr license;
       static const SolvAttr size;
       static const SolvAttr downloadsize;
+      
+      //package
+      static const SolvAttr mediadir;
+      static const SolvAttr medianr;
+      static const SolvAttr mediafile;
       //@}
 
     public:

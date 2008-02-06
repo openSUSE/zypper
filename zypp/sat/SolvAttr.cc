@@ -31,7 +31,12 @@ namespace sat
   const SolvAttr SolvAttr::license      ( "license" );
   const SolvAttr SolvAttr::size         ( "size" );
   const SolvAttr SolvAttr::downloadsize ( "downloadsize" );
-
+  
+  //package
+  const SolvAttr SolvAttr::medianr ( "medianr" );
+  const SolvAttr SolvAttr::mediafile ( "mediafile" );
+  const SolvAttr SolvAttr::mediadir ( "mediadir" );
+  
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
