@@ -1722,12 +1722,12 @@ int source_install(std::vector<std::string> & arguments)
        it != arguments.end(); ++it)
   {
     SrcPackage::Ptr srcpkg;
-
-    gData.repo_resolvables.forEach(
-      functor::chain(
-        resfilter::ByName(*it),
-        resfilter::ByKind(ResTraits<SrcPackage>::kind)),
-        FindSrcPackage(srcpkg));
+// FIXME
+//     gData.repo_resolvables.forEach(
+//       functor::chain(
+//         resfilter::ByName(*it),
+//         resfilter::ByKind(ResTraits<SrcPackage>::kind)),
+//         FindSrcPackage(srcpkg));
 
     if (srcpkg)
     {
