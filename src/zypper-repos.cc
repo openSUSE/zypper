@@ -1273,7 +1273,7 @@ void load_repo_resolvables(Zypper & zypper)
         continue;
       }
 
-      manager.loadFromCache(repo.alias());
+      manager.loadFromCache(repo);
       //cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
     }
     catch (const Exception & e)

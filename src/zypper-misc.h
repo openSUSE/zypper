@@ -110,8 +110,8 @@ bool confirm_licenses(Zypper & zypper);
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess
 {
-  zypp::PoolItem_Ref item;
-  zypp::PoolItem_Ref installed_item;
+  zypp::PoolItem item;
+  zypp::PoolItem installed_item;
   zypp::ResStatus::TransactByValue whoWantsIt;
   std::string version;
   zypp::Arch _architecture;

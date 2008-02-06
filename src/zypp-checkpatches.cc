@@ -226,7 +226,7 @@ int main(int argc, char **argv)
   for ( std::list<RepoInfo>::const_iterator it = repos.begin(); it != repos.end(); ++it )
   {
     // load into the pool
-    manager.loadFromCache(it->alias());
+    manager.loadFromCache(*it);
   }
 
   if ( repos.size() == 0 )

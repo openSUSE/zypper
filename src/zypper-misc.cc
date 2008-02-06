@@ -1185,9 +1185,9 @@ void list_patch_updates(const Zypper & zypper, bool best_effort)
 class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
-  PoolItem_Ref best;
+  PoolItem best;
 
-  bool operator()( PoolItem_Ref provider )
+  bool operator()( PoolItem provider )
     {
       if (!provider.status().isLocked()	// is not locked (taboo)
 	  && (!best 			// first match
@@ -1207,8 +1207,8 @@ public:
 // Similar to zypp::solver::detail::Helper::findUpdateItem
 // but that allows changing the arch (#222140).
 static
-PoolItem_Ref
-findArchUpdateItem( const ResPool & pool, PoolItem_Ref item )
+PoolItem
+findArchUpdateItem( const ResPool & pool, PoolItem item )
 {
   LookForArchUpdate info;
 
@@ -1230,7 +1230,7 @@ findArchUpdateItem( const ResPool & pool, PoolItem_Ref item )
 
 // ----------------------------------------------------------------------------
 
-typedef set<PoolItem_Ref> Candidates;
+typedef set<PoolItem> Candidates;
 
 static void
 find_updates( const ResObject::Kind &kind, Candidates &candidates )
@@ -1245,7 +1245,7 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
     if (it->status().isUninstalled())
       continue;
     // (actually similar to ProvideProcess?)
-    PoolItem_Ref candidate = findArchUpdateItem( pool, *it );
+    PoolItem candidate = findArchUpdateItem( pool, *it );
     if (!candidate.resolvable())
       continue;
 
@@ -1342,8 +1342,8 @@ bool mark_item_install (const PoolItem& pi) {
 //   multiple installed resolvables of the same name.
 //   LookForArchUpdate will return the one with the highest edition.
 
-PoolItem_Ref
-findInstalledItem( PoolItem_Ref item )
+PoolItem
+findInstalledItem( PoolItem item )
 {
   const zypp::ResPool& pool = God->pool();
   LookForArchUpdate info;
@@ -1369,7 +1369,7 @@ findInstalledItem( PoolItem_Ref item )
 bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
-  PoolItem_Ref installed = findInstalledItem( pi );
+  PoolItem installed = findInstalledItem( pi );
 
   // require anything greater than the installed version
   try {
