@@ -64,6 +64,9 @@ namespace zypp
       /** Returns the current status. */
       ResStatus & status() const;
 
+      /** Reset status (applies autoprotection). */
+      ResStatus & statusReset() const;
+      
       /** Returns the ResObject::constPtr.
        * \see \ref operator->
        */

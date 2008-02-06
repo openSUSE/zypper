@@ -45,6 +45,14 @@ namespace zypp
     ResObject::constPtr resolvable() const
     { return _resolvable; }
 
+    ResStatus & statusReset() const
+    {
+      _status.setLock( false, zypp::ResStatus::USER );
+      _status.resetTransact( zypp::ResStatus::USER );
+      return _status;
+    }
+
+    
   private:
     mutable ResStatus     _status;
     ResObject::constPtr   _resolvable;
@@ -136,6 +144,9 @@ namespace zypp
   ResObject::constPtr PoolItem::resolvable() const
   { return _pimpl->resolvable(); }
 
+  ResStatus & PoolItem::statusReset() const
+  { return _pimpl->statusReset(); }
+  
   void PoolItem::saveState() const
   { _pimpl->saveState(); }
 
