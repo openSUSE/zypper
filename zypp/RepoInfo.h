@@ -79,6 +79,11 @@ namespace zypp
     std::string alias() const;
 
     /**
+     * Same as alias(), just escaped in a way to be a valid file name.
+     */
+    std::string escaped_alias() const;
+
+    /**
      * A Url under which the metadata are located, or a set of mirrors.
      *
      * This can't be empty in order the repository to be valid

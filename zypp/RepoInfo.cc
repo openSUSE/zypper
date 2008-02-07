@@ -50,6 +50,7 @@ namespace zypp
     std::set<Url> baseUrls;
     Pathname path;
     std::string alias;
+    std::string escaped_alias;
     std::string name;
     Pathname filepath;
     Pathname metadatapath;
@@ -146,6 +147,17 @@ namespace zypp
   RepoInfo & RepoInfo::setAlias( const std::string &alias )
   {
     _pimpl->alias = alias;
+    // replace slashes with underscores
+    std::string fnd="/";
+    std::string rep="_";
+    std::string escaped_alias = alias;
+    size_t pos = escaped_alias.find(fnd);
+    while(pos!=string::npos)
+    {
+      escaped_alias.replace(pos,fnd.length(),rep);
+      pos = escaped_alias.find(fnd,pos+rep.length());
+    }
+    _pimpl->escaped_alias = escaped_alias;
     return *this;
   }
 
@@ -184,6 +196,9 @@ namespace zypp
 
   std::string RepoInfo::alias() const
   { return _pimpl->alias; }
+
+  std::string RepoInfo::escaped_alias() const
+  { return _pimpl->escaped_alias; }
 
   std::string RepoInfo::name() const
   {

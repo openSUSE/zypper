@@ -324,7 +324,7 @@ namespace zypp
 
 #warning FIXME add root to rpmdb2solv
         // FIXME add root to rpmdb2solv
-        string cmd( str::form( "/usr/bin/rpmdb2solv > '%s'", rpmsolv.c_str() ) );
+        string cmd( str::form( "rpmdb2solv > \"%s\"", rpmsolv.c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
