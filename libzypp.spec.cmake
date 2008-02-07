@@ -100,7 +100,7 @@ cd ..
 
 %post
 %run_ldconfig
-%{prefix}/lib/zypp/zypp-migrate-sources
+#%{prefix}/lib/zypp/zypp-migrate-sources
 
 %postun
 %run_ldconfig
