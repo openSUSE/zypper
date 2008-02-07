@@ -106,7 +106,12 @@ namespace zypp
   OnMediaLocation Package::location() const
   {
     OnMediaLocation loc;
-    loc.setLocation(lookupStrAttribute( sat::SolvAttr::mediafile ));
+    unsigned medianr;
+    std::string filename = lookupLocation( medianr );
+    /* XXX someone else needs to do this prepending of the datadir.
+       It's not necessarily "suse".  */
+    filename = "suse/" + filename;
+    loc.setLocation(filename, medianr);
     return loc;
   }
 
