@@ -77,9 +77,95 @@ namespace zypp
       return s ? s : std::string();
     }
 
-    int Solvable::lookupNumAttribute( const SolvAttr &attr ) const
+    unsigned Solvable::lookupNumAttribute( const SolvAttr &attr ) const
     {
       return repo_lookup_num(this->get(), attr.idStr().id());
+    }
+
+    struct LocCallback
+    {
+      unsigned medianr;
+      const char *mediadir;
+      const char *mediafile;
+      int trivial;
+    };
+
+    static int
+    location_cb (void *vcbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
+    {
+      LocCallback *lc = (LocCallback *)vcbdata;
+      switch (key->type)
+      {
+        case TYPE_ID:
+	  if (key->name == SolvAttr::mediadir.idStr().id())
+	  {
+	    if (data->localpool)
+	      lc->mediadir = stringpool_id2str(&data->spool, kv->id);
+	    else
+	      lc->mediadir = id2str(data->repo->pool, kv->id);
+	  }
+	  break;
+	case TYPE_STR:
+	  if (key->name == SolvAttr::mediafile.idStr().id())
+	    lc->mediafile = kv->str;
+	  break;
+	case TYPE_VOID:
+	  if (key->name == SolvAttr::mediafile.idStr().id())
+	    lc->trivial = 1;
+	  break;
+	case TYPE_CONSTANT:
+	  if (key->name == SolvAttr::medianr.idStr().id())
+	    lc->medianr = kv->num;
+	  break;
+      }
+      /* continue walking */
+      return 0;
+    }
+
+    std::string Solvable::lookupLocation(unsigned &medianr) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      ::Repo *repo = _solvable->repo;
+      ::Pool *pool = repo->pool;
+      Id sid = _solvable - pool->solvables;
+      ::Repodata *data;
+      unsigned i;
+      LocCallback lc;
+      lc.medianr = 1;
+      lc.mediadir = 0;
+      lc.mediafile = 0;
+      lc.trivial = 0;
+      for (i = 0, data = repo->repodata; i < repo->nrepodata; i++, data++)
+      {
+        if (data->state == REPODATA_STUB || data->state == REPODATA_ERROR)
+          continue;
+	if (sid < data->start || sid >= data->end)
+	  continue;
+        repodata_search(data, sid - data->start, 0, location_cb, &lc);
+      }
+      medianr = lc.medianr;
+      std::string ret;
+      if (lc.mediadir)
+	ret += std::string( lc.mediadir ) + "/";
+      if (!lc.trivial)
+        {
+	  if (lc.mediafile)
+	    ret += lc.mediafile;
+	  return ret;
+	}
+      /* Trivial means that we can construct the rpm name from our
+         solvable data, as name-evr.arch.rpm .  */
+      /* If we haven't seen an explicit dirname, then prepend the arch as
+         directory.  */
+      if (!lc.mediadir)
+        ret += IdString(_solvable->arch).asString() + "/";
+      ret += IdString(_solvable->name).asString();
+      ret += '-';
+      ret += IdString(_solvable->evr).asString();
+      ret += '.';
+      ret += IdString(_solvable->arch).asString();
+      ret += ".rpm";
+      return ret;
     }
 
     ResKind Solvable::kind() const

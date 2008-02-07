@@ -89,7 +89,14 @@ namespace zypp
          * returns the numeric attribute value for \ref attr
          * or 0 if it does not exists.
          */
-        int lookupNumAttribute( const SolvAttr &attr ) const;
+        unsigned lookupNumAttribute( const SolvAttr &attr ) const;
+
+	/**
+	 * returns the media location: media number in \ref medianr,
+	 * file name as return value.  The file name is possibly prepended
+	 * with a subdirectory.
+	 */
+	std::string lookupLocation(unsigned &medianr) const;
 
       public:
         /** The identifier.
