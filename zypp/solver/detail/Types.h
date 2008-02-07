@@ -35,7 +35,7 @@
 #include "zypp/PoolItem.h"
 
 #define _DEBUG(x) DBG << x << std::endl;
-#define _XDEBUG(x) XXX << x << std::endl;
+#define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 //#define _DEBUG(x)
 
 /////////////////////////////////////////////////////////////////////////

@@ -109,6 +109,7 @@ namespace zypp
                                        const char * file_r,
                                        const char * func_r,
                                        const int    line_r );
+      extern bool isExcessive();
 
       /////////////////////////////////////////////////////////////////
     } // namespace logger

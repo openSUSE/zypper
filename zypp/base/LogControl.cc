@@ -214,6 +214,9 @@ namespace zypp
       struct LogControlImpl
       {
       public:
+	bool isExcessive()
+	{ return _excessive; }
+
         void excessive( bool onOff_r )
         { _excessive = onOff_r; }
 
@@ -360,6 +363,9 @@ namespace zypp
                                             file_r, func_r, line_r,
                                             buffer_r );
       }
+
+      bool isExcessive()
+      { return LogControlImpl::instance.isExcessive(); }
 
       /////////////////////////////////////////////////////////////////
     } // namespace logger
