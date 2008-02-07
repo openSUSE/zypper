@@ -126,7 +126,7 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::delnotify ); }
 
   License ResObject::licenseToConfirm() const
-  { return lookupStrAttribute( sat::SolvAttr::license ); }
+  { return lookupStrAttribute( sat::SolvAttr::eula ); }
 
   Vendor ResObject::vendor() const
   { return lookupStrAttribute( sat::SolvAttr::vendor ); }

@@ -54,6 +54,7 @@ namespace sat
       static const SolvAttr mediadir;
       static const SolvAttr medianr;
       static const SolvAttr mediafile;
+      static const SolvAttr eula;
       //@}
 
     public:

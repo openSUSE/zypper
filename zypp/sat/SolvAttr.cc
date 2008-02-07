@@ -33,9 +33,10 @@ namespace sat
   const SolvAttr SolvAttr::downloadsize ( "downloadsize" );
   
   //package
-  const SolvAttr SolvAttr::medianr ( "medianr" );
-  const SolvAttr SolvAttr::mediafile ( "mediafile" );
-  const SolvAttr SolvAttr::mediadir ( "mediadir" );
+  const SolvAttr SolvAttr::medianr	( "medianr" );
+  const SolvAttr SolvAttr::mediafile	( "mediafile" );
+  const SolvAttr SolvAttr::mediadir	( "mediadir" );
+  const SolvAttr SolvAttr::eula		( "eula" );
   
 } // namespace sat
   /////////////////////////////////////////////////////////////////

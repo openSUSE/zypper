@@ -53,7 +53,7 @@ namespace zypp
 
   /** */
   Label Package::license() const
-  { return Label(); }
+  { return lookupStrAttribute( sat::SolvAttr::eula ); }
 
   /** */
   std::string Package::packager() const
