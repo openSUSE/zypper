@@ -6,7 +6,6 @@
 
 #include "zypp/ZYpp.h"
 #include "zypp/base/Logger.h"
-#include "zypp/target/store/PersistentStorage.h"
 #include "zypp/base/IOStream.h"
 
 #include "zypp/RepoManager.h"
