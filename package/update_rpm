@@ -1,0 +1,11 @@
+set -e
+rm *.tar.bz2
+svn export http://svn.opensuse.org/svn/zypp/branches/tmp/ma/jump_sat/libzypp
+cd libzypp
+mkdir build
+cd build
+cmake ..
+make srcpackage_local
+cp package/*es package/*ec package/*tar.bz2 ../..
+cd ../..
+rm -rf libzypp
