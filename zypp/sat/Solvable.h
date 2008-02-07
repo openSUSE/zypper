@@ -184,9 +184,9 @@ namespace zypp
       class SolvableIterator : public boost::iterator_adaptor<
           SolvableIterator                   // Derived
           , ::_Solvable*                     // Base
-          , Solvable                         // Value
-          , boost::single_pass_traversal_tag // CategoryOrTraversal
-          , Solvable                         // Reference
+          , const Solvable                   // Value
+          , boost::forward_traversal_tag     // CategoryOrTraversal
+          , const Solvable                   // Reference
           >
       {
         public:
@@ -205,12 +205,13 @@ namespace zypp
         private:
           friend class boost::iterator_core_access;
 
-          void increment()
-          { assignVal( _val.nextInPool() ); }
-
           Solvable dereference() const
           { return _val; }
 
+          void increment()
+          { assignVal( _val.nextInPool() ); }
+
+        private:
           void assignVal( const Solvable & val_r )
           { _val = val_r; base_reference() = _val.get(); }
 

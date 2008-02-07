@@ -51,13 +51,19 @@ namespace zypp
 
      /////////////////////////////////////////////////////////////////
 
-      void logSat( struct _Pool *, void *data, int type, const char *logString )
+      static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
 	  if ((type & (SAT_FATAL|SAT_ERROR))) {
 	      _ERR("satsolver") << logString;
 	  } else {
 	      _MIL("satsolver") << logString;
 	  }
+      }
+
+      static detail::IdType nsCallback( struct _Pool *, void *data, detail::IdType lhs, detail::IdType rhs )
+      {
+        //T << Cability( lhs ) << (const char *)data << Capability( rhs ) << endl;
+        return 0;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -89,7 +95,12 @@ namespace zypp
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
         // set pool architecture
-        //::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
+        ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
+
+        // set namespace callback
+        _pool->nscallback = &nsCallback;
+        _pool->nscallbackdata = (void*)" NAMESPACE ";
+        SEC << _pool->nscallback << endl;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -102,6 +113,8 @@ namespace zypp
         ::pool_free( _pool );
       }
 
+      ///////////////////////////////////////////////////////////////////
+
       void PoolImpl::setDirty( const char * a1, const char * a2, const char * a3 )
       {
         if ( a1 )
@@ -111,16 +124,15 @@ namespace zypp
           else           DBG << a1 << endl;
         }
         _serial.setDirty();
+        ::pool_freewhatprovides( _pool );
       }
 
       void PoolImpl::prepare()
       {
-        if ( _serial.dirty() )
+        if ( _watcher.remember( _serial ) )
         {
            // sat solver claims to handle this on it's own:
-           ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
            ::pool_createwhatprovides( _pool );
-           _serial.serial();
         }
       }
 

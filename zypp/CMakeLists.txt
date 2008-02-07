@@ -11,7 +11,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql )
 
 SET( zypp_SRCS
-  Arch.cc
   Atom.cc
   ByteCount.cc
   Capabilities.cc
@@ -19,7 +18,6 @@ SET( zypp_SRCS
   CapMatch.cc
   Changelog.cc
   CheckSum.cc
-  CountryCode.cc
   Date.cc
   Dep.cc
   Dependencies.cc
@@ -33,8 +31,6 @@ SET( zypp_SRCS
   FileChecker.cc
   IdString.cc
   KeyRing.cc
-  LanguageCode.cc
-  Locale.cc
   Locks.cc
   MediaProducts.cc
   MediaSetAccess.cc
@@ -79,11 +75,17 @@ SET( zypp_SRCS
   UpgradeStatistics.cc
   Url.cc
   VendorAttr.cc
-  ZConfig.cc
   ZYpp.cc
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
   ZYppFactory.cc
+)
+SET( zypp_EARLY_SRCS
+  ZConfig.cc
+  Arch.cc
+  Locale.cc
+  CountryCode.cc
+  LanguageCode.cc
 )
 
 SET( zypp_HEADERS
@@ -831,6 +833,7 @@ ${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_sat_SRCS}
 ${zypp_sat_detail_SRCS}
+${zypp_EARLY_SRCS}
 ${zypp_base_SRCS}
 )
 

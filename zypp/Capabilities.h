@@ -93,7 +93,7 @@ namespace zypp
       , const sat::detail::IdType *      // Base
       , const Capability                 // Value
       , boost::forward_traversal_tag     // CategoryOrTraversal
-      , const Capability &               // Reference
+      , const Capability                 // Reference
       >
   {
     public:
@@ -103,7 +103,7 @@ namespace zypp
 
       explicit const_iterator( const sat::detail::IdType * _idx )
       : const_iterator::iterator_adaptor_( _idx )
-      { assignVal(); }
+      {}
 
     public:
       /** Return \c true if the \ref Capability is \c tagged.
@@ -129,31 +129,26 @@ namespace zypp
       friend class boost::iterator_core_access;
 
       reference dereference() const
-      { return _val; }
+      { return ( base() ) ? Capability( *base() ) : Capability::Null; }
 
       template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
-          bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
-          { // NULL pointer is eqal pointer to Id 0
-            return ( base() == rhs.base() // includes both NULL...
-                || ( !rhs.base() && !*base()     )
-                || ( !base()     && !*rhs.base() ) );
-          }
+      bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
+      { // NULL pointer is eqal pointer to Id 0
+        return ( base() == rhs.base() // includes both NULL...
+                 || ( !rhs.base() && !*base()     )
+                 || ( !base()     && !*rhs.base() ) );
+      }
 
-          void increment()
-          { // jump over satsolvers internal ids.
-            if ( sat::detail::isDepMarkerId( *(++base_reference()) ) )
-            {
-              _tagged = true;
-              ++base_reference();
-            }
-            assignVal();
-          }
+      void increment()
+      { // jump over satsolvers internal ids.
+        if ( sat::detail::isDepMarkerId( *(++base_reference()) ) )
+        {
+          _tagged = true;
+          ++base_reference();
+        }
+      }
 
     private:
-      void assignVal()
-      { _val = ( base() ) ? Capability( *base() ) : Capability::Null; }
-
-      mutable Capability _val;
       DefaultIntegral<bool,false> _tagged;
   };
   ///////////////////////////////////////////////////////////////////

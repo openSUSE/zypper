@@ -198,7 +198,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
-    return str << obj.c_str();
+    return str << obj.detail();
   }
 
   std::ostream & dumpOn( std::ostream & str, const Capability & obj )
@@ -252,7 +252,17 @@ namespace zypp
         return str << obj.name() << " " << obj.op() << " " << obj.ed();
         break;
       case CapDetail::EXPRESSION:
-        return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
+        switch ( obj.capRel() )
+        {
+          case CapDetail::REL_NONE:
+          case CapDetail::CAP_AND:
+          case CapDetail::CAP_OR:
+          case CapDetail::CAP_WITH:
+            return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
+            break;
+          case CapDetail::CAP_NAMESPACE:
+            return str << obj.lhs().detail() << "(" << obj.rhs().detail() << ")";
+        }
         break;
     }
     return str <<  "<UnknownCap>";

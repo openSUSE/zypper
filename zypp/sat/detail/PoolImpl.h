@@ -65,7 +65,7 @@ namespace zypp
           */
           void prepare();
 
-        private:
+        public:
           /** Invalidate housekeeping data (e.g. whatprovides).
           */
           void setDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
@@ -172,6 +172,8 @@ namespace zypp
           ::_Pool * _pool;
           /** Serial number. */
           SerialNumber _serial;
+          /** Watch serial number. */
+          SerialNumberWatcher _watcher;
           /** Additional \ref RepoInfo. */
           std::map<RepoIdType,RepoInfo> _repoinfos;
       };

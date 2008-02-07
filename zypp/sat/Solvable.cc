@@ -270,31 +270,78 @@ namespace zypp
 
     Capabilities Solvable::operator[]( Dep which_r ) const
     {
-      NO_SOLVABLE_RETURN( Capabilities() );
-      ::Offset offs = 0;
       switch( which_r.inSwitch() )
       {
-        case Dep::PROVIDES_e:    offs = _solvable->provides;    break;
-        case Dep::REQUIRES_e:    offs = _solvable->requires;    break;
-        case Dep::CONFLICTS_e:   offs = _solvable->conflicts;   break;
-        case Dep::OBSOLETES_e:   offs = _solvable->obsoletes;   break;
-        case Dep::RECOMMENDS_e:  offs = _solvable->recommends;  break;
-        case Dep::SUGGESTS_e:    offs = _solvable->suggests;    break;
-        case Dep::FRESHENS_e:    offs = _solvable->freshens;    break;
-        case Dep::ENHANCES_e:    offs = _solvable->enhances;    break;
-        case Dep::SUPPLEMENTS_e: offs = _solvable->supplements; break;
-
-        case Dep::PREREQUIRES_e:
-          // prerequires are a subset of requires
-          if ( (offs = _solvable->requires) )
-            return Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker );
-          else
-            return Capabilities();
-          break;
+        case Dep::PROVIDES_e:    return provides();    break;
+        case Dep::REQUIRES_e:    return requires();    break;
+        case Dep::CONFLICTS_e:   return conflicts();   break;
+        case Dep::OBSOLETES_e:   return obsoletes();   break;
+        case Dep::RECOMMENDS_e:  return recommends();  break;
+        case Dep::SUGGESTS_e:    return suggests();    break;
+        case Dep::FRESHENS_e:    return freshens();    break;
+        case Dep::ENHANCES_e:    return enhances();    break;
+        case Dep::SUPPLEMENTS_e: return supplements(); break;
+        case Dep::PREREQUIRES_e: return prerequires(); break;
       }
+      return Capabilities();
+    }
 
-      return offs ? Capabilities( _solvable->repo->idarraydata + offs )
-                  : Capabilities();
+    inline Capabilities _getCapabilities( detail::IdType * idarraydata_r, ::Offset offs_r )
+    {
+      return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
+    }
+    Capabilities Solvable::provides() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->provides );
+    }
+    Capabilities Solvable::requires() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->requires );
+    }
+    Capabilities Solvable::conflicts() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->conflicts );
+    }
+    Capabilities Solvable::obsoletes() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->obsoletes );
+    }
+    Capabilities Solvable::recommends() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->recommends );
+    }
+    Capabilities Solvable::suggests() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->suggests );
+    }
+    Capabilities Solvable::freshens() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->freshens );
+    }
+    Capabilities Solvable::enhances() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->enhances );
+    }
+    Capabilities Solvable::supplements() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->supplements );
+    }
+    Capabilities Solvable::prerequires() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      // prerequires are a subset of requires
+       ::Offset offs = _solvable->requires;
+       return offs ? Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker )
+                   : Capabilities();
     }
 
     /******************************************************************
