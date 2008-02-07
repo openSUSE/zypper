@@ -130,7 +130,7 @@ cd ..
 %{_docdir}/%{name}
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
-%{prefix}/share/cmake/Modules/FindZypp.cmake
+%{prefix}/share/cmake/Modules/*
 %{_libdir}/pkgconfig/libzypp.pc
 
 %changelog -n libzypp
