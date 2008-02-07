@@ -12,7 +12,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/Digest.h"
-#include "zypp/target/store/xml_escape_parser.hpp"
+#include "zypp/parser/xml_escape_parser.hpp"
 
 #include "zypper-updates.h"
 
