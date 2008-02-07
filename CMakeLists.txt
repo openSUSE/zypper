@@ -114,6 +114,9 @@ ENDIF ( NOT DOXYGEN )
 MESSAGE(STATUS "soname: ${LIBZYPP_VERSION_INFO}")
 MESSAGE(STATUS "version: ${VERSION}")
 
+MESSAGE(STATUS "Writing pkg-config file...")
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.pc.cmake ${CMAKE_BINARY_DIR}/libzypp.pc @ONLY)
+INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )
 
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
