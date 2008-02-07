@@ -28,6 +28,7 @@ BuildRequires:  libsatsolver-devel openssl-devel sqlite-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel rpm-devel
 BuildRequires:  hicolor-icon-theme update-desktop-files
 Requires:       gpg2
+Requires:       satsolver-tools == %( echo `rpm -q --queryformat '%{VERSION}' satsolver-tools`)
 
 %description
 Package, Patch, Pattern, and Product Management
