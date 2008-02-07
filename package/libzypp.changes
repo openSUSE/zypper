@@ -5,6 +5,11 @@ Fri Feb  1 17:45:07 CET 2008 - jkupec@suse.cz
 - revision 8431
 
 -------------------------------------------------------------------
+Sun Jan 27 21:35:13 CET 2008 - coolo@suse.de
+
+- fix changelog
+
+-------------------------------------------------------------------
 Thu Jan 24 18:26:47 CET 2008 - jkupec@suse.cz
 
 - read .curlrc more robustly to obtain user-proxy (#330351)
@@ -580,18 +585,18 @@ Thu Aug 30 18:22:32 CEST 2007 - ma@suse.de
 - revision 7030
 
 -------------------------------------------------------------------
-Thu Aug 30 17:25:14 CEST 2007 - ma@suse.de
-
-- Safe fix for bug #299680.
-- version 3.20.1
-- revision 7026
-
--------------------------------------------------------------------
 Thu Aug 30 17:31:33 CEST 2007 - jkupec@suse.cz
 
 - remember the cause of the RepoException when refreshing metadata
   (#301022)
 - r7023
+
+-------------------------------------------------------------------
+Thu Aug 30 17:25:14 CEST 2007 - ma@suse.de
+
+- Safe fix for bug #299680.
+- version 3.20.1
+- revision 7026
 
 -------------------------------------------------------------------
 Thu Aug 30 15:48:03 CEST 2007 - schubi@suse.de
@@ -1290,17 +1295,17 @@ Wed Jul 18 14:43:04 CEST 2007 - ma@suse.de
 - revision 6063
 
 -------------------------------------------------------------------
+Wed Jul 18 14:16:59 CEST 2007 - dmacvicar@suse.de
+
+- allow / in alias (#292628)
+
+-------------------------------------------------------------------
 Wed Jul 18 12:38:55 CEST 2007 - ma@suse.de
 
 - Fixed repo::provideFile to throw on error.
 - Fixed ResolvableQuery to use 0 as default for non existing
   numerical values.
 - revision 6058
-
--------------------------------------------------------------------
-Wed Jul 18 14:16:59 CEST 2007 - dmacvicar@suse.de
-
-- allow / in alias (#292628)
 
 -------------------------------------------------------------------
 Tue Jul 17 15:57:03 CEST 2007 - ma@suse.de
