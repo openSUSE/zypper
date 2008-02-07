@@ -12,7 +12,6 @@
 
 #include <string>
 #include "zypp/Url.h"
-#include "zypp/ResObject.h"
 #include "zypp/Edition.h"
 
 #include "zypp/base/LogControl.h"
