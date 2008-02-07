@@ -199,7 +199,7 @@ namespace zypp
 
       bool operator()( ResObject::constPtr p ) const
       {
-       return p->repository().info().alias() == _alias;
+        return p->repoInfo().alias() == _alias;
       }
 
       std::string _alias;
