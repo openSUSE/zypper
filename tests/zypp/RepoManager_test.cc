@@ -114,7 +114,7 @@ void repomanager_test( const string &dir )
                        "Repo is not yet cached" );
 
   // it is not cached, this should throw
-  BOOST_CHECK_THROW( manager.createFromCache(repo),
+  BOOST_CHECK_THROW( manager.loadFromCache(repo),
                      RepoNotCachedException );
 
   // now cache should build normally
@@ -139,22 +139,7 @@ void repomanager_test( const string &dir )
   // now cache should build normally
   manager.buildCache(repo);
 
-  Repository repository;
-  repository = manager.createFromCache(repo);
-  
-  
-  ResStore store = repository.resolvables();
-  MIL << store.size() << " resolvables" << endl;
-  
-  BOOST_CHECK_EQUAL( store.size(), 47 );
-
-  ResStore::const_iterator it = store.begin();
-  for ( ; it != store.end(); ++it )
-  {
-    MIL << *it << endl;
-  }
-
-  //manager.refreshMetadata(repo);
+  manager.loadFromCache(repo);
 
   if ( manager.isCached(repo ) )
   {
