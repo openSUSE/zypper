@@ -147,6 +147,10 @@ namespace zypp
       std::string ret;
       if (lc.mediadir)
 	ret += std::string( lc.mediadir ) + "/";
+      else
+        /* If we haven't seen an explicit dirname, then prepend the arch as
+           directory.  */
+        ret += IdString(_solvable->arch).asString() + "/";
       if (!lc.trivial)
         {
 	  if (lc.mediafile)
@@ -155,10 +159,6 @@ namespace zypp
 	}
       /* Trivial means that we can construct the rpm name from our
          solvable data, as name-evr.arch.rpm .  */
-      /* If we haven't seen an explicit dirname, then prepend the arch as
-         directory.  */
-      if (!lc.mediadir)
-        ret += IdString(_solvable->arch).asString() + "/";
       ret += IdString(_solvable->name).asString();
       ret += '-';
       ret += IdString(_solvable->evr).asString();
