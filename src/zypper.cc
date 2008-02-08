@@ -1868,7 +1868,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::SEARCH)
   {
-    ZyppSearchOptions options;
+    zypp::PoolQuery query;
 
     if (runningHelp())
     {
@@ -1877,60 +1877,61 @@ void Zypper::doCommand()
     }
 
     if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
-      options.setInstalledFilter(ZyppSearchOptions::UNINSTALLED_ONLY);
+      query.setUninstalledOnly();
 
-    if (copts.count("installed-only")) options.setInstalledFilter(ZyppSearchOptions::INSTALLED_ONLY);
-    if (copts.count("match-any")) options.setMatchAny();
-    if (copts.count("match-words")) options.setMatchWords();
-    if (copts.count("match-exact")) options.setMatchExact();
-    if (copts.count("search-descriptions")) options.setSearchDescriptions();
-    if (copts.count("case-sensitive")) options.setCaseSensitive();
+    if (copts.count("installed-only")) query.setInstalledOnly();
+    //if (copts.count("match-any")) options.setMatchAny();
+    //if (copts.count("match-words")) options.setMatchWords();
+    if (copts.count("match-exact")) query.setMatchExact();
+    //if (copts.count("search-descriptions")) options.setSearchDescriptions();
+    if (copts.count("case-sensitive")) query.setCaseSensitive();
 
-    if (copts.count("type") > 0) {
-      options.clearKinds();
+    if (copts.count("type") > 0)
+    {
       std::list<std::string>::const_iterator it;
-      for (it = copts["type"].begin(); it != copts["type"].end(); ++it) {
-	kind = string_to_kind( *it );
-        if (kind == ResObject::Kind()) {
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
           cerr << _("Unknown resolvable type ") << *it << endl;
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
-        options.addKind( kind );
+        query.addKind( kind );
       }
     }
-    else if (globalOpts().is_rug_compatible) {
-      options.clearKinds();
-      options.addKind( ResTraits<Package>::kind );
+    else if (globalOpts().is_rug_compatible)
+    {
+      query.addKind( ResTraits<Package>::kind );
     }
 
-    if (copts.count("repo") > 0) {
-      options.clearRepos();
+    if (copts.count("repo") > 0)
+    {
+      //options.clearRepos();
       std::list<std::string>::const_iterator it;
       for (it = copts["repo"].begin(); it != copts["repo"].end(); ++it) {
-        options.addRepo( *it );
+        query.addRepo( *it );
       }
     }
-
-    options.resolveConflicts();
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
     cond_init_target(*this);
-    
-    establish();
+
+    // now load resolvables:
+    cond_load_resolvables(*this);
 
     Table t;
     t.style(Ascii);
 
     try
     {
-      ZyppSearch search( God, options, _arguments );
-      FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
-  
-      search.doSearch( callback, callback );
+      
+      FillTable callback( t, query );
+      query.execute(_arguments[0], callback );
   
       if (t.empty())
         cout << _("No resolvables found.") << endl;
