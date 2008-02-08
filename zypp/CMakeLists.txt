@@ -46,6 +46,7 @@ SET( zypp_SRCS
   Pathname.cc
   Pattern.cc
   PoolItem.cc
+  PoolQuery.cc
   ProblemSolution.cc
   Product.cc
   ProgressData.cc
@@ -138,6 +139,7 @@ SET( zypp_HEADERS
   Pathname.h
   Pattern.h
   PoolItem.h
+  PoolQuery.h
   ProblemSolution.h
   ProblemTypes.h
   Product.h
