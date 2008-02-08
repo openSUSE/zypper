@@ -211,6 +211,49 @@ Testcase::~Testcase()
 }
 
 
+bool Testcase::createTestcasePool(const ResPool &pool)
+{
+    PathInfo path (dumpPath);
+
+    if ( !path.isExist() ) {
+	if (zypp::filesystem::mkdir (dumpPath)!=0) {
+	    ERR << "Cannot create directory " << dumpPath << endl;
+	    return false;
+	}
+    } else {
+	if (!path.isDir()) {
+	    ERR << dumpPath << " is not a directory." << endl;
+	    return false;
+	}
+	// remove old stuff
+	zypp::filesystem::clean_dir (dumpPath);
+    }
+    
+    RepositoryTable		repoTable;
+    HelixResolvable 	system (dumpPath + "/solver-system.xml.gz");    
+
+    for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
+    {
+	Resolvable::constPtr res = it->resolvable();
+
+	if ( it->status().isInstalled() ) {
+	    // system channel
+	    system.addResolvable (*it);
+	} else {
+	    // repo channels
+	    ResObject::constPtr repoItem = it->resolvable();
+	    Repository repo  = repoItem->repository();
+	    if (repoTable.find (repo) == repoTable.end()) {
+		repoTable[repo] = new HelixResolvable(dumpPath + "/"
+						      + numstring(repo.numericId())
+						      + "-package.xml.gz");
+	    }
+	    repoTable[repo]->addResolvable (*it);
+	}
+    }	
+    return true;
+}
+
 bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
 {
     PathInfo path (dumpPath);
