@@ -49,8 +49,8 @@ int main(int argc, char **argv)
 //         }
 //       }
 
-      PoolQuery query( &result_cb );
-      query.execute("kde");
+      PoolQuery query();
+      query.execute("kde", &result_cb);
       
 
     }

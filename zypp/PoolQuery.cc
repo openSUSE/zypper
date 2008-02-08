@@ -37,9 +37,9 @@ namespace zypp
   struct PoolQuery::Impl
   {
 
-    Impl(PoolQuery::ProcessResolvable fnc)
+    Impl()
       : _flags( 0 | SEARCH_NOCASE | SEARCH_SUBSTRING )
-      , _fnc(fnc)
+      , _status_flags(ALL)
     {}
 
     ~Impl()
@@ -56,7 +56,28 @@ namespace zypp
       //#define SEACH_STOP              3
 
       PoolQuery *me = (PoolQuery*) cbdata;
-      bool r = me->_pimpl->_fnc(  makeResObject(sat::Solvable(s - sat::Pool::instance().get()->solvables)));
+
+      bool r = false;
+
+      sat::Solvable solvable(s - sat::Pool::instance().get()->solvables);
+
+      // now filter by kind here (we cant do it before)
+      if ( ! me->_pimpl->_kinds.empty() )
+      {
+        // the user wants to filter by kind.
+        if ( find( me->_pimpl->_kinds.begin(),
+                   me->_pimpl->_kinds.end(),
+                   solvable.kind() )
+             == me->_pimpl->_kinds.end() )
+        {
+          // we did not find the kind in the list
+          // so this is not a result.
+          return SEARCH_NEXT_SOLVABLE;
+        }
+      }
+
+      if (me->_pimpl->_fnc)
+        r = me->_pimpl->_fnc( makeResObject(solvable) );
       
       if (!r)
         return SEARCH_STOP;
@@ -67,7 +88,8 @@ namespace zypp
     vector<string> _names;
     vector<Resolvable::Kind> _kinds;
     int _flags;
-    PoolQuery::ProcessResolvable _fnc;
+    int _status_flags;
+    mutable PoolQuery::ProcessResolvable _fnc;
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -88,8 +110,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  PoolQuery::PoolQuery( PoolQuery::ProcessResolvable fnc )
-    : _pimpl(new Impl(fnc))
+  PoolQuery::PoolQuery()
+    : _pimpl(new Impl())
   {}
 
   PoolQuery::~PoolQuery()
@@ -106,32 +128,63 @@ namespace zypp
       _pimpl->_flags = (_pimpl->_flags | SEARCH_NOCASE);
   }
 
+  void PoolQuery::setMatchExact(const bool value)
+  {
+    if (value)
+    {
+      _pimpl->_flags = (_pimpl->_flags | SEARCH_STRING);
+      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_REGEX);
+      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_SUBSTRING);
+      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_GLOB);
+    }
+    else
+    {
+      _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRING);
+    }
+  }
+
   void PoolQuery::setFlags(int flags)
   { _pimpl->_flags = flags; }
 
-  
-  void PoolQuery::execute(const string &term) const
+  void PoolQuery::setInstalledOnly()
   {
-    
+    _pimpl->_status_flags = (_pimpl->_status_flags | INSTALLED_ONLY);
+  }
+
+  void PoolQuery::setUninstalledOnly()
+  {
+    _pimpl->_status_flags = (_pimpl->_status_flags | UNINSTALLED_ONLY);
+  }
+
+  void PoolQuery::setStatusFilterFlags( int flags )
+  {
+    _pimpl->_status_flags = (_pimpl->_status_flags | flags);
+  }
+  
+  void PoolQuery::execute(const string &term, ProcessResolvable fnc) const
+  {
+    _pimpl->_fnc = fnc;
+
     sat::Pool pool(sat::Pool::instance());
     for ( sat::Pool::RepoIterator itr = pool.reposBegin();
           itr != pool.reposEnd();
           ++itr )
     {
-      cout << "repo: " << itr->name() << endl;
+      // filter by installed uninstalled
+      if ( ( _pimpl->_status_flags & INSTALLED_ONLY ) && (itr->name() != sat::Pool::instance().systemRepoName()) )
+        continue;
+
+      if ( ( _pimpl->_status_flags & UNINSTALLED_ONLY ) && (itr->name() == sat::Pool::instance().systemRepoName()) )
+        continue;
+
       // is this repo in users repos?
       bool included = ( find(_pimpl->_repos.begin(), _pimpl->_repos.end(), itr->name()) != _pimpl->_repos.end() );
+
       // only look in user repos filter if the filter is not empty
       // in this case we search in all
       if ( _pimpl->_repos.empty() || included  )
       {
-        // now search in all names
-        //for ( vector<string>::const_iterator itn = _pimpl->_names.begin();
-        //      itn != _pimpl->_names.end();
-        //      ++itn )
-        //{
-          repo_search( itr->get(), 0, 0, term.c_str(), _pimpl->_flags, Impl::repo_search_cb, (void*) (this));
-        //}
+        repo_search( itr->get(), 0, 0, term.c_str(), _pimpl->_flags, Impl::repo_search_cb, (void*) (this));
       }
 
     }

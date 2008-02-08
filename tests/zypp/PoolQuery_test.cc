@@ -16,6 +16,7 @@ using namespace boost::unit_test;
 bool result_cb( const ResObject::Ptr &r )
 {
   cout << r << endl;
+  return true;
 }
 
 void poolquery_simple_test()
@@ -27,9 +28,16 @@ void poolquery_simple_test()
     
   sat::Pool::instance().addRepoSolv(dir + "foo.solv");
 
-  PoolQuery query( &result_cb );
-  query.execute("kde");
+  PoolQuery query;
+  //query.setInstalledOnly();
+  query.execute("kde", &result_cb);
+
+  cout << "search done." << endl;
+
+  query.setMatchExact(true);
+  query.execute("kde", &result_cb);
   
+  cout << "search done." << endl;
 }
 
 test_suite*

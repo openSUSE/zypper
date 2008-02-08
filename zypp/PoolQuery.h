@@ -36,7 +36,7 @@ namespace zypp
 
     typedef function<bool( const ResObject::Ptr & )> ProcessResolvable;
 
-    PoolQuery(PoolQuery::ProcessResolvable fnc);
+    PoolQuery();
     ~PoolQuery();
 
   public:
@@ -46,7 +46,7 @@ namespace zypp
      * results are yielded on the callback passed on
      * construction
      */
-    void execute(const std::string &term) const;
+    void execute(const std::string &term, PoolQuery::ProcessResolvable fnc) const;
 
     /**
      * Filter by selectable kind.
@@ -67,6 +67,17 @@ namespace zypp
      */
     //void addName(const std::string & name, bool isRegex = false);
 
+    /**
+     * Filter by status (installed uninstalled)
+     */
+    enum StatusFilter {
+      ALL = 1,
+      INSTALLED_ONLY = 2,
+      UNINSTALLED_ONLY = 4
+    };
+    void setInstalledOnly();
+    void setUninstalledOnly();
+    void setStatusFilterFlags( int flags );
 
     /**
      * Filter by the \a value of any available attribute of selectables.
@@ -117,6 +128,11 @@ namespace zypp
      * ( disables \ref SEARCH_NOCASE flag )
      */
     void setCaseSensitive(const bool value = true);
+
+    /**
+     * Set match exact string
+     */
+    void setMatchExact(const bool value = true);
 
     /**
      * Free function to set the satsolver repo search
