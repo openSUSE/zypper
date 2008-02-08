@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Feb  8 12:50:30 CET 2008 - coolo@suse.de
+
+- fixes from trunk merged
+
+-------------------------------------------------------------------
 Fri Feb  1 17:45:07 CET 2008 - jkupec@suse.cz
 
 - fixed renaming a repo to an existing one (bnc #228216)
