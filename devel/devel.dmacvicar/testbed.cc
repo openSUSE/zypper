@@ -17,9 +17,16 @@
 
 #include "zypp/sat/Pool.h"
 
+#include "zypp/PoolQuery.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
+
+bool result_cb( const ResObject::Ptr &r )
+{
+  cout << r << endl;
+}
 
 int main(int argc, char **argv)
 {
@@ -27,20 +34,25 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
     
-      z->initializeTarget("/");
+      //z->initializeTarget("/");
       //z->target()->load();
 
       sat::Pool::instance().addRepoSolv("./foo.solv");
 
-      for ( ResPool::const_iterator it = z->pool().begin(); it != z->pool().end(); ++it )
-      {
-        ResObject::constPtr res = it->resolvable();
-        if ( res->name() == "kde4-kcolorchooser")
-        {
-          cout << res << endl;
-          cout << res->summary() << " | " << res->size() << endl;
-        }
-      }
+//       for ( ResPool::const_iterator it = z->pool().begin(); it != z->pool().end(); ++it )
+//       {
+//         ResObject::constPtr res = it->resolvable();
+//         if ( res->name() == "kde4-kcolorchooser")
+//         {
+//           cout << res << endl;
+//           cout << res->summary() << " | " << res->size() << endl;
+//         }
+//       }
+
+      PoolQuery query( &result_cb );
+      query.execute("kde");
+      
+
     }
     catch ( const Exception &e )
     {
