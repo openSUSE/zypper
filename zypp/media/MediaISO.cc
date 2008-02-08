@@ -173,9 +173,8 @@ namespace zypp
 	ZYPP_THROW(e3);
       }
 
-      Pathname isofile = manager.localPath(_parentId, _isofile);
-      PathInfo isoinfo( isofile, PathInfo::LSTAT);
-      if( !isoinfo.isFile())
+      Pathname isofile = expandlink(manager.localPath(_parentId, _isofile));
+      if( isofile.empty() || !PathInfo(isofile).isFile())
       {
         ZYPP_THROW(MediaNotSupportedException(_url));
       }
