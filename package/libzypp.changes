@@ -23,6 +23,12 @@ Thu Jan 17 15:07:52 CET 2008 - jkupec@suse.cz
 - revision 8314
 
 -------------------------------------------------------------------
+Thu Jan 17 15:07:52 CET 2008 - jkupec@suse.cz
+
+- Saner NFS timeo default (#350309)
+- revision 8314
+
+-------------------------------------------------------------------
 Thu Jan 17 12:03:10 CET 2008 - kkaempf@suse.de
 
 - support 'patterns.pat' and 'patterns.pat.gz' to read all
