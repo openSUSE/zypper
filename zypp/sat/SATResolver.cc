@@ -34,6 +34,7 @@
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
+#include "zypp/solver/detail/Testcase.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -65,7 +66,7 @@ static PoolItemSet triggeredSolution;   // only the latest state of an item is i
 //---------------------------------------------------------------------------
 
 int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
-    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
+//    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
     return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
 }
 
@@ -94,6 +95,8 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _dosplitprovides(false)
 
 {
+    Testcase testcase("/var/log/YaST2/autotestcase");
+    testcase.createTestcasePool (pool); // dump pool to testcase    
 }
 
 
@@ -570,7 +573,7 @@ SATResolver::problems ()
 	pcnt = 1;
 	problem = 0;
 	while ((problem = solver_next_problem(_solv, problem)) != 0) {
-	    MIL << "Problem " <<  pcnt << ":" << endl;
+	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string whatString = SATprobleminfoString(problem);
 	    MIL << whatString << endl;
