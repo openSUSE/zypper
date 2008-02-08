@@ -108,13 +108,22 @@ namespace zypp
         {
           // remove the quotes
           string::size_type pos = value.rfind('\"');
+          bool cut_last =
+            pos == value.size() - 1 && pos > 1 && value[pos-1] != '\\';
           value = value.substr(1,
-            pos == value.size() - 1 ? value.size() - 2 : value.size() - 1);
+              cut_last ? value.size() - 2 : value.size() - 1);
 
           // replace special characters:
           pos = 0;
           while ((pos = value.find('\\', pos)) != string::npos)
           {
+            // just erase the backslash if it is found at the end
+            if (pos == value.size() - 1)
+            {
+              value = value.erase(pos, 1);
+              break;
+            }
+
             switch(value[pos+1])
             {
             case 't':
