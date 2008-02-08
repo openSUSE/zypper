@@ -51,9 +51,9 @@ namespace zypp
 
     static int repo_search_cb(void *cbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
     {
-      //#define SEARCH_NEXT_KEY         1
-      //#define SEARCH_NEXT_SOLVABLE    2
-      //#define SEACH_STOP              3
+      //int  SEARCH_NEXT_KEY      =  1;
+      //int  SEARCH_NEXT_SOLVABLE =  2;
+      int  SEARCH_STOP = 3;
 
       PoolQuery *me = (PoolQuery*) cbdata;
 
