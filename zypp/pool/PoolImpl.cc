@@ -13,7 +13,6 @@
 #include "zypp/base/LogTools.h"
 
 #include "zypp/pool/PoolImpl.h"
-#include "zypp/pool/PoolStats.h"
 #include "zypp/Package.h"
 #include "zypp/VendorAttr.h"
 
@@ -56,17 +55,6 @@ namespace zypp
     //
     PoolImpl::~PoolImpl()
     {}
-
-    /******************************************************************
-    **
-    **	FUNCTION NAME : operator<<
-    **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const PoolImpl & obj )
-    {
-      return dumpPoolStats( str << "ResPool " << obj.satpool() << endl << "  ",
-                            obj.begin(), obj.end() );
-    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace pool

@@ -28,6 +28,8 @@ namespace zypp
   class SerialNumber;
   class ResPoolProxy;
 
+
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResPool
@@ -46,175 +48,192 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const ResPool & obj );
 
-  public:
-    /** \ref PoolItem */
-    typedef PoolItem				         value_type;
-    typedef pool::PoolTraits::size_type		         size_type;
-    typedef pool::PoolTraits::const_iterator	         const_iterator;
+    public:
+      /** \ref PoolItem */
+      typedef PoolItem				         value_type;
+      typedef pool::PoolTraits::size_type		         size_type;
+      typedef pool::PoolTraits::const_iterator	         const_iterator;
 
-    typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-    typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
-    typedef pool::PoolTraits::repository_iterator        repository_iterator;
+      typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
+      typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
+      typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
-  public:
-    /** Singleton ctor. */
-    static ResPool instance();
+    public:
+      /** Singleton ctor. */
+      static ResPool instance();
 
-    /** preliminary */
-    ResPoolProxy proxy() const;
+      /** preliminary */
+      ResPoolProxy proxy() const;
 
-  public:
-    /** The pools serial number. Changing whenever the
-     * whenever the content changes. (Resolvables or
-     * Dependencies).
-    */
-    const SerialNumber & serial() const;
+    public:
+      /** The pools serial number. Changing whenever the
+       * whenever the content changes. (Resolvables or
+       * Dependencies).
+       */
+      const SerialNumber & serial() const;
 
-  public:
-    /**  */
-    bool empty() const;
-    /**  */
-    size_type size() const;
+    public:
+      /**  */
+      bool empty() const;
+      /**  */
+      size_type size() const;
 
-    /** \name Iterate through all ResObjects (all kinds). */
-    //@{
-    /** */
-    const_iterator begin() const;
-    /** */
-    const_iterator end() const;
-    //@}
+      /** \name Iterate through all ResObjects (all kinds). */
+      //@{
+      /** */
+      const_iterator begin() const
+      { return make_filter_begin( pool::ByPoolItem(), store() ); }
+      /** */
+      const_iterator end() const
+      { return make_filter_end( pool::ByPoolItem(), store() ); }
+      //@}
 
-  public:
-    /** Return the corresponding \ref PoolItem.
-     * Pool and sat pool should be in sync. Returns an empty
-     * \ref PoolItem if there is no corresponding \ref PoolItem.
-     * \see \ref PoolItem::satSolvable.
-    */
-    PoolItem find( const sat::Solvable & slv_r ) const;
+    public:
+      /** Return the corresponding \ref PoolItem.
+       * Pool and sat pool should be in sync. Returns an empty
+       * \ref PoolItem if there is no corresponding \ref PoolItem.
+       * \see \ref PoolItem::satSolvable.
+       */
+      PoolItem find( const sat::Solvable & slv_r ) const;
 
-  public:
-    /** \name Iterate through all ResObjects of a certain kind. */
-    //@{
-    typedef zypp::resfilter::ByKind ByKind;
-    typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
+    public:
+      /** \name Iterate through all ResObjects of a certain name and kind. */
+      //@{
+      template<class _Filter>
+          filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
+      { return make_filter_begin( filter_r, *this ); }
 
-    byKind_iterator byKindBegin( const ResKind & kind_r ) const
-    { return make_filter_begin( ByKind(kind_r), *this ); }
+      template<class _Filter>
+          filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
+      { return make_filter_end( filter_r, *this ); }
+      //@}
 
-    template<class _Res>
-    byKind_iterator byKindBegin() const
-    { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
+    public:
+      /** \name Iterate through all ResObjects of a certain kind. */
+      //@{
+      typedef zypp::resfilter::ByKind ByKind;
+      typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
 
-    byKind_iterator byKindEnd( const ResKind & kind_r ) const
-    { return make_filter_end( ByKind(kind_r), *this ); }
+      byKind_iterator byKindBegin( const ResKind & kind_r ) const
+      { return make_filter_begin( ByKind(kind_r), *this ); }
 
-    template<class _Res>
-    byKind_iterator byKindEnd() const
-    { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
-    //@}
+      template<class _Res>
+          byKind_iterator byKindBegin() const
+      { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
 
-  public:
-    /** \name Iterate through all ResObjects with a certain name (all kinds). */
-    //@{
-    typedef zypp::resfilter::ByName ByName;
-    typedef filter_iterator<ByName,const_iterator> byName_iterator;
+      byKind_iterator byKindEnd( const ResKind & kind_r ) const
+      { return make_filter_end( ByKind(kind_r), *this ); }
 
-    byName_iterator byNameBegin( const std::string & name_r ) const
-    { return make_filter_begin( ByName(name_r), *this ); }
+      template<class _Res>
+          byKind_iterator byKindEnd() const
+      { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+      //@}
 
-    byName_iterator byNameEnd( const std::string & name_r ) const
-    { return make_filter_end( ByName(name_r), *this ); }
-    //@}
+    public:
+      /** \name Iterate through all ResObjects with a certain name (all kinds). */
+      //@{
+      typedef zypp::resfilter::ByName ByName;
+      typedef filter_iterator<ByName,const_iterator> byName_iterator;
 
- public:
-   /** \name Iterate through all ResObjects which have at least
-    *  one Capability with index \a index_r in dependency \a depType_r.
-   */
-   //@{
-   byCapabilityIndex_iterator byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
+      byName_iterator byNameBegin( const std::string & name_r ) const
+      { return make_filter_begin( ByName(name_r), *this ); }
 
-   byCapabilityIndex_iterator byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
-   //@}
+      byName_iterator byNameEnd( const std::string & name_r ) const
+      { return make_filter_end( ByName(name_r), *this ); }
+      //@}
 
- public:
-   /** \name Iterate through all Repositories that contribute ResObjects.
-   */
-   //@{
-   size_type knownRepositoriesSize() const;
+    public:
+      /** \name Iterate through all ResObjects which have at least
+       *  one Capability with index \a index_r in dependency \a depType_r.
+       */
+      //@{
+      byCapabilityIndex_iterator byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
 
-   repository_iterator knownRepositoriesBegin() const;
+      byCapabilityIndex_iterator byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
+      //@}
 
-   repository_iterator knownRepositoriesEnd() const;
-   //@}
+    public:
+      /** \name Iterate through all Repositories that contribute ResObjects.
+       */
+      //@{
+      size_type knownRepositoriesSize() const;
 
- public:
-   /** \name Handling addition capabilities in the pool in order for solving it in
-    *  a solver run. This is used for tasks like needing a package with the name "foo".
-    *  The solver has to evaluate a proper package by his own.
-    *
-    *  CAUTION: This has another semantic in the solver. The required resolvable has
-    *  been set for installation (in the pool) only AFTER a solver run.
-   */
+      repository_iterator knownRepositoriesBegin() const;
 
-   /**
-    *  Handling additional requirement. E.G. need package "foo" and package
-    *  "foo1" which has a greater version than 1.0:
-    *
-    *  \code
-    *  Capabilities capset;
-    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
-    *
-    *  // The user is setting this capablility
-    *  ResPool::AdditionalCapabilities aCapabilities;
-    *  aCapabilities[ResStatus::USER] = capset;
-    *
-    *  setAdditionalRequire( aCapabilities );
-    *  \endcode
-    */
-   void setAdditionalRequire( const AdditionalCapabilities & capset ) const;
-   AdditionalCapabilities & additionalRequire() const;
+      repository_iterator knownRepositoriesEnd() const;
+      //@}
 
-   /**
-    *  Handling additional conflicts. E.G. do not install anything which provides "foo":
-    *
-    *  \code75
-    *  Capabilities capset;
-    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-    *
-    *  // The user is setting this capablility
-    *  ResPool::AdditionalCapabilities aCapabilities;
-    *  aCapabilities[ResStatus::USER] = capset;
-    *
-    *  setAdditionalConflict( aCapabilities );
-    *  \endcode
-    */
-   void setAdditionalConflict( const AdditionalCapabilities & capset ) const;
-   AdditionalCapabilities & additionaConflict() const;
+    public:
+      /** \name Handling addition capabilities in the pool in order for solving it in
+       *  a solver run. This is used for tasks like needing a package with the name "foo".
+       *  The solver has to evaluate a proper package by his own.
+       *
+       *  CAUTION: This has another semantic in the solver. The required resolvable has
+       *  been set for installation (in the pool) only AFTER a solver run.
+       */
 
-   /**
-    *  Handling additional provides. This is used for ignoring a requirement.
-    *  e.G. Do ignore the requirement "foo":
-    *
-    *  \code
-    *  Capabilities capset;
-    *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-    *
-    *  // The user is setting this capablility
-    *  ResPool::AdditionalCapabilities aCapabilities;
-    *  aCapabilities[ResStatus::USER] = capset;
-    *
-    *  setAdditionalProvide( aCapabilities );
-    *  \endcode
-    */
-   void setAdditionalProvide( const AdditionalCapabilities & capset ) const;
-   AdditionalCapabilities & additionaProvide() const;
+      /**
+       *  Handling additional requirement. E.G. need package "foo" and package
+       *  "foo1" which has a greater version than 1.0:
+       *
+       *  \code
+       *  Capabilities capset;
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
+       *
+       *  // The user is setting this capablility
+       *  ResPool::AdditionalCapabilities aCapabilities;
+       *  aCapabilities[ResStatus::USER] = capset;
+       *
+       *  setAdditionalRequire( aCapabilities );
+       *  \endcode
+       */
+      void setAdditionalRequire( const AdditionalCapabilities & capset ) const;
+      AdditionalCapabilities & additionalRequire() const;
 
-  private:
-    /** Ctor */
-    ResPool( pool::PoolTraits::Impl_constPtr impl_r );
-    /** Const access to implementation. */
-    pool::PoolTraits::Impl_constPtr _pimpl;
+     /**
+       *  Handling additional conflicts. E.G. do not install anything which provides "foo":
+       *
+       *  \code75
+       *  Capabilities capset;
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+       *
+       *  // The user is setting this capablility
+       *  ResPool::AdditionalCapabilities aCapabilities;
+       *  aCapabilities[ResStatus::USER] = capset;
+       *
+       *  setAdditionalConflict( aCapabilities );
+       *  \endcode
+       */
+      void setAdditionalConflict( const AdditionalCapabilities & capset ) const;
+      AdditionalCapabilities & additionaConflict() const;
+
+     /**
+       *  Handling additional provides. This is used for ignoring a requirement.
+       *  e.G. Do ignore the requirement "foo":
+       *
+       *  \code
+       *  Capabilities capset;
+       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+       *
+       *  // The user is setting this capablility
+       *  ResPool::AdditionalCapabilities aCapabilities;
+       *  aCapabilities[ResStatus::USER] = capset;
+       *
+       *  setAdditionalProvide( aCapabilities );
+       *  \endcode
+       */
+      void setAdditionalProvide( const AdditionalCapabilities & capset ) const;
+      AdditionalCapabilities & additionaProvide() const;
+
+    private:
+      const pool::PoolTraits::ItemContainerT & store() const;
+
+    private:
+      /** Ctor */
+      ResPool( pool::PoolTraits::Impl_constPtr impl_r );
+      /** Const access to implementation. */
+      pool::PoolTraits::Impl_constPtr _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

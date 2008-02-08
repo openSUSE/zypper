@@ -24,6 +24,8 @@
 
 #include "zypp/sat/Pool.h"
 
+using std::endl;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -78,14 +80,6 @@ namespace zypp
         size_type size() const
         { return satpool().solvablesSize(); }
 
-        /** */
-        const_iterator begin() const
-        { return make_map_value_begin( store() ); }
-
-        /** */
-        const_iterator end() const
-        { return make_map_value_end( store() ); }
-
       public:
         /** Return the corresponding \ref PoolItem.
          * Pool and sat pool should be in sync. Returns an empty
@@ -94,11 +88,7 @@ namespace zypp
          */
         PoolItem find( const sat::Solvable & slv_r ) const
         {
-          const ContainerT & c( store() );
-          ContainerT::const_iterator it( c.find( slv_r ) );
-          if ( it != c.end() )
-            return it->second;
-          return PoolItem();
+          return store()[slv_r.id()];
         }
 
         ///////////////////////////////////////////////////////////////////
@@ -180,13 +170,11 @@ namespace zypp
           if ( ! _knownRepositoriesPtr )
           {
             _knownRepositoriesPtr.reset( new KnownRepositories );
-            const ContainerT & c( store() );
-            for_( it, c.begin(), c.end() )
+
+            sat::Pool pool( satpool() );
+            for_( it, pool.reposBegin(), pool.reposEnd() )
             {
-              if ( (*it).second->repository() != Repository::noRepository )
-              {
-                _knownRepositoriesPtr->insert( (*it).second->repository() );
-              }
+              _knownRepositoriesPtr->push_back( Repository( it->info() ) );
             }
           }
           return *_knownRepositoriesPtr;
@@ -195,12 +183,32 @@ namespace zypp
         ///////////////////////////////////////////////////////////////////
         //
         ///////////////////////////////////////////////////////////////////
-      private:
+      public:
         const ContainerT & store() const
         {
           checkSerial();
           if ( _storeDirty )
           {
+            sat::Pool pool( satpool() );
+
+            if ( pool.capacity() != _store.capacity() )
+            {
+              _store.resize( pool.capacity() );
+            }
+
+            if ( pool.capacity() )
+            {
+              for ( sat::detail::SolvableIdType i = pool.capacity()-1; i != 0; --i )
+              {
+                sat::Solvable s( i );
+                PoolItem & pi( _store[i] );
+                if ( ! s &&  pi )
+                  pi = PoolItem();
+                else if ( s && ! pi )
+                  pi = PoolItem( s );
+              }
+            }
+#if 0
             // pass 1: delete no longer existing solvables
             for ( ContainerT::iterator it = _store.begin(); it != _store.end(); /**/ )
             {
@@ -223,7 +231,7 @@ namespace zypp
                 }
               }
             }
-
+#endif
             _storeDirty = false;
           }
           return _store;
@@ -265,9 +273,6 @@ namespace zypp
         const PoolTraits::CapItemContainerT   _caphashfake;
     };
     ///////////////////////////////////////////////////////////////////
-
-    /** \relates PoolImpl Stream output */
-    std::ostream & operator<<( std::ostream & str, const PoolImpl & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace pool

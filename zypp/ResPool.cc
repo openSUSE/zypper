@@ -16,6 +16,7 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/pool/PoolImpl.h"
+#include "zypp/pool/PoolStats.h"
 
 using std::endl;
 
@@ -61,12 +62,6 @@ namespace zypp
   ResPool::size_type ResPool::size() const
   { return _pimpl->size(); }
 
-  ResPool::const_iterator ResPool::begin() const
-  { return _pimpl->begin(); }
-
-  ResPool::const_iterator ResPool::end() const
-  { return _pimpl->end(); }
-
 
   PoolItem ResPool::find( const sat::Solvable & slv_r ) const
   { return _pimpl->find( slv_r ); }
@@ -103,6 +98,9 @@ namespace zypp
   ResPool::AdditionalCapabilities & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
 
+  const pool::PoolTraits::ItemContainerT & ResPool::store() const
+  { return _pimpl->store(); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
@@ -110,7 +108,8 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const ResPool & obj )
   {
-    return str << *obj._pimpl;
+    dumpPoolStats( str << "ResPool " << sat::Pool::instance() << endl << "  ",
+                            obj.begin(), obj.end() );
   }
 
   /////////////////////////////////////////////////////////////////

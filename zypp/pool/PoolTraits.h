@@ -33,6 +33,12 @@ namespace zypp
 
     class PoolImpl;
 
+    struct ByPoolItem
+    {
+      bool operator()( const PoolItem & pi ) const
+      { return pi; }
+    };
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PoolTraits
@@ -43,9 +49,15 @@ namespace zypp
     public:
       typedef sat::detail::SolvableIdType		SolvableIdType;
       /** pure items  */
-      typedef std::map<sat::Solvable,PoolItem>		ItemContainerT;
-      typedef MapKVIteratorTraits<ItemContainerT>::Value_const_iterator
-          						const_iterator;
+#if 0
+       typedef std::map<sat::Solvable,PoolItem>		ItemContainerT;
+       typedef MapKVIteratorTraits<ItemContainerT>::Value_const_iterator
+       							const_iterator;
+#endif
+      typedef std::vector<PoolItem>			ItemContainerT;
+      typedef ItemContainerT::const_iterator            item_iterator;
+      typedef filter_iterator<ByPoolItem,ItemContainerT::const_iterator>
+      							const_iterator;
       typedef ItemContainerT::size_type			size_type;
 
       // internal organization
@@ -60,7 +72,7 @@ namespace zypp
       typedef const_capitemiterator                     byCapabilityIndex_iterator;
 
       /* list of known Repositories */
-      typedef std::set<Repository>                      RepoContainerT;
+      typedef std::list<Repository>                     RepoContainerT;
       typedef RepoContainerT::const_iterator		repository_iterator;
 
       typedef PoolImpl                   Impl;
