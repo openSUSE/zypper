@@ -389,6 +389,7 @@ HelixResolvable::HelixResolvable(const std::string & path)
 HelixResolvable::~HelixResolvable()
 {
     *file << "</subchannel></channel>" << endl;
+    delete(file);
 }
 
 
