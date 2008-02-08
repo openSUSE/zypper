@@ -192,7 +192,7 @@ namespace zypp
       {
         switch ( ident[3] )
         {
-#define OUTS(K,S) if ( ::strncmp( ident, ResKind::K.c_str(), S ) ) return ResKind::K
+#define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) return ResKind::K
           //             ----v
           case 'c': OUTS( patch, 5 );       break;
           case 'd': OUTS( product, 7 );     break;
