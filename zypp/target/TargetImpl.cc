@@ -298,7 +298,7 @@ namespace zypp
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
-      RepoStatus rpmstatus(_root + "/var/lib/rpm/Packages");
+      RepoStatus rpmstatus(_root + "/var/lib/rpm/Name");
       if ( PathInfo(rpmsolv).isExist() )
       {
         // see the status of the cache
