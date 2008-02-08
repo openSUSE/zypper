@@ -1,13 +1,13 @@
 -------------------------------------------------------------------
-Sun Jan 27 21:35:13 CET 2008 - coolo@suse.de
-
-- fix changelog
-
--------------------------------------------------------------------
 Fri Feb  1 17:45:07 CET 2008 - jkupec@suse.cz
 
 - fixed renaming a repo to an existing one (bnc #228216)
 - revision 8431
+
+-------------------------------------------------------------------
+Sun Jan 27 21:35:13 CET 2008 - coolo@suse.de
+
+- fix changelog
 
 -------------------------------------------------------------------
 Thu Jan 24 18:26:47 CET 2008 - jkupec@suse.cz
@@ -29,19 +29,6 @@ Thu Jan 17 15:07:52 CET 2008 - jkupec@suse.cz
 - revision 8314
 
 -------------------------------------------------------------------
-Thu Jan 17 15:07:52 CET 2008 - jkupec@suse.cz
-
-- Saner NFS timeo default (#350309)
-- revision 8314
-
--------------------------------------------------------------------
-Thu Jan 17 12:03:10 CET 2008 - kkaempf@suse.de
-
-- support 'patterns.pat' and 'patterns.pat.gz' to read all
-  patterns in one go.
-- rev 8309
-
--------------------------------------------------------------------
 Thu Jan 17 12:03:10 CET 2008 - kkaempf@suse.de
 
 - support 'patterns.pat' and 'patterns.pat.gz' to read all
@@ -54,6 +41,24 @@ Tue Jan 15 14:56:21 CET 2008 - lslezak@suse.cz
 - added RpmDb::removePubkey(), call it from
   KeyRing::Impl::deleteKey() - remove the GPG key from RPM when it
   is removed from the trusted keyring
+- revision 8288
+
+-------------------------------------------------------------------
+Mon Jan 14 17:11:15 CET 2008 - schubi@suse.de
+
+- Textchanges
+- reduced logging in SAT-solver
+- ordering solutions
+- version 4.1.8
+- revision 8276 
+
+-------------------------------------------------------------------
+Thu Jan 10 16:50:26 CET 2008 - schubi@suse.de
+
+- Enabled SAT solver via default. (removed ZYPP_SAT_SOLVER)
+  ZYPP_RC_SOLVER=1 will enable the old RedCapet solver 
+- Revision 8255
+- Version 4.1.7
 
 -------------------------------------------------------------------
 Wed Jan  2 18:24:34 CET 2008 - jkupec@suse.cz
