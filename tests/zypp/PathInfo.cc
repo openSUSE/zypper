@@ -71,11 +71,57 @@ void pathinfo_is_exist_test()
 void pathinfo_misc_test()
 {
   TmpDir dir;
-  
-  
-  
+
   PathInfo info(dir.path());
   BOOST_CHECK(info.isDir());
+}
+
+void pathinfo_expandlink_test()
+{
+  TmpDir dir;
+
+  // ---- not a link
+
+  // create a file
+  Pathname file(dir / "file");
+  ofstream str(file.asString().c_str(),ofstream::out);
+  str << "foo bar" << endl;
+  str.flush();
+  str.close();
+
+  // expandlink should return the original Pathname if it does not point to a link
+  BOOST_CHECK_EQUAL( file, filesystem::expandlink(file) );
+
+  // ---- valid link
+
+  // create a link to that file
+  Pathname link1(dir / "link1");
+  BOOST_CHECK_EQUAL( filesystem::symlink(file, link1), 0);
+
+  // does the link expand to the file?
+  BOOST_CHECK_EQUAL( file, filesystem::expandlink(link1) );
+
+  // ---- broken link
+
+  // create a link to a non-existent file
+  Pathname brokenlink(dir / "brokenlink");
+  Pathname non_existent(dir / "non-existent");
+  BOOST_CHECK_EQUAL( filesystem::symlink(non_existent, brokenlink), 0);
+  PathInfo info(brokenlink, PathInfo::LSTAT);
+  BOOST_CHECK(info.isLink());
+
+  // expandlink should return an empty Pathname for a broken link
+  BOOST_CHECK_EQUAL( Pathname(), filesystem::expandlink(brokenlink) );
+
+  // ---- cyclic link
+
+  // make the 'non-existent' a link to 'brokenlink' :O)
+  BOOST_CHECK_EQUAL( filesystem::symlink(brokenlink, non_existent), 0);
+  // expandlink should return an empty Pathname for such a cyclic link
+  BOOST_CHECK_EQUAL( Pathname(), filesystem::expandlink(brokenlink) );
+  BOOST_CHECK_EQUAL( Pathname(), filesystem::expandlink(non_existent) );
+
+  cout << brokenlink << " -> " << filesystem::expandlink(brokenlink) << endl;
 }
 
 test_suite*
@@ -85,6 +131,7 @@ init_unit_test_suite( int, char* [] )
     test->add( BOOST_TEST_CASE( &pathinfo_checksum_test ), 0 /* expected zero error */ );
     test->add( BOOST_TEST_CASE( &pathinfo_misc_test ), 0 /* expected zero error */ );
     test->add( BOOST_TEST_CASE( &pathinfo_is_exist_test ), 0 /* expected zero error */ );
+    test->add( BOOST_TEST_CASE( &pathinfo_expandlink_test ), 0 /* expected zero error */ );
     return test;
 }
 

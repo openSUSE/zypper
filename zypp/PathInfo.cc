@@ -756,6 +756,50 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //  METHOD NAME : expandlink
+    //  METHOD TYPE : Pathname
+    //
+    Pathname expandlink( const Pathname & path_r )
+    {
+      static const unsigned int level_limit = 256;
+      static unsigned int count;
+      Pathname path(path_r);
+      PathInfo info(path_r, PathInfo::LSTAT);
+
+      for (count = level_limit; info.isLink() && count; count--)
+      {
+        DBG << "following symlink " << path << std::endl;
+        path = readlink(path);
+        info = PathInfo(path, PathInfo::LSTAT);
+      }
+
+      // expand limit reached
+      if (count == 0)
+      {
+        ERR << "Expand level limit reached. Probably a cyclic symbolic link." << endl;
+        return Pathname();
+      }
+      // symlink
+      else if (count < level_limit)
+      {
+        // check for a broken link
+        if (PathInfo(path).isExist())
+          return path;
+        // broken link, return and empty path
+        else
+        {
+          ERR << path << " is broken (expanded from " << path_r << ")" << endl;
+          return Pathname();
+        }
+      }
+
+      // not a symlink, return the original pathname
+      DBG << "not a symlink" << endl;
+      return path;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : copy_file2dir
     //	METHOD TYPE : int
     //
