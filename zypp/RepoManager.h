@@ -311,6 +311,8 @@ namespace zypp
     /**
      * \short Modify repository attributes
      *
+     * \throws RepoAlreadyExistsException if the alias specified in newinfo
+     *         is already used by another repository
      * \throws RepoNotFoundException If no repo match
      * \throws ParseException If the file parsing fails
      * \throws Exception On other errors.

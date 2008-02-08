@@ -1168,6 +1168,19 @@ namespace zypp
   {
     RepoInfo toedit = getRepositoryInfo(alias);
 
+    // check if the new alias already exists when renaming the repo
+    if (alias != newinfo.alias())
+    {
+      std::list<RepoInfo> repos = knownRepositories();
+      for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+            it != repos.end();
+            ++it )
+      {
+        if ( newinfo.alias() == (*it).alias() )
+          ZYPP_THROW(RepoAlreadyExistsException(newinfo.alias()));
+      }
+    }
+
     if (toedit.filepath().empty())
     {
       ZYPP_THROW(RepoException("Can't figure where the repo is stored"));
