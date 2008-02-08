@@ -59,6 +59,15 @@ namespace zypp
      */
     void addKind(const Resolvable::Kind &kind);
 
+
+     /**
+     * Filter by repo.
+     * 
+     * By default, all repos will be returned. If addRepo() is used,
+     * only the specified repo will be returned (multiple repos will be ORed).
+     */
+    void addRepo(const std::string &repoalias);
+
     /**
      * Filter by selectable name.
      * 

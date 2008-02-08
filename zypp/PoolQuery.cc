@@ -139,6 +139,9 @@ namespace zypp
     }
   }
 
+  void PoolQuery::addRepo(const std::string &repoalias)
+  {  _pimpl->_repos.push_back(repoalias);  }
+
   void PoolQuery::setFlags(int flags)
   { _pimpl->_flags = flags; }
 
