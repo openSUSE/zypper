@@ -705,52 +705,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp_detail
 )
 
-SET( zypp_cache_SRCS
-  ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h
-  cache/CacheInitializer.cc
-  cache/CacheException.cc
-  cache/Attribute.cc
-  cache/CacheTypes.cc
-  cache/ResolvableQuery.cc
-  cache/SolvStore.cc
-  cache/CacheFSCK.cc
-  cache/Utils.cc
-)
-
-SET( zypp_cache_HEADERS
-  cache/Attribute.h
-  cache/CacheAttributes.h
-  cache/CacheTypes.h
-  cache/CacheInitializer.h
-  cache/CacheException.h
-  cache/SolvStore.h
-  cache/CacheFSCK.h
-  cache/ResolvableQuery.h
-  cache/Utils.h
-)
-
-INSTALL(  FILES
-  ${zypp_cache_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache
-)
-
-SET( zypp_cache_sqlite3x_SRCS
-  cache/sqlite3x/sqlite3x_command.cpp
-  cache/sqlite3x/sqlite3x_connection.cpp
-  cache/sqlite3x/sqlite3x_exception.cpp
-  cache/sqlite3x/sqlite3x_reader.cpp
-  cache/sqlite3x/sqlite3x_transaction.cpp
-)
-
-SET( zypp_cache_sqlite3x_HEADERS
-  cache/sqlite3x/sqlite3x.hpp
-)
-
-#INSTALL(  FILES
-#  ${zypp_cache_sqlite3x_HEADERS}
-#  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/cache/sqlite3x
-#)
-
 SET( zypp_repo_SRCS
   repo/dummy.cc
   repo/RepositoryImpl.cc
@@ -810,8 +764,6 @@ SET( zypp_repo_susetags_HEADERS
 )
 
 SET( zypp_lib_SRCS
-${zypp_cache_SRCS}
-${zypp_cache_sqlite3x_SRCS}
 ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
 ${zypp_parser_xml_SRCS}
