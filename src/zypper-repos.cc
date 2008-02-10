@@ -1292,7 +1292,7 @@ void load_repo_resolvables(Zypper & zypper)
 void load_target_resolvables(Zypper & zypper)
 {
   if (!zypper.globalOpts().machine_readable)
-    cout_n << _("Reading RPM database...");
+    cout_n << _("Reading installed packages...");
   MIL << "Going to read RPM database" << endl;
 
   God->target()->load();
