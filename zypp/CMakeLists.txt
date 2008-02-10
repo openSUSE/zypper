@@ -4,11 +4,8 @@
 
 ADD_DEFINITIONS(-DLOCALEDIR=\\\"${CMAKE_INSTALL_PREFIX}/share/locale\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
 
-ADD_EXECUTABLE(mkarray ${CMAKE_SOURCE_DIR}/zypp/cache/schema/mkarray.c )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
-
-ADD_CUSTOM_COMMAND( OUTPUT ${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h PRE_BUILD COMMAND "${CMAKE_BINARY_DIR}/zypp/mkarray" ARGS "${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql" "schemaData" "${CMAKE_BINARY_DIR}/zypp/sqlite-schema.h" DEPENDS mkarray DEPENDS ${CMAKE_SOURCE_DIR}/zypp/cache/schema/schema.sql )
 
 SET( zypp_SRCS
   Atom.cc

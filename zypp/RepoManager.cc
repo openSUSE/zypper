@@ -28,7 +28,6 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/RepoManager.h"
 
-#include "zypp/cache/SolvStore.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
@@ -105,33 +104,6 @@ namespace zypp
 
       RepoInfoList repos;
     };
-
-  ////////////////////////////////////////////////////////////////////////////
-
-   /**
-    * \short Internal version of clean cache
-    *
-    * Takes an extra SolvStore reference, so we avoid internally
-    * having 2 SolvStores writing to the same database.
-    */
-  static void cleanCacheInternal( cache::SolvStore &store,
-                                  const RepoInfo &info,
-                                  const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() )
-  {
-//     ProgressData progress;
-//     callback::SendReport<ProgressReport> report;
-//     progress.sendTo( ProgressReportAdaptor( progressrcv, report ) );
-//     progress.name(str::form(_("Cleaning repository '%s' cache"), info.name().c_str()));
-//
-//     if ( !store.isCached(info.alias()) )
-//       return;
-//
-//     MIL << info.alias() << " cleaning cache..." << endl;
-//
-//     CombinedProgressData subprogrcv(progress);
-//
-//     store.cleanRepository(info.alias(), subprogrcv);
-  }
 
   ////////////////////////////////////////////////////////////////////////////
 
