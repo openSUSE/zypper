@@ -139,24 +139,31 @@ namespace zypp
       {
         if (data->state == REPODATA_STUB || data->state == REPODATA_ERROR)
           continue;
-	if (sid < data->start || sid >= data->end)
-        continue;
+        if (sid < data->start || sid >= data->end)
+          continue;
         repodata_search(data, sid - data->start, 0, location_cb, &lc);
       }
       medianr = lc.medianr;
       std::string ret;
-      if (lc.mediadir)
-	ret += std::string( lc.mediadir ) + "/";
-      else
-        /* If we haven't seen an explicit dirname, then prepend the arch as
-           directory.  */
-        ret += IdString(_solvable->arch).asString() + "/";
+      
       if (!lc.trivial)
-        {
+      {
         if (lc.mediafile)
           ret += lc.mediafile;
         return ret;
-	}
+      }
+
+      if (lc.mediadir)
+      {
+        ret += std::string( lc.mediadir ) + "/";
+      }
+      else
+      {
+        /* If we haven't seen an explicit dirname, then prepend the arch as
+           directory.  */
+        ret += "suse/";
+        ret += IdString(_solvable->arch).asString() + "/";
+      }
       /* Trivial means that we can construct the rpm name from our
          solvable data, as name-evr.arch.rpm .  */
       ret += IdString(_solvable->name).asString();

@@ -108,9 +108,6 @@ namespace zypp
     OnMediaLocation loc;
     unsigned medianr;
     std::string filename = lookupLocation( medianr );
-    /* XXX someone else needs to do this prepending of the datadir.
-       It's not necessarily "suse".  */
-    filename = "suse/" + filename;
     loc.setLocation(filename, medianr);
     return loc;
   }
