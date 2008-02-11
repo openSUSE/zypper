@@ -38,6 +38,13 @@ namespace sat
   const SolvAttr SolvAttr::mediadir	( "mediadir" );
   const SolvAttr SolvAttr::eula		( "eula" );
   
+  //pattern
+  const SolvAttr SolvAttr::isvisible      ( "isvisible" );
+  const SolvAttr SolvAttr::icon         ( "icon" );
+  const SolvAttr SolvAttr::isdefault      ( "isdefault" );
+  const SolvAttr SolvAttr::category     ( "category" );
+ 
+  
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

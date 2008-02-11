@@ -55,6 +55,13 @@ namespace sat
       static const SolvAttr medianr;
       static const SolvAttr mediafile;
       static const SolvAttr eula;
+      
+      // patern
+      static const SolvAttr isvisible;
+      static const SolvAttr icon;
+      static const SolvAttr isdefault;
+      static const SolvAttr category;
+      
       //@}
 
     public:
