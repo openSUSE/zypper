@@ -143,6 +143,10 @@ namespace zypp
     inline bool operator!=( const Repo & lhs, const Repo & rhs )
     { return lhs.get() != rhs.get(); }
 
+    /** \relates Repository */
+    inline bool operator<( const Repo & lhs, const Repo & rhs )
+    { return lhs.get() < rhs.get(); }      
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Repo::EraseFromPool
