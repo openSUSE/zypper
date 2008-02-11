@@ -33,10 +33,65 @@ namespace zypp
 
     class PoolImpl;
 
+    /** Pool internal filter skiping invalid/unwanted PoolItems. */
     struct ByPoolItem
     {
       bool operator()( const PoolItem & pi ) const
       { return pi; }
+    };
+
+    /** Main filter selecting PoolItems bu \c name and \c kind. */
+    class ByIdent //: public ResObjectFilterFunctor
+    {
+      public:
+        ByIdent( ResKind kind_r, IdString name_r )
+        : _id( makeIdent( kind_r, name_r ) )
+        {}
+
+        ByIdent( ResKind kind_r, const C_Str & name_r )
+        : _id( makeIdent( kind_r, name_r ) )
+        {}
+
+      public:
+        bool operator()( sat::Solvable slv_r ) const
+        {
+          return _id >= 0 ? ( slv_r.ident().id() == _id && ! slv_r.isKind( ResKind::srcpackage ) )
+                          : ( slv_r.ident().id() == -_id && slv_r.isKind( ResKind::srcpackage ) );
+        }
+
+        bool operator()( const PoolItem & pi_r ) const
+        { return operator()( pi_r.satSolvable() ); }
+
+        bool operator()( ResObject::constPtr p_r ) const
+        { return p_r ? operator()( p_r->satSolvable() ) : !_id; }
+
+      private:
+        sat::detail::IdType makeIdent( ResKind kind_r, IdString name_r )
+        {
+          if ( kind_r == ResKind::package )
+            return name_r.id();
+          else if ( kind_r == ResKind::srcpackage )
+            return -name_r.id();
+          return IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) ).id();
+        }
+
+        sat::detail::IdType makeIdent( ResKind kind_r, const C_Str & name_r )
+        {
+          if ( kind_r == ResKind::package )
+            return IdString( name_r ).id();
+          else if ( kind_r == ResKind::srcpackage )
+            return -(IdString( name_r ).id());
+          return IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) ).id();
+        }
+
+      public:
+        sat::detail::IdType get() const { return _id; }
+
+      private:
+        /** negative \c _id for \c srcpackage, as they use the same \c ident
+         * as \c package.
+         */
+        sat::detail::IdType _id;
     };
 
     ///////////////////////////////////////////////////////////////////

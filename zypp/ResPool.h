@@ -51,7 +51,7 @@ namespace zypp
     public:
       /** \ref PoolItem */
       typedef PoolItem				         value_type;
-      typedef pool::PoolTraits::size_type		         size_type;
+      typedef pool::PoolTraits::size_type		 size_type;
       typedef pool::PoolTraits::const_iterator	         const_iterator;
 
       typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
@@ -78,7 +78,7 @@ namespace zypp
       /**  */
       size_type size() const;
 
-      /** \name Iterate through all ResObjects (all kinds). */
+      /** \name Iterate through all PoolItems (all kinds). */
       //@{
       /** */
       const_iterator begin() const
@@ -97,7 +97,7 @@ namespace zypp
       PoolItem find( const sat::Solvable & slv_r ) const;
 
     public:
-      /** \name Iterate through all ResObjects of a certain name and kind. */
+      /** \name Iterate through all PoolItems matching a \c _Filter. */
       //@{
       template<class _Filter>
           filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
@@ -106,6 +106,42 @@ namespace zypp
       template<class _Filter>
           filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
+      //@}
+
+    public:
+      /** \name Iterate through all PoolItems of a certain name and kind. */
+      //@{
+      typedef pool::ByIdent ByIdent;
+      typedef filter_iterator<ByIdent,const_iterator> byIdent_iterator;
+
+      byIdent_iterator byIdentBegin( ResKind kind_r, IdString name_r ) const
+      { return make_filter_begin( ByIdent(kind_r,name_r), *this ); }
+
+      byIdent_iterator byIdentBegin( ResKind kind_r, const C_Str & name_r ) const
+      { return make_filter_begin( ByIdent(kind_r,name_r), *this ); }
+
+      template<class _Res>
+      byIdent_iterator byIdentBegin( IdString name_r ) const
+      { return make_filter_begin( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+
+      template<class _Res>
+      byIdent_iterator byIdentBegin( const C_Str & name_r ) const
+      { return make_filter_begin( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+
+
+      byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
+      { return make_filter_end( ByIdent(kind_r,name_r), *this ); }
+
+      byIdent_iterator byIdentEnd( ResKind kind_r, const C_Str & name_r ) const
+      { return make_filter_end( ByIdent(kind_r,name_r), *this ); }
+
+      template<class _Res>
+      byIdent_iterator byIdentEnd( IdString name_r ) const
+      { return make_filter_end( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+
+      template<class _Res>
+      byIdent_iterator byIdentEnd( const C_Str & name_r ) const
+      { return make_filter_end( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
       //@}
 
     public:

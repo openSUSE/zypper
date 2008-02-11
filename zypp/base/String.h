@@ -89,6 +89,10 @@ namespace zypp
       mutable size_type _sze;
   };
 
+  /** \relates C_Str Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const C_Str & obj )
+  { return str << obj.c_str(); }
+
   ///////////////////////////////////////////////////////////////////
   /** String related utilities and \ref ZYPP_STR_REGEX.
    \see \ref ZYPP_STR_REGEX
