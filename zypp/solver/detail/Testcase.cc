@@ -429,7 +429,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << "- type        : " << repo.type() << endl;
 	*file << TAB << " -->" << endl;
 
-	*file << TAB << "<channel file=\"" << it->first.id()
+	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
 	      << "-package.xml.gz\" name=\"" << repo.alias()
 	      << "\" />" << endl << endl;
     }
