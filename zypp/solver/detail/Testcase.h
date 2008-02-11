@@ -22,6 +22,7 @@
 #include "zypp/Capabilities.h"
 #include "zypp/ResPool.h"
 #include "zypp/base/GzStream.h"
+#include "zypp/sat/Repo.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -81,7 +82,7 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
 };
 
 DEFINE_PTR_TYPE(HelixResolvable);
-typedef std::map<Repository, HelixResolvable_Ptr> RepositoryTable;
+typedef std::map<sat::Repo, HelixResolvable_Ptr> RepositoryTable;
 
 ///////////////////////////////////////////////////////////////////
 //

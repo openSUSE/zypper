@@ -26,6 +26,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Capabilities.h"
+#include "zypp/sat/Solvable.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -158,7 +159,7 @@ inline string helixXML( const Resolvable::constPtr &obj, Dep deptag_r )
   stringstream out;
   Capabilities caps( obj->dep(deptag_r) );
   if ( ! caps.empty() )
-    out << "    " << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
+    out << TAB << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
   return out.str();
 }
 
@@ -234,18 +235,15 @@ bool Testcase::createTestcasePool(const ResPool &pool)
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
     {
-	Resolvable::constPtr res = it->resolvable();
-
 	if ( it->status().isInstalled() ) {
 	    // system channel
 	    system.addResolvable (*it);
 	} else {
 	    // repo channels
-	    ResObject::constPtr repoItem = it->resolvable();
-	    Repository repo  = repoItem->repository();
+	    sat::Repo repo  = it->resolvable()->satSolvable().repo();
 	    if (repoTable.find (repo) == repoTable.end()) {
 		repoTable[repo] = new HelixResolvable(dumpPath + "/"
-						      + numstring(repo.numericId())
+						      + hexstring((int)repo.id())
 						      + "-package.xml.gz");
 	    }
 	    repoTable[repo]->addResolvable (*it);
@@ -284,7 +282,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     }
 
     ResPool pool 	= resolver.pool();
-    RepositoryTable		repoTable;
+    RepositoryTable	repoTable;
     PoolItemList	items_to_install;
     PoolItemList 	items_to_remove;
     PoolItemList 	items_locked;
@@ -315,12 +313,11 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 		system->addResolvable (*it);
 	    } else {
 		// repo channels
-		ResObject::constPtr repoItem = it->resolvable();
-		Repository repo  = repoItem->repository();
+		sat::Repo repo  = it->resolvable()->satSolvable().repo();
 		if (dumpPool) {
 		    if (repoTable.find (repo) == repoTable.end()) {
 			repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							      + numstring(repo.numericId())
+							      + hexstring((int)repo.id())
 							      + "-package.xml.gz");
 		    }
 		    repoTable[repo]->addResolvable (*it);
@@ -419,21 +416,21 @@ HelixControl::HelixControl(const std::string & controlPath,
 	  << TAB << "<system file=\"" << systemPath << "\"/>" << endl << endl;
     for ( RepositoryTable::const_iterator it = repoTable.begin();
 	  it != repoTable.end(); ++it ) {
-	Repository repo = it->first;
+	RepoInfo repo = it->first.info();
 	*file << TAB << "<!-- " << endl
-	      << TAB << "- alias       : " << repo.info().alias() << endl;
-	for ( RepoInfo::urls_const_iterator itUrl = repo.info().baseUrlsBegin();
-	      itUrl != repo.info().baseUrlsEnd();
+	      << TAB << "- alias       : " << repo.alias() << endl;
+	for ( RepoInfo::urls_const_iterator itUrl = repo.baseUrlsBegin();
+	      itUrl != repo.baseUrlsEnd();
 	      ++itUrl )
 	{
 	    *file << TAB << "- url         : " << *itUrl << endl;
 	}
-	*file << TAB << "- path        : " << repo.info().path() << endl;
-	*file << TAB << "- type        : " << repo.info().type() << endl;
+	*file << TAB << "- path        : " << repo.path() << endl;
+	*file << TAB << "- type        : " << repo.type() << endl;
 	*file << TAB << " -->" << endl;
 
-	*file << TAB << "<channel file=\"" << numstring(repo.numericId())
-	      << "-package.xml.gz\" name=\"" << numstring(repo.numericId())
+	*file << TAB << "<channel file=\"" << it->first.id()
+	      << "-package.xml.gz\" name=\"" << repo.alias()
 	      << "\" />" << endl << endl;
     }
     for (PoolItemList::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
@@ -442,9 +439,7 @@ HelixControl::HelixControl(const std::string & controlPath,
     }
     *file << "</setup>" << endl
 	  << "<trial>" << endl
-	  << "<showpool all=\"yes\"/>" << endl
-	  << "<establish/>" << endl
-	  << "<showpool all=\"true\" prefix=\">!> ESTABLISHED:\"/>" << endl;
+	  << "<showpool all=\"yes\"/>" << endl;
 }
 
 HelixControl::HelixControl()
@@ -462,8 +457,7 @@ HelixControl::~HelixControl()
 void HelixControl::installResolvable(const ResObject::constPtr &resObject,
 				     const ResStatus &status)
 {
-    Repository repo  = resObject->repository();
-    *file << "<install channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+    *file << "<install channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
 	  << " status=\"" << status << "\""
@@ -473,8 +467,7 @@ void HelixControl::installResolvable(const ResObject::constPtr &resObject,
 void HelixControl::lockResolvable(const ResObject::constPtr &resObject,
 				  const ResStatus &status)
 {
-    Repository repo  = resObject->repository();
-    *file << "<lock channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+    *file << "<lock channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
 	  << " status=\"" << status << "\""
@@ -484,8 +477,7 @@ void HelixControl::lockResolvable(const ResObject::constPtr &resObject,
 void HelixControl::keepResolvable(const ResObject::constPtr &resObject,
 				  const ResStatus &status)
 {
-    Repository repo  = resObject->repository();
-    *file << "<keep channel=\"" << numstring(repo.numericId()) << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
+    *file << "<keep channel=\"" << resObject->repoInfo().alias() << "\" kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\"" << " arch=\"" << resObject->arch().asString() << "\""
 	  << " version=\"" << resObject->edition().version() << "\"" << " release=\"" << resObject->edition().release() << "\""
 	  << " status=\"" << status << "\""
@@ -495,7 +487,6 @@ void HelixControl::keepResolvable(const ResObject::constPtr &resObject,
 void HelixControl::deleteResolvable(const ResObject::constPtr &resObject,
 				    const ResStatus &status)
 {
-    Repository repo  = resObject->repository();
     *file << "<uninstall " << " kind=\"" << toLower (resObject->kind().asString()) << "\""
 	  << " name=\"" << resObject->name() << "\""
 	  << " status=\"" << status << "\""
