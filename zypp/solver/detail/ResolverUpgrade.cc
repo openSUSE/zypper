@@ -278,10 +278,9 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
 bool setForInstallation (const ResPool &pool, PoolItem item) {
     LookForSelected info(item);
 
-    invokeOnEach( pool.byNameBegin (item->name()),
-		  pool.byNameEnd (item->name()),
-		  functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-				  resfilter::ByKind (item->kind())),		// equal kind
+    invokeOnEach( pool.byIdentBegin (item->kind(),item->name()),
+		  pool.byIdentEnd (item->kind(),item->name()),
+		  resfilter::ByUninstalled (),			// ByUninstalled
 		  functor::functorRef<bool,PoolItem> (info) );
     if (info.found) {
 	MIL << "   ---> " << item << " will be ignoring" << endl;
