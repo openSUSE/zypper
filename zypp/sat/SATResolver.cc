@@ -95,8 +95,6 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _dosplitprovides(false)
 
 {
-    Testcase testcase("/var/log/YaST2/autotestcase");
-    testcase.createTestcasePool (pool); // dump pool to testcase    
 }
 
 

@@ -248,11 +248,13 @@ Resolver::resolvePool()
 
     // Solving with the satsolver
 	MIL << "-------------- Calling SAT Solver -------------------" << endl;
+	Testcase testcase("/var/log/YaST2/autoTestcase");
 	if ( !_satResolver ) {
 	    sat::Pool satPool( sat::Pool::instance() );
 	    _satResolver = new SATResolver(_pool, satPool.get());
-	    Testcase testcase("/var/log/YaST/autoTestcase");
 	    testcase.createTestcase (*this, true, false); // create pool, do not solver
+	} else {
+	    testcase.createTestcase (*this, false, false); // write control file only
 	}
 #if 0
 	MIL << "------SAT-Pool------" << endl;
