@@ -243,7 +243,7 @@ bool Testcase::createTestcasePool(const ResPool &pool)
 	    sat::Repo repo  = it->resolvable()->satSolvable().repo();
 	    if (repoTable.find (repo) == repoTable.end()) {
 		repoTable[repo] = new HelixResolvable(dumpPath + "/"
-						      + hexstring((int)repo.id())
+						      + str::numstring((long)repo.id())
 						      + "-package.xml.gz");
 	    }
 	    repoTable[repo]->addResolvable (*it);
@@ -317,7 +317,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 		if (dumpPool) {
 		    if (repoTable.find (repo) == repoTable.end()) {
 			repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							      + hexstring((int)repo.id())
+							      + str::numstring((long)repo.id())
 							      + "-package.xml.gz");
 		    }
 		    repoTable[repo]->addResolvable (*it);
