@@ -781,6 +781,7 @@ void Zypper::processCommandOptions()
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disable", no_argument, 0, 'd'},
+      {"disabled", no_argument, 0, 0}, // backward compatibility
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
@@ -866,7 +867,9 @@ void Zypper::processCommandOptions()
       {"disable", no_argument, 0, 'd'},
       {"enable", no_argument, 0, 'e'},
       {"refresh", no_argument, 0, 'r'},
+      {"enable-autorefresh", no_argument, 0, 'a'}, // backward compatibility
       {"no-refresh", no_argument, 0, 'n'},
+      {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
@@ -1392,7 +1395,7 @@ void Zypper::doCommand()
     tribool enabled(indeterminate); 
     tribool refresh(indeterminate);
 
-    if (copts.count("disable"))
+    if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
     if (copts.count("no-refresh"))
       refresh = false;
