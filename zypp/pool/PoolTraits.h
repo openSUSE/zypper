@@ -44,6 +44,10 @@ namespace zypp
     class ByIdent //: public ResObjectFilterFunctor
     {
       public:
+        ByIdent( sat::Solvable slv_r )
+        : _id( makeIdent( slv_r ) )
+        {}
+
         ByIdent( ResKind kind_r, IdString name_r )
         : _id( makeIdent( kind_r, name_r ) )
         {}
@@ -66,6 +70,12 @@ namespace zypp
         { return p_r ? operator()( p_r->satSolvable() ) : !_id; }
 
       private:
+        sat::detail::IdType makeIdent( sat::Solvable slv_r )
+        {
+          return slv_r.isKind( ResKind::srcpackage ) ? -slv_r.ident().id()
+                                                     : slv_r.ident().id();
+        }
+
         sat::detail::IdType makeIdent( ResKind kind_r, IdString name_r )
         {
           if ( kind_r == ResKind::package )

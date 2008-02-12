@@ -128,6 +128,13 @@ namespace zypp
       byIdent_iterator byIdentBegin( const C_Str & name_r ) const
       { return make_filter_begin( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
 
+      /** Derive name and kind from \ref PoolItem. */
+      byIdent_iterator byIdentBegin( const PoolItem & pi_r ) const
+      { return make_filter_begin( ByIdent(pi_r.satSolvable()), *this ); }
+      /** Derive name and kind from \ref sat::Solvable. */
+      byIdent_iterator byIdentBegin( sat::Solvable slv_r ) const
+      { return make_filter_begin( ByIdent(slv_r), *this ); }
+
 
       byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
       { return make_filter_end( ByIdent(kind_r,name_r), *this ); }
@@ -142,7 +149,14 @@ namespace zypp
       template<class _Res>
       byIdent_iterator byIdentEnd( const C_Str & name_r ) const
       { return make_filter_end( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
-      //@}
+
+      /** Derive name and kind from \ref PoolItem. */
+      byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
+      { return make_filter_begin( ByIdent(pi_r.satSolvable()), *this ); }
+      /** Derive name and kind from \ref sat::Solvable. */
+      byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
+      { return make_filter_begin( ByIdent(slv_r), *this ); }
+     //@}
 
     public:
       /** \name Iterate through all ResObjects of a certain kind. */
@@ -166,15 +180,17 @@ namespace zypp
       //@}
 
     public:
-      /** \name Iterate through all ResObjects with a certain name (all kinds). */
+      /** \name Iterate through all ResObjects with a certain name (all kinds).
+       * \deprecated Instead of iterating byName and filter byKind use ByIdent iterator.
+      */
       //@{
       typedef zypp::resfilter::ByName ByName;
       typedef filter_iterator<ByName,const_iterator> byName_iterator;
 
-      byName_iterator byNameBegin( const std::string & name_r ) const
+      byName_iterator ZYPP_DEPRECATED byNameBegin( const std::string & name_r ) const
       { return make_filter_begin( ByName(name_r), *this ); }
 
-      byName_iterator byNameEnd( const std::string & name_r ) const
+      byName_iterator ZYPP_DEPRECATED byNameEnd( const std::string & name_r ) const
       { return make_filter_end( ByName(name_r), *this ); }
       //@}
 

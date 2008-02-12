@@ -108,8 +108,8 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const ResPool & obj )
   {
-    dumpPoolStats( str << "ResPool " << sat::Pool::instance() << endl << "  ",
-                            obj.begin(), obj.end() );
+    return dumpPoolStats( str << "ResPool " << sat::Pool::instance() << endl << "  ",
+                          obj.begin(), obj.end() );
   }
 
   /////////////////////////////////////////////////////////////////
