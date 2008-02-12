@@ -1027,14 +1027,14 @@ void Zypper::processCommandOptions()
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
       {"search-descriptions", no_argument, 0, 'd'},
-      {"case-sensitive", no_argument, 0, 'c'},
+      {"case-sensitive", no_argument, 0, 'C'},
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       // rug compatibility option, we have --sort-by-repo
       {"sort-by-catalog", no_argument, 0, 0},
       {"sort-by-repo", no_argument, 0, 0},
       // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'}, //! \todo fix conflicting 'c' short option
+      {"catalog", required_argument, 0, 'c'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -1054,7 +1054,7 @@ void Zypper::processCommandOptions()
       "    --match-words          Matches with search strings may only be whole words\n"
       "    --match-exact          Searches for an exact package name\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
-      "-c, --case-sensitive       Perform case-sensitive search.\n"
+      "-C, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
       "-t, --type <type>          Search only for packages of the specified type.\n"
