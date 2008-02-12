@@ -167,7 +167,7 @@ namespace zypp
 	    switch ( str::split( tag_r->value, std::back_inserter(words) ) )
 	    {
 	      case 2: // [medianr filename]
-		_data->repositoryLocation.setLocation( Pathname(_data->arch.string()) / words[1],
+		_data->repositoryLocation.setLocation( Pathname(_data->arch.asString()) / words[1],
                                                        str::strtonum<unsigned>(words[0]) );
 		break;
 

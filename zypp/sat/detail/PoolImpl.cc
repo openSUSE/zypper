@@ -12,13 +12,15 @@
 #include <iostream>
 #include <boost/mpl/int.hpp>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
 #include "zypp/ZConfig.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/Repo.h"
 #include "zypp/Capability.h"
 
 using std::endl;
@@ -113,7 +115,7 @@ namespace zypp
         ::pool_free( _pool );
       }
 
-      ///////////////////////////////////////////////////////////////////
+     ///////////////////////////////////////////////////////////////////
 
       void PoolImpl::setDirty( const char * a1, const char * a2, const char * a3 )
       {
@@ -135,6 +137,57 @@ namespace zypp
            ::pool_createwhatprovides( _pool );
         }
       }
+
+      ///////////////////////////////////////////////////////////////////
+
+      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
+      {
+        setDirty(__FUNCTION__, repo_r->name );
+        int ret = ::repo_add_solv( repo_r , file_r  );
+
+        if ( ret == 0 )
+        {
+          // Filter out unwanted archs
+          std::set<detail::IdType> sysids;
+          {
+            Arch::CompatSet sysarchs( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
+            for_( it, sysarchs.begin(), sysarchs.end() )
+              sysids.insert( it->idStr().id() );
+            // unfortunately satsolver treats src/nosrc as architecture:
+            sysids.insert( ARCH_SRC );
+            sysids.insert( ARCH_NOSRC );
+          }
+
+          detail::IdType blockBegin = 0;
+          unsigned       blockSize  = 0;
+          for ( detail::IdType i = repo_r->start; i < repo_r->end; ++i )
+          {
+            ::_Solvable * s( _pool->solvables + i );
+            if ( s->repo == repo_r && sysids.find( s->arch ) == sysids.end() )
+            {
+              // Remember an unwanted arch entry:
+              if ( ! blockBegin )
+                blockBegin = i;
+              ++blockSize;
+            }
+            else if ( blockSize )
+            {
+              // Free remembered entries
+              ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+              blockBegin = blockSize = 0;
+            }
+          }
+          if ( blockSize )
+          {
+            // Free remembered entries
+            ::repo_free_solvable_block( repo_r, blockBegin, blockSize, /*reuseids*/false );
+            blockBegin = blockSize = 0;
+          }
+        }
+
+        return ret;
+      }
+
 
       /////////////////////////////////////////////////////////////////
     } // namespace detail

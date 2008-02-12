@@ -17,9 +17,11 @@
 #include <set>
 #include <string>
 
-#include "zypp/RelCompare.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Iterator.h"
+
+#include "zypp/IdStringType.h"
+#include "zypp/RelCompare.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -42,10 +44,13 @@ namespace zypp
 
   public:
     /** String representation of Arch. */
+    IdString idStr() const
+    { return IdString( asString() ); }
+    /** \overload */
     const std::string & asString() const;
     /** \overload */
-    const std::string & string() const
-    { return asString(); }
+    const char * c_str() const
+    { return asString().c_str(); }
 
     /** Test for an empty Arch (this is "", not Arch_noarch). */
     bool empty() const

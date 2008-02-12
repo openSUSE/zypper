@@ -92,11 +92,8 @@ namespace zypp
           }
 
           /** Adding solv file to a repo. */
-          int _addSolv( ::_Repo * repo_r, FILE * file_r )
-          {
-            setDirty(__FUNCTION__, repo_r->name );
-            return ::repo_add_solv( repo_r , file_r  );
-          }
+          int _addSolv( ::_Repo * repo_r, FILE * file_r );
+
           /** Adding Solvables to a repo. */
           detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r )
           {
