@@ -22,6 +22,7 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  const ResKind ResKind::nokind;
   const ResKind ResKind::atom      ( "atom" );
   const ResKind ResKind::message   ( "message" );
   const ResKind ResKind::package   ( "package" );
