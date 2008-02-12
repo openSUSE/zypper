@@ -95,7 +95,7 @@ class  HelixControl {
 
   private:
     std::string dumpFile; // Path of the generated testcase
-    std::ofstream *file;
+    ofgzstream *file;
 
   public:
     HelixControl (const std::string & controlPath,

@@ -344,7 +344,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     // writing control file "*-test.xml"
 
-    HelixControl control (dumpPath + "/solver-test.xml",
+    HelixControl control (dumpPath + "/solver-test.xml.gz",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
 			  language);
@@ -404,7 +404,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const std::string & systemPath)
     :dumpFile (controlPath)
 {
-    file = new ofstream(controlPath.c_str());
+    file = new ofgzstream(controlPath.c_str());
     if (!file) {
 	ZYPP_THROW (Exception( "Can't open " + controlPath ) );
     }
@@ -430,7 +430,7 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << " -->" << endl;
 
 	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
-	      << "-package.xml.gz\" name=\"" << repo.alias()
+	      << "-package.xml\" name=\"" << repo.alias()
 	      << "\" />" << endl << endl;
     }
     for (PoolItemList::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
@@ -452,6 +452,7 @@ HelixControl::~HelixControl()
 {
     *file << "</trial>" << endl
 	  << "</test>" << endl;
+    delete(file);    
 }
 
 void HelixControl::installResolvable(const ResObject::constPtr &resObject,
