@@ -1164,14 +1164,14 @@ void modify_repo(Zypper & zypper, const string & alias)
 
   // autorefresh
   tribool autoref = indeterminate;
-  if (copts.count("enable-autorefresh"))
+  if (copts.count("refresh"))
     autoref = true;
-  if (copts.count("disable-autorefresh"))
+  if (copts.count("no-refresh"))
   {
     if (autoref)
     {
       cerr << format(msg_contradition)
-        % "--enable-autorefresh" % "--disable-autorefresh" << endl;
+        % "--refresh" % "--no-refresh" << endl;
 
       autoref = indeterminate;
     }

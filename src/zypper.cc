@@ -780,7 +780,7 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"disabled", no_argument, 0, 'd'},
+      {"disable", no_argument, 0, 'd'},
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
@@ -796,7 +796,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
       "-t, --type <TYPE>       Type of repository (%s)\n"
-      "-d, --disabled          Add the repository as disabled\n"
+      "-d, --disable           Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
     )) % "yast2, rpm-md, plaindir");
     break;
@@ -865,8 +865,8 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"disable", no_argument, 0, 'd'},
       {"enable", no_argument, 0, 'e'},
-      {"enable-autorefresh", no_argument, 0, 'a'},
-      {"disable-autorefresh", no_argument, 0, 0},
+      {"refresh", no_argument, 0, 'r'},
+      {"no-refresh", no_argument, 0, 'n'},
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
@@ -878,8 +878,8 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it)\n"
       "-e, --enable              Enable a disabled repository\n"
-      "-a, --enable-autorefresh  Enable auto-refresh of the repository\n"
-      "    --disable-autorefresh Disable auto-refresh of the repository\n"
+      "-a, --refresh             Enable auto-refresh of the repository\n"
+      "-n, --no-refresh          Disable auto-refresh of the repository\n"
     );
     break;
   }
@@ -1392,7 +1392,7 @@ void Zypper::doCommand()
     tribool enabled(indeterminate); 
     tribool refresh(indeterminate);
 
-    if (copts.count("disabled"))
+    if (copts.count("disable"))
       enabled = false;
     if (copts.count("no-refresh"))
       refresh = false;
