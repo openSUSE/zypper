@@ -47,6 +47,7 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    
     /**
      * \short Short text describing the resolvable.
      * This attribute is usually displayed in columns.

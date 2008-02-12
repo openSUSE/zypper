@@ -55,12 +55,29 @@ namespace sat
       static const SolvAttr medianr;
       static const SolvAttr mediafile;
       static const SolvAttr eula;
-      
+      static const SolvAttr changelog;
+      static const SolvAttr buildhost;
+      static const SolvAttr distribution;
+      static const SolvAttr packager;
+      static const SolvAttr group;
+      static const SolvAttr keywords;
+      static const SolvAttr os;
+      static const SolvAttr prein;
+      static const SolvAttr postin;
+      static const SolvAttr preun;
+      static const SolvAttr postun;
+      static const SolvAttr sourcesize;
+      static const SolvAttr authors;
+      static const SolvAttr filenames;
+      static const SolvAttr srcpkgname;
+      static const SolvAttr srcpkgedition;
+
       // patern
       static const SolvAttr isvisible;
       static const SolvAttr icon;
       static const SolvAttr isdefault;
       static const SolvAttr category;
+      static const SolvAttr script;
       
       //@}
 

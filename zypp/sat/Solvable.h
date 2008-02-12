@@ -97,7 +97,12 @@ namespace zypp
 	 * with a subdirectory.
 	 */
 	std::string lookupLocation(unsigned &medianr) const;
-
+        
+        /**
+         *
+         */
+        bool lookupBoolAttribute( const SolvAttr &attr ) const;
+        
       public:
         /** The identifier.
          * This is the solvables \ref name, \b except for packages and

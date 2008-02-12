@@ -43,19 +43,19 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   /** */
   bool Pattern::isDefault() const
-  { return false; }
+  { return lookupBoolAttribute( sat::SolvAttr::isdefault ); }
   /** */
   bool Pattern::userVisible() const
-  { return true; }
+  { return lookupBoolAttribute( sat::SolvAttr::isvisible ); }
   /** */
   std::string Pattern::category() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::category ); }
   /** */
   Pathname Pattern::icon() const
-  { return Pathname(); }
+  { return lookupStrAttribute( sat::SolvAttr::icon ); }
   /** */
   Pathname Pattern::script() const
-  { return Pathname(); }
+  { return lookupStrAttribute( sat::SolvAttr::script ); }
 
   Label Pattern::order() const
   { return Label(); }

@@ -81,6 +81,11 @@ namespace zypp
     {
       return repo_lookup_num(this->get(), attr.idStr().id());
     }
+    
+    bool Solvable::lookupBoolAttribute( const SolvAttr &attr ) const
+    {
+      return repo_lookup_num(this->get(), attr.idStr().id()) > 0;
+    }
 
     struct LocCallback
     {
