@@ -33,6 +33,7 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
 #include <zypp/base/GzStream.h>
@@ -46,7 +47,7 @@ using namespace zypp::ui;
 
 ///////////////////////////////////////////////////////////////////
 
-static const Pathname sysRoot( "/Local/ROOT" );
+static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -137,15 +138,15 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    MIL << obj_r << endl;
-    DBG << " -> " << obj_r->satSolvable() << endl;
+    //MIL << obj_r << endl;
+    //DBG << " -> " << obj_r->satSolvable() << endl;
 
     return true;
   }
 
   bool operator()( const sat::Solvable & obj_r )
   {
-    dumpOn( MIL, obj_r ) << endl;
+    //dumpOn( MIL, obj_r ) << endl;
     return true;
   }
 };
@@ -212,7 +213,7 @@ bool solve()
 {
   bool rres = false;
   {
-    zypp::base::LogControl::TmpLineWriter shutUp;
+    //zypp::base::LogControl::TmpLineWriter shutUp;
     rres = getZYpp()->resolver()->resolvePool();
   }
   if ( ! rres )
@@ -413,6 +414,11 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
+void foo( int i, const Capability & c )
+{
+  WAR << c << endl;
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -422,7 +428,6 @@ int main( int argc, char * argv[] )
 try {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
-  setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
 
   sat::Pool satpool( sat::Pool::instance() );
   ResPool   pool( ResPool::instance() );
@@ -473,27 +478,38 @@ try {
   {
     Measure x( "INIT TARGET" );
     {
-//       zypp::base::LogControl::TmpLineWriter shutUp;
       getZYpp()->initializeTarget( sysRoot );
       getZYpp()->target()->load();
     }
   }
 
-  MIL << satpool << endl;
+  satpool.addRepoSolv( "/Local/ROOT/cache/openSUSE-11.0.solv" );
   USR << "pool: " << pool << endl;
 
-  vdumpPoolStats( USR << "Pool:"<< endl,
-                  pool.begin(), pool.end() ) << endl;
+  {
+    Measure x( "Upgrade" );
+    UpgradeStatistics u;
+    getZYpp()->resolver()->doUpgrade( u );
+  }
 
 
+  if ( 0 ) {
+  PoolItem pi ( getPi<Package>("amarok") );
+  MIL << pi << endl;
+  if ( pi )
+  {
+    pi.status().setTransact( true, ResStatus::USER );
+    solve();
+    vdumpPoolStats( USR << "Transacting:"<< endl,
+                    make_filter_begin<resfilter::ByTransact>(pool),
+                    make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+  }
+  }
+  //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
   //waitForInput();
-  //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-//   for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
-//   {
-//     MIL << *it << endl;
-//     //MIL << dump(*it) << endl;
-//   }
+  //std::for_each( pool.begin(), pool.end(), Xprint() );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
