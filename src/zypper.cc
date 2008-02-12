@@ -1267,6 +1267,9 @@ void Zypper::processCommandOptions()
 
   default:
   {
+    if (runningHelp())
+      break;
+
     ERR << "Unknown or unexpected command" << endl;
     cerr << _("Unexpected program flow") << "." << endl;
     report_a_bug(cerr);
