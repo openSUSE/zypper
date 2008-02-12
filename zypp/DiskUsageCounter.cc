@@ -107,10 +107,9 @@ namespace zypp
         if ( ! (*it)->installOnly() )
         {
           // Item to update -> check the installed ones.
-          for_( nit, pool_r.byNameBegin((*it)->name()), pool_r.byNameEnd((*it)->name()) )
-          {                                          // same name
-            if (    (*nit)->kind() == (*it)->kind()  // same kind
-                 && nit->status().staysInstalled() ) // and unselected installed
+          for_( nit, pool_r.byIdentBegin( *it ), pool_r.byIdentEnd( *it ) )
+          {                                       // same kind and name
+            if ( nit->status().staysInstalled() ) // and unselected installed
             {
               DiskUsage ndu( (*nit)->diskusage() );
               if ( ! ndu.empty() )

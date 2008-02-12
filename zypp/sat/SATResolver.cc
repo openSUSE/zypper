@@ -239,8 +239,7 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 
 
 //------------------------------------------------------------------------------------------------------------
-//  This function loops over the pool and grabs
-//  all item.status().transacts() and item.status().byUser()
+//  This function loops over the pool and grabs all items
 //  It clears all previous bySolver() states also
 //
 //  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
@@ -273,26 +272,14 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	if (status.isToBeInstalled()) {
 	    resolver.addPoolItemToInstall(item);	// -> install!
 	}
-	if (status.isToBeUninstalled()) {
+	else if (status.isToBeUninstalled()) {
 	    resolver.addPoolItemToRemove(item);		// -> remove !
 	}
-	if (status.isIncomplete()) {			// incomplete (re-install needed)
-	    PoolItem reinstall = Helper::findReinstallItem (resolver.pool(), item);
-	    if (reinstall) {
-		MIL << "Reinstall " << reinstall << " for incomplete " << item << endl;
-		resolver.addPoolItemToInstall(reinstall);	// -> install!
-	    }
-	    else {
-		WAR << "Can't find " << item << " for re-installation" << endl;
-	    }
-	}
-
-        if (status.isLocked()
-            || (status.isKept()
-		&& !by_solver)) {
+        else if (status.isLocked()
+                 || (status.isKept()
+                     && !by_solver)) {
             resolver.addPoolItemToLock (item);
         }
-
 
 	return true;
     }
@@ -349,16 +336,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     _items_to_lock.clear();
 
     invokeOnEach ( _pool.begin(), _pool.end(),
-		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
-
-    invokeOnEach ( _pool.begin(), _pool.end(),
-                   resfilter::ByLock( ),                        // collect locks from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );
-
-    invokeOnEach ( _pool.begin(), _pool.end(),
-                   resfilter::ByKeep( ),                        // collect keeps from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem r = *iter;
@@ -450,10 +428,9 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       if (poolItem) {
 	  // Check if this is an update
 	  CheckIfUpdate info;
-	  invokeOnEach( _pool.byNameBegin( poolItem->name() ),
-			_pool.byNameEnd( poolItem->name() ),
-			functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-					resfilter::ByKind( poolItem->kind() ) ),	// equal kind
+	  invokeOnEach( _pool.byIdentBegin( poolItem ),
+			_pool.byIdentEnd( poolItem ),
+			resfilter::ByUninstalled(),			// ByUninstalled
 			functor::functorRef<bool,PoolItem> (info) );
 
 	  if (info.is_updated) {
@@ -471,6 +448,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     _solv = NULL;
     queue_free( &(_jobQueue) );
 
+    MIL << "SATResolver::resolvePool() done" << endl;
     return true;
 }
 
@@ -632,12 +610,12 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
 				{
 				FindPackage info (problemSolution, KEEP);
-				string package_name (id2str(pool, what));
-				invokeOnEach( _pool.byNameBegin( package_name ),
-					      _pool.byNameEnd( package_name ),
+                                IdString ident( what );
+				invokeOnEach( _pool.byIdentBegin( ident ),
+					      _pool.byIdentEnd( ident ),
 					      resfilter::ByUninstalled (),
 					      functor::functorRef<bool,PoolItem> (info) );
-				string description = str::form (_("do not install %s"), id2str(pool, what));
+				string description = str::form (_("do not install %s"), ident.c_str() );
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -645,13 +623,13 @@ SATResolver::problems ()
 			    case SOLVER_ERASE_SOLVABLE_NAME:
 				{
 				FindPackage info (problemSolution, KEEP);
-				string package_name (id2str(pool, what));
-				invokeOnEach( _pool.byNameBegin( package_name ),
-					      _pool.byNameEnd( package_name ),
+                                IdString ident( what );
+				invokeOnEach( _pool.byIdentBegin( ident ),
+					      _pool.byIdentEnd( ident ),
 					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
 							      resfilter::ByTransact ()),			// will be deinstalled
 					      functor::functorRef<bool,PoolItem> (info) );
-				string description = str::form (_("keep %s"), id2str(pool, what));
+				string description = str::form (_("keep %s"), ident.c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}

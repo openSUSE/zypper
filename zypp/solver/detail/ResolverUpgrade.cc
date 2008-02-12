@@ -256,7 +256,7 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
   public:
     bool found;
     PoolItem candidate;
-    
+
     LookForSelected (PoolItem can)
 	: found (false),
 	candidate (can)
@@ -267,7 +267,7 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
 	if (item.status().isToBeInstalled()
 	    && item->edition() == candidate->edition()
 	    && item->arch() == candidate->arch()) {
-	    MIL << item << " is already selected for installation --> ignoring" << endl;	    
+	    MIL << item << " is already selected for installation --> ignoring" << endl;
 	    found = true;
 	    return false; // stop here
 	}
@@ -288,7 +288,7 @@ bool setForInstallation (const ResPool &pool, PoolItem item) {
     } else {
 	return item.status().setToBeInstalled( ResStatus::APPL_HIGH );
     }
-}	
+}
 
 //-----------------------------------------------------------------------------
 
@@ -332,7 +332,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   // create a testcase for the updating system
   Testcase testcase("/var/log/updateTestcase");
-  testcase.createTestcase (*this, true, false); // create pool, do not solver  
+  testcase.createTestcase (*this, true, false); // create pool, do not solver
 
   _update_items.clear();
   {
@@ -380,7 +380,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	++opt_stats_r.pre_nocand;
 	continue;
       }
-      MIL << "item " << item << " is installed, candidate is " << candidate << endl;
       if (candidate.status().isSeen()) {			// seen already
 	candidate.status().setSeen(true);
 	continue;
@@ -405,12 +404,11 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if ( !VendorAttr::instance().equivalent(installed->vendor(), candidate->vendor()) )
 	{
 	    MIL << "Discarding '" << candidate << "' from vendor '"
-		<< candidate->vendor() << "' different to uninstalled '"
+		<< candidate->vendor() << "' different to installed '"
 		<< installed->vendor() << "' vendor." << endl;
 	    continue;
 	}
 
-        MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find( installed );
 	if (cand_it == candidatemap.end()						// not in map yet
 	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
@@ -425,8 +423,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
     ++opt_stats_r.pre_avcand;
     available.insert( candidate );
-
-    MIL << "installed " << installed << ", candidate " << candidate << endl;
   } // iterate over the complete pool
 
   // reset all seen (for next run)
@@ -534,7 +530,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // Remember new package for 2nd pass.
 
       Dep dep (Dep::PROVIDES);
-      Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());      
+      Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
 
       FindProviders info(installed);
 

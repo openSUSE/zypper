@@ -134,6 +134,9 @@ namespace zypp
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentBegin( sat::Solvable slv_r ) const
       { return make_filter_begin( ByIdent(slv_r), *this ); }
+      /** Takes a \ref sat::Solvable::ident string. */
+      byIdent_iterator byIdentBegin( IdString ident_r ) const
+      { return make_filter_begin( ByIdent(ident_r), *this ); }
 
 
       byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
@@ -156,6 +159,9 @@ namespace zypp
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
       { return make_filter_begin( ByIdent(slv_r), *this ); }
+      /** Takes a \ref sat::Solvable::ident string. */
+      byIdent_iterator byIdentEnd( IdString ident_r ) const
+      { return make_filter_end( ByIdent(ident_r), *this ); }
      //@}
 
     public:

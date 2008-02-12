@@ -40,12 +40,18 @@ namespace zypp
       { return pi; }
     };
 
-    /** Main filter selecting PoolItems bu \c name and \c kind. */
-    class ByIdent //: public ResObjectFilterFunctor
+    /** Main filter selecting PoolItems bu \c name and \c kind.
+     *
+    */
+    class ByIdent
     {
       public:
         ByIdent( sat::Solvable slv_r )
         : _id( makeIdent( slv_r ) )
+        {}
+
+        ByIdent( IdString ident_r )
+        : _id( ident_r.id() )
         {}
 
         ByIdent( ResKind kind_r, IdString name_r )
