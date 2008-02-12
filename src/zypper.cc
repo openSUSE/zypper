@@ -881,7 +881,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it)\n"
       "-e, --enable              Enable a disabled repository\n"
-      "-a, --refresh             Enable auto-refresh of the repository\n"
+      "-r, --refresh             Enable auto-refresh of the repository\n"
       "-n, --no-refresh          Disable auto-refresh of the repository\n"
     );
     break;
