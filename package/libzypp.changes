@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 12 17:10:48 CET 2008 - coolo@suse.de
+
+- fix architectures on distupgrade
+
+-------------------------------------------------------------------
 Fri Feb  8 12:50:30 CET 2008 - coolo@suse.de
 
 - fixes from trunk merged
