@@ -128,9 +128,6 @@ namespace zypp
   License ResObject::licenseToConfirm() const
   { return lookupStrAttribute( sat::SolvAttr::eula ); }
 
-  Vendor ResObject::vendor() const
-  { return lookupStrAttribute( sat::SolvAttr::vendor ); }
-
   ByteCount ResObject::size() const
   { return lookupNumAttribute( sat::SolvAttr::size ); }
 

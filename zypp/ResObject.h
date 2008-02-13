@@ -47,7 +47,7 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    
+
     /**
      * \short Short text describing the resolvable.
      * This attribute is usually displayed in columns.
@@ -88,7 +88,8 @@ namespace zypp
      *
      * For Example "Novell Inc."
      */
-    Vendor vendor() const;
+    Vendor vendor() const
+    { return Resolvable::vendor().asString(); }
 
     /** Installed size. */
     ByteCount size() const;
