@@ -627,8 +627,8 @@ void show_summary_resolvable_list(const string & label,
     // plus edition and architecture for verbose output
     cout_v << "-" << res->edition() << "." << res->arch();
     // plus repo providing this package
-    if (res->repository() != Repository::noRepository)
-      cout_v << "  (" << res->repository().info().name() << ")";
+    if (!res->repoInfo().alias().empty())
+      cout_v << "  (" << res->repoInfo().name() << ")";
     // new line after each package in the verbose mode
     cout_v << endl;
   }
@@ -1024,7 +1024,7 @@ void show_patches(const Zypper & zypper)
     Patch::constPtr patch = asKind<Patch>(res);
 
     TableRow tr;
-    tr << patch->repository().info().name();
+    tr << patch->repoInfo().name();
     tr << res->name () << res->edition ().asString();
     tr << patch->category();
     tr << string_status (it->status ());
@@ -1096,10 +1096,10 @@ bool xml_list_patches ()
         cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
         cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
 
-        if ( patch->repository() != Repository::noRepository )
+        if ( !patch->repoInfo().alias().empty() )
         {
-          cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
-          cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
+          cout << "  <source url=\"" << *(patch->repoInfo().baseUrlsBegin());
+          cout << "\" alias=\"" << patch->repoInfo().alias() << "\"/>" << endl;
         }
 
         cout << " </update>" << endl;
@@ -1144,7 +1144,7 @@ void list_patch_updates(const Zypper & zypper, bool best_effort)
 
       if (true) {
 	TableRow tr (cols);
-	tr << patch->repository().info().name();
+	tr << patch->repoInfo().name();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
@@ -1300,7 +1300,7 @@ void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_
       TableRow tr (cols);
       tr << "v";
       if (!hide_repo) {
-	tr << res->repository().info().name();
+	tr << res->repoInfo().name();
       }
       if (zypper.globalOpts().is_rug_compatible)
 	tr << "";		// Bundle
@@ -1404,10 +1404,10 @@ void xml_list_updates()
     cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
     cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
 
-    if ( res->repository() != Repository::noRepository )
+    if ( !res->repoInfo().alias().empty() )
     {
-    	cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
-    	cout << "\" alias=\"" << res->repository().info().alias() << "\"/>" << endl;
+    	cout << "  <source url=\"" << *(res->repoInfo().baseUrlsBegin());
+    	cout << "\" alias=\"" << res->repoInfo().alias() << "\"/>" << endl;
     }
 
     cout << " </update>" << endl;
