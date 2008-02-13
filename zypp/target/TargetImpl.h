@@ -69,6 +69,8 @@ namespace zypp
 
       void load();
 
+      void buildCache();
+      
     public:
 
       /** The root set for this target */

@@ -26,6 +26,7 @@
 #include "zypp/PoolItem.h"
 #include "zypp/ResObjects.h"
 #include "zypp/Url.h"
+#include "zypp/TmpPath.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ExternalProgram.h"
 
@@ -291,15 +292,19 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
-    void TargetImpl::load()
+    
+    void TargetImpl::buildCache()
     {
-      Pathname rpmsolv = _root + ZConfig::instance().repoCachePath() + "_rpm.solv";
-      Pathname rpmsolvcookie = _root + ZConfig::instance().repoCachePath() + "_rpm.cookie";
+      Pathname base = _root + ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName();
+      Pathname rpmsolv = base.extend(".solv");
+      Pathname rpmsolvcookie = base.extend(".cookie");
+      
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
       RepoStatus rpmstatus(_root + "/var/lib/rpm/Name");
-      if ( PathInfo(rpmsolv).isExist() )
+      bool solvexisted = PathInfo(rpmsolv).isExist();
+      if ( solvexisted )
       {
         // see the status of the cache
         PathInfo cookie( rpmsolvcookie );
@@ -317,14 +322,24 @@ namespace zypp
 
       if ( build_rpm_solv )
       {
+        filesystem::TmpFile tmpsolv( _root + ZConfig::instance().repoCachePath() /*dir*/, 
+                                     sat::Pool::instance().systemRepoName() /* prefix */);
+        
          MIL << "Executing solv converter" << endl;
-         // Take care we unlink the solvfile on exception
-         ManagedFile guard( rpmsolv, filesystem::unlink );
-         ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
 
 #warning FIXME add root to rpmdb2solv
         // FIXME add root to rpmdb2solv
-        string cmd( str::form( "rpmdb2solv > \"%s\"", rpmsolv.c_str() ) );
+        string cmd;
+        if ( solvexisted )
+        {
+          MIL << "Old cache found, using it to speed up (merge)" << endl;
+          cmd = str::form( "rpmdb2solv \"%s\" > \"%s\"", rpmsolv.c_str(), tmpsolv.path().c_str() );
+        }
+        else
+        {
+          cmd = str::form( "rpmdb2solv > \"%s\"", tmpsolv.path().c_str() );
+        }
+        
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
@@ -333,13 +348,30 @@ namespace zypp
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to cache rpm database"));
 
+        // Take care we unlink the solvfile on exception
+        ManagedFile guard( rpmsolv, filesystem::unlink );
+        ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
+         
+        ret = filesystem::rename( tmpsolv, rpmsolv );
+        
+        if ( ret != 0 )
+          ZYPP_THROW(Exception("Failed to move cache to final destination"));
+        
         rpmstatus.saveToCookieFile(rpmsolvcookie);
 
         // We keep it.
         guard.resetDispose();
         guardcookie.resetDispose();
       }
-
+    }
+    
+    void TargetImpl::load()
+    {
+      Pathname base = _root + ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName();
+      Pathname rpmsolv = base.extend(".solv");
+      
+      buildCache();
+     
       //now add the repos to the pool
       MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
       sat::Repo system = sat::Pool::instance().reposInsert(sat::Pool::instance().systemRepoName());
