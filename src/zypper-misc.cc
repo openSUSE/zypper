@@ -397,7 +397,7 @@ void mark_by_capability (const Zypper & zypper,
 {
   Capability cap = safe_parse_cap (zypper, kind, capstr);
 
-  if (cap.empty()) {
+  if (!cap.empty()) {
     cout_vv << "Capability: " << cap << endl;
 
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
