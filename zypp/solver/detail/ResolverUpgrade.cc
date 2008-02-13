@@ -36,7 +36,8 @@
 /-*/
 
 #include "zypp/Capabilities.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
@@ -68,6 +69,27 @@ namespace zypp
 
 using namespace std;
 using namespace zypp;
+
+struct PoolIndex
+{
+  PoolIndex()
+  {
+    ResPool pool( ResPool::instance() );
+    for_( it, pool.begin(), pool.end() )
+      _cache[it->satSolvable().ident()].push_back( *it );
+  }
+
+  std::vector<PoolItem> & get( const PoolItem & pi )
+  { return get( pi.satSolvable().ident() ); }
+
+  std::vector<PoolItem> & get( sat::Solvable slv_r )
+  { return get( slv_r.ident() );}
+
+  std::vector<PoolItem> & get( IdString ident_r )
+  { return _cache[ident_r]; }
+
+  std::map<IdString,std::vector<PoolItem> > _cache;
+};
 
 /** Order on AvialableItemSet.
  * \li best Arch
@@ -348,6 +370,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   ///////////////////////////////////////////////////////////////////
   PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
 
+  PoolIndex identIndex;
+
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
     PoolItem item = *it;
     PoolItem candidate;
@@ -373,7 +397,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	candidate = cand_it->second;				// found candidate already
       }
       else {
-	candidate = Helper::findUpdateItem( _pool, installed );	// find 'best' upgrade candidate
+	candidate = Helper::findUpdateItem( identIndex.get( installed ), installed );	// find 'best' upgrade candidate
       }
       if (!candidate) {
 	MIL << "doUpgrade available: SKIP no candidate for " << installed << endl;
@@ -394,7 +418,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       }
       candidate = item;
       candidate.status().setSeen(true);				// mark as seen
-      installed = Helper::findInstalledItem( _pool, candidate );
+      installed = Helper::findInstalledItem( identIndex.get( candidate ), candidate );
       if (installed) {						// check if we already have an installed
 	if ( installed.status().isLocked() ) {
 	  MIL << "doUpgrade available: SKIP candidate " << candidate << ", locked " << installed << endl;

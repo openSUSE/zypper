@@ -63,6 +63,8 @@ class Helper {
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
     static PoolItem findInstalledItem (const ResPool & pool, PoolItem item);
+    /** \overload Using ident cache entry. */
+    static PoolItem findInstalledItem (const std::vector<PoolItem> & pool, PoolItem item);
 
     // for item, find uninstalled item which has same name and higher edition
     static PoolItem findUninstalledItem (const ResPool & pool, PoolItem item);
@@ -71,6 +73,8 @@ class Helper {
     static PoolItem findReinstallItem (const ResPool & pool, PoolItem item);
 
     static PoolItem findUpdateItem (const ResPool & pool, PoolItem item);
+    /** \overload Using ident cache entry. */
+    static PoolItem findUpdateItem (const std::vector<PoolItem> & pool, PoolItem item);
 
     // for item, check if this is the 'best' uninstalled (best arch, best version) item
     static bool isBestUninstalledItem (const ResPool & pool, PoolItem item);

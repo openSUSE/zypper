@@ -72,19 +72,28 @@ class LookFor : public resfilter::PoolItemFilterFunctor
 
 // just find installed item with same kind/name as item
 
-PoolItem
-Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
+template<class _Iter>
+static PoolItem findInstalledByNameAndKind ( _Iter begin, _Iter end, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
 
-    invokeOnEach( pool.byIdentBegin( kind, name ),
-		  pool.byIdentEnd( kind, name ),
+    invokeOnEach(begin, end,
 		  resfilter::ByInstalled (),					// ByInstalled
 		  functor::functorRef<bool,PoolItem> (info) );
 
     _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
     return info.item;
+
 }
+
+PoolItem Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
+{ return detail::findInstalledByNameAndKind( pool.byIdentBegin( kind, name ), pool.byIdentEnd( kind, name ), name, kind ); }
+
+PoolItem Helper::findInstalledItem (const ResPool & pool, PoolItem item)
+{ return findInstalledByNameAndKind(pool, item->name(), item->kind() ); }
+
+PoolItem Helper::findInstalledItem( const std::vector<PoolItem> & pool, PoolItem item )
+{ return detail::findInstalledByNameAndKind( pool.begin(), pool.end(), item->name(), item->kind() ); }
 
 
 // just find uninstalled item with same kind/name as item
@@ -103,15 +112,6 @@ Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name,
     return info.item;
 }
 
-
-// just find installed item with same kind/name as item
-// does *NOT* check edition
-
-PoolItem
-Helper::findInstalledItem (const ResPool & pool, PoolItem item)
-{
-    return findInstalledByNameAndKind (pool, item->name(), item->kind() );
-}
 
 //----------------------------------------------------------------------------
 
@@ -156,14 +156,13 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 // just find best (according to edition) uninstalled item with same kind/name as item
 // *DOES* check edition
 
-PoolItem
-Helper::findUpdateItem (const ResPool & pool, PoolItem item)
+template<class _Iter>
+static PoolItem findUpdateItem( _Iter begin, _Iter end, PoolItem item )
 {
     LookForUpdate info;
     info.installed = item;
 
-    invokeOnEach( pool.byIdentBegin( item ),
-		  pool.byIdentEnd( item ),
+    invokeOnEach( begin, end,
 		  functor::chain (resfilter::ByUninstalled (),						// ByUninstalled
 				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),	// only look at better editions
 		  functor::functorRef<bool,PoolItem> (info) );
@@ -171,6 +170,12 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem item)
     _XDEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
 }
+
+PoolItem Helper::findUpdateItem (const ResPool & pool, PoolItem item)
+{ return detail::findUpdateItem( pool.byIdentBegin( item ), pool.byIdentEnd( item ), item ); }
+
+PoolItem Helper::findUpdateItem (const std::vector<PoolItem> & pool, PoolItem item)
+{ return detail::findUpdateItem( pool.begin(), pool.end(), item ); }
 
 
 //----------------------------------------------------------------------------
