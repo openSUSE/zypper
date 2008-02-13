@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 //       }
 
       PoolQuery query();
-      query.execute("kde", &result_cb);
+      //query.execute("kde", &result_cb);
       
 
     }
