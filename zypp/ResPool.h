@@ -155,10 +155,10 @@ namespace zypp
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
-      { return make_filter_begin( ByIdent(pi_r.satSolvable()), *this ); }
+      { return make_filter_end( ByIdent(pi_r.satSolvable()), *this ); }
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
-      { return make_filter_begin( ByIdent(slv_r), *this ); }
+      { return make_filter_end( ByIdent(slv_r), *this ); }
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentEnd( IdString ident_r ) const
       { return make_filter_end( ByIdent(ident_r), *this ); }
