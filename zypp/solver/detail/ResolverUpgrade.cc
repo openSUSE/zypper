@@ -354,7 +354,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   // create a testcase for the updating system
   Testcase testcase("/var/log/updateTestcase");
-  testcase.createTestcase (*this, true, false); // create pool, do not solver
+  testcase.createTestcase (*this, true, false); // create pool, do not solve
 
   _update_items.clear();
   {
