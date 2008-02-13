@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Feb 13 11:26:01 CET 2008 - coolo@suse.de
+
+- increase version number to mark satsolver branch
+
+-------------------------------------------------------------------
 Tue Feb 12 11:00:03 CET 2008 - jkupec@suse.cz
 
 - ar and mr command options made consistent (bnc #356132,
