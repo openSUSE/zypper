@@ -129,10 +129,10 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::eula ); }
 
   ByteCount ResObject::size() const
-  { return 1024 * lookupNumAttribute( sat::SolvAttr::size ); }
+  { return ByteCount( lookupNumAttribute( sat::SolvAttr::size ), ByteCount::K ); }
 
   ByteCount ResObject::downloadSize() const
-  { return 1024 * lookupNumAttribute( sat::SolvAttr::downloadsize ); }
+  { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ), ByteCount::K ); }
 
   RepoInfo ResObject::repoInfo() const
   { return repo().info(); }
