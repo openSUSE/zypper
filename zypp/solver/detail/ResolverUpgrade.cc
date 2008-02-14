@@ -363,13 +363,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     (UpgradeOptions&)opt_stats_r = opts;
   }
 
-  ///////////////////////////////////////////////////////////////////
-  // Reset all auto states and build PoolItemOrderSet of available candidates
-  // (those that do not belong to PoolItems set to delete).
-  //
-  ///////////////////////////////////////////////////////////////////
-  PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
-
+  /* Find upgrade candidates for each package.  */
   PoolIndex identIndex;
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
@@ -446,7 +440,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     }
 
     ++opt_stats_r.pre_avcand;
-    available.insert( candidate );
   } // iterate over the complete pool
 
   // reset all seen (for next run)
