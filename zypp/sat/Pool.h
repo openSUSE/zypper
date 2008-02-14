@@ -18,6 +18,7 @@
 
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -62,7 +63,7 @@ namespace zypp
         const SerialNumber & serial() const;
 
         /** Update housekeeping data if necessary (e.g. whatprovides). */
-        void prepare();
+        void prepare() const;
 
       public:
         /** Whether \ref Pool contains repos. */
@@ -103,8 +104,6 @@ namespace zypp
         { return reposInsert( systemRepoName() ); }
 
       public:
-
-      public:
         /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
          * In case of an exception the \ref Repo is removed from the \ref Pool.
          * \throws Exception if loading the solv-file fails.
@@ -130,6 +129,43 @@ namespace zypp
 
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
+
+      public:
+        /** \name Requested locales. */
+        //@{
+        /** Set the requested locales.
+         * Languages to be supported by the system, e.g. language specific
+         * packages to be installed.
+         */
+        void setRequestedLocales( const LocaleSet & locales_r );
+
+        /** Add one \ref Locale to the set of requested locales.
+         * Return \c true if \c locale_r was newly added to the set.
+        */
+        bool addRequestedLocale( const Locale & locale_r );
+
+        /** Erase one \ref Locale from the set of requested locales.
+        * Return \c false if \c locale_r was not found in the set.
+         */
+        bool eraseRequestedLocale( const Locale & locale_r );
+
+        /** Return the requested locales.
+         * \see \ref setRequestedLocales
+        */
+        const LocaleSet & getRequestedLocales() const;
+
+        /** Wheter this \ref Locale is in the set of requested locales. */
+        bool isRequestedLocale( const Locale & locale_r ) const;
+
+        /** Get the set of available locales.
+         * This is computed from the package data so it actually
+         * represents all locales packages claim to support.
+         */
+        const LocaleSet & getAvailableLocales() const;
+
+        /** Wheter this \ref Locale is in the set of available locales. */
+        bool isAvailableLocale( const Locale & locale_r ) const;
+        //@}
 
       public:
         /** Expert backdoor. */

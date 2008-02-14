@@ -62,9 +62,14 @@ namespace zypp
 	  }
       }
 
-      static detail::IdType nsCallback( struct _Pool *, void *data, detail::IdType lhs, detail::IdType rhs )
+      detail::IdType PoolImpl::nsCallback( struct _Pool *, void *data, detail::IdType lhs, detail::IdType rhs )
       {
-        //T << Cability( lhs ) << (const char *)data << Capability( rhs ) << endl;
+        if ( lhs == NAMESPACE_LANGUAGE )
+        {
+          const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
+          return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? -1 : 0;
+        }
+        DBG << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
         return 0;
       }
 
@@ -101,8 +106,7 @@ namespace zypp
 
         // set namespace callback
         _pool->nscallback = &nsCallback;
-        _pool->nscallbackdata = (void*)" NAMESPACE ";
-        SEC << _pool->nscallback << endl;
+        _pool->nscallbackdata = (void*)this;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -125,16 +129,34 @@ namespace zypp
           else if ( a2 ) DBG << a1 << " " << a2 << endl;
           else           DBG << a1 << endl;
         }
-        _serial.setDirty();
+        _serial.setDirty();       // pool content change
+        _localeCollector.clear(); // available locales may change
+
+        // invaldate dependency/namespace related indices:
+        depSetDirty();
+      }
+
+      void PoolImpl::depSetDirty( const char * a1, const char * a2, const char * a3 )
+      {
+        if ( a1 )
+        {
+          if      ( a3 ) DBG << a1 << " " << a2 << " " << a3 << endl;
+          else if ( a2 ) DBG << a1 << " " << a2 << endl;
+          else           DBG << a1 << endl;
+        }
         ::pool_freewhatprovides( _pool );
       }
 
-      void PoolImpl::prepare()
+      void PoolImpl::prepare() const
       {
         if ( _watcher.remember( _serial ) )
         {
-           // sat solver claims to handle this on it's own:
-           ::pool_createwhatprovides( _pool );
+          /* nothing to do here, but _watcher MUST remember... */
+        }
+        if ( ! _pool->whatprovides )
+        {
+          DBG << "pool_createwhatprovides..." << endl;
+          ::pool_createwhatprovides( _pool );
         }
       }
 
@@ -144,7 +166,6 @@ namespace zypp
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_solv( repo_r , file_r  );
-
         if ( ret == 0 )
         {
           // Filter out unwanted archs
@@ -184,10 +205,54 @@ namespace zypp
             blockBegin = blockSize = 0;
           }
         }
-
         return ret;
       }
 
+      ///////////////////////////////////////////////////////////////////
+
+      // need on demand and id based Locale
+      void _locale_hack( const LocaleSet & locales_r,
+                         std::tr1::unordered_set<IdString> & locale2Solver )
+      {
+        std::tr1::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver ) ;
+        for_( it, locales_r.begin(),locales_r.end() )
+        {
+          for ( Locale l( *it ); l != Locale::noCode; l = l.fallback() )
+            locale2Solver.insert( IdString( l.code() ) );
+        }
+        DBG << "New Solver Locales: " << locale2Solver << endl;
+      }
+
+
+      void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )
+      {
+        depSetDirty( "setRequestedLocales" );
+        _requestedLocales = locales_r;
+        DBG << "New RequestedLocales: " << locales_r << endl;
+        _locale_hack( _requestedLocales, _locale2Solver );
+      }
+
+      bool PoolImpl::addRequestedLocale( const Locale & locale_r )
+      {
+        if ( _requestedLocales.insert( locale_r ).second )
+        {
+          depSetDirty( "addRequestedLocale", locale_r.code().c_str() );
+          _locale_hack( _requestedLocales, _locale2Solver );
+          return true;
+        }
+        return false;
+      }
+
+      bool PoolImpl::eraseRequestedLocale( const Locale & locale_r )
+      {
+        if ( _requestedLocales.erase( locale_r ) )
+        {
+          depSetDirty( "addRequestedLocale", locale_r.code().c_str() );
+          _locale_hack( _requestedLocales, _locale2Solver );
+          return true;
+        }
+        return false;
+      }
 
       /////////////////////////////////////////////////////////////////
     } // namespace detail

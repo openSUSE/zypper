@@ -164,113 +164,6 @@ namespace zypp
     }
 
     //------------------------------------------------------------------------
-    // locales
-
-    /** */
-    void ZYppImpl::setRequestedLocales( const LocaleSet & locales_r )
-    {
-#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
-#if 0
-     ResPool mpool( ResPool::instance() );
-      // assert all requested are available
-      for ( LocaleSet::const_iterator it = locales_r.begin();
-            it != locales_r.end(); ++it )
-        {
-          NameKindProxy select( nameKindProxy<Language>( mpool, it->code() ) );
-          if ( select.installedEmpty() && select.availableEmpty() )
-            _pool.insert( Language::availableInstance( *it ) );
-        }
-
-      // now adjust status
-      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
-            it != mpool.byKindEnd<Language>(); ++it )
-        {
-          NameKindProxy select( nameKindProxy<Language>( mpool, (*it)->name() ) );
-          if ( locales_r.find( Locale( (*it)->name() ) ) != locales_r.end() )
-            {
-              // Language is requested
-              if ( select.installedEmpty() )
-                {
-                  if ( select.availableEmpty() )
-                    {
-                      // no item ==> provide available to install
-                      _pool.insert( Language::availableInstance( Locale((*it)->name()) ) );
-                      select = nameKindProxy<Language>( mpool, (*it)->name() );
-                    }
-                  // available only ==> to install
-                  select.availableBegin()->status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
-                }
-              else
-                {
-                  // installed ==> keep it
-                  select.installedBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
-                  if ( ! select.availableEmpty() )
-                    {
-                      // both items ==> keep
-                      select.availableBegin()->status().resetTransact( ResStatus::USER );
-                    }
-                }
-            }
-          else
-            {
-              // Language is NOT requested
-              if ( ! select.installedEmpty() )
-                select.installedBegin()->status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
-              if ( ! select.availableEmpty() )
-                select.availableBegin()->status().resetTransact( ResStatus::USER );
-            }
-        }
-#endif
-    }
-
-    /** */
-    ZYppImpl::LocaleSet ZYppImpl::getAvailableLocales() const
-    {
-      ZYpp::LocaleSet ret;
-#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
-#if 0
-      ResPool mpool( ResPool::instance() );
-      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
-            it != mpool.byKindEnd<Language>(); ++it )
-        {
-          if ( (*it).status().isUninstalled() ) // available!
-            ret.insert( Locale( (*it)->name() ) );
-        }
-#endif
-      return ret;
-    }
-
-    /** */
-    ZYppImpl::LocaleSet ZYppImpl::getRequestedLocales() const
-    {
-      ZYpp::LocaleSet ret;
-#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
-#if 0
-     ResPool mpool( ResPool::instance() );
-      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
-            it != mpool.byKindEnd<Language>(); ++it )
-        {
-          NameKindProxy select( nameKindProxy<Language>( mpool, (*it)->name() ) );
-          if ( ! select.installedEmpty()
-               && select.installedBegin()->status().getTransactValue() != ResStatus::TRANSACT )
-            ret.insert( Locale( (*it)->name() ) );
-          else if ( ! select.availableEmpty()
-                    && select.availableBegin()->status().getTransactValue() == ResStatus::TRANSACT )
-            ret.insert( Locale( (*it)->name() ) );
-        }
-#endif
-      return ret;
-    }
-
-    void ZYppImpl::availableLocale( const Locale & locale_r )
-    {
-#warning REIMPLEMENT WITHOUT LANGUAGE RESOLVABLE
-#if 0
-      _pool.insert( Language::availableInstance( locale_r ) );
-#endif
-    }
-
-    //------------------------------------------------------------------------
     // target store path
 
     Pathname ZYppImpl::homePath() const
@@ -287,6 +180,7 @@ namespace zypp
 
     int ZYppImpl::applyLocks()
     {
+#warning make the /etc/zypp/locks path an option zconfig.
       Pathname locksrcPath( "/etc/zypp/locks" );
       try
       {

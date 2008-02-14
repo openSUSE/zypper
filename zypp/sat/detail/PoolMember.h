@@ -13,6 +13,8 @@
 #define ZYPP_SAT_DETAIL_POOLMEMBER_H
 
 #include "zypp/base/Iterator.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Easy.h"
 
 extern "C"
 {
@@ -20,6 +22,16 @@ struct _Solvable;
 struct _Repo;
 struct _Pool;
 }
+
+#define ZYPP_DEFINE_ID_HASHABLE(C)           \
+namespace std { namespace tr1 {              \
+  template<class _Tp> struct hash;           \
+  template<> struct hash<C>                  \
+  {                                          \
+    size_t operator()( const C & __s ) const \
+    { return __s.id(); }                     \
+  };                                         \
+}}
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

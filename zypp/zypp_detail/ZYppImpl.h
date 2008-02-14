@@ -17,7 +17,6 @@
 #include "zypp/TmpPath.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
-#include "zypp/Locale.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
@@ -86,18 +85,6 @@ namespace zypp
 
       /** Install a source package on the Target. */
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
-
-    public:
-      typedef std::set<Locale> LocaleSet;
-      /** */
-      void setRequestedLocales( const LocaleSet & locales_r );
-      /** */
-      LocaleSet getRequestedLocales() const;
-      /** */
-      LocaleSet getAvailableLocales() const;
-
-      /** internal use */
-      void availableLocale( const Locale & locale_r );
 
     public:
       /** Get the path where zypp related plugins store persistent data and caches   */

@@ -13,7 +13,7 @@
 #define ZYPP_SAT_CAPABILITY_H
 
 #include <iosfwd>
-#include <set>
+#include <tr1/unordered_set>
 
 #include "zypp/base/SafeBool.h"
 #include "zypp/base/Deprecated.h"
@@ -34,7 +34,7 @@ namespace zypp
   class Capability;
   class CapDetail;
 
-  typedef std::set<Capability> CapabilitySet;
+  typedef std::tr1::unordered_set<Capability> CapabilitySet;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -54,7 +54,7 @@ namespace zypp
    * \endcode
    */
   class Capability: protected sat::detail::PoolMember,
-  private base::SafeBool<Capability>
+                    private base::SafeBool<Capability>
   {
     public:
       // legacy
@@ -302,4 +302,7 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::Capability )
+
 #endif // ZYPP_SAT_CAPABILITY_H

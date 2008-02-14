@@ -41,7 +41,6 @@ namespace zypp
   class ZYppFactory;
   class ResPool;
   class ResPoolProxy;
-  class Locale;
   class KeyRing;
 
   ///////////////////////////////////////////////////////////////////
@@ -129,30 +128,28 @@ namespace zypp
 
   public:
     /** \name move to pool
+     * \deprecated Use ResPool diretcly.
     */
     //@{
-    typedef std::set<Locale> LocaleSet;
     /** Set the requested locales.
      * Languages to be supported by the system, e.g. language specific
      * packages to be installed. This function operates on the pool,
      * so only the locales that are available as resolvables
      * are marked as requested. The rest is ignored.
+     * \deprecated Use ResPool diretcly.
     */
-    void setRequestedLocales( const LocaleSet & locales_r );
-    /** */
-    LocaleSet getRequestedLocales() const;
+    void setRequestedLocales( const LocaleSet & locales_r ) ZYPP_DEPRECATED;
+
+    /** \deprecated Use ResPool diretcly. */
+    const LocaleSet & getRequestedLocales() const ZYPP_DEPRECATED;
 
     /**
      * Get the set of available locales.
      * This is computed from the package data so it actually
      * represents all locales packages claim to support.
+     * \deprecated Use ResPool diretcly.
      */
-    LocaleSet getAvailableLocales() const;
-
-    /**
-     * internal use only
-     **/
-    void availableLocale( const Locale & locale_r );
+    const LocaleSet & getAvailableLocales() const ZYPP_DEPRECATED;
     //@}
 
   public:

@@ -13,9 +13,9 @@
 #define ZYPP_POOL_POOLIMPL_H
 
 #include <iosfwd>
-#include <map>
 
 #include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/base/Deprecated.h"
 
@@ -81,6 +81,12 @@ namespace zypp
         size_type size() const
         { return satpool().solvablesSize(); }
 
+        const_iterator begin() const
+        { return make_filter_begin( pool::ByPoolItem(), store() ); }
+
+        const_iterator end() const
+        { return make_filter_end( pool::ByPoolItem(), store() ); }
+
       public:
         /** Return the corresponding \ref PoolItem.
          * Pool and sat pool should be in sync. Returns an empty
@@ -88,9 +94,7 @@ namespace zypp
          * \see \ref PoolItem::satSolvable.
          */
         PoolItem find( const sat::Solvable & slv_r ) const
-        {
-          return store()[slv_r.id()];
-        }
+        { return store()[slv_r.id()]; }
 
         ///////////////////////////////////////////////////////////////////
         //
@@ -209,30 +213,6 @@ namespace zypp
                   pi = PoolItem( s );
               }
             }
-#if 0
-            // pass 1: delete no longer existing solvables
-            for ( ContainerT::iterator it = _store.begin(); it != _store.end(); /**/ )
-            {
-              if ( ! it->first ) // solvable became invalid
-                _store.erase( it++ ); // postfix! Incrementing before erase
-              else
-                ++it;
-            }
-
-            // pass 2: add new solvables
-            sat::Pool pool( satpool() );
-            if ( _store.size() != pool.solvablesSize() )
-            {
-              for_( it, pool.solvablesBegin(), pool.solvablesEnd() )
-              {
-                PoolItem & pi( _store[*it] );
-                if ( ! pi ) // newly created
-                {
-                  pi = PoolItem( *it );
-                }
-              }
-            }
-#endif
             _storeDirty = false;
           }
           return _store;
@@ -241,23 +221,21 @@ namespace zypp
 	const Id2ItemT & id2item () const
 	{
 	  checkSerial();
-	  if (_id2itemDirty)
+	  if ( _id2itemDirty )
 	  {
-	    _id2itemDirty = false;
 	    store();
-	    _id2item = Id2ItemT(size());
-	    const_iterator it = make_filter_begin( ByPoolItem(), store() );
-	    const_iterator e = make_filter_end( ByPoolItem(), store() );
-	    for (; it != e; ++it)
-	      {
-	        sat::detail::IdType id;
-	        const sat::Solvable &s = (*it)->satSolvable();
-		id = s.ident().id();
-		if (s.isKind( ResKind::srcpackage ))
-		  id = -id;
-		_id2item.insert(std::make_pair(id, *it));
-	      }
-	  }
+	    _id2item = Id2ItemT( size() );
+            for_( it, begin(), end() )
+            {
+              const sat::Solvable &s = (*it)->satSolvable();
+              sat::detail::IdType id = s.ident().id();
+              if ( s.isKind( ResKind::srcpackage ) )
+                id = -id;
+              _id2item.insert( std::make_pair( id, *it ) );
+            }
+            //INT << _id2item << endl;
+	    _id2itemDirty = false;
+          }
 	  return _id2item;
 	}
 
@@ -270,6 +248,7 @@ namespace zypp
         {
           if ( _watcher.remember( serial() ) )
             invalidate();
+          satpool().prepare(); // always ajust dependencies.
         }
 
         void invalidate() const

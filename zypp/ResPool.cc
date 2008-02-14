@@ -104,6 +104,32 @@ namespace zypp
   const pool::PoolTraits::Id2ItemT & ResPool::id2item() const
   { return _pimpl->id2item(); }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Forward to sat::Pool:
+  //
+  ///////////////////////////////////////////////////////////////////
+  void ResPool::setRequestedLocales( const LocaleSet & locales_r )
+  { sat::Pool::instance().setRequestedLocales( locales_r ); }
+
+  bool ResPool::addRequestedLocale( const Locale & locale_r )
+  { return sat::Pool::instance().addRequestedLocale( locale_r ); }
+
+  bool ResPool::eraseRequestedLocale( const Locale & locale_r )
+  { return sat::Pool::instance().eraseRequestedLocale( locale_r ); }
+
+  const LocaleSet & ResPool::getRequestedLocales() const
+  { return sat::Pool::instance().getRequestedLocales(); }
+
+  bool ResPool::isRequestedLocale( const Locale & locale_r ) const
+  { return sat::Pool::instance().isRequestedLocale( locale_r ); }
+
+  const LocaleSet & ResPool::getAvailableLocales() const
+  { return sat::Pool::instance().getAvailableLocales(); }
+
+  bool ResPool::isAvailableLocale( const Locale & locale_r ) const
+  { return sat::Pool::instance().isAvailableLocale( locale_r ); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

@@ -14,8 +14,11 @@
 
 #include <set>
 #include <map>
+#include <list>
+#include <vector>
 #include <tr1/unordered_map>
 
+#include "zypp/base/Iterator.h"
 #include "zypp/base/Iterator.h"
 
 #include "zypp/PoolItem.h"
@@ -41,17 +44,21 @@ namespace zypp
       { return pi; }
     };
 
-    /** Main filter selecting PoolItems bu \c name and \c kind.
+    /** Main filter selecting PoolItems by \c name and \c kind.
      *
     */
     class ByIdent
     {
       public:
-        ByIdent( sat::Solvable slv_r )
+        ByIdent()
+        : _id( 0 )
+        {}
+
+        explicit ByIdent( sat::Solvable slv_r )
         : _id( makeIdent( slv_r ) )
         {}
 
-        ByIdent( IdString ident_r )
+        explicit ByIdent( IdString ident_r )
         : _id( ident_r.id() )
         {}
 
@@ -120,18 +127,27 @@ namespace zypp
     {
     public:
       typedef sat::detail::SolvableIdType		SolvableIdType;
+
       /** pure items  */
-#if 0
-       typedef std::map<sat::Solvable,PoolItem>		ItemContainerT;
-       typedef MapKVIteratorTraits<ItemContainerT>::Value_const_iterator
-       							const_iterator;
-#endif
       typedef std::vector<PoolItem>			ItemContainerT;
       typedef ItemContainerT::const_iterator            item_iterator;
       typedef filter_iterator<ByPoolItem,ItemContainerT::const_iterator>
       							const_iterator;
       typedef ItemContainerT::size_type			size_type;
-      typedef std::tr1::unordered_multimap<sat::detail::IdType, PoolItem>	Id2ItemT;
+
+      /** ident index */
+      typedef std::tr1::unordered_multimap<sat::detail::IdType, PoolItem>
+                                                        Id2ItemT;
+      typedef std::_Select2nd<Id2ItemT::value_type>     Id2ItemValueSelector;
+      typedef transform_iterator<Id2ItemValueSelector, Id2ItemT::const_iterator>
+                                                        byIdent_iterator;
+
+
+      /* list of known Repositories */
+      typedef std::list<Repository>                     RepoContainerT;
+      typedef RepoContainerT::const_iterator		repository_iterator;
+
+
 
       // internal organization
       typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs
@@ -144,9 +160,6 @@ namespace zypp
       /** hashed by capability index */
       typedef const_capitemiterator                     byCapabilityIndex_iterator;
 
-      /* list of known Repositories */
-      typedef std::list<Repository>                     RepoContainerT;
-      typedef RepoContainerT::const_iterator		repository_iterator;
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;

@@ -14,6 +14,7 @@
 
 #include "zypp/ZYpp.h"
 #include "zypp/zypp_detail/ZYppImpl.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -99,16 +100,14 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   void ZYpp::setRequestedLocales( const LocaleSet & locales_r )
-  { _pimpl->setRequestedLocales( locales_r ); }
+  { sat::Pool::instance().setRequestedLocales( locales_r ); }
 
-  ZYpp::LocaleSet ZYpp::getRequestedLocales() const
-  { return _pimpl->getRequestedLocales(); }
+  const LocaleSet & ZYpp::getRequestedLocales() const
+  { return sat::Pool::instance().getRequestedLocales(); }
 
-  ZYpp::LocaleSet ZYpp::getAvailableLocales() const
-  { return _pimpl->getAvailableLocales(); }
+  const LocaleSet & ZYpp::getAvailableLocales() const
+  { return sat::Pool::instance().getAvailableLocales(); }
 
-  void ZYpp::availableLocale( const Locale & locale_r )
-  { _pimpl->availableLocale( locale_r ); }
 
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }

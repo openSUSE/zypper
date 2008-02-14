@@ -223,7 +223,6 @@ SET( zypp_base_HEADERS
   base/Functional.h
   base/Gettext.h
   base/GzStream.h
-  base/Hash.h
   base/IOStream.h
   base/InputStream.h
   base/Iterator.h
@@ -241,7 +240,6 @@ SET( zypp_base_HEADERS
   base/String.h
   base/Regex.h
   base/Sysconfig.h
-  base/UniqueString.h
   base/Unit.h
   base/WatchFile.h
 )

@@ -599,6 +599,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	bool requested_locale_match = false;
 	Capabilities freshens( guess->dep( Dep::FRESHENS ) );
 
+#warning THIS DOES NO LONGER WORK, CREATE SAT::sOLVABLE::WHATEVERISNEEDED (IN DOUBT ASK MA@)
+// We no longer have any 'locale()' deps in FRESHENS!
+// Providing 'bool sat::Solvable::supportsRequestedLocale()' should simplify this code.
+// Maybe an enum instead of bool ( yes, no and via fallback list )
 	// is this a language package ?
 	for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
 	    string citName = cit->asString();
@@ -625,8 +629,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		    break;
 		} else {
 		    freshens = item->dep( Dep::FRESHENS );
-		    ZYpp::Ptr z = zypp::getZYpp();
-		    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
+		    const LocaleSet & requested_locales = sat::Pool::instance().getRequestedLocales();
 
 		    // try to find a match of the locale freshens with one of the requested locales
 

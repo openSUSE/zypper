@@ -49,7 +49,7 @@ namespace zypp
     const SerialNumber & Pool::serial() const
     { return myPool().serial(); }
 
-    void Pool::prepare()
+    void Pool::prepare() const
     { return myPool().prepare(); }
 
     bool Pool::reposEmpty() const
@@ -147,8 +147,30 @@ namespace zypp
       return ret;
     }
 
+    /////////////////////////////////////////////////////////////////
 
-    /******************************************************************
+    void Pool::setRequestedLocales( const LocaleSet & locales_r )
+    { myPool().setRequestedLocales( locales_r ); }
+
+    bool Pool::addRequestedLocale( const Locale & locale_r )
+    { return myPool().addRequestedLocale( locale_r ); }
+
+    bool Pool::eraseRequestedLocale( const Locale & locale_r )
+    { return myPool().eraseRequestedLocale( locale_r ); }
+
+    const LocaleSet & Pool::getRequestedLocales() const
+    { return myPool().getRequestedLocales(); }
+
+    bool Pool::isRequestedLocale( const Locale & locale_r ) const
+    { return myPool().isRequestedLocale( locale_r ); }
+
+    const LocaleSet & Pool::getAvailableLocales() const
+    {  return myPool().getAvailableLocales(); }
+
+    bool Pool::isAvailableLocale( const Locale & locale_r ) const
+    { return myPool().isAvailableLocale( locale_r ); }
+
+   /******************************************************************
     **
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &

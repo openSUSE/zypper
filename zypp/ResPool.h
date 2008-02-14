@@ -28,8 +28,6 @@ namespace zypp
   class SerialNumber;
   class ResPoolProxy;
 
-
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResPool
@@ -43,6 +41,8 @@ namespace zypp
    * the index is not yet implemented, they are realized as
    * an ordinary filter iterator. Do not provide filter iterators
    * here, if there is no index table for it.
+   *
+   * \include n_ResPool_nomorenameiter
   */
   class ResPool
   {
@@ -55,7 +55,7 @@ namespace zypp
       typedef pool::PoolTraits::const_iterator	         const_iterator;
 
       typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-      typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
+      typedef pool::PoolTraits::AdditionalCapabilities	   AdditionalCapabilities;
       typedef pool::PoolTraits::repository_iterator        repository_iterator;
 
     public:
@@ -111,72 +111,69 @@ namespace zypp
     public:
       /** \name Iterate through all PoolItems of a certain name and kind. */
       //@{
-      typedef pool::ByIdent ByIdent;
-      typedef pool::PoolTraits::Id2ItemT        Id2ItemT;
-      typedef transform_iterator<std::_Select2nd<Id2ItemT::value_type>, Id2ItemT::const_iterator> byIdent_iterator;
+      typedef pool::ByIdent                       ByIdent;
+      typedef pool::PoolTraits::byIdent_iterator  byIdent_iterator;
 
-      byIdent_iterator byIdentBegin( sat::detail::IdType id ) const
+      byIdent_iterator byIdentBegin( const ByIdent & ident_r ) const
       {
-        std::pair<Id2ItemT::const_iterator, Id2ItemT::const_iterator> it2
-	      = id2item().equal_range(id);
-	return make_transform_iterator(it2.first, std::_Select2nd<Id2ItemT::value_type>());
-      }
-
-      byIdent_iterator byIdentEnd( sat::detail::IdType id ) const
-      {
-        std::pair<Id2ItemT::const_iterator, Id2ItemT::const_iterator> it2
-	      = id2item().equal_range(id);
-	return make_transform_iterator(it2.second, std::_Select2nd<Id2ItemT::value_type>());
+	return make_transform_iterator( id2item().equal_range( ident_r.get() ).first,
+                                        pool::PoolTraits::Id2ItemValueSelector() );
       }
 
       byIdent_iterator byIdentBegin( ResKind kind_r, IdString name_r ) const
-      { return byIdentBegin( ByIdent(kind_r,name_r).get() ); }
+      { return byIdentBegin( ByIdent(kind_r,name_r) ); }
 
       byIdent_iterator byIdentBegin( ResKind kind_r, const C_Str & name_r ) const
-      { return byIdentBegin( ByIdent(kind_r,name_r).get() ); }
+      { return byIdentBegin( ByIdent(kind_r,name_r) ); }
 
       template<class _Res>
       byIdent_iterator byIdentBegin( IdString name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
+      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
 
       template<class _Res>
       byIdent_iterator byIdentBegin( const C_Str & name_r ) const
-      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
+      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r) ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentBegin( const PoolItem & pi_r ) const
-      { return byIdentBegin( ByIdent(pi_r.satSolvable()).get() ); }
+      { return byIdentBegin( ByIdent(pi_r.satSolvable()) ); }
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentBegin( sat::Solvable slv_r ) const
-      { return byIdentBegin( ByIdent(slv_r).get() ); }
+      { return byIdentBegin( ByIdent(slv_r) ); }
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentBegin( IdString ident_r ) const
-      { return byIdentBegin( ByIdent(ident_r).get() ); }
+      { return byIdentBegin( ByIdent(ident_r) ); }
 
+
+      byIdent_iterator byIdentEnd( const ByIdent & ident_r ) const
+      {
+	return make_transform_iterator( id2item().equal_range( ident_r.get() ).second,
+                                        pool::PoolTraits::Id2ItemValueSelector() );
+      }
 
       byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
-      { return byIdentEnd( ByIdent(kind_r,name_r).get() ); }
+      { return byIdentEnd( ByIdent(kind_r,name_r) ); }
 
       byIdent_iterator byIdentEnd( ResKind kind_r, const C_Str & name_r ) const
-      { return byIdentEnd( ByIdent(kind_r,name_r).get() ); }
+      { return byIdentEnd( ByIdent(kind_r,name_r) ); }
 
       template<class _Res>
       byIdent_iterator byIdentEnd( IdString name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
+      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
 
       template<class _Res>
       byIdent_iterator byIdentEnd( const C_Str & name_r ) const
-      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
+      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r) ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
-      { return byIdentEnd( ByIdent(pi_r.satSolvable()).get() ); }
+      { return byIdentEnd( ByIdent(pi_r.satSolvable()) ); }
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
-      { return byIdentEnd( ByIdent(slv_r).get() ); }
+      { return byIdentEnd( ByIdent(slv_r) ); }
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentEnd( IdString ident_r ) const
-      { return byIdentEnd( ByIdent(ident_r).get() ); }
+      { return byIdentEnd( ByIdent(ident_r) ); }
      //@}
 
     public:
@@ -236,7 +233,45 @@ namespace zypp
       repository_iterator knownRepositoriesEnd() const;
       //@}
 
-    public:
+     public:
+      /** \name Iterate through requested/available Locales.
+       */
+      //@{
+      /** Set the requested locales.
+       * Languages to be supported by the system, e.g. language specific
+       * packages to be installed.
+       */
+      void setRequestedLocales( const LocaleSet & locales_r );
+
+      /** Add one \ref Locale to the set of requested locales.
+       * Return \c true if \c locale_r was newly added to the set.
+      */
+      bool addRequestedLocale( const Locale & locale_r );
+
+      /** Erase one \ref Locale from the set of requested locales.
+      * Return \c false if \c locale_r was not found in the set.
+       */
+      bool eraseRequestedLocale( const Locale & locale_r );
+
+      /** Return the requested locales.
+       * \see \ref setRequestedLocales
+      */
+      const LocaleSet & getRequestedLocales() const;
+
+      /** Wheter this \ref Locale is in the set of requested locales. */
+      bool isRequestedLocale( const Locale & locale_r ) const;
+
+      /** Get the set of available locales.
+       * This is computed from the package data so it actually
+       * represents all locales packages claim to support.
+       */
+      const LocaleSet & getAvailableLocales() const;
+
+      /** Wheter this \ref Locale is in the set of available locales. */
+      bool isAvailableLocale( const Locale & locale_r ) const;
+      //@}
+
+   public:
       /** \name Handling addition capabilities in the pool in order for solving it in
        *  a solver run. This is used for tasks like needing a package with the name "foo".
        *  The solver has to evaluate a proper package by his own.
