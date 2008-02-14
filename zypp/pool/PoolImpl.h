@@ -47,6 +47,7 @@ namespace zypp
         typedef PoolTraits::ItemContainerT		ContainerT;
         typedef PoolTraits::size_type			size_type;
         typedef PoolTraits::const_iterator		const_iterator;
+	typedef PoolTraits::Id2ItemT			Id2ItemT;
 
         typedef sat::detail::SolvableIdType		SolvableIdType;
 
@@ -237,6 +238,30 @@ namespace zypp
           return _store;
         }
 
+	const Id2ItemT & id2item () const
+	{
+	  checkSerial();
+	  if (_id2itemDirty)
+	  {
+	    _id2itemDirty = false;
+	    store();
+	    _id2item = Id2ItemT(size());
+	    const_iterator it = make_filter_begin( ByPoolItem(), store() );
+	    const_iterator e = make_filter_end( ByPoolItem(), store() );
+	    for (; it != e; ++it)
+	      {
+	        sat::detail::IdType id;
+	        const sat::Solvable &s = (*it)->satSolvable();
+		id = s.ident().id();
+		if (s.isKind( ResKind::srcpackage ))
+		  id = -id;
+		_id2item.insert(std::make_pair(id, *it));
+	      }
+	  }
+	  return _id2item;
+	}
+
+
         ///////////////////////////////////////////////////////////////////
         //
         ///////////////////////////////////////////////////////////////////
@@ -250,6 +275,8 @@ namespace zypp
         void invalidate() const
         {
           _storeDirty = true;
+	  _id2itemDirty = true;
+	  _id2item.clear();
           _poolProxy.reset();
           _knownRepositoriesPtr.reset();
         }
@@ -259,6 +286,8 @@ namespace zypp
         SerialNumberWatcher                   _watcher;
         mutable ContainerT                    _store;
         mutable DefaultIntegral<bool,true>    _storeDirty;
+	mutable Id2ItemT		      _id2item;
+        mutable DefaultIntegral<bool,true>    _id2itemDirty;
 
       private:
         mutable AdditionalCapabilities        _additionalRequire;

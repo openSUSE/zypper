@@ -14,6 +14,7 @@
 
 #include <set>
 #include <map>
+#include <tr1/unordered_map>
 
 #include "zypp/base/Iterator.h"
 
@@ -130,6 +131,7 @@ namespace zypp
       typedef filter_iterator<ByPoolItem,ItemContainerT::const_iterator>
       							const_iterator;
       typedef ItemContainerT::size_type			size_type;
+      typedef std::tr1::unordered_multimap<sat::detail::IdType, PoolItem>	Id2ItemT;
 
       // internal organization
       typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs

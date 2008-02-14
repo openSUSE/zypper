@@ -112,56 +112,71 @@ namespace zypp
       /** \name Iterate through all PoolItems of a certain name and kind. */
       //@{
       typedef pool::ByIdent ByIdent;
-      typedef filter_iterator<ByIdent,const_iterator> byIdent_iterator;
+      typedef pool::PoolTraits::Id2ItemT        Id2ItemT;
+      typedef transform_iterator<std::_Select2nd<Id2ItemT::value_type>, Id2ItemT::const_iterator> byIdent_iterator;
+
+      byIdent_iterator byIdentBegin( sat::detail::IdType id ) const
+      {
+        std::pair<Id2ItemT::const_iterator, Id2ItemT::const_iterator> it2
+	      = id2item().equal_range(id);
+	return make_transform_iterator(it2.first, std::_Select2nd<Id2ItemT::value_type>());
+      }
+
+      byIdent_iterator byIdentEnd( sat::detail::IdType id ) const
+      {
+        std::pair<Id2ItemT::const_iterator, Id2ItemT::const_iterator> it2
+	      = id2item().equal_range(id);
+	return make_transform_iterator(it2.second, std::_Select2nd<Id2ItemT::value_type>());
+      }
 
       byIdent_iterator byIdentBegin( ResKind kind_r, IdString name_r ) const
-      { return make_filter_begin( ByIdent(kind_r,name_r), *this ); }
+      { return byIdentBegin( ByIdent(kind_r,name_r).get() ); }
 
       byIdent_iterator byIdentBegin( ResKind kind_r, const C_Str & name_r ) const
-      { return make_filter_begin( ByIdent(kind_r,name_r), *this ); }
+      { return byIdentBegin( ByIdent(kind_r,name_r).get() ); }
 
       template<class _Res>
       byIdent_iterator byIdentBegin( IdString name_r ) const
-      { return make_filter_begin( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
 
       template<class _Res>
       byIdent_iterator byIdentBegin( const C_Str & name_r ) const
-      { return make_filter_begin( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+      { return byIdentBegin( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentBegin( const PoolItem & pi_r ) const
-      { return make_filter_begin( ByIdent(pi_r.satSolvable()), *this ); }
+      { return byIdentBegin( ByIdent(pi_r.satSolvable()).get() ); }
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentBegin( sat::Solvable slv_r ) const
-      { return make_filter_begin( ByIdent(slv_r), *this ); }
+      { return byIdentBegin( ByIdent(slv_r).get() ); }
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentBegin( IdString ident_r ) const
-      { return make_filter_begin( ByIdent(ident_r), *this ); }
+      { return byIdentBegin( ByIdent(ident_r).get() ); }
 
 
       byIdent_iterator byIdentEnd( ResKind kind_r, IdString name_r ) const
-      { return make_filter_end( ByIdent(kind_r,name_r), *this ); }
+      { return byIdentEnd( ByIdent(kind_r,name_r).get() ); }
 
       byIdent_iterator byIdentEnd( ResKind kind_r, const C_Str & name_r ) const
-      { return make_filter_end( ByIdent(kind_r,name_r), *this ); }
+      { return byIdentEnd( ByIdent(kind_r,name_r).get() ); }
 
       template<class _Res>
       byIdent_iterator byIdentEnd( IdString name_r ) const
-      { return make_filter_end( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
 
       template<class _Res>
       byIdent_iterator byIdentEnd( const C_Str & name_r ) const
-      { return make_filter_end( ByIdent(ResTraits<_Res>::kind,name_r), *this ); }
+      { return byIdentEnd( ByIdent(ResTraits<_Res>::kind,name_r).get() ); }
 
       /** Derive name and kind from \ref PoolItem. */
       byIdent_iterator byIdentEnd( const PoolItem & pi_r ) const
-      { return make_filter_end( ByIdent(pi_r.satSolvable()), *this ); }
+      { return byIdentEnd( ByIdent(pi_r.satSolvable()).get() ); }
       /** Derive name and kind from \ref sat::Solvable. */
       byIdent_iterator byIdentEnd( sat::Solvable slv_r ) const
-      { return make_filter_end( ByIdent(slv_r), *this ); }
+      { return byIdentEnd( ByIdent(slv_r).get() ); }
       /** Takes a \ref sat::Solvable::ident string. */
       byIdent_iterator byIdentEnd( IdString ident_r ) const
-      { return make_filter_end( ByIdent(ident_r), *this ); }
+      { return byIdentEnd( ByIdent(ident_r).get() ); }
      //@}
 
     public:
@@ -286,6 +301,7 @@ namespace zypp
 
     private:
       const pool::PoolTraits::ItemContainerT & store() const;
+      const pool::PoolTraits::Id2ItemT & id2item() const;
 
     private:
       /** Ctor */

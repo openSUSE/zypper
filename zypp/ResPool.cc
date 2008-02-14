@@ -101,6 +101,9 @@ namespace zypp
   const pool::PoolTraits::ItemContainerT & ResPool::store() const
   { return _pimpl->store(); }
 
+  const pool::PoolTraits::Id2ItemT & ResPool::id2item() const
+  { return _pimpl->id2item(); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
