@@ -29,7 +29,7 @@ namespace sat
   const SolvAttr SolvAttr::delnotify    ( "delnotify" );
   const SolvAttr SolvAttr::vendor       ( "vendor" );
   const SolvAttr SolvAttr::license      ( "license" );
-  const SolvAttr SolvAttr::size         ( "size" );
+  const SolvAttr SolvAttr::size         ( "installsize" );
   const SolvAttr SolvAttr::downloadsize ( "downloadsize" );
   
   //package
