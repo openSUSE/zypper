@@ -231,9 +231,9 @@ Capability safe_parse_cap (const Zypper & zypper,
       // get the installed version
       VersionGetter vg;
       invokeOnEach(
-          God->pool().byNameBegin(capstr),
-          God->pool().byNameEnd(capstr),
-          chain(ByKind(kind),ByInstalled()),
+          God->pool().byIdentBegin(kind, capstr),
+          God->pool().byIdentEnd(kind,capstr),
+          ByInstalled(),
           functorRef<bool,const zypp::PoolItem&> (vg));
       // installed found
       if (vg.found)
@@ -241,9 +241,9 @@ Capability safe_parse_cap (const Zypper & zypper,
         // check for newer version of that resolvable
         NewerVersionGetter nvg(vg.edition);
         invokeOnEach(
-             God->pool().byNameBegin(capstr),
-             God->pool().byNameEnd(capstr),
-             chain(resfilter::ByKind(kind),not_c(ByInstalled())),
+             God->pool().byIdentBegin(kind, capstr),
+             God->pool().byIdentEnd(kind,capstr),
+             not_c(ByInstalled()),
              functorRef<bool,const zypp::PoolItem&> (nvg));
         // newer version found
         if (nvg.found)
@@ -271,16 +271,14 @@ void mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
 		      const std::string &name)
 {
-  const ResPool &pool = God->pool();
   // name and kind match:
-
-  ProvideProcess installer (God->architecture(), "" /*version*/);
+  ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
   cout_vv << "Iterating over [" << kind << "]" << name << endl;
-  invokeOnEach( pool.byNameBegin( name ),
-		pool.byNameEnd( name ),
-		resfilter::ByKind( kind ),
-		zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer)
-		);
+  invokeOnEach(
+      God->pool().byIdentBegin(kind, name),
+      God->pool().byIdentEnd(kind, name),
+      zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer));
+
   cout_vv << "... done" << endl;
   if (!installer.item) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
@@ -350,10 +348,9 @@ void mark_for_uninstall(Zypper & zypper,
 
   DeleteProcess deleter;
   cerr_vv << "Iterating over " << name << endl;
-  invokeOnEach( pool.byNameBegin( name ),
-		pool.byNameEnd( name ),
-		functor::chain (resfilter::ByInstalled(),
-				resfilter::ByKind( kind )),
+  invokeOnEach( pool.byIdentBegin( kind, name ),
+		pool.byIdentEnd( kind, name ),
+		resfilter::ByInstalled(),
 		zypp::functor::functorRef<bool,const zypp::PoolItem&> (deleter)
 		);
   cerr_vv << "... done" << endl;
@@ -1212,17 +1209,15 @@ findArchUpdateItem( const ResPool & pool, PoolItem item )
 {
   LookForArchUpdate info;
 
-  invokeOnEach( pool.byNameBegin( item->name() ),
-		pool.byNameEnd( item->name() ),
-		// get uninstalled, equal kind and arch, better edition
-		functor::chain (
-		  functor::chain (
-		    functor::chain (
-		      resfilter::ByUninstalled (),
-		      resfilter::ByKind( item->kind() ) ),
-		    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
-		  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
-		functor::functorRef<bool,PoolItem> (info) );
+  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
+                pool.byIdentEnd( item->kind(), item->name() ),
+                // get uninstalled, equal kind and arch, better edition
+                functor::chain (
+                  functor::chain (
+                    resfilter::ByUninstalled (),
+                    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
+                  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
+                functor::functorRef<bool,PoolItem> (info) );
 
   _XDEBUG("findArchUpdateItem(" << item << ") => " << info.best);
   return info.best;
@@ -1348,13 +1343,10 @@ findInstalledItem( PoolItem item )
   const zypp::ResPool& pool = God->pool();
   LookForArchUpdate info;
 
-  invokeOnEach( pool.byNameBegin( item->name() ),
-		pool.byNameEnd( item->name() ),
-		// get installed, equal kind
-		functor::chain (
-		  resfilter::ByInstalled (),
-		  resfilter::ByKind( item->kind() ) ),
-		functor::functorRef<bool,PoolItem> (info) );
+  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
+                pool.byIdentEnd( item->kind(), item->name() ),
+                resfilter::ByInstalled (),
+                functor::functorRef<bool,PoolItem> (info) );
 
   _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
   return info.best;
