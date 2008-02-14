@@ -227,6 +227,48 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
     return;
 }
 
+
+//----------------------------------------------------------------------------
+// helper functions for distupgrade
+//----------------------------------------------------------------------------
+
+PoolItemList SATResolver::whoProvides(Capability cap) {
+    PoolItemList itemList;
+    Id p, *pp;
+    Repo *installedRepo = sat::Pool::instance().systemRepo().get();
+    for (pp = pool_whatprovides(_SATPool, cap.id()) ; (p = *pp++) != 0; ) {
+	Solvable *solvable = _SATPool->solvables + p;
+	PoolItem item = _pool.find (sat::Solvable(p));
+	if (item &&
+	    (!installedRepo || solvable->repo != installedRepo) ) {
+	    itemList.push_back (item);
+	    MIL << item << " provides " << cap << endl;
+	}
+    }
+    return itemList;
+}
+
+bool SATResolver::doesObsoleteItem (PoolItem candidate, PoolItem installed) {
+  Solvable *sCandidate = _SATPool->solvables + candidate.satSolvable().id();
+  Repo *installedRepo = sat::Pool::instance().systemRepo().get();
+  
+  Id p, *pp, obsolete, *obsoleteIt;
+  
+  if ((!installedRepo || sCandidate->repo != installedRepo) && sCandidate->obsoletes) {
+      obsoleteIt = sCandidate->repo->idarraydata + sCandidate->obsoletes;
+      while ((obsolete = *obsoleteIt++) != 0)
+      {
+	  for (pp = pool_whatprovides(_SATPool, obsolete) ; (p = *pp++) != 0; ) {
+	      if (p > 0 &&  installed.satSolvable().id() == (sat::detail::SolvableIdType)p) {
+		  MIL << candidate << " obsoletes " << installed << endl;
+		  return true;
+	      }
+	  }
+      }
+  }
+  return false;
+}
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // resolvePool

@@ -136,6 +136,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     
     bool dosplitprovides () const {return _dosplitprovides;}
     void setDosplitprovides ( const bool dosplitprovides) { _dosplitprovides = dosplitprovides;}
+
+    PoolItemList whoProvides(Capability cap);
+    bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 };
 
 ///////////////////////////////////////////////////////////////////

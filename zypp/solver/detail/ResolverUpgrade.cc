@@ -56,6 +56,7 @@
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
 #include "zypp/Target.h"
+#include "zypp/sat/SATResolver.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -140,112 +141,13 @@ downgrade_allowed( PoolItem installed, PoolItem candidate, bool silent_downgrade
 }
 
 
-
-struct FindObsoletes
-{
-    bool obsoletes;
-
-    FindObsoletes ()
-	: obsoletes (false)
-    { }
-
-    bool operator()( const CapAndItem & cai )
-    {
-	obsoletes = true;				// we have a match
-	return false;					// stop looping here
-    }
-};
-
-
-// does the candidate obsolete the capability ?
-
-bool
-Resolver::doesObsoleteCapability (PoolItem candidate, const Capability & cap)
-{
-    _DEBUG("doesObsoleteCapability " << candidate << ", " << cap);
-
-    Dep dep (Dep::OBSOLETES);
-    FindObsoletes info;
-    invokeOnEach( _pool.byCapabilityIndexBegin( cap.index(), dep ),
-		  _pool.byCapabilityIndexEnd( cap.index(), dep ),
-		  resfilter::ByCapMatch( cap ),
-		  functor::functorRef<bool,CapAndItem>(info) );
-
-    _DEBUG((info.obsoletes ? "YES" : "NO"));
-    return info.obsoletes;
-}
-
-
 bool
 Resolver::doesObsoleteItem (PoolItem candidate, PoolItem installed)
 {
-    Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
-    return doesObsoleteCapability (candidate, installedCap);
+    return _satResolver->doesObsoleteItem (candidate, installed);
 }
 
 //-----------------------------------------------------------------------------
-
-// find best available providers for installed name
-
-typedef map<string, PoolItem> FindMap;
-
-struct FindProviders
-{
-    FindMap providers;		// the best providers which matched
-    PoolItem forItem;
-    bool otherVendorFound;
-    FindProviders (PoolItem item)
-	:forItem(item),
-	 otherVendorFound(false)
-    { }
-
-    bool operator()( const CapAndItem & cai )
-    {
-	PoolItem provider( cai.item );
-	if ( !VendorAttr::instance().equivalent(provider->vendor(), forItem->vendor()) )
-	{
-	    MIL << "Discarding '" << provider << "' from vendor '"
-		<< provider->vendor() << "' different to uninstalled '"
-		<< forItem->vendor() << "' vendor." << endl;
-	    otherVendorFound = true;
-	} else if ( provider.status().isToBeUninstalled() ) {
-	    MIL << "  IGNORE relation match (package is tagged to delete): " << cai.cap << " ==> " << provider << endl;
-	}
-	else {
-	    FindMap::iterator it = providers.find( provider->name() );
-
-	    if (it != providers.end()) {				// provider with same name found
-		if (provider.status().isToBeInstalled()
-		    || it->second.status().isToBeInstalled()) {
-
-		    if (provider.status().isToBeInstalled()
-			&& it->second.status().isToBeInstalled()) {
-			ERR << "only one should be set for installation: " << it->second << "; " << provider << endl;
-		    } else {
-			if (provider.status().isToBeInstalled()) {
-			    it->second = provider; // take thatone which is already set for installation
-			}
-		    }
-		} else {
-		    // not the same --> find better provider
-		    int cmp = it->second->arch().compare( provider->arch() );
-		    if (cmp < 0) {						// new provider has better arch
-			it->second = provider;
-		    }
-		    else if (cmp == 0) {					// new provider has equal arch
-			if (it->second->edition().compare( provider->edition() ) < 0) {
-			    it->second = provider;				// new provider has better edition
-			}
-		    }
-		}
-	    }
-	    else {
-		providers[provider->name()] = provider;
-	    }
-	}
-	return true;
-    }
-};
 
 
 //-----------------------------------------------------------------------------
@@ -312,6 +214,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
+
+  sat::Pool::instance().prepare();  
 
   Target_Ptr target;
   try {
@@ -524,30 +428,70 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // If unique provides exists check if obsoleted (replaced).
       // Remember new package for 2nd pass.
 
-      Dep dep (Dep::PROVIDES);
       Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
+      // find ALL providers
+      PoolItemList possibleProviders = _satResolver->whoProvides (installedCap);
 
-      FindProviders info(installed);
+      // find best available providers for installed name
+      typedef map<string, PoolItem> FindMap;
+      FindMap providersMap;		// the best providers which matched
+      bool otherVendorFound = false;
+      for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
+	  PoolItem provider = *iter;
+	  if ( !VendorAttr::instance().equivalent(provider->vendor(), installed->vendor()) )
+	  {
+	      MIL << "Discarding '" << provider << "' from vendor '"
+		  << provider->vendor() << "' different to uninstalled '"
+		  << installed->vendor() << "' vendor." << endl;
+	      otherVendorFound = true;
+	  } else if ( provider.status().isToBeUninstalled() ) {
+	      MIL << "  IGNORE relation match (package is tagged to delete): " << provider << endl;
+	  }
+	  else {
+	      FindMap::iterator it = providersMap.find( provider->name() );
 
-      invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
-		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
-		    functor::chain( resfilter::ByCaIUninstalled(),
-				    resfilter::ByCapMatch( installedCap ) ) ,
-		    functor::functorRef<bool,CapAndItem>(info) );
+	      if (it != providersMap.end()) {				// provider with same name found
+		  if (provider.status().isToBeInstalled()
+		      || it->second.status().isToBeInstalled()) {
 
-      int num_providers = info.providers.size();
+		      if (provider.status().isToBeInstalled()
+			  && it->second.status().isToBeInstalled()) {
+			  ERR << "only one should be set for installation: " << it->second << "; " << provider << endl;
+		      } else {
+			  if (provider.status().isToBeInstalled()) {
+			      it->second = provider; // take thatone which is already set for installation
+			  }
+		      }
+		  } else {
+		      // not the same --> find better provider
+		      int cmp = it->second->arch().compare( provider->arch() );
+		      if (cmp < 0) {						// new provider has better arch
+			  it->second = provider;
+		      }
+		      else if (cmp == 0) {					// new provider has equal arch
+			  if (it->second->edition().compare( provider->edition() ) < 0) {
+			      it->second = provider;				// new provider has better edition
+			  }
+		      }
+		  }
+	      }
+	      else {
+		  providersMap[provider->name()] = provider;
+	      }
+	  }
+      }
 
-      _DEBUG("lookup " << num_providers << " provides for installed " << installedCap);
+      _DEBUG("lookup " << providersMap.size() << " provides for installed " << installedCap);
 
       // copy from map to set
       PoolItemOrderSet providers;
-      for (FindMap::const_iterator mapit = info.providers.begin(); mapit != info.providers.end(); ++mapit) {
+      for (FindMap::const_iterator mapit = providersMap.begin(); mapit != providersMap.end(); ++mapit) {
 	providers.insert( mapit->second );
       }
 
-      switch ( info.providers.size() ) {
+      switch ( providersMap.size() ) {
       case 0:
-	  if (info.otherVendorFound) {
+	  if (otherVendorFound) {
 	      MIL << " only resolvable with other vendor found ==> do nothing" << endl;
 	  } else {
 	      MIL << " ==> (dropped)" << endl;
