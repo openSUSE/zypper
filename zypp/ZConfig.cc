@@ -216,6 +216,10 @@ namespace zypp
                 {
                   cfg_vendor_path = Pathname(value);
                 }
+                else if ( entry == "packagesdir" )
+                {
+                  cfg_packages_path = Pathname(value);
+                }
               }
             }
           }
@@ -249,6 +253,7 @@ namespace zypp
     Locale   cfg_textLocale;
 
     Pathname cfg_metadata_path;
+    Pathname cfg_packages_path;
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_vendor_path;
@@ -345,6 +350,12 @@ namespace zypp
   {
     return ( _pimpl->cfg_metadata_path.empty()
         ? Pathname("/var/cache/zypp/raw") : _pimpl->cfg_metadata_path );
+  }
+
+  Pathname ZConfig::repoPackagesPath() const
+  {
+    return ( _pimpl->cfg_packages_path.empty()
+        ? Pathname("/var/cache/zypp/packages") : _pimpl->cfg_packages_path );
   }
 
   Pathname ZConfig::repoCachePath() const

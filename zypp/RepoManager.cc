@@ -67,6 +67,7 @@ namespace zypp
   {
     repoCachePath    = ZConfig::instance().repoCachePath();
     repoRawCachePath = ZConfig::instance().repoMetadataPath();
+    repoPackagesCachePath = ZConfig::instance().repoPackagesPath();
     knownReposPath   = ZConfig::instance().knownReposPath();
   }
 
@@ -197,6 +198,15 @@ namespace zypp
     return opt.repoRawCachePath + info.alias();
   }
 
+  /**
+   * \short Calculates the packages cache path for a repository
+   */
+  static Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  {
+    assert_alias(info);
+    return opt.repoPackagesCachePath + info.alias();
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManager::Impl
@@ -277,6 +287,10 @@ namespace zypp
         // set the metadata path for the repo
         Pathname metadata_path = rawcache_path_for_repoinfo(_pimpl->options, (*it));
         (*it).setMetadataPath(metadata_path);
+	
+	// set the downloaded packages path for the repo
+	Pathname packages_path = packagescache_path_for_repoinfo(_pimpl->options, (*it));
+	(*it).setPackagesPath(packages_path);
       }
       return repos;
     }
@@ -599,10 +613,17 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-        TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
-        filesystem::rename( rawpath, oldmetadata.path() );
+	
+	// first, clean up the old rawcache metadata
+	// #FIXME	
+	// now, move the new metadata in
+	// #FIXME
+	
+        //TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
+        //filesystem::rename( rawpath, oldmetadata.path() );
         // move the just downloaded there
-        filesystem::rename( tmpdir.path(), rawpath );
+        //filesystem::rename( tmpdir.path(), rawpath );
+
         // we are done.
         return;
       }

@@ -33,6 +33,7 @@ namespace zypp
       : enabled (false),
         autorefresh(false),
         gpgcheck(true),
+	keeppackages(false),
         type(repo::RepoType::NONE_e)
     {}
 
@@ -44,6 +45,7 @@ namespace zypp
     bool enabled;
     bool autorefresh;
     bool gpgcheck;
+    bool keeppackages;
     Url gpgkey_url;
     repo::RepoType type;
     Url mirrorlist_url;
@@ -54,6 +56,7 @@ namespace zypp
     std::string name;
     Pathname filepath;
     Pathname metadatapath;
+    Pathname packagespath;
   public:
 
   private:
@@ -185,6 +188,18 @@ namespace zypp
     return *this;
   }
 
+  RepoInfo & RepoInfo::setPackagesPath( const Pathname &path )
+  {
+    _pimpl->packagespath = path;
+    return *this;
+  }
+
+  RepoInfo & RepoInfo::setKeepPackages( bool keep )
+  {
+    _pimpl->keeppackages = keep;
+    return *this;
+  }
+
   bool RepoInfo::enabled() const
   { return _pimpl->enabled; }
 
@@ -216,6 +231,9 @@ namespace zypp
 
   Pathname RepoInfo::metadataPath() const
   { return _pimpl->metadatapath; }
+
+  Pathname RepoInfo::packagesPath() const
+  { return _pimpl->packagespath; }
 
   repo::RepoType RepoInfo::type() const
   { return _pimpl->type; }
@@ -264,6 +282,9 @@ namespace zypp
   bool RepoInfo::baseUrlsEmpty() const
   { return _pimpl->baseUrls.empty(); }
 
+  bool RepoInfo::keepPackages() const
+  { return _pimpl->keeppackages; }
+
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
     str << "--------------------------------------" << std::endl;
@@ -281,6 +302,7 @@ namespace zypp
     str << "- autorefresh : " << autorefresh() << std::endl;
     str << "- gpgcheck : " << gpgCheck() << std::endl;
     str << "- gpgkey : " << gpgKeyUrl() << std::endl;
+    str << "- keeppackages : " << keepPackages() << std::endl;
 
     return str;
   }
@@ -312,6 +334,8 @@ namespace zypp
     str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
     if ( ! (gpgKeyUrl().asString().empty()) )
       str << "gpgkey=" <<gpgKeyUrl() << endl;
+      
+    str << "keeppackages=" << keepPackages() << endl;
 
     return str;
   }

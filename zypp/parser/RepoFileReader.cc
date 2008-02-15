@@ -69,6 +69,8 @@ namespace zypp
             info.setGpgKeyUrl( Url(it->second) );
           else if ( it->first == "gpgcheck" )
             info.setGpgCheck( it->second == "1" );
+	  else if ( it->first == "keeppackages" )
+	    info.setKeepPackages( it->second == "1" );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }

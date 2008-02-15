@@ -189,6 +189,11 @@ namespace zypp
      Pathname metadataPath() const;
 
      /**
+     * \short Path where this repo packages are cached
+     */
+     Pathname packagesPath() const;
+
+     /**
      * \short Whether to check or not this repository with gpg
      *
      * \note This is a just a hint to the application and can
@@ -207,6 +212,11 @@ namespace zypp
      *
      */
      Url gpgKeyUrl() const;
+
+    /**
+     * \short Whether to keep the packages downloaded from this repository will be kept in local cache
+     */
+    bool keepPackages() const;
 
     /**
      * Add a base url. \see baseUrls
@@ -285,6 +295,13 @@ namespace zypp
     RepoInfo & setMetadataPath( const Pathname &path );
 
     /**
+     * \short set the path where the local packages are stored
+     *
+     * \param path directory path
+     */
+    RepoInfo & setPackagesPath( const Pathname &path );
+
+    /**
      * \short Whether to check or not this repository with gpg
      *
      * \param check true (check) or false (dont'check)
@@ -305,6 +322,17 @@ namespace zypp
      *
      */
     RepoInfo & setGpgKeyUrl( const Url &gpgkey );
+    
+    /**
+     * \short Set if the packaqes downloaded from this repository will be kept in local cache
+     *
+     * If the setting is true, all downloaded packages from this repository will be 
+     * copied to the local raw cache.
+     *
+     * \param keep true (keep the downloaded packages) or false (delete them after installation)
+     *
+     */
+    RepoInfo & setKeepPackages( bool keep );
 
     /**
      * Write a human-readable representation of this RepoInfo object

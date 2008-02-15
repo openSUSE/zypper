@@ -139,8 +139,13 @@ namespace zypp
       {
         // does the current file exists in the current cache?
         Pathname cached_file = *it_cache + (*it_res)->location.filename();
+	
+	MIL << "Trying cached file: " << cached_file << endl;
+	
         if ( PathInfo( cached_file ).isExist() )
         {
+	  MIL << "File exist, testing checksum " << (*it_res)->location.checksum() << endl;
+
           // check the checksum
           if ( is_checksum( cached_file, (*it_res)->location.checksum() ) && (! (*it_res)->location.checksum().empty() ) )
           {
@@ -151,16 +156,20 @@ namespace zypp
 
             // replicate the complete path in the target directory
             Pathname dest_full_path = dest_dir + (*it_res)->location.filename();
-            if ( assert_dir( dest_full_path.dirname() ) != 0 )
-              ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
+	    
+	    if( dest_full_path != cached_file )
+	    {
+              if ( assert_dir( dest_full_path.dirname() ) != 0 )
+                ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
 
-            if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
-            { //copy_file2dir
-              //ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
-              ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
-              // try next cache
-              continue;
-            }
+              if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
+              { //copy_file2dir
+                //ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
+                ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
+                // try next cache
+                continue;
+              }
+	    }
 
             got_from_cache = true;
             break;
@@ -170,6 +179,8 @@ namespace zypp
 
       if ( ! got_from_cache )
       {
+        MIL << "Not found in cache, downloading" << endl;
+	
         // try to get the file from the net
         try
         {

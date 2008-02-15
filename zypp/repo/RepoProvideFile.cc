@@ -28,6 +28,7 @@
 #include "zypp/repo/SUSEMediaVerifier.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/FileChecker.h"
+#include "zypp/Fetcher.h"
 
 using std::endl;
 using std::set;
@@ -214,7 +215,12 @@ namespace zypp
         repo_excpt.remember(RepoException(_("No url in repository.")));
         ZYPP_THROW(repo_excpt);
       }
+
+      Fetcher fetcher;
+      fetcher.addCachePath( info.packagesPath() );
       
+      MIL << "Added cache path " << info.packagesPath() << endl;
+            
       for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
             it != info.baseUrlsEnd();
             /* incremented in the loop */ )
@@ -227,11 +233,17 @@ namespace zypp
               << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
           _impl->setVerifierForRepo(repo_r, access);
+	  
+	  fetcher.enqueue( loc_r );
+	  
+	  // FIXME: works for packages only
+	  fetcher.start( info.packagesPath(), *access );
 
-          ManagedFile ret( access->provideFile(loc_r) );
+	  // reached if no exception has been thrown, so this is the correct file
+          ManagedFile ret( info.packagesPath() + loc_r.filename() );
 
           std::string scheme( url.getScheme() );
-          if ( scheme == "http" || scheme == "https" || scheme == "ftp" )
+          if ( !info.keepPackages() )
           {
             ret.setDispose( filesystem::unlink );
           }

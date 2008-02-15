@@ -52,6 +52,7 @@ namespace zypp
 
     Pathname repoCachePath;
     Pathname repoRawCachePath;
+    Pathname repoPackagesCachePath;
     Pathname knownReposPath;
   };
 

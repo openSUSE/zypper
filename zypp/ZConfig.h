@@ -93,6 +93,11 @@ namespace zypp
       Pathname repoMetadataPath() const;
 
       /**
+       * Path where the repo packages are downloaded and kept.
+       */
+      Pathname repoPackagesPath() const;
+
+      /**
        * Path where the processed cache is kept
        * (this is where zypp.db is located.
        */
