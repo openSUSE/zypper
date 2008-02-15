@@ -616,7 +616,7 @@ namespace zypp
 	
         TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
         filesystem::rename( rawpath, oldmetadata.path() );
-         move the just downloaded there
+        // move the just downloaded there
         filesystem::rename( tmpdir.path(), rawpath );
 
         // we are done.
