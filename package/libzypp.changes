@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 15 10:52:59 CET 2008 - coolo@suse.de
+
+- using .solv files only now (fate #303018)
+- revision 8699
+
+-------------------------------------------------------------------
 Tue Feb 12 17:10:48 CET 2008 - coolo@suse.de
 
 - fix architectures on distupgrade
