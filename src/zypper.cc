@@ -290,7 +290,10 @@ void Zypper::processGlobalOptions()
 
   // create output object
   if (gopts.count("xmlout"))
+  {
     _out_ptr = new OutXML(verbosity);
+    _gopts.machine_readable = true;
+  }
   else
     _out_ptr = new OutNormal(verbosity);
 
