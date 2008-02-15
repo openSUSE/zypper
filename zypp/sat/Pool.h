@@ -18,6 +18,7 @@
 
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/sat/WhatProvides.h"
 #include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -129,6 +130,11 @@ namespace zypp
 
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
+
+      public:
+        /** Conainer of all \ref Solvable providing \c cap_r.  */
+        WhatProvides whatProvides( Capability cap_r ) const
+        { return WhatProvides( cap_r ); }
 
       public:
         /** \name Requested locales. */

@@ -225,7 +225,6 @@ namespace zypp
         DBG << "New Solver Locales: " << locale2Solver << endl;
       }
 
-
       void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )
       {
         depSetDirty( "setRequestedLocales" );
@@ -277,6 +276,10 @@ namespace zypp
                 store_r.insert( detail.rhs().id() );
               }
               break;
+
+            case CapDetail::REL_NONE:
+            case CapDetail::CAP_WITH:
+              break; // unwanted
           }
         }
       }

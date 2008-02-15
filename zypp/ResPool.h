@@ -217,9 +217,9 @@ namespace zypp
        *  one Capability with index \a index_r in dependency \a depType_r.
        */
       //@{
-      byCapabilityIndex_iterator byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
+      byCapabilityIndex_iterator ZYPP_DEPRECATED byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
 
-      byCapabilityIndex_iterator byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
+      byCapabilityIndex_iterator ZYPP_DEPRECATED byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
       //@}
 
     public:

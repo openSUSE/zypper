@@ -27,6 +27,7 @@ extern "C"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Locale.h"
+#include "zypp/Capability.h"
 #include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -174,6 +175,10 @@ namespace zypp
           { _repoinfos.erase( id_r ); }
 
         public:
+          const sat::detail::IdType * whatProvides( Capability cap_r )
+          { prepare(); return ::pool_whatprovides( _pool, cap_r.id() ); }
+
+        public:
           /** \name Requested locales. */
           //@{
           void setRequestedLocales( const LocaleSet & locales_r );
@@ -197,8 +202,7 @@ namespace zypp
             LocaleSet::const_iterator it( avl.find( locale_r ) );
             return it != avl.end();
           }
-
-        //@}
+          //@}
 
         private:
           /** sat-pool. */
