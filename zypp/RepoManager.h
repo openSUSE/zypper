@@ -203,6 +203,17 @@ namespace zypp
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
+    * \short Clean local package cache
+    *
+    * Empty local directory with downloaded packages
+    *
+    * \throws repo::RepoNoAliasException if can't figure an alias
+    * \throws Exception on unknown error.
+    */
+   void cleanPackages( const RepoInfo &info,
+                       const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+   /**
     * \short Status of metadata cache
     */
     RepoStatus cacheStatus( const RepoInfo &info ) const;

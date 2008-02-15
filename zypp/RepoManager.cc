@@ -614,15 +614,10 @@ namespace zypp
         // ok we have the metadata, now exchange
         // the contents
 	
-	// first, clean up the old rawcache metadata
-	// #FIXME	
-	// now, move the new metadata in
-	// #FIXME
-	
-        //TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
-        //filesystem::rename( rawpath, oldmetadata.path() );
-        // move the just downloaded there
-        //filesystem::rename( tmpdir.path(), rawpath );
+        TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
+        filesystem::rename( rawpath, oldmetadata.path() );
+         move the just downloaded there
+        filesystem::rename( tmpdir.path(), rawpath );
 
         // we are done.
         return;
@@ -652,6 +647,16 @@ namespace zypp
     progress.sendTo(progressfnc);
 
     filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_pimpl->options, info));
+    progress.toMax();
+  }
+
+  void RepoManager::cleanPackages( const RepoInfo &info,
+                                   const ProgressData::ReceiverFnc & progressfnc )
+  {
+    ProgressData progress(100);
+    progress.sendTo(progressfnc);
+
+    filesystem::recursive_rmdir(packagescache_path_for_repoinfo(_pimpl->options, info));
     progress.toMax();
   }
 
