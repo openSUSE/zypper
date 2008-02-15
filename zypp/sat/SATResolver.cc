@@ -743,7 +743,6 @@ SATResolver::problems ()
 			    PoolItem itemTo = _pool.find (sat::Solvable(rp));
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
-				problemSolution->addSingleAction (itemFrom, REMOVE);
 
 				if (evrcmp(pool, s->evr, sd->evr, EVRCMP_COMPARE ) > 0)
 				{
