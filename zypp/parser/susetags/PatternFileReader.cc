@@ -70,7 +70,7 @@ namespace zypp
 
 	    _data = new data::Pattern;
 	    _data->name    = words[0];
-	    _data->edition = Edition( words[1],words[2] );
+	    _data->edition = Edition( words[1], words[2] );
 	    _data->arch    = Arch( words[3] );
 	  }
 

@@ -38,13 +38,10 @@
 
 #include "zypp/target/CommitLog.h"
 #include "zypp/target/rpm/librpmDb.h"
-#include "zypp/target/rpm/RpmPackageImpl.h"
 #include "zypp/target/rpm/RpmException.h"
-#include "zypp/CapSet.h"
-#include "zypp/CapFactory.h"
+#include "zypp/TmpPath.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppFactory.h"
-#include "zypp/TmpPath.h"
 
 #ifndef _
 #define _(X) X
@@ -1225,7 +1222,9 @@ const list<Package::Ptr> & RpmDb::getPackages()
   return empty_list;
 }
 
-inline static void insertCaps( CapSet &capset, capability::CapabilityImplPtrSet ptrset, CapFactory &factory )
+#warning FIX READING RPM DATBASE TO POOL
+#if 0 // obsolete helper
+inline static void insertCaps( Capabilities &capset, capability::CapabilityImplPtrSet ptrset, CapFactory &factory )
 {
   for ( capability::CapabilityImplPtrSet::const_iterator it = ptrset.begin();
         it != ptrset.end();
@@ -1234,6 +1233,7 @@ inline static void insertCaps( CapSet &capset, capability::CapabilityImplPtrSet 
     capset.insert( factory.fromImpl(*it) );
   }
 }
+#endif
 
 //
 // make Package::Ptr from RpmHeader
@@ -1253,7 +1253,8 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
   }
 
   Package::Ptr pptr;
-
+#warning FIX READING RPM DATBASE TO POOL
+#if 0
   string name = header->tag_name();
 
   // create dataprovider
@@ -1336,7 +1337,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
     ZYPP_CAUGHT( excpt_r );
     ERR << "Can't create Package::Ptr" << endl;
   }
-
+#endif
   return pptr;
 }
 
@@ -1360,7 +1361,6 @@ const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBRepor
 
   librpmDb::db_const_iterator iter;
   unsigned current = 0;
-  CapFactory _f;
   Pathname location;
 
   for ( iter.findAll(); *iter; ++iter, ++current, report->progress( (100*current)/expect))
@@ -1387,6 +1387,8 @@ const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBRepor
   _packages.buildIndex();
   DBG << "Found installed packages: " << _packages._list.size() << endl;
 
+#warning FILEREQUIRES HACK SHOULD BE DONE WHEN WRITING THE RPMDB SOLV FILE
+#if 0
   ///////////////////////////////////////////////////////////////////
   // Evaluate filerequires collected so far
   ///////////////////////////////////////////////////////////////////
@@ -1403,8 +1405,8 @@ const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBRepor
         }
         pptr->injectProvides(_f.parse(ResTraits<Package>::kind, *it));
       }
-
     }
+#endif
 
   ///////////////////////////////////////////////////////////////////
   // Build final packages list

@@ -13,8 +13,6 @@
 
 #include "zypp/Pattern.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -26,8 +24,8 @@ namespace zypp
   //	METHOD NAME : Pattern::Pattern
   //	METHOD TYPE : Ctor
   //
-  Pattern::Pattern( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Pattern::Pattern( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -45,31 +43,66 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   /** */
   bool Pattern::isDefault() const
-  { return pimpl().isDefault(); }
+  { return lookupBoolAttribute( sat::SolvAttr::isdefault ); }
   /** */
   bool Pattern::userVisible() const
-  { return pimpl().userVisible(); }
+  { return lookupBoolAttribute( sat::SolvAttr::isvisible ); }
   /** */
   std::string Pattern::category() const
-  { return pimpl().category().text(); }
+  { return lookupStrAttribute( sat::SolvAttr::category ); }
   /** */
   Pathname Pattern::icon() const
-  { return pimpl().icon(); }
+  { return lookupStrAttribute( sat::SolvAttr::icon ); }
   /** */
   Pathname Pattern::script() const
-  { return pimpl().script(); }
+  { return lookupStrAttribute( sat::SolvAttr::script ); }
 
   Label Pattern::order() const
-  { return pimpl().order(); }
+  { return Label(); }
 
   std::set<std::string> Pattern::install_packages( const Locale & lang ) const
-  { return pimpl().install_packages(); }
+  {
+#warning implement PATTERN::INSTALL_PACKAGES
+#if 0
+-    static void copycaps( std::set<std::string> & out, const CapSet & in)
+-    {
+-	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
+-	    if (isKind<capability::NamedCap>( *it )
+-		&& it->refers() == ResTraits<zypp::Package>::kind )
+-	    {
+-		out.insert( it->index() );
+-	    }
+-	}
+-    }
+-
+-    std::set<std::string> PatternImplIf::install_packages( const Locale & lang) const
+-    {
+-	std::set<std::string> result;
+-
+-	copycaps( result, self()->dep( Dep::REQUIRES ) );
+-	copycaps( result, self()->dep( Dep::RECOMMENDS) );
+-	copycaps( result, self()->dep( Dep::SUGGESTS) );
+-
+-	return result;
+-    }
+-
+-
+#endif
+  return std::set<std::string>();
+  }
 
-  const CapSet & Pattern::includes() const
-  { return pimpl().includes(); }
+#warning implement PATTERN::INSTALL_PACKAGES
+ const Capabilities & Pattern::includes() const
+  {
+    static Capabilities _val;
+    return _val;
+  }
 
-  const CapSet & Pattern::extends() const
-  { return pimpl().extends(); }
+  const Capabilities & Pattern::extends() const
+  {
+    static Capabilities _val;
+    return _val;
+  }
 
 
   /////////////////////////////////////////////////////////////////

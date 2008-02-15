@@ -12,9 +12,11 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
+#include "zypp/base/SerialNumber.h"
+
 #include "zypp/ResPool.h"
 #include "zypp/pool/PoolImpl.h"
-#include "zypp/base/SerialNumber.h"
+#include "zypp/pool/PoolStats.h"
 
 using std::endl;
 
@@ -22,24 +24,16 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  namespace
-  {
-    /** the empty pool used by ResPool::ResPool() */
-    pool::PoolTraits::Impl_constPtr noPool()
-    {
-      static pool::PoolTraits::Impl_constPtr _noPool( new pool::PoolImpl );
-      return _noPool;
-    }
-  }
-
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::ResPool
-  //	METHOD TYPE : Ctor
+  //	METHOD NAME : ResPool::instance
+  //	METHOD TYPE : ResPool
   //
-  ResPool::ResPool()
-  : _pimpl( noPool() )
-  {}
+  ResPool ResPool::instance()
+  {
+    static ResPool _val( pool::PoolTraits::Impl_constPtr( new pool::PoolImpl ) );
+    return _val;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -52,50 +46,32 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::~ResPool
-  //	METHOD TYPE : Dtor
-  //
-  ResPool::~ResPool()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
   // Forward to impementation:
   //
   ///////////////////////////////////////////////////////////////////
 
-  bool ResPool::satSynced() const
-  {  return _pimpl->satSynced(); }
+  ResPoolProxy ResPool::proxy() const
+  { return _pimpl->proxy( *this ); }
 
-  void ResPool::satSync() const
-  {  return _pimpl->satSync(); }
+  const SerialNumber & ResPool::serial() const
+  { return _pimpl->serial(); }
 
   bool ResPool::empty() const
   { return _pimpl->empty(); }
 
-  PoolItem ResPool::find( const sat::Solvable & slv_r ) const
-  { return _pimpl->find( slv_r ); }
-
   ResPool::size_type ResPool::size() const
   { return _pimpl->size(); }
 
-  ResPool::const_iterator ResPool::begin() const
-  { return _pimpl->begin(); }
 
-  ResPool::const_iterator ResPool::end() const
-  { return _pimpl->end(); }
-
-  ResPool::byName_iterator ResPool::byNameBegin( const std::string & name_r ) const
-  { return _pimpl->_namehash.begin( name_r ); }
-
-  ResPool::byName_iterator ResPool::byNameEnd( const std::string & name_r ) const
-  { return _pimpl->_namehash.end( name_r ); }
+  PoolItem ResPool::find( const sat::Solvable & slv_r ) const
+  { return _pimpl->find( slv_r ); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphash.begin( index_r, depType_r ); }
+  { return _pimpl->_caphashfake.begin(); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphash.end( index_r, depType_r ); }
+  { return _pimpl->_caphashfake.end(); }
+
 
   ResPool::size_type ResPool::knownRepositoriesSize() const
   { return _pimpl->knownRepositories().size(); }
@@ -106,23 +82,53 @@ namespace zypp
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
   { return _pimpl->knownRepositories().end(); }
 
-  void ResPool::setAdditionalRequire( const AdditionalCapSet & capset ) const
+
+  void ResPool::setAdditionalRequire( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalRequire( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionalRequire() const
+  ResPool::AdditionalCapabilities & ResPool::additionalRequire() const
   { return _pimpl->additionalRequire(); }
 
-  void ResPool::setAdditionalConflict( const AdditionalCapSet & capset ) const
+  void ResPool::setAdditionalConflict( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalConflict( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionaConflict() const
+  ResPool::AdditionalCapabilities & ResPool::additionaConflict() const
   { return _pimpl->additionaConflict(); }
 
-  void ResPool::setAdditionalProvide( const AdditionalCapSet & capset ) const
+  void ResPool::setAdditionalProvide( const AdditionalCapabilities & capset ) const
   { _pimpl->setAdditionalProvide( capset ); }
-  ResPool::AdditionalCapSet & ResPool::additionaProvide() const
+  ResPool::AdditionalCapabilities & ResPool::additionaProvide() const
   { return _pimpl->additionaProvide(); }
 
-  const SerialNumber & ResPool::serial() const
-  { return _pimpl->serial(); }
+  const pool::PoolTraits::ItemContainerT & ResPool::store() const
+  { return _pimpl->store(); }
+
+  const pool::PoolTraits::Id2ItemT & ResPool::id2item() const
+  { return _pimpl->id2item(); }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Forward to sat::Pool:
+  //
+  ///////////////////////////////////////////////////////////////////
+  void ResPool::setRequestedLocales( const LocaleSet & locales_r )
+  { sat::Pool::instance().setRequestedLocales( locales_r ); }
+
+  bool ResPool::addRequestedLocale( const Locale & locale_r )
+  { return sat::Pool::instance().addRequestedLocale( locale_r ); }
+
+  bool ResPool::eraseRequestedLocale( const Locale & locale_r )
+  { return sat::Pool::instance().eraseRequestedLocale( locale_r ); }
+
+  const LocaleSet & ResPool::getRequestedLocales() const
+  { return sat::Pool::instance().getRequestedLocales(); }
+
+  bool ResPool::isRequestedLocale( const Locale & locale_r ) const
+  { return sat::Pool::instance().isRequestedLocale( locale_r ); }
+
+  const LocaleSet & ResPool::getAvailableLocales() const
+  { return sat::Pool::instance().getAvailableLocales(); }
+
+  bool ResPool::isAvailableLocale( const Locale & locale_r ) const
+  { return sat::Pool::instance().isAvailableLocale( locale_r ); }
 
   /******************************************************************
   **
@@ -131,7 +137,8 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const ResPool & obj )
   {
-    return str << *obj._pimpl;
+    return dumpPoolStats( str << "ResPool " << sat::Pool::instance() << endl << "  ",
+                          obj.begin(), obj.end() );
   }
 
   /////////////////////////////////////////////////////////////////

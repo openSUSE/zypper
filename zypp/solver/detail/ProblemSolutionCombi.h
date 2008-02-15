@@ -55,7 +55,7 @@ namespace zypp
 	    /**
 	     * Add a single action
 	     */
-	    void addSingleAction( PoolItem_Ref item, const TransactionKind action);
+	    void addSingleAction( PoolItem item, const TransactionKind action);
 
 	    /**
 	     * returns the number of actions

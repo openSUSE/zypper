@@ -27,7 +27,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/solver/detail/ProblemSolutionKeep.h"
-#include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/solver/detail/Helper.h"
 
 using namespace std;
 
@@ -46,13 +46,13 @@ IMPL_PTR_TYPE(ProblemSolutionKeep);
 //---------------------------------------------------------------------------
 
 ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
-						PoolItem_Ref item )
+						PoolItem item )
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
     _description = str::form (_("keep %s"), item->name().c_str() );
     // TranslatorExplanation %s = name of package, patch, selection ...      
-    _details = str::form (_("keep %s"), ResolverInfo::toString (item).c_str());
+    _details = str::form (_("keep %s"), Helper::itemToString (item).c_str());
 
     addAction ( new TransactionSolutionAction (item,
 					       KEEP));
@@ -66,7 +66,7 @@ ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {
-	PoolItem_Ref item = *iter;
+	PoolItem item = *iter;
 	addAction ( new TransactionSolutionAction (item, KEEP));
     }
 

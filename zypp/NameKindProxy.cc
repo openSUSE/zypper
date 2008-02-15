@@ -10,8 +10,8 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
 
+#include "zypp/base/Easy.h"
 #include "zypp/NameKindProxy.h"
 
 using std::endl;
@@ -52,21 +52,30 @@ namespace zypp
   //	METHOD NAME : NameKindProxy::NameKindProxy
   //	METHOD TYPE : Ctor
   //
-  NameKindProxy::NameKindProxy( ResPool pool_r, const std::string & name_r, Resolvable::Kind kind_r )
+  NameKindProxy::NameKindProxy( ResPool pool_r, const C_Str & name_r, Resolvable::Kind kind_r )
     : _kind( kind_r )
     , _name( name_r )
     {
-      for ( ResPool::byName_iterator it = pool_r.byNameBegin( _name );
-            it != pool_r.byNameEnd( _name ); ++it )
-        {
-          if ( (*it)->kind() == _kind )
-            {
-              if ( it->status().isInstalled() )
-                _installed.insert( *it ) ;
-              else
-                _available.insert( *it );
-            }
-        }
+      for_( it, pool_r.byIdentBegin( kind_r, _name ), pool_r.byIdentEnd( kind_r, _name ) )
+      {
+        if ( it->status().isInstalled() )
+          _installed.insert( *it ) ;
+        else
+          _available.insert( *it );
+      }
+    }
+
+   NameKindProxy::NameKindProxy( ResPool pool_r, IdString name_r, Resolvable::Kind kind_r )
+    : _kind( kind_r )
+    , _name( name_r )
+    {
+      for_( it, pool_r.byIdentBegin( kind_r, _name ), pool_r.byIdentEnd( kind_r, _name ) )
+      {
+        if ( it->status().isInstalled() )
+          _installed.insert( *it ) ;
+        else
+          _available.insert( *it );
+      }
     }
 
   /******************************************************************

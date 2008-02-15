@@ -20,7 +20,6 @@
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/repo/Applydeltarpm.h"
 #include "zypp/repo/PackageDelta.h"
-#include "zypp/detail/ImplConnect.h"
 
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
@@ -78,7 +77,6 @@ namespace zypp
                                       const PackageProviderPolicy & policy_r )
     : _policy( policy_r )
     , _package( package )
-    , _implPtr( detail::ImplConnect::resimpl( _package ) )
     , _deltas(deltas)
     , _access(access)
     {}

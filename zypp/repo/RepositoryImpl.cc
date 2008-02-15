@@ -10,9 +10,8 @@ namespace zypp { namespace repo {
 IMPL_PTR_TYPE(RepositoryImpl)
 
 RepositoryImpl::RepositoryImpl( const RepoInfo &info )
-  : _restore_lazy_initialized(false),
-    _deltas_lazy_initialized(false),
-    _info(info)
+  : _deltas_lazy_initialized(false)
+  , _info(info)
 {
 
 }
@@ -30,22 +29,6 @@ RepositoryImpl::~RepositoryImpl()
 RepositoryImpl::RepositoryImpl( const null & )
   : base::ProvideNumericId<RepositoryImpl,Repository::NumericId>( NULL )
 {}
-
-
-const ResStore & RepositoryImpl::resolvables() const
-{
-  if ( ! _restore_lazy_initialized )
-  {
-    const_cast<RepositoryImpl*>(this)->createResolvables();
-    const_cast<RepositoryImpl*>(this)->_restore_lazy_initialized = true;
-  }
-  return _store;
-}
-
-void RepositoryImpl::createResolvables()
-{
-  WAR << "createResolvables() not implemented" << endl;
-}
 
 void RepositoryImpl::createPatchAndDeltas()
 {

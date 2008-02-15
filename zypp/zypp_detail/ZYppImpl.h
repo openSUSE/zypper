@@ -15,10 +15,8 @@
 #include <iosfwd>
 
 #include "zypp/TmpPath.h"
-#include "zypp/ResPoolManager.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
-#include "zypp/Locale.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
@@ -48,16 +46,13 @@ namespace zypp
       /** Dtor */
       ~ZYppImpl();
 
-    private:
-      void removeInstalledResolvables ();
-
     public:
       /** */
       ResPool pool() const
-      { return _pool.accessor(); }
+      { return ResPool::instance(); }
 
       ResPoolProxy poolProxy() const
-      { return _pool.proxy(); }
+      { return ResPool::instance().proxy(); }
 
       /** */
       KeyRing_Ptr keyRing() const
@@ -66,10 +61,6 @@ namespace zypp
 
       Resolver_Ptr resolver() const
       { return _resolver; }
-
-      void addResolvables (const ResStore& store, bool installed = false);
-
-      void removeResolvables (const ResStore& store);
 
     public:
       /** \todo Signal locale change. */
@@ -86,12 +77,6 @@ namespace zypp
 
       /**
        * \throws Exception
-       * if commit_only == true, just init the target, dont populate store or pool
-       */
-      ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only);
-
-      /**
-       * \throws Exception
        */
       void finishTarget();
 
@@ -102,36 +87,6 @@ namespace zypp
       void installSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
     public:
-      /** \todo Signal locale change. */
-      void setTextLocale( const Locale & textLocale_r )
-      { _textLocale = textLocale_r; }
-      /** */
-      Locale getTextLocale() const
-      { return _textLocale; }
-    private:
-      Locale _textLocale;
-
-    public:
-      typedef std::set<Locale> LocaleSet;
-      /** */
-      void setRequestedLocales( const LocaleSet & locales_r );
-      /** */
-      LocaleSet getRequestedLocales() const;
-      /** */
-      LocaleSet getAvailableLocales() const;
-
-      /** internal use */
-      void availableLocale( const Locale & locale_r );
-
-    public:
-      /** Get the system architecture.   */
-      Arch architecture() const
-      { return _architecture; }
-      /** Set the system architecture.
-	  This should be used for testing/debugging only since the Target backend
-	  won't be able to install incompatible packages ;-)   */
-      void setArchitecture( const Arch & arch );
-
       /** Get the path where zypp related plugins store persistent data and caches   */
       Pathname homePath() const;
 
@@ -147,20 +102,16 @@ namespace zypp
       DiskUsageCounter::MountPointSet getPartitions() const;
 
     public:
-        
+
       int applyLocks();
-      
+
     private:
-      /** */
-      ResPoolManager _pool;
       /** */
       Target_Ptr _target;
       /** */
       Resolver_Ptr _resolver;
 
       KeyRing_Ptr _keyring;
-      /** */
-      Arch _architecture;
       /** */
       Pathname _home_path;
       /** defined mount points, used for disk usage counting */

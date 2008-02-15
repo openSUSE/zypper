@@ -18,16 +18,13 @@
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
-#include "zypp/PathInfo.h"
-
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/CapFactory.h"
-#include "zypp/Rel.h"
-#include "zypp/Package.h"
 #include "zypp/base/Exception.h"
 
-using namespace std;
-using namespace zypp::capability;
+#include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/Package.h"
+#include "zypp/PathInfo.h"
+
+using std::endl;
 
 namespace zypp
 {
@@ -78,7 +75,7 @@ RpmHeader::~RpmHeader()
 //        METHOD TYPE : constRpmHeaderPtr
 //
 RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
-    VERIFICATION verification_r )
+                                            VERIFICATION verification_r )
 {
   PathInfo file( path_r );
   if ( ! file.isFile() )
@@ -128,16 +125,16 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
 //
 //
 //        METHOD NAME : RpmHeader::dumpOn
-//        METHOD TYPE : ostream &
+//        METHOD TYPE : std::ostream &
 //
 //        DESCRIPTION :
 //
-ostream & RpmHeader::dumpOn( ostream & str ) const
+std::ostream & RpmHeader::dumpOn( std::ostream & str ) const
 {
   return BinHeader::dumpOn( str ) << '{' << tag_name() << "-"
          << (tag_epoch()==0?"":(tag_epoch()+":"))
          << tag_version()
-         << (tag_release().empty()?"":(string("-")+tag_release()))
+         << (tag_release().empty()?"":(std::string("-")+tag_release()))
          << ( isSrc() ? ".src}" : "}");
 }
 
@@ -157,11 +154,11 @@ bool RpmHeader::isSrc() const
 //
 //
 //        METHOD NAME : RpmHeader::tag_name
-//        METHOD TYPE : string
+//        METHOD TYPE : std::string
 //
 //        DESCRIPTION :
 //
-string RpmHeader::tag_name() const
+std::string RpmHeader::tag_name() const
 {
   return string_val( RPMTAG_NAME );
 }
@@ -170,11 +167,11 @@ string RpmHeader::tag_name() const
 //
 //
 //        METHOD NAME : RpmHeader::tag_epoch
-//        METHOD TYPE : int
+//        METHOD TYPE : Edition::epoch_t
 //
 //        DESCRIPTION :
 //
-int RpmHeader::tag_epoch() const
+Edition::epoch_t RpmHeader::tag_epoch() const
 {
   return int_val ( RPMTAG_EPOCH );
 }
@@ -183,11 +180,11 @@ int RpmHeader::tag_epoch() const
 //
 //
 //        METHOD NAME : RpmHeader::tag_version
-//        METHOD TYPE : string
+//        METHOD TYPE : std::string
 //
 //        DESCRIPTION :
 //
-string RpmHeader::tag_version() const
+std::string RpmHeader::tag_version() const
 {
   return string_val ( RPMTAG_VERSION );
 }
@@ -196,11 +193,11 @@ string RpmHeader::tag_version() const
 //
 //
 //        METHOD NAME : RpmHeader::tag_release
-//        METHOD TYPE : string
+//        METHOD TYPE : std::string
 //
 //        DESCRIPTION :
 //
-string RpmHeader::tag_release() const
+std::string RpmHeader::tag_release() const
 {
   return string_val( RPMTAG_RELEASE );
 }
@@ -215,29 +212,20 @@ string RpmHeader::tag_release() const
 //
 Edition RpmHeader::tag_edition () const
 {
-  try
-  {
-    return Edition( tag_version(), tag_release(), tag_epoch());
-  }
-  catch (Exception & excpt_r)
-  {
-    WAR << "Package " << tag_name() << "has an invalid edition";
-    ZYPP_CAUGHT (excpt_r);
-  }
-  return Edition();
+  return Edition( tag_version(), tag_release(), tag_epoch() );
 }
 
 ///////////////////////////////////////////////////////////////////
 //
 //
 //        METHOD NAME : RpmHeader::tag_arch
-//        METHOD TYPE : string
+//        METHOD TYPE : Arch
 //
 //        DESCRIPTION :
 //
-string RpmHeader::tag_arch() const
+Arch RpmHeader::tag_arch() const
 {
-  return string_val( RPMTAG_ARCH );
+  return Arch( string_val( RPMTAG_ARCH ) );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -265,18 +253,18 @@ Date RpmHeader::tag_buildtime() const
 {
   return int_val( RPMTAG_BUILDTIME );
 }
-
+#warning CHECK IF FILE REQUIRES HANDLING IS OBSOLETE
 ///////////////////////////////////////////////////////////////////
 //
 //
 //        METHOD NAME : RpmHeader::PkgRelList_val
-//        METHOD TYPE : unsigned
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) const
+CapabilitySet RpmHeader::PkgRelList_val( tag tag_r, bool pre, std::set<std::string> * freq_r ) const
   {
-    CapabilityImplPtrSet ret;
+    CapabilitySet ret;
 
     int_32  kindFlags   = 0;
     int_32  kindVersion = 0;
@@ -299,19 +287,14 @@ CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string>
       kindFlags   = RPMTAG_CONFLICTFLAGS;
       kindVersion = RPMTAG_CONFLICTVERSION;
       break;
-#ifdef HAVE_RPM_ENHANCES
     case RPMTAG_ENHANCESNAME:
       kindFlags   = RPMTAG_ENHANCESFLAGS;
       kindVersion = RPMTAG_ENHANCESVERSION;
       break;
-#endif
-#warning NEEDS RPMTAG_SUPPLEMENTSNAME
-#if 0
-    case RPMTAG_SUPPLEMENTSNAME:
-      kindFlags   = RPMTAG_SUPPLEMENTSFLAGS;
-      kindVersion = RPMTAG_SUPPLEMENTSVERSION;
+    case RPMTAG_SUGGESTSNAME:
+      kindFlags   = RPMTAG_SUGGESTSFLAGS;
+      kindVersion = RPMTAG_SUGGESTSVERSION;
       break;
-#endif
     default:
       INT << "Illegal RPMTAG_dependencyNAME " << tag_r << endl;
       return ret;
@@ -332,11 +315,11 @@ CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string>
     for ( unsigned i = 0; i < count; ++i )
     {
 
-      string n( names[i] );
+      std::string n( names[i] );
 
       Rel op = Rel::ANY;
       int_32 f  = flags[i];
-      string v  = versions[i];
+      std::string v  = versions[i];
 
       if ( n[0] == '/' )
       {
@@ -374,13 +357,7 @@ CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string>
       {
         try
         {
-          CapabilityImpl::Ptr cap = capability::buildVersioned(
-                             ResTraits<Package>::kind,
-                             n,
-                             op,
-                             Edition(v)
-                           );
-          ret.insert(cap);
+          ret.insert( Capability( n, op, Edition(v) ) );
         }
         catch (Exception & excpt_r)
         {
@@ -398,11 +375,11 @@ CapabilityImplPtrSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string>
 //
 //
 //        METHOD NAME : RpmHeader::tag_provides
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_provides( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_provides( std::set<std::string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_PROVIDENAME, false, freq_r );
   }
@@ -411,11 +388,11 @@ CapabilityImplPtrSet RpmHeader::tag_provides( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_requires
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_requires( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_requires( std::set<std::string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_REQUIRENAME, false, freq_r );
   }
@@ -424,11 +401,11 @@ CapabilityImplPtrSet RpmHeader::tag_requires( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_requires
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_prerequires( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_prerequires( std::set<std::string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_REQUIRENAME, true, freq_r );
   }
@@ -437,11 +414,11 @@ CapabilityImplPtrSet RpmHeader::tag_prerequires( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_conflicts
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_conflicts( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_conflicts( std::set<std::string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_CONFLICTNAME, false, freq_r );
   }
@@ -450,11 +427,11 @@ CapabilityImplPtrSet RpmHeader::tag_conflicts( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_obsoletes
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_obsoletes( std::set<std::string> * freq_r ) const
   {
     return PkgRelList_val( RPMTAG_OBSOLETENAME, false, freq_r );
   }
@@ -463,34 +440,26 @@ CapabilityImplPtrSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
 //
 //
 //        METHOD NAME : RpmHeader::tag_enhances
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_enhances( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_enhances( std::set<std::string> * freq_r ) const
   {
-#ifdef HAVE_RPM_ENHANCES
     return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
-#else
-    return CapabilityImplPtrSet();
-#endif
   }
 
 ///////////////////////////////////////////////////////////////////
 //
 //
-//        METHOD NAME : RpmHeader::tag_supplements
-//        METHOD TYPE : CapabilityImplPtrSet
+//        METHOD NAME : RpmHeader::tag_suggests
+//        METHOD TYPE : CapabilitySet
 //
 //        DESCRIPTION :
 //
-CapabilityImplPtrSet RpmHeader::tag_supplements( set<string> * freq_r ) const
+CapabilitySet RpmHeader::tag_suggests( std::set<std::string> * freq_r ) const
   {
-    return CapabilityImplPtrSet();
-#warning NEEDS RPMTAG_SUPPLEMENTSNAME
-#if 0
-    return PkgRelList_val( RPMTAG_SUPPLEMENTSNAME, false, freq_r );
-#endif
+    return PkgRelList_val( RPMTAG_SUGGESTSNAME, false, freq_r );
   }
 
 ///////////////////////////////////////////////////////////////////
@@ -884,7 +853,7 @@ DiskUsage & RpmHeader::tag_du( DiskUsage & dudata_r ) const
     // filter out hardliks ( different name but same device and inode ).
     ///////////////////////////////////////////////////////////////////
     filesystem::DevInoCache trace;
-    vector<DiskUsage::Entry> entries;
+    std::vector<DiskUsage::Entry> entries;
     entries.resize( dirnames.size() );
     for ( unsigned i = 0; i < dirnames.size(); ++i )
     {

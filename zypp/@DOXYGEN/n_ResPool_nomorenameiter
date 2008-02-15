@@ -1,0 +1,71 @@
+
+I tagged the byName iterator as deprecated, so the compiler tells you
+where it is used. Please review the code and check whether byIdent is
+an appropriate replacement.
+
+
+--
+The 'old' zypp pool internally maintained a byName index, so it was a
+fast way to iterate the pool by name and filter by kind to visit e.g. 
+all packages named foo:
+
+    invokeOnEach( pool.byNameBegin( name ), pool.byNameEnd( name ),
+                  resfilter::ByKind( kind ),
+		  action() );
+
+    for_( it, pool.byNameBegin( name ), pool.byNameEnd( name ) )
+    {
+      if ( (*it)->kind() == kind )
+      {
+	...
+      }
+    }
+
+This is no longer true.
+
+
+
+In contrary, byName now is a 'quite expensive' iteration. It's faster to 
+rewrite these loops using byIdent (and no filter):
+
+    invokeOnEach( pool.byIdentBegin( kind, name ), 
+                  pool.byIdentEnd( kind, name ),
+		  action() );
+
+    for_( it, pool.byIdentBegin( kind, name ), pool.byNameEnd( kind, name ) )
+    {
+      ...
+    }
+
+
+How to construct the byIdent iterator:
+
+    ResPool::byIdentBegin( poolItem )      // using this poolItems kind and name
+    ResPool::byIdentBegin( kind, name )    // explicit kind and name
+    ResPool::byIdentBegin<Package>( name ) // or templated kind
+
+
+
+--
+
+If you prefer using iterator in a for' loop, but dislike to figure out 
+the exact type of the iterator, you may find the 'for_' macro convenient:
+
+    #include "zypp/base/Easy.h"
+
+    for_( it, pool.byIdentBegin( kind, name ), 
+              pool.byIdentEnd( kind, name ) )
+    {
+      PoolItem copy = *it;
+    }
+
+
+instead of:
+
+    for ( ResPool::byIdent_iterator it = pool.byIdentBegin( kind, name ),
+                                    end = pool.byIdentEnd( kind, name );
+          it != end, ++it )
+    {
+      PoolItem copy = *it;
+    }
+

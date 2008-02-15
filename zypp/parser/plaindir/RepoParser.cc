@@ -8,6 +8,7 @@
 \---------------------------------------------------------------------*/
 
 #include <iostream>
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/String.h"
@@ -18,9 +19,7 @@
 
 #include "zypp/parser/plaindir/RepoParser.h"
 #include "zypp/parser/ParseException.h"
-#include "zypp/capability/CapabilityImpl.h"
 #include "zypp/PathInfo.h"
-#include "zypp/ResStore.h"
 #include "zypp/ZConfig.h"
 
 using namespace std;
@@ -72,7 +71,7 @@ RepoStatus dirStatus( const Pathname &dir )
 
 data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
                                              set<string> * filerequires,
-                                             const Pathname & location, data::RecordId &repoid )
+                                             const Pathname & location, std::string &repoid )
 {
   if ( ! header )
     return 0;
@@ -84,38 +83,19 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 
   data::Package_Ptr pkg = new data::Package;
 
-  pkg->name = header->tag_name();
+  pkg->name    = header->tag_name();
+  pkg->edition = header->tag_edition();
+  pkg->arch    = header->tag_arch();
 
-  try  {
-    pkg->edition = Edition( header->tag_version(),
-                            header->tag_release(),
-                            header->tag_epoch());
-  }
-  catch (Exception & excpt_r) {
-    ZYPP_CAUGHT( excpt_r );
-    WAR << "Package " << pkg->name << " has bad edition '"
-    << (header->tag_epoch()==0?"":(header->tag_epoch()+":"))
-    << header->tag_version()
-    << (header->tag_release().empty()?"":(string("-") + header->tag_release())) << "'";
-    return 0;
-  }
+  header->tag_requires( filerequires ).swap( pkg->deps[Dep::REQUIRES] );
+  header->tag_prerequires( filerequires ).swap( pkg->deps[Dep::PREREQUIRES] );
+  header->tag_conflicts( filerequires ).swap( pkg->deps[Dep::CONFLICTS] );
+  header->tag_obsoletes( filerequires ).swap( pkg->deps[Dep::OBSOLETES] );
+  header->tag_enhances( filerequires ).swap( pkg->deps[Dep::ENHANCES] );
+  header->tag_suggests( filerequires ).swap( pkg->deps[Dep::SUGGESTS] );
+  header->tag_freshens( filerequires ).swap( pkg->deps[Dep::FRESHENS] );
+  header->tag_supplements( filerequires ).swap( pkg->deps[Dep::SUPPLEMENTS] );
 
-  Arch arch;
-  try {
-    pkg->arch = Arch( header->tag_arch() );
-  }
-  catch (Exception & excpt_r) {
-    ZYPP_CAUGHT( excpt_r );
-    WAR << "Package " << pkg->name << " has bad architecture '" << header->tag_arch() << "'";
-    return 0;
-  }
-
-  pkg->deps[Dep::REQUIRES]    = header->tag_requires( filerequires );
-  pkg->deps[Dep::PREREQUIRES] = header->tag_prerequires( filerequires );
-  pkg->deps[Dep::CONFLICTS]   = header->tag_conflicts( filerequires );
-  pkg->deps[Dep::OBSOLETES]   = header->tag_obsoletes( filerequires );
-  pkg->deps[Dep::ENHANCES]    = header->tag_enhances( filerequires );
-  pkg->deps[Dep::SUPPLEMENTS] = header->tag_supplements( filerequires );
   pkg->vendor                 = header->tag_vendor();
   pkg->installedSize          = header->tag_size();
   pkg->buildTime              = header->tag_buildtime();
@@ -133,16 +113,9 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
        filename != filenames.end();
        ++filename)
   {
-    if ( capability::isInterestingFileSpec( *filename ) )
+    if ( Capability::isInterestingFileSpec( *filename ) )
     {
-      try {
-        pkg->deps[Dep::PROVIDES].insert(capability::buildFile( ResTraits<Package>::kind, *filename ));
-      }
-      catch (Exception & excpt_r)
-      {
-        ZYPP_CAUGHT( excpt_r );
-        WAR << "Ignoring invalid capability: " << *filename << endl;
-      }
+      pkg->deps[Dep::PROVIDES].insert( Capability( *filename, Capability::PARSED ) );
     }
   }
 
@@ -156,7 +129,7 @@ data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
 class RepoParser::Impl
 {
   public:
-    Impl( const data::RecordId & repositoryId_r,
+    Impl( const std::string & repositoryId_r,
           data::ResolvableDataConsumer & consumer_r,
           const ProgressData::ReceiverFnc & fnc_r )
     : _repositoryId( repositoryId_r )
@@ -172,7 +145,7 @@ class RepoParser::Impl
   public:
 
   private:
-    data::RecordId                 _repositoryId;
+    std::string                 _repositoryId;
     data::ResolvableDataConsumer & _consumer;
     ProgressData                   _ticks;
     Arch			   _sysarch;
@@ -248,10 +221,10 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 #warning FIX creation of Package from src.rpm header
       data::Package_Ptr package = makePackageDataFromHeader( header, NULL, *it, _repositoryId );
       if (package != NULL) {
-	if (package->arch.compatibleWith(_sysarch))
+	if (Arch(package->arch).compatibleWith(_sysarch))
 	{
 	  DBG << "Adding package " << *package << endl;
-	  _consumer.consumePackage( _repositoryId, package );
+	  _consumer.consumePackage( package );
 	}
 	else
 	{
@@ -273,7 +246,7 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
 //	METHOD NAME : RepoParser::RepoParser
 //	METHOD TYPE : Ctor
 //
-RepoParser::RepoParser( const data::RecordId & repositoryId_r,
+RepoParser::RepoParser( const std::string & repositoryId_r,
                         data::ResolvableDataConsumer & consumer_r,
                         const ProgressData::ReceiverFnc & fnc_r )
 : _pimpl( new Impl( repositoryId_r, consumer_r, fnc_r ) )

@@ -16,9 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/PoolItem.h"
-#include "zypp/CapFactory.h"
 #include "zypp/CapMatchHelper.h"
-#include "zypp/capability/Capabilities.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
@@ -105,7 +103,7 @@ struct ItemLockerFunc
 
   bool operator()( const CapAndItem &cai_r )
   {
-    PoolItem_Ref item(cai_r.item);
+    PoolItem item(cai_r.item);
     MIL << "Locking " << cai_r.item << "(matched by " << _lock_str << ")" << endl;
     item.status().setLock( true, ResStatus::USER);
     return true;
@@ -120,20 +118,25 @@ struct AddLockToPool
   : _pool(pool)
   , _count(0)
   {
-  
+
   }
-  
+
   bool operator()( const std::string & str_r )
   {
+#warning MUST FIX LOCK IMPLEMENTATION
+    // - make Capability's parse 'Name [Op edition]' available so it can be used here
+    // - provide new, or extend Capability::Matches, functor to allow pattern (glob/rx) matching
+    return false;
+#if 0
     CapFactory cap_factory;
-    
+
     std::string line( str::trim( str_r ) );
-    
+
     if ( line.empty() || line[0] == '#')
       return true;
-    
+
     MIL << "Applying locks from pattern '" << str_r << "'" << endl;
-    
+
     // zypp does not provide wildcard or regex support in the Capability matching helpers
     // but it still parses the index if it contains wildcards.
     // so we decompose the capability, and keep the op and edition, while, the name
@@ -149,7 +152,7 @@ struct AddLockToPool
     try
     {
       Capability capability = cap_factory.parse( ResTraits<zypp::Package>::kind, line );
-      
+
       capability::NamedCap::constPtr named = capability::asKind<capability::NamedCap>(capability);
       if ( named )
       {
@@ -221,8 +224,9 @@ struct AddLockToPool
       ++_count;
     }
     return true;
+#endif
   } // end operator()()
-        
+
   ResPool _pool;
   int _count;
 };

@@ -26,6 +26,7 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
+#include "zypp/solver/detail/Helper.h"
 
 using namespace std;
 
@@ -48,7 +49,7 @@ IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);
 //---------------------------------------------------------------------------
 
 ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-							      PoolItem_Ref item,
+							      PoolItem item,
 							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
@@ -69,7 +70,7 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 }
 
 ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
-								  PoolItem_Ref item)
+								  PoolItem item)
     : ProblemSolution (parent, "", "")
 {
         // TranslatorExplanation %s = name of package, patch, selection ...
@@ -77,12 +78,12 @@ ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverPr
 				 item->name().c_str());
 	// TranslatorExplanation %s = name of package, patch, selection ...	
 	_details = str::form(_("%s provides this dependency, but would change the architecture of the installed item"),
-			    ResolverInfo::toString (item).c_str());
+			    Helper::itemToString (item).c_str());
 	addAction ( new InjectSolutionAction (item, ARCHITECTURE));
 }
 
 ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
-							  PoolItem_Ref item)
+							  PoolItem item)
     : ProblemSolution (parent, "", "")
 {
         // TranslatorExplanation %s = name of package, patch, selection ...
@@ -90,14 +91,14 @@ ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr pa
 				 item->name().c_str());
 	// TranslatorExplanation %s = name of package, patch, selection ...	
 	_details = str::form(_("%s provides this dependency, but would change the vendor of the installed item"),
-			    ResolverInfo::toString (item).c_str());
+			    Helper::itemToString (item).c_str());
 	addAction ( new InjectSolutionAction (item, VENDOR));
 }
 	
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
-								PoolItem_Ref otherItem)
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
@@ -107,7 +108,7 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 }
 
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
 								PoolItemList itemList)
     : ProblemSolution (parent, "", "")
@@ -122,22 +123,22 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 }
 
 ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
+								PoolItem item,
 								const Capability & capability,
-								PoolItem_Ref otherItem)
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
 	_description = str::form (_("Ignore the obsolete %s in %s"),
-				  ResolverInfo::toString (capability).c_str(),
+				  Helper::capToString (capability).c_str(),
 				  otherItem->name().c_str());
 	addAction (new InjectSolutionAction (item, capability, OBSOLETES, otherItem));	
 }
 
 
 ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-								PoolItem_Ref item,
-								PoolItem_Ref otherItem)
+								PoolItem item,
+								PoolItem otherItem)
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...

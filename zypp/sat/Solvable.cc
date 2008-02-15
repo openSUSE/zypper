@@ -16,7 +16,6 @@
 #include "zypp/base/Exception.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/IdStr.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Repo.h"
 
@@ -66,56 +65,295 @@ namespace zypp
     bool Solvable::isSystem() const
     { return repo().isSystemRepo(); }
 
-    NameId Solvable::name() const
+    IdString Solvable::ident() const
     {
-      NO_SOLVABLE_RETURN( NameId() );
-      return NameId( _solvable->name ); }
-
-    EvrId Solvable::evr() const
-    {
-      NO_SOLVABLE_RETURN( EvrId() );
-      return EvrId( _solvable->evr );
+      NO_SOLVABLE_RETURN( IdString() );
+      return IdString( _solvable->name );
     }
 
-    ArchId Solvable::arch() const
+    std::string Solvable::lookupStrAttribute( const SolvAttr &attr ) const
     {
-      NO_SOLVABLE_RETURN( ArchId() );
-      return ArchId( _solvable->arch );
+      const char *s = repo_lookup_str(this->get(), attr.idStr().id());
+      return s ? s : std::string();
     }
 
-    VendorId Solvable::vendor() const
+    unsigned Solvable::lookupNumAttribute( const SolvAttr &attr ) const
     {
-      NO_SOLVABLE_RETURN( VendorId() );
-      return VendorId( _solvable->vendor );
+      return repo_lookup_num(this->get(), attr.idStr().id());
+    }
+    
+    bool Solvable::lookupBoolAttribute( const SolvAttr &attr ) const
+    {
+      return repo_lookup_num(this->get(), attr.idStr().id()) > 0;
+    }
+
+    struct LocCallback
+    {
+      unsigned medianr;
+      const char *mediadir;
+      const char *mediafile;
+      int trivial;
+    };
+
+    static int
+    location_cb (void *vcbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
+    {
+      LocCallback *lc = (LocCallback *)vcbdata;
+      switch (key->type)
+      {
+        case TYPE_ID:
+        if (key->name == SolvAttr::mediadir.idStr().id())
+        {
+          if (data->localpool)
+            lc->mediadir = stringpool_id2str(&data->spool, kv->id);
+          else
+            lc->mediadir = id2str(data->repo->pool, kv->id);
+        }
+        break;
+        case TYPE_STR:
+        if (key->name == SolvAttr::mediafile.idStr().id())
+          lc->mediafile = kv->str;
+        break;
+          case TYPE_VOID:
+        if (key->name == SolvAttr::mediafile.idStr().id())
+          lc->trivial = 1;
+        break;
+          case TYPE_CONSTANT:
+        if (key->name == SolvAttr::medianr.idStr().id())
+          lc->medianr = kv->num;
+        break;
+      }
+      /* continue walking */
+      return 0;
+    }
+
+    std::string Solvable::lookupLocation(unsigned &medianr) const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      ::Repo *repo = _solvable->repo;
+      ::Pool *pool = repo->pool;
+      Id sid = _solvable - pool->solvables;
+      ::Repodata *data;
+      unsigned i;
+      LocCallback lc;
+      lc.medianr = 1;
+      lc.mediadir = 0;
+      lc.mediafile = 0;
+      lc.trivial = 0;
+      for (i = 0, data = repo->repodata; i < repo->nrepodata; i++, data++)
+      {
+        if (data->state == REPODATA_STUB || data->state == REPODATA_ERROR)
+          continue;
+        if (sid < data->start || sid >= data->end)
+          continue;
+        repodata_search(data, sid - data->start, 0, location_cb, &lc);
+      }
+      medianr = lc.medianr;
+      std::string ret;
+      
+      if (!lc.trivial)
+      {
+        if (lc.mediafile)
+          ret += lc.mediafile;
+        return ret;
+      }
+
+      if (lc.mediadir)
+      {
+        ret += std::string( lc.mediadir ) + "/";
+      }
+      else
+      {
+        /* If we haven't seen an explicit dirname, then prepend the arch as
+           directory.  */
+        ret += "suse/";
+        ret += IdString(_solvable->arch).asString() + "/";
+      }
+      /* Trivial means that we can construct the rpm name from our
+         solvable data, as name-evr.arch.rpm .  */
+      ret += IdString(_solvable->name).asString();
+      ret += '-';
+      ret += IdString(_solvable->evr).asString();
+      ret += '.';
+      ret += IdString(_solvable->arch).asString();
+      ret += ".rpm";
+      return ret;
+    }
+
+    ResKind Solvable::kind() const
+    {
+      NO_SOLVABLE_RETURN( ResKind() );
+      // detect srcpackages by 'arch'
+      switch ( _solvable->arch )
+      {
+        case ARCH_SRC:
+        case ARCH_NOSRC:
+          return ResKind::srcpackage;
+          break;
+      }
+
+      const char * ident = IdString( _solvable->name ).c_str();
+      const char * sep = ::strchr( ident, ':' );
+
+      // no ':' in package names (hopefully)
+      if ( ! sep )
+        return ResKind::package;
+
+      // quick check for well known kinds
+      if ( sep-ident >= 4 )
+      {
+        switch ( ident[3] )
+        {
+#define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) return ResKind::K
+          //             ----v
+          case 'c': OUTS( patch, 5 );       break;
+          case 'd': OUTS( product, 7 );     break;
+          case 'i': OUTS( script, 6 );      break;
+          case 'k': OUTS( package, 7 );     break;
+          case 'm': OUTS( atom, 4 );        break;
+          case 'p': OUTS( srcpackage, 10 ); break;
+          case 's': OUTS( message, 7 );     break;
+          case 't': OUTS( pattern, 7 );     break;
+#undef OUTS
+        }
+      }
+
+      // an unknown kind
+      return ResKind( std::string( ident, sep-ident ) );
+    }
+
+    bool Solvable::isKind( const ResKind & kind_r ) const
+    {
+      NO_SOLVABLE_RETURN( false );
+
+      // detect srcpackages by 'arch'
+      if ( kind_r == ResKind::srcpackage )
+      {
+        return( _solvable->arch == ARCH_SRC || _solvable->arch == ARCH_NOSRC );
+      }
+
+      // no ':' in package names (hopefully)
+      const char * ident = IdString( _solvable->name ).c_str();
+      if ( kind_r == ResKind::package )
+      {
+        return( ::strchr( ident, ':' ) == 0 );
+      }
+
+      // look for a 'kind:' prefix
+      const char * kind = kind_r.c_str();
+      unsigned     ksize = ::strlen( kind );
+      return( ::strncmp( ident, kind, ksize ) == 0
+              && ident[ksize] == ':' );
+    }
+
+    std::string Solvable::name() const
+    {
+      NO_SOLVABLE_RETURN( std::string() );
+      const char * ident = IdString( _solvable->name ).c_str();
+      const char * sep = ::strchr( ident, ':' );
+      return( sep ? sep+1 : ident );
+    }
+
+    Edition Solvable::edition() const
+    {
+      NO_SOLVABLE_RETURN( Edition() );
+      return Edition( _solvable->evr );
+    }
+
+    Arch Solvable::arch() const
+    {
+      NO_SOLVABLE_RETURN( Arch_noarch ); //ArchId() );
+      switch ( _solvable->arch )
+      {
+        case ARCH_SRC:
+        case ARCH_NOSRC:
+          return Arch_noarch; //ArchId( ARCH_NOARCH );
+          break;
+      }
+      return Arch( IdString(_solvable->arch).asString() );
+      //return ArchId( _solvable->arch );
+    }
+
+    IdString Solvable::vendor() const
+    {
+      NO_SOLVABLE_RETURN( IdString() );
+      return IdString( _solvable->vendor );
     }
 
     Capabilities Solvable::operator[]( Dep which_r ) const
     {
-      NO_SOLVABLE_RETURN( Capabilities() );
-      ::Offset offs = 0;
       switch( which_r.inSwitch() )
       {
-        case Dep::PROVIDES_e:    offs = _solvable->provides;    break;
-        case Dep::REQUIRES_e:    offs = _solvable->requires;    break;
-        case Dep::CONFLICTS_e:   offs = _solvable->conflicts;   break;
-        case Dep::OBSOLETES_e:   offs = _solvable->obsoletes;   break;
-        case Dep::RECOMMENDS_e:  offs = _solvable->recommends;  break;
-        case Dep::SUGGESTS_e:    offs = _solvable->suggests;    break;
-        case Dep::FRESHENS_e:    offs = _solvable->freshens;    break;
-        case Dep::ENHANCES_e:    offs = _solvable->enhances;    break;
-        case Dep::SUPPLEMENTS_e: offs = _solvable->supplements; break;
-
-        case Dep::PREREQUIRES_e:
-          // prerequires are a subset of requires
-          if ( (offs = _solvable->requires) )
-            return Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker );
-          else
-            return Capabilities();
-          break;
+        case Dep::PROVIDES_e:    return provides();    break;
+        case Dep::REQUIRES_e:    return requires();    break;
+        case Dep::CONFLICTS_e:   return conflicts();   break;
+        case Dep::OBSOLETES_e:   return obsoletes();   break;
+        case Dep::RECOMMENDS_e:  return recommends();  break;
+        case Dep::SUGGESTS_e:    return suggests();    break;
+        case Dep::FRESHENS_e:    return freshens();    break;
+        case Dep::ENHANCES_e:    return enhances();    break;
+        case Dep::SUPPLEMENTS_e: return supplements(); break;
+        case Dep::PREREQUIRES_e: return prerequires(); break;
       }
+      return Capabilities();
+    }
 
-      return offs ? Capabilities( _solvable->repo->idarraydata + offs )
-                  : Capabilities();
+    inline Capabilities _getCapabilities( detail::IdType * idarraydata_r, ::Offset offs_r )
+    {
+      return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
+    }
+    Capabilities Solvable::provides() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->provides );
+    }
+    Capabilities Solvable::requires() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->requires );
+    }
+    Capabilities Solvable::conflicts() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->conflicts );
+    }
+    Capabilities Solvable::obsoletes() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->obsoletes );
+    }
+    Capabilities Solvable::recommends() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->recommends );
+    }
+    Capabilities Solvable::suggests() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->suggests );
+    }
+    Capabilities Solvable::freshens() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->freshens );
+    }
+    Capabilities Solvable::enhances() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->enhances );
+    }
+    Capabilities Solvable::supplements() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      return _getCapabilities( _solvable->repo->idarraydata, _solvable->supplements );
+    }
+    Capabilities Solvable::prerequires() const
+    {
+      NO_SOLVABLE_RETURN( Capabilities() );
+      // prerequires are a subset of requires
+       ::Offset offs = _solvable->requires;
+       return offs ? Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker )
+                   : Capabilities();
     }
 
     /******************************************************************
@@ -129,7 +367,8 @@ namespace zypp
         return str << "sat::solvable()";
 
       return str << "sat::solvable(" << obj.id() << "|"
-          << obj.name() << '-' << obj.evr() << '.' << obj.arch() << "){"
+          << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()
+          << '-' << obj.edition() << '.' << obj.arch() << "){"
           << obj.repo().name() << "}";
     }
 

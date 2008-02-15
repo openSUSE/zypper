@@ -13,6 +13,8 @@
 #define ZYPP_SAT_DETAIL_POOLMEMBER_H
 
 #include "zypp/base/Iterator.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Easy.h"
 
 extern "C"
 {
@@ -21,16 +23,28 @@ struct _Repo;
 struct _Pool;
 }
 
+#define ZYPP_DEFINE_ID_HASHABLE(C)           \
+namespace std { namespace tr1 {              \
+  template<class _Tp> struct hash;           \
+  template<> struct hash<C>                  \
+  {                                          \
+    size_t operator()( const C & __s ) const \
+    { return __s.id(); }                     \
+  };                                         \
+}}
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class IdString;
+  class Capability;
+  class Capabilities;
+
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    class IdStr;
-    class Capability;
-    class Capabilities;
     class Solvable;
     class Repo;
     class Pool;
@@ -68,10 +82,13 @@ namespace zypp
       /** Generic Id type. */
       typedef int IdType;
       static const IdType noId( 0 );
+      static const IdType emptyId( 1 );
 
-      /** Internal ids satlib includes in dependencies. */
-      static const IdType solvablePrereqMarker( 16 ); // MPL check in PoolImpl.cc
-      static const IdType solvableFileMarker  ( 17 ); // MPL check in PoolImpl.cc
+      /** Internal ids satlib includes in dependencies.
+       * MPL check in PoolImpl.cc
+      */
+      static const IdType solvablePrereqMarker( 16 );
+      static const IdType solvableFileMarker  ( 17 );
       /** Test for internal ids satlib includes in dependencies. */
       inline bool isDepMarkerId( IdType id_r )
       { return( id_r == solvablePrereqMarker || id_r == solvableFileMarker ); }
@@ -80,7 +97,8 @@ namespace zypp
        * Indext into solvable array.
       */
       typedef unsigned SolvableIdType;
-      /** Id to denote \ref Solvable::nosolvable. */
+      typedef SolvableIdType size_type;
+     /** Id to denote \ref Solvable::nosolvable. */
       static const SolvableIdType noSolvableId( 0 );
 
       /** Id type to connect \ref Repo and sat-repo. */
@@ -103,14 +121,6 @@ namespace zypp
 
       /////////////////////////////////////////////////////////////////
     } // namespace detail
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    typedef IdStr KindId;
-    typedef IdStr NameId;
-    typedef IdStr EvrId;
-    typedef IdStr ArchId;
-    typedef IdStr VendorId;
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

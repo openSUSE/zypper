@@ -13,7 +13,6 @@
 #define ZYPP_SCRIPT_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/ScriptImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,7 +27,6 @@ namespace zypp
   class Script : public ResObject
   {
   public:
-    typedef detail::ScriptImplIf     Impl;
     typedef Script                   Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
@@ -62,16 +60,11 @@ namespace zypp
     OnMediaLocation undoScriptLocation() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
-    Script( const NVRAD & nvrad_r );
+    Script( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Script();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

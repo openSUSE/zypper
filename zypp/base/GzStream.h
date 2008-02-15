@@ -64,6 +64,10 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
+    /** \relates ZlibError Stream output. */
+    inline std::ostream & operator<<( std::ostream & str, const ZlibError & obj )
+    { return str << obj.strerror(); }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : fgzstreambuf

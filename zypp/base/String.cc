@@ -57,7 +57,7 @@ namespace zypp
      **      FUNCTION NAME : strToTrue
      **      FUNCTION TYPE : bool
     */
-    bool strToTrue( const std::string & str )
+    bool strToTrue( const C_Str & str )
     {
       std::string t( toLower( str ) );
       return(    t == "1"
@@ -72,7 +72,7 @@ namespace zypp
      **      FUNCTION NAME : strToFalse
      **      FUNCTION TYPE : bool
     */
-    bool strToFalse( const std::string & str )
+    bool strToFalse( const C_Str & str )
     {
       std::string t( toLower( str ) );
       return ! (    t == "0"

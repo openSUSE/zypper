@@ -42,8 +42,6 @@ namespace zypp
      *
      * \note There's one Selectable per installed item, in case more
      * than one item is intalled.
-     *
-     * \todo Make it a _Ref.
     */
     class Selectable : public base::ReferenceCounted, private base::NonCopyable
     {

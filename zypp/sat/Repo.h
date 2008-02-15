@@ -24,6 +24,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Pathname;
+  class RepoInfo;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
@@ -39,6 +40,7 @@ namespace zypp
     {
       public:
         typedef filter_iterator<detail::ByRepo, detail::SolvableIterator> SolvableIterator;
+        typedef detail::size_type size_type;
 
       public:
         /** Default ctor creates \ref norepo.*/
@@ -60,14 +62,14 @@ namespace zypp
         bool isSystemRepo() const;
 
       public:
-        /** The repos name (alias?). */
+        /** The repos name (alias). */
         std::string name() const;
 
         /** Whether \ref Repo contains solvables. */
         bool solvablesEmpty() const;
 
         /** Number of solvables in \ref Repo. */
-        unsigned solvablesSize() const;
+        size_type solvablesSize() const;
 
         /** Iterator to the first \ref Solvable. */
         SolvableIterator solvablesBegin() const;
@@ -76,6 +78,20 @@ namespace zypp
         SolvableIterator solvablesEnd() const;
 
       public:
+        /** Return any associated \ref RepoInfo. */
+        RepoInfo info() const;
+
+        /** Set \ref RepoInfo for this repository.
+         * \throws Exception if this is \ref norepo
+         * \throws Exception if the \ref RepoInfo::alias
+         *         does not match the \ref Repo::name.
+        */
+        void setInfo( const RepoInfo & info_r );
+
+         /** Remove any \ref RepoInfo set for this repository. */
+        void clearInfo();
+
+     public:
         /** Remove this \ref Repo from it's \ref Pool. */
         void eraseFromPool();
 
@@ -83,16 +99,25 @@ namespace zypp
         struct EraseFromPool;
 
       public:
+        /** \name Repo content manipulating methods.
+         * \todo maybe a separate Repo/Solvable content manip interface
+         * provided by the pool.
+         */
+        //@{
         /** Load \ref Solvables from a solv-file.
+         * In case of an exception the repo remains in the \ref Pool.
+         * \throws Exception if this is \ref norepo
          * \throws Exception if loading the solv-file fails.
+         * \see \ref Pool::addRepoSolv and \ref Repo::EraseFromPool
          */
         void addSolv( const Pathname & file_r );
 
-        /** Add a new empt \ref Solvable to this \ref Repo. */
-        detail::SolvableIdType addSolvable();
-
         /** Add \c count_r new empty \ref Solvable to this \ref Repo. */
         detail::SolvableIdType addSolvables( unsigned count_r );
+        /** \overload Add only one new \ref Solvable. */
+        detail::SolvableIdType addSolvable()
+        { return addSolvables( 1 ); }
+        //@}
 
       public:
         /** Expert backdoor. */
@@ -118,11 +143,16 @@ namespace zypp
     inline bool operator!=( const Repo & lhs, const Repo & rhs )
     { return lhs.get() != rhs.get(); }
 
+    /** \relates Repository */
+    inline bool operator<( const Repo & lhs, const Repo & rhs )
+    { return lhs.get() < rhs.get(); }      
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Repo::EraseFromPool
     //
     /** Functor removing \ref Repo from it's \ref Pool.
+     *
      * E.g. used as dispose function in. \ref AutoDispose
      * to provide a convenient and exception safe temporary
      * \ref Repo.

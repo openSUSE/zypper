@@ -112,7 +112,7 @@ namespace zypp
 	      _data->arch = Arch( words[3] );
 	    }
 	    _data->name    = words[0];
-	    _data->edition = Edition( words[1],words[2] );
+	    _data->edition = Edition( words[1], words[2] );
 	  }
 
 

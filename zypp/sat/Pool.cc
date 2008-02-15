@@ -22,13 +22,10 @@ extern "C"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
-#include "zypp/Pathname.h"
 #include "zypp/AutoDispose.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Pool.h"
-#include "zypp/sat/Repo.h"
-#include "zypp/sat/Solvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -46,19 +43,19 @@ namespace zypp
     ::_Pool * Pool::get() const
     { return myPool().getPool(); }
 
+    Pool::size_type Pool::capacity() const
+    { return myPool()->nsolvables; }
+
     const SerialNumber & Pool::serial() const
     { return myPool().serial(); }
 
-    void Pool::setDirty()
-    { return myPool().setDirty(); }
-
-    void Pool::prepare()
+    void Pool::prepare() const
     { return myPool().prepare(); }
 
     bool Pool::reposEmpty() const
     { return myPool()->nrepos; }
 
-    unsigned Pool::reposSize() const
+    Pool::size_type Pool::reposSize() const
     { return myPool()->nrepos; }
 
     Pool::RepoIterator Pool::reposBegin() const
@@ -80,12 +77,12 @@ namespace zypp
       return true;
     }
 
-    unsigned Pool::solvablesSize() const
+    Pool::size_type Pool::solvablesSize() const
     {
-      // return myPool()->nsolvables;
+      // Do not return myPool()->nsolvables;
       // nsolvables is the array size including
       // invalid Solvables.
-      unsigned ret = 0;
+      size_type ret = 0;
       for_( it, reposBegin(), reposEnd() )
       {
         ret += it->solvablesSize();
@@ -104,8 +101,18 @@ namespace zypp
       Repo ret( reposFind( name_r ) );
       if ( ret )
         return ret;
-      myPool().setDirty();
-      return Repo( ::repo_create( get(), name_r.c_str() ) );
+
+      ret = Repo( myPool()._createRepo( name_r ) );
+      if ( name_r == systemRepoName() )
+      {
+        // autoprovide (dummy) RepoInfo
+        ret.setInfo( RepoInfo()
+                     .setAlias( name_r )
+                     .setName( name_r )
+                     .setAutorefresh( true )
+                     .setEnabled( true ) );
+      }
+      return ret;
     }
 
     Repo Pool::reposFind( const std::string & name_r ) const
@@ -133,16 +140,47 @@ namespace zypp
     Repo Pool::addRepoSolv( const Pathname & file_r )
     { return addRepoSolv( file_r, file_r.basename() ); }
 
-    /******************************************************************
+    Repo Pool::addRepoSolv( const Pathname & file_r, const RepoInfo & info_r )
+    {
+      Repo ret( addRepoSolv( file_r, info_r.alias() ) );
+      ret.setInfo( info_r );
+      return ret;
+    }
+
+    /////////////////////////////////////////////////////////////////
+
+    void Pool::setRequestedLocales( const LocaleSet & locales_r )
+    { myPool().setRequestedLocales( locales_r ); }
+
+    bool Pool::addRequestedLocale( const Locale & locale_r )
+    { return myPool().addRequestedLocale( locale_r ); }
+
+    bool Pool::eraseRequestedLocale( const Locale & locale_r )
+    { return myPool().eraseRequestedLocale( locale_r ); }
+
+    const LocaleSet & Pool::getRequestedLocales() const
+    { return myPool().getRequestedLocales(); }
+
+    bool Pool::isRequestedLocale( const Locale & locale_r ) const
+    { return myPool().isRequestedLocale( locale_r ); }
+
+    const LocaleSet & Pool::getAvailableLocales() const
+    {  return myPool().getAvailableLocales(); }
+
+    bool Pool::isAvailableLocale( const Locale & locale_r ) const
+    { return myPool().isAvailableLocale( locale_r ); }
+
+   /******************************************************************
     **
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
     std::ostream & operator<<( std::ostream & str, const Pool & obj )
     {
-      return str << "sat::pool(" << obj.serial() << "){"
+      return str << "sat::pool(" << obj.serial() << ")["
+          << obj.capacity() << "]{"
           << obj.reposSize() << "repos|"
-	  << obj.solvablesSize() << "slov}" << "whatprovides *"<< obj.get()->whatprovides;
+	  << obj.solvablesSize() << "slov}";
     }
 
     /////////////////////////////////////////////////////////////////

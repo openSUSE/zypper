@@ -60,7 +60,7 @@ namespace zypp
 	    _data       = 0;
             //  Filter unwanted stuff
             if ( ret
-                 && ! ret->arch.compatibleWith( _sysarch ) )
+                 && ! Arch(ret->arch).compatibleWith( _sysarch ) )
             {
                 return 0;
             }
@@ -105,7 +105,7 @@ namespace zypp
 	      _data->arch = Arch( words[3] );
 	    }
 	    _data->name    = words[0];
-	    _data->edition = Edition( words[1],words[2] );
+	    _data->edition = Edition( words[1], words[2] );
 	  }
 
 	  /** Consume =Cks:. */
@@ -211,7 +211,7 @@ namespace zypp
 	      _data->sharedDataTag = makeSharedIdent( ResTraits<SrcPackage>::kind,
 		                                      words[0],
 						      Edition( words[1], words[2] ),
-						      Arch() );
+						      Arch_noarch );
 	    }
 	    else
 	    {

@@ -187,8 +187,8 @@ namespace zypp
    * MapTypeKey_const_iterator keyBegin( make_map_key_begin( mymap ) );
    * MapTypeKey_const_iterator keyEnd  ( make_map_key_end( mymap ) );
    *
-   * MapTypeKey_const_iterator valBegin( make_map_value_begin( mymap ) );
-   * MapTypeKey_const_iterator valEnd  ( make_map_value_end( mymap ) );
+   * MapTypeValue_const_iterator valBegin( make_map_value_begin( mymap ) );
+   * MapTypeValue_const_iterator valEnd  ( make_map_value_end( mymap ) );
    *
    * std::for_each( keyBegin, keyEnd, DoSomething() );
    * std::for_each( valBegin, valEnd, DoSomething() );

@@ -35,10 +35,9 @@
 
 /-*/
 
-#include "zypp/CapSet.h"
-#include "zypp/capability/SplitCap.h"
-
-#include "zypp/base/Logger.h"
+#include "zypp/Capabilities.h"
+#include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
@@ -49,18 +48,15 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Capability.h"
-#include "zypp/CapFactory.h"
 #include "zypp/VendorAttr.h"
 #include "zypp/Package.h"
-
-#include "zypp/capability/CapabilityImpl.h"
 #include "zypp/ZYppFactory.h"
-
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
-
+#include "zypp/solver/detail/Testcase.h"
 #include "zypp/Target.h"
+#include "zypp/sat/SATResolver.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -74,22 +70,20 @@ namespace zypp
 
 using namespace std;
 using namespace zypp;
-using zypp::capability::SplitCap;
-
 
 /** Order on AvialableItemSet.
  * \li best Arch
  * \li best Edition
  * \li ResObject::constPtr as fallback.
 */
-struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
+struct AVOrder : public std::binary_function<PoolItem,PoolItem,bool>
 {
     // NOTE: operator() provides LESS semantics to order the set.
     // So LESS means 'prior in set'. We want 'better' archs and
     // 'better' editions at the beginning of the set. So we return
     // TRUE if (lhs > rhs)!
     //
-    bool operator()( const PoolItem_Ref lhs, const PoolItem_Ref rhs ) const
+    bool operator()( const PoolItem lhs, const PoolItem rhs ) const
         {
 	    int res = lhs->arch().compare( rhs->arch() );
 	    if ( res )
@@ -105,7 +99,7 @@ struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
         }
 };
 
-typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
+typedef std::set<PoolItem, AVOrder> PoolItemOrderSet;
 
 
 
@@ -116,7 +110,7 @@ typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
 // newer.
 
 static bool
-downgrade_allowed( PoolItem_Ref installed, PoolItem_Ref candidate, bool silent_downgrades )
+downgrade_allowed( PoolItem installed, PoolItem candidate, bool silent_downgrades )
 {
     if (installed.status().isLocked()) {
 	MIL << "Installed " << installed << " is locked, not upgrading" << endl;
@@ -134,7 +128,7 @@ downgrade_allowed( PoolItem_Ref installed, PoolItem_Ref candidate, bool silent_d
       DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
 
     if (cpkg
-	&& VendorAttr::instance().isKnown( cpkg->vendor() ) )
+	&& VendorAttr::instance().equivalent( ipkg->vendor(), cpkg->vendor() ) )
     {
 	if ( silent_downgrades )
 	    return true;
@@ -147,114 +141,13 @@ downgrade_allowed( PoolItem_Ref installed, PoolItem_Ref candidate, bool silent_d
 }
 
 
-
-struct FindObsoletes
-{
-    bool obsoletes;
-
-    FindObsoletes ()
-	: obsoletes (false)
-    { }
-
-    bool operator()( const CapAndItem & cai )
-    {
-	obsoletes = true;				// we have a match
-	return false;					// stop looping here
-    }
-};
-
-
-// does the candidate obsolete the capability ?
-
 bool
-Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap)
+Resolver::doesObsoleteItem (PoolItem candidate, PoolItem installed)
 {
-    _DEBUG("doesObsoleteCapability " << candidate << ", " << cap);
-
-    Dep dep (Dep::OBSOLETES);
-    FindObsoletes info;
-    invokeOnEach( _pool.byCapabilityIndexBegin( cap.index(), dep ),
-		  _pool.byCapabilityIndexEnd( cap.index(), dep ),
-		  resfilter::ByCapMatch( cap ),
-		  functor::functorRef<bool,CapAndItem>(info) );
-
-    _DEBUG((info.obsoletes ? "YES" : "NO"));
-    return info.obsoletes;
-}
-
-
-bool
-Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
-{
-    CapFactory factory;
-    Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
-
-    return doesObsoleteCapability (candidate, installedCap);
+    return _satResolver->doesObsoleteItem (candidate, installed);
 }
 
 //-----------------------------------------------------------------------------
-
-// find best available providers for installed name
-
-typedef map<string, PoolItem_Ref> FindMap;
-
-struct FindProviders
-{
-    FindMap providers;		// the best providers which matched
-    PoolItem forItem;
-    bool otherVendorFound;
-    FindProviders (PoolItem item)
-	:forItem(item),
-	 otherVendorFound(false)
-    { }
-
-    bool operator()( const CapAndItem & cai )
-    {
-	PoolItem provider( cai.item );
-	if ( !VendorAttr::instance().equivalent(provider->vendor(), forItem->vendor()) )
-	{
-	    MIL << "Discarding '" << provider << "' from vendor '"
-		<< provider->vendor() << "' different to uninstalled '"
-		<< forItem->vendor() << "' vendor." << endl;
-	    otherVendorFound = true;
-	} else if ( provider.status().isToBeUninstalled() ) {
-	    MIL << "  IGNORE relation match (package is tagged to delete): " << cai.cap << " ==> " << provider << endl;
-	}
-	else {
-	    FindMap::iterator it = providers.find( provider->name() );
-
-	    if (it != providers.end()) {				// provider with same name found
-		if (provider.status().isToBeInstalled()
-		    || it->second.status().isToBeInstalled()) {
-
-		    if (provider.status().isToBeInstalled()
-			&& it->second.status().isToBeInstalled()) {
-			ERR << "only one should be set for installation: " << it->second << "; " << provider << endl;
-		    } else {
-			if (provider.status().isToBeInstalled()) {
-			    it->second = provider; // take thatone which is already set for installation
-			}
-		    }
-		} else {
-		    // not the same --> find better provider
-		    int cmp = it->second->arch().compare( provider->arch() );
-		    if (cmp < 0) {						// new provider has better arch
-			it->second = provider;
-		    }
-		    else if (cmp == 0) {					// new provider has equal arch
-			if (it->second->edition().compare( provider->edition() ) < 0) {
-			    it->second = provider;				// new provider has better edition
-			}
-		    }
-		}
-	    }
-	    else {
-		providers[provider->name()] = provider;
-	    }
-	}
-	return true;
-    }
-};
 
 
 //-----------------------------------------------------------------------------
@@ -265,19 +158,19 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
 {
   public:
     bool found;
-    PoolItem_Ref candidate;
-    
-    LookForSelected (PoolItem_Ref can)
+    PoolItem candidate;
+
+    LookForSelected (PoolItem can)
 	: found (false),
 	candidate (can)
     { }
 
-    bool operator()( PoolItem_Ref item )
+    bool operator()( PoolItem item )
     {
 	if (item.status().isToBeInstalled()
 	    && item->edition() == candidate->edition()
 	    && item->arch() == candidate->arch()) {
-	    MIL << item << " is already selected for installation --> ignoring" << endl;	    
+	    MIL << item << " is already selected for installation --> ignoring" << endl;
 	    found = true;
 	    return false; // stop here
 	}
@@ -285,13 +178,12 @@ class LookForSelected : public resfilter::PoolItemFilterFunctor
     }
 };
 
-bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
+bool setForInstallation (const ResPool &pool, PoolItem item) {
     LookForSelected info(item);
 
-    invokeOnEach( pool.byNameBegin (item->name()),
-		  pool.byNameEnd (item->name()),
-		  functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-				  resfilter::ByKind (item->kind())),		// equal kind
+    invokeOnEach( pool.byIdentBegin (item->kind(),item->name()),
+		  pool.byIdentEnd (item->kind(),item->name()),
+		  resfilter::ByUninstalled (),			// ByUninstalled
 		  functor::functorRef<bool,PoolItem> (info) );
     if (info.found) {
 	MIL << "   ---> " << item << " will be ignoring" << endl;
@@ -299,7 +191,7 @@ bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
     } else {
 	return item.status().setToBeInstalled( ResStatus::APPL_HIGH );
     }
-}	
+}
 
 //-----------------------------------------------------------------------------
 
@@ -311,23 +203,19 @@ bool setForInstallation (const ResPool &pool, PoolItem_Ref item) {
 //
 //	DESCRIPTION : go through all installed (but not yet touched by user)
 //		packages and look for update candidates
-//		handle splitprovides and replaced and dropped
 //
 void
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
-  typedef map<PoolItem_Ref,PoolItem_Ref> CandidateMap;
-  typedef intrusive_ptr<const SplitCap> SplitCapPtr;
-  typedef map<PoolItem_Ref,PoolItemOrderSet> SplitMap;
-  typedef map<PoolItem_Ref,PoolItemOrderSet> TodoMap;
+  typedef map<PoolItem,PoolItem> CandidateMap;
+  typedef map<PoolItem,PoolItemOrderSet> TodoMap;
 
   CandidateMap candidatemap;
 
-  SplitMap    splitmap;
-  TodoMap     applyingSplits;
-  TodoMap     addSplitted;
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
+
+  sat::Pool::instance().prepare();  
 
   Target_Ptr target;
   try {
@@ -347,6 +235,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     << "(keep_installed_patches:" << (opt_stats_r.keep_installed_patches?"yes":"no") << ")"
     << endl;
 
+  // create a testcase for the updating system
+  Testcase testcase("/var/log/updateTestcase");
+  testcase.createTestcase (*this, true, false); // create pool, do not solve
+
   _update_items.clear();
   {
     UpgradeOptions opts( opt_stats_r );
@@ -354,19 +246,12 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     (UpgradeOptions&)opt_stats_r = opts;
   }
 
-  ///////////////////////////////////////////////////////////////////
-  // Reset all auto states and build PoolItemOrderSet of available candidates
-  // (those that do not belong to PoolItems set to delete).
-  //
-  // On the fly remember splitprovides and afterwards check, which
-  // of them do apply.
-  ///////////////////////////////////////////////////////////////////
-  PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
+  /* Find upgrade candidates for each package.  */
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
-    PoolItem_Ref item = *it;
-    PoolItem_Ref candidate;
-    PoolItem_Ref installed;
+    PoolItem item = *it;
+    PoolItem candidate;
+    PoolItem installed;
 
     if ( item.status().isToBeUninstalled() ) {
       MIL << "doUpgrade available: SKIP to delete " << item << endl;
@@ -395,7 +280,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	++opt_stats_r.pre_nocand;
 	continue;
       }
-      MIL << "item " << item << " is installed, candidate is " << candidate << endl;
       if (candidate.status().isSeen()) {			// seen already
 	candidate.status().setSeen(true);
 	continue;
@@ -420,12 +304,11 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	if ( !VendorAttr::instance().equivalent(installed->vendor(), candidate->vendor()) )
 	{
 	    MIL << "Discarding '" << candidate << "' from vendor '"
-		<< candidate->vendor() << "' different to uninstalled '"
+		<< candidate->vendor() << "' different to installed '"
 		<< installed->vendor() << "' vendor." << endl;
 	    continue;
 	}
 
-        MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find( installed );
 	if (cand_it == candidatemap.end()						// not in map yet
 	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
@@ -439,35 +322,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     }
 
     ++opt_stats_r.pre_avcand;
-    available.insert( candidate );
-
-    MIL << "installed " << installed << ", candidate " << candidate << endl;
-
-    // remember any splitprovides to packages actually installed.
-    CapSet caps = candidate->dep (Dep::PROVIDES);
-    for (CapSet::iterator cit = caps.begin(); cit != caps.end(); ++cit ) {
-	if (isKind<capability::SplitCap>( *cit ) ) {
-
-	    capability::CapabilityImpl::SplitInfo splitinfo = capability::CapabilityImpl::getSplitInfo( *cit );
-
-	    PoolItem splititem = Helper::findInstalledByNameAndKind (_pool, splitinfo.name, ResTraits<zypp::Package>::kind);
-            MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splititem:" << splititem << endl;
-	    if (splititem) {
-		if (target) {
-		    ResObject::constPtr robj = target->whoOwnsFile( splitinfo.path );
-                    if (robj)
-                      MIL << "whoOwnsFile(): " << *robj << endl;
-		    if (robj
-			&& robj->name() == splitinfo.name)
-		    {
-                      MIL << "split matched !" << endl;
-			splitmap[splititem].insert( candidate );
-		    }
-		}
-	    }
-	}
-    }
-
   } // iterate over the complete pool
 
   // reset all seen (for next run)
@@ -479,26 +333,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   MIL << "doUpgrade: " << opt_stats_r.pre_nocand << " packages without candidate (foreign, replaced or dropped)" << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_avcand << " packages available for update" << endl;
 
-  MIL << "doUpgrade: going to check " << splitmap.size() << " probably splitted packages" << endl;
-  {
-    ///////////////////////////////////////////////////////////////////
-    // splitmap entries are gouped by PoolItems (we know this). So get the
-    // filelist as a new PoolItem occures, and use it for consecutive entries.
-    //
-    // On the fly build SplitPkgMap from splits that do apply (i.e. file is
-    // in PoolItems's filelist). The way splitmap was created, candidates added
-    // are not initially tagged to delete!
-    ///////////////////////////////////////////////////////////////////
-
-    PoolItem_Ref citem;
-
-    for ( SplitMap::iterator it = splitmap.begin(); it != splitmap.end(); ++it ) {
-	applyingSplits[it->first].insert( it->second.begin(), it->second.end() );
-	_DEBUG("  split count for " << it->first->name() << " now " << applyingSplits[it->first].size());
-    }
-    splitmap.clear();
-  }
-
   ///////////////////////////////////////////////////////////////////
   // Now iterate installed packages, not selected to delete, and
   // figure out what might be an appropriate replacement. Current
@@ -509,7 +343,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
 
-    PoolItem_Ref installed(*it);
+    PoolItem installed(*it);
     ResStatus status (installed.status());
 
     if ( ! status.staysInstalled() ) {
@@ -559,7 +393,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     ///////////////////////////////////////////////////////////////////
     if ( cand_it != candidatemap.end() ) {
 
-      PoolItem_Ref candidate (cand_it->second);
+      PoolItem candidate (cand_it->second);
 
       if ( ! candidate.status().isToBeInstalled() ) {
 	int cmp = installed->edition().compare( candidate->edition() );
@@ -594,37 +428,73 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // If unique provides exists check if obsoleted (replaced).
       // Remember new package for 2nd pass.
 
-      Dep dep (Dep::PROVIDES);
-      CapFactory factory;
-      Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::GE, installed->edition() );
+      Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
+      // find ALL providers
+      PoolItemList possibleProviders = _satResolver->whoProvides (installedCap);
 
-      FindProviders info(installed);
+      // find best available providers for installed name
+      typedef map<string, PoolItem> FindMap;
+      FindMap providersMap;		// the best providers which matched
+      bool otherVendorFound = false;
+      for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
+	  PoolItem provider = *iter;
+	  if ( !VendorAttr::instance().equivalent(provider->vendor(), installed->vendor()) )
+	  {
+	      MIL << "Discarding '" << provider << "' from vendor '"
+		  << provider->vendor() << "' different to uninstalled '"
+		  << installed->vendor() << "' vendor." << endl;
+	      otherVendorFound = true;
+	  } else if ( provider.status().isToBeUninstalled() ) {
+	      MIL << "  IGNORE relation match (package is tagged to delete): " << provider << endl;
+	  }
+	  else {
+	      FindMap::iterator it = providersMap.find( provider->name() );
 
-      invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
-		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
-		    functor::chain( resfilter::ByCaIUninstalled(),
-				    resfilter::ByCapMatch( installedCap ) ) ,
-		    functor::functorRef<bool,CapAndItem>(info) );
+	      if (it != providersMap.end()) {				// provider with same name found
+		  if (provider.status().isToBeInstalled()
+		      || it->second.status().isToBeInstalled()) {
 
-      int num_providers = info.providers.size();
+		      if (provider.status().isToBeInstalled()
+			  && it->second.status().isToBeInstalled()) {
+			  ERR << "only one should be set for installation: " << it->second << "; " << provider << endl;
+		      } else {
+			  if (provider.status().isToBeInstalled()) {
+			      it->second = provider; // take thatone which is already set for installation
+			  }
+		      }
+		  } else {
+		      // not the same --> find better provider
+		      int cmp = it->second->arch().compare( provider->arch() );
+		      if (cmp < 0) {						// new provider has better arch
+			  it->second = provider;
+		      }
+		      else if (cmp == 0) {					// new provider has equal arch
+			  if (it->second->edition().compare( provider->edition() ) < 0) {
+			      it->second = provider;				// new provider has better edition
+			  }
+		      }
+		  }
+	      }
+	      else {
+		  providersMap[provider->name()] = provider;
+	      }
+	  }
+      }
 
-      _DEBUG("lookup " << num_providers << " provides for installed " << installedCap);
+      _DEBUG("lookup " << providersMap.size() << " provides for installed " << installedCap);
 
       // copy from map to set
       PoolItemOrderSet providers;
-      for (FindMap::const_iterator mapit = info.providers.begin(); mapit != info.providers.end(); ++mapit) {
+      for (FindMap::const_iterator mapit = providersMap.begin(); mapit != providersMap.end(); ++mapit) {
 	providers.insert( mapit->second );
       }
 
-      switch ( info.providers.size() ) {
+      switch ( providersMap.size() ) {
       case 0:
-	  if (info.otherVendorFound) {
+	  if (otherVendorFound) {
 	      MIL << " only resolvable with other vendor found ==> do nothing" << endl;
 	  } else {
 	      MIL << " ==> (dropped)" << endl;
-	      // wait untill splits are processed. Might be a split obsoletes
-	      // this one (i.e. package replaced but not provided by new one).
-	      // otherwise it's finaly dropped.
 	      probably_dropped = true;
 	  }
 	break;
@@ -644,74 +514,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
     }	// no candidate
 
-    ///////////////////////////////////////////////////////////////////
-    // anyway check for packages split off
-    ///////////////////////////////////////////////////////////////////
-
-    TodoMap::iterator sit = applyingSplits.find( installed );
-    if ( sit != applyingSplits.end() ) {
-      PoolItemOrderSet & toadd( sit->second );
-      if ( !toadd.size() ) {
-	INT << "Empty SplitPkgMap entry for " << installed << endl;
-      } else {
-	FindMap candidate;
-	for ( PoolItemOrderSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
-	    PoolItem_Ref split_candidate = *ait;
-	    if ( probably_dropped
-		 && split_candidate.status().staysUninstalled()
-		 && doesObsoleteItem (split_candidate, installed))
-	    {
-		probably_dropped = false;
-	    }
-
-	    FindMap::iterator itcandidate = candidate.find( split_candidate->name() );
-
-	    if (itcandidate != candidate.end()) {	// split canidate with the same name found
-		if (split_candidate.status().isToBeInstalled()
-		    || itcandidate->second.status().isToBeInstalled()) {
-
-		    if (split_candidate.status().isToBeInstalled()
-			&& itcandidate->second.status().isToBeInstalled()) {
-			ERR << "only one should be set for installation: " << itcandidate->second << "; " << split_candidate << endl;
-		    } else {
-			if (split_candidate.status().isToBeInstalled()) {
-			    itcandidate->second = split_candidate; // take thatone which is already set for installation
-			}
-		    }
-		} else {
-		    // not the same --> find better provider
-		    if (itcandidate->second->arch() != installed->arch()
-			&& split_candidate->arch() == installed->arch() ) {
-			// prefer candidate which the same architecture as the installed item
-			itcandidate->second = split_candidate;
-		    } else {
-			int cmp = itcandidate->second->arch().compare( split_candidate->arch() );
-			if (cmp < 0) {						// new provider has better arch
-			    itcandidate->second = split_candidate;
-			}
-			else if (cmp == 0) {					// new provider has equal arch
-			    if (itcandidate->second->edition().compare( split_candidate->edition() ) < 0) {
-				itcandidate->second = split_candidate;		// new provider has better edition
-			    }
-			}
-		    }
-		}
-	    }
-	    else {
-		candidate[split_candidate->name()] = split_candidate;
-	    }
-	}
-
-	PoolItemOrderSet addcandidate;
-	for (FindMap::iterator itcandidate = candidate.begin() ; itcandidate != candidate.end(); itcandidate++) {
-	    addcandidate.insert(itcandidate->second);
-	    MIL << " ==> ADD (splitted): " << itcandidate->second << endl;
-	}
-
-	addSplitted[installed] = addcandidate;
-      }
-      // count stats later
-    }
 
     ///////////////////////////////////////////////////////////////////
     // now handle dropped package
@@ -742,7 +544,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     PoolItemOrderSet & tset( it->second );		// these are the providers (well, just one)
 
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
-      PoolItem_Ref provider (*sit);
+      PoolItem provider (*sit);
 
       if (setForInstallation (_pool, provider)) {
 	++opt_stats_r.chk_replaced;
@@ -757,78 +559,54 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   }
 
-  // look at the split providers
-
-  for ( TodoMap::iterator it = addSplitted.begin(); it != addSplitted.end(); ++it ) {
-
-    PoolItemOrderSet & tset( it->second );
-    PoolItem_Ref lastItem = PoolItem_Ref();
-
-    for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
-	if (!lastItem
-	    || compareByN ( lastItem.resolvable(), sit->resolvable()) != 0) // do not install packages with the same NVR and other architecture
-	{
-	    PoolItem_Ref item( *sit );
-
-	    // only install split if its actually a different edition
-
-	    PoolItem_Ref already_installed = Helper::findInstalledItem( _pool, item );
-	    if (!already_installed
-		|| already_installed->edition().compare( item->edition() ) != 0 )
-	    {
-		if (setForInstallation (_pool, item)) {
-		    ++opt_stats_r.chk_add_split;
-		}
-	    }
-	}
-	lastItem = *sit;
-    }
-
-  }
-
   // look at the ones with multiple providers
 
   for ( TodoMap::iterator it = addMultiProvided.begin(); it != addMultiProvided.end(); ++it ) {
     MIL << "GET ONE OUT OF " << it->second.size() << " for " << it->first << endl;
 
-    PoolItem_Ref guess;
+    PoolItem guess;
     PoolItemOrderSet & gset( it->second );
 
     for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-      PoolItem_Ref item (*git);
+	PoolItem item (*git);
 
-      if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
-	guess = item;
+	if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
+	    guess = item;
 
-      if ( item.status().isToBeInstalled()) {
-	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
-	if ( ! doesObsoleteItem (item, it->first ) ) {
-	  it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+	if ( item.status().isToBeInstalled()) {
+	    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
+	    if ( ! doesObsoleteItem (item, it->first ) ) {
+		it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+	    }
+	    guess = PoolItem();
+	    break;
+	} else {
+	    // Be prepared to guess.
+	    // Most common situation for guessing is something like:
+	    //   qt-devel
+	    //   qt-devel-experimental
+	    //   qt-devel-japanese
+	    // That's why currently the shortest package name wins.
+	    if ( !guess || guess->name().size() > item->name().size() ) {
+		guess = item;
+	    }
 	}
-	guess = PoolItem_Ref();
-	break;
-      } else {
-	// Be prepared to guess.
-	// Most common situation for guessing is something like:
-	//   qt-devel
-	//   qt-devel-experimental
-	//   qt-devel-japanese
-	// That's why currently the shortest package name wins.
-	if ( !guess || guess->name().size() > item->name().size() ) {
-	  guess = item;
-	}
-      }
     }
 
     if ( guess ) {
 	// Checking if the selected provider depends on language, if yes try to find out the
 	// correct language package
 	bool requested_locale_match = false;
-	CapSet freshens( guess->dep( Dep::FRESHENS ) );
+	Capabilities freshens( guess->dep( Dep::FRESHENS ) );
 
+#warning THIS DOES NO LONGER WORK, CREATE SAT::sOLVABLE::WHATEVERISNEEDED (IN DOUBT ASK MA@)
+// We no longer have any 'locale()' deps in FRESHENS!
+// Providing 'bool sat::Solvable::supportsRequestedLocale()' should simplify this code.
+// Maybe an enum instead of bool ( yes, no and via fallback list )
 	// is this a language package ?
-	for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-	    if (cit->refers() == ResTraits<Language>::kind) {
+	for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+	    string citName = cit->asString();
+	    if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
 		requested_locale_match = true;
 		break;
 	    }
@@ -840,24 +618,24 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    requested_locale_match = false;
 
 	    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-		PoolItem_Ref item (*git);
+		PoolItem item (*git);
 
 		if ( item.status().isToBeInstalled()) {
 		    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
 		    if ( ! doesObsoleteItem (item, it->first ) ) {
 			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 		    }
-		    guess = PoolItem_Ref();
+		    guess = PoolItem();
 		    break;
 		} else {
 		    freshens = item->dep( Dep::FRESHENS );
-		    ZYpp::Ptr z = zypp::getZYpp();
-		    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
+		    const LocaleSet & requested_locales = sat::Pool::instance().getRequestedLocales();
 
 		    // try to find a match of the locale freshens with one of the requested locales
 
-		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-			if (cit->refers() == ResTraits<Language>::kind) {
+		    for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+			string citName = cit->asString();
+			if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
 			    string loc = cit->index();
 			    MIL << "Look for language fallback " << loc << ":" << item << endl;
 			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {

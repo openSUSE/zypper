@@ -28,8 +28,8 @@ namespace zypp
   //
   //	CLASS NAME : ResPoolProxy
   //
-  /**
-   * \todo Make it a _Ref.
+  /** ResPool::instance().proxy();
+   * \todo integrate it into ResPool
   */
   class ResPoolProxy
   {
@@ -49,10 +49,16 @@ namespace zypp
     typedef ResPool::repository_iterator    repository_iterator;
 
   public:
-    /** Default ctor: no pool */
+
+    /** Default ctor: no pool
+     * Nonempty proxies are provided by \ref ResPool.
+     * \see \ref ResPool::proxy
+     * \code
+     * ResPoolProxy p( ResPool::instance().proxy() );
+     * \endcode
+     */
     ResPoolProxy();
-    /** Ctor */
-    ResPoolProxy( ResPool_Ref pool_r );
+
     /** Dtor */
     ~ResPoolProxy();
 
@@ -179,7 +185,10 @@ namespace zypp
         return make_end( _Filter(), kind_r );
       }
 
-
+  private:
+    friend class pool::PoolImpl;
+    /** Ctor */
+    ResPoolProxy( ResPool pool_r );
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };

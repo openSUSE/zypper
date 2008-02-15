@@ -11,8 +11,6 @@
 */
 #include "zypp/Atom.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -24,8 +22,8 @@ namespace zypp
   //	METHOD NAME : Atom::Atom
   //	METHOD TYPE : Ctor
   //
-  Atom::Atom( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Atom::Atom( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////

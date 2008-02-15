@@ -10,9 +10,6 @@
  *
 */
 #include "zypp/Package.h"
-#include "zypp/base/Exception.h"
-
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,8 +22,8 @@ namespace zypp
   //	METHOD NAME : Package::Package
   //	METHOD TYPE : Ctor
   //
-  Package::Package( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Package::Package( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -44,76 +41,82 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   Changelog Package::changelog() const
-  { return pimpl().changelog(); }
+  { return Changelog(); }
 
   /** */
   std::string Package::buildhost() const
-  { return pimpl().buildhost(); }
+  { return std::string(); }
 
   /** */
   std::string Package::distribution() const
-  { return pimpl().distribution(); }
+  { return std::string(); }
 
   /** */
   Label Package::license() const
-  { return pimpl().license(); }
+  { return lookupStrAttribute( sat::SolvAttr::eula ); }
 
   /** */
   std::string Package::packager() const
-  { return pimpl().packager(); }
+  { return std::string(); }
 
   /** */
   PackageGroup Package::group() const
-  { return pimpl().group(); }
+  { return PackageGroup(); }
 
   Package::Keywords Package::keywords() const
-  { return pimpl().keywords(); }
+  { return Keywords(); }
 
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */
   std::string Package::url() const
-  { return pimpl().url(); }
+  { return std::string(); }
 
   /** */
   std::string Package::os() const
-  { return pimpl().os(); }
+  { return std::string(); }
 
   /** */
   Text Package::prein() const
-  { return pimpl().prein(); }
+  { return Text(); }
 
   /** */
   Text Package::postin() const
-  { return pimpl().postin(); }
+  { return Text(); }
 
   /** */
   Text Package::preun() const
-  { return pimpl().preun(); }
+  { return Text(); }
 
   /** */
   Text Package::postun() const
-  { return pimpl().postun(); }
+  { return Text(); }
 
   /** */
   ByteCount Package::sourcesize() const
-  { return pimpl().sourcesize(); }
+  { return ByteCount(); }
 
   /** */
   std::list<std::string> Package::authors() const
-  { return pimpl().authors(); }
+  { return std::list<std::string>(); }
 
   /** */
   std::list<std::string> Package::filenames() const
-  { return pimpl().filenames(); }
+  { return std::list<std::string>(); }
 
   OnMediaLocation Package::location() const
-  { return pimpl().location(); }
+  {
+    OnMediaLocation loc;
+    unsigned medianr;
+    std::string filename = lookupLocation( medianr );
+    loc.setLocation(filename, medianr);
+    return loc;
+  }
 
   std::string Package::sourcePkgName() const
-  { return pimpl().sourcePkgName(); }
+  { return std::string(); }
 
   Edition Package::sourcePkgEdition() const
-  { return pimpl().sourcePkgEdition(); }
+  { return Edition(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

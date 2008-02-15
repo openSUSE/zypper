@@ -41,6 +41,20 @@ namespace zypp
   public:
     
     /**
+     * reads the status from a file which contains the
+     * checksum and timestamp in each line.
+     *
+     * \throws Exception If the file is not valid or accessible
+     */
+    static RepoStatus fromCookieFile( const Pathname &path );
+  
+    /**
+     * save the status information to a cookie file
+     * \throws Exception if the file can't be saved
+     */
+    void saveToCookieFile( const Pathname &path ) const;
+
+    /**
      * Checksum of the repository.
      * Usually the checksum of the index, but any
      * checksum that changes when the repository changes

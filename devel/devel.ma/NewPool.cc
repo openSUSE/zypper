@@ -4,35 +4,24 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/LogTools.h>
+#include <zypp/base/Debug.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
-#include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
-#include <zypp/CapMatchHelper.h>
 
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
-#include "zypp/Package.h"
-#include "zypp/Pattern.h"
-#include "zypp/Language.h"
+#include "zypp/ResObjects.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
-#include "zypp/parser/TagParser.h"
-#include "zypp/parser/susetags/PackagesFileReader.h"
-#include "zypp/parser/susetags/PackagesLangFileReader.h"
-#include "zypp/parser/susetags/PatternFileReader.h"
-#include "zypp/parser/susetags/ContentFileReader.h"
-#include "zypp/parser/susetags/RepoIndex.h"
-#include "zypp/parser/susetags/RepoParser.h"
-#include "zypp/cache/CacheStore.h"
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
 
@@ -44,7 +33,10 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/detail/PoolImpl.h"
+
+#include <zypp/base/GzStream.h>
 
 #include <boost/mpl/int.hpp>
 
@@ -52,11 +44,10 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::ui;
-using zypp::parser::TagParser;
 
 ///////////////////////////////////////////////////////////////////
 
-static const Pathname sysRoot( "/Local/ROOT" );
+static const Pathname sysRoot( getenv("SYSROOT") ? getenv("SYSROOT") : "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -147,15 +138,15 @@ struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
   {
-    MIL << obj_r << endl;
-    DBG << " -> " << obj_r .satSolvable() << endl;
+    //MIL << obj_r << endl;
+    //DBG << " -> " << obj_r->satSolvable() << endl;
 
     return true;
   }
 
   bool operator()( const sat::Solvable & obj_r )
   {
-    dumpOn( MIL, obj_r ) << endl;
+    //dumpOn( MIL, obj_r ) << endl;
     return true;
   }
 };
@@ -218,26 +209,11 @@ inline bool g( const NameKindProxy & nkp, Arch arch = Arch() )
 
 ///////////////////////////////////////////////////////////////////
 
-bool solve( bool establish = false )
+bool solve()
 {
-  if ( establish )
-  {
-    bool eres = false;
-    {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      eres = getZYpp()->resolver()->establishPool();
-    }
-    if ( ! eres )
-    {
-      ERR << "establish " << eres << endl;
-      return false;
-    }
-    MIL << "establish " << eres << endl;
-  }
-
   bool rres = false;
   {
-    zypp::base::LogControl::TmpLineWriter shutUp;
+    //zypp::base::LogControl::TmpLineWriter shutUp;
     rres = getZYpp()->resolver()->resolvePool();
   }
   if ( ! rres )
@@ -375,7 +351,7 @@ void dumpIdStr()
 {
   for ( int i = -3; i < 30; ++i )
   {
-    DBG << i << '\t' << sat::IdStr( i ) << endl;
+    DBG << i << '\t' << IdString( i ) << endl;
   }
 }
 
@@ -406,8 +382,42 @@ namespace filter
   { return HasValue<_MemFun, _Value>( fun_r, val_r ); }
 }
 
+namespace zypp
+{
+}
 
+template <class L>
+struct _TestO { _TestO( const L & lhs ) : _lhs( lhs ) {} const L & _lhs; };
 
+template <class L>
+std::ostream & operator<<( std::ostream & str, const _TestO<L> & obj )
+{ const L & lhs( obj._lhs); return str << (lhs?'_':'*') << (lhs.empty()?'e':'_') << "'" << lhs << "'"; }
+
+template <class L>
+_TestO<L> testO( const L & lhs )
+{ return _TestO<L>( lhs ); }
+
+template <class L, class R>
+void testCMP( const L & lhs, const R & rhs )
+{
+  MIL << "LHS " << testO(lhs) << endl;
+  MIL << "RHS " << rhs << endl;
+
+#define OUTS(S) DBG << #S << ": " << (S) << endl
+  OUTS( lhs.compare(rhs) );
+  OUTS( lhs != rhs );
+  OUTS( lhs <  rhs );
+  OUTS( lhs <= rhs );
+  OUTS( lhs == rhs );
+  OUTS( lhs >= rhs );
+  OUTS( lhs >  rhs );
+#undef OUTS
+}
+
+void foo( int i, const Capability & c )
+{
+  WAR << c << endl;
+}
 
 /******************************************************************
 **
@@ -415,56 +425,16 @@ namespace filter
 **      FUNCTION TYPE : int
 */
 int main( int argc, char * argv[] )
-{
+try {
   //zypp::base::LogControl::instance().logfile( "log.restrict" );
   INT << "===[START]==========================================" << endl;
 
   sat::Pool satpool( sat::Pool::instance() );
-
-#if 1
-  //sat::Repo r( satpool.addRepoSolv( "sl10.1-beta7-packages.solv" ) );
-  //sat::Repo s( satpool.addRepoSolv( "sl10.1-beta7-selections.solv" ) );
-  sat::Repo s( satpool.addRepoSolv( "target.solv" ) );
-
-  sat::Capabilities r( (*satpool.solvablesBegin())[Dep::PROVIDES] );
-  MIL << r << endl;
-  sat::Capabilities::const_iterator it = r.begin();
-  DBG << *it << endl;
-  it = ++r.begin();
-  DBG << *it << endl;
-
-  if ( 1 )
-  std::for_each( make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                       satpool.solvablesBegin(), satpool.solvablesEnd() ),
-                 make_filter_iterator( filter::byValue( &sat::Solvable::name, "bash" ),
-                                       satpool.solvablesEnd(), satpool.solvablesEnd() ),
-                 Xprint() );
-
-  // make_filter_iterator(detail::ByRepo( *this ),
-  // Repo.cc-                                  detail::SolvableIterator(_repo->end),
-  // Repo.cc-                                  detail::SolvableIterator(_repo->end) );
-
-
-//   DBG << satpool.solvablesBegin()->name() << endl;
-//   DBG << (*satpool.solvablesBegin())[Dep::PROVIDES] << endl;
-
-  //std::for_each( satpool.solvablesBegin(), satpool.solvablesEnd(), Xprint() );
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-#endif
-
-  setenv( "ZYPP_CONF", (sysRoot/"zypp.conf").c_str(), 1 );
-
-  ResPool pool( getZYpp()->pool() );
+  ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
-  pool.satSync();
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
   RepoInfoList repos = repoManager.knownRepositories();
-  // SEC << "/Local/ROOT " << repos << endl;
 
   // launch repos
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
@@ -475,7 +445,7 @@ int main( int argc, char * argv[] )
     if ( ! nrepo.enabled() )
       continue;
 
-    if ( ! repoManager.isCached( nrepo ) || 0 )
+    if ( ! repoManager.isCached( nrepo ) || /*force*/false )
     {
       if ( repoManager.isCached( nrepo ) )
       {
@@ -490,8 +460,6 @@ int main( int argc, char * argv[] )
   }
 
   // create from cache:
-  std::list<Repository> repositories;
-
   {
     Measure x( "CREATE FROM CACHE" );
     for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
@@ -501,51 +469,53 @@ int main( int argc, char * argv[] )
         continue;
 
       Measure x( "CREATE FROM CACHE "+nrepo.alias() );
-      Repository nrep( repoManager.createFromCache( nrepo ) );
-      const zypp::ResStore & store( nrep.resolvables() );
-      repositories.push_back( nrep );
+      repoManager.loadFromCache( nrepo );
+      USR << "pool: " << pool << endl;
     }
   }
-
-  // load pool:
-  {
-    Measure x( "LOAD POOL" );
-    for_( it, repositories.begin(), repositories.end() )
-    {
-      Measure x( "LOAD POOL "+(*it).info().alias() );
-      const zypp::ResStore & store( (*it).resolvables() );
-      getZYpp()->addResolvables( store );
-    }
-  }
-
 
   if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
-      zypp::base::LogControl::TmpLineWriter shutUp;
-      getZYpp()->initTarget( sysRoot );
-      //getZYpp()->initTarget( "/" );
+      getZYpp()->initializeTarget( sysRoot );
+      getZYpp()->target()->load();
     }
-    dumpPoolStats( SEC << "TargetStore: " << endl,
-                   getZYpp()->target()->resolvables().begin(),
-                   getZYpp()->target()->resolvables().end() ) << endl;
   }
 
+  satpool.addRepoSolv( "/Local/ROOT/cache/openSUSE-11.0.solv" );
   USR << "pool: " << pool << endl;
-  pool.satSync();
 
-  waitForInput();
+  {
+    Measure x( "Upgrade" );
+    UpgradeStatistics u;
+    getZYpp()->resolver()->doUpgrade( u );
+  }
+
+
+  if ( 0 ) {
+  PoolItem pi ( getPi<Package>("amarok") );
+  MIL << pi << endl;
+  if ( pi )
+  {
+    pi.status().setTransact( true, ResStatus::USER );
+    solve();
+    vdumpPoolStats( USR << "Transacting:"<< endl,
+                    make_filter_begin<resfilter::ByTransact>(pool),
+                    make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+  }
+  }
+  //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
+  //waitForInput();
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
-
-  //sat::detail::PoolImpl satpool;
-  //sat::Pool satpool;
-  //MIL << satpool << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
 }
+catch (...)
+{}
 

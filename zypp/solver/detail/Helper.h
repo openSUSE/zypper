@@ -28,8 +28,8 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
-#include "zypp/CapSet.h"
-
+#include "zypp/Capabilities.h"
+#include "zypp/base/String.h"
 #include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -53,27 +53,35 @@ class Helper {
     // does *NOT* check edition
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
-    static PoolItem_Ref findInstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
+    static PoolItem findInstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
 
     // for name, find uninstalled item which has same name
-    static PoolItem_Ref findUninstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
+    static PoolItem findUninstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
 
     // for item, find installed item which has same name -> calls findInstalledByNameAndKind()
     // does *NOT* check edition
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
-    static PoolItem_Ref findInstalledItem (const ResPool & pool, PoolItem_Ref item);
+    static PoolItem findInstalledItem (const ResPool & pool, PoolItem item);
+    /** \overload Using ident cache entry. */
+    static PoolItem findInstalledItem (const std::vector<PoolItem> & pool, PoolItem item);
 
     // for item, find uninstalled item which has same name and higher edition
-    static PoolItem_Ref findUninstalledItem (const ResPool & pool, PoolItem_Ref item);
+    static PoolItem findUninstalledItem (const ResPool & pool, PoolItem item);
 
     // for item, find uninstalled item which has same name and equal edition
-    static PoolItem_Ref findReinstallItem (const ResPool & pool, PoolItem_Ref item);
+    static PoolItem findReinstallItem (const ResPool & pool, PoolItem item);
 
-    static PoolItem_Ref findUpdateItem (const ResPool & pool, PoolItem_Ref item);
+    static PoolItem findUpdateItem (const ResPool & pool, PoolItem item);
+    /** \overload Using ident cache entry. */
+    static PoolItem findUpdateItem (const std::vector<PoolItem> & pool, PoolItem item);
 
     // for item, check if this is the 'best' uninstalled (best arch, best version) item
-    static bool isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item);
+    static bool isBestUninstalledItem (const ResPool & pool, PoolItem item);
+
+    // Human readable item
+    static std::string itemToString (PoolItem item, bool shortVersion=false);
+    static std::string capToString (const Capability & capability);
 
     friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);
 

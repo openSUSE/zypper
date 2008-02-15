@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Feb 12 17:10:48 CET 2008 - coolo@suse.de
+
+- fix architectures on distupgrade
+
+-------------------------------------------------------------------
+Fri Feb  8 12:50:30 CET 2008 - coolo@suse.de
+
+- fixes from trunk merged
+
+-------------------------------------------------------------------
 Fri Feb  1 17:45:07 CET 2008 - jkupec@suse.cz
 
 - fixed renaming a repo to an existing one (bnc #228216)
@@ -2669,7 +2679,7 @@ Fri Aug 11 17:01:33 CEST 2006 - dmacvicar@suse.de
 
 - forward port 3924:3939
 - Add explicit finish callbacks for subtasks during ProvidePackage
-  to avoid UI confusion.
+  to avoid UI confusion.
 - rev3957
 
 -------------------------------------------------------------------
@@ -2760,7 +2770,7 @@ Tue Jul 18 17:42:45 CEST 2006 - dmacvicar@suse.de
 Tue Jul 18 12:56:17 CEST 2006 - dmacvicar@suse.de
 
 - Digest: Don't read the stream character wise but reading blocks,
-  as advised by matz profiling.
+  as advised by matz profiling.
 - r3819
 
 -------------------------------------------------------------------
@@ -2944,7 +2954,7 @@ Wed Jun  7 11:40:46 CEST 2006 - mt@suse.de
 Wed Jun  7 01:00:06 CEST 2006 - dmacvicar@suse.de
 
 - Merge fix for stalle tmpdir due to cyclic references, using a master
-  TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
+ TmpDir for zypp. (#178292) . There is still 1 tmpdir to fix.
 - rev 3521
 
 -------------------------------------------------------------------
@@ -2953,7 +2963,7 @@ Wed Jun  7 01:00:05 CEST 2006 - dmacvicar@suse.de
 - Fixes unneeded file download, and add download callbacks
   (still need yast side) #181204 and #160206
 - Fix stalle tmpdir due to cyclic references, using a master
-  TmpDir for zypp. # 178292
+  TmpDir for zypp. # 178292
 
 -------------------------------------------------------------------
 Wed Jun  7 00:02:18 CEST 2006 - ma@suse.de
@@ -3012,7 +3022,7 @@ Wed May 31 18:32:58 CEST 2006 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Wed May 31 17:06:48 CEST 2006 - dmacvicar@suse.de
 
-- set cache dir only if storeMetadata is called as a public method.
+- set cache dir only if storeMetadata is called as a public method.´
 - rev 3475
 
 -------------------------------------------------------------------
@@ -3056,11 +3066,11 @@ Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
 
 - dont pass root on init but before.
 - implement rpm db modification timestamp
-  not used yet
+  not used yet
 - move Helix source to testsuite out of the solver
   so we can use it for target, storage tests
 - add Source_Ref::timestamp(), default to now()
-  in order to implement smart sync of sources by zmd
+  in order to implement smart sync of sources by zmd
 - don't parse desc and summary twice
 - fix a segfault with tranlated text
 - fix broken size tag introduced in rev 3427
@@ -3273,7 +3283,7 @@ Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
 Wed May  3 15:34:00 CEST 2006 - dmacvicar@suse.de
 
 - use --no-default-keyring to avoid creating a
-  default gpg dir in / (#171055)
+  default gpg dir in / (#171055)
 - rev 3335
 
 -------------------------------------------------------------------

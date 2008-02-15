@@ -29,7 +29,7 @@ ADD_CUSTOM_TARGET( ma_test
 
 ## ############################################################
 
-FOREACH( loop_var NewPool ScanSource Iorder Xml Ex Main FakePool AOUT Parse Test Basic Sat)
+FOREACH( loop_var NewPool DumpSolv ScanSource Iorder Xml Ex Main FakePool AOUT Parse Test Basic Sat)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )

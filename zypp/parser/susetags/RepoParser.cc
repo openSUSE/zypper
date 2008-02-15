@@ -53,7 +53,7 @@ namespace zypp
       class RepoParser::Impl
       {
 	public:
-	  Impl( const data::RecordId & repositoryId_r,
+	  Impl( const std::string & repositoryId_r,
 		data::ResolvableDataConsumer & consumer_r,
 		const ProgressData::ReceiverFnc & fnc_r )
 	  : _repositoryId( repositoryId_r )
@@ -81,7 +81,7 @@ namespace zypp
 	    ++_stats.prod;
 	    _prodData = data_r;
 	    _defaultVendor = data_r->vendor;
-	    _consumer.consumeProduct( _repositoryId, data_r );
+	    _consumer.consumeProduct( data_r );
 	  }
 
 	  ///////////////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@ namespace zypp
 	    resolveSharedDataTag( data_r );
 
 	    ++_stats.pack;
-	    data::RecordId newid = _consumer.consumePackage( _repositoryId, data_r );
+	    data::RecordId newid = _consumer.consumePackage( data_r );
 
 	    // remember for later reference
 	    idMapAdd( makeSharedIdent( ResTraits<Package>::kind,
@@ -110,13 +110,13 @@ namespace zypp
 	    resolveSharedDataTag( data_r );
 
 	    ++_stats.srcp;
-	    data::RecordId newid = _consumer.consumeSourcePackage( _repositoryId, data_r );
+	    data::RecordId newid = _consumer.consumeSourcePackage( data_r );
 
 	    // remember for later reference
 	    idMapAdd( makeSharedIdent( ResTraits<SrcPackage>::kind,
 		                       data_r->name,
 				       data_r->edition,
-				       data_r->arch ),
+				       data_r->arch),
 		      newid );
           }
 
@@ -178,7 +178,7 @@ namespace zypp
             //SEC << "[Pattern]" << data_r << endl;
 	    fixVendor( data_r );
 	    ++_stats.patt;
-	    _consumer.consumePattern( _repositoryId, data_r );
+	    _consumer.consumePattern( data_r );
           }
 	  //@}
 
@@ -367,7 +367,7 @@ namespace zypp
 	  }
 
 	private:
-	  data::RecordId                 _repositoryId;
+	  std::string                    _repositoryId;
 	  data::ResolvableDataConsumer & _consumer;
 	  ProgressData                   _ticks;
 
@@ -567,7 +567,7 @@ namespace zypp
       //	METHOD NAME : RepoParser::RepoParser
       //	METHOD TYPE : Ctor
       //
-      RepoParser::RepoParser( const data::RecordId & repositoryId_r,
+      RepoParser::RepoParser( const std::string & repositoryId_r,
 			      data::ResolvableDataConsumer & consumer_r,
 			      const ProgressData::ReceiverFnc & fnc_r )
       : _pimpl( new Impl( repositoryId_r, consumer_r, fnc_r ) )

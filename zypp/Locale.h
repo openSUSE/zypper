@@ -13,9 +13,11 @@
 #define ZYPP_LOCALE_H
 
 #include <iosfwd>
+#include <tr1/unordered_set>
 
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/IdString.h"
 #include "zypp/LanguageCode.h"
 #include "zypp/CountryCode.h"
 
@@ -27,7 +29,9 @@ namespace zypp
   //
   //	CLASS NAME : Locale
   //
-  /** */
+  /**
+   * \todo migrate to IdString
+  */
   class Locale
   {
     friend std::ostream & operator<<( std::ostream & str, const Locale & obj );
@@ -42,7 +46,13 @@ namespace zypp
 
     /** Ctor taking a string. */
     explicit
+    Locale( IdString code_r );
+
+    explicit
     Locale( const std::string & code_r );
+
+    explicit
+    Locale( const char * code_r );
 
     /** Ctor taking LanguageCode and optional CountryCode. */
     Locale( const LanguageCode & language_r,
@@ -112,9 +122,22 @@ namespace zypp
   }
   //@}
 
+  ///////////////////////////////////////////////////////////////////
+
+  typedef std::tr1::unordered_set<Locale> LocaleSet;
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+namespace std { namespace tr1 {
+  /** \relates ::zypp::Locale hash function */
+  template<> struct hash< ::zypp::Locale>
+  {
+    size_t operator()( const ::zypp::Locale & __s ) const
+    { return hash<std::string>()(__s.code()); }
+  };
+}}
 
 ///////////////////////////////////////////////////////////////////
 namespace std

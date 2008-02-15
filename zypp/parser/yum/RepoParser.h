@@ -69,7 +69,7 @@ namespace zypp
      * \param progress progress reporting function
      */
     RepoParser(
-      const data::RecordId & repository_id,
+      const std::string &repo_id,
       data::ResolvableDataConsumer & consumer,
       const RepoParserOpts & options = RepoParserOpts(),
       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc()

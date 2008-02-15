@@ -11,8 +11,9 @@
 */
 #include <iostream>
 
+#include "zypp/base/LogTools.h"
+
 #include "zypp/Dependencies.h"
-#include "zypp/CapSet.h"
 
 using std::endl;
 

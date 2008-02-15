@@ -66,6 +66,10 @@ namespace zypp
     std::string text( const Locale &lang = Locale() ) const;
     std::set<Locale> locales() const;
 
+    /** String representation. */
+    const char * c_str( const Locale &lang = Locale() ) const
+    { return text(lang).c_str(); }
+
     void setText( const std::string &text, const Locale &lang = Locale());
     void setText( const std::list<std::string> &text, const Locale &lang = Locale());
 

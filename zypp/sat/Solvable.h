@@ -17,11 +17,15 @@
 #include "zypp/base/SafeBool.h"
 
 #include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/Capabilities.h"
-#include "zypp/sat/Capability.h"
-#include "zypp/sat/IdStr.h"
+#include "zypp/sat/SolvAttr.h"
 
+#include "zypp/ResTraits.h"
+#include "zypp/IdString.h"
+#include "zypp/Edition.h"
+#include "zypp/Arch.h"
 #include "zypp/Dep.h"
+#include "zypp/Capabilities.h"
+#include "zypp/Capability.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -34,7 +38,20 @@ namespace zypp
     //
     //	CLASS NAME : Solvable
     //
-    /** */
+    /** A \ref Solvable object within the sat \ref Pool.
+     *
+     * \note Unfortunately libsatsolver combines the objects kind and
+     * name in a single identifier \c "pattern:kde_multimedia",
+     * \b except for packages and source packes. They are not prefixed
+     * by any kind string. Instead the architecture is abused to store
+     * \c "src" and \c "nosrc" values.
+     *
+     * \ref Solvable will hide this inconsistency by treating source
+     * packages as an own kind of solvable and map their arch to
+     * \ref Arch_noarch.
+     *
+     *
+     */
     class Solvable : protected detail::PoolMember,
                      private base::SafeBool<Solvable>
     {
@@ -61,10 +78,47 @@ namespace zypp
         Repo repo() const;
 
       public:
-        NameId   name()   const;
-        EvrId    evr()    const;
-        ArchId   arch()   const;
-        VendorId vendor() const;
+
+        /**
+         * returns the string attribute value for \ref attr
+         * or an empty string if it does not exists.
+         */
+        std::string lookupStrAttribute( const SolvAttr &attr ) const;
+
+        /**
+         * returns the numeric attribute value for \ref attr
+         * or 0 if it does not exists.
+         */
+        unsigned lookupNumAttribute( const SolvAttr &attr ) const;
+
+	/**
+	 * returns the media location: media number in \ref medianr,
+	 * file name as return value.  The file name is possibly prepended
+	 * with a subdirectory.
+	 */
+	std::string lookupLocation(unsigned &medianr) const;
+        
+        /**
+         *
+         */
+        bool lookupBoolAttribute( const SolvAttr &attr ) const;
+        
+      public:
+        /** The identifier.
+         * This is the solvables \ref name, \b except for packages and
+         * source packes, prefixed by it's \ref kind.
+         */
+        IdString     ident()    const;
+
+        ResKind      kind()     const;
+        /** Test whether a Solvable is of a certain \ref ResKind. */
+        bool         isKind( const ResKind & kind_r ) const;
+
+        std::string  name()     const;
+        Edition      edition()  const;
+        Arch         arch()     const;
+
+        IdString     vendor()   const;
 
       public:
 
@@ -86,7 +140,6 @@ namespace zypp
         Capabilities supplements() const;
         Capabilities prerequires() const;
         //@}
-
 
       public:
         /** Return next Solvable in \ref Pool (or \ref nosolvable). */
@@ -136,9 +189,9 @@ namespace zypp
       class SolvableIterator : public boost::iterator_adaptor<
           SolvableIterator                   // Derived
           , ::_Solvable*                     // Base
-          , Solvable                         // Value
-          , boost::single_pass_traversal_tag // CategoryOrTraversal
-          , Solvable                         // Reference
+          , const Solvable                   // Value
+          , boost::forward_traversal_tag     // CategoryOrTraversal
+          , const Solvable                   // Reference
           >
       {
         public:
@@ -157,12 +210,13 @@ namespace zypp
         private:
           friend class boost::iterator_core_access;
 
-          void increment()
-          { assignVal( _val.nextInPool() ); }
-
           Solvable dereference() const
           { return _val; }
 
+          void increment()
+          { assignVal( _val.nextInPool() ); }
+
+        private:
           void assignVal( const Solvable & val_r )
           { _val = val_r; base_reference() = _val.get(); }
 
@@ -176,6 +230,12 @@ namespace zypp
    /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates sat::Solvable Test whether a \ref sat::Solvable is of a certain Kind. */
+  template<class _Res>
+  inline bool isKind( const sat::Solvable & solvable_r )
+  { return solvable_r.isKind( ResTraits<_Res>::kind ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

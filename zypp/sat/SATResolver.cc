@@ -21,8 +21,9 @@
 
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capability.h"
 #include "zypp/ResStatus.h"
+#include "zypp/VendorAttr.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -46,14 +47,6 @@ extern "C" {
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace zypp_detail
-  { /////////////////////////////////////////////////////////////////
-    Arch defaultArchitecture();
-    /////////////////////////////////////////////////////////////////
-  } // namespace zypp_detail
-  ///////////////////////////////////////////////////////////////////
-
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -65,15 +58,19 @@ using namespace std;
 
 IMPL_PTR_TYPE(SATResolver);
 
-static const unsigned MAX_SECOND_RUNS( 3 );
-static const unsigned MAX_VALID_SOLUTIONS( 10 );
-static const unsigned TIMOUT_SECOND_RUN( 30 );
-
 static PoolItemSet triggeredSolution;   // only the latest state of an item is interesting
                                         // for the pool. Documents already inserted items.
 
 //---------------------------------------------------------------------------
+// Callbacks for SAT policies
+//---------------------------------------------------------------------------
 
+int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
+//    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
+    return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
+}
+
+//---------------------------------------------------------------------------
 
 std::ostream &
 SATResolver::dumpOn( std::ostream & os ) const
@@ -86,17 +83,18 @@ SATResolver::dumpOn( std::ostream & os ) const
 SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     : _pool (pool)
     , _SATPool (SATPool)
-    , solv(NULL)
-    , _timeout_seconds (0)
-    , _maxSolverPasses (0)
-    , _testing (false)
-    , _valid_solution_count (0)
-    , _timed_out (false)
-    , _architecture( zypp_detail::defaultArchitecture() )
+    , _solv(NULL)
+    , _fixsystem(false)
+    , _allowdowngrade(false)
+    , _allowarchchange(false)
+    , _allowvendorchange(false)
+    , _allowuninstall(false)
+    , _updatesystem(false)
+    , _allowvirtualconflicts(false)
+    , _noupdateprovide(false)
+    , _dosplitprovides(false)
 
 {
-    Testcase testcase("/var/log/YaST2/autotestcase");
-    testcase.createTestcasePool (pool); // dump pool to testcase
 }
 
 
@@ -106,6 +104,7 @@ SATResolver::~SATResolver()
 
 //---------------------------------------------------------------------------
 
+
 ResPool
 SATResolver::pool (void) const
 {
@@ -114,7 +113,7 @@ SATResolver::pool (void) const
 
 
 void
-SATResolver::addPoolItemToInstall (PoolItem_Ref item)
+SATResolver::addPoolItemToInstall (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_remove.begin();
@@ -142,7 +141,7 @@ SATResolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 
 
 void
-SATResolver::addPoolItemToRemove (PoolItem_Ref item)
+SATResolver::addPoolItemToRemove (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_install.begin();
@@ -169,7 +168,7 @@ SATResolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 }
 
 void
-SATResolver::addPoolItemToLock (PoolItem_Ref item)
+SATResolver::addPoolItemToLock (PoolItem item)
 {
     _items_to_lock.push_back (item);
     _items_to_lock.unique ();
@@ -182,7 +181,7 @@ SATResolver::addPoolItemToLock (PoolItem_Ref item)
 // if data != NULL, set as APPL_LOW (from establishPool())
 
 static void
-SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus::TransactByValue causer)
+SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
 #if 0
     if (triggeredSolution.find(item) != triggeredSolution.end()) {
@@ -228,6 +227,48 @@ SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus:
     return;
 }
 
+
+//----------------------------------------------------------------------------
+// helper functions for distupgrade
+//----------------------------------------------------------------------------
+
+PoolItemList SATResolver::whoProvides(Capability cap) {
+    PoolItemList itemList;
+    Id p, *pp;
+    Repo *installedRepo = sat::Pool::instance().systemRepo().get();
+    for (pp = pool_whatprovides(_SATPool, cap.id()) ; (p = *pp++) != 0; ) {
+	Solvable *solvable = _SATPool->solvables + p;
+	PoolItem item = _pool.find (sat::Solvable(p));
+	if (item &&
+	    (!installedRepo || solvable->repo != installedRepo) ) {
+	    itemList.push_back (item);
+	    MIL << item << " provides " << cap << endl;
+	}
+    }
+    return itemList;
+}
+
+bool SATResolver::doesObsoleteItem (PoolItem candidate, PoolItem installed) {
+  Solvable *sCandidate = _SATPool->solvables + candidate.satSolvable().id();
+  Repo *installedRepo = sat::Pool::instance().systemRepo().get();
+  
+  Id p, *pp, obsolete, *obsoleteIt;
+  
+  if ((!installedRepo || sCandidate->repo != installedRepo) && sCandidate->obsoletes) {
+      obsoleteIt = sCandidate->repo->idarraydata + sCandidate->obsoletes;
+      while ((obsolete = *obsoleteIt++) != 0)
+      {
+	  for (pp = pool_whatprovides(_SATPool, obsolete) ; (p = *pp++) != 0; ) {
+	      if (p > 0 &&  installed.satSolvable().id() == (sat::detail::SolvableIdType)p) {
+		  MIL << candidate << " obsoletes " << installed << endl;
+		  return true;
+	      }
+	  }
+      }
+  }
+  return false;
+}
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // resolvePool
@@ -239,49 +280,8 @@ SATSolutionToPool (PoolItem_Ref item, const ResStatus & status, const ResStatus:
 //----------------------------------------------------------------------------
 
 
-Resolvable::Kind
-string2kind (const std::string & str)
-{
-    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
-    if (!str.empty()) {
-	if (str == "package") {
-	    // empty
-	}
-	else if (str == "patch") {
-	    kind = ResTraits<zypp::Patch>::kind;
-	}
-	else if (str == "atom") {
-	    kind = ResTraits<zypp::Atom>::kind;
-	}
-	else if (str == "pattern") {
-	    kind = ResTraits<zypp::Pattern>::kind;
-	}
-	else if (str == "selection") {
-	    kind = ResTraits<zypp::Selection>::kind;
-	}
-	else if (str == "script") {
-	    kind = ResTraits<zypp::Script>::kind;
-	}
-	else if (str == "message") {
-	    kind = ResTraits<zypp::Message>::kind;
-	}
-	else if (str == "product") {
-	    kind = ResTraits<zypp::Product>::kind;
-	}
-	else if (str == "language") {
-	    kind = ResTraits<zypp::Language>::kind;
-	}
-	else {
-	    ERR << "string2kind unknown kind '" << str << "'" << endl;
-	}
-    }
-    return kind;
-}
-
-
 //------------------------------------------------------------------------------------------------------------
-//  This function loops over the pool and grabs
-//  all item.status().transacts() and item.status().byUser()
+//  This function loops over the pool and grabs all items
 //  It clears all previous bySolver() states also
 //
 //  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
@@ -299,7 +299,7 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	: resolver (r)
     { }
 
-    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    bool operator()( PoolItem item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
 	_XDEBUG( "SATCollectTransact(" << item << ")" );
@@ -314,26 +314,14 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	if (status.isToBeInstalled()) {
 	    resolver.addPoolItemToInstall(item);	// -> install!
 	}
-	if (status.isToBeUninstalled()) {
+	else if (status.isToBeUninstalled()) {
 	    resolver.addPoolItemToRemove(item);		// -> remove !
 	}
-	if (status.isIncomplete()) {			// incomplete (re-install needed)
-	    PoolItem_Ref reinstall = Helper::findReinstallItem (resolver.pool(), item);
-	    if (reinstall) {
-		MIL << "Reinstall " << reinstall << " for incomplete " << item << endl;
-		resolver.addPoolItemToInstall(reinstall);	// -> install!
-	    }
-	    else {
-		WAR << "Can't find " << item << " for re-installation" << endl;
-	    }
-	}
-
-        if (status.isLocked()
-            || (status.isKept()
-		&& !by_solver)) {
+        else if (status.isLocked()
+                 || (status.isKept()
+                     && !by_solver)) {
             resolver.addPoolItemToLock (item);
         }
-
 
 	return true;
     }
@@ -358,9 +346,9 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
     // check this item will be installed
 
-    bool operator()( PoolItem_Ref item )
+    bool operator()( PoolItem item )
     {
-	if (item.status().isToBeInstalled())	
+	if (item.status().isToBeInstalled())
 	{
 	    is_updated = true;
 	    return false;
@@ -371,126 +359,100 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 
 
 bool
-SATResolver::resolvePool(const CapSet & requires_caps,
-			 const CapSet & conflict_caps,
-			 const bool updgradeMode)
+SATResolver::resolvePool(const CapabilitySet & requires_caps,
+			 const CapabilitySet & conflict_caps)
 {
     SATCollectTransact info (*this);
     MIL << "SATResolver::resolvePool()" << endl;
 
-    if (solv) {
+    if (_solv) {
 	// remove old stuff
-	solver_free(solv);
-	solv = NULL;
-	queue_free( &(jobQueue) );
+	solver_free(_solv);
+	_solv = NULL;
+	queue_free( &(_jobQueue) );
     }
 
-    queue_init( &jobQueue );
+    queue_init( &_jobQueue );
     _items_to_install.clear();
     _items_to_remove.clear();
-    _items_to_lock.clear();    
+    _items_to_lock.clear();
 
     invokeOnEach ( _pool.begin(), _pool.end(),
-		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
 
-    invokeOnEach ( _pool.begin(), _pool.end(),
-                   resfilter::ByLock( ),                        // collect locks from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );
-
-    invokeOnEach ( _pool.begin(), _pool.end(),
-                   resfilter::ByKeep( ),                        // collect keeps from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );
-
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-	PoolItem_Ref r = *iter;
+	PoolItem r = *iter;
 
-	Id id = iter->satSolvable().id();
+	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
 	MIL << "Install " << *iter << " with the SAT-Pool ID: " << id << endl;
-	queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );
-        queue_push( &(jobQueue), id );
+	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+        queue_push( &(_jobQueue), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
-	MIL << "Delete " << *iter << " with the string ID: " << s->name << endl;
-	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
-	queue_push( &(jobQueue), s->name);
+        sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
+	MIL << "Delete " << *iter << " with the string ID: " << ident << endl;
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
+	queue_push( &(_jobQueue), ident);
     }
 
-    for (CapSet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
-	queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
-	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ) );
-	MIL << "Requires " << iter->asString() << endl;
+    for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
+	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), iter->id() );
+	MIL << "Requires " << *iter << endl;
     }
 
-    for (CapSet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
-	queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
-	queue_push( &(jobQueue), str2id( _SATPool, (iter->asString()).c_str(), 1 ));
-	MIL << "Conflicts " << iter->asString() << endl;	
+    for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
+	queue_push( &(_jobQueue), iter->id() );
+	MIL << "Conflicts " << *iter << endl;
     }
 
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
-	Solvable *s = _SATPool->solvables + iter->satSolvable().id();
-	Id id = iter->satSolvable().id();
+        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Lock installed item " << *iter << " with the string ID: " << s->name << endl;
-	    queue_push( &(jobQueue), SOLVER_INSTALL_SOLVABLE );	    
-	    queue_push( &(jobQueue), id );
+	    MIL << "Lock installed item " << *iter << " with the string ID: " << ident << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << s->name << endl;
-	    queue_push( &(jobQueue), SOLVER_ERASE_SOLVABLE );
-	    queue_push( &(jobQueue), id );
+	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(_jobQueue), ident );
 	}
     }
-    
-    solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
-    sat::Pool::instance().setDirty();
-    sat::Pool::instance().prepare();
-    solv->fixsystem = false;
-    solv->noupdateprovide = true;	
-    
-    if (updgradeMode) {
-	MIL << "setting Upgrade Mode" << endl;
-	solv->updatesystem = true;
-	solv->allowdowngrade = true;
-    } else {
-	MIL << "setting NONE Upgrade Mode" << endl;	
-	solv->updatesystem = false;
-	solv->allowdowngrade = false;
-    }
 
-    solv->allowarchchange = true;
-    solv->allowuninstall = false;
+    _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    _solv->vendorCheckCb = &vendorCheck;
+    sat::Pool::instance().prepare();
 
     // Solve !
     MIL << "Starting solving...." << endl;
-    solver_solve( solv, &(jobQueue) );
+    solver_solve( _solv, &(_jobQueue) );
     MIL << "....Solver end" << endl;
 
     // copying solution back to zypp pool
     //-----------------------------------------
 
-    if (solv->problems.count > 0 )
+    if (_solv->problems.count > 0 )
     {
 	ERR << "Solverrun finished with an ERROR" << endl;
 	return false;
     }
 
     /*  solvables to be installed */
-    for (int i = 0; i < solv->decisionq.count; i++)
+    for (int i = 0; i < _solv->decisionq.count; i++)
     {
       Id p;
-      p = solv->decisionq.elements[i];
+      p = _solv->decisionq.elements[i];
       if (p < 0 || !sat::Solvable(p))
 	continue;
-      if (sat::Solvable(p).repo().get() == solv->installed)
+      if (sat::Solvable(p).repo().get() == _solv->installed)
 	continue;
 
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+      PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
 	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
       } else {
@@ -499,21 +461,20 @@ SATResolver::resolvePool(const CapSet & requires_caps,
     }
 
     /* solvables to be erased */
-    for (int i = solv->installed->start; i < solv->installed->start + solv->installed->nsolvables; i++)
+    for (int i = _solv->installed->start; i < _solv->installed->start + _solv->installed->nsolvables; i++)
     {
-      if (solv->decisionmap[i] > 0)
+      if (_solv->decisionmap[i] > 0)
 	continue;
 
-      PoolItem_Ref poolItem = _pool.find (sat::Solvable(i));
+      PoolItem poolItem = _pool.find (sat::Solvable(i));
       if (poolItem) {
 	  // Check if this is an update
-	  CheckIfUpdate info;	  
-	  invokeOnEach( _pool.byNameBegin( poolItem->name() ),
-			_pool.byNameEnd( poolItem->name() ),
-			functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-					resfilter::ByKind( poolItem->kind() ) ),	// equal kind
+	  CheckIfUpdate info;
+	  invokeOnEach( _pool.byIdentBegin( poolItem ),
+			_pool.byIdentEnd( poolItem ),
+			resfilter::ByUninstalled(),			// ByUninstalled
 			functor::functorRef<bool,PoolItem> (info) );
-	  
+
 	  if (info.is_updated) {
 	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
 	  } else {
@@ -525,10 +486,11 @@ SATResolver::resolvePool(const CapSet & requires_caps,
     }
 
     // clean up
-    solver_free(solv);
-    solv = NULL;
-    queue_free( &(jobQueue) );
+    solver_free(_solv);
+    _solv = NULL;
+    queue_free( &(_jobQueue) );
 
+    MIL << "SATResolver::resolvePool() done" << endl;
     return true;
 }
 
@@ -553,7 +515,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
     {
     }
 
-    bool operator()( PoolItem_Ref p)
+    bool operator()( PoolItem p)
     {
 	problemSolution->addSingleAction (p, action);
 	return true;
@@ -564,13 +526,13 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 std::string SATResolver::SATprobleminfoString(Id problem)
 {
   string ret;
-  Pool *pool = solv->pool;
+  Pool *pool = _solv->pool;
   Id probr;
   Id dep, source, target;
   Solvable *s, *s2;
 
-  probr = solver_findproblemrule(solv, problem);
-  switch (solver_problemruleinfo(solv, &(jobQueue), probr, &dep, &source, &target))
+  probr = solver_findproblemrule(_solv, problem);
+  switch (solver_problemruleinfo(_solv, &(_jobQueue), probr, &dep, &source, &target))
   {
       case SOLVER_PROBLEM_UPDATE_RULE:
 	  s = pool_id2solvable(pool, source);
@@ -618,8 +580,8 @@ ResolverProblemList
 SATResolver::problems ()
 {
     ResolverProblemList resolverProblems;
-    if (solv && solv->problems.count) {
-	Pool *pool = solv->pool;
+    if (_solv && _solv->problems.count) {
+	Pool *pool = _solv->pool;
 	int pcnt;
 	Id p, rp, what;
 	Id problem, solution, element;
@@ -628,7 +590,7 @@ SATResolver::problems ()
 	MIL << "Encountered problems! Here are the solutions:\n" << endl;
 	pcnt = 1;
 	problem = 0;
-	while ((problem = solver_next_problem(solv, problem)) != 0) {
+	while ((problem = solver_next_problem(_solv, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string whatString = SATprobleminfoString(problem);
@@ -636,20 +598,20 @@ SATResolver::problems ()
 	    MIL << "------------------------------------" << endl;
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");
 	    solution = 0;
-	    while ((solution = solver_next_solution(solv, problem, solution)) != 0) {
+	    while ((solution = solver_next_solution(_solv, problem, solution)) != 0) {
 		element = 0;
 		ProblemSolutionCombi *problemSolution = new ProblemSolutionCombi(resolverProblem);
-		while ((element = solver_next_solutionelement(solv, problem, solution, element, &p, &rp)) != 0) {
+		while ((element = solver_next_solutionelement(_solv, problem, solution, element, &p, &rp)) != 0) {
 		    if (p == 0) {
 			/* job, rp is index into job queue */
-			what = jobQueue.elements[rp];
-			switch (jobQueue.elements[rp-1])
+			what = _jobQueue.elements[rp];
+			switch (_jobQueue.elements[rp-1])
 			{
 			    case SOLVER_INSTALL_SOLVABLE: {
 				s = pool->solvables + what;
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
-				    if (solv->installed && s->repo == solv->installed) {
+				    if (_solv->installed && s->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
 					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s) );
 					MIL << description << endl;
@@ -668,9 +630,9 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE: {
 				s = pool->solvables + what;
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				if (poolItem) {
-				    if (solv->installed && s->repo == solv->installed) {
+				    if (_solv->installed && s->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("keep %s"), solvable2str(pool, s));
 					MIL << description << endl;
@@ -690,12 +652,12 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
 				{
 				FindPackage info (problemSolution, KEEP);
-				string package_name (id2str(pool, what));
-				invokeOnEach( _pool.byNameBegin( package_name ),
-					      _pool.byNameEnd( package_name ),
+                                IdString ident( what );
+				invokeOnEach( _pool.byIdentBegin( ident ),
+					      _pool.byIdentEnd( ident ),
 					      resfilter::ByUninstalled (),
 					      functor::functorRef<bool,PoolItem> (info) );
-				string description = str::form (_("do not install %s"), id2str(pool, what));
+				string description = str::form (_("do not install %s"), ident.c_str() );
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -703,13 +665,13 @@ SATResolver::problems ()
 			    case SOLVER_ERASE_SOLVABLE_NAME:
 				{
 				FindPackage info (problemSolution, KEEP);
-				string package_name (id2str(pool, what));
-				invokeOnEach( _pool.byNameBegin( package_name ),
-					      _pool.byNameEnd( package_name ),
+                                IdString ident( what );
+				invokeOnEach( _pool.byIdentBegin( ident ),
+					      _pool.byIdentEnd( ident ),
 					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
 							      resfilter::ByTransact ()),			// will be deinstalled
 					      functor::functorRef<bool,PoolItem> (info) );
-				string description = str::form (_("keep %s"), id2str(pool, what));
+				string description = str::form (_("keep %s"), ident.c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -719,12 +681,12 @@ SATResolver::problems ()
 				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
-				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    PoolItem poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeInstalled()
 					|| poolItem.status().staysUninstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
 				}
-				string description = str::form (_("do not install a solvable providing %s"), dep2str(pool, what));
+				string description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -734,22 +696,22 @@ SATResolver::problems ()
 				Id p, *pp;
 				FOR_PROVIDES(p, pp, what);
 				{
-				    PoolItem_Ref poolItem = _pool.find (sat::Solvable(p));
+				    PoolItem poolItem = _pool.find (sat::Solvable(p));
 				    if (poolItem.status().isToBeUninstalled()
 					|| poolItem.status().staysInstalled())
 					problemSolution->addSingleAction (poolItem, KEEP);
 				}
-				string description = str::form (_("keep all solvables providing %s"), dep2str(pool, what));
+				string description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
 				{
-				PoolItem_Ref poolItem = _pool.find (sat::Solvable(what));
+				PoolItem poolItem = _pool.find (sat::Solvable(what));
 				s = pool->solvables + what;
 				if (poolItem) {
-				    if (solv->installed && s->repo == solv->installed) {
+				    if (_solv->installed && s->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s));
 					MIL << description << endl;
@@ -773,14 +735,15 @@ SATResolver::problems ()
 			s = pool->solvables + p;
 			sd = rp ? pool->solvables + rp : 0;
 
-			PoolItem_Ref itemFrom = _pool.find (sat::Solvable(p));
+			PoolItem itemFrom = _pool.find (sat::Solvable(p));
 			if (rp)
 			{
 			    int gotone = 0;
 
-			    PoolItem_Ref itemTo = _pool.find (sat::Solvable(rp));
+			    PoolItem itemTo = _pool.find (sat::Solvable(rp));
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
+				problemSolution->addSingleAction (itemFrom, REMOVE);
 
 				if (evrcmp(pool, s->evr, sd->evr, EVRCMP_COMPARE ) > 0)
 				{
@@ -789,14 +752,14 @@ SATResolver::problems ()
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(solv, s, sd))
+				if (!_solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(_solv, s, sd))
 				{
 				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(solv, s, sd))
+				if (!_solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(_solv, s, sd))
 				{
 				    string description = str::form (_("vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
 								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));

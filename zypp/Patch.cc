@@ -11,8 +11,6 @@
 */
 #include "zypp/Patch.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -24,8 +22,8 @@ namespace zypp
   //	METHOD NAME : Patch::Patch
   //	METHOD TYPE : Ctor
   //
-  Patch::Patch( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
+  Patch::Patch( const sat::Solvable & solvable_r )
+  : ResObject( solvable_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -43,34 +41,89 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::string Patch::id() const
-  { return pimpl().id(); }
+  { return std::string(); }
 
   Date Patch::timestamp() const
-  { return pimpl().timestamp(); }
+  { return Date(); }
 
   std::string Patch::category() const
-  { return pimpl().category(); }
+  { return std::string(); }
 
   bool Patch::reboot_needed() const
-  { return pimpl().reboot_needed(); }
+  { return false; }
 
   bool Patch::affects_pkg_manager() const
-  { return pimpl().affects_pkg_manager(); }
+  { return false; }
 
   Patch::AtomList Patch::atoms() const
-  { return pimpl().all_atoms(); }
+  {
+#warning Implement PATCH::ATOMS
+#if 0
+      if ( ! _atomlist )
+      {
+        if ( ! hasBackRef() )
+        {
+          // We are not jet connected to the Resolvable that
+          // contains our dependencies.
+          return AtomList();
+        }
+
+        // lazy init
+        _atomlist.reset( new AtomList );
+
+        // Build the list using the repositories resolvables.
+        // Installed Patches (no repository) have this method overloaded.
+        if ( repository() )
+        {
+          const CapSet &   requires( self()->dep( Dep::REQUIRES ) );
+          const ResStore & store( repository().resolvables() );
+
+          for_( req, requires.begin(), requires.end() )
+          {
+            // lookup Patch requirements that refer to an Atom, Script or Message.
+            if ( refersTo<Atom>( *req ) || refersTo<Script>( *req ) || refersTo<Message>( *req ) )
+            {
+              for_( res, store.begin(), store.end() )
+              {
+                // Collect ALL matches in the store.
+                if ( hasMatches( (*res)->dep( Dep::PROVIDES ), (*req) ) )
+                {
+                  _atomlist->push_back( *res );
+                }
+              }
+            }
+          }
+        }
+      }
+      return *_atomlist;
+#endif
+    return AtomList();
+  }
 
   bool Patch::interactive() const
-  { return pimpl().interactive(); }
+  {
+#warning Implement PATCH::INTERACTIVE
+#if 0
+      if ( reboot_needed()
+           || ! licenseToConfirm().empty() )
+        {
+          return true;
+        }
 
+      AtomList atoms = all_atoms();
+      for ( AtomList::const_iterator it = atoms.begin(); it != atoms.end(); it++)
+        {
+          if (    isKind<Message>( *it )
+               || ! licenseToConfirm().empty() )
+            {
+              return true;
+            }
+        }
 
-  // DEPRECATED:
-  void Patch::mark_atoms_to_freshen(bool freshen)
-  { ; }
-  bool Patch::any_atom_selected()
-  { return false; }
-  void Patch::select()
-  { ; }
+      return false;
+#endif
+    return false;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

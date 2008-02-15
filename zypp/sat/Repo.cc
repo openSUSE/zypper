@@ -55,7 +55,8 @@ namespace zypp
     std::string Repo::name() const
     {
       NO_REPO_RETURN( std::string() );
-      if ( ! _repo->name ) return std::string();
+      if ( ! _repo->name )
+        return std::string();
       return _repo->name;
     }
 
@@ -65,7 +66,7 @@ namespace zypp
       return _repo->nsolvables;
     }
 
-    unsigned Repo::solvablesSize() const
+    Repo::size_type Repo::solvablesSize() const
     {
       NO_REPO_RETURN( 0 );
       return _repo->nsolvables;
@@ -91,40 +92,60 @@ namespace zypp
                                   detail::SolvableIterator(_repo->end) );
     }
 
+    RepoInfo Repo::info() const
+    {
+      NO_REPO_RETURN( RepoInfo() );
+      return myPool().repoInfo( _repo );
+    }
+
+    void Repo::setInfo( const RepoInfo & info_r )
+    {
+      NO_REPO_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
+      if ( info_r.alias() != name() )
+      {
+        ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
+                    info_r.alias().c_str(), name().c_str() ) ) );
+      }
+      myPool().setRepoInfo( _repo, info_r );
+    }
+
+    void Repo::clearInfo()
+    {
+      NO_REPO_RETURN();
+      myPool().setRepoInfo( _repo, RepoInfo() );
+    }
+
     void Repo::eraseFromPool()
     {
       NO_REPO_RETURN();
-      myPool().setDirty();
-      ::repo_free( _repo, /*reuseids*/false );
+      myPool()._deleteRepo( _repo );
+      _id = detail::noRepoId;
     }
 
+#warning NEED POOL MANIP EXEPTIONS
     void Repo::addSolv( const Pathname & file_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
+      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
 
       AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
       if ( file == NULL )
       {
         file.resetDispose();
-        ZYPP_THROW( Exception( _("Can't read solv-file: ")+file_r.asString() ) );
+        ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
       }
 
-      myPool().setDirty();
-      ::repo_add_solv( _repo, file );
-    }
+      if ( myPool()._addSolv( _repo, file ) != 0 )
+      {
+        ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
+      }
 
-    detail::SolvableIdType Repo::addSolvable()
-    {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
-      myPool().setDirty();
-      return ::repo_add_solvable( _repo );
+
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to noepo.") ) );
-      myPool().setDirty();
-      return ::repo_add_solvable_block( _repo, count_r );
+      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
+      return myPool()._addSolvables( _repo, count_r );
     }
 
     /******************************************************************

@@ -17,6 +17,7 @@
 
 #include "zypp/base/NonCopyable.h"
 #include "zypp/NeedAType.h"
+#include "zypp/PathInfo.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
@@ -28,36 +29,22 @@ class VendorAttr : private base::NonCopyable
     /** Singleton */
     static const VendorAttr & instance();
 
-    /** Enable autoprotection of foreign vendor packages.
-     * This is the default.
-     * \note This will \b not change the status of already
-     * loaded pool items.
-    */
-    static void enableAutoProtect();
-    /** Disable autoprotection of foreign vendor packages.
-     * Autoprotection is on per defult.
-     * \note This will \b not change the status of already
-     * loaded pool items.
-    */
-    static void disableAutoProtect();
+    /**
+     * Adding new equivalent vendors described in a directory
+     **/
+    bool addVendorDirectory( const Pathname & dirname ) const;
 
     /**
-     * Return whether it's a known vendor
+     * Adding new equivalent vendors described in a file
      **/
-    bool isKnown( const Vendor & vendor_r ) const;
-
-    /**
-     * Return whether this vendors packages should be
-     * protected by default.
-     **/
-    bool autoProtect( const Vendor & vendor_r ) const;
+    bool addVendorFile( const Pathname & filename) const;    
 
     /** Return whether two vendor strings shold be treated as the same vendor.
      * Usually the solver is allowed to automatically select a package of an
      * equivalent vendor when updating. Replacing a package with one of a
      * different vendor usually must be confirmed by the user.
     */
-    bool equivalent( const Vendor & lhs, const Vendor & rhs ) const;
+    bool equivalent( const Vendor & lVendor, const Vendor & rVendor ) const;
 
   private:
     VendorAttr();

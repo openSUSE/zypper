@@ -9,7 +9,6 @@
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
-#include "zypp/ResStore.h"
 #include "zypp/PathInfo.h"
 
 #include "zypp/RepoManager.h"
@@ -85,37 +84,61 @@ void repomanager_test( const string &dir )
   // the file should not exist anymore
   BOOST_CHECK( ! PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
   
-  // for now skip creation
-  return;
+
+  // let test cache creation
+
+  RepoInfo repo;
+  repo.setAlias("foo");
+  Url repourl("dir:" + string(TESTS_SRC_DIR) + "/repo/yum/data/10.2-updates-subset");
+  //Url repourl("dir:/mounts/dist/install/stable-x86/suse");
+  //BOOST_CHECK_MESSAGE(0, repourl.asString());
+  repo.setBaseUrl(repourl);
+
+  KeyRingTestReceiver keyring_callbacks;
+  KeyRingTestSignalReceiver receiver;
   
-  RepoInfo repo(repos.front());
+  // disable sgnature checking
+  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptVerFailed(true);
+  keyring_callbacks.answerAcceptUnknownKey(true);
 
   // we have no metadata yet so this should throw
   BOOST_CHECK_THROW( manager.buildCache(repo),
                      RepoMetadataException );
 
+  // now refresh the metadata
   manager.refreshMetadata(repo);
   
   BOOST_CHECK_MESSAGE( ! manager.isCached(repo),
                        "Repo is not yet cached" );
 
-  Repository repository;
-
   // it is not cached, this should throw
-  BOOST_CHECK_THROW( manager.createFromCache(repo),
+  BOOST_CHECK_THROW( manager.loadFromCache(repo),
                      RepoNotCachedException );
 
-  MIL << "repo " << repo.alias() << " not cached yet. Caching..." << endl;
+  // now cache should build normally
   manager.buildCache(repo);
-  repository = manager.createFromCache(repo);
-  
-   BOOST_CHECK_MESSAGE( manager.isCached(repo),
-                       "Repo is cached" );
 
-  ResStore store = repository.resolvables();
-  MIL << store.size() << " resolvables" << endl;
-  
-  manager.refreshMetadata(repo);
+   // the solv file should exists now
+  Pathname base = (opts.repoCachePath + repo.alias());
+  Pathname solvfile = base.extend(".solv");
+  Pathname cookiefile = base.extend(".cookie");
+  BOOST_CHECK_MESSAGE( PathInfo(solvfile).isExist(), "Solv file is created after caching: " + solvfile.asString());
+  BOOST_CHECK_MESSAGE( PathInfo(cookiefile).isExist(), "Cookie file is created after caching: " + cookiefile.asString());
+
+  BOOST_CHECK_MESSAGE( manager.isCached(repo),
+                       "Repo is cached now" );
+
+  MIL << "Repo already in cache, clean cache"<< endl;
+  manager.cleanCache(repo);
+
+  BOOST_CHECK_MESSAGE( !manager.isCached(repo),
+                       "Repo cache was just deleted, should not be cached now" );
+
+  // now cache should build normally
+  manager.buildCache(repo);
+
+  manager.loadFromCache(repo);
 
   if ( manager.isCached(repo ) )
   {

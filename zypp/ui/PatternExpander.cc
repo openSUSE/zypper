@@ -82,9 +82,9 @@ namespace zypp
       {
         if ( ! pat_r->includes().empty() )
           {
-            for_each( pat_r->includes().begin(),
-                      pat_r->includes().end(),
-                      bind( &Impl::expandInclude, this, _1 ) );
+            std::for_each( pat_r->includes().begin(),
+                           pat_r->includes().end(),
+                           bind( &Impl::expandInclude, this, _1 ) );
           }
       }
 
@@ -107,9 +107,9 @@ namespace zypp
       /** Store all patterns extending \c pat_r in \c _patternMap. */
       void expandExtending( const Pattern::constPtr & pat_r )
       {
-        for_each( _pool.byKindBegin<Pattern>(),
-                  _pool.byKindEnd<Pattern>(),
-                  bind( &Impl::expandIfExtends, this, pat_r, _1 ) );
+        std::for_each( _pool.byKindBegin<Pattern>(),
+                       _pool.byKindEnd<Pattern>(),
+                       bind( &Impl::expandIfExtends, this, pat_r, _1 ) );
       }
 
       /** Store \c extending_r if it extends \c pat_r. */
@@ -119,9 +119,9 @@ namespace zypp
 
         if ( ! extending->extends().empty() )
           {
-            if ( find_if( extending->extends().begin(),
-                          extending->extends().end(),
-                          bind( &Impl::providedBy, this, pat_r, _1 ) )
+            if ( std::find_if( extending->extends().begin(),
+                               extending->extends().end(),
+                               bind( &Impl::providedBy, this, pat_r, _1 ) )
                  != extending->extends().end() )
               {
                 // an extends matches the Pattern
@@ -135,9 +135,9 @@ namespace zypp
       bool providedBy( const Pattern::constPtr & pat_r, const Capability & extends_r )
       {
         std::string index( extends_r.index() );
-        return( find_if( _pool.byCapabilityIndexBegin( index, Dep::PROVIDES ),
-                         _pool.byCapabilityIndexEnd( index, Dep::PROVIDES ),
-                         bind( &Impl::providedByFilter, this, pat_r, extends_r, _1 ) )
+        return( std::find_if( _pool.byCapabilityIndexBegin( index, Dep::PROVIDES ),
+                              _pool.byCapabilityIndexEnd( index, Dep::PROVIDES ),
+                              bind( &Impl::providedByFilter, this, pat_r, extends_r, _1 ) )
                 != _pool.byCapabilityIndexEnd( index, Dep::PROVIDES ) );
       }
 

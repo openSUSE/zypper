@@ -11,7 +11,11 @@
 */
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
 //#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/PathInfo.h"
 
@@ -52,7 +56,7 @@ namespace zypp
   /** \relates RepoStatus::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoStatus::Impl & obj )
   {
-    return str << "RepoStatus::Impl";
+    return str << obj.checksum << " " << (time_t) obj.timestamp;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -77,6 +81,33 @@ namespace zypp
   //
   RepoStatus::~RepoStatus()
   {}
+
+  RepoStatus RepoStatus::fromCookieFile( const Pathname &cookiefile )
+  {
+    RepoStatus status;
+    
+    std::ifstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+
+    std::string buffer;
+    file >> buffer;
+    status.setChecksum(buffer);
+    file >> buffer;
+    status.setTimestamp(Date(str::strtonum<time_t>(buffer)));
+    return status;
+  }
+
+  void RepoStatus::saveToCookieFile( const Pathname &cookiefile ) const
+  {
+    std::ofstream file(cookiefile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+    }
+    file << this->checksum() << " " << (int) this->timestamp() << endl << endl;
+    file.close();
+  }
 
   RepoStatus::RepoStatus( const Pathname &path )
     : _pimpl( new Impl() )

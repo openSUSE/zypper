@@ -14,23 +14,18 @@
 
 #include "zypp/base/Deprecated.h"
 
-#include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Resolvable.h"
-#include "zypp/TranslatedText.h"
 #include "zypp/NeedAType.h"
 #include "zypp/Date.h"
+#include "zypp/ByteCount.h"
+#include "zypp/DiskUsage.h"
+#include "zypp/Repository.h"
+#include "zypp/TranslatedText.h"
 #include "zypp/OnMediaLocation.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  namespace detail {
-    class ImplConnect;
-    class ResObjectImplIf;
-  }
-
-  class Repository;
-  class ByteCount;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -40,17 +35,19 @@ namespace zypp
    * Interface base for resolvable objects (common data).
    * That is, all data not needed for solving, but common
    * across all Resolvable kinds.
+   *
+   * \see \ref makeResObject for how to construct ResObjects.
   */
   class ResObject : public Resolvable
   {
   public:
-    typedef detail::ResObjectImplIf  Impl;
     typedef ResObject                Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
 
   public:
+
     /**
      * \short Short text describing the resolvable.
      * This attribute is usually displayed in columns.
@@ -91,7 +88,8 @@ namespace zypp
      *
      * For Example "Novell Inc."
      */
-    Vendor vendor() const;
+    Vendor vendor() const
+    { return Resolvable::vendor().asString(); }
 
     /** Installed size. */
     ByteCount size() const;
@@ -99,17 +97,15 @@ namespace zypp
     /** Size of the rpm package. */
     ByteCount downloadSize() const;
 
-    /**
-     * \short Download size
-     * \deprecated Use downloadSize()
-     */
-    ZYPP_DEPRECATED ByteCount archivesize() const
-    { return downloadSize(); }
+     /** \ref RepoInfo associated with the repository
+      *  providing this resolvable.
+      */
+    RepoInfo repoInfo() const;
 
-    /**
-     * Source providing this resolvable
+    /** \deprecated \ref repoInfo is provided directly.
      */
-    Repository repository() const;
+    ZYPP_DEPRECATED Repository repository() const
+    { return Repository( repoInfo() ); }
 
     /**
      * Media number where the resolvable is located
@@ -119,6 +115,8 @@ namespace zypp
 
     /**
      * \TODO FIXME what is this?
+     * Flag in the metadata indicating this should be
+     * installed unsing '-i' (not -U).
      */
     bool installOnly() const;
 
@@ -143,22 +141,50 @@ namespace zypp
 
   protected:
     /** Ctor */
-    ResObject( const Kind & kind_r,
-               const NVRAD & nvrad_r );
+    ResObject( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~ResObject();
-
     /** Helper for stream output */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-  private:
-    friend class detail::ImplConnect;
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
+
+  /** Create \ref ResObject from \ref sat::Solvable.
+   *
+   * This function creates the apropriate kind of ResObject
+   * depending on the sat::Solvables kind, and returns a smart
+   * pointer to it.
+   *
+   * If the sat::Solvables kind is not convertible, a NULL
+   * pointer is returned.
+   *
+   * \code
+   * sat::Solvable s;
+   * ResObject::Ptr p( makeResObject( s ) );
+   * ResObject::Ptr q( make<ResObject>( s ) );
+   * Package::Ptr   pkg( make<Package>( s ) );
+   * \endcode
+  */
+  ResObject::Ptr makeResObject( const sat::Solvable & solvable_r );
+
+  /** Directly create a certain kind of ResObject from \ref sat::Solvable.
+   *
+   * If the sat::Solvables kind is not appropriate, a NULL
+   * pointer is returned.
+    * \code
+   * sat::Solvable s;
+   * ResObject::Ptr p( makeResObject( s ) );
+   * ResObject::Ptr q( make<ResObject>( s ) );
+   * Package::Ptr   pkg( make<Package>( s ) );
+   * \endcode
+  */
+  template<class _Res>
+  inline typename ResTraits<_Res>::PtrType make( const sat::Solvable & solvable_r )
+  { return( isKind<_Res>( solvable_r ) ? new _Res( solvable_r ) : 0 ); }
+  /** \overload Specialisation for ResObject autodetecting the kind of resolvable. */
+  template<>
+  inline ResObject::Ptr make<ResObject>( const sat::Solvable & solvable_r )
+  { return makeResObject( solvable_r ); }
 
   /** Convert ResObject::Ptr into Ptr of a certain Kind.
    * \return \c NULL iff \a p is \c NULL or points to a Resolvable
@@ -169,12 +195,12 @@ namespace zypp
    * \endcode
   */
   template<class _Res>
-    inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
-    { return dynamic_pointer_cast<_Res>(p); }
+  inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
+  { return dynamic_pointer_cast<_Res>(p); }
 
   template<class _Res>
-    inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
-    { return dynamic_pointer_cast<const _Res>(p); }
+  inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
+  { return dynamic_pointer_cast<const _Res>(p); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

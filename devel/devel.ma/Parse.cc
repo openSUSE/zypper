@@ -35,7 +35,10 @@
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
 
+#include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
+#include "zypp/repo/ScriptProvider.h"
+#include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/ui/PatchContents.h"
 #include "zypp/ResPoolProxy.h"
@@ -93,59 +96,6 @@ ManagedFile repoProvidePackage( const PoolItem & pi )
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-
-template<class _Res>
-Selectable::Ptr getSel( const std::string & name_r )
-{
-  ResPoolProxy uipool( getZYpp()->poolProxy() );
-  for_(it, uipool.byKindBegin<_Res>(), uipool.byKindEnd<_Res>() )
-  {
-    if ( (*it)->name() == name_r )
-      return (*it);
-  }
-  return 0;
-}
-
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & arch_r )
-{
-  PoolItem ret;
-  ResPool pool( getZYpp()->pool() );
-  for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
-  {
-    if ( !ret && isKind<_Res>( (*it).resolvable() )
-         && ( ed_r == Edition() || ed_r == (*it)->edition() )
-         && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
-    {
-      ret = (*it);
-      MIL << "    ->" << *it << endl;
-    }
-    else
-    {
-      DBG << "     ?" << *it << endl;
-    }
-  }
-  return ret;
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r )
-{
-  return getPi<_Res>( name_r, Edition(), Arch() );
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Edition & ed_r )
-{
-  return getPi<_Res>( name_r, ed_r, Arch() );
-}
-template<class _Res>
-PoolItem getPi( const std::string & name_r, const Arch & arch_r )
-{
-  return getPi<_Res>( name_r, Edition(), arch_r );
-}
-
-
-
 
 void dbgDu( Selectable::Ptr sel )
 {
@@ -494,62 +444,10 @@ int main( int argc, char * argv[] )
   DigestReceive foo;
   KeyRingSignalsReceive baa;
 
-  DiskUsageCounter::MountPointSet fakePart;
-  fakePart.insert( DiskUsageCounter::MountPoint( "/",        1024, 10240, 5120, 0LL, false ) );
-//   fakePart.insert( DiskUsageCounter::MountPoint( "/usr",     1024, 10240, 5120, 0LL, false ) );
-  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/lib", 1024, 10240, 5120, 0LL, false ) );
-  fakePart.insert( DiskUsageCounter::MountPoint( "/usr/bin", 1024, 10240, 5120, 0LL, false ) );
-  getZYpp()->setPartitions( fakePart );
-
-  ResPool pool( getZYpp()->pool() );
-  vdumpPoolStats( USR << "Initial pool:" << endl,
-		  pool.begin(),
-		  pool.end() ) << endl;
-
-#if 0
   RepoManager repoManager( makeRepoManager( "/Local/ROOT" ) );
 
   RepoInfoList repos = repoManager.knownRepositories();
   SEC << "/Local/ROOT " << repos << endl;
-
-
-  RepoManager oldrepoManager( makeRepoManager( "/Local/ROOT/mnt" ) );
-
-  RepoInfoList oldrepos = oldrepoManager.knownRepositories();
-  SEC << "/Local/ROOT/mnt " << oldrepos << endl;
-
-  for_( it, oldrepos.begin(), oldrepos.end() )
-  {
-    std::string oldalias( it->alias() );
-    oldrepoManager.modifyRepository( oldalias, it->setEnabled( false ).setAlias( "foo" ) );
-  }
-
-  oldrepos = oldrepoManager.knownRepositories();
-  SEC << "/Local/ROOT/mnt " << oldrepos << endl;
-
-
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-  if ( repos.empty() )
-  {
-    RepoInfo nrepo;
-    nrepo
-	.setAlias( "factorytest" )
-	.setName( "Test Repo for factory." )
-	.setEnabled( true )
-	.setAutorefresh( false )
-	.addBaseUrl( Url("http://dist.suse.de/install/stable-x86/") );
-
-    repoManager.addRepository( nrepo );
-    SEC << "refreshMetadat" << endl;
-    repoManager.refreshMetadata( nrepo );
-    SEC << "buildCache" << endl;
-    repoManager.buildCache( nrepo );
-    SEC << "------" << endl;
-    repos = repoManager.knownRepositories();
-  }
 
   for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
   {
@@ -580,10 +478,11 @@ int main( int argc, char * argv[] )
     getZYpp()->addResolvables( store );
   }
 
+  ResPool pool( getZYpp()->pool() );
   USR << "pool: " << pool << endl;
   SEC << pool.knownRepositoriesSize() << endl;
-#endif
-  if ( 1 )
+
+  if ( 0 )
   {
     {
       zypp::base::LogControl::TmpLineWriter shutUp;
@@ -593,14 +492,29 @@ int main( int argc, char * argv[] )
     MIL << "Added target: " << pool << endl;
   }
 
-  cerr << getZYpp()->getRequestedLocales() << endl;
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 
-  //PoolItem pi = getPi<Package>( "update-test-affects-package-manager", Edition("99-99") );
-  //USR << pi << endl;
-  //pi.status().setTransact( true, ResStatus::USER );
+  PoolItem pi = getPi<Patch>( "fetchmsttfonts.sh" );
+  USR << pi << endl;
 
+  pi = getPi<Script>( "fetchmsttfonts.sh-4347-patch-fetchmsttfonts.sh-2" );
+  USR << pi << endl;
+
+  if ( pi )
+  {
+    Script::constPtr script_r( asKind<Script>( pi.resolvable() ) );
+    MIL << script_r << endl;
+    if ( script_r )
+    {
+      repo::RepoMediaAccess access_r;
+      repo::ScriptProvider prov( access_r );
+      ManagedFile localfile = prov.provideScript( script_r, true );
+      MIL << localfile << endl;
+    }
+  }
+
+  //pi.status().setTransact( true, ResStatus::USER );
   //install();
 
  ///////////////////////////////////////////////////////////////////

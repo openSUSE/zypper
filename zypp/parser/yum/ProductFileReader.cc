@@ -128,9 +128,7 @@ namespace zypp
       // xpath: /products/product/version
       if (reader_r->name() == "version")
       {
-        _product->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        editionStringFromAttrs( reader_r,  _product->edition );
       }
 
       // xpath: /products/product/displayname (+)
@@ -167,7 +165,7 @@ namespace zypp
       // xpath: /products/product/distribution-edition (+)
       if (reader_r->name() == "distribution-edition")
       {
-        _product->distributionEdition = reader_r.nodeText().asString();
+        _product->distributionEdition = Edition( reader_r.nodeText().asString() );
         return true;
       }
 

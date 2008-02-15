@@ -21,16 +21,15 @@ namespace zypp
   : _pimpl( Impl::nullimpl() )
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Repository::Repository
-  //	METHOD TYPE : Ctor
-  //
   Repository::Repository( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {
     assert( impl_r );
   }
+
+  Repository::Repository( const RepoInfo & info_r )
+  : _pimpl( new repo::RepositoryImpl( info_r ) )
+  {}
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -40,11 +39,6 @@ namespace zypp
 
   Repository::NumericId Repository::numericId() const
   { return _pimpl->numericId(); }
-
-  const ResStore & Repository::resolvables() const
-  {
-    return _pimpl->resolvables();
-  }
 
   const RepoInfo & Repository::info() const
   {

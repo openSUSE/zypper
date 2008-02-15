@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
@@ -45,21 +47,47 @@ namespace zypp
       static ZConfig & instance();
 
     public:
-      /** The zypp system architecture. */
+
+      /** The autodetected system architecture. */
+      static Arch defaultSystemArchitecture();
+
+      /** The system architecture zypp uses. */
       Arch systemArchitecture() const;
 
-      /** Override the zypp system architecture, useful for test scenarious.
-	  This should be used for testing/debugging only since the Target backend
-	  won't be able to install incompatible packages !!
-          DONT use for normal application unless you know what you're doing. */
-      void overrideSystemArchitecture( const Arch & );
+      /** Override the zypp system architecture.
+       * This is useful for test scenarious. <b>But be warned</b>, zypp does
+       * not expect the system architecture to change at runtime. So
+       * set it at the verry beginning before you acess any other
+       * zypp component.
+      */
+      void setSystemArchitecture( const Arch & arch_r );
 
-      /** The prefered locale for translated labels, descriptions,
-       *  descriptions, etc. passed to the UI.
+      /** Reset the zypp system architecture to the default. */
+      void resetSystemArchitecture()
+      { setSystemArchitecture( defaultSystemArchitecture() ); }
+
+      /** use setSystemArchitecture */
+      ZYPP_DEPRECATED void overrideSystemArchitecture( const Arch & arch_r )
+      { setSystemArchitecture( arch_r ); }
+
+    public:
+      /** The autodetected prefered locale for translated texts.
+       */
+      static Locale defaultTextLocale();
+
+      /** The locale for translated texts zypp uses.
        */
       Locale textLocale() const;
 
-      /**
+      /** Set the prefered locale for translated texts. */
+      void setTextLocale( const Locale & locale_r );
+
+      /** Reset the locale for translated texts to the default. */
+      void resetTextLocale()
+      { setTextLocale( defaultTextLocale() ); }
+
+    public:
+     /**
        * Path where the repo metadata is downloaded and kept.
        */
       Pathname repoMetadataPath() const;
@@ -105,11 +133,9 @@ namespace zypp
       bool download_use_deltarpm() const;
 
       /**
-       * Whether untrusted vendor should be autolocked
-       / config option
-       * repo.add.probe
+       * Directory for equivalent vendor definitions
        */
-      bool autolock_untrustedvendor() const;
+      Pathname vendorPath() const;
 
     public:
       class Impl;

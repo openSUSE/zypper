@@ -10,10 +10,11 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/zypp_detail/ZYppImpl.h"
+#include "zypp/sat/Pool.h"
 
 using std::endl;
 
@@ -81,23 +82,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::addResolvables (const ResStore& store, bool installed)
-  {
-    _pimpl->addResolvables (store, installed);
-  }
-
-  void ZYpp::removeResolvables (const ResStore& store)
-  {
-    _pimpl->removeResolvables (store);
-  }
-
-  ///////////////////////////////////////////////////////////////////
-
   Target_Ptr ZYpp::target() const
   { return _pimpl->target(); }
-
-  void ZYpp::initTarget(const Pathname & root, bool commit_only )
-  { _pimpl->initTarget(root, commit_only); }
 
   void ZYpp::initializeTarget(const Pathname & root)
   { _pimpl->initializeTarget(root); }
@@ -113,29 +99,15 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::setTextLocale( const Locale & textLocale_r )
-  { _pimpl->setTextLocale( textLocale_r ); }
-
-  Locale ZYpp::getTextLocale() const
-  { return _pimpl->getTextLocale(); }
-
   void ZYpp::setRequestedLocales( const LocaleSet & locales_r )
-  { _pimpl->setRequestedLocales( locales_r ); }
+  { sat::Pool::instance().setRequestedLocales( locales_r ); }
 
-  ZYpp::LocaleSet ZYpp::getRequestedLocales() const
-  { return _pimpl->getRequestedLocales(); }
+  const LocaleSet & ZYpp::getRequestedLocales() const
+  { return sat::Pool::instance().getRequestedLocales(); }
 
-  ZYpp::LocaleSet ZYpp::getAvailableLocales() const
-  { return _pimpl->getAvailableLocales(); }
+  const LocaleSet & ZYpp::getAvailableLocales() const
+  { return sat::Pool::instance().getAvailableLocales(); }
 
-  void ZYpp::availableLocale( const Locale & locale_r )
-  { _pimpl->availableLocale( locale_r ); }
-
-  Arch ZYpp::architecture() const
-  { return _pimpl->architecture(); }
-
-  void ZYpp::setArchitecture( const Arch & arch )
-  { _pimpl->setArchitecture( arch ); }
 
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }

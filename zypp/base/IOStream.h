@@ -87,6 +87,10 @@ namespace zypp
 	const std::string & operator*() const
 	{ return _line; }
 
+	/** Access the current line. */
+	const std::string * operator->() const
+	{ return &_line; }
+
 	/** Advance to next line. */
 	bool next();
 

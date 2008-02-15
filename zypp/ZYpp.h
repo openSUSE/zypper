@@ -17,8 +17,10 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
-
 #include "zypp/base/Deprecated.h"
+
+#include "zypp/ZConfig.h"
+
 #include "zypp/ZYppCommit.h"
 #include "zypp/ResTraits.h"
 
@@ -39,8 +41,6 @@ namespace zypp
   class ZYppFactory;
   class ResPool;
   class ResPoolProxy;
-  class ResStore;
-  class Locale;
   class KeyRing;
 
   ///////////////////////////////////////////////////////////////////
@@ -61,8 +61,8 @@ namespace zypp
   public:
 
     /**
-     * Access to the main resolvable pool
-     * \ref zypp::ResPool
+     * Access to the global resolvable pool.
+     * Same as \ref zypp::ResPool::instance
      */
     ResPool pool() const;
 
@@ -71,10 +71,6 @@ namespace zypp
      * same kind and name.
     */
     ResPoolProxy poolProxy() const;
-
-    void addResolvables (const ResStore& store, bool installed = false);
-
-    void removeResolvables (const ResStore& store);
 
     DiskUsageCounter::MountPointSet diskUsage();
 
@@ -93,12 +89,6 @@ namespace zypp
      * just init the target, dont populate store or pool
      */
     void initializeTarget(const Pathname & root);
-
-    /**
-     * \throws Exception
-     * if commit_only == true, just init the target, dont populate store or pool
-     */
-    ZYPP_DEPRECATED void initTarget(const Pathname & root, bool commit_only = false);
 
     /**
      * \throws Exception
@@ -128,34 +118,39 @@ namespace zypp
   public:
     /** Set the preferred locale for translated labels, descriptions,
      *  etc. passed to the UI.
+     * \deprecated Use ZConfig diretcly.
      */
-    void setTextLocale( const Locale & textLocale_r );
-    /** */
-    Locale getTextLocale() const;
+    ZYPP_DEPRECATED void setTextLocale( const Locale & textLocale_r )
+    { ZConfig::instance().setTextLocale( textLocale_r ); }
+    /** \deprecated Use ZConfig diretcly. */
+    ZYPP_DEPRECATED Locale getTextLocale() const
+    { return ZConfig::instance().textLocale(); }
 
   public:
-    typedef std::set<Locale> LocaleSet;
+    /** \name move to pool
+     * \deprecated Use ResPool diretcly.
+    */
+    //@{
     /** Set the requested locales.
      * Languages to be supported by the system, e.g. language specific
      * packages to be installed. This function operates on the pool,
      * so only the locales that are available as resolvables
      * are marked as requested. The rest is ignored.
+     * \deprecated Use ResPool diretcly.
     */
-    void setRequestedLocales( const LocaleSet & locales_r );
-    /** */
-    LocaleSet getRequestedLocales() const;
+    void setRequestedLocales( const LocaleSet & locales_r ) ZYPP_DEPRECATED;
+
+    /** \deprecated Use ResPool diretcly. */
+    const LocaleSet & getRequestedLocales() const ZYPP_DEPRECATED;
 
     /**
      * Get the set of available locales.
      * This is computed from the package data so it actually
      * represents all locales packages claim to support.
+     * \deprecated Use ResPool diretcly.
      */
-    LocaleSet getAvailableLocales() const;
-
-    /**
-     * internal use only
-     **/
-    void availableLocale( const Locale & locale_r );
+    const LocaleSet & getAvailableLocales() const ZYPP_DEPRECATED;
+    //@}
 
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
@@ -167,23 +162,29 @@ namespace zypp
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
 
-    /** Get the system architecture.   */
-    Arch architecture() const;
+    /** Get the system architecture.
+      * \deprecated Use ZConfig diretcly.
+    */
+    ZYPP_DEPRECATED Arch architecture() const
+    { return ZConfig::instance().systemArchitecture(); }
     /** Set the system architecture.
-	This should be used for testing/debugging only since the Target backend
-	won't be able to install incompatible packages ;-)   */
-    void setArchitecture( const Arch & arch );
+     * This should be used for testing/debugging only since the Target backend
+     * won't be able to install incompatible packages ;-)
+     * \deprecated Use ZConfig diretcly.
+    */
+    ZYPP_DEPRECATED void setArchitecture( const Arch & arch )
+    { ZConfig::instance().setSystemArchitecture( arch ); }
 
   public:
-    
-   /** 
+
+   /**
     * \short Apply persistant locks to current pool.
     * Call this before solving
     *
     * \returns Number of items locked
     */
    int applyLocks();
-      
+
   protected:
     /** Dtor */
     virtual ~ZYpp();

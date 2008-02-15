@@ -20,10 +20,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+#include <sstream>
 
 #include "zypp/solver/detail/Helper.h"
-
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -60,9 +60,9 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 class LookFor : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref item;
+    PoolItem item;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	item = provider;
 	return false;				// stop here, we found it
@@ -72,33 +72,40 @@ class LookFor : public resfilter::PoolItemFilterFunctor
 
 // just find installed item with same kind/name as item
 
-PoolItem_Ref
-Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
+template<class _Iter>
+static PoolItem findInstalledByNameAndKind ( _Iter begin, _Iter end, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
 
-    invokeOnEach( pool.byNameBegin( name ),
-		  pool.byNameEnd( name ),
-		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
-				  resfilter::ByKind( kind ) ),			// equal kind
+    invokeOnEach(begin, end,
+		  resfilter::ByInstalled (),					// ByInstalled
 		  functor::functorRef<bool,PoolItem> (info) );
 
     _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
     return info.item;
+
 }
+
+PoolItem Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
+{ return detail::findInstalledByNameAndKind( pool.byIdentBegin( kind, name ), pool.byIdentEnd( kind, name ), name, kind ); }
+
+PoolItem Helper::findInstalledItem (const ResPool & pool, PoolItem item)
+{ return findInstalledByNameAndKind(pool, item->name(), item->kind() ); }
+
+PoolItem Helper::findInstalledItem( const std::vector<PoolItem> & pool, PoolItem item )
+{ return detail::findInstalledByNameAndKind( pool.begin(), pool.end(), item->name(), item->kind() ); }
 
 
 // just find uninstalled item with same kind/name as item
 
-PoolItem_Ref
+PoolItem
 Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
 
-    invokeOnEach( pool.byNameBegin( name ),
-		  pool.byNameEnd( name ),
-		  functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-				  resfilter::ByKind( kind ) ),			// equal kind
+    invokeOnEach( pool.byIdentBegin( kind, name ),
+		  pool.byIdentEnd( kind, name ),
+		  resfilter::ByUninstalled(),					// ByUninstalled
 		  functor::functorRef<bool,PoolItem> (info) );
 
     _XDEBUG("Helper::findUninstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
@@ -106,24 +113,15 @@ Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name,
 }
 
 
-// just find installed item with same kind/name as item
-// does *NOT* check edition
-
-PoolItem_Ref
-Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
-{
-    return findInstalledByNameAndKind (pool, item->name(), item->kind() );
-}
-
 //----------------------------------------------------------------------------
 
 class LookForUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref uninstalled;
-    PoolItem_Ref installed;
+    PoolItem uninstalled;
+    PoolItem installed;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
         // is valid
         if ( ! provider.resolvable() )
@@ -142,13 +140,13 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
             return true;
           }
         }
-        
+
 	if ((!uninstalled							// none yet
 	    || (uninstalled->edition().compare( provider->edition() ) < 0)	// or a better edition
 	    || (uninstalled->arch().compare( provider->arch() ) < 0) ) // or a better architecture
 	    && !provider.status().isLocked() )                                  // is not locked
 	{
-	    uninstalled = provider;						// store 
+	    uninstalled = provider;						// store
 	}
 	return true;
     }
@@ -158,16 +156,14 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 // just find best (according to edition) uninstalled item with same kind/name as item
 // *DOES* check edition
 
-PoolItem_Ref
-Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
+template<class _Iter>
+static PoolItem findUpdateItem( _Iter begin, _Iter end, PoolItem item )
 {
     LookForUpdate info;
     info.installed = item;
 
-    invokeOnEach( pool.byNameBegin( item->name() ),
-		  pool.byNameEnd( item->name() ),
-		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-						  resfilter::ByKind( item->kind() ) ),		// equal kind
+    invokeOnEach( begin, end,
+		  functor::chain (resfilter::ByUninstalled (),						// ByUninstalled
 				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),	// only look at better editions
 		  functor::functorRef<bool,PoolItem> (info) );
 
@@ -175,15 +171,21 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
     return info.uninstalled;
 }
 
+PoolItem Helper::findUpdateItem (const ResPool & pool, PoolItem item)
+{ return detail::findUpdateItem( pool.byIdentBegin( item ), pool.byIdentEnd( item ), item ); }
+
+PoolItem Helper::findUpdateItem (const std::vector<PoolItem> & pool, PoolItem item)
+{ return detail::findUpdateItem( pool.begin(), pool.end(), item ); }
+
 
 //----------------------------------------------------------------------------
 
 class LookForReinstall : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref uninstalled;
+    PoolItem uninstalled;
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	if (provider.status().isLocked()) {
 	    return true; // search next
@@ -195,15 +197,14 @@ class LookForReinstall : public resfilter::PoolItemFilterFunctor
 };
 
 
-PoolItem_Ref
-Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
+PoolItem
+Helper::findReinstallItem (const ResPool & pool, PoolItem item)
 {
     LookForReinstall info;
 
-    invokeOnEach( pool.byNameBegin( item->name() ),
-		  pool.byNameEnd( item->name() ),
-		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
-						  resfilter::ByKind( item->kind() ) ),		// equal kind
+    invokeOnEach( pool.byIdentBegin( item ),
+		  pool.byIdentEnd( item ),
+		  functor::chain (resfilter::ByUninstalled (),						// ByUninstalled
 				  resfilter::byEdition<CompareByEQ<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
 
@@ -216,17 +217,17 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 class CheckIfBest : public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref _item;
+    PoolItem _item;
     bool is_best;
 
-    CheckIfBest( PoolItem_Ref item )
+    CheckIfBest( PoolItem item )
 	: _item( item )
 	, is_best( true )		// assume we already have the best
     {}
 
     // check if provider is better. If yes, end the search.
 
-    bool operator()( PoolItem_Ref provider )
+    bool operator()( PoolItem provider )
     {
 	int archcmp = _item->arch().compare( provider->arch() );
 	if (((archcmp < 0) 							// provider has a better architecture
@@ -245,18 +246,52 @@ class CheckIfBest : public resfilter::PoolItemFilterFunctor
 // check if the given item is the best one of the pool
 
 bool
-Helper::isBestUninstalledItem (const ResPool & pool, PoolItem_Ref item)
+Helper::isBestUninstalledItem (const ResPool & pool, PoolItem item)
 {
     CheckIfBest info( item );
 
-    invokeOnEach( pool.byNameBegin( item->name() ),
-		  pool.byNameEnd( item->name() ),
-		  functor::chain( resfilter::ByUninstalled(),			// ByUninstalled
-				  resfilter::ByKind( item->kind() ) ),		// equal kind
+    invokeOnEach( pool.byIdentBegin( item ),
+		  pool.byIdentEnd( item ),
+		  resfilter::ByUninstalled(),			// ByUninstalled
 		  functor::functorRef<bool,PoolItem>( info ) );
 
     _XDEBUG("Helper::isBestUninstalledItem(" << item << ") => " << info.is_best);
     return info.is_best;
+}
+
+std::string
+Helper::itemToString (PoolItem item, bool shortVersion)
+{
+    ostringstream os;
+    if (!item) return "";
+
+    if (item->kind() != ResTraits<zypp::Package>::kind)
+	os << item->kind() << ':';
+    os  << item->name();
+    if (!shortVersion) {
+	os << '-' << item->edition();
+	if (item->arch() != "") {
+	    os << '.' << item->arch();
+	}
+	Repository s = item->repository();
+	if (s) {
+	    string alias = s.info().alias();
+	    if (!alias.empty()
+		&& alias != "@system")
+	    {
+		os << '[' << s.info().alias() << ']';
+	    }
+	}
+    }
+    return os.str();
+}
+
+std::string
+Helper::capToString (const Capability & capability)
+{
+    ostringstream os;
+    os << capability.asString();
+    return os.str();
 }
 
 

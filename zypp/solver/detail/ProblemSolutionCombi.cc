@@ -28,7 +28,6 @@
 #include "zypp/base/Gettext.h"
 
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
-#include "zypp/solver/detail/ResolverInfo.h"
 
 using namespace std;
 
@@ -54,7 +53,7 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     _details = "";
 }
 
-void ProblemSolutionCombi::addSingleAction( PoolItem_Ref item, const TransactionKind action)
+void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind action)
 {
     addAction (new TransactionSolutionAction(item, action));
     actNumber++;

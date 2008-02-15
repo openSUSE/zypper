@@ -13,7 +13,6 @@
 #define ZYPP_SRCPACKAGE_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/SrcPackageImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,8 +30,7 @@ namespace zypp
   {
 
   public:
-    typedef detail::SrcPackageImplIf    Impl;
-    typedef SrcPackage                  Self;
+    typedef SrcPackage               Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
@@ -42,15 +40,11 @@ namespace zypp
     OnMediaLocation location() const;
 
   protected:
-    SrcPackage( const NVRAD & nvrad_r );
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
+    /** Ctor */
+    SrcPackage( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~SrcPackage();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

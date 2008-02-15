@@ -35,7 +35,7 @@
 #include "zypp/PoolItem.h"
 
 #define _DEBUG(x) DBG << x << std::endl;
-#define _XDEBUG(x) XXX << x << std::endl;
+#define _XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 //#define _DEBUG(x)
 
 /////////////////////////////////////////////////////////////////////////
@@ -48,36 +48,11 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef std::list<PoolItem_Ref> PoolItemList;
-typedef std::set<PoolItem_Ref> PoolItemSet;
+typedef std::list<PoolItem> PoolItemList;
+typedef std::set<PoolItem> PoolItemSet;
       
 DEFINE_PTR_TYPE(Resolver);
 
-DEFINE_PTR_TYPE(ResolverContext);
-      
-DEFINE_PTR_TYPE(ResolverInfo);
-DEFINE_PTR_TYPE(ResolverInfoChildOf);
-DEFINE_PTR_TYPE(ResolverInfoConflictsWith);
-DEFINE_PTR_TYPE(ResolverInfoContainer);
-DEFINE_PTR_TYPE(ResolverInfoDependsOn);
-DEFINE_PTR_TYPE(ResolverInfoMisc);
-DEFINE_PTR_TYPE(ResolverInfoMissingReq);
-DEFINE_PTR_TYPE(ResolverInfoNeededBy);
-DEFINE_PTR_TYPE(ResolverInfoObsoletes);
-
-DEFINE_PTR_TYPE(QueueItem);
-DEFINE_PTR_TYPE(QueueItemBranch);
-DEFINE_PTR_TYPE(QueueItemConflict);
-DEFINE_PTR_TYPE(QueueItemEstablish);
-DEFINE_PTR_TYPE(QueueItemGroup);
-DEFINE_PTR_TYPE(QueueItemInstall);
-DEFINE_PTR_TYPE(QueueItemRequire);
-DEFINE_PTR_TYPE(QueueItemUninstall);
-
-DEFINE_PTR_TYPE(ResolverQueue);
-
-DEFINE_PTR_TYPE(ContextPool);
-      
 DEFINE_PTR_TYPE(SolutionAction);
 typedef std::list<SolutionAction_Ptr> SolutionActionList;
 typedef std::list<SolutionAction_constPtr> CSolutionActionList;

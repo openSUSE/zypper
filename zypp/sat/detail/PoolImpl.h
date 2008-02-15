@@ -20,11 +20,14 @@ extern "C"
 #include <satsolver/repo_solv.h>
 }
 #include <iosfwd>
+#include <tr1/unordered_set>
 
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
-
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/RepoInfo.h"
+#include "zypp/Locale.h"
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -59,23 +62,54 @@ namespace zypp
           const SerialNumber & serial() const
           { return _serial; }
 
-          /** Invalidate housekeeping data (e.g. whatprovides).
-          */
-          void setDirty()
-          { _serial.setDirty(); }
-
           /** Update housekeeping data (e.g. whatprovides).
            * \todo actually requires a watcher.
-          */
-          void prepare()
+           */
+          void prepare() const;
+
+        private:
+          /** Invalidate housekeeping data (e.g. whatprovides) if the
+           *  pools content changed.
+           */
+          void setDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
+
+          /** Invalidate housekeeping data (e.g. whatprovides) if dependencies changed.
+           */
+          void depSetDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
+
+          static detail::IdType nsCallback( ::_Pool *, void * data, detail::IdType lhs, detail::IdType rhs );
+
+        public:
+          /** \name Actions invalidating housekeeping data.
+           *
+           * All methods expect valid arguments being passed.
+           */
+          //@{
+          /** Creating a new repo named \a name_r. */
+          RepoIdType _createRepo( const std::string & name_r )
           {
-            if ( _serial.dirty() )
-            {
-              // sat solver claims to handle this on it's own:
-              ::pool_createwhatprovides( _pool );
-              _serial.serial();
-            }
+            setDirty(__FUNCTION__, name_r.c_str() );
+            return ::repo_create( _pool, name_r.c_str() );
           }
+
+          /** Creating a new repo named \a name_r. */
+          void _deleteRepo( ::_Repo * repo_r )
+          {
+            setDirty(__FUNCTION__, repo_r->name );
+            ::repo_free( repo_r, /*reuseids*/false );
+            eraseRepoInfo( repo_r );
+          }
+
+          /** Adding solv file to a repo. */
+          int _addSolv( ::_Repo * repo_r, FILE * file_r );
+
+          /** Adding Solvables to a repo. */
+          detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r )
+          {
+            setDirty(__FUNCTION__, repo_r->name );
+            return ::repo_add_solvable_block( repo_r, count_r );
+          }
+          //@}
 
         public:
           /** a \c valid \ref Solvable has a non NULL repo pointer. */
@@ -109,7 +143,7 @@ namespace zypp
         public:
           /** Get id of the first valid \ref Solvable.
            * This is the next valid after the system solvable.
-          */
+           */
           SolvableIdType getFirstId()  const
           { return getNextId( 1 ); }
 
@@ -128,11 +162,68 @@ namespace zypp
             return noSolvableId;
           }
 
+        public:
+          /** */
+          const RepoInfo & repoInfo( RepoIdType id_r )
+          { return _repoinfos[id_r]; }
+          /** */
+          void setRepoInfo( RepoIdType id_r, const RepoInfo & info_r )
+          { _repoinfos[id_r] = info_r; }
+          /** */
+          void eraseRepoInfo( RepoIdType id_r )
+          { _repoinfos.erase( id_r ); }
+
+        public:
+          /** \name Requested locales. */
+          //@{
+          void setRequestedLocales( const LocaleSet & locales_r );
+          bool addRequestedLocale( const Locale & locale_r );
+          bool eraseRequestedLocale( const Locale & locale_r );
+
+          const LocaleSet & getRequestedLocales() const
+          { return _requestedLocales; }
+
+          bool isRequestedLocale( const Locale & locale_r ) const
+          {
+            LocaleSet::const_iterator it( _requestedLocales.find( locale_r ) );
+            return it != _requestedLocales.end();
+          }
+
+          const LocaleSet & getAvailableLocales() const
+          {
+            if ( _availableLocales.size() != _localeCollector.size() )
+            {
+              _availableLocales.clear();
+              for_( it, _localeCollector.begin(), _localeCollector.end() )
+                _availableLocales.insert( Locale( *it ) );
+            }
+            return _availableLocales;
+          }
+
+          bool isAvailableLocale( const Locale & locale_r ) const
+          {
+            const LocaleSet & avl( getAvailableLocales() );
+            LocaleSet::const_iterator it( avl.find( locale_r ) );
+            return it != avl.end();
+          }
+
+        //@}
+
         private:
           /** sat-pool. */
           ::_Pool * _pool;
           /** Serial number. */
           SerialNumber _serial;
+          /** Watch serial number. */
+          SerialNumberWatcher _watcher;
+          /** Additional \ref RepoInfo. */
+          std::map<RepoIdType,RepoInfo> _repoinfos;
+
+          /**  */
+          LocaleSet _requestedLocales;
+          mutable LocaleSet _availableLocales;
+          mutable std::tr1::unordered_set<IdString> _localeCollector;
+          mutable std::tr1::unordered_set<IdString> _locale2Solver;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -145,4 +236,5 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#define POOL_SETDIRTY
 #endif // ZYPP_SAT_DETAIL_POOLIMPL_H

@@ -34,7 +34,7 @@
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capability.h"
 extern "C" {
 #include "satsolver/solver.h"
 #include "satsolver/pool.h"
@@ -61,20 +61,23 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
   private:
     ResPool _pool;
     Pool *_SATPool;
-    Solver *solv;
-    Queue jobQueue;
-
-    unsigned _timeout_seconds;
-    unsigned _maxSolverPasses;
-    bool _testing;
-    int _valid_solution_count;
-    bool _timed_out;
-    Arch _architecture;
+    Solver *_solv;
+    Queue _jobQueue;
 
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
+
+    bool _fixsystem;			/* repair errors in rpm dependency graph */
+    bool _allowdowngrade;		/* allow to downgrade installed solvable */
+    bool _allowarchchange;		/* allow to change architecture of installed solvables */
+    bool _allowvendorchange;		/* allow to change vendor of installed solvables */
+    bool _allowuninstall;		/* allow removal of installed solvables */
+    bool _updatesystem;			/* distupgrade */
+    bool _allowvirtualconflicts;	/* false: conflicts on package name, true: conflicts on package provides */
+    bool _noupdateprovide;		/* true: update packages needs not to provide old package */
+    bool _dosplitprovides;		/* true: consider legacy split provides */
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem);
@@ -90,36 +93,52 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     friend std::ostream& operator<<(std::ostream& str, const SATResolver & obj)
     { return obj.dumpOn (str); }
 
-    // ---------------------------------- methods
-    void setTimeout (int seconds) { _timeout_seconds = seconds; }
-    void setMaxSolverPasses (int count) { _maxSolverPasses = count; }
-    int timeout () const { return _timeout_seconds; }
-    int maxSolverPasses () const { return _maxSolverPasses; }
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
-	
 
-    bool resolvePool(const CapSet & requires_caps,
-		     const CapSet & conflict_caps,
-		     const bool updgradeMode);
+    bool resolvePool(const CapabilitySet & requires_caps,
+		     const CapabilitySet & conflict_caps);
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);
 
-    Arch architecture() const { return _architecture; }
-    void setArchitecture( const Arch & arch) { _architecture = arch; }
-
-    bool testing(void) const { return _testing; }
-    void setTesting( bool testing ) { _testing = testing; }
-
-    void addPoolItemToInstall (PoolItem_Ref item);
+    void addPoolItemToInstall (PoolItem item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
-    void addPoolItemToLock (PoolItem_Ref item);
+    void addPoolItemToLock (PoolItem item);
 
-    void addPoolItemToRemove (PoolItem_Ref item);
+    void addPoolItemToRemove (PoolItem item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
 
+    bool fixsystem () const {return _fixsystem;}
+    void setFixsystem ( const bool fixsystem) { _fixsystem = fixsystem;}
+
+    bool allowdowngrade () const {return _allowdowngrade;}
+    void setAllowdowngrade ( const bool allowdowngrade) { _allowdowngrade = allowdowngrade;}
+
+    bool allowarchchange () const {return _allowarchchange;}
+    void setAllowarchchange ( const bool allowarchchange) { _allowarchchange = allowarchchange;}
+
+    bool allowvendorchange () const {return _allowvendorchange;}
+    void setAllowvendorchange ( const bool allowvendorchange) { _allowvendorchange = allowvendorchange;}
+    
+    bool allowuninstall () const {return _allowuninstall;}
+    void setAllowuninstall ( const bool allowuninstall) { _allowuninstall = allowuninstall;}
+
+    bool updatesystem () const {return _updatesystem;}
+    void setUpdatesystem ( const bool updatesystem) { _updatesystem = updatesystem;}
+    
+    bool allowvirtualconflicts () const {return _allowvirtualconflicts;}
+    void setAllowvirtualconflicts ( const bool allowvirtualconflicts) { _allowvirtualconflicts = allowvirtualconflicts;}
+    
+    bool noupdateprovide () const {return _noupdateprovide;}
+    void setNoupdateprovide ( const bool noupdateprovide) { _noupdateprovide = noupdateprovide;}
+    
+    bool dosplitprovides () const {return _dosplitprovides;}
+    void setDosplitprovides ( const bool dosplitprovides) { _dosplitprovides = dosplitprovides;}
+
+    PoolItemList whoProvides(Capability cap);
+    bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 };
 
 ///////////////////////////////////////////////////////////////////

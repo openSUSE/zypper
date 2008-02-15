@@ -19,8 +19,10 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/CapSet.h"
+#include "zypp/Capabilities.h"
 #include "zypp/ResPool.h"
+#include "zypp/base/GzStream.h"
+#include "zypp/sat/Repo.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -46,13 +48,16 @@ template<>
 std::string helixXML( const Capability &cap );
 
 template<> 
-std::string helixXML( const CapSet &caps );
+std::string helixXML( const Capabilities &caps );
+
+template<> 
+std::string helixXML( const CapabilitySet &caps );
 
 template<> 
 std::string helixXML( const Dependencies &dep );
 	
 template<> 
-std::string helixXML( const PoolItem_Ref &item );
+std::string helixXML( const PoolItem &item );
 
 
 ///////////////////////////////////////////////////////////////////
@@ -66,18 +71,18 @@ class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyabl
 
   private:
     std::string dumpFile; // Path of the generated testcase
-    std::ofstream *file;    
+    ofgzstream *file;    
 
   public:
     HelixResolvable (const std::string & path);
     ~HelixResolvable ();
 
-    void addResolvable (const PoolItem_Ref item);
+    void addResolvable (const PoolItem item);
     std::string filename () { return dumpFile; }
 };
 
 DEFINE_PTR_TYPE(HelixResolvable);
-typedef std::map<Repository, HelixResolvable_Ptr> RepositoryTable;
+typedef std::map<sat::Repo, HelixResolvable_Ptr> RepositoryTable;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -101,11 +106,15 @@ class  HelixControl {
     HelixControl ();    
     ~HelixControl ();
 
-    void installResolvable (const ResObject::constPtr &resObject);
-    void lockResolvable (const ResObject::constPtr &resObject);
-    void keepResolvable (const ResObject::constPtr &resObject);        
-    void deleteResolvable (const ResObject::constPtr &resObject);
-    void addDependencies (const CapSet &capRequire, const CapSet &capConflict);
+    void installResolvable (const ResObject::constPtr &resObject,
+			    const ResStatus &status);
+    void lockResolvable (const ResObject::constPtr &resObject,
+			 const ResStatus &status);
+    void keepResolvable (const ResObject::constPtr &resObject,
+			 const ResStatus &status);        
+    void deleteResolvable (const ResObject::constPtr &resObject,
+			   const ResStatus &status);
+    void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
     std::string filename () { return dumpFile; }
 };
 	
@@ -129,8 +138,7 @@ class Testcase {
     ~Testcase ();
 
     bool createTestcase (Resolver & resolver, bool dumpPool = true, bool runSolver = true);
-    bool createTestcasePool(const ResPool &pool);
-
+    bool createTestcasePool(const ResPool &pool);    
 };
 
 

@@ -18,6 +18,8 @@
 #include <list>
 #include <set>
 #include <map>
+#include <tr1/unordered_set>
+#include <tr1/unordered_map>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Deprecated.h"
@@ -121,6 +123,10 @@ namespace zypp
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
+    std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_set<_Tp> & obj )
+    { return dumpRange( str, obj.begin(), obj.end() ); }
+
+  template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::list<_Tp> & obj )
     { return dumpRange( str, obj.begin(), obj.end() ); }
 
@@ -201,14 +207,6 @@ namespace zypp
         { return make_transform_iterator( map().begin(), Transformer() ); }
 
         MapEntry_const_iterator end() const
-        { return make_transform_iterator( map().end(), Transformer() );}
-
-        /** \deprecated Use begin. */
-        ZYPP_DEPRECATED MapEntry_const_iterator map_begin() const
-        { return make_transform_iterator( map().begin(), Transformer() ); }
-
-        /** \deprecated Use end. */
-        ZYPP_DEPRECATED MapEntry_const_iterator map_end() const
         { return make_transform_iterator( map().end(), Transformer() );}
 
       private:
@@ -329,6 +327,10 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const std::map<_Key, _Tp> & obj )
     { return str << dumpMap( obj ); }
 
+  template<class _Key, class _Tp>
+    std::ostream & operator<<( std::ostream & str, const std::tr1::unordered_map<_Key, _Tp> & obj )
+    { return str << dumpMap( obj ); }
+
   /** Print stream status bits.
    * Prints the values of a streams \c good, \c eof, \c failed and \c bad bit.
    *
@@ -348,6 +350,30 @@ namespace zypp
     ret += "]";
     return str << ret;
   }
+
+  ///////////////////////////////////////////////////////////////////
+  // iomanipulator: str << dump(val) << ...
+  // calls:         std::ostream & dumpOn( std::ostream & str, const Type & obj )
+  ///////////////////////////////////////////////////////////////////
+
+  namespace detail
+  {
+    template<class _Tp>
+    struct Dump
+    {
+      Dump( const _Tp & obj_r ) : _obj( obj_r ) {}
+      const _Tp & _obj;
+    };
+
+    template<class _Tp>
+    std::ostream & operator<<( std::ostream & str, const Dump<_Tp> & obj )
+    { return dumpOn( str, obj._obj ); }
+  }
+
+  template<class _Tp>
+  detail::Dump<_Tp> dump( const _Tp & obj_r )
+  { return detail::Dump<_Tp>(obj_r); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

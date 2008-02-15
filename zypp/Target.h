@@ -19,7 +19,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Deprecated.h"
 
-#include "zypp/ResStore.h"
 #include "zypp/Pathname.h"
 #include "zypp/ResPool.h"
 
@@ -39,7 +38,7 @@ namespace zypp
   }
 
   DEFINE_PTR_TYPE(Target);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Target
@@ -51,29 +50,23 @@ namespace zypp
   public:
     typedef target::TargetImpl  Impl;
     typedef intrusive_ptr<Impl> Impl_Ptr;
-    typedef std::list<PoolItem_Ref> PoolItemList;
+    typedef std::list<PoolItem> PoolItemList;
 
   public:
 
-    /** All resolvables provided by the target. */
-    const ResStore & resolvables();
-    
-    /** 
+    /**
+     * load resolvables into the pool
+     */
+    void load();
+
+    /**
      * reload the target in future calls if
      * needed.
      * note the loading can actually be delayed, but
-     * the next call to resolvables must reflect the 
+     * the next call to resolvables must reflect the
      * status of the system.
     */
     void reset();
-    
-    /**
-     * load resolvables of certain kind in the internal store
-     * and return a iterator
-     * successive calls will be faster as resolvables are cached-
-     */
-    ResStore::resfilter_const_iterator byKindBegin( const ResObject::Kind & kind_r  ) const;
-    ResStore::resfilter_const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
 
     /** Null implementation */
     static Target_Ptr nullimpl();
@@ -85,13 +78,10 @@ namespace zypp
      Needed to evaluate split provides during Resolver::Upgrade() */
     bool providesFile (const std::string & name_str, const std::string & path_str) const;
 
-    ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
-
-#ifndef STORAGE_DISABLED
-    /** enables the storage target */
-    bool isStorageEnabled() const;
-    void enableStorage(const Pathname &root_r);
-#endif
+    /** Return name of package owning \a path_str
+     * or empty string if no installed package owns \a path_str.
+     **/
+    std::string whoOwnsFile (const std::string & path_str) const;
 
     /** Set the log file for target */
     bool setInstallationLogfile(const Pathname & path_r);

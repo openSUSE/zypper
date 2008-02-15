@@ -15,33 +15,34 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
-#include "zypp/ResTraits.h"
 
-#include "zypp/Edition.h"
-#include "zypp/Arch.h"
-#include "zypp/CapSetFwd.h"
-#include "zypp/Dep.h"
+#include "zypp/sat/Solvable.h"
+
+#include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   struct NVRAD;
-  class Dependencies;
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Resolvable
   //
   /** Interface base for resolvable objects (identification and dependencies).
-   * \invariant \c provides <tt>name = edition</tt>
-   * \invariant \c prerequires is a subset of \c requires
+   * \todo Merge with ResObject
   */
-  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
+  class Resolvable : protected sat::Solvable,
+                     public base::ReferenceCounted, private base::NonCopyable
   {
+    friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
+
   public:
     typedef Resolvable               Self;
     typedef ResTraits<Self>          TraitsType;
@@ -50,45 +51,56 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /**  */
-    const Kind & kind() const;
-    /**  */
-    const std::string & name() const;
-    /**  */
-    const Edition & edition() const;
-    /**  */
-    const Arch & arch() const;
+    /** Whether this represents a valid- or no-solvable. */
+    using sat::Solvable::operator bool_type;
+    /** Whether this represents an installed solvable. */
+    using sat::Solvable::isSystem;
+
+    using sat::Solvable::ident;
+
+    using sat::Solvable::kind;
+    using sat::Solvable::name;
+    using sat::Solvable::edition;
+    using sat::Solvable::arch;
 
     /** \name Dependencies. */
     //@{
     /** Select by Dep. */
-    const CapSet & dep( Dep which_r ) const;
-    /** All dependencies. */
-    const Dependencies & deps() const;
+    Capabilities dep( Dep which_r ) const
+    { return operator[]( which_r ); }
+    using sat::Solvable::operator[];
+    using sat::Solvable::provides;
+    using sat::Solvable::requires;
+    using sat::Solvable::conflicts;
+    using sat::Solvable::obsoletes;
+    using sat::Solvable::recommends;
+    using sat::Solvable::suggests;
+    using sat::Solvable::freshens;
+    using sat::Solvable::enhances;
+    using sat::Solvable::supplements;
+    using sat::Solvable::prerequires;
     //@}
 
-    /** \name Deprecated. */
-    //@{
-    void injectProvides( const Capability & cap_r );
-    void injectRequires( const Capability & cap_r );
-    //@}
+  public:
+    const sat::Solvable & satSolvable() const { return *this; }
 
   protected:
     /** Ctor */
-    Resolvable( const Kind & kind_r,
-                const NVRAD & nvrad_r );
+    Resolvable( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Resolvable();
     /** Helper for stream output */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
+ };
+ ///////////////////////////////////////////////////////////////////
 
-  private:
-    /** Implementation */
-    struct Impl;
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
-  };
-  ///////////////////////////////////////////////////////////////////
+ /** \relates Resolvable Stream output */
+ inline std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
+ { return obj.dumpOn( str ); }
+
+ /** \relates Resolvable More verbose stream output including dependencies */
+ inline std::ostream & dumpOn( std::ostream & str, const Resolvable & obj )
+ { return dumpOn( str, obj.satSolvable() ); }
 
   /** Test whether a Resolvable::Ptr is of a certain Kind.
    * \return \c Ture iff \a p is not \c NULL and points to a Resolvable

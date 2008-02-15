@@ -21,8 +21,6 @@
 #include "zypp/PoolItem.h"
 #include "zypp/CapAndItem.h"
 
-//#include "zypp/Repository.h"
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -201,7 +199,7 @@ namespace zypp
 
       bool operator()( ResObject::constPtr p ) const
       {
-       return p->repository().info().alias() == _alias;
+        return p->repoInfo().alias() == _alias;
       }
 
       std::string _alias;
@@ -346,7 +344,7 @@ namespace zypp
 	return p.status().isKept();
       }
     };
-      
+
 
 
     ///////////////////////////////////////////////////////////////////

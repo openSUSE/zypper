@@ -13,7 +13,6 @@
 #define ZYPP_PATTERN_H
 
 #include "zypp/ResObject.h"
-#include "zypp/detail/PatternImplIf.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -31,8 +30,7 @@ namespace zypp
   class Pattern : public ResObject
   {
   public:
-    typedef detail::PatternImplIf  Impl;
-    typedef Pattern                Self;
+    typedef Pattern                  Self;
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
@@ -55,21 +53,16 @@ namespace zypp
     std::set<std::string> install_packages( const Locale & lang = Locale("") ) const ZYPP_DEPRECATED;
 
     /** Ui hint. */
-    const CapSet & includes() const;
+    const Capabilities & includes() const;
     /** Ui hint. */
-    const CapSet & extends() const;
+    const Capabilities & extends() const;
 
   protected:
+    friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
-    Pattern( const NVRAD & nvrad_r );
+    Pattern( const sat::Solvable & solvable_r );
     /** Dtor */
     virtual ~Pattern();
-
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

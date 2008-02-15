@@ -49,7 +49,7 @@ namespace zypp
         ++_perKind[ptr->kind()];
       }
     public:
-      typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
+      typedef std::map<ResKind,Counter<unsigned> > KindMap;
       Counter<unsigned> _total;
       KindMap           _perKind;
     };

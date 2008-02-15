@@ -20,7 +20,6 @@
 #include "zypp/base/NonCopyable.h"
 
 #include "zypp/data/RecordId.h"
-#include "zypp/capability/CapabilityImpl.h"
 #include "zypp/Pathname.h"
 #include "zypp/Resolvable.h"
 #include "zypp/NVR.h"
@@ -39,8 +38,7 @@ namespace zypp
 {
 namespace data
 {
-  /** ::data dependencies are CapabilityImpl. */
-  typedef std::set<capability::CapabilityImpl::Ptr> DependencyList;
+  typedef CapabilitySet                             DependencyList;
   typedef std::map<zypp::Dep, DependencyList>       Dependencies;
 
   typedef DefaultIntegral<unsigned,0u>              MediaNr;
@@ -60,13 +58,13 @@ namespace data
       {};
 
       /** Kind */
-      zypp::Resolvable::Kind kind;
+      ResKind     kind;
       /** Name */
       std::string name;
       /** Edition */
-      Edition edition;
+      Edition     edition;
       /** Architecture */
-      Arch arch;
+      Arch        arch;
       /** Dependencies */
       Dependencies deps;
   };

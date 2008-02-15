@@ -12,7 +12,7 @@
 #ifndef ZYPP_PACKAGEKEYWORD_H
 #define ZYPP_PACKAGEKEYWORD_H
 
-#include "zypp/base/UniqueString.h"
+#include "zypp/IdStringType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -22,16 +22,25 @@ namespace zypp
   //
   //	CLASS NAME : PackageKeyword
   //
-  /** Package keywords. */
-  struct PackageKeyword : public base::UniqueString<PackageKeyword>
+  /** Package keywords.
+   * \see \ref IdStringType
+   */
+  class PackageKeyword : public IdStringType<PackageKeyword>
   {
-    PackageKeyword()
-    {}
+    public:
+      /** Default ctor: empty keyword */
+      PackageKeyword() {}
 
-    PackageKeyword( const std::string & name_r )
-      : base::UniqueString<PackageKeyword>( name_r )
-    {}
-  };
+      /** Ctor taking keyword as string. */
+      explicit PackageKeyword( sat::detail::IdType id_r )  : _str( IdString(id_r).c_str() ) {}
+      explicit PackageKeyword( const IdString & idstr_r )  : _str( idstr_r.c_str() ) {}
+      explicit PackageKeyword( const std::string & str_r ) : _str( str_r ) {}
+      explicit PackageKeyword( const char * cstr_r )       : _str( cstr_r ) {}
+
+    private:
+      friend class IdStringType<PackageKeyword>;
+      IdString _str;
+   };
   ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////

@@ -1,3 +1,27 @@
+// //////////////////////////////////////////////////////////////////////
+// If you prefer using iterator in a for' loop, but dislike to figure out
+// the exact type of the iterator, you may find the 'for_' macro convenient:
+// //////////////////////////////////////////////////////////////////////
+
+    #include "zypp/base/Easy.h"
+
+    for_( it, pool.byIdentBegin( kind, name ),
+              pool.byIdentEnd( kind, name ) )
+    {
+      PoolItem copy = *it;
+    }
+
+instead of:
+
+    for ( ResPool::byIdent_iterator it = pool.byIdentBegin( kind, name ),
+                                    end = pool.byIdentEnd( kind, name );
+          it != end, ++it )
+    {
+      PoolItem copy = *it;
+    }
+
+
+// //////////////////////////////////////////////////////////////////////
 // Avoid buggy code, that tries to erase elements, matching a
 // certain property from containers. Example:
 //

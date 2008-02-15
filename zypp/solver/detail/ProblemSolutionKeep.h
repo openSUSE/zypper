@@ -47,7 +47,7 @@ namespace zypp
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionKeep( ResolverProblem_Ptr parent, PoolItem_Ref item);
+	    ProblemSolutionKeep( ResolverProblem_Ptr parent, PoolItem item);
 	    ProblemSolutionKeep( ResolverProblem_Ptr parent, PoolItemList & itemlist );	    
 	};
 

@@ -22,7 +22,7 @@ namespace zypp
 
   typedef std::map<std::string, std::string> OtherDefaultLanguage;
   static OtherDefaultLanguage otherDefaultLanguage;
-    
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Locale::Impl
@@ -89,7 +89,7 @@ namespace zypp
 
       if (otherDefaultLanguage.find(code()) != otherDefaultLanguage.end())
 	  return LanguageCode(otherDefaultLanguage[code()]);
-	    
+
       if ( _country.hasCode() )
         return _language;
 
@@ -142,8 +142,26 @@ namespace zypp
   //	METHOD NAME : Locale::Locale
   //	METHOD TYPE : Ctor
   //
+  Locale::Locale( IdString code_r )
+  : _pimpl( new Impl( code_r.asString() ) )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Locale::Locale
+  //	METHOD TYPE : Ctor
+  //
   Locale::Locale( const std::string & code_r )
   : _pimpl( new Impl( code_r ) )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Locale::Locale
+  //	METHOD TYPE : Ctor
+  //
+  Locale::Locale( const char * code_r )
+  : _pimpl( new Impl( C_Str(code_r).c_str() ) )
   {}
 
   ///////////////////////////////////////////////////////////////////

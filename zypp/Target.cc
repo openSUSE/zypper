@@ -64,26 +64,11 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  const ResStore & Target::resolvables()
-  { return _pimpl->resolvables(); }
+  void Target::load()
+  { _pimpl->load(); }
 
-  ResStore::resfilter_const_iterator Target::byKindBegin( const ResObject::Kind & kind_r  ) const
-  { return _pimpl->byKindBegin( kind_r ); }
-  
-  ResStore::resfilter_const_iterator Target::byKindEnd( const ResObject::Kind & kind_r  ) const
-  { return _pimpl->byKindEnd( kind_r ); }
-  
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
-
-#ifndef STORAGE_DISABLED
-      /** enables the storage target */
-  bool Target::isStorageEnabled() const
-  { return _pimpl->isStorageEnabled(); }
-
-  void Target::enableStorage(const Pathname &root_r)
-  { _pimpl->enableStorage(root_r); }
-#endif
 
   Pathname Target::root() const
   { return _pimpl->root(); }
@@ -91,7 +76,7 @@ namespace zypp
   bool Target::providesFile (const std::string & name_str, const std::string & path_str) const
   { return _pimpl->providesFile (name_str, path_str); }
 
-  ResObject::constPtr Target::whoOwnsFile (const std::string & path_str) const
+  std::string Target::whoOwnsFile (const std::string & path_str) const
   { return _pimpl->whoOwnsFile (path_str); }
 
   std::ostream & Target::dumpOn( std::ostream & str ) const
@@ -102,10 +87,10 @@ namespace zypp
 
   Date Target::timestamp() const
   { return _pimpl->timestamp(); }
-  
+
   void Target::reset()
   { return _pimpl->reset(); }
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

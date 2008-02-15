@@ -81,16 +81,16 @@ namespace zypp
           // package_ptr will point to a SrcPackage from now on
           package_ptr.swap(srcpkg);
         }
-        package_ptr->arch = Arch(arch);
+        package_ptr->arch = Arch( arch );
         return true;
       }
 
       // xpath: //package/version
       if (reader_r->name() == "version")
       {
-        package_ptr->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        package_ptr->edition = Edition( reader_r->getAttribute("ver").asString(),
+                                        reader_r->getAttribute("rel").asString(),
+                                        reader_r->getAttribute("epoch").asString() );
         return true;
       }
 
@@ -188,7 +188,6 @@ namespace zypp
     return true;
   }
 
-
   // --------------( consume <format> tag )------------------------------------
 
   bool FileReaderBase::BaseImpl::consumeFormatNode(
@@ -252,10 +251,7 @@ namespace zypp
       if (reader_r->name() == "file")
       {
         // insert file dependency into the list
-        package_ptr->deps[Dep::PROVIDES].insert(
-          zypp::capability::parse(
-            ResTraits<Package>::kind,
-            reader_r.nodeText().asString()));
+        package_ptr->deps[Dep::PROVIDES].insert( Capability( reader_r.nodeText().asString(), Capability::PARSED ) );
         return true;
       }
 
@@ -321,12 +317,9 @@ namespace zypp
           ZYPP_THROW(ParseException("rpm:entry found when not expected"));
 
         // read kind of resolvable this entry refers, default to Package
-        string kind_str = reader_r->getAttribute("kind").asString();
-        Resolvable::Kind kind;
-        if (kind_str.empty())
-           kind = ResTraits<Package>::kind;
-        else
-          kind = Resolvable::Kind(kind_str);
+        ResKind kind( reader_r->getAttribute("kind").asString() );
+        if ( ! kind )
+          kind = ResKind::package;
 
         // Check whether this is actually a prerequires dependency.
         // If so, it will be stored in deps_r as Dep::PREREQUIRES
@@ -339,11 +332,6 @@ namespace zypp
             ZYPP_THROW(ParseException("pre=\"1\" found for non-requires dependency"));
           pre = true;
         }
-/*
-        DBG << "got rpm:entry for " << _dtype << ": "
-            << reader_r->getAttribute("name").asString()
-            << " " << edition << " (" << kind << ")" << endl;
-*/
 
         string version = reader_r->getAttribute("ver").asString();
 
@@ -351,9 +339,7 @@ namespace zypp
         {
           // insert unversion dependency into the list
           deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
-            zypp::capability::parse(
-              kind, reader_r->getAttribute("name").asString()
-            )
+            Capability( reader_r->getAttribute("name").asString(), kind, Capability::PARSED )
           );
         }
         else
@@ -366,12 +352,10 @@ namespace zypp
 
           // insert versioned dependency into the list
           deps_r[pre ? Dep::PREREQUIRES : _dtype].insert(
-            zypp::capability::parse(
-              kind,
-              reader_r->getAttribute("name").asString(),
-              Rel(reader_r->getAttribute("flags").asString()),
-              edition
-            )
+            Capability( reader_r->getAttribute("name").asString(),
+                        Rel( reader_r->getAttribute("flags").asString() ),
+                        edition,
+                        kind )
           );
         }
 

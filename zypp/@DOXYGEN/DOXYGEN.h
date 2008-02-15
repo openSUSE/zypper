@@ -34,6 +34,11 @@
  * \verbinclude g_RAII
 */
 ////////////////////////////////////////////////////////////////////////////////
+/*! \defgroup g_CRTP CRTP solutions
+ * \see http://en.wikipedia.org/wiki/Curiously_Recurring_Template_Pattern
+ * \verbinclude g_CRTP
+*/
+////////////////////////////////////////////////////////////////////////////////
 /*! \defgroup g_BackenSpecific Backend Specific
  * \verbinclude g_BackenSpecific
 */

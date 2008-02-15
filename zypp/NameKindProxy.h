@@ -100,14 +100,14 @@ namespace zypp
     typedef AvailableSet::size_type      Available_size_type;
 
   public:
-    NameKindProxy( ResPool pool_r,
-                   const std::string & name_r, Resolvable::Kind kind_r );
+    NameKindProxy( ResPool pool_r, IdString name_r, ResKind kind_r );
+    NameKindProxy( ResPool pool_r, const C_Str & name_r, ResKind kind_r );
 
   public:
-    ResObject::Kind kind() const
+    ResKind kind() const
     { return _kind; }
 
-    const std::string & name() const
+    IdString name() const
     { return _name; }
 
   public:
@@ -141,10 +141,10 @@ namespace zypp
     // status query and manip stuff...
 
   private:
-    ResObject::Kind _kind;
-    std::string     _name;
-    InstalledSet    _installed;
-    AvailableSet    _available;
+    ResKind      _kind;
+    IdString     _name;
+    InstalledSet _installed;
+    AvailableSet _available;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -153,7 +153,10 @@ namespace zypp
 
   /** \relates NameKindProxy Convenience construction. */
   template<class _Res>
-    inline NameKindProxy nameKindProxy( ResPool pool_r, const std::string & name_r )
+    inline NameKindProxy nameKindProxy( ResPool pool_r, IdString name_r )
+    { return NameKindProxy( pool_r, name_r, ResTraits<_Res>::kind ); }
+  template<class _Res>
+    inline NameKindProxy nameKindProxy( ResPool pool_r, const C_Str & name_r )
     { return NameKindProxy( pool_r, name_r, ResTraits<_Res>::kind ); }
 
   /////////////////////////////////////////////////////////////////

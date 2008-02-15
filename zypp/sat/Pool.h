@@ -14,15 +14,18 @@
 
 #include <iosfwd>
 
+#include "zypp/Pathname.h"
+
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Repo.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Pathname;
   class SerialNumber;
+  class RepoInfo;
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
@@ -41,6 +44,7 @@ namespace zypp
       public:
         typedef detail::SolvableIterator SolvableIterator;
         typedef detail::RepoIterator     RepoIterator;
+        typedef detail::size_type        size_type;
 
       public:
         /** Singleton ctor. */
@@ -52,21 +56,21 @@ namespace zypp
         {}
 
       public:
-        /** */
+        /** Internal array size for stats only. */
+        size_type capacity() const;
+
+        /** Housekeeping data serial number. */
         const SerialNumber & serial() const;
 
-        /** Invalidate housekeeping data (e.g. whatprovides). */
-        void setDirty();
-
-        /** Update housekeeping data (e.g. whatprovides). */
-        void prepare();
+        /** Update housekeeping data if necessary (e.g. whatprovides). */
+        void prepare() const;
 
       public:
         /** Whether \ref Pool contains repos. */
         bool reposEmpty() const;
 
         /** Number of repos in \ref Pool. */
-        unsigned reposSize() const;
+        size_type reposSize() const;
 
         /** Iterator to the first \ref Repo. */
         RepoIterator reposBegin() const;
@@ -108,19 +112,60 @@ namespace zypp
         Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
         /** \overload Using the files basename as \ref Repo name. */
         Repo addRepoSolv( const Pathname & file_r );
+        /** \overload Using the \ref RepoInfo::alias \ref Repo name.
+         * Additionally stores the \ref RepoInfo. \See \ref Prool::setInfo.
+        */
+        Repo addRepoSolv( const Pathname & file_r, const RepoInfo & info_r );
 
       public:
         /** Whether \ref Pool contains solvables. */
         bool solvablesEmpty() const;
 
         /** Number of solvables in \ref Pool. */
-        unsigned solvablesSize() const;
+        size_type solvablesSize() const;
 
         /** Iterator to the first \ref Solvable. */
         SolvableIterator solvablesBegin() const;
 
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
+
+      public:
+        /** \name Requested locales. */
+        //@{
+        /** Set the requested locales.
+         * Languages to be supported by the system, e.g. language specific
+         * packages to be installed.
+         */
+        void setRequestedLocales( const LocaleSet & locales_r );
+
+        /** Add one \ref Locale to the set of requested locales.
+         * Return \c true if \c locale_r was newly added to the set.
+        */
+        bool addRequestedLocale( const Locale & locale_r );
+
+        /** Erase one \ref Locale from the set of requested locales.
+        * Return \c false if \c locale_r was not found in the set.
+         */
+        bool eraseRequestedLocale( const Locale & locale_r );
+
+        /** Return the requested locales.
+         * \see \ref setRequestedLocales
+        */
+        const LocaleSet & getRequestedLocales() const;
+
+        /** Wheter this \ref Locale is in the set of requested locales. */
+        bool isRequestedLocale( const Locale & locale_r ) const;
+
+        /** Get the set of available locales.
+         * This is computed from the package data so it actually
+         * represents all locales packages claim to support.
+         */
+        const LocaleSet & getAvailableLocales() const;
+
+        /** Wheter this \ref Locale is in the set of available locales. */
+        bool isAvailableLocale( const Locale & locale_r ) const;
+        //@}
 
       public:
         /** Expert backdoor. */

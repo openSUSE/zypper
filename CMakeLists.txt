@@ -1,114 +1,33 @@
 PROJECT(libzypp)
-
-# Library
-IF ( DEFINED LIB )
-  SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/${LIB}" )
-ELSE ( DEFINED  LIB )
-  IF (CMAKE_SIZEOF_VOID_P MATCHES "8")
-    SET( LIB_SUFFIX "64" )
-  ENDIF(CMAKE_SIZEOF_VOID_P MATCHES "8")
-  SET ( LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}" )
-ENDIF ( DEFINED  LIB )
-MESSAGE(STATUS "Libraries will be installed in ${LIB_INSTALL_DIR}" )
-
-# system configuration dir (etc)
-
-IF( NOT DEFINED SYSCONFDIR )
-  IF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
-    # if installing in usr, set sysconfg to etc
-    SET( SYSCONFDIR /etc )
-  ELSE ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
-    SET ( SYSCONFDIR "${CMAKE_INSTALL_PREFIX}/etc" )
-  ENDIF ( ${CMAKE_INSTALL_PREFIX} STREQUAL "/usr" )
-ENDIF( NOT DEFINED SYSCONFDIR )
-MESSAGE(STATUS "Config files will be installed in ${SYSCONFDIR}" )
-
-####################################################################
-# CONFIGURATION                                                    #
-####################################################################
-
+SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
 
+INCLUDE(ZyppCommon)
 INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
+
 MATH( EXPR LIBZYPP_CURRENT "${LIBZYPP_MAJOR} * 100 + ${LIBZYPP_MINOR}" )
 MATH( EXPR LIBZYPP_AGE     "${LIBZYPP_MINOR} - ${LIBZYPP_COMPATMINOR}" )
 # Libtool wanted current:patch:age
 # But cmake is not libtool, it wants the verbatim suffix to libzypp.so
 MATH( EXPR LIBZYPP_SO_FIRST  "${LIBZYPP_CURRENT}-${LIBZYPP_AGE}" )
-
-SET( PACKAGE "libzypp" )
 SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3 -Wall -Woverloaded-virtual" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -O3 -Wall" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Woverloaded-virtual" )
+SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -Wall" )
+set( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3" )
+set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3" )
+
 ADD_DEFINITIONS( -D_FILE_OFFSET_BITS=64 )
 ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
 SET( LIBZYPP_VERSION_INFO "${LIBZYPP_SO_FIRST}.${LIBZYPP_AGE}.${LIBZYPP_PATCH}" )
 SET( LIBZYPP_SOVERSION_INFO "${LIBZYPP_SO_FIRST}" )
 
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Novell's package management core engine.")
-SET(CPACK_PACKAGE_VENDOR "Novell Inc.")
-#SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt")
-#SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")
-SET(CPACK_PACKAGE_VERSION_MAJOR ${LIBZYPP_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${LIBZYPP_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${LIBZYPP_PATCH})
-SET( CPACK_GENERATOR "TBZ2")
-SET( CPACK_SOURCE_GENERATOR "TBZ2")
-SET( CPACK_SOURCE_PACKAGE_FILE_NAME "${PACKAGE}-${VERSION}" )
-
-# The following components are regex's to match anywhere (unless anchored)
-# in absolute path + filename to find files or directories to be excluded
-# from source tarball.
-SET (CPACK_SOURCE_IGNORE_FILES
-#svn files
-"\\\\.svn/"
-"\\\\.cvsignore$"
-# temporary files
-"\\\\.swp$"
-# backup files
-"~$"
-# eclipse files
-"\\\\.cdtproject$"
-"\\\\.cproject$"
-"\\\\.project$"
-"\\\\.settings/"
-# others
-"\\\\.#"
-"/#"
-"/build/"
-"/_build/"
-"/\\\\.git/"
-# used before
-"/CVS/"
-"/\\\\.libs/"
-"/\\\\.deps/"
-"\\\\.o$"
-"\\\\.lo$"
-"\\\\.la$"
-"Makefile\\\\.in$"
-)
+GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
 INCLUDE(CPack)
 
 ####################################################################
-
-SET( DOC_INSTALL_DIR
-   "${CMAKE_INSTALL_PREFIX}/share/doc/packages/${PACKAGE}"
-   CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
-   FORCE
-)
-
-####################################################################
-# INCLUDES                                                         #
-####################################################################
-
-#SET (CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} SYSTEM )
-
-####################################################################
-
 
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
@@ -158,14 +77,6 @@ ELSE(GLIB_FOUND)
   MESSAGE( FATAL_ERROR "glib not found" )
 ENDIF(GLIB_FOUND)
 
-#IF (DBUS_GLIB_FOUND)
-#  MESSAGE( STATUS "dbus-glib found" )
-#  INCLUDE_DIRECTORIES(${DBUS_GLIB_INCLUDE_DIR})
-#  LINK_DIRECTORIES(${DBUS_GLIB_LINK_DIR})
-#ELSE(DBUS_GLIB_FOUND)
-#  MESSAGE( ERROR "dbus-glib not found" )
-#ENDIF(DBUS_GLIB_FOUND)
-
 FIND_PACKAGE(Curl REQUIRED)
 IF ( NOT CURL_FOUND)
   MESSAGE( FATAL_ERROR " curl not found" )
@@ -206,25 +117,13 @@ ENDIF ( NOT DOXYGEN )
 MESSAGE(STATUS "soname: ${LIBZYPP_VERSION_INFO}")
 MESSAGE(STATUS "version: ${VERSION}")
 
-####################################################################
-# RPM SPEC                                                         #
-####################################################################
-
-MACRO(SPECFILE)
-  MESSAGE(STATUS "Writing spec file...")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.spec.cmake ${CMAKE_BINARY_DIR}/package/libzypp.spec @ONLY)
-  MESSAGE(STATUS "I hate you rpm-lint...!!!")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/package/libzypp-rpmlint.cmake ${CMAKE_BINARY_DIR}/package/libzypp-rpmlintrc @ONLY)
-ENDMACRO(SPECFILE)
-
-SPECFILE()
-
 MESSAGE(STATUS "Writing pkg-config file...")
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/libzypp.pc.cmake ${CMAKE_BINARY_DIR}/libzypp.pc @ONLY)
 INSTALL( FILES ${CMAKE_BINARY_DIR}/libzypp.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig )
 
 MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
 MESSAGE(STATUS "zypp.conf will be installed in ${SYSCONFDIR}/zypp")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
@@ -243,37 +142,3 @@ ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( doc EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
 
-####################################################################
-# OTHERS                                                           #
-####################################################################
-
-#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
-#yumschemadir=${zyppdir}/schema/yum
-#xmlstoreschemadir=${zyppdir}/schema/xmlstore
-
-####################################################################
-# INSTALL                                                          #
-####################################################################
-
-#INSTALL_FILES(  FILES  libzypp.pc )
-
-ADD_CUSTOM_TARGET( svncheck
-  COMMAND cd $(CMAKE_SOURCE_DIR) && ! LC_ALL=C svn status --show-updates --quiet | grep -v '^Status against revision'
-)
-
-SET( AUTOBUILD_COMMAND
-  COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/package/*.tar.bz2
-  COMMAND ${CMAKE_MAKE_PROGRAM} package_source
-  COMMAND ${CMAKE_COMMAND} -E copy ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2 ${CMAKE_BINARY_DIR}/package
-  COMMAND ${CMAKE_COMMAND} -E remove ${CPACK_SOURCE_PACKAGE_FILE_NAME}.tar.bz2
-  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_SOURCE_DIR}/package/${PACKAGE}.changes" "${CMAKE_BINARY_DIR}/package/${PACKAGE}.changes"
-)
-
-ADD_CUSTOM_TARGET( srcpackage_local
-  ${AUTOBUILD_COMMAND}
-)
-
-ADD_CUSTOM_TARGET( srcpackage
-  COMMAND ${CMAKE_MAKE_PROGRAM} svncheck
-  ${AUTOBUILD_COMMAND}
-)

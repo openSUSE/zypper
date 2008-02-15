@@ -10,7 +10,6 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/ProvideNumericId.h"
-#include "zypp/ResStore.h"
 #include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
 
@@ -49,13 +48,11 @@ namespace zypp
        */
       const RepoInfo & info() const;
 
-      const ResStore & resolvables() const;
-
       const std::list<packagedelta::PatchRpm> & patchRpms() const;
       const std::list<packagedelta::DeltaRpm> & deltaRpms() const;
 
-      virtual void createResolvables();
       virtual void createPatchAndDeltas();
+
     public:
       struct null {};
 
@@ -72,13 +69,11 @@ namespace zypp
       { return Repository( this ); }
 
     protected:
-      ResStore _store;
       std::list<packagedelta::PatchRpm> _patchRpms;
       std::list<packagedelta::DeltaRpm> _deltaRpms;
     private:
-      bool _restore_lazy_initialized;
       bool _deltas_lazy_initialized;
-     
+
       RepoInfo _info;
     };
   }

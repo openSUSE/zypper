@@ -50,11 +50,11 @@ namespace zypp
         return; // ---> nothing to do
 
       // build obsoletes from instlist_r
-      CapSet obsoletes;
+      std::set<Capability> obsoletes;
       for ( GetResolvablesToInsDel::PoolItemList::const_iterator it = instlist_r.begin();
             it != instlist_r.end(); ++it )
         {
-          PoolItem_Ref item( *it );
+          PoolItem item( *it );
           obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
         }
       if ( obsoletes.size() == 0 )
@@ -66,14 +66,14 @@ namespace zypp
       for ( GetResolvablesToInsDel::PoolItemList::iterator it = deleteList_r.begin();
             it != deleteList_r.end(); ++it )
         {
-          PoolItem_Ref ipkg( *it );
+          PoolItem ipkg( *it );
           bool delayPkg = false;
           // ...check whether an obsoletes....
-          for ( CapSet::iterator obs = obsoletes.begin();
+          for ( std::set<Capability>::iterator obs = obsoletes.begin();
                 ! delayPkg && obs != obsoletes.end(); ++obs )
             {
               // ...matches anything provided by the package?
-              for ( CapSet::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
+              for ( Capabilities::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
                     prov != ipkg->dep(Dep::PROVIDES).end(); ++prov )
                 {
                   if ( obs->matches( *prov ) == CapMatch::yes )
@@ -102,7 +102,7 @@ namespace zypp
     //
     GetResolvablesToInsDel::GetResolvablesToInsDel( ResPool pool_r, Order order_r )
     {
-      typedef std::set<PoolItem_Ref> PoolItemSet;
+      typedef std::set<PoolItem> PoolItemSet;
 
       PoolItemList & dellist_r( _toDelete );
       PoolItemList & instlist_r( _toInstall );

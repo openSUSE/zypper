@@ -13,13 +13,18 @@
 #define ZYPP_POOL_POOLIMPL_H
 
 #include <iosfwd>
-#include <map>
 
 #include "zypp/base/Easy.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/SerialNumber.h"
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
-#include "zypp/ZYppFactory.h"
+
+#include "zypp/sat/Pool.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,152 +35,6 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : NameHash
-    //
-    /** */
-    class NameHash
-    {
-    public:
-      /** Default ctor */
-      NameHash();
-      /** Dtor */
-      ~NameHash();
-
-      public:
-
-      typedef PoolTraits::ItemContainerT	 ItemContainerT;
-      typedef PoolTraits::NameItemContainerT	 ContainerT;
-      typedef PoolTraits::size_type		 size_type;
-      typedef PoolTraits::iterator		 iterator;
-      typedef PoolTraits::const_iterator	 const_iterator;
-
-      private:
-	ItemContainerT & getItemContainer( const std::string & tag_r );
-	const ItemContainerT & getConstItemContainer( const std::string & tag_r ) const;
-
-      public:
-      /**  */
-      ContainerT & store()
-      { return _store; }
-      /**  */
-      const ContainerT & store() const
-      { return _store; }
-
-      /**  */
-      bool empty() const
-      { return _store.empty(); }
-      /**  */
-      size_type size() const
-      { return _store.size(); }
-
-      /** */
-      iterator begin( const std::string & tag_r )
-      { return getItemContainer( tag_r ).begin(); }
-      /** */
-      const_iterator begin( const std::string & tag_r ) const
-      { return getConstItemContainer( tag_r ).begin(); }
-
-      /** */
-      iterator end( const std::string & tag_r )
-      { return getItemContainer( tag_r ).end(); }
-      /** */
-      const_iterator end( const std::string & tag_r ) const
-      { return getConstItemContainer( tag_r ).end(); }
-
-      /** */
-      void clear()
-      { _store.clear(); }
-
-      /** */
-      void insert( const PoolItem & item_r );
-      /** */
-      void erase( const PoolItem & item_r );
-
-      private:
-	ContainerT _store;
-	ItemContainerT _empty;	// for begin(), end() if tag_r can't be found
-    };
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : CapHash
-    //
-    /** */
-    class CapHash
-    {
-    public:
-      /** Default ctor */
-      CapHash();
-      /** Dtor */
-      ~CapHash();
-
-      public:
-
-      typedef PoolTraits::DepCapItemContainerT	ContainerT;
-      typedef PoolTraits::capitemsize_type	size_type;
-      typedef PoolTraits::capitemiterator	iterator;
-      typedef PoolTraits::const_capitemiterator	const_iterator;
-
-      private:
-
-      typedef PoolTraits::CapItemStoreT		CapItemStoreT;
-      typedef PoolTraits::CapItemContainerT	CapItemContainerT;
-
-      // Dep -> CapItemStoreT
-      const CapItemStoreT & capItemStore ( Dep cap_r ) const;
-
-      // CapItemStoreT, index -> CapItemContainerT
-      const CapItemContainerT & capItemContainer( const CapItemStoreT & cis, const std::string & tag_r ) const;
-
-      public:
-
-      /**  */
-      ContainerT & store()
-      { return _store; }
-      /**  */
-      const ContainerT & store() const
-      { return _store; }
-
-      /**  */
-      bool empty() const
-      { return _store.empty(); }
-      /**  */
-      size_type size() const
-      { return _store.size(); }
-
-      /** */
-      iterator begin( const std::string & tag_r, Dep cap_r )
-      { return _store[cap_r][tag_r].begin(); }
-      /** */
-      const_iterator begin( const std::string & tag_r, Dep cap_r ) const
-      { const CapItemStoreT & capitemstore = capItemStore( cap_r );
-	const CapItemContainerT & capcontainer = capItemContainer ( capitemstore, tag_r );
-	return capcontainer.begin(); }
-
-      /** */
-      iterator end( const std::string & tag_r, Dep cap_r )
-      { return _store[cap_r][tag_r].begin(); }
-      /** */
-      const_iterator end( const std::string & tag_r, Dep cap_r ) const
-      { const CapItemStoreT & capitemstore = capItemStore( cap_r );
-	const CapItemContainerT & capcontainer = capItemContainer ( capitemstore, tag_r );
-	return capcontainer.end(); }
-
-      /** */
-      void clear()
-      { _store.clear(); }
-
-      /** */
-      void insert( const PoolItem & item_r );
-      /** */
-      void erase( const PoolItem & item_r );
-
-      private:
-	PoolTraits::DepCapItemContainerT _store;
-    };
-
-    ///////////////////////////////////////////////////////////////////
-    //
     //	CLASS NAME : PoolImpl
     //
     /** */
@@ -183,210 +42,245 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const PoolImpl & obj );
 
-    public:
-    /** */
-    typedef PoolTraits::Item			Item;
-    typedef PoolTraits::ItemContainerT		ContainerT;
-    typedef PoolTraits::iterator		iterator;
-    typedef PoolTraits::const_iterator		const_iterator;
-    typedef PoolTraits::size_type		size_type;
-    typedef PoolTraits::Inserter		Inserter;
-    typedef PoolTraits::Deleter			Deleter;
-    typedef PoolTraits::AdditionalCapSet 	AdditionalCapSet;
-    typedef PoolTraits::RepoContainerT          KnownRepositories;
+      public:
+        /** */
+        typedef PoolTraits::ItemContainerT		ContainerT;
+        typedef PoolTraits::size_type			size_type;
+        typedef PoolTraits::const_iterator		const_iterator;
+	typedef PoolTraits::Id2ItemT			Id2ItemT;
 
-    public:
-      /** Default ctor */
-      PoolImpl();
-      /** Dtor */
-      ~PoolImpl();
+        typedef sat::detail::SolvableIdType		SolvableIdType;
 
-      /** \todo no poll, but make ZYpp distribute it. */
-      Arch targetArch() const
-      { return getZYpp()->architecture(); }
+        typedef PoolTraits::AdditionalCapabilities	AdditionalCapabilities;
+        typedef PoolTraits::RepoContainerT		KnownRepositories;
 
-    public:
-      /**  */
-      ContainerT & store()
-      { return _store; }
-      /**  */
-      const ContainerT & store() const
-      { return _store; }
+      public:
+        /** Default ctor */
+        PoolImpl();
+        /** Dtor */
+        ~PoolImpl();
 
-      /**  */
-      bool empty() const
-      { return _store.empty(); }
-      /**  */
-      size_type size() const
-      { return _store.size(); }
+      public:
+        /** convenience. */
+        const sat::Pool satpool() const
+        { return sat::Pool::instance(); }
 
-      /** */
-      iterator begin()
-      { return _store.begin(); }
-      /** */
-      const_iterator begin() const
-      { return _store.begin(); }
+        /** Housekeeping data serial number. */
+        const SerialNumber & serial() const
+        { return satpool().serial(); }
 
-      /** */
-      iterator end()
-      { return _store.end(); }
-      /** */
-      const_iterator end() const
-      { return _store.end(); }
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      public:
+        /**  */
+        bool empty() const
+        { return satpool().solvablesEmpty(); }
 
-      /**
-       *  Handling additional requirement. E.G. need package "foo" and package
-       *  "foo1" which has a greater version than 1.0:
-       *
-       *  Capset capset;
-       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-       *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
-       *
-       *  setAdditionalRequire( capset );
-       */
-	void setAdditionalRequire( const AdditionalCapSet & capset ) const
-	    { _additionalRequire = capset; }
-	AdditionalCapSet & additionalRequire() const
-	    { return _additionalRequire; }
+        /**  */
+        size_type size() const
+        { return satpool().solvablesSize(); }
 
-       /**
-	*  Handling additional conflicts. E.G. do not install anything which provides "foo":
-	*
-	*  Capset capset;
-	*  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-	*
-	*  setAdditionalConflict( capset );
-	*/
-	void setAdditionalConflict( const AdditionalCapSet & capset ) const
-	    { _additionaConflict = capset; }
-	AdditionalCapSet & additionaConflict() const
-	    { return _additionaConflict; }
+        const_iterator begin() const
+        { return make_filter_begin( pool::ByPoolItem(), store() ); }
+
+        const_iterator end() const
+        { return make_filter_end( pool::ByPoolItem(), store() ); }
+
+      public:
+        /** Return the corresponding \ref PoolItem.
+         * Pool and sat pool should be in sync. Returns an empty
+         * \ref PoolItem if there is no corresponding \ref PoolItem.
+         * \see \ref PoolItem::satSolvable.
+         */
+        PoolItem find( const sat::Solvable & slv_r ) const
+        { return store()[slv_r.id()]; }
+
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      public:
+        /** \name Save and restore state. */
+        //@{
+        void SaveState( const ResObject::Kind & kind_r );
+
+        void RestoreState( const ResObject::Kind & kind_r );
+        //@}
+
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      public:
+        /**
+         *  Handling additional requirement. E.G. need package "foo" and package
+         *  "foo1" which has a greater version than 1.0:
+         *
+         *  Capset capset;
+         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
+         *
+         *  setAdditionalRequire( capset );
+         */
+        void setAdditionalRequire( const AdditionalCapabilities & capset ) const
+        { _additionalRequire = capset; }
+        AdditionalCapabilities & additionalRequire() const
+        { return _additionalRequire; }
+
+        /**
+         *  Handling additional conflicts. E.G. do not install anything which provides "foo":
+         *
+         *  Capset capset;
+         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+         *
+         *  setAdditionalConflict( capset );
+         */
+        void setAdditionalConflict( const AdditionalCapabilities & capset ) const
+        { _additionaConflict = capset; }
+        AdditionalCapabilities & additionaConflict() const
+        { return _additionaConflict; }
 
 	/**
-	 *  Handling additional provides. This is used for ignoring a requirement.
+         *  Handling additional provides. This is used for ignoring a requirement.
 	 *  e.G. Do ignore the requirement "foo":
-	 *
-	 *  Capset capset;
-	 *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-	 *
-	 *  setAdditionalProvide( cap );
-	 */
-	void setAdditionalProvide( const AdditionalCapSet & capset ) const
-	    { _additionaProvide = capset; }
-	AdditionalCapSet & additionaProvide() const
-	    { return _additionaProvide; }
+         *
+         *  Capset capset;
+         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
+         *
+         *  setAdditionalProvide( cap );
+         */
+        void setAdditionalProvide( const AdditionalCapabilities & capset ) const
+        { _additionaProvide = capset; }
+        AdditionalCapabilities & additionaProvide() const
+        { return _additionaProvide; }
 
-      /** */
-      void clear()
-      {
-        _store.clear();
-	_caphash.clear();
-	_namehash.clear();
-        _additionalRequire.clear();
-	_additionaConflict.clear();
-	_additionaProvide.clear();
-	// don't miss to invalidate ResPoolProxy
-	invalidateProxy();
-	return;
-      }
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      public:
+        ResPoolProxy proxy( ResPool self ) const
+        {
+          checkSerial();
+          if ( !_poolProxy )
+            _poolProxy.reset( new ResPoolProxy( self ) );
+          return *_poolProxy;
+        }
 
-      /** erase all resolvables coming from the target  */
-      void eraseInstalled() const;
+      public:
+        /** Access list of Repositories that contribute ResObjects.
+         * Built on demand.
+         */
+        const KnownRepositories & knownRepositories() const
+        {
+          checkSerial();
+          if ( ! _knownRepositoriesPtr )
+          {
+            _knownRepositoriesPtr.reset( new KnownRepositories );
 
-    public:
-      /** Access list of Repositories that contribute ResObjects.
-       * Built on demand.
-      */
-      const KnownRepositories & knownRepositories() const
-      {
-	if ( ! _knownRepositoriesPtr )
+            sat::Pool pool( satpool() );
+            for_( it, pool.reposBegin(), pool.reposEnd() )
+            {
+              _knownRepositoriesPtr->push_back( Repository( it->info() ) );
+            }
+          }
+          return *_knownRepositoriesPtr;
+        }
+
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      public:
+        const ContainerT & store() const
+        {
+          checkSerial();
+          if ( _storeDirty )
+          {
+            sat::Pool pool( satpool() );
+
+            if ( pool.capacity() != _store.capacity() )
+            {
+              _store.resize( pool.capacity() );
+            }
+
+            if ( pool.capacity() )
+            {
+              for ( sat::detail::SolvableIdType i = pool.capacity()-1; i != 0; --i )
+              {
+                sat::Solvable s( i );
+                PoolItem & pi( _store[i] );
+                if ( ! s &&  pi )
+                  pi = PoolItem();
+                else if ( s && ! pi )
+                  pi = PoolItem( s );
+              }
+            }
+            _storeDirty = false;
+          }
+          return _store;
+        }
+
+	const Id2ItemT & id2item () const
 	{
-	  _knownRepositoriesPtr.reset( new KnownRepositories );
-	  for_( it, _store.begin(), _store.end() )
+	  checkSerial();
+	  if ( _id2itemDirty )
 	  {
-	    if ( (*it)->repository() != Repository::noRepository )
-	    {
-	      _knownRepositoriesPtr->insert( (*it)->repository() );
-	    }
-	  }
+	    store();
+	    _id2item = Id2ItemT( size() );
+            for_( it, begin(), end() )
+            {
+              const sat::Solvable &s = (*it)->satSolvable();
+              sat::detail::IdType id = s.ident().id();
+              if ( s.isKind( ResKind::srcpackage ) )
+                id = -id;
+              _id2item.insert( std::make_pair( id, *it ) );
+            }
+            //INT << _id2item << endl;
+	    _id2itemDirty = false;
+          }
+	  return _id2item;
 	}
 
-	return *_knownRepositoriesPtr;
-      }
 
-    public:
-      /** \name Save and restore state. */
-      //@{
-      void SaveState( const ResObject::Kind & kind_r );
+        ///////////////////////////////////////////////////////////////////
+        //
+        ///////////////////////////////////////////////////////////////////
+      private:
+        void checkSerial() const
+        {
+          if ( _watcher.remember( serial() ) )
+            invalidate();
+          satpool().prepare(); // always ajust dependencies.
+        }
 
-      void RestoreState( const ResObject::Kind & kind_r );
-      //@}
+        void invalidate() const
+        {
+          _storeDirty = true;
+	  _id2itemDirty = true;
+	  _id2item.clear();
+          _poolProxy.reset();
+          _knownRepositoriesPtr.reset();
+        }
 
-    public:
-      /** Serial number changing whenever the content
-       * (Resolvables or Dependencies) changes. */
-      const SerialNumber & serial() const;
+      private:
+        /** Watch sat pools serial number. */
+        SerialNumberWatcher                   _watcher;
+        mutable ContainerT                    _store;
+        mutable DefaultIntegral<bool,true>    _storeDirty;
+	mutable Id2ItemT		      _id2item;
+        mutable DefaultIntegral<bool,true>    _id2itemDirty;
 
-      /** Wheter in sync with sat-pool. */
-      bool satSynced() const
-      { return _satSyncRequired.isClean( _serial ); }
+      private:
+        mutable AdditionalCapabilities        _additionalRequire;
+        mutable AdditionalCapabilities        _additionaConflict;
+        mutable AdditionalCapabilities        _additionaProvide;
 
-      /** Sync with sat-pool. */
-      void satSync() const;
+        mutable shared_ptr<ResPoolProxy>      _poolProxy;
+        mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
 
-      /** Return the corresponding \ref PoolItem.
-       * Pool and sat pool should be in sync. Returns an empty
-       * \ref PoolItem if there is no corresponding \ref PoolItem.
-       * \see \ref PoolItem::satSolvable.
-       */
-      PoolItem find( const sat::Solvable & slv_r ) const;
-
-    private:
-      /** Serial number. */
-      SerialNumber        _serial;
-      /** Watch for changes in /etc/sysconfig/storage. */
-      SerialNumberWatcher _watchFilesystemSysconfigStorage;
-      /** Watch for changes \c _serial. */
-      SerialNumberWatcher _satSyncRequired;
-
-    public:
-      ContainerT   _store;
-      NameHash     _namehash;
-      CapHash      _caphash;
-      mutable AdditionalCapSet _additionalRequire;
-      mutable AdditionalCapSet _additionaConflict;
-      mutable AdditionalCapSet _additionaProvide;
-
-    public:
-      ResPoolProxy proxy( ResPool self ) const
-      {
-        if ( !_poolProxy )
-          _poolProxy.reset( new ResPoolProxy( self ) );
-        return *_poolProxy;
-      }
-
-      /** Invalidate all data we build on demand.
-       * To be called whenever the pools content changes
-       */
-      void invalidateProxy()
-      {
-        _serial.setDirty();
-	_poolProxy.reset();
-	_knownRepositoriesPtr.reset();
-      }
-
-      mutable shared_ptr<ResPoolProxy> _poolProxy;
-
-    private:
-      /** Set of known repositories built on demand.
-       * Invalidated on any Pool content change. Rebuilt on next access.
-       */
-      mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
+      public:
+        /** \bug FAKE capindex */
+        const PoolTraits::CapItemContainerT   _caphashfake;
     };
     ///////////////////////////////////////////////////////////////////
-
-    /** \relates PoolImpl Stream output */
-    std::ostream & operator<<( std::ostream & str, const PoolImpl & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace pool

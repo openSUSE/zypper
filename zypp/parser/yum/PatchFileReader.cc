@@ -235,9 +235,7 @@ namespace zypp
       // xpath: /patch/yum:version
       if (reader_r->name() == "yum:version")
       {
-        _patch->edition = Edition(reader_r->getAttribute("ver").asString(),
-				  reader_r->getAttribute("rel").asString(),
-				  reader_r->getAttribute("epoch").asString());
+        editionStringFromAttrs( reader_r,  _patch->edition );
         return true;
       }
 
@@ -482,14 +480,14 @@ namespace zypp
         data::PatchRpm_Ptr tmp;
         tmp.swap(_patchrpm);
         data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
-        if (patom_ptr && patom_ptr->arch.compatibleWith( ZConfig::instance().systemArchitecture() ))
+        if (patom_ptr && Arch(patom_ptr->arch).compatibleWith( ZConfig::instance().systemArchitecture() ))
         {
           // Patch and delta rpms are standalone objects.
           // We must store the target packages NVRA.
           // We don't store incompatible archs.
           tmp->name    = patom_ptr->name;
-          tmp->edition = patom_ptr->edition;
-          tmp->arch    = patom_ptr->arch;
+          tmp->edition = Edition(patom_ptr->edition);
+          tmp->arch    = Arch(patom_ptr->arch);
           patom_ptr->patchRpms.insert(tmp);
         }
         toParentTag();
@@ -502,14 +500,14 @@ namespace zypp
         data::DeltaRpm_Ptr tmp;
         tmp.swap(_deltarpm);
         data::PackageAtom_Ptr patom_ptr = zypp::dynamic_pointer_cast<data::PackageAtom>(_tmpResObj);
-        if (patom_ptr && patom_ptr->arch.compatibleWith( ZConfig::instance().systemArchitecture() ))
+        if (patom_ptr && Arch(patom_ptr->arch).compatibleWith( ZConfig::instance().systemArchitecture() ))
         {
           // Patch and delta rpms are standalone objects.
           // We must store the target packages NVRA.
           // We don't store incompatible archs.
           tmp->name    = patom_ptr->name;
-          tmp->edition = patom_ptr->edition;
-          tmp->arch    = patom_ptr->arch;
+          tmp->edition = Edition(patom_ptr->edition);
+          tmp->arch    = Arch(patom_ptr->arch);
           patom_ptr->deltaRpms.insert(tmp);
         }
         toParentTag();
@@ -713,9 +711,7 @@ namespace zypp
       // xpath: /patch/atoms/message/yum:name
       if (reader_r->name() == "yum:version")
       {
-        _tmpResObj->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        editionStringFromAttrs( reader_r,  _tmpResObj->edition );
         return true;
       }
 
@@ -769,9 +765,7 @@ namespace zypp
       // xpath: /patch/atoms/script/yum:version
       if (reader_r->name() == "yum:version")
       {
-        _tmpResObj->edition = Edition(reader_r->getAttribute("ver").asString(),
-                                    reader_r->getAttribute("rel").asString(),
-                                    reader_r->getAttribute("epoch").asString());
+        editionStringFromAttrs( reader_r,  _tmpResObj->edition );
         return true;
       }
 

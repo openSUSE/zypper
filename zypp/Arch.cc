@@ -17,7 +17,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Bit.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -238,6 +238,7 @@ namespace zypp
         defCompatibleWith( _ppc,	_ppc64 );
         //
         ///////////////////////////////////////////////////////////////////
+        dumpOn( USR ) << endl;
       }
 
     private:
@@ -278,57 +279,6 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
   } // namespace
   ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-
-  static const string canonical_arch (const string & arch);
-
-  //---------------------------------------------------------------------------
-  // architecture stuff
-
-  static const string
-  canonical_arch (const string & arch)
-  {
-    struct canonical { const char *from; const char *to; };
-    // convert machine string to known_arch
-    static canonical canonical_archs[] = {
-      { "noarch",  "noarch" },
-      { "unknown", "unknown" },
-      { "any",     "any" },
-      { "all",     "any" },
-      { "i386",    "i386" },
-      { "ix86",    "i386" }, /* OpenPKG uses this */
-      { "i486",    "i486" },
-      { "i586",    "i586" },
-      { "i686",    "i686" },
-      { "x86_64",  "x86_64" },
-      { "ia32e",   "ia32e" },
-      { "athlon",  "athlon" },
-      { "ppc",     "ppc" },
-      { "ppc64",   "ppc64" },
-      { "s390",    "s390" },
-      { "s390x",   "s390x" },
-      { "ia64",    "ia64" },
-      { "sparc",   "sparc" },
-      { "sun4c",   "sparc" },
-      { "sun4d",   "sparc" },
-      { "sun4m",   "sparc" },
-      { "sparc64", "sparc64" },
-      { "sun4u",   "sparc64" },
-      { "sparcv9", "sparc64" },
-      { 0, 0 }
-    };
-
-    for (canonical *ptr = canonical_archs; ptr->from; ptr++) {
-      if (arch == ptr->from) {
-        return ptr->to;
-      }
-    }
-
-    return "canonical";
-  }
-
-  //---------------------------------------------------------------------------
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -424,7 +374,6 @@ namespace zypp
 
     return ret;
   }
-
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

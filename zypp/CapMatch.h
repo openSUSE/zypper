@@ -23,8 +23,10 @@ namespace zypp
   //	CLASS NAME : CapMatch
   //
   /** Tri state Capability match result.
+   *
    * CapMatch::irrelevant denotes a result value that should be ignored.
    * Therfore it behaves neutral when used in <tt>! && ||</tt> expressions.
+   *
    * \code
    *   CapMatch any
    *   (CapMatch::irrelevant && any) == any                  // true

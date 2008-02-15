@@ -84,7 +84,7 @@ namespace zypp
 	  }
           else if ( mode_r == std::ios_base::out )
 	  {
-            _fd = ::open( name_r, O_WRONLY );
+            _fd = ::open( name_r, O_WRONLY|O_CREAT, 0666 );
             _file = gzdopen( _fd, "wb" );
 	  }
           // else: not supported

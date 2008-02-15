@@ -58,7 +58,7 @@ namespace zypp
 
   /** Offer a License text and methods to remember confirmation. */
   typedef std::string License;
-  
+
   /** An rpm package group value. Also provide access to a
    * (singleton) tree like group hierarchy which contains
    * all existing groups. No more need to fiddle with YStringTreeItem
@@ -72,15 +72,6 @@ namespace zypp
 
   /** Vendor. Worth a typedef. Maybe a class unifying the strings. */
   typedef std::string Vendor;
-
-  /** Id used inside ZMD */
-  typedef long ZmdId;
-
-  /** Handle data depending on a locale. Translated strings, maybe
-   other too. */
-  template<class _Val>
-    struct MultiLocale : public std::map<Locale,_Val>
-    {};
 
   //@}
   /////////////////////////////////////////////////////////////////
