@@ -12,6 +12,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
 
+#include "output/Out.h"
 #include "zypper-command.h"
 #include "zypper-getopt.h"
 
@@ -84,6 +85,7 @@ public:
   int main(int argc, char ** argv);
 
   // setters & getters
+  Out & out();
   const GlobalOptions & globalOpts() const { return _gopts; }
   const CommandOptions & cmdOpts() const { return _cmdopts; }
   const parsed_opts & cOpts() const { return _copts; }
@@ -94,7 +96,7 @@ public:
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
   bool runningHelp() const { return _running_help; }
-
+  
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
   
@@ -119,6 +121,7 @@ private:
   int     _argc;
   char ** _argv;
 
+  Out * _out_ptr;
   GlobalOptions _gopts;
   CommandOptions _cmdopts;
   parsed_opts   _copts;
@@ -135,8 +138,8 @@ private:
 };
 
 void print_main_help(const Zypper & zypper);
-void print_unknown_command_hint(const Zypper & zypper);
-void print_command_help_hint(const Zypper & zypper);
+void print_unknown_command_hint(Zypper & zypper);
+void print_command_help_hint(Zypper & zypper);
 
 struct RuntimeData
 {

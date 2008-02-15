@@ -38,9 +38,20 @@ SET( zypper_SRCS
   ${zypper_HEADERS}
 )
 
+SET( zypper_out_HEADERS
+  output/Out.h
+  output/OutNormal.h
+  output/OutXML.h
+)
 
+SET( zypper_out_SRCS
+  output/Out.cc
+  output/OutNormal.cc
+  output/OutXML.cc
+  ${zypper_out_HEADERS}
+)
 
-ADD_EXECUTABLE( zypper ${zypper_SRCS} )
+ADD_EXECUTABLE( zypper ${zypper_SRCS} ${zypper_out_SRCS} )
 TARGET_LINK_LIBRARIES( zypper ${ZYPP_LIBRARY} ${READLINE_LIBRARY} )
 
 INSTALL(
