@@ -3,7 +3,6 @@
 #include "OutXML.h"
 
 using std::cout;
-using std::cerr;
 using std::endl;
 
 
@@ -52,7 +51,7 @@ void OutXML::warning(const std::string & msg, Verbosity verbosity, Type mask)
 
 void OutXML::error(const std::string & problem_desc, const std::string & hint)
 {
-  cerr << "<message type=\"error\">" << problem_desc << "</message>" << endl;
+  cout << "<message type=\"error\">" << problem_desc << "</message>" << endl;
   //! \todo hint
 }
 
