@@ -357,6 +357,9 @@ namespace zypp
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to move cache to final destination"));
         
+        // if this fails, don't bother throwing exceptions
+        filesystem::chmod( rpmsolv, 0644 );
+
         rpmstatus.saveToCookieFile(rpmsolvcookie);
 
         // We keep it.
