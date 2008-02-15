@@ -520,10 +520,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     ///////////////////////////////////////////////////////////////////
 
     if ( probably_dropped ) {
-      if ( opt_stats_r.delete_unmaintained
-           && VendorAttr::instance().equivalent( installed->vendor(), "suse" ) ) {
-	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
-      }
       ++opt_stats_r.chk_dropped;
       _update_items.push_back( installed );
     }
