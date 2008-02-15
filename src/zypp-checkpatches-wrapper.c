@@ -16,7 +16,7 @@
 
 const char *app = "/usr/bin/zypper";
 const char *arg1 = "--non-interactive";
-const char *arg2 = "--terse";
+const char *arg2 = "--xmlout";
 const char *arg3 = "-q";
 const char *arg4 = "xu";
 
