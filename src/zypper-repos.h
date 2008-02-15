@@ -29,6 +29,12 @@ void refresh_repos(Zypper & zypper);
 
 
 /**
+ * Clean caches for all repositories.
+ */
+void clean_repos(Zypper & zypper);
+
+
+/**
  * Add repository specified by \url to system repositories.
  * 
  * \param url Valid URL of the repository.
@@ -85,7 +91,6 @@ void rename_repo(Zypper & zypper,
  * \param alias repository alias
  */
 void modify_repo(Zypper & zypper, const std::string & alias);
-
 
 /**
  * Load both repository and target resolvables.

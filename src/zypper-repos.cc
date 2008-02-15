@@ -800,6 +800,134 @@ void refresh_repos(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
+void clean_repos(Zypper & zypper)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+
+  list<RepoInfo> repos;
+  try
+  {
+    repos = manager.knownRepositories();
+  }
+  catch ( const Exception &e )
+  {
+    ZYPP_CAUGHT(e);
+    report_problem(e,
+        _("Error reading repositories:"));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+
+  // get the list of repos specified on the command line ...
+  list<RepoInfo> specified;
+  list<string> not_found;
+  // ...as command arguments
+  get_repos(zypper, zypper.arguments().begin(), zypper.arguments().end(),
+      specified, not_found);
+  // ...as --repo options
+  parsed_opts::const_iterator tmp1;
+  if ((tmp1 = copts.find("repo")) != copts.end())
+    get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
+  report_unknown_repos(not_found);
+
+  cout_v << _("Specified repositories: ");
+  for (list<RepoInfo>::const_iterator it = specified.begin();
+      it != specified.end(); ++it)
+    cout_v << it->alias() << " ";
+  cout_v << endl;
+
+  // should we clean packages or metadata ?
+  bool clean_metadata = (copts.find("metadata") != copts.end());
+  bool clean_packages = (copts.find("metadata") == copts.end());
+
+  if( copts.find("all") != copts.end() )
+  {
+    clean_metadata = true;
+    clean_packages = true;
+  }
+  
+  cout_vv << "Metadata will be cleaned: " << clean_metadata << endl;
+  cout_vv << "Packages will be cleaned: " << clean_packages << endl;
+
+  unsigned error_count = 0;
+  unsigned enabled_repo_count = repos.size();
+
+  if (!specified.empty() || not_found.empty())
+  {
+    for (std::list<RepoInfo>::iterator it = repos.begin();
+         it !=  repos.end(); ++it)
+    {
+      RepoInfo repo(*it);
+  
+      if (!specified.empty())
+      {
+        bool found = false;
+        for (list<RepoInfo>::const_iterator it = specified.begin();
+            it != specified.end(); ++it)
+          if (it->alias() == repo.alias())
+          {
+            found = true;
+            break;
+          }
+  
+        if (!found)
+        {
+          DBG << repo.alias() << "(#" << ") not specified,"
+              << " skipping." << endl;
+          enabled_repo_count--;
+          continue;
+        }
+      }
+  
+      bool error = false;
+      try {
+        if( clean_metadata )
+	{
+	    cout_v << "Cleaning metadata for '" << repo.alias () << "'" << endl;
+	    manager.cleanMetadata(repo);
+	}
+        if( clean_packages )
+	{
+	    cout_v << "Cleaning packages for '" << repo.alias () << "'" << endl;
+    	    manager.cleanPackages(repo);
+	}
+      } catch(...) {
+	error = true;
+      }
+
+      if (error)
+      {
+        cerr << format(_("Skipping repository '%s' because of the above error."))
+            % repo.name() << endl;
+        ERR << format("Skipping repository '%s' because of the above error.")
+            % repo.name() << endl;
+        error_count++;
+      }
+    }
+  }
+  else
+    enabled_repo_count = 0;
+
+  if (error_count == enabled_repo_count)
+  {
+    cerr << _("Could not clean the repositories because of errors.") << endl;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+  else if (error_count)
+  {
+    cerr << _("Some of the repositories have not been cleaned up because of an error.") << endl;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+  else if (!specified.empty())
+    cout << _("Specified repositories have been cleaned up.") << endl;
+  else
+    cout << _("All repositories have been cleaned up.") << endl;
+}
+
+// ----------------------------------------------------------------------------
+
 static
 std::string timestamp ()
 {

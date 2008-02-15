@@ -16,6 +16,7 @@ struct ZypperCommand
   static const ZypperCommand MODIFY_REPO;
   static const ZypperCommand LIST_REPOS;
   static const ZypperCommand REFRESH;
+  static const ZypperCommand CLEAN;
 
   static const ZypperCommand INSTALL;
   static const ZypperCommand REMOVE;
@@ -53,6 +54,7 @@ struct ZypperCommand
     MODIFY_REPO_e,
     LIST_REPOS_e,
     REFRESH_e,
+    CLEAN_e,
 
     INSTALL_e,
     REMOVE_e,

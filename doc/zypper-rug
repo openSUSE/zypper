@@ -96,7 +96,7 @@ N1:  zypp does not have this concept
                     ?     service-types (st)           List the available service types
                         
                         System:
-                    ?     clean-cache (cc)             Clean the HTTP cache
+                    ++     clean-cache (cc)             Clean the HTTP cache
                     N1    load-modules (lm)            Load ZMD modules
                     N1    ping                         Ping the deamon
                     N1    restart                      Restart the daemon

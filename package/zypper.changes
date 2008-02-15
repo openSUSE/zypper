@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Feb 15 14:19:01 CET 2008 - visnov@suse.de
+
+- implemented clean command
+
+-------------------------------------------------------------------
 Wed Feb 13 11:26:01 CET 2008 - coolo@suse.de
 
 - increase version number to mark satsolver branch

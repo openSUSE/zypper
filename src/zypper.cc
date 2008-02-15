@@ -171,6 +171,7 @@ void print_main_help(const Zypper & zypper)
     "\tinfo, if\t\tShow full information for packages\n"
     "\tpatch-info\t\tShow full information for patches\n"
     "\tsource-install, si\tInstall a source package\n"
+    "\tclean\t\t\tClean local caches\n"
     "");
   
   static string help_usage = _(
@@ -443,7 +444,8 @@ void Zypper::processGlobalOptions()
         command() == ZypperCommand::REMOVE_REPO ||
         command() == ZypperCommand::MODIFY_REPO ||
         command() == ZypperCommand::RENAME_REPO ||
-        command() == ZypperCommand::REFRESH)
+        command() == ZypperCommand::REFRESH ||
+	command() == ZypperCommand::CLEAN )
     {
       // TranslatorExplanation The %s is "--plus-repo"
       cout << format(_("The %s option has no effect here, ignoring."))
@@ -913,6 +915,29 @@ void Zypper::processCommandOptions()
       "-B, --build-only         Only build the database, don't download metadata.\n"
       "-D, --download-only      Only download raw metadata, don't build the database\n"
       "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::CLEAN_e:
+  {
+    static struct option service_list_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {"repo", required_argument, 0, 'r'},
+      {"metadata", no_argument, 0, 'm'},
+      {"all", no_argument, 0, 'a'},
+      {0, 0, 0, 0}
+    };
+    specific_options = service_list_options;
+    _command_help = _(
+      "clean\n"
+      "\n"
+      "Clean local caches.\n"
+      "\n"
+      "  Command options:\n"
+      "-r, --repo <alias|#|URI> Clean only only specified repositories.\n"
+      "-m, --metadata		Clean metadata cache instead of package cache.\n"
+      "-a, --all		Clean both metadata and package caches.\n"
     );
     break;
   }
@@ -1646,6 +1671,28 @@ void Zypper::doCommand()
         % "--no-refresh" << endl;
 
     refresh_repos(*this);
+    return;
+  }
+
+  // --------------------------( clean )------------------------------------
+
+  else if (command() == ZypperCommand::CLEAN)
+  {
+    if (runningHelp())
+    {
+      cout << _command_help;
+      return;
+    }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      cerr << _("Root privileges are required for cleaning local caches.") << endl;
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+    
+    clean_repos(*this);
     return;
   }
 

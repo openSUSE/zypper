@@ -405,6 +405,16 @@ Only parse the metadata and build the database, don't download raw metadata into
 .I \-D, \-\-download\-only
 Only download the raw metadata, don't parse it or build the database.
 
+.TP
+.B clean ...
+Clean up the local caches for all known repository caches. By default, only downloaded package caches are cleaned.
+.TP
+.I \-m, \-\-metadata
+Clean up repository metadata cache instead of package cache.
+.TP
+.I \-a, \-\-all
+Clean up both repository metadata and package caches.
+
 .SH "GLOBAL OPTIONS"
 
 .TP 
@@ -716,6 +726,8 @@ Martin Vidner <mvidner@suse.cz>
 Duncan Mac-Vicar <dmacvicar@suse.de>
 .br
 Jan Kupec <jkupec@suse.cz>
+.br
+Stanislav Visnovsky <visnov@suse.cz>
 
 .SH "SEE ALSO"
 .LP
