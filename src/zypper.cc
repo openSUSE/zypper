@@ -1707,16 +1707,13 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::CLEAN)
   {
-    if (runningHelp())
-    {
-      cout << _command_help;
-      return;
-    }
+    if (runningHelp()) { out().info(_command_help), Out::QUIET; return; }
 
     // check root user
     if (geteuid() != 0)
     {
-      cerr << _("Root privileges are required for cleaning local caches.") << endl;
+      out().error(
+        _("Root privileges are required for cleaning local caches."));
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
