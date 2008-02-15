@@ -71,7 +71,7 @@ namespace zypp
       /** Iterator pointing to the first \ref Capability. */
       const_iterator begin() const;
 
-      /** Iterator pointing bhind the last \ref Capability. */
+      /** Iterator pointing behind the last \ref Capability. */
       const_iterator end() const;
 
     private:

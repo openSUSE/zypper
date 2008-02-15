@@ -189,16 +189,7 @@ namespace zypp
             return it != _requestedLocales.end();
           }
 
-          const LocaleSet & getAvailableLocales() const
-          {
-            if ( _availableLocales.size() != _localeCollector.size() )
-            {
-              _availableLocales.clear();
-              for_( it, _localeCollector.begin(), _localeCollector.end() )
-                _availableLocales.insert( Locale( *it ) );
-            }
-            return _availableLocales;
-          }
+          const LocaleSet & getAvailableLocales() const;
 
           bool isAvailableLocale( const Locale & locale_r ) const
           {
@@ -221,8 +212,7 @@ namespace zypp
 
           /**  */
           LocaleSet _requestedLocales;
-          mutable LocaleSet _availableLocales;
-          mutable std::tr1::unordered_set<IdString> _localeCollector;
+          mutable scoped_ptr<LocaleSet> _availableLocalesPtr;
           mutable std::tr1::unordered_set<IdString> _locale2Solver;
       };
       ///////////////////////////////////////////////////////////////////

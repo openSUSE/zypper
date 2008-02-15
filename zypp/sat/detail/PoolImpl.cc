@@ -16,12 +16,14 @@
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Measure.h"
 
 #include "zypp/ZConfig.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/sat/Pool.h"
 #include "zypp/Capability.h"
+#include "zypp/Locale.h"
 
 using std::endl;
 
@@ -129,8 +131,8 @@ namespace zypp
           else if ( a2 ) DBG << a1 << " " << a2 << endl;
           else           DBG << a1 << endl;
         }
-        _serial.setDirty();       // pool content change
-        _localeCollector.clear(); // available locales may change
+        _serial.setDirty();           // pool content change
+        _availableLocalesPtr.reset(); // available locales may change
 
         // invaldate dependency/namespace related indices:
         depSetDirty();
@@ -252,6 +254,56 @@ namespace zypp
           return true;
         }
         return false;
+      }
+
+      static void _getLocaleDeps( Capability cap_r, std::tr1::unordered_set<sat::detail::IdType> & store_r )
+      {
+        // Collect locales from any 'namespace:language(lang)' dependency
+        CapDetail detail( cap_r );
+        if ( detail.kind() == CapDetail::EXPRESSION )
+        {
+          switch ( detail.capRel() )
+          {
+            case CapDetail::CAP_AND:
+            case CapDetail::CAP_OR:
+              // expand
+              _getLocaleDeps( detail.lhs(), store_r );
+              _getLocaleDeps( detail.rhs(), store_r );
+              break;
+
+            case CapDetail::CAP_NAMESPACE:
+              if ( detail.lhs().id() == NAMESPACE_LANGUAGE )
+              {
+                store_r.insert( detail.rhs().id() );
+              }
+              break;
+          }
+        }
+      }
+
+      const LocaleSet & PoolImpl::getAvailableLocales() const
+      {
+        if ( !_availableLocalesPtr )
+        {
+          // Collect any 'namespace:language(ja)' dependencies
+          std::tr1::unordered_set<sat::detail::IdType> tmp;
+          Pool pool( Pool::instance() );
+          for_( it, pool.solvablesBegin(), pool.solvablesEnd() )
+          {
+            Capabilities cap( it->supplements() );
+            for_( cit, cap.begin(), cap.end() )
+            {
+              _getLocaleDeps( *cit, tmp );
+            }
+          }
+#warning immediately build LocaleSet as soon as Loale is an Id based type
+          _availableLocalesPtr.reset( new LocaleSet(tmp.size()) );
+          for_( it, tmp.begin(), tmp.end() )
+          {
+            _availableLocalesPtr->insert( Locale( IdString(*it) ) );
+          }
+        }
+        return *_availableLocalesPtr;
       }
 
       /////////////////////////////////////////////////////////////////
