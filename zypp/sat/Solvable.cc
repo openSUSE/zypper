@@ -81,7 +81,7 @@ namespace zypp
     {
       return repo_lookup_num(this->get(), attr.idStr().id());
     }
-    
+
     bool Solvable::lookupBoolAttribute( const SolvAttr &attr ) const
     {
       return repo_lookup_num(this->get(), attr.idStr().id()) > 0;
@@ -150,7 +150,7 @@ namespace zypp
       }
       medianr = lc.medianr;
       std::string ret;
-      
+
       if (!lc.trivial)
       {
         if (lc.mediafile)
@@ -366,10 +366,10 @@ namespace zypp
       if ( ! obj )
         return str << "sat::solvable()";
 
-      return str << "sat::solvable(" << obj.id() << "|"
+      return str << "(" << obj.id() << ")"
           << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()
-          << '-' << obj.edition() << '.' << obj.arch() << "){"
-          << obj.repo().name() << "}";
+          << '-' << obj.edition() << '.' << obj.arch() << "("
+          << obj.repo().name() << ")";
     }
 
     /******************************************************************

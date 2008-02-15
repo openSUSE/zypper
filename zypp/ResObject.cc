@@ -102,7 +102,7 @@ namespace zypp
   //
   std::ostream & ResObject::dumpOn( std::ostream & str ) const
   {
-    return Resolvable::dumpOn( str << "[S" << repository().numericId() << ":" << mediaNr() << "]" );
+    return Resolvable::dumpOn( str );
   }
 
   ///////////////////////////////////////////////////////////////////
