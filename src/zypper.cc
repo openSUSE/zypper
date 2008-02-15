@@ -44,7 +44,7 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::detail;
+//using namespace zypp::detail;
 using namespace boost;
 
 ZYpp::Ptr God = NULL;
@@ -780,7 +780,8 @@ void Zypper::processCommandOptions()
   {
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
-      {"disabled", no_argument, 0, 'd'},
+      {"disable", no_argument, 0, 'd'},
+      {"disabled", no_argument, 0, 0}, // backward compatibility
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
@@ -796,7 +797,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
       "-t, --type <TYPE>       Type of repository (%s)\n"
-      "-d, --disabled          Add the repository as disabled\n"
+      "-d, --disable           Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
     )) % "yast2, rpm-md, plaindir");
     break;
@@ -865,8 +866,10 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"disable", no_argument, 0, 'd'},
       {"enable", no_argument, 0, 'e'},
-      {"enable-autorefresh", no_argument, 0, 'a'},
-      {"disable-autorefresh", no_argument, 0, 0},
+      {"refresh", no_argument, 0, 'r'},
+      {"enable-autorefresh", no_argument, 0, 'a'}, // backward compatibility
+      {"no-refresh", no_argument, 0, 'n'},
+      {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
@@ -878,8 +881,8 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it)\n"
       "-e, --enable              Enable a disabled repository\n"
-      "-a, --enable-autorefresh  Enable auto-refresh of the repository\n"
-      "    --disable-autorefresh Disable auto-refresh of the repository\n"
+      "-r, --refresh             Enable auto-refresh of the repository\n"
+      "-n, --no-refresh          Disable auto-refresh of the repository\n"
     );
     break;
   }
@@ -1027,14 +1030,14 @@ void Zypper::processCommandOptions()
       {"match-words", no_argument, 0, 0},
       {"match-exact", no_argument, 0, 0},
       {"search-descriptions", no_argument, 0, 'd'},
-      {"case-sensitive", no_argument, 0, 'c'},
+      {"case-sensitive", no_argument, 0, 'C'},
       {"type",    required_argument, 0, 't'},
       {"sort-by-name", no_argument, 0, 0},
       // rug compatibility option, we have --sort-by-repo
       {"sort-by-catalog", no_argument, 0, 0},
       {"sort-by-repo", no_argument, 0, 0},
       // rug compatibility option, we have --repo
-      {"catalog", required_argument, 0, 'c'}, //! \todo fix conflicting 'c' short option
+      {"catalog", required_argument, 0, 'c'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
@@ -1054,7 +1057,7 @@ void Zypper::processCommandOptions()
       "    --match-words          Matches with search strings may only be whole words\n"
       "    --match-exact          Searches for an exact package name\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
-      "-c, --case-sensitive       Perform case-sensitive search.\n"
+      "-C, --case-sensitive       Perform case-sensitive search.\n"
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
       "-t, --type <type>          Search only for packages of the specified type.\n"
@@ -1267,6 +1270,9 @@ void Zypper::processCommandOptions()
 
   default:
   {
+    if (runningHelp())
+      break;
+
     ERR << "Unknown or unexpected command" << endl;
     cerr << _("Unexpected program flow") << "." << endl;
     report_a_bug(cerr);
@@ -1389,7 +1395,7 @@ void Zypper::doCommand()
     tribool enabled(indeterminate); 
     tribool refresh(indeterminate);
 
-    if (copts.count("disabled"))
+    if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
     if (copts.count("no-refresh"))
       refresh = false;
@@ -1858,7 +1864,7 @@ void Zypper::doCommand()
 
     cond_init_target(*this);
     // load only repo resolvables, we don't need the installed ones
-    load_repo_resolvables(*this, false /* don't load to pool */);
+    load_repo_resolvables(*this);
 
     setExitCode(source_install(_arguments));
     return;
@@ -1868,7 +1874,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::SEARCH)
   {
-    ZyppSearchOptions options;
+    zypp::PoolQuery query;
 
     if (runningHelp())
     {
@@ -1877,60 +1883,61 @@ void Zypper::doCommand()
     }
 
     if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
-      options.setInstalledFilter(ZyppSearchOptions::UNINSTALLED_ONLY);
+      query.setUninstalledOnly();
 
-    if (copts.count("installed-only")) options.setInstalledFilter(ZyppSearchOptions::INSTALLED_ONLY);
-    if (copts.count("match-any")) options.setMatchAny();
-    if (copts.count("match-words")) options.setMatchWords();
-    if (copts.count("match-exact")) options.setMatchExact();
-    if (copts.count("search-descriptions")) options.setSearchDescriptions();
-    if (copts.count("case-sensitive")) options.setCaseSensitive();
+    if (copts.count("installed-only")) query.setInstalledOnly();
+    //if (copts.count("match-any")) options.setMatchAny();
+    //if (copts.count("match-words")) options.setMatchWords();
+    if (copts.count("match-exact")) query.setMatchExact();
+    //if (copts.count("search-descriptions")) options.setSearchDescriptions();
+    if (copts.count("case-sensitive")) query.setCaseSensitive();
 
-    if (copts.count("type") > 0) {
-      options.clearKinds();
+    if (copts.count("type") > 0)
+    {
       std::list<std::string>::const_iterator it;
-      for (it = copts["type"].begin(); it != copts["type"].end(); ++it) {
-	kind = string_to_kind( *it );
-        if (kind == ResObject::Kind()) {
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
           cerr << _("Unknown resolvable type ") << *it << endl;
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
-        options.addKind( kind );
+        query.addKind( kind );
       }
     }
-    else if (globalOpts().is_rug_compatible) {
-      options.clearKinds();
-      options.addKind( ResTraits<Package>::kind );
+    else if (globalOpts().is_rug_compatible)
+    {
+      query.addKind( ResTraits<Package>::kind );
     }
 
-    if (copts.count("repo") > 0) {
-      options.clearRepos();
+    if (copts.count("repo") > 0)
+    {
+      //options.clearRepos();
       std::list<std::string>::const_iterator it;
       for (it = copts["repo"].begin(); it != copts["repo"].end(); ++it) {
-        options.addRepo( *it );
+        query.addRepo( *it );
       }
     }
-
-    options.resolveConflicts();
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
     cond_init_target(*this);
-    
-    establish();
+
+    // now load resolvables:
+    cond_load_resolvables(*this);
 
     Table t;
     t.style(Ascii);
 
     try
     {
-      ZyppSearch search( God, options, _arguments );
-      FillTable callback( t, search.installedCache(), search.getQueryInstancePtr(), search.options() );
-  
-      search.doSearch( callback, callback );
+      
+      FillTable callback( t, query );
+      query.execute(_arguments[0], callback );
   
       if (t.empty())
         cout << _("No resolvables found.") << endl;

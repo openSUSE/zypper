@@ -193,15 +193,17 @@ void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const Poo
   printSummaryDesc(pool_item.resolvable());
 
   cout << _("Provides:") << endl;
-  CapSet capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
-    cout << it->refers().asString() << ": " << it->asString() << endl;
+  Capabilities capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
+    // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
+    cout << *it << endl;
   }
 
   cout << endl << _("Requires:") << endl;
   capSet = pool_item.resolvable()->dep(zypp::Dep::REQUIRES);
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
-    cout << it->refers().asString() << ": " << it->asString() << endl;
+  for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
+    // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
+    cout << *it << endl;
   }
 }
 

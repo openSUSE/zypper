@@ -17,7 +17,6 @@
 
 #include <libintl.h>
 
-#include "zypp/target/store/PersistentStorage.h"
 #include "zypp/RepoManager.h"
 #include "zypp/PathInfo.h"
 
@@ -29,7 +28,7 @@
 
 #define XML_FORMAT_VERSION "0.4"
 
-using namespace zypp::detail;
+//using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
@@ -226,8 +225,8 @@ int main(int argc, char **argv)
   
   for ( std::list<RepoInfo>::const_iterator it = repos.begin(); it != repos.end(); ++it )
   {
-    Repository repository = manager.createFromCache(*it);
-    God->addResolvables(repository.resolvables());
+    // load into the pool
+    manager.loadFromCache(*it);
   }
 
   if ( repos.size() == 0 )
@@ -235,9 +234,8 @@ int main(int argc, char **argv)
     errors.push_back( str::form( _( "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates.") ) );
   }
 
-  God->addResolvables( God->target()->resolvables(), true);
-  
-  God->resolver()->establishPool();
+  // load into the pool
+  God->target()->load();
   
   int count = 0;
   int security_count = 0;

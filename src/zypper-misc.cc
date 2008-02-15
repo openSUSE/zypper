@@ -19,9 +19,9 @@
 
 #include "zypp/RepoInfo.h"
 
-#include "zypp/CapFactory.h"
+#include "zypp/Capabilities.h"
 
-#include "zypp/target/store/xml_escape_parser.hpp"
+#include "zypp/parser/xml_escape_parser.hpp"
 
 #include "zypper.h"
 #include "zypper-main.h"
@@ -30,7 +30,7 @@
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
 
-using namespace zypp::detail;
+//using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
@@ -75,8 +75,6 @@ ResObject::Kind string_to_kind (const string &skind)
   string lskind = str::toLower (skind);
   if (lskind == "package")
     return ResTraits<Package>::kind;
-  if (lskind == "selection")
-    return ResTraits<Selection>::kind;
   if (lskind == "pattern")
     return ResTraits<Pattern>::kind;
   if (lskind == "product")
@@ -87,12 +85,10 @@ ResObject::Kind string_to_kind (const string &skind)
     return ResTraits<Script>::kind;
   if (lskind == "message")
     return ResTraits<Message>::kind;
-  if (lskind == "language")
-    return ResTraits<Language>::kind;
   if (lskind == "atom")
     return ResTraits<Atom>::kind;
-  if (lskind == "system")
-    return ResTraits<SystemResObject>::kind;
+//   if (lskind == "system")
+//     return ResTraits<SystemResObject>::kind;
   if (lskind == "srcpackage")
     return ResTraits<SrcPackage>::kind;
   // not recognized
@@ -235,9 +231,9 @@ Capability safe_parse_cap (const Zypper & zypper,
       // get the installed version
       VersionGetter vg;
       invokeOnEach(
-          God->pool().byNameBegin(capstr),
-          God->pool().byNameEnd(capstr),
-          chain(ByKind(kind),ByInstalled()),
+          God->pool().byIdentBegin(kind, capstr),
+          God->pool().byIdentEnd(kind,capstr),
+          ByInstalled(),
           functorRef<bool,const zypp::PoolItem&> (vg));
       // installed found
       if (vg.found)
@@ -245,9 +241,9 @@ Capability safe_parse_cap (const Zypper & zypper,
         // check for newer version of that resolvable
         NewerVersionGetter nvg(vg.edition);
         invokeOnEach(
-             God->pool().byNameBegin(capstr),
-             God->pool().byNameEnd(capstr),
-             chain(resfilter::ByKind(kind),not_c(ByInstalled())),
+             God->pool().byIdentBegin(kind, capstr),
+             God->pool().byIdentEnd(kind,capstr),
+             not_c(ByInstalled()),
              functorRef<bool,const zypp::PoolItem&> (nvg));
         // newer version found
         if (nvg.found)
@@ -258,8 +254,7 @@ Capability safe_parse_cap (const Zypper & zypper,
         }
       }
     }
-
-    cap = CapFactory().parse (kind, new_capstr);
+    cap = Capability( new_capstr.c_str(), kind );
   }
   catch (const Exception& e) {
     //! \todo check this handling (should we fail or set a special exit code?)
@@ -276,16 +271,14 @@ void mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
 		      const std::string &name)
 {
-  const ResPool &pool = God->pool();
   // name and kind match:
-
-  ProvideProcess installer (God->architecture(), "" /*version*/);
+  ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
   cout_vv << "Iterating over [" << kind << "]" << name << endl;
-  invokeOnEach( pool.byNameBegin( name ),
-		pool.byNameEnd( name ),
-		resfilter::ByKind( kind ),
-		zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer)
-		);
+  invokeOnEach(
+      God->pool().byIdentBegin(kind, name),
+      God->pool().byIdentEnd(kind, name),
+      zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer));
+
   cout_vv << "... done" << endl;
   if (!installer.item) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
@@ -355,10 +348,9 @@ void mark_for_uninstall(Zypper & zypper,
 
   DeleteProcess deleter;
   cerr_vv << "Iterating over " << name << endl;
-  invokeOnEach( pool.byNameBegin( name ),
-		pool.byNameEnd( name ),
-		functor::chain (resfilter::ByInstalled(),
-				resfilter::ByKind( kind )),
+  invokeOnEach( pool.byIdentBegin( kind, name ),
+		pool.byIdentEnd( kind, name ),
+		resfilter::ByInstalled(),
 		zypp::functor::functorRef<bool,const zypp::PoolItem&> (deleter)
 		);
   cerr_vv << "... done" << endl;
@@ -402,7 +394,7 @@ void mark_by_capability (const Zypper & zypper,
 {
   Capability cap = safe_parse_cap (zypper, kind, capstr);
 
-  if (cap != Capability::noCap) {
+  if (!cap.empty()) {
     cout_vv << "Capability: " << cap << endl;
 
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
@@ -441,18 +433,19 @@ void remove_selections(Zypper & zypper)
   DBG << "Removing user addRequire() addConflict()" << endl;
 
   Resolver_Ptr solver = God->resolver();
-  CapSet capSet = solver->getConflict();
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-  {
-    DBG << "removing conflict: " << (*it) << endl;
-    solver->removeConflict(*it);
-  }
-  capSet = solver->getRequire();
-  for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
-  {
-    DBG << "removing require: " << (*it) << endl;
-    solver->removeRequire(*it);
-  }
+  // FIXME port this
+//   CapSet capSet = solver->getConflict();
+//   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+//   {
+//     DBG << "removing conflict: " << (*it) << endl;
+//     solver->removeConflict(*it);
+//   }
+//   capSet = solver->getRequire();
+//   for (CapSet::const_iterator it = capSet.begin(); it != capSet.end(); ++it)
+//   {
+//     DBG << "removing require: " << (*it) << endl;
+//     solver->removeRequire(*it);
+//   }
 
   MIL << "DONE" << endl;
 }
@@ -631,8 +624,8 @@ void show_summary_resolvable_list(const string & label,
     // plus edition and architecture for verbose output
     cout_v << "-" << res->edition() << "." << res->arch();
     // plus repo providing this package
-    if (res->repository() != Repository::noRepository)
-      cout_v << "  (" << res->repository().info().name() << ")";
+    if (!res->repoInfo().alias().empty())
+      cout_v << "  (" << res->repoInfo().name() << ")";
     // new line after each package in the verbose mode
     cout_v << endl;
   }
@@ -890,8 +883,8 @@ void establish ()
 {
   int locks = God->applyLocks();
   cout_v <<  format(_("%s items locked")) % locks << endl;
-  cout_v << _("Establishing status of aggregates") << endl;
-  God->resolver()->establishPool();
+  //cout_v << _("Establishing status of aggregates") << endl;
+  //God->resolver()->establishPool();
   dump_pool ();
 }
 
@@ -1028,7 +1021,7 @@ void show_patches(const Zypper & zypper)
     Patch::constPtr patch = asKind<Patch>(res);
 
     TableRow tr;
-    tr << patch->repository().info().name();
+    tr << patch->repoInfo().name();
     tr << res->name () << res->edition ().asString();
     tr << patch->category();
     tr << string_status (it->status ());
@@ -1100,10 +1093,10 @@ bool xml_list_patches ()
         cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
         cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
 
-        if ( patch->repository() != Repository::noRepository )
+        if ( !patch->repoInfo().alias().empty() )
         {
-          cout << "  <source url=\"" << *(patch->repository().info().baseUrlsBegin());
-          cout << "\" alias=\"" << patch->repository().info().alias() << "\"/>" << endl;
+          cout << "  <source url=\"" << *(patch->repoInfo().baseUrlsBegin());
+          cout << "\" alias=\"" << patch->repoInfo().alias() << "\"/>" << endl;
         }
 
         cout << " </update>" << endl;
@@ -1148,7 +1141,7 @@ void list_patch_updates(const Zypper & zypper, bool best_effort)
 
       if (true) {
 	TableRow tr (cols);
-	tr << patch->repository().info().name();
+	tr << patch->repoInfo().name();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
@@ -1189,9 +1182,9 @@ void list_patch_updates(const Zypper & zypper, bool best_effort)
 class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
-  PoolItem_Ref best;
+  PoolItem best;
 
-  bool operator()( PoolItem_Ref provider )
+  bool operator()( PoolItem provider )
     {
       if (!provider.status().isLocked()	// is not locked (taboo)
 	  && (!best 			// first match
@@ -1211,22 +1204,20 @@ public:
 // Similar to zypp::solver::detail::Helper::findUpdateItem
 // but that allows changing the arch (#222140).
 static
-PoolItem_Ref
-findArchUpdateItem( const ResPool & pool, PoolItem_Ref item )
+PoolItem
+findArchUpdateItem( const ResPool & pool, PoolItem item )
 {
   LookForArchUpdate info;
 
-  invokeOnEach( pool.byNameBegin( item->name() ),
-		pool.byNameEnd( item->name() ),
-		// get uninstalled, equal kind and arch, better edition
-		functor::chain (
-		  functor::chain (
-		    functor::chain (
-		      resfilter::ByUninstalled (),
-		      resfilter::ByKind( item->kind() ) ),
-		    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
-		  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
-		functor::functorRef<bool,PoolItem> (info) );
+  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
+                pool.byIdentEnd( item->kind(), item->name() ),
+                // get uninstalled, equal kind and arch, better edition
+                functor::chain (
+                  functor::chain (
+                    resfilter::ByUninstalled (),
+                    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
+                  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
+                functor::functorRef<bool,PoolItem> (info) );
 
   _XDEBUG("findArchUpdateItem(" << item << ") => " << info.best);
   return info.best;
@@ -1234,7 +1225,7 @@ findArchUpdateItem( const ResPool & pool, PoolItem_Ref item )
 
 // ----------------------------------------------------------------------------
 
-typedef set<PoolItem_Ref> Candidates;
+typedef set<PoolItem> Candidates;
 
 static void
 find_updates( const ResObject::Kind &kind, Candidates &candidates )
@@ -1249,7 +1240,7 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
     if (it->status().isUninstalled())
       continue;
     // (actually similar to ProvideProcess?)
-    PoolItem_Ref candidate = findArchUpdateItem( pool, *it );
+    PoolItem candidate = findArchUpdateItem( pool, *it );
     if (!candidate.resolvable())
       continue;
 
@@ -1304,7 +1295,7 @@ void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_
       TableRow tr (cols);
       tr << "v";
       if (!hide_repo) {
-	tr << res->repository().info().name();
+	tr << res->repoInfo().name();
       }
       if (zypper.globalOpts().is_rug_compatible)
 	tr << "";		// Bundle
@@ -1346,19 +1337,16 @@ bool mark_item_install (const PoolItem& pi) {
 //   multiple installed resolvables of the same name.
 //   LookForArchUpdate will return the one with the highest edition.
 
-PoolItem_Ref
-findInstalledItem( PoolItem_Ref item )
+PoolItem
+findInstalledItem( PoolItem item )
 {
   const zypp::ResPool& pool = God->pool();
   LookForArchUpdate info;
 
-  invokeOnEach( pool.byNameBegin( item->name() ),
-		pool.byNameEnd( item->name() ),
-		// get installed, equal kind
-		functor::chain (
-		  resfilter::ByInstalled (),
-		  resfilter::ByKind( item->kind() ) ),
-		functor::functorRef<bool,PoolItem> (info) );
+  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
+                pool.byIdentEnd( item->kind(), item->name() ),
+                resfilter::ByInstalled (),
+                functor::functorRef<bool,PoolItem> (info) );
 
   _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
   return info.best;
@@ -1373,12 +1361,11 @@ findInstalledItem( PoolItem_Ref item )
 bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
-  PoolItem_Ref installed = findInstalledItem( pi );
+  PoolItem installed = findInstalledItem( pi );
 
   // require anything greater than the installed version
   try {
-    Capability cap;
-    cap = CapFactory().parse( installed->kind(), installed->name(), Rel::GT, installed->edition() );
+    Capability  cap( installed->name(), Rel::GT, installed->edition(), installed->kind() );
     resolver->addRequire( cap );
   }
   catch (const Exception& e) {
@@ -1409,10 +1396,10 @@ void xml_list_updates()
     cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
     cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
 
-    if ( res->repository() != Repository::noRepository )
+    if ( !res->repoInfo().alias().empty() )
     {
-    	cout << "  <source url=\"" << *(res->repository().info().baseUrlsBegin());
-    	cout << "\" alias=\"" << res->repository().info().alias() << "\"/>" << endl;
+    	cout << "  <source url=\"" << *(res->repoInfo().baseUrlsBegin());
+    	cout << "\" alias=\"" << res->repoInfo().alias() << "\"/>" << endl;
     }
 
     cout << " </update>" << endl;
@@ -1727,12 +1714,12 @@ int source_install(std::vector<std::string> & arguments)
        it != arguments.end(); ++it)
   {
     SrcPackage::Ptr srcpkg;
-
-    gData.repo_resolvables.forEach(
-      functor::chain(
-        resfilter::ByName(*it),
-        resfilter::ByKind(ResTraits<SrcPackage>::kind)),
-        FindSrcPackage(srcpkg));
+// FIXME
+//     gData.repo_resolvables.forEach(
+//       functor::chain(
+//         resfilter::ByName(*it),
+//         resfilter::ByKind(ResTraits<SrcPackage>::kind)),
+//         FindSrcPackage(srcpkg));
 
     if (srcpkg)
     {

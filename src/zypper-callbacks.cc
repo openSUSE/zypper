@@ -4,6 +4,7 @@
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/Resolvable.h"
 
 #include "AliveCursor.h"
 #include "zypper.h"

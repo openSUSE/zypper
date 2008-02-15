@@ -9,7 +9,6 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResStore.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
 
@@ -149,8 +148,6 @@ struct RuntimeData
   std::list<zypp::RepoInfo> additional_repos;
   int patches_count;
   int security_patches_count;
-  zypp::ResStore repo_resolvables;
-  zypp::ResStore target_resolvables;
   zypp::RepoInfo current_repo;
 
   // hack to enable media progress reporting in the commit phase in normal

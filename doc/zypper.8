@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.9.7" "zypper" "System Tools"
+.TH "zypper" "8" "0.10.0" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -266,6 +266,9 @@ Searches for an exact name of the resolvable.
 .I \-d, \-\-search\-descriptions
 Search also in summaries and descriptions.
 .TP
+.I \-C, \-\-case\-sensitive
+Perform case-sensitive search.
+.TP
 .I \-i, \-\-installed\-only
 Show only resolvables that are already installed.
 .TP
@@ -328,7 +331,7 @@ defined for these types:
 \fBrpm-md\fR - repomd, rpmmd, yum, YUM;
 \fBplaindir\fR - Plaindir.
 .TP
-\fI\-d, \-\-disabled\fR
+\fI\-d, \-\-disable\fR
 Add the repository as disabled.
 .TP
 \fI\-n, \-\-no\-refresh\fR 
@@ -375,10 +378,10 @@ Enable the repository.
 \fI\-d, \-\-disable\fR
 Disable the repository.
 .TP
-\fI\-a, \-\-enable-autorefresh\fR
+\fI\-r, \-\-refresh\fR
 Enable auto-refresh for the repository.
 .TP
-\fI    \-\-disable\-autorefresh\fR
+\fI\-n, \-\-no\-refresh\fR
 Disable auto-refresh for the repository.
 
 .TP
