@@ -1,3 +1,5 @@
+ADD_DEFINITIONS( -DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN )
+
 ADD_EXECUTABLE( YUMDownloader YUMDownloader_test.cc )
 TARGET_LINK_LIBRARIES( YUMDownloader zypp boost_unit_test_framework )
 

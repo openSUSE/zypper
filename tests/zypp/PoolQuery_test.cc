@@ -40,22 +40,15 @@ void poolquery_simple_test()
   cout << "search done." << endl;
 }
 
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
+bool init_function() {
+  framework::master_test_suite().add( BOOST_TEST_CASE( boost::bind( &poolquery_simple_test) ) );
+  return true;
+} 
+
+int
+main( int argc, char* argv[] )
 {
-//   if (argc < 2)
-//   {
-//     cout << "mediasetaccesstest:"
-//       " path to directory with test data required as parameter" << endl;
-//     return (test_suite *)0;
-//   }
-
-  test_suite* test= BOOST_TEST_SUITE("PoolQuery_test");
-
-  // simple test
-  test->add(BOOST_TEST_CASE(&poolquery_simple_test));
-
-  return test;
-}
+return ::boost::unit_test::unit_test_main( &init_function, argc, argv );
+} 
 
 // vim: set ts=2 sts=2 sw=2 ai et:

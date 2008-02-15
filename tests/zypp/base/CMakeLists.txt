@@ -1,3 +1,5 @@
+ADD_DEFINITIONS( -DBOOST_TEST_DYN_LINK )
+
 FOREACH(  loop_var Sysconfig )
    ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
    TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp boost_unit_test_framework )

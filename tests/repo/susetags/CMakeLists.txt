@@ -1,3 +1,5 @@
+ADD_DEFINITIONS( -DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN )
+
 ADD_EXECUTABLE( 
   Downloader
   Downloader_test.cc

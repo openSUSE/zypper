@@ -1,3 +1,5 @@
+ADD_DEFINITIONS( -DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN )
+
 #ADD_EXECUTABLE(CacheInitializer CacheInitializer_test.cc)
 #TARGET_LINK_LIBRARIES(CacheInitializer boost_unit_test_framework )
 #TARGET_LINK_LIBRARIES(CacheInitializer zypp )

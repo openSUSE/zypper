@@ -34,7 +34,7 @@ void sysconfig_test( const string &dir )
   BOOST_CHECK_EQUAL( values["NO_PROXY"], "localhost, 127.0.0.1");
 }
 
-test_suite*
+bool
 init_unit_test_suite( int argc, char* argv[] )
 {
   string datadir;
@@ -57,5 +57,16 @@ init_unit_test_suite( int argc, char* argv[] )
   test->add(BOOST_PARAM_TEST_CASE( &sysconfig_test,
                               (std::string const*)params, params+1));
   return test;
+}
+
+//bool init_function() {
+//  framework::master_test_suite().add( BOOST_TEST_CASE( boost::bind( &poolquery_simple_test) ) );
+//  return true;
+//}
+
+int
+main( int argc, char* argv[] )
+{
+  return ::boost::unit_test::unit_test_main( &init_unit_test_suite, argc, argv );
 }
 
