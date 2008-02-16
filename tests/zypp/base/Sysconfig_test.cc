@@ -4,69 +4,32 @@
 #include <map>
 #include <string>
 
+#include <boost/test/unit_test.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
 
-
-#include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
-
 #include "zypp/base/Sysconfig.h"
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
+using namespace boost::unit_test;
 using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;
 
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/base/data/Sysconfig")
 
-void sysconfig_test( const string &dir )
+BOOST_AUTO_TEST_CASE(Sysconfig)
 {
-  Pathname file = Pathname(dir) + "proxy";
+  Pathname file = DATADIR + "proxy";
   map<string,string> values = zypp::base::sysconfig::read(file);
   BOOST_CHECK_EQUAL( values.size(), 6 );
   BOOST_CHECK_EQUAL( values["PROXY_ENABLED"], "no");
   BOOST_CHECK_EQUAL( values["GOPHER_PROXY"], "");
   BOOST_CHECK_EQUAL( values["NO_PROXY"], "localhost, 127.0.0.1");
-}
-
-bool
-init_unit_test_suite( int argc, char* argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/zypp/base/data/Sysconfig").asString();
-    cout << "sysconfig_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-
-  std::string const params[] = { datadir };
-    //set_log_stream( std::cout );
-  test_suite* test= BOOST_TEST_SUITE( "SysconfigTest" );
-  test->add(BOOST_PARAM_TEST_CASE( &sysconfig_test,
-                              (std::string const*)params, params+1));
-  return test;
-}
-
-//bool init_function() {
-//  framework::master_test_suite().add( BOOST_TEST_CASE( boost::bind( &poolquery_simple_test) ) );
-//  return true;
-//}
-
-int
-main( int argc, char* argv[] )
-{
-  return ::boost::unit_test::unit_test_main( &init_unit_test_suite, argc, argv );
 }
 

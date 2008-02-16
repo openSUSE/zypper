@@ -1,13 +1,18 @@
 #include <iostream>
 
+#include <boost/test/unit_test.hpp>
+
 #include "zypp/base/Logger.h"
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/ReferenceCounted.h>
 #include <zypp/base/ProvideNumericId.h>
 
+#define BOOST_TEST_MODULE PtrTypes
+
 using std::endl;
 using namespace zypp;
 using namespace zypp::base;
+
 
 #define TRACE_TAG DBG << this->numericId() << " " << __PRETTY_FUNCTION__ << endl
 
@@ -116,7 +121,7 @@ template<class _RW>
 **      FUNCTION NAME : main
 **      FUNCTION TYPE : int
 */
-int main( int argc, char * argv[] )
+BOOST_AUTO_TEST_CASE(basic_test)
 {
   MIL << "===[START]=====" << endl;
   test<RW_pointer<NonIntrusive,          rw_pointer::Shared<NonIntrusive> > >();
@@ -130,5 +135,4 @@ int main( int argc, char * argv[] )
   cowt<RWCOW_pointer<const Intrusive,    rw_pointer::Intrusive<Intrusive> > >();
 
   MIL << "===[DONE]=====" << endl;
-  return 0;
 }

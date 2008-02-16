@@ -17,7 +17,7 @@ using namespace zypp::media;
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-void verifier_test()
+BOOST_AUTO_TEST_CASE(verifier_test)
 {
   MediaVerifierRef verifier(
       new MyMediaVerifier(/* "SUSE-Linux-CORE-i386 9" */)
@@ -34,15 +34,5 @@ void verifier_test()
   mm.attach(id);
   mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));  
 }
-
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-  test_suite* test= BOOST_TEST_SUITE( "MediaVerifierTest" );
-  test->add( BOOST_TEST_CASE( &verifier_test ), 0 /* expected zero error */ );
-  return test;
-}
-
-
 
 // vim: set ts=2 sts=2 sw=2 ai et:

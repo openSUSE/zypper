@@ -4,21 +4,15 @@
 #include <list>
 #include <string>
 
-// Boost.Test
-#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
-
-using boost::unit_test::test_suite;
-using boost::unit_test::test_case;
-using boost::test_tools::close_at_tolerance;
-
-// parameterized test
-// http://www.boost.org/libs/test/example/unit_test_example4.cpp
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
 
 using namespace std;
 using namespace zypp;
@@ -29,7 +23,7 @@ using namespace zypp::filesystem;
  * bool is_checksum( const Pathname & file, const CheckSum &checksum );
  * std::string checksum( const Pathname & file, const std::string &algorithm );
  */
-void pathinfo_checksum_test()
+BOOST_AUTO_TEST_CASE(pathinfo_checksum_test)
 {
   const char *buffer = "I will test the checksum of this";
   TmpFile file;
@@ -52,7 +46,7 @@ void pathinfo_checksum_test()
   BOOST_REQUIRE( is_checksum( file.path(), file_md5 ) );
 }
 
-void pathinfo_is_exist_test()
+BOOST_AUTO_TEST_CASE(pathinfo_is_exist_test)
 {
   TmpDir dir;
   Pathname subdir("text with spaces");
@@ -68,7 +62,7 @@ void pathinfo_is_exist_test()
   BOOST_CHECK( PathInfo(filepath).isExist() );
 }
 
-void pathinfo_misc_test()
+BOOST_AUTO_TEST_CASE(pathipathinfo_misc_test)
 {
   TmpDir dir;
 
@@ -76,7 +70,7 @@ void pathinfo_misc_test()
   BOOST_CHECK(info.isDir());
 }
 
-void pathinfo_expandlink_test()
+BOOST_AUTO_TEST_CASE(pathinfo_expandlink_test)
 {
   TmpDir dir;
 
@@ -124,14 +118,4 @@ void pathinfo_expandlink_test()
   cout << brokenlink << " -> " << filesystem::expandlink(brokenlink) << endl;
 }
 
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "PathInfoTest" );
-    test->add( BOOST_TEST_CASE( &pathinfo_checksum_test ), 0 /* expected zero error */ );
-    test->add( BOOST_TEST_CASE( &pathinfo_misc_test ), 0 /* expected zero error */ );
-    test->add( BOOST_TEST_CASE( &pathinfo_is_exist_test ), 0 /* expected zero error */ );
-    test->add( BOOST_TEST_CASE( &pathinfo_expandlink_test ), 0 /* expected zero error */ );
-    return test;
-}
 

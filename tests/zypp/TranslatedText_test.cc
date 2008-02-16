@@ -1,8 +1,3 @@
-// Arch.cc
-//
-// tests for Arch
-//
-
 #include <iostream>
 #include <list>
 #include <string>
@@ -12,18 +7,15 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
-// Boost.Test
-#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using boost::test_tools::close_at_tolerance;
 
 using namespace std;
 using namespace zypp;
 
-void test_tt()
+BOOST_AUTO_TEST_CASE(translatedtext_test)
 {
   ZYpp::Ptr god;
 
@@ -57,10 +49,3 @@ void test_tt()
   BOOST_CHECK_EQUAL( testTT.text(), "default" );
 }
 
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "TranslatedText" );
-    test->add( BOOST_TEST_CASE( &test_tt ), 0 /* expected zero error */ );
-    return test;
-}

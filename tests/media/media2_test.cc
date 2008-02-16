@@ -12,6 +12,11 @@
 
 #include "mymediaverifier.h"
 
+#include <boost/test/unit_test.hpp>
+
+using boost::unit_test::test_suite;
+using boost::unit_test::test_case;
+
 using namespace zypp;
 using namespace zypp::media;
 
@@ -36,7 +41,7 @@ do { \
   if( do_step) { pause(); if( do_quit) exit(0); } \
 } while(0);
 
-int main(int argc, char *argv[])
+BOOST_AUTO_TEST_CASE(strange_test)
 {
   {
       struct sigaction sa;
@@ -47,8 +52,8 @@ int main(int argc, char *argv[])
       sa.sa_handler = quit;
       sigaction(SIGTERM, &sa, NULL);
 
-      if( argc > 1 && std::string(argv[1]) == "-i")
-        do_step = true;
+      //if( argc > 1 && std::string(argv[1]) == "-i")
+      //  do_step = true;
   }
 
   MediaVerifierRef verifier(
@@ -142,8 +147,6 @@ int main(int argc, char *argv[])
     // hmm...
     ERR << "Catched *unknown* exception" << std::endl;
   }
-
-  return 0;
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

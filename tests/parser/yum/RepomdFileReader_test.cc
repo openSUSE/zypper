@@ -4,8 +4,6 @@
 #include <vector>
 #include <list>
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/Url.h"
@@ -17,6 +15,8 @@ using namespace boost::unit_test;
 
 using namespace zypp::parser::yum;
 using repo::yum::ResourceType;
+
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "parser/yum/data")
 
 class Collector
 {
@@ -36,10 +36,10 @@ public:
   //vector<OnMediaLocation> items;
 };
 
-void repomd_read_test(const string &dir)
+BOOST_AUTO_TEST_CASE(repomd_read)
 {
   list<Pathname> entries;
-  if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
+  if ( filesystem::readdir( entries, DATADIR, false ) != 0 )
     ZYPP_THROW(Exception("failed to read directory"));
     
   for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
@@ -77,22 +77,5 @@ void repomd_read_test(const string &dir)
   }
 }
 
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-  if (argc < 2)
-  {
-    cout << "RepomdFileReader_test:"
-      " path to directory with test data required as parameter" << endl;
-    return (test_suite *)0;
-  }
-  
-  test_suite* test= BOOST_TEST_SUITE("RepomdFileReader");
-  string datadir = argv[1];
-  std::string const params[] = { datadir };
-  test->add(BOOST_PARAM_TEST_CASE(&repomd_read_test,
-                                 (std::string const*)params, params+1));
-  return test;
-}
 
 // vim: set ts=2 sts=2 sw=2 ai et:

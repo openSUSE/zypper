@@ -29,7 +29,7 @@ using namespace zypp;
 **
 **      DESCRIPTION :
 */
-void arch_test()
+BOOST_AUTO_TEST_CASE(arch_test)
 {
   Arch _arch32( "i386" );
 
@@ -42,12 +42,4 @@ void arch_test()
   BOOST_REQUIRE( Arch("").empty() );
   BOOST_REQUIRE( ! Arch_noarch.empty() );
   BOOST_REQUIRE( ! ( _arch32.compare(Arch_x86_64) >= 0) );
-}
-
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "ArchTest" );
-    test->add( BOOST_TEST_CASE( &arch_test ), 0 /* expected zero error */ );
-    return test;
 }

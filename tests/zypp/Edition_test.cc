@@ -8,13 +8,12 @@
 
 #include <boost/test/unit_test.hpp>
 
-using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
 using namespace std;
 using namespace zypp;
 
-void edition_test()
+BOOST_AUTO_TEST_CASE(edition)
 {
   Edition _ed1 ("1");
   Edition _ed2 ("1.1");
@@ -35,12 +34,4 @@ void edition_test()
   BOOST_CHECK_EQUAL( Edition::compare("1:1-1","2:1-1"), -1 );
   BOOST_CHECK_EQUAL( Edition::compare("2:1-1","2:1-1"), 0 );
   BOOST_CHECK_EQUAL( Edition::compare("3:1-1","2:1-1"), 1 );
-}
-
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "EditionTest" );
-    test->add( BOOST_TEST_CASE( &edition_test ), 0 /* expected zero error */ );
-    return test;
 }

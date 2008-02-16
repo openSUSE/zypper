@@ -14,21 +14,21 @@
 #include "zypp/RepoManager.h"
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
+
 
 #include "KeyRingTestReceiver.h"
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 using namespace zypp::repo;
 
-void repomanager_test( const string &dir )
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/RepoManager")
+
+BOOST_AUTO_TEST_CASE(repomanager_test)
 {
   RepoManagerOptions opts;
   
@@ -36,7 +36,7 @@ void repomanager_test( const string &dir )
   TmpDir tmpRawCachePath;
   TmpDir tmpKnownReposPath;
   
-  BOOST_CHECK_EQUAL( filesystem::copy_dir_content( Pathname(dir) + "/repos.d", tmpKnownReposPath.path() ), 0 );
+  BOOST_CHECK_EQUAL( filesystem::copy_dir_content( DATADIR + "/repos.d", tmpKnownReposPath.path() ), 0 );
   
   opts.repoCachePath = tmpCachePath.path();
   opts.repoRawCachePath = tmpRawCachePath.path();
@@ -49,7 +49,7 @@ void repomanager_test( const string &dir )
   
   // now add a .repo file with 2 repositories in it
   Url url;
-  url.setPathName((Pathname(dir) + "/proprietary.repo").asString());
+  url.setPathName((DATADIR + "/proprietary.repo").asString());
   url.setScheme("file");
 
   manager.addRepositories(url);
@@ -147,30 +147,5 @@ void repomanager_test( const string &dir )
   }
   MIL << "Parsing repository metadata..." << endl;
   manager.buildCache(repo);
-}
-
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/zypp/data/RepoManager").asString();
-    cout << "repomanager_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-
-  std::string const params[] = { datadir };
-    //set_log_stream( std::cout );
-  test_suite* test= BOOST_TEST_SUITE( "RepoManagerTest" );
-  test->add(BOOST_PARAM_TEST_CASE( &repomanager_test,
-                              (std::string const*)params, params+1));
-  return test;
 }
 

@@ -2,12 +2,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/ResKind.h"
 
-using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 using namespace std;
 using namespace zypp;
 
-void dotest()
+BOOST_AUTO_TEST_CASE(reskind_test)
 {
   // Default construced is empty ""
   BOOST_CHECK_EQUAL( ResKind(), "" );
@@ -31,10 +30,4 @@ void dotest()
 
   BOOST_CHECK_EQUAL( ResKind::compare( "FOO", "foo" ), 0 );
 
-}
-test_suite * init_unit_test_suite( int, char * [] )
-{
-    test_suite * test= BOOST_TEST_SUITE( "ResKind_test" );
-    test->add( BOOST_TEST_CASE( &dotest ), 0 /* expected zero error */ );
-    return test;
 }

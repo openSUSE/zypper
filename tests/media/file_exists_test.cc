@@ -18,7 +18,7 @@ using namespace zypp::media;
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-void http_test()
+BOOST_AUTO_TEST_CASE(http_test)
 {
   //MediaVerifierRef verifier( new MyMediaVerifier() );
   MediaManager     mm;
@@ -58,7 +58,7 @@ void ftp_test()
   mm.release(id); 
 }
 
-void iso_test()
+BOOST_AUTO_TEST_CASE(isotest)
 {
    if ( geteuid() != 0 )
    {
@@ -83,7 +83,7 @@ void iso_test()
   mm.release(id); 
 }
 
-void nfs_test()
+BOOST_AUTO_TEST_CASE(nfs_tst)
 {
    if ( geteuid() != 0 )
    {
@@ -102,20 +102,5 @@ void nfs_test()
   mm.release(id);
   
 }
-
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-  //tests would need root-privileges
-  test_suite* test= BOOST_TEST_SUITE( "MediaFileExistTest" );
-  //test->add( BOOST_TEST_CASE( &nfs_test ), 0 /* expected zero error */ );
-  test->add( BOOST_TEST_CASE( &http_test ), 0 /* expected zero error */ );
-  test->add( BOOST_TEST_CASE( &ftp_test ), 0 /* expected zero error */ );
-  //test->add( BOOST_TEST_CASE( &iso_test ), 0 /* expected zero error */ );
-  //test->add( BOOST_TEST_CASE( &nfs_test ), 0 /* expected zero error */ );
-  return test;
-}
-
-
 
 // vim: set ts=2 sts=2 sw=2 ai et:

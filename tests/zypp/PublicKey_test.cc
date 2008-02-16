@@ -235,7 +235,7 @@ char susekey[]=
 size_t _susekey_size=2173;
 size_t *susekey_size=&_susekey_size;
 
-void publickey_test()
+BOOST_AUTO_TEST_CASE(publickey_test)
 {
   BOOST_CHECK_THROW( zypp::PublicKey("nonexistant"), Exception );
   
@@ -259,13 +259,5 @@ void publickey_test()
   // test for a empty key
   zypp::PublicKey empty_key;
   BOOST_REQUIRE( ! empty_key.isValid() );
-}
-
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "PublicKeyTest" );
-    test->add( BOOST_TEST_CASE( &publickey_test ), 0 /* expected zero error */ );
-    return test;
 }
 

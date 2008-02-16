@@ -6,28 +6,16 @@
 #include "zypp/PathInfo.h"
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 
-void repostatus_test()
+BOOST_AUTO_TEST_CASE(repostatus_test)
 {
   TmpDir tmpPath;
   RepoStatus status;
 }
-
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-  test_suite* test= BOOST_TEST_SUITE( "RepoStatus" );
-  test->add( BOOST_TEST_CASE( &repostatus_test ), 0 /* expected zero error */ );
-  return test;
-}
-

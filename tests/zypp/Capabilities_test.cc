@@ -17,7 +17,7 @@ using boost::test_tools::close_at_tolerance;
 using namespace std;
 using namespace zypp;
 
-void capabilities_test()
+BOOST_AUTO_TEST_CASE(capabilities_test)
 {
 //     Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
 //     CapFactory factory;
@@ -80,10 +80,3 @@ void capabilities_test()
   BOOST_CHECK_EQUAL( Capability::matches( c0, c1 ), CapMatch::yes );
 }
 
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "CapabilitiesTest" );
-    test->add( BOOST_TEST_CASE( &capabilities_test ), 0 /* expected zero error */ );
-    return test;
-}

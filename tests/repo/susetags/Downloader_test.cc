@@ -4,8 +4,6 @@
 #include <vector>
 #include <list>
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/Url.h"
@@ -20,15 +18,16 @@ using std::endl;
 using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
-
 using namespace zypp::repo;
 
-void susetags_download_test(const string &dir)
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "/repo/susetags/data")
+
+BOOST_AUTO_TEST_CASE(susetags_download)
 {
   KeyRingTestReceiver keyring_callbacks;
   keyring_callbacks.answerTrustKey(true);
 
-  Pathname p = dir + "/stable-x86-subset";
+  Pathname p = DATADIR + "/stable-x86-subset";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
   susetags::Downloader downloader("/");
@@ -79,12 +78,12 @@ void susetags_download_test(const string &dir)
 
 }
 
-void susetags_gz_download_test(const string &dir)
+BOOST_AUTO_TEST_CASE(susetags_gz_download)
 {
   KeyRingTestReceiver keyring_callbacks;
   keyring_callbacks.answerTrustKey(true);
 
-  Pathname p = dir + "/stable-x86-subset-gz";
+  Pathname p = DATADIR + "/stable-x86-subset-gz";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
   susetags::Downloader downloader("/");
@@ -133,34 +132,6 @@ void susetags_gz_download_test(const string &dir)
     i++;
   }
 
-}
-
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/repo/susetags/data").asString();
-    cout << "SUSETags Downloader_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-    
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-  
-  test_suite* test= BOOST_TEST_SUITE("SUSETags Downloader");
-  
-  std::string const params[] = { datadir };
-  test->add(BOOST_PARAM_TEST_CASE(&susetags_download_test,
-                                 (std::string const*)params, params+1));
-  test->add(BOOST_PARAM_TEST_CASE(&susetags_gz_download_test,
-                                 (std::string const*)params, params+1));
-  return test;
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

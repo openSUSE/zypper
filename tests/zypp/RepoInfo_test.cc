@@ -24,33 +24,9 @@ using namespace zypp;
 using namespace zypp::filesystem;
 using namespace zypp::repo;
 
-void repoinfo_test( const string &dir )
+BOOST_AUTO_TEST_CASE(repoinfo_test)
 {
 
 }
 
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/zypp/data/RepoInfo").asString();
-    cout << "repoinfo_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-
-  std::string const params[] = { datadir };
-    //set_log_stream( std::cout );
-  test_suite* test= BOOST_TEST_SUITE( "RepoInfoTest" );
-  test->add(BOOST_PARAM_TEST_CASE( &repoinfo_test,
-                              (std::string const*)params, params+1));
-  return test;
-}
 

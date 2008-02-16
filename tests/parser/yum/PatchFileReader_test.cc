@@ -1,6 +1,4 @@
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/base/Easy.h"
 #include "zypp/Url.h"
@@ -13,6 +11,8 @@ using namespace std;
 using namespace boost::unit_test;
 using namespace zypp;
 using namespace zypp::parser::yum;
+
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "parser/yum/data")
 
 struct Check_fetchmsttfonts
 {
@@ -62,24 +62,7 @@ void patch_read_test( const Pathname & file_r )
   PatchFileReader( file_r, Check_fetchmsttfonts() );
 }
 
-test_suite * init_unit_test_suite( int argc, char * argv[] )
+BOOST_AUTO_TEST_CASE(patch_read)
 {
-  Pathname patchfile;
-  --argc; ++argv;
-  if ( argc )
-  {
-    patchfile = argv[0];
-    if ( PathInfo( patchfile ).isDir() )
-      patchfile /= "patch-fetchmsttfonts.sh-4347.xml";
-  }
-  else
-  {
-    patchfile = TESTS_SRC_DIR;
-    patchfile /= "parser/yum/data/patch-fetchmsttfonts.sh-4347.xml";
-  }
-
-  test_suite * test = BOOST_TEST_SUITE( "PatchFileReader" );
-  test->add( BOOST_PARAM_TEST_CASE( &patch_read_test, &patchfile, &patchfile+1 ) );
-
-  return test;
+  patch_read_test(DATADIR + "patch-fetchmsttfonts.sh-4347.xml");
 }

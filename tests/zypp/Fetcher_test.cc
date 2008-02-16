@@ -15,30 +15,12 @@ using namespace zypp;
 using namespace zypp::media;
 using namespace boost::unit_test;
 
-void fetcher_simple_test()
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site")
+
+BOOST_AUTO_TEST_CASE(fetcher)
 {
-  string dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/Fetcher/remote-site";
-  MediaSetAccess media( "dir:" + dir, "/" );
+  MediaSetAccess media( ("dir:" + DATADIR).asUrl(), "/" );
   Fetcher fetcher;
-}
-
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-//   if (argc < 2)
-//   {
-//     cout << "mediasetaccesstest:"
-//       " path to directory with test data required as parameter" << endl;
-//     return (test_suite *)0;
-//   }
-
-  test_suite* test= BOOST_TEST_SUITE("Fetcher_test");
-
-  // simple test
-  test->add(BOOST_TEST_CASE(&fetcher_simple_test));
-
-  return test;
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

@@ -8,19 +8,15 @@
 #include "zypp/base/Exception.h"
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/ProgressData.h"
 
-using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;
 
-void progressdata_test()
+BOOST_AUTO_TEST_CASE(progressdata_test)
 {
   {
     ProgressData progress(100);
@@ -60,12 +56,5 @@ void progressdata_test()
   }
   
 }
-
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-  test_suite* test= BOOST_TEST_SUITE( "ProgressData_test" );
-    test->add( BOOST_TEST_CASE( &progressdata_test ), 0 /* expected zero error */ );
-    return test;
-}
+   
 

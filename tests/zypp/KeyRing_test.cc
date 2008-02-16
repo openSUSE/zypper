@@ -11,8 +11,6 @@
 #include "zypp/TmpPath.h"
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "KeyRingTestReceiver.h"
 
@@ -24,11 +22,11 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 
-void keyring_test( const string &dir )
+#define DATADIR (Pathname(TESTS_SRC_DIR) +  "/zypp/data/KeyRing")
+
+BOOST_AUTO_TEST_CASE(keyring_test)
 {
-  PublicKey key( Pathname(dir) + "public.asc" );
-  
-  
+  PublicKey key( Pathname(DATADIR) + "public.asc" );
 
  /** 
   * scenario #1
@@ -55,7 +53,7 @@ void keyring_test( const string &dir )
     BOOST_CHECK_MESSAGE( ! keyring.isKeyTrusted( key.id() ), "Imported untrusted key should be untrusted");
     
     keyring_callbacks.answerTrustKey(true);
-    bool to_continue = keyring.verifyFileSignatureWorkflow( Pathname(dir) + "repomd.xml", "Blah Blah", Pathname(dir) + "repomd.xml.asc");
+    bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
   
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
     BOOST_CHECK_MESSAGE( keyring_callbacks.askedTrustKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust");
@@ -88,7 +86,7 @@ void keyring_test( const string &dir )
     keyring_callbacks.answerTrustKey(true);
     
     // now we will recheck with a corrupted file
-    bool to_continue = keyring.verifyFileSignatureWorkflow( Pathname(dir) + "repomd.xml.corrupted", "Blah Blah", Pathname(dir) + "repomd.xml.asc");
+    bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml.corrupted", "Blah Blah", DATADIR + "repomd.xml.asc");
     
     // check wether the user got the right questions
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
@@ -118,7 +116,7 @@ void keyring_test( const string &dir )
     
     keyring_callbacks.answerTrustKey(true);
     // now we will recheck with a unsigned file
-    bool to_continue = keyring.verifyFileSignatureWorkflow( Pathname(dir) + "repomd.xml", "Blah Blah", Pathname() );
+    bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", Pathname() );
     
     // check wether the user got the right questions
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
@@ -145,7 +143,7 @@ void keyring_test( const string &dir )
     BOOST_CHECK_MESSAGE( ! keyring.isKeyKnown( key.id() ), "empty keyring has not known keys");
     
     //keyring_callbacks.answerAcceptUnknownKey(true);
-    bool to_continue = keyring.verifyFileSignatureWorkflow( Pathname(dir) + "repomd.xml", "Blah Blah", Pathname(dir) + "repomd.xml.asc");
+    bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
     BOOST_CHECK_MESSAGE(keyring_callbacks.askedAcceptUnknownKey(), "Should ask to accept unknown key, empty keyring");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedTrustKey(), "Unknown key cant be trusted");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedImportKey(), "Unknown key cant be imported");
@@ -178,7 +176,7 @@ void keyring_test( const string &dir )
     BOOST_CHECK_MESSAGE( keyring.isKeyKnown( key.id() ), "Imported trusted key should be known");
     BOOST_CHECK_MESSAGE( keyring.isKeyTrusted( key.id() ), "Imported trusted key should be trusted");
     
-    bool to_continue = keyring.verifyFileSignatureWorkflow( Pathname(dir) + "repomd.xml", "Blah Blah", Pathname(dir) + "repomd.xml.asc");
+    bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
   
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedTrustKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust");
@@ -196,9 +194,9 @@ void keyring_test( const string &dir )
   
 }
 
-void keyring_signature_test( const string &dir )
+BOOST_AUTO_TEST_CASE(signature_test)
 {
-  PublicKey key( Pathname(dir) + "public.asc" );
+  PublicKey key( DATADIR + "public.asc" );
 
   {
     KeyRingTestReceiver keyring_callbacks;
@@ -207,42 +205,16 @@ void keyring_signature_test( const string &dir )
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
     
-    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId( Pathname(dir) + "repomd.xml.asc" ), "BD61D89BD98821BE" );
+    BOOST_CHECK_EQUAL( keyring.readSignatureKeyId( DATADIR + "repomd.xml.asc" ), "BD61D89BD98821BE" );
     BOOST_CHECK_THROW( keyring.readSignatureKeyId(Pathname()), Exception );
     TmpFile tmp;
     BOOST_CHECK_EQUAL( keyring.readSignatureKeyId(tmp.path()), "" );
 
     keyring.importKey(key);
 
-    BOOST_CHECK(keyring.verifyFileSignature( Pathname(dir) + "repomd.xml", Pathname(dir) + "repomd.xml.asc"));
-    BOOST_CHECK( ! keyring.verifyFileSignature( Pathname(dir) + "repomd.xml.corrupted", Pathname(dir) + "repomd.xml.asc"));
+    BOOST_CHECK(keyring.verifyFileSignature( DATADIR + "repomd.xml", DATADIR + "repomd.xml.asc"));
+    BOOST_CHECK( ! keyring.verifyFileSignature( DATADIR + "repomd.xml.corrupted", DATADIR + "repomd.xml.asc"));
   }
 }
 
-test_suite*
-init_unit_test_suite( int argc, char* argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/zypp/data/KeyRing").asString();
-    cout << "keyring_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-
-  std::string const params[] = { datadir };
-    //set_log_stream( std::cout );
-  test_suite* test= BOOST_TEST_SUITE( "PublicKeyTest" );
-  test->add(BOOST_PARAM_TEST_CASE( &keyring_test,
-                              (std::string const*)params, params+1));
-  test->add(BOOST_PARAM_TEST_CASE( &keyring_signature_test,
-                              (std::string const*)params, params+1));
-  return test;
-}
 

@@ -12,16 +12,12 @@
 #include <cassert>
 
 // Boost.Test
-#include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/unit_test.hpp>
 
-using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using boost::test_tools::close_at_tolerance;
-
 using namespace zypp;
 
-void test_url1(void)
+BOOST_AUTO_TEST_CASE(test_url1)
 {
     std::string str, one, two;
     zypp::Url   url;
@@ -127,7 +123,7 @@ void test_url1(void)
     BOOST_CHECK( zypp::Url(str).isValid());
 }
 
-void test_url2(void)
+BOOST_AUTO_TEST_CASE(test_url2)
 {
   zypp::Url url("http://user:pass@localhost:/path/to;version=1.1?arg=val#frag");
 
@@ -146,7 +142,7 @@ void test_url2(void)
   "http://user:pass@localhost/path/to;version=1.1?arg=val#frag");
 }
 
-void test_url3()
+BOOST_AUTO_TEST_CASE(test_url3)
 {
   zypp::Url   url("http://localhost/path/to#frag");
   std::string key;
@@ -187,7 +183,7 @@ void test_url3()
   }
 }
 
-void test_url4()
+BOOST_AUTO_TEST_CASE( test_url4)
 {
   try
   {
@@ -237,17 +233,6 @@ void test_url4()
   {
     ZYPP_CAUGHT(e);
   }
-}
-
-test_suite*
-init_unit_test_suite( int, char* [] )
-{
-    test_suite* test= BOOST_TEST_SUITE( "Url" );
-    test->add( BOOST_TEST_CASE( &test_url1 ), 0 /* expected zero error */ );
-    test->add( BOOST_TEST_CASE( &test_url2 ), 0 );
-    test->add( BOOST_TEST_CASE( &test_url3 ), 0 );
-    test->add( BOOST_TEST_CASE( &test_url4 ), 0 );
-    return test;
 }
 
 

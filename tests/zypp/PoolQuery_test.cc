@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <iostream>
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"
+
+#define BOOST_TEST_MODULE PoolQuery
 
 using std::cout;
 using std::endl;
@@ -19,7 +19,7 @@ bool result_cb( const ResObject::Ptr &r )
   return true;
 }
 
-void poolquery_simple_test()
+BOOST_AUTO_TEST_CASE(pool_query )
 {
   Pathname dir(TESTS_SRC_DIR);
   dir += "/zypp/data/PoolQuery";
@@ -40,15 +40,15 @@ void poolquery_simple_test()
   cout << "search done." << endl;
 }
 
-bool init_function() {
-  framework::master_test_suite().add( BOOST_TEST_CASE( boost::bind( &poolquery_simple_test) ) );
-  return true;
-} 
-
-int
-main( int argc, char* argv[] )
-{
-return ::boost::unit_test::unit_test_main( &init_function, argc, argv );
-} 
+// bool init_function() {
+//   framework::master_test_suite().add( BOOST_TEST_CASE( boost::bind( &poolquery_simple_test) ) );
+//   return true;
+// } 
+// 
+// int
+// main( int argc, char* argv[] )
+// {
+// return ::boost::unit_test::unit_test_main( &init_function, argc, argv );
+// } 
 
 // vim: set ts=2 sts=2 sw=2 ai et:

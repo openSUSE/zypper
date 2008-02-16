@@ -4,8 +4,6 @@
 #include <vector>
 #include <list>
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/Url.h"
@@ -19,10 +17,11 @@ using std::endl;
 using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
-
 using namespace zypp::repo;
 
-void replace_test(const string &dir)
+#define DATADIR (Pathname(TESTS_SRC_DIR) +  "/repo/yum/data")
+
+BOOST_AUTO_TEST_CASE(replace_text)
 {
   /* check RepoVariablesStringReplacer */
 
@@ -47,32 +46,6 @@ void replace_test(const string &dir)
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/?arch=$arch")).asCompleteString(),
 		    "http://site.org/update/?arch=i686");
-}
-
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/repo/yum/data").asString();
-    cout << "RepoVariables_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-
-  test_suite* test= BOOST_TEST_SUITE("RepoVariables");
-
-  std::string const params[] = { datadir };
-  test->add(BOOST_PARAM_TEST_CASE(&replace_test,
-                                 (std::string const*)params, params+1));
-  return test;
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

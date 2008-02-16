@@ -1,6 +1,10 @@
+#include <boost/test/unit_test.hpp>
+
 #include <zypp/base/PtrTypes.h>
 #include <string>
 #include <iostream>
+
+#define BOOST_TEST_MODULE RWPtr_test
 
 struct Foo
 {
@@ -46,11 +50,9 @@ do { \
   std::cerr << std::endl; \
 } while(0);
 
-int main(int argc, char *argv[])
+BOOST_AUTO_TEST_CASE(basic_test)
 {
-  (void)argv;
-
-  bool skip_reset = argc > 1;
+  bool skip_reset = false;
   int  result = 0;
 
   typedef zypp::RW_pointer<Foo> FooRef;
@@ -77,6 +79,5 @@ int main(int argc, char *argv[])
   std::cerr << "RESULT: "
             << (result == 0 ? "PASSED" : "FAILED")
             << std::endl;
-  return result;
 }
 

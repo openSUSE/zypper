@@ -4,8 +4,6 @@
 #include <vector>
 #include <list>
 #include <boost/test/unit_test.hpp>
-#include <boost/test/parameterized_test.hpp>
-#include <boost/test/unit_test_log.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/InputStream.h"
@@ -21,10 +19,11 @@ using namespace zypp;
 using namespace zypp::parser;
 using namespace boost::unit_test;
 
+#define DATADIR (Pathname(TESTS_SRC_DIR) +  "/parser/inifile/data")
 
-void ini_read_test(const string &dir)
+BOOST_AUTO_TEST_CASE(ini_read)
 {
-  InputStream is((Pathname(dir)+"/1.ini"));
+  InputStream is((DATADIR+"/1.ini"));
   IniDict dict(is);
 
   //MIL << dict["homedmacvicar"]["type"] << endl;
@@ -45,41 +44,14 @@ void ini_read_test(const string &dir)
   BOOST_CHECK( !dict.hasEntry("foo", "bar") );
 }
 
-void ini_read_test2(const string &dir)
+BOOST_AUTO_TEST_CASE(ini_read2)
 {
-  InputStream is((Pathname(dir)+"/2.ini"));
+  InputStream is((DATADIR+"/2.ini"));
   IniDict dict(is);
 
   BOOST_CHECK( find( dict.sectionsBegin(), dict.sectionsEnd(), "base" ) != dict.sectionsEnd() );
   //IniDict::entry_const_iterator i = find( dict.entriesBegin("base"), dict.entriesEnd("base"), "name");
   //BOOST_CHECK( i != dict.entriesEnd("base") );
-}
-
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-  string datadir;
-  if (argc < 2)
-  {
-    datadir = TESTS_SRC_DIR;
-    datadir = (Pathname(datadir) + "/parser/inifile/data").asString();
-    cout << "inidict_test:"
-      " path to directory with test data required as parameter. Using " << datadir  << endl;
-    //return (test_suite *)0;
-  }
-  else
-  {
-    datadir = argv[1];
-  }
-  
-  test_suite* test= BOOST_TEST_SUITE("ini_file");
-  
-  std::string const params[] = { datadir };
-  test->add(BOOST_PARAM_TEST_CASE(&ini_read_test,
-                                 (std::string const*)params, params+1));
-  test->add(BOOST_PARAM_TEST_CASE(&ini_read_test2,
-                                 (std::string const*)params, params+1));
-  return test;
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:
