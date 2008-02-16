@@ -81,7 +81,7 @@ Zypper_Ptr Zypper::instance()
   if (!_instance)
     _instance = new Zypper();
   else
-    DBG << "Got an existing instance." << endl;
+    XXX << "Got an existing instance." << endl;
 
   return _instance;
 }
