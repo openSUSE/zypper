@@ -12,6 +12,7 @@
 #include <iostream>
 #include <list>
 
+#include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/DefaultIntegral.h"
@@ -53,11 +54,15 @@ namespace zypp
   //	CLASS NAME : Fetcher::Impl
   //
   /** Fetcher implementation. */
-  struct Fetcher::Impl
+  class Fetcher::Impl
   {
 
   public:
-
+    Impl() {}
+    ~Impl() {
+      MIL << endl;
+     }
+    
     void enqueue( const OnMediaLocation &resource, const FileChecker &checker  );
     void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker );
     void addCachePath( const Pathname &cache_dir );
@@ -84,7 +89,6 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-
   void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
   {
     FetcherJob_Ptr job;
@@ -108,7 +112,6 @@ namespace zypp
   void Fetcher::Impl::reset()
   {
     _resources.clear();
-    _caches.clear();
   }
 
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
@@ -116,12 +119,13 @@ namespace zypp
     PathInfo info(cache_dir);
     if ( info.isDir() )
     {
+      DBG << "Adding fetcher cache: '" << cache_dir << "'." << endl;
       _caches.push_back(cache_dir);
     }
     else
     {
       // don't add bad cache directory, just log the error
-      ERR << "Not adding cache: '" << cache_dir << "'. Not a direcotry." << endl;
+      ERR << "Not adding cache: '" << cache_dir << "'. Not a directory." << endl;
     }
   }
 
@@ -135,16 +139,16 @@ namespace zypp
     for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
     {
       bool got_from_cache = false;
-      for ( list<Pathname>::const_iterator it_cache = _caches.begin(); it_cache != _caches.end(); ++it_cache )
+      
+      MIL << "start fetcher with " << _caches.size() << " cache directories." << endl;
+      for_ ( it_cache, _caches.begin(), _caches.end() )
       {
         // does the current file exists in the current cache?
         Pathname cached_file = *it_cache + (*it_res)->location.filename();
-	
-	MIL << "Trying cached file: " << cached_file << endl;
-	
+
         if ( PathInfo( cached_file ).isExist() )
         {
-	  MIL << "File exist, testing checksum " << (*it_res)->location.checksum() << endl;
+          MIL << "File '" << cached_file << "' exist, testing checksum " << (*it_res)->location.checksum() << endl;
 
           // check the checksum
           if ( is_checksum( cached_file, (*it_res)->location.checksum() ) && (! (*it_res)->location.checksum().empty() ) )
@@ -156,9 +160,9 @@ namespace zypp
 
             // replicate the complete path in the target directory
             Pathname dest_full_path = dest_dir + (*it_res)->location.filename();
-	    
-	    if( dest_full_path != cached_file )
-	    {
+
+            if( dest_full_path != cached_file )
+            {
               if ( assert_dir( dest_full_path.dirname() ) != 0 )
                 ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
 
@@ -169,7 +173,7 @@ namespace zypp
                 // try next cache
                 continue;
               }
-	    }
+            }
 
             got_from_cache = true;
             break;
@@ -266,7 +270,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Fetcher::Fetcher()
-  : _pimpl( Impl::nullimpl() )
+  : _pimpl( new Impl() )
   {}
 
   ///////////////////////////////////////////////////////////////////

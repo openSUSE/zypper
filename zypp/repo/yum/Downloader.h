@@ -69,7 +69,6 @@ namespace zypp
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
         Pathname _path;
-        Fetcher _fetcher;
         Pathname _dest_dir;
         std::list<OnMediaLocation> _patches_files;
         

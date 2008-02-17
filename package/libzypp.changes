@@ -1,3 +1,10 @@
+Sun Feb 17 21:44:12 CET 2008 - dmacvicar@suse.de
+-------------------------------------------------------------------
+
+- Fetcher::reset() should not reset cache directories.
+  (bnc #348050)
+- version 4.2.6
+
 -------------------------------------------------------------------
 Fri Feb 16 15:47:00 CET 2008 - dmacvicar@suse.de
 
@@ -5,7 +12,7 @@ Fri Feb 16 15:47:00 CET 2008 - dmacvicar@suse.de
   for http and https, but this time set CURLOPT_HTTPGET back to 1
   so it actually works. This makes Media::doesFileExist
   efficient for http and https.
-  (bnc #348050)
+  (related to bnc #348050)
 - version 4.2.5
 
 -------------------------------------------------------------------
