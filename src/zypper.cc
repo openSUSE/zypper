@@ -187,6 +187,7 @@ void print_main_help(Zypper & zypper)
     "\tinfo, if\t\tShow full information for packages\n"
     "\tpatch-info\t\tShow full information for patches\n"
     "\tsource-install, si\tInstall a source package\n"
+    "\tbuild-deps-install, bi\tInstall source package build dependencies\n"
     "\tclean\t\t\tClean local caches\n"
     "");
   
@@ -1937,6 +1938,31 @@ void Zypper::doCommand()
     load_repo_resolvables(*this);
 
     setExitCode(source_install(_arguments));
+    return;
+  }
+
+  // -------------------( build deps install )------------------------------------
+
+  else if (command() == ZypperCommand::BUILD_DEPS_INSTALL)
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (_arguments.size() < 1)
+    {
+      out().error(_("Source package name is a required argument."));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+
+    cond_init_target(*this);
+    // load only repo resolvables, we don't need the installed ones
+    load_repo_resolvables(*this);
+    build_deps_install(_arguments);
+    solve_and_commit(*this);
     return;
   }
 

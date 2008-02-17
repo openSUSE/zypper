@@ -23,6 +23,7 @@ struct ZypperCommand
   static const ZypperCommand UPDATE;
   static const ZypperCommand DIST_UPGRADE;
   static const ZypperCommand SRC_INSTALL;
+  static const ZypperCommand BUILD_DEPS_INSTALL;
   
   static const ZypperCommand SEARCH;
   static const ZypperCommand INFO;
@@ -61,7 +62,8 @@ struct ZypperCommand
     UPDATE_e,
     DIST_UPGRADE_e,
     SRC_INSTALL_e,
-    
+    BUILD_DEPS_INSTALL_e,
+
     SEARCH_e,
     INFO_e,
     LIST_UPDATES_e,

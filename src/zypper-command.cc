@@ -29,6 +29,7 @@ const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
 const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
 const ZypperCommand ZypperCommand::DIST_UPGRADE(ZypperCommand::DIST_UPGRADE_e);
 const ZypperCommand ZypperCommand::SRC_INSTALL(ZypperCommand::SRC_INSTALL_e);
+const ZypperCommand ZypperCommand::BUILD_DEPS_INSTALL(ZypperCommand::BUILD_DEPS_INSTALL_e);
 
 const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);

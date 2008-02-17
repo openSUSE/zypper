@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Feb 17 12:03:15 CET 2008 - dmacvicar@suse.de
+
+- add support for installing build dependencies from
+  source package (w.i.p)
+- 0.10.1
+
+-------------------------------------------------------------------
 Fri Feb 15 16:55:15 CET 2008 - jkupec@suse.cz
 
 - --xmlout added (still work in progress)

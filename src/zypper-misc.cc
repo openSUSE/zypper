@@ -1705,6 +1705,46 @@ SrcPackage::constPtr source_find( const string & arg )
     return srcpkg;
 }
 
+int build_deps_install(std::vector<std::string> & arguments)
+{
+  /*
+   * Workflow:
+   *
+   * 1. find the latest version or version satisfying specification.
+   * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
+   */
+
+  int ret = ZYPPER_EXIT_OK;
+
+  for (vector<string>::const_iterator it = arguments.begin();
+       it != arguments.end(); ++it)
+  {
+    SrcPackage::constPtr srcpkg = source_find(*it);
+
+    if (srcpkg)
+    {
+      cout << format(_("Installing source package %s-%s dependencies"))
+          % srcpkg->name() % srcpkg->edition() << endl;
+      
+      // add all src requires to pool
+      for_( itc, srcpkg->dep(Dep::REQUIRES).begin(), srcpkg->dep(Dep::REQUIRES).end() )
+      {
+        God->resolver()->addRequire(*itc);
+      }
+
+      ret = ZYPPER_EXIT_ERR_ZYPP;
+
+    }
+    else
+    {
+      cerr << format(_("Source package '%s' not found.")) % (*it) << endl;
+    }
+  }
+
+  return ret;
+}
+
+
 int source_install(std::vector<std::string> & arguments)
 {
   /*

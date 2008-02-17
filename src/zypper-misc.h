@@ -129,5 +129,7 @@ struct ProvideProcess
  * Installs source packages specified by name.
  */
 int source_install(std::vector<std::string> & arguments);
+int build_deps_install(std::vector<std::string> & arguments);
 
 #endif
+
