@@ -1667,28 +1667,20 @@ bool confirm_licenses(Zypper & zypper)
   return confirmed;
 }
 
-int source_install(std::vector<std::string> & arguments)
+SrcPackage::constPtr source_find( const string & arg )
 {
-  /*
+   /*
    * Workflow:
    *
-   * 1. load repo resolvables (to gData.repo_resolvables)
-   * 2. interate all SrcPackage resolvables with specified name
-   * 3. find the latest version or version satisfying specification.
-   * 4. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
+   * 1. interate all SrcPackage resolvables with specified name
+   * 2. find the latest version or version satisfying specification.
    */
-
-  int ret = ZYPPER_EXIT_OK;
-
-  for (vector<string>::const_iterator it = arguments.begin();
-       it != arguments.end(); ++it)
-  {
     SrcPackage::constPtr srcpkg;
 
     ResPool pool(God->pool());
-    cout_vv << "looking source for : " << *it << endl;
-    for_( srcit, pool.byIdentBegin<SrcPackage>(*it), 
-              pool.byIdentEnd<SrcPackage>(*it) )
+    cout_vv << "looking source for : " << arg << endl;
+    for_( srcit, pool.byIdentBegin<SrcPackage>(arg), 
+              pool.byIdentEnd<SrcPackage>(arg) )
     {
       cout_vv << *srcit << endl;
       if ( ! srcit->status().isInstalled() )
@@ -1710,6 +1702,24 @@ int source_install(std::vector<std::string> & arguments)
         _srcpkg.swap(srcpkg);
       }
     }
+    return srcpkg;
+}
+
+int source_install(std::vector<std::string> & arguments)
+{
+  /*
+   * Workflow:
+   *
+   * 1. find the latest version or version satisfying specification.
+   * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
+   */
+
+  int ret = ZYPPER_EXIT_OK;
+
+  for (vector<string>::const_iterator it = arguments.begin();
+       it != arguments.end(); ++it)
+  {
+    SrcPackage::constPtr srcpkg = source_find(*it);
 
     if (srcpkg)
     {
