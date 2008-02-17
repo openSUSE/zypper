@@ -1667,36 +1667,6 @@ bool confirm_licenses(Zypper & zypper)
   return confirmed;
 }
 
-
-struct FindSrcPackage
-{
-  FindSrcPackage(SrcPackage::Ptr & srcpkg) : _srcpkg(srcpkg) {}
-
-  bool operator() (ResObject::Ptr res)
-  {
-    SrcPackage::Ptr srcpkg = asKind<SrcPackage>(res);
-    cout_vv << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
-    if (_srcpkg)
-    {
-      if (_srcpkg->edition() < srcpkg->edition())
-        cout_vv << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
-      else
-        cout_vv << "is older than the current candidate";
-    }
-    else
-      cout_vv << "first candindate";
-
-    cout_vv << endl;
-
-    _srcpkg.swap(srcpkg);
-
-    return true;
-  }
-
-  SrcPackage::Ptr & _srcpkg;
-};
-
-
 int source_install(std::vector<std::string> & arguments)
 {
   /*
@@ -1713,13 +1683,33 @@ int source_install(std::vector<std::string> & arguments)
   for (vector<string>::const_iterator it = arguments.begin();
        it != arguments.end(); ++it)
   {
-    SrcPackage::Ptr srcpkg;
-// FIXME
-//     gData.repo_resolvables.forEach(
-//       functor::chain(
-//         resfilter::ByName(*it),
-//         resfilter::ByKind(ResTraits<SrcPackage>::kind)),
-//         FindSrcPackage(srcpkg));
+    SrcPackage::constPtr srcpkg;
+
+    ResPool pool(God->pool());
+    cout_vv << "looking source for : " << *it << endl;
+    for_( srcit, pool.byIdentBegin<SrcPackage>(*it), 
+              pool.byIdentEnd<SrcPackage>(*it) )
+    {
+      cout_vv << *srcit << endl;
+      if ( ! srcit->status().isInstalled() )
+      {
+        SrcPackage::constPtr _srcpkg = asKind<SrcPackage>(srcit->resolvable());
+        cout_vv << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
+        if (_srcpkg)
+        {
+          if (_srcpkg->edition() < srcpkg->edition())
+            cout_vv << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
+          else
+            cout_vv << "is older than the current candidate";
+        }
+        else
+          cout_vv << "first candindate";
+  
+        cout_vv << endl;
+  
+        _srcpkg.swap(srcpkg);
+      }
+    }
 
     if (srcpkg)
     {
