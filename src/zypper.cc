@@ -824,6 +824,22 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::BUILD_DEPS_INSTALL_e:
+  {
+    static struct option src_install_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    _command_help = _(
+      "build-deps-install (bi) <name> ...\n"
+      "\n"
+      "Install source packages build dependencies specified by their names.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::ADD_REPO_e:
   {
     static struct option service_add_options[] = {
