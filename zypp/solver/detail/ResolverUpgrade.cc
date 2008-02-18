@@ -447,7 +447,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	  } else if ( provider.status().isToBeUninstalled() ) {
 	      MIL << "  IGNORE relation match (package is tagged to delete): " << provider << endl;
 	  } else if ( provider.status().isInstalled() ) {
-	      MIL << "  IGNORE relation match (package is tagged to delete): " << provider << endl;
+	      MIL << "  IGNORE relation match (package is installed): " << provider << endl;
 	  }	  
 	  else {
 	      FindMap::iterator it = providersMap.find( provider->name() );
