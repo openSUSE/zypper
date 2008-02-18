@@ -1014,12 +1014,20 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       case CURLE_URL_MALFORMAT_USER:
       case CURLE_BAD_PASSWORD_ENTERED:
       case CURLE_FTP_USER_PASSWORD_INCORRECT:
+        err = "Login failed";
+        break;
       case CURLE_COULDNT_RESOLVE_PROXY:
       case CURLE_COULDNT_RESOLVE_HOST:
       case CURLE_COULDNT_CONNECT:
       case CURLE_FTP_CANT_GET_HOST:
+        err = "Connection failed";
+        break;
       case CURLE_WRITE_ERROR:
+        err = "Write error";
+        break;
       case CURLE_ABORTED_BY_CALLBACK:
+        err  = "Timeout reached";
+        break;
       case CURLE_SSL_PEER_CERTIFICATE:
       default:
         err = curl_easy_strerror(ok);
