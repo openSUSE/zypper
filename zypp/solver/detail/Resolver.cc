@@ -72,10 +72,8 @@ Resolver::Resolver (const ResPool & pool)
     , _verifying(false)
 
 {
-    Testcase testcase("/var/log/YaST2/autoTestcase");    
     sat::Pool satPool( sat::Pool::instance() );
     _satResolver = new SATResolver(_pool, satPool.get());
-    testcase.createTestcase (*this, true, false); // create pool, do not solver
 }
 
 
@@ -250,10 +248,17 @@ Resolver::resolvePool()
 {
 
     // Solving with the satsolver
+        static bool poolDumped = false;
 	MIL << "-------------- Calling SAT Solver -------------------" << endl;
-	Testcase testcase("/var/log/YaST2/autoTestcase");
-	testcase.createTestcase (*this, false, false); // write control file only
-
+	if ( getenv("ZYPP_FULLLOG") ) {
+	    Testcase testcase("/var/log/YaST2/autoTestcase");
+	    if (!poolDumped) {
+		testcase.createTestcase (*this, true, false); // dump pool
+		poolDumped = true;
+	    } else {
+		testcase.createTestcase (*this, false, false); // write control file only
+	    }
+	}
 #if 0
 	MIL << "------SAT-Pool------" << endl;
 	for (sat::Pool::SolvableIterator i = satPool.solvablesBegin();

@@ -34,7 +34,6 @@
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
-#include "zypp/solver/detail/Testcase.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -360,6 +359,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 			 const CapabilitySet & conflict_caps)
 {
     SATCollectTransact info (*this);
+    
     MIL << "SATResolver::resolvePool()" << endl;
 
     if (_solv) {
@@ -482,10 +482,10 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       }
     }
 
-    // clean up
+    // cleanup
     solver_free(_solv);
     _solv = NULL;
-    queue_free( &(_jobQueue) );
+    queue_free( &(_jobQueue) );    
 
     MIL << "SATResolver::resolvePool() done" << endl;
     return true;
