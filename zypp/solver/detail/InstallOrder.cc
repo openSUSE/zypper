@@ -36,6 +36,8 @@
 #include "zypp/ResStatus.h"
 #include "zypp/CapAndItem.h"
 #include "zypp/NameKindProxy.h"
+#include "zypp/sat/SATResolver.h"
+#include "zypp/sat/Pool.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -175,37 +177,6 @@ InstallOrder::findProviderInSet( const Capability requirement, const PoolItemSet
     return PoolItem();
 }
 
-struct CollectProviders
-{
-    const PoolItem requestor;
-    PoolItemList result;
-    const PoolItemSet & limitto;		// limit search to members of this set
-
-    CollectProviders (const PoolItem pi, const PoolItemSet & limit)
-	: requestor (pi)
-	, limitto (limit)
-    { }
-
-
-    bool operator()( const CapAndItem & c_and_i )
-    {
-	// item provides cap which matches a requirement from info->requestor
-	//   this function gets _all_ providers and filter out those which are
-	//   either installed or in our toinstall input list
-	//
-XXX << "info(" << c_and_i.item <<")"<< endl;
-	if ((c_and_i.item.resolvable() != requestor.resolvable())	// resolvable could provide its own requirement
-	    && (limitto.find( c_and_i.item ) != limitto.end()))		// limit to members of 'limitto' set
-	{
-	    XXX << "tovisit " << ITEMNAME(c_and_i.item) << endl;
-	    result.push_back (c_and_i.item);
-	}
-
-	return true;
-    }
-
-};
-
 //-----------------------------------------------------------------------------
 
 
@@ -252,31 +223,36 @@ InstallOrder::rdfsvisit (const PoolItem item)
     for (CapList::const_iterator iter = requires.begin(); iter != requires.end(); ++iter)
     {
 	const Capability requirement = *iter;
+        PoolItemList providers;
+        
 	XXX << "check requirement " << requirement << " of " << ITEMNAME(item) << endl;
+        SATResolver satResolver(_pool, sat::Pool::instance().get());
 	PoolItemList tovisit;
+        PoolItemList possibleProviders = satResolver.whoProvides (requirement);
 
-	// _world->foreachProvidingResItem (requirement, collect_providers, &info);
-	Dep dep (Dep::PROVIDES);
+	// first, look in _installed        
+        for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
+            PoolItem provider = *iter;
+            if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
+                && (_installed.find( provider ) != _installed.end()))	// and is not installed
+            {
+                XXX << "tovisit " << ITEMNAME(provider) << endl;
+                providers.push_back (provider);
+            }
+        }
 
-	// first, look in _installed
-	CollectProviders info ( item, _installed );
+	// if not found in _installed, look in _toinstall
 
-	invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
-		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
-		      resfilter::ByCapMatch( requirement ),
-		      functor::functorRef<bool,CapAndItem>(info) );
-
-	// if not found in _iustalled, look in _toinstall
-
-	if (info.result.empty()) {
-	    CollectProviders info1 ( item, _toinstall );
-
-	    invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
-			  _pool.byCapabilityIndexEnd( requirement.index(), dep ),
-			  resfilter::ByCapMatch( requirement ),
-			  functor::functorRef<bool,CapAndItem>(info1) );
-
-	    tovisit = info1.result;
+	if (providers.empty()) {
+            for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
+                PoolItem provider = *iter;
+                if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
+                    && (_toinstall.find( provider ) != _toinstall.end()))	// and is not to be installed
+                {
+                    XXX << "tovisit " << ITEMNAME(provider) << endl;
+                    tovisit.push_back (provider);
+                }
+            }
 	}
 
 	for (PoolItemList::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
