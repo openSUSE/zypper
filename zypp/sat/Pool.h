@@ -19,7 +19,6 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Repo.h"
 #include "zypp/sat/WhatProvides.h"
-#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

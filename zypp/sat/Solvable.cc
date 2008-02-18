@@ -14,6 +14,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Function.h"
+#include "zypp/base/Functional.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
@@ -354,6 +356,122 @@ namespace zypp
        ::Offset offs = _solvable->requires;
        return offs ? Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker )
                    : Capabilities();
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    { /////////////////////////////////////////////////////////////////
+      int invokeOnEachSupportedLocale( Capability cap_r, function<bool (const Locale &)> fnc_r )
+      {
+        CapDetail detail( cap_r );
+        if ( detail.kind() == CapDetail::EXPRESSION )
+        {
+          switch ( detail.capRel() )
+          {
+            case CapDetail::CAP_AND:
+            case CapDetail::CAP_OR:
+                // expand
+            {
+              int res = invokeOnEachSupportedLocale( detail.lhs(), fnc_r );
+              if ( res < 0 )
+                return res; // negative on abort.
+              int res2 = invokeOnEachSupportedLocale( detail.rhs(), fnc_r );
+              if ( res2 < 0 )
+                return -res + res2; // negative on abort.
+              return res + res2;
+            }
+            break;
+
+            case CapDetail::CAP_NAMESPACE:
+              if ( detail.lhs().id() == NAMESPACE_LANGUAGE )
+              {
+                return ( !fnc_r || fnc_r( Locale( IdString(detail.rhs().id()) ) ) ) ? 1 : -1; // negative on abort.
+              }
+              break;
+
+            case CapDetail::REL_NONE:
+            case CapDetail::CAP_WITH:
+              break; // unwanted
+          }
+        }
+        return 0;
+      }
+
+      // return #invocations of fnc_r, negative if fnc_r returned false to indicate abort.
+      inline int invokeOnEachSupportedLocale( Capabilities cap_r, function<bool (const Locale &)> fnc_r )
+      {
+        int cnt = 0;
+        for_( cit, cap_r.begin(), cap_r.end() )
+        {
+          int res = invokeOnEachSupportedLocale( *cit, fnc_r );
+          if ( res < 0 )
+            return -cnt + res; // negative on abort.
+          cnt += res;
+        }
+        return cnt;
+      }
+
+      // Functor returning false if a Locale is in the set.
+      struct NoMatchIn
+      {
+        NoMatchIn( const LocaleSet & locales_r ) : _locales( locales_r ) {}
+
+        bool operator()( const Locale & locale_r ) const
+        {
+          return _locales.find( locale_r ) == _locales.end();
+        }
+
+        const LocaleSet & _locales;
+      };
+
+      template<class _OutputIterator>
+      struct _Collector
+      {
+        _Collector( _OutputIterator iter_r ) : _iter( iter_r ) {}
+
+        template<class _Tp>
+        bool operator()( const _Tp & value_r ) const
+        {
+          *_iter++ = value_r;
+          return true;
+        }
+
+        mutable _OutputIterator _iter;
+      };
+
+      template<class _OutputIterator>
+      inline _Collector<_OutputIterator> Collector( _OutputIterator iter_r )
+      { return _Collector<_OutputIterator>( iter_r ); }
+
+    } /////////////////////////////////////////////////////////////////
+
+    bool Solvable::supportsLocales() const
+    {
+      // false_c stops on 1st Locale.
+      return invokeOnEachSupportedLocale( supplements(), functor::false_c() ) < 0;
+    }
+
+    bool Solvable::supportsLocale( const Locale & locale_r ) const
+    {
+      // not_equal_to stops on == Locale.
+      return invokeOnEachSupportedLocale( supplements(), bind( std::not_equal_to<Locale>(), locale_r, _1 ) ) < 0;
+    }
+
+    bool Solvable::supportsLocale( const LocaleSet & locales_r ) const
+    {
+      if ( locales_r.empty() )
+        return false;
+      // NoMatchIn stops if Locale is included.
+      return invokeOnEachSupportedLocale( supplements(), NoMatchIn(locales_r) ) < 0;
+    }
+
+    bool Solvable::supportsRequestedLocales() const
+    { return supportsLocale( myPool().getRequestedLocales() ); }
+
+    void Solvable::getSupportedLocales( LocaleSet & locales_r ) const
+    {
+      invokeOnEachSupportedLocale( supplements(),
+                                   Collector( std::inserter( locales_r, locales_r.begin() ) ) );
     }
 
     /******************************************************************

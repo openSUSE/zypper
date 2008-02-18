@@ -26,6 +26,7 @@
 #include "zypp/Dep.h"
 #include "zypp/Capabilities.h"
 #include "zypp/Capability.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -97,12 +98,12 @@ namespace zypp
 	 * with a subdirectory.
 	 */
 	std::string lookupLocation(unsigned &medianr) const;
-        
+
         /**
          *
          */
         bool lookupBoolAttribute( const SolvAttr &attr ) const;
-        
+
       public:
         /** The identifier.
          * This is the solvables \ref name, \b except for packages and
@@ -139,6 +140,26 @@ namespace zypp
         Capabilities enhances()    const;
         Capabilities supplements() const;
         Capabilities prerequires() const;
+        //@}
+
+      public:
+        /** \name Locale support. */
+        //@{
+        /** Whether this \c Solvable claims to support locales. */
+        bool supportsLocales() const;
+        /** Whether this \c Solvable supports a specific \ref Locale. */
+        bool supportsLocale( const Locale & locale_r ) const;
+        /** Whether this \c Solvable supports at least one of the specified locales. */
+        bool supportsLocale( const LocaleSet & locales_r ) const;
+        /** Whether this \c Solvable supports at least one requested locale.
+         * \see \ref Pool::setRequestedLocales
+        */
+        bool supportsRequestedLocales() const;
+        /** Return the supported locales via locales_r. */
+        void getSupportedLocales( LocaleSet & locales_r ) const;
+        /** \overload */
+        LocaleSet getSupportedLocales() const
+        { LocaleSet ret; getSupportedLocales( ret ); return ret; }
         //@}
 
       public:
