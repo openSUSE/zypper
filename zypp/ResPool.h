@@ -215,6 +215,9 @@ namespace zypp
     public:
       /** \name Iterate through all ResObjects which have at least
        *  one Capability with index \a index_r in dependency \a depType_r.
+       *
+       * \deprecated If you're looking for providers of a certain capability
+       * use \ref sat::WhatProvides. That's currently the only index provided.
        */
       //@{
       byCapabilityIndex_iterator ZYPP_DEPRECATED byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;

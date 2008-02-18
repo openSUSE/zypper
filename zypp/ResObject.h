@@ -47,6 +47,25 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /** \name Locale support.
+     * \see \ref sat::Solvable
+    */
+    //@{
+    /** Whether this \c Solvable claims to support locales. */
+    using sat::Solvable::supportsLocales;
+    /** Whether this \c Solvable supports a specific \ref Locale. */
+    using sat::Solvable::supportsLocale;
+    /** Whether this \c Solvable supports at least one of the specified locales. */
+    using sat::Solvable::supportsLocale;
+    /** Whether this \c Solvable supports at least one requested locale.
+     * \see \ref Pool::setRequestedLocales
+     */
+    using sat::Solvable::supportsRequestedLocales;
+    /** Return the supported locales via locales_r. */
+    using sat::Solvable::getSupportedLocales;
+    //@}
+
+  public:
 
     /**
      * \short Short text describing the resolvable.
