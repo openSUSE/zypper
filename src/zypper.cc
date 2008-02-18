@@ -668,7 +668,7 @@ void Zypper::safeDoCommand()
     s << ex.asUserString();
     out().error(s.str());
 
-    report_a_bug(cerr);
+    report_a_bug(out());
   }
 }
 
@@ -1362,7 +1362,7 @@ void Zypper::processCommandOptions()
 
     ERR << "Unknown or unexpected command" << endl;
     out().error(_("Unexpected program flow."));
-    report_a_bug(cerr);
+    report_a_bug(out());
   }
   }
 
@@ -1622,7 +1622,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::RENAME_REPO)
   {
-    if (runningHelp()) { out().info(_command_help), Out::QUIET; return; }
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
     if (geteuid() != 0)
@@ -1727,7 +1727,7 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::CLEAN)
   {
-    if (runningHelp()) { out().info(_command_help), Out::QUIET; return; }
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
     if (geteuid() != 0)
@@ -2418,7 +2418,7 @@ void Zypper::doCommand()
     else
     {
       out().error(_("Unexpected program flow."));
-      report_a_bug(cerr);
+      report_a_bug(out());
     }
 
     return;

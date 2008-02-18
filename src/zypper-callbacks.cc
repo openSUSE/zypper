@@ -4,6 +4,7 @@
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Deprecated.h"
 #include "zypp/Resolvable.h"
 
 #include "AliveCursor.h"
@@ -13,7 +14,7 @@
 using namespace std;
 using namespace boost;
 
-void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
+ZYPP_DEPRECATED void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
   static AliveCursor cursor;
 
   if (Zypper::instance()->globalOpts().machine_readable)
@@ -34,7 +35,7 @@ void display_progress ( const std::string &id, ostream & out, const string& s, i
 
 // ----------------------------------------------------------------------------
 
-void display_tick ( const std::string &id, ostream & out, const string& s) {
+ZYPP_DEPRECATED void display_tick ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
   if (Zypper::instance()->globalOpts().machine_readable)
@@ -50,7 +51,7 @@ void display_tick ( const std::string &id, ostream & out, const string& s) {
 
 // ----------------------------------------------------------------------------
 
-void display_done ( const std::string &id, ostream & out, const string& s) {
+ZYPP_DEPRECATED void display_done ( const std::string &id, ostream & out, const string& s) {
   static AliveCursor cursor;
 
   if (Zypper::instance()->globalOpts().machine_readable)
@@ -66,7 +67,7 @@ void display_done ( const std::string &id, ostream & out, const string& s) {
 
 // ----------------------------------------------------------------------------
 
-void display_done (const std::string &id, ostream & out) {
+ZYPP_DEPRECATED void display_done (const std::string &id, ostream & out) {
 
   if (Zypper::instance()->globalOpts().machine_readable)
   {
@@ -182,7 +183,7 @@ string to_string (zypp::Resolvable::constPtr resolvable) {
 
 // ----------------------------------------------------------------------------
 
-void report_zypp_exception(const zypp::Exception & e)
+ZYPP_DEPRECATED void report_zypp_exception(const zypp::Exception & e)
 {
   if (e.historySize())
   {
@@ -204,7 +205,7 @@ void report_zypp_exception(const zypp::Exception & e)
 
 // ----------------------------------------------------------------------------
 
-void report_problem(const zypp::Exception & e,
+ZYPP_DEPRECATED void report_problem(const zypp::Exception & e,
                     const string & problem_desc,
                     const string & hint)
 {
@@ -224,9 +225,9 @@ void report_problem(const zypp::Exception & e,
 void report_too_many_arguments(const string & specific_help)
 {
   //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
-  cerr << _("Too many arguments") << '.' << endl;
-  cout_n << _("Usage") << ':' << endl;
-  cout_n << specific_help;
+  ostringstream s;
+  s << _("Usage") << ':' << endl << specific_help;
+  Zypper::instance()->out().error(_("Too many arguments."), s.str());
 }
 
 // Local Variables:

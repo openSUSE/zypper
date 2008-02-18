@@ -8,12 +8,14 @@
 #include "zypp/Resolvable.h"
 #include "zypp/Pathname.h"
 
+#include "output/Out.h"
+
 std::string readline_getline();
 
 /**
  * Write a suggestion to report a bug to the specified stream.
  */
-std::ostream & report_a_bug (std::ostream& stm);
+void report_a_bug (Out & out);
 
 bool is_changeable_media(const zypp::Url & url);
 

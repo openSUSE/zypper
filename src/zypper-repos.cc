@@ -15,6 +15,7 @@
 #include "zypp/media/MediaException.h"
 
 #include "zypper.h"
+#include "output/Out.h"
 #include "zypper-main.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
@@ -46,7 +47,7 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 // ----------------------------------------------------------------------------
 
-static bool refresh_raw_metadata(const Zypper & zypper,
+static bool refresh_raw_metadata(Zypper & zypper,
                                  const RepoInfo & repo,
                                  bool force_download)
 {
@@ -63,9 +64,9 @@ static bool refresh_raw_metadata(const Zypper & zypper,
     {
       // check whether libzypp indicates a refresh is needed, and if so,
       // print a message
-      cout_v << format(
-          _("Checking whether to refresh metadata for %s")) % repo.name()
-          << endl;
+      zypper.out().info(boost::str(format(
+          _("Checking whether to refresh metadata for %s")) % repo.name()),
+          Out::HIGH);
       for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
           it != repo.baseUrlsEnd(); ++it)
       {
@@ -73,15 +74,17 @@ static bool refresh_raw_metadata(const Zypper & zypper,
         {
           if (manager.checkIfToRefreshMetadata(repo, *it))
           {
-            cout_n << format(_("Refreshing '%s'")) % repo.name();
+            ostringstream s;
+            s << format(_("Refreshing '%s'")) % repo.name();
             if (zypper.command() == ZypperCommand::REFRESH &&
                 zypper.cOpts().count("force"))
-              cout_n << " " << _("(forced)");
-            cout_n << endl;
+              s << " " << _("(forced)");
+            zypper.out().info(s.str(), Out::HIGH);
           }
           else if (zypper.command() == ZypperCommand::REFRESH)
           {
-            cout_n << format(_("Repository '%s' is up to date.")) % repo.name() << endl;
+            zypper.out().info(boost::str(
+              format(_("Repository '%s' is up to date.")) % repo.name()));
           }
           break; // don't check all the urls, just the first succussfull.
         }
@@ -93,14 +96,14 @@ static bool refresh_raw_metadata(const Zypper & zypper,
       }
     }
     else
-      cout << _("Forcing raw metadata refresh") << endl;
+      zypper.out().info(_("Forcing raw metadata refresh"));
 
     manager.refreshMetadata(repo, force_download ?
       RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
   }
   catch (const MediaException & e)
   {
-    report_problem(e,
+    zypper.out().error(e,
         boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
         _("Please see the above error message to for a hint."));
 
@@ -109,27 +112,27 @@ static bool refresh_raw_metadata(const Zypper & zypper,
   catch (const RepoNoUrlException & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << format(_("No URLs defined for '%s'.")) % repo.name() << endl;
+    zypper.out().error(boost::str(
+      format(_("No URLs defined for '%s'.")) % repo.name()));
     if (!repo.filepath().empty())
-      cerr << format(
+      zypper.out().info(boost::str(format(
           // TranslatorExplanation the first %s is a .repo file path
           _("Please add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
-          % repo.filepath() % repo.name() << endl;
+          % repo.filepath() % repo.name()));
 
     return true; // error
   }
   catch (const RepoNoAliasException & e)
   {
     ZYPP_CAUGHT(e);
-    //! \todo correct the message after 10.3 release
-    cerr << format(_("No alias defined this repository.")) << endl;
-    report_a_bug(cerr);
+    zypper.out().error(_("No alias defined for this repository."));
+    report_a_bug(zypper.out());
     return true; // error
   }
   catch (const RepoException & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         boost::str(format(_("Repository '%s' is invalid.")) % repo.name()),
         _("Please check if the URLs defined for this repository are pointing to a valid repository."));
 
@@ -138,7 +141,7 @@ static bool refresh_raw_metadata(const Zypper & zypper,
   catch (const Exception &e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         boost::str(format(_("Error downloading metadata for '%s':")) % repo.name()));
     // log untranslated message
     ERR << format("Error reading repository '%s':") % repo.name() << endl;
@@ -166,7 +169,7 @@ bool build_cache_callback(const ProgressData & pd)
 static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 {
   if (force_build)
-    cout << _("Forcing building of repository cache") << endl;
+    zypper.out().info(_("Forcing building of repository cache"));
 
   try
   {
@@ -178,7 +181,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   {
     ZYPP_CAUGHT(e);
 
-    report_problem(e,
+    zypper.out().error(e,
         boost::str(format(_("Error parsing metadata for '%s':")) % repo.name()),
         // TranslatorExplanation Don't translate the URL unless it is translated, too
         _("This may be caused by invalid metadata in the repository,"
@@ -194,7 +197,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   catch (const repo::RepoMetadataException & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         boost::str(format(_("Repository metadata for '%s' not found in local cache.")) % repo.name()));
     // this should not happend and is probably a bug, rethrowing
     ZYPP_RETHROW(e);
@@ -202,7 +205,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   catch (const Exception &e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         _("Error building the cache database:"));
     // log untranslated message
     ERR << "Error writing to cache db" << endl;
@@ -669,11 +672,12 @@ void refresh_repos(Zypper & zypper)
     get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
   report_unknown_repos(not_found);
 
-  cout_v << _("Specified repositories: ");
+  ostringstream s;
+  s << _("Specified repositories: ");
   for (list<RepoInfo>::const_iterator it = specified.begin();
       it != specified.end(); ++it)
-    cout_v << it->alias() << " ";
-  cout_v << endl;
+    s << it->alias() << " ";
+  zypper.out().info(s.str(), Out::HIGH);
 
   unsigned error_count = 0;
   unsigned enabled_repo_count = repos.size();
@@ -712,9 +716,9 @@ void refresh_repos(Zypper & zypper)
           format(_("Skipping disabled repository '%s'")) % repo.name());
   
         if (specified.empty())
-          cout_v << msg << endl;
+          zypper.out().info(msg, Out::HIGH);
         else
-          cerr << msg << endl;
+          zypper.out().error(msg);
   
         enabled_repo_count--;
         continue;
@@ -757,8 +761,9 @@ void refresh_repos(Zypper & zypper)
   
       if (error)
       {
-        cerr << format(_("Skipping repository '%s' because of the above error."))
-            % repo.name() << endl;
+        zypper.out().error(boost::str(format(
+          _("Skipping repository '%s' because of the above error."))
+            % repo.name()));
         ERR << format("Skipping repository '%s' because of the above error.")
             % repo.name() << endl;
         error_count++;
@@ -771,31 +776,29 @@ void refresh_repos(Zypper & zypper)
   // print the result message
   if (enabled_repo_count == 0)
   {
+    string hint =
+      _("Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories.");
     if (!specified.empty() || !not_found.empty())
-      cerr << _("Specified repositories are not enabled or defined.");
+      zypper.out().error(_("Specified repositories are not enabled or defined."), hint);
     else
-      cerr << _("There are no enabled repositories defined.");
-
-    cout_n << endl
-      << _("Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories.")
-      << endl;
+      zypper.out().error(_("There are no enabled repositories defined."), hint);
   }
   else if (error_count == enabled_repo_count)
   {
-    cerr << _("Could not refresh the repositories because of errors.") << endl;
+    zypper.out().error(_("Could not refresh the repositories because of errors."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
   else if (error_count)
   {
-    cerr << _("Some of the repositories have not been refreshed because of an error.") << endl;
+    zypper.out().error(_("Some of the repositories have not been refreshed because of an error."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
   else if (!specified.empty())
-    cout << _("Specified repositories have been refreshed.") << endl;
+    zypper.out().info(_("Specified repositories have been refreshed."));
   else
-    cout << _("All repositories have been refreshed.") << endl;
+    zypper.out().info(_("All repositories have been refreshed."));
 }
 
 // ----------------------------------------------------------------------------
