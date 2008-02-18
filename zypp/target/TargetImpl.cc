@@ -292,13 +292,14 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
-    
+
     void TargetImpl::buildCache()
     {
-      Pathname base = _root + ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName();
+      Pathname base = Pathname::assertprefix( _root,
+                                              ZConfig::instance().repoCachePath() / sat::Pool::instance().systemRepoName() );
       Pathname rpmsolv = base.extend(".solv");
       Pathname rpmsolvcookie = base.extend(".cookie");
-      
+
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
@@ -322,9 +323,9 @@ namespace zypp
 
       if ( build_rpm_solv )
       {
-        filesystem::TmpFile tmpsolv( _root + ZConfig::instance().repoCachePath() /*dir*/, 
+        filesystem::TmpFile tmpsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() ) /*dir*/,
                                      sat::Pool::instance().systemRepoName() /* prefix */);
-        
+
          MIL << "Executing solv converter" << endl;
 
 #warning FIXME add root to rpmdb2solv
@@ -339,7 +340,7 @@ namespace zypp
         {
           cmd = str::form( "rpmdb2solv > \"%s\"", tmpsolv.path().c_str() );
         }
-        
+
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
@@ -351,12 +352,12 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( rpmsolv, filesystem::unlink );
         ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
-         
+
         ret = filesystem::rename( tmpsolv, rpmsolv );
-        
+
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to move cache to final destination"));
-        
+
         // if this fails, don't bother throwing exceptions
         filesystem::chmod( rpmsolv, 0644 );
 
@@ -367,14 +368,14 @@ namespace zypp
         guardcookie.resetDispose();
       }
     }
-    
+
     void TargetImpl::load()
     {
-      Pathname base = _root + ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName();
+      Pathname base = Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName() );
       Pathname rpmsolv = base.extend(".solv");
-      
+
       buildCache();
-     
+
       //now add the repos to the pool
       MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
       sat::Repo system = sat::Pool::instance().reposInsert(sat::Pool::instance().systemRepoName());
@@ -706,7 +707,7 @@ namespace zypp
         ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
 
       buildCache();
-      
+
       return remaining;
     }
 

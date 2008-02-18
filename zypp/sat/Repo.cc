@@ -138,8 +138,6 @@ namespace zypp
       {
         ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
       }
-
-
     }
 
     detail::SolvableIdType Repo::addSolvables( unsigned count_r )

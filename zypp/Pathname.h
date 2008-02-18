@@ -119,6 +119,9 @@ namespace zypp
       static Pathname relativename( const Pathname & name_tv )
       { return name_tv.absolute() ? cat( ".", name_tv ) : name_tv; }
 
+      /** Return \c path_r prefixed with \c root_r, unless it is already prefixed. */
+      static Pathname assertprefix( const Pathname & root_r, const Pathname & path_r );
+
       /** Concatenation of pathnames.
        * \code
        *   "foo"  / "baa"  ==> "foo/baa"

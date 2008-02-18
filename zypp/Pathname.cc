@@ -11,6 +11,7 @@
 */
 #include <iostream>
 
+#include "zypp/base/String.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 
@@ -255,6 +256,20 @@ namespace zypp
       if ( pos == string::npos )
         return string();
       return base.substr( pos );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Pathname::assertprefix
+    //	METHOD TYPE : Pathname
+    //
+    Pathname Pathname::assertprefix( const Pathname & root_r, const Pathname & path_r )
+    {
+      if ( root_r.empty()
+           || path_r == root_r
+           || str::hasPrefix( path_r.asString(), root_r.asString() ) )
+        return path_r;
+      return root_r / path_r;
     }
 
     ///////////////////////////////////////////////////////////////////
