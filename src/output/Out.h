@@ -98,10 +98,16 @@ public:
                           const std::string & label) = 0;
 
   // progress with download rate
-  virtual void dwnldProgressStart() = 0;
-  virtual void dwnldProgress() = 0;
-  virtual void dwnldProgressEnd() = 0;
+  virtual void dwnldProgressStart(const std::string & id,
+                                  const std::string & label) = 0;
+  virtual void dwnldProgress(const std::string & id,
+                             const std::string & label,
+                             int value = -1,
+                             int rate = -1) = 0;
+  virtual void dwnldProgressEnd(const std::string & id,
+                                const std::string & label) = 0;
 
+  //virtual void Prompt() = 0;
 public:
   /** Get current verbosity. */
   Verbosity verbosity() { return _verbosity; }
@@ -125,6 +131,11 @@ protected:
    *         <tt>false</tt> if it should be shown.
    */
   virtual bool progressFilter();
+
+  /**
+   * Return a zypp::Exception as a string suitable for output.
+   */
+  virtual std::string zyppExceptionReport(const zypp::Exception & e);
 
 private:
   Verbosity _verbosity;

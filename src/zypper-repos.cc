@@ -105,7 +105,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
   {
     zypper.out().error(e,
         boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
-        _("Please see the above error message to for a hint."));
+        _("Please see the above error message for a hint."));
 
     return true; // error
   }
@@ -305,16 +305,15 @@ void get_repos(Zypper & zypper,
 /**
  * Say "Repository %s not found" for all strings in \a not_found list.
  */
-static void report_unknown_repos(list<string> not_found)
+static void report_unknown_repos(Out & out, list<string> not_found)
 {
   for (list<string>::iterator it = not_found.begin();
       it != not_found.end(); ++it)
-    cerr << format(_("Repository '%s' not found by its alias, number, or URI."))
-      % *it << endl;
+    out.error(boost::str(format(
+      _("Repository '%s' not found by its alias, number, or URI.")) % *it));
 
   if (!not_found.empty())
-    cout_n << _("Use 'zypper repos' to get the list of defined repositories.")
-      << endl;
+    out.info(_("Use 'zypper repos' to get the list of defined repositories."));
 }
 
 // ---------------------------------------------------------------------------
@@ -341,7 +340,7 @@ static void do_init_repos(Zypper & zypper)
     get_repos(zypper, it->second.begin(), it->second.end(), gData.repos, not_found);
   if (!not_found.empty())
   {
-    report_unknown_repos(not_found);
+    report_unknown_repos(zypper.out(), not_found);
     zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     return;
   }
@@ -670,7 +669,7 @@ void refresh_repos(Zypper & zypper)
   parsed_opts::const_iterator tmp1;
   if ((tmp1 = copts.find("repo")) != copts.end())
     get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
-  report_unknown_repos(not_found);
+  report_unknown_repos(zypper.out(), not_found);
 
   ostringstream s;
   s << _("Specified repositories: ");
@@ -831,7 +830,7 @@ void clean_repos(Zypper & zypper)
   parsed_opts::const_iterator tmp1;
   if ((tmp1 = copts.find("repo")) != copts.end())
     get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
-  report_unknown_repos(not_found);
+  report_unknown_repos(zypper.out(), not_found);
 
   cout_v << _("Specified repositories: ");
   for (list<RepoInfo>::const_iterator it = specified.begin();

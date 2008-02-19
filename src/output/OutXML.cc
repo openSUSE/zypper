@@ -57,29 +57,6 @@ void OutXML::error(const string & problem_desc, const string & hint)
   //! \todo hint
 }
 
-string OutXML::reportZyppException(const zypp::Exception & e)
-{
-  ostringstream s;
-  if (e.historySize())
-  {
-    if (this->verbosity() > Out::NORMAL)
-    {
-      // print the whole history
-      s << e.historyAsString();
-      // this exception
-      s << " - " << e.asUserString();
-    }
-    else
-      // print the root cause only
-      s << *(--e.historyEnd());
-  }
-  else
-    s << e.asUserString();
-
-  return s.str();
-}
-
-
 void OutXML::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
@@ -89,7 +66,7 @@ void OutXML::error(const zypp::Exception & e,
   // problem
   s << problem_desc << endl;
   // cause
-  s << reportZyppException(e) << endl;
+  s << zyppExceptionReport(e) << endl;
   // hint
   if (!hint.empty())
     s << hint << endl;
@@ -97,17 +74,26 @@ void OutXML::error(const zypp::Exception & e,
   cout << "<message type=\"error\">" << s.str() << "</message>" << endl;
 }
 
+void OutXML::writeProgressTag(const string & id, const string & label,
+                              int value, bool done)
+{
+  cout << "<progress ";
+  cout << " id=\"" << id << "\"";
+  cout << " name=\"" << label << "\"";
+  if (value >= 0)
+    cout << " value=\"" << value << "\"";
+  cout << " done=\"" << done << "\"";
+  cout << "/>" << endl;
+}
+
 void OutXML::progressStart(const string & id,
                            const string & label,
-                           bool is_tick)
+                           bool has_range)
 {
   if (progressFilter())
     return;
 
-  cout << "<progress type=\"" << (is_tick ? "tick" : "percentage") << "\"";
-  cout << " id=\"" << id << "\"";
-  cout << " name=\"" << label << "\">";
-  cout << endl;
+  writeProgressTag(id, label, has_range ? 0 : -1, false);
 }
 
 void OutXML::progress(const string & id,
@@ -117,10 +103,7 @@ void OutXML::progress(const string & id,
   if (progressFilter())
     return;
 
-  if (value)
-    cout << "<tick value=\"" << value << "\"/>" << endl;
-  else
-    cout << "<tick/>" << endl;
+  writeProgressTag(id, label, value, false);
 }
 
 void OutXML::progressEnd(const string & id, const string& label)
@@ -128,10 +111,26 @@ void OutXML::progressEnd(const string & id, const string& label)
   if (progressFilter())
     return;
 
-  cout << "</progress>" << endl;
+  writeProgressTag(id, label, 100, true);
 }
 
+// progress with download rate
+void OutXML::dwnldProgressStart(const std::string & id,
+                                const std::string & label)
+{
+  cout << "<not-implemented what=\"dwnlod-progress-start\">" << endl;
+}
 
-void OutXML::dwnldProgressStart(){}
-void OutXML::dwnldProgress(){}
-void OutXML::dwnldProgressEnd(){}
+void OutXML::dwnldProgress(const std::string & id,
+                           const std::string & label,
+                           int value,
+                           int rate)
+{
+  cout << "<not-implemented what=\"dwnlod-progress\">" << endl;
+}
+
+void OutXML::dwnldProgressEnd(const std::string & id,
+                              const std::string & label)
+{
+  cout << "<not-implemented what=\"dwnlod-progress-end\">" << endl;
+}

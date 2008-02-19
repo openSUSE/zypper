@@ -133,7 +133,7 @@ Out & Zypper::out()
     return *_out_ptr;
   
   cerr << "uninitialized output writer" << endl;
-  ZYPP_THROW(ExitRequestException("help provided"));
+  ZYPP_THROW(ExitRequestException("no output writer"));
 }
 
 void print_main_help(Zypper & zypper)
