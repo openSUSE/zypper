@@ -74,30 +74,23 @@ namespace ZmartRecipients
     DownloadProgressReportReceiver() : _gopts(Zypper::instance()->globalOpts())
     {}
 
-    virtual void start( const zypp::Url & file, zypp::Pathname localfile )
+    virtual void start( const zypp::Url & uri, zypp::Pathname localfile )
     {
-      if (_gopts.verbosity < VERBOSITY_NORMAL)
+      Out & out = Zypper::instance()->out();
+      // don't show download info unless show_media_progress_hack is used 
+      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
         return;
-      else if (_gopts.verbosity == VERBOSITY_MEDIUM || gData.show_media_progress_hack)
-      {
-        cout << CLEARLN << _("Downloading: ")
-          << zypp::Pathname(file.getPathName()).basename()
-          << std::endl;
-      }
-      else if (_gopts.verbosity >= VERBOSITY_HIGH)
-      {
-        cout  << CLEARLN << _("Downloading: ") << file << std::endl;
-      }
+      out.dwnldProgressStart(uri);
     }
 
-    virtual bool progress(int value, const zypp::Url & /*file*/)
+    //! \todo return false on SIGINT
+    virtual bool progress(int value, const zypp::Url & uri)
     {
-      if (_gopts.verbosity < VERBOSITY_NORMAL)
+      Out & out = Zypper::instance()->out();
+      // don't show download info unless show_media_progress_hack is used 
+      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
         return true;
-      if (gData.show_media_progress_hack)
-        display_progress ("download", cout, "Downloading", value);
-      else
-        display_progress ("download", cout_v, "Downloading", value);
+      out.dwnldProgress(uri, value); //! \todo add rate
       return true;
     }
 
@@ -116,16 +109,13 @@ namespace ZmartRecipients
     }
 
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
-    virtual void finish( const zypp::Url & /*file*/, Error error, const std::string & konreason )
+    virtual void finish( const zypp::Url & uri, Error error, const std::string & konreason )
     {
-      if (_gopts.verbosity < VERBOSITY_NORMAL)
+      Out & out = Zypper::instance()->out();
+      // don't show download info unless show_media_progress_hack is used 
+      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
         return;
-      else if (gData.show_media_progress_hack)
-        display_done ("download", cout);
-      else
-        display_done ("download", cout_v);
-      // don't display errors here, they will be reported in media change callback
-      // display_error (error, konreason);
+      out.dwnldProgressEnd(uri);
     }
     
   private:

@@ -115,22 +115,19 @@ void OutXML::progressEnd(const string & id, const string& label)
 }
 
 // progress with download rate
-void OutXML::dwnldProgressStart(const std::string & id,
-                                const std::string & label)
+void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
   cout << "<not-implemented what=\"dwnlod-progress-start\">" << endl;
 }
 
-void OutXML::dwnldProgress(const std::string & id,
-                           const std::string & label,
+void OutXML::dwnldProgress(const zypp::Url & uri,
                            int value,
                            int rate)
 {
   cout << "<not-implemented what=\"dwnlod-progress\">" << endl;
 }
 
-void OutXML::dwnldProgressEnd(const std::string & id,
-                              const std::string & label)
+void OutXML::dwnldProgressEnd(const zypp::Url & uri)
 {
   cout << "<not-implemented what=\"dwnlod-progress-end\">" << endl;
 }
