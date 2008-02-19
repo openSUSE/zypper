@@ -1,8 +1,12 @@
 #include <iostream>
 #include <sstream>
 
-#include "OutNormal.h"
+#include "zypp/Pathname.h"
+
+#include "../zypper-main.h"
 #include "../AliveCursor.h"
+
+#include "OutNormal.h"
 
 using std::cout;
 using std::cerr;
@@ -75,10 +79,7 @@ static void display_progress ( const std::string & id, const string & s, int per
 {
   static AliveCursor cursor;
 
-  if ( percent == 100 )
-    cout << CLEARLN << cursor.done() << " " << s;
-  else
-    cout << CLEARLN << cursor++ << " " << s;
+  cout << CLEARLN << cursor++ << " " << s;
   // dont display percents if invalid
   if (percent >= 0 && percent <= 100)
     cout << " [" << percent << "%]";
@@ -124,31 +125,59 @@ void OutNormal::progress(const std::string & id, const string & label, int value
 
 void OutNormal::progressEnd(const std::string & id, const string& label)
 {
-  static AliveCursor cursor;
-
   if (progressFilter())
     return;
 
+  static AliveCursor cursor;
   cout << CLEARLN << cursor.done() << " " << label << std::flush << endl;
 }
 
 // progress with download rate
-void OutNormal::dwnldProgressStart(const std::string & id,
-                                   const std::string & label)
+void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 {
+  if (verbosity() < NORMAL)
+    return;
 
+  static AliveCursor cursor;
+  cout << CLEARLN << cursor << " " << _("Downloading:") << " ";
+  if (verbosity() == DEBUG)
+    cout << uri; //! \todo shorten to fit the width of the terminal
+  else
+    cout << zypp::Pathname(uri.getPathName()).basename();
+  cout << " [" << _("starting") << "]"; //! \todo align to the right
+  cout << std::flush;
 }
 
-void OutNormal::dwnldProgress(const std::string & id,
-                              const std::string & label,
+void OutNormal::dwnldProgress(const zypp::Url & uri,
                               int value,
                               int rate)
 {
+  if (verbosity() < NORMAL)
+    return;
 
+  static AliveCursor cursor;
+  cout << CLEARLN << cursor++ << " " << _("Downloading:") << " ";
+  if (verbosity() == DEBUG)
+    cout << uri; //! \todo shorten to fit the width of the terminal
+  else
+    cout << zypp::Pathname(uri.getPathName()).basename();
+  // dont display percents if invalid
+  if (value >= 0 && value <= 100)
+    cout << " [" << value << "%]";
+  cout << std::flush;
 }
 
-void OutNormal::dwnldProgressEnd(const std::string & id,
-                                 const std::string & label)
+void OutNormal::dwnldProgressEnd(const zypp::Url & uri)
 {
+  if (verbosity() < NORMAL)
+    return;
 
+  static AliveCursor cursor;
+  cout << CLEARLN << cursor.done() << " " << _("Downloading:") << " ";
+  if (verbosity() == DEBUG)
+    cout << uri; //! \todo shorten to fit the width of the terminal
+  else
+    cout << zypp::Pathname(uri.getPathName()).basename();
+  cout << " [" << _("done") << "]";
+  cout << endl << std::flush;
 }

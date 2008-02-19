@@ -5,6 +5,7 @@
 
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/Exception.h"
+#include "zypp/Url.h"
 
 /**
  * 
@@ -98,14 +99,11 @@ public:
                           const std::string & label) = 0;
 
   // progress with download rate
-  virtual void dwnldProgressStart(const std::string & id,
-                                  const std::string & label) = 0;
-  virtual void dwnldProgress(const std::string & id,
-                             const std::string & label,
+  virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
+  virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              int rate = -1) = 0;
-  virtual void dwnldProgressEnd(const std::string & id,
-                                const std::string & label) = 0;
+  virtual void dwnldProgressEnd(const zypp::Url & uri) = 0;
 
   //virtual void Prompt() = 0;
 public:
