@@ -12,8 +12,9 @@
 #ifndef ZYPP_BASE_FUNCTIONAL_H
 #define ZYPP_BASE_FUNCTIONAL_H
 
-//#include <functional>
 #include <boost/functional.hpp>
+
+#include "zypp/base/Function.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -27,7 +28,6 @@ namespace zypp
   */
   using boost::mem_fun;
   using boost::mem_fun_ref;
-
 
   ///////////////////////////////////////////////////////////////////
   namespace functor

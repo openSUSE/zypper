@@ -205,6 +205,7 @@ SET( zypp_base_SRCS
 )
 
 SET( zypp_base_HEADERS
+  base/Collector.h
   base/SerialNumber.h
   base/Easy.h
   base/Random.h

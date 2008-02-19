@@ -14,8 +14,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
-#include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
+#include "zypp/base/Collector.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
@@ -361,6 +361,10 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
+      /** Expand \ref Capability and call \c fnc_r for each namescpace:language
+       * dependency. Return #invocations of fnc_r, negative if fnc_r returned
+       * false to indicate abort.
+       */
       int invokeOnEachSupportedLocale( Capability cap_r, function<bool (const Locale &)> fnc_r )
       {
         CapDetail detail( cap_r );
@@ -397,7 +401,10 @@ namespace zypp
         return 0;
       }
 
-      // return #invocations of fnc_r, negative if fnc_r returned false to indicate abort.
+       /** Expand \ref Capability and call \c fnc_r for each namescpace:language
+       * dependency. Return #invocations of fnc_r, negative if fnc_r returned
+       * false to indicate abort.
+       */
       inline int invokeOnEachSupportedLocale( Capabilities cap_r, function<bool (const Locale &)> fnc_r )
       {
         int cnt = 0;
@@ -410,6 +417,7 @@ namespace zypp
         }
         return cnt;
       }
+      //@}
 
       // Functor returning false if a Locale is in the set.
       struct NoMatchIn
@@ -423,25 +431,6 @@ namespace zypp
 
         const LocaleSet & _locales;
       };
-
-      template<class _OutputIterator>
-      struct _Collector
-      {
-        _Collector( _OutputIterator iter_r ) : _iter( iter_r ) {}
-
-        template<class _Tp>
-        bool operator()( const _Tp & value_r ) const
-        {
-          *_iter++ = value_r;
-          return true;
-        }
-
-        mutable _OutputIterator _iter;
-      };
-
-      template<class _OutputIterator>
-      inline _Collector<_OutputIterator> Collector( _OutputIterator iter_r )
-      { return _Collector<_OutputIterator>( iter_r ); }
 
     } /////////////////////////////////////////////////////////////////
 
@@ -471,7 +460,7 @@ namespace zypp
     void Solvable::getSupportedLocales( LocaleSet & locales_r ) const
     {
       invokeOnEachSupportedLocale( supplements(),
-                                   Collector( std::inserter( locales_r, locales_r.begin() ) ) );
+                                   functor::Collector( std::inserter( locales_r, locales_r.begin() ) ) );
     }
 
     /******************************************************************

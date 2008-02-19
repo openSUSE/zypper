@@ -13,9 +13,9 @@
 #define ZYPP_BASE_ITERATOR_H
 
 #include <iterator>
-#include <functional>
 #include <utility>
 
+#include <boost/functional.hpp>
 #include <boost/iterator/filter_iterator.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 #include <boost/function_output_iterator.hpp>

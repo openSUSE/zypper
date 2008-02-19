@@ -130,7 +130,18 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
-      public:
+        /** \name Iterate all Solvables matching a \c _Filter. */
+        //@{
+        template<class _Filter>
+        filter_iterator<_Filter,SolvableIterator> filterBegin( const _Filter & filter_r ) const
+        { return make_filter_iterator( filter_r, solvablesBegin(), solvablesEnd() ); }
+
+        template<class _Filter>
+        filter_iterator<_Filter,SolvableIterator> filterEnd( const _Filter & filter_r ) const
+        { return make_filter_iterator( filter_r, solvablesEnd(), solvablesEnd() ); }
+        //@}
+
+     public:
         /** Conainer of all \ref Solvable providing \c cap_r.  */
         WhatProvides whatProvides( Capability cap_r ) const
         { return WhatProvides( cap_r ); }
