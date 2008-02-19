@@ -166,12 +166,15 @@ namespace zypp
               if ( assert_dir( dest_full_path.dirname() ) != 0 )
                 ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
 
-              if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
-              { //copy_file2dir
-                //ZYPP_THROW(SourceIOException("Can't copy " + cached_file.asString() + " to " + destination.asString()));
-                ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
-                // try next cache
-                continue;
+              if ( filesystem::hardlink(cached_file, dest_full_path ) != 0 )
+              {
+                WAR << "Can't hardlink '" << cached_file << "' to '" << dest_dir << "'. Trying copying." << endl;
+                if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
+                {
+                  ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
+                  // try next cache
+                  continue;
+                }
               }
             }
 

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 19 11:21:59 CET 2008 - dmacvicar@suse.de
+
+- hardlink when possible to optimize data transfer
+  and space across caches.
+- version 4.2.8
+
+-------------------------------------------------------------------
 Tue Feb 19 08:15:07 CET 2008 - coolo@suse.de
 
 - added some locale support to sat::Solvable
