@@ -879,18 +879,14 @@ std::string calculate_token()
 }
 */
 
-void establish ()
+bool resolve(Zypper & zypper)
 {
   int locks = God->applyLocks();
-  cout_v <<  format(_("%s items locked")) % locks << endl;
-  //cout_v << _("Establishing status of aggregates") << endl;
-  //God->resolver()->establishPool();
-  dump_pool ();
-}
+  zypper.out().info(
+    boost::str(format(_PL("%s item locked", "%s items locked", locks)) % locks),
+    Out::HIGH);
 
-bool resolve(const Zypper & zypper)
-{
-  establish();
+  dump_pool();
 
   // --force-resolution command line parameter value
   tribool force_resolution = indeterminate;
@@ -938,6 +934,8 @@ bool resolve(const Zypper & zypper)
 
 void patch_check ()
 {
+  Out & out = Zypper::instance()->out();
+
   cout_vv << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
 
@@ -957,9 +955,16 @@ void patch_check ()
     }
   }
 
-  cout << format(_("%d patches needed (%d security patches)"))
-                 % gData.patches_count % gData.security_patches_count
-       << std::endl;
+  ostringstream s;
+  // translators: %d is the number of needed patches
+  s << format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
+      % gData.patches_count
+    << " ("
+    // translators: %d is the number of needed patches
+    << format(_PL("%d security patch", "%d security patches", gData.security_patches_count))
+      % gData.security_patches_count
+    << ")";
+  out.info(s.str(), Out::QUIET);
 }
 
 string string_status (const ResStatus& rs)
@@ -997,7 +1002,7 @@ void dump_pool ()
 }
 
 // patches
-void show_patches(const Zypper & zypper)
+void show_patches(Zypper & zypper)
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 

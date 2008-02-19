@@ -1913,7 +1913,7 @@ void Zypper::doCommand()
     // solve dependencies
     if (copts.count("debug-solver"))
     {
-      establish();
+      //! \todo check whether applyLocks is needed here
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
         out().info(_("Solver test case generated successfully."));
@@ -2098,7 +2098,6 @@ void Zypper::doCommand()
     // now load resolvables:
     cond_load_resolvables(*this);
 
-    establish ();
     patch_check ();
 
     if (gData.security_patches_count > 0)
@@ -2133,7 +2132,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish();
     show_patches(*this);
 
     return;
@@ -2176,7 +2174,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
 
     list_updates(*this, kind, best_effort );
 
@@ -2195,7 +2192,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
 
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;
@@ -2262,7 +2258,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
 
     bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
     mark_updates( kind, skip_interactive, best_effort );
@@ -2270,6 +2265,7 @@ void Zypper::doCommand()
 
     if (copts.count("debug-solver"))
     {
+      //! \todo check whether applyLocks is needed here
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
         out().info(_("Solver test case generated successfully."));
@@ -2317,7 +2313,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
     zypp::UpgradeStatistics opt_stats;
     God->resolver()->doUpgrade(opt_stats);
 
@@ -2389,7 +2384,6 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     cond_load_resolvables(*this);
-    establish ();
 
     printInfo(*this, kind);
 

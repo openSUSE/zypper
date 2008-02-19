@@ -55,9 +55,9 @@ int show_summary(Zypper & zypper);
 //std::string calculate_token();
 
 void establish();
-bool resolve(const Zypper & zypper);
+bool resolve(Zypper & zypper);
 void dump_pool();
-void show_patches(const Zypper & zypper);
+void show_patches(Zypper & zypper);
 bool xml_list_patches();
 void xml_list_updates();
 
