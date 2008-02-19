@@ -27,16 +27,20 @@ public:
   virtual void progressEnd(const std::string & id, const std::string & label);
 
   // progress with download rate
-  void dwnldProgressStart();
-  void dwnldProgress();
-  void dwnldProgressEnd();
+  virtual void dwnldProgressStart(const std::string & id,
+                                  const std::string & label);
+  virtual void dwnldProgress(const std::string & id,
+                             const std::string & label,
+                             int value = -1,
+                             int rate = -1);
+  virtual void dwnldProgressEnd(const std::string & id,
+                                const std::string & label);
 
 protected:
   virtual bool mine(Type type);
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
-  std::string reportZyppException(const zypp::Exception & e);
 };
 
 #endif /*OUTNORMAL_H_*/

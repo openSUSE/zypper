@@ -56,40 +56,14 @@ void OutNormal::error(const std::string & problem_desc, const std::string & hint
 
 // ----------------------------------------------------------------------------
 
-string OutNormal::reportZyppException(const zypp::Exception & e)
-{
-  ostringstream s;
-  if (e.historySize())
-  {
-    if (this->verbosity() > Out::NORMAL)
-    {
-      // print the whole history
-      s << e.historyAsString();
-      // this exception
-      s << " - " << e.asUserString();
-    }
-    else
-      // print the root cause only
-      s << *(--e.historyEnd());
-  }
-  else
-    s << e.asUserString();
-
-  return s.str();
-}
-
-// ----------------------------------------------------------------------------
-
 void OutNormal::error(const zypp::Exception & e,
                       const string & problem_desc,
                       const string & hint)
 {
   // problem
   cerr << problem_desc << endl;
-
   // cause
-  cerr << reportZyppException(e) << endl;
-
+  cerr << zyppExceptionReport(e) << endl;
   // hint
   if (!hint.empty())
     cerr << hint << endl;
@@ -158,6 +132,23 @@ void OutNormal::progressEnd(const std::string & id, const string& label)
   cout << CLEARLN << cursor.done() << " " << label << std::flush << endl;
 }
 
-void OutNormal::dwnldProgressStart(){}
-void OutNormal::dwnldProgress(){}
-void OutNormal::dwnldProgressEnd(){}
+// progress with download rate
+void OutNormal::dwnldProgressStart(const std::string & id,
+                                   const std::string & label)
+{
+
+}
+
+void OutNormal::dwnldProgress(const std::string & id,
+                              const std::string & label,
+                              int value,
+                              int rate)
+{
+
+}
+
+void OutNormal::dwnldProgressEnd(const std::string & id,
+                                 const std::string & label)
+{
+
+}
