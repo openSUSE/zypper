@@ -753,14 +753,14 @@ namespace zypp
         }
         int ret = prog.close();
         if ( ret != 0 )
-          ZYPP_THROW(RepoUnknownTypeException(outputstr.str()));
+          ZYPP_THROW(RepoException(outputstr.str()));
 
         // We keep it.
         guard.resetDispose();
       }
       break;
       default:
-        ZYPP_THROW(Exception("Unhandled repostory type"));
+        ZYPP_THROW(RepoUnknownTypeException("Unhandled repository type"));
       break;
     }
 #if 0
