@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 19 16:21:12 CET 2008 - jkupec@suse.cz
+
+- media: fixed DownloadProgressReport.finish() url argument in
+  doGetFileCopy()
+- revision 8815
+
+-------------------------------------------------------------------
 Tue Feb 19 11:21:59 CET 2008 - dmacvicar@suse.de
 
 - hardlink when possible to optimize data transfer
