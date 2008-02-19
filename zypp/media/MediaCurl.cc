@@ -657,13 +657,40 @@ void MediaCurl::releaseFrom( bool eject )
   disconnect();
 }
 
+static Url getFileUrl(const Url & url, const Pathname & filename)
+{
+  Url newurl(url);
+  string path = url.getPathName();
+  if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
+       filename.absolute() )
+  {
+    // If url has a path with trailing slash, remove the leading slash from
+    // the absolute file name
+    path += filename.asString().substr( 1, filename.asString().size() - 1 );
+  }
+  else if ( filename.relative() )
+  {
+    // Add trailing slash to path, if not already there
+    if (path.empty()) path = "/";
+    else if (*path.rbegin() != '/' ) path += "/";
+    // Remove "./" from begin of relative file name
+    path += filename.asString().substr( 2, filename.asString().size() - 2 );
+  }
+  else
+  {
+    path += filename.asString();
+  }
+
+  newurl.setPathName(path);
+  return newurl;
+}
+
 
 ///////////////////////////////////////////////////////////////////
 //
 //        METHOD NAME : MediaCurl::getFile
-//        METHOD TYPE : PMError
+//        METHOD TYPE : void
 //
-
 void MediaCurl::getFile( const Pathname & filename ) const
 {
     // Use absolute file name to prevent access of files outside of the
@@ -671,12 +698,16 @@ void MediaCurl::getFile( const Pathname & filename ) const
     getFileCopy(filename, localPath(filename).absolutename());
 }
 
-
+///////////////////////////////////////////////////////////////////
+//
+//        METHOD NAME : MediaCurl::getFileCopy
+//        METHOD TYPE : void
+//
 void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
 {
   callback::SendReport<DownloadProgressReport> report;
 
-  Url url( _url );
+  Url fileurl(getFileUrl(_url, filename));
 
   bool retry = false;
   CurlAuthData auth_data;
@@ -728,22 +759,21 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
       else
       {
         DBG << "callback answer: cancel" << endl;
-        report->finish(url, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
+        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
         ZYPP_RETHROW(ex_r);
       }
     }
     // unexpected exception
     catch (MediaException & excpt_r)
     {
-      // FIXME: this will not match the first URL
       // FIXME: error number fix
-      report->finish(url, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserString());
+      report->finish(fileurl, zypp::media::DownloadProgressReport::ERROR, excpt_r.asUserString());
       ZYPP_RETHROW(excpt_r);
     }
   }
   while (retry);
 
-  report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
+  report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
 bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
@@ -1060,6 +1090,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   //}
 }
 
+
 void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report) const
 {
     DBG << filename.asString() << endl;
@@ -1070,24 +1101,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if(_url.getHost().empty())
       ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
 
-    string path = _url.getPathName();
-    if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
-         filename.absolute() ) {
-      // If url has a path with trailing slash, remove the leading slash from
-      // the absolute file name
-      path += filename.asString().substr( 1, filename.asString().size() - 1 );
-    } else if ( filename.relative() ) {
-      // Add trailing slash to path, if not already there
-      if (path.empty()) path = "/";
-      else if (*path.rbegin() != '/' ) path += "/";
-      // Remove "./" from begin of relative file name
-      path += filename.asString().substr( 2, filename.asString().size() - 2 );
-    } else {
-      path += filename.asString();
-    }
-
-    Url url( _url );
-    url.setPathName( path );
+    Url url(getFileUrl(_url, filename));
 
     Pathname dest = target.absolutename();
     if( assert_dir( dest.dirname() ) )
