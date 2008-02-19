@@ -1,11 +1,17 @@
 -------------------------------------------------------------------
+Tue Feb 19 08:15:07 CET 2008 - coolo@suse.de
+
+- added some locale support to sat::Solvable
+- version 4.2.7
+
+-------------------------------------------------------------------
 Mon Feb 18 14:15:48 CET 2008 - dmacvicar@suse.de
 
 - handle error messages better in doesFileExist too which is
   used during probing. (bnc #362608)
 
-Sun Feb 17 21:44:12 CET 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
+Sun Feb 17 21:44:12 CET 2008 - dmacvicar@suse.de
 
 - Fetcher::reset() should not reset cache directories.
   (bnc #348050)
