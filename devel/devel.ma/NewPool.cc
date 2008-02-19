@@ -5,6 +5,7 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Debug.h>
+#include <zypp/base/Functional.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
@@ -414,10 +415,57 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-void foo( int i, const Capability & c )
-{
-  WAR << c << endl;
-}
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace sat
+{ /////////////////////////////////////////////////////////////////
+
+  class ByLocaleSupport
+  {
+    private:
+      typedef bool (sat::Solvable::*LS1) (const Locale &) const;
+      typedef bool (sat::Solvable::*LS2) (const LocaleSet &) const;
+
+    public:
+      /** Solvables with locale support. */
+      ByLocaleSupport()
+      : _sel( mem_fun_ref( &sat::Solvable::supportsLocales ) )
+      {}
+
+      /** Solvables supporting \c locale_r. */
+      ByLocaleSupport( const Locale & locale_r )
+      : _sel( bind( mem_fun_ref( (LS1)&sat::Solvable::supportsLocale ), _1, locale_r ) )
+      {}
+
+      /** Solvables supporting at least one locale in \c locales_r. */
+      ByLocaleSupport( const LocaleSet & locales_r )
+      : _sel( bind( boost::mem_fun_ref( (LS2)&sat::Solvable::supportsLocale ), _1, locales_r ) )
+      {}
+
+    public:
+      bool operator()( const sat::Solvable & solv_r ) const
+      { return _sel && _sel( solv_r ); }
+
+
+      template<class _Solv>
+      bool operator()( const _Solv & solv_r ) const
+      { return operator()( solv_r.satSolvable() ); }
+
+    private:
+      function<bool(const sat::Solvable &)> _sel;
+  };
+
+
+  /////////////////////////////////////////////////////////////////
+} // namespace sat
+///////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+
 
 /******************************************************************
 **
@@ -474,7 +522,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -483,9 +531,55 @@ try {
     }
   }
 
-  satpool.addRepoSolv( "/Local/ROOT/cache/openSUSE-11.0.solv" );
   USR << "pool: " << pool << endl;
+  ///////////////////////////////////////////////////////////////////
 
+  satpool.addRequestedLocale( Locale("de") );
+  satpool.addRequestedLocale( Locale("cs") );
+
+  LocaleSet s;
+  s.insert( Locale("de") );
+
+//   MIL << satpool.getAvailableLocales() << endl;
+
+  {
+    Measure x( "de" );
+    sat::ByLocaleSupport f( Locale("de") );
+    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
+    {
+      MIL << *it << endl;
+    }
+  }
+  {
+    Measure x( "ja" );
+    sat::ByLocaleSupport f( s );
+    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
+    {
+      MIL << *it << endl;
+    }
+  }
+  {
+    Measure x( "requested" );
+    sat::ByLocaleSupport f( satpool.getRequestedLocales() );
+    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
+    {
+      MIL << *it << endl;
+    }
+  }
+   {
+    Measure x( "requested" );
+    sat::ByLocaleSupport f( satpool.getRequestedLocales() );
+    for_( it, pool.filterBegin(f), pool.filterEnd(f) )
+    {
+      MIL << *it << endl;
+    }
+  }
+
+
+  //MIL << sat::WhatProvides( Capability("amarok") ) << endl;
+  //MIL << sat::WhatProvides( Capability("amarok == 1.4.7-37.4") ) << endl;
+
+  if ( 0 )
   {
     Measure x( "Upgrade" );
     UpgradeStatistics u;
