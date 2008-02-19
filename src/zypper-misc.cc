@@ -1535,7 +1535,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please see the above error message to for a hint."));
+            _("Please see the above error message for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
@@ -1543,7 +1543,7 @@ void solve_and_commit (Zypper & zypper)
         ZYPP_CAUGHT(e);
         report_problem(e,
             _("Problem downloading the package file from the repository:"),
-            _("Please see the above error message to for a hint."));
+            _("Please see the above error message for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
