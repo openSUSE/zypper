@@ -56,7 +56,7 @@ namespace zypp
     /** Whether this \c Solvable supports a specific \ref Locale. */
     using sat::Solvable::supportsLocale;
     /** Whether this \c Solvable supports at least one of the specified locales. */
-    using sat::Solvable::supportsLocale;
+    //using sat::Solvable::supportsLocale;
     /** Whether this \c Solvable supports at least one requested locale.
      * \see \ref Pool::setRequestedLocales
      */
