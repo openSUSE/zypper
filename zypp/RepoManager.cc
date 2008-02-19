@@ -753,7 +753,7 @@ namespace zypp
         }
         int ret = prog.close();
         if ( ret != 0 )
-          ZYPP_THROW(RepoUnknownTypeException("Error when creating repository cache: '" + outputstr.str() + "'"));
+          ZYPP_THROW(RepoUnknownTypeException(outputstr.str()));
 
         // We keep it.
         guard.resetDispose();
