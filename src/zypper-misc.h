@@ -16,11 +16,6 @@
 
 #include "zypper-tabulator.h"
 
-/**
- * Initialize rpm database on target, if not already initialized. 
- */
-void cond_init_target(Zypper & zypper);
-
 /// Parse a capability string. On error print a message and return noCap
 zypp::Capability safe_parse_cap (const Zypper & zypper,
                                  const zypp::ResObject::Kind &kind,

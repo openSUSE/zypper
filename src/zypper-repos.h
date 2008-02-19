@@ -8,6 +8,11 @@
 #include "zypper.h"
 
 /**
+ * Initialize rpm database on target, if not already initialized. 
+ */
+void init_target(Zypper & zypper);
+
+/**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
  * 

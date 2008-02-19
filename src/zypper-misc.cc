@@ -39,34 +39,6 @@ using namespace boost;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 
-
-void cond_init_target (Zypper & zypper) {
-  static bool done = false;
-  //! \todo do this so that it works in zypper shell
-  if (!done) {
-    cout_v << _("Initializing Target") << endl;
-
-    try
-    {
-      God->initializeTarget(zypper.globalOpts().root_dir);
-    }
-    catch (const Exception & e)
-    {
-      report_problem(e,
-        _("Target initialization failed:"),
-        geteuid() != 0 ?
-          _("Running 'zypper refresh' as root might resolve the problem."):""
-      );
-
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      throw ExitRequestException(
-        "Target initialization failed: " + e.msg());
-    }
-
-    done = true;
-  }
-}
-
 // converts a user-supplied kind to a zypp kind object
 // returns an empty one if not recognized
 ResObject::Kind string_to_kind (const string &skind)

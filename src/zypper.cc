@@ -1518,7 +1518,7 @@ void Zypper::doCommand()
       warn_if_zmd();
 
       // load gpg keys
-      cond_init_target(*this);
+      init_target(*this);
 
       add_repo_by_url(
           *this, url, _arguments[1]/*alias*/, type, enabled, refresh);
@@ -1649,7 +1649,7 @@ void Zypper::doCommand()
       return;
     }
 
-//    cond_init_target(*this);
+//    init_target(*this);
     warn_if_zmd ();
     try {
       // also stores it
@@ -1887,7 +1887,7 @@ void Zypper::doCommand()
     }
 
     // prepare target
-    cond_init_target(*this);
+    init_target(*this);
     // load metadata
     cond_load_resolvables(*this);
 
@@ -1949,7 +1949,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    cond_init_target(*this);
+    init_target(*this);
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(*this);
 
@@ -1974,7 +1974,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    cond_init_target(*this);
+    init_target(*this);
     // load only repo resolvables, we don't need the installed ones
     load_repo_resolvables(*this);
     build_deps_install(_arguments);
@@ -2034,7 +2034,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    cond_init_target(*this);
+    init_target(*this);
 
     // now load resolvables:
     cond_load_resolvables(*this);
@@ -2085,7 +2085,7 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target(*this);
+    init_target(*this);
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -2127,7 +2127,7 @@ void Zypper::doCommand()
       return;
     }
 
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2169,7 +2169,7 @@ void Zypper::doCommand()
 	out().warning(
 	  _("Running as 'rug', can't do 'best-effort' approach to update."));
     }
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2187,7 +2187,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2253,7 +2253,7 @@ void Zypper::doCommand()
 	out().warning(
 	  _("Running as 'rug', can't do 'best-effort' approach to update."));
     }
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2308,7 +2308,7 @@ void Zypper::doCommand()
     if (copts.count("auto-agree-with-licenses"))
       _cmdopts.license_auto_agree = true;
 
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2379,7 +2379,7 @@ void Zypper::doCommand()
       }
     }
 
-    cond_init_target(*this);
+    init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;

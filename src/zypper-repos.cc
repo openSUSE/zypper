@@ -22,7 +22,6 @@
 #include "zypper-callbacks.h"
 #include "zypper-utils.h"
 #include "zypper-repos.h"
-#include "zypper-misc.h"
 
 using namespace std;
 using namespace boost;
@@ -327,7 +326,7 @@ static void do_init_repos(Zypper & zypper)
   MIL << "Going to initialize repositories." << endl;
 
   // load gpg keys
-  cond_init_target(zypper);
+  init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
 
   // get repositories specified with --repo or --catalog
@@ -468,6 +467,35 @@ void init_repos(Zypper & zypper)
     do_init_repos(zypper);
 
   done = true;
+}
+
+// ----------------------------------------------------------------------------
+
+void init_target (Zypper & zypper) {
+  static bool done = false;
+  //! \todo do this so that it works in zypper shell
+  if (!done) {
+    cout_v << _("Initializing Target") << endl;
+
+    try
+    {
+      God->initializeTarget(zypper.globalOpts().root_dir);
+    }
+    catch (const Exception & e)
+    {
+      report_problem(e,
+        _("Target initialization failed:"),
+        geteuid() != 0 ?
+          _("Running 'zypper refresh' as root might resolve the problem."):""
+      );
+
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      throw ExitRequestException(
+        "Target initialization failed: " + e.msg());
+    }
+
+    done = true;
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -642,7 +670,7 @@ void list_repos(Zypper & zypper)
 void refresh_repos(Zypper & zypper)
 {
   // need gpg keys when downloading (#304672)
-  cond_init_target(zypper);
+  init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
 
   list<RepoInfo> repos;
