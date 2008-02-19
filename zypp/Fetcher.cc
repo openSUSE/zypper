@@ -148,7 +148,7 @@ namespace zypp
 
         if ( PathInfo( cached_file ).isExist() )
         {
-          MIL << "File '" << cached_file << "' exist, testing checksum " << (*it_res)->location.checksum() << endl;
+          DBG << "File '" << cached_file << "' exist, testing checksum " << (*it_res)->location.checksum() << endl;
 
           // check the checksum
           if ( is_checksum( cached_file, (*it_res)->location.checksum() ) && (! (*it_res)->location.checksum().empty() ) )

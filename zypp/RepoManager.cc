@@ -744,14 +744,16 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
+        stringstream outputstr;
         string cmd( str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() ) );
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
+          outputstr << output;
         }
         int ret = prog.close();
         if ( ret != 0 )
-          ZYPP_THROW(RepoUnknownTypeException());
+          ZYPP_THROW(RepoUnknownTypeException("Error when creating repository cache: '" + outputstr.str() + "'"));
 
         // We keep it.
         guard.resetDispose();
