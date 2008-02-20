@@ -1,10 +1,12 @@
-0.9.x
-- move -vv output to zypper.log, leave only normal and verbose output levels
+0.10.x
+- improve command line arguments handling (be more user-friendly,
+  do the obvious stuff automatically, e.g. use -C automatically after typing
+  zypper in subversion=1.5.0)
 - xml output for all (or most of the) commands
 - xml input (feed a xml with operation specification to zypper)
 - implement all rug commands (where it makes sense)
 - system consistency verification command
-- install plain local or remote .rpm files
+- drop xu command (as soon as 'zypper -x lu -t patch -t package is ready')
 
 
 NOT SCHEDULED
@@ -12,18 +14,20 @@ NOT SCHEDULED
 
 General
 
-- script progress: does the output contain newline??
+- enumerate prompt answers for all prompts
+- provide ? for help on prompts (except for Yes/No)
+? script progress: does the output contain newline?
 - installation and deletion notifications
-- --dry-run (use ZYppCommitPolicy.h)
 - confirm license: more user friendly (see confirm_licenses() comment)
 - testsuite
+? move -vv output to zypper.log, leave only normal and verbose output levels?
 
 Patches
 
 - respect license-to-confirm (test on kernel patch)
  (svn up ncurses)
-- reboot-needed: ?
-- cron updater:
+? reboot-needed: ?
+? cron updater:
 - wrapper script for restart-packager
 - zypper patch-search (for rug compatibility)
 
