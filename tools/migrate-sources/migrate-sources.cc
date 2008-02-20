@@ -24,14 +24,30 @@ struct Options
 {
   Options()
   : fake(false)
-  , root(Pathname("/"))
-  , sources_dir(Pathname("/var/lib/zypp/db/sources"))
+  , root("/")
+  , sources_dir("/var/lib/zypp/db/sources")
+  , cache_dir("/var/lib/zypp/cache")
   {}
-  
+
   bool fake;
   Pathname root;
   Pathname sources_dir;
+  Pathname cache_dir;
 };
+
+static void clear_cache( const Options &opt )
+{
+  Pathname cache_p = opt.root + opt.cache_dir;
+  if ( PathInfo(cache_p).isDir() )
+  {
+    cout << "Deleting old cache directory." << endl;
+    if ( ! opt.fake )
+    {
+      if ( filesystem::recursive_rmdir(cache_p) != 0 )
+        ERR << "Error removing cache directory" << cache_p << endl;
+    }
+  }
+}
 
 static void migrate_sources( const Options &opt )
 {
@@ -48,18 +64,19 @@ static void migrate_sources( const Options &opt )
   zypp::zypp_readonly_hack::IWantIt();
   ZYpp::Ptr Z = zypp::getZYpp();
   RepoManager manager;
-  
+
   Pathname source_p = opt.root + opt.sources_dir;
 
   if ( ! PathInfo(source_p).isExist() )
   {
     cout << "No sources to migrate." << endl;
+    clear_cache( opt );
     return;
   }
-  
+
   RepoInfoList sources;
   DBG << "Reading source cache in " << source_p << std::endl;
-  
+
   list<Pathname> entries;
   if ( filesystem::readdir( entries, source_p, false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
@@ -67,9 +84,9 @@ static void migrate_sources( const Options &opt )
   int i=0;
   for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
   {
-    
+
     MIL << "Processing " << *it << endl;
-    
+
     std::ifstream anIstream((*it).c_str());
     zypp::parser::xmlstore::XMLSourceCacheParser iter(anIstream, "");
     for (; ! iter.atEnd(); ++iter) {
@@ -97,12 +114,12 @@ static void migrate_sources( const Options &opt )
       {
         cout << "Error adding repository: " << e.msg() << endl << data << endl;
       }
-      
+
     }
 
   }
   cout << i << " sources migrated."<< endl;
-  
+
   // reread entries
   if ( filesystem::readdir( entries, source_p, false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
@@ -113,6 +130,8 @@ static void migrate_sources( const Options &opt )
     {
       if ( filesystem::recursive_rmdir(source_p) != 0 )
         ERR << "Error removing source directory" << source_p << endl;
+
+      clear_cache( opt );
     }
   }
   else
@@ -138,7 +157,7 @@ main (int argc, char **argv)
   int i;
   for ( i=1; i < argc; ++i )
   {
-    
+
     if ( string(argv[i]) == "--help" )
     {
       usage(argc, argv);
@@ -152,7 +171,7 @@ main (int argc, char **argv)
       opt.sources_dir = argv[++i];
   }
   migrate_sources(opt);
-  
+
   return 0;
 }
 

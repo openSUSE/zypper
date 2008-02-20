@@ -550,30 +550,9 @@ try {
       MIL << *it << endl;
     }
   }
-  {
-    Measure x( "ja" );
-    sat::ByLocaleSupport f( s );
-    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
-    {
-      MIL << *it << endl;
-    }
-  }
-  {
-    Measure x( "requested" );
-    sat::ByLocaleSupport f( satpool.getRequestedLocales() );
-    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
-    {
-      MIL << *it << endl;
-    }
-  }
-   {
-    Measure x( "requested" );
-    sat::ByLocaleSupport f( satpool.getRequestedLocales() );
-    for_( it, pool.filterBegin(f), pool.filterEnd(f) )
-    {
-      MIL << *it << endl;
-    }
-  }
+
+
+
 
 
   //MIL << sat::WhatProvides( Capability("amarok") ) << endl;
