@@ -1913,7 +1913,7 @@ void Zypper::doCommand()
     // solve dependencies
     if (copts.count("debug-solver"))
     {
-      //! \todo check whether applyLocks is needed here
+      God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
         out().info(_("Solver test case generated successfully."));
@@ -2265,7 +2265,7 @@ void Zypper::doCommand()
 
     if (copts.count("debug-solver"))
     {
-      //! \todo check whether applyLocks is needed here
+      God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
         out().info(_("Solver test case generated successfully."));
@@ -2318,6 +2318,7 @@ void Zypper::doCommand()
 
     if (copts.count("debug-solver"))
     {
+      God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
         out().info(_("Solver test case generated successfully."));
