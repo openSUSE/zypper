@@ -14,6 +14,9 @@ NOT SCHEDULED
 
 General
 
+- detect whether the terminal we are writing to supports used control sequences
+  and fall back to OutNoTerminal (make it a child of OutNormal) if not. Usefull
+  also in cases where the output is redirected to a file or pipe.
 - enumerate prompt answers for all prompts
 - provide ? for help on prompts (except for Yes/No)
 ? script progress: does the output contain newline?
