@@ -228,11 +228,11 @@ InstallOrder::rdfsvisit (const PoolItem item)
 	XXX << "check requirement " << requirement << " of " << ITEMNAME(item) << endl;
         SATResolver satResolver(_pool, sat::Pool::instance().get());
 	PoolItemList tovisit;
-        PoolItemList possibleProviders = satResolver.whoProvides (requirement);
+        sat::WhatProvides possibleProviders(requirement);        
 
-	// first, look in _installed        
-        for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
-            PoolItem provider = *iter;
+	// first, look in _installed
+        for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+            PoolItem provider = ResPool::instance().find( *iter );        
             if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
                 && (_installed.find( provider ) != _installed.end()))	// and is not installed
             {
@@ -244,8 +244,8 @@ InstallOrder::rdfsvisit (const PoolItem item)
 	// if not found in _installed, look in _toinstall
 
 	if (providers.empty()) {
-            for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
-                PoolItem provider = *iter;
+            for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+                PoolItem provider = ResPool::instance().find( *iter );        
                 if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
                     && (_toinstall.find( provider ) != _toinstall.end()))	// and is not to be installed
                 {

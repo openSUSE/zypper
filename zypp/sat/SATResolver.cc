@@ -228,21 +228,8 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 
 
 //----------------------------------------------------------------------------
-// helper functions for distupgrade and installation order
+// helper functions for distupgrade 
 //----------------------------------------------------------------------------
-
-PoolItemList SATResolver::whoProvides(Capability cap) {
-    PoolItemList itemList;
-    Id p, *pp;
-    for (pp = pool_whatprovides(_SATPool, cap.id()) ; (p = *pp++) != 0; ) {
-	PoolItem item = _pool.find (sat::Solvable(p));
-	if (item) {
-	    itemList.push_back (item);
-	    MIL << item << " provides " << cap << endl;
-	}
-    }
-    return itemList;
-}
 
 bool SATResolver::doesObsoleteItem (PoolItem candidate, PoolItem installed) {
   Solvable *sCandidate = _SATPool->solvables + candidate.satSolvable().id();

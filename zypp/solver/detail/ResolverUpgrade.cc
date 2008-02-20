@@ -430,14 +430,14 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
       Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
       // find ALL providers
-      PoolItemList possibleProviders = _satResolver->whoProvides (installedCap);
+      sat::WhatProvides possibleProviders(installedCap);
 
       // find best available providers for installed name
       typedef map<string, PoolItem> FindMap;
       FindMap providersMap;		// the best providers which matched
       bool otherVendorFound = false;
-      for (PoolItemList::const_iterator iter = possibleProviders.begin(); iter != possibleProviders.end(); iter++) {
-	  PoolItem provider = *iter;
+      for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+	  PoolItem provider = ResPool::instance().find( *iter );
 	  if ( !VendorAttr::instance().equivalent(provider->vendor(), installed->vendor()) )
 	  {
 	      MIL << "Discarding '" << provider << "' from vendor '"
@@ -594,58 +594,28 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     if ( guess ) {
 	// Checking if the selected provider depends on language, if yes try to find out the
 	// correct language package
-	bool requested_locale_match = false;
-	Capabilities freshens( guess->dep( Dep::FRESHENS ) );
-
-#warning THIS DOES NO LONGER WORK, CREATE SAT::sOLVABLE::WHATEVERISNEEDED (IN DOUBT ASK MA@)
-// We no longer have any 'locale()' deps in FRESHENS!
-// Providing 'bool sat::Solvable::supportsRequestedLocale()' should simplify this code.
-// Maybe an enum instead of bool ( yes, no and via fallback list )
-	// is this a language package ?
-	for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-	    string citName = cit->asString();
-	    if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
-		requested_locale_match = true;
-		break;
-	    }
-	}
-
-	if (requested_locale_match) {
-	    // searching the best language
+	if (guess.satSolvable().supportsLocales()) { // is this a language package ?
+	    // searching a package which provides one of the requested languages.
 	    PoolItemOrderSet & gset( it->second );
-	    requested_locale_match = false;
-
+	    MIL << "Item " << guess << " provides language support. Look for proper language items." <<  endl;
 	    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
 		PoolItem item (*git);
 
 		if ( item.status().isToBeInstalled()) {
-		    MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
+		    MIL << " ==> (pass 2: meanwhile set to install): " << item << ". Ignoring preselections." << endl;
 		    if ( ! doesObsoleteItem (item, it->first ) ) {
 			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 		    }
 		    guess = PoolItem();
 		    break;
 		} else {
-		    freshens = item->dep( Dep::FRESHENS );
-		    const LocaleSet & requested_locales = sat::Pool::instance().getRequestedLocales();
-
-		    // try to find a match of the locale freshens with one of the requested locales
-
-		    for (Capabilities::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
-			string citName = cit->asString();
-			if (citName.length() > 7 &&  citName.compare(0, 7, "locale(") == 0) { // is a language dependency
-			    string loc = cit->index();
-			    MIL << "Look for language fallback " << loc << ":" << item << endl;
-			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
-				MIL << "Locale '" << loc << "' is requested" << endl;
-				requested_locale_match = true;
-				guess = item;
-				break;
-			    }
-			}
+		    if (item.satSolvable().supportsRequestedLocales()) {
+			MIL << item << " provides a requested locale --> take thatone" << endl;
+			guess = item;
+			// do not break here cause there could be an item in the list which has been
+			// already set for installation.
 		    }
 		}
-		if (requested_locale_match) break;
 	    }
 	}
     }
