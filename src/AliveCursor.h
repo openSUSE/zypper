@@ -6,6 +6,7 @@
 
 // VT 100
 #define CLEARLN "\x1B[2K\r"
+#define CURSORUP(N) "\x1B["#N"A"
 
 class AliveCursor
 {

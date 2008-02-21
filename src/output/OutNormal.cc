@@ -181,3 +181,13 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri)
   cout << " [" << _("done") << "]";
   cout << endl << std::flush;
 }
+
+void OutNormal::prompt(PromptId id,
+                       const string & prompt,
+                       const string & answer_hint)
+{
+  cout << CLEARLN << prompt;
+  if (!answer_hint.empty())
+    cout << " " << answer_hint;
+  cout << ": " << std::flush;
+}

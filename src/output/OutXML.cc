@@ -131,3 +131,10 @@ void OutXML::dwnldProgressEnd(const zypp::Url & uri)
 {
   cout << "<not-implemented what=\"dwnlod-progress-end\">" << endl;
 }
+
+void OutXML::prompt(PromptId id,
+                    const string & prompt,
+                    const string & answer_hint) // hint ignored for now, maybe an enumeration will be here in the future
+{
+  cout << "<prompt id=\"" << id << "\">" << prompt << "</prompt>" << endl;
+}

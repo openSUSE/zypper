@@ -61,7 +61,7 @@ void display_error (Error error, const std::string& reason) {
  *    is specified, 0 (ABORT) is returned. In interactive mode, this parameter
  *    is ignored.
  */
-int read_action_ari (int default_action = -1);
+int read_action_ari (PromptId pid, int default_action = -1);
 
 /**
  * Prompt for y/n answer (localized) from stdin.
@@ -70,7 +70,7 @@ int read_action_ari (int default_action = -1);
  * \param default_answer Value to be returned in non-interactive mode or on
  *      input failure.
  */
-bool read_bool_answer(const std::string & question, bool default_answer);
+bool read_bool_answer(PromptId pid, const std::string & question, bool default_answer);
 
 /**
  * Returns string representation of a resolvable.

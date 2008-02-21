@@ -32,6 +32,10 @@ public:
                              int value = -1,
                              int rate = -1);
   virtual void dwnldProgressEnd(const zypp::Url & uri);
+  
+  virtual void prompt(PromptId id,
+                      const std::string & prompt,
+                      const std::string & answer_hint);
 
 protected:
   virtual bool mine(Type type);

@@ -42,6 +42,7 @@ SET( zypper_out_HEADERS
   output/Out.h
   output/OutNormal.h
   output/OutXML.h
+  output/prompt.h
 )
 
 SET( zypper_out_SRCS

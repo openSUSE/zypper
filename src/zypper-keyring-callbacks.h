@@ -20,7 +20,6 @@
 #include "zypp/KeyRing.h"
 #include "zypp/Digest.h"
 
-#include "AliveCursor.h"
 #include "zypper-callbacks.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -46,7 +45,7 @@ namespace zypp {
         // TranslatorExplanation: speaking of a file
         std::string question = boost::str(boost::format(
             _("%s is unsigned, continue?")) % file);
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
 
       virtual bool askUserToImportKey( const PublicKey &key )
@@ -56,7 +55,7 @@ namespace zypp {
 
         std::string question = boost::str(boost::format(
             _("Import key %s to trusted keyring?")) % key.id());
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_YN_GPG_KEY_IMPORT_TRUSTED, question, false);
       }
 
       virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
@@ -73,7 +72,7 @@ namespace zypp {
         // TranslatorExplanation: speaking of a file
         std::string question = boost::str(boost::format(
             _("%s is signed with an unknown key %s. Continue?")) % file % id);
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
       virtual bool askUserToTrustKey( const PublicKey &key )
@@ -94,7 +93,7 @@ namespace zypp {
         std::string question = boost::str(boost::format(
 	    _("Do you want to trust key id %s, %s, fingerprint %s"))
 	    % keyid % keyname % fingerprint);
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_YN_GPG_KEY_TRUST, question, false);
       }
 
       virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
@@ -126,7 +125,7 @@ namespace zypp {
 	      string("\n") +
              _("Continuing is risky! Continue anyway?"))
             % file % keyid % keyname % fingerprint);
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_YN_GPG_CHECK_FAILED_IGNORE, question, false);
       }
 
     private:
@@ -141,7 +140,7 @@ namespace zypp {
       {
 	std::string question = boost::str(boost::format(
 	    _("No digest for file %s.")) % file) + " " + _("Continue?");
-        return read_bool_answer(question, _gopts.no_gpg_checks);
+        return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
@@ -149,7 +148,7 @@ namespace zypp {
         std::string question = boost::str(boost::format(
             _("Unknown digest %s for file %s.")) %name % file) + " " +
             _("Continue?");
-        return read_bool_answer(question, _gopts.no_gpg_checks);
+        return read_bool_answer(PROMPT_GPG_UNKNOWN_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
@@ -168,7 +167,7 @@ namespace zypp {
 	std::string question = boost::str(boost::format(
 	    _("Digest verification failed for %s. Expected %s, found %s."))
 	    % file.basename() % requested % found) + " " + _("Continue?");
-        return read_bool_answer(question, false);
+        return read_bool_answer(PROMPT_GPG_WRONG_DIGEST_ACCEPT, question, false);
       }
 
     private:

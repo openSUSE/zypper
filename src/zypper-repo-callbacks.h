@@ -26,6 +26,7 @@
 #include "zypper.h"
 #include "zypper-callbacks.h"
 #include "zypper-utils.h"
+#include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -204,7 +205,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     std::cerr << description << std::endl;
-    return (Action) read_action_ari(ABORT);
+    return (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, const std::string & reason )
@@ -282,7 +283,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
       .progressEnd("repo", "(" + _repo.name() + ") ");
 //    display_done ("repo", cout_n);
     display_error (error, description);
-    return (Action) read_action_ari (ABORT);
+    return (Action) read_action_ari (PROMPT_ARI_REPO_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Repository /*repo*/, const std::string & task, Error error, const std::string & reason )

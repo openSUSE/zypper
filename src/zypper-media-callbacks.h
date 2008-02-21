@@ -26,8 +26,8 @@
 
 #include "zypper.h"
 #include "zypper-callbacks.h"
-#include "AliveCursor.h"
 #include "zypper-utils.h"
+#include "output/prompt.h"
 
 using zypp::media::MediaChangeReport;
 using zypp::media::DownloadProgressReport;
@@ -56,7 +56,7 @@ namespace ZmartRecipients
             // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
             _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
             % gData.current_repo.name() % mediumNr);
-        if (read_bool_answer(request, false))
+        if (read_bool_answer(PROMPT_YN_MEDIA_CHANGE, request, false))
           return MediaChangeReport::RETRY; 
         else
           return MediaChangeReport::ABORT;
@@ -105,7 +105,7 @@ namespace ZmartRecipients
           display_done ("download", cout_v);
       }
       display_error (error, description);
-      return DownloadProgressReport::ABORT;
+      return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
     }
 
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
@@ -132,27 +132,26 @@ namespace ZmartRecipients
       if (Zypper::instance()->globalOpts().non_interactive)
       {
         MIL << "Non-interactive mode: aborting" << std::endl;
-        cout_vv << description << std::endl;
-        cout_vv << "Non-interactive mode: aborting" << std::endl;
         return false;
       }
-
-      cout << description << std::endl;
 
       // curl authentication
       zypp::media::CurlAuthData * auth_data_ptr =
         dynamic_cast<zypp::media::CurlAuthData*> (&auth_data);
       if (auth_data_ptr)
       {
-        cout_vv << "available auth types: "
-          << auth_data_ptr->authTypeAsString() << std::endl;
+//! \todo move this to prompt help once it's done
+//        cout_vv << "available auth types: "
+//          << auth_data_ptr->authTypeAsString() << std::endl;
 
-        cout << "User Name: ";
+        Zypper::instance()->out().prompt(
+            PROMPT_AUTH_USERNAME, description, _("User Name"));
         string username;
         std::cin >> username;
         auth_data_ptr->setUserName(username);
 
-        cout << "Password: ";
+        Zypper::instance()->out().prompt(
+            PROMPT_AUTH_PASSWORD, description, _("Password"));
         string password;
         std::cin >> password;
         if (password.empty()) return false;

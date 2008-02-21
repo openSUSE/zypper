@@ -23,6 +23,7 @@
 #include "zypper.h"
 #include "zypper-callbacks.h"
 #include "AliveCursor.h"
+#include "output/prompt.h"
 
 using namespace std;
 
@@ -156,7 +157,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   {
     cerr << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
     display_error (error, description);
-    return (Action) read_action_ari (ABORT);
+    return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
@@ -218,7 +219,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
         << std::endl;
     cerr << level << " "; display_error (error, description);
 
-    return (Action) read_action_ari (ABORT);
+    return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel level )

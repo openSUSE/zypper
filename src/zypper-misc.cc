@@ -29,6 +29,7 @@
 #include "zypper-getopt.h"
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
+#include "output/prompt.h"
 
 //using namespace zypp::detail;
 
@@ -468,11 +469,13 @@ tribool show_problem (Zypper & zypper,
     if (solutions.empty())
        return false;
     // TranslatorExplanation: dependency problem solution input prompt
-    cerr << _("Choose the number, (s)kip, (r)etry or (c)ancel> ") << flush;
+    zypper.out().prompt(PROMPT_DEP_RESOLVE,
+      _("Choose the number, (s)kip, (r)etry or (c)ancel"),
+      _("[#/s/r/c]"));
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {
-      cerr_v << "cin: " << cin.rdstate() << endl;
+      zypper.out().error("cin: " + cin.rdstate());
       return false;
     }
     if (isupper( reply_s[0] ))
@@ -491,7 +494,7 @@ tribool show_problem (Zypper & zypper,
     str::strtonum (reply_s, reply);
   } while (reply <= 0 || reply >= n);
 
-  cout_n << format (_("Applying solution %s")) % reply << endl;
+  zypper.out().info(boost::str(format (_("Applying solution %s")) % reply), Out::HIGH);
   ProblemSolutionList::iterator reply_i = solutions.begin ();
   advance (reply_i, reply - 1);
   todo.push_back (*reply_i);
@@ -1472,7 +1475,7 @@ void solve_and_commit (Zypper & zypper)
   int retv = show_summary(zypper);
   bool was_installed = false;
   if (retv >= 0) { // there are resolvables to install/uninstall
-    if (read_bool_answer(_("Continue?"), true)) {
+    if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true)) {
 
       if (!confirm_licenses(zypper)) return;
 
@@ -1606,7 +1609,7 @@ bool confirm_licenses(Zypper & zypper)
       string question = _("In order to install this package, you must agree"
         " to terms of the above license. Continue?");
 
-      if (!read_bool_answer(question, zypper.cmdOpts().license_auto_agree))
+      if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, zypper.cmdOpts().license_auto_agree))
       {
         confirmed = false;
 

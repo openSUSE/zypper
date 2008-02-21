@@ -11,40 +11,52 @@ start = stream-element
 
 stream-element =
   element stream {
-    ( update-element | progress-element | message-element )+
+    ( progress-elements | download-progress-elements | message-element | prompt-element |
+      update-element )+
   }
 
-progress-element = ( progress-tick | progress-percentage )
+progress-elements = ( progress-alive | progress-percentage | progress-done )
 
-progress-tick =
-  element progress {
-    attribute id { xsd:string },
-    attribute type { "tick" },
-    attribute name { xsd:string }?,
-    element tick { empty }*
-  }
-
+# todo - restrict and specialize progress by type
 progress-percentage =
   element progress {
     attribute id { xsd:string },
+    attribute name { xsd:string },
     attribute type { "percentage" },
-    attribute name { xsd:string }?,
-    element tick {
-      attribute value { xsd:integer }
-    }*
+    attribute value { xsd:integer }
   }
 
-# old
-#progress-element =
-#  element progress {
-#    attribute id { xsd:string },
-#    attribute type { xsd:string },
-#    attribute value { xsd:integer },
-#    attribute name { xsd:string }
-#  }
+progress-alive =
+  element progress {
+    attribute id { xsd:string },
+    attribute name { xsd:string },
+    attribute type { "alive" },
+  }
 
-update-element =
-  element update { empty }
+progress-done =
+  element progress {
+    attribute id { xsd:string },
+    attribute name { xsd:string },
+    attribute done { xsd:boolean },
+  }
+
+download-progress-elements = ( download-progress-element | download-progress-done )
+
+download-progress-element =
+  element download {
+    attribute id { xsd:string },
+    attribute label { xsd:string },
+    attribute percent { xsd:integer },
+    attribute rate { xsd:integer } # download rate in bytes per second
+#    attribute done { xsd:boolean },
+  }
+
+download-progress-done =
+  element download {
+    attribute id { xsd:string },
+    attribute label { xsd:string },
+    attribute done { xsd:boolean },
+  }
 
 message-element =
   element message {
@@ -52,3 +64,12 @@ message-element =
     attribute type { "info" | "warning" | "error" },
     text
   }
+
+prompt-element =
+  element prompt {
+    attribute id { xsd:integer },
+    text
+  }
+
+update-element =
+  element update { empty }

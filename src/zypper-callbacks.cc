@@ -10,6 +10,7 @@
 #include "AliveCursor.h"
 #include "zypper.h"
 #include "zypper-main.h"
+#include "output/Out.h"
 
 using namespace std;
 using namespace boost;
@@ -83,9 +84,9 @@ ZYPP_DEPRECATED void display_done (const std::string &id, ostream & out) {
 
 //template<typename Action>
 //Action ...
-int read_action_ari (int default_action) {
-  // TranslatorExplanation don't translate letters in parentheses!! (yet)
-  cout << _("(A)bort, (R)etry, (I)gnore?") << " "; 
+int read_action_ari (PromptId pid, int default_action) {
+  Out & out = Zypper::instance()->out();
+  out.prompt(pid, _("Abort, retry, ignore?"), "[a/r/i]"); //! \todo translation?
 
   // choose abort if no default has been specified
   if (default_action == -1) {
@@ -101,8 +102,8 @@ int read_action_ari (int default_action) {
 	  case 2: c = 'i'; break;
 	  default: c = '?';
       }
-      // print the answer for conveniecne
-      cout << c << endl;
+      // print the answer for conveniecne (only for normal output)
+      out.info(string(1, c), Out::QUIET, Out::TYPE_NORMAL);
       MIL << "answer: " << c << endl;
       return default_action;
   }
@@ -119,7 +120,10 @@ int read_action_ari (int default_action) {
       return 1;
     else if (c == 'i')
       return 2;
-    cerr << _("Invalid answer. Choose letter a, r, or i.") << endl;
+    // translators: don't translate the letters
+    out.prompt(pid,
+     boost::str(format(_("Invalid answer '%s'.")) % c),
+      _("Choose letter 'a', 'r', or 'i'"));
     DBG << "invalid answer" << endl;
   }
 
@@ -128,19 +132,21 @@ int read_action_ari (int default_action) {
 
 // ----------------------------------------------------------------------------
 
-bool read_bool_answer(const string & question, bool default_answer)
+bool read_bool_answer(PromptId pid, const string & question, bool default_answer)
 {
   const GlobalOptions & gopts = Zypper::instance()->globalOpts();
-  if (!gopts.machine_readable)
-    cout << CLEARLN << question
-    << " [" << _("yes") << "/" << _("no") << "]: "
-    << flush;
+  Out & out = Zypper::instance()->out();
 
-  // non-interactive mode: print the answer for convenience and return default
+  ostringstream s;
+  s << "[" << _("yes") << "/" << _("no") << "]";
+  out.prompt(pid, question, s.str());
+
+  // non-interactive mode: print the answer for convenience  (only for normal
+  // output) and return default
   if (gopts.non_interactive)
   {
     if (!gopts.machine_readable)
-      cout << (default_answer ? _("yes") : _("no")) << endl;
+      out.info((default_answer ? _("yes") : _("no")), Out::QUIET, Out::TYPE_NORMAL);
     MIL << "answer (default): " << (default_answer ? 'y' : 'n') << endl;
     return default_answer;
   }
@@ -152,11 +158,13 @@ bool read_bool_answer(const string & question, bool default_answer)
   while (stm.good() && rpmatch(c.c_str()) == -1)
   {
     if (been_here_before)
-      cerr << format(
+      out.prompt(pid,
+          boost::str(format(_("Invalid answer '%s'.")) % c),
+          boost::str(format(
           // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
           // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-          _("Invalid answer '%s'. Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
-          % c % _("yes") % _("no") << ": ";
+          _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
+          % _("yes") % _("no")));
     c = zypp::str::getline (stm, zypp::str::TRIM);
     been_here_before = true;
   }
