@@ -10,11 +10,7 @@
 #ifndef ZYPPER_CALLBACKS_H
 #define ZYPPER_CALLBACKS_H
 
-#include <iostream>
 #include <string>
-
-#include "zypp/Resolvable.h"
-#include "zypp/base/Exception.h"
 
 #include "zypper.h"
 
@@ -69,10 +65,6 @@ int read_action_ari (PromptId pid, int default_action = -1);
  */
 bool read_bool_answer(PromptId pid, const std::string & question, bool default_answer);
 
-/**
- * Returns string representation of a resolvable.
- */
-std::string to_string (zypp::Resolvable::constPtr resolvable);
 
 /**
  * 

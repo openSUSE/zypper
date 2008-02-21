@@ -4,13 +4,9 @@
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
-#include "zypp/base/Deprecated.h"
-#include "zypp/Resolvable.h"
 
-#include "AliveCursor.h"
 #include "zypper.h"
 #include "zypper-main.h"
-#include "output/Out.h"
 
 using namespace std;
 using namespace boost;
@@ -115,15 +111,6 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
     return default_answer;
   }
 }
-
-// ----------------------------------------------------------------------------
-
-string to_string (zypp::Resolvable::constPtr resolvable) {
-  ostringstream ss;
-  ss << *resolvable;
-  return ss.str ();
-}
-
 
 // ----------------------------------------------------------------------------
 
