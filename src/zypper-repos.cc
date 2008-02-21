@@ -483,7 +483,7 @@ void init_target (Zypper & zypper) {
     }
     catch (const Exception & e)
     {
-      report_problem(e,
+      zypper.out().error(e,
         _("Target initialization failed:"),
         geteuid() != 0 ?
           _("Running 'zypper refresh' as root might resolve the problem."):""
@@ -681,7 +681,7 @@ void refresh_repos(Zypper & zypper)
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         _("Error reading repositories:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
@@ -842,7 +842,7 @@ void clean_repos(Zypper & zypper)
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         _("Error reading repositories:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
@@ -1031,7 +1031,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   catch (const RepoException & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
         _("Problem transferring repository data from specified URL:"),
         is_cd ? "" : _("Please check whether the specified URL is accessible."));
     ERR << "Problem transferring repository data from specified URL" << endl;
@@ -1041,7 +1041,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e, _("Unknown problem when adding repository:"));
+    zypper.out().error(e, _("Unknown problem when adding repository:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_BUG);
     return;
   }
@@ -1138,7 +1138,7 @@ void add_repo_from_file( Zypper & zypper,
   catch (const media::MediaException & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
       _("Problem accessing the file at the specified URL") + string(":"),
       _("Please check if the URL is valid and accessible."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
@@ -1147,7 +1147,7 @@ void add_repo_from_file( Zypper & zypper,
   catch (const parser::ParseException & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
       _("Problem parsing the file at the specified URL") + string(":"),
       // TranslatorExplanation don't translate the URL if the URL itself is not translated.
       // Also don't translate the '.repo' string.
@@ -1158,7 +1158,7 @@ void add_repo_from_file( Zypper & zypper,
   catch (const Exception & e)
   {
     ZYPP_CAUGHT(e);
-    report_problem(e,
+    zypper.out().error(e,
       _("Problem encountered while trying to read the file at the specified URL") + string(":"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
@@ -1436,7 +1436,7 @@ void load_repo_resolvables(Zypper & zypper)
     catch (const Exception & e)
     {
       ZYPP_CAUGHT(e);
-      report_problem(e,
+      zypper.out().error(e,
           boost::str(format(_("Problem loading data from '%s'")) % repo.name()),
           _("Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."));
       cerr << format(_("Resolvables from '%s' not loaded because of error."))

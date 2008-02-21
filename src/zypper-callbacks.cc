@@ -124,44 +124,6 @@ string to_string (zypp::Resolvable::constPtr resolvable) {
   return ss.str ();
 }
 
-// ----------------------------------------------------------------------------
-
-ZYPP_DEPRECATED void report_zypp_exception(const zypp::Exception & e)
-{
-  if (e.historySize())
-  {
-    if (Zypper::instance()->globalOpts().verbosity > VERBOSITY_NORMAL)
-    {
-      // print the whole history
-      cerr << e.historyAsString();
-      // this exception
-      cerr << " - " << e.asUserString();
-    }
-    else
-      // print the root cause only
-      cerr << *(--e.historyEnd());
-  }
-  else
-    cerr << e.asUserString();
-  cerr << endl;
-}
-
-// ----------------------------------------------------------------------------
-
-ZYPP_DEPRECATED void report_problem(const zypp::Exception & e,
-                    const string & problem_desc,
-                    const string & hint)
-{
-  // problem
-  cerr << problem_desc << endl;
-
-  // cause
-  report_zypp_exception(e);
-
-  // hint
-  if (!hint.empty())
-    cerr << hint << endl;
-}
 
 // ----------------------------------------------------------------------------
 

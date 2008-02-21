@@ -75,26 +75,6 @@ bool read_bool_answer(PromptId pid, const std::string & question, bool default_a
 std::string to_string (zypp::Resolvable::constPtr resolvable);
 
 /**
- * Prints exception message. If there is exception history available for the
- * exception, this method prints the root cause or the whole history (if
- * verbosity level is >2). Otherwise it just prist the e.asUserString() of the
- * exception passed.
- */
-void report_zypp_exception(const zypp::Exception & e);
-
-/**
- * Prints the problem description caused by an exception, its cause and,
- * optionaly, a hint for the user.
- * 
- * \param e Exception which caused the problem.
- * \param Problem description for the user.
- * \param Hint for the user how to cope with the problem.
- */
-void report_problem(const zypp::Exception & e,
-                    const std::string & problem_desc,
-                    const std::string & hint = "");
-
-/**
  * 
  */
 void report_too_many_arguments(const std::string & specific_help);

@@ -1513,7 +1513,7 @@ void solve_and_commit (Zypper & zypper)
       }
       catch ( const media::MediaException & e ) {
         ZYPP_CAUGHT(e);
-        report_problem(e,
+        zypper.out().error(e,
             _("Problem downloading the package file from the repository:"),
             _("Please see the above error message for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
@@ -1521,7 +1521,7 @@ void solve_and_commit (Zypper & zypper)
       }
       catch ( const zypp::repo::RepoException & e ) {
         ZYPP_CAUGHT(e);
-        report_problem(e,
+        zypper.out().error(e,
             _("Problem downloading the package file from the repository:"),
             _("Please see the above error message for a hint."));
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
@@ -1529,7 +1529,8 @@ void solve_and_commit (Zypper & zypper)
       }
       catch ( const zypp::FileCheckException & e ) {
         ZYPP_CAUGHT(e);
-        report_problem(e, _("The package integrity check failed. This may be a problem"
+        zypper.out().error(e,
+            _("The package integrity check failed. This may be a problem"
             " with the repository or media. Try one of the following:\n"
             "\n"
             "- just retry previous command\n"

@@ -1526,7 +1526,7 @@ void Zypper::doCommand()
     catch (const repo::RepoUnknownTypeException & e)
     {
       ZYPP_CAUGHT(e);
-      report_problem(e,
+      out().error(e,
           _("Specified type is not a valid repository type:"),
           _("See 'zypper -h addrepo' or man zypper to get a list of known repository types."));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
@@ -2061,7 +2061,7 @@ void Zypper::doCommand()
     }
     catch (const Exception & e)
     {
-      report_problem(e,
+      out().error(e,
         _("Problem occurred initializing or executing the search query") + string(":"),
         string(_("See the above message for a hint.")) + " " +
           _("Running 'zypper refresh' as root might resolve the problem."));
