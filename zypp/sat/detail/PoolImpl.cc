@@ -158,6 +158,7 @@ namespace zypp
         if ( ! _pool->whatprovides )
         {
           DBG << "pool_createwhatprovides..." << endl;
+          ::pool_addfileprovides( _pool, sat::Pool::instance().systemRepo().get());
           ::pool_createwhatprovides( _pool );
         }
       }
