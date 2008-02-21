@@ -26,9 +26,6 @@ enum Error {
     INVALID,
 };
 */
-void display_done ( const std::string &id, std::ostream & out, const std::string& s);
-// newline if normal progress is on single line
-void display_done ( const std::string &id, std::ostream & out);
 
 //! \todo this must be rewritten as the error enums are different for some zypp callbacks
 template<typename Error>

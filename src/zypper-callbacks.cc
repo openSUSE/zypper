@@ -17,36 +17,6 @@ using namespace boost;
 
 // ----------------------------------------------------------------------------
 
-ZYPP_DEPRECATED void display_done ( const std::string &id, ostream & out, const string& s) {
-  static AliveCursor cursor;
-
-  if (Zypper::instance()->globalOpts().machine_readable)
-  {
-    cout << "<progress id=\"" << id << "\" type=\"done\" name=\"" << s << "\"/>" << endl;
-    return;
-  }
-
-  out << CLEARLN << cursor.done() << " " << s;
-  out << flush;
-  out << endl;
-}
-
-// ----------------------------------------------------------------------------
-
-ZYPP_DEPRECATED void display_done (const std::string &id, ostream & out) {
-
-  if (Zypper::instance()->globalOpts().machine_readable)
-  {
-    display_done( id, cout, "");
-    return;
-  }
-
-
-  out << endl;
-}
-
-// ----------------------------------------------------------------------------
-
 //template<typename Action>
 //Action ...
 int read_action_ari (PromptId pid, int default_action) {
