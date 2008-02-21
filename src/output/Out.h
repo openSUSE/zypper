@@ -98,14 +98,15 @@ public:
                         const std::string & label,
                         int value = -1) = 0;
   virtual void progressEnd(const std::string & id,
-                          const std::string & label) = 0;
+                           const std::string & label,
+                           bool error = false) = 0; // might be a string with error message instead
 
   // progress with download rate
   virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
   virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              int rate = -1) = 0;
-  virtual void dwnldProgressEnd(const zypp::Url & uri) = 0;
+  virtual void dwnldProgressEnd(const zypp::Url & uri, bool error = false) = 0;
 
   virtual void prompt(PromptId id,
                       const std::string & prompt,

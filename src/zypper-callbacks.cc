@@ -15,41 +15,6 @@
 using namespace std;
 using namespace boost;
 
-ZYPP_DEPRECATED void display_progress ( const std::string &id, ostream & out, const string& s, int percent) {
-  static AliveCursor cursor;
-
-  if (Zypper::instance()->globalOpts().machine_readable)
-  {
-    cout << "<progress id=\"" << id << "\" type=\"percentage\" value=\"" << percent << "\" name=\"" << s << "\"/>" << endl;
-    return;
-  }
-
-  if ( percent == 100 )
-    out << CLEARLN << cursor.done() << " " << s;
-  else
-    out << CLEARLN << cursor++ << " " << s;
-  // dont display percents if invalid
-  if (percent >= 0 && percent <= 100)
-    out << " [" << percent << "%]";
-  out << flush;
-}
-
-// ----------------------------------------------------------------------------
-
-ZYPP_DEPRECATED void display_tick ( const std::string &id, ostream & out, const string& s) {
-  static AliveCursor cursor;
-
-  if (Zypper::instance()->globalOpts().machine_readable)
-  {
-    cout << "<progress id=\"" << id << "\" type=\"tick\" value=\"" << -1 << "\" name=\"" << s << "\"/>" << endl;
-    return;
-  }
-
-  cursor++;
-  out << CLEARLN << cursor << " " << s;
-  out << flush;
-}
-
 // ----------------------------------------------------------------------------
 
 ZYPP_DEPRECATED void display_done ( const std::string &id, ostream & out, const string& s) {

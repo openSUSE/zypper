@@ -10,67 +10,23 @@
 #ifndef ZMART_SOURCE_CALLBACKS_H
 #define ZMART_SOURCE_CALLBACKS_H
 
-#include <stdlib.h>
-#include <iostream>
-#include <boost/algorithm/string.hpp>
+#include <sstream>
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Pathname.h"
-#include "zypp/KeyRing.h"
-#include "zypp/Digest.h"
 #include "zypp/Url.h"
 
 #include "zypper.h"
 #include "zypper-callbacks.h"
 #include "zypper-utils.h"
-#include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
 ///////////////////////////////////////////////////////////////////    
-/*    // progress for probing a source
-    struct ProbeSourceReceive : public zypp::callback::ReceiveReport<zypp::source::ProbeRepoReport>
-    {
-      virtual void start(const zypp::Url &url)
-      {
-        cout << "Determining " << url << " source type..." << endl;
-      }
-      
-      virtual void failedProbe( const zypp::Url & url*//*, const std::string & type )
-      {
-        cout << ".. not " << type << endl;
-      }
-      
-      virtual void successProbe( const zypp::Url &url, const std::string & type )
-      {
-        cout << url << " is type " << type << endl;
-      }
-      
-      virtual void finish(const zypp::Url & url*//*, Error error, const std::string & reason )
-      {
-        if ( error == INVALID )
-        {
-          cout << reason << endl;
-          exit(-1);
-        }
-      }
 
-      virtual bool progress(const zypp::Url & url*//*, int value*//*)
-      { return true; }
-
-      virtual Action problem( const zypp::Url & url*//*, Error error, const std::string & description )
-      {
-	display_done ();
-	display_error (error, description);
-        exit(-1);
-        return ABORT;
-      }
-    };
-    */
 // progress for downloading a resolvable
 struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::repo::DownloadResolvableReport>
 {
@@ -78,14 +34,10 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   zypp::Url _url;
   zypp::Pathname _delta;
   zypp::ByteCount _delta_size;
+  std::string _label_apply_delta;
   zypp::Pathname _patch;
   zypp::ByteCount _patch_size;
-  
-  void display_step( const std::string &id, const std::string &what, int value )
-  {
-    display_progress ("download-resolvable", cout_v, what, value);
-  }
-  
+
   // Dowmload delta rpm:
   // - path below url reported on start()
   // - expected download size (0 if unknown)
@@ -93,28 +45,35 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   // - problems are just informal
   virtual void startDeltaDownload( const zypp::Pathname & filename, const zypp::ByteCount & downloadsize )
   {
-      _delta = filename;
-      _delta_size = downloadsize;
-      cout_n << _("Downloading delta") << ": "
-          << _delta << ", " << _delta_size << std::endl;
+    _delta = filename;
+    _delta_size = downloadsize;
+    ostringstream s;
+    s << _("Downloading delta") << ": "
+        << _delta << ", " << _delta_size;
+    Zypper::instance()->out().info(s.str());
   }
 
   virtual bool progressDeltaDownload( int value )
   {
+    // seems this is never called, the progress is reported by the media backend anyway
+    INT << "not impelmented" << endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
-    display_step( "apply-delta", _("Downloading delta") /*+ _delta.asString()*/, value );
+    //display_step( "apply-delta", _("Downloading delta") /*+ _delta.asString()*/, value );
     return true;
   }
 
   virtual void problemDeltaDownload( const std::string & description )
   {
-    std::cerr << description << std::endl;
+    Zypper::instance()->out().error(description);
   }
-  
+
+  // implementation not needed prehaps - the media backend reports the download progress
+  /*
   virtual void finishDeltaDownload()
   {
     display_done ("download-resolvable", cout_v);
   }
+  */
 
   // Apply delta rpm:
   // - local path of downloaded delta
@@ -122,24 +81,28 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   // - problems are just informal
   virtual void startDeltaApply( const zypp::Pathname & filename )
   {
-    _delta = filename;
-    cout_n << _("Applying delta") << ": " << _delta << std::endl;
+    _delta = filename.basename();
+    ostringstream s;
+    // translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+    s << _("Applying delta") << ": " << _delta;
+    _label_apply_delta = s.str();
+    Zypper::instance()->out().progressStart("apply-delta", _label_apply_delta, false);
   }
 
   virtual void progressDeltaApply( int value )
   {
-    // TranslatorExplanation This text is a progress display label e.g. "Applying delta [42%]"
-    display_step( "apply-delta", _("Applying delta") /* + _delta.asString()*/, value );
+    Zypper::instance()->out().progress("apply-delta", _label_apply_delta, value);
   }
 
   virtual void problemDeltaApply( const std::string & description )
   {
-    std::cerr << description << std::endl;
+    Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta, true);
+    Zypper::instance()->out().error(description);
   }
 
   virtual void finishDeltaApply()
   {
-    display_done ("apply-delta", cout_v);
+    Zypper::instance()->out().progressEnd("apply-delta", _label_apply_delta);
   }
 
   // Dowmload patch rpm:
@@ -148,36 +111,46 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   // - download is interruptable
   virtual void startPatchDownload( const zypp::Pathname & filename, const zypp::ByteCount & downloadsize )
   {
-    _patch = filename;
+    _patch = filename.basename();
     _patch_size = downloadsize;
-    cout_n << _("Downloading patch rpm") << ": "
-	      << _patch << ", " << _patch_size << std::endl;
+    ostringstream s;
+    s << _("Downloading patch rpm") << ": " << _patch << ", " << _patch_size;
+    Zypper::instance()->out().info(s.str());
   }
 
   virtual bool progressPatchDownload( int value )
   {
+    // seems this is never called, the progress is reported by the media backend anyway
+    INT << "not impelmented" << endl;
     // TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
-    display_step( "apply-delta", _("Applying patch rpm") /* + _patch.asString() */, value );
+    //display_step( "apply-delta", _("Applying patch rpm") /* + _patch.asString() */, value );
     return true;
   }
-  
+
   virtual void problemPatchDownload( const std::string & description )
   {
-    std::cerr << description << std::endl;
+    Zypper::instance()->out().error(description);
   }
-  
+
+  // implementation not needed prehaps - the media backend reports the download progress
+  /*
   virtual void finishPatchDownload()
   {
     display_done ("apply-delta", cout_v);
   }
-  
-  
+  */
+
+  /** this is interesting because we have full resolvable data at hand here
+   * The media backend has only the file URI
+   * \todo combine this and the media data progress callbacks in a reasonable manner
+   */
   virtual void start( zypp::Resolvable::constPtr resolvable_ptr, const zypp::Url & url )
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
 
-    cout_n << boost::format(_("Downloading %s %s-%s.%s"))
+    ostringstream s;
+    s << boost::format(_("Downloading %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
@@ -187,32 +160,38 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 //      dynamic_pointer_cast<const zypp::ResObject::constPtr> (resolvable_ptr);
     zypp::Package::constPtr ro = zypp::asKind<zypp::Package> (resolvable_ptr);
     if (ro) {
-      cout_n << ", " << ro->downloadSize () << " "
+      s << ", " << ro->downloadSize () << " "
           // TranslatorExplanation %s is package size like "5.6 M"
           << boost::format(_("(%s unpacked)")) % ro->size();
     }
-    cout_n << std::endl;
+    Zypper::instance()->out().info(s.str());
   }
 
   // return false if the download should be aborted right now
   virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
   {
+    // seems this is never called, the progress is reported by the media backend anyway
+    INT << "not impelmented" << endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
-    display_step( "download-resolvable", _("Downloading") /* + resolvable_ptr->name() */, value );
+//    display_step( "download-resolvable", _("Downloading") /* + resolvable_ptr->name() */, value );
     return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
-    std::cerr << description << std::endl;
+    Zypper::instance()->out().error(description);
+    DBG << "error report" << endl;
     return (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
   }
 
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*/, Error error, const std::string & reason )
+  // implementation not needed prehaps - the media backend reports the download progress
+  /*
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*//*, Error error, const std::string & reason )
   {
     display_done ("download-resolvable", cout_v);
     display_error (error, reason);
   }
+  */
 };
 
 struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::ProgressReport>
@@ -261,19 +240,12 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
     _repo = repo;
     Zypper::instance()->out()
       .progressStart("repo", "(" + _repo.name() + ") " + pd.name());
-    //display_step(pd);
   }
-/*
-  void display_step(const zypp::ProgressData & pd)
-  {
-    display_progress("repo", cout_n, "(" + _repo.name() + ") " + pd.name(), pd.val());
-  }
-*/
+
   virtual bool progress(const zypp::ProgressData & pd)
   {
     Zypper::instance()->out()
       .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
-//    display_step(pd);
     return true;
   }
   
@@ -281,8 +253,7 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   {
     Zypper::instance()->out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
-//    display_done ("repo", cout_n);
-    display_error (error, description);
+    Zypper::instance()->out().error(zcb_error2str(error, description));
     return (Action) read_action_ari (PROMPT_ARI_REPO_PROBLEM, ABORT);
   }
 
@@ -290,13 +261,14 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
   {
     Zypper::instance()->out()
       .progressEnd("repo", "(" + _repo.name() + ") ");
+    if (error != NO_ERROR)
+      Zypper::instance()->out().error(zcb_error2str(error, reason));
 //    display_step(100);
-    // many of these, avoid newline
-    if (boost::algorithm::starts_with (task, "Reading patch"))
-      cout_n << '\r' << flush;
+    // many of these, avoid newline -- probably obsolete??
+    //if (task.find("Reading patch") == 0) 
+      //cout_n << '\r' << flush;
 //    else
 //      display_done ("repo", cout_n);
-    display_error (error, reason);
   }
 
   zypp::RepoInfo _repo;
@@ -308,14 +280,12 @@ struct RepoReportReceiver  : public zypp::callback::ReceiveReport<zypp::repo::Re
 class SourceCallbacks {
 
   private:
-//    ZmartRecipients::ProbeSourceReceive _sourceProbeReport;
     ZmartRecipients::RepoReportReceiver _repoReport;
     ZmartRecipients::DownloadResolvableReportReceiver _downloadReport;
     ZmartRecipients::ProgressReportReceiver _progressReport;
   public:
     SourceCallbacks()
     {
-//      _sourceProbeReport.connect();
       _repoReport.connect();
       _downloadReport.connect();
       _progressReport.connect();
@@ -323,7 +293,6 @@ class SourceCallbacks {
 
     ~SourceCallbacks()
     {
-//      _sourceProbeReport.disconnect();
       _repoReport.disconnect();
       _downloadReport.disconnect();
       _progressReport.disconnect();

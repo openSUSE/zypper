@@ -95,16 +95,14 @@ namespace ZmartRecipients
     }
 
     // not used anywhere in libzypp 3.20.0
-    virtual DownloadProgressReport::Action problem( const zypp::Url & /*file*/, DownloadProgressReport::Error error, const std::string & description )
+    virtual DownloadProgressReport::Action
+    problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
-      if (_gopts.verbosity >= VERBOSITY_NORMAL)
-      {
-        if (gData.show_media_progress_hack)
-          display_done ("download", cout_n);
-        else
-          display_done ("download", cout_v);
-      }
-      display_error (error, description);
+      Out & out = Zypper::instance()->out();
+      if (gData.show_media_progress_hack || out.verbosity() >= Out::HIGH)
+        out.dwnldProgressEnd(uri, true);
+      out.error(zcb_error2str(error, description));
+
       return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
     }
 

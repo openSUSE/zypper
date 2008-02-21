@@ -26,33 +26,33 @@ enum Error {
     INVALID,
 };
 */
-void display_progress ( const std::string &id, std::ostream & out, const std::string& s, int percent);
-void display_tick ( const std::string &id, std::ostream & out, const std::string& s);
 void display_done ( const std::string &id, std::ostream & out, const std::string& s);
 // newline if normal progress is on single line
 void display_done ( const std::string &id, std::ostream & out);
 
 //! \todo this must be rewritten as the error enums are different for some zypp callbacks
 template<typename Error>
-void display_error (Error error, const std::string& reason) {
+std::string zcb_error2str (Error error, const std::string & reason)
+{
+  std::string errstr;
   if (error != 0 /*NO_ERROR*/)
   {
     static const char * error_s[] = {
       // TranslatorExplanation These are reasons for various failures.
       "", _("Not found"), _("I/O error"), _("Invalid object")
     };
-    std::ostream& stm = std::cerr;
 
     // error type:
     if (error < 3)
-      stm << error_s[error];
+      errstr += error_s[error];
     else
-      stm << _("Error");
+      errstr += _("Error");
     // description
     if (!reason.empty())
-	stm << ": " << reason;
-    stm << std::endl;
+      errstr += ": " + reason;
   }
+  
+  return errstr;
 }
 
 /**

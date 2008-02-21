@@ -75,14 +75,15 @@ void OutXML::error(const zypp::Exception & e,
 }
 
 void OutXML::writeProgressTag(const string & id, const string & label,
-                              int value, bool done)
+                              int value, bool done, bool error)
 {
   cout << "<progress ";
   cout << " id=\"" << id << "\"";
   cout << " name=\"" << label << "\"";
-  if (value >= 0)
+  if (done)
+    cout << " done=\"" << error << "\"";
+  else if (value >= 0)
     cout << " value=\"" << value << "\"";
-  cout << " done=\"" << done << "\"";
   cout << "/>" << endl;
 }
 
@@ -93,6 +94,7 @@ void OutXML::progressStart(const string & id,
   if (progressFilter())
     return;
 
+  //! \todo there is a bug in progress data which returns has_range false incorrectly
   writeProgressTag(id, label, has_range ? 0 : -1, false);
 }
 
@@ -106,12 +108,12 @@ void OutXML::progress(const string & id,
   writeProgressTag(id, label, value, false);
 }
 
-void OutXML::progressEnd(const string & id, const string& label)
+void OutXML::progressEnd(const string & id, const string& label, bool error)
 {
   if (progressFilter())
     return;
 
-  writeProgressTag(id, label, 100, true);
+  writeProgressTag(id, label, 100, true, error);
 }
 
 // progress with download rate
@@ -127,7 +129,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
   cout << "<not-implemented what=\"dwnlod-progress\">" << endl;
 }
 
-void OutXML::dwnldProgressEnd(const zypp::Url & uri)
+void OutXML::dwnldProgressEnd(const zypp::Url & uri, bool error)
 {
   cout << "<not-implemented what=\"dwnlod-progress-end\">" << endl;
 }

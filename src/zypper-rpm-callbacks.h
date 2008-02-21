@@ -11,7 +11,7 @@
 #define ZMART_RPM_CALLBACKS_H
 
 #include <iostream>
-#include <string>
+#include <sstream>
 
 #include <boost/format.hpp>
 
@@ -23,7 +23,6 @@
 #include "zypper.h"
 #include "zypper-callbacks.h"
 #include "AliveCursor.h"
-#include "output/prompt.h"
 
 using namespace std;
 
@@ -109,7 +108,8 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
   virtual void start()
   {
     last_reported = 0;
-    progress (0);
+    Zypper::instance()->out().progressStart(
+      "read-installed-packages", _("Reading installed packages"));
   }
 
   virtual bool progress(int value)
@@ -117,20 +117,25 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
     // this is called too often. relax a bit.
     static int last = -1;
     if (last != value)
-      display_progress ( "read-installed-packages", cout_n, _("Reading installed packages"), value);
+      Zypper::instance()->out().progress(
+        "read-installed-packages", _("Reading installed packages"), value);
     last = value;
     return true;
   }
 
   virtual Action problem( zypp::target::rpm::ScanDBReport::Error error, const std::string & description )
   {
+    Zypper::instance()->out().progressEnd(
+      "read-installed-packages", _("Reading installed packages"), true);
     return zypp::target::rpm::ScanDBReport::problem( error, description );
   }
 
   virtual void finish( Error error, const std::string & reason )
   {
-    display_done ("read-installed-packages", cout_n);
-    display_error (error, reason);
+    Zypper::instance()->out()
+      .progressEnd("read-installed-packages", _("Reading installed packages"));
+    if (error != NO_ERROR)
+      Zypper::instance()->out().error(zcb_error2str(error, reason));
   }
 };
 
@@ -138,32 +143,37 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
  // progress for removing a resolvable
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
+  std::string _label;
+
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
-    //! \todo (10.3+) use format
-    display_progress ( "remove-resolvable", cout,
-        _("Removing ") + resolvable->name() + string("-") + resolvable->edition().asString(), 0);
+    // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+    _label = boost::str(boost::format(_("Removing %s-%s"))
+        % resolvable->name() % resolvable->edition()); 
+    Zypper::instance()->out().progressStart("remove-resolvable", _label);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
-    // TranslatorExplanation This text is a progress display label e.g. "Removing [42%]"
-    display_progress ( "remove-resolvable", cout_n,
-        _("Removing ") + resolvable->name() + string("-") + resolvable->edition().asString(), value);
+    Zypper::instance()->out().progress("remove-resolvable", _label, value);
     return true;
   }
 
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
-    cerr << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
-    display_error (error, description);
+    Zypper::instance()->out().progressEnd("remove-resolvable", _label, true);
+    ostringstream s;
+    s << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
+    s << zcb_error2str(error, description);
+    Zypper::instance()->out().error(s.str());
     return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
   }
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
-    display_done ( "remove-resolvable", cout);
-    display_error (error, reason);
+    Zypper::instance()->out().progressEnd("remove-resolvable", _label);
+    if (error != NO_ERROR)
+      Zypper::instance()->out().error(zcb_error2str(error, reason));
   }
 };
 
@@ -180,28 +190,24 @@ ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::
 struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::InstallResolvableReport>
 {
   zypp::Resolvable::constPtr _resolvable;
+  std::string _label;
 
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
-    // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
-    string s = boost::str(boost::format(_("Installing: %s-%s"))
-        % resolvable->name() % resolvable->edition());
-    display_progress ( "install-resolvable", cout_n, s,  value);
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
     _resolvable = resolvable;
-    
-    string s =
-      boost::str(boost::format(_("Installing: %s-%s"))
+    // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+    _label = boost::str(boost::format(_("Installing: %s-%s"))
         % resolvable->name() % resolvable->edition());
-    display_progress ( "install-resolvable", cout, s,  0);
+    Zypper::instance()->out().progressStart("install-resolvable", _label);
   }
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
-    display_step( resolvable, value );
+    Zypper::instance()->out().progress("install-resolvable", _label, value);
     return true;
   }
 
@@ -209,15 +215,16 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
   {
     if (level < RPM_NODEPS_FORCE)
     {
-      std::string msg = "Install failed, will retry more aggressively (with --no-deps, --force).";
-      cerr_vv << msg << std::endl;
-      DBG << msg << std::endl;
+      DBG << "Install failed, will retry more aggressively"
+             " (with --no-deps, --force)." << std::endl;
       return ABORT;
     }
 
-    cerr << boost::format(_("Installation of %s failed:")) % resolvable
-        << std::endl;
-    cerr << level << " "; display_error (error, description);
+    Zypper::instance()->out().progressEnd("install-resolvable", _label, true);
+    ostringstream s;
+    s << boost::format(_("Installation of %s failed:")) % resolvable << std::endl;
+    s << level << " " << zcb_error2str(error, description);
+    Zypper::instance()->out().error(s.str());
 
     return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
   }
@@ -231,12 +238,12 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
       return;
     }
 
-    display_done ("install-resolvable", cout);
-
+    Zypper::instance()->out().progressEnd("remove-resolvable", _label);
     if (error != NO_ERROR)
     {
-      cerr << level << " ";
-      display_error (error, reason);
+      ostringstream s;
+      s << level << " " << zcb_error2str(error, reason);
+      Zypper::instance()->out().error(s.str());
     }
   }
 };

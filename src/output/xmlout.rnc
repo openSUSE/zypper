@@ -37,7 +37,7 @@ progress-done =
   element progress {
     attribute id { xsd:string },
     attribute name { xsd:string },
-    attribute done { xsd:boolean },
+    attribute done { xsd:boolean }, # 0 on success, 1 on error
   }
 
 download-progress-elements = ( download-progress-element | download-progress-done )
