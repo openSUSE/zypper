@@ -24,14 +24,16 @@ public:
   virtual void progress(const std::string & id,
                         const std::string & label,
                         int value = -1);
-  virtual void progressEnd(const std::string & id, const std::string & label);
+  virtual void progressEnd(const std::string & id,
+                           const std::string & label,
+                           bool error);
 
   // progress with download rate
   virtual void dwnldProgressStart(const zypp::Url & uri);
   virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              int rate = -1);
-  virtual void dwnldProgressEnd(const zypp::Url & uri);
+  virtual void dwnldProgressEnd(const zypp::Url & uri, bool error);
   
   virtual void prompt(PromptId id,
                       const std::string & prompt,

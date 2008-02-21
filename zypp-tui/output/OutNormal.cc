@@ -123,7 +123,7 @@ void OutNormal::progress(const std::string & id, const string & label, int value
     display_tick(id, label);
 }
 
-void OutNormal::progressEnd(const std::string & id, const string& label)
+void OutNormal::progressEnd(const std::string & id, const string & label, bool error)
 {
   if (progressFilter())
     return;
@@ -167,7 +167,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   cout << std::flush;
 }
 
-void OutNormal::dwnldProgressEnd(const zypp::Url & uri)
+void OutNormal::dwnldProgressEnd(const zypp::Url & uri, bool error)
 {
   if (verbosity() < NORMAL)
     return;
@@ -178,7 +178,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
     cout << zypp::Pathname(uri.getPathName()).basename();
-  cout << " [" << _("done") << "]";
+  cout << " [" << (error ? _("error") : _("done")) << "]";
   cout << endl << std::flush;
 }
 
