@@ -104,26 +104,26 @@ namespace zypp
       switch (key->type)
       {
         case TYPE_ID:
-        if (key->name == SolvAttr::mediadir.idStr().id())
-        {
-          if (data->localpool)
-            lc->mediadir = stringpool_id2str(&data->spool, kv->id);
-          else
-            lc->mediadir = id2str(data->repo->pool, kv->id);
-        }
-        break;
+          if (key->name == SolvAttr::mediadir.idStr().id())
+          {
+            if (data->localpool)
+              lc->mediadir = stringpool_id2str(&data->spool, kv->id);
+            else
+              lc->mediadir = id2str(data->repo->pool, kv->id);
+          }
+          break;
         case TYPE_STR:
-        if (key->name == SolvAttr::mediafile.idStr().id())
-          lc->mediafile = kv->str;
-        break;
-          case TYPE_VOID:
-        if (key->name == SolvAttr::mediafile.idStr().id())
-          lc->trivial = 1;
-        break;
-          case TYPE_CONSTANT:
-        if (key->name == SolvAttr::medianr.idStr().id())
-          lc->medianr = kv->num;
-        break;
+          if (key->name == SolvAttr::mediafile.idStr().id())
+            lc->mediafile = kv->str;
+          break;
+        case TYPE_VOID:
+          if (key->name == SolvAttr::mediafile.idStr().id())
+            lc->trivial = 1;
+          break;
+        case TYPE_CONSTANT:
+          if (key->name == SolvAttr::medianr.idStr().id())
+            lc->medianr = kv->num;
+          break;
       }
       /* continue walking */
       return 0;
@@ -153,13 +153,6 @@ namespace zypp
       medianr = lc.medianr;
       std::string ret;
 
-      if (!lc.trivial)
-      {
-        if (lc.mediafile)
-          ret += lc.mediafile;
-        return ret;
-      }
-
       if (lc.mediadir)
       {
         ret += std::string( lc.mediadir ) + "/";
@@ -171,6 +164,14 @@ namespace zypp
         ret += "suse/";
         ret += IdString(_solvable->arch).asString() + "/";
       }
+
+      if (!lc.trivial)
+      {
+        if (lc.mediafile)
+          ret += lc.mediafile;
+        return ret;
+      }
+
       /* Trivial means that we can construct the rpm name from our
          solvable data, as name-evr.arch.rpm .  */
       ret += IdString(_solvable->name).asString();
