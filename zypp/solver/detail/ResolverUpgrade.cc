@@ -230,16 +230,15 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   MIL << "target at " << target << endl;
 
   MIL << "doUpgrade start... "
-    << "(delete_unmaintained:" << (opt_stats_r.delete_unmaintained?"yes":"no") << ")"
     << "(silent_downgrades:" << (opt_stats_r.silent_downgrades?"yes":"no") << ")"
-    << "(keep_installed_patches:" << (opt_stats_r.keep_installed_patches?"yes":"no") << ")"
     << endl;
 
   // create a testcase for the updating system
   Testcase testcase("/var/log/updateTestcase");
   testcase.createTestcase (*this, true, false); // create pool, do not solve
 
-  _update_items.clear();
+  _unmaintained_items.clear();
+  _problem_items.clear();
   {
     UpgradeOptions opts( opt_stats_r );
     opt_stats_r = UpgradeStatistics();
@@ -360,32 +359,24 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     if ( installed.status().isLocked() ) {			// skip locked
       MIL << "SKIP taboo: " << installed << endl;
       ++opt_stats_r.chk_is_taboo;
-      _update_items.push_back( installed );			// remember in problem list
+      _problem_items.push_back( installed );			// remember in problem list
       continue;
     }
 
     if ( isKind<Patch>(installed.resolvable())
          || isKind<Atom>(installed.resolvable())
          || isKind<Script>(installed.resolvable())
-         || isKind<Message>(installed.resolvable()) )
-      {
-        if ( ! opt_stats_r.keep_installed_patches )
-          {
-            if ( isKind<Patch>(installed.resolvable()) )
-              MIL << "OUTDATED Patch: " << installed << endl;
-            installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
-          }
-        else
-          {
-            if ( isKind<Patch>(installed.resolvable()) )
-              MIL << "SKIP Patch: " << installed << endl;
-          }
-        continue;
-      }
+         || isKind<Message>(installed.resolvable())
+	 || isKind<Pattern>(installed.resolvable()))
+    {
+	MIL << "Delete old: " << installed << endl;
+	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
+        continue;	
+    }
 
     CandidateMap::iterator cand_it = candidatemap.find( installed );
 
-    bool probably_dropped = false;
+    bool can_be_dropped = false;
 
     MIL << "REPLACEMENT FOR " << installed << endl;
     ///////////////////////////////////////////////////////////////////
@@ -496,8 +487,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	  if (otherVendorFound) {
 	      MIL << " only resolvable with other vendor found ==> do nothing" << endl;
 	  } else {
-	      MIL << " ==> (dropped)" << endl;
-	      probably_dropped = true;
+	      MIL << " ==> dropp if it does not fit to the system" << endl;
+	      can_be_dropped = true;
 	  }
 	break;
       case 1:
@@ -521,9 +512,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     // now handle dropped package
     ///////////////////////////////////////////////////////////////////
 
-    if ( probably_dropped ) {
-      ++opt_stats_r.chk_dropped;
-      _update_items.push_back( installed );
+    if ( can_be_dropped ) {
+      _unmaintained_items.push_back( installed );
     }
 
   } // pass 1 end

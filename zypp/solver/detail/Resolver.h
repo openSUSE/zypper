@@ -69,7 +69,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _testing;
 
     // list of problematic items after doUpgrade()
-    PoolItemList _update_items;
+    PoolItemList _problem_items;
+
+    // list of not supported packages
+    PoolItemList _unmaintained_items;    
 
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
@@ -144,7 +147,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolvePool();
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
-    PoolItemList problematicUpdateItems( void ) const { return _update_items; }
+    PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);

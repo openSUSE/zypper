@@ -57,8 +57,6 @@ UpgradeStatistics::~UpgradeStatistics()
 std::ostream &
 UpgradeStatistics::dumpOn( std::ostream & str ) const
 {
-  str << "===[options]========================================" << endl;
-  str << "delete_unmaintained? " << (delete_unmaintained?"Y":"N") << endl;
   str << "===[initial]========================================" << endl;
   str << "pre_todel            " << pre_todel << endl;
   str << "pre_nocand           " << pre_nocand << endl;

@@ -51,30 +51,16 @@ class UpgradeOptions {
     ///////////////////////////////////////////////////////////////////
 
     /**
-     * If true, dropped SuSE Packages will be preselected to delete
-     **/
-    bool delete_unmaintained;
-
-    /**
      * If true, version downgrades are silently performed. Assuming the
      * installation media contains a consistent sytem, and we target
      * this well defined state.
      **/
     bool silent_downgrades;
 
-    /**
-     * If false, the upgrade algorithm will tag all installed patches to
-     * be deleted. Note, that this will not delete any packages. Just the
-     * patch metadata are removed.
-     **/
-    bool keep_installed_patches;
-
   public:
 
     UpgradeOptions()
-    : delete_unmaintained   ( false )
-    , silent_downgrades     ( false )
-    , keep_installed_patches( true )
+    : silent_downgrades     ( false )
     {}
 
     ~UpgradeOptions() {}
@@ -236,10 +222,7 @@ class UpgradeStatistics : public UpgradeOptions {
      **/
     unsigned totalToDelete() const
     {
-      unsigned ret = chk_already_todel;
-      if ( delete_unmaintained )
-	ret += chk_dropped;
-      return ret;
+      return chk_already_todel + chk_dropped;
     }
 
     /**
@@ -247,10 +230,7 @@ class UpgradeStatistics : public UpgradeOptions {
      **/
     unsigned totalToKeep() const
     {
-      unsigned ret = chk_is_taboo + chk_to_keep_downgrade + chk_to_keep_installed + chk_keep_foreign;
-      if ( !delete_unmaintained )
-	ret += chk_dropped;
-      return ret;
+	return chk_is_taboo + chk_to_keep_downgrade + chk_to_keep_installed + chk_keep_foreign + chk_dropped;
     }
 };
 
