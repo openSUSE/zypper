@@ -150,6 +150,7 @@ SET( zypp_HEADERS
   RepoManager.h
   Repository.h
   RepoStatus.h
+  Filter.h
   ResFilters.h
   ResKind.h
   ResObject.h

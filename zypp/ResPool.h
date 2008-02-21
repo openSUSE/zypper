@@ -19,7 +19,7 @@
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/PoolItem.h"
-#include "zypp/ResFilters.h"
+#include "zypp/Filter.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -100,11 +100,11 @@ namespace zypp
       /** \name Iterate through all PoolItems matching a \c _Filter. */
       //@{
       template<class _Filter>
-          filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
+      filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
       { return make_filter_begin( filter_r, *this ); }
 
       template<class _Filter>
-          filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
+      filter_iterator<_Filter,const_iterator> filterEnd( const _Filter & filter_r ) const
       { return make_filter_end( filter_r, *this ); }
       //@}
 
@@ -237,7 +237,26 @@ namespace zypp
       //@}
 
      public:
-      /** \name Iterate through requested/available Locales.
+      /** \name Handle locale support.
+       *
+       * A \ref filter::ByLocaleSupportort is provided to iterate over
+       * all items supporting a specific locale.
+       * \code
+       * ResPool pool( ResPool::instance() );
+       *
+       * filter::ByLocaleSupport f( Locale("de") );
+       * for_( it, pool.filterBegin(f), pool.filterEnd(f) )
+       * {
+       *   MIL << *it << endl; // supporting "de"
+       * }
+       *
+       * f = filter::ByLocaleSupport( pool.getRequestedLocales() );
+       * for_( it, pool.filterBegin(f), pool.filterEnd(f) )
+       * {
+       *   MIL << *it << endl; // supporting any requested locale
+       * }
+       *
+       * \endcode
        */
       //@{
       /** Set the requested locales.

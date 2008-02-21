@@ -20,40 +20,40 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-namespace sat
-{ /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace sat
+  { /////////////////////////////////////////////////////////////////
 
-  WhatProvides::WhatProvides( Capability cap_r )
-  : _begin( myPool().whatProvides( cap_r ) )
-  {}
+    WhatProvides::WhatProvides( Capability cap_r )
+    : _begin( myPool().whatProvides( cap_r ) )
+    {}
 
-  WhatProvides::size_type WhatProvides::size() const
-  {
-    if ( ! _begin )
-      return 0;
-
-    Capabilities::size_type ret = 0;
-    for ( const sat::detail::IdType * end = _begin; *end; ++end )
+    WhatProvides::size_type WhatProvides::size() const
     {
-      ++ret;
+      if ( ! _begin )
+        return 0;
+
+      Capabilities::size_type ret = 0;
+      for ( const sat::detail::IdType * end = _begin; *end; ++end )
+      {
+        ++ret;
+      }
+      return ret;
     }
-    return ret;
-  }
 
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
-  */
-  std::ostream & operator<<( std::ostream & str, const WhatProvides & obj )
-  {
-    return dumpRange( str << "(" << obj.size() << ")", obj.begin(), obj.end() );
-  }
+    /******************************************************************
+    **
+    **	FUNCTION NAME : operator<<
+    **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & operator<<( std::ostream & str, const WhatProvides & obj )
+    {
+      return dumpRange( str << "(" << obj.size() << ")", obj.begin(), obj.end() );
+    }
 
-  /////////////////////////////////////////////////////////////////
-} // namespace sat
-///////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+  } // namespace sat
+  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

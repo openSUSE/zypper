@@ -130,6 +130,7 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
+      public:
         /** \name Iterate all Solvables matching a \c _Filter. */
         //@{
         template<class _Filter>
