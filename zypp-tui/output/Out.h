@@ -7,6 +7,8 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Url.h"
 
+#include "prompt.h"
+
 /**
  * 
  * - Logger (DBG, MIL, ...) must be in place
@@ -105,7 +107,9 @@ public:
                              int rate = -1) = 0;
   virtual void dwnldProgressEnd(const zypp::Url & uri) = 0;
 
-  //virtual void Prompt() = 0;
+  virtual void prompt(PromptId id,
+                      const std::string & prompt,
+                      const std::string & answer_hint) = 0;
 public:
   /** Get current verbosity. */
   Verbosity verbosity() { return _verbosity; }
