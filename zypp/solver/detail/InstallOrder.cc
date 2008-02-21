@@ -233,7 +233,7 @@ InstallOrder::rdfsvisit (const PoolItem item)
 	// first, look in _installed
         for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
             PoolItem provider = ResPool::instance().find( *iter );        
-            if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
+            if (provider != item	                                // resolvable could provide its own requirement
                 && (_installed.find( provider ) != _installed.end()))	// and is not installed
             {
                 XXX << "tovisit " << ITEMNAME(provider) << endl;
