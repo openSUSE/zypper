@@ -81,7 +81,12 @@ public:
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
   
   /**
+   * Prints the problem description caused by an exception, its cause and,
+   * optionaly, a hint for the user.
    * 
+   * \param e Exception which caused the problem.
+   * \param Problem description for the user.
+   * \param Hint for the user how to cope with the problem.
    */
   virtual void error(const zypp::Exception & e,
                      const std::string & problem_desc,
