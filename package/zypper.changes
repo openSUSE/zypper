@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Feb 22 10:18:37 CET 2008 - visnov@suse.cz
+
+- After generating testcase, also show the location in the message 
+
+-------------------------------------------------------------------
 Fri Feb 22 09:48:38 CET 2008 - ma@suse.de
 
 - Fixed typo in help text (bnc #363804)

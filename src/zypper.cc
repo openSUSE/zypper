@@ -1916,7 +1916,7 @@ void Zypper::doCommand()
       God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully."));
+        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
       else
       {
         out().error(_("Error creating the solver test case."));
@@ -2268,7 +2268,7 @@ void Zypper::doCommand()
       God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully."));
+        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
       else
         out().error(_("Error creating the solver test case."));
     }
@@ -2321,7 +2321,7 @@ void Zypper::doCommand()
       God->applyLocks();
       out().info(_("Generating solver test case..."));
       if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully."));
+        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
       else
         out().error(_("Error creating the solver test case."));
     }
