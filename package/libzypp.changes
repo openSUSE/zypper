@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 22 14:03:59 CET 2008 - ma@suse.de
+
+- Take care target uses --root when creating solv files (bnc #363789)
+- revision 8881
+
+-------------------------------------------------------------------
 Fri Feb 22 10:10:14 CET 2008 - schubi@suse.de
 
 - Unmaintained packages which does not fit to the updated system

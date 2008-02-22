@@ -361,6 +361,8 @@ void ttt( const char * lhs, const char * rhs )
   DBG << lhs << " <=> " << rhs << " --> " << ::strcmp( lhs, rhs ) << endl;
 }
 
+namespace zypp
+{
 namespace filter
 {
   template <class _MemFun, class _Value>
@@ -383,8 +385,6 @@ namespace filter
   { return HasValue<_MemFun, _Value>( fun_r, val_r ); }
 }
 
-namespace zypp
-{
 }
 
 template <class L>
@@ -422,50 +422,21 @@ namespace zypp
 namespace sat
 { /////////////////////////////////////////////////////////////////
 
-  class ByLocaleSupport
-  {
-    private:
-      typedef bool (sat::Solvable::*LS1) (const Locale &) const;
-      typedef bool (sat::Solvable::*LS2) (const LocaleSet &) const;
-
-    public:
-      /** Solvables with locale support. */
-      ByLocaleSupport()
-      : _sel( mem_fun_ref( &sat::Solvable::supportsLocales ) )
-      {}
-
-      /** Solvables supporting \c locale_r. */
-      ByLocaleSupport( const Locale & locale_r )
-      : _sel( bind( mem_fun_ref( (LS1)&sat::Solvable::supportsLocale ), _1, locale_r ) )
-      {}
-
-      /** Solvables supporting at least one locale in \c locales_r. */
-      ByLocaleSupport( const LocaleSet & locales_r )
-      : _sel( bind( boost::mem_fun_ref( (LS2)&sat::Solvable::supportsLocale ), _1, locales_r ) )
-      {}
-
-    public:
-      bool operator()( const sat::Solvable & solv_r ) const
-      { return _sel && _sel( solv_r ); }
-
-
-      template<class _Solv>
-      bool operator()( const _Solv & solv_r ) const
-      { return operator()( solv_r.satSolvable() ); }
-
-    private:
-      function<bool(const sat::Solvable &)> _sel;
-  };
-
 
   /////////////////////////////////////////////////////////////////
 } // namespace sat
 ///////////////////////////////////////////////////////////////////
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -522,7 +493,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -532,7 +503,16 @@ try {
   }
 
   USR << "pool: " << pool << endl;
+
   ///////////////////////////////////////////////////////////////////
+
+  function<bool(const sat::Solvable &)> _sel( bind( boost::mem_fun_ref( &sat::Solvable::isSystem ), _1 ) );
+  for_( it,
+        satpool.filterBegin( _sel ),
+        satpool.filterEnd  ( _sel ) )
+  {
+    INT << *it << endl;
+  }
 
   satpool.addRequestedLocale( Locale("de") );
   satpool.addRequestedLocale( Locale("cs") );
@@ -544,12 +524,14 @@ try {
 
   {
     Measure x( "de" );
-    sat::ByLocaleSupport f( Locale("de") );
+    filter::ByLocaleSupport f( Locale("de") );
     for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
     {
       MIL << *it << endl;
     }
   }
+
+
 
 
 

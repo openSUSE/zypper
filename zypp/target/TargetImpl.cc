@@ -323,35 +323,35 @@ namespace zypp
 
       if ( build_rpm_solv )
       {
+        // Take care we unlink the solvfile on exception
+        ManagedFile guard( rpmsolv, filesystem::unlink );
+        ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
+
         filesystem::TmpFile tmpsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() ) /*dir*/,
-                                     sat::Pool::instance().systemRepoName() /* prefix */);
+                                     sat::Pool::instance().systemRepoName() /* prefix */ );
 
          MIL << "Executing solv converter" << endl;
 
-#warning FIXME add root to rpmdb2solv
-        // FIXME add root to rpmdb2solv
-        string cmd;
-        if ( solvexisted )
-        {
-          MIL << "Old cache found, using it to speed up (merge)" << endl;
-          cmd = str::form( "rpmdb2solv \"%s\" > \"%s\"", rpmsolv.c_str(), tmpsolv.path().c_str() );
-        }
-        else
-        {
-          cmd = str::form( "rpmdb2solv > \"%s\"", tmpsolv.path().c_str() );
-        }
+         // FIXME add root to rpmdb2solv
+         ostringstream cmd;
+         cmd << "rpmdb2solv";
 
-        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+         if ( ! _root.empty() )
+           cmd << " -r '" << _root << "'";
+
+         if ( solvexisted )
+           cmd << " '" << rpmsolv << "'";
+
+         cmd << "  > '" << tmpsolv.path() << "'";
+
+        ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           MIL << "  " << output;
         }
         int ret = prog.close();
+
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to cache rpm database"));
-
-        // Take care we unlink the solvfile on exception
-        ManagedFile guard( rpmsolv, filesystem::unlink );
-        ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
 
         ret = filesystem::rename( tmpsolv, rpmsolv );
 
