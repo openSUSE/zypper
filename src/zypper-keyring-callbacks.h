@@ -39,7 +39,7 @@ namespace zypp {
         {
           MIL << "Accepting unsigned file (" << file << ")" << endl;
           Zypper::instance()->out().warning(boost::str(
-            boost::format(_("Warning: Accepting an unsigned file %s.")) % file),
+            boost::format(_("Accepting an unsigned file %s.")) % file),
             Out::HIGH);
           return true;
         }
@@ -66,7 +66,7 @@ namespace zypp {
         {
           MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
           Zypper::instance()->out().warning(boost::str(boost::format(
-              _("Warning: Accepting file %s signed with an unknown key %s."))
+              _("Accepting file %s signed with an unknown key %s."))
               % file % id));
           return true;
         }
@@ -110,7 +110,7 @@ namespace zypp {
               " with public key id %s, %s, fingerprint %s")
               % file % keyid % keyname % fingerprint << endl;
           Zypper::instance()->out().warning(boost::str(boost::format(
-              _("Warning: Ignoring failed signature verification for %s"
+              _("Ignoring failed signature verification for %s"
                 " with public key id %s, %s, fingerprint %s!\n"
                 "Double-check this is not caused by some malicious"
                 " changes in the file!"))

@@ -1429,7 +1429,7 @@ void mark_patch_updates( bool skip_interactive )
 	      // license to confirm and --skip-interactive is requested.
 	      // TranslatorExplanation %s is the name of a patch
 	      Zypper::instance()->out().warning(boost::str(format(
-	          _("WARNING: %s is interactive, skipped."))
+	          _("%s is interactive, skipped."))
 	          % res));
 	    }
 	    else {
