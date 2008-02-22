@@ -55,8 +55,11 @@
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
+#include "zypp/ResolverProblem.h"
+#include "zypp/ProblemSolution.h"
 #include "zypp/Target.h"
 #include "zypp/sat/SATResolver.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -214,8 +217,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
-
-  sat::Pool::instance().prepare();  
 
   Target_Ptr target;
   try {
@@ -420,6 +421,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // Remember new package for 2nd pass.
 
       Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
+      
       // find ALL providers
       sat::WhatProvides possibleProviders(installedCap);
 
@@ -513,7 +515,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     ///////////////////////////////////////////////////////////////////
 
     if ( can_be_dropped ) {
-      _unmaintained_items.push_back( installed );
+      _unmaintained_items.insert( installed );
     }
 
   } // pass 1 end
@@ -627,7 +629,13 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   // Setting Resolver to upgrade mode
   _upgradeMode = true;
+
+  // Unmaintained packages which does not fit to the updated system
+  // (broken dependencies) will be deleted.
+  checkUnmaintainedItems ();  
+  
 }
+
 
 ///////////////////////////////////////////////////////////////////
     };// namespace detail

@@ -106,6 +106,8 @@ namespace zypp
 	 **/ 
 	void addAction( solver::detail::SolutionAction_constPtr action );
 
+	solver::detail::CSolutionActionList actions() {return _actions;}
+
     };
 
 

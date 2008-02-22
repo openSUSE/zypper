@@ -72,7 +72,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _problem_items;
 
     // list of not supported packages
-    PoolItemList _unmaintained_items;    
+    PoolItemSet _unmaintained_items;    
 
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
@@ -105,6 +105,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 
+    // Unmaintained packages which does not fit to the updated system
+    // (broken dependencies) will be deleted.
+    void checkUnmaintainedItems ();
 
   public:
 
