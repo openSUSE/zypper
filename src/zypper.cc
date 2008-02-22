@@ -997,7 +997,7 @@ void Zypper::processCommandOptions()
       "Clean local caches.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI> Clean only only specified repositories.\n"
+      "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
       "-m, --metadata		Clean metadata cache instead of package cache.\n"
       "-a, --all		Clean both metadata and package caches.\n"
     );

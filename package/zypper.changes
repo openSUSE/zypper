@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 22 09:48:38 CET 2008 - ma@suse.de
+
+- Fixed typo in help text (bnc #363804)
+- revision 8860
+
+-------------------------------------------------------------------
 Thu Feb 21 14:11:23 CET 2008 - jkupec@suse.cz
 
 - xmlout - added support for <prompt> and <download> (bnc #345870)
