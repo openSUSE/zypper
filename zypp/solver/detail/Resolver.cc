@@ -323,7 +323,7 @@ void Resolver::checkUnmaintainedItems () {
 
 	    ProblemSolutionList solutions = problem.solutions();
 	    for (ProblemSolutionList::const_iterator iterSolution = solutions.begin();
-		 iterSolution != solutions.end(); ++iter) {
+		 iterSolution != solutions.end(); ++iterSolution) {
 		ProblemSolution_Ptr solution = *iterSolution;
 		DBG << "   Solution:" << endl;
 		DBG << "      " << solution->description() << endl;
