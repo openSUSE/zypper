@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 22 15:48:53 CET 2008 - jkupec@suse.cz
+
+- --xmlout almost done (special command result output missing)
+- fixed --quiet (#359188)
+- 0.10.1
+
+-------------------------------------------------------------------
 Fri Feb 22 10:18:37 CET 2008 - visnov@suse.cz
 
 - After generating testcase, also show the location in the message 
