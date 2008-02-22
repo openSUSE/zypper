@@ -65,7 +65,7 @@ struct FillTable
 
   bool operator()(const zypp::ResObject::Ptr &item) const
   {
-    std::cout << "result" << std::endl;
+    //std::cout << "result" << std::endl;
     TableRow row;
 
     // add other fields to the result table
