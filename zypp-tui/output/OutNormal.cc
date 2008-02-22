@@ -47,7 +47,7 @@ void OutNormal::warning(const std::string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  info(msg, verbosity, mask);
+  info(_("Warning: ") + msg, verbosity, mask);
 }
 
 void OutNormal::error(const std::string & problem_desc, const std::string & hint)
