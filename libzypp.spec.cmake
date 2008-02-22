@@ -48,7 +48,7 @@ Authors:
 Requires:       libzypp == @VERSION@
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
-Requires:       cmake
+Requires:       cmake libsatsolver-devel
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel

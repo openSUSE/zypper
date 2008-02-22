@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Feb 22 07:20:35 CET 2008 - coolo@suse.de
+
+- let libzypp-devel require libsatsolver-devel
+
+-------------------------------------------------------------------
 Wed Feb 20 13:47:56 CET 2008 - ma@suse.de
 
 - Cleanup unused /var/lib/zypp/cache in migrate_sources (#305160)
