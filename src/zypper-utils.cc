@@ -165,8 +165,10 @@ Url make_url (const string & url_s)
   }
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
-    cerr << _("Given URL is invalid") << ": " << urlstr
-         << " (" << excpt_r.asUserString() << ")" << endl;
+    ostringstream s;
+    s << _("Given URL is invalid") << ": " << urlstr
+      << " (" << excpt_r.asUserString() << ")";
+    Zypper::instance()->out().error(s.str());
   }
   return u;
 }
@@ -215,8 +217,9 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
 
     if (error)
     {
-      cerr << _("Problem copying the specified RPM file to the cache directory.")
-        << endl << _("Perhaps you are running out of disk space.") << endl; 
+      Zypper::instance()->out().error(
+        _("Problem copying the specified RPM file to the cache directory."),
+        _("Perhaps you are running out of disk space.")); 
       return Pathname();
     }
     return cachedrpmpath / localrpmpath.basename();

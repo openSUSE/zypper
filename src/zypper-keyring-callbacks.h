@@ -38,7 +38,9 @@ namespace zypp {
         if (_gopts.no_gpg_checks)
         {
           MIL << "Accepting unsigned file (" << file << ")" << endl;
-          cout_v << boost::format(_("Warning: Accepting an unsigned file %s.")) % file;
+          Zypper::instance()->out().warning(boost::str(
+            boost::format(_("Warning: Accepting an unsigned file %s.")) % file),
+            Out::HIGH);
           return true;
         }
 
@@ -63,9 +65,9 @@ namespace zypp {
         if (_gopts.no_gpg_checks)
         {
           MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
-          cout_n << boost::format(
+          Zypper::instance()->out().warning(boost::str(boost::format(
               _("Warning: Accepting file %s signed with an unknown key %s."))
-              % file % id;
+              % file % id));
           return true;
         }
 
@@ -84,9 +86,9 @@ namespace zypp {
         {
           MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
               % keyid % keyname % fingerprint << endl;
-          cout_n << boost::format(
+          Zypper::instance()->out().info(boost::str(boost::format(
               _("Automatically trusting key id %s, %s, fingerprint %s"))
-              % keyid % keyname % fingerprint << endl;
+              % keyid % keyname % fingerprint));
           return true;
         }
 
@@ -107,23 +109,21 @@ namespace zypp {
               "Ignoring failed signature verification for %s"
               " with public key id %s, %s, fingerprint %s")
               % file % keyid % keyname % fingerprint << endl;
-          cerr << boost::format(
+          Zypper::instance()->out().warning(boost::str(boost::format(
               _("Warning: Ignoring failed signature verification for %s"
-                " with public key id %s, %s, fingerprint %s!") +
-		string("\n") +
-               _("Double-check this is not caused by some malicious"
+                " with public key id %s, %s, fingerprint %s!\n"
+                "Double-check this is not caused by some malicious"
                 " changes in the file!"))
-              %file % keyid % keyname % fingerprint << endl;
+              %file % keyid % keyname % fingerprint),
+              Out::QUIET);
           return true;
         }
 
         std::string question = boost::str(boost::format(
             _("Signature verification failed for %s"
-              " with public key id %s, %s, fingerprint %s.") +
-	      string("\n") +
-             _("Warning: This might be caused by a malicious change in the file!") +
-	      string("\n") +
-             _("Continuing is risky! Continue anyway?"))
+              " with public key id %s, %s, fingerprint %s.\n"
+              "Warning: This might be caused by a malicious change in the file!\n"
+              "Continuing is risky! Continue anyway?"))
             % file % keyid % keyname % fingerprint);
         return read_bool_answer(PROMPT_YN_GPG_CHECK_FAILED_IGNORE, question, false);
       }
@@ -158,9 +158,10 @@ namespace zypp {
           WAR << boost::format(
               "Ignoring failed digest verification for %s (expected %s, found %s).")
               % file % requested % found << endl;
-          cerr << boost::format(
+          Zypper::instance()->out().warning(boost::str(boost::format(
               _("Ignoring failed digest verification for %s (expected %s, found %s)."))
-              % file % requested % found << endl;
+              % file % requested % found),
+              Out::QUIET);
           return true;
         }
 

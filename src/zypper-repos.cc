@@ -380,9 +380,10 @@ static void do_init_repos(Zypper & zypper)
         if (refresh_raw_metadata(zypper, repo, false)
             || build_cache(zypper, repo, false))
         {
-          cerr << format(_("Disabling repository '%s' because of the above error."))
-              % repo.name() << endl;
-          ERR << format("Disabling repository '%s' because of the above error.")
+          zypper.out().warning(boost::str(format(
+              _("Disabling repository '%s' because of the above error."))
+              % repo.name()), Out::QUIET);
+          WAR << format("Disabling repository '%s' because of the above error.")
               % repo.name() << endl;
 
           it->setEnabled(false);
@@ -397,15 +398,12 @@ static void do_init_repos(Zypper & zypper)
         // user
         catch (const Exception & ex)
         {
-          cout << format(_(
+          zypper.out().info(boost::str(format(_(
               "Repository '%s' is out-of-date. You can run 'zypper refresh'"
-              " as root to update it.")) % repo.name()
-            << endl;
+              " as root to update it.")) % repo.name()));
 
-          string nonroot =
-            "We're running as non-root, skipping refresh of " + repo.name();
-          MIL << nonroot << endl;
-          cout_vv << nonroot << endl;
+          MIL << "We're running as non-root, skipping refresh of " << repo.name()
+              << endl;
         }
       }
     }
@@ -418,9 +416,10 @@ static void do_init_repos(Zypper & zypper)
       {
         if (build_cache(zypper, repo, false))
         {
-          cerr << format(_("Disabling repository '%s' because of the above error."))
-              % repo.name() << endl;
-          ERR << format("Disabling repository '%s' because of the above error.")
+          zypper.out().warning(boost::str(format(
+              _("Disabling repository '%s' because of the above error."))
+              % repo.name()), Out::QUIET);
+          WAR << format("Disabling repository '%s' because of the above error.")
               % repo.name() << endl;
 
           it->setEnabled(false);
@@ -429,24 +428,22 @@ static void do_init_repos(Zypper & zypper)
       // non-root user
       else
       {
-        // if error is returned, it means zypp attempted to build the sqlite
+        // if error is returned, it means zypp attempted to build the meta-data
         // cache for the repo and failed because writing is not allowed for
-        // non-root Thus, just display refresh hint for non-root user.
+        // non-root. Thus, just display refresh hint for non-root user.
         if (build_cache(zypper, repo, false))
         {
-          cout << format(_(
-              "The cache database needs to be built for the '%s' repository."
-              " You can run 'zypper refresh' as root to do this.")) % repo.name()
-            << endl;
+          zypper.out().warning(boost::str(format(_(
+              "The meta-data cache needs to be built for the '%s' repository."
+              " You can run 'zypper refresh' as root to do this."))
+              % repo.name()), Out::QUIET);
 
-          string nonroot =
-            "We're running as non-root, skipping building of " + repo.name() + "cache";
-          MIL << nonroot << endl;
-          cout_vv << nonroot << endl;
+          MIL <<  "We're running as non-root, skipping building of "
+            << repo.name() + "cache" << endl;
 
-          cerr << format(_("Disabling repository '%s'."))
-              % repo.name() << endl << endl;
-          ERR << "Disabling repository '" << repo.name() << "'" << endl;
+          zypper.out().info(boost::str(format(_("Disabling repository '%s'."))
+              % repo.name()));
+          WAR << "Disabling repository '" << repo.name() << "'" << endl;
           it->setEnabled(false);
         }
       }
@@ -471,11 +468,12 @@ void init_repos(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-void init_target (Zypper & zypper) {
+void init_target (Zypper & zypper)
+{
   static bool done = false;
-  //! \todo do this so that it works in zypper shell
-  if (!done) {
-    cout_v << _("Initializing Target") << endl;
+  if (!done)
+  {
+    zypper.out().info(_("Initializing Target"), Out::HIGH);
 
     try
     {
@@ -541,7 +539,7 @@ static void print_rug_sources_list(const std::list<zypp::RepoInfo> &repos)
 
 // ----------------------------------------------------------------------------
 
-static void print_repo_list(const Zypper & zypper,
+static void print_repo_list(Zypper & zypper,
                             const std::list<zypp::RepoInfo> &repos )
 {
   Table tbl;
@@ -549,7 +547,7 @@ static void print_repo_list(const Zypper & zypper,
   // header
   TableHeader th;
   th << "#" << _("Enabled") << _("Refresh") << _("Type") << _("Alias") << _("Name");
-  if (zypper.globalOpts().verbosity > VERBOSITY_NORMAL)
+  if (zypper.out().verbosity() > Out::NORMAL)
     th << "URI";
   tbl << th;
 
@@ -559,7 +557,7 @@ static void print_repo_list(const Zypper & zypper,
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
-    TableRow tr (zypper.globalOpts().verbosity > VERBOSITY_NORMAL ? 6 : 7);
+    TableRow tr (zypper.out().verbosity() > Out::NORMAL ? 6 : 7);
 
     // number
     tr << str::numstring (i);
@@ -574,7 +572,7 @@ static void print_repo_list(const Zypper & zypper,
     // name
     tr << repo.name();
     // url
-    if (zypper.globalOpts().verbosity > VERBOSITY_NORMAL)
+    if (zypper.out().verbosity() > Out::NORMAL)
       tr << (*repo.baseUrlsBegin()).asString(); //! \todo properly handle multiple baseurls
 
     tbl << tr;
@@ -582,9 +580,8 @@ static void print_repo_list(const Zypper & zypper,
   }
 
   if (tbl.empty())
-    cout_n << _("No repositories defined."
-        " Use the 'zypper addrepo' command to add one or more repositories.")
-         << endl;
+    zypper.out().info(_("No repositories defined."
+        " Use the 'zypper addrepo' command to add one or more repositories."));
   else
     cout << tbl;
 }
@@ -615,8 +612,7 @@ void list_repos(Zypper & zypper)
   catch ( const Exception &e )
   {
     ZYPP_CAUGHT(e);
-    cerr << _("Error reading repositories:") << endl
-         << e.asUserString() << endl;
+    zypper.out().error(e, _("Error reading repositories:"));
     exit(ZYPPER_EXIT_ERR_ZYPP);
   }
 
@@ -643,17 +639,19 @@ void list_repos(Zypper & zypper)
       std::ofstream stream(file.c_str());
       if (!stream)
       {
-        cerr << format(_("Can't open %s for writing. Maybe you don't have write permissions?"))
-            % file.asString() << endl;
+        zypper.out().error(boost::str(format(
+            _("Can't open %s for writing."))
+            % file.asString()),
+          _("Maybe you do not have write permissions?"));
         exit(ZYPPER_EXIT_ERR_INVALID_ARGS);
       }
       else
       {
         print_repos_to(repos, stream);
-        cout << format(
+        zypper.out().info(boost::str(format(
             _("Repositories have been successfully exported to %s."))
-            % (file.absolute() ? file.asString() : file.asString().substr(2))
-          << endl;
+            % (file.absolute() ? file.asString() : file.asString().substr(2))),
+          Out::QUIET);
       }
     }
   }
@@ -860,11 +858,12 @@ void clean_repos(Zypper & zypper)
     get_repos(zypper, tmp1->second.begin(), tmp1->second.end(), specified, not_found);
   report_unknown_repos(zypper.out(), not_found);
 
-  cout_v << _("Specified repositories: ");
+  ostringstream s;
+  s << _("Specified repositories: ");
   for (list<RepoInfo>::const_iterator it = specified.begin();
       it != specified.end(); ++it)
-    cout_v << it->alias() << " ";
-  cout_v << endl;
+    s << it->alias() << " ";
+  zypper.out().info(s.str(), Out::HIGH);
 
   // should we clean packages or metadata ?
   bool clean_metadata = (copts.find("metadata") != copts.end());
@@ -876,8 +875,8 @@ void clean_repos(Zypper & zypper)
     clean_packages = true;
   }
   
-  cout_vv << "Metadata will be cleaned: " << clean_metadata << endl;
-  cout_vv << "Packages will be cleaned: " << clean_packages << endl;
+  DBG << "Metadata will be cleaned: " << clean_metadata << endl;
+  DBG << "Packages will be cleaned: " << clean_packages << endl;
 
   unsigned error_count = 0;
   unsigned enabled_repo_count = repos.size();
@@ -913,12 +912,17 @@ void clean_repos(Zypper & zypper)
       try {
         if( clean_metadata )
 	{
-	    cout_v << "Cleaning metadata for '" << repo.alias () << "'" << endl;
+	    zypper.out().info(boost::str(format(
+	        _("Cleaning metadata for '%s'.")) % repo.alias ()),
+	      Out::HIGH);
 	    manager.cleanMetadata(repo);
 	}
         if( clean_packages )
 	{
-	    cout_v << "Cleaning packages for '" << repo.alias () << "'" << endl;
+          zypper.out().info(boost::str(format(
+              // translators: meaning the cached rpm files
+              _("Cleaning packages for '%s'.")) % repo.alias ()),
+            Out::HIGH);
     	    manager.cleanPackages(repo);
 	}
       } catch(...) {
@@ -927,9 +931,10 @@ void clean_repos(Zypper & zypper)
 
       if (error)
       {
-        cerr << format(_("Skipping repository '%s' because of the above error."))
-            % repo.name() << endl;
-        ERR << format("Skipping repository '%s' because of the above error.")
+        zypper.out().error(boost::str(format(
+            _("Cannot clean repository '%s' because of an error."))
+            % repo.name()));
+        ERR << format("Cannot clean repository '%s' because of an error.")
             % repo.name() << endl;
         error_count++;
       }
@@ -940,20 +945,21 @@ void clean_repos(Zypper & zypper)
 
   if (error_count == enabled_repo_count)
   {
-    cerr << _("Could not clean the repositories because of errors.") << endl;
+    zypper.out().error(_("Could not clean the repositories because of errors."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
   else if (error_count)
   {
-    cerr << _("Some of the repositories have not been cleaned up because of an error.") << endl;
+    zypper.out().error(
+      _("Some of the repositories have not been cleaned up because of an error."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
   else if (!specified.empty())
-    cout << _("Specified repositories have been cleaned up.") << endl;
+    zypper.out().info(_("Specified repositories have been cleaned up."));
   else
-    cout << _("All repositories have been cleaned up.") << endl;
+    zypper.out().info(_("All repositories have been cleaned up."));
 }
 
 // ----------------------------------------------------------------------------
@@ -991,7 +997,9 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   }
   if (is_cd)
   {
-    cout_v << _("This is a changeable read-only media (CD/DVD), disabling autorefresh.") << endl;
+    zypper.out().info(
+      _("This is a changeable read-only media (CD/DVD), disabling autorefresh."),
+      Out::QUIET);
     repo.setAutorefresh(false);
   }
 
@@ -1010,8 +1018,9 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   catch (const RepoAlreadyExistsException & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << format(_("Repository named '%s' already exists. Please use another alias."))
-        % repo.alias() << endl;
+    zypper.out().error(boost::str(format(
+        _("Repository named '%s' already exists. Please use another alias."))
+        % repo.alias()));
     ERR << "Repository named '" << repo.alias() << "' already exists." << endl;
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
@@ -1019,12 +1028,17 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   catch (const RepoUnknownTypeException & e)
   {
     ZYPP_CAUGHT(e);
-    cerr << _("Can't find a valid repository at given location:") << endl;
-    cerr << _("Could not determine the type of the repository."
+
+    ostringstream s;
+    s << _("Could not determine the type of the repository."
         " Please check if the defined URLs (see below) point to a valid repository:");
     for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
         uit != repo.baseUrlsEnd(); ++uit)
-      cerr << (*uit) << endl;
+      s << (*uit) << endl;
+
+    zypper.out().error(e,
+      _("Can't find a valid repository at given location:"), s.str());
+
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
@@ -1046,42 +1060,44 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     return;
   }
 
-  cout << format(_("Repository '%s' successfully added")) % repo.name();
-  cout_n << ":";
-  cout << endl;
+  ostringstream s;
+  s << format(_("Repository '%s' successfully added")) % repo.name();
 
   if (zypper.globalOpts().is_rug_compatible)
   {
-    cout_n << ( repo.enabled() ? "[x]" : "[ ]" );
-    cout_n << ( repo.autorefresh() ? "* " : "  " );
-    cout_n << repo.name() << " (" << *repo.baseUrlsBegin() << ")" << endl;
+    s << ( repo.enabled() ? "[x]" : "[ ]" );
+    s << ( repo.autorefresh() ? "* " : "  " );
+    s << repo.name() << " (" << *repo.baseUrlsBegin() << ")" << endl;
   }
   else
   {
     // TranslatorExplanation used as e.g. "Enabled: Yes"
-    cout_n << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
+    s << _("Enabled") << ": " << (repo.enabled() ? _("Yes") : _("No")) << endl;
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
-    cout_n << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
+    s << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
 
-    cout_n << "URL:";
+    s << "URL:";
     for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
         uit != repo.baseUrlsEnd(); uit++)
-      cout_n << " " << *uit;
-    cout_n << endl;
+      s << " " << *uit;
+    s << endl;
   }
+  zypper.out().info(s.str());
 
   MIL << "Repository successfully added: " << repo << endl;
 
   if(is_cd)
   {
-    cout_n << format(_("Reading data from '%s' media")) % repo.name() << endl;
+    zypper.out().info(boost::str(
+      format(_("Reading data from '%s' media")) % repo.name()));
     bool error = refresh_raw_metadata(zypper, repo, false);
     if (!error)
       error = build_cache(zypper, repo, false);
     if (error)
     {
-      cerr << format(_("Problem reading data from '%s' media")) % repo.name() << endl;
-      cerr << _("Please check if your installation media is valid and readable.") << endl;
+      zypper.out().error(boost::str(
+        format(_("Problem reading data from '%s' media")) % repo.name()),
+        _("Please check if your installation media is valid and readable."));
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       return;
     }
@@ -1172,13 +1188,15 @@ void add_repo_from_file( Zypper & zypper,
 
     if(repo.alias().empty())
     {
-      cerr << _("A repository with no alias defined found in the file, skipping.") << endl;
+      zypper.out().warning(
+        _("Repository with no alias defined found in the file, skipping."));
       continue;
     }
 
     if(repo.baseUrlsEmpty())
     {
-      cerr << format(_("Repository '%s' has no URL defined, skipping.")) % repo.name() << endl;
+      zypper.out().warning(boost::str(format(
+        _("Repository '%s' has no URL defined, skipping.")) % repo.name()));
       continue;
     }
 
@@ -1212,7 +1230,8 @@ bool remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
   try
   {
     manager.removeRepository(repoinfo);
-    cout << format(_("Repository '%s' has been removed.")) % repoinfo.name() << endl;
+    zypper.out().info(boost::str(
+      format(_("Repository '%s' has been removed.")) % repoinfo.name()));
     MIL << format("Repository '%s' has been removed.") % repoinfo.name() << endl;
   }
   catch (const repo::RepoNotFoundException & ex)
@@ -1268,25 +1287,27 @@ void rename_repo(Zypper & zypper,
     repo.setAlias(newalias);
     manager.modifyRepository(alias, repo);
 
-    cout << format(_("Repository '%s' renamed to '%s'")) % alias % repo.alias() << endl;
+    zypper.out().info(boost::str(format(
+      _("Repository '%s' renamed to '%s'.")) % alias % repo.alias()));
     MIL << format("Repository '%s' renamed to '%s'") % alias % repo.alias() << endl;
   }
   catch (const RepoNotFoundException & ex)
   {
-    cerr << format(_("Repository '%s' not found.")) % alias << endl;
+    zypper.out().error(boost::str(format(
+      _("Repository '%s' not found.")) % alias));
     ERR << "Repo " << alias << " not found" << endl;
   }
   catch (const RepoAlreadyExistsException & ex)
   {
-    cerr << format(_(
-        "Repository named '%s' already exists. Please use another alias."))
-      % newalias << endl;
+    zypper.out().error(boost::str(format(
+       _("Repository named '%s' already exists. Please use another alias."))
+      % newalias));
   }
   catch (const Exception & ex)
   {
-    cerr << _("Error while modifying the repository:") << endl;
-    cerr << ex.asUserString() << endl;
-    cerr << format(_("Leaving repository '%s' unchanged.")) % alias << endl;
+    zypper.out().error(ex,
+      _("Error while modifying the repository:"),
+      boost::str(format(_("Leaving repository '%s' unchanged.")) % alias));
 
     ERR << "Error while modifying the repository:" << ex.asUserString() << endl;
   }
@@ -1298,8 +1319,8 @@ void modify_repo(Zypper & zypper, const string & alias)
 {
   // tell whether currenlty processed options are contradicting each other
   // bool contradiction = false;
-  // TranslatorExplanation speaking of two mutually contradicting command line options
   string msg_contradition =
+    // translators: speaking of two mutually contradicting command line options
     _("%s used together with %s, which contradict each other."
       " This property will be left unchanged.");
 
@@ -1311,7 +1332,8 @@ void modify_repo(Zypper & zypper, const string & alias)
   {
     if (enable)
     {
-      cerr << format(msg_contradition) % "--enable" % "--disable" << endl;
+      zypper.out().warning(boost::str(format(msg_contradition)
+          % "--enable" % "--disable"), Out::QUIET);
 
       enable = indeterminate;
     }
@@ -1328,8 +1350,8 @@ void modify_repo(Zypper & zypper, const string & alias)
   {
     if (autoref)
     {
-      cerr << format(msg_contradition)
-        % "--refresh" % "--no-refresh" << endl;
+      zypper.out().warning(boost::str(format(msg_contradition)
+          % "--refresh" % "--no-refresh"));
 
       autoref = indeterminate;
     }
@@ -1351,19 +1373,21 @@ void modify_repo(Zypper & zypper, const string & alias)
 
     manager.modifyRepository(alias, repo);
 
-    cout << format(_("Repository %s has been sucessfully modified.")) % alias << endl;
+    zypper.out().info(boost::str(format(
+      _("Repository %s has been sucessfully modified.")) % alias));
     MIL << format("Repository %s modified:") % alias << repo << endl;
   }
   catch (const RepoNotFoundException & ex)
   {
-    cerr << format(_("Repository %s not found.")) % alias << endl;
+    zypper.out().error(
+      boost::str(format(_("Repository %s not found.")) % alias));
     ERR << "Repo " << alias << " not found" << endl;
   }
   catch (const Exception & ex)
   {
-    cerr << _("Error while modifying the repository:") << endl;
-    cerr << ex.asUserString();
-    cerr << format(_("Leaving repository %s unchanged.")) % alias << endl;
+    zypper.out().error(ex,
+      _("Error while modifying the repository:"),
+      boost::str(format(_("Leaving repository %s unchanged.")) % alias));
 
     ERR << "Error while modifying the repository:" << ex.asUserString() << endl;
   }
@@ -1410,28 +1434,29 @@ void load_repo_resolvables(Zypper & zypper)
       // if there is no metadata locally
       if ( manager.metadataStatus(repo).empty() )
       {
-        cout_v << format(_("Retrieving repository '%s' data..."))
-                         % repo.name() << endl;
+        zypper.out().info(boost::str(
+          format(_("Retrieving repository '%s' data...")) % repo.name()));
         error = refresh_raw_metadata(zypper, repo, false);
       }
 
       if (!error && !manager.isCached(repo))
       {
-        cout_v << format(_("Repository '%s' not cached. Caching..."))
-                         % repo.name() << endl;
+        zypper.out().info(boost::str(
+          format(_("Repository '%s' not cached. Caching...")) % repo.name()));
         error = build_cache(zypper, repo, false);
       }
 
       if (error)
       {
-        cerr << format(_("Problem loading data from '%s'")) % repo.name() << endl;
-        cerr << format(_("Resolvables from '%s' not loaded because of error."))
-            % repo.name() << endl;
+        ostringstream s;
+        s << format(_("Problem loading data from '%s'")) % repo.name() << endl;
+        s << format(_("Resolvables from '%s' not loaded because of error."))
+            % repo.name();
+        zypper.out().error(s.str());
         continue;
       }
 
       manager.loadFromCache(repo);
-      //cout_v << " " << format(_("(%d resolvables found)")) % store.size() << endl;
     }
     catch (const Exception & e)
     {
@@ -1439,8 +1464,8 @@ void load_repo_resolvables(Zypper & zypper)
       zypper.out().error(e,
           boost::str(format(_("Problem loading data from '%s'")) % repo.name()),
           _("Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."));
-      cerr << format(_("Resolvables from '%s' not loaded because of error."))
-                      % repo.name() << endl;
+      zypper.out().info(boost::str(format(
+        _("Resolvables from '%s' not loaded because of error.")) % repo.name()));
     }
   }
 }
@@ -1453,18 +1478,6 @@ void load_target_resolvables(Zypper & zypper)
   MIL << "Going to read RPM database" << endl;
 
   God->target()->load();
-
-  if (!zypper.globalOpts().machine_readable)
-  {
-    //cout_v << "   " <<  format(_("(%s resolvables)")) % tgt_resolvables.size();
-    cout_n << endl;
-  }
-  //DBG << tgt_resolvables.size() << " resolvables read";
-
-  //if (to_pool)
-  //  God->addResolvables(tgt_resolvables, true /*installed*/);
-  //else
-  //  gData.target_resolvables = tgt_resolvables;
 }
 
 // ---------------------------------------------------------------------------
@@ -1544,9 +1557,9 @@ void warn_if_zmd()
 {
   if (system ("pgrep -lx zmd") == 0)
   { // list name, exact match
-    cout_n << _("ZENworks Management Daemon is running.\n"
+    Zypper::instance()->out().info(_("ZENworks Management Daemon is running.\n"
               "WARNING: this command will not synchronize changes.\n"
-              "Use rug or yast2 for that.\n");
+              "Use rug or yast2 for that."));
     USR << ("ZMD is running. Tell the user this will get"
         " ZMD and libzypp out of sync.") << endl;
   }

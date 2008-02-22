@@ -22,39 +22,6 @@
 #define ZYPPER_EXIT_INF_RESTART_NEEDED     103 // restart of package manager itself needed
 #define ZYPPER_EXIT_INF_CAP_NOT_FOUND      104 // given capability not found (for install/remove)
 
-
-#define VERBOSITY_NORMAL 0
-#define VERBOSITY_MEDIUM 1
-#define VERBOSITY_HIGH 2
-
-/**
- * Macro to filter output above the current verbosity level.
- *
- * \see Output Macros
- * \see GlobalOptions::verbosity
- */
-#define COND_STREAM(STREAM,LEVEL) ((Zypper::instance()->globalOpts().verbosity >= LEVEL) ? STREAM : no_stream)
-
-/** \name Output Macros
- * Alway use these macros to produce output so that the verbosity options
- * like -v or --quiet are respected. Use standard cout and cerr only in
- * cases where it is desirable to ignore them (e.g. help texts (when -h is
- * used) or brief error messages must always be displayed, even if --quiet
- * has been specified).
- */
-//!@{
-//! normal output
-#define cout_n COND_STREAM(cout, VERBOSITY_NORMAL)
-//! verbose output
-#define cout_v COND_STREAM(cout, VERBOSITY_MEDIUM)
-//! verbose error output
-#define cerr_v COND_STREAM(cerr, VERBOSITY_MEDIUM)
-//! debug info output
-#define cout_vv COND_STREAM(cout, VERBOSITY_HIGH)
-//! debug error output (details)
-#define cerr_vv COND_STREAM(cerr, VERBOSITY_HIGH)
-//!@}
-
 // undefine _ and _PL macros from libzypp
 #ifdef _
 #undef _

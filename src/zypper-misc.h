@@ -17,7 +17,7 @@
 #include "zypper-tabulator.h"
 
 /// Parse a capability string. On error print a message and return noCap
-zypp::Capability safe_parse_cap (const Zypper & zypper,
+zypp::Capability safe_parse_cap (Zypper & zypper,
                                  const zypp::ResObject::Kind &kind,
 				 const std::string &capstr);
 
@@ -35,7 +35,7 @@ void mark_by_name (Zypper & zypper,
 		   const zypp::ResObject::Kind &kind,
 		   const std::string &name);
 
-void mark_by_capability (const Zypper & zypper,
+void mark_by_capability (Zypper & zypper,
                          bool install_not_remove,
 			 const zypp::ResObject::Kind &kind,
 			 const std::string &capstr);
@@ -71,7 +71,7 @@ void patch_check();
  * \param kind  resolvable type
  * \param best_effort
  */
-void list_updates(const Zypper & zypper,
+void list_updates(Zypper & zypper,
                   const zypp::ResObject::Kind &kind,
                   bool best_effort);
 

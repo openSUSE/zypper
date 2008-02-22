@@ -46,8 +46,8 @@ namespace ZmartRecipients
     {
       if (is_changeable_media(url))
       {
-        cerr << endl; // may be in the middle of RepoReport or ProgressReport
-        cerr << description << endl;
+        //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
+        Zypper::instance()->out().error(description);
   
         std::string request = boost::str(boost::format(
             // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.

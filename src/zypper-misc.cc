@@ -71,14 +71,14 @@ ResObject::Kind string_to_kind (const string &skind)
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 bool ProvideProcess::operator()( const PoolItem& provider )
 {
-  cerr_vv << "Considering " << provider << endl;
+  DBG << "Considering " << provider << endl;
   // 1. compatible arch
   // 2. best arch
   // 3. best edition
 
   // check the version if it's specified
   if (!version.empty() && version != provider->edition().asString()) {
-    cerr_vv << format ("Skipping version %s (requested: %s)")
+    DBG << format ("Skipping version %s (requested: %s)")
       % provider->edition().asString() % version << endl;
     return true;
   }
@@ -87,25 +87,25 @@ bool ProvideProcess::operator()( const PoolItem& provider )
     // deselect the item if it's already selected,
     // only one item should be selected
     if (provider.status().isToBeInstalled()) {
-      cerr_vv << "  Deselecting" << endl;
+      DBG << "  Deselecting" << endl;
       provider.status().resetTransact(whoWantsIt);
     }
 
     // regarding items which are installable only
     if (!provider->arch().compatibleWith( _architecture )) {
-      cerr_vv << format ("provider %s has incompatible arch '%s'")
+      DBG << format ("provider %s has incompatible arch '%s'")
         % provider->name() % provider->arch().asString() << endl;
     }
     else if (!item) {
-      cerr_vv << "  First match" << endl;
+      DBG << "  First match" << endl;
       item = provider;
     }
     else if (item->arch().compare( provider->arch() ) < 0) {
-      cerr_vv << "  Better arch" << endl;
+      DBG << "  Better arch" << endl;
       item = provider;
     }
     else if (item->edition().compare( provider->edition() ) < 0) {
-      cerr_vv << "  Better edition" << endl;
+      DBG << "  Better edition" << endl;
       item = provider;
     }
   }
@@ -172,7 +172,7 @@ struct NewerVersionGetter
 };
 
 // on error print a message and return noCap
-Capability safe_parse_cap (const Zypper & zypper,
+Capability safe_parse_cap (Zypper & zypper,
                            const ResObject::Kind &kind, const string & capstr)
 {
   Capability cap;
@@ -180,17 +180,17 @@ Capability safe_parse_cap (const Zypper & zypper,
     // expect named caps as NAME[OP<EDITION>]
     // transform to NAME[ OP <EDITION>] (add spaces)
     string new_capstr = capstr;
-    cout_vv << "capstr: " << capstr << endl;
+    DBG << "capstr: " << capstr << endl;
     string::size_type op_pos = capstr.find_first_of("<>=");
     if (op_pos != string::npos)
     {
       new_capstr.insert(op_pos, " ");
-      cout_vv << "new capstr: " << new_capstr << endl;
+      DBG << "new capstr: " << new_capstr << endl;
       op_pos = new_capstr.find_first_not_of("<>=", op_pos + 1);
       if (op_pos != string::npos && new_capstr.size() > op_pos)
       {
         new_capstr.insert(op_pos, " ");
-        cout_vv << "new capstr: " << new_capstr << endl;
+        DBG << "new capstr: " << new_capstr << endl;
       }
     }
     // if we are about to install stuff and
@@ -221,7 +221,7 @@ Capability safe_parse_cap (const Zypper & zypper,
         // newer version found
         if (nvg.found)
         {
-          cout_vv << "installed resolvable named " << capstr
+          DBG << "installed resolvable named " << capstr
             << " found, changing capability to " << new_capstr << endl;
           new_capstr = capstr + " > " + vg.edition.asString();
         }
@@ -232,7 +232,8 @@ Capability safe_parse_cap (const Zypper & zypper,
   catch (const Exception& e) {
     //! \todo check this handling (should we fail or set a special exit code?)
     ZYPP_CAUGHT(e);
-    cerr << format (_("Cannot parse capability '%s'.")) % capstr << endl;
+    zypper.out().error(boost::str(
+      format(_("Cannot parse capability '%s'.")) % capstr));
   }
   return cap;
 }
@@ -246,16 +247,17 @@ void mark_for_install(Zypper & zypper,
 {
   // name and kind match:
   ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
-  cout_vv << "Iterating over [" << kind << "]" << name << endl;
+  DBG << "Iterating over [" << kind << "]" << name << endl;
   invokeOnEach(
       God->pool().byIdentBegin(kind, name),
       God->pool().byIdentEnd(kind, name),
       zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer));
 
-  cout_vv << "... done" << endl;
+  DBG << "... done" << endl;
   if (!installer.item) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
-    cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
+    zypper.out().warning(boost::str(
+      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name));
     WAR << format("%s '%s' not found") % kind % name << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
@@ -272,18 +274,25 @@ void mark_for_install(Zypper & zypper,
       installer.item.status().setTransact( true, zypp::ResStatus::USER );
     }
 
-    cout_n << format(_("skipping %s '%s' (the newest version already installed)")) % kind_to_string_localized(kind,1) % name << endl;
+    zypper.out().info(boost::str(format(
+      _("skipping %s '%s' (the newest version already installed)"))
+      % kind_to_string_localized(kind,1) % name));
   }
   else {
 
-    // TODO don't use setToBeInstalled for this purpose but higher level solver API
+    //! \todo don't use setToBeInstalled for this purpose but higher level solver API
     bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     if (!result)
     {
       // this is because the resolvable is installed and we are forcing.
       installer.item.status().setTransact( true, zypp::ResStatus::USER );
-      //cerr << format(_("Failed to add '%s' to the list of packages to be installed.")) % name << endl;
-      //ERR << "Could not set " << name << " as to-be-installed" << endl;
+      if (!copts.count("force"))
+      {
+        zypper.out().error(boost::str(
+          format(_("Failed to add '%s' to the list of packages to be installed."))
+          % name));
+        ERR << "Could not set " << name << " as to-be-installed" << endl;
+      }
     }
   }
 }
@@ -298,12 +307,12 @@ struct DeleteProcess
   bool operator() ( const PoolItem& provider )
   {
     found = true;
-    cout_vv << "Marking for deletion: " << provider << endl;
+    DBG << "Marking for deletion: " << provider << endl;
     bool result = provider.status().setToBeUninstalled( zypp::ResStatus::USER );
     if (!result) {
-      cerr << format(
+      Zypper::instance()->out().error(boost::str(format(
           _("Failed to add '%s' to the list of packages to be removed."))
-          % provider.resolvable()->name() << endl;
+          % provider.resolvable()->name()));
       ERR << "Could not set " << provider.resolvable()->name()
           << " as to-be-uninstalled" << endl;
     }
@@ -320,16 +329,17 @@ void mark_for_uninstall(Zypper & zypper,
   // name and kind match:
 
   DeleteProcess deleter;
-  cerr_vv << "Iterating over " << name << endl;
+  DBG << "Iterating over " << name << endl;
   invokeOnEach( pool.byIdentBegin( kind, name ),
 		pool.byIdentEnd( kind, name ),
 		resfilter::ByInstalled(),
 		zypp::functor::functorRef<bool,const zypp::PoolItem&> (deleter)
 		);
-  cerr_vv << "... done" << endl;
+  DBG << "... done" << endl;
   if (!deleter.found) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
-    cerr << format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name << endl;
+    zypper.out().error(boost::str(
+      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name));
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
   }
@@ -360,7 +370,7 @@ bool mark_by_name_edition (...)
 
 */
 
-void mark_by_capability (const Zypper & zypper,
+void mark_by_capability (Zypper & zypper,
                          bool install_not_remove,
 			 const ResObject::Kind &kind,
 			 const string &capstr )
@@ -368,15 +378,15 @@ void mark_by_capability (const Zypper & zypper,
   Capability cap = safe_parse_cap (zypper, kind, capstr);
 
   if (!cap.empty()) {
-    cout_vv << "Capability: " << cap << endl;
+    DBG << "Capability: " << cap << endl;
 
     Resolver_Ptr resolver = zypp::getZYpp()->resolver();
     if (install_not_remove) {
-      cerr_vv << "Adding requirement " << cap << endl;
+      DBG << "Adding requirement " << cap << endl;
       resolver->addRequire (cap);
     }
     else {
-      cerr_vv << "Adding conflict " << cap << endl;
+      DBG << "Adding conflict " << cap << endl;
       resolver->addConflict (cap);
     }
   }
@@ -439,6 +449,7 @@ ostream& operator << (ostream & stm, ios::iostate state)
 tribool show_problem (Zypper & zypper,
                       const ResolverProblem & prob, ProblemSolutionList & todo)
 {
+  //! \todo use Out
   ostream& stm = cerr;
   string det;
   stm << _("Problem: ") << prob.description () << endl;
@@ -507,7 +518,6 @@ tribool show_problem (Zypper & zypper,
 bool show_problems(Zypper & zypper)
 {
   bool retry = true;
-  ostream& stm = cerr;
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
   ResolverProblemList rproblems = resolver->problems ();
   ResolverProblemList::iterator
@@ -517,12 +527,12 @@ bool show_problems(Zypper & zypper)
   ProblemSolutionList todo;
 
   // display the number of problems
-  if (rproblems.size() > 1) {
-    stm << format (_("%s Problems:")) % rproblems.size() << endl;
-  }
-  else if (rproblems.empty()) {
+  if (rproblems.size() > 1)
+    zypper.out().info(boost::str(format(_("%s Problems:")) % rproblems.size()));
+  else if (rproblems.empty())
+  {
     // should not happen! If solve() failed at least one problem must be set!
-    stm << _("Specified capability not found") << endl;
+    zypper.out().error(_("Specified capability not found"));
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return false;
   }
@@ -531,13 +541,14 @@ bool show_problems(Zypper & zypper)
   //! \todo handle resolver problems caused by --capability mode arguments specially to give proper output (bnc #337007)
   if (rproblems.size() > 1)
   {
-    for (i = b; i != e; ++i) {
-      stm << _("Problem: ") << (*i)->description () << endl;
-    }
+    for (i = b; i != e; ++i)
+      zypper.out().info(boost::str(
+        format(_("Problem: %s")) % (*i)->description()));
   }
   // now list all problems with solution proposals
-  for (i = b; i != e; ++i) {
-    stm << endl;
+  for (i = b; i != e; ++i)
+  {
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
     tribool stopnow = show_problem(zypper, *(*i), todo);
     if (! indeterminate (stopnow)) {
       retry = stopnow == true;
@@ -547,7 +558,7 @@ bool show_problems(Zypper & zypper)
 
   if (retry)
   {
-    cout_n << _("Resolving dependencies...") << endl;
+    zypper.out().info(_("Resolving dependencies..."));
     resolver->applySolutions (todo);
   }
   return retry;
@@ -559,7 +570,9 @@ void show_summary_resolvable_list(const string & label,
                                   KindToResObjectSet::const_iterator it,
                                   int verbosity)
 {
-  cout << endl << label << endl;
+  Out & out = Zypper::instance()->out();
+  ostringstream s;
+  s << endl << label << endl;
 
   // get terminal width from COLUMNS env. var.
   unsigned cols = 0, cols_written = 0;
@@ -578,35 +591,37 @@ void show_summary_resolvable_list(const string & label,
   {
     ResObject::constPtr res(*resit);
 
-    if (verbosity == VERBOSITY_NORMAL)
+    if (out.verbosity() == Out::NORMAL)
     {
       // watch the terminal widht
       if (cols_written == 0)
-        cout << INDENT;
+        s << INDENT;
       else if (cols_written + res->name().size() + 1  > cols)
       {
-        cout << endl;
+        s << endl;
         cols_written = 0;
       }
 
       cols_written += res->name().size();
     }
     else
-      cout << INDENT;
+      s << INDENT;
 
     // resolvable name
-    cout << res->name() << (verbosity ? "" : " ");
+    s << res->name() << (out.verbosity() > Out::NORMAL ? "" : " ");
     // plus edition and architecture for verbose output
-    cout_v << "-" << res->edition() << "." << res->arch();
+    //cout_v << "-" << res->edition() << "." << res->arch();
     // plus repo providing this package
-    if (!res->repoInfo().alias().empty())
-      cout_v << "  (" << res->repoInfo().name() << ")";
+    //if (!res->repoInfo().alias().empty())
+      //cout_v << "  (" << res->repoInfo().name() << ")";
     // new line after each package in the verbose mode
-    cout_v << endl;
+    //cout_v << endl;
   }
 
-  if (verbosity == VERBOSITY_NORMAL)
-    cout << endl;
+  if (out.verbosity() == Out::NORMAL)
+    s << endl;
+
+  out.info(s.str(), Out::QUIET); //! \todo special output needed for this
 }
 
 
@@ -666,15 +681,11 @@ int show_summary(Zypper & zypper)
 
   if (retv == -1)
   {
-    if (zypper.globalOpts().machine_readable)
-      cout << "<message type=\"warning\">" << _("Nothing to do.") << "</message>" << endl;
-    else
-      cout << _("Nothing to do.") << endl;
-
+    zypper.out().info(_("Nothing to do."));
     return retv;
   }
 
-  // no output for machines for now
+  //! \todo no output for machines for now
   if (zypper.globalOpts().machine_readable)
     return retv;
 
@@ -788,31 +799,32 @@ int show_summary(Zypper & zypper)
     show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
   }
 
-  cout << endl;
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
 
+  ostringstream s;
   if (download_size > 0)
   {
-    cout_n << format(_("Overall download size: %s.")) % download_size;
-    cout_n << " ";
+    s << format(_("Overall download size: %s.")) % download_size;
+    s << " ";
   }
   if (new_installed_size > 0)
     // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    cout_n << format(_("After the operation, additional %s will be used."))
+    s << format(_("After the operation, additional %s will be used."))
         % new_installed_size.asString(0,1,1);
   //! \todo uncomment the following for bug #309112
   /*
   else if (new_installed_size == 0)
-    cout_n << _("No additional space will be used or freed after the operation.");*/
+    s << _("No additional space will be used or freed after the operation.");*/
   else
   {
     // get the absolute size
     ByteCount abs;
     abs = (-new_installed_size);
     // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-    cout_n << format(_("After the operation, %s will be freed."))
+    s << format(_("After the operation, %s will be freed."))
         % abs.asString(0,1,1);
   }
-  cout_n << endl;
+  zypper.out().info(s.str());
 
   return retv;
 }
@@ -875,14 +887,16 @@ bool resolve(Zypper & zypper)
       force_resolution = false;
     else
     {
-      cerr << format(_("Invalid value '%s' of the %s parameter"))
-          % value % "force-resolution" << endl;
-      cerr << format(_("Valid values are '%s' and '%s'")) % "on" % "off" << endl;
+      zypper.out().error(
+        boost::str(format(_("Invalid value '%s' of the %s parameter"))
+          % value % "force-resolution"),
+        boost::str(format(_("Valid values are '%s' and '%s'")) % "on" % "off"));
     }
 
     if (count > 1)
-      cout << format(_("Considering only the first value of the %s parameter, ignoring the rest"))
-          % "force-resolution" << endl;
+      zypper.out().warning(boost::str(format(
+        _("Considering only the first value of the %s parameter, ignoring the rest"))
+          % "force-resolution"));
   }
 
   // if --force-resolution was not specified on the command line, force
@@ -898,11 +912,12 @@ bool resolve(Zypper & zypper)
   }
 
   DBG << "force resolution: " << force_resolution << endl;
-  cout_v << _("Force resolution:") << " " <<
-      (force_resolution ? _("Yes") : _("No")) << endl;
+  ostringstream s;
+  s << _("Force resolution:") << " " << (force_resolution ? _("Yes") : _("No"));
+  zypper.out().info(s.str(), Out::HIGH);
   God->resolver()->setForceResolve( force_resolution );
 
-  cout_v << _("Resolving dependencies...") << endl;
+  zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
 }
@@ -911,7 +926,7 @@ void patch_check ()
 {
   Out & out = Zypper::instance()->out();
 
-  cout_vv << "patch check" << endl;
+  DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
 
   ResPool::byKind_iterator
@@ -1010,7 +1025,7 @@ void show_patches(Zypper & zypper)
   tbl.sort (1);			// Name
 
   if (tbl.empty())
-    cout_n << _("No needed patches found.") << endl;
+    zypper.out().info(_("No needed patches found."));
   else
     // display the result, even if --quiet specified
     cout << tbl;
@@ -1096,7 +1111,7 @@ bool xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-void list_patch_updates(const Zypper & zypper, bool best_effort)
+void list_patch_updates(Zypper & zypper, bool best_effort)
 {
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
@@ -1136,19 +1151,19 @@ void list_patch_updates(const Zypper & zypper, bool best_effort)
 
   // those that affect the package manager go first
   // (TODO: user option for this?)
-  if (!pm_tbl.empty ()) {
-    if (!tbl.empty ()) {
-      cerr << _("WARNING: These are only the updates affecting the updater itself.\n"
-		"There are others available too.\n") << flush;
-
-    }
+  if (!pm_tbl.empty ())
+  {
+    if (!tbl.empty ())
+      zypper.out().warning(
+        _("These are only the updates affecting the updater itself.\n"
+          "There are others available too.\n"));
     tbl = pm_tbl;
   }
 
   tbl.sort (1); 		// Name
 
   if (tbl.empty())
-    cout_n << _("No updates found.") << endl;
+    zypper.out().info(_("No updates found."));
   else
     cout << tbl;
 }
@@ -1214,7 +1229,7 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
   ResPool::byKind_iterator
     it = pool.byKindBegin (kind),
     e  = pool.byKindEnd (kind);
-  cerr_vv << "Finding update candidates" << endl;
+  DBG << "Finding update candidates" << endl;
   for (; it != e; ++it)
   {
     if (it->status().isUninstalled())
@@ -1224,15 +1239,15 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
     if (!candidate.resolvable())
       continue;
 
-    cerr_vv << "item " << *it << endl;
-    cerr_vv << "cand " << candidate << endl;
+    DBG << "item " << *it << endl;
+    DBG << "cand " << candidate << endl;
     candidates.insert (candidate);
   }
 }
 
 // ----------------------------------------------------------------------------
 
-void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_effort )
+void list_updates(Zypper & zypper, const ResObject::Kind &kind, bool best_effort )
 {
   bool k_is_patch = kind == ResTraits<Patch>::kind;
   if (k_is_patch)
@@ -1292,7 +1307,7 @@ void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_
     tbl.sort( name_col );
 
     if (tbl.empty())
-      cout_n << _("No updates found.") << endl;
+      zypper.out().info(_("No updates found."));
     else
       cout << tbl;
   }
@@ -1302,7 +1317,7 @@ void list_updates(const Zypper & zypper, const ResObject::Kind &kind, bool best_
 bool mark_item_install (const PoolItem& pi) {
   bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
   if (!result) {
-    cerr_vv << "Marking " << pi << "for installation failed" << endl;
+    DBG << "Marking " << pi << "for installation failed" << endl;
   }
   return result;
 }
@@ -1350,7 +1365,8 @@ bool require_item_update (const PoolItem& pi) {
   }
   catch (const Exception& e) {
     ZYPP_CAUGHT(e);
-    cerr << "Cannot parse '" << installed->name() << " < " << installed->edition() << "'" << endl;
+    Zypper::instance()->out().error(boost::str(format(
+      _("Cannot parse '%s < %s'")) % installed->name() % installed->edition()));
   }
 
   return true;
@@ -1412,8 +1428,9 @@ void mark_patch_updates( bool skip_interactive )
 	      // Skipping a patch because it is marked as interactive or has
 	      // license to confirm and --skip-interactive is requested.
 	      // TranslatorExplanation %s is the name of a patch
-	      cerr << format (_("WARNING: %s is interactive, skipped."))
-		% res << endl;
+	      Zypper::instance()->out().warning(boost::str(format(
+	          _("WARNING: %s is interactive, skipped."))
+	          % res));
 	    }
 	    else {
 	      nothing_found = false;
@@ -1483,33 +1500,37 @@ void solve_and_commit (Zypper & zypper)
         //! \todo fix the media reporting correctly
         gData.show_media_progress_hack = true;
 
-        cerr_v << _("committing"); MIL << "committing...";
+        ostringstream s;
+        s << _("committing"); MIL << "committing...";
 
         ZYppCommitResult result;
         if (copts.count("dry-run"))
         {
-          cerr_v << " " << _("(dry run)") << endl; MIL << "(dry run)";
+          s << " " << _("(dry run)") << endl; MIL << "(dry run)";
+          zypper.out().info(s.str(), Out::HIGH);
 
           result = God->commit(ZYppCommitPolicy().dryRun(true));
         }
         else
         {
-          cerr_v << endl; // endl after 'committing'
+          zypper.out().info(s.str(), Out::HIGH);
 
           result = God->commit(
             ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
 
           was_installed = true;
         }
+        
 
         MIL << endl << "DONE" << endl;
 
         gData.show_media_progress_hack = false;
-
+        
         if (!result._errors.empty())
           retv = ZYPPER_EXIT_ERR_ZYPP;
 
-        cerr_v << result << std::endl;
+        s.clear(); s << result;
+        zypper.out().info(s.str(), Out::HIGH);
       }
       catch ( const media::MediaException & e ) {
         ZYPP_CAUGHT(e);
@@ -1552,21 +1573,15 @@ void solve_and_commit (Zypper & zypper)
   else if (was_installed)
   {
     if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
-    {
-      if (zypper.globalOpts().machine_readable)
-        cout << "<message type=\"warning\">" << _("One of installed patches requires reboot of"
-            " your machine. Please do it as soon as possible.") << "</message>" << endl;
-      else
-        cout << _("WARNING: One of installed patches requires a reboot of"
-            " your machine. Please do it as soon as possible.") << endl;
-    }
+      zypper.out().warning(
+        _("One of installed patches requires reboot of"
+          " your machine. Please do it as soon as possible."));
     else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
-    {
-      if (!zypper.globalOpts().machine_readable)
-        cout << _("WARNING: One of installed patches affects the package"
-            " manager itself, thus it requires its restart before executing"
-            " any further operations.") << endl;
-    }
+      zypper.out().warning(
+        _("One of installed patches affects the package"
+          " manager itself, thus it requires its restart before executing"
+          " any further operations."),
+        Out::NORMAL, Out::TYPE_NORMAL);
   }
 
   if (zypper.exitCode() == ZYPPER_EXIT_OK) // don't overwrite previously set exit code
@@ -1589,12 +1604,11 @@ bool confirm_licenses(Zypper & zypper)
     {
       if (zypper.cmdOpts().license_auto_agree)
       {
-        // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-			  if (!zypper.globalOpts().machine_readable)
-        	cout << format(_("Automatically agreeing with %s %s license."))
-	            % it->resolvable()->name()
-	            % kind_to_string_localized(it->resolvable()->kind(),1)
-	            << endl;
+      	zypper.out().info(boost::str(
+            // TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
+      	    format(_("Automatically agreeing with %s %s license."))
+            % it->resolvable()->name()
+            % kind_to_string_localized(it->resolvable()->kind(),1)));
 
         MIL << format("Automatically agreeing with %s %s license.")
             % it->resolvable()->name() % it->resolvable()->kind().asString()
@@ -1603,40 +1617,43 @@ bool confirm_licenses(Zypper & zypper)
         continue;
       }
 
-      cout << format(_("%s %s license:")) % it->resolvable()->name()
-                % kind_to_string_localized(it->resolvable()->kind(), 1)
-        << it->resolvable()->licenseToConfirm() << endl;
+      // license text
+      ostringstream s;
+      s << format(_("%s %s license:")) % it->resolvable()->name()
+          % kind_to_string_localized(it->resolvable()->kind(), 1)
+        << it->resolvable()->licenseToConfirm();
+      zypper.out().info(s.str(), Out::QUIET);
 
+      // lincense prompt
       string question = _("In order to install this package, you must agree"
         " to terms of the above license. Continue?");
-
       if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, zypper.cmdOpts().license_auto_agree))
       {
         confirmed = false;
 
         if (zypper.globalOpts().non_interactive)
         {
-          //! \todo do this with _PL()
-          cout << endl <<
-             _("Aborting installation due to the need for"
-              " license(s) confirmation.") << " ";
-          // TranslatorExplanation Don't translate the '--auto-agree-with-licenses',
-          // it is a command line option
-          cout << _("Please restart the operation in interactive"
-              " mode and confirm your agreement with required license(s),"
-              " or use the --auto-agree-with-licenses option.")
-            << endl;
+          zypper.out().info(
+            _("Aborting installation due to the need for license confirmation."),
+            Out::QUIET);
+          zypper.out().info(boost::str(format(
+            // translators: %sanslate the '--auto-agree-with-licenses',
+            // it is a command line option
+            _("Please restart the operation in interactive"
+              " mode and confirm your agreement with required licenses,"
+              " or use the %s option.")) % "--auto-agree-with-licenses"),
+            Out::QUIET);
+
           MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
         }
         else
         {
-          cout << endl;
-            // TranslatorExplanation e.g. "... with flash package license."
-          cout << format(
+          zypper.out().info(boost::str(format(
+              // translators: e.g. "... with flash package license."
               _("Aborting installation due to user disagreement with %s %s license."))
                 % it->resolvable()->name()
-                % kind_to_string_localized(it->resolvable()->kind(), 1)
-              << endl;
+                % kind_to_string_localized(it->resolvable()->kind(), 1)),
+              Out::QUIET);
             MIL << "License(s) NOT confirmed (interactive)" << endl;
         }
 
@@ -1659,26 +1676,26 @@ SrcPackage::constPtr source_find( const string & arg )
     SrcPackage::constPtr srcpkg;
 
     ResPool pool(God->pool());
-    cout_vv << "looking source for : " << arg << endl;
+    DBG << "looking source for : " << arg << endl;
     for_( srcit, pool.byIdentBegin<SrcPackage>(arg), 
               pool.byIdentEnd<SrcPackage>(arg) )
     {
-      cout_vv << *srcit << endl;
+      DBG << *srcit << endl;
       if ( ! srcit->status().isInstalled() )
       {
         SrcPackage::constPtr _srcpkg = asKind<SrcPackage>(srcit->resolvable());
-        cout_vv << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
+        DBG << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
         if (_srcpkg)
         {
           if (_srcpkg->edition() < srcpkg->edition())
-            cout_vv << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
+            DBG << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
           else
-            cout_vv << "is older than the current candidate";
+            DBG << "is older than the current candidate";
         }
         else
-          cout_vv << "first candindate";
+          DBG << "first candindate";
   
-        cout_vv << endl;
+        DBG << endl;
   
         _srcpkg.swap(srcpkg);
       }
@@ -1704,21 +1721,21 @@ int build_deps_install(std::vector<std::string> & arguments)
 
     if (srcpkg)
     {
-      cout << format(_("Installing source package %s-%s dependencies"))
-          % srcpkg->name() % srcpkg->edition() << endl;
-      
+      Zypper::instance()->out().info(boost::str(format(
+          _("Installing source package %s-%s dependencies"))
+          % srcpkg->name() % srcpkg->edition()));
+
       // add all src requires to pool
       for_( itc, srcpkg->dep(Dep::REQUIRES).begin(), srcpkg->dep(Dep::REQUIRES).end() )
       {
         God->resolver()->addRequire(*itc);
       }
-
-      ret = ZYPPER_EXIT_ERR_ZYPP;
-
     }
     else
     {
-      cerr << format(_("Source package '%s' not found.")) % (*it) << endl;
+      Zypper::instance()->out().error(boost::str(format(
+          _("Source package '%s' not found.")) % (*it)));
+      ret = ZYPPER_EXIT_INF_CAP_NOT_FOUND;
     }
   }
 
@@ -1744,29 +1761,32 @@ int source_install(std::vector<std::string> & arguments)
 
     if (srcpkg)
     {
-      cout << format(_("Installing source package %s-%s"))
-          % srcpkg->name() % srcpkg->edition() << endl;
+      Zypper::instance()->out().info(boost::str(format(
+          _("Installing source package %s-%s"))
+          % srcpkg->name() % srcpkg->edition()));
       MIL << "Going to install srcpackage: " << srcpkg << endl;
 
       try
       {
         God->installSrcPackage(srcpkg);
 
-        cout << format(_("Source package %s-%s successfully installed."))
-            % srcpkg->name() % srcpkg->edition() << endl;
+        Zypper::instance()->out().info(boost::str(format(
+            _("Source package %s-%s successfully installed."))
+            % srcpkg->name() % srcpkg->edition()));
       }
       catch (const Exception & ex)
       {
         ZYPP_CAUGHT(ex);
-        cerr << format(_("Problem installing source package %s-%s:"))
-            % srcpkg->name() % srcpkg->edition() << endl;
-        cerr << ex.asUserString() << endl;
+        Zypper::instance()->out().error(ex,
+          boost::str(format(_("Problem installing source package %s-%s:"))
+            % srcpkg->name() % srcpkg->edition()));
 
         ret = ZYPPER_EXIT_ERR_ZYPP;
       }
     }
     else
-      cerr << format(_("Source package '%s' not found.")) % (*it) << endl;
+      Zypper::instance()->out().error(boost::str(format(
+          _("Source package '%s' not found.")) % (*it)));
   }
 
   return ret;
