@@ -58,7 +58,7 @@ public:
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
 
   /**
-   * Show warning.
+   * Show a warning.
    * 
    * \param msg       The warning message to be displayed.
    * \param verbosity Minimal level o verbosity in which the message will be
@@ -71,12 +71,14 @@ public:
    *                  types of output. 
    */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
-  
+
   /**
    * Show an error message and an optional hint.
    * 
-   * \param problem_desc
-   * \param hint
+   * An error message should be shown regardless of the verbosity level.
+   * 
+   * \param problem_desc Problem description (what happend)
+   * \param hint         Hint for the user (what to do, or explanation)
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
   

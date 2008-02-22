@@ -61,7 +61,7 @@ download-progress-done =
 message-element =
   element message {
     attribute id { xsd:string }
-    attribute type { "info" | "warning" | "error" },
+    attribute type { "info" | "warning" | "error" }, # considering yet another type "result", maybe a separate <result> element 
     text
   }
 

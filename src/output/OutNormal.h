@@ -10,8 +10,24 @@ public:
   virtual ~OutNormal();
 
 public:
+  /**
+   * Prints \a msg to the standard output and appends a newline.
+   *
+   *  \see Out::info()
+   */
   virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
+
+  /**
+   * Prints \a msg prepended with <tt>"Warning: "</tt> to the standard output
+   * and appends a newline.
+   * 
+   * \see Out::warning
+   */
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
+  
+  /**
+   * 
+   */
   virtual void error(const std::string & problem_desc, const std::string & hint = "");
   virtual void error(const zypp::Exception & e,
              const std::string & problem_desc,
