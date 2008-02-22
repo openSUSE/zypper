@@ -11,6 +11,8 @@
 */
 #include "zypp/Package.h"
 
+using namespace std;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -45,11 +47,11 @@ namespace zypp
 
   /** */
   std::string Package::buildhost() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::buildhost ); }
 
   /** */
   std::string Package::distribution() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::distribution ); }
 
   /** */
   Label Package::license() const
@@ -57,11 +59,11 @@ namespace zypp
 
   /** */
   std::string Package::packager() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::packager ); }
 
   /** */
   PackageGroup Package::group() const
-  { return PackageGroup(); }
+  { return lookupStrAttribute( sat::SolvAttr::group ); }
 
   Package::Keywords Package::keywords() const
   { return Keywords(); }
@@ -69,31 +71,31 @@ namespace zypp
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */
   std::string Package::url() const
-  { return std::string(); }
+  { return string(); }
 
   /** */
   std::string Package::os() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::os ); }
 
   /** */
   Text Package::prein() const
-  { return Text(); }
+  { return lookupStrAttribute( sat::SolvAttr::prein); }
 
   /** */
   Text Package::postin() const
-  { return Text(); }
+  { return lookupStrAttribute( sat::SolvAttr::postin); }
 
   /** */
   Text Package::preun() const
-  { return Text(); }
+  { return lookupStrAttribute( sat::SolvAttr::preun); }
 
   /** */
   Text Package::postun() const
-  { return Text(); }
+  { return lookupStrAttribute( sat::SolvAttr::postun); }
 
   /** */
   ByteCount Package::sourcesize() const
-  { return ByteCount(); }
+  { return lookupNumAttribute( sat::SolvAttr::sourcesize); }
 
   /** */
   std::list<std::string> Package::authors() const
