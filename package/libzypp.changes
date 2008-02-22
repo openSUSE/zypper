@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 22 10:10:14 CET 2008 - schubi@suse.de
+
+- Unmaintained packages which does not fit to the updated system
+  (broken dependencies) will be deleted.
+- revision 8867
+
+-------------------------------------------------------------------
 Fri Feb 22 07:20:35 CET 2008 - coolo@suse.de
 
 - let libzypp-devel require libsatsolver-devel
