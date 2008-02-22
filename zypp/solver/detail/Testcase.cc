@@ -344,7 +344,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     // writing control file "*-test.xml"
 
-    HelixControl control (dumpPath + "/solver-test.xml",
+    HelixControl control (dumpPath + "/solver-test.xml.gz",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
 			  language);
