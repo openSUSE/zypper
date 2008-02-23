@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Feb 23 17:27:05 CET 2008 - dmacvicar@suse.de
+
+- default autorefresh to disabled like every other package
+  managerment tool
+
+-------------------------------------------------------------------
 Fri Feb 22 15:48:53 CET 2008 - jkupec@suse.cz
 
 - --xmlout almost done (special command result output missing)

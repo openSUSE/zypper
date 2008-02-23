@@ -1511,9 +1511,9 @@ void Zypper::doCommand()
         return;
       }
 
-      // by default, enable the repo and set autorefresh
+      // by default, enable the repo and set autorefresh to false
       if (indeterminate(enabled)) enabled = true;
-      if (indeterminate(refresh)) refresh = true;
+      if (indeterminate(refresh)) refresh = false;
 
       warn_if_zmd();
 
