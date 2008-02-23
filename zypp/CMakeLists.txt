@@ -801,8 +801,6 @@ ${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
 ${zypp_parser_HEADERS}
 ${zypp_data_HEADERS}
-${zypp_cache_HEADERS}
-${zypp_cache_sqlite3x_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_media_HEADERS}
 ${zypp_target_hal_HEADERS}
