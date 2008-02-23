@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <iostream>
-#include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"

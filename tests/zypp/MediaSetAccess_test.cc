@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <iostream>
-#include <boost/test/unit_test.hpp>
+#ifdef BOOST_AUTO_TEST_MAIN
+#undef BOOST_AUTO_TEST_MAIN
+#endif
+#include <boost/test/auto_unit_test.hpp>
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 

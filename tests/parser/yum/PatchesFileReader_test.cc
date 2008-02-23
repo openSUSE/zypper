@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <list>
-#include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 #include "zypp/OnMediaLocation.h"
 #include "zypp/parser/yum/PatchesFileReader.h"

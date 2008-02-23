@@ -7,7 +7,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
-#include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;

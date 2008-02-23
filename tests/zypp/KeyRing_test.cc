@@ -10,13 +10,12 @@
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
 
-#include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 #include "KeyRingTestReceiver.h"
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
-using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;

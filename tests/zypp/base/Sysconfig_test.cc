@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
@@ -16,7 +16,6 @@
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 using namespace boost::unit_test;
-using namespace boost::unit_test::log;
 
 using namespace std;
 using namespace zypp;

@@ -29,7 +29,7 @@ INCLUDE(CPack)
 
 MACRO(ADD_TESTS)
   FOREACH( loop_var ${ARGV} )
-    SET_SOURCE_FILES_PROPERTIES( ${loop_var}_test.cc COMPILE_FLAGS "-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN" )
+    SET_SOURCE_FILES_PROPERTIES( ${loop_var}_test.cc COMPILE_FLAGS "-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -DBOOST_AUTO_TEST_MAIN=\"\" " )
     ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
     TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp boost_unit_test_framework)
     ADD_TEST( ${loop_var}_test ${CMAKE_CURRENT_BINARY_DIR}/${loop_var}_test)
