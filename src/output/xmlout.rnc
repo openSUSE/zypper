@@ -15,29 +15,21 @@ stream-element =
       update-element )+
   }
 
-progress-elements = ( progress-alive | progress-percentage | progress-done )
+progress-elements = ( progress-element | progress-done )
 
 # todo - restrict and specialize progress by type
-progress-percentage =
+progress-element =
   element progress {
     attribute id { xsd:string },
     attribute name { xsd:string },
-    attribute type { "percentage" },
-    attribute value { xsd:integer }
-  }
-
-progress-alive =
-  element progress {
-    attribute id { xsd:string },
-    attribute name { xsd:string },
-    attribute type { "alive" },
+    attribute value { xsd:integer }?
   }
 
 progress-done =
   element progress {
     attribute id { xsd:string },
     attribute name { xsd:string },
-    attribute done { xsd:boolean }, # 0 on success, 1 on error
+    attribute done { xsd:boolean } # 0 on success, 1 on error
   }
 
 download-progress-elements = ( download-progress-element | download-progress-done )
@@ -53,12 +45,11 @@ download-progress-done =
   element download {
     attribute url { xsd:string },
     attribute rate { xsd:integer }, # download rate in bytes per second
-    attribute done { xsd:boolean }, # 0 on success, 1 on error
+    attribute done { xsd:boolean } # 0 on success, 1 on error
   }
 
 message-element =
   element message {
-    attribute id { xsd:string }
     attribute type { "info" | "warning" | "error" }, # considering yet another type "result", maybe a separate <result> element 
     text
   }

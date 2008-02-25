@@ -114,7 +114,9 @@ void OutXML::writeProgressTag(const string & id, const string & label,
   cout << " name=\"" << xmlEncode(label) << "\"";
   if (done)
     cout << " done=\"" << error << "\"";
-  else if (value >= 0)
+  // print value only if it is known (percentage progress)
+  // missing value means 'is-alive' notification
+  else if (value >= 0) 
     cout << " value=\"" << value << "\"";
   cout << "/>" << endl;
 }
@@ -152,9 +154,9 @@ void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
   cout << "<download"
     << " url=\"" << xmlEncode(uri.asString()) << "\""
-    << " percent=\"0\""
-    << " rate=\"0\""
-    << ">" << endl;
+    << " percent=\"-1\""
+    << " rate=\"-1\""
+    << "/>" << endl;
 }
 
 void OutXML::dwnldProgress(const zypp::Url & uri,
@@ -165,7 +167,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
     << " url=\"" << xmlEncode(uri.asString()) << "\""
     << " percent=\"" << value << "\""
     << " rate=\"" << rate << "\""
-    << ">" << endl;
+    << "/>" << endl;
 }
 
 void OutXML::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
@@ -174,7 +176,7 @@ void OutXML::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
     << " url=\"" << xmlEncode(uri.asString()) << "\""
     << " rate=\"" << rate << "\""
     << " done=\"" << error << "\""
-    << ">" << endl;
+    << "/>" << endl;
 }
 
 void OutXML::prompt(PromptId id,
