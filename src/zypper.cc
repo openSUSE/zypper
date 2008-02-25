@@ -1889,7 +1889,7 @@ void Zypper::doCommand()
     // prepare target
     init_target(*this);
     // load metadata
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     // mark resolvables for installation/removal
     bool by_capability = false; // install by name by default
@@ -2037,7 +2037,7 @@ void Zypper::doCommand()
     init_target(*this);
 
     // now load resolvables:
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     Table t;
     t.style(Ascii);
@@ -2096,7 +2096,7 @@ void Zypper::doCommand()
     // TODO calc token?
 
     // now load resolvables:
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     patch_check ();
 
@@ -2131,7 +2131,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
     show_patches(*this);
 
     return;
@@ -2173,7 +2173,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     list_updates(*this, kind, best_effort );
 
@@ -2191,7 +2191,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;
@@ -2257,7 +2257,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
     mark_updates( kind, skip_interactive, best_effort );
@@ -2312,7 +2312,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
     zypp::UpgradeStatistics opt_stats;
     God->resolver()->doUpgrade(opt_stats);
 
@@ -2384,7 +2384,7 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-    cond_load_resolvables(*this);
+    load_resolvables(*this);
 
     printInfo(*this, kind);
 

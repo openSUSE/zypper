@@ -1395,7 +1395,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 
 // ---------------------------------------------------------------------------
 
-void cond_load_resolvables(Zypper & zypper)
+void load_resolvables(Zypper & zypper)
 {
   static bool done = false;
   // don't call this fuction more than once for a single ZYpp instance

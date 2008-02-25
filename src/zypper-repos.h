@@ -103,7 +103,7 @@ void modify_repo(Zypper & zypper, const std::string & alias);
  * \see load_repo_resolvables(bool)
  * \see load_target_resolvables(bool)
  */
-void cond_load_resolvables(Zypper & zypper);
+void load_resolvables(Zypper & zypper);
 
 /**
  * Reads resolvables from the RPM database (installed resolvables) into the pool.
