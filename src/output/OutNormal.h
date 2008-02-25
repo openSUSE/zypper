@@ -49,7 +49,9 @@ public:
   virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              int rate = -1);
-  virtual void dwnldProgressEnd(const zypp::Url & uri, bool error);
+  virtual void dwnldProgressEnd(const zypp::Url & uri,
+                                int rate = -1,
+                                bool error = false);
   
   virtual void prompt(PromptId id,
                       const std::string & prompt,

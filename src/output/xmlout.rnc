@@ -44,18 +44,16 @@ download-progress-elements = ( download-progress-element | download-progress-don
 
 download-progress-element =
   element download {
-    attribute id { xsd:string },
-    attribute label { xsd:string },
+    attribute url { xsd:string },
     attribute percent { xsd:integer },
     attribute rate { xsd:integer } # download rate in bytes per second
-#    attribute done { xsd:boolean },
   }
 
 download-progress-done =
   element download {
-    attribute id { xsd:string },
-    attribute label { xsd:string },
-    attribute done { xsd:boolean },
+    attribute url { xsd:string },
+    attribute rate { xsd:integer }, # download rate in bytes per second
+    attribute done { xsd:boolean }, # 0 on success, 1 on error
   }
 
 message-element =

@@ -97,7 +97,8 @@ public:
   // virtual void table()
   // virtual void text()
 
-  // progress
+  /** \name Progress */
+  //@{
   virtual void progressStart(const std::string & id,
                              const std::string & label,
                              bool is_tick = false) = 0;
@@ -107,13 +108,32 @@ public:
   virtual void progressEnd(const std::string & id,
                            const std::string & label,
                            bool error = false) = 0; // might be a string with error message instead
+  //@}
 
-  // progress with download rate
+  /** \name Download progress with download rate */
+  //@{
+  /**
+   * \param uri   Uri of the file to download. 
+   */
   virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
+
+  /**
+   * \param uri   Uri of the file being downloaded. 
+   * \param value Value of the progress in percents. -1 if unknown.
+   * \param rate  Download rate. -1 if unknown.
+   */
   virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              int rate = -1) = 0;
-  virtual void dwnldProgressEnd(const zypp::Url & uri, bool error = false) = 0;
+  /**
+   * \param uri   Uri of the file to download. 
+   * \param rate  Final download rate. -1 if unknown.
+   * \param error Error flag - did the download finish with error?
+   */
+  virtual void dwnldProgressEnd(const zypp::Url & uri,
+                                int rate = -1,
+                                bool error = false) = 0;
+  //@}
 
   virtual void prompt(PromptId id,
                       const std::string & prompt,

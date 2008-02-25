@@ -109,7 +109,7 @@ void OutXML::error(const zypp::Exception & e,
 void OutXML::writeProgressTag(const string & id, const string & label,
                               int value, bool done, bool error)
 {
-  cout << "<progress ";
+  cout << "<progress";
   cout << " id=\"" << xmlEncode(id) << "\"";
   cout << " name=\"" << xmlEncode(label) << "\"";
   if (done)
@@ -148,23 +148,33 @@ void OutXML::progressEnd(const string & id, const string& label, bool error)
   writeProgressTag(id, label, 100, true, error);
 }
 
-// progress with download rate
 void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
-  cout << "<download url=\"" << xmlEncode(uri.asString()) << "\">"
-    << endl;
+  cout << "<download"
+    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " percent=\"0\""
+    << " rate=\"0\""
+    << ">" << endl;
 }
 
 void OutXML::dwnldProgress(const zypp::Url & uri,
                            int value,
                            int rate)
 {
-  cout << "<not-implemented what=\"dwnlod-progress\">" << endl;
+  cout << "<download"
+    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " percent=\"" << value << "\""
+    << " rate=\"" << rate << "\""
+    << ">" << endl;
 }
 
-void OutXML::dwnldProgressEnd(const zypp::Url & uri, bool error)
+void OutXML::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
 {
-  cout << "<not-implemented what=\"dwnlod-progress-end\">" << endl;
+  cout << "<download"
+    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " rate=\"" << rate << "\""
+    << " done=\"" << error << "\""
+    << ">" << endl;
 }
 
 void OutXML::prompt(PromptId id,

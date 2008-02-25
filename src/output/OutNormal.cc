@@ -167,7 +167,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   cout << std::flush;
 }
 
-void OutNormal::dwnldProgressEnd(const zypp::Url & uri, bool error)
+void OutNormal::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
 {
   if (verbosity() < NORMAL)
     return;
