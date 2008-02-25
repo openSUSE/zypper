@@ -329,35 +329,30 @@ namespace zypp
 
         filesystem::TmpFile tmpsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() ) /*dir*/,
                                      sat::Pool::instance().systemRepoName() /* prefix */ );
+        ostringstream cmd;
+        cmd << "rpmdb2solv";
 
-         MIL << "Executing solv converter" << endl;
+        if ( ! _root.empty() )
+          cmd << " -r '" << _root << "'";
 
-         // FIXME add root to rpmdb2solv
-         ostringstream cmd;
-         cmd << "rpmdb2solv";
+        if ( solvexisted )
+          cmd << " '" << rpmsolv << "'";
 
-         if ( ! _root.empty() )
-           cmd << " -r '" << _root << "'";
+        cmd << "  > '" << tmpsolv.path() << "'";
 
-         if ( solvexisted )
-           cmd << " '" << rpmsolv << "'";
-
-         cmd << "  > '" << tmpsolv.path() << "'";
-
+        MIL << "Executing: " << cmd << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-          MIL << "  " << output;
+          WAR << "  " << output;
         }
         int ret = prog.close();
 
         if ( ret != 0 )
-          ZYPP_THROW(Exception("Failed to cache rpm database"));
+          ZYPP_THROW(Exception(str::form("Failed to cache rpm database (%d).", ret)));
 
         ret = filesystem::rename( tmpsolv, rpmsolv );
-
         if ( ret != 0 )
           ZYPP_THROW(Exception("Failed to move cache to final destination"));
-
         // if this fails, don't bother throwing exceptions
         filesystem::chmod( rpmsolv, 0644 );
 
@@ -378,8 +373,9 @@ namespace zypp
 
       //now add the repos to the pool
       MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
-      sat::Repo system = sat::Pool::instance().reposInsert(sat::Pool::instance().systemRepoName());
+      sat::Repo system = sat::Pool::instance().systemRepo();
       system.addSolv(rpmsolv);
+
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
     }
 
