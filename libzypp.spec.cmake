@@ -24,10 +24,27 @@ Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel openssl-devel sqlite-devel
+BuildRequires:  libsatsolver-devel openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel rpm-devel
+
+%if 0%{?suse_version}
 BuildRequires:  hicolor-icon-theme update-desktop-files
+%endif
+
+%if 0%{?mandriva_version}
+BuildRequires:  sqlite3-devel
+%else
+BuildRequires:  sqlite-devel
+%endif
+
+
+
+%if 0%{?suse_version}
 Requires:       gpg2
+%else
+Requires:       gnupg
+%endif
+
 Requires:       satsolver-tools == %( echo `rpm -q --queryformat '%{VERSION}' satsolver-tools`)
 
 %description
