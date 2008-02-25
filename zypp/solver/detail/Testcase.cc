@@ -27,6 +27,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Capabilities.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -95,7 +96,50 @@ template<>
 std::string helixXML( const Capability &cap )
 {
     stringstream str;
-    str << "<dep name='" << xml_escape(cap.asString()) << "'  />" << endl;
+    CapDetail detail = cap.detail();
+    if (detail.isSimple()) {
+	if (detail.isVersioned()) {
+	    str << "<dep name='" << xml_escape(detail.name().asString()) << "'"
+		<< " op='" << xml_escape(detail.op().asString()) << "'"
+		<< " version='" <<  xml_escape(detail.ed().version()) << "'";
+	    if (!detail.ed().release().empty())
+		str << " release='" << xml_escape(detail.ed().release()) << "'";
+	    if (detail.ed().epoch() != Edition::noepoch)
+		str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";    
+	    str << " />" << endl;	
+	} else {
+	    str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;
+	}
+    } else if (detail.isExpression()) {
+	if (detail.capRel() == CapDetail::CAP_AND
+	    && detail.lhs().detail().isNamed()
+	    && detail.rhs().detail().isNamed()) {
+	    // packageand dependency
+	    str << "<dep name='packageand("
+		<< IdString(detail.lhs().id()) << ","		
+		<< IdString(detail.rhs().id()) << ")' />" << endl;
+	} else {
+	    // modalias ?
+	    IdString packageName;
+	    if (detail.capRel() == CapDetail::CAP_AND) {
+		packageName = IdString(detail.lhs().id());
+		detail = detail.rhs().detail();
+	    }
+	    if (detail.capRel() == CapDetail::CAP_NAMESPACE
+		&& detail.lhs().id() == NAMESPACE_MODALIAS) {
+		str << "<dep name='modalias(";
+		if (!packageName.empty())
+		    str << packageName << ":";
+		str << IdString(detail.rhs().id()) << ")' />" << endl;
+	    } else {
+		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
+		MIL << "ignoring " << cap << " cause this format will be supported" << endl;
+	    }
+	}
+    } else {
+	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
+	MIL << "ignoring " << cap << " cause this format will be supported" << endl;
+    }
 
     return str.str();
 }
@@ -344,7 +388,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     // writing control file "*-test.xml"
 
-    HelixControl control (dumpPath + "/solver-test.xml.gz",
+    HelixControl control (dumpPath + "/solver-test.xml",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
 			  language);

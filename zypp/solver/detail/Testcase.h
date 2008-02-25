@@ -102,7 +102,7 @@ class  HelixControl {
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
 		  const PoolItemList &languages,		  
-		  const std::string & systemPath = "solver-system.xml");
+		  const std::string & systemPath = "solver-system.xml.gz");
     HelixControl ();    
     ~HelixControl ();
 
