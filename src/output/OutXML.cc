@@ -36,24 +36,55 @@ bool OutXML::infoWarningFilter(Verbosity verbosity, Type mask)
   return false;
 }
 
+string xmlEncode(const string & s)
+{
+  string result;
+  result.reserve(s.size()*2);
+  char buff[7];
+
+  for(string::const_iterator it = s.begin(); it != s.end(); ++it)
+  {
+    switch(*it)
+    {
+    case '&':
+    case '<':
+    case '>':
+    case '"':
+    {
+      snprintf(buff, 7, "&#%d;", (unsigned)*it);
+      result.append(buff);
+      break;
+    }
+    default:
+      result.append(1, *it);
+    }
+  }
+
+  return result;
+}
+
 void OutXML::info(const string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  //! \todo xml escape the msg
-  cout << "<message type=\"info\">" << msg << "</message>" << endl;
+  
+  cout << "<message type=\"info\">" << xmlEncode(msg)
+       << "</message>" << endl;
 }
 
 void OutXML::warning(const string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
-  cout << "<message type=\"warning\">" << msg << "</message>" << endl;
+
+  cout << "<message type=\"warning\">" << xmlEncode(msg)
+       << "</message>" << endl;
 }
 
 void OutXML::error(const string & problem_desc, const string & hint)
 {
-  cout << "<message type=\"error\">" << problem_desc << "</message>" << endl;
+  cout << "<message type=\"error\">" << xmlEncode(problem_desc)
+       << "</message>" << endl;
   //! \todo hint
 }
 
@@ -71,15 +102,16 @@ void OutXML::error(const zypp::Exception & e,
   if (!hint.empty())
     s << hint << endl;
 
-  cout << "<message type=\"error\">" << s.str() << "</message>" << endl;
+  cout << "<message type=\"error\">" << xmlEncode(s.str())
+       << "</message>" << endl;
 }
 
 void OutXML::writeProgressTag(const string & id, const string & label,
                               int value, bool done, bool error)
 {
   cout << "<progress ";
-  cout << " id=\"" << id << "\"";
-  cout << " name=\"" << label << "\"";
+  cout << " id=\"" << xmlEncode(id) << "\"";
+  cout << " name=\"" << xmlEncode(label) << "\"";
   if (done)
     cout << " done=\"" << error << "\"";
   else if (value >= 0)
@@ -119,7 +151,8 @@ void OutXML::progressEnd(const string & id, const string& label, bool error)
 // progress with download rate
 void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
-  cout << "<not-implemented what=\"dwnlod-progress-start\">" << endl;
+  cout << "<download url=\"" << xmlEncode(uri.asString()) << "\">"
+    << endl;
 }
 
 void OutXML::dwnldProgress(const zypp::Url & uri,
@@ -138,5 +171,6 @@ void OutXML::prompt(PromptId id,
                     const string & prompt,
                     const string & answer_hint) // hint ignored for now, maybe an enumeration will be here in the future
 {
-  cout << "<prompt id=\"" << id << "\">" << prompt << "</prompt>" << endl;
+  cout << "<prompt id=\"" << id << "\">" << xmlEncode(prompt)
+       << "</prompt>" << endl;
 }
