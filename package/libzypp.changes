@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb 25 13:20:26 CET 2008 - ma@suse.de
+ 
+- Remove obsolete sql database. (bnc#363224)
+- revision 8898
+
+-------------------------------------------------------------------
 Fri Feb 22 14:03:59 CET 2008 - ma@suse.de
 
 - Take care target uses --root when creating solv files (bnc #363789)

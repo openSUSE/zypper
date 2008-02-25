@@ -26,25 +26,34 @@ struct Options
   : fake(false)
   , root("/")
   , sources_dir("/var/lib/zypp/db/sources")
-  , cache_dir("/var/lib/zypp/cache")
   {}
 
   bool fake;
   Pathname root;
   Pathname sources_dir;
-  Pathname cache_dir;
 };
 
 static void clear_cache( const Options &opt )
 {
-  Pathname cache_p = opt.root + opt.cache_dir;
-  if ( PathInfo(cache_p).isDir() )
+  Pathname path = opt.root + "/var/lib/zypp/cache";
+  if ( PathInfo(path).isDir() )
   {
-    cout << "Deleting old cache directory." << endl;
+    cout << "Deleting old cache directory (" << path << ")." << endl;
     if ( ! opt.fake )
     {
-      if ( filesystem::recursive_rmdir(cache_p) != 0 )
-        ERR << "Error removing cache directory" << cache_p << endl;
+      if ( filesystem::recursive_rmdir(path) != 0 )
+        ERR << "Error removing cache directory" << path << endl;
+    }
+  }
+
+  path = opt.root + "/var/lib/zypp/db";
+  if ( PathInfo(path).isDir() )
+  {
+    cout << "Deleting old db directory (" << path << ")." << endl;
+    if ( ! opt.fake )
+    {
+      if ( filesystem::recursive_rmdir(path) != 0 )
+        ERR << "Error removing db directory" << path << endl;
     }
   }
 }
