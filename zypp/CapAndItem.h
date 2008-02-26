@@ -12,6 +12,8 @@
 #ifndef ZYPP_CAPANDITEM_H
 #define ZYPP_CAPANDITEM_H
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/PoolItem.h"
 #include "zypp/Capability.h"
 
@@ -23,8 +25,11 @@ namespace zypp
     //
     //	CLASS NAME : CapAndItem
     //
-    /** */
-    struct CapAndItem
+    /**
+     *
+     * \deprecated no longer supported
+    */
+    struct ZYPP_DEPRECATED CapAndItem
     {
 	friend std::ostream & operator<<( std::ostream & str, const CapAndItem & obj );
 	public:

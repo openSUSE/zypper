@@ -287,7 +287,7 @@ namespace zypp
         // set the metadata path for the repo
         Pathname metadata_path = rawcache_path_for_repoinfo(_pimpl->options, (*it));
         (*it).setMetadataPath(metadata_path);
-	
+
 	// set the downloaded packages path for the repo
 	Pathname packages_path = packagescache_path_for_repoinfo(_pimpl->options, (*it));
 	(*it).setPackagesPath(packages_path);
@@ -613,7 +613,7 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-	
+
         TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
         filesystem::rename( rawpath, oldmetadata.path() );
         // move the just downloaded there
@@ -740,20 +740,28 @@ namespace zypp
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
       {
-        MIL << "Executing solv converter" << endl;
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
-        stringstream outputstr;
-        string cmd( str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() ) );
-        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+        ostringstream cmd;
+        cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() );
+
+        MIL << "Executing: " << cmd << endl;
+        ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
+
+        cmd << endl;
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
-          MIL << "  " << output;
-          outputstr << output;
+          WAR << "  " << output;
+          cmd << "     " << output;
         }
+
         int ret = prog.close();
         if ( ret != 0 )
-          ZYPP_THROW(RepoException(outputstr.str()));
+        {
+          RepoException ex(str::form("Failed to cache repo (%d).", ret));
+          ex.remember( cmd.str() );
+          ZYPP_THROW(ex);
+        }
 
         // We keep it.
         guard.resetDispose();

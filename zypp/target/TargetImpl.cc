@@ -342,13 +342,20 @@ namespace zypp
 
         MIL << "Executing: " << cmd << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
+
+        cmd << endl;
         for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
+          cmd << "     " << output;
         }
-        int ret = prog.close();
 
+        int ret = prog.close();
         if ( ret != 0 )
-          ZYPP_THROW(Exception(str::form("Failed to cache rpm database (%d).", ret)));
+        {
+          Exception ex(str::form("Failed to cache rpm database (%d).", ret));
+          ex.remember( cmd.str() );
+          ZYPP_THROW(ex);
+        }
 
         ret = filesystem::rename( tmpsolv, rpmsolv );
         if ( ret != 0 )
