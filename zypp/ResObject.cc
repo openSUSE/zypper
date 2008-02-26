@@ -138,7 +138,7 @@ namespace zypp
   { return repo().info(); }
 
   unsigned ResObject::mediaNr() const
-  { return 1; }
+  { return lookupNumAttribute( sat::SolvAttr::medianr ); }
 
   bool ResObject::installOnly() const
   { return false; }
