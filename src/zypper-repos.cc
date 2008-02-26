@@ -75,10 +75,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
           {
             ostringstream s;
             s << format(_("Refreshing '%s'")) % repo.name();
-            if (zypper.command() == ZypperCommand::REFRESH &&
+            if (zypper.out().verbosity() > Out::NORMAL &&
+                zypper.command() == ZypperCommand::REFRESH &&
                 zypper.cOpts().count("force"))
               s << " " << _("(forced)");
-            zypper.out().info(s.str(), Out::HIGH);
+            zypper.out().info(s.str());
           }
           else if (zypper.command() == ZypperCommand::REFRESH)
           {
