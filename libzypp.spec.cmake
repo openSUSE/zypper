@@ -118,7 +118,7 @@ cd ..
 
 %post
 %run_ldconfig
-test -f /var/cache/zypp/zypp.db && rm /var/cache/zypp/zypp.db
+if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
 #%{prefix}/lib/zypp/zypp-migrate-sources
 
 %postun
