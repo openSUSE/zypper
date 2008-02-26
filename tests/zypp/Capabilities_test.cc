@@ -2,6 +2,7 @@
 //
 // tests for Capabilities
 //
+#include <iostream>
 #include <string>
 
 // Boost.Test
@@ -9,6 +10,7 @@
 #include <boost/test/auto_unit_test.hpp>
 
 #include "zypp/Capability.h"
+#include "zypp/Capabilities.h"
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
@@ -78,5 +80,35 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
 
   BOOST_CHECK_EQUAL( ( c0 == c1 ), false );
   BOOST_CHECK_EQUAL( Capability::matches( c0, c1 ), CapMatch::yes );
+
+
+  Capability r( "req" );
+  Capability p( "prereq" );
+
+  sat::detail::IdType caps[10];
+  caps[0] = r.id();
+  caps[1] = sat::detail::solvablePrereqMarker;
+  caps[2] = p.id();
+  caps[3] = 0;
+
+  // Capabilities with and without prereq (skip marker in ++)
+  Capabilities c( caps );
+  cout << c << endl;
+  BOOST_CHECK_EQUAL( c.size(), 2 );
+  Capabilities::const_iterator it( c.begin() );
+  BOOST_CHECK_EQUAL( *it, r );
+  BOOST_CHECK_EQUAL( it.tagged(), false );
+  ++it;
+  BOOST_CHECK_EQUAL( *it, p );
+  BOOST_CHECK_EQUAL( it.tagged(), true );
+
+  // Capabilities with prereq only (skip marker in ctor)
+  c = Capabilities( caps+1 );
+  cout << c << endl;
+  BOOST_CHECK_EQUAL( c.size(), 1 );
+  it = c.begin();
+  BOOST_CHECK_EQUAL( *it, p );
+  BOOST_CHECK_EQUAL( it.tagged(), true );
+
 }
 

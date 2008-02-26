@@ -103,7 +103,13 @@ namespace zypp
 
       explicit const_iterator( const sat::detail::IdType * _idx )
       : const_iterator::iterator_adaptor_( _idx )
-      {}
+      {
+        if ( base_reference() && sat::detail::isDepMarkerId( *base_reference() ) )
+        {
+          _tagged = true;
+          ++base_reference();
+        }
+      }
 
     public:
       /** Return \c true if the \ref Capability is \c tagged.

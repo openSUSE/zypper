@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 26 13:26:30 CET 2008 - ma@suse.de
+ 
+- Fixed Capabilites iterator exposing prereq marker.
+- revision 8914
+
+-------------------------------------------------------------------
 Tue Feb 26 11:29:05 CET 2008 - schubi@suse.de
 
 - postinstall script fixed
