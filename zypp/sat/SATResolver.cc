@@ -285,7 +285,6 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
     bool operator()( PoolItem item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
-	_XDEBUG( "SATCollectTransact(" << item << ")" );
 	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
 	if (by_solver) {
