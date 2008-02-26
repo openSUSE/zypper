@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 26 11:29:05 CET 2008 - schubi@suse.de
+
+- postinstall script fixed
+- version 4.2.10
+
+-------------------------------------------------------------------
 Mon Feb 25 17:06:53 CET 2008 - schubi@suse.de
 
 - Testcases regards modaliases, rpmlib, ... correctly
