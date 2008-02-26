@@ -201,6 +201,12 @@ namespace zypp
 	      continue;
 	    }
 
+	    if ( words[2] == "vfat" || words[2] == "fat" || words[2] == "ntfs" || words[2] == "ntfs-3g")
+	    {
+	      MIL << words[1] << " contains ignored fs (" << words[2] << ')' << std::endl;
+	      continue;
+	    }
+
 	    //
 	    // Filter some common unwanted mountpoints
 	    //

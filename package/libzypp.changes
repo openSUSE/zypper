@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 26 13:59:03 CET 2008 - lslezak@suse.cz
+
+- DiskUsageCounter.cc - ignore "vfat", "fat", "ntfs" and "ntfs-3g"
+  file systems (#333166)
+- rev. 8915
+
+-------------------------------------------------------------------
 Tue Feb 26 13:26:30 CET 2008 - ma@suse.de
  
 - Fixed Capabilites iterator exposing prereq marker.
