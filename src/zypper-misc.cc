@@ -21,8 +21,6 @@
 
 #include "zypp/Capabilities.h"
 
-#include "zypp/parser/xml_escape_parser.hpp"
-
 #include "zypper.h"
 #include "zypper-main.h"
 #include "zypper-utils.h"
@@ -30,8 +28,6 @@
 #include "zypper-misc.h"
 #include "zypper-callbacks.h"
 #include "output/prompt.h"
-
-//using namespace zypp::detail;
 
 using namespace std;
 using namespace zypp;
@@ -116,12 +112,6 @@ bool ProvideProcess::operator()( const PoolItem& provider )
   }
 
   return true;
-}
-
-static std::string xml_escape( const std::string &text )
-{
-	iobind::parser::xml_escape_parser parser;
-	return parser.escape(text);
 }
 
 /**
@@ -1084,9 +1074,9 @@ bool xml_list_patches ()
         cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
         cout << "kind=\"" << "patch" << "\" ";
         cout << ">" << endl;
-        cout << "  <summary>" << xml_escape(patch->summary()) << "  </summary>" << endl;
-        cout << "  <description>" << xml_escape(patch->description()) << "</description>" << endl;
-        cout << "  <license>" << xml_escape(patch->licenseToConfirm()) << "</license>" << endl;
+        cout << "  <summary>" << xml_encode(patch->summary()) << "  </summary>" << endl;
+        cout << "  <description>" << xml_encode(patch->description()) << "</description>" << endl;
+        cout << "  <license>" << xml_encode(patch->licenseToConfirm()) << "</license>" << endl;
 
         if ( !patch->repoInfo().alias().empty() )
         {
@@ -1457,9 +1447,9 @@ void xml_list_updates(const ResKindSet & kinds)
     cout << "edition=\""  << res->edition ().asString() << "\" ";
     cout << "kind=\"" << res->kind() << "\" ";
     cout << ">" << endl;
-    cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
-    cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
-    cout << "  <license>" << xml_escape(res->licenseToConfirm()) << "</license>" << endl;
+    cout << "  <summary>" << xml_encode(res->summary()) << "  </summary>" << endl;
+    cout << "  <description>" << xml_encode(res->description()) << "</description>" << endl;
+    cout << "  <license>" << xml_encode(res->licenseToConfirm()) << "</license>" << endl;
 
     if ( !res->repoInfo().alias().empty() )
     {

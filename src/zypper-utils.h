@@ -55,4 +55,6 @@ bool looks_like_rpm_file(const std::string & s);
 zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
                          const std::string & cache_dir);
 
+std::string xml_encode(const std::string & text);
+
 #endif /*ZYPPER_UTILS_H*/

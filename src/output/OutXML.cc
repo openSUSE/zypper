@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "OutXML.h"
+#include "../zypper-utils.h"
 
 using std::cout;
 using std::endl;
@@ -36,6 +37,7 @@ bool OutXML::infoWarningFilter(Verbosity verbosity, Type mask)
   return false;
 }
 
+/*
 string xmlEncode(const string & s)
 {
   string result;
@@ -62,13 +64,14 @@ string xmlEncode(const string & s)
 
   return result;
 }
+*/
 
 void OutXML::info(const string & msg, Verbosity verbosity, Type mask)
 {
   if (infoWarningFilter(verbosity, mask))
     return;
   
-  cout << "<message type=\"info\">" << xmlEncode(msg)
+  cout << "<message type=\"info\">" << xml_encode(msg)
        << "</message>" << endl;
 }
 
@@ -77,13 +80,13 @@ void OutXML::warning(const string & msg, Verbosity verbosity, Type mask)
   if (infoWarningFilter(verbosity, mask))
     return;
 
-  cout << "<message type=\"warning\">" << xmlEncode(msg)
+  cout << "<message type=\"warning\">" << xml_encode(msg)
        << "</message>" << endl;
 }
 
 void OutXML::error(const string & problem_desc, const string & hint)
 {
-  cout << "<message type=\"error\">" << xmlEncode(problem_desc)
+  cout << "<message type=\"error\">" << xml_encode(problem_desc)
        << "</message>" << endl;
   //! \todo hint
 }
@@ -102,7 +105,7 @@ void OutXML::error(const zypp::Exception & e,
   if (!hint.empty())
     s << hint << endl;
 
-  cout << "<message type=\"error\">" << xmlEncode(s.str())
+  cout << "<message type=\"error\">" << xml_encode(s.str())
        << "</message>" << endl;
 }
 
@@ -110,8 +113,8 @@ void OutXML::writeProgressTag(const string & id, const string & label,
                               int value, bool done, bool error)
 {
   cout << "<progress";
-  cout << " id=\"" << xmlEncode(id) << "\"";
-  cout << " name=\"" << xmlEncode(label) << "\"";
+  cout << " id=\"" << xml_encode(id) << "\"";
+  cout << " name=\"" << xml_encode(label) << "\"";
   if (done)
     cout << " done=\"" << error << "\"";
   // print value only if it is known (percentage progress)
@@ -153,7 +156,7 @@ void OutXML::progressEnd(const string & id, const string& label, bool error)
 void OutXML::dwnldProgressStart(const zypp::Url & uri)
 {
   cout << "<download"
-    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " url=\"" << xml_encode(uri.asString()) << "\""
     << " percent=\"-1\""
     << " rate=\"-1\""
     << "/>" << endl;
@@ -164,7 +167,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
                            int rate)
 {
   cout << "<download"
-    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " url=\"" << xml_encode(uri.asString()) << "\""
     << " percent=\"" << value << "\""
     << " rate=\"" << rate << "\""
     << "/>" << endl;
@@ -173,7 +176,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
 void OutXML::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
 {
   cout << "<download"
-    << " url=\"" << xmlEncode(uri.asString()) << "\""
+    << " url=\"" << xml_encode(uri.asString()) << "\""
     << " rate=\"" << rate << "\""
     << " done=\"" << error << "\""
     << "/>" << endl;
@@ -183,6 +186,6 @@ void OutXML::prompt(PromptId id,
                     const string & prompt,
                     const string & answer_hint) // hint ignored for now, maybe an enumeration will be here in the future
 {
-  cout << "<prompt id=\"" << id << "\">" << xmlEncode(prompt)
+  cout << "<prompt id=\"" << id << "\">" << xml_encode(prompt)
        << "</prompt>" << endl;
 }

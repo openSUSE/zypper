@@ -4,9 +4,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+#include "zypp/Pathname.h"
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaManager.h"
-#include "zypp/Pathname.h"
+#include "zypp/parser/xml_escape_parser.hpp"
 
 #include "zypper-main.h"
 #include "zypper-utils.h"
@@ -232,4 +233,10 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   }
 
   return Pathname();
+}
+
+string xml_encode(const string & text)
+{
+  iobind::parser::xml_escape_parser parser;
+  return parser.escape(text);
 }
