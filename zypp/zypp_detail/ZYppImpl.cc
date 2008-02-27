@@ -105,6 +105,7 @@ namespace zypp
 #endif
       }
       _target = new Target( root );
+      _target->buildCache();
     }
 
     void ZYppImpl::finishTarget()

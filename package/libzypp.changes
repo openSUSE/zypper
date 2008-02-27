@@ -1,3 +1,9 @@
+Sun Feb 24 15:40:50 CET 2008 - dmacvicar@suse.de
+-------------------------------------------------------------------
+
+- make sure we have target cache on target initialize
+- version 4.3.0
+
 -------------------------------------------------------------------
 Tue Feb 26 13:59:03 CET 2008 - lslezak@suse.cz
 

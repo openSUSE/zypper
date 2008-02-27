@@ -55,6 +55,11 @@ namespace zypp
   public:
 
     /**
+     * builds or refreshes the target cache
+     */
+    void buildCache();
+
+    /**
      * load resolvables into the pool
      */
     void load();
