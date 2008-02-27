@@ -62,18 +62,37 @@ prompt-element =
 update-status-element =
   element update-status {
     attribute version {xsd:string},
-    element update-list {
-      element update {
-        attribute name { xsd:string },
-        attribute edition { xsd:string },
-        attribute kind { xsd:string },
-        element summary { text },
-        element description { text },
-        element license { text },
-        element source { # repository
-          attribute url { xsd:anyURI },
-          attribute alias { xsd:string }
-        }
-      }*
+    element update-list { ( patch-update | other-update)* }
+  }
+
+other-update =
+  element update {
+    attribute name { xsd:string },
+    attribute edition { xsd:string },
+    attribute kind { xsd:string }, # package, pattern, product
+    element summary { text },
+    element description { text },
+    element license { text },
+    element source { # repository
+      attribute url { xsd:anyURI },
+      attribute alias { xsd:string }
+    }
+  }
+
+patch-update =
+  element update {
+    attribute name { xsd:string },
+    attribute edition { xsd:string },
+    attribute kind { "patch" },
+    attribute category { xsd:string }?,   # patch category (security, recommended, ...)
+    attribute pkgmanager { xsd:boolean }, # affect package management?
+    attribute restart { xsd:boolean },    # needs restart of the machine?
+    attribute interactive { xsd:boolean },# needs user interaction?
+    element summary { text },
+    element description { text },
+    element license { text },
+    element source { # repository
+      attribute url { xsd:anyURI },
+      attribute alias { xsd:string }
     }
   }
