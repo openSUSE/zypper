@@ -47,14 +47,12 @@
 
 using namespace std;
 using namespace zypp;
-//using namespace zypp::detail;
 using namespace boost;
 
 ZYpp::Ptr God = NULL;
 RuntimeData gData;
 parsed_opts copts; // command options
 
-IMPL_PTR_TYPE(Zypper);
 
 Zypper::Zypper()
   : _argc(0), _argv(NULL), _out_ptr(NULL),
@@ -74,12 +72,12 @@ Zypper::~Zypper()
 }
 
 
-Zypper_Ptr Zypper::instance()
+Zypper::Ptr & Zypper::instance()
 {
-  static Zypper_Ptr _instance;
+  static Zypper::Ptr _instance;
   
   if (!_instance)
-    _instance = new Zypper();
+    _instance.reset(new Zypper());
   else
     XXX << "Got an existing instance." << endl;
 

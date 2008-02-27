@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "zypp/base/Exception.h"
-#include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
@@ -74,13 +73,12 @@ struct CommandOptions
   bool license_auto_agree;
 };
 
-
-DEFINE_PTR_TYPE(Zypper);
-
-class Zypper : public zypp::base::ReferenceCounted, private zypp::base::NonCopyable
+class Zypper : private zypp::base::NonCopyable
 {
 public:
-  static Zypper_Ptr instance(); 
+  typedef zypp::RW_pointer<Zypper,zypp::rw_pointer::Scoped<Zypper> > Ptr;
+
+  static Ptr & instance(); 
 
   int main(int argc, char ** argv);
 
@@ -99,10 +97,11 @@ public:
   
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
-  
+
+public:
+  ~Zypper();
 private:
   Zypper();
-  ~Zypper();
 
   void processGlobalOptions();
   void processCommandOptions();
@@ -159,7 +158,6 @@ struct RuntimeData
 };
 
 extern RuntimeData gData;
-extern std::ostream no_stream;
 
 class ExitRequestException : public zypp::Exception
 {
