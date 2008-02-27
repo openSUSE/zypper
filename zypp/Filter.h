@@ -68,17 +68,17 @@ namespace zypp
       public:
         /** Solvables with locale support. */
         ByLocaleSupport()
-        : _sel( mem_fun_ref( &sat::Solvable::supportsLocales ) )
+        : _sel( boost::mem_fun_ref( &sat::Solvable::supportsLocales ) )
         {}
 
         /** Solvables supporting \c locale_r. */
         explicit ByLocaleSupport( const Locale & locale_r )
-        : _sel( bind( mem_fun_ref( (LS1)&sat::Solvable::supportsLocale ), _1, locale_r ) )
+        : _sel( boost::bind( boost::mem_fun_ref( (LS1)&sat::Solvable::supportsLocale ), _1, locale_r ) )
         {}
 
         /** Solvables supporting at least one locale in \c locales_r. */
         explicit ByLocaleSupport( const LocaleSet & locales_r )
-        : _sel( bind( boost::mem_fun_ref( (LS2)&sat::Solvable::supportsLocale ), _1, locales_r ) )
+        : _sel( boost::bind( boost::mem_fun_ref( (LS2)&sat::Solvable::supportsLocale ), _1, locales_r ) )
         {}
 
       public:
