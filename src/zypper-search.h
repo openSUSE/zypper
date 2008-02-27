@@ -17,6 +17,7 @@
 #include "zypp/ZYpp.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/ResObject.h"
+#include "zypp/PoolItem.h"
 
 #include "zypper.h"
 #include "zypper-main.h"
@@ -68,7 +69,10 @@ struct FillTable
     TableRow row;
 
     // add other fields to the result table
-    row << "i"
+
+    zypp::PoolItem pi( zypp::ResPool::instance().find( item->satSolvable() ) );
+
+    row << ( pi.status().isInstalled() ? "i" : " " )
 	  << item->repository().info().name()
     // TODO what about rug's Bundle?
     << (_gopts.is_rug_compatible ?
