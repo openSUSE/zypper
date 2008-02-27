@@ -8,7 +8,7 @@ using std::endl;
 using std::string;
 using std::ostringstream;
 
-OutXML::OutXML(Verbosity verbosity) : Out(verbosity)
+OutXML::OutXML(Verbosity verbosity) : Out(TYPE_XML, verbosity)
 {
   cout << "<?xml version='1.0'?>" << endl;
   cout << "<stream>" << endl;
