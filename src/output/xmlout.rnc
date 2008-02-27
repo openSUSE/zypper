@@ -11,18 +11,17 @@ start = stream-element
 
 stream-element =
   element stream {
-    ( progress-elements | download-progress-elements | message-element | prompt-element |
-      update-element )+
+    ( progress-elements* | download-progress-elements* | message-element* | prompt-element* |
+      update-status-element* )+
   }
 
 progress-elements = ( progress-element | progress-done )
 
-# todo - restrict and specialize progress by type
 progress-element =
   element progress {
     attribute id { xsd:string },
     attribute name { xsd:string },
-    attribute value { xsd:integer }?
+    attribute value { xsd:integer }? # missing value means an 'is alive' notification
   }
 
 progress-done =
@@ -60,5 +59,21 @@ prompt-element =
     text
   }
 
-update-element =
-  element update { empty }
+update-status-element =
+  element update-status {
+    attribute version {xsd:string},
+    element update-list {
+      element update {
+        attribute name { xsd:string },
+        attribute edition { xsd:string },
+        attribute kind { xsd:string },
+        element summary { text },
+        element description { text },
+        element license { text },
+        element source { # repository
+          attribute url { xsd:anyURI },
+          attribute alias { xsd:string }
+        }
+      }*
+    }
+  }
