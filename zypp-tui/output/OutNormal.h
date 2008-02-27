@@ -6,7 +6,7 @@
 class OutNormal : public Out
 {
 public:
-  OutNormal(Verbosity verbosity = NORMAL) : Out(verbosity) {}
+  OutNormal(Verbosity verbosity = NORMAL) : Out(TYPE_NORMAL, verbosity) {}
   virtual ~OutNormal();
 
 public:

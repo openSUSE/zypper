@@ -38,7 +38,9 @@ public:
   } Type;
 
 public:
-  Out(Verbosity verbosity = NORMAL) : _verbosity(verbosity) {}
+  Out(Type type, Verbosity verbosity = NORMAL)
+    : _verbosity(verbosity), _type(type)
+  {}
   virtual ~Out();
 
 public:
