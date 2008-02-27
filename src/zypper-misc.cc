@@ -866,6 +866,25 @@ std::string calculate_token()
 }
 */
 
+void dump_pool ()
+{
+  int count = 1;
+  static bool full_pool_shown = false;
+
+  _XDEBUG( "---------------------------------------" );
+  for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
+
+    if (!full_pool_shown                                    // show item if not shown all before
+        || it->status().transacts()                         // or transacts
+        || !it->status().isUndetermined())                  // or established status
+    {
+      _XDEBUG( count << ": " << *it );
+    }
+  }
+  _XDEBUG( "---------------------------------------" );
+  full_pool_shown = true;
+}
+
 bool resolve(Zypper & zypper)
 {
   int locks = God->applyLocks();
@@ -970,25 +989,6 @@ string string_status (const ResStatus& rs)
     return i? _("Broken"): _("Needed");
   // if ResStatus interface changes
   return _("error");
-}
-
-void dump_pool ()
-{
-  int count = 1;
-  static bool full_pool_shown = false;
-
-  _XDEBUG( "---------------------------------------" );
-  for (ResPool::const_iterator it =   God->pool().begin(); it != God->pool().end(); ++it, ++count) {
-
-    if (!full_pool_shown                                    // show item if not shown all before
-	|| it->status().transacts()                         // or transacts
-	|| !it->status().isUndetermined())                  // or established status
-    {
-      _XDEBUG( count << ": " << *it );
-    }
-  }
-  _XDEBUG( "---------------------------------------" );
-  full_pool_shown = true;
 }
 
 // patches
