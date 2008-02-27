@@ -1077,13 +1077,13 @@ bool xml_list_patches ()
 	!pkg_mgr_available )
       {
         cout << " <update ";
-        cout << "name=\"" << res->name () << "\" " ;
+        cout << "name=\"" << res->name () << "\" ";
         cout << "edition=\""  << res->edition ().asString() << "\" ";
         cout << "category=\"" <<  patch->category() << "\" ";
-        cout << "pkgmanager=\"" << ((patch->affects_pkg_manager()) ? "true" : "false") << "\" ";
-        cout << "restart=\"" << ((patch->reboot_needed()) ? "true" : "false") << "\" ";
-        cout << "interactive=\"" << ((patch->interactive()) ? "true" : "false") << "\" ";
-        cout << "kind=\"" << "patch" << "\" ";
+        cout << "pkgmanager=\"" << (patch->affects_pkg_manager() ? "true" : "false") << "\" ";
+        cout << "restart=\"" << (patch->reboot_needed() ? "true" : "false") << "\" ";
+        cout << "interactive=\"" << (patch->interactive() ? "true" : "false") << "\" ";
+        cout << "kind=\"patch\"";
         cout << ">" << endl;
         cout << "  <summary>" << xml_encode(patch->summary()) << "  </summary>" << endl;
         cout << "  <description>" << xml_encode(patch->description()) << "</description>" << endl;
