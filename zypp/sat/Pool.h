@@ -17,7 +17,7 @@
 #include "zypp/Pathname.h"
 
 #include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 #include "zypp/sat/WhatProvides.h"
 
 ///////////////////////////////////////////////////////////////////

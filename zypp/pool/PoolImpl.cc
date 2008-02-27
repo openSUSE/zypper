@@ -17,7 +17,7 @@
 #include "zypp/VendorAttr.h"
 
 #include "zypp/sat/Pool.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 
 using std::endl;
 

@@ -22,7 +22,7 @@
 #include "zypp/Capabilities.h"
 #include "zypp/ResPool.h"
 #include "zypp/base/GzStream.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

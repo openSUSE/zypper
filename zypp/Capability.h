@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/Capability.h
+/** \file	zypp/Capability.h
  *
 */
-#ifndef ZYPP_SAT_CAPABILITY_H
-#define ZYPP_SAT_CAPABILITY_H
+#ifndef ZYPP_CAPABILITY_H
+#define ZYPP_CAPABILITY_H
 
 #include <iosfwd>
 #include <tr1/unordered_set>
@@ -305,4 +305,4 @@ namespace zypp
 
 ZYPP_DEFINE_ID_HASHABLE( ::zypp::Capability )
 
-#endif // ZYPP_SAT_CAPABILITY_H
+#endif // ZYPP_CAPABILITY_H

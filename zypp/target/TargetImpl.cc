@@ -29,6 +29,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/Repo.h"
 
 #include "zypp/CapMatchHelper.h"
 #include "zypp/ResFilters.h"
@@ -47,7 +48,6 @@
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"
-#include "zypp/sat/Repo.h"
 
 using namespace std;
 using namespace zypp;

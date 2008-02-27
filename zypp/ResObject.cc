@@ -15,7 +15,7 @@
 #include "zypp/Repository.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 
 using namespace zypp;
 using namespace std;

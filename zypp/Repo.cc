@@ -19,7 +19,7 @@
 #include "zypp/Pathname.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 #include "zypp/sat/Pool.h"
 
 using std::endl;

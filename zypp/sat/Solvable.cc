@@ -19,7 +19,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/Repo.h"
+#include "zypp/Repo.h"
 
 using std::endl;
 

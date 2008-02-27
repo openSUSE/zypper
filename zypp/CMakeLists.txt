@@ -77,6 +77,7 @@ SET( zypp_SRCS
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
   ZYppFactory.cc
+  Repo.cc
 )
 SET( zypp_EARLY_SRCS
   ZConfig.cc
@@ -180,6 +181,7 @@ SET( zypp_HEADERS
   ZYppCommitResult.h
   ZYppFactory.h
   ZYpp.h
+  Repo.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -512,7 +514,6 @@ INSTALL(  FILES
 
 SET( zypp_sat_SRCS
   sat/Pool.cc
-  sat/Repo.cc
   sat/Solvable.cc
   sat/WhatProvides.cc
   sat/SATResolver.cc
@@ -521,7 +522,6 @@ SET( zypp_sat_SRCS
 
 SET( zypp_sat_HEADERS
   sat/Pool.h
-  sat/Repo.h
   sat/Solvable.h
   sat/WhatProvides.h
   sat/SATResolver.h
