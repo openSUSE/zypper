@@ -36,6 +36,17 @@ using namespace boost;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 
+
+/**
+ * Loops through resolvables, checking if there is license to confirm. When
+ * run interactively, it displays a dialog, otherwise it answers automatically
+ * according to --auto-agree-with-licenses present or not present.
+ * 
+ * \returns true if all licenses have been confirmed, false otherwise.  
+ */
+static bool confirm_licenses(Zypper & zypper);
+
+
 // converts a user-supplied kind to a zypp kind object
 // returns an empty one if not recognized
 ResObject::Kind string_to_kind (const string &skind)
@@ -162,7 +173,7 @@ struct NewerVersionGetter
 };
 
 // on error print a message and return noCap
-Capability safe_parse_cap (Zypper & zypper,
+static Capability safe_parse_cap (Zypper & zypper,
                            const ResObject::Kind &kind, const string & capstr)
 {
   Capability cap;
@@ -231,7 +242,7 @@ Capability safe_parse_cap (Zypper & zypper,
 // this does only resolvables with this _name_.
 // we could also act on _provides_
 // TODO edition, arch
-void mark_for_install(Zypper & zypper,
+static void mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
 		      const std::string &name)
 {
@@ -311,7 +322,7 @@ struct DeleteProcess
 };
 
 // mark all matches
-void mark_for_uninstall(Zypper & zypper,
+static void mark_for_uninstall(Zypper & zypper,
                         const ResObject::Kind &kind,
 			const std::string &name)
 {
@@ -436,7 +447,7 @@ ostream& operator << (ostream & stm, ios::iostate state)
 }
 
 //! @return true to retry solving now, false to cancel, indeterminate to continue
-tribool show_problem (Zypper & zypper,
+static tribool show_problem (Zypper & zypper,
                       const ResolverProblem & prob, ProblemSolutionList & todo)
 {
   //! \todo use Out
@@ -505,7 +516,7 @@ tribool show_problem (Zypper & zypper,
 }
 
 // return true to retry solving, false to cancel transaction
-bool show_problems(Zypper & zypper)
+static bool show_problems(Zypper & zypper)
 {
   bool retry = true;
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
@@ -556,7 +567,7 @@ bool show_problems(Zypper & zypper)
 
 typedef map<Resolvable::Kind,set<ResObject::constPtr> > KindToResObjectSet;
 
-void show_summary_resolvable_list(const string & label,
+static void show_summary_resolvable_list(const string & label,
                                   KindToResObjectSet::const_iterator it,
                                   int verbosity)
 {
@@ -856,7 +867,7 @@ std::string calculate_token()
 }
 */
 
-void dump_pool ()
+static void dump_pool ()
 {
   int count = 1;
   static bool full_pool_shown = false;
@@ -966,7 +977,7 @@ void patch_check ()
   out.info(s.str(), Out::QUIET);
 }
 
-string string_status (const ResStatus& rs)
+static string string_status (const ResStatus& rs)
 {
   bool i = rs.isInstalled ();
   if (rs.isUndetermined ())
@@ -1101,7 +1112,7 @@ bool xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-void list_patch_updates(Zypper & zypper, bool best_effort)
+static void list_patch_updates(Zypper & zypper, bool best_effort)
 {
   Table tbl;
   Table pm_tbl;	// only those that affect packagemanager: they have priority
@@ -1373,7 +1384,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 }
 
 // may be useful as a functor
-bool mark_item_install (const PoolItem& pi) {
+static bool mark_item_install (const PoolItem& pi) {
   bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
   if (!result) {
     DBG << "Marking " << pi << "for installation failed" << endl;
@@ -1391,7 +1402,7 @@ bool mark_item_install (const PoolItem& pi) {
 //   multiple installed resolvables of the same name.
 //   LookForArchUpdate will return the one with the highest edition.
 
-PoolItem
+static PoolItem
 findInstalledItem( PoolItem item )
 {
   const zypp::ResPool& pool = God->pool();
@@ -1412,7 +1423,7 @@ findInstalledItem( PoolItem item )
 //   to which an update candidate is guaranteed to exist.
 //
 // may be useful as a functor
-bool require_item_update (const PoolItem& pi) {
+static bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
   PoolItem installed = findInstalledItem( pi );
@@ -1653,7 +1664,7 @@ void solve_and_commit (Zypper & zypper)
 //  ask for [y/n/r] with 'r' for read the license text
 //  (opened throu more or less, etc...)
 // - after negative answer, call solve_and_commit() again
-bool confirm_licenses(Zypper & zypper)
+static bool confirm_licenses(Zypper & zypper)
 {
   bool confirmed = true;
 
@@ -1725,7 +1736,7 @@ bool confirm_licenses(Zypper & zypper)
   return confirmed;
 }
 
-SrcPackage::constPtr source_find( const string & arg )
+static SrcPackage::constPtr source_find( const string & arg )
 {
    /*
    * Workflow:

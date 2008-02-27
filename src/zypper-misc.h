@@ -17,20 +17,8 @@
 #include "zypper-tabulator.h"
 #include "zypper-utils.h"
 
-/// Parse a capability string. On error print a message and return noCap
-zypp::Capability safe_parse_cap (Zypper & zypper,
-                                 const zypp::ResObject::Kind &kind,
-				 const std::string &capstr);
 
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
-
-void mark_for_install(Zypper & zypper,
-                      const zypp::ResObject::Kind &kind,
-		      const std::string &name);
-
-void mark_for_uninstall(Zypper & zypper,
-                        const zypp::ResObject::Kind &kind,
-			const std::string &name);
 
 void mark_by_name (Zypper & zypper,
                    bool install_not_remove,
@@ -104,14 +92,6 @@ void mark_updates(const std::set<zypp::Resolvable::Kind> & kinds,
  */
 void solve_and_commit(Zypper & zypper);
 
-/**
- * Loops through resolvables, checking if there is license to confirm. When
- * run interactively, it displays a dialog, otherwise it answers automatically
- * according to --auto-agree-with-licenses present or not present.
- * 
- * \returns true if all licenses have been confirmed, false otherwise.  
- */
-bool confirm_licenses(Zypper & zypper);
 
 // copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
 struct ProvideProcess
