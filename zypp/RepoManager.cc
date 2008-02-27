@@ -746,7 +746,7 @@ namespace zypp
         ostringstream cmd;
         cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() );
 
-        MIL << "Executing: " << cmd << endl;
+        MIL << "Executing: " << cmd.str() << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
 
         cmd << endl;
