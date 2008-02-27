@@ -1131,10 +1131,11 @@ void list_patch_updates(Zypper & zypper, bool best_effort)
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->status().isNeeded() ) {
+    if ( it->status().isNeeded() )
+    {
       Patch::constPtr patch = asKind<Patch>(res);
 
-      if (true) {
+      {
 	TableRow tr (cols);
 	tr << patch->repoInfo().name();
 	tr << res->name () << res->edition ().asString();
@@ -1222,14 +1223,17 @@ findArchUpdateItem( const ResPool & pool, PoolItem item )
 
 typedef set<PoolItem> Candidates;
 
+/**
+ * Find all available updates of given kind.
+ */
 static void
-find_updates( const ResObject::Kind &kind, Candidates &candidates )
+find_updates( const ResKind & kind, Candidates & candidates )
 {
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
     it = pool.byKindBegin (kind),
     e  = pool.byKindEnd (kind);
-  DBG << "Finding update candidates" << endl;
+  DBG << "Finding update candidates of kind " << kind << endl;
   for (; it != e; ++it)
   {
     if (it->status().isUninstalled())
@@ -1245,14 +1249,72 @@ find_updates( const ResObject::Kind &kind, Candidates &candidates )
   }
 }
 
+/**
+ * Find all available updates of given kinds.
+ */
+static void
+find_updates( const ResKindSet & kinds, Candidates & candidates )
+{
+  for (ResKindSet::const_iterator kit = kinds.begin(); kit != kinds.end(); ++kit)
+    find_updates(*kit, candidates);
+
+  if (kinds.empty())
+    WAR << "called with empty kinds set" << endl;
+}
+
+string i18n_kind_updates(const ResKind & kind)
+{
+  if (kind == ResTraits<Package>::kind)
+    return _("Package updates");
+  else if (kind == ResTraits<Patch>::kind)
+    return _("Patches");
+  else if (kind == ResTraits<Pattern>::kind)
+    return _("Pattern updates");
+  else if (kind == ResTraits<Product>::kind)
+    return _("Product updates");
+
+  return boost::str(format("%s updates") % kind);
+}
+
 // ----------------------------------------------------------------------------
 
-void list_updates(Zypper & zypper, const ResObject::Kind &kind, bool best_effort )
+void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 {
-  bool k_is_patch = kind == ResTraits<Patch>::kind;
-  if (k_is_patch)
-    list_patch_updates(zypper, best_effort );
-  else {
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    cout << "<update-status version=\"0.6\">" << endl;
+    cout << "<update-list>" << endl;
+  }
+  bool not_affects_pkgmgr = false;
+
+  unsigned kind_size = kinds.size();
+  ResKindSet localkinds = kinds;
+  ResKindSet::iterator it;
+  it = localkinds.find(ResTraits<Patch>::kind);
+  if(it != localkinds.end())
+  {
+    if (zypper.out().type() == Out::TYPE_XML)
+      not_affects_pkgmgr = !xml_list_patches();
+    else
+    {
+      zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
+      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
+      list_patch_updates(zypper, best_effort );
+    }
+    localkinds.erase(it);
+  }
+
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    if (not_affects_pkgmgr)
+      xml_list_updates(localkinds);
+    cout << "</update-list>" << endl;
+    cout << "</update-status>" << endl;
+    return;
+  }
+
+  for (it = localkinds.begin(); it != localkinds.end(); ++it)
+  {
     Table tbl;
 
     // show repo only if not best effort or --from-repo set
@@ -1280,7 +1342,7 @@ void list_updates(Zypper & zypper, const ResObject::Kind &kind, bool best_effort
     unsigned int cols = th.cols();
 
     Candidates candidates;
-    find_updates( kind, candidates );
+    find_updates( *it, candidates );
 
     Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
     for (ci = cb; ci != ce; ++ci) {
@@ -1305,6 +1367,13 @@ void list_updates(Zypper & zypper, const ResObject::Kind &kind, bool best_effort
       tbl << tr;
     }
     tbl.sort( name_col );
+
+    if (kind_size > 1)
+    {
+      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
+      zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
+      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
+    }
 
     if (tbl.empty())
       zypper.out().info(_("No updates found."));
@@ -1374,10 +1443,10 @@ bool require_item_update (const PoolItem& pi) {
 
 // ----------------------------------------------------------------------------
 
-void xml_list_updates()
+void xml_list_updates(const ResKindSet & kinds)
 {
   Candidates candidates;
-  find_updates (ResTraits<Package>::kind, candidates);
+  find_updates (kinds, candidates);
 
   Candidates::iterator cb = candidates.begin (), ce = candidates.end (), ci;
   for (ci = cb; ci != ce; ++ci) {
@@ -1386,7 +1455,7 @@ void xml_list_updates()
     cout << " <update ";
     cout << "name=\"" << res->name () << "\" " ;
     cout << "edition=\""  << res->edition ().asString() << "\" ";
-    cout << "kind=\"" << "package" << "\" ";
+    cout << "kind=\"" << res->kind() << "\" ";
     cout << ">" << endl;
     cout << "  <summary>" << xml_escape(res->summary()) << "  </summary>" << endl;
     cout << "  <description>" << xml_escape(res->description()) << "</description>" << endl;
@@ -1445,21 +1514,22 @@ void mark_patch_updates( bool skip_interactive )
 
 // ----------------------------------------------------------------------------
 
-void mark_updates( const ResObject::Kind &kind, bool skip_interactive, bool best_effort )
+//! \todo mechanism for updating the update stack before the rest.
+void mark_updates(const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
-  bool k_is_patch = kind == ResTraits<Patch>::kind;
-
-  if (k_is_patch) {
+  unsigned kind_size = kinds.size();
+  ResKindSet localkinds = kinds;
+  ResKindSet::iterator it;
+  it = localkinds.find(ResTraits<Patch>::kind);
+  if(it != localkinds.end()) // patches wanted
     mark_patch_updates(skip_interactive);
-  }
-  else {
-    Candidates candidates;
-    find_updates (kind, candidates);
-    if (best_effort)
-      invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
-    else
-      invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
-  }
+
+  Candidates candidates;
+  find_updates (localkinds, candidates);
+  if (best_effort)
+    invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
+  else
+    invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
 }
 
 // ----------------------------------------------------------------------------

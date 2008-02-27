@@ -15,6 +15,7 @@
 #include "zypp/PoolItem.h"
 
 #include "zypper-tabulator.h"
+#include "zypper-utils.h"
 
 /// Parse a capability string. On error print a message and return noCap
 zypp::Capability safe_parse_cap (Zypper & zypper,
@@ -22,6 +23,7 @@ zypp::Capability safe_parse_cap (Zypper & zypper,
 				 const std::string &capstr);
 
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
+
 void mark_for_install(Zypper & zypper,
                       const zypp::ResObject::Kind &kind,
 		      const std::string &name);
@@ -46,16 +48,19 @@ void mark_by_capability (Zypper & zypper,
  */
 void remove_selections(Zypper & zypper);
 
+/** Show install summary */
 int show_summary(Zypper & zypper);
-//std::string calculate_token();
 
-void establish();
+/**
+ * Run the solver.
+ * 
+ * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
+ */
 bool resolve(Zypper & zypper);
 void dump_pool();
-void show_patches(Zypper & zypper);
-bool xml_list_patches();
-void xml_list_updates();
 
+/** List patches */
+void show_patches(Zypper & zypper);
 
 /**
  * Are there applicable patches?
@@ -72,15 +77,22 @@ void patch_check();
  * \param best_effort
  */
 void list_updates(Zypper & zypper,
-                  const zypp::ResObject::Kind &kind,
+                  const std::set<zypp::Resolvable::Kind> & kinds,
                   bool best_effort);
+
+/** \todo remove from this header after xu is dropped */ 
+bool xml_list_patches();
+/** \todo remove from this header after xu is dropped */
+void xml_list_updates(const ResKindSet & kinds);
 
 /**
  * \param kind  resolvable type
  * \param skip_interactive whether to skip updates that need user interaction
  * \param best_effort
  */
-void mark_updates( const zypp::ResObject::Kind &kind, bool skip_interactive, bool best_effort );
+void mark_updates(const std::set<zypp::Resolvable::Kind> & kinds,
+                  bool skip_interactive,
+                  bool best_effort);
 
 /**
  * Runs solver on the pool, asks to choose solution of eventual problems
@@ -127,4 +139,3 @@ int source_install(std::vector<std::string> & arguments);
 int build_deps_install(std::vector<std::string> & arguments);
 
 #endif
-

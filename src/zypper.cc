@@ -300,6 +300,7 @@ void Zypper::processGlobalOptions()
 
   out().info(boost::str(format(_("Verbosity: %d")) % _gopts.verbosity), Out::HIGH);
   DBG << "Verbosity " << verbosity << endl;
+  DBG << "Output type " << _out_ptr->type() << endl;
 
   if (gopts.count("rug-compatible"))
   {
@@ -2150,15 +2151,27 @@ void Zypper::doCommand()
       return;
     }
 
-    string skind = copts.count("type")?  copts["type"].front() :
-      globalOpts().is_rug_compatible? "package" : "patch";
-    kind = string_to_kind (skind);
-    if (kind == ResObject::Kind ()) {
-      out().error(boost::str(format(
-        _("Unknown resolvable type '%s'.")) % skind));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
+    ResKindSet kinds;
+    if (copts.count("type"))
+    {
+      std::list<std::string>::const_iterator it;
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
+          out().error(boost::str(format(
+            _("Unknown resolvable type '%s'.")) % *it));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        kinds.insert(kind);
+      }
     }
+    else if (globalOpts().is_rug_compatible)
+      kinds.insert(ResTraits<Package>::kind);
+    else
+      kinds.insert(ResTraits<Patch>::kind);
 
     bool best_effort = copts.count( "best-effort" ); 
 
@@ -2175,7 +2188,7 @@ void Zypper::doCommand()
       return;
     load_resolvables(*this);
 
-    list_updates(*this, kind, best_effort );
+    list_updates(*this, kinds, best_effort);
 
     return;
   }
@@ -2195,8 +2208,9 @@ void Zypper::doCommand()
 
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;
+    ResKindSet kinds; kinds.insert(ResTraits<Package>::kind);
     if (!xml_list_patches ())	// Only list updates if no
-      xml_list_updates ();	// affects-pkg-mgr patches are available
+      xml_list_updates (kinds);	// affects-pkg-mgr patches are available
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
 
@@ -2234,15 +2248,27 @@ void Zypper::doCommand()
         || copts.count("agree-to-third-party-licenses"))
       _cmdopts.license_auto_agree = true;
 
-    string skind = copts.count("type")?  copts["type"].front() :
-      globalOpts().is_rug_compatible? "package" : "patch";
-    kind = string_to_kind (skind);
-    if (kind == ResObject::Kind ()) {
-      out().error(boost::str(format(
-        _("Unknown resolvable type '%s'.")) % skind));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
+    ResKindSet kinds;
+    if (copts.count("type"))
+    {
+      std::list<std::string>::const_iterator it;
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
+          out().error(boost::str(format(
+            _("Unknown resolvable type '%s'.")) % *it));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        kinds.insert(kind);
+      }
     }
+    else if (globalOpts().is_rug_compatible)
+      kinds.insert(ResTraits<Package>::kind);
+    else
+      kinds.insert(ResTraits<Patch>::kind);
 
     bool best_effort = copts.count( "best-effort" ); 
 
@@ -2260,7 +2286,7 @@ void Zypper::doCommand()
     load_resolvables(*this);
 
     bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
-    mark_updates( kind, skip_interactive, best_effort );
+    mark_updates( kinds, skip_interactive, best_effort );
 
 
     if (copts.count("debug-solver"))

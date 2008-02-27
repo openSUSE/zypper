@@ -10,6 +10,8 @@
 
 #include "output/Out.h"
 
+typedef std::set<zypp::ResKind> ResKindSet;
+
 std::string readline_getline();
 
 /**
