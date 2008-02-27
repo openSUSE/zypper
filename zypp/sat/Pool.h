@@ -43,7 +43,7 @@ namespace zypp
     {
       public:
         typedef detail::SolvableIterator SolvableIterator;
-        typedef detail::RepoIterator     RepoIterator;
+	typedef zypp::detail::RepoIterator     RepoIterator;	
         typedef detail::size_type        size_type;
 
       public:

@@ -380,7 +380,7 @@ namespace zypp
 
       //now add the repos to the pool
       MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
-      sat::Repo system = sat::Pool::instance().systemRepo();
+      Repo system = sat::Pool::instance().systemRepo();
       system.addSolv(rpmsolv);
 
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;

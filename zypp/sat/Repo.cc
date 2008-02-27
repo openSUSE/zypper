@@ -28,8 +28,6 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace sat
-  { /////////////////////////////////////////////////////////////////
 
     const Repo Repo::norepo;
 
@@ -48,126 +46,124 @@ namespace zypp
 
     bool Repo::isSystemRepo() const
     {
-      NO_REPO_RETURN( false );
-      return( Pool::systemRepoName() == _repo->name );
+	NO_REPO_RETURN( false );
+	return( sat::Pool::systemRepoName() == _repo->name );
     }
 
     std::string Repo::name() const
     {
-      NO_REPO_RETURN( std::string() );
-      if ( ! _repo->name )
-        return std::string();
-      return _repo->name;
+	NO_REPO_RETURN( std::string() );
+	if ( ! _repo->name )
+	    return std::string();
+	return _repo->name;
     }
 
     bool Repo::solvablesEmpty() const
     {
-      NO_REPO_RETURN( true );
-      return _repo->nsolvables;
+	NO_REPO_RETURN( true );
+	return _repo->nsolvables;
     }
 
     Repo::size_type Repo::solvablesSize() const
     {
-      NO_REPO_RETURN( 0 );
-      return _repo->nsolvables;
+	NO_REPO_RETURN( 0 );
+	return _repo->nsolvables;
     }
 
     Repo::SolvableIterator Repo::solvablesBegin() const
     {
-      NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
-                                            detail::SolvableIterator(),
-                                            detail::SolvableIterator() ) );
-      return make_filter_iterator( detail::ByRepo( *this ),
-                                   detail::SolvableIterator(_repo->start),
-                                   detail::SolvableIterator(_repo->end) );
+	NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
+					      sat::detail::SolvableIterator(),
+					      sat::detail::SolvableIterator() ) );
+	return make_filter_iterator( detail::ByRepo( *this ),
+				     sat::detail::SolvableIterator(_repo->start),
+				     sat::detail::SolvableIterator(_repo->end) );
     }
 
     Repo::SolvableIterator Repo::solvablesEnd() const
     {
-      NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
-                                            detail::SolvableIterator(),
-                                            detail::SolvableIterator() ) );
-      return make_filter_iterator(detail::ByRepo( *this ),
-                                  detail::SolvableIterator(_repo->end),
-                                  detail::SolvableIterator(_repo->end) );
+	NO_REPO_RETURN( make_filter_iterator( detail::ByRepo( *this ),
+					      sat::detail::SolvableIterator(),
+					      sat::detail::SolvableIterator() ) );
+	return make_filter_iterator(detail::ByRepo( *this ),
+				    sat::detail::SolvableIterator(_repo->end),
+				    sat::detail::SolvableIterator(_repo->end) );
     }
 
     RepoInfo Repo::info() const
     {
-      NO_REPO_RETURN( RepoInfo() );
-      return myPool().repoInfo( _repo );
+	NO_REPO_RETURN( RepoInfo() );
+	return myPool().repoInfo( _repo );
     }
 
     void Repo::setInfo( const RepoInfo & info_r )
     {
-      NO_REPO_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
-      if ( info_r.alias() != name() )
-      {
-        ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
-                    info_r.alias().c_str(), name().c_str() ) ) );
-      }
-      myPool().setRepoInfo( _repo, info_r );
+	NO_REPO_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
+	if ( info_r.alias() != name() )
+	{
+	    ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
+					      info_r.alias().c_str(), name().c_str() ) ) );
+	}
+	myPool().setRepoInfo( _repo, info_r );
     }
 
     void Repo::clearInfo()
     {
-      NO_REPO_RETURN();
-      myPool().setRepoInfo( _repo, RepoInfo() );
+	NO_REPO_RETURN();
+	myPool().setRepoInfo( _repo, RepoInfo() );
     }
 
     void Repo::eraseFromPool()
     {
-      NO_REPO_RETURN();
-      myPool()._deleteRepo( _repo );
-      _id = detail::noRepoId;
+	NO_REPO_RETURN();
+	myPool()._deleteRepo( _repo );
+	_id = sat::detail::noRepoId;
     }
 
 #warning NEED POOL MANIP EXEPTIONS
     void Repo::addSolv( const Pathname & file_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
+	NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
 
-      AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
-      if ( file == NULL )
-      {
-        file.resetDispose();
-        ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
-      }
+	AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
+	if ( file == NULL )
+	{
+	    file.resetDispose();
+	    ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
+	}
 
-      if ( myPool()._addSolv( _repo, file ) != 0 )
-      {
-        ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
-      }
+	if ( myPool()._addSolv( _repo, file ) != 0 )
+	{
+	    ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
+	}
     }
 
-    detail::SolvableIdType Repo::addSolvables( unsigned count_r )
+    sat::detail::SolvableIdType Repo::addSolvables( unsigned count_r )
     {
-      NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
-      return myPool()._addSolvables( _repo, count_r );
+	NO_REPO_THROW( Exception( _("Can't add solvables to norepo.") ) );
+	return myPool()._addSolvables( _repo, count_r );
     }
 
     /******************************************************************
-    **
-    **	FUNCTION NAME : operator<<
-    **	FUNCTION TYPE : std::ostream &
-    */
+     **
+     **	FUNCTION NAME : operator<<
+     **	FUNCTION TYPE : std::ostream &
+     */
     std::ostream & operator<<( std::ostream & str, const Repo & obj )
     {
-      if ( ! obj )
-        return str << "sat::repo()";
+	if ( ! obj )
+	    return str << "sat::repo()";
 
-      return str << "sat::repo(" << obj.name() << ")"
-          << "{"
-          << obj.solvablesSize()
-          << ' ' << obj.get()->start << ' ' << obj.get()->end << ' '
-          << (obj.get()->start < 0      ? "_START_":"")
-          << (obj.get()->nsolvables < 0 ?"_NUMSOLV_":"")
-          <<"}";
+	return str << "sat::repo(" << obj.name() << ")"
+		   << "{"
+		   << obj.solvablesSize()
+		   << ' ' << obj.get()->start << ' ' << obj.get()->end << ' '
+		   << (obj.get()->start < 0      ? "_START_":"")
+		   << (obj.get()->nsolvables < 0 ?"_NUMSOLV_":"")
+		   <<"}";
     }
 
+
     /////////////////////////////////////////////////////////////////
-  } // namespace sat
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

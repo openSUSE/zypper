@@ -23,35 +23,32 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Pathname;
-  class RepoInfo;
+    class Pathname;
+    class RepoInfo;
 
-  ///////////////////////////////////////////////////////////////////
-  namespace sat
-  { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Repo
     //
     /** */
-    class Repo : protected detail::PoolMember,
+    class Repo : protected sat::detail::PoolMember,
                  private base::SafeBool<Repo>
     {
-      public:
-        typedef filter_iterator<detail::ByRepo, detail::SolvableIterator> SolvableIterator;
-        typedef detail::size_type size_type;
+    public:
+        typedef filter_iterator<detail::ByRepo, sat::detail::SolvableIterator> SolvableIterator;
+        typedef sat::detail::size_type size_type;
 
-      public:
+    public:
         /** Default ctor creates \ref norepo.*/
         Repo()
-        : _id( detail::noRepoId ) {}
+	    : _id( sat::detail::noRepoId ) {}
 
         /** \ref PoolImpl ctor. */
-        explicit Repo( detail::RepoIdType id_r )
-        : _id( id_r ) {}
+        explicit Repo( sat::detail::RepoIdType id_r )
+	    : _id( id_r ) {}
 
-      public:
+    public:
         /** Represents no \ref Repo. */
         static const Repo norepo;
 
@@ -61,7 +58,7 @@ namespace zypp
         /** Return whether this is the system repo. */
         bool isSystemRepo() const;
 
-      public:
+    public:
         /** The repos name (alias). */
         std::string name() const;
 
@@ -77,7 +74,7 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
-      public:
+    public:
         /** Return any associated \ref RepoInfo. */
         RepoInfo info() const;
 
@@ -85,20 +82,20 @@ namespace zypp
          * \throws Exception if this is \ref norepo
          * \throws Exception if the \ref RepoInfo::alias
          *         does not match the \ref Repo::name.
-        */
+	 */
         void setInfo( const RepoInfo & info_r );
 
-         /** Remove any \ref RepoInfo set for this repository. */
+	/** Remove any \ref RepoInfo set for this repository. */
         void clearInfo();
 
-     public:
+    public:
         /** Remove this \ref Repo from it's \ref Pool. */
         void eraseFromPool();
 
         /** Functor calling \ref eraseFromPool. */
         struct EraseFromPool;
 
-      public:
+    public:
         /** \name Repo content manipulating methods.
          * \todo maybe a separate Repo/Solvable content manip interface
          * provided by the pool.
@@ -113,22 +110,22 @@ namespace zypp
         void addSolv( const Pathname & file_r );
 
         /** Add \c count_r new empty \ref Solvable to this \ref Repo. */
-        detail::SolvableIdType addSolvables( unsigned count_r );
+        sat::detail::SolvableIdType addSolvables( unsigned count_r );
         /** \overload Add only one new \ref Solvable. */
-        detail::SolvableIdType addSolvable()
-        { return addSolvables( 1 ); }
+        sat::detail::SolvableIdType addSolvable()
+	    { return addSolvables( 1 ); }
         //@}
 
-      public:
+    public:
         /** Expert backdoor. */
         ::_Repo * get() const;
         /** Expert backdoor. */
-        detail::RepoIdType id() const { return _id; }
-      private:
+        sat::detail::RepoIdType id() const { return _id; }
+    private:
         friend base::SafeBool<Repo>::operator bool_type() const;
         bool boolTest() const { return get(); }
-      private:
-        detail::RepoIdType _id;
+    private:
+        sat::detail::RepoIdType _id;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -179,8 +176,8 @@ namespace zypp
      */
     struct Repo::EraseFromPool
     {
-      void operator()( Repo repo_r ) const
-      { repo_r.eraseFromPool(); }
+	void operator()( Repo repo_r ) const
+	    { repo_r.eraseFromPool(); }
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -192,57 +189,54 @@ namespace zypp
       //	CLASS NAME : RepoIterator
       //
       /** */
-      class RepoIterator : public boost::iterator_adaptor<
-          RepoIterator                   // Derived
-          , ::_Repo **                   // Base
-          , Repo                         // Value
-          , boost::forward_traversal_tag // CategoryOrTraversal
-          , Repo                         // Reference
-          >
-      {
+	class RepoIterator : public boost::iterator_adaptor<
+	    RepoIterator                   // Derived
+			   , ::_Repo **                   // Base
+			   , Repo                         // Value
+			   , boost::forward_traversal_tag // CategoryOrTraversal
+			   , Repo                         // Reference
+			     >
+	{
         public:
-          RepoIterator()
-          : RepoIterator::iterator_adaptor_( 0 )
-          {}
+	    RepoIterator()
+		: RepoIterator::iterator_adaptor_( 0 )
+		{}
 
-          explicit RepoIterator( ::_Repo ** p )
-          : RepoIterator::iterator_adaptor_( p )
-          {}
+	    explicit RepoIterator( ::_Repo ** p )
+		: RepoIterator::iterator_adaptor_( p )
+		{}
 
         private:
-          friend class boost::iterator_core_access;
+	    friend class boost::iterator_core_access;
 
-          Repo dereference() const
-          { return Repo( *base() ); }
-      };
-      ///////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ByRepo
-      //
-      /** Functor filtering \ref Solvable by \ref Repo.*/
-      struct ByRepo
-      {
+	    Repo dereference() const
+		{ return Repo( *base() ); }
+	};
+	///////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////
+	//
+	//	CLASS NAME : ByRepo
+	//
+	/** Functor filtering \ref Solvable by \ref Repo.*/
+	struct ByRepo
+	{
         public:
-          ByRepo( const Repo & repo_r ) : _repo( repo_r ) {}
-          ByRepo( RepoIdType id_r ) : _repo( id_r ) {}
-          ByRepo() {}
+	    ByRepo( const Repo & repo_r ) : _repo( repo_r ) {}
+	    ByRepo( sat::detail::RepoIdType id_r ) : _repo( id_r ) {}
+	    ByRepo() {}
 
-          bool operator()( const Solvable & slv_r ) const
-          { return slv_r.repo() == _repo; }
+	    bool operator()( const sat::Solvable & slv_r ) const
+		{ return slv_r.repo() == _repo; }
 
         private:
-          Repo _repo;
-      };
-      ///////////////////////////////////////////////////////////////////
-     /////////////////////////////////////////////////////////////////
+	    Repo _repo;
+	};
+	///////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
     } // namespace detail
     ///////////////////////////////////////////////////////////////////
 
-  /////////////////////////////////////////////////////////////////
-  } // namespace sat
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_SAT_REPO_H

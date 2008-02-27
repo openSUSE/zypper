@@ -233,7 +233,7 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 
 bool SATResolver::doesObsoleteItem (PoolItem candidate, PoolItem installed) {
   Solvable *sCandidate = _SATPool->solvables + candidate.satSolvable().id();
-  Repo *installedRepo = sat::Pool::instance().systemRepo().get();
+  ::_Repo *installedRepo = sat::Pool::instance().systemRepo().get();
   
   Id p, *pp, obsolete, *obsoleteIt;
   
