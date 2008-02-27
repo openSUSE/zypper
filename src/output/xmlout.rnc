@@ -1,18 +1,22 @@
-# !! still WORK IN PROGRESS !!
+# !! still WORK IN PROGRESS (untill 11.0 freeze) !!
 # namespace zypper
-
-# common stuff
-# progress, messages, prompts, status
-
-# special stuff
-# updates list, installation summary, search output
 
 start = stream-element
 
 stream-element =
   element stream {
-    ( progress-elements* | download-progress-elements* | message-element* | prompt-element* |
-      update-status-element* )+
+    (
+      # common stuff (progress, messages, prompts, status)
+      progress-elements* | download-progress-elements* | message-element* | prompt-element* |
+
+      # special stuff (updates list, installation summary, search output, info)
+      update-status-element* |
+      install-summary-element* |
+      repo-list-element? |
+      solver-problem-element* |
+      list-element? |
+      info-element?
+    )+
   }
 
 progress-elements = ( progress-element | progress-done )
@@ -62,37 +66,47 @@ prompt-element =
 update-status-element =
   element update-status {
     attribute version {xsd:string},
-    element update-list { ( patch-update | other-update)* }
+    element update-list { ( patch-update | other-update )* }
+  }
+
+update-commons =
+  attribute name { xsd:string },
+  attribute edition { xsd:string },
+  element summary { text },
+  element description { text },
+  element license { text },
+  element source { # repository
+    attribute url { xsd:anyURI },
+    attribute alias { xsd:string }
   }
 
 other-update =
   element update {
-    attribute name { xsd:string },
-    attribute edition { xsd:string },
-    attribute kind { xsd:string }, # package, pattern, product
-    element summary { text },
-    element description { text },
-    element license { text },
-    element source { # repository
-      attribute url { xsd:anyURI },
-      attribute alias { xsd:string }
-    }
+    update-commons,
+    attribute kind { "package" | "pattern" | "product" }
   }
 
 patch-update =
   element update {
-    attribute name { xsd:string },
-    attribute edition { xsd:string },
+    update-commons,
     attribute kind { "patch" },
     attribute category { xsd:string }?,   # patch category (security, recommended, ...)
     attribute pkgmanager { xsd:boolean }, # affect package management?
     attribute restart { xsd:boolean },    # needs restart of the machine?
-    attribute interactive { xsd:boolean },# needs user interaction?
-    element summary { text },
-    element description { text },
-    element license { text },
-    element source { # repository
-      attribute url { xsd:anyURI },
-      attribute alias { xsd:string }
-    }
+    attribute interactive { xsd:boolean } # needs user interaction?
   }
+
+install-summary-element =
+  element install-summary { empty } # TODO
+
+repo-list-element =
+  element repo-list { empty } # TODO
+
+solver-problem-element =
+  element solver-problem { empty } # TODO
+
+list-element =
+  element list { empty } # TODO
+
+info-element =
+  element info { empty } # TODO
