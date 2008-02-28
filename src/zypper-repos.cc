@@ -589,6 +589,38 @@ static void print_repo_list(Zypper & zypper,
 
 // ----------------------------------------------------------------------------
 
+/** Repo list as xml */
+static void print_xml_repo_list(Zypper & zypper, list<RepoInfo> repos)
+{
+  cout << "<repo-list>" << endl;
+  for (std::list<RepoInfo>::const_iterator it = repos.begin();
+       it !=  repos.end(); ++it)
+  {
+    string tmpstr;
+    cout << "<repo";
+    cout << " alias=\"" << xml_encode(it->alias()) << "\"";
+    cout << " name=\"" << xml_encode(it->name()) << "\"";
+    cout << " type=\"" << it->type().asString() << "\"";
+    cout << " enabled=\"" << it->enabled() << "\"";
+    cout << " autorefresh=\"" << it->autorefresh() << "\"";
+    cout << " gpgcheck=\"" << it->gpgCheck() << "\"";
+    if (!(tmpstr = it->gpgKeyUrl().asString()).empty())
+      cout << " gpgkey=\"" << xml_encode(tmpstr) << "\"";
+    if (!(tmpstr = it->mirrorListUrl().asString()).empty())
+      cout << " mirrorlist=\"" << xml_encode(tmpstr) << "\"";
+    cout << ">" << endl;
+
+    for (RepoInfo::urls_const_iterator urlit = it->baseUrlsBegin();
+         urlit != it->baseUrlsEnd(); ++urlit)
+      cout << "<url>" << xml_encode(urlit->asString()) << "</url>" << endl;
+
+    cout << "</repo>" << endl;
+  }
+  cout << "</repo-list>" << endl;
+}
+
+// ----------------------------------------------------------------------------
+
 void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 {
   for (std::list<RepoInfo>::const_iterator it = repos.begin();
@@ -656,6 +688,9 @@ void list_repos(Zypper & zypper)
       }
     }
   }
+  // print repo list as xml
+  else if (zypper.out().type() == Out::TYPE_XML)
+    print_xml_repo_list(zypper, repos);
   // print repo list the rug's way
   else if (zypper.globalOpts().is_rug_compatible)
     print_rug_sources_list(repos);

@@ -100,7 +100,19 @@ install-summary-element =
   element install-summary { empty } # TODO
 
 repo-list-element =
-  element repo-list { empty } # TODO
+  element repo-list {
+    element repo {
+      attribute alias { xsd:string },
+      attribute name { xsd:string }?,
+      attribute type { xsd:string }?,
+      attribute enabled { xsd:boolean }?,
+      attribute autorefresh { xsd:boolean }?,
+      attribute gpgcheck { xsd:boolean }?,
+      attribute gpgkey { xsd:anyURI }?,
+      attribute mirrorlist { xsd:anyURI }?,
+      element url { xsd:anyURI }+
+    }*
+  }
 
 solver-problem-element =
   element solver-problem { empty } # TODO
