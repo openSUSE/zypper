@@ -490,8 +490,13 @@ static tribool show_problem (Zypper & zypper,
         solutions.size());
 
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(),
-      // TranslatorExplanation: dependency problem solution input prompt
-      _("[#/s/r/c]"));
+      // translators: answers for dependency problem solution input prompt:
+      // "Choose from above solutions by number or skip, retry or cancel"
+      // Translate the letters to whatever is suitable for your language.
+      // The anserws must be separated by slash characters '/' and must
+      // correspond to number/skip/retry/cancel in that order.
+      // The answers should be lower case letters.
+      _("#/s/r/c"));
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {

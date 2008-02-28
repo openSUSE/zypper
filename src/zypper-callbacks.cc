@@ -17,7 +17,13 @@ using namespace boost;
 //Action ...
 int read_action_ari (PromptId pid, int default_action) {
   Out & out = Zypper::instance()->out();
-  out.prompt(pid, _("Abort, retry, ignore?"), "[a/r/i]"); //! \todo translation?
+  // translators: "a/r/i" are the answers to the
+  // "Abort, retry, ignore?" prompt
+  // Translate the letters to whatever is suitable for your language.
+  // the anserws must be separated by slash characters '/' and must
+  // correspond to abort/retry/ignore in that order.
+  // The answers should be lower case letters.
+  out.prompt(pid, _("Abort, retry, ignore?"), _("a/r/i"));
 
   // choose abort if no default has been specified
   if (default_action == -1) {
@@ -52,9 +58,10 @@ int read_action_ari (PromptId pid, int default_action) {
     else if (c == 'i')
       return 2;
     // translators: don't translate the letters
-    out.prompt(pid,
-     boost::str(format(_("Invalid answer '%s'.")) % c),
-      _("Choose letter 'a', 'r', or 'i'"));
+    ostringstream s;
+    s << format(_("Invalid answer '%s'.")) % c << " "
+      << _("Choose letter 'a', 'r', or 'i'"); 
+    out.prompt(pid, s.str(), _("a/r/i")); //! \todo remove this, handle invalid answers within the first prompt()
     DBG << "invalid answer" << endl;
   }
 
@@ -68,9 +75,9 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
   const GlobalOptions & gopts = Zypper::instance()->globalOpts();
   Out & out = Zypper::instance()->out();
 
-  ostringstream s;
-  s << "[" << _("yes") << "/" << _("no") << "]";
-  out.prompt(pid, question, s.str());
+  string yn = string(_("yes")) + "/" + _("no");
+
+  out.prompt(pid, question, yn);
 
   // non-interactive mode: print the answer for convenience  (only for normal
   // output) and return default
@@ -89,13 +96,15 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
   while (stm.good() && rpmatch(c.c_str()) == -1)
   {
     if (been_here_before)
-      out.prompt(pid,
-          boost::str(format(_("Invalid answer '%s'.")) % c),
-          boost::str(format(
-          // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
-          // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
-          _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
-          % _("yes") % _("no")));
+    {
+      ostringstream s;
+      s << format(_("Invalid answer '%s'.")) % c << " " << format(
+        // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+        // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+        _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
+        % _("yes") % _("no");
+      out.prompt(pid, s.str(), yn); //! \todo remove this, handle invalid answers within the first prompt()
+    }
     c = zypp::str::getline (stm, zypp::str::TRIM);
     been_here_before = true;
   }
