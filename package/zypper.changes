@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 28 19:40:23 CET 2008 - jkupec@suse.cz
+
+- fixed solver solution detail text indentation (bnc #358871)
+- better solver prompt text (bnc #365236)
+
+-------------------------------------------------------------------
 Sat Feb 23 17:27:05 CET 2008 - dmacvicar@suse.de
 
 - default autorefresh to disabled like every other package
