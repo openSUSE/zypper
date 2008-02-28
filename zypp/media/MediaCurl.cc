@@ -16,6 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/Sysconfig.h"
 #include "zypp/base/Gettext.h"
 
@@ -1020,6 +1021,11 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
               ));
             }
             else
+            if ( httpReturnCode == 403)
+            {
+               ZYPP_THROW(MediaForbiddenException(url));
+            }
+            else
             if ( httpReturnCode == 404)
             {
                err_file_not_found = true;
@@ -1229,6 +1235,11 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
                 ZYPP_THROW(MediaUnauthorizedException(
                   url, "Login failed.", _curlError, auth_hint
                 ));
+              }
+              else
+              if ( httpReturnCode == 403)
+              {
+                 ZYPP_THROW(MediaForbiddenException(url));
               }
               else
               if ( httpReturnCode == 404)
