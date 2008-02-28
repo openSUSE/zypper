@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 28 12:20:56 CET 2008 - jkupec@suse.cz
+
+- texts correction based on proof-reading
+- r8943
+
+-------------------------------------------------------------------
 Wed Nov 28 14:43:17 CET 2007 - jkupec@suse.cz
 
 - quit if not root without trying to do anything except displaying help
