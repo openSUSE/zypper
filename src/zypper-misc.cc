@@ -470,7 +470,6 @@ static tribool show_problem (Zypper & zypper,
     if (!det.empty ())
       stm << indent(det, 2) << endl;
   }
-  cout << stm.str();
 
   if (zypper.globalOpts().non_interactive)
     return false;
@@ -479,10 +478,15 @@ static tribool show_problem (Zypper & zypper,
   do {
     // without solutions, its useless to prompt
     if (solutions.empty())
-       return false;
-    // TranslatorExplanation: dependency problem solution input prompt
-    zypper.out().prompt(PROMPT_DEP_RESOLVE,
-      _("Choose the number, (s)kip, (r)etry or (c)ancel"),
+    {
+      zypper.out().error(stm.str());
+      return false;
+    }
+    
+    stm << _("Choose the number, skip, retry or cancel"); 
+
+    zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(),
+      // TranslatorExplanation: dependency problem solution input prompt
       _("[#/s/r/c]"));
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
