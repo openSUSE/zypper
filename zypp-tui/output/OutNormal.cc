@@ -186,8 +186,14 @@ void OutNormal::prompt(PromptId id,
                        const string & prompt,
                        const string & answer_hint)
 {
-  cout << CLEARLN << prompt;
-  if (!answer_hint.empty())
-    cout << " " << answer_hint;
-  cout << ": " << std::flush;
+  /**
+  vector<string> answers;
+  zypp::str::split(answer_hint, back_inserter(answers), "/");
+  for (vector<string>::const_iterator ansit = answers.begin();
+       ansit != answers.end(); ++ansit)
+  {
+  }
+  */
+
+  cout << CLEARLN << prompt << " [" << answer_hint << "]: " << std::flush;
 }
