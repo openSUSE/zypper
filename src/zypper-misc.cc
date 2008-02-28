@@ -1158,7 +1158,7 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
     if (!tbl.empty ())
       zypper.out().warning(
         _("These are only the updates affecting the updater itself.\n"
-          "There are others available too.\n"));
+          "Other updates are available too.\n"));
     tbl = pm_tbl;
   }
 
@@ -1646,7 +1646,7 @@ void solve_and_commit (Zypper & zypper)
     if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
       zypper.out().warning(
         _("One of installed patches requires reboot of"
-          " your machine. Please do it as soon as possible."));
+          " your machine. Reboot as soon as possible."));
     else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
       zypper.out().warning(
         _("One of installed patches affects the package"
