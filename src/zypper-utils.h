@@ -57,4 +57,6 @@ zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
 
 std::string xml_encode(const std::string & text);
 
+std::string & indent(std::string & text, int columns);
+
 #endif /*ZYPPER_UTILS_H*/

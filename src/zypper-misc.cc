@@ -450,8 +450,7 @@ ostream& operator << (ostream & stm, ios::iostate state)
 static tribool show_problem (Zypper & zypper,
                       const ResolverProblem & prob, ProblemSolutionList & todo)
 {
-  //! \todo use Out
-  ostream& stm = cerr;
+  ostringstream stm;
   string det;
   stm << _("Problem: ") << prob.description () << endl;
   det = prob.details ();
@@ -469,8 +468,9 @@ static tribool show_problem (Zypper & zypper,
     stm << format (_(" Solution %d: ")) % n << (*ii)->description () << endl;
     det = (*ii)->details ();
     if (!det.empty ())
-      stm << "  " << det << endl;
+      stm << indent(det, 2) << endl;
   }
+  cout << stm.str();
 
   if (zypper.globalOpts().non_interactive)
     return false;

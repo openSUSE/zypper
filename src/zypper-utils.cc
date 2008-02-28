@@ -240,3 +240,23 @@ string xml_encode(const string & text)
   iobind::parser::xml_escape_parser parser;
   return parser.escape(text);
 }
+
+string & replace_all(string & str, const string & from, const string & to)
+{
+  size_t pos = 0;
+  while((pos = str.find(from, pos)) != string::npos)
+  {
+    str.replace(pos, from.size(), to);
+    pos += to.size();
+  }
+  return str;
+}
+
+std::string & indent(std::string & text, int columns)
+{
+  string indent(columns, ' '); indent.insert(0, 1, '\n');
+  cout << "to: '" << indent << "'" << endl;
+  replace_all(text, "\n", indent);
+  text.insert(0, string(columns, ' '));
+  return text;
+}
