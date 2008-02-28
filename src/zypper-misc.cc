@@ -483,7 +483,10 @@ static tribool show_problem (Zypper & zypper,
       return false;
     }
 
-    stm << _("Choose from above solutions by number or skip, retry or cancel"); 
+    stm << _PL(
+      "Choose the above solution using '1' or skip, retry or cancel",
+      "Choose from above solutions by number or skip, retry or cancel",
+      solutions.size());
 
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(),
       // TranslatorExplanation: dependency problem solution input prompt
