@@ -482,8 +482,8 @@ static tribool show_problem (Zypper & zypper,
       zypper.out().error(stm.str());
       return false;
     }
-    
-    stm << _("Choose the number, skip, retry or cancel"); 
+
+    stm << _("Choose from above solutions by number or skip, retry or cancel"); 
 
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(),
       // TranslatorExplanation: dependency problem solution input prompt
