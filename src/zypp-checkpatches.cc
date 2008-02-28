@@ -210,7 +210,7 @@ int main(int argc, char **argv)
     {
       // TranslatorExplanation %s = detailed low level (unstranslated) error message
       string error = excpt_r.msg();
-      gData.errors.push_back(str::form(_("Couldn't restore source.\nDetail: %s"), error.c_str()));
+      gData.errors.push_back(str::form(_("Could not restore source.\nDetail: %s"), error.c_str()));
     }
   }
   

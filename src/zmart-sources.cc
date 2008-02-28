@@ -77,7 +77,7 @@ void include_source_by_url( const Url &url )
   }
   catch( const Exception & excpt_r )
   {
-    cerr << _("Can't access repository") << endl;
+    cerr << _("Cannot access repository") << endl;
     ZYPP_CAUGHT( excpt_r );
     exit(-1);
   }

@@ -43,7 +43,7 @@ ZyppSearch::ZyppSearch (
   // no sources warning
   if (gData.sources.empty()) {
     cerr << _("No sources. Zypper currently searches within installation"
-        "sources only.") << endl;
+        " sources only.") << endl;
     exit(2); // TODO #define zypper error codes?
   }
 

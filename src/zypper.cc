@@ -131,7 +131,7 @@ string process_globals(int argc, char **argv)
     "\t--terse, -t\t\tTerse output for machine consumption\n"
     "\t--table-style, -s\tTable style (integer)\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-    "\t--non-interactive, -n\tDon't ask anything, use default answers automatically.\n"
+    "\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--root, -R <dir>\tOperate on a different root directory\n");
 
@@ -149,7 +149,7 @@ string process_globals(int argc, char **argv)
 
   if (gopts.count("no-gpg-checks")) {
     gSettings.no_gpg_checks = true;
-    cout << _("Entering no-gpg-checks mode.") << endl;
+    cout << _("Entering 'no-gpg-checks' mode.") << endl;
     MIL << "Entering no-gpg-checks mode" << endl;
   }
 
@@ -409,8 +409,8 @@ int one_command(const string& command, int argc, char **argv)
       "  Command options:\n"
       "    --match-all            Search for a match to all search strings (default)\n"
       "    --match-any            Search for a match to any of the search strings\n"
-      "    --match-substrings     Matches for search strings may be partial words (default)\n"
-      "    --match-words          Matches for search strings may only be whole words\n"
+      "    --match-substrings     Search for a match to partial words (default)\n"
+      "    --match-words          Search for a match to whole words only\n"
       "    --match-exact          Searches for an exact package name\n"
       "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
       "-c, --case-sensitive       Perform case-sensitive search.\n"

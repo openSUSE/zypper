@@ -119,7 +119,7 @@ namespace zypp {
           cerr << boost::format(
               _("Warning: Ignoring failed signature verification for %s"
                 " with public key id %s, %s, fingerprint %s!"
-                " Double-check this is not caused by some malicious"
+                " Make sure this is not caused by some malicious"
                 " changes in the file!"))
               %file % keyid % keyname % fingerprint << endl;
           return true;

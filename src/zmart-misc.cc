@@ -558,8 +558,7 @@ void list_patch_updates ()
   if (!pm_tbl.empty ()) {
     if (!tbl.empty ()) {
       cerr << _("WARNING: These are only the updates affecting the updater itself.\n"
-		"There are others available too.\n") << flush;
-		
+                "Other updates are available too.\n") << flush;
     }
     tbl = pm_tbl;
   }
@@ -781,11 +780,11 @@ int solve_and_commit (bool non_interactive) {
         if (excpt_r.msg().find("fails integrity check") != string::npos) {
           cerr << endl
             << _("Package integrity check failed. This may be a problem"
-            " with installation source or media. Try one of the following:\n"
+            " with the installation source or media. Try one of the following:\n"
             "\n"
-            "- just retry previous command\n"
+            "- retry previous command\n"
             "- refresh installation sources using 'zypper refresh'\n"
-            "- use another installation media (if e.g. damaged)\n"
+            "- use another installation media (for example, if yours is damaged)\n"
             "- use another installation source") << endl;
           return ZYPPER_EXIT_ERR_ZYPP;
         }
@@ -799,7 +798,7 @@ int solve_and_commit (bool non_interactive) {
     retv = ZYPPER_EXIT_OK;
   else if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
     cout << _("WARNING: One of installed patches requires reboot of"
-      " your machine. Please, do it as soon as possible.") << endl;
+      " your machine. Reboot as soon as possible.") << endl;
   else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
     cout << _("WARNING: One of installed patches affects the package"
       " manager itself, thus it requires restart before executing"
