@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 29 16:44:18 CET 2008 - jkupec@suse.cz
+
+- xml encode the repo url and alias in update xml (bnc #337424,
+  bnc #342701)
+
+-------------------------------------------------------------------
 Thu Feb 28 19:40:23 CET 2008 - jkupec@suse.cz
 
 - fixed solver solution detail text indentation (bnc #358871)

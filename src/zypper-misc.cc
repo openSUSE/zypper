@@ -1180,7 +1180,7 @@ bool xml_list_patches ()
 
         if ( !patch->repoInfo().alias().empty() )
         {
-          cout << "  <source url=\"" << xml_encode(*(patch->repoInfo().baseUrlsBegin()));
+          cout << "  <source url=\"" << xml_encode(patch->repoInfo().baseUrlsBegin()->asString());
           cout << "\" alias=\"" << xml_encode(patch->repoInfo().alias()) << "\"/>" << endl;
         }
 
@@ -1553,7 +1553,7 @@ void xml_list_updates(const ResKindSet & kinds)
 
     if ( !res->repoInfo().alias().empty() )
     {
-    	cout << "  <source url=\"" << xml_encode(*(res->repoInfo().baseUrlsBegin()));
+    	cout << "  <source url=\"" << xml_encode(res->repoInfo().baseUrlsBegin()->asString());
     	cout << "\" alias=\"" << xml_encode(res->repoInfo().alias()) << "\"/>" << endl;
     }
 
