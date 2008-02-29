@@ -102,8 +102,28 @@ patch-update =
     attribute interactive { xsd:boolean } # needs user interaction?
   }
 
+solvable-element =
+  element solvable {
+    attribute type { "package" | "patch" | "pattern" | "product" },
+    attribute name { xsd:string },
+    attribute edition { xsd:string },      # target edition
+    attribute edition-old { xsd:string }?, # currently installed version in case of upgrade
+    attribute arch { xsd:string },
+    attribute summary { xsd:string }?,
+    text?
+  }
+
 install-summary-element =
-  element install-summary { empty } # TODO
+  element install-summary {
+    attribute download-size { xsd:integer },    # download size in bytes
+    attribute space-usage-diff { xsd:integer }, # used space before vs. after install difference in bytes
+    (
+      element to-install { solvable-element+ } |
+      element to-remove { solvable-element+ } |
+      element to-upgrade { solvable-element+ } |
+      element to-downgrade { solvable-element+ }
+    )*
+  }
 
 repo-list-element =
   element repo-list {

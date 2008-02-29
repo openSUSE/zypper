@@ -581,10 +581,9 @@ static bool show_problems(Zypper & zypper)
 typedef map<Resolvable::Kind,set<ResObject::constPtr> > KindToResObjectSet;
 
 static void show_summary_resolvable_list(const string & label,
-                                  KindToResObjectSet::const_iterator it,
-                                  int verbosity)
+                                         KindToResObjectSet::const_iterator it,
+                                         Out & out)
 {
-  Out & out = Zypper::instance()->out();
   ostringstream s;
   s << endl << label << endl;
 
@@ -599,7 +598,7 @@ static void show_summary_resolvable_list(const string & label,
     cols = 77;
 
 #define INDENT "  "
-
+//! \todo make function to wrap & indent the text 
   for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
       resit != it->second.end(); ++resit)
   {
@@ -638,6 +637,122 @@ static void show_summary_resolvable_list(const string & label,
   out.info(s.str(), Out::QUIET); //! \todo special output needed for this
 }
 
+typedef enum
+{
+  TO_UPGRADE,
+  TO_DOWNGRADE,
+  TO_INSTALL,
+  TO_REMOVE
+} SummaryType;
+
+static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
+{
+  switch (stype)
+  {
+  case TO_UPGRADE:
+    cout << "<" << (end ? "/" : "") << "to-upgrade>" << endl;
+    break;
+  case TO_DOWNGRADE:
+    cout << "<" << (end ? "/" : "") << "to-downgrade>" << endl;
+    break;
+  case TO_INSTALL:
+    cout << "<" << (end ? "/" : "") << "to-install>" << endl;
+    break;
+  case TO_REMOVE:
+    cout << "<" << (end ? "/" : "") << "to-remove>" << endl;
+    break;
+  }
+}
+
+static void show_summary_of_type(Zypper & zypper,
+                                 SummaryType stype,
+                                 const KindToResObjectSet & summset)
+{
+  // xml install summary
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    bool empty = true;
+    for (KindToResObjectSet::const_iterator it = summset.begin();
+        it != summset.end(); ++it)
+      if (!it->second.empty()) { empty = false; break; }
+    if (empty)
+      return;
+
+    xml_print_to_transact_tag(stype);
+
+    for (KindToResObjectSet::const_iterator it = summset.begin();
+        it != summset.end(); ++it)
+      for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
+          resit != it->second.end(); ++resit)
+      {
+        ResObject::constPtr res(*resit);
+
+        cout << "<solvable";
+        cout << " type=\"" << it->first << "\"";
+        cout << " name=\"" << res->name() << "\"";
+        cout << " edition=\"" << res->edition() << "\"";
+        //! \todo cout << " edition-old=\"" << << "\""; 
+        cout << " arch=\"" << res->arch() << "\"";
+        if (!res->summary().empty())
+          cout << " summary=\"" << xml_encode(res->summary()) << "\"";
+        if (!res->description().empty())
+          cout << ">" << endl << xml_encode(res->description()) << "</solvable>" << endl;
+        else
+          cout << "/>" << endl;
+      }
+
+    xml_print_to_transact_tag(stype, true);
+
+    return;
+  }
+
+  // normal install summary
+  for (KindToResObjectSet::const_iterator it = summset.begin();
+      it != summset.end(); ++it)
+  {
+    string title;
+    switch (stype)
+    {
+    case TO_UPGRADE:
+      title = boost::str(format(_PL(
+          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
+          "The following %s is going to be upgraded:",
+          "The following %s are going to be upgraded:",
+          it->second.size()
+      )) % kind_to_string_localized(it->first, it->second.size()));
+      break;
+    case TO_DOWNGRADE:
+      title = boost::str(format(_PL(
+          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
+          "The following %s is going to be downgraded:",
+          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
+          "The following %s are going to be downgraded:",
+          it->second.size()
+      )) % kind_to_string_localized(it->first, it->second.size()));
+      break;
+    case TO_INSTALL:
+      title = boost::str(format(_PL(
+          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
+          "The following NEW %s is going to be installed:",
+          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
+          "The following NEW %s are going to be installed:",
+          it->second.size()
+      )) % kind_to_string_localized(it->first, it->second.size()));
+      break;
+    case TO_REMOVE:
+      title = boost::str(format(_PL(
+          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
+          "The following %s is going to be REMOVED:",
+          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
+          "The following %s are going to be REMOVED:",
+          it->second.size()
+      )) % kind_to_string_localized(it->first, it->second.size()));
+      break;
+    }
+
+    show_summary_resolvable_list(title, it, zypper.out());
+  }
+}
 
 /**
  * @return (-1) - nothing to do,
@@ -645,7 +760,7 @@ static void show_summary_resolvable_list(const string & label,
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int show_summary(Zypper & zypper)
+int summary(Zypper & zypper)
 {
   int retv = -1; // nothing to do;
 
@@ -699,10 +814,6 @@ int show_summary(Zypper & zypper)
     return retv;
   }
 
-  //! \todo no output for machines for now
-  if (zypper.globalOpts().machine_readable)
-    return retv;
-
   KindToResObjectSet toinstall;
   KindToResObjectSet toupgrade;
   KindToResObjectSet todowngrade;
@@ -710,6 +821,7 @@ int show_summary(Zypper & zypper)
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   ByteCount download_size, new_installed_size;
+
   for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
       it != to_be_installed.end(); ++it)
   {
@@ -757,64 +869,28 @@ int show_summary(Zypper & zypper)
       new_installed_size -= (*resit)->size();
     }
 
+  // "</install-summary>"
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    cout << "<install-summary";
+    cout << " download-size=\"" << ((ByteCount::SizeType) download_size) << "\"";
+    cout << " space-usage-diff=\"" << ((ByteCount::SizeType) new_installed_size) << "\"";
+    cout << ">" << endl;
+  }
+
   // show summary
-  for (KindToResObjectSet::const_iterator it = toupgrade.begin();
-      it != toupgrade.end(); ++it)
-  {
-    string title = boost::str(format(_PL(
-        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-        "The following %s is going to be upgraded:",
-        "The following %s are going to be upgraded:",
-        it->second.size()
-    )) % kind_to_string_localized(it->first, it->second.size()));
+  show_summary_of_type(zypper, TO_UPGRADE, toupgrade);
+  show_summary_of_type(zypper, TO_DOWNGRADE, todowngrade);
+  show_summary_of_type(zypper, TO_INSTALL, toinstall);
+  show_summary_of_type(zypper, TO_REMOVE, toremove);
 
-    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
-  }
-
-  for (KindToResObjectSet::const_iterator it = todowngrade.begin();
-      it != todowngrade.end(); ++it)
-  {
-    string title = boost::str(format(_PL(
-        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-        "The following %s is going to be downgraded:",
-        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-        "The following %s are going to be downgraded:",
-        it->second.size()
-    )) % kind_to_string_localized(it->first, it->second.size()));
-
-    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
-  }
-
-  for (KindToResObjectSet::const_iterator it = toinstall.begin();
-      it != toinstall.end(); ++it)
-  {
-    string title = boost::str(format(_PL(
-        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-        "The following NEW %s is going to be installed:",
-        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-        "The following NEW %s are going to be installed:",
-        it->second.size()
-    )) % kind_to_string_localized(it->first, it->second.size()));
-
-    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
-  }
-
-  for (KindToResObjectSet::const_iterator it = toremove.begin();
-      it != toremove.end(); ++it)
-  {
-    string title = boost::str(format(_PL(
-        // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-        "The following %s is going to be REMOVED:",
-        // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-        "The following %s are going to be REMOVED:",
-        it->second.size()
-    )) % kind_to_string_localized(it->first, it->second.size()));
-
-    show_summary_resolvable_list(title, it, zypper.globalOpts().verbosity);
-  }
+  // "</install-summary>"
+  if (zypper.out().type() == Out::TYPE_XML)
+    cout << "</install-summary>" << endl;
 
   zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
 
+  // count and download size info
   ostringstream s;
   if (download_size > 0)
   {
@@ -1573,7 +1649,7 @@ void solve_and_commit (Zypper & zypper)
 
 
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-  int retv = show_summary(zypper);
+  int retv = summary(zypper);
   bool was_installed = false;
   if (retv >= 0) { // there are resolvables to install/uninstall
     if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true)) {
