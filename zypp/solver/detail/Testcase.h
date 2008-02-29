@@ -23,6 +23,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/base/GzStream.h"
 #include "zypp/Repository.h"
+#include "zypp/Locale.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -101,7 +102,7 @@ class  HelixControl {
     HelixControl (const std::string & controlPath,
 		  const RepositoryTable & sourceTable,
 		  const Arch & systemArchitecture,
-		  const PoolItemList &languages,		  
+		  const LocaleSet &languages,		  
 		  const std::string & systemPath = "solver-system.xml.gz");
     HelixControl ();    
     ~HelixControl ();

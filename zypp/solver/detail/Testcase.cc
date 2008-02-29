@@ -331,7 +331,6 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     PoolItemList 	items_to_remove;
     PoolItemList 	items_locked;
     PoolItemList 	items_keep;
-    PoolItemList	language;
     HelixResolvable_Ptr	system = NULL;
 
     if (dumpPool)
@@ -341,57 +340,45 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     {
 	Resolvable::constPtr res = it->resolvable();
 
-#warning NO MORE LANGUAGE RESOLVABLE
-        // - use pools list of requested locales and pass it as 'LocaleList language'
-        // - restore the list via Pool::setRequestedLocales.
-#if 0
-	if (isKind<Language>(res)) {
-	    if ( it->status().isInstalled()
-		 || it->status().isToBeInstalled()) {
-		language.push_back (*it);
-	    }
+	if ( system && it->status().isInstalled() ) {
+	    // system channel
+	    system->addResolvable (*it);
 	} else {
-#endif
-	    if ( system && it->status().isInstalled() ) {
-		// system channel
-		system->addResolvable (*it);
-	    } else {
-		// repo channels
-		Repository repo  = it->resolvable()->satSolvable().repository();
-		if (dumpPool) {
-		    if (repoTable.find (repo) == repoTable.end()) {
-			repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							      + str::numstring((long)repo.id())
-							      + "-package.xml.gz");
-		    }
-		    repoTable[repo]->addResolvable (*it);
+	    // repo channels
+	    Repository repo  = it->resolvable()->satSolvable().repository();
+	    if (dumpPool) {
+		if (repoTable.find (repo) == repoTable.end()) {
+		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
+							  + str::numstring((long)repo.id())
+							  + "-package.xml.gz");
 		}
+		repoTable[repo]->addResolvable (*it);
 	    }
+	}
 
-	    if ( it->status().isToBeInstalled()
-		 && !(it->status().isBySolver())) {
-		items_to_install.push_back (*it);
-	    }
-	    if ( it->status().isKept()
-		 && !(it->status().isBySolver())) {
-		items_keep.push_back (*it);
-	    }
-	    if ( it->status().isToBeUninstalled()
-		 && !(it->status().isBySolver())) {
-		items_to_remove.push_back (*it);
-	    }
-	    if ( it->status().isLocked()
-		 && !(it->status().isBySolver())) {
-		items_locked.push_back (*it);
-	    }
+	if ( it->status().isToBeInstalled()
+	     && !(it->status().isBySolver())) {
+	    items_to_install.push_back (*it);
+	}
+	if ( it->status().isKept()
+	     && !(it->status().isBySolver())) {
+	    items_keep.push_back (*it);
+	}
+	if ( it->status().isToBeUninstalled()
+	     && !(it->status().isBySolver())) {
+	    items_to_remove.push_back (*it);
+	}
+	if ( it->status().isLocked()
+	     && !(it->status().isBySolver())) {
+	    items_locked.push_back (*it);
+	}
     }
 
     // writing control file "*-test.xml"
-
     HelixControl control (dumpPath + "/solver-test.xml",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
-			  language);
+			  pool.getRequestedLocales());
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
 	control.installResolvable (iter->resolvable(), iter->status());
@@ -444,7 +431,7 @@ void HelixResolvable::addResolvable(const PoolItem item)
 HelixControl::HelixControl(const std::string & controlPath,
 			   const RepositoryTable & repoTable,
 			   const Arch & systemArchitecture,
-			   const PoolItemList &languages,
+			   const LocaleSet &languages,
 			   const std::string & systemPath)
     :dumpFile (controlPath)
 {
@@ -477,8 +464,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 	      << "-package.xml.gz\" name=\"" << repo.alias()
 	      << "\" />" << endl << endl;
     }
-    for (PoolItemList::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
-	*file << TAB << "<locale name=\"" <<  iter->resolvable()->name()
+    for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
+	*file << TAB << "<locale name=\"" <<  iter->code()
 	      << "\" />" << endl;
     }
     *file << "</setup>" << endl
