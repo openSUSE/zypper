@@ -88,6 +88,11 @@ touch %buildroot%_var/log/zypper.log
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-checkpatches
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
+%dir %{prefix}/share/zypper
+%dir %{prefix}/share/zypper/xml
+%{prefix}/share/zypper/xml/xmlout.rnc
+%dir %{prefix}/include/zypper
+%{prefix}/include/zypper/prompt.h
 %doc %{_mandir}/*/*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/TODO
