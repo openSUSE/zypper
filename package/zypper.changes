@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Feb 29 17:15:38 CET 2008 - jkupec@suse.cz
+
+- --xmlout for repos, install, update, dist-upgrade, remove,
+  list-updates, refresh, and *repo command complete (fate #302595)
+- install prompt.h to /usr/include/zypper and xmlout.rnc to
+  /usr/share/zypper/xml
+- 0.10.2
+
+-------------------------------------------------------------------
 Fri Feb 29 16:44:18 CET 2008 - jkupec@suse.cz
 
 - xml encode the repo url and alias in update xml (bnc #337424,
