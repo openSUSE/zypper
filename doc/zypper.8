@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.10.0" "zypper" "System Tools"
+.TH "zypper" "8" "0.10.2" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -428,7 +428,8 @@ Increase verbosity. For debugging output specify this option twice.
 Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.
 .TP
 .I \-t, \-\-terse
-Terse output for machine consumption.
+Terse output for machine consumption. Currently not used and provided only for
+compatibility with rug.
 .TP
 .I \-s, \-\-table\-style
 Specifies table style to use. Table style is identified by an integer number. TODO
@@ -438,6 +439,11 @@ Turns on rug compatibility. See section COMPATIBILITY WITH RUG for details.
 .TP
 .I \-n, \-\-non\-interactive
 Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.
+.TP
+.I \-x, \-\-xmlout
+Switches to XML output. This option is useful for scripts or graphical frontends
+using zypper. For detailed information about this feature, see
+http://en.opensuse.org/Zypper/XML_Output.
 .TP
 .I \-D, \-\-reposd\-dir <dir>
 Use the specified directory to look for the repository definition (*.repo) files.
@@ -550,11 +556,8 @@ Use the \-\-raw\-cache\-dir global option to use an alternative directory
 for this purpose or the \-\-root option to make this directory relative to the
 specified root directory.
 .TP
-.B /var/cache/zypp/zypp.db
-Sqlite database file containing pre-parsed metadata of all repositories.
-Use the \-\-cache\-dir global option to use an alternative directory
-for the zypp.db file or the \-\-root option to make its default location
-relative to the specified root directory.
+.B /var/cache/zypp/*.solv
+TODO
 .TP
 .B ~/.zypper_history
 Command history for the shell.
@@ -715,6 +718,9 @@ This option is an alias to zypper's \-\-repo <alias> and it will restrict
 the operation of commands like search, install, etc to the repository specified
 by the alias.
 
+.SH "HOMEPAGE"
+
+http://en.opensuse.org/Zypper
 
 .SH "AUTHORS"
 .LP
