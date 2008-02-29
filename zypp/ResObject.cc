@@ -85,9 +85,6 @@ namespace zypp
   RepoInfo ResObject::repoInfo() const
   { return repository().info(); }
 
-  Repository ResObject::repository() const
-  { return repository(); }
-
   unsigned ResObject::mediaNr() const
   { return lookupNumAttribute( sat::SolvAttr::medianr ); }
 

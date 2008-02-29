@@ -19,6 +19,7 @@
 #include "zypp/CapFilters.h"
 
 #include "zypp/PoolItem.h"
+#include "zypp/Repository.h"
 #include "zypp/CapAndItem.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -184,6 +185,25 @@ namespace zypp
       std::string _name;
     };
 
+    /** Select ResObject by repository or repository alias. */
+    struct ByRepository : public ResObjectFilterFunctor
+    {
+      ByRepository( Repository repository_r )
+      : _alias( repository_r.info().alias() )
+      {}
+
+      ByRepository( const std::string & alias_r )
+      : _alias( alias_r )
+      {}
+
+      bool operator()( ResObject::constPtr p ) const
+      {
+        return p->repoInfo().alias() == _alias;
+      }
+
+      std::string _alias;
+    };
+      
     /** Select ResObject by Edition using \a _Compare functor.
      *
      * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )</tt>

@@ -63,6 +63,9 @@ namespace zypp
     using sat::Solvable::supportsRequestedLocales;
     /** Return the supported locales via locales_r. */
     using sat::Solvable::getSupportedLocales;
+
+    using sat::Solvable::repository;;
+      
     //@}
 
   public:
@@ -120,11 +123,6 @@ namespace zypp
       *  providing this resolvable.
       */
     RepoInfo repoInfo() const;
-
-     /** \ref Repository
-      *  providing this resolvable.
-      */
-    Repository repository() const;
 
     /**
      * Media number where the resolvable is located
