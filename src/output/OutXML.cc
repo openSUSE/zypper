@@ -199,7 +199,7 @@ void OutXML::prompt(PromptId id,
        ansit != answers.end(); ++ansit)
   {
     string answer = *ansit;
-    cout << "<answer";
+    cout << "<option";
     //if (is_default) // TODO
     //  cout << " default=\"1\"";
     cout << " value=\"" << xml_encode(answer) << "\"";

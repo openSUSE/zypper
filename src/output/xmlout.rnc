@@ -13,9 +13,11 @@ stream-element =
       update-status-element* |
       install-summary-element* |
       repo-list-element? |
-      solver-problem-element* |
       list-element? |
-      info-element?
+      info-element? |
+
+      # random text can appear between tags - this text should be ignored
+      text
     )+
   }
 
@@ -60,7 +62,11 @@ message-element =
 prompt-element =
   element prompt {
     attribute id { xsd:integer },
-    text
+    text,
+    element option {
+      attribute default { xsd:boolean }?,
+      attribute value { xsd:string }
+    }*
   }
 
 update-status-element =
@@ -113,9 +119,6 @@ repo-list-element =
       element url { xsd:anyURI }+
     }*
   }
-
-solver-problem-element =
-  element solver-problem { empty } # TODO
 
 list-element =
   element list { empty } # TODO
