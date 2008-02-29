@@ -32,6 +32,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/RepoInfo.h"
 
 using namespace std;
 
@@ -273,14 +274,12 @@ Helper::itemToString (PoolItem item, bool shortVersion)
 	if (item->arch() != "") {
 	    os << '.' << item->arch();
 	}
-	Repository s = item->repository();
-	if (s) {
-	    string alias = s.info().alias();
-	    if (!alias.empty()
-		&& alias != "@system")
-	    {
-		os << '[' << s.info().alias() << ']';
-	    }
+
+	string alias = item->repoInfo().alias();
+	if (!alias.empty()
+	    && alias != "@system")
+	{
+	    os << '[' << alias << ']';
 	}
     }
     return os.str();

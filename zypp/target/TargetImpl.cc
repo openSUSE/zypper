@@ -29,7 +29,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ExternalProgram.h"
-#include "zypp/Repo.h"
+#include "zypp/Repository.h"
 
 #include "zypp/CapMatchHelper.h"
 #include "zypp/ResFilters.h"
@@ -380,7 +380,7 @@ namespace zypp
 
       //now add the repos to the pool
       MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
-      Repo system = sat::Pool::instance().systemRepo();
+      Repository system = sat::Pool::instance().systemRepo();
       system.addSolv(rpmsolv);
 
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;

@@ -40,20 +40,22 @@ namespace zypp
   class IdString;
   class Capability;
   class Capabilities;
-  class Repo;
+  class Repository;
+  class RepoInfo;    
+
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { 
     class RepoIterator;
-    class ByRepo;      
+    class ByRepository;      
   }    
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    class Solvable;
     class Pool;
+    class Solvable;
 
     ///////////////////////////////////////////////////////////////////
     namespace detail

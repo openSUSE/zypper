@@ -46,7 +46,7 @@ namespace zypp
     typedef SelectableIndex::const_iterator const_iterator;
     typedef SelectableIndex::size_type      size_type;
 
-    typedef ResPool::repository_iterator    repository_iterator;
+    typedef ResPool::repository_iterator          repository_iterator;
 
   public:
 

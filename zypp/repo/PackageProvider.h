@@ -17,7 +17,6 @@
 #include "zypp/base/NonCopyable.h"
 
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/Repository.h"
 #include "zypp/Package.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/repo/RepoProvideFile.h"

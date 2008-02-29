@@ -14,6 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/PathInfo.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/target/CommitPackageCacheReadAhead.h"
 
 using std::endl;
@@ -33,8 +34,8 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const IMediaKey & obj )
     {
-      return str << "[S" << obj._repository.numericId() << ":" << obj._mediaNr << "]"
-                 << " " << obj._repository.info().alias();
+      return str << "[S" << obj._repo.id() << ":" << obj._mediaNr << "]"
+                 << " " << obj._repo.info().alias();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -66,9 +67,9 @@ namespace zypp
     {
       if ( pi->mediaNr() == 0 ) // no media access at all
         return false;
-      if ( pi->repository().info().baseUrlsEmpty() )
+      if ( pi->repoInfo().baseUrlsEmpty() )
         return false; // no Url - should actually not happen
-      std::string scheme( pi->repository().info().baseUrlsBegin()->getScheme() );
+      std::string scheme( pi->repoInfo().baseUrlsBegin()->getScheme() );
       return ( scheme == "dvd" || scheme == "cd" );
     }
 
@@ -160,7 +161,7 @@ namespace zypp
 
           // copy it to the cachedir
           std::string destName( str::form( "S%lu_%u_%s",
-                                           it->first->repository().numericId(),
+                                           it->first->repository().id(),
                                            it->first->mediaNr(),
                                            fromSource.value().basename().c_str() ) );
 

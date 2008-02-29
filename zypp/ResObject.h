@@ -19,9 +19,9 @@
 #include "zypp/Date.h"
 #include "zypp/ByteCount.h"
 #include "zypp/DiskUsage.h"
-#include "zypp/Repository.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/Repository.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -121,10 +121,10 @@ namespace zypp
       */
     RepoInfo repoInfo() const;
 
-    /** \deprecated \ref repoInfo is provided directly.
-     */
-    ZYPP_DEPRECATED Repository repository() const
-    { return Repository( repoInfo() ); }
+     /** \ref Repository
+      *  providing this resolvable.
+      */
+    Repository repository() const;
 
     /**
      * Media number where the resolvable is located

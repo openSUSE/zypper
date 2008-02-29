@@ -51,7 +51,7 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       /** Hack to extract progress information from source::DownloadFileReport.
-       * We redirect the static report triggered from Repository::provideFile
+       * We redirect the static report triggered from RepoInfo::provideFile
        * to feed the ProvideFilePolicy callbacks.
       */
       struct DownloadFileReportHack : public callback::ReceiveReport<repo::RepoReport>
@@ -69,7 +69,7 @@ namespace zypp
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
-    ManagedFile provideFile( Repository repo_r,
+    ManagedFile provideFile( RepoInfo repo_r,
                              const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r )
     {
@@ -112,21 +112,20 @@ namespace zypp
         return media;
       }
 
-      void setVerifierForRepo( Repository repo, shared_ptr<MediaSetAccess> media )
+      void setVerifierForRepo( RepoInfo repo, shared_ptr<MediaSetAccess> media )
       {
-        RepoInfo info = repo.info();
         // set a verifier if the repository has it
          
-        Pathname mediafile = info.metadataPath() + "/media.1/media";
-        if ( ! info.metadataPath().empty() )
+        Pathname mediafile = repo.metadataPath() + "/media.1/media";
+        if ( ! repo.metadataPath().empty() )
         {
           if ( PathInfo(mediafile).isExist() )
           {
-            std::map<shared_ptr<MediaSetAccess>, Repository>::const_iterator it;
+            std::map<shared_ptr<MediaSetAccess>, RepoInfo>::const_iterator it;
             it = _verifier.find(media);
             if ( it != _verifier.end() )
             {
-              if ( it->second == repo )
+              if ( it->second.alias() == repo.alias() )
               {
                 // this media is already using this repo verifier
                 return;
@@ -144,7 +143,7 @@ namespace zypp
               getline(str, buffer);
 
               unsigned media_nr = str::strtonum<unsigned>(buffer);
-              MIL << "Repository '" << info.alias() << "' has " << media_nr << " medias"<< endl;
+              MIL << "Repository '" << repo.alias() << "' has " << media_nr << " medias"<< endl;
 
               for ( unsigned i=1; i <= media_nr; ++i )
               {
@@ -156,21 +155,21 @@ namespace zypp
             }
             else
             {
-              ZYPP_THROW(RepoMetadataException(info));
+              ZYPP_THROW(RepoMetadataException(repo));
             }
           }
           else
           {
-            WAR << "No media verifier for repo '" << info.alias() << "' media/media.1 does not exist in '" << info.metadataPath() << "'" << endl;
+            WAR << "No media verifier for repo '" << repo.alias() << "' media/media.1 does not exist in '" << repo.metadataPath() << "'" << endl;
           }
         }
         else
         {
-          WAR << "'" << info.alias() << "' metadata path is empty. Can't set verifier. Probably this repository does not come from RepoManager." << endl;
+          WAR << "'" << repo.alias() << "' metadata path is empty. Can't set verifier. Probably this repository does not come from RepoManager." << endl;
         }
       }
 
-      std::map<shared_ptr<MediaSetAccess>, Repository> _verifier;
+      std::map<shared_ptr<MediaSetAccess>, RepoInfo> _verifier;
       std::map<Url, shared_ptr<MediaSetAccess> > _medias;
       ProvideFilePolicy _defaultPolicy;
     };
@@ -190,7 +189,7 @@ namespace zypp
     const ProvideFilePolicy & RepoMediaAccess::defaultPolicy() const
     { return _impl->_defaultPolicy; }
 
-    ManagedFile RepoMediaAccess::provideFile( Repository repo_r,
+    ManagedFile RepoMediaAccess::provideFile( RepoInfo repo_r,
                                               const OnMediaLocation & loc_r,
                                               const ProvideFilePolicy & policy_r )
     {
@@ -204,32 +203,31 @@ namespace zypp
       callback::TempConnect<repo::RepoReport> temp( dumb );
 
       Url url;
-      RepoInfo info = repo_r.info();
       
       RepoException repo_excpt(str::form(_("Can't provide file '%s' from repository '%s'"),
                                loc_r.filename().c_str(),
-                               info.alias().c_str() ) );
+                               repo_r.alias().c_str() ) );
       
-      if ( info.baseUrlsEmpty() )
+      if ( repo_r.baseUrlsEmpty() )
       {
         repo_excpt.remember(RepoException(_("No url in repository.")));
         ZYPP_THROW(repo_excpt);
       }
 
       Fetcher fetcher;
-      fetcher.addCachePath( info.packagesPath() );
+      fetcher.addCachePath( repo_r.packagesPath() );
       
-      MIL << "Added cache path " << info.packagesPath() << endl;
+      MIL << "Added cache path " << repo_r.packagesPath() << endl;
             
-      for ( RepoInfo::urls_const_iterator it = info.baseUrlsBegin();
-            it != info.baseUrlsEnd();
+      for ( RepoInfo::urls_const_iterator it = repo_r.baseUrlsBegin();
+            it != repo_r.baseUrlsEnd();
             /* incremented in the loop */ )
       {
         url = *it;
         ++it;
         try
         {
-          MIL << "Providing file of repo '" << info.alias()
+          MIL << "Providing file of repo '" << repo_r.alias()
               << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
           _impl->setVerifierForRepo(repo_r, access);
@@ -237,13 +235,13 @@ namespace zypp
 	  fetcher.enqueue( loc_r );
 	  
 	  // FIXME: works for packages only
-	  fetcher.start( info.packagesPath(), *access );
+	  fetcher.start( repo_r.packagesPath(), *access );
 
 	  // reached if no exception has been thrown, so this is the correct file
-          ManagedFile ret( info.packagesPath() + loc_r.filename() );
+          ManagedFile ret( repo_r.packagesPath() + loc_r.filename() );
 
           std::string scheme( url.getScheme() );
-          if ( !info.keepPackages() )
+          if ( !repo_r.keepPackages() )
           {
             ret.setDispose( filesystem::unlink );
           }

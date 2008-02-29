@@ -13,10 +13,9 @@
 #include <set>
 
 #include "zypp/base/Logger.h"
-
+#include "zypp/sat/Solvable.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 #include "zypp/pool/PoolStats.h"
-
 #include "zypp/solver/detail/InstallOrder.h"
 
 using std::endl;
@@ -232,7 +231,7 @@ namespace zypp
                 continue;
               }
 
-              if ( cobj->satSolvable().repo().id() == last_prio &&
+              if ( cobj->satSolvable().repository().id() == last_prio &&
                    cobj->mediaNr() == last_medianum ) {
                 // prefer packages on current media.
                 XXX << "Stay with current media " << *cit << endl;
@@ -250,9 +249,9 @@ namespace zypp
                       if ( cobj->mediaNr() < best_medianum ) {
                         best_list.clear(); // new best
                       } else if ( cobj->mediaNr() == best_medianum ) {
-                        if ( cobj->satSolvable().repo().id() < best_prio ) {
+                        if ( cobj->satSolvable().repository().id() < best_prio ) {
                           best_list.clear(); // new best
-                        } else if ( cobj->satSolvable().repo().id() == best_prio ) {
+                        } else if ( cobj->satSolvable().repository().id() == best_prio ) {
                           XXX << "Add to best list " << *cit << endl;
                           best_list.push_back( *cit ); // same as best -> add
                           continue;
@@ -265,9 +264,9 @@ namespace zypp
                     }
                   else // default: ORDER_BY_SOURCE
                     {
-                      if ( cobj->satSolvable().repo().id() < best_prio ) {
+                      if ( cobj->satSolvable().repository().id() < best_prio ) {
                         best_list.clear(); // new best
-                      } else if ( cobj->satSolvable().repo().id() == best_prio ) {
+                      } else if ( cobj->satSolvable().repository().id() == best_prio ) {
                         if ( cobj->mediaNr() < best_medianum ) {
                           best_list.clear(); // new best
                         } else if ( cobj->mediaNr() == best_medianum ) {
@@ -285,9 +284,9 @@ namespace zypp
 
                 if ( best_list.empty() )
                   {
-                    XXX << "NEW BEST LIST [S" << cobj->satSolvable().repo().id() << ":" << cobj->mediaNr()
+                    XXX << "NEW BEST LIST [S" << cobj->satSolvable().repository().id() << ":" << cobj->mediaNr()
                         << "] (last [S" << best_prio << ":" << best_medianum << "])" << endl;
-                    best_prio     = cobj->satSolvable().repo().id();
+                    best_prio     = cobj->satSolvable().repository().id();
                     best_medianum = cobj->mediaNr();
                     // first package or new best
                     XXX << "Add to best list " << *cit << endl;

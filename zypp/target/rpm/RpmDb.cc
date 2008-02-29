@@ -1241,7 +1241,8 @@ inline static void insertCaps( Capabilities &capset, capability::CapabilityImplP
 //
 Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
                                            set<string> * filerequires,
-                                           const Pathname & location, Repository repo )
+                                           const Pathname & location,
+					   Repository repo )
 {
   if ( ! header )
     return 0;

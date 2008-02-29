@@ -1,75 +1,169 @@
-#include <cassert>
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/** \file	zypp/sat/Repository.cc
+ *
+*/
 #include <iostream>
 
-#include "zypp/Repository.h"
-#include "zypp/repo/RepositoryImpl.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/base/Exception.h"
 
-using namespace std;
+#include "zypp/AutoDispose.h"
+#include "zypp/Pathname.h"
+
+#include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/Repository.h"
+#include "zypp/sat/Pool.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  const Repository Repository::noRepository;
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Repository::Repository
-  //	METHOD TYPE : Ctor
-  //
-  Repository::Repository()
-  : _pimpl( Impl::nullimpl() )
-  {}
-
-  Repository::Repository( const Impl_Ptr & impl_r )
-  : _pimpl( impl_r )
-  {
-    assert( impl_r );
-  }
-
-  Repository::Repository( const RepoInfo & info_r )
-  : _pimpl( new repo::RepositoryImpl( info_r ) )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Forward to RepositoryImpl:
-  //
   ///////////////////////////////////////////////////////////////////
 
-  Repository::NumericId Repository::numericId() const
-  { return _pimpl->numericId(); }
+    const Repository Repository::noRepository;
 
-  const RepoInfo & Repository::info() const
-  {
-    return _pimpl->info();
-  }
+    /////////////////////////////////////////////////////////////////
 
-  const std::list<packagedelta::PatchRpm> &
-  Repository::patchRpms() const
-  {
-    return _pimpl->patchRpms();
-  }
+    ::_Repo * Repository::get() const
+    { return myPool().getRepo( _id ); }
 
-  const std::list<packagedelta::DeltaRpm> &
-  Repository::deltaRpms() const
-  {
-    return _pimpl->deltaRpms();
-  }
+#define NO_REPOSITORY_RETURN( VAL ) \
+    ::_Repo * _repo( get() ); \
+    if ( ! _repo ) return VAL
 
-  std::ostream & operator<<( std::ostream & str, const Repository & obj )
-  {
-    return str << "[" << obj.info().alias() << "]";
-  }
+#define NO_REPOSITORY_THROW( VAL ) \
+    ::_Repo * _repo( get() ); \
+    if ( ! _repo ) ZYPP_THROW( VAL )
 
-  bool operator==( const Repository & lhs, const Repository & rhs )
-  {
-    return (lhs.info().alias() == rhs.info().alias());
-  }
+    bool Repository::isSystemRepo() const
+    {
+	NO_REPOSITORY_RETURN( false );
+	return( sat::Pool::systemRepoName() == _repo->name );
+    }
 
-  bool operator<( const Repository & lhs, const Repository & rhs )
-  {
-    return (lhs.info().alias() < rhs.info().alias());
-  }
-}
+    std::string Repository::name() const
+    {
+	NO_REPOSITORY_RETURN( std::string() );
+	if ( ! _repo->name )
+	    return std::string();
+	return _repo->name;
+    }
 
+    bool Repository::solvablesEmpty() const
+    {
+	NO_REPOSITORY_RETURN( true );
+	return _repo->nsolvables;
+    }
+
+    Repository::size_type Repository::solvablesSize() const
+    {
+	NO_REPOSITORY_RETURN( 0 );
+	return _repo->nsolvables;
+    }
+
+    Repository::SolvableIterator Repository::solvablesBegin() const
+    {
+	NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
+					      sat::detail::SolvableIterator(),
+					      sat::detail::SolvableIterator() ) );
+	return make_filter_iterator( detail::ByRepository( *this ),
+				     sat::detail::SolvableIterator(_repo->start),
+				     sat::detail::SolvableIterator(_repo->end) );
+    }
+
+    Repository::SolvableIterator Repository::solvablesEnd() const
+    {
+	NO_REPOSITORY_RETURN( make_filter_iterator( detail::ByRepository( *this ),
+					      sat::detail::SolvableIterator(),
+					      sat::detail::SolvableIterator() ) );
+	return make_filter_iterator(detail::ByRepository( *this ),
+				    sat::detail::SolvableIterator(_repo->end),
+				    sat::detail::SolvableIterator(_repo->end) );
+    }
+
+    RepoInfo Repository::info() const
+    {
+	NO_REPOSITORY_RETURN( RepoInfo() );
+	return myPool().repoInfo( _repo );
+    }
+
+    void Repository::setInfo( const RepoInfo & info_r )
+    {
+	NO_REPOSITORY_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
+	if ( info_r.alias() != name() )
+	{
+	    ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
+					      info_r.alias().c_str(), name().c_str() ) ) );
+	}
+	myPool().setRepoInfo( _repo, info_r );
+    }
+
+    void Repository::clearInfo()
+    {
+	NO_REPOSITORY_RETURN();
+	myPool().setRepoInfo( _repo, RepoInfo() );
+    }
+
+    void Repository::eraseFromPool()
+    {
+	NO_REPOSITORY_RETURN();
+	myPool()._deleteRepo( _repo );
+	_id = sat::detail::noRepoId;
+    }
+
+#warning NEED POOL MANIP EXEPTIONS
+    void Repository::addSolv( const Pathname & file_r )
+    {
+	NO_REPOSITORY_THROW( Exception( _("Can't add solvables to norepo.") ) );
+
+	AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
+	if ( file == NULL )
+	{
+	    file.resetDispose();
+	    ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
+	}
+
+	if ( myPool()._addSolv( _repo, file ) != 0 )
+	{
+	    ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
+	}
+    }
+
+    sat::detail::SolvableIdType Repository::addSolvables( unsigned count_r )
+    {
+	NO_REPOSITORY_THROW( Exception( _("Can't add solvables to norepo.") ) );
+	return myPool()._addSolvables( _repo, count_r );
+    }
+
+    /******************************************************************
+     **
+     **	FUNCTION NAME : operator<<
+     **	FUNCTION TYPE : std::ostream &
+     */
+    std::ostream & operator<<( std::ostream & str, const Repository & obj )
+    {
+	if ( ! obj )
+	    return str << "sat::repo()";
+
+	return str << "sat::repo(" << obj.name() << ")"
+		   << "{"
+		   << obj.solvablesSize()
+		   << ' ' << obj.get()->start << ' ' << obj.get()->end << ' '
+		   << (obj.get()->start < 0      ? "_START_":"")
+		   << (obj.get()->nsolvables < 0 ?"_NUMSOLV_":"")
+		   <<"}";
+    }
+
+
+    /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////

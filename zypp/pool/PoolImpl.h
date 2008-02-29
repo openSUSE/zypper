@@ -179,7 +179,7 @@ namespace zypp
             sat::Pool pool( satpool() );
             for_( it, pool.reposBegin(), pool.reposEnd() )
             {
-              _knownRepositoriesPtr->push_back( Repository( it->info() ) );
+              _knownRepositoriesPtr->push_back( *it );
             }
           }
           return *_knownRepositoriesPtr;

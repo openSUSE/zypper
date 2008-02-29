@@ -18,7 +18,6 @@
 
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/SolvAttr.h"
-
 #include "zypp/ResTraits.h"
 #include "zypp/IdString.h"
 #include "zypp/Edition.h"
@@ -76,7 +75,7 @@ namespace zypp
         bool isSystem() const;
 
         /** The \ref Repository this \ref Solvable belongs to. */
-        Repo repo() const;
+        Repository repository() const;
 
       public:
 

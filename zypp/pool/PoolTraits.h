@@ -29,7 +29,6 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class CapAndItem;
-  class Repository;
 
   ///////////////////////////////////////////////////////////////////
   namespace pool
@@ -144,11 +143,10 @@ namespace zypp
 
 
       /* list of known Repositories */
-      typedef std::list<Repository>                     RepoContainerT;
+      typedef std::list<Repository>	                RepoContainerT;
       typedef RepoContainerT::const_iterator		repository_iterator;
 
-
-
+	
       // internal organization
       typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs
       typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs

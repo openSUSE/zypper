@@ -12,10 +12,10 @@
 
 #include <zypp/base/Logger.h>
 #include "zypp/ResObject.h"
-#include "zypp/Repository.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/Repo.h"
+#include "zypp/Repository.h"
+#include "zypp/RepoInfo.h"
 
 using namespace zypp;
 using namespace std;
@@ -83,7 +83,10 @@ namespace zypp
   { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ), ByteCount::K ); }
 
   RepoInfo ResObject::repoInfo() const
-  { return repo().info(); }
+  { return repository().info(); }
+
+  Repository ResObject::repository() const
+  { return repository(); }
 
   unsigned ResObject::mediaNr() const
   { return lookupNumAttribute( sat::SolvAttr::medianr ); }

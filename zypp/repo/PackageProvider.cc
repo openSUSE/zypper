@@ -11,11 +11,10 @@
 */
 #include <iostream>
 #include <sstream>
+#include "zypp/repo/PackageDelta.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/UserRequestException.h"
-
-#include "zypp/Repository.h"
 #include "zypp/repo/PackageProvider.h"
 #include "zypp/repo/RepoProvideFile.h"
 #include "zypp/repo/Applydeltarpm.h"
@@ -23,7 +22,6 @@
 
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/Repository.h"
 #include "zypp/media/MediaManager.h"
 
 using std::endl;
@@ -87,7 +85,7 @@ namespace zypp
     ManagedFile PackageProvider::providePackage() const
     {
       Url url;
-      RepoInfo info = _package->repository().info();
+      RepoInfo info = _package->repoInfo();
       // FIXME we only support the first url for now.
       if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
@@ -122,7 +120,7 @@ namespace zypp
     ManagedFile PackageProvider::doProvidePackage() const
     {
       Url url;
-      RepoInfo info = _package->repository().info();
+      RepoInfo info = _package->repoInfo();
       // FIXME we only support the first url for now.
       if ( info.baseUrlsEmpty() )
         ZYPP_THROW(Exception("No url in repository."));
@@ -201,7 +199,7 @@ namespace zypp
       ProvideFilePolicy policy;
       policy.progressCB( bind( &PackageProvider::progressPackageDownload, this, _1 ) );
       policy.failOnChecksumErrorCB( bind( &PackageProvider::failOnChecksumError, this ) );
-      return _access.provideFile( _package->repository(), loc, policy );
+      return _access.provideFile( _package->repoInfo(), loc, policy );
     }
 
     ManagedFile PackageProvider::tryDelta( const DeltaRpm & delta_r ) const
@@ -220,7 +218,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressDeltaDownload, this, _1 ) );
-          delta = _access.provideFile( _package->repository(), delta_r.location(), policy );
+          delta = _access.provideFile( _package->repoInfo(), delta_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {
@@ -271,7 +269,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressPatchDownload, this, _1 ) );
-          patch = _access.provideFile( _package->repository(), patch_r.location(), policy );
+          patch = _access.provideFile( _package->repoInfo(), patch_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {

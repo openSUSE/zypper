@@ -14,7 +14,7 @@
 
 #include "zypp/Callback.h"
 #include "zypp/Resolvable.h"
-#include "zypp/Repository.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
@@ -34,7 +34,7 @@ namespace zypp
     { return true; }
 
 //     virtual Action problem(
-//         Repository /*source*/
+//         Repo /*source*/
 //         , Error /*error*/
 //         , const std::string &/*description*/ )
 //     { return ABORT; }

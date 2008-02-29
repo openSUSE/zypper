@@ -17,7 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Functional.h"
-#include "zypp/Repository.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/ProvideFilePolicy.h"
@@ -43,7 +43,7 @@ namespace zypp
      *
      * \throws Exception
     */
-    ManagedFile provideFile( Repository repo_r,
+    ManagedFile provideFile( RepoInfo repo_r,
                              const OnMediaLocation & loc_r,
                              const ProvideFilePolicy & policy_r = ProvideFilePolicy() );
 
@@ -73,12 +73,12 @@ namespace zypp
       * \throws Exception
       * \todo Investigate why this needs a non-const Repository as arg.
       */
-      ManagedFile provideFile( Repository repo_r,
+      ManagedFile provideFile( RepoInfo repo_r,
                                const OnMediaLocation & loc_r,
                                const ProvideFilePolicy & policy_r );
 
       /** \overload Using the current default \ref ProvideFilePolicy. */
-      ManagedFile provideFile( Repository repo_r, const OnMediaLocation & loc_r )
+      ManagedFile provideFile( RepoInfo repo_r, const OnMediaLocation & loc_r )
       { return provideFile( repo_r, loc_r, defaultPolicy() ); }
 
     public:

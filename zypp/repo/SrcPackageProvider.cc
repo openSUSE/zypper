@@ -58,7 +58,7 @@ namespace zypp
           OnMediaLocation location( (script_r.*location_r)() );
           if ( ! location.filename().empty() )
           {
-            ret = access_r.provideFile( script_r.repository(), location );
+            ret = access_r.provideFile( script_r.repoInfo(), location );
           }
           else
           {
@@ -95,7 +95,7 @@ namespace zypp
 
     ManagedFile SrcPackageProvider::provideSrcPackage( const SrcPackage_constPtr & srcPackage_r ) const
     {
-      return _access.provideFile( srcPackage_r->repository(), srcPackage_r->location() );
+      return _access.provideFile( srcPackage_r->repoInfo(), srcPackage_r->location() );
     }
 
     /////////////////////////////////////////////////////////////////

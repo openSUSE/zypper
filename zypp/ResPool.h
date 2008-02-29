@@ -56,7 +56,7 @@ namespace zypp
 
       typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
       typedef pool::PoolTraits::AdditionalCapabilities	   AdditionalCapabilities;
-      typedef pool::PoolTraits::repository_iterator        repository_iterator;
+      typedef pool::PoolTraits::repository_iterator              repository_iterator;
 
     public:
       /** Singleton ctor. */

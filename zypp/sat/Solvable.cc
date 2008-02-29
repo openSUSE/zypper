@@ -19,7 +19,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/Repo.h"
+#include "zypp/Repository.h"
 
 using std::endl;
 
@@ -58,14 +58,14 @@ namespace zypp
       return nosolvable;
     }
 
-    Repo Solvable::repo() const
+    Repository Solvable::repository() const
     {
-      NO_SOLVABLE_RETURN( Repo::norepo );
-      return Repo( _solvable->repo );
+      NO_SOLVABLE_RETURN( Repository::noRepository );
+      return Repository( _solvable->repo );
     }
 
     bool Solvable::isSystem() const
-    { return repo().isSystemRepo(); }
+    { return repository().isSystemRepo(); }
 
     IdString Solvable::ident() const
     {
@@ -477,7 +477,7 @@ namespace zypp
       return str << "(" << obj.id() << ")"
           << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()
           << '-' << obj.edition() << '.' << obj.arch() << "("
-          << obj.repo().name() << ")";
+          << obj.repository().name() << ")";
     }
 
     /******************************************************************

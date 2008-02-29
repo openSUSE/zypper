@@ -18,7 +18,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
-#include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/repo/RepoType.h"

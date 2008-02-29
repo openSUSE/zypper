@@ -17,7 +17,7 @@
 #include "zypp/Pathname.h"
 
 #include "zypp/sat/detail/PoolMember.h"
-#include "zypp/Repo.h"
+#include "zypp/Repository.h"
 #include "zypp/sat/WhatProvides.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ namespace zypp
     {
       public:
         typedef detail::SolvableIterator SolvableIterator;
-	typedef zypp::detail::RepoIterator     RepoIterator;	
+	typedef zypp::detail::RepositoryIterator     RepositoryIterator;	
         typedef detail::size_type        size_type;
 
       public:
@@ -72,50 +72,50 @@ namespace zypp
         /** Number of repos in \ref Pool. */
         size_type reposSize() const;
 
-        /** Iterator to the first \ref Repo. */
-        RepoIterator reposBegin() const;
+        /** Iterator to the first \ref Repository. */
+        RepositoryIterator reposBegin() const;
 
-        /** Iterator behind the last \ref Repo. */
-        RepoIterator reposEnd() const;
+        /** Iterator behind the last \ref Repository. */
+        RepositoryIterator reposEnd() const;
 
-        /** Return a \ref Repo named \c name_r.
-         * It a such a \ref Repo does not already exist
-         * a new empty \ref Repo is created.
+        /** Return a \ref Repository named \c name_r.
+         * It a such a \ref Repository does not already exist
+         * a new empty \ref Repository is created.
          */
-        Repo reposInsert( const std::string & name_r );
+        Repository reposInsert( const std::string & name_r );
 
-        /** Find a \ref Repo named \c name_r.
-         * Returns \ref norepo if there is no such \ref Repo.
+        /** Find a \ref Repository named \c name_r.
+         * Returns \ref norepository if there is no such \ref Repository.
          */
-        Repo reposFind( const std::string & name_r ) const;
+        Repository reposFind( const std::string & name_r ) const;
 
-        /** Remove a \ref Repo named \c name_r.
-         * \see \ref Repo::eraseFromPool
+        /** Remove a \ref Repository named \c name_r.
+         * \see \ref Repository::eraseFromPool
          */
         void reposErase( const std::string & name_r )
         { reposFind( name_r ).eraseFromPool(); }
 
       public:
-        /** Reserved system repo name \c @System. */
+        /** Reserved system repository name \c @System. */
         static const std::string & systemRepoName();
 
-        /** Return the system repo. */
-        Repo systemRepo()
+        /** Return the system repository. */
+        Repository systemRepo()
         { return reposInsert( systemRepoName() ); }
 
       public:
-        /** Load \ref Solvables from a solv-file into a \ref Repo named \c name_r.
-         * In case of an exception the \ref Repo is removed from the \ref Pool.
+        /** Load \ref Solvables from a solv-file into a \ref Repository named \c name_r.
+         * In case of an exception the \ref Repository is removed from the \ref Pool.
          * \throws Exception if loading the solv-file fails.
-         * \see \ref Repo::EraseFromPool
+         * \see \ref Repository::EraseFromPool
         */
-        Repo addRepoSolv( const Pathname & file_r, const std::string & name_r );
-        /** \overload Using the files basename as \ref Repo name. */
-        Repo addRepoSolv( const Pathname & file_r );
+        Repository addRepoSolv( const Pathname & file_r, const std::string & name_r );
+        /** \overload Using the files basename as \ref Repository name. */
+        Repository addRepoSolv( const Pathname & file_r );
         /** \overload Using the \ref RepoInfo::alias \ref Repo name.
          * Additionally stores the \ref RepoInfo. \See \ref Prool::setInfo.
         */
-        Repo addRepoSolv( const Pathname & file_r, const RepoInfo & info_r );
+        Repository addRepoSolv( const Pathname & file_r, const RepoInfo & info_r );
 
       public:
         /** Whether \ref Pool contains solvables. */

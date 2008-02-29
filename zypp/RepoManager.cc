@@ -913,7 +913,7 @@ namespace zypp
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException());
 
-    Repo repo = satpool.addRepoSolv(solvfile, info);
+    Repository repo = satpool.addRepoSolv(solvfile, info);
   }
 
   ////////////////////////////////////////////////////////////////////////////

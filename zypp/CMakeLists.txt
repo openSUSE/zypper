@@ -53,7 +53,6 @@ SET( zypp_SRCS
   Rel.cc
   RepoInfo.cc
   RepoManager.cc
-  Repository.cc
   RepoStatus.cc
   ResKind.cc
   ResObject.cc
@@ -77,7 +76,7 @@ SET( zypp_SRCS
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
   ZYppFactory.cc
-  Repo.cc
+  Repository.cc
 )
 SET( zypp_EARLY_SRCS
   ZConfig.cc
@@ -149,7 +148,6 @@ SET( zypp_HEADERS
   Rel.h
   RepoInfo.h
   RepoManager.h
-  Repository.h
   RepoStatus.h
   Filter.h
   ResFilters.h
@@ -181,7 +179,7 @@ SET( zypp_HEADERS
   ZYppCommitResult.h
   ZYppFactory.h
   ZYpp.h
-  Repo.h
+  Repository.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -706,7 +704,6 @@ INSTALL(  FILES
 
 SET( zypp_repo_SRCS
   repo/dummy.cc
-  repo/RepositoryImpl.cc
   repo/RepoException.cc
   repo/RepoType.cc
   repo/PackageProvider.cc
@@ -723,7 +720,6 @@ SET( zypp_repo_SRCS
 )
 
 SET( zypp_repo_HEADERS
-  repo/RepositoryImpl.h
   repo/RepoException.h
   repo/RepoType.h
   repo/PackageProvider.h

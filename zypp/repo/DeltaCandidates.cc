@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include "zypp/base/Logger.h"
-
+#include "zypp/Repository.h"
 #include "zypp/repo/DeltaCandidates.h"
 
 using std::endl;
@@ -66,7 +66,8 @@ namespace zypp
             ++it )
       {
         // all delta in repo
-        std::list<PatchRpm> candidates_in_repo = (*it).patchRpms();
+	#warning patchRpms are not implemented
+	std::list<PatchRpm> candidates_in_repo; // = (*it).patchRpms();
         for ( std::list<PatchRpm>::const_iterator dit = candidates_in_repo.begin();
               dit != candidates_in_repo.end();
               ++dit )
@@ -93,7 +94,8 @@ namespace zypp
             ++it )
       {
         // all delta in repo
-        std::list<DeltaRpm> candidates_in_repo = (*it).deltaRpms();
+	#warning deltaRpms are not implemented
+	std::list<DeltaRpm> candidates_in_repo; // = (*it).deltaRpms();
         for ( std::list<DeltaRpm>::const_iterator dit = candidates_in_repo.begin();
               dit != candidates_in_repo.end();
               ++dit )

@@ -165,7 +165,7 @@ namespace zypp
     _pimpl->_fnc = fnc;
 
     sat::Pool pool(sat::Pool::instance());
-    for ( sat::Pool::RepoIterator itr = pool.reposBegin();
+    for ( sat::Pool::RepositoryIterator itr = pool.reposBegin();
           itr != pool.reposEnd();
           ++itr )
     {

@@ -432,7 +432,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       p = _solv->decisionq.elements[i];
       if (p < 0 || !sat::Solvable(p))
 	continue;
-      if (sat::Solvable(p).repo().get() == _solv->installed)
+      if (sat::Solvable(p).repository().get() == _solv->installed)
 	continue;
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));

@@ -58,7 +58,7 @@ namespace zypp
           OnMediaLocation location( (script_r.*location_r)() );
           if ( ! location.filename().empty() )
           {
-            ret = access_r.provideFile( script_r.repository(), location );
+            ret = access_r.provideFile( script_r.repoInfo(), location );
           }
           else
           {

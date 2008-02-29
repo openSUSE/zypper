@@ -15,7 +15,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
-
+#include "zypp/repo/PackageDelta.h"
 #include "zypp/Repository.h"
 #include "zypp/Package.h"
 
@@ -67,13 +67,13 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** \relates DeltaCandidates Convenient construction. */
-    template<class RepositoryIter>
-    inline DeltaCandidates makeDeltaCandidates( RepositoryIter begin_r, RepositoryIter end_r )
+    template<class RepoIter>
+    inline DeltaCandidates makeDeltaCandidates( RepoIter begin_r, RepoIter end_r )
     { return DeltaCandidates( std::list<Repository>( begin_r, end_r ) ); }
 
     /** \relates DeltaCandidates Convenient construction. */
-    template<class RepositoryContainer>
-    inline DeltaCandidates makeDeltaCandidates( const RepositoryContainer & cont_r )
+    template<class RepoContainer>
+    inline DeltaCandidates makeDeltaCandidates( const RepoContainer & cont_r )
     { return makeDeltaCandidates( cont_r.begin(), cont_r.end() ); }
 
 

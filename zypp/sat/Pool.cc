@@ -58,11 +58,11 @@ namespace zypp
     Pool::size_type Pool::reposSize() const
     { return myPool()->nrepos; }
 
-    Pool::RepoIterator Pool::reposBegin() const
-    { return RepoIterator( myPool()->repos ); }
+    Pool::RepositoryIterator Pool::reposBegin() const
+    { return RepositoryIterator( myPool()->repos ); }
 
-    Pool::RepoIterator Pool::reposEnd() const
-    { return RepoIterator( myPool()->repos+myPool()->nrepos ); }
+    Pool::RepositoryIterator Pool::reposEnd() const
+    { return RepositoryIterator( myPool()->repos+myPool()->nrepos ); }
 
     bool Pool::solvablesEmpty() const
     {
@@ -96,13 +96,13 @@ namespace zypp
     Pool::SolvableIterator Pool::solvablesEnd() const
     { return SolvableIterator(); }
 
-    Repo Pool::reposInsert( const std::string & name_r )
+    Repository Pool::reposInsert( const std::string & name_r )
     {
-      Repo ret( reposFind( name_r ) );
+      Repository ret( reposFind( name_r ) );
       if ( ret )
         return ret;
 
-      ret = Repo( myPool()._createRepo( name_r ) );
+      ret = Repository( myPool()._createRepo( name_r ) );
       if ( name_r == systemRepoName() )
       {
         // autoprovide (dummy) RepoInfo
@@ -115,20 +115,20 @@ namespace zypp
       return ret;
     }
 
-    Repo Pool::reposFind( const std::string & name_r ) const
+    Repository Pool::reposFind( const std::string & name_r ) const
     {
       for_( it, reposBegin(), reposEnd() )
       {
         if ( name_r == it->name() )
           return *it;
       }
-      return Repo();
+      return Repository();
     }
 
-    Repo Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
+    Repository Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
     {
       // Using a temporay repo! (The additional parenthesis are required.)
-      AutoDispose<Repo> tmprepo( (Repo::EraseFromPool()) );
+      AutoDispose<Repository> tmprepo( (Repository::EraseFromPool()) );
       *tmprepo = reposInsert( name_r );
       tmprepo->addSolv( file_r );
 
@@ -137,12 +137,12 @@ namespace zypp
       return tmprepo;
     }
 
-    Repo Pool::addRepoSolv( const Pathname & file_r )
+    Repository Pool::addRepoSolv( const Pathname & file_r )
     { return addRepoSolv( file_r, file_r.basename() ); }
 
-    Repo Pool::addRepoSolv( const Pathname & file_r, const RepoInfo & info_r )
+    Repository Pool::addRepoSolv( const Pathname & file_r, const RepoInfo & info_r )
     {
-      Repo ret( addRepoSolv( file_r, info_r.alias() ) );
+      Repository ret( addRepoSolv( file_r, info_r.alias() ) );
       ret.setInfo( info_r );
       return ret;
     }
