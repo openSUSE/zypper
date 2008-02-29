@@ -10,11 +10,11 @@ stream-element =
       progress-elements* | download-progress-elements* | message-element* | prompt-element* |
 
       # special stuff (updates list, installation summary, search output, info)
-      update-status-element* |
-      install-summary-element* |
-      repo-list-element? |
-      list-element? |
-      info-element? |
+      update-status-element* |   # for zypper list-updates
+      install-summary-element* | # for zypper install/remove/update
+      repo-list-element? |       # for zypper repos
+      selectable-list-element? | # for zypper search
+      selectable-info-element? | # for zypper info
 
       # random text can appear between tags - this text should be ignored
       text
@@ -113,6 +113,11 @@ solvable-element =
     text?
   }
 
+selectable-element =
+  element selectable {
+    solvable-element+
+  }
+
 install-summary-element =
   element install-summary {
     attribute download-size { xsd:integer },    # download size in bytes
@@ -140,8 +145,34 @@ repo-list-element =
     }*
   }
 
-list-element =
-  element list { empty } # TODO
+selectable-list-element =
+  element selectable-list {
+    selectable-element*
+  }
 
-info-element =
-  element info { empty } # TODO
+selectable-info-element =
+  element selectable-info {
+    common-selectable-info &
+    (
+      package-selectable-info |
+      patch-selectable-info 
+      #pattern-selectable-info |
+      #product-selectable-info
+    )
+  }
+
+# TODO
+common-selectable-info =
+  attribute installed { xsd:boolean },
+  solvable-element+
+
+# TODO
+package-selectable-info =
+  attribute status { "up-to-date" | "out-of-date" }
+
+# TODO
+patch-selectable-info =
+  attribute status {
+    "installed" | "not-installed" | "not-applicable" | "no-longer-applicable" |
+    "applied" | "not-needed" | "broken" | "needed"
+  }
