@@ -5,6 +5,7 @@ Fri Feb 29 17:15:38 CET 2008 - jkupec@suse.cz
   list-updates, refresh, and *repo command complete (fate #302595)
 - install prompt.h to /usr/include/zypper and xmlout.rnc to
   /usr/share/zypper/xml
+- r8970
 - 0.10.2
 
 -------------------------------------------------------------------
