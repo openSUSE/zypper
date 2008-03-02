@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Mar  2 10:28:13 CET 2008 - coolo@suse.de
+
+- create cache directory before calling rpmdb2solv (in an empty
+  chroot)
+- version 4.3.1
+
+-------------------------------------------------------------------
 Thu Feb 28 16:43:11 CET 2008 - jkupec@suse.cz
 
 - special exception message if server returns 403 response
