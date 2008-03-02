@@ -327,8 +327,14 @@ namespace zypp
         ManagedFile guard( rpmsolv, filesystem::unlink );
         ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
 
-        filesystem::TmpFile tmpsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() ) /*dir*/,
+        filesystem::Pathname cachePath = Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() );
+
+        // if it does not exist yet, we better create it
+        filesystem::assert_dir( cachePath );
+
+        filesystem::TmpFile tmpsolv( cachePath /*dir*/,
                                      sat::Pool::instance().systemRepoName() /* prefix */ );
+
         ostringstream cmd;
         cmd << "rpmdb2solv";
 
