@@ -698,6 +698,12 @@ namespace zypp
 
       needs_cleaning = true;
     }
+    else {
+      /* if there is no cache at this point, we refresh the raw
+         in case this is the first time - if it's !autorefresh,
+         we may still refresh */
+      refreshMetadata(info, RefreshIfNeeded, progressrcv );
+    }
 
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;

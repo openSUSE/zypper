@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Mar  2 16:13:16 CET 2008 - coolo@suse.de
+
+- refresh metadata if there is no cache to unbreak compat with
+  kiwi (that relied on "zypper sa <url> <alias>" to create a repo
+  that "zypper in" could work on)
+
+-------------------------------------------------------------------
 Sun Mar  2 10:28:13 CET 2008 - coolo@suse.de
 
 - create cache directory before calling rpmdb2solv (in an empty
