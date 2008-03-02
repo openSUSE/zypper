@@ -675,7 +675,10 @@ namespace zypp
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
     {
-      ZYPP_THROW(RepoMetadataException(info));
+       /* if there is no cache at this point, we refresh the raw
+          in case this is the first time - if it's !autorefresh,
+          we may still refresh */
+      refreshMetadata(info, RefreshIfNeeded, progressrcv );
     }
 
     bool needs_cleaning = false;
