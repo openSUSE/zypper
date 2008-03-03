@@ -103,7 +103,7 @@ namespace zypp
       LocCallback *lc = (LocCallback *)vcbdata;
       switch (key->type)
       {
-        case TYPE_ID:
+        case REPOKEY_TYPE_ID:
           if (key->name == SolvAttr::mediadir.idStr().id())
           {
             if (data->localpool)
@@ -112,15 +112,15 @@ namespace zypp
               lc->mediadir = id2str(data->repo->pool, kv->id);
           }
           break;
-        case TYPE_STR:
+        case REPOKEY_TYPE_STR:
           if (key->name == SolvAttr::mediafile.idStr().id())
             lc->mediafile = kv->str;
           break;
-        case TYPE_VOID:
+        case REPOKEY_TYPE_VOID:
           if (key->name == SolvAttr::mediafile.idStr().id())
             lc->trivial = 1;
           break;
-        case TYPE_CONSTANT:
+        case REPOKEY_TYPE_CONSTANT:
           if (key->name == SolvAttr::medianr.idStr().id())
             lc->medianr = kv->num;
           break;
