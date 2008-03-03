@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar  3 17:10:26 CET 2008 - schubi@suse.de
+
+- (Update) Prevent reinstallation of installed packages.
+- revision 8984 
+
+-------------------------------------------------------------------
 Sun Mar  2 16:13:16 CET 2008 - coolo@suse.de
 
 - refresh metadata if there is no cache to unbreak compat with
