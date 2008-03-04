@@ -1719,9 +1719,12 @@ void solve_and_commit (Zypper & zypper)
         zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
         return;
       }
-      catch ( const Exception & excpt_r ) {
-        ZYPP_CAUGHT( excpt_r );
-        ZYPP_RETHROW( excpt_r );
+      catch ( const Exception & e ) {
+        ZYPP_CAUGHT(e);
+        zypper.out().error(e,
+            _("Problem occured during or after installation or removal of packages:"),
+            _("Please see the above error message for a hint."));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       }
     }
   }

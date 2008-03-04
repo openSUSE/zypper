@@ -1513,7 +1513,18 @@ void load_target_resolvables(Zypper & zypper)
   zypper.out().info(_("Reading installed packages..."));
   MIL << "Going to read RPM database" << endl;
 
-  God->target()->load();
+  try
+  {
+    God->target()->load();
+  }
+  catch ( const Exception & e )
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e,
+        _("Problem occured while reading the installed packages:"),
+        _("Please see the above error message for a hint."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+  }
 }
 
 // ---------------------------------------------------------------------------
