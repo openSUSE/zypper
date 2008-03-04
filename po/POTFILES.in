@@ -31,4 +31,5 @@
 ../src/zypper-getopt.h
 ../src/zypper-search.h
 ../src/checkpatches-keyring-callbacks.h
+../src/output/OutNormal.cc
 
