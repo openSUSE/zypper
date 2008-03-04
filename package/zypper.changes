@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Mar  4 16:09:05 CET 2008 - jkupec@suse.cz
+
+- appropriate error message for problems with rpm database during
+  reading installed packages or after installation (bnc #364370)
+- say 'no space will be freed/used' instead of '0 will be freed'
+  (bnc #309112)
+
+-------------------------------------------------------------------
 Fri Feb 29 17:15:38 CET 2008 - jkupec@suse.cz
 
 - --xmlout for repos, install, update, dist-upgrade, remove,
