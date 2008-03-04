@@ -351,7 +351,7 @@ namespace zypp
           }
           else
           {
-            MIL << "mkdir " << path << ' ' << str::octstring( mode );
+            MIL << "mkdir " << path << ' ' << str::octstring( mode ) << endl;
           }
           lastpos = pos+1;
         }
