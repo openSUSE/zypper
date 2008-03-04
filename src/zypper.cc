@@ -663,10 +663,10 @@ void Zypper::safeDoCommand()
   {
     ZYPP_CAUGHT(ex);
 
-    ostringstream s;
-    s << _("Unexpected exception.") << endl;
-    s << ex.asUserString();
-    out().error(s.str());
+    Out::Verbosity tmp = out().verbosity(); 
+    out().setVerbosity(Out::DEBUG);
+    out().error(ex, _("Unexpected exception."));
+    out().setVerbosity(tmp);
 
     report_a_bug(out());
   }
