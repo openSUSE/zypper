@@ -901,10 +901,8 @@ int summary(Zypper & zypper)
     // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
     s << format(_("After the operation, additional %s will be used."))
         % new_installed_size.asString(0,1,1);
-  //! \todo uncomment the following for bug #309112
-  /*
   else if (new_installed_size == 0)
-    s << _("No additional space will be used or freed after the operation.");*/
+    s << _("No additional space will be used or freed after the operation.");
   else
   {
     // get the absolute size
