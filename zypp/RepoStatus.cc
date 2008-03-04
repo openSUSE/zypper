@@ -34,10 +34,10 @@ namespace zypp
   {
 
   public:
-    
+
     string checksum;
     Date timestamp;
-    
+
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
     {
@@ -85,7 +85,7 @@ namespace zypp
   RepoStatus RepoStatus::fromCookieFile( const Pathname &cookiefile )
   {
     RepoStatus status;
-    
+
     std::ifstream file(cookiefile.c_str());
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
@@ -119,7 +119,7 @@ namespace zypp
         _pimpl->timestamp = Date(info.mtime());
       }
   }
-  
+
   bool RepoStatus::empty() const
   {
     return _pimpl->checksum.empty();
@@ -136,23 +136,28 @@ namespace zypp
     _pimpl->timestamp = timestamp;
     return *this;
   }
-  
+
   string RepoStatus::checksum() const
   { return _pimpl->checksum; }
 
   Date RepoStatus::timestamp() const
   { return _pimpl->timestamp; }
-  
-  RepoStatus operator&&( const RepoStatus &lhs, const RepoStatus &rhs )
+
+  RepoStatus operator&&( const RepoStatus & lhs, const RepoStatus & rhs )
   {
+    if ( lhs.empty() )
+      return rhs;
+    if ( rhs.empty() )
+      return lhs;
+
+    std::string lchk( lhs.checksum() );
+    std::string rchk( rhs.checksum() );
+    // order strings to assert && is kommutativ
+    stringstream ss( lchk < rchk ? lchk+rchk : rchk+lchk );
+
     RepoStatus result;
-    string combinedcs = (lhs.checksum() + rhs.checksum());
-    stringstream ss(combinedcs);
-    CheckSum newcs(CheckSum::sha1(ss));
-    result.setChecksum(newcs.checksum());
-    result.setTimestamp(lhs.timestamp());
-    if ( rhs.timestamp() > lhs.timestamp() )
-      result.setTimestamp(rhs.timestamp());
+    result.setChecksum( CheckSum::sha1(ss).checksum() );
+    result.setTimestamp( lhs.timestamp() < rhs.timestamp() ? rhs.timestamp() : lhs.timestamp() );
     return result;
   }
 

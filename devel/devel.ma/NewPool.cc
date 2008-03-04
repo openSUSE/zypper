@@ -508,10 +508,7 @@ try {
     }
   }
 
-  satpool.addRequestedLocale( Locale("de_DE") );
-  satpool.addRequestedLocale( Locale("pt_BR") );
-
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -523,9 +520,6 @@ try {
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
-
-  MIL << "pool: " << pool.getRequestedLocales() << endl;
-  install();
 
   if ( 0 )
   {

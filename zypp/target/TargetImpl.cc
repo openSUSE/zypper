@@ -381,7 +381,7 @@ namespace zypp
       Pathname rpmsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + system.name() ).extend(".solv") );
       MIL << "adding " << rpmsolv << " to pool(" << system.name() << ")";
 #warning PROBABLY CLEAR NONEMTY SYSTEM REPO
-      system.addSolv(rpmsolv);
+      system.addSolv( rpmsolv );
 
       // (Re)Load the requested locales.
       // If the requested locales are empty, we leave the pool untouched

@@ -670,7 +670,6 @@ namespace zypp
     Pathname base = _pimpl->options.repoCachePath + info.escaped_alias();
     Pathname solvfile = base.extend(".solv");
 
-    //cache::SolvStore store(_pimpl->options.repoCachePath);
 
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
@@ -679,6 +678,7 @@ namespace zypp
           in case this is the first time - if it's !autorefresh,
           we may still refresh */
       refreshMetadata(info, RefreshIfNeeded, progressrcv );
+      raw_metadata_status = metadataStatus(info);
     }
 
     bool needs_cleaning = false;
@@ -701,12 +701,6 @@ namespace zypp
 
       needs_cleaning = true;
     }
-    else {
-      /* if there is no cache at this point, we refresh the raw
-         in case this is the first time - if it's !autorefresh,
-         we may still refresh */
-      refreshMetadata(info, RefreshIfNeeded, progressrcv );
-    }
 
     ProgressData progress(100);
     callback::SendReport<ProgressReport> report;
@@ -716,18 +710,10 @@ namespace zypp
 
     if (needs_cleaning)
     {
-//       Pathname name = _pimpl->options.repoCachePath;
-//       //data::RecordId id = store.lookupRepository(info.alias());
-//       ostringstream os;
-//       os << id.get();
-//       name += os.str() + ".solv";
-//       unlink (name);
-//       cleanCacheInternal( store, info);
       cleanCache(info);
     }
 
     MIL << info.alias() << " building cache..." << endl;
-    //data::RecordId id = store.lookupOrAppendRepository(info.alias());
     // do we have type?
     repo::RepoType repokind = info.type();
 
@@ -910,19 +896,29 @@ namespace zypp
     status.saveToCookieFile(cookiefile);
   }
 
-  void RepoManager::loadFromCache( const RepoInfo &info,
+  void RepoManager::loadFromCache( const RepoInfo & info,
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    sat::Pool satpool( sat::Pool::instance() );
     string alias = info.escaped_alias();
-
-    Pathname solvfile = (_pimpl->options.repoCachePath + alias).extend(".solv");
+    Pathname solvfile = (_pimpl->options.repoCachePath / alias).extend(".solv");
 
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException());
 
-    Repository repo = satpool.addRepoSolv(solvfile, info);
+    try
+    {
+      sat::Pool::instance().addRepoSolv( solvfile, info );
+    }
+    catch ( const Exception & exp )
+    {
+      ZYPP_CAUGHT( exp );
+      MIL << "Try to handle exception by rebuilding the solv-file" << endl;
+      cleanCache( info, progressrcv );
+      buildCache( info, BuildIfNeeded, progressrcv );
+
+      sat::Pool::instance().addRepoSolv( solvfile, info );
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////

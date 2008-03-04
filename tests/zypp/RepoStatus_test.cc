@@ -16,6 +16,18 @@ using namespace zypp::filesystem;
 
 BOOST_AUTO_TEST_CASE(repostatus_test)
 {
-  TmpDir tmpPath;
+  TmpFile tmpPath;
+  TmpFile tmpPath2;
   RepoStatus status;
+  RepoStatus fstatus( tmpPath );
+  RepoStatus fstatus2( tmpPath2 );
+  BOOST_CHECK_EQUAL( status.empty(), true );
+  BOOST_CHECK_EQUAL( (status&&status).empty(), true );
+
+  BOOST_CHECK_EQUAL( fstatus.empty(), false );
+  BOOST_CHECK_EQUAL( (fstatus&&status).empty(), false );
+
+  BOOST_CHECK_EQUAL( (fstatus&&status).checksum(), (status&&fstatus).checksum() );
+  BOOST_CHECK_EQUAL( (fstatus&&fstatus2).checksum(), (fstatus2&&fstatus).checksum() );
+
 }
