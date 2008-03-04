@@ -80,7 +80,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _dosplitprovides;		/* true: consider legacy split provides */
     
     // ---------------------------------- methods
-    std::string SATprobleminfoString (Id problem);
+    std::string SATprobleminfoString (Id problem, std::string &detail);
 
   public:
 

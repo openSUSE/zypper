@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
+#include <sstream>
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/base/String.h"
 #include "zypp/Capability.h"
@@ -33,6 +33,7 @@
 #include "zypp/CapFilters.h"
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/WhatProvides.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
 extern "C" {
@@ -68,6 +69,35 @@ int vendorCheck (Pool *pool, Solvable *solvable1, Solvable *solvable2) {
 //    DBG << "vendorCheck: " << id2str(pool, solvable1->vendor) << " <--> " << id2str(pool, solvable1->vendor) << endl;
     return VendorAttr::instance().equivalent(id2str(pool, solvable1->vendor), id2str(pool, solvable2->vendor)) ? 0:1;
 }
+
+
+string
+itemToString (PoolItem item, bool shortVersion)
+{
+    ostringstream os;
+    if (!item) return "";
+
+    if (item->kind() != ResTraits<zypp::Package>::kind)
+	os << item->kind() << ':';
+    os  << item->name();
+    if (!shortVersion) {
+	os << '-' << item->edition();
+	if (item->arch() != "") {
+	    os << '.' << item->arch();
+	}
+	Repository s = item->repository();
+	if (s) {
+	    string alias = s.info().alias();
+	    if (!alias.empty()
+		&& alias != "@system")
+	    {
+		os << '[' << s.info().alias() << ']';
+	    }
+	}
+    }
+    return os.str();
+}
+	
 
 //---------------------------------------------------------------------------
 
@@ -506,7 +536,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 };
 
 
-std::string SATResolver::SATprobleminfoString(Id problem)
+string SATResolver::SATprobleminfoString(Id problem, string &detail)
 {
   string ret;
   Pool *pool = _solv->pool;
@@ -552,7 +582,55 @@ std::string SATResolver::SATprobleminfoString(Id problem)
 	  break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("%s requires %s, but none of the providers can be installed"), solvable2str(pool, s), dep2str(pool, dep));
+	  Capability cap(dep);
+	  sat::WhatProvides possibleProviders(cap);
+
+	  // check, if a provider will be deleted
+	  typedef list<PoolItem> ProviderList;
+	  ProviderList providerlistInstalled, providerlistUninstalled;
+	  for_( iter1, possibleProviders.begin(), possibleProviders.end() ) {
+	      PoolItem provider1 = ResPool::instance().find( *iter1 );
+	      // find pair of an installed/uninstalled item with the same NVR
+	      bool found = false;
+	      for_( iter2, possibleProviders.begin(), possibleProviders.end() ) {
+		  PoolItem provider2 = ResPool::instance().find( *iter2 );		  
+		  if (compareByNVR (provider1.resolvable(),provider2.resolvable()) == 0
+		      && (provider1.status().isInstalled() && provider2.status().isUninstalled() 
+			  || provider2.status().isInstalled() && provider1.status().isUninstalled()))  {
+		      found = true;
+		      break;
+		  }
+	      }
+	      if (!found) {
+		  if (provider1.status().isInstalled())
+		      providerlistInstalled.push_back(provider1);
+		  else
+		      providerlistUninstalled.push_back(provider1);
+	      }
+	  }
+
+	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), solvable2str(pool, s), dep2str(pool, dep));
+	  if (providerlistInstalled.size() > 0) {
+	      detail += _("deleted providers: ");
+	      for (ProviderList::const_iterator iter = providerlistInstalled.begin(); iter != providerlistInstalled.end(); iter++) {
+		  if (iter == providerlistInstalled.begin())
+		      detail += itemToString (*iter, false);
+		  else
+		      detail += "\n                   " + itemToString (*iter, false);
+	      }
+	  }
+	  if (providerlistUninstalled.size() > 0) {
+	      if (detail.size() > 0)
+		  detail += _("\nuninstallable providers: ");
+	      else
+		  detail = _("uninstallable providers: ");		  
+	      for (ProviderList::const_iterator iter = providerlistUninstalled.begin(); iter != providerlistUninstalled.end(); iter++) {
+		  if (iter == providerlistUninstalled.begin())
+		      detail += itemToString (*iter, false);		      
+		  else
+		      detail += "\n                   " + itemToString (*iter, false);		      
+	      }
+	  }	  
 	  break;
   }
 
@@ -576,10 +654,11 @@ SATResolver::problems ()
 	while ((problem = solver_next_problem(_solv, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
-	    string whatString = SATprobleminfoString(problem);
+	    string detail;
+	    string whatString = SATprobleminfoString (problem,detail);
 	    MIL << whatString << endl;
 	    MIL << "------------------------------------" << endl;
-	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, "");
+	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail);
 	    solution = 0;
 	    while ((solution = solver_next_solution(_solv, problem, solution)) != 0) {
 		element = 0;
