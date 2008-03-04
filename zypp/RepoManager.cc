@@ -335,7 +335,6 @@ namespace zypp
 
       case RepoType::YAST2_e :
       {
-        // the order of RepoStatus && RepoStatus matters! (#304310)
         status = RepoStatus( rawpath + "/content") && (RepoStatus( rawpath + "/media.1/media"));
       }
       break;
