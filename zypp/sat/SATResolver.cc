@@ -743,8 +743,9 @@ SATResolver::problems ()
 				}
 				if (!_solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(_solv, s, sd))
 				{
-				    string description = str::form (_("vendor change of [%s]%s to [%s]%s") , id2str(pool, s->vendor) , solvable2str(pool, s),
-								      string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str(),  solvable2str(pool, sd));
+				    string description = str::form (_("install %s (with vendor change)\n  %s\n-->\n  %s") ,
+								    solvable2str(pool, sd) , id2str(pool, s->vendor),
+								    string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str() );
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
