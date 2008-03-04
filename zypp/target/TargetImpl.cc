@@ -113,20 +113,13 @@ namespace zypp
         }
 
         int exitCode = prog.close();
-        /* FIXME
         if ( exitCode != 0 )
         {
-          storage_r.setObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
           std::ostringstream err;
           err << "Script failed with exit code " << exitCode;
           report->problem( err.str() );
           ZYPP_THROW(Exception(err.str()));
         }
-        else if ( storage_r.doesObjectHasFlag( script_r, "SCRIPT_EXEC_FAILED" ) )
-        {
-          storage_r.removeObjectFlag( script_r, "SCRIPT_EXEC_FAILED" );
-        }
-        */
         report->finish();
         return;
       }
@@ -276,6 +269,7 @@ namespace zypp
     //
     TargetImpl::TargetImpl(const Pathname & root_r)
     : _root(root_r)
+    , _requestedLocalesFile( home() / "RequestedLocales" )
     {
       _rpm.initDatabase(root_r);
       MIL << "Initialized target on " << _root << endl;
@@ -379,27 +373,28 @@ namespace zypp
 
     void TargetImpl::load()
     {
-      Pathname base = Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + sat::Pool::instance().systemRepoName() );
-      Pathname rpmsolv = base.extend(".solv");
-
       buildCache();
 
-      //now add the repos to the pool
-      MIL << "adding " << rpmsolv << " to pool(" << sat::Pool::instance().systemRepoName() << ")";
-      Repository system = sat::Pool::instance().systemRepo();
+      // now add the repos to the pool
+      sat::Pool satpool( sat::Pool::instance() );
+      Repository system( satpool.systemRepo() );
+      Pathname rpmsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + system.name() ).extend(".solv") );
+      MIL << "adding " << rpmsolv << " to pool(" << system.name() << ")";
+#warning PROBABLY CLEAR NONEMTY SYSTEM REPO
       system.addSolv(rpmsolv);
 
+      // (Re)Load the requested locales.
+      // If the requested locales are empty, we leave the pool untouched
+      // to avoid undoing changes the application applied. We expect this
+      // to happen on a bare metal installation only. An already existing
+      // target should be loaded before its settings are changed.
+      const LocaleSet & requestedLocales( _requestedLocalesFile.locales() );
+      if ( ! requestedLocales.empty() )
+      {
+        satpool.setRequestedLocales( requestedLocales );
+      }
+
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
-    }
-
-    Pathname TargetImpl::root() const
-    {
-      return _root;
-    }
-
-    void TargetImpl::reset()
-    {
-      // FIXME remove
     }
 
     ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
@@ -413,6 +408,12 @@ namespace zypp
       // ----------------------------------------------------------------- //
 
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
+
+      // Store non-package data:
+      filesystem::assert_dir( home() );
+      _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
+
+      // Process packages:
       ZYppCommitResult result;
 
       TargetImpl::PoolItemList to_uninstall;
@@ -486,6 +487,8 @@ namespace zypp
         result._srcremaining.insert(result._srcremaining.end(), bad.begin(), bad.end());
       }
 
+      // Try to rebuild solv file while rpm database is still in cache.
+      buildCache();
 
       result._result = (to_install.size() - result._remaining.size());
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ") returns: " << result << endl;
@@ -715,8 +718,6 @@ namespace zypp
       if ( abort )
         ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
 
-      buildCache();
-
       return remaining;
     }
 
@@ -739,33 +740,7 @@ namespace zypp
 
     Date TargetImpl::timestamp() const
     {
-      Date ts_rpm;
-      Date ts_store;
-
-      ts_rpm = _rpm.timestamp();
-
-      PathInfo store_info = PathInfo( _root + Pathname(ZYPP_DB) + "_store.solv" );
-      if (store_info.isExist() )
-        ts_store = Date(store_info.mtime());
-      else
-         ts_store = Date::now();
-
-      if ( ts_rpm > ts_store )
-      {
-        return ts_rpm;
-      }
-      else if (ts_rpm < ts_store)
-      {
-        return ts_store;
-      }
-      else
-      {
-        // they are the same
-        if ( ts_rpm != 0 )
-          return ts_rpm;
-        else
-          return Date::now();
-      }
+      return _rpm.timestamp();
     }
 
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )

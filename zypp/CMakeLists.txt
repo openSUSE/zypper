@@ -547,6 +547,7 @@ INSTALL(  FILES
 
 
 SET( zypp_target_SRCS
+  target/RequestedLocalesFile.cc
   target/CommitLog.cc
   target/CommitPackageCache.cc
   target/CommitPackageCacheImpl.cc
@@ -557,6 +558,7 @@ SET( zypp_target_SRCS
 )
 
 SET( zypp_target_HEADERS
+  target/RequestedLocalesFile.h
   target/CommitLog.h
   target/CommitPackageCache.h
   target/CommitPackageCacheImpl.h

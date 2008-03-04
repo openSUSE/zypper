@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar  4 12:57:58 CET 2008 - ma@suse.de
+ 
+- Save and restore requested locales on target load/commit.
+- revision 8999
+
+-------------------------------------------------------------------
 Mon Mar  3 17:10:26 CET 2008 - schubi@suse.de
 
 - (Update) Prevent reinstallation of installed packages.

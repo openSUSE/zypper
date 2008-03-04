@@ -6,6 +6,7 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Debug.h>
 #include <zypp/base/Functional.h>
+#include <zypp/base/IOStream.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
@@ -19,11 +20,13 @@
 #include "zypp/ResObjects.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
+#include "zypp/TmpPath.h"
 #include "zypp/ManagedFile.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/pool/GetResolvablesToInsDel.h"
 
 #include "zypp/RepoManager.h"
+#include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
 
 #include "zypp/repo/PackageProvider.h"
@@ -32,10 +35,7 @@
 #include "zypp/ResPoolProxy.h"
 
 #include "zypp/sat/Pool.h"
-#include "zypp/sat/Repo.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/detail/PoolImpl.h"
+//#include "zypp/sat/detail/PoolImpl.h"
 
 #include <zypp/base/GzStream.h>
 
@@ -418,14 +418,12 @@ void testCMP( const L & lhs, const R & rhs )
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-namespace sat
-{ /////////////////////////////////////////////////////////////////
 
+  class RequestedLocalesFile
+  {
+  };
 
-  /////////////////////////////////////////////////////////////////
-} // namespace sat
-///////////////////////////////////////////////////////////////////
+  /** \relates RequestedLocalesFile Stream output */
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
@@ -452,46 +450,66 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
-  RepoManager repoManager( makeRepoManager( sysRoot ) );
-  RepoInfoList repos = repoManager.knownRepositories();
-
-  // launch repos
-  for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+  if ( 1 )
   {
-    RepoInfo & nrepo( *it );
-    SEC << nrepo << endl;
+    RepoManager repoManager( makeRepoManager( sysRoot ) );
+    RepoInfoList repos = repoManager.knownRepositories();
 
-    if ( ! nrepo.enabled() )
-      continue;
-
-    if ( ! repoManager.isCached( nrepo ) || /*force*/false )
-    {
-      if ( repoManager.isCached( nrepo ) )
-      {
-	SEC << "cleanCache" << endl;
-	repoManager.cleanCache( nrepo );
-      }
-      SEC << "refreshMetadata" << endl;
-      repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
-      SEC << "buildCache" << endl;
-      repoManager.buildCache( nrepo );
-    }
-  }
-
-  // create from cache:
-  {
-    Measure x( "CREATE FROM CACHE" );
+    // launch repos
     for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
     {
       RepoInfo & nrepo( *it );
+      SEC << nrepo << endl;
+
       if ( ! nrepo.enabled() )
         continue;
 
-      Measure x( "CREATE FROM CACHE "+nrepo.alias() );
-      repoManager.loadFromCache( nrepo );
-      USR << "pool: " << pool << endl;
+      if ( ! repoManager.isCached( nrepo ) || /*force*/false )
+      {
+        if ( repoManager.isCached( nrepo ) )
+        {
+          SEC << "cleanCache" << endl;
+          repoManager.cleanCache( nrepo );
+        }
+        SEC << "refreshMetadata" << endl;
+        repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+        SEC << "buildCache" << endl;
+        repoManager.buildCache( nrepo );
+      }
+    }
+
+    // create from cache:
+    {
+      Measure x( "CREATE FROM CACHE" );
+      for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
+      {
+        RepoInfo & nrepo( *it );
+        if ( ! nrepo.enabled() )
+          continue;
+
+        Measure x( "CREATE FROM CACHE "+nrepo.alias() );
+        try
+        {
+          repoManager.loadFromCache( nrepo );
+        }
+        catch ( const Exception & exp )
+        {
+          MIL << "Try to rebuild cache..." << endl;
+          SEC << "cleanCache" << endl;
+          repoManager.cleanCache( nrepo );
+          SEC << "buildCache" << endl;
+          repoManager.buildCache( nrepo );
+          SEC << "Create from cache" << endl;
+          repoManager.loadFromCache( nrepo );
+        }
+
+        USR << "pool: " << pool << endl;
+      }
     }
   }
+
+  satpool.addRequestedLocale( Locale("de_DE") );
+  satpool.addRequestedLocale( Locale("pt_BR") );
 
   if ( 1 )
   {
@@ -506,39 +524,8 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
-  function<bool(const sat::Solvable &)> _sel( bind( boost::mem_fun_ref( &sat::Solvable::isSystem ), _1 ) );
-  for_( it,
-        satpool.filterBegin( _sel ),
-        satpool.filterEnd  ( _sel ) )
-  {
-    INT << *it << endl;
-  }
-
-  satpool.addRequestedLocale( Locale("de") );
-  satpool.addRequestedLocale( Locale("cs") );
-
-  LocaleSet s;
-  s.insert( Locale("de") );
-
-//   MIL << satpool.getAvailableLocales() << endl;
-
-  {
-    Measure x( "de" );
-    filter::ByLocaleSupport f( Locale("de") );
-    for_( it, satpool.filterBegin(f), satpool.filterEnd(f) )
-    {
-      MIL << *it << endl;
-    }
-  }
-
-
-
-
-
-
-
-  //MIL << sat::WhatProvides( Capability("amarok") ) << endl;
-  //MIL << sat::WhatProvides( Capability("amarok == 1.4.7-37.4") ) << endl;
+  MIL << "pool: " << pool.getRequestedLocales() << endl;
+  install();
 
   if ( 0 )
   {
@@ -571,6 +558,11 @@ try {
   zypp::base::LogControl::instance().logNothing();
   return 0;
 }
+catch ( const Exception & exp )
+{
+  INT << exp << endl << exp.historyAsString();
+}
 catch (...)
 {}
+
 

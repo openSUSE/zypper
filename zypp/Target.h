@@ -64,14 +64,9 @@ namespace zypp
      */
     void load();
 
-    /**
-     * reload the target in future calls if
-     * needed.
-     * note the loading can actually be delayed, but
-     * the next call to resolvables must reflect the
-     * status of the system.
+    /** \deprecated NOOP
     */
-    void reset();
+    ZYPP_DEPRECATED void reset() {}
 
     /** Null implementation */
     static Target_Ptr nullimpl();
@@ -96,6 +91,7 @@ namespace zypp
 
     /** return the last modification date of the target */
     Date timestamp() const;
+
   public:
     /** Ctor */
     explicit

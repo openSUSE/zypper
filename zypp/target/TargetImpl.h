@@ -28,6 +28,7 @@
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/TargetException.h"
+#include "zypp/target/RequestedLocalesFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -70,11 +71,16 @@ namespace zypp
       void load();
 
       void buildCache();
-      
+
     public:
 
       /** The root set for this target */
-      Pathname root() const;
+      Pathname root() const
+      { return _root; }
+
+      /** The directory to store things. */
+      Pathname home() const
+      { return _root / "/var/lib/zypp"; }
 
       /** Commit changes in the pool */
       ZYppCommitResult commit( ResPool pool_r, const ZYppCommitPolicy & policy_r );
@@ -127,20 +133,13 @@ namespace zypp
       /** return the last modification date of the target */
       Date timestamp() const;
 
-     /**
-      * reload the target in future calls if
-      * needed.
-      * note the loading can actually be delayed, but
-      * the next call to resolvables must reflect the
-      * status of the system.
-     */
-     void reset();
-
     protected:
       /** Path to the target */
       Pathname _root;
       /** RPM database */
       rpm::RpmDb _rpm;
+      /** Requested Locales database */
+      RequestedLocalesFile _requestedLocalesFile;
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;
