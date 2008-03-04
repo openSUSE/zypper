@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar  4 16:09:14 CET 2008 - schubi@suse.de
+
+- improved problem description while a vendor change
+- improved problem description if a requirement cannot be fulfilled. Bug #358560
+- revision 9002
+
+-------------------------------------------------------------------
 Tue Mar  4 12:57:58 CET 2008 - ma@suse.de
  
 - Save and restore requested locales on target load/commit.
