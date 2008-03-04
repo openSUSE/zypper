@@ -147,6 +147,7 @@ namespace zypp
       /** Dtor */
       ~ZConfig();
     private:
+      friend class Impl;
       /** Default ctor. */
       ZConfig();
       /** Pointer to implementation */

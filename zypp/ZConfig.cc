@@ -141,7 +141,7 @@ namespace zypp
   class ZConfig::Impl
   {
     public:
-      Impl()
+      Impl( const Pathname & override_r = Pathname() )
         : cfg_arch                ( defaultSystemArchitecture() )
         , cfg_textLocale          ( defaultTextLocale() )
         , repo_add_probe          ( false )
@@ -152,9 +152,21 @@ namespace zypp
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
 
-	// ZYPP_CONF might override /etc/zypp/zypp.conf
-        const char *env_confpath = getenv( "ZYPP_CONF" );
-        Pathname confpath( env_confpath ? env_confpath : "/etc/zypp/zypp.conf" );
+	// override_r has higest prio
+        // ZYPP_CONF might override /etc/zypp/zypp.conf
+        Pathname confpath( override_r );
+        if ( confpath.empty() )
+        {
+          const char *env_confpath = getenv( "ZYPP_CONF" );
+          confpath = env_confpath ? env_confpath : "/etc/zypp/zypp.conf";
+        }
+        else
+        {
+          // Inject this into ZConfig. Be shure this is
+          // allocated via new. See: reconfigureZConfig
+          INT << "Reconfigure to " << confpath << endl;
+          ZConfig::instance()._pimpl.reset( this );
+        }
         if ( PathInfo(confpath).isExist() )
         {
           parser::IniDict dict( confpath );
@@ -267,6 +279,14 @@ namespace zypp
 
   };
   ///////////////////////////////////////////////////////////////////
+
+  // Backdoor to redirect ZConfig from within the running
+  // TEST-application. HANDLE WITH CARE!
+  void reconfigureZConfig( const Pathname & override_r )
+  {
+    // ctor puts itself unter smart pointer control.
+    new ZConfig::Impl( override_r );
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
