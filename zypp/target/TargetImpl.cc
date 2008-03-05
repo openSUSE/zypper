@@ -286,6 +286,13 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
+    void TargetImpl::clearCache()
+    {
+      Pathname base = Pathname::assertprefix( _root,
+                                              ZConfig::instance().repoCachePath() / sat::Pool::instance().systemRepoName() );
+      filesystem::unlink( base.extend(".solv") );
+      filesystem::unlink( base.extend(".cookie") );
+    }
 
     void TargetImpl::buildCache()
     {
@@ -379,9 +386,22 @@ namespace zypp
       sat::Pool satpool( sat::Pool::instance() );
       Repository system( satpool.systemRepo() );
       Pathname rpmsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + system.name() ).extend(".solv") );
-      MIL << "adding " << rpmsolv << " to pool(" << system.name() << ")";
+      MIL << "adding " << rpmsolv << " to pool(" << system.name() << ")" << endl;
 #warning PROBABLY CLEAR NONEMTY SYSTEM REPO
-      system.addSolv( rpmsolv );
+
+      try
+      {
+        system.addSolv( rpmsolv );
+      }
+      catch ( const Exception & exp )
+      {
+        ZYPP_CAUGHT( exp );
+        MIL << "Try to handle exception by rebuilding the solv-file" << endl;
+        clearCache();
+        buildCache();
+
+        system.addSolv( rpmsolv );
+      }
 
       // (Re)Load the requested locales.
       // If the requested locales are empty, we leave the pool untouched

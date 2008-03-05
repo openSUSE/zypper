@@ -70,6 +70,8 @@ namespace zypp
 
       void load();
 
+      void clearCache();
+
       void buildCache();
 
     public:

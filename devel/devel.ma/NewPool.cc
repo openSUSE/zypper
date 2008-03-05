@@ -508,7 +508,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {

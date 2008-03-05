@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar  5 11:33:26 CET 2008 - ma@suse.de
+	
+- Try to rebuild broken solv files in Target::load.
+- revision 9015
+
+-------------------------------------------------------------------
 Tue Mar  4 18:17:41 CET 2008 - ma@suse.de
  
 - Try to rebuild broken solv files in RepoManager::loadFromCache.
