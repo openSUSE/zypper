@@ -542,7 +542,8 @@ static bool show_problems(Zypper & zypper)
 
   // display the number of problems
   if (rproblems.size() > 1)
-    zypper.out().info(boost::str(format(_("%s Problems:")) % rproblems.size()));
+    zypper.out().info(boost::str(format(
+      _PL("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()));
   else if (rproblems.empty())
   {
     // should not happen! If solve() failed at least one problem must be set!
