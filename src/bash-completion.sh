@@ -1,5 +1,12 @@
 # zypper completion v 0.2 aplha 1 :-) (This is not feature complete version!)
 # A hackweek gift from Marek Stopka <marekstopka@gmail.com>
+#
+# some TODOs:
+# - complete package names for install/remove/update
+# - make sure the default file completion always works for:
+#   * install (to install plain rpms)
+#   * addrepo --repo (to specify .repo file)
+#   * maybe other cases   
 
 _zypper() {
 	ZYPPER="/usr/bin/zypper"
