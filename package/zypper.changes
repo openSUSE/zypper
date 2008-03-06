@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar  6 11:21:34 CET 2008 - jkupec@suse.cz
+
+- don't show download progress of the media file if not vebose
+  (bnc #330614)
+- r9026
+
+-------------------------------------------------------------------
 Tue Mar  4 16:09:05 CET 2008 - jkupec@suse.cz
 
 - appropriate error message for problems with rpm database during
