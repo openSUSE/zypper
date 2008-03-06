@@ -154,6 +154,8 @@ namespace zypp
         if ( _watcher.remember( _serial ) )
         {
           /* nothing to do here, but _watcher MUST remember... */
+	  // set pool architecture
+          ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
         }
         if ( ! _pool->whatprovides )
         {
@@ -176,7 +178,8 @@ namespace zypp
           {
             Arch::CompatSet sysarchs( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
             for_( it, sysarchs.begin(), sysarchs.end() )
-              sysids.insert( it->idStr().id() );
+	       sysids.insert( it->idStr().id() );
+
             // unfortunately satsolver treats src/nosrc as architecture:
             sysids.insert( ARCH_SRC );
             sysids.insert( ARCH_NOSRC );
