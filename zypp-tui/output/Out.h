@@ -10,10 +10,42 @@
 #include "prompt.h"
 
 /**
+ * Base class for producing common (for now) zypper output.
  * 
- * - Logger (DBG, MIL, ...) must be in place
- * - out.XX wherever output is needed
+ * This is an abstract class providing interface for writing output like
+ * info messages, warnings, error messages, user prompts, progress reports,
+ * and download progress reports. See descriptions of the methods for more
+ * details.
  * 
+ * The output is produced using Out derived class instances.
+ * 
+ * <code>
+ * 
+ * // create output object
+ * SomePointerType<Out> out;
+ * if (options.count("xmlout"))
+ *   out = new OutXML();
+ * else
+ *   out = new OutNormal();
+ * 
+ * out->info("output instance ready to use", Out::HIGH);
+ * out->info("Doing foo");
+ * try
+ * {
+ *   foo();
+ *   out->prompt(PROMPT_FOO, "Need your action?", "y/n"); // see output/prompt.h
+ *   if (action())
+ *     out->info("result", Out::QUIET);                // always show the result
+ *   else
+ *     cout << "special result" << endl; // special output must be done
+ *                                       // the usual way for now
+ * }
+ * catch(const zypp::Exception & e)
+ * {
+ *   out->error(e, "Problem doing foo", "Do 'bar' to deal with this");
+ * }
+ *
+ * </code>
  */
 class Out : private zypp::base::NonCopyable
 {
@@ -23,13 +55,16 @@ public:
   {
     /** Only important messages (no progress or status, only the result). */
     QUIET  = 0,
-    /**  */
+    /** Default output verbosity level. Progress for important tasks, moderate
+     * amount of status messages, operation information, result. */
     NORMAL = 1,
     /** More detailed description of the operations. */
     HIGH   = 2,
+    /** \todo drop this level in favor of zypper.log? */
     DEBUG  = 3
   } Verbosity;
 
+  /** Known output types implemented by derived classes. */
   typedef enum
   {
     TYPE_NORMAL = 1,
@@ -83,7 +118,7 @@ public:
    * \param hint         Hint for the user (what to do, or explanation)
    */
   virtual void error(const std::string & problem_desc, const std::string & hint = "") = 0;
-  
+
   /**
    * Prints the problem description caused by an exception, its cause and,
    * optionaly, a hint for the user.
@@ -96,17 +131,46 @@ public:
                      const std::string & problem_desc,
                      const std::string & hint = "") = 0;
 
-  // virtual void table()
-  // virtual void text()
+  //! \todo provide an error() method with a/r/i prompt, more read_action_ari here
 
-  /** \name Progress */
+  /** \name Progress of an operation. */
   //@{
+  /**
+   * Start of an operation with reported progress.
+   * 
+   * \param id      Identifier. Any string used to match multiple overlapping
+   *                progress reports (doesn't happen now,
+   *                but probably will in the future).
+   * \param label   Progress description.
+   * \param is_tick <tt>false</tt> for known progress percentage, <tt>true</tt>
+   *                for 'still alive' notifications
+   */
   virtual void progressStart(const std::string & id,
                              const std::string & label,
                              bool is_tick = false) = 0;
+
+  /**
+   * Progress report for an on-going operation.
+   * 
+   * \param id      Identifier. Any string used to match multiple overlapping
+   *                progress reports.
+   * \param label   Progress description.
+   * \param value   Percentage value or <tt>-1</tt> if unknown ('still alive'
+   *                notification)
+   */
   virtual void progress(const std::string & id,
                         const std::string & label,
                         int value = -1) = 0;
+
+  /**
+   * End of an operation with reported progress.
+   * 
+   * \param id      Identifier. Any string used to match multiple overlapping
+   *                progress reports.
+   * \param label   Progress description.
+   * \param error   <tt>false</tt> if the operation finished with success,
+   *                <tt>true</tt> otherwise.
+   */
   virtual void progressEnd(const std::string & id,
                            const std::string & label,
                            bool error = false) = 0; // might be a string with error message instead
@@ -115,11 +179,15 @@ public:
   /** \name Download progress with download rate */
   //@{
   /**
+   * Reoprt start of a download.
+   * 
    * \param uri   Uri of the file to download. 
    */
   virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
 
   /**
+   * Reports download progress.
+   * 
    * \param uri   Uri of the file being downloaded. 
    * \param value Value of the progress in percents. -1 if unknown.
    * \param rate  Download rate. -1 if unknown.
@@ -128,6 +196,8 @@ public:
                              int value = -1,
                              int rate = -1) = 0;
   /**
+   * Reports end of a download.
+   * 
    * \param uri   Uri of the file to download. 
    * \param rate  Final download rate. -1 if unknown.
    * \param error Error flag - did the download finish with error?
@@ -137,6 +207,15 @@ public:
                                 bool error = false) = 0;
   //@}
 
+  /**
+   * Prompt the user for a decision.
+   * 
+   * \param id           Unique prompt identifier for use by machines.
+   * \param prompt       Prompt text.
+   * \param answer_hint  list of answers separated by '/'. \todo improve this
+   * 
+   * \see prompt.h 
+   */
   virtual void prompt(PromptId id,
                       const std::string & prompt,
                       const std::string & answer_hint) = 0;
