@@ -439,6 +439,14 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;
+    _solv->fixsystem = _fixsystem;
+    _solv->updatesystem = _updatesystem;
+    _solv->allowdowngrade = _allowdowngrade;
+    _solv->allowuninstall = _allowuninstall;
+    _solv->allowarchchange = _allowarchchange;
+    _solv->dosplitprovides = _dosplitprovides;
+    _solv->noupdateprovide = _noupdateprovide;
+    
     sat::Pool::instance().prepare();
 
     // Solve !
