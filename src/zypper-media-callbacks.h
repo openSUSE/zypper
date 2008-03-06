@@ -71,26 +71,39 @@ namespace ZmartRecipients
   // progress for downloading a file
   struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
   {
-    DownloadProgressReportReceiver() : _gopts(Zypper::instance()->globalOpts())
+    DownloadProgressReportReceiver()
+      : _gopts(Zypper::instance()->globalOpts()), _be_quiet(false)
     {}
 
     virtual void start( const zypp::Url & uri, zypp::Pathname localfile )
     {
       Out & out = Zypper::instance()->out();
-      // don't show download info unless show_media_progress_hack is used 
-      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
+
+      if (out.verbosity() < Out::HIGH &&
+           (
+             // don't show download info unless show_media_progress_hack is used 
+             !gData.show_media_progress_hack ||
+             // don't report download of the media file (bnc #330614)
+             zypp::Pathname(uri.getPathName()).basename() == "media"
+           )
+         )
+      {
+        _be_quiet = true;
         return;
+      }
+      else
+        _be_quiet = false;
+
       out.dwnldProgressStart(uri);
     }
 
     //! \todo return false on SIGINT
     virtual bool progress(int value, const zypp::Url & uri)
     {
-      Out & out = Zypper::instance()->out();
-      // don't show download info unless show_media_progress_hack is used 
-      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
+      if (_be_quiet)
         return true;
-      out.dwnldProgress(uri, value); //! \todo add rate
+
+      Zypper::instance()->out().dwnldProgress(uri, value); //! \todo add transfer rate
       return true;
     }
 
@@ -98,10 +111,9 @@ namespace ZmartRecipients
     virtual DownloadProgressReport::Action
     problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
-      Out & out = Zypper::instance()->out();
-      if (gData.show_media_progress_hack || out.verbosity() >= Out::HIGH)
-        out.dwnldProgressEnd(uri, true);
-      out.error(zcb_error2str(error, description));
+      if (_be_quiet)
+        Zypper::instance()->out().dwnldProgressEnd(uri, true);
+      Zypper::instance()->out().error(zcb_error2str(error, description));
 
       return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
     }
@@ -109,15 +121,15 @@ namespace ZmartRecipients
     // used only to finish, errors will be reported in media change callback (libzypp 3.20.0)
     virtual void finish( const zypp::Url & uri, Error error, const std::string & konreason )
     {
-      Out & out = Zypper::instance()->out();
-      // don't show download info unless show_media_progress_hack is used 
-      if (!gData.show_media_progress_hack && out.verbosity() < Out::HIGH)
+      if (_be_quiet)
         return;
-      out.dwnldProgressEnd(uri);
+
+      Zypper::instance()->out().dwnldProgressEnd(uri);
     }
-    
+
   private:
     const GlobalOptions & _gopts;
+    bool _be_quiet;
   };
 
 
