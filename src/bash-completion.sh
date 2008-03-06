@@ -9,7 +9,7 @@
 #   * maybe other cases   
 
 _zypper() {
-	ZYPPER="/usr/bin/zypper"
+	ZYPPER="/usr/bin/zypper -q"
 	local magic_string="Command options:"
 	local opts cur prev prevprev
 	if test ${#MODLIST[*]} = 0; then
