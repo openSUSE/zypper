@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar  6 18:35:09 CET 2008 - jkupec@suse.cz
+
+- bash completion script added (thanx to Marek Stopka)
+- r9035
+
+-------------------------------------------------------------------
 Thu Mar  6 11:21:34 CET 2008 - jkupec@suse.cz
 
 - don't show download progress of the media file if not vebose
