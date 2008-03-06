@@ -84,6 +84,7 @@ touch %buildroot%_var/log/zypper.log
 %files -f zypper.lang
 %defattr(-,root,root)
 %{_sysconfdir}/logrotate.d/zypper.lr
+%{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/installation_sources
 %{_sbindir}/zypp-checkpatches

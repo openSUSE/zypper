@@ -80,6 +80,12 @@ INSTALL(
   RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
 )
 
+INSTALL(
+  FILES bash-completion.sh
+  DESTINATION ${SYSCONFDIR}/bash_completion.d
+  RENAME zypper.sh
+)
+
 ADD_EXECUTABLE( zypp-checkpatches-wrapper zypp-checkpatches-wrapper.c )
 TARGET_LINK_LIBRARIES( zypp-checkpatches-wrapper ${ZYPP_LIBRARY} )
 
