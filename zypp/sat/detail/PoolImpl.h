@@ -101,8 +101,11 @@ namespace zypp
             eraseRepoInfo( repo_r );
           }
 
-          /** Adding solv file to a repo. */
-          int _addSolv( ::_Repo * repo_r, FILE * file_r );
+          /** Adding solv file to a repo.
+           * Except for \c isSystemRepo_r, solvables of incompatible architecture
+           * are filtered out.
+          */
+          int _addSolv( ::_Repo * repo_r, FILE * file_r, bool isSystemRepo_r = false );
 
           /** Adding Solvables to a repo. */
           detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r )

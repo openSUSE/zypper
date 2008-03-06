@@ -94,6 +94,7 @@ namespace zypp
       PoolImpl::PoolImpl()
       : _pool( ::pool_create() )
       {
+        MIL << "Creating sat-pool." << endl;
         if ( ! _pool )
         {
           ZYPP_THROW( Exception( _("Can not create sat-pool.") ) );
@@ -102,9 +103,6 @@ namespace zypp
         bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
         ::pool_setdebuglevel( _pool, verbose ? 5 : 1 );
         ::pool_setdebugcallback( _pool, logSat, NULL );
-
-        // set pool architecture
-        ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
 
         // set namespace callback
         _pool->nscallback = &nsCallback;
@@ -153,8 +151,8 @@ namespace zypp
       {
         if ( _watcher.remember( _serial ) )
         {
-          /* nothing to do here, but _watcher MUST remember... */
-	  // set pool architecture
+          // After repo/solvable add/remove:
+          // set pool architecture
           ::pool_setarch( _pool,  ZConfig::instance().systemArchitecture().asString().c_str() );
         }
         if ( ! _pool->whatprovides )
@@ -167,11 +165,11 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
 
-      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
+      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r, bool isSystemRepo_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_solv( repo_r , file_r  );
-        if ( ret == 0 )
+        if ( ret == 0 && ! isSystemRepo_r )
         {
           // Filter out unwanted archs
           std::set<detail::IdType> sysids;

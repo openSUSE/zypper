@@ -443,7 +443,7 @@ namespace zypp
 */
 int main( int argc, char * argv[] )
 try {
-  //zypp::base::LogControl::instance().logfile( "log.restrict" );
+  zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
 
   sat::Pool satpool( sat::Pool::instance() );

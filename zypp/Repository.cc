@@ -132,7 +132,7 @@ namespace zypp
 	    ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
 	}
 
-	if ( myPool()._addSolv( _repo, file ) != 0 )
+	if ( myPool()._addSolv( _repo, file, isSystemRepo() ) != 0 )
 	{
 	    ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
 	}
