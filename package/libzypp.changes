@@ -3,6 +3,7 @@ Thu Mar  6 13:42:53 CET 2008 - ma@suse.de
 
 - Do not filter any installed solvables.
 - revision 9031
+- version 4.3.2
 
 -------------------------------------------------------------------
 Wed Mar  5 11:33:26 CET 2008 - ma@suse.de
