@@ -216,7 +216,8 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   return false; // no error
 }
 
-bool match_repo(Zypper & zypper, string str, RepoInfo *repo){
+bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
+{
   RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> known = manager.knownRepositories();
   bool founded = false;  
@@ -282,9 +283,10 @@ void get_repos(Zypper & zypper,
       
       // alias
       if (repo_it->alias() != repo.alias())
+      {
         equals = false;
-
-      if (equals)
+      }
+      else
       {
         // URIs (all of them)
         for (RepoInfo::urls_const_iterator urlit = repo_it->baseUrlsBegin();
@@ -297,7 +299,8 @@ void get_repos(Zypper & zypper,
           catch(const url::UrlException &){}
       }
 
-      if (equals){
+      if (equals)
+      {
         duplicate = true;
         break;
       }

@@ -1494,7 +1494,8 @@ void Zypper::doCommand()
       string type = copts.count("type") ? copts["type"].front() : "";
   
       // display help message if insufficient info was given
-      switch (_arguments.size()){
+      switch (_arguments.size())
+      {
       case 0:
         out().error(_("Too few arguments."));
         ERR << "Too few arguments." << endl;
@@ -1572,9 +1573,12 @@ void Zypper::doCommand()
     for (vector<string>::const_iterator it = _arguments.begin();
 	it!= _arguments.end();++it){
       RepoInfo repo;
-      if (match_repo(*this,*it,&repo)){
+      if (match_repo(*this,*it,&repo))
+      {
 	repo_to_remove.push_back(repo);
-      } else {
+      }
+      else
+      {
 	MIL << "Repository not found by given alias, number or URL." << endl;
 	out().error(boost::str(format(
 	  //TranslatorExplanation %s is string which was not found (can be url,
@@ -1585,7 +1589,8 @@ void Zypper::doCommand()
     }
 
     for (std::list<RepoInfo>::const_iterator it = repo_to_remove.begin();
-      it!=repo_to_remove.end();++it){
+      it!=repo_to_remove.end();++it)
+    {
       if (!remove_repo(*this,*it))
 	ERR << "Repository '" << it->alias() << "' found but cound not be"
 	    " removed with root privileges. Should not happen." << endl;
@@ -1629,9 +1634,12 @@ void Zypper::doCommand()
     warn_if_zmd ();
     try {
       RepoInfo repo;
-      if (match_repo(*this,_arguments[0], &repo)){
+      if (match_repo(*this,_arguments[0], &repo))
+      {
 	rename_repo(*this, repo.alias(), _arguments[1]);
-      } else {
+      }
+      else
+      {
 	 out().error(boost::str(format(
            _("Repository '%s' not found.")) % _arguments[0]));
          ERR << "Repo " << _arguments[0] << " not found" << endl;
@@ -1679,9 +1687,12 @@ void Zypper::doCommand()
     }
   
     RepoInfo repo;
-    if (match_repo(*this,_arguments[0],&repo)){
+    if (match_repo(*this,_arguments[0],&repo))
+    {
       modify_repo(*this, repo.alias());
-    } else {
+    }
+    else 
+    {
       out().error(
         boost::str(format(_("Repository %s not found.")) % _arguments[0]));
       ERR << "Repo " << _arguments[0] << " not found" << endl;
