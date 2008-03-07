@@ -854,9 +854,9 @@ void Zypper::processCommandOptions()
     specific_options = service_add_options;
     _command_help = boost::str(format(_(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-      "addrepo (ar) [options] <URI> <alias>\n"
+      "addrepo (ar) [options] <URI> [<alias>]\n"
       "\n"
-      "Add repository specified by URI to the system and assing the specified alias to it.\n"
+      "Add repository specified by URI to the system and assing the specified alias to it or specified by URI to repo file.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
@@ -1494,34 +1494,37 @@ void Zypper::doCommand()
       string type = copts.count("type") ? copts["type"].front() : "";
   
       // display help message if insufficient info was given
-      if (_arguments.size() < 2)
-      {
-        out().error(
-          _("Too few arguments. At least URL and alias are required."));
-        ERR << "Too few arguments. At least URL and alias are required." << endl;
+      switch (_arguments.size()){
+      case 0:
+        out().error(_("Too few arguments."));
+        ERR << "Too few arguments." << endl;
         out().info(_command_help);
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
-      }
+      case 1:
+        add_repo_from_file(*this,_arguments[0], enabled, refresh);
+	break;
+      case 2:
+	Url url = make_url (_arguments[0]);
+        if (!url.isValid())
+        {
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
 
-      Url url = make_url (_arguments[0]);
-      if (!url.isValid())
-      {
-        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        // by default, enable the repo and set autorefresh to false
+        if (indeterminate(enabled)) enabled = true;
+        if (indeterminate(refresh)) refresh = false;
+
+        warn_if_zmd();
+
+        // load gpg keys
+        init_target(*this);
+
+        add_repo_by_url(
+	    *this, url, _arguments[1]/*alias*/, type, enabled, refresh);
         return;
       }
-
-      // by default, enable the repo and set autorefresh to false
-      if (indeterminate(enabled)) enabled = true;
-      if (indeterminate(refresh)) refresh = false;
-
-      warn_if_zmd();
-
-      // load gpg keys
-      init_target(*this);
-
-      add_repo_by_url(
-          *this, url, _arguments[1]/*alias*/, type, enabled, refresh);
     }
     catch (const repo::RepoUnknownTypeException & e)
     {
@@ -1638,7 +1641,7 @@ void Zypper::doCommand()
       if (match_repo(*this,_arguments[0], &repo)){
 	rename_repo(*this, repo.alias(), _arguments[1]);
       } else {
-	 this->out().error(boost::str(format(
+	 out().error(boost::str(format(
            _("Repository '%s' not found.")) % _arguments[0]));
          ERR << "Repo " << _arguments[0] << " not found" << endl;
       }
@@ -1688,7 +1691,7 @@ void Zypper::doCommand()
     if (match_repo(*this,_arguments[0],&repo)){
       modify_repo(*this, repo.alias());
     } else {
-      this->out().error(
+      out().error(
         boost::str(format(_("Repository %s not found.")) % _arguments[0]));
       ERR << "Repo " << _arguments[0] << " not found" << endl;
     }
