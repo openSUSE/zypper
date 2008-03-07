@@ -1565,15 +1565,6 @@ void Zypper::doCommand()
       return;
     }
 
-    // too many arguments
-    //! \todo allow to specify multiple repos to delete
-/*    else if (_arguments.size() > 1)
-    {
-      report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    } */
-
     warn_if_zmd ();
 
     //must store repository before remove to ensure correct match number
@@ -1586,8 +1577,8 @@ void Zypper::doCommand()
       } else {
 	MIL << "Repository not found by given alias, number or URL." << endl;
 	out().error(boost::str(format(
-	  //TranslatorExplanation %s is string which not founded (can be url,
-	  //allias or number of repo)
+	  //TranslatorExplanation %s is string which was not found (can be url,
+	  //alias or the repo number)
 	  _("Repository %s not found by alias, number or URL."))
 	    % *it));
       }
@@ -1596,8 +1587,8 @@ void Zypper::doCommand()
     for (std::list<RepoInfo>::const_iterator it = repo_to_remove.begin();
       it!=repo_to_remove.end();++it){
       if (!remove_repo(*this,*it))
-	MIL << "Repository is founded but cannot remove with root privilegies."
-	  << "Should not happen." << endl ;
+	ERR << "Repository '" << it->alias() << "' found but cound not be"
+	    " removed with root privileges. Should not happen." << endl;
     }
 
     return;

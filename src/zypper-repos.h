@@ -43,8 +43,8 @@ void clean_repos(Zypper & zypper);
  * Try match given string with any known repository.
  * 
  * \param str string to match
- * \param repo pointer to fill with founded repository
- * \return success if respository is founded
+ * \param repo pointer to fill with found repository
+ * \return success if respository is found
  */
 bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo);
 
