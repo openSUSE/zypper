@@ -1,16 +1,18 @@
 -------------------------------------------------------------------
 Fri Mar  7 14:57:37 CET 2008 - jreidinger@suse.cz
 
-- addrepo can accept one argument and it must be URI to .repo file
-  (bcn #240018)
+- addrepo now allows to use a .repo file URI as an argument
+  (bnc #240018)
+- r9047
 
 -------------------------------------------------------------------
 Fri Mar  7 12:56:21 CET 2008 - jreidinger@suse.cz
 
 - allow write repo as number or URL -repo and for repo-manipulating
   commands (bnc #298312)
-- allow multiple repos in removerepo command
+- allow multiple repos in removerepo command (bnc #244440)
 - r9044
+
 -------------------------------------------------------------------
 Thu Mar  6 18:35:09 CET 2008 - jkupec@suse.cz
 
