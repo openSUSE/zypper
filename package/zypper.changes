@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar  7 14:57:37 CET 2008 - jreidinger@suse.cz
+
+- addrepo can accept one argument and it must be URI to .repo file
+  (bcn #240018)
+
+-------------------------------------------------------------------
 Fri Mar  7 12:56:21 CET 2008 - jreidinger@suse.cz
 
 - allow write repo as number or URL -repo and for repo-manipulating
