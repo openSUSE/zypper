@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar  7 12:56:21 CET 2008 - jreidinger@suse.cz
+
+- allow write repo as number or URL -repo and for repo-manipulating
+  commands (bnc #298312)
+- allow multiple repos in removerepo command
+- r9044
+-------------------------------------------------------------------
 Thu Mar  6 18:35:09 CET 2008 - jkupec@suse.cz
 
 - bash completion script added (thanx to Marek Stopka)
