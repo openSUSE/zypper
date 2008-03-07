@@ -2037,10 +2037,9 @@ void Zypper::doCommand()
 
     try
     {
-      
       FillTable callback( t, query );
-      query.execute(_arguments[0], callback );
-  
+      query.execute(_arguments.empty()? string() : _arguments[0], callback );
+
       if (t.empty())
         out().info(_("No resolvables found."), Out::QUIET);
       else {
