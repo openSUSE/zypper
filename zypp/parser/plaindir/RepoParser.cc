@@ -138,7 +138,8 @@ class RepoParser::Impl
     {
       _ticks.sendTo( fnc_r );
     }
-    int extract_packages_from_directory( const Pathname & path,
+    int extract_packages_from_directory( const Pathname & rootpath,
+                                         const Pathname & subdir,
                                          bool recursive);
     /** Main entry to parser. */
     void parse( const Pathname & reporoot_r );
@@ -161,7 +162,7 @@ class RepoParser::Impl
 //
 void RepoParser::Impl::parse( const Pathname & reporoot_r )
 {
-  extract_packages_from_directory( reporoot_r, true );
+  extract_packages_from_directory( reporoot_r, Pathname(), true );
 /*if ( ! _ticks.incr() )
       ZYPP_THROW( AbortRequestException() );*/
   // Done
@@ -169,10 +170,12 @@ void RepoParser::Impl::parse( const Pathname & reporoot_r )
     ZYPP_THROW( AbortRequestException() );
 }
 
-int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
+int RepoParser::Impl::extract_packages_from_directory( const Pathname & rootpath,
+                                                       const Pathname & subdir, 
                                                        bool recursive)
 {
   using target::rpm::RpmHeader;
+  Pathname path = rootpath / subdir;
   Pathname filename;
   PathInfo magic;
   bool distro_magic, pkginfo_magic;
@@ -212,14 +215,16 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & path,
   for (std::list<std::string>::const_iterator it = dircontent.begin(); it != dircontent.end(); ++it) {
     Pathname file_path = path + *it;
     PathInfo file_info( file_path );
-    if (recursive && file_info.isDir()) {
-
-      extract_packages_from_directory( file_path, recursive );
-
-    } else if (file_info.isFile() && file_path.extension() == ".rpm" ) {
+    if (recursive && file_info.isDir())
+    {
+      extract_packages_from_directory( rootpath, subdir / *it, recursive );
+    }
+    else if (file_info.isFile() && file_path.extension() == ".rpm" )
+    {
       RpmHeader::constPtr header = RpmHeader::readPackage( file_path, RpmHeader::NOSIGNATURE );
 #warning FIX creation of Package from src.rpm header
-      data::Package_Ptr package = makePackageDataFromHeader( header, NULL, *it, _repositoryId );
+      // make up proper location relative to rootpath (bnc #368218)
+      data::Package_Ptr package = makePackageDataFromHeader( header, NULL, subdir / *it, _repositoryId );
       if (package != NULL) {
 	if (Arch(package->arch).compatibleWith(_sysarch))
 	{
