@@ -4,6 +4,7 @@
 #include <boost/logic/tribool.hpp>
 
 #include "zypp/Url.h"
+#include "zypp/RepoInfo.h"
 
 #include "zypper.h"
 
@@ -37,6 +38,15 @@ void refresh_repos(Zypper & zypper);
  * Clean caches for all repositories.
  */
 void clean_repos(Zypper & zypper);
+
+/**
+ * Try match given string with any known repository.
+ * 
+ * \param str string to match
+ * \param repo pointer to fill with founded repository
+ * \return success if respository is founded
+ */
+bool match_repo(Zypper & zypper, const std::string str, zypp::RepoInfo *repo);
 
 
 /**

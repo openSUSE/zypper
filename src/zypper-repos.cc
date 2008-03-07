@@ -216,6 +216,37 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   return false; // no error
 }
 
+bool match_repo(Zypper & zypper, string str, RepoInfo *repo){
+  RepoManager manager(zypper.globalOpts().rm_options);
+  list<RepoInfo> known = manager.knownRepositories();
+  bool founded = false;  
+  
+  unsigned int number = 1; // repo number
+  for (list<RepoInfo>::const_iterator known_it = known.begin();
+      known_it != known.end(); ++known_it, number++)
+  {
+    unsigned int tmp = 0;
+    safe_lexical_cast (str, tmp); // try to make an int out of the string
+
+    try
+    {
+      if (known_it->alias() == str ||
+          tmp == number ||
+          find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(str))
+            != known_it->baseUrlsEnd())
+      {
+        *repo = *known_it;
+	founded = true;
+        break;
+      }
+    }
+    catch(const url::UrlException &){}
+
+  } // END for all known repos
+  
+  return founded;
+}
+
 // ---------------------------------------------------------------------------
 
 /**
@@ -229,37 +260,12 @@ void get_repos(Zypper & zypper,
                const T & begin, const T & end,
                list<RepoInfo> & repos, list<string> & not_found)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
-  list<RepoInfo> known = manager.knownRepositories();
 
   for (T it = begin; it != end; ++it)
   {
     RepoInfo repo;
 
-    // can i find it by alias, #, or the url, in that order?
-    unsigned int number = 1; // repo number
-    for (list<RepoInfo>::const_iterator known_it = known.begin();
-        known_it != known.end(); ++known_it, number++)
-    {
-      unsigned int tmp = 0;
-      safe_lexical_cast (*it, tmp); // try to make an int out of the string
-
-      try
-      {
-        if (known_it->alias() == *it ||
-            tmp == number ||
-            find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(*it))
-              != known_it->baseUrlsEnd())
-        {
-          repo = *known_it;
-          break;
-        }
-      }
-      catch(const url::UrlException &){}
-    } // END for all known repos
-
-    // no match found
-    if (repo.alias().empty())
+    if (!match_repo(zypper,*it,&repo))
     {
       not_found.push_back(*it);
       continue;
@@ -291,8 +297,10 @@ void get_repos(Zypper & zypper,
           catch(const url::UrlException &){}
       }
 
-      if (equals)
+      if (equals){
         duplicate = true;
+        break;
+      }
     } // END for all found so far
 
     if (!duplicate)
@@ -1329,9 +1337,7 @@ void rename_repo(Zypper & zypper,
   }
   catch (const RepoNotFoundException & ex)
   {
-    zypper.out().error(boost::str(format(
-      _("Repository '%s' not found.")) % alias));
-    ERR << "Repo " << alias << " not found" << endl;
+    MIL << "This should not happen. Already finded repo is not found" << endl;
   }
   catch (const RepoAlreadyExistsException & ex)
   {

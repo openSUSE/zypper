@@ -46,8 +46,8 @@ A resolvable is a package, patch, pattern, language, or a product.
 Displays full info for the specified packages or other resolvables.
 
 .TP
-.I \-r, \-\-repo <alias>
-Work only with the repository specified by the alias.
+.I \-r, \-\-repo <alias|#|URL>
+Work only with the repository specified by the alias, number or URL.
 .TP
 .I \-t, \-\-type <type>
 Type of resolvable (default: package). Currently supported resolvable types for
@@ -85,8 +85,8 @@ add this directory as a temporary \fBplaindir\fR repository and mark the
 respective resolvables for installation.
 
 .TP
-\fI\-r, \-\-repo\fR <alias>
-Install resolvables only from the repository specified by the alias.
+\fI\-r, \-\-repo\fR <alias|#|URL>
+Install resolvables only from the repository specified by the alias, number or URL.
 .TP
 \fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -137,8 +137,8 @@ List available updates.
 \fI\-t, --type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
-\fI\-r, \-\-repo\fR <alias>
-List only updates from the repository specified by the alias.
+\fI\-r, \-\-repo\fR <alias|#|URL>
+List only updates from the repository specified by the alias, number or URL.
 
 See also the NOTE at
 .BR update .
@@ -153,8 +153,8 @@ The resolvables can be selected by their name or by a capability they provide.
 For details see the install command
 
 .TP
-\fI\-r, \-\-repo\fR <alias>
-Operate only with resolvables from repository specified by alias.
+\fI\-r, \-\-repo\fR <alias|#|URL>		
+Operate only with resolvables from repository specified by alias, number or URL.
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -186,8 +186,8 @@ install <name> (see documentation of the install command for details).
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: patch)
 .TP
-\fI\-r, \-\-repo\fR <alias>
-Limit updates to repository specified by alias.
+\fI\-r, \-\-repo\fR <alias|#|URL>
+Limit updates to repository specified by alias, number or URL.
 .TP
 .I     \-\-skip\-interactive
 This will skip interactive patches, that is, those that need reboot,
@@ -221,8 +221,8 @@ with a special resolver algorithm which takes care of package splits, pattern
 and product updates, etc.
 
 .TP
-\fI\-r, \-\-repo\fR <alias>
-Limit updates to repository specified by alias.
+\fI\-r, \-\-repo\fR <alias|#|URL>
+Limit updates to repository specified by alias, number or URL.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
@@ -276,8 +276,8 @@ Show only resolvables that are not currently installed.
 Search only for resolvables of specified type. See the beginning of the subsection for the list of available resolvable types.
 Multiple \-t option are allowed.
 .TP
-.I \-r, \-\-repo <alias>
-Search only in the repository specified by the alias.
+.I \-r, \-\-repo <alias|#|URL>
+Search only in the repository specified by the alias, number or URL.		
 Multiple \-r options are allowed.
 .TP
 \fI    \-\-sort\-by\-name\fR
@@ -296,16 +296,16 @@ of them have the security category.
 See also the EXIT CODES section for details on exit status of 0, 100, and 101
 returned by this command.
 .TP
-.I \-r, \-\-repo <alias>
-Check for patches only in the repository specified by the alias.
+.I \-r, \-\-repo <alias|#|URL>
+Check for patches only in the repository specified by the alias, number or URL.
 
 .TP
 .B patches (pch)
 List patches. Lists all patches that are available, including
 installed and not applicable ones.
 .TP
-.I \-r, \-\-repo <alias>
-Check for patches only in the repository specified by the alias.
+.I \-r, \-\-repo <alias|#|URL>
+Check for patches only in the repository specified by the alias, number or URL.
 
 .SS Repository Management
 
@@ -337,8 +337,8 @@ Add the repository with auto-refresh disabled.
 NOTE: This command does not automatically refresh the newly added repositories. You have to use the \fBrefresh\fR command after finishing your modifications to repositories with \fB*repo\fR commands.
 
 .TP
-.B removerepo (rr) [options] <alias|URI>
-Delete repository specified by alias or URI.
+.B removerepo (rr) [options] <alias|#|URI>
+Delete repository specified by alias, number or URI.
 .TP
 \fI    --loose-auth\fR
 Ignore user authentication data in the URI
@@ -362,12 +362,12 @@ If '\-' is specified instead of a file name,
 the repositories will be written to the standard output.   
 
 .TP
-.B renamerepo (nr) <alias> <new-alias>
-Assign new alias to the repository specified by alias.
+.B renamerepo (nr) <alias|#|URL> <new-alias>
+Assign new alias to the repository specified by alias, number or URL.
 
 .TP
-.B modifyrepo (mr) <options> <alias>
-Modify properties of the repository specified by alias.
+.B modifyrepo (mr) <options> <alias|#|URL>
+Modify properties of the repository specified by alias, number or URL.
 .TP
 \fI\-e, \-\-enable\fR
 Enable the repository.

@@ -896,7 +896,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_delete_options;
     _command_help = _(
-      "removerepo (rr) [options] <alias|URL>\n"
+      "removerepo (rr) [options] <alias|#|URL>\n"
       "\n"
       "Remove repository specified by alias or URL.\n"
       "\n"
@@ -915,9 +915,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_rename_options;
     _command_help = _(
-      "renamerepo [options] <alias> <new-alias>\n"
+      "renamerepo [options] <alias|#|URL> <new-alias>\n"
       "\n"
-      "Assign new alias to the repository specified by alias.\n"
+      "Assign new alias to the repository specified by alias,number or URL.\n"
       "\n"
       "This command has no additional options.\n"
     );
@@ -938,9 +938,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_modify_options;
     _command_help = _(
-      "modifyrepo (mr) <options> <alias>\n"
+      "modifyrepo (mr) <options> <alias|#|URL>\n"
       "\n"
-      "Modify properties of the repository specified by alias.\n"
+      "Modify properties of the repository specified by alias, number or URL.\n"
       "\n"
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it)\n"
@@ -967,7 +967,7 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "refresh (ref) [alias|#] ...\n"
       "\n"
-      "Refresh repositories specified by their alias or number."
+      "Refresh repositories specified by their alias, number or URL."
       " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
       "  Command options:\n"
@@ -1148,7 +1148,7 @@ void Zypper::processCommandOptions()
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
       "-t, --type <type>          Search only for packages of the specified type.\n"
-      "-r, --repo <alias>         Search only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>         Search only in the repository specified by the alias.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
       "    --sort-by-repo         Sort packages by repository.\n"
       "\n"
@@ -1564,55 +1564,37 @@ void Zypper::doCommand()
 
     // too many arguments
     //! \todo allow to specify multiple repos to delete
-    else if (_arguments.size() > 1)
+/*    else if (_arguments.size() > 1)
     {
       report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
-    }
+    } */
 
     warn_if_zmd ();
 
-    bool found = remove_repo(*this, _arguments[0]);
-    if (found)
-      return;
-
-    MIL << "Repository not found by alias, trying delete by URL" << endl;
-    out().info(_("Repository not found by alias, trying delete by URL..."), Out::HIGH);
-
-    Url url;
-    try { url = Url (_arguments[0]); }
-    catch ( const Exception & excpt_r )
-    {
-      ZYPP_CAUGHT( excpt_r );
-      ostringstream s;
-      s << _("Given URL is invalid.") << " " << excpt_r.asUserString();
-      out().warning(s.str(), Out::HIGH);
-    }
-
-    if (url.isValid())
-    {
-      url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-
-      if (copts.count("loose-auth"))
-      {
-        urlview = urlview
-          - url::ViewOptions::WITH_PASSWORD
-          - url::ViewOptions::WITH_USERNAME;
+    //must store repository before remove to ensure correct match number
+    list<RepoInfo> repo_to_remove;
+    for (vector<string>::const_iterator it = _arguments.begin();
+	it!= _arguments.end();++it){
+      RepoInfo repo;
+      if (match_repo(*this,*it,&repo)){
+	repo_to_remove.push_back(repo);
+      } else {
+	MIL << "Repository not found by given alias, number or URL." << endl;
+	out().error(boost::str(format(
+	  //TranslatorExplanation %s is string which not founded (can be url,
+	  //allias or number of repo)
+	  _("Repository %s not found by alias, number or URL."))
+	    % *it));
       }
-
-      if (copts.count("loose-query"))
-        urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
-
-      found = remove_repo(*this, url, urlview);
     }
-    else
-      found = false;
 
-    if (!found)
-    {
-      MIL << "Repository not found by given alias or URL." << endl;
-      out().error(_("Repository not found by given alias or URL."));
+    for (std::list<RepoInfo>::const_iterator it = repo_to_remove.begin();
+      it!=repo_to_remove.end();++it){
+      if (!remove_repo(*this,*it))
+	MIL << "Repository is founded but cannot remove with root privilegies."
+	  << "Should not happen." << endl ;
     }
 
     return;
@@ -1652,8 +1634,14 @@ void Zypper::doCommand()
 //    init_target(*this);
     warn_if_zmd ();
     try {
-      // also stores it
-      rename_repo(*this, _arguments[0], _arguments[1]);
+      RepoInfo repo;
+      if (match_repo(*this,_arguments[0], &repo)){
+	rename_repo(*this, repo.alias(), _arguments[1]);
+      } else {
+	 this->out().error(boost::str(format(
+           _("Repository '%s' not found.")) % _arguments[0]));
+         ERR << "Repo " << _arguments[0] << " not found" << endl;
+      }
     }
     catch ( const Exception & excpt_r )
     {
@@ -1695,8 +1683,15 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-
-    modify_repo(*this, _arguments[0]);
+  
+    RepoInfo repo;
+    if (match_repo(*this,_arguments[0],&repo)){
+      modify_repo(*this, repo.alias());
+    } else {
+      this->out().error(
+        boost::str(format(_("Repository %s not found.")) % _arguments[0]));
+      ERR << "Repo " << _arguments[0] << " not found" << endl;
+    }
   }
 
   // --------------------------( refresh )------------------------------------
@@ -2021,18 +2016,15 @@ void Zypper::doCommand()
       query.addKind( ResTraits<Package>::kind );
     }
 
-    if (copts.count("repo") > 0)
-    {
-      //options.clearRepos();
-      std::list<std::string>::const_iterator it;
-      for (it = copts["repo"].begin(); it != copts["repo"].end(); ++it) {
-        query.addRepo( *it );
-      }
-    }
-
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
+
+    //add available repos to query
+    std::list<zypp::RepoInfo>::const_iterator repo_it;
+    for (repo_it = gData.repos.begin();repo_it != gData.repos.end();++repo_it){
+      query.addRepo( repo_it->alias());
+    }
 
     init_target(*this);
 
