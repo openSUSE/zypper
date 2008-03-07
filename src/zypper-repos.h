@@ -87,12 +87,7 @@ void add_repo(Zypper & zypper, zypp::RepoInfo & repo);
 /**
  * Remove repository specified by \a alias.
  */
-bool remove_repo(Zypper & zypper, const std::string &alias );
-
-bool remove_repo(Zypper & zypper,
-                 const zypp::Url & url, const zypp::url::ViewOption & urlview);
-
-bool remove_repo(Zypper & zypper, const zypp::RepoInfo & repoinfo);
+void remove_repo(Zypper & zypper, const zypp::RepoInfo & repoinfo);
 
 /**
  * Rename repository specified by \a alias to \a newalias.

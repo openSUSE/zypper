@@ -1267,56 +1267,16 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 
 // ----------------------------------------------------------------------------
 
-bool remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
+void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
   bool found = true;
-  try
-  {
-    manager.removeRepository(repoinfo);
-    zypper.out().info(boost::str(
-      format(_("Repository '%s' has been removed.")) % repoinfo.name()));
-    MIL << format("Repository '%s' has been removed.") % repoinfo.name() << endl;
-  }
-  catch (const repo::RepoNotFoundException & ex)
-  {
-    found = false;
-  }
-
-  return found;
+  manager.removeRepository(repoinfo);
+  zypper.out().info(boost::str(
+    format(_("Repository '%s' has been removed.")) % repoinfo.name()));
+  MIL << format("Repository '%s' has been removed.") % repoinfo.name() << endl;
 }
 
-
-// ----------------------------------------------------------------------------
-
-bool remove_repo(Zypper & zypper, const std::string &alias )
-{
-  list<RepoInfo> repos =
-    RepoManager(zypper.globalOpts().rm_options).knownRepositories();
-  for (list<RepoInfo>::const_iterator it = repos.begin();
-      it != repos.end(); ++it)
-    if (it->alias() == alias)
-      return remove_repo(zypper, *it);
-
-  return false;
-}
-
-bool remove_repo(Zypper & zypper, const Url & url, const url::ViewOption & urlview)
-{
-  RepoManager manager(zypper.globalOpts().rm_options);
-  bool found = true;
-  try
-  {
-    RepoInfo info = manager.getRepositoryInfo(url, urlview);
-    found = remove_repo(zypper, info);
-  }
-  catch (const repo::RepoNotFoundException & ex)
-  {
-    found = false;
-  }
-
-  return found;
-}
 
 // ----------------------------------------------------------------------------
 
@@ -1334,10 +1294,6 @@ void rename_repo(Zypper & zypper,
     zypper.out().info(boost::str(format(
       _("Repository '%s' renamed to '%s'.")) % alias % repo.alias()));
     MIL << format("Repository '%s' renamed to '%s'") % alias % repo.alias() << endl;
-  }
-  catch (const RepoNotFoundException & ex)
-  {
-    MIL << "This should not happen. Already finded repo is not found" << endl;
   }
   catch (const RepoAlreadyExistsException & ex)
   {
@@ -1418,12 +1374,6 @@ void modify_repo(Zypper & zypper, const string & alias)
     zypper.out().info(boost::str(format(
       _("Repository %s has been sucessfully modified.")) % alias));
     MIL << format("Repository %s modified:") % alias << repo << endl;
-  }
-  catch (const RepoNotFoundException & ex)
-  {
-    zypper.out().error(
-      boost::str(format(_("Repository %s not found.")) % alias));
-    ERR << "Repo " << alias << " not found" << endl;
   }
   catch (const Exception & ex)
   {
