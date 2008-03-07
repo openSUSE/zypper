@@ -110,6 +110,9 @@ namespace zypp
     OnMediaLocation loc;
     unsigned medianr;
     std::string filename = lookupLocation( medianr );
+    /* XXX This datadir should be part of RepoInfo.  */
+    if (repoInfo().type().toEnum() == repo::RepoType::YAST2_e)
+      filename = std::string("suse/") + filename;
     loc.setLocation(filename, medianr);
     return loc;
   }
