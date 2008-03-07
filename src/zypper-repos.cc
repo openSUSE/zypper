@@ -1273,7 +1273,6 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
-  bool found = true;
   manager.removeRepository(repoinfo);
   zypper.out().info(boost::str(
     format(_("Repository '%s' has been removed.")) % repoinfo.name()));

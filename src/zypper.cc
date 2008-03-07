@@ -1589,12 +1589,8 @@ void Zypper::doCommand()
     }
 
     for (std::list<RepoInfo>::const_iterator it = repo_to_remove.begin();
-      it!=repo_to_remove.end();++it)
-    {
-      if (!remove_repo(*this,*it))
-	ERR << "Repository '" << it->alias() << "' found but cound not be"
-	    " removed with root privileges. Should not happen." << endl;
-    }
+         it!=repo_to_remove.end();++it)
+      remove_repo(*this,*it);
 
     return;
   }
