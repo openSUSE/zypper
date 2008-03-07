@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar  7 19:59:10 CET 2008 - jkupec@suse.cz
+
+- fixed location of RPMs in subdirs when parsing plaindir repo
+  recursively (bnc #368218)
+- revision 9060
+
+-------------------------------------------------------------------
 Thu Mar  6 13:42:53 CET 2008 - ma@suse.de
 
 - Do not filter any installed solvables.
