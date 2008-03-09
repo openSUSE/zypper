@@ -3,6 +3,7 @@ Fri Mar  7 16:49:46 CET 2008 - jkupec@suse.cz
 
 - fixed crashing when searching with no search terms (bnc #366487)
 - r9055
+- 0.10.3
 
 -------------------------------------------------------------------
 Fri Mar  7 14:57:37 CET 2008 - jreidinger@suse.cz
