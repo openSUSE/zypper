@@ -255,6 +255,11 @@ namespace zypp
                     const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
    /**
+    * Clean target system (rpm db) cache.
+    */
+   void cleanTargetCache(const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc());
+
+   /**
     * \short Whether a repository exists in cache
     *
     * \param RepoInfo to be checked.

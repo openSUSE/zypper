@@ -195,7 +195,7 @@ namespace zypp
   static Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
-    return opt.repoRawCachePath + info.alias();
+    return opt.repoRawCachePath / info.escaped_alias();
   }
 
   /**
@@ -204,7 +204,7 @@ namespace zypp
   static Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
-    return opt.repoPackagesCachePath + info.alias();
+    return opt.repoPackagesCachePath / info.escaped_alias();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -865,9 +865,21 @@ namespace zypp
   void RepoManager::cleanCache( const RepoInfo &info,
                                 const ProgressData::ReceiverFnc & progressrcv )
   {
-    Pathname name = _pimpl->options.repoCachePath;
-    name += info.escaped_alias() + ".solv";
-    unlink (name);
+    ProgressData progress(100);
+    progress.sendTo(progressrcv);
+    progress.toMin();
+
+    unlink (_pimpl->options.repoCachePath / (info.escaped_alias() + ".solv"));
+    progress.set(99);
+    unlink (_pimpl->options.repoCachePath / (info.escaped_alias() + ".cookie"));
+
+    progress.toMax();
+  }
+
+  void RepoManager::cleanTargetCache(const ProgressData::ReceiverFnc & progressrcv)
+  {
+    unlink (_pimpl->options.repoCachePath / (sat::Pool::systemRepoName() + ".solv"));
+    unlink (_pimpl->options.repoCachePath / (sat::Pool::systemRepoName() + ".cookie"));
   }
 
   ////////////////////////////////////////////////////////////////////////////
