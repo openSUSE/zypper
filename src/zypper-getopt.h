@@ -63,7 +63,6 @@ private:
   char ** _argv;
 };
 
-extern parsed_opts gopts; // global options
 extern parsed_opts copts; // command options
 
 #endif /*ZYPPER_GETOPT_H_*/
