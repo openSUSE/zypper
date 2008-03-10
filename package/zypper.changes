@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 10 13:36:39 CET 2008 - jkupec@suse.cz
+
+- show download rate for http/ftp downloads (bnc #227903)
+- r9077
+
+-------------------------------------------------------------------
 Mon Mar 10 13:01:13 CET 2008 - jkupec@suse.cz
 
 - zypper clean is now able to clean also normal meta-data caches
