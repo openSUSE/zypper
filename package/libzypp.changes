@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Mar 10 12:45:03 CET 2008 - jkupec@suse.cz
+
+- cleanCache(): clean also .cookie files
+- cleanTargetCache() added
+- use escaped_alias() in rawcache_path_for_repoinfo() and
+  packagescache_path_for_repoinfo()
+- r9068
+
+-------------------------------------------------------------------
 Fri Mar  7 19:59:10 CET 2008 - jkupec@suse.cz
 
 - fixed location of RPMs in subdirs when parsing plaindir repo
