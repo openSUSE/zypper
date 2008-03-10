@@ -914,15 +914,18 @@ void clean_repos(Zypper & zypper)
 
   // should we clean packages or metadata ?
   bool clean_metadata = (copts.find("metadata") != copts.end());
-  bool clean_packages = (copts.find("metadata") == copts.end());
+  bool clean_raw_metadata = (copts.find("raw-metadata") != copts.end());
+  bool clean_packages = !(clean_metadata || clean_raw_metadata);
 
   if( copts.find("all") != copts.end() )
   {
     clean_metadata = true;
+    clean_raw_metadata = true;
     clean_packages = true;
   }
-  
+
   DBG << "Metadata will be cleaned: " << clean_metadata << endl;
+  DBG << "Raw metadata will be cleaned: " << clean_raw_metadata << endl;
   DBG << "Packages will be cleaned: " << clean_packages << endl;
 
   unsigned error_count = 0;
@@ -956,27 +959,32 @@ void clean_repos(Zypper & zypper)
       }
   
       bool error = false;
-      try {
+      try
+      {
         if( clean_metadata )
 	{
 	    zypper.out().info(boost::str(format(
-	        _("Cleaning metadata for '%s'.")) % repo.alias ()),
-	      Out::HIGH);
-	    manager.cleanMetadata(repo);
+	        _("Cleaning metadata cache for '%s'.")) % repo.alias ()),
+	        Out::HIGH);
+	    manager.cleanCache(repo);
 	}
+        if( clean_raw_metadata )
+        {
+            zypper.out().info(boost::str(format(
+                _("Cleaning raw metadata cache for '%s'.")) % repo.alias ()),
+                Out::HIGH);
+            manager.cleanMetadata(repo);
+        }
         if( clean_packages )
 	{
           zypper.out().info(boost::str(format(
               // translators: meaning the cached rpm files
               _("Cleaning packages for '%s'.")) % repo.alias ()),
-            Out::HIGH);
-    	    manager.cleanPackages(repo);
+              Out::HIGH);
+    	  manager.cleanPackages(repo);
 	}
-      } catch(...) {
-	error = true;
       }
-
-      if (error)
+      catch(...)
       {
         zypper.out().error(boost::str(format(
             _("Cannot clean repository '%s' because of an error."))
@@ -990,7 +998,23 @@ void clean_repos(Zypper & zypper)
   else
     enabled_repo_count = 0;
 
-  if (error_count == enabled_repo_count)
+  // clean the target system cache
+  if( clean_metadata )
+  {
+    zypper.out().info(_("Cleaning installed packages cache."), Out::HIGH);
+    try
+    {
+      manager.cleanTargetCache();
+    }
+    catch (...)
+    {
+      zypper.out().error(_("Cannot clean installed packages cache because of an error."));
+      ERR << "Couldn't clean @System cache" << endl;
+      error_count++;
+    }
+  }
+
+  if (error_count >= enabled_repo_count)
   {
     zypper.out().error(_("Could not clean the repositories because of errors."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);

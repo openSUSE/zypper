@@ -403,11 +403,15 @@ Only parse the metadata and build the database, don't download raw metadata into
 Only download the raw metadata, don't parse it or build the database.
 
 .TP
-.B clean ...
-Clean up the local caches for all known repository caches. By default, only downloaded package caches are cleaned.
+.B clean [alias|#|URI] ...
+Clean up the local caches for all known or specified repositories. By default,
+ only caches of downloaded packages are cleaned.
 .TP
 .I \-m, \-\-metadata
 Clean up repository metadata cache instead of package cache.
+.TP
+.I \-M, \-\-raw\-metadata
+Clean up repository raw metadata cache instead of package cache.
 .TP
 .I \-a, \-\-all
 Clean up both repository metadata and package caches.

@@ -35,7 +35,7 @@ void refresh_repos(Zypper & zypper);
 
 
 /**
- * Clean caches for all repositories.
+ * Clean caches for all (specified) repositories.
  */
 void clean_repos(Zypper & zypper);
 

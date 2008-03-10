@@ -987,19 +987,21 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"repo", required_argument, 0, 'r'},
       {"metadata", no_argument, 0, 'm'},
+      {"raw-metadata", no_argument, 0, 'M'},
       {"all", no_argument, 0, 'a'},
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
     _command_help = _(
-      "clean\n"
+      "clean [alias|#|URI] ...\n"
       "\n"
       "Clean local caches.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI> Clean only specified repositories.\n"
-      "-m, --metadata		Clean metadata cache instead of package cache.\n"
-      "-a, --all		Clean both metadata and package caches.\n"
+      "-m, --metadata           Clean metadata cache.\n"
+      "-M, --raw-metadata       Clean raw metadata cache.\n"
+      "-a, --all                Clean both metadata and package caches.\n"
     );
     break;
   }
