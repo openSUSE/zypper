@@ -1523,7 +1523,7 @@ int MediaCurl::progressCallback( void *clientp,
 	// the time in seconds
 	//! \todo more accurate download rate computationn, e.g. compute average value from last 5 seconds, or work with milliseconds instead of seconds 
 
-        if ( pdata->secs > 0 && (dif > 0 || dlnow == dltotal ))
+        if ( pdata->secs > 1 && (dif > 0 || dlnow == dltotal ))
           pdata->drate_avg = (dlnow / pdata->secs);
 
 	if ( dif > 0 )
