@@ -190,20 +190,20 @@ public:
    * 
    * \param uri   Uri of the file being downloaded. 
    * \param value Value of the progress in percents. -1 if unknown.
-   * \param rate  Download rate. -1 if unknown.
+   * \param rate  Current download rate in B/s. -1 if unknown.
    */
   virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
-                             int rate = -1) = 0;
+                             long rate = -1) = 0;
   /**
    * Reports end of a download.
    * 
    * \param uri   Uri of the file to download. 
-   * \param rate  Final download rate. -1 if unknown.
+   * \param rate  Average download rate at the end. -1 if unknown.
    * \param error Error flag - did the download finish with error?
    */
   virtual void dwnldProgressEnd(const zypp::Url & uri,
-                                int rate = -1,
+                                long rate = -1,
                                 bool error = false) = 0;
   //@}
 

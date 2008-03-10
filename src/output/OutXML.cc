@@ -168,7 +168,7 @@ void OutXML::dwnldProgressStart(const zypp::Url & uri)
 
 void OutXML::dwnldProgress(const zypp::Url & uri,
                            int value,
-                           int rate)
+                           long rate)
 {
   cout << "<download"
     << " url=\"" << xml_encode(uri.asString()) << "\""
@@ -177,7 +177,7 @@ void OutXML::dwnldProgress(const zypp::Url & uri,
     << "/>" << endl;
 }
 
-void OutXML::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
+void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 {
   cout << "<download"
     << " url=\"" << xml_encode(uri.asString()) << "\""

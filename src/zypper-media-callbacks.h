@@ -11,11 +11,10 @@
 #define ZMART_MEDIA_CALLBACKS_H
 
 #include <stdlib.h>
-#include <iostream>
+#include <ctime>
 
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Pathname.h"
 #include "zypp/KeyRing.h"
@@ -69,7 +68,8 @@ namespace ZmartRecipients
   };
 
   // progress for downloading a file
-  struct DownloadProgressReportReceiver : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
+  struct DownloadProgressReportReceiver
+    : public zypp::callback::ReceiveReport<zypp::media::DownloadProgressReport>
   {
     DownloadProgressReportReceiver()
       : _gopts(Zypper::instance()->globalOpts()), _be_quiet(false)
@@ -77,6 +77,9 @@ namespace ZmartRecipients
 
     virtual void start( const zypp::Url & uri, zypp::Pathname localfile )
     {
+      _last_reported = time(NULL);
+      _last_drate_avg = -1;
+
       Out & out = Zypper::instance()->out();
 
       if (out.verbosity() < Out::HIGH &&
@@ -98,12 +101,22 @@ namespace ZmartRecipients
     }
 
     //! \todo return false on SIGINT
-    virtual bool progress(int value, const zypp::Url & uri)
+    virtual bool progress(int value, const zypp::Url & uri, double drate_avg, double drate_now)
     {
       if (_be_quiet)
         return true;
 
-      Zypper::instance()->out().dwnldProgress(uri, value); //! \todo add transfer rate
+//      std::cout << "avg: " << drate_avg << " current: " << drate_now << std::endl;
+
+      // don't report more often than 1 second
+      time_t now = time(NULL);
+      if (now > _last_reported)
+        _last_reported = now;
+      else
+        return true;
+
+      Zypper::instance()->out().dwnldProgress(uri, value, (long) drate_now);
+      _last_drate_avg = drate_avg;
       return true;
     }
 
@@ -112,7 +125,7 @@ namespace ZmartRecipients
     problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
       if (_be_quiet)
-        Zypper::instance()->out().dwnldProgressEnd(uri, true);
+        Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg, true);
       Zypper::instance()->out().error(zcb_error2str(error, description));
 
       return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
@@ -124,12 +137,14 @@ namespace ZmartRecipients
       if (_be_quiet)
         return;
 
-      Zypper::instance()->out().dwnldProgressEnd(uri);
+      Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg);
     }
 
   private:
     const GlobalOptions & _gopts;
     bool _be_quiet;
+    time_t _last_reported;
+    double _last_drate_avg;
   };
 
 
