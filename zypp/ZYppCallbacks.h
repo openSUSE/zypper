@@ -322,6 +322,14 @@ namespace zypp
 
         virtual void start( const Url &/*file*/, Pathname /*localfile*/ ) {}
 
+        /**
+         * Download progress.
+         * 
+         * \param value        Percentage value.
+         * \param file         File URI.
+         * \param dbps_avg     Average download rate so far. -1 if unknown.
+         * \param dbps_current Current download (cca last 1 sec). -1 if unknown.
+         */
         virtual bool progress(int /*value*/, const Url &/*file*/,
                               double dbps_avg = -1,
                               double dbps_current = -1)
