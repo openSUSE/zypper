@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 10 13:01:13 CET 2008 - jkupec@suse.cz
+
+- zypper clean is now able to clean also normal meta-data caches
+  (the .solv files)
+- r9070
+
+-------------------------------------------------------------------
 Fri Mar  7 16:49:46 CET 2008 - jkupec@suse.cz
 
 - fixed crashing when searching with no search terms (bnc #366487)
