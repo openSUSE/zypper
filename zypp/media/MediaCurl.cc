@@ -120,6 +120,10 @@ namespace zypp {
         : timeout(_timeout)
         , reached(false)
         , report(_report)
+        , drate_period(-1)
+        , dload_period(0)
+        , secs(0)
+        , drate_avg(-1)
         , ltime( time(NULL))
         , dload( 0)
         , uload( 0)
@@ -128,8 +132,19 @@ namespace zypp {
       long                                          timeout;
       bool                                          reached;
       callback::SendReport<DownloadProgressReport> *report;
+      // download rate of the last period (cca 1 sec)
+      double                                        drate_period;
+      // bytes downloaded at the start of the last period
+      double                                        dload_period;
+      // seconds from the start of the download
+      long                                          secs;
+      // average download rate
+      double                                        drate_avg;
+      // last time the progress was reported
       time_t                                        ltime;
+      // bytes downloaded at the moment the progress was last reported
       double                                        dload;
+      // bytes uploaded at the moment the progress was last reported
       double                                        uload;
       zypp::Url                                     url;
     };
@@ -1474,16 +1489,57 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 //
 //        DESCRIPTION : Progress callback triggered from MediaCurl::getFile
 //
-int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
-                                 double ultotal, double ulnow )
+int MediaCurl::progressCallback( void *clientp,
+                                 double dltotal, double dlnow,
+                                 double ultotal, double ulnow)
 {
   ProgressData *pdata = reinterpret_cast<ProgressData *>(clientp);
   if( pdata)
   {
+    time_t now   = time(NULL);
+    if( now > 0)
+    {
+    	// reset time of last change in case initial time()
+	// failed or the time was adjusted (goes backward)
+	if( pdata->ltime <= 0 || pdata->ltime > now)
+	{
+	  pdata->ltime = now;
+	}
+
+	// start time counting as soon as first data arrives
+	// (skip the connection / redirection time at begin)
+	time_t dif = 0;
+	if (dlnow > 0 || ulnow > 0)
+	{
+    	  dif = (now - pdata->ltime);
+	  dif = dif > 0 ? dif : 0;
+
+	  pdata->secs += dif;
+	}
+
+	// update the drate_avg and drate_period only after a second has passed
+	// (this callback is called much more often than a second)
+	// otherwise the values would be far from accurate when measuring
+	// the time in seconds
+	//! \todo more accurate download rate computationn, e.g. compute average value from last 5 seconds, or work with milliseconds instead of seconds 
+
+        if ( pdata->secs > 0 && (dif > 0 || dlnow == dltotal ))
+          pdata->drate_avg = (dlnow / pdata->secs);
+
+	if ( dif > 0 )
+	{
+	  pdata->drate_period = ((dlnow - pdata->dload_period) / dif);
+	  pdata->dload_period = dlnow;
+	}
+    }
+
     // send progress report first, abort transfer if requested
     if( pdata->report)
     {
-      if (! (*(pdata->report))->progress(int( dlnow * 100 / dltotal ), pdata->url))
+      if (!(*(pdata->report))->progress(int( dlnow * 100 / dltotal ),
+	                                pdata->url,
+	                                pdata->drate_avg,
+	                                pdata->drate_period))
       {
         return 1; // abort transfer
       }
@@ -1492,15 +1548,9 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
     // check if we there is a timeout set
     if( pdata->timeout > 0)
     {
-      time_t now = time(NULL);
       if( now > 0)
       {
         bool progress = false;
-
-        // reset time of last change in case initial time()
-        // failed or the time was adjusted (goes backward)
-        if( pdata->ltime <= 0 || pdata->ltime > now)
-          pdata->ltime = now;
 
         // update download data if changed, mark progress
         if( dlnow != pdata->dload)

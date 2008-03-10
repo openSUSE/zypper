@@ -322,7 +322,9 @@ namespace zypp
 
         virtual void start( const Url &/*file*/, Pathname /*localfile*/ ) {}
 
-        virtual bool progress(int /*value*/, const Url &/*file*/)
+        virtual bool progress(int /*value*/, const Url &/*file*/,
+                              double dbps_avg = -1,
+                              double dbps_current = -1)
         { return true; }
 
         virtual Action problem(
