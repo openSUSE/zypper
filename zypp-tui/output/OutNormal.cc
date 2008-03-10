@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "zypp/Pathname.h"
+#include "zypp/ByteCount.h" // for download progress reporting
 
 #include "../zypper-main.h"
 #include "../AliveCursor.h"
@@ -150,7 +151,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
 void OutNormal::dwnldProgress(const zypp::Url & uri,
                               int value,
-                              int rate)
+                              long rate) 
 {
   if (verbosity() < NORMAL)
     return;
@@ -162,12 +163,20 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
   else
     cout << zypp::Pathname(uri.getPathName()).basename();
   // dont display percents if invalid
-  if (value >= 0 && value <= 100)
-    cout << " [" << value << "%]";
+  if ((value >= 0 && value <= 100) || rate >= 0)
+  {
+    cout << " [";
+    if (value >= 0 && value <= 100)
+      cout << value << "%";
+    if (rate >= 0)
+      cout << " (" << zypp::ByteCount(rate) << "/s)";
+    cout << "]";
+  }
+
   cout << std::flush;
 }
 
-void OutNormal::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
+void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 {
   if (verbosity() < NORMAL)
     return;
@@ -178,7 +187,10 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, int rate, bool error)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
     cout << zypp::Pathname(uri.getPathName()).basename();
-  cout << " [" << (error ? _("error") : _("done")) << "]";
+  cout << " [" << (error ? _("error") : _("done"));
+  if (rate >= 0)
+    cout << " (" << zypp::ByteCount(rate) << "/s)";
+  cout << "]";
   cout << endl << std::flush;
 }
 
