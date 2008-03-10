@@ -85,11 +85,21 @@ void Downloader::download( MediaSetAccess &media,
   {
     ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No repository index in content file." ) );
   }
-  
+  MIL << "RepoIndex: " << _repoindex << endl;
+  if ( _repoindex->metaFileChecksums.empty() )
+  {
+    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No metadata checksums in content file." ) );
+  }
+  if ( _repoindex->signingKeys.empty() )
+  {
+    WAR << "No signing keys defined." << endl;
+  }
+
   // Prepare parsing
   descr_dir = _repoindex->descrdir; // path below reporoot
   //_datadir  = _repoIndex->datadir;  // path below reporoot
-  
+
+
   for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->metaFileChecksums.begin();
         it != _repoindex->metaFileChecksums.end();
         ++it )
@@ -125,7 +135,7 @@ void Downloader::download( MediaSetAccess &media,
     {
       // take all patterns in one go
     }
-    else if ( str::endsWith( it->first, ".pat" ) 
+    else if ( str::endsWith( it->first, ".pat" )
               || str::endsWith( it->first, ".pat.gz" ) )
     {
 
@@ -166,7 +176,7 @@ void Downloader::download( MediaSetAccess &media,
     location.setChecksum( it->second );
     this->enqueueDigested(location);
   }
-  
+
   for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->signingKeys.begin();
         it != _repoindex->signingKeys.end();
         ++it )
@@ -175,7 +185,7 @@ void Downloader::download( MediaSetAccess &media,
     location.setChecksum( it->second );
     this->enqueueDigested(location);
   }
-  
+
   this->start( dest_dir, media );
 }
 

@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 
 #include "zypp/parser/susetags/RepoIndex.h"
 
@@ -29,6 +29,14 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       IMPL_PTR_TYPE(RepoIndex);
+
+      std::ostream & RepoIndex::dumpOn( std::ostream & str ) const
+      {
+        return str
+            << "RepoIndex checksums: META files " << metaFileChecksums.size()
+            << ", HASH files " << mediaFileChecksums.size()
+            << ", KEY files " << signingKeys.size();
+      }
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

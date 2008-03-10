@@ -86,20 +86,14 @@ namespace zypp
     struct RepoCollector
     {
       RepoCollector()
-      {
-        MIL << endl;
-      }
+      {}
 
       ~RepoCollector()
-      {
-        MIL << endl;
-      }
+      {}
 
       bool collect( const RepoInfo &repo )
       {
-        //MIL << "here in collector: " << repo.alias() << endl;
         repos.push_back(repo);
-        //MIL << "added: " << repo.alias() << endl;
         return true;
       }
 
