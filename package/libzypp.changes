@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 10 13:30:04 CET 2008 - jkupec@suse.cz
+
+- provide download rate info (average and curent) in the
+  media::DownloadProgressReport for ftp/http (bnc #168935)
+- r9074
+
+-------------------------------------------------------------------
 Mon Mar 10 12:45:03 CET 2008 - jkupec@suse.cz
 
 - cleanCache(): clean also .cookie files
