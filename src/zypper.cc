@@ -156,7 +156,7 @@ void print_main_help(Zypper & zypper)
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository.\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
-    "\t--no-refresh\tDo not refresh the repositories.\n"
+    "\t--no-refresh\t\tDo not refresh the repositories.\n"
   );
 
   static string help_global_target_options = _("\tTarget Options:\n"
