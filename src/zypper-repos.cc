@@ -1386,52 +1386,53 @@ void modify_repo(Zypper & zypper, const string & alias)
   {
     RepoManager manager(zypper.globalOpts().rm_options);
     RepoInfo repo(manager.getRepositoryInfo(alias));
-    bool change_able = false;
-    bool change_autoref = false;
+    bool chnaged_enabled = false;
+    bool changed_autoref = false;
 
     if (!indeterminate(enable))
     {
       if (enable != repo.enabled())
-        change_able = true;
+        chnaged_enabled = true;
       repo.setEnabled(enable);
     }
 
     if (!indeterminate(autoref))
     {
       if (autoref != repo.autorefresh())
-        change_autoref = true;
+        changed_autoref = true;
       repo.setAutorefresh(autoref);
     }
 
 
-    if (change_able || change_autoref)
+    if (chnaged_enabled || changed_autoref)
     {
       manager.modifyRepository(alias, repo);
-      if (change_able)
+
+      if (chnaged_enabled)
       {
         if (repo.enabled())
           zypper.out().info(boost::str(format(
-            _("Repository %s has been sucessfully enabled.")) % alias));
+            _("Repository '%s' has been sucessfully enabled.")) % alias));
         else
           zypper.out().info(boost::str(format(
-            _("Repository %s has been sucessfully disabled.")) % alias));
+            _("Repository '%s' has been sucessfully disabled.")) % alias));
       }
 
-      if (change_autoref)
+      if (changed_autoref)
       {
         if (repo.autorefresh())
           zypper.out().info(boost::str(format(
-            _("Repository %s has activated autorefresh.")) % alias));
+            _("Autorefresh has been enabled for repository '%s'.")) % alias));
         else
           zypper.out().info(boost::str(format(
-            _("Repository %s has disabled autorefresh.")) % alias));
+            _("Autorefresh has been disabled for repository '%s'.")) % alias));
       }
     }
     else
     {
-      zypper.out().info(
-        _("Nothink to change. No options change repository settings."));
-      MIL << format("Repository %s nothink to modify:") % alias << repo << endl;
+      zypper.out().info(boost::str(format(
+        _("Nothing to change for repository '%s'.")) % alias));
+      MIL << format("Nothing to modify in '%s':") % alias << repo << endl;
     }
   }
   catch (const Exception & ex)
