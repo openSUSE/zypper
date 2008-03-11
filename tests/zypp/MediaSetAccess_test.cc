@@ -148,7 +148,7 @@ void msa_provide_files_single(const string &urlstr)
   // provide file from media
   Pathname file = setaccess.provideFile("/test.txt", 1);
   BOOST_CHECK(check_file_exists(file) == true);
-  
+
   // provide non-existent file
   // (default answer from callback should be ABORT)
   BOOST_CHECK_THROW(setaccess.provideFile("/imnothere", 2),
@@ -164,7 +164,7 @@ void msa_provide_dir(const string &urlstr)
   MediaSetAccess setaccess(url);
 
   Pathname dir = setaccess.provideDir("/dir", false, 1);
-  
+
   Pathname file1 = dir + "/file1";
   BOOST_CHECK(check_file_exists(file1) == true);
 
@@ -207,9 +207,9 @@ void msa_provide_dirtree(const string &urlstr)
 
 
 /*
- * 
+ *
  * test data dir structure:
- * 
+ *
  * .
  * |-- src1
  * |   |-- cd1
@@ -225,24 +225,17 @@ void msa_provide_dirtree(const string &urlstr)
  * |       `-- test.txt
  * `-- src2
  *     `-- test.txt
- * 
+ *
  */
 
 test_suite*
 init_unit_test_suite( int argc, char *argv[] )
 {
-  if (argc < 2)
-  {
-    cout << "mediasetaccesstest:"
-      " absolute path to local directory with test data required as parameter"
-      << endl;
-    return (test_suite *)0;
-  }
-
   test_suite* test= BOOST_TEST_SUITE("MediaSetAccessTest");
 
-  // urls to test  
-  string datadir = argv[1];
+  // urls to test
+  string datadir( TESTS_SRC_DIR );
+  datadir += "/zypp/data/mediasetaccess";
   std::string const params[] = {"dir:" + datadir + "/src1/cd1"};
   std::string const params_single[] = {"dir:" + datadir + "/src2"};
 

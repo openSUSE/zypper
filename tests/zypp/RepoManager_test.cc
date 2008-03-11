@@ -4,7 +4,7 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Exception.h"
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
@@ -31,36 +31,36 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(repomanager_test)
 {
   RepoManagerOptions opts;
-  
+
   TmpDir tmpCachePath;
   TmpDir tmpRawCachePath;
   TmpDir tmpKnownReposPath;
-  
+
   BOOST_CHECK_EQUAL( filesystem::copy_dir_content( DATADIR + "/repos.d", tmpKnownReposPath.path() ), 0 );
-  
+
   opts.repoCachePath = tmpCachePath.path();
   opts.repoRawCachePath = tmpRawCachePath.path();
   opts.knownReposPath = tmpKnownReposPath.path();
-  
+
   RepoManager manager(opts);
-  
+
   list<RepoInfo> repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
-  
+
   // now add a .repo file with 2 repositories in it
   Url url;
   url.setPathName((DATADIR + "/proprietary.repo").asString());
   url.setScheme("file");
 
   manager.addRepositories(url);
-  
+
   // check it was not overwriten the proprietary.repo file
   BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
-  
+
   // now there should be 6 repos
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 6);
-  
+
   RepoInfo office_dup;
   office_dup.setAlias("office");
   BOOST_CHECK_THROW(manager.addRepository(office_dup), RepoAlreadyExistsException);
@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 5);
   // the file still contained one repo, so it should still exists
   BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
-  
+
   // now delete the macromedia one
   RepoInfo macromedia;
   macromedia.setAlias("macromedia");
@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
   // the file should not exist anymore
   BOOST_CHECK( ! PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
-  
+
 
   // let test cache creation
 
@@ -96,28 +96,25 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   KeyRingTestReceiver keyring_callbacks;
   KeyRingTestSignalReceiver receiver;
-  
+
   // disable sgnature checking
   keyring_callbacks.answerTrustKey(true);
   keyring_callbacks.answerAcceptVerFailed(true);
   keyring_callbacks.answerAcceptUnknownKey(true);
 
-  // we have no metadata yet so this should throw
-  BOOST_CHECK_THROW( manager.buildCache(repo),
-                     RepoMetadataException );
+  // We have no metadata and cache yet
+  BOOST_CHECK_MESSAGE( !manager.isCached(repo), "Repo should not yet be cached" );
 
-  // now refresh the metadata
-  manager.refreshMetadata(repo);
-  
-  BOOST_CHECK_MESSAGE( ! manager.isCached(repo),
-                       "Repo is not yet cached" );
-
-  // it is not cached, this should throw
-  BOOST_CHECK_THROW( manager.loadFromCache(repo),
-                     RepoNotCachedException );
-
-  // now cache should build normally
+  // This should download metadata and build the cache
   manager.buildCache(repo);
+
+  // Now we have metadata and cache
+  BOOST_CHECK_MESSAGE( manager.isCached(repo), "Repo should be cached now" );
+
+  // Metadata are up to date
+  SEC << endl
+      << manager.checkIfToRefreshMetadata(repo, *repo.baseUrlsBegin()) << endl;
+  BOOST_CHECK_MESSAGE( !manager.checkIfToRefreshMetadata(repo, *repo.baseUrlsBegin()), "Metadata should be up to date" );
 
    // the solv file should exists now
   Pathname base = (opts.repoCachePath + repo.alias());
@@ -125,9 +122,6 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   Pathname cookiefile = base.extend(".cookie");
   BOOST_CHECK_MESSAGE( PathInfo(solvfile).isExist(), "Solv file is created after caching: " + solvfile.asString());
   BOOST_CHECK_MESSAGE( PathInfo(cookiefile).isExist(), "Cookie file is created after caching: " + cookiefile.asString());
-
-  BOOST_CHECK_MESSAGE( manager.isCached(repo),
-                       "Repo is cached now" );
 
   MIL << "Repo already in cache, clean cache"<< endl;
   manager.cleanCache(repo);
