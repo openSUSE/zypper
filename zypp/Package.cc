@@ -42,6 +42,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+#warning DUMMY changelog
   Changelog Package::changelog() const
   { return Changelog(); }
 
@@ -65,11 +66,13 @@ namespace zypp
   PackageGroup Package::group() const
   { return lookupStrAttribute( sat::SolvAttr::group ); }
 
+#warning DUMMY keywords
   Package::Keywords Package::keywords() const
   { return Keywords(); }
 
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */
+#warning DUMMY url
   std::string Package::url() const
   { return string(); }
 
@@ -98,10 +101,12 @@ namespace zypp
   { return lookupNumAttribute( sat::SolvAttr::sourcesize); }
 
   /** */
+#warning DUMMY authors
   std::list<std::string> Package::authors() const
   { return std::list<std::string>(); }
 
   /** */
+#warning DUMMY filenames
   std::list<std::string> Package::filenames() const
   { return std::list<std::string>(); }
 
@@ -117,10 +122,12 @@ namespace zypp
     return loc;
   }
 
-  std::string Package::sourcePkgName() const
+#warning DUMMY sourcePkgName
+ std::string Package::sourcePkgName() const
   { return std::string(); }
 
-  Edition Package::sourcePkgEdition() const
+#warning DUMMY sourcePkgEdition
+ Edition Package::sourcePkgEdition() const
   { return Edition(); }
 
   /////////////////////////////////////////////////////////////////
