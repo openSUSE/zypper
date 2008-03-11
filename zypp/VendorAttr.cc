@@ -49,10 +49,10 @@ namespace zypp
 
     typedef map<Vendor,unsigned int> VendorMap;
     typedef vector<string> VendorList;
-      
+
     VendorMap _vendorMap;
     VendorMap _matchMap;
-    unsigned int vendorGroupCounter;  
+    unsigned int vendorGroupCounter;
 
     void addEquivalentVendors( VendorList & vendorList )
     {
@@ -71,7 +71,7 @@ namespace zypp
 		    unsigned int moveID = _vendorMap[*it];
 		    for (VendorMap::iterator itMap = _vendorMap.begin();
 			 itMap != _vendorMap.end();
-			 itMap++) {
+			 ++itMap) {
 			if (itMap->second == moveID)
 			    itMap->second = nextId;
 		    }
@@ -85,12 +85,12 @@ namespace zypp
 	// add new entries
 	for (VendorList::iterator it = vendorList.begin();
 	     it != vendorList.end();
-	     it++) {
+	     ++it) {
 	    _vendorMap[*it] = nextId;
 	}
 
 	if (nextId == vendorGroupCounter + 1)
-	    vendorGroupCounter++;
+	    ++vendorGroupCounter;
     }
 
 
@@ -106,7 +106,7 @@ namespace zypp
 
   VendorAttr::VendorAttr ()
   {
-      vendorGroupCounter = 1; 
+      vendorGroupCounter = 1;
       Pathname xxx = ZConfig::instance().repoCachePath();
       Pathname vendorPath (ZConfig::instance().vendorPath());
       try
@@ -123,19 +123,29 @@ namespace zypp
       // creating entries
       addVendorDirectory (vendorPath);
 
-      //checking if suse,opensuse has been defined. If not create entries
-      if (_vendorMap.find("suse") != _vendorMap.end()) {
-	  if (_vendorMap.find("opensuse") == _vendorMap.end()) {
-	      _vendorMap["opensuse"] = vendorGroupCounter;
-	  }
-      } else {
-	  if (_vendorMap.find("opensuse") == _vendorMap.end()) {
-	      // both are not available. Create one group with suse,opensuse
-	      _vendorMap["opensuse"] = vendorGroupCounter;
-	      _vendorMap["suse"] = vendorGroupCounter;	    
-	  } else {
-	      _vendorMap["suse"] = vendorGroupCounter;
-	  }
+      // Checking if suse,opensuse has been defined, else create entries:
+      // - if both are defined we leve them as thay are.
+      // - if only one of them is defined, we add the other to the same group.
+      // - if both are undefined they make up a new group
+      VendorMap::const_iterator suseit( _vendorMap.find("suse") );
+      VendorMap::const_iterator opensuseit( _vendorMap.find("opensuse") );
+      if ( suseit == _vendorMap.end() )
+      {
+        if ( opensuseit == _vendorMap.end() )
+        {
+          // both are undefined
+          _vendorMap["suse"] = _vendorMap["opensuse"] = ++vendorGroupCounter;
+        }
+        else
+        {
+          // add suse to opensuse
+          _vendorMap["suse"] = opensuseit->second;
+        }
+      }
+      else if ( opensuseit == _vendorMap.end() )
+      {
+        // add opensuse to suse
+        _vendorMap["opensuse"] = suseit->second;
       }
 
       MIL << "Equivalent vendors:" << endl;
@@ -143,13 +153,13 @@ namespace zypp
 	   it != _vendorMap.end();
 	   it ++) {
 	  MIL << "   " << it->first << " (group " << it->second << ")" << endl;
-      }      
+      }
   }
 
   bool VendorAttr::addVendorFile( const Pathname & filename ) const
   {
       parser::IniDict dict;
-      
+
       if ( PathInfo(filename).isExist())
       {
           InputStream is(filename);
@@ -185,14 +195,14 @@ namespace zypp
 	      }
 	  }
       }
-      
+
       return true;
   }
 
   bool VendorAttr::addVendorDirectory( const Pathname & dirname ) const
   {
       parser::IniDict dict;
-      
+
       if ( PathInfo(dirname).isExist())
       {
           InputStream is(dirname);
@@ -205,17 +215,17 @@ namespace zypp
       }
 
       list<Pathname> filenames;
-	  
+
       filesystem::readdir( filenames,
 			   dirname, false );
       for (list<Pathname>::iterator it = filenames.begin();
-	   it != filenames.end(); it++) {
+	   it != filenames.end(); ++it) {
 	  MIL << "Adding file " << *it << endl;
 	  addVendorFile( *it );
-      }	
+      }
       return true;
   }
-    
+
 
   bool VendorAttr::equivalent( const Vendor & lVendor, const Vendor & rVendor ) const
   {
@@ -233,7 +243,7 @@ namespace zypp
 	  // compare this entry with the vendor map
 	  for (VendorMap::reverse_iterator it = _vendorMap.rbegin();
 	       it != _vendorMap.rend();
-	       it++) {
+	       ++it) {
 	      if (lhs.substr (0, it->first.size())  == it->first) {
 		  lhsID = it->second;
 		  _matchMap[lhs] = lhsID;
@@ -245,10 +255,10 @@ namespace zypp
       if (_matchMap.find(rhs) != _matchMap.end()) {
 	  rhsID = _matchMap[rhs];
       } else {
-	  // compare this entry with the vendor map 
+	  // compare this entry with the vendor map
 	  for (VendorMap::reverse_iterator it = _vendorMap.rbegin();
 	       it != _vendorMap.rend();
-	       it++) {
+	       ++it) {
 	      if (rhs.substr (0, it->first.size())  == it->first) {
 		  rhsID = it->second;
 		  _matchMap[rhs] = rhsID;
