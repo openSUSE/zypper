@@ -958,7 +958,6 @@ void clean_repos(Zypper & zypper)
         }
       }
   
-      bool error = false;
       try
       {
         if( clean_metadata )
@@ -1185,7 +1184,6 @@ void add_repo_by_url( Zypper & zypper,
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
 
-  RepoManager manager(zypper.globalOpts().rm_options);
   RepoInfo repo;
 
   if ( ! type.empty() )
@@ -1388,18 +1386,53 @@ void modify_repo(Zypper & zypper, const string & alias)
   {
     RepoManager manager(zypper.globalOpts().rm_options);
     RepoInfo repo(manager.getRepositoryInfo(alias));
+    bool change_able = false;
+    bool change_autoref = false;
 
     if (!indeterminate(enable))
+    {
+      if (enable != repo.enabled())
+        change_able = true;
       repo.setEnabled(enable);
+    }
 
     if (!indeterminate(autoref))
+    {
+      if (autoref != repo.autorefresh())
+        change_autoref = true;
       repo.setAutorefresh(autoref);
+    }
 
-    manager.modifyRepository(alias, repo);
 
-    zypper.out().info(boost::str(format(
-      _("Repository %s has been sucessfully modified.")) % alias));
-    MIL << format("Repository %s modified:") % alias << repo << endl;
+    if (change_able || change_autoref)
+    {
+      manager.modifyRepository(alias, repo);
+      if (change_able)
+      {
+        if (repo.enabled())
+          zypper.out().info(boost::str(format(
+            _("Repository %s has been sucessfully enabled.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("Repository %s has been sucessfully disabled.")) % alias));
+      }
+
+      if (change_autoref)
+      {
+        if (repo.autorefresh())
+          zypper.out().info(boost::str(format(
+            _("Repository %s has activated autorefresh.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("Repository %s has disabled autorefresh.")) % alias));
+      }
+    }
+    else
+    {
+      zypper.out().info(
+        _("Nothink to change. No options change repository settings."));
+      MIL << format("Repository %s nothink to modify:") % alias << repo << endl;
+    }
   }
   catch (const Exception & ex)
   {
