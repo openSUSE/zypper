@@ -24,6 +24,7 @@
 
 #include "zypp/media/MediaSource.h"
 #include "zypp/media/MediaException.h"
+#include "zypp/base/Deprecated.h"
 
 namespace zypp {
   namespace media {
@@ -322,6 +323,8 @@ class MediaHandler {
 	 **/
         virtual void disconnectFrom() { return; }
 
+        ZYPP_DEPRECATED virtual void releaseFrom( bool eject = false ) = 0;
+
 	/**
 	 * Call concrete handler to release the media.
 	 *
@@ -329,11 +332,12 @@ class MediaHandler {
 	 * instance only, physically eject the media (i.e. CD-ROM).
 	 *
 	 * Asserted that media is attached.
+	 * \param ejectDev Device to eject. None if empty.
 	 *
 	 * \throws MediaException
 	 *
 	 **/
-	virtual void releaseFrom( bool eject ) = 0;
+	virtual void releaseFrom( const std::string & ejectDev = "" ) = 0;
 
 	/**
 	 * Call concrete handler to physically eject the media (i.e. CD-ROM)
@@ -341,7 +345,7 @@ class MediaHandler {
 	 *
 	 * Asserted that media is not attached.
 	 **/
-	virtual void forceEject() {}
+	virtual void forceEject( const std::string & device ) {}
 
 	/**
 	 * Call concrete handler to provide file below attach point.
@@ -553,12 +557,11 @@ class MediaHandler {
 
 	/**
 	 * Use concrete handler to release the media.
-	 * @param eject if true, physically eject the media * (i.e. CD-ROM)
+	 * @param eject Device to physically eject. None if empty.
 	 *
 	 * \throws MediaException
-	 *
 	 **/
-	void release( bool eject = false );
+	void release( const std::string & ejectDev = "");
 
 	/**
 	 * Use concrete handler to provide file denoted by path below

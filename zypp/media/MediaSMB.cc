@@ -279,12 +279,17 @@ namespace zypp {
     //
     //	DESCRIPTION : Asserted that media is attached.
     //
-    void MediaSMB::releaseFrom( bool eject )
+    void MediaSMB::releaseFrom( const std::string & ejectDev )
     {
       Mount mount;
       mount.umount(attachPoint().asString());
     }
 
+    // deprecated
+    void MediaSMB::releaseFrom( bool eject )
+    {
+      releaseFrom( "" );
+    }
 
     ///////////////////////////////////////////////////////////////////
     //

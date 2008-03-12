@@ -20,6 +20,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Deprecated.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
@@ -210,7 +211,16 @@ namespace zypp {
 	 * \throws MediaException
 	 *
 	 **/
-	void release( bool eject = false );
+	void release( bool eject = false ) ZYPP_DEPRECATED;
+
+        /**
+         * Use concrete handler to release the media.
+         * @param ejectDev Device to eject. None if empty.
+         *
+         * \throws MediaException
+         *
+         **/
+        void release( const std::string & ejectDev = "" );
 
 	/**
 	 * Use concrete handler to provide file denoted by path below

@@ -700,12 +700,13 @@ void MediaHandler::disconnect()
 //
 //	DESCRIPTION :
 //
-void MediaHandler::release( bool eject )
+void MediaHandler::release( const std::string & ejectDev )
 {
   if ( !isAttached() ) {
-    DBG << "Request to release media - not attached; eject " << eject << std::endl;
-    if ( eject )
-      forceEject();
+    DBG << "Request to release media - not attached; eject '" << ejectDev << "'"
+        << std::endl;
+    if ( !ejectDev.empty() )
+      forceEject(ejectDev);
     return;
   }
 
@@ -718,7 +719,7 @@ void MediaHandler::release( bool eject )
   {
     DBG << "Releasing media " << _mediaSource->asString() << std::endl;
     try {
-      releaseFrom( eject ); // pass to concrete handler
+      releaseFrom( ejectDev ); // pass to concrete handler
     }
     catch(const MediaNotEjectedException &e)
     {
@@ -734,7 +735,7 @@ void MediaHandler::release( bool eject )
     _mediaSource.reset(NULL);
     removeAttachPoint();
   }
-  else if( eject) {
+  else if( !ejectDev.empty() ) {
     //
     // Can't eject a shared media
     //
@@ -749,7 +750,7 @@ void MediaHandler::release( bool eject )
     setMediaSource(media);
     DBG << "Releasing media (forced) " << _mediaSource->asString() << std::endl;
     try {
-      releaseFrom( eject ); // pass to concrete handler
+      releaseFrom( ejectDev ); // pass to concrete handler
     }
     catch(const MediaNotEjectedException &e)
     {

@@ -102,7 +102,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt);
       MIL << "No products description found on the Url" << std::endl;
     }
-    media_mgr.release(id);
+    media_mgr.release(id, "");
  }
  
  /**

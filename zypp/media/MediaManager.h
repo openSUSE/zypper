@@ -596,11 +596,14 @@ namespace zypp
        * that are _not_ used by another access id's.
        *
        * \param accessId A media access id.
-       * \param eject    Whether to eject the drive.
+       * \param ejectDev Device to eject. None if empty.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
-      release(MediaAccessId accessId, bool eject = false);
+      release(MediaAccessId accessId, const std::string & ejectDev = "");
+
+      void
+      release(MediaAccessId accessId, bool eject = false) ZYPP_DEPRECATED;
 
       /**
        * Release all attached media.

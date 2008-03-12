@@ -383,12 +383,16 @@ namespace zypp {
     //
     //	DESCRIPTION : Asserted that media is attached.
     //
-    void MediaDISK::releaseFrom( bool eject )
+    void MediaDISK::releaseFrom( const std::string & ejectDev )
     {
       Mount mount;
       mount.umount(attachPoint().asString());
     }
 
+    void MediaDISK::releaseFrom( bool eject )
+    {
+      releaseFrom("");
+    }
 
     ///////////////////////////////////////////////////////////////////
     //

@@ -597,7 +597,7 @@ namespace zypp
           ZYPP_RETHROW(ex);
 
         if (ref.handler->isAttached())
-          ref.handler->release();
+          ref.handler->release("");
       }
 
       MIL << "checkDesired(" << accessId << ") of first device failed,"
@@ -625,7 +625,7 @@ namespace zypp
           AttachedMedia media(ref.handler->attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << ": not desired media." << std::endl;
 
-          ref.handler->release();
+          ref.handler->release("");
         }
         catch (const MediaException & ex)
         {
@@ -637,22 +637,25 @@ namespace zypp
           AttachedMedia media(ref.handler->attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl; 
 
-          if (ref.handler->isAttached()) ref.handler->release();
+          if (ref.handler->isAttached()) ref.handler->release("");
         }
       }
     }
 
     // ---------------------------------------------------------------
     void
-    MediaManager::release(MediaAccessId accessId, bool eject)
+    MediaManager::release(MediaAccessId accessId, const std::string & ejectDev)
     {
       MutexLock glock(g_Mutex);
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      DBG << "release(id=" << accessId
-          << (eject ? ", eject)" : ")") << std::endl;
-      if( eject)
+      DBG << "release(id=" << accessId;
+      if (!ejectDev.empty())
+        DBG << ", " << ejectDev;
+      DBG << ")" << std::endl;
+
+      if(!ejectDev.empty())
       {
         //
         // release MediaISO handlers, that are using the one
@@ -670,7 +673,7 @@ namespace zypp
               DBG << "Forcing release of handler depending on access id "
                   << accessId << std::endl;
               m->second.desired  = false;
-              m->second.handler->release(!eject);
+              m->second.handler->release("");
             }
             catch(const MediaException &e)
             {
@@ -680,7 +683,7 @@ namespace zypp
         }
       }
       ref.desired  = false;
-      ref.handler->release(eject);
+      ref.handler->release(ejectDev);
     }
 
     // ---------------------------------------------------------------

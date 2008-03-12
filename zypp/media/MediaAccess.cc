@@ -270,12 +270,17 @@ MediaAccess::disconnect()
 void
 MediaAccess::release( bool eject )
 {
+  release("");
+}
+
+void
+MediaAccess::release( const std::string & ejectDev )
+{
   if ( !_handler )
     return;
 
-  _handler->release( eject );
+  _handler->release( ejectDev );
 }
-
 
 // provide file denoted by path to attach dir
 //
@@ -415,7 +420,7 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
     media.open( u );
     media.attach();
     media._handler->provideFileCopy( base, to );
-    media.release();
+    media.release("");
   }
   catch (const MediaException & excpt_r)
   {

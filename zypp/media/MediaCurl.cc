@@ -660,15 +660,21 @@ void MediaCurl::disconnectFrom()
   }
 }
 
+// deprecated
+void MediaCurl::releaseFrom( bool eject )
+{
+  releaseFrom("");
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
 //        METHOD NAME : MediaCurl::releaseFrom
-//        METHOD TYPE : PMError
+//        METHOD TYPE : void
 //
 //        DESCRIPTION : Asserted that media is attached.
 //
-void MediaCurl::releaseFrom( bool eject )
+void MediaCurl::releaseFrom( const std::string & ejectDev )
 {
   disconnect();
 }

@@ -113,10 +113,16 @@ namespace zypp {
     //
     //
     //	METHOD NAME : MediaDIR::releaseFrom
-    //	METHOD TYPE : PMError
+    //	METHOD TYPE : void
     //
     //	DESCRIPTION : Asserted that media is attached.
     //
+    void MediaDIR::releaseFrom( const std::string & ejectDev )
+    {
+      return;
+    }
+
+    // deprecated
     void MediaDIR::releaseFrom( bool eject )
     {
       return;

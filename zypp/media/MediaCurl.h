@@ -32,7 +32,9 @@ class MediaCurl : public MediaHandler {
   protected:
 
     virtual void attachTo (bool next = false);
-    virtual void releaseFrom( bool eject );
+    /** \deprecated in favor of releaseFrom(string&) */
+    virtual void releaseFrom( bool eject ) ZYPP_DEPRECATED;
+    virtual void releaseFrom( const std::string & ejectDev );
     virtual void getFile( const Pathname & filename ) const;
     virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
     virtual void getDirInfo( std::list<std::string> & retlist,

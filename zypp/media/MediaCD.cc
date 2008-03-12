@@ -544,6 +544,10 @@ namespace zypp {
     DBG << _lastdev << " " << count << endl;
   }
 
+  void MediaCD::releaseFrom( bool eject )
+  {
+    releaseFrom("");
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -553,7 +557,7 @@ namespace zypp {
   //
   //  DESCRIPTION : Asserted that media is attached.
   //
-  void MediaCD::releaseFrom( bool eject )
+  void MediaCD::releaseFrom( const std::string & ejectDev )
   {
     Mount mount;
     try
@@ -565,29 +569,29 @@ namespace zypp {
     catch (const Exception & excpt_r)
     {
       ZYPP_CAUGHT(excpt_r);
-      if (eject)
+      if (!ejectDev.empty())
       {
 #if FORCE_RELEASE_FOREIGN > 0
         /* 1 = automounted only, 2 = all */
         forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
 #endif
-        if(openTray( mediaSourceName()))
+        if(openTray( ejectDev ))
           return;
       }
       ZYPP_RETHROW(excpt_r);
     }
 
     // eject device
-    if (eject)
+    if (!ejectDev.empty())
     {
 #if FORCE_RELEASE_FOREIGN > 0
       /* 1 = automounted only, 2 = all */
       forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN == 1);
 #endif
-      if( !openTray( mediaSourceName() ))
+      if( !openTray( ejectDev ))
       {
 #if REPORT_EJECT_ERRORS
-        ZYPP_THROW(MediaNotEjectedException(mediaSourceName()));
+        ZYPP_THROW(MediaNotEjectedException(ejectDev));
 #endif
       }
     }
@@ -601,7 +605,7 @@ namespace zypp {
   //
   // Asserted that media is not attached.
   //
-  void MediaCD::forceEject()
+  void MediaCD::forceEject(const std::string & ejectDev)
   {
     bool ejected=false;
     if ( !isAttached()) {	// no device mounted in this instance

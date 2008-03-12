@@ -233,7 +233,7 @@ namespace zypp
         try
         {
           mount.umount(attachPoint().asString());
-          manager.release(_parentId);
+          manager.release(_parentId, "");
         }
         catch (const MediaException & excpt_r)
         {
@@ -247,7 +247,8 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
-    void MediaISO::releaseFrom(bool eject)
+
+    void MediaISO::releaseFrom(const std::string & ejectDev)
     {
       Mount mount;
       mount.umount(attachPoint().asString());
@@ -255,11 +256,17 @@ namespace zypp
       if( _parentId)
       {
         MediaManager manager;
-        manager.release(_parentId);
+        manager.release(_parentId, "");
       }
       // else:
       // the media manager has reset the _parentId
       // and will destroy the parent handler itself.
+    }
+
+    // deprecated
+    void MediaISO::releaseFrom(bool eject)
+    {
+      releaseFrom();
     }
 
     // ---------------------------------------------------------------

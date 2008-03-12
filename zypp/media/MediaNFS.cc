@@ -194,10 +194,22 @@ namespace zypp {
     //
     void MediaNFS::releaseFrom( bool eject )
     {
+      releaseFrom( "" );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //
+    //  METHOD NAME : MediaNFS::releaseFrom
+    //  METHOD TYPE : void
+    //
+    //  DESCRIPTION : Asserted that media is attached.
+    //
+    void MediaNFS::releaseFrom( const std::string & ejectDev )
+    {
       Mount mount;
       mount.umount(attachPoint().asString());
     }
-
 
     ///////////////////////////////////////////////////////////////////
     //
