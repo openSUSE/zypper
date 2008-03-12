@@ -58,7 +58,7 @@ namespace zypp
                       unsigned int devCurrent)
       : Exception( msg_r ), _devices(devices), _dev_current(devCurrent)
       {}
-                      
+
       const std::vector<std::string> & devices() const { return _devices; }
       unsigned int deviceCurrent() const { return _dev_current; }
 

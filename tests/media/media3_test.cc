@@ -114,8 +114,8 @@ BOOST_AUTO_TEST_CASE(strange_test)
     {
       try
       {
-        ONE_STEP("SRC: release(eject=true)")
-        mm.release(src, true);
+        ONE_STEP("SRC: release(ejectDev=\"/dev/device\")")
+        mm.release(src);//! \todo add the device argument once mm.getDevices() is ready
       }
       catch(const MediaException &e)
       {

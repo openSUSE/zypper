@@ -120,7 +120,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           DBG << "Media couldn't provide file " << file << " , releasing." << endl;
           try
           {
-            media_mgr.release (media, false);
+            media_mgr.release (media);
           }
           catch (const Exception & excpt_r)
           {
@@ -234,7 +234,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           DBG << "Media couldn't provide file " << file << " , releasing." << endl;
           try
           {
-            media_mgr.release (media, false);
+            media_mgr.release (media);
           }
           catch (const Exception & excpt_r)
           {
@@ -361,7 +361,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           DBG << "Media couldn't provide dir " << dir << ", releasing." << endl;
           try
           {
-            media_mgr.release (_media, false);
+            media_mgr.release (_media);
           }
           catch (const Exception & excpt_r)
           {
@@ -394,7 +394,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             reason = media::MediaChangeReport::WRONG;
           }
-          
+
           unsigned int devindex = excp.deviceCurrent();
 
           user = report->requestMedia(_url,

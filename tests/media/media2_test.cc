@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(strange_test)
     try
     {
       ONE_STEP("ONE: release()")
-      mm.release(one, true);
+      mm.release(one); //! \todo add the device argument once mm.getDevices() is ready
     }
     catch(const MediaException &e)
     {

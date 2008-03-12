@@ -706,7 +706,7 @@ namespace zypp
           {
             DBG << "Releasing media id " << m->first << std::endl;
             m->second.desired  = false;
-            m->second.handler->release(false);
+            m->second.handler->release();
           }
           else
           {
@@ -1124,7 +1124,7 @@ namespace zypp
         AttachedMedia ret = m->second.handler->attachedMedia();
         if( ret.mediaSource && ret.mediaSource->equals( *media))
         {
-          m->second.handler->release(false);
+          m->second.handler->release();
           m->second.desired  = false;
         }
       }
