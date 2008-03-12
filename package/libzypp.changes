@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 12 14:16:07 CET 2008 - coolo@suse.de
+
+- fix for bnc#369543
+- version 4.4.0
+
+-------------------------------------------------------------------
 Mon Mar 10 13:30:04 CET 2008 - jkupec@suse.cz
 
 - provide download rate info (average and curent) in the
