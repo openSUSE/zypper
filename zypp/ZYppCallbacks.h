@@ -300,8 +300,9 @@ namespace zypp
        * \param url         in: url for which the media is requested,
        *                    out: url to use instead of the original one
        * \param mediumNr    requested medium number
+       * \param label       label of requested medium
        * \param error       type of error from \ref Error enum
-       * \param description
+       * \param description error message (media not desired or error foo occured)
        * \param devices     list of the available devices (for eject)
        * \param dev_current in: index of the currently used device in the \a devices list
        *                    out: index of the devices to be ejected in the \a devices list 
@@ -310,6 +311,7 @@ namespace zypp
       virtual Action requestMedia(
         Url & /* url (I/O parameter) */
         , unsigned /*mediumNr*/
+        , const std::string & /* label */
         , Error /*error*/
         , const std::string & /*description*/
         , const std::vector<std::string> & /* devices */

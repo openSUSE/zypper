@@ -147,6 +147,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           user = report->requestMedia (
               _url,
               media_nr,
+              string(), //! \todo label
               reason,
               excp.asUserString(),
               excp.devices(),
@@ -261,6 +262,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             report->requestMedia (
               _url,
               media_nr,
+              string(), //! \todo label
               reason,
               excp.asUserString(),
               excp.devices(),
@@ -397,6 +399,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
           user = report->requestMedia(_url,
                                       media_nr,
+                                      string(), //! \todo label
                                       reason,
                                       excp.asUserString(),
                                       excp.devices(),
