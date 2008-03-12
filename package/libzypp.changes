@@ -1,8 +1,16 @@
 -------------------------------------------------------------------
+Wed Mar 12 15:55:14 CET 2008 - jkupec@suse.cz
+
+- media backend release() methods changed to take string & instead
+  of bool (needed for FATE #120298)
+- media label, detected device list and current device arguments
+  added to the requestMedia callback
+- version 4.4.0
+
+-------------------------------------------------------------------
 Wed Mar 12 14:16:07 CET 2008 - coolo@suse.de
 
 - fix for bnc#369543
-- version 4.4.0
 
 -------------------------------------------------------------------
 Mon Mar 10 13:30:04 CET 2008 - jkupec@suse.cz
