@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <iostream>
-#ifdef BOOST_AUTO_TEST_MAIN
-#undef BOOST_AUTO_TEST_MAIN
-#endif
 #include <boost/test/auto_unit_test.hpp>
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
@@ -48,7 +45,7 @@ bool check_file_exists(const Pathname &path)
 /*
  * Check how MediaSetAccess::rewriteUrl() works.
  */
-void msa_url_rewrite()
+BOOST_AUTO_TEST_CASE(msa_url_rewrite)
 {
   BOOST_CHECK_EQUAL(
     MediaSetAccess::rewriteUrl(Url("iso:/?iso=/path/to/CD1.iso"), 1).asString(),
@@ -93,11 +90,36 @@ void msa_url_rewrite()
     Url("http://ftp.opensuse.org/pub/opensuse/distribution/SL-OSS-factory/inst-source").asString());
 }
 
+#define DATADIR (string("dir:") + string(TESTS_SRC_DIR) + string("/zypp/data/mediasetaccess"))
+
+/*
+ *
+ * test data dir structure:
+ *
+ * .
+ * |-- src1
+ * |   |-- cd1
+ * |   |   |-- dir
+ * |   |   |   |-- file1
+ * |   |   |   |-- file2
+ * |   |   |   `-- subdir
+ * |   |   |       `-- file
+ * |   |   `-- test.txt
+ * |   |-- cd2
+ * |   |   `-- test.txt
+ * |   `-- cd3
+ * |       `-- test.txt
+ * `-- src2
+ *     `-- test.txt
+ *
+ */
+
 /*
  * Provide files from set without verifiers.
  */
-void msa_provide_files_set(const string &urlstr)
+BOOST_AUTO_TEST_CASE(msa_provide_files_set)
 {
+  string urlstr = DATADIR + "/src1/cd1";
   Url url(urlstr);
   MediaSetAccess setaccess(url);
 
@@ -114,8 +136,9 @@ void msa_provide_files_set(const string &urlstr)
 /*
  * Provide files from set with verifiers.
  */
-void msa_provide_files_set_verified(const string &urlstr)
+BOOST_AUTO_TEST_CASE(msa_provide_files_set_verified)
 {
+  string urlstr = DATADIR + "/src1/cd1";
   Url url(urlstr);
   MediaSetAccess setaccess(url);
 
@@ -139,8 +162,9 @@ void msa_provide_files_set_verified(const string &urlstr)
 /*
  * Provide file from single media with verifier.
  */
-void msa_provide_files_single(const string &urlstr)
+BOOST_AUTO_TEST_CASE(msa_provide_files_single)
 {
+  string urlstr = DATADIR + "/src2";
   Url url(urlstr);
   MediaSetAccess setaccess(url);
   setaccess.setVerifier(1, media::MediaVerifierRef(new SimpleVerifier("media")));
@@ -158,8 +182,9 @@ void msa_provide_files_single(const string &urlstr)
 /*
  * Provide directory from src/cd1.
  */
-void msa_provide_dir(const string &urlstr)
+BOOST_AUTO_TEST_CASE(msa_provide_dir)
 {
+  string urlstr = DATADIR + "/src1/cd1";
   Url url(urlstr);
   MediaSetAccess setaccess(url);
 
@@ -188,8 +213,9 @@ void msa_provide_dir(const string &urlstr)
 /*
  * Provide directory from src/cd1 (recursively).
  */
-void msa_provide_dirtree(const string &urlstr)
+BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
 {
+  string urlstr = DATADIR + "/src1/cd1";
   Url url(urlstr);
   MediaSetAccess setaccess(url);
 
@@ -205,64 +231,5 @@ void msa_provide_dirtree(const string &urlstr)
   BOOST_CHECK(check_file_exists(file3) == true);
 }
 
-
-/*
- *
- * test data dir structure:
- *
- * .
- * |-- src1
- * |   |-- cd1
- * |   |   |-- dir
- * |   |   |   |-- file1
- * |   |   |   |-- file2
- * |   |   |   `-- subdir
- * |   |   |       `-- file
- * |   |   `-- test.txt
- * |   |-- cd2
- * |   |   `-- test.txt
- * |   `-- cd3
- * |       `-- test.txt
- * `-- src2
- *     `-- test.txt
- *
- */
-
-test_suite*
-init_unit_test_suite( int argc, char *argv[] )
-{
-  test_suite* test= BOOST_TEST_SUITE("MediaSetAccessTest");
-
-  // urls to test
-  string datadir( TESTS_SRC_DIR );
-  datadir += "/zypp/data/mediasetaccess";
-  std::string const params[] = {"dir:" + datadir + "/src1/cd1"};
-  std::string const params_single[] = {"dir:" + datadir + "/src2"};
-
-  // url rewrite
-  test->add(BOOST_TEST_CASE(&msa_url_rewrite));
-
-  // provide files from media set
-  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_files_set,
-                                  (std::string const*)params, params+1));
-
-  // provide files from media set with verifier
-  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_files_set_verified,
-                                  (std::string const*)params, params+1));
-
-  // provide file from single media
-  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_files_single,
-                                  (std::string const*)params_single, params_single+1));
-
-  // provide directory
-  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_dir,
-                                  (std::string const*)params, params+1));
-
-  // provide directory tree
-  test->add(BOOST_PARAM_TEST_CASE(&msa_provide_dirtree,
-                                  (std::string const*)params, params+1));
-
-  return test;
-}
 
 // vim: set ts=2 sts=2 sw=2 ai et:
