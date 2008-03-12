@@ -597,7 +597,7 @@ namespace zypp
           ZYPP_RETHROW(ex);
 
         if (ref.handler->isAttached())
-          ref.handler->release("");
+          ref.handler->release();
       }
 
       MIL << "checkDesired(" << accessId << ") of first device failed,"
@@ -625,7 +625,7 @@ namespace zypp
           AttachedMedia media(ref.handler->attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << ": not desired media." << std::endl;
 
-          ref.handler->release("");
+          ref.handler->release();
         }
         catch (const MediaException & ex)
         {
@@ -637,7 +637,7 @@ namespace zypp
           AttachedMedia media(ref.handler->attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl; 
 
-          if (ref.handler->isAttached()) ref.handler->release("");
+          if (ref.handler->isAttached()) ref.handler->release();
         }
       }
     }
@@ -673,7 +673,7 @@ namespace zypp
               DBG << "Forcing release of handler depending on access id "
                   << accessId << std::endl;
               m->second.desired  = false;
-              m->second.handler->release("");
+              m->second.handler->release();
             }
             catch(const MediaException &e)
             {

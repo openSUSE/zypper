@@ -323,8 +323,6 @@ class MediaHandler {
 	 **/
         virtual void disconnectFrom() { return; }
 
-        ZYPP_DEPRECATED virtual void releaseFrom( bool eject = false ) = 0;
-
 	/**
 	 * Call concrete handler to release the media.
 	 *
@@ -561,7 +559,7 @@ class MediaHandler {
 	 *
 	 * \throws MediaException
 	 **/
-	void release( const std::string & ejectDev = "");
+	void release( const std::string & ejectDev = "" );
 
 	/**
 	 * Use concrete handler to provide file denoted by path below

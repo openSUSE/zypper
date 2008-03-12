@@ -660,11 +660,6 @@ void MediaCurl::disconnectFrom()
   }
 }
 
-// deprecated
-void MediaCurl::releaseFrom( bool eject )
-{
-  releaseFrom("");
-}
 
 ///////////////////////////////////////////////////////////////////
 //

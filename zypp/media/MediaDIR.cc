@@ -122,12 +122,6 @@ namespace zypp {
       return;
     }
 
-    // deprecated
-    void MediaDIR::releaseFrom( bool eject )
-    {
-      return;
-    }
-
     ///////////////////////////////////////////////////////////////////
     //
     //

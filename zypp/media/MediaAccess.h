@@ -204,15 +204,6 @@ namespace zypp {
         */
         void disconnect();
 
-	/**
-	 * Use concrete handler to release the media.
-	 * @param eject if true, physically eject the media * (i.e. CD-ROM)
-	 *
-	 * \throws MediaException
-	 *
-	 **/
-	void release( bool eject = false ) ZYPP_DEPRECATED;
-
         /**
          * Use concrete handler to release the media.
          * @param ejectDev Device to eject. None if empty.

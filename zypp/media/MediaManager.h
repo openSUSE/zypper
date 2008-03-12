@@ -587,23 +587,16 @@ namespace zypp
       /**
        * Release the attached media and optionally eject.
        *
-       * If the \p eject parameter is set to true and there
-       * is currently an attached drive, all other access
-       * id's are released and the drive (CD/DVD drive) is
+       * If the \p ejectDev parameter is not empty all other access
+       * id's are released and the specified drive (CD/DVD drive) is
        * ejected.
-       * In case that there is currently no attached drive,
-       * a \p eject set to true causes to eject all drives
-       * that are _not_ used by another access id's.
-       *
+       * 
        * \param accessId A media access id.
        * \param ejectDev Device to eject. None if empty.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
       release(MediaAccessId accessId, const std::string & ejectDev = "");
-
-      void
-      release(MediaAccessId accessId, bool eject = false) ZYPP_DEPRECATED;
 
       /**
        * Release all attached media.

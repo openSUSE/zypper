@@ -389,11 +389,6 @@ namespace zypp {
       mount.umount(attachPoint().asString());
     }
 
-    void MediaDISK::releaseFrom( bool eject )
-    {
-      releaseFrom("");
-    }
-
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : MediaDISK::getFile

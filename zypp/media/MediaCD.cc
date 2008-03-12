@@ -544,10 +544,6 @@ namespace zypp {
     DBG << _lastdev << " " << count << endl;
   }
 
-  void MediaCD::releaseFrom( bool eject )
-  {
-    releaseFrom("");
-  }
 
   ///////////////////////////////////////////////////////////////////
   //
