@@ -37,14 +37,13 @@ namespace zypp
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */
-      MediaException() : Exception( "Media Exception" ),
-        _devices(std::vector<std::string>()), _dev_current(0)
+      MediaException() : Exception( "Media Exception" ), _dev_current(0)
       {}
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaException( const std::string & msg_r )
-      : Exception( msg_r ), _devices(std::vector<std::string>()), _dev_current(0)
+      : Exception( msg_r ), _dev_current(0)
       {}
 
       /**
@@ -65,10 +64,10 @@ namespace zypp
       /** Dtor. */
       virtual ~MediaException() throw() {};
 
-    protected:
-      void operator = (const MediaException & ex) {}
+//    private:
+//      void operator = (const MediaException & ex) {}
     private:
-      const std::vector<std::string> & _devices;
+      std::vector<std::string> _devices;
       unsigned int _dev_current;
     };
 
