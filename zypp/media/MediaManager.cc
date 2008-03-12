@@ -982,7 +982,16 @@ namespace zypp
 
       return ref.handler->doesFileExist(filename);
     }
-    
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::getDetectedDevices(MediaAccessId accessId,
+                                     std::vector<std::string> & devices,
+                                     unsigned int & index) const
+    {
+      //! \todo implementation
+    }
+
     // ---------------------------------------------------------------
     // STATIC
     time_t

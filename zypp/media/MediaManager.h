@@ -802,6 +802,17 @@ namespace zypp
        */
       bool doesFileExist(MediaAccessId  accessId,
                          const Pathname & filename ) const;
+
+      /**
+       * Fill in a vector of detected devices and the index of the currently
+       * attached device within the vector. The contents of the vector
+       * are the device names (/dev/cdrom and such).
+       */
+      void
+      getDetectedDevices(MediaAccessId accessId,
+                         std::vector<std::string> & devices,
+                         unsigned int & index) const;
+
     public:
       /**
        * Get the modification time of the /etc/mtab file.
@@ -829,7 +840,7 @@ namespace zypp
       bool
       isUseableAttachPoint(const Pathname &path,
                            bool            mtab=true) const;
-
+      
     private:
       friend class MediaHandler;
 

@@ -37,38 +37,17 @@ namespace zypp
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */
-      MediaException() : Exception( "Media Exception" ), _dev_current(0)
+      MediaException() : Exception( "Media Exception" )
       {}
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaException( const std::string & msg_r )
-      : Exception( msg_r ), _dev_current(0)
+      : Exception( msg_r )
       {}
-
-      /**
-       * Ctor taking the message and detected device list (e.g. for ejecting).
-       * \param msg_r
-       * \param devices    list of available devices as vector
-       * \param devCurrent index of the currently used device in the \a devices vector
-       */
-      MediaException( const std::string & msg_r,
-                      const std::vector<std::string> & devices,
-                      unsigned int devCurrent)
-      : Exception( msg_r ), _devices(devices), _dev_current(devCurrent)
-      {}
-
-      const std::vector<std::string> & devices() const { return _devices; }
-      unsigned int deviceCurrent() const { return _dev_current; }
 
       /** Dtor. */
       virtual ~MediaException() throw() {};
-
-//    private:
-//      void operator = (const MediaException & ex) {}
-    private:
-      std::vector<std::string> _devices;
-      unsigned int _dev_current;
     };
 
     class MediaMountException : public MediaException

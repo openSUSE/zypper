@@ -142,7 +142,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          unsigned int devindex = excp.deviceCurrent();
+          vector<string> devices;
+          unsigned int devindex;
+          media_mgr.getDetectedDevices(media, devices, devindex);
 
           user = report->requestMedia (
               _url,
@@ -150,8 +152,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
               string(), //! \todo label
               reason,
               excp.asUserString(),
-              excp.devices(),
-              devindex
+              devices, devindex
             );
 
           DBG << "doesFileExist exception caught, callback answer: " << user << endl;
@@ -173,8 +174,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release (media,
-              excp.devices().empty() ? "" : excp.devices()[devindex]);
+            media_mgr.release (media, devices.empty() ? "" : devices[devindex]);
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -256,18 +256,25 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          unsigned int devindex = excp.deviceCurrent();
+          unsigned int devindex = 0;
+          vector<string> devices;
 
-          user  = checkonly ? media::MediaChangeReport::ABORT :
+          if (checkonly)
+            user  = media::MediaChangeReport::ABORT;
+          else
+          {
+            media_mgr.getDetectedDevices(media, devices, devindex);
+
             report->requestMedia (
               _url,
               media_nr,
               string(), //! \todo label
               reason,
               excp.asUserString(),
-              excp.devices(),
+              devices,
               devindex
             );
+          }
 
           DBG << "ProvideFile exception caught, callback answer: " << user << endl;
 
@@ -288,8 +295,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release (media,
-              excp.devices().empty() ? "" : excp.devices()[devindex]);
+            media_mgr.release (media, devices.empty() ? "" : devices[devindex]);
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -395,14 +401,16 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          unsigned int devindex = excp.deviceCurrent();
+          vector<string> devices;
+          unsigned int devindex;
+          media_mgr.getDetectedDevices(_media, devices, devindex);
 
           user = report->requestMedia(_url,
                                       media_nr,
                                       string(), //! \todo label
                                       reason,
                                       excp.asUserString(),
-                                      excp.devices(),
+                                      devices,
                                       devindex);
 
           DBG << "ProvideFile exception caught, callback answer: " << user << endl;
@@ -417,7 +425,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release (_media, excp.devices().empty() ? "" : excp.devices()[devindex]);
+            media_mgr.release(_media, devices.empty() ? "" : devices[devindex]);
           }
           else if (user == media::MediaChangeReport::RETRY ||
               user == media::MediaChangeReport::CHANGE_URL)
