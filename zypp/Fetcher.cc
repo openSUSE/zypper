@@ -117,16 +117,24 @@ namespace zypp
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
   {
     PathInfo info(cache_dir);
-    if ( info.isDir() )
+    if ( info.isExist() )
     {
-      DBG << "Adding fetcher cache: '" << cache_dir << "'." << endl;
-      _caches.push_back(cache_dir);
+      if ( info.isDir() )
+      {
+        DBG << "Adding fetcher cache: '" << cache_dir << "'." << endl;
+        _caches.push_back(cache_dir);
+      }
+      else
+      {
+        // don't add bad cache directory, just log the error
+        ERR << "Not adding cache: '" << cache_dir << "'. Not a directory." << endl;
+      }
     }
     else
     {
-      // don't add bad cache directory, just log the error
-      ERR << "Not adding cache: '" << cache_dir << "'. Not a directory." << endl;
+        ERR << "Not adding cache '" << cache_dir << "'. Path does not exists." << endl;
     }
+    
   }
 
   void Fetcher::Impl::start( const Pathname &dest_dir,

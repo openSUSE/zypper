@@ -579,7 +579,9 @@ namespace zypp
                 it != repos.end();
                 ++it )
           {
-            downloader_ptr->addCachePath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
+            Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
+            if ( PathInfo(cachepath).isExist() )  
+              downloader_ptr->addCachePath(cachepath);
           }
 
           downloader_ptr->download( media, tmpdir.path());
