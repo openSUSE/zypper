@@ -69,6 +69,7 @@ namespace zypp
     repoRawCachePath = ZConfig::instance().repoMetadataPath();
     repoPackagesCachePath = ZConfig::instance().repoPackagesPath();
     knownReposPath   = ZConfig::instance().knownReposPath();
+    probe            = ZConfig::instance().repo_add_probe();
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -1010,8 +1011,7 @@ namespace zypp
     RepoInfo tosave = info;
 
     // check the first url for now
-    if ( ZConfig::instance().repo_add_probe()
-        || ( tosave.type() == RepoType::NONE && tosave.enabled()) )
+    if ( _pimpl->options.probe )
     {
       DBG << "unknown repository type, probing" << endl;
 

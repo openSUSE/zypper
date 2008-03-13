@@ -53,6 +53,7 @@ namespace zypp
     Pathname repoRawCachePath;
     Pathname repoPackagesCachePath;
     Pathname knownReposPath;
+    bool probe;
   };
 
   /**
