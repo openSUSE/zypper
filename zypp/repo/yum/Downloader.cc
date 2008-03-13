@@ -105,24 +105,29 @@ void Downloader::download( MediaSetAccess &media,
   
   _dest_dir = dest_dir;
   
-  if ( _media_ptr->doesFileExist(keypath) )
-    this->enqueue( OnMediaLocation(keypath,1) );
+  SignatureFileChecker sigchecker;
 
   if ( _media_ptr->doesFileExist(sigpath) )
+  {
      this->enqueue( OnMediaLocation(sigpath,1) );
+     this->start( dest_dir, *_media_ptr);
+     this->reset();
+     sigchecker = SignatureFileChecker(dest_dir + sigpath);
+  }
+ 
+  if ( _media_ptr->doesFileExist(keypath) )
+  {
+    this->enqueue( OnMediaLocation(keypath,1) );
+    this->start( dest_dir, *_media_ptr);
+    this->reset();
+    sigchecker.addPublicKey(dest_dir + keypath);
+  }
 
+ 
   this->start( dest_dir, *_media_ptr );
 
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());
-
-  SignatureFileChecker sigchecker;
-
-  if ( PathInfo( dest_dir + sigpath ).isExist() )
-    sigchecker = SignatureFileChecker(dest_dir + sigpath);
-
-  if ( PathInfo( dest_dir + keypath ).isExist() )
-    sigchecker.addPublicKey(dest_dir + keypath );
 
   this->enqueue( OnMediaLocation(repomdpath,1), sigchecker );
   this->start( dest_dir, *_media_ptr);
