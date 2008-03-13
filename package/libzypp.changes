@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 13 11:45:20 CET 2008 - jkupec@suse.cz
+
+- release all media before requesting another (bnc #336881)
+- revision 9110
+
+-------------------------------------------------------------------
 Thu Mar 13 11:32:56 CET 2008 - jkupec@suse.cz
 
 - getDetectedDevices added (fate #120298)
