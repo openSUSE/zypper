@@ -146,6 +146,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           unsigned int devindex;
           media_mgr.getDetectedDevices(media, devices, devindex);
 
+          // release all media before requesting another (#336881)
+          media_mgr.releaseAll();
+
           user = report->requestMedia (
               _url,
               media_nr,
@@ -264,6 +267,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else
           {
             media_mgr.getDetectedDevices(media, devices, devindex);
+            // release all media before requesting another (#336881)
+            media_mgr.releaseAll();
 
             report->requestMedia (
               _url,
@@ -404,6 +409,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           vector<string> devices;
           unsigned int devindex;
           media_mgr.getDetectedDevices(_media, devices, devindex);
+
+          // release all media before requesting another (#336881)
+          media_mgr.releaseAll();
 
           user = report->requestMedia(_url,
                                       media_nr,
