@@ -25,19 +25,20 @@ Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
 BuildRequires:  libsatsolver-devel openssl-devel
-BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel rpm-devel
+BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 %if 0%{?suse_version}
-BuildRequires:  hicolor-icon-theme update-desktop-files
+BuildRequires:  hicolor-icon-theme update-desktop-files rpm-devel
 %endif
 
 %if 0%{?fedora_version}
-BuildRequires: glib2-devel popt-devel dbus-glib-devel
+BuildRequires: glib2-devel popt-devel dbus-glib-devel rpm-devel
 %endif
 
 %if 0%{?mandriva_version}
 BuildRequires:  sqlite3-devel
 BuildRequires:  glib2-devel
+BuildRequires:  librpm-devel
 %else
 BuildRequires:  sqlite-devel
 %endif
