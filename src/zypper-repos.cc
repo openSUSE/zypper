@@ -28,7 +28,6 @@ using namespace boost;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::media;
-using namespace zypp::parser;
 
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
@@ -1515,7 +1514,10 @@ void load_repo_resolvables(Zypper & zypper)
       ZYPP_CAUGHT(e);
       zypper.out().error(e,
           boost::str(format(_("Problem loading data from '%s'")) % repo.name()),
-          _("Try 'zypper refresh', or even remove /var/cache/zypp/zypp.db before doing so."));
+          // translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
+          boost::str(format(_("Try '%s', or even '%s' before doing so."))
+            % "zypper refresh" % "zypper clean -m")
+      );
       zypper.out().info(boost::str(format(
         _("Resolvables from '%s' not loaded because of error.")) % repo.name()));
     }
