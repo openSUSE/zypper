@@ -231,7 +231,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
     Zypper::instance()->out().progressEnd("install-resolvable", _label, true);
     ostringstream s;
-    s << boost::format(_("Installation of %s failed:")) % resolvable << std::endl;
+    s << boost::format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
     s << level << " " << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
 
