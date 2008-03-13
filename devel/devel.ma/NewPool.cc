@@ -450,7 +450,7 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
-  if ( 1 )
+  if ( 0 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -508,7 +508,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -520,6 +520,20 @@ try {
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
+
+  const char* argv[] =
+  {
+    "ls", "-fail",
+    NULL
+  };
+  ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+  int ret = prog.close();
+  if ( ret != 0 )
+  {
+    Exception ex(str::form("Failed command (%s)", prog.execError().c_str() ) );
+    ex.remember( prog.command() );
+    ZYPP_THROW(ex);
+  }
 
   if ( 0 )
   {

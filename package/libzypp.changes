@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 13 12:33:13 CET 2008 - ma@suse.de
+
+- Add ExternalProgram::execError and ExternalProgram::command
+  to improve error reporting.
+- revision 9112
+
+-------------------------------------------------------------------
 Thu Mar 13 11:45:20 CET 2008 - jkupec@suse.cz
 
 - release all media before requesting another (bnc #336881)
