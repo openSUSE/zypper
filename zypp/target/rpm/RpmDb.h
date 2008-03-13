@@ -406,6 +406,12 @@ private:
    * The exit code of the rpm process, or -1 if not yet known.
   */
   int exit_code;
+  
+  /**
+   * Error message from running rpm as external program.
+   * Use only if something fail.
+   */
+  std::string error_message;
 
   /** /var/adm/backup */
   Pathname _backuppath;

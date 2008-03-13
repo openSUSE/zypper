@@ -887,7 +887,8 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("rpm failed with message: ") + errmsg));
+    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
+               (errmsg.empty() ? error_message: errmsg)));
   }
   else
   {
@@ -1041,7 +1042,8 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("Failed to import public key from file ") + pubkey_r.asString() + string(": rpm returned  ") + str::numstring(rpm_status)));
+    ZYPP_THROW(RpmSubprocessException(string("Failed to import public key from file ") +
+               pubkey_r.asString() + ":" + error_message));
   }
   else
   {
@@ -1115,7 +1117,8 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("Failed to remove public key ") + pubkey_r.asString() + string(": rpm returned  ") + str::numstring(rpm_status)));
+    ZYPP_THROW(RpmSubprocessException(string("Failed to remove public key ") +
+               pubkey_r.asString() + ":" + error_message));
   }
   else
   {
@@ -1793,6 +1796,10 @@ RpmDb::systemStatus()
     return -1;
 
   exit_code = process->close();
+  if (exit_code == 0)
+    error_message = "";
+  else
+    error_message = process->execError();
   process->kill();
   delete process;
   process = 0;
@@ -2044,7 +2051,8 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
     // %s = filename of rpm package
     progresslog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
     progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") + rpmmsg));
+    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
+               (rpmmsg.empty() ? error_message : rpmmsg)));
   }
   else
   {
@@ -2162,7 +2170,8 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::Se
     // %s = name of rpm package
     progresslog(/*timestamp*/true) << str::form(_("%s remove failed"), name_r.c_str()) << endl;
     progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") + rpmmsg));
+    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
+               (rpmmsg.empty() ? error_message: rpmmsg)));
   }
   else
   {
