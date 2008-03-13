@@ -216,7 +216,7 @@ namespace zypp {
   //  METHOD TYPE : MediaCD::DeviceList
   //
   MediaCD::DeviceList
-  MediaCD::detectDevices(bool supportingDVD)
+  MediaCD::detectDevices(bool supportingDVD) const
   {
     using namespace zypp::target::hal;
 
@@ -826,6 +826,43 @@ namespace zypp {
       return true;
 
     return (unsigned) _lastdev_tried < _devices.size() - 1;
+  }
+
+  void
+  MediaCD::getDetectedDevices(std::vector<std::string> & devices,
+                              unsigned int & index) const
+  {
+    index = 0;
+    if (!devices.empty())
+      devices.clear();
+
+    for (DeviceList::const_iterator it = _devices.begin();
+         it != _devices.end(); ++it)
+      devices.push_back(it->name);
+
+    if (_lastdev >= 0)
+      index = _lastdev;
+
+    // try to detect again if _devices are empty (maybe this method will be
+    // called before _devices get actually filled)
+    if (devices.empty())
+    {
+      DBG << "no device list so far, trying to detect" << endl;
+
+      DeviceList detected(
+        detectDevices(_url.getScheme() == "dvd" ? true : false));
+
+      for (DeviceList::const_iterator it = detected.begin();
+           it != detected.end(); ++it)
+        devices.push_back(it->name);
+
+      // don't know which one is in use in this case
+      index = 0;
+    }
+
+    MIL << "got " << devices.size() << " detected devices, current: "
+        << (index < devices.size() ? devices[index] : "<none>")
+        << "(" << index << ")" << endl;
   }
 
 

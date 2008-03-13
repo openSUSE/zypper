@@ -235,6 +235,22 @@ bool MediaAccess::hasMoreDevices() const
 }
 
 
+void
+MediaAccess::getDetectedDevices(std::vector<std::string> & devices,
+                                unsigned int & index) const
+{
+  if (_handler)
+  {
+    _handler->getDetectedDevices(devices, index);
+    return;
+  }
+
+  if (!devices.empty())
+    devices.clear();
+  index = 0;
+}
+
+
 // local directory that corresponds to medias url
 // If media is not open an empty pathname.
 Pathname

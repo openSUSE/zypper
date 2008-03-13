@@ -804,9 +804,13 @@ namespace zypp
                          const Pathname & filename ) const;
 
       /**
-       * Fill in a vector of detected devices and the index of the currently
-       * attached device within the vector. The contents of the vector
+       * Fill in a vector of detected ejectable devices and the index of the
+       * currently attached device within the vector. The contents of the vector
        * are the device names (/dev/cdrom and such).
+       * 
+       * \param accessId Medium id.
+       * \param devices  vector to load with the device names
+       * \param index    index of the currently used device in the devices vector
        */
       void
       getDetectedDevices(MediaAccessId accessId,

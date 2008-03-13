@@ -1383,6 +1383,18 @@ bool MediaHandler::hasMoreDevices()
   return false;
 }
 
+void MediaHandler::getDetectedDevices(std::vector<std::string> & devices,
+                                      unsigned int & index) const
+{
+  // clear the vector by default
+  if (!devices.empty())
+    devices.clear();
+  index = 0;
+
+  DBG << "No devices for this medium" << endl;
+}
+
+
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

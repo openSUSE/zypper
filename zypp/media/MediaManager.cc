@@ -989,7 +989,9 @@ namespace zypp
                                      std::vector<std::string> & devices,
                                      unsigned int & index) const
     {
-      //! \todo implementation
+      MutexLock glock(g_Mutex);
+      ManagedMedia &ref( m_impl->findMM(accessId));
+      return ref.handler->getDetectedDevices(devices, index);
     }
 
     // ---------------------------------------------------------------

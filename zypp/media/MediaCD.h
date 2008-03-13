@@ -40,7 +40,7 @@ namespace zypp {
         static bool openTray( const std::string & device_r );
         static bool closeTray( const std::string & device_r );
 
-	DeviceList  detectDevices(bool supportingDVD);
+	DeviceList  detectDevices(bool supportingDVD) const;
 
       protected:
 
@@ -59,6 +59,10 @@ namespace zypp {
 	virtual bool isAutoMountedMedia(const AttachedMedia &media);
         
         virtual bool hasMoreDevices();
+
+        virtual void
+        getDetectedDevices(std::vector<std::string> & devices,
+                           unsigned int & index) const;
 
       public:
 
