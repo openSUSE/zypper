@@ -31,6 +31,10 @@ BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel gra
 BuildRequires:  hicolor-icon-theme update-desktop-files
 %endif
 
+%if 0%{?fedora_version}
+BuildRequires: glib2-devel popt-devel dbus-glib-devel
+%endif
+
 %if 0%{?mandriva_version}
 BuildRequires:  sqlite3-devel
 BuildRequires:  glib2-devel
