@@ -5,7 +5,7 @@
 #include "zypp/ByteCount.h" // for download progress reporting
 
 #include "../zypper-main.h"
-#include "../AliveCursor.h"
+#include "AliveCursor.h"
 
 #include "OutNormal.h"
 

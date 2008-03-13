@@ -152,19 +152,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
 }
 
 // ---------------------------------------------------------------------------
-/*
-bool build_cache_callback(const ProgressData & pd)
-{
-  static AliveCursor cursor;
-  if ( pd.val() == 100 )
-    cout << CLEARLN << cursor.done() << " " << pd.name();
-  else
-    cout << CLEARLN << cursor++ << " " << pd.name();
-  cout << " [" << pd.val() << "%] :O)";
-  cout << flush;
-  return true;
-}
-*/
+
 static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 {
   if (force_build)
