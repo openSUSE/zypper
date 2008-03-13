@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 13 11:32:56 CET 2008 - jkupec@suse.cz
+
+- getDetectedDevices added (fate #120298)
+- revision 9108
+
+-------------------------------------------------------------------
 Wed Mar 12 15:55:14 CET 2008 - jkupec@suse.cz
 
 - media backend release() methods changed to take string & instead
