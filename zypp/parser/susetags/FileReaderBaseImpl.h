@@ -93,7 +93,7 @@ namespace zypp
 	  {
 	    std::for_each( tag_r->value.begin(),
 			   tag_r->value.end(),
-			   bind( &BaseImpl::depAddLine, this, _1, refers_r, ref(deps_r) ) );
+			   boost::bind( &BaseImpl::depAddLine, this, _1, refers_r, boost::ref(deps_r) ) );
 	  }
 
 	public:

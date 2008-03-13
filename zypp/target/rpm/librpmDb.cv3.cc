@@ -9,6 +9,7 @@
 /** \file zypp/target/rpm/librpmDb.cv3.cc
  *
 */
+
 #include "librpm.h"
 
 #include <iostream>
