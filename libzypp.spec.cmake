@@ -97,6 +97,7 @@ Authors:
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
+      -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
       -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
@@ -114,7 +115,11 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
+
+%if 0%{?suse_version}
 %suse_update_desktop_file -G "" -C "" package-manager
+%endif
+
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 # Create filelist with translations
 cd ..
@@ -130,6 +135,7 @@ if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
 %run_ldconfig
 
 %clean
+rm -rf "$RPM_BUILD_ROOT"
 
 %files -f zypp.lang
 %defattr(-,root,root)

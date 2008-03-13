@@ -38,11 +38,13 @@ MESSAGE( "** Manual files will be installed in ${MANDIR}" )
 # CONFIGURATION                                                    #
 ####################################################################
 
-SET( DOC_INSTALL_DIR
-   "${CMAKE_INSTALL_PREFIX}/share/doc/packages/${PACKAGE}"
-   CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
-   FORCE
-)
+IF( NOT DEFINED DOC_INSTALL_DIR )
+  SET( DOC_INSTALL_DIR
+     "${CMAKE_INSTALL_PREFIX}/share/doc/packages/${PACKAGE}"
+     CACHE PATH "The install dir for documentation (default prefix/share/doc/packages/${PACKAGE})"
+     FORCE
+  )
+ENDIF( NOT DEFINED DOC_INSTALL_DIR )
 
 ####################################################################
 # INCLUDES                                                         #
