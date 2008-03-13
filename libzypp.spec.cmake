@@ -111,6 +111,7 @@ make -C po %{?jobs:-j %jobs} translations
 #make check
 
 %install
+rm -rf "$RPM_BUILD_ROOT"
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
