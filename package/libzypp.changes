@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 13 18:40:57 CET 2008 - jreidinger@suse.cz
+
+- enable frontend to rewrite add_probe settings.(bnc #309612) 
+- Correct adding repo without type to lazy probing.
+- revision 9135
+
+-------------------------------------------------------------------
 Thu Mar 13 17:59:52 CET 2008 - jreidinger@suse.cz
 
 - get better message if something fail when trying run rpm
