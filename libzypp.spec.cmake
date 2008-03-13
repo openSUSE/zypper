@@ -33,6 +33,7 @@ BuildRequires:  hicolor-icon-theme update-desktop-files
 
 %if 0%{?mandriva_version}
 BuildRequires:  sqlite3-devel
+BuildRequires:  glib2-devel
 %else
 BuildRequires:  sqlite-devel
 %endif

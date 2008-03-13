@@ -52,8 +52,16 @@ INSTALL( FILES
    ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE}.doxytag
    DESTINATION ${DOC_INSTALL_DIR}
 )
-INSTALL( DIRECTORY
-   ${CMAKE_CURRENT_BINARY_DIR}/html
-   DESTINATION ${DOC_INSTALL_DIR}
+
+# We could use the thing below but it wont work with cmake older than 2.4.4
+FILE(GLOB docfiles ${CMAKE_CURRENT_BINARY_DIR}/html/*)
+INSTALL( FILES
+   ${docfiles}
+   DESTINATION ${DOC_INSTALL_DIR}/html
 )
+
+#INSTALL( DIRECTORY
+#   ${CMAKE_CURRENT_BINARY_DIR}/html
+#   DESTINATION ${DOC_INSTALL_DIR}
+#)
 
