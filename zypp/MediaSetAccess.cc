@@ -177,7 +177,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release (media, devices.empty() ? "" : devices[devindex]);
+            media_mgr.release (media,
+              devindex < devices.size() ? devices[devindex] : "");
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -300,7 +301,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release (media, devices.empty() ? "" : devices[devindex]);
+            media_mgr.release (media,
+              devindex < devices.size() ? devices[devindex] : "");
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )
@@ -433,7 +435,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
             DBG << "Eject: try to release" << endl;
             media_mgr.releaseAll();
             // eject
-            media_mgr.release(_media, devices.empty() ? "" : devices[devindex]);
+            media_mgr.release (_media,
+              devindex < devices.size() ? devices[devindex] : "");
           }
           else if (user == media::MediaChangeReport::RETRY ||
               user == media::MediaChangeReport::CHANGE_URL)
