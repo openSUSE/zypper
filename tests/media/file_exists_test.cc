@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 #include <boost/test/unit_test.hpp>
+#include <boost/test/auto_unit_test.hpp>
 
 #include "mymediaverifier.h"
 
@@ -17,6 +18,41 @@ using namespace zypp::media;
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
+
+BOOST_AUTO_TEST_CASE(curl_params_reset)
+{
+  MediaManager     mm;
+  media::MediaId   id;
+  
+  Url url("http://ftp.kernel.org/pub/");
+  
+  id = mm.open( url, "");
+  mm.attach(id);
+
+  Pathname dest;
+  Pathname src("/README");
+  mm.doesFileExist(id, src);
+  mm.provideFile(id, src);
+  dest = mm.localPath(id, src);
+  BOOST_REQUIRE( PathInfo(dest).size() != 0 );
+    
+  mm.doesFileExist(id, src);
+  mm.provideFile(id, src);
+  dest = mm.localPath(id, src);
+  BOOST_REQUIRE( PathInfo(dest).size() != 0 );
+
+  mm.doesFileExist(id, src);
+  mm.provideFile(id, src);
+  dest = mm.localPath(id, src);
+  BOOST_REQUIRE( PathInfo(dest).size() != 0 );
+
+  mm.doesFileExist(id, src);
+  mm.provideFile(id, src);
+  dest = mm.localPath(id, src);
+  BOOST_CHECK_EQUAL( PathInfo(dest).size() , 1 );
+
+  mm.release(id);   
+}
 
 BOOST_AUTO_TEST_CASE(http_test)
 {
@@ -38,7 +74,7 @@ BOOST_AUTO_TEST_CASE(http_test)
   mm.release(id); 
 }
 
-void ftp_test()
+BOOST_AUTO_TEST_CASE(ftp_test)
 {
   //MediaVerifierRef verifier( new MyMediaVerifier() );
   MediaManager     mm;
@@ -62,7 +98,7 @@ BOOST_AUTO_TEST_CASE(isotest)
 {
    if ( geteuid() != 0 )
    {
-     BOOST_ERROR( "ISO test requires root permissions! (mount)");
+     BOOST_WARN( "ISO test requires root permissions! (mount)");
      return;
    }
   
@@ -87,7 +123,7 @@ BOOST_AUTO_TEST_CASE(nfs_tst)
 {
    if ( geteuid() != 0 )
    {
-     BOOST_ERROR( "NFS test requires root permissions! (mount)");
+     BOOST_WARN( "NFS test requires root permissions! (mount)");
      return;
    }
   
