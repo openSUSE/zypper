@@ -33,11 +33,20 @@ namespace ZmartRecipients
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
-    virtual MediaChangeReport::Action requestMedia( zypp::Url & url,
-                                                    unsigned mediumNr,
-                                                    MediaChangeReport::Error error,
-                                                    const std::string & description )
+    virtual MediaChangeReport::Action
+    requestMedia(zypp::Url & url,
+                 unsigned                         mediumNr,
+                 const std::string &              label,
+                 MediaChangeReport::Error         error,
+                 const std::string &              description,
+                 const std::vector<std::string> & devices,
+                 unsigned int &                   index)
     {
+      /*std::cout << "detected devices: "; 
+      for (std::vector<std::string>::const_iterator it = devices.begin();
+           it != devices.end(); ++it)
+        std::cout << *it << " ";
+      cout << std::endl;*/
       if (is_changeable_media(url))
       {
         //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
