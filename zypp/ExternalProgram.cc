@@ -24,6 +24,8 @@
 #include <sstream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/ExternalProgram.h"
 
 using namespace std;
@@ -136,14 +138,32 @@ namespace zypp {
       int to_external[2], from_external[2];  // fds for pair of pipes
       int master_tty,	slave_tty;	   // fds for pair of ttys
 
+      // do not remove the single quotes around every argument, copy&paste of
+      // command to shell will not work otherwise!
+      {
+        stringstream cmdstr;
+        for (int i = 0; argv[i]; i++)
+        {
+          if (i>0) cmdstr << ' ';
+          cmdstr << '\'';
+          cmdstr << argv[i];
+          cmdstr << '\'';
+        }
+        _command = cmdstr.str();
+      }
+      DBG << "Executing " << _command << endl;
+
+
       if (use_pty)
       {
     	// Create pair of ttys
-          DBG << "Using ttys for communication with " << argv[0] << endl;
+        DBG << "Using ttys for communication with " << argv[0] << endl;
     	if (openpty (&master_tty, &slave_tty, 0, 0, 0) != 0)
     	{
-    	    ERR << "openpty failed" << endl;
-    	    return;
+          _execError = str::form( _("Can't open pty (%s)."), strerror(errno) );
+          _exitStatus = 126;
+          ERR << _execError << endl;
+          return;
     	}
       }
       else
@@ -151,25 +171,12 @@ namespace zypp {
     	// Create pair of pipes
     	if (pipe (to_external) != 0 || pipe (from_external) != 0)
     	{
-    	    ERR << "pipe failed" << endl;
-    	    return;
+          _execError = str::form( _("Can't open pipe (%s)."), strerror(errno) );
+          _exitStatus = 126;
+          ERR << _execError << endl;
+          return;
     	}
       }
-
-      // do not remove the single quotes around every argument, copy&paste of
-      // command to shell will not work otherwise!
-
-      stringstream cmdstr;
-
-      cmdstr << "Executing ";
-      for (int i = 0; argv[i]; i++)
-      {
-    	if (i>0) cmdstr << ' ';
-    	cmdstr << '\'';
-    	cmdstr << argv[i];
-    	cmdstr << '\'';
-      }
-      DBG << cmdstr.str() << endl;
 
       // Create module process
       if ((pid = fork()) == 0)
@@ -228,13 +235,17 @@ namespace zypp {
     	{
     	    if(chroot(root) == -1)
     	    {
-    		ERR << "chroot to " << root << " failed: " << strerror(errno) << endl;
-    		_exit (3);			// No sense in returning! I am forked away!!
+                _execError = str::form( _("Can't chroot to '%s' (%s)."), root, strerror(errno) );
+                ERR << _execError << endl;
+                std::cerr << _execError << endl;// After fork log on stderr too
+    		_exit (128);			// No sense in returning! I am forked away!!
     	    }
     	    if(chdir("/") == -1)
     	    {
-    		ERR << "chdir to / inside chroot failed: " << strerror(errno) << endl;
-    		_exit (4);			// No sense in returning! I am forked away!!
+                _execError = str::form( _("Can't chdir to '/' inside chroot (%s)."), strerror(errno) );
+                ERR << _execError << endl;
+                std::cerr << _execError << endl;// After fork log on stderr too
+    		_exit (128);			// No sense in returning! I am forked away!!
     	    }
     	}
 
@@ -244,14 +255,20 @@ namespace zypp {
     	}
 
     	execvp(argv[0], const_cast<char *const *>(argv));
-    	ERR << "Cannot execute external program "
-    		 << argv[0] << ":" << strerror(errno) << endl;
-    	_exit (5);			// No sense in returning! I am forked away!!
+        // don't want to get here
+        _execError = str::form( _("Can't exec '%s' (%s)."), argv[0], strerror(errno) );
+        ERR << _execError << endl;
+        std::cerr << _execError << endl;// After fork log on stderr too
+        _exit (129);			// No sense in returning! I am forked away!!
       }
 
       else if (pid == -1)	 // Fork failed, close everything.
       {
-    	if (use_pty) {
+        _execError = str::form( _("Can't fork (%s)."), strerror(errno) );
+        _exitStatus = 127;
+        ERR << _execError << endl;
+
+   	if (use_pty) {
     	    ::close(master_tty);
     	    ::close(slave_tty);
     	}
@@ -261,8 +278,6 @@ namespace zypp {
     	    ::close(from_external[0]);
     	    ::close(from_external[1]);
     	}
-    	ERR << "Cannot fork " << strerror(errno) << endl;
-        _exitStatus = -127;
       }
 
       else {
@@ -327,29 +342,33 @@ namespace zypp {
     	status = WEXITSTATUS (status);
     	if(status)
     	{
-    	    DBG << "pid " << pid << " exited with status " << status << endl;
+    	    DBG << "Pid " << pid << " exited with status " << status << endl;
+            _execError = str::form( _("Command exited with status %d."), status );
     	}
     	else
     	{
     	    // if 'launch' is logged, completion should be logged,
     	    // even if successfull.
-    	    DBG << "pid " << pid << " successfully completed" << endl;
+    	    DBG << "Pid " << pid << " successfully completed" << endl;
+            //_execError = _("Command successfully completed.");
     	}
       }
       else if (WIFSIGNALED (status))
       {
     	status = WTERMSIG (status);
-    	WAR << "pid " << pid << " was killed by signal " << status
+    	WAR << "Pid " << pid << " was killed by signal " << status
     		<< " (" << strsignal(status);
     	if (WCOREDUMP (status))
     	{
     	    WAR << ", core dumped";
     	}
     	WAR << ")" << endl;
+        _execError = str::form( _("Command was killed by signal %d (%s)."), status, strsignal(status) );
     	status+=128;
       }
       else {
-    	ERR << "pid " << pid << " exited with unknown error" << endl;
+    	ERR << "Pid " << pid << " exited with unknown error" << endl;
+        _execError = _("Command exited with unknown error.");
       }
 
       return status;

@@ -43,6 +43,7 @@ namespace zypp {
     	Stderr_To_FileDesc
       };
 
+
       /**
        * For passing additional environment variables to set
        */
@@ -65,6 +66,7 @@ namespace zypp {
        * Start an external program by giving the arguments as an arry of char *pointers.
        * If environment is provided, varaiables will be added to the childs environment,
        * overwriting existing ones.
+       * \throws ExternalProgramException if fork fails.
        */
 
       ExternalProgram();
@@ -106,6 +108,22 @@ namespace zypp {
        * */
       pid_t getpid() { return pid; }
 
+      /** The command we're executing. */
+      const std::string & command() const
+      { return _command; }
+
+      /** Some detail telling why the execution failed, if it failed.
+       * Empty if the command is still running or successfully completed.
+       *
+       * \li <tt>Can't open pty (%s).</tt>
+       * \li <tt>Can't open pipe (%s).</tt>
+       * \li <tt>Can't fork (%s).</tt>
+       * \li <tt>Command exited with status %d.</tt>
+       * \li <tt>Command was killed by signal %d (%s).</tt>
+      */
+      const std::string & execError() const
+      { return _execError; }
+
       /**
        * origfd will be accessible as newfd and closed (unless they were equal)
        */
@@ -124,6 +142,10 @@ namespace zypp {
 
       pid_t pid;
       int _exitStatus;
+      /** Store the command we're executing. */
+      std::string _command;
+      /** Remember execution errors like failed fork/exec. */
+      std::string _execError;
 
       void start_program (const char *const *argv, const Environment & environment,
     			Stderr_Disposition stderr_disp = Normal_Stderr,
