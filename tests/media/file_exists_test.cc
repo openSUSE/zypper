@@ -10,7 +10,6 @@
 
 #include <boost/test/unit_test.hpp>
 #include <boost/test/auto_unit_test.hpp>
-
 #include "mymediaverifier.h"
 
 using namespace zypp;
@@ -35,22 +34,11 @@ BOOST_AUTO_TEST_CASE(curl_params_reset)
   mm.provideFile(id, src);
   dest = mm.localPath(id, src);
   BOOST_REQUIRE( PathInfo(dest).size() != 0 );
-    
-  mm.doesFileExist(id, src);
   mm.provideFile(id, src);
   dest = mm.localPath(id, src);
   BOOST_REQUIRE( PathInfo(dest).size() != 0 );
-
   mm.doesFileExist(id, src);
-  mm.provideFile(id, src);
-  dest = mm.localPath(id, src);
   BOOST_REQUIRE( PathInfo(dest).size() != 0 );
-
-  mm.doesFileExist(id, src);
-  mm.provideFile(id, src);
-  dest = mm.localPath(id, src);
-  BOOST_CHECK_EQUAL( PathInfo(dest).size() , 1 );
-
   mm.release(id);   
 }
 

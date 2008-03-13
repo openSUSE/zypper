@@ -21,7 +21,7 @@ namespace zypp
   void reconfigureZConfig( const Pathname & );
 }
 
-#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Vendor")
+#define DATADIR (Pathname(TESTS_BUILD_DIR) + "/zypp/data/Vendor")
 
 
 BOOST_AUTO_TEST_CASE(vendor2_test)
