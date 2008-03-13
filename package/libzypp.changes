@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 13 17:59:52 CET 2008 - jreidinger@suse.cz
+
+- get better message if something fail when trying run rpm
+  (bnc #344584)
+- revision 9133
+
+-------------------------------------------------------------------
 Thu Mar 13 12:33:13 CET 2008 - ma@suse.de
 
 - Add ExternalProgram::execError and ExternalProgram::command
