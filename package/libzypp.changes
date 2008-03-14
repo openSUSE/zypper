@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 14 12:07:41 CET 2008 - jreidinger@suse.cz
+
+- Save repo type during refresh if type is NONE (f.e. lazy probing).
+- revision 9153 
+
+-------------------------------------------------------------------
 Fri Mar 14 11:34:24 CET 2008 - jreidinger@suse.cz
 
 - replace gpg escaped semicolon with real semicolon (bnc #355434)
