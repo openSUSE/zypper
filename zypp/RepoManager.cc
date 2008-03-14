@@ -550,10 +550,18 @@ namespace zypp
 
             if (repokind.toEnum() != RepoType::NONE_e)
             {
-              //save probed type
-              RepoInfo modifiedrepo = info;
-              modifiedrepo.setType(repokind);
-              modifyRepository(info.alias(),modifiedrepo);
+              //save probed type only for repos in system
+              std::list<RepoInfo> repos = knownRepositories();
+              for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+                   it != repos.end(); ++it )
+              {
+                if ( info.alias() == (*it).alias() )
+                {
+                  RepoInfo modifiedrepo = info;
+                  modifiedrepo.setType(repokind);
+                  modifyRepository(info.alias(),modifiedrepo);
+                }
+              }
             }
           break;
           default:
