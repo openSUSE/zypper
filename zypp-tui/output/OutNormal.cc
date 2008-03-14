@@ -200,10 +200,11 @@ void OutNormal::prompt(PromptId id,
 {
   string option_str;
   PromptOptions::OptionList::const_iterator it;
-  if (poptions.options().begin() != poptions.end())
+  if ((it = poptions.options().begin()) != poptions.options().end())
   {
     //if (is_default) // TODO
     option_str += *it;
+    ++it;
   }
   for (;
        it != poptions.options().end(); ++it)
