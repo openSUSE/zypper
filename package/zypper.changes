@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 14 14:58:27 CET 2008 - jkupec@suse.cz
+
+- don't offer to skip or retry in the prompt if there is only one
+  dependency problem (bnc #369608)
+- r9161
+
+-------------------------------------------------------------------
 Fri Mar 14 09:35:02 CET 2008 - jreidinger@suse.cz
 
 - add check and nocheck option to addrepo command (bnc #309612) 
