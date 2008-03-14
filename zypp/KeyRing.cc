@@ -15,6 +15,8 @@
 #include <cstdio>
 #include <unistd.h>
 
+#include <boost/format.hpp>
+
 #include "zypp/TmpPath.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
@@ -23,6 +25,7 @@
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/PathInfo.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
@@ -267,7 +270,11 @@ namespace zypp
     catch (BadKeyException &e)
     {
       ERR << "Cannot create public key " << id << " from " << keyring << " keyring  to file " << e.keyFile() << endl;
-      ZYPP_THROW(Exception("Cannot create public key " + id + " from " + keyring.asString() + " keyring to file " + e.keyFile().asString() ) );
+      // TranslatorExplanation first %s is key name, second is keyring name
+      // and third is keyfile name
+      ZYPP_THROW(Exception(boost::str(boost::format(
+          _("Cannot create public key %s from %s keyring to file %s"))
+          % id % keyring.asString() % e.keyFile().asString())));
     }
     catch (exception &e)
     {
@@ -495,7 +502,10 @@ namespace zypp
   void KeyRing::Impl::importKey( const Pathname &keyfile, const Pathname &keyring)
   {
     if ( ! PathInfo(keyfile).isExist() )
-      ZYPP_THROW(KeyRingException("Tried to import not existant key " + keyfile.asString() + " into keyring " + keyring.asString()));
+      // TranslatorExplanation first %s is key name, second is keyring name
+      ZYPP_THROW(KeyRingException(boost::str(boost::format(
+          _("Tried to import not existant key %s into keyring %s"))
+          % keyfile.asString() % keyring.asString())));
 
     const char* argv[] =
     {
@@ -545,7 +555,7 @@ namespace zypp
 
     int code = prog.close();
     if ( code )
-      ZYPP_THROW(Exception("Failed to delete key."));
+      ZYPP_THROW(Exception(_("Failed to delete key.")));
     else
       MIL << "Deleted key " << id << " from keyring " << keyring << endl;
   }
@@ -554,7 +564,8 @@ namespace zypp
   string KeyRing::Impl::readSignatureKeyId(const Pathname &signature )
   {
     if ( ! PathInfo(signature).isFile() )
-      ZYPP_THROW(Exception("Signature file " + signature.asString() + " not found"));
+      ZYPP_THROW(Exception(boost::str(boost::format(
+          _("Signature file %s not found"))% signature.asString())));
 
     MIL << "Determining key id if signature " << signature << endl;
     // HACK create a tmp keyring with no keys

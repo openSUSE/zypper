@@ -24,9 +24,12 @@
 #include <vector>
 #include <algorithm>
 
+#include <boost/format.hpp>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Regex.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
@@ -42,10 +45,6 @@
 #include "zypp/TmpPath.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ZYppFactory.h"
-
-#ifndef _
-#define _(X) X
-#endif
 
 using namespace std;
 using namespace zypp::filesystem;
@@ -887,8 +886,9 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
-               (errmsg.empty() ? error_message: errmsg)));
+    //TranslatorExplanation after semicolon is error message
+    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ") +
+               (errmsg.empty() ? error_message: errmsg))));
   }
   else
   {
@@ -1042,8 +1042,10 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("Failed to import public key from file ") +
-               pubkey_r.asString() + ":" + error_message));
+    //TranslatorExplanation first %s is file name, second is error message
+    ZYPP_THROW(RpmSubprocessException(boost::str(boost::format(
+        _("Failed to import public key from file %s: %s"))
+        % pubkey_r.asString() % error_message)));
   }
   else
   {
@@ -1117,8 +1119,10 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
 
   if ( rpm_status != 0 )
   {
-    ZYPP_THROW(RpmSubprocessException(string("Failed to remove public key ") +
-               pubkey_r.asString() + ":" + error_message));
+    //TranslatorExplanation first %s is key name, second is error message
+    ZYPP_THROW(RpmSubprocessException(boost::str(boost::format(
+        _("Failed to remove public key %s: %s")) % pubkey_r.asString()
+        % error_message)));
   }
   else
   {
@@ -2051,7 +2055,8 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
     // %s = filename of rpm package
     progresslog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
     progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
+    //TranslatorExplanation after semicolon is error message
+    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message : rpmmsg)));
   }
   else
@@ -2170,7 +2175,8 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::Se
     // %s = name of rpm package
     progresslog(/*timestamp*/true) << str::form(_("%s remove failed"), name_r.c_str()) << endl;
     progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-    ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") +
+    //TranslatorExplanation after semicolon is error message
+    ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message: rpmmsg)));
   }
   else
