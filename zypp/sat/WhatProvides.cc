@@ -38,7 +38,6 @@ namespace zypp
           INT << "Illegal index: WhatProvides (" << cap_r << ") = " << *end << " (limit " << limit << ")" << endl;
         }
       }
-      myPool()->nsolvables;
     }
 
     WhatProvides::size_type WhatProvides::size() const
