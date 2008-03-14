@@ -3,6 +3,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/ByteCount.h" // for download progress reporting
+#include "zypp/base/String.h" // for toUpper()
 
 #include "../zypper-main.h"
 #include "AliveCursor.h"
@@ -202,17 +203,11 @@ void OutNormal::prompt(PromptId id,
   PromptOptions::OptionList::const_iterator it;
   if ((it = poptions.options().begin()) != poptions.options().end())
   {
-    //if (is_default) // TODO
-    option_str += *it;
+    option_str += (poptions.defaultOpt() == 0 ? zypp::str::toUpper(*it) : *it);
     ++it;
   }
-  for (;
-       it != poptions.options().end(); ++it)
-  {
-    string option = *it;
-    //if (is_default) // TODO
-    option_str += "/" + option;
-  }
+  for (unsigned int i = 1; it != poptions.options().end(); ++it, i++)
+    option_str += "/" + (poptions.defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
 
   cout << CLEARLN << prompt << " [" << option_str << "]: " << std::flush;
 }
