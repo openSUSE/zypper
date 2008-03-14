@@ -849,6 +849,8 @@ void Zypper::processCommandOptions()
       {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
+      {"check", no_argument, 0, 'c'},
+      {"nocheck", no_argument, 0, 'x'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -863,6 +865,8 @@ void Zypper::processCommandOptions()
       "-t, --type <TYPE>       Type of repository (%s)\n"
       "-d, --disable           Add the repository as disabled\n"
       "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
+      "-c, --check             Probe URI\n"
+      "-x, --nocheck           Don't probe URI, probe later during refresh.\n"
     )) % "yast2, rpm-md, plaindir");
     break;
   }
@@ -1518,6 +1522,16 @@ void Zypper::doCommand()
         // by default, enable the repo and set autorefresh to false
         if (indeterminate(enabled)) enabled = true;
         if (indeterminate(refresh)) refresh = false;
+        if (copts.count("check"))
+        {
+          if (!copts.count("nocheck"))
+            this->_gopts.rm_options.probe = true;
+          else
+            this->out().warning(_("Cannot use --check together with --nocheck."
+                " Used settings from zypp.conf."),Out::QUIET);
+        }
+        else if (copts.count("nocheck"))
+          this->_gopts.rm_options.probe = false;
 
         warn_if_zmd();
 
