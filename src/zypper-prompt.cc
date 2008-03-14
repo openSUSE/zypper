@@ -68,6 +68,7 @@ int read_action_ari (PromptId pid, int default_action) {
   while (cin.good()) {          // #269263
     char c;
     cin >> c;
+    MIL << "answer: " << c << endl;
     c = tolower (c);
     MIL << "answer: " << c << endl;
     if (c == 'a')
@@ -76,6 +77,9 @@ int read_action_ari (PromptId pid, int default_action) {
       return 1;
     else if (c == 'i')
       return 2;
+    else if (c == 0)
+      return default_action;
+
     // translators: don't translate the letters
     ostringstream s;
     s << format(_("Invalid answer '%s'.")) % c << " "
@@ -111,9 +115,9 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
 
   istream & stm = cin;
 
-  string c = "";
+  string c;
   bool been_here_before = false;
-  while (stm.good() && rpmatch(c.c_str()) == -1)
+  while (stm.good())
   {
     if (been_here_before)
     {
@@ -126,11 +130,13 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
       out.prompt(pid, s.str(), popts); //! \todo remove this, handle invalid answers within the first prompt()
     }
     c = zypp::str::getline (stm, zypp::str::TRIM);
+    if (rpmatch(c.c_str()) >= 0 || c.empty())
+      break;
     been_here_before = true;
   }
 
   MIL << "answer: " << c << endl;
-  int answer = rpmatch(c.c_str());
+  int answer = c.empty() ?  default_answer : rpmatch(c.c_str());
   if (answer >= 0)
     return answer;
   else // in case of !stm.good()

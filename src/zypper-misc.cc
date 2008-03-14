@@ -497,6 +497,8 @@ static tribool show_problem (Zypper & zypper,
     // The answers should be lower case letters.
     PromptOptions popts(_("#/s/r/c"), 3);
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(), popts);
+    //string reply = get_prompt_reply(promptstr, popts); \TODO
+
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {
@@ -510,7 +512,7 @@ static tribool show_problem (Zypper & zypper,
     if (reply_s == _("r"))
       return true;
     // translators: corresponds to (c)ancel
-    else if (reply_s == _("c"))
+    else if (reply_s == _("c") || reply_s.empty())
       return false;
     // translators: corresponds to (s)kip
     else if (reply_s == _("s"))
