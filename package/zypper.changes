@@ -1,20 +1,24 @@
 -------------------------------------------------------------------
 Fri Mar 14 14:58:27 CET 2008 - jkupec@suse.cz
 
+- use default answers to prompts on enter. Default answer options
+  will be shown uppercase.
 - don't offer to skip or retry in the prompt if there is only one
   dependency problem (bnc #369608)
 - r9161
+- 0.10.4
 
 -------------------------------------------------------------------
 Fri Mar 14 09:35:02 CET 2008 - jreidinger@suse.cz
 
-- add check and nocheck option to addrepo command (bnc #309612) 
+- --check and --nocheck options added to the addrepo command
+  (bnc #309612)
 - r9143
 
 -------------------------------------------------------------------
 Tue Mar 11 15:25:11 CET 2008 - jreidinger@suse.cz
 
-- say exactly what change modifyrepo (bnc #327580)
+- say exactly what did modifyrepo change (bnc #327580)
 - r9091
 
 -------------------------------------------------------------------
