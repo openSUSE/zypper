@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 14 14:27:43 CET 2008 - dmacvicar@suse.de
+
+- look for openssl in cmake, actually we build require it
+- explicitely link against openssl and crypto, required to
+  compile in all platforms/distros.
+
+-------------------------------------------------------------------
 Fri Mar 14 12:07:41 CET 2008 - jreidinger@suse.cz
 
 - Save repo type during refresh if type is NONE (f.e. lazy probing).
