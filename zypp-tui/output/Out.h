@@ -7,6 +7,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Url.h"
 
+#include "../zypper-prompt.h"
 #include "prompt.h"
 
 /**
@@ -212,13 +213,14 @@ public:
    * 
    * \param id           Unique prompt identifier for use by machines.
    * \param prompt       Prompt text.
-   * \param answer_hint  list of answers separated by '/'. \todo improve this
+   * \param options      A PromptOptions object
    * 
    * \see prompt.h 
    */
   virtual void prompt(PromptId id,
                       const std::string & prompt,
-                      const std::string & answer_hint) = 0;
+                      const PromptOptions & poptions) = 0;
+
 public:
   /** Get current verbosity. */
   Verbosity verbosity() { return _verbosity; }
