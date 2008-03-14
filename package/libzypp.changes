@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 14 10:17:41 CET 2008 - jreidinger@suse.cz
+
+- make strings from RpmDb and Keyring exceptions translatable
+- revision 9146 
+
+-------------------------------------------------------------------
 Thu Mar 13 18:41:26 CET 2008 - dmacvicar@suse.de
 
 - fix retrieving keys (bnc #368099)
