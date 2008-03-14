@@ -547,6 +547,14 @@ namespace zypp
           case RepoType::NONE_e:
             // unknown, probe it
             repokind = probe(*it);
+
+            if (repokind.toEnum() != RepoType::NONE_e)
+            {
+              //save probed type
+              RepoInfo modifiedrepo = info;
+              modifiedrepo.setType(repokind);
+              modifyRepository(info.alias(),modifiedrepo);
+            }
           break;
           default:
           break;
