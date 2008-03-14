@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Mar 14 17:28:39 CET 2008 - ma@suse.de
+
+- version 4.4.2
+
+-------------------------------------------------------------------
 Fri Mar 14 14:27:43 CET 2008 - dmacvicar@suse.de
 
 - look for openssl in cmake, actually we build require it
