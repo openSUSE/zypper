@@ -6,7 +6,6 @@
 #include "zypp/base/Logger.h"
 
 #include "zypper.h"
-//#include "zypper-main.h"
 #include "zypper-prompt.h"
 
 using namespace std;
@@ -14,19 +13,28 @@ using namespace boost;
 
 // ----------------------------------------------------------------------------
 
-PromptOptions::PromptOptions(const std::string option_str, unsigned int default_opt)
+PromptOptions::PromptOptions(const std::string & option_str, unsigned int default_opt)
 {
-  zypp::str::split(option_str, back_inserter(_options), "/");
+  setOptions(option_str, default_opt);
+}
+
+// ----------------------------------------------------------------------------
+
+PromptOptions::~PromptOptions()
+{
+
+}
+
+// ----------------------------------------------------------------------------
+
+void PromptOptions::setOptions(const std::string & option_str, unsigned int default_opt)
+{
+  zypp::str::split(option_str, back_inserter(_options), "/"); 
 
   if (_options.size() <= default_opt)
     INT << "Invalid default option index " << default_opt << endl;
   else
     _default = default_opt; 
-}
-
-PromptOptions::~PromptOptions()
-{
-  
 }
 
 // ----------------------------------------------------------------------------

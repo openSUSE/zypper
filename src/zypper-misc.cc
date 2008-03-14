@@ -448,7 +448,8 @@ ostream& operator << (ostream & stm, ios::iostate state)
 
 //! @return true to retry solving now, false to cancel, indeterminate to continue
 static tribool show_problem (Zypper & zypper,
-                      const ResolverProblem & prob, ProblemSolutionList & todo)
+                      const ResolverProblem & prob,
+                      ProblemSolutionList & todo)
 {
   ostringstream stm;
   string det;
@@ -474,6 +475,8 @@ static tribool show_problem (Zypper & zypper,
   if (zypper.globalOpts().non_interactive)
     return false;
 
+  unsigned int problem_count = God->resolver()->problems().size();
+
   int reply;
   do {
     // without solutions, its useless to prompt
@@ -484,18 +487,42 @@ static tribool show_problem (Zypper & zypper,
     }
 
     if (!zypper.globalOpts().machine_readable)
-      stm << _PL(
-        "Choose the above solution using '1' or skip, retry or cancel",
-        "Choose from above solutions by number or skip, retry or cancel",
-        solutions.size());
+    {
+      if (problem_count > 1)
+        stm << _PL(
+          "Choose the above solution using '1' or skip, retry or cancel",
+          "Choose from above solutions by number or skip, retry or cancel",
+          solutions.size());
+      else
+        // translators: translate 'c' to whatever you translated the 'c' in
+        // "#/c" and "#/s/r/c" strings
+        stm << _PL(
+          "Choose the above solution using '1' or cancel using 'c'",
+          "Choose from above solutions by number or cancel",
+          solutions.size());
+    }
 
-    // translators: answers for dependency problem solution input prompt:
-    // "Choose from above solutions by number or skip, retry or cancel"
-    // Translate the letters to whatever is suitable for your language.
-    // The anserws must be separated by slash characters '/' and must
-    // correspond to number/skip/retry/cancel in that order.
-    // The answers should be lower case letters.
-    PromptOptions popts(_("#/s/r/c"), 3);
+    PromptOptions popts;
+    if (problem_count > 1)
+    {
+      // translators: answers for dependency problem solution input prompt:
+      // "Choose from above solutions by number or skip, retry or cancel"
+      // Translate the letters to whatever is suitable for your language.
+      // The anserws must be separated by slash characters '/' and must
+      // correspond to number/skip/retry/cancel in that order.
+      // The answers should be lower case letters.
+      popts.setOptions(_("#/s/r/c"), 3);
+    }
+    else
+    {
+      // translators: answers for dependency problem solution input prompt:
+      // "Choose from above solutions by number or cancel"
+      // Translate the letter 'c' to whatever is suitable for your language
+      // and the same as you translated it in the "#/s/r/c" string
+      // See the "#/s/r/c" comment for other details
+      popts.setOptions(_("#/c"), 1);
+    }
+
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(), popts);
     //string reply = get_prompt_reply(promptstr, popts); \TODO
 
@@ -509,13 +536,13 @@ static tribool show_problem (Zypper & zypper,
       reply_s[0] = tolower( reply_s[0] );
 
     // translators: corresponds to (r)etry
-    if (reply_s == _("r"))
+    if (problem_count > 1 && reply_s == _("r"))
       return true;
     // translators: corresponds to (c)ancel
     else if (reply_s == _("c") || reply_s.empty())
       return false;
     // translators: corresponds to (s)kip
-    else if (reply_s == _("s"))
+    else if (problem_count > 1 && reply_s == _("s"))
       return indeterminate; // continue with next problem
 
     str::strtonum (reply_s, reply);

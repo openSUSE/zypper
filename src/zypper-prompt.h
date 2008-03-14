@@ -10,6 +10,11 @@ public:
   typedef std::vector<std::string> OptionList;
 
   /**
+   * Default c-tor.
+   */
+  PromptOptions() {};
+
+  /**
    * Constructor.
    * 
    * \param option_str translated option string containing one or more
@@ -17,10 +22,13 @@ public:
    *                   e.g. "yes/no/?" or "1/s/r/c"
    * \param default_opt index of the default answer within the \a option_str
    */
-  PromptOptions(const std::string option_str, unsigned int default_opt);
+  PromptOptions(const std::string & option_str, unsigned int default_opt);
+
+  /** D-tor */
   ~PromptOptions();
-  
+
   const OptionList & options() const { return _options; }
+  void setOptions(const std::string & option_str, unsigned int default_opt);
   unsigned int defaultOpt() const { return _default; }
 
 private:
