@@ -199,7 +199,7 @@ void OutXML::prompt(PromptId id,
   {
     string option = *it;
     cout << "<option";
-    if (options.defaultOpt() == i)
+    if (poptions.defaultOpt() == i)
       cout << " default=\"1\"";
     cout << " value=\"" << xml_encode(option) << "\"";
     cout << "/>" << endl;

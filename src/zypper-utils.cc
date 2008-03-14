@@ -9,9 +9,10 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml_escape_parser.hpp"
 
+#include "zypper.h"
 #include "zypper-main.h"
 #include "zypper-utils.h"
-//#include "zypper-callbacks.h"
+
 
 using namespace std;
 using namespace zypp;

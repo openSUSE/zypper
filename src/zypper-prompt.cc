@@ -16,7 +16,7 @@ using namespace boost;
 
 PromptOptions::PromptOptions(const std::string option_str, unsigned int default_opt)
 {
-  zypp::str::split(answer_hint, back_inserter(_options), "/");
+  zypp::str::split(option_str, back_inserter(_options), "/");
 
   if (_options.size() <= default_opt)
     INT << "Invalid default option index " << default_opt << endl;
@@ -41,7 +41,8 @@ int read_action_ari (PromptId pid, int default_action) {
   // the anserws must be separated by slash characters '/' and must
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
-  out.prompt(pid, _("Abort, retry, ignore?"), _("a/r/i"));
+  PromptOptions popts(_("a/r/i"), 0);
+  out.prompt(pid, _("Abort, retry, ignore?"), popts);
 
   // choose abort if no default has been specified
   if (default_action == -1) {
@@ -79,7 +80,7 @@ int read_action_ari (PromptId pid, int default_action) {
     ostringstream s;
     s << format(_("Invalid answer '%s'.")) % c << " "
       << _("Choose letter 'a', 'r', or 'i'"); 
-    out.prompt(pid, s.str(), _("a/r/i")); //! \todo remove this, handle invalid answers within the first prompt()
+    out.prompt(pid, s.str(), popts); //! \todo remove this, handle invalid answers within the first prompt()
     DBG << "invalid answer" << endl;
   }
 
@@ -95,7 +96,8 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
 
   string yn = string(_("yes")) + "/" + _("no");
 
-  out.prompt(pid, question, yn);
+  PromptOptions popts(yn, default_answer ? 0 : 1);
+  out.prompt(pid, question, popts);
 
   // non-interactive mode: print the answer for convenience  (only for normal
   // output) and return default
@@ -121,7 +123,7 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
         // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
         _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you"))
         % _("yes") % _("no");
-      out.prompt(pid, s.str(), yn); //! \todo remove this, handle invalid answers within the first prompt()
+      out.prompt(pid, s.str(), popts); //! \todo remove this, handle invalid answers within the first prompt()
     }
     c = zypp::str::getline (stm, zypp::str::TRIM);
     been_here_before = true;
