@@ -51,21 +51,14 @@ namespace zypp
      * \see \ref sat::Solvable
     */
     //@{
-    /** Whether this \c Solvable claims to support locales. */
+    /** \see \ref sat::Solvable::supportsLocales */
     using sat::Solvable::supportsLocales;
-    /** Whether this \c Solvable supports a specific \ref Locale. */
+    /** \see \ref sat::Solvable::supportsLocale */
     using sat::Solvable::supportsLocale;
-    /** Whether this \c Solvable supports at least one of the specified locales. */
-    //using sat::Solvable::supportsLocale;
-    /** Whether this \c Solvable supports at least one requested locale.
-     * \see \ref Pool::setRequestedLocales
-     */
+    /** \see \ref sat::Solvable::supportsRequestedLocales */
     using sat::Solvable::supportsRequestedLocales;
-    /** Return the supported locales via locales_r. */
+    /** \see \ref sat::Solvable::getSupportedLocales */
     using sat::Solvable::getSupportedLocales;
-
-    using sat::Solvable::repository;;
-      
     //@}
 
   public:
@@ -119,10 +112,14 @@ namespace zypp
     /** Size of the rpm package. */
     ByteCount downloadSize() const;
 
+    /** \see \ref sat::Solvable::repository */
+    using sat::Solvable::repository;
+
      /** \ref RepoInfo associated with the repository
       *  providing this resolvable.
       */
-    RepoInfo repoInfo() const;
+    RepoInfo repoInfo() const
+    { return repository().info(); }
 
     /**
      * Media number where the resolvable is located

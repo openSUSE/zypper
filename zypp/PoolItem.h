@@ -23,6 +23,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class ResPool;
+
   namespace pool
   {
     class PoolImpl;
@@ -57,8 +59,18 @@ namespace zypp
       /** Default ctor for use in std::container. */
       PoolItem();
 
+      /** Ctor looking up the \ref sat::Solvable in the \ref ResPool. */
+      explicit PoolItem( const sat::Solvable & solvable_r );
+
+      /** Ctor looking up the \ref ResObject in the \ref ResPool. */
+      explicit PoolItem( const ResObject::constPtr & resolvable_r );
+
       /** Dtor */
       ~PoolItem();
+
+    public:
+      /** Return the \ref ResPool the item belongs to. */
+      ResPool pool() const;
 
     public:
       /** Returns the current status. */
@@ -93,8 +105,10 @@ namespace zypp
 
     private:
       friend class pool::PoolImpl;
-      /** ctor */
-      explicit PoolItem( const sat::Solvable & solvable_r );
+      /** \ref PoolItem generator for \ref pool::PoolImpl. */
+      static PoolItem makePoolItem( const sat::Solvable & solvable_r );
+      /** internal ctor */
+      explicit PoolItem( Impl * implptr_r );
       /** Pointer to implementation */
       RW_pointer<Impl> _pimpl;
 

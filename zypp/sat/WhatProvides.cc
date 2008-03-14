@@ -26,7 +26,20 @@ namespace zypp
 
     WhatProvides::WhatProvides( Capability cap_r )
     : _begin( myPool().whatProvides( cap_r ) )
-    {}
+    {
+#warning REMOVE THIS DEBUGSTUFF AGAIN
+      if ( ! _begin )
+        return;
+      int limit = myPool()->nsolvables;
+      for ( const sat::detail::IdType * end = _begin; *end; ++end )
+      {
+        if ( *end >= limit )
+        {
+          INT << "Illegal index: WhatProvides (" << cap_r << ") = " << *end << " (limit " << limit << ")" << endl;
+        }
+      }
+      myPool()->nsolvables;
+    }
 
     WhatProvides::size_type WhatProvides::size() const
     {

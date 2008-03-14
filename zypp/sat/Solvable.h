@@ -91,17 +91,18 @@ namespace zypp
          */
         unsigned lookupNumAttribute( const SolvAttr &attr ) const;
 
-	/**
-	 * returns the media location: media number in \ref medianr,
-	 * file name as return value.  The file name is possibly prepended
-	 * with a subdirectory.
-	 */
-	std::string lookupLocation(unsigned &medianr) const;
-
         /**
-         *
+         * returns the boolean attribute value for \ref attr
+         * or \c false if it does not exists.
          */
         bool lookupBoolAttribute( const SolvAttr &attr ) const;
+
+        /**
+         * returns the media location: media number in \ref medianr,
+         * file name as return value.  The file name is possibly prepended
+         * with a subdirectory.
+         */
+        std::string lookupLocation( unsigned & medianr ) const;
 
       public:
         /** The identifier.

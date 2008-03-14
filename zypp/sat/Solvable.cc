@@ -95,6 +95,9 @@ namespace zypp
       unsigned int nr;
       char *l = solvable_get_location(_solvable, &nr);
       medianr = nr;
+//     /* XXX This datadir should be part of RepoInfo.  */
+//     if (repoInfo().type().toEnum() == repo::RepoType::YAST2_e)
+//       filename = std::string("suse/") + filename;
       return l ? std::string(l) : std::string();
     }
 

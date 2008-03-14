@@ -60,9 +60,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   Text ResObject::summary() const
-  {
-    return lookupStrAttribute( sat::SolvAttr::summary );
-  }
+  { return lookupStrAttribute( sat::SolvAttr::summary ); }
 
   Text ResObject::description() const
   { return lookupStrAttribute( sat::SolvAttr::description ); }
@@ -82,21 +80,22 @@ namespace zypp
   ByteCount ResObject::downloadSize() const
   { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ), ByteCount::K ); }
 
-  RepoInfo ResObject::repoInfo() const
-  { return repository().info(); }
-
   unsigned ResObject::mediaNr() const
   { return lookupNumAttribute( sat::SolvAttr::medianr ); }
 
+#warning DUMMY installOnly
   bool ResObject::installOnly() const
   { return false; }
 
+#warning DUMMY
   Date ResObject::buildtime() const
   { return Date(); }
 
+#warning DUMMY installtime
   Date ResObject::installtime() const
   { return Date(); }
 
+#warning DUMMY diskusage
   const DiskUsage & ResObject::diskusage() const
   {
     static DiskUsage _du;

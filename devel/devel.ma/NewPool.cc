@@ -436,6 +436,18 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
+void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
+{
+  Capability cap( name_r, kind_r );
+  sat::WhatProvides possibleProviders(cap);
+  (possibleProviders.empty()?WAR:MIL) << name_r << endl;
+  for_(iter, possibleProviders.begin(), possibleProviders.end())
+  {
+    MIL << name_r << endl;
+    PoolItem provider = ResPool::instance().find(*iter);
+  }
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -450,7 +462,7 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
-  if ( 0 )
+  if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -521,19 +533,36 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
-  const char* argv[] =
+  for_( it, pool.begin(), pool.end() )
   {
-    "ls", "-fail",
-    NULL
-  };
-  ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-  int ret = prog.close();
-  if ( ret != 0 )
-  {
-    Exception ex(str::form("Failed command (%s)", prog.execError().c_str() ) );
-    ex.remember( prog.command() );
-    ZYPP_THROW(ex);
+    tt( (*it)->name() );
   }
+
+#if 0
+  IdString id ("amarok");
+  sat::WhatProvides w( Capability(id.id()) );
+
+  for_( it, w.begin(), w.end() )
+  {
+    WAR << *it << endl;
+    MIL << PoolItem(*it) << endl;
+    Package_Ptr p( asKind<Package>(PoolItem(*it)) );
+    MIL << p << endl;
+    if ( p )
+    {
+      OnMediaLocation l( p->location() );
+      MIL << l << endl;
+    }
+    //OnMediaLocation
+  }
+
+  sat::Solvable a(65241);
+  PoolItem p( a );
+  USR << p << endl;
+  p.status().setTransact( true, ResStatus::USER );
+  USR << p << endl;
+  USR << PoolItem() << endl;
+#endif
 
   if ( 0 )
   {

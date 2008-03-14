@@ -13,6 +13,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/PoolItem.h"
+#include "zypp/ResPool.h"
 #include "zypp/Package.h"
 #include "zypp/VendorAttr.h"
 
@@ -52,7 +53,7 @@ namespace zypp
       return _status;
     }
 
-    
+
   private:
     mutable ResStatus     _status;
     ResObject::constPtr   _resolvable;
@@ -121,8 +122,34 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   PoolItem::PoolItem( const sat::Solvable & solvable_r )
-  : _pimpl( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) )
+  : _pimpl( ResPool::instance().find( solvable_r )._pimpl )
   {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : PoolItem::PoolItem
+  //	METHOD TYPE : Ctor
+  //
+  PoolItem::PoolItem( const ResObject::constPtr & resolvable_r )
+  : _pimpl( ResPool::instance().find( resolvable_r )._pimpl )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : PoolItem::PoolItem
+  //	METHOD TYPE : Ctor
+  //
+  PoolItem::PoolItem( Impl * implptr_r )
+  : _pimpl( implptr_r )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : PoolItem::makePoolItem
+  //	METHOD TYPE : PoolItem
+  //
+  PoolItem PoolItem::makePoolItem( const sat::Solvable & solvable_r )
+  { return PoolItem( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) ); }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -131,6 +158,14 @@ namespace zypp
   //
   PoolItem::~PoolItem()
   {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : PoolItem::pool
+  //	METHOD TYPE : ResPool
+  //
+  ResPool PoolItem::pool() const
+  { return ResPool::instance(); }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -146,7 +181,7 @@ namespace zypp
 
   ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
-  
+
   void PoolItem::saveState() const
   { _pimpl->saveState(); }
 

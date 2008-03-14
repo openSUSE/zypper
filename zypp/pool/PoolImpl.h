@@ -94,7 +94,10 @@ namespace zypp
          * \see \ref PoolItem::satSolvable.
          */
         PoolItem find( const sat::Solvable & slv_r ) const
-        { return store()[slv_r.id()]; }
+        {
+          const ContainerT & mystore( store() );
+          return( slv_r.id() < mystore.size() ? mystore[slv_r.id()] : PoolItem() );
+        }
 
         ///////////////////////////////////////////////////////////////////
         //
@@ -210,7 +213,7 @@ namespace zypp
                 if ( ! s &&  pi )
                   pi = PoolItem();
                 else if ( s && ! pi )
-                  pi = PoolItem( s );
+                  pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
               }
             }
             _storeDirty = false;

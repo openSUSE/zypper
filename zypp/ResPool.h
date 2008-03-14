@@ -95,6 +95,9 @@ namespace zypp
        * \see \ref PoolItem::satSolvable.
        */
       PoolItem find( const sat::Solvable & slv_r ) const;
+      /** \overload */
+      PoolItem find( const ResObject::constPtr & resolvable_r ) const
+      { return( resolvable_r ? find( resolvable_r->satSolvable() ) : PoolItem() ); }
 
     public:
       /** \name Iterate through all PoolItems matching a \c _Filter. */

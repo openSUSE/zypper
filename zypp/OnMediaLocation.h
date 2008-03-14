@@ -33,6 +33,8 @@ namespace zypp
    * size. It does not specify the URI of the file.
    *
    * Media number \c 0 usually indicates no media access.
+   *
+   * \todo Implement cheap copy via COW.
   */
   class OnMediaLocation
   {
@@ -110,7 +112,7 @@ namespace zypp
     CheckSum  _checksum;
     ByteCount _downloadsize;
     ByteCount _opendownloadsize;
-    CheckSum _openchecksum;
+    CheckSum  _openchecksum;
   };
   ///////////////////////////////////////////////////////////////////
 

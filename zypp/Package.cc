@@ -112,6 +112,7 @@ namespace zypp
 
   OnMediaLocation Package::location() const
   {
+#warning MISSING checkdums in OnMediaLocation
     OnMediaLocation loc;
     unsigned medianr;
     std::string filename = lookupLocation( medianr );
