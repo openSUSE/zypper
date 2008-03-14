@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 14 11:34:24 CET 2008 - jreidinger@suse.cz
+
+- replace gpg escaped semicolon with real semicolon (bnc #355434)
+- revision 9151 
+
+-------------------------------------------------------------------
 Fri Mar 14 10:17:41 CET 2008 - jreidinger@suse.cz
 
 - make strings from RpmDb and Keyring exceptions translatable
