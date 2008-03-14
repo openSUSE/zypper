@@ -19,7 +19,7 @@
 #include "zypp/Url.h"
 
 #include "zypper.h"
-#include "zypper-callbacks.h"
+#include "zypper-prompt.h"
 #include "zypper-utils.h"
 
 ///////////////////////////////////////////////////////////////////

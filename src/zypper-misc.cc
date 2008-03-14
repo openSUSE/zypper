@@ -26,7 +26,7 @@
 #include "zypper-utils.h"
 #include "zypper-getopt.h"
 #include "zypper-misc.h"
-#include "zypper-callbacks.h"
+#include "zypper-prompt.h"
 #include "output/prompt.h"
 
 using namespace std;
@@ -489,14 +489,14 @@ static tribool show_problem (Zypper & zypper,
         "Choose from above solutions by number or skip, retry or cancel",
         solutions.size());
 
-    zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(),
-      // translators: answers for dependency problem solution input prompt:
-      // "Choose from above solutions by number or skip, retry or cancel"
-      // Translate the letters to whatever is suitable for your language.
-      // The anserws must be separated by slash characters '/' and must
-      // correspond to number/skip/retry/cancel in that order.
-      // The answers should be lower case letters.
-      _("#/s/r/c"));
+    // translators: answers for dependency problem solution input prompt:
+    // "Choose from above solutions by number or skip, retry or cancel"
+    // Translate the letters to whatever is suitable for your language.
+    // The anserws must be separated by slash characters '/' and must
+    // correspond to number/skip/retry/cancel in that order.
+    // The answers should be lower case letters.
+    PromptOptions popts(_("#/s/r/c"), 3);
+    zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(), popts);
     string reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {

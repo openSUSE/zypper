@@ -40,7 +40,7 @@
 #include "zypper-getopt.h"
 #include "zypper-command.h"
 #include "zypper-utils.h"
-#include "zypper-callbacks.h"
+//#include "zypper-callbacks.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"

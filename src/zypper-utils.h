@@ -19,6 +19,11 @@ std::string readline_getline();
  */
 void report_a_bug (Out & out);
 
+/**
+ * 
+ */
+void report_too_many_arguments(const std::string & specific_help);
+
 bool is_changeable_media(const zypp::Url & url);
 
 std::string kind_to_string_localized(

@@ -21,7 +21,7 @@
 //#include "zypp/target/rpm/RpmCallbacks.h"
 
 #include "zypper.h"
-#include "zypper-callbacks.h"
+#include "zypper-prompt.h"
 
 using namespace std;
 

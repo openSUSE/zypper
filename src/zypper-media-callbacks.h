@@ -21,7 +21,7 @@
 #include "zypp/media/MediaUserAuth.h"
 
 #include "zypper.h"
-#include "zypper-callbacks.h"
+#include "zypper-prompt.h"
 #include "output/prompt.h"
 
 using zypp::media::MediaChangeReport;
@@ -174,13 +174,13 @@ namespace ZmartRecipients
 //          << auth_data_ptr->authTypeAsString() << std::endl;
 
         Zypper::instance()->out().prompt(
-            PROMPT_AUTH_USERNAME, description, _("User Name"));
+            PROMPT_AUTH_USERNAME, description, PromptOptions(_("User Name"), 0));
         string username;
         std::cin >> username;
         auth_data_ptr->setUserName(username);
 
         Zypper::instance()->out().prompt(
-            PROMPT_AUTH_PASSWORD, description, _("Password"));
+            PROMPT_AUTH_PASSWORD, description, PromptOptions(_("Password"), 0));
         string password;
         std::cin >> password;
         if (password.empty()) return false;

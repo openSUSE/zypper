@@ -6,10 +6,28 @@
 #include "zypp/base/Logger.h"
 
 #include "zypper.h"
-#include "zypper-main.h"
+//#include "zypper-main.h"
+#include "zypper-prompt.h"
 
 using namespace std;
 using namespace boost;
+
+// ----------------------------------------------------------------------------
+
+PromptOptions::PromptOptions(const std::string option_str, unsigned int default_opt)
+{
+  zypp::str::split(answer_hint, back_inserter(_options), "/");
+
+  if (_options.size() <= default_opt)
+    INT << "Invalid default option index " << default_opt << endl;
+  else
+    _default = default_opt; 
+}
+
+PromptOptions::~PromptOptions()
+{
+  
+}
 
 // ----------------------------------------------------------------------------
 
@@ -34,10 +52,10 @@ int read_action_ari (PromptId pid, int default_action) {
   if (Zypper::instance()->globalOpts().non_interactive) {
       char c;
       switch (default_action) {
-	  case 0: c = 'a'; break;
-	  case 1: c = 'r'; break;
-	  case 2: c = 'i'; break;
-	  default: c = '?';
+          case 0: c = 'a'; break;
+          case 1: c = 'r'; break;
+          case 2: c = 'i'; break;
+          default: c = '?';
       }
       // print the answer for conveniecne (only for normal output)
       out.info(string(1, c), Out::QUIET, Out::TYPE_NORMAL);
@@ -46,7 +64,7 @@ int read_action_ari (PromptId pid, int default_action) {
   }
 
   // interactive mode, ask user
-  while (cin.good()) {		// #269263
+  while (cin.good()) {          // #269263
     char c;
     cin >> c;
     c = tolower (c);
@@ -120,17 +138,3 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
     return default_answer;
   }
 }
-
-// ----------------------------------------------------------------------------
-
-void report_too_many_arguments(const string & specific_help)
-{
-  //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
-  ostringstream s;
-  s << _("Usage") << ':' << endl << specific_help;
-  Zypper::instance()->out().error(_("Too many arguments."), s.str());
-}
-
-// Local Variables:
-// c-basic-offset: 2
-// End:

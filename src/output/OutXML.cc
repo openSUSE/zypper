@@ -188,21 +188,20 @@ void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 
 void OutXML::prompt(PromptId id,
                     const string & prompt,
-                    const string & answer_hint)
+                    const PromptOptions & poptions)
 {
   cout << "<prompt id=\"" << id << "\">" << endl;
   cout << xml_encode(prompt);
 
-  vector<string> answers;
-  zypp::str::split(answer_hint, back_inserter(answers), "/");
-  for (vector<string>::const_iterator ansit = answers.begin();
-       ansit != answers.end(); ++ansit)
+  int i = 0;
+  for (PromptOptions::OptionList::const_iterator it = poptions.options().begin();
+       it != poptions.options().end(); ++it, i++)
   {
-    string answer = *ansit;
+    string option = *it;
     cout << "<option";
-    //if (is_default) // TODO
-    //  cout << " default=\"1\"";
-    cout << " value=\"" << xml_encode(answer) << "\"";
+    if (options.defaultOpt() == i)
+      cout << " default=\"1\"";
+    cout << " value=\"" << xml_encode(option) << "\"";
     cout << "/>" << endl;
   }
   cout << "</prompt>" << endl;

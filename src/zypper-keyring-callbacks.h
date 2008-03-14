@@ -20,7 +20,7 @@
 #include "zypp/KeyRing.h"
 #include "zypp/Digest.h"
 
-#include "zypper-callbacks.h"
+#include "zypper-prompt.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {

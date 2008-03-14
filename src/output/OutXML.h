@@ -39,7 +39,7 @@ public:
 
   virtual void prompt(PromptId id,
                       const std::string & prompt,
-                      const std::string & answer_hint);
+                      const PromptOptions & poptions);
 
 protected:
   virtual bool mine(Type type);

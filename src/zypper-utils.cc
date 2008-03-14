@@ -11,7 +11,7 @@
 
 #include "zypper-main.h"
 #include "zypper-utils.h"
-#include "zypper-callbacks.h"
+//#include "zypper-callbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -55,6 +55,16 @@ void report_a_bug (Out & out)
       // unless you translate the actual page :)
     << _("See http://en.opensuse.org/Zypper#Troubleshooting for instructions.");
   out.error(s.str());
+}
+
+// ----------------------------------------------------------------------------
+
+void report_too_many_arguments(const string & specific_help)
+{
+  //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
+  ostringstream s;
+  s << _("Usage") << ':' << endl << specific_help;
+  Zypper::instance()->out().error(_("Too many arguments."), s.str());
 }
 
 // ----------------------------------------------------------------------------

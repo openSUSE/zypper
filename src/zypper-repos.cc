@@ -19,7 +19,7 @@
 #include "zypper-main.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
-#include "zypper-callbacks.h"
+//#include "zypper-callbacks.h"
 #include "zypper-utils.h"
 #include "zypper-repos.h"
 

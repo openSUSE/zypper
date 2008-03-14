@@ -15,8 +15,8 @@ SET (zypper_HEADERS
   zypper-utils.h
   zypper-search.h
   zypper-info.h
+  zypper-prompt.h
   zypper-tabulator.h
-  zypper-callbacks.h
   zypper-keyring-callbacks.h
   zypper-media-callbacks.h
   zypper-rpm-callbacks.h
@@ -34,7 +34,7 @@ SET( zypper_SRCS
   zypper-search.cc
   zypper-info.cc
   zypper-tabulator.cc
-  zypper-callbacks.cc
+  zypper-prompt.cc
   ${zypper_HEADERS}
 )
 
@@ -43,6 +43,7 @@ SET( zypper_out_HEADERS
   output/OutNormal.h
   output/OutXML.h
   output/prompt.h
+  output/AliveCursor.h
 )
 
 SET( zypper_out_SRCS

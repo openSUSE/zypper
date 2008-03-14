@@ -196,16 +196,22 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 
 void OutNormal::prompt(PromptId id,
                        const string & prompt,
-                       const string & answer_hint)
+                       const PromptOptions & poptions)
 {
-  /**
-  vector<string> answers;
-  zypp::str::split(answer_hint, back_inserter(answers), "/");
-  for (vector<string>::const_iterator ansit = answers.begin();
-       ansit != answers.end(); ++ansit)
+  string option_str;
+  PromptOptions::OptionList::const_iterator it;
+  if (poptions.options().begin() != poptions.end())
   {
+    //if (is_default) // TODO
+    option_str += *it;
   }
-  */
+  for (;
+       it != poptions.options().end(); ++it)
+  {
+    string option = *it;
+    //if (is_default) // TODO
+    option_str += "/" + option;
+  }
 
-  cout << CLEARLN << prompt << " [" << answer_hint << "]: " << std::flush;
+  cout << CLEARLN << prompt << " [" << option_str << "]: " << std::flush;
 }
