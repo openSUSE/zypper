@@ -97,6 +97,7 @@ namespace zypp
 	}
 
 	tm date;
+        memset(&date, 0, sizeof(date));
 
 	try
 	{
@@ -110,9 +111,6 @@ namespace zypp
 	    WAR << "Cannot parse date string: " << datestr << std::endl;
 	    return Date();
 	}
-
-	// reset time (set 00:00:00)
-	date.tm_sec = date.tm_min = date.tm_hour = 0;
 
 	time_t time_epoch = ::mktime(&date);
 
