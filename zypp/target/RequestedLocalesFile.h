@@ -67,7 +67,10 @@ namespace zypp
         */
         void setLocales( const LocaleSet & locales_r )
         {
-          if ( !_localesPtr || differs( *_localesPtr, locales_r ) )
+          if ( !_localesPtr )
+            _localesPtr.reset( new LocaleSet );
+
+          if ( differs( *_localesPtr, locales_r ) )
           {
             store( _file, locales_r );
             *_localesPtr = locales_r;
