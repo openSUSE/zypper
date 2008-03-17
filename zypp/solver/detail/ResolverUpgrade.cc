@@ -46,7 +46,6 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResStatus.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 #include "zypp/Capability.h"
 #include "zypp/VendorAttr.h"
 #include "zypp/Package.h"

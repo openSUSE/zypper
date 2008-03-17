@@ -87,13 +87,6 @@ namespace zypp
     { _openchecksum = val_r; return *this; }
 
   public:
-    /** \deprecated use \ref setLocation or \ref changeMedianr */
-    ZYPP_DEPRECATED OnMediaLocation & xsetMedianr( unsigned val_r )
-    { return changeMedianr( val_r ); }
-    /** \deprecated use \ref setLocation or \ref changeFilename */
-    ZYPP_DEPRECATED OnMediaLocation & xsetFilename( const Pathname & val_r )
-    {  return changeFilename( val_r ); }
-
     /** Individual manipulation of \c medianr.
      * Using \ref setLocation is prefered.
     */

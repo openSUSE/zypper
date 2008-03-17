@@ -54,9 +54,8 @@ namespace zypp
       typedef pool::PoolTraits::size_type		 size_type;
       typedef pool::PoolTraits::const_iterator	         const_iterator;
 
-      typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
-      typedef pool::PoolTraits::AdditionalCapabilities	   AdditionalCapabilities;
-      typedef pool::PoolTraits::repository_iterator              repository_iterator;
+      typedef pool::PoolTraits::AdditionalCapabilities	 AdditionalCapabilities;
+      typedef pool::PoolTraits::repository_iterator      repository_iterator;
 
     public:
       /** Singleton ctor. */
@@ -201,31 +200,16 @@ namespace zypp
       //@}
 
     public:
-      /** \name Iterate through all ResObjects with a certain name (all kinds).
-       * \deprecated Instead of iterating byName and filter byKind use ByIdent iterator.
-      */
+      /** \name Iterate through all ResObjects with a certain name (all kinds). */
       //@{
       typedef zypp::resfilter::ByName ByName;
       typedef filter_iterator<ByName,const_iterator> byName_iterator;
 
-      byName_iterator ZYPP_DEPRECATED byNameBegin( const std::string & name_r ) const
+      byName_iterator byNameBegin( const std::string & name_r ) const
       { return make_filter_begin( ByName(name_r), *this ); }
 
-      byName_iterator ZYPP_DEPRECATED byNameEnd( const std::string & name_r ) const
+      byName_iterator byNameEnd( const std::string & name_r ) const
       { return make_filter_end( ByName(name_r), *this ); }
-      //@}
-
-    public:
-      /** \name Iterate through all ResObjects which have at least
-       *  one Capability with index \a index_r in dependency \a depType_r.
-       *
-       * \deprecated If you're looking for providers of a certain capability
-       * use \ref sat::WhatProvides. That's currently the only index provided.
-       */
-      //@{
-      byCapabilityIndex_iterator ZYPP_DEPRECATED byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
-
-      byCapabilityIndex_iterator ZYPP_DEPRECATED byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;
       //@}
 
     public:

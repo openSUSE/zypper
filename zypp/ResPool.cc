@@ -66,13 +66,6 @@ namespace zypp
   PoolItem ResPool::find( const sat::Solvable & slv_r ) const
   { return _pimpl->find( slv_r ); }
 
-  ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphashfake.begin(); }
-
-  ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
-  { return _pimpl->_caphashfake.end(); }
-
-
   ResPool::size_type ResPool::knownRepositoriesSize() const
   { return _pimpl->knownRepositories().size(); }
 

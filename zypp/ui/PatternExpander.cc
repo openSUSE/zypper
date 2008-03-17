@@ -17,7 +17,6 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Function.h"
 #include "zypp/ResPool.h"
-#include "zypp/CapMatchHelper.h"
 
 using std::endl;
 
@@ -91,16 +90,11 @@ namespace zypp
       /** Store Patterns matching an \c Includes capability in \c _patternMap. */
       void expandInclude( const Capability & include_r )
       {
-        forEachMatchIn( _pool, Dep::PROVIDES, include_r,
-                        bind( &Impl::storeIncludeMatch, this, _1 ) );
-      }
-
-      /** Store a Pattern in \c _patternMap. */
-      bool storeIncludeMatch( const CapAndItem & capitem_r )
-      {
-        _patternMap[asKind<Pattern>(capitem_r.item)];
-        //DBG << mapEntry(*_patternMap.find(asKind<Pattern>(capitem_r.item))) << endl;
-        return true;
+        sat::WhatProvides w( include_r );
+        for_( it, w.begin(), w.end() )
+        {
+          _patternMap[asKind<Pattern>(PoolItem(*it))];
+        }
       }
 
     private:
@@ -134,19 +128,17 @@ namespace zypp
       /** Return true if Capability \c extends_r is provided by Pattern. */
       bool providedBy( const Pattern::constPtr & pat_r, const Capability & extends_r )
       {
-        std::string index( extends_r.index() );
-        return( std::find_if( _pool.byCapabilityIndexBegin( index, Dep::PROVIDES ),
-                              _pool.byCapabilityIndexEnd( index, Dep::PROVIDES ),
-                              bind( &Impl::providedByFilter, this, pat_r, extends_r, _1 ) )
-                != _pool.byCapabilityIndexEnd( index, Dep::PROVIDES ) );
-      }
+        if ( !pat_r )
+          return false;
 
-      /** Return true if \c capitem_r refers to \c pat_r and matches \c extends_r. */
-      bool providedByFilter( const Pattern::constPtr & pat_r, const Capability & extends_r,
-                             const CapAndItem & capitem_r ) const
-      {
-        return( capitem_r.item == pat_r
-                && extends_r.matches( capitem_r.cap ) == CapMatch::yes );
+        sat::Solvable pat( pat_r->satSolvable() );
+        sat::WhatProvides w( extends_r );
+        for_( it, w.begin(), w.end() )
+        {
+          if ( pat == *it )
+            return true;
+        }
+        return false;
       }
 
     private:

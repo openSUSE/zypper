@@ -66,10 +66,6 @@ namespace zypp
       void resetSystemArchitecture()
       { setSystemArchitecture( defaultSystemArchitecture() ); }
 
-      /** use setSystemArchitecture */
-      ZYPP_DEPRECATED void overrideSystemArchitecture( const Arch & arch_r )
-      { setSystemArchitecture( arch_r ); }
-
     public:
       /** The autodetected prefered locale for translated texts.
        */

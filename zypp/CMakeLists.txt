@@ -95,10 +95,7 @@ SET( zypp_HEADERS
   Callback.h
   Capabilities.h
   Capability.h
-  CapAndItem.h
-  CapFilters.h
   CapMatch.h
-  CapMatchHelper.h
   Changelog.h
   CheckSum.h
   CountryCode.h

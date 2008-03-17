@@ -15,7 +15,6 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 
 #include <zypp/SourceFactory.h>
 #include <zypp/source/susetags/SuseTagsImpl.h>

@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar"),
                     "http://foo/"+ ZConfig::instance().systemArchitecture().asString() + "/bar");
 
-  getZYpp()->setArchitecture(Arch("i686"));
+  ZConfig::instance().setSystemArchitecture(Arch("i686"));
   BOOST_CHECK_EQUAL(replacer1("http://foo/$arch/bar/$basearch"),
                     "http://foo/i686/bar/i386");
 

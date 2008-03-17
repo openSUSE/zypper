@@ -28,8 +28,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class CapAndItem;
-
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
@@ -141,23 +139,9 @@ namespace zypp
       typedef transform_iterator<Id2ItemValueSelector, Id2ItemT::const_iterator>
                                                         byIdent_iterator;
 
-
       /* list of known Repositories */
       typedef std::list<Repository>	                RepoContainerT;
       typedef RepoContainerT::const_iterator		repository_iterator;
-
-	
-      // internal organization
-      typedef std::list<zypp::CapAndItem>		CapItemContainerT;	// (why,who) pairs
-      typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
-      typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
-
-      typedef CapItemContainerT::iterator		capitemiterator;
-      typedef CapItemContainerT::const_iterator		const_capitemiterator;
-      typedef CapItemContainerT::size_type		capitemsize_type;
-      /** hashed by capability index */
-      typedef const_capitemiterator                     byCapabilityIndex_iterator;
-
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;

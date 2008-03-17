@@ -10,7 +10,6 @@
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 #include "zypp/Package.h"
 #include "zypp/Pattern.h"
 #include "zypp/Language.h"

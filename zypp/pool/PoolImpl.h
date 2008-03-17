@@ -278,10 +278,6 @@ namespace zypp
 
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
         mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
-
-      public:
-        /** \bug FAKE capindex */
-        const PoolTraits::CapItemContainerT   _caphashfake;
     };
     ///////////////////////////////////////////////////////////////////
 

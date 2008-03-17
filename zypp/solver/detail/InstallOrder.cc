@@ -34,7 +34,6 @@
 
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
-#include "zypp/CapAndItem.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"

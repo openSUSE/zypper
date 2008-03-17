@@ -16,7 +16,6 @@
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 #include "zypp/ResObjects.h"
 #include "zypp/Digest.h"
 #include "zypp/PackageKeyword.h"
@@ -316,14 +315,20 @@ struct MediaChangeReceive : public callback::ReceiveReport<media::MediaChangeRep
 {
   virtual Action requestMedia( Url & source
                                , unsigned mediumNr
+                               , const std::string & label
                                , Error error
-                               , const std::string & description )
+                               , const std::string & description
+                               , const std::vector<std::string> & devices
+                               , unsigned int & dev_current )
   {
     SEC << __FUNCTION__ << endl
     << "  " << source << endl
     << "  " << mediumNr << endl
+    << "  " << label << endl
     << "  " << error << endl
-    << "  " << description << endl;
+    << "  " << description << endl
+    << "  " << devices << endl
+    << "  " << dev_current << endl;
     return IGNORE;
   }
 };

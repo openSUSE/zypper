@@ -4,8 +4,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/TranslatedText.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
+#include "zypp/ZConfig.h"
 
 #include <boost/test/auto_unit_test.hpp>
 
@@ -17,13 +16,9 @@ using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(translatedtext_test)
 {
-  ZYpp::Ptr god;
-
-  god = getZYpp();
-
   TranslatedText testTT;
   MIL << "Locale: en" << std::endl;
-  god->setTextLocale(Locale("en"));
+  ZConfig::instance().setTextLocale(Locale("en"));
   testTT.setText("default");
   MIL << "value: '" << testTT.text() << "'" << std::endl;
   BOOST_CHECK_EQUAL( testTT.text(), "default" );
@@ -32,7 +27,7 @@ BOOST_AUTO_TEST_CASE(translatedtext_test)
   BOOST_CHECK_EQUAL( testTT.text(), "default english" );
 
   MIL << "Locale: es_ES" << std::endl;
-  god->setTextLocale(Locale("es_ES"));
+  ZConfig::instance().setTextLocale(Locale("es_ES"));
 
   BOOST_CHECK_EQUAL( testTT.text(), "default english" );
 
@@ -45,7 +40,7 @@ BOOST_AUTO_TEST_CASE(translatedtext_test)
   BOOST_CHECK_EQUAL( testTT.text(), "hola Spain" );
 
   MIL << "Locale: null" << std::endl;
-  god->setTextLocale(Locale());
+  ZConfig::instance().setTextLocale(Locale());
   BOOST_CHECK_EQUAL( testTT.text(), "default" );
 }
 

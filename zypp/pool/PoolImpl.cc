@@ -13,22 +13,12 @@
 #include "zypp/base/LogTools.h"
 
 #include "zypp/pool/PoolImpl.h"
-#include "zypp/Package.h"
-#include "zypp/VendorAttr.h"
-
-#include "zypp/sat/Pool.h"
-#include "zypp/Repository.h"
 
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  std::ostream & operator<<( std::ostream & str, const CapAndItem & obj )
-  {
-    return str << "{" << obj.cap << ", " << obj.item << "}";
-  }
 
   ///////////////////////////////////////////////////////////////////
   namespace pool

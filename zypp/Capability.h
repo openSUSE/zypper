@@ -57,10 +57,6 @@ namespace zypp
                     private base::SafeBool<Capability>
   {
     public:
-      // legacy
-      std::string index() const ZYPP_DEPRECATED;
-
-    public:
       enum CtorFlag { PARSED, UNPARSED };
 
     public:
@@ -292,12 +288,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   inline CapDetail Capability::detail() const { return CapDetail( _id ); }
-
-  inline std::string Capability::index() const
-  {
-    CapDetail cap( _id );
-    return( cap.isSimple() ? cap.name().asString() : std::string() );
-  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -30,7 +30,6 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/WhatProvides.h"

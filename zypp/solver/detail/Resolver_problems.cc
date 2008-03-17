@@ -34,7 +34,6 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
 
 
 /////////////////////////////////////////////////////////////////////////

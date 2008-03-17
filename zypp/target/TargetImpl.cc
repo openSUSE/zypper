@@ -31,7 +31,6 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/Repository.h"
 
-#include "zypp/CapMatchHelper.h"
 #include "zypp/ResFilters.h"
 #include "zypp/target/CommitLog.h"
 #include "zypp/target/TargetImpl.h"
@@ -133,63 +132,6 @@ namespace zypp
       {
         ExecuteScriptHelper( access_r, script_r, false );
       }
-      /////////////////////////////////////////////////////////////////
-    } // namespace
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    namespace
-    { /////////////////////////////////////////////////////////////////
-
-      /** Helper removing obsoleted non-Package from store. */
-      struct StorageRemoveObsoleted
-      {
-        StorageRemoveObsoleted(const PoolItem & byPoolitem_r )
-        : _byPoolitem( byPoolitem_r )
-        {}
-
-        bool operator()( const PoolItem & poolitem_r ) const
-        {
-          if ( ! poolitem_r.status().isInstalled() )
-            return true;
-
-          if ( isKind<Package>(poolitem_r.resolvable()) )
-            {
-              ERR << "Ignore unsupported Package/non-Package obsolete: "
-                  << _byPoolitem << " obsoletes " << poolitem_r << endl;
-              return true;
-            }
-
-          try
-            {
-               // delete poolitem_r.resolvable()
-               MIL<< "Obsoleted: " << poolitem_r << " (by " << _byPoolitem << ")" << endl;
-            }
-          catch ( Exception & excpt_r )
-            {
-              ZYPP_CAUGHT( excpt_r );
-              WAR << "Failed obsolete: " << poolitem_r << " (by " << _byPoolitem << ")" << endl;
-            }
-
-          return true;
-        }
-
-      private:
-        const PoolItem               _byPoolitem;
-      };
-
-      /** Helper processing non-Package obsoletes.
-      *
-      * Scan \a pool_r for items obsoleted \a byPoolitem_r and remove them from
-      * \a storage_r.
-      */
-      void obsoleteMatchesFromStorage( const ResPool & pool_r,
-                                       const PoolItem & byPoolitem_r )
-      {
-        forEachPoolItemMatchedBy( pool_r, byPoolitem_r, Dep::OBSOLETES,
-                                  OncePerPoolItem( StorageRemoveObsoleted( byPoolitem_r ) ) );
-      }
-
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -641,9 +583,6 @@ namespace zypp
         {
           if (it->status().isToBeInstalled())
           {
-            // Process OBSOLETES and remove them from store.
-            obsoleteMatchesFromStorage( pool_r, *it );
-
             bool success = false;
             try
             {

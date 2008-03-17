@@ -11,12 +11,11 @@
 #include <fstream>
 #include <boost/function.hpp>
 
-#include <zypp/base/Regex.h>
-#include <zypp/base/String.h>
+#include "zypp/base/Regex.h"
+#include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/PoolItem.h"
-#include "zypp/CapMatchHelper.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
@@ -32,7 +31,7 @@ namespace zypp
 {
 namespace locks
 {
-
+#if 0
 //
 // collect matching names
 //
@@ -89,28 +88,11 @@ wildcards2regex(const string & str)
 
   return regexed;
 }
-
+#endif
 
 //
 // assign Lock to installed pool item
 //
-
-struct ItemLockerFunc
-{
-  ItemLockerFunc( const string lock_str )
-    : _lock_str(lock_str)
-  {}
-
-  bool operator()( const CapAndItem &cai_r )
-  {
-    PoolItem item(cai_r.item);
-    MIL << "Locking " << cai_r.item << "(matched by " << _lock_str << ")" << endl;
-    item.status().setLock( true, ResStatus::USER);
-    return true;
-  }
-
-  string _lock_str;
-};
 
 struct AddLockToPool
 {

@@ -16,11 +16,9 @@
 
 #include "zypp/base/Functional.h"
 #include "zypp/Resolvable.h"
-#include "zypp/CapFilters.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/Repository.h"
-#include "zypp/CapAndItem.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -203,7 +201,7 @@ namespace zypp
 
       std::string _alias;
     };
-      
+
     /** Select ResObject by Edition using \a _Compare functor.
      *
      * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )</tt>
@@ -342,97 +340,6 @@ namespace zypp
 	return p.status().isKept();
       }
     };
-
-
-
-    ///////////////////////////////////////////////////////////////////
-
-    /** Select ResObject if at least one Capability with
-     *  index \a index_r was found in dependency \a depType_r.
-    */
-    struct ByCapabilityIndex
-    {
-      bool operator()( const CapAndItem & /*cai*/ ) const
-      {
-	return true;			// its all in the PoolImpl !
-      }
-    };
-
-
-    /** Select ResObject if at least one Capability with
-     *  index \a index_r was found in dependency \a depType_r.
-    */
-    struct ByCapMatch
-    {
-      bool operator()( const CapAndItem & cai ) const
-      {
-	return cai.cap.matches( _cap ) == CapMatch::yes;
-      }
-      ByCapMatch( const Capability & cap_r )
-	: _cap( cap_r )
-      {}
-      Capability _cap;
-    };
-
-
-    /** Select PoolItem by uninstalled. */
-    struct ByCaIUninstalled
-    {
-      bool operator()( const CapAndItem & cai ) const
-      {
-	return cai.item.status().isUninstalled();
-      }
-    };
-
-    /** Select PoolItem by installed. */
-    struct ByCaIInstalled
-    {
-      bool operator()( const CapAndItem & cai ) const
-      {
-	return cai.item.status().isInstalled();
-      }
-    };
-
-    /** Select PoolItem by transact. */
-    struct ByCaITransact
-    {
-      bool operator()( const CapAndItem & cai ) const
-      {
-	return cai.item.status().transacts();
-      }
-    };
-
-    /** Select PoolItem by not transact. */
-    struct ByCaINotTransact
-    {
-      bool operator()( const CapAndItem & cai ) const
-      {
-	return !(cai.item.status().transacts());
-      }
-    };
-
-
-    /** Select CapAndItem by kind. */
-    struct ByCaIKind
-    {
-      ByCaIKind( const ResObject::Kind & kind_r )
-      : _kind( kind_r )
-      {}
-
-      bool operator()( const CapAndItem & cai ) const
-      {
-        return cai.item->kind() == _kind;
-      }
-
-      ResObject::Kind _kind;
-    };
-
-    /** */
-    template<class _Res>
-      inline ByCaIKind byCaIKind()
-      { return ByCaIKind( ResTraits<_Res>::kind ); }
-
-    ///////////////////////////////////////////////////////////////////
 
     //@}
     /////////////////////////////////////////////////////////////////
