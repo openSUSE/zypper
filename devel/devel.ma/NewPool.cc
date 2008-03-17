@@ -533,12 +533,20 @@ try {
 
   ///////////////////////////////////////////////////////////////////
 
-  for_( it, pool.begin(), pool.end() )
+  for_( it, pool.byIdentBegin<SrcPackage>("zypper"), pool.byIdentEnd<SrcPackage>("zypper") )
   {
-    tt( (*it)->name() );
+    INT << *it << endl;
+    MIL << dump((*it).satSolvable()) << endl;
+    //tt( (*it)->name() );
   }
 
 #if 0
+  for_( it, pool.byKindBegin<SrcPackage>(), pool.byKindEnd<SrcPackage>() )
+  {
+    MIL << *it << endl;
+    //tt( (*it)->name() );
+  }
+
   IdString id ("amarok");
   sat::WhatProvides w( Capability(id.id()) );
 

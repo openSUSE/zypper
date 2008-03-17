@@ -125,9 +125,9 @@ namespace zypp
       {
         if ( a1 )
         {
-          if      ( a3 ) DBG << a1 << " " << a2 << " " << a3 << endl;
-          else if ( a2 ) DBG << a1 << " " << a2 << endl;
-          else           DBG << a1 << endl;
+          if      ( a3 ) MIL << a1 << " " << a2 << " " << a3 << endl;
+          else if ( a2 ) MIL << a1 << " " << a2 << endl;
+          else           MIL << a1 << endl;
         }
         _serial.setDirty();           // pool content change
         _availableLocalesPtr.reset(); // available locales may change
@@ -140,9 +140,9 @@ namespace zypp
       {
         if ( a1 )
         {
-          if      ( a3 ) DBG << a1 << " " << a2 << " " << a3 << endl;
-          else if ( a2 ) DBG << a1 << " " << a2 << endl;
-          else           DBG << a1 << endl;
+          if      ( a3 ) MIL << a1 << " " << a2 << " " << a3 << endl;
+          else if ( a2 ) MIL << a1 << " " << a2 << endl;
+          else           MIL << a1 << endl;
         }
         ::pool_freewhatprovides( _pool );
       }
@@ -157,7 +157,7 @@ namespace zypp
         }
         if ( ! _pool->whatprovides )
         {
-          DBG << "pool_createwhatprovides..." << endl;
+          MIL << "pool_createwhatprovides..." << endl;
           ::pool_addfileprovides( _pool, sat::Pool::instance().systemRepo().get() );
           ::pool_createwhatprovides( _pool );
         }
