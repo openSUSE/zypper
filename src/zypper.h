@@ -10,6 +10,7 @@
 
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoManager.h"
+#include "zypp/SrcPackage.h"
 
 #include "output/Out.h"
 #include "zypper-command.h"
@@ -73,6 +74,25 @@ struct CommandOptions
   bool license_auto_agree;
 };
 
+struct RuntimeData
+{
+  RuntimeData()
+    : patches_count(0), security_patches_count(0), show_media_progress_hack(false)
+  {}
+
+  std::list<zypp::RepoInfo> repos;
+  std::list<zypp::RepoInfo> additional_repos;
+  int patches_count;
+  int security_patches_count;
+  zypp::RepoInfo current_repo;
+
+  std::list<zypp::SrcPackage::constPtr> srcpkgs_to_install;
+
+  // hack to enable media progress reporting in the commit phase in normal
+  // output level
+  bool show_media_progress_hack;
+};
+
 class Zypper : private zypp::base::NonCopyable
 {
 public:
@@ -90,6 +110,7 @@ public:
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
   const std::vector<std::string> & arguments() const { return _arguments; }
+  RuntimeData & runtimeData() { return _rdata; }
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
@@ -132,6 +153,8 @@ private:
   bool  _running_shell;
   bool  _running_help;
 
+  RuntimeData _rdata;
+
   int _sh_argc;
   char **_sh_argv;
 };
@@ -139,23 +162,6 @@ private:
 void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
 void print_command_help_hint(Zypper & zypper);
-
-struct RuntimeData
-{
-  RuntimeData()
-    : patches_count(0), security_patches_count(0), show_media_progress_hack(false)
-  {}
-
-  std::list<zypp::RepoInfo> repos;
-  std::list<zypp::RepoInfo> additional_repos;
-  int patches_count;
-  int security_patches_count;
-  zypp::RepoInfo current_repo;
-
-  // hack to enable media progress reporting in the commit phase in normal
-  // output level
-  bool show_media_progress_hack;
-};
 
 extern RuntimeData gData;
 

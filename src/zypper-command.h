@@ -23,7 +23,6 @@ struct ZypperCommand
   static const ZypperCommand UPDATE;
   static const ZypperCommand DIST_UPGRADE;
   static const ZypperCommand SRC_INSTALL;
-  static const ZypperCommand BUILD_DEPS_INSTALL;
   
   static const ZypperCommand SEARCH;
   static const ZypperCommand INFO;
@@ -62,7 +61,6 @@ struct ZypperCommand
     UPDATE_e,
     DIST_UPGRADE_e,
     SRC_INSTALL_e,
-    BUILD_DEPS_INSTALL_e,
 
     SEARCH_e,
     INFO_e,
@@ -102,6 +100,9 @@ inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj 
 */
 inline bool operator==(const ZypperCommand & obj1, const ZypperCommand & obj2)
 { return obj1._command == obj2._command; }
+
+inline bool operator!=(const ZypperCommand & obj1, const ZypperCommand & obj2)
+{ return obj1._command != obj2._command; }
 
 
 #endif /*ZYPPERCOMMAND_H_*/

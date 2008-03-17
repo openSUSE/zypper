@@ -838,7 +838,7 @@ int summary(Zypper & zypper)
     }
   }
 
-  if (retv == -1)
+  if (retv == -1 && zypper.runtimeData().srcpkgs_to_install.empty())
   {
     zypper.out().info(_("Nothing to do."));
     return retv;
@@ -898,6 +898,10 @@ int summary(Zypper & zypper)
       toremove[it->first].insert(*resit);
       new_installed_size -= (*resit)->size();
     }
+
+  for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
+      it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
+    toinstall[ResTraits<SrcPackage>::kind].insert(*it);
 
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
@@ -1635,7 +1639,7 @@ void mark_patch_updates( bool skip_interactive )
 //! \todo mechanism for updating the update stack before the rest.
 void mark_updates(const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
-  unsigned kind_size = kinds.size();
+//  unsigned kind_size = kinds.size();
   ResKindSet localkinds = kinds;
   ResKindSet::iterator it;
   it = localkinds.find(ResTraits<Patch>::kind);
@@ -1679,83 +1683,90 @@ void solve_and_commit (Zypper & zypper)
   // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
   int retv = summary(zypper);
   bool was_installed = false;
-  if (retv >= 0) { // there are resolvables to install/uninstall
-    if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true)) {
-
+  if (retv >= 0 || !zypper.runtimeData().srcpkgs_to_install.empty())
+  {
+    // there are resolvables to install/uninstall
+    if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true))
+    {
       if (!confirm_licenses(zypper)) return;
-
-      try {
-        //! \todo fix the media reporting correctly
-        gData.show_media_progress_hack = true;
-
-        ostringstream s;
-        s << _("committing"); MIL << "committing...";
-
-        ZYppCommitResult result;
-        if (copts.count("dry-run"))
+      if (retv >= 0)
+      {
+        try
         {
-          s << " " << _("(dry run)") << endl; MIL << "(dry run)";
+          gData.show_media_progress_hack = true;
+  
+          ostringstream s;
+          s << _("committing"); MIL << "committing...";
+  
+          ZYppCommitResult result;
+          if (copts.count("dry-run"))
+          {
+            s << " " << _("(dry run)") << endl; MIL << "(dry run)";
+            zypper.out().info(s.str(), Out::HIGH);
+  
+            result = God->commit(ZYppCommitPolicy().dryRun(true));
+          }
+          else
+          {
+            zypper.out().info(s.str(), Out::HIGH);
+  
+            result = God->commit(
+              ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
+  
+            was_installed = true;
+          }
+          
+  
+          MIL << endl << "DONE" << endl;
+  
+          gData.show_media_progress_hack = false;
+          
+          if (!result._errors.empty())
+            retv = ZYPPER_EXIT_ERR_ZYPP;
+  
+          s.clear(); s << result;
           zypper.out().info(s.str(), Out::HIGH);
-
-          result = God->commit(ZYppCommitPolicy().dryRun(true));
         }
-        else
-        {
-          zypper.out().info(s.str(), Out::HIGH);
-
-          result = God->commit(
-            ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-
-          was_installed = true;
+        catch ( const media::MediaException & e ) {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("Problem downloading the package file from the repository:"),
+              _("Please see the above error message for a hint."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
         }
-        
-
-        MIL << endl << "DONE" << endl;
-
-        gData.show_media_progress_hack = false;
-        
-        if (!result._errors.empty())
-          retv = ZYPPER_EXIT_ERR_ZYPP;
-
-        s.clear(); s << result;
-        zypper.out().info(s.str(), Out::HIGH);
+        catch ( const zypp::repo::RepoException & e ) {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("Problem downloading the package file from the repository:"),
+              _("Please see the above error message for a hint."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
+        }
+        catch ( const zypp::FileCheckException & e ) {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("The package integrity check failed. This may be a problem"
+              " with the repository or media. Try one of the following:\n"
+              "\n"
+              "- just retry previous command\n"
+              "- refresh the repositories using 'zypper refresh'\n"
+              "- use another installation medium (if e.g. damaged)\n"
+              "- use another repository"));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          return;
+        }
+        catch ( const Exception & e ) {
+          ZYPP_CAUGHT(e);
+          zypper.out().error(e,
+              _("Problem occured during or after installation or removal of packages:"),
+              _("Please see the above error message for a hint."));
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        }
       }
-      catch ( const media::MediaException & e ) {
-        ZYPP_CAUGHT(e);
-        zypper.out().error(e,
-            _("Problem downloading the package file from the repository:"),
-            _("Please see the above error message for a hint."));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        return;
-      }
-      catch ( const zypp::repo::RepoException & e ) {
-        ZYPP_CAUGHT(e);
-        zypper.out().error(e,
-            _("Problem downloading the package file from the repository:"),
-            _("Please see the above error message for a hint."));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        return;
-      }
-      catch ( const zypp::FileCheckException & e ) {
-        ZYPP_CAUGHT(e);
-        zypper.out().error(e,
-            _("The package integrity check failed. This may be a problem"
-            " with the repository or media. Try one of the following:\n"
-            "\n"
-            "- just retry previous command\n"
-            "- refresh the repositories using 'zypper refresh'\n"
-            "- use another installation medium (if e.g. damaged)\n"
-            "- use another repository"));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        return;
-      }
-      catch ( const Exception & e ) {
-        ZYPP_CAUGHT(e);
-        zypper.out().error(e,
-            _("Problem occured during or after installation or removal of packages:"),
-            _("Please see the above error message for a hint."));
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      }
+      // install any pending source packages
+      if (!zypper.runtimeData().srcpkgs_to_install.empty())
+        install_src_pkgs(zypper);
     }
   }
 
@@ -1875,11 +1886,12 @@ static SrcPackage::constPtr source_find( const string & arg )
       if ( ! srcit->status().isInstalled() )
       {
         SrcPackage::constPtr _srcpkg = asKind<SrcPackage>(srcit->resolvable());
-        DBG << "Considering srcpakcage " << srcpkg->name() << "-" << srcpkg->edition() << ": ";
-        if (_srcpkg)
+
+        DBG << "Considering srcpakcage " << _srcpkg->name() << "-" << _srcpkg->edition() << ": ";
+        if (srcpkg)
         {
-          if (_srcpkg->edition() < srcpkg->edition())
-            DBG << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")" << endl;
+          if (_srcpkg->edition() > srcpkg->edition())
+            DBG << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")";
           else
             DBG << "is older than the current candidate";
         }
@@ -1894,7 +1906,7 @@ static SrcPackage::constPtr source_find( const string & arg )
     return srcpkg;
 }
 
-int build_deps_install(std::vector<std::string> & arguments)
+void build_deps_install(Zypper & zypper)
 {
   /*
    * Workflow:
@@ -1903,38 +1915,34 @@ int build_deps_install(std::vector<std::string> & arguments)
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  int ret = ZYPPER_EXIT_OK;
-
-  for (vector<string>::const_iterator it = arguments.begin();
-       it != arguments.end(); ++it)
+  for (vector<string>::const_iterator it = zypper.arguments().begin();
+       it != zypper.arguments().end(); ++it)
   {
     SrcPackage::constPtr srcpkg = source_find(*it);
 
     if (srcpkg)
     {
-      Zypper::instance()->out().info(boost::str(format(
-          _("Installing source package %s-%s dependencies"))
-          % srcpkg->name() % srcpkg->edition()));
+      DBG << format("Injecting build requieres for source package %s-%s")
+          % srcpkg->name() % srcpkg->edition() << endl;
 
       // add all src requires to pool
       for_( itc, srcpkg->dep(Dep::REQUIRES).begin(), srcpkg->dep(Dep::REQUIRES).end() )
       {
         God->resolver()->addRequire(*itc);
+        DBG << "added req: " << *itc << endl;
       }
     }
     else
     {
-      Zypper::instance()->out().error(boost::str(format(
+      zypper.out().error(boost::str(format(
           _("Source package '%s' not found.")) % (*it)));
-      ret = ZYPPER_EXIT_INF_CAP_NOT_FOUND;
+      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     }
   }
-
-  return ret;
 }
 
 
-int source_install(std::vector<std::string> & arguments)
+void find_src_pkgs(Zypper & zypper)
 {
   /*
    * Workflow:
@@ -1943,44 +1951,47 @@ int source_install(std::vector<std::string> & arguments)
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
 
-  int ret = ZYPPER_EXIT_OK;
-
-  for (vector<string>::const_iterator it = arguments.begin();
-       it != arguments.end(); ++it)
+  for (vector<string>::const_iterator it = zypper.arguments().begin();
+       it != zypper.arguments().end(); ++it)
   {
     SrcPackage::constPtr srcpkg = source_find(*it);
 
     if (srcpkg)
-    {
-      Zypper::instance()->out().info(boost::str(format(
-          _("Installing source package %s-%s"))
-          % srcpkg->name() % srcpkg->edition()));
-      MIL << "Going to install srcpackage: " << srcpkg << endl;
-
-      try
-      {
-        God->installSrcPackage(srcpkg);
-
-        Zypper::instance()->out().info(boost::str(format(
-            _("Source package %s-%s successfully installed."))
-            % srcpkg->name() % srcpkg->edition()));
-      }
-      catch (const Exception & ex)
-      {
-        ZYPP_CAUGHT(ex);
-        Zypper::instance()->out().error(ex,
-          boost::str(format(_("Problem installing source package %s-%s:"))
-            % srcpkg->name() % srcpkg->edition()));
-
-        ret = ZYPPER_EXIT_ERR_ZYPP;
-      }
-    }
+      zypper.runtimeData().srcpkgs_to_install.push_back(srcpkg);
     else
-      Zypper::instance()->out().error(boost::str(format(
+      zypper.out().error(boost::str(format(
           _("Source package '%s' not found.")) % (*it)));
   }
+}
 
-  return ret;
+void install_src_pkgs(Zypper & zypper)
+{
+  for_(it, zypper.runtimeData().srcpkgs_to_install.begin(), zypper.runtimeData().srcpkgs_to_install.end())
+  {
+    SrcPackage::constPtr srcpkg = *it;
+    zypper.out().info(boost::str(format(
+        _("Installing source package %s-%s"))
+        % srcpkg->name() % srcpkg->edition()));
+    MIL << "Going to install srcpackage: " << srcpkg << endl;
+  
+    try
+    {
+      God->installSrcPackage(srcpkg);
+  
+      zypper.out().info(boost::str(format(
+          _("Source package %s-%s successfully installed."))
+          % srcpkg->name() % srcpkg->edition()));
+    }
+    catch (const Exception & ex)
+    {
+      ZYPP_CAUGHT(ex);
+      zypper.out().error(ex,
+        boost::str(format(_("Problem installing source package %s-%s:"))
+          % srcpkg->name() % srcpkg->edition()));
+  
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    }
+  }
 }
 
 // Local Variables:

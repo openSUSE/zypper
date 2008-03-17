@@ -112,9 +112,16 @@ struct ProvideProcess
 };
 
 /**
- * Installs source packages specified by name.
+ * Find source packages by names specified as arguments.
  */
-int source_install(std::vector<std::string> & arguments);
-int build_deps_install(std::vector<std::string> & arguments);
+void find_src_pkgs(Zypper & zypper);
+/**
+ * Install source packages found by \ref find_src_pkgs.
+ */
+void install_src_pkgs(Zypper & zypper);
+/**
+ * Inject requirements of source packages' build dependencies to the pool.
+ */
+void build_deps_install(Zypper & zypper);
 
 #endif

@@ -126,9 +126,19 @@ add the \-\-test option to the rpm commands run by the install command.
 
 .TP
 .B source-install (si) <name> ...
-Install source packages specified by their names.
+Install specified source packages and their build dependencies.
 
 This command will try to find the newest available versions of the source packages and use rpm -i to install them.
+
+.TP
+.I \-d, \-\-build\-deps\-only
+Install only build dependencies of specified packages.
+.TP
+.I \-D, \-\-no\-build\-deps
+Don't install build dependencies.
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Install packages only from specified repositories.
 
 .TP
 .B list-updates (lu) [options]

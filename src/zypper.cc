@@ -168,8 +168,8 @@ void print_main_help(Zypper & zypper)
     "  Commands:\n"
     "\thelp, ?\t\t\tHelp\n"
     "\tshell, sh\t\tAccept multiple commands at once.\n"
-    "\tinstall, in\t\tInstall packages or resolvables.\n"
-    "\tremove, rm\t\tRemove packages or resolvables.\n"
+    "\tinstall, in\t\tInstall packages.\n"
+    "\tremove, rm\t\tRemove packages.\n"
     "\tsearch, se\t\tSearch for packages matching a pattern.\n"
     "\trepos, lr\t\tList all defined repositories.\n"
     "\taddrepo, ar\t\tAdd a new repository.\n"
@@ -181,12 +181,11 @@ void print_main_help(Zypper & zypper)
     "\tpatches, pch\t\tList patches.\n"
     "\tlist-updates, lu\tList updates.\n"
     "\txml-updates, xu\t\tList updates and patches in xml format.\n"
-    "\tupdate, up\t\tUpdate installed resolvables with newer versions.\n"
+    "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
     "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
     "\tinfo, if\t\tShow full information for packages.\n"
     "\tpatch-info\t\tShow full information for patches.\n"
-    "\tsource-install, si\tInstall a source package.\n"
-    "\tbuild-deps-install, bi\tInstall source package build dependencies.\n"
+    "\tsource-install, si\tInstall source packages.\n"
     "\tclean\t\t\tClean local caches.\n"
     "");
 
@@ -810,6 +809,9 @@ void Zypper::processCommandOptions()
   case ZypperCommand::SRC_INSTALL_e:
   {
     static struct option src_install_options[] = {
+      {"build-deps-only", no_argument, 0, 'd'},
+      {"no-build-deps", no_argument, 0, 'D'},
+      {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -817,25 +819,12 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "source-install (si) <name> ...\n"
       "\n"
-      "Install source packages specified by their names.\n"
+      "Install specified source packages and their build dependencies.\n"
       "\n"
-      "This command has no additional options.\n"
-    );
-    break;
-  }
-
-  case ZypperCommand::BUILD_DEPS_INSTALL_e:
-  {
-    static struct option src_install_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    _command_help = _(
-      "build-deps-install (bi) <name> ...\n"
-      "\n"
-      "Install source packages build dependencies specified by their names.\n"
-      "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-d, --build-deps-only    Install only build dependencies of specified packages.\n"
+      "-D, --no-build-deps      Don't install build dependencies.\n"
+      "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
     );
     break;
   }
@@ -1960,36 +1949,15 @@ void Zypper::doCommand()
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
-
     init_target(*this);
-    // load only repo resolvables, we don't need the installed ones
+    if (!copts.count("no-build-deps"))
+      load_target_resolvables(*this);
     load_repo_resolvables(*this);
 
-    setExitCode(source_install(_arguments));
-    return;
-  }
-
-  // -------------------( build deps install )------------------------------------
-
-  else if (command() == ZypperCommand::BUILD_DEPS_INSTALL)
-  {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
-    if (_arguments.size() < 1)
-    {
-      out().error(_("Source package name is a required argument."));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-
-    init_repos(*this);
-    if (exitCode() != ZYPPER_EXIT_OK)
-      return;
-
-    init_target(*this);
-    // load only repo resolvables, we don't need the installed ones
-    load_repo_resolvables(*this);
-    build_deps_install(_arguments);
+    if (!copts.count("no-build-deps"))
+      build_deps_install(*this);
+    if (!copts.count("build-deps-only"))
+      find_src_pkgs(*this);
     solve_and_commit(*this);
     return;
   }
