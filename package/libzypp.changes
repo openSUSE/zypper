@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 18 11:42:51 CET 2008 - jreidinger@suse.cz
+
+- Don't mask skip and abort exception in Fetcher
+- revision 9188
+
+-------------------------------------------------------------------
 Tue Mar 18 11:00:22 CET 2008 - jreidinger@suse.cz
 
 - action is correctly set in mediaRequest callback
