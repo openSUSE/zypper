@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 18 13:54:16 CET 2008 - jkupec@suse.cz
+
+- removed obsolete capability handling stuff (ma)
+- version 4.5.0
+
+-------------------------------------------------------------------
 Tue Mar 18 11:42:51 CET 2008 - jreidinger@suse.cz
 
 - Don't mask skip and abort exception in Fetcher
