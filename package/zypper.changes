@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 18 11:54:57 CET 2008 - jreidinger@suse.cz
+
+- add abort/retry/ignore option when download fail (bnc #340345)
+- r9190 
+
+-------------------------------------------------------------------
 Fri Mar 14 14:58:27 CET 2008 - jkupec@suse.cz
 
 - use default answers to prompts on enter. Default answer options
