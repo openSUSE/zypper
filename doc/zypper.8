@@ -47,7 +47,8 @@ Displays full info for the specified packages or other resolvables.
 
 .TP
 .I \-r, \-\-repo <alias|#|URL>
-Work only with the repository specified by the alias, number or URL.
+Work only with the repository specified by the alias, number or URL. This
+option can be used multiple times.
 .TP
 .I \-t, \-\-type <type>
 Type of resolvable (default: package). Currently supported resolvable types for
@@ -87,6 +88,7 @@ respective resolvables for installation.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>
 Install resolvables only from the repository specified by the alias, number or URL.
+This option can be used multiple times.
 .TP
 \fI\-t, \-\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -139,6 +141,7 @@ Don't install build dependencies.
 .TP
 .I \-r, \-\-repo <alias|#|URI>
 Install packages only from specified repositories.
+This option can be used multiple times.
 
 .TP
 .B list-updates (lu) [options]
@@ -149,6 +152,7 @@ Type of resolvable (default: patch)
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>
 List only updates from the repository specified by the alias, number or URL.
+This option can be used multiple times.
 
 See also the NOTE at
 .BR update .
@@ -165,6 +169,7 @@ For details see the install command
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>		
 Operate only with resolvables from repository specified by alias, number or URL.
+This option can be used multiple times.
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
 Type of resolvable (default: package)
@@ -198,6 +203,7 @@ Type of resolvable (default: patch)
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>
 Limit updates to repository specified by alias, number or URL.
+This option can be used multiple times.
 .TP
 .I     \-\-skip\-interactive
 This will skip interactive patches, that is, those that need reboot,
@@ -233,6 +239,7 @@ and product updates, etc.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>
 Limit updates to repository specified by alias, number or URL.
+This option can be used multiple times.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
@@ -308,6 +315,7 @@ returned by this command.
 .TP
 .I \-r, \-\-repo <alias|#|URL>
 Check for patches only in the repository specified by the alias, number or URL.
+This option can be used multiple times.
 
 .TP
 .B patches (pch)
@@ -316,6 +324,7 @@ installed and not applicable ones.
 .TP
 .I \-r, \-\-repo <alias|#|URL>
 Check for patches only in the repository specified by the alias, number or URL.
+This option can be used multiple times.
 
 .SS Repository Management
 
