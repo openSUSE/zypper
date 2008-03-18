@@ -47,10 +47,10 @@ namespace ZmartRecipients
            it != devices.end(); ++it)
         std::cout << *it << " ";
       cout << std::endl;*/
-      if (is_changeable_media(url))
+      Zypper::instance()->out().error(description);
+      if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
       {
         //cerr << endl; // may be in the middle of RepoReport or ProgressReport \todo check this
-        Zypper::instance()->out().error(description);
   
         std::string request = boost::str(boost::format(
             // TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
@@ -65,9 +65,8 @@ namespace ZmartRecipients
           return MediaChangeReport::ABORT;
       }
 
-      // not displaying the error for non-changeable media, it will be displayed
-      // where it is caught
-      return MediaChangeReport::ABORT;
+      return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM
+          ,MediaChangeReport::ABORT);
     }
   };
 
