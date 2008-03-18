@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 18 11:00:22 CET 2008 - jreidinger@suse.cz
+
+- action is correctly set in mediaRequest callback
+- revision 9186
+
+-------------------------------------------------------------------
 Mon Mar 17 12:33:44 CET 2008 - ma@suse.de
 
 - Fix SEGV in commit (bnc# 371137)
