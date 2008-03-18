@@ -91,6 +91,15 @@ struct RuntimeData
   // hack to enable media progress reporting in the commit phase in normal
   // output level
   bool show_media_progress_hack;
+
+  // Indicates an ongoing raw meta-data refresh.
+  // If not empty call zypper.out().progress(
+  //  "raw-refresh", raw_refresh_progress_label) in the media download
+  // progress callback.
+  //! \todo better way to do this would be to propagate the download progress
+  // all the way up from the media back-end through fetcher and downloader
+  // into the RepoManager::refreshMetadata(), so that we get a combined percentage
+  std::string raw_refresh_progress_label;
 };
 
 class Zypper : private zypp::base::NonCopyable

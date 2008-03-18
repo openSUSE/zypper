@@ -106,11 +106,6 @@ namespace ZmartRecipients
     //! \todo return false on SIGINT
     virtual bool progress(int value, const zypp::Url & uri, double drate_avg, double drate_now)
     {
-      if (_be_quiet)
-        return true;
-
-//      std::cout << "avg: " << drate_avg << " current: " << drate_now << std::endl;
-
       // don't report more often than 1 second
       time_t now = time(NULL);
       if (now > _last_reported)
@@ -118,7 +113,15 @@ namespace ZmartRecipients
       else
         return true;
 
-      Zypper::instance()->out().dwnldProgress(uri, value, (long) drate_now);
+      Zypper & zypper = *(Zypper::instance());
+      if (!zypper.runtimeData().raw_refresh_progress_label.empty())
+        zypper.out().progress(
+          "raw-refresh", zypper.runtimeData().raw_refresh_progress_label);
+
+      if (_be_quiet)
+        return true;
+
+      zypper.out().dwnldProgress(uri, value, (long) drate_now);
       _last_drate_avg = drate_avg;
       return true;
     }

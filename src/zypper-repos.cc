@@ -50,6 +50,8 @@ static bool refresh_raw_metadata(Zypper & zypper,
                                  bool force_download)
 {
   gData.current_repo = repo;
+  bool do_refresh = false;
+  string & plabel = zypper.runtimeData().raw_refresh_progress_label;
 
   // reset the gData.current_repo when going out of scope
   struct Bye { ~Bye() { gData.current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
@@ -70,17 +72,8 @@ static bool refresh_raw_metadata(Zypper & zypper,
       {
         try
         {
-          if (manager.checkIfToRefreshMetadata(repo, *it))
-          {
-            ostringstream s;
-            s << format(_("Refreshing '%s'")) % repo.name();
-            if (zypper.out().verbosity() > Out::NORMAL &&
-                zypper.command() == ZypperCommand::REFRESH &&
-                zypper.cOpts().count("force"))
-              s << " " << _("(forced)");
-            zypper.out().info(s.str());
-          }
-          else if (zypper.command() == ZypperCommand::REFRESH)
+          do_refresh = manager.checkIfToRefreshMetadata(repo, *it);
+          if (!do_refresh && zypper.command() == ZypperCommand::REFRESH)
           {
             zypper.out().info(boost::str(
               format(_("Repository '%s' is up to date.")) % repo.name()));
@@ -95,13 +88,31 @@ static bool refresh_raw_metadata(Zypper & zypper,
       }
     }
     else
+    {
       zypper.out().info(_("Forcing raw metadata refresh"));
+      do_refresh = true;
+    }
 
-    manager.refreshMetadata(repo, force_download ?
-      RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
+    if (do_refresh)
+    {
+      zypper.runtimeData().raw_refresh_progress_label =
+        boost::str(format(_("Downloading repository '%s' metadata.")) % repo.name());
+      zypper.out().progressStart("raw-refresh", plabel, true);
+
+      manager.refreshMetadata(repo, force_download ?
+        RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
+
+      zypper.out().progressEnd("raw-refresh", plabel);
+    }
   }
   catch (const MediaException & e)
   {
+    ZYPP_CAUGHT(e);
+    if (do_refresh)
+    {
+      zypper.out().progressEnd("raw-refresh", plabel, true);
+      plabel.clear();
+    }
     zypper.out().error(e,
         boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
         _("Please see the above error message for a hint."));
@@ -111,6 +122,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
   catch (const RepoNoUrlException & e)
   {
     ZYPP_CAUGHT(e);
+    if (do_refresh)
+    {
+      zypper.out().progressEnd("raw-refresh", plabel, true);
+      plabel.clear();
+    }
     zypper.out().error(boost::str(
       format(_("No URLs defined for '%s'.")) % repo.name()));
     if (!repo.filepath().empty())
@@ -124,6 +140,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
   catch (const RepoNoAliasException & e)
   {
     ZYPP_CAUGHT(e);
+    if (do_refresh)
+    {
+      zypper.out().progressEnd("raw-refresh", plabel, true);
+      plabel.clear();
+    }
     zypper.out().error(_("No alias defined for this repository."));
     report_a_bug(zypper.out());
     return true; // error
@@ -131,6 +152,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
   catch (const RepoException & e)
   {
     ZYPP_CAUGHT(e);
+    if (do_refresh)
+    {
+      zypper.out().progressEnd("raw-refresh", plabel, true);
+      plabel.clear();
+    }
     zypper.out().error(e,
         boost::str(format(_("Repository '%s' is invalid.")) % repo.name()),
         _("Please check if the URLs defined for this repository are pointing to a valid repository."));
@@ -140,6 +166,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
   catch (const Exception &e)
   {
     ZYPP_CAUGHT(e);
+    if (do_refresh)
+    {
+      zypper.out().progressEnd("raw-refresh", plabel, true);
+      plabel.clear();
+    }
     zypper.out().error(e,
         boost::str(format(_("Error downloading metadata for '%s':")) % repo.name()));
     // log untranslated message
@@ -427,13 +458,13 @@ static void do_init_repos(Zypper & zypper)
       // non-root user
       else
       {
-        // if error is returned, it means zypp attempted to build the meta-data
+        // if error is returned, it means zypp attempted to build the metadata
         // cache for the repo and failed because writing is not allowed for
         // non-root. Thus, just display refresh hint for non-root user.
         if (build_cache(zypper, repo, false))
         {
           zypper.out().warning(boost::str(format(_(
-              "The meta-data cache needs to be built for the '%s' repository."
+              "The metadata cache needs to be built for the '%s' repository."
               " You can run 'zypper refresh' as root to do this."))
               % repo.name()), Out::QUIET);
 
