@@ -73,20 +73,23 @@ namespace zypp
       return IdString( _solvable->name );
     }
 
-    std::string Solvable::lookupStrAttribute( const SolvAttr &attr ) const
+    std::string Solvable::lookupStrAttribute( const SolvAttr & attr ) const
     {
-      const char *s = repo_lookup_str(this->get(), attr.idStr().id());
+      NO_SOLVABLE_RETURN( std::string() );
+      const char *s = ::repo_lookup_str( _solvable, attr.idStr().id() );
       return s ? s : std::string();
     }
 
-    unsigned Solvable::lookupNumAttribute( const SolvAttr &attr ) const
+    unsigned Solvable::lookupNumAttribute( const SolvAttr & attr ) const
     {
-      return repo_lookup_num(this->get(), attr.idStr().id());
+      NO_SOLVABLE_RETURN( 0 );
+      return ::repo_lookup_num( _solvable, attr.idStr().id() );
     }
 
-    bool Solvable::lookupBoolAttribute( const SolvAttr &attr ) const
+    bool Solvable::lookupBoolAttribute( const SolvAttr & attr ) const
     {
-      return repo_lookup_num(this->get(), attr.idStr().id()) > 0;
+      NO_SOLVABLE_RETURN( false );
+      return ::repo_lookup_num( _solvable, attr.idStr().id() );
     }
 
     std::string Solvable::lookupLocation(unsigned &medianr) const

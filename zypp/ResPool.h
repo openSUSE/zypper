@@ -226,8 +226,11 @@ namespace zypp
      public:
       /** \name Handle locale support.
        *
-       * A \ref filter::ByLocaleSupportort is provided to iterate over
+       * A \ref filter::ByLocaleSupport is provided to iterate over
        * all items supporting a specific locale.
+       *
+       * \see \ref sat::LocaleSupport for a more convenient interface.
+       *
        * \code
        * ResPool pool( ResPool::instance() );
        *
@@ -242,7 +245,6 @@ namespace zypp
        * {
        *   MIL << *it << endl; // supporting any requested locale
        * }
-       *
        * \endcode
        */
       //@{

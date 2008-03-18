@@ -224,14 +224,14 @@ namespace zypp
           for ( Locale l( *it ); l != Locale::noCode; l = l.fallback() )
             locale2Solver.insert( IdString( l.code() ) );
         }
-        DBG << "New Solver Locales: " << locale2Solver << endl;
+        MIL << "New Solver Locales: " << locale2Solver << endl;
       }
 
       void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )
       {
         depSetDirty( "setRequestedLocales" );
         _requestedLocales = locales_r;
-        DBG << "New RequestedLocales: " << locales_r << endl;
+        MIL << "New RequestedLocales: " << locales_r << endl;
         _locale_hack( _requestedLocales, _locale2Solver );
       }
 

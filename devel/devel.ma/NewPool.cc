@@ -34,7 +34,7 @@
 #include "zypp/ResPoolProxy.h"
 
 #include "zypp/sat/Pool.h"
-//#include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/LocaleSupport.h"
 
 #include <zypp/base/GzStream.h>
 
@@ -420,26 +420,10 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-  class RequestedLocalesFile
-  {
-  };
-
-  /** \relates RequestedLocalesFile Stream output */
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
+{
+//   poolItemIterator
+}
 
 void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
 {
@@ -537,13 +521,64 @@ try {
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
+// Dataiterator di;
+// Id keyname = std2id (pool, "susetags:datadir");
+// if (keyname)
+//   {
+//     Dataitertor di;
+//     dataiterator_init(&di, repo, 0, keyname, 0, SEARCH_NO_STORAGE_SOLVABLE);
+//     if (dataiterator_step(&di))
+//       printf ("datadir: %s\n", di.kv.str);
+//   }
 
-  for_( it, pool.byIdentBegin<SrcPackage>("zypper"), pool.byIdentEnd<SrcPackage>("zypper") )
+  sat::LocaleSupport myLocale( Locale("de") );
+
+  if ( myLocale.isAvailable() )
+  {
+    MIL << "Support for locale '" << myLocale.locale() << "' is available." << endl;
+  }
+  if ( ! myLocale.isRequested() )
+  {
+    MIL << "Will enable support for locale '" << myLocale.locale() << "'." << endl;
+    myLocale.setRequested( true );
+  }
+  MIL << "Packages supporting locale '" << myLocale.locale() << "':" << endl;
+  for_( it, myLocale.begin(), myLocale.end() )
+  {
+    // iterate over sat::Solvables
+    MIL << "  " << *it << endl;
+    // or get the PoolItems
+    DBG << "  " << PoolItem(*it) << endl;
+
+  }
+
+//   for_( it, poolItemIterator(myLocale.begin()), poolItemIterator(myLocale.end()) )
+//   {
+    // iterate over PoolItem
+//     MIL << "  " << *it << endl;
+//   }
+
+
+#if 0
+  sat::SolvAttr flist( "solvable:filelist" );
+
+  for_( it, pool.byIdentBegin<Package>("zypper"), pool.byIdentEnd<Package>("zypper") )
   {
     INT << *it << endl;
-    MIL << dump((*it).satSolvable()) << endl;
-    //tt( (*it)->name() );
+    sat::Solvable s( it->satSolvable() );
+    MIL << sat::SolvAttr::summary << endl;
+    MIL << s.lookupStrAttribute( sat::SolvAttr::summary ) << endl;
+    MIL << s.lookupStrAttribute( sat::SolvAttr::noAttr ) << endl;
+
+    ::Dataitertor di;
+    ::dataiterator_init( &di, 0, s.id(), flist.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+    while ( ::dataiterator_step( &di ) )
+    {
+
+    }
+
   }
+#endif
 
 #if 0
   for_( it, pool.byKindBegin<SrcPackage>(), pool.byKindEnd<SrcPackage>() )

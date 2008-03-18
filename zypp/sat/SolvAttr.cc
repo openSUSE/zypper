@@ -23,6 +23,9 @@ namespace zypp
 namespace sat
 { /////////////////////////////////////////////////////////////////
 
+  const SolvAttr SolvAttr::noAttr;
+
+#warning use predefined Ids from libsatsolver.
   const SolvAttr SolvAttr::summary      ( "solvable:summary" );
   const SolvAttr SolvAttr::description  ( "solvable:description" );
   const SolvAttr SolvAttr::insnotify    ( "solvable:messageins" );
@@ -31,7 +34,7 @@ namespace sat
   const SolvAttr SolvAttr::license      ( "solvable:license" );
   const SolvAttr SolvAttr::size         ( "solvable:installsize" );
   const SolvAttr SolvAttr::downloadsize ( "solvable:downloadsize" );
-  
+
   //package
   const SolvAttr SolvAttr::medianr	( "solvable:medianr" );
   const SolvAttr SolvAttr::mediafile	( "solvable:mediafile" );
@@ -60,8 +63,7 @@ namespace sat
   const SolvAttr SolvAttr::isdefault    ( "isdefault" );
   const SolvAttr SolvAttr::category     ( "solvable:category" ); // FIXME translate
   const SolvAttr SolvAttr::script       ( "script" );
- 
-  
+
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

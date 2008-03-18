@@ -83,19 +83,19 @@ namespace zypp
          * returns the string attribute value for \ref attr
          * or an empty string if it does not exists.
          */
-        std::string lookupStrAttribute( const SolvAttr &attr ) const;
+        std::string lookupStrAttribute( const SolvAttr & attr ) const;
 
         /**
          * returns the numeric attribute value for \ref attr
          * or 0 if it does not exists.
          */
-        unsigned lookupNumAttribute( const SolvAttr &attr ) const;
+        unsigned lookupNumAttribute( const SolvAttr & attr ) const;
 
         /**
          * returns the boolean attribute value for \ref attr
          * or \c false if it does not exists.
          */
-        bool lookupBoolAttribute( const SolvAttr &attr ) const;
+        bool lookupBoolAttribute( const SolvAttr & attr ) const;
 
         /**
          * returns the media location: media number in \ref medianr,

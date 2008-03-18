@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 18 21:59:04 CET 2008 - ma@suse.de
+
+- class sat::LocaleSupport: Convenience methods to manage support 
+  for language specific packages.
+- revision 9197
+
+-------------------------------------------------------------------
 Tue Mar 18 13:54:16 CET 2008 - jkupec@suse.cz
 
 - removed obsolete capability handling stuff (ma)

@@ -24,23 +24,21 @@ namespace zypp
 namespace sat
 { /////////////////////////////////////////////////////////////////
 
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : SolvAttr
   //
-  /** Resolvable kinds.
-   * A \b lowercased string and used as identification.
-   * Comparison against string values is always case
-   * insensitive.
+  /** Solvable attribute keys.
    */
   class SolvAttr : public IdStringType<SolvAttr>
   {
     public:
       /** \name Some builtin SolvAttr constants. */
       //@{
-      /** Value representing \c nokind (<tt>""</tt>)*/
+      /** Value representing \c noAttr (<tt>""</tt>)*/
       static const SolvAttr noAttr;
+
       static const SolvAttr summary;
       static const SolvAttr description;
       static const SolvAttr insnotify;
@@ -49,7 +47,7 @@ namespace sat
       static const SolvAttr license;
       static const SolvAttr size;
       static const SolvAttr downloadsize;
-      
+
       //package
       static const SolvAttr mediadir;
       static const SolvAttr medianr;
@@ -78,27 +76,18 @@ namespace sat
       static const SolvAttr isdefault;
       static const SolvAttr category;
       static const SolvAttr script;
-      
+
       //@}
 
     public:
-      /** Default ctor: \ref nokind */
+      /** Default ctor: \ref noAttr */
       SolvAttr() {}
 
       /** Ctor taking kind as string. */
-      explicit SolvAttr( sat::detail::IdType id_r )  : _str( str::toLower(IdString(id_r).c_str()) ) {}
-      explicit SolvAttr( const IdString & idstr_r )  : _str( str::toLower(idstr_r.c_str()) ) {}
-      explicit SolvAttr( const std::string & str_r ) : _str( str::toLower(str_r) ) {}
-      explicit SolvAttr( const char * cstr_r )       : _str( str::toLower(cstr_r) ) {}
-
-    public:
-      private:
-      static int _doCompare( const char * lhs,  const char * rhs )
-      {
-        if ( lhs == rhs ) return 0;
-        if ( lhs && rhs ) return ::strcasecmp( lhs, rhs );
-        return( lhs ? 1 : -1 );
-      }
+      explicit SolvAttr( sat::detail::IdType id_r )  : _str( IdString(id_r).c_str() ) {}
+      explicit SolvAttr( const IdString & idstr_r )  : _str( idstr_r.c_str() ) {}
+      explicit SolvAttr( const std::string & str_r ) : _str( str_r ) {}
+      explicit SolvAttr( const char * cstr_r )       : _str( cstr_r ) {}
 
     private:
       friend class IdStringType<SolvAttr>;

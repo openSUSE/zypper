@@ -238,7 +238,7 @@ namespace zypp
         defCompatibleWith( _ppc,	_ppc64 );
         //
         ///////////////////////////////////////////////////////////////////
-        dumpOn( USR ) << endl;
+        //dumpOn( USR ) << endl;
       }
 
     private:
