@@ -210,12 +210,11 @@ namespace zypp
 
 
         }
-        catch (const Exception & excpt_r)
+        catch (Exception & excpt_r)
         {
           ZYPP_CAUGHT(excpt_r);
-          Exception nexcpt("Can't provide " + (*it_res)->location.filename().asString() + " : " + excpt_r.msg());
-          nexcpt.remember(excpt_r);
-          ZYPP_THROW(nexcpt);
+          excpt_r.remember("Can't provide " + (*it_res)->location.filename().asString() + " : " + excpt_r.msg());
+          ZYPP_RETHROW(excpt_r);
         }
       }
       else
