@@ -271,7 +271,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             // release all media before requesting another (#336881)
             media_mgr.releaseAll();
 
-            report->requestMedia (
+            user = report->requestMedia (
               _url,
               media_nr,
               string(), //! \todo label
