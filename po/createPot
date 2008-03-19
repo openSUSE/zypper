@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # search for sourcecode-files
-SRCFILES=`find .. -type d -name testsuite -prune , \
+SRCFILES=`find .. -type d -name testsuite -prune -o -name build -prune , \
                            -type f -name "*.h" \
                                 -o -name "*.pm"  \
                                 -o -name "*.c"   \
@@ -9,4 +9,4 @@ SRCFILES=`find .. -type d -name testsuite -prune , \
                                 -o -name "*.cpp"`
 echo $SRCFILES
 #calling xgettext with the sourcefiles
-xgettext --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --foreign-user --copyright-holder="SuSE Linux Products GmbH, Nuernberg" --default-domain=libzypp --output=zypp.pot $SRCFILES
+xgettext -s --no-wrap --add-comments --add-location --keyword=_ --keyword=_:1,2 --keyword=__ --keyword=N_ --foreign-user --copyright-holder="SuSE Linux Products GmbH, Nuernberg" --default-domain=libzypp --output=zypp.pot $SRCFILES
