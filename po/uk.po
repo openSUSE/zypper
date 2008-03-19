@@ -1,3 +1,4 @@
+# translation of zypp.po to Ukrainian
 # Translation of zypp.uk.po to Ukrainian
 # Ukrainian message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -5,13 +6,14 @@
 #
 # xxx, 2005.
 # Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>, 2006, 2007.
+# Yuri Chornoivan <yurchor@ukr.net>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.uk\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-09-18 20:33-0700\n"
-"Last-Translator: Ivan Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
+"PO-Revision-Date: 2008-02-13 21:46+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -410,7 +412,7 @@ msgstr "Аймарська"
 #. language code: aze az
 #: ../zypp/LanguageCode.cc:312
 msgid "Azerbaijani"
-msgstr "Сербська"
+msgstr "Азербайджанська"
 
 #. language code: bad
 #: ../zypp/LanguageCode.cc:314
@@ -526,7 +528,7 @@ msgstr "Боснійська"
 #. language code: bra
 #: ../zypp/LanguageCode.cc:360
 msgid "Braj"
-msgstr "Браж"
+msgstr "Брай"
 
 #. language code: bre br
 #: ../zypp/LanguageCode.cc:362
@@ -581,7 +583,7 @@ msgstr "Карибські мови"
 #. language code: cat ca
 #: ../zypp/LanguageCode.cc:384
 msgid "Catalan"
-msgstr "Каталонська"
+msgstr "Каталанська"
 
 #. language code: cau
 #: ../zypp/LanguageCode.cc:386
@@ -607,7 +609,7 @@ msgstr "Чаморо"
 #. language code: chb
 #: ../zypp/LanguageCode.cc:394
 msgid "Chibcha"
-msgstr "Чібча"
+msgstr "Чибча"
 
 #. language code: che ce
 #: ../zypp/LanguageCode.cc:396
@@ -622,7 +624,7 @@ msgstr "Чагатай"
 #. language code: chi zho zh
 #: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
 msgid "Chinese"
-msgstr "Китайський"
+msgstr "Китайська"
 
 #. language code: chk
 #: ../zypp/LanguageCode.cc:404
@@ -639,17 +641,17 @@ msgstr "Марі"
 #. language code: chn
 #: ../zypp/LanguageCode.cc:408
 msgid "Chinook Jargon"
-msgstr "Шінукський жаргон"
+msgstr "Чинукський жаргон"
 
 #. language code: cho
 #: ../zypp/LanguageCode.cc:410
 msgid "Choctaw"
-msgstr "Чоставська"
+msgstr "Чокто"
 
 #. language code: chp
 #: ../zypp/LanguageCode.cc:412
 msgid "Chipewyan"
-msgstr "Чіпевська"
+msgstr "Чіпев’ян"
 
 #. language code: chr
 #: ../zypp/LanguageCode.cc:414
@@ -669,7 +671,7 @@ msgstr "Чуваська"
 #. language code: chy
 #: ../zypp/LanguageCode.cc:420
 msgid "Cheyenne"
-msgstr "Чеєнська"
+msgstr "Шайєнська"
 
 #. language code: cmc
 #: ../zypp/LanguageCode.cc:422
@@ -694,17 +696,17 @@ msgstr "Корсиканська"
 #. language code: cpe
 #: ../zypp/LanguageCode.cc:430
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "Креольські і піджінські, англійські (інші)"
+msgstr "Креольські і піджинські, англійські (інші)"
 
 #. language code: cpf
 #: ../zypp/LanguageCode.cc:432
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr "Креольські і піджінські, французькі (інші)"
+msgstr "Креольські і піджинські, французькі (інші)"
 
 #. language code: cpp
 #: ../zypp/LanguageCode.cc:434
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr "Креольські і піджінські, португальські (інші)"
+msgstr "Креольські і піджинські, португальські (інші)"
 
 #. language code: cre cr
 #: ../zypp/LanguageCode.cc:436
@@ -714,12 +716,12 @@ msgstr "Крі"
 #. language code: crh
 #: ../zypp/LanguageCode.cc:438
 msgid "Crimean Tatar"
-msgstr "Кримська татарська"
+msgstr "Кримсько-татарська"
 
 #. language code: crp
 #: ../zypp/LanguageCode.cc:440
 msgid "Creoles and Pidgins (Other)"
-msgstr "Креольські і піджінські (інші)"
+msgstr "Креольські і піджинські (інші)"
 
 #. language code: csb
 #: ../zypp/LanguageCode.cc:442
@@ -729,7 +731,7 @@ msgstr "Кашубська"
 #. language code: cus
 #: ../zypp/LanguageCode.cc:444
 msgid "Cushitic (Other)"
-msgstr "Кушітські (інші)"
+msgstr "Кушитські (інші)"
 
 #. language code: cze ces cs
 #: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
@@ -759,7 +761,7 @@ msgstr "Даяк"
 #. language code: del
 #: ../zypp/LanguageCode.cc:458
 msgid "Delaware"
-msgstr "Делавар"
+msgstr "Делавер"
 
 #. language code: den
 #: ../zypp/LanguageCode.cc:460
@@ -779,7 +781,7 @@ msgstr "Дінка"
 #. language code: div dv
 #: ../zypp/LanguageCode.cc:466
 msgid "Divehi"
-msgstr "Давегі"
+msgstr "Дайвегі"
 
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
@@ -789,12 +791,12 @@ msgstr "Догрі"
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
 msgid "Dravidian (Other)"
-msgstr "Дравідійські (інші)"
+msgstr "Дравідські (інші)"
 
 #. language code: dsb
 #: ../zypp/LanguageCode.cc:472
 msgid "Lower Sorbian"
-msgstr "Нижня сорбійська"
+msgstr "Нижня лужицька"
 
 #. language code: dua
 #: ../zypp/LanguageCode.cc:474
@@ -834,12 +836,12 @@ msgstr "Єгипетська (древня)"
 #. language code: eka
 #: ../zypp/LanguageCode.cc:490
 msgid "Ekajuk"
-msgstr "Екажук"
+msgstr "Екаюк"
 
 #. language code: elx
 #: ../zypp/LanguageCode.cc:492
 msgid "Elamite"
-msgstr "Еламіте"
+msgstr "Еламська"
 
 #. language code: eng en
 #: ../zypp/LanguageCode.cc:494
@@ -849,12 +851,12 @@ msgstr "Англійська"
 #. language code: enm
 #: ../zypp/LanguageCode.cc:496
 msgid "English, Middle (1100-1500)"
-msgstr "Англійська, середніх (1100-1500)"
+msgstr "Англійська, середньовічна (1100-1500)"
 
 #. language code: epo eo
 #: ../zypp/LanguageCode.cc:498
 msgid "Esperanto"
-msgstr "Німецька"
+msgstr "Есперанто"
 
 #. language code: est et
 #: ../zypp/LanguageCode.cc:500
@@ -904,7 +906,7 @@ msgstr "Фінська"
 #. language code: fiu
 #: ../zypp/LanguageCode.cc:518
 msgid "Finno-Ugrian (Other)"
-msgstr "Фінсько-угорські (інші)"
+msgstr "Фіно-угорські (інші)"
 
 #. language code: fon
 #: ../zypp/LanguageCode.cc:520
@@ -919,12 +921,12 @@ msgstr "Французька"
 #. language code: frm
 #: ../zypp/LanguageCode.cc:526
 msgid "French, Middle (ca.1400-1600)"
-msgstr "Французька, середніх (1400-1600)"
+msgstr "Французька, середньовічна (1400-1600)"
 
 #. language code: fro
 #: ../zypp/LanguageCode.cc:528
 msgid "French, Old (842-ca.1400)"
-msgstr "Французька, стара (842 - 1400)"
+msgstr "Французька, давня (842 - 1400)"
 
 #. language code: fry fy
 #: ../zypp/LanguageCode.cc:530
@@ -981,7 +983,7 @@ msgstr "Ґіз"
 #. language code: gil
 #: ../zypp/LanguageCode.cc:554
 msgid "Gilbertese"
-msgstr "Ґілбертійська"
+msgstr "Гілбертійська"
 
 # ML
 # fuzzy
@@ -1028,7 +1030,7 @@ msgstr "Ґоронтало"
 #. language code: got
 #: ../zypp/LanguageCode.cc:572
 msgid "Gothic"
-msgstr "Готична"
+msgstr "Готська"
 
 #. language code: grb
 #: ../zypp/LanguageCode.cc:574
@@ -1053,27 +1055,27 @@ msgstr "Гуарані"
 #. language code: guj gu
 #: ../zypp/LanguageCode.cc:584
 msgid "Gujarati"
-msgstr "Гуараті"
+msgstr "Гуджараті"
 
 #. language code: gwi
 #: ../zypp/LanguageCode.cc:586
 msgid "Gwich'in"
-msgstr "Ґвічїн"
+msgstr "Ґвіч’ін"
 
 #. language code: hai
 #: ../zypp/LanguageCode.cc:588
 msgid "Haida"
-msgstr "Хаіда"
+msgstr "Хайда"
 
 #. language code: hat ht
 #: ../zypp/LanguageCode.cc:590
 msgid "Haitian"
-msgstr "Гаїті"
+msgstr "Гаїтянська"
 
 #. language code: hau ha
 #: ../zypp/LanguageCode.cc:592
 msgid "Hausa"
-msgstr "Гауса"
+msgstr "Хауса"
 
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
@@ -1108,7 +1110,7 @@ msgstr "Хінді"
 #. language code: hit
 #: ../zypp/LanguageCode.cc:606
 msgid "Hittite"
-msgstr "Гітітська"
+msgstr "Хетська"
 
 #. language code: hmn
 #: ../zypp/LanguageCode.cc:608
@@ -1123,7 +1125,7 @@ msgstr "Хірі Моту"
 #. language code: hsb
 #: ../zypp/LanguageCode.cc:612
 msgid "Upper Sorbian"
-msgstr "Верхня сорбійська"
+msgstr "Верхня лужицька"
 
 #. language code: hun hu
 #: ../zypp/LanguageCode.cc:614
@@ -1160,7 +1162,7 @@ msgstr "Ідо"
 #. language code: iii ii
 #: ../zypp/LanguageCode.cc:628
 msgid "Sichuan Yi"
-msgstr "Січуан ї"
+msgstr "Сичуаньська Ї"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1220,7 +1222,7 @@ msgstr "Іранські (інші)"
 #. language code: iro
 #: ../zypp/LanguageCode.cc:652
 msgid "Iroquoian Languages"
-msgstr "Ірокоські мови"
+msgstr "Ірокезькі мови"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -1245,12 +1247,12 @@ msgstr "Японська"
 #. language code: jpr
 #: ../zypp/LanguageCode.cc:662
 msgid "Judeo-Persian"
-msgstr "Юдео-перська"
+msgstr "Іудейсько-перська"
 
 #. language code: jrb
 #: ../zypp/LanguageCode.cc:664
 msgid "Judeo-Arabic"
-msgstr "Юдео-арабська"
+msgstr "Іудейсько-арабська"
 
 #. language code: kaa
 #: ../zypp/LanguageCode.cc:666
@@ -1260,12 +1262,12 @@ msgstr "Каракалпацька"
 #. language code: kab
 #: ../zypp/LanguageCode.cc:668
 msgid "Kabyle"
-msgstr "Кабильська"
+msgstr "Кабільська"
 
 #. language code: kac
 #: ../zypp/LanguageCode.cc:670
 msgid "Kachin"
-msgstr "Качін"
+msgstr "Качин"
 
 #. language code: kal kl
 #: ../zypp/LanguageCode.cc:672
@@ -1290,7 +1292,7 @@ msgstr "Карен"
 #. language code: kas ks
 #: ../zypp/LanguageCode.cc:680
 msgid "Kashmiri"
-msgstr "Кашмірі"
+msgstr "Кашмірська"
 
 #. language code: kau kr
 #: ../zypp/LanguageCode.cc:682
@@ -1322,7 +1324,7 @@ msgstr "Хасі"
 #. language code: khi
 #: ../zypp/LanguageCode.cc:692
 msgid "Khoisan (Other)"
-msgstr "Хоіські (інші)"
+msgstr "Койсанські (інші)"
 
 #. language code: khm km
 #: ../zypp/LanguageCode.cc:694
@@ -1342,7 +1344,7 @@ msgstr "Кікуйю"
 #. language code: kin rw
 #: ../zypp/LanguageCode.cc:700
 msgid "Kinyarwanda"
-msgstr "Кіняруанда"
+msgstr "Кіньяруанда"
 
 #. language code: kir ky
 #: ../zypp/LanguageCode.cc:702
@@ -1377,7 +1379,7 @@ msgstr "Корейська"
 #. language code: kos
 #: ../zypp/LanguageCode.cc:714
 msgid "Kosraean"
-msgstr "Косрае"
+msgstr "Косраенська"
 
 #. language code: kpe
 #: ../zypp/LanguageCode.cc:716
@@ -1447,12 +1449,12 @@ msgstr "Латинська"
 #. language code: lav lv
 #: ../zypp/LanguageCode.cc:742
 msgid "Latvian"
-msgstr "Хорватська"
+msgstr "Латвійська"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
 msgid "Lezghian"
-msgstr "Лезгійська"
+msgstr "Лезгінська"
 
 #. language code: lim li
 #: ../zypp/LanguageCode.cc:746
@@ -1472,7 +1474,7 @@ msgstr "Литовська"
 #. language code: lol
 #: ../zypp/LanguageCode.cc:752
 msgid "Mongo"
-msgstr "Монго"
+msgstr "Монгольська"
 
 #. language code: loz
 #: ../zypp/LanguageCode.cc:754
@@ -1505,7 +1507,7 @@ msgstr "Ґанда"
 #. language code: lui
 #: ../zypp/LanguageCode.cc:764
 msgid "Luiseno"
-msgstr "Луісено"
+msgstr "Луїсено"
 
 #. language code: lun
 #: ../zypp/LanguageCode.cc:766
@@ -1520,7 +1522,7 @@ msgstr "Луо (Кенія і Танзанія)"
 #. language code: lus
 #: ../zypp/LanguageCode.cc:770
 msgid "Lushai"
-msgstr "Лушай"
+msgstr "Лушаї"
 
 #. language code: mac mkd mk
 #: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
@@ -1559,7 +1561,7 @@ msgstr "Макасар"
 #. language code: mal ml
 #: ../zypp/LanguageCode.cc:786
 msgid "Malayalam"
-msgstr "Малаям"
+msgstr "Малаялам"
 
 #. language code: man
 #: ../zypp/LanguageCode.cc:788
@@ -1588,7 +1590,7 @@ msgstr "Маратхі"
 #. language code: mas
 #: ../zypp/LanguageCode.cc:798
 msgid "Masai"
-msgstr "Масаі"
+msgstr "Масаї"
 
 #. language code: may msa ms
 #: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
@@ -1615,7 +1617,7 @@ msgstr "Менде"
 #. language code: mga
 #: ../zypp/LanguageCode.cc:810
 msgid "Irish, Middle (900-1200)"
-msgstr "Ірландська, середніх (900-1200)"
+msgstr "Ірландська, середньовічна (900-1200)"
 
 #. language code: mic
 #: ../zypp/LanguageCode.cc:812
@@ -1723,7 +1725,7 @@ msgstr "Мови Майя"
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
-msgstr "Ерзя"
+msgstr "Ерзія"
 
 #. language code: nah
 #: ../zypp/LanguageCode.cc:852
@@ -1799,12 +1801,12 @@ msgstr "Ніу"
 #. language code: nno nn
 #: ../zypp/LanguageCode.cc:880
 msgid "Norwegian Nynorsk"
-msgstr "Норвезька (нюношк)"
+msgstr "Норвезька (лансмол)"
 
 #. language code: nob nb
 #: ../zypp/LanguageCode.cc:882
 msgid "Norwegian Bokmal"
-msgstr "Норвезька букмол"
+msgstr "Норвезька (букмол)"
 
 #. language code: nog
 #: ../zypp/LanguageCode.cc:884
@@ -1814,7 +1816,7 @@ msgstr "Ногайська"
 #. language code: non
 #: ../zypp/LanguageCode.cc:886
 msgid "Norse, Old"
-msgstr "Норська, стара"
+msgstr "Норвезька, давня"
 
 #. language code: nor no
 #: ../zypp/LanguageCode.cc:888
@@ -1839,7 +1841,7 @@ msgstr "Класичне неварі"
 #. language code: nya ny
 #: ../zypp/LanguageCode.cc:896
 msgid "Chichewa"
-msgstr "Чічева"
+msgstr "Чичева"
 
 #. language code: nym
 #: ../zypp/LanguageCode.cc:898
@@ -1849,7 +1851,7 @@ msgstr "Ньямвезі"
 #. language code: nyn
 #: ../zypp/LanguageCode.cc:900
 msgid "Nyankole"
-msgstr "Нянколе"
+msgstr "Ньянколе"
 
 #. language code: nyo
 #: ../zypp/LanguageCode.cc:902
@@ -1864,7 +1866,7 @@ msgstr "Нзіма"
 #. language code: oci oc
 #: ../zypp/LanguageCode.cc:906
 msgid "Occitan (post 1500)"
-msgstr "Окситанська (після 1500)"
+msgstr "Провансальська (після 1500)"
 
 #. language code: oji oj
 #: ../zypp/LanguageCode.cc:908
@@ -1896,12 +1898,12 @@ msgstr "Осетинська"
 #. language code: ota
 #: ../zypp/LanguageCode.cc:918
 msgid "Turkish, Ottoman (1500-1928)"
-msgstr "Турецька, отоманська (1500-1928)"
+msgstr "Турецька, оттоманська (1500-1928)"
 
 #. language code: oto
 #: ../zypp/LanguageCode.cc:920
 msgid "Otomian Languages"
-msgstr "Отоманські мови"
+msgstr "Отомійські мови"
 
 #. language code: paa
 #: ../zypp/LanguageCode.cc:922
@@ -1945,7 +1947,7 @@ msgstr "Палау"
 #. language code: peo
 #: ../zypp/LanguageCode.cc:936
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "Перська, стара (600-400 до н.е.)"
+msgstr "Перська, давня (600-400 до н.е.)"
 
 #. language code: per fas fa
 #: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
@@ -1992,7 +1994,7 @@ msgstr "Пракритські мови"
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
 msgid "Provencal, Old (to 1500)"
-msgstr "Провансальська, стара (до 1500)"
+msgstr "Провансальська, давня (до 1500)"
 
 #. language code: pus ps
 #: ../zypp/LanguageCode.cc:958
@@ -2019,7 +2021,7 @@ msgstr "Рапануї"
 #. language code: rar
 #: ../zypp/LanguageCode.cc:966
 msgid "Rarotongan"
-msgstr "Раротонганська"
+msgstr "Раротонгська"
 
 #. language code: roa
 #: ../zypp/LanguageCode.cc:968
@@ -2104,7 +2106,7 @@ msgstr "Сербська"
 #. language code: scn
 #: ../zypp/LanguageCode.cc:1004
 msgid "Sicilian"
-msgstr "Сіцилійська"
+msgstr "Сицилійська"
 
 #. language code: sco
 #: ../zypp/LanguageCode.cc:1006
@@ -2129,7 +2131,7 @@ msgstr "Семітські (інші)"
 #. language code: sga
 #: ../zypp/LanguageCode.cc:1016
 msgid "Irish, Old (to 900)"
-msgstr "Ірландська, стара (до 900)"
+msgstr "Ірландська, давня (до 900)"
 
 #. language code: sgn
 #: ../zypp/LanguageCode.cc:1018
@@ -2161,7 +2163,7 @@ msgstr "Сіуанські мови"
 #. language code: sit
 #: ../zypp/LanguageCode.cc:1028
 msgid "Sino-Tibetan (Other)"
-msgstr "Сіно-тібетські (інші)"
+msgstr "Сино-тибетські (інші)"
 
 #. language code: sla
 #: ../zypp/LanguageCode.cc:1030
@@ -2300,7 +2302,7 @@ msgstr "Шумерська"
 #. language code: swa sw
 #: ../zypp/LanguageCode.cc:1084
 msgid "Swahili"
-msgstr "Свагілі"
+msgstr "Суахілі"
 
 #. language code: swe sv
 #: ../zypp/LanguageCode.cc:1086
@@ -2322,7 +2324,7 @@ msgstr "Таїтянська"
 #. language code: tai
 #: ../zypp/LanguageCode.cc:1092
 msgid "Tai (Other)"
-msgstr "Таі (інші)"
+msgstr "Тайські (інші)"
 
 #. language code: tam ta
 #: ../zypp/LanguageCode.cc:1094
@@ -2400,7 +2402,7 @@ msgstr "Токелау"
 #. language code: tlh
 #: ../zypp/LanguageCode.cc:1124
 msgid "Klingon"
-msgstr "Клінгон"
+msgstr "Клінгонська"
 
 #. language code: tli
 #: ../zypp/LanguageCode.cc:1126
@@ -2415,7 +2417,7 @@ msgstr "Тамашек"
 #. language code: tog
 #: ../zypp/LanguageCode.cc:1130
 msgid "Tonga (Nyasa)"
-msgstr "Тонга (Няса)"
+msgstr "Тонга (Ньяса)"
 
 #. language code: ton to
 #: ../zypp/LanguageCode.cc:1132
@@ -2536,7 +2538,7 @@ msgstr "Венда"
 #. language code: vie vi
 #: ../zypp/LanguageCode.cc:1178
 msgid "Vietnamese"
-msgstr "В'єтнамський"
+msgstr "В'єтнамська"
 
 #. language code: vol vo
 #: ../zypp/LanguageCode.cc:1180
@@ -2576,7 +2578,7 @@ msgstr "Валлійська"
 #. language code: wen
 #: ../zypp/LanguageCode.cc:1196
 msgid "Sorbian Languages"
-msgstr "Сорбійські мови"
+msgstr "Лужицькі мови"
 
 #. language code: wln wa
 #: ../zypp/LanguageCode.cc:1198
@@ -2628,7 +2630,7 @@ msgstr "Юпікські мови"
 #. language code: zap
 #: ../zypp/LanguageCode.cc:1216
 msgid "Zapotec"
-msgstr "Запотецькі мови"
+msgstr "Сапотекські мови"
 
 # GD
 #. language code: zen
@@ -2826,7 +2828,7 @@ msgstr "%s буде встановлено іншою прогамою. (ApplLow
 #: ../zypp/solver/detail/Resolver_problems.cc:356
 #, c-format
 msgid "No valid solution found within %d seconds"
-msgstr ""
+msgstr "Протягом %d секунд не знайдено коректного розв’язання"
 
 #: ../zypp/solver/detail/Resolver_problems.cc:357
 msgid "The solver has reached a defined timout"
@@ -2837,15 +2839,15 @@ msgstr "Тайм-аут сервера"
 #. give the user an additional solution for trying all branches
 #: ../zypp/solver/detail/Resolver_problems.cc:383
 msgid "No valid solution found with just resolvables of best architecture."
-msgstr ""
+msgstr "Не знайдено коректного розв’язання з залежностями найкращої системної архітектури."
 
 #: ../zypp/solver/detail/Resolver_problems.cc:384
 msgid "With this run only resolvables with the best architecture have been regarded.\n"
-msgstr ""
+msgstr "Протягом цього пошуку брати до уваги залежності лише найкращої системної архітектури.\n"
 
 #: ../zypp/solver/detail/Resolver_problems.cc:385
 msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-msgstr ""
+msgstr "Якщо взяти до уваги всі можливі варіанти залежностей, може бути витрачено більше часу, але знайдено прийнятний варіант."
 
 #: ../zypp/solver/detail/Resolver_problems.cc:411
 msgid "Invalid information"
@@ -3509,7 +3511,7 @@ msgstr "Встановити потрібні пакунки"
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:53
 msgid "Make a solver run with ALL possibilities."
-msgstr ""
+msgstr "Примусити програму розв’язання розглянути ВСІ можливості."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:54
 msgid "Regarding all resolvables with a compatible architecture."
@@ -3517,11 +3519,11 @@ msgstr "Відносно всіх потрібних пакунків з сум�
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
 msgid "Make a solver run with best architecture only."
-msgstr ""
+msgstr "Запустити програму розв’язання лише для пошуку з найкращою системною архітектурою."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
 msgid "Regarding resolvables with best architecture only."
-msgstr ""
+msgstr "Брати до уваги лише залежності з найкращою системною архітектурою."
 
 #. Translator: all.%s = name of package,patch,....
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -3579,7 +3581,7 @@ msgstr "Подвійний тайм-аут"
 
 #: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
 msgid "Start the next solver run with doubled timeout."
-msgstr ""
+msgstr "Наступного разу запустити програму розв’язання з подвоєним часовим лімітом."
 
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"

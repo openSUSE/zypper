@@ -13,10 +13,10 @@
 # Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.hu\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-09-07 09:01+0200\n"
+"PO-Revision-Date: 2007-10-12 11:21+0200\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,7 @@ msgstr "Felhasználó-azonosítás szükséges ehhez: '%s'"
 #: ../zypp/RepoManager.cc:115
 #, c-format
 msgid "Cleaning repository '%s' cache"
-msgstr "A(z) '%s' telepítési forrás gyorsítótárának kiürítésének"
+msgstr "A(z) '%s' telepítési forrás gyorsítótárának kiürítése"
 
 #. we will throw this later if no URL checks out fine
 #: ../zypp/RepoManager.cc:521

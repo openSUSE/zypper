@@ -3380,7 +3380,7 @@ msgstr "pre %s"
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
-msgstr "Nie sú k dispozícii žiadne nainštalovateľné balíčky, ktoré by poskytovali %s"
+msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"
 
 #. Translator: 1.%s = name of package,patch,..., 2.%s = name of package,patch,...
 #. TranslatorExample: Upgrade to foo to avoid removing bar is not possible
@@ -3406,7 +3406,7 @@ msgstr "%s poskytuje %s, ale už je nainštalovaná iná verzia %s."
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:396
 #, c-format
 msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-msgstr "%s poskytuje %s, ale nie je nainštalovateľný. Pre získanie viac podrobní sa ho pokúste nainštalovať samostatne."
+msgstr "%s poskytuje %s, ale nie je nainštalovateľný. Pre získanie viac podrobností sa ho pokúste nainštalovať samostatne."
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:414

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-05-01 15:00+0300\n"
+"PO-Revision-Date: 2007-11-17 16:13+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lietuvių <komp_lt@konf.lt>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,8 @@ msgstr "Klaidingas %s komponentas"
 msgid "Path parameter parsing not supported for this URL"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "Užklausos eilutės nagrinėjimas nepalaikomas šiam URL"
 
@@ -86,7 +87,8 @@ msgstr "Klaidingas prievado komponentas „%s“"
 msgid "Url scheme requires path name"
 msgstr "Url schema reikalauja kelio pavadinimo"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
@@ -156,12 +158,14 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:715 ../zypp/media/MediaCurl.cc:784
+#: ../zypp/media/MediaCurl.cc:715
+#: ../zypp/media/MediaCurl.cc:784
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "Klaidingas CA spaltažodis."
 
-#: ../zypp/media/MediaCurl.cc:718 ../zypp/media/MediaCurl.cc:787
+#: ../zypp/media/MediaCurl.cc:718
+#: ../zypp/media/MediaCurl.cc:787
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -214,7 +218,8 @@ msgstr "Nepavyksta klonuoti Url objekto"
 msgid "Invalid empty Url object reference"
 msgstr ""
 
-#: ../zypp/Url.cc:321 ../zypp/Url.cc:335
+#: ../zypp/Url.cc:321
+#: ../zypp/Url.cc:335
 msgid "Unable to parse Url components"
 msgstr "Nepavyksta išnagrinėti Url komponentų"
 
@@ -224,7 +229,8 @@ msgstr "Nežinoma kalba: "
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 #, fuzzy
 msgid "No Code"
 msgstr "Ko&das"
@@ -292,7 +298,8 @@ msgid "Akkadian"
 msgstr "Akadų"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "Albanų"
 
@@ -345,7 +352,8 @@ msgid "Aragonese"
 msgstr "Farerų"
 
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "Armėnų"
 
@@ -456,7 +464,8 @@ msgid "Balinese"
 msgstr "Pagrindai"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "Baskų"
 
@@ -575,7 +584,8 @@ msgid "Bulgarian"
 msgstr "Bulgarų"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "Birmiečių"
 
@@ -648,7 +658,8 @@ msgid "Chagatai"
 msgstr "Šanchajus"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "Kinų"
 
@@ -770,7 +781,8 @@ msgid "Cushitic (Other)"
 msgstr ""
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "Čekų"
 
@@ -854,7 +866,8 @@ msgid "Dutch, Middle (ca.1050-1350)"
 msgstr "Olandų, Vidurinioji (apie 1050-1350)"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "Olandų"
 
@@ -966,7 +979,8 @@ msgid "Fon"
 msgstr "Šriftai"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "Prancūzų"
 
@@ -1020,12 +1034,14 @@ msgid "Germanic (Other)"
 msgstr "Germanų (Kita)"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "Gruzinų"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "Vokiečių"
 
@@ -1099,7 +1115,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "Graikų, senovės (iki 1453)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "Graikų, šiuolaikinė (1453-)"
 
@@ -1214,7 +1231,8 @@ msgid "Igbo"
 msgstr "Ignoruoti"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "Islandų"
 
@@ -1626,7 +1644,8 @@ msgid "Lushai"
 msgstr "Thai"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "Makedonų"
 
@@ -1673,7 +1692,8 @@ msgid "Mandingo"
 msgstr "Įspėjimas"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "Maorių"
 
@@ -1695,7 +1715,8 @@ msgid "Masai"
 msgstr "Malta"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "Malajų"
 
@@ -1848,7 +1869,8 @@ msgstr ""
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:380
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -2070,7 +2092,8 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "Persų, Senoji (apie 600-400 pr.m.e)"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "Persų"
 
@@ -2163,7 +2186,8 @@ msgid "Romany"
 msgstr "Rumunija"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "Rumunų"
 
@@ -2230,7 +2254,8 @@ msgid "Santali"
 msgstr "Skenavimo stotis"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "Serbų"
 
@@ -2247,7 +2272,8 @@ msgid "Scots"
 msgstr "Pietūs"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "Kroatų"
 
@@ -2307,7 +2333,8 @@ msgid "Slavic (Other)"
 msgstr "Slavų (Kita)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "Slovakų"
 
@@ -2529,7 +2556,8 @@ msgstr "Thai"
 
 # TW
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "Tibeto"
 
@@ -2552,7 +2580,8 @@ msgstr ""
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:428
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -2636,7 +2665,8 @@ msgstr "Altajaus (Kita)"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -2744,7 +2774,8 @@ msgid "Washo"
 msgstr "Velšo"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "Velšo"
 
@@ -2838,7 +2869,8 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Tunisas"
 
-#: ../zypp/ZYppFactory.cc:279 ../zypp/ZYppFactory.cc:334
+#: ../zypp/ZYppFactory.cc:279
+#: ../zypp/ZYppFactory.cc:334
 #, fuzzy
 msgid "Software management is already running."
 msgstr "Demonas jau veikia"
@@ -2879,7 +2911,8 @@ msgstr ""
 msgid "Not a CDROM drive"
 msgstr "Ne CDROM įrenginys"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Hal išimtis"
@@ -2889,7 +2922,7 @@ msgstr "Hal išimtis"
 #: ../zypp/target/rpm/RpmDb.cc:1779
 #, c-format
 msgid "Changed configuration files for %s:"
-msgstr "Pakeistos %s konfigūracios bylos:"
+msgstr "Pakeisti %s konfigūracios failai:"
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:1943
@@ -2926,7 +2959,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "%s įdiegimas nesėkmingas"
 
-#: ../zypp/target/rpm/RpmDb.cc:1957 ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:1957
+#: ../zypp/target/rpm/RpmDb.cc:2075
 msgid "rpm output:"
 msgstr "rpm išvestis:"
 
@@ -2937,7 +2971,8 @@ msgstr "rpm išvestis:"
 msgid "%s installed ok"
 msgstr "%s įdiegtas sėkmingai"
 
-#: ../zypp/target/rpm/RpmDb.cc:1966 ../zypp/target/rpm/RpmDb.cc:2083
+#: ../zypp/target/rpm/RpmDb.cc:1966
+#: ../zypp/target/rpm/RpmDb.cc:2083
 msgid "Additional rpm output:"
 msgstr "Papildoma rpm išvestis:"
 
@@ -4008,7 +4043,8 @@ msgstr "Kokosų (Kilingo) salos"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:255
+#: ../zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongas"
 
@@ -5074,8 +5110,8 @@ msgid ""
 "File %s is not signed.\n"
 "Use it anyway?"
 msgstr ""
-"Byla %s nepasirašyta.\n"
-"Vis tiek ją naudoti?"
+"Failas %s nepasirašytas.\n"
+"Vis tiek jį naudoti?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:65
 #, c-format
@@ -5084,9 +5120,9 @@ msgid ""
 "%s|%s|%s\n"
 "Use the file anyway?"
 msgstr ""
-"Byla %s pasirašyta su nežinomu raktu:\n"
+"Failas %s pasirašytas su nežinomu raktu:\n"
 "%s|%s|%s\n"
-"Vis tiek naudoti bylą?"
+"Vis tiek naudoti failą?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:75
 #, c-format
@@ -5106,9 +5142,9 @@ msgid ""
 "%s|%s|%s\n"
 "Use the file anyway?"
 msgstr ""
-"Bylos %s vientisumo patikrinimas nepavyko su raktu:\n"
+"Failo %s vientisumo patikrinimas nepavyko su raktu:\n"
 "%s|%s|%s\n"
-"Vis tiek naudoti bylą?"
+"Vis tiek naudoti failą?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:99
 #, c-format
@@ -5116,8 +5152,8 @@ msgid ""
 "File %s does not have a checksum.\n"
 "Use the file anyway?"
 msgstr ""
-"Byla %s neturi kontrolinės sumos.\n"
-"Vis tiek ją naudoti?"
+"Failas %s neturi kontrolinės sumos.\n"
+"Vis tiek jį naudoti?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:108
 #, c-format
@@ -5125,8 +5161,8 @@ msgid ""
 "File %s has an unknown checksum %s.\n"
 "Use the file anyway?"
 msgstr ""
-"Byla %s turi nežinomą kontrolinę sumą %s.\n"
-"Vis tiek naudoti bylą?"
+"Failas %s turi nežinomą kontrolinę sumą %s.\n"
+"Vis tiek naudoti failą?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:117
 #, c-format
@@ -5135,9 +5171,9 @@ msgid ""
 "Expected %s, found %s\n"
 "Use the file anyway?"
 msgstr ""
-"Byla %s turi klaidingą kontrolinę sumą.\n"
+"Failas %s turi klaidingą kontrolinę sumą.\n"
 "Tikėtasi %s, rasta %s\n"
-"Vis tiek naudoti bylą?"
+"Vis tiek naudoti failą?"
 
 #, fuzzy
 #~ msgid "%s is freshened by %s"
@@ -5150,40 +5186,30 @@ msgstr ""
 #, fuzzy
 #~ msgid "Ignore this requirement generally"
 #~ msgstr "turi neišsprendžiamų reikalavimų..."
-
 #~ msgid "Unable to restore all sources."
 #~ msgstr "Nepavyksta atstatyti visų šaltinių."
-
 #~ msgid "Reading filelist from %s"
 #~ msgstr "Skaitomas bylų sąrašas iš %s"
-
 #~ msgid "Reading packages from %s"
 #~ msgstr "Skaitomi paketai iš %s"
-
 #~ msgid "Reading patch %s"
 #~ msgstr "Skaitoma pataisa %s"
-
 #~ msgid "Reading packages file"
 #~ msgstr "Skaitoma paketų byla"
-
 #~ msgid "Reading translation: %s"
 #~ msgstr "Skaitomas vertimas: %s"
-
 #~ msgid " miss checksum."
 #~ msgstr " trūksta kontrolinės sumos."
-
 #~ msgid " fails checksum verification."
 #~ msgstr " nepavyko kontrolinės sumos tikrinimas."
-
 #~ msgid "Downloading %s"
 #~ msgstr "Atsiunčiama %s"
-
 #~ msgid "Downloaded %s from %s"
 #~ msgstr "Atsiųsta %s iš %s"
-
 #~ msgid "%s needed by %s"
 #~ msgstr "%s reikalingas %s"
 
 #, fuzzy
 #~ msgid "Can't write the patch script to a temporary file."
 #~ msgstr "negaliu rašyti į laikiną bylą „%1“"
+

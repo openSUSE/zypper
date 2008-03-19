@@ -1,3 +1,4 @@
+# translation of zypp.po to czech
 # translation of zypp.po to
 # Czech message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -7,14 +8,15 @@
 # Petr Pavlik <pp@suse.cz>, 1999, 2000, 2001.
 # Klara Cihlarova <koty@seznam.cz>, 2006.
 # Jakub Hegenbart <jhegenbart@suse.cz>, 2007.
+# Marek Stopka <marekstopka@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-09-06 19:10+0200\n"
-"Last-Translator: Jakub Hegenbart <jhegenbart@suse.cz>\n"
-"Language-Team:  <cs@li.org>\n"
+"PO-Revision-Date: 2008-02-15 15:15+0100\n"
+"Last-Translator: Marek Stopka <marekstopka@gmail.com>\n"
+"Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3557,16 +3559,16 @@ msgstr ""
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:128
-#, fuzzy, c-format
+#, c-format
 msgid "%s is enhanced by %s"
-msgstr "%s je nahrazen %s"
+msgstr "%s je vylepšen %s"
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:84
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:134
-#, fuzzy, c-format
+#, c-format
 msgid "%s is supplemented by %s"
-msgstr "%s je požadován pro %s"
+msgstr "%s je doplněn %s"
 
 #. Translator all.%s = name of packages,patches,....
 #. TranslatorExplanation: 1.%s name of package, 2.%s list of names

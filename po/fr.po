@@ -5,13 +5,14 @@
 # Patricia Vaz <patricia@suse.de>, 2003.
 # Francoise Lermen <flermen@suse.de>, 2000, 2001, 2002.
 # Karine Nguyen <karine@suse.de>, 2001.
+# Guillaume GARDET <guillaume.gardet@free.fr>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 13:53+0200\n"
-"PO-Revision-Date: 2007-09-19 14:34+0100\n"
+"PO-Revision-Date: 2008-02-17 16:56+0100\n"
 "Last-Translator: Guillaume GARDET <guillaume.gardet@free.fr>\n"
 "Language-Team: French Team <opensuse-fr@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -2810,7 +2811,7 @@ msgstr "Aucune solution valide trouvée dans les %d secondes"
 
 #: ../zypp/solver/detail/Resolver_problems.cc:357
 msgid "The solver has reached a defined timout"
-msgstr ""
+msgstr "Le résolveur a atteint un temps limite défini (timeout)"
 
 #. a second run with ALL possibilities has not been tried
 #. possible other solutions skipped
@@ -3076,7 +3077,7 @@ msgstr "%s ne peut pas être installé car il est en conflit avec %s"
 #: ../zypp/solver/detail/Resolver_problems.cc:940
 #, c-format
 msgid "Requirememt %s cannot be fulfilled."
-msgstr ""
+msgstr "Le besoin %s ne peut être comblé."
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
@@ -3100,15 +3101,15 @@ msgstr "%s offre cette dépendance, mais changerait l'architecture de l'élémen
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
-#, fuzzy, c-format
+#, c-format
 msgid "Install %s although it would change the vendor"
-msgstr "Installer %s bien que cela modifie l'architecture"
+msgstr "Installer %s bien que cela modifie le fabricant"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
-#, fuzzy, c-format
+#, c-format
 msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s offre cette dépendance, mais changerait l'architecture de l'élément installé"
+msgstr "%s offre cette dépendance, mais changerait le fabricant de l'élément installé"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
@@ -3131,9 +3132,8 @@ msgid "Ignore that %s is already set to install"
 msgstr "Ignorer que %s est déjà prêt(e) à être installé"
 
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete the resolvables concerned"
-msgstr "Ne pas installer ou supprimer les correctifs concernés"
+msgstr "Ne pas installer ou supprimer les élements concernés"
 
 #. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
 #: ../zypp/solver/detail/QueueItemRequire.cc:791
@@ -3143,9 +3143,9 @@ msgstr "pour l'exigence %s destinée à %s lors de la mise à niveau de %s"
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency
 #: ../zypp/solver/detail/ResolverInfoMissingReq.cc:64
-#, fuzzy, c-format
+#, c-format
 msgid "%s is lacking the requirement %s"
-msgstr "%s manque de l'exigence %s"
+msgstr "%s manque le besoin %s"
 
 # TLABEL rpm-groups_2002_03_14_2340__3
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:56
@@ -3221,16 +3221,16 @@ msgstr "Marquage du correctif %s comme étant non installable"
 #. Translator: %s = name of packages,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:159
-#, fuzzy, c-format
+#, c-format
 msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
 msgstr "L'installation de %s est planifiée mais elle est impossible en raison de problèmes de dépendance."
 
 #. Translator: %s = name of package,patch,...
 #. TranslatorExplanation: Additional information to dependency solver result.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:167
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s since it is already marked as needed to be uninstalled"
-msgstr "Impossible de mettre en place %s car le fichier est déjà marqué comme étant à désinstaller"
+msgstr "Impossible d'installer %s car le fichier est marqué comme étant à désinstaller"
 
 #. Translator: %s = name of patch
 #. TranslatorExplanation: A patch which is not needed (does not apply) cant be installed
@@ -3239,9 +3239,9 @@ msgstr "Impossible de mettre en place %s car le fichier est déjà marqué comme
 #. TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
 #. TranslatorExplanation: package is not installed.
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:179
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, because it does not apply to this system."
-msgstr "Impossible d'installer %s parce qu'il ne s'applique pas à ce système."
+msgstr "Impossible d'installer %s parce qu'il n'est pas necessaire pour ce système."
 
 #. affected() = item 1 which has to be installed
 #. _capability =
@@ -3249,7 +3249,7 @@ msgstr "Impossible d'installer %s parce qu'il ne s'applique pas à ce système."
 #. other_capability() =
 #. Translator: %s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:190
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, because %s is already marked as needed to for installation"
 msgstr "Impossible d'installer %s car %s est déjà marqué comme étant à installer"
 
@@ -3320,9 +3320,9 @@ msgstr "%s ignoré : déjà installé."
 #. TranslatorExplanation: removal of this resolvable would therefore break dependency
 #. TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:292
-#, fuzzy, c-format
+#, c-format
 msgid "There are no alternative providers of %s installed"
-msgstr "Aucun autre fournisseur de %s n'est défini"
+msgstr "Il n'y a aucun fournisseur alternatif de %s d'installé"
 
 #. Translator: 1.%s = name of package,patch....
 #. TranslatorExample: for bar
@@ -3353,7 +3353,7 @@ msgstr "Aucun fournisseur de %s définissable"
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:341
 #, fuzzy, c-format
 msgid "Upgrading to %s to avoid removing %s is not possible."
-msgstr "Impossible de procéder à une mise à niveau vers %s pour éviter de retirer %s."
+msgstr "La mise à niveau vers %s pour éviter de retirer %s n'est pas possible."
 
 #. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:359
@@ -3411,9 +3411,9 @@ msgstr "Impossible de satisfaire l'exigence %s pour %s"
 #. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:508
-#, fuzzy, c-format
+#, c-format
 msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-msgstr "%s est nécessaire à un autre correctif installé pour éviter l'absence de liaison."
+msgstr "%s est requis par un autre élement sélectionné pour l'installation donc il ne sera pas supprimé."
 
 #. affected() = provider of cap
 #. _capability =
@@ -3423,9 +3423,9 @@ msgstr "%s est nécessaire à un autre correctif installé pour éviter l'absenc
 #. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 #. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:525
-#, fuzzy, c-format
+#, c-format
 msgid "%s is required by another installed resolvable, so it won't be unlinked."
-msgstr "%s est nécessaire à un autre correctif installé pour éviter l'absence de liaison."
+msgstr "%s est requis par un autre élement installé donc il ne sera pas supprimé."
 
 # TLABEL autoinst_2002_08_07_0216__335
 #. affected() = to-be-uninstalled resolvable which is locked
@@ -3447,9 +3447,9 @@ msgstr "%s est verrouillé et ne peut pas être désinstallé."
 #. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 #. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
 #: ../zypp/solver/detail/ResolverInfoMisc.cc:561
-#, fuzzy, c-format
+#, c-format
 msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-msgstr "Un conflit sur %s (%s) nécessite le retrait de %s à installer."
+msgstr "Un conflit sur %s (%s) nécessite le retrait de %s qui est prévu à l'installation"
 
 #. affected() = provider of capability
 #. _capability = provided by provider
@@ -3507,19 +3507,16 @@ msgid "Make a solver run with ALL possibilities."
 msgstr "Créer un solutionneur qui couvre toutes les possibilités."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:54
-#, fuzzy
 msgid "Regarding all resolvables with a compatible architecture."
-msgstr "Regarder toutes les solutions compatible avec cette architecture."
+msgstr "Regarde tous les élements avec une architecture compatible."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
-#, fuzzy
 msgid "Make a solver run with best architecture only."
-msgstr "Créer un solutionneur qui couvre toutes les possibilités."
+msgstr "Lancer un résolveur avec la meilleure architecture uniquement."
 
 #: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
-#, fuzzy
 msgid "Regarding resolvables with best architecture only."
-msgstr "Regarder toutes les solutions compatible avec cette architecture."
+msgstr "Regarde les élements avec la meilleure architecture uniquement."
 
 #. Translator: all.%s = name of package,patch,....
 #: ../zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -3546,7 +3543,7 @@ msgstr "%s est suggéré par %s"
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
 #, c-format
 msgid "%s will be evaluated for installation (freshened) by %s"
-msgstr ""
+msgstr "%s sera évalué pour l'installation (rafraichi) par %s"
 
 #. Translator: all.%s = name of package,patch,...
 #: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
@@ -3576,9 +3573,8 @@ msgid "Double timeout"
 msgstr "Double timeout"
 
 #: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
-#, fuzzy
 msgid "Start the next solver run with doubled timeout."
-msgstr "lancer le résolveur de conflit avec un timeout double."
+msgstr "Lancer le prochain résolveur de conflit avec un délai (timeout) doublé."
 
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:70
 msgid "unlock all resolvables"

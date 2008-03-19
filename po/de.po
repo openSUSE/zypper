@@ -3032,7 +3032,7 @@ msgstr "Anforderung %s kann nicht erfüllt werden."
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
 msgid "Ignore this requirement just here"
-msgstr "Anforderung wird hier ignoriert"
+msgstr "Anforderung nur hier ignorieren"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
 msgid "Generally ignore this requirement"
