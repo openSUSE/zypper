@@ -643,6 +643,8 @@ namespace zypp {
       DeviceList::iterator it;
       for( it = _devices.begin(); it != _devices.end(); ++it ) {
         MediaSourceRef media( new MediaSource( *it));
+        if (media->name != ejectDev)
+          continue;
 
         bool        valid=false;
         PathInfo    dinfo(media->name);
