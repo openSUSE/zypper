@@ -232,18 +232,25 @@ IMPL_PTR_TYPE(MediaSetAccess);
       catch ( media::MediaException & excp )
       {
         ZYPP_CAUGHT(excp);
-        media::MediaChangeReport::Action user;
+        media::MediaChangeReport::Action user = media::MediaChangeReport::ABORT;
+        unsigned int devindex = 0;
+        vector<string> devices;
+        media_mgr.getDetectedDevices(media, devices, devindex);
+
         do
         {
-          DBG << "Media couldn't provide file " << file << " , releasing." << endl;
-          try
+          if (user != media::MediaChangeReport::EJECT) // no use in calling this again
           {
-            media_mgr.release (media);
-          }
-          catch (const Exception & excpt_r)
-          {
-              ZYPP_CAUGHT(excpt_r);
-              MIL << "Failed to release media " << media << endl;
+            DBG << "Media couldn't provide file " << file << " , releasing." << endl;
+            try
+            {
+              media_mgr.release(media);
+            }
+            catch (const Exception & excpt_r)
+            {
+                ZYPP_CAUGHT(excpt_r);
+                MIL << "Failed to release media " << media << endl;
+            }
           }
 
           // set up the reason
@@ -260,14 +267,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-          unsigned int devindex = 0;
-          vector<string> devices;
 
           if (checkonly)
             user  = media::MediaChangeReport::ABORT;
           else
           {
-            media_mgr.getDetectedDevices(media, devices, devindex);
             // release all media before requesting another (#336881)
             media_mgr.releaseAll();
 
