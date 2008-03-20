@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 20 15:00:24 CET 2008 - jreidinger@suse.cz
+
+- return more information from checking if metadata need refresh,
+  so user can get better info. (bnc #307249) 
+- revision 9231
+
+-------------------------------------------------------------------
 Tue Mar 18 21:59:04 CET 2008 - ma@suse.de
 
 - class sat::LocaleSupport: Convenience methods to manage support 
