@@ -1,0 +1,706 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-18 12:01\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Isilumkiso: Kwamkelwa ifayili engatyikitywanga %s."
+
+#: src/zmart-keyring-callbacks.h:46
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s ayityikitywanga, qhubeka?"
+
+#: src/zmart-keyring-callbacks.h:57
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "ngenisa iqhosha %s kwiringi yesitshixo ethembekileyo"
+
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "Isilumkiso: Kwamkelwa ifayili %s etyikityiweyo eneqhosha elingaziwayo %s."
+
+#: src/zmart-keyring-callbacks.h:79
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s ityobelwe ngeqhosha %s elingaziwayo. Uyaqhubeka?"
+
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "Ngokuzenzekelayo iyalithemba iqhosha le-id %s, %s, ukugximfizwa komnwe %s"
+
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Ingaba ufuna ukuwuthemba umnwe %s, %s, weqhosha le-id %s"
+
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
+msgstr "Isilumkiso: Ayihoyi akuphumelelisanga ukuqinisekiswa komtyikityo ukwenzela %s ngeqhosha likawonke wonke id %s, %s, umnwe %s! Qinisekisa ukuba oku akubangelwa zezinye iinguqu ezingalunganga kwifayili!"
+
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "Ungqiniso lomtyikityo aluphumelelanga ukwenzela %s yomnwe we-id %s, %s yeqhosha likawonke wonke, %s! Isilumkiso: oku kusenokubangelwa yinguqu enolunya kwifayili! Ukuqhubeka kuyingozi! Uyaqhubeka nokuba kunjalo?"
+
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "ifayili %s ayetyiswanga"
+
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "qhubeka?"
+
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Ukufunxa %s okungaziwayo okwenzelwe ifayili %s. "
+
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "Ukukubetha ngoyaba ukuhlola kometyiso we-%s okungaphumelelanga (elindelweyo %s, efunyenweyo %s)"
+
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "Aluphumelelanga ungqiniso lofunxo ukwenzela i-%s. Elindelweyo %s, efunyenweyo %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
+msgid "Initializing Target"
+msgstr "Indulula Okujoliswe kuko"
+
+#: src/zmart-misc.cc:28
+msgid " (old way)"
+msgstr "(indlela endala)"
+
+#: src/zmart-misc.cc:139
+msgid "not found"
+msgstr "ayifunyanwanga"
+
+#: src/zmart-misc.cc:146
+msgid "skipping "
+msgstr "iyatsiba"
+
+#: src/zmart-misc.cc:146
+msgid "(already installed)"
+msgstr "(sele ihlohliwe)"
+
+#: src/zmart-misc.cc:152
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "Isilele ukufaka u'%s' kuluhlu lwemibekelo emayihlohlwe."
+
+#: src/zmart-misc.cc:170
+msgid "Failed"
+msgstr "Kusilele"
+
+#: src/zmart-misc.cc:193
+msgid "Not found"
+msgstr "ayifunyanwanga"
+
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "Ingxaki:"
+
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr "Isicombululo %s:"
+
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "inombolo, (z)ama kwakhona okanye (r)hoxisa>"
+
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "r"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "c"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "Ukusebenzisa isicombululo %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s Iingxaki:"
+
+#: src/zmart-misc.cc:306
+msgid "Summary:"
+msgstr "Isishwankathelo:"
+
+#: src/zmart-misc.cc:329
+msgid "<install>   "
+msgstr "<install>"
+
+#: src/zmart-misc.cc:331
+msgid "<uninstall> "
+msgstr "<uninstall>"
+
+#: src/zmart-misc.cc:336
+msgid "Nothing to do."
+msgstr "Akukho nto yakwenza."
+
+#: src/zmart-misc.cc:392
+msgid "Parsing RPM database..."
+msgstr "Ihlahlela iinkcukacha ye-RPM..."
+
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
+msgid " resolvables."
+msgstr "ezinokwahlulwa."
+
+#: src/zmart-misc.cc:405
+msgid "Parsing metadata for "
+msgstr "Ihlahlela i-metadata uku"
+
+#: src/zmart-misc.cc:414
+msgid "Establishing status of aggregates"
+msgstr "Imisela iwonga le-aggregates"
+
+#: src/zmart-misc.cc:422
+msgid "Resolving dependencies..."
+msgstr "Isombulula Izixhomekeki..."
+
+#: src/zmart-misc.cc:448
+msgid " patches needed"
+msgstr "iindawana ezifunekayo"
+
+#: src/zmart-misc.cc:448
+msgid " security patches"
+msgstr "iindawana zokhuseloko"
+
+#: src/zmart-misc.cc:455
+msgid "Installed"
+msgstr "Ihlohliwe"
+
+#: src/zmart-misc.cc:455
+msgid "Uninstalled"
+msgstr "Ayihlohlwanga"
+
+#: src/zmart-misc.cc:457
+msgid "No Longer Applicable"
+msgstr "Ayisenakusetyenziswa"
+
+#: src/zmart-misc.cc:457
+msgid "Not Applicable"
+msgstr "Ayisetyenziswa"
+
+#: src/zmart-misc.cc:459
+msgid "Applied"
+msgstr "Isetyenzisiwe"
+
+#: src/zmart-misc.cc:459
+msgid "Not Needed"
+msgstr "Ayifuneki"
+
+#: src/zmart-misc.cc:461
+msgid "Broken"
+msgstr "Yaphukile"
+
+#: src/zmart-misc.cc:461
+msgid "Needed"
+msgstr "Iyafuneka"
+
+#: src/zmart-misc.cc:463
+msgid "error"
+msgstr "impazamo"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
+msgid "Catalog"
+msgstr "Ikhathalogu"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+#: src/zmart-sources.cc:100
+msgid "Name"
+msgstr "Igama"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+msgid "Version"
+msgstr "Inguqulelo"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
+msgid "Category"
+msgstr "Udidi"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
+msgid "Status"
+msgstr "Isimo"
+
+#: src/zmart-misc.cc:560
+msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
+msgstr "ISILUMKISO: Ezi zizo kuphela eziluhlaziyo oluchaphazela umhlaziyi ubuqu.\nLukhona nolunye uhlaziyo.\n"
+
+#: src/zmart-misc.cc:648
+msgid "S"
+msgstr "S"
+
+#: src/zmart-misc.cc:653
+msgid "Arch"
+msgstr "Ezokwakha."
+
+#: src/zmart-misc.cc:710
+#, c-format
+msgid "WARNING: %s is interactive, skipped."
+msgstr "ISILUMKISO: %s iyasebenzisana, itsityiwe."
+
+#: src/zmart-misc.cc:766
+msgid "committing"
+msgstr "yenza"
+
+#: src/zmart-misc.cc:782
+msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
+msgstr "Ukhangelo lokunyaniseka kwepakethe akuphumelelanga. Oku kusenokuba yingxaki nomthombo wokufakela okanye imidiya. Zama okunye koku kulandelayo:\n\n- zama ikhomandi yangaphambili\n- hlaziya ngokutsha imithombo yofakelo esebenzisa 'zypper refresh'\n- sebenzisa enye imidiya yokufakela (umzekelo, ukuba eyakho yonakele)\n- sebenzisa omnye umthombo wokufakela"
+
+#: src/zmart-misc.cc:800
+msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "ISILUMKISO: Enye yeepetshi zokufakela zifuna ukuqaliswa ngokutsha komatshini wakho. Qalisa ngokutsha ngokukhawuleza kangangoko kunokwenzeka."
+
+#: src/zmart-misc.cc:803
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+msgstr "ISILUMKISO: Enye yeendawana ezihlohliweyo ichaphazela umlawuli wombekelo ngokunokwawo, ngolo hlobo ifuna ukuqalela kwakhona ngaphambi kokwenza umsebenzi olandelayo."
+
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Ngokuzenzekelayo iyavumelana %s %s nelayisenisi"
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
+msgid "license"
+msgstr "Ilayisensi"
+
+#: src/zmart-misc.cc:843
+msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgstr "Khon’ukuze uhlohle lo mbekelo, kufuneka vume kwizigqibo zelayisentsi engentla. Qhubeka?"
+
+#: src/zmart-misc.cc:853
+msgid "Aborting installation due to the need of license(s) confirmation."
+msgstr "Ukulahla ukuhlohla ngenxa yemfuno yobumbeko lwelayisentsi."
+
+#: src/zmart-misc.cc:855
+msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
+msgstr "Nceda, qalela kwakhona umsebenzi kwimowudi esebenzisanayo kwaye uqinisekise isivumelwano ngelayisentsi efunekayo."
+
+#: src/zmart-misc.cc:862
+msgid "Aborting installation due to user disagreement with "
+msgstr "Ukulahla ukuhlohla ngenxa yokungavumelani komsebenzisi ne"
+
+#: src/zmart-sources.cc:31
+msgid "Sorry, you need root privileges to use system sources, disabling them..."
+msgstr "Uxolo, kufuneka kufuneka umilisele amalungelo awodwa ukuze usebenzise oovimba bezixokelelwano, ukuzenza zingasebenzi..."
+
+#: src/zmart-sources.cc:48
+msgid "Restoring system sources..."
+msgstr "Ukugcina oovimba bezixokelelwano..."
+
+#: src/zmart-sources.cc:57
+msgid "Failed to restore sources"
+msgstr "Isilele ukuphinda igcine oovimba"
+
+#: src/zmart-sources.cc:80
+msgid "Cannot access repository"
+msgstr "Ayinako ukufikelela kuvimba"
+
+#: src/zmart-sources.cc:99
+msgid "Enabled"
+msgstr "Yenziwe yasebenza"
+
+#: src/zmart-sources.cc:99
+msgid "Refresh"
+msgstr "Hlaziya"
+
+#: src/zmart-sources.cc:100
+msgid "Type"
+msgstr "Uhlobo"
+
+#: src/zmart-sources.cc:116 src/zmart-sources.cc:118
+msgid "Active"
+msgstr "Kuyasebenza"
+
+#: src/zmart-sources.cc:118
+msgid "Disabled"
+msgstr "Kususwe isakhono"
+
+#: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
+#: src/zmart-sources.cc:129
+msgid "Yes"
+msgstr "Ewe"
+
+#: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
+msgid "No"
+msgstr "Hayi"
+
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
+msgid "Error reading system sources: "
+msgstr "Imposiso ekufundeni iivimba besixokelelwano:"
+
+#: src/zmart-sources.cc:190
+msgid "Unknown repository type "
+msgstr "Alwaziwa uhlobo lomthombo "
+
+#: src/zmart-sources.cc:202
+msgid "Name not found"
+msgstr "Igama alifunyanwanga"
+
+#: src/zmart-sources.cc:205
+msgid "baseurl not found"
+msgstr "isiseko se-url asifunyanwanga"
+
+#: src/zmart-sources.cc:339
+msgid "Continuing anyway"
+msgstr "Iyaqhubeka kakade"
+
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "Isusa uvimba '%s'"
+
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "Uvimba '%s' ususiwe."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "Akuphumelelanga ukususa uvimba '%s':"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
+msgid "Source %s not found."
+msgstr "Uvimba %s akafunyanwanga."
+
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s' ayidibenanga okanye ayifikeleleki. Ingaba unqwenela ukuyisusa?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "ishenxisa uvimba"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
+msgid "URL is invalid: "
+msgstr "i-URL ayisebenziseki:"
+
+#: src/zmart-sources.cc:541
+msgid "Sorry, not implemented yet for libzypp-1.x.x"
+msgstr "Uxolo, ayikaphunyezelwa i-libzypp-1.x.x "
+
+#: src/zmart-sources.cc:562
+msgid "Refreshing "
+msgstr "Ihlaziya :"
+
+#: src/zmart-sources.cc:569
+msgid "DONE"
+msgstr "IGQIBILE"
+
+#: src/zmart-sources.cc:573
+msgid "Error while refreshing the source: "
+msgstr "Imposiso ngexesha ihlaziya uvimba:"
+
+#: src/zmart-sources.cc:578
+msgid "All system sources have been refreshed."
+msgstr "Bonke oovimba besixokelelwano kuhlaziyiwe."
+
+#: src/zmart-sources.cc:599
+msgid "Error while fetching "
+msgstr "Imposiso ngexesha izisa"
+
+#: src/zmart-sources.cc:615
+msgid "ZENworks Management Daemon is running."
+msgstr "i-Daemon yoLawulo lweNeethiwekhi ye-ZE isayebenza."
+
+#: src/zmart-sources.cc:616
+msgid "WARNING: this command will not synchronize changes."
+msgstr "ISILUMKISO: lo myalelo awuzukungqamanisa utshintsho."
+
+#: src/zmart-sources.cc:617
+msgid "Use rug or yast2 for that."
+msgstr "Sebenzisa i-rug okanye i-yast2 ngako oko."
+
+#: src/zypp-checkpatches.cc:127
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgstr "Isihlaziyi asikwazi kufikelela kwinjini yomlawuli wombekelo.  Oku kwenzeka ngokuqhelekileyo xa unenye inkqubo (enjenge-YaST) eyisebenzisayo ngaxeshanye. Nceda vala ezinye iinkqubo kwaye ukhangele kwakhona izihlaziyi."
+
+#: src/zypp-checkpatches.cc:213
+#, c-format
+msgid "Could not restore source.\nDetail: %s"
+msgstr "Ayibanga nako ukugcina umthombo.\nInkcukacha: %s"
+
+#: src/zypp-checkpatches.cc:262
+msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
+msgstr "Abekho oovimba bokuhlaziya abachaziweyo.  Nceda faka omnye okanye hlaziya oovimba khon’ukuze waziswe ngohlaziyo."
+
+#: src/zypper-callbacks.cc:30
+msgid "(A)bort, (R)etry, (I)gnore?"
+msgstr "(L)ahla, (Z)ama kwakhona, (G)atya?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "Impendulo engasebenziyo '%s'. faka u-'e' okanye u-'h':"
+
+#: src/zypper-getopt.cc:56
+msgid "Unknown option "
+msgstr "Okunokukhethwa okungaziwa"
+
+#: src/zypper-getopt.cc:59
+msgid "Missing argument for "
+msgstr "Impikiswano elahlekileyo ka"
+
+#: src/zypper-info.cc:48
+msgid " not found."
+msgstr "ayifunyanwanga."
+
+#: src/zypper-info.cc:52
+msgid "Information for "
+msgstr "Ulwazi loku"
+
+#: src/zypper-info.cc:84
+msgid "Catalog: "
+msgstr "Ikhathalog:"
+
+#: src/zypper-info.cc:85
+msgid "Name: "
+msgstr "Igama:"
+
+#: src/zypper-info.cc:86
+msgid "Version: "
+msgstr "Inguqulelo:"
+
+#: src/zypper-info.cc:87
+msgid "Arch: "
+msgstr "Ezokwakha:"
+
+#: src/zypper-info.cc:88
+msgid "Installed: "
+msgstr "Okuhlohliweyo:"
+
+#: src/zypper-info.cc:90
+msgid "Status: "
+msgstr "Isimo:"
+
+#: src/zypper-info.cc:93
+msgid "up-to-date"
+msgstr "kuhlaziyeke-okwanamhla"
+
+#: src/zypper-info.cc:95
+msgid "out-of-date (version "
+msgstr "iphelelwe (inguqulelo"
+
+#: src/zypper-info.cc:96
+msgid " installed) "
+msgstr "ihlohliwe)"
+
+#: src/zypper-info.cc:99
+msgid "not installed"
+msgstr "ayihlohlwanga"
+
+#: src/zypper-info.cc:101
+msgid "Installed Size: "
+msgstr "Ubukhulu Obuhlohliweyo:"
+
+#: src/zypper-info.cc:102
+msgid "Summary: "
+msgstr "Isishwankathelo:"
+
+#: src/zypper-info.cc:103
+msgid "Description: "
+msgstr "Inkcazelo:"
+
+#: src/zypper-search.cc:45
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "Akukho mithombo. I-Zypper ngoku ikhangela ngaphakathi kwimithombo yokufakela kuphela."
+
+#: src/zypper-search.cc:107
+msgid "Pre-caching installed resolvables matching given search criteria... "
+msgstr "Ibeka kwangaphambili iziconjululwa ezihlohliweyo ezihambelana nendlela yokufuna ezinikezelweyo..."
+
+#: src/zypper-search.cc:116
+msgid " out of ("
+msgstr "iphelelwe("
+
+#: src/zypper-search.cc:117
+msgid "cached."
+msgstr "ibekiwe."
+
+#: src/zypper-search.cc:216
+msgid " is not a valid regular expression: \""
+msgstr "ayiyombonakalo eqhelekileyo esebenzayo: \""
+
+#: src/zypper-search.cc:218
+msgid "This is a bug, please file a bug report against zypper."
+msgstr "Le yintsholongwane, nceda yenza inxelo yentsholongwane malungana ne-zypper:"
+
+#: src/zypper.cc:76
+msgid "URL is invalid."
+msgstr "I-URL ayisebenzi."
+
+#: src/zypper.cc:84
+msgid "  Commands:\n\thelp\t\t\tHelp\n\tshell, sh\t\tAccept multiple commands at once\n\tinstall, in\t\tInstall packages or resolvables\n\tremove, rm\t\tRemove packages or resolvables\n\tsearch, se\t\tSearch for packages matching a pattern\n\tservice-list, sl\tList services, also called installation sources\n\tservice-add, sa\t\tAdd a new service\n\tservice-delete, sd\tDelete a service\n\tservice-rename, sr\tRename a service\n\trefresh, ref\t\tRefresh all installation sources\n\tpatch-check, pchk\tCheck for patches\n\tpatches, pch\t\tList patches\n\tlist-updates, lu\tList updates\n\tupdate, up\t\tUpdate packages\n\tinfo, if\t\tShow full information for packages\n\tpatch-info\t\tShow full information for patches\n"
+msgstr "  Imiyalelo:\n\tnceda\t\t\tNceda\n \tigobhogobho, sh\t\tYamkela imiyalelo emininzi ngaxeshanye\n \thlohla, kwi\t\tmiBekelo yokuhlohla okanye enokwahlulwa\n \tukushenxisa, rm\t\tShenxisa imibekelo okanye enokwahlulwa\n \tzingela, mise\"la\tUkuzingela imibekelo ehambemalana nendlela yenkqubo\n \tuluhlu-lwenkonzo, sl\tUluhlu lweenkonzo, elikwabizwa umthombo wokuhlohla\n \tfaka-inkonzo, sa\t\tFaka inkonzo entsha\n \tcima-inkonzo, sd\tCima inkonzo\n \tthiya inkonzo igama elitsha, sr\tThiya inkonzo igama elitsha\n \thlaziya, ref\t\tHlaziya yonke imithombo yokuhlohla\n \tqwalasela-indawana, pchk\tKuqwalaselwa iindawana\n \tiindawana, pch\t\tDwelisa iindawana\n \tDwelisa-iindawana, lu\tDwelisa uhlaziyo\n \thlaziya, up\t\tHlaziya imibekelo\n \tilwazi, ukuba\t\tIbonise ulwazi olugcweleyo yemibekelo\n \tulwazi-lwendawana\t\tBonisa ulwazi olugcwele yemibekelo\n"
+
+#: src/zypper.cc:127
+msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr " Iindlela zokukhetha:\n\t--nceda, -h\t\tNceda\n\t--inguqulelo, -V\t\tKhuphela inombolo yohlelo\n\t--lomlembelele, -v\t\tYandisa ubunembelele\n\t--terse, -t\t\tIsiphumo se-terse ukwenzela okuthathwa kumatshini\n\t--isimbo setebhuli, -s\tIsimbo setebhuli (inani eliphelelyo)\n\t--i-rug-ekhuphisekayo, -r\tLayita ukhuphiseko lwe-rug\n\t--ayisebenzisani, -n\tMusa ukubuza nantonina, sebenzisa ngokuzenzekelayo impendulo esisisekoy.\n\t--no-gpg-checks\t\tSukuhoya ukungaphumeleli kokhangelo lwe-GPG uze uqhubeke.\n\t--root, -R <dir>\tSebenza kwisalathisi esahlukileyo se-root\n"
+
+#: src/zypper.cc:140
+msgid "Verbosity "
+msgstr "Ubulembelele"
+
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "Kungenwa kwimowudi engasebenzisaniyo."
+
+#: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Kungenwa kwimodi yokhangelo olungenayo i-gpg."
+
+#: src/zypper.cc:162
+msgid "Invalid table style "
+msgstr "Uhlobo lwetheybhile olungasebenzi"
+
+#: src/zypper.cc:205
+msgid "Try -h for help"
+msgstr "Zama u-h ukufumana uncedo"
+
+#: src/zypper.cc:223
+msgid "  Source options:\n\t--disable-system-sources, -D\t\tDo not read the system sources\n\t--source, -S\t\tRead additional source\n"
+msgstr "  Izikhethwa zomthombo:\n\t—yenza imithombo-yesixokelelwano-ingasebenzi, -D\t\tMusa ukufunda imithombo yesixokelelwano\n \t--umthombo, -S\t\tFunda umthombo owongezelelweyo\n"
+
+#: src/zypper.cc:228
+msgid "  Target options:\n\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr "  Izikhethwa ekujoliswe kuzo:\n\t--yenza -isixokelelwano-sibenokwahlulwa, -T\t\tMusa ukufunda ukuhohlwa kwesixokelelwano  esinokwahlulwa\n"
+
+#: src/zypper.cc:245
+msgid "  Command options:\n\t--catalog,-c\t\t\tOnly from this catalog (under development)\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "Iindlela zokukhetha zekhomandi:\n\t--ikhathalogu,-c\t\t\tKule khathalogu kuphela (iphantsi kophuhliso)\n\t--type,-t\t\tUhlobo lokusombululekayo (isiseko: ipakethe)\n\t--alungqiniswanga,-y\t\t\talufuni ngqiniso lwamsebenzisi ukuqhubeka nofakelo\n\t--luvuma ngokuzenzekelayo nelayisensi,-l\tLuthi 'ewe' ngokuzenzekelayo kumyalelo wongqiniso lomntu wesithathu.\n\t\t\t\t\tMalunga neenkcukacha ezithe vetshe, jonga i-man zypper.\n"
+
+#: src/zypper.cc:265
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\tDo not require user confirmation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "Iindlela zokukhetha zekhomandi:\n\t--uhlobo,-t\t\tUhlobo lokusombululekayo (isiseko: ipakethe)\n\t--alungqiniswanga,-y\t\t\tAlufuni ngqiniso lwamsebenzisi\n\t--luvuma ngokuzenzekelayo nelayisensi,-l\tLuthi 'ewe' ngokuzenzekelayo kumyalelo wongqiniso lomntu wesithathu.\n\t\t\t\t\tMalunga neenkcukacha ezithe vetshe, jonga i-man zypper.\n"
+
+#: src/zypper.cc:283
+msgid "service-add [options] URI [alias]\n\nAdd a service (installation source) to the system.\n  Command options:\n\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n\t\t\t\t(even remote)\n\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n\t--disabled,-d\t\tAdd the service as disabled\n\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr "faka-inkonzo [izikhethwa] URI [alias]\n\n Faka inkonzo (umthombo wokuhlohla) kwisixokelelwano.\nl   Izikhethwa-zomyalelo:\n \t--repo,-r <FILE.repo>\tFunda i-URL ne-alias ukusuka kwifayili\n \t\t\t\t(nomgama)\n \t--uhlobo,-t <TYPE>\tUhlobo lwendawo ekugcinwa kuyo into (YaST, YUM, okanye Plaindir)\n \t—yenziwe ayasebenza,-d\t\tFaka inkonzo njengeyenzwe ayasebenza\n \t--akukho-hlaziyo,-n\t\tMusa ukuhlaziya i-metedata ngokuzenzekelayo\n"
+
+#: src/zypper.cc:302
+msgid "service-list\n\nList all defined system services (installation sources).\nThis command has no options.\n"
+msgstr "uluhlu-lwenkonzo\n\n Dwelisa zonke iinkonzo zesixokelelwano ezichaziweyo (imithombo yokuhlohla).\n Lo myalelo awunazikhethwa.\n"
+
+#: src/zypper.cc:316
+msgid "service-delete [options] <URI|alias>\n\nRemove service (installation source) from the system.\nThis command has no options.\n"
+msgstr "cima-inkonzo [izikhethwa] <URI|alias>\n\n Shenxisa inkonzo (umthombo wokuhlohla) kwisixokelelwano.\n Lo myalelo awunazikhethwa.\n"
+
+#: src/zypper.cc:330
+msgid "service-rename [options] <URI|alias> <new-alias>\n\nAssign new alias to the service specified by URI or current alias.\nThis command has no options.\n"
+msgstr "thiya inkonzo-igama elitsha [izikhethwa] <URI|alias> <i-alias-entsha>\n\n Yabela i-alias entsha kwinkonzo echazwe yi-URI okanye i-alias yangoku.\n Lo myalelo awunazikhethwa.\n"
+
+#: src/zypper.cc:344
+msgid "zypper refresh\n\nRefresh all installation sources found in the system.\n"
+msgstr "hlaziya i-zypper\n\n Hlaziya yonke imithombo yokuhlohla efunyenwe kwisixokelelwano.\n"
+
+#: src/zypper.cc:357
+msgid "list-updates [options]\n\nList all available updates\n\n  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr "dwelisa-uhlaziyo [izikhthwa]\n\n Dwelisa lonke uhlaziyo olufumanekayo\n \n   Izikhethwa zomyalelo:\n \t--uhlobo,-t\t\tUhlobo lwento enokwahlulwa (into ehlala ikhona: indawana)\n"
+
+#: src/zypper.cc:378
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n\t--no-confirm,-y\t\tDo not require user confirmation\n\t--skip-interactive\t\tSkip interactive updates\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "Iindlela zokukhetha zekhomandi:\n\t--uhlobo,-t\t\tUhlobo lokusombululekayo (isiseko: ipakethe)\n\t--alungqiniswanga,-y\t\t\tAlufuni ngqiniso lwamsebenzisi\n\t--tsiba ukusebenzisana\n\t--Tsiba uhlaziyo lokusebenzisana\n\t--luvumelana ngokuzenzekelayo nelayisensi,-l\tLuthi 'ewe' ngokuzenzekelayo kumyalelo wongqiniso lomntu wesithathu.\n\t\t\t\t\tMalunga neenkcukacha ezithe vetshe, jonga i-man zypper.\n"
+
+#: src/zypper.cc:405
+msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
+msgstr "ukhangelo [iindlela zokukhetha zehlabathi] ze-zypper [iindlela zokukhetha] [uludwe lwemibuzo...]\n\n'khangela' - Khangela iipakethe ezingqinelana noludwe olunikiweyo lokukhangela\n\n  Iindlela zokukhetha zekhomandi:\n    --ngqinelanisa konkel            Khangela ukungqinelana kulo lonke uludwe lokukhangela (isiseko)\n    --ngqinelanisa nakuphina            Khangela ukungqinelana nakoluphina uludwe lokukhangela\n    --ngqinelanisa uludwe oluncinci     Khangela ukungqinelana ukuya kumagama aphakathi (isiseko)\n    --ngqinelanisa amagama          Khangela ukungqinelana kumagama aphleleyo kuphela\n    --ngqinelanisa ngqo          Ikhangela elona gama lithe ngqo lepakethe\n-d, --iinkcazelo zokukhangela  Kwakhona khangela kwizishwankathelo nakwiinkcazelo zokukhangela.\n-c, --ibuthathaka koonobumba abakhulu       Yenza ukhangelo lobuthathaka boonobumba.\n-i, --lufakiwe kuphela       Bonisa kuphela iipakethe esele zifakiwe.\n-u, --azifakelwanga kuphela     Bonisa kuphela iipakethe ezingafakelwanga ngoku.\n-t, --uhlobo                 Khangela iipakethe zohlobo oluchaziweyo.\n    --sota ngokwegama         Sota iipakethe ngokwegama (isiseko).\n    --sota ngokwekhathalogu      Sota iipakethe ngokwekhathalogu (umthombo).\n\n* kunye ? nee-wildcards zisenokusetyenziswa kuphela ngaphakathi kuludwe lokukhangela.\n"
+
+#: src/zypper.cc:433
+msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"
+msgstr "qwalase-indawana\n\n Qwalasela iindawana ezikhoyo\n \n Lo myalelo awunazikhethwa.\n"
+
+#: src/zypper.cc:447
+msgid "patches\n\nList all available patches\n\nThis command has no options.\n"
+msgstr "iindawana\n\n Dwelisa iindawana ezikhoyo\n \n Lo myalelo awunazikhethwa.\n"
+
+#: src/zypper.cc:461
+msgid "zypper [global-options] info [name...]\n\n'info' -- Show full information for packages\n"
+msgstr "zypper [izikhethwa-zehlabathi] ulwazi [igama...]\n\n 'ulwazi' -- Bonisa ulwazi olugcweleyo lwemibekelo\n"
+
+#: src/zypper.cc:473
+msgid "zypper [global-options] patch-info [patchname...]\n\n'patch-info' -- Show detailed information for patches\n"
+msgstr "zypper [izikhethwa-zehlabathi] ulwazi-lwendawana [igama lendawana...]\n\n 'ulwazi-lwendawana' -- Bonisa ulwazi olucacileyo lwemibekelo\n"
+
+#: src/zypper.cc:485
+msgid "zypper [global-options] moo\n\n'moo' - Show an animal\n"
+msgstr "zypper [izikhethwa-zehlabathi] moo\n\n 'moo' - Bonisa isilwanyana\n"
+
+#: src/zypper.cc:492
+msgid "Unknown command"
+msgstr "Umyalelo Ongaziwa"
+
+#: src/zypper.cc:507
+msgid "Non-Option Program Arguments: "
+msgstr "Isikhethwa-esingekho seNkqubo Yeempikiswano:"
+
+#: src/zypper.cc:519
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "Ukungahoyi --i-terse (inikezelwe kuphela ukungqamana kwe-rug)"
+
+#: src/zypper.cc:535
+msgid "Ignoring installed resolvables..."
+msgstr "Ukungahoyi ezinokwahlulwa ezihlohliweyo..."
+
+#: src/zypper.cc:563
+msgid "A ZYpp transaction is already in progress."
+msgstr "Intengiselwano ye-ZY sele iqhubeka."
+
+#: src/zypper.cc:602
+msgid "Warning: Unknown metadata type "
+msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
+
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
+msgid "Unknown resolvable type "
+msgstr "Uhlobo olungaziwa olunokwahlulwa"
+
+#: src/zypper.cc:756
+msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "Isilumkiso: Akho mithombo. Isebenza kuphela ngezinto ezinokwahlulwa ezihlohliweyo. Akukho nto inokuhlohlwa."
+
+#: src/zypper.cc:962
+msgid "Please file a bug report about this."
+msgstr "Nceda fayilisha ingxelo ye-bug malunga noku."
+
+#: src/zypper.cc:965
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "Khangela http://en.opensuse.org/Zypper#Umphandi nkathazo wemiyalelo."
+
+#: src/zypper.cc:978
+msgid "Unexpected exception."
+msgstr "Isinxaxhi esingalindelekanga."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "Amalungelo awoddwa engcambu ayafuneka ukusebenzisa i-zypper."
+

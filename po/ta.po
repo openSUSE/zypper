@@ -1,0 +1,706 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-14 13:47\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "எச்சரிக்கை: கையொப்பமிடப்படாத கோப்பு %s ஏற்கப்படுகிறது"
+
+#: src/zmart-keyring-callbacks.h:46
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s கையொப்பமிடப்படவில்லை, தொடரலாமா?"
+
+#: src/zmart-keyring-callbacks.h:57
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "நம்பிக்கைக்குகந்த திறவுகோல்வளையத்திற்கு திறவுகோல் %sஐஏற்றுமதி செய்யலாமா?"
+
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "எச்சரிக்கை: தெரியாத திறவுகோல்%s உடன் கையொப்பமிடப்பட்ட கோப்பு %s ஏற்கப்படுகிறது."
+
+#: src/zmart-keyring-callbacks.h:79
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s ஒரு தெரியாத திறவுகோல் %sஆல் கையொப்பமிடப்பட்டுள்ளது. தொடரலாமா?"
+
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "தானாகவே திறவுகோல் அடையாளம் %s நம்பப்படுகிறது, %s, விரல்ரேகை %s"
+
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "திறவுகோல் அடையாளம் %s, %s,விரல்ரேகையை %s நீங்கள் நம்ப விரும்புகிறீர்களா"
+
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
+msgstr "எச்சரிக்கை: பொது கீ அடையாளம்%s, %s, விரல்ரேகை%sஉடனான  %s க்கான தோல்வியுற்ற கையெழுத்து சரிபார்ப்பு புறக்கணிக்கப்படுகிறது! இது கோப்பில் ஏற்படுத்தப்பட்டுள்ள சில தீங்கு விளைவிக்கக்கூடிய மாற்றங்களால் ஏற்படவில்லை என்பதை உறுதிசெய்து கொள்ளவும்!"
+
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "பொது திறவுகோல் அடையாளம் %s , %s, விரல்ரேகை %s.உடன் %sக்கான கையொப்ப சரிபார்ப்பு தோல்வியுற்றது. எச்சரிக்கை: கோப்பில் சேதம் விளைவிக்கும் மாற்றங்களால் இது உருவாகியிருக்கலாம்! தொடர்வது ஆபத்தானது! அப்படியும் தொடரலாமா?"
+
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "கோப்பு%sக்கு கருத்துச் சுருக்கம் இல்லை."
+
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "தொடரலாமா?"
+
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "கோப்பு%s.க்கு தெரியாத கருத்துச்சுருக்கம் %s."
+
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "%s.க்கான (எதிர்பார்த்தது%s. கண்டது %s) தோல்வியுற்ற கருத்துச்சுருக்க சரிபார்ப்பு புறக்கணிக்கப்படுகிறது."
+
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "%s.க்கான கருத்துச்சுருக்க சரிபார்ப்பு தோல்வியுற்றது. எதிர்பார்த்தது%s. கண்டது %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
+msgid "Initializing Target"
+msgstr "இலக்கு துவக்கப்படுகிறது"
+
+#: src/zmart-misc.cc:28
+msgid " (old way)"
+msgstr " (பழைய வழி)"
+
+#: src/zmart-misc.cc:139
+msgid "not found"
+msgstr "கிடைக்கவில்லை"
+
+#: src/zmart-misc.cc:146
+msgid "skipping "
+msgstr "தாண்டப்படுகிறது"
+
+#: src/zmart-misc.cc:146
+msgid "(already installed)"
+msgstr "(ஏற்கனவே நிறுவப்பட்டுள்ளது)"
+
+#: src/zmart-misc.cc:152
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "நிறுவப்பட வேண்டிய தயாரிப்புகளின் பட்டியலில் '%s' சேர்க்கப்படவில்லை."
+
+#: src/zmart-misc.cc:170
+msgid "Failed"
+msgstr "தோல்வியுற்றது"
+
+#: src/zmart-misc.cc:193
+msgid "Not found"
+msgstr "கிடைக்கவில்லை"
+
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "பிரச்னை:"
+
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr "தீர்வு%s:"
+
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "எண், (மீ)ண்டும் முயற்சிக்கவும் அல்லது (ர)த்து செய்யவும்>"
+
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "ஆர்"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "c"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "தீர்வு%s\n பயன்படுத்தப்படுகிறது"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s பிரச்னைகள்:"
+
+#: src/zmart-misc.cc:306
+msgid "Summary:"
+msgstr "தொகுப்புரை:"
+
+#: src/zmart-misc.cc:329
+msgid "<install>   "
+msgstr "<நிறுவவும்>   "
+
+#: src/zmart-misc.cc:331
+msgid "<uninstall> "
+msgstr "<நிறுவுதலை நீக்கவும்> "
+
+#: src/zmart-misc.cc:336
+msgid "Nothing to do."
+msgstr "செய்வதற்கு ஏதுமில்லை."
+
+#: src/zmart-misc.cc:392
+msgid "Parsing RPM database..."
+msgstr "RPM தரவுதளம் விளக்கப்படுகிறது…"
+
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
+msgid " resolvables."
+msgstr "தீர்க்கப்படக்கூடியவை"
+
+#: src/zmart-misc.cc:405
+msgid "Parsing metadata for "
+msgstr "இதற்கு மேல்தரவு விளக்கப்படுகிறது"
+
+#: src/zmart-misc.cc:414
+msgid "Establishing status of aggregates"
+msgstr "மொத்தங்களின் நிலை அமைக்கப்படுகிறது"
+
+#: src/zmart-misc.cc:422
+msgid "Resolving dependencies..."
+msgstr "சார்புத்தன்மைகள் தீர்க்கப்படுகின்றன…"
+
+#: src/zmart-misc.cc:448
+msgid " patches needed"
+msgstr "பிழைநீப்புகள் தேவைப்படுகின்றன"
+
+#: src/zmart-misc.cc:448
+msgid " security patches"
+msgstr "பாதுகாப்பு பிழைநீப்புகள்"
+
+#: src/zmart-misc.cc:455
+msgid "Installed"
+msgstr "நிறுவப்பட்டன"
+
+#: src/zmart-misc.cc:455
+msgid "Uninstalled"
+msgstr "நிறுவுதல்நீக்கப்பட்டது"
+
+#: src/zmart-misc.cc:457
+msgid "No Longer Applicable"
+msgstr "இனிமேல் பொருந்தாது"
+
+#: src/zmart-misc.cc:457
+msgid "Not Applicable"
+msgstr "பொருந்தாது"
+
+#: src/zmart-misc.cc:459
+msgid "Applied"
+msgstr "பயன்படுத்தப்பட்டது"
+
+#: src/zmart-misc.cc:459
+msgid "Not Needed"
+msgstr "தேவைப்படாது"
+
+#: src/zmart-misc.cc:461
+msgid "Broken"
+msgstr "உடைந்துள்ளது"
+
+#: src/zmart-misc.cc:461
+msgid "Needed"
+msgstr "தேவைப்படுகிறது"
+
+#: src/zmart-misc.cc:463
+msgid "error"
+msgstr "பிழை"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
+msgid "Catalog"
+msgstr "வரிசைப்பட்டியல்"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+#: src/zmart-sources.cc:100
+msgid "Name"
+msgstr "பெயர்"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+msgid "Version"
+msgstr "பதிப்பு"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
+msgid "Category"
+msgstr "வகை"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
+msgid "Status"
+msgstr "நிலை"
+
+#: src/zmart-misc.cc:560
+msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
+msgstr "எச்சரிக்கை: இவை புதுப்பிக்கும் அமைப்பையே பாதிக்கக்கூடிய புதுப்பித்தல்களாகும்.\n மற்ற புதுப்பித்தல்களும் உள்ளன.\n"
+
+#: src/zmart-misc.cc:648
+msgid "S"
+msgstr "S"
+
+#: src/zmart-misc.cc:653
+msgid "Arch"
+msgstr "Arch"
+
+#: src/zmart-misc.cc:710
+#, c-format
+msgid "WARNING: %s is interactive, skipped."
+msgstr "எச்சரிக்கை: %s எதிர்ச்செயலாற்றும் தன்மையுடையது, தாண்டப்பட்டது."
+
+#: src/zmart-misc.cc:766
+msgid "committing"
+msgstr "ஈடுபடுகிறது"
+
+#: src/zmart-misc.cc:782
+msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
+msgstr "தயாரிப்பின் உண்மைத்தன்மைக்கான சோதனை தோல்வியுற்றது. இது நிறுவதல் ஆதாரம் அல்லது ஊடகத்தின் பிரச்னை காரணமாக இருக்கலாம். பின்வருவனவற்றில் ஒன்றை முயற்சிக்கவும்.\n\n - முந்தைய ஆணையை மீண்டும் முயற்சிக்கவும்\n - 'ஸைப்பர் புதுப்பித்தலை' பயன்படுத்தி நிறுவுதல் ஆதாரங்களை புதுப்பிக்கவும்.\n - வேறொரு நிறுவுதல் ஊடகத்தைப் பயன்படுத்தவும் (உதாரணமாக, உங்களுடையது சேதமடைந்திருந்தால்)\n - வேறொரு நிறுவுதல் ஆதாரத்தைப் பயன்படுத்தவும்"
+
+#: src/zmart-misc.cc:800
+msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்றிற்கு உங்கள் கணினியின் மறுதுவக்கம் தேவைப்படுகிறது. இயன்றவரை விரைவாக மறுதுவக்கம் செய்யவும்."
+
+#: src/zmart-misc.cc:803
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+msgstr "எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்று தயாரிப்பு  மேலாளரையே பாதிக்கிறது. எனவே அதற்கு அடுத்த இயக்கங்களை  செயல்படுத்துவதற்குமுன் மறுதுவக்கம் செய்ய வேண்டியுள்ளது."
+
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "தானாகவே %s %s உரிமத்திற்கு ஒப்புக்கொள்ளப்படுகிறது."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
+msgid "license"
+msgstr "உரிமம்"
+
+#: src/zmart-misc.cc:843
+msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgstr "இத்தயாரிப்பை நிறுவுவதற்கு , மேற்கண்ட உரிமத்திற்கான விதிகளுக்கு நீங்கள் ஒப்புக்கொள்ளவேண்டும். தொடரலாமா?"
+
+#: src/zmart-misc.cc:853
+msgid "Aborting installation due to the need of license(s) confirmation."
+msgstr "உரிமங்(கள்) உறுதிப்படுத்துதல் தேவைப்படுவதால் நிறுவுதல் இடைநிறுத்தப்படுகிறது"
+
+#: src/zmart-misc.cc:855
+msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
+msgstr "தயவுசெய்து, இயக்கத்தை எதிர்செயலாற்றும் வகையில் மறுதுவக்கம் செய்யுவும் மற்றும்;தேவைப்படும் உரிமங்களுக்கான ஒப்புதலை உறுதிப்படுத்தவும்."
+
+#: src/zmart-misc.cc:862
+msgid "Aborting installation due to user disagreement with "
+msgstr "இதனுடனான பயனரின் ஆட்சேபத்தினால் நிறுவுதல் இடைநிறுத்தப்படுகிறது"
+
+#: src/zmart-sources.cc:31
+msgid "Sorry, you need root privileges to use system sources, disabling them..."
+msgstr "மன்னிக்கவும், அமைப்பின் மூலங்களை பயன்படுத்துவதற்கு உங்களுக்கு ஆதார சலுகைகள்தேவைப்படுகின்றன, அவை செயலிழக்கப்படுகின்றன..."
+
+#: src/zmart-sources.cc:48
+msgid "Restoring system sources..."
+msgstr "அமைப்பின் மூலங்கள் மீட்கப்படுகின்றன…"
+
+#: src/zmart-sources.cc:57
+msgid "Failed to restore sources"
+msgstr "மூலங்கள் மீட்கப்படுவது தோல்வியுற்றது"
+
+#: src/zmart-sources.cc:80
+msgid "Cannot access repository"
+msgstr "சேமிப்பிடத்தை அணுக முடியவில்லை"
+
+#: src/zmart-sources.cc:99
+msgid "Enabled"
+msgstr "செயல்படுத்தப்பட்டது"
+
+#: src/zmart-sources.cc:99
+msgid "Refresh"
+msgstr "புதுப்பிக்கவும்"
+
+#: src/zmart-sources.cc:100
+msgid "Type"
+msgstr "வகை"
+
+#: src/zmart-sources.cc:116 src/zmart-sources.cc:118
+msgid "Active"
+msgstr "செயல்பாட்டில் உள்ளது"
+
+#: src/zmart-sources.cc:118
+msgid "Disabled"
+msgstr "செயலிழக்கப்பட்டது"
+
+#: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
+#: src/zmart-sources.cc:129
+msgid "Yes"
+msgstr "ஆம்"
+
+#: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
+msgid "No"
+msgstr "இல்லை"
+
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
+msgid "Error reading system sources: "
+msgstr "அமைப்பின் மூலங்களை படிப்பதில் பிழை:"
+
+#: src/zmart-sources.cc:190
+msgid "Unknown repository type "
+msgstr "தெரியாத சேமிப்பிட வகை"
+
+#: src/zmart-sources.cc:202
+msgid "Name not found"
+msgstr "பெயர் காணப்படவில்லை"
+
+#: src/zmart-sources.cc:205
+msgid "baseurl not found"
+msgstr "அடிப்படை url காணப்படவில்லை"
+
+#: src/zmart-sources.cc:339
+msgid "Continuing anyway"
+msgstr "இருப்பினும் தொடரப்படுகிறது"
+
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "'%s' மூலம் நீக்கப்படுகிறது"
+
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "மூலம் '%s' நீக்கப்பட்டது."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "மூலம் '%s': நீக்கப்படுவது தோல்வியுற்றது."
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
+msgid "Source %s not found."
+msgstr "%s மூலம் காணப்படவில்லை."
+
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s ' உடைந்துள்ளது அல்லது அணுகக்கூடிய நிலையில் இல்லை. நீங்கள் அதை நீக்க விரும்புகிறீர்களா?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "மூலம் நீக்கப்படுகிறது"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
+msgid "URL is invalid: "
+msgstr "URL செல்லாது:"
+
+#: src/zmart-sources.cc:541
+msgid "Sorry, not implemented yet for libzypp-1.x.x"
+msgstr "மன்னிக்கவும், libzypp-1.x.xக்கு இன்னும் செயல்படுத்தப்படவில்லை"
+
+#: src/zmart-sources.cc:562
+msgid "Refreshing "
+msgstr "புதுப்பிக்கப்படுகிறது"
+
+#: src/zmart-sources.cc:569
+msgid "DONE"
+msgstr "முடிவுற்றது"
+
+#: src/zmart-sources.cc:573
+msgid "Error while refreshing the source: "
+msgstr "மூலத்தை புதுப்பிக்கும்போது பிழை: "
+
+#: src/zmart-sources.cc:578
+msgid "All system sources have been refreshed."
+msgstr "அனைத்து அமைப்பு மூலங்களும்  புதுப்பிக்கப்பட்டுவிட்டன. "
+
+#: src/zmart-sources.cc:599
+msgid "Error while fetching "
+msgstr "எடுக்கும்போது பிழை"
+
+#: src/zmart-sources.cc:615
+msgid "ZENworks Management Daemon is running."
+msgstr " ZENworks நிர்வாக டேமன் இயங்கிக் கொண்டிருக்கிறது."
+
+#: src/zmart-sources.cc:616
+msgid "WARNING: this command will not synchronize changes."
+msgstr "எச்சரிக்கை: இந்த ஆணை மாற்றங்களை  ஒருங்கிணைக்காது."
+
+#: src/zmart-sources.cc:617
+msgid "Use rug or yast2 for that."
+msgstr "அதற்கு rug அல்லது yast2வை பயன்படுத்தவும்"
+
+#: src/zypp-checkpatches.cc:127
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgstr "புதுப்பிப்பவரால் தயாரிப்பு மேலாளர் இயந்திரத்தை அணுக முடியவில்லை. ஒரே நேரத்தில்வேறொரு பயன்பாடு (YaST போன்றது) அதனைப் பயன்படுத்தும் வகையில் நீங்கள் வைத்திருந்தால் இதுசாதாரணமாக நிகழும். தயவுசெய்து மற்ற பயன்பாடுகளை மூடிவிட்டு புதுப்பித்தல்களுக்காக மீண்டும்தேடவும்."
+
+#: src/zypp-checkpatches.cc:213
+#, c-format
+msgid "Could not restore source.\nDetail: %s"
+msgstr "ஆதாரத்தை மீட்டமைக்க முடியவில்லை.\nவிவரம்: %s"
+
+#: src/zypp-checkpatches.cc:262
+msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
+msgstr "புதுப்பித்தல் மூலங்கள் எதுவும் அறுதியிடப்படவில்லை. தயவுசெய்து பதுப்பித்தல்கள் பற்றிதெரிவிக்கப்படுவதற்கு ஒன்று அல்லது அதற்கு அதிகமான புதுப்பித்தல் மூலங்களை சேர்க்கவும்."
+
+#: src/zypper-callbacks.cc:30
+msgid "(A)bort, (R)etry, (I)gnore?"
+msgstr "(இ)டைநிறுத்தலாமா,  (ம)றுமுயற்சி செய்யலாமா, (பு)றக்கணிக்கலமா?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "செல்லாத விடை '%s',  'y' அல்லது 'n'ஐ உள்ளிடவும்."
+
+#: src/zypper-getopt.cc:56
+msgid "Unknown option "
+msgstr "தெரியாத விருப்பத்தேர்வு"
+
+#: src/zypper-getopt.cc:59
+msgid "Missing argument for "
+msgstr "இதற்கான தொலைந்துபோன விவாதம்"
+
+#: src/zypper-info.cc:48
+msgid " not found."
+msgstr " காணப்படவில்லை"
+
+#: src/zypper-info.cc:52
+msgid "Information for "
+msgstr "இதற்கான விவரம்"
+
+#: src/zypper-info.cc:84
+msgid "Catalog: "
+msgstr "வரிசைப்பட்டியல்:"
+
+#: src/zypper-info.cc:85
+msgid "Name: "
+msgstr "பெயர்:"
+
+#: src/zypper-info.cc:86
+msgid "Version: "
+msgstr "பதிப்பு:"
+
+#: src/zypper-info.cc:87
+msgid "Arch: "
+msgstr "தொகுப்பு:"
+
+#: src/zypper-info.cc:88
+msgid "Installed: "
+msgstr "நிறுவப்பட்டது:"
+
+#: src/zypper-info.cc:90
+msgid "Status: "
+msgstr "நிலை:"
+
+#: src/zypper-info.cc:93
+msgid "up-to-date"
+msgstr "புதுப்பிக்கப்பட்டது"
+
+#: src/zypper-info.cc:95
+msgid "out-of-date (version "
+msgstr "வழக்கில் இல்லாதது (பதிப்பு"
+
+#: src/zypper-info.cc:96
+msgid " installed) "
+msgstr " நிறுவப்பட்டது)"
+
+#: src/zypper-info.cc:99
+msgid "not installed"
+msgstr "நிறுவப்படவில்லை"
+
+#: src/zypper-info.cc:101
+msgid "Installed Size: "
+msgstr "நிறுவப்பட்ட அளவு: "
+
+#: src/zypper-info.cc:102
+msgid "Summary: "
+msgstr "தொகுப்புரை:"
+
+#: src/zypper-info.cc:103
+msgid "Description: "
+msgstr "விளக்கம்:"
+
+#: src/zypper-search.cc:45
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "ஆதாரங்கள் இல்லை. ஸைப்பர் தற்போது நிறுவப்பட்ட ஆதாரங்களுக்குள் மட்டுமே தேடுகிறது. "
+
+#: src/zypper-search.cc:107
+msgid "Pre-caching installed resolvables matching given search criteria... "
+msgstr "குறிப்பிட்ட தேடுதல் விதிகளுடன் பொருந்தும் தற்காலிக சேமிப்பிற்குமுன் நிறுவப்பட்ட தீர்க்கப்படக்கூடியவை... "
+
+#: src/zypper-search.cc:116
+msgid " out of ("
+msgstr " இதிலிருந்து("
+
+#: src/zypper-search.cc:117
+msgid "cached."
+msgstr "தற்காலிகமாக சேமிக்கப்பட்டது."
+
+#: src/zypper-search.cc:216
+msgid " is not a valid regular expression: \""
+msgstr "ஒரு செல்லத்தக்க வழக்கமான வெளிப்பாடு அல்ல: \""
+
+#: src/zypper-search.cc:218
+msgid "This is a bug, please file a bug report against zypper."
+msgstr "இது ஒரு பிழை, தயவுசெய்து zypperக்கு ஏதிராக ஒரு பிழை அறிக்கையை அனுப்பவும்."
+
+#: src/zypper.cc:76
+msgid "URL is invalid."
+msgstr "URL செல்லாது"
+
+#: src/zypper.cc:84
+msgid "  Commands:\n\thelp\t\t\tHelp\n\tshell, sh\t\tAccept multiple commands at once\n\tinstall, in\t\tInstall packages or resolvables\n\tremove, rm\t\tRemove packages or resolvables\n\tsearch, se\t\tSearch for packages matching a pattern\n\tservice-list, sl\tList services, also called installation sources\n\tservice-add, sa\t\tAdd a new service\n\tservice-delete, sd\tDelete a service\n\tservice-rename, sr\tRename a service\n\trefresh, ref\t\tRefresh all installation sources\n\tpatch-check, pchk\tCheck for patches\n\tpatches, pch\t\tList patches\n\tlist-updates, lu\tList updates\n\tupdate, up\t\tUpdate packages\n\tinfo, if\t\tShow full information for packages\n\tpatch-info\t\tShow full information for patches\n"
+msgstr "  ஆணைகள்:\n\tஉதவி \t\t\tஉதவி\n\tஷெல், sh\t\tஉடனடியாக பல ஆணைகளை ஏற்கிறது\n\tநிறுவவும், in\t\tதயாரிப்புகள் அல்லது தீர்க்கக்கூடியவைகளை நிறுவுகிறது\n\tநீக்கவும்;, rm\t\tதயாரிப்புகள் அல்லது தீர்க்கக்கூடியவைகளை நீக்குகிறது \n\tதேடவும், se\t\tஒரு வடிவத்திற்கு பொருந்தும் தயாரிப்புகளைத் தேடுகிறது\n\tசேவை-பட்டியல்;, sl\tநிறுவுதல் மூலங்கள் என்றும் அழைக்கப்படும் சேவைகளை பட்டியலிடுகிறது\n\tசேவை-சேர்க்கவும்;, sa\t\tஒரு புதிய சேவையை சேர்க்கிறது\n\tசேவை-நீக்கவும்;, sd\tஒரு சேவையை நீக்குகிறது\n\tசேவை-மறுபெயரளிக்கவும், sr\tஒரு சேவைக்கு மறுபெயரளிக்கிறது\n\tபுதுப்பிக்கவும், ref\t\tஅனைத்து நிறுவுதல் மூலங்களையும் புதுப்பிக்கிறது \n\tபிழைநீப்பு-சரிபார்ப்பு, pchk\tபிழைநீப்புகளுக்காக சரிபார்க்கிறது\n\tபிழைநீப்புகள்;, pch\t\tபிழைநீப்புகளை பட்டியலிடுகிறது\n\tபட்டியல்-புதுப்பித்தல்கள், lu\tபுதுப்பித்தல்களை பட்டியலிடுகிறது \n\tபுதுப்பித்தல், up\t\tதயாரிப்புகளை புதுப்பிக்கிறது\n\tவிவரம், if\t\tதயாரிப்புகளுக்கான முழு விரவங்களையும் காட்டுகிறது \n\tபிழைநீப்பு-விவரம்;\t\tபிழைநீப்புகளுக்கான முழு விவரங்களையும் காட்டுகிறது\n"
+
+#: src/zypper.cc:127
+msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr "விருப்பத்தேர்வுகள்:\n\t--உதவி, -h\t\tHelp\n\t--பதிப்பு, -V\t\tபதிப்பு எண்ணை வெளியிடவும்\n\t--மிகுசொல், -v\t\tமிகுசொல்லை அதிகரிக்கவும்\n\t--சுருக்கமான, -t\t\tசாதனம் வாங்குதலுக்கு சுருக்கமான வெளியீடு\n\t--அட்டவணை-பாணி, -s\tஅட்டவணை பாணி (முழுஎண்)\n\t--ரக்-ஒத்திசைவுள்ளது, -r\tரக் ஒத்திசைவை இயக்கவும்\n\t--பரிமாற்றமில்லாதது -n\tஎதையும் கேட்க வேண்டாம், முன்னிருந்த பதில்களை தானாகவே பயன்படுத்தவும்.\n\t--gpg-சோதனைகள்-இல்லை\t\tGPG சோதனை தோல்விகளைப் புறக்கணித்துவிட்டுத் தொடரவும்.\n\t--ஆதாரம், -R <dir>\n"
+
+#: src/zypper.cc:140
+msgid "Verbosity "
+msgstr "மிகுசொல்;"
+
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "பரிமாற்றமில்லாத வகைக்குள் நுழைவு."
+
+#: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "'no-gpg-சோதனைகள்' வகையில் நுழைவு."
+
+#: src/zypper.cc:162
+msgid "Invalid table style "
+msgstr "செல்லாத அட்டவணை பாணி"
+
+#: src/zypper.cc:205
+msgid "Try -h for help"
+msgstr "உதவிக்கு –hஐ முயற்சிக்கவும்"
+
+#: src/zypper.cc:223
+msgid "  Source options:\n\t--disable-system-sources, -D\t\tDo not read the system sources\n\t--source, -S\t\tRead additional source\n"
+msgstr "  மூல விருப்பத்தேர்வுகள்:\n\t—அமைப்பு- மூலங்களை-செயலிழக்கவும்;, -D\t\tஅமைப்பு மூலங்களை படிக்க வேண்டாம்;\n\t--மூலம், -S\t\tகூடுதல் மூலங்களை படிக்கவும்\n"
+
+#: src/zypper.cc:228
+msgid "  Target options:\n\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr "  இலக்கு விருப்பத்தேர்வுகள்:\n\t—அமைப்பு-தீர்க்கக்கூடியவைகளை- செயலிழக்கவும், -T\t\t அமைப்பு நிறுவப்பட்டதீர்க்கக்கூடியவைகளை படிக்க வேண்டாம்\n"
+
+#: src/zypper.cc:245
+msgid "  Command options:\n\t--catalog,-c\t\t\tOnly from this catalog (under development)\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr " ஆணை விருப்பத்தேர்வுகள்:\n\t--அட்டவணை,-c\t\t\tஇந்த அட்டவணையிலிருந்து மட்டும் (உருவாக்கத்தின்கீழ்)\n\t--வகை,-t\t\tதீர்க்கக்கூடிய வகை (முன்னிருந்த நிலை: தயாரிப்பு)\n\t--உறுதி இல்லை-y\t\t\tநிறுவுதலை மேற்கொள்வதற்கு பயனாளரின் உறுதியளிப்பு தேவையில்லை\n\t--உரிமங்களுடனான தானியங்கு ஒப்புதல்,-l\tமூன்றாம் நபர் உரிம உறுதியளிப்பிற்கான விழிப்பூட்டுதலுக்கு 'ஆம்' என்று தானாகக் கூறவும்.\n\t\t\t\t\tகூடுதல் விவரங்களுக்கு man zypperஐ பார்க்கவும்.\n\n"
+
+#: src/zypper.cc:265
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\tDo not require user confirmation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr " ஆணை விருப்பத்தேர்வுகள்:\n\t--வகை-t\t\tதீர்க்கக்கூடிய வகை (முன்னிருந்த நிலை: தயாரிப்பு)\n\t--உறுதி இல்லை-y\tபயனாளரின் உறுதியளிப்பு தேவையில்லை\n\t--உரிமங்களுடனான தானியங்கு ஒப்புதல்,-l\tமூன்றாம் நபர் உரிம உறுதியளிப்பிற்கான விழிப்பூட்டுதலுக்கு 'ஆம்' என்று தானாகக் கூறவும்.\n\t\t\t\t\tகூடுதல் விவரங்களுக்கு man zypperஐ பார்க்கவும்.\n\n"
+
+#: src/zypper.cc:283
+msgid "service-add [options] URI [alias]\n\nAdd a service (installation source) to the system.\n  Command options:\n\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n\t\t\t\t(even remote)\n\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n\t--disabled,-d\t\tAdd the service as disabled\n\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr "சேவை -URIஐ  [விருப்பத்தேர்வுகள்] சேர்க்கவும் [மாற்றுப்பெயர்]\n\nஅமைப்பிற்கு ஒரு சேவையை (நிறுவுதல் மூலம்) சேர்க்கிறது.\n  ஆணை விருப்பத்தேர்வுகள்:\n\t--repo,-r <FILE.repo>\t ஒரு கோப்பிலிருந்து URL மற்றும் மாற்றுப்பெயரை படிக்கிறது\n\t\t\t\t(தொலைதூரத்திலுள்ளதுகூட)\n\t--வகை,-t <TYPE>\tசேமிப்பிட வகை(YaST, YUM, அல்லது Plaindir)\n\t—செயலிழக்கப்பட்டது,-d\t\t செயலிழக்கப்பட்டதாக சேவையை சேர்க்கிறது \n\t—புதுப்பித்தல்- இல்லை,-n\t\tமேல்தரவை தானியங்குமுறையில் புதுப்பிப்பதில்லை\n"
+
+#: src/zypper.cc:302
+msgid "service-list\n\nList all defined system services (installation sources).\nThis command has no options.\n"
+msgstr "சேவை-பட்டியல்\n\nஅறுதியிடப்பட்ட அனைத்து அமைப்பு சேவைகளையும் பட்டியலிடுகிறது (நிறுவதல் மூலங்கள்).\nஇந்த ஆணைக்கு விருப்பத்தேர்வுகள் இல்லை.\n"
+
+#: src/zypper.cc:316
+msgid "service-delete [options] <URI|alias>\n\nRemove service (installation source) from the system.\nThis command has no options.\n"
+msgstr "சேவை- நீக்கவும் [விருப்பத்தேர்வுகள்] <URI|மாற்றுபெயர்>\n\nஅமைப்பிலிருந்து சேவையை (நிறுவுதல் மூலம்) நீக்குகிறது.\nஇந்த ஆணைக்கு விருப்பத்தேர்வுகள் இல்லை.\n"
+
+#: src/zypper.cc:330
+msgid "service-rename [options] <URI|alias> <new-alias>\n\nAssign new alias to the service specified by URI or current alias.\nThis command has no options.\n"
+msgstr "சேவை-மறுபெயர் அளிக்கவும் [விருப்பத்தேர்வுகள்] <URI|மாற்றுபெயர்><புதிய-மாற்றுபெயர்>\n\nURI அல்லது நடப்பு மாற்றுபெயரால் குறிப்பிடப்பட சேவைக்கு புதிய மாற்றுப்பெயரை அளிக்கிறது.\nஇந்த ஆணைக்கு விருப்பத்தேர்வுகள் இல்லை.\n"
+
+#: src/zypper.cc:344
+msgid "zypper refresh\n\nRefresh all installation sources found in the system.\n"
+msgstr "zypper புதுப்பித்தல்\n\nஅமைப்பில் காணப்படும் அனைத்து நிறுவுதல் மூலங்களையும் புதுப்பிக்கிறது.\n"
+
+#: src/zypper.cc:357
+msgid "list-updates [options]\n\nList all available updates\n\n  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr "புதுப்பித்தல்களை-பட்டியலிடவும் [விருப்பத்தேவுகள்]\n\nகிடைக்கக்கூடிய அனைத்து புதுப்பித்தல்களையும் பட்டியலிடுகிறது\n\n  ஆணை விருப்பத்தேர்வுகள்:\n\t--வகை,-t\t\tதீர்க்கக்கூடிய வகை (முன்னிருந்த: பிழைநீப்பு)\n"
+
+#: src/zypper.cc:378
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n\t--no-confirm,-y\t\tDo not require user confirmation\n\t--skip-interactive\t\tSkip interactive updates\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr " ஆணை விருப்பத்தேர்வுகள்:\n\t--வகை-t\t\tதீர்க்கக்கூடிய வகை (முன்னிருந்த நிலை: பிழைநீப்பு)\n\t--உறுதி இல்லை,-y\t\tபயனாளரின் உறுதியளிப்பு தேவையில்லை\n\t--பரிமாற்றத்தைத் தாண்டவும்\t\tபரிமாற்ற புதுப்பித்தல்களைத் தாண்டவும்\n\t--உரிமங்களுடனான தானியங்கு ஒப்புதல்,-l\tமூன்றாம் நபர் உரிம உறுதியளிப்பிற்கான விழிப்பூட்டுதலுக்கு 'ஆம்' என்று தானாகக் கூறவும்.\n\t\t\t\t\tகூடுதல் விவரங்களுக்கு man zypperஐ பார்க்கவும்.\n\n"
+
+#: src/zypper.cc:405
+msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
+msgstr "ஸைப்பர் [உலகளாவிய-விருப்பத்தேர்வுகள்] தேடுதல் [விருப்பத்தேர்வுகள்] [வினாவரிசை...]\n\n'தேடுதல்' - குறிப்பிட்ட தேடுதல் வரிசைக்குப் பொருந்தும் தயாரிப்புகளைத் தேடுகிறது\n\n  ஆணை விருப்பத்தேர்வுகள்:\n    -அனைத்தையும்-பொருத்தவும்           அனைத்து தேடுதல் வரிசைகளுக்கும் பொருந்தக்கூடியதைத் தேடுகிறது (முன்னிருந்தது)\n    --எதையும்-பொருத்தவும்            எந்தவொரு தேடுதல் வரிசைகளுக்கும் பொருந்தக்கூடியதைத் தேடுகிறது\n    --துணைவரிசைகளைப்-பொருத்தவும்    பாதி சொற்களுக்குப் பொருந்தக்கூடியதைத் தேடுகிறது(முன்னிருந்தது)\n    --சொற்களைப்-பொருத்தவும்         முழு வார்த்தைகளுக்குப் பொருந்தக்கூடியதை மட்டுமே தேடுகிறது\n    --சரியானதைப்-பொருத்தவும்          மிகச்சரியான தயாரிப்புப் பெயரைத் தேடுகிறது\n-d, --தேடுதல்-விளக்கங்கள்  தயாரிப்புத் தொகுப்புரைகள் மற்றும் விளக்கங்களிலும் தேடுகிறது.\n-c, --எழுத்துவகை உணரக்கூடியது       எழுத்துவகை உணரக்கூடிய தேடுதலை மேற்கொள்கிறது.\n-i, --நிறுவப்பட்டுள்ளது -மட்டும்      ஏற்கனவே நிறுவப்பட்டுள்ள தயாரிப்புகளை மட்டுமே காட்டுகிறது.\n-u, --நிறுவுதல் நீக்கப்பட்டது-மட்டும்    தற்போது நிறுவப்பட்டுள்ளவை அல்லாத தயாரிப்புகளை மட்டும் காட்டுகிறது.\n-t, --வகை                 குறிப்பிட்ட வகையைச் சேர்ந்த தயாரிப்புகளை மட்டும் தேடுகிறது.\n    --பெயர் -அடிப்படையில்-அடுக்குதல்        தயாரிப்புகளை பெயர்வாரியாக அடுக்குகிறது  (முன்னிருந்தது).\n    --பெயர்ப்பட்டியலின்படி-அடுக்குதல்      பெயர்ப்பட்டியலின்படி தயாரிப்புகளை அடுக்குகிறது (ஆதாரம்).\n\n* மற்றும் ? பல் உரு எழுத்துக்களையும் தேடுதல் வரிசைகளில் பயன்படுத்தலாம்.\n\n"
+
+#: src/zypper.cc:433
+msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"
+msgstr "பிழைநீப்பு-சரிபார்ப்பு\n\nஇருக்கக்கூடிய பிழைநீப்புகளுக்காக சரிபார்க்கவும்\n\nஇந்த ஆணைக்கு விருப்பத்தேர்வுகள் எதுவுமில்லை.\n"
+
+#: src/zypper.cc:447
+msgid "patches\n\nList all available patches\n\nThis command has no options.\n"
+msgstr "பிழைநீப்புகள்\n\nகிடைக்கக்கூடிய அனைத்து பிழைநீப்புகளையும் பட்டியலிடவும்;\n\nஇந்த ஆணைக்கு விருப்பத்தேர்வுகள் எதுவுமில்லை.\n"
+
+#: src/zypper.cc:461
+msgid "zypper [global-options] info [name...]\n\n'info' -- Show full information for packages\n"
+msgstr "zypper [உலகமய-விருப்பத்தேர்வுகள்] விவரம் [பெயர்..]\n\n'விவரம்;' – தயாரிப்புகளுக்கான முழு விவரங்களையும் காட்டவும்.;\n"
+
+#: src/zypper.cc:473
+msgid "zypper [global-options] patch-info [patchname...]\n\n'patch-info' -- Show detailed information for patches\n"
+msgstr "zypper [உலகமய-விருப்பத்தேர்வுகள்] பிழைநீப்பு-விவரம்; [பிழைநீப்புபெயர்...]\n\n'பிழைநீப்பு-விவரம்' – பிழைநீப்பிற்கான விரிவான விவரங்களைக் காட்டவும்\n"
+
+#: src/zypper.cc:485
+msgid "zypper [global-options] moo\n\n'moo' - Show an animal\n"
+msgstr "zypper [உலகமய-விருப்பத்தேர்வுகள்] moo\n\n'moo' – ஒரு விலங்கைக் காட்டவும்;\n"
+
+#: src/zypper.cc:492
+msgid "Unknown command"
+msgstr "தெரியாத ஆணை"
+
+#: src/zypper.cc:507
+msgid "Non-Option Program Arguments: "
+msgstr "விருப்பத்தேர்வு-அல்லாத நிரல் விவாதங்கள்:"
+
+#: src/zypper.cc:519
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "புறக்கணிக்கப்படுகிறது --terse (rug ஒத்திசைவிற்கு மட்டுமே அளிக்கப்படுவது)"
+
+#: src/zypper.cc:535
+msgid "Ignoring installed resolvables..."
+msgstr "நிறுவப்பட்ட தீர்க்கப்படக்கூடியவைகள் புறக்கணிக்கப்படுகின்றன …"
+
+#: src/zypper.cc:563
+msgid "A ZYpp transaction is already in progress."
+msgstr "ஒரு ZYpp பரிமாற்றம் ஏற்கனவே நடைபெற்றுக் கொண்டிருக்கிறது."
+
+#: src/zypper.cc:602
+msgid "Warning: Unknown metadata type "
+msgstr "எச்சரிக்கை:தெரியாத மேல்தரவு வகை"
+
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
+msgid "Unknown resolvable type "
+msgstr "தெரியாத தீர்க்கக்கூடிய வகை"
+
+#: src/zypper.cc:756
+msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "எச்சரிக்கை: மூலங்கள் இல்லை. நிறுவப்பட்ட தீர்வுகளுடன் மட்டுமே இயங்குகிறது. எதையும் நிறுவ முடியாது."
+
+#: src/zypper.cc:962
+msgid "Please file a bug report about this."
+msgstr "தயவுசெய்து ஒரு பிழை அறிக்கையை இதற்காக அனுப்பவும்"
+
+#: src/zypper.cc:965
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "விதிமுறைகளுக்கு http://en.opensuse.org/Zypper#Troubleshooting I பார்க்கவும்."
+
+#: src/zypper.cc:978
+msgid "Unexpected exception."
+msgstr "எதிர்பாராத விதிவிலக்கு."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "zypperஐ இயக்குவதற்கு ஆதாரச் சலுகைகள் தேவைப்படுகின்றன."
+

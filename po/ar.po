@@ -1,0 +1,1022 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-14 14:03\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "تحذير: قبول ملف %s غير موقع."
+
+#: src/zmart-keyring-callbacks.h:46
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s غير مُوقَع، هل تريد المتابعة؟"
+
+#: src/zmart-keyring-callbacks.h:57
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "هل تريد استيراد المفتاح %s إلى سلسلة مفاتيح موثوق بها؟"
+
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "تحذير: قبول ملف %s مُوقع بمفتاح %s غير معروف."
+
+#: src/zmart-keyring-callbacks.h:79
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s مُوقع بمفتاح %s غير معروف. هل تريد المتابعة؟"
+
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "الوثوق تلقائيًا في معرف المفتاح %s، %s، البصمة %s"
+
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "هل تريد الوثوق في معرف المفتاح %s، %s، البصمة %s"
+
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"تحذير: يتم تجاهل التحقق من التوقيع الفاشل لـ %s بمعرف المفتاح العام %s، %s، "
+"البصمة %s! تأكد من أن ذلك لم ينتج عن بعض التغييرات الضارة في الملف!"
+
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"فشل التحقق من التوقيع لـ %s باستخدام معرف المفتاح العام %s، %s، البصمة %s. "
+"تحذير: قد يكون ذلك بسبب تغير ضار في الملف! تُعد المتابعة خطرة! هل تريد "
+"المتابعة على أي حال؟"
+
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "لا يوجد تشفير للملف %s."
+
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "هل تريد المتابعة؟"
+
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "تشفير %s غير معروف للملف %s."
+
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "تجاهل فشل التحقق من التشفير لـ %s (متوقع %s، تم العثور على %s)."
+
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "فشل التحقق من التشفير لـ %s. متوقع %s، تم العثور على %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
+msgid "Initializing Target"
+msgstr "تهيئة الهدف"
+
+#: src/zmart-misc.cc:28
+msgid " (old way)"
+msgstr "(طريقة قديمة)"
+
+#: src/zmart-misc.cc:139
+msgid "not found"
+msgstr "غير موجود"
+
+#: src/zmart-misc.cc:146
+msgid "skipping "
+msgstr "تخطي"
+
+#: src/zmart-misc.cc:146
+msgid "(already installed)"
+msgstr "(مثبَت بالفعل)"
+
+#: src/zmart-misc.cc:152
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "فشلت إضافة '%s' إلى قائمة الحزم المطلوب تثبيتها."
+
+#: src/zmart-misc.cc:170
+msgid "Failed"
+msgstr "فشل"
+
+#: src/zmart-misc.cc:193
+msgid "Not found"
+msgstr "غير موجود"
+
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "المشكلة: "
+
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " حل %s: "
+
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "الرقم، (ع)إعادة المحاولة أو (غ)إلغاء> "
+
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "ع"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "غ"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "تطبيق الحل %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "مشكلات %s:"
+
+#: src/zmart-misc.cc:306
+msgid "Summary:"
+msgstr "الملخص:"
+
+#: src/zmart-misc.cc:329
+msgid "<install>   "
+msgstr "<install>"
+
+#: src/zmart-misc.cc:331
+msgid "<uninstall> "
+msgstr "<uninstall>"
+
+#: src/zmart-misc.cc:336
+msgid "Nothing to do."
+msgstr "لا يوجد ما يمكن إجراؤه."
+
+#: src/zmart-misc.cc:392
+msgid "Parsing RPM database..."
+msgstr "تحليل قاعدة بيانات RPM..."
+
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
+msgid " resolvables."
+msgstr "التبعيات القابلة للتحليل."
+
+#: src/zmart-misc.cc:405
+msgid "Parsing metadata for "
+msgstr "تحليل بيانات تعريف"
+
+#: src/zmart-misc.cc:414
+msgid "Establishing status of aggregates"
+msgstr "إنشاء حالة التجميعات"
+
+#: src/zmart-misc.cc:422
+msgid "Resolving dependencies..."
+msgstr "تحليل التبعيات..."
+
+#: src/zmart-misc.cc:448
+msgid " patches needed"
+msgstr "التصحيحات المطلوبة"
+
+#: src/zmart-misc.cc:448
+msgid " security patches"
+msgstr "تصحيحات الأمان"
+
+#: src/zmart-misc.cc:455
+msgid "Installed"
+msgstr "مثبَّت"
+
+#: src/zmart-misc.cc:455
+msgid "Uninstalled"
+msgstr "تم إلغاء تثبيته"
+
+#: src/zmart-misc.cc:457
+msgid "No Longer Applicable"
+msgstr "لم يعد قابلاً للتطبيق"
+
+#: src/zmart-misc.cc:457
+msgid "Not Applicable"
+msgstr "غير قابل للتطبيق"
+
+#: src/zmart-misc.cc:459
+msgid "Applied"
+msgstr "تم تطبيقه"
+
+#: src/zmart-misc.cc:459
+msgid "Not Needed"
+msgstr "غير مطلوب"
+
+#: src/zmart-misc.cc:461
+msgid "Broken"
+msgstr "مقطوع"
+
+#: src/zmart-misc.cc:461
+msgid "Needed"
+msgstr "مطلوب"
+
+#: src/zmart-misc.cc:463
+msgid "error"
+msgstr "الخطأ"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
+msgid "Catalog"
+msgstr "الكتالوج"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+#: src/zmart-sources.cc:100
+msgid "Name"
+msgstr "الاسم"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+msgid "Version"
+msgstr "الإصدار"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
+msgid "Category"
+msgstr "الفئة"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
+msgid "Status"
+msgstr "الحالة"
+
+#: src/zmart-misc.cc:560
+msgid ""
+"WARNING: These are only the updates affecting the updater itself.\n"
+"Other updates are available too.\n"
+msgstr ""
+"تحذير: هذه هي فقط التحديثات التي تؤثر على برنامج التحديث نفسه.\n"
+"وتتوفر تحديثات أخرى أيضًا.\n"
+
+#: src/zmart-misc.cc:648
+msgid "S"
+msgstr "S"
+
+#: src/zmart-misc.cc:653
+msgid "Arch"
+msgstr "الهيكل"
+
+#: src/zmart-misc.cc:710
+#, c-format
+msgid "WARNING: %s is interactive, skipped."
+msgstr "تحذير: %s تفاعلي، تم تخطيه."
+
+#: src/zmart-misc.cc:766
+msgid "committing"
+msgstr "تنفيذ"
+
+#: src/zmart-misc.cc:782
+msgid ""
+"Package integrity check failed. This may be a problem with the installation "
+"source or media. Try one of the following:\n"
+"\n"
+"- retry previous command\n"
+"- refresh installation sources using 'zypper refresh'\n"
+"- use another installation media (for example, if yours is damaged)\n"
+"- use another installation source"
+msgstr ""
+"فشل التحقق من سلامة الحزمة. قد يمثل ذلك مشكلة في مصدر التثبيت أو وسائطه. "
+"حاول القيام بأحد الإجراءات التالية:\n"
+"\n"
+"- أعد محاولة استخدام الأمر السابق\n"
+"- قم بتجديد مصادر التثبيت باستخدام 'zypper refresh'\n"
+"- استخدم وسائط تثبيت أخرى (في حالة تلف وسائطك مثلاً)\n"
+"- استخدم مصدر تثبيت آخر"
+
+#: src/zmart-misc.cc:800
+msgid ""
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
+msgstr ""
+"تحذير: يتطلب أحد التصحيحات المثبتة إعادة تشغيل الجهاز. قم بإعاة التشغيل في "
+"أقرب وقت ممكن."
+
+#: src/zmart-misc.cc:803
+msgid ""
+"WARNING: One of installed patches affects the package manager itself, thus "
+"it requires restart before executing next operations."
+msgstr ""
+"تحذير: يؤثر أحد التصحيحات المثبتة على مدير الحزم نفسه، ولذلك يلزم إعادة "
+"التشغيل قبل تنفيذ العمليات التالية."
+
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "متوافق تلقائيًا مع ترخيص %s %s."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
+msgid "license"
+msgstr "الترخيص"
+
+#: src/zmart-misc.cc:843
+msgid ""
+"In order to install this package, you must agree to terms of the above "
+"licencse. Continue?"
+msgstr ""
+"لتثبيت هذه الحزمة، يجب الموافقة على بنود الترخيص السابقة. هل تريد المتابعة؟"
+
+#: src/zmart-misc.cc:853
+msgid "Aborting installation due to the need of license(s) confirmation."
+msgstr "إيقاف التثبيت نتيجة لضرورة تأكيد الترخيص (التراخيص)."
+
+#: src/zmart-misc.cc:855
+msgid ""
+"Please, restart the operation in interactive mode and confirm agreement with "
+"required license(s)."
+msgstr ""
+"الرجاء إعادة تشغيل العملية في الوضع التفاعلي وتأكيد الموافقة على الترخيص "
+"(التراخيص) المطلوب."
+
+#: src/zmart-misc.cc:862
+msgid "Aborting installation due to user disagreement with "
+msgstr "إيقاف التثبيت بسبب عدم موافقة المستخدم على"
+
+#: src/zmart-sources.cc:31
+msgid ""
+"Sorry, you need root privileges to use system sources, disabling them..."
+msgstr ""
+"عذرًا، يجب توفر امتيازات المسؤول لتتمكن من استخدام مصادر النظام، يتم الآن "
+"تعطيلها..."
+
+#: src/zmart-sources.cc:48
+msgid "Restoring system sources..."
+msgstr "استعادة مصادر النظام..."
+
+#: src/zmart-sources.cc:57
+msgid "Failed to restore sources"
+msgstr "فشلت استعادة المصادر"
+
+#: src/zmart-sources.cc:80
+msgid "Cannot access repository"
+msgstr "تعذر الوصول إلى المخزن"
+
+#: src/zmart-sources.cc:99
+msgid "Enabled"
+msgstr "مُمكّن"
+
+#: src/zmart-sources.cc:99
+msgid "Refresh"
+msgstr "تجديد"
+
+#: src/zmart-sources.cc:100
+msgid "Type"
+msgstr "ÇáäæÚ"
+
+#: src/zmart-sources.cc:116 src/zmart-sources.cc:118
+msgid "Active"
+msgstr "نشط"
+
+#: src/zmart-sources.cc:118
+msgid "Disabled"
+msgstr "معطل"
+
+#: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
+#: src/zmart-sources.cc:129
+msgid "Yes"
+msgstr "نعم"
+
+#: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
+msgid "No"
+msgstr "لا"
+
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
+msgid "Error reading system sources: "
+msgstr "تعذرت قراءة مصادر النظام:"
+
+#: src/zmart-sources.cc:190
+msgid "Unknown repository type "
+msgstr "نوع مخزن غير معروف"
+
+#: src/zmart-sources.cc:202
+msgid "Name not found"
+msgstr "لم يتم العثور على الاسم"
+
+#: src/zmart-sources.cc:205
+msgid "baseurl not found"
+msgstr "لم يتم العثور على baseurl"
+
+#: src/zmart-sources.cc:339
+msgid "Continuing anyway"
+msgstr "المتابعة على أي حال"
+
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "إزالة المصدر '%s'"
+
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "تمت إزالة المصدر '%s'."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "فشلت إزالة المصدر '%s':"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
+msgid "Source %s not found."
+msgstr "لم يتم العثور على المصدر %s."
+
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s' معطل أو لا يمكن الوصول إليه. هل ترغب في إزالته؟"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "إزالة المصدر"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
+msgid "URL is invalid: "
+msgstr "عنوان URL غير صالح:"
+
+#: src/zmart-sources.cc:541
+msgid "Sorry, not implemented yet for libzypp-1.x.x"
+msgstr "عذرًا، لم يتم التنفيذ حتى الآن لـ libzypp-1.x.x"
+
+#: src/zmart-sources.cc:562
+msgid "Refreshing "
+msgstr "تجديد"
+
+#: src/zmart-sources.cc:569
+msgid "DONE"
+msgstr "تم"
+
+#: src/zmart-sources.cc:573
+msgid "Error while refreshing the source: "
+msgstr "حدث خطأ أثناء تجديد المصدر:"
+
+#: src/zmart-sources.cc:578
+msgid "All system sources have been refreshed."
+msgstr "تم تجديد كافة مصادر النظام."
+
+#: src/zmart-sources.cc:599
+msgid "Error while fetching "
+msgstr "حدث خطأ أثناء الإحضار"
+
+#: src/zmart-sources.cc:615
+msgid "ZENworks Management Daemon is running."
+msgstr "برنامج محرك الإدارة ZENworks قيد التشغيل."
+
+#: src/zmart-sources.cc:616
+msgid "WARNING: this command will not synchronize changes."
+msgstr "تحذير: لن يقوم هذا الأمر بمزامنة التغييرات."
+
+#: src/zmart-sources.cc:617
+msgid "Use rug or yast2 for that."
+msgstr "استخدم rug أو yast2 مع هذا."
+
+#: src/zypp-checkpatches.cc:127
+msgid ""
+"The updater could not access the package manager engine. This usually "
+"happens when you have another application (like YaST) using it at the same "
+"time. Please close other applications and check again for updates."
+msgstr ""
+"تعذر على برنامج التحديث الوصول إلى محرك مدير الحزم. عادةً ما يحدث هذا عندما "
+"يتوفر لديك تطبيق آخر (مثل YaST) تستخدمه في نفس الوقت. الرجاء إغلاق التطبيقات "
+"الأخرى والتحقق من التحديثات مرة أخرى."
+
+#: src/zypp-checkpatches.cc:213
+#, c-format
+msgid ""
+"Could not restore source.\n"
+"Detail: %s"
+msgstr ""
+"تعذرت استعادة المصدر.\n"
+"التفاصيل: %s"
+
+#: src/zypp-checkpatches.cc:262
+msgid ""
+"There are no update sources defined. Please add one or more update sources "
+"in order to be notified of updates."
+msgstr ""
+"لا توجد أية مصادر تحديث محددة. الرجاء إضافة مصدر تحديث واحد أو أكثر للحصول "
+"على إعلام بالتحديثات."
+
+#: src/zypper-callbacks.cc:30
+msgid "(A)bort, (R)etry, (I)gnore?"
+msgstr "(ق)إيقاف أم (ع)إعادة محاولة أم (ت)تجاهل؟"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "الاستجابة '%s' غير صالحة، أدخل 'y' أو 'n':"
+
+#: src/zypper-getopt.cc:56
+msgid "Unknown option "
+msgstr "خيار غير معروف"
+
+#: src/zypper-getopt.cc:59
+msgid "Missing argument for "
+msgstr "الوسيطة مفقودة لـ"
+
+#: src/zypper-info.cc:48
+msgid " not found."
+msgstr "غير موجود."
+
+#: src/zypper-info.cc:52
+msgid "Information for "
+msgstr "معلومات حول"
+
+#: src/zypper-info.cc:84
+msgid "Catalog: "
+msgstr "الكتالوج:"
+
+#: src/zypper-info.cc:85
+msgid "Name: "
+msgstr "الاسم:"
+
+#: src/zypper-info.cc:86
+msgid "Version: "
+msgstr "الإصدار:"
+
+#: src/zypper-info.cc:87
+msgid "Arch: "
+msgstr "الهيكل:"
+
+#: src/zypper-info.cc:88
+msgid "Installed: "
+msgstr "مثبَّت:"
+
+#: src/zypper-info.cc:90
+msgid "Status: "
+msgstr "الحالة:"
+
+#: src/zypper-info.cc:93
+msgid "up-to-date"
+msgstr "حديث"
+
+#: src/zypper-info.cc:95
+msgid "out-of-date (version "
+msgstr "قديم (إصدار"
+
+#: src/zypper-info.cc:96
+msgid " installed) "
+msgstr "مثبت)"
+
+#: src/zypper-info.cc:99
+msgid "not installed"
+msgstr "غير مثبت"
+
+#: src/zypper-info.cc:101
+msgid "Installed Size: "
+msgstr "الحجم المُثَّبت:"
+
+#: src/zypper-info.cc:102
+msgid "Summary: "
+msgstr "الملخص:"
+
+#: src/zypper-info.cc:103
+msgid "Description: "
+msgstr "الوصف:"
+
+#: src/zypper-search.cc:45
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "لا توجد أية مصادر. يبحث Zypper حاليًا في مصادر التثبيت فقط."
+
+#: src/zypper-search.cc:107
+msgid "Pre-caching installed resolvables matching given search criteria... "
+msgstr ""
+"تتوافق التبعيات القابلة للتحليل المثبتة قبل التخزين المؤقت مع معايير البحث "
+"المحددة..."
+
+#: src/zypper-search.cc:116
+msgid " out of ("
+msgstr "خارج ("
+
+#: src/zypper-search.cc:117
+msgid "cached."
+msgstr "تم التخزين مؤقتًا."
+
+#: src/zypper-search.cc:216
+msgid " is not a valid regular expression: \""
+msgstr "لا يعد تعبيرًا منتظمًا صالحًا: \""
+
+#: src/zypper-search.cc:218
+msgid "This is a bug, please file a bug report against zypper."
+msgstr "يعد هذا خطأً، الرجاء كتابة تقرير خطأ بخصوص zipper."
+
+#: src/zypper.cc:76
+msgid "URL is invalid."
+msgstr "عنوان URL غير صالح."
+
+#: src/zypper.cc:84
+msgid ""
+"  Commands:\n"
+"\thelp\t\t\tHelp\n"
+"\tshell, sh\t\tAccept multiple commands at once\n"
+"\tinstall, in\t\tInstall packages or resolvables\n"
+"\tremove, rm\t\tRemove packages or resolvables\n"
+"\tsearch, se\t\tSearch for packages matching a pattern\n"
+"\tservice-list, sl\tList services, also called installation sources\n"
+"\tservice-add, sa\t\tAdd a new service\n"
+"\tservice-delete, sd\tDelete a service\n"
+"\tservice-rename, sr\tRename a service\n"
+"\trefresh, ref\t\tRefresh all installation sources\n"
+"\tpatch-check, pchk\tCheck for patches\n"
+"\tpatches, pch\t\tList patches\n"
+"\tlist-updates, lu\tList updates\n"
+"\tupdate, up\t\tUpdate packages\n"
+"\tinfo, if\t\tShow full information for packages\n"
+"\tpatch-info\t\tShow full information for patches\n"
+msgstr ""
+"  الأوامر:\n"
+"\thelp\t\t\tتعليمات\n"
+" \tshell, sh\t\tقبول أوامر متعددة في وقت واحد\n"
+" \tinstall, in\t\tتثبيت الحزم أو التبعيات القابلة للتحليل\n"
+" \tremove, rm\t\tإزالة الحزم أو التبعيات القابلة للتحليل\n"
+" \tsearch, se\t\tبحث عن حزم تطابق نمط\n"
+" \tservice-list, sl\tسرد الخدمات، وأيضًا تسمى مصادر التثبيت\n"
+" \tservice-add, sa\t\tإضافة خدمة جديدة\n"
+" \tservice-delete, sd\tحذف خدمة\n"
+" \tservice-rename, sr\tإعادة تسمية خدمة\n"
+" \trefresh, ref\t\tتجديد كافة مصادر التثبيت\n"
+" \tpatch-check, pchk\tبحث عن تصحيحات\n"
+" \tpatches, pch\t\tسرد التصحيحات\n"
+" \tlist-updates, lu\tسرد التحديثات\n"
+" \tupdate, up\t\tتحديث الحزم\n"
+" \tinfo, if\t\tإظهار كافة المعلومات الخاصة بالحزم\n"
+" \tpatch-info\t\tإظهار كافة المعلومات الخاصة بالتصحيحات\n"
+
+#: src/zypper.cc:127
+msgid ""
+"  Options:\n"
+"\t--help, -h\t\tHelp\n"
+"\t--version, -V\t\tOutput the version number\n"
+"\t--verbose, -v\t\tIncrease verbosity\n"
+"\t--terse, -t\t\tTerse output for machine consumption\n"
+"\t--table-style, -s\tTable style (integer)\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr ""
+"  الخيارات:\n"
+"\t--help، -h\t\tتعليمات\n"
+"\t--version، -V\t\tإظهار رقم الإصدار\n"
+"\t--verbose, -v\t\tزيادة الإسهاب\n"
+"\t--terse، -t\t\tملخص موجز لاستهلاك الجهاز\n"
+"\t--table-style، -s\tنمط الجدول (عدد صحيح)\n"
+"\t--rug-compatible، -r\tتشغيل توافق rug\n"
+"\t--non-interactive، -n\tعدم المطالبة بأي شيء، استخدام الإجابات الافتراضية "
+"تلقائيًا.\n"
+"\t--no-gpg-checks\t\tتجاهل حالات فشل فحص GPG والمتابعة.\n"
+"\t--root، -R <dir>\tتشغيل على دليل جذر مختلف\n"
+
+#: src/zypper.cc:140
+msgid "Verbosity "
+msgstr "الإسهاب"
+
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "الدخول في وضع غير تفاعلي."
+
+#: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "الدخول في وضع 'no-gpg-checks'."
+
+#: src/zypper.cc:162
+msgid "Invalid table style "
+msgstr "نمط جدول غير صالح"
+
+#: src/zypper.cc:205
+msgid "Try -h for help"
+msgstr "جرب ‎-h للتعليمات"
+
+#: src/zypper.cc:223
+msgid ""
+"  Source options:\n"
+"\t--disable-system-sources, -D\t\tDo not read the system sources\n"
+"\t--source, -S\t\tRead additional source\n"
+msgstr ""
+"  خيارات المصدر: \n"
+"\t--disable-system-sources, -D\t\tعدم قراءة مصادر النظام\n"
+" \t--source, -S\t\tقراءة مصدر إضافي\n"
+
+#: src/zypper.cc:228
+msgid ""
+"  Target options:\n"
+"\t--disable-system-resolvables, -T\t\tDo not read system installed "
+"resolvables\n"
+msgstr ""
+"  خيارات الهدف:\n"
+"\t--disable-system-resolvables, -T\t\tعدم قراءة التبعيات القابلة للتحليل "
+"المثبتة الخاصة بالنظام\n"
+
+#: src/zypper.cc:245
+msgid ""
+"  Command options:\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
+"\t--type,-t\t\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
+msgstr ""
+"  خيارات الأمر:\n"
+"\t--catalog,-c\t\t\tفقط من هذا الكتالوج (قيد التطوير)\n"
+"\t--type,-t\t\tنوع التبعية القابلة للتحليل (القيمة الافتراضية: حزمة)\n"
+"\t--no-confirm,-y\t\t\tعدم طلب تأكيد المستخدم لمتابعة التثبيت\n"
+"\t--auto-agree-with-licenses,-l\tالإجابة \"نعم\" تلقائيًا عند مطالبة تأكيد "
+"ترخيص جهة خارجية.\n"
+"\t\t\t\t\tراجع man zypper للحصول على مزيد من التفاصيل.\n"
+
+#: src/zypper.cc:265
+msgid ""
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: package)\n"
+"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
+msgstr ""
+"  خيارات الأمر:\n"
+"\t--type,-t\t\tنوع التبعية القابلة للتحليل (القيمة الافتراضية: حزمة)\n"
+"\t--no-confirm,-y\tعدم طلب تأكيد المستخدم\n"
+"\t--auto-agree-with-licenses,-l\tالإجابة \"نعم\" تلقائيًا عند مطالبة تأكيد "
+"ترخيص جهة خارجية.\n"
+"\t\t\t\t\tراجع man zypper للحصول على مزيد من التفاصيل.\n"
+
+#: src/zypper.cc:283
+msgid ""
+"service-add [options] URI [alias]\n"
+"\n"
+"Add a service (installation source) to the system.\n"
+"  Command options:\n"
+"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
+"\t\t\t\t(even remote)\n"
+"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
+"\t--disabled,-d\t\tAdd the service as disabled\n"
+"\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr ""
+"service-add [الخيارات]  URI[الاسم المستعار]\n"
+"\n"
+" إضافة خدمة (مصدر التثبيت) إلى النظام.\n"
+"   خيارات الأمر:\n"
+" \t--repo,-r <FILE.repo>\tقراءة عنوان URL والاسم المستعار من ملف\n"
+" \t\t\t\t(حتى البعيد)\n"
+" \t--type,-t <TYPE>\tنوع المخزن (YaST أو YUM أو Plaindir)\n"
+" \t--disabled,-d\t\tإضافة الخدمة كمعطلة\n"
+" \t--no-refresh,-n\t\tعدم تجديد بيانات التعريف تلقائيًا\n"
+
+#: src/zypper.cc:302
+msgid ""
+"service-list\n"
+"\n"
+"List all defined system services (installation sources).\n"
+"This command has no options.\n"
+msgstr ""
+"service-list\n"
+"\n"
+" سرد كافة خدمات النظام المعرَّفة (مصادر التثبيت).\n"
+" ليس لهذا الأمر خيارات.\n"
+
+#: src/zypper.cc:316
+msgid ""
+"service-delete [options] <URI|alias>\n"
+"\n"
+"Remove service (installation source) from the system.\n"
+"This command has no options.\n"
+msgstr ""
+"service-delete [خيارات] <URI|alias>\n"
+"\n"
+" إزالة الخدمة (مصدر التثبيت) من النظام.\n"
+" ليس لهذا الأمر خيارات.\n"
+
+#: src/zypper.cc:330
+msgid ""
+"service-rename [options] <URI|alias> <new-alias>\n"
+"\n"
+"Assign new alias to the service specified by URI or current alias.\n"
+"This command has no options.\n"
+msgstr ""
+"service-rename [خيارات] <URI|alias> <new-alias>\n"
+"\n"
+" تخصيص اسم مستعار جديد للخدمة يتم تحديده من خلال URI أو الاسم المستعار "
+"الحالي.\n"
+" ليس لهذا الأمر خيارات.\n"
+
+#: src/zypper.cc:344
+msgid ""
+"zypper refresh\n"
+"\n"
+"Refresh all installation sources found in the system.\n"
+msgstr ""
+"zypper refresh\n"
+"\n"
+" تجديد كافة مصادر التثبيت الموجودة في النظام.\n"
+
+#: src/zypper.cc:357
+msgid ""
+"list-updates [options]\n"
+"\n"
+"List all available updates\n"
+"\n"
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr ""
+"list-updates [خيارات]\n"
+"\n"
+" سرد كافة التحديثات المتاحة\n"
+" \n"
+"   خيارات الأمر:\n"
+" \t--type,-t\t\tنوع التبعية القابلة للتحليل (القيمة الافتراضية: تصحيح)\n"
+
+#: src/zypper.cc:378
+msgid ""
+"  Command options:\n"
+"\t--type,-t\t\tType of resolvable (default: patch)\n"
+"\t--no-confirm,-y\t\tDo not require user confirmation\n"
+"\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
+msgstr ""
+"  خيارات الأمر:\n"
+"\t--type,-t\t\tنوع التبعية القابلة للتحليل (القيمة الافتراضية: تصحيح)\n"
+"\t--no-confirm,-y\t\tعدم طلب تأكيد المستخدم\n"
+"\t--skip-interactive\t\tتخطي التحديثات التفاعلية\n"
+"\t--auto-agree-with-licenses,-l\tالإجابة \"نعم\" تلقائيًا عند مطالبة تأكيد "
+"ترخيص جهة خارجية.\n"
+"\t\t\t\t\tراجع man zypper للحصول على مزيد من التفاصيل.\n"
+
+#: src/zypper.cc:405
+msgid ""
+"zypper [global-options] search [options] [querystring...]\n"
+"\n"
+"'search' - Search for packages matching given search strings\n"
+"\n"
+"  Command options:\n"
+"    --match-all            Search for a match to all search strings "
+"(default)\n"
+"    --match-any            Search for a match to any of the search strings\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
+"    --match-exact          Searches for an exact package name\n"
+"-d, --search-descriptions  Search also in package summaries and "
+"descriptions.\n"
+"-c, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently "
+"installed.\n"
+"-t, --type                 Search only for packages of the specified type.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-catalog      Sort packages by catalog (source).\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+msgstr ""
+"zypper [خيارات عامة] البحث [خيارات] [سلسلة الاستعلام...]\n"
+"\n"
+"'search' - بحث عن الحزم التي تطابق سلاسل بحث محددة\n"
+"\n"
+"  خيارات الأمر:\n"
+"    --match-all            بحث عن مطابقة لكافة سلاسل البحث (افتراضي)\n"
+"    --match-any            بحث عن مطابقة لأيٍ من سلاسل البحث\n"
+"    --match-substrings     بحث عن مطابقة للكلمات الجزئية (افتراضي)\n"
+"    --match-words          بحث عن مطابقة للكلمات الكاملة فقط\n"
+"    --match-exact          بحث عن اسم حزمة مطابق مطابقة تامة\n"
+"-d, --search-descriptions  بحث أيضًا في ملخصات الحزم وأوصافها.\n"
+"-c, --case-sensitive       إجراء بحث مميز لحالة الأحرف.\n"
+"-i, --installed-only       إظهار الحزم المثبتة بالفعل فقط.\n"
+"-u, --uninstalled-only     إظهار الحزم غير المثبتة حاليًا فقط.\n"
+"-t, --type                 بحث عن حزم نوع محدد فقط.\n"
+"    --sort-by-name         فرز الحزم حسب الاسم (افتراضي).\n"
+"    --sort-by-catalog      فرز الحزم حسب الكتالوج (المصدر).\n"
+"\n"
+"يمكن أيضًا استخدام حرفي المثال * و? في سلاسل البحث.\n"
+
+#: src/zypper.cc:433
+msgid ""
+"patch-check\n"
+"\n"
+"Check for available patches\n"
+"\n"
+"This command has no options.\n"
+msgstr ""
+"patch-check\n"
+"\n"
+" بحث عن التصحيحات المتاحة\n"
+" \n"
+" ليس لهذا الأمر خيارات.\n"
+
+#: src/zypper.cc:447
+msgid ""
+"patches\n"
+"\n"
+"List all available patches\n"
+"\n"
+"This command has no options.\n"
+msgstr ""
+"patches\n"
+"\n"
+" سرد الحزم المتاحة\n"
+" \n"
+" ليس لهذا الأمر خيارات.\n"
+
+#: src/zypper.cc:461
+msgid ""
+"zypper [global-options] info [name...]\n"
+"\n"
+"'info' -- Show full information for packages\n"
+msgstr ""
+"zypper [خيارات عامة] info [الاسم...]\n"
+"\n"
+" 'info' – إظهار كافة المعلومات الخاصة بالحزم\n"
+
+#: src/zypper.cc:473
+msgid ""
+"zypper [global-options] patch-info [patchname...]\n"
+"\n"
+"'patch-info' -- Show detailed information for patches\n"
+msgstr ""
+"zypper [خيارات عامة] patch-info [اسم التصحيح...]\n"
+"\n"
+" 'patch-info' – إظهار معلومات تفصيلية للحزم\n"
+
+#: src/zypper.cc:485
+msgid ""
+"zypper [global-options] moo\n"
+"\n"
+"'moo' - Show an animal\n"
+msgstr ""
+"zypper [خيارات عامة] moo\n"
+"\n"
+" 'moo' - إظهار حيوان\n"
+
+#: src/zypper.cc:492
+msgid "Unknown command"
+msgstr "أمر غير معروف"
+
+#: src/zypper.cc:507
+msgid "Non-Option Program Arguments: "
+msgstr "وسيطات برنامج غير خيار:"
+
+#: src/zypper.cc:519
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "Ignoring --موجز (يتم توفيره فقط لتوافق rug)"
+
+#: src/zypper.cc:535
+msgid "Ignoring installed resolvables..."
+msgstr "تجاهل التبعيات القابلة للتحليل المثبَّتة..."
+
+#: src/zypper.cc:563
+msgid "A ZYpp transaction is already in progress."
+msgstr "هناك عملية ZYpp قيد التقدم بالفعل."
+
+#: src/zypper.cc:602
+msgid "Warning: Unknown metadata type "
+msgstr "تحذير: نوع بيانات تعريف غير معروف"
+
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
+msgid "Unknown resolvable type "
+msgstr "نوع تبعية قابلة للتحليل غير معروف"
+
+#: src/zypper.cc:756
+msgid ""
+"Warning: No sources. Operating only with the installed resolvables. Nothing "
+"can be installed."
+msgstr ""
+"تحذير: لا توجد مصادر. تشغيل بالتبعيات القابلة للتحليل المثبَّتة فقط. لا يمكن "
+"تثبيت أي شيء."
+
+#: src/zypper.cc:962
+msgid "Please file a bug report about this."
+msgstr "الرجاء تقديم تقرير خطأ حول هذا الأمر."
+
+#: src/zypper.cc:965
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr ""
+"انظر http://en.opensuse.org/Zypper#Troubleshooting للحصول على الإرشادات."
+
+#: src/zypper.cc:978
+msgid "Unexpected exception."
+msgstr "استثناء غير متوقع."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "امتيازات المسؤول مطلوبة لتشغيل zypper."
