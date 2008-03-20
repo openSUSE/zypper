@@ -356,11 +356,11 @@ INSTALL(  FILES
 SET( zypp_parser_susetags_SRCS
   parser/susetags/RepoIndex.cc
   parser/susetags/ContentFileReader.cc
-  parser/susetags/PackagesFileReader.cc
-  parser/susetags/PackagesLangFileReader.cc
-  parser/susetags/PackagesDuFileReader.cc
-  parser/susetags/PatternFileReader.cc
-  parser/susetags/RepoParser.cc
+  #parser/susetags/PackagesFileReader.cc
+  #parser/susetags/PackagesLangFileReader.cc
+  #parser/susetags/PackagesDuFileReader.cc
+  #parser/susetags/PatternFileReader.cc
+  #parser/susetags/RepoParser.cc
 )
 
 SET( zypp_parser_susetags_HEADERS
@@ -420,16 +420,16 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_yum_SRCS
-  parser/yum/RepoParser.cc
-  parser/yum/FileReaderBaseImpl.cc
+  #parser/yum/RepoParser.cc
+  #parser/yum/FileReaderBaseImpl.cc
   parser/yum/RepomdFileReader.cc
   parser/yum/PatchesFileReader.cc
-  parser/yum/PrimaryFileReader.cc
-  parser/yum/OtherFileReader.cc
-  parser/yum/FilelistsFileReader.cc
-  parser/yum/PatchFileReader.cc
-  parser/yum/PatternFileReader.cc
-  parser/yum/ProductFileReader.cc
+  #parser/yum/PrimaryFileReader.cc
+  #parser/yum/OtherFileReader.cc
+  #parser/yum/FilelistsFileReader.cc
+  #parser/yum/PatchFileReader.cc
+  #parser/yum/PatternFileReader.cc
+  #parser/yum/ProductFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
@@ -866,7 +866,6 @@ ADD_DEPENDENCIES(zypp schema_header)
 # System libraries
 TARGET_LINK_LIBRARIES(zypp util )
 TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp dbus-glib-1 )
 TARGET_LINK_LIBRARIES(zypp ${RPM_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${GETTEXT_LIBRARIES} )
 TARGET_LINK_LIBRARIES(zypp ${HAL_LIBRARY} )
