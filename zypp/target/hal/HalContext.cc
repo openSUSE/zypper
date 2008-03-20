@@ -137,7 +137,7 @@ namespace zypp
       class HalContext_Impl
       {
       public:
-        HalContext_Impl(bool monitorable = false);
+        HalContext_Impl();
         ~HalContext_Impl();
 
         DBusConnection *conn;
@@ -192,7 +192,7 @@ namespace zypp
 
 
       ////////////////////////////////////////////////////////////////
-      HalContext_Impl::HalContext_Impl(bool monitorable)
+      HalContext_Impl::HalContext_Impl()
         : conn(NULL)
         , hctx(NULL)
         , pcon(false) // we allways use shared connections at the moment
@@ -208,9 +208,6 @@ namespace zypp
             _("Unable to create dbus connection")
           ));
         }
-
-        if( monitorable)
-          dbus_connection_setup_with_g_main(conn, NULL);
 
         hctx = libhal_ctx_new();
         if( !hctx)
@@ -291,16 +288,6 @@ namespace zypp
         MutexLock lock(g_Mutex);
 
         zypp::RW_pointer<HalContext_Impl>(context.h_impl).swap(h_impl);
-      }
-
-      // -------------------------------------------------------------
-      HalContext::HalContext(bool autoconnect, bool monitorable)
-        : h_impl( NULL)
-      {
-        MutexLock lock(g_Mutex);
-
-        if( autoconnect)
-          h_impl.reset( new HalContext_Impl(monitorable));
       }
 
       // -------------------------------------------------------------

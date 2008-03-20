@@ -161,8 +161,6 @@ namespace zypp
                              const std::string &key);
 
       private:
-        //friend HalMonitor;
-        HalContext(bool,bool);
 
         zypp::RW_pointer<HalContext_Impl> h_impl;
       };
