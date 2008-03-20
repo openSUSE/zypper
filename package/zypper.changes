@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 20 15:36:57 CET 2008 - jreidinger@suse.cz
+
+- precise information why not update repository (bnc #307249)
+- r9235 
+
+-------------------------------------------------------------------
 Wed Mar 19 00:05:10 CET 2008 - jkupec@suse.cz
 
 - provide feedback when downloading metadata (bnc #300903)
