@@ -43,39 +43,47 @@ namespace sat
       static const SolvAttr description;
       static const SolvAttr insnotify;
       static const SolvAttr delnotify;
-      static const SolvAttr vendor;
-      static const SolvAttr license;
-      static const SolvAttr size;
+      static const SolvAttr eula;
+      static const SolvAttr installtime;
+      static const SolvAttr buildtime;
+      static const SolvAttr installsize;
       static const SolvAttr downloadsize;
+      static const SolvAttr diskusage;
 
       //package
       static const SolvAttr mediadir;
       static const SolvAttr medianr;
       static const SolvAttr mediafile;
-      static const SolvAttr eula;
       static const SolvAttr changelog;
       static const SolvAttr buildhost;
       static const SolvAttr distribution;
+      static const SolvAttr license;
       static const SolvAttr packager;
       static const SolvAttr group;
       static const SolvAttr keywords;
-      static const SolvAttr os;
-      static const SolvAttr prein;
-      static const SolvAttr postin;
-      static const SolvAttr preun;
-      static const SolvAttr postun;
       static const SolvAttr sourcesize;
       static const SolvAttr authors;
       static const SolvAttr filenames;
       static const SolvAttr srcpkgname;
       static const SolvAttr srcpkgedition;
+      static const SolvAttr filelist;
+      static const SolvAttr sourcearch;
+      static const SolvAttr sourcename;
+      static const SolvAttr sourceevr;
+      static const SolvAttr headerend;
+
+      // patch
+      static const SolvAttr patchcategory;
 
       // patern
       static const SolvAttr isvisible;
       static const SolvAttr icon;
+      static const SolvAttr order;
       static const SolvAttr isdefault;
       static const SolvAttr category;
       static const SolvAttr script;
+      static const SolvAttr includes;
+      static const SolvAttr extends;
 
       //@}
 

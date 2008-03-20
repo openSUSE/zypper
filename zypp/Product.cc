@@ -40,39 +40,42 @@ namespace zypp
   //	Package interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
-
+#warning DUMMY type
   std::string Product::type() const
   { return std::string(); }
 
-  Label Product::vendor() const
-  { return Label(); }
-
+#warning DUMMY releaseNotesUrl
   Url Product::releaseNotesUrl() const
   { return Url(); }
 
+#warning DUMMY updateUrls
   std::list<Url> Product::updateUrls() const
   { return std::list<Url>(); }
 
+#warning DUMMY extraUrls
   std::list<Url> Product::extraUrls() const
   { return std::list<Url>(); }
 
+#warning DUMMY optionalUrls
   std::list<Url> Product::optionalUrls() const
   { return std::list<Url>(); }
 
+#warning DUMMY flags
   std::list<std::string> Product::flags() const
   { return std::list<std::string>(); }
 
-  /** */
-  Label Product::shortName() const
-  { return Label(); }
+#warning DUMMY shortName
+  std::string Product::shortName() const
+  { return std::string(); }
 
-  /** */
-  Label Product::longName() const
-  { return summary(); }
+  std::string Product::longName( const Locale & lang_r ) const
+  { return summary( lang_r ); }
 
+#warning DUMMY distributionName
   std::string Product::distributionName() const
   { return std::string(); }
 
+#warning DUMMY distributionEdition
   Edition Product::distributionEdition() const
   { return Edition(); }
 

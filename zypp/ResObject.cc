@@ -59,23 +59,23 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  Text ResObject::summary() const
-  { return lookupStrAttribute( sat::SolvAttr::summary ); }
+  std::string ResObject::summary( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::summary, lang_r ); }
 
-  Text ResObject::description() const
-  { return lookupStrAttribute( sat::SolvAttr::description ); }
+  std::string ResObject::description( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::description, lang_r ); }
 
-  Text ResObject::insnotify() const
-  { return lookupStrAttribute( sat::SolvAttr::insnotify ); }
+  std::string ResObject::insnotify( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::insnotify, lang_r ); }
 
-  Text ResObject::delnotify() const
-  { return lookupStrAttribute( sat::SolvAttr::delnotify ); }
+  std::string ResObject::delnotify( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::delnotify, lang_r ); }
 
-  License ResObject::licenseToConfirm() const
-  { return lookupStrAttribute( sat::SolvAttr::eula ); }
+  std::string ResObject::licenseToConfirm( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::eula, lang_r ); }
 
-  ByteCount ResObject::size() const
-  { return ByteCount( lookupNumAttribute( sat::SolvAttr::size ), ByteCount::K ); }
+  ByteCount ResObject::installsize() const
+  { return ByteCount( lookupNumAttribute( sat::SolvAttr::installsize ), ByteCount::K ); }
 
   ByteCount ResObject::downloadSize() const
   { return ByteCount( lookupNumAttribute( sat::SolvAttr::downloadsize ), ByteCount::K ); }
@@ -87,13 +87,11 @@ namespace zypp
   bool ResObject::installOnly() const
   { return false; }
 
-#warning DUMMY
   Date ResObject::buildtime() const
-  { return Date(); }
+  { return Date( lookupNumAttribute( sat::SolvAttr::buildtime ) ); }
 
-#warning DUMMY installtime
   Date ResObject::installtime() const
-  { return Date(); }
+  { return Date( lookupNumAttribute( sat::SolvAttr::installtime ) ); }
 
 #warning DUMMY diskusage
   const DiskUsage & ResObject::diskusage() const

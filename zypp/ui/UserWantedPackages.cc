@@ -129,7 +129,8 @@ namespace zypp
 		    DBG << (*it)->theObj()->kind().asString()
 			<< " will be transacted: \"" << pkgSet->name() << "\"" << endl;
 
-		    set<string> setPkgs = pkgSet->install_packages();
+#warning NEEDS FIX
+		    set<string> setPkgs;// = pkgSet->install_packages();
 		    pkgNames.insert( setPkgs.begin(), setPkgs.end() );
 		}
 	    }

@@ -56,12 +56,15 @@ namespace zypp
                      private base::SafeBool<Solvable>
     {
       public:
+        typedef sat::detail::SolvableIdType IdType;
+
+      public:
         /** Default ctor creates \ref nosolvable.*/
         Solvable()
         : _id( detail::noSolvableId ) {}
 
         /** \ref PoolImpl ctor. */
-        explicit Solvable( detail::SolvableIdType id_r )
+        explicit Solvable( IdType id_r )
         : _id( id_r ) {}
 
       public:
@@ -84,6 +87,15 @@ namespace zypp
          * or an empty string if it does not exists.
          */
         std::string lookupStrAttribute( const SolvAttr & attr ) const;
+        /** \overload Trying to look up a translated string attribute.
+         *
+         * Passing an empty \ref Locale will return the string for the
+         * current default locale (\see \ref ZConfig::defaultTextLocale).
+         *
+         * Returns the translation for \c lang_r considering all fallback
+         * locales. Returns an empty string if no translation is available.
+        */
+        std::string lookupStrAttribute( const SolvAttr & attr, const Locale & lang_r ) const;
 
         /**
          * returns the numeric attribute value for \ref attr
@@ -172,12 +184,12 @@ namespace zypp
         /** Expert backdoor. */
         ::_Solvable * get() const;
         /** Expert backdoor. */
-        detail::SolvableIdType id() const { return _id; }
+        IdType id() const { return _id; }
       private:
         friend base::SafeBool<Solvable>::operator bool_type() const;
         bool boolTest() const { return get(); }
       private:
-        detail::SolvableIdType _id;
+        IdType _id;
     };
     ///////////////////////////////////////////////////////////////////
 

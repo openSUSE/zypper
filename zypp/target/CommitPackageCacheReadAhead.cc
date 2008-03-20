@@ -160,7 +160,7 @@ namespace zypp
           ManagedFile fromSource( sourceProvidePackage( it->first ) );
 
           // copy it to the cachedir
-          std::string destName( str::form( "S%lu_%u_%s",
+          std::string destName( str::form( "S%p_%u_%s",
                                            it->first->repository().id(),
                                            it->first->mediaNr(),
                                            fromSource.value().basename().c_str() ) );

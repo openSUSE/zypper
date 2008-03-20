@@ -29,20 +29,21 @@ namespace zypp
     //
     /** */
     class Repository : protected sat::detail::PoolMember,
-                 private base::SafeBool<Repository>
+                       private base::SafeBool<Repository>
     {
     public:
         typedef filter_iterator<detail::ByRepository, sat::detail::SolvableIterator> SolvableIterator;
         typedef sat::detail::size_type size_type;
+        typedef sat::detail::RepoIdType IdType;
 
     public:
         /** Default ctor creates \ref noRepository.*/
         Repository()
-	    : _id( sat::detail::noRepoId ) {}
+        : _id( sat::detail::noRepoId ) {}
 
         /** \ref PoolImpl ctor. */
-        explicit Repository( sat::detail::RepoIdType id_r )
-	    : _id( id_r ) {}
+        explicit Repository( IdType id_r )
+        : _id( id_r ) {}
 
     public:
         /** Represents no \ref Repository. */
@@ -106,9 +107,9 @@ namespace zypp
         void addSolv( const Pathname & file_r );
 
         /** Add \c count_r new empty \ref Solvable to this \ref Repository. */
-        sat::detail::SolvableIdType addSolvables( unsigned count_r );
+        sat::Solvable::IdType addSolvables( unsigned count_r );
         /** \overload Add only one new \ref Solvable. */
-        sat::detail::SolvableIdType addSolvable()
+        sat::Solvable::IdType addSolvable()
 	    { return addSolvables( 1 ); }
         //@}
 
@@ -116,12 +117,12 @@ namespace zypp
         /** Expert backdoor. */
         ::_Repo * get() const;
         /** Expert backdoor. */
-        sat::detail::RepoIdType id() const { return _id; }
+        IdType id() const { return _id; }
     private:
         friend base::SafeBool<Repository>::operator bool_type() const;
         bool boolTest() const { return get(); }
     private:
-        sat::detail::RepoIdType _id;
+        IdType _id;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -138,7 +139,7 @@ namespace zypp
 
     /** \relates Repository */
     inline bool operator<( const Repository & lhs, const Repository & rhs )
-    { return lhs.get() < rhs.get(); }      
+    { return lhs.get() < rhs.get(); }
 
     ///////////////////////////////////////////////////////////////////
     //

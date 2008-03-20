@@ -55,15 +55,15 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::distribution ); }
 
   /** */
-  Label Package::license() const
-  { return lookupStrAttribute( sat::SolvAttr::eula ); }
+  std::string Package::license() const
+  { return lookupStrAttribute( sat::SolvAttr::license ); }
 
   /** */
   std::string Package::packager() const
   { return lookupStrAttribute( sat::SolvAttr::packager ); }
 
   /** */
-  PackageGroup Package::group() const
+  std::string Package::group() const
   { return lookupStrAttribute( sat::SolvAttr::group ); }
 
 #warning DUMMY keywords
@@ -77,28 +77,8 @@ namespace zypp
   { return string(); }
 
   /** */
-  std::string Package::os() const
-  { return lookupStrAttribute( sat::SolvAttr::os ); }
-
-  /** */
-  Text Package::prein() const
-  { return lookupStrAttribute( sat::SolvAttr::prein); }
-
-  /** */
-  Text Package::postin() const
-  { return lookupStrAttribute( sat::SolvAttr::postin); }
-
-  /** */
-  Text Package::preun() const
-  { return lookupStrAttribute( sat::SolvAttr::preun); }
-
-  /** */
-  Text Package::postun() const
-  { return lookupStrAttribute( sat::SolvAttr::postun); }
-
-  /** */
   ByteCount Package::sourcesize() const
-  { return lookupNumAttribute( sat::SolvAttr::sourcesize); }
+  { return lookupNumAttribute( sat::SolvAttr::sourcesize ); }
 
   /** */
 #warning DUMMY authors

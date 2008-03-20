@@ -41,9 +41,6 @@ namespace zypp
     /** Get the product type (base, add-on) */
     std::string type() const;
 
-    /** Get the vendor of the product */
-    Label vendor() const;
-
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 
@@ -69,11 +66,11 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
-    /** */
-    Label shortName() const;
+    /** Untranslated short name like <tt>SLES 10</tt>*/
+    std::string shortName() const;
 
-    /** */
-    Label longName() const;
+    /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>*/
+    std::string longName( const Locale & lang_r = Locale() ) const;
 
     /** Vendor specific distribution id. */
     std::string distributionName() const;

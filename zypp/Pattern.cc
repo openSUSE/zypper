@@ -48,8 +48,8 @@ namespace zypp
   bool Pattern::userVisible() const
   { return lookupBoolAttribute( sat::SolvAttr::isvisible ); }
   /** */
-  std::string Pattern::category() const
-  { return lookupStrAttribute( sat::SolvAttr::category ); }
+  std::string Pattern::category( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::category, lang_r ); }
   /** */
   Pathname Pattern::icon() const
   { return lookupStrAttribute( sat::SolvAttr::icon ); }
@@ -57,13 +57,13 @@ namespace zypp
   Pathname Pattern::script() const
   { return lookupStrAttribute( sat::SolvAttr::script ); }
 
-  Label Pattern::order() const
-  { return Label(); }
+  std::string Pattern::order() const
+  { return lookupStrAttribute( sat::SolvAttr::order ); }
 
-  std::set<std::string> Pattern::install_packages( const Locale & lang ) const
-  {
 #warning implement PATTERN::INSTALL_PACKAGES
 #if 0
+  std::set<std::string> Pattern::install_packages( const Locale & lang ) const
+  {
 -    static void copycaps( std::set<std::string> & out, const CapSet & in)
 -    {
 -	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
@@ -87,9 +87,9 @@ namespace zypp
 -    }
 -
 -
-#endif
   return std::set<std::string>();
   }
+#endif
 
 #warning implement PATTERN::INSTALL_PACKAGES
  const Capabilities & Pattern::includes() const

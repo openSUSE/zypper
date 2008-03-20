@@ -77,8 +77,14 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( std::string() );
       const char *s = ::repo_lookup_str( _solvable, attr.idStr().id() );
-      return s ? s : std::string();
+      return  s ? s : std::string();
     }
+
+    std::string Solvable::lookupStrAttribute( const SolvAttr & attr, const Locale & lang_r ) const
+    {
+#warning FIX RETRIEVIENG TRANSLATIONS
+      return lookupStrAttribute( attr );
+   }
 
     unsigned Solvable::lookupNumAttribute( const SolvAttr & attr ) const
     {

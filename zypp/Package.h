@@ -48,27 +48,17 @@ namespace zypp
     /** */
     std::string distribution() const;
     /** */
-    Label license() const;
+    std::string license() const;
     /** */
     std::string packager() const;
     /** */
-    PackageGroup group() const;
+    std::string group() const;
     /** */
     Keywords keywords() const;
     /** Don't ship it as class Url, because it might be
      * in fact anything but a legal Url. */
     std::string url() const;
-    /** */
-    std::string os() const;
-    /** */
-    Text prein() const;
-    /** */
-    Text postin() const;
-    /** */
-    Text preun() const;
-    /** */
-    Text postun() const;
-    /** */
+    /** Size of corresponding the source package. */
     ByteCount sourcesize() const;
     /** */
     std::list<std::string> authors() const;
@@ -86,16 +76,29 @@ namespace zypp
     Edition sourcePkgEdition() const;
 
     /**
-     * Checksum the source says this package should have
-     * \deprecated Use location().checksum()
+     * Checksum the source says this package should have.
+     * \see \ref location
      */
-    ZYPP_DEPRECATED CheckSum checksum() const
+    CheckSum checksum() const
     { return location().checksum(); }
 
-    /**
-     * \short Location of the resolvable in the repository
+    /** Location of the resolvable in the repository.
+     * \ref OnMediaLocation conatins all information required to
+     * retrieve the packge (url, checksum, etc.).
      */
     OnMediaLocation location() const;
+
+
+    /** \deprecated no metadata always empty */
+    ZYPP_DEPRECATED std::string os() const { return std::string(); }
+    /** \deprecated no metadata always empty */
+    ZYPP_DEPRECATED std::string prein() const { return std::string(); }
+    /** \deprecated no metadata always empty */
+    ZYPP_DEPRECATED std::string postin() const { return std::string(); }
+    /** \deprecated no metadata always empty */
+    ZYPP_DEPRECATED std::string preun() const { return std::string(); }
+    /** \deprecated no metadata always empty */
+    ZYPP_DEPRECATED std::string postun() const { return std::string(); }
 
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );

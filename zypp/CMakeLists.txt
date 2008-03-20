@@ -121,7 +121,7 @@ SET( zypp_HEADERS
   MediaSetAccess.h
   Message.h
   NameKindProxy.h
-  NeedAType.h
+  Vendor.h
   NVRAD.h
   NVRA.h
   NVR.h

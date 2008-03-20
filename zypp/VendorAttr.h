@@ -16,8 +16,8 @@
 #include <string>
 
 #include "zypp/base/NonCopyable.h"
-#include "zypp/NeedAType.h"
 #include "zypp/PathInfo.h"
+#include "zypp/Vendor.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
@@ -37,7 +37,7 @@ class VendorAttr : private base::NonCopyable
     /**
      * Adding new equivalent vendors described in a file
      **/
-    bool addVendorFile( const Pathname & filename) const;    
+    bool addVendorFile( const Pathname & filename) const;
 
     /** Return whether two vendor strings shold be treated as the same vendor.
      * Usually the solver is allowed to automatically select a package of an

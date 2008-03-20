@@ -9,10 +9,14 @@
 /** \file	zypp/SolvAttr.cc
  *
 */
+extern "C"
+{
+#include <satsolver/knownid.h>
+}
+
 #include <iostream>
 
 #include "zypp/base/String.h"
-
 #include "zypp/sat/SolvAttr.h"
 
 using std::endl;
@@ -25,44 +29,54 @@ namespace sat
 
   const SolvAttr SolvAttr::noAttr;
 
-#warning use predefined Ids from libsatsolver.
-  const SolvAttr SolvAttr::summary      ( "solvable:summary" );
-  const SolvAttr SolvAttr::description  ( "solvable:description" );
-  const SolvAttr SolvAttr::insnotify    ( "solvable:messageins" );
-  const SolvAttr SolvAttr::delnotify    ( "solvable:messagedel" );
-  const SolvAttr SolvAttr::vendor       ( "solvable:vendor" );
-  const SolvAttr SolvAttr::license      ( "solvable:license" );
-  const SolvAttr SolvAttr::size         ( "solvable:installsize" );
-  const SolvAttr SolvAttr::downloadsize ( "solvable:downloadsize" );
+#warning STILL ATTRIBUTES HERE WHICH ARE NOT PROVIDED BY SOLV FILES
+// At least the ones that do nat have a satsolver/knownid.
+
+  const SolvAttr SolvAttr::summary      ( SOLVABLE_SUMMARY );       // translated
+  const SolvAttr SolvAttr::description  ( SOLVABLE_DESCRIPTION );   // translated
+  const SolvAttr SolvAttr::insnotify    ( SOLVABLE_MESSAGEINS );    // translated
+  const SolvAttr SolvAttr::delnotify    ( SOLVABLE_MESSAGEDEL );    // translated
+  const SolvAttr SolvAttr::eula		( SOLVABLE_EULA );          // translated
+  const SolvAttr SolvAttr::installtime  ( SOLVABLE_INSTALLTIME );
+  const SolvAttr SolvAttr::buildtime    ( SOLVABLE_BUILDTIME );
+  const SolvAttr SolvAttr::installsize  ( SOLVABLE_INSTALLSIZE );
+  const SolvAttr SolvAttr::downloadsize ( SOLVABLE_DOWNLOADSIZE );
+  const SolvAttr SolvAttr::diskusage    ( SOLVABLE_DISKUSAGE );
 
   //package
-  const SolvAttr SolvAttr::medianr	( "solvable:medianr" );
-  const SolvAttr SolvAttr::mediafile	( "solvable:mediafile" );
-  const SolvAttr SolvAttr::mediadir	( "solvable:mediadir" );
-  const SolvAttr SolvAttr::eula		( "solvable:eula" );
+  const SolvAttr SolvAttr::medianr	( SOLVABLE_MEDIANR );
+  const SolvAttr SolvAttr::mediafile	( SOLVABLE_MEDIAFILE );
+  const SolvAttr SolvAttr::mediadir	( SOLVABLE_MEDIADIR );
   const SolvAttr SolvAttr::changelog    ( "changelog" );
   const SolvAttr SolvAttr::buildhost    ( "buildhost" );
   const SolvAttr SolvAttr::distribution ( "distribution" );
+  const SolvAttr SolvAttr::license      ( SOLVABLE_LICENSE );
   const SolvAttr SolvAttr::packager     ( "packager" );
-  const SolvAttr SolvAttr::group        ( "solvable:group" );
-  const SolvAttr SolvAttr::keywords     ( "solvable:keywords" );
-  const SolvAttr SolvAttr::os           ( "os" );
-  const SolvAttr SolvAttr::prein        ( "prein" );
-  const SolvAttr SolvAttr::postin       ( "postin" );
-  const SolvAttr SolvAttr::preun        ( "preun" );
-  const SolvAttr SolvAttr::postun       ( "postun" );
+  const SolvAttr SolvAttr::group        ( SOLVABLE_GROUP );
+  const SolvAttr SolvAttr::keywords     ( SOLVABLE_KEYWORDS );
   const SolvAttr SolvAttr::sourcesize   ( "sourcesize" );
-  const SolvAttr SolvAttr::authors      ( "solvable:authors" );
+  const SolvAttr SolvAttr::authors      ( SOLVABLE_AUTHORS );
   const SolvAttr SolvAttr::filenames    ( "filenames" );
   const SolvAttr SolvAttr::srcpkgname   ( "srcpkgname" );
   const SolvAttr SolvAttr::srcpkgedition( "srcpkgedition" );
+  const SolvAttr SolvAttr::filelist     ( SOLVABLE_FILELIST );
+  const SolvAttr SolvAttr::sourcearch   ( SOLVABLE_SOURCEARCH );
+  const SolvAttr SolvAttr::sourcename   ( SOLVABLE_SOURCENAME );
+  const SolvAttr SolvAttr::sourceevr    ( SOLVABLE_SOURCEEVR );
+  const SolvAttr SolvAttr::headerend    ( SOLVABLE_HEADEREND );
+
+  // patch
+  const SolvAttr SolvAttr::patchcategory( SOLVABLE_PATCHCATEGORY );
 
   //pattern
-  const SolvAttr SolvAttr::isvisible    ( "solvable:isvisible" );
-  const SolvAttr SolvAttr::icon         ( "icon" );
+  const SolvAttr SolvAttr::isvisible    ( SOLVABLE_ISVISIBLE );
+  const SolvAttr SolvAttr::icon         ( SOLVABLE_ICON );
+  const SolvAttr SolvAttr::order        ( SOLVABLE_ORDER );
   const SolvAttr SolvAttr::isdefault    ( "isdefault" );
-  const SolvAttr SolvAttr::category     ( "solvable:category" ); // FIXME translate
+  const SolvAttr SolvAttr::category     ( SOLVABLE_CATEGORY );    // translated
   const SolvAttr SolvAttr::script       ( "script" );
+  const SolvAttr SolvAttr::includes     ( SOLVABLE_INCLUDES );
+  const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////

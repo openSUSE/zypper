@@ -40,7 +40,9 @@ namespace zypp
 
         void operator()( const Pattern::constPtr & pattern )
         {
-          std::set<std::string> s( pattern->install_packages() );
+#warning NEEDS FIX
+//          std::set<std::string> s( pattern->install_packages() );
+          std::set<std::string> s;
           _result->insert( s.begin(), s.end() );
         }
 

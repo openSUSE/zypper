@@ -15,13 +15,15 @@
 #include "zypp/base/Deprecated.h"
 
 #include "zypp/Resolvable.h"
-#include "zypp/NeedAType.h"
 #include "zypp/Date.h"
+#include "zypp/Locale.h"
+#include "zypp/Vendor.h"
 #include "zypp/ByteCount.h"
 #include "zypp/DiskUsage.h"
-#include "zypp/TranslatedText.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
+
+#include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -67,12 +69,12 @@ namespace zypp
      * \short Short text describing the resolvable.
      * This attribute is usually displayed in columns.
      */
-    Text summary() const;
+    std::string summary( const Locale & lang_r = Locale() ) const;
 
     /**
      * \short Long text describing the resolvable.
      */
-    Text description() const;
+    std::string description( const Locale & lang_r = Locale() ) const;
 
     /**
      * \short Installation Notification
@@ -80,7 +82,7 @@ namespace zypp
      * This text can be used to tell the user some notes
      * When he selects the resovable for installation.
      */
-    Text insnotify() const;
+    std::string insnotify( const Locale & lang_r = Locale() ) const;
 
     /**
      * \short De-Installation Notification
@@ -88,7 +90,7 @@ namespace zypp
      * This text can be used to tell the user some notes
      * When he selects the resovable for deinstall.
      */
-    Text delnotify() const;
+    std::string delnotify( const Locale & lang_r = Locale() ) const;
 
     /**
      * \short License or agreement to accept
@@ -96,7 +98,7 @@ namespace zypp
      * Agreement, warning or license the user should
      * accept before installing the resolvable.
      */
-    Text licenseToConfirm() const;
+    std::string licenseToConfirm( const Locale & lang_r = Locale() ) const;
 
     /**
      * \short Vendor
@@ -107,7 +109,10 @@ namespace zypp
     { return Resolvable::vendor().asString(); }
 
     /** Installed size. */
-    ByteCount size() const;
+    ByteCount installsize() const;
+    /** \deprecated Use installsize which is more precise. */
+    ZYPP_DEPRECATED ByteCount size() const
+    { return installsize(); }
 
     /** Size of the rpm package. */
     ByteCount downloadSize() const;

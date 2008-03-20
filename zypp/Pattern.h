@@ -41,16 +41,13 @@ namespace zypp
     /** */
     bool userVisible() const;
     /** */
-    std::string category() const;
+    std::string category( const Locale & lang_r = Locale() ) const;
     /** */
     Pathname icon() const;
     /** */
     Pathname script() const;
     /** */
-    Label order() const;
-
-    /** \deprecated AFAIK unused old Selection interface method. */
-    std::set<std::string> install_packages( const Locale & lang = Locale("") ) const ZYPP_DEPRECATED;
+    std::string order() const;
 
     /** Ui hint. */
     const Capabilities & includes() const;
