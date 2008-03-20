@@ -106,6 +106,15 @@ namespace zypp
     RepoStatus metadataStatus( const RepoInfo &info ) const;
 
     /**
+     * Possibly return state of checkIfRefreshMEtadata function
+     */
+    enum RefreshCheckStatus {
+      REFRESH_NEEDED,  /**< refresh is needed */
+      REPO_UP_TO_DATE, /**< repository not changed */
+      REPO_DELAYED     /**< refresh is delayed due to settings */
+    };
+
+    /**
      * Checks whether to refresh metadata for specified repository and url.
      * <p>
      * The need for refresh is evaluated according to the following conditions,
@@ -133,7 +142,7 @@ namespace zypp
      *   {
      *     // check whether to refresh metadata
      *     // if the check fails for this url, it throws, so another url will be checked
-     *     if (!checkIfToRefreshMetadata(info, *it, policy))
+     *     if (checkIfToRefreshMetadata(info, *it, policy)!=RepoInfo::REFRESH_NEEDED)
      *       return;
      *
      *     // do the actual refresh
@@ -152,12 +161,14 @@ namespace zypp
      * \param info
      * \param url
      * \param policy
+     * \return state of repository 
+     * \see RefreshCheckStatus
      * \throws RepoUnknownTypeException
      * \throws repo::RepoNoAliasException if can't figure an alias
      * \throws Exception on unknown error
      *
      */
-    bool checkIfToRefreshMetadata( const RepoInfo &info,
+    RefreshCheckStatus checkIfToRefreshMetadata( const RepoInfo &info,
                                    const Url &url,
                                    RawMetadataRefreshPolicy policy = RefreshIfNeeded);
 

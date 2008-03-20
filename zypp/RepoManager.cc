@@ -386,7 +386,8 @@ namespace zypp
     filesystem::touch(p);
   }
 
-  bool RepoManager::checkIfToRefreshMetadata( const RepoInfo &info,
+  RepoManager::RefreshCheckStatus RepoManager::checkIfToRefreshMetadata(
+                                              const RepoInfo &info,
                                               const Url &url,
                                               RawMetadataRefreshPolicy policy )
   {
@@ -434,7 +435,7 @@ namespace zypp
               << "' has been refreshed less than repo.refresh.delay ("
               << ZConfig::instance().repo_refresh_delay()
               << ") minutes ago. Advising to skip refresh" << endl;
-          return false;
+          return REPO_DELAYED;
         }
       }
 
@@ -472,7 +473,7 @@ namespace zypp
         if (!refresh)
           touchIndexFile(info);
 
-        return refresh;
+        return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
       }
 #if 0
       else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
@@ -512,7 +513,7 @@ namespace zypp
       ZYPP_RETHROW(e);
     }
 
-    return true; // default
+    return REFRESH_NEEDED; // default
   }
 
   void RepoManager::refreshMetadata( const RepoInfo &info,
@@ -534,7 +535,7 @@ namespace zypp
 
         // check whether to refresh metadata
         // if the check fails for this url, it throws, so another url will be checked
-        if (!checkIfToRefreshMetadata(info, url, policy))
+        if (checkIfToRefreshMetadata(info, url, policy)!=REFRESH_NEEDED)
           return;
 
         MIL << "Going to refresh metadata from " << url << endl;
