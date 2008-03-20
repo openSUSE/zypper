@@ -111,7 +111,7 @@ namespace zypp
     enum RefreshCheckStatus {
       REFRESH_NEEDED,  /**< refresh is needed */
       REPO_UP_TO_DATE, /**< repository not changed */
-      REPO_DELAYED     /**< refresh is delayed due to settings */
+      REPO_CHECK_DELAYED     /**< refresh is delayed due to settings */
     };
 
     /**
