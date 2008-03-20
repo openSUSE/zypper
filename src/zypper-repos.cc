@@ -72,11 +72,25 @@ static bool refresh_raw_metadata(Zypper & zypper,
       {
         try
         {
-          do_refresh = manager.checkIfToRefreshMetadata(repo, *it);
+          RepoManager::RefreshCheckStatus stat = manager.
+              checkIfToRefreshMetadata(repo, *it);
+          do_refresh = (stat == RepoManager::REFRESH_NEEDED);
           if (!do_refresh && zypper.command() == ZypperCommand::REFRESH)
           {
-            zypper.out().info(boost::str(
-              format(_("Repository '%s' is up to date.")) % repo.name()));
+            switch (stat)
+            {
+            case RepoManager::REPO_UP_TO_DATE:
+              zypper.out().info(boost::str(
+                format(_("Repository '%s' is up to date.")) % repo.name()));
+            break;
+            case RepoManager::REPO_CHECK_DELAYED:
+              zypper.out().info(boost::str(
+                format(_("Repository '%s': the status check has been delayed."))
+                    % repo.name()));
+            break;
+            default:
+              WAR << "new item in enum, which is not cover" << endl;
+            }
           }
           break; // don't check all the urls, just the first succussfull.
         }
