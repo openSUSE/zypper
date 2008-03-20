@@ -435,7 +435,7 @@ namespace zypp
               << "' has been refreshed less than repo.refresh.delay ("
               << ZConfig::instance().repo_refresh_delay()
               << ") minutes ago. Advising to skip refresh" << endl;
-          return REPO_DELAYED;
+          return REPO_CHECK_DELAYED;
         }
       }
 
