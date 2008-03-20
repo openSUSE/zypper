@@ -20,8 +20,6 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 
-#include <dbus/dbus-glib-lowlevel.h>
-#include <dbus/dbus-glib.h>
 #include <hal/libhal.h>
 #include <hal/libhal-storage.h>
 
