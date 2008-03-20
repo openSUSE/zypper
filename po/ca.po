@@ -1,336 +1,314 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2007-03-12 12:40+0100\n"
-"Last-Translator: espe <ehumet@idisc.es>\n"
-"Language-Team: Catalan\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-14 10:23\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr " està sense signar, voleu continuar?"
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "Voleu importar la clau"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Avís: S'està acceptant el fitxer %s sense signar."
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr " a l'anell de claus fiable?"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s està sense signar, voleu continuar?"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "està signat amb un identificador de clau desconeguda:"
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "Voleu importar la clau %s a l'anell de claus de confiança?"
 
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "voleu continuar?"
-
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "Voleu confiar en l'identificador de la clau fiable"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr " empremta:"
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "Avís: S'està acceptant el fitxer %s signat amb una clau desconeguda %s."
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "Verificació de la signatura per a "
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s està signat amb una clau desconeguda %s. Voleu continuar?"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr " amb l'identificador de la clau fiable"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "S'està confiant automàticament en l'identificador de clau %s, %s, empremta %s"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "ha fallat. AIXÒ ÉS PERILLÓS."
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Voleu confiar en l'identificador de clau %s, %s, empremta %s"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "No hi ha resum per a"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
+msgstr "Avís: s'està ignorant l'error de la verificació de la signatura de %s amb l'identificador de clau pública %s, %s, empremta %s. Assegureu-vos que no s'hagin fet canvis maliciosos en el fitxer."
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "El resum és desconegut"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "Ha fallat la verificació de la signatura de %s amb l'identificador de clau pública %s, %s, empremta %s. Avís: És possible que la causa sigui algun canvi malintencionat en el fitxer. Continuar és arriscat; voleu continuar igualment?"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr " per a"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "No hi ha cap resum per al fitxer %s."
 
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "No s'ha pogut verificar el resum per a"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "voleu continuar?"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr ", s'esperava"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Resum %s desconegut per al fitxer %s."
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr " trobat"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "S'està ignorant la verificació del resum per a %s (s'esperava %s, s'ha obtingut %s)."
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "Ha fallat la verificació del resum per a %s. S'esperava %s, s'ha obtingut %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "S'està inicialitzant el dispositiu"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr " (mode antic)"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "no s'ha trobat"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "s'està ometent"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "(ja està instal·lat)"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr ""
-"No s'ha pogut afegir '%s' a la llista de paquets que s'han d'instal·lar."
+msgstr "No s'ha pogut afegir '%s' a la llista de paquets que s'han d'instal·lar."
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "Error"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
-msgstr "No s'ha trobat"
+msgstr "no s'ha trobat"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
-msgstr "Problemes:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "Problema: "
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "PROB "
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " Solució %s: "
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr " SOL  "
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "nombre, (t)orna-hi o (c)ancel·la> "
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "t"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "c"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "S'està aplicant la solució %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s Problemes:"
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "Resum:"
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<instal·la>   "
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<desinstal·la> "
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "Res a fer."
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "S'està analitzant la base de dades RPM..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr " ítems amb dependències."
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "S'estan analitzant les metadades per a"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "S'està establint l'estat dels agregats"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "S'estan resolent les dependències..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr " pedaços necessaris"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr " pedaços de seguretat"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "Instal·lat"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "Desinstal·lat"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "Ja no és aplicable"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "No és aplicable"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "S'ha aplicat"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "No és necessari"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "S'ha interromput"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "És necessari"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "error"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "Catàleg"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "Nom"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "Versió"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "Categoria"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "Estat"
 
-#: src/zmart-misc.cc:511
-msgid ""
-"WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
-msgstr ""
-"AVÍS: només es tracta de les actualitzacions que afecten a l'actualitzador.\n"
-"També n'hi ha d'altres disponibles.\n"
+#: src/zmart-misc.cc:560
+msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
+msgstr "AVÍS: aquestes només són les actualitzacions que afecten el mateix actualitzador.\nHi ha altres actualitzacions disponibles.\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "Arquit."
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "AVÍS: %s és interactiu, s'ha omès."
 
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "Voleu continuar?"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "s'està confirmant"
 
-#: src/zmart-misc.cc:728
-msgid ""
-"Package integrity check failed. This may be a problem with installation "
-"source or media. Try one of the following:\n"
-"\n"
-"- just retry previous command\n"
-"- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
-"- use another installation source"
-msgstr ""
-"No s'ha pogut comprovar la integritat del paquet. És possible que sigui un "
-"problema del suport o la font d'instal·lació. Proveu una de les següents "
-"accions:\n"
-"\n"
-"- torneu a intentar l'ordre anterior\n"
-"- refresqueu les fonts d'instal·lació mitjançant  'zypper refresh'\n"
-"- utilitzeu un altre suport d'instal·lació (si, per exemple, està malmès)\n"
-"- utilitzeu un altra font d'instal·lació"
+#: src/zmart-misc.cc:782
+msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
+msgstr "Ha fallat la comprovació de la integritat del paquet. Pot ser que hi hagi un problema amb l'origen o el suport d'instal·lació. Proveu una de les opcions següents: \n\n- Torneu a provar l'ordre anterior.\n- Actualitzeu els orígens d'instal·lació mitjançant 'zypper refresh'.\n- Utilitzeu un altre suport d'instal·lació (per exemple, si el vostre està malmès).\n- Utilitzeu un altre origen d'instal·lació."
 
-#: src/zmart-misc.cc:746
-msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
-msgstr ""
-"AVÍS: un dels pedaços instal·lats requereix que l'ordinador arrenqui de nou. "
-"Feu-ho al més aviat possible."
+#: src/zmart-misc.cc:800
+msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "AVÍS: un dels pedaços que s'han instal·lat requereix que es reiniciï l'ordinador. Reinicieu-lo al més aviat possible."
 
-#: src/zmart-misc.cc:749
-msgid ""
-"WARNING: One of installed patches affects the package manager itself, thus "
-"it requires restart before executing next operations."
-msgstr ""
-"AVÍS: un dels pedaços instal·lats afecta al gestor de paquets, per tant, és "
-"necessari reiniciar abans d'executar les operacions següents."
+#: src/zmart-misc.cc:803
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+msgstr "AVÍS: un dels pedaços instal·lats afecta al gestor de paquets, per tant, és necessari reiniciar abans d'executar les operacions següents."
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "S'està acceptant automàticament la llicència %s %s."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "llicència"
 
-#: src/zmart-misc.cc:775
-msgid ""
-"In order to install this package, you must agree to terms of the above "
-"licencse. Continue?"
-msgstr ""
-"Per a poder instal·lar aquest paquet, heu d'acceptar els termes de la "
-"llicència que apareix més amunt. Voleu continuar?"
+#: src/zmart-misc.cc:843
+msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgstr "Per a poder instal·lar aquest paquet, heu d'acceptar els termes de la llicència que apareix més amunt. Voleu continuar?"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr ""
-"S'està interrompent la instal·lació a causa de la necessitat de confirmació "
-"de les llicències."
+msgstr "S'està interrompent la instal·lació a causa de la necessitat de confirmació de les llicències."
 
-#: src/zmart-misc.cc:788
-msgid ""
-"Please, restart the operation in interactive mode and confirm agreement with "
-"required license(s)."
-msgstr ""
-"Reinicieu l'operació en el mode interactiu i confirmeu l'acceptació de les "
-"llicències necessàries."
+#: src/zmart-misc.cc:855
+msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
+msgstr "Reinicieu l'operació en el mode interactiu i confirmeu l'acceptació de les llicències necessàries."
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
-msgstr ""
-"S'està interrompent la instal·lació a causa del desacord de l'usuari amb"
+msgstr "S'està interrompent la instal·lació a causa del desacord de l'usuari amb"
 
 #: src/zmart-sources.cc:31
-msgid ""
-"Sorry, you need root privileges to use system sources, disabling them..."
-msgstr ""
-"Necessiteu els permisos de l'usuari primari per utilitzar les fonts del "
-"sistema, inhabilitar-les..."
+msgid "Sorry, you need root privileges to use system sources, disabling them..."
+msgstr "Necessiteu els permisos de l'usuari primari per utilitzar les fonts del sistema, inhabilitar-les..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
@@ -341,8 +319,8 @@ msgid "Failed to restore sources"
 msgstr "No s'han pogut restaurar les fonts"
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
-msgstr "No es pot accedir al dipòsit"
+msgid "Cannot access repository"
+msgstr "No es pot accedit al dipòsit"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -373,7 +351,7 @@ msgstr "Sí"
 msgid "No"
 msgstr "No"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "S'ha produït un error en llegir les fonts del sistema:"
 
@@ -389,91 +367,102 @@ msgstr "No s'ha trobat el nom"
 msgid "baseurl not found"
 msgstr "No s'ha trobat l'url de base"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "S'està continuant igualment"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "s'està suprimint la font"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "S'està suprimint la font '%s'"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "S'ha suprimit la font '%s'."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "No s'ha pogut suprimir la font '%s':"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
 #, c-format
 msgid "Source %s not found."
 msgstr "No s'ha trobat la font %s."
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s' està malmès o no s'hi pot accedir. Voleu suprimir-lo?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "s'està suprimint la font"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "L'URL no és vàlid:"
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "Encara no s'ha implementat per al libzypp-1.x.x"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "S'està refrescant"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "FET"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "S'ha produït un error en refrescar la font:"
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "S'han refrescat totes les fonts del sistema."
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "S'ha produït un error en recollir"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "S'està executant el dimoni de gestió del ZENworks (ZMD)."
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "AVÍS: aquesta ordre no sincronitza els canvis."
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "Utilitzeu el rug o el yast2 per a això."
 
 #: src/zypp-checkpatches.cc:127
-msgid ""
-"The updater could not access the package manager engine. This usually "
-"happens when you have another application (like YaST) using it at the same "
-"time. Please close other applications and check again for updates."
-msgstr ""
-"L'actualitzador no ha pogut accedir al motor del gestor de paquets. Això "
-"passa quan teniu una altra aplicació (com el YaST) que l'utilitza al mateix "
-"temps. Tanqueu les altres aplicacions i torneu a comprovar si hi ha "
-"actualitzacions."
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgstr "L'actualitzador no ha pogut accedir al motor del gestor de paquets. Això passa quan teniu una altra aplicació (com el YaST) que l'utilitza al mateix temps. Tanqueu les altres aplicacions i torneu a comprovar si hi ha actualitzacions."
 
 #: src/zypp-checkpatches.cc:213
 #, c-format
-msgid ""
-"Couldn't restore source.\n"
-"Detail: %s"
-msgstr ""
-"No s'ha pogut restaurar la font.\n"
-"Detall: %s"
+msgid "Could not restore source.\nDetail: %s"
+msgstr "No s'ha pogut restaurar l'origen.\nDetall: %s"
 
 #: src/zypp-checkpatches.cc:262
-msgid ""
-"There are no update sources defined. Please add one or more update sources "
-"in order to be notified of updates."
-msgstr ""
-"No hi ha cap font d'actualització definida. Afegiu-ne una o més perquè se us "
-"notifiqui quan hi hagi actualitzacions."
+msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
+msgstr "No hi ha cap font d'actualització definida. Afegiu-ne una o més perquè se us notifiqui quan hi hagi actualitzacions."
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "Voleu (I)nterrompre, (R)eintentar, (I)gnorar?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "Resposta '%s' no vàlida, introduïu 'y' o 'n':"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -544,15 +533,12 @@ msgid "Description: "
 msgstr "Descripció: "
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr ""
-"No hi ha fonts. Actualment el Zypper només cerca en les fonts d'instal·lació."
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "No hi ha cap origen. Actualment, el Zypper només cerca dins dels orígens d'instal·lació."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr ""
-"S'estan capturant els ítems amb dependències que coincideixen amb el criteri "
-"de cerca definit..."
+msgstr "S'estan capturant els ítems amb dependències que coincideixen amb el criteri de cerca definit..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
@@ -570,388 +556,151 @@ msgstr " no és una expressió regular vàlida: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Es tracta d'un error, envieu un informe d'error al zypper."
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "L'URL no és vàlid."
 
-#: src/zypper.cc:78
-msgid ""
-"  Commands:\n"
-"\thelp\t\t\tHelp\n"
-"\tshell, sh\t\tAccept multiple commands at once\n"
-"\tinstall, in\t\tInstall packages or resolvables\n"
-"\tremove, rm\t\tRemove packages or resolvables\n"
-"\tsearch, se\t\tSearch for packages matching a pattern\n"
-"\tservice-list, sl\tList services, also called installation sources\n"
-"\tservice-add, sa\t\tAdd a new service\n"
-"\tservice-delete, sd\tDelete a service\n"
-"\tservice-rename, sr\tRename a service\n"
-"\trefresh, ref\t\tRefresh all installation sources\n"
-"\tpatch-check, pchk\tCheck for patches\n"
-"\tpatches, pch\t\tList patches\n"
-"\tlist-updates, lu\tList updates\n"
-"\tupdate, up\t\tUpdate packages\n"
-"\tinfo, if\t\tShow full information for packages\n"
-"\tpatch-info\t\tShow full information for patches\n"
-msgstr ""
-"  Ordres:\n"
-"\thelp\t\t\tAjuda\n"
-"\tshell, sh\t\tAccepta diverses ordres a la vegada\n"
-"\tinstall, in\t\tInstal·la paquets o ítems amb dependències\n"
-"\tremove, rm\t\tSuprimeix paquets o ítems amb dependències\n"
-"\tsearch, se\t\tCerca paquets que coincideixin amb un patró\n"
-"\tservice-list, sl\tEnumera els serveis, també anomenats fonts "
-"d'instal·lació\n"
-"\tservice-add, sa\t\tAfegeix un nou servei\n"
-"\tservice-delete, sd\tSuprimeix un servei\n"
-"\tservice-rename, sr\tCanvia el nom d'un servei\n"
-"\trefresh, ref\t\tRefresca totes dels fonts d'instal·lació\n"
-"\tpatch-check, pchk\tComprova si hi ha pedaços\n"
-"\tpatches, pch\t\tEnumera els pedaços\n"
-"\tlist-updates, lu\tEnumera les actualitzacions\n"
-"\tupdate, up\t\tActualitza els paquets\n"
-"\tinfo, if\t\tMostra informació completa dels paquets\n"
-"\tpatch-info\t\tMostra informació completa dels pedaços\n"
+#: src/zypper.cc:84
+msgid "  Commands:\n\thelp\t\t\tHelp\n\tshell, sh\t\tAccept multiple commands at once\n\tinstall, in\t\tInstall packages or resolvables\n\tremove, rm\t\tRemove packages or resolvables\n\tsearch, se\t\tSearch for packages matching a pattern\n\tservice-list, sl\tList services, also called installation sources\n\tservice-add, sa\t\tAdd a new service\n\tservice-delete, sd\tDelete a service\n\tservice-rename, sr\tRename a service\n\trefresh, ref\t\tRefresh all installation sources\n\tpatch-check, pchk\tCheck for patches\n\tpatches, pch\t\tList patches\n\tlist-updates, lu\tList updates\n\tupdate, up\t\tUpdate packages\n\tinfo, if\t\tShow full information for packages\n\tpatch-info\t\tShow full information for patches\n"
+msgstr "  Ordres:\n\thelp\t\t\tAjuda\n\tshell, sh\t\tAccepta diverses ordres a la vegada\n\tinstall, in\t\tInstal·la paquets o ítems amb dependències\n\tremove, rm\t\tSuprimeix paquets o ítems amb dependències\n\tsearch, se\t\tCerca paquets que coincideixin amb un patró\n\tservice-list, sl\tEnumera els serveis, també anomenats fonts d'instal·lació\n\tservice-add, sa\t\tAfegeix un nou servei\n\tservice-delete, sd\tSuprimeix un servei\n\tservice-rename, sr\tCanvia el nom d'un servei\n\trefresh, ref\t\tRefresca totes dels fonts d'instal·lació\n\tpatch-check, pchk\tComprova si hi ha pedaços\n\tpatches, pch\t\tEnumera els pedaços\n\tlist-updates, lu\tEnumera les actualitzacions\n\tupdate, up\t\tActualitza els paquets\n\tinfo, if\t\tMostra informació completa dels paquets\n\tpatch-info\t\tMostra informació completa dels pedaços\n"
 
-#: src/zypper.cc:121
-msgid ""
-"  Options:\n"
-"\t--help, -h\t\tHelp\n"
-"\t--version, -V\t\tOutput the version number\n"
-"\t--verbose, -v\t\tIncrease verbosity\n"
-"\t--terse, -t\t\tTerse output for machine consumption\n"
-"\t--table-style, -s\tTable style (integer)\n"
-"\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
-msgstr ""
-"  Opcions:\n"
-"\t--help, -h\t\tAjuda\n"
-"\t--version, -V\t\tMostra el número de la versió\n"
-"\t--verbose, -v\t\tAugmenta el detall\n"
-"\t--terse, -t\t\tInformació abreujada del consum de l'ordinador\n"
-"\t--table-style, -s\tEstil de la taula (enter)\n"
-"\t--rug-compatible, -r\tActiva la compatibilitat amb el rug\n"
-"\t--non-interactive\tNo fa cap pregunta, utilitza les respostes "
-"predeterminades automàticament. (en fase de desenvolupament)\n"
+#: src/zypper.cc:127
+msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr "  Opcions:\n\t--help, -h\t\tAjuda.\n\t--version, -V\t\tImprimeix el número de versió.\n\t--verbose, -v\t\tProporciona més detalls.\n\t--terse, -t\t\tSortida simple per al consum de la màquina.\n\t--table-style, -s\tEstil de la taula (enter).\n\t--rug-compatible, -r\tActiva la compatibilitat amb rug.\n\t--non-interactive, -n\tNo demanis res; utilitza automàticament les respostes per defecte.\n\t--no-gpg-checks\t\tIgnora els errors de comprovació de GPG i continua.\n\t--root, -R <dir>\tTreballa en un directori arrel diferent.\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "Verbositat"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "S'està entrant al mode no interactiu (non-interactive)."
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "S'està entrant al mode sense verificació del GPG (no-gpg-checks)."
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "Estil de taula no vàlid"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "Feu -h per a obtenir ajuda"
 
-#: src/zypper.cc:207
-msgid ""
-"  Source options:\n"
-"\t--disable-system-sources, -D\t\tDo not read the system sources\n"
-"\t--source, -S\t\tRead additional source\n"
-msgstr ""
-"  Opcions de font:\n"
-"\t--disable-system-sources, -D\t\tNo llegeix les fonts del sistema\n"
-"\t--source, -S\t\tLlegeix les fonts addicionals\n"
+#: src/zypper.cc:223
+msgid "  Source options:\n\t--disable-system-sources, -D\t\tDo not read the system sources\n\t--source, -S\t\tRead additional source\n"
+msgstr "  Opcions de font:\n\t--disable-system-sources, -D\t\tNo llegeix les fonts del sistema\n\t--source, -S\t\tLlegeix les fonts addicionals\n"
 
-#: src/zypper.cc:212
-msgid ""
-"  Target options:\n"
-"\t--disable-system-resolvables, -T\t\tDo not read system installed "
-"resolvables\n"
-msgstr ""
-"  Opcions de destí:\n"
-"\t--disable-system-resolvables, -T\t\tNo llegeix els ítems amb dependències "
-"instal·lats al sistema\n"
+#: src/zypper.cc:228
+msgid "  Target options:\n\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr "  Opcions de destí:\n\t--disable-system-resolvables, -T\t\tNo llegeix els ítems amb dependències instal·lats al sistema\n"
 
-#: src/zypper.cc:226
-msgid ""
-"  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
-"\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
-msgstr ""
-"  Opcions d'ordre:\n"
-"\t--catalog,-c\t\tNomés d'aquest catàleg (en fase de desenvolupament)\n"
-"\t--type,-t\t\tTipus d'ítem amb dependències (paquet per defecte)\n"
-"\t--no-confirm,-y\tNo requereix confirmació de l'usuari\n"
+#: src/zypper.cc:245
+msgid "  Command options:\n\t--catalog,-c\t\t\tOnly from this catalog (under development)\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "  Opcions de l'ordre:\n\t--catalog,-c\t\t\tNomés d'aquest catàleg (s'està desenvolupant)\n\t--type,-t\t\tTipus de resoluble (predeterminat: paquet)\n\t--no-confirm,-y\t\t\tNo demanis confirmació a l'usuari per instal·lar\n\t--auto-agree-with-licenses,-l\tRespon automàticament 'yes' (sí) a les confirmacions de llicències de tercers.\n\t\t\t\t\tPer obtenir-ne més detalls, vegeu el manual del zypper.\n"
 
-#: src/zypper.cc:241
-msgid ""
-"  Command options:\n"
-"\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
-msgstr ""
-"  Opcions d'ordre:\n"
-"\t--type,-t\t\tTipus d'ítem amb dependències (paquet per defecte)\n"
-"\t--no-confirm,-y\tNo requereix confirmació de l'usuari\n"
+#: src/zypper.cc:265
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\tDo not require user confirmation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "  Opcions de l'ordre:\n\t--type,-t\t\tTipus de resoluble (predeterminat: paquet)\n\t--no-confirm,-y\tNo demanis confirmació a l'usuari\n\t--auto-agree-with-licenses,-l\tRespon automàticament 'yes' (sí) a les confirmacions de llicències de tercers.\n\t\t\t\t\tPer obtenir-ne més detalls, vegeu el manual del zypper.\n"
 
-#: src/zypper.cc:257
-msgid ""
-"service-add [options] URI [alias]\n"
-"\n"
-"Add a service (installation source) to the system.\n"
-"  Command options:\n"
-"\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n"
-"\t\t\t\t(even remote)\n"
-"\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n"
-"\t--disabled,-d\t\tAdd the service as disabled\n"
-"\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
-msgstr ""
-"service-add [opcions] URI [àlies]\n"
-"\n"
-"Afegeix un servei (font d'instal·lació) al sistema.\n"
-"  Opcions d'ordre:\n"
-"\t--repo,-r <FITXER.repo>\tLlegeix l'URL i l'àlies d'un fitxer\n"
-"\t\t\t\t(fins i tot remot)\n"
-"\t--type,-t <TIPUS>\tTipus de dipòsit (YaST, YUM o Plaindir)\n"
-"\t--disabled,-d\t\tAfegeix el servei com a inhabilitat\n"
-"\t--no-refresh,-n\t\tNo refresca les metadades de forma automàtica\n"
+#: src/zypper.cc:283
+msgid "service-add [options] URI [alias]\n\nAdd a service (installation source) to the system.\n  Command options:\n\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n\t\t\t\t(even remote)\n\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n\t--disabled,-d\t\tAdd the service as disabled\n\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr "service-add [opcions] URI [àlies]\n\nAfegeix un servei (font d'instal·lació) al sistema.\n  Opcions d'ordre:\n\t--repo,-r <FITXER.repo>\tLlegeix l'URL i l'àlies d'un fitxer\n\t\t\t\t(fins i tot remot)\n\t--type,-t <TIPUS>\tTipus de dipòsit (YaST, YUM o Plaindir)\n\t--disabled,-d\t\tAfegeix el servei com a inhabilitat\n\t--no-refresh,-n\t\tNo refresca les metadades de forma automàtica\n"
 
-#: src/zypper.cc:276
-msgid ""
-"service-list\n"
-"\n"
-"List all defined system services (installation sources).\n"
-"This command has no options.\n"
-msgstr ""
-"service-list\n"
-"\n"
-"Enumera els serveis definits (fonts d'instal·lació) del sistema.\n"
-"Aquesta ordre no disposa d'opcions.\n"
+#: src/zypper.cc:302
+msgid "service-list\n\nList all defined system services (installation sources).\nThis command has no options.\n"
+msgstr "service-list\n\nEnumera els serveis definits (fonts d'instal·lació) del sistema.\nAquesta ordre no disposa d'opcions.\n"
 
-#: src/zypper.cc:290
-msgid ""
-"service-delete [options] <URI|alias>\n"
-"\n"
-"Remove service (installation source) from the system.\n"
-"This command has no options.\n"
-msgstr ""
-"service-delete [opcions] <URI|àlies>\n"
-"\n"
-"Suprimeix el servei (font d'instal·lació) del sistema.\n"
-"Aquesta ordre no disposa d'opcions.\n"
+#: src/zypper.cc:316
+msgid "service-delete [options] <URI|alias>\n\nRemove service (installation source) from the system.\nThis command has no options.\n"
+msgstr "service-delete [opcions] <URI|àlies>\n\nSuprimeix el servei (font d'instal·lació) del sistema.\nAquesta ordre no disposa d'opcions.\n"
 
-#: src/zypper.cc:304
-msgid ""
-"service-rename [options] <URI|alias> <new-alias>\n"
-"\n"
-"Assign new alias to the service specified by URI or current alias.\n"
-"This command has no options.\n"
-msgstr ""
-"service-rename [opcions] <URI|àlies> <nou-àlies>\n"
-"\n"
-"Assigna un nou àlies al servei especificat per URI o l'àlies actual.\n"
-"Aquesta ordre no disposa d'opcions.\n"
+#: src/zypper.cc:330
+msgid "service-rename [options] <URI|alias> <new-alias>\n\nAssign new alias to the service specified by URI or current alias.\nThis command has no options.\n"
+msgstr "service-rename [opcions] <URI|àlies> <nou-àlies>\n\nAssigna un nou àlies al servei especificat per URI o l'àlies actual.\nAquesta ordre no disposa d'opcions.\n"
 
-#: src/zypper.cc:318
-msgid ""
-"zypper refresh\n"
-"\n"
-"Refresh all installation sources found in the system.\n"
-msgstr ""
-"zypper refresh\n"
-"\n"
-"Refresca totes les fonts d'instal·lació que es troben al sistema.\n"
+#: src/zypper.cc:344
+msgid "zypper refresh\n\nRefresh all installation sources found in the system.\n"
+msgstr "zypper refresh\n\nRefresca totes les fonts d'instal·lació que es troben al sistema.\n"
 
-#: src/zypper.cc:331
-msgid ""
-"list-updates [options]\n"
-"\n"
-"List all available updates\n"
-"\n"
-"  Command options:\n"
-"\t--type,-t\t\tType of resolvable (default: patch)\n"
-msgstr ""
-"list-updates [opcions]\n"
-"\n"
-"Enumera les actualitzacions disponibles\n"
-"\n"
-"  Opcions d'ordre:\n"
-"\t--type,-t\t\ttipus d'ítem amb dependències (pedaç per defecte)\n"
+#: src/zypper.cc:357
+msgid "list-updates [options]\n\nList all available updates\n\n  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr "list-updates [opcions]\n\nEnumera les actualitzacions disponibles\n\n  Opcions d'ordre:\n\t--type,-t\t\ttipus d'ítem amb dependències (pedaç per defecte)\n"
 
-#: src/zypper.cc:349
-msgid ""
-"  Command options:\n"
-"\t--type,-t\t\tType of resolvable (default: patch)\n"
-"\t--no-confirm,-y\t\tDo not require user confirmation\n"
-"\t--skip-interactive\t\tSkip interactive updates\n"
-msgstr ""
-"  Opcions d'ordre:\n"
-"\t--type,-t\t\tTipus d'ítem amb dependències (pedaç per defecte)\n"
-"\t--no-confirm,-y\t\tNo requereix confirmació de l'usuari\n"
-"\t--skip-interactive\t\tOmet les actualitzacions interactives\n"
+#: src/zypper.cc:378
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n\t--no-confirm,-y\t\tDo not require user confirmation\n\t--skip-interactive\t\tSkip interactive updates\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "  Opcions de l'ordre:\n\t--type,-t\t\tTipus de resoluble (predeterminat: patch (pedaç))\n\t--no-confirm,-y\t\tNo demanis confirmació a l'usuari\n\t--skip-interactive\t\tEvita les actualitzacions interactives\n\t--auto-agree-with-licenses,-l\tRespon automàticament 'yes' (sí) a les confirmacions de llicències de tercers.\n\t\t\t\t\tPer obtenir-ne més detalls, vegeu el manual del zypper.\n"
 
-#: src/zypper.cc:374
-msgid ""
-"zypper [global-options] search [options] [querystring...]\n"
-"\n"
-"'search' - Search for packages matching given search strings\n"
-"\n"
-"  Command options:\n"
-"    --match-all            Search for a match to all search strings "
-"(default)\n"
-"    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
-"    --match-exact          Searches for an exact package name\n"
-"-d, --search-descriptions  Search also in package summaries and "
-"descriptions.\n"
-"-c, --case-sensitive       Perform case-sensitive search.\n"
-"-i, --installed-only       Show only packages that are already installed.\n"
-"-u, --uninstalled-only     Show only packages that are not currently "
-"installed.\n"
-"-t, --type                 Search only for packages of the specified type.\n"
-"    --sort-by-name         Sort packages by name (default).\n"
-"    --sort-by-catalog      Sort packages by catalog (source).\n"
-"\n"
-"* and ? wildcards can also be used within search strings.\n"
-msgstr ""
-"zypper [opcions-globals] search [opcions] [cadena_consulta...]\n"
-"\n"
-"'search' - Cerca els paquets que coincideixen amb les cadenes de cerca "
-"indicades\n"
-"\n"
-"  Opcions d'ordre:\n"
-"    --match-all            Cerca una coincidència a totes les cadenes de "
-"cerca (valor per defecte)\n"
-"    --match-any            Cerca una coincidència a qualsevol de les cadenes "
-"de cerca\n"
-"    --match-substrings     Les coincidències de les cadenes de cerca poden "
-"ser parts de paraules (valor per defecte)\n"
-"    --match-words          Les coincidències de les cadenes de cerca només "
-"poden ser paraules completes\n"
-"    --match-exact          Cerca el nom d'un paquet en particular\n"
-"-d, --search-descriptions  També cerca en els resums i descripcions dels "
-"paquets.\n"
-"-c, --case-sensitive       Distingeix entre majúscules i minúscules.\n"
-"-i, --installed-only       Mostra només els paquets que ja estan "
-"instal·lats.\n"
-"-u, --uninstalled-only     Mostra només els paquets que no estan actualment "
-"instal·lats.\n"
-"-t, --type                 Cerca només els paquets del tipus especificat.\n"
-"    --sort-by-name         Ordena els paquets per nom (valor per defecte).\n"
-"    --sort-by-catalog      Ordena els paquets per catàleg (font).\n"
-"\n"
-"Els comodins * i ? també es poden fer servir a les cadenes de cerca.\n"
+#: src/zypper.cc:405
+msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
+msgstr "zypper [opcions-globals] search [opcions] [cadena-de-consulta...]\n\n'search' - Cerca paquets que coincideixin amb les cadenes de consulta especificades.\n\n  Opcions d'ordre:\n    --match-all            Cerca una coincidència amb totes les cadenes de cerca (per defecte).\n    --match-any            Cerca una coincidència amb qualsevol de les cadenes de cerca.\n    --match-substrings     Cerca una coincidència amb paraules parcials (per defecte).\n    --match-words          Cerca una coincidència només amb paraules completes.\n    --match-exact          Cerca un nom de paquet exacte.\n-d, --search-descriptions  Cerca també en els resums i les descripcions dels paquets.\n-c, --case-sensitive       En cercar, distingeix entre majúscules i minúscules.\n-i, --installed-only       Mostra només els paquets que ja estan instal·lats.\n-u, --uninstalled-only     Mostra només els paquets que no estan instal·lats.\n-t, --type                 Cerca només els paquets del tipus especificat.\n    --sort-by-name         Ordena els paquets per nom (per defecte).\n    --sort-by-catalog      Ordena els paquets per catàleg (origen).\n\nTambé es poden utilitzar els comodins * i ? a les cadenes de cerca.\n"
 
-#: src/zypper.cc:402
-msgid ""
-"patch-check\n"
-"\n"
-"Check for available patches\n"
-"\n"
-"This command has no options.\n"
-msgstr ""
-"patch-check\n"
-"\n"
-"Comprova els pedaços que hi ha disponibles\n"
-"\n"
-"Aquesta ordre no disposa d'opcions.\n"
+#: src/zypper.cc:433
+msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"
+msgstr "patch-check\n\nComprova els pedaços que hi ha disponibles\n\nAquesta ordre no disposa d'opcions.\n"
 
-#: src/zypper.cc:416
-msgid ""
-"patches\n"
-"\n"
-"List all available patches\n"
-"\n"
-"This command has no options.\n"
-msgstr ""
-"patches\n"
-"\n"
-"Enumera tots els pedaços disponibles\n"
-"\n"
-"Aquesta ordre no disposa d'opcions.\n"
+#: src/zypper.cc:447
+msgid "patches\n\nList all available patches\n\nThis command has no options.\n"
+msgstr "patches\n\nEnumera tots els pedaços disponibles\n\nAquesta ordre no disposa d'opcions.\n"
 
-#: src/zypper.cc:430
-msgid ""
-"zypper [global-options] info [name...]\n"
-"\n"
-"'info' -- Show full information for packages\n"
-msgstr ""
-"zypper [opcions-globals] info [nom...]\n"
-"\n"
-"'info' -- Mostra informació completa sobre els paquets\n"
+#: src/zypper.cc:461
+msgid "zypper [global-options] info [name...]\n\n'info' -- Show full information for packages\n"
+msgstr "zypper [opcions-globals] info [nom...]\n\n'info' -- Mostra informació completa sobre els paquets\n"
 
-#: src/zypper.cc:442
-msgid ""
-"zypper [global-options] patch-info [patchname...]\n"
-"\n"
-"'patch-info' -- Show detailed information for patches\n"
-msgstr ""
-"zypper [opcions-globals] patch-info [nom_pedaç...]\n"
-"\n"
-"'patch-info' -- Mostra informació detallada sobre els pedaços\n"
+#: src/zypper.cc:473
+msgid "zypper [global-options] patch-info [patchname...]\n\n'patch-info' -- Show detailed information for patches\n"
+msgstr "zypper [opcions-globals] patch-info [nom_pedaç...]\n\n'patch-info' -- Mostra informació detallada sobre els pedaços\n"
 
-#: src/zypper.cc:454
-msgid ""
-"zypper [global-options] moo\n"
-"\n"
-"'moo' - Show an animal\n"
-msgstr ""
-"zypper [opcions-globals] moo\n"
-"\n"
-"'moo' - Mostra un animal\n"
+#: src/zypper.cc:485
+msgid "zypper [global-options] moo\n\n'moo' - Show an animal\n"
+msgstr "zypper [opcions-globals] moo\n\n'moo' - Mostra un animal\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "Ordre desconeguda"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "Arguments del programa sense opcions:"
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
-msgstr ""
-"S'està ignorant --terse (només es proporciona per a la compatibilitat amb "
-"rug)"
+msgstr "S'està ignorant --terse (només es proporciona per a la compatibilitat amb rug)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "S'estan ignorant els ítems amb dependències instal·lats..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "Ja hi ha una transacció de ZYpp en curs."
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr ""
-"Es necessiten privilegis d'usuari primari per a poder veure les fonts del "
-"sistema."
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "Atenció: tipus de metadades desconegut "
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "Tipus d'ítem amb dependències desconegut"
 
-#: src/zypper.cc:721
-msgid ""
-"Warning: No sources. Operating only with the installed resolvables. Nothing "
-"can be installed."
-msgstr ""
-"Atenció: no hi ha cap font. Només es treballarà amb els ítems amb "
-"dependències instal·lats. No es pot instal·lar cap element."
+#: src/zypper.cc:756
+msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "Atenció: no hi ha cap font. Només es treballarà amb els ítems amb dependències instal·lats. No es pot instal·lar cap element."
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "Registreu un informe d'error relatiu a aquest assumpte."
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr ""
-"Consulteu la pàgina http://en.opensuse.org/Zypper#Troubleshooting per a "
-"obtenir-ne instruccions."
+msgstr "Consulteu la pàgina http://en.opensuse.org/Zypper#Troubleshooting per a obtenir-ne instruccions."
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "Calen privilegis d'usuari primari per a utilitzar el zypper."
+

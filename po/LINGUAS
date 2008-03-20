@@ -1,4 +1,7 @@
 # Set of available languages.
+af
+ar
+bn
 ca
 cs
 da
@@ -6,9 +9,11 @@ de
 es
 fi
 fr
+gu
 hu
 it
 ja
+mr
 nb
 nl
 pl
@@ -16,5 +21,8 @@ pt_BR
 ru
 sk
 sv
+ta
+xh
 zh_CN
 zh_TW
+zu

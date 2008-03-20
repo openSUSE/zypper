@@ -1,315 +1,370 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2005-03-09 13:54+0100\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-13 10:22\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
-"Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr "não está atribuído, deseja continuar?"
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "Importar chave"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Aviso: Aceitando um arquivo não assinado %s."
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr "para um chaveiro confiável?"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s não está assinado. Deseja continuar?"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "é assinado com um id de chave desconhecido:"
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "Importar chave %s para chaveiro confiável?"
 
-# internal key used: Ok
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "deseja continuar?"
-
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "Deseja confiar no id de chave"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr "impressão digital:"
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "Aviso: Aceitando arquivo %s assinado com uma chave desconhecida %s."
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "Verificação de assinatura para"
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s está assinado com uma chave desconhecida %s. Deseja continuar?"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr "com id de chave pública"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "Confiando automaticamente no id de chave %s, %s, impressão digital %s"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "falhou, ISTO É ARRISCADO!"
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Deseja confiar no id de chave %s, %s, impressão digital %s?"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "Nenhuma síntese para"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"Aviso: Ignorando falha de verificação de assinatura para %s com id de chave "
+"pública %s, %s, impressão digital %s! Verifique se isso não foi causado por "
+"algumas mudanças mal-intencionadas no arquivo!"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "Síntese desconhecida"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"Falha na verificação de assinatura para %s com id de chave pública %s, %s, "
+"impressão digital %s. Aviso: isso pode ter sido causado por uma mudança mal-"
+"intencionada no arquivo! É arriscado continuar! Deseja continuar mesmo assim?"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr "para"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "Nenhuma síntese para o arquivo %s."
 
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "Falha ao verificar a síntese para"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "deseja continuar?"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr ", esperado"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Síntese %s desconhecida para o arquivo %s."
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr "encontrado"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr ""
+"Ignorando falha na verificação de síntese para %s (era esperado %s, foi "
+"encontrado %s)."
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr ""
+"Falha na verificação de síntese para %s. Era esperado %s, foi encontrado %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "Inicializando Destino"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr "(modo antigo)"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "não encontrado"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "ignorando"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "(já instalado)"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "Falha ao adicionar '%s' à lista de pacotes a serem instalados."
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "Falhou"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
-msgstr "Não encontrado"
+msgstr "não encontrado"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
-msgstr "Problemas:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "Problema: "
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "PROB"
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " Solução %s: "
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr "SOL"
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "número, (r)epetir ou (c)ancelar> "
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "r"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "c"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "Aplicando solução %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s Problemas:"
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "Resumo:"
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<install>"
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<uninstall>"
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "Nada a fazer."
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "Analisando banco de dados RPM..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr "resolvíveis."
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "Analisando metadados para"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "Estabelecendo o status dos agregados"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "Resolvendo dependências..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr "patches necessários"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr "patches de segurança"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "instalado"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "desinstalado"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "Já não é aplicável"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "Não aplicável"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "Aplicado"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "Desnecessário"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "Danificado"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "Necessário"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "erro"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "Catálogo"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "Nome"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "Versão"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "Categoria"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "Status"
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:560
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
-msgstr "AVISO: Estas são as únicas atualizações que afetam o atualizador propriamente dito.\nHá outras disponíveis também.\n"
+"Other updates are available too.\n"
+msgstr ""
+"AVISO: Estas são as únicas atualizações que afetam o atualizador "
+"propriamente dito.\n"
+"Também há outras atualizações disponíveis.\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "Arquitetura"
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "AVISO: %s é interativo, ignorado."
 
-# internal key used: Ok
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "Deseja continuar?"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "submetendo"
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:782
 msgid ""
-"Package integrity check failed. This may be a problem with installation "
+"Package integrity check failed. This may be a problem with the installation "
 "source or media. Try one of the following:\n"
 "\n"
-"- just retry previous command\n"
+"- retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- use another installation media (for example, if yours is damaged)\n"
 "- use another installation source"
-msgstr "Falha ao verificar a integridade do pacote. Este pode ser um problema com a fonte ou mídia de instalação. Tente um dos seguintes procedimentos:\n \n - apenas repita o comando anterior\n - atualize as fontes de instalação usando 'zypper refresh'\n - use outra mídia de instalação (se, por exemplo, estiver danificada)\n - use outra fonte de instalação"
+msgstr ""
+"Falha ao verificar a integridade do pacote. Pode ser um problema com a fonte "
+"ou a mídia de instalação. Tente um dos seguintes procedimentos:\n"
+" \n"
+"- repita o comando anterior\n"
+"- atualize as fontes de instalação usando 'zypper refresh'\n"
+"- use outra mídia de instalação (se, por exemplo, a sua estiver danificada)\n"
+"- use outra fonte de instalação"
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:800
 msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
-msgstr "AVISO: Um dos patches instalados requer a reinicialização da sua máquina. Faça isso assim que possível."
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
+msgstr ""
+"AVISO: Um dos patches instalados requer a reinicialização da sua máquina. "
+"Faça isso assim que possível."
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:803
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
-msgstr "AVISO: Um dos patches instalados afeta o gerenciador de pacotes propriamente dito, portanto, ele requer a reinicialização antes da execução das próximas operações."
+msgstr ""
+"AVISO: Um dos patches instalados afeta o gerenciador de pacotes propriamente "
+"dito, portanto, ele requer a reinicialização antes da execução das próximas "
+"operações."
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Aceitando automaticamente com licença %s %s."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "licença"
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:843
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
-msgstr "Para instalar este pacote, é necessário que você concorde com os termos da licença acima. Deseja continuar?"
+msgstr ""
+"Para instalar este pacote, é necessário que você concorde com os termos da "
+"licença acima. Deseja continuar?"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "Interrompendo a instalação devido à necessidade da confirmação da(s) licença(s)."
+msgstr ""
+"Interrompendo a instalação devido à necessidade da confirmação da(s) licença"
+"(s)."
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:855
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
-msgstr "Reinicie a operação em modo interativo e confirme se está de acordo com a(s) licença(s) necessária(s)."
+msgstr ""
+"Reinicie a operação em modo interativo e confirme se está de acordo com a(s) "
+"licença(s) necessária(s)."
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
 msgstr "Interrompendo a instalação devido ao usuário não estar de acordo com"
 
 #: src/zmart-sources.cc:31
 msgid ""
 "Sorry, you need root privileges to use system sources, disabling them..."
-msgstr "Desculpe, é necessário que você tenha privilégios root para usar as fontes do sistema, desabilitando-as..."
+msgstr ""
+"Desculpe, é necessário que você tenha privilégios root para usar as fontes "
+"do sistema, desabilitando-as..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
@@ -320,7 +375,7 @@ msgid "Failed to restore sources"
 msgstr "Não foi possível restaurar fontes"
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
+msgid "Cannot access repository"
 msgstr "Impossível acessar o repositório"
 
 #: src/zmart-sources.cc:99
@@ -352,7 +407,7 @@ msgstr "Sim"
 msgid "No"
 msgstr "Não"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "Erro ao ler as fontes do sistema:"
 
@@ -368,56 +423,78 @@ msgstr "Nome não encontrado"
 msgid "baseurl not found"
 msgstr "baseurl não encontrado"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "Continuando mesmo assim"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "removendo fonte"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "Removendo origem '%s'"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "Origem '%s' removida."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "Falha ao remover origem '%s':"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
 msgid "Source %s not found."
 msgstr "A fonte %s não foi encontrada."
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s' está danificado ou não está acessível. Deseja removê-lo?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "removendo fonte"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "URL inválido:"
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "Ainda não implementado para libzypp-1.x.x"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "Atualizando"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "CONCLUÍDO"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "Erro ao atualizar a fonte:"
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "Todas as fontes do sistema foram atualizadas."
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "Erro durante a obtenção"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "O Daemon de Gerenciamento ZENworks está sendo executado."
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "AVISO: este comando não fará a sincronização das mudanças."
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "Para isso, use o rug ou o yast2."
 
@@ -426,23 +503,37 @@ msgid ""
 "The updater could not access the package manager engine. This usually "
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
-msgstr "O atualizador não pôde acessar o mecanismo do gerenciador de pacotes. Isso geralmente acontece quando outro aplicativo (como o YaST) está usando o mecanismo simultaneamente. Feche outros aplicativos e verifique novamente se há atualizações."
+msgstr ""
+"O atualizador não pôde acessar o mecanismo do gerenciador de pacotes. Isso "
+"geralmente acontece quando outro aplicativo (como o YaST) está usando o "
+"mecanismo simultaneamente. Feche outros aplicativos e verifique novamente se "
+"há atualizações."
 
 #: src/zypp-checkpatches.cc:213
+#, c-format
 msgid ""
-"Couldn't restore source.\n"
+"Could not restore source.\n"
 "Detail: %s"
-msgstr "Impossível restaurar a fonte.\nDetalhe: %s"
+msgstr ""
+"Não foi possível restaurar a fonte.\n"
+"Detalhe: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
-msgstr "Não há fontes de atualização definidas. Adicione uma ou mais fontes de atualização para ser notificado sobre as atualizações."
+msgstr ""
+"Não há fontes de atualização definidas. Adicione uma ou mais fontes de "
+"atualização para ser notificado sobre as atualizações."
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "(I)nterromper, (R)epetir, (I)gnorar?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "Resposta inválida '%s'; digite 'y' para 'sim' ou 'n' para 'não':"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -506,19 +597,22 @@ msgstr "Tamanho após Instalação: "
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr "Resumo: "
+msgstr "Resumo:"
 
 #: src/zypper-info.cc:103
 msgid "Description: "
 msgstr "Descrição: "
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "Nenhuma fonte. No momento, o Zypper pesquisa apenas em fontes de instalação."
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr ""
+"Nenhuma fonte. No momento, o Zypper pesquisa apenas em fontes de instalação."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "O pré-cache instalou resolvíveis que correspondem aos critérios de pesquisa fornecidos..."
+msgstr ""
+"O pré-cache instalou resolvíveis que correspondem aos critérios de pesquisa "
+"fornecidos..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
@@ -536,11 +630,11 @@ msgstr "não é uma expressão regular válida: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Isto é um bug, registre um relatório de bugs relacionados ao zypper."
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "URL inválido."
 
-#: src/zypper.cc:78
+#: src/zypper.cc:84
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -579,7 +673,7 @@ msgstr ""
 " \tinfo, if\t\tMostrar informações completas de pacotes\n"
 " \tpatch-info\t\tMostrar informações completas de patches\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:127
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -588,23 +682,44 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
-msgstr "  Opções:\n\t--help, -h\t\tAjuda\n \t--version, -V\t\tInformar o número da versão\n \t--verbose, -v\t\tAumentar o detalhamento\n \t--terse, -t\t\tResumir a saída para consumo da máquina\n \t--table-style, -s\tEstilo da tabela (número inteiro)\n \t--rug-compatible, -r\tAtivar a compatibilidade com rug\n \t--non-interactive\tNão pergunte nada, use as respostas padrão automaticamente.  (em desenvolvimento)\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr ""
+" Opções:\n"
+"\t--help, -h\t\tAjuda\n"
+"\t--version, -V\t\tProduzir saída do número de versão\n"
+"\t--verbose, -v\t\tAumentar detalhamento\n"
+"\t--terse, -t\t\tSaída concisa para consumo de máquina\n"
+"\t--table-style, -s\tEstilo de tabela (inteiro)\n"
+"\t--rug-compatible, -r\tAtivar compatibilidade com rug\n"
+"\t--non-interactive, -n\tNão perguntar nada; usar respostas padrão "
+"automaticamente.\n"
+"\t--no-gpg-checks\t\tIgnorar falhas de verificação de GPG e continuar.\n"
+"\t--root, -R <dir>\tOperar em um diretório raiz diferente\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "Detalhamento"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "Entrando no modo não interativo."
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Entrando no modo 'no-gpg-checks'."
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "Estilo de tabela inválido"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "Tente usar -h para obter ajuda"
 
-#: src/zypper.cc:207
+#: src/zypper.cc:223
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -614,7 +729,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tNão ler as origens do sistema\n"
 " \t--source, -S\t\tLer a origem adicional\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:228
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -624,29 +739,43 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tNão ler os resolvíveis instalados no "
 "sistema\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:245
 msgid ""
 "  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Opções de comando:\n"
-"\t--catalog,-c\t\tSomente deste catálogo (em desenvolvimento)\n"
-" \t--type,-t\t\tTipo de resolvível (padrão: pacote)\n"
-" \t--no-confirm,-y\tNão solicitar confirmação do usuário\n"
+"\t--catalog,-c\t\t\tSomente deste catálogo (em desenvolvimento)\n"
+"\t--type,-t\t\tTipo de resolvível (padrão: pacote)\n"
+"\t--no-confirm,-y\t\t\tNão requer confirmação do usuário para continuar a "
+"instalação\n"
+"\t--auto-agree-with-licenses,-l\tInforma 'sim' automaticamente no prompt de "
+"confirmação de licença de terceiros.\n"
+"\t\t\t\t\tConsulte o manual do zypper para obter mais detalhes.\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:265
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Opções de comando:\n"
 "\t--type,-t\t\tTipo de resolvível (padrão: pacote)\n"
-" \t--no-confirm,-y\tNão solicitar confirmação do usuário\n"
+"\t--no-confirm,-y\tNão requer confirmação do usuário\n"
+"\t--auto-agree-with-licenses,-l\tInforma 'sim' automaticamente no prompt de "
+"confirmação da licença de terceiros.\n"
+"\t\t\t\t\tConsulte o manual do zypper para obter mais detalhes.\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:283
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -668,7 +797,7 @@ msgstr ""
 " \t--disabled,-d\t\tAdicionar o serviço como desabilitado\n"
 " \t--no-refresh,-n\t\tNão atualizar os metadados automaticamente\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:302
 msgid ""
 "service-list\n"
 "\n"
@@ -680,7 +809,7 @@ msgstr ""
 " Listar todos os serviços de sistema definidos (fontes de instalação).\n"
 " Este comando não possui opções.\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:316
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -692,7 +821,7 @@ msgstr ""
 " Remover o serviço (fonte de instalação) do sistema.\n"
 " Este comando não possui opções.\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:330
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -705,7 +834,7 @@ msgstr ""
 "atual.\n"
 " Este comando não possui opções.\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:344
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -715,7 +844,7 @@ msgstr ""
 "\n"
 " Atualizar todas as fontes de instalação encontradas no sistema.\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:357
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -731,19 +860,25 @@ msgstr ""
 "   Opções de comando:\n"
 " \t--type,-t\t\tTipo de resolvível (padrão: patch)\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:378
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Opções de comando:\n"
 "\t--type,-t\t\tTipo de resolvível (padrão: patch)\n"
-" \t--no-confirm,-y\t\tNão solicitar confirmação do usuário\n"
-" \t--skip-interactive\t\tIgnorar atualizações interativas\n"
+"\t--no-confirm,-y\t\tNão requer confirmação do usuário\n"
+"\t--skip-interactive\t\tIgnora atualizações interativas\n"
+"\t--auto-agree-with-licenses,-l\tInforma 'sim' no prompt de comando da "
+"licença de terceiros.\n"
+"\t\t\t\t\tConsulte o manual do zypper para obter mais detalhes.\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:405
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -753,10 +888,8 @@ msgid ""
 "    --match-all            Search for a match to all search strings "
 "(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and "
 "descriptions.\n"
@@ -780,10 +913,10 @@ msgstr ""
 "strings de pesquisa (padrão)\n"
 "     --match-any            Procurar uma correspondência para qualquer uma "
 "das strings de pesquisa\n"
-"     --match-substrings     As correspondências das strings de pesquisa "
-"podem ser de palavras parciais (padrão)\n"
-"     --match-words          As correspondências das strings de pesquisa "
-"somente podem ser de palavras inteiras\n"
+"     --match-substrings     Procurar uma correspondência para as palavras "
+"parciais (padrão)\n"
+"     --match-words          Procurar uma correspondência somente para as "
+"palavras inteiras\n"
 "     --match-exact          Procura um nome de pacote exato\n"
 " -d, --search-descriptions  Pesquisar também em resumos e descrições de "
 "pacotes.\n"
@@ -795,10 +928,9 @@ msgstr ""
 "     --sort-by-name         Classificar pacotes por nome (padrão).\n"
 "     --sort-by-catalog      Classificar pacotes por catálogo (fonte).\n"
 " \n"
-" Os caracteres curinga * e ? também podem ser usados em strings de "
-"pesquisa.\n"
+"Os caracteres curinga * e ? também podem ser usados em strings de pesquisa.\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:433
 msgid ""
 "patch-check\n"
 "\n"
@@ -812,7 +944,7 @@ msgstr ""
 " \n"
 " Este comando não possui opções.\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:447
 msgid ""
 "patches\n"
 "\n"
@@ -826,7 +958,7 @@ msgstr ""
 " \n"
 " Este comando não possui opções.\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:461
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -836,7 +968,7 @@ msgstr ""
 "\n"
 " 'info' -- Mostrar informações completas de pacotes\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:473
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -846,7 +978,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- Mostrar informações detalhadas de patches\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:485
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -856,40 +988,36 @@ msgstr ""
 "\n"
 " 'moo' - Mostrar um animal\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "Comando desconhecido"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "Argumentos de Programa Sem Opção:"
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr ""
 "Ignorando --terse (fornecido apenas para fins de compatibilidade com rug)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "Ignorando resolvíveis instalados..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "Uma transação ZYpp já está em andamento."
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr "São necessários privilégios de root para exibir as origens do sistema."
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "Aviso: Tipo de metadados desconhecido"
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "Tipo de resolvível desconhecido"
 
-#: src/zypper.cc:721
+#: src/zypper.cc:756
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -897,15 +1025,19 @@ msgstr ""
 "Aviso: Nenhuma origem. Operando somente com os resolvíveis instalados. Nada "
 "pode ser instalado."
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "Registre um relatório de bugs sobre isto."
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
 "Consulte http://en.opensuse.org/Zypper#Troubleshooting para obter instruções."
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "Exceção inesperada."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "São necessários privilégios de root para executar o zypper."

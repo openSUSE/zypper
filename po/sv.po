@@ -1,317 +1,370 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-14 09:28\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr "är inte signerad, vill du fortsätta?"
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "Vill du importera nyckeln"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Varning! Den osignerade filen %s accepteras."
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr "till din betrodda nyckelring?"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s är inte signerad. Vill du fortsätta?"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "är signerad med ett okänt nyckel-ID:"
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "Vill du importera nyckeln %s till din betrodda nyckelring?"
 
-# continue button label
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "vill du fortsätta?"
-
-# power-off message
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "Vill du välja att ha förtroende för nyckel-ID:t"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr "fingeravtryck:"
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "Varning! Filen %s som är signerad med en okänd nyckel (%s) accepteras."
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "Signaturverifieringen av"
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s är signerad med en okänd nyckel (%s). Vill du fortsätta?"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr "med det allmänna nyckel-ID:t"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr ""
+"Förtroende för nyckel-ID:t %s, %s, fingeravtryck %s tillämpas automatiskt"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "misslyckades, DET HÄR ÄR RISKABELT!"
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Vill du ha förtroende för nyckel-ID %s, %s, fingeravtryck %s"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "Inget sammandrag hittades för"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"Varning: Den misslyckade signaturverifieringen för %s med allmänt nyckel-ID %"
+"s, %s, fingeravtrycket %s ignoreras. Kontrollera att detta inte beror på  "
+"att filen har ändrats med skadligt uppsåt."
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "Okänt sammandrag"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"Signaturverifieringen misslyckades för %s med det allmänna nyckel-ID:t %s, %"
+"s, fingeravtrycket %s. Varning! Detta kan bero på en ändring med skadligt "
+"uppsåt i filen. Det kan vara riskabelt att fortsätta. Vill du fortsätta ändå?"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr "för"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "Det finns inget sammandrag för filen %s."
 
-# %s is either BOOTP or DHCP
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "Sammandragsverifieringen för"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "vill du fortsätta?"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr ", förväntade"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Sammandraget %s för filen %s är okänt."
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr "påträffade"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr ""
+"Den misslyckade sammandragsverifieringen för %s ignoreras (%s förväntades, %"
+"s hittades)."
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr ""
+"Sammandragsverifieringen för %s misslyckades. %s förväntades, %s hittades."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "Målet initieras"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr "(gammalt sätt)"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "hittades inte"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "hoppar över"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "(redan installerat)"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Det gick inte att lägga till %s i listan över paket som ska installeras."
+msgstr ""
+"Det gick inte att lägga till %s i listan över paket som ska installeras."
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "Misslyckades"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
-msgstr "Inte hittad"
+msgstr "hittades inte"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
-msgstr "Problem:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "Problem: "
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "PROB"
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " Lösning %s: "
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr "SOL"
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "siffra, (f)örsök igen eller (a)vbryt> "
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "f"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "a"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "Lösningen %s tillämpas"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s - problem:"
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "Sammanfattning:"
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<install>"
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<uninstall>"
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "Ingenting att göra."
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "RPM-databasen analyseras..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr "resurser."
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "Analyserar metadata för"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "Statusen för aggregeringar etableras"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "Löser beroenden..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr "programfixar krävs"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr "säkerhetsprogramfixar"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "Installerad"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "Avinstallerad"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "Inte längre tillämplig"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "Inte tillämplig"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "Verkställd"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "Behövs inte"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "Trasig"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "Behövd"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "fel"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "Katalog"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "Namn"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "Version"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "Kategori"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "Status"
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:560
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
-msgstr "VARNING: De här uppdateringarna gäller bara för uppdateringsverktyget.\nAndra uppdateringar är också tillgängliga.\n"
+"Other updates are available too.\n"
+msgstr ""
+"VARNING: De här uppdateringarna gäller bara för uppdateringsverktyget.\n"
+"Det finns även andra tillgängliga uppdateringar.\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "Ark"
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "VARNING: %s är interaktiv, åsidosätts."
 
-# continue button label
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "Vill du fortsätta?"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "skriver"
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:782
 msgid ""
-"Package integrity check failed. This may be a problem with installation "
+"Package integrity check failed. This may be a problem with the installation "
 "source or media. Try one of the following:\n"
 "\n"
-"- just retry previous command\n"
+"- retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- use another installation media (for example, if yours is damaged)\n"
 "- use another installation source"
-msgstr "Paketintegritetskontrollen misslyckades. Det kan bero på problem i installationskällan eller installationsmediet. Pröva något av följande alternativ:\n \n - pröva föregående kommando igen\n - uppdatera installationskällorna genom att ange ”zypper refresh”\n - använd ett annat installationsmedium (t.ex. vid skada)\n - använd en annan installationskälla"
+msgstr ""
+"Paketintegritetskontrollen misslyckades. Det kan bero på problem i "
+"installationskällan eller installationsmediet. Pröva något av följande "
+"alternativ:\n"
+" \n"
+" - utför det föregående kommandot igen\n"
+" - uppdatera installationskällorna genom att ange 'zypper refresh'\n"
+" - använd ett annat installationsmedium (t.ex. vid skada)\n"
+" - använd en annan installationskälla"
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:800
 msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
-msgstr "VARNING: En av de installerade programfixarna innebär att datorn måste startas om. Du bör göra det så snart som möjligt."
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
+msgstr ""
+"VARNING: En av de installerade programfixarna innebär att datorn måste "
+"startas om. Starta om datorn så snart som möjligt."
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:803
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
-msgstr "VARNING: En av de installerade programfixarna påverkar pakethanteraren, vilket innebär att omstart krävs innan därpå följande operationer kan utföras."
+msgstr ""
+"VARNING: En av de installerade programfixarna påverkar pakethanteraren, "
+"vilket innebär att omstart krävs innan därpå följande operationer kan "
+"utföras."
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Licensen %s %s accepteras automatiskt."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "licens"
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:843
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
-msgstr "För att installera det här paketet måste du godkänna licensavtalet ovan. Vill du fortsätta?"
+msgstr ""
+"För att installera det här paketet måste du godkänna licensavtalet ovan. "
+"Vill du fortsätta?"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
 msgstr "Installationen avbryts på grund av att licensavtalet inte godkänns."
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:855
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
-msgstr "Starta om den här operationen i interaktivt läge och bekräfta avtalet med de licenser som krävs."
+msgstr ""
+"Starta om den här operationen i interaktivt läge och bekräfta avtalet med de "
+"licenser som krävs."
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
 msgstr "Installationen avbryts för att användaren inte godkänner"
 
 #: src/zmart-sources.cc:31
 msgid ""
 "Sorry, you need root privileges to use system sources, disabling them..."
-msgstr "Du måste ha rotbehörigheter för att få använda systemresurser. Systemresurserna inaktiveras..."
+msgstr ""
+"Du måste ha rotbehörigheter för att få använda systemresurser. "
+"Systemresurserna inaktiveras..."
 
 #: src/zmart-sources.cc:48
 msgid "Restoring system sources..."
@@ -322,8 +375,8 @@ msgid "Failed to restore sources"
 msgstr "Det gick inte att återställa systemresurserna."
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
-msgstr "Det går inte att få tillgång till arkivet"
+msgid "Cannot access repository"
+msgstr "Det gick inte att få tillgång till lagringsplatsen"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -354,7 +407,7 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nej"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "Det går inte att läsa systemkällor:"
 
@@ -370,56 +423,78 @@ msgstr "Det gick inte att hitta namnet"
 msgid "baseurl not found"
 msgstr "Det gick inte att hitta elementet baseurl"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "Fortsätter ändå"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "tar bort källan"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "Källan %s tas bort"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "Källan %s har tagits bort."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "Det gick inte att ta bort källan %s:"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
 msgid "Source %s not found."
 msgstr "Det gick inte att hitta källan %s"
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "%s är skadad eller inte tillgänglig. Vill du ta bort den?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "tar bort källan"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "URL:en är felaktig."
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "Ännu ej implementerat för libzypp-1.x.x"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "Uppdaterar"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "KLAR"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "Ett fel uppstod när källan skulle uppdateras."
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "Alla systemkällor har uppdaterats."
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "Ett fel uppstod vid hämtning av"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "ZENworks-hanteringsdemonen körs."
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "VARNING: det här kommandot kommer inte att synkronisera ändringar."
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "Använd rug eller yast2 för det ändamålet."
 
@@ -428,24 +503,36 @@ msgid ""
 "The updater could not access the package manager engine. This usually "
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
-msgstr "Uppdateringsprogrammet kunde inte få tillgång till pakethanteringsmotorn. Det inträffar oftast när ett annat program (till exempel YaST) använder det samtidigt. Stäng alla andra program och sök efter uppdateringar på nytt."
+msgstr ""
+"Uppdateringsprogrammet kunde inte få tillgång till pakethanteringsmotorn. "
+"Det inträffar oftast när ett annat program (till exempel YaST) använder det "
+"samtidigt. Stäng alla andra program och sök efter uppdateringar på nytt."
 
 #: src/zypp-checkpatches.cc:213
 #, c-format
 msgid ""
-"Couldn't restore source.\n"
+"Could not restore source.\n"
 "Detail: %s"
-msgstr "Det gick inte att återställa källan.\nInformation: %s"
+msgstr ""
+"Det gick inte att återställa källan.\n"
+"Detaljerad information: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
-msgstr "Inga uppdateringskällor har definierats. Lägg till en eller fler uppdateringskällor om du vill få uppdateringsaviseringar."
+msgstr ""
+"Inga uppdateringskällor har definierats. Lägg till en eller fler "
+"uppdateringskällor om du vill få uppdateringsaviseringar."
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "A)vbryt, Fö(R)sök igen, (I)gnorera?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "%s är ett ogiltigt svar, ange j eller n:"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -516,12 +603,13 @@ msgid "Description: "
 msgstr "Beskrivning: "
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "Inga källor. Zypper söker för närvarande bara i installationskällorna."
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "Inga källor. Zypper söker endast i installationskällor."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "Cachelagrar installerade resurser som uppfyller de angivna sökvillkoren..."
+msgstr ""
+"Cachelagrar installerade resurser som uppfyller de angivna sökvillkoren..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
@@ -539,11 +627,11 @@ msgstr "är inte ett giltigt reguljärt uttryck: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Det här är ett fel, skicka gärna en felrapport om zypper."
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "URL-adressen är felaktig."
 
-#: src/zypper.cc:78
+#: src/zypper.cc:84
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -581,7 +669,7 @@ msgstr ""
 " \tinfo, if\t\tVisa fullständig information för paket\n"
 " \tpatch-info\t\tVisa fullständig information för korrigeringsfiler\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:127
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -590,23 +678,44 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
-msgstr "  Alternativ:\n\t--help, -h\t\tHjälp\n \t--version, -V\t\tVisa versionsnumret\n \t--verbose, -v\t\tÖka utförlighetsnivån\n \t--terse, -t\t\tKortfattade utdata för maskinellt bruk\n \t--table-style, -s\tTabellstil (heltal)\n \t--rug-compatible, -r\tAktivera rug-kompabilitet\n \t--non-interactive\tFråga ingenting, använd standardsvaren automatiskt. (under utveckling)\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr ""
+"  Alternativ:\n"
+"\t--help, -h\t\tHjälp\n"
+"\t--version, -V\t\tVisa versionsnummer\n"
+"\t--verbose, -v\t\tVisa utförligare information\n"
+"\t--terse, -t\t\tKortfattade utdata för automatisk bearbetning\n"
+"\t--table-style, -s\tTabellformat (heltal)\n"
+"\t--rug-compatible, -r\tAktivera rug-kompabilitet\n"
+"\t--non-interactive, -n\tVisa inga frågor, använd standardsvaren "
+"automatiskt.\n"
+"\t--no-gpg-checks\t\tIgnorera GPG-kontrollfel och fortsätt.\n"
+"\t--root, -R <kat>\tArbeta i en annan rotkatalog\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "Utförlighet"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "Ej interaktivt läge tillämpas."
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Läget no-gpg-checks tillämpas."
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "Ogiltig tabellstil"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "Ange -h om du vill ha hjälp"
 
-#: src/zypper.cc:207
+#: src/zypper.cc:223
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -616,7 +725,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tLäs inte systemkällorna\n"
 " \t--source, -S\t\tLäs ytterligare källor\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:228
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -625,29 +734,43 @@ msgstr ""
 "  Alternativ för mål:\n"
 "\t--disable-system-resolvables, -T\t\tLäs inte systeminstallerade resurser\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:245
 msgid ""
 "  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Kommandoalternativ:\n"
-"\t--catalog,-c\t\tEndast från den här katalogen (under utveckling)\n"
-" \t--type,-t\t\tTyp av resurs (standard: paket)\n"
-" \t--no-confirm,-y\tUppmana inte användaren att bekräfta\n"
+"\t--catalog,-c\t\t\tEndast från den här katalogen (under utveckling)\n"
+"\t--type,-t\t\tTyp av resurs (standard: paket)\n"
+"\t--no-confirm,-y\t\t\tKräv inte användarens bekräftelse för att fortsätta "
+"med installationen\n"
+"\t--auto-agree-with-licenses,-l\tAcceptera automatiskt "
+"licensbekräftelsesidor från tredje part.\n"
+"\t\t\t\t\tMer information visar du med kommandot man zypper.\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:265
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Kommandoalternativ:\n"
 "\t--type,-t\t\tTyp av resurs (standard: paket)\n"
-" \t--no-confirm,-y\tUppmana inte användaren att bekräfta\n"
+"\t--no-confirm,-y\tKräv inte att användaren ska bekräfta\n"
+"\t--auto-agree-with-licenses,-l\tAcceptera automatiskt "
+"licensbekräftelsesidor från tredje part.\n"
+"\t\t\t\t\tMer information visar du med kommandot man zypper.\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:283
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -669,7 +792,7 @@ msgstr ""
 " \t--disabled,-d\t\tLägg till tjänsten som inaktiverad\n"
 " \t--no-refresh,-n\t\tUppdatera inte metadata automatiskt\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:302
 msgid ""
 "service-list\n"
 "\n"
@@ -681,7 +804,7 @@ msgstr ""
 " Visa alla definierade systemtjänster (installationskällor).\n"
 " Kommandot har inte några alternativ.\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:316
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -693,7 +816,7 @@ msgstr ""
 " Ta bort en tjänst (installationskälla) från systemet.\n"
 " Kommandot har inte några alternativ.\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:330
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -706,7 +829,7 @@ msgstr ""
 "alias.\n"
 " Kommandot har inte några alternativ.\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:344
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -716,7 +839,7 @@ msgstr ""
 "\n"
 " Uppdatera alla installationskällor i systemet.\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:357
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -732,19 +855,25 @@ msgstr ""
 "   Kommandoalternativ:\n"
 " \t--type,-t\t\tTyp av resurs (standard: korrigeringsfil)\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:378
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  Kommandoalternativ:\n"
-"\t--type,-t\t\tTyp av resurs (standard: korrigeringsfil)\n"
-" \t--no-confirm,-y\tUppmana inte användaren att bekräfta\n"
-" \t--skip-interactive\t\tHoppa över interaktiva uppdateringar\n"
+"\t--type,-t\t\tTyp av resurs (standard: programfix)\n"
+"\t--no-confirm,-y\t\tKräv inte att användaren ska bekräfta\n"
+"\t--skip-interactive\t\tHoppa över interaktiva uppdateringar\n"
+"\t--auto-agree-with-licenses,-l\tAcceptera automatiskt "
+"licensbekräftelsesidor från tredje part.\n"
+"\t\t\t\t\tMer information visar du med kommandot man zypper.\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:405
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -754,10 +883,8 @@ msgid ""
 "    --match-all            Search for a match to all search strings "
 "(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and "
 "descriptions.\n"
@@ -773,18 +900,17 @@ msgid ""
 msgstr ""
 "zypper [globala-alternativ] search [alternativ] [frågesträng...]\n"
 "\n"
-" 'search' - Sök efter paket som matchar de angivna söksträngarna\n"
+"'search' - Sök efter paket som matchar de angivna söksträngarna\n"
 " \n"
-"   Kommandoalternativ:\n"
-"     --match-all            Sök efter en matchning av alla söksträngar "
+"  Kommandoalternativ:\n"
+"    --match-all            Sök efter en matchning av alla söksträngar "
 "(standard)\n"
-"     --match-any            Sök efter en matchning av någon av "
-"söksträngarna\n"
-"     --match-substrings     Matchningar för söksträngar kan vara delar av "
-"ord (standard)\n"
-"     --match-words          Matchningar för söksträngar kan endast vara hela "
+"    --match-any            Sök efter en matchning av någon av söksträngarna\n"
+"    --match-substrings     Matchningar för söksträngar kan vara delar av ord "
+"(standard)\n"
+"    --match-words          Matchningar för söksträngar kan endast vara hela "
 "ord\n"
-"     --match-exact          Söker efter ett exakt paketnamn\n"
+"    --match-exact          Söker efter ett exakt paketnamn\n"
 " -d, --search-descriptions  Söker även i sammanfattningar och beskrivningar "
 "av paket.\n"
 " -c, --case-sensitive       Utför en skiftlägeskänslig sökning.\n"
@@ -797,7 +923,7 @@ msgstr ""
 " \n"
 " Det går även att använda jokertecknen * och ? i söksträngarna.\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:433
 msgid ""
 "patch-check\n"
 "\n"
@@ -811,7 +937,7 @@ msgstr ""
 " \n"
 " Kommandot har inte några alternativ.\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:447
 msgid ""
 "patches\n"
 "\n"
@@ -825,7 +951,7 @@ msgstr ""
 " \n"
 " Kommandot har inte några alternativ.\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:461
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -835,7 +961,7 @@ msgstr ""
 "\n"
 " 'info' -- Visa fullständig information för paket\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:473
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -845,7 +971,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- Visa fullständig information för korrigeringsfiler\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:485
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -855,39 +981,35 @@ msgstr ""
 "\n"
 " 'moo' - Visa ett djur\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "Okänt kommando"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "Programargument som inte är alternativ:"
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Ignorerar --terse (endast för rug-kompabilitet)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "Installerade resurser ignoreras..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "En ZYpp-transaktion är redan igång."
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr "Root-behörigheter krävs för att visa systemkällor."
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "Varning: Okänd metadatatyp"
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "Okänd resurstyp"
 
-#: src/zypper.cc:721
+#: src/zypper.cc:756
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -895,15 +1017,19 @@ msgstr ""
 "Varning: Inga källor. Endast de installerade resurserna används. Det går "
 "inte att installera någonting."
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "Skriv en buggrapport om detta."
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
 "Se http://en.opensuse.org/Zypper#Troubleshooting om du vill ha instruktioner."
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "Oväntat undantag."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "För att köra zypper krävs rotprivilegier."

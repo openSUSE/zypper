@@ -1,308 +1,345 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2005-03-09 13:54+0100\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-12 09:28\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr "未签名，是否继续？ "
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "导入键"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "警告：正在接受未签名文件 %s。"
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr "到可信密钥环？"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s 未签名，是否继续？"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "用未知的密钥 ID 签名："
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "是否将密钥 %s 导入可信密钥环？"
 
-# internal key used: Ok
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "是否继续？"
-
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "是否要信任密钥 ID"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr "指纹： "
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "警告：正在接受的文件 %s 是用未知密钥 %s 签名的。"
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "以下项的签名校验"
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s 是用未知密钥 %s 签名的。是否继续？"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr "用公共密钥 ID"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "正在自动信任密钥 ID %s，%s 和指纹 %s"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "已失败，这样风险很大！"
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "是否要信任密钥 ID %s，%s 和指纹 %s"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "无以下项的摘要"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"警告：正在忽略对 %s（公共密钥 id 为 %s、%s 且指纹为 %s）签名校验失败！确保这"
+"并非由文件中的一些恶意更改导致！"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "以下项的未知"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"%s（带有公共密钥 ID %s，%s 和指纹 %s）的签名校验失败。警告：可能是由文件中的"
+"恶意更改导致的！继续操作具有风险！是否仍继续？"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr "摘要"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "文件 %s 无文摘。"
 
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "以下项的摘要校验已失败"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "是否继续？"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr "，预期的"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "未知文摘 %s（对于文件 %s）。"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr "已找到"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "正在忽略 %s 的失败文摘校验（需要 %s，但找到的是 %s）。"
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "%s 的文摘校验失败。需要 %s，但找到的是 %s。"
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "正在初始化目标"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr "（旧方法）"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "未找到"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "正在跳过"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "（已安装）"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "未能将“%s”添加到要安装的包列表。"
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "已失败"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
 msgstr "未找到"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
 msgstr "问题："
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "问题"
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " 解决方案 %s："
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr "解决方案"
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "数字、重试(r)或取消(c)>"
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "r"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "c"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "正在应用解决方案 %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s 问题："
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "摘要："
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<install>"
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<uninstall>"
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "无操作。"
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "正在对 RPM 数据库进行语法分析..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr "可解析对象。"
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "对以下项的元数据进行语法分析"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "正在确立合计状态"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "正在解析依赖性..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr "需要的增补程序"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr "安全增补程序"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "已安装 "
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "已卸载"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "不再适用"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "不适用"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "已应用"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "不需要"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "已断开"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "需要"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "错误"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "编目"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "名称"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "版本"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "类别"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "状态"
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:560
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
-msgstr "警告： 这些只是影响更新程序本身的更新。\n还存在其他可用更新。\n"
+"Other updates are available too.\n"
+msgstr ""
+"警告：这些仅仅是影响更新程序本身的更新。\n"
+"其他更新也可用。\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "存档"
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "警告： %s 是交互的，已跳过。"
 
-# internal key used: Ok
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "是否继续？"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "正在提交"
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:782
 msgid ""
-"Package integrity check failed. This may be a problem with installation "
+"Package integrity check failed. This may be a problem with the installation "
 "source or media. Try one of the following:\n"
 "\n"
-"- just retry previous command\n"
+"- retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- use another installation media (for example, if yours is damaged)\n"
 "- use another installation source"
-msgstr "包完整性检查已失败。 可能是因为安装源或媒体存在问题。 请尝试执行以下其中一个操作：\n \n － 重试前个命令\n － 使用“zypper refresh”刷新安装源\n － 使用其他安装媒体（例如如果已损坏）\n － 使用其他安装源"
+msgstr ""
+"包完整性检查失败。这可能是安装源或媒体的问题。尝试以下操作之一：\n"
+"\n"
+"- 重试前一命令\n"
+"- 使用“zypper 刷新”刷新安装源\n"
+"- 使用其他安装媒体（例如，如果您的安装媒体已损坏）\n"
+"- 使用其他安装源"
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:800
 msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
-msgstr "警告： 其中一个已安装增补程序要求重引导计算机。 请尽快重引导。"
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
+msgstr "警告：其中一个安装的增补程序需要重引导您的计算机。请尽快重引导。"
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:803
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
-msgstr "警告： 其中一个已安装增补程序影响到包管理器本身，因此要求在执行下一个操作前重启动。"
+msgstr ""
+"警告： 其中一个已安装增补程序影响到包管理器本身，因此要求在执行下一个操作前重"
+"启动。"
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "正在自动同意 %s %s 许可证。"
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "许可证"
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:843
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
 msgstr "要安装此包，必须同意以上许可证条款。 是否继续？"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
 msgstr "由于未确认许可证，正在中止安装。"
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:855
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
 msgstr "请以交互方式重启动操作并用需要的许可证确认协议。"
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
 msgstr "由于用户未表示同意，正在中止安装"
 
@@ -320,7 +357,7 @@ msgid "Failed to restore sources"
 msgstr "未能恢复源"
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
+msgid "Cannot access repository"
 msgstr "无法访问储存库"
 
 #: src/zmart-sources.cc:99
@@ -352,7 +389,7 @@ msgstr "是"
 msgid "No"
 msgstr "否"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "读取系统源时出错："
 
@@ -368,56 +405,78 @@ msgstr "名称未找到"
 msgid "baseurl not found"
 msgstr "未找到基本 URL"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "还是继续"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "正在去除源"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "正在去除源“%s”"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "已去除源“%s”。"
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "未能去除源“%s”："
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
 msgid "Source %s not found."
 msgstr "源 %s 未找到。"
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "“%s”已中断或不可访问。是否要将其去除？"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "正在去除源"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "URL 无效："
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "对不起，还未为 libzypp-1.x.x 实施"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "正在刷新"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "已完成"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "刷新源时出错："
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "所有系统源均已刷新。"
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "取出时出错"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "ZENworks 管理守护程序正处于运行状态。"
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "警告： 此命令不会同步更改。"
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "请使用 rug 或 yast2 来进行同步。"
 
@@ -426,13 +485,18 @@ msgid ""
 "The updater could not access the package manager engine. This usually "
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
-msgstr "更新程序无法访问包管理器引擎。 这通常是因为使用更新程序时同时还使用其他一个应用程序（比如 YaST）。 请关闭其他应用程序并再次检查更新。"
+msgstr ""
+"更新程序无法访问包管理器引擎。 这通常是因为使用更新程序时同时还使用其他一个应"
+"用程序（比如 YaST）。 请关闭其他应用程序并再次检查更新。"
 
 #: src/zypp-checkpatches.cc:213
+#, c-format
 msgid ""
-"Couldn't restore source.\n"
+"Could not restore source.\n"
 "Detail: %s"
-msgstr "无法恢复源。\n细节： %s"
+msgstr ""
+"无法恢复源。\n"
+"细节：%s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
@@ -440,9 +504,14 @@ msgid ""
 "in order to be notified of updates."
 msgstr "没有定义的更新源。 请添加一个或多个更新源，以接收更新通知。"
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "中止(A)、重试(R)或忽略(I)？"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "无效回答“%s”，请输入“y”或“n”："
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -506,15 +575,15 @@ msgstr "已安装的大小："
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr "概要："
+msgstr "摘要："
 
 #: src/zypper-info.cc:103
 msgid "Description: "
 msgstr "描述："
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "无源。 Zypper 当前只在安装源内搜索。"
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "无源。Zypper 当前仅在安装源内搜索。"
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
@@ -536,11 +605,11 @@ msgstr "不是有效的正则表达式： \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "这是一个错误，请向 zypper 发送错误报告。"
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "URL 无效。"
 
-#: src/zypper.cc:78
+#: src/zypper.cc:84
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -578,7 +647,7 @@ msgstr ""
 " \tinfo、if\t\t显示包的完整信息\n"
 " \tpatch-info\t\t显示增补程序的完整信息\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:127
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -587,23 +656,43 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
-msgstr "  选项：\n\t--help, -h\t\t帮助\n \t--version, -V\t\t输出版本号\n \t--verbose, -v\t\t提高详细程度\n \t--terse, -t\t\t计算机消耗的简明输出\n \t--table-style, -s\t表格样式（整型）\n \t--rug-compatible, -r\t开启 rug 兼容\n \t--non-interactive\t不做任何询问，自动使用默认回答。  （开发中）\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr ""
+"  选项：\n"
+"\t--help, -h\t\t帮助\n"
+"\t--version, -V\t\t输出版本号\n"
+"\t--verbose, -v\t\t增加详细程度\n"
+"\t--terse, -t\t\t计算机消耗的简明输出\n"
+"\t--table-style, -s\t表样式（整数）\n"
+"\t--rug-compatible, -r\t打开 rug 兼容性\n"
+"\t--non-interactive, -n\t不要问任何问题，请自动使用默认答案。\n"
+"\t--no-gpg-checks\t\t忽略 GPG 检查失败并继续。\n"
+"\t--root, -R <dir>\t在其他根目录上操作\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "详细程度"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "正在进入 non-interactive 模式。"
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "正在进入“no-gpg-checks”方式。"
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "无效表格样式"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "尝试用 –h 获取帮助"
 
-#: src/zypper.cc:207
+#: src/zypper.cc:223
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -613,7 +702,7 @@ msgstr ""
 "\t--disable-system-sources、-D\t\t不读取系统源\n"
 " \t—source、-S\t\t读取额外的源\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:228
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -622,29 +711,40 @@ msgstr ""
 "  目标选项：\n"
 "\t--disable-system-sources、-D\t\t不读取系统安装的可解析对象\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:245
 msgid ""
 "  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  命令选项：\n"
-"\t--catalog、-c\t\t仅通过此编目（开发中）\n"
-" \t—type、-t\t\t可解析对象的类型（默认：包）\n"
-" \t--no-confirm、-y\t不要求用户确认\n"
+"\t--catalog、-c\t\t\t仅来自该编目（开发中）\n"
+"\t--type、-t\t\t可解析对象的类型（默认值：package）\n"
+"\t--no-confirm、-y\t\t\t无需用户确认即继续安装\n"
+"\t--auto-agree-with-licenses、-l\t对第三方许可证确认提示自动回答“是”。\n"
+"\t\t\t\t\t请查看 man zypper 以了解更多细节。\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:265
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  命令选项：\n"
-"\t--type、-t\t\t可解析对象的类型（默认：包）\n"
-" \t--no-confirm、-y\t不要求用户确认\n"
+"\t--type、-t\t\t可解析对象的类型（默认值：package）\n"
+"\t--no-confirm、-y\t无需用户确认\n"
+"\t--auto-agree-with-licenses、-l\t对第三方许可证确认提示自动回答“是”。\n"
+"\t\t\t\t\t请参见 man zypper 以了解更多细节。\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:283
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -666,7 +766,7 @@ msgstr ""
 " \t--disabled、-d\t\t将服务添加为禁用服务\n"
 " \t--no-refresh、-n\t\t不自动刷新元数据\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:302
 msgid ""
 "service-list\n"
 "\n"
@@ -678,7 +778,7 @@ msgstr ""
 " 列出所有定义的系统服务（安装源）。\n"
 "此命令无选项。\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:316
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -690,7 +790,7 @@ msgstr ""
 " 从系统去除服务（安装源）。\n"
 "此命令无选项。\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:330
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -702,7 +802,7 @@ msgstr ""
 " 将新别名指派给 URI 或当前别名指定的服务。\n"
 "此命令无选项。\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:344
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -712,7 +812,7 @@ msgstr ""
 "\n"
 " 刷新系统中找到的所有安装源。\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:357
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -728,19 +828,24 @@ msgstr ""
 "   命令选项：\n"
 "\t--type、-t\t\t可解析对象的类型（默认：增补程序）\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:378
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  命令选项：\n"
-"\t--type、-t\t\t可解析对象的类型（默认：增补程序）\n"
-" \t--no-confirm、-y\t\t不要求用户确认\n"
-" \t--skip-interactive\t\t跳过交互更新\n"
+"\t--type、-t\t\t可解析对象的类型（默认值：patch）\n"
+"\t--no-confirm、-y\t\t无需用户确认\n"
+"\t--skip-interactive\t\t跳过交互更新\n"
+"\t--auto-agree-with-licenses、-l\t对第三方许可证确认提示自动回答“是”。\n"
+"\t\t\t\t\t请参见 man zypper 以了解更多细节。\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:405
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -750,10 +855,8 @@ msgid ""
 "    --match-all            Search for a match to all search strings "
 "(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and "
 "descriptions.\n"
@@ -769,25 +872,25 @@ msgid ""
 msgstr ""
 "zypper [全局选项] search [选项] [查询字符串...]\n"
 "\n"
-"“搜索”－ 搜索与给定搜索字符串匹配的包\n"
-" \n"
-"   命令选项：\n"
-"--match-all            搜索所有搜索字符串的匹配项（默认）\n"
-"     --match-any            搜索任一搜索字符串的匹配项\n"
-"     --match-substrings     搜索字符串的匹配项可能是单词的一部分（默认）\n"
-"     --match-words          搜索字符串的匹配项只能是整个单词\n"
-"     --match-exact          搜索精确的包名称\n"
-" -d, --search-descriptions  同时还搜索包摘要和说明。\n"
-"-c, --case-sensitive       搜索时区分大小写。\n"
-"-I、--installed-only       只显示已安装的包。\n"
-"-u、--uninstalled-only       只显示当前未安装的包。\n"
-"-t、--type                 只搜索指定类型的包。\n"
-"--sort-by-name         按名称排列包的顺序（默认）。\n"
-"--sort-by-catalog      按编目排列包的顺序（源）。\n"
+"“search”- 搜索与给定搜索字符串匹配的包\n"
 "\n"
-" * 和 ? 通配符也可以用在搜索字符串中。\n"
+"  命令选项：\n"
+"    --match-all            搜索与所有搜索字符串匹配的包（默认值）\n"
+"    --match-any            搜索与任何搜索字符串匹配的包\n"
+"    --match-substrings     搜索部分文字匹配的包（默认值）\n"
+"    --match-words          仅搜索全部文字匹配的包\n"
+"    --match-exact          搜索精确的包名称\n"
+"-d, --search-descriptions  也在包摘要和说明说搜索。\n"
+"-c, --case-sensitive       执行区分大小写的搜索。\n"
+"-i, --installed-only       仅显示已安装的包。\n"
+"-u, --uninstalled-only     仅显示当前未安装的包。\n"
+"-t, --type                 仅搜索指定类型的包。\n"
+"    --sort-by-name         按名称为包排序（默认值）。\n"
+"    --sort-by-catalog      按编目为包排序（源）。\n"
+"\n"
+"* 和 ? 通配符也可以在搜索字符串中使用。\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:433
 msgid ""
 "patch-check\n"
 "\n"
@@ -801,7 +904,7 @@ msgstr ""
 " \n"
 " 此命令无选项。\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:447
 msgid ""
 "patches\n"
 "\n"
@@ -815,7 +918,7 @@ msgstr ""
 " \n"
 " 此命令无选项。\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:461
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -825,7 +928,7 @@ msgstr ""
 "\n"
 "“info”－ 显示包的完整信息\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:473
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -835,7 +938,7 @@ msgstr ""
 "\n"
 "“patch-info”－ 显示增补程序的详细信息\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:485
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -845,52 +948,52 @@ msgstr ""
 "\n"
 " “moo” － 显示动物\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "未知命令"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "无选项程序自变量："
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Ignoring --terse（仅用于 rug 兼容性）"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "正在忽略已安装的可解析对象..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "有一项 ZYpp 事务已在运行中。"
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr "查看系统源需要有 root 特权。"
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "警告：未知的元数据类型"
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "未知的可解析对象类型"
 
-#: src/zypper.cc:721
+#: src/zypper.cc:756
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
 msgstr "警告：无源。只能使用已安装的可解析对象运行。未能安装。"
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "请提交关于此情况的错误报告。"
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "请参阅 http://en.opensuse.org/Zypper#Troubleshooting 站点上的指导。"
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "意外异常。"
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "运行 zypper 需要 root 特权。"

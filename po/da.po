@@ -1,297 +1,324 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2005-08-16 20:00+0200\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-14 10:01\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr "er ikke signeret. Vil du fortsætte?"
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "Importer nøgle"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "Advarsel: Accepterer en usigneret fil %s."
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr "til en nøglering, der er tillid til?"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s er ikke signeret. Vil du fortsætte?"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "er signeret med et ukendt nøgle-id:"
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "Importér nøgle %s til betroet nøglering?"
 
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "Vil du fortsætte?"
-
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "Vil du have tillid til nøgle-id"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr "fingeraftryk:"
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "Advarsel: Accepterer fil %s, der er signeret med en ukendt nøgle %s."
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "Signaturgodkendelse for"
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%s er signeret med en ukendt nøgle %s. Vil du fortsætte?"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr "med offentligt nøgle-id"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "Har automatisk tillid til nøgle-id %s, %s, fingeraftryk %s"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "mislykkedes, DETTE ER RISIKABELT!"
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "Ønsker du at have tillid til nøgle-id %s, %s, fingeraftryk %s"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "Intet sammendrag for//"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"Advarsel: Der ignoreres en mislykket signaturgodkendelse for %s med det "
+"offentlige nøgle-id %s, %s og fingeraftrykket %s! Kontroller, at dette ikke "
+"skyldes skadelige ændringer i filen!"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "Ukendt sammendrag"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"Det lykkedes ikke at bekræfte signaturen for %s med det offentlige nøgle-id %"
+"s, %s, fingeraftrykket %s. Advarsel: Dette kan skyldes, at der er foretaget "
+"skadelige ændringer i filen! Det er risikabelt at fortsætte! Vil du "
+"fortsætte alligevel?"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr "for"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "Ingen oversigt for filen %s."
 
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "Sammendraget kunne ikke godkendes for"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "Vil du fortsætte?"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr ", forventet"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "Ukendt oversigt %s for filen %s."
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr "fundet"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr ""
+"Ignorerer mislykket oversigts-verifikation for %s (forventede %s, fandt %s)."
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "Oversigts-verifikation mislykkedes for %s. Forventede %s, fandt %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "Initialiserer målet"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr "(gammel metode)"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "ikke fundet"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "springer over"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "(allerede installeret)"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr ""
 "Det var ikke muligt at føje '%s' til listen over pakker, der skal "
 "installeres."
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "Mislykkedes"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
-msgstr "Ikke fundet"
+msgstr "ikke fundet"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
-msgstr "Problemer:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "Problem: "
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "PROBLEM"
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " Løsning %s: "
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr "LØSNING"
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "tal, (f)orsøg igen eller (a)nullér> "
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "R"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "a"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "Udfører løsning %s"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s problemer:"
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "Oversigt:"
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<install>"
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<uninstall>"
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "Der er ikke noget at gøre."
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "Analyserer RPM-database..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr "ændringer."
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "Analyserer metadata for"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "Opretter status for aggregater"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "Løser afhængigheder..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr "programrettelser er påkrævet"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr "sikkerhedsrettelser"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "Installeret"
 
-#
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "Ikke-installeret"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "Ikke længere anvendelig"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "Ikke anvendelig"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "Anvendt"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "Ikke nødvendig"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "Brudt"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "Nødvendig"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "fejl"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "Katalog"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "Navn"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "Version"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "Kategori"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "Status"
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:560
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
+"Other updates are available too.\n"
 msgstr ""
 "ADVARSEL: Dette er kun de opdateringer, der påvirker selve "
 "opdateringsprogrammet.\n"
-"Der er andre tilgængelige opdateringer.\n"
+"Der findes også andre opdateringer.\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "Arkitektur"
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "ADVARSEL: %s er interaktiv. Den springes over."
 
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "Vil du fortsætte?"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "indskriver"
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:782
 msgid ""
-"Package integrity check failed. This may be a problem with installation "
+"Package integrity check failed. This may be a problem with the installation "
 "source or media. Try one of the following:\n"
 "\n"
-"- just retry previous command\n"
+"- retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- use another installation media (for example, if yours is damaged)\n"
 "- use another installation source"
 msgstr ""
 "Integritetskontrollen af pakken mislykkedes. Det kan skyldes et problem med "
 "installationskilden eller installationsmediet. Prøv en af følgende "
 "fremgangsmåder:\n"
 "\n"
-" - kør den forrige kommando igen\n"
-" - opdater installationskilderne ved hjælp af \"zypper refresh\"\n"
-" - brug et andet installationsmedie (hvis f.eks. det nuværende er "
+"- Kør den forrige kommando igen\n"
+"- Opdater installationskilderne ved hjælp af \"zypper refresh\"\n"
+"- Brug et andet installationsmedie (hvis det nuværende f.eks. er "
 "beskadiget)\n"
-" - brug en anden installationskilde"
+"- Brug en anden installationskilde."
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:800
 msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
 msgstr ""
 "ADVARSEL: En af de installerede programrettelser kræver, at computeren "
-"genstartes. Genstart computeren så snart, det er muligt."
+"genstartes. Genstart computeren så hurtigt som muligt."
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:803
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
@@ -300,11 +327,16 @@ msgstr ""
 "pakkeinstallationsprogrammet. Derfor skal computeren genstartes, inden de "
 "næste handlinger udføres."
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "Automatisk accept af %s %s licensaftale."
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "licens"
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:843
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
@@ -312,13 +344,13 @@ msgstr ""
 "Du skal acceptere de ovenstående licensvilkår for at kunne installere denne "
 "pakke. Vil du fortsætte?"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
 msgstr ""
 "Installationen afbrydes, fordi du ikke har bekræftet, at du accepterer "
 "licensvilkårene."
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:855
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
@@ -326,7 +358,7 @@ msgstr ""
 "Start proceduren igen i interaktiv tilstand, og bekræft, at du accepterer "
 "licensvilkårene."
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
 msgstr "Installationen afbrydes, fordi brugeren ikke kan acceptere"
 
@@ -346,8 +378,8 @@ msgid "Failed to restore sources"
 msgstr "Kilderne kunne ikke gendannes"
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
-msgstr "Der kan ikke opnås adgang til lagerstedet"
+msgid "Cannot access repository"
+msgstr "Der kan ikke opnås adgang til lageret"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -378,7 +410,7 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nej"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "Der opstod en fejl under læsningen af systemkilderne:"
 
@@ -394,57 +426,78 @@ msgstr "Navnet blev ikke fundet"
 msgid "baseurl not found"
 msgstr "basis-url'en blev ikke fundet"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "Fortsætter alligevel"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "fjerner kilde"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "Fjerner kilde '%s'"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "Kilden '%s' er fjernet."
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "Kilden '%s' kunne ikke fjernes:"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
 #, c-format
 msgid "Source %s not found."
 msgstr "Kilden %s blev ikke fundet."
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "'%s' er beskadiget eller er ikke tilgængelig. Vil du fjerne den?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "fjerner kilde"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "URL-adressen er ugyldig:"
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "Elementet er desværre endnu ikke implementeret for libzypp-1.x.x"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "Opdaterer"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "UDFØRT"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "Der opstod en fejl under opdateringen af kilden:"
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "Alle systemkilder er blevet opdateret."
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "Der opstod en fejl under hentningen"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "ZENworks Management Daemon (ZMD) kører."
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "ADVARSEL: Denne kommando synkroniserer ikke ændringerne."
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "Brug rug eller yast2 til dette."
 
@@ -462,11 +515,11 @@ msgstr ""
 #: src/zypp-checkpatches.cc:213
 #, c-format
 msgid ""
-"Couldn't restore source.\n"
+"Could not restore source.\n"
 "Detail: %s"
 msgstr ""
 "Kilden kunne ikke gendannes.\n"
-"Oplysninger: %s"
+"Detalje: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
@@ -476,9 +529,14 @@ msgstr ""
 "Der er ikke angivet nogen opdateringskilder. Tilføj en eller flere "
 "opdateringskilder, så du får besked om nye opdateringer."
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "(A)fbryd, (P)røv igen, (I)gnorer?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "'%s' er ikke et gyldigt svar. Indtast 'j' eller 'n':"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -542,15 +600,16 @@ msgstr "Størrelse installeret: "
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr "Opsummering: "
+msgstr "Oversigt:"
 
 #: src/zypper-info.cc:103
 msgid "Description: "
 msgstr "Beskrivelse: "
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "Ingen kilder. Zypper søger i øjeblikket kun i installationskilderne."
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr ""
+"Der er ingen kilder. Zypper søger i øjeblikket kun i installationskilder."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
@@ -574,11 +633,11 @@ msgstr "er ikke et gyldigt regulært udtryk: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "Dette er en fejl. Udfyld en fejlrapport om Zypper."
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "URL-adressen er ugyldig."
 
-#: src/zypper.cc:78
+#: src/zypper.cc:84
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -616,7 +675,7 @@ msgstr ""
 " \tinfo, if\t\tVis alle oplysninger om pakker\n"
 " \tpatch-info\t\tVis alle oplysninger om rettelser\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:127
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -625,32 +684,44 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
 msgstr ""
-" Valgmuligheder:\n"
+"  Parametre:\n"
 "\t--help, -h\t\tHjælp\n"
-" \t--version, -V\t\tVis versionsnummeret\n"
-" \t--verbose, -v\t\tVær mere udførlig\n"
-" \t--terse, -t\t\tForenklet output til maskinbrug\n"
-" \t--table-style, -s\tTabeltypografi (heltal)\n"
-" \t--rug-compatible, -r\tAktiver rug-kompatibilitet\n"
-"\t--non-interactive\tSpørg ikke om noget, brug automatisk standardsvar. "
-"(Under udvikling)\n"
+"\t--version, -V\t\tUdlæs versionsnummeret\n"
+"\t--verbose, -v\t\tMedtag flere detaljer\n"
+"\t--terse, -t\t\tAfkort outputtet til maskinforbrug\n"
+"\t--table-style, -s\tTabeltypografi (heltal)\n"
+"\t--rug-compatible, -r\tSlå rug-kompatibilitet til\n"
+"\t--non-interactive, -n\tSpørg ikke om noget. Brug automatisk "
+"standardsvarene.\n"
+"\t--no-gpg-checks\t\tIgnorer fejl i GPG-kontrol, og fortsæt.\n"
+"\t--root, -R <dir>\tArbejd i et andet rodbibliotek\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "Uddybende"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "Går i ikke-interaktiv tilstand."
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Går i ingen GPG-tjek-tilstand."
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "Ugyldig tabeltypografi"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "Prøv -h for at få hjælp"
 
-#: src/zypper.cc:207
+#: src/zypper.cc:223
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -660,7 +731,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tLæs ikke systemkilderne\n"
 " \t--source, -S\t\tLæs ekstra kilde\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:228
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -670,29 +741,45 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tLæs ikke ændringer, der er installeret "
 "på systemet\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:245
 msgid ""
 "  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
-"  Kommandovalgmuligheder:\n"
-"\t--catalog,-c\t\tKun fra dette katalog (under udvikling)\n"
-" \t--type,-t\t\tType af ændring (standard: pakke)\n"
-" \t--no-confirm,-y\tKræver ikke brugerbekræftelse\n"
+"  Kommandoparametre:\n"
+"\t--catalog,-c\t\t\tKun fra dette katalog (under udvikling)\n"
+"\t--type,-t\t\tObjekttype (standard: pakke)\n"
+"\t--no-confirm,-y\t\t\tKræver ikke brugerbekræftelse for at fortsætte med "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAccepter automatisk bekræftelse af "
+"tredjepartslicens.\n"
+"\t\t\t\t\tDu kan finde flere oplysninger i man zypper.\n"
+"\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:265
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
-"  Kommandovalgmuligheder:\n"
-"\t--type,-t\t\tType af ændring (standard: pakke)\n"
-" \t--no-confirm,-y\tKræver ikke brugerbekræftelse\n"
+"  Kommandoparametre:\n"
+"\t--type,-t\t\tObjekttype (standard: pakke)\n"
+"\t--no-confirm,-y\tKræver ikke brugerbekræftelse\n"
+"\t--auto-agree-with-licenses,-l\tAccepter automatisk bekræftelse af "
+"tredjepartslicens.\n"
+"\t\t\t\t\tDu kan finde flere oplysninger i man zypper.\n"
+"\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:283
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -714,7 +801,7 @@ msgstr ""
 " \t--disabled,-d\t\tTilføj tjenesten som deaktiveret\n"
 " \t--no-refresh,-n\t\tOpdater ikke automatisk metadataene\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:302
 msgid ""
 "service-list\n"
 "\n"
@@ -726,7 +813,7 @@ msgstr ""
 " Angiv alle definerede systemtjenester (installationskilder).\n"
 " Denne kommando har ingen valgmuligheder.\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:316
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -738,7 +825,7 @@ msgstr ""
 " Fjern service (installationskilde) fra systemet.\n"
 " Denne kommando har ingen valgmuligheder.\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:330
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -751,7 +838,7 @@ msgstr ""
 "det aktuelle alias.\n"
 " Denne kommando har ingen valgmuligheder.\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:344
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -761,7 +848,7 @@ msgstr ""
 "\n"
 " Opdater alle installationskilder i systemet.\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:357
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -777,19 +864,26 @@ msgstr ""
 "   Kommandovalgmuligheder:\n"
 " \t--type,-t\t\tType af ændring (standard: rettelse)\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:378
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
-"  Kommandovalgmuligheder:\n"
-"\t--type,-t\t\tType af ændring (standard: rettelse)\n"
-" \t--no-confirm,-y\t\tDer kræves ikke brugerbekræftelse\n"
-" \t--skip-interactive\t\tSpring interaktive opdateringer over\n"
+"  Kommandoparametre:\n"
+"\t--type,-t\t\tObjekttype (standard: programrettelse)\n"
+"\t--no-confirm,-y\t\tKræver ikke brugerbekræftelse\n"
+"\t--skip-interactive\t\tSpring interaktive opdateringer over\n"
+"\t--auto-agree-with-licenses,-l\tAccepter automatisk bekræftelse af "
+"tredjepartslicens.\n"
+"\t\t\t\t\tDu kan finde flere oplysninger i man zypper.\n"
+"\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:405
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -799,10 +893,8 @@ msgid ""
 "    --match-all            Search for a match to all search strings "
 "(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and "
 "descriptions.\n"
@@ -816,33 +908,31 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"zypper [globale-valgmuligheder] search [valgmuligheder] [søgestreng...]\n"
+"zypper [global-options] search [options] [querystring...]\n"
 "\n"
-" 'search' - Søg efter pakker, der matcher bestemte søgestrenge\n"
-" \n"
-"   Kommandovalgmuligheder:\n"
-"     --match-all            Søg efter et matchende resultat til alle "
-"søgestrenge  (standard)\n"
-"     --match-any            Søg efter et matchende resultat til en eller "
+"'search' - Søg efter et matchende resultat til alle søgestrenge\n"
+"\n"
+"  Kommandoindstillinger:\n"
+"    --match-all             Søg efter et matchende resultat til alle "
+"søgestrenge (standard)\n"
+"    --match-any            Søg efter et matchende resultat til en eller "
 "flere af søgestrengene\n"
-"     --match-substrings     De matchende resultater til søgestrengene kan "
-"være dele af ord (standard)\n"
-"     --match-words          De matchende resultater til søgestrengene kan "
-"kun være hele ord\n"
-"     --match-exact          Søger efter et nøjagtigt pakkenavn\n"
-" -d, --search-descriptions  Søg også i pakkeopsummeringer og -beskrivelser.\n"
-" -c, --case-sensitive       Udfør en søgning, hvor der skelnes mellem store "
+"    --match-substrings     Søg efter matchende resultater til dele af ord "
+"(standard)\n"
+"    --match-words          Søg kun efter matchende resultater til hele ord\n"
+"    --match-exact          Søger efter et nøjagtigt pakkenavn\n"
+"-d, --search-descriptions  Søg også i pakkeopsummeringer og -beskrivelser.\n"
+"-c, --case-sensitive       Udfør en søgning, hvor der skelnes mellem store "
 "og små bogstaver.\n"
-" -i, --installed-only       Vis kun pakker, der allerede er installeret.\n"
-" -u, --uninstalled-only     Vis kun pakker, der aktuelt ikke er "
-"installeret.\n"
-" -t, --type                 Søg kun efter pakker af den angivne type.\n"
-"     --sort-by-name         Sorter pakker efter navn (standard).\n"
-"     --sort-by-catalog      Sorter pakker efter katalog (kilde).\n"
-" \n"
-" Jokertegnene * og ? kan bruges i søgestrenge.\n"
+"-i, --installed-only       Vis kun pakker, som allerede er installeret.\n"
+"-u, --uninstalled-only     Vis kun pakker, som ikke er installeret.\n"
+"-t, --type                 Søg kun efter pakker af den angivne type.\n"
+"    --sort-by-name         Sorter pakker efter navn (standard).\n"
+"    --sort-by-catalog      Sorter pakker efter katalog (kilde).\n"
+"\n"
+"Jokertegnene * og ? kan også bruges i søgestrenge.\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:433
 msgid ""
 "patch-check\n"
 "\n"
@@ -856,7 +946,7 @@ msgstr ""
 " \n"
 " Denne kommando har ingen valgmuligheder.\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:447
 msgid ""
 "patches\n"
 "\n"
@@ -870,7 +960,7 @@ msgstr ""
 " \n"
 " Denne kommando har ingen valgmuligheder.\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:461
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -880,7 +970,7 @@ msgstr ""
 "\n"
 " 'info' -- Vis alle oplysninger om pakker\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:473
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -890,7 +980,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- Vis detaljerede oplysninger om rettelser\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:485
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -900,39 +990,35 @@ msgstr ""
 "\n"
 " 'moo' - Vis et dyr\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "Ukendt kommando"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "Programargumenter uden valgmulighed:"
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Ignorerer --forenklet (kun til rug-kompatibilitet)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "Ignorerer installerede ændringer..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "Der udføres allerede en ZYpp-transaktion."
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr "Der kræves root-rettigheder for at få vist systemkilderne."
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "Advarsel: Ukendt metadatatype"
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "Ukendt ændringstype"
 
-#: src/zypper.cc:721
+#: src/zypper.cc:756
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -940,14 +1026,18 @@ msgstr ""
 "Advarsel: Ingen kilder. Der anvendes kun installerede ændringer. Det er ikke "
 "muligt at installere noget."
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "Udfyld en fejlrapport om dette."
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr "Du kan få vejledning på http://en.opensuse.org/Zypper#Troubleshooting."
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "Uventet undtagelse."
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "Der kræves rodrettigheder til at køre zypper."

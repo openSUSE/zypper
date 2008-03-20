@@ -1,312 +1,362 @@
-# @TITLE@
-# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2007-02-16 10:33+0100\n"
-"PO-Revision-Date: 2006-06-21 13:31\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-13 15:51\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/zmart-keyring-callbacks.h:36
-msgid " is unsigned, continue?"
-msgstr "は、署名がありません。続行しますか?"
-
-#: src/zmart-keyring-callbacks.h:46
-msgid "Import key "
-msgstr "キーを"
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "警告: 署名のないファイル%sを受け入れています。"
 
 #: src/zmart-keyring-callbacks.h:46
-msgid " to trusted keyring?"
-msgstr "信頼されたキーリングにインポートしますか?"
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%sは署名がありません。続行しますか?"
 
 #: src/zmart-keyring-callbacks.h:57
-msgid " is signed with an unknown key id: "
-msgstr "は、不明なキーIDで署名されています:"
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "信頼されたキーリングにキー%sをインポートしますか？"
 
-# internal key used: Ok
-# internal key used: Ok
-#: src/zmart-keyring-callbacks.h:57 src/zmart-keyring-callbacks.h:80
-#: src/zmart-keyring-callbacks.h:91 src/zmart-keyring-callbacks.h:97
-#: src/zmart-keyring-callbacks.h:104
-msgid "continue?"
-msgstr "続行しますか?"
-
-#: src/zmart-keyring-callbacks.h:68
-msgid "Do you want to trust key id "
-msgstr "信頼するキーIDが必要ですか"
-
-#: src/zmart-keyring-callbacks.h:68 src/zmart-keyring-callbacks.h:80
-msgid " fingerprint:"
-msgstr "指紋:"
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr ""
+"警告: 受け入れようとしているファイル%sは、不明なキー%sで署名されています。"
 
 #: src/zmart-keyring-callbacks.h:79
-msgid "Signature verification for "
-msgstr "署名検証:"
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "%sは不明なキー%sで署名されています。続行しますか？"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " with public key id "
-msgstr "公開鍵ID"
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "ID %s、%s、指紋%sのキーを自動的に信頼します。"
 
-#: src/zmart-keyring-callbacks.h:80
-msgid " failed, THIS IS RISKY!"
-msgstr "失敗しました、危険です!"
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "ID %s、%s、指紋%sのキーを信頼しますか？"
 
-#: src/zmart-keyring-callbacks.h:90
-msgid "No digest for "
-msgstr "ダイジェストがありません:"
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid ""
+"Warning: Ignoring failed signature verification for %s with public key id %"
+"s, %s, fingerprint %s! Make sure this is not caused by some malicious "
+"changes in the file!"
+msgstr ""
+"警告:公開鍵ID %s、%s、指紋 %sを含む %sの失敗した署名検証を無視しています! "
+"ファイル内の悪意のある変更によるものではないことを確認してください!"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid "Unknown digest "
-msgstr "不明なダイジェスト"
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid ""
+"Signature verification failed for %s with public key id %s, %s, fingerprint %"
+"s. Warning: this might be caused by a malicious change in the file! "
+"Continuing is risky! Continue anyway?"
+msgstr ""
+"%sに対する公開鍵ID %s、%s、指紋%sの署名検証が失敗しました。警告: ファイル内の"
+"悪意のある変更による可能性があります。続行するのは危険です。続行してもよろし"
+"いですか?"
 
-#: src/zmart-keyring-callbacks.h:96
-msgid " for "
-msgstr ":"
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "ファイル%sに対するダイジェストがありません。"
 
-#: src/zmart-keyring-callbacks.h:102
-msgid "Digest verification failed for "
-msgstr "ダイジェスト検証に失敗しました:"
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "続行しますか?"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid ", expected "
-msgstr "、予定:"
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "不明なダイジェスト%sです(ファイル%s)。"
 
-#: src/zmart-keyring-callbacks.h:103
-msgid " found "
-msgstr "該当:"
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr ""
+"%sに対するダイジェスト検証に失敗しましたが、無視しました(%sが予期されました"
+"が、書かれていたのは%sでした)。"
 
-#: src/zmart-misc.cc:26 src/zmart-misc.cc:29
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr ""
+"%sに対するダイジェスト検証に失敗しました(%sが予期されましたが、書かれていたの"
+"は%sでした)。"
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
 msgid "Initializing Target"
 msgstr "ターゲットを初期化しています"
 
-#: src/zmart-misc.cc:26
+#: src/zmart-misc.cc:28
 msgid " (old way)"
 msgstr "(古い方法)"
 
-#: src/zmart-misc.cc:161
+#: src/zmart-misc.cc:139
 msgid "not found"
 msgstr "見つかりません"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "skipping "
 msgstr "スキップ"
 
-#: src/zmart-misc.cc:168
+#: src/zmart-misc.cc:146
 msgid "(already installed)"
 msgstr "(すでにインストール済み)"
 
-#: src/zmart-misc.cc:174
+#: src/zmart-misc.cc:152
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "インストールするパッケージリストへの「%s」の追加に失敗しました。"
 
-#: src/zmart-misc.cc:192
+#: src/zmart-misc.cc:170
 msgid "Failed"
 msgstr "失敗"
 
-#: src/zmart-misc.cc:215
+#: src/zmart-misc.cc:193
 msgid "Not found"
 msgstr "見つかりません"
 
-#: src/zmart-misc.cc:229
-msgid "Problems:"
-msgstr "問題:"
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "問題点: "
 
-#: src/zmart-misc.cc:232
-msgid "PROB "
-msgstr "PROB"
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr " 解決方法%s: "
 
-#: src/zmart-misc.cc:241
-msgid " SOL  "
-msgstr "SOL"
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "数字、再試行(R)またはキャンセル(C)"
 
-#: src/zmart-misc.cc:257
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "R"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "C"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "解決方法%sを適用中"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s件の問題:"
+
+#: src/zmart-misc.cc:306
 msgid "Summary:"
 msgstr "概要:"
 
-#: src/zmart-misc.cc:280
+#: src/zmart-misc.cc:329
 msgid "<install>   "
 msgstr "<install>"
 
-#: src/zmart-misc.cc:282
+#: src/zmart-misc.cc:331
 msgid "<uninstall> "
 msgstr "<uninstall>"
 
-#: src/zmart-misc.cc:287
+#: src/zmart-misc.cc:336
 msgid "Nothing to do."
 msgstr "何もすることはありません。"
 
-#: src/zmart-misc.cc:343
+#: src/zmart-misc.cc:392
 msgid "Parsing RPM database..."
 msgstr "RPMデータベースを解析中..."
 
-#: src/zmart-misc.cc:345 src/zmart-misc.cc:358
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
 msgid " resolvables."
 msgstr "resolvable"
 
-#: src/zmart-misc.cc:356
+#: src/zmart-misc.cc:405
 msgid "Parsing metadata for "
 msgstr "次のメタデータを解析中:"
 
-#: src/zmart-misc.cc:365
+#: src/zmart-misc.cc:414
 msgid "Establishing status of aggregates"
 msgstr "集合のステータスを確立中"
 
-#: src/zmart-misc.cc:373
+#: src/zmart-misc.cc:422
 msgid "Resolving dependencies..."
 msgstr "依存関係を解決しています..."
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " patches needed"
 msgstr "パッチが必要"
 
-#: src/zmart-misc.cc:399
+#: src/zmart-misc.cc:448
 msgid " security patches"
 msgstr "セキュリティパッチ"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Installed"
 msgstr "インストール済み"
 
-#: src/zmart-misc.cc:406
+#: src/zmart-misc.cc:455
 msgid "Uninstalled"
 msgstr "アンインストール済み"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "No Longer Applicable"
 msgstr "利用できなくなりました"
 
-#: src/zmart-misc.cc:408
+#: src/zmart-misc.cc:457
 msgid "Not Applicable"
 msgstr "適用不可"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Applied"
 msgstr "適用済み"
 
-#: src/zmart-misc.cc:410
+#: src/zmart-misc.cc:459
 msgid "Not Needed"
 msgstr "不要"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Broken"
 msgstr "破損"
 
-#: src/zmart-misc.cc:412
+#: src/zmart-misc.cc:461
 msgid "Needed"
 msgstr "必要"
 
-#: src/zmart-misc.cc:414
+#: src/zmart-misc.cc:463
 msgid "error"
 msgstr "エラー"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:600
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
 msgid "Catalog"
 msgstr "カタログ"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 #: src/zmart-sources.cc:100
 msgid "Name"
 msgstr "名前"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-misc.cc:605
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
 msgid "Version"
 msgstr "バージョン"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
 msgid "Category"
 msgstr "カテゴリ"
 
-#: src/zmart-misc.cc:443 src/zmart-misc.cc:477 src/zmart-sources.cc:98
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
 msgid "Status"
 msgstr "状態"
 
-#: src/zmart-misc.cc:511
+#: src/zmart-misc.cc:560
 msgid ""
 "WARNING: These are only the updates affecting the updater itself.\n"
-"There are others available too.\n"
-msgstr "警告: これらは、アップデータ自身に影響するアップデートだけです。\n他のアップデートも利用できます。\n"
+"Other updates are available too.\n"
+msgstr ""
+"警告:アップデータそのものに影響するアップデートしかありません。\n"
+"その他のアップデートも利用できます。\n"
 
-#: src/zmart-misc.cc:600
+#: src/zmart-misc.cc:648
 msgid "S"
 msgstr "S"
 
-#: src/zmart-misc.cc:605
+#: src/zmart-misc.cc:653
 msgid "Arch"
 msgstr "アーチ"
 
-#: src/zmart-misc.cc:662
+#: src/zmart-misc.cc:710
 #, c-format
 msgid "WARNING: %s is interactive, skipped."
 msgstr "警告: %sは、アクティブではありません。スキップされました。"
 
-# internal key used: Ok
-# internal key used: Ok
-#: src/zmart-misc.cc:707
-msgid "Continue?"
-msgstr "続行しますか?"
-
-#: src/zmart-misc.cc:712
+#: src/zmart-misc.cc:766
 msgid "committing"
 msgstr "コミット中"
 
-#: src/zmart-misc.cc:728
+#: src/zmart-misc.cc:782
 msgid ""
-"Package integrity check failed. This may be a problem with installation "
+"Package integrity check failed. This may be a problem with the installation "
 "source or media. Try one of the following:\n"
 "\n"
-"- just retry previous command\n"
+"- retry previous command\n"
 "- refresh installation sources using 'zypper refresh'\n"
-"- use another installation media (if e.g. damaged)\n"
+"- use another installation media (for example, if yours is damaged)\n"
 "- use another installation source"
-msgstr "パッケージの整合性チェックに失敗しました。 インストールソースまたはメディアに関する問題の可能性があります。 次のいずれかの方法を試してください:\n \n- コマンドを再試行する\n- 「zypper refresh」を使ってインストールソースを更新する\n - 他のインストールメディアを使用する(例:損傷している場合など)\n - 他のインストールソースを使用する"
+msgstr ""
+"パッケージ整合性チェックが失敗しました。インストールソースまたはメディアに問"
+"題がある可能性があります。次のいずれかを試してください:\n"
+"\n"
+"- 前のコマンドを再試行する\n"
+"- 「zypper refresh」を使用してインストールソースを更新する'\n"
+"- 別のインストールメディアを使用する(破損している場合など)\n"
+"- 別のインストールソースを使用する"
 
-#: src/zmart-misc.cc:746
+#: src/zmart-misc.cc:800
 msgid ""
-"WARNING: One of installed patches requires reboot of your machine. Please, "
-"do it as soon as possible."
-msgstr "警告: インストールされたパッチの中には、コンピュータを再起動する必要があるものがあります。 できる限り早めに、コンピュータを再起動してください。"
+"WARNING: One of installed patches requires reboot of your machine. Reboot as "
+"soon as possible."
+msgstr ""
+"警告:インストールされたパッチの1つで、マシンの再起動が要求されています。速や"
+"かに再起動してください。"
 
-#: src/zmart-misc.cc:749
+#: src/zmart-misc.cc:803
 msgid ""
 "WARNING: One of installed patches affects the package manager itself, thus "
 "it requires restart before executing next operations."
-msgstr "警告: インストールされているパッチの1つが、パッケージマネージャに影響を与えてしまいます。そのため、次の操作を実行する前に、再起動する必要があります。"
+msgstr ""
+"警告: インストールされているパッチの1つが、パッケージマネージャに影響を与えて"
+"しまいます。そのため、次の操作を実行する前に、再起動する必要があります。"
 
-#: src/zmart-misc.cc:772 src/zmart-misc.cc:798
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "自動的に%s %sライセンスに同意します。"
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
 msgid "license"
 msgstr "ライセンス"
 
-#: src/zmart-misc.cc:775
+#: src/zmart-misc.cc:843
 msgid ""
 "In order to install this package, you must agree to terms of the above "
 "licencse. Continue?"
-msgstr "このパッケージをインストールするには、上記のライセンス(使用許諾契約)の条項に同意する必要があります。 続行しますか?"
+msgstr ""
+"このパッケージをインストールするには、上記のライセンス(使用許諾契約)の条項に"
+"同意する必要があります。 続行しますか?"
 
-#: src/zmart-misc.cc:786
+#: src/zmart-misc.cc:853
 msgid "Aborting installation due to the need of license(s) confirmation."
-msgstr "ライセンス(使用許諾契約)に同意する必要があるため、インストールを中止します。"
+msgstr ""
+"ライセンス(使用許諾契約)に同意する必要があるため、インストールを中止します。"
 
-#: src/zmart-misc.cc:788
+#: src/zmart-misc.cc:855
 msgid ""
 "Please, restart the operation in interactive mode and confirm agreement with "
 "required license(s)."
-msgstr "インタラクティブモードで操作を再開始して、必要なライセンス(使用許諾契約)に同意してください。"
+msgstr ""
+"インタラクティブモードで操作を再開始して、必要なライセンス(使用許諾契約)に同"
+"意してください。"
 
-#: src/zmart-misc.cc:795
+#: src/zmart-misc.cc:862
 msgid "Aborting installation due to user disagreement with "
-msgstr "ユーザが次の使用許諾契約に同意しなかったため、インストールを中止しました:"
+msgstr ""
+"ユーザが次の使用許諾契約に同意しなかったため、インストールを中止しました:"
 
 #: src/zmart-sources.cc:31
 msgid ""
@@ -322,7 +372,7 @@ msgid "Failed to restore sources"
 msgstr "ソースの復元に失敗しました。"
 
 #: src/zmart-sources.cc:80
-msgid "Can't access repository"
+msgid "Cannot access repository"
 msgstr "リポジトリにアクセスできません"
 
 #: src/zmart-sources.cc:99
@@ -354,7 +404,7 @@ msgstr "はい"
 msgid "No"
 msgstr "いいえ"
 
-#: src/zmart-sources.cc:163 src/zmart-sources.cc:476
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
 msgid "Error reading system sources: "
 msgstr "システムソースの読み込み時にエラーが発生しました:"
 
@@ -370,56 +420,78 @@ msgstr "名前が見つかりません"
 msgid "baseurl not found"
 msgstr "ベースURLが見つかりません"
 
-#: src/zmart-sources.cc:330
+#: src/zmart-sources.cc:339
 msgid "Continuing anyway"
 msgstr "続行します"
 
-#: src/zmart-sources.cc:336
-msgid "removing source "
-msgstr "ソースを削除しています"
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "ソース「%s」を削除しています"
 
-#: src/zmart-sources.cc:343 src/zmart-sources.cc:367 src/zmart-sources.cc:379
-#: src/zmart-sources.cc:412 src/zmart-sources.cc:435 src/zmart-sources.cc:446
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "ソース「%s」が削除されました。"
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "ソース「%s」の削除に失敗しました:"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
 msgid "Source %s not found."
 msgstr "ソース%sが見つかりません。"
 
-#: src/zmart-sources.cc:359 src/zmart-sources.cc:427
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "「%s」は破損しているか、またはアクセスできません。削除しますか?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "ソースを削除しています"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
 msgid "URL is invalid: "
 msgstr "URLが無効です:"
 
-#: src/zmart-sources.cc:464
+#: src/zmart-sources.cc:541
 msgid "Sorry, not implemented yet for libzypp-1.x.x"
 msgstr "libzypp-1.x.xでは実装されていません"
 
-#: src/zmart-sources.cc:485
+#: src/zmart-sources.cc:562
 msgid "Refreshing "
 msgstr "更新中"
 
-#: src/zmart-sources.cc:492
+#: src/zmart-sources.cc:569
 msgid "DONE"
 msgstr "完了"
 
-#: src/zmart-sources.cc:496
+#: src/zmart-sources.cc:573
 msgid "Error while refreshing the source: "
 msgstr "ソースの更新中にエラーが発生しました:"
 
-#: src/zmart-sources.cc:501
+#: src/zmart-sources.cc:578
 msgid "All system sources have been refreshed."
 msgstr "すべてのシステムソースが更新されました。"
 
-#: src/zmart-sources.cc:522
+#: src/zmart-sources.cc:599
 msgid "Error while fetching "
 msgstr "フェッチ中にエラーが発生しました"
 
-#: src/zmart-sources.cc:538
+#: src/zmart-sources.cc:615
 msgid "ZENworks Management Daemon is running."
 msgstr "ZENworks管理デーモンが稼働中です"
 
-#: src/zmart-sources.cc:539
+#: src/zmart-sources.cc:616
 msgid "WARNING: this command will not synchronize changes."
 msgstr "警告: このコマンドは、変更内容を同期化しません。"
 
-#: src/zmart-sources.cc:540
+#: src/zmart-sources.cc:617
 msgid "Use rug or yast2 for that."
 msgstr "rugまたはyast2を使用してください。"
 
@@ -428,23 +500,36 @@ msgid ""
 "The updater could not access the package manager engine. This usually "
 "happens when you have another application (like YaST) using it at the same "
 "time. Please close other applications and check again for updates."
-msgstr "アップデータは、パッケージマネージャエンジンにアクセスできません。 他のアプリケーション(YaSTなど)を同時に使用している場合などに、このような問題が発生します。 他のアプリケーションを終了してから、アップデートの確認を行ってください。"
+msgstr ""
+"アップデータは、パッケージマネージャエンジンにアクセスできません。 他のアプリ"
+"ケーション(YaSTなど)を同時に使用している場合などに、このような問題が発生しま"
+"す。 他のアプリケーションを終了してから、アップデートの確認を行ってください。"
 
 #: src/zypp-checkpatches.cc:213
+#, c-format
 msgid ""
-"Couldn't restore source.\n"
+"Could not restore source.\n"
 "Detail: %s"
-msgstr "リソースを復元できません。\n詳細: %s"
+msgstr ""
+"ソースを復元できませんでした。\n"
+"詳細: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid ""
 "There are no update sources defined. Please add one or more update sources "
 "in order to be notified of updates."
-msgstr "アップデートソースが定義されていません。 アップデートを通知するには、アップデートソースを追加してください。"
+msgstr ""
+"アップデートソースが定義されていません。 アップデートを通知するには、アップ"
+"デートソースを追加してください。"
 
-#: src/zypper-callbacks.cc:23
+#: src/zypper-callbacks.cc:30
 msgid "(A)bort, (R)etry, (I)gnore?"
 msgstr "中止(A)、再試行(R)、無視(I)?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "回答「%s」が無効です。「y」または「n」を入力してください:"
 
 #: src/zypper-getopt.cc:56
 msgid "Unknown option "
@@ -508,19 +593,22 @@ msgstr "インストール済みのサイズ: "
 
 #: src/zypper-info.cc:102
 msgid "Summary: "
-msgstr "概要: "
+msgstr "概要:"
 
 #: src/zypper-info.cc:103
 msgid "Description: "
 msgstr "説明: "
 
 #: src/zypper-search.cc:45
-msgid "No sources. Zypper currently searches within installationsources only."
-msgstr "ソースがありません。 現在Zypperは、インストールソース内のみを検索しています。"
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr ""
+"ソースがありません。現在Zypperはインストールソース内のみを検索しています。"
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
-msgstr "指定された検索基準に一致する、インストール済みresolvableをプリキャッシュしています..."
+msgstr ""
+"指定された検索基準に一致する、インストール済みresolvableをプリキャッシュして"
+"います..."
 
 #: src/zypper-search.cc:116
 msgid " out of ("
@@ -538,11 +626,11 @@ msgstr "は、有効な方形式ではありません: \""
 msgid "This is a bug, please file a bug report against zypper."
 msgstr "これはバグです。zypperにバグレポートを報告してください"
 
-#: src/zypper.cc:70
+#: src/zypper.cc:76
 msgid "URL is invalid."
 msgstr "URLが無効です。"
 
-#: src/zypper.cc:78
+#: src/zypper.cc:84
 msgid ""
 "  Commands:\n"
 "\thelp\t\t\tHelp\n"
@@ -580,7 +668,7 @@ msgstr ""
 " \tinfo, if\t\tパッケージの全情報を表示します\n"
 " \tpatch-info\t\tパッチの全情報を表示します\n"
 
-#: src/zypper.cc:121
+#: src/zypper.cc:127
 msgid ""
 "  Options:\n"
 "\t--help, -h\t\tHelp\n"
@@ -589,23 +677,44 @@ msgid ""
 "\t--terse, -t\t\tTerse output for machine consumption\n"
 "\t--table-style, -s\tTable style (integer)\n"
 "\t--rug-compatible, -r\tTurn on rug compatibility\n"
-"\t--non-interactive\tDon't ask anything, use default answers automatically. "
-"(under development)\n"
-msgstr "  オプション:\n\t--help, -h\t\tヘルプ\n \t--version, -V\t\tバージョン番号を出力します\n \t--verbose, -v\t\t冗長性を増やします\n \t--terse, -t\t\tマシン消費の簡易出力\n \t--table-style, -s\tテーブルスタイル(整数)\n \t--rug-compatible, -r\trug互換性をオンにします\n\t--非対話\t何も問い合わせない、自動的にデフォルトの回答を使用  (開発中)\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers "
+"automatically.\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr ""
+"  オプション:\n"
+"\t--help、-h\t\tヘルプ\n"
+"\t--version、-V\t\tバージョン番号を出力します\n"
+"\t--verbose、-v\t\t冗長レベルを増加します\n"
+"\t--terse、-t\t\tマシン使用量を簡易出力します\n"
+"\t--table-style、-s\tテーブルスタイル(整数)\n"
+"\t--rug-compatible、-r\trug互換性を有効にします\n"
+"\t--non-interactive、-n\t何も確認せずに、デフォルトの回答を自動的に使用しま"
+"す\n"
+"\t--no-gpg-checks\t\tGPGチェック失敗を無視して続行します。\n"
+"\t--root、-R <dir>\t別のルートディレクトリ上で動作します\n"
 
-#: src/zypper.cc:133
+#: src/zypper.cc:140
 msgid "Verbosity "
 msgstr "冗長性"
 
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "対話処理を行なわない設定にします。"
+
 #: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "「no-gpg-checks」モードに移行します。"
+
+#: src/zypper.cc:162
 msgid "Invalid table style "
 msgstr "無効なテーブルスタイル"
 
-#: src/zypper.cc:189
+#: src/zypper.cc:205
 msgid "Try -h for help"
 msgstr "-hでヘルプを表示してください"
 
-#: src/zypper.cc:207
+#: src/zypper.cc:223
 msgid ""
 "  Source options:\n"
 "\t--disable-system-sources, -D\t\tDo not read the system sources\n"
@@ -615,7 +724,7 @@ msgstr ""
 "\t--disable-system-sources, -D\t\tシステムソースを読みません\n"
 " \t--source, -S\t\t他のソースを読み込みます\n"
 
-#: src/zypper.cc:212
+#: src/zypper.cc:228
 msgid ""
 "  Target options:\n"
 "\t--disable-system-resolvables, -T\t\tDo not read system installed "
@@ -625,29 +734,42 @@ msgstr ""
 "\t--disable-system-resolvables, -T\t\tシステムにインストールされたresolvable"
 "を読み込みません\n"
 
-#: src/zypper.cc:226
+#: src/zypper.cc:245
 msgid ""
 "  Command options:\n"
-"\t--catalog,-c\t\tOnly from this catalog (under development)\n"
+"\t--catalog,-c\t\t\tOnly from this catalog (under development)\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
-"\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with "
+"installation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  コマンドオプション:\n"
-"\t--catalog,-c\t\tこのカタログからのみ(開発中)\n"
-" \t--type,-t\t\tresolvableのタイプ(デフォルト:package)\n"
-" \t--no-confirm,-y\tユーザの確認を必要としない\n"
+"\t--catalog、-c\t\t\tこのカタログからのみ(開発中)\n"
+"\t--type、-t\t\tresolvableのタイプ(デフォルト: package)\n"
+"\t--no-confirm、-y\t\t\tユーザに確認せずにインストールを続行します\n"
+"\t--auto-agree-with-licenses、-l\tサードパーティのライセンス確認を自動的に受"
+"け入れます。\n"
+"\t\t\t\t\t詳細はman zypperを参照してください。\n"
 
-#: src/zypper.cc:241
+#: src/zypper.cc:265
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: package)\n"
 "\t--no-confirm,-y\tDo not require user confirmation\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  コマンドオプション:\n"
-"\t--type,-t\t\tresolvableのタイプ(デフォルト: パッケージ)\n"
-" \t--no-confirm,-y\tユーザの確認を必要としない\n"
+"\t--type、-t\t\tresolvableのタイプ(デフォルト: package)\n"
+"\t--no-confirm、-y\tユーザに確認しません\n"
+"\t--auto-agree-with-licenses、-l\tサードパーティのライセンス確認を自動的に受"
+"け入れます。\n"
+"\t\t\t\t\t詳細はman zypperを参照してください。\n"
 
-#: src/zypper.cc:257
+#: src/zypper.cc:283
 msgid ""
 "service-add [options] URI [alias]\n"
 "\n"
@@ -669,7 +791,7 @@ msgstr ""
 " \t--disabled,-d\t\tサービスを無効として追加します\n"
 " \t--no-refresh,-n\t\tメタデータを自動更新しません\n"
 
-#: src/zypper.cc:276
+#: src/zypper.cc:302
 msgid ""
 "service-list\n"
 "\n"
@@ -681,7 +803,7 @@ msgstr ""
 " 定義されたシステムサービス(インストールソース)をすべて一覧表示します。\n"
 " このコマンドにオプションはありません。\n"
 
-#: src/zypper.cc:290
+#: src/zypper.cc:316
 msgid ""
 "service-delete [options] <URI|alias>\n"
 "\n"
@@ -693,7 +815,7 @@ msgstr ""
 " システムからサービス(インストールソース)を削除します。\n"
 " このコマンドにオプションはありません。\n"
 
-#: src/zypper.cc:304
+#: src/zypper.cc:330
 msgid ""
 "service-rename [options] <URI|alias> <new-alias>\n"
 "\n"
@@ -705,7 +827,7 @@ msgstr ""
 " URIまたは現在の別名で指定されたサービスに、新しい別名を割り当てます。\n"
 " このコマンドにオプションはありません。\n"
 
-#: src/zypper.cc:318
+#: src/zypper.cc:344
 msgid ""
 "zypper refresh\n"
 "\n"
@@ -715,7 +837,7 @@ msgstr ""
 "\n"
 " システム内で見つかったすべてのインストールソースを更新します。\n"
 
-#: src/zypper.cc:331
+#: src/zypper.cc:357
 msgid ""
 "list-updates [options]\n"
 "\n"
@@ -731,19 +853,25 @@ msgstr ""
 "   コマンドオプション:\n"
 " \t--type,-t\t\tresolvableのタイプ(デフォルト: patch)\n"
 
-#: src/zypper.cc:349
+#: src/zypper.cc:378
 msgid ""
 "  Command options:\n"
 "\t--type,-t\t\tType of resolvable (default: patch)\n"
 "\t--no-confirm,-y\t\tDo not require user confirmation\n"
 "\t--skip-interactive\t\tSkip interactive updates\n"
+"\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party "
+"license confirmation prompt.\n"
+"\t\t\t\t\tSee man zypper for more details.\n"
 msgstr ""
 "  コマンドオプション:\n"
-"\t--type,-t\t\tresolvableのタイプ(デフォルト: patch)\n"
-" \t--no-confirm,-y\t\tユーザの確認を必要としない\n"
-" \t--skip-interactive\t\tインタラクティブアップデートをスキップする\n"
+"\t--type、-t\t\tresolvableのタイプ(デフォルト: patch)\n"
+"\t--no-confirm、-y\t\tユーザに確認しません\n"
+"\t--skip-interactive\t\tインタラクティブな更新をスキップします\n"
+"\t--auto-agree-with-licenses、-l\tサードパーティのライセンス確認を自動的に受"
+"け入れます。\n"
+"\t\t\t\t\t詳細はman zypperを参照してください。\n"
 
-#: src/zypper.cc:374
+#: src/zypper.cc:405
 msgid ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
@@ -753,10 +881,8 @@ msgid ""
 "    --match-all            Search for a match to all search strings "
 "(default)\n"
 "    --match-any            Search for a match to any of the search strings\n"
-"    --match-substrings     Matches for search strings may be partial words "
-"(default)\n"
-"    --match-words          Matches for search strings may only be whole "
-"words\n"
+"    --match-substrings     Search for a match to partial words (default)\n"
+"    --match-words          Search for a match to whole words only\n"
 "    --match-exact          Searches for an exact package name\n"
 "-d, --search-descriptions  Search also in package summaries and "
 "descriptions.\n"
@@ -772,30 +898,28 @@ msgid ""
 msgstr ""
 "zypper [global-options] search [options] [querystring...]\n"
 "\n"
-" 'search' - 指定した検索文字列に一致するパッケージを検索します\n"
-" \n"
-"   コマンドオプション:\n"
-"     --match-all            すべての検索文字列に一致するパッケージを検索しま"
-"す(デフォルト)\n"
-"     --match-any            いずれかの検索文字列に一致するパッケージを検索し"
-"ます\n"
-"     --match-substrings     検索文字列の一部の文字列が一致する検索(デフォル"
+"'search' - 指定された検索文字列と一致するパッケージを検索します\n"
+"\n"
+"  コマンドオプション:\n"
+"    --match-all            すべての検索文字列との一致を検索します(デフォル"
 "ト)\n"
-"     --match-words          検索文字列が単語全体に一致する検索\n"
-"     --match-exact          パッケージ名に正確に一致するものを検索します\n"
-" -d, --search-descriptions  パッケージ要約と説明も検索します。\n"
-" -c, --case-sensitive       大文字と小文字を区別して検索を行います。\n"
-" -i, --installed-only       すでにインストールされているパッケージのみを表示"
-"します。\n"
-" -u, --uninstalled-only     現在インストールされていないパッケージのみを表示"
-"します。\n"
-" -t, --type                 指定したタイプのパッケージのみを検索します。\n"
-"     --sort-by-name         パッケージを名前別にソートします(デフォルト)。\n"
-"     --sort-by-catalog      パッケージをカタログ(ソース)別にソートします。\n"
-" \n"
-" 検索文字列にワイルドカード「*」および「?」を使用することもできます。\n"
+"    --match-any            任意の検索文字列との一致を検索します\n"
+"    --match-substrings     部分的な一致を検索します(デフォルト)\n"
+"    --match-words          単語全体と一致するもののみ検索します\n"
+"    --match-exact          完全なパッケージ名を検索します\n"
+"-d、--search-descriptions  パッケージの概要と説明の中も検索します\n"
+"-c、--case-sensitive       大文字と小文字を区別して検索します\n"
+"-i, --installed-only       すでにインストールされているパッケージのみ表示しま"
+"す\n"
+"-u、--uninstalled-only     現在インストールされていないパッケージのみ表示しま"
+"す\n"
+"-t、--type                 指定したタイプのパッケージのみ検索します\n"
+"    --sort-by-name         パッケージを名前でソートします(デフォルト)\n"
+"    --sort-by-catalog      パッケージをカタログでソートします(ソース)\n"
+"\n"
+"*および?のワイルドカードを検索文字列内で使用することもできます。\n"
 
-#: src/zypper.cc:402
+#: src/zypper.cc:433
 msgid ""
 "patch-check\n"
 "\n"
@@ -809,7 +933,7 @@ msgstr ""
 " \n"
 " このコマンドにオプションはありません。\n"
 
-#: src/zypper.cc:416
+#: src/zypper.cc:447
 msgid ""
 "patches\n"
 "\n"
@@ -823,7 +947,7 @@ msgstr ""
 " \n"
 " このコマンドにオプションはありません。\n"
 
-#: src/zypper.cc:430
+#: src/zypper.cc:461
 msgid ""
 "zypper [global-options] info [name...]\n"
 "\n"
@@ -833,7 +957,7 @@ msgstr ""
 "\n"
 " 'info' -- パッケージの全情報を表示します\n"
 
-#: src/zypper.cc:442
+#: src/zypper.cc:473
 msgid ""
 "zypper [global-options] patch-info [patchname...]\n"
 "\n"
@@ -843,7 +967,7 @@ msgstr ""
 "\n"
 " 'patch-info' -- パッチの詳細情報を表示します\n"
 
-#: src/zypper.cc:454
+#: src/zypper.cc:485
 msgid ""
 "zypper [global-options] moo\n"
 "\n"
@@ -853,39 +977,35 @@ msgstr ""
 "\n"
 " 'moo' - 動物を表示します\n"
 
-#: src/zypper.cc:460
+#: src/zypper.cc:492
 msgid "Unknown command"
 msgstr "不明なコマンド"
 
-#: src/zypper.cc:475
+#: src/zypper.cc:507
 msgid "Non-Option Program Arguments: "
 msgstr "オプション以外のプログラム引数:"
 
-#: src/zypper.cc:487
+#: src/zypper.cc:519
 msgid "Ignoring --terse (provided only for rug compatibility)"
 msgstr "Ignoring --簡易(rug互換性のためにのみ提供)"
 
-#: src/zypper.cc:503
+#: src/zypper.cc:535
 msgid "Ignoring installed resolvables..."
 msgstr "インストールされているresolvableを無視しています..."
 
-#: src/zypper.cc:526
+#: src/zypper.cc:563
 msgid "A ZYpp transaction is already in progress."
 msgstr "ZYppトランザクションはすでに処理中です。"
 
-#: src/zypper.cc:553
-msgid "Root privileges are required for viewing system sources."
-msgstr "システムソースを表示するには、ルート権限が必要です。"
-
-#: src/zypper.cc:571
+#: src/zypper.cc:602
 msgid "Warning: Unknown metadata type "
 msgstr "警告: 不明なメタデータタイプ"
 
-#: src/zypper.cc:708 src/zypper.cc:766 src/zypper.cc:852 src/zypper.cc:880
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
 msgid "Unknown resolvable type "
 msgstr "不明なresolvableタイプ"
 
-#: src/zypper.cc:721
+#: src/zypper.cc:756
 msgid ""
 "Warning: No sources. Operating only with the installed resolvables. Nothing "
 "can be installed."
@@ -893,15 +1013,19 @@ msgstr ""
 "警告: ソースがありません。 インストールされているresolvableでのみ動作しま"
 "す。 何もインストールできません。"
 
-#: src/zypper.cc:923
+#: src/zypper.cc:962
 msgid "Please file a bug report about this."
 msgstr "これに関するバクレポートをファイルしてください。"
 
-#: src/zypper.cc:926
+#: src/zypper.cc:965
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
 msgstr ""
 "詳細は、http://en.opensuse.org/Zypper#Troubleshootingを参照してください。"
 
-#: src/zypper.cc:939
+#: src/zypper.cc:978
 msgid "Unexpected exception."
 msgstr "予期しない例外エラーが発生しました。"
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "zypperの実行にはルート権限が必要です。"
