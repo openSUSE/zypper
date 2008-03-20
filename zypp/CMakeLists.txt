@@ -182,6 +182,7 @@ SET( zypp_HEADERS
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
 
 SET( zypp_base_SRCS
+  base/InterProcessMutex.cc
   base/SerialNumber.cc
   base/Random.cc
   base/Measure.cc
@@ -203,6 +204,7 @@ SET( zypp_base_SRCS
 )
 
 SET( zypp_base_HEADERS
+  base/InterProcessMutex.h
   base/Collector.h
   base/SerialNumber.h
   base/Easy.h
