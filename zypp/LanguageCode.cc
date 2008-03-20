@@ -233,7 +233,7 @@ namespace zypp
 
       // some languages have more than one iso639_2 code
       // so there are items with duplicate names
-      LangInit langInit[] = {
+      const LangInit langInit[] = {
 	  // language code: aar aa
 	  { "aar", "aa", N_( "Afar" ) },
 	  // language code: abk ab
@@ -1228,7 +1228,7 @@ namespace zypp
 	  { NULL, NULL, NULL }
       };
 
-      for (LangInit * i = langInit; i->iso639_2 != NULL; ++i)
+      for (const LangInit * i = langInit; i->iso639_2 != NULL; ++i)
       {
 	  iso639_2[i->iso639_2] = i->name;
 	  if (i->iso639_1 != NULL)
