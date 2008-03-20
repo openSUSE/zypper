@@ -112,9 +112,9 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_MESSAGE( manager.isCached(repo), "Repo should be cached now" );
 
   // Metadata are up to date
-  SEC << endl
-      << manager.checkIfToRefreshMetadata(repo, *repo.baseUrlsBegin()) << endl;
-  BOOST_CHECK_MESSAGE( !manager.checkIfToRefreshMetadata(repo, *repo.baseUrlsBegin()), "Metadata should be up to date" );
+  RepoManager::RefreshCheckStatus ref_stat = manager.checkIfToRefreshMetadata(repo, *repo.baseUrlsBegin());
+  SEC << endl << ref_stat << endl;
+  BOOST_CHECK_MESSAGE( ref_stat== RepoManager::REPO_UP_TO_DATE || ref_stat == RepoManager::REPO_CHECK_DELAYED, "Metadata should be up to date" );
 
    // the solv file should exists now
   Pathname base = (opts.repoCachePath + repo.alias());
