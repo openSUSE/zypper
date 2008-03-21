@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 21 13:23:13 CET 2008 - jreidinger@suse.cz
+
+- Throwing special exception MediaBadCAException in case of SSL
+  certificate validation failure.(bnc #223512)
+- revision 9250
+
+-------------------------------------------------------------------
 Fri Mar 21 12:38:39 CET 2008 - jreidinger@suse.cz
 
 - add new error IO_SOFT to media request callback for temporary
