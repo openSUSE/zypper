@@ -141,6 +141,10 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             reason = media::MediaChangeReport::WRONG;
           }
+          else if( typeid(excp) == typeid( media::MediaTimeoutException))  
+          {
+            reason = media::MediaChangeReport::IO_SOFT;
+          }
 
           vector<string> devices;
           unsigned int devindex;

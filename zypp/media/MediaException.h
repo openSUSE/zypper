@@ -471,6 +471,20 @@ namespace zypp
       std::string _msg;
     };
 
+    class MediaTimeoutException : public MediaException
+    {
+    public:
+      MediaTimeoutException(const Url & url_r, const std::string & msg = "Timeout exceed")
+      : MediaException(msg)
+      , _url(url_r.asString()), _msg(msg)
+      {}
+      virtual ~MediaTimeoutException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _msg;
+    };
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

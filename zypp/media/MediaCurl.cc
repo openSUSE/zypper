@@ -1078,7 +1078,9 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
         err = "Write error";
         break;
       case CURLE_ABORTED_BY_CALLBACK:
+      case CURLE_OPERATION_TIMEOUTED:
         err  = "Timeout reached";
+        ZYPP_THROW(MediaTimeoutException(url));
         break;
       case CURLE_SSL_PEER_CERTIFICATE:
       default:
@@ -1295,9 +1297,11 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
           err = "Write error";
           break;
         case CURLE_ABORTED_BY_CALLBACK:
+        case CURLE_OPERATION_TIMEDOUT:
           if( progressData.reached)
           {
             err  = "Timeout reached";
+            ZYPP_THROW(MediaTimeoutException(url));
           }
           else
           {

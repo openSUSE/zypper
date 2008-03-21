@@ -292,7 +292,8 @@ namespace zypp
         NOT_FOUND,  // the medie not found at all
         IO,	// error accessing the media
         INVALID, // media is broken
-        WRONG	// wrong media, need a different one
+        WRONG,	// wrong media, need a different one
+        IO_SOFT       /**< IO error which can happen on worse connection like timeout exceed */
       };
 
       /**
