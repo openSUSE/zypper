@@ -1082,6 +1082,8 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
         err  = "Timeout reached";
         ZYPP_THROW(MediaTimeoutException(url));
         break;
+      case CURLE_SSL_CACERT:
+        ZYPP_THROW(MediaBadCAException(url,_curlError));
       case CURLE_SSL_PEER_CERTIFICATE:
       default:
         err = curl_easy_strerror(ok);

@@ -207,6 +207,13 @@ namespace zypp
         return str << form(_("Timeout exceed when access '%s'."), _url.c_str()) << endl;
       return str << _msg << endl;
     }
+
+    std::ostream & MediaBadCAException::dumpOn( std::ostream & str ) const
+    {
+      if (_msg.empty())
+        return str << form(_(" SSL certificate problem, verify that the CA cert is OK for '%s'."), _url.c_str()) << endl;
+      return str << _msg << endl;
+    }
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

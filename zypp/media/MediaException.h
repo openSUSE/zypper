@@ -485,6 +485,19 @@ namespace zypp
       std::string _msg;
     };
 
+    class MediaBadCAException : public MediaException
+    {
+    public:
+      MediaBadCAException(const Url & url_r, const std::string & msg = "Invalid CA")
+      : MediaException(msg)
+      , _url(url_r.asString()), _msg(msg)
+      {}
+      virtual ~MediaBadCAException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _msg;
+    };
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
