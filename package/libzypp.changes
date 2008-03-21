@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Mar 21 12:38:39 CET 2008 - jreidinger@suse.cz
+
+- add new error IO_SOFT to media request callback for temporary
+  connection problem. (bnc #328822)
+- add new media exception timeout when somethink fail due to exceed
+  timeout
+- mediacurl throw timeout exception when timeouted
+- revision 9246
+
+-------------------------------------------------------------------
 Thu Mar 20 15:00:24 CET 2008 - jreidinger@suse.cz
 
 - return more information from checking if metadata need refresh,
