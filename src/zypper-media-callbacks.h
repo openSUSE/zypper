@@ -24,12 +24,34 @@
 #include "zypper-prompt.h"
 #include "output/prompt.h"
 
+#define REPEAT_LIMIT 3
+
 using zypp::media::MediaChangeReport;
 using zypp::media::DownloadProgressReport;
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
+  class repeat_counter_ {
+    private:
+      zypp::Url url;
+      unsigned counter;
+    public:
+      repeat_counter_():counter(0){}
+      bool counter_overrun(const zypp::Url & u){
+        if (u==url)
+        {
+          if (++counter==REPEAT_LIMIT)
+            return true;
+        }
+        else
+        {
+          url = u;
+          counter = 0;
+        }
+        return false;
+      }
+  };
 
   struct MediaChangeReportReceiver : public zypp::callback::ReceiveReport<MediaChangeReport>
   {
@@ -65,9 +87,20 @@ namespace ZmartRecipients
           return MediaChangeReport::ABORT;
       }
 
+      if (error == MediaChangeReport::IO_SOFT)
+      {
+        MediaChangeReport::Action action = MediaChangeReport::RETRY;
+        if (repeat_counter.counter_overrun(url))
+          action = MediaChangeReport::ABORT;
+        return (Action) read_action_ari_with_timeout(PROMPT_ARI_MEDIA_PROBLEM,
+          30,action);
+      }
+
       return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM
           ,MediaChangeReport::ABORT);
     }
+    private:
+      repeat_counter_ repeat_counter;
   };
 
   // progress for downloading a file

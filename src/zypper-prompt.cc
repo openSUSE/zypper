@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <sstream>
+#include <poll.h>
 
 #include <boost/format.hpp>
 
@@ -39,6 +40,66 @@ void PromptOptions::setOptions(const std::string & option_str, unsigned int defa
 
 // ----------------------------------------------------------------------------
 
+const std::string ari_mapping[] = { string(_("abort")),string(_("retry")),string(_("ignore"))};
+
+int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
+    int default_action) {
+  Out & out = Zypper::instance()->out();
+
+  if (default_action >2 || default_action < 0)
+  {
+    WAR << "bad default action" << endl;
+    default_action = 0;
+  }
+
+  out.info (_("Abort,retry, ignore?\n"));
+  
+  //FIXME XML output
+  cout << endl;
+
+  while (timeout)
+  {
+    char c = 0;
+    pollfd pollfds;
+    pollfds.fd = 0; //stdin
+    pollfds.events = POLLIN; //wait only for data to read
+
+    while (poll(&pollfds,1,5)){ //some user input, timeout 5msec
+      c = getchar();
+#define eat_rest_input() do {} while (getchar()!='\n')
+      switch (c){
+        case 'a':
+        case 'A':
+          eat_rest_input();
+          return 0;
+        case 'r':
+        case 'R':
+          eat_rest_input();
+          return 1;
+        case 'i':
+        case 'I':
+          eat_rest_input();
+          return 2;
+        default:
+        WAR << "Unknown char " << c << endl;
+      }
+    }
+
+    //FIXME XML output
+    cout << "\r";
+    cout << boost::str(format(_("autoselect %s after %u ")) % ari_mapping[default_action]
+      % timeout);
+    cout.flush();
+
+    sleep(1);
+    timeout--;
+  }
+  
+  return default_action;
+}
+
+
+// ----------------------------------------------------------------------------
 //template<typename Action>
 //Action ...
 int read_action_ari (PromptId pid, int default_action) {
@@ -46,7 +107,7 @@ int read_action_ari (PromptId pid, int default_action) {
   // translators: "a/r/i" are the answers to the
   // "Abort, retry, ignore?" prompt
   // Translate the letters to whatever is suitable for your language.
-  // the anserws must be separated by slash characters '/' and must
+  // the answers must be separated by slash characters '/' and must
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
   PromptOptions popts(_("a/r/i"), 0);

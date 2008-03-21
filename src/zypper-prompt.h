@@ -38,6 +38,16 @@ private:
 
 
 /**
+ * Abort, Retry, Ignore stdin prompt with timeout.
+ * \param default_action Answer to be returned in non-interactive mode. If none
+ *    is specified, 0 (ABORT) is returned. In interactive mode, this parameter
+ *    is ignored.
+ * \param timeout how many seconds wait until return default action
+ */
+int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
+    int default_action = 0);
+
+/**
  * Abort, Retry, Ignore stdin prompt.
  * \param default_action Answer to be returned in non-interactive mode. If none
  *    is specified, 0 (ABORT) is returned. In interactive mode, this parameter
