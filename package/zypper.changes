@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Mar 21 12:45:00 CET 2008 - jreidinger@suse.cz
+
+- add new call for abort/request/ignore question with timeout
+- in media request callback add this call for temporary network
+  problems, and first three run have retry as default and then
+  abort is default (bnc #328822) 
+- r9248
+
+-------------------------------------------------------------------
 Thu Mar 20 15:36:57 CET 2008 - jreidinger@suse.cz
 
 - precise information why not update repository (bnc #307249)
