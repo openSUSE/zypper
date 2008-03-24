@@ -84,9 +84,11 @@ class RepoParser::Impl
     {
       _ticks.sendTo( fnc_r );
     }
+#if 0
     int extract_packages_from_directory( const Pathname & rootpath,
                                          const Pathname & subdir,
                                          bool recursive);
+#endif
     /** Main entry to parser. */
     void parse( const Pathname & reporoot_r );
   public:
@@ -108,7 +110,7 @@ class RepoParser::Impl
 //
 void RepoParser::Impl::parse( const Pathname & reporoot_r )
 {
-  extract_packages_from_directory( reporoot_r, Pathname(), true );
+  //extract_packages_from_directory( reporoot_r, Pathname(), true );
 /*if ( ! _ticks.incr() )
       ZYPP_THROW( AbortRequestException() );*/
   // Done
