@@ -38,6 +38,7 @@
 #include "zypp/parser/yum/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/susetags/RepoParser.h"
+#include "zypp/parser/plaindir/RepoParser.h"
 
 #include "zypp/ZYppCallbacks.h"
 
@@ -475,7 +476,6 @@ namespace zypp
 
         return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
       }
-#if 0
       else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
       {
         RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
@@ -498,9 +498,8 @@ namespace zypp
         if (!refresh)
           touchIndexFile(info);
 
-        return refresh;
+        return refresh ? REFRESH_NEEDED : REPO_UP_TO_DATE;
       }
-#endif
       else
       {
         ZYPP_THROW(RepoUnknownTypeException());
@@ -604,7 +603,6 @@ namespace zypp
 
           downloader_ptr->download( media, tmpdir.path());
         }
-#if 0
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
           RepoStatus newstatus = parser::plaindir::dirStatus(url.getPathName());
@@ -618,7 +616,6 @@ namespace zypp
 
           file.close();
         }
-#endif
         else
         {
           ZYPP_THROW(RepoUnknownTypeException());
@@ -747,12 +744,17 @@ namespace zypp
     {
       case RepoType::RPMMD_e :
       case RepoType::YAST2_e :
+      case RepoType::RPMPLAINDIR_e :
       {
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
         ostringstream cmd;
-        cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() );
+        if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
+        {
+          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", info.baseUrlsBegin()->getPathName().c_str(), solvfile.c_str() );
+        } else
+          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() );
 
         MIL << "Executing: " << cmd.str() << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
@@ -798,19 +800,6 @@ namespace zypp
         parser::susetags::RepoParser parser(id, store, subprogrcv);
         parser.parse(rawpath);
         // no error
-      }
-      break;
-#endif
-#if 0
-      case RepoType::RPMPLAINDIR_e :
-      {
-        CombinedProgressData subprogrcv( progress, 100);
-        InputStream is(rawpath + "cookie");
-        string buffer;
-        getline( is.stream(), buffer);
-        Url url(buffer);
-        parser::plaindir::RepoParser parser(id, store, subprogrcv);
-        parser.parse(url.getPathName());
       }
       break;
 

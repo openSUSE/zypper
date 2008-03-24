@@ -69,60 +69,6 @@ RepoStatus dirStatus( const Pathname &dir )
   return status;
 }
 
-data::Package_Ptr makePackageDataFromHeader( const RpmHeader::constPtr header,
-                                             set<string> * filerequires,
-                                             const Pathname & location, std::string &repoid )
-{
-  if ( ! header )
-    return 0;
-
-  if ( header->isSrc() ) {
-    WAR << "Can't make Package from SourcePackage header" << endl;
-    return 0;
-  }
-
-  data::Package_Ptr pkg = new data::Package;
-
-  pkg->name    = header->tag_name();
-  pkg->edition = header->tag_edition();
-  pkg->arch    = header->tag_arch();
-
-  header->tag_requires( filerequires ).swap( pkg->deps[Dep::REQUIRES] );
-  header->tag_prerequires( filerequires ).swap( pkg->deps[Dep::PREREQUIRES] );
-  header->tag_conflicts( filerequires ).swap( pkg->deps[Dep::CONFLICTS] );
-  header->tag_obsoletes( filerequires ).swap( pkg->deps[Dep::OBSOLETES] );
-  header->tag_enhances( filerequires ).swap( pkg->deps[Dep::ENHANCES] );
-  header->tag_suggests( filerequires ).swap( pkg->deps[Dep::SUGGESTS] );
-  header->tag_freshens( filerequires ).swap( pkg->deps[Dep::FRESHENS] );
-  header->tag_supplements( filerequires ).swap( pkg->deps[Dep::SUPPLEMENTS] );
-
-  pkg->vendor                 = header->tag_vendor();
-  pkg->installedSize          = header->tag_size();
-  pkg->buildTime              = header->tag_buildtime();
-  pkg->summary                = (TranslatedText)header->tag_summary();
-  pkg->description            = (TranslatedText)header->tag_description();
-
-  pkg->repositoryLocation     = location;
-
-  header->tag_du( pkg->diskusage );
-
-  list<string> filenames = header->tag_filenames();
-  pkg->deps[Dep::PROVIDES] = header->tag_provides ( filerequires );
-
-  for (list<string>::const_iterator filename = filenames.begin();
-       filename != filenames.end();
-       ++filename)
-  {
-    if ( Capability::isInterestingFileSpec( *filename ) )
-    {
-      pkg->deps[Dep::PROVIDES].insert( Capability( *filename, Capability::PARSED ) );
-    }
-  }
-
-  return pkg;
-}
-
-
 /** RepoParser implementation.
  * \todo Clean data on exeption.
  */
@@ -170,6 +116,7 @@ void RepoParser::Impl::parse( const Pathname & reporoot_r )
     ZYPP_THROW( AbortRequestException() );
 }
 
+#if 0
 int RepoParser::Impl::extract_packages_from_directory( const Pathname & rootpath,
                                                        const Pathname & subdir, 
                                                        bool recursive)
@@ -240,6 +187,8 @@ int RepoParser::Impl::extract_packages_from_directory( const Pathname & rootpath
   }
   return 0;
 }
+#endif
+
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : RepoParser
