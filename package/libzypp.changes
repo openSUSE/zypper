@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 24 21:17:05 CET 2008 - coolo@suse.de
+
+- support plaindir again (at least the most important parts)
+
+-------------------------------------------------------------------
 Fri Mar 21 13:23:13 CET 2008 - jreidinger@suse.cz
 
 - Throwing special exception MediaBadCAException in case of SSL
