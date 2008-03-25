@@ -1164,6 +1164,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 
   ostringstream s;
   s << format(_("Repository '%s' successfully added")) % repo.name();
+  s << endl;
 
   if (zypper.globalOpts().is_rug_compatible)
   {
