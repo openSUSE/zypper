@@ -1883,7 +1883,7 @@ static SrcPackage::constPtr source_find( const string & arg )
               pool.byIdentEnd<SrcPackage>(arg) )
     {
       DBG << *srcit << endl;
-      if ( ! srcit->status().isInstalled() )
+      if ( ! srcit->status().isInstalled() ) // this will be true for all of the srcpackages, won't it?
       {
         SrcPackage::constPtr _srcpkg = asKind<SrcPackage>(srcit->resolvable());
 
@@ -1891,18 +1891,22 @@ static SrcPackage::constPtr source_find( const string & arg )
         if (srcpkg)
         {
           if (_srcpkg->edition() > srcpkg->edition())
+          {
             DBG << "newer edition (" << srcpkg->edition() << " > " << _srcpkg->edition() << ")";
+            _srcpkg.swap(srcpkg);
+          }
           else
             DBG << "is older than the current candidate";
         }
         else
+        {
           DBG << "first candindate";
-  
+          _srcpkg.swap(srcpkg);
+        }
         DBG << endl;
-  
-        _srcpkg.swap(srcpkg);
       }
     }
+
     return srcpkg;
 }
 
@@ -1925,12 +1929,17 @@ void build_deps_install(Zypper & zypper)
       DBG << format("Injecting build requieres for source package %s-%s")
           % srcpkg->name() % srcpkg->edition() << endl;
 
-      // add all src requires to pool
+      // add all src requires to pool DEPRECATED: srcpakcages will be in
+      // the pool (together with their build-deps) like normal packages
+      // so only require the srcpackage
+      /*
       for_( itc, srcpkg->dep(Dep::REQUIRES).begin(), srcpkg->dep(Dep::REQUIRES).end() )
       {
         God->resolver()->addRequire(*itc);
         DBG << "added req: " << *itc << endl;
-      }
+      }*/
+      God->resolver()->addRequire(Capability(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResTraits<SrcPackage>::kind));
+      //installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     }
     else
     {
