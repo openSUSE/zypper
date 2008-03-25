@@ -672,6 +672,7 @@ typedef enum
   TO_UPGRADE,
   TO_DOWNGRADE,
   TO_INSTALL,
+  TO_REINSTALL,
   TO_REMOVE
 } SummaryType;
 
@@ -687,6 +688,9 @@ static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
     break;
   case TO_INSTALL:
     cout << "<" << (end ? "/" : "") << "to-install>" << endl;
+    break;
+  case TO_REINSTALL:
+    cout << "<" << (end ? "/" : "") << "to-reinstall>" << endl;
     break;
   case TO_REMOVE:
     cout << "<" << (end ? "/" : "") << "to-remove>" << endl;
@@ -769,6 +773,15 @@ static void show_summary_of_type(Zypper & zypper,
           it->second.size()
       )) % kind_to_string_localized(it->first, it->second.size()));
       break;
+    case TO_REINSTALL:
+      title = boost::str(format(_PL(
+          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
+          "The following NEW %s is going to be re-installed:",
+          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
+          "The following NEW %s are going to be re-installed:",
+          it->second.size()
+      )) % kind_to_string_localized(it->first, it->second.size()));
+      break;
     case TO_REMOVE:
       title = boost::str(format(_PL(
           // TranslatorExplanation %s is a "package", "patch", "pattern", etc
@@ -847,6 +860,7 @@ int summary(Zypper & zypper)
   KindToResObjectSet toinstall;
   KindToResObjectSet toupgrade;
   KindToResObjectSet todowngrade;
+  KindToResObjectSet toreinstall;
   KindToResObjectSet toremove;
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
@@ -869,6 +883,8 @@ int summary(Zypper & zypper)
         {
           if (res->edition() > (*rmit)->edition())
             toupgrade[res->kind()].insert(res);
+          else if (res->edition() == (*rmit)->edition())
+            toreinstall[res->kind()].insert(res);
           else
             todowngrade[res->kind()].insert(res);
 
@@ -916,6 +932,7 @@ int summary(Zypper & zypper)
   show_summary_of_type(zypper, TO_UPGRADE, toupgrade);
   show_summary_of_type(zypper, TO_DOWNGRADE, todowngrade);
   show_summary_of_type(zypper, TO_INSTALL, toinstall);
+  show_summary_of_type(zypper, TO_REINSTALL, toremove);
   show_summary_of_type(zypper, TO_REMOVE, toremove);
 
   // "</install-summary>"
