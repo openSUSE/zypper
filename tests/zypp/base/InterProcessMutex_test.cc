@@ -48,12 +48,12 @@ BOOST_AUTO_TEST_CASE(WaitForTheOther)
             // child
             //BOOST_REQUIRE_THROW( InterProcessMutex("testcase"), ZYppLockedException);
             sleep(3);
-            InterProcessMutex mutex2("testcase");
+            InterProcessMutex mutex2(InterProcessMutex::Reader,"testcase");
         }
         else
         {
             MIL << "parent: " << getpid() << endl;
-            InterProcessMutex mutex("testcase");
+            InterProcessMutex mutex(InterProcessMutex::Writer,"testcase");
             // parent
             sleep(3);
             

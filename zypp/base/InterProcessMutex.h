@@ -27,16 +27,31 @@ private:
 
 
 /**
+ *
  * Inter process scoped lock implementation
  *
- * This mutex will allow only one process to
+ * This mutex will allow only one writer process to
  * reach a critical region protected by a mutex
- * of the same name.
+ * of the same name, if there are no readers
+ * at the same time.
+ *
+ * Multiple readers are allowed if there is no
+ * currently a writer.
  *
  */
 class InterProcessMutex
 {
 public:
+   /**
+    * Processes can be of two types
+    * Reader or Writer
+    */
+    enum ConsumerType
+    {
+        Reader,
+        Writer
+    };
+
    /**
     * Creates a mutex with a name and a timeout.
     *
@@ -52,31 +67,23 @@ public:
     * the timeout is reached.
     *
     */
-    InterProcessMutex( const std::string &name = "zypp",
-                      int timeout = -1 );
+    InterProcessMutex( ConsumerType ctype,
+                       const std::string &name = "zypp",
+                       int timeout = -1 );
 
+    /**
+     * Destructor
+     */
     ~InterProcessMutex();
 
-    pid_t locker_pid() const;
-
 private:
-    void openLockFile(const char *mode);
-    void closeLockFile();
-
-    void shLockFile();
-    void exLockFile();
-    void unLockFile();
-    void createLockFile();
     bool isProcessRunning(pid_t pid_r);
-    pid_t lockerPid();
-    bool locked();
     Pathname lockFilePath() const;
 private:
-    bool _clean_lock;
-    FILE *_zypp_lockfile;
-    pid_t _locker_pid;
+    int _fd;
     std::string _name;
     int _timeout;
+    ConsumerType _type;
 };
 
 

@@ -1,2 +1,3 @@
 
-ADD_TESTS(Sysconfig InterProcessMutex InterProcessMutex2)
+ADD_TESTS(Sysconfig )
+#ADD_TESTS( InterProcessMutex2 )
