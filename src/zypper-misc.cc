@@ -767,18 +767,18 @@ static void show_summary_of_type(Zypper & zypper,
     case TO_INSTALL:
       title = boost::str(format(_PL(
           // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following %s is going to be installed:",
+          "The following NEW %s is going to be installed:",
           // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following %s are going to be installed:",
+          "The following NEW %s are going to be installed:",
           it->second.size()
       )) % kind_to_string_localized(it->first, it->second.size()));
       break;
     case TO_REINSTALL:
       title = boost::str(format(_PL(
           // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following NEW %s is going to be re-installed:",
+          "The following %s is going to be re-installed:",
           // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following NEW %s are going to be re-installed:",
+          "The following %s are going to be re-installed:",
           it->second.size()
       )) % kind_to_string_localized(it->first, it->second.size()));
       break;
