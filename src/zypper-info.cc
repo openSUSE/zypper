@@ -51,17 +51,17 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
 
     // find the resolvable among installed 
     PoolItem installed;
-    for(ResPool::byName_iterator it = pool.byNameBegin(*nameit);
-        it != pool.byNameEnd(*nameit); ++it) {
+    for_( it, pool.byIdentBegin( kind, *nameit ),
+        pool.byIdentEnd( kind, *nameit ) )
+    {
       if (it->status().isInstalled()) { installed = *it; break; }
     }
 
     // find installation candidate
     ProvideProcess installer (God->architecture(), "" /*version*/);
-    invokeOnEach(pool.byNameBegin(*nameit), pool.byNameEnd(*nameit),
-      resfilter::ByKind(kind),
-      zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer)
-      );
+    invokeOnEach( pool.byIdentBegin( kind, *nameit ), 
+        pool.byIdentEnd( kind, *nameit ),
+        zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer) );
 
     if (!installer.item) {
       // TranslatorExplanation E.g. "package zypper not found."
