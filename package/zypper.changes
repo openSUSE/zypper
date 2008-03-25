@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 25 10:51:08 CET 2008 - jreidinger@suse.cz
+
+- add end of line (bnc #373196) 
+- r9261
+
+-------------------------------------------------------------------
 Fri Mar 21 12:45:00 CET 2008 - jreidinger@suse.cz
 
 - add new call for abort/request/ignore question with timeout
