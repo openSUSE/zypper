@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 25 15:42:11 CET 2008 - jkupec@suse.cz
+
+- fixed dependency problems not shown in non-interactive mode
+  (bnc #373125)
+- r9269
+
+-------------------------------------------------------------------
 Tue Mar 25 10:51:08 CET 2008 - jreidinger@suse.cz
 
 - add end of line to add repository output (bnc #373196) 
