@@ -472,9 +472,6 @@ static tribool show_problem (Zypper & zypper,
       stm << indent(det, 2) << endl;
   }
 
-  if (zypper.globalOpts().non_interactive)
-    return false;
-
   unsigned int problem_count = God->resolver()->problems().size();
 
   int reply;
@@ -526,7 +523,14 @@ static tribool show_problem (Zypper & zypper,
     zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(), popts);
     //string reply = get_prompt_reply(promptstr, popts); \TODO
 
-    string reply_s = str::getline (cin, zypp::str::TRIM);
+    string reply_s;
+    if (zypper.globalOpts().non_interactive) //! \todo do this in the prompt() call
+    {
+      reply_s = "c";
+      cout << reply_s << endl;
+    }
+    else
+      reply_s = str::getline (cin, zypp::str::TRIM);
 
     if (! cin.good()) {
       zypper.out().error("cin: " + cin.rdstate());
