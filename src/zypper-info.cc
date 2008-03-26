@@ -1,5 +1,3 @@
-#include "zypper-info.h"
-
 #include <iostream>
 
 #include <boost/format.hpp>
@@ -11,8 +9,8 @@
 
 #include "zypper.h"
 #include "zypper-main.h"
-#include "zypper-utils.h"
 #include "zypper-misc.h"
+#include "zypper-info.h"
 
 using namespace std;
 using namespace zypp;
@@ -58,7 +56,7 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
     }
 
     // find installation candidate
-    ProvideProcess installer (God->architecture(), "" /*version*/);
+    ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
     invokeOnEach( pool.byIdentBegin( kind, *nameit ), 
         pool.byIdentEnd( kind, *nameit ),
         zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer) );
@@ -133,7 +131,7 @@ void printPkgInfo(const Zypper & zypper,
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size: ") << pool_item.resolvable()->size().asString() << endl;
+  cout << _("Installed Size: ") << pool_item.resolvable()->installsize() << endl;
 
   printSummaryDesc(pool_item.resolvable());
 }

@@ -162,7 +162,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     if (ro) {
       s << ", " << ro->downloadSize () << " "
           // TranslatorExplanation %s is package size like "5.6 M"
-          << boost::format(_("(%s unpacked)")) % ro->size();
+          << boost::format(_("(%s unpacked)")) % ro->installsize();
     }
     Zypper::instance()->out().info(s.str());
   }

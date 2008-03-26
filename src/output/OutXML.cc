@@ -193,7 +193,7 @@ void OutXML::prompt(PromptId id,
   cout << "<prompt id=\"" << id << "\">" << endl;
   cout << xml_encode(prompt);
 
-  int i = 0;
+  unsigned int i = 0;
   for (PromptOptions::OptionList::const_iterator it = poptions.options().begin();
        it != poptions.options().end(); ++it, i++)
   {

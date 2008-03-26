@@ -892,7 +892,7 @@ int summary(Zypper & zypper)
           else
             todowngrade[res->kind()].insert(res);
 
-          new_installed_size += res->size() - (*rmit)->size();
+          new_installed_size += res->installsize() - (*rmit)->installsize();
 
           to_be_removed[res->kind()].erase(*rmit);
           upgrade_downgrade = true;
@@ -903,7 +903,7 @@ int summary(Zypper & zypper)
       if (!upgrade_downgrade)
       {
         toinstall[res->kind()].insert(res);
-        new_installed_size += res->size();
+        new_installed_size += res->installsize();
       }
 
       download_size += res->downloadSize();
@@ -916,7 +916,7 @@ int summary(Zypper & zypper)
         resit != it->second.end(); ++resit)
     {
       toremove[it->first].insert(*resit);
-      new_installed_size -= (*resit)->size();
+      new_installed_size -= (*resit)->installsize();
     }
 
   for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
