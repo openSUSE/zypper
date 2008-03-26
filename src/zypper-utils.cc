@@ -266,7 +266,7 @@ string & replace_all(string & str, const string & from, const string & to)
 std::string & indent(std::string & text, int columns)
 {
   string indent(columns, ' '); indent.insert(0, 1, '\n');
-  cout << "to: '" << indent << "'" << endl;
+  DBG << "to: '" << indent << "'" << endl;
   replace_all(text, "\n", indent);
   text.insert(0, string(columns, ' '));
   return text;

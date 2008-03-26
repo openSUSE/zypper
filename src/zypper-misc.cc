@@ -436,7 +436,7 @@ void remove_selections(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-// debugging
+/* debugging
 static
 ostream& operator << (ostream & stm, ios::iostate state)
 {
@@ -445,7 +445,7 @@ ostream& operator << (ostream & stm, ios::iostate state)
 	     << (state & ifstream::failbit ? "Fail ": "")
 	     << (state == 0 ? "Good ": "");
 }
-
+*/
 //! @return true to retry solving now, false to cancel, indeterminate to continue
 static tribool show_problem (Zypper & zypper,
                       const ResolverProblem & prob,
