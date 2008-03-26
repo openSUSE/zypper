@@ -197,7 +197,8 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 
 void OutNormal::prompt(PromptId id,
                        const string & prompt,
-                       const PromptOptions & poptions)
+                       const PromptOptions & poptions,
+                       const std::string & startdesc)
 {
   string option_str;
   PromptOptions::OptionList::const_iterator it;
@@ -209,5 +210,9 @@ void OutNormal::prompt(PromptId id,
   for (unsigned int i = 1; it != poptions.options().end(); ++it, i++)
     option_str += "/" + (poptions.defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
 
-  cout << CLEARLN << prompt << " [" << option_str << "]: " << std::flush;
+  if (startdesc.empty())
+    cout << CLEARLN;
+  else
+    cout << startdesc << endl;
+  cout << prompt << " [" << option_str << "]: " << std::flush;
 }

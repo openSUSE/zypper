@@ -214,12 +214,17 @@ public:
    * \param id           Unique prompt identifier for use by machines.
    * \param prompt       Prompt text.
    * \param options      A PromptOptions object
-   * 
-   * \see prompt.h 
+   * \param startdesc    Initial detailed description of the prompt to be
+   *                     prepended to the \a prompt text. Should be used
+   *                     only whe prompting for the first time and left empty
+   *                     when retrying after an invalid answer has been given. 
+   * \see prompt.h
+   * \see ../zypper-prompt.h
    */
   virtual void prompt(PromptId id,
                       const std::string & prompt,
-                      const PromptOptions & poptions) = 0;
+                      const PromptOptions & poptions,
+                      const std::string & startdesc = "") = 0;
 
 public:
   /** Get current verbosity. */
