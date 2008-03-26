@@ -56,6 +56,7 @@ namespace zypp
    * gpgcheck=1
    * gpgkey=http://software.opensuse.org/openSUSE-Build-Service.asc
    * enabled=1
+   * priority=10
    * \endcode
    *
    * \note A RepoInfo is a hint about how
@@ -64,6 +65,9 @@ namespace zypp
   class RepoInfo
   {
     friend std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
+
+    public:
+    static unsigned defaultPrioity();
 
     public:
     RepoInfo();
@@ -82,6 +86,22 @@ namespace zypp
      * Same as alias(), just escaped in a way to be a valid file name.
      */
     std::string escaped_alias() const;
+
+    /**
+     * Repository priority for solver.
+     * Some number between \c 1 (highest priority) and \c 99 (\ref defaultPriority).
+     */
+    unsigned priority() const;
+    /**
+     * The default priority (\c 99).
+     */
+    static unsigned defaultPriority();
+    /**
+     * Set repository priority for solver.
+     * A \c newval_r of \c 0 sets the default priority.
+     * \see \ref priority.
+     */
+    RepoInfo & setPriority( unsigned newval_r );
 
     /**
      * A Url under which the metadata are located, or a set of mirrors.
@@ -218,6 +238,7 @@ namespace zypp
      */
     bool keepPackages() const;
 
+    public:
     /**
      * Add a base url. \see baseUrls
      * \param url The base url for the repository.
@@ -322,11 +343,11 @@ namespace zypp
      *
      */
     RepoInfo & setGpgKeyUrl( const Url &gpgkey );
-    
+
     /**
      * \short Set if the packaqes downloaded from this repository will be kept in local cache
      *
-     * If the setting is true, all downloaded packages from this repository will be 
+     * If the setting is true, all downloaded packages from this repository will be
      * copied to the local raw cache.
      *
      * \param keep true (keep the downloaded packages) or false (delete them after installation)

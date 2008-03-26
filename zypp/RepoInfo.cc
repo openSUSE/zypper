@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/DefaultIntegral.h"
 
 #include "zypp/RepoInfo.h"
 
@@ -42,6 +43,9 @@ namespace zypp
       //MIL << std::endl;
     }
   public:
+    static const unsigned defaultPriority = 99;
+
+  public:
     bool enabled;
     bool autorefresh;
     bool gpgcheck;
@@ -57,6 +61,7 @@ namespace zypp
     Pathname filepath;
     Pathname metadatapath;
     Pathname packagespath;
+    DefaultIntegral<unsigned,defaultPriority> priority;
   public:
 
   private:
@@ -97,6 +102,17 @@ namespace zypp
   {
     //MIL << std::endl;
   }
+
+  unsigned RepoInfo::priority() const
+  { return _pimpl->priority; }
+  unsigned RepoInfo::defaultPriority()
+  { return Impl::defaultPriority; }
+  RepoInfo & RepoInfo::setPriority( unsigned newval_r )
+  {
+    _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority;
+    return *this;
+  }
+
 
   RepoInfo & RepoInfo::setEnabled( bool enabled )
   {
@@ -298,11 +314,12 @@ namespace zypp
     str << "- path        : " << path() << std::endl;
     str << "- type        : " << type() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
+    str << "- priority    : " << priority() << std::endl;
 
     str << "- autorefresh : " << autorefresh() << std::endl;
-    str << "- gpgcheck : " << gpgCheck() << std::endl;
-    str << "- gpgkey : " << gpgKeyUrl() << std::endl;
-    str << "- keeppackages : " << keepPackages() << std::endl;
+    str << "- gpgcheck    : " << gpgCheck() << std::endl;
+    str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
+    str << "- keeppackages: " << keepPackages() << std::endl;
 
     return str;
   }
@@ -330,11 +347,15 @@ namespace zypp
 
     str << "type=" << type().asString() << endl;
     str << "enabled=" << (enabled() ? "1" : "0") << endl;
+
+    if ( priority() != defaultPriority() )
+      str << "priority=" << priority() << endl;
+
     str << "autorefresh=" << (autorefresh() ? "1" : "0") << endl;
     str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
     if ( ! (gpgKeyUrl().asString().empty()) )
       str << "gpgkey=" <<gpgKeyUrl() << endl;
-      
+
     str << "keeppackages=" << keepPackages() << endl;
 
     return str;

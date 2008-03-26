@@ -105,6 +105,10 @@ namespace zypp
 					      info_r.alias().c_str(), name().c_str() ) ) );
 	}
 	myPool().setRepoInfo( _repo, info_r );
+
+        // satsolver priority is based on '<', while yum's repoinfo
+        // uses 1(highest)->99(lowest). Thus we use -info_r.priority.
+        _repo->priority = -info_r.priority();
     }
 
     void Repository::clearInfo()
@@ -156,10 +160,8 @@ namespace zypp
 
 	return str << "sat::repo(" << obj.name() << ")"
 		   << "{"
-		   << obj.solvablesSize()
-		   << ' ' << obj.get()->start << ' ' << obj.get()->end << ' '
-		   << (obj.get()->start < 0      ? "_START_":"")
-		   << (obj.get()->nsolvables < 0 ?"_NUMSOLV_":"")
+                   << "prio " << obj.get()->priority
+		   << ", size " << obj.solvablesSize()
 		   <<"}";
     }
 

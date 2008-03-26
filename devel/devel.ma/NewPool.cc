@@ -134,6 +134,25 @@ void dbgDu( Selectable::Ptr sel )
 
 ///////////////////////////////////////////////////////////////////
 
+std::ostream & testDump( std::ostream & str, const PoolItem & pi )
+{
+  str << pi << endl;
+  Package::constPtr p( asKind<Package>(pi) );
+  if ( p )
+  {
+#define OUTS(V) str << str::form("%-25s: ",#V) << p->V() << endl
+    OUTS( summary );
+    OUTS( size );
+    OUTS( downloadSize );
+    OUTS( sourcePkgName );
+    OUTS( sourcePkgEdition );
+    OUTS( checksum );
+    OUTS( location );
+#undef OUTS
+  }
+  return str;
+}
+
 struct Xprint
 {
   bool operator()( const PoolItem & obj_r )
@@ -518,6 +537,7 @@ try {
     }
   }
 
+  dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() );
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
@@ -531,32 +551,38 @@ try {
 //       printf ("datadir: %s\n", di.kv.str);
 //   }
 
-  sat::LocaleSupport myLocale( Locale("de") );
+#if 0
+  const LocaleSet & avlocales( ResPool::instance().getAvailableLocales() );
 
-  if ( myLocale.isAvailable() )
+  for_( it, avlocales.begin(), avlocales.end() )
   {
-    MIL << "Support for locale '" << myLocale.locale() << "' is available." << endl;
-  }
-  if ( ! myLocale.isRequested() )
-  {
-    MIL << "Will enable support for locale '" << myLocale.locale() << "'." << endl;
-    myLocale.setRequested( true );
-  }
-  MIL << "Packages supporting locale '" << myLocale.locale() << "':" << endl;
-  for_( it, myLocale.begin(), myLocale.end() )
-  {
-    // iterate over sat::Solvables
-    MIL << "  " << *it << endl;
-    // or get the PoolItems
-    DBG << "  " << PoolItem(*it) << endl;
+    sat::LocaleSupport myLocale( *it );
 
+    if ( ! myLocale.isRequested() )
+    {
+      MIL << "Will enable support for locale '" << myLocale.locale() << "'." << endl;
+      myLocale.setRequested( true );
+    }
+
+    MIL << "Packages supporting locale '" << myLocale.locale() << "':" << endl;
+    for_( it, myLocale.begin(), myLocale.end() )
+    {
+      // iterate over sat::Solvables
+      // MIL << "  " << *it << endl;
+
+      // or get the PoolItems
+      PoolItem pi(*it);
+      MIL << "  " << pi << endl;
+    }
   }
+
 
 //   for_( it, poolItemIterator(myLocale.begin()), poolItemIterator(myLocale.end()) )
 //   {
     // iterate over PoolItem
 //     MIL << "  " << *it << endl;
 //   }
+#endif
 
 
 #if 0
@@ -618,6 +644,21 @@ try {
     UpgradeStatistics u;
     getZYpp()->resolver()->doUpgrade( u );
   }
+
+
+  PoolItem pi ( getPi<Package>("vim") );
+  MIL << pi << endl;
+  if ( pi )
+  {
+    testDump( MIL, pi );
+  }
+  getZYpp()->resolver()->addRequire( Capability("vim") );
+  solve();
+  vdumpPoolStats( USR << "Transacting:"<< endl,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+
 
 
   if ( 0 ) {

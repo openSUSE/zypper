@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Mar 26 16:15:24 CET 2008 - ma@suse.de
+
+- Allow prioritizing repos by adding a line 'priority=N' to the
+  .repo file. Where N is an integer number from 1 (highest prio) 
+  to 99 (least and default). (bnc #369827, fate #302872)
+- version 4.6.1
+- revision 9276
+
+-------------------------------------------------------------------
 Mon Mar 24 21:17:05 CET 2008 - coolo@suse.de
 
 - support plaindir again (at least the most important parts)

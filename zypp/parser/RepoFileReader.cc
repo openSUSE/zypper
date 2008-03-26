@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/base/InputStream.h"
 #include "zypp/base/UserRequestException.h"
 
@@ -42,10 +43,10 @@ namespace zypp
             ++its )
       {
         MIL << (*its) << endl;
-        
+
         RepoInfo info;
         info.setAlias(*its);
-                      
+
         for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
               it != dict.entriesEnd(*its);
               ++it )
@@ -54,7 +55,9 @@ namespace zypp
           if (it->first == "name" )
             info.setName(it-> second);
           else if ( it->first == "enabled" )
-            info.setEnabled( it->second == "1" );
+            info.setEnabled( str::strToTrue( it->second ) );
+          else if ( it->first == "priority" )
+            info.setPriority( str::strtonum<unsigned>( it->second ) );
           else if ( it->first == "baseurl" && !it->second.empty())
             info.addBaseUrl( Url(it->second) );
           else if ( it->first == "path" )
@@ -62,15 +65,15 @@ namespace zypp
           else if ( it->first == "type" )
             info.setType(repo::RepoType(it->second));
           else if ( it->first == "autorefresh" )
-            info.setAutorefresh( it->second == "1" );
+            info.setAutorefresh( str::strToTrue( it->second ) );
           else if ( it->first == "mirrorlist" && !it->second.empty())
             info.setMirrorListUrl(Url(it->second));
           else if ( it->first == "gpgkey" && !it->second.empty())
             info.setGpgKeyUrl( Url(it->second) );
           else if ( it->first == "gpgcheck" )
-            info.setGpgCheck( it->second == "1" );
+            info.setGpgCheck( str::strToTrue( it->second ) );
 	  else if ( it->first == "keeppackages" )
-	    info.setKeepPackages( it->second == "1" );
+	    info.setKeepPackages( str::strToTrue( it->second ) );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }
