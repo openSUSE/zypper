@@ -657,12 +657,15 @@ static void show_summary_resolvable_list(const string & label,
     // resolvable name
     s << res->name() << (out.verbosity() > Out::NORMAL ? "" : " ");
     // plus edition and architecture for verbose output
-    //cout_v << "-" << res->edition() << "." << res->arch();
-    // plus repo providing this package
-    //if (!res->repoInfo().alias().empty())
-      //cout_v << "  (" << res->repoInfo().name() << ")";
-    // new line after each package in the verbose mode
-    //cout_v << endl;
+    if (out.verbosity() > Out::NORMAL)
+    {
+      s << "-" << res->edition() << "." << res->arch();
+      // plus repo providing this package
+      if (!res->repoInfo().alias().empty())
+        s << "  (" << res->repoInfo().name() << ")";
+      // new line after each package in the verbose mode
+      s << endl;
+    }
   }
 
   if (out.verbosity() == Out::NORMAL)
