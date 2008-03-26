@@ -62,7 +62,8 @@ message-element =
 prompt-element =
   element prompt {
     attribute id { xsd:integer },
-    text,
+    element description { text },
+    element text { text },
     element option {
       attribute default { xsd:boolean }?,
       attribute value { xsd:string }

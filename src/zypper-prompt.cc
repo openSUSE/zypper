@@ -5,6 +5,7 @@
 #include <boost/format.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
 #include "zypper.h"
 #include "zypper-prompt.h"
@@ -102,7 +103,20 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
 // ----------------------------------------------------------------------------
 //template<typename Action>
 //Action ...
-int read_action_ari (PromptId pid, int default_action) {
+int read_action_ari (PromptId pid, int default_action)
+{
+  Zypper & zypper = *Zypper::instance();
+  // translators: "a/r/i" are the answers to the
+  // "Abort, retry, ignore?" prompt
+  // Translate the letters to whatever is suitable for your language.
+  // the answers must be separated by slash characters '/' and must
+  // correspond to abort/retry/ignore in that order.
+  // The answers should be lower case letters.
+  PromptOptions popts(_("a/r/i"), (unsigned int) default_action);
+  zypper.out().prompt(pid, _("Abort, retry, ignore?"), popts);
+  return get_prompt_reply(zypper, pid, popts);
+
+/*
   Out & out = Zypper::instance()->out();
   // translators: "a/r/i" are the answers to the
   // "Abort, retry, ignore?" prompt
@@ -158,15 +172,20 @@ int read_action_ari (PromptId pid, int default_action) {
   }
 
   return default_action;
+  */
 }
 
 // ----------------------------------------------------------------------------
 
 bool read_bool_answer(PromptId pid, const string & question, bool default_answer)
 {
-  const GlobalOptions & gopts = Zypper::instance()->globalOpts();
-  Out & out = Zypper::instance()->out();
+  Zypper & zypper = *Zypper::instance();
+  string yn = string(_("yes")) + "/" + _("no");
+  PromptOptions popts(yn, default_answer ? 0 : 1);
+  zypper.out().prompt(pid, question, popts);
+  return !get_prompt_reply(zypper, pid, popts);
 
+  /*
   string yn = string(_("yes")) + "/" + _("no");
 
   PromptOptions popts(yn, default_answer ? 0 : 1);
@@ -214,4 +233,98 @@ bool read_bool_answer(PromptId pid, const string & question, bool default_answer
         << (default_answer ? 'y' : 'n') << endl;
     return default_answer;
   }
+  */
+}
+
+unsigned int get_prompt_reply(Zypper & zypper,
+                              PromptId pid,
+                              const PromptOptions & poptions)
+{
+  // non-interactive mode: return the default reply
+  if (zypper.globalOpts().non_interactive)
+  {
+    // print the reply for convenience (only for normal output)
+    if (!zypper.globalOpts().machine_readable)
+      zypper.out().info(poptions.options()[poptions.defaultOpt()],
+        Out::QUIET, Out::TYPE_NORMAL);
+    MIL << "running non-interactively, returning "
+        << poptions.options()[poptions.defaultOpt()] << endl;
+    return poptions.defaultOpt();
+  }
+
+  istream & stm = cin;
+  bool is_yn_prompt =
+    poptions.options().size() == 2 &&
+    poptions.options()[0] == _("yes") &&
+    poptions.options()[1] == _("no");
+
+  string reply;
+  unsigned int reply_int = poptions.defaultOpt();
+  bool stmgood;
+  while ((stmgood = stm.good()))
+  {
+    reply = zypp::str::getline (stm, zypp::str::TRIM);
+
+    // empty reply is a good reply (on enter)
+    if (reply.empty())
+      break;
+
+    if (is_yn_prompt && rpmatch(reply.c_str()) >= 0)
+    {
+      if (rpmatch(reply.c_str()))
+        reply_int = 0; // the index of "yes" in the poptions.options()
+      else
+        reply_int = 1; // the index of "no" in the poptions.options()
+      break;
+    }
+    else
+    {
+      bool got_valid_reply = false;
+      for (unsigned int i = 0; i < poptions.options().size(); i++)
+      {
+        DBG << "index: " << i << " option: "
+            << poptions.options()[i] << " reply: " << reply
+            << " (" << zypp::str::toLower(reply) << " lowercase)" << endl; 
+        if (poptions.options()[i] == zypp::str::toLower(reply))
+        {
+          reply_int = i;
+          got_valid_reply = true;
+          break;
+        }
+      }
+      if (got_valid_reply)
+        break;
+    }
+
+    ostringstream s;
+    s << format(_("Invalid answer '%s'.")) % reply;
+
+    if (is_yn_prompt)
+    {
+      s << " " << format(
+      // TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+      // The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+      _("Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."))
+      % _("yes") % _("no");
+    }
+
+    zypper.out().prompt(pid, s.str(), poptions);
+  }
+
+  if (!stmgood)
+  {
+    WAR << "Could not read the answer, returning the default: "
+        << poptions.options()[poptions.defaultOpt()] << " (" << reply_int << ")"
+        << endl;
+    return poptions.defaultOpt();
+  }
+
+  if (reply.empty())
+    MIL << "reply empty, returning the default: "
+        << poptions.options()[poptions.defaultOpt()] << " (" << reply_int << ")"
+        << endl; 
+  else
+    MIL << "reply: " << reply << " (" << reply_int << ")" << endl;
+
+  return reply_int;
 }

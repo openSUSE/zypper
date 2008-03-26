@@ -64,6 +64,10 @@ int read_action_ari (PromptId pid, int default_action = -1);
  */
 bool read_bool_answer(PromptId pid, const std::string & question, bool default_answer);
 
+class Zypper;
+unsigned int get_prompt_reply(Zypper & zypper,
+                              PromptId pid,
+                              const PromptOptions & poptions);
 
 /*
 enum Error {

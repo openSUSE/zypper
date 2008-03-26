@@ -188,10 +188,13 @@ void OutXML::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 
 void OutXML::prompt(PromptId id,
                     const string & prompt,
-                    const PromptOptions & poptions)
+                    const PromptOptions & poptions,
+                    const string & startdesc)
 {
   cout << "<prompt id=\"" << id << "\">" << endl;
-  cout << xml_encode(prompt);
+  if (!startdesc.empty())
+    cout << "<description>" << xml_encode(startdesc) << "</description>" << endl;
+  cout << "<text>" << xml_encode(prompt) << "</text>" << endl;
 
   unsigned int i = 0;
   for (PromptOptions::OptionList::const_iterator it = poptions.options().begin();

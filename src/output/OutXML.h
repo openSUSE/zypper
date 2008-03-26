@@ -39,7 +39,8 @@ public:
 
   virtual void prompt(PromptId id,
                       const std::string & prompt,
-                      const PromptOptions & poptions);
+                      const PromptOptions & poptions,
+                      const std::string & startdesc = "");
 
 protected:
   virtual bool mine(Type type);
