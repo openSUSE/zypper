@@ -42,6 +42,8 @@ namespace zypp
    * \li \c TransactDetailField Reason why the Resolvable transacts.
    *        Splitted into \c InstallDetailValue and \c RemoveDetailValue
    *        dependent on the kind of transaction.
+   * \li \c WeakField The solvable will be recommended/suggested by 
+   *        a to be installed/deleted solvable.
    *
   */
   class ResStatus
@@ -59,13 +61,14 @@ namespace zypp
     typedef uint16_t FieldType;
     typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
-    typedef bit::Range<FieldType,0,                        1> StateField;
-    typedef bit::Range<FieldType,StateField::end,          2> EstablishField;
-    typedef bit::Range<FieldType,EstablishField::end,      2> TransactField;
-    typedef bit::Range<FieldType,TransactField::end,       2> TransactByField;
-    typedef bit::Range<FieldType,TransactByField::end,     3> TransactDetailField;
-    typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
-    typedef bit::Range<FieldType,SolverStateField::end,    1> LicenceConfirmedField;
+    typedef bit::Range<FieldType,0,                          1> StateField;
+    typedef bit::Range<FieldType,StateField::end,            2> EstablishField;
+    typedef bit::Range<FieldType,EstablishField::end,        2> TransactField;
+    typedef bit::Range<FieldType,TransactField::end,         2> TransactByField;
+    typedef bit::Range<FieldType,TransactByField::end,       2> TransactDetailField;
+    typedef bit::Range<FieldType,TransactDetailField::end,   1> SolverStateField;
+    typedef bit::Range<FieldType,SolverStateField::end,      1> LicenceConfirmedField;
+    typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;      
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -120,14 +123,12 @@ namespace zypp
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
         DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
-        DUE_TO_UNLINK   = bit::RangeValue<TransactDetailField,3>::value,
-        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,4>::value
+        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
       };
     enum SolverStateValue
       {
 	NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
 	SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
-	IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
       };
 
     enum LicenceConfirmedValue
@@ -135,6 +136,14 @@ namespace zypp
         LICENCE_UNCONFIRMED = bit::RangeValue<LicenceConfirmedField,0>::value,
         LICENCE_CONFIRMED   = bit::RangeValue<LicenceConfirmedField,1>::value
       };
+      
+    enum WeakValue
+      {
+        NO_WEAK 		= bit::RangeValue<WeakField,0>::value,
+        SUGGESTED   		= bit::RangeValue<WeakField,1>::value,
+	RECOMMENDED 		= bit::RangeValue<WeakField,2>::value,
+	SUGGESTED_AND_RECOMMENDED = bit::RangeValue<WeakField,3>::value
+      };      
     //@}
 
   public:
@@ -163,6 +172,28 @@ namespace zypp
 
     void setLicenceConfirmed( bool toVal_r = true )
     { fieldValueAssign<LicenceConfirmedField>( toVal_r ? LICENCE_CONFIRMED : LICENCE_UNCONFIRMED ); }
+
+  public:
+
+    bool isRecommended() const
+    { return fieldValueIs<WeakField>( RECOMMENDED ); }
+
+    bool isSuggested() const
+    { return fieldValueIs<WeakField>( SUGGESTED ); }
+
+    void setRecommended( bool toVal_r = true )
+    { if (isSuggested())
+	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : SUGGESTED );
+    else
+	fieldValueAssign<WeakField>( toVal_r ? RECOMMENDED : NO_WEAK );
+    }
+
+    void setSuggested( bool toVal_r = true ) 
+    { if (isRecommended())
+	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : RECOMMENDED );
+    else
+	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED : NO_WEAK );
+    }
 
   public:
     // These two are IMMUTABLE!
@@ -248,9 +279,6 @@ namespace zypp
       
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
-
-    bool isToBeUninstalledDueToUnlink() const
-    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK ); }
 
     bool isToBeUninstalledDueToUpgrade() const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
@@ -488,13 +516,6 @@ namespace zypp
 	return true;
     }
 
-    bool setToBeUninstalledDueToUnlink ( )
-    {
-      if (!setToBeUninstalled (SOLVER)) return false;
-      fieldValueAssign<TransactDetailField>(DUE_TO_UNLINK);
-      return true;
-    }
-
     bool setToBeUninstalledDueToObsolete ( )
     {
       if (!setToBeUninstalled (SOLVER)) return false;
@@ -582,18 +603,9 @@ namespace zypp
     bool isSeen () const
     { return fieldValueIs<SolverStateField>( SEEN ); }
 
-    bool isImpossible () const
-    { return fieldValueIs<SolverStateField>( IMPOSSIBLE ); }
-
     bool setSeen (bool value)
     {
       fieldValueAssign<SolverStateField>( value ? SEEN : NORMAL );
-      return true;
-    }
-
-    bool setImpossible (bool value)
-    {
-      fieldValueAssign<SolverStateField>( value ? IMPOSSIBLE : NORMAL );
       return true;
     }
 
@@ -627,7 +639,6 @@ namespace zypp
     static const ResStatus unneeded;	// uninstalled, unneeded
     static const ResStatus needed;	// uninstalled, incomplete
     static const ResStatus incomplete;	// installed, incomplete
-    static const ResStatus impossible;	// uninstallable
     //@}
 
   private:
