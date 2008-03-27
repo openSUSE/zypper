@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 27 16:38:17 CET 2008 - jreidinger@suse.cz
+
+- same default for adding by URL & alias and by repo file.
+- Drop support for no-refresh parameter during addrepo. 
+- r9282
+
+-------------------------------------------------------------------
 Thu Mar 27 08:20:34 CET 2008 - jkupec@suse.cz
 
 - fixed dependency problem prompt (bnc #372711), options now
