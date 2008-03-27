@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 27 08:20:34 CET 2008 - jkupec@suse.cz
+
+- fixed dependency problem prompt (bnc #372711), options now
+  also available for translation
+- r9280
+
+-------------------------------------------------------------------
 Tue Mar 25 15:42:11 CET 2008 - jkupec@suse.cz
 
 - fixed dependency problems not shown in non-interactive mode
