@@ -835,7 +835,6 @@ void Zypper::processCommandOptions()
       {"type", required_argument, 0, 't'},
       {"disable", no_argument, 0, 'd'},
       {"disabled", no_argument, 0, 0}, // backward compatibility
-      {"no-refresh", no_argument, 0, 'n'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
@@ -853,7 +852,6 @@ void Zypper::processCommandOptions()
       "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
       "-t, --type <TYPE>       Type of repository (%s)\n"
       "-d, --disable           Add the repository as disabled\n"
-      "-n, --no-refresh        Add the repository with auto-refresh disabled\n"
       "-c, --check             Probe URI\n"
       "-x, --nocheck           Don't probe URI, probe later during refresh.\n"
     )) % "yast2, rpm-md, plaindir");
@@ -1469,19 +1467,16 @@ void Zypper::doCommand()
 
     // indeterminate indicates the user has not specified the values
     tribool enabled(indeterminate); 
-    tribool refresh(indeterminate);
 
     if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
-    if (copts.count("no-refresh"))
-      refresh = false;
 
     try
     {
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        add_repo_from_file(*this,copts["repo"].front(), enabled, refresh);
+        add_repo_from_file(*this,copts["repo"].front(), enabled);
         return;
       }
   
@@ -1498,7 +1493,7 @@ void Zypper::doCommand()
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       case 1:
-        add_repo_from_file(*this,_arguments[0], enabled, refresh);
+        add_repo_from_file(*this,_arguments[0], enabled);
 	break;
       case 2:
 	Url url = make_url (_arguments[0]);
@@ -1510,7 +1505,6 @@ void Zypper::doCommand()
 
         // by default, enable the repo and set autorefresh to false
         if (indeterminate(enabled)) enabled = true;
-        if (indeterminate(refresh)) refresh = false;
         if (copts.count("check"))
         {
           if (!copts.count("nocheck"))
@@ -1528,7 +1522,7 @@ void Zypper::doCommand()
         init_target(*this);
 
         add_repo_by_url(
-	    *this, url, _arguments[1]/*alias*/, type, enabled, refresh);
+	    *this, url, _arguments[1]/*alias*/, type, enabled);
         return;
       }
     }

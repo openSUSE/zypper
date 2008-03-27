@@ -1228,7 +1228,7 @@ void add_repo_by_url( Zypper & zypper,
   if ( !indeterminate(enabled) )
     repo.setEnabled((enabled == true));
   if ( !indeterminate(autorefresh) )
-    repo.setAutorefresh((autorefresh == true));
+    repo.setAutorefresh((autorefresh == false));
 
   add_repo(zypper, repo);
 }
@@ -1306,7 +1306,7 @@ void add_repo_from_file( Zypper & zypper,
     if ( !indeterminate(enabled) )
       repo.setEnabled((enabled == true));
     if ( !indeterminate(autorefresh) )
-      repo.setAutorefresh((autorefresh == true));
+      repo.setAutorefresh((autorefresh == false));
     MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
 
     add_repo(zypper, repo);
