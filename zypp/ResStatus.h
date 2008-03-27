@@ -639,6 +639,8 @@ namespace zypp
     static const ResStatus unneeded;	// uninstalled, unneeded
     static const ResStatus needed;	// uninstalled, incomplete
     static const ResStatus incomplete;	// installed, incomplete
+    static const ResStatus recommended;	// recommended
+    static const ResStatus suggested;	// suggested      
     //@}
 
   private:

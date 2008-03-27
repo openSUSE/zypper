@@ -249,6 +249,14 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
     else if (status.isSatisfied()) {
 	r = item.status().setSatisfied();
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") satisfied !" << r);
+    }
+    else if (status.isRecommended()) {
+	item.status().setRecommended(true);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") recommended !" << r);
+    }
+    else if (status.isSuggested()) {
+	item.status().setSuggested(true);
+	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") suggested !" << r);    	
     } else {
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") unchanged !");
     }
@@ -502,6 +510,38 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	  }
       } else {
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
+      }
+    }
+
+    /*  solvables which are recommended */
+    for (int i = 0; i < _solv->recommendations.count; i++)
+    {
+      Id p;
+      p = _solv->recommendations.elements[i];
+      if (p < 0 || !sat::Solvable(p))
+	continue;
+
+      PoolItem poolItem = _pool.find (sat::Solvable(p));
+      if (poolItem) {
+	  SATSolutionToPool (poolItem, ResStatus::recommended, ResStatus::SOLVER);
+      } else {
+	  ERR << "id " << p << " not found in ZYPP pool." << endl;
+      }
+    }
+
+    /*  solvables which are suggested */
+    for (int i = 0; i < _solv->suggestions.count; i++)
+    {
+      Id p;
+      p = _solv->suggestions.elements[i];
+      if (p < 0 || !sat::Solvable(p))
+	continue;
+
+      PoolItem poolItem = _pool.find (sat::Solvable(p));
+      if (poolItem) {
+	  SATSolutionToPool (poolItem, ResStatus::suggested, ResStatus::SOLVER);
+      } else {
+	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
     }
 
