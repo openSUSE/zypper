@@ -446,17 +446,19 @@ ostream& operator << (ostream & stm, ios::iostate state)
 	     << (state == 0 ? "Good ": "");
 }
 */
+
 //! @return true to retry solving now, false to cancel, indeterminate to continue
 static tribool show_problem (Zypper & zypper,
                       const ResolverProblem & prob,
                       ProblemSolutionList & todo)
 {
-  ostringstream stm;
-  string det;
-  stm << _("Problem: ") << prob.description () << endl;
-  det = prob.details ();
-  if (!det.empty ())
-    stm << "  " << det << endl;
+  ostringstream desc_stm;
+  string tmp;
+  // translators: meaning 'dependency problem' found during solving
+  desc_stm << _("Problem: ") << prob.description () << endl;
+  tmp = prob.details ();
+  if (!tmp.empty ())
+    desc_stm << "  " << tmp << endl;
 
   int n;
   ProblemSolutionList solutions = prob.solutions ();
@@ -466,95 +468,83 @@ static tribool show_problem (Zypper & zypper,
     ii;
   for (n = 1, ii = bb; ii != ee; ++n, ++ii) {
     // TranslatorExplanation %d is the solution number
-    stm << format (_(" Solution %d: ")) % n << (*ii)->description () << endl;
-    det = (*ii)->details ();
-    if (!det.empty ())
-      stm << indent(det, 2) << endl;
+    desc_stm << format (_(" Solution %d: ")) % n << (*ii)->description () << endl;
+    tmp = (*ii)->details ();
+    if (!tmp.empty ())
+      desc_stm << indent(tmp, 2) << endl;
   }
 
   unsigned int problem_count = God->resolver()->problems().size();
+  unsigned int solution_count = solutions.size(); 
 
-  int reply;
-  do {
-    // without solutions, its useless to prompt
-    if (solutions.empty())
-    {
-      zypper.out().error(stm.str());
-      return false;
-    }
+  // without solutions, its useless to prompt
+  if (solutions.empty())
+  {
+    zypper.out().error(desc_stm.str());
+    return false;
+  }
 
-    if (!zypper.globalOpts().machine_readable)
-    {
-      if (problem_count > 1)
-        stm << _PL(
-          "Choose the above solution using '1' or skip, retry or cancel",
-          "Choose from above solutions by number or skip, retry or cancel",
-          solutions.size());
-      else
-        // translators: translate 'c' to whatever you translated the 'c' in
-        // "#/c" and "#/s/r/c" strings
-        stm << _PL(
-          "Choose the above solution using '1' or cancel using 'c'",
-          "Choose from above solutions by number or cancel",
-          solutions.size());
-    }
+  string prompt_text;
+  if (problem_count > 1)
+    prompt_text = _PL(
+      "Choose the above solution using '1' or skip, retry or cancel",
+      "Choose from above solutions by number or skip, retry or cancel",
+      solution_count);
+  else
+    // translators: translate 'c' to whatever you translated the 'c' in
+    // "#/c" and "#/s/r/c" strings
+    prompt_text = _PL(
+      "Choose the above solution using '1' or cancel using 'c'",
+      "Choose from above solutions by number or cancel",
+      solution_count);
 
-    PromptOptions popts;
-    if (problem_count > 1)
-    {
-      // translators: answers for dependency problem solution input prompt:
-      // "Choose from above solutions by number or skip, retry or cancel"
-      // Translate the letters to whatever is suitable for your language.
-      // The anserws must be separated by slash characters '/' and must
-      // correspond to number/skip/retry/cancel in that order.
-      // The answers should be lower case letters.
-      popts.setOptions(_("#/s/r/c"), 3);
-    }
-    else
-    {
-      // translators: answers for dependency problem solution input prompt:
-      // "Choose from above solutions by number or cancel"
-      // Translate the letter 'c' to whatever is suitable for your language
-      // and the same as you translated it in the "#/s/r/c" string
-      // See the "#/s/r/c" comment for other details
-      popts.setOptions(_("#/c"), 1);
-    }
+  PromptOptions popts;
+  unsigned int default_reply;
+  ostringstream numbers;
+  for (unsigned int i = 1; i <= solution_count; i++)
+    numbers << i << "/";
 
-    zypper.out().prompt(PROMPT_DEP_RESOLVE, stm.str(), popts);
-    //string reply = get_prompt_reply(promptstr, popts); \TODO
+  if (problem_count > 1)
+  {
+    default_reply = solution_count + 2;
+    // translators: answers for dependency problem solution input prompt:
+    // "Choose from above solutions by number or skip, retry or cancel"
+    // Translate the letters to whatever is suitable for your language.
+    // The anserws must be separated by slash characters '/' and must
+    // correspond to skip/retry/cancel in that order.
+    // The answers should be lower case letters.
+    popts.setOptions(numbers.str() + _("s/r/c"), default_reply);
+  }
+  else
+  {
+    default_reply = solution_count;
+    // translators: answers for dependency problem solution input prompt:
+    // "Choose from above solutions by number or cancel"
+    // Translate the letter 'c' to whatever is suitable for your language
+    // and to the same as you translated it in the "s/r/c" string
+    // See the "s/r/c" comment for other details.
+    // One letter string  for translation can be tricky, so in case of problems,
+    // please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+    popts.setOptions(numbers.str() + _("c"), default_reply);
+  }
 
-    string reply_s;
-    if (zypper.globalOpts().non_interactive) //! \todo do this in the prompt() call
-    {
-      reply_s = "c";
-      cout << reply_s << endl;
-    }
-    else
-      reply_s = str::getline (cin, zypp::str::TRIM);
+  zypper.out().prompt(PROMPT_DEP_RESOLVE, prompt_text, popts, desc_stm.str());
+  unsigned int reply =
+    get_prompt_reply(zypper, PROMPT_DEP_RESOLVE, popts);
 
-    if (! cin.good()) {
-      zypper.out().error("cin: " + cin.rdstate());
-      return false;
-    }
-    if (isupper( reply_s[0] ))
-      reply_s[0] = tolower( reply_s[0] );
-
-    // translators: corresponds to (r)etry
-    if (problem_count > 1 && reply_s == _("r"))
-      return true;
-    // translators: corresponds to (c)ancel
-    else if (reply_s == _("c") || reply_s.empty())
-      return false;
-    // translators: corresponds to (s)kip
-    else if (problem_count > 1 && reply_s == _("s"))
-      return indeterminate; // continue with next problem
-
-    str::strtonum (reply_s, reply);
-  } while (reply <= 0 || reply >= n);
+  // retry
+  if (problem_count > 1 && reply == solution_count + 1)
+    return true;
+  // cancel
+  if (problem_count == 1 && reply == solution_count)
+    return false;
+  // skip
+  if (problem_count > 1 && reply == solution_count)
+    return indeterminate; // continue with next problem
 
   zypper.out().info(boost::str(format (_("Applying solution %s")) % reply), Out::HIGH);
   ProblemSolutionList::iterator reply_i = solutions.begin ();
-  advance (reply_i, reply - 1);
+  advance (reply_i, reply);
   todo.push_back (*reply_i);
 
   tribool go_on = indeterminate; // continue with next problem
