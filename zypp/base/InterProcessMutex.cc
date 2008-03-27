@@ -58,12 +58,12 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
         
         // try to create the lock file atomically, this will fail if
         // the lock exists
-        if ( ( _fd = open(lock_file.c_str(), O_WRONLY | O_CREAT | O_EXCL) ) == -1 )
+        if ( ( _fd = open(lock_file.c_str(), O_RDWR | O_CREAT | O_EXCL) ) == -1 )
         {
             struct flock lock;
             
             // the file exists, lets see if someone has it locked exclusively
-            if ( (_fd = open(lock_file.c_str(), O_RDONLY)) == -1 )
+            if ( (_fd = open(lock_file.c_str(), O_RDWR)) == -1 )
             {
                 ZYPP_THROW(Exception(str::form(_("It %d, Can't open lock file: %s"), k, strerror(errno))));
             }
@@ -142,10 +142,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             {
                 // either there is no lock or a reader has it so we just
                 // acquire a reader lock.
-                // TODO to know wether there is no lock over the file or there
-                // is a reader, we would need to test for a writer lock
-                // that conflicts with it.
-                // 
+
                 // try to get more lock info
                 lock.l_type = F_WRLCK;
  
@@ -280,7 +277,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
         }           
     } // end loop       
 
-    MIL << "Finish constructor" << endl;
+    LMIL << "Lock intialized" << endl;
     
 }
 
@@ -289,6 +286,10 @@ InterProcessMutex::~InterProcessMutex()
     try
     {
         Pathname lock_file = lockFilePath();
+        LMIL << "dropping " 
+             << ( (_type == Reader ) ? "reader" : "writer" ) 
+             << " lock on " << lock_file << endl;
+        
         switch ( _type )
         {
             case Reader:

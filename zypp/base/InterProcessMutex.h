@@ -72,7 +72,8 @@ public:
                        int timeout = -1 );
 
     /**
-     * Destructor
+     * Destructor, gives up the lock on the named
+     * resource.
      */
     ~InterProcessMutex();
 

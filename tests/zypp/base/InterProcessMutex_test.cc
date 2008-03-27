@@ -26,8 +26,6 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::base;
 
-#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/base/data/Sysconfig")
-
 BOOST_AUTO_TEST_CASE(WaitForTheOther)
 {
     int r = 0;
@@ -45,8 +43,6 @@ BOOST_AUTO_TEST_CASE(WaitForTheOther)
         else if ( r == 0 )
         {
             MIL << "child, PID: " << getpid() << endl;
-            // child
-            //BOOST_REQUIRE_THROW( InterProcessMutex("testcase"), ZYppLockedException);
             sleep(3);
             InterProcessMutex mutex2(InterProcessMutex::Reader,"testcase");
         }
@@ -55,10 +51,7 @@ BOOST_AUTO_TEST_CASE(WaitForTheOther)
             MIL << "parent: " << getpid() << endl;
             InterProcessMutex mutex(InterProcessMutex::Writer,"testcase");
             // parent
-            sleep(3);
-            
-            MIL << "first lock will go out of scope" << endl;
-            
+            sleep(6);
         }        
     }
     //if ( r > 0 )
