@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 28 16:51:15 CET 2008 - jkupec@suse.cz
+
+- fixed crashing in help when zypp not initialized (bnc #372696)
+- r9296
+
+-------------------------------------------------------------------
 Thu Mar 27 16:38:17 CET 2008 - jreidinger@suse.cz
 
 - same default for adding by URL & alias and by repo file.
