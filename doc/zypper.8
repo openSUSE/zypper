@@ -336,6 +336,16 @@ Management servers, as well as local files.
 .TP
 .B addrepo (ar) [options] <URI> [<alias>]
 Add a new repository specified by URI and assign specified alias to it or specify URI to repo file.
+
+Newly added repositories have auto-refresh disabled by default (except for repositories
+imported from a .repo, having the auto-refresh enabled). To enable auto-refresh, use the
+\fB\-\-refresh\fR option of the \fBmodifyrepo\fR command.
+
+Also, this command does not automatically refresh the newly added repositories.
+The repositories will get refreshed when used for the first time, or you can use
+the \fBrefresh\fR command after finishing your modifications with \fB*repo\fR commands.
+See also METADATA REFRESH POLICY section for more details.
+
 .TP
 \fI\-r, \-\-repo\fR <FILE.repo>
 Read URI and alias from specified .repo file
@@ -355,8 +365,6 @@ Probe given URI.
 .TP
 \fI\-x, \-\-nocheck\fR
 Don't probe URI, probe later during refresh.
-.PP
-NOTE: This command does not automatically refresh the newly added repositories. You have to use the \fBrefresh\fR command after finishing your modifications to repositories with \fB*repo\fR commands.
 
 .TP
 .B removerepo (rr) [options] <alias|#|URI> ...
@@ -522,11 +530,11 @@ can damage your system using this option.
 
 .SH "METADATA REFRESH POLICY"
 .LP
-Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working on the up-to-date metadata.
+Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working with up-to-date metadata.
 .LP
-Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into an sqlite database (/var/cache/zypp/zypp.db).
+Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv files (/var/cache/zypp/*.solv).
 .LP
-The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBautorefresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBautorefresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
+The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBauto-refresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBauto-refresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
 .LP
 The status of the repository metadata is checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
 .LP
