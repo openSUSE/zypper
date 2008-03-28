@@ -341,7 +341,7 @@ namespace zypp
       }
     };
 
-    /** Select PoolItem by recommended. */
+    /** PoolItem which is recommended. */
     struct ByRecommended : public PoolItemFilterFunctor
     {
       bool operator()( const PoolItem & p ) const
@@ -350,7 +350,7 @@ namespace zypp
       }
     };
 
-    /** Select PoolItem by suggested. */
+    /** PoolItem which is suggested. */
     struct BySuggested : public PoolItemFilterFunctor
     {
       bool operator()( const PoolItem & p ) const
