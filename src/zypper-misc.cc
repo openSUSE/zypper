@@ -397,6 +397,11 @@ void mark_by_capability (Zypper & zypper,
 
 void remove_selections(Zypper & zypper)
 {
+  // zypp gets initialized only upon the first successful processing of
+  // command options, if the command was not the 'help'. bnc #372696
+  if (!God)
+    return;
+
   MIL << "Removing user selections from the solver pool" << endl;
 
   DBG << "Removing user setToBeInstalled()/Removed()" << endl;
