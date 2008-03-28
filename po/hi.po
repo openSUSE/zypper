@@ -1,0 +1,706 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2008-02-28 13:38+0100\n"
+"PO-Revision-Date: 2008-03-27 17:48\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/zmart-keyring-callbacks.h:40
+#, c-format
+msgid "Warning: Accepting an unsigned file %s."
+msgstr "चेतावनी: अचिन्हित फाइल%s स्वीकार करना।"
+
+#: src/zmart-keyring-callbacks.h:46
+#, c-format
+msgid "%s is unsigned, continue?"
+msgstr "%s अचिन्हित है, जारी रखें?"
+
+#: src/zmart-keyring-callbacks.h:57
+#, c-format
+msgid "Import key %s to trusted keyring?"
+msgstr "की %s विश्वसनीय कीरिंग में इंपोर्ट करें?"
+
+#: src/zmart-keyring-callbacks.h:72
+#, c-format
+msgid "Warning: Accepting file %s signed with an unknown key %s."
+msgstr "चेतावनी: अज्ञात की %s के साथ चिन्हित फाइल %s को स्वीकार किया जा रहा है।"
+
+#: src/zmart-keyring-callbacks.h:79
+#, c-format
+msgid "%s is signed with an unknown key %s. Continue?"
+msgstr "अज्ञात की %s के साथ चिन्हित फाइल %s को स्वीकार किया जा रहा है। जारी रखा जाए?"
+
+#: src/zmart-keyring-callbacks.h:95
+#, c-format
+msgid "Automatically trusting key id %s, %s, fingerprint %s"
+msgstr "स्वतः की आईडी %s, %s पर विश्वास कर रहा, फिंगरप्रिंट, %s"
+
+#: src/zmart-keyring-callbacks.h:101
+#, c-format
+msgid "Do you want to trust key id %s, %s, fingerprint %s"
+msgstr "क्या आप की आईडी %s, %s पर भरोसा करना चाहते हैं, फिंगरप्रिंट %s"
+
+#: src/zmart-keyring-callbacks.h:120
+#, c-format
+msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
+msgstr "चेतावनी:सार्वजनिक की आईडी%s, %s, फिंगरप्रिंट %s के साथ %s के लिए हस्ताक्षर सत्यापन विफल! सुनिश्चित करें कि यह फाइल में किसी दुर्भावपूर्ण परिवर्तन के कारण नहीं हुआ!"
+
+#: src/zmart-keyring-callbacks.h:129
+#, c-format
+msgid "Signature verification failed for %s with public key id %s, %s, fingerprint %s. Warning: this might be caused by a malicious change in the file! Continuing is risky! Continue anyway?"
+msgstr "सार्वजनिक की आईडी %s, %s, फिंगरप्रिंट %s के साथ %s के लिए विफल हस्ताक्षर सत्यापन। चेतावनी: यह फाइल में कुछ दुर्भावपूर्ण परिवर्तन के कारण हो सकता है! जारी रखना जोखिमपूर्ण है! फिर भी जारी रखें?"
+
+#: src/zmart-keyring-callbacks.h:144
+#, c-format
+msgid "No digest for file %s."
+msgstr "फाइल %s के लिए कोई डाइजेस्ट नहीं।"
+
+#: src/zmart-keyring-callbacks.h:144 src/zmart-keyring-callbacks.h:151
+#: src/zmart-keyring-callbacks.h:169 src/zmart-misc.cc:763
+msgid "Continue?"
+msgstr "जारी रखें?"
+
+#: src/zmart-keyring-callbacks.h:150
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "फाइल %s के लिए अज्ञात डाइजेस्ट %s."
+
+#: src/zmart-keyring-callbacks.h:162
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "%s (अपेक्षित %s, मिला %s) के लिए विफल डाइजेस्ट सत्यापन को नजरअंदाज करना।"
+
+#: src/zmart-keyring-callbacks.h:168
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "%s के लिए डाइजेस्ट सत्यापन विफल। अपेक्षित %s, मिला %s."
+
+#: src/zmart-misc.cc:28 src/zmart-misc.cc:31
+msgid "Initializing Target"
+msgstr "टार्गेट शुरू करना"
+
+#: src/zmart-misc.cc:28
+msgid " (old way)"
+msgstr "(पुराना ढंग)"
+
+#: src/zmart-misc.cc:139
+msgid "not found"
+msgstr "नहीं पाया गया"
+
+#: src/zmart-misc.cc:146
+msgid "skipping "
+msgstr "छोड़ना"
+
+#: src/zmart-misc.cc:146
+msgid "(already installed)"
+msgstr "(पहले से इंस्टाल)"
+
+#: src/zmart-misc.cc:152
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "इंस्टाल किए जाने वाले पैकेजों की सूची में '%s' जोड़ने में विफल। "
+
+#: src/zmart-misc.cc:170
+msgid "Failed"
+msgstr "असफल"
+
+#: src/zmart-misc.cc:193
+msgid "Not found"
+msgstr "नहीं पाया गया"
+
+#: src/zmart-misc.cc:213 src/zmart-misc.cc:280
+msgid "Problem: "
+msgstr "समस्या:"
+
+#: src/zmart-misc.cc:225
+#, c-format
+msgid " Solution %s: "
+msgstr "समाधान %s:"
+
+#: src/zmart-misc.cc:237
+msgid "number, (r)etry or (c)ancel> "
+msgstr "संख्या, (पु)नः शुरू करना या (र)द्द करना>"
+
+#: src/zmart-misc.cc:245
+msgid "r"
+msgstr "R"
+
+#: src/zmart-misc.cc:248
+msgid "c"
+msgstr "सी"
+
+#: src/zmart-misc.cc:254
+#, c-format
+msgid "Applying solution %s"
+msgstr "समाधान %s लागू करना"
+
+#: src/zmart-misc.cc:277
+#, c-format
+msgid "%s Problems:"
+msgstr "%s समस्याएं:"
+
+#: src/zmart-misc.cc:306
+msgid "Summary:"
+msgstr "सार:"
+
+#: src/zmart-misc.cc:329
+msgid "<install>   "
+msgstr "<इंस्टाल>   "
+
+#: src/zmart-misc.cc:331
+msgid "<uninstall> "
+msgstr "<अनइंस्टाल> "
+
+#: src/zmart-misc.cc:336
+msgid "Nothing to do."
+msgstr "करने के लिए कुछ नहीं।"
+
+#: src/zmart-misc.cc:392
+msgid "Parsing RPM database..."
+msgstr "आरपीएम डेटाबेट पार्स करना..."
+
+#: src/zmart-misc.cc:394 src/zmart-misc.cc:407
+msgid " resolvables."
+msgstr "रिजॉल्‍वेबल्‍स"
+
+#: src/zmart-misc.cc:405
+msgid "Parsing metadata for "
+msgstr "के लिए मेटाडेटा पार्स करना"
+
+#: src/zmart-misc.cc:414
+msgid "Establishing status of aggregates"
+msgstr "समूह स्थिति स्थापित करना"
+
+#: src/zmart-misc.cc:422
+msgid "Resolving dependencies..."
+msgstr "निर्भरताएं जाँच रहा है..."
+
+#: src/zmart-misc.cc:448
+msgid " patches needed"
+msgstr "पैच जरूरी"
+
+#: src/zmart-misc.cc:448
+msgid " security patches"
+msgstr "सुरक्षा पैच"
+
+#: src/zmart-misc.cc:455
+msgid "Installed"
+msgstr "इंस्टाल हो गया"
+
+#: src/zmart-misc.cc:455
+msgid "Uninstalled"
+msgstr "अनइंस्टाल हो गया"
+
+#: src/zmart-misc.cc:457
+msgid "No Longer Applicable"
+msgstr "अधिक समय तक लागू होने योग्‍य नहीं"
+
+#: src/zmart-misc.cc:457
+msgid "Not Applicable"
+msgstr "लागू नहीं"
+
+#: src/zmart-misc.cc:459
+msgid "Applied"
+msgstr "अनुप्रयुक्‍त"
+
+#: src/zmart-misc.cc:459
+msgid "Not Needed"
+msgstr "आवश्‍यक नहीं"
+
+#: src/zmart-misc.cc:461
+msgid "Broken"
+msgstr "टूटा हुआ"
+
+#: src/zmart-misc.cc:461
+msgid "Needed"
+msgstr "आवश्‍यक"
+
+#: src/zmart-misc.cc:463
+msgid "error"
+msgstr "त्रुटि"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:648
+msgid "Catalog"
+msgstr "सूचीपत्र"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+#: src/zmart-sources.cc:100
+msgid "Name"
+msgstr "नाम"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-misc.cc:653
+msgid "Version"
+msgstr "वरजन"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526
+msgid "Category"
+msgstr "श्रेणी"
+
+#: src/zmart-misc.cc:492 src/zmart-misc.cc:526 src/zmart-sources.cc:98
+msgid "Status"
+msgstr "स्थिती"
+
+#: src/zmart-misc.cc:560
+msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
+msgstr "चेतावनी: ये केवल वे अपडेट हैं जो स्वयं अपडेटर को प्रभावित करते हैं।\nअन्य अपडेट भी उपलब्ध हैं।\n"
+
+#: src/zmart-misc.cc:648
+msgid "S"
+msgstr "S"
+
+#: src/zmart-misc.cc:653
+msgid "Arch"
+msgstr "Arch"
+
+#: src/zmart-misc.cc:710
+#, c-format
+msgid "WARNING: %s is interactive, skipped."
+msgstr "चेतावनी: %s इंटरेक्टिव है, छोड़ दिया।"
+
+#: src/zmart-misc.cc:766
+msgid "committing"
+msgstr "वचनबद्ध"
+
+#: src/zmart-misc.cc:782
+msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
+msgstr "पैकेज संघटन जांच विफल। यह इंस्टालेशन स्रोत या मीडिया के साथ समस्या हो सकती है। निम्न में से एक प्रयोग करके देखें: \n\n- पुनः प्रयास कमांड\n- 'जिप्पर रिफ्रैश' प्रयोग करते हुए इंस्टालेशन स्रोत रिफ्रैश करें\n- अन्य इंस्टालेशन मीडिया प्रयोग करें (उदाहरण के लिए, यदि आपका क्षतिग्रस्त है)\n- अन्य इंस्टालेशन स्रोत प्रयोग करें।"
+
+#: src/zmart-misc.cc:800
+msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "चेतावनी: इंस्टाल हुए पैकेजों में से एक के लिए आपकी मशीन को रिबूट करना जरूरी है। शीघ्र से शीघ्र रिबूट करें।"
+
+#: src/zmart-misc.cc:803
+msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
+msgstr "चेतावनी: कोई एक इंस्टाल हुआ पैच स्वयं पैकेज मैनेजर को प्रभावित करता है, इसलिए अगला परिचालन निष्पादन से पहले इसे रिस्टार्ट करने की जरूरत है। "
+
+#: src/zmart-misc.cc:827
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "%s %s लाइसेंस के साथ स्वचालित ढंग से सहमत।"
+
+#: src/zmart-misc.cc:840 src/zmart-misc.cc:865
+msgid "license"
+msgstr "लाइसैंस :"
+
+#: src/zmart-misc.cc:843
+msgid "In order to install this package, you must agree to terms of the above licencse. Continue?"
+msgstr "यह पैकेज इंस्टाल करने के लिए, आपको उपरोक्त लाइसेंस की शर्तों से सहमत होना चाहिए। जारी रखें?"
+
+#: src/zmart-misc.cc:853
+msgid "Aborting installation due to the need of license(s) confirmation."
+msgstr "लाइसेंस पुष्टि की जरूरत के कारण इंस्टालेशन रद्द कर रहा।"
+
+#: src/zmart-misc.cc:855
+msgid "Please, restart the operation in interactive mode and confirm agreement with required license(s)."
+msgstr "कृपया, इंटरैक्टिव मोड में परिचालन पुनः शुरू करें और वांछित लाइसेंस के साथ अनुबंध की पुष्टि करें।"
+
+#: src/zmart-misc.cc:862
+msgid "Aborting installation due to user disagreement with "
+msgstr "के साथ प्रयोगकर्त्ता असहमति के कारण इंस्टालेशन रद्द करना"
+
+#: src/zmart-sources.cc:31
+msgid "Sorry, you need root privileges to use system sources, disabling them..."
+msgstr "क्षमा करें, आपको इन्हें असमर्थित करते हुए, सिस्टम स्रोत प्रयोग करने के लिए रूट सुविधाओं की जरूरत है"
+
+#: src/zmart-sources.cc:48
+msgid "Restoring system sources..."
+msgstr "सिस्टम स्रोत पुनः संग्रहित कर रहा..."
+
+#: src/zmart-sources.cc:57
+msgid "Failed to restore sources"
+msgstr "स्रोत पुनः संग्रहित करने में विफल"
+
+#: src/zmart-sources.cc:80
+msgid "Cannot access repository"
+msgstr "रिपॉजिटरी एक्सेस नहीं कर सकते"
+
+#: src/zmart-sources.cc:99
+msgid "Enabled"
+msgstr "समर्थ हैं"
+
+#: src/zmart-sources.cc:99
+msgid "Refresh"
+msgstr "रीफ्रेश"
+
+#: src/zmart-sources.cc:100
+msgid "Type"
+msgstr "प्रकार"
+
+#: src/zmart-sources.cc:116 src/zmart-sources.cc:118
+msgid "Active"
+msgstr "सक्रिय"
+
+#: src/zmart-sources.cc:118
+msgid "Disabled"
+msgstr "असमर्थ"
+
+#: src/zmart-sources.cc:125 src/zmart-sources.cc:126 src/zmart-sources.cc:128
+#: src/zmart-sources.cc:129
+msgid "Yes"
+msgstr "हाँ"
+
+#: src/zmart-sources.cc:126 src/zmart-sources.cc:128 src/zmart-sources.cc:129
+msgid "No"
+msgstr "नहीं"
+
+#: src/zmart-sources.cc:163 src/zmart-sources.cc:553
+msgid "Error reading system sources: "
+msgstr "सिस्टम स्रोत पढ़ने में त्रुटि:"
+
+#: src/zmart-sources.cc:190
+msgid "Unknown repository type "
+msgstr "अज्ञात रिपॉजिटरी प्रकार"
+
+#: src/zmart-sources.cc:202
+msgid "Name not found"
+msgstr "नाम नहीं मिला"
+
+#: src/zmart-sources.cc:205
+msgid "baseurl not found"
+msgstr "बेसयूआरएल नहीं मिला"
+
+#: src/zmart-sources.cc:339
+msgid "Continuing anyway"
+msgstr "फिर भी जारी रखें"
+
+#: src/zmart-sources.cc:371 src/zmart-sources.cc:398
+#, c-format
+msgid "Removing source '%s'"
+msgstr "स्रोत '%s' मिटा रहा "
+
+#: src/zmart-sources.cc:374 src/zmart-sources.cc:400
+#, c-format
+msgid "Source '%s' removed."
+msgstr "स्रोत '%s' मिटा दिया।"
+
+#: src/zmart-sources.cc:378 src/zmart-sources.cc:404
+#, c-format
+msgid "Failed to remove source '%s':"
+msgstr "'%s' मिटाने में विफल"
+
+#: src/zmart-sources.cc:383 src/zmart-sources.cc:420 src/zmart-sources.cc:444
+#: src/zmart-sources.cc:456 src/zmart-sources.cc:489 src/zmart-sources.cc:512
+#: src/zmart-sources.cc:523
+#, c-format
+msgid "Source %s not found."
+msgstr "स्रोत %s नहीं मिला"
+
+#: src/zmart-sources.cc:393
+#, c-format
+msgid "'%s' is broken or not accessible. Do you wish to remove it?"
+msgstr "%s टूट गया है या एक्सेस करने योग्य नहीं है। क्या आप उसे मिटाना चाहते हैं?"
+
+#: src/zmart-sources.cc:413
+msgid "Removing source "
+msgstr "स्रोत मिटा रहा"
+
+#: src/zmart-sources.cc:436 src/zmart-sources.cc:504
+msgid "URL is invalid: "
+msgstr "URL अवैध हैं ।"
+
+#: src/zmart-sources.cc:541
+msgid "Sorry, not implemented yet for libzypp-1.x.x"
+msgstr "क्षमा करें, libzypp-1.x.x के लिए अभी तक क्रियान्वित नहीं"
+
+#: src/zmart-sources.cc:562
+msgid "Refreshing "
+msgstr "पुनश्चर्या हो रहा है "
+
+#: src/zmart-sources.cc:569
+msgid "DONE"
+msgstr "हो गया"
+
+#: src/zmart-sources.cc:573
+msgid "Error while refreshing the source: "
+msgstr "स्रोत को रिफ्रैश करते समय त्रुटि:"
+
+#: src/zmart-sources.cc:578
+msgid "All system sources have been refreshed."
+msgstr "सभी सिस्टम स्रोत पुनश्चर्या  कर दिए गए हैं।"
+
+#: src/zmart-sources.cc:599
+msgid "Error while fetching "
+msgstr "लाने के दौरान त्रुटि"
+
+#: src/zmart-sources.cc:615
+msgid "ZENworks Management Daemon is running."
+msgstr "जैनवर्क्स मैनेजमेंट डेमॉन चल रहा है।"
+
+#: src/zmart-sources.cc:616
+msgid "WARNING: this command will not synchronize changes."
+msgstr "चेतावनी: यह कमांड परिवर्तन सिंक्रोनाइज़ नहीं करेगी।"
+
+#: src/zmart-sources.cc:617
+msgid "Use rug or yast2 for that."
+msgstr "उसके लिए रग या यास्ट2 प्रयोग करें।"
+
+#: src/zypp-checkpatches.cc:127
+msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close other applications and check again for updates."
+msgstr "अपडेटर पैकेज मैनेजर इंजन एक्सेस नहीं कर सकता। यह आमतौर पर तब होता है जब आपका कोई अन्य अनुप्रयोग (जैसे यास्ट) उसे उसी समय प्रयोग करता है। कृपया अन्य अनुप्रयोग बंद करें और दोबारा अपडेट्स जांचे।"
+
+#: src/zypp-checkpatches.cc:213
+#, c-format
+msgid "Could not restore source.\nDetail: %s"
+msgstr "स्रोत पुनःसंग्रहित नहीं कर सकते।\nविवरण: %s"
+
+#: src/zypp-checkpatches.cc:262
+msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
+msgstr "यहां कोई अपडेट स्रोत परिभाषित नहीं हैं। कृपया अपडेट्स की सूचना पाने के लिए एक या अधिक अपडेट स्रोत जोड़ें।"
+
+#: src/zypper-callbacks.cc:30
+msgid "(A)bort, (R)etry, (I)gnore?"
+msgstr "रद्द करें, पुनः प्रयास करें, नजरअंदाज करें?"
+
+#: src/zypper-callbacks.cc:94
+#, c-format
+msgid "Invalid answer '%s', enter 'y' or 'n':"
+msgstr "अवैध उत्तर '%s', 'वाई' या 'एन' प्रविष्ट करें:"
+
+#: src/zypper-getopt.cc:56
+msgid "Unknown option "
+msgstr "अज्ञात विकल्‍प"
+
+#: src/zypper-getopt.cc:59
+msgid "Missing argument for "
+msgstr "के लिए लुप्त तर्क"
+
+#: src/zypper-info.cc:48
+msgid " not found."
+msgstr "नहीं पाया गया"
+
+#: src/zypper-info.cc:52
+msgid "Information for "
+msgstr "के लिए जानकारी"
+
+#: src/zypper-info.cc:84
+msgid "Catalog: "
+msgstr "सूचीपत्र: "
+
+#: src/zypper-info.cc:85
+msgid "Name: "
+msgstr "नाम: "
+
+#: src/zypper-info.cc:86
+msgid "Version: "
+msgstr "संस्‍करण: "
+
+#: src/zypper-info.cc:87
+msgid "Arch: "
+msgstr "Arch : "
+
+#: src/zypper-info.cc:88
+msgid "Installed: "
+msgstr "इंस्टाल हो गया: "
+
+#: src/zypper-info.cc:90
+msgid "Status: "
+msgstr "स्थिति: "
+
+#: src/zypper-info.cc:93
+msgid "up-to-date"
+msgstr "वर्तमान समय तक अपडेट"
+
+#: src/zypper-info.cc:95
+msgid "out-of-date (version "
+msgstr "पुराना (संस्करण"
+
+#: src/zypper-info.cc:96
+msgid " installed) "
+msgstr "इंस्टाल हो गया)"
+
+#: src/zypper-info.cc:99
+msgid "not installed"
+msgstr "इंस्टाल नहीं हुआ"
+
+#: src/zypper-info.cc:101
+msgid "Installed Size: "
+msgstr "इंस्टाल किए गए का आकार: "
+
+#: src/zypper-info.cc:102
+msgid "Summary: "
+msgstr "सार:"
+
+#: src/zypper-info.cc:103
+msgid "Description: "
+msgstr "विवरण:"
+
+#: src/zypper-search.cc:45
+msgid "No sources. Zypper currently searches within installation sources only."
+msgstr "कोई स्रोत नहीं। जिप्पर मौजूदा समय में केवल इंस्टालेशन स्रोतों में खोज रहा है।"
+
+#: src/zypper-search.cc:107
+msgid "Pre-caching installed resolvables matching given search criteria... "
+msgstr "कैचिंग पूर्व इंस्टाल हुए रिसॉल्वेबल्स दिए गए सर्च मापदंड से मेल खा रहे हैं..."
+
+#: src/zypper-search.cc:116
+msgid " out of ("
+msgstr "{0} में से"
+
+#: src/zypper-search.cc:117
+msgid "cached."
+msgstr "कैश।"
+
+#: src/zypper-search.cc:216
+msgid " is not a valid regular expression: \""
+msgstr "एक वैध नियमित अभिव्यक्ति नहीं है: \""
+
+#: src/zypper-search.cc:218
+msgid "This is a bug, please file a bug report against zypper."
+msgstr "यह एक बग है, कृपया जिप्पर के विरूद्ध बग रिपोर्ट फाइल करें।"
+
+#: src/zypper.cc:76
+msgid "URL is invalid."
+msgstr "URL अवैध हैं ।"
+
+#: src/zypper.cc:84
+msgid "  Commands:\n\thelp\t\t\tHelp\n\tshell, sh\t\tAccept multiple commands at once\n\tinstall, in\t\tInstall packages or resolvables\n\tremove, rm\t\tRemove packages or resolvables\n\tsearch, se\t\tSearch for packages matching a pattern\n\tservice-list, sl\tList services, also called installation sources\n\tservice-add, sa\t\tAdd a new service\n\tservice-delete, sd\tDelete a service\n\tservice-rename, sr\tRename a service\n\trefresh, ref\t\tRefresh all installation sources\n\tpatch-check, pchk\tCheck for patches\n\tpatches, pch\t\tList patches\n\tlist-updates, lu\tList updates\n\tupdate, up\t\tUpdate packages\n\tinfo, if\t\tShow full information for packages\n\tpatch-info\t\tShow full information for patches\n"
+msgstr "कमांड:\n\thelp\t\t\tHelp\n\tshell, sh\t\tएक बार\n\tमें बहु कमांड स्वीकार करती है install, in\t\tपैकेज या रिसॉल्वेबल\n\t इंस्टाल करें remove, rm\t\tपैकेज या रिसॉल्वेबल\n\tमिटाएं search, se\t\tनमूने\n\tसे मेल खाते पैकेज खोजें service-list, sl\tलिस्ट सेवाएं, इंस्टालेशन स्रोत भी कहा जाता है service-add, sa\t\tनई सेवा\n\tजोड़े service-delete, sd\tसेवा\n\tहटाएं service-rename, sr\tसेवा\n\tको पुनः नाम दें refresh, ref\t\tसभी इंस्टालेशन स्रोत\n\tरिफ्रैश करें patch-check, pchk\tपैच\n\t जांचें patches, pch\t\tपैचों\n\tकी सूची बनाएं tlist-updates, lu\tअपडेटों\n\tकी सूची बनाएं update, up\t\tअपडेट पैकेज\n\tinfo, if\t\tपैकेज\n\tके लिए पूर्ण जानकारी दर्शाएं patch-info\t\tपैचों के लिए पूर्ण जानकारी दर्शाएं\n"
+
+#: src/zypper.cc:127
+msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
+msgstr "विकल्प:\n\t--मदद, -h\t\tमदद\n\t--संस्करण, -V\t\tसंस्करण संख्या का आउटपुट निकालें\n\t--verbose, -v\t\tवर्बोसिटी बढ़ाएं\n\t--terse, -t\t\tमशीन उपभोग के लिए आउटपुट टर्स करें\n\t--तालिका-शैली, -s\tतालिका शैली(पूर्णांक)\n\t--रग-समर्थित, -r\tरग समर्थता चालू करें\n\t--गैर-इंटरैक्टिव, -n\tकुछ भी न पूछें, स्वतः डिफाल्ट उत्तर प्रयोग करें।\n\t--no-gpg-checks\t\tजीपीजी जांच विफलताएं नजरअंदाज करें और जारी रखें।\n\t--root, -R <dir>\tविभिन्न रूट डायरेक्टरी पर परिचालन करें\n"
+
+#: src/zypper.cc:140
+msgid "Verbosity "
+msgstr "वर्बोसिटी"
+
+#: src/zypper.cc:146
+msgid "Entering non-interactive mode."
+msgstr "गैर-इंटरेक्टिव मोड में प्रवेश कर रहा।"
+
+#: src/zypper.cc:152
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "कोई जीपीजी जांच नहीं मोड में प्रवेश कर रहा।"
+
+#: src/zypper.cc:162
+msgid "Invalid table style "
+msgstr "अवैध टेबल शैली"
+
+#: src/zypper.cc:205
+msgid "Try -h for help"
+msgstr "मदद के लिए -एच प्रयोग करें"
+
+#: src/zypper.cc:223
+msgid "  Source options:\n\t--disable-system-sources, -D\t\tDo not read the system sources\n\t--source, -S\t\tRead additional source\n"
+msgstr "स्रोत विकल्प:\n\t--disable-system-sources, -D\t\tसिस्टम स्रोत न पढ़ें\n\t--source, -S\t\tअतिरिक्त स्रोत पढ़ें\n\n"
+
+#: src/zypper.cc:228
+msgid "  Target options:\n\t--disable-system-resolvables, -T\t\tDo not read system installed resolvables\n"
+msgstr "लक्षित विकल्प:\n\t--disable-system-resolvables, -T\t\tइंस्टाल हुए सिस्टम रिसॉल्वेबल न पढ़ें\n\n"
+
+#: src/zypper.cc:245
+msgid "  Command options:\n\t--catalog,-c\t\t\tOnly from this catalog (under development)\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\t\t\tDo not require user confirmation to proceed with installation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "कमांड विकल्प:\n\t--catalog,-c\t\t\tकेवल इस कैटालॉग से(विकास अधीन)\n\t--type,-t\t\tरिसॉल्वेबल प्रकार (डिफाल्ट: पैकेज)\n\t--no-confirm,-y\t\t\tइंस्टालेशन के साथ आगे बढ़ने के लिए प्रयोगकर्त्ता की पुष्टि की जरूरत नहीं\n\t--auto-agree-with-licenses,-l\tतीसरे पक्ष के लाइसेंस पुष्टि प्रांप्ट पर स्वतः 'हां' कहें।\n\t\t\t\t\tअधिक विवरण के लिए मैन जिप्पर देखें।\n"
+
+#: src/zypper.cc:265
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: package)\n\t--no-confirm,-y\tDo not require user confirmation\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "कमांड विकल्प:\n\t--type,-t\t\tरिसॉल्वेबल प्रकार (डिफाल्ट: पैकेज)\n\t--no-confirm,-y\tप्रयोगकर्त्ता पुष्टि की जरूरत नहीं\n\t--auto-agree-with-licenses,-l\tतीसरे पक्ष के लाइसेंस पुष्टि प्रांप्ट पर स्वतः 'हां' कहें।\n\t\t\t\t\tअधिक विवरण के लिए मैन जिप्पर देखें।\n"
+
+#: src/zypper.cc:283
+msgid "service-add [options] URI [alias]\n\nAdd a service (installation source) to the system.\n  Command options:\n\t--repo,-r <FILE.repo>\tRead the URL and alias from a file\n\t\t\t\t(even remote)\n\t--type,-t <TYPE>\tType of repository (YaST, YUM, or Plaindir)\n\t--disabled,-d\t\tAdd the service as disabled\n\t--no-refresh,-n\t\tDo not automatically refresh the metadata\n"
+msgstr "सेवा-जोड़ें [विकल्प] यूआरआई [उपनाम]\n\nसिस्टम में सेवा (इंस्टालेशन स्रोत) जोड़ें।\n कमांड विकल्प:\n\t--repo,-r <FILE.repo>\tफाइल से यूआरएल और उपनाम पढ़ें\n\t\t\t\t(रिमोट भी)\n\t--type,-t <TYPE>\tरिपॉजिटरी प्रकार (YaST, YUM या Plaindir)\n\t--disabled,-d\t\tअसमर्थित के रूप में सेवा जोड़ें\n\t--no-refresh,-n\t\tमेटाडेटा को स्वचालित ढंग से रिफ्रैश न करें\n"
+
+#: src/zypper.cc:302
+msgid "service-list\n\nList all defined system services (installation sources).\nThis command has no options.\n"
+msgstr "सेवा-सूची\n\nसभी परिभाषित सिस्टम सेवाएं (इंस्टालेशन स्रोत) सूचीबद्ध करें।\nइस कमांड के कोई विकल्प नहीं हैं।\n"
+
+#: src/zypper.cc:316
+msgid "service-delete [options] <URI|alias>\n\nRemove service (installation source) from the system.\nThis command has no options.\n"
+msgstr "सेवा-मिटाएं (विकल्प) <URI|alias>\n\nइस सिस्टम से रिमोट सेवा (इंस्टालेशन स्रोत)।\nइस कमांड के कोई विकल्प नहीं हैं।\n\n"
+
+#: src/zypper.cc:330
+msgid "service-rename [options] <URI|alias> <new-alias>\n\nAssign new alias to the service specified by URI or current alias.\nThis command has no options.\n"
+msgstr "सेवा-पुनःनाम दें [विकल्प]<URI|alias> <new-alias>\n\nयूआरआई या मौजूदा उपनाम द्वारा विनिर्दिष्ट सेवा को नया उपनाम निर्दिष्ट करें।\nइस कमांड में कोई विकल्प नहीं हैं।\n\n"
+
+#: src/zypper.cc:344
+msgid "zypper refresh\n\nRefresh all installation sources found in the system.\n"
+msgstr "जिप्पर रिफ्रैश\n\nसिस्टम में मिले सभी इंस्टालेशन स्रोत रिफ्रैश करें।\n"
+
+#: src/zypper.cc:357
+msgid "list-updates [options]\n\nList all available updates\n\n  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n"
+msgstr "सूची बनाएं-अपडेट्स [विकल्प]\n\nसभी उपलब्ध अपडेट्स सूचीबद्ध करें\n\n कमांड विकल्प:\n\t--type,-t\t\tरिसॉल्वेबल प्रकार (डिफाल्ट: पैच)\n"
+
+#: src/zypper.cc:378
+msgid "  Command options:\n\t--type,-t\t\tType of resolvable (default: patch)\n\t--no-confirm,-y\t\tDo not require user confirmation\n\t--skip-interactive\t\tSkip interactive updates\n\t--auto-agree-with-licenses,-l\tAutomatically say 'yes' to third party license confirmation prompt.\n\t\t\t\t\tSee man zypper for more details.\n"
+msgstr "कमांड विकल्प:\n\t--type,-t\t\tरिसॉल्वेबल प्रकार (डिफाल्ट: पैच)\n\t--no-confirm,-y\t\tप्रयोगकर्त्ता पुष्टि की जरूरत नहीं\n\t--skip-interactive\t\tइंटरेक्टिव अपडेट्स छोड़े\n\t--auto-agree-with-licenses,-l\tतीसरे पक्ष के पुष्टि प्रांप्ट को स्वतः 'हां' कहें।\n\t\t\t\t\tअधिक विवरण के लिए मैन जिप्पर देखें।\n"
+
+#: src/zypper.cc:405
+msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
+msgstr "जिप्पर [वैश्विक-विकल्प] खोज [विकल्प] [querystring...]\n\n'खोज' - दी गई खोड स्ट्रिंगों से मेल खाते पैकेज खोजें\n\n  कमांड विकल्प:\n    --सभी-मिलाएंl            सभी खोज स्ट्रिंग से मिलाने के लिए खोजें (डिफाल्ट)\n    --कोई भी-मिलाएं            किसी भी खोज स्ट्रिंग के लिए मिलान करने के लिए खोजें\n    --उपस्ट्रिंग-मिलाएं     आंशिक शब्द के लिए मैच खोजें (डिफाल्ट)\n    --शब्द-मिलाएं          केवल संपूर्ण शब्दों के लिए मैच खोजें\n    --सटीक-मिलाएं          सटीक पैकेज नाम के लिए खोज करें\n-d, --खोज-विवरण      पैकेज सारांश और विवरण में भी खोजें।\n-c, --केस-सेंसिटिव       केस-सेंसिटिव खोज करें।\n-i, --केवल-इंस्टाल    केवल वे पैकेज दर्शाएं जो पहले से इंस्टाल हैं।\n-u, --केवल-अनइंस्टाल     केवल वे पैकेज दर्शाएं जो मौजूदा समय में इंस्टाल नहीं हैं।\n-t, --टाइप करें                 केवल विशेष प्रकार के पैकेजों के लिए खोजें।\n    --sort-by-name         नाम द्वारा पैकेज छांटे (डिफाल्ट)।\n    --कैटालॉग-द्वारा-छांटे      कैटालॉग द्वारा पैकेज छांटे (स्रोत)।\n\n* और? इस खोज स्ट्रिंग के भीतर वाइल्डकार्ड भी प्रयोग किए जा सकते हैं।\n\n"
+
+#: src/zypper.cc:433
+msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"
+msgstr "पैच-जांच\n\nउपलब्ध पैच जांचें\n\nइस कमांड में कोई विकल्प नहीं है।\n"
+
+#: src/zypper.cc:447
+msgid "patches\n\nList all available patches\n\nThis command has no options.\n"
+msgstr "पैच\n\nसभी उपलब्ध पैच सूचीबद्ध करें\n\nइस कमांड में कोई विकल्प नहीं हैं।\n"
+
+#: src/zypper.cc:461
+msgid "zypper [global-options] info [name...]\n\n'info' -- Show full information for packages\n"
+msgstr "जिप्पर [वैश्विक-विकल्प] सूचना [नाम...]\n\n'info' -- पैकेज के लिए संपूर्ण जानकारी दर्शाएं\n"
+
+#: src/zypper.cc:473
+msgid "zypper [global-options] patch-info [patchname...]\n\n'patch-info' -- Show detailed information for patches\n"
+msgstr "जिप्पर [वैश्विक-विकल्प] पैच-सूचना [पैचनाम...]\n\n'patch-info' -- पैचों के लिए विवरणित जानकारी दर्शाएं\n\n"
+
+#: src/zypper.cc:485
+msgid "zypper [global-options] moo\n\n'moo' - Show an animal\n"
+msgstr "जिप्पर [वैश्विक-विकल्प] moo\n\n'moo' - जानवर दर्शाएं\n"
+
+#: src/zypper.cc:492
+msgid "Unknown command"
+msgstr "अज्ञात कमांड"
+
+#: src/zypper.cc:507
+msgid "Non-Option Program Arguments: "
+msgstr "गैर-विकल्प कार्यक्रम तर्क:"
+
+#: src/zypper.cc:519
+msgid "Ignoring --terse (provided only for rug compatibility)"
+msgstr "टर्स को नजरअंदाज करना (केवल रग समर्थता के लिए प्रदत्त)"
+
+#: src/zypper.cc:535
+msgid "Ignoring installed resolvables..."
+msgstr "इंस्टाल हुए रिसॉल्वेबल नजरअंदाज करना"
+
+#: src/zypper.cc:563
+msgid "A ZYpp transaction is already in progress."
+msgstr "जिप ट्रांजैक्शन पहले से प्रगति में है।"
+
+#: src/zypper.cc:602
+msgid "Warning: Unknown metadata type "
+msgstr "चेतावनी: अज्ञात मेटाडेटा प्रकार"
+
+#: src/zypper.cc:743 src/zypper.cc:801 src/zypper.cc:887 src/zypper.cc:919
+msgid "Unknown resolvable type "
+msgstr "अज्ञात रिसॉल्वेबल प्रकार"
+
+#: src/zypper.cc:756
+msgid "Warning: No sources. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "चेतावनी: कोई स्रोत नहीं। केवल इंस्टाल हुए रिसॉल्वेबल के साथ संचालन करना। कुछ भी इंस्टाल नहीं हो सकता।"
+
+#: src/zypper.cc:962
+msgid "Please file a bug report about this."
+msgstr "कृपया इसके बारे में बग रिपोर्ट फाइल करें।"
+
+#: src/zypper.cc:965
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "निर्देशों के लिए http://en.opensuse.org/Zypper#Troubleshooting देखें।"
+
+#: src/zypper.cc:978
+msgid "Unexpected exception."
+msgstr "अनपेक्षित अपवाद।"
+
+#: src/zypper.cc:1082
+msgid "Root privileges are required for running zypper."
+msgstr "जिप्पर चलाने के लिए रूट सुविधाओं की जरूरत है।"
+
