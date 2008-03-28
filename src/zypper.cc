@@ -1891,6 +1891,15 @@ void Zypper::doCommand()
     //! \todo install by capability by default in the future (need to improve its output)
     if (copts.count("capability"))
       by_capability = true;
+
+    if (install_not_remove && by_capability && _copts.count("force"))
+    {
+      out().error(boost::str(format(_("%s cannot currently be used with %s"))
+        % "--force" % "--capability"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
     for ( vector<string>::const_iterator it = _arguments.begin();
           it != _arguments.end(); ++it )
     {
