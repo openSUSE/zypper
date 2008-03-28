@@ -341,6 +341,24 @@ namespace zypp
       }
     };
 
+    /** Select PoolItem by recommended. */
+    struct ByRecommended : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isRecommended();
+      }
+    };
+
+    /** Select PoolItem by suggested. */
+    struct BySuggested : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isSuggested();
+      }
+    };      
+
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace resfilter
