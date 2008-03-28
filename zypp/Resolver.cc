@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/Resolver.h"
+#include "zypp/ZConfig.h"
 #include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
@@ -22,6 +23,8 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  using namespace solver;
+    
   IMPL_PTR_TYPE(Resolver);
 #if 0
   Resolver_Ptr Resolver::_resolver = NULL;
@@ -72,6 +75,21 @@ namespace zypp
   { _pimpl->setForceResolve( force ); }
   bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
+  void Resolver::setOnlyRequires( const bool onlyRequires )
+  { onlyRequires ? _pimpl->setOnlyRequires( TRUE ) : _pimpl->setOnlyRequires( FALSE ); }
+  void Resolver::resetOnlyRequires()
+  { _pimpl->setOnlyRequires( DEFAULT ); }    
+  bool Resolver::onlyRequires()
+  {
+      switch (_pimpl->onlyRequires()) {
+	  case DEFAULT:
+	      return ZConfig::instance().solver_onlyRequires();
+	  case TRUE:
+	      return true;
+	  case FALSE:
+	      return false;
+      };
+  }
   
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraRequire( capability ); }

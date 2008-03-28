@@ -25,6 +25,7 @@
 #include "zypp/solver/detail/Testcase.h"
 
 #include "zypp/Capabilities.h"
+#include "zypp/ZConfig.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
@@ -71,6 +72,7 @@ Resolver::Resolver (const ResPool & pool)
     , _forceResolve(false)
     , _upgradeMode(false)
     , _verifying(false)
+    , _onlyRequires(DEFAULT)
 
 {
     sat::Pool satPool( sat::Pool::instance() );
@@ -287,6 +289,15 @@ Resolver::resolvePool()
 
 	if (_forceResolve)
 	    _satResolver->setAllowuninstall(true);
+	
+ 	switch (_onlyRequires) {
+	    case DEFAULT:
+		_satResolver->setOnlyRequires(ZConfig::instance().solver_onlyRequires());
+	    case TRUE:
+		_satResolver->setOnlyRequires(true);
+	    case FALSE:
+		_satResolver->setOnlyRequires(false);
+	}
 
 	if (_verifying)
 	    _satResolver->setFixsystem(true);

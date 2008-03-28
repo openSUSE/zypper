@@ -50,6 +50,14 @@ namespace zypp
   namespace solver
   { /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
+
+    enum TriState
+    {
+	FALSE,
+	TRUE,
+	DEFAULT
+    };
+      
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
@@ -95,11 +103,14 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _ignoreVendorItem;
 
 
-    bool _forceResolve; // remove items which are conflicts with others or
-                        // have unfulfilled requirements.
-                        // This behaviour is favourited by ZMD
-    bool _upgradeMode;  // Resolver has been called with doUpgrade
-    bool _verifying;    // The system will be checked
+    bool _forceResolve;           // remove items which are conflicts with others or
+                                  // have unfulfilled requirements.
+                                  // This behaviour is favourited by ZMD
+    bool _upgradeMode;            // Resolver has been called with doUpgrade
+    bool _verifying;              // The system will be checked
+    TriState _onlyRequires; 	  // do install required resolvables only
+                                  // no recommended resolvables, language
+                                  // packages, hardware packages (modalias)  
 
     // helpers
     bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
@@ -145,6 +156,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     bool forceResolve() { return _forceResolve; }
+
+    void setOnlyRequires (const TriState state)
+	{ _onlyRequires = state; }
+    TriState onlyRequires () { return _onlyRequires; }
 
     bool verifySystem ();
     bool resolvePool();

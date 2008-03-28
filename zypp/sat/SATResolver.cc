@@ -30,6 +30,7 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
+#include "zypp/ZConfig.h"
 #include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/WhatProvides.h"
@@ -121,6 +122,7 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _allowvirtualconflicts(false)
     , _noupdateprovide(false)
     , _dosplitprovides(false)
+    , _onlyRequires(ZConfig::instance().solver_onlyRequires())
 
 {
 }
@@ -453,6 +455,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     _solv->allowarchchange = _allowarchchange;
     _solv->dosplitprovides = _dosplitprovides;
     _solv->noupdateprovide = _noupdateprovide;
+    _solv->dontinstallrecommended = _onlyRequires;
     
     sat::Pool::instance().prepare();
 

@@ -142,12 +142,13 @@ namespace zypp
   {
     public:
       Impl( const Pathname & override_r = Pathname() )
-        : cfg_arch                ( defaultSystemArchitecture() )
-        , cfg_textLocale          ( defaultTextLocale() )
-        , repo_add_probe          ( false )
-        , repo_refresh_delay      ( 10 )
-        , download_use_patchrpm   ( true )
-        , download_use_deltarpm   ( true )
+        : cfg_arch                	( defaultSystemArchitecture() )
+        , cfg_textLocale          	( defaultTextLocale() )
+        , repo_add_probe          	( false )
+        , repo_refresh_delay      	( 10 )
+        , download_use_patchrpm   	( true )
+        , download_use_deltarpm   	( true )
+	, solver_onlyRequires ( false )
 
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -232,6 +233,10 @@ namespace zypp
                 {
                   cfg_packages_path = Pathname(value);
                 }
+                else if ( entry == "solver.onlyRequires" )
+                {
+                  solver_onlyRequires = str::strToBool( value, solver_onlyRequires );		    
+                }		
               }
             }
           }
@@ -276,6 +281,7 @@ namespace zypp
     bool download_use_patchrpm;
     bool download_use_deltarpm;
 
+    bool solver_onlyRequires; 
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -417,6 +423,9 @@ namespace zypp
     return ( _pimpl->cfg_vendor_path.empty()
         ? Pathname("/etc/zypp/vendors.d") : _pimpl->cfg_vendor_path );
   }
+
+  bool ZConfig::solver_onlyRequires() const
+  { return _pimpl->solver_onlyRequires; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

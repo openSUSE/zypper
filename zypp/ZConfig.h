@@ -138,6 +138,11 @@ namespace zypp
        */
       Pathname vendorPath() const;
 
+      /**
+       * Solver regards required packages,patterns,... only
+       */      
+      bool solver_onlyRequires() const;
+
     public:
       class Impl;
       /** Dtor */

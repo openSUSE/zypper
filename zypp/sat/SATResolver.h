@@ -69,15 +69,16 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
 
-    bool _fixsystem;			/* repair errors in rpm dependency graph */
-    bool _allowdowngrade;		/* allow to downgrade installed solvable */
-    bool _allowarchchange;		/* allow to change architecture of installed solvables */
-    bool _allowvendorchange;		/* allow to change vendor of installed solvables */
-    bool _allowuninstall;		/* allow removal of installed solvables */
-    bool _updatesystem;			/* distupgrade */
-    bool _allowvirtualconflicts;	/* false: conflicts on package name, true: conflicts on package provides */
-    bool _noupdateprovide;		/* true: update packages needs not to provide old package */
-    bool _dosplitprovides;		/* true: consider legacy split provides */
+    bool _fixsystem;			// repair errors in rpm dependency graph 
+    bool _allowdowngrade;		// allow to downgrade installed solvable 
+    bool _allowarchchange;		// allow to change architecture of installed solvables 
+    bool _allowvendorchange;		// allow to change vendor of installed solvables 
+    bool _allowuninstall;		// allow removal of installed solvables
+    bool _updatesystem;			// distupgrade 
+    bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides 
+    bool _noupdateprovide;		// true: update packages needs not to provide old package 
+    bool _dosplitprovides;		// true: consider legacy split provides 
+    bool _onlyRequires;	                // true: consider required packages only 
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail);
@@ -133,9 +134,12 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     
     bool noupdateprovide () const {return _noupdateprovide;}
     void setNoupdateprovide ( const bool noupdateprovide) { _noupdateprovide = noupdateprovide;}
-    
+
     bool dosplitprovides () const {return _dosplitprovides;}
     void setDosplitprovides ( const bool dosplitprovides) { _dosplitprovides = dosplitprovides;}
+    
+    bool onlyRequires () const {return _onlyRequires;}
+    void setOnlyRequires ( const bool onlyRequires) { _onlyRequires = onlyRequires;}
 
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 };

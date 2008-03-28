@@ -122,6 +122,15 @@ namespace zypp
     bool forceResolve();
 
     /**
+     * Setting whether required packages are installed ONLY
+     * So recommended packages, language packages and packages which depend 
+     * on hardware (modalias) will not be regarded.
+     **/
+    void setOnlyRequires (const bool onlyRequires);
+    void resetOnlyRequires(); // set back to default (described in zypp.conf)  
+    bool onlyRequires();
+
+    /**
      * Adding additional requirement
      *
      */
