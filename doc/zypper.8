@@ -380,7 +380,7 @@ Ignore query string in the URI
 .B repos (lr)
 List all defined repositories.
 .IP
-The following data are printed for each repository found: # (repository number), Enabled (whether the repository is enabled), Refresh (whether autorefresh is enabled for the repository), Type (rpm-md, yast2, plaindir), Alias (shorthand for Name), and Name. If -v global option is used, an additional URI column will be displayed containing the base URI of the repository.
+The following data are printed for each repository found: # (repository number), Enabled (whether the repository is enabled), Refresh (whether auto-refresh is enabled for the repository), Type (rpm-md, yast2, plaindir), Alias (shorthand for Name), and Name. If -v global option is used, an additional URI column will be displayed containing the base URI of the repository.
 
 Repository number is a unique identifier of the repository in current repository set. If you add, remove or change a repository, the numbers may change. Beware of that when using the numbers with the repository handling commands (although not possible right now, the feature will be reimplmented soon). On the other hand, using the alias instead of the number is always safe.
 
@@ -510,7 +510,7 @@ resolvables from repositories, thus making zypper work only with the installed
 resolvables (if \-\-disable\-system\-resolvables was not specified).
 .TP
 .I \-\-no\-refresh
-Do not auto-refresh repositories (ignore the autorefresh setting). Useful to save
+Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
 time when doing operations like search, if there is not a need to have
 a completely up to date meta-data.
 .LP
