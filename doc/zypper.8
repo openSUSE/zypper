@@ -144,6 +144,20 @@ Install packages only from specified repositories.
 This option can be used multiple times.
 
 .TP
+.B verify (ve) [options]
+Check whether dependencies of installed packages are satisfied.
+
+In case that any dependency problems are found, zypper suggests packages
+to install or remove to fix them.
+
+.TP
+.I \-N, \-\-dry-run
+Test the repair, do not actually do anything to the system.
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Use only specified repositories to install missing packages.
+
+.TP
 .B list-updates (lu) [options]
 List available updates.
 .TP
@@ -698,6 +712,15 @@ This option is not available in rug and zypper uses the 'force-resolution'
 solver mode by default when running rug in compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
+.RE
+
+.TP
+.I rug verify (ve)
+zypper verify (ve)
+.RS
+.TP
+.I \-y, \-\-no\-confirm
+Don't require user interaction. This option is implemented using zypper's non-interactive mode.
 .RE
 
 .TP

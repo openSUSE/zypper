@@ -170,6 +170,7 @@ void print_main_help(Zypper & zypper)
     "\tshell, sh\t\tAccept multiple commands at once.\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
+    "\tverify, ve\t\tVerify integrity of package dependencies.\n"
     "\tsearch, se\t\tSearch for packages matching a pattern.\n"
     "\trepos, lr\t\tList all defined repositories.\n"
     "\taddrepo, ar\t\tAdd a new repository.\n"
@@ -825,6 +826,29 @@ void Zypper::processCommandOptions()
       "-d, --build-deps-only    Install only build dependencies of specified packages.\n"
       "-D, --no-build-deps      Don't install build dependencies.\n"
       "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
+    );
+    break;
+  }
+  
+  case ZypperCommand::VERIFY_e:
+  {
+    static struct option verify_options[] = {
+      // rug compatibility option, we have global --non-interactive
+      {"no-confirm", no_argument, 0, 'y'},
+      {"dry-run", no_argument, 0, 'N'},
+      {"repo", required_argument, 0, 'r'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = verify_options;
+    _command_help = _(
+      "verify (ve) [options]\n"
+      "\n"
+      "Check whether dependencies of installed packages are satisfied.\n"
+      "\n"
+      "  Command options:\n"
+      "-N, --dry-run            Test the repair, do not actually do anything to the system.\n"
+      "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
     );
     break;
   }
@@ -1962,6 +1986,44 @@ void Zypper::doCommand()
     if (!copts.count("build-deps-only"))
       find_src_pkgs(*this);
     solve_and_commit(*this);
+    return;
+  }
+
+  else if (command() == ZypperCommand::VERIFY)
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    // too many arguments
+    if (_arguments.size() > 0)
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    // rug compatibility code
+    // switch on non-interactive mode if no-confirm specified
+    if (copts.count("no-confirm"))
+      _gopts.non_interactive = true;
+
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+
+    if ( gData.repos.empty() )
+    {
+      out().error(_("Warning: No repositories defined."
+          " Operating only with the installed resolvables."
+          " Nothing can be installed."));
+    }
+
+    // prepare target
+    init_target(*this);
+    // load metadata
+    load_resolvables(*this);
+
+    solve_and_commit(*this);
+    
     return;
   }
 

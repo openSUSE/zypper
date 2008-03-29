@@ -855,9 +855,16 @@ int summary(Zypper & zypper)
 
   if (retv == -1 && zypper.runtimeData().srcpkgs_to_install.empty())
   {
-    zypper.out().info(_("Nothing to do."));
+    if (zypper.command() == ZypperCommand::VERIFY)
+      zypper.out().info(_("Dependencies of all installed packages are satisfied."));
+    else
+      zypper.out().info(_("Nothing to do."));
     return retv;
   }
+
+  if (zypper.command() == ZypperCommand::VERIFY)
+    zypper.out().info(_("Some of the dependencies of installed packages are broken."
+        " In order to fix these dependencies, the following actions need to be taken:"));
 
   KindToResObjectSet toinstall;
   KindToResObjectSet toupgrade;
@@ -1026,13 +1033,18 @@ static void dump_pool ()
   full_pool_shown = true;
 }
 
-bool resolve(Zypper & zypper)
+static int apply_locks(Zypper & zypper)
 {
   int locks = God->applyLocks();
   zypper.out().info(
     boost::str(format(_PL("%s item locked", "%s items locked", locks)) % locks),
     Out::HIGH);
+  return locks;
+}
 
+bool resolve(Zypper & zypper)
+{
+  apply_locks(zypper);
   dump_pool();
 
   // --force-resolution command line parameter value
@@ -1080,6 +1092,20 @@ bool resolve(Zypper & zypper)
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
+}
+
+bool verify(Zypper & zypper)
+{
+  apply_locks(zypper);
+  dump_pool();
+  zypper.out().info(_("Verifying dependencies..."), Out::HIGH);
+  //! \todo should these two setting be optional through command options? 
+  // don't force aggressive solutions
+  God->resolver()->setForceResolve(false);
+  // don't drag new packages - just verify the needed ones
+  God->resolver()->setOnlyRequires(true);
+  DBG << "Calling the solver to verify system..." << endl;
+  return God->resolver()->verifySystem();
 }
 
 void patch_check ()
@@ -1686,7 +1712,11 @@ void solve_and_commit (Zypper & zypper)
   MIL << "solving..." << endl;
 
   while (true) {
-    bool success = resolve(zypper);
+    bool success;
+    if (zypper.command() == ZypperCommand::VERIFY)
+      success = verify(zypper);
+    else
+      success = resolve(zypper);
     if (success)
       break;
 
@@ -1704,6 +1734,15 @@ void solve_and_commit (Zypper & zypper)
   bool was_installed = false;
   if (retv >= 0 || !zypper.runtimeData().srcpkgs_to_install.empty())
   {
+    // check root user
+    if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0)
+    {
+      zypper.out().error(
+        _("Root privileges are required to fix broken package dependencies."));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+
     // there are resolvables to install/uninstall
     if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true))
     {
