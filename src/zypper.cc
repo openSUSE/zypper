@@ -955,6 +955,7 @@ void Zypper::processCommandOptions()
       {"enable-autorefresh", no_argument, 0, 'a'}, // backward compatibility
       {"no-refresh", no_argument, 0, 'n'},
       {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
+      {"priority", required_argument, 0, 'p'},
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
@@ -968,6 +969,7 @@ void Zypper::processCommandOptions()
       "-e, --enable              Enable a disabled repository\n"
       "-r, --refresh             Enable auto-refresh of the repository\n"
       "-n, --no-refresh          Disable auto-refresh of the repository\n"
+      "-p, --priority <1-99>     Set priority of the repository. Seem the manual page for details.\n"
     );
     break;
   }

@@ -19,7 +19,6 @@
 #include "zypper-main.h"
 #include "zypper-getopt.h"
 #include "zypper-tabulator.h"
-//#include "zypper-callbacks.h"
 #include "zypper-utils.h"
 #include "zypper-repos.h"
 
@@ -1421,6 +1420,7 @@ void modify_repo(Zypper & zypper, const string & alias)
     RepoInfo repo(manager.getRepositoryInfo(alias));
     bool chnaged_enabled = false;
     bool changed_autoref = false;
+    bool changed_prio = false;
 
     if (!indeterminate(enable))
     {
@@ -1435,9 +1435,36 @@ void modify_repo(Zypper & zypper, const string & alias)
         changed_autoref = true;
       repo.setAutorefresh(autoref);
     }
+    
+    int prio = 0;
+    parsed_opts::const_iterator tmp1;
+    if ((tmp1 = zypper.cOpts().find("priority")) != zypper.cOpts().end())
+    {
+      //! \todo use some preset priorities (high, medium, low, ...)
 
+      string prio_str = *tmp1->second.begin();
+      safe_lexical_cast(prio_str, prio); // try to make an int out of the string
+      if (prio < 1 || prio > 99)
+      {
+        zypper.out().error(boost::str(format(
+          _("Invalid priority '%s'. Use an integer number between 1 (highest priority) and 99 (lowest priority)."))
+          % prio_str));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
 
-    if (chnaged_enabled || changed_autoref)
+      if (prio == (int) repo.priority())
+        zypper.out().info(boost::str(format(
+          _("Repository '%s' priority has been left unchanged (%d)"))
+          % alias % prio));
+      else
+      {
+        repo.setPriority(prio);
+        changed_prio = true;
+      }
+    }
+
+    if (chnaged_enabled || changed_autoref || changed_prio)
     {
       manager.modifyRepository(alias, repo);
 
@@ -1459,6 +1486,12 @@ void modify_repo(Zypper & zypper, const string & alias)
         else
           zypper.out().info(boost::str(format(
             _("Autorefresh has been disabled for repository '%s'.")) % alias));
+      }
+
+      if (changed_prio)
+      {
+        zypper.out().info(boost::str(format(
+          _("Repository '%s' priority has been set to %d.")) % alias % prio));
       }
     }
     else
