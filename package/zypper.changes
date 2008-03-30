@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Mar 30 22:41:10 CEST 2008 - jkupec@suse.cz
+
+- --priority option added to the modifyrepo command to set repository
+  priority (bnc #369827)
+- r9311
+
+-------------------------------------------------------------------
 Sat Mar 29 14:48:00 CET 2008 - jkupec@suse.cz
 
 - 'verify' command added (fate #301178)
