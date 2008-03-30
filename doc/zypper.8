@@ -151,7 +151,7 @@ In case that any dependency problems are found, zypper suggests packages
 to install or remove to fix them.
 
 .TP
-.I \-N, \-\-dry-run
+.I \-D, \-\-dry-run
 Test the repair, do not actually do anything to the system.
 .TP
 .I \-r, \-\-repo <alias|#|URI>
@@ -653,7 +653,7 @@ or other capabilities.
 .LP
 zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands. 
 .LP
-To enable rug compatible behaviour, use the \-r or \-\-rug\-compatible global option with each command.
+To enable rug compatible behavior, use the \-r or \-\-rug\-compatible global option with each command.
 
 .SS Service Management Commands
 .LP
@@ -774,6 +774,13 @@ zypper info -t product
 This option is an alias to zypper's \-\-repo <alias> and it will restrict
 the operation of commands like search, install, etc to the repository specified
 by the alias.
+
+.TP
+.I \-N, \-\-dry\-run
+Zypper uses -D shorthand for this option, but -N is provided for the sake
+of compatibility. Zypper (libzypp) implements this option by passing the
+\fB\-\-test\fR option to \fBrpm\fR. The option is used in \fBinstall\fR, \fBremove\fR,
+\fBupdate\fR, \fBdist-upgrade\fR (not available in rug), and \fBverify\fR commands.
 
 .SH "HOMEPAGE"
 

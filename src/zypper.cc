@@ -738,6 +738,8 @@ void Zypper::processCommandOptions()
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
       {"dry-run",                   no_argument,       0, 'D'},
+      // rug uses -N shorthand
+      {"dry-run",                   no_argument,       0, 'N'},
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -782,6 +784,8 @@ void Zypper::processCommandOptions()
       {"debug-solver", no_argument,     0, 0},
       {"force-resolution", required_argument, 0, 'R'},
       {"dry-run",    no_argument,       0, 'D'},
+      // rug uses -N shorthand
+      {"dry-run",    no_argument,       0, 'N'},
       {"help",       no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -806,7 +810,7 @@ void Zypper::processCommandOptions()
     )) % "package, patch, pattern, product" % "package");
     break;
   }
-  
+
   case ZypperCommand::SRC_INSTALL_e:
   {
     static struct option src_install_options[] = {
@@ -835,6 +839,8 @@ void Zypper::processCommandOptions()
     static struct option verify_options[] = {
       // rug compatibility option, we have global --non-interactive
       {"no-confirm", no_argument, 0, 'y'},
+      {"dry-run", no_argument, 0, 'D'},
+      // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
@@ -847,7 +853,7 @@ void Zypper::processCommandOptions()
       "Check whether dependencies of installed packages are satisfied.\n"
       "\n"
       "  Command options:\n"
-      "-N, --dry-run            Test the repair, do not actually do anything to the system.\n"
+      "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
       "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
     );
     break;
@@ -1069,6 +1075,8 @@ void Zypper::processCommandOptions()
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
       {"dry-run",                   no_argument,       0, 'D'},
+      // rug uses -N shorthand
+      {"dry-run",                   no_argument,       0, 'N'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1103,6 +1111,8 @@ void Zypper::processCommandOptions()
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0, 0},
       {"dry-run",                   no_argument,       0, 'D'},
+      // rug uses -N shorthand
+      {"dry-run",                   no_argument,       0, 'N'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
