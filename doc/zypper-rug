@@ -1,11 +1,13 @@
 Zypper: rug compatibility
 
-+: to be implemented
+status symbols:
+
+ +: to be implemented
 ++: already implemented
 +1: patch-check does something similar
-N: not implemented
-N1:  zypp does not have this concept
-?: undecided
+ N: not implemented
+N1: zypp does not have this concept
+ ?: undecided
 
 
     Usage: rug <options> <command> <command-options> ...
@@ -60,7 +62,7 @@ N1:  zypp does not have this concept
  search             ++    search (se)                  Search for packages matching a pattern
  update             +1    summary (sum)                Show a per-catalog summary of available updates.
                     ++    update (up)                  Update packages
-                    ?     verify (ve)                  Verify system dependencies
+ verify             ++    verify (ve)                  Verify system dependencies
                     +     what-conflicts (wc)          List packages that conflict with a given token
                     +     what-provides (wp)           Show which packages provide a given token
                     +     what-requires (wr)           Show which packages require a given token
@@ -68,17 +70,17 @@ N1:  zypp does not have this concept
                         Patch management:
  search -t patch    ++    patches (pch)                Show the patches in a given catalog
  info -t patch      ++    patch-info                   Show detailed information for a patch
-                        
+ 
                         Pattern management:
- info -t pattern    +     pattern-info                 Show detailed information for a pattern
+ info -t pattern    ++    pattern-info                 Show detailed information for a pattern
  search -t pattern  +     patterns (pt)                Show the patterns in a given catalog
-                        
+ 
                         Preference management:
                     ?     get-prefs (get prefs)        List the system preferences that may be set
                     ?     set-prefs (set)              Set a preference variable
                         
                         Product management:
- info -t product    +     product-info                 Show detailed information for a product
+ info -t product    ++    product-info                 Show detailed information for a product
  search -t product  +     products (pd)                Show the products in a given catalog
                         
                         Security:
