@@ -1,35 +1,22 @@
-# List of source files which contain translatable strings.
-../src/zypper-main.cc
-../src/zypper-main.h
-../src/zypper-keyring-callbacks.h
-../src/zypper-misc.cc
-../src/zypper-repos.cc
-../src/zypper.h
+# list of files containing translatable texts
+# grep -Pl '(\_\()|(\_PL\()' ../src/*.{cc,h} > tmp
+# grep -Pl '(\_\()|(\_PL\()' ../src/output/*.{cc,h} >> tmp
+# cat tmp | sort > POTFILES.in.new
+../src/output/OutNormal.cc
 ../src/zypp-checkpatches.cc
-../src/zypper-callbacks.cc
+../src/zypper.cc
+../src/zypper-command.cc
 ../src/zypper-getopt.cc
 ../src/zypper-info.cc
-../src/zypper-search.cc
-../src/zypper.cc
-../src/zypper-tabulator.h
-../src/zypper-repos.h
-../src/AliveCursor.h
-../src/zypper-info.h
-../src/zypper-misc.h
-../src/zypper-utils.cc
-../src/zypper-updates.h
-../src/zypper-tabulator.cc
-../src/zypper-command.cc
-../src/zypper-callbacks.h
-../src/zypp-checkpatches-wrapper.c
-../src/zypper-utils.h
+../src/zypper-keyring-callbacks.h
+../src/zypper-main.h
 ../src/zypper-media-callbacks.h
+../src/zypper-misc.cc
+../src/zypper-prompt.cc
+../src/zypper-prompt.h
 ../src/zypper-repo-callbacks.h
-../src/zypper-updates.cc
-../src/zypper-command.h
+../src/zypper-repos.cc
 ../src/zypper-rpm-callbacks.h
-../src/zypper-getopt.h
 ../src/zypper-search.h
-../src/checkpatches-keyring-callbacks.h
-../src/output/OutNormal.cc
-
+../src/zypper-updates.h
+../src/zypper-utils.cc
