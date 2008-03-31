@@ -99,6 +99,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool resolvePool(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps);
+    bool doUpdate();
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);

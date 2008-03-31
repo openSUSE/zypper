@@ -71,6 +71,8 @@ namespace zypp
   { _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   { _pimpl->doUpgrade(opt_stats_r); }
+  void Resolver::doUpdate()
+  { _pimpl->doUpdate(); }    
   void Resolver::setForceResolve( const bool force )
   { _pimpl->setForceResolve( force ); }
   bool Resolver::forceResolve()

@@ -558,6 +558,89 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 }
 
 
+bool SATResolver::doUpdate()
+{
+    MIL << "SATResolver::doUpdate()" << endl;
+
+    if (_solv) {
+	// remove old stuff
+	solver_free(_solv);
+	_solv = NULL;
+	queue_free( &(_jobQueue) );
+    }
+
+    queue_init( &_jobQueue );
+
+    _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    _solv->vendorCheckCb = &vendorCheck;
+
+    _solv->updatesystem = true;
+    _solv->dontinstallrecommended = true; // #FIXME dontinstallrecommended maybe set to false if it works correctly
+    
+    sat::Pool::instance().prepare();
+
+    // Solve !
+    MIL << "Starting solving...." << endl;
+    solver_solve( _solv, &(_jobQueue) );
+    MIL << "....Solver end" << endl;
+
+    // copying solution back to zypp pool
+    //-----------------------------------------
+
+    /*  solvables to be installed */
+    for (int i = 0; i < _solv->decisionq.count; i++)
+    {
+      Id p;
+      p = _solv->decisionq.elements[i];
+      if (p < 0 || !sat::Solvable(p))
+	continue;
+      if (sat::Solvable(p).repository().get() == _solv->installed)
+	continue;
+
+      PoolItem poolItem = _pool.find (sat::Solvable(p));
+      if (poolItem) {
+	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
+      } else {
+	  ERR << "id " << p << " not found in ZYPP pool." << endl;
+      }
+    }
+
+    /* solvables to be erased */
+    for (int i = _solv->installed->start; i < _solv->installed->start + _solv->installed->nsolvables; i++)
+    {
+      if (_solv->decisionmap[i] > 0)
+	continue;
+
+      PoolItem poolItem = _pool.find (sat::Solvable(i));
+      if (poolItem) {
+	  // Check if this is an update
+	  CheckIfUpdate info;
+	  invokeOnEach( _pool.byIdentBegin( poolItem ),
+			_pool.byIdentEnd( poolItem ),
+			resfilter::ByUninstalled(),			// ByUninstalled
+			functor::functorRef<bool,PoolItem> (info) );
+
+	  if (info.is_updated) {
+	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
+	  } else {
+	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
+	  }
+      } else {
+	  ERR << "id " << i << " not found in ZYPP pool." << endl;
+      }
+    }
+
+    // cleanup
+    solver_free(_solv);
+    _solv = NULL;
+    queue_free( &(_jobQueue) );    
+
+    MIL << "SATResolver::doUpdate() done" << endl;
+    return true;
+}
+
+
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // error handling

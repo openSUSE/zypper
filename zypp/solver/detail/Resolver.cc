@@ -103,6 +103,17 @@ Resolver::reset (bool keepExtras )
     }
 }
 
+bool
+Resolver::doUpdate()
+{
+    if (_satResolver) {
+	return _satResolver->doUpdate();
+    } else {
+	ERR << "SAT solver has not been initialized." << endl;
+	return false;
+    }
+}
+
 void
 Resolver::addExtraRequire (const Capability & capability)
 {

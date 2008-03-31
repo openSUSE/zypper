@@ -163,6 +163,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool verifySystem ();
     bool resolvePool();
+    bool doUpdate();
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const { return _problem_items; }

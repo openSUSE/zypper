@@ -83,7 +83,8 @@ namespace zypp
      * This will run a full upgrade on the pool, taking all upgrade
      * dependencies (provide/obsolete for package renames, split-
      * provides, etc.) into account and actually removing installed
-     * packages if no upgrade exists.
+     * packages if no upgrade exists AND the package dependency is
+     * broken
      *
      * To be run with great caution. It basically brings your
      * system 'back to start'.
@@ -91,6 +92,18 @@ namespace zypp
      * since you'll loose all non-distribution packages
      **/
     void doUpgrade( UpgradeStatistics & opt_stats_r );
+
+    /**
+     * Update to newest package
+     *
+     * Install the newest version of your installed packages as
+     * far as possible. This means a newer package will NOT be
+     * installed if it generates dependency problems.
+     * So the user will not get an error message.
+     *
+     **/
+    void doUpdate( );
+      
 
     /**
      * Return the list of problematic update items
