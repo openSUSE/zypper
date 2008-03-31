@@ -162,7 +162,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
               devices, devindex
             );
 
-          DBG << "doesFileExist exception caught, callback answer: " << user << endl;
+          MIL << "doesFileExist exception caught, callback answer: " << user << endl;
 
           if( user == media::MediaChangeReport::ABORT )
           {
@@ -290,7 +290,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             );
           }
 
-          DBG << "ProvideFile exception caught, callback answer: " << user << endl;
+          MIL << "ProvideFile exception caught, callback answer: " << user << endl;
 
           if( user == media::MediaChangeReport::ABORT )
           {
@@ -431,7 +431,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
                                       devices,
                                       devindex);
 
-          DBG << "ProvideFile exception caught, callback answer: " << user << endl;
+          MIL << "ProvideDir exception caught, callback answer: " << user << endl;
 
           if (user == media::MediaChangeReport::ABORT)
           {
