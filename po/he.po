@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-03 13:53+0200\n"
+"POT-Creation-Date: 2008-03-19 17:06+0100\n"
 "PO-Revision-Date: 2004-08-09 10:24+0200\n"
 "Last-Translator: xxx <yyy@example.org>\n"
 "Language-Team: Hebrew <i18n@suse.de>\n"
@@ -15,215 +15,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../zypp/url/UrlBase.cc:154
+#: ../zypp/sat/SATResolver.cc:631
+msgid ""
+"\n"
+"uninstallable providers: "
+msgstr ""
+
+#: ../zypp/sat/SATResolver.cc:583
 #, c-format
-msgid "Url scheme does not allow a %s"
+msgid "%s conflicts with %s provided by %s"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:173
+#. %s = filename of rpm package
+#. timestamp
+#: ../zypp/target/rpm/RpmDb.cc:2056
+#, fuzzy, c-format
+msgid "%s install failed"
+msgstr "התקנה נכשלה"
+
+#. %s = filename of rpm package
+#. timestamp
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
-msgid "Invalid %s component '%s'"
+msgid "%s installed ok"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:180
+#: ../zypp/sat/SATResolver.cc:569
+#, fuzzy, c-format
+msgid "%s is not installable"
+msgstr "התקנה נכשלה"
+
+#: ../zypp/sat/SATResolver.cc:588
 #, c-format
-msgid "Invalid %s component"
+msgid "%s obsoletes %s provided by %s"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
-msgid "Query string parsing not supported for this URL"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:820
-msgid "Url scheme is a required component"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:826
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
 #, c-format
-msgid "Invalid Url scheme '%s'"
+msgid "%s provides this dependency, but would change the architecture of the installed item"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:947
-msgid "Url scheme does not allow a username"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:981
-msgid "Url scheme does not allow a password"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1010
-msgid "Url scheme requires a host component"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1020
-msgid "Url scheme does not allow a host component"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1047
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
 #, c-format
-msgid "Invalid host component '%s'"
+msgid "%s provides this dependency, but would change the vendor of the installed item"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:1068
-msgid "Url scheme does not allow a port"
-msgstr ""
+#. %s = name of rpm package
+#. timestamp
+#: ../zypp/target/rpm/RpmDb.cc:2176
+#, fuzzy, c-format
+msgid "%s remove failed"
+msgstr "rpm  נכשל."
 
-#: ../zypp/url/UrlBase.cc:1079
+#. timestamp
+#: ../zypp/target/rpm/RpmDb.cc:2184
 #, c-format
-msgid "Invalid port component '%s'"
+msgid "%s remove ok"
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:1096
-msgid "Url scheme requires path name"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
-msgid "Relative path not allowed if authority exists"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr ""
-
-#: ../zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr ""
-
-#: ../zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr ""
-
-#: ../zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr ""
-
-#: ../zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr ""
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: ../zypp/base/Exception.cc:89
-msgid "History:"
-msgstr ""
-
-#: ../zypp/repo/PackageProvider.cc:237
-msgid "applydeltarpm check failed."
-msgstr ""
-
-#: ../zypp/repo/PackageProvider.cc:251
-msgid "applydeltarpm failed."
-msgstr ""
-
-#. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:318
+#: ../zypp/sat/SATResolver.cc:619
 #, c-format
-msgid "Package %s fails integrity check. Do you want to retry?"
-msgstr ""
-
-#: ../zypp/repo/RepoProvideFile.cc:206
-msgid "No url in repository."
-msgstr ""
-
-#. iteration over urls
-#: ../zypp/repo/RepoProvideFile.cc:278
-#, c-format
-msgid "Can't provide file %s from repository %s"
-msgstr ""
-
-#: ../zypp/repo/cached/RepoImpl.cc:73
-#, c-format
-msgid "Reading '%s' repository cache"
-msgstr ""
-
-#: ../zypp/repo/cached/RepoImpl.cc:194
-#, c-format
-msgid "Reading patch and delta rpms from '%s' repository cache"
-msgstr ""
-
-#: ../zypp/media/MediaUserAuth.cc:97
-#, c-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr ""
-
-#: ../zypp/media/MediaCurl.cc:715 ../zypp/media/MediaCurl.cc:784
-msgid "Invalid user name or password."
-msgstr ""
-
-#: ../zypp/media/MediaCurl.cc:718 ../zypp/media/MediaCurl.cc:787
-#, c-format
-msgid "Authentication required for '%s'"
-msgstr ""
-
-#: ../zypp/RepoManager.cc:115
-#, c-format
-msgid "Cleaning repository '%s' cache"
-msgstr ""
-
-#. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:521
-msgid "Valid metadata not found at specified URL(s)"
-msgstr ""
-
-#: ../zypp/RepoManager.cc:677
-#, c-format
-msgid "Building repository '%s' cache"
-msgstr ""
-
-#. progress.sendTo( progressrcv );
-#: ../zypp/RepoManager.cc:822
-#, c-format
-msgid "Reading repository '%s' cache"
-msgstr ""
-
-#: ../zypp/RepoManager.cc:912
-#, c-format
-msgid "Adding repository '%s'"
-msgstr ""
-
-#: ../zypp/RepoManager.cc:1017
-#, c-format
-msgid "Removing repository '%s'"
-msgstr ""
-
-#: ../zypp/Url.cc:112
-msgid "Invalid LDAP URL query string"
-msgstr ""
-
-#: ../zypp/Url.cc:151
-#, c-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr ""
-
-#: ../zypp/Url.cc:295
-msgid "Unable to clone Url object"
-msgstr ""
-
-#: ../zypp/Url.cc:308
-msgid "Invalid empty Url object reference"
-msgstr ""
-
-#: ../zypp/Url.cc:321 ../zypp/Url.cc:335
-msgid "Unable to parse Url components"
-msgstr ""
-
-#: ../zypp/LanguageCode.cc:145
-msgid "Unknown language: "
-msgstr ""
-
-#. Defined LanguageCode constants
-#. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
-#, fuzzy
-msgid "No Code"
-msgstr "מצב"
-
-#. language code: aar aa
-#: ../zypp/LanguageCode.cc:238
-msgid "Afar"
+msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
 
 #. language code: abk ab
@@ -248,15 +102,31 @@ msgstr ""
 msgid "Adangme"
 msgstr ""
 
+#: ../zypp/RepoManager.cc:1015
+#, c-format
+msgid "Adding repository '%s'"
+msgstr ""
+
+#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#, fuzzy
+msgid "Additional rpm output:"
+msgstr "מידע נוסף"
+
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
 msgid "Adyghe"
 msgstr ""
 
-#. language code: afa
-#: ../zypp/LanguageCode.cc:250
-msgid "Afro-Asiatic (Other)"
+#. language code: aar aa
+#: ../zypp/LanguageCode.cc:238
+msgid "Afar"
 msgstr ""
+
+#. :ARE:784:
+#: ../zypp/CountryCode.cc:219
+#, fuzzy
+msgid "Afghanistan"
+msgstr "פקיסטן"
 
 #. language code: afh
 #: ../zypp/LanguageCode.cc:252
@@ -267,6 +137,11 @@ msgstr ""
 #: ../zypp/LanguageCode.cc:254
 msgid "Afrikaans"
 msgstr "אפריקנס"
+
+#. language code: afa
+#: ../zypp/LanguageCode.cc:250
+msgid "Afro-Asiatic (Other)"
+msgstr ""
 
 #  Edit field label for linux partition size in non-graphical mode
 #. language code: ain
@@ -286,6 +161,18 @@ msgstr "אפריקנס"
 msgid "Akkadian"
 msgstr ""
 
+# IE
+#. :ABW:533:
+#: ../zypp/CountryCode.cc:232
+#, fuzzy
+msgid "Aland Islands"
+msgstr "איי פר-אר"
+
+#. :AIA:660:
+#: ../zypp/CountryCode.cc:222
+msgid "Albania"
+msgstr "אלבניה"
+
 #. language code: alb sqi sq
 #: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
 #, fuzzy
@@ -297,6 +184,12 @@ msgstr "אלבניה"
 msgid "Aleut"
 msgstr ""
 
+# BG
+#. :DOM:214:
+#: ../zypp/CountryCode.cc:277
+msgid "Algeria"
+msgstr "אלג'יר"
+
 # BD
 #. language code: alg
 #: ../zypp/LanguageCode.cc:268
@@ -304,12 +197,15 @@ msgstr ""
 msgid "Algonquian Languages"
 msgstr "שפות"
 
-# ZA
-#. language code: alt
-#: ../zypp/LanguageCode.cc:270
-#, fuzzy
-msgid "Southern Altai"
-msgstr "דרום אפריקה"
+#. language code: tut
+#: ../zypp/LanguageCode.cc:1150
+msgid "Altaic (Other)"
+msgstr ""
+
+#. :ARG:032:
+#: ../zypp/CountryCode.cc:228
+msgid "American Samoa"
+msgstr ""
 
 #. language code: amh am
 #: ../zypp/LanguageCode.cc:272
@@ -317,9 +213,28 @@ msgstr "דרום אפריקה"
 msgid "Amharic"
 msgstr "ערבית"
 
-#. language code: ang
-#: ../zypp/LanguageCode.cc:274
-msgid "English, Old (ca.450-1100)"
+#: ../zypp/CountryCode.cc:217
+msgid "Andorra"
+msgstr ""
+
+#. :ANT:530:
+#: ../zypp/CountryCode.cc:225
+msgid "Angola"
+msgstr ""
+
+#. :ATG:028:
+#: ../zypp/CountryCode.cc:221
+msgid "Anguilla"
+msgstr ""
+
+#. :AGO:024:
+#: ../zypp/CountryCode.cc:226
+msgid "Antarctica"
+msgstr ""
+
+#. :AFG:004:
+#: ../zypp/CountryCode.cc:220
+msgid "Antigua and Barbuda"
 msgstr ""
 
 # BD
@@ -334,23 +249,22 @@ msgstr "שפות"
 msgid "Arabic"
 msgstr "ערבית"
 
+#. language code: arg an
+#: ../zypp/LanguageCode.cc:282
+msgid "Aragonese"
+msgstr ""
+
 #. language code: arc
 #: ../zypp/LanguageCode.cc:280
 #, fuzzy
 msgid "Aramaic"
 msgstr "ערבית"
 
-#. language code: arg an
-#: ../zypp/LanguageCode.cc:282
-msgid "Aragonese"
-msgstr ""
-
-# AR
-#. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#. language code: arp
+#: ../zypp/LanguageCode.cc:290
 #, fuzzy
-msgid "Armenian"
-msgstr "ארגנטינה"
+msgid "Arapaho"
+msgstr "גרף"
 
 # UA
 #. language code: arn
@@ -359,20 +273,39 @@ msgstr "ארגנטינה"
 msgid "Araucanian"
 msgstr "אוקראינית"
 
-#. language code: arp
-#: ../zypp/LanguageCode.cc:290
+#. language code: arw
+#: ../zypp/LanguageCode.cc:294
+msgid "Arawak"
+msgstr ""
+
+# AR
+#. :ATA:010:
+#: ../zypp/CountryCode.cc:227
+msgid "Argentina"
+msgstr "ארגנטינה"
+
+# AR
+#. :ALB:008:
+#: ../zypp/CountryCode.cc:223
 #, fuzzy
-msgid "Arapaho"
-msgstr "גרף"
+msgid "Armenia"
+msgstr "ארגנטינה"
+
+# AR
+#. language code: arm hye hy
+#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#, fuzzy
+msgid "Armenian"
+msgstr "ארגנטינה"
 
 #. language code: art
 #: ../zypp/LanguageCode.cc:292
 msgid "Artificial (Other)"
 msgstr ""
 
-#. language code: arw
-#: ../zypp/LanguageCode.cc:294
-msgid "Arawak"
+#. :AUS:036:
+#: ../zypp/CountryCode.cc:231
+msgid "Aruba"
 msgstr ""
 
 #. language code: asm as
@@ -395,11 +328,33 @@ msgstr "אוסטריה"
 msgid "Athapascan Languages"
 msgstr "שפות"
 
+# AU
+#. :AUT:040:
+#: ../zypp/CountryCode.cc:230
+msgid "Australia"
+msgstr "אוסטרליה"
+
 #. language code: aus
 #: ../zypp/LanguageCode.cc:302
 #, fuzzy
 msgid "Australian Languages"
 msgstr "רשימת כל השפות האפשרויות"
+
+# AT
+#. :ASM:016:
+#: ../zypp/CountryCode.cc:229
+msgid "Austria"
+msgstr "אוסטריה"
+
+#. language code: map
+#: ../zypp/LanguageCode.cc:794
+msgid "Austronesian (Other)"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#, c-format
+msgid "Authentication required for '%s'"
+msgstr ""
 
 #. language code: ava av
 #: ../zypp/LanguageCode.cc:304
@@ -422,28 +377,48 @@ msgstr ""
 msgid "Aymara"
 msgstr ""
 
+#. :ALA:248:
+#: ../zypp/CountryCode.cc:233
+#, fuzzy
+msgid "Azerbaijan"
+msgstr "אזרביג'נית"
+
 #. language code: aze az
 #: ../zypp/LanguageCode.cc:312
 msgid "Azerbaijani"
 msgstr "אזרביג'נית"
 
-# CA
-#. language code: bad
-#: ../zypp/LanguageCode.cc:314
-#, fuzzy
-msgid "Banda"
-msgstr "קנדה"
+#: ../zypp/media/MediaException.cc:47
+#, c-format
+msgid "Bad file name: %s"
+msgstr ""
 
-# BD
-#. language code: bai
-#: ../zypp/LanguageCode.cc:316
-#, fuzzy
-msgid "Bamileke Languages"
-msgstr "שפות"
+#: ../zypp/media/MediaException.cc:77
+msgid "Bad media attach point"
+msgstr ""
 
-#. language code: bak ba
-#: ../zypp/LanguageCode.cc:318
-msgid "Bashkir"
+# PA
+#. :BRA:076:
+#: ../zypp/CountryCode.cc:247
+#, fuzzy
+msgid "Bahamas"
+msgstr "פנמה"
+
+#. :BGR:100:
+#: ../zypp/CountryCode.cc:240
+#, fuzzy
+msgid "Bahrain"
+msgstr "בחריין"
+
+#. language code: ban
+#: ../zypp/LanguageCode.cc:324
+#, fuzzy
+msgid "Balinese"
+msgstr "בסיס"
+
+#. language code: bat
+#: ../zypp/LanguageCode.cc:332
+msgid "Baltic (Other)"
 msgstr ""
 
 #. language code: bal
@@ -456,16 +431,35 @@ msgstr ""
 msgid "Bambara"
 msgstr ""
 
-#. language code: ban
-#: ../zypp/LanguageCode.cc:324
+# BD
+#. language code: bai
+#: ../zypp/LanguageCode.cc:316
 #, fuzzy
-msgid "Balinese"
-msgstr "בסיס"
+msgid "Bamileke Languages"
+msgstr "שפות"
 
-#. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
-msgid "Basque"
-msgstr "בסקית"
+# CA
+#. language code: bad
+#: ../zypp/LanguageCode.cc:314
+#, fuzzy
+msgid "Banda"
+msgstr "קנדה"
+
+#. :BRB:052:
+#: ../zypp/CountryCode.cc:236
+msgid "Bangladesh"
+msgstr "בנגלדש"
+
+#. language code: bnt
+#: ../zypp/LanguageCode.cc:356
+msgid "Bantu (Other)"
+msgstr ""
+
+# BB
+#. :BIH:070:
+#: ../zypp/CountryCode.cc:235
+msgid "Barbados"
+msgstr "ברבדוס"
 
 #. language code: bas
 #: ../zypp/LanguageCode.cc:330
@@ -473,10 +467,22 @@ msgstr "בסקית"
 msgid "Basa"
 msgstr "בסיס"
 
-#. language code: bat
-#: ../zypp/LanguageCode.cc:332
-msgid "Baltic (Other)"
+#. language code: bak ba
+#: ../zypp/LanguageCode.cc:318
+msgid "Bashkir"
 msgstr ""
+
+#. language code: baq eus eu
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+msgid "Basque"
+msgstr "בסקית"
+
+# ID
+#. language code: btk
+#: ../zypp/LanguageCode.cc:364
+#, fuzzy
+msgid "Batak (Indonesia)"
+msgstr "אינדונזיה"
 
 #. language code: bej
 #: ../zypp/LanguageCode.cc:334
@@ -484,11 +490,29 @@ msgid "Beja"
 msgstr ""
 
 # BY
+#. :BWA:072:
+#: ../zypp/CountryCode.cc:251
+msgid "Belarus"
+msgstr "בלרוס"
+
+# BY
 #. language code: bel be
 #: ../zypp/LanguageCode.cc:336
 #, fuzzy
 msgid "Belarusian"
 msgstr "בלרוס"
+
+# BE
+#. :BGD:050:
+#: ../zypp/CountryCode.cc:237
+msgid "Belgium"
+msgstr "בלגיה"
+
+#. :BLR:112:
+#: ../zypp/CountryCode.cc:252
+#, fuzzy
+msgid "Belize"
+msgstr "בלגית"
 
 #. language code: bem
 #: ../zypp/LanguageCode.cc:338
@@ -500,14 +524,31 @@ msgstr ""
 msgid "Bengali"
 msgstr "בנגאלית"
 
+#. :BDI:108:
+#: ../zypp/CountryCode.cc:242
+#, fuzzy
+msgid "Benin"
+msgstr "בנגאלית"
+
 #. language code: ber
 #: ../zypp/LanguageCode.cc:342
 msgid "Berber (Other)"
 msgstr ""
 
+#. :BEN:204:
+#: ../zypp/CountryCode.cc:243
+#, fuzzy
+msgid "Bermuda"
+msgstr "גרמנית"
+
 #. language code: bho
 #: ../zypp/LanguageCode.cc:344
 msgid "Bhojpuri"
+msgstr ""
+
+#. :BHS:044:
+#: ../zypp/CountryCode.cc:248
+msgid "Bhutan"
 msgstr ""
 
 #. language code: bih bh
@@ -531,15 +572,23 @@ msgstr ""
 msgid "Bislama"
 msgstr ""
 
-#. language code: bla
-#: ../zypp/LanguageCode.cc:354
-msgid "Siksika"
-msgstr ""
+#. language code: byn
+#: ../zypp/LanguageCode.cc:376
+#, fuzzy
+msgid "Blin"
+msgstr "בלגית"
 
-#. language code: bnt
-#: ../zypp/LanguageCode.cc:356
-msgid "Bantu (Other)"
-msgstr ""
+# BO
+#. :BRN:096:
+#: ../zypp/CountryCode.cc:245
+msgid "Bolivia"
+msgstr "בוליביה"
+
+#. :AZE:031:
+#: ../zypp/CountryCode.cc:234
+#, fuzzy
+msgid "Bosnia and Herzegovina"
+msgstr "בוסניה הרצגובינה"
 
 #. language code: bos bs
 #: ../zypp/LanguageCode.cc:358
@@ -547,9 +596,26 @@ msgstr ""
 msgid "Bosnian"
 msgstr "רומנית"
 
+#. :BVT:074:
+#: ../zypp/CountryCode.cc:250
+msgid "Botswana"
+msgstr "בוטסואנה"
+
+# IE
+#. :BTN:064:
+#: ../zypp/CountryCode.cc:249
+#, fuzzy
+msgid "Bouvet Island"
+msgstr "איי פר-אר"
+
 #. language code: bra
 #: ../zypp/LanguageCode.cc:360
 msgid "Braj"
+msgstr ""
+
+#. :BOL:068:
+#: ../zypp/CountryCode.cc:246
+msgid "Brazil"
 msgstr ""
 
 #. language code: bre br
@@ -557,12 +623,42 @@ msgstr ""
 msgid "Breton"
 msgstr "ברטונית"
 
-# ID
-#. language code: btk
-#: ../zypp/LanguageCode.cc:364
+#. :IND:356:
+#: ../zypp/CountryCode.cc:320
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+#. :VEN:862:
+#: ../zypp/CountryCode.cc:447
+msgid "British Virgin Islands"
+msgstr ""
+
+#. :BMU:060:
+#: ../zypp/CountryCode.cc:244
+msgid "Brunei Darussalam"
+msgstr ""
+
+#. language code: bug
+#: ../zypp/LanguageCode.cc:368
 #, fuzzy
-msgid "Batak (Indonesia)"
-msgstr "אינדונזיה"
+msgid "Buginese"
+msgstr "סינית"
+
+#: ../zypp/RepoManager.cc:720
+#, c-format
+msgid "Building repository '%s' cache"
+msgstr ""
+
+# BG
+#. :BFA:854:
+#: ../zypp/CountryCode.cc:239
+msgid "Bulgaria"
+msgstr "בולגריה"
+
+#. language code: bul bg
+#: ../zypp/LanguageCode.cc:370
+msgid "Bulgarian"
+msgstr "בולגרית"
 
 # BG
 #. language code: bua
@@ -571,27 +667,20 @@ msgstr "אינדונזיה"
 msgid "Buriat"
 msgstr "בולגריה"
 
-#. language code: bug
-#: ../zypp/LanguageCode.cc:368
-#, fuzzy
-msgid "Buginese"
-msgstr "סינית"
-
-#. language code: bul bg
-#: ../zypp/LanguageCode.cc:370
-msgid "Bulgarian"
-msgstr "בולגרית"
+#. :BEL:056:
+#: ../zypp/CountryCode.cc:238
+msgid "Burkina Faso"
+msgstr ""
 
 #. language code: bur mya my
 #: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr ""
 
-#. language code: byn
-#: ../zypp/LanguageCode.cc:376
-#, fuzzy
-msgid "Blin"
-msgstr "בלגית"
+#. :BHR:048:
+#: ../zypp/CountryCode.cc:241
+msgid "Burundi"
+msgstr ""
 
 # CA
 #. language code: cad
@@ -600,9 +689,120 @@ msgstr "בלגית"
 msgid "Caddo"
 msgstr "כרטיס"
 
-#. language code: cai
-#: ../zypp/LanguageCode.cc:380
-msgid "Central American Indian (Other)"
+#. :KGZ:417:
+#: ../zypp/CountryCode.cc:330
+#, fuzzy
+msgid "Cambodia"
+msgstr "קולומביה"
+
+#. :CHL:152:
+#: ../zypp/CountryCode.cc:262
+msgid "Cameroon"
+msgstr ""
+
+#: ../zypp/sat/detail/PoolImpl.cc:100
+msgid "Can not create sat-pool."
+msgstr ""
+
+#: ../zypp/thread/Mutex.cc:77
+msgid "Can't acquire the mutex lock"
+msgstr ""
+
+#: ../zypp/Repository.cc:126 ../zypp/Repository.cc:143
+msgid "Can't add solvables to norepo."
+msgstr ""
+
+#: ../zypp/ExternalProgram.cc:245
+#, c-format
+msgid "Can't chdir to '/' inside chroot (%s)."
+msgstr ""
+
+#: ../zypp/ExternalProgram.cc:238
+#, c-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr ""
+
+#. don't want to get here
+#: ../zypp/ExternalProgram.cc:259
+#, c-format
+msgid "Can't exec '%s' (%s)."
+msgstr ""
+
+#: ../zypp/ExternalProgram.cc:267
+#, c-format
+msgid "Can't fork (%s)."
+msgstr ""
+
+#: ../zypp/thread/Mutex.cc:33
+msgid "Can't initialize mutex attributes"
+msgstr ""
+
+#: ../zypp/thread/Mutex.cc:47
+msgid "Can't initialize recursive mutex"
+msgstr ""
+
+#: ../zypp/ExternalProgram.cc:174
+#, fuzzy, c-format
+msgid "Can't open pipe (%s)."
+msgstr "Couldn't open file: %s."
+
+#: ../zypp/ExternalProgram.cc:163
+#, fuzzy, c-format
+msgid "Can't open pty (%s)."
+msgstr "Couldn't open file: %s."
+
+#: ../zypp/Repository.cc:132
+#, fuzzy
+msgid "Can't open solv-file: "
+msgstr "Couldn't open file: %s."
+
+#: ../zypp/repo/RepoProvideFile.cc:207
+#, c-format
+msgid "Can't provide file '%s' from repository '%s'"
+msgstr ""
+
+#: ../zypp/thread/Mutex.cc:87
+msgid "Can't release the mutex lock"
+msgstr ""
+
+#: ../zypp/Repository.cc:101
+msgid "Can't set RepoInfo for norepo."
+msgstr ""
+
+#: ../zypp/thread/Mutex.cc:40
+msgid "Can't set recursive mutex attribute"
+msgstr ""
+
+# CA
+#. :BLZ:084:
+#: ../zypp/CountryCode.cc:253
+msgid "Canada"
+msgstr "קנדה"
+
+#: ../zypp/KeyRing.cc:276
+#, c-format
+msgid "Cannot create public key %s from %s keyring to file %s"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:182
+msgid "Cannot eject any media"
+msgstr ""
+
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/media/MediaException.cc:184
+#, fuzzy, c-format
+msgid "Cannot eject media '%s'"
+msgstr "מתקין על:"
+
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/media/MediaException.cc:67
+#, fuzzy, c-format
+msgid "Cannot write file '%s'."
+msgstr "מתקין על:"
+
+#. :CUB:192:
+#: ../zypp/CountryCode.cc:268
+msgid "Cape Verde"
 msgstr ""
 
 # CA
@@ -622,6 +822,13 @@ msgstr "קטלונית"
 msgid "Caucasian (Other)"
 msgstr ""
 
+# IE
+#. :KWT:414:
+#: ../zypp/CountryCode.cc:337
+#, fuzzy
+msgid "Cayman Islands"
+msgstr "איי פר-אר"
+
 #. language code: ceb
 #: ../zypp/LanguageCode.cc:388
 #, fuzzy
@@ -633,9 +840,64 @@ msgstr "לבנון"
 msgid "Celtic (Other)"
 msgstr ""
 
+# DO
+#. :COD:180:
+#: ../zypp/CountryCode.cc:256
+#, fuzzy
+msgid "Central African Republic"
+msgstr "סוריה"
+
+#. language code: cai
+#: ../zypp/LanguageCode.cc:380
+msgid "Central American Indian (Other)"
+msgstr ""
+
+# CA
+#. :TCA:796:
+#: ../zypp/CountryCode.cc:423
+#, fuzzy
+msgid "Chad"
+msgstr "כרטיס"
+
+#. language code: chg
+#: ../zypp/LanguageCode.cc:398
+msgid "Chagatai"
+msgstr ""
+
+# BD
+#. language code: cmc
+#: ../zypp/LanguageCode.cc:422
+#, fuzzy
+msgid "Chamic Languages"
+msgstr "שפות"
+
 #. language code: cha ch
 #: ../zypp/LanguageCode.cc:392
 msgid "Chamorro"
+msgstr ""
+
+#  Commandline help title
+#. Translator: %s = name of an rpm package. A list of diffs follows
+#. this message.
+#: ../zypp/target/rpm/RpmDb.cc:1879
+#, fuzzy, c-format
+msgid "Changed configuration files for %s:"
+msgstr "קורא קובץ הגדרות"
+
+#. language code: che ce
+#: ../zypp/LanguageCode.cc:396
+#, fuzzy
+msgid "Chechen"
+msgstr "צ'כית"
+
+#. language code: chr
+#: ../zypp/LanguageCode.cc:414
+msgid "Cherokee"
+msgstr ""
+
+#. language code: chy
+#: ../zypp/LanguageCode.cc:420
+msgid "Cheyenne"
 msgstr ""
 
 # CN
@@ -645,42 +907,33 @@ msgstr ""
 msgid "Chibcha"
 msgstr "סין"
 
-#. language code: che ce
-#: ../zypp/LanguageCode.cc:396
+# CL
+#. language code: nya ny
+#: ../zypp/LanguageCode.cc:896
 #, fuzzy
-msgid "Chechen"
-msgstr "צ'כית"
+msgid "Chichewa"
+msgstr "צ'ילה"
 
-#. language code: chg
-#: ../zypp/LanguageCode.cc:398
-msgid "Chagatai"
-msgstr ""
+# CL
+#. :COK:184:
+#: ../zypp/CountryCode.cc:261
+msgid "Chile"
+msgstr "צ'ילה"
+
+# CN
+#. :CMR:120:
+#: ../zypp/CountryCode.cc:263
+msgid "China"
+msgstr "סין"
 
 #. language code: chi zho zh
 #: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "סינית"
 
-#. language code: chk
-#: ../zypp/LanguageCode.cc:404
-#, fuzzy
-msgid "Chuukese"
-msgstr "סינית"
-
-#. language code: chm
-#: ../zypp/LanguageCode.cc:406
-#, fuzzy
-msgid "Mari"
-msgstr "מאורית"
-
 #. language code: chn
 #: ../zypp/LanguageCode.cc:408
 msgid "Chinook Jargon"
-msgstr ""
-
-#. language code: cho
-#: ../zypp/LanguageCode.cc:410
-msgid "Choctaw"
 msgstr ""
 
 #. language code: chp
@@ -688,9 +941,14 @@ msgstr ""
 msgid "Chipewyan"
 msgstr ""
 
-#. language code: chr
-#: ../zypp/LanguageCode.cc:414
-msgid "Cherokee"
+#. language code: cho
+#: ../zypp/LanguageCode.cc:410
+msgid "Choctaw"
+msgstr ""
+
+#. :CPV:132:
+#: ../zypp/CountryCode.cc:269
+msgid "Christmas Island"
 msgstr ""
 
 #. language code: chu cu
@@ -698,22 +956,66 @@ msgstr ""
 msgid "Church Slavic"
 msgstr ""
 
+#. language code: chk
+#: ../zypp/LanguageCode.cc:404
+#, fuzzy
+msgid "Chuukese"
+msgstr "סינית"
+
 #. language code: chv cv
 #: ../zypp/LanguageCode.cc:418
 msgid "Chuvash"
 msgstr ""
 
-#. language code: chy
-#: ../zypp/LanguageCode.cc:420
-msgid "Cheyenne"
+#. language code: nwc
+#: ../zypp/LanguageCode.cc:894
+msgid "Classical Newari"
 msgstr ""
 
-# BD
-#. language code: cmc
-#: ../zypp/LanguageCode.cc:422
+#. :CAN:124:
+#: ../zypp/CountryCode.cc:254
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+#. :CHN:156:
+#: ../zypp/CountryCode.cc:264
+msgid "Colombia"
+msgstr "קולומביה"
+
+#: ../zypp/ExternalProgram.cc:346
+#, c-format
+msgid "Command exited with status %d."
+msgstr ""
+
+#: ../zypp/ExternalProgram.cc:371
 #, fuzzy
-msgid "Chamic Languages"
-msgstr "שפות"
+msgid "Command exited with unknown error."
+msgstr "פקודה לביצוע כאשר מתחברים"
+
+#: ../zypp/ExternalProgram.cc:366
+#, c-format
+msgid "Command was killed by signal %d (%s)."
+msgstr ""
+
+#  Frame description in suggested partition for mode accept modify ..
+#. :KIR:296:
+#: ../zypp/CountryCode.cc:332
+#, fuzzy
+msgid "Comoros"
+msgstr "בחרו"
+
+#. :CCK:166:
+#. :CAF:140:
+#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+msgid "Congo"
+msgstr ""
+
+# IE
+#. :CIV:384:
+#: ../zypp/CountryCode.cc:260
+#, fuzzy
+msgid "Cook Islands"
+msgstr "איי פר-אר"
 
 #. language code: cop
 #: ../zypp/LanguageCode.cc:424
@@ -733,6 +1035,35 @@ msgstr "אירית"
 msgid "Corsican"
 msgstr "קוסטה ריקה"
 
+#. :COL:170:
+#: ../zypp/CountryCode.cc:265
+msgid "Costa Rica"
+msgstr "קוסטה ריקה"
+
+#. :CHE:756:
+#: ../zypp/CountryCode.cc:259
+msgid "Cote D'Ivoire"
+msgstr ""
+
+# HR
+#  heading text
+#. language code: cre cr
+#: ../zypp/LanguageCode.cc:436
+#, fuzzy
+msgid "Cree"
+msgstr "צור"
+
+#. language code: mus
+#: ../zypp/LanguageCode.cc:842
+#, fuzzy
+msgid "Creek"
+msgstr "יוונית"
+
+#. language code: crp
+#: ../zypp/LanguageCode.cc:440
+msgid "Creoles and Pidgins (Other)"
+msgstr ""
+
 #. language code: cpe
 #: ../zypp/LanguageCode.cc:430
 msgid "Creoles and Pidgins, English-Based (Other)"
@@ -748,27 +1079,25 @@ msgstr ""
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
 msgstr ""
 
-# HR
-#  heading text
-#. language code: cre cr
-#: ../zypp/LanguageCode.cc:436
-#, fuzzy
-msgid "Cree"
-msgstr "צור"
-
 #. language code: crh
 #: ../zypp/LanguageCode.cc:438
 msgid "Crimean Tatar"
 msgstr ""
 
-#. language code: crp
-#: ../zypp/LanguageCode.cc:440
-msgid "Creoles and Pidgins (Other)"
-msgstr ""
+# HR
+#. :HND:340:
+#: ../zypp/CountryCode.cc:313
+msgid "Croatia"
+msgstr "קרואטיה"
 
-#. language code: csb
-#: ../zypp/LanguageCode.cc:442
-msgid "Kashubian"
+#. language code: scr hrv hr
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+msgid "Croatian"
+msgstr "קרואטית"
+
+#. :SCG:891:
+#: ../zypp/CountryCode.cc:267
+msgid "Cuba"
 msgstr ""
 
 #. language code: cus
@@ -776,10 +1105,22 @@ msgstr ""
 msgid "Cushitic (Other)"
 msgstr ""
 
+#. :CXR:162:
+#: ../zypp/CountryCode.cc:270
+msgid "Cyprus"
+msgstr ""
+
 #. language code: cze ces cs
 #: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "צ'כית"
+
+# DO
+#. :CYP:196:
+#: ../zypp/CountryCode.cc:271
+#, fuzzy
+msgid "Czech Republic"
+msgstr "הרפובליקה הדומיניקנית"
 
 #. language code: dak
 #: ../zypp/LanguageCode.cc:450
@@ -809,15 +1150,11 @@ msgstr "יום:"
 msgid "Delaware"
 msgstr "חומרה"
 
-#. language code: den
-#: ../zypp/LanguageCode.cc:460
-msgid "Slave (Athapascan)"
-msgstr ""
-
-#. language code: dgr
-#: ../zypp/LanguageCode.cc:462
-msgid "Dogrib"
-msgstr ""
+# DK
+#. :DJI:262:
+#: ../zypp/CountryCode.cc:274
+msgid "Denmark"
+msgstr "דנמרק"
 
 #. language code: din
 #: ../zypp/LanguageCode.cc:464
@@ -830,22 +1167,58 @@ msgstr "כונן"
 msgid "Divehi"
 msgstr ""
 
+#. :DEU:276:
+#: ../zypp/CountryCode.cc:273
+msgid "Djibouti"
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
+#, fuzzy
+msgid "Do not install or delete the resolvables concerned"
+msgstr "מתקין דריבר..."
+
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 #, fuzzy
 msgid "Dogri"
 msgstr "מאורית"
 
+#. language code: dgr
+#: ../zypp/LanguageCode.cc:462
+msgid "Dogrib"
+msgstr ""
+
+# RO
+#. :DNK:208:
+#: ../zypp/CountryCode.cc:275
+#, fuzzy
+msgid "Dominica"
+msgstr "רומניה"
+
+# DO
+#. :DMA:212:
+#: ../zypp/CountryCode.cc:276
+msgid "Dominican Republic"
+msgstr "הרפובליקה הדומיניקנית"
+
+#: ../zypp/media/MediaException.cc:152
+#, c-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:84
+#, c-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr ""
+
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
 msgid "Dravidian (Other)"
 msgstr ""
-
-#. language code: dsb
-#: ../zypp/LanguageCode.cc:472
-#, fuzzy
-msgid "Lower Sorbian"
-msgstr "סרבית"
 
 #. language code: dua
 #: ../zypp/LanguageCode.cc:474
@@ -853,15 +1226,21 @@ msgstr "סרבית"
 msgid "Duala"
 msgstr "יומי"
 
-#. language code: dum
-#: ../zypp/LanguageCode.cc:476
-msgid "Dutch, Middle (ca.1050-1350)"
+#. dubious: Throw on malformed known types, otherwise log a warning.
+#: ../zypp/CheckSum.cc:96
+#, c-format
+msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
 
 #. language code: dut nld nl
 #: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "הולנדית"
+
+#. language code: dum
+#: ../zypp/LanguageCode.cc:476
+msgid "Dutch, Middle (ca.1050-1350)"
+msgstr ""
 
 #. language code: dyu
 #: ../zypp/LanguageCode.cc:482
@@ -873,10 +1252,26 @@ msgstr ""
 msgid "Dzongkha"
 msgstr ""
 
+#. :TON:776:
+#: ../zypp/CountryCode.cc:432
+msgid "East Timor"
+msgstr ""
+
+#. :DZA:012:
+#: ../zypp/CountryCode.cc:278
+msgid "Ecuador"
+msgstr "אקוודור"
+
 #. language code: efi
 #: ../zypp/LanguageCode.cc:486
 msgid "Efik"
 msgstr ""
+
+# EG
+#. :EST:233:
+#: ../zypp/CountryCode.cc:280
+msgid "Egypt"
+msgstr "מצרים"
 
 #. language code: egy
 #: ../zypp/LanguageCode.cc:488
@@ -888,9 +1283,31 @@ msgstr ""
 msgid "Ekajuk"
 msgstr ""
 
+# SV
+#. :STP:678:
+#: ../zypp/CountryCode.cc:419
+msgid "El Salvador"
+msgstr "אל סלבדור"
+
 #. language code: elx
 #: ../zypp/LanguageCode.cc:492
 msgid "Elamite"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:135
+msgid "Empty destination in URI"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:130
+msgid "Empty filesystem in URI"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:125
+msgid "Empty host name in URI"
+msgstr ""
+
+#: ../zypp/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
 msgstr ""
 
 #. language code: eng en
@@ -904,15 +1321,58 @@ msgstr "אנגלית (אנגליה)"
 msgid "English, Middle (1100-1500)"
 msgstr ""
 
+#. language code: ang
+#: ../zypp/LanguageCode.cc:274
+msgid "English, Old (ca.450-1100)"
+msgstr ""
+
+#. :GLP:312:
+#: ../zypp/CountryCode.cc:303
+msgid "Equatorial Guinea"
+msgstr ""
+
+#. :ESH:732:
+#: ../zypp/CountryCode.cc:282
+msgid "Eritrea"
+msgstr ""
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: ../zypp/media/MediaException.cc:161
+#, c-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+
+#: ../zypp/Repository.cc:137
+msgid "Error reading solv-file: "
+msgstr ""
+
+#. language code: myv
+#: ../zypp/LanguageCode.cc:850
+msgid "Erzya"
+msgstr ""
+
 #. language code: epo eo
 #: ../zypp/LanguageCode.cc:498
 msgid "Esperanto"
 msgstr "אספרנטו"
 
+# EE
+#. :ECU:218:
+#: ../zypp/CountryCode.cc:279
+msgid "Estonia"
+msgstr "אסטוניה"
+
 #. language code: est et
 #: ../zypp/LanguageCode.cc:500
 msgid "Estonian"
 msgstr "אסטונית"
+
+# EE
+#. :ESP:724:
+#: ../zypp/CountryCode.cc:284
+#, fuzzy
+msgid "Ethiopia"
+msgstr "אסטוניה"
 
 #. language code: ewe ee
 #: ../zypp/LanguageCode.cc:502
@@ -926,12 +1386,54 @@ msgstr ""
 msgid "Ewondo"
 msgstr "סוף"
 
+#: ../zypp/KeyRing.cc:558
+#, fuzzy
+msgid "Failed to delete key."
+msgstr "Failed to parse: %s."
+
+#: ../zypp/target/rpm/RpmDb.cc:1047
+#, c-format
+msgid "Failed to import public key from file %s: %s"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:31
+#, fuzzy, c-format
+msgid "Failed to mount %s on %s"
+msgstr "Failed to parse: %s."
+
+#: ../zypp/target/rpm/RpmDb.cc:1124
+#, c-format
+msgid "Failed to remove public key %s: %s"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:41
+#, fuzzy, c-format
+msgid "Failed to unmount %s"
+msgstr "Failed to parse: %s."
+
+#. :FJI:242:
+#: ../zypp/CountryCode.cc:287
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
 # FR
 #. language code: fan
 #: ../zypp/LanguageCode.cc:506
 #, fuzzy
 msgid "Fang"
 msgstr "צרפת"
+
+#. language code: fat
+#: ../zypp/LanguageCode.cc:510
+#, fuzzy
+msgid "Fanti"
+msgstr "פונטים"
+
+# IE
+#. :FSM:583:
+#: ../zypp/CountryCode.cc:289
+msgid "Faroe Islands"
+msgstr "איי פר-אר"
 
 #  Label for free part of the partition in non-graphical mode
 #  Label for free part of the Windows partition in non-graphical mode
@@ -941,11 +1443,15 @@ msgstr "צרפת"
 msgid "Faroese"
 msgstr "פנוי:"
 
-#. language code: fat
-#: ../zypp/LanguageCode.cc:510
-#, fuzzy
-msgid "Fanti"
-msgstr "פונטים"
+#. :FLK:238:
+#: ../zypp/CountryCode.cc:288
+msgid "Federated States of Micronesia"
+msgstr ""
+
+#. :FIN:246:
+#: ../zypp/CountryCode.cc:286
+msgid "Fiji"
+msgstr ""
 
 # FI
 #. language code: fij fj
@@ -954,11 +1460,67 @@ msgstr "פונטים"
 msgid "Fijian"
 msgstr "פינלנד"
 
+#: ../devel/devel.mvidner/installation_sources.cc:99
+#, c-format
+msgid ""
+"File %s does not have a checksum.\n"
+"Use the file anyway?"
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:85
+#, c-format
+msgid ""
+"File %s failed integrity check with the folowing key:\n"
+"%s|%s|%s\n"
+"Use the file anyway?"
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:117
+#, c-format
+msgid ""
+"File %s has an invalid checksum.\n"
+"Expected %s, found %s\n"
+"Use the file anyway?"
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:108
+#, c-format
+msgid ""
+"File %s has an unknown checksum %s.\n"
+"Use the file anyway?"
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:56
+#, c-format
+msgid ""
+"File %s is not signed.\n"
+"Use it anyway?"
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:65
+#, c-format
+msgid ""
+"File %s is signed with an unknown key:\n"
+"%s|%s|%s\n"
+"Use the file anyway?"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:60
+#, c-format
+msgid "File '%s' not found on medium '%s'"
+msgstr ""
+
 #. language code: fil
 #: ../zypp/LanguageCode.cc:514
 #, fuzzy
 msgid "Filipino"
 msgstr "הפיליפינים"
+
+# FI
+#. :ETH:231:
+#: ../zypp/CountryCode.cc:285
+msgid "Finland"
+msgstr "פינלנד"
 
 #. language code: fin fi
 #: ../zypp/LanguageCode.cc:516
@@ -970,16 +1532,43 @@ msgstr "פינית"
 msgid "Finno-Ugrian (Other)"
 msgstr ""
 
+#: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
+msgid "Following actions will be done:"
+msgstr ""
+
 #. language code: fon
 #: ../zypp/LanguageCode.cc:520
 #, fuzzy
 msgid "Fon"
 msgstr "פונטים"
 
+# FR
+#. :FRO:234:
+#: ../zypp/CountryCode.cc:290
+msgid "France"
+msgstr "צרפת"
+
 #. language code: fre fra fr
 #: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "צרפתית"
+
+#. :GEO:268:
+#: ../zypp/CountryCode.cc:296
+#, fuzzy
+msgid "French Guiana"
+msgstr "צרפתית (קנדה)"
+
+#. :PER:604:
+#: ../zypp/CountryCode.cc:386
+#, fuzzy
+msgid "French Polynesia"
+msgstr "צרפתית (קנדה)"
+
+#. :TCD:148:
+#: ../zypp/CountryCode.cc:424
+msgid "French Southern Territories"
+msgstr ""
 
 #. language code: frm
 #: ../zypp/LanguageCode.cc:526
@@ -998,11 +1587,6 @@ msgstr ""
 msgid "Frisian"
 msgstr "&גירסת FS"
 
-#. language code: ful ff
-#: ../zypp/LanguageCode.cc:532
-msgid "Fulah"
-msgstr ""
-
 # FI
 #. language code: fur
 #: ../zypp/LanguageCode.cc:534
@@ -1010,10 +1594,43 @@ msgstr ""
 msgid "Friulian"
 msgstr "פינלנד"
 
+#. language code: ful ff
+#: ../zypp/LanguageCode.cc:532
+msgid "Fulah"
+msgstr ""
+
 #. language code: gaa
 #: ../zypp/LanguageCode.cc:536
 msgid "Ga"
 msgstr ""
+
+#. :FXX:249:
+#: ../zypp/CountryCode.cc:292
+msgid "Gabon"
+msgstr ""
+
+#. language code: gla gd
+#: ../zypp/LanguageCode.cc:556
+msgid "Gaelic"
+msgstr ""
+
+#. language code: glg gl
+#: ../zypp/LanguageCode.cc:560
+#, fuzzy
+msgid "Galician"
+msgstr "איטלקית"
+
+#. :GRL:304:
+#: ../zypp/CountryCode.cc:300
+msgid "Gambia"
+msgstr ""
+
+# CA
+#. language code: lug lg
+#: ../zypp/LanguageCode.cc:762
+#, fuzzy
+msgid "Ganda"
+msgstr "קנדה"
 
 #. language code: gay
 #: ../zypp/LanguageCode.cc:538
@@ -1025,11 +1642,20 @@ msgstr ""
 msgid "Gbaya"
 msgstr ""
 
-#. language code: gem
-#: ../zypp/LanguageCode.cc:542
+#. language code: gez
+#: ../zypp/LanguageCode.cc:552
 #, fuzzy
-msgid "Germanic (Other)"
-msgstr "גרמנית (עם מקשים מתים)"
+msgid "Geez"
+msgstr "יוונית"
+
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
+msgid "Generally ignore this requirement"
+msgstr ""
+
+#. :GRD:308:
+#: ../zypp/CountryCode.cc:295
+msgid "Georgia"
+msgstr " ג'ורג'יה"
 
 #. language code: geo kat ka
 #: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
@@ -1042,41 +1668,6 @@ msgstr " ג'ורג'יה"
 msgid "German"
 msgstr "גרמנית"
 
-#. language code: gez
-#: ../zypp/LanguageCode.cc:552
-#, fuzzy
-msgid "Geez"
-msgstr "יוונית"
-
-#. language code: gil
-#: ../zypp/LanguageCode.cc:554
-#, fuzzy
-msgid "Gilbertese"
-msgstr "וייטנאמית"
-
-#. language code: gla gd
-#: ../zypp/LanguageCode.cc:556
-msgid "Gaelic"
-msgstr ""
-
-#. language code: gle ga
-#: ../zypp/LanguageCode.cc:558
-msgid "Irish"
-msgstr "אירית"
-
-#. language code: glg gl
-#: ../zypp/LanguageCode.cc:560
-#, fuzzy
-msgid "Galician"
-msgstr "איטלקית"
-
-#  ComboBox item
-#. language code: glv gv
-#: ../zypp/LanguageCode.cc:562
-#, fuzzy
-msgid "Manx"
-msgstr "מדריך"
-
 #. language code: gmh
 #: ../zypp/LanguageCode.cc:564
 msgid "German, Middle High (ca.1050-1500)"
@@ -1086,6 +1677,36 @@ msgstr ""
 #: ../zypp/LanguageCode.cc:566
 msgid "German, Old High (ca.750-1050)"
 msgstr ""
+
+#. language code: gem
+#: ../zypp/LanguageCode.cc:542
+#, fuzzy
+msgid "Germanic (Other)"
+msgstr "גרמנית (עם מקשים מתים)"
+
+# DE
+#. :CZE:203:
+#: ../zypp/CountryCode.cc:272
+msgid "Germany"
+msgstr "גרמניה"
+
+# CN
+#. :GUF:254:
+#: ../zypp/CountryCode.cc:297
+#, fuzzy
+msgid "Ghana"
+msgstr "סין"
+
+#. :GHA:288:
+#: ../zypp/CountryCode.cc:298
+msgid "Gibraltar"
+msgstr ""
+
+#. language code: gil
+#: ../zypp/LanguageCode.cc:554
+#, fuzzy
+msgid "Gilbertese"
+msgstr "וייטנאמית"
 
 # SD
 #. language code: gon
@@ -1110,6 +1731,12 @@ msgstr ""
 msgid "Grebo"
 msgstr "קבוצה"
 
+# GR
+#. :GNQ:226:
+#: ../zypp/CountryCode.cc:304
+msgid "Greece"
+msgstr "יוון"
+
 #. language code: grc
 #: ../zypp/LanguageCode.cc:576
 msgid "Greek, Ancient (to 1453)"
@@ -1120,17 +1747,61 @@ msgstr ""
 msgid "Greek, Modern (1453-)"
 msgstr ""
 
+# GD
+#. :GIB:292:
+#: ../zypp/CountryCode.cc:299
+msgid "Greenland"
+msgstr "גרינלנד"
+
+# GD
+#. :GBR:826:
+#: ../zypp/CountryCode.cc:294
+msgid "Grenada"
+msgstr "גרנדה"
+
+#. :GIN:324:
+#: ../zypp/CountryCode.cc:302
+msgid "Guadeloupe"
+msgstr ""
+
+#. :GTM:320:
+#: ../zypp/CountryCode.cc:307
+#, fuzzy
+msgid "Guam"
+msgstr "משחקים"
+
 #. language code: grn gn
 #: ../zypp/LanguageCode.cc:582
 #, fuzzy
 msgid "Guarani"
 msgstr "הונגרית"
 
+# GT
+#. :SGS:239:
+#: ../zypp/CountryCode.cc:306
+msgid "Guatemala"
+msgstr "גואטמלה"
+
+#. :GMB:270:
+#: ../zypp/CountryCode.cc:301
+msgid "Guinea"
+msgstr ""
+
+#. :GUM:316:
+#: ../zypp/CountryCode.cc:308
+msgid "Guinea-Bissau"
+msgstr ""
+
 #. language code: guj gu
 #: ../zypp/LanguageCode.cc:584
 #, fuzzy
 msgid "Gujarati"
 msgstr "אורך"
+
+#. :GNB:624:
+#: ../zypp/CountryCode.cc:309
+msgid "Guyana"
+msgstr ""
 
 #. language code: gwi
 #: ../zypp/LanguageCode.cc:586
@@ -1144,11 +1815,34 @@ msgstr ""
 msgid "Haida"
 msgstr "חומרה"
 
+#. :HRV:191:
+#: ../zypp/CountryCode.cc:314
+#, fuzzy
+msgid "Haiti"
+msgstr "המתן"
+
 #. language code: hat ht
 #: ../zypp/LanguageCode.cc:590
 #, fuzzy
 msgid "Haitian"
 msgstr "לטבית"
+
+#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:64
+msgid "Hal Exception"
+msgstr ""
+
+#: ../zypp/target/hal/HalContext.cc:96
+msgid "HalContext not connected"
+msgstr ""
+
+#: ../zypp/target/hal/HalContext.cc:106
+msgid "HalDrive not initialized"
+msgstr ""
+
+#: ../zypp/target/hal/HalContext.cc:116
+msgid "HalVolume not initialized"
+msgstr ""
 
 #. language code: hau ha
 #: ../zypp/LanguageCode.cc:592
@@ -1158,6 +1852,11 @@ msgstr ""
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
 msgid "Hawaiian"
+msgstr ""
+
+#. :HKG:344:
+#: ../zypp/CountryCode.cc:311
+msgid "Heard Island and McDonald Islands"
 msgstr ""
 
 #. language code: heb he
@@ -1187,6 +1886,16 @@ msgstr ""
 msgid "Hindi"
 msgstr "סוג"
 
+#. language code: hmo ho
+#: ../zypp/LanguageCode.cc:610
+msgid "Hiri Motu"
+msgstr ""
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: ../zypp/base/Exception.cc:89
+msgid "History:"
+msgstr ""
+
 #. language code: hit
 #: ../zypp/LanguageCode.cc:606
 msgid "Hittite"
@@ -1197,21 +1906,32 @@ msgstr ""
 msgid "Hmong"
 msgstr ""
 
-#. language code: hmo ho
-#: ../zypp/LanguageCode.cc:610
-msgid "Hiri Motu"
+#. :UZB:860:
+#: ../zypp/CountryCode.cc:444
+msgid "Holy See (Vatican City State)"
 msgstr ""
 
-#. language code: hsb
-#: ../zypp/LanguageCode.cc:612
-#, fuzzy
-msgid "Upper Sorbian"
-msgstr "סרבית"
+# HN
+#. :HMD:334:
+#: ../zypp/CountryCode.cc:312
+msgid "Honduras"
+msgstr "הונדורס"
+
+#. :GUY:328:
+#: ../zypp/CountryCode.cc:310
+msgid "Hong Kong"
+msgstr "הונג-קונג"
 
 #. language code: hun hu
 #: ../zypp/LanguageCode.cc:614
 msgid "Hungarian"
 msgstr "הונגרית"
+
+# HU
+#. :HTI:332:
+#: ../zypp/CountryCode.cc:315
+msgid "Hungary"
+msgstr "הונגריה"
 
 #. language code: hup
 #: ../zypp/LanguageCode.cc:616
@@ -1223,10 +1943,11 @@ msgstr ""
 msgid "Iban"
 msgstr ""
 
-#. language code: ibo ig
-#: ../zypp/LanguageCode.cc:620
-msgid "Igbo"
-msgstr ""
+# IS
+#. :IRN:364:
+#: ../zypp/CountryCode.cc:323
+msgid "Iceland"
+msgstr "איסלנד"
 
 #. language code: ice isl is
 #: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
@@ -1240,21 +1961,105 @@ msgstr "איסלנדית"
 msgid "Ido"
 msgstr "Id"
 
-# LT
-#. language code: iii ii
-#: ../zypp/LanguageCode.cc:628
-#, fuzzy
-msgid "Sichuan Yi"
-msgstr "ליטא"
+#. language code: ibo ig
+#: ../zypp/LanguageCode.cc:620
+msgid "Igbo"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
+#, c-format
+msgid "Ignore that %s is already set to install"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
+#, c-format
+msgid "Ignore the obsolete %s in %s"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
+#, c-format
+msgid "Ignore this conflict of %s"
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
+msgid "Ignore this requirement just here"
+msgstr ""
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
 msgid "Ijo"
 msgstr ""
 
-#. language code: iku iu
-#: ../zypp/LanguageCode.cc:632
-msgid "Inuktitut"
+#. language code: ilo
+#: ../zypp/LanguageCode.cc:636
+msgid "Iloko"
+msgstr ""
+
+#. language code: smn
+#: ../zypp/LanguageCode.cc:1046
+msgid "Inari Sami"
+msgstr ""
+
+# IN
+#. :ISR:376:
+#: ../zypp/CountryCode.cc:319
+msgid "India"
+msgstr "הודו"
+
+#. language code: inc
+#: ../zypp/LanguageCode.cc:640
+msgid "Indic (Other)"
+msgstr ""
+
+#. language code: ine
+#: ../zypp/LanguageCode.cc:644
+msgid "Indo-European (Other)"
+msgstr ""
+
+# ID
+#. :HUN:348:
+#: ../zypp/CountryCode.cc:316
+msgid "Indonesia"
+msgstr "אינדונזיה"
+
+#. language code: ind id
+#: ../zypp/LanguageCode.cc:642
+msgid "Indonesian"
+msgstr "אינדונזית"
+
+#. language code: inh
+#: ../zypp/LanguageCode.cc:646
+msgid "Ingush"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
+#, c-format
+msgid "Install %s although it would change the architecture"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
+#, c-format
+msgid "Install %s although it would change the vendor"
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
+#, fuzzy
+msgid "Install missing resolvables"
+msgstr "מתקין דריבר..."
+
+#: ../zypp/target/TargetImpl.cc:678
+msgid "Installation has been aborted as directed."
+msgstr ""
+
+#. language code: ina ia
+#: ../zypp/LanguageCode.cc:638
+msgid "Interlingua (International Auxiliary Language Association)"
 msgstr ""
 
 #. language code: ile ie
@@ -1263,34 +2068,9 @@ msgstr ""
 msgid "Interlingue"
 msgstr "המשך"
 
-#. language code: ilo
-#: ../zypp/LanguageCode.cc:636
-msgid "Iloko"
-msgstr ""
-
-#. language code: ina ia
-#: ../zypp/LanguageCode.cc:638
-msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
-
-#. language code: inc
-#: ../zypp/LanguageCode.cc:640
-msgid "Indic (Other)"
-msgstr ""
-
-#. language code: ind id
-#: ../zypp/LanguageCode.cc:642
-msgid "Indonesian"
-msgstr "אינדונזית"
-
-#. language code: ine
-#: ../zypp/LanguageCode.cc:644
-msgid "Indo-European (Other)"
-msgstr ""
-
-#. language code: inh
-#: ../zypp/LanguageCode.cc:646
-msgid "Ingush"
+#. language code: iku iu
+#: ../zypp/LanguageCode.cc:632
+msgid "Inuktitut"
 msgstr ""
 
 # IN
@@ -1300,9 +2080,97 @@ msgstr ""
 msgid "Inupiaq"
 msgstr "הודו"
 
+#: ../zypp/url/UrlBase.cc:180
+#, c-format
+msgid "Invalid %s component"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:173
+#, c-format
+msgid "Invalid %s component '%s'"
+msgstr ""
+
+#: ../zypp/Url.cc:152
+#, c-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr ""
+
+#: ../zypp/Url.cc:113
+msgid "Invalid LDAP URL query string"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:826
+#, c-format
+msgid "Invalid Url scheme '%s'"
+msgstr ""
+
+#: ../zypp/Url.cc:309
+msgid "Invalid empty Url object reference"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1047
+#, c-format
+msgid "Invalid host component '%s'"
+msgstr ""
+
+#: ../zypp/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr ""
+
+#: ../zypp/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr ""
+
+#: ../zypp/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1079
+#, c-format
+msgid "Invalid port component '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+msgid "Invalid user name or password."
+msgstr ""
+
+# IQ
+#. :IRQ:368:
+#: ../zypp/CountryCode.cc:322
+#, fuzzy
+msgid "Iran"
+msgstr "עירק"
+
 #. language code: ira
 #: ../zypp/LanguageCode.cc:650
 msgid "Iranian (Other)"
+msgstr ""
+
+# IQ
+#. :IOT:086:
+#: ../zypp/CountryCode.cc:321
+msgid "Iraq"
+msgstr "עירק"
+
+# IE
+#. :IDN:360:
+#: ../zypp/CountryCode.cc:317
+msgid "Ireland"
+msgstr "אירלנד"
+
+#. language code: gle ga
+#: ../zypp/LanguageCode.cc:558
+msgid "Irish"
+msgstr "אירית"
+
+#. language code: mga
+#: ../zypp/LanguageCode.cc:810
+msgid "Irish, Middle (900-1200)"
+msgstr ""
+
+#. language code: sga
+#: ../zypp/LanguageCode.cc:1016
+msgid "Irish, Old (to 900)"
 msgstr ""
 
 # BD
@@ -1312,10 +2180,38 @@ msgstr ""
 msgid "Iroquoian Languages"
 msgstr "שפות"
 
+# IL
+#. :IRL:372:
+#: ../zypp/CountryCode.cc:318
+msgid "Israel"
+msgstr "ישראל"
+
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
 msgid "Italian"
 msgstr "איטלקית"
+
+# IT
+#. :ISL:352:
+#: ../zypp/CountryCode.cc:324
+msgid "Italy"
+msgstr "איטליה"
+
+#. :ITA:380:
+#: ../zypp/CountryCode.cc:325
+msgid "Jamaica"
+msgstr ""
+
+# JP
+#. :JOR:400:
+#: ../zypp/CountryCode.cc:327
+msgid "Japan"
+msgstr "יפן"
+
+#. language code: jpn ja
+#: ../zypp/LanguageCode.cc:660
+msgid "Japanese"
+msgstr "יפנית"
 
 #. language code: jav jv
 #: ../zypp/LanguageCode.cc:656
@@ -1323,22 +2219,11 @@ msgstr "איטלקית"
 msgid "Javanese"
 msgstr "יפנית"
 
-#. language code: jbo
-#: ../zypp/LanguageCode.cc:658
-#, fuzzy
-msgid "Lojban"
-msgstr "לבנון"
-
-#. language code: jpn ja
-#: ../zypp/LanguageCode.cc:660
-msgid "Japanese"
-msgstr "יפנית"
-
-#. language code: jpr
-#: ../zypp/LanguageCode.cc:662
-#, fuzzy
-msgid "Judeo-Persian"
-msgstr "אינדונזית"
+# JO
+#. :JAM:388:
+#: ../zypp/CountryCode.cc:326
+msgid "Jordan"
+msgstr "ירדן"
 
 #. language code: jrb
 #: ../zypp/LanguageCode.cc:664
@@ -1346,9 +2231,15 @@ msgstr "אינדונזית"
 msgid "Judeo-Arabic"
 msgstr "ערבית"
 
-#. language code: kaa
-#: ../zypp/LanguageCode.cc:666
-msgid "Kara-Kalpak"
+#. language code: jpr
+#: ../zypp/LanguageCode.cc:662
+#, fuzzy
+msgid "Judeo-Persian"
+msgstr "אינדונזית"
+
+#. language code: kbd
+#: ../zypp/LanguageCode.cc:688
+msgid "Kabardian"
 msgstr ""
 
 #. language code: kab
@@ -1368,6 +2259,12 @@ msgstr "בחריין"
 msgid "Kalaallisut"
 msgstr ""
 
+#. language code: xal
+#: ../zypp/LanguageCode.cc:1202
+#, fuzzy
+msgid "Kalmyk"
+msgstr "דיבור"
+
 #. language code: kam
 #: ../zypp/LanguageCode.cc:674
 msgid "Kamba"
@@ -1380,6 +2277,22 @@ msgstr ""
 msgid "Kannada"
 msgstr "קנדה"
 
+#. language code: kau kr
+#: ../zypp/LanguageCode.cc:682
+#, fuzzy
+msgid "Kanuri"
+msgstr "כורדית"
+
+#. language code: kaa
+#: ../zypp/LanguageCode.cc:666
+msgid "Kara-Kalpak"
+msgstr ""
+
+#. language code: krc
+#: ../zypp/LanguageCode.cc:718
+msgid "Karachay-Balkar"
+msgstr ""
+
 #. language code: kar
 #: ../zypp/LanguageCode.cc:678
 #, fuzzy
@@ -1391,11 +2304,10 @@ msgstr "קוריאנית"
 msgid "Kashmiri"
 msgstr ""
 
-#. language code: kau kr
-#: ../zypp/LanguageCode.cc:682
-#, fuzzy
-msgid "Kanuri"
-msgstr "כורדית"
+#. language code: csb
+#: ../zypp/LanguageCode.cc:442
+msgid "Kashubian"
+msgstr ""
 
 #. language code: kaw
 #: ../zypp/LanguageCode.cc:684
@@ -1408,9 +2320,20 @@ msgstr "כווית "
 msgid "Kazakh"
 msgstr ""
 
-#. language code: kbd
-#: ../zypp/LanguageCode.cc:688
-msgid "Kabardian"
+#. :CYM:136:
+#: ../zypp/CountryCode.cc:338
+#, fuzzy
+msgid "Kazakhstan"
+msgstr "פקיסטן"
+
+#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
+#, fuzzy
+msgid "Keep resolvables"
+msgstr "מתקין דריבר..."
+
+#. :JPN:392:
+#: ../zypp/CountryCode.cc:328
+msgid "Kenya"
 msgstr ""
 
 #. language code: kha
@@ -1419,16 +2342,16 @@ msgstr ""
 msgid "Khasi"
 msgstr "תאילנדית"
 
-#. language code: khi
-#: ../zypp/LanguageCode.cc:692
-msgid "Khoisan (Other)"
-msgstr ""
-
 #. language code: khm km
 #: ../zypp/LanguageCode.cc:694
 #, fuzzy
 msgid "Khmer"
 msgstr "אחר"
+
+#. language code: khi
+#: ../zypp/LanguageCode.cc:692
+msgid "Khoisan (Other)"
+msgstr ""
 
 #. language code: kho
 #: ../zypp/LanguageCode.cc:696
@@ -1441,6 +2364,12 @@ msgstr "סינית"
 msgid "Kikuyu"
 msgstr ""
 
+#. language code: kmb
+#: ../zypp/LanguageCode.cc:704
+#, fuzzy
+msgid "Kimbundu"
+msgstr "סוג"
+
 #. language code: kin rw
 #: ../zypp/LanguageCode.cc:700
 msgid "Kinyarwanda"
@@ -1451,17 +2380,15 @@ msgstr ""
 msgid "Kirghiz"
 msgstr ""
 
-#. language code: kmb
-#: ../zypp/LanguageCode.cc:704
-#, fuzzy
-msgid "Kimbundu"
-msgstr "סוג"
+#. :KHM:116:
+#: ../zypp/CountryCode.cc:331
+msgid "Kiribati"
+msgstr ""
 
-#. language code: kok
-#: ../zypp/LanguageCode.cc:706
-#, fuzzy
-msgid "Konkani"
-msgstr "קוריאנית"
+#. language code: tlh
+#: ../zypp/LanguageCode.cc:1124
+msgid "Klingon"
+msgstr ""
 
 #. language code: kom kv
 #: ../zypp/LanguageCode.cc:708
@@ -1472,6 +2399,12 @@ msgstr ""
 #: ../zypp/LanguageCode.cc:710
 msgid "Kongo"
 msgstr ""
+
+#. language code: kok
+#: ../zypp/LanguageCode.cc:706
+#, fuzzy
+msgid "Konkani"
+msgstr "קוריאנית"
 
 #. language code: kor ko
 #: ../zypp/LanguageCode.cc:712
@@ -1490,21 +2423,10 @@ msgstr "קוריאנית"
 msgid "Kpelle"
 msgstr "איות"
 
-#. language code: krc
-#: ../zypp/LanguageCode.cc:718
-msgid "Karachay-Balkar"
-msgstr ""
-
 #. language code: kro
 #: ../zypp/LanguageCode.cc:720
 msgid "Kru"
 msgstr ""
-
-#. language code: kru
-#: ../zypp/LanguageCode.cc:722
-#, fuzzy
-msgid "Kurukh"
-msgstr "טורקית"
 
 # PA
 #. language code: kua kj
@@ -1524,11 +2446,27 @@ msgstr "דמה"
 msgid "Kurdish"
 msgstr "כורדית"
 
+#. language code: kru
+#: ../zypp/LanguageCode.cc:722
+#, fuzzy
+msgid "Kurukh"
+msgstr "טורקית"
+
 #. language code: kut
 #: ../zypp/LanguageCode.cc:730
 #, fuzzy
 msgid "Kutenai"
 msgstr "כווית "
+
+#. :KOR:410:
+#: ../zypp/CountryCode.cc:336
+msgid "Kuwait"
+msgstr "כווית "
+
+#. :KEN:404:
+#: ../zypp/CountryCode.cc:329
+msgid "Kyrgyzstan"
+msgstr ""
 
 #. language code: lad
 #: ../zypp/LanguageCode.cc:732
@@ -1556,22 +2494,58 @@ msgstr "תווית"
 msgid "Lao"
 msgstr "לבנון"
 
+#. :KAZ:398:
+#: ../zypp/CountryCode.cc:339
+msgid "Lao People's Democratic Republic"
+msgstr ""
+
 #. language code: lat la
 #: ../zypp/LanguageCode.cc:740
 #, fuzzy
 msgid "Latin"
 msgstr "לטבית"
 
+# LV
+#. :LUX:442:
+#: ../zypp/CountryCode.cc:348
+msgid "Latvia"
+msgstr "לטביה"
+
 #. language code: lav lv
 #: ../zypp/LanguageCode.cc:742
 msgid "Latvian"
 msgstr "לטבית"
+
+#. :LAO:418:
+#: ../zypp/CountryCode.cc:340
+msgid "Lebanon"
+msgstr "לבנון"
+
+#. :LBR:430:
+#: ../zypp/CountryCode.cc:345
+msgid "Lesotho"
+msgstr ""
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
 #, fuzzy
 msgid "Lezghian"
 msgstr "בלגית"
+
+#. :LKA:144:
+#: ../zypp/CountryCode.cc:344
+msgid "Liberia"
+msgstr ""
+
+#. :LVA:428:
+#: ../zypp/CountryCode.cc:349
+msgid "Libya"
+msgstr ""
+
+#. :LCA:662:
+#: ../zypp/CountryCode.cc:342
+msgid "Liechtenstein"
+msgstr ""
 
 # LU
 #. language code: lim li
@@ -1585,15 +2559,34 @@ msgstr "לוקסמבורג"
 msgid "Lingala"
 msgstr ""
 
+# LT
+#. :LSO:426:
+#: ../zypp/CountryCode.cc:346
+msgid "Lithuania"
+msgstr "ליטא"
+
 #. language code: lit lt
 #: ../zypp/LanguageCode.cc:750
 msgid "Lithuanian"
 msgstr "ליטאית"
 
-#. language code: lol
-#: ../zypp/LanguageCode.cc:752
-msgid "Mongo"
-msgstr ""
+#. language code: jbo
+#: ../zypp/LanguageCode.cc:658
+#, fuzzy
+msgid "Lojban"
+msgstr "לבנון"
+
+#. language code: nds
+#: ../zypp/LanguageCode.cc:868
+#, fuzzy
+msgid "Low German"
+msgstr "גרמנית"
+
+#. language code: dsb
+#: ../zypp/LanguageCode.cc:472
+#, fuzzy
+msgid "Lower Sorbian"
+msgstr "סרבית"
 
 #. language code: loz
 #: ../zypp/LanguageCode.cc:754
@@ -1601,34 +2594,27 @@ msgstr ""
 msgid "Lozi"
 msgstr "&חיבור"
 
-# LU
-#. language code: ltz lb
-#: ../zypp/LanguageCode.cc:756
-#, fuzzy
-msgid "Luxembourgish"
-msgstr "לוקסמבורג"
+#. language code: lub lu
+#: ../zypp/LanguageCode.cc:760
+msgid "Luba-Katanga"
+msgstr ""
 
 #. language code: lua
 #: ../zypp/LanguageCode.cc:758
 msgid "Luba-Lulua"
 msgstr ""
 
-#. language code: lub lu
-#: ../zypp/LanguageCode.cc:760
-msgid "Luba-Katanga"
-msgstr ""
-
-# CA
-#. language code: lug lg
-#: ../zypp/LanguageCode.cc:762
-#, fuzzy
-msgid "Ganda"
-msgstr "קנדה"
-
 #. language code: lui
 #: ../zypp/LanguageCode.cc:764
 msgid "Luiseno"
 msgstr ""
+
+#  label text
+#. language code: smj
+#: ../zypp/LanguageCode.cc:1044
+#, fuzzy
+msgid "Lule Sami"
+msgstr "&שם למודול"
 
 # SD
 #. language code: lun
@@ -1648,10 +2634,40 @@ msgstr ""
 msgid "Lushai"
 msgstr "תאילנדית"
 
+# LU
+#. :LTU:440:
+#: ../zypp/CountryCode.cc:347
+msgid "Luxembourg"
+msgstr "לוקסמבורג"
+
+# LU
+#. language code: ltz lb
+#: ../zypp/LanguageCode.cc:756
+#, fuzzy
+msgid "Luxembourgish"
+msgstr "לוקסמבורג"
+
+#. :MNG:496:
+#: ../zypp/CountryCode.cc:359
+#, fuzzy
+msgid "Macao"
+msgstr "מאורית"
+
+# MK
+#. :MHL:584:
+#: ../zypp/CountryCode.cc:355
+msgid "Macedonia"
+msgstr "מקדונית"
+
 #. language code: mac mkd mk
 #: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "מקדונית"
+
+#. :MDA:498:
+#: ../zypp/CountryCode.cc:353
+msgid "Madagascar"
+msgstr ""
 
 #. language code: mad
 #: ../zypp/LanguageCode.cc:776
@@ -1665,12 +2681,6 @@ msgstr "מלטזית"
 #, fuzzy
 msgid "Magahi"
 msgstr "מתמטיקה"
-
-#. language code: mah mh
-#: ../zypp/LanguageCode.cc:780
-#, fuzzy
-msgid "Marshallese"
-msgstr "מלטזית"
 
 # MT
 #. language code: mai
@@ -1687,41 +2697,18 @@ msgid "Makasar"
 msgstr "מלזיה "
 
 # MT
-#. language code: mal ml
-#: ../zypp/LanguageCode.cc:786
+#. language code: mlg mg
+#: ../zypp/LanguageCode.cc:820
 #, fuzzy
-msgid "Malayalam"
+msgid "Malagasy"
 msgstr "מלזיה "
 
-#. language code: man
-#: ../zypp/LanguageCode.cc:788
-#, fuzzy
-msgid "Mandingo"
-msgstr "אזהרה"
-
-#. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
-msgid "Maori"
-msgstr "מאורית"
-
-#. language code: map
-#: ../zypp/LanguageCode.cc:794
-msgid "Austronesian (Other)"
-msgstr ""
-
 # MT
-#. language code: mar mr
-#: ../zypp/LanguageCode.cc:796
+#. :MDV:462:
+#: ../zypp/CountryCode.cc:367
 #, fuzzy
-msgid "Marathi"
-msgstr "מתמטיקה"
-
-# MT
-#. language code: mas
-#: ../zypp/LanguageCode.cc:798
-#, fuzzy
-msgid "Masai"
-msgstr "מלזיה "
+msgid "Malawi"
+msgstr "מלטה"
 
 # MT
 #. language code: may msa ms
@@ -1730,57 +2717,40 @@ msgstr "מלזיה "
 msgid "Malay"
 msgstr "מלטה"
 
-#. language code: mdf
-#: ../zypp/LanguageCode.cc:804
-msgid "Moksha"
-msgstr ""
-
-#  ComboBox item
-#. language code: mdr
-#: ../zypp/LanguageCode.cc:806
+# MT
+#. language code: mal ml
+#: ../zypp/LanguageCode.cc:786
 #, fuzzy
-msgid "Mandar"
-msgstr "מדריך"
-
-#. language code: men
-#: ../zypp/LanguageCode.cc:808
-#, fuzzy
-msgid "Mende"
-msgstr "מצב"
-
-#. language code: mga
-#: ../zypp/LanguageCode.cc:810
-msgid "Irish, Middle (900-1200)"
-msgstr ""
-
-#. language code: mic
-#: ../zypp/LanguageCode.cc:812
-msgid "Mi'kmaq"
-msgstr ""
-
-#. language code: min
-#: ../zypp/LanguageCode.cc:814
-msgid "Minangkabau"
-msgstr ""
-
-#  label text
-#. language code: mis
-#: ../zypp/LanguageCode.cc:816
-#, fuzzy
-msgid "Miscellaneous Languages"
-msgstr "בחרו שפה:"
-
-#. language code: mkh
-#: ../zypp/LanguageCode.cc:818
-msgid "Mon-Khmer (Other)"
-msgstr ""
+msgid "Malayalam"
+msgstr "מלזיה "
 
 # MT
-#. language code: mlg mg
-#: ../zypp/LanguageCode.cc:820
-#, fuzzy
-msgid "Malagasy"
+#. :MEX:484:
+#: ../zypp/CountryCode.cc:369
+msgid "Malaysia"
 msgstr "מלזיה "
+
+#. :MUS:480:
+#: ../zypp/CountryCode.cc:366
+#, fuzzy
+msgid "Maldives"
+msgstr "מלטזית"
+
+#: ../zypp/media/MediaException.cc:115
+msgid "Malformed URI"
+msgstr ""
+
+#. :MKD:807:
+#: ../zypp/CountryCode.cc:356
+#, fuzzy
+msgid "Mali"
+msgstr "&דואר"
+
+# MT
+#. :MSR:500:
+#: ../zypp/CountryCode.cc:364
+msgid "Malta"
+msgstr "מלטה"
 
 #. language code: mlt mt
 #: ../zypp/LanguageCode.cc:822
@@ -1793,6 +2763,19 @@ msgstr "מלטזית"
 #, fuzzy
 msgid "Manchu"
 msgstr "מדריך"
+
+#  ComboBox item
+#. language code: mdr
+#: ../zypp/LanguageCode.cc:806
+#, fuzzy
+msgid "Mandar"
+msgstr "מדריך"
+
+#. language code: man
+#: ../zypp/LanguageCode.cc:788
+#, fuzzy
+msgid "Mandingo"
+msgstr "אזהרה"
 
 #. language code: mni
 #: ../zypp/LanguageCode.cc:826
@@ -1807,9 +2790,157 @@ msgstr "מאורית"
 msgid "Manobo Languages"
 msgstr "שפות"
 
+#  ComboBox item
+#. language code: glv gv
+#: ../zypp/LanguageCode.cc:562
+#, fuzzy
+msgid "Manx"
+msgstr "מדריך"
+
+#. language code: mao mri mi
+#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+msgid "Maori"
+msgstr "מאורית"
+
+# MT
+#. language code: mar mr
+#: ../zypp/LanguageCode.cc:796
+#, fuzzy
+msgid "Marathi"
+msgstr "מתמטיקה"
+
+#. language code: chm
+#: ../zypp/LanguageCode.cc:406
+#, fuzzy
+msgid "Mari"
+msgstr "מאורית"
+
+# IE
+#. :MDG:450:
+#: ../zypp/CountryCode.cc:354
+#, fuzzy
+msgid "Marshall Islands"
+msgstr "איי פר-אר"
+
+#. language code: mah mh
+#: ../zypp/LanguageCode.cc:780
+#, fuzzy
+msgid "Marshallese"
+msgstr "מלטזית"
+
+#. :MNP:580:
+#: ../zypp/CountryCode.cc:361
+#, fuzzy
+msgid "Martinique"
+msgstr "דקה"
+
+#  Table header 4/4
+#. language code: mwr
+#: ../zypp/LanguageCode.cc:846
+#, fuzzy
+msgid "Marwari"
+msgstr "חומרה"
+
+# MT
+#. language code: mas
+#: ../zypp/LanguageCode.cc:798
+#, fuzzy
+msgid "Masai"
+msgstr "מלזיה "
+
+# LT
+#. :MTQ:474:
+#: ../zypp/CountryCode.cc:362
+#, fuzzy
+msgid "Mauritania"
+msgstr "ליטא"
+
+#. :MLT:470:
+#: ../zypp/CountryCode.cc:365
+msgid "Mauritius"
+msgstr ""
+
+# BD
+#. language code: myn
+#: ../zypp/LanguageCode.cc:848
+#, fuzzy
+msgid "Mayan Languages"
+msgstr "שפות"
+
+#  ComboBox item
+#. :YEM:887:
+#: ../zypp/CountryCode.cc:454
+#, fuzzy
+msgid "Mayotte"
+msgstr "אדון"
+
+#: ../zypp/media/MediaException.cc:169
+#, c-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:175
+#, c-format
+msgid "Medium '%s' is in use by another instance"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:72
+msgid "Medium not attached"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:53
+#, c-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr ""
+
+#. language code: men
+#: ../zypp/LanguageCode.cc:808
+#, fuzzy
+msgid "Mende"
+msgstr "מצב"
+
+#. :FRA:250:
+#: ../zypp/CountryCode.cc:291
+msgid "Metropolitan France"
+msgstr ""
+
+# MX
+#. :MWI:454:
+#: ../zypp/CountryCode.cc:368
+msgid "Mexico"
+msgstr "מקסיקו"
+
+#. language code: mic
+#: ../zypp/LanguageCode.cc:812
+msgid "Mi'kmaq"
+msgstr ""
+
+#. language code: min
+#: ../zypp/LanguageCode.cc:814
+msgid "Minangkabau"
+msgstr ""
+
+#. language code: mwl
+#: ../zypp/LanguageCode.cc:844
+#, fuzzy
+msgid "Mirandese"
+msgstr "מלטזית"
+
+#  label text
+#. language code: mis
+#: ../zypp/LanguageCode.cc:816
+#, fuzzy
+msgid "Miscellaneous Languages"
+msgstr "בחרו שפה:"
+
 #. language code: moh
 #: ../zypp/LanguageCode.cc:830
 msgid "Mohawk"
+msgstr ""
+
+#. language code: mdf
+#: ../zypp/LanguageCode.cc:804
+msgid "Moksha"
 msgstr ""
 
 #. language code: mol mo
@@ -1818,17 +2949,60 @@ msgstr ""
 msgid "Moldavian"
 msgstr "יגוסלביה"
 
+#. :MCO:492:
+#: ../zypp/CountryCode.cc:352
+#, fuzzy
+msgid "Moldova"
+msgstr "סלובקית"
+
+#. language code: mkh
+#: ../zypp/LanguageCode.cc:818
+msgid "Mon-Khmer (Other)"
+msgstr ""
+
+#. :MAR:504:
+#: ../zypp/CountryCode.cc:351
+#, fuzzy
+msgid "Monaco"
+msgstr "שני"
+
+#. language code: lol
+#: ../zypp/LanguageCode.cc:752
+msgid "Mongo"
+msgstr ""
+
+#. :MMR:104:
+#: ../zypp/CountryCode.cc:358
+msgid "Mongolia"
+msgstr ""
+
 #. language code: mon mn
 #: ../zypp/LanguageCode.cc:834
 #, fuzzy
 msgid "Mongolian"
 msgstr "מקדונית"
 
+#. :MRT:478:
+#: ../zypp/CountryCode.cc:363
+msgid "Montserrat"
+msgstr ""
+
+#. :LBY:434:
+#: ../zypp/CountryCode.cc:350
+msgid "Morocco"
+msgstr "מרוקו"
+
 #. language code: mos
 #: ../zypp/LanguageCode.cc:836
 #, fuzzy
 msgid "Mossi"
 msgstr "מורס"
+
+#. :MYS:458:
+#: ../zypp/CountryCode.cc:370
+#, fuzzy
+msgid "Mozambique"
+msgstr "נייד"
 
 # BD
 #. language code: mul
@@ -1844,36 +3018,12 @@ msgstr "שפות"
 msgid "Munda languages"
 msgstr "שפות"
 
-#. language code: mus
-#: ../zypp/LanguageCode.cc:842
+# PA
+#. :MLI:466:
+#: ../zypp/CountryCode.cc:357
 #, fuzzy
-msgid "Creek"
-msgstr "יוונית"
-
-#. language code: mwl
-#: ../zypp/LanguageCode.cc:844
-#, fuzzy
-msgid "Mirandese"
-msgstr "מלטזית"
-
-#  Table header 4/4
-#. language code: mwr
-#: ../zypp/LanguageCode.cc:846
-#, fuzzy
-msgid "Marwari"
-msgstr "חומרה"
-
-# BD
-#. language code: myn
-#: ../zypp/LanguageCode.cc:848
-#, fuzzy
-msgid "Mayan Languages"
-msgstr "שפות"
-
-#. language code: myv
-#: ../zypp/LanguageCode.cc:850
-msgid "Erzya"
-msgstr ""
+msgid "Myanmar"
+msgstr "פנמה"
 
 #  ComboBox item
 #. language code: nah
@@ -1882,19 +3032,14 @@ msgstr ""
 msgid "Nahuatl"
 msgstr "מדריך"
 
-#. language code: nai
-#: ../zypp/LanguageCode.cc:854
-msgid "North American Indian"
+#. :MOZ:508:
+#: ../zypp/CountryCode.cc:371
+msgid "Namibia"
 msgstr ""
 
-#. language code: nap
-#: ../zypp/LanguageCode.cc:856
-msgid "Neapolitan"
-msgstr ""
-
-#. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:380
+#. language code: nau na
+#: ../zypp/CountryCode.cc:380 ../zypp/LanguageCode.cc:858
 msgid "Nauru"
 msgstr ""
 
@@ -1904,14 +3049,14 @@ msgstr ""
 msgid "Navajo"
 msgstr "ניווט"
 
-#. language code: nbl nr
-#: ../zypp/LanguageCode.cc:862
-msgid "Ndebele, South"
-msgstr ""
-
 #. language code: nde nd
 #: ../zypp/LanguageCode.cc:864
 msgid "Ndebele, North"
+msgstr ""
+
+#. language code: nbl nr
+#: ../zypp/LanguageCode.cc:862
+msgid "Ndebele, South"
 msgstr ""
 
 #. language code: ndo ng
@@ -1919,11 +3064,20 @@ msgstr ""
 msgid "Ndonga"
 msgstr ""
 
-#. language code: nds
-#: ../zypp/LanguageCode.cc:868
-#, fuzzy
-msgid "Low German"
-msgstr "גרמנית"
+#. language code: nap
+#: ../zypp/LanguageCode.cc:856
+msgid "Neapolitan"
+msgstr ""
+
+#. :NOR:578:
+#: ../zypp/CountryCode.cc:379
+msgid "Nepal"
+msgstr ""
+
+#. language code: new
+#: ../zypp/LanguageCode.cc:872
+msgid "Nepal Bhasa"
+msgstr ""
 
 #. language code: nep ne
 #: ../zypp/LanguageCode.cc:870
@@ -1931,14 +3085,46 @@ msgstr "גרמנית"
 msgid "Nepali"
 msgstr "בנגאלית"
 
-#. language code: new
-#: ../zypp/LanguageCode.cc:872
-msgid "Nepal Bhasa"
-msgstr ""
+# NL
+#. :NIC:558:
+#: ../zypp/CountryCode.cc:377
+msgid "Netherlands"
+msgstr "הולנד"
+
+# NL
+#. :ARM:051:
+#: ../zypp/CountryCode.cc:224
+#, fuzzy
+msgid "Netherlands Antilles"
+msgstr "הולנד"
+
+# MK
+#. :NAM:516:
+#: ../zypp/CountryCode.cc:372
+#, fuzzy
+msgid "New Caledonia"
+msgstr "מקדונית"
+
+# NZ
+#. :NIU:570:
+#: ../zypp/CountryCode.cc:382
+msgid "New Zealand"
+msgstr "ניו זילנד"
 
 #. language code: nia
 #: ../zypp/LanguageCode.cc:874
 msgid "Nias"
+msgstr ""
+
+# PY
+#. :NGA:566:
+#: ../zypp/CountryCode.cc:376
+msgid "Nicaragua"
+msgstr "ניקאראגואה"
+
+#. :NCL:540:
+#: ../zypp/CountryCode.cc:373
+msgid "Niger"
 msgstr ""
 
 #. language code: nic
@@ -1946,15 +3132,91 @@ msgstr ""
 msgid "Niger-Kordofanian (Other)"
 msgstr ""
 
+# BG
+#. :NFK:574:
+#: ../zypp/CountryCode.cc:375
+#, fuzzy
+msgid "Nigeria"
+msgstr "אלג'יר"
+
+#. language code: ssa
+#: ../zypp/LanguageCode.cc:1072
+msgid "Nilo-Saharan (Other)"
+msgstr ""
+
+#. :NRU:520:
+#: ../zypp/CountryCode.cc:381
+#, fuzzy
+msgid "Niue"
+msgstr "דקה"
+
 #. language code: niu
 #: ../zypp/LanguageCode.cc:878
 msgid "Niuean"
 msgstr ""
 
-#. language code: nno nn
-#: ../zypp/LanguageCode.cc:880
+#. Defined CountryCode constants
+#. Defined LanguageCode constants
+#: ../zypp/CountryCode.cc:215 ../zypp/LanguageCode.cc:225
 #, fuzzy
-msgid "Norwegian Nynorsk"
+msgid "No Code"
+msgstr "מצב"
+
+#: ../zypp/repo/RepoProvideFile.cc:213
+msgid "No url in repository."
+msgstr ""
+
+#. language code: nog
+#: ../zypp/LanguageCode.cc:884
+msgid "Nogai"
+msgstr ""
+
+# IE
+#. :NER:562:
+#: ../zypp/CountryCode.cc:374
+#, fuzzy
+msgid "Norfolk Island"
+msgstr "איי פר-אר"
+
+#. language code: non
+#: ../zypp/LanguageCode.cc:886
+msgid "Norse, Old"
+msgstr ""
+
+#. language code: nai
+#: ../zypp/LanguageCode.cc:854
+msgid "North American Indian"
+msgstr ""
+
+#. :KNA:659:
+#: ../zypp/CountryCode.cc:334
+msgid "North Korea"
+msgstr ""
+
+#. :MAC:446:
+#: ../zypp/CountryCode.cc:360
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#. language code: sme se
+#: ../zypp/LanguageCode.cc:1040
+msgid "Northern Sami"
+msgstr ""
+
+#. language code: nso
+#: ../zypp/LanguageCode.cc:890
+msgid "Northern Sotho"
+msgstr ""
+
+# NO
+#. :NLD:528:
+#: ../zypp/CountryCode.cc:378
+msgid "Norway"
+msgstr "נורבגיה"
+
+#. language code: nor no
+#: ../zypp/LanguageCode.cc:888
+msgid "Norwegian"
 msgstr "הנורבגית"
 
 #. language code: nob nb
@@ -1963,24 +3225,14 @@ msgstr "הנורבגית"
 msgid "Norwegian Bokmal"
 msgstr "הנורבגית"
 
-#. language code: nog
-#: ../zypp/LanguageCode.cc:884
-msgid "Nogai"
-msgstr ""
-
-#. language code: non
-#: ../zypp/LanguageCode.cc:886
-msgid "Norse, Old"
-msgstr ""
-
-#. language code: nor no
-#: ../zypp/LanguageCode.cc:888
-msgid "Norwegian"
+#. language code: nno nn
+#: ../zypp/LanguageCode.cc:880
+#, fuzzy
+msgid "Norwegian Nynorsk"
 msgstr "הנורבגית"
 
-#. language code: nso
-#: ../zypp/LanguageCode.cc:890
-msgid "Northern Sotho"
+#: ../zypp/target/hal/HalContext.cc:843
+msgid "Not a CDROM drive"
 msgstr ""
 
 # BD
@@ -1989,18 +3241,6 @@ msgstr ""
 #, fuzzy
 msgid "Nubian Languages"
 msgstr "שפות"
-
-#. language code: nwc
-#: ../zypp/LanguageCode.cc:894
-msgid "Classical Newari"
-msgstr ""
-
-# CL
-#. language code: nya ny
-#: ../zypp/LanguageCode.cc:896
-#, fuzzy
-msgid "Chichewa"
-msgstr "צ'ילה"
 
 #  table header texts
 #. language code: nym
@@ -2034,6 +3274,15 @@ msgstr ""
 msgid "Ojibwa"
 msgstr ""
 
+#. :NZL:554:
+#: ../zypp/CountryCode.cc:383
+msgid "Oman"
+msgstr "עומן"
+
+#: ../zypp/media/MediaException.cc:145
+msgid "Operation not supported by medium"
+msgstr ""
+
 #. language code: ori or
 #: ../zypp/LanguageCode.cc:910
 msgid "Oriya"
@@ -2055,11 +3304,6 @@ msgstr ""
 msgid "Ossetian"
 msgstr "רוסית"
 
-#. language code: ota
-#: ../zypp/LanguageCode.cc:918
-msgid "Turkish, Ottoman (1500-1928)"
-msgstr ""
-
 # BD
 #. language code: oto
 #: ../zypp/LanguageCode.cc:920
@@ -2067,21 +3311,47 @@ msgstr ""
 msgid "Otomian Languages"
 msgstr "שפות"
 
-#. language code: paa
-#: ../zypp/LanguageCode.cc:922
-msgid "Papuan (Other)"
+#. TranslatorExplanation %s = package being checked for integrity
+#: ../zypp/repo/PackageProvider.cc:314
+#, c-format
+msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr ""
-
-#. language code: pag
-#: ../zypp/LanguageCode.cc:924
-#, fuzzy
-msgid "Pangasinan"
-msgstr "הונגרית"
 
 #. language code: pal
 #: ../zypp/LanguageCode.cc:926
 msgid "Pahlavi"
 msgstr ""
+
+#. :PHL:608:
+#: ../zypp/CountryCode.cc:389
+msgid "Pakistan"
+msgstr "פקיסטן"
+
+# PA
+#. :PRT:620:
+#: ../zypp/CountryCode.cc:396
+#, fuzzy
+msgid "Palau"
+msgstr "פאלם"
+
+# PY
+#. language code: pau
+#: ../zypp/LanguageCode.cc:934
+#, fuzzy
+msgid "Palauan"
+msgstr "פרגואי"
+
+#. :PRI:630:
+#: ../zypp/CountryCode.cc:394
+msgid "Palestinian Territory"
+msgstr ""
+
+# PA
+#. language code: pli pi
+#: ../zypp/LanguageCode.cc:946
+#, fuzzy
+msgid "Pali"
+msgstr "פאלם"
 
 # PY
 #. language code: pam
@@ -2089,6 +3359,18 @@ msgstr ""
 #, fuzzy
 msgid "Pampanga"
 msgstr "פרגואי"
+
+# PA
+#. :OMN:512:
+#: ../zypp/CountryCode.cc:384
+msgid "Panama"
+msgstr "פנמה"
+
+#. language code: pag
+#: ../zypp/LanguageCode.cc:924
+#, fuzzy
+msgid "Pangasinan"
+msgstr "הונגרית"
 
 #. language code: pan pa
 #: ../zypp/LanguageCode.cc:930
@@ -2102,16 +3384,43 @@ msgstr "פונוגאבי"
 msgid "Papiamento"
 msgstr "ניהול"
 
+#. :PYF:258:
+#: ../zypp/CountryCode.cc:387
+msgid "Papua New Guinea"
+msgstr ""
+
+#. language code: paa
+#: ../zypp/LanguageCode.cc:922
+msgid "Papuan (Other)"
+msgstr ""
+
 # PY
-#. language code: pau
-#: ../zypp/LanguageCode.cc:934
-#, fuzzy
-msgid "Palauan"
+#. :PLW:585:
+#: ../zypp/CountryCode.cc:397
+msgid "Paraguay"
 msgstr "פרגואי"
 
-#. language code: peo
-#: ../zypp/LanguageCode.cc:936
-msgid "Persian, Old (ca.600-400 B.C.)"
+#: ../zypp/media/MediaException.cc:106
+#, c-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:98
+#, c-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1184
+msgid "Path Parameter parsing not supported for this URL"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:727
+msgid "Path parameter parsing not supported for this URL"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:200
+#, c-format
+msgid "Permission to access '%s' denied."
 msgstr ""
 
 #. language code: per fas fa
@@ -2120,10 +3429,26 @@ msgstr ""
 msgid "Persian"
 msgstr "סרבית"
 
+#. language code: peo
+#: ../zypp/LanguageCode.cc:936
+msgid "Persian, Old (ca.600-400 B.C.)"
+msgstr ""
+
+# PE
+#. :PAN:591:
+#: ../zypp/CountryCode.cc:385
+msgid "Peru"
+msgstr "פרו"
+
 #. language code: phi
 #: ../zypp/LanguageCode.cc:942
 #, fuzzy
 msgid "Philippine (Other)"
+msgstr "הפיליפינים"
+
+#. :PNG:598:
+#: ../zypp/CountryCode.cc:388
+msgid "Philippines"
 msgstr "הפיליפינים"
 
 #. language code: phn
@@ -2132,23 +3457,34 @@ msgstr "הפיליפינים"
 msgid "Phoenician"
 msgstr "סלובנית"
 
-# PA
-#. language code: pli pi
-#: ../zypp/LanguageCode.cc:946
+#. :SPM:666:
+#: ../zypp/CountryCode.cc:392
 #, fuzzy
-msgid "Pali"
-msgstr "פאלם"
-
-#. language code: pol pl
-#: ../zypp/LanguageCode.cc:948
-msgid "Polish"
-msgstr "פולנית"
+msgid "Pitcairn"
+msgstr "פקיסטן"
 
 #. language code: pon
 #: ../zypp/LanguageCode.cc:950
 #, fuzzy
 msgid "Pohnpeian"
 msgstr "אינדונזית"
+
+# PL
+#. :PAK:586:
+#: ../zypp/CountryCode.cc:390
+msgid "Poland"
+msgstr "פולין"
+
+#. language code: pol pl
+#: ../zypp/LanguageCode.cc:948
+msgid "Polish"
+msgstr "פולנית"
+
+# PT
+#. :PSE:275:
+#: ../zypp/CountryCode.cc:395
+msgid "Portugal"
+msgstr "פורטוגל"
 
 #. language code: por pt
 #: ../zypp/LanguageCode.cc:952
@@ -2166,14 +3502,40 @@ msgstr "שפה עיקרית: %1"
 msgid "Provencal, Old (to 1500)"
 msgstr ""
 
+#. :PCN:612:
+#: ../zypp/CountryCode.cc:393
+msgid "Puerto Rico"
+msgstr "פורטו ריקו"
+
 #. language code: pus ps
 #: ../zypp/LanguageCode.cc:958
 msgid "Pushto"
 msgstr ""
 
+# MT
+#. :PRY:600:
+#: ../zypp/CountryCode.cc:398
+msgid "Qatar"
+msgstr "קטאר"
+
 #. language code: que qu
 #: ../zypp/LanguageCode.cc:960
 msgid "Quechua"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+msgid "Query string parsing not supported for this URL"
+msgstr ""
+
+#. TranslatorExplanation after semicolon is error message
+#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
+#: ../zypp/target/rpm/RpmDb.cc:2179
+msgid "RPM failed: "
+msgstr ""
+
+#. language code: roh rm
+#: ../zypp/LanguageCode.cc:970
+msgid "Raeto-Romance"
 msgstr ""
 
 # TW
@@ -2195,15 +3557,45 @@ msgstr "יפן"
 msgid "Rarotongan"
 msgstr ""
 
+#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+msgid "Relative path not allowed if authority exists"
+msgstr ""
+
+#: ../zypp/RepoManager.cc:1122
+#, c-format
+msgid "Removing repository '%s'"
+msgstr ""
+
+#: ../zypp/Repository.cc:104
+#, c-format
+msgid "RepoInfo alias (%s) does not match repository name (%s)"
+msgstr ""
+
+#: ../zypp/parser/susetags/RepoParser.cc:232
+msgid "Required file is missing: "
+msgstr ""
+
+#. :QAT:634:
+#: ../zypp/CountryCode.cc:399
+#, fuzzy
+msgid "Reunion"
+msgstr "&אזור"
+
 #. language code: roa
 #: ../zypp/LanguageCode.cc:968
 msgid "Romance (Other)"
 msgstr ""
 
-#. language code: roh rm
-#: ../zypp/LanguageCode.cc:970
-msgid "Raeto-Romance"
-msgstr ""
+# RO
+#. :REU:638:
+#: ../zypp/CountryCode.cc:400
+msgid "Romania"
+msgstr "רומניה"
+
+#. language code: rum ron ro
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+msgid "Romanian"
+msgstr "רומנית"
 
 # RO
 #. language code: rom
@@ -2211,11 +3603,6 @@ msgstr ""
 #, fuzzy
 msgid "Romany"
 msgstr "רומניה"
-
-#. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
-msgid "Romanian"
-msgstr "רומנית"
 
 # SD
 #. language code: run rn
@@ -2228,6 +3615,78 @@ msgstr "קול"
 #: ../zypp/LanguageCode.cc:980
 msgid "Russian"
 msgstr "רוסית"
+
+#. :ROU:642:
+#: ../zypp/CountryCode.cc:401
+msgid "Russian Federation"
+msgstr ""
+
+# CA
+#. :RUS:643:
+#: ../zypp/CountryCode.cc:402
+#, fuzzy
+msgid "Rwanda"
+msgstr "קנדה"
+
+#. :SGP:702:
+#: ../zypp/CountryCode.cc:409
+msgid "Saint Helena"
+msgstr ""
+
+#. :COM:174:
+#: ../zypp/CountryCode.cc:333
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#. :LBN:422:
+#: ../zypp/CountryCode.cc:341
+msgid "Saint Lucia"
+msgstr ""
+
+#. :POL:616:
+#: ../zypp/CountryCode.cc:391
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+#. :VAT:336:
+#: ../zypp/CountryCode.cc:445
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+# BD
+#. language code: sal
+#: ../zypp/LanguageCode.cc:990
+#, fuzzy
+msgid "Salishan Languages"
+msgstr "שפות"
+
+#. language code: sam
+#: ../zypp/LanguageCode.cc:992
+msgid "Samaritan Aramaic"
+msgstr ""
+
+# BD
+#. language code: smi
+#: ../zypp/LanguageCode.cc:1042
+#, fuzzy
+msgid "Sami Languages (Other)"
+msgstr "שפות"
+
+#. :WLF:876:
+#: ../zypp/CountryCode.cc:452
+msgid "Samoa"
+msgstr ""
+
+#. language code: smo sm
+#: ../zypp/LanguageCode.cc:1048
+#, fuzzy
+msgid "Samoan"
+msgstr "עומן"
+
+#. :SLE:694:
+#: ../zypp/CountryCode.cc:414
+msgid "San Marino"
+msgstr ""
 
 # CA
 #. language code: sad
@@ -2243,29 +3702,6 @@ msgstr "קנדה"
 msgid "Sango"
 msgstr "סודן"
 
-#. language code: sah
-#: ../zypp/LanguageCode.cc:986
-#, fuzzy
-msgid "Yakut"
-msgstr "נקודת שבירה"
-
-#. language code: sai
-#: ../zypp/LanguageCode.cc:988
-msgid "South American Indian (Other)"
-msgstr ""
-
-# BD
-#. language code: sal
-#: ../zypp/LanguageCode.cc:990
-#, fuzzy
-msgid "Salishan Languages"
-msgstr "שפות"
-
-#. language code: sam
-#: ../zypp/LanguageCode.cc:992
-msgid "Samaritan Aramaic"
-msgstr ""
-
 #  Column header: minimum = 5 characters   fill with space if needed
 #. language code: san sa
 #: ../zypp/LanguageCode.cc:994
@@ -2273,37 +3709,39 @@ msgstr ""
 msgid "Sanskrit"
 msgstr "התחלה"
 
-#. language code: sas
-#: ../zypp/LanguageCode.cc:996
-msgid "Sasak"
-msgstr ""
-
 #. language code: sat
 #: ../zypp/LanguageCode.cc:998
 #, fuzzy
 msgid "Santali"
 msgstr "לווין"
 
-#. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
-msgid "Serbian"
-msgstr "סרבית"
-
-#. language code: scn
-#: ../zypp/LanguageCode.cc:1004
-msgid "Sicilian"
+#. :SUR:740:
+#: ../zypp/CountryCode.cc:418
+msgid "Sao Tome and Principe"
 msgstr ""
+
+# UA
+#. language code: srd sc
+#: ../zypp/LanguageCode.cc:1068
+#, fuzzy
+msgid "Sardinian"
+msgstr "אוקראינית"
+
+#. language code: sas
+#: ../zypp/LanguageCode.cc:996
+msgid "Sasak"
+msgstr ""
+
+#. :RWA:646:
+#: ../zypp/CountryCode.cc:403
+msgid "Saudi Arabia"
+msgstr "ערב הסעודית"
 
 #. language code: sco
 #: ../zypp/LanguageCode.cc:1006
 #, fuzzy
 msgid "Scots"
 msgstr "איקונים"
-
-#. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
-msgid "Croatian"
-msgstr "קרואטית"
 
 #. language code: sel
 #: ../zypp/LanguageCode.cc:1012
@@ -2316,17 +3754,32 @@ msgstr "דלג"
 msgid "Semitic (Other)"
 msgstr ""
 
-#. language code: sga
-#: ../zypp/LanguageCode.cc:1016
-msgid "Irish, Old (to 900)"
+#. :SMR:674:
+#: ../zypp/CountryCode.cc:415
+#, fuzzy
+msgid "Senegal"
+msgstr "בנגאלית"
+
+#. :CRI:188:
+#: ../zypp/CountryCode.cc:266
+msgid "Serbia and Montenegro"
 msgstr ""
 
-# BD
-#. language code: sgn
-#: ../zypp/LanguageCode.cc:1018
+#. language code: scc srp sr
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+msgid "Serbian"
+msgstr "סרבית"
+
+#. language code: srr
+#: ../zypp/LanguageCode.cc:1070
 #, fuzzy
-msgid "Sign Languages"
-msgstr "שפות"
+msgid "Serer"
+msgstr "שרת"
+
+#. :SLB:090:
+#: ../zypp/CountryCode.cc:405
+msgid "Seychelles"
+msgstr ""
 
 # SD
 #. language code: shn
@@ -2335,14 +3788,73 @@ msgstr "שפות"
 msgid "Shan"
 msgstr "סודן"
 
+# SI
+#. language code: sna sn
+#: ../zypp/LanguageCode.cc:1052
+#, fuzzy
+msgid "Shona"
+msgstr "סלובניה"
+
+# LT
+#. language code: iii ii
+#: ../zypp/LanguageCode.cc:628
+#, fuzzy
+msgid "Sichuan Yi"
+msgstr "ליטא"
+
+#. language code: scn
+#: ../zypp/LanguageCode.cc:1004
+msgid "Sicilian"
+msgstr ""
+
 #. language code: sid
 #: ../zypp/LanguageCode.cc:1022
 msgid "Sidamo"
 msgstr ""
 
+#  Device type label
+#. :SVK:703:
+#: ../zypp/CountryCode.cc:413
+#, fuzzy
+msgid "Sierra Leone"
+msgstr "קו סיריאלי"
+
+# BD
+#. language code: sgn
+#: ../zypp/LanguageCode.cc:1018
+#, fuzzy
+msgid "Sign Languages"
+msgstr "שפות"
+
+#: ../zypp/KeyRing.cc:568
+#, c-format
+msgid "Signature file %s not found"
+msgstr ""
+
+#. language code: bla
+#: ../zypp/LanguageCode.cc:354
+msgid "Siksika"
+msgstr ""
+
+#. language code: snd sd
+#: ../zypp/LanguageCode.cc:1054
+#, fuzzy
+msgid "Sindhi"
+msgstr "סוג"
+
+#. :SWE:752:
+#: ../zypp/CountryCode.cc:408
+msgid "Singapore"
+msgstr "סינגפור"
+
 #. language code: sin si
 #: ../zypp/LanguageCode.cc:1024
 msgid "Sinhala"
+msgstr ""
+
+#. language code: sit
+#: ../zypp/LanguageCode.cc:1028
+msgid "Sino-Tibetan (Other)"
 msgstr ""
 
 #  label text
@@ -2352,9 +3864,14 @@ msgstr ""
 msgid "Siouan Languages"
 msgstr "בחרו שפה:"
 
-#. language code: sit
-#: ../zypp/LanguageCode.cc:1028
-msgid "Sino-Tibetan (Other)"
+#. language code: sms
+#: ../zypp/LanguageCode.cc:1050
+msgid "Skolt Sami"
+msgstr ""
+
+#. language code: den
+#: ../zypp/LanguageCode.cc:460
+msgid "Slave (Athapascan)"
 msgstr ""
 
 #. language code: sla
@@ -2367,69 +3884,22 @@ msgstr ""
 msgid "Slovak"
 msgstr "סלובקית"
 
+# SK
+#. :SJM:744:
+#: ../zypp/CountryCode.cc:412
+msgid "Slovakia"
+msgstr "סלובקיה"
+
+# SI
+#. :SHN:654:
+#: ../zypp/CountryCode.cc:410
+msgid "Slovenia"
+msgstr "סלובניה"
+
 #. language code: slv sl
 #: ../zypp/LanguageCode.cc:1036
 msgid "Slovenian"
 msgstr "סלובנית"
-
-#. language code: sma
-#: ../zypp/LanguageCode.cc:1038
-msgid "Southern Sami"
-msgstr ""
-
-#. language code: sme se
-#: ../zypp/LanguageCode.cc:1040
-msgid "Northern Sami"
-msgstr ""
-
-# BD
-#. language code: smi
-#: ../zypp/LanguageCode.cc:1042
-#, fuzzy
-msgid "Sami Languages (Other)"
-msgstr "שפות"
-
-#  label text
-#. language code: smj
-#: ../zypp/LanguageCode.cc:1044
-#, fuzzy
-msgid "Lule Sami"
-msgstr "&שם למודול"
-
-#. language code: smn
-#: ../zypp/LanguageCode.cc:1046
-msgid "Inari Sami"
-msgstr ""
-
-#. language code: smo sm
-#: ../zypp/LanguageCode.cc:1048
-#, fuzzy
-msgid "Samoan"
-msgstr "עומן"
-
-#. language code: sms
-#: ../zypp/LanguageCode.cc:1050
-msgid "Skolt Sami"
-msgstr ""
-
-# SI
-#. language code: sna sn
-#: ../zypp/LanguageCode.cc:1052
-#, fuzzy
-msgid "Shona"
-msgstr "סלובניה"
-
-#. language code: snd sd
-#: ../zypp/LanguageCode.cc:1054
-#, fuzzy
-msgid "Sindhi"
-msgstr "סוג"
-
-#. language code: snk
-#: ../zypp/LanguageCode.cc:1056
-#, fuzzy
-msgid "Soninke"
-msgstr "המשך"
 
 # SD
 #. language code: sog
@@ -2438,6 +3908,13 @@ msgstr "המשך"
 msgid "Sogdian"
 msgstr "סודן"
 
+# IE
+#. :SAU:682:
+#: ../zypp/CountryCode.cc:404
+#, fuzzy
+msgid "Solomon Islands"
+msgstr "איי פר-אר"
+
 # RO
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -2445,37 +3922,133 @@ msgstr "סודן"
 msgid "Somali"
 msgstr "רומניה"
 
+# RO
+#. :SEN:686:
+#: ../zypp/CountryCode.cc:416
+#, fuzzy
+msgid "Somalia"
+msgstr "רומניה"
+
 #. language code: son
 #: ../zypp/LanguageCode.cc:1062
 msgid "Songhai"
 msgstr ""
+
+#. language code: snk
+#: ../zypp/LanguageCode.cc:1056
+#, fuzzy
+msgid "Soninke"
+msgstr "המשך"
+
+#  label text
+#. language code: wen
+#: ../zypp/LanguageCode.cc:1196
+#, fuzzy
+msgid "Sorbian Languages"
+msgstr "בחרו שפה:"
 
 #. language code: sot st
 #: ../zypp/LanguageCode.cc:1064
 msgid "Sotho, Southern"
 msgstr ""
 
+# ZA
+#. :MYT:175:
+#: ../zypp/CountryCode.cc:455
+msgid "South Africa"
+msgstr "דרום אפריקה"
+
+#. language code: sai
+#: ../zypp/LanguageCode.cc:988
+msgid "South American Indian (Other)"
+msgstr ""
+
+#. :GRC:300:
+#: ../zypp/CountryCode.cc:305
+msgid "South Georgia and the South Sandwich Islands"
+msgstr ""
+
+# ZA
+#. :PRK:408:
+#: ../zypp/CountryCode.cc:335
+#, fuzzy
+msgid "South Korea"
+msgstr "דרום אפריקה"
+
+# ZA
+#. language code: alt
+#: ../zypp/LanguageCode.cc:270
+#, fuzzy
+msgid "Southern Altai"
+msgstr "דרום אפריקה"
+
+#. language code: sma
+#: ../zypp/LanguageCode.cc:1038
+msgid "Southern Sami"
+msgstr ""
+
+# ES
+#. :ERI:232:
+#: ../zypp/CountryCode.cc:283
+msgid "Spain"
+msgstr "ספרד"
+
 #. language code: spa es
 #: ../zypp/LanguageCode.cc:1066
 msgid "Spanish"
 msgstr "ספרדית"
 
-# UA
-#. language code: srd sc
-#: ../zypp/LanguageCode.cc:1068
+#. :LIE:438:
+#: ../zypp/CountryCode.cc:343
 #, fuzzy
-msgid "Sardinian"
-msgstr "אוקראינית"
+msgid "Sri Lanka"
+msgstr "סרבית"
 
-#. language code: srr
-#: ../zypp/LanguageCode.cc:1070
+# SD
+#. :SYC:690:
+#: ../zypp/CountryCode.cc:406
+msgid "Sudan"
+msgstr "סודן"
+
+#. language code: suk
+#: ../zypp/LanguageCode.cc:1076
 #, fuzzy
-msgid "Serer"
-msgstr "שרת"
+msgid "Sukuma"
+msgstr "סיכום"
 
-#. language code: ssa
-#: ../zypp/LanguageCode.cc:1072
-msgid "Nilo-Saharan (Other)"
+#. language code: sux
+#: ../zypp/LanguageCode.cc:1082
+#, fuzzy
+msgid "Sumerian"
+msgstr "סרבית"
+
+# SD
+#. language code: sun su
+#: ../zypp/LanguageCode.cc:1078
+#, fuzzy
+msgid "Sundanese"
+msgstr "סודן"
+
+#. :SOM:706:
+#: ../zypp/CountryCode.cc:417
+msgid "Suriname"
+msgstr ""
+
+#  heading text
+#. language code: sus
+#: ../zypp/LanguageCode.cc:1080
+#, fuzzy
+msgid "Susu"
+msgstr "סטטוס"
+
+#. :SVN:705:
+#: ../zypp/CountryCode.cc:411
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+#. language code: swa sw
+#: ../zypp/LanguageCode.cc:1084
+msgid "Swahili"
 msgstr ""
 
 #  Column header: minimum = 5 characters   fill with space if needed
@@ -2485,47 +4058,56 @@ msgstr ""
 msgid "Swati"
 msgstr "התחלה"
 
-#. language code: suk
-#: ../zypp/LanguageCode.cc:1076
+# TH
+#. :SYR:760:
+#: ../zypp/CountryCode.cc:421
 #, fuzzy
-msgid "Sukuma"
-msgstr "סיכום"
+msgid "Swaziland"
+msgstr "תאילנד"
 
-# SD
-#. language code: sun su
-#: ../zypp/LanguageCode.cc:1078
-#, fuzzy
-msgid "Sundanese"
-msgstr "סודן"
-
-#  heading text
-#. language code: sus
-#: ../zypp/LanguageCode.cc:1080
-#, fuzzy
-msgid "Susu"
-msgstr "סטטוס"
-
-#. language code: sux
-#: ../zypp/LanguageCode.cc:1082
-#, fuzzy
-msgid "Sumerian"
-msgstr "סרבית"
-
-#. language code: swa sw
-#: ../zypp/LanguageCode.cc:1084
-msgid "Swahili"
-msgstr ""
+# SE
+#. :SDN:736:
+#: ../zypp/CountryCode.cc:407
+msgid "Sweden"
+msgstr "שבדיה"
 
 #. language code: swe sv
 #: ../zypp/LanguageCode.cc:1086
 msgid "Swedish"
 msgstr "שבדית"
 
+# CH
+#. :COG:178:
+#: ../zypp/CountryCode.cc:258
+msgid "Switzerland"
+msgstr "שוייץ"
+
+#. :SLV:222:
+#: ../zypp/CountryCode.cc:420
+#, fuzzy
+msgid "Syria"
+msgstr "סרבית"
+
 #. language code: syr
 #: ../zypp/LanguageCode.cc:1088
 #, fuzzy
 msgid "Syriac"
 msgstr "שרות"
+
+#: ../zypp/media/MediaException.cc:91
+#, c-format
+msgid "System exception '%s' on medium '%s'."
+msgstr ""
+
+#: ../zypp/ZYppFactory.cc:354
+#, c-format
+msgid "System management is locked by the application with pid %d. Please close this application before trying again."
+msgstr ""
+
+#. language code: tgl tl
+#: ../zypp/LanguageCode.cc:1108
+msgid "Tagalog"
+msgstr ""
 
 #. language code: tah ty
 #: ../zypp/LanguageCode.cc:1090
@@ -2539,10 +4121,39 @@ msgstr "לטבית"
 msgid "Tai (Other)"
 msgstr "אחר"
 
+# TH
+#. :TUV:798:
+#: ../zypp/CountryCode.cc:436
+#, fuzzy
+msgid "Taiwan"
+msgstr "תאילנד"
+
+#. language code: tgk tg
+#: ../zypp/LanguageCode.cc:1106
+#, fuzzy
+msgid "Tajik"
+msgstr "דיבור"
+
+# TW
+#. :THA:764:
+#: ../zypp/CountryCode.cc:427
+msgid "Tajikistan"
+msgstr "טאג'יקיסטן"
+
+#. language code: tmh
+#: ../zypp/LanguageCode.cc:1128
+msgid "Tamashek"
+msgstr ""
+
 #. language code: tam ta
 #: ../zypp/LanguageCode.cc:1094
 msgid "Tamil"
 msgstr "טמילית"
+
+#. :TWN:158:
+#: ../zypp/CountryCode.cc:437
+msgid "Tanzania"
+msgstr ""
 
 # MT
 #. language code: tat tt
@@ -2558,13 +4169,6 @@ msgstr "קטאר"
 msgid "Telugu"
 msgstr "בלגיה"
 
-#  label text
-#. language code: tem
-#: ../zypp/LanguageCode.cc:1100
-#, fuzzy
-msgid "Timne"
-msgstr "אזור זמן"
-
 # MX
 #. language code: ter
 #: ../zypp/LanguageCode.cc:1102
@@ -2578,21 +4182,16 @@ msgstr "מידעטקסט"
 msgid "Tetum"
 msgstr "טקסט"
 
-#. language code: tgk tg
-#: ../zypp/LanguageCode.cc:1106
-#, fuzzy
-msgid "Tajik"
-msgstr "דיבור"
-
-#. language code: tgl tl
-#: ../zypp/LanguageCode.cc:1108
-msgid "Tagalog"
-msgstr ""
-
 #. language code: tha th
 #: ../zypp/LanguageCode.cc:1110
 msgid "Thai"
 msgstr "תאילנדית"
+
+# TH
+#. :TGO:768:
+#: ../zypp/CountryCode.cc:426
+msgid "Thailand"
+msgstr "תאילנד"
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -2609,20 +4208,16 @@ msgstr ""
 msgid "Tigrinya"
 msgstr ""
 
+#  label text
+#. language code: tem
+#: ../zypp/LanguageCode.cc:1100
+#, fuzzy
+msgid "Timne"
+msgstr "אזור זמן"
+
 #. language code: tiv
 #: ../zypp/LanguageCode.cc:1120
 msgid "Tiv"
-msgstr ""
-
-#. language code: tkl
-#. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:428
-msgid "Tokelau"
-msgstr ""
-
-#. language code: tlh
-#: ../zypp/LanguageCode.cc:1124
-msgid "Klingon"
 msgstr ""
 
 #. language code: tli
@@ -2630,9 +4225,25 @@ msgstr ""
 msgid "Tlingit"
 msgstr ""
 
-#. language code: tmh
-#: ../zypp/LanguageCode.cc:1128
-msgid "Tamashek"
+#. :ATF:260:
+#: ../zypp/CountryCode.cc:425
+msgid "Togo"
+msgstr ""
+
+#. language code: tpi
+#: ../zypp/LanguageCode.cc:1134
+msgid "Tok Pisin"
+msgstr ""
+
+#. :TJK:762:
+#. language code: tkl
+#: ../zypp/CountryCode.cc:428 ../zypp/LanguageCode.cc:1122
+msgid "Tokelau"
+msgstr ""
+
+#. :TUN:788:
+#: ../zypp/CountryCode.cc:431
+msgid "Tonga"
 msgstr ""
 
 #. language code: tog
@@ -2645,9 +4256,14 @@ msgstr ""
 msgid "Tonga (Tonga Islands)"
 msgstr ""
 
-#. language code: tpi
-#: ../zypp/LanguageCode.cc:1134
-msgid "Tok Pisin"
+#: ../zypp/KeyRing.cc:507
+#, c-format
+msgid "Tried to import not existant key %s into keyring %s"
+msgstr ""
+
+#. :TUR:792:
+#: ../zypp/CountryCode.cc:434
+msgid "Trinidad and Tobago"
 msgstr ""
 
 #. language code: tsi
@@ -2656,12 +4272,6 @@ msgstr ""
 msgid "Tsimshian"
 msgstr "רוסית"
 
-#. language code: tsn tn
-#: ../zypp/LanguageCode.cc:1138
-#, fuzzy
-msgid "Tswana"
-msgstr "בוטסואנה"
-
 # EE
 #. language code: tso ts
 #: ../zypp/LanguageCode.cc:1140
@@ -2669,17 +4279,21 @@ msgstr "בוטסואנה"
 msgid "Tsonga"
 msgstr "אסטוניה"
 
-# TR
-#. language code: tuk tk
-#: ../zypp/LanguageCode.cc:1142
+#. language code: tsn tn
+#: ../zypp/LanguageCode.cc:1138
 #, fuzzy
-msgid "Turkmen"
-msgstr "טורקיה"
+msgid "Tswana"
+msgstr "בוטסואנה"
 
 #. language code: tum
 #: ../zypp/LanguageCode.cc:1144
 msgid "Tumbuka"
 msgstr ""
+
+#. :TKM:795:
+#: ../zypp/CountryCode.cc:430
+msgid "Tunisia"
+msgstr "טוניס"
 
 # BD
 #. language code: tup
@@ -2688,27 +4302,47 @@ msgstr ""
 msgid "Tupi Languages"
 msgstr "שפות"
 
+# TR
+#. :TLS:626:
+#: ../zypp/CountryCode.cc:433
+msgid "Turkey"
+msgstr "טורקיה"
+
 #. language code: tur tr
 #: ../zypp/LanguageCode.cc:1148
 msgid "Turkish"
 msgstr "טורקית"
 
-#. language code: tut
-#: ../zypp/LanguageCode.cc:1150
-msgid "Altaic (Other)"
+#. language code: ota
+#: ../zypp/LanguageCode.cc:918
+msgid "Turkish, Ottoman (1500-1928)"
 msgstr ""
 
-#. language code: tvl
+# TR
+#. language code: tuk tk
+#: ../zypp/LanguageCode.cc:1142
+#, fuzzy
+msgid "Turkmen"
+msgstr "טורקיה"
+
+# TW
+#. :TKL:772:
+#: ../zypp/CountryCode.cc:429
+#, fuzzy
+msgid "Turkmenistan"
+msgstr "טאג'יקיסטן"
+
+#. :SWZ:748:
+#: ../zypp/CountryCode.cc:422
+msgid "Turks and Caicos Islands"
+msgstr ""
+
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:435
+#. language code: tvl
+#: ../zypp/CountryCode.cc:435 ../zypp/LanguageCode.cc:1152
 #, fuzzy
 msgid "Tuvalu"
 msgstr "דיבור"
-
-#. language code: twi tw
-#: ../zypp/LanguageCode.cc:1154
-msgid "Twi"
-msgstr ""
 
 #. language code: tyv
 #: ../zypp/LanguageCode.cc:1156
@@ -2716,10 +4350,22 @@ msgstr ""
 msgid "Tuvinian"
 msgstr "טוניס"
 
+#. language code: twi tw
+#: ../zypp/LanguageCode.cc:1154
+msgid "Twi"
+msgstr ""
+
 #. language code: udm
 #: ../zypp/LanguageCode.cc:1158
 msgid "Udmurt"
 msgstr ""
+
+# CA
+#. :UKR:804:
+#: ../zypp/CountryCode.cc:439
+#, fuzzy
+msgid "Uganda"
+msgstr "קנדה"
 
 #. language code: uga
 #: ../zypp/LanguageCode.cc:1160
@@ -2732,6 +4378,12 @@ msgid "Uighur"
 msgstr ""
 
 # UA
+#. :TZA:834:
+#: ../zypp/CountryCode.cc:438
+msgid "Ukraine"
+msgstr "אוקראינה"
+
+# UA
 #. language code: ukr uk
 #: ../zypp/LanguageCode.cc:1164
 msgid "Ukrainian"
@@ -2742,15 +4394,128 @@ msgstr "אוקראינית"
 msgid "Umbundu"
 msgstr ""
 
+#: ../zypp/Url.cc:296
+msgid "Unable to clone Url object"
+msgstr ""
+
+#: ../zypp/target/hal/HalContext.cc:208
+msgid "Unable to create dbus connection"
+msgstr ""
+
+#: ../zypp/target/hal/HalContext.cc:254
+msgid "Unable to initalize HAL context -- hald not running?"
+msgstr ""
+
+#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
+msgid "Unable to parse Url components"
+msgstr ""
+
 #. language code: und
 #: ../zypp/LanguageCode.cc:1168
 msgid "Undetermined"
 msgstr ""
 
+#. :AND:020:
+#: ../zypp/CountryCode.cc:218
+msgid "United Arab Emirates"
+msgstr "איחוד הנסיכויות הערביות"
+
+#. :GAB:266:
+#: ../zypp/CountryCode.cc:293
+msgid "United Kingdom"
+msgstr ""
+
+#. :UMI:581:
+#: ../zypp/CountryCode.cc:441
+#, fuzzy
+msgid "United States"
+msgstr "איחוד הנסיכויות הערביות"
+
+#. :UGA:800:
+#: ../zypp/CountryCode.cc:440
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+#: ../zypp/CountryCode.cc:135
+msgid "Unknown country: "
+msgstr ""
+
+#: ../zypp/LanguageCode.cc:145
+msgid "Unknown language: "
+msgstr ""
+
+#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
+#, fuzzy
+msgid "Unlock these resolvables"
+msgstr "מתקין דריבר..."
+
+#: ../zypp/media/MediaUserAuth.cc:97
+#, c-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr ""
+
+#: ../zypp/media/MediaException.cc:140
+#, c-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr ""
+
+#: ../devel/devel.mvidner/installation_sources.cc:75
+#, c-format
+msgid ""
+"Untrusted key found:\n"
+"%s|%s|%s\n"
+"Trust key?"
+msgstr ""
+
+#. language code: hsb
+#: ../zypp/LanguageCode.cc:612
+#, fuzzy
+msgid "Upper Sorbian"
+msgstr "סרבית"
+
 #. language code: urd ur
 #: ../zypp/LanguageCode.cc:1170
 msgid "Urdu"
 msgstr ""
+
+#: ../zypp/url/UrlBase.cc:154
+#, c-format
+msgid "Url scheme does not allow a %s"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1020
+msgid "Url scheme does not allow a host component"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:981
+msgid "Url scheme does not allow a password"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1068
+msgid "Url scheme does not allow a port"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:947
+msgid "Url scheme does not allow a username"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:820
+msgid "Url scheme is a required component"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1010
+msgid "Url scheme requires a host component"
+msgstr ""
+
+#: ../zypp/url/UrlBase.cc:1096
+msgid "Url scheme requires path name"
+msgstr ""
+
+# UY
+#. :USA:840:
+#: ../zypp/CountryCode.cc:442
+msgid "Uruguay"
+msgstr "אורוגואי"
 
 #. language code: uzb uz
 #: ../zypp/LanguageCode.cc:1172
@@ -2758,10 +4523,27 @@ msgstr ""
 msgid "Uzbek"
 msgstr "אוסביקיסטן"
 
+#. :URY:858:
+#: ../zypp/CountryCode.cc:443
+msgid "Uzbekistan"
+msgstr "אוסביקיסטן"
+
 #. language code: vai
 #: ../zypp/LanguageCode.cc:1174
 msgid "Vai"
 msgstr ""
+
+#. we will throw this later if no URL checks out fine
+#: ../zypp/RepoManager.cc:526
+msgid "Valid metadata not found at specified URL(s)"
+msgstr ""
+
+#  ComboBox item
+#. :VNM:704:
+#: ../zypp/CountryCode.cc:450
+#, fuzzy
+msgid "Vanuatu"
+msgstr "מדריך"
 
 # GD
 #. language code: ven ve
@@ -2770,10 +4552,27 @@ msgstr ""
 msgid "Venda"
 msgstr "גרנדה"
 
+# VE
+#. :VCT:670:
+#: ../zypp/CountryCode.cc:446
+msgid "Venezuela"
+msgstr "ונצואלה"
+
+#. :VIR:850:
+#: ../zypp/CountryCode.cc:449
+#, fuzzy
+msgid "Vietnam"
+msgstr "וייטנאמית"
+
 #. language code: vie vi
 #: ../zypp/LanguageCode.cc:1178
 msgid "Vietnamese"
 msgstr "וייטנאמית"
+
+#. :VGB:092:
+#: ../zypp/CountryCode.cc:448
+msgid "Virgin Islands, U.S."
+msgstr ""
 
 #. language code: vol vo
 #: ../zypp/LanguageCode.cc:1180
@@ -2799,6 +4598,16 @@ msgstr "שפות"
 msgid "Walamo"
 msgstr "פאלם"
 
+#. :VUT:548:
+#: ../zypp/CountryCode.cc:451
+msgid "Wallis and Futuna"
+msgstr ""
+
+#. language code: wln wa
+#: ../zypp/LanguageCode.cc:1198
+msgid "Walloon"
+msgstr ""
+
 # PY
 #. language code: war
 #: ../zypp/LanguageCode.cc:1188
@@ -2817,16 +4626,9 @@ msgstr "וולשית"
 msgid "Welsh"
 msgstr "וולשית"
 
-#  label text
-#. language code: wen
-#: ../zypp/LanguageCode.cc:1196
-#, fuzzy
-msgid "Sorbian Languages"
-msgstr "בחרו שפה:"
-
-#. language code: wln wa
-#: ../zypp/LanguageCode.cc:1198
-msgid "Walloon"
+#. :EGY:818:
+#: ../zypp/CountryCode.cc:281
+msgid "Western Sahara"
 msgstr ""
 
 #. language code: wol wo
@@ -2834,16 +4636,16 @@ msgstr ""
 msgid "Wolof"
 msgstr ""
 
-#. language code: xal
-#: ../zypp/LanguageCode.cc:1202
-#, fuzzy
-msgid "Kalmyk"
-msgstr "דיבור"
-
 #. language code: xho xh
 #: ../zypp/LanguageCode.cc:1204
 msgid "Xhosa"
 msgstr "קוזה"
+
+#. language code: sah
+#: ../zypp/LanguageCode.cc:986
+#, fuzzy
+msgid "Yakut"
+msgstr "נקודת שבירה"
 
 #. language code: yao
 #: ../zypp/LanguageCode.cc:1206
@@ -2855,6 +4657,11 @@ msgstr ""
 #, fuzzy
 msgid "Yapese"
 msgstr "יפנית"
+
+#. :WSM:882:
+#: ../zypp/CountryCode.cc:453
+msgid "Yemen"
+msgstr "תימן"
 
 #. language code: yid yi
 #: ../zypp/LanguageCode.cc:1210
@@ -2872,6 +4679,16 @@ msgstr ""
 #, fuzzy
 msgid "Yupik Languages"
 msgstr "שפות"
+
+#. :ZAF:710:
+#: ../zypp/CountryCode.cc:456
+msgid "Zambia"
+msgstr ""
+
+#. language code: znd
+#: ../zypp/LanguageCode.cc:1222
+msgid "Zande"
+msgstr ""
 
 #. language code: zap
 #: ../zypp/LanguageCode.cc:1216
@@ -2891,10 +4708,10 @@ msgstr "גרנדה"
 msgid "Zhuang"
 msgstr "&שינוי"
 
-#. language code: znd
-#: ../zypp/LanguageCode.cc:1222
-msgid "Zande"
-msgstr ""
+#. :ZMB:894:
+#: ../zypp/CountryCode.cc:457
+msgid "Zimbabwe"
+msgstr "זימבבואה "
 
 #. language code: zul zu
 #: ../zypp/LanguageCode.cc:1224
@@ -2906,28 +4723,117 @@ msgstr "זולו"
 msgid "Zuni"
 msgstr ""
 
-#: ../zypp/ZYppFactory.cc:279 ../zypp/ZYppFactory.cc:334
-msgid "Software management is already running."
+#: ../zypp/repo/PackageProvider.cc:233
+msgid "applydeltarpm check failed."
 msgstr ""
 
-#: ../zypp/parser/susetags/RepoParser.cc:232
-msgid "Required file is missing: "
+#: ../zypp/repo/PackageProvider.cc:247
+msgid "applydeltarpm failed."
 msgstr ""
 
-#: ../zypp/target/hal/HalContext.cc:96
-msgid "HalContext not connected"
+#: ../zypp/sat/SATResolver.cc:825
+#, c-format
+msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/target/hal/HalContext.cc:106
-msgid "HalDrive not initialized"
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/sat/SATResolver.cc:578
+#, fuzzy, c-format
+msgid "cannot install both %s and %s"
+msgstr "מתקין על:"
+
+#: ../zypp/sat/SATResolver.cc:562
+msgid "conflicting requests"
 msgstr ""
 
-#: ../zypp/target/hal/HalContext.cc:116
-msgid "HalVolume not initialized"
+#. timestamp
+#: ../zypp/target/rpm/RpmDb.cc:2329
+#, fuzzy, c-format
+msgid "created backup %s"
+msgstr "אל תיצור גיבויים"
+
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/sat/SATResolver.cc:852
+#, fuzzy, c-format
+msgid "deinstallation of %s"
+msgstr "מתקין על:"
+
+#  main dialog: Button Delete partition
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
+#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#, fuzzy, c-format
+msgid "delete %s"
+msgstr "&מחק"
+
+#: ../zypp/sat/SATResolver.cc:621
+msgid "deleted providers: "
 msgstr ""
 
-#: ../zypp/target/hal/HalContext.cc:208
-msgid "Unable to create dbus connection"
+#: ../zypp/sat/SATResolver.cc:773
+#, fuzzy, c-format
+msgid "do not ask to delete all solvables providing %s"
+msgstr "מתקין דריבר..."
+
+#: ../zypp/sat/SATResolver.cc:758
+#, c-format
+msgid "do not ask to install a solvable providing %s"
+msgstr ""
+
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/sat/SATResolver.cc:711
+#, fuzzy, c-format
+msgid "do not forbid installation of %s"
+msgstr "מתקין על:"
+
+#  Frame title for installation target hard disk / partition(s)
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/sat/SATResolver.cc:690 ../zypp/sat/SATResolver.cc:729
+#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
+#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#, fuzzy, c-format
+msgid "do not install %s"
+msgstr "מתקין על:"
+
+#: ../zypp/sat/SATResolver.cc:785
+#, c-format
+msgid "do not install most recent version of %s"
+msgstr ""
+
+#  Frame title for installation target hard disk / partition(s)
+#: ../zypp/sat/SATResolver.cc:685
+#, fuzzy, c-format
+msgid "do not keep %s installed"
+msgstr "מתקין על:"
+
+#: ../zypp/sat/SATResolver.cc:818
+#, c-format
+msgid "downgrade of %s to %s"
+msgstr ""
+
+#  Frame title for installation target hard disk / partition(s)
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
+#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
+#, fuzzy, c-format
+msgid "install %s"
+msgstr "מתקין על:"
+
+#: ../zypp/sat/SATResolver.cc:832
+#, c-format
+msgid ""
+"install %s (with vendor change)\n"
+"  %s\n"
+"-->\n"
+"  %s"
+msgstr ""
+
+#. TranslatorExplanation %s = name of package, patch, selection ...
+#: ../zypp/sat/SATResolver.cc:706 ../zypp/sat/SATResolver.cc:743
+#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
+#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#, c-format
+msgid "keep %s"
 msgstr ""
 
 #: ../zypp/target/hal/HalContext.cc:224
@@ -2938,2341 +4844,91 @@ msgstr ""
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr ""
 
-#: ../zypp/target/hal/HalContext.cc:254
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-
-#: ../zypp/target/hal/HalContext.cc:843
-msgid "Not a CDROM drive"
-msgstr ""
-
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
-#: ../zypp/target/hal/HalException.h:64
-msgid "Hal Exception"
-msgstr ""
-
-#  Commandline help title
-#. Translator: %s = name of an rpm package. A list of diffs follows
-#. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1779
-#, fuzzy, c-format
-msgid "Changed configuration files for %s:"
-msgstr "קורא קובץ הגדרות"
-
-#. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1943
+#: ../zypp/sat/SATResolver.cc:573
 #, c-format
-msgid "rpm saved %s as %s, but it was impossible to determine the difference"
+msgid "nothing provides %s needed by %s"
 msgstr ""
 
-#. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1945
+#: ../zypp/sat/SATResolver.cc:565
 #, c-format
-msgid ""
-"rpm saved %s as %s.\n"
-"Here are the first 25 lines of difference:\n"
+msgid "nothing provides requested %s"
+msgstr ""
+
+#: ../zypp/sat/SATResolver.cc:559
+#, c-format
+msgid "problem with installed package %s"
+msgstr ""
+
+#: ../zypp/sat/SATResolver.cc:840
+#, c-format
+msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1948
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:1950
+#: ../zypp/target/rpm/RpmDb.cc:2050
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1956
-#, fuzzy, c-format
-msgid "%s install failed"
-msgstr "התקנה נכשלה"
-
-#: ../zypp/target/rpm/RpmDb.cc:1957 ../zypp/target/rpm/RpmDb.cc:2075
+#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
 msgid "rpm output:"
 msgstr ""
 
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:1963
+#. %s = filenames
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
-msgid "%s installed ok"
+msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:1966 ../zypp/target/rpm/RpmDb.cc:2083
-#, fuzzy
-msgid "Additional rpm output:"
-msgstr "מידע נוסף"
-
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2074
-#, fuzzy, c-format
-msgid "%s remove failed"
-msgstr "rpm  נכשל."
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s remove ok"
-msgstr ""
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2225
-#, fuzzy, c-format
-msgid "created backup %s"
-msgstr "אל תיצור גיבויים"
-
-#: ../zypp/target/TargetImpl.cc:731
-msgid "Installation has been aborted as directed."
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,....
-#: ../zypp/solver/detail/ResolverInfoObsoletes.cc:55
-#, c-format
-msgid "%s is replaced by %s"
-msgstr ""
-
-#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
-#. TranslatorExplanation: 1.%s is replaced by others
-#: ../zypp/solver/detail/ResolverInfoObsoletes.cc:69
-#, c-format
-msgid "%s replaced by %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:263
-#, c-format
-msgid "%s will be deleted by the user.\n"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:268
-#, c-format
-msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:274
-#, c-format
-msgid "%s will be installed by the user.\n"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:279
-#, c-format
-msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-msgstr ""
-
-#. This can be generated by a timout only
-#: ../zypp/solver/detail/Resolver_problems.cc:356
-#, c-format
-msgid "No valid solution found within %d seconds"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:357
-msgid "The solver has reached a defined timout"
-msgstr ""
-
-#. a second run with ALL possibilities has not been tried
-#. possible other solutions skipped
-#. give the user an additional solution for trying all branches
-#: ../zypp/solver/detail/Resolver_problems.cc:383
-msgid "No valid solution found with just resolvables of best architecture."
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:384
-msgid "With this run only resolvables with the best architecture have been regarded.\n"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:385
-msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:411
-msgid "Invalid information"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:418
-#, c-format
-msgid "%s is needed by other resolvables"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:421
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:90
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:140
-#, c-format
-msgid "%s is needed by %s"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:422
+#. %s = filenames
+#: ../zypp/target/rpm/RpmDb.cc:2045
 #, c-format
 msgid ""
-"%s is needed by:\n"
-"%s"
+"rpm saved %s as %s.\n"
+"Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:429
-#, c-format
-msgid "%s conflicts with other resolvables"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#. Translator: all.%s = name of package, patch,...
-#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
-#. TranslatorExplanation: 1.%s is conflicting with multiple others
-#: ../zypp/solver/detail/Resolver_problems.cc:432
-#: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:55
-#: ../zypp/solver/detail/ResolverInfoConflictsWith.cc:70
-#, c-format
-msgid "%s conflicts with %s"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:434
-#, c-format
-msgid ""
-"%s conflicts with:\n"
-"%s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:463
-#, c-format
-msgid "%s obsoletes other resolvables"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:466
-#, c-format
-msgid "%s obsoletes %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:468
-#, c-format
-msgid "%s obsoletes:%s"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:469
-msgid ""
-"\n"
-"These resolvables will be deleted from the system."
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:477
-#, c-format
-msgid "%s depends on other resolvables"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
-#. TranslatorExplanation: 1.%s is dependent on list of names
-#: ../zypp/solver/detail/Resolver_problems.cc:481
-#: ../zypp/solver/detail/ResolverInfoDependsOn.cc:69
-#, c-format
-msgid "%s depends on %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:484
-#, c-format
-msgid "%s depends on:%s"
-msgstr ""
-
-#. TranslatorExplanation: currently it is unused.
-#: ../zypp/solver/detail/Resolver_problems.cc:490
-msgid "Child of"
-msgstr ""
-
-#  Frame title for installation target hard disk / partition(s)
-#. TranslatorExplanation %s = dependency
-#. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:496
-#: ../zypp/solver/detail/Resolver_problems.cc:580
-#, fuzzy, c-format
-msgid "Cannot install %s"
-msgstr "מתקין על:"
-
-#. TranslatorExplanation %s = capability
-#: ../zypp/solver/detail/Resolver_problems.cc:498
-#, c-format
-msgid "None provides %s"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:499
-msgid ""
-"\n"
-"There is no resource available which supports this requirement."
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:507
-msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:518
-#: ../zypp/solver/detail/Resolver_problems.cc:900
-#, c-format
-msgid "Cannot install %s, because it is conflicting with %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:536
-#, c-format
-msgid "%s is not installed and has been marked as uninstallable"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package,patch,...
-#: ../zypp/solver/detail/Resolver_problems.cc:548
-#, c-format
-msgid "Cannot install %s due to dependency problems"
-msgstr ""
-
-#  main dialog: Button Delete partition
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:590
-#: ../zypp/solver/detail/Resolver_problems.cc:600
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
-msgid "delete %s"
-msgstr "&מחק"
-
-#  Frame title for installation target hard disk / partition(s)
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:593
-#: ../zypp/solver/detail/Resolver_problems.cc:603
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
-#, fuzzy, c-format
-msgid "do not install %s"
-msgstr "מתקין על:"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:616
-#, c-format
-msgid "%s has unfulfilled requirements"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:655
-#, c-format
-msgid "%s has missing dependencies"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:703
-#, c-format
-msgid "%s cannot be installed due to missing dependencies"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:760
-#, c-format
-msgid "%s fulfills dependencies of %s but will be uninstalled"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:770
-#, c-format
-msgid "%s fulfills dependencies of %s but will be kept on your system"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:780
-#, fuzzy, c-format
-msgid "No need to install %s"
-msgstr "&בוט מערכת קיימת"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:788
-#, c-format
-msgid "Cannot install %s to fulfill the dependencies of %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:803
-#, c-format
-msgid "Cannot install %s to fulfil the dependencies of %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:841
-#: ../zypp/solver/detail/Resolver_problems.cc:849
-#, c-format
-msgid "%s will not be uninstalled, because it is still required"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:872
-#, c-format
-msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-msgstr ""
-
-#: ../zypp/solver/detail/Resolver_problems.cc:904
-#, c-format
-msgid "Cannot install %s, because it is conflicting"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/Resolver_problems.cc:926
-#, c-format
-msgid "%s is uninstallable due to conflicts with %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name requirement ...
-#: ../zypp/solver/detail/Resolver_problems.cc:940
-#, c-format
-msgid "Requirememt %s cannot be fulfilled."
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:55
-msgid "Ignore this requirement just here"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:64
-msgid "Generally ignore this requirement"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:76
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:79
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:89
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:92
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:104
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:116
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:131
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:144
-#, c-format
-msgid "Ignore that %s is already set to install"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
+# IT
+#: ../zypp/sat/SATResolver.cc:633
 #, fuzzy
-msgid "Do not install or delete the resolvables concerned"
-msgstr "מתקין דריבר..."
-
-#. Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
-#: ../zypp/solver/detail/QueueItemRequire.cc:791
-#, c-format
-msgid "for requiring %s for %s when upgrading %s"
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-#: ../zypp/solver/detail/ResolverInfoMissingReq.cc:64
-#, c-format
-msgid "%s is lacking the requirement %s"
-msgstr ""
-
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:56
-#, fuzzy
-msgid ", Action: "
-msgstr "פעולה"
-
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:58
-msgid ", Trigger: "
-msgstr ""
-
-#. Translator: Notation for (RPM) package
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:90
-msgid "package"
-msgstr ""
-
-#. Translator: Notation for SuSE package selection (set of packages)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:94
-msgid "selection"
-msgstr ""
-
-#. Translator: Notation for SuSE installation pattern (set of packages, describing use of system)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:98
-msgid "pattern"
-msgstr ""
-
-#. Translator: Notation for product
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:102
-msgid "product"
-msgstr ""
-
-#. Translator: Notation for patch
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:106
-msgid "patch"
-msgstr ""
-
-#. Translator: Notation for script (part of a patch)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:110
-msgid "script"
-msgstr ""
-
-#. Translator: Notation for message (part of a patch)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:114
-msgid "message"
-msgstr ""
-
-#. Translator: Notation for atom (part of a patch)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:118
-msgid "atom"
-msgstr ""
-
-#. Translator: Notation for computer system
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:122
-msgid "system"
-msgstr ""
-
-#. Translator: Generic term for an item with dependencies, please leave untranslated for now
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:126
-msgid "Resolvable"
-msgstr ""
-
-#. TranslatorExplanation: Additional information to dependency solver result, no solution could be found
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:144
-msgid "Marking this resolution attempt as invalid."
-msgstr ""
-
-#. Translator: %s = name of packages,patch,...
-#. TranslatorExplanation: Additional information to dependency solver result.
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:151
-#, c-format
-msgid "Marking resolvable %s as uninstallable"
-msgstr ""
-
-#. Translator: %s = name of packages,patch,...
-#. TranslatorExplanation: Additional information to dependency solver result.
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:159
-#, c-format
-msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-msgstr ""
-
-#. Translator: %s = name of package,patch,...
-#. TranslatorExplanation: Additional information to dependency solver result.
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:167
-#, c-format
-msgid "Can't install %s since it is already marked as needed to be uninstalled"
-msgstr ""
-
-#. Translator: %s = name of patch
-#. TranslatorExplanation: A patch which is not needed (does not apply) cant be installed
-#. TranslatorExplanation: Patches contain updates (bug fixes) to packages. Such fixes
-#. TranslatorExplanation: do only apply if the package to-be-fixed is actually installed.
-#. TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
-#. TranslatorExplanation: package is not installed.
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:179
-#, c-format
-msgid "Can't install %s, because it does not apply to this system."
-msgstr ""
-
-#. affected() = item 1 which has to be installed
-#. _capability =
-#. other() = item 2 which has to be installed
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:190
-#, c-format
-msgid "Can't install %s, because %s is already marked as needed to for installation"
-msgstr ""
-
-#. Translator: %s = name of patch,product
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:198
-#, c-format
-msgid "This would invalidate %s."
-msgstr ""
-
-#  Frame title for installation target hard disk / partition(s)
-#. Translator: %s = name of patch, pattern, ...
-#. TranslatorExplanation: Establishing is the process of computing which patches are needed
-#. TranslatorExplanation: This is just a progress indicator
-#. TranslatorExplanation: It is also used for other types of resolvables in order to verify
-#. TranslatorExplanation: the completeness of their dependencies
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:214
-#, fuzzy, c-format
-msgid "Establishing %s"
-msgstr "מתקין על:"
-
-#  Frame title for installation target hard disk / partition(s)
-#. affected() = resolvable to be installed
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#. TranslatorExample: Installing foo
-#. TranslatorExplanation: Just a progress indicator that something is scheduled for installation
-#. Translator: %s = packagename
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:235
-#, fuzzy, c-format
-msgid "Installing %s"
-msgstr "מתקין על:"
-
-#. affected() = updated resolvable
-#. _capability =
-#. other() = currently installed, being updated resolvable
-#. other_capability() =
-#. Translator: 1.%s and 2.%s = name of package
-#. TranslatorExample: Updating foo-1.1 to foo-1.2
-#. TranslatorExplanation: Just a progress indicator that something is scheduled for upgrade
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:252
-#, c-format
-msgid "Updating %s to %s"
-msgstr ""
-
-#. affected() =
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#. TranslatorExample: Skipping foo: already installed
-#. TranslatorExplanation: An installation request for foo is skipped since foo is already installed
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:270
-#, c-format
-msgid "Skipping %s: already installed"
-msgstr ""
-
-#. affected() = is set
-#. _capability = is set
-#. other() =
-#. other_capability() =
-#. Translator: 1.%s = dependency
-#. TranslatorExample: There are no alternative installed providers of foo
-#. TranslatorExplanation: A resolvable is to be uninstalled. It provides 'foo' which is needed by others
-#. TranslatorExplanation: We just found out that 'foo' is not provided by anything else (an alternative)
-#. TranslatorExplanation: removal of this resolvable would therefore break dependency
-#. TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:292
-#, c-format
-msgid "There are no alternative providers of %s installed"
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch....
-#. TranslatorExample: for bar
-#. TranslatorExplanation: extension to previous message if we know what the resolvable is
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:298
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:323
-#, c-format
-msgid "for %s"
-msgstr ""
-
-#. affected() =
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: 1.%s = dependency
-#. TranslatorExample: There are no installable providers of foo
-#. TranslatorExplanation: A resolvable is to be installed which requires foo
-#. TranslatorExplanation: But there is nothing available to fulfill this requirement
-#. TranslatorExplanation: This is an error message explaining that the resolvable cannot be installed
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:317
-#, c-format
-msgid "There are no installable providers of %s"
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,..., 2.%s = name of package,patch,...
-#. TranslatorExample: Upgrade to foo to avoid removing bar is not possible
-#. TranslatorExplanation: bar requires something from foo
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:341
-#, c-format
-msgid "Upgrading to %s to avoid removing %s is not possible."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:359
-#, c-format
-msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s type (package, patch, ...)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:377
-#, c-format
-msgid "%s provides %s, but another version of that %s is already installed."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:396
-#, c-format
-msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:414
-#, c-format
-msgid "%s provides %s, but it is locked."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:432
-#, c-format
-msgid "%s provides %s,  but is scheduled to be kept."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:451
-#, c-format
-msgid "%s provides %s, but has another architecture."
-msgstr ""
-
-#. Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s = vendor ID
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:469
-#, c-format
-msgid "%s provides %s, but has another vendor (%s)."
-msgstr ""
-
-#. Translator: 1.%s = dependency. 2.%s name of package, patch, ...
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:487
-#, c-format
-msgid "Can't satisfy requirement %s for %s"
-msgstr ""
-
-#. affected() = to-be-installed resolvable which was scheduled to be uninstalled
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#. TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
-#. TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:508
-#, c-format
-msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-msgstr ""
-
-#. affected() = provider of cap
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#. TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
-#. TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:525
-#, c-format
-msgid "%s is required by another installed resolvable, so it won't be unlinked."
-msgstr ""
-
-#. affected() = to-be-uninstalled resolvable which is locked
-#. _capability =
-#. other() =
-#. other_capability() =
-#. Translator: %s = name of package,patch,...
-#. TranslatorExample: foo is locked and cannot be uninstalled.
-#. TranslatorExplanation: foo is to-be-uninstalled but it is locked
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:542
-#, c-format
-msgid "%s is locked and cannot be uninstalled."
-msgstr ""
-
-#. affected() = provider of capability
-#. _capability = provided by provider
-#. other() = conflict issuer
-#. other_capability() = conflict capability
-#. Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
-#. TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:561
-#, c-format
-msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-msgstr ""
-
-#. affected() = provider of capability
-#. _capability = provided by provider
-#. other() = conflict issuer
-#. other_capability() = conflict capability from issuer
-#. Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
-#. TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:579
-#, c-format
-msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr ""
-
-#. Translator: %s = name of package,patch
-#. TranslatorExample: from abc
-#: ../zypp/solver/detail/ResolverInfoMisc.cc:587
-#, c-format
-msgid "from %s"
-msgstr ""
-
-#: ../zypp/solver/detail/ResolverInfo.cc:195
-#, fuzzy
-msgid " Error!"
-msgstr "שגיאה"
-
-#: ../zypp/solver/detail/ResolverInfo.cc:196
-msgid " Important!"
-msgstr ""
+msgid "uninstallable providers: "
+msgstr "התקן"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
-#, c-format
-msgid "keep %s"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
-msgid "Keep resolvables"
-msgstr "מתקין דריבר..."
-
-#  Frame title for installation target hard disk / partition(s)
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, fuzzy, c-format
-msgid "install %s"
-msgstr "מתקין על:"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
-msgid "Install missing resolvables"
-msgstr "מתקין דריבר..."
-
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:53
-msgid "Make a solver run with ALL possibilities."
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:54
-msgid "Regarding all resolvables with a compatible architecture."
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:57
-msgid "Make a solver run with best architecture only."
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionAllBranches.cc:58
-msgid "Regarding resolvables with best architecture only."
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,....
-#: ../zypp/solver/detail/ResolverInfoDependsOn.cc:55
-#, c-format
-msgid "%s depended on %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:60
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:110
-#, c-format
-msgid "%s is recommended by %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:66
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:116
-#, c-format
-msgid "%s is suggested by %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:72
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:122
-#, c-format
-msgid "%s will be evaluated for installation (freshened) by %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:78
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:128
-#, c-format
-msgid "%s is enhanced by %s"
-msgstr ""
-
-#. Translator: all.%s = name of package,patch,...
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:84
-#: ../zypp/solver/detail/ResolverInfoNeededBy.cc:134
-#, c-format
-msgid "%s is supplemented by %s"
-msgstr ""
-
-#. Translator all.%s = name of packages,patches,....
-#. TranslatorExplanation: 1.%s name of package, 2.%s list of names
-#. TranslatorExplanation: 1.%s is part of 'bundles', the bundles are listed in 2.%s
-#: ../zypp/solver/detail/ResolverInfoChildOf.cc:56
-#: ../zypp/solver/detail/ResolverInfoChildOf.cc:71
-#, c-format
-msgid "%s part of %s"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:50
-msgid "Double timeout"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionDoubleTimeout.cc:51
-msgid "Start the next solver run with doubled timeout."
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:70
-#, fuzzy
-msgid "unlock all resolvables"
-msgstr "מתקין דריבר..."
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:83
+#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
 #, fuzzy, c-format
 msgid "unlock %s"
 msgstr "שעונים"
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:92
+#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
 #, fuzzy
-msgid "Unlock these resolvables"
+msgid "unlock all resolvables"
 msgstr "מתקין דריבר..."
 
-#: ../zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr ""
-
-#: ../zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr ""
-
-#: ../zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr ""
-
-#: ../zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr ""
-
-#: ../zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr ""
-
-#: ../zypp/CountryCode.cc:135
-msgid "Unknown country: "
-msgstr ""
-
-#: ../zypp/CountryCode.cc:217
-msgid "Andorra"
-msgstr ""
-
-#. :AND:020:
-#: ../zypp/CountryCode.cc:218
-msgid "United Arab Emirates"
-msgstr "איחוד הנסיכויות הערביות"
-
-#. :ARE:784:
-#: ../zypp/CountryCode.cc:219
 #, fuzzy
-msgid "Afghanistan"
-msgstr "פקיסטן"
+#~ msgid "No need to install %s"
+#~ msgstr "&בוט מערכת קיימת"
 
-#. :AFG:004:
-#: ../zypp/CountryCode.cc:220
-msgid "Antigua and Barbuda"
-msgstr ""
-
-#. :ATG:028:
-#: ../zypp/CountryCode.cc:221
-msgid "Anguilla"
-msgstr ""
-
-#. :AIA:660:
-#: ../zypp/CountryCode.cc:222
-msgid "Albania"
-msgstr "אלבניה"
-
-# AR
-#. :ALB:008:
-#: ../zypp/CountryCode.cc:223
 #, fuzzy
-msgid "Armenia"
-msgstr "ארגנטינה"
+#~ msgid ", Action: "
+#~ msgstr "פעולה"
 
-# NL
-#. :ARM:051:
-#: ../zypp/CountryCode.cc:224
+#  Frame title for installation target hard disk / partition(s)
 #, fuzzy
-msgid "Netherlands Antilles"
-msgstr "הולנד"
+#~ msgid "Establishing %s"
+#~ msgstr "מתקין על:"
 
-#. :ANT:530:
-#: ../zypp/CountryCode.cc:225
-msgid "Angola"
-msgstr ""
-
-#. :AGO:024:
-#: ../zypp/CountryCode.cc:226
-msgid "Antarctica"
-msgstr ""
-
-# AR
-#. :ATA:010:
-#: ../zypp/CountryCode.cc:227
-msgid "Argentina"
-msgstr "ארגנטינה"
-
-#. :ARG:032:
-#: ../zypp/CountryCode.cc:228
-msgid "American Samoa"
-msgstr ""
-
-# AT
-#. :ASM:016:
-#: ../zypp/CountryCode.cc:229
-msgid "Austria"
-msgstr "אוסטריה"
-
-# AU
-#. :AUT:040:
-#: ../zypp/CountryCode.cc:230
-msgid "Australia"
-msgstr "אוסטרליה"
-
-#. :AUS:036:
-#: ../zypp/CountryCode.cc:231
-msgid "Aruba"
-msgstr ""
-
-# IE
-#. :ABW:533:
-#: ../zypp/CountryCode.cc:232
 #, fuzzy
-msgid "Aland Islands"
-msgstr "איי פר-אר"
-
-#. :ALA:248:
-#: ../zypp/CountryCode.cc:233
-#, fuzzy
-msgid "Azerbaijan"
-msgstr "אזרביג'נית"
-
-#. :AZE:031:
-#: ../zypp/CountryCode.cc:234
-#, fuzzy
-msgid "Bosnia and Herzegovina"
-msgstr "בוסניה הרצגובינה"
-
-# BB
-#. :BIH:070:
-#: ../zypp/CountryCode.cc:235
-msgid "Barbados"
-msgstr "ברבדוס"
-
-#. :BRB:052:
-#: ../zypp/CountryCode.cc:236
-msgid "Bangladesh"
-msgstr "בנגלדש"
-
-# BE
-#. :BGD:050:
-#: ../zypp/CountryCode.cc:237
-msgid "Belgium"
-msgstr "בלגיה"
-
-#. :BEL:056:
-#: ../zypp/CountryCode.cc:238
-msgid "Burkina Faso"
-msgstr ""
-
-# BG
-#. :BFA:854:
-#: ../zypp/CountryCode.cc:239
-msgid "Bulgaria"
-msgstr "בולגריה"
-
-#. :BGR:100:
-#: ../zypp/CountryCode.cc:240
-#, fuzzy
-msgid "Bahrain"
-msgstr "בחריין"
-
-#. :BHR:048:
-#: ../zypp/CountryCode.cc:241
-msgid "Burundi"
-msgstr ""
-
-#. :BDI:108:
-#: ../zypp/CountryCode.cc:242
-#, fuzzy
-msgid "Benin"
-msgstr "בנגאלית"
-
-#. :BEN:204:
-#: ../zypp/CountryCode.cc:243
-#, fuzzy
-msgid "Bermuda"
-msgstr "גרמנית"
-
-#. :BMU:060:
-#: ../zypp/CountryCode.cc:244
-msgid "Brunei Darussalam"
-msgstr ""
-
-# BO
-#. :BRN:096:
-#: ../zypp/CountryCode.cc:245
-msgid "Bolivia"
-msgstr "בוליביה"
-
-#. :BOL:068:
-#: ../zypp/CountryCode.cc:246
-msgid "Brazil"
-msgstr ""
-
-# PA
-#. :BRA:076:
-#: ../zypp/CountryCode.cc:247
-#, fuzzy
-msgid "Bahamas"
-msgstr "פנמה"
-
-#. :BHS:044:
-#: ../zypp/CountryCode.cc:248
-msgid "Bhutan"
-msgstr ""
-
-# IE
-#. :BTN:064:
-#: ../zypp/CountryCode.cc:249
-#, fuzzy
-msgid "Bouvet Island"
-msgstr "איי פר-אר"
-
-#. :BVT:074:
-#: ../zypp/CountryCode.cc:250
-msgid "Botswana"
-msgstr "בוטסואנה"
-
-# BY
-#. :BWA:072:
-#: ../zypp/CountryCode.cc:251
-msgid "Belarus"
-msgstr "בלרוס"
-
-#. :BLR:112:
-#: ../zypp/CountryCode.cc:252
-#, fuzzy
-msgid "Belize"
-msgstr "בלגית"
-
-# CA
-#. :BLZ:084:
-#: ../zypp/CountryCode.cc:253
-msgid "Canada"
-msgstr "קנדה"
-
-#. :CAN:124:
-#: ../zypp/CountryCode.cc:254
-msgid "Cocos (Keeling) Islands"
-msgstr ""
-
-#. :CCK:166:
-#. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
-msgid "Congo"
-msgstr ""
-
-# DO
-#. :COD:180:
-#: ../zypp/CountryCode.cc:256
-#, fuzzy
-msgid "Central African Republic"
-msgstr "סוריה"
-
-# CH
-#. :COG:178:
-#: ../zypp/CountryCode.cc:258
-msgid "Switzerland"
-msgstr "שוייץ"
-
-#. :CHE:756:
-#: ../zypp/CountryCode.cc:259
-msgid "Cote D'Ivoire"
-msgstr ""
-
-# IE
-#. :CIV:384:
-#: ../zypp/CountryCode.cc:260
-#, fuzzy
-msgid "Cook Islands"
-msgstr "איי פר-אר"
-
-# CL
-#. :COK:184:
-#: ../zypp/CountryCode.cc:261
-msgid "Chile"
-msgstr "צ'ילה"
-
-#. :CHL:152:
-#: ../zypp/CountryCode.cc:262
-msgid "Cameroon"
-msgstr ""
-
-# CN
-#. :CMR:120:
-#: ../zypp/CountryCode.cc:263
-msgid "China"
-msgstr "סין"
-
-#. :CHN:156:
-#: ../zypp/CountryCode.cc:264
-msgid "Colombia"
-msgstr "קולומביה"
-
-#. :COL:170:
-#: ../zypp/CountryCode.cc:265
-msgid "Costa Rica"
-msgstr "קוסטה ריקה"
-
-#. :CRI:188:
-#: ../zypp/CountryCode.cc:266
-msgid "Serbia and Montenegro"
-msgstr ""
-
-#. :SCG:891:
-#: ../zypp/CountryCode.cc:267
-msgid "Cuba"
-msgstr ""
-
-#. :CUB:192:
-#: ../zypp/CountryCode.cc:268
-msgid "Cape Verde"
-msgstr ""
-
-#. :CPV:132:
-#: ../zypp/CountryCode.cc:269
-msgid "Christmas Island"
-msgstr ""
-
-#. :CXR:162:
-#: ../zypp/CountryCode.cc:270
-msgid "Cyprus"
-msgstr ""
-
-# DO
-#. :CYP:196:
-#: ../zypp/CountryCode.cc:271
-#, fuzzy
-msgid "Czech Republic"
-msgstr "הרפובליקה הדומיניקנית"
-
-# DE
-#. :CZE:203:
-#: ../zypp/CountryCode.cc:272
-msgid "Germany"
-msgstr "גרמניה"
-
-#. :DEU:276:
-#: ../zypp/CountryCode.cc:273
-msgid "Djibouti"
-msgstr ""
-
-# DK
-#. :DJI:262:
-#: ../zypp/CountryCode.cc:274
-msgid "Denmark"
-msgstr "דנמרק"
-
-# RO
-#. :DNK:208:
-#: ../zypp/CountryCode.cc:275
-#, fuzzy
-msgid "Dominica"
-msgstr "רומניה"
-
-# DO
-#. :DMA:212:
-#: ../zypp/CountryCode.cc:276
-msgid "Dominican Republic"
-msgstr "הרפובליקה הדומיניקנית"
-
-# BG
-#. :DOM:214:
-#: ../zypp/CountryCode.cc:277
-msgid "Algeria"
-msgstr "אלג'יר"
-
-#. :DZA:012:
-#: ../zypp/CountryCode.cc:278
-msgid "Ecuador"
-msgstr "אקוודור"
-
-# EE
-#. :ECU:218:
-#: ../zypp/CountryCode.cc:279
-msgid "Estonia"
-msgstr "אסטוניה"
-
-# EG
-#. :EST:233:
-#: ../zypp/CountryCode.cc:280
-msgid "Egypt"
-msgstr "מצרים"
-
-#. :EGY:818:
-#: ../zypp/CountryCode.cc:281
-msgid "Western Sahara"
-msgstr ""
-
-#. :ESH:732:
-#: ../zypp/CountryCode.cc:282
-msgid "Eritrea"
-msgstr ""
-
-# ES
-#. :ERI:232:
-#: ../zypp/CountryCode.cc:283
-msgid "Spain"
-msgstr "ספרד"
-
-# EE
-#. :ESP:724:
-#: ../zypp/CountryCode.cc:284
-#, fuzzy
-msgid "Ethiopia"
-msgstr "אסטוניה"
-
-# FI
-#. :ETH:231:
-#: ../zypp/CountryCode.cc:285
-msgid "Finland"
-msgstr "פינלנד"
-
-#. :FIN:246:
-#: ../zypp/CountryCode.cc:286
-msgid "Fiji"
-msgstr ""
-
-#. :FJI:242:
-#: ../zypp/CountryCode.cc:287
-msgid "Falkland Islands (Malvinas)"
-msgstr ""
-
-#. :FLK:238:
-#: ../zypp/CountryCode.cc:288
-msgid "Federated States of Micronesia"
-msgstr ""
-
-# IE
-#. :FSM:583:
-#: ../zypp/CountryCode.cc:289
-msgid "Faroe Islands"
-msgstr "איי פר-אר"
-
-# FR
-#. :FRO:234:
-#: ../zypp/CountryCode.cc:290
-msgid "France"
-msgstr "צרפת"
-
-#. :FRA:250:
-#: ../zypp/CountryCode.cc:291
-msgid "Metropolitan France"
-msgstr ""
-
-#. :FXX:249:
-#: ../zypp/CountryCode.cc:292
-msgid "Gabon"
-msgstr ""
-
-#. :GAB:266:
-#: ../zypp/CountryCode.cc:293
-msgid "United Kingdom"
-msgstr ""
-
-# GD
-#. :GBR:826:
-#: ../zypp/CountryCode.cc:294
-msgid "Grenada"
-msgstr "גרנדה"
-
-#. :GRD:308:
-#: ../zypp/CountryCode.cc:295
-msgid "Georgia"
-msgstr " ג'ורג'יה"
-
-#. :GEO:268:
-#: ../zypp/CountryCode.cc:296
-#, fuzzy
-msgid "French Guiana"
-msgstr "צרפתית (קנדה)"
-
-# CN
-#. :GUF:254:
-#: ../zypp/CountryCode.cc:297
-#, fuzzy
-msgid "Ghana"
-msgstr "סין"
-
-#. :GHA:288:
-#: ../zypp/CountryCode.cc:298
-msgid "Gibraltar"
-msgstr ""
-
-# GD
-#. :GIB:292:
-#: ../zypp/CountryCode.cc:299
-msgid "Greenland"
-msgstr "גרינלנד"
-
-#. :GRL:304:
-#: ../zypp/CountryCode.cc:300
-msgid "Gambia"
-msgstr ""
-
-#. :GMB:270:
-#: ../zypp/CountryCode.cc:301
-msgid "Guinea"
-msgstr ""
-
-#. :GIN:324:
-#: ../zypp/CountryCode.cc:302
-msgid "Guadeloupe"
-msgstr ""
-
-#. :GLP:312:
-#: ../zypp/CountryCode.cc:303
-msgid "Equatorial Guinea"
-msgstr ""
-
-# GR
-#. :GNQ:226:
-#: ../zypp/CountryCode.cc:304
-msgid "Greece"
-msgstr "יוון"
-
-#. :GRC:300:
-#: ../zypp/CountryCode.cc:305
-msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
-
-# GT
-#. :SGS:239:
-#: ../zypp/CountryCode.cc:306
-msgid "Guatemala"
-msgstr "גואטמלה"
-
-#. :GTM:320:
-#: ../zypp/CountryCode.cc:307
-#, fuzzy
-msgid "Guam"
-msgstr "משחקים"
-
-#. :GUM:316:
-#: ../zypp/CountryCode.cc:308
-msgid "Guinea-Bissau"
-msgstr ""
-
-#. :GNB:624:
-#: ../zypp/CountryCode.cc:309
-msgid "Guyana"
-msgstr ""
-
-#. :GUY:328:
-#: ../zypp/CountryCode.cc:310
-msgid "Hong Kong"
-msgstr "הונג-קונג"
-
-#. :HKG:344:
-#: ../zypp/CountryCode.cc:311
-msgid "Heard Island and McDonald Islands"
-msgstr ""
-
-# HN
-#. :HMD:334:
-#: ../zypp/CountryCode.cc:312
-msgid "Honduras"
-msgstr "הונדורס"
-
-# HR
-#. :HND:340:
-#: ../zypp/CountryCode.cc:313
-msgid "Croatia"
-msgstr "קרואטיה"
-
-#. :HRV:191:
-#: ../zypp/CountryCode.cc:314
-#, fuzzy
-msgid "Haiti"
-msgstr "המתן"
-
-# HU
-#. :HTI:332:
-#: ../zypp/CountryCode.cc:315
-msgid "Hungary"
-msgstr "הונגריה"
-
-# ID
-#. :HUN:348:
-#: ../zypp/CountryCode.cc:316
-msgid "Indonesia"
-msgstr "אינדונזיה"
-
-# IE
-#. :IDN:360:
-#: ../zypp/CountryCode.cc:317
-msgid "Ireland"
-msgstr "אירלנד"
-
-# IL
-#. :IRL:372:
-#: ../zypp/CountryCode.cc:318
-msgid "Israel"
-msgstr "ישראל"
-
-# IN
-#. :ISR:376:
-#: ../zypp/CountryCode.cc:319
-msgid "India"
-msgstr "הודו"
-
-#. :IND:356:
-#: ../zypp/CountryCode.cc:320
-msgid "British Indian Ocean Territory"
-msgstr ""
-
-# IQ
-#. :IOT:086:
-#: ../zypp/CountryCode.cc:321
-msgid "Iraq"
-msgstr "עירק"
-
-# IQ
-#. :IRQ:368:
-#: ../zypp/CountryCode.cc:322
-#, fuzzy
-msgid "Iran"
-msgstr "עירק"
-
-# IS
-#. :IRN:364:
-#: ../zypp/CountryCode.cc:323
-msgid "Iceland"
-msgstr "איסלנד"
-
-# IT
-#. :ISL:352:
-#: ../zypp/CountryCode.cc:324
-msgid "Italy"
-msgstr "איטליה"
-
-#. :ITA:380:
-#: ../zypp/CountryCode.cc:325
-msgid "Jamaica"
-msgstr ""
-
-# JO
-#. :JAM:388:
-#: ../zypp/CountryCode.cc:326
-msgid "Jordan"
-msgstr "ירדן"
-
-# JP
-#. :JOR:400:
-#: ../zypp/CountryCode.cc:327
-msgid "Japan"
-msgstr "יפן"
-
-#. :JPN:392:
-#: ../zypp/CountryCode.cc:328
-msgid "Kenya"
-msgstr ""
-
-#. :KEN:404:
-#: ../zypp/CountryCode.cc:329
-msgid "Kyrgyzstan"
-msgstr ""
-
-#. :KGZ:417:
-#: ../zypp/CountryCode.cc:330
-#, fuzzy
-msgid "Cambodia"
-msgstr "קולומביה"
-
-#. :KHM:116:
-#: ../zypp/CountryCode.cc:331
-msgid "Kiribati"
-msgstr ""
-
-#  Frame description in suggested partition for mode accept modify ..
-#. :KIR:296:
-#: ../zypp/CountryCode.cc:332
-#, fuzzy
-msgid "Comoros"
-msgstr "בחרו"
-
-#. :COM:174:
-#: ../zypp/CountryCode.cc:333
-msgid "Saint Kitts and Nevis"
-msgstr ""
-
-#. :KNA:659:
-#: ../zypp/CountryCode.cc:334
-msgid "North Korea"
-msgstr ""
-
-# ZA
-#. :PRK:408:
-#: ../zypp/CountryCode.cc:335
-#, fuzzy
-msgid "South Korea"
-msgstr "דרום אפריקה"
-
-#. :KOR:410:
-#: ../zypp/CountryCode.cc:336
-msgid "Kuwait"
-msgstr "כווית "
-
-# IE
-#. :KWT:414:
-#: ../zypp/CountryCode.cc:337
-#, fuzzy
-msgid "Cayman Islands"
-msgstr "איי פר-אר"
-
-#. :CYM:136:
-#: ../zypp/CountryCode.cc:338
-#, fuzzy
-msgid "Kazakhstan"
-msgstr "פקיסטן"
-
-#. :KAZ:398:
-#: ../zypp/CountryCode.cc:339
-msgid "Lao People's Democratic Republic"
-msgstr ""
-
-#. :LAO:418:
-#: ../zypp/CountryCode.cc:340
-msgid "Lebanon"
-msgstr "לבנון"
-
-#. :LBN:422:
-#: ../zypp/CountryCode.cc:341
-msgid "Saint Lucia"
-msgstr ""
-
-#. :LCA:662:
-#: ../zypp/CountryCode.cc:342
-msgid "Liechtenstein"
-msgstr ""
-
-#. :LIE:438:
-#: ../zypp/CountryCode.cc:343
-#, fuzzy
-msgid "Sri Lanka"
-msgstr "סרבית"
-
-#. :LKA:144:
-#: ../zypp/CountryCode.cc:344
-msgid "Liberia"
-msgstr ""
-
-#. :LBR:430:
-#: ../zypp/CountryCode.cc:345
-msgid "Lesotho"
-msgstr ""
-
-# LT
-#. :LSO:426:
-#: ../zypp/CountryCode.cc:346
-msgid "Lithuania"
-msgstr "ליטא"
-
-# LU
-#. :LTU:440:
-#: ../zypp/CountryCode.cc:347
-msgid "Luxembourg"
-msgstr "לוקסמבורג"
-
-# LV
-#. :LUX:442:
-#: ../zypp/CountryCode.cc:348
-msgid "Latvia"
-msgstr "לטביה"
-
-#. :LVA:428:
-#: ../zypp/CountryCode.cc:349
-msgid "Libya"
-msgstr ""
-
-#. :LBY:434:
-#: ../zypp/CountryCode.cc:350
-msgid "Morocco"
-msgstr "מרוקו"
-
-#. :MAR:504:
-#: ../zypp/CountryCode.cc:351
-#, fuzzy
-msgid "Monaco"
-msgstr "שני"
-
-#. :MCO:492:
-#: ../zypp/CountryCode.cc:352
-#, fuzzy
-msgid "Moldova"
-msgstr "סלובקית"
-
-#. :MDA:498:
-#: ../zypp/CountryCode.cc:353
-msgid "Madagascar"
-msgstr ""
-
-# IE
-#. :MDG:450:
-#: ../zypp/CountryCode.cc:354
-#, fuzzy
-msgid "Marshall Islands"
-msgstr "איי פר-אר"
-
-# MK
-#. :MHL:584:
-#: ../zypp/CountryCode.cc:355
-msgid "Macedonia"
-msgstr "מקדונית"
-
-#. :MKD:807:
-#: ../zypp/CountryCode.cc:356
-#, fuzzy
-msgid "Mali"
-msgstr "&דואר"
-
-# PA
-#. :MLI:466:
-#: ../zypp/CountryCode.cc:357
-#, fuzzy
-msgid "Myanmar"
-msgstr "פנמה"
-
-#. :MMR:104:
-#: ../zypp/CountryCode.cc:358
-msgid "Mongolia"
-msgstr ""
-
-#. :MNG:496:
-#: ../zypp/CountryCode.cc:359
-#, fuzzy
-msgid "Macao"
-msgstr "מאורית"
-
-#. :MAC:446:
-#: ../zypp/CountryCode.cc:360
-msgid "Northern Mariana Islands"
-msgstr ""
-
-#. :MNP:580:
-#: ../zypp/CountryCode.cc:361
-#, fuzzy
-msgid "Martinique"
-msgstr "דקה"
-
-# LT
-#. :MTQ:474:
-#: ../zypp/CountryCode.cc:362
-#, fuzzy
-msgid "Mauritania"
-msgstr "ליטא"
-
-#. :MRT:478:
-#: ../zypp/CountryCode.cc:363
-msgid "Montserrat"
-msgstr ""
-
-# MT
-#. :MSR:500:
-#: ../zypp/CountryCode.cc:364
-msgid "Malta"
-msgstr "מלטה"
-
-#. :MLT:470:
-#: ../zypp/CountryCode.cc:365
-msgid "Mauritius"
-msgstr ""
-
-#. :MUS:480:
-#: ../zypp/CountryCode.cc:366
-#, fuzzy
-msgid "Maldives"
-msgstr "מלטזית"
-
-# MT
-#. :MDV:462:
-#: ../zypp/CountryCode.cc:367
-#, fuzzy
-msgid "Malawi"
-msgstr "מלטה"
-
-# MX
-#. :MWI:454:
-#: ../zypp/CountryCode.cc:368
-msgid "Mexico"
-msgstr "מקסיקו"
-
-# MT
-#. :MEX:484:
-#: ../zypp/CountryCode.cc:369
-msgid "Malaysia"
-msgstr "מלזיה "
-
-#. :MYS:458:
-#: ../zypp/CountryCode.cc:370
-#, fuzzy
-msgid "Mozambique"
-msgstr "נייד"
-
-#. :MOZ:508:
-#: ../zypp/CountryCode.cc:371
-msgid "Namibia"
-msgstr ""
-
-# MK
-#. :NAM:516:
-#: ../zypp/CountryCode.cc:372
-#, fuzzy
-msgid "New Caledonia"
-msgstr "מקדונית"
-
-#. :NCL:540:
-#: ../zypp/CountryCode.cc:373
-msgid "Niger"
-msgstr ""
-
-# IE
-#. :NER:562:
-#: ../zypp/CountryCode.cc:374
-#, fuzzy
-msgid "Norfolk Island"
-msgstr "איי פר-אר"
-
-# BG
-#. :NFK:574:
-#: ../zypp/CountryCode.cc:375
-#, fuzzy
-msgid "Nigeria"
-msgstr "אלג'יר"
-
-# PY
-#. :NGA:566:
-#: ../zypp/CountryCode.cc:376
-msgid "Nicaragua"
-msgstr "ניקאראגואה"
-
-# NL
-#. :NIC:558:
-#: ../zypp/CountryCode.cc:377
-msgid "Netherlands"
-msgstr "הולנד"
-
-# NO
-#. :NLD:528:
-#: ../zypp/CountryCode.cc:378
-msgid "Norway"
-msgstr "נורבגיה"
-
-#. :NOR:578:
-#: ../zypp/CountryCode.cc:379
-msgid "Nepal"
-msgstr ""
-
-#. :NRU:520:
-#: ../zypp/CountryCode.cc:381
-#, fuzzy
-msgid "Niue"
-msgstr "דקה"
-
-# NZ
-#. :NIU:570:
-#: ../zypp/CountryCode.cc:382
-msgid "New Zealand"
-msgstr "ניו זילנד"
-
-#. :NZL:554:
-#: ../zypp/CountryCode.cc:383
-msgid "Oman"
-msgstr "עומן"
-
-# PA
-#. :OMN:512:
-#: ../zypp/CountryCode.cc:384
-msgid "Panama"
-msgstr "פנמה"
-
-# PE
-#. :PAN:591:
-#: ../zypp/CountryCode.cc:385
-msgid "Peru"
-msgstr "פרו"
-
-#. :PER:604:
-#: ../zypp/CountryCode.cc:386
-#, fuzzy
-msgid "French Polynesia"
-msgstr "צרפתית (קנדה)"
-
-#. :PYF:258:
-#: ../zypp/CountryCode.cc:387
-msgid "Papua New Guinea"
-msgstr ""
-
-#. :PNG:598:
-#: ../zypp/CountryCode.cc:388
-msgid "Philippines"
-msgstr "הפיליפינים"
-
-#. :PHL:608:
-#: ../zypp/CountryCode.cc:389
-msgid "Pakistan"
-msgstr "פקיסטן"
-
-# PL
-#. :PAK:586:
-#: ../zypp/CountryCode.cc:390
-msgid "Poland"
-msgstr "פולין"
-
-#. :POL:616:
-#: ../zypp/CountryCode.cc:391
-msgid "Saint Pierre and Miquelon"
-msgstr ""
-
-#. :SPM:666:
-#: ../zypp/CountryCode.cc:392
-#, fuzzy
-msgid "Pitcairn"
-msgstr "פקיסטן"
-
-#. :PCN:612:
-#: ../zypp/CountryCode.cc:393
-msgid "Puerto Rico"
-msgstr "פורטו ריקו"
-
-#. :PRI:630:
-#: ../zypp/CountryCode.cc:394
-msgid "Palestinian Territory"
-msgstr ""
-
-# PT
-#. :PSE:275:
-#: ../zypp/CountryCode.cc:395
-msgid "Portugal"
-msgstr "פורטוגל"
-
-# PA
-#. :PRT:620:
-#: ../zypp/CountryCode.cc:396
-#, fuzzy
-msgid "Palau"
-msgstr "פאלם"
-
-# PY
-#. :PLW:585:
-#: ../zypp/CountryCode.cc:397
-msgid "Paraguay"
-msgstr "פרגואי"
-
-# MT
-#. :PRY:600:
-#: ../zypp/CountryCode.cc:398
-msgid "Qatar"
-msgstr "קטאר"
-
-#. :QAT:634:
-#: ../zypp/CountryCode.cc:399
-#, fuzzy
-msgid "Reunion"
-msgstr "&אזור"
-
-# RO
-#. :REU:638:
-#: ../zypp/CountryCode.cc:400
-msgid "Romania"
-msgstr "רומניה"
-
-#. :ROU:642:
-#: ../zypp/CountryCode.cc:401
-msgid "Russian Federation"
-msgstr ""
-
-# CA
-#. :RUS:643:
-#: ../zypp/CountryCode.cc:402
-#, fuzzy
-msgid "Rwanda"
-msgstr "קנדה"
-
-#. :RWA:646:
-#: ../zypp/CountryCode.cc:403
-msgid "Saudi Arabia"
-msgstr "ערב הסעודית"
-
-# IE
-#. :SAU:682:
-#: ../zypp/CountryCode.cc:404
-#, fuzzy
-msgid "Solomon Islands"
-msgstr "איי פר-אר"
-
-#. :SLB:090:
-#: ../zypp/CountryCode.cc:405
-msgid "Seychelles"
-msgstr ""
-
-# SD
-#. :SYC:690:
-#: ../zypp/CountryCode.cc:406
-msgid "Sudan"
-msgstr "סודן"
-
-# SE
-#. :SDN:736:
-#: ../zypp/CountryCode.cc:407
-msgid "Sweden"
-msgstr "שבדיה"
-
-#. :SWE:752:
-#: ../zypp/CountryCode.cc:408
-msgid "Singapore"
-msgstr "סינגפור"
-
-#. :SGP:702:
-#: ../zypp/CountryCode.cc:409
-msgid "Saint Helena"
-msgstr ""
-
-# SI
-#. :SHN:654:
-#: ../zypp/CountryCode.cc:410
-msgid "Slovenia"
-msgstr "סלובניה"
-
-#. :SVN:705:
-#: ../zypp/CountryCode.cc:411
-msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-# SK
-#. :SJM:744:
-#: ../zypp/CountryCode.cc:412
-msgid "Slovakia"
-msgstr "סלובקיה"
-
-#  Device type label
-#. :SVK:703:
-#: ../zypp/CountryCode.cc:413
-#, fuzzy
-msgid "Sierra Leone"
-msgstr "קו סיריאלי"
-
-#. :SLE:694:
-#: ../zypp/CountryCode.cc:414
-msgid "San Marino"
-msgstr ""
-
-#. :SMR:674:
-#: ../zypp/CountryCode.cc:415
-#, fuzzy
-msgid "Senegal"
-msgstr "בנגאלית"
-
-# RO
-#. :SEN:686:
-#: ../zypp/CountryCode.cc:416
-#, fuzzy
-msgid "Somalia"
-msgstr "רומניה"
-
-#. :SOM:706:
-#: ../zypp/CountryCode.cc:417
-msgid "Suriname"
-msgstr ""
-
-#. :SUR:740:
-#: ../zypp/CountryCode.cc:418
-msgid "Sao Tome and Principe"
-msgstr ""
-
-# SV
-#. :STP:678:
-#: ../zypp/CountryCode.cc:419
-msgid "El Salvador"
-msgstr "אל סלבדור"
-
-#. :SLV:222:
-#: ../zypp/CountryCode.cc:420
-#, fuzzy
-msgid "Syria"
-msgstr "סרבית"
-
-# TH
-#. :SYR:760:
-#: ../zypp/CountryCode.cc:421
-#, fuzzy
-msgid "Swaziland"
-msgstr "תאילנד"
-
-#. :SWZ:748:
-#: ../zypp/CountryCode.cc:422
-msgid "Turks and Caicos Islands"
-msgstr ""
-
-# CA
-#. :TCA:796:
-#: ../zypp/CountryCode.cc:423
-#, fuzzy
-msgid "Chad"
-msgstr "כרטיס"
-
-#. :TCD:148:
-#: ../zypp/CountryCode.cc:424
-msgid "French Southern Territories"
-msgstr ""
-
-#. :ATF:260:
-#: ../zypp/CountryCode.cc:425
-msgid "Togo"
-msgstr ""
-
-# TH
-#. :TGO:768:
-#: ../zypp/CountryCode.cc:426
-msgid "Thailand"
-msgstr "תאילנד"
-
-# TW
-#. :THA:764:
-#: ../zypp/CountryCode.cc:427
-msgid "Tajikistan"
-msgstr "טאג'יקיסטן"
-
-# TW
-#. :TKL:772:
-#: ../zypp/CountryCode.cc:429
-#, fuzzy
-msgid "Turkmenistan"
-msgstr "טאג'יקיסטן"
-
-#. :TKM:795:
-#: ../zypp/CountryCode.cc:430
-msgid "Tunisia"
-msgstr "טוניס"
-
-#. :TUN:788:
-#: ../zypp/CountryCode.cc:431
-msgid "Tonga"
-msgstr ""
-
-#. :TON:776:
-#: ../zypp/CountryCode.cc:432
-msgid "East Timor"
-msgstr ""
-
-# TR
-#. :TLS:626:
-#: ../zypp/CountryCode.cc:433
-msgid "Turkey"
-msgstr "טורקיה"
-
-#. :TUR:792:
-#: ../zypp/CountryCode.cc:434
-msgid "Trinidad and Tobago"
-msgstr ""
-
-# TH
-#. :TUV:798:
-#: ../zypp/CountryCode.cc:436
-#, fuzzy
-msgid "Taiwan"
-msgstr "תאילנד"
-
-#. :TWN:158:
-#: ../zypp/CountryCode.cc:437
-msgid "Tanzania"
-msgstr ""
-
-# UA
-#. :TZA:834:
-#: ../zypp/CountryCode.cc:438
-msgid "Ukraine"
-msgstr "אוקראינה"
-
-# CA
-#. :UKR:804:
-#: ../zypp/CountryCode.cc:439
-#, fuzzy
-msgid "Uganda"
-msgstr "קנדה"
-
-#. :UGA:800:
-#: ../zypp/CountryCode.cc:440
-msgid "United States Minor Outlying Islands"
-msgstr ""
-
-#. :UMI:581:
-#: ../zypp/CountryCode.cc:441
-#, fuzzy
-msgid "United States"
-msgstr "איחוד הנסיכויות הערביות"
-
-# UY
-#. :USA:840:
-#: ../zypp/CountryCode.cc:442
-msgid "Uruguay"
-msgstr "אורוגואי"
-
-#. :URY:858:
-#: ../zypp/CountryCode.cc:443
-msgid "Uzbekistan"
-msgstr "אוסביקיסטן"
-
-#. :UZB:860:
-#: ../zypp/CountryCode.cc:444
-msgid "Holy See (Vatican City State)"
-msgstr ""
-
-#. :VAT:336:
-#: ../zypp/CountryCode.cc:445
-msgid "Saint Vincent and the Grenadines"
-msgstr ""
-
-# VE
-#. :VCT:670:
-#: ../zypp/CountryCode.cc:446
-msgid "Venezuela"
-msgstr "ונצואלה"
-
-#. :VEN:862:
-#: ../zypp/CountryCode.cc:447
-msgid "British Virgin Islands"
-msgstr ""
-
-#. :VGB:092:
-#: ../zypp/CountryCode.cc:448
-msgid "Virgin Islands, U.S."
-msgstr ""
-
-#. :VIR:850:
-#: ../zypp/CountryCode.cc:449
-#, fuzzy
-msgid "Vietnam"
-msgstr "וייטנאמית"
-
-#  ComboBox item
-#. :VNM:704:
-#: ../zypp/CountryCode.cc:450
-#, fuzzy
-msgid "Vanuatu"
-msgstr "מדריך"
-
-#. :VUT:548:
-#: ../zypp/CountryCode.cc:451
-msgid "Wallis and Futuna"
-msgstr ""
-
-#. :WLF:876:
-#: ../zypp/CountryCode.cc:452
-msgid "Samoa"
-msgstr ""
-
-#. :WSM:882:
-#: ../zypp/CountryCode.cc:453
-msgid "Yemen"
-msgstr "תימן"
-
-#  ComboBox item
-#. :YEM:887:
-#: ../zypp/CountryCode.cc:454
-#, fuzzy
-msgid "Mayotte"
-msgstr "אדון"
-
-# ZA
-#. :MYT:175:
-#: ../zypp/CountryCode.cc:455
-msgid "South Africa"
-msgstr "דרום אפריקה"
-
-#. :ZAF:710:
-#: ../zypp/CountryCode.cc:456
-msgid "Zambia"
-msgstr ""
-
-#. :ZMB:894:
-#: ../zypp/CountryCode.cc:457
-msgid "Zimbabwe"
-msgstr "זימבבואה "
-
-#: ../devel/devel.mvidner/installation_sources.cc:56
-#, c-format
-msgid ""
-"File %s is not signed.\n"
-"Use it anyway?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:65
-#, c-format
-msgid ""
-"File %s is signed with an unknown key:\n"
-"%s|%s|%s\n"
-"Use the file anyway?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:75
-#, c-format
-msgid ""
-"Untrusted key found:\n"
-"%s|%s|%s\n"
-"Trust key?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:85
-#, c-format
-msgid ""
-"File %s failed integrity check with the folowing key:\n"
-"%s|%s|%s\n"
-"Use the file anyway?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:99
-#, c-format
-msgid ""
-"File %s does not have a checksum.\n"
-"Use the file anyway?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:108
-#, c-format
-msgid ""
-"File %s has an unknown checksum %s.\n"
-"Use the file anyway?"
-msgstr ""
-
-#: ../devel/devel.mvidner/installation_sources.cc:117
-#, c-format
-msgid ""
-"File %s has an invalid checksum.\n"
-"Expected %s, found %s\n"
-"Use the file anyway?"
-msgstr ""
+#~ msgid " Error!"
+#~ msgstr "שגיאה"
 
 #~ msgid "Ok"
 #~ msgstr "בסדר"
@@ -5292,9 +4948,4 @@ msgstr ""
 # IT
 #, fuzzy
 #~ msgid "installed"
-#~ msgstr "התקן"
-
-# IT
-#, fuzzy
-#~ msgid "uninstalled"
 #~ msgstr "התקן"
