@@ -45,6 +45,9 @@ namespace zypp
       BOOST_MPL_ASSERT_RELATION( noId,                 ==, STRID_NULL );
       BOOST_MPL_ASSERT_RELATION( emptyId,              ==, STRID_EMPTY );
 
+      BOOST_MPL_ASSERT_RELATION( noSolvableId,         ==, ID_NULL );
+      BOOST_MPL_ASSERT_RELATION( systemSolvableId,     ==, SYSTEMSOLVABLE );
+
       BOOST_MPL_ASSERT_RELATION( solvablePrereqMarker, ==, SOLVABLE_PREREQMARKER );
       BOOST_MPL_ASSERT_RELATION( solvableFileMarker,   ==, SOLVABLE_FILEMARKER );
 
@@ -160,6 +163,22 @@ namespace zypp
           MIL << "pool_createwhatprovides..." << endl;
           ::pool_addfileprovides( _pool, sat::Pool::instance().systemRepo().get() );
           ::pool_createwhatprovides( _pool );
+        }
+        if ( ! _pool->languages )
+        {
+          std::vector<std::string> fallbacklist;
+          for ( Locale l( ZConfig::instance().textLocale() ); l != Locale::noCode; l = l.fallback() )
+          {
+            fallbacklist.push_back( l.code() );
+          }
+          dumpRangeLine( MIL << "pool_set_languages: ", fallbacklist.begin(), fallbacklist.end() ) << endl;
+
+          std::vector<const char *> fallbacklist_cstr;
+          for_( it, fallbacklist.begin(), fallbacklist.end() )
+          {
+            fallbacklist_cstr.push_back( it->c_str() );
+          }
+          ::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
         }
       }
 

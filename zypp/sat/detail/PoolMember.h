@@ -41,14 +41,14 @@ namespace zypp
   class Capability;
   class Capabilities;
   class Repository;
-  class RepoInfo;    
+  class RepoInfo;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
-  { 
+  {
     class RepoIterator;
-    class ByRepository;      
-  }    
+    class ByRepository;
+  }
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
@@ -106,12 +106,14 @@ namespace zypp
       */
       typedef unsigned SolvableIdType;
       typedef SolvableIdType size_type;
-     /** Id to denote \ref Solvable::nosolvable. */
+     /** Id to denote \ref Solvable::noSolvable. */
       static const SolvableIdType noSolvableId( 0 );
+     /** Id to denote the usually hidden \ref Solvable::systemSolvable. */
+      static const SolvableIdType systemSolvableId( 1 );
 
       /** Id type to connect \ref Repo and sat-repo. */
       typedef ::_Repo * RepoIdType;
-      /** Id to denote \ref Repo::nosolvable. */
+      /** Id to denote \ref Repo::noRepository. */
       static const RepoIdType noRepoId( 0 );
 
       /////////////////////////////////////////////////////////////////

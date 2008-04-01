@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Apr  1 21:54:10 CEST 2008 - ma@suse.de
+
+- Extend sat::WhatProvides to allow to query for possible providers 
+  of a collection of capabilies. E.g. all providers of a packages 
+  requirements.
+- Fixed retrieval of translated texts from .solv files, provided the 
+  solv file contains them. 
+- revision 9328
+
+-------------------------------------------------------------------
 Tue Apr  1 16:17:44 CEST 2008 - jreidinger@suse.cz
 
 - initial implementation of serialize/recovery PoolQuery

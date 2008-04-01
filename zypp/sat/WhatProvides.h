@@ -13,8 +13,9 @@
 #define ZYPP_SAT_WHATPROVIDES_H
 
 #include <iosfwd>
+#include <vector>
 
-#include "zypp/base/DefaultIntegral.h"
+#include "zypp/base/PtrTypes.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Solvable.h"
 
@@ -30,14 +31,50 @@ namespace zypp
     //	CLASS NAME : WhatProvides
     //
     /** Container of \ref Solvable providing a \ref Capability (read only).
+     *
      * \code
      * Capability cap("amarok < 1.13");
+     *
      * WhatProvides q( cap );
+     * Solvable firstMatch;
+     *
      * if ( ! q.empty() )
      * {
      *   cout << "Found " << q.size() << " matches for " << cap << ":" << endl;
+     *   firstMatch = *q.begin();
+     *
      *   for_( it, q.begin(), q.end() )
-     *     cout << *it << end;
+     *     cout << *it << endl;
+     * }
+     *
+     * if ( firstMatch )
+     * {
+     *   WhatProvides req( firstMatch.requires() );
+     *   if ( ! req.empty() )
+     *   {
+     *      cout << "Found " << req.size() << " items providing requirements of " << firstMatch << ":" << endl;
+     *   }
+     * }
+     * \endcode
+     *
+     * \note Note that there are capabilities which are not provided by any \ref Solvable,
+     * but are system properties. For example:
+     * \code
+     *   rpmlib(PayloadIsBzip2) <= 3.0.5-1
+     * \endcode
+     * In that case a \ref Solvable::noSolvable is returned, which has \c isSystem set \c true, although
+     * there should never be a \ref Solvable::noSolvable returned with \c isSystem set \c false. If so,
+     * please file a bugreport.
+     * \code
+     * WhatProvides q( Capability("rpmlib(PayloadIsBzip2) <= 3.0.5-1") );
+     * for_( it, q.begin(), q.end() )
+     * {
+     *   if ( *it )
+     *     cout << "Capability is provided by package " << *it << endl;
+     *   else if ( it->isSystem() )
+     *     cout << "Capability is a system property" << endl;
+     *   else
+     *     ; // never reaching this \c else
      * }
      * \endcode
      */
@@ -53,11 +90,19 @@ namespace zypp
         : _begin( 0 )
         {}
 
-        /** Ctor from Id pointer (friend \ref Solvable). */
+        /** Ctor from \ref Capability. */
         explicit
         WhatProvides( Capability cap_r );
 
-      public:
+        /** Ctor collecting all providers of capabilities in \c caps_r. */
+        explicit
+        WhatProvides( Capabilities caps_r );
+
+        /** Ctor collecting all providers of capabilities in \c caps_r. */
+        explicit
+        WhatProvides( const CapabilitySet & caps_r );
+
+     public:
         /** Whether the container is empty. */
         bool empty() const
         { return ! ( _begin && *_begin ); }
@@ -76,6 +121,7 @@ namespace zypp
 
       private:
         const sat::detail::IdType * _begin;
+        shared_ptr<void> _private;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -109,7 +155,7 @@ namespace zypp
         friend class boost::iterator_core_access;
 
         reference dereference() const
-        { return ( base() ) ? Solvable( *base() ) : Solvable::nosolvable; }
+        { return ( base() ) ? Solvable( *base() ) : Solvable::noSolvable; }
 
         template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const

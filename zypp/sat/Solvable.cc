@@ -30,7 +30,7 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const Solvable Solvable::nosolvable;
+    const Solvable Solvable::noSolvable;
 
     /////////////////////////////////////////////////////////////////
 
@@ -46,7 +46,7 @@ namespace zypp
 
     Solvable Solvable::nextInRepo() const
     {
-      NO_SOLVABLE_RETURN( nosolvable );
+      NO_SOLVABLE_RETURN( noSolvable );
       for ( detail::SolvableIdType next = _id+1; next < unsigned(_solvable->repo->end); ++next )
       {
         ::_Solvable * nextS( myPool().getSolvable( next ) );
@@ -55,7 +55,7 @@ namespace zypp
           return Solvable( next );
         }
       }
-      return nosolvable;
+      return noSolvable;
     }
 
     Repository Solvable::repository() const
@@ -65,7 +65,10 @@ namespace zypp
     }
 
     bool Solvable::isSystem() const
-    { return repository().isSystemRepo(); }
+    {
+      NO_SOLVABLE_RETURN( _id == detail::systemSolvableId );
+      return Repository( _solvable->repo ).isSystemRepo();
+    }
 
     IdString Solvable::ident() const
     {
@@ -76,26 +79,35 @@ namespace zypp
     std::string Solvable::lookupStrAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( std::string() );
-      const char *s = ::repo_lookup_str( _solvable, attr.idStr().id() );
-      return  s ? s : std::string();
+      const char * s = ::solvable_lookup_str( _solvable, attr.idStr().id() );
+      return s ? s : std::string();
     }
 
     std::string Solvable::lookupStrAttribute( const SolvAttr & attr, const Locale & lang_r ) const
     {
-#warning FIX RETRIEVIENG TRANSLATIONS
-      return lookupStrAttribute( attr );
+      NO_SOLVABLE_RETURN( std::string() );
+      const char * s = 0;
+      if ( lang_r == Locale::noCode )
+      {
+        s = ::solvable_lookup_str_poollang( _solvable, attr.idStr().id() );
+      }
+      else
+      {
+        s = ::solvable_lookup_str_lang( _solvable, attr.idStr().id(), lang_r.code().c_str() );
+      }
+      return s ? s : std::string();
    }
 
     unsigned Solvable::lookupNumAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( 0 );
-      return ::repo_lookup_num( _solvable, attr.idStr().id() );
+      return ::solvable_lookup_num( _solvable, attr.idStr().id(), 0 );
     }
 
     bool Solvable::lookupBoolAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( false );
-      return ::repo_lookup_num( _solvable, attr.idStr().id() );
+      return ::solvable_lookup_bool( _solvable, attr.idStr().id() );
     }
 
     std::string Solvable::lookupLocation(unsigned &medianr) const
@@ -399,7 +411,7 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const Solvable & obj )
     {
       if ( ! obj )
-        return str << "sat::solvable()";
+        return str << (obj.isSystem() ? "systemSolvable" : "noSolvable" );
 
       return str << "(" << obj.id() << ")"
           << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()

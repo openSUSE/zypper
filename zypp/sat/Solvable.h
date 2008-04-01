@@ -49,8 +49,6 @@ namespace zypp
      * \ref Solvable will hide this inconsistency by treating source
      * packages as an own kind of solvable and map their arch to
      * \ref Arch_noarch.
-     *
-     *
      */
     class Solvable : protected detail::PoolMember,
                      private base::SafeBool<Solvable>
@@ -59,7 +57,7 @@ namespace zypp
         typedef sat::detail::SolvableIdType IdType;
 
       public:
-        /** Default ctor creates \ref nosolvable.*/
+        /** Default ctor creates \ref noSolvable.*/
         Solvable()
         : _id( detail::noSolvableId ) {}
 
@@ -69,12 +67,14 @@ namespace zypp
 
       public:
         /** Represents no \ref Solvable. */
-        static const Solvable nosolvable;
+        static const Solvable noSolvable;
 
-        /** Evaluate \ref Solvable in a boolean context (\c != \c nosolvable). */
+        /** Evaluate \ref Solvable in a boolean context (\c != \c noSolvable). */
         using base::SafeBool<Solvable>::operator bool_type;
 
-        /** Return whether this \ref Solvable belongs to the system repo. */
+        /** Return whether this \ref Solvable belongs to the system repo.
+         * \note This includes the otherwise hidden systemSolvable.
+        */
         bool isSystem() const;
 
         /** The \ref Repository this \ref Solvable belongs to. */
@@ -89,11 +89,13 @@ namespace zypp
         std::string lookupStrAttribute( const SolvAttr & attr ) const;
         /** \overload Trying to look up a translated string attribute.
          *
-         * Passing an empty \ref Locale will return the string for the
-         * current default locale (\see \ref ZConfig::defaultTextLocale).
+         * Returns the translation for \c lang_r (\b no fallback locales).
          *
-         * Returns the translation for \c lang_r considering all fallback
-         * locales. Returns an empty string if no translation is available.
+         * Passing an empty \ref Locale will return the string for the
+         * current default locale (\see \ref ZConfig::defaultTextLocale),
+         * \b considering all fallback locales.
+         *
+         * Returns an empty string if no translation is available.
         */
         std::string lookupStrAttribute( const SolvAttr & attr, const Locale & lang_r ) const;
 
@@ -175,9 +177,9 @@ namespace zypp
         //@}
 
       public:
-        /** Return next Solvable in \ref Pool (or \ref nosolvable). */
+        /** Return next Solvable in \ref Pool (or \ref noSolvable). */
         Solvable nextInPool() const;
-        /** Return next Solvable in \ref Repo (or \ref nosolvable). */
+        /** Return next Solvable in \ref Repo (or \ref noSolvable). */
         Solvable nextInRepo() const;
 
       public:
