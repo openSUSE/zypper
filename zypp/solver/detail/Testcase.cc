@@ -172,32 +172,6 @@ std::string helixXML( const CapabilitySet &caps )
     return str.str();
 }
 
-
-template<>
-std::string helixXML( const Dependencies &dep )
-{
-    stringstream str;
-    if ( dep[Dep::PROVIDES].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::PROVIDES]), "provides") << endl;
-    if ( dep[Dep::CONFLICTS].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::CONFLICTS]), "conflicts") << endl;
-    if ( dep[Dep::OBSOLETES].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::OBSOLETES]), "obsoletes") << endl;
-    if ( dep[Dep::FRESHENS].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::FRESHENS]), "freshens") << endl;
-    if ( dep[Dep::REQUIRES].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::REQUIRES]), "requires") << endl;
-    if ( dep[Dep::RECOMMENDS].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::RECOMMENDS]), "recommends") << endl;
-    if ( dep[Dep::ENHANCES].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::ENHANCES]), "enhances") << endl;
-    if ( dep[Dep::SUPPLEMENTS].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::SUPPLEMENTS]), "supplements") << endl;
-    if ( dep[Dep::SUGGESTS].size() > 0 )
-	str << TAB << xml_tag_enclose(helixXML(dep[Dep::SUGGESTS]), "suggests") << endl;
-    return str.str();
-}
-
 inline string helixXML( const Resolvable::constPtr &obj, Dep deptag_r )
 {
   stringstream out;

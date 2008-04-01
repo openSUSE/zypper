@@ -42,7 +42,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Dependencies Stream output */
-  std::ostream & operator<<( std::ostream & str, const Dependencies & obj );
+  std::ostream & operator<<( std::ostream & str, const Dependencies & obj ) ZYPP_DEPRECATED;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -55,9 +55,6 @@ template<>
 std::string helixXML( const CapabilitySet &caps );
 
 template<> 
-std::string helixXML( const Dependencies &dep );
-	
-template<> 
 std::string helixXML( const PoolItem &item );
 
 

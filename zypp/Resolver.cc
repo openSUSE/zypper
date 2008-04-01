@@ -84,6 +84,7 @@ namespace zypp
   bool Resolver::onlyRequires()
   {
       switch (_pimpl->onlyRequires()) {
+	  default: // to silence compiler warnings about no-value returns
 	  case DEFAULT:
 	      return ZConfig::instance().solver_onlyRequires();
 	  case TRUE:

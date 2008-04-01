@@ -29,7 +29,7 @@ namespace zypp
    * \note Stream output and comaprison operators based on
    * \ref NVRA.
   */
-  struct NVRAD : public NVRA, public Dependencies
+  struct ZYPP_DEPRECATED NVRAD : public NVRA, public Dependencies
   {
     /** Default ctor */
     NVRAD()
@@ -69,7 +69,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates NVRAD Stream output */
-  std::ostream & operator<<( std::ostream & str, const NVRAD & obj );
+  std::ostream & operator<<( std::ostream & str, const NVRAD & obj ) ZYPP_DEPRECATED;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
