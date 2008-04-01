@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr  1 16:17:44 CEST 2008 - jreidinger@suse.cz
+
+- initial implementation of serialize/recovery PoolQuery
+  (needed by FATE #120118)
+- revision 9325
+
+-------------------------------------------------------------------
 Wed Mar 26 16:15:24 CET 2008 - ma@suse.de
 
 - Allow prioritizing repos by adding a line 'priority=N' to the
