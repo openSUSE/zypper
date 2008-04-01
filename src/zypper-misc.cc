@@ -1076,8 +1076,9 @@ bool resolve(Zypper & zypper)
   // and not rug_compatible mode
   if (indeterminate(force_resolution))
   {
-    if (zypper.globalOpts().non_interactive &&
-        !zypper.globalOpts().is_rug_compatible)
+    if ((zypper.globalOpts().non_interactive &&
+        !zypper.globalOpts().is_rug_compatible) ||
+        zypper.command() == ZypperCommand::DIST_UPGRADE) // bnc #369980
       force_resolution = false;
     else
       force_resolution = true;
