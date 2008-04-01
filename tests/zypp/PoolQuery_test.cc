@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <iostream>
+#include <iterator>
 #include <boost/test/auto_unit_test.hpp>
+#include <list>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/PoolQueryUtil.h"
+#include "zypp/TmpPath.h"
 
 #define BOOST_TEST_MODULE PoolQuery
 
@@ -43,4 +47,38 @@ BOOST_AUTO_TEST_CASE(pool_query)
 
   cout << "search done." << endl;
 #endif
+
+//test recovery from file
+  Pathname pathToQueries(TESTS_SRC_DIR);
+  pathToQueries += "/zypp/data/PoolQuery/savedqueries";
+
+  std::list<PoolQuery> savedQueries;
+
+  std::insert_iterator<std::list<PoolQuery> > ii(savedQueries, savedQueries.end());
+  readPoolQueriesFromFile(pathToQueries,ii);
+  BOOST_CHECK( savedQueries.size() == 2 );
+
+  filesystem::TmpFile tmp;
+  Pathname tmpPath = tmp.path();
+
+  savedQueries.clear();
+
+  PoolQuery q1;
+  PoolQuery q2;
+
+  q1.addKind( Resolvable::Kind::patch );
+  q2.addKind( Resolvable::Kind::patch );
+  q2.addKind( Resolvable::Kind::pattern );
+
+  savedQueries.push_front( q1 );
+  savedQueries.push_front( q2 );
+
+  writePoolQueriesToFile ( tmpPath, savedQueries.begin(), savedQueries.end() );
+  std::insert_iterator<std::list<PoolQuery> > ii2(savedQueries,
+      savedQueries.end());
+  //reread writed queries
+  readPoolQueriesFromFile( tmpPath, ii2);
+  //TODO test if 0==2 and 1==3
+  BOOST_CHECK( savedQueries.size() == 4 );
+
 }

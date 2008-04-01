@@ -22,6 +22,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/SolvAttr.h"
 
 extern "C"
 {
@@ -198,6 +199,148 @@ namespace zypp
   {
     return str;
   }
+  
+
+  /**
+   * represents all atributes in PoolQuery except SolvAtributes, which is
+   * used as is (not needed extend anythink if someone add new solv attr)
+   */
+  struct PoolQueryAttr : public IdStringType<PoolQueryAttr>
+  {
+    private:
+      friend class IdStringType<PoolQueryAttr>;
+      IdString _str;
+
+    public:
+    
+    //noAttr
+    PoolQueryAttr():isSolvAttr(false){}
+
+    explicit PoolQueryAttr( const char* cstr_r )
+        : _str( cstr_r ),isSolvAttr(false){}
+
+    explicit PoolQueryAttr( const std::string & str_r )
+        : _str( str_r ),isSolvAttr(false)
+    {
+      if( _str==noAttr ){
+        sat::SolvAttr sa(str_r);
+        if( sa != sat::SolvAttr::noAttr )
+        {
+          isSolvAttr = true; 
+        }
+      }
+    }
+
+    //unknown atributes
+    static const PoolQueryAttr noAttr;
+
+    // own attributes
+    static const PoolQueryAttr nameAttr;
+    static const PoolQueryAttr repoAttr;
+    static const PoolQueryAttr kindAttr;
+
+    // exported attributes from SolvAtributes
+    bool isSolvAttr;
+  };
+
+  const PoolQueryAttr PoolQueryAttr::noAttr;
+
+  const PoolQueryAttr PoolQueryAttr::nameAttr( "name" );
+  const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
+  const PoolQueryAttr PoolQueryAttr::kindAttr( "kind" );
+
+  //\TODO maybe ctor with stream can be usefull
+  bool PoolQuery::recover( istream &str, char delim )
+  {
+    bool finded_something = false; //indicates some atributes is finded
+    string s;
+    do {
+      if ( str.eof() )
+        break;
+
+      getline( str, s, delim );
+
+      if ((!s.empty()) && s[0]=='#') //comment
+      {
+        continue;
+      }
+
+      string::size_type pos = s.find(':');
+      if (s.empty() || pos == s.npos) // some garbage on line... act like blank line
+      {
+        if (finded_something) //is first blank line after record?
+        {
+          break;
+        }
+        else
+        {
+          continue;
+        }
+      }
+
+      finded_something = true;
+
+      string atrName(str::trim(string(s,0,pos))); // trimmed name of atribute
+      string atrValue(str::trim(string(s,pos+1,s.npos))); //trimmed value
+
+      PoolQueryAttr attribute( atrName );
+
+      if ( attribute==PoolQueryAttr::nameAttr)
+      {
+        //setName...maybe some regex test
+        break;
+      }
+      else if ( attribute==PoolQueryAttr::repoAttr )
+      {
+        addRepo( atrValue );
+      }
+      else if ( attribute==PoolQueryAttr::kindAttr )
+      {
+        addKind( Resolvable::Kind(atrValue) );
+      }
+      else if ( attribute==PoolQueryAttr::noAttr )
+      {
+        if (attribute.isSolvAttr)
+        {
+          //setAtribute
+        }
+        else
+        {
+          //log unknwon atribute
+        }
+      }
+      else
+      {
+        //some forget handle new atribute
+        ;
+      }
+      
+    } while ( true );
+
+    return finded_something;
+  }
+
+  void PoolQuery::serialize( ostream &str, char delim )
+  {
+    //separating delim
+    str << delim; 
+    //iterate thrue all settings and write it
+    
+    for_( it, _pimpl->_repos.begin(), _pimpl->_repos.end() )
+    {
+      str << "repo: " << *it << delim ;
+    }
+
+    for_( it, _pimpl->_kinds.begin(), _pimpl->_kinds.end() )
+    {
+      str << "kind: " << it->idStr() << delim ;
+    }
+
+    //separating delim - protection
+    str << delim; 
+
+  }
+     
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

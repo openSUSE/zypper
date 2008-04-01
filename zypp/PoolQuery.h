@@ -173,12 +173,35 @@ namespace zypp
     
     // a forEach method consuming a functor can be added here, too
 
+    /**
+     * Reads from stream query. Attributes is sepated by delim. Query is 
+     * separated by two delim.
+     * 
+     * \param str input stream which contains query
+     * \param delim delimeter for attributes
+     * \return true if non-empty query is recovered
+     * 
+     * \see readPoolQueriesFromFile
+     */
+    bool recover( std::istream &str, char delim = '\n' );
+
+    /**
+     * Writes query to stream, As delimeter is used delim.
+     *
+     * \param str output stream for query
+     * \param delim delimeter for attributes
+     *
+     * \see writePoolQueriesToFile
+     */
+    void serialize( std::ostream &str, char delim = '\n' );
+
   public:
     class Impl;
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };
+
 
 
 /////////////////////////////////////////////////////////////////

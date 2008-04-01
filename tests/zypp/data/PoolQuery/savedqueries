@@ -1,0 +1,5 @@
+#repo cannot be tested due to possibly missing allias
+kind: patch
+
+kind: product
+kind: pattern
