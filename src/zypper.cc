@@ -1950,24 +1950,7 @@ void Zypper::doCommand()
           it != rpms_files_caps.end(); ++it )
       mark_by_capability (*this, true, kind, *it);
 
-    // solve dependencies
-    if (copts.count("debug-solver"))
-    {
-      God->applyLocks();
-      out().info(_("Generating solver test case..."));
-      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
-      else
-      {
-        out().error(_("Error creating the solver test case."));
-        setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-        return;
-      }
-    }
-    else
-    {
-      solve_and_commit(*this);
-    }
+    solve_and_commit(*this);
 
     return;
   }
@@ -2340,23 +2323,7 @@ void Zypper::doCommand()
     bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
     mark_updates( kinds, skip_interactive, best_effort );
 
-
-    if (copts.count("debug-solver"))
-    {
-      God->applyLocks();
-      out().info(_("Generating solver test case..."));
-      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
-      else
-        out().error(_("Error creating the solver test case."));
-    }
-    // commit
-    // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
-    // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    else
-    {
-      solve_and_commit(*this);
-    }
+    solve_and_commit(*this);
 
     return; 
   }
@@ -2394,22 +2361,7 @@ void Zypper::doCommand()
     zypp::UpgradeStatistics opt_stats;
     God->resolver()->doUpgrade(opt_stats);
 
-    if (copts.count("debug-solver"))
-    {
-      God->applyLocks();
-      out().info(_("Generating solver test case..."));
-      if (God->resolver()->createSolverTestcase("/var/log/zypper.solverTestCase"))
-        out().info(_("Solver test case generated successfully at /var/log/zypper.solverTestCase."));
-      else
-        out().error(_("Error creating the solver test case."));
-    }
-    // commit
-    // returns ZYPPER_EXIT_OK, ZYPPER_EXIT_ERR_ZYPP,
-    // ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-    else
-    {
-      solve_and_commit(*this);
-    }
+    solve_and_commit(*this);
 
     return; 
   }

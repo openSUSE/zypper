@@ -36,16 +36,6 @@ void mark_by_capability (Zypper & zypper,
  */
 void remove_selections(Zypper & zypper);
 
-/** Show install summary */
-int show_summary(Zypper & zypper);
-
-/**
- * Run the solver.
- * 
- * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
- */
-bool resolve(Zypper & zypper);
-
 /** List patches */
 void show_patches(Zypper & zypper);
 

@@ -805,7 +805,7 @@ static void show_summary_of_type(Zypper & zypper,
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-int summary(Zypper & zypper)
+static int summary(Zypper & zypper)
 {
   int retv = -1; // nothing to do;
 
@@ -1042,14 +1042,11 @@ static int apply_locks(Zypper & zypper)
   return locks;
 }
 
-bool resolve(Zypper & zypper)
+static void set_force_resolution(Zypper & zypper)
 {
-  apply_locks(zypper);
-  dump_pool();
-
   // --force-resolution command line parameter value
   tribool force_resolution = indeterminate;
-  vector<string>::size_type count = copts.count("force-resolution");
+  unsigned int count = zypper.cOpts().count("force-resolution");
   if (count)
   {
     string value = copts["force-resolution"].front();
@@ -1091,14 +1088,26 @@ bool resolve(Zypper & zypper)
   ostringstream s;
   s << _("Force resolution:") << " " << (force_resolution ? _("Yes") : _("No"));
   zypper.out().info(s.str(), Out::HIGH);
-  God->resolver()->setForceResolve( force_resolution );
 
+  God->resolver()->setForceResolve(force_resolution);
+}
+
+/**
+ * Run the solver.
+ * 
+ * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
+ */
+static bool resolve(Zypper & zypper)
+{
+  apply_locks(zypper);
+  dump_pool(); // debug
+  set_force_resolution(zypper);
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
 }
 
-bool verify(Zypper & zypper)
+static bool verify(Zypper & zypper)
 {
   apply_locks(zypper);
   dump_pool();
@@ -1110,6 +1119,25 @@ bool verify(Zypper & zypper)
   God->resolver()->setOnlyRequires(true);
   DBG << "Calling the solver to verify system..." << endl;
   return God->resolver()->verifySystem();
+}
+
+static void make_solver_test_case(Zypper & zypper)
+{
+  apply_locks(zypper);
+  set_force_resolution(zypper);
+  
+  string testcase_dir("/var/log/zypper.solverTestCase");
+
+  zypper.out().info(_("Generating solver test case..."));
+  if (God->resolver()->createSolverTestcase(testcase_dir))
+    zypper.out().info(boost::str(
+      format(_("Solver test case generated successfully at %s."))
+        % testcase_dir));
+  else
+  {
+    zypper.out().error(_("Error creating the solver test case."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+  }
 }
 
 void patch_check ()
@@ -1713,6 +1741,12 @@ void mark_updates(const ResKindSet & kinds, bool skip_interactive, bool best_eff
  */
 void solve_and_commit (Zypper & zypper)
 {
+  if (zypper.cOpts().count("debug-solver"))
+  {
+    make_solver_test_case(zypper);
+    return;
+  }
+
   MIL << "solving..." << endl;
 
   while (true) {
