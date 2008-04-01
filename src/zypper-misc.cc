@@ -1072,16 +1072,19 @@ bool resolve(Zypper & zypper)
   }
 
   // if --force-resolution was not specified on the command line, force
-  // the resolution by default, don't force it only in non-interactive mode
-  // and not rug_compatible mode
+  // the resolution by default for the install and remove commands and the
+  // rug_compatible mode. Don't force resolution in non-interactive mode
+  // and for update and dist-upgrade command (complex solver request).
+  // bnc #369980
   if (indeterminate(force_resolution))
   {
-    if ((zypper.globalOpts().non_interactive &&
-        !zypper.globalOpts().is_rug_compatible) ||
-        zypper.command() == ZypperCommand::DIST_UPGRADE) // bnc #369980
-      force_resolution = false;
-    else
+    if (!zypper.globalOpts().non_interactive &&
+        (zypper.globalOpts().is_rug_compatible ||
+         zypper.command() == ZypperCommand::INSTALL ||
+         zypper.command() == ZypperCommand::REMOVE))
       force_resolution = true;
+    else
+      force_resolution = false;
   }
 
   DBG << "force resolution: " << force_resolution << endl;

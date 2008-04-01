@@ -199,7 +199,11 @@ Create solver test case for debugging. See the install command for details.
 .TP
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements.
+with unfulfilled requirements. Otherwise it reports
+a dependency problem and prompt the user to resolve it manually.
+
+The default value is 'on' in the interactive mode and 'off' in the
+non-interactive mode. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
 Test the removal of packages, do not actually remove anything. This option will
@@ -232,7 +236,10 @@ Create solver test case for debugging. See the install command for details.
 .TP
 .I \-R, \-\-force\-resolution
 Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements.
+with unfulfilled requirements. Otherwise it reports
+a dependency problem and prompt the user to resolve it manually.
+
+The default value is 'off'. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
@@ -659,7 +666,7 @@ or other capabilities.
 .LP
 zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands. 
 .LP
-To enable rug compatible behavior, use the \-r or \-\-rug\-compatible global option with each command.
+To enable rug-compatible behavior, use the \-r or \-\-rug\-compatible global option with each command.
 
 .SS Service Management Commands
 .LP
@@ -700,7 +707,7 @@ This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .TP
 .I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode. However, it is
+solver mode by default when running in rug-compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
 .RE
@@ -715,7 +722,7 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .TP
 .I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode. However, it is
+solver mode by default when running in rug-compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
 .RE
@@ -742,7 +749,7 @@ This option is an alias to zypper's \-\-auto-agree\-with\-licenses option.
 .TP
 .I \-R, \-\-force\-resolution <on|off>
 This option is not available in rug and zypper uses the 'force-resolution'
-solver mode by default when running rug in compatible mode. However, it is
+solver mode by default when running in rug-compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
 .RE
