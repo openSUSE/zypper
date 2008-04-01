@@ -378,7 +378,9 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     HelixControl control (dumpPath + "/solver-test.xml",
 			  repoTable,
 			  ZConfig::instance().systemArchitecture(),
-			  pool.getRequestedLocales());
+			  pool.getRequestedLocales(),
+			  "solver-system.xml.gz",
+			  resolver.forceResolve());
 
     for (PoolItemList::const_iterator iter = items_to_install.begin(); iter != items_to_install.end(); iter++) {
 	control.installResolvable (iter->resolvable(), iter->status());
@@ -432,7 +434,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 			   const RepositoryTable & repoTable,
 			   const Arch & systemArchitecture,
 			   const LocaleSet &languages,
-			   const std::string & systemPath)
+			   const std::string & systemPath,
+			   const bool forceResolve)
     :dumpFile (controlPath)
 {
     file = new ofstream(controlPath.c_str());
@@ -468,6 +471,10 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << "<locale name=\"" <<  iter->code()
 	      << "\" />" << endl;
     }
+    
+    if (forceResolve)
+	*file << TAB << "<forceResolve/>" << endl;
+    
     *file << "</setup>" << endl
 	  << "<trial>" << endl
 	  << "<showpool all=\"yes\"/>" << endl;
