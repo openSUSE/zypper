@@ -85,7 +85,7 @@ namespace zypp
       ResObject::constPtr resolvable() const;
 
       sat::Solvable satSolvable() const
-      { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::nosolvable; }
+      { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
 
     public:
       /** Implicit conversion into ResObject::constPtr to
