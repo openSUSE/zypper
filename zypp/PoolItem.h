@@ -69,25 +69,33 @@ namespace zypp
       ~PoolItem();
 
     public:
-      /** Return the \ref ResPool the item belongs to. */
-      ResPool pool() const;
-
-    public:
       /** Returns the current status. */
       ResStatus & status() const;
 
       /** Reset status. */
       ResStatus & statusReset() const;
 
+      /** Whether the items requirements are met. */
+      bool isSatisfied() const;
+
+      /** Whether the items requirements are broken. */
+      bool isBroken() const
+      { return ! isSatisfied(); }
+
+    public:
+      /** Return the \ref ResPool the item belongs to. */
+      ResPool pool() const;
+
+      /** Return the corresponding \ref sat::Solvable. */
+      sat::Solvable satSolvable() const
+      { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
+
+    public:
       /** Returns the ResObject::constPtr.
        * \see \ref operator->
        */
       ResObject::constPtr resolvable() const;
 
-      sat::Solvable satSolvable() const
-      { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
-
-    public:
       /** Implicit conversion into ResObject::constPtr to
        *  support query filters operating on ResObject.
        */

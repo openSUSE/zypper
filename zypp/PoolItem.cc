@@ -30,63 +30,69 @@ namespace zypp
   /** PoolItem implementation. */
   struct PoolItem::Impl
   {
-    Impl()
-    {}
+    public:
+      Impl() {}
 
-    Impl( ResObject::constPtr res_r,
-          const ResStatus & status_r )
-    : _status( status_r )
-    , _resolvable( res_r )
-    {
-    }
+      Impl( ResObject::constPtr res_r,
+            const ResStatus & status_r )
+      : _status( status_r )
+      , _resolvable( res_r )
+      {}
 
-    ResStatus & status() const
-    { return _status; }
+      ResStatus & status() const
+      { return _status; }
 
-    ResObject::constPtr resolvable() const
-    { return _resolvable; }
+      ResObject::constPtr resolvable() const
+      { return _resolvable; }
 
-    ResStatus & statusReset() const
-    {
-      _status.setLock( false, zypp::ResStatus::USER );
-      _status.resetTransact( zypp::ResStatus::USER );
-      return _status;
-    }
+      ResStatus & statusReset() const
+      {
+        _status.setLock( false, zypp::ResStatus::USER );
+        _status.resetTransact( zypp::ResStatus::USER );
+        return _status;
+      }
 
+    public:
 
-  private:
-    mutable ResStatus     _status;
-    ResObject::constPtr   _resolvable;
+      bool isSatisfied() const
+      {
+#warning TBD determine isSatisfied
+        return true;
+      }
+
+    private:
+      mutable ResStatus     _status;
+      ResObject::constPtr   _resolvable;
 
     /** \name Poor man's save/restore state.
-     * \todo There may be better save/restore state strategies.
-    */
+       * \todo There may be better save/restore state strategies.
+     */
     //@{
-  public:
-    void saveState() const
-    { _savedStatus = _status; }
-    void restoreState() const
-    { _status = _savedStatus; }
-    bool sameState() const
-    {
-      if (    _status.getTransactValue() != _savedStatus.getTransactValue()
-           && !_status.isBySolver() )
-        return false;
-      if ( _status.isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
-        return false;
-      return true;
-    }
-  private:
-    mutable ResStatus _savedStatus;
+    public:
+      void saveState() const
+      { _savedStatus = _status; }
+      void restoreState() const
+      { _status = _savedStatus; }
+      bool sameState() const
+      {
+        if (    _status.getTransactValue() != _savedStatus.getTransactValue()
+                && !_status.isBySolver() )
+          return false;
+        if ( _status.isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
+          return false;
+        return true;
+      }
+    private:
+      mutable ResStatus _savedStatus;
     //@}
 
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
+    public:
+      /** Offer default Impl. */
+      static shared_ptr<Impl> nullimpl()
+      {
+        static shared_ptr<Impl> _nullimpl( new Impl );
+        return _nullimpl;
+      }
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -176,11 +182,14 @@ namespace zypp
   ResStatus & PoolItem::status() const
   { return _pimpl->status(); }
 
-  ResObject::constPtr PoolItem::resolvable() const
-  { return _pimpl->resolvable(); }
-
   ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
+
+  bool PoolItem::isSatisfied() const
+  { return _pimpl->isSatisfied(); }
+
+  ResObject::constPtr PoolItem::resolvable() const
+  { return _pimpl->resolvable(); }
 
   void PoolItem::saveState() const
   { _pimpl->saveState(); }
