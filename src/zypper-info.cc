@@ -165,14 +165,8 @@ void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const Poo
 
   cout << _("Status: "); // TODO debug
   bool i = ins_pool_item ? true : false;
-  if (pool_item.status().isUndetermined ())
-    cout << (i ? _("Installed"): _("Uninstalled"));
-  else if (pool_item.status().isEstablishedUneeded ())
-    cout << (i ? _("No Longer Applicable"): _("Not Applicable"));
-  else if (pool_item.status().isEstablishedSatisfied ())
-    cout << (i ? _("Applied"): _("Not Needed"));
-  else if (pool_item.status().isEstablishedIncomplete ())
-    cout << (i ? _("Broken"): _("Needed"));
+  if (pool_item.isBroken ())
+    cout << (i ? _("broken"): _("satisfied"));
   cout << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());

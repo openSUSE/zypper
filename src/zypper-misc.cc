@@ -269,8 +269,8 @@ static void mark_for_install(Zypper & zypper,
       installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch() &&
       ( ! copts.count("force") ) )
   {
-    // if it is needed install anyway, even if it is installed
-    if ( installer.item.status().isNeeded() )
+    // if it is broken install anyway, even if it is installed
+    if ( installer.item.isBroken() )
     {
       installer.item.status().setTransact( true, zypp::ResStatus::USER );
     }
@@ -1024,7 +1024,7 @@ static void dump_pool ()
 
     if (!full_pool_shown                                    // show item if not shown all before
         || it->status().transacts()                         // or transacts
-        || !it->status().isUndetermined())                  // or established status
+        || !it->isBroken())                                 // or broken status
     {
       _XDEBUG( count << ": " << *it );
     }
@@ -1155,7 +1155,7 @@ void patch_check ()
     ResObject::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
 
-    if ( it->status().isNeeded() )
+    if ( it->isBroken() )
     {
       gData.patches_count++;
       if (patch->category() == "security")
@@ -1177,17 +1177,7 @@ void patch_check ()
 
 static string string_status (const ResStatus& rs)
 {
-  bool i = rs.isInstalled ();
-  if (rs.isUndetermined ())
-    return i? _("Installed"): _("Uninstalled");
-  else if (rs.isEstablishedUneeded ())
-    return i? _("No Longer Applicable"): _("Not Applicable");
-  else if (rs.isEstablishedSatisfied ())
-    return i? _("Applied"): _("Not Needed");
-  else if (rs.isEstablishedIncomplete ())
-    return i? _("Broken"): _("Needed");
-  // if ResStatus interface changes
-  return _("error");
+  return rs.isInstalled () ? _("Installed"): _("Uninstalled");
 }
 
 // patches
@@ -1207,11 +1197,6 @@ void show_patches(Zypper & zypper)
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->status().isUndetermined() ) {
-#warning is this a library bug?
-      // these are duplicates of those that are determined
-      continue;
-    }
     Patch::constPtr patch = asKind<Patch>(res);
 
     TableRow tr;
@@ -1219,6 +1204,8 @@ void show_patches(Zypper & zypper)
     tr << res->name () << res->edition ().asString();
     tr << patch->category();
     tr << string_status (it->status ());
+    if (it->isBroken())
+      tr <<  _("Broken");
     tbl << tr;
   }
   tbl.sort (1);			// Name
@@ -1248,7 +1235,7 @@ bool xml_list_patches ()
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->status().isNeeded() )
+    if ( it->isBroken() )
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
@@ -1268,7 +1255,7 @@ bool xml_list_patches ()
 
     patchcount++;
 
-    if ( it->status().isNeeded())
+    if ( it->isBroken())
     {
       Patch::constPtr patch = asKind<Patch>(res);
       if ((pkg_mgr_available && patch->affects_pkg_manager())  ||
@@ -1330,7 +1317,7 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->status().isNeeded() )
+    if ( it->isBroken() )
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
@@ -1340,6 +1327,8 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
 	tr << string_status (it->status ());
+	if (it->isBroken())
+	  tr <<  _("Broken");
 
 	if (patch->affects_pkg_manager ())
 	  pm_tbl << tr;
@@ -1688,7 +1677,7 @@ void mark_patch_updates( bool skip_interactive )
       {
 	ResObject::constPtr res = it->resolvable();
 
-	if ( it->status().isNeeded() ) {
+	if ( it->isBroken() ) {
 	  Patch::constPtr patch = asKind<Patch>(res);
 	  if (attempt == 1 || patch->affects_pkg_manager ()) {
 	    // #221476

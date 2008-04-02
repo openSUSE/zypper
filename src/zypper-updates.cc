@@ -121,8 +121,8 @@ void render_result( const Edition &version, std::ostream &out, const zypp::ResPo
   {
     Resolvable::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
-    MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->status().isNeeded() ? " [needed]" : " [unneeded]" )<< std::endl;
-    if ( it->status().isNeeded() )
+    MIL << patch->name() << " " << patch->edition() << " " << "[" << patch->category() << "]" << ( it->isBroken() ? " [broken]" : " [satisfied]" )<< std::endl;
+    if ( it->isBroken() )
     {
       out << " <update category=\"" << patch ->category() << "\" name=\"" << patch->name() << "\" edition=\"" << patch->edition() << "\"" << ">" << std::endl;
       out << " <summary>" << xml_escape(patch->summary()) << "</summary>" << endl;
