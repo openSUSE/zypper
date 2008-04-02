@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr  2 13:48:52 CEST 2008 - schubi@suse.de
+
+- Moved poolItem.status().isSatisfied(),.... to poolItem.isSatisfied()
+- Removed establish state in ResStatus 
+- revision 9337
+- version 4.7.0
+
+-------------------------------------------------------------------
 Wed Apr  2 10:24:17 CEST 2008 - ma@suse.de
 
 - Add PoolItem::isSatisfied()/isBroken() to test whether 
