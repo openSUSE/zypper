@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr  2 10:24:17 CEST 2008 - ma@suse.de
+
+- Add PoolItem::isSatisfied()/isBroken() to test whether 
+  the items requirements are met.
+- revision 9334
+
+-------------------------------------------------------------------
 Tue Apr  1 21:54:10 CEST 2008 - ma@suse.de
 
 - Extend sat::WhatProvides to allow to query for possible providers 
