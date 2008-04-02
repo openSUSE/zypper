@@ -20,19 +20,14 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, UNDETERMINED, TRANSACT);
-  const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_INSTALL);
-  const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
-  const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
-  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
-  const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
-  const ResStatus ResStatus::installed			 (INSTALLED,   UNDETERMINED);
-  const ResStatus ResStatus::uninstalled		 (UNINSTALLED, UNDETERMINED);
-  const ResStatus ResStatus::incomplete			 (INSTALLED,   INCOMPLETE);
-  const ResStatus ResStatus::complete			 (INSTALLED,   SATISFIED);
-  const ResStatus ResStatus::satisfied			 (UNINSTALLED, SATISFIED);
-  const ResStatus ResStatus::unneeded			 (UNINSTALLED, UNNEEDED);
-  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE);
+  const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, TRANSACT);
+  const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, TRANSACT, SOFT_INSTALL);
+  const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   TRANSACT);
+  const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
+  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+  const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
+  const ResStatus ResStatus::installed			 (INSTALLED);
+  const ResStatus ResStatus::uninstalled		 (UNINSTALLED);
   const ResStatus ResStatus::recommended		 (RECOMMENDED);
   const ResStatus ResStatus::suggested			 (SUGGESTED);        
 
@@ -62,10 +57,9 @@ namespace zypp
   {}
 
 
-  ResStatus::ResStatus (enum StateValue s, enum EstablishValue e, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
+  ResStatus::ResStatus (enum StateValue s, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
     : _bitfield (s)
   {
-    fieldValueAssign<EstablishField>(e);
     fieldValueAssign<TransactField>(t);
     if (t == TRANSACT) {
 	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
@@ -85,10 +79,6 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj )
   {
     str << (obj.isInstalled() ? "I" : "U");
-
-    str << (obj.isEstablishedUneeded() ? "U" :
-	( obj.isEstablishedSatisfied() ? "S" :
-	( obj.isEstablishedIncomplete() ? "I" : "_") ) );
 
     str << (obj.transacts () ? "T"
                              : (obj.isLocked() ? "L" : "_") );

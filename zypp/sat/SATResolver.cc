@@ -239,19 +239,6 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 	r = item.status().setToBeUninstalled (causer);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") remove !" << r);
     }
-    else if (status.isIncomplete()
-	     || status.isNeeded()) {
-	r = item.status().setIncomplete();
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") incomplete !" << r);
-    }
-    else if (status.isUnneeded()) {
-	r = item.status().setUnneeded();
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") unneeded !" << r);
-    }
-    else if (status.isSatisfied()) {
-	r = item.status().setSatisfied();
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") satisfied !" << r);
-    }
     else if (status.isRecommended()) {
 	item.status().setRecommended(true);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") recommended !" << r);
