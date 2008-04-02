@@ -31,6 +31,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
+#include "zypp/TriBool.h"
 #include "zypp/base/SerialNumber.h"
 
 #include "zypp/solver/detail/Types.h"
@@ -50,14 +51,6 @@ namespace zypp
   namespace solver
   { /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
-
-    enum TriState
-    {
-	FALSE,
-	TRUE,
-	DEFAULT
-    };
-      
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
@@ -108,7 +101,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // This behaviour is favourited by ZMD
     bool _upgradeMode;            // Resolver has been called with doUpgrade
     bool _verifying;              // The system will be checked
-    TriState _onlyRequires; 	  // do install required resolvables only
+    TriBool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)  
 
@@ -157,9 +150,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void setForceResolve (const bool force) { _forceResolve = force; }
     bool forceResolve() { return _forceResolve; }
 
-    void setOnlyRequires (const TriState state)
+    void setOnlyRequires (const TriBool state)
 	{ _onlyRequires = state; }
-    TriState onlyRequires () { return _onlyRequires; }
+    TriBool onlyRequires () { return _onlyRequires; }
 
     bool verifySystem ();
     bool resolvePool();

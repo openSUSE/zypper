@@ -13,6 +13,7 @@
 
 #include "zypp/Resolver.h"
 #include "zypp/ZConfig.h"
+#include "zypp/TriBool.h"
 #include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
@@ -78,20 +79,15 @@ namespace zypp
   bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
   void Resolver::setOnlyRequires( const bool onlyRequires )
-  { onlyRequires ? _pimpl->setOnlyRequires( TRUE ) : _pimpl->setOnlyRequires( FALSE ); }
+  { onlyRequires ? _pimpl->setOnlyRequires( true ) : _pimpl->setOnlyRequires( false ); }
   void Resolver::resetOnlyRequires()
-  { _pimpl->setOnlyRequires( DEFAULT ); }    
+  { _pimpl->setOnlyRequires( indeterminate ); }    
   bool Resolver::onlyRequires()
   {
-      switch (_pimpl->onlyRequires()) {
-	  default: // to silence compiler warnings about no-value returns
-	  case DEFAULT:
-	      return ZConfig::instance().solver_onlyRequires();
-	  case TRUE:
-	      return true;
-	  case FALSE:
-	      return false;
-      };
+      if (_pimpl->onlyRequires() == indeterminate)
+	  return ZConfig::instance().solver_onlyRequires();
+      else
+	  return _pimpl->onlyRequires();
   }
   
   void Resolver::addRequire (const Capability & capability)
