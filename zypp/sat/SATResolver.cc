@@ -728,8 +728,8 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail)
 	      for_( iter2, possibleProviders.begin(), possibleProviders.end() ) {
 		  PoolItem provider2 = ResPool::instance().find( *iter2 );		  
 		  if (compareByNVR (provider1.resolvable(),provider2.resolvable()) == 0
-		      && (provider1.status().isInstalled() && provider2.status().isUninstalled() 
-			  || provider2.status().isInstalled() && provider1.status().isUninstalled()))  {
+		      && ( (provider1.status().isInstalled() && provider2.status().isUninstalled())
+			  || (provider2.status().isInstalled() && provider1.status().isUninstalled()) ))  {
 		      found = true;
 		      break;
 		  }
