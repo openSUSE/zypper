@@ -30,15 +30,17 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   MediaSetAccess::MediaSetAccess(const Url &url,
                                  const Pathname & prefered_attach_point)
-      : _url(url),
-        _prefAttachPoint(prefered_attach_point)
-  {
-    MIL << "initializing.." << std::endl;
-    //std::vector<media::MediaVerifierRef> single_media;
-    //single_media[0] = media::MediaVerifierRef(new media::NoVerifier());
-    //_verifiers = single_media;
-  }
+      : _url(url)
+      , _prefAttachPoint(prefered_attach_point)
+  {}
 
+  MediaSetAccess::MediaSetAccess(const std::string & label_r,
+                                 const Url &url,
+                                 const Pathname & prefered_attach_point)
+      : _url(url)
+      , _prefAttachPoint(prefered_attach_point)
+      , _label( label_r )
+  {}
 
   MediaSetAccess::~MediaSetAccess()
   {
@@ -141,7 +143,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           {
             reason = media::MediaChangeReport::WRONG;
           }
-          else if( typeid(excp) == typeid( media::MediaTimeoutException))  
+          else if( typeid(excp) == typeid( media::MediaTimeoutException))
           {
             reason = media::MediaChangeReport::IO_SOFT;
           }
@@ -156,7 +158,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           user = report->requestMedia (
               _url,
               media_nr,
-              string(), //! \todo label
+              _label,
               reason,
               excp.asUserString(),
               devices, devindex
@@ -282,7 +284,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
             user = report->requestMedia (
               _url,
               media_nr,
-              string(), //! \todo label
+              _label,
               reason,
               excp.asUserString(),
               devices,
@@ -425,7 +427,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
           user = report->requestMedia(_url,
                                       media_nr,
-                                      string(), //! \todo label
+                                      _label,
                                       reason,
                                       excp.asUserString(),
                                       devices,

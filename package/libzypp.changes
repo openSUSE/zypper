@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Apr  3 11:59:13 CEST 2008 - ma@suse.de
+
+- Allow to store a media label in MediaSetAccess. This label is
+  passed to a media change requests to describe which CD is 
+  requested.  (bnc #330094)
+- revision 9347
+
+-------------------------------------------------------------------
 Wed Apr  2 13:48:52 CEST 2008 - schubi@suse.de
 
 - Moved poolItem.status().isSatisfied(),.... to poolItem.isSatisfied()

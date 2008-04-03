@@ -114,8 +114,16 @@ namespace zypp
 
       void setVerifierForRepo( RepoInfo repo, shared_ptr<MediaSetAccess> media )
       {
+        // Maybe a good place to also set the MediaSetAccess label.
+        // Would be nice if this info was provided by some media
+        // description like
+        if ( media->label().empty() )
+        {
+          media->setLabel( repo.name() );
+        }
+
         // set a verifier if the repository has it
-         
+
         Pathname mediafile = repo.metadataPath() + "/media.1/media";
         if ( ! repo.metadataPath().empty() )
         {
@@ -203,11 +211,11 @@ namespace zypp
       callback::TempConnect<repo::RepoReport> temp( dumb );
 
       Url url;
-      
+
       RepoException repo_excpt(str::form(_("Can't provide file '%s' from repository '%s'"),
                                loc_r.filename().c_str(),
                                repo_r.alias().c_str() ) );
-      
+
       if ( repo_r.baseUrlsEmpty() )
       {
         repo_excpt.remember(RepoException(_("No url in repository.")));
@@ -216,9 +224,9 @@ namespace zypp
 
       Fetcher fetcher;
       fetcher.addCachePath( repo_r.packagesPath() );
-      
+
       MIL << "Added cache path " << repo_r.packagesPath() << endl;
-            
+
       for ( RepoInfo::urls_const_iterator it = repo_r.baseUrlsBegin();
             it != repo_r.baseUrlsEnd();
             /* incremented in the loop */ )
@@ -231,9 +239,9 @@ namespace zypp
               << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl(url);
           _impl->setVerifierForRepo(repo_r, access);
-	  
+
 	  fetcher.enqueue( loc_r );
-	  
+
 	  // FIXME: works for packages only
 	  fetcher.start( repo_r.packagesPath(), *access );
 
@@ -291,9 +299,9 @@ namespace zypp
         catch ( const Exception &e )
         {
           ZYPP_CAUGHT( e );
-          
+
           repo_excpt.remember(e);
-          
+
           WAR << "Trying next url" << endl;
           continue;
         }
