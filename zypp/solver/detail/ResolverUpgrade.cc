@@ -134,7 +134,7 @@ downgrade_allowed( PoolItem installed, PoolItem candidate, bool silent_downgrade
     {
 	if ( silent_downgrades )
 	    return true;
-	if ( ipkg->buildtime() < cpkg->buildtime() ) {			// installed has older buildtime
+	if ( ipkg->buildtime() <= cpkg->buildtime() ) {			// installed has older or equal buildtime
 	    MIL << "allowed downgrade " << installed << " to " << candidate << endl;
 	    return true;						// see bug #152760
 	}

@@ -188,6 +188,7 @@ std::string helixXML( const PoolItem &item )
   str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
   str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;
   str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;
+  str << TAB << xml_tag_enclose (item->buildtime().asSeconds(), "buildtime", true) << endl;  
   if ( isKind<Package>(resolvable) ) {
       str << TAB << "<history>" << endl << TAB << "<update>" << endl;
       str << TAB2 << helixXML (resolvable->arch()) << endl;
