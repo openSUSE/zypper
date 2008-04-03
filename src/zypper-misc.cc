@@ -340,7 +340,7 @@ static void mark_for_uninstall(Zypper & zypper,
   if (!deleter.found) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
     zypper.out().error(boost::str(
-      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name));
+      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name), Out::QUIET);
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
   }
