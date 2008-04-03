@@ -9,6 +9,7 @@
 /** \file	zypp/CheckSum.cc
  *
 */
+#include <iostream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"

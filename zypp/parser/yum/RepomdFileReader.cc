@@ -9,9 +9,12 @@
 /** \file zypp/parser/yum/RepomdFileReader.cc
  * Implementation of repomd.xml file reader.
  */
+#include <iostream>
+
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
+#include "zypp/Pathname.h"
 #include "zypp/Date.h"
 #include "zypp/CheckSum.h"
 #include "zypp/parser/xml/Reader.h"

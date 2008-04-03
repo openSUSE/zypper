@@ -16,7 +16,7 @@
 
 #include <set>
 #include <string>
-#include <iostream>
+#include <iosfwd>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

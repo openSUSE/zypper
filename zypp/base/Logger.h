@@ -13,7 +13,7 @@
 #define ZYPP_BASE_LOGGER_H
 
 #include <iosfwd>
-#include <string.h>
+#include <string>
 
 /** \defgroup ZYPP_BASE_LOGGER_MACROS ZYPP_BASE_LOGGER_MACROS
  *  Convenience macros for logging.

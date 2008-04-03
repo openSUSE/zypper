@@ -9,6 +9,8 @@
 /** \file zypp/parser/yum/PatchesFileReader.cc
  * Implementation of patches.xml file reader.
  */
+#include <iostream>
+
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 

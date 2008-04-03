@@ -12,7 +12,7 @@
 #ifndef ZYPP_PATHNAME_H
 #define ZYPP_PATHNAME_H
 
-#include <iostream>
+#include <iosfwd>
 #include <string>
 
 ///////////////////////////////////////////////////////////////////
