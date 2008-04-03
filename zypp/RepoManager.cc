@@ -677,6 +677,7 @@ namespace zypp
     assert_alias(info);
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
+    filesystem::assert_dir(_pimpl->options.repoCachePath);
     Pathname base = _pimpl->options.repoCachePath + info.escaped_alias();
     Pathname solvfile = base.extend(".solv");
 
@@ -904,6 +905,7 @@ namespace zypp
 
   void RepoManager::setCacheStatus( const string &alias, const RepoStatus &status )
   {
+    filesystem::assert_dir(_pimpl->options.repoCachePath);
     Pathname base = _pimpl->options.repoCachePath + alias;
     Pathname cookiefile = base.extend(".cookie");
 
