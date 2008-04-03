@@ -35,6 +35,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LocaleSupport.h"
+#include "zypp/sat/LookupAttr.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
 #include <zypp/base/GzStream.h>
@@ -505,11 +506,14 @@ namespace zypp
 {
   namespace sat
   {
-
+#if 0
     class LookupAttr
     {
       public:
         LookupAttr()
+        {}
+        LookupAttr( SolvAttr attr_r )
+        : _attr( attr_r )
         {}
         LookupAttr( SolvAttr attr_r, Repository repo_r )
         : _attr( attr_r ), _repo( repo_r )
@@ -519,7 +523,13 @@ namespace zypp
         {}
 
       public:
-        class iterator
+        class iterator : public boost::iterator_adaptor<
+            iterator                           // Derived
+            , RepoDataIterator *               // Base
+            , const sat::Solvable              // Value
+            , boost::forward_traversal_tag     // CategoryOrTraversal
+            , const sat::Solvable &            // Reference
+                >
         {
           friend bool operator==( const iterator & lhs, const iterator & rhs );
 
@@ -570,15 +580,16 @@ namespace zypp
 
     inline bool operator!=( const LookupAttr::iterator & lhs, const LookupAttr::iterator & rhs )
     { return ! (lhs == rhs); }
-  }
+#endif
 
+  }
 }
 
 
 void ditest( sat::Solvable slv_r )
 {
   MIL << slv_r << endl;
-
+#if 0
   sat::LookupAttr q( sat::SolvAttr::keywords, slv_r );
   dumpRange( MIL, q.begin(), q.end() ) << endl;
   sat::LookupAttr::iterator a1( q.begin() );
@@ -587,6 +598,7 @@ void ditest( sat::Solvable slv_r )
   SEC << ( a1 == q.begin() ) << endl;
   SEC << ( a1 == ++q.begin() ) << endl;
   return;
+#endif
   ::_Pool * pool = sat::Pool::instance().get();
   ::_Repo * repo = slv_r.repository().get();
   sat::SolvAttr attr( "susetags:datadir" );

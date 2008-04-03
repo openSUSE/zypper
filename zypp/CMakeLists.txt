@@ -514,6 +514,7 @@ SET( zypp_sat_SRCS
   sat/Solvable.cc
   sat/WhatProvides.cc
   sat/LocaleSupport.cc
+  sat/LookupAttr.cc
   sat/SATResolver.cc
   sat/SolvAttr.cc
 )
@@ -523,6 +524,7 @@ SET( zypp_sat_HEADERS
   sat/Solvable.h
   sat/WhatProvides.h
   sat/LocaleSupport.h
+  sat/LookupAttr.h
   sat/SATResolver.h
   sat/SolvAttr.h
 )
@@ -876,7 +878,7 @@ TARGET_LINK_LIBRARIES(zypp ${CURL_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${LIBXML_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
 TARGET_LINK_LIBRARIES(zypp ${SATSOLVER_LIBRARY} )
-TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES})       
+TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES})
 TARGET_LINK_LIBRARIES(zypp crypto)
 
 INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
