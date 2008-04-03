@@ -90,26 +90,26 @@ namespace zypp
   std::list<std::string> Package::filenames() const
   { return std::list<std::string>(); }
 
+  CheckSum Package::checksum() const
+  { return lookupCheckSumAttribute( sat::SolvAttr::checksum ); }
+
   OnMediaLocation Package::location() const
-  {
-#warning MISSING checkdums in OnMediaLocation
-    OnMediaLocation loc;
-    unsigned medianr;
-    std::string filename = lookupLocation( medianr );
-    /* XXX This datadir should be part of RepoInfo.  */
-    if (repoInfo().type().toEnum() == repo::RepoType::YAST2_e)
-      filename = std::string("suse/") + filename;
-    loc.setLocation(filename, medianr);
-    return loc;
-  }
+  { return lookupLocation(); }
 
-#warning DUMMY sourcePkgName
  std::string Package::sourcePkgName() const
-  { return std::string(); }
+ {
+   // no id means same as package
+   sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourcename ) );
+   id = lookupIdAttribute(sat::SolvAttr::sourcearch);
+   return id ? IdString( id ).asString() : name();
+ }
 
-#warning DUMMY sourcePkgEdition
  Edition Package::sourcePkgEdition() const
-  { return Edition(); }
+ {
+   // no id means same as package
+   sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourceevr ) );
+   return id ? Edition( id ) : edition();
+ }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

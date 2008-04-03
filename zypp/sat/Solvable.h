@@ -30,6 +30,10 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class CheckSum;
+  class OnMediaLocation;
+
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
@@ -111,12 +115,25 @@ namespace zypp
          */
         bool lookupBoolAttribute( const SolvAttr & attr ) const;
 
-        /**
-         * returns the media location: media number in \ref medianr,
-         * file name as return value.  The file name is possibly prepended
-         * with a subdirectory.
+       /**
+         * returns the id attribute value for \ref attr
+         * or \ref detail::noId if it does not exists.
          */
-        std::string lookupLocation( unsigned & medianr ) const;
+        detail::IdType lookupIdAttribute( const SolvAttr & attr ) const;
+
+
+
+       /**
+         * returns the CheckSum attribute value for \ref attr
+         * or an empty CheckSum if ir does not exist.
+         */
+        CheckSum lookupCheckSumAttribute( const SolvAttr & attr ) const;
+
+        /**
+         * returns OnMediaLocation data: This is everything we need to
+         * download e.g. an rpm (path, checksum, downloadsize, etc.).
+         */
+        OnMediaLocation lookupLocation() const;
 
       public:
         /** The identifier.

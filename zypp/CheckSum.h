@@ -36,7 +36,7 @@ namespace zypp
      * Creates a checksum for algorithm \param type
      * \throws CheckSumException if the checksum is invalid and can't be constructed
      */
-    CheckSum( const std::string & type, const std::string & checksum);
+    CheckSum( const std::string & type, const std::string & checksum );
     CheckSum( const std::string & type, std::istream & input_r );
     CheckSum();
 

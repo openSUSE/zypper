@@ -39,11 +39,14 @@ namespace zypp
                    private base::SafeBool<IdString>
   {
     public:
+      typedef sat::detail::IdType IdType;
+
+    public:
       /** Default ctor, empty string. */
       IdString() : _id( sat::detail::emptyId ) {}
 
       /** Ctor from id. */
-      explicit IdString( sat::detail::IdType id_r ) : _id( id_r ) {}
+      explicit IdString( IdType id_r ) : _id( id_r ) {}
 
       /** Ctor from string. */
       explicit IdString( const char * str_r );
@@ -96,18 +99,21 @@ namespace zypp
 
     public:
       /** Expert backdoor. */
-      sat::detail::IdType id() const
+      IdType id() const
       { return _id; }
     private:
       friend base::SafeBool<IdString>::operator bool_type() const;
       bool boolTest() const { return _id; }
     private:
-      sat::detail::IdType _id;
+      IdType _id;
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates IdString Stream output */
   std::ostream & operator<<( std::ostream & str, const IdString & obj );
+
+  /** \relates IdString Stream output */
+  std::ostream & dumpOn( std::ostream & str, const IdString & obj );
 
   /** \relates IdString Equal */
   inline bool operator==( const IdString & lhs, const IdString & rhs )

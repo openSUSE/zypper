@@ -195,7 +195,7 @@ namespace zypp
           {
             Arch::CompatSet sysarchs( Arch::compatSet( ZConfig::instance().systemArchitecture() ) );
             for_( it, sysarchs.begin(), sysarchs.end() )
-	       sysids.insert( it->idStr().id() );
+	       sysids.insert( it->id() );
 
             // unfortunately satsolver treats src/nosrc as architecture:
             sysids.insert( ARCH_SRC );

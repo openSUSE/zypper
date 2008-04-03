@@ -51,6 +51,7 @@ namespace sat
       static const SolvAttr diskusage;
 
       //package
+      static const SolvAttr checksum;
       static const SolvAttr mediadir;
       static const SolvAttr medianr;
       static const SolvAttr mediafile;
@@ -64,8 +65,6 @@ namespace sat
       static const SolvAttr sourcesize;
       static const SolvAttr authors;
       static const SolvAttr filenames;
-      static const SolvAttr srcpkgname;
-      static const SolvAttr srcpkgedition;
       static const SolvAttr filelist;
       static const SolvAttr sourcearch;
       static const SolvAttr sourcename;

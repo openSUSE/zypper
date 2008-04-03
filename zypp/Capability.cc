@@ -51,7 +51,7 @@ namespace zypp
 
       if ( op_r != Rel::ANY && ed_r != Edition::noedition )
       {
-        nid = ::rel2id( pool_r, nid, ed_r.idStr().id(), op_r.bits(), /*create*/true );
+        nid = ::rel2id( pool_r, nid, ed_r.id(), op_r.bits(), /*create*/true );
       }
 
       return nid;

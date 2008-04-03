@@ -74,6 +74,11 @@ namespace zypp
     return str << obj.c_str();
   }
 
+  std::ostream & dumpOn( std::ostream & str, const IdString & obj )
+  {
+    return str << '(' << obj.id() << ')' << obj.c_str();
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

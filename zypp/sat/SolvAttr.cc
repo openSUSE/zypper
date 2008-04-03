@@ -44,6 +44,7 @@ namespace sat
   const SolvAttr SolvAttr::diskusage    ( SOLVABLE_DISKUSAGE );
 
   //package
+  const SolvAttr SolvAttr::checksum     ( SOLVABLE_CHECKSUM );
   const SolvAttr SolvAttr::medianr	( SOLVABLE_MEDIANR );
   const SolvAttr SolvAttr::mediafile	( SOLVABLE_MEDIAFILE );
   const SolvAttr SolvAttr::mediadir	( SOLVABLE_MEDIADIR );
@@ -57,8 +58,6 @@ namespace sat
   const SolvAttr SolvAttr::sourcesize   ( "sourcesize" );
   const SolvAttr SolvAttr::authors      ( SOLVABLE_AUTHORS );
   const SolvAttr SolvAttr::filenames    ( "filenames" );
-  const SolvAttr SolvAttr::srcpkgname   ( "srcpkgname" );
-  const SolvAttr SolvAttr::srcpkgedition( "srcpkgedition" );
   const SolvAttr SolvAttr::filelist     ( SOLVABLE_FILELIST );
   const SolvAttr SolvAttr::sourcearch   ( SOLVABLE_SOURCEARCH );
   const SolvAttr SolvAttr::sourcename   ( SOLVABLE_SOURCENAME );

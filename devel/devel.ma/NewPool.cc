@@ -35,6 +35,7 @@
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LocaleSupport.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 #include <zypp/base/GzStream.h>
 
@@ -141,6 +142,12 @@ std::ostream & testDump( std::ostream & str, const PoolItem & pi )
   if ( p )
   {
 #define OUTS(V) str << str::form("%-25s: ",#V) << p->V() << endl
+    Locale l( "de" );
+    str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
+    l = Locale( "fr" );
+    str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
+    l = Locale( "dsdf" );
+    str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
     OUTS( summary );
     OUTS( size );
     OUTS( downloadSize );
@@ -149,6 +156,8 @@ std::ostream & testDump( std::ostream & str, const PoolItem & pi )
     OUTS( checksum );
     OUTS( location );
 #undef OUTS
+
+
   }
   return str;
 }
@@ -442,6 +451,32 @@ void testCMP( const L & lhs, const R & rhs )
 namespace zypp
 {
 //   poolItemIterator
+  template <class _Filter>
+  class PoolFilter
+  {
+    typedef filter_iterator<_Filter,ResPool::const_iterator> iterator;
+
+    public:
+      PoolFilter()
+      {}
+
+      PoolFilter( const _Filter & filter_r )
+      : _filter( filter_r )
+      {}
+
+      iterator begin() const
+      { return ResPool::instance().filterBegin(_filter); }
+
+      iterator end() const
+      { return ResPool::instance().filterEnd(_filter); }
+
+    private:
+      _Filter _filter;
+  };
+
+  template <class _Filter>
+  PoolFilter<_Filter> makePoolFilter( const _Filter & filter_r )
+  { return PoolFilter<_Filter>( filter_r ); }
 }
 
 void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
@@ -456,6 +491,141 @@ void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
   }
 }
 
+bool myfilter( const PoolItem & pi )
+{
+  if ( pi->name() == "ruby" )
+    return true;
+  return false;
+}
+
+struct Foo : private debug::TraceCAD<Foo>
+{};
+
+namespace zypp
+{
+  namespace sat
+  {
+
+    class LookupAttr
+    {
+      public:
+        LookupAttr()
+        {}
+        LookupAttr( SolvAttr attr_r, Repository repo_r )
+        : _attr( attr_r ), _repo( repo_r )
+        {}
+        LookupAttr( SolvAttr attr_r, Solvable slv_r )
+        : _attr( attr_r ), _repo( slv_r.repository() ), _slv( slv_r )
+        {}
+
+      public:
+        class iterator
+        {
+          friend bool operator==( const iterator & lhs, const iterator & rhs );
+
+          public:
+            iterator()
+            : _valid( false )
+            {}
+
+          public:
+            iterator & operator++()
+            { _valid = ::dataiterator_step( &_di ); return *this; }
+
+            IdString operator*() const
+            { return IdString( _valid ? ::repodata_globalize_id( _di.data, _di.kv.id ) : detail::noId ); }
+
+          private:
+            friend class LookupAttr;
+            iterator( ::Dataiterator di_r )
+            : _di( di_r ), _valid( ::dataiterator_step( &_di ) )
+            {}
+
+          private:
+            ::Dataiterator _di;
+            bool           _valid;
+        };
+
+      public:
+        iterator begin() const
+        {
+          if ( ! (_attr && _repo ) )
+            return iterator();
+          ::Dataiterator di;
+          ::dataiterator_init( &di, _repo.id(), _slv.id(), _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+          return iterator( di );
+        }
+
+        iterator end() const
+        { return iterator(); }
+
+      private:
+        SolvAttr   _attr;
+        Repository _repo;
+        Solvable   _slv;
+    };
+
+    inline bool operator==( const LookupAttr::iterator & lhs, const LookupAttr::iterator & rhs )
+    { return( lhs._valid == rhs._valid && ( !lhs._valid || lhs._di == rhs._di ) ); }
+
+    inline bool operator!=( const LookupAttr::iterator & lhs, const LookupAttr::iterator & rhs )
+    { return ! (lhs == rhs); }
+  }
+
+}
+
+
+void ditest( sat::Solvable slv_r )
+{
+  MIL << slv_r << endl;
+
+  sat::LookupAttr q( sat::SolvAttr::keywords, slv_r );
+  dumpRange( MIL, q.begin(), q.end() ) << endl;
+  sat::LookupAttr::iterator a1( q.begin() );
+  SEC << ( a1 == q.begin() ) << endl;
+  ++a1;
+  SEC << ( a1 == q.begin() ) << endl;
+  SEC << ( a1 == ++q.begin() ) << endl;
+  return;
+  ::_Pool * pool = sat::Pool::instance().get();
+  ::_Repo * repo = slv_r.repository().get();
+  sat::SolvAttr attr( "susetags:datadir" );
+  attr = sat::SolvAttr::keywords;
+  attr = sat::SolvAttr::keywords;
+
+  if ( attr )
+  {
+    INT << attr << endl;
+    unsigned steps = 3;
+    ::Dataiterator di;
+    ::dataiterator_init( &di, repo, 0, attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+    ::Dataiterator di2 = di;
+    while ( dataiterator_step( &di ) && --steps )
+    {
+      MIL << sat::Solvable(di.solvid) << endl;
+      DBG << dump(IdString(di.keyname)) << endl;
+      DBG << dump(IdString(::repodata_globalize_id(di.data, di.kv.id))) << endl;
+    }
+    SEC << endl;
+    di = di2;
+    steps = 5;
+    while ( dataiterator_step( &di ) && --steps )
+    {
+      MIL << sat::Solvable(di.solvid) << endl;
+      DBG << dump(IdString(di.keyname)) << endl;
+      DBG << dump(IdString(::repodata_globalize_id(di.data, di.kv.id))) << endl;
+    }
+
+
+  }
+}
+
+void ditest( const PoolItem & pi_r )
+{
+  ditest( pi_r.satSolvable() );
+}
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -465,6 +635,7 @@ int main( int argc, char * argv[] )
 try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
+  ZConfig::instance().setTextLocale(Locale("de"));
 
   sat::Pool satpool( sat::Pool::instance() );
   ResPool   pool( ResPool::instance() );
@@ -491,8 +662,8 @@ try {
           SEC << "cleanCache" << endl;
           repoManager.cleanCache( nrepo );
         }
-        SEC << "refreshMetadata" << endl;
-        repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+        //SEC << "refreshMetadata" << endl;
+        //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
         SEC << "buildCache" << endl;
         repoManager.buildCache( nrepo );
       }
@@ -541,15 +712,28 @@ try {
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
-// Dataiterator di;
-// Id keyname = std2id (pool, "susetags:datadir");
-// if (keyname)
-//   {
-//     Dataitertor di;
-//     dataiterator_init(&di, repo, 0, keyname, 0, SEARCH_NO_STORAGE_SOLVABLE);
-//     if (dataiterator_step(&di))
-//       printf ("datadir: %s\n", di.kv.str);
-//   }
+  if ( 0 )
+  {
+    Measure x( "Upgrade" );
+    UpgradeStatistics u;
+    getZYpp()->resolver()->doUpgrade( u );
+  }
+  ///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+
+
+  Repository repo( satpool.reposFind("openSUSE-10.3-DVD 10.3") );
+  if(0)//for_( it, repo.solvablesBegin(), repo.solvablesEnd() )
+  {
+    //testDump( MIL, PoolItem(*it) );
+  }
+
+
+  PoolItem pi ( getPi<Package>("CheckHardware",Edition("0.1-1088"),Arch_i586) );
+  MIL << pi << endl;
+  ditest( pi );
+
+
 
 #if 0
   const LocaleSet & avlocales( ResPool::instance().getAvailableLocales() );
@@ -585,94 +769,50 @@ try {
 #endif
 
 
-#if 0
-  sat::SolvAttr flist( "solvable:filelist" );
 
-  for_( it, pool.byIdentBegin<Package>("zypper"), pool.byIdentEnd<Package>("zypper") )
-  {
-    INT << *it << endl;
-    sat::Solvable s( it->satSolvable() );
-    MIL << sat::SolvAttr::summary << endl;
-    MIL << s.lookupStrAttribute( sat::SolvAttr::summary ) << endl;
-    MIL << s.lookupStrAttribute( sat::SolvAttr::noAttr ) << endl;
-
-    ::Dataitertor di;
-    ::dataiterator_init( &di, 0, s.id(), flist.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
-    while ( ::dataiterator_step( &di ) )
-    {
-
-    }
-
-  }
-#endif
 
 #if 0
-  for_( it, pool.byKindBegin<SrcPackage>(), pool.byKindEnd<SrcPackage>() )
+#define POOL_FILTER( N, V ) typeof(makePoolFilter(V)) N( (V) )
+
+  SEC << endl;
   {
-    MIL << *it << endl;
-    //tt( (*it)->name() );
+    POOL_FILTER( pf, &myfilter );
+    std::for_each( pf.begin(), pf.end(), Print() );
   }
-
-  IdString id ("amarok");
-  sat::WhatProvides w( Capability(id.id()) );
-
-  for_( it, w.begin(), w.end() )
   {
-    WAR << *it << endl;
-    MIL << PoolItem(*it) << endl;
-    Package_Ptr p( asKind<Package>(PoolItem(*it)) );
-    MIL << p << endl;
-    if ( p )
-    {
-      OnMediaLocation l( p->location() );
-      MIL << l << endl;
-    }
-    //OnMediaLocation
+    POOL_FILTER( pf, resfilter::ByName("zlib") );
+    std::for_each( pf.begin(), pf.end(), Print() );
   }
-
-  sat::Solvable a(65241);
-  PoolItem p( a );
-  USR << p << endl;
-  p.status().setTransact( true, ResStatus::USER );
-  USR << p << endl;
-  USR << PoolItem() << endl;
+  SEC << endl;
+  {
+    POOL_FILTER( pf, resfilter::ByName("zlib") );
+    std::for_each( pf.begin(), pf.end(), Print() );
+  }
+  SEC << endl;
+  {
+    POOL_FILTER( pf, or_c( chain( resfilter::ByName("zlib"),
+                                  resfilter::ByKind(ResKind::package) ),
+                           &myfilter )
+               );
+    std::for_each( pf.begin(), pf.end(), Print() );
+  }
+  SEC << endl;
 #endif
+
 
   if ( 0 )
   {
-    Measure x( "Upgrade" );
-    UpgradeStatistics u;
-    getZYpp()->resolver()->doUpgrade( u );
-  }
-
-
-  PoolItem pi ( getPi<Package>("vim") );
-  MIL << pi << endl;
-  if ( pi )
-  {
-    testDump( MIL, pi );
-  }
-  getZYpp()->resolver()->addRequire( Capability("vim") );
-  solve();
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
-
-
-
-  if ( 0 ) {
-  PoolItem pi ( getPi<Package>("amarok") );
-  MIL << pi << endl;
-  if ( pi )
-  {
-    pi.status().setTransact( true, ResStatus::USER );
-    solve();
-    vdumpPoolStats( USR << "Transacting:"<< endl,
+    PoolItem pi ( getPi<Package>("amarok") );
+    MIL << pi << endl;
+    if ( pi )
+    {
+      pi.status().setTransact( true, ResStatus::USER );
+      solve();
+      vdumpPoolStats( USR << "Transacting:"<< endl,
                     make_filter_begin<resfilter::ByTransact>(pool),
                     make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  }
+    }
   }
   //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
   //waitForInput();

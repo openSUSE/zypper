@@ -66,12 +66,10 @@ namespace zypp
     std::list<std::string> filenames() const;
 
     /** Name of the source rpm this package was built from.
-     * Empty if unknown.
      */
     std::string sourcePkgName() const;
 
     /** Edition of the source rpm this package was built from.
-     * Empty if unknown.
      */
     Edition sourcePkgEdition() const;
 
@@ -79,8 +77,7 @@ namespace zypp
      * Checksum the source says this package should have.
      * \see \ref location
      */
-    CheckSum checksum() const
-    { return location().checksum(); }
+    CheckSum checksum() const;
 
     /** Location of the resolvable in the repository.
      * \ref OnMediaLocation conatins all information required to

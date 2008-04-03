@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Thu Apr  3 12:55:50 CEST 2008 - ma@suse.de
+
+- Fixed some missing package and source package attributes.
+- revision 9348
+
+-------------------------------------------------------------------
 Thu Apr  3 11:59:13 CEST 2008 - ma@suse.de
 
 - Allow to store a media label in MediaSetAccess. This label is
   passed to a media change requests to describe which CD is 
   requested.  (bnc #330094)
+- Fixed some missing package and source package attributes.
 - revision 9347
 
 -------------------------------------------------------------------

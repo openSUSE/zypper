@@ -20,6 +20,7 @@
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/Repository.h"
+#include "zypp/OnMediaLocation.h"
 
 using std::endl;
 
@@ -79,7 +80,7 @@ namespace zypp
     std::string Solvable::lookupStrAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( std::string() );
-      const char * s = ::solvable_lookup_str( _solvable, attr.idStr().id() );
+      const char * s = ::solvable_lookup_str( _solvable, attr.id() );
       return s ? s : std::string();
     }
 
@@ -89,11 +90,11 @@ namespace zypp
       const char * s = 0;
       if ( lang_r == Locale::noCode )
       {
-        s = ::solvable_lookup_str_poollang( _solvable, attr.idStr().id() );
+        s = ::solvable_lookup_str_poollang( _solvable, attr.id() );
       }
       else
       {
-        s = ::solvable_lookup_str_lang( _solvable, attr.idStr().id(), lang_r.code().c_str() );
+        s = ::solvable_lookup_str_lang( _solvable, attr.id(), lang_r.code().c_str() );
       }
       return s ? s : std::string();
    }
@@ -101,25 +102,64 @@ namespace zypp
     unsigned Solvable::lookupNumAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( 0 );
-      return ::solvable_lookup_num( _solvable, attr.idStr().id(), 0 );
+      return ::solvable_lookup_num( _solvable, attr.id(), 0 );
     }
 
     bool Solvable::lookupBoolAttribute( const SolvAttr & attr ) const
     {
       NO_SOLVABLE_RETURN( false );
-      return ::solvable_lookup_bool( _solvable, attr.idStr().id() );
+      return ::solvable_lookup_bool( _solvable, attr.id() );
     }
 
-    std::string Solvable::lookupLocation(unsigned &medianr) const
+    detail::IdType Solvable::lookupIdAttribute( const SolvAttr & attr ) const
     {
-      NO_SOLVABLE_RETURN( std::string() );
-      unsigned int nr;
-      char *l = solvable_get_location(_solvable, &nr);
-      medianr = nr;
-//     /* XXX This datadir should be part of RepoInfo.  */
-//     if (repoInfo().type().toEnum() == repo::RepoType::YAST2_e)
-//       filename = std::string("suse/") + filename;
-      return l ? std::string(l) : std::string();
+      NO_SOLVABLE_RETURN( detail::noId );
+      return ::solvable_lookup_id( _solvable, attr.id() );
+    }
+
+    CheckSum Solvable::lookupCheckSumAttribute( const SolvAttr & attr ) const
+    {
+      NO_SOLVABLE_RETURN( CheckSum() );
+      detail::IdType chksumtype = 0;
+      const char * s = ::solvable_lookup_checksum( _solvable, attr.id(), &chksumtype );
+      if ( ! s )
+        return CheckSum();
+      switch ( chksumtype )
+      {
+        case REPOKEY_TYPE_MD5:    return CheckSum::md5( s );
+        case REPOKEY_TYPE_SHA1:   return CheckSum::sha1( s );
+        case REPOKEY_TYPE_SHA256: return CheckSum::sha256( s );
+      }
+      return CheckSum( std::string(), s ); // try to autodetect
+    }
+
+    OnMediaLocation Solvable::lookupLocation() const
+    //std::string Solvable::lookupLocation( unsigned & medianr ) const
+    {
+      NO_SOLVABLE_RETURN( OnMediaLocation() );
+      // medianumber and path
+      unsigned medianr;
+      char * file = ::solvable_get_location( _solvable, &medianr );
+      if ( ! file )
+        return OnMediaLocation();
+
+      OnMediaLocation ret;
+
+      Pathname path;
+      if ( repository().info().type().toEnum() == repo::RepoType::YAST2_e )
+      {
+#warning STILL HARDCODED /suse PREFIX in location
+        // (ma@) loading a susetags repo search for a solvable with attribute
+        // susetags:datadir. this is the prefix. store it in RepoInfo(?).
+        path = "suse";
+      }
+      ret.setLocation    ( path/file, medianr );
+      ret.setDownloadSize( ByteCount( lookupNumAttribute( SolvAttr::downloadsize ), ByteCount::K ) );
+      ret.setChecksum    ( lookupCheckSumAttribute( SolvAttr::checksum ) );
+      // Not needed/available for solvables?
+      //ret.setOpenSize    ( ByteCount( lookupNumAttribute( SolvAttr::opensize ), ByteCount::K ) );
+      //ret.setOpenChecksum( lookupCheckSumAttribute( SolvAttr::openchecksum ) );
+      return ret;
     }
 
     ResKind Solvable::kind() const

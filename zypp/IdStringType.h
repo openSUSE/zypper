@@ -91,6 +91,7 @@ namespace zypp
       IdStringType() {}
       IdStringType(const IdStringType &) {}
       void operator=(const IdStringType &) {}
+      ~IdStringType() {}
 
     private:
       const Derived & self() const { return *static_cast<const Derived*>( this ); }
@@ -102,6 +103,8 @@ namespace zypp
       unsigned      size()        const { return idStr().size(); }
       const char *  c_str()       const { return idStr().c_str(); }
       std::string   asString()    const { return idStr().asString(); }
+
+      IdString::IdType id()       const { return idStr().id(); }
 
     public:
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */

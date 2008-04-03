@@ -52,6 +52,9 @@ namespace zypp
     const char * c_str() const
     { return asString().c_str(); }
 
+    IdString::IdType id() const
+    { return idStr().id(); }
+
     /** Test for an empty Arch (this is "", not Arch_noarch). */
     bool empty() const
     { return asString().empty(); }
