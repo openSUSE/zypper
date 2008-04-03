@@ -258,7 +258,7 @@ static void mark_for_install(Zypper & zypper,
   if (!installer.item) {
     // TranslatorExplanation e.g. "package 'pornview' not found"
     zypper.out().warning(boost::str(
-      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name));
+      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name), Out::QUIET);
     WAR << format("%s '%s' not found") % kind % name << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
