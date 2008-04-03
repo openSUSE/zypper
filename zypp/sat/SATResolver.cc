@@ -104,7 +104,18 @@ itemToString (PoolItem item, bool shortVersion)
 std::ostream &
 SATResolver::dumpOn( std::ostream & os ) const
 {
-    return os << "<resolver/>";
+    os << "<resolver>";	    
+    os << "  fixsystem = " << _fixsystem << endl;
+    os << "  allowdowngrade = " << _allowdowngrade << endl;
+    os << "  allowarchchange = " << _allowarchchange << endl;
+    os << "  allowvendorchange = " <<  _allowvendorchange << endl;
+    os << "  allowuninstall = " << _allowuninstall << endl;
+    os << "  updatesystem = " << _updatesystem << endl;
+    os << "  allowvirtualconflicts = " <<  _allowvirtualconflicts << endl;
+    os << "  noupdateprovide = " << _noupdateprovide << endl;
+    os << "  dosplitprovides = " << _dosplitprovides << endl;
+    os << "  onlyRequires = " << _onlyRequires << endl;
+    return os << "<resolver/>" << endl;
 }
 
 //---------------------------------------------------------------------------
@@ -448,6 +459,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
     // Solve !
     MIL << "Starting solving...." << endl;
+    MIL << *this;
     solver_solve( _solv, &(_jobQueue) );
     MIL << "....Solver end" << endl;
 
@@ -567,7 +579,8 @@ bool SATResolver::doUpdate()
     sat::Pool::instance().prepare();
 
     // Solve !
-    MIL << "Starting solving...." << endl;
+    MIL << "Starting solving for update...." << endl;
+    MIL << *this;    
     solver_solve( _solv, &(_jobQueue) );
     MIL << "....Solver end" << endl;
 
