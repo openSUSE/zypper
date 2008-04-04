@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  4 14:01:45 CEST 2008 - jreidinger@suse.cz
+
+- add split with respect to escaped delimeters and also for quotes
+- revision 9373 
+
+-------------------------------------------------------------------
 Thu Apr  3 12:55:50 CEST 2008 - ma@suse.de
 
 - Fixed some missing package and source package attributes.
