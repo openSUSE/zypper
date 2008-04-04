@@ -6,7 +6,7 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"
-#include "zypp/PoolQueryUtil.h"
+#include "zypp/PoolQueryUtil.tcc"
 #include "zypp/TmpPath.h"
 
 #define BOOST_TEST_MODULE PoolQuery

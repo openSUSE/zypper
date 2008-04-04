@@ -134,6 +134,7 @@ SET( zypp_HEADERS
   Pattern.h
   PoolItem.h
   PoolQuery.h
+  PoolQueryUtil.tcc
   ProblemSolution.h
   ProblemTypes.h
   Product.h

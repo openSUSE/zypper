@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ui/PoolQuery.h
+/** \file zypp/PoolQuery.h
  *
 */
-#ifndef QUERY_H_
-#define QUERY_H_
+#ifndef ZYPP_POOLQUERY_H
+#define ZYPP_POOLQUERY_H
 
 #include "zypp/ui/Selectable.h"
 #include "zypp/sat/SolvAttr.h"
@@ -24,13 +24,13 @@ namespace zypp
 
   /**
    * Meta-data query API for user interfaces.
-   * 
+   *
    * TODO: details, examples.
    */
   class PoolQuery
   {
   public:
-    
+
     //typedef SelectableSet::iterator      ResultIterator;
     //typedef constSelectableSet::iterator constResultIterator;
 
@@ -50,10 +50,10 @@ namespace zypp
 
     /**
      * Filter by selectable kind.
-     * 
+     *
      * By default, all kinds will be returned. If addKind() is used,
      * only the specified kinds will be returned (multiple kinds will be ORed).
-     * 
+     *
      * Pass ResTraits<T>::kind to this method, where T is one of the
      * \ref Resolvable child classes (e.g. ResTraits<Pattern>::kind).
      */
@@ -62,7 +62,7 @@ namespace zypp
 
      /**
      * Filter by repo.
-     * 
+     *
      * By default, all repos will be returned. If addRepo() is used,
      * only the specified repo will be returned (multiple repos will be ORed).
      */
@@ -70,7 +70,7 @@ namespace zypp
 
     /**
      * Filter by selectable name.
-     * 
+     *
      * \param name   what to search for
      * \param isRegex is the value a regex?
      */
@@ -90,10 +90,10 @@ namespace zypp
 
     /**
      * Filter by the \a value of any available attribute of selectables.
-     * 
+     *
      * \note Selectables of a kind not supporting the specified attribute will
      * <b>not</b> be returned.
-     * 
+     *
      * \param attrid  attribute identfier (sat::SolvAttr or cache::Attribute
      *                or something implementation independent)
      * \param value   what to search for
@@ -105,13 +105,13 @@ namespace zypp
 
     /**
      * Filter by Selectable status.
-     * 
+     *
      * This should cover also plain 'is installed' and 'not installed' statuses.
      *
      * \param status Selectable status (zypp::ui::Status enum)
      */
     //void addStatus(const Status status);
-    
+
 
     /**
      * Add dependency filter.
@@ -163,24 +163,24 @@ namespace zypp
 
     /** selectable iterator over the result */
     //ResultIterator resultBegin() const;
-    //ResultIterator resultEnd() const; 
+    //ResultIterator resultEnd() const;
 
     /** Returns the size of the query result. */
     //size_t resultSize() const;
 
     /** Low-cost empty query result checker */
     //bool resultEmpty() const;
-    
+
     // a forEach method consuming a functor can be added here, too
 
     /**
-     * Reads from stream query. Attributes is sepated by delim. Query is 
+     * Reads from stream query. Attributes is sepated by delim. Query is
      * separated by two delim.
-     * 
+     *
      * \param str input stream which contains query
      * \param delim delimeter for attributes
      * \return true if non-empty query is recovered
-     * 
+     *
      * \see readPoolQueriesFromFile
      */
     bool recover( std::istream &str, char delim = '\n' );
@@ -204,8 +204,8 @@ namespace zypp
 
 
 
-/////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#endif /*QUERY_H_*/
+#endif // ZYPP_POOLQUERY_H
