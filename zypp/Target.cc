@@ -70,6 +70,9 @@ namespace zypp
   void Target::load()
   { _pimpl->load(); }
 
+  void Target::unload()
+  { _pimpl->unload(); }
+
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
 

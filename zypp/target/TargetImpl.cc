@@ -320,6 +320,14 @@ namespace zypp
       }
     }
 
+    void TargetImpl::unload()
+    {
+      sat::Pool satpool( sat::Pool::instance() );
+      Repository system( satpool.systemRepo() );
+      system.eraseFromPool();
+    }
+      
+
     void TargetImpl::load()
     {
       buildCache();

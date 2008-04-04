@@ -31,7 +31,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   namespace zypp_detail
-  { /////////////////////////////////////////////////////////////////
+  { /////////////////////////////////////////////////////////////////      
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -95,14 +95,13 @@ namespace zypp
     {
       MIL << "initTarget( " << root << endl;
       if (_target) {
-	if (_target->root() == root) {
-	    MIL << "Repeated call to initializeTarget()" << endl;
-	    return;
-	}
-#warning NEED SOME NEW WAY TO INDICATE NEDD OF TARGET RELOAD
-#if 0
-	removeInstalledResolvables( );
-#endif
+          if (_target->root() == root) {
+              MIL << "Repeated call to initializeTarget()" << endl;
+              return;
+          }
+
+          _target->unload();
+  
       }
       _target = new Target( root );
       _target->buildCache();
@@ -110,11 +109,9 @@ namespace zypp
 
     void ZYppImpl::finishTarget()
     {
-#warning NEED SOME NEW WAY TO UNLOAD THE POOL
-#if 0
       if (_target)
-	removeInstalledResolvables();
-#endif
+          _target->unload();
+      
       _target = 0;
     }
 
@@ -137,19 +134,17 @@ namespace zypp
       ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 
       if (! policy_r.dryRun() ) {
-        // Tag target data invalid, so they are reloaded on the next call to
-        // target->resolvables(). Actually the target should do this without
-        // foreign help.
-        _target->reset();
-#warning NEED SOME NEW WAY TO INDICATE NEDD OF TARGET RELOAD
-#if 0
-	removeInstalledResolvables();
+
+          DBG << "unloading " << sat::Pool::instance().systemRepoName() << " repo from pool" << endl;
+          
+        _target->unload();
+        
         if ( policy_r.syncPoolAfterCommit() )
           {
             // reload new status from target
-            addResolvables( _target->resolvables(), true );
+            DBG << "reloading " << sat::Pool::instance().systemRepoName() << " repo to pool" << endl;
+            _target->load();
           }
-#endif
       }
 
       MIL << "Commit (" << policy_r << ") returned: "

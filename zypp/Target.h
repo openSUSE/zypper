@@ -64,6 +64,12 @@ namespace zypp
      */
     void load();
 
+    /**
+     * unload target resolvables from the
+     * pool
+     */
+    void unload();
+
     /** \deprecated NOOP
     */
     ZYPP_DEPRECATED void reset() {}
