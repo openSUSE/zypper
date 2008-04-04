@@ -16,6 +16,8 @@
 #include <string>
 #include <string.h>
 
+#include <boost/algorithm/string/replace.hpp>
+
 #include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -315,6 +317,108 @@ namespace zypp
               ++cur;
             // build string
             *result_r = std::string( beg, cur-beg );
+            // skip sepchars
+            while ( *cur && ::strchr( sepchars_r, *cur ) )
+              ++cur;
+          }
+        return ret;
+      }
+
+    /** Split \a line_r into words with respect to escape delimeters.
+     * Any sequence of characters in \a sepchars_r is treated as
+     * delimiter if not inside "" or "" or escaped by \, but not \\.
+     * The words are passed to OutputIterator \a result_r.
+     * \code
+     * std::vector<std::string> words;
+     * str::splitEscaped( "some line", std::back_inserter(words) )
+     * \endcode
+     *
+     * \code
+     * example splitted strings
+     * normal line -> 2 elements ( "normal", "line" )
+     * escaped\ line -> 1 element( "escaped line" )
+     * "quoted line" -> 1 element same as above
+     * 'quoted line' -> 1 element same as above
+     * "escaped quote\'" -> 1 element ( "escaped quote'" )
+     * \endcode
+    */
+    template<class _OutputIterator>
+      unsigned splitEscaped( const C_Str &   line_r,
+                      _OutputIterator result_r,
+                      const C_Str &   sepchars_r = " \t" )
+      {
+        const char * beg = line_r;
+        const char * cur = beg;
+        // skip leading sepchars
+        while ( *cur && ::strchr( sepchars_r, *cur ) )
+          ++cur;
+        unsigned ret = 0;
+        for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
+          {
+            if ( *cur == '"'  || *cur == '\'' )
+            {
+              char closeChar = *cur;
+              ++cur;
+              bool cont = true;
+              while (cont)
+              {
+                while ( *cur && *cur != closeChar)
+                  ++cur;
+                if ( *cur == '\0' )
+                {
+                  return ret; //TODO parsing exception no closing quote
+                }
+                int escCount = 0;
+                const char * esc = cur-1;
+                while ( esc != beg && *esc == '\\' )
+                {
+                  escCount++;
+                  --esc;
+                }
+                cont = (escCount % 2 == 1); // find some non escaped escape char
+                cur++; //skip quote
+              }
+              
+              std::string s( beg+1, cur-beg-2 ); //without quotes
+              //transform escaped escape
+              boost::replace_all( s, "\\\\", "\\" );
+              //transform escaped quotes (only same as open
+              char tmpn[2] = { closeChar, 0 };
+              char tmpo[3] = { '\\', closeChar, 0 };
+              boost::replace_all( s, tmpo, tmpn );
+
+              *result_r = s;
+            }
+            else
+            {
+              // skip non sepchars
+              while( *cur && !::strchr( sepchars_r, *cur ) )
+              {
+                //ignore char after backslash
+                if ( *cur == '\\' )
+                {
+                  ++cur;
+                }
+                ++cur;
+              }
+              // build string
+              std::string s( beg, cur-beg );
+              //transform escaped escape
+              boost::replace_all( s, "\\\\", "\\" );
+              
+              const char *delimeter = sepchars_r;
+              while ( *delimeter )
+              {
+                std::string ds("\\");
+                const char tmp[2] = { *delimeter, '\0' };
+                std::string del(tmp);
+                ds+= del;
+                boost::replace_all( s, ds, del );
+                ++delimeter;
+              }
+
+              *result_r = s;
+            }
             // skip sepchars
             while ( *cur && ::strchr( sepchars_r, *cur ) )
               ++cur;
