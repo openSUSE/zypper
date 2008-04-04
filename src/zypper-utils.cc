@@ -165,7 +165,7 @@ Url make_url (const string & url_s)
 
     if (PathInfo(path).isExist())
     {
-      urlstr = "dir:" + path.absolutename().asString();
+      urlstr = "dir:" + url::encode(path.absolutename().asString(),"/");
       DBG <<  "resulting url: " << urlstr << endl;
     }
     else

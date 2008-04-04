@@ -77,7 +77,7 @@ parsed_opts parse_options (int argc, char **argv,
 Args::Args (const std::string& s)
   : _argv(NULL) {
   OIter oit (this);
-  zypp::str::split (s, oit);
+  zypp::str::splitEscaped (s, oit);
 }
 
 void Args::clear_argv () {
