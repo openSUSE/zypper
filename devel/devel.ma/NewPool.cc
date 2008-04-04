@@ -506,81 +506,8 @@ namespace zypp
 {
   namespace sat
   {
-#if 0
-    class LookupAttr
-    {
-      public:
-        LookupAttr()
-        {}
-        LookupAttr( SolvAttr attr_r )
-        : _attr( attr_r )
-        {}
-        LookupAttr( SolvAttr attr_r, Repository repo_r )
-        : _attr( attr_r ), _repo( repo_r )
-        {}
-        LookupAttr( SolvAttr attr_r, Solvable slv_r )
-        : _attr( attr_r ), _repo( slv_r.repository() ), _slv( slv_r )
-        {}
 
-      public:
-        class iterator : public boost::iterator_adaptor<
-            iterator                           // Derived
-            , RepoDataIterator *               // Base
-            , const sat::Solvable              // Value
-            , boost::forward_traversal_tag     // CategoryOrTraversal
-            , const sat::Solvable &            // Reference
-                >
-        {
-          friend bool operator==( const iterator & lhs, const iterator & rhs );
 
-          public:
-            iterator()
-            : _valid( false )
-            {}
-
-          public:
-            iterator & operator++()
-            { _valid = ::dataiterator_step( &_di ); return *this; }
-
-            IdString operator*() const
-            { return IdString( _valid ? ::repodata_globalize_id( _di.data, _di.kv.id ) : detail::noId ); }
-
-          private:
-            friend class LookupAttr;
-            iterator( ::Dataiterator di_r )
-            : _di( di_r ), _valid( ::dataiterator_step( &_di ) )
-            {}
-
-          private:
-            ::Dataiterator _di;
-            bool           _valid;
-        };
-
-      public:
-        iterator begin() const
-        {
-          if ( ! (_attr && _repo ) )
-            return iterator();
-          ::Dataiterator di;
-          ::dataiterator_init( &di, _repo.id(), _slv.id(), _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
-          return iterator( di );
-        }
-
-        iterator end() const
-        { return iterator(); }
-
-      private:
-        SolvAttr   _attr;
-        Repository _repo;
-        Solvable   _slv;
-    };
-
-    inline bool operator==( const LookupAttr::iterator & lhs, const LookupAttr::iterator & rhs )
-    { return( lhs._valid == rhs._valid && ( !lhs._valid || lhs._di == rhs._di ) ); }
-
-    inline bool operator!=( const LookupAttr::iterator & lhs, const LookupAttr::iterator & rhs )
-    { return ! (lhs == rhs); }
-#endif
 
   }
 }
@@ -589,47 +516,25 @@ namespace zypp
 void ditest( sat::Solvable slv_r )
 {
   MIL << slv_r << endl;
-#if 0
-  sat::LookupAttr q( sat::SolvAttr::keywords, slv_r );
-  dumpRange( MIL, q.begin(), q.end() ) << endl;
-  sat::LookupAttr::iterator a1( q.begin() );
-  SEC << ( a1 == q.begin() ) << endl;
-  ++a1;
-  SEC << ( a1 == q.begin() ) << endl;
-  SEC << ( a1 == ++q.begin() ) << endl;
-  return;
-#endif
-  ::_Pool * pool = sat::Pool::instance().get();
-  ::_Repo * repo = slv_r.repository().get();
-  sat::SolvAttr attr( "susetags:datadir" );
-  attr = sat::SolvAttr::keywords;
-  attr = sat::SolvAttr::keywords;
 
-  if ( attr )
+  //sat::LookupAttr q( sat::SolvAttr::keywords, slv_r.repository() );
+  sat::LookupAttr q( sat::SolvAttr::allAttr );
+
+  WAR << q << endl;
+  for_( it, q.begin(), q.end() )
   {
-    INT << attr << endl;
-    unsigned steps = 3;
-    ::Dataiterator di;
-    ::dataiterator_init( &di, repo, 0, attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
-    ::Dataiterator di2 = di;
-    while ( dataiterator_step( &di ) && --steps )
+    WAR << "" << it << endl;
+    const ::_Dataiterator * dip( it.get() );
+
+    switch ( it.solvAttrType() )
     {
-      MIL << sat::Solvable(di.solvid) << endl;
-      DBG << dump(IdString(di.keyname)) << endl;
-      DBG << dump(IdString(::repodata_globalize_id(di.data, di.kv.id))) << endl;
-    }
-    SEC << endl;
-    di = di2;
-    steps = 5;
-    while ( dataiterator_step( &di ) && --steps )
-    {
-      MIL << sat::Solvable(di.solvid) << endl;
-      DBG << dump(IdString(di.keyname)) << endl;
-      DBG << dump(IdString(::repodata_globalize_id(di.data, di.kv.id))) << endl;
+
     }
 
-
-  }
+    //it.nextSkipRepo();
+    it.nextSkipSolvable();
+ }
+  return;
 }
 
 void ditest( const PoolItem & pi_r )

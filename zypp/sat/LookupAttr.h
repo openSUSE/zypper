@@ -19,6 +19,7 @@ struct _Dataiterator;
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/DefaultIntegral.h"
 #include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -40,18 +41,22 @@ namespace zypp
      *
      * Modifying the query will not affect any running
      * iterator.
+     *
+     * Use \ref SolvAttr::allAttr to search all attributes.
     */
     class LookupAttr
     {
       public:
-        /** Default ctor. */
+        /** Default ctor finds nothing. */
         LookupAttr()
         {}
         /** Lookup \ref SolvAttr in \ref Pool (all repositories). */
+        explicit
         LookupAttr( SolvAttr attr_r )
         : _attr( attr_r )
         {}
         /** Lookup \ref SolvAttr in one\ref Repository. */
+        explicit
         LookupAttr( SolvAttr attr_r, Repository repo_r )
         : _attr( attr_r ), _repo( repo_r )
         {}
@@ -141,6 +146,7 @@ namespace zypp
     //	CLASS NAME : LookupAttr::iterator
     //
     /** Result iterator.
+     * Extended iterator methods valid only if not @end.
      * \note Implementation: Keep iterator_adaptor base and _dip in sync!
      */
     class LookupAttr::iterator : public boost::iterator_adaptor<
@@ -152,14 +158,56 @@ namespace zypp
     >
     {
       public:
+        /** \name Moving fast forward. */
+        //@{
+        /** On the next call to \ref operator++ advance to the next \ref SolvAttr. */
+        void nextSkipSolvAttr();
+
+        /** On the next call to \ref operator++ advance to the next \ref Solvable. */
+        void nextSkipSolvable();
+
+        /** On the next call to \ref operator++ advance to the next \ref Repository. */
+        void nextSkipRepo();
+
+        /** Immediately advance to the next \ref SolvAttr. */
+        void skipSolvAttr()
+        { nextSkipSolvAttr(); increment(); }
+
+        /** Immediately advance to the next \ref Solvable. */
+        void skipSolvable()
+        { nextSkipSolvable(); increment(); }
+
+        /** Immediately advance to the next \ref Repository. */
+        void skipRepo()
+        { nextSkipRepo(); increment(); }
+        //@}
+
+        /** \name Current position info. */
+        //@{
+        /** The current \ref Repository. */
+        Repository inRepo() const;
+
+        /** The current \ref Solvabele. */
+        Solvable inSolvable() const;
+
+        /** The current \ref SolvAttr. */
+        SolvAttr inSolvAttr() const;
+
+        /** The current \ref SolvAttr type. */
+        detail::IdType solvAttrType() const;
+        //@}
+
+        /** \name Retrieving attribute values. */
+        //@{
+        //@}
+        ///////////////////////////////////////////////////////////////////
+        // internal stuff below
+        ///////////////////////////////////////////////////////////////////
+      public:
         iterator()
         : iterator_adaptor_( 0 )
         {}
 
-      public:
-
-
-      public:
         iterator( const iterator & rhs )
         : iterator_adaptor_( cloneFrom( rhs.base() ) )
         , _dip( base() )
@@ -177,8 +225,9 @@ namespace zypp
 
       private:
         friend class LookupAttr;
-        iterator( scoped_ptr< ::_Dataiterator> & dip_r )
+        iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r )
         : iterator_adaptor_( dip_r.get() )
+        , _chainRepos( chain_r )
         {
           _dip.swap( dip_r ); // take ownership!
           increment();
@@ -208,6 +257,7 @@ namespace zypp
         { return _dip.get(); }
       private:
         scoped_ptr< ::_Dataiterator> _dip;
+        DefaultIntegral<bool,false>  _chainRepos;
     };
     ///////////////////////////////////////////////////////////////////
 

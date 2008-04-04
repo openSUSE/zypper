@@ -28,20 +28,27 @@ namespace zypp
 
     LookupAttr::iterator LookupAttr::begin() const
     {
-//       if ( ! (_attr ) )
-//         return iterator();
+      if ( _attr == SolvAttr::noAttr )
+        return iterator();
 
       scoped_ptr< ::_Dataiterator> dip( new ::Dataiterator );
+      // needed while LookupAttr::iterator::dip_equal does ::memcmp:
       ::memset( dip.get(), 0, sizeof(::_Dataiterator) );
+      bool chain = false;
+
       if ( _solv )
         ::dataiterator_init( dip.get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
       else if ( _repo )
         ::dataiterator_init( dip.get(), _repo.id(), 0, _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+      else if ( ! sat::Pool::instance().reposEmpty() )
+      {
+        ::dataiterator_init( dip.get(), sat::Pool::instance().reposBegin()->id(), 0, _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+        chain = true;
+      }
       else
-#warning pool search still disabled.
-        return iterator(); // pool search not yet s
+        return iterator();
 
-      return iterator( dip ); // iterator takes over ownership!
+      return iterator( dip, chain ); // iterator takes over ownership!
     }
 
     LookupAttr::iterator LookupAttr::end() const
@@ -51,10 +58,14 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const LookupAttr & obj )
     {
-      if ( ! obj.attr() )
+      if ( obj.attr() == SolvAttr::noAttr )
         return str << "search nothing";
 
-      str << "seach " << obj.attr() << " in ";
+      if ( obj.attr() )
+        str << "seach " << obj.attr() << " in ";
+      else
+        str << "seach ALL in ";
+
       if ( obj.solvable() )
         return str << obj.solvable();
       if ( obj.repo() )
@@ -78,6 +89,31 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
+    Repository LookupAttr::iterator::inRepo() const
+    { return Repository( _dip->repo ); }
+
+    Solvable LookupAttr::iterator::inSolvable() const
+    { return Solvable( _dip->solvid ); }
+
+    SolvAttr LookupAttr::iterator::inSolvAttr() const
+    { return SolvAttr( _dip->key->name ); }
+
+    detail::IdType LookupAttr::iterator::solvAttrType() const
+    { return _dip->key->type; }
+
+    void LookupAttr::iterator::nextSkipSolvAttr()
+    { ::dataiterator_skip_attribute( _dip.get() ); }
+
+    void LookupAttr::iterator::nextSkipSolvable()
+    { ::dataiterator_skip_solvable( _dip.get() ); }
+
+    void LookupAttr::iterator::nextSkipRepo()
+    { ::dataiterator_skip_repo( _dip.get() ); }
+
+    ///////////////////////////////////////////////////////////////////
+    // internal stuff below
+    ///////////////////////////////////////////////////////////////////
+
     ::_Dataiterator * LookupAttr::iterator::cloneFrom( const ::_Dataiterator * rhs )
     {
       if ( ! rhs )
@@ -89,6 +125,7 @@ namespace zypp
 
     bool LookupAttr::iterator::dip_equal( const ::_Dataiterator & lhs, const ::_Dataiterator & rhs ) const
     {
+      // requires ::memset in LookupAttr::begin
       return ::memcmp( &lhs, &rhs, sizeof(::_Dataiterator) ) == 0;
     }
 
@@ -102,8 +139,21 @@ namespace zypp
     {
       if ( _dip && ! ::dataiterator_step( _dip.get() ) )
       {
-        _dip.reset();
-        base_reference() = 0;
+        bool haveNext = false;
+        if ( _chainRepos )
+        {
+          Repository nextRepo( inRepo().nextInPool() );
+          if ( nextRepo )
+          {
+            ::dataiterator_jump_to_repo( _dip.get(), nextRepo.get() );
+            haveNext = ::dataiterator_step( _dip.get() );
+          }
+        }
+        if ( ! haveNext )
+        {
+          _dip.reset();
+          base_reference() = 0;
+        }
       }
     }
 
@@ -113,10 +163,10 @@ namespace zypp
       if ( ! dip )
         return str << "EndOfQuery" << endl;
 
-      str << Solvable( dip->solvid )
-          << '<' << SolvAttr( dip->keyname )
-          << "> = " << IdString( dip->key->type )
-          << "(" <<  dip->kv.id << ")";
+      str << obj.inSolvable()
+          << '<' << obj.inSolvAttr()
+          << "> = " << obj.solvAttrType()
+          << "(" <<  dip->kv.id << ")" << (dip->data && dip->data->localpool ? "*" : "" );
       return str;
     }
 

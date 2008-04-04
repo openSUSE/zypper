@@ -92,7 +92,11 @@ namespace zypp
         /** Functor calling \ref eraseFromPool. */
         struct EraseFromPool;
 
-    public:
+   public:
+        /** Return next Repository in \ref Pool (or \ref noRepository). */
+        Repository nextInPool() const;
+
+   public:
         /** \name Repository content manipulating methods.
          * \todo maybe a separate Repository/Solvable content manip interface
          * provided by the pool.
@@ -186,11 +190,11 @@ namespace zypp
       //
       /** */
 	class RepositoryIterator : public boost::iterator_adaptor<
-	    RepositoryIterator                   // Derived
+	    RepositoryIterator                            // Derived
 			   , ::_Repo **                   // Base
-			   , Repository                         // Value
+			   , Repository                   // Value
 			   , boost::forward_traversal_tag // CategoryOrTraversal
-			   , Repository                         // Reference
+			   , Repository                   // Reference
 			     >
 	{
         public:

@@ -53,7 +53,7 @@ namespace zypp
     { return myPool().prepare(); }
 
     bool Pool::reposEmpty() const
-    { return myPool()->nrepos; }
+    { return ! myPool()->nrepos; }
 
     Pool::size_type Pool::reposSize() const
     { return myPool()->nrepos; }

@@ -21,7 +21,7 @@
  *  }
  * \endcode
 */
-#define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG, _ZZ = END; IT != _ZZ; ++IT )
+#define for_(IT,BEG,END) for ( typeof(BEG) IT = BEG, _for_end = END; IT != _for_end; ++IT )
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

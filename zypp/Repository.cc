@@ -61,7 +61,7 @@ namespace zypp
     bool Repository::solvablesEmpty() const
     {
 	NO_REPOSITORY_RETURN( true );
-	return _repo->nsolvables;
+	return !_repo->nsolvables;
     }
 
     Repository::size_type Repository::solvablesSize() const
@@ -124,6 +124,21 @@ namespace zypp
 	_id = sat::detail::noRepoId;
     }
 
+    Repository Repository::nextInPool() const
+    {
+      NO_REPOSITORY_RETURN( noRepository );
+      for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
+      {
+        if ( *it == *this )
+        {
+          if ( ++it != _for_end )
+            return *it;
+          break;
+        }
+      }
+      return noRepository;
+    }
+
 #warning NEED POOL MANIP EXEPTIONS
     void Repository::addSolv( const Pathname & file_r )
     {
@@ -156,7 +171,7 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const Repository & obj )
     {
 	if ( ! obj )
-	    return str << "sat::repo()";
+	    return str << "noRepository";
 
 	return str << "sat::repo(" << obj.name() << ")"
 		   << "{"
