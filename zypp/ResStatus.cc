@@ -28,8 +28,6 @@ namespace zypp
   const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
   const ResStatus ResStatus::installed			 (INSTALLED);
   const ResStatus ResStatus::uninstalled		 (UNINSTALLED);
-  const ResStatus ResStatus::recommended		 (RECOMMENDED);
-  const ResStatus ResStatus::suggested			 (SUGGESTED);        
 
   ///////////////////////////////////////////////////////////////////
   //

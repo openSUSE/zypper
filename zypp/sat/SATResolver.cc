@@ -525,7 +525,9 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
-	  SATSolutionToPool (poolItem, ResStatus::recommended, ResStatus::SOLVER);
+	  ResStatus status = poolItem.status();
+	  status.setRecommended (true);
+	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
@@ -541,7 +543,9 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
-	  SATSolutionToPool (poolItem, ResStatus::suggested, ResStatus::SOLVER);
+	  ResStatus status = poolItem.status();
+	  status.setSuggested (true);
+	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
