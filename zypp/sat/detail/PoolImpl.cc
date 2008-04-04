@@ -72,7 +72,7 @@ namespace zypp
         if ( lhs == NAMESPACE_LANGUAGE )
         {
           const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
-          return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? -1 : 0;
+          return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? 0 : 1;
         }
         DBG << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
         return 0;
