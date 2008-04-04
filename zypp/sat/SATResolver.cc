@@ -215,6 +215,12 @@ SATResolver::addPoolItemToLock (PoolItem item)
     _items_to_lock.unique ();
 }
 
+void
+SATResolver::addPoolItemToKeep (PoolItem item)
+{
+    _items_to_keep.push_back (item);
+    _items_to_keep.unique ();
+}
 
 //---------------------------------------------------------------------------
 
@@ -337,10 +343,13 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 	    resolver.addPoolItemToRemove(item);		// -> remove !
 	}
         else if (status.isLocked()
-                 || (status.isKept()
-                     && !by_solver)) {
-            resolver.addPoolItemToLock (item);
+		 && !by_solver) {
+	    resolver.addPoolItemToLock (item);
         }
+        else if (status.isKept()
+		 && !by_solver) {
+	    resolver.addPoolItemToKeep (item);
+        }	
 
 	return true;
     }
@@ -396,6 +405,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     _items_to_install.clear();
     _items_to_remove.clear();
     _items_to_lock.clear();
+    _items_to_keep.clear();    
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   functor::functorRef<bool,PoolItem>(info) );
@@ -443,6 +453,19 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	    queue_push( &(_jobQueue), ident );
 	}
     }
+
+    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); iter++) {
+        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
+	if (iter->status().isInstalled()) {
+	    MIL << "Keep installed item " << *iter << " with the string ID: " << ident << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), ident );
+	} else {
+	    MIL << "Keep NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), ident );
+	}
+    }    
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;

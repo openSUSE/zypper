@@ -68,6 +68,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
+    PoolItemList _items_to_keep;    
 
     bool _fixsystem;			// repair errors in rpm dependency graph 
     bool _allowdowngrade;		// allow to downgrade installed solvable 
@@ -108,6 +109,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
     void addPoolItemToLock (PoolItem item);
+    void addPoolItemToKeep (PoolItem item);    
 
     void addPoolItemToRemove (PoolItem item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
