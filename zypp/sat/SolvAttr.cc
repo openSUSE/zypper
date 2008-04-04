@@ -27,6 +27,7 @@ namespace zypp
 namespace sat
 { /////////////////////////////////////////////////////////////////
 
+  const SolvAttr SolvAttr::allAttr( detail::noId );
   const SolvAttr SolvAttr::noAttr;
 
 #warning STILL ATTRIBUTES HERE WHICH ARE NOT PROVIDED BY SOLV FILES
