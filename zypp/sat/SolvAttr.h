@@ -41,6 +41,7 @@ namespace sat
       /** Value representing \c noAttr (<tt>""</tt>)*/
       static const SolvAttr noAttr;
 
+      static const SolvAttr name;
       static const SolvAttr summary;
       static const SolvAttr description;
       static const SolvAttr insnotify;

@@ -33,6 +33,7 @@ namespace sat
 #warning STILL ATTRIBUTES HERE WHICH ARE NOT PROVIDED BY SOLV FILES
 // At least the ones that do nat have a satsolver/knownid.
 
+  const SolvAttr SolvAttr::name         ( SOLVABLE_NAME ); 
   const SolvAttr SolvAttr::summary      ( SOLVABLE_SUMMARY );       // translated
   const SolvAttr SolvAttr::description  ( SOLVABLE_DESCRIPTION );   // translated
   const SolvAttr SolvAttr::insnotify    ( SOLVABLE_MESSAGEINS );    // translated
