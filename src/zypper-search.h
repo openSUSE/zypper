@@ -83,6 +83,26 @@ struct FillTable
         *_table << row;
     return true;
   }
+
+  bool operator()(const zypp::sat::Solvable & solv) const
+    {
+      TableRow row;
+
+      // add other fields to the result table
+
+      zypp::PoolItem pi( zypp::ResPool::instance().find( solv ) );
+
+      row << ( pi.status().isInstalled() ? "i" : " " )
+            << pi->repository().info().name()
+      // TODO what about rug's Bundle?
+      << (_gopts.is_rug_compatible ?
+          "" : kind_to_string_localized(pi->kind(), 1))
+              << pi->name()
+              << pi->edition().asString()
+              << pi->arch().asString();
+          *_table << row;
+      return true;
+    }
 };
 
 #endif /*ZYPPERSEARCH_H_*/

@@ -23,9 +23,12 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 
+//#include "zypp/base/Algorithm.h"
+
 #include "zypp/base/UserRequestException.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
+#include "zypp/sat/SolvAttr.h"
 
 #include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
 
@@ -2065,10 +2068,13 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    //add available repos to query
-    std::list<zypp::RepoInfo>::const_iterator repo_it;
-    for (repo_it = gData.repos.begin();repo_it != gData.repos.end();++repo_it){
-      query.addRepo( repo_it->alias());
+    // add available repos to query
+    if (cOpts().count("repo"))
+    {
+      std::list<zypp::RepoInfo>::const_iterator repo_it;
+      for (repo_it = gData.repos.begin();repo_it != gData.repos.end();++repo_it){
+        query.addRepo( repo_it->alias());
+      }
     }
 
     init_target(*this);
@@ -2079,20 +2085,37 @@ void Zypper::doCommand()
     Table t;
     t.style(Ascii);
 
+    for(vector<string>::const_iterator it = _arguments.begin();
+        it != _arguments.end(); ++it)
+      query.addString(*it);
+    query.addAttribute(sat::SolvAttr::name);
+    if (cOpts().count("search-descriptions"))
+    {
+      query.addAttribute(sat::SolvAttr::summary);
+      query.addAttribute(sat::SolvAttr::description);
+    }
+
     try
     {
       FillTable callback( t, query );
-      query.execute(_arguments.empty()? string() : _arguments[0], callback );
+      cout <<"going ahead"<<endl;
+      query.execute(callback);
+      //unsigned int count = invokeOnEach(query.begin(), query.end(), callback);
+      //cout << "query: " << endl << query;
 
       if (t.empty())
         out().info(_("No resolvables found."), Out::QUIET);
       else {
         cout << endl; //! \todo  out().separator()?
+
         if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
           t.sort(1);
         else
           t.sort(3); // sort by name
+
         cout << t; //! \todo out().table()?
+
+//        cout << "invocations:" << count << endl;        
       }
     }
     catch (const Exception & e)
