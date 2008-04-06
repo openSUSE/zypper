@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 #include <list>
 #include <vector>
 #include <algorithm>
@@ -17,39 +18,45 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/DefaultIntegral.h"
-#include "zypp/PoolQuery.h"
+#include "zypp/base/Regex.h"
+#include "zypp/base/Algorithm.h"
 #include "zypp/base/UserRequestException.h"
+#include "zypp/repo/RepoException.h"
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
-extern "C"
-{
-#include "satsolver/repo.h"
-}
+#include "zypp/PoolQuery.h"
 
 using namespace std;
+using namespace zypp::sat;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  struct PoolQuery::Impl
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PoolQuery::Impl
+  //
+  class PoolQuery::Impl
   {
-
+  public:
     Impl()
-      : _flags( 0 | SEARCH_NOCASE | SEARCH_SUBSTRING )
+      : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING )
       , _status_flags(ALL)
+      , _match_word(false), _use_wildcards(false)
+      , _require_all(false)
+      , _compiled(false)
     {}
 
     ~Impl()
-    {
-      //MIL << std::endl;
-    }
+    {}
 
   public:
-
+/*
     static int repo_search_cb(void *cbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
     {
       PoolQuery *me = (PoolQuery*) cbdata;
@@ -74,18 +81,57 @@ namespace zypp
       }
 
       if (me->_pimpl->_fnc)
-        r = me->_pimpl->_fnc( makeResObject(solvable) );
+        r = me->_pimpl->_fnc( solvable );//makeResObject(solvable) );
       
       if (!r)
         return SEARCH_STOP;
       return SEARCH_NEXT_SOLVABLE;
     }
+  */  
+    ResultIterator begin();
+    ResultIterator end();
+    
+    string asString() const;
+    
+  private:
+    void compile();
+    string createRegex(vector<string> & container);
 
+  public:
+    /** Raw search strings. */
+    vector<string> _strings;
+    /** Regex-compiled search strings. */
+    string _rcstrings;
+    /** Raw attributes */
+    AttrMap _attrs;
+    /** Regex-compiled attributes */
+    CompiledAttrMap _rcattrs;
+
+    /** Repos to search. */
     vector<string> _repos;
-    vector<string> _names;
+    /** Kinds to search */
     vector<Resolvable::Kind> _kinds;
+
+    /** Sat solver search flags */
     int _flags;
+    /** Backup of search flags. compile() may change the flags if needed, so
+     * in order to reuse the query, the original flags need to be stored
+     * at the start of compile() */
+    int _flags_old;
+    /** Sat solver status flags */
     int _status_flags;
+
+    bool _match_word;
+    bool _use_wildcards;
+
+    bool _require_all;
+
+    /** Sat solver Dataiterator structure */
+    RepoDataIterator _rdit;
+
+    bool _compiled;
+
+    /** Function for processing found solvables. Used in execute(). */
     mutable PoolQuery::ProcessResolvable _fnc;
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -93,12 +139,444 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
   };
-  ///////////////////////////////////////////////////////////////////
+/*
+  template <class _OutputIterator>
+  struct CollectNonEmpty
+  {
+    CollectNonEmpty( _OutputIterator iter_r ) : _iter( iter_r ) {}
 
-  /** \relates PoolQuery::Impl Stream output */
+    template<class _Tp>
+    bool operator()( const _Tp & value_r ) const
+    {
+      if (value_r.empty())
+        return true;
+      *_iter++ = value_r;
+      return true;
+    }
+
+    private:
+      mutable _OutputIterator _iter;
+  };
+*/
+  void PoolQuery::Impl::compile()
+  {
+    // backup the flags
+    _flags_old = _flags;
+
+    // 'different'         - will have to iterate through all and match by ourselves (slow)
+    // 'same'              - will pass the compiled string to dataiterator_init
+    // 'one-attr'          - will pass it to dataiterator_init
+    // 'one-non-regex-str' - will pass to dataiterator_init, set flag to SEARCH_STRING or SEARCH_SUBSTRING
+    
+    // // NO ATTRIBUTE
+    // else
+    //   for all _strings
+    //     create regex; store in _rcstrings; if more strings flag regex;
+    if (_attrs.empty())
+    {
+      _rcstrings = createRegex(_strings);
+      if (_strings.size() > 1)
+        _flags = (_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;//setMatchRegex();
+    }
+
+    // // ONE ATTRIBUTE 
+    // else if _attrs is not empty but it contains just one attr
+    //   for all _strings and _attr[key] strings
+    //     create regex; store in _rcattrs; flag 'one-attr'; if more strings flag regex;
+    else if (_attrs.size() == 1)
+    {
+      vector<string> joined;
+      for(vector<string>::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
+        if (!it->empty())
+          joined.push_back(*it);
+      for(vector<string>::const_iterator it = _attrs.begin()->second.begin(); it != _attrs.begin()->second.end(); ++it)
+        if (!it->empty())
+          joined.push_back(*it);
+      _rcstrings = createRegex(joined);
+      _rcattrs.insert(pair<sat::SolvAttr, string>(_attrs.begin()->first, string()));
+    }
+
+
+    // // MULTIPLE ATTRIBUTES
+    else
+    {
+      bool attrvals_empty = true;
+      for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+        if (!ai->second.empty())
+          for(vector<string>::const_iterator it = ai->second.begin();
+              it != ai->second.end(); it++)
+            if (!it->empty())
+            {
+              attrvals_empty = false;
+              goto attremptycheckend;
+            }
+
+attremptycheckend:
+
+      bool attrvals_thesame = true;
+      for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+      {
+        
+      }
+
+      // // THE SAME STRINGS FOR DIFFERENT ATTRS
+      // else if _attrs is not empty but it does not contain strings
+      //   for each key in _attrs take all _strings
+      //     create regex; store in _rcattrs and _rcstrings; flag 'same'; if more strings flag regex;
+      if (attrvals_empty || attrvals_thesame)
+      {
+        if (attrvals_empty)
+        {
+          // compile the search string
+          vector<string> joined;
+          for(vector<string>::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
+            if (!it->empty())
+              joined.push_back(*it);
+          _rcstrings = createRegex(joined);
+
+          // copy the _attrs keys to _rcattrs
+          for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+            _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
+        }
+      }
+      // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
+      // if _attrs is not empty and it contains non-empty vectors with non-empty strings
+      //   for each key in _attrs take all _strings + all _attrs[key] strings
+      //     create regex; store in _rcattrs; flag 'different'; if more strings flag regex;
+      else
+      {
+        
+      }
+    }
+
+    // tell the Dataiterator to search only in one repo if only one specified
+    if (_repos.size() == 1)
+      _flags &= ~SEARCH_ALL_REPOS;
+
+    _compiled = true;
+    
+    DBG << asString() << endl;
+  }
+
+  /**
+   * Converts '*' and '?' wildcards within str into their regex equivalents.
+   */
+  static string wildcards2regex(const string & str)
+  {
+    string regexed = str;
+
+    str::regex all("\\*"); // regex to search for '*'
+    str::regex one("\\?"); // regex to search for '?'
+    string r_all(".*"); // regex equivalent of '*'
+    string r_one(".");  // regex equivalent of '?'
+    string::size_type pos;
+
+    // replace all "*" in input with ".*"
+    for (pos = 0; (pos = regexed.find("*", pos)) != std::string::npos; pos+=2)
+      regexed = regexed.replace(pos, 1, r_all);
+
+    // replace all "?" in input with "."
+    for (pos = 0; (pos = regexed.find('?', pos)) != std::string::npos; ++pos)
+      regexed = regexed.replace(pos, 1, r_one);
+
+    DBG << " -> " << regexed << endl;
+
+    return regexed;
+  }
+
+//! macro for word boundary tags for regexes
+#define WB (_match_word ? string("\\b") : string())
+
+  string PoolQuery::Impl::createRegex(vector<string> & container)
+  {
+    string rstr;
+
+    if (container.empty())
+      return rstr;
+
+    if (container.size() == 1)
+    {
+      rstr = *container.begin();
+
+      if (!_use_wildcards && ((_flags & SEARCH_STRINGMASK) != SEARCH_REGEX))
+        return rstr;
+
+      if (_use_wildcards)
+      {
+        rstr = wildcards2regex(rstr);
+      
+        if (_flags & SEARCH_STRING) // match exact
+          rstr = "^" + rstr + "$";
+      }
+
+      rstr = ".*" + WB + rstr + WB + ".*";
+
+      return rstr;
+    }
+
+    // multiple strings
+
+    vector<string>::const_iterator it = container.begin();
+    string tmp;
+
+    if (_use_wildcards)
+      tmp = wildcards2regex(*it);
+
+    if (_require_all)
+    {
+      if (!(_flags & SEARCH_STRING)) // not match exact
+        tmp += ".*" + WB + tmp;
+      rstr = "(?=" + tmp + ")";
+    }
+    else
+    {
+      if (_flags & SEARCH_STRING) // match exact
+        rstr = "^";
+      else
+        rstr = ".*" + WB;
+
+      rstr += "(" + tmp;
+    }
+
+    ++it;
+
+    for (; it != container.end(); ++it)
+    {
+      if (_use_wildcards)
+        tmp = wildcards2regex(*it);
+
+      if (_require_all)
+      {
+        if (!(_flags & SEARCH_STRING)) // not match exact
+          tmp += ".*" + WB + tmp;
+        rstr += "(?=" + tmp + ")";
+      }
+      else
+      {
+        rstr += "|" + tmp;
+      }
+    }
+
+    if (_require_all)
+    {
+      if (!(_flags & SEARCH_STRING)) // not match exact
+        rstr += WB + ".*";
+    }
+    else
+    {
+      rstr += ")";
+      if (_flags & SEARCH_STRING) // match exact
+        rstr += "$";
+      else
+        rstr += WB + ".*";
+    }
+
+    return rstr;
+  }
+
+
+  PoolQuery::ResultIterator PoolQuery::Impl::begin()
+  {
+    compile();
+
+    // if only one repository has been specified, find it in the pool
+    sat::Pool pool(sat::Pool::instance());
+    sat::Pool::RepositoryIterator itr = pool.reposBegin();
+    if (!(_flags & SEARCH_ALL_REPOS) && _repos.size() == 1)
+    {
+      string theone = *_repos.begin();
+      for (; itr->info().alias() != theone && itr != pool.reposEnd(); ++itr);
+      if (itr == pool.reposEnd())
+      {
+        RepoInfo info; info.setAlias(theone);
+        ERR << "Repository not found in sat pool." <<  endl;
+        ZYPP_THROW(repo::RepoNotFoundException(info));
+      }
+    }
+
+    DBG << "_flags:" << _flags << endl;
+
+    if (_rcattrs.empty())
+    {
+    ::dataiterator_init(&_rdit,
+      _flags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this
+      0,                                           // search all solvables
+      0,                                           // attribute id - only if 1 attr key specified
+      _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
+      _flags);
+    }
+    else if (_rcattrs.size() == 1)
+    {
+      ::dataiterator_init(&_rdit,
+        _flags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this 
+        0,                                           // search all solvables
+        _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
+        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string 
+        _flags);
+    }
+    else
+    {
+      ::dataiterator_init(&_rdit,
+        _flags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), /* repository - switch to next at the end of current one in increment() */ 
+        0, /*search all resolvables */
+        0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
+        0, //qs.empty() ? 0 : qs.c_str(), /* create regex, pass it here */
+        _flags);
+    }
+
+    ImplPtr p(this);
+    PoolQuery::ResultIterator it(p);
+    it.increment();
+    return it;
+  }
+
+  PoolQuery::ResultIterator PoolQuery::Impl::end()
+  {
+    INT << "end" << endl;
+    return PoolQuery::ResultIterator();
+  }
+
+
+  string PoolQuery::Impl::asString() const
+  {
+    ostringstream o;
+
+    o << "compiled: " << _compiled << endl;
+
+    o << "match flags:" << endl;
+    o << "* sat: " << (_flags & SEARCH_STRINGMASK) << endl; 
+    o << "* SEARCH_REGEX: " << ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX ? "yes" : "no") << endl;
+
+    // raw
+    
+    o << "strings: ";
+    for(vector<string>::const_iterator it = _strings.begin();
+        it != _strings.end(); ++it)
+      o << *it << " ";
+    o << endl;
+
+    o << "attributes: " << endl;
+    for(AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+    {
+      o << "* " << ai->first << ": ";
+      for(vector<string>::const_iterator vi = ai->second.begin();
+          vi != ai->second.end(); ++vi)
+        o << *vi << " ";
+      o << endl;
+    }
+
+    // compiled
+
+    o << "regex compiled strings: " << _rcstrings << endl;
+    o << "regex compiled attributes:" << endl;
+    for (CompiledAttrMap::const_iterator ai = _rcattrs.begin(); ai != _rcattrs.end(); ++ai)
+      o << "* " << ai->first << ": " << ai->second << endl;
+
+    return o.str();
+  }
+
+  /** \relates PoolQuery::Impl Stream output *//*
   inline std::ostream & operator<<( std::ostream & str, const PoolQuery::Impl & obj )
   {
     return str << "PoolQuery::Impl";
+  }
+  */
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PoolQuery::ResultIterator
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  PoolQuery::ResultIterator::ResultIterator(ImplPtr pqimpl)
+  : PoolQuery::ResultIterator::iterator_adaptor_(0)
+  , _pqimpl(pqimpl)
+  , _has_next(true)
+  , _attrs(pqimpl->_rcattrs)
+  , _do_matching(false)
+  , _pool((sat::Pool::instance()))
+  {
+    _rdit = &_pqimpl->_rdit;
+    base_reference() = _rdit;
+    _sid = 0; /*rdit > ID_EMPTY ? rdit->solvid : 0;*/
+
+    if (_attrs.size() > 1)
+      _do_matching = true;
+  }
+
+  void PoolQuery::ResultIterator::increment()
+  {
+    if (!_rdit)
+      return;
+
+    bool got_match = false;
+    if (_has_next)
+    {
+      DBG << "last: " << _sid << endl;
+      while (_has_next && !(got_match = matchSolvable()));
+    }
+
+    if (!got_match)
+    {
+      base_reference() = 0;
+      _sid = 0;
+    }
+
+    DBG << "next: " << _sid << endl;
+  }
+
+  bool PoolQuery::ResultIterator::matchSolvable()
+  {
+    _sid = _rdit->solvid;
+
+    bool matches = !_do_matching;
+    bool in_repo;
+    do
+    {
+      //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
+      in_repo = _sid >= _rdit->repo->start; 
+
+      if (_do_matching)
+      {
+        if ( !matches && in_repo /*_sid >= 2 *//*_rdit->repo->start*/)
+        {
+          SolvAttr attr(_rdit->key->name);
+
+          CompiledAttrMap::const_iterator ai = _attrs.find(attr);
+          if (ai != _attrs.end())
+          {
+            // exact match
+            //matches = (ai->second == IdString(_rdit->kv.id).asString());
+            // substring
+            matches = (
+              IdString(_rdit->kv.id).asString().find
+                (_pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings)
+                != string::npos);
+            if (matches)
+              INT << "value: " << IdString(_rdit->kv.id).asString() << endl
+                  << " mstr: " <<  (_pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings) << endl; 
+            // regex
+          }
+        }
+      }
+
+      if ((_has_next = ::dataiterator_step(_rdit)))
+      {
+        if (!in_repo /*_sid < 2 *//*_rdit->repo->start*/)
+        {
+          INT << "repo start: " << _rdit->repo->start << endl;
+          _sid = _rdit->solvid;
+        }
+      }
+      else
+      {
+        return matches;
+      }
+    }
+    while (_rdit->solvid == _sid || !in_repo /*_sid < 2 *//*_rdit->repo->start*/);
+
+    return matches;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -111,59 +589,96 @@ namespace zypp
     : _pimpl(new Impl())
   {}
 
+
   PoolQuery::~PoolQuery()
   {}
+
+
+  void PoolQuery::addRepo(const std::string &repoalias)
+  {
+    _pimpl->_repos.push_back(repoalias);
+    _pimpl->_flags &= ~SEARCH_ALL_REPOS;
+  }
+
 
   void PoolQuery::addKind(const Resolvable::Kind &kind)
   { _pimpl->_kinds.push_back(kind); }
 
+
+  void PoolQuery::addString(const string & value)
+  { _pimpl->_strings.push_back(value); }
+
+
+  void PoolQuery::addAttribute(const sat::SolvAttr & attr, const std::string & value)
+  { _pimpl->_attrs[attr].push_back(value); }
+
+
   void PoolQuery::setCaseSensitive(const bool value)
   {
     if (value)
-      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_NOCASE);
+      _pimpl->_flags &= ~SEARCH_NOCASE;
     else
-      _pimpl->_flags = (_pimpl->_flags | SEARCH_NOCASE);
+      _pimpl->_flags |= SEARCH_NOCASE;
   }
 
-  void PoolQuery::setMatchExact(const bool value)
+
+  void PoolQuery::setMatchSubstring()
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
+  void PoolQuery::setMatchExact()
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
+  void PoolQuery::setMatchRegex()
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
+  void PoolQuery::setMatchWord()
   {
-    if (value)
-    {
-      _pimpl->_flags = (_pimpl->_flags | SEARCH_STRING);
-      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_REGEX);
-      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_SUBSTRING);
-      _pimpl->_flags = (_pimpl->_flags &  ~SEARCH_GLOB);
-    }
-    else
-    {
-      _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRING);
-    }
+    _pimpl->_match_word = true;
+    _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
   }
 
-  void PoolQuery::addRepo(const std::string &repoalias)
-  {  _pimpl->_repos.push_back(repoalias);  }
 
   void PoolQuery::setFlags(int flags)
   { _pimpl->_flags = flags; }
 
+
   void PoolQuery::setInstalledOnly()
-  {
-    _pimpl->_status_flags = (_pimpl->_status_flags | INSTALLED_ONLY);
-  }
-
+  { _pimpl->_status_flags |= INSTALLED_ONLY; }
   void PoolQuery::setUninstalledOnly()
+  { _pimpl->_status_flags |= UNINSTALLED_ONLY; }
+  void PoolQuery::setStatusFilterFlags( int flags )
+  { _pimpl->_status_flags |= flags; }
+
+
+  void PoolQuery::requireAll(const bool require_all)
+  { _pimpl->_require_all = require_all; }
+
+
+  PoolQuery::ResultIterator PoolQuery::begin()
+  { return _pimpl->begin(); }
+
+
+  PoolQuery::ResultIterator PoolQuery::end()
+  { return _pimpl->end(); }
+
+
+  bool PoolQuery::empty()
+  { return _pimpl->begin() == _pimpl->end(); }
+
+  //! \todo collect the result, reuse if not dirty
+  PoolQuery::size_type PoolQuery::size()
   {
-    _pimpl->_status_flags = (_pimpl->_status_flags | UNINSTALLED_ONLY);
+    size_type count = 0;
+    for(ResultIterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
+    return count;
   }
 
-  void PoolQuery::setStatusFilterFlags( int flags )
+
+  void PoolQuery::execute(ProcessResolvable fnc)
   {
-    _pimpl->_status_flags = (_pimpl->_status_flags | flags);
-  }
-  
-  void PoolQuery::execute(const string &term, ProcessResolvable fnc) const
-  {
+    invokeOnEach(_pimpl->begin(), _pimpl->end(), fnc);
+    /*
     _pimpl->_fnc = fnc;
+    string term;
+    if (!_pimpl->_strings.empty())
+      term = *_pimpl->_strings.begin();
 
     sat::Pool pool(sat::Pool::instance());
     for ( sat::Pool::RepositoryIterator itr = pool.reposBegin();
@@ -188,22 +703,16 @@ namespace zypp
       }
 
     }
+    */
   }
-  
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : ostream &
-  */
-  ostream & operator<<( ostream & str, const PoolQuery & obj )
-  {
-    return str;
-  }
-  
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PoolQuery::Impl
+  //
   /**
-   * represents all atributes in PoolQuery except SolvAtributes, which is
-   * used as is (not needed extend anythink if someone add new solv attr)
+   * represents all atributes in PoolQuery except SolvAtributes, which are
+   * used as is (not needed extend anything if someone adds new solv attr)
    */
   struct PoolQueryAttr : public IdStringType<PoolQueryAttr>
   {
@@ -248,6 +757,9 @@ namespace zypp
   const PoolQueryAttr PoolQueryAttr::nameAttr( "name" );
   const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
   const PoolQueryAttr PoolQueryAttr::kindAttr( "kind" );
+
+  ///////////////////////////////////////////////////////////////////
+
 
   //\TODO maybe ctor with stream can be usefull
   bool PoolQuery::recover( istream &str, char delim )
@@ -320,7 +832,8 @@ namespace zypp
     return finded_something;
   }
 
-  void PoolQuery::serialize( ostream &str, char delim )
+
+  void PoolQuery::serialize( ostream &str, char delim ) const
   {
     //separating delim
     str << delim; 
@@ -340,7 +853,15 @@ namespace zypp
     str << delim; 
 
   }
-     
+
+
+  string PoolQuery::asString() const
+  { return _pimpl->asString(); }
+
+
+  ostream & operator<<( ostream & str, const PoolQuery & obj )
+  { return str << obj.asString(); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
