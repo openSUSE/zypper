@@ -12,11 +12,11 @@ extern "C"
 #include "zypp/base/InterProcessMutex.h"
 #include "zypp/base/String.h"
 
+#include "zypp/TmpPath.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
 
-#define ZYPP_LOCK_FILE "/var/run/zypp.pid"
-#define LMIL MIL << "LOCK [" << _name << "] "
+#define LMIL MIL << "LOCK [" << _options.name << "] "
 
 using namespace std;
 
@@ -35,16 +35,26 @@ ZYppLockedException::ZYppLockedException( const std::string & msg_r,
 
 ZYppLockedException::~ZYppLockedException() throw()
 {}
+ 
+
+InterProcessMutex::Options::Options( ConsumerType ptype,
+                                     const std::string &pname,
+                                     int ptimeout )
+    : name(pname) 
+    , timeout(ptimeout)
+    , type(ptype)
+{
+    if ( geteuid() == 0 )
+        base = "/var/run";
+    else
+        base = filesystem::TmpPath::defaultLocation() + ( string("zypp-") + getenv("USER") );
+}
     
 
-InterProcessMutex::InterProcessMutex( ConsumerType ctype,
-                                      const std::string &name,
-                                      int timeout )
-  : _name(name)
-  , _timeout(timeout)
-  , _type(ctype)
+   
+InterProcessMutex::InterProcessMutex( const Options &poptions )
+    : _options(poptions)
 {
-
     // get the current pid
     pid_t curr_pid = getpid();
     Pathname lock_file = lockFilePath();
@@ -75,7 +85,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             // GETLK tells you the conflicting lock as if the lock you pass
             // would have been set. So set the lock type depending on wether
             // we are a writer or a reader.
-            lock.l_type = ( ( _type == Writer ) ? F_WRLCK : F_RDLCK );
+            lock.l_type = ( ( _options.type == Writer ) ? F_WRLCK : F_RDLCK );
             
 
             // get lock information
@@ -123,11 +133,11 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                 // abort if we have slept more or equal than the timeout, but
                 // not for the case where timeout is negative which means no
                 // timeout and therefore we never abort.
-                if ( (totalslept >= _timeout) && (_timeout >= 0 ) )
+                if ( (totalslept >= _options.timeout) && (_options.timeout >= 0 ) )
                 {
                     ZYPP_THROW(ZYppLockedException(                                       
                                    _("This action is being run by another program already."),
-                                   _name, lock.l_pid));
+                                   _options.name, lock.l_pid));
                 }
                         
                 // if not, let sleep one second and count it
@@ -136,7 +146,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                 ++totalslept;
                 continue;
             }
-            else if ( ( lock.l_type == F_UNLCK ) && ( _type == Reader ) )
+            else if ( ( lock.l_type == F_UNLCK ) && ( _options.type == Reader ) )
             {
                 // either there is no lock or a reader has it so we just
                 // acquire a reader lock.
@@ -195,7 +205,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                     break;
                 }
             }
-            else if ( ( lock.l_type == F_UNLCK ) && ( _type == Writer ) )
+            else if ( ( lock.l_type == F_UNLCK ) && ( _options.type == Writer ) )
             {
                 LMIL << "stale lock found" << endl;
                 // Nobody conflicts with a writer lock so nobody is actually
@@ -234,7 +244,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             // try to lock it exclusively
             // if it fails, someone won us, so we just go for another try
             // or just abort
-            LMIL << "no lock found, taking ownership of it as a " << ( (_type == Reader ) ? "reader" : "writer" ) << endl;
+            LMIL << "no lock found, taking ownership of it as a " << ( (_options.type == Reader ) ? "reader" : "writer" ) << endl;
             struct flock lock;
             memset(&lock, 0, sizeof(struct flock));
             lock.l_whence = SEEK_SET;
@@ -251,7 +261,7 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             // by now the pid is written and the file locked.
             // If we are a reader, just downgrade the lock to
             // read shared lock.
-            if ( _type == Reader )
+            if ( _options.type == Reader )
             {
                 lock.l_type = F_RDLCK;
                
@@ -273,10 +283,10 @@ InterProcessMutex::~InterProcessMutex()
     {
         Pathname lock_file = lockFilePath();
         LMIL << "dropping " 
-             << ( (_type == Reader ) ? "reader" : "writer" ) 
+             << ( (_options.type == Reader ) ? "reader" : "writer" ) 
              << " lock on " << lock_file << endl;
         
-        switch ( _type )
+        switch ( _options.type )
         {
             case Reader:
                 
@@ -297,7 +307,8 @@ InterProcessMutex::~InterProcessMutex()
 
 Pathname InterProcessMutex::lockFilePath() const
 {
-    return Pathname("/var/run/zypp-" + _name + ".pid");
+    filesystem::assert_dir(_options.base);
+    return _options.base + ("zypp-" + _options.name + ".lock");
 }    
 
 bool InterProcessMutex::isProcessRunning(pid_t pid_r)

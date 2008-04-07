@@ -44,12 +44,12 @@ BOOST_AUTO_TEST_CASE(WaitForTheOther)
         {
             MIL << "child, PID: " << getpid() << endl;
             sleep(3);
-            InterProcessMutex mutex2(InterProcessMutex::Reader,"testcase");
+            InterProcessMutex mutex2(InterProcessMutex::Options(InterProcessMutex::Reader,"testcase"));
         }
         else
         {
             MIL << "parent: " << getpid() << endl;
-            InterProcessMutex mutex(InterProcessMutex::Writer,"testcase");
+            InterProcessMutex mutex(InterProcessMutex::Options(InterProcessMutex::Writer,"testcase"));
             // parent
             sleep(6);
         }        

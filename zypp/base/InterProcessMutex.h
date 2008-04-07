@@ -5,6 +5,7 @@
 #include <string>
 #include "zypp/base/Fd.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/Pathname.h"
 
 namespace zypp
@@ -26,7 +27,6 @@ private:
     std::string _name;
 };
 
-
 /**
  *
  * Inter process scoped lock implementation
@@ -40,7 +40,7 @@ private:
  * currently a writer.
  *
  */
-class InterProcessMutex
+class InterProcessMutex : private base::NonCopyable
 {
 public:
    /**
@@ -53,6 +53,43 @@ public:
         Writer
     };
 
+   /**
+    * options to alter the mutex behavor
+    */
+   class Options
+   {
+   public:
+       /**
+        * Options for a mutex of type \ref ptype
+        * with a given name and timeout.
+        * Default is name "zypp" and no timeout
+        * (wait till resource is free)
+        *
+        * The mutex type, Writer or Reader must be
+        * given explitly.
+        *
+        * The mutex will be handled using a lock file
+        * located on default library path if the
+        * library is running as root, and in users home
+        * directory if not.
+        *
+        */
+       Options( ConsumerType ptype,
+                const std::string &pname = "zypp",
+                int ptimeout = -1 );
+
+       /**
+        * set the path where the lockfile is
+        * created.
+        */
+       void setPath( const Pathname &base );
+
+       std::string name;
+       int timeout;
+       ConsumerType type;
+       Pathname base;
+   };
+    
    /**
     * Creates a mutex with a name and a timeout.
     *
@@ -68,9 +105,7 @@ public:
     * the timeout is reached.
     *
     */
-    InterProcessMutex( ConsumerType ctype,
-                       const std::string &name = "zypp",
-                       int timeout = -1 );
+    InterProcessMutex( const Options &poptions );
 
     /**
      * Destructor, gives up the lock on the named
@@ -83,9 +118,7 @@ private:
     Pathname lockFilePath() const;
 private:
     shared_ptr<Fd> _fd;
-    std::string _name;
-    int _timeout;
-    ConsumerType _type;
+    Options _options;
 };
 
 

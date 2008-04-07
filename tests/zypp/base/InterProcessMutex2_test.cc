@@ -46,13 +46,13 @@ BOOST_AUTO_TEST_CASE(Abort)
             MIL << "child, PID: " << getpid() << endl;
             // child
             sleep(3);
-            BOOST_REQUIRE_THROW( InterProcessMutex( InterProcessMutex::Reader,"testcase", 0), ZYppLockedException);
+            BOOST_REQUIRE_THROW( InterProcessMutex( InterProcessMutex::Options(InterProcessMutex::Reader,"testcase", 0)), ZYppLockedException);
             //InterProcessMutex mutex2("testcase");
         }
         else
         {
             MIL << "parent: " << getpid() << endl;
-            InterProcessMutex mutex( InterProcessMutex::Writer, "testcase");
+            InterProcessMutex mutex( InterProcessMutex::Options(InterProcessMutex::Writer, "testcase"));
             // parent
             sleep(6);
             wait(NULL);
