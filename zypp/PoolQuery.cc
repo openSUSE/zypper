@@ -447,9 +447,10 @@ attremptycheckend:
 
     o << "compiled: " << _compiled << endl;
 
-    o << "match flags:" << endl;
+    o << "string match flags:" << endl;
     o << "* sat: " << (_flags & SEARCH_STRINGMASK) << endl; 
     o << "* SEARCH_REGEX: " << ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX ? "yes" : "no") << endl;
+    o << "status filter flags:" << _status_flags << endl; 
 
     // raw
     
@@ -533,16 +534,35 @@ attremptycheckend:
   {
     _sid = _rdit->solvid;
 
+    bool new_solvable = true;
     bool matches = !_do_matching;
     bool in_repo;
+    bool drop_by_kind_status;
     do
     {
       //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
-      in_repo = _sid >= _rdit->repo->start; 
+      in_repo = _sid >= _rdit->repo->start;
 
-      if (_do_matching)
+      if (in_repo && new_solvable)
       {
-        if ( !matches && in_repo /*_sid >= 2 *//*_rdit->repo->start*/)
+        drop_by_kind_status = false;
+
+        // filter by installed uninstalled
+        if ( (_pqimpl->_status_flags & INSTALLED_ONLY) &&
+             _rdit->repo->name != _pool.systemRepoName() )
+          drop_by_kind_status = true;
+
+        if (!drop_by_kind_status)
+          if ( (_pqimpl->_status_flags & UNINSTALLED_ONLY) &&
+               _rdit->repo->name == _pool.systemRepoName() )
+            drop_by_kind_status = true;
+
+        matches = matches && !drop_by_kind_status;
+      }
+
+      if (_do_matching && !drop_by_kind_status)
+      {
+        if (!matches && in_repo)
         {
           SolvAttr attr(_rdit->key->name);
 
@@ -566,7 +586,8 @@ attremptycheckend:
 
       if ((_has_next = ::dataiterator_step(_rdit)))
       {
-        if (!in_repo /*_sid < 2 *//*_rdit->repo->start*/)
+        new_solvable = _rdit->solvid != _sid;
+        if (!in_repo)
         {
           INT << "repo start: " << _rdit->repo->start << endl;
           _sid = _rdit->solvid;
@@ -579,7 +600,7 @@ attremptycheckend:
         return matches && in_repo;
       }
     }
-    while (_rdit->solvid == _sid || !in_repo /*_sid < 2 *//*_rdit->repo->start*/);
+    while (!new_solvable || !in_repo);
 
     return matches;
   }
@@ -645,11 +666,11 @@ attremptycheckend:
 
 
   void PoolQuery::setInstalledOnly()
-  { _pimpl->_status_flags |= INSTALLED_ONLY; }
+  { _pimpl->_status_flags = INSTALLED_ONLY; }
   void PoolQuery::setUninstalledOnly()
-  { _pimpl->_status_flags |= UNINSTALLED_ONLY; }
+  { _pimpl->_status_flags = UNINSTALLED_ONLY; }
   void PoolQuery::setStatusFilterFlags( int flags )
-  { _pimpl->_status_flags |= flags; }
+  { _pimpl->_status_flags = flags; }
 
 
   void PoolQuery::requireAll(const bool require_all)

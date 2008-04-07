@@ -145,9 +145,9 @@ namespace zypp
      * Filter by status (installed uninstalled)
      */
     enum StatusFilter {
-      ALL = 1,
-      INSTALLED_ONLY = 2,
-      UNINSTALLED_ONLY = 4
+      ALL = 0, // both install filter and uninstall filter bits are 0
+      INSTALLED_ONLY = 1,
+      UNINSTALLED_ONLY = 2
     };
     void setInstalledOnly();
     void setUninstalledOnly();
