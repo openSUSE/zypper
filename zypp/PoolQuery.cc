@@ -14,6 +14,7 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <fnmatch.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
@@ -436,12 +437,13 @@ attremptycheckend:
     o << "compiled: " << _compiled << endl;
 
     o << "string match flags:" << endl;
-    o << "* sat: " << (_flags & SEARCH_STRINGMASK) << endl; 
-    o << "* SEARCH_REGEX: " << ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX ? "yes" : "no") << endl;
-    o << "status filter flags:" << _status_flags << endl; 
+    o << "* string/substring/glob/regex: " << (_flags & SEARCH_STRINGMASK) << endl; 
+    o << "* SEARCH_NOCASE: " << ((_flags & SEARCH_NOCASE) ? "yes" : "no") << endl;
+    o << "* SEARCH_ALL_REPOS: " << ((_flags & SEARCH_ALL_REPOS) ? "yes" : "no") << endl;
+    o << "status filter flags:" << _status_flags << endl;
 
     // raw
-    
+
     o << "strings: ";
     for(vector<string>::const_iterator it = _strings.begin();
         it != _strings.end(); ++it)
@@ -553,21 +555,49 @@ attremptycheckend:
         if (!matches && in_repo)
         {
           SolvAttr attr(_rdit->key->name);
-
           CompiledAttrMap::const_iterator ai = _attrs.find(attr);
           if (ai != _attrs.end())
           {
-            // exact match
-            //matches = (ai->second == IdString(_rdit->kv.id).asString());
-            // substring
-            matches = (
-              IdString(_rdit->kv.id).asString().find
-                (_pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings)
-                != string::npos);
+            const string & sstr =
+              _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
+            const IdString & value =
+              IdString(_rdit->kv.id);
+
+            //cout << "solvid: " << _sid << " attr: " << attr.asString() << " val: " << value.asString() << endl;
+
+            //string v2(::id2str(_rdit->repo->pool/*_pool.get()*/, _rdit->kv.id));
+            //if (value.asString() != v2)
+            //  cout << "ha! " << value.asString() << "!=" << v2 << endl;
+
+            switch(_pqimpl->_flags & SEARCH_STRINGMASK)
+            {
+            case SEARCH_STRING:
+              if (_pqimpl->_flags & SEARCH_NOCASE)
+                matches = ! str::compareCI(sstr.c_str(), value.c_str());
+              else
+                matches = (sstr == value.asString());
+              break;
+            case SEARCH_SUBSTRING:
+              if (_pqimpl->_flags & SEARCH_NOCASE)
+                matches = ::strcasestr(value.c_str(), sstr.c_str());
+              else
+                matches = (value.asString().find(sstr) != string::npos);
+              break;
+            case SEARCH_GLOB:
+              matches = !::fnmatch(sstr.c_str(), value.c_str(),
+                  (_pqimpl->_flags & SEARCH_NOCASE) ? FNM_CASEFOLD : 0);
+              break;
+            case SEARCH_REGEX:
+              matches = false;
+              break;
+            default:
+              matches = false;
+              ERR << "ivalid string matching type: "
+                  << (_pqimpl->_flags & SEARCH_STRINGMASK) << endl;
+            }
             if (matches)
-              INT << "value: " << IdString(_rdit->kv.id).asString() << endl
-                  << " mstr: " <<  (_pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings) << endl; 
-            // regex
+              INT << "value: " << value.asString() << endl
+                  << " mstr: " <<  sstr << endl; 
           }
         }
       }

@@ -222,6 +222,51 @@ BOOST_AUTO_TEST_CASE(pool_query_9)
   BOOST_CHECK(q2.size() == 28);
 }
 
+// multi attr (same value) substring matching (case sensitive and insensitive)
+BOOST_AUTO_TEST_CASE(pool_query_10)
+{
+  cout << "****10****"  << endl;
+/*
+  PoolQuery q;
+  q.addString("SSH");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addAttribute(sat::SolvAttr::summary);
+  q.addAttribute(sat::SolvAttr::description);
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  cout << q.size() << endl;
+//  BOOST_CHECK(q.size() == 17);
+*/
+  cout << endl;
+
+  PoolQuery q2;
+  q2.addString("SSH");
+  q2.addAttribute(sat::SolvAttr::name);
+  q2.addAttribute(sat::SolvAttr::summary);
+  q2.addAttribute(sat::SolvAttr::description);
+  q2.setCaseSensitive();
+
+  std::for_each(q2.begin(), q2.end(), &result_cb);
+  cout << q2.size() << endl;
+}
+/*
+// multi attr (same value) glob matching (case sensitive and insensitive)
+BOOST_AUTO_TEST_CASE(pool_query_11)
+{
+  cout << "****11****"  << endl;
+  PoolQuery q;
+  q.addString("pack*");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addAttribute(sat::SolvAttr::summary);
+  q.setMatchGlob();
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  cout << q.asString() <<  endl;
+//  BOOST_CHECK(q.size() == 11);
+}
+*/
+
+
 // save/load query
 BOOST_AUTO_TEST_CASE(pool_query_save_restore)
 {
