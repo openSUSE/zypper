@@ -2,7 +2,7 @@
 Fri Apr  4 16:14:49 CEST 2008 - jreidinger@suse.cz
 
 - fix escaping characters for shell and for local files
-- r9381 
+- r9381
 
 -------------------------------------------------------------------
 Sun Mar 30 22:41:10 CEST 2008 - jkupec@suse.cz
@@ -10,6 +10,7 @@ Sun Mar 30 22:41:10 CEST 2008 - jkupec@suse.cz
 - --priority option added to the modifyrepo command to set repository
   priority (bnc #369827)
 - r9311
+- 0.10.5
 
 -------------------------------------------------------------------
 Sat Mar 29 14:48:00 CET 2008 - jkupec@suse.cz
