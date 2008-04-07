@@ -105,11 +105,7 @@ BOOST_AUTO_TEST_CASE(pool_query_4)
   q.addAttribute(sat::SolvAttr::name, "zypper");
   q.addRepo("zypp_svn");
 
-  PoolQuery::ResultIterator it = q.begin();
-  std::for_each(
-    it,
-    q.end(),
-    &result_cb);
+  std::for_each(q.begin(), q.end(), &result_cb);
   BOOST_CHECK(q.size() == 3);
 }
 
@@ -145,8 +141,25 @@ BOOST_AUTO_TEST_CASE(pool_query_6)
   BOOST_CHECK(q1.size() == 5);
 }
 
+// match exact
 BOOST_AUTO_TEST_CASE(pool_query_7)
 {
+  cout << "****7****"  << endl;
+  PoolQuery q;
+  q.addString("vim");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchExact();
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 3);
+
+  PoolQuery q1;
+  q1.addString("zypp");
+  q1.addAttribute(sat::SolvAttr::name);
+  q1.setMatchExact();
+
+  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.empty());
 }
 
 BOOST_AUTO_TEST_CASE(pool_query_8)

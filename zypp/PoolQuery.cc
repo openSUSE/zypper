@@ -517,7 +517,8 @@ attremptycheckend:
       while (_has_next && !(got_match = matchSolvable()));
     }
 
-    if (!got_match)
+    // no more solvables and the last did not match
+    if (!got_match && !_has_next)
     {
       base_reference() = 0;
       _sid = 0;
@@ -569,9 +570,11 @@ attremptycheckend:
           _sid = _rdit->solvid;
         }
       }
+      // no more attributes/solvables, return
       else
       {
-        return matches;
+        // did the last solvable match conditions?
+        return matches && in_repo;
       }
     }
     while (_rdit->solvid == _sid || !in_repo /*_sid < 2 *//*_rdit->repo->start*/);
