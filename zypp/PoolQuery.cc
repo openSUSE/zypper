@@ -52,7 +52,7 @@ namespace zypp
     Impl()
       : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING )
       , _status_flags(ALL)
-      , _match_word(false), _use_wildcards(false)
+      , _match_word(false) 
       , _require_all(false)
       , _compiled(false)
     {}
@@ -127,7 +127,6 @@ namespace zypp
     int _status_flags;
 
     bool _match_word;
-    bool _use_wildcards;
 
     bool _require_all;
 
@@ -301,26 +300,15 @@ attremptycheckend:
 
     if (container.size() == 1)
     {
-      rstr = *container.begin();
+      if (_match_word)
+        return ".*" + WB + *container.begin() + WB + ".*";
 
-      if (!_use_wildcards && ((_flags & SEARCH_STRINGMASK) != SEARCH_REGEX))
-        return rstr;
-
-      if (_use_wildcards)
-      {
-        rstr = wildcards2regex(rstr);
-      
-        if (_flags & SEARCH_STRING) // match exact
-          rstr = "^" + rstr + "$";
-      }
-
-      rstr = ".*" + WB + rstr + WB + ".*";
-
-      return rstr;
+      return *container.begin();
     }
 
     // multiple strings
 
+    bool _use_wildcards = (_flags & SEARCH_STRINGMASK) == SEARCH_GLOB;
     vector<string>::const_iterator it = container.begin();
     string tmp;
 
@@ -649,17 +637,18 @@ attremptycheckend:
 
 
   void PoolQuery::setMatchSubstring()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
+  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
   void PoolQuery::setMatchExact()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
+  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
   void PoolQuery::setMatchRegex()
-  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
+  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
+  void PoolQuery::setMatchGlob()
+  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_GLOB; }
   void PoolQuery::setMatchWord()
   {
     _pimpl->_match_word = true;
     _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
   }
-
 
   void PoolQuery::setFlags(int flags)
   { _pimpl->_flags = flags; }

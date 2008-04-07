@@ -213,20 +213,14 @@ namespace zypp
 
     /** Set to match exact string instead of substring.*/
     void setMatchExact();
-    /** Set to use the query strings as regexes */
-    void setMatchRegex();
     /** Set to substring (the default). */
     void setMatchSubstring();
+    /** Set to match globs. */
+    void setMatchGlob();
+    /** Set to use the query strings as regexes */
+    void setMatchRegex();
     /** Set to match words (uses regex) */
     void setMatchWord();
-
-    /**
-     * If true, convert * and ? to correspondent regex equivalent, otherwise
-     * shield wildcards from being interpreted like regex control chars (if
-     * SEARCH_REGEX is set)
-     */
-    void setUseWildcards(const bool value = true);
-
     //void setLocale(const Locale & locale);
     //@}
 

@@ -192,6 +192,37 @@ BOOST_AUTO_TEST_CASE(pool_query_8)
   BOOST_CHECK(q1.size() == 5);
 }
 
+// use globs
+BOOST_AUTO_TEST_CASE(pool_query_9)
+{
+  cout << "****9****"  << endl;
+  PoolQuery q;
+  q.addString("z?p*");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchGlob();
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 11);
+
+  cout << endl;
+
+  PoolQuery q1;
+  q1.addString("*zypp*");
+  q1.addAttribute(sat::SolvAttr::name);
+  q1.setMatchGlob();
+
+  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.size() == 28);
+
+  // should be the same as above
+  PoolQuery q2;
+  q2.addString("zypp");
+  q2.addAttribute(sat::SolvAttr::name);
+
+  BOOST_CHECK(q2.size() == 28);
+}
+
+// save/load query
 BOOST_AUTO_TEST_CASE(pool_query_save_restore)
 {
 #warning CAN NOT USE A FIX SOLV FILE
