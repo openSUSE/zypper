@@ -29,6 +29,7 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/PoolQuery.h"
 
 #include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
 
@@ -2039,9 +2040,10 @@ void Zypper::doCommand()
     if (copts.count("installed-only")) query.setInstalledOnly();
     //if (copts.count("match-any")) options.setMatchAny();
     //if (copts.count("match-words")) options.setMatchWords();
-    if (copts.count("match-exact")) query.setMatchExact();
-    //if (copts.count("search-descriptions")) options.setSearchDescriptions();
-    if (copts.count("case-sensitive")) query.setCaseSensitive();
+    if (copts.count("match-exact"))
+      query.setMatchExact();
+    if (copts.count("case-sensitive"))
+      query.setCaseSensitive();
 
     if (copts.count("type") > 0)
     {
@@ -2077,14 +2079,6 @@ void Zypper::doCommand()
       }
     }
 
-    init_target(*this);
-
-    // now load resolvables:
-    load_resolvables(*this);
-
-    Table t;
-    t.style(Ascii);
-
     for(vector<string>::const_iterator it = _arguments.begin();
         it != _arguments.end(); ++it)
       query.addString(*it);
@@ -2095,10 +2089,17 @@ void Zypper::doCommand()
       query.addAttribute(sat::SolvAttr::description);
     }
 
+    init_target(*this);
+
+    // now load resolvables:
+    load_resolvables(*this);
+
+    Table t;
+    t.style(Ascii);
+
     try
     {
-      FillTable callback( t, query );
-      cout <<"going ahead"<<endl;
+      FillTable callback( t );
       query.execute(callback);
       //unsigned int count = invokeOnEach(query.begin(), query.end(), callback);
       //cout << "query: " << endl << query;
