@@ -2036,8 +2036,8 @@ void Zypper::doCommand()
 
     if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
       query.setUninstalledOnly();
-
-    if (copts.count("installed-only")) query.setInstalledOnly();
+    if (copts.count("installed-only"))
+      query.setInstalledOnly();
     //if (copts.count("match-any")) options.setMatchAny();
     //if (copts.count("match-words")) options.setMatchWords();
     if (copts.count("match-exact"))
@@ -2088,6 +2088,7 @@ void Zypper::doCommand()
       query.addAttribute(sat::SolvAttr::summary);
       query.addAttribute(sat::SolvAttr::description);
     }
+    //query.setMatchGlob(); \todo switch this on if the input contains * or ?
 
     init_target(*this);
 
