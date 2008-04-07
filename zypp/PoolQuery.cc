@@ -28,6 +28,11 @@
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
+extern "C"
+{
+#include "satsolver/repo.h"
+}
+
 #include "zypp/PoolQuery.h"
 
 using namespace std;
@@ -127,7 +132,7 @@ namespace zypp
     bool _require_all;
 
     /** Sat solver Dataiterator structure */
-    RepoDataIterator _rdit;
+    ::_Dataiterator _rdit;
 
     bool _compiled;
 
@@ -424,8 +429,7 @@ attremptycheckend:
         _flags);
     }
 
-    ImplPtr p(this);
-    PoolQuery::ResultIterator it(p);
+    PoolQuery::ResultIterator it(this);
     it.increment();
     return it;
   }
@@ -489,18 +493,16 @@ attremptycheckend:
   //
   ///////////////////////////////////////////////////////////////////
 
-  PoolQuery::ResultIterator::ResultIterator(ImplPtr pqimpl)
-  : PoolQuery::ResultIterator::iterator_adaptor_(0)
+  PoolQuery::ResultIterator::ResultIterator(Impl * pqimpl)
+  : PoolQuery::ResultIterator::iterator_adaptor_(pqimpl ? &pqimpl->_rdit : 0)
+  , _rdit(pqimpl ? &pqimpl->_rdit : 0)
   , _pqimpl(pqimpl)
+  , _sid(0)
   , _has_next(true)
   , _attrs(pqimpl->_rcattrs)
   , _do_matching(false)
   , _pool((sat::Pool::instance()))
   {
-    _rdit = &_pqimpl->_rdit;
-    base_reference() = _rdit;
-    _sid = 0; /*rdit > ID_EMPTY ? rdit->solvid : 0;*/
-
     if (_attrs.size() > 1)
       _do_matching = true;
   }

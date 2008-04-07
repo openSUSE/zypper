@@ -19,7 +19,7 @@
 
 extern "C"
 {
-#include "satsolver/repo.h"
+struct _Dataiterator;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -41,13 +41,10 @@ namespace zypp
     typedef unsigned int size_type;
 
     class Impl;
-    typedef Impl * ImplPtr;
-
-    typedef ::_Dataiterator RepoDataIterator;
 
     class ResultIterator : public boost::iterator_adaptor<
       ResultIterator                     // Derived
-      , RepoDataIterator *               // Base
+      , ::_Dataiterator *                // Base
       , sat::Solvable                    // Value
       , boost::forward_traversal_tag     // CategoryOrTraversal
       , sat::Solvable                    // Reference
@@ -63,7 +60,7 @@ namespace zypp
       friend class boost::iterator_core_access;
       friend class PoolQuery;
 
-      ResultIterator(ImplPtr pqimpl);
+      ResultIterator(Impl * pqimpl);
 
       sat::Solvable dereference() const
       {
@@ -81,14 +78,14 @@ namespace zypp
           return true;
         if (!rhs.base() || !base())
           return false;
-        if (rhs.base()->solvid == base()->solvid)
-          return true;
-        return false;
+        /*if (rhs.base()->solvid == base()->solvid)
+          return true;*/
+        return true;
       }
 
     private:
-      RepoDataIterator * _rdit;
-      ImplPtr _pqimpl;
+      ::_Dataiterator * _rdit;
+      Impl * _pqimpl;
       /*SolvableId*/ int _sid;
       bool _has_next;
       const CompiledAttrMap & _attrs;
@@ -285,7 +282,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    ImplPtr _pimpl;
+    RW_pointer<Impl> _pimpl;
   };
 
 
