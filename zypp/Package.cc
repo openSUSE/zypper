@@ -66,9 +66,8 @@ namespace zypp
   std::string Package::group() const
   { return lookupStrAttribute( sat::SolvAttr::group ); }
 
-#warning DUMMY keywords
   Package::Keywords Package::keywords() const
-  { return Keywords(); }
+  { return Keywords( sat::SolvAttr::keywords, satSolvable() ); }
 
   /** Don't ship it as class Url, because it might be
    * in fact anything but a legal Url. */

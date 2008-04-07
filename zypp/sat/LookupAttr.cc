@@ -11,11 +11,15 @@
 */
 #include <cstring>
 #include <iostream>
+#include <sstream>
+
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
 
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/CheckSum.h"
 
 using std::endl;
 
@@ -56,6 +60,9 @@ namespace zypp
       return iterator();
     }
 
+    bool LookupAttr::empty() const
+    { return begin() == end(); }
+
     std::ostream & operator<<( std::ostream & str, const LookupAttr & obj )
     {
       if ( obj.attr() == SolvAttr::noAttr )
@@ -89,6 +96,10 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    // position and moving
+    ///////////////////////////////////////////////////////////////////
+
     Repository LookupAttr::iterator::inRepo() const
     { return Repository( _dip->repo ); }
 
@@ -97,9 +108,6 @@ namespace zypp
 
     SolvAttr LookupAttr::iterator::inSolvAttr() const
     { return SolvAttr( _dip->key->name ); }
-
-    detail::IdType LookupAttr::iterator::solvAttrType() const
-    { return _dip->key->type; }
 
     void LookupAttr::iterator::nextSkipSolvAttr()
     { ::dataiterator_skip_attribute( _dip.get() ); }
@@ -111,7 +119,214 @@ namespace zypp
     { ::dataiterator_skip_repo( _dip.get() ); }
 
     ///////////////////////////////////////////////////////////////////
+    // attr value type test
+    ///////////////////////////////////////////////////////////////////
+
+    detail::IdType LookupAttr::iterator::solvAttrType() const
+    { return _dip->key->type; }
+
+    bool LookupAttr::iterator::solvAttrNumeric() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_U32:
+        case REPOKEY_TYPE_NUM:
+        case REPOKEY_TYPE_CONSTANT:
+          return true;
+          break;
+      }
+      return false;
+    }
+
+    bool LookupAttr::iterator::solvAttrString() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_ID:
+        case REPOKEY_TYPE_IDARRAY:
+        case REPOKEY_TYPE_CONSTANTID:
+        case REPOKEY_TYPE_STR:
+        case REPOKEY_TYPE_DIRSTRARRAY:
+          return true;
+          break;
+      }
+      return false;
+    }
+
+    bool LookupAttr::iterator::solvAttrIdString() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_ID:
+        case REPOKEY_TYPE_IDARRAY:
+        case REPOKEY_TYPE_CONSTANTID:
+          return true;
+          break;
+      }
+      return false;
+    }
+
+    bool LookupAttr::iterator::solvAttrCheckSum() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_MD5:
+        case REPOKEY_TYPE_SHA1:
+        case REPOKEY_TYPE_SHA256:
+          return true;
+          break;
+      }
+      return false;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    // attr value type test
+    ///////////////////////////////////////////////////////////////////
+
+    int LookupAttr::iterator::asInt() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_U32:
+        case REPOKEY_TYPE_NUM:
+        case REPOKEY_TYPE_CONSTANT:
+          return _dip->kv.num;
+          break;
+      }
+      return 0;
+    }
+
+    unsigned LookupAttr::iterator::asUnsigned() const
+    { return asInt(); }
+
+    bool LookupAttr::iterator::asBool() const
+    { return asInt(); }
+
+
+    const char * LookupAttr::iterator::c_str() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_ID:
+        case REPOKEY_TYPE_IDARRAY:
+        case REPOKEY_TYPE_CONSTANTID:
+          if ( _dip->data && _dip->data->localpool )
+            return ::stringpool_id2str( &_dip->data->spool, _dip->kv.id ); // in local pool
+          else
+            return IdString( _dip->kv.id ).c_str(); // in global pool
+          break;
+
+        case REPOKEY_TYPE_STR:
+          return _dip->kv.str;
+          break;
+
+        case REPOKEY_TYPE_DIRSTRARRAY:
+          return ::repodata_dir2str( _dip->data, _dip->kv.id, _dip->kv.str );
+          break;
+      }
+      return 0;
+    }
+
+    std::string LookupAttr::iterator::asString() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_ID:
+        case REPOKEY_TYPE_IDARRAY:
+        case REPOKEY_TYPE_CONSTANTID:
+        case REPOKEY_TYPE_STR:
+        case REPOKEY_TYPE_DIRSTRARRAY:
+          {
+            const char * ret( c_str() );
+            return ret ? ret : "";
+          }
+          break;
+
+        case REPOKEY_TYPE_U32:
+        case REPOKEY_TYPE_NUM:
+        case REPOKEY_TYPE_CONSTANT:
+          return str::numstring( asInt() );
+          break;
+
+        case REPOKEY_TYPE_MD5:
+        case REPOKEY_TYPE_SHA1:
+        case REPOKEY_TYPE_SHA256:
+          {
+            std::ostringstream str;
+            str << asCheckSum();
+            return str.str();
+          }
+          break;
+      }
+     return std::string();
+    }
+
+    IdString LookupAttr::iterator::idStr() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_ID:
+        case REPOKEY_TYPE_IDARRAY:
+        case REPOKEY_TYPE_CONSTANTID:
+          return IdString( ::repodata_globalize_id( _dip->data, _dip->kv.id ) );
+          break;
+      }
+      return IdString();
+    }
+
+    CheckSum LookupAttr::iterator::asCheckSum() const
+    {
+      switch ( solvAttrType() )
+      {
+        case REPOKEY_TYPE_MD5:
+          return CheckSum::md5( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+          break;
+
+        case REPOKEY_TYPE_SHA1:
+          return CheckSum::sha1( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+          break;
+
+        case REPOKEY_TYPE_SHA256:
+          return CheckSum::sha256( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+          break;
+      }
+      return CheckSum();
+    }
+
+    ///////////////////////////////////////////////////////////////////
     // internal stuff below
+    ///////////////////////////////////////////////////////////////////
+
+    LookupAttr::iterator::~iterator()
+    {}
+
+    LookupAttr::iterator::iterator()
+    : iterator_adaptor_( 0 )
+    {}
+
+    LookupAttr::iterator::iterator( const iterator & rhs )
+    : iterator_adaptor_( cloneFrom( rhs.base() ) )
+    , _dip( base() )
+    {}
+
+    LookupAttr::iterator & LookupAttr::iterator::operator=( const iterator & rhs )
+    {
+      if ( &rhs != this )
+      {
+        _dip.reset( cloneFrom( rhs.base() ) );
+        base_reference() = _dip.get();
+      }
+      return *this;
+    }
+
+    LookupAttr::iterator::iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r )
+    : iterator_adaptor_( dip_r.get() )
+    , _chainRepos( chain_r )
+    {
+      _dip.swap( dip_r ); // take ownership!
+      increment();
+    }
+
     ///////////////////////////////////////////////////////////////////
 
     ::_Dataiterator * LookupAttr::iterator::cloneFrom( const ::_Dataiterator * rhs )
@@ -163,10 +378,13 @@ namespace zypp
       if ( ! dip )
         return str << "EndOfQuery" << endl;
 
-      str << obj.inSolvable()
-          << '<' << obj.inSolvAttr()
-          << "> = " << obj.solvAttrType()
-          << "(" <<  dip->kv.id << ")" << (dip->data && dip->data->localpool ? "*" : "" );
+      if ( obj.inSolvable() )
+        str << obj.inSolvable();
+      else if ( obj.inRepo() )
+        str << obj.inRepo();
+
+      str << '<' << obj.inSolvAttr()
+          << ">(" <<  obj.solvAttrType() << ") = " << obj.asString();
       return str;
     }
 

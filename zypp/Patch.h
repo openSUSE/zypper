@@ -50,10 +50,12 @@ namespace zypp
     bool reboot_needed() const;
     /** Does the patch affect the package manager itself? */
     bool affects_pkg_manager() const;
-    /** The list of all atoms building the patch */
-    AtomList atoms() const;
     /** Is the patch installation interactive? (does it need user input?) */
     bool interactive() const;
+
+    /** The list of all atoms building the patch */
+    ZYPP_DEPRECATED AtomList atoms() const
+    { return AtomList(); }
 
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );

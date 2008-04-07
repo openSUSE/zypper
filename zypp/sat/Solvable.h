@@ -86,6 +86,11 @@ namespace zypp
 
       public:
 
+        /** \name Attribute lookup.
+         * \see \ref LookupAttr and  \ref ArrayAttr providing a general, more
+         * query like interface for attribute retrieval.
+        */
+        //@{
         /**
          * returns the string attribute value for \ref attr
          * or an empty string if it does not exists.
@@ -121,8 +126,6 @@ namespace zypp
          */
         detail::IdType lookupIdAttribute( const SolvAttr & attr ) const;
 
-
-
        /**
          * returns the CheckSum attribute value for \ref attr
          * or an empty CheckSum if ir does not exist.
@@ -135,6 +138,7 @@ namespace zypp
          */
         OnMediaLocation lookupLocation() const;
 
+        //@}
       public:
         /** The identifier.
          * This is the solvables \ref name, \b except for packages and
@@ -177,7 +181,7 @@ namespace zypp
         /** Returns true if the solvable is satisfied */
         bool isSatisfied() const;
         /** Returns true if the solvable is satisfied */
-        bool isBroken() const { return !isSatisfied(); }	
+        bool isBroken() const { return !isSatisfied(); }
 
       public:
         /** \name Locale support. */

@@ -23,6 +23,8 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/Repository.h"
 
+#include "zypp/sat/LookupAttr.h"
+
 #include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////

@@ -55,10 +55,10 @@ namespace zypp
   bool Patch::affects_pkg_manager() const
   { return false; }
 
-  Patch::AtomList Patch::atoms() const
-  {
 #warning Implement PATCH::ATOMS
 #if 0
+  Patch::AtomList Patch::atoms() const
+  {
       if ( ! _atomlist )
       {
         if ( ! hasBackRef() )
@@ -96,9 +96,9 @@ namespace zypp
         }
       }
       return *_atomlist;
-#endif
     return AtomList();
   }
+#endif
 
   bool Patch::interactive() const
   {

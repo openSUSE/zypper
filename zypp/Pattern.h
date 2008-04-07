@@ -36,6 +36,9 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+   typedef sat::ArrayAttr<IdString,IdString> NameList;
+
+  public:
     /** */
     bool isDefault() const;
     /** */

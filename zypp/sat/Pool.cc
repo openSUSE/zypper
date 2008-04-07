@@ -26,6 +26,7 @@ extern "C"
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/LookupAttr.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

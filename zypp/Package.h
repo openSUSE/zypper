@@ -37,7 +37,7 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    typedef std::set<PackageKeyword> Keywords;
+    typedef sat::ArrayAttr<PackageKeyword,IdString> Keywords;
 
   public:
 
