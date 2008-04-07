@@ -19,6 +19,7 @@
 
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/Pool.h"
 #include "zypp/Repository.h"
 #include "zypp/OnMediaLocation.h"
 
@@ -336,6 +337,17 @@ namespace zypp
        ::Offset offs = _solvable->requires;
        return offs ? Capabilities( _solvable->repo->idarraydata + offs, detail::solvablePrereqMarker )
                    : Capabilities();
+    }
+
+    ///////////////////////////////////////////////////////////////////
+
+    bool Solvable::isSatisfied() const
+    {
+	NO_SOLVABLE_RETURN( false );	
+	if (solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get()) == 1)
+	    return true;
+	else
+	    return false;
     }
 
     ///////////////////////////////////////////////////////////////////

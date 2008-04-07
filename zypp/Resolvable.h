@@ -82,6 +82,12 @@ namespace zypp
     //@}
 
   public:
+    /** Returns true if the solvable is satisfied */
+    using sat::Solvable::isSatisfied;
+    /** Returns true if the solvable is satisfied */
+    using sat::Solvable::isBroken;      
+
+  public:
     const sat::Solvable & satSolvable() const { return *this; }
 
   protected:

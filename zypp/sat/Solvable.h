@@ -174,6 +174,12 @@ namespace zypp
         //@}
 
       public:
+        /** Returns true if the solvable is satisfied */
+        bool isSatisfied() const;
+        /** Returns true if the solvable is satisfied */
+        bool isBroken() const { return !isSatisfied(); }	
+
+      public:
         /** \name Locale support. */
         //@{
         /** Whether this \c Solvable claims to support locales. */

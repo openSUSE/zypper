@@ -56,8 +56,7 @@ namespace zypp
 
       bool isSatisfied() const
       {
-#warning TBD determine isSatisfied
-        return true;
+        return _resolvable->isSatisfied();
       }
 
     private:
