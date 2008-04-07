@@ -3,6 +3,7 @@
 #define ZYPP_BASE_INTER_PROCESS_MUTEX_H
 
 #include <string>
+#include "zypp/base/Fd.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
@@ -81,7 +82,7 @@ private:
     bool isProcessRunning(pid_t pid_r);
     Pathname lockFilePath() const;
 private:
-    int _fd;
+    shared_ptr<Fd> _fd;
     std::string _name;
     int _timeout;
     ConsumerType _type;

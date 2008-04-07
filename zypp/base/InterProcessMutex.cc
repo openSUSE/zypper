@@ -40,8 +40,7 @@ ZYppLockedException::~ZYppLockedException() throw()
 InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                                       const std::string &name,
                                       int timeout )
-  : _fd(0)
-  , _name(name)
+  : _name(name)
   , _timeout(timeout)
   , _type(ctype)
 {
@@ -58,12 +57,14 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
         
         // try to create the lock file atomically, this will fail if
         // the lock exists
-        if ( ( _fd = open(lock_file.c_str(), O_RDWR | O_CREAT | O_EXCL) ) == -1 )
+        _fd.reset( new Fd( lock_file, O_RDWR | O_CREAT | O_EXCL) );
+        if ( !_fd->isOpen() )
         {
             struct flock lock;
             
             // the file exists, lets see if someone has it locked exclusively
-            if ( (_fd = open(lock_file.c_str(), O_RDWR)) == -1 )
+            _fd.reset( new Fd( lock_file, O_RDWR ) );
+            if ( !_fd->isOpen() )
             {
                 ZYPP_THROW(Exception(str::form(_("It %d, Can't open lock file: %s"), k, strerror(errno))));
             }
@@ -78,9 +79,8 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             
 
             // get lock information
-            if (fcntl(_fd, F_GETLK, &lock) < 0)
+            if (fcntl(_fd->fd(), F_GETLK, &lock) < 0)
             {
-                close(_fd);
                 ZYPP_THROW(Exception(string("Error getting lock info: ") +  strerror(errno)));
             }
 
@@ -125,7 +125,6 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                 // timeout and therefore we never abort.
                 if ( (totalslept >= _timeout) && (_timeout >= 0 ) )
                 {
-                    close(_fd);
                     ZYPP_THROW(ZYppLockedException(                                       
                                    _("This action is being run by another program already."),
                                    _name, lock.l_pid));
@@ -133,7 +132,6 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                         
                 // if not, let sleep one second and count it
                 LMIL << "waiting 1 second..." << endl;
-                close(_fd);
                 sleep(1);
                 ++totalslept;
                 continue;
@@ -146,9 +144,8 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                 // try to get more lock info
                 lock.l_type = F_WRLCK;
  
-                if (fcntl(_fd, F_GETLK, &lock) < 0)
+                if (fcntl(_fd->fd(), F_GETLK, &lock) < 0)
                 {
-                    close(_fd);
                     ZYPP_THROW(Exception(string("Error getting lock info: ") +  strerror(errno)));
                 }
                 
@@ -167,13 +164,11 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                     lock.l_whence = SEEK_SET;
                     lock.l_pid = getpid();
 
-                    if (fcntl(_fd, F_SETLK, &lock) < 0)
+                    if (fcntl(_fd->fd(), F_SETLK, &lock) < 0)
                     {
-                        close(_fd);
                         ZYPP_THROW (Exception( "Can't lock file to unlink it."));
                     }
                     filesystem::unlink(lock_file.c_str());
-                    close(_fd);
                     continue;
                 }
                 else if ( lock.l_type == F_RDLCK )
@@ -185,9 +180,8 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                     lock.l_whence = SEEK_SET;
                     lock.l_pid = getpid();
 
-                    if (fcntl(_fd, F_SETLK, &lock) < 0)
+                    if (fcntl(_fd->fd(), F_SETLK, &lock) < 0)
                     {
-                        close(_fd);
                         ZYPP_THROW (Exception( "Can't lock file for reader"));
                     }
                     // and keep the lock open.
@@ -216,13 +210,11 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
                 lock.l_whence = SEEK_SET;
                 lock.l_pid = getpid();
 
-                if (fcntl(_fd, F_SETLK, &lock) < 0)
+                if (fcntl(_fd->fd(), F_SETLK, &lock) < 0)
                 {
-                    close(_fd);
                     ZYPP_THROW (Exception( "Can't lock file to unlink it."));
                 }
                 filesystem::unlink(lock_file.c_str());
-                close(_fd);
                 continue;
             } 
             else 
@@ -249,15 +241,12 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             lock.l_type = F_WRLCK;
             lock.l_pid = getpid();
 
-            if (fcntl(_fd, F_SETLK, &lock) < 0)
-            {
-                close(_fd);
+            if (fcntl(_fd->fd(), F_SETLK, &lock) < 0)
                 ZYPP_THROW (Exception( "Can't lock file to write pid."));
-            }
             
             char buffer[100];
             sprintf( buffer, "%d\n", curr_pid);
-            write( _fd, buffer, strlen(buffer));
+            write( _fd->fd(), buffer, strlen(buffer));
             
             // by now the pid is written and the file locked.
             // If we are a reader, just downgrade the lock to
@@ -266,11 +255,8 @@ InterProcessMutex::InterProcessMutex( ConsumerType ctype,
             {
                 lock.l_type = F_RDLCK;
                
-                if (fcntl(_fd, F_SETLK, &lock) < 0)
-                {
-                    close(_fd);
+                if (fcntl(_fd->fd(), F_SETLK, &lock) < 0)
                     ZYPP_THROW (Exception( "Can't set lock file to shared"));
-                }
             }
             
             break;
@@ -303,7 +289,7 @@ InterProcessMutex::~InterProcessMutex()
                 
         }
         // and finally close the file and release the lock
-        close(_fd);
+        // (happens automatically)
     }
     catch(...) {} // let no exception escape.
 }
