@@ -40,20 +40,27 @@ namespace zypp
 
     public:
 
-      typedef SelectableTraits::AvialableItemSet             AvialableItemSet;
-      typedef SelectableTraits::availableItem_iterator       availableItem_iterator;
-      typedef SelectableTraits::availableItem_const_iterator availableItem_const_iterator;
-      typedef SelectableTraits::availableItem_size_type      availableItem_size_type;
+      typedef SelectableTraits::AvailableItemSet         AvailableItemSet;
+      typedef SelectableTraits::available_iterator       available_iterator;
+      typedef SelectableTraits::available_const_iterator available_const_iterator;
+      typedef SelectableTraits::available_size_type      available_size_type;
+
+      typedef SelectableTraits::InstalledItemSet         InstalledItemSet;
+      typedef SelectableTraits::installed_iterator       installed_iterator;
+      typedef SelectableTraits::installed_const_iterator installed_const_iterator;
+      typedef SelectableTraits::installed_size_type      installed_size_type;
+
 
     public:
       Impl( const ResObject::Kind & kind_r,
             const std::string & name_r,
-            const PoolItem & installedItem_r,
-            availableItem_const_iterator availableBegin_r,
-            availableItem_const_iterator availableEnd_r )
+            installed_const_iterator installedBegin_r,
+            installed_const_iterator installedEnd_r ,
+            available_const_iterator availableBegin_r,
+            available_const_iterator availableEnd_r )
       : _kind( kind_r )
       , _name( name_r )
-      , _installedItem( installedItem_r )
+      , _installedItems( installedBegin_r, installedEnd_r )
       , _availableItems( availableBegin_r, availableEnd_r )
       {
         setCandidate( NULL );
@@ -72,11 +79,15 @@ namespace zypp
       Status status() const;
 
       /**  */
-      bool set_status( const Status state_r );
+      bool setStatus( const Status state_r );
 
       /** Installed object. */
       PoolItem installedObj() const
-      { return _installedItem; }
+      {
+          if (!installedEmpty())
+              return *_installedItems.begin();
+          return PoolItem();
+      }
 
       /** Best among available objects.
        * The transacting candidate or the one scheduled to receive
@@ -103,20 +114,48 @@ namespace zypp
       PoolItem theObj() const
       {
         PoolItem ret( candidateObj() );
-        return( ret ? ret : _installedItem );
+        if (ret)
+            return ret;
+
+        if ( ! _installedItems.empty() )
+            return  (*_installedItems.begin());
+
+        return PoolItem();
       }
 
-      /**  */
-      availableItem_size_type availableObjs() const
+      ////////////////////////////////////////////////////////////////////////
+
+      bool availableEmpty() const
+      { return _availableItems.empty(); }
+
+      available_size_type availableSize() const
       { return _availableItems.size(); }
 
-      /**  */
-      availableItem_const_iterator availableBegin() const
+      available_const_iterator availableBegin() const
       { return _availableItems.begin(); }
 
-      /**  */
-      availableItem_const_iterator availableEnd() const
+
+      available_const_iterator availableEnd() const
       { return _availableItems.end(); }
+
+      ////////////////////////////////////////////////////////////////////////
+
+      bool installedEmpty() const
+      { return _installedItems.empty(); }
+
+      installed_size_type installedSize() const
+      { return _installedItems.size(); }
+
+      installed_iterator installedBegin() const
+      { return _installedItems.begin(); }
+
+      installed_iterator installedEnd() const
+      { return _installedItems.end(); }
+
+      ////////////////////////////////////////////////////////////////////////
+
+      bool isUnmaintained() const
+      { return availableEmpty(); }
 
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;
@@ -132,7 +171,7 @@ namespace zypp
     private:
       PoolItem transactingCandidate() const
       {
-        for ( availableItem_const_iterator it = availableBegin();
+        for ( available_const_iterator it = availableBegin();
               it != availableEnd(); ++it )
           {
             if ( (*it).status().transacts() )
@@ -143,28 +182,31 @@ namespace zypp
 
       PoolItem defaultCandidate() const
       {
-        if ( installedObj() )
+        if ( !installedEmpty() )
           {
             // prefer the installed objects arch.
-            for ( availableItem_const_iterator it = availableBegin();
-                  it != availableEnd(); ++it )
-              {
-                if ( installedObj()->arch() == (*it)->arch() )
-                  {
-                    return (*it);
-                  }
-              }
+            for ( installed_const_iterator iit = installedBegin();
+                  iit != installedEnd(); ++iit )
+            {
+                for ( available_const_iterator it = availableBegin();
+                      it != availableEnd(); ++it )
+                {
+                    if ( (*iit)->arch() == (*it)->arch() )
+                    {
+                        return (*it);
+                    }
+                }
+            }
           }
         if ( _availableItems.empty() )
-          {
             return PoolItem();
-          }
+
         return *_availableItems.begin();
       }
 
       bool allCandidatesLocked() const
       {
-        for ( availableItem_const_iterator it = availableBegin();
+        for ( available_const_iterator it = availableBegin();
               it != availableEnd(); ++it )
           {
             if ( ! (*it).status().isLocked() )
@@ -176,8 +218,8 @@ namespace zypp
     private:
       ResObject::Kind  _kind;
       std::string      _name;
-      PoolItem         _installedItem;
-      AvialableItemSet _availableItems;
+      InstalledItemSet _installedItems;
+      AvailableItemSet _availableItems;
       PoolItem         _candidate;
     };
     ///////////////////////////////////////////////////////////////////
@@ -186,7 +228,7 @@ namespace zypp
     inline std::ostream & operator<<( std::ostream & str, const Selectable::Impl & obj )
     {
       return str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status()
-                 << " (I " << obj._installedItem << ")"
+                 << " (I " << obj._installedItems.size() << ")"
                  << " (A " << obj._availableItems.size() << ")"
                  << obj.candidateObj();
     }

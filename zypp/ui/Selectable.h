@@ -53,8 +53,10 @@ namespace zypp
 
       /** Iterates over ResObject::constPtr */
       typedef SelectableTraits::available_iterator      available_iterator;
-      typedef SelectableTraits::availableItem_iterator  availablePoolItem_iterator;
-      typedef SelectableTraits::availableItem_size_type size_type;
+      typedef SelectableTraits::available_size_type     available_size_type;
+
+      typedef SelectableTraits::installed_iterator      installed_iterator;
+      typedef SelectableTraits::installed_size_type     installed_size_type;
 
     public:
       /** The ResObjects kind. */
@@ -63,32 +65,56 @@ namespace zypp
       /** The ResObjects name.  */
       const std::string & name() const;
 
-      /** Installed object. */
-      ResObject::constPtr installedObj() const;
+      /**
+       * return the first Installed object
+       * of available
+       */
+      PoolItem installedObj() const;
 
-      /** PoolItem corresponding to the installed object. */
-      PoolItem installedPoolItem() const;
+      /**
+       * \deprecated use installedObj
+       * PoolItem corresponding to the installed object.
+       */
+      ZYPP_DEPRECATED PoolItem installedPoolItem() const
+      { return installedObj(); }
 
       /** Best among available objects.
        + The user selected candiate, or a default.
       */
-      ResObject::constPtr candidateObj() const;
+      PoolItem candidateObj() const;
 
       /** PoolItem corresponding to the candidate object. */
-      PoolItem candidatePoolItem() const;
+      ZYPP_DEPRECATED PoolItem candidatePoolItem() const
+      { return candidateObj(); }
 
       /** Set a candidate (out of available objects).
        * \return The new candidate, or NULL if choice was invalid
        * (NULL or not among availableObjs). An invalid choice
        * selects the default candidate.
        */
-      ResObject::constPtr setCandidate( ResObject::constPtr byUser_r );
+      PoolItem setCandidate( ResObject::constPtr byUser_r );
 
       /** Best among all objects. */
-      ResObject::constPtr theObj() const;
+      PoolItem theObj() const;
 
-      /** Number of available objects. */
-      size_type availableObjs() const;
+      ////////////////////////////////////////////////////////////////////////
+
+      /**
+       * Are there available objects?
+       */
+      bool availableEmpty() const;
+
+      /**
+       * Number of available objects.
+       */
+      available_size_type availableSize() const;
+
+      /** 
+       * Number of available objects. 
+       * \deprecated Use availableSize
+       */
+      ZYPP_DEPRECATED available_size_type availableObjs() const
+      { return availableSize(); }
 
       /** */
       available_iterator availableBegin() const;
@@ -96,11 +122,29 @@ namespace zypp
       /** */
       available_iterator availableEnd() const;
 
-      /** */
-      availablePoolItem_iterator availablePoolItemBegin() const;
+      ////////////////////////////////////////////////////////////////////////
+
+      /**
+       * Installed object iterators
+       */
+
+      /**
+       * Are there installed objects?
+       */
+      bool installedEmpty() const;
+
+      /**
+       * Number of available objects.
+       */
+      installed_size_type installedSize() const;
 
       /** */
-      availablePoolItem_iterator availablePoolItemEnd() const;
+      installed_iterator installedBegin() const;
+
+      /** */
+      installed_iterator installedEnd() const;
+
+      ////////////////////////////////////////////////////////////////////////
 
     public:
       /** \name Query for objects within this Selectable.
@@ -108,11 +152,14 @@ namespace zypp
       //@{
       /** True if either installed or candidate object is present */
       bool hasObject() const
-      { return installedObj() || candidateObj(); }
+      { return (! installedEmpty()) || candidateObj(); }
 
-      /** True if installed object is present. */
-      bool hasInstalledObj() const
-      { return installedObj(); }
+      /** 
+       * True if installed object is present. 
+       * \deprecated Use ! installedEmpty()
+       */
+      ZYPP_DEPRECATED bool hasInstalledObj() const
+      { return ! installedEmpty(); }
 
       /** True if candidate object is present. */
       bool hasCandidateObj() const
@@ -120,16 +167,22 @@ namespace zypp
 
       /** True if installed and candidate object is present */
       bool hasBothObjects() const
-      { return installedObj() && candidateObj(); }
+      { return (! installedEmpty()) && candidateObj(); }
 
       /** True if installed object is present but no candidate. */
       bool hasInstalledObjOnly() const
-      { return installedObj() && ! candidateObj(); }
+      { return (! installedEmpty()) && ! candidateObj(); }
 
       /** True if candidate object is present but no installed. */
       bool hasCandidateObjOnly() const
-      { return ! installedObj() && candidateObj(); }
+      { return ( installedEmpty() ) && candidateObj(); }
       //@}
+
+      /**
+       * True if this package has no replacement from
+       * the available repositories
+       */
+      bool isUnmaintained() const;
 
      public:
       /** \name Query objects fate in case of commit.
@@ -161,7 +214,8 @@ namespace zypp
       //@}
 
     public:
-      /** \name Special inteface for Y2UI.
+      /** 
+       * \name Special inteface for Y2UI.
        * \note This interface acts on \ref ResStatus::USER level.
        * The \ref Status enum, and allowed state transitions are
        * tightly related to the Y2UI. It might be not verry usefull
@@ -170,10 +224,18 @@ namespace zypp
       //@{
       /** Return the current Status */
       Status status() const;
+
+      /** 
+       * Try to set a new Status.
+       * Returns \c false if the transitions is not allowed.
+       */
+      bool setStatus( const Status state_r );
+
       /** Try to set a new Status.
        * Returns \c false if the transitions is not allowed.
       */
-      bool set_status( const Status state_r );
+      ZYPP_DEPRECATED bool set_status( const Status state_r )
+      { return setStatus( state_r ); }
 
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;

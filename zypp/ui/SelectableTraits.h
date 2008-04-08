@@ -32,7 +32,7 @@ namespace zypp
     /** */
     struct SelectableTraits
     {
-      /** Oder on AvialableItemSet.
+      /** Oder on AvalableItemSet.
        * \li best Arch
        * \li best Edition
        * \li ResObject::constPtr as fallback.
@@ -60,20 +60,15 @@ namespace zypp
         }
       };
 
-      typedef std::set<PoolItem,AVOrder>       AvialableItemSet;
-      typedef AvialableItemSet::iterator       availableItem_iterator;
-      typedef AvialableItemSet::const_iterator availableItem_const_iterator;
-      typedef AvialableItemSet::size_type      availableItem_size_type;
+      typedef std::set<PoolItem,AVOrder>       AvailableItemSet;
+      typedef AvailableItemSet::iterator       available_iterator;
+      typedef AvailableItemSet::const_iterator available_const_iterator;
+      typedef AvailableItemSet::size_type      available_size_type;
 
-      /** Transform PoolItem to ResObject::constPtr. */
-      struct TransformToResObjectPtr : public std::unary_function<PoolItem,ResObject::constPtr>
-      {
-        ResObject::constPtr operator()( const PoolItem & obj ) const
-        { return obj; }
-      };
-
-      typedef transform_iterator<TransformToResObjectPtr, availableItem_const_iterator>
-              available_iterator;
+      typedef std::set<PoolItem,AVOrder>       InstalledItemSet;
+      typedef AvailableItemSet::iterator       installed_iterator;
+      typedef AvailableItemSet::const_iterator installed_const_iterator;
+      typedef AvailableItemSet::size_type      installed_size_type;
 
   };
     ///////////////////////////////////////////////////////////////////

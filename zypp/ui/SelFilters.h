@@ -61,7 +61,7 @@ namespace zypp
       struct ByHasInstalledObj : public SelectableFilterFunctor
       {
         bool operator()( const ui::Selectable::constPtr & obj ) const
-        { return obj && obj->hasInstalledObj(); }
+        { return obj && !obj->installedEmpty(); }
       };
 
       /** */

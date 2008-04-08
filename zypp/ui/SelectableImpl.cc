@@ -37,8 +37,6 @@ namespace zypp
       , cand( impl.candidateObj() )
       {}
 
-      typedef Selectable::Impl::availableItem_const_iterator availableItem_const_iterator;
-
       //
       // Queries
       //
@@ -62,7 +60,7 @@ namespace zypp
       //
       void resetTransactingCandidates() const
       {
-        for ( availableItem_const_iterator it = _impl.availableBegin();
+          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -70,7 +68,7 @@ namespace zypp
       }
       void unlockCandidates() const
       {
-        for ( availableItem_const_iterator it = _impl.availableBegin();
+          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -79,7 +77,7 @@ namespace zypp
       }
       void lockCandidates() const
       {
-        for ( availableItem_const_iterator it = _impl.availableBegin();
+          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -188,7 +186,7 @@ namespace zypp
       return( installedObj() ? S_KeepInstalled : S_NoInst );
     }
 
-    bool Selectable::Impl::set_status( const Status state_r )
+    bool Selectable::Impl::setStatus( const Status state_r )
     {
       StatusHelper self( *this );
 
@@ -235,7 +233,7 @@ namespace zypp
 
       if ( byUser_r ) // must be in available list
         {
-          for ( availableItem_const_iterator it = availableBegin();
+          for ( available_const_iterator it = availableBegin();
                 it != availableEnd(); ++it )
             {
               if ( it->resolvable() == byUser_r )

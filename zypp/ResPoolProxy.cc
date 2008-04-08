@@ -96,12 +96,13 @@ namespace zypp
 
     ui::Selectable::Ptr buildSelectable( const ResObject::Kind & kind_r,
                                          const std::string & name_r,
-                                         const PoolItem & installedItem_r,
+                                         const ItemC & installed,
                                          const ItemC & available )
     {
       return ui::Selectable::Ptr( new ui::Selectable(
              ui::Selectable::Impl_Ptr( new ui::Selectable::Impl( kind_r, name_r,
-                                                                 installedItem_r,
+                                                                 installed.begin(),
+                                                                 installed.end(),
                                                                  available.begin(),
                                                                  available.end() ) )
                                                       ) );
@@ -122,20 +123,10 @@ namespace zypp
               const ItemC & installed( nameIt->second.installed );
               const ItemC & available( nameIt->second.available );
 
-              if ( installed.empty() )
-                {
-                  if ( available.empty() )
+              if ( installed.empty() && available.empty() )
                     continue;
-                  _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, PoolItem(), available ) );
-                }
               else
-                {
-                  // ui want's one Selectable per installed item
-                  for ( ItemC::const_iterator instIt = installed.begin(); instIt != installed.end(); ++instIt )
-                    {
-                      _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, *instIt, available ) );
-                    }
-                }
+                    _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, installed, available ) );
             }
         }
     }

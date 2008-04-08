@@ -122,7 +122,7 @@ namespace zypp
 		// for that pkg set or if the patterns is required by another
 		// pkg set of the same class
 
-		typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*it)->theObj() );
+          typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*it)->theObj() ? (*it)->theObj().resolvable() : 0L );
 
 		if ( pkgSet && (*it)->toModify() )
 		{
@@ -190,7 +190,7 @@ namespace zypp
                   patch_it != patchesEnd();
                   ++patch_it )
             {
-		Patch::constPtr patch = dynamic_pointer_cast<const Patch>( (*patch_it)->theObj() );
+                Patch::constPtr patch = dynamic_pointer_cast<const Patch>( (*patch_it)->theObj() ? (*patch_it)->theObj().resolvable() : 0 );
 
                 if ( patch && (*patch_it)->toModify() )
 		{

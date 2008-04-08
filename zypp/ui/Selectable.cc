@@ -55,43 +55,56 @@ namespace zypp
     Status Selectable::status() const
     { return _pimpl->status(); }
 
-    bool Selectable::set_status( const Status state_r )
-    { return _pimpl->set_status( state_r ); }
+    bool Selectable::setStatus( const Status state_r )
+    { return _pimpl->setStatus( state_r ); }
 
-    ResObject::constPtr Selectable::installedObj() const
+    PoolItem Selectable::installedObj() const
     { return _pimpl->installedObj(); }
 
-    PoolItem Selectable::installedPoolItem() const
-    { return _pimpl->installedObj(); }
-
-    ResObject::constPtr Selectable::candidateObj() const
+    PoolItem Selectable::candidateObj() const
     { return _pimpl->candidateObj(); }
 
-    PoolItem Selectable::candidatePoolItem() const
-    { return _pimpl->candidateObj(); }
-
-    ResObject::constPtr Selectable::setCandidate( ResObject::constPtr byUser_r )
+    PoolItem Selectable::setCandidate( ResObject::constPtr byUser_r )
     { return _pimpl->setCandidate( byUser_r ); }
 
-    ResObject::constPtr Selectable::theObj() const
+    PoolItem Selectable::theObj() const
     { return _pimpl->theObj(); }
 
-    Selectable::size_type Selectable::availableObjs() const
-    { return _pimpl->availableObjs(); }
+    ////////////////////////////////////////////////////////////////////////
+
+    bool Selectable::availableEmpty() const
+    { return _pimpl->availableEmpty(); }
+
+    Selectable::available_size_type Selectable::availableSize() const
+    { return _pimpl->availableSize(); }
 
     Selectable::available_iterator Selectable::availableBegin() const
-    { return make_transform_iterator( _pimpl->availableBegin(),
-                                      SelectableTraits::TransformToResObjectPtr() ); }
-
-    Selectable::available_iterator Selectable::availableEnd() const
-    { return make_transform_iterator( _pimpl->availableEnd(),
-                                      SelectableTraits::TransformToResObjectPtr() ); }
-
-    Selectable::availablePoolItem_iterator Selectable::availablePoolItemBegin() const
     { return _pimpl->availableBegin(); }
-
-    Selectable::availablePoolItem_iterator Selectable::availablePoolItemEnd() const
+    
+    Selectable::available_iterator Selectable::availableEnd() const
     { return _pimpl->availableEnd(); }
+
+    ////////////////////////////////////////////////////////////////////////
+   
+    bool Selectable::installedEmpty() const
+    { return _pimpl->installedEmpty(); }
+
+    Selectable::installed_size_type Selectable::installedSize() const
+    { return _pimpl->installedSize(); }
+
+    Selectable::installed_iterator Selectable::installedBegin() const
+    { return _pimpl->installedBegin(); }
+
+    Selectable::installed_iterator Selectable::installedEnd() const
+    { return _pimpl->installedEnd(); }
+
+
+    ////////////////////////////////////////////////////////////////////////
+
+    bool Selectable::isUnmaintained() const
+    { return _pimpl->isUnmaintained(); }
+      
+
 
     ResStatus::TransactByValue Selectable::modifiedBy() const
     { return _pimpl->modifiedBy(); }
