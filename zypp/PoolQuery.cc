@@ -527,7 +527,7 @@ attremptycheckend:
     bool new_solvable = true;
     bool matches = !_do_matching;
     bool in_repo;
-    bool drop_by_kind_status;
+    bool drop_by_kind_status = false;
     do
     {
       //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
@@ -535,17 +535,37 @@ attremptycheckend:
 
       if (in_repo && new_solvable)
       {
-        drop_by_kind_status = false;
-
-        // filter by installed uninstalled
-        if ( (_pqimpl->_status_flags & INSTALLED_ONLY) &&
-             _rdit->repo->name != _pool.systemRepoName() )
-          drop_by_kind_status = true;
-
-        if (!drop_by_kind_status)
-          if ( (_pqimpl->_status_flags & UNINSTALLED_ONLY) &&
-               _rdit->repo->name == _pool.systemRepoName() )
+        while(1)
+        {
+          drop_by_kind_status = false;
+  
+          // whether to drop an uninstalled (repo) solvable
+          if ( (_pqimpl->_status_flags & INSTALLED_ONLY) &&
+               _rdit->repo->name != _pool.systemRepoName() )
+          {
             drop_by_kind_status = true;
+            break;
+          }
+  
+          // whether to drop an installed (target) solvable
+          if ((_pqimpl->_status_flags & UNINSTALLED_ONLY) &&
+               _rdit->repo->name == _pool.systemRepoName())
+          {
+            drop_by_kind_status = true;
+            break;
+          }
+
+          // whether to drop unwanted kind
+          if (!_pqimpl->_kinds.empty())
+          {
+            sat::Solvable s(_sid);
+            // the user wants to filter by kind.
+            if (_pqimpl->_kinds.find(s.kind()) == _pqimpl->_kinds.end())
+              drop_by_kind_status = true;
+          }
+
+          break;
+        }
 
         matches = matches && !drop_by_kind_status;
       }
@@ -646,7 +666,7 @@ attremptycheckend:
 
 
   void PoolQuery::addKind(const Resolvable::Kind &kind)
-  { _pimpl->_kinds.push_back(kind); }
+  { _pimpl->_kinds.insert(kind); }
 
 
   void PoolQuery::addString(const string & value)

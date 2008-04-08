@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
 {
   init_pool();
 }
-
+/*
 // no conditions, default query
 // result: all available resolvables
 BOOST_AUTO_TEST_CASE(pool_query_1)
@@ -225,7 +225,7 @@ BOOST_AUTO_TEST_CASE(pool_query_9)
 // multi attr (same value) substring matching (case sensitive and insensitive)
 BOOST_AUTO_TEST_CASE(pool_query_10)
 {
-  cout << "****10****"  << endl;
+  cout << "****10****"  << endl;*/
 /*
   PoolQuery q;
   q.addString("SSH");
@@ -237,6 +237,7 @@ BOOST_AUTO_TEST_CASE(pool_query_10)
   cout << q.size() << endl;
 //  BOOST_CHECK(q.size() == 17);
 */
+/*
   cout << endl;
 
   PoolQuery q2;
@@ -248,7 +249,7 @@ BOOST_AUTO_TEST_CASE(pool_query_10)
 
   std::for_each(q2.begin(), q2.end(), &result_cb);
   cout << q2.size() << endl;
-}
+}*/
 /*
 // multi attr (same value) glob matching (case sensitive and insensitive)
 BOOST_AUTO_TEST_CASE(pool_query_11)
@@ -263,6 +264,32 @@ BOOST_AUTO_TEST_CASE(pool_query_11)
   std::for_each(q.begin(), q.end(), &result_cb);
   cout << q.asString() <<  endl;
 //  BOOST_CHECK(q.size() == 11);
+}
+*/
+/*
+// kind filter
+BOOST_AUTO_TEST_CASE(pool_query_20)
+{
+  cout << "****20****"  << endl;
+  PoolQuery q;
+  q.addString("zypper");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addKind(ResTraits<Package>::kind);
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 3);
+}
+*/
+/*
+BOOST_AUTO_TEST_CASE(pool_query_X)
+{
+  cout << "****X****"  << endl;
+  PoolQuery q;
+  q.addString("pack*");
+  q.addAttribute(sat::SolvAttr::name);
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 28);
 }
 */
 

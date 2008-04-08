@@ -40,7 +40,7 @@ namespace zypp
   {
   public:
     typedef std::vector<std::string>                           StrContainer;
-    typedef std::vector<Resolvable::Kind>                      Kinds;
+    typedef std::set<Resolvable::Kind>                         Kinds;
     typedef std::map<sat::SolvAttr, StrContainer>              AttrMap;
     typedef std::map<sat::SolvAttr, std::string>               CompiledAttrMap;
     typedef unsigned int size_type;
