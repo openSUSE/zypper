@@ -17,6 +17,12 @@ Tue Apr  8 10:52:30 CEST 2008 - jreidinger@suse.cz
 - revision 9442
 
 -------------------------------------------------------------------
+Tue Apr  8 15:18:22 CEST 2008 - dmacvicar@suse.de
+
+- selectable API updates and changes
+- 4.10.0
+
+-------------------------------------------------------------------
 Fri Apr  4 14:01:45 CEST 2008 - jreidinger@suse.cz
 
 - add split with respect to escaped delimeters and also for quotes
