@@ -944,6 +944,53 @@ attremptycheckend:
   ostream & operator<<( ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
+  bool operator==(const PoolQuery& a, const PoolQuery& b)
+  {
+    return equal(a,b);
+  }
+
+  //internal matching two containers O(n^2)
+  template <class Container>
+  bool equalContainers(const Container& a, const Container& b)
+  {
+    for_(it,a.begin(),a.end())
+    {
+      bool finded = false;
+      for_( it2, b.begin(),b.end() )
+      {
+        if (*it==*it2)
+        {
+          finded = true;
+          break;
+        }
+      }
+
+      if (!finded)
+        return false;
+    }
+    return true;
+  }
+
+  bool equal(const PoolQuery& a, const PoolQuery& b)
+  {
+    if( a.matchType()!=b.matchType() )
+      return false;
+    if( a.matchWord()!=b.matchWord())
+      return false;
+    if( a.requireAll()!=b.requireAll() )
+      return false;
+    if(!equalContainers(a.strings(), b.strings()))
+      return false;
+    if(!equalContainers(a.kinds(), b.kinds()))
+      return false;
+    if(!equalContainers(a.repos(), b.repos()))
+      return false;
+    if(!equalContainers(a.attributes(), b.attributes()))
+      return false;
+
+    return true;
+  }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

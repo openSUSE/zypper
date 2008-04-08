@@ -270,6 +270,9 @@ namespace zypp
   /** \relates PoolQuery Stream output. */
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
 
+  bool equal(const PoolQuery& a, const PoolQuery& b);
+  bool operator==(const PoolQuery& a, const PoolQuery& b);
+
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery::ResultIterator

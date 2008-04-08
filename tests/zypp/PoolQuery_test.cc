@@ -266,6 +266,33 @@ BOOST_AUTO_TEST_CASE(pool_query_11)
 }
 */
 
+// test matching
+BOOST_AUTO_TEST_CASE(pool_query_equal)
+{
+  cout << "****equal****"  << endl;
+  PoolQuery q;
+  q.addString("zypp");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchGlob();
+  PoolQuery q2;
+  q2.addString("zypp");
+  q2.addAttribute(sat::SolvAttr::name);
+  q2.setMatchGlob();
+  PoolQuery q3;
+  q3.addString("zypp");
+  q3.addAttribute(sat::SolvAttr::name);
+  q3.setMatchGlob();
+  q3.setRequireAll(true);
+  PoolQuery q4;
+  q4.addAttribute(sat::SolvAttr::name,"zypp");
+  q4.setMatchGlob();
+
+  BOOST_CHECK(equal(q,q2));
+  BOOST_CHECK(!equal(q,q3));
+  //only exact equal! \TODO maybe change
+  BOOST_CHECK(!equal(q,q4));
+  BOOST_CHECK(!equal(q4,q3));
+}
 
 // save/load query
 BOOST_AUTO_TEST_CASE(pool_query_save_restore)
