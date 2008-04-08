@@ -25,8 +25,11 @@ struct _Dataiterator;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PoolQuery
+  //
   /**
    * Meta-data query API. Returns solvables of specified kinds from specified
    * repositories with attributes matching the specified search strings.
@@ -42,59 +45,6 @@ namespace zypp
     typedef std::map<sat::SolvAttr, std::string>               CompiledAttrMap;
     typedef unsigned int size_type;
 
-    class Impl;
-
-    class ResultIterator : public boost::iterator_adaptor<
-      ResultIterator                     // Derived
-      , ::_Dataiterator *                // Base
-      , sat::Solvable                    // Value
-      , boost::forward_traversal_tag     // CategoryOrTraversal
-      , sat::Solvable                    // Reference
-    >
-    {
-    public:
-      ResultIterator()
-      : ResultIterator::iterator_adaptor_(0), _has_next(true),
-        _attrs(CompiledAttrMap()), _do_matching(false), _pool((sat::Pool::instance()))
-      { _rdit = 0; _sid = 0; }
-
-    private:
-      friend class boost::iterator_core_access;
-      friend class PoolQuery;
-
-      ResultIterator(Impl * pqimpl);
-
-      sat::Solvable dereference() const
-      {
-        return _sid ? sat::Solvable(_sid) : sat::Solvable::noSolvable;
-      }
-
-      void increment();
-
-      bool matchSolvable();
-
-      template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
-        bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
-      {
-        if (!rhs.base() && !base())
-          return true;
-        if (!rhs.base() || !base())
-          return false;
-        /*if (rhs.base()->solvid == base()->solvid)
-          return true;*/
-        return true;
-      }
-
-    private:
-      ::_Dataiterator * _rdit;
-      Impl * _pqimpl;
-      /*SolvableId*/ int _sid;
-      bool _has_next;
-      const CompiledAttrMap & _attrs;
-      bool _do_matching;
-      sat::Pool _pool;
-    };
-
   public:
     typedef function<bool( const sat::Solvable & )> ProcessResolvable;
 
@@ -103,6 +53,8 @@ namespace zypp
 
     /** Query result accessers. */
     //@{
+
+    class ResultIterator;
 
     /** */
     ResultIterator begin();
@@ -308,14 +260,75 @@ namespace zypp
      */
     void setFlags(int flags);
 
+    class Impl;
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };
-
+  ///////////////////////////////////////////////////////////////////
 
   /** \relates PoolQuery Stream output. */
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //  CLASS NAME : PoolQuery::ResultIterator
+  //
+  /**
+   * 
+   */
+  class PoolQuery::ResultIterator : public boost::iterator_adaptor<
+    ResultIterator                     // Derived
+    , ::_Dataiterator *                // Base
+    , sat::Solvable                    // Value
+    , boost::forward_traversal_tag     // CategoryOrTraversal
+    , sat::Solvable                    // Reference
+  >
+  {
+  public:
+    ResultIterator()
+    : ResultIterator::iterator_adaptor_(0), _has_next(true),
+      _attrs(CompiledAttrMap()), _do_matching(false), _pool((sat::Pool::instance()))
+    { _rdit = 0; _sid = 0; }
+
+  private:
+    friend class boost::iterator_core_access;
+    friend class PoolQuery;
+
+    ResultIterator(Impl * pqimpl);
+
+    sat::Solvable dereference() const
+    {
+      return _sid ? sat::Solvable(_sid) : sat::Solvable::noSolvable;
+    }
+
+    void increment();
+
+    bool matchSolvable();
+
+    template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
+      bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
+    {
+      if (!rhs.base() && !base())
+        return true;
+      if (!rhs.base() || !base())
+        return false;
+      /*if (rhs.base()->solvid == base()->solvid)
+        return true;*/
+      return true;
+    }
+
+  private:
+    //! \todo clean up this mess
+    ::_Dataiterator * _rdit;
+    PoolQuery::Impl * _pqimpl;
+    /*SolvableId*/ int _sid;
+    bool _has_next;
+    const CompiledAttrMap & _attrs;
+    bool _do_matching;
+    sat::Pool _pool;
+  };
+  ///////////////////////////////////////////////////////////////////
 
 
   /////////////////////////////////////////////////////////////////
