@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  8 15:50:48 CEST 2008 - jreidinger@suse.cz
+
+- add comparing to PoolQuery
+- revision 9466 
+
+-------------------------------------------------------------------
 Tue Apr  8 13:18:30 CEST 2008 - jreidinger@suse.cz
 
 - move RepoInfo to universal RepoException. This can enable more verbose output - for frontend. (helps with bnc #377137) 
