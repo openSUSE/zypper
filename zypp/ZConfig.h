@@ -143,6 +143,8 @@ namespace zypp
        */      
       bool solver_onlyRequires() const;
 
+      Pathname  locksFile() const;
+
     public:
       class Impl;
       /** Dtor */

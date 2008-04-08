@@ -237,6 +237,10 @@ namespace zypp
                 {
                   solver_onlyRequires = str::strToBool( value, solver_onlyRequires );		    
                 }		
+                else if ( entry == "locksfile" )
+                {
+                  locks_file = Pathname(value);
+                }
               }
             }
           }
@@ -274,6 +278,7 @@ namespace zypp
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_vendor_path;
+    Pathname locks_file;
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
@@ -426,6 +431,12 @@ namespace zypp
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }
+
+  Pathname ZConfig::locksFile() const
+  { 
+    return ( _pimpl->locks_file.empty()
+        ? Pathname("/etc/zypp/locks") : _pimpl->locks_file );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -16,6 +16,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/PoolItem.h"
+#include "zypp/PoolQueryUtil.tcc"
+#include "zypp/ZYppCallbacks.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
@@ -31,65 +33,6 @@ namespace zypp
 {
 namespace locks
 {
-#if 0
-//
-// collect matching names
-//
-// called by regexp matching, see 'Match' below
-//
-
-struct NameMatchCollectorFunc
-{
-  set<string> matches;
-
-  bool operator()( const PoolItem &item )
-  {
-    matches.insert( item.resolvable()->name() );
-    return true;
-  }
-};
-
-
-// taken from zypper
-struct Match
-{
-  const regex * _regex;
-
-  Match(const regex & regex ) :
-    _regex(&regex)
-  {}
-
-  bool operator()(const zypp::PoolItem & pi) const
-  {
-    return
-    // match resolvable name
-    regex_match(pi.resolvable()->name(), *_regex);
-  }
-};
-
-
-string
-wildcards2regex(const string & str)
-{
-  string regexed;
-
-  string all("*"); // regex to search for '*'
-  string one("?"); // regex to search for '?'
-  string r_all(".*"); // regex equivalent of '*'
-  string r_one(".");  // regex equivalent of '?'
-
-  // replace all "*" in input with ".*"
-  regexed = str::gsub( str, all, r_all );
-  MIL << "wildcards2regex: " << str << " -> " << regexed;
-
-  // replace all "?" in input with "."
-   regexed = str::gsub(regexed, one, r_one);
-   MIL << " -> " << regexed << endl;
-
-  return regexed;
-}
-#endif
-
 //
 // assign Lock to installed pool item
 //
@@ -109,104 +52,6 @@ struct AddLockToPool
     // - make Capability's parse 'Name [Op edition]' available so it can be used here
     // - provide new, or extend Capability::Matches, functor to allow pattern (glob/rx) matching
     return false;
-#if 0
-    CapFactory cap_factory;
-
-    std::string line( str::trim( str_r ) );
-
-    if ( line.empty() || line[0] == '#')
-      return true;
-
-    MIL << "Applying locks from pattern '" << str_r << "'" << endl;
-
-    // zypp does not provide wildcard or regex support in the Capability matching helpers
-    // but it still parses the index if it contains wildcards.
-    // so we decompose the capability, and keep the op and edition, while, the name
-    // is converted to a regexp and matched against all possible names in the _pool
-    // Then these names are combined with the original edition and relation and we
-    // got a new capability for matching wildcard to use with the capability match
-    // helpers
-
-    Rel rel;
-    Edition edition;
-    string name;
-
-    try
-    {
-      Capability capability = cap_factory.parse( ResTraits<zypp::Package>::kind, line );
-
-      capability::NamedCap::constPtr named = capability::asKind<capability::NamedCap>(capability);
-      if ( named )
-      {
-        rel = named->op();
-        edition = named->edition();
-        name = named->index();
-      }
-      else
-      {
-        ERR << "Not a named capability in: '" << line << "' skipping" << std::endl;
-        return true;
-      }
-    }
-    catch ( const Exception &e )
-    {
-      ERR << "Can't parse capability in: '" << line << "' (" << e.msg() << ") skipping" << std::endl;
-      return true;
-    }
-
-    // Operator NONE is not allowed in Capability
-    if (rel == Rel::NONE) rel = Rel::ANY;
-
-    NameMatchCollectorFunc nameMatchFunc;
-
-    // regex flags
-    unsigned int flags = regex::normal;
-    flags |= regex::icase;
-    regex reg;
-
-    // create regex object
-    string regstr( wildcards2regex( name ) );
-    MIL << "regstr '" << regstr << "'" << endl;
-    try
-    {
-      reg.assign( regstr, flags );
-    }
-    catch (regex_error & e)
-    {
-      ERR << "locks: " << regstr << " is not a valid regular expression: \"" << e.msg() << "\"" << endl;
-      ERR << "This is a bug, please file a bug report against libzypp" << endl;
-      // ignore this lock and continue
-      return true;;
-    }
-
-    invokeOnEach( _pool.begin(), _pool.end(), Match(reg), functor::functorRef<bool, const PoolItem &>(nameMatchFunc) );
-
-    MIL << "Found " << nameMatchFunc.matches.size() << " matches." << endl;
-
-    // now we have all the names matching
-
-    // for each name matching try to match a capability
-
-    ItemLockerFunc lockItemFunc( line );
-
-    for ( set<string>::const_iterator it = nameMatchFunc.matches.begin(); it != nameMatchFunc.matches.end(); ++it )
-    {
-      string matched_name = *it;
-
-      try
-      {
-        Capability capability = cap_factory.parse( ResTraits<zypp::Package>::kind, matched_name, rel, edition );
-        MIL << "Locking capability " << capability << endl;
-        forEachMatchIn( _pool, Dep::PROVIDES, capability, functor::functorRef<bool, const CapAndItem &>(lockItemFunc) );
-      }
-      catch ( const Exception &e )
-      {
-        ERR << "Invalid lock: " << e.msg() << std::endl;
-      }
-      ++_count;
-    }
-    return true;
-#endif
   } // end operator()()
 
   ResPool _pool;
@@ -231,6 +76,112 @@ readLocks(const ResPool & pool, const Pathname &file )
   }
   return 0;
 }
+
+class Locks::Impl
+{
+public:
+  std::list<PoolQuery> locks;
+};
+
+void Locks::saveLocks( const Pathname& file )
+{
+  writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
+}
+
+void Locks::loadLocks( const Pathname& file )
+{
+  _pimpl->locks.clear();
+  insert_iterator<std::list<PoolQuery> > ii( _pimpl->locks,
+      _pimpl->locks.end() );
+  readPoolQueriesFromFile( file, ii );
+}
+
+void Locks::addLock( const PoolQuery& query )
+{
+  //XXX real lock it!
+  _pimpl->locks.push_back( query );
+}
+
+bool Locks::existEmptyLocks()
+{
+  for_( it, _pimpl->locks.begin(), _pimpl->locks.end() )
+  {
+    if( it->empty() )
+      return true;
+  }
+
+  return false;
+}
+
+//handle locks during removing
+class LocksRemovePredicate{
+private:
+  bool skip_rest;
+  size_t searched;
+  size_t all;
+  callback::SendReport<CleanEmptyLocksReport> &report;
+
+public:
+  LocksRemovePredicate(size_t count, callback::SendReport<CleanEmptyLocksReport> &_report): skip_rest(false),searched(0),all(count), report(_report){}
+
+  bool aborted(){ return skip_rest; }
+
+  bool operator()(PoolQuery& q)
+  {
+    if( skip_rest )
+      return false;
+    searched++;
+    if( !q.empty() )
+      return false;
+
+    if (!report->progress((100*searched)/all))
+    {
+      skip_rest = true;
+      return false;
+    }
+
+    switch (report->execute(q))
+    {
+    case CleanEmptyLocksReport::ABORT:
+      report->finish(CleanEmptyLocksReport::ABORTED);
+      skip_rest = true;
+      return false;
+    case CleanEmptyLocksReport::DELETE:
+      return true;
+    case CleanEmptyLocksReport::IGNORE:
+      return false;
+    default:
+      WAR << "Unknown returned value. Callback have more value then"
+          << " this switch. Need correct handle all enum values." << std::endl;
+    }
+
+    return false;
+  }
+
+};
+
+void Locks::removeEmptyLocks()
+{
+  callback::SendReport<CleanEmptyLocksReport> report;
+  report->start();
+  size_t sum = _pimpl->locks.size();
+  LocksRemovePredicate p(sum, report);
+
+  _pimpl->locks.remove_if(p);
+
+  if( p.aborted() )
+  {
+    report->finish(CleanEmptyLocksReport::ABORTED);
+  }
+  else 
+  {
+    report->finish(CleanEmptyLocksReport::NO_ERROR);
+
+  }
+}
+
+Locks::Locks(){}
+
 
 } // ns locks
 } // ns zypp

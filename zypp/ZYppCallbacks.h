@@ -16,6 +16,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
+#include "zypp/PoolQuery.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
 #include "zypp/ProgressData.h"
@@ -621,6 +622,46 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace locks
+  {
+    struct CleanEmptyLocksReport : public callback::ReportBase
+    {
+      enum Action {
+        ABORT,  // abort and return error
+        DELETE, // delete empty lock    
+	IGNORE  // skip empty lock
+      };
+
+      enum Error {
+	NO_ERROR,
+	ABORTED		// cleaning aborted
+      };
+
+      virtual void start(
+      ) {}
+
+      virtual bool progress(int /*value*/)
+      { return true; }
+
+      /**
+       * When find empty lock ask what to do with it
+       */
+      virtual Action execute(
+  	 const PoolQuery& /*error*/
+       ) { return DELETE; }
+
+       virtual void finish(
+         Error /*error*/
+        ) {}
+
+    };
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace locks
+  ///////////////////////////////////////////////////////////////////
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

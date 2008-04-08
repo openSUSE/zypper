@@ -877,7 +877,6 @@ attremptycheckend:
     return finded_something;
   }
 
-
   void PoolQuery::serialize( ostream &str, char delim ) const
   {
     //separating delim
