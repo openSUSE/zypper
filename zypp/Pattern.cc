@@ -10,8 +10,11 @@
  *
 */
 #include <iostream>
+#include "zypp/base/Logger.h"
 
 #include "zypp/Pattern.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -91,19 +94,20 @@ namespace zypp
   }
 #endif
 
-#warning implement PATTERN::INSTALL_PACKAGES
- const Capabilities & Pattern::includes() const
-  {
-    static Capabilities _val;
-    return _val;
-  }
+  Pattern::NameList Pattern::includes() const
+  { return NameList( sat::SolvAttr::includes, satSolvable() ); }
 
-  const Capabilities & Pattern::extends() const
-  {
-    static Capabilities _val;
-    return _val;
-  }
+  Pattern::NameList Pattern::extends() const
+  { return NameList( sat::SolvAttr::extends, satSolvable() ); }
 
+  Pattern::Contents Pattern::contents() const
+  {
+#warning FILL contents
+    ERR << *this << endl;
+    WAR << "  includes: " << includes() << endl;
+    WAR << "  extends:  " << extends() << endl;
+    return Contents();
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

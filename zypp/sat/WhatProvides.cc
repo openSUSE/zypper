@@ -10,7 +10,6 @@
  *
 */
 #include <iostream>
-#include <tr1/unordered_set>
 
 #include "zypp/base/LogTools.h"
 #include "zypp/sat/WhatProvides.h"

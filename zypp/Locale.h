@@ -13,9 +13,9 @@
 #define ZYPP_LOCALE_H
 
 #include <iosfwd>
-#include <tr1/unordered_set>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Tr1hash.h"
 
 #include "zypp/IdString.h"
 #include "zypp/LanguageCode.h"

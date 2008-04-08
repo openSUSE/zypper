@@ -16,10 +16,9 @@
 #include <map>
 #include <list>
 #include <vector>
-#include <tr1/unordered_map>
 
 #include "zypp/base/Iterator.h"
-#include "zypp/base/Iterator.h"
+#include "zypp/base/Tr1hash.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/sat/Pool.h"

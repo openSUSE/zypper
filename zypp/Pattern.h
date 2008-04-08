@@ -29,40 +29,47 @@ namespace zypp
   */
   class Pattern : public ResObject
   {
-  public:
-    typedef Pattern                  Self;
-    typedef ResTraits<Self>          TraitsType;
-    typedef TraitsType::PtrType      Ptr;
-    typedef TraitsType::constPtrType constPtr;
+    public:
+      typedef Pattern                  Self;
+      typedef ResTraits<Self>          TraitsType;
+      typedef TraitsType::PtrType      Ptr;
+      typedef TraitsType::constPtrType constPtr;
 
-  public:
-   typedef sat::ArrayAttr<IdString,IdString> NameList;
+    public:
+      typedef sat::ArrayAttr<IdString,IdString> NameList;
+      typedef sat::SolvableSet                  Contents;
 
-  public:
-    /** */
-    bool isDefault() const;
-    /** */
-    bool userVisible() const;
-    /** */
-    std::string category( const Locale & lang_r = Locale() ) const;
-    /** */
-    Pathname icon() const;
-    /** */
-    Pathname script() const;
-    /** */
-    std::string order() const;
+    public:
+      /** */
+      bool isDefault() const;
+      /** */
+      bool userVisible() const;
+      /** */
+      std::string category( const Locale & lang_r = Locale() ) const;
+      /** */
+      Pathname icon() const;
+      /** */
+      Pathname script() const;
+      /** */
+      std::string order() const;
 
-    /** Ui hint. */
-    const Capabilities & includes() const;
-    /** Ui hint. */
-    const Capabilities & extends() const;
+    public:
+      /** Ui hint. */
+      NameList includes() const;
+      /** Ui hint. */
+      NameList extends() const;
 
-  protected:
-    friend Ptr make<Self>( const sat::Solvable & solvable_r );
-    /** Ctor */
-    Pattern( const sat::Solvable & solvable_r );
-    /** Dtor */
-    virtual ~Pattern();
+      /** The collection of packages associated with this patch.
+        * This also evaluates the patterns includes/extends relation.
+       */
+      Contents contents() const;
+
+    protected:
+      friend Ptr make<Self>( const sat::Solvable & solvable_r );
+      /** Ctor */
+      Pattern( const sat::Solvable & solvable_r );
+      /** Dtor */
+      virtual ~Pattern();
   };
   ///////////////////////////////////////////////////////////////////
 

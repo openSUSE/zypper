@@ -13,7 +13,6 @@
 #define ZYPP_CAPABILITY_H
 
 #include <iosfwd>
-#include <tr1/unordered_set>
 
 #include "zypp/base/SafeBool.h"
 #include "zypp/base/Deprecated.h"

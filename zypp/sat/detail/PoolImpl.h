@@ -20,8 +20,8 @@ extern "C"
 #include <satsolver/repo_solv.h>
 }
 #include <iosfwd>
-#include <tr1/unordered_set>
 
+#include "zypp/base/Tr1hash.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/SerialNumber.h"
 #include "zypp/sat/detail/PoolMember.h"

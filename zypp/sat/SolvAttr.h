@@ -76,6 +76,8 @@ namespace sat
 
       // patch
       static const SolvAttr patchcategory;
+      static const SolvAttr needReboot;
+      static const SolvAttr needRestart;
 
       // patern
       static const SolvAttr isvisible;

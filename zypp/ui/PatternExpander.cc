@@ -79,12 +79,11 @@ namespace zypp
       /** Store all included patterns in \c _patternMap. */
       void expandIncludes( const Pattern::constPtr & pat_r )
       {
-        if ( ! pat_r->includes().empty() )
-          {
-            std::for_each( pat_r->includes().begin(),
-                           pat_r->includes().end(),
-                           bind( &Impl::expandInclude, this, _1 ) );
-          }
+        Pattern::NameList c( pat_r->includes() );
+        for_( it, c.begin(), c.end() )
+        {
+          expandInclude( Capability( it->c_str(), ResKind::pattern ) );
+        }
       }
 
       /** Store Patterns matching an \c Includes capability in \c _patternMap. */
@@ -101,9 +100,12 @@ namespace zypp
       /** Store all patterns extending \c pat_r in \c _patternMap. */
       void expandExtending( const Pattern::constPtr & pat_r )
       {
-        std::for_each( _pool.byKindBegin<Pattern>(),
-                       _pool.byKindEnd<Pattern>(),
-                       bind( &Impl::expandIfExtends, this, pat_r, _1 ) );
+        Pattern::NameList c( pat_r->extends() );
+        for_( it, c.begin(), c.end() )
+        {
+#warning TBD
+          //expandIfExtends( pat_r, Capability( it->c_str(), ResKind::pattern ) );
+        }
       }
 
       /** Store \c extending_r if it extends \c pat_r. */
@@ -113,6 +115,8 @@ namespace zypp
 
         if ( ! extending->extends().empty() )
           {
+#warning TBD
+#if 0
             if ( std::find_if( extending->extends().begin(),
                                extending->extends().end(),
                                bind( &Impl::providedBy, this, pat_r, _1 ) )
@@ -122,6 +126,7 @@ namespace zypp
                 _patternMap[extending];
                 //DBG << mapEntry(*_patternMap.find(extending)) << endl;
               }
+#endif
           }
       }
 

@@ -242,6 +242,7 @@ SET( zypp_base_HEADERS
   base/String.h
   base/Regex.h
   base/Sysconfig.h
+  base/Tr1hash.h
   base/Unit.h
   base/WatchFile.h
 )
@@ -513,6 +514,7 @@ INSTALL(  FILES
 SET( zypp_sat_SRCS
   sat/Pool.cc
   sat/Solvable.cc
+  sat/SolvableSet.cc
   sat/WhatProvides.cc
   sat/LocaleSupport.cc
   sat/LookupAttr.cc
@@ -523,6 +525,7 @@ SET( zypp_sat_SRCS
 SET( zypp_sat_HEADERS
   sat/Pool.h
   sat/Solvable.h
+  sat/SolvableSet.h
   sat/WhatProvides.h
   sat/LocaleSupport.h
   sat/LookupAttr.h

@@ -18,8 +18,8 @@
 #include <list>
 #include <set>
 #include <map>
-#include <tr1/unordered_set>
-#include <tr1/unordered_map>
+
+#include "zypp/base/Tr1hash.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Deprecated.h"

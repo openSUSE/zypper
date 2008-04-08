@@ -30,39 +30,52 @@ namespace zypp
   */
   class Patch : public ResObject
   {
-  public:
-    typedef Patch                    Self;
-    typedef ResTraits<Self>          TraitsType;
-    typedef TraitsType::PtrType      Ptr;
-    typedef TraitsType::constPtrType constPtr;
+    public:
+      typedef Patch                    Self;
+      typedef ResTraits<Self>          TraitsType;
+      typedef TraitsType::PtrType      Ptr;
+      typedef TraitsType::constPtrType constPtr;
 
-  public:
-    typedef std::list<ResObject::Ptr> AtomList;
+    public:
+      typedef sat::SolvableSet Contents;
 
-  public:
-    /** Patch ID */
-    std::string id() const;
-    /** Patch time stamp */
-    Date timestamp() const;
-    /** Patch category (recommended, security,...) */
-    std::string category() const;
-    /** Does the system need to reboot to finish the update process? */
-    bool reboot_needed() const;
-    /** Does the patch affect the package manager itself? */
-    bool affects_pkg_manager() const;
-    /** Is the patch installation interactive? (does it need user input?) */
-    bool interactive() const;
+    public:
+      /** Patch time stamp */
+      Date timestamp() const
+      { return buildtime(); }
+      /** Patch category (recommended, security,...) */
+      std::string category() const;
+      /** Does the system need to reboot to finish the update process? */
+      bool reboot_needed() const;
+      /** Does the patch affect the package manager itself? */
+      bool affects_pkg_manager() const;
+      /** Is the patch installation interactive? (does it need user input?) */
+      bool interactive() const;
 
-    /** The list of all atoms building the patch */
-    ZYPP_DEPRECATED AtomList atoms() const
-    { return AtomList(); }
+    public:
+      /** The collection of packages associated with this patch. */
+      Contents contents() const;
 
-  protected:
-    friend Ptr make<Self>( const sat::Solvable & solvable_r );
-    /** Ctor */
-    Patch( const sat::Solvable & solvable_r );
-    /** Dtor */
-    virtual ~Patch();
+    public:
+      /** Patch ID
+       * \deprecated Seems to be unsused autobuild interal data?
+      */
+      ZYPP_DEPRECATED std::string id() const
+      { return std::string(); }
+
+      /** The list of all atoms building the patch
+       * \deprecated  Try contents().
+      */
+      typedef std::list<ResObject::Ptr> AtomList;
+      ZYPP_DEPRECATED AtomList atoms() const
+      { return AtomList(); }
+
+    protected:
+      friend Ptr make<Self>( const sat::Solvable & solvable_r );
+      /** Ctor */
+      Patch( const sat::Solvable & solvable_r );
+      /** Dtor */
+      virtual ~Patch();
   };
 
   /////////////////////////////////////////////////////////////////
