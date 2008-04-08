@@ -16,7 +16,6 @@
 #include "zypp/Resolvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
-#include "zypp/PoolQuery.h"
 #include "zypp/Message.h"
 #include "zypp/Url.h"
 #include "zypp/ProgressData.h"
@@ -623,6 +622,7 @@ namespace zypp
   } // namespace target
   ///////////////////////////////////////////////////////////////////
 
+class PoolQuery;
   ///////////////////////////////////////////////////////////////////
   namespace locks
   {
