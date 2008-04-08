@@ -1820,11 +1820,37 @@ void solve_and_commit (Zypper & zypper)
           zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
           return;
         }
-        catch ( const zypp::repo::RepoException & e ) {
+        catch ( zypp::repo::RepoException & e ) {
           ZYPP_CAUGHT(e);
+          
+          RepoManager manager(zypper.globalOpts().rm_options );
+
+          bool refresh_needed = false;
+          for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
+                    it != e.info().baseUrlsEnd(); ++it)
+            {
+              RepoManager::RefreshCheckStatus stat = manager.
+                            checkIfToRefreshMetadata(e.info(), *it,
+                            RepoManager::RefreshForced );
+              if ( stat == RepoManager::REFRESH_NEEDED )
+              {
+                refresh_needed = true;
+                break;
+              }
+            }
+          
+          std::string hint = _("Please see the above error message for a hint.");
+          if (refresh_needed)
+          {
+            hint = boost::str(format(
+                // translators: the first %s is 'zypper refresh' and the second
+                // is repo allias
+                _("Repository '%s' is out of date. Running '%s' might help.")) %
+                e.info().alias() % "zypper refresh" );
+          }
           zypper.out().error(e,
               _("Problem downloading the package file from the repository:"),
-              _("Please see the above error message for a hint."));
+              hint);
           zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
           return;
         }
