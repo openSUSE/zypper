@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr  8 10:52:30 CEST 2008 - jreidinger@suse.cz
+
+- initial implementation of new locks (FATE #120118 and #120352) 
+
+-------------------------------------------------------------------
 Fri Apr  4 14:01:45 CEST 2008 - jreidinger@suse.cz
 
 - add split with respect to escaped delimeters and also for quotes
