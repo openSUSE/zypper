@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr  8 13:20:47 CEST 2008 - jreidinger@suse.cz
+
+- give better hint if zypper cannot download file from out of date
+  repository. (bnc #377137). 
+- r9454 
+
+-------------------------------------------------------------------
 Fri Apr  4 16:14:49 CEST 2008 - jreidinger@suse.cz
 
 - fix escaping characters for shell and for local files
