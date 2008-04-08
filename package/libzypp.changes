@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Tue Apr  8 13:18:30 CEST 2008 - jreidinger@suse.cz
+
+- move RepoInfo to universal RepoException. This can enable more verbose output - for frontend. (helps with bnc #377137) 
+- revision 9452
+
+-------------------------------------------------------------------
 Tue Apr  8 10:52:30 CEST 2008 - jreidinger@suse.cz
 
 - initial implementation of new locks (FATE #120118 and #120352) 
+- revision 9442
 
 -------------------------------------------------------------------
 Fri Apr  4 14:01:45 CEST 2008 - jreidinger@suse.cz
