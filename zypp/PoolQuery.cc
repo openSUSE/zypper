@@ -105,7 +105,7 @@ namespace zypp
 
   public:
     /** Raw search strings. */
-    vector<string> _strings;
+    StrContainer _strings;
     /** Regex-compiled search strings. */
     string _rcstrings;
     /** Raw attributes */
@@ -114,9 +114,9 @@ namespace zypp
     CompiledAttrMap _rcattrs;
 
     /** Repos to search. */
-    vector<string> _repos;
+    StrContainer _repos;
     /** Kinds to search */
-    vector<Resolvable::Kind> _kinds;
+    Kinds _kinds;
 
     /** Sat solver search flags */
     int _flags;
@@ -692,8 +692,46 @@ attremptycheckend:
   { _pimpl->_status_flags = flags; }
 
 
-  void PoolQuery::requireAll(const bool require_all)
+  void PoolQuery::setRequireAll(const bool require_all)
   { _pimpl->_require_all = require_all; }
+
+
+  const PoolQuery::StrContainer &
+  PoolQuery::strings() const
+  { return _pimpl->_strings; }
+
+  const PoolQuery::AttrMap &
+  PoolQuery::attributes() const
+  { return _pimpl->_attrs; }
+
+  const PoolQuery::Kinds &
+  PoolQuery::kinds() const
+  { return _pimpl->_kinds; }
+
+  const PoolQuery::StrContainer &
+  PoolQuery::repos() const
+  { return _pimpl->_repos; }
+
+  bool PoolQuery::caseSensitive()
+  { return _pimpl->_flags & SEARCH_NOCASE; }
+
+  bool PoolQuery::matchExact() const
+  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_STRING; }
+  bool PoolQuery::matchSubstring() const
+  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_SUBSTRING; }
+  bool PoolQuery::matchGlob() const
+  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_GLOB; }
+  bool PoolQuery::matchRegex() const
+  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_REGEX; }
+  int PoolQuery::matchType() const
+  { return _pimpl->_flags & SEARCH_STRINGMASK; }
+
+  bool PoolQuery::matchWord() const
+  { return _pimpl->_match_word; }
+
+  bool PoolQuery::requireAll() const
+  { return _pimpl->_require_all; }
+
 
 
   PoolQuery::ResultIterator PoolQuery::begin()

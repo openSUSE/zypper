@@ -36,8 +36,10 @@ namespace zypp
   class PoolQuery
   {
   public:
-    typedef std::map<sat::SolvAttr, std::vector<std::string> > AttrMap;
-    typedef std::map<sat::SolvAttr, std::string > CompiledAttrMap;
+    typedef std::vector<std::string>                           StrContainer;
+    typedef std::vector<Resolvable::Kind>                      Kinds;
+    typedef std::map<sat::SolvAttr, StrContainer>              AttrMap;
+    typedef std::map<sat::SolvAttr, std::string>               CompiledAttrMap;
     typedef unsigned int size_type;
 
     class Impl;
@@ -226,10 +228,42 @@ namespace zypp
 
 
     /**
-     * Require that all of the query conditions set by
-     * addAttribute, addString, addDep are satisfied.
+     * Require that all of the values set by addString, addAttribute, addDep
+     * match the values of respective attributes. 
      */
-    void requireAll(const bool require_all = true);
+    void setRequireAll(const bool require_all = true);
+
+    /** \name getters */
+    //@{
+
+    /** Search strings added via addString() */
+    const StrContainer & strings() const;
+    /**
+     * Map (map<SolvAttr, StrContainer>) of attribute values added via
+     * addAttribute(), addDep in string form */
+    const AttrMap & attributes() const;
+
+    const Kinds & kinds() const;
+
+    const StrContainer & repos() const;
+
+    bool caseSensitive() const;
+
+    bool matchExact() const;
+    bool matchSubstring() const;
+    bool matchGlob() const;
+    bool matchRegex() const;
+    /**
+     * Returns currently used string matching type.
+     * \see satsolver/repo.h
+     */
+    int  matchType() const;
+
+    bool matchWord() const;
+
+    bool requireAll() const;
+
+    //@}
 
     /**
      * Reads from stream query. Attributes is sepated by delim. Query is
