@@ -154,7 +154,7 @@ SATResolver::pool (void) const
 
 
 void
-SATResolver::addPoolItemToInstall (PoolItem item)
+SATResolver::resetItemTransaction (PoolItem item)
 {
     bool found = false;
     for (PoolItemList::const_iterator iter = _items_to_remove.begin();
@@ -166,9 +166,54 @@ SATResolver::addPoolItemToInstall (PoolItem item)
 	}
     }
     if (!found) {
-	_items_to_install.push_back (item);
-	_items_to_install.unique ();
+	for (PoolItemList::const_iterator iter = _items_to_install.begin();
+	     iter != _items_to_install.end(); iter++) {
+	    if (*iter == item) {
+		_items_to_install.remove(*iter);
+		found = true;
+		break;
+	    }
+	}
     }
+    if (!found) {
+	for (PoolItemList::const_iterator iter = _items_to_keep.begin();
+	     iter != _items_to_keep.end(); iter++) {
+	    if (*iter == item) {
+		_items_to_keep.remove(*iter);
+		found = true;
+		break;
+	    }
+	}
+    }
+    if (!found) {
+	for (PoolItemList::const_iterator iter = _items_to_lock.begin();
+	     iter != _items_to_lock.end(); iter++) {
+	    if (*iter == item) {
+		_items_to_lock.remove(*iter);
+		found = true;
+		break;
+	    }
+	}
+    }        
+    if (!found) {
+	for (PoolItemList::const_iterator iter = _items_to_update.begin();
+	     iter != _items_to_update.end(); iter++) {
+	    if (*iter == item) {
+		_items_to_update.remove(*iter);
+		found = true;
+		break;
+	    }
+	}
+    }        
+}
+
+
+void
+SATResolver::addPoolItemToInstall (PoolItem item)
+{
+    resetItemTransaction (item);
+    _items_to_install.push_back (item);
+    _items_to_install.unique ();
 }
 
 
@@ -184,19 +229,9 @@ SATResolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 void
 SATResolver::addPoolItemToRemove (PoolItem item)
 {
-    bool found = false;
-    for (PoolItemList::const_iterator iter = _items_to_install.begin();
-	 iter != _items_to_install.end(); iter++) {
-	if (*iter == item) {
-	    _items_to_install.remove(*iter);
-	    found = true;
-	    break;
-	}
-    }
-    if (!found) {
-	_items_to_remove.push_back (item);
-	_items_to_remove.unique ();
-    }
+    resetItemTransaction (item);    
+    _items_to_remove.push_back (item);
+    _items_to_remove.unique ();
 }
 
 
@@ -211,6 +246,7 @@ SATResolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 void
 SATResolver::addPoolItemToLock (PoolItem item)
 {
+    resetItemTransaction (item);    
     _items_to_lock.push_back (item);
     _items_to_lock.unique ();
 }
@@ -218,6 +254,7 @@ SATResolver::addPoolItemToLock (PoolItem item)
 void
 SATResolver::addPoolItemToKeep (PoolItem item)
 {
+    resetItemTransaction (item);    
     _items_to_keep.push_back (item);
     _items_to_keep.unique ();
 }
@@ -421,6 +458,18 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
         queue_push( &(_jobQueue), id );
     }
+
+    for (PoolItemList::const_iterator iter = _items_to_update.begin(); iter != _items_to_update.end(); iter++) {
+	PoolItem r = *iter;
+
+	Id id = (*iter)->satSolvable().id();
+	if (id == ID_NULL) {
+	    ERR << "Update explicit: " << *iter << " not found" << endl;
+	}
+	MIL << "Update explicit " << *iter << " with the SAT-Pool ID: " << id << endl;
+	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_UPDATE );
+        queue_push( &(_jobQueue), id );
+    }    
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );

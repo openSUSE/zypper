@@ -66,6 +66,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_install;
+    PoolItemList _items_to_update;    
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
     PoolItemList _items_to_keep;    
@@ -83,6 +84,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail);
+    void resetItemTransaction (PoolItem item);
 
   public:
 
