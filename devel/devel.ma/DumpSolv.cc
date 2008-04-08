@@ -25,7 +25,7 @@ int main( int argc, const char * argv[] )
 
   cout << "Done: " << satpool << endl;
 
-  if ( getenv("VERBOSE") )
+  if ( true ||  getenv("VERBOSE") )
   {
     for_( it, satpool.solvablesBegin(), satpool.solvablesEnd() )
     {

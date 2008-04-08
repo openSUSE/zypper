@@ -13,7 +13,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 
 #include "zypp/sat/detail/PoolImpl.h"
@@ -82,12 +82,7 @@ namespace zypp
 
     std::ostream & dumpOn( std::ostream & str, const LookupAttr & obj )
     {
-      str << obj << endl;
-      for_( it, obj.begin(), obj.end() )
-      {
-        str << "  " << it << endl;
-      }
-      return str << "<EndOfSerach>";
+      return dumpRange( str << obj, obj.begin(), obj.end() );
     }
 
     ///////////////////////////////////////////////////////////////////

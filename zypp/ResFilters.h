@@ -15,6 +15,7 @@
 #include <boost/function.hpp>
 
 #include "zypp/base/Functional.h"
+#include "zypp/Filter.h"
 #include "zypp/Resolvable.h"
 
 #include "zypp/PoolItem.h"
@@ -136,6 +137,8 @@ namespace zypp
      * If you look at a functor, you'll see that it contains both, the function
      * to call (it's <tt>operator()</tt> ) and the data you'd otherwise pass as
      * <tt>void * data</tt>. That's nice and safe.
+     *
+     * \todo migrate to namespace filter and enhance to support Solvables as well.
     */
     //@{
     ///////////////////////////////////////////////////////////////////
@@ -148,25 +151,12 @@ namespace zypp
     typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
     typedef boost::function<bool ( ResObject::constPtr )> ResFilter;
 
-    /** Select ResObject by kind. */
-    struct ByKind : public ResObjectFilterFunctor
-    {
-      ByKind( const ResObject::Kind & kind_r )
-      : _kind( kind_r )
-      {}
-
-      bool operator()( ResObject::constPtr p ) const
-      {
-        return p->kind() == _kind;
-      }
-
-      ResObject::Kind _kind;
-    };
-
+    /** Select ResObject by kind. \deprecated include filter.h and use filter::ByKind. */
+    ZYPP_DEPRECATED typedef filter::ByKind ByKind;
     /** */
     template<class _Res>
-      inline ByKind byKind()
-      { return ByKind( ResTraits<_Res>::kind ); }
+      inline filter::ByKind byKind()
+      { return filter::ByKind( ResTraits<_Res>::kind ); }
 
     /** Select ResObject by name. */
     struct ByName : public ResObjectFilterFunctor
@@ -357,7 +347,7 @@ namespace zypp
       {
 	return p.status().isSuggested();
       }
-    };      
+    };
 
     //@}
     /////////////////////////////////////////////////////////////////

@@ -16,8 +16,7 @@
 
 #include "zypp/base/Functional.h"
 #include "zypp/base/Function.h"
-#include "zypp/ResFilters.h"
-
+// #include "zypp/ResFilters.h"  included at the end!
 #include "zypp/sat/Pool.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -96,6 +95,39 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ByKind
+    //
+    /** Filter solvables according to their kind.
+    */
+    class ByKind
+    {
+      public:
+        ByKind( const ResKind & kind_r )
+        : _kind( kind_r )
+        {}
+
+      public:
+        /** Filter on \ref Solvable. */
+        bool operator()( const sat::Solvable & solv_r ) const
+        { return solv_r.isKind( _kind ); }
+
+        /** Filter fitting PoolItem/ResObject. */
+        template<class _Solv>
+        bool operator()( const _Solv & solv_r ) const
+        { return operator()( solv_r.satSolvable() ); }
+
+      private:
+        ResKind _kind;
+    };
+
+    /** \relates ByKind templated convenience ctor. */
+    template<class _Res>
+    inline ByKind byKind()
+    { return ByKind( ResTraits<_Res>::kind ); }
+
+    ///////////////////////////////////////////////////////////////////
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace filter
@@ -103,4 +135,7 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+#include "zypp/ResFilters.h"
+
 #endif // ZYPP_FILTER_H

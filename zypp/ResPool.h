@@ -181,7 +181,7 @@ namespace zypp
     public:
       /** \name Iterate through all ResObjects of a certain kind. */
       //@{
-      typedef zypp::resfilter::ByKind ByKind;
+      typedef filter::ByKind ByKind;
       typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
 
       byKind_iterator byKindBegin( const ResKind & kind_r ) const

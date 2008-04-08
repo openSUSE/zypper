@@ -120,15 +120,15 @@ namespace zypp
 
 void dbgDu( Selectable::Ptr sel )
 {
-  if ( sel->installedPoolItem() )
+  if ( sel->installedObj() )
   {
-    DBG << "i: " << sel->installedPoolItem() << endl
-        << sel->installedPoolItem()->diskusage() << endl;
+    DBG << "i: " << sel->installedObj() << endl
+        << sel->installedObj()->diskusage() << endl;
   }
-  if ( sel->candidatePoolItem() )
+  if ( sel->candidateObj() )
   {
-    DBG << "c: " << sel->candidatePoolItem() << endl
-        << sel->candidatePoolItem()->diskusage() << endl;
+    DBG << "c: " << sel->candidateObj() << endl
+        << sel->candidateObj()->diskusage() << endl;
   }
   INT << sel << endl
       << getZYpp()->diskUsage() << endl;
@@ -150,7 +150,7 @@ std::ostream & testDump( std::ostream & str, const PoolItem & pi )
     l = Locale( "dsdf" );
     str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
     OUTS( summary );
-    OUTS( size );
+    OUTS( installsize );
     OUTS( downloadSize );
     OUTS( sourcePkgName );
     OUTS( sourcePkgEdition );
@@ -639,82 +639,21 @@ try {
   ///////////////////////////////////////////////////////////////////
 
 
-  Repository repo( satpool.reposFind("openSUSE-10.3-DVD 10.3") );
+  //Repository repo( satpool.reposFind("openSUSE-10.3-DVD 10.3") );
   if(0)//for_( it, repo.solvablesBegin(), repo.solvablesEnd() )
   {
     //testDump( MIL, PoolItem(*it) );
   }
 
-
-  PoolItem pi ( getPi<Package>("CheckHardware",Edition("0.1-1088"),Arch_i586) );
-  MIL << pi << endl;
-  ditest( pi );
-
-
-
-#if 0
-  const LocaleSet & avlocales( ResPool::instance().getAvailableLocales() );
-
-  for_( it, avlocales.begin(), avlocales.end() )
+  for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
   {
-    sat::LocaleSupport myLocale( *it );
+    if ( (*it)->name() != "apparmor" )
+      continue;
+    USR << asKind<Pattern>(*it)->contents() << endl;
 
-    if ( ! myLocale.isRequested() )
-    {
-      MIL << "Will enable support for locale '" << myLocale.locale() << "'." << endl;
-      myLocale.setRequested( true );
-    }
-
-    MIL << "Packages supporting locale '" << myLocale.locale() << "':" << endl;
-    for_( it, myLocale.begin(), myLocale.end() )
-    {
-      // iterate over sat::Solvables
-      // MIL << "  " << *it << endl;
-
-      // or get the PoolItems
-      PoolItem pi(*it);
-      MIL << "  " << pi << endl;
-    }
+    break;
   }
 
-
-//   for_( it, poolItemIterator(myLocale.begin()), poolItemIterator(myLocale.end()) )
-//   {
-    // iterate over PoolItem
-//     MIL << "  " << *it << endl;
-//   }
-#endif
-
-
-
-
-#if 0
-#define POOL_FILTER( N, V ) typeof(makePoolFilter(V)) N( (V) )
-
-  SEC << endl;
-  {
-    POOL_FILTER( pf, &myfilter );
-    std::for_each( pf.begin(), pf.end(), Print() );
-  }
-  {
-    POOL_FILTER( pf, resfilter::ByName("zlib") );
-    std::for_each( pf.begin(), pf.end(), Print() );
-  }
-  SEC << endl;
-  {
-    POOL_FILTER( pf, resfilter::ByName("zlib") );
-    std::for_each( pf.begin(), pf.end(), Print() );
-  }
-  SEC << endl;
-  {
-    POOL_FILTER( pf, or_c( chain( resfilter::ByName("zlib"),
-                                  resfilter::ByKind(ResKind::package) ),
-                           &myfilter )
-               );
-    std::for_each( pf.begin(), pf.end(), Print() );
-  }
-  SEC << endl;
-#endif
 
 
   if ( 0 )

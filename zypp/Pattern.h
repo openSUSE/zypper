@@ -54,13 +54,17 @@ namespace zypp
       std::string order() const;
 
     public:
-      /** Ui hint. */
+      /** Ui hint: included patterns. */
       NameList includes() const;
-      /** Ui hint. */
+
+      /** Ui hint: patterns this one extends. */
       NameList extends() const;
 
-      /** The collection of packages associated with this patch.
-        * This also evaluates the patterns includes/extends relation.
+      /** Ui hint: Dependent packages. */
+      Contents depends() const;
+
+      /** The collection of packages associated with this pattern.
+       * This also evaluates the patterns includes/extends relation.
        */
       Contents contents() const;
 
