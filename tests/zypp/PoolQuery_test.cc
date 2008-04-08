@@ -47,26 +47,31 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
 {
   init_pool();
 }
-/*
+
+/////////////////////////////////////////////////////////////////////////////
+//  0xx basic queries
+/////////////////////////////////////////////////////////////////////////////
+
 // no conditions, default query
 // result: all available resolvables
-BOOST_AUTO_TEST_CASE(pool_query_1)
+BOOST_AUTO_TEST_CASE(pool_query_000)
 {
-  cout << "****1****"  << endl;
+  cout << "****000****"  << endl;
   PoolQuery q;
   cout << q.size() << endl;
   BOOST_CHECK(q.size() == 11451);
-  //!\todo should be 11453 probably according to:
-  // dumpsolv factory.solv factory-nonoss.solv zypp_svn.solv \@System.solv | \
-  // grep '^name:.*\(noarch\|i386\|i586\|i686\|src\)$' | wc -l
+  /**!\todo should be 11453 probably according to:
+   * dumpsolv factory.solv factory-nonoss.solv zypp_svn.solv \@System.solv | \
+   * grep '^name:.*\(noarch\|i386\|i586\|i686\|src\)$' | wc -l
+   */
 }
 
 // default query + one search string
 // q.addString("foo");
 // result: all resolvables having at least one attribute matching foo
-BOOST_AUTO_TEST_CASE(pool_query_2)
+BOOST_AUTO_TEST_CASE(pool_query_001)
 {
-  cout << "****2****"  << endl;
+  cout << "****001****"  << endl;
   PoolQuery q;
   q.addString("zypper");
 
@@ -79,9 +84,9 @@ BOOST_AUTO_TEST_CASE(pool_query_2)
 // should be the same as
 // q.addAttribute(foo); q.addString(bar);
 // result: resolvables with foo containing bar
-BOOST_AUTO_TEST_CASE(pool_query_3)
+BOOST_AUTO_TEST_CASE(pool_query_002)
 {
-  cout << "****3****"  << endl;
+  cout << "****002****"  << endl;
   PoolQuery q;
   q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
@@ -98,58 +103,23 @@ BOOST_AUTO_TEST_CASE(pool_query_3)
   BOOST_CHECK(q1.size() == 6);
 }
 
-
-// default query + one attribute(one string) + one repo
-// q.addRepo(foorepo);
-// q.addAttribute(solvable:name, foo);
-// FAILS
-BOOST_AUTO_TEST_CASE(pool_query_4)
+// kind filter
+BOOST_AUTO_TEST_CASE(pool_query_003)
 {
-  cout << "****4****"  << endl;
+  cout << "****003****"  << endl;
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "zypper");
-  q.addRepo("zypp_svn");
+  q.addString("zypper");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addKind(ResTraits<Package>::kind);
 
   std::for_each(q.begin(), q.end(), &result_cb);
   BOOST_CHECK(q.size() == 3);
 }
 
-BOOST_AUTO_TEST_CASE(pool_query_5)
-{
-  cout << "****5****"  << endl;
-  PoolQuery q;
-  q.addRepo("zypp_svn");
-
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 21);
-}
-
-BOOST_AUTO_TEST_CASE(pool_query_6)
-{
-  cout << "****6****"  << endl;
-  PoolQuery q;
-  q.addString("browser");
-  q.addAttribute(sat::SolvAttr::name);
-  q.addAttribute(sat::SolvAttr::summary);
-  q.addAttribute(sat::SolvAttr::description);
-
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 15);
-
-  cout << endl;
-
-  PoolQuery q1;
-  q1.addString("browser");
-  q1.addAttribute(sat::SolvAttr::name);
-
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 5);
-}
-
 // match exact
-BOOST_AUTO_TEST_CASE(pool_query_7)
+BOOST_AUTO_TEST_CASE(pool_query_004)
 {
-  cout << "****7****"  << endl;
+  cout << "****004****"  << endl;
   PoolQuery q;
   q.addString("vim");
   q.addAttribute(sat::SolvAttr::name);
@@ -167,35 +137,10 @@ BOOST_AUTO_TEST_CASE(pool_query_7)
   BOOST_CHECK(q1.empty());
 }
 
-// match by installed status (basically by system vs. repo)
-BOOST_AUTO_TEST_CASE(pool_query_8)
-{
-  cout << "****8****"  << endl;
-  PoolQuery q;
-  q.addString("zypper");
-  q.addAttribute(sat::SolvAttr::name);
-  q.setMatchExact();
-  q.setInstalledOnly();
-
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 1);
-
-  cout << endl;
-
-  PoolQuery q1;
-  q1.addString("zypper");
-  q1.addAttribute(sat::SolvAttr::name);
-  q1.setMatchExact();
-  q1.setUninstalledOnly();
-
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 5);
-}
-
 // use globs
-BOOST_AUTO_TEST_CASE(pool_query_9)
+BOOST_AUTO_TEST_CASE(pool_query_005)
 {
-  cout << "****9****"  << endl;
+  cout << "****005****"  << endl;
   PoolQuery q;
   q.addString("z?p*");
   q.addAttribute(sat::SolvAttr::name);
@@ -222,11 +167,64 @@ BOOST_AUTO_TEST_CASE(pool_query_9)
   BOOST_CHECK(q2.size() == 28);
 }
 
+// match by installed status (basically by system vs. repo)
+BOOST_AUTO_TEST_CASE(pool_query_006)
+{
+  cout << "****006****"  << endl;
+  PoolQuery q;
+  q.addString("zypper");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchExact();
+  q.setInstalledOnly();
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 1);
+
+  cout << endl;
+
+  PoolQuery q1;
+  q1.addString("zypper");
+  q1.addAttribute(sat::SolvAttr::name);
+  q1.setMatchExact();
+  q1.setUninstalledOnly();
+
+  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.size() == 5);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//  1xx multiple attribute queries
+/////////////////////////////////////////////////////////////////////////////
+
+/*
+BOOST_AUTO_TEST_CASE(pool_query_100)
+{
+  cout << "****100****"  << endl;
+  PoolQuery q;
+  q.addString("browser");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addAttribute(sat::SolvAttr::summary);
+  q.addAttribute(sat::SolvAttr::description);
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 15);
+
+  cout << endl;
+
+  PoolQuery q1;
+  q1.addString("browser");
+  q1.addAttribute(sat::SolvAttr::name);
+
+  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.size() == 5);
+}
+
+
 // multi attr (same value) substring matching (case sensitive and insensitive)
 BOOST_AUTO_TEST_CASE(pool_query_10)
 {
-  cout << "****10****"  << endl;*/
-/*
+  cout << "****10****"  << endl;
+
   PoolQuery q;
   q.addString("SSH");
   q.addAttribute(sat::SolvAttr::name);
@@ -235,9 +233,8 @@ BOOST_AUTO_TEST_CASE(pool_query_10)
 
   std::for_each(q.begin(), q.end(), &result_cb);
   cout << q.size() << endl;
-//  BOOST_CHECK(q.size() == 17);
-*/
-/*
+  BOOST_CHECK(q.size() == 17);
+
   cout << endl;
 
   PoolQuery q2;
@@ -249,8 +246,9 @@ BOOST_AUTO_TEST_CASE(pool_query_10)
 
   std::for_each(q2.begin(), q2.end(), &result_cb);
   cout << q2.size() << endl;
-}*/
-/*
+}
+
+
 // multi attr (same value) glob matching (case sensitive and insensitive)
 BOOST_AUTO_TEST_CASE(pool_query_11)
 {
@@ -266,20 +264,48 @@ BOOST_AUTO_TEST_CASE(pool_query_11)
 //  BOOST_CHECK(q.size() == 11);
 }
 */
-/*
-// kind filter
-BOOST_AUTO_TEST_CASE(pool_query_20)
+
+/////////////////////////////////////////////////////////////////////////////
+//  3xx repo filter queries (addRepo(alias_str))
+/////////////////////////////////////////////////////////////////////////////
+
+// default query + one attribute(one string) + one repo
+BOOST_AUTO_TEST_CASE(pool_query_300)
 {
-  cout << "****20****"  << endl;
+  cout << "****300****"  << endl;
   PoolQuery q;
-  q.addString("zypper");
-  q.addAttribute(sat::SolvAttr::name);
-  q.addKind(ResTraits<Package>::kind);
+  q.addAttribute(sat::SolvAttr::name, "zypper");
+  q.addRepo("zypp_svn");
 
   std::for_each(q.begin(), q.end(), &result_cb);
   BOOST_CHECK(q.size() == 3);
 }
-*/
+
+// default query + one repo
+BOOST_AUTO_TEST_CASE(pool_query_301)
+{
+  cout << "****301****"  << endl;
+  PoolQuery q;
+  q.addRepo("zypp_svn");
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 21);
+}
+
+// multiple repos + one attribute
+BOOST_AUTO_TEST_CASE(pool_query_302)
+{
+  cout << "****302****"  << endl;
+  PoolQuery q;
+  q.addString("ma");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addRepo("factory-nonoss");
+  q.addRepo("zypp_svn");
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 8);
+}
+
 /*
 BOOST_AUTO_TEST_CASE(pool_query_X)
 {

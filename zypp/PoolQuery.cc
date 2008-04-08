@@ -101,7 +101,7 @@ namespace zypp
     
   private:
     void compile();
-    string createRegex(vector<string> & container);
+    string createRegex(StrContainer & container);
 
   public:
     /** Raw search strings. */
@@ -190,13 +190,13 @@ namespace zypp
     //     create regex; store in _rcattrs; flag 'one-attr'; if more strings flag regex;
     else if (_attrs.size() == 1)
     {
-      vector<string> joined;
-      for(vector<string>::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
+      StrContainer joined;
+      for(StrContainer::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
         if (!it->empty())
-          joined.push_back(*it);
-      for(vector<string>::const_iterator it = _attrs.begin()->second.begin(); it != _attrs.begin()->second.end(); ++it)
+          joined.insert(*it);
+      for(StrContainer::const_iterator it = _attrs.begin()->second.begin(); it != _attrs.begin()->second.end(); ++it)
         if (!it->empty())
-          joined.push_back(*it);
+          joined.insert(*it);
       _rcstrings = createRegex(joined);
       _rcattrs.insert(pair<sat::SolvAttr, string>(_attrs.begin()->first, string()));
     }
@@ -208,7 +208,7 @@ namespace zypp
       bool attrvals_empty = true;
       for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
         if (!ai->second.empty())
-          for(vector<string>::const_iterator it = ai->second.begin();
+          for(StrContainer::const_iterator it = ai->second.begin();
               it != ai->second.end(); it++)
             if (!it->empty())
             {
@@ -233,10 +233,10 @@ attremptycheckend:
         if (attrvals_empty)
         {
           // compile the search string
-          vector<string> joined;
-          for(vector<string>::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
+          StrContainer joined;
+          for(StrContainer::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
             if (!it->empty())
-              joined.push_back(*it);
+              joined.insert(*it);
           _rcstrings = createRegex(joined);
 
           // copy the _attrs keys to _rcattrs
@@ -292,7 +292,7 @@ attremptycheckend:
 //! macro for word boundary tags for regexes
 #define WB (_match_word ? string("\\b") : string())
 
-  string PoolQuery::Impl::createRegex(vector<string> & container)
+  string PoolQuery::Impl::createRegex(StrContainer & container)
   {
     string rstr;
 
@@ -310,7 +310,7 @@ attremptycheckend:
     // multiple strings
 
     bool _use_wildcards = (_flags & SEARCH_STRINGMASK) == SEARCH_GLOB;
-    vector<string>::const_iterator it = container.begin();
+    StrContainer::const_iterator it = container.begin();
     string tmp;
 
     if (_use_wildcards)
@@ -435,6 +435,18 @@ attremptycheckend:
     ostringstream o;
 
     o << "compiled: " << _compiled << endl;
+    
+    o << "kinds: ";
+    for(Kinds::const_iterator it = _kinds.begin();
+        it != _kinds.end(); ++it)
+      o << *it << " ";
+    o << endl;
+
+    o << "repos: ";
+    for(StrContainer::const_iterator it = _repos.begin();
+        it != _repos.end(); ++it)
+      o << *it << " ";
+    o << endl;
 
     o << "string match flags:" << endl;
     o << "* string/substring/glob/regex: " << (_flags & SEARCH_STRINGMASK) << endl; 
@@ -445,7 +457,7 @@ attremptycheckend:
     // raw
 
     o << "strings: ";
-    for(vector<string>::const_iterator it = _strings.begin();
+    for(StrContainer::const_iterator it = _strings.begin();
         it != _strings.end(); ++it)
       o << *it << " ";
     o << endl;
@@ -454,7 +466,7 @@ attremptycheckend:
     for(AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
     {
       o << "* " << ai->first << ": ";
-      for(vector<string>::const_iterator vi = ai->second.begin();
+      for(StrContainer::const_iterator vi = ai->second.begin();
           vi != ai->second.end(); ++vi)
         o << *vi << " ";
       o << endl;
@@ -528,6 +540,7 @@ attremptycheckend:
     bool matches = !_do_matching;
     bool in_repo;
     bool drop_by_kind_status = false;
+    bool drop_by_repo = false;
     do
     {
       //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
@@ -537,8 +550,16 @@ attremptycheckend:
       {
         while(1)
         {
+          drop_by_repo = false;
+          if (!_pqimpl->_repos.empty() && 
+            _pqimpl->_repos.find(_rdit->repo->name) == _pqimpl->_repos.end())
+          {
+            drop_by_repo = true;
+            break;
+          }
+
           drop_by_kind_status = false;
-  
+
           // whether to drop an uninstalled (repo) solvable
           if ( (_pqimpl->_status_flags & INSTALLED_ONLY) &&
                _rdit->repo->name != _pool.systemRepoName() )
@@ -546,7 +567,7 @@ attremptycheckend:
             drop_by_kind_status = true;
             break;
           }
-  
+
           // whether to drop an installed (target) solvable
           if ((_pqimpl->_status_flags & UNINSTALLED_ONLY) &&
                _rdit->repo->name == _pool.systemRepoName())
@@ -567,7 +588,7 @@ attremptycheckend:
           break;
         }
 
-        matches = matches && !drop_by_kind_status;
+        matches = matches && !drop_by_kind_status && !drop_by_repo;
       }
 
       if (_do_matching && !drop_by_kind_status)
@@ -582,12 +603,6 @@ attremptycheckend:
               _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
             const IdString & value =
               IdString(_rdit->kv.id);
-
-            //cout << "solvid: " << _sid << " attr: " << attr.asString() << " val: " << value.asString() << endl;
-
-            //string v2(::id2str(_rdit->repo->pool/*_pool.get()*/, _rdit->kv.id));
-            //if (value.asString() != v2)
-            //  cout << "ha! " << value.asString() << "!=" << v2 << endl;
 
             switch(_pqimpl->_flags & SEARCH_STRINGMASK)
             {
@@ -612,7 +627,7 @@ attremptycheckend:
               break;
             default:
               matches = false;
-              ERR << "ivalid string matching type: "
+              ERR << "invalid string matching type: "
                   << (_pqimpl->_flags & SEARCH_STRINGMASK) << endl;
             }
             if (matches)
@@ -622,18 +637,40 @@ attremptycheckend:
         }
       }
 
+      if (drop_by_repo)
+      {
+        Repository nextRepo(Repository(_rdit->repo).nextInPool());
+        ::dataiterator_skip_repo(_rdit);
+        if (nextRepo)
+          ::dataiterator_jump_to_repo(_rdit, nextRepo.get());
+        drop_by_repo = false;
+      }
+      else if (drop_by_kind_status)
+      {
+        ::dataiterator_skip_solvable(_rdit);
+        drop_by_kind_status = false;
+      }
+
       if ((_has_next = ::dataiterator_step(_rdit)))
       {
         new_solvable = _rdit->solvid != _sid;
         if (!in_repo)
-        {
-          INT << "repo start: " << _rdit->repo->start << endl;
           _sid = _rdit->solvid;
-        }
       }
-      // no more attributes/solvables, return
+      // no more attributes in this repo, return
       else
       {
+        // check for more repos to jump to
+        if (!_pqimpl->_repos.empty())
+        {
+          Repository nextRepo(Repository(_rdit->repo).nextInPool());
+          if (nextRepo)
+          {
+            ::dataiterator_jump_to_repo(_rdit, nextRepo.get());
+            _has_next = ::dataiterator_step(_rdit);
+          }
+        }
+
         // did the last solvable match conditions?
         return matches && in_repo;
       }
@@ -660,7 +697,7 @@ attremptycheckend:
 
   void PoolQuery::addRepo(const std::string &repoalias)
   {
-    _pimpl->_repos.push_back(repoalias);
+    _pimpl->_repos.insert(repoalias);
     _pimpl->_flags &= ~SEARCH_ALL_REPOS;
   }
 
@@ -670,11 +707,11 @@ attremptycheckend:
 
 
   void PoolQuery::addString(const string & value)
-  { _pimpl->_strings.push_back(value); }
+  { _pimpl->_strings.insert(value); }
 
 
   void PoolQuery::addAttribute(const sat::SolvAttr & attr, const std::string & value)
-  { _pimpl->_attrs[attr].push_back(value); }
+  { _pimpl->_attrs[attr].insert(value); }
 
 
   void PoolQuery::setCaseSensitive(const bool value)
