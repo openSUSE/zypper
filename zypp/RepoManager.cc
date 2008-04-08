@@ -920,7 +920,7 @@ namespace zypp
     Pathname solvfile = (_pimpl->options.repoCachePath / alias).extend(".solv");
 
     if ( ! PathInfo(solvfile).isExist() )
-      ZYPP_THROW(RepoNotCachedException());
+      ZYPP_THROW(RepoNotCachedException(info));
 
     try
     {
@@ -1013,7 +1013,7 @@ namespace zypp
           ++it )
     {
       if ( info.alias() == (*it).alias() )
-        ZYPP_THROW(RepoAlreadyExistsException(info.alias()));
+        ZYPP_THROW(RepoAlreadyExistsException(info));
     }
 
     RepoInfo tosave = info;
@@ -1071,7 +1071,7 @@ namespace zypp
         if ( (*it).alias() == (*kit).alias() )
         {
           ERR << "To be added repo " << (*it).alias() << " conflicts with existing repo " << (*kit).alias() << endl;
-          ZYPP_THROW(RepoAlreadyExistsException((*it).alias()));
+          ZYPP_THROW(RepoAlreadyExistsException(*it));
         }
       }
     }
@@ -1205,7 +1205,7 @@ namespace zypp
             ++it )
       {
         if ( newinfo.alias() == (*it).alias() )
-          ZYPP_THROW(RepoAlreadyExistsException(newinfo.alias()));
+          ZYPP_THROW(RepoAlreadyExistsException(newinfo));
       }
     }
 

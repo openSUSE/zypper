@@ -212,7 +212,8 @@ namespace zypp
 
       Url url;
 
-      RepoException repo_excpt(str::form(_("Can't provide file '%s' from repository '%s'"),
+      RepoException repo_excpt(repo_r, 
+                            str::form(_("Can't provide file '%s' from repository '%s'"),
                                loc_r.filename().c_str(),
                                repo_r.alias().c_str() ) );
 

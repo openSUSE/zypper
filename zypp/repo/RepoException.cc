@@ -30,12 +30,22 @@ namespace zypp
     : Exception( msg_r )
     {}
 
-    RepoNotCachedException::RepoNotCachedException()
-    : RepoException( "Repository not Cached" )
+    RepoException::RepoException( const RepoInfo & info )
+    : Exception( "Repo exception" ), _info( info )
     {}
 
-    RepoNotCachedException::RepoNotCachedException( const std::string & msg_r )
-    : RepoException( msg_r )
+    RepoException::RepoException( const RepoInfo & info,
+        const std::string& msg_r )
+    : Exception( msg_r ), _info( info )
+    {}
+
+    RepoNotCachedException::RepoNotCachedException( const RepoInfo& info )
+    : RepoException( info, "Repository not Cached" )
+    {}
+
+    RepoNotCachedException::RepoNotCachedException(  const RepoInfo& info, 
+        const std::string & msg_r )
+    : RepoException( info, msg_r )
     {}
 
 
