@@ -79,17 +79,17 @@ namespace zypp
     public:
 
       /** Query class for Patch issue references */
-      class ReferenceIterator
+      class ReferenceIterator;
       /**
        * Get an iterator to the beginning of the patch
        * references. \see Patch::ReferenceIterator
        */
-      Patch::ReferenceIterator referencesBegin() const;
+      ReferenceIterator referencesBegin() const;
       /**
        * Get an iterator to the end of the patch
        * references. \see Patch::ReferenceIterator
        */
-      Patch::ReferenceIterator referencesEnd() const;
+      ReferenceIterator referencesEnd() const;
 
 
     public:
