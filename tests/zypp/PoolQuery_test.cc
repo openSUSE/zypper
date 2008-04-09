@@ -201,13 +201,18 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
 {
   cout << "****100****"  << endl;
   PoolQuery q;
-  q.addString("mp3");
+  /* This string is found sometimes only in solvable names (e.g. novell-lum),
+     sometimes only in summary (e.g. yast2-casa-ats) and sometimes only
+     in descriptions (e.g. beagle-quickfinder).  novell-lum doesn't exist
+     in our test solv file, but let's ignore this.  I didn't find a string
+     with the same characteristics giving fewer matches :-/  */
+  q.addString("novell");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
   std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 73);
+  BOOST_CHECK(q.size() == 74);
 
   cout << endl;
 

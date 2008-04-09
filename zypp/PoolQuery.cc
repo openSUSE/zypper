@@ -601,14 +601,14 @@ attremptycheckend:
           {
             const string & sstr =
               _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
-            const IdString & value =
-              IdString(_rdit->kv.id);
 
             //! \todo pass compiled regex if SEARCH_REGEX
-            matches = dataiterator_match(_rdit, _pqimpl->_flags, sstr.c_str());
+            matches = ::dataiterator_match(_rdit, _pqimpl->_flags, sstr.c_str());
 
             if (matches)
-              INT << "value: " << value.asString() << endl
+	      /* After calling dataiterator_match (with any string matcher set)
+	         the kv.str member will be filled with something sensible.  */
+              INT << "value: " << _rdit->kv.str << endl
                   << " mstr: " <<  sstr << endl; 
           }
         }
