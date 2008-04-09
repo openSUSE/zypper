@@ -70,6 +70,15 @@ namespace sat
   const SolvAttr SolvAttr::patchcategory( SOLVABLE_PATCHCATEGORY );
   const SolvAttr SolvAttr::needReboot   ( UPDATE_REBOOT );
   const SolvAttr SolvAttr::needRestart  ( UPDATE_RESTART );
+  const SolvAttr SolvAttr::updateCollectionName     ( UPDATE_COLLECTION_NAME );
+  const SolvAttr SolvAttr::updateCollectionEvr      ( UPDATE_COLLECTION_EVR );
+  const SolvAttr SolvAttr::updateCollectionArch     ( UPDATE_COLLECTION_ARCH );
+  const SolvAttr SolvAttr::updateCollectionFilename ( UPDATE_COLLECTION_FILENAME );
+  const SolvAttr SolvAttr::updateCollectionFlags    ( UPDATE_COLLECTION_FLAGS );
+  const SolvAttr SolvAttr::updateReferenceType      ( UPDATE_REFERENCE_TYPE );
+  const SolvAttr SolvAttr::updateReferenceHref      ( UPDATE_REFERENCE_HREF );
+  const SolvAttr SolvAttr::updateReferenceId        ( UPDATE_REFERENCE_ID );
+  const SolvAttr SolvAttr::updateReferenceTitle     ( UPDATE_REFERENCE_TITLE );
 
   //pattern
   const SolvAttr SolvAttr::isvisible    ( SOLVABLE_ISVISIBLE );

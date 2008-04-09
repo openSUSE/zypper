@@ -86,13 +86,13 @@ namespace zypp
 
     Patch::ReferenceIterator::ReferenceIterator( const sat::Solvable & val_r )
     {
-        base_reference() = sat::LookupAttr( sat::SolvAttr("update::referenceid"),
+      base_reference() = sat::LookupAttr( sat::SolvAttr::updateReferenceId,
                                             val_r ).begin();
-        _hrefit = sat::LookupAttr( sat::SolvAttr("update::referencehref"),
+      _hrefit = sat::LookupAttr( sat::SolvAttr::updateReferenceHref,
                                    val_r ).begin();
-        _titleit = sat::LookupAttr( sat::SolvAttr("update::referencetitle"),
+      _titleit = sat::LookupAttr( sat::SolvAttr::updateReferenceTitle,
                                     val_r ).begin();
-        _typeit = sat::LookupAttr( sat::SolvAttr("update::referencetype"),
+      _typeit = sat::LookupAttr( sat::SolvAttr::updateReferenceType,
                                    val_r ).begin();
     }
 

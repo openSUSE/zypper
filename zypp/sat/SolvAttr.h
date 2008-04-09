@@ -78,8 +78,17 @@ namespace sat
       static const SolvAttr patchcategory;
       static const SolvAttr needReboot;
       static const SolvAttr needRestart;
-
-      // patern
+      static const SolvAttr updateCollectionName;
+      static const SolvAttr updateCollectionEvr;
+      static const SolvAttr updateCollectionArch;
+      static const SolvAttr updateCollectionFilename;
+      static const SolvAttr updateCollectionFlags;
+      static const SolvAttr updateReferenceType;
+      static const SolvAttr updateReferenceHref;
+      static const SolvAttr updateReferenceId;
+      static const SolvAttr updateReferenceTitle;
+    
+      // pattern
       static const SolvAttr isvisible;
       static const SolvAttr icon;
       static const SolvAttr order;
