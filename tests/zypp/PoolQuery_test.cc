@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(pool_query_004)
 // use globs
 BOOST_AUTO_TEST_CASE(pool_query_005)
 {
-  cout << "****005****"  << endl;
+  cout << "****005.1****"  << endl;
   PoolQuery q;
   q.addString("z?p*");
   q.addAttribute(sat::SolvAttr::name);
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   std::for_each(q.begin(), q.end(), &result_cb);
   BOOST_CHECK(q.size() == 11);
 
-  cout << endl;
+  cout << "****005.2****"  << endl;
 
   PoolQuery q1;
   q1.addString("*zypp*");
@@ -159,6 +159,8 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   std::for_each(q1.begin(), q1.end(), &result_cb);
   BOOST_CHECK(q1.size() == 28);
 
+  cout << "****005.3****"  << endl;
+
   // should be the same as above
   PoolQuery q2;
   q2.addString("zypp");
@@ -167,10 +169,44 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   BOOST_CHECK(q2.size() == 28);
 }
 
-// match by installed status (basically by system vs. repo)
+// use regex
 BOOST_AUTO_TEST_CASE(pool_query_006)
 {
-  cout << "****006****"  << endl;
+  cout << "****006.1***"  << endl;
+
+  // should be the same as 005 1
+  PoolQuery q;
+  q.addString("^z.p.*");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchRegex();
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 11);
+
+  cout << "****006.2***"  << endl;
+
+  PoolQuery q1;
+  q1.addString("zypper|smart");
+  q1.addAttribute(sat::SolvAttr::name);
+  q1.setMatchRegex();
+
+  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.size() == 21);
+
+  cout << "****006.3***"  << endl;
+
+  // invalid regex
+  PoolQuery q2;
+  q2.addString("zypp\\");
+  q2.setMatchRegex();
+  BOOST_CHECK_THROW(q2.size(), Exception);
+}
+
+
+// match by installed status (basically by system vs. repo)
+BOOST_AUTO_TEST_CASE(pool_query_050)
+{
+  cout << "****050****"  << endl;
   PoolQuery q;
   q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
@@ -263,7 +299,6 @@ BOOST_AUTO_TEST_CASE(pool_query_102)
   q.setMatchGlob();
 
   std::for_each(q.begin(), q.end(), &result_cb);
-  cout << q.size() <<  endl;
   BOOST_CHECK(q.size() == 35);
 }
 

@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <fnmatch.h>
 
+#include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/DefaultIntegral.h"
@@ -418,6 +419,10 @@ attremptycheckend:
         _flags);
     }
 
+    if ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit.regex_err != 0)
+      ZYPP_THROW(Exception(
+        str::form(_("Invalid regular expression '%s'"), _rcstrings.c_str())));
+
     PoolQuery::ResultIterator it(this);
     it.increment();
     return it;
@@ -701,13 +706,13 @@ attremptycheckend:
 
 
   void PoolQuery::setMatchSubstring()
-  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
   void PoolQuery::setMatchExact()
-  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_STRING; }
   void PoolQuery::setMatchRegex()
-  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_REGEX; }
   void PoolQuery::setMatchGlob()
-  { _pimpl->_flags |= (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_GLOB; }
+  { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_GLOB; }
   void PoolQuery::setMatchWord()
   {
     _pimpl->_match_word = true;
