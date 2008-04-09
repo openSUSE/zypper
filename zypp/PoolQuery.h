@@ -53,13 +53,12 @@ namespace zypp
 
     /** Query result accessers. */
     //@{
-
     class ResultIterator;
 
     /** */
-    ResultIterator begin();
+    ResultIterator begin() const;
     /** */
-    ResultIterator end();
+    ResultIterator end() const;
     /** */
     bool empty();
     /** */
@@ -298,7 +297,7 @@ namespace zypp
     friend class boost::iterator_core_access;
     friend class PoolQuery;
 
-    ResultIterator(Impl * pqimpl);
+    ResultIterator(const Impl * pqimpl);
 
     sat::Solvable dereference() const
     {
@@ -324,7 +323,7 @@ namespace zypp
   private:
     //! \todo clean up this mess
     ::_Dataiterator * _rdit;
-    PoolQuery::Impl * _pqimpl;
+    const PoolQuery::Impl * _pqimpl;
     /*SolvableId*/ int _sid;
     bool _has_next;
     const CompiledAttrMap & _attrs;
