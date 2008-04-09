@@ -276,7 +276,7 @@ Helper::itemToString (PoolItem item, bool shortVersion)
 
 	string alias = item->repoInfo().alias();
 	if (!alias.empty()
-	    && alias != "@system")
+	    && alias != "@System")
 	{
 	    os << '[' << alias << ']';
 	}

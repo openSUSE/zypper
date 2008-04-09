@@ -76,7 +76,7 @@ InterProcessMutex::InterProcessMutex( const Options &poptions )
             _fd.reset( new Fd( lock_file, O_RDWR ) );
             if ( !_fd->isOpen() )
             {
-                ZYPP_THROW(Exception(str::form(_("It %d, Can't open lock file: %s"), k, strerror(errno))));
+                ZYPP_THROW(Exception(str::form(_("Can't open lock file: %s"), strerror(errno))));
             }
             
             memset(&lock, 0, sizeof(struct flock));

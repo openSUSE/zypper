@@ -98,10 +98,10 @@ namespace zypp
 
     void Repository::setInfo( const RepoInfo & info_r )
     {
-	NO_REPOSITORY_THROW( Exception( _("Can't set RepoInfo for norepo.") ) );
+	NO_REPOSITORY_THROW( Exception( "Can't set RepoInfo for norepo." ) );
 	if ( info_r.alias() != name() )
 	{
-	    ZYPP_THROW( Exception( str::form( _("RepoInfo alias (%s) does not match repository name (%s)"),
+	    ZYPP_THROW( Exception( str::form( "RepoInfo alias (%s) does not match repository name (%s)",
 					      info_r.alias().c_str(), name().c_str() ) ) );
 	}
 	myPool().setRepoInfo( _repo, info_r );
@@ -142,24 +142,24 @@ namespace zypp
 #warning NEED POOL MANIP EXEPTIONS
     void Repository::addSolv( const Pathname & file_r )
     {
-	NO_REPOSITORY_THROW( Exception( _("Can't add solvables to norepo.") ) );
+	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo." ) );
 
 	AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
 	if ( file == NULL )
 	{
 	    file.resetDispose();
-	    ZYPP_THROW( Exception( _("Can't open solv-file: ")+file_r.asString() ) );
+	    ZYPP_THROW( Exception( "Can't open solv-file: "+file_r.asString() ));
 	}
 
 	if ( myPool()._addSolv( _repo, file, isSystemRepo() ) != 0 )
 	{
-	    ZYPP_THROW( Exception( _("Error reading solv-file: ")+file_r.asString() ) );
+	    ZYPP_THROW( Exception( "Error reading solv-file: "+file_r.asString() ));
 	}
     }
 
     sat::detail::SolvableIdType Repository::addSolvables( unsigned count_r )
     {
-	NO_REPOSITORY_THROW( Exception( _("Can't add solvables to norepo.") ) );
+	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo.") );
 	return myPool()._addSolvables( _repo, count_r );
     }
 

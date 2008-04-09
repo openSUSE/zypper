@@ -724,7 +724,7 @@ namespace zypp
           config("vsep_pathparam").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          _("Path parameter parsing not supported for this URL")
+          "Path parameter parsing not supported for this URL"
         ));
       }
       zypp::url::ParamMap pmap;
@@ -1181,7 +1181,7 @@ namespace zypp
           config("vsep_pathparam").empty())
       {
         ZYPP_THROW(UrlNotSupportedException(
-          _("Path Parameter parsing not supported for this URL")
+          "Path Parameter parsing not supported for this URL"
         ));
       }
       setPathParams(
