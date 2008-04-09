@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Apr  9 21:24:54 CEST 2008 - ma@suse.de
+
+- Enable ui::Selectable lookup by Solvable/PoolItem in ResPoolProxy.
+- Add SolvIterMixin: Base class providing PoolItem_iterator and 
+  Selectable_iterator iterator types based on a Solvable iterator.
+- Enhanced WhatProvides and SolvableSet to PoolItem_iterator to offer
+  PoolItem_iterator and Selectable_iterator.
+- Add Solvable::SplitIdent: Helper class that splits an identifier 
+  into kind and name.
+- Provide methods Pattern::contents returning a collection of packages 
+  associated with the pattern/patch.
+- revision 9496
+
+-------------------------------------------------------------------
 Tue Apr  8 15:50:48 CEST 2008 - jreidinger@suse.cz
 
 - add comparing to PoolQuery

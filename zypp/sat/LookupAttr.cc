@@ -63,6 +63,14 @@ namespace zypp
     bool LookupAttr::empty() const
     { return begin() == end(); }
 
+    LookupAttr::size_type LookupAttr::size() const
+    {
+      size_type c = 0;
+      for_( it, begin(), end() )
+        ++c;
+      return c;
+    }
+
     std::ostream & operator<<( std::ostream & str, const LookupAttr & obj )
     {
       if ( obj.attr() == SolvAttr::noAttr )

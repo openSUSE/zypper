@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Solvable.h"
+#include "zypp/sat/SolvIterMixin.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,6 +26,11 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+
+    namespace detail
+    {
+      class WhatProvidesIterator;
+    }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -78,7 +84,8 @@ namespace zypp
      * }
      * \endcode
      */
-    class WhatProvides : protected detail::PoolMember
+    class WhatProvides : public SolvIterMixin<WhatProvides,detail::WhatProvidesIterator>,
+                         protected detail::PoolMember
     {
       public:
         typedef Solvable  value_type;
@@ -111,7 +118,7 @@ namespace zypp
         size_type size() const;
 
       public:
-        class const_iterator;
+        typedef detail::WhatProvidesIterator const_iterator;
 
         /** Iterator pointing to the first \ref Solvable. */
         const_iterator begin() const;
@@ -128,14 +135,16 @@ namespace zypp
     /** \relates WhatProvides Stream output */
     std::ostream & operator<<( std::ostream & str, const WhatProvides & obj );
 
+    namespace detail
+    {
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : WhatProvides::const_iterator
     //
     /** \ref WhatProvides iterator.
      */
-    class WhatProvides::const_iterator : public boost::iterator_adaptor<
-          const_iterator               // Derived
+    class WhatProvidesIterator : public boost::iterator_adaptor<
+          WhatProvidesIterator         // Derived
         , const detail::IdType *       // Base
         , const Solvable               // Value
         , boost::forward_traversal_tag // CategoryOrTraversal
@@ -143,12 +152,12 @@ namespace zypp
         >
     {
       public:
-        const_iterator()
-        : const_iterator::iterator_adaptor_( 0 )
+        WhatProvidesIterator()
+        : iterator_adaptor_( 0 )
         {}
 
-        explicit const_iterator( const sat::detail::IdType * _idx )
-        : const_iterator::iterator_adaptor_( _idx )
+        explicit WhatProvidesIterator( const sat::detail::IdType * _idx )
+        : iterator_adaptor_( _idx )
         {}
 
       private:
@@ -169,6 +178,7 @@ namespace zypp
         { ++base_reference(); }
     };
     ///////////////////////////////////////////////////////////////////
+    }
 
     inline WhatProvides::const_iterator WhatProvides::begin() const
     { return const_iterator( _begin ); }

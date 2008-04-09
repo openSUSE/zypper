@@ -36,6 +36,8 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/LocaleSupport.h"
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/SolvableSet.h"
+#include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
 #include <zypp/base/GzStream.h>
@@ -506,34 +508,31 @@ namespace zypp
 {
   namespace sat
   {
-
-
-
   }
 }
 
+void dit( const Pattern::Contents & c_r )
+{
+  {
+  sat::WhatProvides c( Capability("amarok") );
+  INT << c << endl;
+  dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
+  dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
+  dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
+  }
+  {
+  const Pattern::Contents & c( c_r );
+  dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
+  dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
+  dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
+  }
+}
 
 void ditest( sat::Solvable slv_r )
 {
   MIL << slv_r << endl;
-
-  //sat::LookupAttr q( sat::SolvAttr::keywords, slv_r.repository() );
-  sat::LookupAttr q( sat::SolvAttr::allAttr );
-
-  WAR << q << endl;
-  for_( it, q.begin(), q.end() )
-  {
-    WAR << "" << it << endl;
-    const ::_Dataiterator * dip( it.get() );
-
-    switch ( it.solvAttrType() )
-    {
-
-    }
-
-    //it.nextSkipRepo();
-    it.nextSkipSolvable();
- }
+  Package::Ptr   pkg( make<Package>( slv_r ) );
+  dumpRange( DBG, pkg->keywords().begin(), pkg->keywords().end() ) << endl;
   return;
 }
 
@@ -639,18 +638,13 @@ try {
   ///////////////////////////////////////////////////////////////////
 
 
-  //Repository repo( satpool.reposFind("openSUSE-10.3-DVD 10.3") );
-  if(0)//for_( it, repo.solvablesBegin(), repo.solvablesEnd() )
-  {
-    //testDump( MIL, PoolItem(*it) );
-  }
-
   for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
   {
     if ( (*it)->name() != "apparmor" )
       continue;
-    USR << asKind<Pattern>(*it)->contents() << endl;
-
+    Pattern::Contents c( asKind<Pattern>(*it)->contents() );
+    dumpRange( USR, c.begin(), c.end() ) << endl;
+    dit( c );
     break;
   }
 

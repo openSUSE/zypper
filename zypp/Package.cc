@@ -79,10 +79,12 @@ namespace zypp
   ByteCount Package::sourcesize() const
   { return lookupNumAttribute( sat::SolvAttr::sourcesize ); }
 
-  /** */
-#warning DUMMY authors
   std::list<std::string> Package::authors() const
-  { return std::list<std::string>(); }
+  {
+    std::list<std::string> ret;
+    str::split( lookupStrAttribute( sat::SolvAttr::authors ), std::back_inserter(ret), "\n" );
+    return ret;
+  }
 
   /** */
 #warning DUMMY filenames

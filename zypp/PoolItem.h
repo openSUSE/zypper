@@ -160,6 +160,18 @@ namespace zypp
   inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem & rhs )
   { return ! (lhs==rhs); }
 
+  /** Solvable to PoolItem transform functor.
+   * \relates PoolItem
+   * \relates sat::SolvIterMixin
+   */
+  struct asPoolItem
+  {
+    typedef PoolItem result_type;
+
+    PoolItem operator()( const sat::Solvable & solv_r ) const
+    { return PoolItem( solv_r ); }
+  };
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

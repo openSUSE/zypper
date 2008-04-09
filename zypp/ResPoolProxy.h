@@ -46,7 +46,7 @@ namespace zypp
     typedef SelectableIndex::const_iterator const_iterator;
     typedef SelectableIndex::size_type      size_type;
 
-    typedef ResPool::repository_iterator          repository_iterator;
+    typedef ResPool::repository_iterator    repository_iterator;
 
   public:
 
@@ -61,6 +61,24 @@ namespace zypp
 
     /** Dtor */
     ~ResPoolProxy();
+
+  public:
+    /** \name Lookup individual Selectables. */
+    //@{
+    ui::Selectable::Ptr lookup( IdString ident_r ) const
+    { sat::Solvable::SplitIdent id( ident_r ); return lookup( id.kind(), id.name() ); }
+
+    ui::Selectable::Ptr lookup( ResKind kind_r, const std::string & name_r ) const;
+
+    ui::Selectable::Ptr lookup( const sat::Solvable & solv_r ) const
+    { return lookup( solv_r.kind(), solv_r.name() ); }
+
+    ui::Selectable::Ptr lookup( const ResObject::constPtr & resolvable_r ) const
+    { return resolvable_r ? lookup( resolvable_r->satSolvable() ) : ui::Selectable::Ptr(); }
+
+    ui::Selectable::Ptr lookup( const PoolItem & pi_r ) const
+    { return lookup( pi_r.satSolvable() ); }
+    //@}
 
   public:
 

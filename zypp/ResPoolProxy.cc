@@ -136,7 +136,9 @@ namespace zypp
   //
   //	CLASS NAME : ResPoolProxy::Impl
   //
-  /** ResPoolProxy implementation. */
+  /** ResPoolProxy implementation.
+   * \todo Seedup as it is still using old index
+  */
   struct ResPoolProxy::Impl
   {
   public:
@@ -154,7 +156,18 @@ namespace zypp
     }
 
   public:
+    ui::Selectable::Ptr lookup( ResKind kind_r, const std::string & name_r ) const
+    {
+      SelectableIndex idx( _selPool[kind_r] );
+      for_( it, idx.begin(), idx.end() )
+      {
+        if ( (*it)->name() == name_r )
+          return *it;
+      }
+      return ui::Selectable::Ptr();
+    }
 
+  public:
     bool empty( const ResObject::Kind & kind_r ) const
     { return _selPool[kind_r].empty(); }
 
@@ -254,6 +267,9 @@ namespace zypp
   // forward to implementation
   //
   ///////////////////////////////////////////////////////////////////
+
+  ui::Selectable::Ptr ResPoolProxy::lookup( ResKind kind_r, const std::string & name_r ) const
+  { return _pimpl->lookup( kind_r, name_r ); }
 
   bool ResPoolProxy::empty( const ResObject::Kind & kind_r ) const
   { return _pimpl->empty( kind_r ); }

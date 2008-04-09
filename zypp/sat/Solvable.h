@@ -209,6 +209,21 @@ namespace zypp
         /** Return next Solvable in \ref Repo (or \ref noSolvable). */
         Solvable nextInRepo() const;
 
+        /** Helper that splits an identifier into kind and name.
+         * \see \ref ident
+        */
+        class SplitIdent
+        {
+          public:
+            SplitIdent() {}
+            SplitIdent( IdString ident_r );
+            ResKind      kind() const { return _kind; }
+            std::string  name() const { return _name; }
+          private:
+            ResKind      _kind;
+            std::string  _name;
+        };
+
       public:
         /** Expert backdoor. */
         ::_Solvable * get() const;

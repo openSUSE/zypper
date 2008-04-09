@@ -32,6 +32,49 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    Solvable::SplitIdent::SplitIdent( IdString ident_r )
+    {
+      if ( ! ident_r )
+        return;
+
+      const char * ident = ident_r.c_str();
+      const char * sep = ::strchr( ident, ':' );
+
+      // no ':' in package names (hopefully)
+      if ( ! sep )
+      {
+        _kind = ResKind::package;
+        _name = ident_r.asString();
+        return;
+      }
+
+      // save name
+      _name = sep+1;
+      // quick check for well known kinds
+      if ( sep-ident >= 4 )
+      {
+        switch ( ident[3] )
+        {
+#define OUTS(K,S) if ( !::strncmp( ident, ResKind::K.c_str(), S ) ) _kind = ResKind::K
+          //             ----v
+          case 'c': OUTS( patch, 5 );       return; break;
+          case 'd': OUTS( product, 7 );     return; break;
+          case 'i': OUTS( script, 6 );      return; break;
+          case 'k': OUTS( package, 7 );     return; break;
+          case 'm': OUTS( atom, 4 );        return; break;
+          case 'p': OUTS( srcpackage, 10 ); return; break;
+          case 's': OUTS( message, 7 );     return; break;
+          case 't': OUTS( pattern, 7 );     return; break;
+#undef OUTS
+        }
+      }
+
+      // an unknown kind
+      _kind = ResKind( std::string( ident, sep-ident ) );
+    }
+
+    /////////////////////////////////////////////////////////////////
+
     const Solvable Solvable::noSolvable;
 
     /////////////////////////////////////////////////////////////////
@@ -343,7 +386,7 @@ namespace zypp
 
     bool Solvable::isSatisfied() const
     {
-	NO_SOLVABLE_RETURN( false );	
+	NO_SOLVABLE_RETURN( false );
 	if (solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get()) == 1)
 	    return true;
 	else

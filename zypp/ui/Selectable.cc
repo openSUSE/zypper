@@ -22,6 +22,8 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(Selectable);
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Selectable::Selectable
@@ -80,12 +82,12 @@ namespace zypp
 
     Selectable::available_iterator Selectable::availableBegin() const
     { return _pimpl->availableBegin(); }
-    
+
     Selectable::available_iterator Selectable::availableEnd() const
     { return _pimpl->availableEnd(); }
 
     ////////////////////////////////////////////////////////////////////////
-   
+
     bool Selectable::installedEmpty() const
     { return _pimpl->installedEmpty(); }
 
@@ -103,7 +105,7 @@ namespace zypp
 
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
-      
+
 
 
     ResStatus::TransactByValue Selectable::modifiedBy() const

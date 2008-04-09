@@ -70,6 +70,9 @@ namespace zypp
      */
     class LookupAttr
     {
+     public:
+       typedef unsigned size_type;
+
       public:
         /** Default ctor finds nothing. */
         LookupAttr()
@@ -103,6 +106,11 @@ namespace zypp
 
         /** Whether the query is empty. */
         bool empty() const;
+
+        /** Ammount of results.
+         * \note This is not a cheap call. It runs the query.
+        */
+        size_type size() const;
 
         /** TransformIterator returning an \ref iterator vaue of type \c _ResultT. */
         template<class _ResultT, class _AttrT> class transformIterator;

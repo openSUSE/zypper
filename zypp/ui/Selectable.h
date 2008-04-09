@@ -29,6 +29,8 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
+    DEFINE_PTR_TYPE(Selectable);
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Selectable
@@ -109,8 +111,8 @@ namespace zypp
        */
       available_size_type availableSize() const;
 
-      /** 
-       * Number of available objects. 
+      /**
+       * Number of available objects.
        * \deprecated Use availableSize
        */
       ZYPP_DEPRECATED available_size_type availableObjs() const
@@ -154,8 +156,8 @@ namespace zypp
       bool hasObject() const
       { return (! installedEmpty()) || candidateObj(); }
 
-      /** 
-       * True if installed object is present. 
+      /**
+       * True if installed object is present.
        * \deprecated Use ! installedEmpty()
        */
       ZYPP_DEPRECATED bool hasInstalledObj() const
@@ -214,7 +216,7 @@ namespace zypp
       //@}
 
     public:
-      /** 
+      /**
        * \name Special inteface for Y2UI.
        * \note This interface acts on \ref ResStatus::USER level.
        * The \ref Status enum, and allowed state transitions are
@@ -225,7 +227,7 @@ namespace zypp
       /** Return the current Status */
       Status status() const;
 
-      /** 
+      /**
        * Try to set a new Status.
        * Returns \c false if the transitions is not allowed.
        */
@@ -264,6 +266,20 @@ namespace zypp
 
     /** \relates Selectable Stream output */
     std::ostream & operator<<( std::ostream & str, const Selectable & obj );
+
+    /** Solvable to Selectable transform functor.
+     * \relates Selectable
+     * \relates sat::SolvIterMixin
+     */
+    struct asSelectable
+    {
+      typedef Selectable_Ptr result_type;
+
+      Selectable_Ptr operator()( const sat::Solvable & solv_r ) const;
+
+      Selectable_Ptr operator()( const PoolItem & pi_r ) const
+      { return operator()( pi_r.satSolvable() ); }
+    };
 
     /////////////////////////////////////////////////////////////////
   } // namespace ui

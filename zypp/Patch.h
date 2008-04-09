@@ -22,10 +22,10 @@ namespace zypp
 
   DEFINE_PTR_TYPE(Patch);
 
-  
-  /** 
+
+  /**
    * Class representing a patch.
-   * 
+   *
    * A patch represents a specific problem that
    * can be fixed by pulling in the patch dependencies.
    *
@@ -44,7 +44,7 @@ namespace zypp
       typedef sat::SolvableSet Contents;
 
     public:
-      /** 
+      /**
        * issue date time
        */
       Date timestamp() const
@@ -61,7 +61,7 @@ namespace zypp
       bool reboot_needed() const;
 
       /**
-       * Does the patch affect the package manager itself? 
+       * Does the patch affect the package manager itself?
        */
       bool affects_pkg_manager() const;
 
@@ -77,68 +77,9 @@ namespace zypp
       Contents contents() const;
 
     public:
-     
-      /**
-       * Query class for Patch issue references
-       * like bugzilla and security issues the
-       * patch is supposed to fix.
-       *
-       * The iterator does not provide a dereference
-       * operator so you can do * on it, but you can
-       * access the attributes of each patch issue reference
-       * directly from the iterator.
-       *
-       * \code
-       * for ( Patch::ReferenceIterator it = patch->referencesBegin();
-       *       it != patch->referencesEnd();
-       *       ++it )
-       * {
-       *   cout << it.href() << endl;
-       * }
-       * \endcode
-       *
-       */
-      class ReferenceIterator : public boost::iterator_adaptor<
-        Patch::ReferenceIterator            // Derived
-        , sat::LookupAttr::iterator         // Base
-        , int                              // Value
-        , boost::forward_traversal_tag     // CategoryOrTraversal
-        , int
-        >
-      {
-      public:
-          ReferenceIterator();
-          explicit ReferenceIterator( const sat::Solvable & val_r );
-          
-          /**
-           * The id of the reference. For bugzilla entries
-           * this is the bug number as a string.
-           */
-          std::string id() const;
-          /**
-           * Url or ponter where to find more information
-           */
-          std::string href() const;
-          /**
-           * Title describing the issue
-           */
-          std::string title() const;
-          /**
-           * Type of the reference. For example
-           * "bugzilla"
-           */
-          std::string type() const;
-      private:
-        friend class boost::iterator_core_access;
 
-        int dereference() const;
-        void increment();
-      private:
-        sat::LookupAttr::iterator _hrefit;
-        sat::LookupAttr::iterator _titleit;
-        sat::LookupAttr::iterator _typeit;
-      };
-
+      /** Query class for Patch issue references */
+      class ReferenceIterator
       /**
        * Get an iterator to the beginning of the patch
        * references. \see Patch::ReferenceIterator
@@ -172,6 +113,74 @@ namespace zypp
       /** Dtor */
       virtual ~Patch();
   };
+
+
+  /**
+   * Query class for Patch issue references
+   * like bugzilla and security issues the
+   * patch is supposed to fix.
+   *
+   * The iterator does not provide a dereference
+   * operator so you can do * on it, but you can
+   * access the attributes of each patch issue reference
+   * directly from the iterator.
+   *
+   * \code
+   * for ( Patch::ReferenceIterator it = patch->referencesBegin();
+   *       it != patch->referencesEnd();
+   *       ++it )
+   * {
+   *   cout << it.href() << endl;
+   * }
+   * \endcode
+   *
+   */
+  class Patch::ReferenceIterator : public boost::iterator_adaptor<
+      Patch::ReferenceIterator           // Derived
+      , sat::LookupAttr::iterator        // Base
+      , int                              // Value
+      , boost::forward_traversal_tag     // CategoryOrTraversal
+      , int
+  >
+  {
+    public:
+      ReferenceIterator() {}
+      explicit ReferenceIterator( const sat::Solvable & val_r );
+
+      /**
+       * The id of the reference. For bugzilla entries
+       * this is the bug number as a string.
+       */
+      std::string id() const;
+      /**
+       * Url or pointer where to find more information
+       */
+      std::string href() const;
+      /**
+       * Title describing the issue
+       */
+      std::string title() const;
+      /**
+       * Type of the reference. For example
+       * "bugzilla"
+       */
+      std::string type() const;
+    private:
+      friend class boost::iterator_core_access;
+
+      int dereference() const { return 0; }
+      void increment();
+    private:
+      sat::LookupAttr::iterator _hrefit;
+      sat::LookupAttr::iterator _titleit;
+      sat::LookupAttr::iterator _typeit;
+  };
+
+  inline Patch::ReferenceIterator Patch::referencesBegin() const
+  { return ReferenceIterator(satSolvable()); }
+
+  inline Patch::ReferenceIterator Patch::referencesEnd() const
+  { return ReferenceIterator(); }
 
   /////////////////////////////////////////////////////////////////
 
