@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 17:06+0100\n"
+"POT-Creation-Date: 2008-03-31 15:30+0200\n"
 "PO-Revision-Date: 2007-09-15 19:06+0200\n"
 "Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -22,14 +22,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/sat/SATResolver.cc:631
+#: ../zypp/sat/SATResolver.cc:757
 #, fuzzy
 msgid ""
 "\n"
 "uninstallable providers: "
 msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"
 
-#: ../zypp/sat/SATResolver.cc:583
+#: ../zypp/media/MediaException.cc:214
+#, c-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+
+#: ../zypp/sat/SATResolver.cc:709
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s je v konflikte s %s"
@@ -48,12 +53,12 @@ msgstr "Inštalácia %s zlyhala."
 msgid "%s installed ok"
 msgstr "%s bol úspešne nainštalovaný"
 
-#: ../zypp/sat/SATResolver.cc:569
+#: ../zypp/sat/SATResolver.cc:695
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "nenainštalovaný"
 
-#: ../zypp/sat/SATResolver.cc:588
+#: ../zypp/sat/SATResolver.cc:714
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s nahrádza %s"
@@ -83,7 +88,7 @@ msgstr "Odstránenie %s zlyhalo"
 msgid "%s remove ok"
 msgstr "%s bol úspešne odstránený"
 
-#: ../zypp/sat/SATResolver.cc:619
+#: ../zypp/sat/SATResolver.cc:745
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -110,7 +115,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1015
+#: ../zypp/RepoManager.cc:1005
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
@@ -131,7 +136,7 @@ msgstr "Afar"
 
 # AF
 #. :ARE:784:
-#: ../zypp/CountryCode.cc:219
+#: ../zypp/CountryCode.cc:226
 msgid "Afghanistan"
 msgstr "Afganistan"
 
@@ -169,12 +174,12 @@ msgstr "Akkadian"
 
 # KY
 #. :ABW:533:
-#: ../zypp/CountryCode.cc:232
+#: ../zypp/CountryCode.cc:239
 msgid "Aland Islands"
 msgstr "Alandské ostrovy"
 
 #. :AIA:660:
-#: ../zypp/CountryCode.cc:222
+#: ../zypp/CountryCode.cc:229
 msgid "Albania"
 msgstr "Albánsko"
 
@@ -189,7 +194,7 @@ msgid "Aleut"
 msgstr "Aleuty"
 
 #. :DOM:214:
-#: ../zypp/CountryCode.cc:277
+#: ../zypp/CountryCode.cc:284
 msgid "Algeria"
 msgstr "Alžírsko"
 
@@ -205,7 +210,7 @@ msgstr "Altaic (Other)"
 
 # AS
 #. :ARG:032:
-#: ../zypp/CountryCode.cc:228
+#: ../zypp/CountryCode.cc:235
 msgid "American Samoa"
 msgstr "Americká Samoa"
 
@@ -215,31 +220,31 @@ msgid "Amharic"
 msgstr "Amharic"
 
 # AD
-#: ../zypp/CountryCode.cc:217
+#: ../zypp/CountryCode.cc:224
 msgid "Andorra"
 msgstr "Andorra"
 
 # AO
 #. :ANT:530:
-#: ../zypp/CountryCode.cc:225
+#: ../zypp/CountryCode.cc:232
 msgid "Angola"
 msgstr "Angola"
 
 # AI
 #. :ATG:028:
-#: ../zypp/CountryCode.cc:221
+#: ../zypp/CountryCode.cc:228
 msgid "Anguilla"
 msgstr "Anguilla"
 
 # AQ
 #. :AGO:024:
-#: ../zypp/CountryCode.cc:226
+#: ../zypp/CountryCode.cc:233
 msgid "Antarctica"
 msgstr "Antarktída"
 
 # AG
 #. :AFG:004:
-#: ../zypp/CountryCode.cc:220
+#: ../zypp/CountryCode.cc:227
 msgid "Antigua and Barbuda"
 msgstr "Antigua a Barbuda"
 
@@ -279,13 +284,13 @@ msgid "Arawak"
 msgstr "Arawak"
 
 #. :ATA:010:
-#: ../zypp/CountryCode.cc:227
+#: ../zypp/CountryCode.cc:234
 msgid "Argentina"
 msgstr "Argentína"
 
 # AM
 #. :ALB:008:
-#: ../zypp/CountryCode.cc:223
+#: ../zypp/CountryCode.cc:230
 msgid "Armenia"
 msgstr "Arménsko"
 
@@ -302,7 +307,7 @@ msgstr "Umelý (ostatné)"
 
 # AW
 #. :AUS:036:
-#: ../zypp/CountryCode.cc:231
+#: ../zypp/CountryCode.cc:238
 msgid "Aruba"
 msgstr "Aruba"
 
@@ -322,7 +327,7 @@ msgid "Athapascan Languages"
 msgstr "Athapascan Languages"
 
 #. :AUT:040:
-#: ../zypp/CountryCode.cc:230
+#: ../zypp/CountryCode.cc:237
 msgid "Australia"
 msgstr "Austrália"
 
@@ -332,7 +337,7 @@ msgid "Australian Languages"
 msgstr "Austrálske jazyky"
 
 #. :ASM:016:
-#: ../zypp/CountryCode.cc:229
+#: ../zypp/CountryCode.cc:236
 msgid "Austria"
 msgstr "Rakúsko"
 
@@ -370,7 +375,7 @@ msgstr "Aymara"
 
 # AZ
 #. :ALA:248:
-#: ../zypp/CountryCode.cc:233
+#: ../zypp/CountryCode.cc:240
 msgid "Azerbaijan"
 msgstr "Azerbajdžan"
 
@@ -390,12 +395,12 @@ msgstr ""
 
 # BS
 #. :BRA:076:
-#: ../zypp/CountryCode.cc:247
+#: ../zypp/CountryCode.cc:254
 msgid "Bahamas"
 msgstr "Bahamy"
 
 #. :BGR:100:
-#: ../zypp/CountryCode.cc:240
+#: ../zypp/CountryCode.cc:247
 msgid "Bahrain"
 msgstr "Bahrajn"
 
@@ -430,7 +435,7 @@ msgid "Banda"
 msgstr "Banda"
 
 #. :BRB:052:
-#: ../zypp/CountryCode.cc:236
+#: ../zypp/CountryCode.cc:243
 msgid "Bangladesh"
 msgstr "Bangladéš"
 
@@ -440,7 +445,7 @@ msgid "Bantu (Other)"
 msgstr "Bantu (ostatné)"
 
 #. :BIH:070:
-#: ../zypp/CountryCode.cc:235
+#: ../zypp/CountryCode.cc:242
 msgid "Barbados"
 msgstr "Barbados"
 
@@ -470,7 +475,7 @@ msgid "Beja"
 msgstr "Beja"
 
 #. :BWA:072:
-#: ../zypp/CountryCode.cc:251
+#: ../zypp/CountryCode.cc:258
 msgid "Belarus"
 msgstr "Bielorusko"
 
@@ -480,13 +485,13 @@ msgid "Belarusian"
 msgstr "Bieloruský"
 
 #. :BGD:050:
-#: ../zypp/CountryCode.cc:237
+#: ../zypp/CountryCode.cc:244
 msgid "Belgium"
 msgstr "Belgicko"
 
 # BZ
 #. :BLR:112:
-#: ../zypp/CountryCode.cc:252
+#: ../zypp/CountryCode.cc:259
 msgid "Belize"
 msgstr "Belize"
 
@@ -502,7 +507,7 @@ msgstr "Bengálsky"
 
 # BJ
 #. :BDI:108:
-#: ../zypp/CountryCode.cc:242
+#: ../zypp/CountryCode.cc:249
 msgid "Benin"
 msgstr "Benin"
 
@@ -512,7 +517,7 @@ msgid "Berber (Other)"
 msgstr "Berber (ostatné)"
 
 #. :BEN:204:
-#: ../zypp/CountryCode.cc:243
+#: ../zypp/CountryCode.cc:250
 msgid "Bermuda"
 msgstr "Bermudy"
 
@@ -523,7 +528,7 @@ msgstr "Bhojpuri"
 
 # BT
 #. :BHS:044:
-#: ../zypp/CountryCode.cc:248
+#: ../zypp/CountryCode.cc:255
 msgid "Bhutan"
 msgstr "Bhutan"
 
@@ -553,13 +558,13 @@ msgid "Blin"
 msgstr "Blin"
 
 #. :BRN:096:
-#: ../zypp/CountryCode.cc:245
+#: ../zypp/CountryCode.cc:252
 msgid "Bolivia"
 msgstr "Bolívia"
 
 # BA
 #. :AZE:031:
-#: ../zypp/CountryCode.cc:234
+#: ../zypp/CountryCode.cc:241
 msgid "Bosnia and Herzegovina"
 msgstr "Bosna a Hercegovina"
 
@@ -570,13 +575,13 @@ msgid "Bosnian"
 msgstr "Bosniansky"
 
 #. :BVT:074:
-#: ../zypp/CountryCode.cc:250
+#: ../zypp/CountryCode.cc:257
 msgid "Botswana"
 msgstr "Botswana"
 
 # BV
 #. :BTN:064:
-#: ../zypp/CountryCode.cc:249
+#: ../zypp/CountryCode.cc:256
 msgid "Bouvet Island"
 msgstr "Bouvet Island"
 
@@ -588,7 +593,7 @@ msgstr "Braj"
 
 # BR
 #. :BOL:068:
-#: ../zypp/CountryCode.cc:246
+#: ../zypp/CountryCode.cc:253
 msgid "Brazil"
 msgstr "Brazilia"
 
@@ -599,20 +604,20 @@ msgstr "Bretónsky"
 
 # IO
 #. :IND:356:
-#: ../zypp/CountryCode.cc:320
+#: ../zypp/CountryCode.cc:327
 msgid "British Indian Ocean Territory"
 msgstr "Britská oblasť Indického oceánu"
 
 # VI
 # fuzzy
 #. :VEN:862:
-#: ../zypp/CountryCode.cc:447
+#: ../zypp/CountryCode.cc:454
 msgid "British Virgin Islands"
 msgstr "Britské Panenské ostrovy"
 
 # BN
 #. :BMU:060:
-#: ../zypp/CountryCode.cc:244
+#: ../zypp/CountryCode.cc:251
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
@@ -621,13 +626,13 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../zypp/RepoManager.cc:720
+#: ../zypp/RepoManager.cc:718
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváram medzipamäť repozitára '%s'"
 
 #. :BFA:854:
-#: ../zypp/CountryCode.cc:239
+#: ../zypp/CountryCode.cc:246
 msgid "Bulgaria"
 msgstr "Bulharsko"
 
@@ -643,7 +648,7 @@ msgstr "Buriat"
 
 # BF
 #. :BEL:056:
-#: ../zypp/CountryCode.cc:238
+#: ../zypp/CountryCode.cc:245
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
@@ -655,7 +660,7 @@ msgstr "Burmese"
 
 # BI
 #. :BHR:048:
-#: ../zypp/CountryCode.cc:241
+#: ../zypp/CountryCode.cc:248
 msgid "Burundi"
 msgstr "Burundi"
 
@@ -666,13 +671,13 @@ msgstr "Caddo"
 
 # KH
 #. :KGZ:417:
-#: ../zypp/CountryCode.cc:330
+#: ../zypp/CountryCode.cc:337
 msgid "Cambodia"
 msgstr "Kambodža"
 
 # CM
 #. :CHL:152:
-#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:269
 msgid "Cameroon"
 msgstr "Kamerun"
 
@@ -685,7 +690,7 @@ msgstr "Nepodarilo sa vytvoriť dočasný súbor %s: %m"
 msgid "Can't acquire the mutex lock"
 msgstr "Nemôžem získať zámok mutexu"
 
-#: ../zypp/Repository.cc:126 ../zypp/Repository.cc:143
+#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
 msgid "Can't add solvables to norepo."
 msgstr ""
 
@@ -728,7 +733,7 @@ msgstr "Nemôžem otvoriť súbor '%1'."
 msgid "Can't open pty (%s)."
 msgstr "Nepodarilo sa otvoriť %s: %m"
 
-#: ../zypp/Repository.cc:132
+#: ../zypp/Repository.cc:136
 #, fuzzy
 msgid "Can't open solv-file: "
 msgstr "Nemôžem otvoriť súbor '%1'."
@@ -751,7 +756,7 @@ msgid "Can't set recursive mutex attribute"
 msgstr "Nemôžem nastaviť rekurzívny mutex"
 
 #. :BLZ:084:
-#: ../zypp/CountryCode.cc:253
+#: ../zypp/CountryCode.cc:260
 msgid "Canada"
 msgstr "Kanada"
 
@@ -776,7 +781,7 @@ msgstr "Nemôžem otvoriť súbor '%1'."
 
 # CV
 #. :CUB:192:
-#: ../zypp/CountryCode.cc:268
+#: ../zypp/CountryCode.cc:275
 msgid "Cape Verde"
 msgstr "Cape Verde"
 
@@ -797,7 +802,7 @@ msgstr "Kaukazský (ostatné)"
 
 # KY
 #. :KWT:414:
-#: ../zypp/CountryCode.cc:337
+#: ../zypp/CountryCode.cc:344
 msgid "Cayman Islands"
 msgstr "Kaimanské ostrovy"
 
@@ -813,7 +818,7 @@ msgstr "Keltský (ostatné)"
 
 # CF
 #. :COD:180:
-#: ../zypp/CountryCode.cc:256
+#: ../zypp/CountryCode.cc:263
 msgid "Central African Republic"
 msgstr "Stredoafrická Republika"
 
@@ -824,7 +829,7 @@ msgstr "Stredoamerický Indiánsky (ostatné)"
 
 # TD
 #. :TCA:796:
-#: ../zypp/CountryCode.cc:423
+#: ../zypp/CountryCode.cc:430
 msgid "Chad"
 msgstr "Čad"
 
@@ -884,12 +889,12 @@ msgid "Chichewa"
 msgstr "Chichewa"
 
 #. :COK:184:
-#: ../zypp/CountryCode.cc:261
+#: ../zypp/CountryCode.cc:268
 msgid "Chile"
 msgstr "Chile"
 
 #. :CMR:120:
-#: ../zypp/CountryCode.cc:263
+#: ../zypp/CountryCode.cc:270
 msgid "China"
 msgstr "Čína"
 
@@ -915,7 +920,7 @@ msgstr "Choctaw"
 
 # CX
 #. :CPV:132:
-#: ../zypp/CountryCode.cc:269
+#: ../zypp/CountryCode.cc:276
 msgid "Christmas Island"
 msgstr "Vianočne ostrovy"
 
@@ -941,12 +946,12 @@ msgstr "Classical Newari"
 
 # CC
 #. :CAN:124:
-#: ../zypp/CountryCode.cc:254
+#: ../zypp/CountryCode.cc:261
 msgid "Cocos (Keeling) Islands"
 msgstr "Kokosové (Keeling) ostrovy"
 
 #. :CHN:156:
-#: ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:271
 msgid "Colombia"
 msgstr "Kolumbia"
 
@@ -967,20 +972,20 @@ msgstr ""
 
 # KM
 #. :KIR:296:
-#: ../zypp/CountryCode.cc:332
+#: ../zypp/CountryCode.cc:339
 msgid "Comoros"
 msgstr "Comoros"
 
 # CG
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "Kongo"
 
 # CK
 #. :CIV:384:
-#: ../zypp/CountryCode.cc:260
+#: ../zypp/CountryCode.cc:267
 msgid "Cook Islands"
 msgstr "Cookove ostrovy"
 
@@ -1000,14 +1005,14 @@ msgid "Corsican"
 msgstr "Korzický"
 
 #. :COL:170:
-#: ../zypp/CountryCode.cc:265
+#: ../zypp/CountryCode.cc:272
 msgid "Costa Rica"
 msgstr "Kostarika"
 
 # CI
 # fuzzy
 #. :CHE:756:
-#: ../zypp/CountryCode.cc:259
+#: ../zypp/CountryCode.cc:266
 msgid "Cote D'Ivoire"
 msgstr "Pobrežie slonoviny"
 
@@ -1047,7 +1052,7 @@ msgid "Crimean Tatar"
 msgstr "Krimský tatársky"
 
 #. :HND:340:
-#: ../zypp/CountryCode.cc:313
+#: ../zypp/CountryCode.cc:320
 msgid "Croatia"
 msgstr "Chorvátsko"
 
@@ -1058,7 +1063,7 @@ msgstr "Chorvátsky"
 
 # CU
 #. :SCG:891:
-#: ../zypp/CountryCode.cc:267
+#: ../zypp/CountryCode.cc:274
 msgid "Cuba"
 msgstr "Kuba"
 
@@ -1069,7 +1074,7 @@ msgstr "Cushitic (ostatné)"
 
 # CY
 #. :CXR:162:
-#: ../zypp/CountryCode.cc:270
+#: ../zypp/CountryCode.cc:277
 msgid "Cyprus"
 msgstr "Cyprus"
 
@@ -1079,7 +1084,7 @@ msgid "Czech"
 msgstr "Český"
 
 #. :CYP:196:
-#: ../zypp/CountryCode.cc:271
+#: ../zypp/CountryCode.cc:278
 msgid "Czech Republic"
 msgstr "Česká Republika"
 
@@ -1109,7 +1114,7 @@ msgid "Delaware"
 msgstr "Delaware"
 
 #. :DJI:262:
-#: ../zypp/CountryCode.cc:274
+#: ../zypp/CountryCode.cc:281
 msgid "Denmark"
 msgstr "Dánsko"
 
@@ -1126,7 +1131,7 @@ msgid "Divehi"
 msgstr "Divehi"
 
 #. :DEU:276:
-#: ../zypp/CountryCode.cc:273
+#: ../zypp/CountryCode.cc:280
 msgid "Djibouti"
 msgstr "Džibuti"
 
@@ -1145,12 +1150,12 @@ msgid "Dogrib"
 msgstr "Dogrib"
 
 #. :DNK:208:
-#: ../zypp/CountryCode.cc:275
+#: ../zypp/CountryCode.cc:282
 msgid "Dominica"
 msgstr "Dominika"
 
 #. :DMA:212:
-#: ../zypp/CountryCode.cc:276
+#: ../zypp/CountryCode.cc:283
 msgid "Dominican Republic"
 msgstr "Dominikánska Republika"
 
@@ -1207,12 +1212,12 @@ msgstr "Dzongkha"
 
 #  Textentry label - lease time for IPs in the range
 #. :TON:776:
-#: ../zypp/CountryCode.cc:432
+#: ../zypp/CountryCode.cc:439
 msgid "East Timor"
 msgstr "Východný Timor"
 
 #. :DZA:012:
-#: ../zypp/CountryCode.cc:278
+#: ../zypp/CountryCode.cc:285
 msgid "Ecuador"
 msgstr "Ekvádor"
 
@@ -1222,7 +1227,7 @@ msgid "Efik"
 msgstr "Efik"
 
 #. :EST:233:
-#: ../zypp/CountryCode.cc:280
+#: ../zypp/CountryCode.cc:287
 msgid "Egypt"
 msgstr "Egypt"
 
@@ -1237,7 +1242,7 @@ msgid "Ekajuk"
 msgstr "Ekajuk"
 
 #. :STP:678:
-#: ../zypp/CountryCode.cc:419
+#: ../zypp/CountryCode.cc:426
 msgid "El Salvador"
 msgstr "El Salvador"
 
@@ -1279,13 +1284,13 @@ msgstr "Staroanglický (r. 450-1100)"
 
 # GQ
 #. :GLP:312:
-#: ../zypp/CountryCode.cc:303
+#: ../zypp/CountryCode.cc:310
 msgid "Equatorial Guinea"
 msgstr "Equatorial Guinea"
 
 # ER
 #. :ESH:732:
-#: ../zypp/CountryCode.cc:282
+#: ../zypp/CountryCode.cc:289
 msgid "Eritrea"
 msgstr "Eritrea"
 
@@ -1295,7 +1300,7 @@ msgstr "Eritrea"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:137
+#: ../zypp/Repository.cc:141
 #, fuzzy
 msgid "Error reading solv-file: "
 msgstr "Chyba pri čítaní repozitárov:"
@@ -1313,7 +1318,7 @@ msgid "Esperanto"
 msgstr "Esperanto"
 
 #. :ECU:218:
-#: ../zypp/CountryCode.cc:279
+#: ../zypp/CountryCode.cc:286
 msgid "Estonia"
 msgstr "Estónsko"
 
@@ -1324,7 +1329,7 @@ msgstr "Estónsky"
 
 # ET
 #. :ESP:724:
-#: ../zypp/CountryCode.cc:284
+#: ../zypp/CountryCode.cc:291
 msgid "Ethiopia"
 msgstr "Etiópia"
 
@@ -1365,7 +1370,7 @@ msgstr "Nepodarilo sa načítať modul \"%s\"."
 
 # FK
 #. :FJI:242:
-#: ../zypp/CountryCode.cc:287
+#: ../zypp/CountryCode.cc:294
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falklandské ostrovy (Malvinas)"
 
@@ -1381,7 +1386,7 @@ msgid "Fanti"
 msgstr "Fanti"
 
 #. :FSM:583:
-#: ../zypp/CountryCode.cc:289
+#: ../zypp/CountryCode.cc:296
 msgid "Faroe Islands"
 msgstr "Faerské ostrovy"
 
@@ -1391,12 +1396,12 @@ msgid "Faroese"
 msgstr "Faroese"
 
 #. :FLK:238:
-#: ../zypp/CountryCode.cc:288
+#: ../zypp/CountryCode.cc:295
 msgid "Federated States of Micronesia"
 msgstr "Federácia Mikronézskych štátov"
 
 #. :FIN:246:
-#: ../zypp/CountryCode.cc:286
+#: ../zypp/CountryCode.cc:293
 msgid "Fiji"
 msgstr "Fidži"
 
@@ -1476,7 +1481,7 @@ msgid "Filipino"
 msgstr "Filipínsky"
 
 #. :ETH:231:
-#: ../zypp/CountryCode.cc:285
+#: ../zypp/CountryCode.cc:292
 msgid "Finland"
 msgstr "Fínsko"
 
@@ -1500,7 +1505,7 @@ msgid "Fon"
 msgstr "Fon"
 
 #. :FRO:234:
-#: ../zypp/CountryCode.cc:290
+#: ../zypp/CountryCode.cc:297
 msgid "France"
 msgstr "Francúzsko"
 
@@ -1512,20 +1517,20 @@ msgstr "Francúzsky"
 # GF
 # fuzzy
 #. :GEO:268:
-#: ../zypp/CountryCode.cc:296
+#: ../zypp/CountryCode.cc:303
 msgid "French Guiana"
 msgstr "Francúzska Guana"
 
 # PF
 #. :PER:604:
-#: ../zypp/CountryCode.cc:386
+#: ../zypp/CountryCode.cc:393
 msgid "French Polynesia"
 msgstr "Francúzska Polynézia"
 
 # TF
 # fuzzy
 #. :TCD:148:
-#: ../zypp/CountryCode.cc:424
+#: ../zypp/CountryCode.cc:431
 msgid "French Southern Territories"
 msgstr "Južné Francźske teritóriá"
 
@@ -1561,7 +1566,7 @@ msgstr "Ga"
 
 # GA
 #. :FXX:249:
-#: ../zypp/CountryCode.cc:292
+#: ../zypp/CountryCode.cc:299
 msgid "Gabon"
 msgstr "Gabon"
 
@@ -1577,7 +1582,7 @@ msgstr "Galícijský"
 
 # GM
 #. :GRL:304:
-#: ../zypp/CountryCode.cc:300
+#: ../zypp/CountryCode.cc:307
 msgid "Gambia"
 msgstr "Gambia"
 
@@ -1608,7 +1613,7 @@ msgid "Generally ignore this requirement"
 msgstr "Ignoruj túto požiadavku pre všetky prípady"
 
 #. :GRD:308:
-#: ../zypp/CountryCode.cc:295
+#: ../zypp/CountryCode.cc:302
 msgid "Georgia"
 msgstr "Gruzínsko"
 
@@ -1638,18 +1643,18 @@ msgid "Germanic (Other)"
 msgstr "Nemecký (ostatné)"
 
 #. :CZE:203:
-#: ../zypp/CountryCode.cc:272
+#: ../zypp/CountryCode.cc:279
 msgid "Germany"
 msgstr "Nemecko"
 
 # GH
 #. :GUF:254:
-#: ../zypp/CountryCode.cc:297
+#: ../zypp/CountryCode.cc:304
 msgid "Ghana"
 msgstr "Ghana"
 
 #. :GHA:288:
-#: ../zypp/CountryCode.cc:298
+#: ../zypp/CountryCode.cc:305
 msgid "Gibraltar"
 msgstr "Gibraltár"
 
@@ -1679,7 +1684,7 @@ msgid "Grebo"
 msgstr "Grebo"
 
 #. :GNQ:226:
-#: ../zypp/CountryCode.cc:304
+#: ../zypp/CountryCode.cc:311
 msgid "Greece"
 msgstr "Grécko"
 
@@ -1694,22 +1699,22 @@ msgid "Greek, Modern (1453-)"
 msgstr "Grécky moderný (od r. 1453)"
 
 #. :GIB:292:
-#: ../zypp/CountryCode.cc:299
+#: ../zypp/CountryCode.cc:306
 msgid "Greenland"
 msgstr "Grónsko"
 
 #. :GBR:826:
-#: ../zypp/CountryCode.cc:294
+#: ../zypp/CountryCode.cc:301
 msgid "Grenada"
 msgstr "Granada"
 
 #. :GIN:324:
-#: ../zypp/CountryCode.cc:302
+#: ../zypp/CountryCode.cc:309
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
 #. :GTM:320:
-#: ../zypp/CountryCode.cc:307
+#: ../zypp/CountryCode.cc:314
 msgid "Guam"
 msgstr "Guam"
 
@@ -1719,19 +1724,19 @@ msgid "Guarani"
 msgstr "Guarani"
 
 #. :SGS:239:
-#: ../zypp/CountryCode.cc:306
+#: ../zypp/CountryCode.cc:313
 msgid "Guatemala"
 msgstr "Guatemala"
 
 # GN
 #. :GMB:270:
-#: ../zypp/CountryCode.cc:301
+#: ../zypp/CountryCode.cc:308
 msgid "Guinea"
 msgstr "Guinea"
 
 # GW
 #. :GUM:316:
-#: ../zypp/CountryCode.cc:308
+#: ../zypp/CountryCode.cc:315
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
@@ -1743,7 +1748,7 @@ msgstr "Gujarati"
 
 # GY
 #. :GNB:624:
-#: ../zypp/CountryCode.cc:309
+#: ../zypp/CountryCode.cc:316
 msgid "Guyana"
 msgstr "Guyana"
 
@@ -1759,7 +1764,7 @@ msgstr "Haida"
 
 # HT
 #. :HRV:191:
-#: ../zypp/CountryCode.cc:314
+#: ../zypp/CountryCode.cc:321
 msgid "Haiti"
 msgstr "Haiti"
 
@@ -1774,15 +1779,15 @@ msgstr "Haitian"
 msgid "Hal Exception"
 msgstr "Výnimka HAL"
 
-#: ../zypp/target/hal/HalContext.cc:96
+#: ../zypp/target/hal/HalContext.cc:94
 msgid "HalContext not connected"
 msgstr "HalContext nie je pripojený"
 
-#: ../zypp/target/hal/HalContext.cc:106
+#: ../zypp/target/hal/HalContext.cc:104
 msgid "HalDrive not initialized"
 msgstr "Jednotka HalDrive nie je inicializovaná"
 
-#: ../zypp/target/hal/HalContext.cc:116
+#: ../zypp/target/hal/HalContext.cc:114
 msgid "HalVolume not initialized"
 msgstr "Jednotka HalVolume nie je inicializovaná"
 
@@ -1799,7 +1804,7 @@ msgstr "Havajský"
 # HM
 # fuzzy
 #. :HKG:344:
-#: ../zypp/CountryCode.cc:311
+#: ../zypp/CountryCode.cc:318
 msgid "Heard Island and McDonald Islands"
 msgstr "Heardove a McDonaldove ostrovy"
 
@@ -1853,17 +1858,17 @@ msgstr "Hmong"
 # VA
 # fuzzy
 #. :UZB:860:
-#: ../zypp/CountryCode.cc:444
+#: ../zypp/CountryCode.cc:451
 msgid "Holy See (Vatican City State)"
 msgstr "Mestský Štát Vatikán"
 
 #. :HMD:334:
-#: ../zypp/CountryCode.cc:312
+#: ../zypp/CountryCode.cc:319
 msgid "Honduras"
 msgstr "Honduras"
 
 #. :GUY:328:
-#: ../zypp/CountryCode.cc:310
+#: ../zypp/CountryCode.cc:317
 msgid "Hong Kong"
 msgstr "Hongkong"
 
@@ -1873,7 +1878,7 @@ msgid "Hungarian"
 msgstr "Maďarský"
 
 #. :HTI:332:
-#: ../zypp/CountryCode.cc:315
+#: ../zypp/CountryCode.cc:322
 msgid "Hungary"
 msgstr "Maďarsko"
 
@@ -1890,7 +1895,7 @@ msgid "Iban"
 msgstr "Iban"
 
 #. :IRN:364:
-#: ../zypp/CountryCode.cc:323
+#: ../zypp/CountryCode.cc:330
 msgid "Iceland"
 msgstr "Island"
 
@@ -1948,7 +1953,7 @@ msgid "Inari Sami"
 msgstr "Inari Sami"
 
 #. :ISR:376:
-#: ../zypp/CountryCode.cc:319
+#: ../zypp/CountryCode.cc:326
 msgid "India"
 msgstr "India"
 
@@ -1963,7 +1968,7 @@ msgid "Indo-European (Other)"
 msgstr "Indoeurópsky (ostatné)"
 
 #. :HUN:348:
-#: ../zypp/CountryCode.cc:316
+#: ../zypp/CountryCode.cc:323
 msgid "Indonesia"
 msgstr "Indonézia"
 
@@ -2074,7 +2079,7 @@ msgstr "Neplatné meno používateľa alebo heslo."
 # IR
 # fuzzy
 #. :IRQ:368:
-#: ../zypp/CountryCode.cc:322
+#: ../zypp/CountryCode.cc:329
 msgid "Iran"
 msgstr "Irák"
 
@@ -2084,12 +2089,12 @@ msgid "Iranian (Other)"
 msgstr "Iránsky (ostatné)"
 
 #. :IOT:086:
-#: ../zypp/CountryCode.cc:321
+#: ../zypp/CountryCode.cc:328
 msgid "Iraq"
 msgstr "Irak"
 
 #. :IDN:360:
-#: ../zypp/CountryCode.cc:317
+#: ../zypp/CountryCode.cc:324
 msgid "Ireland"
 msgstr "Írsko"
 
@@ -2114,9 +2119,14 @@ msgid "Iroquoian Languages"
 msgstr "Iroquoian Languages"
 
 #. :IRL:372:
-#: ../zypp/CountryCode.cc:318
+#: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "Izrael"
+
+#: ../zypp/base/InterProcessMutex.cc:68
+#, fuzzy, c-format
+msgid "It %d, Can't open lock file: %s"
+msgstr "Nemôžem otvoriť súbor '%1'."
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2124,17 +2134,17 @@ msgid "Italian"
 msgstr "Taliansky"
 
 #. :ISL:352:
-#: ../zypp/CountryCode.cc:324
+#: ../zypp/CountryCode.cc:331
 msgid "Italy"
 msgstr "Taliansko"
 
 #. :ITA:380:
-#: ../zypp/CountryCode.cc:325
+#: ../zypp/CountryCode.cc:332
 msgid "Jamaica"
 msgstr "Jamajka"
 
 #. :JOR:400:
-#: ../zypp/CountryCode.cc:327
+#: ../zypp/CountryCode.cc:334
 msgid "Japan"
 msgstr "Japonsko"
 
@@ -2149,7 +2159,7 @@ msgid "Javanese"
 msgstr "Jávsky"
 
 #. :JAM:388:
-#: ../zypp/CountryCode.cc:326
+#: ../zypp/CountryCode.cc:333
 msgid "Jordan"
 msgstr "Jordánsko"
 
@@ -2245,7 +2255,7 @@ msgstr "Kazašský"
 # KZ
 # fuzzy
 #. :CYM:136:
-#: ../zypp/CountryCode.cc:338
+#: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Kazachstan"
 
@@ -2255,7 +2265,7 @@ msgstr "Ponechať balíčky"
 
 # KE
 #. :JPN:392:
-#: ../zypp/CountryCode.cc:328
+#: ../zypp/CountryCode.cc:335
 msgid "Kenya"
 msgstr "Keňa"
 
@@ -2301,7 +2311,7 @@ msgstr "Kirgizský"
 
 # KI
 #. :KHM:116:
-#: ../zypp/CountryCode.cc:331
+#: ../zypp/CountryCode.cc:338
 msgid "Kiribati"
 msgstr "Kiribati"
 
@@ -2373,14 +2383,14 @@ msgid "Kutenai"
 msgstr "Kutenai"
 
 #. :KOR:410:
-#: ../zypp/CountryCode.cc:336
+#: ../zypp/CountryCode.cc:343
 msgid "Kuwait"
 msgstr "Kuvajt"
 
 # KG
 # fuzzy
 #. :KEN:404:
-#: ../zypp/CountryCode.cc:329
+#: ../zypp/CountryCode.cc:336
 msgid "Kyrgyzstan"
 msgstr "Kyrgyzstan"
 
@@ -2408,7 +2418,7 @@ msgstr "Lao"
 # CD
 # fuzzy
 #. :KAZ:398:
-#: ../zypp/CountryCode.cc:339
+#: ../zypp/CountryCode.cc:346
 msgid "Lao People's Democratic Republic"
 msgstr "Ľudová Demoratická Republika Laos"
 
@@ -2418,7 +2428,7 @@ msgid "Latin"
 msgstr "Latinský"
 
 #. :LUX:442:
-#: ../zypp/CountryCode.cc:348
+#: ../zypp/CountryCode.cc:355
 msgid "Latvia"
 msgstr "Lotyšsko"
 
@@ -2428,13 +2438,13 @@ msgid "Latvian"
 msgstr "Lotyšský"
 
 #. :LAO:418:
-#: ../zypp/CountryCode.cc:340
+#: ../zypp/CountryCode.cc:347
 msgid "Lebanon"
 msgstr "Libanon"
 
 # LS
 #. :LBR:430:
-#: ../zypp/CountryCode.cc:345
+#: ../zypp/CountryCode.cc:352
 msgid "Lesotho"
 msgstr "Lesotho"
 
@@ -2445,19 +2455,19 @@ msgstr "Lezghian"
 
 # LR
 #. :LKA:144:
-#: ../zypp/CountryCode.cc:344
+#: ../zypp/CountryCode.cc:351
 msgid "Liberia"
 msgstr "Liberia"
 
 # LY
 # fuzzy
 #. :LVA:428:
-#: ../zypp/CountryCode.cc:349
+#: ../zypp/CountryCode.cc:356
 msgid "Libya"
 msgstr "Liberia"
 
 #. :LCA:662:
-#: ../zypp/CountryCode.cc:342
+#: ../zypp/CountryCode.cc:349
 msgid "Liechtenstein"
 msgstr "Lichtenštajnsko"
 
@@ -2473,7 +2483,7 @@ msgid "Lingala"
 msgstr "Lingala"
 
 #. :LSO:426:
-#: ../zypp/CountryCode.cc:346
+#: ../zypp/CountryCode.cc:353
 msgid "Lithuania"
 msgstr "Litva"
 
@@ -2538,7 +2548,7 @@ msgid "Lushai"
 msgstr "Lushai"
 
 #. :LTU:440:
-#: ../zypp/CountryCode.cc:347
+#: ../zypp/CountryCode.cc:354
 msgid "Luxembourg"
 msgstr "Luxemburgsko"
 
@@ -2548,12 +2558,12 @@ msgid "Luxembourgish"
 msgstr "Luxemburský"
 
 #. :MNG:496:
-#: ../zypp/CountryCode.cc:359
+#: ../zypp/CountryCode.cc:366
 msgid "Macao"
 msgstr "Makao"
 
 #. :MHL:584:
-#: ../zypp/CountryCode.cc:355
+#: ../zypp/CountryCode.cc:362
 msgid "Macedonia"
 msgstr "Macedónsko"
 
@@ -2564,7 +2574,7 @@ msgstr "Macedónsky"
 
 # MG
 #. :MDA:498:
-#: ../zypp/CountryCode.cc:353
+#: ../zypp/CountryCode.cc:360
 msgid "Madagascar"
 msgstr "Madagaskar"
 
@@ -2598,7 +2608,7 @@ msgstr "Malagasy"
 
 # MW
 #. :MDV:462:
-#: ../zypp/CountryCode.cc:367
+#: ../zypp/CountryCode.cc:374
 msgid "Malawi"
 msgstr "Malawi"
 
@@ -2613,14 +2623,14 @@ msgid "Malayalam"
 msgstr "Malayalam"
 
 #. :MEX:484:
-#: ../zypp/CountryCode.cc:369
+#: ../zypp/CountryCode.cc:376
 msgid "Malaysia"
 msgstr "Malajzia"
 
 # MV
 # fuzzy
 #. :MUS:480:
-#: ../zypp/CountryCode.cc:366
+#: ../zypp/CountryCode.cc:373
 msgid "Maldives"
 msgstr "Mali"
 
@@ -2630,12 +2640,12 @@ msgstr ""
 
 # ML
 #. :MKD:807:
-#: ../zypp/CountryCode.cc:356
+#: ../zypp/CountryCode.cc:363
 msgid "Mali"
 msgstr "Mali"
 
 #. :MSR:500:
-#: ../zypp/CountryCode.cc:364
+#: ../zypp/CountryCode.cc:371
 msgid "Malta"
 msgstr "Malta"
 
@@ -2692,7 +2702,7 @@ msgstr "Mari"
 
 # MH
 #. :MDG:450:
-#: ../zypp/CountryCode.cc:354
+#: ../zypp/CountryCode.cc:361
 msgid "Marshall Islands"
 msgstr "Marshallove ostrovy"
 
@@ -2703,7 +2713,7 @@ msgid "Marshallese"
 msgstr "Marshallove ostrovy"
 
 #. :MNP:580:
-#: ../zypp/CountryCode.cc:361
+#: ../zypp/CountryCode.cc:368
 msgid "Martinique"
 msgstr "Martinik"
 
@@ -2720,14 +2730,14 @@ msgstr "Masai"
 
 # MR
 #. :MTQ:474:
-#: ../zypp/CountryCode.cc:362
+#: ../zypp/CountryCode.cc:369
 msgid "Mauritania"
 msgstr "Mauritania"
 
 # MU
 # fuzzy
 #. :MLT:470:
-#: ../zypp/CountryCode.cc:365
+#: ../zypp/CountryCode.cc:372
 msgid "Mauritius"
 msgstr "Maurícius"
 
@@ -2738,7 +2748,7 @@ msgstr "Májske jazyky"
 
 # YT
 #. :YEM:887:
-#: ../zypp/CountryCode.cc:454
+#: ../zypp/CountryCode.cc:461
 msgid "Mayotte"
 msgstr "Mayotte"
 
@@ -2769,12 +2779,12 @@ msgid "Mende"
 msgstr "Mende"
 
 #. :FRA:250:
-#: ../zypp/CountryCode.cc:291
+#: ../zypp/CountryCode.cc:298
 msgid "Metropolitan France"
 msgstr "Metropolitné Francúzko"
 
 #. :MWI:454:
-#: ../zypp/CountryCode.cc:368
+#: ../zypp/CountryCode.cc:375
 msgid "Mexico"
 msgstr "Mexiko"
 
@@ -2816,7 +2826,7 @@ msgid "Moldavian"
 msgstr "Moldavský"
 
 #. :MCO:492:
-#: ../zypp/CountryCode.cc:352
+#: ../zypp/CountryCode.cc:359
 msgid "Moldova"
 msgstr "Moldavsko"
 
@@ -2826,7 +2836,7 @@ msgid "Mon-Khmer (Other)"
 msgstr "Mon-Khmer (ostatné)"
 
 #. :MAR:504:
-#: ../zypp/CountryCode.cc:351
+#: ../zypp/CountryCode.cc:358
 msgid "Monaco"
 msgstr "Monako"
 
@@ -2838,7 +2848,7 @@ msgstr "Mongo"
 
 # MN
 #. :MMR:104:
-#: ../zypp/CountryCode.cc:358
+#: ../zypp/CountryCode.cc:365
 msgid "Mongolia"
 msgstr "Mongólsko"
 
@@ -2850,12 +2860,12 @@ msgstr "Mongolský"
 
 # MS
 #. :MRT:478:
-#: ../zypp/CountryCode.cc:363
+#: ../zypp/CountryCode.cc:370
 msgid "Montserrat"
 msgstr "Montserrat"
 
 #. :LBY:434:
-#: ../zypp/CountryCode.cc:350
+#: ../zypp/CountryCode.cc:357
 msgid "Morocco"
 msgstr "Maroko"
 
@@ -2866,7 +2876,7 @@ msgstr "Mossi"
 
 # MZ
 #. :MYS:458:
-#: ../zypp/CountryCode.cc:370
+#: ../zypp/CountryCode.cc:377
 msgid "Mozambique"
 msgstr "Mozambik"
 
@@ -2882,7 +2892,7 @@ msgstr "Munda languages"
 
 # MM
 #. :MLI:466:
-#: ../zypp/CountryCode.cc:357
+#: ../zypp/CountryCode.cc:364
 msgid "Myanmar"
 msgstr "Myanmar"
 
@@ -2893,13 +2903,13 @@ msgstr "Nahuatl"
 
 # NA
 #. :MOZ:508:
-#: ../zypp/CountryCode.cc:371
+#: ../zypp/CountryCode.cc:378
 msgid "Namibia"
 msgstr "Namíbia"
 
-#. :NPL:524:
 #. language code: nau na
-#: ../zypp/CountryCode.cc:380 ../zypp/LanguageCode.cc:858
+#. :NPL:524:
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -2932,7 +2942,7 @@ msgstr "Neapolitan"
 
 # NP
 #. :NOR:578:
-#: ../zypp/CountryCode.cc:379
+#: ../zypp/CountryCode.cc:386
 msgid "Nepal"
 msgstr "Nepal"
 
@@ -2949,24 +2959,24 @@ msgid "Nepali"
 msgstr "Nepálsky"
 
 #. :NIC:558:
-#: ../zypp/CountryCode.cc:377
+#: ../zypp/CountryCode.cc:384
 msgid "Netherlands"
 msgstr "Holandsko"
 
 # AN
 #. :ARM:051:
-#: ../zypp/CountryCode.cc:224
+#: ../zypp/CountryCode.cc:231
 msgid "Netherlands Antilles"
 msgstr "Holandské Antily"
 
 # NC
 #. :NAM:516:
-#: ../zypp/CountryCode.cc:372
+#: ../zypp/CountryCode.cc:379
 msgid "New Caledonia"
 msgstr "Nová Kaledónia"
 
 #. :NIU:570:
-#: ../zypp/CountryCode.cc:382
+#: ../zypp/CountryCode.cc:389
 msgid "New Zealand"
 msgstr "Nový Zéland"
 
@@ -2980,13 +2990,13 @@ msgid "Nias"
 msgstr "Nias"
 
 #. :NGA:566:
-#: ../zypp/CountryCode.cc:376
+#: ../zypp/CountryCode.cc:383
 msgid "Nicaragua"
 msgstr "Nikaragua"
 
 # NE
 #. :NCL:540:
-#: ../zypp/CountryCode.cc:373
+#: ../zypp/CountryCode.cc:380
 msgid "Niger"
 msgstr "Nigér"
 
@@ -2997,7 +3007,7 @@ msgstr "Nigérisjko-Kordofanský (ostatné)"
 
 # NG
 #. :NFK:574:
-#: ../zypp/CountryCode.cc:375
+#: ../zypp/CountryCode.cc:382
 msgid "Nigeria"
 msgstr "Nigéria"
 
@@ -3008,7 +3018,7 @@ msgstr "Nílsko-saharský"
 
 # NU
 #. :NRU:520:
-#: ../zypp/CountryCode.cc:381
+#: ../zypp/CountryCode.cc:388
 msgid "Niue"
 msgstr "Niue"
 
@@ -3018,9 +3028,9 @@ msgstr "Niue"
 msgid "Niuean"
 msgstr "Niuean"
 
-#. Defined CountryCode constants
 #. Defined LanguageCode constants
-#: ../zypp/CountryCode.cc:215 ../zypp/LanguageCode.cc:225
+#. Defined CountryCode constants
+#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Žiadny kód"
 
@@ -3036,7 +3046,7 @@ msgstr "Nogai"
 
 # NF
 #. :NER:562:
-#: ../zypp/CountryCode.cc:374
+#: ../zypp/CountryCode.cc:381
 msgid "Norfolk Island"
 msgstr "Norfolské ostrovy"
 
@@ -3052,13 +3062,13 @@ msgid "North American Indian"
 msgstr "Severoamerický Indiánsky"
 
 #. :KNA:659:
-#: ../zypp/CountryCode.cc:334
+#: ../zypp/CountryCode.cc:341
 msgid "North Korea"
 msgstr "Severná Kórea"
 
 # MP
 #. :MAC:446:
-#: ../zypp/CountryCode.cc:360
+#: ../zypp/CountryCode.cc:367
 msgid "Northern Mariana Islands"
 msgstr "Severné ostrovy Mariana"
 
@@ -3073,7 +3083,7 @@ msgid "Northern Sotho"
 msgstr "Severné Sotho"
 
 #. :NLD:528:
-#: ../zypp/CountryCode.cc:378
+#: ../zypp/CountryCode.cc:385
 msgid "Norway"
 msgstr "Nórsko"
 
@@ -3092,7 +3102,7 @@ msgstr "Nórsky Bokmal"
 msgid "Norwegian Nynorsk"
 msgstr "Nórsky Nynorsk"
 
-#: ../zypp/target/hal/HalContext.cc:843
+#: ../zypp/target/hal/HalContext.cc:828
 msgid "Not a CDROM drive"
 msgstr "Dané zariadenie nie je CDROM mechanika."
 
@@ -3132,7 +3142,7 @@ msgid "Ojibwa"
 msgstr "Ojibwa"
 
 #. :NZL:554:
-#: ../zypp/CountryCode.cc:383
+#: ../zypp/CountryCode.cc:390
 msgid "Oman"
 msgstr "Omán"
 
@@ -3179,12 +3189,12 @@ msgid "Pahlavi"
 msgstr "Pahlavi"
 
 #. :PHL:608:
-#: ../zypp/CountryCode.cc:389
+#: ../zypp/CountryCode.cc:396
 msgid "Pakistan"
 msgstr "Pakistan"
 
 #. :PRT:620:
-#: ../zypp/CountryCode.cc:396
+#: ../zypp/CountryCode.cc:403
 msgid "Palau"
 msgstr "Palau"
 
@@ -3195,7 +3205,7 @@ msgstr "Palauan"
 
 # IO
 #. :PRI:630:
-#: ../zypp/CountryCode.cc:394
+#: ../zypp/CountryCode.cc:401
 msgid "Palestinian Territory"
 msgstr "Palestínske teritórium"
 
@@ -3210,7 +3220,7 @@ msgid "Pampanga"
 msgstr "Pampanga"
 
 #. :OMN:512:
-#: ../zypp/CountryCode.cc:384
+#: ../zypp/CountryCode.cc:391
 msgid "Panama"
 msgstr "Panama"
 
@@ -3231,7 +3241,7 @@ msgstr "Papiamento"
 
 # PG
 #. :PYF:258:
-#: ../zypp/CountryCode.cc:387
+#: ../zypp/CountryCode.cc:394
 msgid "Papua New Guinea"
 msgstr "Papua Nová Guinea"
 
@@ -3241,7 +3251,7 @@ msgid "Papuan (Other)"
 msgstr "Papujský (ostatné)"
 
 #. :PLW:585:
-#: ../zypp/CountryCode.cc:397
+#: ../zypp/CountryCode.cc:404
 msgid "Paraguay"
 msgstr "Paraguaj"
 
@@ -3279,7 +3289,7 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "Perzský starý (r. 600-400 p.n.l.)"
 
 #. :PAN:591:
-#: ../zypp/CountryCode.cc:385
+#: ../zypp/CountryCode.cc:392
 msgid "Peru"
 msgstr "Peru"
 
@@ -3289,7 +3299,7 @@ msgid "Philippine (Other)"
 msgstr "Filipíny (ostatné)"
 
 #. :PNG:598:
-#: ../zypp/CountryCode.cc:388
+#: ../zypp/CountryCode.cc:395
 msgid "Philippines"
 msgstr "Filipíny"
 
@@ -3299,7 +3309,7 @@ msgid "Phoenician"
 msgstr "Phoenician"
 
 #. :SPM:666:
-#: ../zypp/CountryCode.cc:392
+#: ../zypp/CountryCode.cc:399
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
@@ -3309,7 +3319,7 @@ msgid "Pohnpeian"
 msgstr "Pohnpeian"
 
 #. :PAK:586:
-#: ../zypp/CountryCode.cc:390
+#: ../zypp/CountryCode.cc:397
 msgid "Poland"
 msgstr "Poľsko"
 
@@ -3319,7 +3329,7 @@ msgid "Polish"
 msgstr "Poľský"
 
 #. :PSE:275:
-#: ../zypp/CountryCode.cc:395
+#: ../zypp/CountryCode.cc:402
 msgid "Portugal"
 msgstr "Portugalsko"
 
@@ -3339,7 +3349,7 @@ msgid "Provencal, Old (to 1500)"
 msgstr "Provensálsky, starý (do 1500)"
 
 #. :PCN:612:
-#: ../zypp/CountryCode.cc:393
+#: ../zypp/CountryCode.cc:400
 msgid "Puerto Rico"
 msgstr "Portoriko"
 
@@ -3349,7 +3359,7 @@ msgid "Pushto"
 msgstr "Pushto"
 
 #. :PRY:600:
-#: ../zypp/CountryCode.cc:398
+#: ../zypp/CountryCode.cc:405
 msgid "Qatar"
 msgstr "Katar"
 
@@ -3395,7 +3405,7 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relatívna cesta nie je povolená v prípade, že je zadaná autorita"
 
-#: ../zypp/RepoManager.cc:1122
+#: ../zypp/RepoManager.cc:1112
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
@@ -3411,7 +3421,7 @@ msgstr "Chýba vyžadovaný súbor: "
 
 # RE
 #. :QAT:634:
-#: ../zypp/CountryCode.cc:399
+#: ../zypp/CountryCode.cc:406
 msgid "Reunion"
 msgstr "Reunion"
 
@@ -3421,7 +3431,7 @@ msgid "Romance (Other)"
 msgstr "Romance (ostatné)"
 
 #. :REU:638:
-#: ../zypp/CountryCode.cc:400
+#: ../zypp/CountryCode.cc:407
 msgid "Romania"
 msgstr "Rumunsko"
 
@@ -3448,47 +3458,47 @@ msgstr "Ruský"
 
 # RU
 #. :ROU:642:
-#: ../zypp/CountryCode.cc:401
+#: ../zypp/CountryCode.cc:408
 msgid "Russian Federation"
 msgstr "Ruská Federácia"
 
 # RW
 #. :RUS:643:
-#: ../zypp/CountryCode.cc:402
+#: ../zypp/CountryCode.cc:409
 msgid "Rwanda"
 msgstr "Rwanda"
 
 # SH
 #. :SGP:702:
-#: ../zypp/CountryCode.cc:409
+#: ../zypp/CountryCode.cc:416
 msgid "Saint Helena"
 msgstr "Svätá Helena"
 
 # KN
 # fuzzy
 #. :COM:174:
-#: ../zypp/CountryCode.cc:333
+#: ../zypp/CountryCode.cc:340
 msgid "Saint Kitts and Nevis"
 msgstr "Svätý Kitts a Nevis"
 
 # LC
 # fuzzy
 #. :LBN:422:
-#: ../zypp/CountryCode.cc:341
+#: ../zypp/CountryCode.cc:348
 msgid "Saint Lucia"
 msgstr "Svätá Lucia"
 
 # PM
 # fuzzy
 #. :POL:616:
-#: ../zypp/CountryCode.cc:391
+#: ../zypp/CountryCode.cc:398
 msgid "Saint Pierre and Miquelon"
 msgstr "Svätý Pierre a Miquelon"
 
 # VC
 # fuzzy
 #. :VAT:336:
-#: ../zypp/CountryCode.cc:445
+#: ../zypp/CountryCode.cc:452
 msgid "Saint Vincent and the Grenadines"
 msgstr "Svätý Vincent a Grenadíny"
 
@@ -3508,7 +3518,7 @@ msgid "Sami Languages (Other)"
 msgstr "Samské jazyky (ostatné)"
 
 #. :WLF:876:
-#: ../zypp/CountryCode.cc:452
+#: ../zypp/CountryCode.cc:459
 msgid "Samoa"
 msgstr "Samoa"
 
@@ -3519,7 +3529,7 @@ msgstr "Samoan"
 
 # SM
 #. :SLE:694:
-#: ../zypp/CountryCode.cc:414
+#: ../zypp/CountryCode.cc:421
 msgid "San Marino"
 msgstr "San Marino"
 
@@ -3546,7 +3556,7 @@ msgstr "Santali"
 
 # ST
 #. :SUR:740:
-#: ../zypp/CountryCode.cc:418
+#: ../zypp/CountryCode.cc:425
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome a Principe"
 
@@ -3561,7 +3571,7 @@ msgid "Sasak"
 msgstr "Sasak"
 
 #. :RWA:646:
-#: ../zypp/CountryCode.cc:403
+#: ../zypp/CountryCode.cc:410
 msgid "Saudi Arabia"
 msgstr "Saudská Arábia"
 
@@ -3582,12 +3592,12 @@ msgstr "Semitský (ostatné)"
 
 # SN
 #. :SMR:674:
-#: ../zypp/CountryCode.cc:415
+#: ../zypp/CountryCode.cc:422
 msgid "Senegal"
 msgstr "Senegal"
 
 #. :CRI:188:
-#: ../zypp/CountryCode.cc:266
+#: ../zypp/CountryCode.cc:273
 msgid "Serbia and Montenegro"
 msgstr "Srbsko a Čierna hora"
 
@@ -3603,7 +3613,7 @@ msgstr "Serer"
 
 # SC
 #. :SLB:090:
-#: ../zypp/CountryCode.cc:405
+#: ../zypp/CountryCode.cc:412
 msgid "Seychelles"
 msgstr "Seychelles"
 
@@ -3634,7 +3644,7 @@ msgstr "Sidamo"
 
 # SL
 #. :SVK:703:
-#: ../zypp/CountryCode.cc:413
+#: ../zypp/CountryCode.cc:420
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
@@ -3659,7 +3669,7 @@ msgid "Sindhi"
 msgstr "Sindhi"
 
 #. :SWE:752:
-#: ../zypp/CountryCode.cc:408
+#: ../zypp/CountryCode.cc:415
 msgid "Singapore"
 msgstr "Singapur"
 
@@ -3700,12 +3710,12 @@ msgid "Slovak"
 msgstr "Slovenský"
 
 #. :SJM:744:
-#: ../zypp/CountryCode.cc:412
+#: ../zypp/CountryCode.cc:419
 msgid "Slovakia"
 msgstr "Slovensko"
 
 #. :SHN:654:
-#: ../zypp/CountryCode.cc:410
+#: ../zypp/CountryCode.cc:417
 msgid "Slovenia"
 msgstr "Slovinsko"
 
@@ -3721,7 +3731,7 @@ msgstr "Sogdian"
 
 # SB
 #. :SAU:682:
-#: ../zypp/CountryCode.cc:404
+#: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "Solomon ostrovy"
 
@@ -3733,7 +3743,7 @@ msgstr "Somálsky"
 
 # SO
 #. :SEN:686:
-#: ../zypp/CountryCode.cc:416
+#: ../zypp/CountryCode.cc:423
 msgid "Somalia"
 msgstr "Somálsko"
 
@@ -3760,7 +3770,7 @@ msgid "Sotho, Southern"
 msgstr "Sotho, Southern"
 
 #. :MYT:175:
-#: ../zypp/CountryCode.cc:455
+#: ../zypp/CountryCode.cc:462
 msgid "South Africa"
 msgstr "Južná Afrika"
 
@@ -3772,12 +3782,12 @@ msgstr "Juhoamerický Indiánsky (ostatné)"
 # GS
 # fuzzy
 #. :GRC:300:
-#: ../zypp/CountryCode.cc:305
+#: ../zypp/CountryCode.cc:312
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Južna Gergia a Južný Sandwitch ostrov"
 
 #. :PRK:408:
-#: ../zypp/CountryCode.cc:335
+#: ../zypp/CountryCode.cc:342
 msgid "South Korea"
 msgstr "Južná Kórea"
 
@@ -3792,7 +3802,7 @@ msgid "Southern Sami"
 msgstr "Južné Sami"
 
 #. :ERI:232:
-#: ../zypp/CountryCode.cc:283
+#: ../zypp/CountryCode.cc:290
 msgid "Spain"
 msgstr "Španielsko"
 
@@ -3803,12 +3813,12 @@ msgstr "Španielsky"
 
 # LK
 #. :LIE:438:
-#: ../zypp/CountryCode.cc:343
+#: ../zypp/CountryCode.cc:350
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
 #. :SYC:690:
-#: ../zypp/CountryCode.cc:406
+#: ../zypp/CountryCode.cc:413
 msgid "Sudan"
 msgstr "Sudán"
 
@@ -3829,7 +3839,7 @@ msgstr "Sundánsky"
 
 # SR
 #. :SOM:706:
-#: ../zypp/CountryCode.cc:417
+#: ../zypp/CountryCode.cc:424
 msgid "Suriname"
 msgstr "Surinam"
 
@@ -3841,7 +3851,7 @@ msgstr "Susu"
 # SJ
 # fuzzy
 #. :SVN:705:
-#: ../zypp/CountryCode.cc:411
+#: ../zypp/CountryCode.cc:418
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard a Jan Mayen ostrovy"
 
@@ -3859,12 +3869,12 @@ msgstr "Swati"
 
 # SZ
 #. :SYR:760:
-#: ../zypp/CountryCode.cc:421
+#: ../zypp/CountryCode.cc:428
 msgid "Swaziland"
 msgstr "Swazijsko"
 
 #. :SDN:736:
-#: ../zypp/CountryCode.cc:407
+#: ../zypp/CountryCode.cc:414
 msgid "Sweden"
 msgstr "Švédsko"
 
@@ -3874,14 +3884,14 @@ msgid "Swedish"
 msgstr "Švédsky"
 
 #. :COG:178:
-#: ../zypp/CountryCode.cc:258
+#: ../zypp/CountryCode.cc:265
 msgid "Switzerland"
 msgstr "Švajčiarsko"
 
 # SY
 # fuzzy
 #. :SLV:222:
-#: ../zypp/CountryCode.cc:420
+#: ../zypp/CountryCode.cc:427
 msgid "Syria"
 msgstr "Surinam"
 
@@ -3918,7 +3928,7 @@ msgid "Tai (Other)"
 msgstr "Tai (ostatné)"
 
 #. :TUV:798:
-#: ../zypp/CountryCode.cc:436
+#: ../zypp/CountryCode.cc:443
 msgid "Taiwan"
 msgstr "Tajwan"
 
@@ -3928,7 +3938,7 @@ msgid "Tajik"
 msgstr "Tajik"
 
 #. :THA:764:
-#: ../zypp/CountryCode.cc:427
+#: ../zypp/CountryCode.cc:434
 msgid "Tajikistan"
 msgstr "Tadžikistan"
 
@@ -3943,7 +3953,7 @@ msgid "Tamil"
 msgstr "Tamilský"
 
 #. :TWN:158:
-#: ../zypp/CountryCode.cc:437
+#: ../zypp/CountryCode.cc:444
 msgid "Tanzania"
 msgstr "Tanzánia"
 
@@ -3973,9 +3983,13 @@ msgid "Thai"
 msgstr "Thajský"
 
 #. :TGO:768:
-#: ../zypp/CountryCode.cc:426
+#: ../zypp/CountryCode.cc:433
 msgid "Thailand"
 msgstr "Thajsko"
+
+#: ../zypp/base/InterProcessMutex.cc:130
+msgid "This action is being run by another program already."
+msgstr ""
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -3992,6 +4006,11 @@ msgstr "Tigre"
 #: ../zypp/LanguageCode.cc:1118
 msgid "Tigrinya"
 msgstr "Tigrinya"
+
+#: ../zypp/media/MediaException.cc:207
+#, c-format
+msgid "Timeout exceed when access '%s'."
+msgstr ""
 
 #. language code: tem
 #: ../zypp/LanguageCode.cc:1100
@@ -4010,7 +4029,7 @@ msgstr "Tlingit"
 
 # TG
 #. :ATF:260:
-#: ../zypp/CountryCode.cc:425
+#: ../zypp/CountryCode.cc:432
 msgid "Togo"
 msgstr "Togo"
 
@@ -4020,15 +4039,15 @@ msgid "Tok Pisin"
 msgstr "Tok Pisin"
 
 # TK
-#. :TJK:762:
 #. language code: tkl
-#: ../zypp/CountryCode.cc:428 ../zypp/LanguageCode.cc:1122
+#. :TJK:762:
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "Tokelau"
 
 # TO
 #. :TUN:788:
-#: ../zypp/CountryCode.cc:431
+#: ../zypp/CountryCode.cc:438
 msgid "Tonga"
 msgstr "Tonga"
 
@@ -4050,7 +4069,7 @@ msgstr ""
 
 # TT
 #. :TUR:792:
-#: ../zypp/CountryCode.cc:434
+#: ../zypp/CountryCode.cc:441
 msgid "Trinidad and Tobago"
 msgstr "Trinidad a Tobago"
 
@@ -4076,7 +4095,7 @@ msgid "Tumbuka"
 msgstr "Tumbuka"
 
 #. :TKM:795:
-#: ../zypp/CountryCode.cc:430
+#: ../zypp/CountryCode.cc:437
 msgid "Tunisia"
 msgstr "Tunisko"
 
@@ -4086,7 +4105,7 @@ msgid "Tupi Languages"
 msgstr "Tupi Languages"
 
 #. :TLS:626:
-#: ../zypp/CountryCode.cc:433
+#: ../zypp/CountryCode.cc:440
 msgid "Turkey"
 msgstr "Turecko"
 
@@ -4107,21 +4126,21 @@ msgstr "Turkménsky"
 
 # TM
 #. :TKL:772:
-#: ../zypp/CountryCode.cc:429
+#: ../zypp/CountryCode.cc:436
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
 # TC
 # fuzzy
 #. :SWZ:748:
-#: ../zypp/CountryCode.cc:422
+#: ../zypp/CountryCode.cc:429
 msgid "Turks and Caicos Islands"
 msgstr "Ostrovy Turks a Caicos"
 
 # TV
-#. :TTO:780:
 #. language code: tvl
-#: ../zypp/CountryCode.cc:435 ../zypp/LanguageCode.cc:1152
+#. :TTO:780:
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -4142,7 +4161,7 @@ msgstr "Udmurt"
 
 # UG
 #. :UKR:804:
-#: ../zypp/CountryCode.cc:439
+#: ../zypp/CountryCode.cc:446
 msgid "Uganda"
 msgstr "Uganda"
 
@@ -4158,7 +4177,7 @@ msgid "Uighur"
 msgstr "Uighur"
 
 #. :TZA:834:
-#: ../zypp/CountryCode.cc:438
+#: ../zypp/CountryCode.cc:445
 msgid "Ukraine"
 msgstr "Ukrajina"
 
@@ -4176,11 +4195,11 @@ msgstr "Umbundu"
 msgid "Unable to clone Url object"
 msgstr "Daný URL objekt nie je možne klonovať"
 
-#: ../zypp/target/hal/HalContext.cc:208
+#: ../zypp/target/hal/HalContext.cc:206
 msgid "Unable to create dbus connection"
 msgstr "Nie je možné vytvoriť spojenie pomocou dbus"
 
-#: ../zypp/target/hal/HalContext.cc:254
+#: ../zypp/target/hal/HalContext.cc:249
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "Nie je možné inicializovať HAL context - overte či je spustený hald."
 
@@ -4194,24 +4213,24 @@ msgid "Undetermined"
 msgstr "Neurčený"
 
 #. :AND:020:
-#: ../zypp/CountryCode.cc:218
+#: ../zypp/CountryCode.cc:225
 msgid "United Arab Emirates"
 msgstr "Spojené Arabské Emiráty"
 
 #. :GAB:266:
-#: ../zypp/CountryCode.cc:293
+#: ../zypp/CountryCode.cc:300
 msgid "United Kingdom"
 msgstr "Spojené kráľovstvo"
 
 # US
 #. :UMI:581:
-#: ../zypp/CountryCode.cc:441
+#: ../zypp/CountryCode.cc:448
 msgid "United States"
 msgstr "Spojené Štáty"
 
 # UM
 #. :UGA:800:
-#: ../zypp/CountryCode.cc:440
+#: ../zypp/CountryCode.cc:447
 msgid "United States Minor Outlying Islands"
 msgstr "Spojené Štáty Minor Outlying ostrovy"
 
@@ -4292,7 +4311,7 @@ msgid "Url scheme requires path name"
 msgstr "Daná URL schéma vyžaduje zadanú cestu"
 
 #. :USA:840:
-#: ../zypp/CountryCode.cc:442
+#: ../zypp/CountryCode.cc:449
 msgid "Uruguay"
 msgstr "Uruguaj"
 
@@ -4302,7 +4321,7 @@ msgid "Uzbek"
 msgstr "Uzbecký"
 
 #. :URY:858:
-#: ../zypp/CountryCode.cc:443
+#: ../zypp/CountryCode.cc:450
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
@@ -4318,7 +4337,7 @@ msgstr "Na zadanej URL adrese neboli nájdené platné metadáta"
 
 # VU
 #. :VNM:704:
-#: ../zypp/CountryCode.cc:450
+#: ../zypp/CountryCode.cc:457
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
@@ -4328,14 +4347,14 @@ msgid "Venda"
 msgstr "Venda"
 
 #. :VCT:670:
-#: ../zypp/CountryCode.cc:446
+#: ../zypp/CountryCode.cc:453
 msgid "Venezuela"
 msgstr "Venezuela"
 
 # VN
 # fuzzy
 #. :VIR:850:
-#: ../zypp/CountryCode.cc:449
+#: ../zypp/CountryCode.cc:456
 msgid "Vietnam"
 msgstr "Vietnam"
 
@@ -4347,7 +4366,7 @@ msgstr "Vietnamský"
 # VI
 # fuzzy
 #. :VGB:092:
-#: ../zypp/CountryCode.cc:448
+#: ../zypp/CountryCode.cc:455
 msgid "Virgin Islands, U.S."
 msgstr "Panenské ostrovy, U.S."
 
@@ -4374,7 +4393,7 @@ msgstr "Walamo"
 # WF
 # fuzzy
 #. :VUT:548:
-#: ../zypp/CountryCode.cc:451
+#: ../zypp/CountryCode.cc:458
 msgid "Wallis and Futuna"
 msgstr "Wallis a Futuna ostrovy"
 
@@ -4400,7 +4419,7 @@ msgstr "Welšský"
 
 # EH
 #. :EGY:818:
-#: ../zypp/CountryCode.cc:281
+#: ../zypp/CountryCode.cc:288
 msgid "Western Sahara"
 msgstr "Západna Sahara"
 
@@ -4430,7 +4449,7 @@ msgid "Yapese"
 msgstr "Yapese"
 
 #. :WSM:882:
-#: ../zypp/CountryCode.cc:453
+#: ../zypp/CountryCode.cc:460
 msgid "Yemen"
 msgstr "Jemen"
 
@@ -4452,7 +4471,7 @@ msgstr "Yupik Languages"
 
 # ZM
 #. :ZAF:710:
-#: ../zypp/CountryCode.cc:456
+#: ../zypp/CountryCode.cc:463
 msgid "Zambia"
 msgstr "Zambia"
 
@@ -4478,7 +4497,7 @@ msgid "Zhuang"
 msgstr "Zhuang"
 
 #. :ZMB:894:
-#: ../zypp/CountryCode.cc:457
+#: ../zypp/CountryCode.cc:464
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
@@ -4500,17 +4519,17 @@ msgstr "Kontrola aplikovania delta rpm zlyhala."
 msgid "applydeltarpm failed."
 msgstr "Aplikovanie delta rpm zlyhalo."
 
-#: ../zypp/sat/SATResolver.cc:825
+#: ../zypp/sat/SATResolver.cc:951
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:578
+#: ../zypp/sat/SATResolver.cc:704
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "Nie je možné nainštalovať %s"
 
-#: ../zypp/sat/SATResolver.cc:562
+#: ../zypp/sat/SATResolver.cc:688
 #, fuzzy
 msgid "conflicting requests"
 msgstr "Požiadavka pripojenia k: "
@@ -4521,7 +4540,7 @@ msgstr "Požiadavka pripojenia k: "
 msgid "created backup %s"
 msgstr "Bola vytvorená záloha %s"
 
-#: ../zypp/sat/SATResolver.cc:852
+#: ../zypp/sat/SATResolver.cc:978
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Zlyhala inštalácia %s:"
@@ -4533,45 +4552,45 @@ msgstr "Zlyhala inštalácia %s:"
 msgid "delete %s"
 msgstr "odstrániť %s"
 
-#: ../zypp/sat/SATResolver.cc:621
+#: ../zypp/sat/SATResolver.cc:747
 #, fuzzy
 msgid "deleted providers: "
 msgstr "Žiaden balíček neposkytuje %s"
 
-#: ../zypp/sat/SATResolver.cc:773
+#: ../zypp/sat/SATResolver.cc:899
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "Neinštaluj ani neodstraňuj dotknuté balíčky"
 
-#: ../zypp/sat/SATResolver.cc:758
+#: ../zypp/sat/SATResolver.cc:884
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"
 
-#: ../zypp/sat/SATResolver.cc:711
+#: ../zypp/sat/SATResolver.cc:837
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "neinštaluj %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:690 ../zypp/sat/SATResolver.cc:729
+#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
 msgid "do not install %s"
 msgstr "neinštaluj %s"
 
-#: ../zypp/sat/SATResolver.cc:785
+#: ../zypp/sat/SATResolver.cc:911
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/sat/SATResolver.cc:811
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "nenainštalovaný"
 
-#: ../zypp/sat/SATResolver.cc:818
+#: ../zypp/sat/SATResolver.cc:944
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "Aktualizujem %s na %s"
@@ -4583,7 +4602,7 @@ msgstr "Aktualizujem %s na %s"
 msgid "install %s"
 msgstr "nainštalovať %s"
 
-#: ../zypp/sat/SATResolver.cc:832
+#: ../zypp/sat/SATResolver.cc:958
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4593,37 +4612,37 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:706 ../zypp/sat/SATResolver.cc:743
+#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
 msgstr "ponechať %s"
 
-#: ../zypp/target/hal/HalContext.cc:224
+#: ../zypp/target/hal/HalContext.cc:219
 msgid "libhal_ctx_new: Can't create libhal context"
 msgstr "libhal_ctx_new: Nie je možné vytvoriť libhal context"
 
-#: ../zypp/target/hal/HalContext.cc:239
+#: ../zypp/target/hal/HalContext.cc:234
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: Nie je možné nastaviť spojenie s dbus"
 
-#: ../zypp/sat/SATResolver.cc:573
+#: ../zypp/sat/SATResolver.cc:699
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s je vyžadovaný balíčkom %s"
 
-#: ../zypp/sat/SATResolver.cc:565
+#: ../zypp/sat/SATResolver.cc:691
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "Žiaden balíček neposkytuje %s"
 
-#: ../zypp/sat/SATResolver.cc:559
+#: ../zypp/sat/SATResolver.cc:685
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "Problém pri inštalovaní zdrojového balíka %s-%s:"
 
-#: ../zypp/sat/SATResolver.cc:840
+#: ../zypp/sat/SATResolver.cc:966
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
@@ -4664,7 +4683,7 @@ msgstr ""
 "Balíček rpm uložil %s ako %s.\n"
 "Tu je prvých 25 riadkov rozdielov:\n"
 
-#: ../zypp/sat/SATResolver.cc:633
+#: ../zypp/sat/SATResolver.cc:759
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"

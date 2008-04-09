@@ -10,39 +10,46 @@
 # Sári Gábor <saga@tux.hu>, 2000.
 # Steve Varadi <svaradi@usa.com>, 2000.
 # Zoltán Levárdy <pogacsa@programmer.net>, 1999.
-# Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007.
+# Kalman Kemenczy <kkemenczy@novell.com>, 2006, 2007, 2008.
+# Ervin Novak <enovak@novell.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 17:06+0100\n"
-"PO-Revision-Date: 2007-10-12 11:21+0200\n"
+"POT-Creation-Date: 2008-03-31 15:30+0200\n"
+"PO-Revision-Date: 2008-04-03 10:19+0200\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: ../zypp/sat/SATResolver.cc:631
-#, fuzzy
+#: ../zypp/sat/SATResolver.cc:757
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "%s számára nincs telepíthető szolgáltató"
+msgstr ""
+"\n"
+"nem telepíthető szolgáltatók: "
 
-#: ../zypp/sat/SATResolver.cc:583
-#, fuzzy, c-format
+#: ../zypp/media/MediaException.cc:214
+#, c-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr " hiba az SSL-tanúsítvánnyal, ellenőrizze, hogy megfelelő-e a CA tanúsítványa a következőhöz: '%s'."
+
+#: ../zypp/sat/SATResolver.cc:709
+#, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s és %s ütközik"
+msgstr "%s ütközik a(z) %s csomaggal, amit %s biztosít"
 
 #. %s = filename of rpm package
 #. timestamp
 #: ../zypp/target/rpm/RpmDb.cc:2056
 #, c-format
 msgid "%s install failed"
-msgstr "%s telepítése nem sikerült"
+msgstr "%s telepítése meghiúsult"
 
 #. %s = filename of rpm package
 #. timestamp
@@ -52,27 +59,35 @@ msgid "%s installed ok"
 msgstr "%s telepítése OK"
 
 # modules/inst_target_part.ycp:676
-#: ../zypp/sat/SATResolver.cc:569
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:695
+#, c-format
 msgid "%s is not installable"
-msgstr "nincs telepítve"
+msgstr "%s nem telepíthető"
 
-#: ../zypp/sat/SATResolver.cc:588
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:714
+#, c-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s elavulttá teszi a(z) %s csomagot"
+msgstr "%s elavulttá teszi a(z) %s csomagot, amit %s biztosít"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
 #, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s biztosítja a kívánt függőséget, de megváltoztatja a telepített egység architektúráját"
+msgid ""
+"%s provides this dependency, but would change the architecture of the "
+"installed item"
+msgstr ""
+"%s biztosítja a kívánt függőséget, de megváltoztatja a telepített csomag "
+"architektúráját"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
 #, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s biztosítja a kívánt függőséget, de ennek más a gyártója"
+msgid ""
+"%s provides this dependency, but would change the vendor of the installed "
+"item"
+msgstr ""
+"%s biztosítja a kívánt függőséget, de megváltoztatja a telepített csomag "
+"gyártóját"
 
 #. %s = name of rpm package
 #. timestamp
@@ -87,10 +102,10 @@ msgstr "%s eltávolítása meghiúsult"
 msgid "%s remove ok"
 msgstr "%s eltávolítása OK"
 
-#: ../zypp/sat/SATResolver.cc:619
+#: ../zypp/sat/SATResolver.cc:745
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s igényli %s -t, de ez a függőség nem teljesíthető"
 
 #. language code: abk ab
 #: ../zypp/LanguageCode.cc:240
@@ -112,7 +127,7 @@ msgstr "acoli"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1015
+#: ../zypp/RepoManager.cc:1005
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "A(z) '%s' telepítési forrás hozzáadása"
@@ -133,7 +148,7 @@ msgstr "afar"
 
 # AF
 #. :ARE:784:
-#: ../zypp/CountryCode.cc:219
+#: ../zypp/CountryCode.cc:226
 msgid "Afghanistan"
 msgstr "Afganisztán"
 
@@ -170,12 +185,12 @@ msgstr "akkád"
 
 # KY
 #. :ABW:533:
-#: ../zypp/CountryCode.cc:232
+#: ../zypp/CountryCode.cc:239
 msgid "Aland Islands"
 msgstr "Aland-szigetek"
 
 #. :AIA:660:
-#: ../zypp/CountryCode.cc:222
+#: ../zypp/CountryCode.cc:229
 msgid "Albania"
 msgstr "Albánia"
 
@@ -191,7 +206,7 @@ msgid "Aleut"
 msgstr "aleut"
 
 #. :DOM:214:
-#: ../zypp/CountryCode.cc:277
+#: ../zypp/CountryCode.cc:284
 msgid "Algeria"
 msgstr "Algéria"
 
@@ -207,7 +222,7 @@ msgstr "altáji (egyéb)"
 
 # AS
 #. :ARG:032:
-#: ../zypp/CountryCode.cc:228
+#: ../zypp/CountryCode.cc:235
 msgid "American Samoa"
 msgstr "Amerikai Szamoa"
 
@@ -218,31 +233,31 @@ msgid "Amharic"
 msgstr "amhara"
 
 # AD
-#: ../zypp/CountryCode.cc:217
+#: ../zypp/CountryCode.cc:224
 msgid "Andorra"
 msgstr "Andorra"
 
 # AO
 #. :ANT:530:
-#: ../zypp/CountryCode.cc:225
+#: ../zypp/CountryCode.cc:232
 msgid "Angola"
 msgstr "Angola"
 
 # AI
 #. :ATG:028:
-#: ../zypp/CountryCode.cc:221
+#: ../zypp/CountryCode.cc:228
 msgid "Anguilla"
 msgstr "Anguilla"
 
 # AQ
 #. :AGO:024:
-#: ../zypp/CountryCode.cc:226
+#: ../zypp/CountryCode.cc:233
 msgid "Antarctica"
 msgstr "Antarktisz"
 
 # AG
 #. :AFG:004:
-#: ../zypp/CountryCode.cc:220
+#: ../zypp/CountryCode.cc:227
 msgid "Antigua and Barbuda"
 msgstr "Antigua és Barbuda"
 
@@ -286,13 +301,13 @@ msgid "Arawak"
 msgstr "arawak"
 
 #. :ATA:010:
-#: ../zypp/CountryCode.cc:227
+#: ../zypp/CountryCode.cc:234
 msgid "Argentina"
 msgstr "Argentína"
 
 # AM
 #. :ALB:008:
-#: ../zypp/CountryCode.cc:223
+#: ../zypp/CountryCode.cc:230
 msgid "Armenia"
 msgstr "Örményország"
 
@@ -308,7 +323,7 @@ msgstr "mesterséges (egyéb)"
 
 # AW
 #. :AUS:036:
-#: ../zypp/CountryCode.cc:231
+#: ../zypp/CountryCode.cc:238
 msgid "Aruba"
 msgstr "Aruba"
 
@@ -328,7 +343,7 @@ msgid "Athapascan Languages"
 msgstr "athapaszka nyelvek"
 
 #. :AUT:040:
-#: ../zypp/CountryCode.cc:230
+#: ../zypp/CountryCode.cc:237
 msgid "Australia"
 msgstr "Ausztrália"
 
@@ -340,7 +355,7 @@ msgid "Australian Languages"
 msgstr "ausztrál nyelvek"
 
 #. :ASM:016:
-#: ../zypp/CountryCode.cc:229
+#: ../zypp/CountryCode.cc:236
 msgid "Austria"
 msgstr "Ausztria"
 
@@ -377,7 +392,7 @@ msgstr "aymara"
 
 # AZ
 #. :ALA:248:
-#: ../zypp/CountryCode.cc:233
+#: ../zypp/CountryCode.cc:240
 msgid "Azerbaijan"
 msgstr "Azerbajdzsán"
 
@@ -390,20 +405,20 @@ msgstr "azerbajdzsán"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Hibás fájlnév: %s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Hibás csatolási pont"
 
 # BS
 #. :BRA:076:
-#: ../zypp/CountryCode.cc:247
+#: ../zypp/CountryCode.cc:254
 msgid "Bahamas"
 msgstr "Bahama-szigetek"
 
 #. :BGR:100:
-#: ../zypp/CountryCode.cc:240
+#: ../zypp/CountryCode.cc:247
 msgid "Bahrain"
 msgstr "Bahrein"
 
@@ -441,7 +456,7 @@ msgid "Banda"
 msgstr "banda"
 
 #. :BRB:052:
-#: ../zypp/CountryCode.cc:236
+#: ../zypp/CountryCode.cc:243
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
@@ -451,7 +466,7 @@ msgid "Bantu (Other)"
 msgstr "bantu (egyéb)"
 
 #. :BIH:070:
-#: ../zypp/CountryCode.cc:235
+#: ../zypp/CountryCode.cc:242
 msgid "Barbados"
 msgstr "Barbados"
 
@@ -482,7 +497,7 @@ msgid "Beja"
 msgstr "beja"
 
 #. :BWA:072:
-#: ../zypp/CountryCode.cc:251
+#: ../zypp/CountryCode.cc:258
 msgid "Belarus"
 msgstr "Fehéroroszország"
 
@@ -493,13 +508,13 @@ msgid "Belarusian"
 msgstr "belorusz"
 
 #. :BGD:050:
-#: ../zypp/CountryCode.cc:237
+#: ../zypp/CountryCode.cc:244
 msgid "Belgium"
 msgstr "Belgium"
 
 # BZ
 #. :BLR:112:
-#: ../zypp/CountryCode.cc:252
+#: ../zypp/CountryCode.cc:259
 msgid "Belize"
 msgstr "Belize"
 
@@ -515,7 +530,7 @@ msgstr "bengáli"
 
 # BJ
 #. :BDI:108:
-#: ../zypp/CountryCode.cc:242
+#: ../zypp/CountryCode.cc:249
 msgid "Benin"
 msgstr "Benin"
 
@@ -525,7 +540,7 @@ msgid "Berber (Other)"
 msgstr "berber (egyéb)"
 
 #. :BEN:204:
-#: ../zypp/CountryCode.cc:243
+#: ../zypp/CountryCode.cc:250
 msgid "Bermuda"
 msgstr "Bermuda"
 
@@ -536,7 +551,7 @@ msgstr "bhodzspuri"
 
 # BT
 #. :BHS:044:
-#: ../zypp/CountryCode.cc:248
+#: ../zypp/CountryCode.cc:255
 msgid "Bhutan"
 msgstr "Bhutan"
 
@@ -566,13 +581,13 @@ msgid "Blin"
 msgstr "blin"
 
 #. :BRN:096:
-#: ../zypp/CountryCode.cc:245
+#: ../zypp/CountryCode.cc:252
 msgid "Bolivia"
 msgstr "Bolívia"
 
 # BA
 #. :AZE:031:
-#: ../zypp/CountryCode.cc:234
+#: ../zypp/CountryCode.cc:241
 msgid "Bosnia and Herzegovina"
 msgstr "Bosznia és Hercegovina"
 
@@ -583,13 +598,13 @@ msgid "Bosnian"
 msgstr "bosnyák"
 
 #. :BVT:074:
-#: ../zypp/CountryCode.cc:250
+#: ../zypp/CountryCode.cc:257
 msgid "Botswana"
 msgstr "Botswana"
 
 # BV
 #. :BTN:064:
-#: ../zypp/CountryCode.cc:249
+#: ../zypp/CountryCode.cc:256
 msgid "Bouvet Island"
 msgstr "Bouvet-sziget"
 
@@ -601,7 +616,7 @@ msgstr "bradzs"
 
 # BR
 #. :BOL:068:
-#: ../zypp/CountryCode.cc:246
+#: ../zypp/CountryCode.cc:253
 msgid "Brazil"
 msgstr "Brazília"
 
@@ -613,20 +628,20 @@ msgstr "breton"
 
 # IO
 #. :IND:356:
-#: ../zypp/CountryCode.cc:320
+#: ../zypp/CountryCode.cc:327
 msgid "British Indian Ocean Territory"
 msgstr "Brit indiai-óceáni terület"
 
 # VI
 # fuzzy
 #. :VEN:862:
-#: ../zypp/CountryCode.cc:447
+#: ../zypp/CountryCode.cc:454
 msgid "British Virgin Islands"
 msgstr "Brit Virgin-szigetek"
 
 # BN
 #. :BMU:060:
-#: ../zypp/CountryCode.cc:244
+#: ../zypp/CountryCode.cc:251
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
@@ -636,13 +651,13 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "buginéz"
 
-#: ../zypp/RepoManager.cc:720
+#: ../zypp/RepoManager.cc:718
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "A(z) '%s' telepítési forrás gyorsítótárának felépítése"
 
 #. :BFA:854:
-#: ../zypp/CountryCode.cc:239
+#: ../zypp/CountryCode.cc:246
 msgid "Bulgaria"
 msgstr "Bulgária"
 
@@ -659,7 +674,7 @@ msgstr "burját"
 
 # BF
 #. :BEL:056:
-#: ../zypp/CountryCode.cc:238
+#: ../zypp/CountryCode.cc:245
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
@@ -670,7 +685,7 @@ msgstr "burmai"
 
 # BI
 #. :BHR:048:
-#: ../zypp/CountryCode.cc:241
+#: ../zypp/CountryCode.cc:248
 msgid "Burundi"
 msgstr "Burundi"
 
@@ -681,49 +696,48 @@ msgstr "caddo"
 
 # KH
 #. :KGZ:417:
-#: ../zypp/CountryCode.cc:330
+#: ../zypp/CountryCode.cc:337
 msgid "Cambodia"
 msgstr "Kambodzsa"
 
 # CM
 #. :CHL:152:
-#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:269
 msgid "Cameroon"
 msgstr "Kamerun"
 
 #: ../zypp/sat/detail/PoolImpl.cc:100
-#, fuzzy
 msgid "Can not create sat-pool."
-msgstr "Nem hozható létre a fájl."
+msgstr "Nem hozható létre sat-pool."
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "A mutex zárolás sikertelen"
 
-#: ../zypp/Repository.cc:126 ../zypp/Repository.cc:143
+#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
 msgid "Can't add solvables to norepo."
-msgstr ""
+msgstr "A feloldhatók hozzáadása a norepo-hoz sikertelen."
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr ""
+msgstr "A könyvtár '/'-ra váltása a chroot-ban sikertelen (%s)."
 
 #: ../zypp/ExternalProgram.cc:238
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "A chroot sikertelen ide: '%s' (%s)."
 
 #. don't want to get here
 #: ../zypp/ExternalProgram.cc:259
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "'%s' végrehajtása sikertelen (%s)."
 
 #: ../zypp/ExternalProgram.cc:267
-#, fuzzy, c-format
+#, c-format
 msgid "Can't fork (%s)."
-msgstr "%s nem található."
+msgstr "A forkolás sikertelen (%s)."
 
 #: ../zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -734,24 +748,23 @@ msgid "Can't initialize recursive mutex"
 msgstr "Rekurzív mutex attributum inicializációja sikertelen"
 
 #: ../zypp/ExternalProgram.cc:174
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pipe (%s)."
-msgstr "A fájl nem nyitható meg: %1."
+msgstr "A cső nem nyitható meg (%s)."
 
 #: ../zypp/ExternalProgram.cc:163
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pty (%s)."
-msgstr "A fájl megnyitása nem sikerült: %s."
+msgstr "A pty nem nyitható meg (%s)."
 
-#: ../zypp/Repository.cc:132
-#, fuzzy
+#: ../zypp/Repository.cc:136
 msgid "Can't open solv-file: "
-msgstr "A fájl nem nyitható meg: %1."
+msgstr "A solv-fájl nem nyitható meg: "
 
 #: ../zypp/repo/RepoProvideFile.cc:207
-#, fuzzy, c-format
+#, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "A(z) %s programkönyvtárat nem biztosítja a(z) %s telepítési forrás"
+msgstr "A(z) '%s' fájlt nem biztosítja a(z) '%s' telepítési forrás"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -759,40 +772,39 @@ msgstr "A mutex zárolásának feloldása sikertelen"
 
 #: ../zypp/Repository.cc:101
 msgid "Can't set RepoInfo for norepo."
-msgstr ""
+msgstr "A RepoInfo beállítása a norepo-hoz sikertelen."
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
 msgstr "Rekurzív mutex attributum nem állítható be"
 
 #. :BLZ:084:
-#: ../zypp/CountryCode.cc:253
+#: ../zypp/CountryCode.cc:260
 msgid "Canada"
 msgstr "Kanada"
 
 #: ../zypp/KeyRing.cc:276
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "A(z) %s publikus kulcs elkészítése %s kulcstartóból %s fájlba sikertelen"
 
 #: ../zypp/media/MediaException.cc:182
-#, fuzzy
 msgid "Cannot eject any media"
-msgstr "Egyetlen séma sem található."
+msgstr "Nincs kiadható adathordozó"
 
 #: ../zypp/media/MediaException.cc:184
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot eject media '%s'"
-msgstr "A(z) %s nem érhető el: %m\n"
+msgstr "A(z) '%s' adathordozó kiadása sikertelen"
 
 #: ../zypp/media/MediaException.cc:67
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot write file '%s'."
-msgstr "A fájl írása sikertelen: %1."
+msgstr "A fájl írása sikertelen: '%s'."
 
 # CV
 #. :CUB:192:
-#: ../zypp/CountryCode.cc:268
+#: ../zypp/CountryCode.cc:275
 msgid "Cape Verde"
 msgstr "Cape Verde"
 
@@ -814,7 +826,7 @@ msgstr "kaukázusi (egyéb)"
 
 # KY
 #. :KWT:414:
-#: ../zypp/CountryCode.cc:337
+#: ../zypp/CountryCode.cc:344
 msgid "Cayman Islands"
 msgstr "Kajmán-szigetek"
 
@@ -830,7 +842,7 @@ msgstr "kelta (egyéb)"
 
 # CF
 #. :COD:180:
-#: ../zypp/CountryCode.cc:256
+#: ../zypp/CountryCode.cc:263
 msgid "Central African Republic"
 msgstr "Közép-Afrikai Köztársaság"
 
@@ -841,7 +853,7 @@ msgstr "közép-amerikai indián (egyéb)"
 
 # TD
 #. :TCA:796:
-#: ../zypp/CountryCode.cc:423
+#: ../zypp/CountryCode.cc:430
 msgid "Chad"
 msgstr "Csád"
 
@@ -899,12 +911,12 @@ msgid "Chichewa"
 msgstr "csicseva"
 
 #. :COK:184:
-#: ../zypp/CountryCode.cc:261
+#: ../zypp/CountryCode.cc:268
 msgid "Chile"
 msgstr "Chile"
 
 #. :CMR:120:
-#: ../zypp/CountryCode.cc:263
+#: ../zypp/CountryCode.cc:270
 msgid "China"
 msgstr "Kína"
 
@@ -930,7 +942,7 @@ msgstr "choctaw"
 
 # CX
 #. :CPV:132:
-#: ../zypp/CountryCode.cc:269
+#: ../zypp/CountryCode.cc:276
 msgid "Christmas Island"
 msgstr "Karácsony-sziget"
 
@@ -956,46 +968,45 @@ msgstr "klasszikus nevari"
 
 # CC
 #. :CAN:124:
-#: ../zypp/CountryCode.cc:254
+#: ../zypp/CountryCode.cc:261
 msgid "Cocos (Keeling) Islands"
 msgstr "Cocos (Keeling) -szigetek"
 
 #. :CHN:156:
-#: ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:271
 msgid "Colombia"
 msgstr "Kolumbia"
 
 #: ../zypp/ExternalProgram.cc:346
 #, c-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "A parancs visszatérési értéke %d."
 
 #: ../zypp/ExternalProgram.cc:371
-#, fuzzy
 msgid "Command exited with unknown error."
-msgstr "Kapcsolódáskor végrehajtandó parancs"
+msgstr "A parancs végrehajtása ismeretlen hibával leállt."
 
 #: ../zypp/ExternalProgram.cc:366
 #, c-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "A parancs végrehajtását a(z) %d szignál megszakította (%s)."
 
 # KM
 #. :KIR:296:
-#: ../zypp/CountryCode.cc:332
+#: ../zypp/CountryCode.cc:339
 msgid "Comoros"
 msgstr "Comoros"
 
 # CG
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "Kongó"
 
 # CK
 #. :CIV:384:
-#: ../zypp/CountryCode.cc:260
+#: ../zypp/CountryCode.cc:267
 msgid "Cook Islands"
 msgstr "Cook-szigetek"
 
@@ -1016,14 +1027,14 @@ msgid "Corsican"
 msgstr "korzikai"
 
 #. :COL:170:
-#: ../zypp/CountryCode.cc:265
+#: ../zypp/CountryCode.cc:272
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
 # CI
 # fuzzy
 #. :CHE:756:
-#: ../zypp/CountryCode.cc:259
+#: ../zypp/CountryCode.cc:266
 msgid "Cote D'Ivoire"
 msgstr "Elefántcsontpart"
 
@@ -1066,7 +1077,7 @@ msgid "Crimean Tatar"
 msgstr "krími tatár"
 
 #. :HND:340:
-#: ../zypp/CountryCode.cc:313
+#: ../zypp/CountryCode.cc:320
 msgid "Croatia"
 msgstr "Horvátország"
 
@@ -1077,7 +1088,7 @@ msgstr "horvát"
 
 # CU
 #. :SCG:891:
-#: ../zypp/CountryCode.cc:267
+#: ../zypp/CountryCode.cc:274
 msgid "Cuba"
 msgstr "Kuba"
 
@@ -1088,7 +1099,7 @@ msgstr "kusiti (egyéb)"
 
 # CY
 #. :CXR:162:
-#: ../zypp/CountryCode.cc:270
+#: ../zypp/CountryCode.cc:277
 msgid "Cyprus"
 msgstr "Ciprus"
 
@@ -1098,7 +1109,7 @@ msgid "Czech"
 msgstr "Cseh"
 
 #. :CYP:196:
-#: ../zypp/CountryCode.cc:271
+#: ../zypp/CountryCode.cc:278
 msgid "Czech Republic"
 msgstr "Cseh Köztársaság"
 
@@ -1128,7 +1139,7 @@ msgid "Delaware"
 msgstr "delavár"
 
 #. :DJI:262:
-#: ../zypp/CountryCode.cc:274
+#: ../zypp/CountryCode.cc:281
 msgid "Denmark"
 msgstr "Dánia"
 
@@ -1143,7 +1154,7 @@ msgid "Divehi"
 msgstr "divehi"
 
 #. :DEU:276:
-#: ../zypp/CountryCode.cc:273
+#: ../zypp/CountryCode.cc:280
 msgid "Djibouti"
 msgstr "Dzsibuti"
 
@@ -1162,12 +1173,12 @@ msgid "Dogrib"
 msgstr "dogrib"
 
 #. :DNK:208:
-#: ../zypp/CountryCode.cc:275
+#: ../zypp/CountryCode.cc:282
 msgid "Dominica"
 msgstr "Dominika"
 
 #. :DMA:212:
-#: ../zypp/CountryCode.cc:276
+#: ../zypp/CountryCode.cc:283
 msgid "Dominican Republic"
 msgstr "Dominikai Köztársaság"
 
@@ -1178,12 +1189,15 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"Letöltési (curl) hiba: '%s'\n"
+"Hibakód: %s\n"
+"Hibaüzenet: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:84
-#, fuzzy, c-format
+#, c-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "A cél inicializálása meghiúsult:"
+msgstr "A letöltés (curl) inicializálása meghiúsult: '%s'"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1199,7 +1213,7 @@ msgstr "duala"
 #: ../zypp/CheckSum.cc:96
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
+msgstr "'%s' bizonytalan típus %u byte, ellenőrzőösszeg '%s'"
 
 #. language code: dut nld nl
 #: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
@@ -1223,12 +1237,12 @@ msgid "Dzongkha"
 msgstr "dzongha"
 
 #. :TON:776:
-#: ../zypp/CountryCode.cc:432
+#: ../zypp/CountryCode.cc:439
 msgid "East Timor"
 msgstr "Kelet-Timor"
 
 #. :DZA:012:
-#: ../zypp/CountryCode.cc:278
+#: ../zypp/CountryCode.cc:285
 msgid "Ecuador"
 msgstr "Ecuador"
 
@@ -1238,7 +1252,7 @@ msgid "Efik"
 msgstr "efik"
 
 #. :EST:233:
-#: ../zypp/CountryCode.cc:280
+#: ../zypp/CountryCode.cc:287
 msgid "Egypt"
 msgstr "Egyiptom"
 
@@ -1253,7 +1267,7 @@ msgid "Ekajuk"
 msgstr "ekadzsuk"
 
 #. :STP:678:
-#: ../zypp/CountryCode.cc:419
+#: ../zypp/CountryCode.cc:426
 msgid "El Salvador"
 msgstr "Salvador"
 
@@ -1264,16 +1278,15 @@ msgstr "elamit"
 
 #: ../zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "Üres cél a hivatkozásban"
 
 #: ../zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "Üres fájlrendszer a hivatkozásban"
 
 #: ../zypp/media/MediaException.cc:125
-#, fuzzy
 msgid "Empty host name in URI"
-msgstr "Üres CA név."
+msgstr "Üres hosztnév a hivatkozásban"
 
 #: ../zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
@@ -1297,13 +1310,13 @@ msgstr "óangol (kb. 450-1100)"
 
 # GQ
 #. :GLP:312:
-#: ../zypp/CountryCode.cc:303
+#: ../zypp/CountryCode.cc:310
 msgid "Equatorial Guinea"
 msgstr "Egyenlítői Guinea"
 
 # ER
 #. :ESH:732:
-#: ../zypp/CountryCode.cc:282
+#: ../zypp/CountryCode.cc:289
 msgid "Eritrea"
 msgstr "Eritrea"
 
@@ -1311,12 +1324,11 @@ msgstr "Eritrea"
 #: ../zypp/media/MediaException.cc:161
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
+msgstr "Hiba történt a '%s' letöltési (curl) beállításainak beállítása közben:"
 
-#: ../zypp/Repository.cc:137
-#, fuzzy
+#: ../zypp/Repository.cc:141
 msgid "Error reading solv-file: "
-msgstr "Hiba a telepítési forrás olvasásakor:"
+msgstr "Hiba a solv-fájl olvasásakor: "
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1330,7 +1342,7 @@ msgid "Esperanto"
 msgstr "eszperantó"
 
 #. :ECU:218:
-#: ../zypp/CountryCode.cc:279
+#: ../zypp/CountryCode.cc:286
 msgid "Estonia"
 msgstr "Észtország"
 
@@ -1341,7 +1353,7 @@ msgstr "észt"
 
 # ET
 #. :ESP:724:
-#: ../zypp/CountryCode.cc:284
+#: ../zypp/CountryCode.cc:291
 msgid "Ethiopia"
 msgstr "Etiópia"
 
@@ -1357,33 +1369,32 @@ msgid "Ewondo"
 msgstr "evondo"
 
 #: ../zypp/KeyRing.cc:558
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "A virtuális gép elindítása sikertelen."
+msgstr "A kulcs törlése sikertelen."
 
 #: ../zypp/target/rpm/RpmDb.cc:1047
 #, c-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "Nem sikerült a(z) %s fájlból importálni a publikus kulcsot: %s"
 
 #: ../zypp/media/MediaException.cc:31
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Nem sikerült az értelmezés: %s."
+msgstr "Nem sikerült a(z) %s felcsatolása ide: %s"
 
 #: ../zypp/target/rpm/RpmDb.cc:1124
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to remove public key %s: %s"
-msgstr "A publikus kulcs bekérése sikertelen."
+msgstr "A(z) %s publikus kulcs eltávolítása sikertelen: %s"
 
 #: ../zypp/media/MediaException.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to unmount %s"
-msgstr "A(z) \"%s\" modul betöltése nem sikerült."
+msgstr "A(z) %s eltávolítása sikertelen"
 
 # FK
 #. :FJI:242:
-#: ../zypp/CountryCode.cc:287
+#: ../zypp/CountryCode.cc:294
 msgid "Falkland Islands (Malvinas)"
 msgstr "Falkland-szigetek (Malvinas)"
 
@@ -1401,7 +1412,7 @@ msgid "Fanti"
 msgstr "fanti"
 
 #. :FSM:583:
-#: ../zypp/CountryCode.cc:289
+#: ../zypp/CountryCode.cc:296
 msgid "Faroe Islands"
 msgstr "Färöer-szigetek"
 
@@ -1412,12 +1423,12 @@ msgid "Faroese"
 msgstr "färöi"
 
 #. :FLK:238:
-#: ../zypp/CountryCode.cc:288
+#: ../zypp/CountryCode.cc:295
 msgid "Federated States of Micronesia"
 msgstr "Mikronéziai Szövetségi Államok"
 
 #. :FIN:246:
-#: ../zypp/CountryCode.cc:286
+#: ../zypp/CountryCode.cc:293
 msgid "Fiji"
 msgstr "Fidzsi"
 
@@ -1487,9 +1498,9 @@ msgstr ""
 "Ennek ellenére használni kívánja?"
 
 #: ../zypp/media/MediaException.cc:60
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "A(z) %1 fájl nem található tanúsítványtárban."
+msgstr "A(z) '%s' fájl nem található a(z) '%s' adathordozón"
 
 #. language code: fil
 #: ../zypp/LanguageCode.cc:514
@@ -1497,7 +1508,7 @@ msgid "Filipino"
 msgstr "fülöp-szigeteki"
 
 #. :ETH:231:
-#: ../zypp/CountryCode.cc:285
+#: ../zypp/CountryCode.cc:292
 msgid "Finland"
 msgstr "Finnország"
 
@@ -1512,9 +1523,8 @@ msgid "Finno-Ugrian (Other)"
 msgstr "finn-ugor (egyéb)"
 
 #: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
-#, fuzzy
 msgid "Following actions will be done:"
-msgstr "Az alábbi csomagok kerülnek frissítésre:\n"
+msgstr "A következő műveletek kerülnek végrehajtásra:"
 
 #. language code: fon
 #: ../zypp/LanguageCode.cc:520
@@ -1522,7 +1532,7 @@ msgid "Fon"
 msgstr "fon"
 
 #. :FRO:234:
-#: ../zypp/CountryCode.cc:290
+#: ../zypp/CountryCode.cc:297
 msgid "France"
 msgstr "Franciaország"
 
@@ -1534,20 +1544,20 @@ msgstr "francia"
 # GF
 # fuzzy
 #. :GEO:268:
-#: ../zypp/CountryCode.cc:296
+#: ../zypp/CountryCode.cc:303
 msgid "French Guiana"
 msgstr "Francia Guiana"
 
 # PF
 #. :PER:604:
-#: ../zypp/CountryCode.cc:386
+#: ../zypp/CountryCode.cc:393
 msgid "French Polynesia"
 msgstr "Francia Polinézia"
 
 # TF
 # fuzzy
 #. :TCD:148:
-#: ../zypp/CountryCode.cc:424
+#: ../zypp/CountryCode.cc:431
 msgid "French Southern Territories"
 msgstr "Déli francia területek"
 
@@ -1586,7 +1596,7 @@ msgstr "ga"
 
 # GA
 #. :FXX:249:
-#: ../zypp/CountryCode.cc:292
+#: ../zypp/CountryCode.cc:299
 msgid "Gabon"
 msgstr "Gabon"
 
@@ -1602,7 +1612,7 @@ msgstr "galíciai"
 
 # GM
 #. :GRL:304:
-#: ../zypp/CountryCode.cc:300
+#: ../zypp/CountryCode.cc:307
 msgid "Gambia"
 msgstr "Gambia"
 
@@ -1633,7 +1643,7 @@ msgid "Generally ignore this requirement"
 msgstr "Követelmény figyelmen kívül hagyása csak itt"
 
 #. :GRD:308:
-#: ../zypp/CountryCode.cc:295
+#: ../zypp/CountryCode.cc:302
 msgid "Georgia"
 msgstr "Grúzia"
 
@@ -1663,18 +1673,18 @@ msgid "Germanic (Other)"
 msgstr "germán (egyéb)"
 
 #. :CZE:203:
-#: ../zypp/CountryCode.cc:272
+#: ../zypp/CountryCode.cc:279
 msgid "Germany"
 msgstr "Németország"
 
 # GH
 #. :GUF:254:
-#: ../zypp/CountryCode.cc:297
+#: ../zypp/CountryCode.cc:304
 msgid "Ghana"
 msgstr "Ghana"
 
 #. :GHA:288:
-#: ../zypp/CountryCode.cc:298
+#: ../zypp/CountryCode.cc:305
 msgid "Gibraltar"
 msgstr "Gibraltár"
 
@@ -1713,7 +1723,7 @@ msgid "Grebo"
 msgstr "grebo"
 
 #. :GNQ:226:
-#: ../zypp/CountryCode.cc:304
+#: ../zypp/CountryCode.cc:311
 msgid "Greece"
 msgstr "Görögország"
 
@@ -1728,22 +1738,22 @@ msgid "Greek, Modern (1453-)"
 msgstr "görög, modern (1453-)"
 
 #. :GIB:292:
-#: ../zypp/CountryCode.cc:299
+#: ../zypp/CountryCode.cc:306
 msgid "Greenland"
 msgstr "Grönland"
 
 #. :GBR:826:
-#: ../zypp/CountryCode.cc:294
+#: ../zypp/CountryCode.cc:301
 msgid "Grenada"
 msgstr "Grenada"
 
 #. :GIN:324:
-#: ../zypp/CountryCode.cc:302
+#: ../zypp/CountryCode.cc:309
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
 #. :GTM:320:
-#: ../zypp/CountryCode.cc:307
+#: ../zypp/CountryCode.cc:314
 msgid "Guam"
 msgstr "Guam"
 
@@ -1753,19 +1763,19 @@ msgid "Guarani"
 msgstr "guarani"
 
 #. :SGS:239:
-#: ../zypp/CountryCode.cc:306
+#: ../zypp/CountryCode.cc:313
 msgid "Guatemala"
 msgstr "Guatemala"
 
 # GN
 #. :GMB:270:
-#: ../zypp/CountryCode.cc:301
+#: ../zypp/CountryCode.cc:308
 msgid "Guinea"
 msgstr "Guinea"
 
 # GW
 #. :GUM:316:
-#: ../zypp/CountryCode.cc:308
+#: ../zypp/CountryCode.cc:315
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
@@ -1776,7 +1786,7 @@ msgstr "gudzsarati"
 
 # GY
 #. :GNB:624:
-#: ../zypp/CountryCode.cc:309
+#: ../zypp/CountryCode.cc:316
 msgid "Guyana"
 msgstr "Guyana"
 
@@ -1792,7 +1802,7 @@ msgstr "haida"
 
 # HT
 #. :HRV:191:
-#: ../zypp/CountryCode.cc:314
+#: ../zypp/CountryCode.cc:321
 msgid "Haiti"
 msgstr "Haiti"
 
@@ -1807,15 +1817,15 @@ msgstr "haiti"
 msgid "Hal Exception"
 msgstr "Hal kivétel"
 
-#: ../zypp/target/hal/HalContext.cc:96
+#: ../zypp/target/hal/HalContext.cc:94
 msgid "HalContext not connected"
 msgstr "A HalContext nem kapcsolódott"
 
-#: ../zypp/target/hal/HalContext.cc:106
+#: ../zypp/target/hal/HalContext.cc:104
 msgid "HalDrive not initialized"
 msgstr "A HalDriver inicializálása sikertelen"
 
-#: ../zypp/target/hal/HalContext.cc:116
+#: ../zypp/target/hal/HalContext.cc:114
 msgid "HalVolume not initialized"
 msgstr "A HalVolume inicializálása sikertelen"
 
@@ -1832,7 +1842,7 @@ msgstr "hawaii"
 # HM
 # fuzzy
 #. :HKG:344:
-#: ../zypp/CountryCode.cc:311
+#: ../zypp/CountryCode.cc:318
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard-sziget és McDonald-szigetek"
 
@@ -1886,17 +1896,17 @@ msgstr "hmong"
 # VA
 # fuzzy
 #. :UZB:860:
-#: ../zypp/CountryCode.cc:444
+#: ../zypp/CountryCode.cc:451
 msgid "Holy See (Vatican City State)"
 msgstr "Vatikán (Szentszék)"
 
 #. :HMD:334:
-#: ../zypp/CountryCode.cc:312
+#: ../zypp/CountryCode.cc:319
 msgid "Honduras"
 msgstr "Honduras"
 
 #. :GUY:328:
-#: ../zypp/CountryCode.cc:310
+#: ../zypp/CountryCode.cc:317
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
@@ -1906,7 +1916,7 @@ msgid "Hungarian"
 msgstr "magyar"
 
 #. :HTI:332:
-#: ../zypp/CountryCode.cc:315
+#: ../zypp/CountryCode.cc:322
 msgid "Hungary"
 msgstr "Magyarország"
 
@@ -1923,7 +1933,7 @@ msgid "Iban"
 msgstr "iban"
 
 #. :IRN:364:
-#: ../zypp/CountryCode.cc:323
+#: ../zypp/CountryCode.cc:330
 msgid "Iceland"
 msgstr "Izland"
 
@@ -1981,7 +1991,7 @@ msgid "Inari Sami"
 msgstr "inári számi"
 
 #. :ISR:376:
-#: ../zypp/CountryCode.cc:319
+#: ../zypp/CountryCode.cc:326
 msgid "India"
 msgstr "India"
 
@@ -1996,7 +2006,7 @@ msgid "Indo-European (Other)"
 msgstr "indoeurópai (egyéb)"
 
 #. :HUN:348:
-#: ../zypp/CountryCode.cc:316
+#: ../zypp/CountryCode.cc:323
 msgid "Indonesia"
 msgstr "Indonézia"
 
@@ -2110,7 +2120,7 @@ msgstr "Érvénytelen felhasználói név és/vagy jelszó."
 # IR
 # fuzzy
 #. :IRQ:368:
-#: ../zypp/CountryCode.cc:322
+#: ../zypp/CountryCode.cc:329
 msgid "Iran"
 msgstr "Irán"
 
@@ -2120,12 +2130,12 @@ msgid "Iranian (Other)"
 msgstr "iráni (egyéb)"
 
 #. :IOT:086:
-#: ../zypp/CountryCode.cc:321
+#: ../zypp/CountryCode.cc:328
 msgid "Iraq"
 msgstr "Irak"
 
 #. :IDN:360:
-#: ../zypp/CountryCode.cc:317
+#: ../zypp/CountryCode.cc:324
 msgid "Ireland"
 msgstr "Írország"
 
@@ -2151,9 +2161,14 @@ msgid "Iroquoian Languages"
 msgstr "irokéz nyelvek"
 
 #. :IRL:372:
-#: ../zypp/CountryCode.cc:318
+#: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "Izrael"
+
+#: ../zypp/base/InterProcessMutex.cc:68
+#, fuzzy, c-format
+msgid "It %d, Can't open lock file: %s"
+msgstr "A solv-fájl nem nyitható meg: "
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2161,17 +2176,17 @@ msgid "Italian"
 msgstr "olasz"
 
 #. :ISL:352:
-#: ../zypp/CountryCode.cc:324
+#: ../zypp/CountryCode.cc:331
 msgid "Italy"
 msgstr "Olaszország"
 
 #. :ITA:380:
-#: ../zypp/CountryCode.cc:325
+#: ../zypp/CountryCode.cc:332
 msgid "Jamaica"
 msgstr "Jamaika"
 
 #. :JOR:400:
-#: ../zypp/CountryCode.cc:327
+#: ../zypp/CountryCode.cc:334
 msgid "Japan"
 msgstr "Japán"
 
@@ -2187,7 +2202,7 @@ msgid "Javanese"
 msgstr "jávai"
 
 #. :JAM:388:
-#: ../zypp/CountryCode.cc:326
+#: ../zypp/CountryCode.cc:333
 msgid "Jordan"
 msgstr "Jordánia"
 
@@ -2282,7 +2297,7 @@ msgstr "kazah"
 # KZ
 # fuzzy
 #. :CYM:136:
-#: ../zypp/CountryCode.cc:338
+#: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Kazahsztán"
 
@@ -2292,7 +2307,7 @@ msgstr "Feloldhatók megtartása"
 
 # KE
 #. :JPN:392:
-#: ../zypp/CountryCode.cc:328
+#: ../zypp/CountryCode.cc:335
 msgid "Kenya"
 msgstr "Kenya"
 
@@ -2338,7 +2353,7 @@ msgstr "kirgiz"
 
 # KI
 #. :KHM:116:
-#: ../zypp/CountryCode.cc:331
+#: ../zypp/CountryCode.cc:338
 msgid "Kiribati"
 msgstr "Kiribati"
 
@@ -2412,14 +2427,14 @@ msgid "Kutenai"
 msgstr "kutenai"
 
 #. :KOR:410:
-#: ../zypp/CountryCode.cc:336
+#: ../zypp/CountryCode.cc:343
 msgid "Kuwait"
 msgstr "Kuvait"
 
 # KG
 # fuzzy
 #. :KEN:404:
-#: ../zypp/CountryCode.cc:329
+#: ../zypp/CountryCode.cc:336
 msgid "Kyrgyzstan"
 msgstr "Kirgizisztán"
 
@@ -2448,7 +2463,7 @@ msgstr "lao"
 # CD
 # fuzzy
 #. :KAZ:398:
-#: ../zypp/CountryCode.cc:339
+#: ../zypp/CountryCode.cc:346
 msgid "Lao People's Democratic Republic"
 msgstr "Lao Népi Demokratikus Népköztársaság"
 
@@ -2459,7 +2474,7 @@ msgid "Latin"
 msgstr "latin"
 
 #. :LUX:442:
-#: ../zypp/CountryCode.cc:348
+#: ../zypp/CountryCode.cc:355
 msgid "Latvia"
 msgstr "Lettország"
 
@@ -2470,13 +2485,13 @@ msgid "Latvian"
 msgstr "lett"
 
 #. :LAO:418:
-#: ../zypp/CountryCode.cc:340
+#: ../zypp/CountryCode.cc:347
 msgid "Lebanon"
 msgstr "Libanon"
 
 # LS
 #. :LBR:430:
-#: ../zypp/CountryCode.cc:345
+#: ../zypp/CountryCode.cc:352
 msgid "Lesotho"
 msgstr "Lesotho"
 
@@ -2487,19 +2502,19 @@ msgstr "lezgiai"
 
 # LR
 #. :LKA:144:
-#: ../zypp/CountryCode.cc:344
+#: ../zypp/CountryCode.cc:351
 msgid "Liberia"
 msgstr "Libéria"
 
 # LY
 # fuzzy
 #. :LVA:428:
-#: ../zypp/CountryCode.cc:349
+#: ../zypp/CountryCode.cc:356
 msgid "Libya"
 msgstr "Líbia"
 
 #. :LCA:662:
-#: ../zypp/CountryCode.cc:342
+#: ../zypp/CountryCode.cc:349
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
@@ -2514,7 +2529,7 @@ msgid "Lingala"
 msgstr "lingala"
 
 #. :LSO:426:
-#: ../zypp/CountryCode.cc:346
+#: ../zypp/CountryCode.cc:353
 msgid "Lithuania"
 msgstr "Litvánia"
 
@@ -2579,7 +2594,7 @@ msgid "Lushai"
 msgstr "lushai"
 
 #. :LTU:440:
-#: ../zypp/CountryCode.cc:347
+#: ../zypp/CountryCode.cc:354
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
@@ -2589,12 +2604,12 @@ msgid "Luxembourgish"
 msgstr "luxemburgi"
 
 #. :MNG:496:
-#: ../zypp/CountryCode.cc:359
+#: ../zypp/CountryCode.cc:366
 msgid "Macao"
 msgstr "Makaó"
 
 #. :MHL:584:
-#: ../zypp/CountryCode.cc:355
+#: ../zypp/CountryCode.cc:362
 msgid "Macedonia"
 msgstr "Macedónia"
 
@@ -2606,7 +2621,7 @@ msgstr "macedón"
 
 # MG
 #. :MDA:498:
-#: ../zypp/CountryCode.cc:353
+#: ../zypp/CountryCode.cc:360
 msgid "Madagascar"
 msgstr "Madagaszkár"
 
@@ -2638,7 +2653,7 @@ msgstr "malagázi"
 
 # MW
 #. :MDV:462:
-#: ../zypp/CountryCode.cc:367
+#: ../zypp/CountryCode.cc:374
 msgid "Malawi"
 msgstr "Malawi"
 
@@ -2653,29 +2668,29 @@ msgid "Malayalam"
 msgstr "malajalam"
 
 #. :MEX:484:
-#: ../zypp/CountryCode.cc:369
+#: ../zypp/CountryCode.cc:376
 msgid "Malaysia"
 msgstr "Malajzia"
 
 # MV
 # fuzzy
 #. :MUS:480:
-#: ../zypp/CountryCode.cc:366
+#: ../zypp/CountryCode.cc:373
 msgid "Maldives"
 msgstr "Maldív Szigetek"
 
 #: ../zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "Hibás URI"
 
 # ML
 #. :MKD:807:
-#: ../zypp/CountryCode.cc:356
+#: ../zypp/CountryCode.cc:363
 msgid "Mali"
 msgstr "Mali"
 
 #. :MSR:500:
-#: ../zypp/CountryCode.cc:364
+#: ../zypp/CountryCode.cc:371
 msgid "Malta"
 msgstr "Málta"
 
@@ -2736,7 +2751,7 @@ msgstr "mari"
 
 # MH
 #. :MDG:450:
-#: ../zypp/CountryCode.cc:354
+#: ../zypp/CountryCode.cc:361
 msgid "Marshall Islands"
 msgstr "Marshall-szigetek"
 
@@ -2747,7 +2762,7 @@ msgid "Marshallese"
 msgstr "marshall"
 
 #. :MNP:580:
-#: ../zypp/CountryCode.cc:361
+#: ../zypp/CountryCode.cc:368
 msgid "Martinique"
 msgstr "Martinique"
 
@@ -2764,14 +2779,14 @@ msgstr "maszáj"
 
 # MR
 #. :MTQ:474:
-#: ../zypp/CountryCode.cc:362
+#: ../zypp/CountryCode.cc:369
 msgid "Mauritania"
 msgstr "Mauritánia"
 
 # MU
 # fuzzy
 #. :MLT:470:
-#: ../zypp/CountryCode.cc:365
+#: ../zypp/CountryCode.cc:372
 msgid "Mauritius"
 msgstr "Mauritius"
 
@@ -2782,28 +2797,28 @@ msgstr "maja nyelvek"
 
 # YT
 #. :YEM:887:
-#: ../zypp/CountryCode.cc:454
+#: ../zypp/CountryCode.cc:461
 msgid "Mayotte"
 msgstr "Mayotte"
 
 #: ../zypp/media/MediaException.cc:169
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "A '%s' adathordozó forrása nem tartalmazza a kívánt adathordozót"
 
 #: ../zypp/media/MediaException.cc:175
 #, c-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "Jelenleg egy másik folyamat használja a(z) '%s' adathordozót"
 
 #: ../zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr ""
+msgstr "Az adathordozó nincs csatlakoztatva"
 
 #: ../zypp/media/MediaException.cc:53
 #, c-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+msgstr "Az adathordozó elérése a(z) '%s' művelet végrehajtása közben nem sikerült."
 
 #. language code: men
 #: ../zypp/LanguageCode.cc:808
@@ -2811,12 +2826,12 @@ msgid "Mende"
 msgstr "mende"
 
 #. :FRA:250:
-#: ../zypp/CountryCode.cc:291
+#: ../zypp/CountryCode.cc:298
 msgid "Metropolitan France"
 msgstr "Nagyvárosi Franciaország"
 
 #. :MWI:454:
-#: ../zypp/CountryCode.cc:368
+#: ../zypp/CountryCode.cc:375
 msgid "Mexico"
 msgstr "Mexikó"
 
@@ -2857,7 +2872,7 @@ msgid "Moldavian"
 msgstr "moldáv"
 
 #. :MCO:492:
-#: ../zypp/CountryCode.cc:352
+#: ../zypp/CountryCode.cc:359
 msgid "Moldova"
 msgstr "Moldávia"
 
@@ -2867,7 +2882,7 @@ msgid "Mon-Khmer (Other)"
 msgstr "mon-khmer (egyéb)"
 
 #. :MAR:504:
-#: ../zypp/CountryCode.cc:351
+#: ../zypp/CountryCode.cc:358
 msgid "Monaco"
 msgstr "Monaco"
 
@@ -2879,7 +2894,7 @@ msgstr "mongo"
 
 # MN
 #. :MMR:104:
-#: ../zypp/CountryCode.cc:358
+#: ../zypp/CountryCode.cc:365
 msgid "Mongolia"
 msgstr "Mongólia"
 
@@ -2890,12 +2905,12 @@ msgstr "mongol"
 
 # MS
 #. :MRT:478:
-#: ../zypp/CountryCode.cc:363
+#: ../zypp/CountryCode.cc:370
 msgid "Montserrat"
 msgstr "Montserrat"
 
 #. :LBY:434:
-#: ../zypp/CountryCode.cc:350
+#: ../zypp/CountryCode.cc:357
 msgid "Morocco"
 msgstr "Marokkó"
 
@@ -2906,7 +2921,7 @@ msgstr "mossi"
 
 # MZ
 #. :MYS:458:
-#: ../zypp/CountryCode.cc:370
+#: ../zypp/CountryCode.cc:377
 msgid "Mozambique"
 msgstr "Mozambik"
 
@@ -2924,7 +2939,7 @@ msgstr "munda nyelvek"
 
 # MM
 #. :MLI:466:
-#: ../zypp/CountryCode.cc:357
+#: ../zypp/CountryCode.cc:364
 msgid "Myanmar"
 msgstr "Myanmar"
 
@@ -2938,13 +2953,13 @@ msgstr "nahuatl"
 
 # NA
 #. :MOZ:508:
-#: ../zypp/CountryCode.cc:371
+#: ../zypp/CountryCode.cc:378
 msgid "Namibia"
 msgstr "Namíbia"
 
-#. :NPL:524:
 #. language code: nau na
-#: ../zypp/CountryCode.cc:380 ../zypp/LanguageCode.cc:858
+#. :NPL:524:
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -2976,7 +2991,7 @@ msgstr "nápolyi"
 
 # NP
 #. :NOR:578:
-#: ../zypp/CountryCode.cc:379
+#: ../zypp/CountryCode.cc:386
 msgid "Nepal"
 msgstr "Nepál"
 
@@ -2992,24 +3007,24 @@ msgid "Nepali"
 msgstr "nepáli"
 
 #. :NIC:558:
-#: ../zypp/CountryCode.cc:377
+#: ../zypp/CountryCode.cc:384
 msgid "Netherlands"
 msgstr "Hollandia"
 
 # AN
 #. :ARM:051:
-#: ../zypp/CountryCode.cc:224
+#: ../zypp/CountryCode.cc:231
 msgid "Netherlands Antilles"
 msgstr "Holland Antillák"
 
 # NC
 #. :NAM:516:
-#: ../zypp/CountryCode.cc:372
+#: ../zypp/CountryCode.cc:379
 msgid "New Caledonia"
 msgstr "Új-Kaledónia"
 
 #. :NIU:570:
-#: ../zypp/CountryCode.cc:382
+#: ../zypp/CountryCode.cc:389
 msgid "New Zealand"
 msgstr "Új-Zéland"
 
@@ -3019,13 +3034,13 @@ msgid "Nias"
 msgstr "nias"
 
 #. :NGA:566:
-#: ../zypp/CountryCode.cc:376
+#: ../zypp/CountryCode.cc:383
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
 # NE
 #. :NCL:540:
-#: ../zypp/CountryCode.cc:373
+#: ../zypp/CountryCode.cc:380
 msgid "Niger"
 msgstr "Niger"
 
@@ -3036,7 +3051,7 @@ msgstr "niger-kordofáni (egyéb)"
 
 # NG
 #. :NFK:574:
-#: ../zypp/CountryCode.cc:375
+#: ../zypp/CountryCode.cc:382
 msgid "Nigeria"
 msgstr "Nigéria"
 
@@ -3047,7 +3062,7 @@ msgstr "nílus-szaharai (egyéb)"
 
 # NU
 #. :NRU:520:
-#: ../zypp/CountryCode.cc:381
+#: ../zypp/CountryCode.cc:388
 msgid "Niue"
 msgstr "Niue"
 
@@ -3057,9 +3072,9 @@ msgstr "Niue"
 msgid "Niuean"
 msgstr "niuei"
 
-#. Defined CountryCode constants
 #. Defined LanguageCode constants
-#: ../zypp/CountryCode.cc:215 ../zypp/LanguageCode.cc:225
+#. Defined CountryCode constants
+#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Nincs kód"
 
@@ -3075,7 +3090,7 @@ msgstr "nogai"
 
 # NF
 #. :NER:562:
-#: ../zypp/CountryCode.cc:374
+#: ../zypp/CountryCode.cc:381
 msgid "Norfolk Island"
 msgstr "Norfolk-sziget"
 
@@ -3090,13 +3105,13 @@ msgid "North American Indian"
 msgstr "észak-amerikai indián"
 
 #. :KNA:659:
-#: ../zypp/CountryCode.cc:334
+#: ../zypp/CountryCode.cc:341
 msgid "North Korea"
 msgstr "Észak-Korea"
 
 # MP
 #. :MAC:446:
-#: ../zypp/CountryCode.cc:360
+#: ../zypp/CountryCode.cc:367
 msgid "Northern Mariana Islands"
 msgstr "Északi Mariana-szigetek"
 
@@ -3111,7 +3126,7 @@ msgid "Northern Sotho"
 msgstr "északi sotho"
 
 #. :NLD:528:
-#: ../zypp/CountryCode.cc:378
+#: ../zypp/CountryCode.cc:385
 msgid "Norway"
 msgstr "Norvégia"
 
@@ -3130,7 +3145,7 @@ msgstr "norvég Bokmal"
 msgid "Norwegian Nynorsk"
 msgstr "norvég nynorsk"
 
-#: ../zypp/target/hal/HalContext.cc:843
+#: ../zypp/target/hal/HalContext.cc:828
 msgid "Not a CDROM drive"
 msgstr "CD-ROM meghajtó nem található"
 
@@ -3170,14 +3185,13 @@ msgid "Ojibwa"
 msgstr "odzsibva"
 
 #. :NZL:554:
-#: ../zypp/CountryCode.cc:383
+#: ../zypp/CountryCode.cc:390
 msgid "Oman"
 msgstr "Omán"
 
 #: ../zypp/media/MediaException.cc:145
-#, fuzzy
 msgid "Operation not supported by medium"
-msgstr "A profil verzióját az AppArmor nem támogatja\n"
+msgstr "Az adathordozó nem támogatja ezt a műveletet"
 
 #. language code: ori or
 #: ../zypp/LanguageCode.cc:910
@@ -3216,12 +3230,12 @@ msgid "Pahlavi"
 msgstr "pahlavi"
 
 #. :PHL:608:
-#: ../zypp/CountryCode.cc:389
+#: ../zypp/CountryCode.cc:396
 msgid "Pakistan"
 msgstr "Pakisztán"
 
 #. :PRT:620:
-#: ../zypp/CountryCode.cc:396
+#: ../zypp/CountryCode.cc:403
 msgid "Palau"
 msgstr "Palau"
 
@@ -3232,7 +3246,7 @@ msgstr "palaui"
 
 # IO
 #. :PRI:630:
-#: ../zypp/CountryCode.cc:394
+#: ../zypp/CountryCode.cc:401
 msgid "Palestinian Territory"
 msgstr "Palesztin terület"
 
@@ -3247,7 +3261,7 @@ msgid "Pampanga"
 msgstr "pampanga"
 
 #. :OMN:512:
-#: ../zypp/CountryCode.cc:384
+#: ../zypp/CountryCode.cc:391
 msgid "Panama"
 msgstr "Panama"
 
@@ -3269,7 +3283,7 @@ msgstr "papiamento"
 
 # PG
 #. :PYF:258:
-#: ../zypp/CountryCode.cc:387
+#: ../zypp/CountryCode.cc:394
 msgid "Papua New Guinea"
 msgstr "Pápua Új-Guinea"
 
@@ -3279,32 +3293,32 @@ msgid "Papuan (Other)"
 msgstr "pápua (egyéb)"
 
 #. :PLW:585:
-#: ../zypp/CountryCode.cc:397
+#: ../zypp/CountryCode.cc:404
 msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../zypp/media/MediaException.cc:106
-#, fuzzy, c-format
+#, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "A(z) %1 nem könyvtár."
+msgstr "A(z) '%s' elérési út a(z) '%s' adathordozón nem könyvtár."
 
 #: ../zypp/media/MediaException.cc:98
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
+msgstr "A(z) '%s' elérési út a(z) '%s' adathordozón nem fájl."
 
 #: ../zypp/url/UrlBase.cc:1184
 msgid "Path Parameter parsing not supported for this URL"
-msgstr "Az elérési útvonal feldolgozása ehhez az URI-hez nem támogatott"
+msgstr "Az elérési útvonal feldolgozása ehhez az URL-hez nem támogatott"
 
 #: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
-msgstr "Az elérési út feldolgazása ehhez az URI-hez nem támogatott"
+msgstr "Az elérési út feldolgozása ehhez az URL-hez nem támogatott"
 
 #: ../zypp/media/MediaException.cc:200
-#, fuzzy, c-format
+#, c-format
 msgid "Permission to access '%s' denied."
-msgstr "Hozzáférés megtagadva"
+msgstr "Hozzáférés megtagadva: '%s'."
 
 # clients/inst_sw_single.ycp:1320 clients/inst_sw_single.ycp:1971
 #. language code: per fas fa
@@ -3318,7 +3332,7 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "perzsa, régi (kb. i.e. 600-400)"
 
 #. :PAN:591:
-#: ../zypp/CountryCode.cc:385
+#: ../zypp/CountryCode.cc:392
 msgid "Peru"
 msgstr "Peru"
 
@@ -3328,7 +3342,7 @@ msgid "Philippine (Other)"
 msgstr "fülöp-szigeteki (egyéb)"
 
 #. :PNG:598:
-#: ../zypp/CountryCode.cc:388
+#: ../zypp/CountryCode.cc:395
 msgid "Philippines"
 msgstr "Fülöp-szigetek"
 
@@ -3338,7 +3352,7 @@ msgid "Phoenician"
 msgstr "föníciai"
 
 #. :SPM:666:
-#: ../zypp/CountryCode.cc:392
+#: ../zypp/CountryCode.cc:399
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
@@ -3349,7 +3363,7 @@ msgid "Pohnpeian"
 msgstr "pompeji"
 
 #. :PAK:586:
-#: ../zypp/CountryCode.cc:390
+#: ../zypp/CountryCode.cc:397
 msgid "Poland"
 msgstr "Lengyelország"
 
@@ -3359,7 +3373,7 @@ msgid "Polish"
 msgstr "Lengyel"
 
 #. :PSE:275:
-#: ../zypp/CountryCode.cc:395
+#: ../zypp/CountryCode.cc:402
 msgid "Portugal"
 msgstr "Portugália"
 
@@ -3379,7 +3393,7 @@ msgid "Provencal, Old (to 1500)"
 msgstr "provanszi, régi (1500-ig)"
 
 #. :PCN:612:
-#: ../zypp/CountryCode.cc:393
+#: ../zypp/CountryCode.cc:400
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
@@ -3389,9 +3403,9 @@ msgid "Pushto"
 msgstr "pushto"
 
 #. :PRY:600:
-#: ../zypp/CountryCode.cc:398
+#: ../zypp/CountryCode.cc:405
 msgid "Qatar"
-msgstr "Qatar"
+msgstr "Katar"
 
 #. language code: que qu
 #: ../zypp/LanguageCode.cc:960
@@ -3400,14 +3414,13 @@ msgstr "kecsua"
 
 #: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
-msgstr "A lekérdezés feldolgozása ehhez az URI-hez nem támogatott"
+msgstr "A lekérdezés feldolgozása ehhez az URL-hez nem támogatott"
 
 #. TranslatorExplanation after semicolon is error message
 #: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
 #: ../zypp/target/rpm/RpmDb.cc:2179
-#, fuzzy
 msgid "RPM failed: "
-msgstr "Sikertelen felcsatolás"
+msgstr "RPM sikertelen: "
 
 #. language code: roh rm
 #: ../zypp/LanguageCode.cc:970
@@ -3436,7 +3449,7 @@ msgstr "rarotongai"
 msgid "Relative path not allowed if authority exists"
 msgstr "Megadott hitelesítő esetén a relatív elérési útvonal megadása nem támogatott"
 
-#: ../zypp/RepoManager.cc:1122
+#: ../zypp/RepoManager.cc:1112
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "A(z) '%s' telepítési forrás eltávolítása"
@@ -3444,7 +3457,7 @@ msgstr "A(z) '%s' telepítési forrás eltávolítása"
 #: ../zypp/Repository.cc:104
 #, c-format
 msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
+msgstr "A RepoInfo álneve (%s) nem egyezik a telepítési forrás nevével (%s)"
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3452,7 +3465,7 @@ msgstr "A következő szükséges fájl hiányzik: "
 
 # RE
 #. :QAT:634:
-#: ../zypp/CountryCode.cc:399
+#: ../zypp/CountryCode.cc:406
 msgid "Reunion"
 msgstr "Reunion"
 
@@ -3462,7 +3475,7 @@ msgid "Romance (Other)"
 msgstr "romansz (egyéb)"
 
 #. :REU:638:
-#: ../zypp/CountryCode.cc:400
+#: ../zypp/CountryCode.cc:407
 msgid "Romania"
 msgstr "Románia"
 
@@ -3488,47 +3501,47 @@ msgstr "Orosz"
 
 # RU
 #. :ROU:642:
-#: ../zypp/CountryCode.cc:401
+#: ../zypp/CountryCode.cc:408
 msgid "Russian Federation"
 msgstr "Oroszország"
 
 # RW
 #. :RUS:643:
-#: ../zypp/CountryCode.cc:402
+#: ../zypp/CountryCode.cc:409
 msgid "Rwanda"
 msgstr "Ruanda"
 
 # SH
 #. :SGP:702:
-#: ../zypp/CountryCode.cc:409
+#: ../zypp/CountryCode.cc:416
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
 # KN
 # fuzzy
 #. :COM:174:
-#: ../zypp/CountryCode.cc:333
+#: ../zypp/CountryCode.cc:340
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts és Nevis"
 
 # LC
 # fuzzy
 #. :LBN:422:
-#: ../zypp/CountryCode.cc:341
+#: ../zypp/CountryCode.cc:348
 msgid "Saint Lucia"
 msgstr "Santa Lucia"
 
 # PM
 # fuzzy
 #. :POL:616:
-#: ../zypp/CountryCode.cc:391
+#: ../zypp/CountryCode.cc:398
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre és Miquelon"
 
 # VC
 # fuzzy
 #. :VAT:336:
-#: ../zypp/CountryCode.cc:445
+#: ../zypp/CountryCode.cc:452
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent és Grenadines"
 
@@ -3548,7 +3561,7 @@ msgid "Sami Languages (Other)"
 msgstr "számi nyelvek (egyéb)"
 
 #. :WLF:876:
-#: ../zypp/CountryCode.cc:452
+#: ../zypp/CountryCode.cc:459
 msgid "Samoa"
 msgstr "Szamoa"
 
@@ -3559,7 +3572,7 @@ msgstr "szamoai"
 
 # SM
 #. :SLE:694:
-#: ../zypp/CountryCode.cc:414
+#: ../zypp/CountryCode.cc:421
 msgid "San Marino"
 msgstr "San Marino"
 
@@ -3586,7 +3599,7 @@ msgstr "szantáli"
 
 # ST
 #. :SUR:740:
-#: ../zypp/CountryCode.cc:418
+#: ../zypp/CountryCode.cc:425
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome és Principe"
 
@@ -3602,7 +3615,7 @@ msgid "Sasak"
 msgstr "szaszak"
 
 #. :RWA:646:
-#: ../zypp/CountryCode.cc:403
+#: ../zypp/CountryCode.cc:410
 msgid "Saudi Arabia"
 msgstr "Szaúd-Arábia"
 
@@ -3623,13 +3636,13 @@ msgstr "sémi (egyéb)"
 
 # SN
 #. :SMR:674:
-#: ../zypp/CountryCode.cc:415
+#: ../zypp/CountryCode.cc:422
 msgid "Senegal"
 msgstr "Szenegál"
 
 # clients/printconf_ask_device.ycp:67
 #. :CRI:188:
-#: ../zypp/CountryCode.cc:266
+#: ../zypp/CountryCode.cc:273
 msgid "Serbia and Montenegro"
 msgstr "Szerbia és Montenegro"
 
@@ -3647,7 +3660,7 @@ msgstr "szerer"
 
 # SC
 #. :SLB:090:
-#: ../zypp/CountryCode.cc:405
+#: ../zypp/CountryCode.cc:412
 msgid "Seychelles"
 msgstr "Seychelles"
 
@@ -3678,7 +3691,7 @@ msgstr "szidamo"
 
 # SL
 #. :SVK:703:
-#: ../zypp/CountryCode.cc:413
+#: ../zypp/CountryCode.cc:420
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
@@ -3688,9 +3701,9 @@ msgid "Sign Languages"
 msgstr "jelnyelvek"
 
 #: ../zypp/KeyRing.cc:568
-#, fuzzy, c-format
+#, c-format
 msgid "Signature file %s not found"
-msgstr "A(z) %s forráscsomag nem található."
+msgstr "A(z) %s aláírás-fájl nem található"
 
 #. language code: bla
 #: ../zypp/LanguageCode.cc:354
@@ -3703,7 +3716,7 @@ msgid "Sindhi"
 msgstr "szindi"
 
 #. :SWE:752:
-#: ../zypp/CountryCode.cc:408
+#: ../zypp/CountryCode.cc:415
 msgid "Singapore"
 msgstr "Szingapúr"
 
@@ -3744,12 +3757,12 @@ msgid "Slovak"
 msgstr "Szlovák"
 
 #. :SJM:744:
-#: ../zypp/CountryCode.cc:412
+#: ../zypp/CountryCode.cc:419
 msgid "Slovakia"
 msgstr "Szlovákia"
 
 #. :SHN:654:
-#: ../zypp/CountryCode.cc:410
+#: ../zypp/CountryCode.cc:417
 msgid "Slovenia"
 msgstr "Szlovénia"
 
@@ -3765,7 +3778,7 @@ msgstr "szogdiai"
 
 # SB
 #. :SAU:682:
-#: ../zypp/CountryCode.cc:404
+#: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "Salamon-szigetek"
 
@@ -3776,7 +3789,7 @@ msgstr "szomáli"
 
 # SO
 #. :SEN:686:
-#: ../zypp/CountryCode.cc:416
+#: ../zypp/CountryCode.cc:423
 msgid "Somalia"
 msgstr "Szomália"
 
@@ -3804,7 +3817,7 @@ msgid "Sotho, Southern"
 msgstr "sotho, déli"
 
 #. :MYT:175:
-#: ../zypp/CountryCode.cc:455
+#: ../zypp/CountryCode.cc:462
 msgid "South Africa"
 msgstr "Dél-Afrika"
 
@@ -3816,12 +3829,12 @@ msgstr "dél-amerikai indián (egyéb)"
 # GS
 # fuzzy
 #. :GRC:300:
-#: ../zypp/CountryCode.cc:305
+#: ../zypp/CountryCode.cc:312
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Dél-Georgia és a Dél-Sandwich-sziget"
 
 #. :PRK:408:
-#: ../zypp/CountryCode.cc:335
+#: ../zypp/CountryCode.cc:342
 msgid "South Korea"
 msgstr "Dél-Korea"
 
@@ -3836,7 +3849,7 @@ msgid "Southern Sami"
 msgstr "déli számi"
 
 #. :ERI:232:
-#: ../zypp/CountryCode.cc:283
+#: ../zypp/CountryCode.cc:290
 msgid "Spain"
 msgstr "Spanyolország"
 
@@ -3847,12 +3860,12 @@ msgstr "Spanyol"
 
 # LK
 #. :LIE:438:
-#: ../zypp/CountryCode.cc:343
+#: ../zypp/CountryCode.cc:350
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
 #. :SYC:690:
-#: ../zypp/CountryCode.cc:406
+#: ../zypp/CountryCode.cc:413
 msgid "Sudan"
 msgstr "Szudán"
 
@@ -3874,7 +3887,7 @@ msgstr "szundanéz"
 
 # SR
 #. :SOM:706:
-#: ../zypp/CountryCode.cc:417
+#: ../zypp/CountryCode.cc:424
 msgid "Suriname"
 msgstr "Suriname"
 
@@ -3886,7 +3899,7 @@ msgstr "szuszu"
 # SJ
 # fuzzy
 #. :SVN:705:
-#: ../zypp/CountryCode.cc:411
+#: ../zypp/CountryCode.cc:418
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard és Jan Mayen-szigetek"
 
@@ -3902,12 +3915,12 @@ msgstr "swati"
 
 # SZ
 #. :SYR:760:
-#: ../zypp/CountryCode.cc:421
+#: ../zypp/CountryCode.cc:428
 msgid "Swaziland"
 msgstr "Szváziföld"
 
 #. :SDN:736:
-#: ../zypp/CountryCode.cc:407
+#: ../zypp/CountryCode.cc:414
 msgid "Sweden"
 msgstr "Svédország"
 
@@ -3917,14 +3930,14 @@ msgid "Swedish"
 msgstr "Svéd"
 
 #. :COG:178:
-#: ../zypp/CountryCode.cc:258
+#: ../zypp/CountryCode.cc:265
 msgid "Switzerland"
 msgstr "Svájc"
 
 # SY
 # fuzzy
 #. :SLV:222:
-#: ../zypp/CountryCode.cc:420
+#: ../zypp/CountryCode.cc:427
 msgid "Syria"
 msgstr "Szíria"
 
@@ -3938,12 +3951,16 @@ msgstr "szír"
 #: ../zypp/media/MediaException.cc:91
 #, c-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "%s rendszerkivétel történt a(z) '%s' adathordozón."
 
 #: ../zypp/ZYppFactory.cc:354
 #, c-format
-msgid "System management is locked by the application with pid %d. Please close this application before trying again."
+msgid ""
+"System management is locked by the application with pid %d. Please close "
+"this application before trying again."
 msgstr ""
+"A rendszerkezelőt a %d pid-del rendelkező folyamat zárolta. Kérem, zárja be "
+"az alkalmazást, majd próbálja újra."
 
 # src/trans.h:116
 #. language code: tgl tl
@@ -3962,7 +3979,7 @@ msgid "Tai (Other)"
 msgstr "tai (egyéb)"
 
 #. :TUV:798:
-#: ../zypp/CountryCode.cc:436
+#: ../zypp/CountryCode.cc:443
 msgid "Taiwan"
 msgstr "Tajvan"
 
@@ -3972,7 +3989,7 @@ msgid "Tajik"
 msgstr "tadzsik"
 
 #. :THA:764:
-#: ../zypp/CountryCode.cc:427
+#: ../zypp/CountryCode.cc:434
 msgid "Tajikistan"
 msgstr "Tadzsikisztán"
 
@@ -3988,7 +4005,7 @@ msgstr "tamil"
 
 # TZ
 #. :TWN:158:
-#: ../zypp/CountryCode.cc:437
+#: ../zypp/CountryCode.cc:444
 msgid "Tanzania"
 msgstr "Tanzánia"
 
@@ -4018,9 +4035,13 @@ msgid "Thai"
 msgstr "thai"
 
 #. :TGO:768:
-#: ../zypp/CountryCode.cc:426
+#: ../zypp/CountryCode.cc:433
 msgid "Thailand"
 msgstr "Thaiföld"
+
+#: ../zypp/base/InterProcessMutex.cc:130
+msgid "This action is being run by another program already."
+msgstr "Ezt a folyamatot már elindította egy másik program."
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -4037,6 +4058,11 @@ msgstr "tigre"
 #: ../zypp/LanguageCode.cc:1118
 msgid "Tigrinya"
 msgstr "tigrinja"
+
+#: ../zypp/media/MediaException.cc:207
+#, c-format
+msgid "Timeout exceed when access '%s'."
+msgstr ""
 
 #. language code: tem
 #: ../zypp/LanguageCode.cc:1100
@@ -4055,7 +4081,7 @@ msgstr "tlingit"
 
 # TG
 #. :ATF:260:
-#: ../zypp/CountryCode.cc:425
+#: ../zypp/CountryCode.cc:432
 msgid "Togo"
 msgstr "Togo"
 
@@ -4065,15 +4091,15 @@ msgid "Tok Pisin"
 msgstr "tok pisin"
 
 # TK
-#. :TJK:762:
 #. language code: tkl
-#: ../zypp/CountryCode.cc:428 ../zypp/LanguageCode.cc:1122
+#. :TJK:762:
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "Tokelau"
 
 # TO
 #. :TUN:788:
-#: ../zypp/CountryCode.cc:431
+#: ../zypp/CountryCode.cc:438
 msgid "Tonga"
 msgstr "Tonga"
 
@@ -4091,11 +4117,11 @@ msgstr "tongai (Tonga-szigetek)"
 #: ../zypp/KeyRing.cc:507
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
-msgstr ""
+msgstr "Nem létező kulcsot (%s) próbált a %s kulcstartóba importálni"
 
 # TT
 #. :TUR:792:
-#: ../zypp/CountryCode.cc:434
+#: ../zypp/CountryCode.cc:441
 msgid "Trinidad and Tobago"
 msgstr "Trinidad és Tobago"
 
@@ -4121,7 +4147,7 @@ msgid "Tumbuka"
 msgstr "tumbuka"
 
 #. :TKM:795:
-#: ../zypp/CountryCode.cc:430
+#: ../zypp/CountryCode.cc:437
 msgid "Tunisia"
 msgstr "Tunézia"
 
@@ -4131,7 +4157,7 @@ msgid "Tupi Languages"
 msgstr "tupi nyelvek"
 
 #. :TLS:626:
-#: ../zypp/CountryCode.cc:433
+#: ../zypp/CountryCode.cc:440
 msgid "Turkey"
 msgstr "Törökország"
 
@@ -4152,21 +4178,21 @@ msgstr "türkmén"
 
 # TM
 #. :TKL:772:
-#: ../zypp/CountryCode.cc:429
+#: ../zypp/CountryCode.cc:436
 msgid "Turkmenistan"
 msgstr "Türkmenisztán"
 
 # TC
 # fuzzy
 #. :SWZ:748:
-#: ../zypp/CountryCode.cc:422
+#: ../zypp/CountryCode.cc:429
 msgid "Turks and Caicos Islands"
 msgstr "Turks és Caicos-szigetek"
 
 # TV
-#. :TTO:780:
 #. language code: tvl
-#: ../zypp/CountryCode.cc:435 ../zypp/LanguageCode.cc:1152
+#. :TTO:780:
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -4187,7 +4213,7 @@ msgstr "udmurti"
 
 # UG
 #. :UKR:804:
-#: ../zypp/CountryCode.cc:439
+#: ../zypp/CountryCode.cc:446
 msgid "Uganda"
 msgstr "Uganda"
 
@@ -4202,7 +4228,7 @@ msgid "Uighur"
 msgstr "ujgur"
 
 #. :TZA:834:
-#: ../zypp/CountryCode.cc:438
+#: ../zypp/CountryCode.cc:445
 msgid "Ukraine"
 msgstr "Ukrajna"
 
@@ -4220,11 +4246,11 @@ msgstr "umbundu"
 msgid "Unable to clone Url object"
 msgstr "Az URL objektum másolása sikertelen"
 
-#: ../zypp/target/hal/HalContext.cc:208
+#: ../zypp/target/hal/HalContext.cc:206
 msgid "Unable to create dbus connection"
 msgstr "A dbus kapcsolat létrehozása sikertelen"
 
-#: ../zypp/target/hal/HalContext.cc:254
+#: ../zypp/target/hal/HalContext.cc:249
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "A HAL kontextus inicializálása sikertelen -- lehetséges, hogy a hald nem fut?"
 
@@ -4239,24 +4265,24 @@ msgid "Undetermined"
 msgstr "meghatározatlan"
 
 #. :AND:020:
-#: ../zypp/CountryCode.cc:218
+#: ../zypp/CountryCode.cc:225
 msgid "United Arab Emirates"
 msgstr "Egyesült Arab Emirátusok"
 
 #. :GAB:266:
-#: ../zypp/CountryCode.cc:293
+#: ../zypp/CountryCode.cc:300
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
 
 # US
 #. :UMI:581:
-#: ../zypp/CountryCode.cc:441
+#: ../zypp/CountryCode.cc:448
 msgid "United States"
 msgstr "Amerikai Egyesült Államok"
 
 # UM
 #. :UGA:800:
-#: ../zypp/CountryCode.cc:440
+#: ../zypp/CountryCode.cc:447
 msgid "United States Minor Outlying Islands"
 msgstr "Amerikai Egyesült Államok - kisebb külső szigetek"
 
@@ -4278,9 +4304,9 @@ msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nem támogatott HTTP hitelesítési metódus: '%s'"
 
 #: ../zypp/media/MediaException.cc:140
-#, fuzzy, c-format
+#, c-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Érvénytelen URL séma: '%1'."
+msgstr "Érvénytelen URI séma: '%s'."
 
 #: ../devel/devel.mvidner/installation_sources.cc:75
 #, c-format
@@ -4307,38 +4333,38 @@ msgstr "urdu"
 #: ../zypp/url/UrlBase.cc:154
 #, c-format
 msgid "Url scheme does not allow a %s"
-msgstr "Az URI séma nem engedélyezi a(z) %s használatát"
+msgstr "Az Url séma nem engedélyezi a(z) %s használatát"
 
 #: ../zypp/url/UrlBase.cc:1020
 msgid "Url scheme does not allow a host component"
-msgstr "Az URI séma megadása nem engedélyezi a gépkomponenst (host)"
+msgstr "Az Url séma megadása nem engedélyezi a gépkomponenst (host)"
 
 #: ../zypp/url/UrlBase.cc:981
 msgid "Url scheme does not allow a password"
-msgstr "Az URI séma nem engedélyezi a jelszót"
+msgstr "Az Url séma nem engedélyezi a jelszót"
 
 #: ../zypp/url/UrlBase.cc:1068
 msgid "Url scheme does not allow a port"
-msgstr "Az URI séma nem engedélyezi a portot"
+msgstr "Az Url séma nem engedélyezi a portot"
 
 #: ../zypp/url/UrlBase.cc:947
 msgid "Url scheme does not allow a username"
-msgstr "Az URI séma nem engedélyezi a felhasználónevet"
+msgstr "Az Url séma nem engedélyezi a felhasználónevet"
 
 #: ../zypp/url/UrlBase.cc:820
 msgid "Url scheme is a required component"
-msgstr "Az url-séma megadása szükséges"
+msgstr "Az Url-séma megadása szükséges"
 
 #: ../zypp/url/UrlBase.cc:1010
 msgid "Url scheme requires a host component"
-msgstr "Az URI sémában a gépkomponenst (host) megadása kötelező"
+msgstr "Az Url sémában a gépkomponenst (host) megadása kötelező"
 
 #: ../zypp/url/UrlBase.cc:1096
 msgid "Url scheme requires path name"
-msgstr "Az URI sémában az elérési útvonal megadása szükséges"
+msgstr "Az Url sémában az elérési útvonal megadása szükséges"
 
 #. :USA:840:
-#: ../zypp/CountryCode.cc:442
+#: ../zypp/CountryCode.cc:449
 msgid "Uruguay"
 msgstr "Uruguay"
 
@@ -4348,7 +4374,7 @@ msgid "Uzbek"
 msgstr "üzbég"
 
 #. :URY:858:
-#: ../zypp/CountryCode.cc:443
+#: ../zypp/CountryCode.cc:450
 msgid "Uzbekistan"
 msgstr "Üzbegisztán"
 
@@ -4364,7 +4390,7 @@ msgstr "A megadokt URL nem tartalmaz érvényes metaadatot"
 
 # VU
 #. :VNM:704:
-#: ../zypp/CountryCode.cc:450
+#: ../zypp/CountryCode.cc:457
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
@@ -4374,14 +4400,14 @@ msgid "Venda"
 msgstr "venda"
 
 #. :VCT:670:
-#: ../zypp/CountryCode.cc:446
+#: ../zypp/CountryCode.cc:453
 msgid "Venezuela"
 msgstr "Venezuela"
 
 # VN
 # fuzzy
 #. :VIR:850:
-#: ../zypp/CountryCode.cc:449
+#: ../zypp/CountryCode.cc:456
 msgid "Vietnam"
 msgstr "Vietnám"
 
@@ -4394,7 +4420,7 @@ msgstr "vietnami"
 # VI
 # fuzzy
 #. :VGB:092:
-#: ../zypp/CountryCode.cc:448
+#: ../zypp/CountryCode.cc:455
 msgid "Virgin Islands, U.S."
 msgstr "Virgin-szigetek (USA)"
 
@@ -4421,7 +4447,7 @@ msgstr "valamo"
 # WF
 # fuzzy
 #. :VUT:548:
-#: ../zypp/CountryCode.cc:451
+#: ../zypp/CountryCode.cc:458
 msgid "Wallis and Futuna"
 msgstr "Wallis és Futuna-szigetek"
 
@@ -4451,7 +4477,7 @@ msgstr "velszi"
 
 # EH
 #. :EGY:818:
-#: ../zypp/CountryCode.cc:281
+#: ../zypp/CountryCode.cc:288
 msgid "Western Sahara"
 msgstr "Nyugat-Szahara"
 
@@ -4482,7 +4508,7 @@ msgid "Yapese"
 msgstr "yapi"
 
 #. :WSM:882:
-#: ../zypp/CountryCode.cc:453
+#: ../zypp/CountryCode.cc:460
 msgid "Yemen"
 msgstr "Jemen"
 
@@ -4503,7 +4529,7 @@ msgstr "jupik nyelvek"
 
 # ZM
 #. :ZAF:710:
-#: ../zypp/CountryCode.cc:456
+#: ../zypp/CountryCode.cc:463
 msgid "Zambia"
 msgstr "Zambia"
 
@@ -4529,7 +4555,7 @@ msgid "Zhuang"
 msgstr "zhuang"
 
 #. :ZMB:894:
-#: ../zypp/CountryCode.cc:457
+#: ../zypp/CountryCode.cc:464
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
@@ -4551,21 +4577,20 @@ msgstr "az applydeltarpm ellenőrzés sikertelen."
 msgid "applydeltarpm failed."
 msgstr "az applydeltarpm futtatása sikertelen."
 
-#: ../zypp/sat/SATResolver.cc:825
+#: ../zypp/sat/SATResolver.cc:951
 #, c-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "architektúra váltás erről: %s erre: %s"
 
 # modules/inst_target_part.ycp:676
-#: ../zypp/sat/SATResolver.cc:578
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:704
+#, c-format
 msgid "cannot install both %s and %s"
-msgstr "%s nem telepíthető"
+msgstr "nem telepíthető %s és %s is"
 
-#: ../zypp/sat/SATResolver.cc:562
-#, fuzzy
+#: ../zypp/sat/SATResolver.cc:688
 msgid "conflicting requests"
-msgstr "Kapcsolat kezdeményezése: "
+msgstr "ütköző kérelmek"
 
 #. timestamp
 #: ../zypp/target/rpm/RpmDb.cc:2329
@@ -4573,10 +4598,10 @@ msgstr "Kapcsolat kezdeményezése: "
 msgid "created backup %s"
 msgstr "%s másolata létrehozva"
 
-#: ../zypp/sat/SATResolver.cc:852
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:978
+#, c-format
 msgid "deinstallation of %s"
-msgstr "%s telepítése meghiúsult:"
+msgstr "%s eltávolítása"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
@@ -4585,51 +4610,50 @@ msgstr "%s telepítése meghiúsult:"
 msgid "delete %s"
 msgstr "%s törlése"
 
-#: ../zypp/sat/SATResolver.cc:621
-#, fuzzy
+#: ../zypp/sat/SATResolver.cc:747
 msgid "deleted providers: "
-msgstr "A(z) %s képességet semmi nem biztosítja"
+msgstr "törölt feloldhatók: "
 
-#: ../zypp/sat/SATResolver.cc:773
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:899
+#, c-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "Ne telepítse vagy törölje a vonatkozó feloldhatókat"
+msgstr "ne kérdezzen rá a %s-t biztosító feloldhatók eltávolítására"
 
-#: ../zypp/sat/SATResolver.cc:758
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:884
+#, c-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "%s számára nincs telepíthető szolgáltató"
+msgstr "ne kérdezzen rá a %s-t biztosító feloldható telepítésére"
 
 # modules/inst_target_part.ycp:676
-#: ../zypp/sat/SATResolver.cc:711
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:837
+#, c-format
 msgid "do not forbid installation of %s"
-msgstr "%s nem telepíthető"
+msgstr "ne tagadja meg %s telepítését"
 
 # modules/inst_target_part.ycp:676
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:690 ../zypp/sat/SATResolver.cc:729
+#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
 msgid "do not install %s"
-msgstr "%s nem telepíthető"
+msgstr "ne telepítse: %s"
 
-#: ../zypp/sat/SATResolver.cc:785
+#: ../zypp/sat/SATResolver.cc:911
 #, c-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "ne telepítse %s legújabb verzióját"
 
 # modules/inst_target_part.ycp:676
-#: ../zypp/sat/SATResolver.cc:685
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:811
+#, c-format
 msgid "do not keep %s installed"
-msgstr "nincs telepítve"
+msgstr "ne hagyja feltelepítve: %s"
 
-#: ../zypp/sat/SATResolver.cc:818
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:944
+#, c-format
 msgid "downgrade of %s to %s"
-msgstr "%s frissítése; az új: %s"
+msgstr "régebbi verzió telepítése %s helyett: %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
@@ -4638,7 +4662,7 @@ msgstr "%s frissítése; az új: %s"
 msgid "install %s"
 msgstr "%s telepítése"
 
-#: ../zypp/sat/SATResolver.cc:832
+#: ../zypp/sat/SATResolver.cc:958
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4646,42 +4670,46 @@ msgid ""
 "-->\n"
 "  %s"
 msgstr ""
+"%s telepítése (gyártó megváltoztatásával)\n"
+"  %s\n"
+"-->\n"
+"  %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:706 ../zypp/sat/SATResolver.cc:743
+#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
 msgstr "%s megtartása"
 
-#: ../zypp/target/hal/HalContext.cc:224
+#: ../zypp/target/hal/HalContext.cc:219
 msgid "libhal_ctx_new: Can't create libhal context"
 msgstr "libhal_ctx_new: A libhal kontextus létrehozása sikertelen"
 
-#: ../zypp/target/hal/HalContext.cc:239
+#: ../zypp/target/hal/HalContext.cc:234
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: A dbus kapcsolat beállítása sikertelen"
 
-#: ../zypp/sat/SATResolver.cc:573
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:699
+#, c-format
 msgid "nothing provides %s needed by %s"
-msgstr "A(z) %s csomagot igényli %s"
+msgstr "semmi sem biztosítja a %s által igényelt %s csomagot"
 
-#: ../zypp/sat/SATResolver.cc:565
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:691
+#, c-format
 msgid "nothing provides requested %s"
-msgstr "A(z) %s képességet semmi nem biztosítja"
+msgstr "semmi nem biztosítja az igényelt %s képességet"
 
-#: ../zypp/sat/SATResolver.cc:559
-#, fuzzy, c-format
+#: ../zypp/sat/SATResolver.cc:685
+#, c-format
 msgid "problem with installed package %s"
-msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
+msgstr "probléma a telepített csomaggal: %s"
 
-#: ../zypp/sat/SATResolver.cc:840
+#: ../zypp/sat/SATResolver.cc:966
 #, c-format
 msgid "replacement of %s with %s"
-msgstr ""
+msgstr "%s cseréje erre: %s"
 
 #. %s = filenames
 #: ../zypp/target/rpm/RpmDb.cc:2048
@@ -4719,10 +4747,9 @@ msgstr ""
 "Az rpm elmentette %s-t, mint %s.\n"
 "A különbség első 25 sora:\n"
 
-#: ../zypp/sat/SATResolver.cc:633
-#, fuzzy
+#: ../zypp/sat/SATResolver.cc:759
 msgid "uninstallable providers: "
-msgstr "%s számára nincs telepíthető szolgáltató"
+msgstr "nem eltávolítható szolgáltatók: "
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
@@ -4734,326 +4761,3 @@ msgstr "%s zárolásának feloldása"
 msgid "unlock all resolvables"
 msgstr "Összes feloldhatók zárolásának feloldása"
 
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "A(z) '%s' telepítési forrás betöltése"
-
-#~ msgid "Reading patch and delta rpms from '%s' repository cache"
-#~ msgstr "Frissítés és különbség rpm beolvasása a(z) '%s' telepítési forrásból"
-
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "A(z) '%s' telepítési forrás gyorsítótárának kiürítése"
-
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "A(z) '%s' telepítési forrás gyorsítótárának beolvasása"
-
-#~ msgid "Software management is already running."
-#~ msgstr "A szoftverkezelő már fut."
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "A(z) %s csomagot felváltja %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "A(z) %s csomagot felváltja %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "A felhasználó törli a(z) %s csomagot.\n"
-
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "Egy alkalmazás törli a(z) %s csomagot. (ApplLow/ApplHigh)\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "A felhasználó telepíti a(z) %s csomagot.\n"
-
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "Egy alkalmazás telepíti a(z) %s csomagot. (ApplLow/ApplHigh)\n"
-
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "Nem található érvényes megoldás %d másodpercen belül"
-
-#~ msgid "The solver has reached a defined timout"
-#~ msgstr "A feloldásvizsgálat túllépte a megadott időt"
-
-#~ msgid "No valid solution found with just resolvables of best architecture."
-#~ msgstr "Nem található érvényes megoldás kizárólag a legmegfelelőbb architektúra feloldhatóinak használatával."
-
-#~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
-#~ msgstr "Ez a futtatás csak a legmegfelelőbb architektúra feloldhatóit veszi figyelembe.\n"
-
-#~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-#~ msgstr "Az összes lehetséges feloldandó vizsgálata hosszabb ideig tart, de megbízhatóbb eredményt ad."
-
-#~ msgid "Invalid information"
-#~ msgstr "Érvénytelen információ"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "A(z) %s csomagot más feloldhatók igénylik"
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s-t igényli:\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s ütközik más feloldhatókkal"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s ütközik az alábbiakkal:\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s elavulttá tesz más feloldhatókat"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s elavulttá teszi: %s"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "Ezek a feloldhatók törlésre kerülnek a rendszerből."
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s függ más feloldhatóktól"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s függ a(z) %s csomagtól"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s függ ettől: %s"
-
-#~ msgid "Child of"
-#~ msgstr "Szülője "
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "Nem áll rendelkezésre ezt a követelményt kielégítő erőforrás."
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "A fent/lent leírt problémák miatt ez a feloldás nem oldja fel az összes függőséget"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "%s nem telepíthető, mert ütközik (%s)"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "%s nincs telepítve és nem telepíthetőnek lett megjelölve"
-
-#~ msgid "Cannot install %s due to dependency problems"
-#~ msgstr "%s nem telepíthető függőségi problémák miatt"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "%s egyes követelményei nincsenek kielégítve"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "%s függőségei hiányoznak"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s nem telepíthető hiányzó függőségek miatt"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s kielégíti %s függőségeit, de eltávolításra kerül"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "A(z) %s kielégíti a(z) %s függőségeit, de a rendszeren marad"
-
-#~ msgid "No need to install %s"
-#~ msgstr "Nincs szükség %s telepítésére"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s nem távolítható el, mert még mindig szükséges"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s miatt %s elavult, de %s zárolás miatt nem törölhető."
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "A(z) %s nem telepíthető, mert ütközik"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s nem telepíthető, mert ütközik (%s)"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "A(z) %s követelmény nem teljesíthető."
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "mert %s szükséges %s esetén, %s frissítésekor"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "%s követelménye (%s) hiányzik"
-
-#~ msgid ", Action: "
-#~ msgstr ", Művelet"
-
-#~ msgid ", Trigger: "
-#~ msgstr ", trigger: "
-
-#~ msgid "package"
-#~ msgstr "csomag"
-
-#~ msgid "selection"
-#~ msgstr "kiválasztás"
-
-#~ msgid "pattern"
-#~ msgstr "minta"
-
-#~ msgid "product"
-#~ msgstr "termék"
-
-#~ msgid "patch"
-#~ msgstr "javítás"
-
-#~ msgid "script"
-#~ msgstr "parancsfájl"
-
-#~ msgid "message"
-#~ msgstr "üzenet"
-
-#~ msgid "atom"
-#~ msgstr "atom"
-
-#~ msgid "system"
-#~ msgstr "rendszer"
-
-#~ msgid "Resolvable"
-#~ msgstr "Feloldható"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "A feloldási kísérlet érvénytelennek jelölése."
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "%s feloldható telepíthetetlennek jelölése"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "%s nem telepíthető, mert már meg van jelölve eltávolításra"
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "%s nem telepíthető, mert nem ehhez a rendszerhez való."
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "%s nem telepíthető, mert %s már meg van jelölve telepítésre"
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "Ennek hatására %s érvénytelenné válna."
-
-# modules/inst_target_part.ycp:676
-#~ msgid "Establishing %s"
-#~ msgstr "%s előfeldolgozása"
-
-# modules/inst_target_part.ycp:676
-#~ msgid "Installing %s"
-#~ msgstr "%s telepítése"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "%s kimarad: már telepítve van"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "%s számára nincs alternatív telepített szolgáltató"
-
-#~ msgid "for %s"
-#~ msgstr "%s számára"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "A(z) %s csomagra frissítés %s eltávolításának elkerülése érdekében nem lehetséges."
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s biztosítja %s-t, de eltávolításra van ütemezve."
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s biztosítja %s-t, de %s egy másik verziója már telepítve van."
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s biztosítja %s-t, de nem telepíthető.  Hogy további információk kapjon a problémáról, próbálja meg külön telepíteni."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s biztosítja %s-t, de zárolva van."
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "A(z) %s biztosítja a(z) %s csomagot, de a rendszeren marad."
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s biztosítja %s-t, de más architektúrával rendelkezik."
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s biztosítja %s-t, de más gyártótól (%s)."
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "%s %s követelménye nem elégíthető ki"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "A(z) %s csomagot egy másik telepített feloldható igényli, ezért a csatolása nem lesz megszüntetve."
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "A(z) %s csomagot egy másik telepített feloldható igényli, ezért a csatolása nem lesz megszüntetve."
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s zárolva van, ezért nem távolítható el."
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "%s ütközése (%s) a telepítendő %s eltávolítását igényli"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "%s nem telepíthetőnek lesz jelölve, mert ütközik a(z) %s csomaggal"
-
-#~ msgid "from %s"
-#~ msgstr "%s csomagból"
-
-#~ msgid " Error!"
-#~ msgstr "Hiba!"
-
-#~ msgid " Important!"
-#~ msgstr "Fontos!"
-
-#~ msgid "Make a solver run with ALL possibilities."
-#~ msgstr "Az összes lehetőség bekapcsolása."
-
-#~ msgid "Regarding all resolvables with a compatible architecture."
-#~ msgstr "Minden feloldandó figyelembevétele a kompatibilis architektúrán."
-
-#~ msgid "Make a solver run with best architecture only."
-#~ msgstr "Csak a legmegfelelőbb architektúra használata."
-
-#~ msgid "Regarding resolvables with best architecture only."
-#~ msgstr "Minden feloldandó figyelembevétele a legmegfelelőbb architektúrán."
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s ettől függött: %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "A(z) %s csomagot ajánlja a(z) %s csomag"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "A(z) %s csomagot javasolja a(z) %s csomag"
-
-#~ msgid "%s will be evaluated for installation (freshened) by %s"
-#~ msgstr "A(z) %s csomag frissebb verziója kerül telepítésre a(z) %s csomag telepítése miatt."
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "A(z) %s csomagot felváltja a(z) %s csomag"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "A(z) %s csomagot kiegészíti a(z) %s csomag"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s %s része"
-
-#~ msgid "Double timeout"
-#~ msgstr "Kétszeres időtúllépés"
-
-#~ msgid "Start the next solver run with doubled timeout."
-#~ msgstr "A következő feloldásvizsgálat indítása kétszeres időtúllépési értékkel."

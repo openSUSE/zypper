@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-19 17:06+0100\n"
+"POT-Creation-Date: 2008-03-31 15:30+0200\n"
 "PO-Revision-Date: 2008-03-22 18:23+1000\n"
 "Last-Translator: Eric Shan <ericalways@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
@@ -16,14 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/sat/SATResolver.cc:631
+#: ../zypp/sat/SATResolver.cc:757
 #, fuzzy
 msgid ""
 "\n"
 "uninstallable providers: "
 msgstr "没有提供可安装的 %s"
 
-#: ../zypp/sat/SATResolver.cc:583
+#: ../zypp/media/MediaException.cc:214
+#, c-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+
+#: ../zypp/sat/SATResolver.cc:709
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s 冲突 %s"
@@ -42,12 +47,12 @@ msgstr "%s 安装失败"
 msgid "%s installed ok"
 msgstr "%s 安装成功"
 
-#: ../zypp/sat/SATResolver.cc:569
+#: ../zypp/sat/SATResolver.cc:695
 #, c-format
 msgid "%s is not installable"
 msgstr "%s 不能安装"
 
-#: ../zypp/sat/SATResolver.cc:588
+#: ../zypp/sat/SATResolver.cc:714
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s 废弃 %s"
@@ -77,7 +82,7 @@ msgstr "%s 去除失败"
 msgid "%s remove ok"
 msgstr "%s 去除成功"
 
-#: ../zypp/sat/SATResolver.cc:619
+#: ../zypp/sat/SATResolver.cc:745
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -102,7 +107,7 @@ msgstr "阿乔利语"
 msgid "Adangme"
 msgstr "阿当梅语"
 
-#: ../zypp/RepoManager.cc:1015
+#: ../zypp/RepoManager.cc:1005
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "正在添加安装源 '%s'"
@@ -122,7 +127,7 @@ msgid "Afar"
 msgstr "阿法尔"
 
 #. :ARE:784:
-#: ../zypp/CountryCode.cc:219
+#: ../zypp/CountryCode.cc:226
 msgid "Afghanistan"
 msgstr "阿富汗"
 
@@ -157,12 +162,12 @@ msgid "Akkadian"
 msgstr "阿卡德语"
 
 #. :ABW:533:
-#: ../zypp/CountryCode.cc:232
+#: ../zypp/CountryCode.cc:239
 msgid "Aland Islands"
 msgstr "奥兰群岛"
 
 #. :AIA:660:
-#: ../zypp/CountryCode.cc:222
+#: ../zypp/CountryCode.cc:229
 msgid "Albania"
 msgstr "阿尔巴尼亚"
 
@@ -177,7 +182,7 @@ msgid "Aleut"
 msgstr "阿留申语"
 
 #. :DOM:214:
-#: ../zypp/CountryCode.cc:277
+#: ../zypp/CountryCode.cc:284
 msgid "Algeria"
 msgstr "阿尔及利亚"
 
@@ -192,7 +197,7 @@ msgid "Altaic (Other)"
 msgstr "阿尔泰诸语言（其它）"
 
 #. :ARG:032:
-#: ../zypp/CountryCode.cc:228
+#: ../zypp/CountryCode.cc:235
 msgid "American Samoa"
 msgstr "美属萨摩亚"
 
@@ -201,27 +206,27 @@ msgstr "美属萨摩亚"
 msgid "Amharic"
 msgstr "阿姆哈拉语"
 
-#: ../zypp/CountryCode.cc:217
+#: ../zypp/CountryCode.cc:224
 msgid "Andorra"
 msgstr "安道尔共和国"
 
 #. :ANT:530:
-#: ../zypp/CountryCode.cc:225
+#: ../zypp/CountryCode.cc:232
 msgid "Angola"
 msgstr "安哥拉"
 
 #. :ATG:028:
-#: ../zypp/CountryCode.cc:221
+#: ../zypp/CountryCode.cc:228
 msgid "Anguilla"
 msgstr "安圭拉岛"
 
 #. :AGO:024:
-#: ../zypp/CountryCode.cc:226
+#: ../zypp/CountryCode.cc:233
 msgid "Antarctica"
 msgstr "南极洲"
 
 #. :AFG:004:
-#: ../zypp/CountryCode.cc:220
+#: ../zypp/CountryCode.cc:227
 msgid "Antigua and Barbuda"
 msgstr "安提瓜岛和巴布达岛"
 
@@ -261,12 +266,12 @@ msgid "Arawak"
 msgstr "阿拉瓦克语"
 
 #. :ATA:010:
-#: ../zypp/CountryCode.cc:227
+#: ../zypp/CountryCode.cc:234
 msgid "Argentina"
 msgstr "阿根廷"
 
 #. :ALB:008:
-#: ../zypp/CountryCode.cc:223
+#: ../zypp/CountryCode.cc:230
 msgid "Armenia"
 msgstr "亚美尼亚"
 
@@ -281,7 +286,7 @@ msgid "Artificial (Other)"
 msgstr "人工语言（其它）"
 
 #. :AUS:036:
-#: ../zypp/CountryCode.cc:231
+#: ../zypp/CountryCode.cc:238
 msgid "Aruba"
 msgstr "阿鲁巴岛"
 
@@ -301,7 +306,7 @@ msgid "Athapascan Languages"
 msgstr "阿撒巴斯卡语"
 
 #. :AUT:040:
-#: ../zypp/CountryCode.cc:230
+#: ../zypp/CountryCode.cc:237
 msgid "Australia"
 msgstr "澳大利亚"
 
@@ -311,7 +316,7 @@ msgid "Australian Languages"
 msgstr "澳洲语"
 
 #. :ASM:016:
-#: ../zypp/CountryCode.cc:229
+#: ../zypp/CountryCode.cc:236
 msgid "Austria"
 msgstr "奥地利"
 
@@ -346,7 +351,7 @@ msgid "Aymara"
 msgstr "艾马拉语"
 
 #. :ALA:248:
-#: ../zypp/CountryCode.cc:233
+#: ../zypp/CountryCode.cc:240
 msgid "Azerbaijan"
 msgstr "阿塞拜疆"
 
@@ -365,12 +370,12 @@ msgid "Bad media attach point"
 msgstr ""
 
 #. :BRA:076:
-#: ../zypp/CountryCode.cc:247
+#: ../zypp/CountryCode.cc:254
 msgid "Bahamas"
 msgstr "巴哈马群岛"
 
 #. :BGR:100:
-#: ../zypp/CountryCode.cc:240
+#: ../zypp/CountryCode.cc:247
 msgid "Bahrain"
 msgstr "巴林"
 
@@ -405,7 +410,7 @@ msgid "Banda"
 msgstr "班达语"
 
 #. :BRB:052:
-#: ../zypp/CountryCode.cc:236
+#: ../zypp/CountryCode.cc:243
 msgid "Bangladesh"
 msgstr "孟加拉国"
 
@@ -415,7 +420,7 @@ msgid "Bantu (Other)"
 msgstr "班图诸语言（其它）"
 
 #. :BIH:070:
-#: ../zypp/CountryCode.cc:235
+#: ../zypp/CountryCode.cc:242
 msgid "Barbados"
 msgstr "巴巴多斯岛"
 
@@ -445,7 +450,7 @@ msgid "Beja"
 msgstr "别札语"
 
 #. :BWA:072:
-#: ../zypp/CountryCode.cc:251
+#: ../zypp/CountryCode.cc:258
 msgid "Belarus"
 msgstr "白俄罗斯"
 
@@ -455,12 +460,12 @@ msgid "Belarusian"
 msgstr "白俄罗斯语"
 
 #. :BGD:050:
-#: ../zypp/CountryCode.cc:237
+#: ../zypp/CountryCode.cc:244
 msgid "Belgium"
 msgstr "比利时"
 
 #. :BLR:112:
-#: ../zypp/CountryCode.cc:252
+#: ../zypp/CountryCode.cc:259
 msgid "Belize"
 msgstr "伯利兹城"
 
@@ -475,7 +480,7 @@ msgid "Bengali"
 msgstr "孟加拉语"
 
 #. :BDI:108:
-#: ../zypp/CountryCode.cc:242
+#: ../zypp/CountryCode.cc:249
 msgid "Benin"
 msgstr "贝宁湾"
 
@@ -485,7 +490,7 @@ msgid "Berber (Other)"
 msgstr "柏柏尔诸语言（其它）"
 
 #. :BEN:204:
-#: ../zypp/CountryCode.cc:243
+#: ../zypp/CountryCode.cc:250
 msgid "Bermuda"
 msgstr "百慕大群岛"
 
@@ -495,7 +500,7 @@ msgid "Bhojpuri"
 msgstr "博杰普尔语"
 
 #. :BHS:044:
-#: ../zypp/CountryCode.cc:248
+#: ../zypp/CountryCode.cc:255
 msgid "Bhutan"
 msgstr "不丹"
 
@@ -525,12 +530,12 @@ msgid "Blin"
 msgstr "布林语"
 
 #. :BRN:096:
-#: ../zypp/CountryCode.cc:245
+#: ../zypp/CountryCode.cc:252
 msgid "Bolivia"
 msgstr "玻利维亚"
 
 #. :AZE:031:
-#: ../zypp/CountryCode.cc:234
+#: ../zypp/CountryCode.cc:241
 msgid "Bosnia and Herzegovina"
 msgstr "波斯尼亚和黑塞哥维那"
 
@@ -540,12 +545,12 @@ msgid "Bosnian"
 msgstr "波斯尼亚语"
 
 #. :BVT:074:
-#: ../zypp/CountryCode.cc:250
+#: ../zypp/CountryCode.cc:257
 msgid "Botswana"
 msgstr "博茨瓦纳"
 
 #. :BTN:064:
-#: ../zypp/CountryCode.cc:249
+#: ../zypp/CountryCode.cc:256
 msgid "Bouvet Island"
 msgstr "布维岛"
 
@@ -555,7 +560,7 @@ msgid "Braj"
 msgstr "布拉杰语"
 
 #. :BOL:068:
-#: ../zypp/CountryCode.cc:246
+#: ../zypp/CountryCode.cc:253
 msgid "Brazil"
 msgstr "巴西"
 
@@ -565,17 +570,17 @@ msgid "Breton"
 msgstr "布里多尼语"
 
 #. :IND:356:
-#: ../zypp/CountryCode.cc:320
+#: ../zypp/CountryCode.cc:327
 msgid "British Indian Ocean Territory"
 msgstr "英属印度洋领地"
 
 #. :VEN:862:
-#: ../zypp/CountryCode.cc:447
+#: ../zypp/CountryCode.cc:454
 msgid "British Virgin Islands"
 msgstr "英属维尔京群岛"
 
 #. :BMU:060:
-#: ../zypp/CountryCode.cc:244
+#: ../zypp/CountryCode.cc:251
 msgid "Brunei Darussalam"
 msgstr "文莱达鲁萨兰国"
 
@@ -584,13 +589,13 @@ msgstr "文莱达鲁萨兰国"
 msgid "Buginese"
 msgstr "布吉语"
 
-#: ../zypp/RepoManager.cc:720
+#: ../zypp/RepoManager.cc:718
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建 '%s' 安装源缓存"
 
 #. :BFA:854:
-#: ../zypp/CountryCode.cc:239
+#: ../zypp/CountryCode.cc:246
 msgid "Bulgaria"
 msgstr "保加利亚"
 
@@ -605,7 +610,7 @@ msgid "Buriat"
 msgstr "布利亚特语"
 
 #. :BEL:056:
-#: ../zypp/CountryCode.cc:238
+#: ../zypp/CountryCode.cc:245
 msgid "Burkina Faso"
 msgstr "布基纳法索"
 
@@ -615,7 +620,7 @@ msgid "Burmese"
 msgstr "缅甸语"
 
 #. :BHR:048:
-#: ../zypp/CountryCode.cc:241
+#: ../zypp/CountryCode.cc:248
 msgid "Burundi"
 msgstr "布隆迪"
 
@@ -625,12 +630,12 @@ msgid "Caddo"
 msgstr "卡多语"
 
 #. :KGZ:417:
-#: ../zypp/CountryCode.cc:330
+#: ../zypp/CountryCode.cc:337
 msgid "Cambodia"
 msgstr "柬埔寨"
 
 #. :CHL:152:
-#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:269
 msgid "Cameroon"
 msgstr "喀麦隆"
 
@@ -643,7 +648,7 @@ msgstr "无法创建文件。"
 msgid "Can't acquire the mutex lock"
 msgstr "无法获取 mutex 锁定"
 
-#: ../zypp/Repository.cc:126 ../zypp/Repository.cc:143
+#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
 msgid "Can't add solvables to norepo."
 msgstr ""
 
@@ -686,7 +691,7 @@ msgstr "无法打开管道 (%s)。"
 msgid "Can't open pty (%s)."
 msgstr "无法打开 pty (%s)."
 
-#: ../zypp/Repository.cc:132
+#: ../zypp/Repository.cc:136
 #, fuzzy
 msgid "Can't open solv-file: "
 msgstr "无法打开文件 %1。"
@@ -709,7 +714,7 @@ msgid "Can't set recursive mutex attribute"
 msgstr "无法设置递归的 mutex 特性"
 
 #. :BLZ:084:
-#: ../zypp/CountryCode.cc:253
+#: ../zypp/CountryCode.cc:260
 msgid "Canada"
 msgstr "加拿大"
 
@@ -733,7 +738,7 @@ msgid "Cannot write file '%s'."
 msgstr "无法写入文件“%s”。"
 
 #. :CUB:192:
-#: ../zypp/CountryCode.cc:268
+#: ../zypp/CountryCode.cc:275
 msgid "Cape Verde"
 msgstr "佛得角"
 
@@ -753,7 +758,7 @@ msgid "Caucasian (Other)"
 msgstr "高加索诸语言（其它）"
 
 #. :KWT:414:
-#: ../zypp/CountryCode.cc:337
+#: ../zypp/CountryCode.cc:344
 msgid "Cayman Islands"
 msgstr "开曼群岛"
 
@@ -768,7 +773,7 @@ msgid "Celtic (Other)"
 msgstr "凯尔特诸语言（其它）"
 
 #. :COD:180:
-#: ../zypp/CountryCode.cc:256
+#: ../zypp/CountryCode.cc:263
 msgid "Central African Republic"
 msgstr "中非共和国"
 
@@ -778,7 +783,7 @@ msgid "Central American Indian (Other)"
 msgstr "中美洲印第安诸语言（其它）"
 
 #. :TCA:796:
-#: ../zypp/CountryCode.cc:423
+#: ../zypp/CountryCode.cc:430
 msgid "Chad"
 msgstr "乍得湖"
 
@@ -830,12 +835,12 @@ msgid "Chichewa"
 msgstr "齐切瓦语"
 
 #. :COK:184:
-#: ../zypp/CountryCode.cc:261
+#: ../zypp/CountryCode.cc:268
 msgid "Chile"
 msgstr "智利"
 
 #. :CMR:120:
-#: ../zypp/CountryCode.cc:263
+#: ../zypp/CountryCode.cc:270
 msgid "China"
 msgstr "中国"
 
@@ -860,7 +865,7 @@ msgid "Choctaw"
 msgstr "乔克托语"
 
 #. :CPV:132:
-#: ../zypp/CountryCode.cc:269
+#: ../zypp/CountryCode.cc:276
 msgid "Christmas Island"
 msgstr "圣诞岛"
 
@@ -885,12 +890,12 @@ msgid "Classical Newari"
 msgstr "古典尼瓦尔语"
 
 #. :CAN:124:
-#: ../zypp/CountryCode.cc:254
+#: ../zypp/CountryCode.cc:261
 msgid "Cocos (Keeling) Islands"
 msgstr "科科斯（基林）群岛"
 
 #. :CHN:156:
-#: ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:271
 msgid "Colombia"
 msgstr "哥伦比亚"
 
@@ -909,18 +914,18 @@ msgid "Command was killed by signal %d (%s)."
 msgstr ""
 
 #. :KIR:296:
-#: ../zypp/CountryCode.cc:332
+#: ../zypp/CountryCode.cc:339
 msgid "Comoros"
 msgstr "科摩罗"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:255 ../zypp/CountryCode.cc:257
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "刚果"
 
 #. :CIV:384:
-#: ../zypp/CountryCode.cc:260
+#: ../zypp/CountryCode.cc:267
 msgid "Cook Islands"
 msgstr "库克群岛"
 
@@ -940,12 +945,12 @@ msgid "Corsican"
 msgstr "科西嘉语"
 
 #. :COL:170:
-#: ../zypp/CountryCode.cc:265
+#: ../zypp/CountryCode.cc:272
 msgid "Costa Rica"
 msgstr "哥斯达黎加"
 
 #. :CHE:756:
-#: ../zypp/CountryCode.cc:259
+#: ../zypp/CountryCode.cc:266
 msgid "Cote D'Ivoire"
 msgstr "科特迪瓦共和国"
 
@@ -985,7 +990,7 @@ msgid "Crimean Tatar"
 msgstr "克里米亚鞑靼语"
 
 #. :HND:340:
-#: ../zypp/CountryCode.cc:313
+#: ../zypp/CountryCode.cc:320
 msgid "Croatia"
 msgstr "克罗地亚"
 
@@ -995,7 +1000,7 @@ msgid "Croatian"
 msgstr "克罗地亚语"
 
 #. :SCG:891:
-#: ../zypp/CountryCode.cc:267
+#: ../zypp/CountryCode.cc:274
 msgid "Cuba"
 msgstr "古巴"
 
@@ -1005,7 +1010,7 @@ msgid "Cushitic (Other)"
 msgstr "库施特诸语言（其它）"
 
 #. :CXR:162:
-#: ../zypp/CountryCode.cc:270
+#: ../zypp/CountryCode.cc:277
 msgid "Cyprus"
 msgstr "塞浦路斯"
 
@@ -1015,7 +1020,7 @@ msgid "Czech"
 msgstr "捷克语"
 
 #. :CYP:196:
-#: ../zypp/CountryCode.cc:271
+#: ../zypp/CountryCode.cc:278
 msgid "Czech Republic"
 msgstr "捷克共和国"
 
@@ -1045,7 +1050,7 @@ msgid "Delaware"
 msgstr "特拉瓦印第安人语"
 
 #. :DJI:262:
-#: ../zypp/CountryCode.cc:274
+#: ../zypp/CountryCode.cc:281
 msgid "Denmark"
 msgstr "丹麦"
 
@@ -1060,7 +1065,7 @@ msgid "Divehi"
 msgstr "迪蔚希语"
 
 #. :DEU:276:
-#: ../zypp/CountryCode.cc:273
+#: ../zypp/CountryCode.cc:280
 msgid "Djibouti"
 msgstr "吉布提"
 
@@ -1079,12 +1084,12 @@ msgid "Dogrib"
 msgstr "多格里布语"
 
 #. :DNK:208:
-#: ../zypp/CountryCode.cc:275
+#: ../zypp/CountryCode.cc:282
 msgid "Dominica"
 msgstr "多米尼加"
 
 #. :DMA:212:
-#: ../zypp/CountryCode.cc:276
+#: ../zypp/CountryCode.cc:283
 msgid "Dominican Republic"
 msgstr "多米尼加共和国"
 
@@ -1139,12 +1144,12 @@ msgid "Dzongkha"
 msgstr "不丹语"
 
 #. :TON:776:
-#: ../zypp/CountryCode.cc:432
+#: ../zypp/CountryCode.cc:439
 msgid "East Timor"
 msgstr "东帝汶"
 
 #. :DZA:012:
-#: ../zypp/CountryCode.cc:278
+#: ../zypp/CountryCode.cc:285
 msgid "Ecuador"
 msgstr "厄瓜多尔"
 
@@ -1154,7 +1159,7 @@ msgid "Efik"
 msgstr "艾非克语"
 
 #. :EST:233:
-#: ../zypp/CountryCode.cc:280
+#: ../zypp/CountryCode.cc:287
 msgid "Egypt"
 msgstr "埃及"
 
@@ -1169,7 +1174,7 @@ msgid "Ekajuk"
 msgstr "艾卡朱克语"
 
 #. :STP:678:
-#: ../zypp/CountryCode.cc:419
+#: ../zypp/CountryCode.cc:426
 msgid "El Salvador"
 msgstr "萨尔瓦多"
 
@@ -1210,12 +1215,12 @@ msgid "English, Old (ca.450-1100)"
 msgstr "古代英语（约 450-1100）"
 
 #. :GLP:312:
-#: ../zypp/CountryCode.cc:303
+#: ../zypp/CountryCode.cc:310
 msgid "Equatorial Guinea"
 msgstr "赤道几内亚"
 
 #. :ESH:732:
-#: ../zypp/CountryCode.cc:282
+#: ../zypp/CountryCode.cc:289
 msgid "Eritrea"
 msgstr "厄立特里亚"
 
@@ -1225,7 +1230,7 @@ msgstr "厄立特里亚"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:137
+#: ../zypp/Repository.cc:141
 #, fuzzy
 msgid "Error reading solv-file: "
 msgstr "读取扇区 %u 时出错。"
@@ -1241,7 +1246,7 @@ msgid "Esperanto"
 msgstr "世界语"
 
 #. :ECU:218:
-#: ../zypp/CountryCode.cc:279
+#: ../zypp/CountryCode.cc:286
 msgid "Estonia"
 msgstr "爱沙尼亚"
 
@@ -1251,7 +1256,7 @@ msgid "Estonian"
 msgstr "爱沙尼亚语"
 
 #. :ESP:724:
-#: ../zypp/CountryCode.cc:284
+#: ../zypp/CountryCode.cc:291
 msgid "Ethiopia"
 msgstr "埃塞俄比亚"
 
@@ -1291,7 +1296,7 @@ msgid "Failed to unmount %s"
 msgstr "未能卸载 %s"
 
 #. :FJI:242:
-#: ../zypp/CountryCode.cc:287
+#: ../zypp/CountryCode.cc:294
 msgid "Falkland Islands (Malvinas)"
 msgstr "福克兰群岛（马尔维纳斯群岛）"
 
@@ -1306,7 +1311,7 @@ msgid "Fanti"
 msgstr "芳蒂语"
 
 #. :FSM:583:
-#: ../zypp/CountryCode.cc:289
+#: ../zypp/CountryCode.cc:296
 msgid "Faroe Islands"
 msgstr "法罗群岛"
 
@@ -1316,12 +1321,12 @@ msgid "Faroese"
 msgstr "法罗语"
 
 #. :FLK:238:
-#: ../zypp/CountryCode.cc:288
+#: ../zypp/CountryCode.cc:295
 msgid "Federated States of Micronesia"
 msgstr "密克罗尼西亚联邦"
 
 #. :FIN:246:
-#: ../zypp/CountryCode.cc:286
+#: ../zypp/CountryCode.cc:293
 msgid "Fiji"
 msgstr "斐济"
 
@@ -1400,7 +1405,7 @@ msgid "Filipino"
 msgstr "菲律宾语"
 
 #. :ETH:231:
-#: ../zypp/CountryCode.cc:285
+#: ../zypp/CountryCode.cc:292
 msgid "Finland"
 msgstr "芬兰"
 
@@ -1425,7 +1430,7 @@ msgid "Fon"
 msgstr "丰语"
 
 #. :FRO:234:
-#: ../zypp/CountryCode.cc:290
+#: ../zypp/CountryCode.cc:297
 msgid "France"
 msgstr "法国"
 
@@ -1435,17 +1440,17 @@ msgid "French"
 msgstr "法语"
 
 #. :GEO:268:
-#: ../zypp/CountryCode.cc:296
+#: ../zypp/CountryCode.cc:303
 msgid "French Guiana"
 msgstr "法属圭亚那"
 
 #. :PER:604:
-#: ../zypp/CountryCode.cc:386
+#: ../zypp/CountryCode.cc:393
 msgid "French Polynesia"
 msgstr "法属波利尼西亚"
 
 #. :TCD:148:
-#: ../zypp/CountryCode.cc:424
+#: ../zypp/CountryCode.cc:431
 msgid "French Southern Territories"
 msgstr "法属南部领土"
 
@@ -1480,7 +1485,7 @@ msgid "Ga"
 msgstr "加语"
 
 #. :FXX:249:
-#: ../zypp/CountryCode.cc:292
+#: ../zypp/CountryCode.cc:299
 msgid "Gabon"
 msgstr "加蓬"
 
@@ -1495,7 +1500,7 @@ msgid "Galician"
 msgstr "加利西亚语"
 
 #. :GRL:304:
-#: ../zypp/CountryCode.cc:300
+#: ../zypp/CountryCode.cc:307
 msgid "Gambia"
 msgstr "冈比亚"
 
@@ -1524,7 +1529,7 @@ msgid "Generally ignore this requirement"
 msgstr "通常忽略此需求"
 
 #. :GRD:308:
-#: ../zypp/CountryCode.cc:295
+#: ../zypp/CountryCode.cc:302
 msgid "Georgia"
 msgstr "乔治亚州"
 
@@ -1554,17 +1559,17 @@ msgid "Germanic (Other)"
 msgstr "日尔曼诸语言（其它）"
 
 #. :CZE:203:
-#: ../zypp/CountryCode.cc:272
+#: ../zypp/CountryCode.cc:279
 msgid "Germany"
 msgstr "德国"
 
 #. :GUF:254:
-#: ../zypp/CountryCode.cc:297
+#: ../zypp/CountryCode.cc:304
 msgid "Ghana"
 msgstr "加纳"
 
 #. :GHA:288:
-#: ../zypp/CountryCode.cc:298
+#: ../zypp/CountryCode.cc:305
 msgid "Gibraltar"
 msgstr "直布罗陀"
 
@@ -1594,7 +1599,7 @@ msgid "Grebo"
 msgstr "格列博语"
 
 #. :GNQ:226:
-#: ../zypp/CountryCode.cc:304
+#: ../zypp/CountryCode.cc:311
 msgid "Greece"
 msgstr "希腊"
 
@@ -1609,22 +1614,22 @@ msgid "Greek, Modern (1453-)"
 msgstr "现代希腊语 (1453-)"
 
 #. :GIB:292:
-#: ../zypp/CountryCode.cc:299
+#: ../zypp/CountryCode.cc:306
 msgid "Greenland"
 msgstr "格陵兰"
 
 #. :GBR:826:
-#: ../zypp/CountryCode.cc:294
+#: ../zypp/CountryCode.cc:301
 msgid "Grenada"
 msgstr "格林纳达"
 
 #. :GIN:324:
-#: ../zypp/CountryCode.cc:302
+#: ../zypp/CountryCode.cc:309
 msgid "Guadeloupe"
 msgstr "瓜德罗普岛"
 
 #. :GTM:320:
-#: ../zypp/CountryCode.cc:307
+#: ../zypp/CountryCode.cc:314
 msgid "Guam"
 msgstr "关岛"
 
@@ -1634,17 +1639,17 @@ msgid "Guarani"
 msgstr "瓜拉尼语"
 
 #. :SGS:239:
-#: ../zypp/CountryCode.cc:306
+#: ../zypp/CountryCode.cc:313
 msgid "Guatemala"
 msgstr "危地马拉"
 
 #. :GMB:270:
-#: ../zypp/CountryCode.cc:301
+#: ../zypp/CountryCode.cc:308
 msgid "Guinea"
 msgstr "几内亚"
 
 #. :GUM:316:
-#: ../zypp/CountryCode.cc:308
+#: ../zypp/CountryCode.cc:315
 msgid "Guinea-Bissau"
 msgstr "几内亚比绍共和国"
 
@@ -1654,7 +1659,7 @@ msgid "Gujarati"
 msgstr "印度古哈拉地语"
 
 #. :GNB:624:
-#: ../zypp/CountryCode.cc:309
+#: ../zypp/CountryCode.cc:316
 msgid "Guyana"
 msgstr "圭亚那"
 
@@ -1669,7 +1674,7 @@ msgid "Haida"
 msgstr "海达语"
 
 #. :HRV:191:
-#: ../zypp/CountryCode.cc:314
+#: ../zypp/CountryCode.cc:321
 msgid "Haiti"
 msgstr "海地"
 
@@ -1683,15 +1688,15 @@ msgstr "海地语"
 msgid "Hal Exception"
 msgstr "Hal 例外"
 
-#: ../zypp/target/hal/HalContext.cc:96
+#: ../zypp/target/hal/HalContext.cc:94
 msgid "HalContext not connected"
 msgstr "HalContext 未连接"
 
-#: ../zypp/target/hal/HalContext.cc:106
+#: ../zypp/target/hal/HalContext.cc:104
 msgid "HalDrive not initialized"
 msgstr "HalDrive 未初始化"
 
-#: ../zypp/target/hal/HalContext.cc:116
+#: ../zypp/target/hal/HalContext.cc:114
 msgid "HalVolume not initialized"
 msgstr "HalVolume 未初始化"
 
@@ -1706,7 +1711,7 @@ msgid "Hawaiian"
 msgstr "夏威夷语"
 
 #. :HKG:344:
-#: ../zypp/CountryCode.cc:311
+#: ../zypp/CountryCode.cc:318
 msgid "Heard Island and McDonald Islands"
 msgstr "赫德岛和麦克唐纳岛"
 
@@ -1756,17 +1761,17 @@ msgid "Hmong"
 msgstr "蒙（苗）语"
 
 #. :UZB:860:
-#: ../zypp/CountryCode.cc:444
+#: ../zypp/CountryCode.cc:451
 msgid "Holy See (Vatican City State)"
 msgstr "梵蒂冈（梵蒂冈城国）"
 
 #. :HMD:334:
-#: ../zypp/CountryCode.cc:312
+#: ../zypp/CountryCode.cc:319
 msgid "Honduras"
 msgstr "洪都拉斯"
 
 #. :GUY:328:
-#: ../zypp/CountryCode.cc:310
+#: ../zypp/CountryCode.cc:317
 msgid "Hong Kong"
 msgstr "中国香港特别行政区"
 
@@ -1776,7 +1781,7 @@ msgid "Hungarian"
 msgstr "匈牙利语"
 
 #. :HTI:332:
-#: ../zypp/CountryCode.cc:315
+#: ../zypp/CountryCode.cc:322
 msgid "Hungary"
 msgstr "匈牙利"
 
@@ -1791,7 +1796,7 @@ msgid "Iban"
 msgstr "伊班语"
 
 #. :IRN:364:
-#: ../zypp/CountryCode.cc:323
+#: ../zypp/CountryCode.cc:330
 msgid "Iceland"
 msgstr "冰岛"
 
@@ -1849,7 +1854,7 @@ msgid "Inari Sami"
 msgstr "伊纳里萨摩斯语"
 
 #. :ISR:376:
-#: ../zypp/CountryCode.cc:319
+#: ../zypp/CountryCode.cc:326
 msgid "India"
 msgstr "印度"
 
@@ -1864,7 +1869,7 @@ msgid "Indo-European (Other)"
 msgstr "印欧诸语言（其它）"
 
 #. :HUN:348:
-#: ../zypp/CountryCode.cc:316
+#: ../zypp/CountryCode.cc:323
 msgid "Indonesia"
 msgstr "印度尼西亚"
 
@@ -1973,7 +1978,7 @@ msgid "Invalid user name or password."
 msgstr "无效用户名或密码。"
 
 #. :IRQ:368:
-#: ../zypp/CountryCode.cc:322
+#: ../zypp/CountryCode.cc:329
 msgid "Iran"
 msgstr "伊朗"
 
@@ -1983,12 +1988,12 @@ msgid "Iranian (Other)"
 msgstr "伊朗诸语言（其它）"
 
 #. :IOT:086:
-#: ../zypp/CountryCode.cc:321
+#: ../zypp/CountryCode.cc:328
 msgid "Iraq"
 msgstr "伊拉克"
 
 #. :IDN:360:
-#: ../zypp/CountryCode.cc:317
+#: ../zypp/CountryCode.cc:324
 msgid "Ireland"
 msgstr "爱尔兰"
 
@@ -2013,9 +2018,14 @@ msgid "Iroquoian Languages"
 msgstr "易洛魁语"
 
 #. :IRL:372:
-#: ../zypp/CountryCode.cc:318
+#: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "以色列"
+
+#: ../zypp/base/InterProcessMutex.cc:68
+#, fuzzy, c-format
+msgid "It %d, Can't open lock file: %s"
+msgstr "无法打开文件 %1。"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2023,17 +2033,17 @@ msgid "Italian"
 msgstr "意大利语"
 
 #. :ISL:352:
-#: ../zypp/CountryCode.cc:324
+#: ../zypp/CountryCode.cc:331
 msgid "Italy"
 msgstr "意大利"
 
 #. :ITA:380:
-#: ../zypp/CountryCode.cc:325
+#: ../zypp/CountryCode.cc:332
 msgid "Jamaica"
 msgstr "牙买加"
 
 #. :JOR:400:
-#: ../zypp/CountryCode.cc:327
+#: ../zypp/CountryCode.cc:334
 msgid "Japan"
 msgstr "日本"
 
@@ -2048,7 +2058,7 @@ msgid "Javanese"
 msgstr "爪哇语"
 
 #. :JAM:388:
-#: ../zypp/CountryCode.cc:326
+#: ../zypp/CountryCode.cc:333
 msgid "Jordan"
 msgstr "约旦"
 
@@ -2138,7 +2148,7 @@ msgid "Kazakh"
 msgstr "哈萨克语"
 
 #. :CYM:136:
-#: ../zypp/CountryCode.cc:338
+#: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "哈萨克斯坦"
 
@@ -2147,7 +2157,7 @@ msgid "Keep resolvables"
 msgstr "保留可解析项"
 
 #. :JPN:392:
-#: ../zypp/CountryCode.cc:328
+#: ../zypp/CountryCode.cc:335
 msgid "Kenya"
 msgstr "肯尼亚"
 
@@ -2192,7 +2202,7 @@ msgid "Kirghiz"
 msgstr "吉尔吉斯语"
 
 #. :KHM:116:
-#: ../zypp/CountryCode.cc:331
+#: ../zypp/CountryCode.cc:338
 msgid "Kiribati"
 msgstr "基里巴斯"
 
@@ -2262,12 +2272,12 @@ msgid "Kutenai"
 msgstr "库特内语"
 
 #. :KOR:410:
-#: ../zypp/CountryCode.cc:336
+#: ../zypp/CountryCode.cc:343
 msgid "Kuwait"
 msgstr "科威特"
 
 #. :KEN:404:
-#: ../zypp/CountryCode.cc:329
+#: ../zypp/CountryCode.cc:336
 msgid "Kyrgyzstan"
 msgstr "吉尔吉斯斯坦"
 
@@ -2292,7 +2302,7 @@ msgid "Lao"
 msgstr "老挝语"
 
 #. :KAZ:398:
-#: ../zypp/CountryCode.cc:339
+#: ../zypp/CountryCode.cc:346
 msgid "Lao People's Democratic Republic"
 msgstr "老挝人民民主共和国"
 
@@ -2302,7 +2312,7 @@ msgid "Latin"
 msgstr "拉丁语"
 
 #. :LUX:442:
-#: ../zypp/CountryCode.cc:348
+#: ../zypp/CountryCode.cc:355
 msgid "Latvia"
 msgstr "拉脱维亚"
 
@@ -2312,12 +2322,12 @@ msgid "Latvian"
 msgstr "拉脱维亚语"
 
 #. :LAO:418:
-#: ../zypp/CountryCode.cc:340
+#: ../zypp/CountryCode.cc:347
 msgid "Lebanon"
 msgstr "黎巴嫩"
 
 #. :LBR:430:
-#: ../zypp/CountryCode.cc:345
+#: ../zypp/CountryCode.cc:352
 msgid "Lesotho"
 msgstr "莱索托"
 
@@ -2327,17 +2337,17 @@ msgid "Lezghian"
 msgstr "列兹金语"
 
 #. :LKA:144:
-#: ../zypp/CountryCode.cc:344
+#: ../zypp/CountryCode.cc:351
 msgid "Liberia"
 msgstr "利比里亚"
 
 #. :LVA:428:
-#: ../zypp/CountryCode.cc:349
+#: ../zypp/CountryCode.cc:356
 msgid "Libya"
 msgstr "利比亚"
 
 #. :LCA:662:
-#: ../zypp/CountryCode.cc:342
+#: ../zypp/CountryCode.cc:349
 msgid "Liechtenstein"
 msgstr "列支敦士登"
 
@@ -2352,7 +2362,7 @@ msgid "Lingala"
 msgstr "林加拉语"
 
 #. :LSO:426:
-#: ../zypp/CountryCode.cc:346
+#: ../zypp/CountryCode.cc:353
 msgid "Lithuania"
 msgstr "立陶宛"
 
@@ -2417,7 +2427,7 @@ msgid "Lushai"
 msgstr "卢萨语"
 
 #. :LTU:440:
-#: ../zypp/CountryCode.cc:347
+#: ../zypp/CountryCode.cc:354
 msgid "Luxembourg"
 msgstr "卢森堡公国"
 
@@ -2427,12 +2437,12 @@ msgid "Luxembourgish"
 msgstr "卢森堡语"
 
 #. :MNG:496:
-#: ../zypp/CountryCode.cc:359
+#: ../zypp/CountryCode.cc:366
 msgid "Macao"
 msgstr "中国澳门行政特区"
 
 #. :MHL:584:
-#: ../zypp/CountryCode.cc:355
+#: ../zypp/CountryCode.cc:362
 msgid "Macedonia"
 msgstr "马其顿王国"
 
@@ -2442,7 +2452,7 @@ msgid "Macedonian"
 msgstr "马其顿语"
 
 #. :MDA:498:
-#: ../zypp/CountryCode.cc:353
+#: ../zypp/CountryCode.cc:360
 msgid "Madagascar"
 msgstr "马达加斯加岛"
 
@@ -2472,7 +2482,7 @@ msgid "Malagasy"
 msgstr "马达加斯加语"
 
 #. :MDV:462:
-#: ../zypp/CountryCode.cc:367
+#: ../zypp/CountryCode.cc:374
 msgid "Malawi"
 msgstr "马拉维"
 
@@ -2487,12 +2497,12 @@ msgid "Malayalam"
 msgstr "马拉雅拉姆语"
 
 #. :MEX:484:
-#: ../zypp/CountryCode.cc:369
+#: ../zypp/CountryCode.cc:376
 msgid "Malaysia"
 msgstr "马来群岛"
 
 #. :MUS:480:
-#: ../zypp/CountryCode.cc:366
+#: ../zypp/CountryCode.cc:373
 msgid "Maldives"
 msgstr "马尔代夫"
 
@@ -2501,12 +2511,12 @@ msgid "Malformed URI"
 msgstr ""
 
 #. :MKD:807:
-#: ../zypp/CountryCode.cc:356
+#: ../zypp/CountryCode.cc:363
 msgid "Mali"
 msgstr "马里"
 
 #. :MSR:500:
-#: ../zypp/CountryCode.cc:364
+#: ../zypp/CountryCode.cc:371
 msgid "Malta"
 msgstr "马耳他"
 
@@ -2561,7 +2571,7 @@ msgid "Mari"
 msgstr "马里语"
 
 #. :MDG:450:
-#: ../zypp/CountryCode.cc:354
+#: ../zypp/CountryCode.cc:361
 msgid "Marshall Islands"
 msgstr "马绍尔群岛"
 
@@ -2571,7 +2581,7 @@ msgid "Marshallese"
 msgstr "马绍尔语"
 
 #. :MNP:580:
-#: ../zypp/CountryCode.cc:361
+#: ../zypp/CountryCode.cc:368
 msgid "Martinique"
 msgstr "马提尼克岛"
 
@@ -2586,12 +2596,12 @@ msgid "Masai"
 msgstr "马萨伊语"
 
 #. :MTQ:474:
-#: ../zypp/CountryCode.cc:362
+#: ../zypp/CountryCode.cc:369
 msgid "Mauritania"
 msgstr "毛利塔尼亚"
 
 #. :MLT:470:
-#: ../zypp/CountryCode.cc:365
+#: ../zypp/CountryCode.cc:372
 msgid "Mauritius"
 msgstr "毛里求斯"
 
@@ -2601,7 +2611,7 @@ msgid "Mayan Languages"
 msgstr "玛雅诸语言"
 
 #. :YEM:887:
-#: ../zypp/CountryCode.cc:454
+#: ../zypp/CountryCode.cc:461
 msgid "Mayotte"
 msgstr "马约特岛"
 
@@ -2630,12 +2640,12 @@ msgid "Mende"
 msgstr "门德语"
 
 #. :FRA:250:
-#: ../zypp/CountryCode.cc:291
+#: ../zypp/CountryCode.cc:298
 msgid "Metropolitan France"
 msgstr "法属美特罗波利坦"
 
 #. :MWI:454:
-#: ../zypp/CountryCode.cc:368
+#: ../zypp/CountryCode.cc:375
 msgid "Mexico"
 msgstr "墨西哥"
 
@@ -2675,7 +2685,7 @@ msgid "Moldavian"
 msgstr "摩尔达维亚语"
 
 #. :MCO:492:
-#: ../zypp/CountryCode.cc:352
+#: ../zypp/CountryCode.cc:359
 msgid "Moldova"
 msgstr "摩尔多瓦"
 
@@ -2685,7 +2695,7 @@ msgid "Mon-Khmer (Other)"
 msgstr "孟-高棉诸语言（其它）"
 
 #. :MAR:504:
-#: ../zypp/CountryCode.cc:351
+#: ../zypp/CountryCode.cc:358
 msgid "Monaco"
 msgstr "摩纳哥"
 
@@ -2695,7 +2705,7 @@ msgid "Mongo"
 msgstr "蒙古语"
 
 #. :MMR:104:
-#: ../zypp/CountryCode.cc:358
+#: ../zypp/CountryCode.cc:365
 msgid "Mongolia"
 msgstr "蒙古"
 
@@ -2705,12 +2715,12 @@ msgid "Mongolian"
 msgstr "蒙古语"
 
 #. :MRT:478:
-#: ../zypp/CountryCode.cc:363
+#: ../zypp/CountryCode.cc:370
 msgid "Montserrat"
 msgstr "蒙特塞拉特岛"
 
 #. :LBY:434:
-#: ../zypp/CountryCode.cc:350
+#: ../zypp/CountryCode.cc:357
 msgid "Morocco"
 msgstr "摩洛哥"
 
@@ -2720,7 +2730,7 @@ msgid "Mossi"
 msgstr "莫西语"
 
 #. :MYS:458:
-#: ../zypp/CountryCode.cc:370
+#: ../zypp/CountryCode.cc:377
 msgid "Mozambique"
 msgstr "莫桑比克"
 
@@ -2735,7 +2745,7 @@ msgid "Munda languages"
 msgstr "蒙达诸语言"
 
 #. :MLI:466:
-#: ../zypp/CountryCode.cc:357
+#: ../zypp/CountryCode.cc:364
 msgid "Myanmar"
 msgstr "缅甸"
 
@@ -2745,13 +2755,13 @@ msgid "Nahuatl"
 msgstr "纳瓦特尔语"
 
 #. :MOZ:508:
-#: ../zypp/CountryCode.cc:371
+#: ../zypp/CountryCode.cc:378
 msgid "Namibia"
 msgstr "纳米比亚"
 
-#. :NPL:524:
 #. language code: nau na
-#: ../zypp/CountryCode.cc:380 ../zypp/LanguageCode.cc:858
+#. :NPL:524:
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "瑙鲁语"
 
@@ -2781,7 +2791,7 @@ msgid "Neapolitan"
 msgstr "那不勒斯语"
 
 #. :NOR:578:
-#: ../zypp/CountryCode.cc:379
+#: ../zypp/CountryCode.cc:386
 msgid "Nepal"
 msgstr "尼泊尔"
 
@@ -2796,22 +2806,22 @@ msgid "Nepali"
 msgstr "尼泊尔语"
 
 #. :NIC:558:
-#: ../zypp/CountryCode.cc:377
+#: ../zypp/CountryCode.cc:384
 msgid "Netherlands"
 msgstr "荷兰"
 
 #. :ARM:051:
-#: ../zypp/CountryCode.cc:224
+#: ../zypp/CountryCode.cc:231
 msgid "Netherlands Antilles"
 msgstr "荷属安的列斯"
 
 #. :NAM:516:
-#: ../zypp/CountryCode.cc:372
+#: ../zypp/CountryCode.cc:379
 msgid "New Caledonia"
 msgstr "新喀里多尼亚"
 
 #. :NIU:570:
-#: ../zypp/CountryCode.cc:382
+#: ../zypp/CountryCode.cc:389
 msgid "New Zealand"
 msgstr "新西兰"
 
@@ -2821,12 +2831,12 @@ msgid "Nias"
 msgstr "尼亚斯语"
 
 #. :NGA:566:
-#: ../zypp/CountryCode.cc:376
+#: ../zypp/CountryCode.cc:383
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
 #. :NCL:540:
-#: ../zypp/CountryCode.cc:373
+#: ../zypp/CountryCode.cc:380
 msgid "Niger"
 msgstr "尼日尔"
 
@@ -2836,7 +2846,7 @@ msgid "Niger-Kordofanian (Other)"
 msgstr "尼日尔-科尔多凡语诸语言（其它）"
 
 #. :NFK:574:
-#: ../zypp/CountryCode.cc:375
+#: ../zypp/CountryCode.cc:382
 msgid "Nigeria"
 msgstr "尼日利亚"
 
@@ -2846,7 +2856,7 @@ msgid "Nilo-Saharan (Other)"
 msgstr "尼罗-撒哈拉诸语言（其它）"
 
 #. :NRU:520:
-#: ../zypp/CountryCode.cc:381
+#: ../zypp/CountryCode.cc:388
 msgid "Niue"
 msgstr "纽埃岛"
 
@@ -2855,9 +2865,9 @@ msgstr "纽埃岛"
 msgid "Niuean"
 msgstr "纽埃语"
 
-#. Defined CountryCode constants
 #. Defined LanguageCode constants
-#: ../zypp/CountryCode.cc:215 ../zypp/LanguageCode.cc:225
+#. Defined CountryCode constants
+#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "无代码"
 
@@ -2871,7 +2881,7 @@ msgid "Nogai"
 msgstr "诺盖语"
 
 #. :NER:562:
-#: ../zypp/CountryCode.cc:374
+#: ../zypp/CountryCode.cc:381
 msgid "Norfolk Island"
 msgstr "诺福克岛"
 
@@ -2886,12 +2896,12 @@ msgid "North American Indian"
 msgstr "北美印第安语"
 
 #. :KNA:659:
-#: ../zypp/CountryCode.cc:334
+#: ../zypp/CountryCode.cc:341
 msgid "North Korea"
 msgstr "北朝鲜"
 
 #. :MAC:446:
-#: ../zypp/CountryCode.cc:360
+#: ../zypp/CountryCode.cc:367
 msgid "Northern Mariana Islands"
 msgstr "北马里亚纳群岛"
 
@@ -2906,7 +2916,7 @@ msgid "Northern Sotho"
 msgstr "北梭托语"
 
 #. :NLD:528:
-#: ../zypp/CountryCode.cc:378
+#: ../zypp/CountryCode.cc:385
 msgid "Norway"
 msgstr "挪威"
 
@@ -2925,7 +2935,7 @@ msgstr "挪威布克摩尔语"
 msgid "Norwegian Nynorsk"
 msgstr "挪威 Nynorsk 语"
 
-#: ../zypp/target/hal/HalContext.cc:843
+#: ../zypp/target/hal/HalContext.cc:828
 msgid "Not a CDROM drive"
 msgstr "不是 CDROM 驱动器"
 
@@ -2965,7 +2975,7 @@ msgid "Ojibwa"
 msgstr "奥吉布瓦语"
 
 #. :NZL:554:
-#: ../zypp/CountryCode.cc:383
+#: ../zypp/CountryCode.cc:390
 msgid "Oman"
 msgstr "阿曼"
 
@@ -3011,12 +3021,12 @@ msgid "Pahlavi"
 msgstr "钵罗钵语"
 
 #. :PHL:608:
-#: ../zypp/CountryCode.cc:389
+#: ../zypp/CountryCode.cc:396
 msgid "Pakistan"
 msgstr "巴基斯坦"
 
 #. :PRT:620:
-#: ../zypp/CountryCode.cc:396
+#: ../zypp/CountryCode.cc:403
 msgid "Palau"
 msgstr "帕劳群岛"
 
@@ -3026,7 +3036,7 @@ msgid "Palauan"
 msgstr "帕劳语"
 
 #. :PRI:630:
-#: ../zypp/CountryCode.cc:394
+#: ../zypp/CountryCode.cc:401
 msgid "Palestinian Territory"
 msgstr "巴基斯坦领土"
 
@@ -3041,7 +3051,7 @@ msgid "Pampanga"
 msgstr "邦板牙语"
 
 #. :OMN:512:
-#: ../zypp/CountryCode.cc:384
+#: ../zypp/CountryCode.cc:391
 msgid "Panama"
 msgstr "巴拿马"
 
@@ -3061,7 +3071,7 @@ msgid "Papiamento"
 msgstr "帕皮亚门托语"
 
 #. :PYF:258:
-#: ../zypp/CountryCode.cc:387
+#: ../zypp/CountryCode.cc:394
 msgid "Papua New Guinea"
 msgstr "巴布亚新几内亚"
 
@@ -3071,7 +3081,7 @@ msgid "Papuan (Other)"
 msgstr "巴布亚诸语言（其它）"
 
 #. :PLW:585:
-#: ../zypp/CountryCode.cc:397
+#: ../zypp/CountryCode.cc:404
 msgid "Paraguay"
 msgstr "巴拉圭"
 
@@ -3109,7 +3119,7 @@ msgid "Persian, Old (ca.600-400 B.C.)"
 msgstr "古波斯语（约公元前 600-400）"
 
 #. :PAN:591:
-#: ../zypp/CountryCode.cc:385
+#: ../zypp/CountryCode.cc:392
 msgid "Peru"
 msgstr "秘鲁"
 
@@ -3119,7 +3129,7 @@ msgid "Philippine (Other)"
 msgstr "菲律宾诸语言（其它）"
 
 #. :PNG:598:
-#: ../zypp/CountryCode.cc:388
+#: ../zypp/CountryCode.cc:395
 msgid "Philippines"
 msgstr "菲律宾共和国"
 
@@ -3129,7 +3139,7 @@ msgid "Phoenician"
 msgstr "腓尼基语"
 
 #. :SPM:666:
-#: ../zypp/CountryCode.cc:392
+#: ../zypp/CountryCode.cc:399
 msgid "Pitcairn"
 msgstr "皮特克恩岛"
 
@@ -3139,7 +3149,7 @@ msgid "Pohnpeian"
 msgstr "波纳佩语"
 
 #. :PAK:586:
-#: ../zypp/CountryCode.cc:390
+#: ../zypp/CountryCode.cc:397
 msgid "Poland"
 msgstr "波兰"
 
@@ -3149,7 +3159,7 @@ msgid "Polish"
 msgstr "波兰语"
 
 #. :PSE:275:
-#: ../zypp/CountryCode.cc:395
+#: ../zypp/CountryCode.cc:402
 msgid "Portugal"
 msgstr "葡萄牙"
 
@@ -3169,7 +3179,7 @@ msgid "Provencal, Old (to 1500)"
 msgstr "古普罗旺斯语（1500 以前）"
 
 #. :PCN:612:
-#: ../zypp/CountryCode.cc:393
+#: ../zypp/CountryCode.cc:400
 msgid "Puerto Rico"
 msgstr "波多黎各"
 
@@ -3179,7 +3189,7 @@ msgid "Pushto"
 msgstr "普什图语"
 
 #. :PRY:600:
-#: ../zypp/CountryCode.cc:398
+#: ../zypp/CountryCode.cc:405
 msgid "Qatar"
 msgstr "卡塔尔"
 
@@ -3222,7 +3232,7 @@ msgstr "拉罗汤加语"
 msgid "Relative path not allowed if authority exists"
 msgstr "如果存在认证，则不允许相对路径"
 
-#: ../zypp/RepoManager.cc:1122
+#: ../zypp/RepoManager.cc:1112
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "正在移除安装源 '%s'"
@@ -3237,7 +3247,7 @@ msgid "Required file is missing: "
 msgstr "找不到所需文件："
 
 #. :QAT:634:
-#: ../zypp/CountryCode.cc:399
+#: ../zypp/CountryCode.cc:406
 msgid "Reunion"
 msgstr "Reunion"
 
@@ -3247,7 +3257,7 @@ msgid "Romance (Other)"
 msgstr "罗曼诸语言（其它）"
 
 #. :REU:638:
-#: ../zypp/CountryCode.cc:400
+#: ../zypp/CountryCode.cc:407
 msgid "Romania"
 msgstr "罗马尼亚"
 
@@ -3272,37 +3282,37 @@ msgid "Russian"
 msgstr "俄语"
 
 #. :ROU:642:
-#: ../zypp/CountryCode.cc:401
+#: ../zypp/CountryCode.cc:408
 msgid "Russian Federation"
 msgstr "俄联邦"
 
 #. :RUS:643:
-#: ../zypp/CountryCode.cc:402
+#: ../zypp/CountryCode.cc:409
 msgid "Rwanda"
 msgstr "卢旺达"
 
 #. :SGP:702:
-#: ../zypp/CountryCode.cc:409
+#: ../zypp/CountryCode.cc:416
 msgid "Saint Helena"
 msgstr "圣赫勒拿"
 
 #. :COM:174:
-#: ../zypp/CountryCode.cc:333
+#: ../zypp/CountryCode.cc:340
 msgid "Saint Kitts and Nevis"
 msgstr "圣基茨和尼维斯"
 
 #. :LBN:422:
-#: ../zypp/CountryCode.cc:341
+#: ../zypp/CountryCode.cc:348
 msgid "Saint Lucia"
 msgstr "圣卢西亚岛"
 
 #. :POL:616:
-#: ../zypp/CountryCode.cc:391
+#: ../zypp/CountryCode.cc:398
 msgid "Saint Pierre and Miquelon"
 msgstr "圣皮埃尔和密克隆"
 
 #. :VAT:336:
-#: ../zypp/CountryCode.cc:445
+#: ../zypp/CountryCode.cc:452
 msgid "Saint Vincent and the Grenadines"
 msgstr "圣文森特和格林纳丁斯"
 
@@ -3322,7 +3332,7 @@ msgid "Sami Languages (Other)"
 msgstr "萨摩斯诸语言（其它）"
 
 #. :WLF:876:
-#: ../zypp/CountryCode.cc:452
+#: ../zypp/CountryCode.cc:459
 msgid "Samoa"
 msgstr "萨摩亚群岛"
 
@@ -3332,7 +3342,7 @@ msgid "Samoan"
 msgstr "萨摩亚语"
 
 #. :SLE:694:
-#: ../zypp/CountryCode.cc:414
+#: ../zypp/CountryCode.cc:421
 msgid "San Marino"
 msgstr "圣马力诺"
 
@@ -3357,7 +3367,7 @@ msgid "Santali"
 msgstr "桑塔利语"
 
 #. :SUR:740:
-#: ../zypp/CountryCode.cc:418
+#: ../zypp/CountryCode.cc:425
 msgid "Sao Tome and Principe"
 msgstr "圣多美和普林西比"
 
@@ -3372,7 +3382,7 @@ msgid "Sasak"
 msgstr "萨萨克语"
 
 #. :RWA:646:
-#: ../zypp/CountryCode.cc:403
+#: ../zypp/CountryCode.cc:410
 msgid "Saudi Arabia"
 msgstr "沙特阿拉伯"
 
@@ -3392,12 +3402,12 @@ msgid "Semitic (Other)"
 msgstr "闪米特诸语言（其它）"
 
 #. :SMR:674:
-#: ../zypp/CountryCode.cc:415
+#: ../zypp/CountryCode.cc:422
 msgid "Senegal"
 msgstr "塞内加尔"
 
 #. :CRI:188:
-#: ../zypp/CountryCode.cc:266
+#: ../zypp/CountryCode.cc:273
 msgid "Serbia and Montenegro"
 msgstr "塞尔维亚和黑山"
 
@@ -3412,7 +3422,7 @@ msgid "Serer"
 msgstr "塞雷尔语"
 
 #. :SLB:090:
-#: ../zypp/CountryCode.cc:405
+#: ../zypp/CountryCode.cc:412
 msgid "Seychelles"
 msgstr "塞舌尔"
 
@@ -3442,7 +3452,7 @@ msgid "Sidamo"
 msgstr "锡达莫语"
 
 #. :SVK:703:
-#: ../zypp/CountryCode.cc:413
+#: ../zypp/CountryCode.cc:420
 msgid "Sierra Leone"
 msgstr "塞拉利昂"
 
@@ -3467,7 +3477,7 @@ msgid "Sindhi"
 msgstr "信德语"
 
 #. :SWE:752:
-#: ../zypp/CountryCode.cc:408
+#: ../zypp/CountryCode.cc:415
 msgid "Singapore"
 msgstr "新加坡"
 
@@ -3507,12 +3517,12 @@ msgid "Slovak"
 msgstr "斯洛伐克语"
 
 #. :SJM:744:
-#: ../zypp/CountryCode.cc:412
+#: ../zypp/CountryCode.cc:419
 msgid "Slovakia"
 msgstr "斯洛伐克"
 
 #. :SHN:654:
-#: ../zypp/CountryCode.cc:410
+#: ../zypp/CountryCode.cc:417
 msgid "Slovenia"
 msgstr "斯洛文尼亚"
 
@@ -3527,7 +3537,7 @@ msgid "Sogdian"
 msgstr "粟特语"
 
 #. :SAU:682:
-#: ../zypp/CountryCode.cc:404
+#: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "所罗门群岛"
 
@@ -3537,7 +3547,7 @@ msgid "Somali"
 msgstr "索马里语"
 
 #. :SEN:686:
-#: ../zypp/CountryCode.cc:416
+#: ../zypp/CountryCode.cc:423
 msgid "Somalia"
 msgstr "索马里"
 
@@ -3562,7 +3572,7 @@ msgid "Sotho, Southern"
 msgstr "南部索托语"
 
 #. :MYT:175:
-#: ../zypp/CountryCode.cc:455
+#: ../zypp/CountryCode.cc:462
 msgid "South Africa"
 msgstr "南非"
 
@@ -3572,12 +3582,12 @@ msgid "South American Indian (Other)"
 msgstr "南美洲印第安诸语言（其它）"
 
 #. :GRC:300:
-#: ../zypp/CountryCode.cc:305
+#: ../zypp/CountryCode.cc:312
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南乔治亚岛和南三维治群岛"
 
 #. :PRK:408:
-#: ../zypp/CountryCode.cc:335
+#: ../zypp/CountryCode.cc:342
 msgid "South Korea"
 msgstr "南韩"
 
@@ -3592,7 +3602,7 @@ msgid "Southern Sami"
 msgstr "南萨摩斯语"
 
 #. :ERI:232:
-#: ../zypp/CountryCode.cc:283
+#: ../zypp/CountryCode.cc:290
 msgid "Spain"
 msgstr "西班牙"
 
@@ -3602,12 +3612,12 @@ msgid "Spanish"
 msgstr "西班牙语"
 
 #. :LIE:438:
-#: ../zypp/CountryCode.cc:343
+#: ../zypp/CountryCode.cc:350
 msgid "Sri Lanka"
 msgstr "斯里兰卡"
 
 #. :SYC:690:
-#: ../zypp/CountryCode.cc:406
+#: ../zypp/CountryCode.cc:413
 msgid "Sudan"
 msgstr "苏丹"
 
@@ -3627,7 +3637,7 @@ msgid "Sundanese"
 msgstr "巽他语"
 
 #. :SOM:706:
-#: ../zypp/CountryCode.cc:417
+#: ../zypp/CountryCode.cc:424
 msgid "Suriname"
 msgstr "苏里南"
 
@@ -3637,7 +3647,7 @@ msgid "Susu"
 msgstr "苏苏语"
 
 #. :SVN:705:
-#: ../zypp/CountryCode.cc:411
+#: ../zypp/CountryCode.cc:418
 msgid "Svalbard and Jan Mayen"
 msgstr "斯瓦尔巴岛和扬马延岛"
 
@@ -3652,12 +3662,12 @@ msgid "Swati"
 msgstr "斯瓦特语"
 
 #. :SYR:760:
-#: ../zypp/CountryCode.cc:421
+#: ../zypp/CountryCode.cc:428
 msgid "Swaziland"
 msgstr "斯威士兰"
 
 #. :SDN:736:
-#: ../zypp/CountryCode.cc:407
+#: ../zypp/CountryCode.cc:414
 msgid "Sweden"
 msgstr "瑞典"
 
@@ -3667,12 +3677,12 @@ msgid "Swedish"
 msgstr "瑞典语"
 
 #. :COG:178:
-#: ../zypp/CountryCode.cc:258
+#: ../zypp/CountryCode.cc:265
 msgid "Switzerland"
 msgstr "瑞士"
 
 #. :SLV:222:
-#: ../zypp/CountryCode.cc:420
+#: ../zypp/CountryCode.cc:427
 msgid "Syria"
 msgstr "叙利亚共和国"
 
@@ -3707,7 +3717,7 @@ msgid "Tai (Other)"
 msgstr "傣语诸语言（其它）"
 
 #. :TUV:798:
-#: ../zypp/CountryCode.cc:436
+#: ../zypp/CountryCode.cc:443
 msgid "Taiwan"
 msgstr "台湾"
 
@@ -3717,7 +3727,7 @@ msgid "Tajik"
 msgstr "塔吉克语"
 
 #. :THA:764:
-#: ../zypp/CountryCode.cc:427
+#: ../zypp/CountryCode.cc:434
 msgid "Tajikistan"
 msgstr "塔吉克斯坦"
 
@@ -3732,7 +3742,7 @@ msgid "Tamil"
 msgstr "泰米尔语"
 
 #. :TWN:158:
-#: ../zypp/CountryCode.cc:437
+#: ../zypp/CountryCode.cc:444
 msgid "Tanzania"
 msgstr "坦桑尼亚"
 
@@ -3762,9 +3772,13 @@ msgid "Thai"
 msgstr "泰国语"
 
 #. :TGO:768:
-#: ../zypp/CountryCode.cc:426
+#: ../zypp/CountryCode.cc:433
 msgid "Thailand"
 msgstr "泰国"
+
+#: ../zypp/base/InterProcessMutex.cc:130
+msgid "This action is being run by another program already."
+msgstr ""
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -3780,6 +3794,11 @@ msgstr "提格雷语"
 #: ../zypp/LanguageCode.cc:1118
 msgid "Tigrinya"
 msgstr "提格里尼亚语"
+
+#: ../zypp/media/MediaException.cc:207
+#, c-format
+msgid "Timeout exceed when access '%s'."
+msgstr ""
 
 #. language code: tem
 #: ../zypp/LanguageCode.cc:1100
@@ -3797,7 +3816,7 @@ msgid "Tlingit"
 msgstr "特林吉特语"
 
 #. :ATF:260:
-#: ../zypp/CountryCode.cc:425
+#: ../zypp/CountryCode.cc:432
 msgid "Togo"
 msgstr "多哥"
 
@@ -3806,14 +3825,14 @@ msgstr "多哥"
 msgid "Tok Pisin"
 msgstr "托克皮辛语"
 
-#. :TJK:762:
 #. language code: tkl
-#: ../zypp/CountryCode.cc:428 ../zypp/LanguageCode.cc:1122
+#. :TJK:762:
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "托克劳语"
 
 #. :TUN:788:
-#: ../zypp/CountryCode.cc:431
+#: ../zypp/CountryCode.cc:438
 msgid "Tonga"
 msgstr "汤加"
 
@@ -3833,7 +3852,7 @@ msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
 
 #. :TUR:792:
-#: ../zypp/CountryCode.cc:434
+#: ../zypp/CountryCode.cc:441
 msgid "Trinidad and Tobago"
 msgstr "特立尼达和多巴哥"
 
@@ -3858,7 +3877,7 @@ msgid "Tumbuka"
 msgstr "奇图姆布卡语"
 
 #. :TKM:795:
-#: ../zypp/CountryCode.cc:430
+#: ../zypp/CountryCode.cc:437
 msgid "Tunisia"
 msgstr "突尼斯"
 
@@ -3868,7 +3887,7 @@ msgid "Tupi Languages"
 msgstr "图皮诸语言"
 
 #. :TLS:626:
-#: ../zypp/CountryCode.cc:433
+#: ../zypp/CountryCode.cc:440
 msgid "Turkey"
 msgstr "土耳其"
 
@@ -3888,18 +3907,18 @@ msgid "Turkmen"
 msgstr "土库曼语"
 
 #. :TKL:772:
-#: ../zypp/CountryCode.cc:429
+#: ../zypp/CountryCode.cc:436
 msgid "Turkmenistan"
 msgstr "土库曼斯坦"
 
 #. :SWZ:748:
-#: ../zypp/CountryCode.cc:422
+#: ../zypp/CountryCode.cc:429
 msgid "Turks and Caicos Islands"
 msgstr "特克斯和凯科斯群岛"
 
-#. :TTO:780:
 #. language code: tvl
-#: ../zypp/CountryCode.cc:435 ../zypp/LanguageCode.cc:1152
+#. :TTO:780:
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "图瓦卢语"
 
@@ -3919,7 +3938,7 @@ msgid "Udmurt"
 msgstr "乌德穆尔特语"
 
 #. :UKR:804:
-#: ../zypp/CountryCode.cc:439
+#: ../zypp/CountryCode.cc:446
 msgid "Uganda"
 msgstr "乌干达"
 
@@ -3934,7 +3953,7 @@ msgid "Uighur"
 msgstr "维吾尔语"
 
 #. :TZA:834:
-#: ../zypp/CountryCode.cc:438
+#: ../zypp/CountryCode.cc:445
 msgid "Ukraine"
 msgstr "乌克兰"
 
@@ -3952,11 +3971,11 @@ msgstr "翁本杜语"
 msgid "Unable to clone Url object"
 msgstr "无法克隆 URL 对象"
 
-#: ../zypp/target/hal/HalContext.cc:208
+#: ../zypp/target/hal/HalContext.cc:206
 msgid "Unable to create dbus connection"
 msgstr "无法创建 dbus 连接"
 
-#: ../zypp/target/hal/HalContext.cc:254
+#: ../zypp/target/hal/HalContext.cc:249
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "无法初始化 HAL 环境 － hald 未运行？"
 
@@ -3970,22 +3989,22 @@ msgid "Undetermined"
 msgstr "未确定的语种"
 
 #. :AND:020:
-#: ../zypp/CountryCode.cc:218
+#: ../zypp/CountryCode.cc:225
 msgid "United Arab Emirates"
 msgstr "阿拉伯联合酋长国"
 
 #. :GAB:266:
-#: ../zypp/CountryCode.cc:293
+#: ../zypp/CountryCode.cc:300
 msgid "United Kingdom"
 msgstr "英国"
 
 #. :UMI:581:
-#: ../zypp/CountryCode.cc:441
+#: ../zypp/CountryCode.cc:448
 msgid "United States"
 msgstr "美国"
 
 #. :UGA:800:
-#: ../zypp/CountryCode.cc:440
+#: ../zypp/CountryCode.cc:447
 msgid "United States Minor Outlying Islands"
 msgstr "美国本土外小岛屿"
 
@@ -4066,7 +4085,7 @@ msgid "Url scheme requires path name"
 msgstr "URL 纲要要求有路径名"
 
 #. :USA:840:
-#: ../zypp/CountryCode.cc:442
+#: ../zypp/CountryCode.cc:449
 msgid "Uruguay"
 msgstr "乌拉圭"
 
@@ -4076,7 +4095,7 @@ msgid "Uzbek"
 msgstr "乌兹别克斯坦语"
 
 #. :URY:858:
-#: ../zypp/CountryCode.cc:443
+#: ../zypp/CountryCode.cc:450
 msgid "Uzbekistan"
 msgstr "乌兹别克斯坦"
 
@@ -4091,7 +4110,7 @@ msgid "Valid metadata not found at specified URL(s)"
 msgstr "在指定 URL 未找到有效元数据"
 
 #. :VNM:704:
-#: ../zypp/CountryCode.cc:450
+#: ../zypp/CountryCode.cc:457
 msgid "Vanuatu"
 msgstr "瓦努阿图"
 
@@ -4101,12 +4120,12 @@ msgid "Venda"
 msgstr "文达语"
 
 #. :VCT:670:
-#: ../zypp/CountryCode.cc:446
+#: ../zypp/CountryCode.cc:453
 msgid "Venezuela"
 msgstr "委内瑞拉"
 
 #. :VIR:850:
-#: ../zypp/CountryCode.cc:449
+#: ../zypp/CountryCode.cc:456
 msgid "Vietnam"
 msgstr "越南"
 
@@ -4116,7 +4135,7 @@ msgid "Vietnamese"
 msgstr "越南语"
 
 #. :VGB:092:
-#: ../zypp/CountryCode.cc:448
+#: ../zypp/CountryCode.cc:455
 msgid "Virgin Islands, U.S."
 msgstr "美属维尔京群岛"
 
@@ -4141,7 +4160,7 @@ msgid "Walamo"
 msgstr "瓦拉莫语"
 
 #. :VUT:548:
-#: ../zypp/CountryCode.cc:451
+#: ../zypp/CountryCode.cc:458
 msgid "Wallis and Futuna"
 msgstr "瓦利斯和富图纳"
 
@@ -4166,7 +4185,7 @@ msgid "Welsh"
 msgstr "威尔士语"
 
 #. :EGY:818:
-#: ../zypp/CountryCode.cc:281
+#: ../zypp/CountryCode.cc:288
 msgid "Western Sahara"
 msgstr "西撒哈拉"
 
@@ -4196,7 +4215,7 @@ msgid "Yapese"
 msgstr "雅浦语"
 
 #. :WSM:882:
-#: ../zypp/CountryCode.cc:453
+#: ../zypp/CountryCode.cc:460
 msgid "Yemen"
 msgstr "也门"
 
@@ -4216,7 +4235,7 @@ msgid "Yupik Languages"
 msgstr "尤皮克诸语言"
 
 #. :ZAF:710:
-#: ../zypp/CountryCode.cc:456
+#: ../zypp/CountryCode.cc:463
 msgid "Zambia"
 msgstr "赞比亚"
 
@@ -4241,7 +4260,7 @@ msgid "Zhuang"
 msgstr "Zhuang 语"
 
 #. :ZMB:894:
-#: ../zypp/CountryCode.cc:457
+#: ../zypp/CountryCode.cc:464
 msgid "Zimbabwe"
 msgstr "津巴布韦"
 
@@ -4263,17 +4282,17 @@ msgstr "Applydeltarpm 检查已失败。"
 msgid "applydeltarpm failed."
 msgstr "Applydeltarpm 已失败。"
 
-#: ../zypp/sat/SATResolver.cc:825
+#: ../zypp/sat/SATResolver.cc:951
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:578
+#: ../zypp/sat/SATResolver.cc:704
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "无法安装 %s 和 %s"
 
-#: ../zypp/sat/SATResolver.cc:562
+#: ../zypp/sat/SATResolver.cc:688
 msgid "conflicting requests"
 msgstr "冲突的请求"
 
@@ -4283,7 +4302,7 @@ msgstr "冲突的请求"
 msgid "created backup %s"
 msgstr "已创建备份 %s"
 
-#: ../zypp/sat/SATResolver.cc:852
+#: ../zypp/sat/SATResolver.cc:978
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "安装 %s 失败："
@@ -4295,45 +4314,45 @@ msgstr "安装 %s 失败："
 msgid "delete %s"
 msgstr "删除 %s"
 
-#: ../zypp/sat/SATResolver.cc:621
+#: ../zypp/sat/SATResolver.cc:747
 #, fuzzy
 msgid "deleted providers: "
 msgstr "均不提供 %s"
 
-#: ../zypp/sat/SATResolver.cc:773
+#: ../zypp/sat/SATResolver.cc:899
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "不安装或删除相关的可解析项"
 
-#: ../zypp/sat/SATResolver.cc:758
+#: ../zypp/sat/SATResolver.cc:884
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "没有提供可安装的 %s"
 
-#: ../zypp/sat/SATResolver.cc:711
+#: ../zypp/sat/SATResolver.cc:837
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "不安装 %s"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:690 ../zypp/sat/SATResolver.cc:729
+#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
 #, c-format
 msgid "do not install %s"
 msgstr "不安装 %s"
 
-#: ../zypp/sat/SATResolver.cc:785
+#: ../zypp/sat/SATResolver.cc:911
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/sat/SATResolver.cc:811
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "未安装"
 
-#: ../zypp/sat/SATResolver.cc:818
+#: ../zypp/sat/SATResolver.cc:944
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "降级 %s 为 %s"
@@ -4345,7 +4364,7 @@ msgstr "降级 %s 为 %s"
 msgid "install %s"
 msgstr "安装 %s"
 
-#: ../zypp/sat/SATResolver.cc:832
+#: ../zypp/sat/SATResolver.cc:958
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4355,37 +4374,37 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:706 ../zypp/sat/SATResolver.cc:743
+#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
 #: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
 msgstr "保留 %s"
 
-#: ../zypp/target/hal/HalContext.cc:224
+#: ../zypp/target/hal/HalContext.cc:219
 msgid "libhal_ctx_new: Can't create libhal context"
 msgstr "libhal_ctx_new：无法创建 libhal 环境"
 
-#: ../zypp/target/hal/HalContext.cc:239
+#: ../zypp/target/hal/HalContext.cc:234
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection：无法设置 dbus 连接"
 
-#: ../zypp/sat/SATResolver.cc:573
+#: ../zypp/sat/SATResolver.cc:699
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s 对于以下对象是必需的： %s"
 
-#: ../zypp/sat/SATResolver.cc:565
+#: ../zypp/sat/SATResolver.cc:691
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "均不提供 %s"
 
-#: ../zypp/sat/SATResolver.cc:559
+#: ../zypp/sat/SATResolver.cc:685
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "正在读取已安装的包"
 
-#: ../zypp/sat/SATResolver.cc:840
+#: ../zypp/sat/SATResolver.cc:966
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
@@ -4426,7 +4445,7 @@ msgstr ""
 "rpm 已将 %s 另存为 %s。\n"
 "以下是前 25 行差异：\n"
 
-#: ../zypp/sat/SATResolver.cc:633
+#: ../zypp/sat/SATResolver.cc:759
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "没有提供可安装的 %s"
