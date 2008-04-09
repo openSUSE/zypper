@@ -12,22 +12,26 @@
 #ifndef ZYPP_PATCH_H
 #define ZYPP_PATCH_H
 
+#include "zypp/sat/SolvAttr.h"
 #include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+
   DEFINE_PTR_TYPE(Patch);
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Patch
-  //
-  /** Class representing a patch.
-   * \todo Patch::atoms can't be const, if Impl does not
-   * provide a const method. Check it.
-  */
+  
+  /** 
+   * Class representing a patch.
+   * 
+   * A patch represents a specific problem that
+   * can be fixed by pulling in the patch dependencies.
+   *
+   * Patches can be marked for installation but their
+   * installation is a no-op.
+   */
   class Patch : public ResObject
   {
     public:
@@ -40,21 +44,112 @@ namespace zypp
       typedef sat::SolvableSet Contents;
 
     public:
-      /** Patch time stamp */
+      /** 
+       * issue date time
+       */
       Date timestamp() const
       { return buildtime(); }
-      /** Patch category (recommended, security,...) */
+
+      /**
+       * Patch category (recommended, security,...)
+       */
       std::string category() const;
-      /** Does the system need to reboot to finish the update process? */
+
+      /**
+       * Does the system need to reboot to finish the update process?
+       */
       bool reboot_needed() const;
-      /** Does the patch affect the package manager itself? */
+
+      /**
+       * Does the patch affect the package manager itself? 
+       */
       bool affects_pkg_manager() const;
-      /** Is the patch installation interactive? (does it need user input?) */
+
+      /**
+       * Is the patch installation interactive? (does it need user input?)
+       */
       bool interactive() const;
 
     public:
-      /** The collection of packages associated with this patch. */
+      /**
+       * The collection of packages associated with this patch.
+       */
       Contents contents() const;
+
+    public:
+     
+      /**
+       * Query class for Patch issue references
+       * like bugzilla and security issues the
+       * patch is supposed to fix.
+       *
+       * The iterator does not provide a dereference
+       * operator so you can do * on it, but you can
+       * access the attributes of each patch issue reference
+       * directly from the iterator.
+       *
+       * \code
+       * for ( Patch::ReferenceIterator it = patch->referencesBegin();
+       *       it != patch->referencesEnd();
+       *       ++it )
+       * {
+       *   cout << it.href() << endl;
+       * }
+       * \endcode
+       *
+       */
+      class ReferenceIterator : public boost::iterator_adaptor<
+        Patch::ReferenceIterator            // Derived
+        , sat::LookupAttr::iterator         // Base
+        , int                              // Value
+        , boost::forward_traversal_tag     // CategoryOrTraversal
+        , int
+        >
+      {
+      public:
+          ReferenceIterator();
+          explicit ReferenceIterator( const sat::Solvable & val_r );
+          
+          /**
+           * The id of the reference. For bugzilla entries
+           * this is the bug number as a string.
+           */
+          std::string id() const;
+          /**
+           * Url or ponter where to find more information
+           */
+          std::string href() const;
+          /**
+           * Title describing the issue
+           */
+          std::string title() const;
+          /**
+           * Type of the reference. For example
+           * "bugzilla"
+           */
+          std::string type() const;
+      private:
+        friend class boost::iterator_core_access;
+
+        int dereference() const;
+        void increment();
+      private:
+        sat::LookupAttr::iterator _hrefit;
+        sat::LookupAttr::iterator _titleit;
+        sat::LookupAttr::iterator _typeit;
+      };
+
+      /**
+       * Get an iterator to the beginning of the patch
+       * references. \see Patch::ReferenceIterator
+       */
+      ReferenceIterator referencesBegin() const;
+      /**
+       * Get an iterator to the end of the patch
+       * references. \see Patch::ReferenceIterator
+       */
+      ReferenceIterator referencesEnd() const;
+
 
     public:
       /** Patch ID
@@ -79,6 +174,7 @@ namespace zypp
   };
 
   /////////////////////////////////////////////////////////////////
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_PATCH_H
