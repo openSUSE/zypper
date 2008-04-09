@@ -143,12 +143,12 @@ namespace zypp
        * Get an iterator to the beginning of the patch
        * references. \see Patch::ReferenceIterator
        */
-      ReferenceIterator referencesBegin() const;
+      Patch::ReferenceIterator referencesBegin() const;
       /**
        * Get an iterator to the end of the patch
        * references. \see Patch::ReferenceIterator
        */
-      ReferenceIterator referencesEnd() const;
+      Patch::ReferenceIterator referencesEnd() const;
 
 
     public:
