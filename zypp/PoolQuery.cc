@@ -474,8 +474,8 @@ attremptycheckend:
 
     // compiled
 
-    o << "regex compiled strings: " << _rcstrings << endl;
-    o << "regex compiled attributes:" << endl;
+    o << "compiled strings: " << _rcstrings << endl;
+    o << "compiled attributes:" << endl;
     for (CompiledAttrMap::const_iterator ai = _rcattrs.begin(); ai != _rcattrs.end(); ++ai)
       o << "* " << ai->first << ": " << ai->second << endl;
 
@@ -604,32 +604,9 @@ attremptycheckend:
             const IdString & value =
               IdString(_rdit->kv.id);
 
-            switch(_pqimpl->_flags & SEARCH_STRINGMASK)
-            {
-            case SEARCH_STRING:
-              if (_pqimpl->_flags & SEARCH_NOCASE)
-                matches = ! str::compareCI(sstr.c_str(), value.c_str());
-              else
-                matches = (sstr == value.asString());
-              break;
-            case SEARCH_SUBSTRING:
-              if (_pqimpl->_flags & SEARCH_NOCASE)
-                matches = ::strcasestr(value.c_str(), sstr.c_str());
-              else
-                matches = (value.asString().find(sstr) != string::npos);
-              break;
-            case SEARCH_GLOB:
-              matches = !::fnmatch(sstr.c_str(), value.c_str(),
-                  (_pqimpl->_flags & SEARCH_NOCASE) ? FNM_CASEFOLD : 0);
-              break;
-            case SEARCH_REGEX:
-              matches = false;
-              break;
-            default:
-              matches = false;
-              ERR << "invalid string matching type: "
-                  << (_pqimpl->_flags & SEARCH_STRINGMASK) << endl;
-            }
+            //! \todo pass compiled regex if SEARCH_REGEX
+            matches = dataiterator_match(_rdit, _pqimpl->_flags, sstr.c_str());
+
             if (matches)
               INT << "value: " << value.asString() << endl
                   << " mstr: " <<  sstr << endl; 

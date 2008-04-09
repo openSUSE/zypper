@@ -196,63 +196,61 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
 //  1xx multiple attribute queries
 /////////////////////////////////////////////////////////////////////////////
 
-/*
+
 BOOST_AUTO_TEST_CASE(pool_query_100)
 {
   cout << "****100****"  << endl;
   PoolQuery q;
-  q.addString("browser");
+  q.addString("mp3");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
   std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 15);
+  BOOST_CHECK(q.size() == 73);
 
   cout << endl;
 
   PoolQuery q1;
-  q1.addString("browser");
+  q1.addString("mp3");
   q1.addAttribute(sat::SolvAttr::name);
 
   std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 5);
+  BOOST_CHECK(q1.size() == 7);
 }
 
-
 // multi attr (same value) substring matching (case sensitive and insensitive)
-BOOST_AUTO_TEST_CASE(pool_query_10)
+BOOST_AUTO_TEST_CASE(pool_query_101)
 {
-  cout << "****10****"  << endl;
+  cout << "****101****"  << endl;
 
   PoolQuery q;
-  q.addString("SSH");
+  q.addString("ZYpp");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
   std::for_each(q.begin(), q.end(), &result_cb);
-  cout << q.size() << endl;
-  BOOST_CHECK(q.size() == 17);
+  BOOST_CHECK(q.size() == 30);
 
   cout << endl;
 
   PoolQuery q2;
-  q2.addString("SSH");
+  q2.addString("ZYpp");
   q2.addAttribute(sat::SolvAttr::name);
   q2.addAttribute(sat::SolvAttr::summary);
   q2.addAttribute(sat::SolvAttr::description);
   q2.setCaseSensitive();
 
   std::for_each(q2.begin(), q2.end(), &result_cb);
-  cout << q2.size() << endl;
+  BOOST_CHECK(q2.size() == 2);
 }
 
 
 // multi attr (same value) glob matching (case sensitive and insensitive)
-BOOST_AUTO_TEST_CASE(pool_query_11)
+BOOST_AUTO_TEST_CASE(pool_query_102)
 {
-  cout << "****11****"  << endl;
+  cout << "****102****"  << endl;
   PoolQuery q;
   q.addString("pack*");
   q.addAttribute(sat::SolvAttr::name);
@@ -260,10 +258,10 @@ BOOST_AUTO_TEST_CASE(pool_query_11)
   q.setMatchGlob();
 
   std::for_each(q.begin(), q.end(), &result_cb);
-  cout << q.asString() <<  endl;
-//  BOOST_CHECK(q.size() == 11);
+  cout << q.size() <<  endl;
+  BOOST_CHECK(q.size() == 35);
 }
-*/
+
 
 /////////////////////////////////////////////////////////////////////////////
 //  3xx repo filter queries (addRepo(alias_str))
