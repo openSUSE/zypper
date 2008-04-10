@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include <sstream>
+#include <boost/algorithm/string/replace.hpp>
 
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
@@ -877,7 +878,6 @@ attremptycheckend:
 
   const PoolQueryAttr PoolQueryAttr::noAttr;
 
-  const PoolQueryAttr PoolQueryAttr::nameAttr( "name" );
   const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
   const PoolQueryAttr PoolQueryAttr::kindAttr( "kind" );
 
