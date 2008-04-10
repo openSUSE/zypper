@@ -75,11 +75,11 @@ namespace zypp
   Patch::Contents Patch::contents() const
   {
     Contents result;
-    const sat::LookupAttr::iterator _col_name_it = sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).begin();
-    const sat::LookupAttr::iterator _col_evr_it = sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).begin();
-    const sat::LookupAttr::iterator _col_arch_it = sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).begin();
+    sat::LookupAttr::iterator _col_name_it(sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).begin());
+    sat::LookupAttr::iterator _col_evr_it(sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).begin());
+    sat::LookupAttr::iterator _col_arch_it(sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).begin());
 
-    while (_col_name_it != sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).end())
+    for (;_col_name_it != sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).end(); ++_col_name_it, ++_col_evr_it, ++_col_arch_it)
     {
       /* safety checks, shouldn't happen (tm) */
       if (_col_evr_it == sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).end()
