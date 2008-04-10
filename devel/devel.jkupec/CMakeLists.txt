@@ -1,9 +1,7 @@
-ADD_DEFINITIONS(-DSRC_DIR=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\")
-
-#ADD_EXECUTABLE(sourcedownload sourcedownload.cc)
-#TARGET_LINK_LIBRARIES(sourcedownload zypp zypp2)
-
-
+ADD_DEFINITIONS(
+  -DSRC_DIR=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\"
+  -DTESTS_SRC_DIR=\\\"${CMAKE_SOURCE_DIR}/tests\\\"
+)
 
 SET( bridge_SRCS
   bridge/bridge.cc
@@ -17,8 +15,11 @@ SET( bridge_HEADERS
   bridge/Derived.h
 )
 
-ADD_EXECUTABLE( yumparsertest YUMParser_test.cc )
-TARGET_LINK_LIBRARIES(yumparsertest zypp zypp2)
+#ADD_EXECUTABLE( yumparsertest YUMParser_test.cc )
+#TARGET_LINK_LIBRARIES( yumparsertest zypp )
 
 ADD_EXECUTABLE( bridge ${bridge_SRCS} )
-TARGET_LINK_LIBRARIES( bridge zypp zypp2)
+TARGET_LINK_LIBRARIES( bridge zypp )
+
+ADD_EXECUTABLE( poolquery poolquery.cc )
+TARGET_LINK_LIBRARIES( poolquery zypp )

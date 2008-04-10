@@ -68,10 +68,12 @@ namespace zypp
     StrContainer _strings;
     /** Regex-compiled search strings. */
     mutable string _rcstrings;
+    mutable regex_t _regex;
     /** Raw attributes */
     AttrMap _attrs;
     /** Regex-compiled attributes */
     mutable CompiledAttrMap _rcattrs;
+    mutable map<sat::SolvAttr, regex_t> _rattrs;
 
     /** Repos to search. */
     StrContainer _repos;
@@ -104,25 +106,31 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
   };
-/*
-  template <class _OutputIterator>
-  struct CollectNonEmpty
-  {
-    CollectNonEmpty( _OutputIterator iter_r ) : _iter( iter_r ) {}
 
-    template<class _Tp>
-    bool operator()( const _Tp & value_r ) const
+  
+  struct MyInserter
+  {
+    MyInserter(PoolQuery::StrContainer & cont) : _cont(cont) {}
+    
+    bool operator()(const string & str)
     {
-      if (value_r.empty())
-        return true;
-      *_iter++ = value_r;
+      _cont.insert(str);
       return true;
     }
-
-    private:
-      mutable _OutputIterator _iter;
+    
+    PoolQuery::StrContainer & _cont;
   };
-*/
+
+  
+  struct EmptyFilter
+  {
+    bool operator()(const string & str)
+    {
+      return !str.empty();
+    }
+  };
+
+
   void PoolQuery::Impl::compile() const
   {
     _cflags = _flags;
@@ -150,20 +158,16 @@ namespace zypp
     else if (_attrs.size() == 1)
     {
       StrContainer joined;
-      for(StrContainer::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
-        if (!it->empty())
-          joined.insert(*it);
-      for(StrContainer::const_iterator it = _attrs.begin()->second.begin(); it != _attrs.begin()->second.end(); ++it)
-        if (!it->empty())
-          joined.insert(*it);
+      invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
+      invokeOnEach(_attrs.begin()->second.begin(), _attrs.begin()->second.end(), EmptyFilter(), MyInserter(joined));
       _rcstrings = createRegex(joined);
       _rcattrs.insert(pair<sat::SolvAttr, string>(_attrs.begin()->first, string()));
     }
 
-
     // // MULTIPLE ATTRIBUTES
     else
     {
+      // check whether there are any per-attribute strings 
       bool attrvals_empty = true;
       for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
         if (!ai->second.empty())
@@ -177,10 +181,24 @@ namespace zypp
 
 attremptycheckend:
 
+      // chceck whether the per-attribute strings are all the same
       bool attrvals_thesame = true;
-      for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+      AttrMap::const_iterator ai = _attrs.begin();
+      const StrContainer & set1 = ai->second;
+      ++ai;
+      for (; ai != _attrs.end(); ++ai)
       {
-        
+        StrContainer result;
+        set_difference(
+          set1.begin(), set1.end(),
+          ai->second.begin(), ai->second.end(),
+          inserter(result, result.begin())/*, ltstr()*/);
+        if (!result.empty())
+        {
+          copy(result.begin(), result.end(), ostream_iterator<string>(cout, " "));
+          attrvals_thesame = false;
+          break;
+        }
       }
 
       // // THE SAME STRINGS FOR DIFFERENT ATTRS
@@ -189,19 +207,21 @@ attremptycheckend:
       //     create regex; store in _rcattrs and _rcstrings; flag 'same'; if more strings flag regex;
       if (attrvals_empty || attrvals_thesame)
       {
+        StrContainer joined;
         if (attrvals_empty)
         {
-          // compile the search string
-          StrContainer joined;
-          for(StrContainer::const_iterator it = _strings.begin(); it != _strings.end(); ++it)
-            if (!it->empty())
-              joined.insert(*it);
+          invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
           _rcstrings = createRegex(joined);
-
-          // copy the _attrs keys to _rcattrs
-          for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
-            _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
         }
+        else
+        {
+          invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
+          invokeOnEach(_attrs.begin()->second.begin(), _attrs.begin()->second.end(), EmptyFilter(), MyInserter(joined));
+          _rcstrings = createRegex(joined);
+        }
+        // copy the _attrs keys to _rcattrs
+        for_(ai, _attrs.begin(), _attrs.end())
+          _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
       }
       // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
       // if _attrs is not empty and it contains non-empty vectors with non-empty strings
@@ -209,7 +229,9 @@ attremptycheckend:
       //     create regex; store in _rcattrs; flag 'different'; if more strings flag regex;
       else
       {
-        
+        /*          set_union(A.begin(), A.end(), B.begin(), B.end(),
+                             ostream_iterator<const char*>(cout, " "),
+                             ltstr());*/
       }
     }
 

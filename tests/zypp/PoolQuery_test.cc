@@ -247,6 +247,7 @@ BOOST_AUTO_TEST_CASE(pool_query_050)
   BOOST_CHECK(q1.size() == 5);
 }
 
+
 /////////////////////////////////////////////////////////////////////////////
 //  1xx multiple attribute queries
 /////////////////////////////////////////////////////////////////////////////
@@ -278,6 +279,7 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
   std::for_each(q1.begin(), q1.end(), &result_cb);
   BOOST_CHECK(q1.size() == 7);
 }
+
 
 // multi attr (same value) substring matching (case sensitive and insensitive)
 BOOST_AUTO_TEST_CASE(pool_query_101)
@@ -321,6 +323,30 @@ BOOST_AUTO_TEST_CASE(pool_query_102)
   BOOST_CHECK(q.size() == 35);
 }
 
+
+// multi attr (same value via addAttribute())
+BOOST_AUTO_TEST_CASE(pool_query_103)
+{
+  cout << "****103.1****"  << endl;
+  PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, "novell");
+  q.addAttribute(sat::SolvAttr::summary, "novell");
+
+//  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 42);
+
+  cout << "****103.2****"  << endl;
+
+  PoolQuery q1;
+  q1.addString("novell");
+  q1.addAttribute(sat::SolvAttr::name);
+  q1.addAttribute(sat::SolvAttr::summary);
+
+//  std::for_each(q1.begin(), q1.end(), &result_cb);
+  BOOST_CHECK(q1.size() == 42);
+
+  cout << endl;
+}
 
 /////////////////////////////////////////////////////////////////////////////
 //  3xx repo filter queries (addRepo(alias_str))
