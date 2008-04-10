@@ -249,6 +249,8 @@ namespace zypp
     /** Return a human-readable description of the query */
     std::string asString() const;
 
+    bool operator==(const PoolQuery& b) const;
+    bool operator!=(const PoolQuery& b) const { return !(*this == b ); }
 
     // low level API
 
@@ -276,8 +278,6 @@ namespace zypp
   /** \relates PoolQuery Stream output. */
   std::ostream & operator<<( std::ostream & str, const PoolQuery & obj );
 
-  bool equal(const PoolQuery& a, const PoolQuery& b);
-  bool operator==(const PoolQuery& a, const PoolQuery& b);
 
 
   ///////////////////////////////////////////////////////////////////

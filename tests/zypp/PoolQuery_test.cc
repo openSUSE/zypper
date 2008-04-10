@@ -437,11 +437,10 @@ BOOST_AUTO_TEST_CASE(pool_query_equal)
   q4.addAttribute(sat::SolvAttr::name,"zypp");
   q4.setMatchGlob();
 
-  BOOST_CHECK(equal(q,q2));
-  BOOST_CHECK(!equal(q,q3));
-  //only exact equal! \TODO maybe change
-  BOOST_CHECK(!equal(q,q4));
-  BOOST_CHECK(!equal(q4,q3));
+  BOOST_CHECK(q==q2);
+  BOOST_CHECK(q!=q3);
+  BOOST_CHECK(q==q4);
+  BOOST_CHECK(q4!=q3);
 }
 
 // save/load query

@@ -59,8 +59,8 @@ namespace zypp
     
     string asString() const;
     
-  private:
     void compile() const;
+  private:
     string createRegex(const StrContainer & container) const;
 
   public:
@@ -944,15 +944,13 @@ attremptycheckend:
   ostream & operator<<( ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
-  bool operator==(const PoolQuery& a, const PoolQuery& b)
-  {
-    return equal(a,b);
-  }
-
   //internal matching two containers O(n^2)
   template <class Container>
   bool equalContainers(const Container& a, const Container& b)
   {
+    if (a.size()!=b.size())
+      return false;
+
     for_(it,a.begin(),a.end())
     {
       bool finded = false;
@@ -971,21 +969,27 @@ attremptycheckend:
     return true;
   }
 
-  bool equal(const PoolQuery& a, const PoolQuery& b)
+  bool PoolQuery::operator==(const PoolQuery& a) const
   {
-    if( a.matchType()!=b.matchType() )
+    if (!_pimpl->_compiled)
+      _pimpl->compile();
+    if (!a._pimpl->_compiled)
+      a._pimpl->compile();
+    if( matchType()!=a.matchType() )
       return false;
-    if( a.matchWord()!=b.matchWord())
+    if( a.matchWord()!=matchWord())
       return false;
-    if( a.requireAll()!=b.requireAll() )
+    if( a.requireAll()!=requireAll() )
       return false;
-    if(!equalContainers(a.strings(), b.strings()))
+    if(!equalContainers(a.kinds(), kinds()))
       return false;
-    if(!equalContainers(a.kinds(), b.kinds()))
+    if(!equalContainers(a.repos(), repos()))
       return false;
-    if(!equalContainers(a.repos(), b.repos()))
+    if(a._pimpl->_rcstrings!=_pimpl->_rcstrings)
       return false;
-    if(!equalContainers(a.attributes(), b.attributes()))
+    if(!equalContainers(a._pimpl->_rcattrs, _pimpl->_rcattrs))
+      return false;
+    if(a._pimpl->_cflags!= _pimpl->_cflags)
       return false;
 
     return true;
