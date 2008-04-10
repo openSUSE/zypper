@@ -9,8 +9,12 @@
 /** \file zypp/Patch.cc
  *
 */
+
+#include "zypp/base/Logger.h"
 #include "zypp/Patch.h"
 #include "zypp/Message.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -83,54 +87,68 @@ namespace zypp
     {
       /* safety checks, shouldn't happen (tm) */
       if (_col_evr_it == sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).end()
-	  || _col_arch_it == sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).end())
+          || _col_arch_it == sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).end())
       {
-	/* FIXME: Raise exception ?! */
-	break;
+          /* FIXME: Raise exception ?! */
+          ERR << *this << " : The thing that should not happen, happened." << endl;
+          break;
       }
+
       IdString nameid( _col_name_it.asString() ); /* IdString for fast compare */
       Arch arch( _col_arch_it.asString() );
       
       /* search providers of name */
       sat::WhatProvides providers( Capability( _col_name_it.asString() ) );
+      MIL << *this << " providers: " << endl;
+      MIL << providers << endl;
+      
       if (providers.empty())
-	continue;
+      {
+          WAR << *this << " misses provider for '" << _col_name_it.asString() << "'" << endl;
+          continue;
+      }
+      
       bool is_relevant = false;
       for_( it, providers.begin(), providers.end() )
       {
-	if (it->ident() != nameid) /* package _name_ must match */
-	  continue;
+          if (it->ident() != nameid) /* package _name_ must match */
+              continue;
 	
-	if (it->isSystem()  /* only look at installed providers with same arch */
-	    && it->arch() == arch)
-	{
-	  is_relevant = true;
-	}
+          if (it->isSystem()  /* only look at installed providers with same arch */
+              && it->arch() == arch)
+          {
+              is_relevant = true;
+          }
       }
       if (!is_relevant)
-	continue;        /* skip if name.arch is not installed */
+      {
+          MIL << *this << " is not relevant to the system" << endl;
+          
+          continue;        /* skip if name.arch is not installed */
+      }
       
+
       /* find exact providers first (this matches the _real_ 'collection content' of the patch */
       sat::WhatProvides exact_providers( Capability( _col_name_it.asString(), Rel::EQ, _col_evr_it.asString(), ResKind::package ) );
       if (exact_providers.empty())
       {
-	/* no exact providers: find 'best' providers */
-	sat::WhatProvides best_providers( Capability( _col_name_it.asString(), Rel::GT, _col_evr_it.asString(), ResKind::package ) );
-        if (best_providers.empty())
-	{
-	  // Hmm, this patch is not installable, noone is providing the package in the collection
-	  // raise execption ? fake a solvable ?
-	}
-	else
-	{
-	  // FIXME ?! loop over providers and try to find installed ones ?
-	  result.get().insert( *(best_providers.begin()) );
-	}
+          /* no exact providers: find 'best' providers */
+          sat::WhatProvides best_providers( Capability( _col_name_it.asString(), Rel::GT, _col_evr_it.asString(), ResKind::package ) );
+          if (best_providers.empty())
+          {
+              // Hmm, this patch is not installable, noone is providing the package in the collection
+              // raise execption ? fake a solvable ?
+          }
+          else
+          {
+              // FIXME ?! loop over providers and try to find installed ones ?
+              result.get().insert( *(best_providers.begin()) );
+          }
       }
       else
       {
-	// FIXME ?! loop over providers and try to find installed ones ?
-	result.get().insert( *(exact_providers.begin()) );
+          // FIXME ?! loop over providers and try to find installed ones ?
+          result.get().insert( *(exact_providers.begin()) );
       }
     } /* while (attribute array) */
 
