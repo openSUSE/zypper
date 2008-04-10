@@ -387,7 +387,7 @@ namespace zypp
     ValidValue Solvable::validate() const
     {
 	NO_SOLVABLE_RETURN( NOTRELEVANT );
-	int ret = solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get());
+	int ret = solvable_trivial_installable_repo (_solvable, Pool::instance().systemRepo().get());
 	if (ret == 0)
 	    return BROKEN;
 	else if (ret > 0)
