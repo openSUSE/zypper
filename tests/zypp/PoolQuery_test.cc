@@ -348,6 +348,20 @@ BOOST_AUTO_TEST_CASE(pool_query_103)
   cout << endl;
 }
 
+
+// multiple attributes, different search strings (one string per attrbute)
+BOOST_AUTO_TEST_CASE(pool_query_104)
+{
+  cout << "****104****"  << endl;
+  PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, "novell");
+  q.addAttribute(sat::SolvAttr::summary, "package management");
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+  BOOST_CHECK(q.size() == 22);
+}
+
+
 /////////////////////////////////////////////////////////////////////////////
 //  3xx repo filter queries (addRepo(alias_str))
 /////////////////////////////////////////////////////////////////////////////

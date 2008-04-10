@@ -178,7 +178,6 @@ namespace zypp
               attrvals_empty = false;
               goto attremptycheckend;
             }
-
 attremptycheckend:
 
       // chceck whether the per-attribute strings are all the same
@@ -195,7 +194,6 @@ attremptycheckend:
           inserter(result, result.begin())/*, ltstr()*/);
         if (!result.empty())
         {
-          copy(result.begin(), result.end(), ostream_iterator<string>(cout, " "));
           attrvals_thesame = false;
           break;
         }
@@ -223,15 +221,21 @@ attremptycheckend:
         for_(ai, _attrs.begin(), _attrs.end())
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
       }
+
       // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
       // if _attrs is not empty and it contains non-empty vectors with non-empty strings
       //   for each key in _attrs take all _strings + all _attrs[key] strings
       //     create regex; store in _rcattrs; flag 'different'; if more strings flag regex;
       else
       {
-        /*          set_union(A.begin(), A.end(), B.begin(), B.end(),
-                             ostream_iterator<const char*>(cout, " "),
-                             ltstr());*/
+        for_(ai, _attrs.begin(), _attrs.end())
+        {
+          StrContainer joined;
+          invokeOnEach(_strings.begin(), _strings.end(), EmptyFilter(), MyInserter(joined));
+          invokeOnEach(ai->second.begin(), ai->second.end(), EmptyFilter(), MyInserter(joined));
+          string s = createRegex(joined);
+          _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, s));
+        }
       }
     }
 

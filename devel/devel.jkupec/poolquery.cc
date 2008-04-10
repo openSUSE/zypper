@@ -49,11 +49,11 @@ int main (int argc, const char ** argv)
   init_pool();
 
   PoolQuery q;
-  //q.addString("novell");
   q.addAttribute(sat::SolvAttr::name, "novell");
-  q.addAttribute(sat::SolvAttr::summary, "novell");
+  q.addAttribute(sat::SolvAttr::summary, "package management");
 
   std::for_each(q.begin(), q.end(), &result_cb);
 
   cout << q.size() << endl;
+  cout << q << endl;
 }
