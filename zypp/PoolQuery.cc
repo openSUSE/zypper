@@ -868,7 +868,6 @@ attremptycheckend:
     static const PoolQueryAttr noAttr;
 
     // own attributes
-    static const PoolQueryAttr nameAttr;
     static const PoolQueryAttr repoAttr;
     static const PoolQueryAttr kindAttr;
 
@@ -920,12 +919,7 @@ attremptycheckend:
 
       PoolQueryAttr attribute( atrName );
 
-      if ( attribute==PoolQueryAttr::nameAttr)
-      {
-        //setName...maybe some regex test
-        break;
-      }
-      else if ( attribute==PoolQueryAttr::repoAttr )
+      if ( attribute==PoolQueryAttr::repoAttr )
       {
         addRepo( atrValue );
       }
