@@ -303,7 +303,7 @@ namespace zypp
   public:
     PoolQueryIterator()
     : PoolQueryIterator::iterator_adaptor_(0), _has_next(true),
-      _attrs(PoolQuery::CompiledAttrMap()), _do_matching(false), _pool((sat::Pool::instance()))
+      _do_matching(false), _pool((sat::Pool::instance()))
     { _rdit = 0; _sid = 0; }
 
   private:
@@ -339,7 +339,6 @@ namespace zypp
     const PoolQuery::Impl * _pqimpl;
     /*SolvableId*/ int _sid;
     bool _has_next;
-    const PoolQuery::CompiledAttrMap & _attrs;
     bool _do_matching;
     sat::Pool _pool;
   };

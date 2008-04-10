@@ -517,11 +517,10 @@ attremptycheckend:
   , _pqimpl(pqimpl)
   , _sid(0)
   , _has_next(true)
-  , _attrs(pqimpl->_rcattrs)
   , _do_matching(false)
   , _pool((sat::Pool::instance()))
   {
-    if (_attrs.size() > 1)
+    if (_pqimpl->_rcattrs.size() > 1)
       _do_matching = true;
   }
 
@@ -611,8 +610,8 @@ attremptycheckend:
         if (!matches && in_repo)
         {
           SolvAttr attr(_rdit->key->name);
-          PoolQuery::CompiledAttrMap::const_iterator ai = _attrs.find(attr);
-          if (ai != _attrs.end())
+          PoolQuery::CompiledAttrMap::const_iterator ai = _pqimpl->_rcattrs.find(attr);
+          if (ai != _pqimpl->_rcattrs.end())
           {
             if ((_pqimpl->_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
             {
