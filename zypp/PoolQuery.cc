@@ -843,6 +843,7 @@ attremptycheckend:
     private:
       friend class IdStringType<PoolQueryAttr>;
       IdString _str;
+      sat::SolvAttr sa;
 
     public:
     
@@ -856,13 +857,17 @@ attremptycheckend:
         : _str( str_r ),isSolvAttr(false)
     {
       if( _str==noAttr ){
-        sat::SolvAttr sa(str_r);
+        string s(str_r);
+        boost::replace_all(s,"_",":");
+        sa = sat::SolvAttr(s);
         if( sa != sat::SolvAttr::noAttr )
         {
           isSolvAttr = true; 
         }
       }
     }
+
+    const sat::SolvAttr& solvAttr() { return sa;}
 
     //unknown atributes
     static const PoolQueryAttr noAttr;
@@ -914,34 +919,33 @@ attremptycheckend:
 
       finded_something = true;
 
-      string atrName(str::trim(string(s,0,pos))); // trimmed name of atribute
-      string atrValue(str::trim(string(s,pos+1,s.npos))); //trimmed value
+      string attrName(str::trim(string(s,0,pos))); // trimmed name of atribute
+      string attrValue(str::trim(string(s,pos+1,s.npos))); //trimmed value
 
-      PoolQueryAttr attribute( atrName );
+      PoolQueryAttr attribute( attrName );
 
       if ( attribute==PoolQueryAttr::repoAttr )
       {
-        addRepo( atrValue );
+        addRepo( attrValue );
       }
       else if ( attribute==PoolQueryAttr::kindAttr )
       {
-        addKind( Resolvable::Kind(atrValue) );
+        addKind( Resolvable::Kind(attrValue) );
       }
       else if ( attribute==PoolQueryAttr::noAttr )
       {
         if (attribute.isSolvAttr)
         {
-          //setAtribute
+          addAttribute(attribute.solvAttr(),attrValue);
         }
         else
         {
-          //log unknwon atribute
+          WAR << "unknown attribute " << attrName << endl;
         }
       }
       else
       {
-        //some forget handle new atribute
-        ;
+        WAR << "forget recover some attribute defined as PoolQuery attribute: " << attrName << endl;
       }
       
     } while ( true );
