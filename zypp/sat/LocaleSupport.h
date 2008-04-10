@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/sat/detail/PoolMember.h"
+#include "zypp/sat/SolvIterMixin.h"
 #include "zypp/Locale.h"
 #include "zypp/Filter.h"
 
@@ -55,7 +56,8 @@ namespace zypp
      *
      * \todo If iterator is too slow install a proxy watching the Pool::serial.
      */
-    class LocaleSupport : protected detail::PoolMember
+    class LocaleSupport : public SolvIterMixin<LocaleSupport,filter_iterator<filter::ByLocaleSupport,Pool::SolvableIterator> >
+                        , protected detail::PoolMember
     {
       public:
         /** Default ctor */
@@ -86,7 +88,7 @@ namespace zypp
       public:
         /** \name Iterate through all \ref sat::Solvables supporting my \ref Locale. */
         //@{
-        typedef filter_iterator<filter::ByLocaleSupport,Pool::SolvableIterator> iterator;
+        typedef Solvable_iterator iterator;
 
         iterator begin() const
         { return Pool(*this).filterBegin( filter::ByLocaleSupport( _locale ) ); }

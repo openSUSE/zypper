@@ -307,7 +307,7 @@ namespace zypp
             return CheckSum::sha256( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
             break;
         }
-
+      }
       return CheckSum();
     }
 
