@@ -38,9 +38,9 @@ namespace zypp
 
       public:
         typedef std::tr1::unordered_set<Solvable> Container;
-        typedef Container::value_type     value_type;
-        typedef Container::size_type      size_type;
-        typedef Container::const_iterator const_iterator;
+        typedef Container::value_type             value_type;
+        typedef Container::size_type              size_type;
+        typedef Solvable_iterator                 const_iterator; // from SolvIterMixin
 
       public:
         /** Default ctor */

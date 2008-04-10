@@ -88,7 +88,7 @@ namespace zypp
       public:
         /** \name Iterate through all \ref sat::Solvables supporting my \ref Locale. */
         //@{
-        typedef Solvable_iterator iterator;
+        typedef Solvable_iterator iterator;  // from SolvIterMixin
 
         iterator begin() const
         { return Pool(*this).filterBegin( filter::ByLocaleSupport( _locale ) ); }
