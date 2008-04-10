@@ -34,6 +34,8 @@ namespace zypp
   class CheckSum;
   class OnMediaLocation;
 
+  enum ValidValue { BROKEN, SATISFIED, NOTRELEVANT };    
+
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
@@ -186,6 +188,13 @@ namespace zypp
 	 *  that at least one package of the patch is installed.
 	 */
         bool isRelevant() const;
+
+	/** Check if the solvable is satisfied,broken or not relevant
+	 *  (not important, so it can be ignored)
+	 * \return BROKEN, SATISFIED, NOTRELEVANT   
+	*/
+	
+	ValidValue validate() const;
 
       public:
         /** \name Locale support. */

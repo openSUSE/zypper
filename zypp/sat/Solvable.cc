@@ -384,13 +384,21 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
+    ValidValue Solvable::validate() const
+    {
+	NO_SOLVABLE_RETURN( NOTRELEVANT );
+	int ret = solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get());
+	if (ret == 0)
+	    return BROKEN;
+	else if (ret > 0)
+	    return SATISFIED;
+	else
+	    return NOTRELEVANT;
+    }
+
     bool Solvable::isSatisfied() const
     {
-	NO_SOLVABLE_RETURN( false );
-	if (solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get()) == 1)
-	    return true;
-	else
-	    return false;
+	return validate() == SATISFIED;
     }
 
     bool Solvable::isRelevant() const
@@ -398,10 +406,8 @@ namespace zypp
 	NO_SOLVABLE_RETURN( false );
 	if (isKind (ResKind::package))
 	    return true; // packages are always relevant
-	if (solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get()) == -1)
-	    return false;
-	else
-	    return true;
+	
+	return validate() == BROKEN;	
     }
       
 

@@ -87,6 +87,12 @@ namespace zypp
        */
       bool isRelevant() const;
 
+      /** Check if the solvable is satisfied,broken or not relevant
+       *  (not important, so it can be ignored)
+       * \return BROKEN, SATISFIED, NOTRELEVANT          
+      */
+      ValidValue validate() const;
+
     public:
       /** Return the \ref ResPool the item belongs to. */
       ResPool pool() const;
