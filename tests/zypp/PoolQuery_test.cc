@@ -48,6 +48,25 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
   init_pool();
 }
 
+BOOST_AUTO_TEST_CASE(pool_query_exp)
+{
+  cout << "****exp****"  << endl;
+  
+  PoolQuery q;
+  q.addString("zypper");
+  q.addAttribute(sat::SolvAttr::name);
+
+  // should list 2 selectables
+  for (PoolQuery::Selectable_iterator it = q.selectableBegin();
+       it != q.selectableEnd(); ++it)
+  {
+    ui::Selectable::Ptr s = *it;
+    cout << s->kind() << ":" << s->name() << " hasinstalled: " << s->installedEmpty() << endl;
+  }
+
+  std::for_each(q.begin(), q.end(), &result_cb);
+}
+
 /////////////////////////////////////////////////////////////////////////////
 //  0xx basic queries
 /////////////////////////////////////////////////////////////////////////////

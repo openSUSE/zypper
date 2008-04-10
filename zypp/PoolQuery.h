@@ -12,8 +12,9 @@
 #ifndef ZYPP_POOLQUERY_H
 #define ZYPP_POOLQUERY_H
 
-#include "zypp/ui/Selectable.h"
+#include "zypp/Resolvable.h"
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/sat/SolvIterMixin.h"
 
 #include "zypp/base/Function.h"
 
@@ -26,6 +27,11 @@ struct _Dataiterator;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace detail
+  {
+    class PoolQueryIterator;
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery
@@ -36,13 +42,14 @@ namespace zypp
    *
    * TODO: details, examples.
    */
-  class PoolQuery
+  class PoolQuery : public sat::SolvIterMixin<PoolQuery, detail::PoolQueryIterator>
   {
   public:
     typedef std::set<std::string>                              StrContainer;
     typedef std::set<Resolvable::Kind>                         Kinds;
     typedef std::map<sat::SolvAttr, StrContainer>              AttrMap;
     typedef std::map<sat::SolvAttr, std::string>               CompiledAttrMap;
+    typedef detail::PoolQueryIterator                          const_iterator;
     typedef unsigned int size_type;
 
   public:
@@ -53,12 +60,12 @@ namespace zypp
 
     /** Query result accessers. */
     //@{
-    class ResultIterator;
+    class PoolQueryIterator;
 
     /** */
-    ResultIterator begin() const;
+    const_iterator begin() const;
     /** */
-    ResultIterator end() const;
+    const_iterator end() const;
     /** */
     bool empty();
     /** */
@@ -272,34 +279,40 @@ namespace zypp
   bool equal(const PoolQuery& a, const PoolQuery& b);
   bool operator==(const PoolQuery& a, const PoolQuery& b);
 
+
+  ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+
+
   ///////////////////////////////////////////////////////////////////
   //
-  //  CLASS NAME : PoolQuery::ResultIterator
+  //  CLASS NAME : PoolQuery::PoolQueryIterator
   //
   /**
    * 
    */
-  class PoolQuery::ResultIterator : public boost::iterator_adaptor<
-    ResultIterator                     // Derived
+  class PoolQueryIterator : public boost::iterator_adaptor<
+    PoolQueryIterator                  // Derived
     , ::_Dataiterator *                // Base
-    , sat::Solvable                    // Value
+    , const sat::Solvable              // Value
     , boost::forward_traversal_tag     // CategoryOrTraversal
-    , sat::Solvable                    // Reference
+    , const sat::Solvable              // Reference
   >
   {
   public:
-    ResultIterator()
-    : ResultIterator::iterator_adaptor_(0), _has_next(true),
-      _attrs(CompiledAttrMap()), _do_matching(false), _pool((sat::Pool::instance()))
+    PoolQueryIterator()
+    : PoolQueryIterator::iterator_adaptor_(0), _has_next(true),
+      _attrs(PoolQuery::CompiledAttrMap()), _do_matching(false), _pool((sat::Pool::instance()))
     { _rdit = 0; _sid = 0; }
 
   private:
     friend class boost::iterator_core_access;
-    friend class PoolQuery;
+    friend class PoolQuery::Impl;
 
-    ResultIterator(const Impl * pqimpl);
+    PoolQueryIterator(const PoolQuery::Impl * pqimpl);
 
-    sat::Solvable dereference() const
+    const sat::Solvable dereference() const
     {
       return _sid ? sat::Solvable(_sid) : sat::Solvable::noSolvable;
     }
@@ -326,12 +339,15 @@ namespace zypp
     const PoolQuery::Impl * _pqimpl;
     /*SolvableId*/ int _sid;
     bool _has_next;
-    const CompiledAttrMap & _attrs;
+    const PoolQuery::CompiledAttrMap & _attrs;
     bool _do_matching;
     sat::Pool _pool;
   };
   ///////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  } //namespace detail
+  ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

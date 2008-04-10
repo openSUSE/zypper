@@ -11,31 +11,22 @@
 */
 #include <iostream>
 #include <sstream>
-#include <list>
-#include <vector>
-#include <algorithm>
-#include <fnmatch.h>
 
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/DefaultIntegral.h"
 #include "zypp/base/Regex.h"
 #include "zypp/base/Algorithm.h"
-#include "zypp/base/UserRequestException.h"
 #include "zypp/repo/RepoException.h"
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/sat/detail/PoolImpl.h"
+
+#include "zypp/PoolQuery.h"
 
 extern "C"
 {
 #include "satsolver/repo.h"
 }
-
-#include "zypp/PoolQuery.h"
 
 using namespace std;
 using namespace zypp::sat;
@@ -63,40 +54,8 @@ namespace zypp
     {}
 
   public:
-/*
-    static int repo_search_cb(void *cbdata, ::Solvable *s, ::Repodata *data, ::Repokey *key, ::KeyValue *kv)
-    {
-      PoolQuery *me = (PoolQuery*) cbdata;
-
-      bool r = false;
-
-      sat::Solvable solvable(s - sat::Pool::instance().get()->solvables);
-
-      // now filter by kind here (we cant do it before)
-      if ( ! me->_pimpl->_kinds.empty() )
-      {
-        // the user wants to filter by kind.
-        if ( find( me->_pimpl->_kinds.begin(),
-                   me->_pimpl->_kinds.end(),
-                   solvable.kind() )
-             == me->_pimpl->_kinds.end() )
-        {
-          // we did not find the kind in the list
-          // so this is not a result.
-          return SEARCH_NEXT_SOLVABLE;
-        }
-      }
-
-      if (me->_pimpl->_fnc)
-        r = me->_pimpl->_fnc( solvable );//makeResObject(solvable) );
-      
-      if (!r)
-        return SEARCH_STOP;
-      return SEARCH_NEXT_SOLVABLE;
-    }
-  */  
-    ResultIterator begin() const;
-    ResultIterator end() const;
+    const_iterator begin() const;
+    const_iterator end() const;
     
     string asString() const;
     
@@ -369,7 +328,7 @@ attremptycheckend:
   }
 
 
-  PoolQuery::ResultIterator PoolQuery::Impl::begin() const
+  PoolQuery::const_iterator PoolQuery::Impl::begin() const
   {
     compile();
 
@@ -422,15 +381,15 @@ attremptycheckend:
       ZYPP_THROW(Exception(
         str::form(_("Invalid regular expression '%s'"), _rcstrings.c_str())));
 
-    PoolQuery::ResultIterator it(this);
+    PoolQuery::const_iterator it(this);
     it.increment();
     return it;
   }
 
-  PoolQuery::ResultIterator PoolQuery::Impl::end() const
+  PoolQuery::const_iterator PoolQuery::Impl::end() const
   {
     INT << "end" << endl;
-    return PoolQuery::ResultIterator();
+    return PoolQuery::const_iterator();
   }
 
 
@@ -495,13 +454,17 @@ attremptycheckend:
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery::ResultIterator
   //
   ///////////////////////////////////////////////////////////////////
 
-  PoolQuery::ResultIterator::ResultIterator(const Impl * pqimpl)
-  : PoolQuery::ResultIterator::iterator_adaptor_(pqimpl ? &pqimpl->_rdit : 0)
+  PoolQueryIterator::PoolQueryIterator(const PoolQuery::Impl * pqimpl)
+  : PoolQueryIterator::iterator_adaptor_(pqimpl ? &pqimpl->_rdit : 0)
   , _rdit(pqimpl ? &pqimpl->_rdit : 0)
   , _pqimpl(pqimpl)
   , _sid(0)
@@ -514,7 +477,7 @@ attremptycheckend:
       _do_matching = true;
   }
 
-  void PoolQuery::ResultIterator::increment()
+  void PoolQueryIterator::increment()
   {
     if (!_rdit)
       return;
@@ -536,7 +499,7 @@ attremptycheckend:
     DBG << "next: " << _sid << endl;
   }
 
-  bool PoolQuery::ResultIterator::matchSolvable()
+  bool PoolQueryIterator::matchSolvable()
   {
     _sid = _rdit->solvid;
 
@@ -565,7 +528,7 @@ attremptycheckend:
           drop_by_kind_status = false;
 
           // whether to drop an uninstalled (repo) solvable
-          if ( (_pqimpl->_status_flags & INSTALLED_ONLY) &&
+          if ( (_pqimpl->_status_flags & PoolQuery::INSTALLED_ONLY) &&
                _rdit->repo->name != _pool.systemRepoName() )
           {
             drop_by_kind_status = true;
@@ -573,7 +536,7 @@ attremptycheckend:
           }
 
           // whether to drop an installed (target) solvable
-          if ((_pqimpl->_status_flags & UNINSTALLED_ONLY) &&
+          if ((_pqimpl->_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
                _rdit->repo->name == _pool.systemRepoName())
           {
             drop_by_kind_status = true;
@@ -600,7 +563,7 @@ attremptycheckend:
         if (!matches && in_repo)
         {
           SolvAttr attr(_rdit->key->name);
-          CompiledAttrMap::const_iterator ai = _attrs.find(attr);
+          PoolQuery::CompiledAttrMap::const_iterator ai = _attrs.find(attr);
           if (ai != _attrs.end())
           {
             const string & sstr =
@@ -660,6 +623,10 @@ attremptycheckend:
 
     return matches;
   }
+
+  ///////////////////////////////////////////////////////////////////
+  } //namespace detail
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -772,11 +739,11 @@ attremptycheckend:
 
 
 
-  PoolQuery::ResultIterator PoolQuery::begin() const
+  PoolQuery::const_iterator PoolQuery::begin() const
   { return _pimpl->begin(); }
 
 
-  PoolQuery::ResultIterator PoolQuery::end() const
+  PoolQuery::const_iterator PoolQuery::end() const
   { return _pimpl->end(); }
 
 
@@ -787,49 +754,18 @@ attremptycheckend:
   PoolQuery::size_type PoolQuery::size()
   {
     size_type count = 0;
-    for(ResultIterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
+    for(const_iterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
     return count;
   }
 
 
   void PoolQuery::execute(ProcessResolvable fnc)
-  {
-    invokeOnEach(_pimpl->begin(), _pimpl->end(), fnc);
-    /*
-    _pimpl->_fnc = fnc;
-    string term;
-    if (!_pimpl->_strings.empty())
-      term = *_pimpl->_strings.begin();
+  { invokeOnEach(_pimpl->begin(), _pimpl->end(), fnc); }
 
-    sat::Pool pool(sat::Pool::instance());
-    for ( sat::Pool::RepositoryIterator itr = pool.reposBegin();
-          itr != pool.reposEnd();
-          ++itr )
-    {
-      // filter by installed uninstalled
-      if ( ( _pimpl->_status_flags & INSTALLED_ONLY ) && (itr->name() != sat::Pool::instance().systemRepoName()) )
-        continue;
-
-      if ( ( _pimpl->_status_flags & UNINSTALLED_ONLY ) && (itr->name() == sat::Pool::instance().systemRepoName()) )
-        continue;
-
-      // is this repo in users repos?
-      bool included = ( find(_pimpl->_repos.begin(), _pimpl->_repos.end(), itr->name()) != _pimpl->_repos.end() );
-
-      // only look in user repos filter if the filter is not empty
-      // in this case we search in all
-      if ( _pimpl->_repos.empty() || included  )
-      {
-        repo_search( itr->get(), 0, 0, term.c_str(), _pimpl->_flags, Impl::repo_search_cb, (void*) (this));
-      }
-
-    }
-    */
-  }
 
   ///////////////////////////////////////////////////////////////////
   //
-  //  CLASS NAME : PoolQuery::Impl
+  //  CLASS NAME : PoolQuery::Attr
   //
   /**
    * represents all atributes in PoolQuery except SolvAtributes, which are
