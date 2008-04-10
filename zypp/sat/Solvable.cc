@@ -393,6 +393,18 @@ namespace zypp
 	    return false;
     }
 
+    bool Solvable::isRelevant() const
+    {
+	NO_SOLVABLE_RETURN( false );
+	if (isKind (ResKind::package))
+	    return true; // packages are always relevant
+	if (solvable_trivial_installable (_solvable, Pool::instance().systemRepo().get()) == -1)
+	    return false;
+	else
+	    return true;
+    }
+      
+
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////

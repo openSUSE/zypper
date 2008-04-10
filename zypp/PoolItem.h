@@ -82,6 +82,11 @@ namespace zypp
       bool isBroken() const
       { return ! isSatisfied(); }
 
+      /** Returns true if the solvable is relevant which means e.G. for patches
+       *  that at least one package of the patch is installed.
+       */
+      bool isRelevant() const;
+
     public:
       /** Return the \ref ResPool the item belongs to. */
       ResPool pool() const;

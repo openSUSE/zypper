@@ -59,6 +59,11 @@ namespace zypp
         return _resolvable->isSatisfied();
       }
 
+      bool isRelevant() const
+      {
+        return _resolvable->isRelevant();
+      }
+
     private:
       mutable ResStatus     _status;
       ResObject::constPtr   _resolvable;

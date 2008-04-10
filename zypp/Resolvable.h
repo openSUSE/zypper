@@ -84,8 +84,14 @@ namespace zypp
   public:
     /** Returns true if the solvable is satisfied */
     using sat::Solvable::isSatisfied;
+      
     /** Returns true if the solvable is satisfied */
-    using sat::Solvable::isBroken;      
+    using sat::Solvable::isBroken;
+      
+    /** Returns true if the solvable is relevant which means e.G. for patches
+     *  that at least one package of the patch is installed.
+     */
+    using sat::Solvable::isRelevant;
 
   public:
     const sat::Solvable & satSolvable() const { return *this; }
