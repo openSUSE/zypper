@@ -19,7 +19,7 @@ namespace zypp
     public:
       class Impl;
 
-      static Locks instance;
+      static Locks& instance();
 
       /**
        * locks all solvables which is result of query

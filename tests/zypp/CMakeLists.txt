@@ -16,6 +16,7 @@ ADD_TESTS(
   Fetcher
   FileChecker
   KeyRing
+  Locks
   MediaSetAccess
   PathInfo
   PoolQuery

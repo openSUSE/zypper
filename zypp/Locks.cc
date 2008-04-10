@@ -10,6 +10,7 @@
 #include <set>
 #include <fstream>
 #include <boost/function.hpp>
+#include <boost/function_output_iterator.hpp>
 
 #include "zypp/base/Regex.h"
 #include "zypp/base/String.h"
@@ -77,28 +78,66 @@ readLocks(const ResPool & pool, const Pathname &file )
   return 0;
 }
 
+Locks& Locks::instance()
+{
+  static Locks _instance;
+  return _instance;
+}
+
 class Locks::Impl
 {
 public:
   std::list<PoolQuery> locks;
 };
 
+Locks::Locks() : _pimpl(new Impl){}
+
 void Locks::saveLocks( const Pathname& file )
 {
   writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
 }
 
+/**
+ * iterator that takes lock, lock all solvables from query 
+ * and send query to output iterator
+ */
+template <class OutputIterator>
+struct LockingOutputIterator
+{
+  LockingOutputIterator(OutputIterator& out_)
+    : out(out_)
+    {}
+
+  void operator()(const PoolQuery& query) const
+  {
+    for_( it,query.begin(),query.end() )
+    {
+      PoolItem item(*it);
+      item.status().setLock(true,ResStatus::USER);
+    }
+    
+    *out++ = query;
+  }
+  
+  private:
+  OutputIterator& out;
+ };
+
 void Locks::loadLocks( const Pathname& file )
 {
-  _pimpl->locks.clear();
   insert_iterator<std::list<PoolQuery> > ii( _pimpl->locks,
       _pimpl->locks.end() );
-  readPoolQueriesFromFile( file, ii );
+  LockingOutputIterator<insert_iterator<std::list<PoolQuery> > > lout(ii);
+  readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
 }
 
 void Locks::addLock( const PoolQuery& query )
 {
-  //XXX real lock it!
+  for_( it,query.begin(),query.end() )
+  {
+    PoolItem item(*it);
+    item.status().setLock(true,ResStatus::USER);
+  }
   _pimpl->locks.push_back( query );
 }
 
@@ -179,9 +218,6 @@ void Locks::removeEmptyLocks()
 
   }
 }
-
-Locks::Locks(){}
-
 
 } // ns locks
 } // ns zypp
