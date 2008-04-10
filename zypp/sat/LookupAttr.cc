@@ -104,29 +104,29 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     Repository LookupAttr::iterator::inRepo() const
-    { return Repository( _dip->repo ); }
+    { return _dip ? Repository( _dip->repo ) : Repository::noRepository; }
 
     Solvable LookupAttr::iterator::inSolvable() const
-    { return Solvable( _dip->solvid ); }
+    { return _dip ? Solvable( _dip->solvid ) : Solvable::noSolvable; }
 
     SolvAttr LookupAttr::iterator::inSolvAttr() const
-    { return SolvAttr( _dip->key->name ); }
+    { return _dip ? SolvAttr( _dip->key->name ) : SolvAttr::noAttr; }
 
     void LookupAttr::iterator::nextSkipSolvAttr()
-    { ::dataiterator_skip_attribute( _dip.get() ); }
+    { if ( _dip ) ::dataiterator_skip_attribute( _dip.get() ); }
 
     void LookupAttr::iterator::nextSkipSolvable()
-    { ::dataiterator_skip_solvable( _dip.get() ); }
+    { if ( _dip ) ::dataiterator_skip_solvable( _dip.get() ); }
 
     void LookupAttr::iterator::nextSkipRepo()
-    { ::dataiterator_skip_repo( _dip.get() ); }
+    { if ( _dip ) ::dataiterator_skip_repo( _dip.get() ); }
 
     ///////////////////////////////////////////////////////////////////
     // attr value type test
     ///////////////////////////////////////////////////////////////////
 
     detail::IdType LookupAttr::iterator::solvAttrType() const
-    { return _dip->key->type; }
+    { return _dip ? _dip->key->type : detail::noId; }
 
     bool LookupAttr::iterator::solvAttrNumeric() const
     {
@@ -183,18 +183,21 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
-    // attr value type test
+    // attr value retrieval
     ///////////////////////////////////////////////////////////////////
 
     int LookupAttr::iterator::asInt() const
     {
-      switch ( solvAttrType() )
+      if ( _dip )
       {
-        case REPOKEY_TYPE_U32:
-        case REPOKEY_TYPE_NUM:
-        case REPOKEY_TYPE_CONSTANT:
-          return _dip->kv.num;
-          break;
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_U32:
+          case REPOKEY_TYPE_NUM:
+          case REPOKEY_TYPE_CONSTANT:
+            return _dip->kv.num;
+            break;
+        }
       }
       return 0;
     }
@@ -208,91 +211,103 @@ namespace zypp
 
     const char * LookupAttr::iterator::c_str() const
     {
-      switch ( solvAttrType() )
+      if ( _dip )
       {
-        case REPOKEY_TYPE_ID:
-        case REPOKEY_TYPE_IDARRAY:
-        case REPOKEY_TYPE_CONSTANTID:
-          if ( _dip->data && _dip->data->localpool )
-            return ::stringpool_id2str( &_dip->data->spool, _dip->kv.id ); // in local pool
-          else
-            return IdString( _dip->kv.id ).c_str(); // in global pool
-          break;
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_ID:
+          case REPOKEY_TYPE_IDARRAY:
+          case REPOKEY_TYPE_CONSTANTID:
+            if ( _dip->data && _dip->data->localpool )
+              return ::stringpool_id2str( &_dip->data->spool, _dip->kv.id ); // in local pool
+            else
+              return IdString( _dip->kv.id ).c_str(); // in global pool
+            break;
 
-        case REPOKEY_TYPE_STR:
-          return _dip->kv.str;
-          break;
+          case REPOKEY_TYPE_STR:
+            return _dip->kv.str;
+            break;
 
-        case REPOKEY_TYPE_DIRSTRARRAY:
-          return ::repodata_dir2str( _dip->data, _dip->kv.id, _dip->kv.str );
-          break;
+          case REPOKEY_TYPE_DIRSTRARRAY:
+            return ::repodata_dir2str( _dip->data, _dip->kv.id, _dip->kv.str );
+            break;
+        }
       }
       return 0;
     }
 
     std::string LookupAttr::iterator::asString() const
     {
-      switch ( solvAttrType() )
+      if ( _dip )
       {
-        case REPOKEY_TYPE_ID:
-        case REPOKEY_TYPE_IDARRAY:
-        case REPOKEY_TYPE_CONSTANTID:
-        case REPOKEY_TYPE_STR:
-        case REPOKEY_TYPE_DIRSTRARRAY:
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_ID:
+          case REPOKEY_TYPE_IDARRAY:
+          case REPOKEY_TYPE_CONSTANTID:
+          case REPOKEY_TYPE_STR:
+          case REPOKEY_TYPE_DIRSTRARRAY:
           {
             const char * ret( c_str() );
             return ret ? ret : "";
           }
           break;
 
-        case REPOKEY_TYPE_U32:
-        case REPOKEY_TYPE_NUM:
-        case REPOKEY_TYPE_CONSTANT:
-          return str::numstring( asInt() );
-          break;
+          case REPOKEY_TYPE_U32:
+          case REPOKEY_TYPE_NUM:
+          case REPOKEY_TYPE_CONSTANT:
+            return str::numstring( asInt() );
+            break;
 
-        case REPOKEY_TYPE_MD5:
-        case REPOKEY_TYPE_SHA1:
-        case REPOKEY_TYPE_SHA256:
+          case REPOKEY_TYPE_MD5:
+          case REPOKEY_TYPE_SHA1:
+          case REPOKEY_TYPE_SHA256:
           {
             std::ostringstream str;
             str << asCheckSum();
             return str.str();
           }
           break;
+        }
       }
-     return std::string();
+      return std::string();
     }
 
     IdString LookupAttr::iterator::idStr() const
     {
-      switch ( solvAttrType() )
+      if ( _dip )
       {
-        case REPOKEY_TYPE_ID:
-        case REPOKEY_TYPE_IDARRAY:
-        case REPOKEY_TYPE_CONSTANTID:
-          return IdString( ::repodata_globalize_id( _dip->data, _dip->kv.id ) );
-          break;
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_ID:
+          case REPOKEY_TYPE_IDARRAY:
+          case REPOKEY_TYPE_CONSTANTID:
+            return IdString( ::repodata_globalize_id( _dip->data, _dip->kv.id ) );
+            break;
+        }
       }
       return IdString();
     }
 
     CheckSum LookupAttr::iterator::asCheckSum() const
     {
-      switch ( solvAttrType() )
+      if ( _dip )
       {
-        case REPOKEY_TYPE_MD5:
-          return CheckSum::md5( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
-          break;
+        switch ( solvAttrType() )
+        {
+          case REPOKEY_TYPE_MD5:
+            return CheckSum::md5( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
 
-        case REPOKEY_TYPE_SHA1:
-          return CheckSum::sha1( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
-          break;
+          case REPOKEY_TYPE_SHA1:
+            return CheckSum::sha1( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
 
-        case REPOKEY_TYPE_SHA256:
-          return CheckSum::sha256( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
-          break;
-      }
+          case REPOKEY_TYPE_SHA256:
+            return CheckSum::sha256( ::repodata_chk2str( _dip->data, solvAttrType(), (unsigned char *)_dip->kv.str ) );
+            break;
+        }
+
       return CheckSum();
     }
 
