@@ -100,6 +100,7 @@ namespace zypp
 
     /** Function for processing found solvables. Used in execute(). */
     mutable PoolQuery::ProcessResolvable _fnc;
+    
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -107,7 +108,17 @@ namespace zypp
     { return new Impl( *this ); }
   };
 
-  
+  static void
+  compileRegex(regex_t * regex, const string & str, bool nocase)
+  {
+    /* We feed multiple lines eventually (e.g. authors or descriptions),
+       so set REG_NEWLINE. */
+    if (regcomp(regex, str.c_str(),
+        REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (nocase ? REG_ICASE : 0)) != 0)
+      ZYPP_THROW(Exception(
+        str::form(_("Invalid regular expression '%s'"), str.c_str())));
+  }
+
   struct MyInserter
   {
     MyInserter(PoolQuery::StrContainer & cont) : _cont(cont) {}
@@ -220,6 +231,9 @@ attremptycheckend:
         // copy the _attrs keys to _rcattrs
         for_(ai, _attrs.begin(), _attrs.end())
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
+
+        if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
+          compileRegex(&_regex, _rcstrings, _cflags & SEARCH_NOCASE);
       }
 
       // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
@@ -235,6 +249,13 @@ attremptycheckend:
           invokeOnEach(ai->second.begin(), ai->second.end(), EmptyFilter(), MyInserter(joined));
           string s = createRegex(joined);
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, s));
+
+          if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
+          {
+            regex_t regex;
+            compileRegex(&regex, s, _cflags & SEARCH_NOCASE);
+            _rattrs.insert(pair<sat::SolvAttr, regex_t>(ai->first, regex));
+          }
         }
       }
     }
@@ -592,17 +613,36 @@ attremptycheckend:
           PoolQuery::CompiledAttrMap::const_iterator ai = _attrs.find(attr);
           if (ai != _attrs.end())
           {
-            const string & sstr =
-              _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
+            if ((_pqimpl->_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
+            {
+              const regex_t * regex;
+              if (_pqimpl->_rcstrings.empty())
+              {
+                map<sat::SolvAttr, regex_t>::const_iterator rai = _pqimpl->_rattrs.find(attr);
+                if (rai != _pqimpl->_rattrs.end())
+                  regex = &rai->second;
+                else
+                {
+                  ERR << "no compiled regex found for " <<  attr << endl;
+                  continue;
+                }
+              }
+              else
+                regex = &_pqimpl->_regex;
+              matches = ::dataiterator_match(_rdit, _pqimpl->_cflags, regex);
+            }
+            else
+            {
+              const string & sstr =
+                _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
+              matches = ::dataiterator_match(_rdit, _pqimpl->_cflags, sstr.c_str());
+            }
 
-            //! \todo pass compiled regex if SEARCH_REGEX
-            matches = ::dataiterator_match(_rdit, _pqimpl->_cflags, sstr.c_str());
-
-            if (matches)
+//            if (matches)
 	      /* After calling dataiterator_match (with any string matcher set)
 	         the kv.str member will be filled with something sensible.  */
-              INT << "value: " << _rdit->kv.str << endl
-                  << " mstr: " <<  sstr << endl; 
+  /*            INT << "value: " << _rdit->kv.str << endl
+                  << " mstr: " <<  sstr << endl;*/ 
           }
         }
       }
