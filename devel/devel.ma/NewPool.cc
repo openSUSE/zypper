@@ -39,6 +39,7 @@
 #include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/PoolQuery.h"
 
 #include <zypp/base/GzStream.h>
 
@@ -515,12 +516,11 @@ void dit( const Pattern::Contents & c_r )
 {
   {
   sat::WhatProvides c( Capability("amarok") );
-  INT << c << endl;
   dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
-  dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
-  dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
+  dumpRange( MIL, c.poolItemBegin(), c.poolItemEnd() ) << endl;
+  dumpRange( MIL, c.selectableBegin(), c.selectableEnd() ) << endl;
   }
-  {
+  if(0){
   const Pattern::Contents & c( c_r );
   dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
   dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
@@ -638,6 +638,14 @@ try {
   ///////////////////////////////////////////////////////////////////
 
 
+  //ResPool pool( ResPool::instance() );
+  for_( it, pool.satisfiedProductsBegin(), pool.satisfiedProductsEnd() )
+  {
+    MIL << *it << endl;
+    Product_constPtr p( asKind<Product>(*it) );
+    MIL << p << endl;
+  }
+  return 0;
   for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
   {
     if ( (*it)->name() != "apparmor" )
@@ -647,8 +655,6 @@ try {
     dit( c );
     break;
   }
-
-
 
   if ( 0 )
   {

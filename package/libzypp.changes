@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri Apr 11 14:43:05 CEST 2008 - ma@suse.de
+
+- Fix SolvIterMixin to avioid multiple visits of the same Selectable.
+- Add Resolvable::poolItem() providing access to the corresponding 
+  PoolItem. API to query isRelevant/isSatisfied/isBroken was moved 
+  to PoolItem.
+- Add ResPool::satisfiedProductsBegin/End iterator over all products
+  whose dependencies are satisfied. This reflects the status determined
+  by the last solver run. (#368104)
+- revision 9535
+
+-------------------------------------------------------------------
 Fri Apr 11 12:07:47 CEST 2008 - jreidinger@suse.cz
 
 - switch to new locks api
