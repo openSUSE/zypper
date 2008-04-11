@@ -6,6 +6,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/ZConfig.h"
+#include "zypp/ui/Selectable.h"
 
 namespace zypp
 {
@@ -24,10 +25,17 @@ namespace zypp
       void addLock( const PoolQuery& query );
 
       /**
+       * locks selectable
+       */
+      void addLock( const ui::Selectable& selectable );
+
+      /**
        * unlocks all solvables which is result of query.
        * Can call callback
        */
       void unlock( const PoolQuery& query );
+
+      void unlock( const ui::Selectable& selectable );
 
       void loadLocks( const Pathname& file = ZConfig::instance().locksFile() );
 

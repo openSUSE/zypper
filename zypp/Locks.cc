@@ -19,6 +19,7 @@
 #include "zypp/PoolItem.h"
 #include "zypp/PoolQueryUtil.tcc"
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/sat/SolvAttr.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
@@ -96,6 +97,17 @@ void Locks::addLock( const PoolQuery& query )
     item.status().setLock(true,ResStatus::USER);
   }
   _pimpl->locks.push_back( query );
+}
+
+void Locks::addLock(const ui::Selectable& selectable)
+{
+  PoolQuery q;
+  q.addAttribute( sat::SolvAttr::name,selectable.name() );
+  q.addKind( selectable.kind() );
+  q.setMatchExact();
+  q.setCaseSensitive(true);
+  q.requireAll();
+  addLock( q );
 }
 
 bool Locks::existEmptyLocks()
