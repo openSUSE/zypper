@@ -581,15 +581,11 @@ attremptycheckend:
 
     bool new_solvable = true;
     bool matches = !_do_matching;
-    bool in_repo;
     bool drop_by_kind_status = false;
     bool drop_by_repo = false;
     do
     {
-      //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
-      in_repo = _sid >= base().get()->repo->start;
-
-      if (in_repo && new_solvable)
+      if (new_solvable)
       {
         while(1)
         {
@@ -636,7 +632,7 @@ attremptycheckend:
 
       if (_do_matching && !drop_by_kind_status)
       {
-        if (!matches && in_repo)
+        if (!matches)
         {
           SolvAttr attr(base().get()->key->name);
           PoolQuery::CompiledAttrMap::const_iterator ai = _pqimpl->_rcattrs.find(attr);
@@ -699,14 +695,12 @@ attremptycheckend:
         // thus resulting to a problem in the equal() method
         ++base_reference();
         new_solvable = base().get()->solvid != _sid;
-        if (!in_repo)
-          _sid = base().get()->solvid;
       }
       // no more attributes in this repo, return
       else
-        return matches && in_repo; // did the last solvable match conditions?
+        return matches; // did the last solvable match conditions?
     }
-    while (!new_solvable || !in_repo);
+    while (!new_solvable);
 
     return matches;
   }
