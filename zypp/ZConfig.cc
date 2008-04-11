@@ -284,6 +284,7 @@ namespace zypp
     Pathname cfg_known_repos_path;
     Pathname cfg_vendor_path;
     Pathname locks_file;
+    Pathname update_scripts_path;
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
@@ -448,6 +449,12 @@ namespace zypp
   bool ZConfig::apply_locks_file() const
   {
     return _pimpl->apply_locks_file;
+  }
+
+  Pathname ZConfig::updateScriptsPath() const
+  {
+    return ( _pimpl->update_scripts_path.empty()
+        ? Pathname("/var/adm/update-scripts") : _pimpl->update_scripts_path );
   }
 
   /////////////////////////////////////////////////////////////////

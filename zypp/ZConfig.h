@@ -153,6 +153,11 @@ namespace zypp
        */
       bool apply_locks_file() const;
 
+     /**
+       * Path where update scripts are stored
+       */
+      Pathname updateScriptsPath() const;
+
     public:
       class Impl;
       /** Dtor */
