@@ -658,6 +658,42 @@ class PoolQuery;
 
     };
 
+    struct SavingLocksReport : public callback::ReportBase
+    {
+      enum Action {
+        ABORT,  // abort and return error
+        DELETE, // delete conflicted lock    
+	IGNORE  // skip conflict lock
+      };
+
+      enum Error {
+	NO_ERROR,
+	ABORTED		// cleaning aborted
+      };
+
+      enum ConflictState{
+        SAME_RESULTS,
+        INTERSECT
+      };
+
+      virtual void start() {}
+
+      virtual bool progress() /*still alive*/
+      { return true; }
+
+      /**
+       * When user unlock something which is locked by non-identical query
+       */
+      virtual Action conflict(
+  	 const PoolQuery&, /*problematic query*/
+         ConflictState 
+       ) { return DELETE; }
+
+       virtual void finish(
+         Error /*error*/
+        ) {}
+
+    };
     /////////////////////////////////////////////////////////////////
   } // namespace locks
   ///////////////////////////////////////////////////////////////////
