@@ -246,6 +246,10 @@ namespace zypp
                 {
                   apply_locks_file = str::strToBool( value, apply_locks_file );
                 }
+                else if ( entry == "update.scriptsdir" )
+                {
+                  update_scripts_path = Pathname(value);
+                }
               }
             }
           }
