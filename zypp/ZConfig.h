@@ -143,7 +143,15 @@ namespace zypp
        */      
       bool solver_onlyRequires() const;
 
+      /**
+       * Path where zypp can find or create lock file
+       */
       Pathname  locksFile() const;
+
+      /**
+       * Whetever locks file should be readed and applied after start
+       */
+      bool apply_locks_file() const;
 
     public:
       class Impl;

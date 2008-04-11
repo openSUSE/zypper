@@ -11,9 +11,6 @@ namespace zypp
 {
   namespace locks
   {
-
-    int readLocks(const ResPool & pool, const Pathname &file );
-
     class Locks
     {
     public:

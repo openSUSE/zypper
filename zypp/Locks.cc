@@ -34,49 +34,6 @@ namespace zypp
 {
 namespace locks
 {
-//
-// assign Lock to installed pool item
-//
-
-struct AddLockToPool
-{
-  AddLockToPool( const ResPool &pool )
-  : _pool(pool)
-  , _count(0)
-  {
-
-  }
-
-  bool operator()( const std::string & str_r )
-  {
-#warning MUST FIX LOCK IMPLEMENTATION
-    // - make Capability's parse 'Name [Op edition]' available so it can be used here
-    // - provide new, or extend Capability::Matches, functor to allow pattern (glob/rx) matching
-    return false;
-  } // end operator()()
-
-  ResPool _pool;
-  int _count;
-};
-
-//
-// read 'locks' table, evaluate 'glob' column, assign locks to pool
-//
-int
-readLocks(const ResPool & pool, const Pathname &file )
-{
-  PathInfo lockrc( file );
-  if ( lockrc.isFile() )
-  {
-    MIL << "Reading " << lockrc << endl;
-    ifstream inp( file.c_str() );
-    AddLockToPool addlock(pool);
-    iostr::forEachLine( inp, addlock);
-    MIL << addlock._count << " locks." << endl;
-    return addlock._count;
-  }
-  return 0;
-}
 
 Locks& Locks::instance()
 {

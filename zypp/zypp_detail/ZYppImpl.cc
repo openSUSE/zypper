@@ -23,6 +23,9 @@
 #include "zypp/DiskUsageCounter.h"
 #include "zypp/NameKindProxy.h"
 #include "zypp/Locks.h"
+#include "zypp/ZConfig.h"
+#include "zypp/sat/Pool.h"
+#include "zypp/PoolItem.h"
 
 using std::endl;
 
@@ -176,32 +179,24 @@ namespace zypp
 
     int ZYppImpl::applyLocks()
     {
-#warning make the /etc/zypp/locks path an option zconfig.
-      Pathname locksrcPath( "/etc/zypp/locks" );
-      try
+      if (!ZConfig::instance().apply_locks_file())
+        return 0;
+
+      //TODO catch posibble exceptions
+      locks::Locks::instance().loadLocks();
+
+      //current locks api doesn't support counting lock
+      //so count it after
+      int count = 0;
+      for_(it, sat::Pool::instance().solvablesBegin(),
+          sat::Pool::instance().solvablesEnd())
       {
-        Target_Ptr trg( target() );
-        if ( trg )
-          locksrcPath = trg->root() / locksrcPath;
-      }
-      catch ( ... )
-      {
-        // noop: Someone decided to let target() throw if the ptr is NULL ;(
+        PoolItem i(*it);
+        if ( i.status().isLocked() )
+          count++;
       }
 
-      int num=0;
-      PathInfo locksrc( locksrcPath );
-      if ( locksrc.isFile() )
-      {
-        MIL << "Reading locks from '" << locksrcPath << "'" << endl;
-        num = zypp::locks::readLocks( pool(), locksrcPath );
-        MIL << num << " items locked." << endl;
-      }
-      else
-      {
-        MIL << "No file '" << locksrcPath << "' to read locks from" << endl;
-      }
-      return num;
+      return count;
     }
     /******************************************************************
      **

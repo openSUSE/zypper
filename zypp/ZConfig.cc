@@ -148,6 +148,7 @@ namespace zypp
         , repo_refresh_delay      	( 10 )
         , download_use_patchrpm   	( true )
         , download_use_deltarpm   	( true )
+        , apply_locks_file              ( true )
 	, solver_onlyRequires ( false )
 
       {
@@ -237,9 +238,13 @@ namespace zypp
                 {
                   solver_onlyRequires = str::strToBool( value, solver_onlyRequires );		    
                 }		
-                else if ( entry == "locksfile" )
+                else if ( entry == "locksfile.path" )
                 {
                   locks_file = Pathname(value);
+                }
+                else if ( entry == "locksfile.apply" )
+                {
+                  apply_locks_file = str::strToBool( value, apply_locks_file );
                 }
               }
             }
@@ -287,6 +292,8 @@ namespace zypp
     bool download_use_deltarpm;
 
     bool solver_onlyRequires; 
+
+    bool apply_locks_file;
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -436,6 +443,11 @@ namespace zypp
   { 
     return ( _pimpl->locks_file.empty()
         ? Pathname("/etc/zypp/locks") : _pimpl->locks_file );
+  }
+
+  bool ZConfig::apply_locks_file() const
+  {
+    return _pimpl->apply_locks_file;
   }
 
   /////////////////////////////////////////////////////////////////
