@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Apr 11 18:02:14 CEST 2008 - kkaempf@suse.de
+
+- Implement update scripts installed by packages. After every
+  package install /var/adm/update-scripts is scanned for the first
+  file starting with "<name>-<version>.<release>-", which is then
+  executed.
+- revision 9547
+
+-------------------------------------------------------------------
 Fri Apr 11 14:43:05 CEST 2008 - ma@suse.de
 
 - Fix SolvIterMixin to avioid multiple visits of the same Selectable.

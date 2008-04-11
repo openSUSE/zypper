@@ -15,6 +15,9 @@
 #include <list>
 #include <set>
 
+#include <sys/types.h>
+#include <dirent.h>
+
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Iterator.h"
@@ -65,6 +68,96 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
+      
+      // Execute file (passed as pi_t) as script
+      // report against report_r
+      // 
+      void ExecuteScript( const Pathname & pn_r,
+			  callback::SendReport<ScriptResolvableReport> * report)
+      {
+        PathInfo pi( pn_r );
+        if ( ! pi.isFile() )
+        {
+          std::ostringstream err;
+          err << "Script is not a file: " << pi.fileType() << " " << pn_r;
+	  if (report)
+	    (*report)->problem( err.str() );
+          ZYPP_THROW(Exception(err.str()));
+        }
+
+        filesystem::chmod( pn_r, S_IRUSR|S_IWUSR|S_IXUSR );	// "rwx------"
+        ExternalProgram prog( pn_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
+
+        for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
+        {
+	  // hmm, this depends on a ScriptResolvableReport :-(
+          if ( report
+	       && ! (*report)->progress( ScriptResolvableReport::OUTPUT, output ) )
+            {
+              WAR << "User request to abort script." << endl;
+              prog.kill(); // the rest is handled by exit code evaluation.
+            }
+        }
+
+        int exitCode = prog.close();
+        if ( exitCode != 0 )
+        {
+          std::ostringstream err;
+          err << "Script failed with exit code " << exitCode;
+	  if (report)
+            (*report)->problem( err.str() );
+          ZYPP_THROW(Exception(err.str()));
+        }
+	return;
+      }
+      
+      // Check for (and run) update script
+      // path: directory where to look
+      // name,version,release: Script name must match 'name-version.release-' prefix
+      // 
+      void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
+      {
+	// open the scripts directory
+	
+	DIR *dir = opendir(path.asString().c_str());
+	if (!dir)
+	{
+	  WAR << "Cannot access directory " << path << endl;
+	  return;
+	}
+	
+	// compute the name-version.release- prefix
+	std::string prefix = name + "-" + version + "." + release + "-";
+	size_t pfx_size = prefix.length();
+	if (pfx_size > 255)
+	{
+	  ERR << "Prefix size (" << pfx_size << ") larger than supported (255)" << endl;
+	  pfx_size = 255;
+	}
+	
+	// scan directory for match
+	const char *found = NULL;
+	struct dirent *dentry;
+	while ((dentry = readdir(dir)))
+	{
+	  if (strncmp( dentry->d_name, prefix.c_str(), pfx_size) == 0) {
+	    found = dentry->d_name;
+	    break;
+	  }
+	}
+	if (found)
+	{
+	  ExecuteScript( Pathname(found), NULL );
+	}
+	closedir(dir);
+	return;
+      }
+      
+      // Fetch and execute remote script
+      // access_r: remote access handle
+      // script_r: script (resolvable) handle
+      // do_r: true for 'do', false for 'undo'
+      // 
       void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
                                 Script::constPtr script_r,
                                 bool do_r )
@@ -91,35 +184,9 @@ namespace zypp
                        (do_r ? ScriptResolvableReport::DO
                         : ScriptResolvableReport::UNDO ) );
 
-        PathInfo pi( localfile );
-        if ( ! pi.isFile() )
-        {
-          std::ostringstream err;
-          err << "Script is not a file: " << pi.fileType() << " " << localfile;
-          report->problem( err.str() );
-          ZYPP_THROW(Exception(err.str()));
-        }
-
-        filesystem::chmod( localfile, S_IRUSR|S_IWUSR|S_IXUSR );	// "rwx------"
-        ExternalProgram prog( localfile->asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
-        for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
-        {
-          if ( ! report->progress( ScriptResolvableReport::OUTPUT, output ) )
-            {
-              WAR << "User request to abort script." << endl;
-              prog.kill(); // the rest is handled by exit code evaluation.
-            }
-        }
-
-        int exitCode = prog.close();
-        if ( exitCode != 0 )
-        {
-          std::ostringstream err;
-          err << "Script failed with exit code " << exitCode;
-          report->problem( err.str() );
-          ZYPP_THROW(Exception(err.str()));
-        }
+	ExecuteScript( localfile, &report );
         report->finish();
+	
         return;
       }
 
@@ -558,6 +625,8 @@ namespace zypp
             if ( success && !policy_r.dryRun() )
             {
               it->status().resetTransact( ResStatus::USER );
+	      // check for and run an update script
+	      RunUpdateScript(ZConfig::instance().updateScriptsPath(), p->name(), p->edition().version(), p->edition().release());
             }
             progress.disconnect();
           }
