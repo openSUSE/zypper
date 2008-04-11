@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 11 12:07:47 CEST 2008 - jreidinger@suse.cz
+
+- switch to new locks api
+- revision 9524 
+
+-------------------------------------------------------------------
 Wed Apr  9 21:24:54 CEST 2008 - ma@suse.de
 
 - Enable ui::Selectable lookup by Solvable/PoolItem in ResPoolProxy.
