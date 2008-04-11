@@ -15,7 +15,10 @@
 #include "zypp/Resolvable.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/SolvIterMixin.h"
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/LookupAttr.h"
 
+#include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
 
 extern "C"
@@ -295,23 +298,32 @@ namespace zypp
    */
   class PoolQueryIterator : public boost::iterator_adaptor<
     PoolQueryIterator                  // Derived
-    , ::_Dataiterator *                // Base
+    , sat::LookupAttr::iterator        // Base
     , const sat::Solvable              // Value
     , boost::forward_traversal_tag     // CategoryOrTraversal
     , const sat::Solvable              // Reference
   >
   {
   public:
-    PoolQueryIterator()
-    : PoolQueryIterator::iterator_adaptor_(0), _has_next(true),
-      _do_matching(false), _pool((sat::Pool::instance()))
-    { _rdit = 0; _sid = 0; }
+    PoolQueryIterator();
+
+    PoolQueryIterator(const PoolQueryIterator &);
+
+    explicit
+    PoolQueryIterator( const sat::LookupAttr::iterator & val_r )
+    { this->base_reference() = val_r; }
+
+    ~PoolQueryIterator();
+
+    PoolQueryIterator & operator=( const PoolQueryIterator & rhs );
 
   private:
     friend class boost::iterator_core_access;
     friend class PoolQuery::Impl;
 
-    PoolQueryIterator(const PoolQuery::Impl * pqimpl);
+    PoolQueryIterator(
+        scoped_ptr< ::_Dataiterator> & dip_r,
+        const PoolQuery::Impl * pqimpl);
 
     const sat::Solvable dereference() const
     {
@@ -322,26 +334,17 @@ namespace zypp
 
     bool matchSolvable();
 
-    template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
-      bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
-    {
-      if (!rhs.base() && !base())
-        return true;
-      if (!rhs.base() || !base())
-        return false;
-      /*if (rhs.base()->solvid == base()->solvid)
-        return true;*/
-      return true;
-    }
-
   private:
-    //! \todo clean up this mess
-    ::_Dataiterator * _rdit;
+    //! \todo get rid of this Impl* and use copies of the necessary data (flags, compiled attr maps, etc)
     const PoolQuery::Impl * _pqimpl;
-    /*SolvableId*/ int _sid;
+    /** current matching solvable id */
+    int _sid;
+    /** whether there is a next solvable to check */
     bool _has_next;
+    /** whether to do text matching on our own (true) or the Dataiterator already did it */
     bool _do_matching;
-    sat::Pool _pool;
+    /** used to copy current iterator in order to forward check for next attributes */
+    sat::LookupAttr::iterator _tmpit;
   };
   ///////////////////////////////////////////////////////////////////
 

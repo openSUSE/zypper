@@ -51,7 +51,7 @@ namespace zypp
       , _require_all(false)
       , _compiled(false)
     {}
-
+    
     ~Impl()
     {}
 
@@ -95,14 +95,8 @@ namespace zypp
 
     bool _require_all;
 
-    /** Sat solver Dataiterator structure */
-    mutable ::_Dataiterator _rdit;
-
     mutable bool _compiled;
 
-    /** Function for processing found solvables. Used in execute(). */
-    mutable PoolQuery::ProcessResolvable _fnc;
-    
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -110,6 +104,7 @@ namespace zypp
     { return new Impl( *this ); }
   };
 
+  
   static void
   compileRegex(regex_t * regex, const string & str, bool nocase)
   {
@@ -398,9 +393,13 @@ attremptycheckend:
 
     DBG << "_cflags:" << _cflags << endl;
 
+    scoped_ptr< ::_Dataiterator> _rdit( new ::Dataiterator );
+    // needed while LookupAttr::iterator::dip_equal does ::memcmp:
+    ::memset( _rdit.get(), 0, sizeof(::_Dataiterator) );
+
     if (_rcattrs.empty())
     {
-    ::dataiterator_init(&_rdit,
+    ::dataiterator_init(_rdit.get(),
       _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this
       0,                                           // search all solvables
       0,                                           // attribute id - only if 1 attr key specified
@@ -409,7 +408,7 @@ attremptycheckend:
     }
     else if (_rcattrs.size() == 1)
     {
-      ::dataiterator_init(&_rdit,
+      ::dataiterator_init(_rdit.get(),
         _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this 
         0,                                           // search all solvables
         _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
@@ -418,7 +417,7 @@ attremptycheckend:
     }
     else
     {
-      ::dataiterator_init(&_rdit,
+      ::dataiterator_init(_rdit.get(),
         _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), /* repository - switch to next at the end of current one in increment() */ 
         0, /*search all resolvables */
         0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
@@ -426,11 +425,12 @@ attremptycheckend:
         _cflags);
     }
 
-    if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit.regex_err != 0)
-      ZYPP_THROW(Exception(
-        str::form(_("Invalid regular expression '%s'"), _rcstrings.c_str())));
+    if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit->regex_err != 0)
+      ZYPP_THROW(Exception(str::form(
+          _("Invalid regular expression '%s': regcomp returned %d"),
+          _rcstrings.c_str(), _rdit->regex_err)));
 
-    PoolQuery::const_iterator it(this);
+    PoolQuery::const_iterator it(_rdit, this);
     it.increment();
     return it;
   }
@@ -512,22 +512,50 @@ attremptycheckend:
   //
   ///////////////////////////////////////////////////////////////////
 
-  PoolQueryIterator::PoolQueryIterator(const PoolQuery::Impl * pqimpl)
-  : PoolQueryIterator::iterator_adaptor_(pqimpl ? &pqimpl->_rdit : 0)
-  , _rdit(pqimpl ? &pqimpl->_rdit : 0)
-  , _pqimpl(pqimpl)
+  PoolQueryIterator::PoolQueryIterator()
+    : _sid(0), _has_next(false), _do_matching(false)
+  { this->base_reference() = LookupAttr::iterator(); }
+
+
+  PoolQueryIterator::PoolQueryIterator(
+      scoped_ptr< ::_Dataiterator> & dip_r,
+      const PoolQuery::Impl * pqimpl)
+  : _pqimpl(pqimpl)
   , _sid(0)
   , _has_next(true)
-  , _do_matching(false)
-  , _pool((sat::Pool::instance()))
+  , _do_matching(_pqimpl->_rcattrs.size() > 1)
   {
-    if (_pqimpl->_rcattrs.size() > 1)
-      _do_matching = true;
+    this->base_reference() = LookupAttr::iterator(dip_r, true); //!\todo pass chain_repos
+    _has_next = (*base_reference() != sat::detail::noId); 
   }
+
+
+  PoolQueryIterator::PoolQueryIterator(const PoolQueryIterator & rhs)
+    : _pqimpl(rhs._pqimpl)
+    , _sid(rhs._sid)
+    , _has_next(rhs._has_next)
+    , _do_matching(rhs._do_matching)
+  { base_reference() = LookupAttr::iterator(rhs.base()); }
+
+
+  PoolQueryIterator::~PoolQueryIterator()
+  {}
+
+
+  PoolQueryIterator & PoolQueryIterator::operator=( const PoolQueryIterator & rhs )
+  {
+    base_reference() = rhs.base();
+    _pqimpl = rhs._pqimpl; //! \todo FIXME
+    _sid = rhs._sid;
+    _has_next = rhs._has_next;
+    _do_matching = rhs._do_matching;
+    return *this;
+  }
+
 
   void PoolQueryIterator::increment()
   {
-    if (!_rdit)
+    if (!base().get())
       return;
 
     bool got_match = false;
@@ -540,7 +568,7 @@ attremptycheckend:
     // no more solvables and the last did not match
     if (!got_match && !_has_next)
     {
-      base_reference() = 0;
+      base_reference() = LookupAttr::iterator();
       _sid = 0;
     }
 
@@ -549,7 +577,7 @@ attremptycheckend:
 
   bool PoolQueryIterator::matchSolvable()
   {
-    _sid = _rdit->solvid;
+    _sid = base().get()->solvid;
 
     bool new_solvable = true;
     bool matches = !_do_matching;
@@ -559,7 +587,7 @@ attremptycheckend:
     do
     {
       //! \todo FIXME Dataiterator returning resolvables belonging to current repo?
-      in_repo = _sid >= _rdit->repo->start;
+      in_repo = _sid >= base().get()->repo->start;
 
       if (in_repo && new_solvable)
       {
@@ -567,7 +595,7 @@ attremptycheckend:
         {
           drop_by_repo = false;
           if (!_pqimpl->_repos.empty() && 
-            _pqimpl->_repos.find(_rdit->repo->name) == _pqimpl->_repos.end())
+            _pqimpl->_repos.find(base().get()->repo->name) == _pqimpl->_repos.end())
           {
             drop_by_repo = true;
             break;
@@ -577,7 +605,7 @@ attremptycheckend:
 
           // whether to drop an uninstalled (repo) solvable
           if ( (_pqimpl->_status_flags & PoolQuery::INSTALLED_ONLY) &&
-               _rdit->repo->name != _pool.systemRepoName() )
+              base().get()->repo->name != sat::Pool::instance().systemRepoName() )
           {
             drop_by_kind_status = true;
             break;
@@ -585,7 +613,7 @@ attremptycheckend:
 
           // whether to drop an installed (target) solvable
           if ((_pqimpl->_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
-               _rdit->repo->name == _pool.systemRepoName())
+              base().get()->repo->name == sat::Pool::instance().systemRepoName())
           {
             drop_by_kind_status = true;
             break;
@@ -610,7 +638,7 @@ attremptycheckend:
       {
         if (!matches && in_repo)
         {
-          SolvAttr attr(_rdit->key->name);
+          SolvAttr attr(base().get()->key->name);
           PoolQuery::CompiledAttrMap::const_iterator ai = _pqimpl->_rcattrs.find(attr);
           if (ai != _pqimpl->_rcattrs.end())
           {
@@ -630,19 +658,19 @@ attremptycheckend:
               }
               else
                 regex = &_pqimpl->_regex;
-              matches = ::dataiterator_match(_rdit, _pqimpl->_cflags, regex);
+              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, regex);
             }
             else
             {
               const string & sstr =
                 _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
-              matches = ::dataiterator_match(_rdit, _pqimpl->_cflags, sstr.c_str());
+              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, sstr.c_str());
             }
 
 //            if (matches)
 	      /* After calling dataiterator_match (with any string matcher set)
 	         the kv.str member will be filled with something sensible.  */
-  /*            INT << "value: " << _rdit->kv.str << endl
+  /*            INT << "value: " << base().get()->kv.str << endl
                   << " mstr: " <<  sstr << endl;*/ 
           }
         }
@@ -650,41 +678,33 @@ attremptycheckend:
 
       if (drop_by_repo)
       {
-        Repository nextRepo(Repository(_rdit->repo).nextInPool());
-        ::dataiterator_skip_repo(_rdit);
-        if (nextRepo)
-          ::dataiterator_jump_to_repo(_rdit, nextRepo.get());
+        base_reference().nextSkipRepo();
         drop_by_repo = false;
       }
       else if (drop_by_kind_status)
       {
-        ::dataiterator_skip_solvable(_rdit);
+        base_reference().nextSkipSolvable();
         drop_by_kind_status = false;
       }
 
-      if ((_has_next = ::dataiterator_step(_rdit)))
+      // copy the iterator to forward check for the next attribute ***
+      _tmpit = base_reference();
+      _has_next = (*(++_tmpit) != sat::detail::noId);
+
+      if (_has_next)
       {
-        new_solvable = _rdit->solvid != _sid;
+        // *** now increment. Had it not be done this way,
+        // the LookupAttr::iterator could have reached the end() while
+        // trying to reach a matching attribute or the next solvable
+        // thus resulting to a problem in the equal() method
+        ++base_reference();
+        new_solvable = base().get()->solvid != _sid;
         if (!in_repo)
-          _sid = _rdit->solvid;
+          _sid = base().get()->solvid;
       }
       // no more attributes in this repo, return
       else
-      {
-        // check for more repos to jump to
-        if (!_pqimpl->_repos.empty())
-        {
-          Repository nextRepo(Repository(_rdit->repo).nextInPool());
-          if (nextRepo)
-          {
-            ::dataiterator_jump_to_repo(_rdit, nextRepo.get());
-            _has_next = ::dataiterator_step(_rdit);
-          }
-        }
-
-        // did the last solvable match conditions?
-        return matches && in_repo;
-      }
+        return matches && in_repo; // did the last solvable match conditions?
     }
     while (!new_solvable || !in_repo);
 
