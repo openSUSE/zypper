@@ -325,6 +325,7 @@ namespace zypp
     LookupAttr::iterator::iterator( const iterator & rhs )
     : iterator_adaptor_( cloneFrom( rhs.base() ) )
     , _dip( base() )
+    , _chainRepos(rhs._chainRepos)
     {}
 
     LookupAttr::iterator & LookupAttr::iterator::operator=( const iterator & rhs )
@@ -333,6 +334,7 @@ namespace zypp
       {
         _dip.reset( cloneFrom( rhs.base() ) );
         base_reference() = _dip.get();
+        _chainRepos = rhs._chainRepos;
       }
       return *this;
     }

@@ -295,8 +295,11 @@ namespace zypp
 
         ~iterator();
 
-      private:
-        friend class LookupAttr;
+      public:
+        /**
+         * C-tor taking over ownership of the passed scoped _Dataiterator*
+         * and doing it's first iteration (::dataiterator_step)
+         */
         iterator( scoped_ptr< ::_Dataiterator> & dip_r, bool chain_r );
 
         ::_Dataiterator * cloneFrom( const ::_Dataiterator * rhs );
@@ -319,7 +322,7 @@ namespace zypp
 
       public:
         /** Expert backdoor. */
-        const ::_Dataiterator * get() const
+        ::_Dataiterator * get() const
         { return _dip.get(); }
       private:
         scoped_ptr< ::_Dataiterator> _dip;
