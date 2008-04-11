@@ -77,7 +77,7 @@ namespace zypp
       /**  */
       size_type size() const;
 
-      /** \name Iterate through all PoolItems (all kinds). */
+      /** \name Iterate over all PoolItems (all kinds). */
       //@{
       /** */
       const_iterator begin() const
@@ -99,7 +99,7 @@ namespace zypp
       { return( resolvable_r ? find( resolvable_r->satSolvable() ) : PoolItem() ); }
 
     public:
-      /** \name Iterate through all PoolItems matching a \c _Filter. */
+      /** \name Iterate over all PoolItems matching a \c _Filter. */
       //@{
       template<class _Filter>
       filter_iterator<_Filter,const_iterator> filterBegin( const _Filter & filter_r ) const
@@ -111,7 +111,7 @@ namespace zypp
       //@}
 
     public:
-      /** \name Iterate through all PoolItems of a certain name and kind. */
+      /** \name Iterate over all PoolItems of a certain name and kind. */
       //@{
       typedef pool::ByIdent                       ByIdent;
       typedef pool::PoolTraits::byIdent_iterator  byIdent_iterator;
@@ -179,7 +179,7 @@ namespace zypp
      //@}
 
     public:
-      /** \name Iterate through all ResObjects of a certain kind. */
+      /** \name Iterate over all ResObjects of a certain kind. */
       //@{
       typedef filter::ByKind ByKind;
       typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
@@ -200,7 +200,7 @@ namespace zypp
       //@}
 
     public:
-      /** \name Iterate through all ResObjects with a certain name (all kinds). */
+      /** \name Iterate over all ResObjects with a certain name (all kinds). */
       //@{
       typedef zypp::resfilter::ByName ByName;
       typedef filter_iterator<ByName,const_iterator> byName_iterator;
@@ -213,7 +213,25 @@ namespace zypp
       //@}
 
     public:
-      /** \name Iterate through all Repositories that contribute ResObjects.
+      /** \name Special iterators. */
+      //@{
+
+      /** \name Iterate over all satisfied products.
+       * \note Satisfied reflects the satuts as determined by the last solver run.
+      */
+      //@{
+      typedef filter_iterator<filter::SatisfiedProducts,const_iterator> satisfiedProducts_iterator;
+
+      satisfiedProducts_iterator satisfiedProductsBegin() const
+      { return filterBegin( filter::SatisfiedProducts() ); }
+
+      satisfiedProducts_iterator satisfiedProductsEnd() const
+      { return filterEnd( filter::SatisfiedProducts() ); }
+      //@}
+
+      //@}
+   public:
+      /** \name Iterate over all Repositories that contribute ResObjects.
        */
       //@{
       size_type knownRepositoriesSize() const;
@@ -223,7 +241,7 @@ namespace zypp
       repository_iterator knownRepositoriesEnd() const;
       //@}
 
-     public:
+    public:
       /** \name Handle locale support.
        *
        * A \ref filter::ByLocaleSupport is provided to iterate over
