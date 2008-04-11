@@ -20,12 +20,12 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, TRANSACT);
-  const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, TRANSACT, SOFT_INSTALL);
-  const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   TRANSACT);
-  const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
-  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
-  const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
+  const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, UNDETERMINED, TRANSACT);
+  const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_INSTALL);
+  const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
+  const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
+  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+  const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
   const ResStatus ResStatus::installed			 (INSTALLED);
   const ResStatus ResStatus::uninstalled		 (UNINSTALLED);
 
@@ -55,9 +55,10 @@ namespace zypp
   {}
 
 
-  ResStatus::ResStatus (enum StateValue s, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
+  ResStatus::ResStatus (enum StateValue s, enum ValidateValue v, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
     : _bitfield (s)
   {
+    fieldValueAssign<ValidateField>(v);      
     fieldValueAssign<TransactField>(t);
     if (t == TRANSACT) {
 	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
@@ -77,6 +78,10 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj )
   {
     str << (obj.isInstalled() ? "I" : "U");
+
+    str << (obj.isBroken() ? "B" :
+	( obj.isSatisfied() ? "S" :
+	( obj.isNonRelevant() ? "N" : "_") ) );
 
     str << (obj.transacts () ? "T"
                              : (obj.isLocked() ? "L" : "_") );
