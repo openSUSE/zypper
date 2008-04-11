@@ -28,6 +28,8 @@ regex::regex()
 void regex::assign(const std::string& str,int flags)
 {
   m_valid = true;
+  m_str = str;
+  m_flags = flags;
   int err;
   char errbuff[100];
   if (!(flags & normal)) {

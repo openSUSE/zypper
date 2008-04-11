@@ -12,9 +12,7 @@
 #ifndef ZYPP_BASE_REGEX_H
 #define ZYPP_BASE_REGEX_H
 
-#include <iosfwd>
 #include <string>
-
 #include <regex.h>
 
 #include "zypp/base/Exception.h"
@@ -32,20 +30,12 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \defgroup ZYPP_STR_REGEX Regular expressions
      *
-     * Namespace zypp::str regular expressions \b using the
-     * boost regex library
-     * \url http://www.boost.org/libs/regex/doc/index.html.
-     *
-     * \li \c regex
-     * \li \c regex_match
-     * \li \c regex_search
-     * \li \c regex_replace
-     * \li \c match_results
-     * \li \c cmatch
-     * \li \c wcmatch
-     * \li \c smatch
-     * \li \c wsmatch
-    */
+     * Namespace zypp::str regular expressions \b using the glibc regex library.
+     * 
+     * regex
+     * regex_match
+     * smatch
+     */
 
     typedef Exception regex_error;
 
@@ -76,12 +66,26 @@ namespace zypp
       regex(const std::string& s,int flags = match_extended);
       ~regex() throw();
 
+      regex(const regex & rhs)
+      { assign(rhs.m_str, rhs.m_flags); }
+
+      regex & operator=(const regex & rhs)
+      { assign(rhs.m_str, rhs.m_flags); return *this; }
+
+    public:
+      /** Expert backdoor. Returns pointer to the compiled regex for direct use in regexec() */
+      regex_t * get()
+      { return & m_preg; }
+
+    private:
       void assign(const std::string& s,int flags = match_extended);
 
     private:
       friend class smatch;
       friend bool regex_match(const char * s, str::smatch& matches, const regex& regex);
       friend bool regex_match(const char * s,  const regex& regex);
+      std::string m_str;
+      int m_flags;
       regex_t m_preg;
       bool m_valid;
     };
