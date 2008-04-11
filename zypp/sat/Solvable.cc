@@ -383,35 +383,6 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
-
-    ValidValue Solvable::validate() const
-    {
-	NO_SOLVABLE_RETURN( NOTRELEVANT );
-	int ret = solvable_trivial_installable_repo (_solvable, Pool::instance().systemRepo().get());
-	if (ret == 0)
-	    return BROKEN;
-	else if (ret > 0)
-	    return SATISFIED;
-	else
-	    return NOTRELEVANT;
-    }
-
-    bool Solvable::isSatisfied() const
-    {
-	return validate() == SATISFIED;
-    }
-
-    bool Solvable::isRelevant() const
-    {
-	NO_SOLVABLE_RETURN( false );
-	if (isKind (ResKind::package))
-	    return true; // packages are always relevant
-	
-	return validate() == BROKEN;	
-    }
-      
-
-    ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
       /** Expand \ref Capability and call \c fnc_r for each namescpace:language

@@ -30,6 +30,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   struct NVRAD;
+  class PoolItem;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -82,25 +83,11 @@ namespace zypp
     //@}
 
   public:
-    /** Returns true if the solvable is satisfied */
-    using sat::Solvable::isSatisfied;
-      
-    /** Returns true if the solvable is satisfied */
-    using sat::Solvable::isBroken;
-      
-    /** Returns true if the solvable is relevant which means e.G. for patches
-     *  that at least one package of the patch is installed.
-     */
-    using sat::Solvable::isRelevant;
-
-    /** Check if the solvable is satisfied,broken or not relevant
-     *  (not important, so it can be ignored)
-     * \return BROKEN, SATISFIED, NOTRELEVANT   
-    */
-    using sat::Solvable::validate;
-
-  public:
+    /** Access the corresponding \ref sat:::Solvable. */
     const sat::Solvable & satSolvable() const { return *this; }
+
+    /** Access the corresponding \ref PoolItem. */
+    PoolItem poolItem() const;
 
   protected:
     /** Ctor */

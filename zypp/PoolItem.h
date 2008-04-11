@@ -69,30 +69,32 @@ namespace zypp
       ~PoolItem();
 
     public:
+      /** \name Status related methods. */
+      //@{
       /** Returns the current status. */
       ResStatus & status() const;
 
       /** Reset status. */
       ResStatus & statusReset() const;
 
-      /** Whether the items requirements are met. */
-      bool isSatisfied() const;
 
-      /** Whether the items requirements are broken. */
-      bool isBroken() const
-      { return ! isSatisfied(); }
-
-      /** Returns true if the solvable is relevant which means e.G. for patches
+      /** \name Status validation.
+       *
+      */
+      //@{
+      /** Returns true if the solvable is relevant which means e.g. for patches
        *  that at least one package of the patch is installed.
        */
       bool isRelevant() const;
 
-      /** Check if the solvable is satisfied,broken or not relevant
-       *  (not important, so it can be ignored)
-       * \return BROKEN, SATISFIED, NOTRELEVANT          
-      */
-      ValidValue validate() const;
+      /** Whether a relevant items requirements are met. */
+      bool isSatisfied() const;
 
+      /** Whether a relevant items requirements are broken. */
+      bool isBroken() const;
+      //@}
+
+      //@}
     public:
       /** Return the \ref ResPool the item belongs to. */
       ResPool pool() const;

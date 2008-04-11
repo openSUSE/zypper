@@ -16,6 +16,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
+#include "zypp/base/Tr1hash.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,6 +34,26 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     class Solvable;
+
+    namespace solvitermixin_detail
+    {
+      /** Unify by \c ident \c (kind:name).
+       * Return true on the 1st appearance of a new \c ident. This is
+       * used in \ref SolvIterMixin when mapping a  Solvable iterator
+       * to a Selectable iterator.
+      */
+      struct UnifyByIdent
+      {
+        bool operator()( const Solvable & solv_r ) const;
+
+        typedef std::tr1::unordered_set<unsigned> Uset;
+        UnifyByIdent()
+          : _uset( new Uset )
+        {}
+        shared_ptr<Uset> _uset;
+      };
+    } // namespace solvitermixin_detail
+
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -103,15 +124,26 @@ namespace zypp
         { return make_transform_iterator( solvableEnd(), asPoolItem() ); }
         //@}
 
+      private:
+        typedef filter_iterator<solvitermixin_detail::UnifyByIdent,Solvable_iterator> UnifiedSolvable_iterator;
+      public:
         /** \name Iterate ui::Selectable::Ptr */
         //@{
-        typedef transform_iterator<ui::asSelectable,Solvable_iterator> Selectable_iterator;
+        typedef transform_iterator<ui::asSelectable,UnifiedSolvable_iterator> Selectable_iterator;
         Selectable_iterator selectableBegin() const
-        { return make_transform_iterator( solvableBegin(), ui::asSelectable() ); }
+        { return make_transform_iterator( unifiedSolvableBegin(), ui::asSelectable() ); }
         Selectable_iterator selectableEnd() const
-        { return make_transform_iterator( solvableEnd(), ui::asSelectable() ); }
+        { return make_transform_iterator( unifiedSolvableEnd(), ui::asSelectable() ); }
         //@}
 
+      private:
+        /** \name Iterate unified Solbvables to be transformed into Selectable. */
+        //@{
+        UnifiedSolvable_iterator unifiedSolvableBegin() const
+        { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableBegin(), solvableEnd() ); }
+        UnifiedSolvable_iterator unifiedSolvableEnd() const
+        { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableEnd(), solvableEnd() );; }
+        //@}
       private:
         const Derived & self() const
         { return *static_cast<const Derived*>( this ); }

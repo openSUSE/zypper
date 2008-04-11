@@ -54,20 +54,20 @@ namespace zypp
 
     public:
 
-      bool isSatisfied() const
-      {
-        return _resolvable->isSatisfied();
-      }
-
       bool isRelevant() const
       {
-        return _resolvable->isRelevant();
+        return true;
       }
 
-      bool validate() const
+      bool isSatisfied() const
       {
-        return _resolvable->validate();
-      }      
+        return true;
+      }
+
+      bool isBroken() const
+      {
+        return true;
+      }
 
     private:
       mutable ResStatus     _status;
@@ -194,11 +194,14 @@ namespace zypp
   ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
 
+  bool PoolItem::isRelevant() const
+  { return _pimpl->isSatisfied(); }
+
   bool PoolItem::isSatisfied() const
   { return _pimpl->isSatisfied(); }
 
-  ResObject::constPtr PoolItem::resolvable() const
-  { return _pimpl->resolvable(); }
+  bool PoolItem::isBroken() const
+  { return _pimpl->isSatisfied(); }
 
   void PoolItem::saveState() const
   { _pimpl->saveState(); }
@@ -208,6 +211,9 @@ namespace zypp
 
   bool PoolItem::sameState() const
   { return _pimpl->sameState(); }
+
+  ResObject::constPtr PoolItem::resolvable() const
+  { return _pimpl->resolvable(); }
 
   /******************************************************************
    **

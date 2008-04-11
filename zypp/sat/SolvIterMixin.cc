@@ -13,6 +13,7 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/sat/SolvIterMixin.h"
+#include "zypp/sat/Solvable.h"
 #include "zypp/ResPoolProxy.h"
 
 using std::endl;
@@ -21,13 +22,29 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+  namespace sat
+  { /////////////////////////////////////////////////////////////////
+
+    namespace solvitermixin_detail
+    {
+      bool UnifyByIdent::operator()( const Solvable & solv_r ) const
+      {
+        return( solv_r && _uset->insert( solv_r.ident().id() ).second );
+      }
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace sat
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
-      Selectable_Ptr asSelectable::operator()( const sat::Solvable & sov_r ) const
-      {
-        return ResPool::instance().proxy().lookup( sov_r );
-      }
+    Selectable_Ptr asSelectable::operator()( const sat::Solvable & sov_r ) const
+    {
+      return ResPool::instance().proxy().lookup( sov_r );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace ui
