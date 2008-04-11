@@ -66,6 +66,24 @@ namespace zypp
         setCandidate( NULL );
       }
 
+      template <class _Iterator>
+      Impl( const ResObject::Kind & kind_r,
+            const std::string & name_r,
+            _Iterator begin_r,
+            _Iterator end_r )
+      : _kind( kind_r )
+      , _name( name_r )
+      {
+        for_( it, begin_r, end_r )
+        {
+          if ( it->status().isInstalled() )
+            _installedItems.insert( *it );
+          else
+            _availableItems.insert( *it );
+        }
+        setCandidate( NULL );
+      }
+
     public:
       /**  */
       ResObject::Kind kind() const

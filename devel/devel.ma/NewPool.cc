@@ -615,7 +615,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -637,23 +637,28 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-
-  //ResPool pool( ResPool::instance() );
-  for_( it, pool.satisfiedProductsBegin(), pool.satisfiedProductsEnd() )
   {
-    MIL << *it << endl;
-    Product_constPtr p( asKind<Product>(*it) );
-    MIL << p << endl;
+    Measure x( "PROCXY" );
+    pool.proxy();
   }
-  return 0;
-  for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
+
   {
-    if ( (*it)->name() != "apparmor" )
-      continue;
-    Pattern::Contents c( asKind<Pattern>(*it)->contents() );
-    dumpRange( USR, c.begin(), c.end() ) << endl;
-    dit( c );
-    break;
+    Measure x( "ALL PATTERNS" );
+
+    for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
+    {
+      Measure x( string("  ") + (*it)->name() );
+      Pattern::Contents c( asKind<Pattern>(*it)->contents() );
+      {
+        Measure x( "    poolitem" );
+        dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
+      }
+      {
+        Measure x( "    selectable" );
+        dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
+      }
+      break;
+    }
   }
 
   if ( 0 )

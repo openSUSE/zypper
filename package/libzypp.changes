@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 11 21:55:21 CEST 2008 - ma@suse.de
+
+- Install ResPoolProxy index to speedup Solvable to Selectable
+  conversion.
+- version 4.11.0
+- revision 9558
+
+-------------------------------------------------------------------
 Fri Apr 11 18:02:14 CEST 2008 - kkaempf@suse.de
 
 - Implement update scripts installed by packages. After every

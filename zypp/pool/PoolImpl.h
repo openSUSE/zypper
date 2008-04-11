@@ -164,7 +164,7 @@ namespace zypp
         {
           checkSerial();
           if ( !_poolProxy )
-            _poolProxy.reset( new ResPoolProxy( self ) );
+            _poolProxy.reset( new ResPoolProxy( self, *this ) );
           return *_poolProxy;
         }
 

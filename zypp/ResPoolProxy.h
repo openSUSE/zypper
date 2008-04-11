@@ -35,16 +35,16 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj );
 
-    typedef std::set<ui::Selectable::Ptr>             SelectableIndex;
-    typedef std::map<ResObject::Kind,SelectableIndex> SelectablePool;
+    typedef std::vector<ui::Selectable::Ptr>  SelectableKinds;
+    typedef std::map<ResKind,SelectableKinds> SelectablePool;
 
   public:
     /** Implementation  */
     class Impl;
 
-    typedef SelectableIndex::iterator       iterator;
-    typedef SelectableIndex::const_iterator const_iterator;
-    typedef SelectableIndex::size_type      size_type;
+    typedef SelectableKinds::iterator       iterator;
+    typedef SelectableKinds::const_iterator const_iterator;
+    typedef SelectableKinds::size_type      size_type;
 
     typedef ResPool::repository_iterator    repository_iterator;
 
@@ -65,13 +65,16 @@ namespace zypp
   public:
     /** \name Lookup individual Selectables. */
     //@{
-    ui::Selectable::Ptr lookup( IdString ident_r ) const
-    { sat::Solvable::SplitIdent id( ident_r ); return lookup( id.kind(), id.name() ); }
+    ui::Selectable::Ptr lookup( const pool::ByIdent & ident_r ) const;
 
-    ui::Selectable::Ptr lookup( ResKind kind_r, const std::string & name_r ) const;
+    ui::Selectable::Ptr lookup( IdString ident_r ) const
+    { return lookup( pool::ByIdent( ident_r ) ); }
+
+    ui::Selectable::Ptr lookup( ResKind kind_r, const std::string & name_r ) const
+    { return lookup( pool::ByIdent( kind_r, name_r ) ); }
 
     ui::Selectable::Ptr lookup( const sat::Solvable & solv_r ) const
-    { return lookup( solv_r.kind(), solv_r.name() ); }
+    { return lookup( pool::ByIdent( solv_r ) ); }
 
     ui::Selectable::Ptr lookup( const ResObject::constPtr & resolvable_r ) const
     { return resolvable_r ? lookup( resolvable_r->satSolvable() ) : ui::Selectable::Ptr(); }
@@ -83,14 +86,14 @@ namespace zypp
   public:
 
     /** True if there are items of a certain kind. */
-    bool empty( const ResObject::Kind & kind_r ) const;
+    bool empty( const ResKind & kind_r ) const;
 
     template<class _Res>
       bool empty() const
       { return empty( ResTraits<_Res>::kind ); }
 
     /** Number of Items of a certain kind.  */
-    size_type size( const ResObject::Kind & kind_r ) const;
+    size_type size( const ResKind & kind_r ) const;
 
     template<class _Res>
       size_type size() const
@@ -98,14 +101,14 @@ namespace zypp
 
     /** \name Iterate through all Selectables of a certain kind. */
     //@{
-    const_iterator byKindBegin( const ResObject::Kind & kind_r ) const;
+    const_iterator byKindBegin( const ResKind & kind_r ) const;
 
     template<class _Res>
       const_iterator byKindBegin() const
       { return byKindBegin( ResTraits<_Res>::kind ); }
 
 
-    const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
+    const_iterator byKindEnd( const ResKind & kind_r ) const;
 
     template<class _Res>
       const_iterator byKindEnd() const
@@ -127,7 +130,7 @@ namespace zypp
     /** Test whether there is at least one ui::Selectable with
      * an installed object.
     */
-    bool hasInstalledObj( const ResObject::Kind & kind_r ) const
+    bool hasInstalledObj( const ResKind & kind_r ) const
     {
       return(    make_begin<ui::selfilter::ByHasInstalledObj>( kind_r )
               != make_end<ui::selfilter::ByHasInstalledObj>( kind_r ) );
@@ -148,7 +151,7 @@ namespace zypp
     //@{
     void saveState() const;
 
-    void saveState( const ResObject::Kind & kind_r ) const;
+    void saveState( const ResKind & kind_r ) const;
 
     template<class _Res>
       void saveState() const
@@ -156,7 +159,7 @@ namespace zypp
 
     void restoreState() const;
 
-    void restoreState( const ResObject::Kind & kind_r ) const;
+    void restoreState( const ResKind & kind_r ) const;
 
     template<class _Res>
       void restoreState() const
@@ -164,7 +167,7 @@ namespace zypp
 
     bool diffState() const;
 
-    bool diffState( const ResObject::Kind & kind_r ) const;
+    bool diffState( const ResKind & kind_r ) const;
 
     template<class _Res>
       bool diffState() const
@@ -174,7 +177,7 @@ namespace zypp
   private:
     template<class _Filter>
       filter_iterator<_Filter,const_iterator>
-      make_begin( _Filter filter_r, const ResObject::Kind & kind_r ) const
+      make_begin( _Filter filter_r, const ResKind & kind_r ) const
       {
         return make_filter_iterator( filter_r,
                                      byKindBegin(kind_r),
@@ -182,7 +185,7 @@ namespace zypp
       }
     template<class _Filter>
       filter_iterator<_Filter,const_iterator>
-      make_begin( const ResObject::Kind & kind_r ) const
+      make_begin( const ResKind & kind_r ) const
       {
         return make_begin( _Filter(), kind_r );
       }
@@ -190,7 +193,7 @@ namespace zypp
 
     template<class _Filter>
       filter_iterator<_Filter,const_iterator>
-      make_end( _Filter filter_r, const ResObject::Kind & kind_r ) const
+      make_end( _Filter filter_r, const ResKind & kind_r ) const
       {
         return make_filter_iterator( filter_r,
                                      byKindEnd(kind_r),
@@ -198,7 +201,7 @@ namespace zypp
       }
     template<class _Filter>
       filter_iterator<_Filter,const_iterator>
-      make_end( const ResObject::Kind & kind_r ) const
+      make_end( const ResKind & kind_r ) const
       {
         return make_end( _Filter(), kind_r );
       }
@@ -206,7 +209,7 @@ namespace zypp
   private:
     friend class pool::PoolImpl;
     /** Ctor */
-    ResPoolProxy( ResPool pool_r );
+    ResPoolProxy( ResPool pool_r, const pool::PoolImpl & poolImpl_r );
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };

@@ -10,13 +10,17 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
+
+#include "zypp/base/Measure.h"
+using zypp::debug::Measure;
 
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/Functional.h"
 
 #include "zypp/ResPoolProxy.h"
+#include "zypp/pool/PoolImpl.h"
 #include "zypp/ui/SelectableImpl.h"
 
 using std::endl;
@@ -34,7 +38,7 @@ namespace zypp
                      std::mem_fun_ref(&PoolItem::saveState) );
     }
 
-    void saveState( ResPool pool_r, const ResObject::Kind & kind_r )
+    void saveState( ResPool pool_r, const ResKind & kind_r )
     {
       std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
                      std::mem_fun_ref(&PoolItem::saveState) );
@@ -46,7 +50,7 @@ namespace zypp
                      std::mem_fun_ref(&PoolItem::restoreState) );
     }
 
-    void restoreState( ResPool pool_r, const ResObject::Kind & kind_r )
+    void restoreState( ResPool pool_r, const ResKind & kind_r )
     {
       std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
                      std::mem_fun_ref(&PoolItem::restoreState) );
@@ -59,7 +63,7 @@ namespace zypp
                             std::mem_fun_ref(&PoolItem::sameState) ) < 0 );
     }
 
-    bool diffState( ResPool pool_r, const ResObject::Kind & kind_r ) const
+    bool diffState( ResPool pool_r, const ResKind & kind_r ) const
     {
       // return whether some PoolItem::sameState reported \c false.
       return( invokeOnEach( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
@@ -67,70 +71,18 @@ namespace zypp
     }
   };
 
-  struct SelPoolHelper
+  namespace
   {
-    typedef std::set<PoolItem>         ItemC;
-    struct SelC
+    ui::Selectable::Ptr makeSelectablePtr( pool::PoolImpl::Id2ItemT::const_iterator begin_r,
+                                           pool::PoolImpl::Id2ItemT::const_iterator end_r )
     {
-      void add( PoolItem it )
-      {
-        if ( it.status().isInstalled() )
-          installed.insert( it );
-        else
-          available.insert( it );
-      }
-      ItemC installed;
-      ItemC available;
-    };
-    typedef std::map<std::string,SelC>      NameC;
-    typedef std::map<ResObject::Kind,NameC> KindC;
+      pool::PoolTraits::byIdent_iterator begin( begin_r, pool::PoolTraits::Id2ItemValueSelector() );
+      pool::PoolTraits::byIdent_iterator end( end_r, pool::PoolTraits::Id2ItemValueSelector() );
+      sat::Solvable solv( begin->satSolvable() );
 
-    KindC _kinds;
-
-    /** collect from a pool */
-    void operator()( PoolItem it )
-    {
-      _kinds[it->kind()][it->name()].add( it );
+      return new ui::Selectable( ui::Selectable::Impl_Ptr( new ui::Selectable::Impl( solv.kind(), solv.name(), begin, end ) ) );
     }
-
-
-    ui::Selectable::Ptr buildSelectable( const ResObject::Kind & kind_r,
-                                         const std::string & name_r,
-                                         const ItemC & installed,
-                                         const ItemC & available )
-    {
-      return ui::Selectable::Ptr( new ui::Selectable(
-             ui::Selectable::Impl_Ptr( new ui::Selectable::Impl( kind_r, name_r,
-                                                                 installed.begin(),
-                                                                 installed.end(),
-                                                                 available.begin(),
-                                                                 available.end() ) )
-                                                      ) );
-    }
-
-    /** Build Selectable::Ptr and feed them to some container.
-     * \todo Cleanup typedefs
-    */
-    typedef std::set<ui::Selectable::Ptr>             SelectableIndex;
-    typedef std::map<ResObject::Kind,SelectableIndex> SelectablePool;
-
-    void feed( SelectablePool & _selPool )
-    {
-      for ( KindC::const_iterator kindIt = _kinds.begin(); kindIt != _kinds.end(); ++kindIt )
-        {
-          for ( NameC::const_iterator nameIt = kindIt->second.begin(); nameIt != kindIt->second.end(); ++nameIt )
-            {
-              const ItemC & installed( nameIt->second.installed );
-              const ItemC & available( nameIt->second.available );
-
-              if ( installed.empty() && available.empty() )
-                    continue;
-              else
-                    _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, installed, available ) );
-            }
-        }
-    }
-  };
+  } // namespace
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -141,43 +93,68 @@ namespace zypp
   */
   struct ResPoolProxy::Impl
   {
+    typedef std::tr1::unordered_map<sat::detail::IdType,ui::Selectable::Ptr>
+            SelectableIndex;
+
   public:
     Impl()
     :_pool( ResPool::instance() )
     {}
 
-    Impl( ResPool pool_r )
+    Impl( ResPool pool_r, const pool::PoolImpl & poolImpl_r )
     : _pool( pool_r )
     {
-      SelPoolHelper collect;
-      std::for_each( _pool.begin(), _pool.end(),
-                     functor::functorRef<void,PoolItem>( collect ) );
-      collect.feed( _selPool );
+      Measure( "id2item" );
+      const pool::PoolImpl::Id2ItemT & id2item( poolImpl_r.id2item() );
+      if ( ! id2item.empty() )
+      {
+        sat::detail::IdType cidx = sat::detail::noId;
+        pool::PoolImpl::Id2ItemT::const_iterator cbegin = id2item.begin();
+
+        for_( it, id2item.begin(), id2item.end() )
+        {
+          sat::detail::IdType idx( it->first );
+          if ( idx != cidx )
+          {
+            // starting a new Selectable
+            if ( cidx )
+            {
+              // create the previous one
+              ui::Selectable::Ptr p( makeSelectablePtr( cbegin, it ) );
+              _selPool[p->kind()].push_back( p );
+              _selIndex[cidx] = p;
+            }
+            cidx = idx;
+            cbegin = it;
+          }
+        }
+        // create the final one
+        ui::Selectable::Ptr p( makeSelectablePtr( cbegin, id2item.end() ) );
+        _selPool[p->kind()].push_back( p );
+        _selIndex[cidx] = p;
+      }
     }
 
   public:
-    ui::Selectable::Ptr lookup( ResKind kind_r, const std::string & name_r ) const
+    ui::Selectable::Ptr lookup( const pool::ByIdent & ident_r ) const
     {
-      SelectableIndex idx( _selPool[kind_r] );
-      for_( it, idx.begin(), idx.end() )
-      {
-        if ( (*it)->name() == name_r )
-          return *it;
-      }
+      SelectableIndex::const_iterator it( _selIndex.find( ident_r.get() ) );
+      if ( it != _selIndex.end() )
+        return it->second;
       return ui::Selectable::Ptr();
     }
 
   public:
-    bool empty( const ResObject::Kind & kind_r ) const
+    bool empty( const ResKind & kind_r ) const
     { return _selPool[kind_r].empty(); }
 
-    size_type size( const ResObject::Kind & kind_r ) const
+    size_type size( const ResKind & kind_r ) const
     { return _selPool[kind_r].size(); }
 
-    const_iterator byKindBegin( const ResObject::Kind & kind_r ) const
+    const_iterator byKindBegin( const ResKind & kind_r ) const
     { return _selPool[kind_r].begin(); }
 
-    const_iterator byKindEnd( const ResObject::Kind & kind_r ) const
+    const_iterator byKindEnd( const ResKind & kind_r ) const
     { return _selPool[kind_r].end(); }
 
   public:
@@ -195,24 +172,25 @@ namespace zypp
     void saveState() const
     { PoolItemSaver().saveState( _pool ); }
 
-    void saveState( const ResObject::Kind & kind_r ) const
+    void saveState( const ResKind & kind_r ) const
     { PoolItemSaver().saveState( _pool, kind_r ); }
 
     void restoreState() const
     { PoolItemSaver().restoreState( _pool ); }
 
-    void restoreState( const ResObject::Kind & kind_r ) const
+    void restoreState( const ResKind & kind_r ) const
     { PoolItemSaver().restoreState( _pool, kind_r ); }
 
     bool diffState() const
     { return PoolItemSaver().diffState( _pool ); }
 
-    bool diffState( const ResObject::Kind & kind_r ) const
+    bool diffState( const ResKind & kind_r ) const
     { return PoolItemSaver().diffState( _pool, kind_r ); }
 
   private:
     ResPool _pool;
     mutable SelectablePool _selPool;
+    mutable SelectableIndex _selIndex;
 
   public:
     /** Offer default Impl. */
@@ -250,8 +228,8 @@ namespace zypp
   //	METHOD NAME : ResPoolProxy::ResPoolProxy
   //	METHOD TYPE : Ctor
   //
-  ResPoolProxy::ResPoolProxy( ResPool pool_r )
-  : _pimpl( new Impl( pool_r ) )
+  ResPoolProxy::ResPoolProxy( ResPool pool_r, const pool::PoolImpl & poolImpl_r )
+  : _pimpl( new Impl( pool_r, poolImpl_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -268,19 +246,19 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  ui::Selectable::Ptr ResPoolProxy::lookup( ResKind kind_r, const std::string & name_r ) const
-  { return _pimpl->lookup( kind_r, name_r ); }
+  ui::Selectable::Ptr ResPoolProxy::lookup( const pool::ByIdent & ident_r ) const
+  { return _pimpl->lookup( ident_r ); }
 
-  bool ResPoolProxy::empty( const ResObject::Kind & kind_r ) const
+  bool ResPoolProxy::empty( const ResKind & kind_r ) const
   { return _pimpl->empty( kind_r ); }
 
-  ResPoolProxy::size_type ResPoolProxy::size( const ResObject::Kind & kind_r ) const
+  ResPoolProxy::size_type ResPoolProxy::size( const ResKind & kind_r ) const
   { return _pimpl->size( kind_r ); }
 
-  ResPoolProxy::const_iterator ResPoolProxy::byKindBegin( const ResObject::Kind & kind_r ) const
+  ResPoolProxy::const_iterator ResPoolProxy::byKindBegin( const ResKind & kind_r ) const
   { return _pimpl->byKindBegin( kind_r ); }
 
-  ResPoolProxy::const_iterator ResPoolProxy::byKindEnd( const ResObject::Kind & kind_r ) const
+  ResPoolProxy::const_iterator ResPoolProxy::byKindEnd( const ResKind & kind_r ) const
   { return _pimpl->byKindEnd( kind_r ); }
 
   ResPoolProxy::size_type ResPoolProxy::knownRepositoriesSize() const
@@ -295,19 +273,19 @@ namespace zypp
   void ResPoolProxy::saveState() const
   { _pimpl->saveState(); }
 
-  void ResPoolProxy::saveState( const ResObject::Kind & kind_r ) const
+  void ResPoolProxy::saveState( const ResKind & kind_r ) const
   { _pimpl->saveState( kind_r ); }
 
   void ResPoolProxy::restoreState() const
   { _pimpl->restoreState(); }
 
-  void ResPoolProxy::restoreState( const ResObject::Kind & kind_r ) const
+  void ResPoolProxy::restoreState( const ResKind & kind_r ) const
   { _pimpl->restoreState( kind_r ); }
 
   bool ResPoolProxy::diffState() const
   { return _pimpl->diffState(); }
 
-  bool ResPoolProxy::diffState( const ResObject::Kind & kind_r ) const
+  bool ResPoolProxy::diffState( const ResKind & kind_r ) const
   { return _pimpl->diffState( kind_r ); }
 
   /******************************************************************
