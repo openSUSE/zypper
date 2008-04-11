@@ -217,8 +217,9 @@ namespace zypp
       //@{
 
       /** \name Iterate over all satisfied products.
-       * \note Satisfied reflects the satuts as determined by the last solver run.
-      */
+       * \note Is satisfied status is computed and updated on each solver
+       * run. So it does not reflect any changes made since the last solver run.
+       */
       //@{
       typedef filter_iterator<filter::SatisfiedProducts,const_iterator> satisfiedProducts_iterator;
 
