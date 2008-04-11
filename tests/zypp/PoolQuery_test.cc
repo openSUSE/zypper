@@ -427,7 +427,7 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
 }
 */
 
-#if 0
+#if 1
 BOOST_AUTO_TEST_CASE(pool_query_recovery)
 {
   Pathname testfile(TESTS_SRC_DIR);
@@ -436,12 +436,51 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   std::vector<PoolQuery> queries;
   std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.begin());
   readPoolQueriesFromFile(testfile,ii);
-  BOOST_REQUIRE_MESSAGE(queries.size()==1,"Bad count of readed queries.");
-  cout << queries[0].asString() << endl;
+  BOOST_REQUIRE_MESSAGE(queries.size()==2,"Bad count of readed queries.");
   BOOST_CHECK(queries[0].size() == 8);
+  PoolQuery q;
+  q.addString("ma*");
+  q.addRepo("factory");
+  q.addKind(Resolvable::Kind::patch);
+  q.setMatchRegex();
+  q.setRequireAll();
+  q.setCaseSensitive();
+  q.setUninstalledOnly();
+  BOOST_CHECK(q==queries[1]);
 }
 
 #endif
+
+BOOST_AUTO_TEST_CASE(pool_query_serialize)
+{
+  PoolQuery q;
+  q.addString("ma");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addRepo("factory-nonoss");
+  q.addRepo("zypp_svn");
+  PoolQuery q2;
+  q2.addAttribute(sat::SolvAttr::name,"ma");
+  q2.addRepo("factory-nonoss");
+  q2.addRepo("zypp_svn");
+
+
+//  Pathname testfile(TESTS_SRC_DIR);
+  //  testfile += "/zypp/data/PoolQuery/testqueries";
+  filesystem::TmpFile testfile;
+  cout << "****serialize****"  << endl;
+  std::vector<PoolQuery> queries;
+  queries.push_back(q);
+  queries.push_back(q2);
+  writePoolQueriesToFile(testfile,queries.begin(),queries.end());
+  BOOST_REQUIRE_MESSAGE(queries.size()==2,"Bad count of added queries.");
+
+  std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.end());
+  readPoolQueriesFromFile(testfile,ii);
+  BOOST_REQUIRE_MESSAGE(queries.size()==4,"Bad count of writed/readed queries.");
+  BOOST_CHECK(queries[2] == queries[0]);
+  BOOST_CHECK(queries[3] == queries[1]);
+}
+
 
 // test matching
 BOOST_AUTO_TEST_CASE(pool_query_equal)

@@ -17,6 +17,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Regex.h"
 #include "zypp/base/Algorithm.h"
+#include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
 
 #include "zypp/sat/Pool.h"
@@ -88,7 +89,7 @@ namespace zypp
      * at the start of compile() */
     mutable int _cflags;
     /** Sat solver status flags */
-    int _status_flags;
+    PoolQuery::StatusFilter _status_flags;
 
     bool _match_word;
 
@@ -759,7 +760,7 @@ attremptycheckend:
   { _pimpl->_status_flags = INSTALLED_ONLY; }
   void PoolQuery::setUninstalledOnly()
   { _pimpl->_status_flags = UNINSTALLED_ONLY; }
-  void PoolQuery::setStatusFilterFlags( int flags )
+  void PoolQuery::setStatusFilterFlags( PoolQuery::StatusFilter flags )
   { _pimpl->_status_flags = flags; }
 
 
@@ -803,7 +804,8 @@ attremptycheckend:
   bool PoolQuery::requireAll() const
   { return _pimpl->_require_all; }
 
-
+  PoolQuery::StatusFilter PoolQuery::statusFilterFlags() const
+  { return _pimpl->_status_flags; }
 
   PoolQuery::const_iterator PoolQuery::begin() const
   { return _pimpl->begin(); }
@@ -842,31 +844,18 @@ attremptycheckend:
     private:
       friend class IdStringType<PoolQueryAttr>;
       IdString _str;
-      sat::SolvAttr sa;
-
     public:
     
     //noAttr
-    PoolQueryAttr():isSolvAttr(false){}
+    PoolQueryAttr(){}
 
     explicit PoolQueryAttr( const char* cstr_r )
-        : _str( cstr_r ),isSolvAttr(false){}
+        : _str( cstr_r )
+      {}
 
     explicit PoolQueryAttr( const std::string & str_r )
-        : _str( str_r ),isSolvAttr(false)
-    {
-      if( _str==noAttr ){
-        string s(str_r);
-        boost::replace_all(s,"_",":");
-        sa = sat::SolvAttr(s);
-        if( sa != sat::SolvAttr::noAttr )
-        {
-          isSolvAttr = true; 
-        }
-      }
-    }
-
-    const sat::SolvAttr& solvAttr() { return sa;}
+        : _str( str_r )
+      {}
 
     //unknown atributes
     static const PoolQueryAttr noAttr;
@@ -874,15 +863,50 @@ attremptycheckend:
     // own attributes
     static const PoolQueryAttr repoAttr;
     static const PoolQueryAttr kindAttr;
-
-    // exported attributes from SolvAtributes
-    bool isSolvAttr;
+    static const PoolQueryAttr stringAttr;
+    static const PoolQueryAttr stringTypeAttr;
+    static const PoolQueryAttr requireAllAttr;
+    static const PoolQueryAttr caseSensitiveAttr;
+    static const PoolQueryAttr installStatusAttr;
   };
 
   const PoolQueryAttr PoolQueryAttr::noAttr;
 
   const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
   const PoolQueryAttr PoolQueryAttr::kindAttr( "kind" );
+  const PoolQueryAttr PoolQueryAttr::stringAttr( "global_string" );
+  const PoolQueryAttr PoolQueryAttr::stringTypeAttr("string_type");
+  const PoolQueryAttr PoolQueryAttr::requireAllAttr("require_all");
+  const PoolQueryAttr PoolQueryAttr::caseSensitiveAttr("case_sensitive");
+  const PoolQueryAttr PoolQueryAttr::installStatusAttr("install_status");
+
+  class StringTypeAttr : public IdStringType<PoolQueryAttr>
+  {
+    friend class IdStringType<StringTypeAttr>;
+    IdString _str;
+
+  public:
+    StringTypeAttr(){}
+    explicit StringTypeAttr( const char* cstr_r )
+            : _str( cstr_r ){}
+    explicit StringTypeAttr( const std::string & str_r )
+             : _str( str_r ){}
+
+    static const StringTypeAttr noAttr;
+
+    static const StringTypeAttr exactAttr;
+    static const StringTypeAttr substringAttr;
+    static const StringTypeAttr regexAttr;
+    static const StringTypeAttr globAttr;
+    static const StringTypeAttr wordAttr;
+  };
+    const StringTypeAttr StringTypeAttr::noAttr;
+
+    const StringTypeAttr StringTypeAttr::exactAttr("exact");
+    const StringTypeAttr StringTypeAttr::substringAttr("substring");
+    const StringTypeAttr StringTypeAttr::regexAttr("regex");
+    const StringTypeAttr StringTypeAttr::globAttr("glob");
+    const StringTypeAttr StringTypeAttr::wordAttr("word");
 
   ///////////////////////////////////////////////////////////////////
 
@@ -931,20 +955,101 @@ attremptycheckend:
       {
         addKind( Resolvable::Kind(attrValue) );
       }
-      else if ( attribute==PoolQueryAttr::noAttr )
+      else if ( attribute==PoolQueryAttr::stringAttr )
       {
-        if (attribute.isSolvAttr)
+        addString( attrValue );
+      }
+      else if ( attribute==PoolQueryAttr::stringTypeAttr )
+      {
+        StringTypeAttr s(attrValue);
+        if( s == StringTypeAttr::regexAttr )
         {
-          addAttribute(attribute.solvAttr(),attrValue);
+          setMatchRegex();
+        }
+        else if ( s == StringTypeAttr::globAttr )
+        {
+          setMatchGlob();
+        }
+        else if ( s == StringTypeAttr::exactAttr )
+        {
+          setMatchExact();
+        }
+        else if ( s == StringTypeAttr::substringAttr )
+        {
+          setMatchSubstring();
+        }
+        else if ( s == StringTypeAttr::wordAttr )
+        {
+          setMatchWord();
+        }
+        else if ( s == StringTypeAttr::noAttr )
+        {
+          WAR << "unknown string type " << attrValue << endl;
         }
         else
         {
-          WAR << "unknown attribute " << attrName << endl;
+          WAR << "forget recover some attribute defined as String type attribute: " << attrValue << endl;
         }
+      }
+      else if ( attribute==PoolQueryAttr::requireAllAttr )
+      {
+        if ( str::strToTrue(attrValue) )
+        {
+          setRequireAll(true);
+        }
+        else if ( !str::strToFalse(attrValue) )
+        {
+          setRequireAll(false);
+        }
+        else
+        {
+          WAR << "unknown boolean value " << attrValue << endl;
+        }
+      }
+      else if ( attribute==PoolQueryAttr::caseSensitiveAttr )
+      {
+        if ( str::strToTrue(attrValue) )
+        {
+          setCaseSensitive(true);
+        }
+        else if ( !str::strToFalse(attrValue) )
+        {
+          setCaseSensitive(false);
+        }
+        else
+        {
+          WAR << "unknown boolean value " << attrValue << endl;
+        }
+      }
+      else if ( attribute==PoolQueryAttr::installStatusAttr )
+      {
+        if( attrValue == "all" )
+        {
+          setStatusFilterFlags( ALL );
+        }
+        else if( attrValue == "installed" )
+        {
+          setInstalledOnly();
+        }
+        else if( attrValue == "not-installed" )
+        {
+          setUninstalledOnly();
+        }
+        else
+        {
+          WAR << "Unknown value for install status " << attrValue << endl;
+        }
+      }
+      else if ( attribute==PoolQueryAttr::noAttr )
+      {
+        WAR << "empty attribute name" << endl;
       }
       else
       {
-        WAR << "forget recover some attribute defined as PoolQuery attribute: " << attrName << endl;
+        string s = attrName;
+        boost::replace_all( s,"_",":" );
+        SolvAttr a(s);
+        addAttribute(a,attrValue);
       }
       
     } while ( true );
@@ -957,15 +1062,94 @@ attremptycheckend:
     //separating delim
     str << delim; 
     //iterate thrue all settings and write it
+    static const zypp::PoolQuery q; //not save default options, so create default query example
     
-    for_( it, _pimpl->_repos.begin(), _pimpl->_repos.end() )
+    for_( it, repos().begin(), repos().end() )
     {
       str << "repo: " << *it << delim ;
     }
 
-    for_( it, _pimpl->_kinds.begin(), _pimpl->_kinds.end() )
+    for_( it, kinds().begin(), kinds().end() )
     {
       str << "kind: " << it->idStr() << delim ;
+    }
+
+    if (matchType()!=q.matchType())
+    {
+      switch( matchType() )
+      {
+      case SEARCH_STRING:
+        str << "string_type: exact" << delim;
+        break;
+      case SEARCH_SUBSTRING:
+        str << "string_type: substring" << delim;
+        break;
+      case SEARCH_GLOB:
+        str << "string_type: glob" << delim;
+        break;
+      case SEARCH_REGEX:
+        str << "string_type: regex" << delim;
+        break;
+      default:
+        WAR << "unknown match type "  << matchType() << endl;
+      }
+    }
+
+    if( caseSensitive() != q.caseSensitive() )
+    {
+      str << "case_sensitive: ";
+      if (caseSensitive())
+      {
+        str << "on" << delim;
+      }
+      else 
+      {
+        str << "off" << delim;
+      }
+    }
+
+    if( requireAll() != q.requireAll() )
+    {
+      str << "require_all: ";
+      if (requireAll())
+      {
+        str << "on" << delim;
+      }
+      else 
+      {
+        str << "off" << delim;
+      }
+    }
+
+    if( statusFilterFlags() != q.statusFilterFlags() )
+    {
+      switch( statusFilterFlags() )
+      {
+      case ALL:
+        str << "install_status: all" << delim;
+        break;
+      case INSTALLED_ONLY:
+        str << "install_status: installed" << delim;
+        break;
+      case UNINSTALLED_ONLY:
+        str << "install_status: not-installed" << delim;
+        break;
+      }
+    }
+
+    for_( it, strings().begin(), strings().end() )
+    {
+      str << "global_string: " << *it << delim;
+    }
+
+    for_( it, attributes().begin(), attributes().end() )
+    {
+      string s = it->first.asString();
+      boost::replace_all(s,":","_"); 
+      for_( it2,it->second.begin(),it->second.end() )
+      {
+        str << s <<": "<< *it2 << delim;
+      }
     }
 
     //separating delim - protection

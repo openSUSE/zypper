@@ -111,7 +111,7 @@ namespace zypp
     };
     void setInstalledOnly();
     void setUninstalledOnly();
-    void setStatusFilterFlags( int flags );
+    void setStatusFilterFlags( StatusFilter flags );
 
     //@}
 
@@ -221,6 +221,7 @@ namespace zypp
 
     bool requireAll() const;
 
+    StatusFilter statusFilterFlags() const;
     //@}
 
     /**

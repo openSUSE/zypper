@@ -1,3 +1,11 @@
 solvable_name: ma
 repo: factory-nonoss
 repo: zypp_svn
+
+global_string: ma*
+repo: factory
+kind: patch
+string_type: regex
+require_all: on
+case_sensitive: on
+install_status: not-installed
