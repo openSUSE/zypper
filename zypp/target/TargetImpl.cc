@@ -147,7 +147,7 @@ namespace zypp
 	}
 	if (found)
 	{
-	  ExecuteScript( Pathname(found), NULL );
+	  ExecuteScript( Pathname(path / found), NULL );
 	}
 	closedir(dir);
 	return;
