@@ -20,12 +20,12 @@
 #include "zypp/PoolQueryUtil.tcc"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/PathInfo.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
 
 #include "zypp/Locks.h"
-#include "zypp/PathInfo.h"
 
 using namespace std;
 using namespace zypp;
@@ -100,10 +100,12 @@ void Locks::addLock( const PoolQuery& query )
     _pimpl->toRemove.end(), query);
   if ( i != _pimpl->toRemove.end() )
   {
+    DBG << "query removed from toRemove" << endl;
     _pimpl->toRemove.erase(i);
   }
   else
   {
+    DBG << "query added as new" << endl;
     _pimpl->toAdd.push_back( query );
   }
 }
@@ -131,10 +133,12 @@ void Locks::unlock( const PoolQuery& query )
     _pimpl->toAdd.end(), query);
   if ( i != _pimpl->toAdd.end() )
   {
+    DBG << "query removed from added" << endl;
     _pimpl->toAdd.erase(i);
   }
   else
   {
+    DBG << "needed remove some old lock" << endl;
     _pimpl->toRemove.push_back( query );
   }
 }
@@ -264,8 +268,11 @@ public:
   {
     if (aborted())
       return false;
-    if( q==query ) //identical
+    if( q==query )
+    {//identical
+      DBG << "identical queries" << endl;
       return true;
+    }
 
     SavingLocksReport::ConflictState cs;
     switch( contains(q,solvs) )
@@ -284,10 +291,13 @@ public:
     {
     case SavingLocksReport::ABORT:
       aborted_ = true;
+      DBG << "abort merging" << endl;
       return false;
     case SavingLocksReport::DELETE:
+      DBG << "force delete" << endl;
       return true;
     case SavingLocksReport::IGNORE:
+      DBG << "skip lock" << endl;
       return false;
     }
     WAR << "should not reached, some state is missing" << endl;
@@ -322,6 +332,7 @@ void Locks::saveLocks( const Pathname& file )
     report->finish(SavingLocksReport::ABORTED);
     return;
   }
+  DBG << "writed "<< _pimpl->locks.size() << "locks" << endl;
   writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
   report->finish(SavingLocksReport::NO_ERROR);
 }

@@ -1,5 +1,1 @@
-#repo cannot be tested due to possibly missing allias
-kind: patch
-
-string: kde
-attribute: pattern
+global_string: zypper
