@@ -42,6 +42,7 @@ extern "C" {
 #include "satsolver/evr.h"
 #include "satsolver/poolvendor.h"
 #include "satsolver/policy.h"
+#include "satsolver/bitmap.h"    
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -57,9 +58,6 @@ namespace zypp
 using namespace std;
 
 IMPL_PTR_TYPE(SATResolver);
-
-static PoolItemSet triggeredSolution;   // only the latest state of an item is interesting
-                                        // for the pool. Documents already inserted items.
 
 //---------------------------------------------------------------------------
 // Callbacks for SAT policies
@@ -267,20 +265,13 @@ SATResolver::addPoolItemToKeep (PoolItem item)
 static void
 SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::TransactByValue causer)
 {
-#if 0
-    if (triggeredSolution.find(item) != triggeredSolution.end()) {
-        _XDEBUG("SATSolutionToPool(" << item << ") is already in the pool --> skip");
-        return;
-    }
-#endif
-
-    triggeredSolution.insert(item);
-
-    // resetting transaction only
+    // resetting 
     item.status().resetTransact (causer);
+    item.status().resetWeak ();
 
     bool r;
 
+    // installation/deletion
     if (status.isToBeInstalled()) {
 	r = item.status().setToBeInstalled (causer);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") install !" << r);
@@ -293,16 +284,17 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 	r = item.status().setToBeUninstalled (causer);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") remove !" << r);
     }
-    else if (status.isRecommended()) {
+
+    // recommend/suggest
+    if (status.isRecommended()) {
 	item.status().setRecommended(true);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") recommended !" << r);
     }
     else if (status.isSuggested()) {
 	item.status().setSuggested(true);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") suggested !" << r);    	
-    } else {
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") unchanged !");
     }
+
     return;
 }
 
@@ -417,6 +409,38 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 	{
 	    is_updated = true;
 	    return false;
+	}
+	return true;
+    }
+};
+
+
+class SetValidate : public resfilter::PoolItemFilterFunctor
+{
+  public:
+    Map installedmap, conflictsmap;    
+
+    SetValidate(Solver *solv)
+    {
+	solver_create_state_maps(solv, &installedmap, &conflictsmap);
+    }
+
+    // set validation 
+
+    bool operator()( PoolItem item )
+    {
+	int ret = solvable_trivial_installable_map(item.satSolvable().get(), &installedmap, &conflictsmap);
+	item.status().setUndetermined();        
+    
+	if (ret == -1) {
+	    item.status().setNonRelevant();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
+	} else if (ret == 1) {
+	    item.status().setSatisfied();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
+	} else if (ret == 0) {
+	    item.status().setBroken();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) broken !");    		    
 	}
 	return true;
     }
@@ -623,6 +647,13 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
       }
     }
 
+    /* Write validation state back to pool */
+    SetValidate infoValidate(_solv);
+    invokeOnEach( _pool.begin(),
+		  _pool.end(),
+		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
+		  functor::functorRef<bool,PoolItem> (infoValidate) );
+    
     // cleanup
     solver_free(_solv);
     _solv = NULL;

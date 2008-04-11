@@ -56,17 +56,17 @@ namespace zypp
 
       bool isRelevant() const
       {
-        return true;
+	  return !status().isNonRelevant();
       }
 
       bool isSatisfied() const
       {
-        return true;
+	  return status().isSatisfied();	  
       }
 
       bool isBroken() const
       {
-        return true;
+	  return status().isBroken();	  	  
       }
 
     private:
@@ -195,13 +195,13 @@ namespace zypp
   { return _pimpl->statusReset(); }
 
   bool PoolItem::isRelevant() const
-  { return _pimpl->isSatisfied(); }
+  { return _pimpl->isRelevant(); }
 
   bool PoolItem::isSatisfied() const
   { return _pimpl->isSatisfied(); }
 
   bool PoolItem::isBroken() const
-  { return _pimpl->isSatisfied(); }
+  { return _pimpl->isBroken(); }
 
   void PoolItem::saveState() const
   { _pimpl->saveState(); }

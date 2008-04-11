@@ -179,6 +179,9 @@ namespace zypp
     bool isSuggested() const
     { return fieldValueIs<WeakField>( SUGGESTED ); }
 
+    bool resetWeak() const
+    { return fieldValueIs<WeakField>( NO_WEAK ); }
+
     void setRecommended( bool toVal_r = true )
     { if (isSuggested())
 	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : SUGGESTED );
@@ -196,6 +199,9 @@ namespace zypp
     bool isUndetermined() const
     { return fieldValueIs<ValidateField>( UNDETERMINED ); }
 
+    ValidateValue validate() const
+    { return (ValidateValue)_bitfield.value<ValidateField>(); }
+      
     bool isSatisfied() const
     { return fieldValueIs<ValidateField>( SATISFIED ); }
 
