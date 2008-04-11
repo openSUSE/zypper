@@ -343,6 +343,14 @@ namespace zypp
     bool _has_next;
     /** whether to do text matching on our own (true) or the Dataiterator already did it */
     bool _do_matching;
+
+    // flags
+    // str
+    // regex
+    // attrs_regex
+    // attrs_str
+    
+    
     /** used to copy current iterator in order to forward check for next attributes */
     sat::LookupAttr::iterator _tmpit;
   };

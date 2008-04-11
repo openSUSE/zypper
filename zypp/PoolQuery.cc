@@ -68,14 +68,15 @@ namespace zypp
   public:
     /** Raw search strings. */
     StrContainer _strings;
-    /** Regex-compiled search strings. */
+    /** Compiled search strings. */
     mutable string _rcstrings;
-    mutable regex_t _regex;
+    /** Compiled regex struct */
+    mutable str::regex _regex;
     /** Raw attributes */
     AttrMap _attrs;
     /** Regex-compiled attributes */
     mutable CompiledAttrMap _rcattrs;
-    mutable map<sat::SolvAttr, regex_t> _rattrs;
+    mutable map<sat::SolvAttr, str::regex> _rattrs;
 
     /** Repos to search. */
     StrContainer _repos;
@@ -105,17 +106,6 @@ namespace zypp
   };
 
   
-  static void
-  compileRegex(regex_t * regex, const string & str, bool nocase)
-  {
-    /* We feed multiple lines eventually (e.g. authors or descriptions),
-       so set REG_NEWLINE. */
-    if (regcomp(regex, str.c_str(),
-        REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (nocase ? REG_ICASE : 0)) != 0)
-      ZYPP_THROW(Exception(
-        str::form(_("Invalid regular expression '%s'"), str.c_str())));
-  }
-
   struct MyInserter
   {
     MyInserter(PoolQuery::StrContainer & cont) : _cont(cont) {}
@@ -230,7 +220,8 @@ attremptycheckend:
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
 
         if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
-          compileRegex(&_regex, _rcstrings, _cflags & SEARCH_NOCASE);
+          /* We feed multiple lines eventually (e.g. authors or descriptions), so set REG_NEWLINE. */
+          _regex = str::regex(_rcstrings, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
       }
 
       // // DIFFERENT STRINGS FOR DIFFERENT ATTRS
@@ -249,9 +240,8 @@ attremptycheckend:
 
           if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
           {
-            regex_t regex;
-            compileRegex(&regex, s, _cflags & SEARCH_NOCASE);
-            _rattrs.insert(pair<sat::SolvAttr, regex_t>(ai->first, regex));
+            str::regex regex(s, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
+            _rattrs.insert(pair<sat::SolvAttr, str::regex>(ai->first, regex));
           }
         }
       }
@@ -640,12 +630,12 @@ attremptycheckend:
           {
             if ((_pqimpl->_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
             {
-              const regex_t * regex;
+              const regex_t * regex_p;
               if (_pqimpl->_rcstrings.empty())
               {
-                map<sat::SolvAttr, regex_t>::const_iterator rai = _pqimpl->_rattrs.find(attr);
+                map<sat::SolvAttr, str::regex>::iterator rai = _pqimpl->_rattrs.find(attr);
                 if (rai != _pqimpl->_rattrs.end())
-                  regex = &rai->second;
+                  regex_p = rai->second.get();
                 else
                 {
                   ERR << "no compiled regex found for " <<  attr << endl;
@@ -653,8 +643,8 @@ attremptycheckend:
                 }
               }
               else
-                regex = &_pqimpl->_regex;
-              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, regex);
+                regex_p = _pqimpl->_regex.get();
+              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, regex_p);
             }
             else
             {
