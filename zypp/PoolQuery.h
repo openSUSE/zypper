@@ -14,7 +14,7 @@
 
 #include "base/Regex.h"
 
-#include "zypp/Resolvable.h"
+#include "zypp/ResKind.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/LookupAttr.h"
@@ -50,7 +50,7 @@ namespace zypp
   {
   public:
     typedef std::set<std::string>                           StrContainer;
-    typedef std::set<Resolvable::Kind>                      Kinds;
+    typedef std::set<ResKind>                               Kinds;
     typedef std::map<sat::SolvAttr, StrContainer>           AttrRawStrMap;
     typedef std::map<sat::SolvAttr, std::string>            AttrCompiledStrMap;
     typedef std::map<sat::SolvAttr, str::regex>             AttrRegexMap;
@@ -94,7 +94,7 @@ namespace zypp
      * Pass ResTraits<T>::kind to this method, where T is one of the
      * \ref Resolvable child classes (e.g. ResTraits<Pattern>::kind).
      */
-    void addKind(const Resolvable::Kind &kind);
+    void addKind(const ResKind & kind);
 
     /**
      * Filter by repo.

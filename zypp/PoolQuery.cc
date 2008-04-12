@@ -741,7 +741,7 @@ attremptycheckend:
   }
 
 
-  void PoolQuery::addKind(const Resolvable::Kind &kind)
+  void PoolQuery::addKind(const ResKind & kind)
   { _pimpl->_kinds.insert(kind); }
 
 
@@ -977,7 +977,7 @@ attremptycheckend:
       }
       else if ( attribute==PoolQueryAttr::kindAttr )
       {
-        addKind( Resolvable::Kind(attrValue) );
+        addKind( ResKind(attrValue) );
       }
       else if ( attribute==PoolQueryAttr::stringAttr )
       {
