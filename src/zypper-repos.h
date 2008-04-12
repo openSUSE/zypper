@@ -8,6 +8,8 @@
 
 #include "zypper.h"
 
+#define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
+
 /**
  * Initialize rpm database on target, if not already initialized. 
  */
@@ -32,6 +34,12 @@ void list_repos(Zypper & zypper);
  * Refresh all enabled repositories.
  */
 void refresh_repos(Zypper & zypper);
+
+/**
+ * Refresh a single repository.
+ * \return true on error, false otherwise
+ */
+bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo);
 
 
 /**

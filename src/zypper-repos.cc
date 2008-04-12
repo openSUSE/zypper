@@ -791,7 +791,7 @@ void refresh_repos(Zypper & zypper)
          it !=  repos.end(); ++it)
     {
       RepoInfo repo(*it);
-  
+
       if (!specified.empty())
       {
         bool found = false;
@@ -802,7 +802,7 @@ void refresh_repos(Zypper & zypper)
             found = true;
             break;
           }
-  
+
         if (!found)
         {
           DBG << repo.alias() << "(#" << ") not specified,"
@@ -811,7 +811,7 @@ void refresh_repos(Zypper & zypper)
           continue;
         }
       }
-  
+
       // skip disabled repos
       if (!repo.enabled())
       {
@@ -826,43 +826,9 @@ void refresh_repos(Zypper & zypper)
         enabled_repo_count--;
         continue;
       }
-  
+
       // do the refresh
-  
-      // raw metadata refresh
-      bool error = false;
-      if (!copts.count("build-only"))
-      {
-        bool force_download =
-          copts.count("force") || copts.count("force-download");
-  
-        // without this a cd is required to be present in the drive on each refresh
-        // (or more 'refresh needed' check)
-        bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
-        if (!force_download && is_cd)
-        {
-          MIL << "Skipping refresh of a changeable read-only media." << endl;
-          continue;
-        }
-  
-        MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
-            << endl;
-  
-        error = refresh_raw_metadata(zypper, repo, force_download);
-      }
-  
-      // db rebuild
-      if (!(error || copts.count("download-only")))
-      {
-        bool force_build =
-          copts.count("force") || copts.count("force-build");
-  
-        MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
-  
-        error = build_cache(zypper, repo, force_build);
-      }
-  
-      if (error)
+      if (refresh_repo(zypper, repo))
       {
         zypper.out().error(boost::str(format(
           _("Skipping repository '%s' because of the above error."))
@@ -902,6 +868,46 @@ void refresh_repos(Zypper & zypper)
     zypper.out().info(_("Specified repositories have been refreshed."));
   else
     zypper.out().info(_("All repositories have been refreshed."));
+}
+
+// ----------------------------------------------------------------------------
+
+bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
+{
+  // raw metadata refresh
+  bool error = false;
+  if (!zypper.cOpts().count("build-only"))
+  {
+    bool force_download =
+      zypper.cOpts().count("force") || zypper.cOpts().count("force-download");
+
+    // without this a cd is required to be present in the drive on each refresh
+    // (or more 'refresh needed' check)
+    bool is_cd = is_changeable_media(*repo.baseUrlsBegin());
+    if (!force_download && is_cd)
+    {
+      MIL << "Skipping refresh of a changeable read-only media." << endl;
+      return false;
+    }
+
+    MIL << "calling refreshMetadata" << (force_download ? ", forced" : "")
+        << endl;
+
+    error = refresh_raw_metadata(zypper, repo, force_download);
+  }
+
+  // db rebuild
+  if (!(error || zypper.cOpts().count("download-only")))
+  {
+    bool force_build =
+      zypper.cOpts().count("force") || zypper.cOpts().count("force-build");
+
+    MIL << "calling buildCache" << (force_build ? ", forced" : "") << endl;
+
+    error = build_cache(zypper, repo, force_build);
+  }
+
+  return error;
 }
 
 // ----------------------------------------------------------------------------
