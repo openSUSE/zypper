@@ -346,16 +346,19 @@ static void mark_for_uninstall(Zypper & zypper,
   }
 }
 
-void mark_by_name (Zypper & zypper,
-                   bool install_not_remove,
-		   const ResObject::Kind &kind,
-		   const string &name )
+
+static void
+mark_by_name (Zypper & zypper,
+              bool install_not_remove,
+              const ResObject::Kind &kind,
+              const string &name )
 {
   if (install_not_remove)
     mark_for_install(zypper, kind, name);
   else
     mark_for_uninstall(zypper, kind, name);
 }
+
 
 // don't try NAME-EDITION yet, could be confused by
 // dbus-1-x11, java-1_4_2-gcj-compat, ...
@@ -368,13 +371,13 @@ bool mark_by_name_edition (...)
     capstr = m.str(1) + " = " + m.str(2);
     is_cap = true;
   }
-
 */
 
-void mark_by_capability (Zypper & zypper,
-                         bool install_not_remove,
-			 const ResObject::Kind &kind,
-			 const string &capstr )
+static void
+mark_by_capability (Zypper & zypper,
+                    bool install_not_remove,
+                    const ResObject::Kind &kind,
+                    const string &capstr )
 {
   Capability cap = safe_parse_cap (zypper, kind, capstr);
 
@@ -390,6 +393,66 @@ void mark_by_capability (Zypper & zypper,
       DBG << "Adding conflict " << cap << endl;
       resolver->addConflict (cap);
     }
+  }
+}
+
+// ----------------------------------------------------------------------------
+
+void install_remove(Zypper & zypper,
+                    const Zypper::ArgList & args,
+                    bool install_not_remove,
+                    const ResKind & kind)
+{
+  bool by_capability = false;   // TODO
+  bool force_by_capability = zypper.cOpts().count("capability");
+  bool force_by_name = zypper.cOpts().count("name");
+  bool force = zypper.cOpts().count("force");
+
+  if (force_by_capability && force_by_name)
+  {
+    zypper.out().error(boost::str(
+      format(_("%s contradicts %s")) % "--capability" % "--name"));
+    
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    ZYPP_THROW(ExitRequestException());
+  }
+
+  if (install_not_remove && force_by_capability && force)
+  {
+    // translators: meaning --force with --capability
+    zypper.out().error(boost::str(format(_("%s cannot currently be used with %s"))
+      % "--force" % "--capability"));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    ZYPP_THROW(ExitRequestException());
+  }
+
+  for_(it, args.begin(), args.end())
+  {
+    string str = *it;
+
+    // install remove modifiers
+    if (str[0] == '+' || str[0] == '~')
+    {
+      install_not_remove = true;
+      str.erase(0, 1);
+    }
+    else if (str[0] == '-' || str[0] == '!')
+    {
+      install_not_remove = false;
+      str.erase(0, 1);
+    }
+
+    if (force_by_name)
+      by_capability = false;
+    else
+      // by capability needed?
+      by_capability = force_by_capability
+        || str.find_first_of("=<>") != string::npos;
+
+    if (by_capability)
+      mark_by_capability (zypper, install_not_remove, kind, str);
+    else
+      mark_by_name (zypper, install_not_remove, kind, str);
   }
 }
 

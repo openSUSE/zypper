@@ -1824,7 +1824,7 @@ void Zypper::doCommand()
     bool install_not_remove = command() == ZypperCommand::INSTALL;
 
     // check for rpm files among the arguments
-    list<string> rpms_files_caps;
+    ArgList rpms_files_caps;
     if (install_not_remove)
     {
       for (vector<string>::iterator it = _arguments.begin();
@@ -1933,33 +1933,9 @@ void Zypper::doCommand()
     // load metadata
     load_resolvables(*this);
 
-    // mark resolvables for installation/removal
-    bool by_capability = false; // install by name by default
-    //! \todo install by capability by default in the future (need to improve its output)
-    if (copts.count("capability"))
-      by_capability = true;
-
-    if (install_not_remove && by_capability && _copts.count("force"))
-    {
-      out().error(boost::str(format(_("%s cannot currently be used with %s"))
-        % "--force" % "--capability"));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-
-    for ( vector<string>::const_iterator it = _arguments.begin();
-          it != _arguments.end(); ++it )
-    {
-      if (by_capability)
-        mark_by_capability (*this, install_not_remove, kind, *it);
-      else
-        mark_by_name (*this, install_not_remove, kind, *it);
-    }
-
-    // rpm files
-    for ( list<string>::const_iterator it = rpms_files_caps.begin();
-          it != rpms_files_caps.end(); ++it )
-      mark_by_capability (*this, true, kind, *it);
+    // tell the solver what we want
+    install_remove(*this, _arguments, install_not_remove, kind);
+    install_remove(*this, rpms_files_caps, true, kind);
 
     solve_and_commit(*this);
 

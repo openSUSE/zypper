@@ -11,24 +11,23 @@
 #define ZMART_MISC_H
 
 #include <string>
-#include "zypp/ResObject.h"
+#include "zypp/ResKind.h"
 #include "zypp/PoolItem.h"
 
+#include "zypper.h"
 #include "zypper-tabulator.h"
 #include "zypper-utils.h"
 
 
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 
-void mark_by_name (Zypper & zypper,
-                   bool install_not_remove,
-		   const zypp::ResObject::Kind &kind,
-		   const std::string &name);
-
-void mark_by_capability (Zypper & zypper,
-                         bool install_not_remove,
-			 const zypp::ResObject::Kind &kind,
-			 const std::string &capstr);
+/**
+ * 
+ */
+void install_remove(Zypper & zypper,
+                    const Zypper::ArgList & args,
+                    bool install_not_remove,
+                    const zypp::ResKind & kind);
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset

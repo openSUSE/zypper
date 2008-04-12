@@ -106,6 +106,7 @@ class Zypper : private zypp::base::NonCopyable
 {
 public:
   typedef zypp::RW_pointer<Zypper,zypp::rw_pointer::Scoped<Zypper> > Ptr;
+  typedef std::vector<std::string>  ArgList;
 
   static Ptr & instance(); 
 
@@ -118,7 +119,7 @@ public:
   const parsed_opts & cOpts() const { return _copts; }
   const ZypperCommand & command() const { return _command; }
   const std::string & commandHelp() const { return _command_help; }
-  const std::vector<std::string> & arguments() const { return _arguments; }
+  const ArgList & arguments() const { return _arguments; }
   RuntimeData & runtimeData() { return _rdata; }
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
@@ -155,7 +156,7 @@ private:
   CommandOptions _cmdopts;
   parsed_opts   _copts;
   ZypperCommand _command;
-  std::vector<std::string> _arguments;
+  ArgList _arguments;
   std::string _command_help;
 
   int   _exit_code;
