@@ -7,27 +7,27 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/Algorithm.h"
 
 #include "zypp/Edition.h"
 #include "zypp/Patch.h"
 #include "zypp/Package.h"
 #include "zypp/SrcPackage.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/solver/detail/Helper.h"
+#include "zypp/Capabilities.h"
+
 #include "zypp/media/MediaException.h"
 #include "zypp/FileChecker.h"
 
 #include "zypp/RepoInfo.h"
 
-#include "zypp/Capabilities.h"
-
 #include "zypper.h"
 #include "zypper-main.h"
 #include "zypper-utils.h"
 #include "zypper-getopt.h"
-#include "zypper-misc.h"
 #include "zypper-prompt.h"
 #include "output/prompt.h"
+
+#include "zypper-misc.h"
 
 using namespace std;
 using namespace zypp;
@@ -255,11 +255,12 @@ static void mark_for_install(Zypper & zypper,
       zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer));
 
   DBG << "... done" << endl;
-  if (!installer.item) {
-    // TranslatorExplanation e.g. "package 'pornview' not found"
-    zypper.out().warning(boost::str(
-      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name), Out::QUIET);
-    WAR << format("%s '%s' not found") % kind % name << endl;
+  if (!installer.item)
+  {
+    zypper.out().error(
+        // translators: meaning a package %s or provider of capability %s
+      str::form(_("'%s' not found"), name.c_str()));
+    WAR << str::form("'%s' not found", name.c_str()) << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
   }
@@ -338,9 +339,10 @@ static void mark_for_uninstall(Zypper & zypper,
 		);
   DBG << "... done" << endl;
   if (!deleter.found) {
-    // TranslatorExplanation e.g. "package 'pornview' not found"
-    zypper.out().error(boost::str(
-      format(_("%s '%s' not found")) % kind_to_string_localized(kind,1) % name));
+    zypper.out().error(
+      // translators: meaning a package %s or provider of capability %s
+      str::form(_("'%s' not found"), name.c_str()));
+    WAR << str::form("'%s' not found", name.c_str()) << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
     return;
   }
@@ -376,11 +378,9 @@ bool mark_by_name_edition (...)
 static void
 mark_by_capability (Zypper & zypper,
                     bool install_not_remove,
-                    const ResObject::Kind &kind,
-                    const string &capstr )
+                    const ResKind & kind,
+                    const Capability & cap)
 {
-  Capability cap = safe_parse_cap (zypper, kind, capstr);
-
   if (!cap.empty()) {
     DBG << "Capability: " << cap << endl;
 
@@ -449,8 +449,43 @@ void install_remove(Zypper & zypper,
       by_capability = force_by_capability
         || str.find_first_of("=<>") != string::npos;
 
+    Capability cap = safe_parse_cap (zypper, kind, str);
+    sat::WhatProvides q(cap);
+
+    // is there a provider for the requested capability?
+    if (q.empty())
+    {
+      // translators: meaning a package %s or provider of capability %s
+      zypper.out().error(str::form(_("'%s' not found."), str.c_str()));
+      WAR << str::form("'%s' not found", str.c_str()) << endl;
+      zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      continue;
+    }
+
+    // is the provider alrady installed?
+    bool installed = false;
+    for_(solvit, q.poolItemBegin(), q.poolItemEnd())
+      if (solvit->status().isInstalled())
+      { installed = true; break; }
+    // already installed, nothing to do
+    if (installed && install_not_remove)
+    {
+      // translators: meaning a package %s or provider of capability %s
+      zypper.out().info(str::form(_("'%s' is already installed."), str.c_str()));
+      MIL << str::form("skipping '%s': already installed", str.c_str()) << endl;
+      continue;
+    }
+    // not installed, nothing to do
+    else if (!installed && !install_not_remove)
+    {
+      // translators: meaning a package %s or provider of capability %s
+      zypper.out().info(str::form(_("'%s' is not installed."), str.c_str()));
+      MIL << str::form("skipping '%s': not installed", str.c_str()) << endl;
+      continue;
+    }
+
     if (by_capability)
-      mark_by_capability (zypper, install_not_remove, kind, str);
+      mark_by_capability (zypper, install_not_remove, kind, cap);
     else
       mark_by_name (zypper, install_not_remove, kind, str);
   }
