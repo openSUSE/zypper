@@ -55,12 +55,10 @@ Type of resolvable (default: package). Currently supported resolvable types for
 the info command are: package, patch, pattern, product.
 
 .TP
-.B install (in) [options] <name|rpm_file_uri> ...
-.TP
-.B install (in) [options] --capability <capability|rpm_file_uri> ...
-Install or update packages or other resolvables.
+.B install (in) [options] <name|capability|rpm_file_uri> ...
+Install or update packages.
 
-The resolvables can be selected by their name or by a capability they provide.
+The packages can be selected by their name or by a capability they provide.
 
 Capability is: NAME, or "NAME[OP<EDITION>]", where OP is <, <=, =, >=, or > and
 EDITION is VERSION[-RELEASE], for example: zypper=0.8.8-2.
@@ -70,9 +68,9 @@ provided by packages: /bin/vi, libcurl.so.3, perl(Time::ParseDate).
 Just remember to quote to protect the special characters from the shell,
 for example: zypper\\>0.8.10 or 'zypper>0.8.10'
 
-If EDITION is not specified, the newest available version will be installed.
+If EDITION is not specified, the newest installable version will be installed.
 This also means that if the package is already installed and newer versions
-are available, it will get upgraded to the newest one.
+are available, it will get upgraded to the newest installable version.
 
 Zypper is also able to install plain RPM files while trying to satisfy their
 dependencies using packages from defined repositories. You can install a plain
@@ -83,7 +81,21 @@ as a local path or an URI. E.g.:
 
 Zypper will download the files into its cache directory (/var/cache/zypper/RPMS),
 add this directory as a temporary \fBplaindir\fR repository and mark the
-respective resolvables for installation.
+respective packages for installation.
+
+In the install command, you can specify also packages you wish to remove in
+addition to the packages you wish to install, by prepending their names by
+a '-' or '~' character. For example:
+
+.B $ zypper install vim -emacs
+.br
+.B $ zypper remove emacs +vim
+
+will both install vim and remove emacs. Note that if you choose to use '-' with the
+first package you specify, you need to write '--' before it to prevent it's
+interpretation as a command option.
+
+.B $ zypper install -- -boring-game great-game great-game-manual
 
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URL>

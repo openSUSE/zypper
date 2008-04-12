@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Sat Apr 12 19:20:45 CEST 2008 - jkupec@suse.cz
+
+- allow to install and remove package in one command by prepending
+  package name by + or ~ modifiers (for install) and - or ! (for
+  uninstall). fate #302148, bnc #230342
+- allow install foo<op<version>> without having to use --capability
+  (fate #302919)
+- r9569
+
+-------------------------------------------------------------------
 Tue Apr  8 13:20:47 CEST 2008 - jreidinger@suse.cz
 
 - give better hint if zypper cannot download file from out of date
