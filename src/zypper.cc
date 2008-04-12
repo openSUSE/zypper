@@ -1894,10 +1894,17 @@ void Zypper::doCommand()
           + ZYPPER_RPM_CACHE_DIR));
       repo.setEnabled(true);
       repo.setAutorefresh(true);
-      repo.setAlias("_tmpRPMcache_");
-      repo.setName(_("RPM files cache"));
+      repo.setAlias(TMP_RPM_REPO_ALIAS);
+      repo.setName("RPM files cache");
 
-      gData.additional_repos.push_back(repo);
+      // shut up zypper
+      Out::Verbosity tmp = out().verbosity();
+      out().setVerbosity(Out::QUIET);
+
+      add_repo(*this, repo);
+      refresh_repo(*this, repo);
+
+      out().setVerbosity(tmp);
     }
     // no rpms and no other arguments either
     else if (_arguments.empty())
@@ -2486,6 +2493,20 @@ void Zypper::cleanup()
   for (list<RepoInfo>::const_iterator it = gData.additional_repos.begin();
          it != gData.additional_repos.end(); ++it)
     remove_repo(*this, *it);
+
+  // remove tmprpm cache repo
+  for_(it, gData.repos.begin(), gData.repos.end())
+    if (it->alias() == TMP_RPM_REPO_ALIAS)
+    {
+      // shut up zypper
+      Out::Verbosity tmp = out().verbosity();
+      out().setVerbosity(Out::QUIET);
+    
+      remove_repo(*this, *it);
+    
+      out().setVerbosity(tmp);
+      break;
+    }
 }
 
 // Local Variables:
