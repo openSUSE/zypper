@@ -79,32 +79,36 @@ namespace zypp
   Patch::Contents Patch::contents() const
   {
     Contents result;
-    sat::LookupAttr::iterator _col_name_it(sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).begin());
-    sat::LookupAttr::iterator _col_evr_it(sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).begin());
-    sat::LookupAttr::iterator _col_arch_it(sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).begin());
+    sat::LookupAttr col_name(sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ));
+    sat::LookupAttr col_evr(sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ));
+    sat::LookupAttr col_arch(sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ));
 
-    for (;_col_name_it != sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ).end(); ++_col_name_it, ++_col_evr_it, ++_col_arch_it)
+    sat::LookupAttr::iterator col_name_it(col_name.begin());
+    sat::LookupAttr::iterator col_evr_it(col_evr.begin());
+    sat::LookupAttr::iterator col_arch_it(col_arch.begin());
+
+    for (;col_name_it != col_name.end(); ++col_name_it, ++col_evr_it, ++col_arch_it)
     {
       /* safety checks, shouldn't happen (tm) */
-      if (_col_evr_it == sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ).end()
-          || _col_arch_it == sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ).end())
+      if (col_evr_it == col_evr.end()
+          || col_arch_it == col_arch.end())
       {
           /* FIXME: Raise exception ?! */
           ERR << *this << " : The thing that should not happen, happened." << endl;
           break;
       }
 
-      IdString nameid( _col_name_it.asString() ); /* IdString for fast compare */
-      Arch arch( _col_arch_it.asString() );
+      IdString nameid( col_name_it.asString() ); /* IdString for fast compare */
+      Arch arch( col_arch_it.asString() );
       
       /* search providers of name */
-      sat::WhatProvides providers( Capability( _col_name_it.asString() ) );
+      sat::WhatProvides providers( Capability( col_name_it.asString() ) );
       MIL << *this << " providers: " << endl;
       MIL << providers << endl;
       
       if (providers.empty())
       {
-          WAR << *this << " misses provider for '" << _col_name_it.asString() << "'" << endl;
+          WAR << *this << " misses provider for '" << col_name_it.asString() << "'" << endl;
           continue;
       }
       
@@ -129,15 +133,15 @@ namespace zypp
       
 
       /* find exact providers first (this matches the _real_ 'collection content' of the patch */
-      sat::WhatProvides exact_providers( Capability( _col_name_it.asString(), Rel::EQ, _col_evr_it.asString(), ResKind::package ) );
+      sat::WhatProvides exact_providers( Capability( col_name_it.asString(), Rel::EQ, col_evr_it.asString(), ResKind::package ) );
       if (exact_providers.empty())
       {
-          /* no exact providers: find 'best' providers */
-          sat::WhatProvides best_providers( Capability( _col_name_it.asString(), Rel::GT, _col_evr_it.asString(), ResKind::package ) );
+          /* no exact providers: find 'best' providers: those with a larger evr */
+          sat::WhatProvides best_providers( Capability( col_name_it.asString(), Rel::GT, col_evr_it.asString(), ResKind::package ) );
           if (best_providers.empty())
           {
               // Hmm, this patch is not installable, noone is providing the package in the collection
-              // raise execption ? fake a solvable ?
+              // FIXME: raise execption ? fake a solvable ?
           }
           else
           {
