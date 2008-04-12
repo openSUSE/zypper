@@ -1895,7 +1895,7 @@ void Zypper::doCommand()
       repo.setEnabled(true);
       repo.setAutorefresh(true);
       repo.setAlias(TMP_RPM_REPO_ALIAS);
-      repo.setName("RPM files cache");
+      repo.setName(_("Plain RPM files cache"));
 
       // shut up zypper
       Out::Verbosity tmp = out().verbosity();
