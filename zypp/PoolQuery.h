@@ -12,10 +12,11 @@
 #ifndef ZYPP_POOLQUERY_H
 #define ZYPP_POOLQUERY_H
 
+#include "base/Regex.h"
+
 #include "zypp/Resolvable.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/Pool.h"
 #include "zypp/sat/LookupAttr.h"
 
 #include "zypp/base/PtrTypes.h"
@@ -48,12 +49,14 @@ namespace zypp
   class PoolQuery : public sat::SolvIterMixin<PoolQuery, detail::PoolQueryIterator>
   {
   public:
-    typedef std::set<std::string>                              StrContainer;
-    typedef std::set<Resolvable::Kind>                         Kinds;
-    typedef std::map<sat::SolvAttr, StrContainer>              AttrMap;
-    typedef std::map<sat::SolvAttr, std::string>               CompiledAttrMap;
-    typedef detail::PoolQueryIterator                          const_iterator;
-    typedef unsigned int size_type;
+    typedef std::set<std::string>                           StrContainer;
+    typedef std::set<Resolvable::Kind>                      Kinds;
+    typedef std::map<sat::SolvAttr, StrContainer>           AttrRawStrMap;
+    typedef std::map<sat::SolvAttr, std::string>            AttrCompiledStrMap;
+    typedef std::map<sat::SolvAttr, str::regex>             AttrRegexMap;
+
+    typedef detail::PoolQueryIterator                       const_iterator;
+    typedef unsigned int                                    size_type;
 
   public:
     typedef function<bool( const sat::Solvable & )> ProcessResolvable;
@@ -202,7 +205,7 @@ namespace zypp
     /**
      * Map (map<SolvAttr, StrContainer>) of attribute values added via
      * addAttribute(), addDep in string form */
-    const AttrMap & attributes() const;
+    const AttrRawStrMap & attributes() const;
 
     const Kinds & kinds() const;
 
@@ -335,8 +338,6 @@ namespace zypp
     bool matchSolvable();
 
   private:
-    //! \todo get rid of this Impl* and use copies of the necessary data (flags, compiled attr maps, etc)
-    const PoolQuery::Impl * _pqimpl;
     /** current matching solvable id */
     int _sid;
     /** whether there is a next solvable to check */
@@ -344,13 +345,30 @@ namespace zypp
     /** whether to do text matching on our own (true) or the Dataiterator already did it */
     bool _do_matching;
 
-    // flags
-    // str
-    // regex
-    // attrs_regex
-    // attrs_str
-    
-    
+    /** \name Query Data
+     * Depending on whether regexes are used in the search either \ref _str or
+     * \ref _regex (or either _attrs_str or _attrs_regex respectively) are used.
+     */
+    //@{
+
+    /** string matching option flags */
+    int _flags;
+    /** global query string compiled */
+    std::string _str;
+    /** global query compiled regex */
+    str::regex _regex;
+    /** Attribute to string map holding per-attribute query strings (compiled) */
+    PoolQuery::AttrCompiledStrMap _attrs_str;
+    /** Attribute to regex map holding per-attribute compiled regex */
+    PoolQuery::AttrRegexMap _attrs_regex;
+    /** Set of repository names include in the search. */
+    PoolQuery::StrContainer _repos;
+    /** Set of solvable kinds to include in the search. */
+    PoolQuery::Kinds _kinds;
+    /** Installed status filter flags. \see PoolQuery::StatusFilter */
+    int _status_flags;
+    //@}
+
     /** used to copy current iterator in order to forward check for next attributes */
     sat::LookupAttr::iterator _tmpit;
   };

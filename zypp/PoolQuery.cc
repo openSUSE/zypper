@@ -15,7 +15,6 @@
 
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
-#include "zypp/base/Regex.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
@@ -73,10 +72,10 @@ namespace zypp
     /** Compiled regex struct */
     mutable str::regex _regex;
     /** Raw attributes */
-    AttrMap _attrs;
+    AttrRawStrMap _attrs;
     /** Regex-compiled attributes */
-    mutable CompiledAttrMap _rcattrs;
-    mutable map<sat::SolvAttr, str::regex> _rattrs;
+    mutable AttrCompiledStrMap _rcattrs;
+    mutable AttrRegexMap _rattrs;
 
     /** Repos to search. */
     StrContainer _repos;
@@ -90,7 +89,7 @@ namespace zypp
      * at the start of compile() */
     mutable int _cflags;
     /** Sat solver status flags */
-    PoolQuery::StatusFilter _status_flags;
+    StatusFilter _status_flags;
 
     bool _match_word;
 
@@ -167,7 +166,7 @@ namespace zypp
     {
       // check whether there are any per-attribute strings 
       bool attrvals_empty = true;
-      for (AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+      for (AttrRawStrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
         if (!ai->second.empty())
           for(StrContainer::const_iterator it = ai->second.begin();
               it != ai->second.end(); it++)
@@ -180,7 +179,7 @@ attremptycheckend:
 
       // chceck whether the per-attribute strings are all the same
       bool attrvals_thesame = true;
-      AttrMap::const_iterator ai = _attrs.begin();
+      AttrRawStrMap::const_iterator ai = _attrs.begin();
       const StrContainer & set1 = ai->second;
       ++ai;
       for (; ai != _attrs.end(); ++ai)
@@ -465,7 +464,7 @@ attremptycheckend:
     o << endl;
 
     o << "attributes: " << endl;
-    for(AttrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
+    for(AttrRawStrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
     {
       o << "* " << ai->first << ": ";
       for(StrContainer::const_iterator vi = ai->second.begin();
@@ -478,7 +477,7 @@ attremptycheckend:
 
     o << "compiled strings: " << _rcstrings << endl;
     o << "compiled attributes:" << endl;
-    for (CompiledAttrMap::const_iterator ai = _rcattrs.begin(); ai != _rcattrs.end(); ++ai)
+    for (AttrCompiledStrMap::const_iterator ai = _rcattrs.begin(); ai != _rcattrs.end(); ++ai)
       o << "* " << ai->first << ": " << ai->second << endl;
 
     return o.str();
@@ -510,10 +509,17 @@ attremptycheckend:
   PoolQueryIterator::PoolQueryIterator(
       scoped_ptr< ::_Dataiterator> & dip_r,
       const PoolQuery::Impl * pqimpl)
-  : _pqimpl(pqimpl)
-  , _sid(0)
+  : _sid(0)
   , _has_next(true)
-  , _do_matching(_pqimpl->_rcattrs.size() > 1)
+  , _do_matching(pqimpl->_rcattrs.size() > 1)
+  , _flags(pqimpl->_cflags)
+  , _str(pqimpl->_rcstrings)
+  , _regex(pqimpl->_regex)
+  , _attrs_str(pqimpl->_rcattrs)
+  , _attrs_regex(pqimpl->_rattrs)
+  , _repos(pqimpl->_repos)
+  , _kinds(pqimpl->_kinds)
+  , _status_flags(pqimpl->_status_flags)
   {
     this->base_reference() = LookupAttr::iterator(dip_r, true); //!\todo pass chain_repos
     _has_next = (*base_reference() != sat::detail::noId); 
@@ -521,10 +527,17 @@ attremptycheckend:
 
 
   PoolQueryIterator::PoolQueryIterator(const PoolQueryIterator & rhs)
-    : _pqimpl(rhs._pqimpl)
-    , _sid(rhs._sid)
+    : _sid(rhs._sid)
     , _has_next(rhs._has_next)
     , _do_matching(rhs._do_matching)
+    , _flags(rhs._flags)
+    , _str(rhs._str)
+    , _regex(rhs._regex)
+    , _attrs_str(rhs._attrs_str)
+    , _attrs_regex(rhs._attrs_regex)
+    , _repos(rhs._repos)
+    , _kinds(rhs._kinds)
+    , _status_flags(rhs._status_flags)
   { base_reference() = LookupAttr::iterator(rhs.base()); }
 
 
@@ -535,10 +548,17 @@ attremptycheckend:
   PoolQueryIterator & PoolQueryIterator::operator=( const PoolQueryIterator & rhs )
   {
     base_reference() = rhs.base();
-    _pqimpl = rhs._pqimpl; //! \todo FIXME
     _sid = rhs._sid;
     _has_next = rhs._has_next;
     _do_matching = rhs._do_matching;
+    _flags = rhs._flags;
+    _str = rhs._str;
+    _regex = rhs._regex;
+    _attrs_str = rhs._attrs_str;
+    _attrs_regex = rhs._attrs_regex;
+    _repos = rhs._repos;
+    _kinds = rhs._kinds;
+    _status_flags = rhs._status_flags;
     return *this;
   }
 
@@ -580,8 +600,8 @@ attremptycheckend:
         while(1)
         {
           drop_by_repo = false;
-          if (!_pqimpl->_repos.empty() && 
-            _pqimpl->_repos.find(base().get()->repo->name) == _pqimpl->_repos.end())
+          if(!_repos.empty() && 
+             _repos.find(base().get()->repo->name) == _repos.end())
           {
             drop_by_repo = true;
             break;
@@ -590,7 +610,7 @@ attremptycheckend:
           drop_by_kind_status = false;
 
           // whether to drop an uninstalled (repo) solvable
-          if ( (_pqimpl->_status_flags & PoolQuery::INSTALLED_ONLY) &&
+          if ( (_status_flags & PoolQuery::INSTALLED_ONLY) &&
               base().get()->repo->name != sat::Pool::instance().systemRepoName() )
           {
             drop_by_kind_status = true;
@@ -598,7 +618,7 @@ attremptycheckend:
           }
 
           // whether to drop an installed (target) solvable
-          if ((_pqimpl->_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
+          if ((_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
               base().get()->repo->name == sat::Pool::instance().systemRepoName())
           {
             drop_by_kind_status = true;
@@ -606,11 +626,11 @@ attremptycheckend:
           }
 
           // whether to drop unwanted kind
-          if (!_pqimpl->_kinds.empty())
+          if (!_kinds.empty())
           {
             sat::Solvable s(_sid);
             // the user wants to filter by kind.
-            if (_pqimpl->_kinds.find(s.kind()) == _pqimpl->_kinds.end())
+            if (_kinds.find(s.kind()) == _kinds.end())
               drop_by_kind_status = true;
           }
 
@@ -625,16 +645,16 @@ attremptycheckend:
         if (!matches)
         {
           SolvAttr attr(base().get()->key->name);
-          PoolQuery::CompiledAttrMap::const_iterator ai = _pqimpl->_rcattrs.find(attr);
-          if (ai != _pqimpl->_rcattrs.end())
+          PoolQuery::AttrCompiledStrMap::const_iterator ai = _attrs_str.find(attr);
+          if (ai != _attrs_str.end())
           {
-            if ((_pqimpl->_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
+            if ((_flags & SEARCH_STRINGMASK) == SEARCH_REGEX)
             {
               const regex_t * regex_p;
-              if (_pqimpl->_rcstrings.empty())
+              if (_str.empty())
               {
-                map<sat::SolvAttr, str::regex>::iterator rai = _pqimpl->_rattrs.find(attr);
-                if (rai != _pqimpl->_rattrs.end())
+                PoolQuery::AttrRegexMap::iterator rai = _attrs_regex.find(attr);
+                if (rai != _attrs_regex.end())
                   regex_p = rai->second.get();
                 else
                 {
@@ -643,21 +663,21 @@ attremptycheckend:
                 }
               }
               else
-                regex_p = _pqimpl->_regex.get();
-              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, regex_p);
+                regex_p = _regex.get();
+              matches = ::dataiterator_match(base().get(), _flags, regex_p);
             }
             else
             {
               const string & sstr =
-                _pqimpl->_rcstrings.empty() ? ai->second : _pqimpl->_rcstrings;
-              matches = ::dataiterator_match(base().get(), _pqimpl->_cflags, sstr.c_str());
+                _str.empty() ? ai->second : _str;
+              matches = ::dataiterator_match(base().get(), _flags, sstr.c_str());
             }
 
-//            if (matches)
+              // if (matches)
 	      /* After calling dataiterator_match (with any string matcher set)
 	         the kv.str member will be filled with something sensible.  */
-  /*            INT << "value: " << base().get()->kv.str << endl
-                  << " mstr: " <<  sstr << endl;*/ 
+              /* INT << "value: " << base().get()->kv.str << endl
+                  << " mstr: " <<  sstr << endl; */ 
           }
         }
       }
@@ -776,7 +796,7 @@ attremptycheckend:
   PoolQuery::strings() const
   { return _pimpl->_strings; }
 
-  const PoolQuery::AttrMap &
+  const PoolQuery::AttrRawStrMap &
   PoolQuery::attributes() const
   { return _pimpl->_attrs; }
 
