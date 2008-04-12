@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Apr 12 23:17:15 CEST 2008 - jkupec@suse.cz
+
+- say 'foo already installed' or 'foo not found' when installing or
+  removing by injecting solver requirements/conflicts (bnc #379195)
+- r9572
+
+-------------------------------------------------------------------
 Sat Apr 12 19:20:45 CEST 2008 - jkupec@suse.cz
 
 - allow to install and remove package in one command by prepending
