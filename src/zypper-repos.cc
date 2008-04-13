@@ -72,7 +72,10 @@ static bool refresh_raw_metadata(Zypper & zypper,
         try
         {
           RepoManager::RefreshCheckStatus stat = manager.
-              checkIfToRefreshMetadata(repo, *it);
+              checkIfToRefreshMetadata(repo, *it,
+                zypper.command() == ZypperCommand::REFRESH ?
+                  RepoManager::RefreshIfNeededIgnoreDelay :
+                  RepoManager::RefreshIfNeeded);
           do_refresh = (stat == RepoManager::REFRESH_NEEDED);
           if (!do_refresh && zypper.command() == ZypperCommand::REFRESH)
           {
@@ -84,11 +87,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
             break;
             case RepoManager::REPO_CHECK_DELAYED:
               zypper.out().info(boost::str(
-                format(_("Repository '%s': the status check has been delayed."))
-                    % repo.name()));
+                format(_("The up-to-date check of '%s' has been delayed."))
+                    % repo.name()), Out::HIGH);
             break;
             default:
-              WAR << "new item in enum, which is not cover" << endl;
+              WAR << "new item in enum, which is not covered" << endl;
             }
           }
           break; // don't check all the urls, just the first succussfull.
@@ -112,8 +115,12 @@ static bool refresh_raw_metadata(Zypper & zypper,
         boost::str(format(_("Downloading repository '%s' metadata.")) % repo.name());
       zypper.out().progressStart("raw-refresh", plabel, true);
 
-      manager.refreshMetadata(repo, force_download ?
-        RepoManager::RefreshForced : RepoManager::RefreshIfNeeded);
+      manager.refreshMetadata(repo,
+        force_download ?
+          RepoManager::RefreshForced :
+            zypper.command() == ZypperCommand::REFRESH ?
+              RepoManager::RefreshIfNeededIgnoreDelay :
+              RepoManager::RefreshIfNeeded);
 
       zypper.out().progressEnd("raw-refresh", plabel);
     }
