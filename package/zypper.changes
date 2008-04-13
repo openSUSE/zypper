@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 14 01:17:55 CEST 2008 - jkupec@suse.cz
+
+- added Recommends: logrotate cron bash-completion (bnc #379553)
+
+-------------------------------------------------------------------
 Mon Apr 14 01:13:53 CEST 2008 - jkupec@suse.cz
 
 - allow wildcards in install (fate #302193, fate #302148)
