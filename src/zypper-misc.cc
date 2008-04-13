@@ -48,6 +48,19 @@ extern RuntimeData gData;
  */
 static bool confirm_licenses(Zypper & zypper);
 
+static bool
+equalNVRA(const Resolvable & lhs, const Resolvable & rhs)
+{
+  if (lhs.name() != rhs.name())
+    return false;
+  if (lhs.kind() != rhs.kind())
+    return false;
+  if (lhs.edition() != rhs.edition())
+    return false;
+  if (lhs.arch() != rhs.arch())
+    return false;
+  return true;
+}
 
 // converts a user-supplied kind to a zypp kind object
 // returns an empty one if not recognized
@@ -444,6 +457,62 @@ install_remove_preprocess_args(const Zypper::ArgList & args,
   DBG << endl;
 }
 
+static void
+mark_selectable(Zypper & zypper,
+                ui::Selectable & s,
+                bool install_not_remove,
+                bool force,
+                const string & repo = "",
+                const string & arch = "")
+{
+  PoolItem theone = s.theObj();
+  //! \todo handle multiple installed case 
+  bool installed = !s.installedEmpty() && theone &&
+    equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
+
+  if (install_not_remove)
+  {
+    if (installed && !force)
+    {
+      DBG << "the One (" << theone << ") is installed, skipping." << endl;
+      zypper.out().info(str::form(
+          _("'%s' is already installed."), s.name().c_str()));
+      return;
+    }
+
+    if (installed && force)
+    {
+      s.setStatus(ui::S_Install);
+      DBG << s << " install: forcing reinstall" << endl;
+    }
+    else
+    {
+      Capability c;
+      if (s.installedEmpty())
+        c = Capability(s.name(), s.kind());
+      else
+        c = Capability(s.name(), Rel::GT, s.installedObj()->edition(), s.kind());
+      God->resolver()->addRequire(c);
+      DBG << s << " install: adding requirement " << c << endl;
+    }
+  }
+  // removing is simpler, as usually
+  else
+  {
+    if (s.installedEmpty())
+    {
+      zypper.out().info(str::form(
+          _("'%s' is not installed."), s.name().c_str()));
+      DBG << s << " remove: not installed, skipping." << endl;
+      return;
+    }
+
+    Capability c(s.name(), s.kind());
+    God->resolver()->addConflict(c);
+    DBG << s << " remove: adding conflict " << c << endl;
+  }
+}
+
 // ----------------------------------------------------------------------------
 
 void install_remove(Zypper & zypper,
@@ -454,7 +523,6 @@ void install_remove(Zypper & zypper,
   if (args.empty())
     return;
   
-  bool by_capability = false;   // TODO
   bool force_by_capability = zypper.cOpts().count("capability");
   bool force_by_name = zypper.cOpts().count("name");
   bool force = zypper.cOpts().count("force");
@@ -480,9 +548,12 @@ void install_remove(Zypper & zypper,
   Zypper::ArgList argsnew;
   install_remove_preprocess_args(args, argsnew);
 
+  string str, arch, repo;
+  bool by_capability;
   for_(it, argsnew.begin(), argsnew.end())
   {
-    string str = *it;
+    str = *it; arch.clear(); repo.clear();
+    by_capability = false;
 
     // install remove modifiers
     if (str[0] == '+' || str[0] == '~')
@@ -496,39 +567,64 @@ void install_remove(Zypper & zypper,
       str.erase(0, 1);
     }
 
+    //! \todo force repo with ':'
+
+    //! \todo force arch with '@'
+
+    // mark by name by force
     if (force_by_name)
-      by_capability = false;
-    else
     {
-      // by capability needed?
-      by_capability = force_by_capability
-        || str.find_first_of("=<>") != string::npos;
+      mark_by_name (zypper, install_not_remove, kind, str);
+      continue;
+    }
 
-      // try to find foo-bar-1.2.3-2
-      if (!by_capability && str.find('-') != string::npos)
+    // is version specified?
+    by_capability = str.find_first_of("=<>") != string::npos;
+
+    // try to find foo-bar-1.2.3-2
+    if (!by_capability && str.find('-') != string::npos)
+    {
+      string::size_type pos = 0;
+      while ((pos = str.find('-', pos)) != string::npos)
       {
-        string::size_type pos = 0;
-        while ((pos = str.find('-', pos)) != string::npos)
+        string trythis = str;
+        trythis.replace(pos, 1, 1, '=');
+
+        DBG << "trying: " << trythis << endl;
+
+        Capability cap = safe_parse_cap (zypper, kind, trythis);
+        sat::WhatProvides q(cap);
+
+        if (!q.empty())
         {
-          string trythis = str;
-          trythis.replace(pos, 1, 1, '=');
-
-          DBG << "trying: " << trythis << endl;
-
-          Capability cap = safe_parse_cap (zypper, kind, trythis);
-          sat::WhatProvides q(cap);
-
-          if (!q.empty())
-          {
-            str = trythis;
-            DBG << str << "might be what we wanted" << endl;
-            by_capability = true;
-            break;
-          }
-          ++pos;
+          str = trythis;
+          by_capability = true;
+          DBG << str << "might be what we wanted" << endl;
+          break;
         }
+        ++pos;
       }
     }
+
+    // try to find by name + wildcards first
+    if (!by_capability)
+    {
+      PoolQuery q;
+      q.addKind(kind);
+      q.addAttribute(sat::SolvAttr::name, str);
+      q.setMatchGlob();
+      bool found = false;
+      for_(s, q.selectableBegin(), q.selectableEnd())
+      {
+        mark_selectable(zypper, **s, install_not_remove, force);
+        found = true;
+      }
+      // done with this requirement, skip to next argument
+      if (found)
+        continue;
+    }
+
+    // try by capability
 
     Capability cap = safe_parse_cap (zypper, kind, str);
     sat::WhatProvides q(cap);
@@ -565,10 +661,7 @@ void install_remove(Zypper & zypper,
       continue;
     }
 
-    if (by_capability)
-      mark_by_capability (zypper, install_not_remove, kind, cap);
-    else
-      mark_by_name (zypper, install_not_remove, kind, str);
+    mark_by_capability (zypper, install_not_remove, kind, cap);
   }
 }
 
@@ -1925,20 +2018,6 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
       }
     }
   }
-}
-
-static bool
-equalNVRA(const Resolvable & lhs, const Resolvable & rhs)
-{
-  if (lhs.name() != rhs.name())
-    return false;
-  if (lhs.kind() != rhs.kind())
-    return false;
-  if (lhs.edition() != rhs.edition())
-    return false;
-  if (lhs.arch() != rhs.arch())
-    return false;
-  return true;
 }
 
 // ----------------------------------------------------------------------------
