@@ -371,7 +371,9 @@ static void report_unknown_repos(Out & out, list<string> not_found)
  * Fill gData.repositories with active repos (enabled or specified) and refresh
  * if autorefresh is on.
  */
-static void do_init_repos(Zypper & zypper)
+
+template <class Container>
+static void do_init_repos(Zypper & zypper, const Container & container)
 {
   MIL << "Going to initialize repositories." << endl;
 
@@ -379,14 +381,19 @@ static void do_init_repos(Zypper & zypper)
   init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
 
-  // get repositories specified with --repo or --catalog
+  // get repositories specified with --repo or --catalog or in the container
+
   list<string> not_found;
   parsed_opts::const_iterator it;
+  // --repo
   if ((it = copts.find("repo")) != copts.end())
     get_repos(zypper, it->second.begin(), it->second.end(), gData.repos, not_found);
-  // rug compatibility
+  // --catalog - rug compatibility
   if ((it = copts.find("catalog")) != copts.end())
     get_repos(zypper, it->second.begin(), it->second.end(), gData.repos, not_found);
+  // container
+  if (!container.empty())
+    get_repos(zypper, container.begin(), container.end(), gData.repos, not_found);
   if (!not_found.empty())
   {
     report_unknown_repos(zypper.out(), not_found);
@@ -503,7 +510,8 @@ static void do_init_repos(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-void init_repos(Zypper & zypper)
+template <typename Container>
+void init_repos(Zypper & zypper, const Container & container)
 {
   static bool done = false;
   //! \todo this has to be done so that it works in zypper shell
@@ -511,7 +519,7 @@ void init_repos(Zypper & zypper)
     return;
 
   if ( !zypper.globalOpts().disable_system_sources )
-    do_init_repos(zypper);
+    do_init_repos(zypper, container);
 
   done = true;
 }

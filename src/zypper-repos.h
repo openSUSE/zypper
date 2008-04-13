@@ -16,6 +16,15 @@
 void init_target(Zypper & zypper);
 
 /**
+ * The same as \ref init_repos(), but allows to specify repos to initialize.
+ *
+ * \param zypper    The zypper instance. 
+ * \param container A string container of identifier (alias|#|URI) to init.
+  */
+template <typename Container>
+void init_repos(Zypper & zypper, const Container & container = Container());
+
+/**
  * Reads known enabled repositories and stores them in gData.
  * This command also refreshes repos with auto-refresh enabled.
  * 
@@ -23,7 +32,9 @@ void init_target(Zypper & zypper);
  *  - ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
  *  - ZYPPER_EXIT_ERR_ZYPP on error
  */
-void init_repos(Zypper & zypper);
+void init_repos(Zypper & zypper)
+{ init_repos(zypper, std::vector<std::string>()); }
+
 
 /**
  * List defined repositories.
