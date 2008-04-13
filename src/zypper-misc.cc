@@ -499,9 +499,36 @@ void install_remove(Zypper & zypper,
     if (force_by_name)
       by_capability = false;
     else
+    {
       // by capability needed?
       by_capability = force_by_capability
         || str.find_first_of("=<>") != string::npos;
+
+      // try to find foo-bar-1.2.3-2
+      if (!by_capability && str.find('-') != string::npos)
+      {
+        string::size_type pos = 0;
+        while ((pos = str.find('-', pos)) != string::npos)
+        {
+          string trythis = str;
+          trythis.replace(pos, 1, 1, '=');
+
+          DBG << "trying: " << trythis << endl;
+
+          Capability cap = safe_parse_cap (zypper, kind, trythis);
+          sat::WhatProvides q(cap);
+
+          if (!q.empty())
+          {
+            str = trythis;
+            DBG << str << "might be what we wanted" << endl;
+            by_capability = true;
+            break;
+          }
+          ++pos;
+        }
+      }
+    }
 
     Capability cap = safe_parse_cap (zypper, kind, str);
     sat::WhatProvides q(cap);
