@@ -400,11 +400,60 @@ mark_by_capability (Zypper & zypper,
 
 // ----------------------------------------------------------------------------
 
+// join arguments at comparison operators ('=', '>=', and the like)
+static void
+install_remove_preprocess_args(const Zypper::ArgList & args,
+                               Zypper::ArgList & argsnew)
+{
+  Zypper::ArgList::size_type argc = args.size();
+  argsnew.reserve(argc);
+  string tmp;
+  // preprocess the arguments
+  for(Zypper::ArgList::size_type i = 0, lastnew = 0; i < argc; ++i)
+  {
+    tmp = args[i];
+    if (i
+        && (tmp == "=" || tmp == "==" || tmp == "<"
+            || tmp == ">" || tmp == "<=" || tmp == ">=")
+        && i < argc - 1)
+    {
+      argsnew[lastnew-1] += tmp + args[++i];
+      continue;
+    }
+    else if (tmp.find_last_of("=<>") == tmp.size() - 1 && i < argc - 1)
+    {
+      argsnew.push_back(tmp + args[++i]);
+      ++lastnew;
+    }
+    else if (i && tmp.find_first_of("=<>") == 0)
+    {
+      argsnew[lastnew-1] += tmp;
+      ++i;
+    }
+    else
+    {
+      argsnew.push_back(tmp);
+      ++lastnew;
+    }
+  }
+
+  DBG << "old: ";
+  copy(args.begin(), args.end(), ostream_iterator<string>(DBG, " "));
+  DBG << endl << "new: ";
+  copy(argsnew.begin(), argsnew.end(), ostream_iterator<string>(DBG, " "));
+  DBG << endl;
+}
+
+// ----------------------------------------------------------------------------
+
 void install_remove(Zypper & zypper,
                     const Zypper::ArgList & args,
                     bool install_not_remove,
                     const ResKind & kind)
 {
+  if (args.empty())
+    return;
+  
   bool by_capability = false;   // TODO
   bool force_by_capability = zypper.cOpts().count("capability");
   bool force_by_name = zypper.cOpts().count("name");
@@ -428,7 +477,10 @@ void install_remove(Zypper & zypper,
     ZYPP_THROW(ExitRequestException());
   }
 
-  for_(it, args.begin(), args.end())
+  Zypper::ArgList argsnew;
+  install_remove_preprocess_args(args, argsnew);
+
+  for_(it, argsnew.begin(), argsnew.end())
   {
     string str = *it;
 
