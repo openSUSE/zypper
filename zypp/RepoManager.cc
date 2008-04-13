@@ -419,7 +419,7 @@ namespace zypp
       oldstatus = metadataStatus(info);
 
       // now we've got the old (cached) status, we can decide repo.refresh.delay
-      if (policy != RefreshForced)
+      if (policy != RefreshForced && policy != RefreshIfNeededIgnoreDelay)
       {
         // difference in seconds
         double diff = difftime(

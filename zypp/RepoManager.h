@@ -76,7 +76,8 @@ namespace zypp
     enum RawMetadataRefreshPolicy
     {
       RefreshIfNeeded,
-      RefreshForced
+      RefreshForced,
+      RefreshIfNeededIgnoreDelay
     };
 
     enum CacheBuildPolicy
