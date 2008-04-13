@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Apr 13 02:17:25 CEST 2008 - jkupec@suse.cz
+
+- RawMetadataRefreshPolicy: CheckIfNeededIgnoreDelay added
+  needed for explicit refresh request
+- revision 9574
+
+-------------------------------------------------------------------
 Fri Apr 11 21:55:21 CEST 2008 - ma@suse.de
 
 - Install ResPoolProxy index to speedup Solvable to Selectable
