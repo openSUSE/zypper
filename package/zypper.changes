@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sun Apr 13 23:06:28 CEST 2008 - jkupec@suse.cz
+
+- allow zypper install foo-bar-version-release
+  (fate #302919, fate #302148)
+- allow white space when specifying version with operators in
+  install/remove commands (fate #302919)
+- r9595
+
+-------------------------------------------------------------------
 Sun Apr 13 17:51:16 CEST 2008 - jkupec@suse.cz
 
 - allow update of individual packages + support wildcards
