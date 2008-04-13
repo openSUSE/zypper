@@ -1333,7 +1333,7 @@ bool xml_list_patches ()
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->isBroken() )
+    if ( it->isRelevant() )
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
