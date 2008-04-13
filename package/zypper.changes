@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Apr 13 02:20:42 CEST 2008 - jkupec@suse.cz
+
+- always check if the repo is up-to-date on explicit refresh
+  request (zypper ref)
+- r9576
+
+-------------------------------------------------------------------
 Sat Apr 12 23:17:15 CEST 2008 - jkupec@suse.cz
 
 - say 'foo already installed' or 'foo not found' when installing or
