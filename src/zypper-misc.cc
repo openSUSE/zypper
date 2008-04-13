@@ -1420,18 +1420,18 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
       Patch::constPtr patch = asKind<Patch>(res);
 
       {
-	TableRow tr (cols);
-	tr << patch->repoInfo().name();
-	tr << res->name () << res->edition ().asString();
-	tr << patch->category();
+        TableRow tr (cols);
+        tr << patch->repoInfo().name();
+        tr << res->name () << res->edition ().asString();
+        tr << patch->category();
 
-	if (!it->isSatisfied())
-	  tr <<  _("Needed");
+        if (!it->isSatisfied())
+          tr <<  _("Needed");
 
-	if (patch->affects_pkg_manager ())
-	  pm_tbl << tr;
-	else
-	  tbl << tr;
+        if (patch->affects_pkg_manager ())
+          pm_tbl << tr;
+        else
+          tbl << tr;
       }
     }
   }
