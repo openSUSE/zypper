@@ -1774,7 +1774,7 @@ mark_patch_updates( bool skip_interactive )
              God->pool().byKindEnd  (ResKind::patch))
     {
       Patch::constPtr patch = asKind<Patch>(it->resolvable());
-      if (patch->isRelevant() && ! patch->isSatisfied())
+      if (it->isRelevant() && ! it->isSatisfied())
       {
         if (attempt == 1 || patch->affects_pkg_manager ())
         {
