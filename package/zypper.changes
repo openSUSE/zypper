@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Sun Apr 13 17:51:16 CEST 2008 - jkupec@suse.cz
+
+- allow update of individual packages + support wildcards
+  (bnc #345458, bnc #284725, and abuse of fate #302511 :O)
+- 'update foo' treat command arguments as repos in rug-compatible
+  mode (fate #302148)
+- 'update': dummy --download-only and --category options for now
+  (fate #302148)
+- r9590
+
+-------------------------------------------------------------------
 Sun Apr 13 02:20:42 CEST 2008 - jkupec@suse.cz
 
 - always check if the repo is up-to-date on explicit refresh

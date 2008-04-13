@@ -222,10 +222,18 @@ Test the removal of packages, do not actually remove anything. This option will
 add the \-\-test option to the rpm commands run by the remove command.
 
 .TP
-.B update (up) [options]
-Update all installed packages or other resolvables with patches or their
-newer versions, where applicable. To update individual packages, use zypper
-install <name> (see documentation of the install command for details).
+.B update (up) [options] [packagename] ...
+Update installed packages with patches or newer version, where applicable.
+
+To update individual packages, specify one or more package names. You can
+use the '*' and '?' wildcard characters in the package names to specify
+multiple packages matching the pattern.
+
+.B NOTE:
+Zypper prefers to update only those packages for which a patch
+description exists, like on the SUSE update servers. To operate on all
+packages for which there is a better version instead, select \fI--type
+package\fR which is also the default in rug compatibility mode.
 
 .TP
 \fI\-t, -\-type\fR <resolvable_type>
@@ -256,12 +264,6 @@ The default value is 'off'. If this option is specified, it takes the preference
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the update command.
-
-.B NOTE:
-Zypper prefers to update only those packages for which a patch
-description exists, like on the SUSE update servers. To operate on all
-packages for which there is a better version instead, select \fI--type
-package\fR which is also the default in rug compatibility mode.
 
 .TP
 .B dist-upgrade (dup) [options]
@@ -749,9 +751,15 @@ Don't require user interaction. This option is implemented using zypper's non-in
 .RE
 
 .TP
-.I rug update (up)
-zypper update (up)
+.I rug update (up) [catalog] ...
+zypper update (up) [package] ...
+.IP
+Zypper interprets the update command arguments as repository identifiers in rug-compatibilty
+mode. The update operation is restricted to the specified repositories.
 .RS
+.TP
+.I \-t, \-\-type
+This option defaults to 'package' in rug compatibility mode. Zypper's default is 'patch'.
 .TP
 .I \-y, \-\-no\-confirm
 Don't require user interaction. This option is implemented using zypper's non-interactive mode.
@@ -764,6 +772,13 @@ This option is not available in rug and zypper uses the 'force-resolution'
 solver mode by default when running in rug-compatible mode. However, it is
 possible to turn the forcing of resolution off using this option even in
 rug-compatible mode.
+.TP
+.I \-d, \-\-downloade\-only
+This option has currently no effect.
+.TP
+.I      \-\-category
+This option has currently no effect.
+
 .RE
 
 .TP
