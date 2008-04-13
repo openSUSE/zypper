@@ -42,7 +42,6 @@ void mark_by_capability (Zypper & zypper,
                          bool install_not_remove,
 			 const zypp::ResObject::Kind &kind,
 			 const std::string &capstr);
->>>>>>> fix displaying uninstalled patches:zypper/src/zypper-misc.h
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset

@@ -349,7 +349,7 @@ static void mark_for_uninstall(Zypper & zypper,
 }
 
 
-static void
+void
 mark_by_name (Zypper & zypper,
               bool install_not_remove,
               const ResObject::Kind &kind,
@@ -1415,7 +1415,8 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
-    if ( it->isBroken() )
+
+    if ( it->isRelevant() && ! it->isSatisfied() )
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
@@ -1426,7 +1427,7 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
         tr << patch->category();
 
         if (!it->isSatisfied())
-          tr <<  _("Needed");
+          tr <<  _("Needed");        
 
         if (patch->affects_pkg_manager ())
           pm_tbl << tr;
