@@ -1759,38 +1759,85 @@ void xml_list_updates(const ResKindSet & kinds)
 }
 
 
+static bool
+mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affects_pm)
+{
+  Patch::constPtr patch = asKind<Patch>(pi.resolvable());
+  if (pi.isRelevant() && ! pi.isSatisfied())
+  {
+    if (ignore_affects_pm || patch->affects_pkg_manager ())
+    {
+      // #221476
+      if (skip_interactive
+          && (patch->interactive() || !patch->licenseToConfirm().empty()))
+      {
+        // Skipping a patch because it is marked as interactive or has
+        // license to confirm and --skip-interactive is requested.
+        Zypper::instance()->out().warning(str::form(
+          // translators: %s is the name of a patch
+          _("'%s' is interactive, skipping."), patch->name().c_str()));
+        return false;
+      }
+      else
+      {
+        mark_item_install(pi);
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 // ----------------------------------------------------------------------------
 
 static void
-mark_patch_updates( bool skip_interactive )
+mark_patch_updates( Zypper & zypper, bool skip_interactive )
 {
   DBG << "going to mark patches to install" << endl;
+
   // search twice: if there are none with affects_pkg_manager, retry on all
-  bool nothing_found = true;
-  for (int attempt = 0; nothing_found && attempt < 2; ++attempt)
+  bool any_marked = false;
+  for(unsigned ignore_affects_pm = 0;
+      !any_marked && ignore_affects_pm < 2; ++ignore_affects_pm)
   {
-    for_(it, God->pool().byKindBegin(ResKind::patch), 
-             God->pool().byKindEnd  (ResKind::patch))
+    if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
     {
-      Patch::constPtr patch = asKind<Patch>(it->resolvable());
-      if (it->isRelevant() && ! it->isSatisfied())
+      for_(it, God->pool().byKindBegin(ResKind::patch), 
+               God->pool().byKindEnd  (ResKind::patch))
       {
-        if (attempt == 1 || patch->affects_pkg_manager ())
+        any_marked = mark_patch_update(*it, skip_interactive, ignore_affects_pm);
+      }
+    }
+    else if (!zypper.arguments().empty())
+    {
+      for_(it, zypper.arguments().begin(), zypper.arguments().end())
+      {
+        // look for patches matching specified pattern
+        PoolQuery q;
+        q.addKind(ResKind::patch);
+        q.addAttribute(sat::SolvAttr::name, *it);
+        //! \todo should we look for patches requiring packages with matching name instead? 
+        //q.addAttribute(sat::SolvAttr::require, *it);
+        q.setMatchGlob();
+
+        if (q.empty())
         {
-          // #221476
-          if (skip_interactive
-              && (patch->interactive() || !patch->licenseToConfirm().empty()))
-          {
-            // Skipping a patch because it is marked as interactive or has
-            // license to confirm and --skip-interactive is requested.
-            Zypper::instance()->out().warning(str::form(
-              // translators: %s is the name of a patch
-              _("'%s' is interactive, skipping."), patch->name().c_str()));
-          }
+          if (ignore_affects_pm) // avoid displaying this twice
+            continue;
+          if (it->find_first_of("?*") != string::npos) // wildcards used
+            zypper.out().info(str::form(
+                _("No patches matching '%s' found."), it->c_str()));
           else
+            zypper.out().info(str::form(
+                _("Patch '%s' not found."), it->c_str()));
+          zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+        }
+        else
+        {
+          for_(pit, q.poolItemBegin(), q.poolItemEnd())
           {
-            nothing_found = false;
-            mark_item_install (*it);
+            any_marked = mark_patch_update(*pit, skip_interactive, ignore_affects_pm);
           }
         }
       }
@@ -1821,11 +1868,14 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
   ResKindSet::iterator it;
   it = localkinds.find(ResKind::patch);
   if(it != localkinds.end()) // patches wanted
-    mark_patch_updates(skip_interactive);
+  {
+    mark_patch_updates(zypper, skip_interactive);
+    localkinds.erase(it);
+  }
 
   if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
   {
-    God->resolver()->doUpdate();
+    God->resolver()->doUpdate(); //! \todo what about patch updates?
 
     /*
     Candidates candidates;
@@ -1839,44 +1889,48 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
   // treat arguments as package names (+allow wildcards)
   else if (!zypper.arguments().empty())
   {
-    Resolver_Ptr solver = God->resolver();
-    for_(it, zypper.arguments().begin(), zypper.arguments().end())
+    for_(kindit, localkinds.begin(), localkinds.end())
     {
-      PoolQuery q;
-      q.addAttribute(sat::SolvAttr::name, *it);
-      q.setMatchGlob();
-      q.setInstalledOnly();
-
-      if (q.empty())
+      Resolver_Ptr solver = God->resolver();
+      for_(it, zypper.arguments().begin(), zypper.arguments().end())
       {
-        if (it->find_first_of("?*") != string::npos) // wildcards used
-          zypper.out().info(str::form(
-              _("No packages matching '%s' are installed."), it->c_str()));
-        else
-          zypper.out().info(str::form(
-              _("Package '%s' is not installed."), it->c_str()));
-        zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
-      }
-      else
-        for_(solvit, q.selectableBegin(), q.selectableEnd())
+        PoolQuery q;
+        q.addKind(*kindit);
+        q.addAttribute(sat::SolvAttr::name, *it);
+        q.setMatchGlob();
+        q.setInstalledOnly();
+  
+        if (q.empty())
         {
-          ui::Selectable::Ptr s = *solvit;
-          PoolItem theone = s->theObj();
-          if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))
-          {
-            DBG << "the One (" << theone << ") is installed, skipping." << endl;
+          if (it->find_first_of("?*") != string::npos) // wildcards used
             zypper.out().info(str::form(
-                _("No update candindate for '%s'"), s->name().c_str()));
-          }
+                _("No packages matching '%s' are installed."), it->c_str()));
           else
-          {
-            //s->setCandidate(theone); ?
-            //s->setStatus(ui::S_Update); ?
-            Capability c(s->name(), Rel::GT, s->installedObj()->edition(), s->kind());
-            solver->addRequire(c);
-            DBG << *s << " update: adding requirement " << c << endl;
-          }
+            zypper.out().info(str::form(
+                _("Package '%s' is not installed."), it->c_str()));
+          zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
         }
+        else
+          for_(solvit, q.selectableBegin(), q.selectableEnd())
+          {
+            ui::Selectable::Ptr s = *solvit;
+            PoolItem theone = s->theObj();
+            if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))
+            {
+              DBG << "the One (" << theone << ") is installed, skipping." << endl;
+              zypper.out().info(str::form(
+                  _("No update candindate for '%s'"), s->name().c_str()));
+            }
+            else
+            {
+              //s->setCandidate(theone); ?
+              //s->setStatus(ui::S_Update); ?
+              Capability c(s->name(), Rel::GT, s->installedObj()->edition(), s->kind());
+              solver->addRequire(c);
+              DBG << *s << " update: adding requirement " << c << endl;
+            }
+          }
+      }
     }
   }
 }
