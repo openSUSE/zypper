@@ -2230,7 +2230,8 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
-
+    resolve(*this);
+    
     list_updates(*this, kinds, best_effort);
 
     return;

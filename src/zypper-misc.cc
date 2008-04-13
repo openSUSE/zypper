@@ -1195,7 +1195,7 @@ static void set_force_resolution(Zypper & zypper)
  * 
  * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
  */
-static bool resolve(Zypper & zypper)
+bool resolve(Zypper & zypper)
 {
   apply_locks(zypper);
   dump_pool(); // debug
@@ -1424,9 +1424,9 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
 	tr << patch->repoInfo().name();
 	tr << res->name () << res->edition ().asString();
 	tr << patch->category();
-	tr << string_status (it->status ());
-	if (it->isBroken())
-	  tr <<  _("Broken");
+
+	if (!it->isSatisfied())
+	  tr <<  _("Needed");
 
 	if (patch->affects_pkg_manager ())
 	  pm_tbl << tr;

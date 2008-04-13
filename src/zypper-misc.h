@@ -22,12 +22,27 @@
 zypp::ResObject::Kind string_to_kind (const std::string &skind);
 
 /**
+ * Run the solver.
  * 
+ * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
  */
+bool resolve(Zypper & zypper);
+
 void install_remove(Zypper & zypper,
                     const Zypper::ArgList & args,
                     bool install_not_remove,
                     const zypp::ResKind & kind);
+
+void mark_by_name (Zypper & zypper,
+                   bool install_not_remove,
+		   const zypp::ResObject::Kind &kind,
+		   const std::string &name);
+
+void mark_by_capability (Zypper & zypper,
+                         bool install_not_remove,
+			 const zypp::ResObject::Kind &kind,
+			 const std::string &capstr);
+>>>>>>> fix displaying uninstalled patches:zypper/src/zypper-misc.h
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset
