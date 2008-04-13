@@ -640,8 +640,11 @@ static tribool show_problem (Zypper & zypper,
   // retry
   if (problem_count > 1 && reply == solution_count + 1)
     return true;
-  // cancel
+  // cancel (one problem)
   if (problem_count == 1 && reply == solution_count)
+    return false;
+  // cancel (more problems)
+  if (problem_count > 1 && reply == solution_count + 2)
     return false;
   // skip
   if (problem_count > 1 && reply == solution_count)
