@@ -14,6 +14,8 @@
 #include "zypp/Package.h"
 #include "zypp/SrcPackage.h"
 #include "zypp/Capabilities.h"
+#include "zypp/PoolQuery.h"
+
 
 #include "zypp/media/MediaException.h"
 #include "zypp/FileChecker.h"
@@ -1670,14 +1672,14 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 }
 
 // may be useful as a functor
-static bool mark_item_install (const PoolItem& pi) {
+static bool
+mark_item_install (const PoolItem & pi)
+{
   bool result = pi.status().setToBeInstalled( zypp::ResStatus::USER );
-  if (!result) {
-    DBG << "Marking " << pi << "for installation failed" << endl;
-  }
+  if (!result)
+    ERR << "Marking " << pi << "for installation failed" << endl;
   return result;
 }
-
 
 // ----------------------------------------------------------------------------
 // best-effort update
@@ -1761,39 +1763,37 @@ void xml_list_updates(const ResKindSet & kinds)
 
 // ----------------------------------------------------------------------------
 
-static
-void mark_patch_updates( bool skip_interactive )
+static void
+mark_patch_updates( bool skip_interactive )
 {
-  if (true) {
-    // search twice: if there are none with affects_pkg_manager, retry on all
-    bool nothing_found = true;
-    for (int attempt = 0;
-	 nothing_found && attempt < 2; ++attempt) {
-      ResPool::byKind_iterator
-	it = God->pool().byKindBegin<Patch> (),
-	e  = God->pool().byKindEnd<Patch> ();
-      for (; it != e; ++it )
+  // search twice: if there are none with affects_pkg_manager, retry on all
+  bool nothing_found = true;
+  for (int attempt = 0; nothing_found && attempt < 2; ++attempt)
+  {
+    for_(it, God->pool().byKindBegin(ResKind::patch), 
+             God->pool().byKindEnd  (ResKind::patch))
+    {
+      Patch::constPtr patch = asKind<Patch>(it->resolvable());
+      if (patch->isRelevant() && ! patch->isSatisfied())
       {
-	ResObject::constPtr res = it->resolvable();
-
-	if ( it->isBroken() ) {
-	  Patch::constPtr patch = asKind<Patch>(res);
-	  if (attempt == 1 || patch->affects_pkg_manager ()) {
-	    // #221476
-	    if (skip_interactive && (patch->interactive() || !patch->licenseToConfirm().empty())) {
-	      // Skipping a patch because it is marked as interactive or has
-	      // license to confirm and --skip-interactive is requested.
-	      // TranslatorExplanation %s is the name of a patch
-	      Zypper::instance()->out().warning(boost::str(format(
-	          _("%s is interactive, skipped."))
-	          % res));
-	    }
-	    else {
-	      nothing_found = false;
-	      mark_item_install (*it);
-	    }
-	  }
-	}
+        if (attempt == 1 || patch->affects_pkg_manager ())
+        {
+          // #221476
+          if (skip_interactive
+              && (patch->interactive() || !patch->licenseToConfirm().empty()))
+          {
+            // Skipping a patch because it is marked as interactive or has
+            // license to confirm and --skip-interactive is requested.
+            Zypper::instance()->out().warning(str::form(
+              // translators: %s is the name of a patch
+              _("'%s' is interactive, skipping."), patch->name().c_str()));
+          }
+          else
+          {
+            nothing_found = false;
+            mark_item_install (*it);
+          }
+        }
       }
     }
   }
