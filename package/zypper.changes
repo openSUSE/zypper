@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Apr 14 01:13:53 CEST 2008 - jkupec@suse.cz
+
+- allow wildcards in install (fate #302193, fate #302148)
+- fall back to --capability if package not found by name
+  (fate #302919)
+- r9597
+
+-------------------------------------------------------------------
 Sun Apr 13 23:06:28 CEST 2008 - jkupec@suse.cz
 
 - allow zypper install foo-bar-version-release
