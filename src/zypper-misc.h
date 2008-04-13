@@ -57,7 +57,7 @@ void patch_check();
  * \param best_effort
  */
 void list_updates(Zypper & zypper,
-                  const std::set<zypp::Resolvable::Kind> & kinds,
+                  const ResKindSet & kinds,
                   bool best_effort);
 
 /** \todo remove from this header after xu is dropped */ 
@@ -70,7 +70,8 @@ void xml_list_updates(const ResKindSet & kinds);
  * \param skip_interactive whether to skip updates that need user interaction
  * \param best_effort
  */
-void mark_updates(const std::set<zypp::Resolvable::Kind> & kinds,
+void mark_updates(Zypper & zypper,
+                  const ResKindSet & kinds,
                   bool skip_interactive,
                   bool best_effort);
 

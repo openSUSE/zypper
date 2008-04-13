@@ -1083,6 +1083,10 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
+      // dummy for now
+      {"download-only",             no_argument,       0, 'd'},
+      // rug-compatibility - dummy for now
+      {"category",                  no_argument,       0, 'g'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -2275,13 +2279,10 @@ void Zypper::doCommand()
       return;
     }
 
-    // too many arguments
-    if (_arguments.size() > 0)
-    {
-      report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
+    if (_copts.count("download-only"))
+      report_dummy_option(out(), "download-only");
+    if (_copts.count("category"))
+      report_dummy_option(out(), "category");
 
     // rug compatibility code
     // switch on non-interactive mode if no-confirm specified
@@ -2315,22 +2316,31 @@ void Zypper::doCommand()
       kinds.insert(ResTraits<Patch>::kind);
 
     bool best_effort = copts.count( "best-effort" ); 
-
-    if (globalOpts().is_rug_compatible && best_effort) {
-	best_effort = false;
-	// 'rug' is the name of a program and must not be translated
-	// 'best-effort' is a program parameter and can not be translated
-	out().warning(
-	  _("Running as 'rug', can't do 'best-effort' approach to update."));
+    if (globalOpts().is_rug_compatible && best_effort)
+    {
+      best_effort = false;
+      out().warning(str::form(
+        // translators: Running as 'rug', can't do 'best-effort' approach to update.
+        _("Running as '%s', cannot do '%s' approach to update."),
+        "rug", "best-effort"));
     }
+
     init_target(*this);
-    init_repos(*this);
+
+    // rug compatibility - treat arguments as repos
+    if (_gopts.is_rug_compatible && !_arguments.empty())
+      init_repos(*this, _arguments);
+    else
+      init_repos(*this);
+
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
 
-    bool skip_interactive = copts.count("skip-interactive") || globalOpts().non_interactive;
-    mark_updates( kinds, skip_interactive, best_effort );
+    bool skip_interactive =
+      copts.count("skip-interactive") || globalOpts().non_interactive;
+
+    mark_updates(*this, kinds, skip_interactive, best_effort);
 
     solve_and_commit(*this);
 

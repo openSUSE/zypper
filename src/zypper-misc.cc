@@ -351,7 +351,7 @@ static void mark_for_uninstall(Zypper & zypper,
 }
 
 
-void
+static void
 mark_by_name (Zypper & zypper,
               bool install_not_remove,
               const ResObject::Kind &kind,
@@ -1764,6 +1764,7 @@ void xml_list_updates(const ResKindSet & kinds)
 static void
 mark_patch_updates( bool skip_interactive )
 {
+  DBG << "going to mark patches to install" << endl;
   // search twice: if there are none with affects_pkg_manager, retry on all
   bool nothing_found = true;
   for (int attempt = 0; nothing_found && attempt < 2; ++attempt)
@@ -1797,24 +1798,87 @@ mark_patch_updates( bool skip_interactive )
   }
 }
 
+static bool
+equalNVRA(const Resolvable & lhs, const Resolvable & rhs)
+{
+  if (lhs.name() != rhs.name())
+    return false;
+  if (lhs.kind() != rhs.kind())
+    return false;
+  if (lhs.edition() != rhs.edition())
+    return false;
+  if (lhs.arch() != rhs.arch())
+    return false;
+  return true;
+}
+
 // ----------------------------------------------------------------------------
 
-//! \todo mechanism for updating the update stack before the rest.
-void mark_updates(const ResKindSet & kinds, bool skip_interactive, bool best_effort )
+void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
-//  unsigned kind_size = kinds.size();
   ResKindSet localkinds = kinds;
+
   ResKindSet::iterator it;
-  it = localkinds.find(ResTraits<Patch>::kind);
+  it = localkinds.find(ResKind::patch);
   if(it != localkinds.end()) // patches wanted
     mark_patch_updates(skip_interactive);
 
-  Candidates candidates;
-  find_updates (localkinds, candidates);
-  if (best_effort)
-    invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
-  else
-    invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
+  if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
+  {
+    God->resolver()->doUpdate();
+
+    /*
+    Candidates candidates;
+    find_updates (localkinds, candidates);
+    if (best_effort)
+      invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
+    else
+      invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
+    */
+  }
+  // treat arguments as package names (+allow wildcards)
+  else if (!zypper.arguments().empty())
+  {
+    Resolver_Ptr solver = God->resolver();
+    for_(it, zypper.arguments().begin(), zypper.arguments().end())
+    {
+      PoolQuery q;
+      q.addAttribute(sat::SolvAttr::name, *it);
+      q.setMatchGlob();
+      q.setInstalledOnly();
+
+      if (q.empty())
+      {
+        if (it->find_first_of("?*") != string::npos) // wildcards used
+          zypper.out().info(str::form(
+              _("No packages matching '%s' are installed."), it->c_str()));
+        else
+          zypper.out().info(str::form(
+              _("Package '%s' is not installed."), it->c_str()));
+        zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      }
+      else
+        for_(solvit, q.selectableBegin(), q.selectableEnd())
+        {
+          ui::Selectable::Ptr s = *solvit;
+          PoolItem theone = s->theObj();
+          if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))
+          {
+            DBG << "the One (" << theone << ") is installed, skipping." << endl;
+            zypper.out().info(str::form(
+                _("No update candindate for '%s'"), s->name().c_str()));
+          }
+          else
+          {
+            //s->setCandidate(theone); ?
+            //s->setStatus(ui::S_Update); ?
+            Capability c(s->name(), Rel::GT, s->installedObj()->edition(), s->kind());
+            solver->addRequire(c);
+            DBG << *s << " update: adding requirement " << c << endl;
+          }
+        }
+    }
+  }
 }
 
 // ----------------------------------------------------------------------------
