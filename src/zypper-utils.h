@@ -14,15 +14,14 @@ typedef std::set<zypp::ResKind> ResKindSet;
 
 std::string readline_getline();
 
-/**
- * Write a suggestion to report a bug to the specified stream.
- */
+/** Write a suggestion to report a bug to the output. */
 void report_a_bug (Out & out);
 
-/**
- * 
- */
+/** Say that too many arguments have been specified */
 void report_too_many_arguments(const std::string & specific_help);
+
+/** Say the specified option has no effect */
+void report_dummy_option(Out & out, const std::string & longoption_str);
 
 bool is_changeable_media(const zypp::Url & url);
 

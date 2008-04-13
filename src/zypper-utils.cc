@@ -70,6 +70,14 @@ void report_too_many_arguments(const string & specific_help)
 
 // ----------------------------------------------------------------------------
 
+void report_dummy_option(Out & out, const string & longoption_str)
+{
+  out.warning(str::form(
+    _("The '--%s' option has currently no effect."), longoption_str.c_str()));
+}
+
+// ----------------------------------------------------------------------------
+
 bool is_changeable_media(const zypp::Url & url)
 {
   MIL << "Checking if this is a changeable medium" << endl;
