@@ -30,7 +30,7 @@ public:
       : _repository( repository )
   { }
 
-  bool operator()( PoolItem_Ref item )
+  bool operator()( PoolItem item )
   {
     if (_repository.empty()
         || _repository == item->repository().info().alias())
@@ -69,7 +69,6 @@ query_pool( ZYpp::Ptr Z, string filter, const string & repository)
   if (filter == "packages") kind = ResTraits<zypp::Package>::kind;
   else if (filter == "patches") kind = ResTraits<zypp::Patch>::kind;
   else if (filter == "patterns") kind = ResTraits<zypp::Pattern>::kind;
-  else if (filter == "selections") kind = ResTraits<zypp::Selection>::kind;
   else if (filter == "products") kind = ResTraits<zypp::Product>::kind;
   else if (filter != FILTER_ALL)
   {
@@ -101,7 +100,7 @@ query_pool( ZYpp::Ptr Z, string filter, const string & repository)
           MIL << "Must build cache..." << repo << endl;
           repoManager.buildCache( repo );
         }
-        Z->addResolvables( repoManager.createFromCache( repo ).resolvables() );
+        repoManager.loadFromCache( repo );
       }
       MIL << "Loaded enabled repositories." << endl;
     }
@@ -114,23 +113,9 @@ query_pool( ZYpp::Ptr Z, string filter, const string & repository)
   }
 
   // add resolvables from the system
-  if ( filter != FILTER_ALL )
-  {
-    MIL << "Loading target (" << kind << ")..." << endl;
-    ResStore items;
-    for (ResStore::resfilter_const_iterator it = Z->target()->byKindBegin(kind); it != Z->target()->byKindEnd(kind); ++it)
-    {
-      SEC << *it << endl;
-      items.insert(*it);
-    }
-    Z->addResolvables( items, true );
-  }
-  else
-  {
-    // no filter, just add themm all
-    MIL << "Loading target..." << endl;
-    Z->addResolvables( Z->target()->resolvables(), true );
-  }
+  MIL << "Loading target..." << endl;
+  Z->target()->load();
+ 
   MIL << "Loaded target." << endl;
 
 
