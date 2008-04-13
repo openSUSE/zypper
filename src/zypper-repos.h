@@ -32,9 +32,7 @@ void init_repos(Zypper & zypper, const Container & container = Container());
  *  - ZYPPER_EXIT_ERR_INVALID_ARGS if --repo does not specify a valid repository,
  *  - ZYPPER_EXIT_ERR_ZYPP on error
  */
-void init_repos(Zypper & zypper)
-{ init_repos(zypper, std::vector<std::string>()); }
-
+void init_repos(Zypper & zypper);
 
 /**
  * List defined repositories.

@@ -510,6 +510,10 @@ static void do_init_repos(Zypper & zypper, const Container & container)
 
 // ----------------------------------------------------------------------------
 
+void init_repos(Zypper & zypper)
+{ init_repos(zypper, std::vector<std::string>()); }
+
+
 template <typename Container>
 void init_repos(Zypper & zypper, const Container & container)
 {
