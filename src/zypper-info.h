@@ -2,26 +2,19 @@
 #define ZYPPERINFO_H_
 
 #include "zypp/PoolItem.h"
-#include "zypp/Resolvable.h"
+#include "zypp/ResKind.h"
+#include "zypp/ui/Selectable.h"
 
 #include "zypper.h"
 
-void printInfo(const Zypper & zypper, const zypp::Resolvable::Kind & kind);
+void printInfo(const Zypper & zypper, const zypp::ResKind & kind);
 
-void printPkgInfo(const Zypper & zypper,
-                  const zypp::PoolItem & pool_item,
-                  const zypp::PoolItem & ins_pool_item);
+void printPkgInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printPatchInfo(const Zypper & zypper,
-                    const zypp::PoolItem & pool_item,
-                    const zypp::PoolItem & ins_pool_item);
+void printPatchInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printPatternInfo(const Zypper & zypper,
-                      const zypp::PoolItem & pool_item,
-                      const zypp::PoolItem & ins_pool_item);
+void printPatternInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printProductInfo(const Zypper & zypper,
-                      const zypp::PoolItem & pool_item,
-                      const zypp::PoolItem & ins_pool_item);
+void printProductInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
 
 #endif /*ZYPPERINFO_H_*/

@@ -48,20 +48,6 @@ extern RuntimeData gData;
  */
 static bool confirm_licenses(Zypper & zypper);
 
-static bool
-equalNVRA(const Resolvable & lhs, const Resolvable & rhs)
-{
-  if (lhs.name() != rhs.name())
-    return false;
-  if (lhs.kind() != rhs.kind())
-    return false;
-  if (lhs.edition() != rhs.edition())
-    return false;
-  if (lhs.arch() != rhs.arch())
-    return false;
-  return true;
-}
-
 // converts a user-supplied kind to a zypp kind object
 // returns an empty one if not recognized
 ResObject::Kind string_to_kind (const string &skind)

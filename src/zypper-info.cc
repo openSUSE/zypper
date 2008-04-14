@@ -5,11 +5,14 @@
 #include "zypp/ZYpp.h"
 #include "zypp/base/Algorithm.h"
 #include "zypp/Patch.h"
+#include "zypp/Pattern.h"
 #include "zypp/Product.h"
+#include "zypp/PoolQuery.h"
 
 #include "zypper.h"
 #include "zypper-main.h"
 #include "zypper-misc.h"
+#include "zypper-tabulator.h"
 #include "zypper-info.h"
 
 using namespace std;
@@ -37,7 +40,7 @@ void printSummaryDesc(const ResObject::constPtr & res)
 /**
  * 
  */
-void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
+void printInfo(const Zypper & zypper, const ResKind & kind)
 {
   ResPool pool = God->pool();
 
@@ -47,27 +50,37 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
       nameit != zypper.arguments().end(); ++nameit )
   {
 
-    // find the resolvable among installed 
+    // find the resolvable among installed
+    /*
     PoolItem installed;
     for_( it, pool.byIdentBegin( kind, *nameit ),
         pool.byIdentEnd( kind, *nameit ) )
     {
       if (it->status().isInstalled()) { installed = *it; break; }
     }
-
+*/
     // find installation candidate
-    ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
+//    ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
+    PoolQuery q;
+    q.addKind(kind);
+    q.addAttribute(sat::SolvAttr::name, *nameit);
+    /*
     invokeOnEach( pool.byIdentBegin( kind, *nameit ), 
         pool.byIdentEnd( kind, *nameit ),
         zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer) );
-
-    if (!installer.item) {
-      // TranslatorExplanation E.g. "package zypper not found."
-      cout << "\n" << format(_("%s %s not found."))
+*/
+    
+    //if (!installer.item) {
+    if (q.empty())
+    {
+      // TranslatorExplanation E.g. "package 'zypper' not found."
+      cout << "\n" << format(_("%s '%s' not found."))
           % kind_to_string_localized(kind, 1) % *nameit
           << endl;
     }
-    else {
+    else
+    {
+      ui::Selectable::constPtr s = *q.selectableBegin();
       // print info
       // TranslatorExplanation E.g. "Information for package zypper:"
       cout << endl << format(_("Information for %s %s:"))
@@ -76,13 +89,13 @@ void printInfo(const Zypper & zypper, const Resolvable::Kind & kind)
       cout << endl << endl;
 
       if (kind == ResTraits<Package>::kind)
-        printPkgInfo(zypper, installer.item, installed);
+        printPkgInfo(zypper, *s);
       else if (kind == ResTraits<Patch>::kind)
-        printPatchInfo(zypper, installer.item, installed);
+        printPatchInfo(zypper, *s);
       else if (kind == ResTraits<Pattern>::kind)
-        printPatternInfo(zypper, installer.item, installed);
+        printPatternInfo(zypper, *s);
       else if (kind == ResTraits<Product>::kind)
-        printProductInfo(zypper, installer.item, installed);
+        printProductInfo(zypper, *s);
       else
         // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
         cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
@@ -110,30 +123,35 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 </pre>
  *
  */
-void printPkgInfo(const Zypper & zypper,
-                  const PoolItem & pool_item, const PoolItem & ins_pool_item)
+void printPkgInfo(const Zypper & zypper, const ui::Selectable & s)
 {
+  PoolItem theone = s.theObj();
+  PoolItem installed = s.installedObj();
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-       << pool_item.resolvable()->repository().info().name() << endl;
+       << theone.resolvable()->repository().info().name() << endl;
 
-  printNVA(pool_item.resolvable());
+  printNVA(installed ? installed.resolvable() : theone.resolvable());
 
-  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+  cout << _("Installed: ") << (installed ? _("Yes") : _("No")) << endl;
 
+  //! \todo fix this - arch?
   cout << _("Status: ");
-  if (ins_pool_item &&
-      ins_pool_item.resolvable()->edition() >= pool_item.resolvable()->edition())
+  if (installed &&
+      installed.resolvable()->edition() >= theone.resolvable()->edition())
+  {
     cout << _("up-to-date") << endl;
-  else if (ins_pool_item) {
-    cout << _("out-of-date (version ") << ins_pool_item.resolvable()->edition()
+  }
+  else if (installed)
+  {
+    cout << _("out-of-date (version ") << installed.resolvable()->edition()
       << _(" installed) ") << endl; // TODO use sformat for this for proper translation
   }
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size: ") << pool_item.resolvable()->installsize() << endl;
+  cout << _("Installed Size: ") << theone.resolvable()->installsize() << endl;
 
-  printSummaryDesc(pool_item.resolvable());
+  printSummaryDesc(theone.resolvable());
 }
 
 /**
@@ -160,11 +178,14 @@ atom: xv = 3.10a-1091.2
 </pre>
  * 
  */
-void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const PoolItem & ins_pool_item) {
+void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
+{
+  const PoolItem & pool_item = s.theObj();
+  const PoolItem & ins_pool_item = s.installedObj();
   printNVA(pool_item.resolvable());
 
   cout << _("Status: "); // TODO debug
-  bool i = ins_pool_item ? true : false;
+  bool i = bool(ins_pool_item);
   if (pool_item.isBroken ())
     cout << (i ? _("broken"): _("satisfied"));
   cout << endl;
@@ -199,6 +220,15 @@ void printPatchInfo(const Zypper & zypper, const PoolItem & pool_item, const Poo
   }
 }
 
+static string string_weak_status(const ResStatus & rs)
+{
+  if (rs.isRecommended())
+    return _("Recommended");
+  if (rs.isSuggested())
+    return _("Suggested");
+  return ""; 
+}
+
 /**
  * Print pattern information.
  * <p>
@@ -217,9 +247,11 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
-void printPatternInfo(const Zypper & zypper,
-                      const PoolItem & pool_item, const PoolItem & ins_pool_item)
+void printPatternInfo(const Zypper & zypper, const ui::Selectable & s)
 {
+  const PoolItem & pool_item = s.theObj();
+  const PoolItem & ins_pool_item = s.installedObj();
+
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
 
@@ -228,6 +260,36 @@ void printPatternInfo(const Zypper & zypper,
   cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
   
   printSummaryDesc(pool_item.resolvable());
+
+  if (zypper.globalOpts().is_rug_compatible)
+    return;
+
+  // show contents
+  Table t;
+  TableHeader th;
+  th << _("S") << _("Name") << _("Type") << _("Dependency"); 
+  t << th;
+
+  //God->resolver()->solve();
+
+  Pattern::constPtr pattern = asKind<Pattern>(pool_item.resolvable());
+  Pattern::Contents contents = pattern->contents(); 
+  for_(sit, contents.selectableBegin(), contents.selectableEnd())
+  {
+    const ui::Selectable & s = **sit;
+    TableRow tr;
+
+    tr << (s.installedEmpty() ? "" : "i");
+    tr << s.name() << s.kind().asString() << string_weak_status(s.theObj().status());
+
+    t << tr;
+  }
+
+  cout << _("Contents") << ":";
+  if (t.empty())
+    cout << " " << _("(empty)") << endl;
+  else
+    cout << endl << endl << t;
 }
 
 /**
@@ -248,9 +310,11 @@ Description:
 </pre>
  *
  */
-void printProductInfo(const Zypper & zypper,
-                      const PoolItem & pool_item, const PoolItem & ins_pool_item)
+void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
 {
+  const PoolItem & pool_item = s.theObj();
+  const PoolItem & ins_pool_item = s.installedObj();
+
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
 

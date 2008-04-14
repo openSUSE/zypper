@@ -137,6 +137,21 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
 
 // ----------------------------------------------------------------------------
 
+bool equalNVRA(const Resolvable & lhs, const Resolvable & rhs)
+{
+  if (lhs.name() != rhs.name())
+    return false;
+  if (lhs.kind() != rhs.kind())
+    return false;
+  if (lhs.edition() != rhs.edition())
+    return false;
+  if (lhs.arch() != rhs.arch())
+    return false;
+  return true;
+}
+
+// ----------------------------------------------------------------------------
+
 bool looks_like_url (const string& s)
 {
 /*
