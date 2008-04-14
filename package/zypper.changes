@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 14 18:07:19 CEST 2008 - jkupec@suse.cz
+
+- 'patterns' command added (fate #302148)
+- 'patches' now take repos as arguments (fate #302148)
+- r9617
+
+-------------------------------------------------------------------
 Mon Apr 14 15:43:08 CEST 2008 - jkupec@suse.cz
 
 - package lock management commands added (addlock, removelock, and
