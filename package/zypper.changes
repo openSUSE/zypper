@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 15 00:43:30 CEST 2008 - jkupec@suse.cz
+
+- some texts cleanup (bnc #379235)
+- r9629
+- 0.11.0
+
+-------------------------------------------------------------------
 Mon Apr 14 23:45:54 CEST 2008 - jkupec@suse.cz
 
 - use --force-resolution and --no-force-resolution instead of
