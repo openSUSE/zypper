@@ -183,9 +183,9 @@ namespace zypp
         return 0;
 
       //TODO catch posibble exceptions
-      Locks::instance().loadLocks();
+      Locks::instance().read();
 
-      //current locks api doesn't support counting lock
+      //current locks api doesn't support counting locked solvables
       //so count it after
       int count = 0;
       for_(it, sat::Pool::instance().solvablesBegin(),

@@ -12,9 +12,25 @@ namespace zypp
   class Locks
   {
   public:
+    typedef std::list<PoolQuery> LockList;
+    typedef LockList::const_iterator iterator;
+  public:
     class Impl;
 
     static Locks& instance();
+
+    iterator begin();
+    iterator end();
+    LockList::size_type size();
+    bool empty();
+
+    /**
+     * TODO add:
+     * applied{Begin,End,Size,Empty}
+     * toBeAdded{Begin,End,Size,Empty}
+     * toBeRemoved{Begin,End,Size,Empty}
+     * bool dirty();
+     */
 
     /**
      * locks all solvables which is result of query
@@ -30,17 +46,20 @@ namespace zypp
      * unlocks all solvables which is result of query.
      * Can call callback
      */
-    void unlock( const PoolQuery& query );
+    void removeLock( const PoolQuery& query );
 
-    void unlock( const ui::Selectable& selectable );
+    void removeLock( const ui::Selectable& selectable );
 
-    void loadLocks( const Pathname& file = ZConfig::instance().locksFile() );
+    void read( const Pathname& file = ZConfig::instance().locksFile() );
 
-    void saveLocks( const Pathname& file = ZConfig::instance().locksFile() );
+    //! \todo void read( const Pathname& file = ZConfig::instance().locksFile(), bool apply );
+    //! \todo void apply();
 
-    bool existEmptyLocks();
+    void save( const Pathname& file = ZConfig::instance().locksFile() );
+    
+    bool existEmpty();
 
-    void removeEmptyLocks();
+    void removeEmpty();
 
   private:
     Locks();

@@ -84,14 +84,14 @@ BOOST_AUTO_TEST_CASE(locks_save_load)
   cout << "****save/load****"  << endl;
   Pathname src(TESTS_SRC_DIR);
     src += "zypp/data/Locks/locks";
-  Locks::instance().loadLocks(src);
+  Locks::instance().read(src);
   PoolQuery q;
   q.addString("zypper");
   for_(it,q.begin(),q.end())
   {
     BOOST_CHECK(isLocked(*it));
   }
-  Locks::instance().unlock(q);
+  Locks::instance().removeLock(q);
   for_(it,q.begin(),q.end())
   {
     BOOST_CHECK(!isLocked(*it));
@@ -100,16 +100,16 @@ BOOST_AUTO_TEST_CASE(locks_save_load)
   filesystem::TmpFile testfile;
   //Pathname testfile(TESTS_SRC_DIR);
     //  testfile += "/zypp/data/Locks/testlocks";
-  Locks::instance().saveLocks(testfile);
-  Locks::instance().loadLocks(testfile);
+  Locks::instance().save(testfile);
+  Locks::instance().read(testfile);
   //still locked
   for_(it,q.begin(),q.end())
   {
     BOOST_CHECK(isLocked(*it));
   }
-  Locks::instance().unlock(q); //need twice because finded from previous test
-  Locks::instance().saveLocks(testfile);
-  Locks::instance().loadLocks(testfile);
+  Locks::instance().removeLock(q); //need twice because finded from previous test
+  Locks::instance().save(testfile);
+  Locks::instance().read(testfile);
   //now unlocked - first unlock remove indetical lock from previous test
   //and next unlock remove lock from lockfile
   for_(it,q.begin(),q.end())

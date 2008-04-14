@@ -43,15 +43,26 @@ Locks& Locks::instance()
 class Locks::Impl
 {
 public:
-  std::list<PoolQuery> locks;
-  std::list<PoolQuery> toAdd;
-  std::list<PoolQuery> toRemove;
+  LockList locks;
+  LockList toAdd;
+  LockList toRemove;
 
   bool mergeList(callback::SendReport<SavingLocksReport>& report);
-  
 };
 
 Locks::Locks() : _pimpl(new Impl){}
+
+Locks::iterator Locks::begin()
+{ return _pimpl->locks.begin(); }
+
+Locks::iterator Locks::end()
+{ return _pimpl->locks.end(); }
+
+Locks::LockList::size_type Locks::size()
+{ return _pimpl->locks.size(); }
+
+bool Locks::empty()
+{ return _pimpl->locks.empty(); }
 
 /**
  * iterator that takes lock, lock all solvables from query 
@@ -79,7 +90,7 @@ struct LockingOutputIterator
   OutputIterator& out;
 };
 
-void Locks::loadLocks( const Pathname& file )
+void Locks::read( const Pathname& file )
 {
   insert_iterator<std::list<PoolQuery> > ii( _pimpl->locks,
       _pimpl->locks.end() );
@@ -118,7 +129,7 @@ void Locks::addLock(const ui::Selectable& selectable)
   addLock( q );
 }
 
-void Locks::unlock( const PoolQuery& query )
+void Locks::removeLock( const PoolQuery& query )
 {
   for_( it,query.begin(),query.end() )
   {
@@ -140,7 +151,7 @@ void Locks::unlock( const PoolQuery& query )
   }
 }
 
-void Locks::unlock( const ui::Selectable& s )
+void Locks::removeLock( const ui::Selectable& s )
 {
   PoolQuery q;
   q.addAttribute( sat::SolvAttr::name,s.name() );
@@ -148,10 +159,10 @@ void Locks::unlock( const ui::Selectable& s )
   q.setMatchExact();
   q.setCaseSensitive(true);
   q.requireAll();
-  unlock(q);
+  removeLock(q);
 }
 
-bool Locks::existEmptyLocks()
+bool Locks::existEmpty()
 {
   for_( it, _pimpl->locks.begin(), _pimpl->locks.end() )
   {
@@ -209,7 +220,7 @@ public:
 
 };
 
-void Locks::removeEmptyLocks()
+void Locks::removeEmpty()
 {
   callback::SendReport<CleanEmptyLocksReport> report;
   report->start();
@@ -320,7 +331,7 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
   return true;
 }
 
-void Locks::saveLocks( const Pathname& file )
+void Locks::save( const Pathname& file )
 {
   callback::SendReport<SavingLocksReport> report;
   report->start();
