@@ -18,13 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALLONEOF_H
-#define ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALLONEOF_H
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H
 
 #include <iosfwd>
 #include <string>
 
-#include "zypp/sat/SolverQueueItem.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
+#include "zypp/PoolItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -36,33 +37,30 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-DEFINE_PTR_TYPE(SolverQueueItemInstallOneOf);
+DEFINE_PTR_TYPE(SolverQueueItemUpdate);
 	
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : SolverQueueItemInstallOneOf
+//	CLASS NAME : SolverQueueItemUpdate
 
-class SolverQueueItemInstallOneOf : public SolverQueueItem {
-
-  public:
-    typedef std::list<PoolItem> PoolItemList;
+class SolverQueueItemUpdate : public SolverQueueItem {
     
   private:
 
-    PoolItemList _oneOfList; // List of candidates
-    bool _soft;              // if triggered by a soft requirement (a recommends)
+    PoolItem _item;  	// the item to-be-updated
+    bool _soft;         // if triggered by a soft requirement (a recommends)
 
   public:
 
-    SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList, bool soft = false);
-    virtual ~SolverQueueItemInstallOneOf();
+    SolverQueueItemUpdate (const ResPool & pool, const PoolItem & item, bool soft = false);
+    virtual ~SolverQueueItemUpdate();
     
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemInstallOneOf & obj)
+    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemUpdate & obj)
     { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
@@ -72,7 +70,7 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
     // ---------------------------------- methods
 
     virtual SolverQueueItem_Ptr copy (void) const;
-    virtual int cmp (SolverQueueItem_constPtr item) const;
+    //virtual int cmp (SolverQueueItem_constPtr item) const;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -85,4 +83,4 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALLONEOF_H
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H

@@ -489,6 +489,12 @@ SET( zypp_solver_detail_SRCS
   solver/detail/Resolver_problems.cc
   solver/detail/SolutionAction.cc
   solver/detail/Testcase.cc
+  solver/detail/SolverQueueItem.cc
+  solver/detail/SolverQueueItemInstall.cc
+  solver/detail/SolverQueueItemDelete.cc
+  solver/detail/SolverQueueItemUpdate.cc
+  solver/detail/SolverQueueItemInstallOneOf.cc
+
 )
 
 SET( zypp_solver_detail_HEADERS
@@ -521,11 +527,6 @@ SET( zypp_sat_SRCS
   sat/LookupAttr.cc
   sat/SATResolver.cc
   sat/SolvAttr.cc
-  sat/SolverQueueItem.cc
-  sat/SolverQueueItemInstall.cc
-  sat/SolverQueueItemDelete.cc
-  sat/SolverQueueItemUpdate.cc
-  sat/SolverQueueItemInstallOneOf.cc
 )
 
 SET( zypp_sat_HEADERS

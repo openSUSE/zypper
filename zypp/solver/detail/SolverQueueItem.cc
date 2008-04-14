@@ -19,7 +19,8 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/sat/SolverQueueItemInstallOneOf.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -33,46 +34,54 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItemInstallOneOf);
+IMPL_PTR_TYPE(SolverQueueItem);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
+SolverQueueItem::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "InstallOneOf: ";
-    for (PoolItemList::const_iterator iter = _oneOfList.begin();
-	 iter != _oneOfList.end();
-	 iter++)
-	os << *iter;
+    switch (_type) {
+      case QUEUE_ITEM_TYPE_UNKNOWN       :	os << "unknown"; break;
+      case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;	  
+      case QUEUE_ITEM_TYPE_INSTALL       :	os << "install"; break;
+      case QUEUE_ITEM_TYPE_DELETE      :	os << "delete"; break;
+      case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;	  
+      default: os << "?solverqueueitem?"; break;
+    }
+    return os;
+}
 
+
+ostream&
+operator<<( ostream & os, const SolverQueueItemList & itemlist )
+{
+    for (SolverQueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
+	if (iter != itemlist.begin())
+	    os << "," << endl << "\t";
+	os << **iter;
+    }
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList, bool soft)
-    : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL_ONE_OF, pool)
-    , _oneOfList (itemList)
-    , _soft (soft)
+SolverQueueItem::SolverQueueItem (SolverQueueItemType type, const ResPool & pool)
+    : _type (type)
+    , _pool (pool)
 {
 }
 
 
-SolverQueueItemInstallOneOf::~SolverQueueItemInstallOneOf()
+SolverQueueItem::~SolverQueueItem()
 {
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItem_Ptr
-SolverQueueItemInstallOneOf::copy (void) const
+void
+SolverQueueItem::copy (const SolverQueueItem *from)
 {
-    SolverQueueItemInstallOneOf_Ptr new_installOneOf = new SolverQueueItemInstallOneOf (pool(), _oneOfList, _soft);
-    new_installOneOf->SolverQueueItem::copy(this);
-
-    new_installOneOf->_soft = _soft;
-    return new_installOneOf;
 }
 
 

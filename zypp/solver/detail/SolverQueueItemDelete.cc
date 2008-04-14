@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItem.h
+/* SolverQueueItem.cc
  *
  * Copyright (C) 2008 SUSE Linux Products GmbH
  *
@@ -18,16 +18,11 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
-#define ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
-
-#include <iosfwd>
-#include <string>
-
-#include "zypp/sat/SolverQueueItem.h"
+#include "zypp/base/Logger.h"
+#include "zypp/solver/detail/SolverQueueItemDelete.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp
+namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -36,41 +31,50 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-DEFINE_PTR_TYPE(SolverQueueItemInstall);
-	
+using namespace std;
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : SolverQueueItemInstall
+IMPL_PTR_TYPE(SolverQueueItemDelete);
 
-class SolverQueueItemInstall : public SolverQueueItem {
-    
-  private:
+//---------------------------------------------------------------------------
 
-    std::string _name;
-    bool _soft;          // if triggered by a soft requirement (a recommends)
+std::ostream &
+SolverQueueItemDelete::dumpOn( std::ostream & os ) const
+{
+    os << "[" << (_soft?"Soft":"") << "Delete: ";
+    os << _name;
 
-  public:
+    return os;
+}
 
-    SolverQueueItemInstall (const ResPool & pool, std::string name, bool soft = false);
-    virtual ~SolverQueueItemInstall();
-    
-    // ---------------------------------- I/O
+//---------------------------------------------------------------------------
 
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
+SolverQueueItemDelete::SolverQueueItemDelete (const ResPool & pool, std::string name, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_DELETE, pool)
+    , _name (name)
+    , _soft (soft)
+{
+}
 
-    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemInstall & obj)
-    { return obj.dumpOn (str); }
 
-    // ---------------------------------- accessors
+SolverQueueItemDelete::~SolverQueueItemDelete()
+{
+}
 
-    bool isSoft (void) const { return _soft; }    
+//---------------------------------------------------------------------------
 
-    // ---------------------------------- methods
+SolverQueueItem_Ptr
+SolverQueueItemDelete::copy (void) const
+{
+    SolverQueueItemDelete_Ptr new_delete = new SolverQueueItemDelete (pool(), _name);
+    new_delete->SolverQueueItem::copy(this);
 
-    virtual SolverQueueItem_Ptr copy (void) const;
-    virtual int cmp (SolverQueueItem_constPtr item) const;
-};
+    new_delete->_soft = _soft;
+    return new_delete;
+}
+
+
+//---------------------------------------------------------------------------
+
 
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -81,5 +85,3 @@ class SolverQueueItemInstall : public SolverQueueItem {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
-#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H

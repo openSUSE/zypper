@@ -19,7 +19,7 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/sat/SolverQueueItemInstall.h"
+#include "zypp/solver/detail/SolverQueueItemInstallOneOf.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -33,43 +33,46 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItemInstall);
+IMPL_PTR_TYPE(SolverQueueItemInstallOneOf);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItemInstall::dumpOn( std::ostream & os ) const
+SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Install: ";
-    os << _name;
+    os << "[" << (_soft?"Soft":"") << "InstallOneOf: ";
+    for (PoolItemList::const_iterator iter = _oneOfList.begin();
+	 iter != _oneOfList.end();
+	 iter++)
+	os << *iter;
 
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItemInstall::SolverQueueItemInstall (const ResPool & pool, std::string name, bool soft)
-    : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
-    , _name (name)
+SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL_ONE_OF, pool)
+    , _oneOfList (itemList)
     , _soft (soft)
 {
 }
 
 
-SolverQueueItemInstall::~SolverQueueItemInstall()
+SolverQueueItemInstallOneOf::~SolverQueueItemInstallOneOf()
 {
 }
 
 //---------------------------------------------------------------------------
 
 SolverQueueItem_Ptr
-SolverQueueItemInstall::copy (void) const
+SolverQueueItemInstallOneOf::copy (void) const
 {
-    SolverQueueItemInstall_Ptr new_install = new SolverQueueItemInstall (pool(), _name);
-    new_install->SolverQueueItem::copy(this);
+    SolverQueueItemInstallOneOf_Ptr new_installOneOf = new SolverQueueItemInstallOneOf (pool(), _oneOfList, _soft);
+    new_installOneOf->SolverQueueItem::copy(this);
 
-    new_install->_soft = _soft;
-    return new_install;
+    new_installOneOf->_soft = _soft;
+    return new_installOneOf;
 }
 
 

@@ -19,7 +19,7 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/sat/SolverQueueItemUpdate.h"
+#include "zypp/solver/detail/SolverQueueItemInstall.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -33,44 +33,43 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItemUpdate);
+IMPL_PTR_TYPE(SolverQueueItemInstall);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItemUpdate::dumpOn( std::ostream & os ) const
+SolverQueueItemInstall::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Update: ";
-    os << _item;
+    os << "[" << (_soft?"Soft":"") << "Install: ";
+    os << _name;
 
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItemUpdate::SolverQueueItemUpdate (const ResPool & pool,
-					      const PoolItem & item, bool soft)
-    : SolverQueueItem (QUEUE_ITEM_TYPE_UPDATE, pool)
-    , _item (item)
+SolverQueueItemInstall::SolverQueueItemInstall (const ResPool & pool, std::string name, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
+    , _name (name)
     , _soft (soft)
 {
 }
 
 
-SolverQueueItemUpdate::~SolverQueueItemUpdate()
+SolverQueueItemInstall::~SolverQueueItemInstall()
 {
 }
 
 //---------------------------------------------------------------------------
 
 SolverQueueItem_Ptr
-SolverQueueItemUpdate::copy (void) const
+SolverQueueItemInstall::copy (void) const
 {
-    SolverQueueItemUpdate_Ptr new_update = new SolverQueueItemUpdate (pool(), _item);
-    new_update->SolverQueueItem::copy(this);
+    SolverQueueItemInstall_Ptr new_install = new SolverQueueItemInstall (pool(), _name);
+    new_install->SolverQueueItem::copy(this);
 
-    new_update->_soft = _soft;
-    return new_update;
+    new_install->_soft = _soft;
+    return new_install;
 }
 
 

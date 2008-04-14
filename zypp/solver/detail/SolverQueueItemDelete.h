@@ -1,3 +1,4 @@
+
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* QueueItem.h
  *
@@ -24,7 +25,7 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/sat/SolverQueueItem.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -69,7 +70,7 @@ class SolverQueueItemDelete : public SolverQueueItem {
     // ---------------------------------- methods
 
     virtual SolverQueueItem_Ptr copy (void) const;
-    virtual int cmp (SolverQueueItem_constPtr item) const;
+    //virtual int cmp (SolverQueueItem_constPtr item) const;
 };
 
 ///////////////////////////////////////////////////////////////////

@@ -19,8 +19,7 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/sat/SolverQueueItem.h"
-
+#include "zypp/solver/detail/SolverQueueItemUpdate.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,54 +33,44 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItem);
+IMPL_PTR_TYPE(SolverQueueItemUpdate);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItem::dumpOn( std::ostream & os ) const
+SolverQueueItemUpdate::dumpOn( std::ostream & os ) const
 {
-    switch (_type) {
-      case QUEUE_ITEM_TYPE_UNKNOWN       :	os << "unknown"; break;
-      case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;	  
-      case QUEUE_ITEM_TYPE_INSTALL       :	os << "install"; break;
-      case QUEUE_ITEM_TYPE_DELETE      :	os << "delete"; break;
-      case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;	  
-      default: os << "?solverqueueitem?"; break;
-    }
-    return os;
-}
+    os << "[" << (_soft?"Soft":"") << "Update: ";
+    os << _item;
 
-
-ostream&
-operator<<( ostream & os, const SolverQueueItemList & itemlist )
-{
-    for (SolverQueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
-	if (iter != itemlist.begin())
-	    os << "," << endl << "\t";
-	os << **iter;
-    }
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItem::SolverQueueItem (SolverQueueItemType type, const ResPool & pool)
-    : _type (type)
-    , _pool (pool)
+SolverQueueItemUpdate::SolverQueueItemUpdate (const ResPool & pool,
+					      const PoolItem & item, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_UPDATE, pool)
+    , _item (item)
+    , _soft (soft)
 {
 }
 
 
-SolverQueueItem::~SolverQueueItem()
+SolverQueueItemUpdate::~SolverQueueItemUpdate()
 {
 }
 
 //---------------------------------------------------------------------------
 
-void
-SolverQueueItem::copy (const SolverQueueItem *from)
+SolverQueueItem_Ptr
+SolverQueueItemUpdate::copy (void) const
 {
+    SolverQueueItemUpdate_Ptr new_update = new SolverQueueItemUpdate (pool(), _item);
+    new_update->SolverQueueItem::copy(this);
+
+    new_update->_soft = _soft;
+    return new_update;
 }
 
 
