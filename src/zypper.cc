@@ -1131,6 +1131,7 @@ void Zypper::processCommandOptions()
   {
     static struct option dupdate_options[] = {
       {"repo",                      required_argument, 0, 'r'},
+      {"no-recommends",             no_argument,       0,  0 },
       {"auto-agree-with-licenses",  no_argument,       0, 'l'},
       {"debug-solver",              no_argument,       0, 0},
       {"dry-run",                   no_argument,       0, 'D'},
@@ -1148,6 +1149,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "\n"
       "-r, --repo <alias|#|URI>        Limit the upgrade to the repository specified by the alias.\n"
+      "    --no-recommends             Do not install recommended packages, only required.\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
