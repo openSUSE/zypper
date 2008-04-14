@@ -1223,7 +1223,7 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::SHOW_PATCHES_e:
+  case ZypperCommand::PATCHES_e:
   {
     static struct option patches_options[] = {
       {"repo", required_argument, 0, 'r'},
@@ -1234,13 +1234,39 @@ void Zypper::processCommandOptions()
     };
     specific_options = patches_options;
     _command_help = _(
-      "patches\n"
+      "patches (pch) [repository] ...\n"
       "\n"
-      "List all available patches\n"
+      "List all patches available in specified repositories.\n"
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::PATTERNS_e:
+  {
+    static struct option options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
+      {"installed-only", no_argument, 0, 'i'},
+      {"uninstalled-only", no_argument, 0, 'u'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "patterns (pt) [options] [repository] ...\n"
+      "\n"
+      "List all patterns available in specified repositories..\n"
+      "\n"
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+      "-i, --installed-only      Show only installed patterns.\n"
+      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
     );
     break;
   }
@@ -2238,23 +2264,27 @@ void Zypper::doCommand()
 
   // --------------------------( patches )------------------------------------
 
-  else if (command() == ZypperCommand::SHOW_PATCHES) {
+  else if (command() == ZypperCommand::PATCHES ||
+           command() == ZypperCommand::PATTERNS)
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
-    // too many arguments
-    if (_arguments.size() > 0)
-    {
-      report_too_many_arguments(_command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-
     init_target(*this);
-    init_repos(*this);
+    init_repos(*this, _arguments);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
-    show_patches(*this);
+
+    switch (command().toEnum())
+    {
+    case ZypperCommand::PATCHES_e:
+      list_patches(*this);
+      break;
+    case ZypperCommand::PATTERNS_e:
+      list_patterns(*this);
+      break;
+    default:;
+    }
 
     return;
   }
@@ -2620,13 +2650,7 @@ void Zypper::doCommand()
   else if (command() == ZypperCommand::LIST_LOCKS)
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-/*
-    init_target(*this);
-    init_repos(*this);
-    if (exitCode() != ZYPPER_EXIT_OK)
-      return;
-    load_resolvables(*this);
-*/
+
     list_locks(*this);
 
     return;

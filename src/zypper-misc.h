@@ -39,9 +39,6 @@ void install_remove(Zypper & zypper,
  */
 void remove_selections(Zypper & zypper);
 
-/** List patches */
-void show_patches(Zypper & zypper);
-
 /**
  * Are there applicable patches?
  */

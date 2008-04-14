@@ -73,4 +73,10 @@ struct FillTable
   }
 };
 
+/** List patches */
+void list_patches(Zypper & zypper);
+
+/** List paterns */
+void list_patterns(Zypper & zypper);
+
 #endif /*ZYPPERSEARCH_H_*/

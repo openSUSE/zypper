@@ -1450,48 +1450,6 @@ void patch_check ()
   out.info(s.str(), Out::QUIET);
 }
 
-static string string_status (const ResStatus& rs)
-{
-  return rs.isInstalled () ? _("Installed"): _("Uninstalled");
-}
-
-// patches
-void show_patches(Zypper & zypper)
-{
-  MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
-
-  Table tbl;
-  TableHeader th;
-  th << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-     << _("Name") << _("Version") << _("Category") << _("Status");
-  tbl << th;
-
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin<Patch>(),
-    e  = God->pool().byKindEnd<Patch>();
-  for (; it != e; ++it )
-  {
-    ResObject::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
-
-    TableRow tr;
-    tr << patch->repoInfo().name();
-    tr << res->name () << res->edition ().asString();
-    tr << patch->category();
-    tr << string_status (it->status ());
-    if (it->isBroken())
-      tr <<  _("Broken");
-    tbl << tr;
-  }
-  tbl.sort (1);			// Name
-
-  if (tbl.empty())
-    zypper.out().info(_("No needed patches found."));
-  else
-    // display the result, even if --quiet specified
-    cout << tbl;
-}
-
 // ----------------------------------------------------------------------------
 
 bool xml_list_patches ()
