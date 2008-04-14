@@ -90,13 +90,38 @@ struct LockingOutputIterator
   OutputIterator& out;
 };
 
-void Locks::read( const Pathname& file )
+void Locks::readAndApply( const Pathname& file )
 {
-  insert_iterator<std::list<PoolQuery> > ii( _pimpl->locks,
+  insert_iterator<LockList> ii( _pimpl->locks,
       _pimpl->locks.end() );
-  LockingOutputIterator<insert_iterator<std::list<PoolQuery> > > lout(ii);
+  LockingOutputIterator<insert_iterator<LockList> > lout(ii);
   readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
 }
+
+struct ApplyLock
+{
+  void operator()(const PoolQuery& query) const
+  {
+    for_( it,query.begin(),query.end() )
+    {
+      PoolItem item(*it);
+      item.status().setLock(true,ResStatus::USER);
+    }
+  }
+};
+
+void Locks::read( const Pathname& file )
+{
+  readPoolQueriesFromFile(
+    file, insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
+}
+
+
+void Locks::apply()
+{
+  for_each(begin(), end(), ApplyLock());
+}
+
 
 void Locks::addLock( const PoolQuery& query )
 {
@@ -105,7 +130,7 @@ void Locks::addLock( const PoolQuery& query )
     PoolItem item(*it);
     item.status().setLock(true,ResStatus::USER);
   }
-  std::list<PoolQuery>::iterator i = find(_pimpl->toRemove.begin(),
+  LockList::iterator i = find(_pimpl->toRemove.begin(),
     _pimpl->toRemove.end(), query);
   if ( i != _pimpl->toRemove.end() )
   {
@@ -137,7 +162,7 @@ void Locks::removeLock( const PoolQuery& query )
     item.status().setLock(false,ResStatus::USER);
   }
   
-  std::list<PoolQuery>::iterator i = find(_pimpl->toAdd.begin(),
+  LockList::iterator i = find(_pimpl->toAdd.begin(),
     _pimpl->toAdd.end(), query);
   if ( i != _pimpl->toAdd.end() )
   {

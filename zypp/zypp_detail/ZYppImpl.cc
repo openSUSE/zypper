@@ -183,7 +183,7 @@ namespace zypp
         return 0;
 
       //TODO catch posibble exceptions
-      Locks::instance().read();
+      Locks::instance().readAndApply();
 
       //current locks api doesn't support counting locked solvables
       //so count it after

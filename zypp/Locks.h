@@ -50,10 +50,11 @@ namespace zypp
 
     void removeLock( const ui::Selectable& selectable );
 
+    void readAndApply( const Pathname& file = ZConfig::instance().locksFile() );
+
     void read( const Pathname& file = ZConfig::instance().locksFile() );
 
-    //! \todo void read( const Pathname& file = ZConfig::instance().locksFile(), bool apply );
-    //! \todo void apply();
+    void apply();
 
     void save( const Pathname& file = ZConfig::instance().locksFile() );
     
