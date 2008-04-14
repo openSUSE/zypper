@@ -822,7 +822,7 @@ static tribool show_problem (Zypper & zypper,
   if (problem_count > 1 && reply == solution_count)
     return indeterminate; // continue with next problem
 
-  zypper.out().info(boost::str(format (_("Applying solution %s")) % reply), Out::HIGH);
+  zypper.out().info(boost::str(format (_("Applying solution %s")) % (reply + 1)), Out::HIGH);
   ProblemSolutionList::iterator reply_i = solutions.begin ();
   advance (reply_i, reply);
   todo.push_back (*reply_i);

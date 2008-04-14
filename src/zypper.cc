@@ -23,8 +23,6 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 
-//#include "zypp/base/Algorithm.h"
-
 #include "zypp/base/UserRequestException.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
@@ -37,6 +35,7 @@
 #include "zypper.h"
 #include "zypper-repos.h"
 #include "zypper-misc.h"
+#include "zypper-locks.h"
 
 #include "zypper-tabulator.h"
 #include "zypper-search.h"
@@ -44,7 +43,6 @@
 #include "zypper-getopt.h"
 #include "zypper-command.h"
 #include "zypper-utils.h"
-//#include "zypper-callbacks.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
@@ -170,7 +168,7 @@ void print_main_help(Zypper & zypper)
 
   static string help_commands = _(
     "  Commands:\n"
-    "\thelp, ?\t\t\tHelp\n"
+    "\thelp, ?\t\t\tPrint help.\n"
     "\tshell, sh\t\tAccept multiple commands at once.\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
@@ -192,7 +190,10 @@ void print_main_help(Zypper & zypper)
     "\tpatch-info\t\tShow full information for patches.\n"
     "\tsource-install, si\tInstall source packages.\n"
     "\tclean\t\t\tClean local caches.\n"
-    "");
+    "\taddlock\t\t\tAdd a package lock.\n"
+    "\tremovelock\t\tRemove a package lock.\n"
+    "\tlocks\t\t\tList current package locks.\n"
+  );
 
   static string help_usage = _(
     "  Usage:\n"
@@ -489,19 +490,24 @@ void Zypper::processGlobalOptions()
   // additional repositories
   if (gopts.count("plus-repo"))
   {
-    if (command() == ZypperCommand::ADD_REPO ||
-        command() == ZypperCommand::REMOVE_REPO ||
-        command() == ZypperCommand::MODIFY_REPO ||
-        command() == ZypperCommand::RENAME_REPO ||
-        command() == ZypperCommand::REFRESH ||
-	command() == ZypperCommand::CLEAN )
+    switch (command().toEnum())
+    {
+    case ZypperCommand::ADD_REPO_e:
+    case ZypperCommand::REMOVE_REPO_e:
+    case ZypperCommand::MODIFY_REPO_e:
+    case ZypperCommand::RENAME_REPO_e:
+    case ZypperCommand::REFRESH_e:
+    case ZypperCommand::CLEAN_e:
+    case ZypperCommand::REMOVE_LOCK_e:
+    case ZypperCommand::LIST_LOCKS_e:
     {
       // TranslatorExplanation The %s is "--plus-repo"
       out().warning(boost::str(format(
         _("The %s option has no effect here, ignoring."))
         % "--plus-repo"));
+      break;
     }
-    else
+    default:
     {
       list<string> repos = gopts["plus-repo"];
 
@@ -527,6 +533,7 @@ void Zypper::processGlobalOptions()
         DBG << "got additional repo: " << url << endl;
         count++;
       }
+    }
     }
   }
 
@@ -1354,6 +1361,73 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>  Work only with updates from repository specified by alias.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::ADD_LOCK_e:
+  {
+    static struct option options[] =
+    {
+      {"type", required_argument, 0, 't'},
+      {"repo", required_argument, 0, 'r'},
+      // rug compatiblity (although rug does not seem to support this)
+      {"catalog", required_argument, 0, 'c'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = string(_(
+      "addlock (al) <packagename>\n"
+      "\n"
+      "Add a package lock. Specify packages to lock by exact name or by a"
+      " glob pattern using '*' and '?' wildcard characters.\n"
+      "\n"
+      "  Command options:\n"
+      "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
+     ))
+     + str::form(
+       _("-t, --type <type>         Type of resolvable (%s)\n"
+         "                          Default: %s\n")
+         , "package, patch, pattern, product" 
+         , "package");
+
+    break;
+  }
+
+  case ZypperCommand::REMOVE_LOCK_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "removelock (rl) <lock-number>\n"
+      "\n"
+      "Remove a package lock. Specify the lock to remove by its number obtained"
+      "with 'zypper locks'.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::LIST_LOCKS_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "locks (ll)\n"
+      "\n"
+      "List current package locks.\n"
+      "\n"
+      "This command has no additional options.\n"
     );
     break;
   }
@@ -2439,6 +2513,126 @@ void Zypper::doCommand()
 
     return;
   }
+  
+  // -----------------------------( locks )------------------------------------
+
+  else if (command() == ZypperCommand::ADD_LOCK)
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+    
+    // check root user
+    if (geteuid() != 0)
+    {
+      out().error(
+        _("Root privileges are required for adding of package locks."));
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+
+    // too few arguments
+    if (_arguments.empty())
+    {
+      report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    // too many arguments
+    else if (_arguments.size() > 1)
+    {
+      // rug compatibility
+      if (_gopts.is_rug_compatible)
+        // translators: 'zypper addlock foo' takes only one argument.
+        out().warning(_("Only the first command argument considered. Zypper currently does not support versioned locks."));
+      else
+      {
+        report_too_many_arguments(_command_help);
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+        return;
+      }
+    }
+
+    ResKindSet kinds;
+    if (copts.count("type"))
+    {
+      std::list<std::string>::const_iterator it;
+      for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
+      {
+        kind = string_to_kind( *it );
+        if (kind == ResObject::Kind())
+        {
+          out().error(boost::str(format(
+            _("Unknown resolvable type '%s'.")) % *it));
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
+        kinds.insert(kind);
+      }
+    }
+    else
+      kinds.insert(ResKind::package);
+
+    init_target(*this);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    load_resolvables(*this);
+
+    add_locks(*this, _arguments, kinds);
+
+    return;
+  }
+
+  else if (command() == ZypperCommand::REMOVE_LOCK)
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    // check root user
+    if (geteuid() != 0)
+    {
+      out().error(
+        _("Root privileges are required for adding of package locks."));
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+
+    if (_arguments.size() != 1)
+    {
+      if (_arguments.empty())
+        report_required_arg_missing(out(), _command_help);
+      else
+        report_too_many_arguments(_command_help); 
+        
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    
+    init_target(*this);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    load_resolvables(*this);
+
+    remove_locks(*this, _arguments);
+
+    return;
+  }
+
+  else if (command() == ZypperCommand::LIST_LOCKS)
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+/*
+    init_target(*this);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    load_resolvables(*this);
+*/
+    list_locks(*this);
+
+    return;
+  }
+
+  // -----------------------------( shell )------------------------------------
 
   else if (command() == ZypperCommand::SHELL_QUIT)
   {

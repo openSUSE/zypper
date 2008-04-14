@@ -23,6 +23,9 @@ void report_too_many_arguments(const std::string & specific_help);
 /** Say the specified option has no effect */
 void report_dummy_option(Out & out, const std::string & longoption_str);
 
+/** Say you miss a required argument and print command help */
+void report_required_arg_missing(Out & out, const std::string & cmd_help);
+
 bool is_changeable_media(const zypp::Url & url);
 
 std::string kind_to_string_localized(

@@ -32,6 +32,10 @@ struct ZypperCommand
   static const ZypperCommand SHOW_PATCHES;
   static const ZypperCommand XML_LIST_UPDATES_PATCHES;
 
+  static const ZypperCommand ADD_LOCK;
+  static const ZypperCommand REMOVE_LOCK;
+  static const ZypperCommand LIST_LOCKS;
+
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
   static const ZypperCommand SHELL_QUIT;
@@ -70,6 +74,10 @@ struct ZypperCommand
     PATCH_CHECK_e,
     SHOW_PATCHES_e,
     XML_LIST_UPDATES_PATCHES_e,
+    
+    ADD_LOCK_e,
+    REMOVE_LOCK_e,
+    LIST_LOCKS_e,
 
     HELP_e,
     SHELL_e,

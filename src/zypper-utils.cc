@@ -70,6 +70,17 @@ void report_too_many_arguments(const string & specific_help)
 
 // ----------------------------------------------------------------------------
 
+void report_required_arg_missing(Out & out, const string & cmd_help)
+{
+  out.error(_("Required argument missing."));
+  ostringstream s;
+  s << _("Usage") << ':' << endl;
+  s << cmd_help;
+  out.info(s.str());
+}
+
+// ----------------------------------------------------------------------------
+
 void report_dummy_option(Out & out, const string & longoption_str)
 {
   out.warning(str::form(

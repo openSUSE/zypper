@@ -1,10 +1,9 @@
 #include <map>
 
-#include <boost/format.hpp>
-
-#include "zypp/Locale.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/String.h"
 
+#include "zypper-main.h"
 #include "zypper-command.h"
 
 // redefine _ gettext macro defined by ZYpp
@@ -37,6 +36,10 @@ const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
 const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
 const ZypperCommand ZypperCommand::SHOW_PATCHES(ZypperCommand::SHOW_PATCHES_e);
 const ZypperCommand ZypperCommand::XML_LIST_UPDATES_PATCHES(ZypperCommand::XML_LIST_UPDATES_PATCHES_e);
+
+const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
+const ZypperCommand ZypperCommand::REMOVE_LOCK(ZypperCommand::REMOVE_LOCK_e);
+const ZypperCommand ZypperCommand::LIST_LOCKS(ZypperCommand::LIST_LOCKS_e);
 
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
@@ -80,6 +83,10 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["patches"] = _table["pch"] = ZypperCommand::SHOW_PATCHES_e;
     _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
+    _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;
+    _table["removelock"] = _table["rl"] = _table["lock-delete"] = _table["ld"] = ZypperCommand::REMOVE_LOCK_e;
+    _table["locks"] = _table["ll"] = _table["lock-list"] = ZypperCommand::LIST_LOCKS_e;
+
     _table["help"] = _table["?"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;
     _table["quit"] = _table["exit"] = _table["\004"] = ZypperCommand::SHELL_QUIT_e;
@@ -98,7 +105,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
   if (it == _table.end())
   {
     std::string message =
-      boost::str( boost::format(_("Unknown command '%s'")) % strval_r );
+      zypp::str::form(_("Unknown command '%s'"), strval_r.c_str());
     ZYPP_THROW(zypp::Exception(message));
   }
   return it->second;
