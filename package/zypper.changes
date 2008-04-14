@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 14 22:15:13 CEST 2008 - jkupec@suse.cz
+
+- --no-recommends added to install, update, dist-upgrade and verify
+  to suppress installation of recommended packages
+- r9623
+
+-------------------------------------------------------------------
 Mon Apr 14 19:41:24 CEST 2008 - jkupec@suse.cz
 
 - pattern content with Dependency (Recommended/Suggested) column added
