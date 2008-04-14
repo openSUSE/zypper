@@ -144,7 +144,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               /etc/zypp
 %dir               /etc/zypp/repos.d
 %config(noreplace) /etc/zypp/zypp.conf
-#%{prefix}/lib/zypp
+%{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg

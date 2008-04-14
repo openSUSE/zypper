@@ -35,7 +35,12 @@ public:
     if (_repository.empty()
         || _repository == item->repository().info().alias())
     {
-      cout << (item.status().isInstalled() ? "i" : " ");
+
+	if ( isKind<Package>(item.resolvable()) )
+	    cout << (item.status().isInstalled() ? "i" : " ");
+	else
+	    cout << (item.status().isSatisfied() ? "i" : " ");
+
       cout << "|" << item->kind();
       cout << "|" << item->name();
       cout << "|" << item->edition().version();
@@ -118,8 +123,11 @@ query_pool( ZYpp::Ptr Z, string filter, const string & repository)
  
   MIL << "Loaded target." << endl;
 
-
   MIL << "Pool has " << Z->pool().size() << " entries" << endl;
+
+  // solve to get the status satisfied available
+  getZYpp()->resolver()->resolvePool();
+
   if ( filter == FILTER_ALL)
   {
     PrintItem printitem( system ? "" : repository );

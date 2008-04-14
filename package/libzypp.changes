@@ -6,6 +6,12 @@ Mon Apr 14 12:53:09 CEST 2008 - ma@suse.de
 - revision 9605
 
 -------------------------------------------------------------------
+Mon Apr 14 17:00:05 CEST 2008 - dmacvicar@suse.de
+
+- reenable zypp-query-pool
+- 4.11.1
+
+-------------------------------------------------------------------
 Sun Apr 13 02:17:25 CEST 2008 - jkupec@suse.cz
 
 - RawMetadataRefreshPolicy: CheckIfNeededIgnoreDelay added
