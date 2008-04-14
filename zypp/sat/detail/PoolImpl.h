@@ -78,6 +78,7 @@ namespace zypp
            */
           void depSetDirty( const char * a1 = 0, const char * a2 = 0, const char * a3 = 0 );
 
+          /** Callback to resolve namespace dependencies (language, modalias, filesystem, etc.). */
           static detail::IdType nsCallback( ::_Pool *, void * data, detail::IdType lhs, detail::IdType rhs );
 
         public:

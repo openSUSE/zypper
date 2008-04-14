@@ -9,6 +9,20 @@
 /** \file	zypp/target/modalias/Modalias.cc
  *
 */
+extern "C"
+{
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <fnmatch.h>
+}
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
+#include <cerrno>
+
 #include <iostream>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -17,16 +31,6 @@
 
 #include "zypp/target/modalias/Modalias.h"
 
-#include <cstdlib>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <fnmatch.h>
-#include <cstring>
-#include <cerrno>
 
 using std::endl;
 using std::string;
@@ -39,7 +43,7 @@ namespace zypp
   namespace target
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    namespace modalias
+    namespace
     { /////////////////////////////////////////////////////////////////
 
 /*
@@ -49,7 +53,7 @@ namespace zypp
  * If FUNC returns a non-zero return value, stop reading the directory
  * and return that value. Returns -1 if an error occurs.
  */
-static int
+int
 foreach_file(const char *path, int (*func)(const char *, const char *, void *),
 	     void *arg)
 {
@@ -81,7 +85,7 @@ struct modalias_list {
  * If DIR/FILE/modalias exists, remember this modalias on the linked modalias list
  * passed in in ARG. Never returns an error.
  */
-static int
+int
 read_modalias(const char *dir, const char *file, void *arg)
 {
 	char path[PATH_MAX];
@@ -120,7 +124,7 @@ out:
  * and remembers all module aliases for those devices on
  * the linked modalias list passed in in ARG.
  */
-static int
+int
 iterate_bus(const char *dir, const char *file, void *arg)
 {
 	char path[PATH_MAX];
@@ -136,7 +140,7 @@ iterate_bus(const char *dir, const char *file, void *arg)
  * and remembers all module aliases for those devices on
  * the linked modalias list passed in in ARG.
  */
-static int
+int
 iterate_class(const char *dir, const char *file, void *arg)
 {
 	char path[PATH_MAX];
@@ -146,6 +150,10 @@ iterate_class(const char *dir, const char *file, void *arg)
 
 	return 0;
 }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -186,82 +194,31 @@ struct Modalias::Impl
 	}
     }
 
-    /**
-     * query for modalias capability present
+    /*
+     * Check if a device on the system matches a modalias PATTERN.
+     *
+     * Returns NULL if no matching device is found, and the modalias
+     * of the first matching device otherwise. (More than one device
+     * may match a given pattern.)
+     *
+     * On a system that has the following device,
+     *
+     *   pci:v00008086d0000265Asv00008086sd00004556bc0Csc03i00
+     *
+     * modalias_matches("pci:v00008086d0000265Asv*sd*bc*sc*i*") will
+     * return a non-NULL value.
      */
-
-    bool query( const std::string & cap_r ) const
-    { return query( cap_r, Rel::ANY, std::string() ); }
-
-    /**
-     * query for modalias capability having a specific value
-     */
-    bool  query( const std::string & cap_r,
-	       Rel op_r,
-	       const std::string & val_r ) const
+    bool query( const char * cap_r ) const
     {
-
-	/*
-	 * Check if a device on the system matches a modalias PATTERN.
-	 *
-	 * Returns NULL if no matching device is found, and the modalias
-	 * of the first matching device otherwise. (More than one device
-	 * may match a given pattern.)
-	 *
-	 * On a system that has the following device,
-	 *
-	 *   pci:v00008086d0000265Asv00008086sd00004556bc0Csc03i00
-	 *
-	 * modalias_matches("pci:v00008086d0000265Asv*sd*bc*sc*i*") will
-	 * return a non-NULL value.
-	 */
-
-	struct modalias_list *l;
-	for (l = _modaliases; l; l = l->next) {
-	    if ( fnmatch( cap_r.c_str(), l->modalias, 0 ) == 0 )
-		return true;
-	}
-	return false;
-
-#if 0		// once we get a capabilities values, we can compare it ...
-	    if (value) {
-		string lhs (value);
-		int cmp = (lhs != rhs) ? ((lhs < rhs) ? -1 : 1) : 0;
-
-		switch ( relation.inSwitch() )
-		{
-		    case Rel::EQ_e:
-			res = (cmp == 0);
-			break;
-		    case Rel::NE_e:
-			res = (cmp != 0);
-			break;
-		    case Rel::LT_e:
-			res = (cmp == -1);
-			break;
-		    case Rel::LE_e:
-			res = (cmp != 1);
-			break;
-		    case Rel::GT_e:
-			res = (cmp == 1);
-			break;
-		    case Rel::GE_e:
-			res = (cmp != -1);
-			break;
-		    case Rel::ANY_e:
-			res = true;
-			break;
-		    case Rel::NONE_e:
-			res = false;
-			break;
-		    default:
-			// We shouldn't get here.
-			INT << "Unknown relational opertor '" << relation << "' treated as  'NONE'" << endl;
-			break;
-		}
-	    }
-#endif
-
+        if ( cap_r )
+        {
+          struct modalias_list *l;
+          for (l = _modaliases; l; l = l->next) {
+            if ( fnmatch( cap_r, l->modalias, 0 ) == 0 )
+              return true;
+          }
+        }
+        return false;
     }
 
   public:
@@ -323,13 +280,8 @@ Modalias & Modalias::instance()
 // Foreward to implenemtation
 ///////////////////////////////////////////////////////////////////
 
-bool Modalias::query( const std::string & cap_r ) const
+bool Modalias::query( const char * cap_r ) const
 { return _pimpl->query( cap_r ); }
-
-bool Modalias::query( const std::string & cap_r,
-		 Rel op_r,
-		 const std::string & val_r ) const
-{ return _pimpl->query( cap_r, op_r, val_r ); }
 
 /******************************************************************
 **
@@ -341,9 +293,6 @@ std::ostream & operator<<( std::ostream & str, const Modalias & obj )
   return str << *obj._pimpl;
 }
 
-/////////////////////////////////////////////////////////////////
-    } // namespace modalias
-    ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

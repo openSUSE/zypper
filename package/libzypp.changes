@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 14 12:01:13 CEST 2008 - ma@suse.de
+
+- Enable evaluation of hardware dependencies.
+- revision 9603
+
+-------------------------------------------------------------------
 Sun Apr 13 02:17:25 CEST 2008 - jkupec@suse.cz
 
 - RawMetadataRefreshPolicy: CheckIfNeededIgnoreDelay added

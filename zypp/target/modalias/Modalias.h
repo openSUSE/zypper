@@ -16,7 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/Rel.h"
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -24,20 +24,16 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    namespace modalias
-    { /////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : Modalias
-      //
-      /** Hardware abstaction layer.
-       * Singleton.
-      */
-      class Modalias
-      {
-        friend std::ostream & operator<<( std::ostream & str, const Modalias & obj );
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : Modalias
+    //
+    /** Hardware abstaction layer singleton.
+     */
+    class Modalias
+    {
+      friend std::ostream & operator<<( std::ostream & str, const Modalias & obj );
 
       public:
         /** Implementation  */
@@ -52,13 +48,28 @@ namespace zypp
 
       public:
 
-        /** */
-        bool query( const std::string & cap_r ) const;
-
-        /** */
-        bool query( const std::string & cap_r,
-                    Rel op_r,
-                    const std::string & val_r ) const;
+        /** Checks if a device on the system matches a modalias pattern.
+         *
+         * Returns \c false if no matching device is found, and the modalias
+         * of the first matching device otherwise. (More than one device
+         * may match a given pattern.)
+         *
+         * On a system that has the following device,
+         * \code
+         *   pci:v00008086d0000265Asv00008086sd00004556bc0Csc03i00
+         * \endcode
+         * the following query will return \c true:
+         * \code
+         *   modalias_matches("pci:v00008086d0000265Asv*sd*bc*sc*i*")
+         * \endcode
+         */
+        bool query( IdString cap_r ) const
+        { return query( cap_r.c_str() ); }
+        /** \overload */
+        bool query( const char * cap_r ) const;
+        /** \overload */
+        bool query( const std::string & cap_r ) const
+        { return query( cap_r.c_str() ); }
 
       private:
         /** Singleton ctor. */
@@ -66,15 +77,12 @@ namespace zypp
 
         /** Pointer to implementation */
         RW_pointer<Impl> _pimpl;
-      };
-      ///////////////////////////////////////////////////////////////////
-
-      /** \relates Modalias Stream output */
-      std::ostream & operator<<( std::ostream & str, const Modalias & obj );
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace modalias
+    };
     ///////////////////////////////////////////////////////////////////
+
+    /** \relates Modalias Stream output */
+    std::ostream & operator<<( std::ostream & str, const Modalias & obj );
+
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

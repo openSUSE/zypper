@@ -637,12 +637,12 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  {
+  if ( 0 ) {
     Measure x( "PROCXY" );
     pool.proxy();
   }
 
-  {
+  if ( 0 ) {
     Measure x( "ALL PATTERNS" );
 
     for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
@@ -661,7 +661,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     PoolItem pi ( getPi<Package>("amarok") );
     MIL << pi << endl;
@@ -670,8 +670,8 @@ try {
       pi.status().setTransact( true, ResStatus::USER );
       solve();
       vdumpPoolStats( USR << "Transacting:"<< endl,
-                    make_filter_begin<resfilter::ByTransact>(pool),
-                    make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+                      make_filter_begin<resfilter::ByTransact>(pool),
+                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
     }
   }

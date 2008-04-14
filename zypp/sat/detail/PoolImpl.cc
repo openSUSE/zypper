@@ -25,6 +25,8 @@
 #include "zypp/Capability.h"
 #include "zypp/Locale.h"
 
+#include "zypp/target/modalias/Modalias.h"
+
 using std::endl;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
@@ -67,15 +69,40 @@ namespace zypp
 	  }
       }
 
-      detail::IdType PoolImpl::nsCallback( struct _Pool *, void *data, detail::IdType lhs, detail::IdType rhs )
+      detail::IdType PoolImpl::nsCallback( struct _Pool *, void * data, detail::IdType lhs, detail::IdType rhs )
       {
-        if ( lhs == NAMESPACE_LANGUAGE )
+        // lhs:    the namespace identifier, e.g. NAMESPACE:MODALIAS
+        // rhs:    the value, e.g. pci:v0000104Cd0000840[01]sv*sd*bc*sc*i*
+        // return: 0 if not supportded
+        //         1 if supported by the system
+        //        -1  AFAIK it's also possible to return a list of solvables that support it, but don't know how.
+
+        static const detail::IdType RET_unsupported     = 0;
+        static const detail::IdType RET_systemProperty = 1;
+        switch ( lhs )
         {
-          const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
-          return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? 0 : 1;
+          case NAMESPACE_LANGUAGE:
+            {
+              const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
+              return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? RET_unsupported : RET_systemProperty;
+            }
+            break;
+
+          case NAMESPACE_MODALIAS:
+            {
+              return target::Modalias::instance().query( IdString(rhs) ) ? RET_systemProperty : RET_unsupported;
+            }
+            break;
+
+          case NAMESPACE_FILESYSTEM:
+            {
+
+            }
+            break;
         }
-        DBG << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
-        return 0;
+
+        INT << "Unhandled " << Capability( lhs ) << " vs. " << Capability( rhs ) << endl;
+        return RET_unsupported;
       }
 
       ///////////////////////////////////////////////////////////////////
