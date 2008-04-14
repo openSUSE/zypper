@@ -207,6 +207,8 @@ namespace zypp
      * addAttribute(), addDep in string form */
     const AttrRawStrMap & attributes() const;
 
+    const StrContainer & attribute(const sat::SolvAttr & attr) const;
+
     const Kinds & kinds() const;
 
     const StrContainer & repos() const;

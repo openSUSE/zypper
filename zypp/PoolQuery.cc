@@ -800,6 +800,13 @@ attremptycheckend:
   PoolQuery::attributes() const
   { return _pimpl->_attrs; }
 
+  const PoolQuery::StrContainer &
+  PoolQuery::attribute(const sat::SolvAttr & attr) const
+  {
+    AttrRawStrMap::const_iterator it = _pimpl->_attrs.find(attr); 
+    return it != _pimpl->_attrs.end() ? it->second : StrContainer();
+  }
+
   const PoolQuery::Kinds &
   PoolQuery::kinds() const
   { return _pimpl->_kinds; }
