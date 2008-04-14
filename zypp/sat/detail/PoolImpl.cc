@@ -17,6 +17,8 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Measure.h"
+#include "zypp/base/WatchFile.h"
+#include "zypp/base/Sysconfig.h"
 
 #include "zypp/ZConfig.h"
 
@@ -38,6 +40,9 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
+
+
+
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
@@ -84,7 +89,7 @@ namespace zypp
           case NAMESPACE_LANGUAGE:
             {
               const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
-              return locale2Solver.find( IdString(rhs) ) == locale2Solver.end() ? RET_unsupported : RET_systemProperty;
+              return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
             }
             break;
 
@@ -96,7 +101,16 @@ namespace zypp
 
           case NAMESPACE_FILESYSTEM:
             {
-
+              static const Pathname sysconfigStoragePath( "/etc/sysconfig/storage" );
+              static WatchFile      sysconfigFile( sysconfigStoragePath, WatchFile::NO_INIT );
+              static std::set<std::string> requiredFilesystems;
+              if ( sysconfigFile.hasChanged() )
+              {
+                requiredFilesystems.clear();
+                str::split( base::sysconfig::read( sysconfigStoragePath )["USED_FS_LIST"],
+                            std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
+              }
+              return requiredFilesystems.find( IdString(rhs).asString() ) != requiredFilesystems.end() ? RET_systemProperty : RET_unsupported;
             }
             break;
         }
