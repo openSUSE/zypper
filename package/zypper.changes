@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 14 23:45:54 CEST 2008 - jkupec@suse.cz
+
+- use --force-resolution and --no-force-resolution instead of
+  --force-resolution <on|off>
+- r9627
+
+-------------------------------------------------------------------
 Mon Apr 14 22:15:13 CEST 2008 - jkupec@suse.cz
 
 - --no-recommends added to install, update, dist-upgrade and verify
