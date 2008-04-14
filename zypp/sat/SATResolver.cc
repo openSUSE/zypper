@@ -429,6 +429,14 @@ class SetValidate : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem item )
     {
+	
+	if (isKind<Product>(item.resolvable())) {
+	    // FIXME This is a hack for registration 11.0 beta1
+	    item.status().setSatisfied();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied. THIS IS A HACK !");
+	    return true;
+	}
+
 	int ret = solvable_trivial_installable_map(item.satSolvable().get(), &installedmap, &conflictsmap);
 	item.status().setUndetermined();        
     
