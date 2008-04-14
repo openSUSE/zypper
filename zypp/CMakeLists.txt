@@ -510,6 +510,12 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/SolutionAction.h
   solver/detail/Testcase.h
   solver/detail/Types.h
+  solver/detail/SolverQueueItem.h
+  solver/detail/SolverQueueItemInstall.h
+  solver/detail/SolverQueueItemDelete.h
+  solver/detail/SolverQueueItemUpdate.h
+  solver/detail/SolverQueueItemInstallOneOf.h
+
 )
 
 INSTALL(  FILES
@@ -538,11 +544,6 @@ SET( zypp_sat_HEADERS
   sat/LocaleSupport.h
   sat/LookupAttr.h
   sat/SATResolver.h
-  sat/SolverQueueItem.h
-  sat/SolverQueueItemInstall.h
-  sat/SolverQueueItemDelete.h
-  sat/SolverQueueItemUpdate.h
-  sat/SolverQueueItemInstallOneOf.h
   sat/SolvAttr.h
 )
 
