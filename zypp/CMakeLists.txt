@@ -521,6 +521,7 @@ SET( zypp_sat_SRCS
   sat/LookupAttr.cc
   sat/SATResolver.cc
   sat/SolvAttr.cc
+  sat/SolverQueueItem.cc
 )
 
 SET( zypp_sat_HEADERS
@@ -532,6 +533,7 @@ SET( zypp_sat_HEADERS
   sat/LocaleSupport.h
   sat/LookupAttr.h
   sat/SATResolver.h
+  sat/SolverQueueItem.h
   sat/SolvAttr.h
 )
 
