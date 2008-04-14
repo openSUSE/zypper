@@ -1307,26 +1307,17 @@ static void set_force_resolution(Zypper & zypper)
 {
   // --force-resolution command line parameter value
   tribool force_resolution = indeterminate;
-  unsigned int count = zypper.cOpts().count("force-resolution");
-  if (count)
-  {
-    string value = copts["force-resolution"].front();
-    if (value == "on" || value == "true" || value == "1" || value == "yes")
-      force_resolution = true;
-    else if (value == "off" || value == "false" || value == "0" || value == "no")
-      force_resolution = false;
-    else
-    {
-      zypper.out().error(
-        boost::str(format(_("Invalid value '%s' of the %s parameter"))
-          % value % "force-resolution"),
-        boost::str(format(_("Valid values are '%s' and '%s'")) % "on" % "off"));
-    }
 
-    if (count > 1)
-      zypper.out().warning(boost::str(format(
-        _("Considering only the first value of the %s parameter, ignoring the rest"))
-          % "force-resolution"));
+  if (zypper.cOpts().count("force-resolution"))
+    force_resolution = true;
+  if (zypper.cOpts().count("no-force-resolution"))
+  {
+    if (force_resolution)
+      zypper.out().warning(str::form(
+        // translators: meaning --force-resolution and --no-force-resolution
+        _("%s conflicts with %s, will use the less aggressive %s"),
+          "--force-resolution", "--no-force-resolution", "--no-force-resolution"));
+    force_resolution = false;
   }
 
   // if --force-resolution was not specified on the command line, force

@@ -747,7 +747,8 @@ void Zypper::processCommandOptions()
       // rug compatibility, we have --auto-agree-with-licenses
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"debug-solver",              no_argument,       0, 0},
-      {"force-resolution",          required_argument, 0, 'R'},
+      {"no-force-resolution",       no_argument,       0, 'R'},
+      {"force-resolution",          no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -776,7 +777,8 @@ void Zypper::processCommandOptions()
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "    --no-recommends             Do not install recommended packages, only required.\n"
-      "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the installation, do not actually install\n"
     )) % "package, patch, pattern, product" % "package");
     break;
@@ -795,7 +797,8 @@ void Zypper::processCommandOptions()
       // rug compatibility, we have global --non-interactive
       {"no-confirm", no_argument,       0, 'y'},
       {"debug-solver", no_argument,     0, 0},
-      {"force-resolution", required_argument, 0, 'R'},
+      {"no-force-resolution", no_argument, 0, 'R'},
+      {"force-resolution", no_argument, 0,  0 },
       {"dry-run",    no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",    no_argument,       0, 'N'},
@@ -818,7 +821,8 @@ void Zypper::processCommandOptions()
       "-n, --name                      Select resolvables by plain name, not by capability\n"
       "-C, --capability                Select resolvables by capability\n"
       "    --debug-solver              Create solver test case for debugging\n"  
-      "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the removal, do not actually remove\n"
     )) % "package, patch, pattern, product" % "package");
     break;
@@ -1090,7 +1094,8 @@ void Zypper::processCommandOptions()
       {"agree-to-third-party-licenses",  no_argument,  0, 0},
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
-      {"force-resolution",          required_argument, 0, 'R'},
+      {"no-force-resolution",       no_argument,       0, 'R'},
+      {"force-resolution",          no_argument,       0,  0 },
       {"no-recommends",             no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
@@ -1121,7 +1126,8 @@ void Zypper::processCommandOptions()
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "    --debug-solver              Create solver test case for debugging\n"
       "    --no-recommends             Do not install recommended packages, only required.\n"
-      "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
+      "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+      "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the update, do not actually update\n"
     )) % "package, patch, pattern, product" % "patch");
     break;
