@@ -148,11 +148,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
       plabel.clear();
     }
     zypper.out().error(boost::str(
-      format(_("No URLs defined for '%s'.")) % repo.name()));
+      format(_("No URIs defined for '%s'.")) % repo.name()));
     if (!repo.filepath().empty())
       zypper.out().info(boost::str(format(
           // TranslatorExplanation the first %s is a .repo file path
-          _("Please add one or more base URL (baseurl=URL) entries to %s for repository '%s'."))
+          _("Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."))
           % repo.filepath() % repo.name()));
 
     return true; // error
@@ -179,7 +179,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
     }
     zypper.out().error(e,
         boost::str(format(_("Repository '%s' is invalid.")) % repo.name()),
-        _("Please check if the URLs defined for this repository are pointing to a valid repository."));
+        _("Please check if the URIs defined for this repository are pointing to a valid repository."));
 
     return true; // error
   }
@@ -1157,7 +1157,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 
     ostringstream s;
     s << _("Could not determine the type of the repository."
-        " Please check if the defined URLs (see below) point to a valid repository:");
+        " Please check if the defined URIs (see below) point to a valid repository:");
     for(RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
         uit != repo.baseUrlsEnd(); ++uit)
       s << (*uit) << endl;
@@ -1172,9 +1172,9 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-        _("Problem transferring repository data from specified URL:"),
-        is_cd ? "" : _("Please check whether the specified URL is accessible."));
-    ERR << "Problem transferring repository data from specified URL" << endl;
+        _("Problem transferring repository data from specified URI:"),
+        is_cd ? "" : _("Please check whether the specified URI is accessible."));
+    ERR << "Problem transferring repository data from specified URI" << endl;
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
@@ -1203,7 +1203,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     // TranslatorExplanation used as e.g. "Autorefresh: Yes"
     s << _("Autorefresh") << ": " << (repo.autorefresh() ? _("Yes") : _("No")) << endl;
 
-    s << "URL:";
+    s << "URI:";
     for (RepoInfo::urls_const_iterator uit = repo.baseUrlsBegin();
         uit != repo.baseUrlsEnd(); uit++)
       s << " " << *uit;
@@ -1264,7 +1264,7 @@ void add_repo_from_file( Zypper & zypper,
                          const std::string & repo_file_url,
                          tribool enabled, tribool autorefresh)
 {
-  //! \todo handle local .repo files, validate the URL
+  //! \todo handle local .repo files, validate the URI
   Url url = make_url(repo_file_url);
   if (!url.isValid())
   {
@@ -1281,8 +1281,8 @@ void add_repo_from_file( Zypper & zypper,
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-      _("Problem accessing the file at the specified URL") + string(":"),
-      _("Please check if the URL is valid and accessible."));
+      _("Problem accessing the file at the specified URI") + string(":"),
+      _("Please check if the URI is valid and accessible."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
@@ -1290,8 +1290,8 @@ void add_repo_from_file( Zypper & zypper,
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-      _("Problem parsing the file at the specified URL") + string(":"),
-      // TranslatorExplanation don't translate the URL if the URL itself is not translated.
+      _("Problem parsing the file at the specified URI") + string(":"),
+      // TranslatorExplanation don't translate the URI if the URI itself is not translated.
       // Also don't translate the '.repo' string.
       _("Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
@@ -1301,7 +1301,7 @@ void add_repo_from_file( Zypper & zypper,
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-      _("Problem encountered while trying to read the file at the specified URL") + string(":"));
+      _("Problem encountered while trying to read the file at the specified URI") + string(":"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     return;
   }
@@ -1322,7 +1322,7 @@ void add_repo_from_file( Zypper & zypper,
     if(repo.baseUrlsEmpty())
     {
       zypper.out().warning(boost::str(format(
-        _("Repository '%s' has no URL defined, skipping.")) % repo.name()));
+        _("Repository '%s' has no URI defined, skipping.")) % repo.name()));
       continue;
     }
 
@@ -1666,7 +1666,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
     bool is_url = false;
     if (looks_like_url (anystring)) {
 	is_url = true;
-	cerr_vv << "Looks like a URL" << endl;
+	cerr_vv << "Looks like a URI" << endl;
 
 	Url url;
 	try {
@@ -1674,7 +1674,7 @@ void rename_source( const std::string& anystring, const std::string& newalias )
 	}
 	catch ( const Exception & excpt_r ) {
 	  ZYPP_CAUGHT( excpt_r );
-	  cerr << _("URL is invalid: ") << excpt_r.asUserString() << endl;
+	  cerr << _("URI is invalid: ") << excpt_r.asUserString() << endl;
 	}
 	if (url.isValid ()) {
 	  try {

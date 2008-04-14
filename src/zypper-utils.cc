@@ -212,7 +212,7 @@ Url make_url (const string & url_s)
   catch ( const Exception & excpt_r ) {
     ZYPP_CAUGHT( excpt_r );
     ostringstream s;
-    s << _("Given URL is invalid") << ": " << urlstr
+    s << _("Given URI is invalid") << ": " << urlstr
       << " (" << excpt_r.asUserString() << ")";
     Zypper::instance()->out().error(s.str());
   }

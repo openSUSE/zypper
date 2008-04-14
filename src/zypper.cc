@@ -757,7 +757,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
-    _command_help = boost::str(format(_(
+    _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
       "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -767,20 +767,20 @@ void Zypper::processCommandOptions()
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Install resolvables only from repository specified by alias.\n"
-      "-t, --type <type>               Type of resolvable (%s)\n"
-      "                                Default: %s\n"
-      "-n, --name                      Select resolvables by plain name, not by capability\n"
-      "-C, --capability                Select resolvables by capability\n"
-      "-f, --force                     Install even if the item is already installed (reinstall)\n"
+      "-r, --repo <alias|#|URI>        Install resolvables only from the specified repository.\n"
+      "-t, --type <type>               Type of resolvable (%s).\n"
+      "                                Default: %s.\n"
+      "-n, --name                      Select resolvables by plain name, not by capability.\n"
+      "-C, --capability                Select resolvables by capability.\n"
+      "-f, --force                     Install even if the item is already installed (reinstall).\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
-      "    --debug-solver              Create solver test case for debugging\n"
+      "    --debug-solver              Create solver test case for debugging.\n"
       "    --no-recommends             Do not install recommended packages, only required.\n"
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the installation, do not actually install\n"
-    )) % "package, patch, pattern, product" % "package");
+      "-D, --dry-run                   Test the installation, do not actually install.\n"
+    ), "package, patch, pattern, product", "package");
     break;
   }
 
@@ -806,7 +806,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = remove_options;
-    _command_help = boost::str(format(_(
+    _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "package"
       "remove (rm) [options] <capability> ...\n"
@@ -815,16 +815,16 @@ void Zypper::processCommandOptions()
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Operate only with resolvables from repository specified by alias.\n"
-      "-t, --type <type>               Type of resolvable (%s)\n"
-      "                                Default: %s\n"
-      "-n, --name                      Select resolvables by plain name, not by capability\n"
-      "-C, --capability                Select resolvables by capability\n"
-      "    --debug-solver              Create solver test case for debugging\n"  
+      "-r, --repo <alias|#|URI>        Operate only with resolvables from the specified repository.\n"
+      "-t, --type <type>               Type of resolvable (%s).\n"
+      "                                Default: %s.\n"
+      "-n, --name                      Select resolvables by plain name, not by capability.\n"
+      "-C, --capability                Select resolvables by capability.\n"
+      "    --debug-solver              Create solver test case for debugging.\n"  
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the removal, do not actually remove\n"
-    )) % "package, patch, pattern, product" % "package");
+      "-D, --dry-run                   Test the removal, do not actually remove.\n"
+    ), "package, patch, pattern, product", "package");
     break;
   }
 
@@ -891,19 +891,21 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
-    _command_help = boost::str(format(_(
+    _command_help = str::form(_(
       // TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-      "addrepo (ar) [options] <URI> [<alias>]\n"
+      "addrepo (ar) [options] <URI> <alias>\n"
+      "addrepo (ar) [options] <FILE.repo>\n"
       "\n"
-      "Add repository specified by URI to the system and assing the specified alias to it or specified by URI to repo file.\n"
+      "Add a repository to the sytem. The repository can be specified by its URI"
+      " or can be read from specified .repo file (even remote).\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <FILE.repo>  Read the URL and alias from a file (even remote)\n"
-      "-t, --type <TYPE>       Type of repository (%s)\n"
-      "-d, --disable           Add the repository as disabled\n"
-      "-c, --check             Probe URI\n"
+      "-r, --repo <FILE.repo>  Read the URI and alias from a file (even remote).\n"
+      "-t, --type <TYPE>       Type of repository (%s).\n"
+      "-d, --disable           Add the repository as disabled.\n"
+      "-c, --check             Probe URI.\n"
       "-x, --nocheck           Don't probe URI, probe later during refresh.\n"
-    )) % "yast2, rpm-md, plaindir");
+    ), "yast2, rpm-md, plaindir");
     break;
   }
 
@@ -921,7 +923,7 @@ void Zypper::processCommandOptions()
       "List all defined repositories.\n"
       "\n"
       "  Command options:\n"
-      "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file\n"
+      "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
     );
     break;
   }
@@ -936,13 +938,13 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_delete_options;
     _command_help = _(
-      "removerepo (rr) [options] <alias|#|URL>\n"
+      "removerepo (rr) [options] <alias|#|URI>\n"
       "\n"
-      "Remove repository specified by alias or URL.\n"
+      "Remove repository specified by alias, number or URI.\n"
       "\n"
       "  Command options:\n"
-      "    --loose-auth\tIgnore user authentication data in the URL\n"
-      "    --loose-query\tIgnore query string in the URL\n"
+      "    --loose-auth   Ignore user authentication data in the URI.\n"
+      "    --loose-query  Ignore query string in the URI.\n"
     );
     break;
   }
@@ -955,9 +957,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_rename_options;
     _command_help = _(
-      "renamerepo [options] <alias|#|URL> <new-alias>\n"
+      "renamerepo [options] <alias|#|URI> <new-alias>\n"
       "\n"
-      "Assign new alias to the repository specified by alias,number or URL.\n"
+      "Assign new alias to the repository specified by alias, number or URI.\n"
       "\n"
       "This command has no additional options.\n"
     );
@@ -979,16 +981,16 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_modify_options;
     _command_help = _(
-      "modifyrepo (mr) <options> <alias|#|URL>\n"
+      "modifyrepo (mr) <options> <alias|#|URI>\n"
       "\n"
-      "Modify properties of the repository specified by alias, number or URL.\n"
+      "Modify properties of the repository specified by alias, number or URI.\n"
       "\n"
       "  Command options:\n"
-      "-d, --disable             Disable the repository (but don't remove it)\n"
-      "-e, --enable              Enable a disabled repository\n"
-      "-r, --refresh             Enable auto-refresh of the repository\n"
-      "-n, --no-refresh          Disable auto-refresh of the repository\n"
-      "-p, --priority <1-99>     Set priority of the repository. Seem the manual page for details.\n"
+      "-d, --disable             Disable the repository (but don't remove it).\n"
+      "-e, --enable              Enable a disabled repository.\n"
+      "-r, --refresh             Enable auto-refresh of the repository.\n"
+      "-n, --no-refresh          Disable auto-refresh of the repository.\n"
+      "-p, --priority <1-99>     Set priority of the repository. See the manual page for details.\n"
     );
     break;
   }
@@ -1007,17 +1009,17 @@ void Zypper::processCommandOptions()
     };
     specific_options = refresh_options;
     _command_help = _(
-      "refresh (ref) [alias|#] ...\n"
+      "refresh (ref) [alias|#|URI] ...\n"
       "\n"
-      "Refresh repositories specified by their alias, number or URL."
+      "Refresh repositories specified by their alias, number or URI."
       " If none are specified, all enabled repositories will be refreshed.\n"
       "\n"
       "  Command options:\n"
-      "-f, --force              Force a complete refresh\n"
-      "-b, --force-build        Force rebuild of the database\n"
-      "-d, --force-download     Force download of raw metadata\n"
+      "-f, --force              Force a complete refresh.\n"
+      "-b, --force-build        Force rebuild of the database.\n"
+      "-d, --force-download     Force download of raw metadata.\n"
       "-B, --build-only         Only build the database, don't download metadata.\n"
-      "-D, --download-only      Only download raw metadata, don't build the database\n"
+      "-D, --download-only      Only download raw metadata, don't build the database.\n"
       "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
     );
     break;
@@ -1060,7 +1062,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = list_updates_options;
-    _command_help = boost::str(format(_(
+    _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
       "list-updates [options]\n"
@@ -1068,13 +1070,13 @@ void Zypper::processCommandOptions()
       "List all available updates\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>         Type of resolvable (%s)\n"
-      "                          Default: %s\n"
-      "-r, --repo <alias|#|URI>  List only updates from the repository specified by the alias.\n"
-      "    --best-effort         Do a 'best effort' approach to update, updates to\n"
-      "                          a lower than latest-and-greatest version are\n"
-      "                          also acceptable.\n"
-    )) % "package, patch, pattern, product" % "patch");
+      "-t, --type <type>               Type of resolvable (%s).\n"
+      "                                Default: %s.\n"
+      "-r, --repo <alias|#|URI>        List only updates from the specified repository.\n"
+      "    --best-effort               Do a 'best effort' approach to update. Updates\n"
+      "                                to a lower than the latest version are\n"
+      "                                also acceptable.\n"
+    ), "package, patch, pattern, product", "patch");
     break;
   }
 
@@ -1108,7 +1110,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = update_options;
-    _command_help = boost::str(format(_(
+    _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
       "update (up) [options]\n"
@@ -1117,19 +1119,21 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-t, --type <type>               Type of resolvable (%s)\n"
-      "                                Default: %s\n"
-      "-r, --repo <alias|#|URI>        Limit updates to the repository specified by the alias.\n"
-      "    --skip-interactive          Skip interactive updates\n"
+      "-t, --type <type>               Type of resolvable (%s).\n"
+      "                                Default: %s.\n"
+      "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
+      "    --skip-interactive          Skip interactive updates.\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
-      "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
-      "    --debug-solver              Create solver test case for debugging\n"
+      "    --best-effort               Do a 'best effort' approach to update. Updates\n"
+      "                                to a lower than the latest version are\n"
+      "                                also acceptable.\n"
+      "    --debug-solver              Create solver test case for debugging.\n"
       "    --no-recommends             Do not install recommended packages, only required.\n"
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
-      "-D, --dry-run                   Test the update, do not actually update\n"
-    )) % "package, patch, pattern, product" % "patch");
+      "-D, --dry-run                   Test the update, do not actually update.\n"
+    ), "package, patch, pattern, product", "patch");
     break;
   }
 
@@ -1154,7 +1158,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>        Limit the upgrade to the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
       "    --no-recommends             Do not install recommended packages, only required.\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See man zypper for more details.\n"
@@ -1206,7 +1210,7 @@ void Zypper::processCommandOptions()
       "-i, --installed-only       Show only packages that are already installed.\n"
       "-u, --uninstalled-only     Show only packages that are not currently installed.\n"
       "-t, --type <type>          Search only for packages of the specified type.\n"
-      "-r, --repo <alias|#|URI>         Search only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
       "    --sort-by-repo         Sort packages by repository.\n"
       "\n"
@@ -1232,7 +1236,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-r, --repo <alias|#|URI>  Check for patches only in the repository specified by the alias.\n"
+      "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
     );
     break;
   }
@@ -1296,18 +1300,16 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = info_options;
-    _command_help =
-      string(
-      _("info <name> ...\n"
+    _command_help = str::form(_(
+        "info <name> ...\n"
         "\n"
-        "Show full information for packages")) + "\n"
-        "\n" +
-      _("  Command options:") + "\n" +
-      _("-r, --repo <alias|#|URI>  Work only with the repository specified by the alias.") + "\n" +
-      boost::str(format(
-      _("-t, --type <type>         Type of resolvable (%s)\n"
-        "                          Default: %s"))
-          % "package, patch, pattern, product" % "package") + "\n"; 
+        "Show detailed information for packages\n"
+        "\n"
+        "  Command options:\n"
+        "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
+        "-t, --type <type>         Type of resolvable (%s).\n"
+        "                          Default: %s."
+      ), "package, patch, pattern, product", "package"); 
 
     break;
   }
@@ -1321,13 +1323,13 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = patch_info_options;
-    _command_help = _(
+    _command_help = str::form(_(
       "patch-info <patchname> ...\n"
       "\n"
-      "Show detailed information for patches\n"
+      "Show detailed information for patches.\n"
       "\n"
-      "This is a rug compatibility alias for 'zypper info -t patch'\n"
-    );
+      "This is a rug compatibility alias for '%s'.\n"
+    ), "zypper info -t patch");
     break;
   }
 
@@ -1340,13 +1342,13 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
+    _command_help = str::form(_(
       "pattern-info <pattern_name> ...\n"
       "\n"
-      "Show detailed information for patterns\n"
+      "Show detailed information for patterns.\n"
       "\n"
-      "This is a rug compatibility alias for 'zypper info -t pattern'\n"
-    );
+      "This is a rug compatibility alias for '%s'.\n"
+    ), "zypper info -t pattern");
     break;
   }
 
@@ -1359,13 +1361,13 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
+    _command_help = str::form(_(
       "product-info <product_name> ...\n"
       "\n"
-      "Show detailed information for products\n"
+      "Show detailed information for products.\n"
       "\n"
-      "This is a rug compatibility alias for 'zypper info -t product'\n"
-    );
+      "This is a rug compatibility alias for '%s'.\n"
+    ), "zypper info -t product");
     break;
   }
 
@@ -1379,7 +1381,7 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "moo\n"
       "\n"
-      "Show an animal\n"
+      "Show an animal.\n"
       "\n"
       "This command has no additional options.\n"
       );
@@ -1394,14 +1396,15 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = xml_updates_options;
-    _command_help = _(
+    _command_help = str::form(_(
       "xml-updates\n"
       "\n"
-      "Show updates and patches in xml format\n"
+      "Show updates and patches in xml format. This command is deprecated and will"
+      "eventually be dropped in favor of '%s'.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>  Work only with updates from repository specified by alias.\n"
-    );
+      "-r, --repo <alias|#|URI>  Work only with updates from the specified repository.\n"
+    ), "zypper --xmlout install -t package -t patch");
     break;
   }
 
@@ -1417,7 +1420,7 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = string(_(
+    _command_help = str::form(_(
       "addlock (al) <packagename>\n"
       "\n"
       "Add a package lock. Specify packages to lock by exact name or by a"
@@ -1425,12 +1428,9 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
-     ))
-     + str::form(
-       _("-t, --type <type>         Type of resolvable (%s)\n"
-         "                          Default: %s\n")
-         , "package, patch, pattern, product" 
-         , "package");
+      "-t, --type <type>         Type of resolvable (%s).\n"
+      "                          Default: %s.\n"
+    ), "package, patch, pattern, product", "package");
 
     break;
   }
@@ -1736,11 +1736,11 @@ void Zypper::doCommand()
       }
       else
       {
-	MIL << "Repository not found by given alias, number or URL." << endl;
+	MIL << "Repository not found by given alias, number or URI." << endl;
 	out().error(boost::str(format(
 	  //TranslatorExplanation %s is string which was not found (can be url,
 	  //alias or the repo number)
-	  _("Repository %s not found by alias, number or URL."))
+	  _("Repository %s not found by alias, number or URI."))
 	    % *it));
       }
     }
@@ -1769,8 +1769,8 @@ void Zypper::doCommand()
 
     if (_arguments.size() < 2)
     {
-      out().error(_("Too few arguments. At least URL and alias are required."));
-      ERR << "Too few arguments. At least URL and alias are required." << endl;
+      out().error(_("Too few arguments. At least URI and alias are required."));
+      ERR << "Too few arguments. At least URI and alias are required." << endl;
       out().info(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
