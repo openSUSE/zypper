@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 14 15:43:08 CEST 2008 - jkupec@suse.cz
+
+- package lock management commands added (addlock, removelock, and
+  locks) (fate #120118, fate #302148)
+- r9612
+
+-------------------------------------------------------------------
 Mon Apr 14 01:17:55 CEST 2008 - jkupec@suse.cz
 
 - added Recommends: logrotate cron bash-completion (bnc #379553)
