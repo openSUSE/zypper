@@ -18,17 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEM_H
-#define ZYPP_SOLVER_DETAIL_QUEUEITEM_H
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H
 
 #include <iosfwd>
-#include <list>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ResPool.h"
+#include "zypp/sat/SolverQueueItem.h"
+#include "zypp/PoolItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,66 +37,40 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef enum {
-    QUEUE_ITEM_TYPE_UNKNOWN = 0,
-    QUEUE_ITEM_TYPE_UPDATE,    
-    QUEUE_ITEM_TYPE_INSTALL,
-    QUEUE_ITEM_TYPE_DELETE,
-    QUEUE_ITEM_TYPE_INSTALL_ONE_OF,    
-} SolverQueueItemType;
-
-DEFINE_PTR_TYPE(SolverQueueItem);
+DEFINE_PTR_TYPE(SolverQueueItemUpdate);
 	
-typedef std::list<SolverQueueItem_Ptr> SolverQueueItemList;
-
-#define CMP(a,b) (((a) < (b)) - ((b) < (a)))
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : SolverQueueItem
+//	CLASS NAME : SolverQueueItemUpdate
 
-class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable {
+class SolverQueueItemUpdate : public SolverQueueItem {
     
   private:
 
-    SolverQueueItemType _type;
-    ResPool _pool;    
-
-  protected:
-
-    SolverQueueItem (SolverQueueItemType type, const ResPool & pool);
+    PoolItem _item;  	// the item to-be-updated
+    bool _soft;         // if triggered by a soft requirement (a recommends)
 
   public:
 
-    virtual ~SolverQueueItem();
-
+    SolverQueueItemUpdate (const ResPool & pool, const PoolItem & item, bool soft = false);
+    virtual ~SolverQueueItemUpdate();
+    
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItem & obj)
+    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemUpdate & obj)
     { return obj.dumpOn (str); }
-    friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemList & itemlist);
 
     // ---------------------------------- accessors
 
-    ResPool pool (void) const { return _pool; }
+    bool isSoft (void) const { return _soft; }    
 
     // ---------------------------------- methods
 
-    void copy (const SolverQueueItem *from);
-
-    bool isDelete (void) const { return _type == QUEUE_ITEM_TYPE_DELETE; }
-    bool isInstall (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL; }
-    bool isUpdate (void) const { return _type == QUEUE_ITEM_TYPE_UPDATE; }
-    bool isInstallOneOf (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL_ONE_OF; }    
-
-
-    virtual SolverQueueItem_Ptr copy (void) const = 0;
-    virtual int cmp (SolverQueueItem_constPtr item) const = 0;
-    int compare (SolverQueueItem_constPtr item) const { return CMP(_type, item->_type); }
-
-
+    virtual SolverQueueItem_Ptr copy (void) const;
+    virtual int cmp (SolverQueueItem_constPtr item) const;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -112,4 +83,4 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_QUEUEITEM_H
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMUPDATE_H

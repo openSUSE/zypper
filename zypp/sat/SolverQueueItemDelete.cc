@@ -19,8 +19,7 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/sat/SolverQueueItem.h"
-
+#include "zypp/sat/SolverQueueItemDelete.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,54 +33,43 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItem);
+IMPL_PTR_TYPE(SolverQueueItemDelete);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItem::dumpOn( std::ostream & os ) const
+SolverQueueItemDelete::dumpOn( std::ostream & os ) const
 {
-    switch (_type) {
-      case QUEUE_ITEM_TYPE_UNKNOWN       :	os << "unknown"; break;
-      case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;	  
-      case QUEUE_ITEM_TYPE_INSTALL       :	os << "install"; break;
-      case QUEUE_ITEM_TYPE_DELETE      :	os << "delete"; break;
-      case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;	  
-      default: os << "?solverqueueitem?"; break;
-    }
-    return os;
-}
+    os << "[" << (_soft?"Soft":"") << "Delete: ";
+    os << _name;
 
-
-ostream&
-operator<<( ostream & os, const SolverQueueItemList & itemlist )
-{
-    for (SolverQueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
-	if (iter != itemlist.begin())
-	    os << "," << endl << "\t";
-	os << **iter;
-    }
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItem::SolverQueueItem (SolverQueueItemType type, const ResPool & pool)
-    : _type (type)
-    , _pool (pool)
+SolverQueueItemDelete::SolverQueueItemDelete (const ResPool & pool, std::string name, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_DELETE, pool)
+    , _name (name)
+    , _soft (soft)
 {
 }
 
 
-SolverQueueItem::~SolverQueueItem()
+SolverQueueItemDelete::~SolverQueueItemDelete()
 {
 }
 
 //---------------------------------------------------------------------------
 
-void
-SolverQueueItem::copy (const SolverQueueItem *from)
+SolverQueueItem_Ptr
+SolverQueueItemDelete::copy (void) const
 {
+    SolverQueueItemDelete_Ptr new_delete = new SolverQueueItemDelete (pool(), _name);
+    new_delete->SolverQueueItem::copy(this);
+
+    new_delete->_soft = _soft;
+    return new_delete;
 }
 
 

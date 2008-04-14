@@ -522,6 +522,10 @@ SET( zypp_sat_SRCS
   sat/SATResolver.cc
   sat/SolvAttr.cc
   sat/SolverQueueItem.cc
+  sat/SolverQueueItemInstall.cc
+  sat/SolverQueueItemDelete.cc
+  sat/SolverQueueItemUpdate.cc
+  sat/SolverQueueItemInstallOneOf.cc
 )
 
 SET( zypp_sat_HEADERS
@@ -534,6 +538,10 @@ SET( zypp_sat_HEADERS
   sat/LookupAttr.h
   sat/SATResolver.h
   sat/SolverQueueItem.h
+  sat/SolverQueueItemInstall.h
+  sat/SolverQueueItemDelete.h
+  sat/SolverQueueItemUpdate.h
+  sat/SolverQueueItemInstallOneOf.h
   sat/SolvAttr.h
 )
 
