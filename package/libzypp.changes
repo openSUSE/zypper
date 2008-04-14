@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 15 00:54:07 CEST 2008 - jkupec@suse.cz
+
+- Locks API cleaned-up, iterator added, light read() added
+- PoolQuery::attribute(SolvAttr) getter added
+- revision 9609
+
+-------------------------------------------------------------------
 Mon Apr 14 17:00:05 CEST 2008 - dmacvicar@suse.de
 
 - reenable zypp-query-pool
