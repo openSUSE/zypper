@@ -16,7 +16,6 @@ using std::cout;
 using std::endl;
 using std::string;
 using namespace zypp;
-using namespace zypp::locks;
 using namespace boost::unit_test;
 
 bool isLocked( const sat::Solvable & solvable )

@@ -33,8 +33,6 @@ using namespace zypp::str;
 
 namespace zypp
 {
-namespace locks
-{
 
 Locks& Locks::instance()
 {
@@ -79,7 +77,7 @@ struct LockingOutputIterator
   
   private:
   OutputIterator& out;
- };
+};
 
 void Locks::loadLocks( const Pathname& file )
 {
@@ -117,7 +115,6 @@ void Locks::addLock(const ui::Selectable& selectable)
   q.addKind( selectable.kind() );
   q.setMatchExact();
   q.setCaseSensitive(true);
-  q.requireAll();
   addLock( q );
 }
 
@@ -337,5 +334,4 @@ void Locks::saveLocks( const Pathname& file )
   report->finish(SavingLocksReport::NO_ERROR);
 }
 
-} // ns locks
 } // ns zypp

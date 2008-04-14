@@ -622,81 +622,75 @@ namespace zypp
   } // namespace target
   ///////////////////////////////////////////////////////////////////
 
-class PoolQuery;
-  ///////////////////////////////////////////////////////////////////
-  namespace locks
+  class PoolQuery;
+
+  struct CleanEmptyLocksReport : public callback::ReportBase
   {
-    struct CleanEmptyLocksReport : public callback::ReportBase
-    {
-      enum Action {
-        ABORT,  // abort and return error
-        DELETE, // delete empty lock    
-	IGNORE  // skip empty lock
-      };
+    enum Action {
+      ABORT,  // abort and return error
+      DELETE, // delete empty lock    
+      IGNORE  // skip empty lock
+    };
 
-      enum Error {
-	NO_ERROR,
-	ABORTED		// cleaning aborted
-      };
+    enum Error {
+      NO_ERROR,
+      ABORTED // cleaning aborted
+    };
 
-      virtual void start(
+    virtual void start(
+    ) {}
+
+    virtual bool progress(int /*value*/)
+    { return true; }
+
+    /**
+     * When find empty lock ask what to do with it
+     */
+    virtual Action execute(
+        const PoolQuery& /*error*/
+     ) { return DELETE; }
+
+     virtual void finish(
+       Error /*error*/
       ) {}
 
-      virtual bool progress(int /*value*/)
-      { return true; }
+  };
 
-      /**
-       * When find empty lock ask what to do with it
-       */
-      virtual Action execute(
-  	 const PoolQuery& /*error*/
-       ) { return DELETE; }
-
-       virtual void finish(
-         Error /*error*/
-        ) {}
-
+  struct SavingLocksReport : public callback::ReportBase
+  {
+    enum Action {
+      ABORT,  // abort and return error
+      DELETE, // delete conflicted lock    
+      IGNORE  // skip conflict lock
     };
 
-    struct SavingLocksReport : public callback::ReportBase
-    {
-      enum Action {
-        ABORT,  // abort and return error
-        DELETE, // delete conflicted lock    
-	IGNORE  // skip conflict lock
-      };
-
-      enum Error {
-	NO_ERROR,
-	ABORTED		// cleaning aborted
-      };
-
-      enum ConflictState{
-        SAME_RESULTS,
-        INTERSECT
-      };
-
-      virtual void start() {}
-
-      virtual bool progress() /*still alive*/
-      { return true; }
-
-      /**
-       * When user unlock something which is locked by non-identical query
-       */
-      virtual Action conflict(
-  	 const PoolQuery&, /*problematic query*/
-         ConflictState 
-       ) { return DELETE; }
-
-       virtual void finish(
-         Error /*error*/
-        ) {}
-
+    enum Error {
+      NO_ERROR,
+      ABORTED  // cleaning aborted
     };
-    /////////////////////////////////////////////////////////////////
-  } // namespace locks
-  ///////////////////////////////////////////////////////////////////
+
+    enum ConflictState{
+      SAME_RESULTS,
+      INTERSECT
+    };
+
+    virtual void start() {}
+
+    virtual bool progress() /*still alive*/
+    { return true; }
+
+    /**
+     * When user unlock something which is locked by non-identical query
+     */
+    virtual Action conflict(
+	 const PoolQuery&, /*problematic query*/
+       ConflictState 
+     ) { return DELETE; }
+
+     virtual void finish(
+       Error /*error*/
+      ) {}
+  };
 
 
   /////////////////////////////////////////////////////////////////

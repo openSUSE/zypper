@@ -183,7 +183,7 @@ namespace zypp
         return 0;
 
       //TODO catch posibble exceptions
-      locks::Locks::instance().loadLocks();
+      Locks::instance().loadLocks();
 
       //current locks api doesn't support counting lock
       //so count it after
