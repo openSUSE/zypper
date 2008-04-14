@@ -751,6 +751,7 @@ void Zypper::processCommandOptions()
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
+      {"no-recommends",             no_argument,       0,  0 },
       {"help",                      no_argument,       0, 'h'},
       {0, 0, 0, 0}
     };
@@ -774,6 +775,7 @@ void Zypper::processCommandOptions()
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
       "    --debug-solver              Create solver test case for debugging\n"
+      "    --no-recommends             Do not install recommended packages, only required.\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
       "-D, --dry-run                   Test the installation, do not actually install\n"
     )) % "package, patch, pattern, product" % "package");
@@ -844,7 +846,7 @@ void Zypper::processCommandOptions()
     );
     break;
   }
-  
+
   case ZypperCommand::VERIFY_e:
   {
     static struct option verify_options[] = {
@@ -854,6 +856,7 @@ void Zypper::processCommandOptions()
       // rug uses -N shorthand
       {"dry-run", no_argument, 0, 'N'},
       {"repo", required_argument, 0, 'r'},
+      {"no-recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -864,6 +867,7 @@ void Zypper::processCommandOptions()
       "Check whether dependencies of installed packages are satisfied.\n"
       "\n"
       "  Command options:\n"
+      "    --no-recommends      Do not install recommended packages, only required.\n"
       "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
       "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
     );
@@ -1087,6 +1091,7 @@ void Zypper::processCommandOptions()
       {"best-effort",               no_argument,       0, 0},
       {"debug-solver",              no_argument,       0, 0},
       {"force-resolution",          required_argument, 0, 'R'},
+      {"no-recommends",             no_argument,       0,  0 },
       {"dry-run",                   no_argument,       0, 'D'},
       // rug uses -N shorthand
       {"dry-run",                   no_argument,       0, 'N'},
@@ -1115,6 +1120,7 @@ void Zypper::processCommandOptions()
       "                                See man zypper for more details.\n"
       "    --best-effort               Do a 'best effort' approach to update, updates to a lower than latest-and-greatest version are also acceptable\n"
       "    --debug-solver              Create solver test case for debugging\n"
+      "    --no-recommends             Do not install recommended packages, only required.\n"
       "-R, --force-resolution <on|off> Force the solver to find a solution (even agressive)\n"
       "-D, --dry-run                   Test the update, do not actually update\n"
     )) % "package, patch, pattern, product" % "patch");

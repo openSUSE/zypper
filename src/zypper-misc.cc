@@ -1363,6 +1363,8 @@ bool resolve(Zypper & zypper)
   apply_locks(zypper);
   dump_pool(); // debug
   set_force_resolution(zypper);
+  // install also recommended packages unless --no-recommends is specified
+  God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
@@ -1373,11 +1375,10 @@ static bool verify(Zypper & zypper)
   apply_locks(zypper);
   dump_pool();
   zypper.out().info(_("Verifying dependencies..."), Out::HIGH);
-  //! \todo should these two setting be optional through command options? 
   // don't force aggressive solutions
   God->resolver()->setForceResolve(false);
-  // don't drag new packages - just verify the needed ones
-  God->resolver()->setOnlyRequires(true);
+  // install also recommended packages unless --no-recommends is specified
+  God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
   DBG << "Calling the solver to verify system..." << endl;
   return God->resolver()->verifySystem();
 }
