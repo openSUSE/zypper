@@ -229,8 +229,7 @@ bool looks_like_rpm_file(const string & s)
 
   if (s.rfind(".rpm") == s.size() - 4 || // ends with .rpm
       s.find("./") == 0 ||               // starts with ./, ../, or / indicating
-      s.find("../") == 0 ||              //  a local path
-      s.find("/") == 0)
+      s.find("../") == 0)                //  a local path
     return true;
 
   return false;
