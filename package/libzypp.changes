@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr 15 12:57:42 CEST 2008 - jreidinger@suse.cz
+
+- save do nothing if no locks added/removed
+- fix bug with multiple save lock
+- don't save same query multiple times
+- improve tests 
+- revision 9644
+
+-------------------------------------------------------------------
 Tue Apr 15 09:34:29 CEST 2008 - schubi@suse.de
 
 - added new translations
