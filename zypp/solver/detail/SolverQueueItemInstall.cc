@@ -40,9 +40,10 @@ IMPL_PTR_TYPE(SolverQueueItemInstall);
 std::ostream &
 SolverQueueItemInstall::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Install: ";
-    os << _name;
-
+    os << "[" << (_soft?"Soft":"") << "Install: "
+    << _name
+    << "]";
+    
     return os;
 }
 
@@ -62,6 +63,20 @@ SolverQueueItemInstall::~SolverQueueItemInstall()
 
 //---------------------------------------------------------------------------
 
+bool SolverQueueItemInstall::addRule (Queue & q, Pool *SATPool)
+{
+    Id id = str2id( SATPool, _name.c_str(), 0 );
+    queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME );
+    queue_push( &(q), id);
+    if (_soft) {
+	queue_push( &(q), SOLVER_WEAK );
+	queue_push( &(q), id);
+    }
+    MIL << "Install " << _name << (_soft ? "(soft)" : "")
+	<< " with SAT-Pooly: " << id << endl;        
+    return true;
+}
+
 SolverQueueItem_Ptr
 SolverQueueItemInstall::copy (void) const
 {
@@ -71,7 +86,6 @@ SolverQueueItemInstall::copy (void) const
     new_install->_soft = _soft;
     return new_install;
 }
-
 
 int
 SolverQueueItemInstall::cmp (SolverQueueItem_constPtr item) const

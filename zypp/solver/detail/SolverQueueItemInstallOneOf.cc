@@ -40,21 +40,21 @@ IMPL_PTR_TYPE(SolverQueueItemInstallOneOf);
 std::ostream &
 SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "InstallOneOf: ";
+    os << "[" << "InstallOneOf: ";
     for (PoolItemList::const_iterator iter = _oneOfList.begin();
 	 iter != _oneOfList.end();
 	 iter++)
 	os << *iter;
-
+    os << "]";
+    
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList, bool soft)
+SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList)
     : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL_ONE_OF, pool)
     , _oneOfList (itemList)
-    , _soft (soft)
 {
 }
 
@@ -65,13 +65,32 @@ SolverQueueItemInstallOneOf::~SolverQueueItemInstallOneOf()
 
 //---------------------------------------------------------------------------
 
+bool SolverQueueItemInstallOneOf::addRule (Queue & q, Pool *SATPool)
+{
+    bool ret = true;
+    MIL << "Install one of: " << endl;
+    queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF );
+    for (PoolItemList::const_iterator iter = _oneOfList.begin(); iter != _oneOfList.end(); iter++) {
+	Id id = (*iter)->satSolvable().id();
+	if (id == ID_NULL) {
+	    ERR << *iter << " not found" << endl;
+	    ret = false;
+	} else {
+	    MIL << "    candidate:" << *iter << " with the SAT-Pool ID: " << id << endl;
+	    queue_push( &(q), id );    		    
+	}
+    }
+    queue_push( &(q), 0 ); // finish candidate
+    
+    return ret;
+}
+
 SolverQueueItem_Ptr
 SolverQueueItemInstallOneOf::copy (void) const
 {
-    SolverQueueItemInstallOneOf_Ptr new_installOneOf = new SolverQueueItemInstallOneOf (pool(), _oneOfList, _soft);
+    SolverQueueItemInstallOneOf_Ptr new_installOneOf = new SolverQueueItemInstallOneOf (pool(), _oneOfList);
     new_installOneOf->SolverQueueItem::copy(this);
-
-    new_installOneOf->_soft = _soft;
+    
     return new_installOneOf;
 }
 

@@ -66,7 +66,8 @@ class SolverQueueItemDelete : public SolverQueueItem {
     bool isSoft (void) const { return _soft; }    
 
     // ---------------------------------- methods
-
+    
+    virtual bool addRule (Queue & q, Pool *SATPool);
     virtual SolverQueueItem_Ptr copy (void) const;
     virtual int cmp (SolverQueueItem_constPtr item) const;
 };

@@ -40,8 +40,8 @@ IMPL_PTR_TYPE(SolverQueueItemDelete);
 std::ostream &
 SolverQueueItemDelete::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Delete: ";
-    os << _name;
+    os << "[" << (_soft?"Soft":"") << "Delete: "
+       << _name << "]";
 
     return os;
 }
@@ -61,6 +61,20 @@ SolverQueueItemDelete::~SolverQueueItemDelete()
 }
 
 //---------------------------------------------------------------------------
+
+bool SolverQueueItemDelete::addRule (Queue & q, Pool *SATPool)
+{
+    Id id = str2id( SATPool, _name.c_str(), 0 );
+    queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME );
+    queue_push( &(q), id);
+    if (_soft) {
+	queue_push( &(q), SOLVER_WEAK );
+	queue_push( &(q), id);
+    }    
+    MIL << "Delete " << _name << (_soft ? "(soft)" : "")
+	<< " with SAT-Pool: " << id << endl;    
+    return true;
+}
 
 SolverQueueItem_Ptr
 SolverQueueItemDelete::copy (void) const

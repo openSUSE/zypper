@@ -40,8 +40,8 @@ IMPL_PTR_TYPE(SolverQueueItemUpdate);
 std::ostream &
 SolverQueueItemUpdate::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Update: ";
-    os << _item;
+    os << "[" << (_soft?"Soft":"") << "Update: " <<
+	_item << "]";
 
     return os;
 }
@@ -62,6 +62,19 @@ SolverQueueItemUpdate::~SolverQueueItemUpdate()
 }
 
 //---------------------------------------------------------------------------
+
+bool SolverQueueItemUpdate::addRule (Queue & q, Pool *SATPool)
+{
+    Id id = _item.satSolvable().id();
+    if (id == ID_NULL) {
+	ERR << "Update explicit: " << _item << " not found" << endl;
+	return false;
+    }
+    MIL << "Update explicit " << _item << " with the SAT-Pool ID: " << id << endl;
+    queue_push( &(q), SOLVER_INSTALL_SOLVABLE_UPDATE );
+    queue_push( &(q), id );    
+    return true;
+}
 
 SolverQueueItem_Ptr
 SolverQueueItemUpdate::copy (void) const
