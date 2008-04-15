@@ -25,6 +25,7 @@
 #include <list>
 #include <string>
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
@@ -48,7 +49,6 @@ typedef enum {
     QUEUE_ITEM_TYPE_INSTALL_ONE_OF,    
 } SolverQueueItemType;
 
-DEFINE_PTR_TYPE(SolverQueueItem);
 	
 typedef std::list<SolverQueueItem_Ptr> SolverQueueItemList;
 
