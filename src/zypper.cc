@@ -913,6 +913,14 @@ void Zypper::processCommandOptions()
   {
     static struct option service_list_options[] = {
       {"export", required_argument, 0, 'e'},
+      {"uri", no_argument, 0, 'u'},
+      {"url", no_argument, 0, 'u'},
+      {"priority", no_argument, 0, 'p'},
+      {"details", no_argument, 0, 'd'},
+      {"sort-by-priority", no_argument, 0, 'P'},
+      {"sort-by-uri", no_argument, 0, 'U'},
+      {"sort-by-alias", no_argument, 0, 'A'},
+      {"sort-by-name", no_argument, 0, 'N'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -924,6 +932,13 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
+      "-u, --uri                 Show also base URI of repositories.\n"
+      "-p, --priority            Show also repository priority.\n"
+      "-d, --details             Show more information like URI, priority, type.\n"
+      "-U, --sort-by-uri         Sort the list by URI.\n"
+      "-P, --sort-by-priority    Sort the list by repository priority.\n"
+      "-A, --sort-by-alias       Sort the list by alias.\n"
+      "-N, --sort-by-name        Sort the list by name.\n"
     );
     break;
   }

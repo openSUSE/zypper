@@ -605,12 +605,27 @@ static void print_repo_list(Zypper & zypper,
                             const std::list<zypp::RepoInfo> &repos )
 {
   Table tbl;
+  bool all = zypper.cOpts().count("details");
+  bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url") || zypper.cOpts().count("sort-by-uri");
+  bool showprio = zypper.cOpts().count("priority") || zypper.cOpts().count("sort-by-priority");
 
   // header
   TableHeader th;
-  th << "#" << _("Enabled") << _("Refresh") << _("Type") << _("Alias") << _("Name");
-  if (zypper.out().verbosity() > Out::NORMAL)
-    th << "URI";
+  // fixed 'zypper repos' columns
+  th << "#"
+     << _("Alias")
+     << _("Name")
+     << _("Enabled")
+     // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
+     << _("Refresh");
+  // optional columns
+  if (all || showprio)
+    // translators: repository priority (in zypper repos -p or -d)
+    th << _("Priority");
+  if (all)
+    th << _("Type");
+  if (all || showuri)
+    th << _("URI");
   tbl << th;
 
   int i = 1;
@@ -619,23 +634,32 @@ static void print_repo_list(Zypper & zypper,
        it !=  repos.end(); ++it)
   {
     RepoInfo repo = *it;
-    TableRow tr (zypper.out().verbosity() > Out::NORMAL ? 6 : 7);
+    TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
 
     // number
     tr << str::numstring (i);
-    // enabled?
-    tr << (repo.enabled() ? _("Yes") : _("No"));
-    // autorefresh?
-    tr << (repo.autorefresh() ? _("Yes") : _("No"));
-    // type
-    tr << repo.type().asString();
     // alias
     tr << repo.alias();
     // name
     tr << repo.name();
+    // enabled?
+    tr << (repo.enabled() ? _("Yes") : _("No"));
+    // autorefresh?
+    tr << (repo.autorefresh() ? _("Yes") : _("No"));
+    // priority
+    if (all || showprio)
+      tr << str::numstring (repo.priority());
+    // type
+    if (all)
+      tr << repo.type().asString();
     // url
-    if (zypper.out().verbosity() > Out::NORMAL)
-      tr << (*repo.baseUrlsBegin()).asString(); //! \todo properly handle multiple baseurls
+    /**
+     * \todo properly handle multiple baseurls - show "(multiple)" and
+     * provide zypper lr [#|alias|URI] ... for showing full repo info
+     * (not in table)
+     */
+    if (all || showuri)
+      tr << (*repo.baseUrlsBegin()).asString();
 
     tbl << tr;
     i++;
@@ -645,7 +669,38 @@ static void print_repo_list(Zypper & zypper,
     zypper.out().info(_("No repositories defined."
         " Use the 'zypper addrepo' command to add one or more repositories."));
   else
+  {
+    // sort
+    if (zypper.cOpts().count("sort-by-uri"))
+    {
+      cout << "will sort by uri: ";
+      if (all)
+      {
+        tbl.sort(7);
+        cout << 7;
+      }
+      else if (showprio)
+      {
+        tbl.sort(6);
+        cout << 6;
+      }
+      else
+      {
+        tbl.sort(5);
+        cout << 5;
+      }
+      cout << endl;
+    }
+    else if (zypper.cOpts().count("sort-by-alias"))
+      tbl.sort(1);
+    else if (zypper.cOpts().count("sort-by-name"))
+      tbl.sort(2);
+    else if (zypper.cOpts().count("sort-by-priority"))
+      tbl.sort(5);
+
+    // print
     cout << tbl;
+  }
 }
 
 // ----------------------------------------------------------------------------
