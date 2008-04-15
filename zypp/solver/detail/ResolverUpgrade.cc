@@ -54,11 +54,10 @@
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Testcase.h"
+#include "zypp/solver/detail/SATResolver.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
 #include "zypp/Target.h"
-#include "zypp/sat/SATResolver.h"
-
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

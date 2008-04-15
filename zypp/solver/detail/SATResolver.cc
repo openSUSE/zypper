@@ -31,9 +31,9 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/ZConfig.h"
-#include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/WhatProvides.h"
+#include "zypp/solver/detail/SATResolver.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
 extern "C" {

@@ -23,9 +23,9 @@
 #include <sstream>
 
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/SATResolver.h"
 #include "zypp/Resolver.h"
 #include "zypp/ResolverProblem.h"
-#include "zypp/sat/SATResolver.h"
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"

@@ -494,7 +494,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/SolverQueueItemDelete.cc
   solver/detail/SolverQueueItemUpdate.cc
   solver/detail/SolverQueueItemInstallOneOf.cc
-
+  solver/detail/SATResolver.cc
 )
 
 SET( zypp_solver_detail_HEADERS
@@ -515,7 +515,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/SolverQueueItemDelete.h
   solver/detail/SolverQueueItemUpdate.h
   solver/detail/SolverQueueItemInstallOneOf.h
-
+  solver/detail/SATResolver.h
 )
 
 INSTALL(  FILES
@@ -531,7 +531,6 @@ SET( zypp_sat_SRCS
   sat/WhatProvides.cc
   sat/LocaleSupport.cc
   sat/LookupAttr.cc
-  sat/SATResolver.cc
   sat/SolvAttr.cc
 )
 
@@ -543,7 +542,6 @@ SET( zypp_sat_HEADERS
   sat/WhatProvides.h
   sat/LocaleSupport.h
   sat/LookupAttr.h
-  sat/SATResolver.h
   sat/SolvAttr.h
 )
 

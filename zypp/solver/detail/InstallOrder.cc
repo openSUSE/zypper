@@ -32,10 +32,11 @@
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Algorithm.h"
 
+#include "zypp/solver/detail/SATResolver.h"
+
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
 #include "zypp/NameKindProxy.h"
-#include "zypp/sat/SATResolver.h"
 #include "zypp/sat/Pool.h"
 
 /////////////////////////////////////////////////////////////////////////

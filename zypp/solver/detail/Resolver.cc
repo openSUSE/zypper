@@ -23,6 +23,7 @@
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Testcase.h"
+#include "zypp/solver/detail/SATResolver.h"
 
 #include "zypp/Capabilities.h"
 #include "zypp/ZConfig.h"
@@ -34,7 +35,6 @@
 #include "zypp/ResFilters.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
-#include "zypp/sat/SATResolver.h"
 
 #define MAXSOLVERRUNS 5
 
