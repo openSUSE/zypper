@@ -179,8 +179,8 @@ int main(int argc, char **argv)
     }
     catch (const Exception &excpt_r )
     {
-      // TranslatorExplanation %s = detailed low level (unstranslated) error message
       string error = excpt_r.msg();
+      // TranslatorExplanation %s = detailed low level (unstranslated) error message
       errors.push_back(str::form(_("Couldn't restore repository.\nDetail: %s"), error.c_str()));
     }
   }

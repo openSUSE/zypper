@@ -259,7 +259,7 @@ static void mark_for_install(Zypper & zypper,
   if (!installer.item)
   {
     zypper.out().error(
-        // translators: meaning a package %s or provider of capability %s
+      // translators: meaning a package %s or provider of capability %s
       str::form(_("'%s' not found"), name.c_str()));
     WAR << str::form("'%s' not found", name.c_str()) << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
@@ -754,9 +754,9 @@ static tribool show_problem (Zypper & zypper,
       "Choose from above solutions by number or skip, retry or cancel",
       solution_count);
   else
-    // translators: translate 'c' to whatever you translated the 'c' in
-    // "#/c" and "#/s/r/c" strings
     prompt_text = _PL(
+      // translators: translate 'c' to whatever you translated the 'c' in
+      // "c" and "s/r/c" strings
       "Choose the above solution using '1' or cancel using 'c'",
       "Choose from above solutions by number or cancel",
       solution_count);

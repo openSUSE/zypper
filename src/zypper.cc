@@ -501,8 +501,8 @@ void Zypper::processGlobalOptions()
     case ZypperCommand::REMOVE_LOCK_e:
     case ZypperCommand::LIST_LOCKS_e:
     {
-      // TranslatorExplanation The %s is "--plus-repo"
       out().warning(boost::str(format(
+        // TranslatorExplanation The %s is "--plus-repo"
         _("The %s option has no effect here, ignoring."))
         % "--plus-repo"));
       break;

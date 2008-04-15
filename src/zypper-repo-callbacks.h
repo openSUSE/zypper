@@ -58,7 +58,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     // seems this is never called, the progress is reported by the media backend anyway
     INT << "not impelmented" << endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
-    //display_step( "apply-delta", _("Downloading delta") /*+ _delta.asString()*/, value );
+    //display_step( "apply-delta", ~("Downloading delta") /*+ _delta.asString()*/, value );
     return true;
   }
 
@@ -173,7 +173,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     // seems this is never called, the progress is reported by the media backend anyway
     INT << "not impelmented" << endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
-//    display_step( "download-resolvable", _("Downloading") /* + resolvable_ptr->name() */, value );
+//    display_step( "download-resolvable", ~("Downloading") /* + resolvable_ptr->name() */, value );
     return true;
   }
 

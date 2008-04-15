@@ -44,8 +44,8 @@ namespace zypp {
           return true;
         }
 
-        // TranslatorExplanation: speaking of a file
         std::string question = boost::str(boost::format(
+            // TranslatorExplanation: speaking of a file
             _("%s is unsigned, continue?")) % file);
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
@@ -71,8 +71,8 @@ namespace zypp {
           return true;
         }
 
-        // TranslatorExplanation: speaking of a file
         std::string question = boost::str(boost::format(
+            // TranslatorExplanation: speaking of a file
             _("%s is signed with an unknown key %s. Continue?")) % file % id);
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
