@@ -11,6 +11,7 @@
 #include <fstream>
 #include <boost/function.hpp>
 #include <boost/function_output_iterator.hpp>
+#include <algorithm>
 
 #include "zypp/base/Regex.h"
 #include "zypp/base/String.h"
@@ -64,6 +65,18 @@ Locks::LockList::size_type Locks::size()
 bool Locks::empty()
 { return _pimpl->locks.empty(); }
 
+struct ApplyLock
+{
+  void operator()(const PoolQuery& query) const
+  {
+    for_( it,query.begin(),query.end() )
+    {
+      PoolItem item(*it);
+      item.status().setLock(true,ResStatus::USER);
+    }
+  }
+};
+
 /**
  * iterator that takes lock, lock all solvables from query 
  * and send query to output iterator
@@ -77,12 +90,7 @@ struct LockingOutputIterator
 
   void operator()(const PoolQuery& query) const
   {
-    for_( it,query.begin(),query.end() )
-    {
-      PoolItem item(*it);
-      item.status().setLock(true,ResStatus::USER);
-    }
-    
+    ApplyLock a;a(query);
     *out++ = query;
   }
   
@@ -97,18 +105,6 @@ void Locks::readAndApply( const Pathname& file )
   LockingOutputIterator<insert_iterator<LockList> > lout(ii);
   readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
 }
-
-struct ApplyLock
-{
-  void operator()(const PoolQuery& query) const
-  {
-    for_( it,query.begin(),query.end() )
-    {
-      PoolItem item(*it);
-      item.status().setLock(true,ResStatus::USER);
-    }
-  }
-};
 
 void Locks::read( const Pathname& file )
 {
@@ -344,20 +340,33 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 {
   for_(it,toRemove.begin(),toRemove.end())
   {
-    if (!report->progress())
-      return false;
     std::set<sat::Solvable> s(it->begin(),it->end());
     locks.remove_if(LocksRemovePredicate(s,*it, report));
   }
 
   if (!report->progress())
     return false;
-  locks.insert(locks.end(),toAdd.begin(),toAdd.end());
+
+  for_( it, toAdd.begin(), toAdd.end() )
+  {
+    if( std::find( locks.begin(), locks.end(), *it ) == locks.end() )
+      locks.push_back( *it );
+  }
+
+  toAdd.clear();
+  toRemove.clear();
+
   return true;
 }
 
 void Locks::save( const Pathname& file )
 {
+  if( (_pimpl->toAdd.size() | _pimpl->toRemove.size())==0 )
+  {
+    DBG << "nothing changed in locks - no write to file" << endl;
+    return;
+  }
+
   callback::SendReport<SavingLocksReport> report;
   report->start();
   if (!_pimpl->mergeList(report))

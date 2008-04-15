@@ -23,8 +23,6 @@ bool isLocked( const sat::Solvable & solvable )
   zypp::PoolItem pi( zypp::ResPool::instance().find( solvable ) );
   if( pi.status().isLocked() )
     return true;
-  cout << "non-locked resolvable" << pi.resolvable() << endl;
-  // name: yast2-sound 2.16.2-9 i586
   return false;
 }
 
@@ -51,23 +49,10 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
 //  0xx basic queries
 /////////////////////////////////////////////////////////////////////////////
 
-// no conditions, default query
-// result: all available resolvables
-BOOST_AUTO_TEST_CASE(locks_1)
-{
-  cout << "****000****"  << endl;
-  PoolQuery q;
-  Locks::instance().addLock(q);
-  for_(it,q.begin(),q.end())
-  {
-    BOOST_CHECK(isLocked(*it));
-  }
-}
-
 // default query + one search string
 // q.addString("foo");
 // result: all resolvables having at least one attribute matching foo
-BOOST_AUTO_TEST_CASE(locks_2)
+BOOST_AUTO_TEST_CASE(locks_1)
 {
   cout << "****001****"  << endl;
   PoolQuery q;
@@ -77,6 +62,7 @@ BOOST_AUTO_TEST_CASE(locks_2)
   {
     BOOST_CHECK(isLocked(*it));
   }
+  Locks::instance().removeLock(q); //clear before next test
 }
 
 BOOST_AUTO_TEST_CASE(locks_save_load)
@@ -91,30 +77,49 @@ BOOST_AUTO_TEST_CASE(locks_save_load)
   {
     BOOST_CHECK(isLocked(*it));
   }
-  Locks::instance().removeLock(q);
-  for_(it,q.begin(),q.end())
-  {
-    BOOST_CHECK(!isLocked(*it));
-  }
 #if 1 
   filesystem::TmpFile testfile;
   //Pathname testfile(TESTS_SRC_DIR);
     //  testfile += "/zypp/data/Locks/testlocks";
+  Locks::instance().removeLock(q); 
   Locks::instance().save(testfile);
   Locks::instance().readAndApply(testfile);
-  //still locked
-  for_(it,q.begin(),q.end())
-  {
-    BOOST_CHECK(isLocked(*it));
-  }
-  Locks::instance().removeLock(q); //need twice because finded from previous test
-  Locks::instance().save(testfile);
-  Locks::instance().readAndApply(testfile);
-  //now unlocked - first unlock remove indetical lock from previous test
-  //and next unlock remove lock from lockfile
+  //now unlocked
   for_(it,q.begin(),q.end())
   {
     BOOST_CHECK(!isLocked(*it));
   }
+  BOOST_CHECK(Locks::instance().size()==0);
 #endif
+}
+
+BOOST_AUTO_TEST_CASE(locks_save_without_redundancy)
+{
+  cout << "****save without redundancy****"  << endl;
+  PoolQuery q;
+  q.addString("zypper");
+  Locks& locks = Locks::instance();
+  locks.addLock(q);
+  locks.addLock(q);
+  locks.save("/dev/null");
+  BOOST_CHECK( locks.size()==1 );
+  locks.addLock(q);
+  locks.save("/dev/null");
+  BOOST_CHECK( locks.size()==1 );
+  locks.removeLock(q);
+  locks.save("/dev/null");
+  BOOST_CHECK( locks.size() == 0 );
+}
+
+BOOST_AUTO_TEST_CASE( locks_empty )
+{
+  cout << "****test and clear empty locks****"  << endl;
+  PoolQuery q;
+  q.addString("foo-bar-nonexist");
+  Locks& locks = Locks::instance();
+  locks.addLock(q);
+  locks.save( "/dev/null" ); //only need merge list
+  BOOST_CHECK( locks.existEmpty() );
+  locks.removeEmpty();
+  BOOST_CHECK( locks.size() == 0 );
 }
