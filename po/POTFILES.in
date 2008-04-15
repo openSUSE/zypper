@@ -8,6 +8,8 @@
 ../src/zypper-command.cc
 ../src/zypper-getopt.cc
 ../src/zypper-info.cc
+../src/zypper-locks.cc
+../src/zypper-search.cc
 ../src/zypper-keyring-callbacks.h
 ../src/zypper-main.h
 ../src/zypper-media-callbacks.h
