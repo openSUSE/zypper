@@ -75,6 +75,17 @@ SolverQueueItemInstallOneOf::copy (void) const
     return new_installOneOf;
 }
 
+int
+SolverQueueItemInstallOneOf::cmp (SolverQueueItem_constPtr item) const
+{
+    int cmp = this->compare (item);
+    if (cmp != 0)
+        return cmp;
+    SolverQueueItemInstallOneOf_constPtr install = dynamic_pointer_cast<const SolverQueueItemInstallOneOf>(item);
+
+    return (_oneOfList == install->_oneOfList) ? 0 : -1; // more evaluation would be not useful
+}
+
 
 //---------------------------------------------------------------------------
 

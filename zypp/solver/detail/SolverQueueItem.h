@@ -96,7 +96,7 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
 
 
     virtual SolverQueueItem_Ptr copy (void) const = 0;
-    //virtual int cmp (SolverQueueItem_constPtr item) const = 0;
+    virtual int cmp (SolverQueueItem_constPtr item) const = 0;
     int compare (SolverQueueItem_constPtr item) const { return CMP(_type, item->_type); }
 
 

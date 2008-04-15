@@ -69,7 +69,7 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
     // ---------------------------------- methods
 
     virtual SolverQueueItem_Ptr copy (void) const;
-    //virtual int cmp (SolverQueueItem_constPtr item) const;
+    virtual int cmp (SolverQueueItem_constPtr item) const;
 };
 
 ///////////////////////////////////////////////////////////////////

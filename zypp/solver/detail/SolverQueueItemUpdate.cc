@@ -73,6 +73,16 @@ SolverQueueItemUpdate::copy (void) const
     return new_update;
 }
 
+int
+SolverQueueItemUpdate::cmp (SolverQueueItem_constPtr item) const
+{
+    int cmp = this->compare (item);
+    if (cmp != 0)
+        return cmp;
+    SolverQueueItemUpdate_constPtr update = dynamic_pointer_cast<const SolverQueueItemUpdate>(item);
+    return compareByNVRA (_item.resolvable(), update->_item.resolvable());
+}
+
 
 //---------------------------------------------------------------------------
 

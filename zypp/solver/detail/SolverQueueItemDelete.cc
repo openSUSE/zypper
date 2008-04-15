@@ -72,6 +72,26 @@ SolverQueueItemDelete::copy (void) const
     return new_delete;
 }
 
+int
+SolverQueueItemDelete::cmp (SolverQueueItem_constPtr item) const
+{
+    int cmp = this->compare (item);
+    if (cmp != 0)
+        return cmp;
+    SolverQueueItemDelete_constPtr del = dynamic_pointer_cast<const SolverQueueItemDelete>(item);
+    if (_name != del->_name) {
+	return _name.compare(del->_name);
+    } else {
+	if (_soft == del->_soft) {
+	    return 0;
+	} else {
+	    if (_soft)
+		return 1;
+	    else
+		return -1;
+	}
+    }
+}
 
 //---------------------------------------------------------------------------
 
