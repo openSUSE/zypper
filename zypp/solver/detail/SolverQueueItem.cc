@@ -43,9 +43,10 @@ SolverQueueItem::dumpOn( std::ostream & os ) const
 {
     switch (_type) {
       case QUEUE_ITEM_TYPE_UNKNOWN       :	os << "unknown"; break;
-      case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;	  
+      case QUEUE_ITEM_TYPE_UPDATE        :	os << "update"; break;
+      case QUEUE_ITEM_TYPE_LOCK          :	os << "lock"; break;	  
       case QUEUE_ITEM_TYPE_INSTALL       :	os << "install"; break;
-      case QUEUE_ITEM_TYPE_DELETE      :	os << "delete"; break;
+      case QUEUE_ITEM_TYPE_DELETE        :	os << "delete"; break;
       case QUEUE_ITEM_TYPE_INSTALL_ONE_OF:	os << "install one of"; break;	  
       default: os << "?solverqueueitem?"; break;
     }

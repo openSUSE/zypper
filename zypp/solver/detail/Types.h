@@ -62,7 +62,8 @@ DEFINE_PTR_TYPE(SolverQueueItem);
 DEFINE_PTR_TYPE(SolverQueueItemUpdate);
 DEFINE_PTR_TYPE(SolverQueueItemDelete);
 DEFINE_PTR_TYPE(SolverQueueItemInstall);	
-DEFINE_PTR_TYPE(SolverQueueItemInstallOneOf);	
+DEFINE_PTR_TYPE(SolverQueueItemInstallOneOf);
+DEFINE_PTR_TYPE(SolverQueueItemLock);		
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

@@ -66,12 +66,13 @@ SolverQueueItemInstall::~SolverQueueItemInstall()
 bool SolverQueueItemInstall::addRule (Queue & q, Pool *SATPool)
 {
     Id id = str2id( SATPool, _name.c_str(), 0 );
-    queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME );
-    queue_push( &(q), id);
-    if (_soft) {
-	queue_push( &(q), SOLVER_WEAK );
-	queue_push( &(q), id);
+    if (_soft) {    
+	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME | SOLVER_WEAK  );
+    } else {
+	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME );
     }
+    queue_push( &(q), id);
+
     MIL << "Install " << _name << (_soft ? "(soft)" : "")
 	<< " with SAT-Pooly: " << id << endl;        
     return true;

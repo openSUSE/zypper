@@ -19,7 +19,7 @@
  */
 
 #include "zypp/base/Logger.h"
-#include "zypp/solver/detail/SolverQueueItemDelete.h"
+#include "zypp/solver/detail/SolverQueueItemLock.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -33,80 +33,81 @@ namespace zypp
 
 using namespace std;
 
-IMPL_PTR_TYPE(SolverQueueItemDelete);
+IMPL_PTR_TYPE(SolverQueueItemLock);
 
 //---------------------------------------------------------------------------
 
 std::ostream &
-SolverQueueItemDelete::dumpOn( std::ostream & os ) const
+SolverQueueItemLock::dumpOn( std::ostream & os ) const
 {
-    os << "[" << (_soft?"Soft":"") << "Delete: "
-       << _name << "]";
+    os << "[" << (_soft?"Soft":"") << "Lock: " <<
+	_item << "]";
 
     return os;
 }
 
 //---------------------------------------------------------------------------
 
-SolverQueueItemDelete::SolverQueueItemDelete (const ResPool & pool, std::string name, bool soft)
-    : SolverQueueItem (QUEUE_ITEM_TYPE_DELETE, pool)
-    , _name (name)
+SolverQueueItemLock::SolverQueueItemLock (const ResPool & pool,
+					      const PoolItem & item, bool soft)
+    : SolverQueueItem (QUEUE_ITEM_TYPE_LOCK, pool)
+    , _item (item)
     , _soft (soft)
 {
 }
 
 
-SolverQueueItemDelete::~SolverQueueItemDelete()
+SolverQueueItemLock::~SolverQueueItemLock()
 {
 }
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemDelete::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemLock::addRule (Queue & q, Pool *SATPool)
 {
-    Id id = str2id( SATPool, _name.c_str(), 0 );
-    if (_soft) {    
-	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | SOLVER_WEAK);
-    } else {
-	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME );	
+    Id id = _item.satSolvable().id();
+    if (id == ID_NULL) {
+	ERR << "Lock : " << _item << " not found" << endl;
+	return false;
     }
-    queue_push( &(q), id);
-
-    MIL << "Delete " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-Pool: " << id << endl;    
+    MIL << "Lock " << _item << " with the SAT-Pool ID: " << id << endl;
+    if (_item.status().isInstalled()) {    
+	if (_soft) {    
+	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK );
+	} else {
+	    queue_push( &(q), SOLVER_INSTALL_SOLVABLE );	
+	}
+    } else {
+	if (_soft) {    
+	    queue_push( &(q), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK );
+	} else {
+	    queue_push( &(q), SOLVER_ERASE_SOLVABLE );	
+	}	
+    }
+    queue_push( &(q), id );    
     return true;
 }
 
 SolverQueueItem_Ptr
-SolverQueueItemDelete::copy (void) const
+SolverQueueItemLock::copy (void) const
 {
-    SolverQueueItemDelete_Ptr new_delete = new SolverQueueItemDelete (pool(), _name);
-    new_delete->SolverQueueItem::copy(this);
+    SolverQueueItemLock_Ptr new_lock = new SolverQueueItemLock (pool(), _item);
+    new_lock->SolverQueueItem::copy(this);
 
-    new_delete->_soft = _soft;
-    return new_delete;
+    new_lock->_soft = _soft;
+    return new_lock;
 }
 
 int
-SolverQueueItemDelete::cmp (SolverQueueItem_constPtr item) const
+SolverQueueItemLock::cmp (SolverQueueItem_constPtr item) const
 {
     int cmp = this->compare (item);
     if (cmp != 0)
         return cmp;
-    SolverQueueItemDelete_constPtr del = dynamic_pointer_cast<const SolverQueueItemDelete>(item);
-    if (_name != del->_name) {
-	return _name.compare(del->_name);
-    } else {
-	if (_soft == del->_soft) {
-	    return 0;
-	} else {
-	    if (_soft)
-		return 1;
-	    else
-		return -1;
-	}
-    }
+    SolverQueueItemLock_constPtr lock = dynamic_pointer_cast<const SolverQueueItemLock>(item);
+    return compareByNVRA (_item.resolvable(), lock->_item.resolvable());
 }
+
 
 //---------------------------------------------------------------------------
 
