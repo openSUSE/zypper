@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr 15 11:25:48 CEST 2008 - jkupec@suse.cz
+
+- make translator comments visible
+- r9641
+
+-------------------------------------------------------------------
 Tue Apr 15 08:54:47 CEST 2008 - jreidinger@suse.cz
 
-- remove redundant -f (bnc #379889)
+- remove redundant -f in the man page (bnc #379889)
 - r9633 
 
 -------------------------------------------------------------------
