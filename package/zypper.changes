@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Apr 15 13:44:32 CEST 2008 - jreidinger@suse.cz
+
+- bash completion - if no option can be completed, return to
+  default behaviour. 
+- r9646
+
+-------------------------------------------------------------------
+=======
 Tue Apr 15 11:25:48 CEST 2008 - jkupec@suse.cz
 
 - make translator comments visible
