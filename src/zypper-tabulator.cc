@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cstring>
 
+#include "zypp/base/Logger.h"
+
 #include "zypper-tabulator.h"
 using namespace std;
 #include <wchar.h>
@@ -183,8 +185,8 @@ void Table::style (TableStyle st) {
 }
 
 void Table::sort (unsigned by_column) {
-  if (by_column >= _max_col) {
-#warning Provide proper error handling here
+  if (by_column > _max_col) {
+    ERR << "by_column >= _max_col (" << by_column << ">=" << _max_col << ")" << endl;
     return;
   }
 
