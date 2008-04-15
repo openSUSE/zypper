@@ -100,6 +100,7 @@ struct LockingOutputIterator
 
 void Locks::readAndApply( const Pathname& file )
 {
+  MIL << "read and apply locks from "<<file << endl;
   insert_iterator<LockList> ii( _pimpl->locks,
       _pimpl->locks.end() );
   LockingOutputIterator<insert_iterator<LockList> > lout(ii);
@@ -108,19 +109,22 @@ void Locks::readAndApply( const Pathname& file )
 
 void Locks::read( const Pathname& file )
 {
+  MIL << "read locks from "<<file << endl;
   readPoolQueriesFromFile(
     file, insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
 }
 
 
 void Locks::apply()
-{
+{ 
+  DBG << "apply locks" << endl;
   for_each(begin(), end(), ApplyLock());
 }
 
 
 void Locks::addLock( const PoolQuery& query )
 {
+  MIL << "add new lock" << endl;
   for_( it,query.begin(),query.end() )
   {
     PoolItem item(*it);
@@ -147,11 +151,13 @@ void Locks::addLock(const ui::Selectable& selectable)
   q.addKind( selectable.kind() );
   q.setMatchExact();
   q.setCaseSensitive(true);
+  DBG << "add lock by selectactable" << endl;
   addLock( q );
 }
 
 void Locks::removeLock( const PoolQuery& query )
 {
+  MIL << "remove lock" << endl;
   for_( it,query.begin(),query.end() )
   {
     PoolItem item(*it);
@@ -180,6 +186,7 @@ void Locks::removeLock( const ui::Selectable& s )
   q.setMatchExact();
   q.setCaseSensitive(true);
   q.requireAll();
+  DBG << "remove lock by selectactable" << endl;
   removeLock(q);
 }
 
@@ -243,6 +250,7 @@ public:
 
 void Locks::removeEmpty()
 {
+  MIL << "cleaning of locks" << endl;
   callback::SendReport<CleanEmptyLocksReport> report;
   report->start();
   size_t sum = _pimpl->locks.size();
@@ -252,6 +260,7 @@ void Locks::removeEmpty()
 
   if( p.aborted() )
   {
+    MIL << "cleaning aborted" << endl;
     report->finish(CleanEmptyLocksReport::ABORTED);
   }
   else 
@@ -316,6 +325,7 @@ public:
     default:
       return true;
     }
+    MIL << "find conflict: " << cs << endl;
     switch (report->conflict(q,cs))
     {
     case SavingLocksReport::ABORT:
@@ -338,6 +348,8 @@ public:
 
 bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 {
+  MIL << "merging list old: " << locks.size()
+    << " to add: " << toAdd.size() << "to remove: " << toRemove.size() << endl;
   for_(it,toRemove.begin(),toRemove.end())
   {
     std::set<sat::Solvable> s(it->begin(),it->end());
