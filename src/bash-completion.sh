@@ -111,4 +111,4 @@ _zypper() {
 	esac
 }
 
-complete -F _zypper zypper
+complete -F _zypper -o default zypper
