@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Apr 15 09:34:29 CEST 2008 - schubi@suse.de
+
+- added new translations
+- activate zypp-query-pool
+- Revision 9637
+- 4.12.1 
+
+-------------------------------------------------------------------
 Tue Apr 15 00:54:07 CEST 2008 - jkupec@suse.cz
 
 - Locks API cleaned-up, iterator added, light read() added
