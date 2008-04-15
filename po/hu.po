@@ -17,14 +17,14 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-31 15:30+0200\n"
-"PO-Revision-Date: 2008-04-03 10:19+0200\n"
+"PO-Revision-Date: 2008-04-13 20:51+0200\n"
 "Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
 "Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../zypp/sat/SATResolver.cc:757
 msgid ""
@@ -120,7 +120,7 @@ msgstr "akínai"
 #. language code: ach
 #: ../zypp/LanguageCode.cc:244
 msgid "Acoli"
-msgstr "acoli"
+msgstr "acsoli"
 
 #. language code: ada
 #: ../zypp/LanguageCode.cc:246
@@ -139,7 +139,7 @@ msgstr "További rpm kimenet:"
 #. language code: ady
 #: ../zypp/LanguageCode.cc:248
 msgid "Adyghe"
-msgstr "adyghe"
+msgstr "cserkesz"
 
 #. language code: aar aa
 #: ../zypp/LanguageCode.cc:238
@@ -871,7 +871,7 @@ msgstr "hámi nyelvek"
 #. language code: cha ch
 #: ../zypp/LanguageCode.cc:392
 msgid "Chamorro"
-msgstr "chamorro"
+msgstr "csamorro"
 
 # modules/dialup/dialup.ycp:231 modules/dialup/dialup.ycp:246
 # modules/dialup/dialup.ycp:259
@@ -892,12 +892,12 @@ msgstr "csecsen"
 #. language code: chr
 #: ../zypp/LanguageCode.cc:414
 msgid "Cherokee"
-msgstr "csirokí"
+msgstr "cseroki"
 
 #. language code: chy
 #: ../zypp/LanguageCode.cc:420
 msgid "Cheyenne"
-msgstr "sájenn"
+msgstr "csejenn"
 
 #. language code: chb
 #: ../zypp/LanguageCode.cc:394
@@ -928,7 +928,7 @@ msgstr "kínai"
 #. language code: chn
 #: ../zypp/LanguageCode.cc:408
 msgid "Chinook Jargon"
-msgstr "csinuk zsargon"
+msgstr "csinúk zsargon"
 
 #. language code: chp
 #: ../zypp/LanguageCode.cc:412
@@ -2166,9 +2166,9 @@ msgid "Israel"
 msgstr "Izrael"
 
 #: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
+#, c-format
 msgid "It %d, Can't open lock file: %s"
-msgstr "A solv-fájl nem nyitható meg: "
+msgstr "Eredménye %d, a zárolt fájl nem nyitható meg: %s"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -4062,7 +4062,7 @@ msgstr "tigrinja"
 #: ../zypp/media/MediaException.cc:207
 #, c-format
 msgid "Timeout exceed when access '%s'."
-msgstr ""
+msgstr "Időtúllépés a '%s' elérése közben."
 
 #. language code: tem
 #: ../zypp/LanguageCode.cc:1100

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-31 15:30+0200\n"
-"PO-Revision-Date: 2008-04-07 01:31+0400\n"
+"PO-Revision-Date: 2008-04-11 21:28+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../zypp/sat/SATResolver.cc:757
-#, fuzzy
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "Нет доступных для установки поставщиков %s"
+msgstr ""
+"\n"
+"поставщики, которые не возможно установить: "
 
 #: ../zypp/media/MediaException.cc:214
 #, c-format
@@ -683,9 +684,8 @@ msgid "Can't acquire the mutex lock"
 msgstr "Не удаётся получить блокировку взаимоисключения"
 
 #: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-#, fuzzy
 msgid "Can't add solvables to norepo."
-msgstr "Не удаётся add solvables to norepo."
+msgstr ""
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
@@ -740,9 +740,8 @@ msgid "Can't release the mutex lock"
 msgstr "Не удаётся освободить блокировку взаимоисключения"
 
 #: ../zypp/Repository.cc:101
-#, fuzzy
 msgid "Can't set RepoInfo for norepo."
-msgstr "Не удаётся выставить RepoInfo для norepo."
+msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -755,9 +754,8 @@ msgstr "Канада"
 
 #: ../zypp/KeyRing.cc:276
 #, c-format
-#, fuzzy
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr "Не удаётся создать публичный ключ %s из хранилища ключей %s в файле %s"
+msgstr ""
 
 #  Error message
 #: ../zypp/media/MediaException.cc:182
@@ -2091,9 +2089,9 @@ msgid "Israel"
 msgstr "Израиль"
 
 #: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
+#, c-format
 msgid "It %d, Can't open lock file: %s"
-msgstr "Невозможно открыть файл %1."
+msgstr ""
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -3214,9 +3212,8 @@ msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Путь '%s' на носителе '%s' не является файлом."
 
 #: ../zypp/url/UrlBase.cc:1184
-#, fuzzy
 msgid "Path Parameter parsing not supported for this URL"
-msgstr "Для данного URL-адреса анализ параметров пути не поддерживается"
+msgstr ""
 
 #: ../zypp/url/UrlBase.cc:727
 msgid "Path parameter parsing not supported for this URL"
@@ -4483,14 +4480,14 @@ msgid "deleted providers: "
 msgstr "удалённые поставщики: "
 
 #: ../zypp/sat/SATResolver.cc:899
-#, fuzzy, c-format
+#, c-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "Не выполнять установку или удаление затрагиваемых объектов разрешения зависимостей"
+msgstr "не просить удалить все объекты разрешения зависимостей, предоставляющие %s"
 
 #: ../zypp/sat/SATResolver.cc:884
-#, fuzzy, c-format
+#, c-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "Нет доступных для установки поставщиков %s"
+msgstr "не просить установить объект разрешения зависимостей, предоставляющий %s"
 
 #: ../zypp/sat/SATResolver.cc:837
 #, c-format
@@ -4613,9 +4610,8 @@ msgstr ""
 "Первые 25 строк различий:\n"
 
 #: ../zypp/sat/SATResolver.cc:759
-#, fuzzy
 msgid "uninstallable providers: "
-msgstr "Нет доступных для установки поставщиков %s"
+msgstr "поставщики, которые невозможно установить: "
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
