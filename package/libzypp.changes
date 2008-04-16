@@ -11,7 +11,7 @@ Wed Apr 16 12:50:09 CEST 2008 - ma@suse.de
 
 - initializeTarget now takes an additional option, telling whether to
   rebuild an existing rpm database before using it. Default is false.
-  (#308352)
+  (bnc #308352)
 - version 4.13.0
 - revision 9664
 
