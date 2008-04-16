@@ -29,10 +29,10 @@ struct ZypperCommand
   static const ZypperCommand INFO;
   static const ZypperCommand LIST_UPDATES;
   static const ZypperCommand PATCH_CHECK;
-  //static const ZypperCommand PACKAGES;
+  static const ZypperCommand PACKAGES;
   static const ZypperCommand PATCHES;
   static const ZypperCommand PATTERNS;
-  //static const ZypperCommand PRODUCTS;
+  static const ZypperCommand PRODUCTS;
   static const ZypperCommand XML_LIST_UPDATES_PATCHES;
 
   static const ZypperCommand ADD_LOCK;
@@ -75,10 +75,10 @@ struct ZypperCommand
     INFO_e,
     LIST_UPDATES_e,
     PATCH_CHECK_e,
-    //PACKAGES_e,
+    PACKAGES_e,
     PATCHES_e,
     PATTERNS_e,
-    //PRODUCTS_e,
+    PRODUCTS_e,
     XML_LIST_UPDATES_PATCHES_e,
 
     ADD_LOCK_e,

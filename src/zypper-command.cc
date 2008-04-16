@@ -34,10 +34,10 @@ const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
 const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
 const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
-//const ZypperCommand ZypperCommand::PACKAGES(ZypperCommand::PACKAGES_e);
+const ZypperCommand ZypperCommand::PACKAGES(ZypperCommand::PACKAGES_e);
 const ZypperCommand ZypperCommand::PATCHES(ZypperCommand::PATCHES_e);
 const ZypperCommand ZypperCommand::PATTERNS(ZypperCommand::PATTERNS_e);
-//const ZypperCommand ZypperCommand::PRODUCTS(ZypperCommand::PRODUCTS_e);
+const ZypperCommand ZypperCommand::PRODUCTS(ZypperCommand::PRODUCTS_e);
 const ZypperCommand ZypperCommand::XML_LIST_UPDATES_PATCHES(ZypperCommand::XML_LIST_UPDATES_PATCHES_e);
 
 const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
@@ -83,10 +83,10 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
     _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
     _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
-    //_table["packages"] = _table["pa"] = _table["pkg"] = ZypperCommand::PACKAGES_e;
+    _table["packages"] = _table["pa"] = _table["pkg"] = ZypperCommand::PACKAGES_e;
     _table["patches"] = _table["pch"] = ZypperCommand::PATCHES_e;
     _table["patterns"] = _table["pt"] = ZypperCommand::PATTERNS_e;
-    //_table["products"] = _table["pd"] = ZypperCommand::PRODUCTS_e;
+    _table["products"] = _table["pd"] = ZypperCommand::PRODUCTS_e;
     _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
     _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;

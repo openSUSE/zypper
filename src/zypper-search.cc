@@ -5,6 +5,8 @@
 #include "zypp/Patch.h"
 #include "zypp/Pattern.h"
 
+#include "zypp/ResPoolProxy.h"
+
 #include "zypper.h"
 #include "zypper-main.h"
 #include "zypper-tabulator.h"
@@ -17,10 +19,46 @@ using namespace std;
 
 extern ZYpp::Ptr God;
 
+
+string selectable_search_repo_str(const ui::Selectable & s)
+{
+  string repostr;
+  for_(it, s.installedBegin(), s.installedEnd())
+  {
+    if (!(*it)->repository().isSystemRepo())
+    {
+      cout << "can this ever be true?" << endl;
+      if (repostr.empty())
+        repostr = (*it)->repository().info().name();
+      else
+      {
+        repostr = _("(multiple)");
+        return repostr;
+      }
+    }
+  }
+
+  // show available objects
+  for_(it, s.availableBegin(), s.availableEnd())
+  {      
+    if (repostr.empty())
+      repostr = (*it)->repository().info().name();
+    else
+    {
+      repostr = _("(multiple)");
+      return repostr;
+    }
+  }
+  
+  return string();
+}
+
+
 static string string_status (const ResStatus& rs)
 {
   return rs.isInstalled () ? _("Installed"): _("Uninstalled");
 }
+
 
 static string string_weak_status(const ResStatus & rs)
 {
@@ -106,6 +144,77 @@ void list_patterns(Zypper & zypper)
     // display the result, even if --quiet specified
     cout << tbl;
 }
+
+void list_packages(Zypper & zypper)
+{
+  MIL << "Going to list patterns." << std::endl;
+
+  Table tbl;
+  TableHeader th;
+
+  // translators: S for installed Status
+  th << _("S");
+  if (zypper.globalOpts().is_rug_compatible)
+    // translators: Bundle is a term used in rug. See rug for how to translate it.
+    th << _("Bundle");
+  else
+    th << _("Repository");
+  th << _("Name") << _("Version") << _("Arch");
+  tbl << th;
+  
+  bool installed_only = zypper.cOpts().count("installed-only");
+  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+
+  ResPoolProxy::const_iterator
+    it = God->pool().proxy().byKindBegin(ResKind::package),
+    e  = God->pool().proxy().byKindEnd(ResKind::package);
+  for (; it != e; ++it )
+  {
+    ui::Selectable::constPtr s = *it;
+
+    // get the first installed object
+    PoolItem installed;
+    if (!s->installedEmpty())
+      installed = s->installedObj();
+
+    // show available objects
+    for_(it, s->availableBegin(), s->availableEnd())
+    {
+      TableRow row;
+
+      zypp::PoolItem pi = *it;
+      if (installed)
+      {
+        if (notinst_only)
+          continue;
+        row << (equalNVRA(*installed.resolvable(), *pi.resolvable()) ? "i" : "v");
+      }
+      else
+      {
+        if (installed_only)
+          continue;
+        row << "";
+      }
+      row << (zypper.globalOpts().is_rug_compatible ? "" : pi->repository().info().name())
+          << pi->name()
+          << pi->edition().asString()
+          << pi->arch().asString();
+
+      tbl << row;
+    }
+  }
+  if (zypper.cOpts().count("sort-by-repo") || zypper.cOpts().count("sort-by-catalog"))
+    tbl.sort(1); // Repo
+  else
+    tbl.sort(2); // Name
+
+  if (tbl.empty())
+    zypper.out().info(_("No packages found."));
+  else
+    // display the result, even if --quiet specified
+    cout << tbl;
+}
+
 
 // Local Variables:
 // c-basic-offset: 2

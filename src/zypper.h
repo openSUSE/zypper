@@ -35,7 +35,9 @@ struct GlobalOptions
   no_gpg_checks(false),
   machine_readable(false),
   no_refresh(false),
-  root_dir("/")
+  root_dir("/"),
+  no_abbrev(false),
+  terse(false)
   {}
 
 //  std::list<zypp::Url> additional_sources;
@@ -61,6 +63,8 @@ struct GlobalOptions
   bool no_refresh;
   std::string root_dir;
   zypp::RepoManagerOptions rm_options;
+  bool no_abbrev;
+  bool terse;
 };
 
 

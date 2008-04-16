@@ -21,11 +21,12 @@
 #include <boost/format.hpp>
 
 #include "zypp/ZYppFactory.h"
-#include "zypp/base/Logger.h"
-
-#include "zypp/base/UserRequestException.h"
-#include "zypp/repo/RepoException.h"
 #include "zypp/zypp_detail/ZYppReadOnlyHack.h"
+
+#include "zypp/base/Logger.h"
+#include "zypp/base/Algorithm.h"
+#include "zypp/base/UserRequestException.h"
+
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/PoolQuery.h"
 
@@ -1278,6 +1279,37 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::PACKAGES_e:
+  {
+    static struct option options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
+      {"installed-only", no_argument, 0, 'i'},
+      {"uninstalled-only", no_argument, 0, 'u'},
+      {"sort-by-name", no_argument, 0, 'N'},
+      {"sort-by-repo", no_argument, 0, 'R'},
+      {"sort-by-catalog", no_argument, 0, 0},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "packages (pa) [options] [repository] ...\n"
+      "\n"
+      "List all packages available in specified repositories.\n"
+      "\n"
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+      "-i, --installed-only      Show only installed patterns.\n"
+      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
+      "-N, --sort-by-name        Sort the list by package name.\n"
+      "-R, --sort-by-repo        Sort the list by repository.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::PATTERNS_e:
   {
     static struct option options[] = {
@@ -2218,10 +2250,8 @@ void Zypper::doCommand()
 
     try
     {
-      FillTable callback( t );
-      query.execute(callback);
-      //unsigned int count = invokeOnEach(query.begin(), query.end(), callback);
-      //cout << "query: " << endl << query;
+      FillSearchTableSolvable callback(t);
+      invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
 
       if (t.empty())
         out().info(_("No resolvables found."), Out::QUIET);
@@ -2234,8 +2264,6 @@ void Zypper::doCommand()
           t.sort(3); // sort by name
 
         cout << t; //! \todo out().table()?
-
-//        cout << "invocations:" << count << endl;        
       }
     }
     catch (const Exception & e)
@@ -2296,7 +2324,8 @@ void Zypper::doCommand()
   // --------------------------( patches )------------------------------------
 
   else if (command() == ZypperCommand::PATCHES ||
-           command() == ZypperCommand::PATTERNS)
+           command() == ZypperCommand::PATTERNS ||
+           command() == ZypperCommand::PACKAGES)
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2313,6 +2342,9 @@ void Zypper::doCommand()
       break;
     case ZypperCommand::PATTERNS_e:
       list_patterns(*this);
+      break;
+    case ZypperCommand::PACKAGES_e:
+      list_packages(*this);
       break;
     default:;
     }

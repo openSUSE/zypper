@@ -18,22 +18,24 @@
 #include "zypper-utils.h" // for kind_to_string_localized
 #include "zypper-tabulator.h"
 
+std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
+
 /**
  * Functor for filling search output table in rug style.
  */
-struct FillTable
+struct FillSearchTableSolvable
 {
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
 
-  FillTable( Table & table )
+  FillSearchTableSolvable( Table & table )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
   {
     TableHeader header;
 
-    // TranslatorExplanation S as Status
+    // translators: S for installed Status
     header << _("S");
 
     if (_gopts.is_rug_compatible)
@@ -42,7 +44,7 @@ struct FillTable
       header << _("Repository");
 
     if (_gopts.is_rug_compatible)
-      // TranslatorExplanation This is Bundle in as used in rug.
+      // translators: Bundle is a term used in rug. See rug for how to translate it.
       header << _("Bundle");
     else
       header << _("Type");
@@ -71,12 +73,96 @@ struct FillTable
         *_table << row;
     return true;
   }
+
+  bool operator()(const zypp::ui::Selectable::constPtr & s) const
+  {
+    // show installed objects
+    for_(it, s->installedBegin(), s->installedEnd())
+    {
+      TableRow row;
+      zypp::PoolItem pi = *it;
+      row << "i";
+      row << pi->repository().info().name()
+          // TODO what about rug's Bundle?
+          << (_gopts.is_rug_compatible ? "" : kind_to_string_localized(pi->kind(), 1))
+          << pi->name()
+          << pi->edition().asString()
+          << pi->arch().asString();
+      *_table << row;
+    }
+
+    // get the first installed object
+    zypp::PoolItem installed;
+    if (!s->installedEmpty())
+      installed = s->installedObj();
+
+    // show available objects
+    for_(it, s->availableBegin(), s->availableEnd())
+    {
+      TableRow row;
+
+      zypp::PoolItem pi = *it;
+      if (installed)
+      {
+        row << (equalNVRA(*installed.resolvable(), *pi.resolvable()) ?  "i" : "v");
+      }
+      else
+        row << "";
+      row << pi->repository().info().name();
+      row << (_gopts.is_rug_compatible ? "" : kind_to_string_localized(pi->kind(), 1))
+          << pi->name()
+          << pi->edition().asString()
+          << pi->arch().asString();
+
+      *_table << row;
+    }
+    return true;
+  }
 };
 
-/** List patches */
+struct FillSearchTableSelectable
+{
+  // the table used for output
+  Table * _table;
+  const GlobalOptions & _gopts;
+
+  FillSearchTableSelectable( Table & table )
+  : _table( &table )
+  , _gopts(Zypper::instance()->globalOpts())
+  {
+    TableHeader header;
+    // translators: S for installed Status
+    header << _("S");
+    header << _("Name");
+    header << _("Summary");
+    header << _("Type");
+    header << _("Repository");
+    *_table << header;
+  }
+
+  bool operator()(const zypp::ui::Selectable::constPtr & s) const
+  {
+    TableRow row;
+
+    row << (s->installedEmpty() ? "" : "i");
+    //! \todo improve the abbreviation
+    row << (_gopts.no_abbrev || s->theObj()->summary().size() < 33 ?
+        s->theObj()->summary() : s->theObj()->summary().substr(0,28) + "...");
+    row << kind_to_string_localized(s->kind(), 1);
+    row << selectable_search_repo_str(*s);
+    *_table << row;
+    return true;
+  }
+};
+
+/** List all patches with specific info in specified repos */
 void list_patches(Zypper & zypper);
 
-/** List paterns */
+/** List all patterns with specific info in specified repos */
 void list_patterns(Zypper & zypper);
+
+/** List all packages with specific info in specified repos
+ *  - currently looks like zypper search -t package -r foorepo */
+void list_packages(Zypper & zypper);
 
 #endif /*ZYPPERSEARCH_H_*/
