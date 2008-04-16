@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 15 18:20:56 CEST 2008 - jkupec@suse.cz
+
+- options added to 'zypper repos' to list URI, priority, type
+  and to sort by name, alias, URI and priority (bnc #364391)
+- r9656
+
+-------------------------------------------------------------------
 Tue Apr 15 14:43:51 CEST 2008 - jkupec@suse.cz
 
 - don't look for rpm if path starts with '/' and does not end with
