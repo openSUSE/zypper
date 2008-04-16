@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr 16 16:42:34 CEST 2008 - jkupec@suse.cz
+
+- fixed installed status column in zypper search (bnc #375161)
+- 'packages' command added (fate #302148)
+- r9669
+
+-------------------------------------------------------------------
 Wed Apr 16 11:39:41 CEST 2008 - jkupec@suse.cz
 
 - changed ar --nocheck to --no-check to be consistent
