@@ -453,7 +453,6 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
 
   if ( doRebuild_r )
   {
-    INT << "ping" << dbsi_has( info, DbSI_HAVE_V4 ) << dbsi_has( info, DbSI_MADE_V4 ) << endl;
     if (      dbsi_has( info, DbSI_HAVE_V4 )
          && ! dbsi_has( info, DbSI_MADE_V4 ) )
     {
