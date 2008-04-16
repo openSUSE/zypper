@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 16 11:39:41 CEST 2008 - jkupec@suse.cz
+
+- changed ar --nocheck to --no-check to be consistent
+- r9660
+
+-------------------------------------------------------------------
 Tue Apr 15 18:20:56 CEST 2008 - jkupec@suse.cz
 
 - options added to 'zypper repos' to list URI, priority, type
