@@ -29,8 +29,8 @@ namespace zypp
   //	METHOD NAME : Target::Target
   //	METHOD TYPE : Ctor
   //
-  Target::Target( const Pathname & root )
-  : _pimpl( new Impl(root) )
+  Target::Target( const Pathname & root, bool doRebuild_r )
+  : _pimpl( new Impl(root,doRebuild_r) )
   {
   }
 

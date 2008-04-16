@@ -619,7 +619,7 @@ try {
   {
     Measure x( "INIT TARGET" );
     {
-      getZYpp()->initializeTarget( sysRoot );
+      getZYpp()->initializeTarget( sysRoot, true );
       getZYpp()->target()->load();
     }
   }
@@ -661,6 +661,8 @@ try {
     }
   }
 
+  SEC << zypp::getZYpp()->diskUsage() << endl;
+
   if ( 1 )
   {
     PoolItem pi ( getPi<Package>("amarok") );
@@ -675,6 +677,9 @@ try {
 
     }
   }
+
+  SEC << zypp::getZYpp()->diskUsage() << endl;
+
   //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
   //waitForInput();
 

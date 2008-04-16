@@ -99,9 +99,11 @@ namespace zypp
     Date timestamp() const;
 
   public:
-    /** Ctor */
+    /** Ctor. If \c doRebuild_r is \c true, an already existing
+     * database is rebuilt (rpm --rebuilddb ).
+    */
     explicit
-    Target( const Pathname & root = "/" );
+    Target( const Pathname & root = "/", bool doRebuild_r = false );
     /** Ctor */
     explicit
     Target( const Impl_Ptr & impl_r );

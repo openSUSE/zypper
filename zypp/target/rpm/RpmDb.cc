@@ -370,7 +370,7 @@ ostream & RpmDb::dumpOn( ostream & str ) const
 //	METHOD NAME : RpmDb::initDatabase
 //	METHOD TYPE : PMError
 //
-void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
+void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
 {
   ///////////////////////////////////////////////////////////////////
   // Check arguments
@@ -387,7 +387,8 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
     ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
-  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r ) << endl;
+  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r )
+      << ( doRebuild_r ? " (rebuilddb)" : "" ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Check whether already initialized
@@ -450,17 +451,15 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   _dbPath = dbPath_r;
   _dbStateInfo = info;
 
-#warning Add rebuild database once have the info about context
-#if 0
-  if ( ! ( Y2PM::runningFromSystem() ) )
+  if ( doRebuild_r )
   {
+    INT << "ping" << dbsi_has( info, DbSI_HAVE_V4 ) << dbsi_has( info, DbSI_MADE_V4 ) << endl;
     if (      dbsi_has( info, DbSI_HAVE_V4 )
-              && ! dbsi_has( info, DbSI_MADE_V4 ) )
+         && ! dbsi_has( info, DbSI_MADE_V4 ) )
     {
-      err = rebuildDatabase();
+      rebuildDatabase();
     }
   }
-#endif
 
   MIL << "Syncronizing keys with zypp keyring" << endl;
   // we do this one by one now.
@@ -586,11 +585,6 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
     {
 
       WAR << "Non empty rpm3 and rpm4 database found: using rpm4" << endl;
-#warning EXCEPTION: nonempty rpm4 and rpm3 database found.
-      //ConvertDbReport::Send report( RpmDbCallbacks::convertDbReport );
-      //report->start( dbInfo.dbV3().path() );
-      //report->stop( some error );
-
       // set DbSI_MODIFIED_V4 as it's not a temporary which can be removed.
       dbsi_set( info_r, DbSI_MODIFIED_V4 );
 
@@ -871,7 +865,12 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
     if ( newMaster() )
     { // file is removed at the end of rebuild.
       // current size should be upper limit for new db
-      report->progress( (100 * newMaster.size()) / dbMaster.size(), root() + dbPath());
+      if ( ! report->progress( (100 * newMaster.size()) / dbMaster.size(), root() + dbPath()) )
+      {
+        WAR << "User requested abort." << endl;
+        systemKill();
+        filesystem::recursive_rmdir( newMaster.path().dirname() );
+      }
     }
 
     if ( line.compare( 0, 2, "D:" ) )

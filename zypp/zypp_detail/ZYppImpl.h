@@ -73,7 +73,7 @@ namespace zypp
        * \throws Exception
        * true, just init the target, dont populate store or pool
        */
-      void initializeTarget(const Pathname & root);
+      void initializeTarget( const Pathname & root, bool doRebuild_r );
 
       /**
        * \throws Exception

@@ -85,8 +85,8 @@ namespace zypp
   Target_Ptr ZYpp::target() const
   { return _pimpl->target(); }
 
-  void ZYpp::initializeTarget(const Pathname & root)
-  { _pimpl->initializeTarget(root); }
+  void ZYpp::initializeTarget( const Pathname & root, bool doRebuild_r )
+  { _pimpl->initializeTarget( root, doRebuild_r ); }
 
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }

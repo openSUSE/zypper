@@ -86,9 +86,11 @@ namespace zypp
 
     /**
      * \throws Exception
-     * just init the target, dont populate store or pool
+     * Just init the target, dont populate store or pool.
+     * If \c doRebuild_r is \c true, an already existing
+     * database is rebuilt (rpm --rebuilddb ).
      */
-    void initializeTarget(const Pathname & root);
+    void initializeTarget(const Pathname & root, bool doRebuild_r = false);
 
     /**
      * \throws Exception

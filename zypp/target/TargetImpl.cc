@@ -68,10 +68,10 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
-      
+
       // Execute file (passed as pi_t) as script
       // report against report_r
-      // 
+      //
       void ExecuteScript( const Pathname & pn_r,
 			  callback::SendReport<ScriptResolvableReport> * report)
       {
@@ -110,22 +110,22 @@ namespace zypp
         }
 	return;
       }
-      
+
       // Check for (and run) update script
       // path: directory where to look
       // name,version,release: Script name must match 'name-version.release-' prefix
-      // 
+      //
       void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
       {
 	// open the scripts directory
-	
+
 	DIR *dir = opendir(path.asString().c_str());
 	if (!dir)
 	{
 	  WAR << "Cannot access directory " << path << endl;
 	  return;
 	}
-	
+
 	// compute the name-version.release- prefix
 	std::string prefix = name + "-" + version + "." + release + "-";
 	size_t pfx_size = prefix.length();
@@ -134,7 +134,7 @@ namespace zypp
 	  ERR << "Prefix size (" << pfx_size << ") larger than supported (255)" << endl;
 	  pfx_size = 255;
 	}
-	
+
 	// scan directory for match
 	const char *found = NULL;
 	struct dirent *dentry;
@@ -152,12 +152,12 @@ namespace zypp
 	closedir(dir);
 	return;
       }
-      
+
       // Fetch and execute remote script
       // access_r: remote access handle
       // script_r: script (resolvable) handle
       // do_r: true for 'do', false for 'undo'
-      // 
+      //
       void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
                                 Script::constPtr script_r,
                                 bool do_r )
@@ -186,7 +186,7 @@ namespace zypp
 
 	ExecuteScript( localfile, &report );
         report->finish();
-	
+
         return;
       }
 
@@ -276,11 +276,11 @@ namespace zypp
     //	METHOD NAME : TargetImpl::TargetImpl
     //	METHOD TYPE : Ctor
     //
-    TargetImpl::TargetImpl(const Pathname & root_r)
-    : _root(root_r)
+    TargetImpl::TargetImpl( const Pathname & root_r, bool doRebuild_r )
+    : _root( root_r )
     , _requestedLocalesFile( home() / "RequestedLocales" )
     {
-      _rpm.initDatabase(root_r);
+      _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -393,7 +393,7 @@ namespace zypp
       Repository system( satpool.systemRepo() );
       system.eraseFromPool();
     }
-      
+
 
     void TargetImpl::load()
     {

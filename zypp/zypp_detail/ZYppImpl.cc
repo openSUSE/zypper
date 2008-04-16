@@ -34,7 +34,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   namespace zypp_detail
-  { /////////////////////////////////////////////////////////////////      
+  { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -94,9 +94,9 @@ namespace zypp
       return _target;
      }
 
-    void ZYppImpl::initializeTarget(const Pathname & root)
+    void ZYppImpl::initializeTarget( const Pathname & root, bool doRebuild_r )
     {
-      MIL << "initTarget( " << root << endl;
+      MIL << "initTarget( " << root << (doRebuild_r?", rebuilddb":"") << ")" << endl;
       if (_target) {
           if (_target->root() == root) {
               MIL << "Repeated call to initializeTarget()" << endl;
@@ -104,9 +104,9 @@ namespace zypp
           }
 
           _target->unload();
-  
+
       }
-      _target = new Target( root );
+      _target = new Target( root, doRebuild_r );
       _target->buildCache();
     }
 
@@ -114,7 +114,7 @@ namespace zypp
     {
       if (_target)
           _target->unload();
-      
+
       _target = 0;
     }
 
@@ -139,9 +139,9 @@ namespace zypp
       if (! policy_r.dryRun() ) {
 
           DBG << "unloading " << sat::Pool::instance().systemRepoName() << " repo from pool" << endl;
-          
+
         _target->unload();
-        
+
         if ( policy_r.syncPoolAfterCommit() )
           {
             // reload new status from target

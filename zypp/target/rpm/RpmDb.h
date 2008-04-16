@@ -187,11 +187,15 @@ public:
    * (no packages were installed or deleted). Otherwise the new database
    * is kept, and the old one is removed.
    *
+   * If the  database alredy exists and \c doRebuild_r is true, \ref rebuildDatabase
+   * is called.
+   *
    * \throws RpmException
    *
    **/
   void initDatabase( Pathname root_r = Pathname(),
-                     Pathname dbPath_r = Pathname() );
+                     Pathname dbPath_r = Pathname(),
+                     bool doRebuild_r = false );
 
   /**
    * Block further access to the rpm database and go back to uninitialized
@@ -406,7 +410,7 @@ private:
    * The exit code of the rpm process, or -1 if not yet known.
   */
   int exit_code;
-  
+
   /**
    * Error message from running rpm as external program.
    * Use only if something fail.

@@ -61,7 +61,7 @@ namespace zypp
 
     public:
       /** Ctor. */
-      TargetImpl(const Pathname & root_r = "/");
+      TargetImpl(const Pathname & root_r = "/", bool doRebuild_r = false );
       /** Dtor. */
       virtual ~TargetImpl();
 
