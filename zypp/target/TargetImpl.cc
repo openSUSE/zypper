@@ -350,10 +350,14 @@ namespace zypp
 
         if ( ! _root.empty() )
           cmd << " -r '" << _root << "'";
-
+#warning DIFF TO EXISTING SOLV FILE DISABLED
+#if 0
+        // This currently does not work if someone did a rebuilddb.
+        // The result is a comletely broken solv file. Thus disabled
+        // until rpmdb2solv is fixed.
         if ( solvexisted )
           cmd << " '" << rpmsolv << "'";
-
+#endif
         cmd << "  > '" << tmpsolv.path() << "'";
 
         MIL << "Executing: " << cmd << endl;

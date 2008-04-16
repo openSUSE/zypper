@@ -549,6 +549,8 @@ void ditest( const PoolItem & pi_r )
 */
 int main( int argc, char * argv[] )
 try {
+  --argc;
+  ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance().setTextLocale(Locale("de"));
@@ -557,7 +559,7 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
-  if ( 1 )
+  if ( 0 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -619,7 +621,7 @@ try {
   {
     Measure x( "INIT TARGET" );
     {
-      getZYpp()->initializeTarget( sysRoot, true );
+      getZYpp()->initializeTarget( sysRoot );
       getZYpp()->target()->load();
     }
   }
@@ -636,6 +638,35 @@ try {
   }
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
+  //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
+
+  if ( !pool.empty() )
+  {
+    std::string name( pool.begin()->resolvable()->name() );
+    PoolItem pi ( getPi<Package>( name ) );
+    MIL << pi << endl;
+    if ( pi )
+    {
+      pi.status().setTransact( true, ResStatus::USER );
+      //solve();
+      vdumpPoolStats( USR << "Transacting:"<< endl,
+                      make_filter_begin<resfilter::ByTransact>(pool),
+                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+      install();
+
+      pi = getPi<Package>( name );
+      if ( pi )
+      {
+        INT << "Still here? " << getPi<Package>("ant") << endl;
+        return 1;
+      }
+    }
+  }
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
 
   if ( 0 ) {
     Measure x( "PROCXY" );

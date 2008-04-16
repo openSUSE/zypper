@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 16 15:00:19 CEST 2008 - ma@suse.de
+
+- Disable fast creation of @System.solv. It may produce wrong results 
+  e.g. after a rebuilddb.
+- version 4.13.1
+- revision 9666
+
+-------------------------------------------------------------------
 Wed Apr 16 12:50:09 CEST 2008 - ma@suse.de
 
 - initializeTarget now takes an additional option, telling whether to
