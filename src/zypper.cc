@@ -887,7 +887,7 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
-      {"nocheck", no_argument, 0, 'x'},
+      {"no-check", no_argument, 0, 'x'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -904,7 +904,7 @@ void Zypper::processCommandOptions()
       "-t, --type <TYPE>       Type of repository (%s).\n"
       "-d, --disable           Add the repository as disabled.\n"
       "-c, --check             Probe URI.\n"
-      "-x, --nocheck           Don't probe URI, probe later during refresh.\n"
+      "-x, --no-check           Don't probe URI, probe later during refresh.\n"
     ), "yast2, rpm-md, plaindir");
     break;
   }
@@ -1680,13 +1680,15 @@ void Zypper::doCommand()
         if (indeterminate(enabled)) enabled = true;
         if (copts.count("check"))
         {
-          if (!copts.count("nocheck"))
+          if (!copts.count("no-check"))
             this->_gopts.rm_options.probe = true;
           else
-            this->out().warning(_("Cannot use --check together with --nocheck."
-                " Used settings from zypp.conf."),Out::QUIET);
+            this->out().warning(str::form(
+              _("Cannot use %s together with %s. Using the %s setting."),
+              "--check", "--no-check", "zypp.conf")
+                ,Out::QUIET);
         }
-        else if (copts.count("nocheck"))
+        else if (copts.count("no-check"))
           this->_gopts.rm_options.probe = false;
 
         warn_if_zmd();
