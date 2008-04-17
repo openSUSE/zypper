@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 17 16:00:19 CEST 2008 - jreidinger@suse.cz
+
+- fix multiple remove same repository
+- r9681 
+
+-------------------------------------------------------------------
 Wed Apr 16 16:42:34 CEST 2008 - jkupec@suse.cz
 
 - fixed installed status column in zypper search (bnc #375161)
