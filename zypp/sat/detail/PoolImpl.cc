@@ -204,7 +204,7 @@ namespace zypp
           MIL << "pool_createwhatprovides..." << endl;
 
           // NOTE: Thake care not to ctreate a nonexisting systemRepo
-          Repositort sysrepo( sat::Pool::instance().reposFind( sat::Pool::instance().systemRepoName() ) );
+          Repository sysrepo( sat::Pool::instance().reposFind( sat::Pool::instance().systemRepoName() ) );
           if ( sysrepo )
           {
             ::pool_addfileprovides( _pool, sysrepo.get() );
