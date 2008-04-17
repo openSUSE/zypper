@@ -1669,32 +1669,35 @@ void Zypper::doCommand()
 
 
   // === execute command ===
+  
+  switch(command().toEnum())
+  {
 
   // --------------------------( moo )----------------------------------------
 
-  if (command() == ZypperCommand::MOO)
+  case ZypperCommand::MOO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // TranslatorExplanation this is a hedgehog, paint another animal, if you want
     out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    return;
+    break;
   }
 
   // --------------------------( repo list )----------------------------------
   
-  else if (command() == ZypperCommand::LIST_REPOS)
+  case ZypperCommand::LIST_REPOS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     // if (runningHelp()) display_command_help()
 
     list_repos(*this);
-    return;
+    break;
   }
 
   // --------------------------( addrepo )------------------------------------
   
-  else if (command() == ZypperCommand::ADD_REPO)
+  case ZypperCommand::ADD_REPO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1787,12 +1790,12 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     }
 
-    return;
+    break;
   }
 
   // --------------------------( delete repo )--------------------------------
 
-  else if (command() == ZypperCommand::REMOVE_REPO)
+  case ZypperCommand::REMOVE_REPO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1843,12 +1846,12 @@ void Zypper::doCommand()
          it!=repo_to_remove.end();++it)
       remove_repo(*this,*it);
 
-    return;
+    break;
   }
 
   // --------------------------( rename repo )--------------------------------
 
-  else if (command() == ZypperCommand::RENAME_REPO)
+  case ZypperCommand::RENAME_REPO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1904,7 +1907,7 @@ void Zypper::doCommand()
 
   // --------------------------( modify repo )--------------------------------
 
-  else if (command() == ZypperCommand::MODIFY_REPO)
+  case ZypperCommand::MODIFY_REPO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1944,11 +1947,13 @@ void Zypper::doCommand()
         boost::str(format(_("Repository %s not found.")) % _arguments[0]));
       ERR << "Repo " << _arguments[0] << " not found" << endl;
     }
+    
+    break;
   }
 
   // --------------------------( refresh )------------------------------------
 
-  else if (command() == ZypperCommand::REFRESH)
+  case ZypperCommand::REFRESH_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1967,12 +1972,12 @@ void Zypper::doCommand()
         % "--no-refresh"));
 
     refresh_repos(*this);
-    return;
+    break;
   }
 
   // --------------------------( clean )------------------------------------
 
-  else if (command() == ZypperCommand::CLEAN)
+  case ZypperCommand::CLEAN_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1986,13 +1991,13 @@ void Zypper::doCommand()
     }
     
     clean_repos(*this);
-    return;
+    break;
   }
 
   // --------------------------( remove/install )-----------------------------
 
-  else if (command() == ZypperCommand::INSTALL ||
-           command() == ZypperCommand::REMOVE)
+  case ZypperCommand::INSTALL_e:
+  case ZypperCommand::REMOVE_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2151,12 +2156,12 @@ void Zypper::doCommand()
 
     solve_and_commit(*this);
 
-    return;
+    break;
   }
 
   // -------------------( source install )------------------------------------
 
-  else if (command() == ZypperCommand::SRC_INSTALL)
+  case ZypperCommand::SRC_INSTALL_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2180,10 +2185,10 @@ void Zypper::doCommand()
     if (!copts.count("build-deps-only"))
       find_src_pkgs(*this);
     solve_and_commit(*this);
-    return;
+    break;
   }
 
-  else if (command() == ZypperCommand::VERIFY)
+  case ZypperCommand::VERIFY_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2218,12 +2223,12 @@ void Zypper::doCommand()
 
     solve_and_commit(*this);
     
-    return;
+    break;
   }
 
   // --------------------------( search )-------------------------------------
 
-  else if (command() == ZypperCommand::SEARCH)
+  case ZypperCommand::SEARCH_e:
   {
     zypp::PoolQuery query;
 
@@ -2320,13 +2325,14 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
 
-    return;
+    break;
   }
 
   // --------------------------( patch check )--------------------------------
 
   // TODO: rug summary
-  else if (command() == ZypperCommand::PATCH_CHECK) {
+  case ZypperCommand::PATCH_CHECK_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // too many arguments
@@ -2363,15 +2369,15 @@ void Zypper::doCommand()
       return;
     }
 
-    return;
+    break;
   }
 
   // --------------------------( patches )------------------------------------
 
-  else if (command() == ZypperCommand::PATCHES ||
-           command() == ZypperCommand::PATTERNS ||
-           command() == ZypperCommand::PACKAGES ||
-           command() == ZypperCommand::PRODUCTS)
+  case ZypperCommand::PATCHES_e:
+  case ZypperCommand::PATTERNS_e:
+  case ZypperCommand::PACKAGES_e:
+  case ZypperCommand::PRODUCTS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2398,12 +2404,13 @@ void Zypper::doCommand()
     default:;
     }
 
-    return;
+    break;
   }
 
   // --------------------------( list updates )-------------------------------
 
-  else if (command() == ZypperCommand::LIST_UPDATES) {
+  case ZypperCommand::LIST_UPDATES_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // too many arguments
@@ -2454,14 +2461,14 @@ void Zypper::doCommand()
     
     list_updates(*this, kinds, best_effort);
 
-    return;
+    break;
   }
-
 
   // -----------------( xml list updates and patches )------------------------
 
   //! \todo remove this command
-  else if (command() == ZypperCommand::XML_LIST_UPDATES_PATCHES) {
+  case ZypperCommand::XML_LIST_UPDATES_PATCHES_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     init_target(*this);
@@ -2478,12 +2485,13 @@ void Zypper::doCommand()
     cout << "</update-list>" << endl;
     cout << "</update-status>" << endl;
 
-    return;
+    break;
   }
 
   // -----------------------------( update )----------------------------------
 
-  else if (command() == ZypperCommand::UPDATE) {
+  case ZypperCommand::UPDATE_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
@@ -2560,12 +2568,13 @@ void Zypper::doCommand()
 
     solve_and_commit(*this);
 
-    return; 
+    break; 
   }
 
   // ----------------------------( dist-upgrade )------------------------------
 
-  else if (command() == ZypperCommand::DIST_UPGRADE) {
+  case ZypperCommand::DIST_UPGRADE_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
@@ -2598,15 +2607,16 @@ void Zypper::doCommand()
 
     solve_and_commit(*this);
 
-    return; 
+    break; 
   }
 
   // -----------------------------( info )------------------------------------
 
-  else if (command() == ZypperCommand::INFO ||
-           command() == ZypperCommand::RUG_PATCH_INFO ||
-           command() == ZypperCommand::RUG_PATTERN_INFO ||
-           command() == ZypperCommand::RUG_PRODUCT_INFO) {
+  case ZypperCommand::INFO_e:
+  case ZypperCommand::RUG_PATCH_INFO_e:
+  case ZypperCommand::RUG_PATTERN_INFO_e:
+  case ZypperCommand::RUG_PRODUCT_INFO_e:
+  {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     if (_arguments.size() < 1)
@@ -2655,10 +2665,10 @@ void Zypper::doCommand()
 
     return;
   }
-  
+
   // -----------------------------( locks )------------------------------------
 
-  else if (command() == ZypperCommand::ADD_LOCK)
+  case ZypperCommand::ADD_LOCK_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     
@@ -2721,10 +2731,10 @@ void Zypper::doCommand()
 
     add_locks(*this, _arguments, kinds);
 
-    return;
+    break;
   }
 
-  else if (command() == ZypperCommand::REMOVE_LOCK)
+  case ZypperCommand::REMOVE_LOCK_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2756,21 +2766,21 @@ void Zypper::doCommand()
 
     remove_locks(*this, _arguments);
 
-    return;
+    break;
   }
 
-  else if (command() == ZypperCommand::LIST_LOCKS)
+  case ZypperCommand::LIST_LOCKS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     list_locks(*this);
 
-    return;
+    break;
   }
 
   // -----------------------------( shell )------------------------------------
 
-  else if (command() == ZypperCommand::SHELL_QUIT)
+  case ZypperCommand::SHELL_QUIT_e:
   {
     if (runningHelp())
       out().info(_command_help, Out::QUIET);
@@ -2780,10 +2790,10 @@ void Zypper::doCommand()
     else
       out().error("oops, you wanted to quit, didn't you?"); // should not happen
 
-    return;
+    break;
   }
 
-  else if (command() == ZypperCommand::SHELL)
+  case ZypperCommand::SHELL_e:
   {
     if (runningHelp())
       out().info(_command_help, Out::QUIET);
@@ -2795,11 +2805,13 @@ void Zypper::doCommand()
       report_a_bug(out());
     }
 
-    return;
+    break;
   }
 
-  // if the program reaches this line, something went wrong
-  setExitCode(ZYPPER_EXIT_ERR_BUG);
+  default:
+    // if the program reaches this line, something went wrong
+    setExitCode(ZYPPER_EXIT_ERR_BUG);
+  }
 }
 
 void Zypper::cleanup()
