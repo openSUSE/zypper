@@ -232,7 +232,18 @@ void list_products(Zypper & zypper)
     Product::constPtr product = asKind<Product>(it->resolvable());
 
     TableRow tr;
-    tr << (it->isSatisfied() ? "i" : ""); 
+    if (it->isSatisfied())
+    {
+      if (notinst_only)
+        continue;
+      tr << "i";
+    }
+    else
+    {
+      if (installed_only)
+        continue;
+      tr << "";
+    }
     tr << product->name () << product->edition().asString();
     tr << product->type();
     tbl << tr;
