@@ -171,31 +171,46 @@ void print_main_help(Zypper & zypper)
     "  Commands:\n"
     "\thelp, ?\t\t\tPrint help.\n"
     "\tshell, sh\t\tAccept multiple commands at once.\n"
-    "\tinstall, in\t\tInstall packages.\n"
-    "\tremove, rm\t\tRemove packages.\n"
-    "\tverify, ve\t\tVerify integrity of package dependencies.\n"
-    "\tsearch, se\t\tSearch for packages matching a pattern.\n"
+  );
+
+  static string help_repo_commands = _("\tRepository Handling:\n"
     "\trepos, lr\t\tList all defined repositories.\n"
     "\taddrepo, ar\t\tAdd a new repository.\n"
     "\tremoverepo, rr\t\tRemove specified repository.\n"
     "\trenamerepo, nr\t\tRename specified repository.\n"
     "\tmodifyrepo, mr\t\tModify specified repository.\n"
     "\trefresh, ref\t\tRefresh all repositories.\n"
-    "\tpatch-check, pchk\tCheck for patches.\n"
-    "\tpatches, pch\t\tList patches.\n"
-    "\tlist-updates, lu\tList updates.\n"
-    "\txml-updates, xu\t\tList updates and patches in xml format.\n"
+    "\tclean\t\t\tClean local caches.\n"
+  );
+  
+  static string help_package_commands = _("\tSoftware Management:\n"
+    "\tinstall, in\t\tInstall packages.\n"
+    "\tremove, rm\t\tRemove packages.\n"
+    "\tverify, ve\t\tVerify integrity of package dependencies.\n"
     "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
     "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
-    "\tinfo, if\t\tShow full information for packages.\n"
-    "\tpatch-info\t\tShow full information for patches.\n"
-    "\tsource-install, si\tInstall source packages.\n"
-    "\tclean\t\t\tClean local caches.\n"
-    "\taddlock\t\t\tAdd a package lock.\n"
-    "\tremovelock\t\tRemove a package lock.\n"
-    "\tlocks\t\t\tList current package locks.\n"
+    "\tsource-install, si\tInstall source packages and their build dependencies.\n"
   );
 
+  static string help_query_commands = _("\tQuerying:\n"
+    "\tsearch, se\t\tSearch for packages matching a pattern.\n"
+    "\tinfo, if\t\tShow full information for specified packages.\n"
+    "\tpatch-info\t\tShow full information for specied patches.\n"
+    "\tpattern-info\t\tShow full information for specied patterns.\n"
+    "\tproduct-info\t\tShow full information for specied products.\n"
+    "\tpatch-check, pchk\tCheck for patches.\n"
+    "\tlist-updates, lu\tList available updates.\n"
+    "\tpatches, pch\t\tList all available patches.\n"
+    "\tpackages, pa\t\tList all available packages.\n"
+    "\tpatterns, pt\t\tList all available patterns.\n"
+    "\tproducts, pd\t\tList all available products.\n"
+  );
+
+  static string help_lock_commands = _("\tPackage Locks:\n"
+    "\taddlock, al\t\tAdd a package lock.\n"
+    "\tremovelock, rl\t\tRemove a package lock.\n"
+    "\tlocks, ll\t\tList current package locks.\n"
+  );
   static string help_usage = _(
     "  Usage:\n"
     "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -206,6 +221,10 @@ void print_main_help(Zypper & zypper)
   zypper.out().info(help_global_source_options, Out::QUIET);
   zypper.out().info(help_global_target_options, Out::QUIET);
   zypper.out().info(help_commands, Out::QUIET);
+  zypper.out().info(help_repo_commands, Out::QUIET);
+  zypper.out().info(help_package_commands, Out::QUIET);
+  zypper.out().info(help_query_commands, Out::QUIET);
+  zypper.out().info(help_lock_commands, Out::QUIET);
 
   print_command_help_hint(zypper);
 }
@@ -213,7 +232,7 @@ void print_main_help(Zypper & zypper)
 void print_unknown_command_hint(Zypper & zypper)
 {
   zypper.out().info(boost::str(format(
-    // TranslatorExplanation %s is "help" or "zypper help" depending on whether
+    // translators: %s is "help" or "zypper help" depending on whether
     // zypper shell is running or not
     _("Type '%s' to get a list of global options and commands."))
       % (zypper.runningShell() ? "help" : "zypper help")));
@@ -222,9 +241,9 @@ void print_unknown_command_hint(Zypper & zypper)
 void print_command_help_hint(Zypper & zypper)
 {
   zypper.out().info(boost::str(format(
-    // TranslatorExplanation %s is "help" or "zypper help" depending on whether
+    // translators: %s is "help" or "zypper help" depending on whether
     // zypper shell is running or not
-    _("Type '%s' to get a command-specific help."))
+    _("Type '%s' to get command-specific help."))
       % (zypper.runningShell() ? "help <command>" : "zypper help <command>")));
 }
 
