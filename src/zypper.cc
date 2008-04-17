@@ -1325,7 +1325,33 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "patterns (pt) [options] [repository] ...\n"
       "\n"
-      "List all patterns available in specified repositories..\n"
+      "List all patterns available in specified repositories.\n"
+      "\n"
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+      "-i, --installed-only      Show only installed patterns.\n"
+      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::PRODUCTS_e:
+  {
+    static struct option options[] = {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatibility option, we have --repo
+      {"catalog", required_argument, 0, 'c'},
+      {"installed-only", no_argument, 0, 'i'},
+      {"uninstalled-only", no_argument, 0, 'u'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "products (pd) [options] [repository] ...\n"
+      "\n"
+      "List all products available in specified repositories.\n"
       "\n"
       "  Command options:\n"
       "\n"
@@ -2325,7 +2351,8 @@ void Zypper::doCommand()
 
   else if (command() == ZypperCommand::PATCHES ||
            command() == ZypperCommand::PATTERNS ||
-           command() == ZypperCommand::PACKAGES)
+           command() == ZypperCommand::PACKAGES ||
+           command() == ZypperCommand::PRODUCTS)
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2345,6 +2372,9 @@ void Zypper::doCommand()
       break;
     case ZypperCommand::PACKAGES_e:
       list_packages(*this);
+      break;
+    case ZypperCommand::PRODUCTS_e:
+      list_products(*this);
       break;
     default:;
     }

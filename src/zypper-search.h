@@ -167,4 +167,7 @@ void list_patterns(Zypper & zypper);
  *  - currently looks like zypper search -t package -r foorepo */
 void list_packages(Zypper & zypper);
 
+/** List all products with specific info in specified repos */
+void list_products(Zypper & zypper);
+
 #endif /*ZYPPERSEARCH_H_*/

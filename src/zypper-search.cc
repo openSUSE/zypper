@@ -4,6 +4,7 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/Patch.h"
 #include "zypp/Pattern.h"
+#include "zypp/Product.h"
 
 #include "zypp/ResPoolProxy.h"
 
@@ -133,7 +134,7 @@ void list_patterns(Zypper & zypper)
 
 void list_packages(Zypper & zypper)
 {
-  MIL << "Going to list patterns." << std::endl;
+  MIL << "Going to list packages." << std::endl;
 
   Table tbl;
   TableHeader th;
@@ -201,6 +202,49 @@ void list_packages(Zypper & zypper)
     cout << tbl;
 }
 
+void list_products(Zypper & zypper)
+{
+  MIL << "Going to list packages." << std::endl;
+
+  Table tbl;
+  TableHeader th;
+
+  // translators: S for installed Status
+  th << _("S");
+  th << _("Name");
+  th << _("Version");
+  if (zypper.globalOpts().is_rug_compatible)
+     // translators: product category (the rug term)
+     th << _("Category");
+  else
+    // translators: product type (addon/base) (rug calls it Category)
+    th << _("Type");
+  tbl << th;
+
+  bool installed_only = zypper.cOpts().count("installed-only");
+  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin(ResKind::product),
+    e  = God->pool().byKindEnd(ResKind::product);
+  for (; it != e; ++it )
+  {
+    Product::constPtr product = asKind<Product>(it->resolvable());
+
+    TableRow tr;
+    tr << (it->isSatisfied() ? "i" : ""); 
+    tr << product->name () << product->edition().asString();
+    tr << product->type();
+    tbl << tr;
+  }
+  tbl.sort(1); // Name
+
+  if (tbl.empty())
+    zypper.out().info(_("No products found."));
+  else
+    // display the result, even if --quiet specified
+    cout << tbl;
+}
 
 // Local Variables:
 // c-basic-offset: 2
