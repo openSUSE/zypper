@@ -108,6 +108,7 @@ struct FillSearchTableSolvable
       }
       else
         row << "";
+      
       row << pi->repository().info().name();
       row << (_gopts.is_rug_compatible ? "" : kind_to_string_localized(pi->kind(), 1))
           << pi->name()
@@ -145,6 +146,7 @@ struct FillSearchTableSelectable
     TableRow row;
 
     row << (s->installedEmpty() ? "" : "i");
+    row << s->name();
     //! \todo improve the abbreviation
     row << (_gopts.no_abbrev || s->theObj()->summary().size() < 33 ?
         s->theObj()->summary() : s->theObj()->summary().substr(0,28) + "...");

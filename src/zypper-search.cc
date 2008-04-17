@@ -23,34 +23,20 @@ extern ZYpp::Ptr God;
 string selectable_search_repo_str(const ui::Selectable & s)
 {
   string repostr;
-  for_(it, s.installedBegin(), s.installedEnd())
-  {
-    if (!(*it)->repository().isSystemRepo())
-    {
-      cout << "can this ever be true?" << endl;
-      if (repostr.empty())
-        repostr = (*it)->repository().info().name();
-      else
-      {
-        repostr = _("(multiple)");
-        return repostr;
-      }
-    }
-  }
 
   // show available objects
   for_(it, s.availableBegin(), s.availableEnd())
   {      
     if (repostr.empty())
       repostr = (*it)->repository().info().name();
-    else
+    else if (repostr != (*it)->repository().info().name())
     {
       repostr = _("(multiple)");
       return repostr;
     }
   }
-  
-  return string();
+
+  return repostr;
 }
 
 
