@@ -7,6 +7,7 @@
 #include "zypp/Url.h"
 #include "zypp/Resolvable.h"
 #include "zypp/Pathname.h"
+#include "zypp/RepoInfo.h"
 
 #include "output/Out.h"
 
@@ -67,5 +68,12 @@ zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
 std::string xml_encode(const std::string & text);
 
 std::string & indent(std::string & text, int columns);
+
+//comparator for RepoInfo set
+class RepoInfoAliasComparator{
+  public: bool operator()(const zypp::RepoInfo &a, const zypp::RepoInfo& b){
+    return a.alias()<b.alias();
+  }
+};
 
 #endif /*ZYPPER_UTILS_H*/

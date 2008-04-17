@@ -56,7 +56,6 @@ ZYpp::Ptr God = NULL;
 RuntimeData gData;
 parsed_opts copts; // command options
 
-
 Zypper::Zypper()
   : _argc(0), _argv(NULL), _out_ptr(NULL),
     _command(ZypperCommand::NONE),
@@ -1823,13 +1822,13 @@ void Zypper::doCommand()
     warn_if_zmd ();
 
     //must store repository before remove to ensure correct match number
-    list<RepoInfo> repo_to_remove;
+    set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
     for (vector<string>::const_iterator it = _arguments.begin();
 	it!= _arguments.end();++it){
       RepoInfo repo;
       if (match_repo(*this,*it,&repo))
       {
-	repo_to_remove.push_back(repo);
+	repo_to_remove.insert(repo);
       }
       else
       {
@@ -1842,8 +1841,7 @@ void Zypper::doCommand()
       }
     }
 
-    for (std::list<RepoInfo>::const_iterator it = repo_to_remove.begin();
-         it!=repo_to_remove.end();++it)
+    for_ (it,repo_to_remove.begin(),repo_to_remove.end())
       remove_repo(*this,*it);
 
     break;
