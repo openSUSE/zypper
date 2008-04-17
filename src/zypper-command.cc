@@ -38,6 +38,9 @@ const ZypperCommand ZypperCommand::PACKAGES(ZypperCommand::PACKAGES_e);
 const ZypperCommand ZypperCommand::PATCHES(ZypperCommand::PATCHES_e);
 const ZypperCommand ZypperCommand::PATTERNS(ZypperCommand::PATTERNS_e);
 const ZypperCommand ZypperCommand::PRODUCTS(ZypperCommand::PRODUCTS_e);
+const ZypperCommand ZypperCommand::WHAT_PROVIDES(ZypperCommand::WHAT_PROVIDES_e);
+//const ZypperCommand ZypperCommand::WHAT_REQUIRES(ZypperCommand::WHAT_REQUIRES_e);
+//const ZypperCommand ZypperCommand::WHAT_CONFLICTS(ZypperCommand::WHAT_CONFLICTS_e);
 const ZypperCommand ZypperCommand::XML_LIST_UPDATES_PATCHES(ZypperCommand::XML_LIST_UPDATES_PATCHES_e);
 
 const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
@@ -87,6 +90,9 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["patches"] = _table["pch"] = ZypperCommand::PATCHES_e;
     _table["patterns"] = _table["pt"] = ZypperCommand::PATTERNS_e;
     _table["products"] = _table["pd"] = ZypperCommand::PRODUCTS_e;
+    _table["what-provides"] = _table["wp"] = ZypperCommand::WHAT_PROVIDES_e;
+    //_table["what-requires"] = _table["wr"] = ZypperCommand::WHAT_REQUIRES_e;
+    //_table["what-conflicts"] = _table["wc"] = ZypperCommand::WHAT_CONFLICTS_e;
     _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
     _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;

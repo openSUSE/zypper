@@ -203,6 +203,9 @@ void print_main_help(Zypper & zypper)
     "\tpackages, pa\t\tList all available packages.\n"
     "\tpatterns, pt\t\tList all available patterns.\n"
     "\tproducts, pd\t\tList all available products.\n"
+    "\twhat-provides, wp\tList packages providing specified capability.\n"
+    //"\twhat-requires, wr\tList packages requiring specified capability.\n"
+    //"\twhat-conflicts, wc\tList packages conflicting with specified capability.\n"
   );
 
   static string help_lock_commands = _("\tPackage Locks:\n"
@@ -1462,6 +1465,57 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::WHAT_PROVIDES_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "what-provides (wp) <capability>\n"
+      "\n"
+      "List all packages providing the specified capability.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+/*
+  case ZypperCommand::WHAT_REQUIRES_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "what-requires (wr) <capability>\n"
+      "\n"
+      "List all packages requiring the specified capability.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::WHAT_CONFLICTS_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "what-conflicts (wc) <capability>\n"
+      "\n"
+      "List all packages conflicting with the specified capability.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+*/
   case ZypperCommand::MOO_e:
   {
     static struct option moo_options[] = {
@@ -2370,7 +2424,7 @@ void Zypper::doCommand()
     break;
   }
 
-  // --------------------------( patches )------------------------------------
+  // --------------------------( misc queries )--------------------------------
 
   case ZypperCommand::PATCHES_e:
   case ZypperCommand::PATTERNS_e:
@@ -2398,6 +2452,32 @@ void Zypper::doCommand()
       break;
     case ZypperCommand::PRODUCTS_e:
       list_products(*this);
+      break;
+    default:;
+    }
+
+    break;
+  }
+
+  case ZypperCommand::WHAT_PROVIDES_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+    
+    if (_arguments.empty())
+      report_required_arg_missing(out(), _command_help);
+    else if (_arguments.size() > 1)
+      report_too_many_arguments(out(), _command_help);
+
+    init_target(*this);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    load_resolvables(*this);
+
+    switch (command().toEnum())
+    {
+    case ZypperCommand::WHAT_PROVIDES_e:
+      list_what_provides(*this, _arguments[0]);
       break;
     default:;
     }

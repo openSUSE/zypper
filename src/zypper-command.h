@@ -33,6 +33,9 @@ struct ZypperCommand
   static const ZypperCommand PATCHES;
   static const ZypperCommand PATTERNS;
   static const ZypperCommand PRODUCTS;
+  static const ZypperCommand WHAT_PROVIDES;
+  //static const ZypperCommand WHAT_REQUIRES;
+  //static const ZypperCommand WHAT_CONFLICTS;
   static const ZypperCommand XML_LIST_UPDATES_PATCHES;
 
   static const ZypperCommand ADD_LOCK;
@@ -79,6 +82,9 @@ struct ZypperCommand
     PATCHES_e,
     PATTERNS_e,
     PRODUCTS_e,
+    WHAT_PROVIDES_e,
+    //WHAT_REQUIRES_e,
+    //WHAT_CONFLICTS_e,
     XML_LIST_UPDATES_PATCHES_e,
 
     ADD_LOCK_e,

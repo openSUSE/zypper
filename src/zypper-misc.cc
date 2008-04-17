@@ -50,7 +50,7 @@ static bool confirm_licenses(Zypper & zypper);
 
 // converts a user-supplied kind to a zypp kind object
 // returns an empty one if not recognized
-ResObject::Kind string_to_kind (const string &skind)
+ResKind string_to_kind (const string &skind)
 {
   ResObject::Kind empty;
   string lskind = str::toLower (skind);
@@ -124,120 +124,6 @@ bool ProvideProcess::operator()( const PoolItem& provider )
   }
 
   return true;
-}
-
-/**
- * Stops iterations on first item and stores edition of the found item.
- *
- * If no item has been found, the \ref found variable is set to false.
- */
-struct VersionGetter
-{
-  Edition edition;
-  bool found;
-
-  VersionGetter() : found(false) {}
-
-  bool operator()(const zypp::PoolItem& item)
-  {
-    edition = item.resolvable()->edition();
-    found = true;
-    return false; // don't iterate further
-  }
-};
-
-/**
- * Stops iterations on first item having revision newer than edition passed in
- * contructor. Stores the edition of the found item.
- *
- * If no item has been found, the \ref found variable is set to false.
- */
-struct NewerVersionGetter
-{
-  const Edition & old_edition;
-  Edition edition;
-  bool found;
-
-  NewerVersionGetter(const Edition & edition) : old_edition(edition), found(false) {}
-
-  bool operator()(const zypp::PoolItem& item)
-  {
-    if (item.resolvable()->edition() > old_edition)
-    {
-      edition = item.resolvable()->edition();
-      found = true;
-      return false; // don't iterate further
-    }
-
-    return true;
-  }
-};
-
-// on error print a message and return noCap
-static Capability safe_parse_cap (Zypper & zypper,
-                           const ResObject::Kind &kind, const string & capstr)
-{
-  Capability cap;
-  try {
-    // expect named caps as NAME[OP<EDITION>]
-    // transform to NAME[ OP <EDITION>] (add spaces)
-    string new_capstr = capstr;
-    DBG << "capstr: " << capstr << endl;
-    string::size_type op_pos = capstr.find_first_of("<>=");
-    if (op_pos != string::npos)
-    {
-      new_capstr.insert(op_pos, " ");
-      DBG << "new capstr: " << new_capstr << endl;
-      op_pos = new_capstr.find_first_not_of("<>=", op_pos + 1);
-      if (op_pos != string::npos && new_capstr.size() > op_pos)
-      {
-        new_capstr.insert(op_pos, " ");
-        DBG << "new capstr: " << new_capstr << endl;
-      }
-    }
-    // if we are about to install stuff and
-    // if this is not a candidate for a versioned capability, take it like
-    // a package name and check if it is already installed
-    else if (zypper.command() == ZypperCommand::INSTALL)
-    {
-      using namespace zypp::functor;
-      using namespace zypp::resfilter;
-
-      // get the installed version
-      VersionGetter vg;
-      invokeOnEach(
-          God->pool().byIdentBegin(kind, capstr),
-          God->pool().byIdentEnd(kind,capstr),
-          ByInstalled(),
-          functorRef<bool,const zypp::PoolItem&> (vg));
-      // installed found
-      if (vg.found)
-      {
-        // check for newer version of that resolvable
-        NewerVersionGetter nvg(vg.edition);
-        invokeOnEach(
-             God->pool().byIdentBegin(kind, capstr),
-             God->pool().byIdentEnd(kind,capstr),
-             not_c(ByInstalled()),
-             functorRef<bool,const zypp::PoolItem&> (nvg));
-        // newer version found
-        if (nvg.found)
-        {
-          DBG << "installed resolvable named " << capstr
-            << " found, changing capability to " << new_capstr << endl;
-          new_capstr = capstr + " > " + vg.edition.asString();
-        }
-      }
-    }
-    cap = Capability( new_capstr.c_str(), kind );
-  }
-  catch (const Exception& e) {
-    //! \todo check this handling (should we fail or set a special exit code?)
-    ZYPP_CAUGHT(e);
-    zypper.out().error(boost::str(
-      format(_("Cannot parse capability '%s'.")) % capstr));
-  }
-  return cap;
 }
 
 // this does only resolvables with this _name_.
@@ -578,7 +464,7 @@ void install_remove(Zypper & zypper,
 
         DBG << "trying: " << trythis << endl;
 
-        Capability cap = safe_parse_cap (zypper, kind, trythis);
+        Capability cap = safe_parse_cap (zypper, trythis, kind);
         sat::WhatProvides q(cap);
 
         if (!q.empty())
@@ -612,7 +498,7 @@ void install_remove(Zypper & zypper,
 
     // try by capability
 
-    Capability cap = safe_parse_cap (zypper, kind, str);
+    Capability cap = safe_parse_cap (zypper, str, kind);
     sat::WhatProvides q(cap);
 
     // is there a provider for the requested capability?

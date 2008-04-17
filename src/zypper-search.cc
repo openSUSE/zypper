@@ -257,6 +257,24 @@ void list_products(Zypper & zypper)
     cout << tbl;
 }
 
+
+void list_what_provides(Zypper & zypper, const string & str)
+{
+  Capability cap = safe_parse_cap (zypper, /*kind,*/ str);
+  sat::WhatProvides q(cap);
+
+  // is there a provider for the requested capability?
+  if (q.empty())
+  {
+    zypper.out().info(str::form(_("No providers of '%s' found."), str.c_str()));
+    return;
+  }
+
+  Table t;
+  invokeOnEach(q.selectableBegin(), q.selectableEnd(), FillSearchTableSolvable(t) );
+  cout << t;
+}
+
 // Local Variables:
 // c-basic-offset: 2
 // End:

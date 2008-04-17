@@ -8,6 +8,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml_escape_parser.hpp"
+#include "zypp/Capability.h"
 
 #include "zypper.h"
 #include "zypper-main.h"
@@ -62,10 +63,15 @@ void report_a_bug (Out & out)
 
 void report_too_many_arguments(const string & specific_help)
 {
+  report_too_many_arguments(Zypper::instance()->out(), specific_help);
+}
+
+void report_too_many_arguments(Out & out, const string & specific_help)
+{
   //! \todo make this more explanatory, e.g. "Ingoring arg1 arg2. This command does not take arguments. See %s for more information."
   ostringstream s;
   s << _("Usage") << ':' << endl << specific_help;
-  Zypper::instance()->out().error(_("Too many arguments."), s.str());
+  out.error(_("Too many arguments."), s.str());
 }
 
 // ----------------------------------------------------------------------------
@@ -303,4 +309,46 @@ std::string & indent(std::string & text, int columns)
   replace_all(text, "\n", indent);
   text.insert(0, string(columns, ' '));
   return text;
+}
+
+static string preparse_cap_str(const string & capstr)
+{
+  // expect versioned caps as NAME[OP<EDITION>]
+  // transform to NAME[ OP <EDITION>] (add spaces)
+  string new_capstr = capstr;
+  DBG << "capstr: " << capstr << endl;
+  string::size_type op_pos = capstr.find_first_of("<>=");
+  if (op_pos != string::npos)
+  {
+    new_capstr.insert(op_pos, " ");
+    DBG << "new capstr: " << new_capstr << endl;
+    op_pos = new_capstr.find_first_not_of("<>=", op_pos + 1);
+    if (op_pos != string::npos && new_capstr.size() > op_pos)
+    {
+      new_capstr.insert(op_pos, " ");
+      DBG << "new capstr: " << new_capstr << endl;
+    }
+  }
+  
+  return new_capstr;
+}
+
+Capability safe_parse_cap (Zypper & zypper,
+                           const string & capstr,
+                           const ResKind & kind)
+{
+  try
+  {
+    if (kind == ResKind::nokind)
+      return Capability(preparse_cap_str(capstr));
+    else
+      return Capability(preparse_cap_str(capstr), kind);
+  }
+  catch (const Exception& e)
+  {
+    //! \todo check this handling (should we fail or set a special exit code?)
+    ZYPP_CAUGHT(e);
+    zypper.out().error(str::form(_("Cannot parse capability '%s'."), capstr.c_str()));
+  }
+  return Capability();
 }

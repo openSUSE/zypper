@@ -11,6 +11,7 @@
 #define ZMART_MISC_H
 
 #include <string>
+
 #include "zypp/ResKind.h"
 #include "zypp/PoolItem.h"
 
@@ -19,7 +20,7 @@
 #include "zypper-utils.h"
 
 
-zypp::ResObject::Kind string_to_kind (const std::string &skind);
+zypp::ResKind string_to_kind (const std::string & skind);
 
 /**
  * Run the solver.

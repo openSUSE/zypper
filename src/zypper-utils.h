@@ -19,7 +19,8 @@ std::string readline_getline();
 void report_a_bug (Out & out);
 
 /** Say that too many arguments have been specified */
-void report_too_many_arguments(const std::string & specific_help);
+void report_too_many_arguments(const std::string & specific_help); // deprecated
+void report_too_many_arguments(Out & out, const std::string & specific_help);
 
 /** Say the specified option has no effect */
 void report_dummy_option(Out & out, const std::string & longoption_str);
@@ -68,6 +69,11 @@ zypp::Pathname cache_rpm(const std::string & rpm_uri_str,
 std::string xml_encode(const std::string & text);
 
 std::string & indent(std::string & text, int columns);
+
+zypp::Capability safe_parse_cap (Zypper & zypper,
+                                 const std::string & capstr,
+                                 const zypp::ResKind & kind = zypp::ResKind::nokind);
+
 
 //comparator for RepoInfo set
 class RepoInfoAliasComparator{
