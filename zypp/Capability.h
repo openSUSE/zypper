@@ -41,8 +41,12 @@ namespace zypp
   //
   /** A sat capability.
    *
+   * A Capability: <tt>"name[.arch] [op edition]"</tt>
+   *
    * If a certain \ref ResKind is specified upon construction, the
-   * capabilities name part is prefixed accordingly:
+   * capabilities name part is prefixed accordingly. If no \ref ResKind
+   * is specified, it's assumed you refer to a package or the name is
+   * already prefixed:
    * \code
    * Capability( "foo" )                   ==> 'foo'
    * Capability( "foo", ResKind::package ) ==> 'foo'
@@ -65,9 +69,13 @@ namespace zypp
       /** Ctor from id. */
       explicit Capability( sat::detail::IdType id_r ) : _id( id_r ) {}
 
+      /** \name Ctors parsing a Capability: <tt>"name[.arch] [op edition]"</tt>
+      */
+      //@{
       /** Ctor from string.
        * \a str_r is parsed to check whether it contains an <tt>[op edition]</tt> part,
-       * unless the \ref PARSED flag is passed to the ctor.
+       * unless the \ref PARSED flag is passed to the ctor. In that case <tt>"name[.arch]"</tt>
+       * is assumed.
       */
       explicit Capability( const char * str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
       /** \overload */
@@ -76,13 +84,37 @@ namespace zypp
       Capability( const char * str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
       /** \overload */
       Capability( const std::string & str_r, CtorFlag flag_r, const ResKind & prefix_r = ResKind() );
+      //@}
 
-      /** Ctor from <tt>name op edition</tt>. */
+      /** \name Ctors parsing a broken down Capability: <tt>( "name[.arch]", op, edition )</tt>
+      */
+      //@{
+      /** Ctor from <tt>name[.arch] op edition</tt>. */
       Capability( const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
       /** \overload */
       Capability( const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
       /** \overload */
       Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
+      //@}
+
+#if 0
+      /** \name Ctors taking a broken down Capability: <tt>( arch, name, op, edition )</tt>
+      */
+      //@{
+      /** Ctor from <tt>arch name op edition</tt>. */
+      Capability( const std::string & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const Arch & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+      /** \overload */
+      Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
+      //@}
+#endif
 
     public:
       /** No or Null \ref Capability ( Id \c 0 ). */

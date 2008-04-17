@@ -17,6 +17,7 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/Arch.h"
 #include "zypp/Rel.h"
 #include "zypp/Edition.h"
 #include "zypp/Capability.h"
@@ -32,9 +33,17 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
+    sat::detail::IdType relFromStr( ::_Pool * pool_r,
+                                    const Arch & arch_r,
+                                    const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
+    {
+      sat::detail::IdType nid( sat::detail::noId );
+      return nid;
+    }
 
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
-                                    const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
+                                    const std::string & name_r, Rel op_r, const Edition & ed_r,
+                                    const ResKind & kind_r )
     {
       sat::detail::IdType nid( sat::detail::noId );
       if ( ! kind_r || kind_r == ResKind::package )
@@ -58,7 +67,8 @@ namespace zypp
     }
 
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
-                                      const std::string & str_r, const ResKind & kind_r, Capability::CtorFlag flag_r )
+                                      const std::string & str_r, const ResKind & kind_r,
+                                      Capability::CtorFlag flag_r )
     {
       // strval_r has at least two words which could make 'op edition'?
       // improve regex!
@@ -129,6 +139,15 @@ namespace zypp
   Capability::Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r )
   : _id( relFromStr( myPool().getPool(), name_r, op_r, ed_r, prefix_r ) )
   {}
+
+#if 0
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
+#endif
 
   const char * Capability::c_str() const
   { return( _id ? ::dep2str( myPool().getPool(), _id ) : "" ); }
