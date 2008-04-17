@@ -13,11 +13,11 @@ N1: zypp does not have this concept
     Usage: rug <options> <command> <command-options> ...
     
     General Options:
-        --normal-output     Normal output (default)
-        --terse             Terse output
-        --no-abbrev         No abbreviation
-        --debug             Debug output, print full exception traces
-        --quiet             Quiet output, print only error messages
+++      --normal-output     Normal output (default)
++       --terse             Terse output
+++      --no-abbrev         No abbreviation
+++      --debug             Debug output, print full exception traces
+++      --quiet             Quiet output, print only error messages
 
 ------------------+----+----------------------------+----------------------------
  zypper command   | St | rug command                | rug description
@@ -47,33 +47,33 @@ N1: zypp does not have this concept
                     N1    dump                         Get an dump of system information as a sqlite database
                     +     file-list (fl)               List files within a package
                     N1    history (hi)                 Search log entries
- info               ++    info (if)                    Show the full info for packages
+                    ++    info (if)                    Show the full info for packages
                     +     info-conflicts (ic)          List all conflicts for package
                     +     info-obsoletes (io)          List all obsoletes for package
                     +     info-provides (ip)           List package's provides
                     +     info-requirements (ir)       List package's requirements
- install            ++    install (in)                 Install packages
+                    ++    install (in)                 Install packages
                     ++    list-updates (lu)            Show the available updates.
                     +     package-file (pf)            Get package which contains file
-                    +     packages (pa)                Show the packages in a given catalog
+                    ++    packages (pa)                Show the packages in a given catalog
                     +     patch-search (pse)           Search for patches matching a pattern
- remove             ++    remove (rm)                  Remove packages
+                    ++    remove (rm)                  Remove packages
                     N1    rollback (ro)                Rollback packages to a specified date
- search             ++    search (se)                  Search for packages matching a pattern
- update             +1    summary (sum)                Show a per-catalog summary of available updates.
+                    ++    search (se)                  Search for packages matching a pattern
+                    +1    summary (sum)                Show a per-catalog summary of available updates.
                     ++    update (up)                  Update packages
- verify             ++    verify (ve)                  Verify system dependencies
+                    ++    verify (ve)                  Verify system dependencies
                     +     what-conflicts (wc)          List packages that conflict with a given token
-                    +     what-provides (wp)           Show which packages provide a given token
+                    ++    what-provides (wp)           Show which packages provide a given token
                     +     what-requires (wr)           Show which packages require a given token
                         
                         Patch management:
- search -t patch    ++    patches (pch)                Show the patches in a given catalog
+                    ++    patches (pch)                Show the patches in a given catalog
  info -t patch      ++    patch-info                   Show detailed information for a patch
  
                         Pattern management:
  info -t pattern    ++    pattern-info                 Show detailed information for a pattern
- search -t pattern  +     patterns (pt)                Show the patterns in a given catalog
+                    ++    patterns (pt)                Show the patterns in a given catalog
  
                         Preference management:
                     ?     get-prefs (get prefs)        List the system preferences that may be set
@@ -81,24 +81,24 @@ N1: zypp does not have this concept
                         
                         Product management:
  info -t product    ++    product-info                 Show detailed information for a product
- search -t product  +     products (pd)                Show the products in a given catalog
+                    ++    products (pd)                Show the products in a given catalog
                         
                         Security:
-                    N1    key-add (ka)                 Add to the list of whitelisted keys for a service
-                    N1    key-delete (kd)              Remove from the list of whitelisted keys for a service
-                    N1    key-list (kl)                Display whitelisted keys for a service
+                    ?     key-add (ka)                 Add to the list of whitelisted keys for a service
+                    ?     key-delete (kd)              Remove from the list of whitelisted keys for a service
+                    ?     key-list (kl)                Display whitelisted keys for a service
                         
                         Service management:
                     ?     mount                        Mount directory as a channel
- refresh            ++    refresh (ref)                Refresh all or some services
+                    ++    refresh (ref)                Refresh all or some services
                     ?     register (reg)               Register a service
  addrepo            ++    service-add (sa)             Add a service
- rmrepo             ++    service-delete (sd)          Delete a service
- listrepos          ++    service-list (sl)            List the available services
+ removerepo         ++    service-delete (sd)          Delete a service
+ repos              ++    service-list (sl)            List the available services
                     ?     service-types (st)           List the available service types
                         
                         System:
-                    ++     clean-cache (cc)             Clean the HTTP cache
+                    ++    clean-cache (cc)             Clean the HTTP cache
                     N1    load-modules (lm)            Load ZMD modules
                     N1    ping                         Ping the deamon
                     N1    restart                      Restart the daemon
