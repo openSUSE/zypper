@@ -46,20 +46,20 @@ namespace zypp
     Impl()
       : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING )
       , _status_flags(ALL)
-      , _match_word(false) 
+      , _match_word(false)
       , _require_all(false)
       , _compiled(false)
     {}
-    
+
     ~Impl()
     {}
 
   public:
     const_iterator begin() const;
     const_iterator end() const;
-    
+
     string asString() const;
-    
+
     void compile() const;
   private:
     string createRegex(const StrContainer & container) const;
@@ -104,21 +104,21 @@ namespace zypp
     { return new Impl( *this ); }
   };
 
-  
+
   struct MyInserter
   {
     MyInserter(PoolQuery::StrContainer & cont) : _cont(cont) {}
-    
+
     bool operator()(const string & str)
     {
       _cont.insert(str);
       return true;
     }
-    
+
     PoolQuery::StrContainer & _cont;
   };
 
-  
+
   struct EmptyFilter
   {
     bool operator()(const string & str)
@@ -136,7 +136,7 @@ namespace zypp
     // 'same'              - will pass the compiled string to dataiterator_init
     // 'one-attr'          - will pass it to dataiterator_init
     // 'one-non-regex-str' - will pass to dataiterator_init, set flag to SEARCH_STRING or SEARCH_SUBSTRING
-    
+
     // // NO ATTRIBUTE
     // else
     //   for all _strings
@@ -148,7 +148,7 @@ namespace zypp
         _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;//setMatchRegex();
     }
 
-    // // ONE ATTRIBUTE 
+    // // ONE ATTRIBUTE
     // else if _attrs is not empty but it contains just one attr
     //   for all _strings and _attr[key] strings
     //     create regex; store in _rcattrs; flag 'one-attr'; if more strings flag regex;
@@ -164,7 +164,7 @@ namespace zypp
     // // MULTIPLE ATTRIBUTES
     else
     {
-      // check whether there are any per-attribute strings 
+      // check whether there are any per-attribute strings
       bool attrvals_empty = true;
       for (AttrRawStrMap::const_iterator ai = _attrs.begin(); ai != _attrs.end(); ++ai)
         if (!ai->second.empty())
@@ -251,7 +251,7 @@ attremptycheckend:
       _cflags &= ~SEARCH_ALL_REPOS;
 
     _compiled = true;
-    
+
     DBG << asString() << endl;
   }
 
@@ -398,16 +398,16 @@ attremptycheckend:
     else if (_rcattrs.size() == 1)
     {
       ::dataiterator_init(_rdit.get(),
-        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this 
+        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this
         0,                                           // search all solvables
         _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
-        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string 
+        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
         _cflags);
     }
     else
     {
       ::dataiterator_init(_rdit.get(),
-        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), /* repository - switch to next at the end of current one in increment() */ 
+        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), /* repository - switch to next at the end of current one in increment() */
         0, /*search all resolvables */
         0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
         0, //qs.empty() ? 0 : qs.c_str(), /* create regex, pass it here */
@@ -436,7 +436,7 @@ attremptycheckend:
     ostringstream o;
 
     o << "compiled: " << _compiled << endl;
-    
+
     o << "kinds: ";
     for(Kinds::const_iterator it = _kinds.begin();
         it != _kinds.end(); ++it)
@@ -450,7 +450,7 @@ attremptycheckend:
     o << endl;
 
     o << "string match flags:" << endl;
-    o << "* string/substring/glob/regex: " << (_cflags & SEARCH_STRINGMASK) << endl; 
+    o << "* string/substring/glob/regex: " << (_cflags & SEARCH_STRINGMASK) << endl;
     o << "* SEARCH_NOCASE: " << ((_cflags & SEARCH_NOCASE) ? "yes" : "no") << endl;
     o << "* SEARCH_ALL_REPOS: " << ((_cflags & SEARCH_ALL_REPOS) ? "yes" : "no") << endl;
     o << "status filter flags:" << _status_flags << endl;
@@ -522,7 +522,7 @@ attremptycheckend:
   , _status_flags(pqimpl->_status_flags)
   {
     this->base_reference() = LookupAttr::iterator(dip_r, true); //!\todo pass chain_repos
-    _has_next = (*base_reference() != sat::detail::noId); 
+    _has_next = (*base_reference() != sat::detail::noId);
   }
 
 
@@ -600,7 +600,7 @@ attremptycheckend:
         while(1)
         {
           drop_by_repo = false;
-          if(!_repos.empty() && 
+          if(!_repos.empty() &&
              _repos.find(base().get()->repo->name) == _repos.end())
           {
             drop_by_repo = true;
@@ -677,7 +677,7 @@ attremptycheckend:
 	      /* After calling dataiterator_match (with any string matcher set)
 	         the kv.str member will be filled with something sensible.  */
               /* INT << "value: " << base().get()->kv.str << endl
-                  << " mstr: " <<  sstr << endl; */ 
+                  << " mstr: " <<  sstr << endl; */
           }
         }
       }
@@ -803,8 +803,9 @@ attremptycheckend:
   const PoolQuery::StrContainer &
   PoolQuery::attribute(const sat::SolvAttr & attr) const
   {
-    AttrRawStrMap::const_iterator it = _pimpl->_attrs.find(attr); 
-    return it != _pimpl->_attrs.end() ? it->second : StrContainer();
+    static const PoolQuery::StrContainer nocontainer;
+    AttrRawStrMap::const_iterator it = _pimpl->_attrs.find(attr);
+    return it != _pimpl->_attrs.end() ? it->second : nocontainer;
   }
 
   const PoolQuery::Kinds &
@@ -876,7 +877,7 @@ attremptycheckend:
       friend class IdStringType<PoolQueryAttr>;
       IdString _str;
     public:
-    
+
     //noAttr
     PoolQueryAttr(){}
 
@@ -1082,7 +1083,7 @@ attremptycheckend:
         SolvAttr a(s);
         addAttribute(a,attrValue);
       }
-      
+
     } while ( true );
 
     return finded_something;
@@ -1091,10 +1092,10 @@ attremptycheckend:
   void PoolQuery::serialize( ostream &str, char delim ) const
   {
     //separating delim
-    str << delim; 
+    str << delim;
     //iterate thrue all settings and write it
     static const zypp::PoolQuery q; //not save default options, so create default query example
-    
+
     for_( it, repos().begin(), repos().end() )
     {
       str << "repo: " << *it << delim ;
@@ -1133,7 +1134,7 @@ attremptycheckend:
       {
         str << "on" << delim;
       }
-      else 
+      else
       {
         str << "off" << delim;
       }
@@ -1146,7 +1147,7 @@ attremptycheckend:
       {
         str << "on" << delim;
       }
-      else 
+      else
       {
         str << "off" << delim;
       }
@@ -1176,7 +1177,7 @@ attremptycheckend:
     for_( it, attributes().begin(), attributes().end() )
     {
       string s = it->first.asString();
-      boost::replace_all(s,":","_"); 
+      boost::replace_all(s,":","_");
       for_( it2,it->second.begin(),it->second.end() )
       {
         str << s <<": "<< *it2 << delim;
@@ -1184,7 +1185,7 @@ attremptycheckend:
     }
 
     //separating delim - protection
-    str << delim; 
+    str << delim;
 
   }
 
