@@ -29,7 +29,7 @@ bool isLocked( const sat::Solvable & solvable )
 static void init_pool()
 {
   Pathname dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/Locks";
+  dir += "/zypp/data/PoolQuery";
 
   ZYpp::Ptr z = getZYpp();
   ZConfig::instance().setSystemArchitecture(Arch("i586"));
