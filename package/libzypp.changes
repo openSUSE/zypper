@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 17 16:29:15 CEST 2008 - ma@suse.de
+
+- Fixed pools package index wrongly including source packages. (bnc #380283)
+- version 4.13.2
+- revision 9683
+
+-------------------------------------------------------------------
 Wed Apr 16 15:00:19 CEST 2008 - ma@suse.de
 
 - Disable fast creation of @System.solv. It may produce wrong results 

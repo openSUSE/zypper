@@ -512,33 +512,61 @@ namespace zypp
   }
 }
 
-void dit( const Pattern::Contents & c_r )
+template <class _Res>
+void ttest( const PoolItem & pi_r )
 {
+  MIL << pi_r  << endl;
+  if ( ! pi_r.resolvable() )
   {
-  sat::WhatProvides c( Capability("amarok") );
-  dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
-  dumpRange( MIL, c.poolItemBegin(), c.poolItemEnd() ) << endl;
-  dumpRange( MIL, c.selectableBegin(), c.selectableEnd() ) << endl;
+    ERR << "NO ResObj Ptr" << endl;
+    return;
   }
-  if(0){
-  const Pattern::Contents & c( c_r );
-  dumpRange( MIL, c.solvableBegin(), c.solvableEnd() ) << endl;
-  dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
-  dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
+  typename _Res::constPtr p = boost::dynamic_pointer_cast<const _Res>( pi_r.resolvable() );
+  if ( ! p )
+  {
+    ERR << "Kind cast missmatch " << pi_r << endl;
+  }
+  ResKind k = pi_r->kind();
+  if ( k != ResTraits<_Res>::kind )
+  {
+    ERR << "Kind traits missmatch " << k << " <> " << ResTraits<_Res>::kind << endl;
+  }
+  if ( ! pi_r->isKind( ResTraits<_Res>::kind ) )
+  {
+    ERR << "IsKind missmatch " << k << " <> " << ResTraits<_Res>::kind << endl;
   }
 }
-
-void ditest( sat::Solvable slv_r )
-{
-  MIL << slv_r << endl;
-  Package::Ptr   pkg( make<Package>( slv_r ) );
-  dumpRange( DBG, pkg->keywords().begin(), pkg->keywords().end() ) << endl;
-  return;
-}
-
 void ditest( const PoolItem & pi_r )
 {
-  ditest( pi_r.satSolvable() );
+  ttest<Package>( pi_r );
+  return;
+
+  ResKind kind( pi_r->kind() );
+  if ( kind == ResKind::package )
+  {
+    ttest<Package>( pi_r );
+  }
+  else if ( kind == ResKind::pattern )
+  {
+    ttest<Pattern>( pi_r );
+  }
+  else if ( kind == ResKind::patch )
+  {
+    ttest<Patch>( pi_r );
+  }
+  else if ( kind == ResKind::product )
+  {
+    ttest<Product>( pi_r );
+  }
+  else if ( kind == ResKind::srcpackage )
+  {
+    ttest<SrcPackage>( pi_r );
+  }
+  else
+  {
+    if ( kind != ResKind::atom )
+    ERR << "Unknown kind " << kind << endl;
+  }
 }
 
 
@@ -559,7 +587,7 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
 
-  if ( 0 )
+  if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -639,6 +667,13 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  //std::for_each( pool.begin(), pool.end(), &ditest );
+  std::for_each( pool.byKindBegin<Package>(), pool.byKindEnd<Package>(), &ditest );
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
   //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
 
   if ( !pool.empty() )

@@ -60,6 +60,7 @@ namespace zypp
     using sat::Solvable::ident;
 
     using sat::Solvable::kind;
+    using sat::Solvable::isKind;
     using sat::Solvable::name;
     using sat::Solvable::edition;
     using sat::Solvable::arch;

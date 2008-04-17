@@ -253,9 +253,12 @@ namespace zypp
       NO_SOLVABLE_RETURN( false );
 
       // detect srcpackages by 'arch'
-      if ( kind_r == ResKind::srcpackage )
+      switch ( _solvable->arch )
       {
-        return( _solvable->arch == ARCH_SRC || _solvable->arch == ARCH_NOSRC );
+        case ARCH_SRC:
+        case ARCH_NOSRC:
+          return( kind_r == ResKind::srcpackage );
+          break;
       }
 
       // no ':' in package names (hopefully)
