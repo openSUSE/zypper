@@ -264,7 +264,13 @@ void Zypper::processGlobalOptions()
     {"verbose",                    no_argument,       0, 'v'},
     {"quiet",                      no_argument,       0, 'q'},
     {"version",                    no_argument,       0, 'V'},
+    // rug compatibility alias for -vv
+    {"debug",                      no_argument,       0,  0 },
+    // rug compatibility alias for the default output level => ignored
+    {"normal-output",              no_argument,       0,  0 },
+    // not implemented currently => ignored
     {"terse",                      no_argument,       0, 't'},
+    {"no-abbrev",                  no_argument,       0,  0 },
     {"table-style",                required_argument, 0, 's'},
     {"rug-compatible",             no_argument,       0, 'r'},
     {"non-interactive",            no_argument,       0, 'n'},
@@ -294,13 +300,21 @@ void Zypper::processGlobalOptions()
 
   parsed_opts::const_iterator it;
 
+  // ====== output setup ======
+  // depends on global options, that's we set it up here
+  //! \todo create a default in the zypper constructor, recreate here.
+
   // determine the desired verbosity
   int iverbosity = 0;
-  if (gopts.count("quiet")) {
+  //// --quiet
+  if (gopts.count("quiet"))
+  {
     _gopts.verbosity = iverbosity = -1;
     DBG << "Verbosity " << _gopts.verbosity << endl;
   }
-  if ((it = gopts.find("verbose")) != gopts.end()) {
+  //// --verbose
+  if ((it = gopts.find("verbose")) != gopts.end())
+  {
     //! \todo if iverbosity is -1 now, say we conflict with -q
     _gopts.verbosity += iverbosity = it->second.size();
     // _gopts.verbosity += gopts["verbose"].size();
@@ -315,11 +329,19 @@ void Zypper::processGlobalOptions()
     default: verbosity = Out::DEBUG;
   }
 
+  //// --debug
+  // rug compatibility alias for -vv
+  if (gopts.count("debug"))
+    verbosity = Out::DEBUG;
+
   // create output object
+
+  //// --xml-out
   if (gopts.count("xmlout"))
   {
     _out_ptr = new OutXML(verbosity);
     _gopts.machine_readable = true;
+    _gopts.no_abbrev = true;
   }
   else
     _out_ptr = new OutNormal(verbosity);
@@ -327,6 +349,29 @@ void Zypper::processGlobalOptions()
   out().info(boost::str(format(_("Verbosity: %d")) % _gopts.verbosity), Out::HIGH);
   DBG << "Verbosity " << verbosity << endl;
   DBG << "Output type " << _out_ptr->type() << endl;
+
+  if (gopts.count("no-abbrev"))
+    _gopts.no_abbrev = true;
+
+  if ((it = gopts.find("table-style")) != gopts.end())
+  {
+    unsigned s;
+    str::strtonum (it->second.front(), s);
+    if (s < _End)
+      Table::defaultStyle = (TableStyle) s;
+    else
+      out().error(str::form(_("Invalid table style %d."), s),
+          str::form(_("Use an integer number from %d to %d"), 0, 8));
+  }
+
+  if (gopts.count("terse")) 
+  {
+    _gopts.machine_readable = true;
+    _gopts.no_abbrev = true;
+    out().error("--terse is not implemented, does nothing");
+  }
+
+  // ======== other global options ========
 
   if (gopts.count("rug-compatible"))
   {
@@ -354,15 +399,6 @@ void Zypper::processGlobalOptions()
     _gopts.no_gpg_checks = true;
     out().info(_("Entering 'no-gpg-checks' mode."), Out::HIGH);
     MIL << "Entering no-gpg-checks mode" << endl;
-  }
-
-  if ((it = gopts.find("table-style")) != gopts.end()) {
-    unsigned s;
-    str::strtonum (it->second.front(), s);
-    if (s < _End)
-      Table::defaultStyle = (TableStyle) s;
-    else
-      out().error(boost::str(format(_("Invalid table style %s")) % s) /** \todo hint */);
   }
 
   if ((it = gopts.find("root")) != gopts.end()) {
@@ -400,12 +436,6 @@ void Zypper::processGlobalOptions()
   DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
   DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
   DBG << "raw cache dir = " << _gopts.rm_options.repoRawCachePath << endl;
-
-  if (gopts.count("terse")) 
-  {
-    _gopts.machine_readable = true;
-    out().error("--terse is not implemented, does nothing");
-  }
 
   if (gopts.count("disable-repositories"))
   {
