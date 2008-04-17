@@ -512,61 +512,23 @@ namespace zypp
   }
 }
 
-template <class _Res>
-void ttest( const PoolItem & pi_r )
-{
-  MIL << pi_r  << endl;
-  if ( ! pi_r.resolvable() )
-  {
-    ERR << "NO ResObj Ptr" << endl;
-    return;
-  }
-  typename _Res::constPtr p = boost::dynamic_pointer_cast<const _Res>( pi_r.resolvable() );
-  if ( ! p )
-  {
-    ERR << "Kind cast missmatch " << pi_r << endl;
-  }
-  ResKind k = pi_r->kind();
-  if ( k != ResTraits<_Res>::kind )
-  {
-    ERR << "Kind traits missmatch " << k << " <> " << ResTraits<_Res>::kind << endl;
-  }
-  if ( ! pi_r->isKind( ResTraits<_Res>::kind ) )
-  {
-    ERR << "IsKind missmatch " << k << " <> " << ResTraits<_Res>::kind << endl;
-  }
-}
 void ditest( const PoolItem & pi_r )
 {
-  ttest<Package>( pi_r );
-  return;
+}
 
-  ResKind kind( pi_r->kind() );
-  if ( kind == ResKind::package )
+void tt()
+{
+  WAR << "+++TTT" << endl;
+  getZYpp()->pool();
+  WAR << "+  TTT" << endl;
+  for (zypp::ResPool::repository_iterator it =
+       getZYpp()->pool().knownRepositoriesBegin()
+       ; it != getZYpp()->pool().knownRepositoriesEnd()
+       ; ++it)
   {
-    ttest<Package>( pi_r );
+    WAR << it->info().alias() << endl;
   }
-  else if ( kind == ResKind::pattern )
-  {
-    ttest<Pattern>( pi_r );
-  }
-  else if ( kind == ResKind::patch )
-  {
-    ttest<Patch>( pi_r );
-  }
-  else if ( kind == ResKind::product )
-  {
-    ttest<Product>( pi_r );
-  }
-  else if ( kind == ResKind::srcpackage )
-  {
-    ttest<SrcPackage>( pi_r );
-  }
-  else
-  {
-    if ( kind != ResKind::atom )
-    ERR << "Unknown kind " << kind << endl;
-  }
+  WAR << "---TTT" << endl;
 }
 
 
@@ -581,11 +543,12 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
-  ZConfig::instance().setTextLocale(Locale("de"));
-
-  sat::Pool satpool( sat::Pool::instance() );
+  //ZConfig::instance().setTextLocale(Locale("de"));
+tt();
+tt();
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
+  sat::Pool satpool( sat::Pool::instance() );
 
   if ( 1 )
   {
@@ -645,7 +608,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -667,8 +630,13 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  //std::for_each( pool.begin(), pool.end(), &ditest );
-  std::for_each( pool.byKindBegin<Package>(), pool.byKindEnd<Package>(), &ditest );
+  for (zypp::ResPool::repository_iterator it =
+       getZYpp()->pool().knownRepositoriesBegin()
+       ; it != getZYpp()->pool().knownRepositoriesEnd()
+       ; ++it)
+  {
+    MIL << it->info().alias() << endl;
+  }
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
