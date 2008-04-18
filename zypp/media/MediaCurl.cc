@@ -214,6 +214,12 @@ MediaCurl::MediaCurl( const Url &      url_r,
     if( atemp != NULL)
       ::free(atemp);
   }
+
+  // set the right user agent string
+  curl_version_info_data *version_data;
+  version_data = curl_version_info(CURLVERSION_NOW);
+  _agent = str::form("ZYpp %s (curl %s)", VERSION, version_data->version);
+
 }
 
 void MediaCurl::setCookieFile( const Pathname &fileName )
@@ -344,7 +350,10 @@ void MediaCurl::attachTo (bool next)
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
+
     ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
+
+
     if ( ret != 0) {
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
