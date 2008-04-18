@@ -32,8 +32,9 @@
 #include "zypp/ResPool.h"
 
 extern "C" {
-#include "satsolver/solver.h"
-#include "satsolver/pool.h"
+  struct Queue;
+//#include "satsolver/solver.h"
+//#include "satsolver/pool.h"
 }
 
 
@@ -49,14 +50,14 @@ namespace zypp
 
 typedef enum {
     QUEUE_ITEM_TYPE_UNKNOWN = 0,
-    QUEUE_ITEM_TYPE_UPDATE,    
+    QUEUE_ITEM_TYPE_UPDATE,
     QUEUE_ITEM_TYPE_INSTALL,
     QUEUE_ITEM_TYPE_DELETE,
     QUEUE_ITEM_TYPE_INSTALL_ONE_OF,
-    QUEUE_ITEM_TYPE_LOCK    
+    QUEUE_ITEM_TYPE_LOCK
 } SolverQueueItemType;
 
-	
+
 typedef std::list<SolverQueueItem_Ptr> SolverQueueItemList;
 
 #define CMP(a,b) (((a) < (b)) - ((b) < (a)))
@@ -66,11 +67,11 @@ typedef std::list<SolverQueueItem_Ptr> SolverQueueItemList;
 //	CLASS NAME : SolverQueueItem
 
 class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable {
-    
+
   private:
 
     SolverQueueItemType _type;
-    ResPool _pool;    
+    ResPool _pool;
 
   protected:
 
@@ -99,8 +100,8 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
     bool isDelete (void) const { return _type == QUEUE_ITEM_TYPE_DELETE; }
     bool isInstall (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL; }
     bool isUpdate (void) const { return _type == QUEUE_ITEM_TYPE_UPDATE; }
-    bool isLock (void) const { return _type == QUEUE_ITEM_TYPE_LOCK; }    
-    bool isInstallOneOf (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL_ONE_OF; }    
+    bool isLock (void) const { return _type == QUEUE_ITEM_TYPE_LOCK; }
+    bool isInstallOneOf (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL_ONE_OF; }
 
 
     virtual SolverQueueItem_Ptr copy (void) const = 0;
