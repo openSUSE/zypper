@@ -35,6 +35,7 @@
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
 #include "zypp/Capability.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 extern "C" {
 #include "satsolver/solver.h"
 #include "satsolver/pool.h"
@@ -86,6 +87,13 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     std::string SATprobleminfoString (Id problem, std::string &detail);
     void resetItemTransaction (PoolItem item);
 
+    // Create a SAT solver and reset solver selection in the pool (Collecting 
+    void solverInit();
+    // common solver run with the _jobQueue; Save results back to pool
+    bool solving();
+    // cleanup solver
+    void solverEnd();
+    
   public:
 
     SATResolver (const ResPool & pool, Pool *SATPool);
@@ -100,8 +108,12 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
 
+    // solver run with pool selected items
     bool resolvePool(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps);
+    // solver run with the given request queue
+    bool resolveQueue(const SolverQueueItemList &requestQueue);
+    // searching for new packages
     bool doUpdate();
 
     ResolverProblemList problems ();

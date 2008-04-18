@@ -256,11 +256,9 @@ Resolver::undo(void)
     return;
 }
 
-
-bool
-Resolver::resolvePool()
+void
+Resolver::solverInit()
 {
-
     // Solving with the satsolver
         static bool poolDumped = false;
 	MIL << "-------------- Calling SAT Solver -------------------" << endl;
@@ -273,14 +271,7 @@ Resolver::resolvePool()
 		testcase.createTestcase (*this, false, false); // write control file only
 	    }
 	}
-#if 0
-	MIL << "------SAT-Pool------" << endl;
-	for (sat::Pool::SolvableIterator i = satPool.solvablesBegin();
-	     i != satPool.solvablesEnd(); i++ ) {
-	    MIL << *i << " ID: " << i->id() << endl;
-	}
-	MIL << "------SAT-Pool end------" << endl;
-#endif
+
 	_satResolver->setFixsystem(false);
 	_satResolver->setAllowdowngrade(false);
 	_satResolver->setAllowarchchange(false);
@@ -310,9 +301,22 @@ Resolver::resolvePool()
 
 	if (_verifying)
 	    _satResolver->setFixsystem(true);
-	
-	return _satResolver->resolvePool(_extra_requires, _extra_conflicts);
 }
+
+bool
+Resolver::resolvePool()
+{
+    solverInit();
+    return _satResolver->resolvePool(_extra_requires, _extra_conflicts);
+}
+
+bool
+Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
+{
+    solverInit();
+    return _satResolver->resolveQueue(queue);
+}
+
 
 
 ///////////////////////////////////////////////////////////////////

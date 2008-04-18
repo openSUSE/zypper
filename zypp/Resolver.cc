@@ -64,6 +64,8 @@ namespace zypp
   { return _pimpl->verifySystem(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool(); }
+  bool Resolver::resolveQueue (zypp::solver::detail::SolverQueueItemList & queue)
+  { return _pimpl->resolveQueue(queue); }    
   void Resolver::undo()
   { _pimpl->undo(); }
   ResolverProblemList Resolver::problems ()

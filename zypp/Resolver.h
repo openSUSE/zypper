@@ -21,6 +21,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 #include "zypp/ProblemTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -58,18 +59,30 @@ namespace zypp
      *
      * Try to execute all pending transactions (there may be more than
      * one!).
-     * The solver pays attention to the BEST packages only in order to
-     * come to a solution. 
-     * If there has not been found a valid results all other branches
-     * (e.G. packages with older version numbers, worse architecture)
-     *  will be regarded.
+     * The solver collects all transactions (install/delete resolvables)
+     * from the pool, generates task, solving it and writes the 
+     * results back to pool
      *
      * Returns "true" on success (i.e., if there were no problems that
      * need user interaction) and "false" if there were problems.  In
      * the latter case, use problems() and later applySolutions()
      * below.
      **/
-    bool resolvePool (void);      
+    bool resolvePool (void);
+
+
+    /**
+     * Resolve package dependencies:
+     *
+     * The solver works off the given queue and writes back the solution
+     * to pool.
+     *
+     * Returns "true" on success (i.e., if there were no problems that
+     * need user interaction) and "false" if there were problems.  In
+     * the latter case, use problems() and later applySolutions()
+     * below.
+     **/
+    bool resolveQueue (solver::detail::SolverQueueItemList & queue);      
 
     /*
      * Undo solver changes done in resolvePool()

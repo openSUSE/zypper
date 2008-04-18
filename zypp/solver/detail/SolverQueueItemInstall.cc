@@ -74,7 +74,7 @@ bool SolverQueueItemInstall::addRule (Queue & q, Pool *SATPool)
     queue_push( &(q), id);
 
     MIL << "Install " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-Pooly: " << id << endl;        
+	<< " with SAT-PoolID: " << id << endl;        
     return true;
 }
 

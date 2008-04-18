@@ -35,6 +35,7 @@
 #include "zypp/base/SerialNumber.h"
 
 #include "zypp/solver/detail/Types.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
@@ -113,6 +114,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // (broken dependencies) will be deleted.
     void checkUnmaintainedItems ();
 
+    void solverInit();
+
   public:
 
     Resolver (const ResPool & pool);
@@ -156,6 +159,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool verifySystem ();
     bool resolvePool();
+    bool resolveQueue(solver::detail::SolverQueueItemList & queue);    
     bool doUpdate();
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
