@@ -31,15 +31,16 @@ N1: zypp does not have this concept
                     N1    bundle-lock-list (bll)       List bundle locks
                     N1    bundle-remove (brm)          Remove bundles
                     N1    bundle-search (bse)          Search for bundles
+                    N1    bundle-types (bt)            List the available bundle types
                     N1    bundle-upgrade (bup)         Upgrade bundles
                     ?     catalogs (ca)                List the available catalogs
                     ?     subscribe (sub)              Subscribe to catalogs
                     ?     unsubscribe (unsub)          Unsubscribe to catalogs
-                        
-                        Other:
-                          Unknown!                     
-                        
-                        Package management:
+                       
+                       File management:
+                    N1      bundle-files (bf)            Show the files in a given file bundle
+
+                       Package management:
                     N1    bundle-packages (bp)         Show the packages in a given bundle
                     N1    checkpoint-add (cpa)         Add a check point
                     N1    checkpoint-remove (cpr)      Remove a check point
@@ -56,7 +57,7 @@ N1: zypp does not have this concept
                     ++    list-updates (lu)            Show the available updates.
                     +     package-file (pf)            Get package which contains file
                     ++    packages (pa)                Show the packages in a given catalog
-                    +     patch-search (pse)           Search for patches matching a pattern
+search -t pattern   +     patch-search (pse)           Search for patches matching a pattern
                     ++    remove (rm)                  Remove packages
                     N1    rollback (ro)                Rollback packages to a specified date
                     ++    search (se)                  Search for packages matching a pattern
@@ -75,6 +76,9 @@ N1: zypp does not have this concept
  info -t pattern    ++    pattern-info                 Show detailed information for a pattern
                     ++    patterns (pt)                Show the patterns in a given catalog
  
+                        Policy management:
+                    ?     policy-list (pl)             List the available policies.
+
                         Preference management:
                     ?     get-prefs (get prefs)        List the system preferences that may be set
                     ?     set-prefs (set)              Set a preference variable
