@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Apr 18 14:52:24 CEST 2008 - jkupec@suse.cz
+
+- 'mount' command added (rug compatibility alias for
+  'zypper addrepo -t plaindir <localpath>') (fate #302148)
+- --name option added to addrepo command to be able to set repo
+  name
+- 'service-types' command (rug compatibility) - lists available
+  service types (hardcoded) (fate #302148)
+- clean-cache, cc, you-clean-cache, yc 'clean' command aliases for
+  rug (fate #302148)
+- r9700
+
+-------------------------------------------------------------------
 Fri Apr 18 12:33:12 CEST 2008 - jreidinger@suse.cz
 
 - add warning if as only one parameter is not specified repo file.
