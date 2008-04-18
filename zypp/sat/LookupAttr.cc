@@ -41,12 +41,12 @@ namespace zypp
       bool chain = false;
 
       if ( _solv )
-        ::dataiterator_init( dip.get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+        ::dataiterator_init( dip.get(), _solv.repository().id(), _solv.id(), _attr.id(), 0, 0 );
       else if ( _repo )
-        ::dataiterator_init( dip.get(), _repo.id(), 0, _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+        ::dataiterator_init( dip.get(), _repo.id(), 0, _attr.id(), 0, 0 );
       else if ( ! sat::Pool::instance().reposEmpty() )
       {
-        ::dataiterator_init( dip.get(), sat::Pool::instance().reposBegin()->id(), 0, _attr.id(), 0, SEARCH_NO_STORAGE_SOLVABLE );
+        ::dataiterator_init( dip.get(), sat::Pool::instance().reposBegin()->id(), 0, _attr.id(), 0, 0 );
         chain = true;
       }
       else
