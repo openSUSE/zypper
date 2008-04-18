@@ -45,12 +45,12 @@ namespace zypp
       if ( ! sep )
       {
         _kind = ResKind::package;
-        _name = ident_r.asString();
+        _name = ident_r;
         return;
       }
 
       // save name
-      _name = sep+1;
+      _name = IdString( sep+1 );
       // quick check for well known kinds
       if ( sep-ident >= 4 )
       {
