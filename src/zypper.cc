@@ -1829,6 +1829,15 @@ void Zypper::doCommand()
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       case 1:
+        if( !isRepoFile(_arguments[0] ))
+        {
+          out().error(
+            _("If only one argument is used, it must be a URI pointing to a .repo file."));
+          ERR << "Not repo file." << endl;
+          out().info(_command_help);
+          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+          return;
+        }
         add_repo_from_file(*this,_arguments[0], enabled);
 	break;
       case 2:

@@ -76,10 +76,20 @@ zypp::Capability safe_parse_cap (Zypper & zypper,
 
 
 //comparator for RepoInfo set
-class RepoInfoAliasComparator{
-  public: bool operator()(const zypp::RepoInfo &a, const zypp::RepoInfo& b){
+class RepoInfoAliasComparator
+{
+  public: bool operator()(const zypp::RepoInfo &a, const zypp::RepoInfo& b)
+  {
     return a.alias()<b.alias();
   }
 };
+
+/**
+ * checks name for .repo string
+ */
+inline bool isRepoFile(const std::string& name)
+{
+  return name.find(".repo") != name.npos ;
+}
 
 #endif /*ZYPPER_UTILS_H*/
