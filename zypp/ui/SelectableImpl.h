@@ -50,28 +50,14 @@ namespace zypp
       typedef SelectableTraits::installed_const_iterator installed_const_iterator;
       typedef SelectableTraits::installed_size_type      installed_size_type;
 
-
     public:
-      Impl( const ResObject::Kind & kind_r,
-            const std::string & name_r,
-            installed_const_iterator installedBegin_r,
-            installed_const_iterator installedEnd_r ,
-            available_const_iterator availableBegin_r,
-            available_const_iterator availableEnd_r )
-      : _kind( kind_r )
-      , _name( name_r )
-      , _installedItems( installedBegin_r, installedEnd_r )
-      , _availableItems( availableBegin_r, availableEnd_r )
-      {
-        setCandidate( NULL );
-      }
-
       template <class _Iterator>
       Impl( const ResObject::Kind & kind_r,
             const std::string & name_r,
             _Iterator begin_r,
             _Iterator end_r )
-      : _kind( kind_r )
+      : _ident( sat::Solvable::SplitIdent( kind_r, name_r ).ident() )
+      , _kind( kind_r )
       , _name( name_r )
       {
         for_( it, begin_r, end_r )
@@ -85,6 +71,10 @@ namespace zypp
       }
 
     public:
+      /**  */
+      IdString ident() const
+      { return _ident; }
+
       /**  */
       ResObject::Kind kind() const
       { return _kind; }
@@ -234,11 +224,12 @@ namespace zypp
       }
 
     private:
-      ResObject::Kind  _kind;
-      std::string      _name;
-      InstalledItemSet _installedItems;
-      AvailableItemSet _availableItems;
-      PoolItem         _candidate;
+      const IdString         _ident;
+      const ResObject::Kind  _kind;
+      const std::string      _name;
+      InstalledItemSet       _installedItems;
+      AvailableItemSet       _availableItems;
+      PoolItem               _candidate;
     };
     ///////////////////////////////////////////////////////////////////
 

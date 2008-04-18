@@ -61,6 +61,13 @@ namespace zypp
       typedef SelectableTraits::installed_size_type     installed_size_type;
 
     public:
+      /** The identifier.
+       * This is the solvables \ref name, \b except for packages and
+       * source packes, prefixed by it's \ref kind.
+       * \see \ref sat::Solvable.
+       */
+      IdString ident() const;
+
       /** The ResObjects kind. */
       ResObject::Kind kind() const;
 

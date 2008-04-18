@@ -48,6 +48,9 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
+    IdString Selectable::ident() const
+    { return _pimpl->ident(); }
+
     ResObject::Kind Selectable::kind() const
     { return _pimpl->kind(); }
 
@@ -105,8 +108,6 @@ namespace zypp
 
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
-
-
 
     ResStatus::TransactByValue Selectable::modifiedBy() const
     { return _pimpl->modifiedBy(); }
