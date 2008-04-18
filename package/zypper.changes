@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 18 17:50:45 CEST 2008 - jkupec@suse.cz
+
+- allow to force repository per-package using:
+  zypper install <repo_alias>:packagename (fate #302919)
+- r9707
+
+-------------------------------------------------------------------
 Fri Apr 18 14:52:24 CEST 2008 - jkupec@suse.cz
 
 - 'mount' command added (rug compatibility alias for
