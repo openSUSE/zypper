@@ -516,22 +516,6 @@ void ditest( const PoolItem & pi_r )
 {
 }
 
-void tt()
-{
-  WAR << "+++TTT" << endl;
-  getZYpp()->pool();
-  WAR << "+  TTT" << endl;
-  for (zypp::ResPool::repository_iterator it =
-       getZYpp()->pool().knownRepositoriesBegin()
-       ; it != getZYpp()->pool().knownRepositoriesEnd()
-       ; ++it)
-  {
-    WAR << it->info().alias() << endl;
-  }
-  WAR << "---TTT" << endl;
-}
-
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -543,9 +527,8 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
-  //ZConfig::instance().setTextLocale(Locale("de"));
-tt();
-tt();
+  ZConfig::instance().setTextLocale(Locale("de"));
+
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
   sat::Pool satpool( sat::Pool::instance() );
@@ -608,7 +591,7 @@ tt();
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -630,42 +613,22 @@ tt();
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  for (zypp::ResPool::repository_iterator it =
-       getZYpp()->pool().knownRepositoriesBegin()
-       ; it != getZYpp()->pool().knownRepositoriesEnd()
-       ; ++it)
-  {
-    MIL << it->info().alias() << endl;
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-  //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
-
   if ( !pool.empty() )
   {
-    std::string name( pool.begin()->resolvable()->name() );
-    PoolItem pi ( getPi<Package>( name ) );
+    PoolItem pi ( getPi<Package>( "aspell" ) );
     MIL << pi << endl;
     if ( pi )
     {
       pi.status().setTransact( true, ResStatus::USER );
-      //solve();
+      solve();
       vdumpPoolStats( USR << "Transacting:"<< endl,
                       make_filter_begin<resfilter::ByTransact>(pool),
                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
       install();
-
-      pi = getPi<Package>( name );
-      if ( pi )
-      {
-        INT << "Still here? " << getPi<Package>("ant") << endl;
-        return 1;
-      }
     }
+
   }
+
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
@@ -708,7 +671,6 @@ tt();
       vdumpPoolStats( USR << "Transacting:"<< endl,
                       make_filter_begin<resfilter::ByTransact>(pool),
                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
     }
   }
 

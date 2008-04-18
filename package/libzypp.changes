@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Apr 19 01:08:04 CEST 2008 - ma@suse.de
+
+- per default abort if package installation fails. (bnc #381203)
+- version 4.13.3
+- revision 9725
+
+-------------------------------------------------------------------
 Fri Apr 18 15:19:36 CEST 2008 - dmacvicar@suse.de
 
 - add ZYpp and curl version to http agent string

@@ -115,6 +115,7 @@ namespace zypp
       // path: directory where to look
       // name,version,release: Script name must match 'name-version.release-' prefix
       //
+#warning nedds to be reimplemented excetion safe
       void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
       {
 	// open the scripts directory
@@ -623,7 +624,9 @@ namespace zypp
               // else
               WAR << "Install failed" << endl;
               remaining.push_back( *it );
+              progress.disconnect();
               success = false;
+              break;
             }
 
             if ( success && !policy_r.dryRun() )
