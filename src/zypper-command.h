@@ -55,6 +55,8 @@ struct ZypperCommand
   static const ZypperCommand RUG_PATCH_INFO;
   static const ZypperCommand RUG_PATTERN_INFO;
   static const ZypperCommand RUG_PRODUCT_INFO;
+  static const ZypperCommand RUG_SERVICE_TYPES;
+  static const ZypperCommand RUG_MOUNT;
   //!@}
 
   enum Command
@@ -100,7 +102,9 @@ struct ZypperCommand
 
     RUG_PATCH_INFO_e,
     RUG_PATTERN_INFO_e,
-    RUG_PRODUCT_INFO_e
+    RUG_PRODUCT_INFO_e,
+    RUG_SERVICE_TYPES_e,
+    RUG_MOUNT_e
   };
 
   ZypperCommand(Command command) : _command(command) {}

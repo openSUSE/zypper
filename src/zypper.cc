@@ -940,6 +940,7 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'x'},
+      {"name", no_argument, 0, 'n'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -956,7 +957,8 @@ void Zypper::processCommandOptions()
       "-t, --type <TYPE>       Type of repository (%s).\n"
       "-d, --disable           Add the repository as disabled.\n"
       "-c, --check             Probe URI.\n"
-      "-x, --no-check           Don't probe URI, probe later during refresh.\n"
+      "-x, --no-check          Don't probe URI, probe later during refresh.\n"
+      "-n, --name              Specify descriptive name for the repository.\n"
     ), "yast2, rpm-md, plaindir");
     break;
   }
@@ -1681,6 +1683,48 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::RUG_SERVICE_TYPES_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "service-types\n"
+      "\n"
+      "List available service types.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::RUG_MOUNT_e:
+  {
+    static struct option options[] = {
+      {"alias", required_argument, 0, 'a'},
+      {"name", required_argument, 0, 'n'},
+      // dummy for now - always recurse
+      {"recurse", required_argument, 0, 'r'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      // trunslators: this is a rug-compatibility command (equivalent of
+      // 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
+      // for how to translate specific terms like channel or service if in doubt.
+      "mount\n"
+      "\n"
+      "Mount directory with RPMs as a channel.\n"
+      "\n"
+      "  Command options:\n"
+      "-a, --alias <alias>  Use given string as service alias.\n"
+      "-n, --name <name>    Use given string as service name.\n"
+      "-r, --recurse        Dive into subdirectories.\n"
+    );
+    break;
+  }
+
   default:
   {
     if (runningHelp())
@@ -1779,8 +1823,9 @@ void Zypper::doCommand()
   }
 
   // --------------------------( addrepo )------------------------------------
-  
+
   case ZypperCommand::ADD_REPO_e:
+  case ZypperCommand::RUG_MOUNT_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -1818,10 +1863,14 @@ void Zypper::doCommand()
   
       // force specific repository type. Validation is done in add_repo_by_url()
       string type = copts.count("type") ? copts["type"].front() : "";
-  
-      // display help message if insufficient info was given
+      if (command() == ZypperCommand::RUG_MOUNT || type == "mount")
+        type = "plaindir";
+      else if (type == "zypp")
+        type = "";
+
       switch (_arguments.size())
       {
+      // display help message if insufficient info was given
       case 0:
         out().error(_("Too few arguments."));
         ERR << "Too few arguments." << endl;
@@ -1829,17 +1878,35 @@ void Zypper::doCommand()
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       case 1:
-        if( !isRepoFile(_arguments[0] ))
+        if (command() == ZypperCommand::RUG_MOUNT)
+        {
+          string alias;
+          parsed_opts::const_iterator it = _copts.find("alias");
+          if (it != _copts.end())
+            alias = it->second.front();
+          // get the last component of the path
+          if (alias.empty())
+          {
+            Pathname path(_arguments[0]);
+            alias = path.basename();
+          }
+          _arguments.push_back(alias);
+          // continue to case 2:
+        }
+        else if( !isRepoFile(_arguments[0] ))
         {
           out().error(
             _("If only one argument is used, it must be a URI pointing to a .repo file."));
-          ERR << "Not repo file." << endl;
+          ERR << "Not a repo file." << endl;
           out().info(_command_help);
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
-        add_repo_from_file(*this,_arguments[0], enabled);
-	break;
+        else
+        {
+          add_repo_from_file(*this,_arguments[0], enabled);
+          break;
+        }
       case 2:
 	Url url = make_url (_arguments[0]);
         if (!url.isValid())
@@ -2921,6 +2988,27 @@ void Zypper::doCommand()
       out().error(_("Unexpected program flow."));
       report_a_bug(out());
     }
+
+    break;
+  }
+
+  case ZypperCommand::RUG_SERVICE_TYPES_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+    
+    Table t;
+
+    TableHeader th;
+    th << _("Alias") << _("Name") << _("Description");
+    t << th;
+
+    { TableRow tr; tr << "yum" << "YUM" << "YUM server service"; t << tr; } // rpm-md
+    { TableRow tr; tr << "yast" << "YaST2" << "YaST2 repository"; t << tr; }
+    { TableRow tr; tr << "zypp" << "ZYPP" << "ZYpp installation repository"; t << tr; }
+    { TableRow tr; tr << "mount" << "Mount" << "Mount a directory of RPMs"; t << tr; }
+    { TableRow tr; tr << "plaindir" << "Plaindir" << "Mount a directory of RPMs"; t << tr; }
+
+    cout << t;
 
     break;
   }

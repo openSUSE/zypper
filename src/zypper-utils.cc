@@ -206,10 +206,15 @@ Url make_url (const string & url_s)
     if (PathInfo(path).isExist())
     {
       urlstr = "dir:" + url::encode(path.absolutename().asString(),"/");
-      DBG <<  "resulting url: " << urlstr << endl;
+      MIL <<  "resulting url: " << urlstr << endl;
     }
     else
-      DBG << "specified local path does not exist or is not accessible" << endl;
+    {
+      Zypper::instance()->out().error(
+        _("Specified local path does not exist or is not accessible."));
+      ERR << "specified local path does not exist or is not accessible" << endl;
+      return u;
+    }
   }
 
   try {

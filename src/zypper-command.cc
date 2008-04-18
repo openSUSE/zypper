@@ -57,6 +57,8 @@ const ZypperCommand ZypperCommand::MOO(ZypperCommand::MOO_e);
 const ZypperCommand ZypperCommand::RUG_PATCH_INFO(ZypperCommand::RUG_PATCH_INFO_e);
 const ZypperCommand ZypperCommand::RUG_PATTERN_INFO(ZypperCommand::RUG_PATTERN_INFO_e);
 const ZypperCommand ZypperCommand::RUG_PRODUCT_INFO(ZypperCommand::RUG_PRODUCT_INFO_e);
+const ZypperCommand ZypperCommand::RUG_SERVICE_TYPES(ZypperCommand::RUG_SERVICE_TYPES_e);
+const ZypperCommand ZypperCommand::RUG_MOUNT(ZypperCommand::RUG_MOUNT_e);
 
 ZypperCommand::ZypperCommand(const std::string & strval_r)
   : _command(parse(strval_r))
@@ -73,7 +75,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["modifyrepo"]= _table["mr"] = _table["service-modify"] = _table["sm"] = ZypperCommand::MODIFY_REPO_e;    
     _table["repos"] = _table["lr"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_REPOS_e;
     _table["refresh"] = _table["ref"] = ZypperCommand::REFRESH_e;
-    _table["clean"] = ZypperCommand::CLEAN_e;
+    _table["clean"] = _table["clean-cache"] = _table["cc"] = _table["you-clean-cache"] = _table["yc"] = ZypperCommand::CLEAN_e;
 
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
     _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
@@ -110,6 +112,8 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["patch-info"] = ZypperCommand::RUG_PATCH_INFO_e;
     _table["pattern-info"] = ZypperCommand::RUG_PATTERN_INFO_e;
     _table["product-info"] = ZypperCommand::RUG_PRODUCT_INFO_e;
+    _table["service-types"] = _table["st"] = ZypperCommand::RUG_SERVICE_TYPES_e;
+    _table["mount"] = ZypperCommand::RUG_MOUNT_e;
   }
 
   std::map<std::string,ZypperCommand::Command>::const_iterator it

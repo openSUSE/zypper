@@ -1302,6 +1302,9 @@ void add_repo_by_url( Zypper & zypper,
     repo.setType(RepoType(type));
 
   repo.setAlias(alias.empty() ? timestamp() : alias);
+  parsed_opts::const_iterator it = zypper.cOpts().find("name"); 
+  if (it != zypper.cOpts().end())
+    repo.setName(it->second.front());
   repo.addBaseUrl(url);
 
   if ( !indeterminate(enabled) )
