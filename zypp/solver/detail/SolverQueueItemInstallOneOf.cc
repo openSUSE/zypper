@@ -21,6 +21,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemInstallOneOf.h"
 
+extern "C" {
+  #include "satsolver/solver.h"
+  #include "satsolver/pool.h"
+}
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -65,7 +70,7 @@ SolverQueueItemInstallOneOf::~SolverQueueItemInstallOneOf()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemInstallOneOf::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
 {
     bool ret = true;
     MIL << "Install one of: " << endl;

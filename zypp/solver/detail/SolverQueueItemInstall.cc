@@ -19,7 +19,14 @@
  */
 
 #include "zypp/base/Logger.h"
+#include "zypp/IdString.h"
+#include "zypp/IdStringType.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
+
+extern "C" {
+  #include "satsolver/solver.h"
+  #include "satsolver/pool.h"
+}
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -63,9 +70,9 @@ SolverQueueItemInstall::~SolverQueueItemInstall()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemInstall::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemInstall::addRule (_Queue & q)
 {
-    Id id = str2id( SATPool, _name.c_str(), 0 );
+    ::Id id = IdString(_name).id();
     if (_soft) {    
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_NAME | SOLVER_WEAK  );
     } else {

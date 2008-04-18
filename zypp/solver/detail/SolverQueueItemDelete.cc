@@ -19,7 +19,13 @@
  */
 
 #include "zypp/base/Logger.h"
+#include "zypp/IdString.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
+
+extern "C" {
+  #include "satsolver/solver.h"
+  #include "satsolver/pool.h"
+}
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -62,9 +68,9 @@ SolverQueueItemDelete::~SolverQueueItemDelete()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemDelete::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemDelete::addRule (_Queue & q)
 {
-    Id id = str2id( SATPool, _name.c_str(), 0 );
+    ::Id id = IdString(_name).id();
     if (_soft) {    
 	queue_push( &(q), SOLVER_ERASE_SOLVABLE_NAME | SOLVER_WEAK);
     } else {

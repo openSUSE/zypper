@@ -708,7 +708,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue)
 
     // generate solver queue
     for (SolverQueueItemList::const_iterator iter = requestQueue.begin(); iter != requestQueue.end(); iter++) {
-	(*iter)->addRule(_jobQueue,_SATPool);
+	(*iter)->addRule(_jobQueue);
     }    
 
     // solving

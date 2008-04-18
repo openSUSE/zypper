@@ -21,6 +21,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemUpdate.h"
 
+extern "C" {
+  #include "satsolver/solver.h"
+  #include "satsolver/pool.h"
+}
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -63,9 +68,9 @@ SolverQueueItemUpdate::~SolverQueueItemUpdate()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemUpdate::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemUpdate::addRule (_Queue & q)
 {
-    Id id = _item.satSolvable().id();
+    ::Id id = _item.satSolvable().id();
     if (id == ID_NULL) {
 	ERR << "Update explicit: " << _item << " not found" << endl;
 	return false;

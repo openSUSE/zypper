@@ -32,9 +32,7 @@
 #include "zypp/ResPool.h"
 
 extern "C" {
-  struct Queue;
-//#include "satsolver/solver.h"
-//#include "satsolver/pool.h"
+  struct _Queue;
 }
 
 
@@ -105,7 +103,7 @@ class SolverQueueItem : public base::ReferenceCounted, private base::NonCopyable
 
 
     virtual SolverQueueItem_Ptr copy (void) const = 0;
-    virtual bool addRule (Queue & q, Pool *SATPool) =0 ;
+    virtual bool addRule (_Queue & q) =0 ;
     virtual int cmp (SolverQueueItem_constPtr item) const = 0;
     int compare (SolverQueueItem_constPtr item) const { return CMP(_type, item->_type); }
 

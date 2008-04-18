@@ -21,6 +21,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemLock.h"
 
+extern "C" {
+  #include "satsolver/solver.h"
+  #include "satsolver/pool.h"
+}
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -63,9 +68,9 @@ SolverQueueItemLock::~SolverQueueItemLock()
 
 //---------------------------------------------------------------------------
 
-bool SolverQueueItemLock::addRule (Queue & q, Pool *SATPool)
+bool SolverQueueItemLock::addRule (_Queue & q)
 {
-    Id id = _item.satSolvable().id();
+    ::Id id = _item.satSolvable().id();
     if (id == ID_NULL) {
 	ERR << "Lock : " << _item << " not found" << endl;
 	return false;
