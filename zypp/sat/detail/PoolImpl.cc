@@ -41,8 +41,6 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-
-
     ///////////////////////////////////////////////////////////////////
     namespace detail
     { /////////////////////////////////////////////////////////////////
@@ -88,7 +86,10 @@ namespace zypp
         {
           case NAMESPACE_LANGUAGE:
             {
+              static IdString en( "en" );
               const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
+              if ( locale2Solver.empty() )
+                ;//return rhs == en.id();
               return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
             }
             break;
@@ -284,7 +285,7 @@ namespace zypp
       void _locale_hack( const LocaleSet & locales_r,
                          std::tr1::unordered_set<IdString> & locale2Solver )
       {
-        std::tr1::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver ) ;
+        std::tr1::unordered_set<IdString>( 2*locales_r.size() ).swap( locale2Solver );
         for_( it, locales_r.begin(),locales_r.end() )
         {
           for ( Locale l( *it ); l != Locale::noCode; l = l.fallback() )
