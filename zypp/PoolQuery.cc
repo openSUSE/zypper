@@ -426,7 +426,7 @@ attremptycheckend:
 
   PoolQuery::const_iterator PoolQuery::Impl::end() const
   {
-    INT << "end" << endl;
+    //INT << "end" << endl;
     return PoolQuery::const_iterator();
   }
 
