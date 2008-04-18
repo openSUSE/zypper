@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 18 15:19:36 CEST 2008 - dmacvicar@suse.de
+
+- add ZYpp and curl version to http agent string
+  (bnc #381280)
+
+-------------------------------------------------------------------
 Thu Apr 17 16:29:15 CEST 2008 - ma@suse.de
 
 - Fixed pools package index wrongly including source packages. (bnc #380283)
