@@ -21,11 +21,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/IdString.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
-
-extern "C" {
-  #include "satsolver/solver.h"
-  #include "satsolver/pool.h"
-}
+#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

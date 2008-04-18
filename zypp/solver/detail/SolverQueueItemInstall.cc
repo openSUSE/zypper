@@ -22,11 +22,7 @@
 #include "zypp/IdString.h"
 #include "zypp/IdStringType.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
-
-extern "C" {
-  #include "satsolver/solver.h"
-  #include "satsolver/pool.h"
-}
+#include "satsolver/solver.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
