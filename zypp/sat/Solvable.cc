@@ -33,6 +33,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     Solvable::SplitIdent::SplitIdent( IdString ident_r )
+    : _ident( ident_r )
     {
       if ( ! ident_r )
         return;
@@ -71,6 +72,26 @@ namespace zypp
 
       // an unknown kind
       _kind = ResKind( std::string( ident, sep-ident ) );
+    }
+
+    Solvable::SplitIdent::SplitIdent( ResKind kind_r, IdString name_r )
+    : _kind( kind_r )
+    , _name( name_r )
+    {
+      if ( kind_r == ResKind::package || kind_r == ResKind::srcpackage )
+        _ident = _name;
+      else
+        _ident = IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) );
+    }
+
+    Solvable::SplitIdent::SplitIdent( ResKind kind_r, const C_Str & name_r )
+    : _kind( kind_r )
+    , _name( name_r )
+    {
+      if ( kind_r == ResKind::package || kind_r == ResKind::srcpackage )
+        _ident = _name;
+      else
+        _ident = IdString( str::form( "%s:%s", kind_r.c_str(), name_r.c_str() ) );
     }
 
     /////////////////////////////////////////////////////////////////

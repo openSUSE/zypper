@@ -203,7 +203,7 @@ namespace zypp
         /** Return next Solvable in \ref Repo (or \ref noSolvable). */
         Solvable nextInRepo() const;
 
-        /** Helper that splits an identifier into kind and name.
+        /** Helper that splits an identifier into kind and name or vice versa.
          * \see \ref ident
         */
         class SplitIdent
@@ -211,11 +211,16 @@ namespace zypp
           public:
             SplitIdent() {}
             SplitIdent( IdString ident_r );
-            ResKind      kind() const { return _kind; }
-            std::string  name() const { return _name; }
+            SplitIdent( ResKind kind_r, IdString name_r );
+            SplitIdent( ResKind kind_r, const C_Str & name_r );
+
+            IdString ident() const { return _ident; }
+            ResKind  kind()  const { return _kind; }
+            IdString name()  const { return _name; }
           private:
-            ResKind      _kind;
-            std::string  _name;
+            IdString  _ident;
+            ResKind   _kind;
+            IdString  _name;
         };
 
       public:
