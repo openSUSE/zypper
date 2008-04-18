@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 18 12:33:12 CEST 2008 - jreidinger@suse.cz
+
+- add warning if as only one parameter is not specified repo file.
+  (bnc #380322)
+- r9695 
+
+-------------------------------------------------------------------
 Thu Apr 17 16:00:19 CEST 2008 - jreidinger@suse.cz
 
 - fix multiple remove same repository
