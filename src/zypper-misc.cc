@@ -84,10 +84,11 @@ bool ProvideProcess::operator()( const PoolItem& provider )
   // 2. best arch
   // 3. best edition
 
-  // check the version if it's specified
-  if (!version.empty() && version != provider->edition().asString()) {
-    DBG << format ("Skipping version %s (requested: %s)")
-      % provider->edition().asString() % version << endl;
+  // check the repository alias if it's specified
+  if (!_repo.empty() && _repo != provider->repository().info().alias())
+  {
+    DBG << format ("Skipping repository %s (requested: %s)")
+      % provider->repository().info().alias() % _repo << endl;
     return true;
   }
 
@@ -131,10 +132,11 @@ bool ProvideProcess::operator()( const PoolItem& provider )
 // TODO edition, arch
 static void mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
-		      const std::string &name)
+		      const std::string &name,
+		      const std::string & repo = "")
 {
   // name and kind match:
-  ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
+  ProvideProcess installer (ZConfig::instance().systemArchitecture(), repo);
   DBG << "Iterating over [" << kind << "]" << name << endl;
   invokeOnEach(
       God->pool().byIdentBegin(kind, name),
@@ -240,10 +242,11 @@ static void
 mark_by_name (Zypper & zypper,
               bool install_not_remove,
               const ResObject::Kind &kind,
-              const string &name )
+              const string &name,
+              const string & repo = "")
 {
   if (install_not_remove)
-    mark_for_install(zypper, kind, name);
+    mark_for_install(zypper, kind, name, repo);
   else
     mark_for_uninstall(zypper, kind, name);
 }
@@ -439,14 +442,24 @@ void install_remove(Zypper & zypper,
       str.erase(0, 1);
     }
 
-    //! \todo force repo with ':'
+    string::size_type pos;
 
-    //! \todo force arch with '@'
+    //! \todo force repo with ':'
+    if ((pos = str.rfind(':')) != string::npos)
+    {
+      repo = str.substr(0, pos);
+      str = str.substr(pos + 1);
+      force_by_name = true; // until there is a solver API for this
+    }
+
+    //! \todo force arch with '.' or '@'???
+    if ((pos = str.find('.')) != string::npos)
+    { }
 
     // mark by name by force
     if (force_by_name)
     {
-      mark_by_name (zypper, install_not_remove, kind, str);
+      mark_by_name (zypper, install_not_remove, kind, str, repo);
       continue;
     }
 

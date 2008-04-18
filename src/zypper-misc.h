@@ -91,12 +91,12 @@ struct ProvideProcess
   zypp::PoolItem item;
   zypp::PoolItem installed_item;
   zypp::ResStatus::TransactByValue whoWantsIt;
-  std::string version;
+  std::string _repo;
   zypp::Arch _architecture;
 
-  ProvideProcess(zypp::Arch arch, const std::string &vers)
+  ProvideProcess(zypp::Arch arch, const std::string & repo)
     : whoWantsIt(zypp::ResStatus::USER)
-    , version(vers)
+    , _repo(repo)
     , _architecture( arch )
     { }
 
