@@ -54,6 +54,7 @@ N1: zypp does not have this concept
                     +     info-provides (ip)           List package's provides
                     +     info-requirements (ir)       List package's requirements
                     ++    install (in)                 Install packages
+                    +     list-resolvables (lr)        List Available Resolvable Types
                     ++    list-updates (lu)            Show the available updates.
                     +     package-file (pf)            Get package which contains file
                     ++    packages (pa)                Show the packages in a given catalog
@@ -99,7 +100,7 @@ search -t pattern   +     patch-search (pse)           Search for patches matchi
  addrepo            ++    service-add (sa)             Add a service
  removerepo         ++    service-delete (sd)          Delete a service
  repos              ++    service-list (sl)            List the available services
-                    ?     service-types (st)           List the available service types
+                    ++    service-types (st)           List the available service types
                         
                         System:
                     ++    clean-cache (cc)             Clean the HTTP cache
