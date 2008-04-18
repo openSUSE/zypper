@@ -80,7 +80,7 @@ namespace zypp
         //         1 if supported by the system
         //        -1  AFAIK it's also possible to return a list of solvables that support it, but don't know how.
 
-        static const detail::IdType RET_unsupported     = 0;
+        static const detail::IdType RET_unsupported    = 0;
         static const detail::IdType RET_systemProperty = 1;
         switch ( lhs )
         {
@@ -89,7 +89,9 @@ namespace zypp
               static IdString en( "en" );
               const std::tr1::unordered_set<IdString> & locale2Solver( reinterpret_cast<PoolImpl*>(data)->_locale2Solver );
               if ( locale2Solver.empty() )
-                ;//return rhs == en.id();
+              {
+                return rhs == en.id() ? RET_systemProperty : RET_unsupported;
+              }
               return locale2Solver.find( IdString(rhs) ) != locale2Solver.end() ? RET_systemProperty : RET_unsupported;
             }
             break;
