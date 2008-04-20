@@ -465,32 +465,42 @@ void install_remove(Zypper & zypper,
 
     // is version specified?
     by_capability = str.find_first_of("=<>") != string::npos;
-/*
+
     // try to find foo-bar-1.2.3-2
     if (!by_capability && str.find('-') != string::npos)
     {
-      string::size_type pos = 0;
-      while ((pos = str.find('-', pos)) != string::npos)
+      // try to find the original string first as name
+      // to avoid treating foo-3 as foo=3 which could exist
+      Capability cap = safe_parse_cap (zypper, str, kind);
+      sat::WhatProvides q(cap);
+      // continue only if nothing has been found this way
+      if (q.empty())
       {
-        string trythis = str;
-        trythis.replace(pos, 1, 1, '=');
-
-        DBG << "trying: " << trythis << endl;
-
-        Capability cap = safe_parse_cap (zypper, trythis, kind);
-        sat::WhatProvides q(cap);
-
-        if (!q.empty())
+        // try to replace '-' for '=' from right to the left and check
+        // whether there is something providing such capability
+        string::size_type pos = string::npos;
+        while ((pos = str.rfind('-', pos)) != string::npos)
         {
-          str = trythis;
-          by_capability = true;
-          DBG << str << "might be what we wanted" << endl;
-          break;
+          string trythis = str;
+          trythis.replace(pos, 1, 1, '=');
+  
+          DBG << "trying: " << trythis << endl;
+  
+          Capability cap = safe_parse_cap (zypper, trythis, kind);
+          sat::WhatProvides q(cap);
+  
+          if (!q.empty())
+          {
+            str = trythis;
+            by_capability = true;
+            DBG << str << "might be what we wanted" << endl;
+            break;
+          }
+          --pos;
         }
-        ++pos;
       }
     }
-*/
+
     // try to find by name + wildcards first
     if (!by_capability)
     {
