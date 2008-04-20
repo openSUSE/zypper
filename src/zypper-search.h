@@ -35,25 +35,33 @@ struct FillSearchTableSolvable
   {
     TableHeader header;
 
-    // translators: S for installed Status
-    header << _("S");
-
     if (_gopts.is_rug_compatible)
-      header << _("Catalog");
+    {
+      header
+        // translators: S for 'installed Status'
+        << _("S")
+        << _("Catalog")
+        // translators: Bundle is a term used in rug. See rug for how to translate it.
+        << _("Bundle")
+        << _("Name")
+        << _("Version")
+        << _("Arch");
+    }
     else
-      header << _("Repository");
-
-    if (_gopts.is_rug_compatible)
-      // translators: Bundle is a term used in rug. See rug for how to translate it.
-      header << _("Bundle");
-    else
-      header << _("Type");
-
-    header << _("Name") << _("Version") << _("Arch");
+    {
+      header
+        // translators: S for 'installed Status'
+        << _("S")
+        << _("Name")
+        << _("Type")
+        << _("Version")
+        << _("Arch")
+        << _("Repository");
+    }
 
     *_table << header;
   }
-
+/*
   bool operator()(const zypp::sat::Solvable & solv) const
   {
     TableRow row;
@@ -64,7 +72,6 @@ struct FillSearchTableSolvable
 
     row << ( pi.status().isInstalled() ? "i" : " " )
           << pi->repository().info().name()
-    // TODO what about rug's Bundle?
     << (_gopts.is_rug_compatible ?
         "" : kind_to_string_localized(pi->kind(), 1))
             << pi->name()
@@ -73,7 +80,7 @@ struct FillSearchTableSolvable
         *_table << row;
     return true;
   }
-
+*/
   bool operator()(const zypp::ui::Selectable::constPtr & s) const
   {
     // show installed objects
@@ -82,12 +89,26 @@ struct FillSearchTableSolvable
       TableRow row;
       zypp::PoolItem pi = *it;
       row << "i";
-      row << pi->repository().info().name()
+      if (_gopts.is_rug_compatible)
+      {
+        row
+          << pi->repository().info().name()
           // TODO what about rug's Bundle?
-          << (_gopts.is_rug_compatible ? "" : kind_to_string_localized(pi->kind(), 1))
+          << ""
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();
+      }
+      else
+      {
+        row
+          << pi->name()
+          << kind_to_string_localized(pi->kind(), 1)
+          << pi->edition().asString()
+          << pi->arch().asString()
+          << pi->repository().info().name();
+      }
+
       *_table << row;
     }
 
@@ -109,11 +130,24 @@ struct FillSearchTableSolvable
       else
         row << "";
       
-      row << pi->repository().info().name();
-      row << (_gopts.is_rug_compatible ? "" : kind_to_string_localized(pi->kind(), 1))
+      if (_gopts.is_rug_compatible)
+      {
+        row
+          << pi->repository().info().name()
+          << ""
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();
+      }
+      else
+      {
+        row
+          << pi->name()
+          << kind_to_string_localized(pi->kind(), 1)
+          << pi->edition().asString()
+          << pi->arch().asString()
+          << pi->repository().info().name();
+      }
 
       *_table << row;
     }

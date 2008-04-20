@@ -2462,7 +2462,7 @@ void Zypper::doCommand()
 
     try
     {
-      if (_copts.count("details"))
+      if (_gopts.is_rug_compatible || _copts.count("details"))
       {
         FillSearchTableSolvable callback(t);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
