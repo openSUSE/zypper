@@ -1578,7 +1578,7 @@ void Zypper::processCommandOptions()
       "xml-updates\n"
       "\n"
       "Show updates and patches in xml format. This command is deprecated and will"
-      "eventually be dropped in favor of '%s'.\n"
+      " eventually be dropped in favor of '%s'.\n"
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>  Work only with updates from the specified repository.\n"
@@ -1625,7 +1625,7 @@ void Zypper::processCommandOptions()
       "removelock (rl) <lock-number>\n"
       "\n"
       "Remove a package lock. Specify the lock to remove by its number obtained"
-      "with 'zypper locks'.\n"
+      " with 'zypper locks'.\n"
       "\n"
       "This command has no additional options.\n"
     );

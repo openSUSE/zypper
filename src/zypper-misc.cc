@@ -1925,7 +1925,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
             {
               DBG << "the One (" << theone << ") is installed, skipping." << endl;
               zypper.out().info(str::form(
-                  _("No update candindate for '%s'"), s->name().c_str()));
+                  _("No update candidate for '%s'."), s->name().c_str()));
             }
             else
             {
