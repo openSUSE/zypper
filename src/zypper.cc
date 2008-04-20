@@ -1258,6 +1258,7 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have --repo
       {"catalog", required_argument, 0, 'c'},
       {"repo", required_argument, 0, 'r'},
+      {"details", no_argument, 0, 's'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1283,6 +1284,8 @@ void Zypper::processCommandOptions()
       "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
       "    --sort-by-name         Sort packages by name (default).\n"
       "    --sort-by-repo         Sort packages by repository.\n"
+      "    --details              Show each available version in each repository\n"
+      "                           on a separate line.\n"
       "\n"
       "* and ? wildcards can also be used within search strings.\n"
     );
@@ -2459,8 +2462,16 @@ void Zypper::doCommand()
 
     try
     {
-      FillSearchTableSolvable callback(t);
-      invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
+      if (_copts.count("details"))
+      {
+        FillSearchTableSolvable callback(t);
+        invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
+      }
+      else
+      {
+        FillSearchTableSelectable callback(t);
+        invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
+      }
 
       if (t.empty())
         out().info(_("No resolvables found."), Out::QUIET);

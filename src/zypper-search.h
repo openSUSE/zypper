@@ -137,7 +137,6 @@ struct FillSearchTableSelectable
     header << _("Name");
     header << _("Summary");
     header << _("Type");
-    header << _("Repository");
     *_table << header;
   }
 
@@ -147,11 +146,8 @@ struct FillSearchTableSelectable
 
     row << (s->installedEmpty() ? "" : "i");
     row << s->name();
-    //! \todo improve the abbreviation
-    row << (_gopts.no_abbrev || s->theObj()->summary().size() < 33 ?
-        s->theObj()->summary() : s->theObj()->summary().substr(0,28) + "...");
+    row << s->theObj()->summary();
     row << kind_to_string_localized(s->kind(), 1);
-    row << selectable_search_repo_str(*s);
     *_table << row;
     return true;
   }
