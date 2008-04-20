@@ -127,6 +127,8 @@ struct FillSearchTableSolvable
       {
         row << (equalNVRA(*installed.resolvable(), *pi.resolvable()) ?  "i" : "v");
       }
+      else if (pi.isSatisfied()) // patches/patterns/products are installed if satisfied
+        row << "i";
       else
         row << "";
       
@@ -178,7 +180,7 @@ struct FillSearchTableSelectable
   {
     TableRow row;
 
-    row << (s->installedEmpty() ? "" : "i");
+    row << (s->installedEmpty() ? (s->theObj().isSatisfied() ? "i" : "") : "i");
     row << s->name();
     row << s->theObj()->summary();
     row << kind_to_string_localized(s->kind(), 1);
