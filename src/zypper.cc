@@ -920,7 +920,8 @@ void Zypper::processCommandOptions()
     _command_help = _(
       "verify (ve) [options]\n"
       "\n"
-      "Check whether dependencies of installed packages are satisfied.\n"
+      "Check whether dependencies of installed packages are satisfied"
+      " and repair eventual dependency problems.\n"
       "\n"
       "  Command options:\n"
       "    --no-recommends      Do not install recommended packages, only required.\n"
