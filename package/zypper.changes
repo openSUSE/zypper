@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Apr 20 10:51:01 CEST 2008 - jkupec@suse.cz
+
+- fixed nstall foo-bar-version-release
+- r9728
+
+-------------------------------------------------------------------
 Fri Apr 18 17:50:45 CEST 2008 - jkupec@suse.cz
 
 - allow to force repository per-package using:
