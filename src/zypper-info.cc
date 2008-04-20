@@ -257,7 +257,7 @@ void printPatternInfo(const Zypper & zypper, const ui::Selectable & s)
 
   printNVA(pool_item.resolvable());
 
-  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+  cout << _("Installed: ") << (pool_item.isSatisfied() ? _("Yes") : _("No")) << endl;
   
   printSummaryDesc(pool_item.resolvable());
 

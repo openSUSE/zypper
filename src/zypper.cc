@@ -2456,6 +2456,7 @@ void Zypper::doCommand()
 
     // now load resolvables:
     load_resolvables(*this);
+    resolve(*this); // needed to compute status of PPP?
 
     Table t;
     t.style(Ascii);
@@ -2756,6 +2757,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
+    resolve(*this); // needed to compute status of PPP
 
     bool skip_interactive =
       copts.count("skip-interactive") || globalOpts().non_interactive;
@@ -2856,6 +2858,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
+    resolve(*this); // needed to compute status of PPP?
 
     printInfo(*this, kind);
 
