@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr 20 13:54:16 CEST 2008 - jkupec@suse.cz
+
+- some text corrections (bnc #381385, bnc #381366)
+
+-------------------------------------------------------------------
 Sun Apr 20 10:51:01 CEST 2008 - jkupec@suse.cz
 
 - fixed install foo-bar-version-release (bnc #381694)
