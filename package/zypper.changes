@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Sun Apr 20 10:51:01 CEST 2008 - jkupec@suse.cz
 
-- fixed nstall foo-bar-version-release
+- fixed nstall foo-bar-version-release (bnc #381694)
 - r9728
 
 -------------------------------------------------------------------
