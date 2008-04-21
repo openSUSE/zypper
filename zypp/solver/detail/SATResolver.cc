@@ -35,6 +35,7 @@
 #include "zypp/sat/WhatProvides.h"
 #include "zypp/solver/detail/SATResolver.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
+#include "zypp/solver/detail/ProblemSolutionIgnore.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -470,6 +471,9 @@ SATResolver::solving()
     
     sat::Pool::instance().prepare();
 
+    // Add ignoring request
+    
+
     // Solve !
     MIL << "Starting solving...." << endl;
     MIL << *this;
@@ -576,7 +580,7 @@ SATResolver::solving()
 
 
 void
-SATResolver::solverInit()
+SATResolver::solverInit(const PoolItemList & weakItems)
 {
     SATCollectTransact info (*this);
     
@@ -597,6 +601,16 @@ SATResolver::solverInit()
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   functor::functorRef<bool,PoolItem>(info) );
+    
+    for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
+	Id id = (*iter)->satSolvable().id();
+	if (id == ID_NULL) {
+	    ERR << "Weaken: " << *iter << " not found" << endl;
+	}
+	MIL << "Weaken dependencies of " << *iter << " with the SAT-Pool ID: " << id << endl;
+	queue_push( &(_jobQueue), SOLVER_WEAKEN_SOLVABLE_DEPS );
+        queue_push( &(_jobQueue), id );	
+    }
 }
 
 void
@@ -611,16 +625,15 @@ SATResolver::solverEnd()
 
 bool
 SATResolver::resolvePool(const CapabilitySet & requires_caps,
-			 const CapabilitySet & conflict_caps)
+			 const CapabilitySet & conflict_caps,
+			 const PoolItemList & weakItems)
 {
     MIL << "SATResolver::resolvePool()" << endl;
     
     // initialize
-    solverInit();
+    solverInit(weakItems);
     
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-	PoolItem r = *iter;
-
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
@@ -631,8 +644,6 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     for (PoolItemList::const_iterator iter = _items_to_update.begin(); iter != _items_to_update.end(); iter++) {
-	PoolItem r = *iter;
-
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Update explicit: " << *iter << " not found" << endl;
@@ -699,12 +710,13 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
 
 bool
-SATResolver::resolveQueue(const SolverQueueItemList &requestQueue)
+SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
+			  const PoolItemList & weakItems)
 {
     MIL << "SATResolver::resolvQueue()" << endl;
     
     // initialize
-    solverInit();
+    solverInit(weakItems);
 
     // generate solver queue
     for (SolverQueueItemList::const_iterator iter = requestQueue.begin(); iter != requestQueue.end(); iter++) {
@@ -728,7 +740,7 @@ bool SATResolver::doUpdate()
     MIL << "SATResolver::doUpdate()" << endl;
 
     // initialize
-    solverInit();
+    solverInit(PoolItemList());
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;
@@ -827,7 +839,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 };
 
 
-string SATResolver::SATprobleminfoString(Id problem, string &detail)
+string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
   string ret;
   Pool *pool = _solv->pool;
@@ -835,6 +847,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail)
   Id dep, source, target;
   Solvable *s, *s2;
 
+  ignoreId = 0;
   probr = solver_findproblemrule(_solv, problem);
   switch (solver_problemruleinfo(_solv, &(_jobQueue), probr, &dep, &source, &target))
   {
@@ -872,6 +885,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail)
 	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
+	  ignoreId = source; // for setting weak dependencies
 	  s = pool_id2solvable(pool, source);
 	  Capability cap(dep);
 	  sat::WhatProvides possibleProviders(cap);
@@ -946,10 +960,12 @@ SATResolver::problems ()
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string detail;
-	    string whatString = SATprobleminfoString (problem,detail);
+	    Id ignorId;
+	    string whatString = SATprobleminfoString (problem,detail,ignorId);
 	    MIL << whatString << endl;
 	    MIL << "------------------------------------" << endl;
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail);
+
 	    solution = 0;
 	    while ((solution = solver_next_solution(_solv, problem, solution)) != 0) {
 		element = 0;
@@ -1145,6 +1161,15 @@ SATResolver::problems ()
 					      problemSolution->actionCount() > 1 ? true : false); // Solutions with more than 1 action will be shown first.
 		MIL << "------------------------------------" << endl;
 	    }
+
+	    if (ignorId > 0) {
+		// There is a possibility to ignore this error by setting weak dependencies
+		PoolItem item = _pool.find (sat::Solvable(ignorId));		
+		ProblemSolutionIgnore *problemSolution = new ProblemSolutionIgnore(resolverProblem, item);		
+		resolverProblem->addSolution (problemSolution,
+					      false); // Solutions will be shown at the end
+	    }	    
+	    
 	    // save problem
 	    resolverProblems.push_back (resolverProblem);
 	}

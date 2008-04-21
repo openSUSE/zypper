@@ -479,10 +479,6 @@ SET( zypp_solver_detail_SRCS
   solver/detail/Helper.cc
   solver/detail/InstallOrder.cc
   solver/detail/ProblemSolutionIgnore.cc
-  solver/detail/ProblemSolutionInstall.cc
-  solver/detail/ProblemSolutionKeep.cc
-  solver/detail/ProblemSolutionUninstall.cc
-  solver/detail/ProblemSolutionUnlock.cc
   solver/detail/ProblemSolutionCombi.cc
   solver/detail/Resolver.cc
   solver/detail/ResolverUpgrade.cc
@@ -502,10 +498,6 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/Helper.h
   solver/detail/InstallOrder.h
   solver/detail/ProblemSolutionIgnore.h
-  solver/detail/ProblemSolutionInstall.h
-  solver/detail/ProblemSolutionKeep.h
-  solver/detail/ProblemSolutionUninstall.h
-  solver/detail/ProblemSolutionUnlock.h
   solver/detail/ProblemSolutionCombi.h
   solver/detail/Resolver.h
   solver/detail/SolutionAction.h

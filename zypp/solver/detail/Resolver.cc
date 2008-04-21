@@ -261,14 +261,14 @@ bool
 Resolver::resolvePool()
 {
     solverInit();
-    return _satResolver->resolvePool(_extra_requires, _extra_conflicts);
+    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak);
 }
 
 bool
 Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 {
     solverInit();
-    return _satResolver->resolveQueue(queue);
+    return _satResolver->resolveQueue(queue, _addWeak);
 }
 
 

@@ -84,11 +84,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _onlyRequires;	                // true: consider required packages only 
     
     // ---------------------------------- methods
-    std::string SATprobleminfoString (Id problem, std::string &detail);
+    std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
     void resetItemTransaction (PoolItem item);
 
     // Create a SAT solver and reset solver selection in the pool (Collecting 
-    void solverInit();
+    void solverInit(const PoolItemList & weakItems);
     // common solver run with the _jobQueue; Save results back to pool
     bool solving();
     // cleanup solver
@@ -110,9 +110,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // solver run with pool selected items
     bool resolvePool(const CapabilitySet & requires_caps,
-		     const CapabilitySet & conflict_caps);
+		     const CapabilitySet & conflict_caps,
+		     const PoolItemList & weakItems);
     // solver run with the given request queue
-    bool resolveQueue(const SolverQueueItemList &requestQueue);
+    bool resolveQueue(const SolverQueueItemList &requestQueue,
+		      const PoolItemList & weakItems);
     // searching for new packages
     bool doUpdate();
 
