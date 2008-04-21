@@ -2156,6 +2156,14 @@ void solve_and_commit (Zypper & zypper)
       return;
     }
 
+    if (false)
+    {
+      // translators: Yes / No / show Problems. This prompt will appear
+      // after install/update command summary if there will be any package
+      // to-be-removed automatically to show why, if asked.
+      string prompt_with_p = _("y/n/p");
+    }
+
     // there are resolvables to install/uninstall
     if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true))
     {
