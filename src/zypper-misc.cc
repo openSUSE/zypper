@@ -166,6 +166,7 @@ static void mark_for_install(Zypper & zypper,
     }
 
     zypper.out().info(boost::str(format(
+      // translators: e.g. skipping package 'zypper' (the newest version already installed)  
       _("skipping %s '%s' (the newest version already installed)"))
       % kind_to_string_localized(kind,1) % name));
   }

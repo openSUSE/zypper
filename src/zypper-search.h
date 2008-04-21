@@ -40,11 +40,15 @@ struct FillSearchTableSolvable
       header
         // translators: S for 'installed Status'
         << _("S")
+        // translators: catalog (rug's word for repository) (header)
         << _("Catalog")
         // translators: Bundle is a term used in rug. See rug for how to translate it.
         << _("Bundle")
+        // translators: name (general header)
         << _("Name")
+        // translators: package version (header)
         << _("Version")
+        // translators: package architecture (header)
         << _("Arch");
     }
     else
@@ -52,10 +56,15 @@ struct FillSearchTableSolvable
       header
         // translators: S for 'installed Status'
         << _("S")
+        // translators: name (general header)
         << _("Name")
+        // translators: type (general header)
         << _("Type")
+        // translators: package version (header)
         << _("Version")
+        // translators: package architecture (header)
         << _("Arch")
+        // translators: package's repository (header)
         << _("Repository");
     }
 
@@ -171,6 +180,7 @@ struct FillSearchTableSelectable
     // translators: S for installed Status
     header << _("S");
     header << _("Name");
+    // translators: package summary (header)
     header << _("Summary");
     header << _("Type");
     *_table << header;
