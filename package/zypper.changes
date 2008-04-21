@@ -1,4 +1,26 @@
 -------------------------------------------------------------------
+Mon Apr 21 10:32:46 CEST 2008 - jkupec@suse.cz
+
+- show architecture changes in the install summary (bnc #381772)
+- show upgrades/downgrades with changed arch in the install summary
+  (bnc  #381772)
+
+-------------------------------------------------------------------
+Mon Apr 21 10:32:11 CEST 2008 - jkupec@suse.cz
+
+- allow correct translation of install summary (bnc #310896)
+- texts cleanup
+
+-------------------------------------------------------------------
+Mon Apr 21 10:26:43 CEST 2008 - jkupec@suse.cz
+
+- use isSatisfied() to determine installed status of PPP
+  (bnc #381295)
+- show search result groupped by name-kind (bnc #348676)
+- show summary, don't show repo (bnc #348676)
+- --details option added to show solvable list, columns rearranged
+
+-------------------------------------------------------------------
 Sun Apr 20 13:54:16 CEST 2008 - jkupec@suse.cz
 
 - some text corrections (bnc #381385, bnc #381366)
