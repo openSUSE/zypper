@@ -37,87 +37,22 @@ namespace zypp
 
 	/**
 	 * Class representing one possible solution to one problem found during resolving
-	 * This problem solution ignores one or more items
-	 * 
+	 * This problem solution ignores one or more items by setting his dependencies
+	 * to weak
 	 **/
-	class ProblemSolutionIgnoreConflicts : public ProblemSolution
+	class ProblemSolutionIgnore : public ProblemSolution
 	{
 	public:
 
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem item,
-					    const Capability & capability,
-					    PoolItem otherItem);
-	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem item,
-					    const Capability & capability,
-					    PoolItemList itemList);	    
+	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+				   PoolItem item );
+	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+				   PoolItemList itemList);	    
 	};
 
-	class ProblemSolutionIgnoreRequires : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItem item,
-					   const Capability & capability);
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItemList itemList,
-					   const Capability & capability);
-	};
-
-	class ProblemSolutionIgnoreArchitecture : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
-					       PoolItem item);
-	};
-
-	class ProblemSolutionIgnoreVendor : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
-					 PoolItem item);
-	};		
-
-	class ProblemSolutionIgnoreObsoletes : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
-					    PoolItem item,
-					    const Capability & capability,
-					    PoolItem otherItem);	    
-	};
-
-	class ProblemSolutionIgnoreInstalled : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-					    PoolItem item,
-					    PoolItem otherItem);  
-	};
 	
 
       ///////////////////////////////////////////////////////////////////

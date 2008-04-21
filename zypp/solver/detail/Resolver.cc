@@ -139,42 +139,9 @@ Resolver::removeExtraConflict (const Capability & capability)
 }
 
 void
-Resolver::addIgnoreConflict (const PoolItem item,
-		   const Capability & capability)
+Resolver::addWeak (const PoolItem item)
 {
-    _ignoreConflicts.insert(make_pair(item, capability));
-}
-
-void
-Resolver::addIgnoreRequires (const PoolItem item,
-			     const Capability & capability)
-{
-    _ignoreRequires.insert(make_pair(item, capability));
-}
-
-void
-Resolver::addIgnoreObsoletes (const PoolItem item,
-			      const Capability & capability)
-{
-    _ignoreObsoletes.insert(make_pair(item, capability));
-}
-
-void
-Resolver::addIgnoreInstalledItem (const PoolItem item)
-{
-    _ignoreInstalledItem.push_back (item);
-}
-
-void
-Resolver::addIgnoreArchitectureItem (const PoolItem item)
-{
-    _ignoreArchitectureItem.push_back (item);
-}
-
-void
-Resolver::addIgnoreVendorItem (const PoolItem item)
-{
-    _ignoreVendorItem.push_back (item);
+    _addWeak.push_back (item);
 }
 
 //---------------------------------------------------------------------------
@@ -237,21 +204,8 @@ Resolver::undo(void)
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
-    // These conflict should be ignored of the concering item
-    _ignoreConflicts.clear();
-    // These requires should be ignored of the concering item
-    _ignoreRequires.clear();
-    // These obsoletes should be ignored of the concering item
-    _ignoreObsoletes.clear();
-    // Ignore architecture of the item
-    _ignoreArchitecture.clear();
-    // Ignore the status "installed" of the item
-    _ignoreInstalledItem.clear();
-    // Ignore the architecture of the item
-    _ignoreArchitectureItem.clear();
-    // Ignore the vendor of the item
-    _ignoreVendorItem.clear();
-
+    //  Regard dependencies of the item weak onl
+    _addWeak.clear();
 
     return;
 }

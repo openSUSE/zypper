@@ -102,15 +102,8 @@ ostream &
 InjectSolutionAction::dumpOn( ostream& os ) const
 {
     os << "InjectSolutionAction: ";
-    os << _capability;
-    os << ", ";
     switch (_kind) {
-	case REQUIRES:	os << "Requires"; break;
-	case CONFLICTS:	os << "Conflicts"; break;
-	case OBSOLETES: os << "Obsoletes"; break;
-	case INSTALLED: os << "Installed"; break;
-	case ARCHITECTURE: os << "Architecture"; break;
-	case VENDOR: os << "Vendor"; break;
+	case WEAK:	os << "Weak"; break;
 	default: os << "Wrong kind"; break;
     }
     os << " ";
@@ -138,7 +131,6 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
-	    resolver.addIgnoreInstalledItem( _item );
 	    /*FALLTHRU*/
 	case INSTALL:
 	    if (_item.status().isToBeUninstalled())
@@ -169,72 +161,11 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    Capabilities depList;
-    if (_item != PoolItem()) {
-	depList = _item.resolvable()->dep(Dep::CONFLICTS);
-    }
     switch (_kind) {
-        case CONFLICTS:
-	    // removing conflict in both resolvables
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) == CapMatch::yes )
-		{
-		    resolver.addIgnoreConflict (_item, _capability);
-		}
-	    }
-	    // Obsoletes are conflicts too
-	    depList = _item.resolvable()->dep(Dep::OBSOLETES);
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) == CapMatch::yes )
-		{
-		    resolver.addIgnoreConflict (_otherItem, _capability);
-		}
-	    }
-
-	    depList = _otherItem.resolvable()->dep(Dep::CONFLICTS);
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) == CapMatch::yes )
-		{
-		    resolver.addIgnoreConflict (_otherItem, _capability);
-		}
-	    }
-	    // Obsoletes are conflicts too
-	    depList = _otherItem.resolvable()->dep(Dep::OBSOLETES);
-	    for (Capabilities::const_iterator iter = depList.begin(); iter != depList.end(); iter++) {
-		if (iter->matches (_capability) == CapMatch::yes )
-		{
-		    resolver.addIgnoreConflict (_otherItem, _capability);
-		}
-	    }
-
-	    break;
-        case REQUIRES:
-	    // removing the requires dependency from the item
-	    if (_item == PoolItem()) {
-		// this was a requirement via Resolver::addExtraCapability
-		// so we have to delete it.
-		resolver.removeExtraRequire (_capability);
-	    } else {
-		resolver.addIgnoreRequires (_item, _capability);
-	    }
-	    break;
-        case ARCHITECTURE:
-	    // This item is for ALL architectures available
-	    resolver.addIgnoreArchitectureItem (_item);
-	    break;
-        case VENDOR:
-	    // This item is for ALL vendor available
-	    resolver.addIgnoreVendorItem (_item);
-	    break;
-        case OBSOLETES:
-	    // removing the obsoletes dependency from the item
-	    resolver.addIgnoreObsoletes (_otherItem, _capability);
-	    break;
-        case INSTALLED:
-	    // ignoring already installed items
-	    resolver.addIgnoreInstalledItem (_item);
-	    resolver.addIgnoreInstalledItem (_otherItem);
-	    break;
+        case WEAK:
+	    // set item dependencies to weak
+	    resolver.addWeak (_item);
+            break;
         default:
 	    ERR << "No valid InjectSolutionAction kind found" << endl;
 	    return false;

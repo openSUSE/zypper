@@ -104,17 +104,12 @@ namespace zypp
 
 
 	/**
-	 * Type of ignoring dependencies, architectures and vendor
+	 * Type of ignoring; currently only WEAK
 	 **/
 
 	typedef enum
 	{
-	    REQUIRES,
-	    CONFLICTS,
-	    OBSOLETES,
-	    INSTALLED,
-	    ARCHITECTURE,
-	    VENDOR
+	    WEAK
 	} InjectSolutionKind;
 
 
@@ -130,25 +125,10 @@ namespace zypp
 	public:
 
 	    InjectSolutionAction( PoolItem item,
-				  const Capability & capability,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
-		  _item( item ), _capability( capability ),
-		  _kind( kind ), _otherItem() {}
-
-	    InjectSolutionAction( PoolItem item,
-				  const InjectSolutionKind & kind)
-		: SolutionAction(),
-		  _item( item ), _capability(),
-		  _kind( kind ), _otherItem() {}
-
-	    InjectSolutionAction( PoolItem item,
-				  const Capability & capability,
-				  const InjectSolutionKind & kind,
-				  PoolItem otherItem)
-		: SolutionAction(),
-		  _item( item ), _capability( capability ),
-		  _kind( kind ), _otherItem( otherItem ) {}
+		  _item( item ), 
+		  _kind( kind ) {}
 
 	  // ---------------------------------- I/O
 	  virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -156,7 +136,6 @@ namespace zypp
 		{ return action.dumpOn (str); }
 
 	  // ---------------------------------- accessors
-	    const Capability & capability() const { return _capability; };
 	    const PoolItem item() const { return _item; }
 
 	  // ---------------------------------- methods
@@ -164,9 +143,7 @@ namespace zypp
 
 	protected:
 	    PoolItem _item;
-	    const Capability _capability;
 	    const InjectSolutionKind _kind;
-	    PoolItem _otherItem;
 	};
 
 

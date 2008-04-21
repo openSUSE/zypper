@@ -40,111 +40,29 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
-IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
-IMPL_PTR_TYPE(ProblemSolutionIgnoreArchitecture);
-IMPL_PTR_TYPE(ProblemSolutionIgnoreVendor);	
-IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);	
+IMPL_PTR_TYPE(ProblemSolutionIgnore);
 
 //---------------------------------------------------------------------------
 
-ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-							      PoolItem item,
-							      const Capability & capability)
+ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+					      PoolItem item )
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Ignore this requirement just here");
-	addAction ( new InjectSolutionAction (item, capability, REQUIRES));
+    // TranslatorExplanation %s = name of package, patch, selection ...    
+    _description = str::form (_("Ignore some dependencies for %s"), item->name().c_str() );
+
+//    addAction ( new InjectSolutionAction (item, capability, REQUIRES));
 }	
 	
-ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-							      PoolItemList itemList,	  
-							      const Capability & capability)
+ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+					      PoolItemList itemList )
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Generally ignore this requirement");
+	_description = _("Generally ignore of some dependecies");
 	for (PoolItemList::const_iterator iter = itemList.begin();
 	     iter != itemList.end(); iter++) {
-	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
+//	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
 	}
-}
-
-ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
-								  PoolItem item)
-    : ProblemSolution (parent, "", "")
-{
-        // TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form(_("Install %s although it would change the architecture"),
-				 item->name().c_str());
-	// TranslatorExplanation %s = name of package, patch, selection ...	
-	_details = str::form(_("%s provides this dependency, but would change the architecture of the installed item"),
-			    Helper::itemToString (item).c_str());
-	addAction ( new InjectSolutionAction (item, ARCHITECTURE));
-}
-
-ProblemSolutionIgnoreVendor::ProblemSolutionIgnoreVendor( ResolverProblem_Ptr parent,
-							  PoolItem item)
-    : ProblemSolution (parent, "", "")
-{
-        // TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form(_("Install %s although it would change the vendor"),
-				 item->name().c_str());
-	// TranslatorExplanation %s = name of package, patch, selection ...	
-	_details = str::form(_("%s provides this dependency, but would change the vendor of the installed item"),
-			    Helper::itemToString (item).c_str());
-	addAction ( new InjectSolutionAction (item, VENDOR));
-}
-	
-ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem item,
-								const Capability & capability,
-								PoolItem otherItem)
-    : ProblemSolution (parent, "", "")
-{
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignore this conflict of %s"),
-				  item->name().c_str());
-	addAction (new InjectSolutionAction (item, capability, CONFLICTS, otherItem));	
-}
-
-ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-								PoolItem item,
-								const Capability & capability,
-								PoolItemList itemList)
-    : ProblemSolution (parent, "", "")
-{
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignore this conflict of %s"),
-				  item->name().c_str());
-	for (PoolItemList::const_iterator iter = itemList.begin();
-	     iter != itemList.end(); iter++) {
-	    addAction (new InjectSolutionAction (item, capability, CONFLICTS, *iter));		    
-	}
-}
-
-ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
-								PoolItem item,
-								const Capability & capability,
-								PoolItem otherItem)
-    : ProblemSolution (parent, "", "")
-{
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignore the obsolete %s in %s"),
-				  Helper::capToString (capability).c_str(),
-				  otherItem->name().c_str());
-	addAction (new InjectSolutionAction (item, capability, OBSOLETES, otherItem));	
-}
-
-
-ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-								PoolItem item,
-								PoolItem otherItem)
-    : ProblemSolution (parent, "", "")
-{
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignore that %s is already set to install"),
-				  item->name().c_str());
-	addAction (new InjectSolutionAction (item, Capability(), INSTALLED, otherItem));	
 }
 	
       ///////////////////////////////////////////////////////////////////
