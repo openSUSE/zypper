@@ -920,48 +920,114 @@ static void show_summary_of_type(Zypper & zypper,
     switch (stype)
     {
     case TO_UPGRADE:
-      title = boost::str(format(_PL(
-          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following %s is going to be upgraded:",
-          "The following %s are going to be upgraded:",
-          it->second.size()
-      )) % kind_to_string_localized(it->first, it->second.size()));
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be upgraded:",
+          "The following packages are going to be upgraded:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be upgraded:",
+          "The following patches are going to be upgraded:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be upgraded:",
+          "The following patterns are going to be upgraded:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be upgraded:",
+          "The following products are going to be upgraded:",
+          it->second.size());
       break;
     case TO_DOWNGRADE:
-      title = boost::str(format(_PL(
-          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following %s is going to be downgraded:",
-          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following %s are going to be downgraded:",
-          it->second.size()
-      )) % kind_to_string_localized(it->first, it->second.size()));
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be downgraded:",
+          "The following packages are going to be downgraded:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be downgraded:",
+          "The following patches are going to be downgraded:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be downgraded:",
+          "The following patterns are going to be downgraded:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be downgraded:",
+          "The following products are going to be downgraded:",
+          it->second.size());
       break;
     case TO_INSTALL:
-      title = boost::str(format(_PL(
-          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following NEW %s is going to be installed:",
-          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following NEW %s are going to be installed:",
-          it->second.size()
-      )) % kind_to_string_localized(it->first, it->second.size()));
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following NEW package is going to be installed:",
+          "The following NEW packages are going to be installed:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following NEW patch is going to be installed:",
+          "The following NEW patches are going to be installed:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following NEW pattern is going to be installed:",
+          "The following NEW patterns are going to be installed:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following NEW product is going to be installed:",
+          "The following NEW products are going to be installed:",
+          it->second.size());
       break;
     case TO_REINSTALL:
-      title = boost::str(format(_PL(
-          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following %s is going to be re-installed:",
-          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following %s are going to be re-installed:",
-          it->second.size()
-      )) % kind_to_string_localized(it->first, it->second.size()));
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be reinstalled:",
+          "The following packages are going to be reinstalled:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be reinstalled:",
+          "The following patches are going to be reinstalled:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be reinstalled:",
+          "The following patterns are going to be reinstalled:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be reinstalled:",
+          "The following products are going to be reinstalled:",
+          it->second.size());
       break;
     case TO_REMOVE:
-      title = boost::str(format(_PL(
-          // TranslatorExplanation %s is a "package", "patch", "pattern", etc
-          "The following %s is going to be REMOVED:",
-          // TranslatorExplanation %s is a "packages", "patches", "patterns", etc
-          "The following %s are going to be REMOVED:",
-          it->second.size()
-      )) % kind_to_string_localized(it->first, it->second.size()));
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be REMOVED:",
+          "The following packages are going to be REMOVED:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be REMOVED:",
+          "The following patches are going to be REMOVED:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be REMOVED:",
+          "The following patterns are going to be REMOVED:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be REMOVED:",
+          "The following products are going to be REMOVED:",
+          it->second.size());
       break;
     }
 
