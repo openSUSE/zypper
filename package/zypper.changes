@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 21 11:27:16 CEST 2008 - jkupec@suse.cz
+
+- rug's list-resolvables added (hardcoded list of resolvable types)
+  (fate #302148)
+- r9748
+
+-------------------------------------------------------------------
 Mon Apr 21 10:32:46 CEST 2008 - jkupec@suse.cz
 
 - show architecture changes in the install summary (bnc #381772)
