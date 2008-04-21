@@ -158,8 +158,9 @@ void printPkgInfo(const Zypper & zypper, const ui::Selectable & s)
   }
   else if (installed)
   {
-    cout << _("out-of-date (version ") << installed.resolvable()->edition()
-      << _(" installed) ") << endl; // TODO use sformat for this for proper translation
+    cout << str::form(_("out-of-date (version %s installed)"),
+        installed.resolvable()->edition().asString().c_str())
+      << endl;
   }
   else
     cout << _("not installed") << endl;
