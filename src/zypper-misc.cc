@@ -1040,6 +1040,11 @@ static void show_summary_of_type(Zypper & zypper,
           "The following NEW product is going to be installed:",
           "The following NEW products are going to be installed:",
           it->second.size());
+      else if (it->first == ResKind::srcpackage)
+        title = _PL(
+          "The following source package is going to be installed:",
+          "The following source packages are going to be installed:",
+          it->second.size());
       break;
     case TO_REINSTALL:
       if (it->first == ResKind::package)
