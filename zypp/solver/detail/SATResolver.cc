@@ -960,8 +960,8 @@ SATResolver::problems ()
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
 	    string detail;
-	    Id ignorId;
-	    string whatString = SATprobleminfoString (problem,detail,ignorId);
+	    Id ignoreId;
+	    string whatString = SATprobleminfoString (problem,detail,ignoreId);
 	    MIL << whatString << endl;
 	    MIL << "------------------------------------" << endl;
 	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail);
@@ -1162,12 +1162,14 @@ SATResolver::problems ()
 		MIL << "------------------------------------" << endl;
 	    }
 
-	    if (ignorId > 0) {
+	    if (ignoreId > 0) {
 		// There is a possibility to ignore this error by setting weak dependencies
-		PoolItem item = _pool.find (sat::Solvable(ignorId));		
+		PoolItem item = _pool.find (sat::Solvable(ignoreId));		
 		ProblemSolutionIgnore *problemSolution = new ProblemSolutionIgnore(resolverProblem, item);		
 		resolverProblem->addSolution (problemSolution,
 					      false); // Solutions will be shown at the end
+		MIL << "Ignore some dependencies of " << item << endl;
+		MIL << "------------------------------------" << endl;		
 	    }	    
 	    
 	    // save problem
