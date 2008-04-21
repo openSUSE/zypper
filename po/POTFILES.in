@@ -8,9 +8,8 @@
 ../src/zypper-command.cc
 ../src/zypper-getopt.cc
 ../src/zypper-info.cc
-../src/zypper-locks.cc
-../src/zypper-search.cc
 ../src/zypper-keyring-callbacks.h
+../src/zypper-locks.cc
 ../src/zypper-main.h
 ../src/zypper-media-callbacks.h
 ../src/zypper-misc.cc
@@ -19,6 +18,7 @@
 ../src/zypper-repo-callbacks.h
 ../src/zypper-repos.cc
 ../src/zypper-rpm-callbacks.h
+../src/zypper-search.cc
 ../src/zypper-search.h
 ../src/zypper-updates.h
 ../src/zypper-utils.cc
