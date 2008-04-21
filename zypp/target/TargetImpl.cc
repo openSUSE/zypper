@@ -345,6 +345,13 @@ namespace zypp
 
         filesystem::TmpFile tmpsolv( cachePath /*dir*/,
                                      sat::Pool::instance().systemRepoName() /* prefix */ );
+        if (!tmpsolv)
+        {
+          Exception ex("Failed to cache rpm database.");
+          ex.remember(str::form(
+              "Cannot create temporary file under %s.", cachePath.asString().c_str()));
+          ZYPP_THROW(ex);
+        }
 
         ostringstream cmd;
         cmd << "rpmdb2solv";
