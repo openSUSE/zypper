@@ -884,6 +884,10 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  s2 = pool_id2solvable(pool, target);
 	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
 	  break;
+      case SOLVER_PROBLEM_SELF_CONFLICT:
+	  s = pool_id2solvable(pool, source);
+	  ret = str::form (_("Solvable %s conflicts with %s provided by itself"), solvable2str(pool, s), dep2str(pool, dep));
+          break;	  
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  ignoreId = source; // for setting weak dependencies
 	  s = pool_id2solvable(pool, source);
