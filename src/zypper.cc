@@ -56,6 +56,8 @@ ZYpp::Ptr God = NULL;
 RuntimeData gData;
 parsed_opts copts; // command options
 
+static void rug_list_resolvables(Zypper & zypper);
+
 Zypper::Zypper()
   : _argc(0), _argv(NULL), _out_ptr(NULL),
     _command(ZypperCommand::NONE),
@@ -980,6 +982,24 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = service_list_options;
+
+    // handle the conflicting rug's lr here:
+    if (_gopts.is_rug_compatible)
+    {
+      static struct option options[] = {
+        {"help", no_argument, 0, 'h'},
+        {0, 0, 0, 0}
+      };
+      specific_options = options;
+
+      _command_help = _(
+        "list-resolvables (lr)\n"
+        "\n"
+        "List available resolvable types.\n"
+      );
+      break;
+    }
+
     _command_help = _(
       "repos (lr)\n"
       "\n"
@@ -1702,6 +1722,21 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::RUG_LIST_RESOLVABLES_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "list-resolvables (lr)\n"
+      "\n"
+      "List available resolvable types.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::RUG_MOUNT_e:
   {
     static struct option options[] = {
@@ -1820,9 +1855,12 @@ void Zypper::doCommand()
   case ZypperCommand::LIST_REPOS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-    // if (runningHelp()) display_command_help()
 
-    list_repos(*this);
+    if (_gopts.is_rug_compatible)
+      rug_list_resolvables(*this);
+    else
+      list_repos(*this);
+
     break;
   }
 
@@ -3028,6 +3066,13 @@ void Zypper::doCommand()
     break;
   }
 
+  case ZypperCommand::RUG_LIST_RESOLVABLES_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+    rug_list_resolvables(*this);
+    break;
+  }
+
   default:
     // if the program reaches this line, something went wrong
     setExitCode(ZYPPER_EXIT_ERR_BUG);
@@ -3057,6 +3102,23 @@ void Zypper::cleanup()
       break;
     }
 }
+
+void rug_list_resolvables(Zypper & zypper)
+{
+  Table t;
+
+  TableHeader th;
+  th << _("Resolvable Type");
+  t << th;
+
+  { TableRow tr; tr << "package"; t << tr; }
+  { TableRow tr; tr << "patch"; t << tr; }
+  { TableRow tr; tr << "pattern"; t << tr; }
+  { TableRow tr; tr << "product"; t << tr; }
+
+  cout << t;
+}
+
 
 // Local Variables:
 // c-basic-offset: 2
