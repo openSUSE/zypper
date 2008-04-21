@@ -1284,8 +1284,6 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = _(
-      // TranslatorExplanation don't translate the resolvable types
-      // (see the install command comment) 
       "search [options] [querystring...]\n"
       "\n"
       "Search for packages matching given search strings\n"
@@ -1761,6 +1759,33 @@ void Zypper::processCommandOptions()
       "-n, --name <name>    Use given string as service name.\n"
       "-r, --recurse        Dive into subdirectories.\n"
     );
+    break;
+  }
+
+  case ZypperCommand::RUG_PATCH_SEARCH_e:
+  {
+    static struct option search_options[] = {
+      {"installed-only", no_argument, 0, 'i'},
+      {"uninstalled-only", no_argument, 0, 'u'},
+      {"match-all", no_argument, 0, 0},
+      {"match-any", no_argument, 0, 0},
+      {"match-substrings", no_argument, 0, 0},
+      {"match-words", no_argument, 0, 0},
+      {"match-exact", no_argument, 0, 0},
+      {"search-descriptions", no_argument, 0, 'd'},
+      {"case-sensitive", no_argument, 0, 'C'},
+      {"sort-by-name", no_argument, 0, 0},
+      {"sort-by-catalog", no_argument, 0, 0},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = search_options;
+    _command_help = str::form(_(
+      "patch-search [options] [querystring...]\n"
+      "\n"
+      "Search for patches matching given search strings. This is a"
+      " rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+    ), "zypper -r search -t patch --detail ...");
     break;
   }
 

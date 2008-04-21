@@ -2163,6 +2163,8 @@ void solve_and_commit (Zypper & zypper)
 
     if (false)
     {
+      // translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
+      string prompt_lablel = _("Continue? (Choose 'p' to show dependency problems.)");
       // translators: Yes / No / show Problems. This prompt will appear
       // after install/update command summary if there will be any package
       // to-be-removed automatically to show why, if asked.

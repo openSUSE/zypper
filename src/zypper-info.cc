@@ -101,6 +101,21 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
         cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
     }
   }
+  
+  if (false)
+  {
+    string s00 = _("None");
+    string s0 = _("Requires");
+    string s1 = _("Provides");
+    string s2 = _("Conflicts");
+    string s3 = _("Obsoletes");
+    // translators: package requirements table header 
+    string s4 = _("Requirement");
+    // translators: package requirements table header 
+    string s5 = _("Provided By");
+    // translators: package conflicts table header 
+    string s6 = _("Conflict");
+  }
 }
 
 
