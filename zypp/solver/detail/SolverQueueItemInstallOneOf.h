@@ -48,10 +48,11 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
   private:
 
     PoolItemList _oneOfList; // List of candidates
+    bool _soft;          // if triggered by a soft requirement (a recommends)    
 
   public:
 
-    SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList);
+    SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList, bool soft = false);
     virtual ~SolverQueueItemInstallOneOf();
     
     // ---------------------------------- I/O
@@ -61,6 +62,10 @@ class SolverQueueItemInstallOneOf : public SolverQueueItem {
     friend std::ostream& operator<<(std::ostream & str, const SolverQueueItemInstallOneOf & obj)
     { return obj.dumpOn (str); }
 
+    // ---------------------------------- accessors
+
+    bool isSoft (void) const { return _soft; }    
+    
     // ---------------------------------- methods
 
     virtual bool addRule (_Queue & q);    
