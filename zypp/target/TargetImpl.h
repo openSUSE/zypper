@@ -137,6 +137,13 @@ namespace zypp
       /** return the last modification date of the target */
       Date timestamp() const;
 
+      /** The targets distribution release string.
+       * \code
+       *   openSUSE 10.3 (i586)
+       * \endcode
+       */
+      std::string release() const;
+
     protected:
       /** Path to the target */
       Pathname _root;

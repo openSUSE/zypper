@@ -94,6 +94,9 @@ namespace zypp
   Date Target::timestamp() const
   { return _pimpl->timestamp(); }
 
+  std::string Target::release() const
+  { return _pimpl->release(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

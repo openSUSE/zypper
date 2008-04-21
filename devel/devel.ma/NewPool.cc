@@ -597,6 +597,7 @@ try {
     {
       getZYpp()->initializeTarget( sysRoot );
       getZYpp()->target()->load();
+      SEC << getZYpp()->target()->release() << endl;
     }
   }
 
@@ -613,29 +614,8 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  if ( !pool.empty() )
-  {
-    PoolItem pi ( getPi<Package>( "aspell" ) );
-    MIL << pi << endl;
-    if ( pi )
-    {
-      pi.status().setTransact( true, ResStatus::USER );
-      solve();
-      vdumpPoolStats( USR << "Transacting:"<< endl,
-                      make_filter_begin<resfilter::ByTransact>(pool),
-                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-      install();
-    }
-
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
   if ( 0 ) {
-    Measure x( "PROCXY" );
+    Measure x( "PROXY" );
     pool.proxy();
   }
 

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 21 15:38:10 CEST 2008 - ma@suse.de
+
+- Added Target::release(), returning the targets distribution 
+  release string. 
+- revision 9761
+
+-------------------------------------------------------------------
 Sat Apr 19 01:08:04 CEST 2008 - ma@suse.de
 
 - per default abort if package installation fails. (bnc #381203)

@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <string>
 #include <list>
@@ -22,6 +23,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/IOStream.h"
 #include "zypp/base/UserRequestException.h"
 
 #include "zypp/ZConfig.h"
@@ -791,6 +793,19 @@ namespace zypp
     Date TargetImpl::timestamp() const
     {
       return _rpm.timestamp();
+    }
+
+    std::string TargetImpl::release() const
+    {
+      std::ifstream suseRelease( (_root / "/etc/SuSE-release").c_str() );
+      for( iostr::EachLine in( suseRelease ); in; in.next() )
+      {
+        std::string line( str::trim( *in ) );
+        if ( ! line.empty() )
+          return line;
+      }
+
+      return _("Unknown Distribution");
     }
 
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
