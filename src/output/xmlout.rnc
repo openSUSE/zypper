@@ -128,6 +128,8 @@ install-summary-element =
       element to-remove { solvable-element+ } |
       element to-upgrade { solvable-element+ } |
       element to-downgrade { solvable-element+ } |
+      element to-upgrade-change-arch { solvable-element+ } |
+      element to-downgrade-change-arch { solvable-element+ } |
       element to-reinstall { solvable-element+ } |
       element to-change-arch { solvable-element+ }
     )*

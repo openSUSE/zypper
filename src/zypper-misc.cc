@@ -842,7 +842,9 @@ static void show_summary_resolvable_list(const string & label,
 typedef enum
 {
   TO_UPGRADE,
+  TO_UPGRADE_CHANGE_ARCH,
   TO_DOWNGRADE,
+  TO_DOWNGRADE_CHANGE_ARCH,
   TO_INSTALL,
   TO_REINSTALL,
   TO_REMOVE,
@@ -858,6 +860,12 @@ static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
     break;
   case TO_DOWNGRADE:
     cout << "<" << (end ? "/" : "") << "to-downgrade>" << endl;
+    break;
+  case TO_UPGRADE_CHANGE_ARCH:
+    cout << "<" << (end ? "/" : "") << "to-upgrade-change-arch>" << endl;
+    break;
+  case TO_DOWNGRADE_CHANGE_ARCH:
+    cout << "<" << (end ? "/" : "") << "to-downgrade-change-arch>" << endl;
     break;
   case TO_INSTALL:
     cout << "<" << (end ? "/" : "") << "to-install>" << endl;
@@ -945,6 +953,28 @@ static void show_summary_of_type(Zypper & zypper,
           "The following products are going to be upgraded:",
           it->second.size());
       break;
+    case TO_UPGRADE_CHANGE_ARCH:
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be upgraded and change architecture:",
+          "The following packages are going to be upgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be upgraded and change architecture:",
+          "The following patches are going to be upgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be upgraded and change architecture:",
+          "The following patterns are going to be upgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be upgraded and change architecture:",
+          "The following products are going to be upgraded and change architecture:",
+          it->second.size());
+      break;
     case TO_DOWNGRADE:
       if (it->first == ResKind::package)
         title = _PL(
@@ -965,6 +995,28 @@ static void show_summary_of_type(Zypper & zypper,
         title = _PL(
           "The following product is going to be downgraded:",
           "The following products are going to be downgraded:",
+          it->second.size());
+      break;
+    case TO_DOWNGRADE_CHANGE_ARCH:
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to be downgraded and change architecture:",
+          "The following packages are going to be downgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to be downgraded and change architecture:",
+          "The following patches are going to be downgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to be downgraded and change architecture:",
+          "The following patterns are going to be downgraded and change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to be downgraded and change architecture:",
+          "The following products are going to be downgraded and change architecture:",
           it->second.size());
       break;
     case TO_INSTALL:
@@ -1131,6 +1183,8 @@ static int summary(Zypper & zypper)
   KindToResObjectSet toinstall;
   KindToResObjectSet toupgrade;
   KindToResObjectSet todowngrade;
+  KindToResObjectSet toupgrade_charch;
+  KindToResObjectSet todowngrade_charch;
   KindToResObjectSet toreinstall;
   KindToResObjectSet toremove;
   KindToResObjectSet tochangearch;
@@ -1154,7 +1208,12 @@ static int summary(Zypper & zypper)
         if (res->name() == (*rmit)->name())
         {
           if (res->edition() > (*rmit)->edition())
-            toupgrade[res->kind()].insert(res);
+          {
+            if (res->arch() == (*rmit)->arch())
+              toupgrade[res->kind()].insert(res);
+            else
+              toupgrade_charch[res->kind()].insert(res);
+          }
           else if (res->edition() == (*rmit)->edition())
           {
             if (res->arch() == (*rmit)->arch())
@@ -1163,7 +1222,12 @@ static int summary(Zypper & zypper)
               tochangearch[res->kind()].insert(res);
           }
           else
-            todowngrade[res->kind()].insert(res);
+          {
+            if (res->arch() == (*rmit)->arch())
+              todowngrade[res->kind()].insert(res);
+            else
+              todowngrade_charch[res->kind()].insert(res);
+          }
 
           new_installed_size += res->installsize() - (*rmit)->installsize();
 
@@ -1208,6 +1272,8 @@ static int summary(Zypper & zypper)
   // show summary
   show_summary_of_type(zypper, TO_UPGRADE, toupgrade);
   show_summary_of_type(zypper, TO_DOWNGRADE, todowngrade);
+  show_summary_of_type(zypper, TO_UPGRADE_CHANGE_ARCH, toupgrade_charch);
+  show_summary_of_type(zypper, TO_DOWNGRADE_CHANGE_ARCH, todowngrade_charch);
   show_summary_of_type(zypper, TO_INSTALL, toinstall);
   show_summary_of_type(zypper, TO_REINSTALL, toreinstall);
   show_summary_of_type(zypper, TO_REMOVE, toremove);
