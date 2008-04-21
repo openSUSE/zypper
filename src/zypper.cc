@@ -2454,7 +2454,11 @@ void Zypper::doCommand()
   // --------------------------( search )-------------------------------------
 
   case ZypperCommand::SEARCH_e:
+  case ZypperCommand::RUG_PATCH_SEARCH_e:
   {
+    if (command() == ZypperCommand::RUG_PATCH_SEARCH)
+      _gopts.is_rug_compatible = true;
+    
     zypp::PoolQuery query;
 
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
@@ -2470,7 +2474,11 @@ void Zypper::doCommand()
     if (copts.count("case-sensitive"))
       query.setCaseSensitive();
 
-    if (copts.count("type") > 0)
+    if (command() == ZypperCommand::RUG_PATCH_SEARCH)
+      query.addKind(ResKind::patch);
+    else if (globalOpts().is_rug_compatible)
+      query.addKind(ResKind::package);
+    else if (copts.count("type") > 0)
     {
       std::list<std::string>::const_iterator it;
       for (it = copts["type"].begin(); it != copts["type"].end(); ++it)
@@ -2485,10 +2493,6 @@ void Zypper::doCommand()
         }
         query.addKind( kind );
       }
-    }
-    else if (globalOpts().is_rug_compatible)
-    {
-      query.addKind( ResTraits<Package>::kind );
     }
 
     init_repos(*this);
@@ -2519,14 +2523,20 @@ void Zypper::doCommand()
 
     // now load resolvables:
     load_resolvables(*this);
-    resolve(*this); // needed to compute status of PPP?
+    // needed to compute status of PPP
+    resolve(*this);
 
     Table t;
     t.style(Ascii);
 
     try
     {
-      if (_gopts.is_rug_compatible || _copts.count("details"))
+      if (command() == ZypperCommand::RUG_PATCH_SEARCH)
+      {
+        FillPatchesTable callback(t);
+        invokeOnEach(query.poolItemBegin(), query.poolItemEnd(), callback);
+      }
+      else if (_gopts.is_rug_compatible || _copts.count("details"))
       {
         FillSearchTableSolvable callback(t);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
@@ -2539,13 +2549,36 @@ void Zypper::doCommand()
 
       if (t.empty())
         out().info(_("No resolvables found."), Out::QUIET);
-      else {
+      else
+      {
         cout << endl; //! \todo  out().separator()?
 
-        if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
-          t.sort(1);
+        if (command() == ZypperCommand::RUG_PATCH_SEARCH)
+        {
+          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+            t.sort(1);
+          else
+            t.sort(3); // sort by name
+        }
+        else if (_gopts.is_rug_compatible)
+        {
+          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+            t.sort(1);
+          else
+            t.sort(3); // sort by name
+        }
+        else if (_copts.count("details"))
+        {
+          if (copts.count("sort-by-catalog") || copts.count("sort-by-repo"))
+            t.sort(5);
+          else
+            t.sort(1); // sort by name
+        }
         else
-          t.sort(3); // sort by name
+        {
+          // sort by name (can't sort by repo)
+          t.sort(1);
+        }
 
         cout << t; //! \todo out().table()?
       }
@@ -2620,6 +2653,8 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
+    // needed to compute status of PPP
+    resolve(*this);
 
     switch (command().toEnum())
     {

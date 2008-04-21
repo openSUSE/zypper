@@ -40,10 +40,19 @@ string selectable_search_repo_str(const ui::Selectable & s)
   return repostr;
 }
 
-
-static string string_status (const ResStatus& rs)
+string string_ppp_status(const PoolItem & pi)
 {
-  return rs.isInstalled () ? _("Installed"): _("Uninstalled");
+  if (pi.isRelevant())
+  {
+    if (pi.isSatisfied())
+      return _("Installed");
+    if (pi.isBroken())
+      return _("Needed");
+    // can this ever happen?
+    return "";
+  }
+
+  return _("Not Applicable");
 }
 
 
@@ -58,31 +67,18 @@ static string string_weak_status(const ResStatus & rs)
 
 void list_patches(Zypper & zypper)
 {
-  MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
+  MIL
+    << "Pool contains " << God->pool().size()
+    << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
-  TableHeader th;
-  th << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-     << _("Name") << _("Version") << _("Category") << _("Status");
-  tbl << th;
 
-  ResPool::byKind_iterator
-    it = God->pool().byKindBegin<Patch>(),
-    e  = God->pool().byKindEnd<Patch>();
-  for (; it != e; ++it )
-  {
-    ResObject::constPtr res = it->resolvable();
-    Patch::constPtr patch = asKind<Patch>(res);
+  FillPatchesTable callback(tbl);
+  invokeOnEach(
+    God->pool().byKindBegin(ResKind::patch),
+    God->pool().byKindEnd(ResKind::patch),
+    callback);
 
-    TableRow tr;
-    tr << patch->repoInfo().name();
-    tr << res->name () << res->edition ().asString();
-    tr << patch->category();
-    tr << string_status (it->status ());
-    if (it->isBroken())
-      tr <<  _("Broken");
-    tbl << tr;
-  }
   tbl.sort (1);                 // Name
 
   if (tbl.empty())

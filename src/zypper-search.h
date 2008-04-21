@@ -13,12 +13,14 @@
 #include "zypp/ZYpp.h" // for zypp::ResPool::instance()
 #include "zypp/sat/Solvable.h"
 #include "zypp/PoolItem.h"
+#include "zypp/Patch.h"
 
 #include "zypper.h"
 #include "zypper-utils.h" // for kind_to_string_localized
 #include "zypper-tabulator.h"
 
 std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
+std::string string_ppp_status(const zypp::PoolItem & pi);
 
 /**
  * Functor for filling search output table in rug style.
@@ -70,26 +72,7 @@ struct FillSearchTableSolvable
 
     *_table << header;
   }
-/*
-  bool operator()(const zypp::sat::Solvable & solv) const
-  {
-    TableRow row;
 
-    // add other fields to the result table
-
-    zypp::PoolItem pi( zypp::ResPool::instance().find( solv ) );
-
-    row << ( pi.status().isInstalled() ? "i" : " " )
-          << pi->repository().info().name()
-    << (_gopts.is_rug_compatible ?
-        "" : kind_to_string_localized(pi->kind(), 1))
-            << pi->name()
-            << pi->edition().asString()
-            << pi->arch().asString();
-        *_table << row;
-    return true;
-  }
-*/
   bool operator()(const zypp::ui::Selectable::constPtr & s) const
   {
     // show installed objects
@@ -198,6 +181,55 @@ struct FillSearchTableSelectable
     return true;
   }
 };
+
+
+/**
+ * Functor for filling search output table in rug style.
+ */
+struct FillPatchesTable
+{
+  // the table used for output
+  Table * _table;
+  const GlobalOptions & _gopts;
+
+  FillPatchesTable( Table & table )
+  : _table( &table )
+  , _gopts(Zypper::instance()->globalOpts())
+  {
+    TableHeader header;
+
+    header
+      // translators: catalog (rug's word for repository) (header)
+      << _("Catalog")
+      << _("Name")
+      << _("Version")
+      // translators: patch category (recommended, security)
+      << _("Category")
+      // translators: patch status (installed, uninstalled, needed)
+      << _("Status");
+
+    *_table << header;
+  }
+
+  bool operator()(const zypp::PoolItem & pi) const
+  {
+    TableRow row;
+
+    zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
+
+    row
+      << pi->repository().info().name()
+      << pi->name()
+      << pi->edition().asString()
+      << patch->category()
+      << string_ppp_status(pi);
+
+    *_table << row;
+
+    return true;
+  }
+};
+
 
 /** List all patches with specific info in specified repos */
 void list_patches(Zypper & zypper);
