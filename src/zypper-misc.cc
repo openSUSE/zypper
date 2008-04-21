@@ -845,7 +845,8 @@ typedef enum
   TO_DOWNGRADE,
   TO_INSTALL,
   TO_REINSTALL,
-  TO_REMOVE
+  TO_REMOVE,
+  TO_CHANGE_ARCH
 } SummaryType;
 
 static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
@@ -866,6 +867,9 @@ static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
     break;
   case TO_REMOVE:
     cout << "<" << (end ? "/" : "") << "to-remove>" << endl;
+    break;
+  case TO_CHANGE_ARCH:
+    cout << "<" << (end ? "/" : "") << "to-change-arch>" << endl;
     break;
   }
 }
@@ -1029,6 +1033,28 @@ static void show_summary_of_type(Zypper & zypper,
           "The following products are going to be REMOVED:",
           it->second.size());
       break;
+    case TO_CHANGE_ARCH:
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to change architecture:",
+          "The following packages are going to change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to change architecture:",
+          "The following patches are going to change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to change architecture:",
+          "The following patterns are going to change architecture:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to change architecture:",
+          "The following products are going to change architecture:",
+          it->second.size());
+      break;
     }
 
     show_summary_resolvable_list(title, it, zypper.out());
@@ -1107,6 +1133,7 @@ static int summary(Zypper & zypper)
   KindToResObjectSet todowngrade;
   KindToResObjectSet toreinstall;
   KindToResObjectSet toremove;
+  KindToResObjectSet tochangearch;
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   ByteCount download_size, new_installed_size;
@@ -1129,7 +1156,12 @@ static int summary(Zypper & zypper)
           if (res->edition() > (*rmit)->edition())
             toupgrade[res->kind()].insert(res);
           else if (res->edition() == (*rmit)->edition())
-            toreinstall[res->kind()].insert(res);
+          {
+            if (res->arch() == (*rmit)->arch())
+              toreinstall[res->kind()].insert(res);
+            else
+              tochangearch[res->kind()].insert(res);
+          }
           else
             todowngrade[res->kind()].insert(res);
 
@@ -1179,6 +1211,7 @@ static int summary(Zypper & zypper)
   show_summary_of_type(zypper, TO_INSTALL, toinstall);
   show_summary_of_type(zypper, TO_REINSTALL, toreinstall);
   show_summary_of_type(zypper, TO_REMOVE, toremove);
+  show_summary_of_type(zypper, TO_CHANGE_ARCH, tochangearch);
 
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
