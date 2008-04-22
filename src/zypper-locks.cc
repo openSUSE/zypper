@@ -150,7 +150,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
   {
     Locks & locks = Locks::instance();
     locks.readAndApply();
-    Locks::iterator it = locks.begin();
+    Locks::const_iterator it = locks.begin();
     Locks::LockList::size_type i = 0;
     safe_lexical_cast(args[0], i);
     if (i > 0 && i <= locks.size())
