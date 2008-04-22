@@ -60,7 +60,12 @@ namespace zypp
       /** Ui hint: patterns this one extends. */
       NameList extends() const;
 
-      /** Ui hint: Dependent packages. */
+      /** Ui hint: Required Packages. */
+      Contents core() const;
+
+      /** Ui hint: Dependent packages.
+       * This also includes recommended and suugested packages.
+      */
       Contents depends() const;
 
       /** The collection of packages associated with this pattern.

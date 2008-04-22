@@ -205,6 +205,15 @@ namespace zypp
   Pattern::NameList Pattern::extends() const
   { return NameList( sat::SolvAttr::extends, satSolvable() ); }
 
+  Pattern::Contents Pattern::core() const
+  {
+    // get items providing the requirements
+    sat::WhatProvides prv( requires() );
+    // return packages only.
+    return Pattern::Contents( make_filter_begin( filter::byKind<Package>(), prv ),
+                              make_filter_end( filter::byKind<Package>(), prv ) );
+  }
+
   Pattern::Contents Pattern::depends() const
   {
     // load requires, recommends, suggests

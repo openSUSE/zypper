@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 22 10:33:03 CEST 2008 - ma@suse.de
+
+- Added Pattern::core returning the packages required by a pattern.
+  (see also Pattern::depends and Pattern::contents).
+- revision 9771
+
+-------------------------------------------------------------------
 Mon Apr 21 15:38:10 CEST 2008 - ma@suse.de
 
 - Added Target::release(), returning the targets distribution 
