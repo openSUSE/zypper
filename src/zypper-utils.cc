@@ -6,6 +6,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml_escape_parser.hpp"
 #include "zypp/Capability.h"
@@ -296,22 +297,11 @@ string xml_encode(const string & text)
   return parser.escape(text);
 }
 
-string & replace_all(string & str, const string & from, const string & to)
-{
-  size_t pos = 0;
-  while((pos = str.find(from, pos)) != string::npos)
-  {
-    str.replace(pos, from.size(), to);
-    pos += to.size();
-  }
-  return str;
-}
-
 std::string & indent(std::string & text, int columns)
 {
   string indent(columns, ' '); indent.insert(0, 1, '\n');
   DBG << "to: '" << indent << "'" << endl;
-  replace_all(text, "\n", indent);
+  text = str::gsub(text, "\n", indent);
   text.insert(0, string(columns, ' '));
   return text;
 }
