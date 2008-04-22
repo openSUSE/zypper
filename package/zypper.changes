@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Tue Apr 22 20:37:32 CEST 2008 - jkupec@suse.cz
+
+- bash-completion: rename variable conflicting with yast
+  (bnc #382097)
+- r9793
+
+-------------------------------------------------------------------
 Tue Apr 22 16:02:52 CEST 2008 - jreidinger@suse.cz
 
-- make different output to terminal and rest 
+- suppress escape sequences and excessive output when writing to
+  a file or pipe rather than a terminal (bnc #336333)
 - r9786
 
 -------------------------------------------------------------------
