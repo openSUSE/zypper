@@ -53,6 +53,10 @@ namespace zypp
       }
 
     public:
+      bool isUndetermined() const
+      {
+	  return status().isUndetermined();
+      }
 
       bool isRelevant() const
       {
@@ -61,12 +65,12 @@ namespace zypp
 
       bool isSatisfied() const
       {
-	  return status().isSatisfied();	  
+	  return status().isSatisfied();
       }
 
       bool isBroken() const
       {
-	  return status().isBroken();	  	  
+	  return status().isBroken();
       }
 
     private:
@@ -193,6 +197,9 @@ namespace zypp
 
   ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
+
+  bool PoolItem::isUndetermined() const
+  { return _pimpl->isUndetermined(); }
 
   bool PoolItem::isRelevant() const
   { return _pimpl->isRelevant(); }

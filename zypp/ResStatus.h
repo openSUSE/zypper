@@ -40,7 +40,7 @@ namespace zypp
    * \li \c TransactDetailField Reason why the Resolvable transacts.
    *        Splitted into \c InstallDetailValue and \c RemoveDetailValue
    *        dependent on the kind of transaction.
-   * \li \c WeakField The solvable will be recommended/suggested by 
+   * \li \c WeakField The solvable will be recommended/suggested by
    *        a to be installed/deleted solvable.
    *
   */
@@ -60,13 +60,13 @@ namespace zypp
     typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                          1> StateField;
-    typedef bit::Range<FieldType,StateField::end,            2> ValidateField;      
+    typedef bit::Range<FieldType,StateField::end,            2> ValidateField;
     typedef bit::Range<FieldType,ValidateField::end,         2> TransactField;
     typedef bit::Range<FieldType,TransactField::end,         2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end,       2> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end,   1> SolverStateField;
     typedef bit::Range<FieldType,SolverStateField::end,      1> LicenceConfirmedField;
-    typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;      
+    typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -134,14 +134,14 @@ namespace zypp
         LICENCE_UNCONFIRMED = bit::RangeValue<LicenceConfirmedField,0>::value,
         LICENCE_CONFIRMED   = bit::RangeValue<LicenceConfirmedField,1>::value
       };
-      
+
     enum WeakValue
       {
         NO_WEAK 		= bit::RangeValue<WeakField,0>::value,
         SUGGESTED   		= bit::RangeValue<WeakField,1>::value,
 	RECOMMENDED 		= bit::RangeValue<WeakField,2>::value,
 	SUGGESTED_AND_RECOMMENDED = bit::RangeValue<WeakField,3>::value
-      };      
+      };
     //@}
 
   public:
@@ -189,19 +189,19 @@ namespace zypp
 	fieldValueAssign<WeakField>( toVal_r ? RECOMMENDED : NO_WEAK );
     }
 
-    void setSuggested( bool toVal_r = true ) 
+    void setSuggested( bool toVal_r = true )
     { if (isRecommended())
 	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED_AND_RECOMMENDED : RECOMMENDED );
     else
 	fieldValueAssign<WeakField>( toVal_r ? SUGGESTED : NO_WEAK );
     }
 
+    ValidateValue validate() const
+    { return (ValidateValue)_bitfield.value<ValidateField>(); }
+
     bool isUndetermined() const
     { return fieldValueIs<ValidateField>( UNDETERMINED ); }
 
-    ValidateValue validate() const
-    { return (ValidateValue)_bitfield.value<ValidateField>(); }
-      
     bool isSatisfied() const
     { return fieldValueIs<ValidateField>( SATISFIED ); }
 
@@ -242,7 +242,7 @@ namespace zypp
     { return fieldValueIs<TransactField>( LOCKED ); }
 
     bool isKept() const
-    { return fieldValueIs<TransactField>( KEEP_STATE ); }      
+    { return fieldValueIs<TransactField>( KEEP_STATE ); }
 
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
@@ -265,7 +265,7 @@ namespace zypp
     TransactByValue getTransactByValue() const
     { return (TransactByValue)_bitfield.value<TransactByField>(); }
 
-      
+
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
@@ -537,7 +537,7 @@ namespace zypp
 	bool ret = setToBeUninstalledSoft ();
 	_bitfield = savBitfield;
 	return ret;
-    }      
+    }
 
     bool isSoftInstall () {
         return fieldValueIs<TransactDetailField> (SOFT_INSTALL);
@@ -621,13 +621,13 @@ namespace zypp
     static const ResStatus needed;	// uninstalled, incomplete
     static const ResStatus incomplete;	// installed, incomplete
     static const ResStatus recommended;	// recommended
-    static const ResStatus suggested;	// suggested      
+    static const ResStatus suggested;	// suggested
     //@}
 
   private:
     /** Ctor for intialization of builtin constants. */
     ResStatus( StateValue s,
-               ValidateValue v      = UNDETERMINED,	       
+               ValidateValue v      = UNDETERMINED,
                TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
                RemoveDetailValue r  = EXPLICIT_REMOVE,

@@ -79,9 +79,12 @@ namespace zypp
 
 
       /** \name Status validation.
-       *
+       * Performed for non-packages.
       */
       //@{
+      /** No validation is performed for packages. */
+      bool isUndetermined() const;
+
       /** Returns true if the solvable is relevant which means e.g. for patches
        *  that at least one package of the patch is installed.
        */
