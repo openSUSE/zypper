@@ -43,7 +43,8 @@ extern "C" {
 #include "satsolver/evr.h"
 #include "satsolver/poolvendor.h"
 #include "satsolver/policy.h"
-#include "satsolver/bitmap.h"    
+#include "satsolver/bitmap.h"
+#include "satsolver/queue.h"        
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -416,41 +417,20 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 };
 
 
-class SetValidate : public resfilter::PoolItemFilterFunctor
+class CollectNonePackages : public resfilter::PoolItemFilterFunctor
 {
   public:
-    Map installedmap, conflictsmap;    
+    Queue *solvableQueue;
 
-    SetValidate(Solver *solv)
-    {
-	solver_create_state_maps(solv, &installedmap, &conflictsmap);
-    }
-
-    // set validation 
+    CollectNonePackages( Queue *queue )
+	:solvableQueue (queue)
+    {}
+    
+    // collecting none packges
 
     bool operator()( PoolItem item )
     {
-	
-	if (isKind<Product>(item.resolvable())) {
-	    // FIXME This is a hack for registration 11.0 beta1
-	    item.status().setSatisfied();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied. THIS IS A HACK !");
-	    return true;
-	}
-
-	int ret = solvable_trivial_installable_map(item.satSolvable().get(), &installedmap, &conflictsmap);
-	item.status().setUndetermined();        
-    
-	if (ret == -1) {
-	    item.status().setNonRelevant();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
-	} else if (ret == 1) {
-	    item.status().setSatisfied();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
-	} else if (ret == 0) {
-	    item.status().setBroken();
-	    _XDEBUG("SATSolutionToPool(" << item << " ) broken !");    		    
-	}
+	queue_push(solvableQueue, item.satSolvable().id());
 	return true;
     }
 };
@@ -569,11 +549,37 @@ SATResolver::solving()
     }
 
     /* Write validation state back to pool */
-    SetValidate infoValidate(_solv);
+    Map installedmap;
+    Queue flags, solvableQueue;
+
+    queue_init(&flags);    
+    queue_init(&solvableQueue);
+
+    CollectNonePackages collectNonePackages(&solvableQueue);
     invokeOnEach( _pool.begin(),
 		  _pool.end(),
 		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
-		  functor::functorRef<bool,PoolItem> (infoValidate) );
+		  functor::functorRef<bool,PoolItem> (collectNonePackages) );
+    solver_create_state_maps(_solv, &installedmap, 0);
+    pool_trivial_installable(_solv->pool, _solv->installed, &installedmap, &solvableQueue, &flags);
+    for (int i = 0; i < solvableQueue.count; i++) {
+	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
+	item.status().setUndetermined();        
+    
+	if (flags.elements[i] == -1) {
+	    item.status().setNonRelevant();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
+	} else if (flags.elements[i] == 1) {
+	    item.status().setSatisfied();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
+	} else if (flags.elements[i] == 0) {
+	    item.status().setBroken();
+	    _XDEBUG("SATSolutionToPool(" << item << " ) broken !");    		    
+	}
+    }
+    map_free(&installedmap);
+    queue_free(&(solvableQueue));
+    queue_free(&flags);    
 
     return true;
 }
