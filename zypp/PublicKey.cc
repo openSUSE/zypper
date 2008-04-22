@@ -11,8 +11,6 @@
 */
 #include <iostream>
 
-#include <boost/algorithm/string/replace.hpp>
-
 //#include "zypp/base/Logger.h"
 
 #include "zypp/base/String.h"
@@ -168,7 +166,7 @@ namespace zypp
               _id = what[5];
               _name = what[10];
               //replace all escaped semicolon with real
-              boost::replace_all(_name,"\\x3a",":");
+              str::replace_all(_name,"\\x3a",":");
 
 	      _created = createDate(what[6]);
 	      _expires = createDate(what[7]);

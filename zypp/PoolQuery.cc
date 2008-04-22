@@ -11,7 +11,6 @@
 */
 #include <iostream>
 #include <sstream>
-#include <boost/algorithm/string/replace.hpp>
 
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
@@ -1079,7 +1078,7 @@ attremptycheckend:
       else
       {
         string s = attrName;
-        boost::replace_all( s,"_",":" );
+        str::replace_all( s,"_",":" );
         SolvAttr a(s);
         addAttribute(a,attrValue);
       }
@@ -1177,7 +1176,7 @@ attremptycheckend:
     for_( it, attributes().begin(), attributes().end() )
     {
       string s = it->first.asString();
-      boost::replace_all(s,":","_");
+      str::replace_all(s,":","_");
       for_( it2,it->second.begin(),it->second.end() )
       {
         str << s <<": "<< *it2 << delim;

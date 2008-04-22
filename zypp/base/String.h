@@ -16,8 +16,6 @@
 #include <string>
 #include <string.h>
 
-#include <boost/algorithm/string/replace.hpp>
-
 #include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -287,6 +285,22 @@ namespace zypp
     { return( default_r ? strToFalse( str ) : strToTrue( str ) ); }
     //@}
 
+    /**
+     * \short Looks for text in a string and replaces it.
+     *
+     * \note It only perform substtution in one pass
+     */
+    std::string gsub( const std::string& sData, const std::string& sFrom, const std::string& sTo);
+
+    /**
+     * \short Looks for text in string and replaces it in place
+     *
+     *
+     * \note It only perform substtution in one pass
+     * \note use only if you replace same lenght strings, otherwise use gsub
+     */
+    std::string& replace_all( std::string & str, const std::string & from, const std::string & to);
+
     ///////////////////////////////////////////////////////////////////
     /** \name Split. */
     //@{
@@ -381,11 +395,11 @@ namespace zypp
               
               std::string s( beg+1, cur-beg-2 ); //without quotes
               //transform escaped escape
-              boost::replace_all( s, "\\\\", "\\" );
+              replace_all( s, "\\\\", "\\" );
               //transform escaped quotes (only same as open
               char tmpn[2] = { closeChar, 0 };
               char tmpo[3] = { '\\', closeChar, 0 };
-              boost::replace_all( s, tmpo, tmpn );
+              replace_all( s, tmpo, tmpn );
 
               *result_r = s;
             }
@@ -404,7 +418,7 @@ namespace zypp
               // build string
               std::string s( beg, cur-beg );
               //transform escaped escape
-              boost::replace_all( s, "\\\\", "\\" );
+              replace_all( s, "\\\\", "\\" );
               
               const char *delimeter = sepchars_r;
               while ( *delimeter )
@@ -413,7 +427,7 @@ namespace zypp
                 const char tmp[2] = { *delimeter, '\0' };
                 std::string del(tmp);
                 ds+= del;
-                boost::replace_all( s, ds, del );
+                replace_all( s, ds, del );
                 ++delimeter;
               }
 
@@ -515,14 +529,6 @@ namespace zypp
     inline bool startsWith(const std::string& s, const char* str) { return s.find(str) == 0; }
     inline bool endsWith(const std::string& s, const char* str) { return s.find(str) == s.size() - strlen(str); }
     inline bool contains(const std::string& s, const char* str) { return s.find(str) != std::string::npos; }
-
-    /**
-     * \short Looks for text in a string and replaces it.
-     *
-     * \note It only perform substtution in one pass
-     */
-    std::string gsub( const std::string& sData, const std::string& sFrom, const std::string& sTo);
-
 
     ///////////////////////////////////////////////////////////////////
 

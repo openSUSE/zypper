@@ -207,7 +207,22 @@ namespace zypp
         }
       }
 
+
       return sNew;
+    }
+
+    string & replace_all(string & str, const string & from, const string & to)
+    {
+      string::size_type pos = 0;
+      while((pos = str.find(from, pos)) != string::npos)
+      {
+        str.replace(pos, from.size(), to);
+        pos += to.size();
+
+        if (pos >= str.length())
+          break;
+      }
+      return str;
     }
 
     /******************************************************************
