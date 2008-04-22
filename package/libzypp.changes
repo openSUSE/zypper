@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
 Tue Apr 22 13:55:14 CEST 2008 - schubi@suse.de
 
-- Do not architecture changes while "dup" in the external distribution
-  updagrade ONLY. bnc #382274 
+- Do architecture changes while "dup" in the external distribution
+  upgrade ONLY. bnc #382274 
 - Added "ignore" to the solutions
 - Added "self-conflicts" to the solution
 - added new solver mechanism "resolveQueue"
