@@ -80,6 +80,8 @@ INSTALL(  FILES
 ADD_EXECUTABLE( zypp-checkpatches zypp-checkpatches.cc zypper-updates.cc )
 TARGET_LINK_LIBRARIES( zypp-checkpatches ${ZYPP_LIBRARY} )
 
+ADD_EXECUTABLE( zypp-refresh zypp-refresh.cc )
+TARGET_LINK_LIBRARIES( zypp-refresh ${ZYPP_LIBRARY} )
 INSTALL(
   TARGETS zypp-checkpatches
   RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
