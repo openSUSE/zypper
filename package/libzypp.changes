@@ -8,6 +8,12 @@ Tue Apr 22 15:44:34 CEST 2008 - jreidinger@suse.cz
 - revision 9781
 
 -------------------------------------------------------------------
+Tue Apr 22 17:39:28 CEST 2008 - dmacvicar@suse.de
+
+- patch attributes and deprecate old ones
+- 4.14.0
+
+-------------------------------------------------------------------
 Tue Apr 22 13:55:14 CEST 2008 - schubi@suse.de
 
 - Do architecture changes while "dup" in the external distribution
