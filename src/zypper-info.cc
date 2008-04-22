@@ -14,13 +14,13 @@
 #include "zypper-misc.h"
 #include "zypper-tabulator.h"
 #include "zypper-info.h"
+#include "zypper-richtext.h"
 
 using namespace std;
 using namespace zypp;
 using boost::format;
 
 extern ZYpp::Ptr God;
-
 
 void printNVA(const ResObject::constPtr & res)
 {
@@ -34,7 +34,15 @@ void printSummaryDesc(const ResObject::constPtr & res)
 {
   cout << _("Summary: ") << res->summary() << endl;
   cout << _("Description: ") << endl;
-  cout << res->description() << endl;
+  const string& s = res->description();
+  if (s.find("DT:Rich")!=s.npos){
+    string ns = processRichText(s);
+    cout << ns << endl;
+  }
+  else
+  {
+    cout << s << endl;
+  }
 }
 
 /**

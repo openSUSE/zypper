@@ -16,6 +16,7 @@ SET (zypper_HEADERS
   zypper-search.h
   zypper-info.h
   zypper-prompt.h
+  zypper-richtext.h
   zypper-tabulator.h
   zypper-locks.h
   zypper-keyring-callbacks.h
@@ -36,6 +37,7 @@ SET( zypper_SRCS
   zypper-info.cc
   zypper-tabulator.cc
   zypper-prompt.cc
+  zypper-richtext.cc
   zypper-locks.cc
   ${zypper_HEADERS}
 )
