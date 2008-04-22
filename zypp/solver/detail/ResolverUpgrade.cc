@@ -233,8 +233,15 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     << endl;
 
   // create a testcase for the updating system
-  Testcase testcase("/var/log/updateTestcase");
-  testcase.createTestcase (*this, true, false); // create pool, do not solve
+  PathInfo path ("/mnt/var/log"); // checking if update has been started from instsys
+
+  if ( !path.isExist() ) {
+      Testcase testcase("/var/log/updateTestcase");
+      testcase.createTestcase (*this, true, false); // create pool, do not solve 
+  } else {
+      Testcase testcase("/mnt/var/log/updateTestcase");
+      testcase.createTestcase (*this, true, false); // create pool, do not solve
+  }
 
   _unmaintained_items.clear();
   _problem_items.clear();
