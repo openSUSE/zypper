@@ -45,7 +45,8 @@ namespace zypp
 
     public:
       /**
-       * issue date time
+       * Issue date time. For now it is the same as
+       * \ref buildtime().
        */
       Date timestamp() const
       { return buildtime(); }
@@ -58,12 +59,25 @@ namespace zypp
       /**
        * Does the system need to reboot to finish the update process?
        */
-      bool reboot_needed() const;
-
+      bool rebootSuggested() const;
+      
       /**
        * Does the patch affect the package manager itself?
+       * restart is suggested then
        */
-      bool affects_pkg_manager() const;
+      bool restartSuggested() const;
+
+      /**
+       * Use \ref rebootSuggested()
+       */
+      ZYPP_DEPRECATED bool reboot_needed() const
+      { return rebootSuggested(); }
+
+      /**
+       * Use \ref restartSuggested()
+       */
+      ZYPP_DEPRECATED bool affects_pkg_manager() const
+      { return restartSuggested(); }
 
       /**
        * Is the patch installation interactive? (does it need user input?)

@@ -48,15 +48,15 @@ namespace zypp
   std::string Patch::category() const
   { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
 
-  bool Patch::reboot_needed() const
-  { return lookupBoolAttribute( sat::SolvAttr::needReboot ); }
+  bool Patch::rebootSuggested() const
+  { return lookupBoolAttribute( sat::SolvAttr::rebootSuggested ); }
 
-  bool Patch::affects_pkg_manager() const
-  { return lookupBoolAttribute( sat::SolvAttr::needRestart ); }
+  bool Patch::restartSuggested() const
+  { return lookupBoolAttribute( sat::SolvAttr::restartSuggested ); }
 
   bool Patch::interactive() const
   {
-    if ( reboot_needed()
+    if ( rebootSuggested()
          || ! licenseToConfirm().empty() )
     {
       return true;

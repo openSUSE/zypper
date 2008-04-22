@@ -76,8 +76,8 @@ namespace sat
 
       // patch
       static const SolvAttr patchcategory;
-      static const SolvAttr needReboot;
-      static const SolvAttr needRestart;
+      static const SolvAttr rebootSuggested;
+      static const SolvAttr restartSuggested;
       static const SolvAttr updateCollectionName;
       static const SolvAttr updateCollectionEvr;
       static const SolvAttr updateCollectionArch;
