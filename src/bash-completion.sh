@@ -9,12 +9,13 @@
 #   * maybe other cases   
 
 _zypper() {
+        ZYPPER_CMDLIST=()
 	ZYPPER="/usr/bin/zypper -q"
 	local magic_string="Command options:"
 	local opts cur prev prevprev
-	if test ${#MODLIST[*]} = 0; then
+	if test ${#ZYPPER_CMDLIST[*]} = 0; then
 		for foo in $(LC_ALL=C $ZYPPER -h | sed -e "1,/Commands:/d" | awk -F ' ' '{print $1}' | sed 's/,//'); do
-			MODLIST="$MODLIST $foo"
+			ZYPPER_CMDLIST="$ZYPPER_CMDLIST $foo"
 		done
 	fi
 
@@ -26,11 +27,11 @@ _zypper() {
 
 	case "$prev" in
 		zypper)
-      opts=$MODLIST
+      opts=$ZYPPER_CMDLIST
       COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		help)
-			opts=$MODLIST
+			opts=$ZYPPER_CMDLIST
 			COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 		;;
 		shell)
