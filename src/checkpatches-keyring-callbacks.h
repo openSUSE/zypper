@@ -9,14 +9,9 @@
 /** \file zmd/backend/KeyRingCallbacks.cc
  *
  */
-
 #ifndef CHECKPATCHES_KEYRINGCALLBACKS_H
 #define CHECKPATCHES_KEYRINGCALLBACKS_H
 
-#include <stdlib.h>
-#include <iostream>
-
-#include "zypp/base/Logger.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Pathname.h"
 #include "zypp/KeyRing.h"
@@ -46,33 +41,15 @@ namespace zypp {
       {
         return readCallbackAnswer();
       }
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToAcceptUnknownKey( const std::string &/*file*/, const std::string &/*id*/, const std::string &/*keyname*/, const std::string &/*fingerprint*/ )
-#else
       virtual bool askUserToAcceptUnknownKey( const std::string &/*file*/, const std::string &/*id*/ )
-#endif
       {
         return readCallbackAnswer();
       }
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint)
-#else
       virtual bool askUserToTrustKey( const PublicKey &key )
-#endif
       {
         return readCallbackAnswer();
       }
-#ifndef LIBZYPP_1xx
-      virtual bool askUserToImportKey( const PublicKey &key )
-      {
-        return readCallbackAnswer();
-      }
-#endif
-#ifdef LIBZYPP_1xx
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
-#else
       virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key )
-#endif
       {
         return readCallbackAnswer();
       }
@@ -135,5 +112,4 @@ class DigestCallbacks {
 
 };
 
-
-#endif // ZMD_BACKEND_KEYRINGCALLBACKS_H
+#endif // CHECKPATCHES_KEYRINGCALLBACKS_H
