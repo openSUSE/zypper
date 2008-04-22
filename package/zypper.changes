@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 22 16:02:52 CEST 2008 - jreidinger@suse.cz
+
+- make different output to terminal and rest 
+- r9786
+
+-------------------------------------------------------------------
 Tue Apr 22 09:30:25 CEST 2008 - jreidinger@suse.cz
 
 - add richtext support to zypper info (bnc #224677).
