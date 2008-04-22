@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 22 09:30:25 CEST 2008 - jreidinger@suse.cz
+
+- add richtext support to zypper info (bnc #224677).
+- r9767 
+
+-------------------------------------------------------------------
 Mon Apr 21 13:02:36 CEST 2008 - jkupec@suse.cz
 
 - texts cleanup, translations update
