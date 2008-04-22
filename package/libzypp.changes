@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr 22 15:44:34 CEST 2008 - jreidinger@suse.cz
+
+- change locks api -
+- make more functions const
+- replace add/remove by selectable to add/remove by ident or name and kind 
+- rename iterator to const_iterator to avoid confusion
+- revision 9781
+
+-------------------------------------------------------------------
 Tue Apr 22 13:55:14 CEST 2008 - schubi@suse.de
 
 - Do architecture changes while "dup" in the external distribution
