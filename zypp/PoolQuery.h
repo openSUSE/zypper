@@ -73,9 +73,9 @@ namespace zypp
     /** */
     const_iterator end() const;
     /** */
-    bool empty();
+    bool empty() const;
     /** */
-    size_type size();
+    size_type size() const;
     //@}
 
     /**

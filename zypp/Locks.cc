@@ -21,6 +21,7 @@
 #include "zypp/PoolQueryUtil.tcc"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/sat/SolvAttr.h"
+#include "zypp/sat/Solvable.h"
 #include "zypp/PathInfo.h"
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -53,16 +54,16 @@ public:
 
 Locks::Locks() : _pimpl(new Impl){}
 
-Locks::iterator Locks::begin()
+Locks::const_iterator Locks::begin() const
 { return _pimpl->locks.begin(); }
 
-Locks::iterator Locks::end()
+Locks::const_iterator Locks::end() const
 { return _pimpl->locks.end(); }
 
-Locks::LockList::size_type Locks::size()
+Locks::LockList::size_type Locks::size() const
 { return _pimpl->locks.size(); }
 
-bool Locks::empty()
+bool Locks::empty() const
 { return _pimpl->locks.empty(); }
 
 struct ApplyLock
@@ -115,7 +116,7 @@ void Locks::read( const Pathname& file )
 }
 
 
-void Locks::apply()
+void Locks::apply() const
 { 
   DBG << "apply locks" << endl;
   for_each(begin(), end(), ApplyLock());
@@ -144,14 +145,25 @@ void Locks::addLock( const PoolQuery& query )
   }
 }
 
-void Locks::addLock(const ui::Selectable& selectable)
+void Locks::addLock( const IdString& ident_r )
+{
+  sat::Solvable::SplitIdent id(ident_r);
+  addLock(id.kind(),id.name());
+}
+
+void Locks::addLock( const ResKind& kind_r, const C_Str & name_r )
+{
+  addLock(kind_r,IdString(name_r));
+}
+
+void Locks::addLock( const ResKind& kind_r, const IdString& name_r )
 {
   PoolQuery q;
-  q.addAttribute( sat::SolvAttr::name,selectable.name() );
-  q.addKind( selectable.kind() );
+  q.addAttribute( sat::SolvAttr::name,name_r.asString() );
+  q.addKind( kind_r );
   q.setMatchExact();
   q.setCaseSensitive(true);
-  DBG << "add lock by selectactable" << endl;
+  DBG << "add lock by identifier" << endl;
   addLock( q );
 }
 
@@ -178,11 +190,22 @@ void Locks::removeLock( const PoolQuery& query )
   }
 }
 
-void Locks::removeLock( const ui::Selectable& s )
+void Locks::removeLock( const IdString& ident_r )
+{
+  sat::Solvable::SplitIdent id(ident_r);
+  removeLock(id.kind(),id.name());
+}
+
+void Locks::removeLock( const ResKind& kind_r, const C_Str & name_r )
+{
+  removeLock(kind_r,IdString(name_r));
+}
+
+void Locks::removeLock( const ResKind &kind_r, const IdString &name_r )
 {
   PoolQuery q;
-  q.addAttribute( sat::SolvAttr::name,s.name() );
-  q.addKind( s.kind() );
+  q.addAttribute( sat::SolvAttr::name,name_r.asString() );
+  q.addKind( kind_r );
   q.setMatchExact();
   q.setCaseSensitive(true);
   q.requireAll();
@@ -190,7 +213,7 @@ void Locks::removeLock( const ui::Selectable& s )
   removeLock(q);
 }
 
-bool Locks::existEmpty()
+bool Locks::existEmpty() const
 {
   for_( it, _pimpl->locks.begin(), _pimpl->locks.end() )
   {

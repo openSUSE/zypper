@@ -5,7 +5,6 @@
 #include "zypp/Pathname.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/ZConfig.h"
-#include "zypp/ui/Selectable.h"
  
 namespace zypp
 {
@@ -13,16 +12,16 @@ namespace zypp
   {
   public:
     typedef std::list<PoolQuery> LockList;
-    typedef LockList::const_iterator iterator;
+    typedef LockList::const_iterator const_iterator;
   public:
     class Impl;
 
     static Locks& instance();
 
-    iterator begin();
-    iterator end();
-    LockList::size_type size();
-    bool empty();
+    const_iterator begin() const;
+    const_iterator end() const;
+    LockList::size_type size() const;
+    bool empty() const;
 
     /**
      * TODO add:
@@ -38,9 +37,15 @@ namespace zypp
     void addLock( const PoolQuery& query );
 
     /**
-     * locks selectable
+     * add lock by identifier (f.e. Selectable->ident()
      */
-    void addLock( const ui::Selectable& selectable );
+    void addLock( const IdString& ident_r );
+
+    /**
+     * add lock by name and kind
+     */ 
+    void addLock( const ResKind& kind_r, const IdString& name_r );
+    void addLock( const ResKind& kind_r, const C_Str& name_r );
 
     /**
      * unlocks all solvables which is result of query.
@@ -48,17 +53,26 @@ namespace zypp
      */
     void removeLock( const PoolQuery& query );
 
-    void removeLock( const ui::Selectable& selectable );
+    /**
+     * add lock by identifier (f.e. Selectable->ident()
+     */
+    void removeLock( const IdString& ident_r );
+
+    /**
+     * add lock by name and kind
+     */ 
+    void removeLock( const ResKind& kind_r, const IdString& name_r );
+    void removeLock( const ResKind& kind_r, const C_Str & name_r );
 
     void readAndApply( const Pathname& file = ZConfig::instance().locksFile() );
 
     void read( const Pathname& file = ZConfig::instance().locksFile() );
 
-    void apply();
+    void apply() const;
 
     void save( const Pathname& file = ZConfig::instance().locksFile() );
     
-    bool existEmpty();
+    bool existEmpty() const;
 
     void removeEmpty();
 

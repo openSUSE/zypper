@@ -846,11 +846,11 @@ attremptycheckend:
   { return _pimpl->end(); }
 
 
-  bool PoolQuery::empty()
+  bool PoolQuery::empty() const
   { return _pimpl->begin() == _pimpl->end(); }
 
   //! \todo collect the result, reuse if not dirty
-  PoolQuery::size_type PoolQuery::size()
+  PoolQuery::size_type PoolQuery::size() const
   {
     size_type count = 0;
     for(const_iterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
