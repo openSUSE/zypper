@@ -21,6 +21,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItemInstallOneOf.h"
 #include "satsolver/solver.h"
+#include "zypp/sat/Pool.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -72,13 +73,15 @@ bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
 {
     bool ret = true;
     MIL << "Install one of " << (_soft ? "(soft):" : ":")<< endl;
+    Queue qs;
     
     if (_soft) {    
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF | SOLVER_WEAK);
     } else {
 	queue_push( &(q), SOLVER_INSTALL_SOLVABLE_ONE_OF );
     }
-    
+
+    queue_init(&qs);    
     for (PoolItemList::const_iterator iter = _oneOfList.begin(); iter != _oneOfList.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
@@ -86,10 +89,12 @@ bool SolverQueueItemInstallOneOf::addRule (_Queue & q)
 	    ret = false;
 	} else {
 	    MIL << "    candidate:" << *iter << " with the SAT-Pool ID: " << id << endl;
-	    queue_push( &(q), id );    		    
+	    queue_push( &(qs), id );    		    
 	}
     }
-    queue_push( &(q), 0 ); // finish candidate
+    sat::Pool satPool( sat::Pool::instance() );    
+    queue_push( &(q), pool_queuetowhatprovides(satPool.get(), &qs));
+    queue_free(&qs);
     
     return ret;
 }
