@@ -24,6 +24,12 @@ char *lang = NULL;
 
 int main (void)
 {
+  fprintf (stderr, "WARNING: Since zypper 0.11.1, this program is"
+      " deprecated and will be dropped for openSUSE 11.1.\n\n"
+      " Use zypp-refresh-wrapper as a replacement, followed by any regular"
+      " zypper query command. To check for patches, execute"
+      " 'zypper --xmlout lu' after executing zypp-refresh-wrapper.\n");
+
     /* see http://rechner.lst.de/~okir/blackhats/node41.html */
     while (1) {
 	int fd = open("/dev/null", O_RDWR);
