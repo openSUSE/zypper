@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2008-02-28 13:38+0100\n"
-"PO-Revision-Date: 2008-03-14 14:53\n"
+"PO-Revision-Date: 2008-04-17 13:34\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Wil u sleutel-id %s, %s, vingerafdruk %s vertrou"
 #: src/zmart-keyring-callbacks.h:120
 #, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
-msgstr "Waarskuwing: Ignoreer mislukte handtekening-bevestiging vir %s met openbare sleutel-ID %s, %s, vingerafdruk %s! Maak seker dat dit nie deur kwaadwillige veranderings in die lêer veroorsaak word nie!"
+msgstr "Waarskuwing: Ignoreer mislukte handtekening-bevestiging vir %s met openbaresleutel-ID %s, %s, vingerafdruk %s! Maak seker dat dit nie deur kwaadwillige veranderings in die lêer veroorsaak word nie!"
 
 #: src/zmart-keyring-callbacks.h:129
 #, c-format
@@ -271,11 +271,11 @@ msgstr "verplig tot"
 
 #: src/zmart-misc.cc:782
 msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
-msgstr "Nagaan van Pakket-integriteit het misluk. Die probleem lê dalk by die installasiebron of media. Probeer een van die volgende:\n\n- probeer weer vorige opdrag\n- vernuwe installasiebronne met gebruik van 'zypper refresh'\n- gebruik ’n ander installasiemedia (byvoorbeeld as u s’n beskadig is)\n- gebruik ’n ander installasiebron"
+msgstr "Nagaan van Pakket-integriteit het misluk. Die probleem lê dalk by die installasiebron of media. Probeer een van die volgende:\n\n- probeer weer vorige opdrag\n- verfris installasiebronne met gebruik van 'zypper refresh'\n- gebruik ’n ander installasiemedia (as u s’n beskadig is)\n- gebruik ’n ander installasiebron"
 
 #: src/zmart-misc.cc:800
 msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "WAARSKUWING: Een van die geïnstalleerde regstellings vereis herlaai van u masjien. Herlaai so gou as moontlik."
+msgstr "WAARSKUWING: Een van die geïnstalleerde regstellings vereis herselflaai van u masjien. Herselflaai so gou as moontlik."
 
 #: src/zmart-misc.cc:803
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
@@ -566,7 +566,7 @@ msgstr "  Opdragte:\n\thelp\t\t\tHelp\n \tstelseldop, sh\t\tAanvaar veelvuldige 
 
 #: src/zypper.cc:127
 msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
-msgstr "  Opsies:\n\t--hulp, -h\t\tHulp\n\t--weergawe, -V\t\tSit die weergawenommer uit\n\t--woordryk, -v\t\tVergroot woordrykheid\n\t--kernagtig, -t\t\tKernagtige uitset vir masjienverbruik\n\t--tabelstyl, -s\tTabelstyl (integer)\n\t--rug-versoenbaar, -r\tSit rug-versoenbaarheid aan\n\t--nie-interaktief, -n\tMoet niks vra nie, gebruik verstekantwoorde outomaties.\n\t--no-gpg-checks nie\t\tIgnoreer GPG-nagaanmislukkings en gaan voort.\n\t--stam, -R <dir>\tWerk op ’n ander stamgids\n"
+msgstr "  Opsies:\n\t--help, -h\t\tHulp\n\t--version, -V\t\tWys die weergawenommer\n\t--verbose, -v\t\tWys meer omslagtig\n\t--kernagtig, -t\t\tWys minder omslagtig vir masjienverbruik\n\t--table-style, -s\tTabelstyl (heelgetal)\n\t--rug-compatible, -r\tSit rug-versoenbaarheid aan\n\t--non-interactive, -n\tMoet niks vra nie, gebruik verstekantwoorde outomaties.\n\t--no-gpg-checks nie\t\tIgnoreer GPG-nagaanmislukkings en gaan voort.\n\t--root, -R <dir>\tWerk op ’n ander stamgids\n"
 
 #: src/zypper.cc:140
 msgid "Verbosity "
@@ -578,7 +578,7 @@ msgstr "Invoer van nie-interaktiewe modus."
 
 #: src/zypper.cc:152
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Invoer van 'no-gpg-checks'-modus."
+msgstr "Binnegaan van 'no-gpg-checks'-modus."
 
 #: src/zypper.cc:162
 msgid "Invalid table style "
@@ -634,7 +634,7 @@ msgstr "Opdragopsies:\n\t--soort,-t\t\tSoort oplosbare (verstek: regstelling)\n\
 
 #: src/zypper.cc:405
 msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
-msgstr "zypper [globale opsies] soek [opsies] [navraagstring...]\n\n'soek' - Soek na pakkette wat ooreenstem met gegewe soekstringe\n\n  Opdrag-opsies:\n    --pas-almal            Soek na ’n pasmaat vir alle soekstringe (verstek)\n    --pas-enigeen            Soek na ’n pasmaat vir enige van die soekstringe\n    --pas-substringe     Soek na ’n pasmaat vir woorddele (verstek)\n    --pas-woorde          Soek na ’n pasmaat vir slegs hele woorde\n    --pas-presies          Soek na ’n presiese pakketnaam\n-d, --soek-beskrywings  Soek ook in pakket-opsommings en -beskrywings.\n-c, --kas-gevoelig       Voer kas-gevoelige soektog uit.\n-i, --slegs-geïnstalleer       Toon slegs pakkette wat reeds geïnstalleer is.\n-u, --slegs-ongeïnstalleer     Toon slegs pakkette wat nie tans geïnstalleer is nie.\n-t, --soort                 Soek slegs na pakkette van die gespesifiseerde soort.\n    --sorteer-volgens-naam         Sorteer pakkette volgens naam (verstek).\n    --sorteer-volgens-katalogus      Sorteer pakkette volgens katalogus (bron).\n\n*- en ?-oorheerskaarte kan ook binne soekstringe gebruik word.\n"
+msgstr "zypper [globale opsies] search [opsies] [navraagstring...]\n\n'soek' - Soek na pakkette wat ooreenstem met gegewe soekstringe\n\n  Opdrag-opsies:\n    --match-all            Soek na wat ooreenstem met alle soekstringe (verstek)\n    --match-any            Soek na wat ooreenstem met enige van die soekstringe\n    --match-substrings     Soek na wat ooreenstem met woorddele (verstek)\n    --match-words          Soek na wat ooreenstem met hele woorde\n    --pas-presies          Soek na ’n presiese pakketnaam\n-d, --soek-beskrywings  Soek ook in pakket-opsommings en -beskrywings.\n-c, --kas-gevoelig       Voer kas-gevoelige soektog uit.\n-i, --slegs-geïnstalleer       Toon slegs pakkette wat reeds geïnstalleer is.\n-u, --slegs-ongeïnstalleer     Toon slegs pakkette wat nie tans geïnstalleer is nie.\n-t, --soort                 Soek slegs na pakkette van die gespesifiseerde soort.\n    --sorteer-volgens-naam         Sorteer pakkette volgens naam (verstek).\n    --sorteer-volgens-katalogus      Sorteer pakkette volgens katalogus (bron).\n\n*- en ?-oorheerskaarte kan ook binne soekstringe gebruik word.\n"
 
 #: src/zypper.cc:433
 msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"

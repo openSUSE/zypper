@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2008-02-28 13:38+0100\n"
-"PO-Revision-Date: 2008-03-27 16:53\n"
+"PO-Revision-Date: 2008-04-17 11:09\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Luotetaanko avaimeen %s, %s, sormenjälki %s"
 #: src/zmart-keyring-callbacks.h:120
 #, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "Varoitus: Ohitetaan epäonnistunut allekirjoituksen vahvistus kohteelle %s: julkisen avaimen tunnus %s, %s, sormenjälki %s! Varmista, että syy vahvistuksen epäonnistumiseen ei ole tiedostoon tehty vihamielinen muutos."
 
 #: src/zmart-keyring-callbacks.h:129
 #, c-format
@@ -250,7 +250,7 @@ msgstr "Tila"
 
 #: src/zmart-misc.cc:560
 msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
-msgstr ""
+msgstr "VAROITUS: Nämä ovat ainoat päivitykset, jotka vaikuttavat itse päivitysohjelmaan.\nMyös muita päivityksiä on saatavilla.\n"
 
 #: src/zmart-misc.cc:648
 msgid "S"
@@ -271,11 +271,11 @@ msgstr "kirjataan"
 
 #: src/zmart-misc.cc:782
 msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
-msgstr ""
+msgstr "Paketin eheydentarkistus epäonnistui. Syy voi olla asennuslähteen tai tallennusvälineen ongelma. Yritä ratkaista ongelma jollakin seuraavista tavoista:\n\n- yritä suorittaa edellinen komento uudelleen\n- päivitä asennuslähteet käyttämällä 'zypper refresh' -toimintoa\n- käytä toista asennustietovälinettä (jos omasi esimerkiksi vaurioituu)\n- käytä toista asennuslähdettä"
 
 #: src/zmart-misc.cc:800
 msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr ""
+msgstr "VAROITUS: Jokin asennetuista korjaustiedostoista edellyttää tietokoneen käynnistämistä uudelleen. Käynnistä uudelleen mahdollisimman pian."
 
 #: src/zmart-misc.cc:803
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
@@ -320,7 +320,7 @@ msgstr "Lähteiden palauttaminen epäonnistui"
 
 #: src/zmart-sources.cc:80
 msgid "Cannot access repository"
-msgstr ""
+msgstr "Tietovarastoa ei voi käyttää"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -449,7 +449,7 @@ msgstr "Päivitystoiminto ei voinut käyttää paketinhallintatoimintoa. Näin t
 #: src/zypp-checkpatches.cc:213
 #, c-format
 msgid "Could not restore source.\nDetail: %s"
-msgstr ""
+msgstr "Lähdettä ei voi palauttaa.\nTiedot: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
@@ -534,7 +534,7 @@ msgstr "Kuvaus: "
 
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installation sources only."
-msgstr ""
+msgstr "Ei lähteitä. Zypper hakee nykyään vain asennuslähteistä."
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
@@ -566,7 +566,7 @@ msgstr "  Komennot:\n\thelp\t\t\tOhje\n \tshell, sh\t\tHyväksy useita komentoja
 
 #: src/zypper.cc:127
 msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
-msgstr ""
+msgstr "  Valinnat:\n\t--help, -h\t\tOhje\n\t--version, -V\t\tNäyttää versionumeron\n\t--verbose, -v\t\tKasvata sanallisuusastetta\n\t--terse, -t\t\tLyhyet tulosteet koneellista käyttöä varten\n\t--table-style, -s\tTaulukkotyyli (kokonaisluku)\n\t--rug-compatible, -r\tOta rug-yhteensopivuus käyttöön\n\t--non-interactive, -n\tÄlä esitä kysymyksiä, käytä oletusvastauksia automaattisesti.\n\t--no-gpg-checks\t\tOhita GPG-tarkistuksen epäonnistumiset ja jatka.\n\t--root, -R <dir>\tKäsittele jotakin toista juurihakemistoa\n"
 
 #: src/zypper.cc:140
 msgid "Verbosity "
@@ -634,7 +634,7 @@ msgstr "  Komentovalinnant:\n\t--type,-t\t\tRatkaistavan kohteen tyyppi (oletus:
 
 #: src/zypper.cc:405
 msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
-msgstr ""
+msgstr "zypper [yleiset valinnat] search [valinnat] [haettava merkkijono...]\n\n'search' - Hae paketteja, jotka vastaavat määritettyä hakumerkkijonoa\n\n  Komennon valitsimet:\n    --match-all            Hae vastaavuutta kaikille haettaville merkkijonoille (oletusarvo)\n    --match-any            Hae vastaavuutta mille tahansa haettavista merkkijonoista\n    --match-substrings     Hae vastaavuutta osittaisille sanoille (oletusarvo)\n    --match-words          Hae vastaavuutta vain kokonaisille sanoille\n    --match-exact          Hae tarkkaa paketin nimeä\n-d, --search-descriptions  Hae myös pakettien yhteenvedoista ja kuvauksista.\n-c, --case-sensitive       Ottaa kirjainkoon huomioon hauissa.\n-i, --installed-only       Näyttää vain jo asennetut paketit.\n-u, --uninstalled-only     Näyttää vain paketit, jotka eivät ole tällä hetkellä asennettuja.\n-t, --type                 Hae vain määritetyn tyyppisiä paketteja.\n    --sort-by-name         Lajittele paketit nimen mukaan (oletusarvo).\n    --sort-by-catalog      Lajittele paketit luettelon (lähteen) mukaan.\n\nYleismerkkejä \"*\" ja \"?\" voi käyttää hakumerkkijonoissa.\n"
 
 #: src/zypper.cc:433
 msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"

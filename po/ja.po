@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2008-02-28 13:38+0100\n"
-"PO-Revision-Date: 2008-03-27 16:51\n"
+"PO-Revision-Date: 2008-04-17 12:00\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "ID %s、%s、指紋%sのキーを信頼しますか？"
 #: src/zmart-keyring-callbacks.h:120
 #, c-format
 msgid "Warning: Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s! Make sure this is not caused by some malicious changes in the file!"
-msgstr ""
+msgstr "警告:公開鍵ID %s、%s、指紋 %sを含む %sの失敗した署名検証を無視しています! ファイル内の悪意のある変更によるものではないことを確認してください!"
 
 #: src/zmart-keyring-callbacks.h:129
 #, c-format
@@ -250,7 +250,7 @@ msgstr "状態"
 
 #: src/zmart-misc.cc:560
 msgid "WARNING: These are only the updates affecting the updater itself.\nOther updates are available too.\n"
-msgstr ""
+msgstr "警告:アップデータそのものに影響するアップデートしかありません。\nその他のアップデートも利用できます。\n"
 
 #: src/zmart-misc.cc:648
 msgid "S"
@@ -271,11 +271,11 @@ msgstr "コミット中"
 
 #: src/zmart-misc.cc:782
 msgid "Package integrity check failed. This may be a problem with the installation source or media. Try one of the following:\n\n- retry previous command\n- refresh installation sources using 'zypper refresh'\n- use another installation media (for example, if yours is damaged)\n- use another installation source"
-msgstr ""
+msgstr "パッケージ整合性チェックが失敗しました。インストールソースまたはメディアに問題がある可能性があります。次のいずれかを試してください:\n\n- 前のコマンドを再試行する\n- 「zypper refresh」を使用してインストールソースを更新する'\n- 別のインストールメディアを使用する(破損している場合など)\n- 別のインストールソースを使用する"
 
 #: src/zmart-misc.cc:800
 msgid "WARNING: One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr ""
+msgstr "警告:インストールされたパッチの1つで、マシンの再起動が要求されています。速やかに再起動してください。"
 
 #: src/zmart-misc.cc:803
 msgid "WARNING: One of installed patches affects the package manager itself, thus it requires restart before executing next operations."
@@ -320,7 +320,7 @@ msgstr "ソースの復元に失敗しました。"
 
 #: src/zmart-sources.cc:80
 msgid "Cannot access repository"
-msgstr ""
+msgstr "リポジトリにアクセスできません"
 
 #: src/zmart-sources.cc:99
 msgid "Enabled"
@@ -449,7 +449,7 @@ msgstr "アップデータは、パッケージマネージャエンジンにア
 #: src/zypp-checkpatches.cc:213
 #, c-format
 msgid "Could not restore source.\nDetail: %s"
-msgstr ""
+msgstr "ソースを復元できませんでした。\n詳細: %s"
 
 #: src/zypp-checkpatches.cc:262
 msgid "There are no update sources defined. Please add one or more update sources in order to be notified of updates."
@@ -534,7 +534,7 @@ msgstr "説明: "
 
 #: src/zypper-search.cc:45
 msgid "No sources. Zypper currently searches within installation sources only."
-msgstr ""
+msgstr "ソースがありません。現在Zypperはインストールソース内のみを検索しています。"
 
 #: src/zypper-search.cc:107
 msgid "Pre-caching installed resolvables matching given search criteria... "
@@ -566,7 +566,7 @@ msgstr "  コマンド:\n\thelp\t\t\tヘルプ\n \tshell, sh\t\t複数のコマ�
 
 #: src/zypper.cc:127
 msgid "  Options:\n\t--help, -h\t\tHelp\n\t--version, -V\t\tOutput the version number\n\t--verbose, -v\t\tIncrease verbosity\n\t--terse, -t\t\tTerse output for machine consumption\n\t--table-style, -s\tTable style (integer)\n\t--rug-compatible, -r\tTurn on rug compatibility\n\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n\t--root, -R <dir>\tOperate on a different root directory\n"
-msgstr ""
+msgstr "  オプション:\n\t--help、-h\t\tヘルプ\n\t--version、-V\t\tバージョン番号を出力します\n\t--verbose、-v\t\t冗長レベルを増加します\n\t--terse、-t\t\tマシン使用量を簡易出力します\n\t--table-style、-s\tテーブルスタイル(整数)\n\t--rug-compatible、-r\trug互換性を有効にします\n\t--non-interactive、-n\t何も確認せずに、デフォルトの回答を自動的に使用します\n\t--no-gpg-checks\t\tGPGチェック失敗を無視して続行します。\n\t--root、-R <dir>\t別のルートディレクトリ上で動作します\n"
 
 #: src/zypper.cc:140
 msgid "Verbosity "
@@ -578,7 +578,7 @@ msgstr "対話処理を行なわない設定にします。"
 
 #: src/zypper.cc:152
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "GPG署名確認を行なわない設定にします。"
+msgstr "「no-gpg-checks」モードに移行します。"
 
 #: src/zypper.cc:162
 msgid "Invalid table style "
@@ -634,7 +634,7 @@ msgstr "  コマンドオプション:\n\t--type、-t\t\tresolvableのタイプ(
 
 #: src/zypper.cc:405
 msgid "zypper [global-options] search [options] [querystring...]\n\n'search' - Search for packages matching given search strings\n\n  Command options:\n    --match-all            Search for a match to all search strings (default)\n    --match-any            Search for a match to any of the search strings\n    --match-substrings     Search for a match to partial words (default)\n    --match-words          Search for a match to whole words only\n    --match-exact          Searches for an exact package name\n-d, --search-descriptions  Search also in package summaries and descriptions.\n-c, --case-sensitive       Perform case-sensitive search.\n-i, --installed-only       Show only packages that are already installed.\n-u, --uninstalled-only     Show only packages that are not currently installed.\n-t, --type                 Search only for packages of the specified type.\n    --sort-by-name         Sort packages by name (default).\n    --sort-by-catalog      Sort packages by catalog (source).\n\n* and ? wildcards can also be used within search strings.\n"
-msgstr ""
+msgstr "zypper [global-options] search [options] [querystring...]\n\n'search' - 指定された検索文字列と一致するパッケージを検索します\n\n  コマンドオプション:\n    --match-all            すべての検索文字列との一致を検索します(デフォルト)\n    --match-any            任意の検索文字列との一致を検索します\n    --match-substrings     部分的な一致を検索します(デフォルト)\n    --match-words          単語全体と一致するもののみ検索します\n    --match-exact          完全なパッケージ名を検索します\n-d、--search-descriptions  パッケージの概要と説明の中も検索します\n-c、--case-sensitive       大文字と小文字を区別して検索します\n-i, --installed-only       すでにインストールされているパッケージのみ表示します\n-u、--uninstalled-only     現在インストールされていないパッケージのみ表示します\n-t、--type                 指定したタイプのパッケージのみ検索します\n    --sort-by-name         パッケージを名前でソートします(デフォルト)\n    --sort-by-catalog      パッケージをカタログでソートします(ソース)\n\n*および?のワイルドカードを検索文字列内で使用することもできます。\n"
 
 #: src/zypper.cc:433
 msgid "patch-check\n\nCheck for available patches\n\nThis command has no options.\n"
