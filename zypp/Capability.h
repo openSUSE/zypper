@@ -32,6 +32,7 @@ namespace zypp
 
   class Capability;
   class CapDetail;
+  class Arch;
 
   typedef std::tr1::unordered_set<Capability> CapabilitySet;
 
@@ -97,7 +98,6 @@ namespace zypp
       Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
       //@}
 
-#if 0
       /** \name Ctors taking a broken down Capability: <tt>( arch, name, op, edition )</tt>
       */
       //@{
@@ -114,7 +114,6 @@ namespace zypp
       /** \overload */
       Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
       //@}
-#endif
 
     public:
       /** No or Null \ref Capability ( Id \c 0 ). */
@@ -154,8 +153,6 @@ namespace zypp
        *
        * If a capability expression is involved, \ref matches returns
        * \ref CapMatch::irrelevant.
-       *
-       * \todo check whether we must promote string to Capability in order to match.
        */
       //@{
       static CapMatch matches( const Capability & lhs,  const Capability & rhs )     { return _doMatch( lhs.id(), rhs.id() ); }
@@ -240,6 +237,17 @@ namespace zypp
   //	CLASS NAME : CapDetail
   //
   /** Helper providing more detailed information about a \ref Capability.
+   *
+   * Capabilities are classified to be either \c SIMPLE:
+   * \code
+   *   name[.arch] [op edition]
+   *   with op := <|<=|=|>=|>|!=
+   * \endcode
+   * or formed by some \c EXPRESSION:
+   * \code
+   *   left_cap op right_cap
+   *   with op := AND|OR|WITH|NAMESPACE
+   * \endcode
    */
   class CapDetail: protected sat::detail::PoolMember
   {
@@ -253,7 +261,7 @@ namespace zypp
       };
 
       /** Enum values corresponding with libsatsolver defines.
-       * MPL check in PoolImpl.cc
+       * \note MPL check in PoolImpl.cc
       */
       enum CapRel
       {
@@ -261,18 +269,19 @@ namespace zypp
         CAP_AND       = 16,
         CAP_OR        = 17,
         CAP_WITH      = 18,
-        CAP_NAMESPACE = 19
+        CAP_NAMESPACE = 19,
+        CAP_ARCH      = 20
       };
 
     public:
       CapDetail()
-      : _kind( NOCAP ), _lhs( 0 ), _rhs( 0 ), _flag( 0 )
+      : _kind( NOCAP ), _lhs( 0 ), _rhs( 0 ), _flag( 0 ), _archIfSimple( 0 )
       {}
       explicit CapDetail( const Capability & cap_r )
-      : _kind( NOCAP ), _lhs( cap_r.id() ), _rhs( 0 ), _flag( 0 )
+      : _kind( NOCAP ), _lhs( cap_r.id() ), _rhs( 0 ), _flag( 0 ), _archIfSimple( 0 )
       { _init(); }
       explicit CapDetail( sat::detail::IdType id_r )
-      : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 )
+      : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 ), _archIfSimple( 0 )
       { _init(); }
 
     public:
@@ -283,8 +292,10 @@ namespace zypp
       bool isSimple()     const { return _kind & (NAMED|VERSIONED); }
       bool isExpression() const { return _kind == EXPRESSION; }
 
-      /** \name Is simple: <tt>name [op edition]</tt> */
+      /** \name Is simple: <tt>name[.arch] [op edition]</tt> */
       //@{
+      bool     hasArch()  const { return _archIfSimple; }
+      IdString arch()     const { return _archIfSimple ? IdString( _archIfSimple ) : IdString(); }
       IdString name()     const { return isSimple()    ? IdString( _lhs ) : IdString(); }
       Rel      op()       const { return isVersioned() ? Rel( _flag )     : Rel::ANY; }
       Edition  ed()       const { return isVersioned() ? Edition( _rhs )  : Edition(); }
@@ -304,6 +315,7 @@ namespace zypp
       sat::detail::IdType _lhs;
       sat::detail::IdType _rhs;
       unsigned            _flag;
+      sat::detail::IdType _archIfSimple;
   };
   ///////////////////////////////////////////////////////////////////
 

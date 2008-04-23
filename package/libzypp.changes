@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Apr 23 21:12:56 CEST 2008 - ma@suse.de
+
+- Support dependencies requiring a specific architecture: 
+  "name[.arch] [op edition]". See class Capability for details 
+  about how to construct dependencies. (bnc #305445)  
+- version 4.15.0
+- revision 9805
+
+-------------------------------------------------------------------
 Tue Apr 22 17:39:28 CEST 2008 - dmacvicar@suse.de
 
 - patch attributes and deprecate old ones

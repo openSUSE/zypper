@@ -79,6 +79,7 @@ namespace zypp
    *    DBG << "na == a ? " << (na == "a") << endl;   // na == a ? 1
    *    DBG << "na == A ? " << (na == "A") << endl;   // na == A ? 1
    * \endcode
+   * \todo allow redefinition of order vis _doCompare not only for char* but on any level
    * \ingroup g_CRTP
    */
   template <class Derived>

@@ -33,18 +33,16 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
+    /** Build \ref Capability from data. No parsing required.
+    */
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
                                     const Arch & arch_r,
-                                    const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & kind_r )
-    {
-      sat::detail::IdType nid( sat::detail::noId );
-      return nid;
-    }
-
-    sat::detail::IdType relFromStr( ::_Pool * pool_r,
-                                    const std::string & name_r, Rel op_r, const Edition & ed_r,
+                                    const std::string & name_r,
+                                    Rel op_r,
+                                    const Edition & ed_r,
                                     const ResKind & kind_r )
     {
+      // First build the name, non-packages prefixed by kind
       sat::detail::IdType nid( sat::detail::noId );
       if ( ! kind_r || kind_r == ResKind::package )
       {
@@ -52,12 +50,19 @@ namespace zypp
       }
       else
       {
-        // non-packages prefixed by kind
         nid = IdString( str::form( "%s:%s",
                         kind_r.c_str(),
-                                     name_r.c_str() ) ).id();
+                        name_r.c_str() ) ).id();
       }
 
+
+      // Extend name by architecture, if provided
+      if ( ! arch_r.empty() )
+      {
+        nid = ::rel2id( pool_r, nid, arch_r.id(), REL_ARCH, /*create*/true );
+      }
+
+      // Extend 'op edition', if provided
       if ( op_r != Rel::ANY && ed_r != Edition::noedition )
       {
         nid = ::rel2id( pool_r, nid, ed_r.id(), op_r.bits(), /*create*/true );
@@ -66,9 +71,34 @@ namespace zypp
       return nid;
     }
 
+    /** Build \ref Capability from data, just parsing name for '[.arch]'.
+    */
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
-                                      const std::string & str_r, const ResKind & kind_r,
-                                      Capability::CtorFlag flag_r )
+                                    const std::string & name_r, Rel op_r, const Edition & ed_r,
+                                    const ResKind & kind_r )
+    {
+      Arch arch( Arch_empty );
+      std::string name( name_r );
+
+      std::string::size_type asep( name_r.rfind( "." ) );
+      if ( asep != std::string::npos )
+      {
+        Arch ext( name_r.substr( asep+1 ) );
+        if ( ext.isBuiltIn() )
+        {
+          arch = ext;
+          name.erase( asep );
+        }
+      }
+
+      return relFromStr( pool_r, arch, name, op_r, ed_r, kind_r );
+    }
+
+    /** Full parse from string, unless Capability::PARSED.
+    */
+    sat::detail::IdType relFromStr( ::_Pool * pool_r,
+                                    const std::string & str_r, const ResKind & kind_r,
+                                    Capability::CtorFlag flag_r )
     {
       // strval_r has at least two words which could make 'op edition'?
       // improve regex!
@@ -100,7 +130,7 @@ namespace zypp
       //else
       // not a versioned relation
 
-      return relFromStr( pool_r, name, op, ed, kind_r );
+      return relFromStr( pool_r, name, op, ed, kind_r ); // parses for name[.arch]
     }
 
     /////////////////////////////////////////////////////////////////
@@ -127,27 +157,42 @@ namespace zypp
   : _id( relFromStr( myPool().getPool(), str_r, prefix_r, flag_r ) )
   {}
 
+  ///////////////////////////////////////////////////////////////////
+  // Ctor from <name[.arch] op edition>.
+  ///////////////////////////////////////////////////////////////////
 
   Capability::Capability( const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r )
   : _id( relFromStr( myPool().getPool(), name_r, Rel(op_r), Edition(ed_r), prefix_r ) )
   {}
-
   Capability::Capability( const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r )
   : _id( relFromStr( myPool().getPool(), name_r, op_r, Edition(ed_r), prefix_r ) )
   {}
-
   Capability::Capability( const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r )
   : _id( relFromStr( myPool().getPool(), name_r, op_r, ed_r, prefix_r ) )
   {}
 
-#if 0
-  Capability::Capability( const std::string & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
-  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
-  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
-  Capability::Capability( const Arch & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
-  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r = ResKind() );
-  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r = ResKind() );
-#endif
+  ///////////////////////////////////////////////////////////////////
+  // Ctor from <arch name op edition>.
+  ///////////////////////////////////////////////////////////////////
+
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), Arch(arch_r), name_r, Rel(op_r), Edition(ed_r), prefix_r ) )
+  {}
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), Arch(arch_r), name_r, op_r, Edition(ed_r), prefix_r ) )
+  {}
+  Capability::Capability( const std::string & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), Arch(arch_r), name_r, op_r, ed_r, prefix_r ) )
+  {}
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, const std::string & op_r, const std::string & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, name_r, Rel(op_r), Edition(ed_r), prefix_r ) )
+  {}
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const std::string & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, name_r, op_r, Edition(ed_r), prefix_r ) )
+  {}
+  Capability::Capability( const Arch & arch_r, const std::string & name_r, Rel op_r, const Edition & ed_r, const ResKind & prefix_r )
+  : _id( relFromStr( myPool().getPool(), arch_r, name_r, op_r, ed_r, prefix_r ) )
+  {}
 
   const char * Capability::c_str() const
   { return( _id ? ::dep2str( myPool().getPool(), _id ) : "" ); }
@@ -189,6 +234,11 @@ namespace zypp
     }
     // comparing two simple caps:
     if ( l.name() != r.name() )
+      return CapMatch::no;
+
+    // if both are arch restricted they must match
+    if ( l.arch() != r.arch()
+         && ! ( l.arch().empty() || r.arch().empty() ) )
       return CapMatch::no;
 
     // isNamed matches ANY edition:
@@ -233,13 +283,14 @@ namespace zypp
 
   void CapDetail::_init()
   {
-    // : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 )
+    // : _kind( NOCAP ), _lhs( id_r ), _rhs( 0 ), _flag( 0 ), _archIfSimple( 0 )
 
     if ( _lhs == sat::detail::emptyId || _lhs == sat::detail::noId )
       return; // NOCAP
 
     if ( ! ISRELDEP(_lhs) )
     {
+      // this is name without arch!
       _kind = NAMED;
       return;
     }
@@ -249,7 +300,31 @@ namespace zypp
     _rhs  = rd->evr;
     _flag = rd->flags;
 
-    _kind = Rel::isRel( _flag ) ? VERSIONED : EXPRESSION;
+    if ( Rel::isRel( _flag ) )
+    {
+      _kind = VERSIONED;
+      // Check for name.arch...
+      if ( ! ISRELDEP(_lhs) )
+        return; // this is name without arch!
+      rd = GETRELDEP( myPool().getPool(), _lhs );
+      if ( rd->flags != CAP_ARCH )
+        return; // this is not name.arch
+      // This is name.arch:
+      _lhs = rd->name;
+      _archIfSimple = rd->evr;
+    }
+    else if ( rd->flags == CAP_ARCH )
+    {
+      _kind = NAMED;
+      // This is name.arch:
+      _lhs = rd->name;
+      _archIfSimple = rd->evr;
+    }
+    else
+    {
+      _kind = EXPRESSION;
+      return;
+    }
   }
 
   /******************************************************************
@@ -265,10 +340,16 @@ namespace zypp
         return str << "<NoCap>";
         break;
       case CapDetail::NAMED:
-        return str << obj.name();
+        str << obj.name();
+        if ( obj.hasArch() )
+          str << '.' << obj.arch();
+        return str;
         break;
       case CapDetail::VERSIONED:
-        return str << obj.name() << " " << obj.op() << " " << obj.ed();
+        str << obj.name();
+        if ( obj.hasArch() )
+          str << '.' << obj.arch();
+        return str << " " << obj.op() << " " << obj.ed();
         break;
       case CapDetail::EXPRESSION:
         switch ( obj.capRel() )

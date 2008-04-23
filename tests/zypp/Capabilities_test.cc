@@ -9,6 +9,7 @@
 #include <boost/test/floating_point_comparison.hpp>
 #include <boost/test/auto_unit_test.hpp>
 
+#include "zypp/Arch.h"
 #include "zypp/Capability.h"
 #include "zypp/Capabilities.h"
 
@@ -21,48 +22,14 @@ using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(capabilities_test)
 {
-//     Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
-//     CapFactory factory;
-//
-//     Edition edition ("1.0", "42");
-//     Capability cap = factory.parse ( kind, "foo", "=", "1.0-42");
-//     BOOST_CHECK_EQUAL( cap.asString(), "foo == 1.0-42" );
-//     BOOST_CHECK_EQUAL( cap.index(), "foo");
-//     BOOST_CHECK_EQUAL( cap.op(), Rel::EQ);
-//     BOOST_CHECK_EQUAL( cap.edition(), edition);
-//
-//     Capability cap2 = factory.parse ( kind, "foo", Rel::EQ, edition);
-//     BOOST_CHECK_EQUAL( cap2.index(), cap.index());
-//     BOOST_CHECK_EQUAL( cap2.op(), cap.op());
-//     BOOST_CHECK_EQUAL( cap2.edition(), cap.edition());
-//
-//     Capability cap3 = factory.parse ( kind, "foo = 1.0-42");
-//     BOOST_CHECK_EQUAL( cap3.index(), cap.index());
-//     BOOST_CHECK_EQUAL( cap3.op(), cap.op());
-//     BOOST_CHECK_EQUAL( cap3.edition(), cap.edition());
-//
-//     Capability cap6 = factory.parse ( kind, "kdelibs* > 1.5");
-//     BOOST_CHECK_EQUAL( cap6.index(), "kdelibs*");
-//     BOOST_CHECK_EQUAL( cap6.op(), Rel::GT);
-//     BOOST_CHECK_EQUAL( cap6.edition(), Edition("1.5"));
-//
-//
-//     string bash = "/bin/bash";
-//     Capability cap4 = factory.parse ( kind, bash);
-//     BOOST_CHECK_EQUAL(cap4.index(), bash);
-//     BOOST_CHECK_EQUAL(cap4.op(), Rel::NONE);
-//     BOOST_CHECK_EQUAL(cap4.edition(), Edition::noedition);
-//
-//     string hal = "hal(smp)";
-//     Capability cap5 = factory.parse ( kind, hal);
-//     BOOST_CHECK_EQUAL(cap5.index(), "hal()");
-//     BOOST_CHECK_EQUAL(cap5.op(), Rel::NONE);
-//     BOOST_CHECK_EQUAL(cap5.edition(), Edition::noedition);
+  //////////////////////////////////////////////////////////////////////
+  // Id 0 and 1 are nor equal, but share the same representation ""/NOCAP
+  //////////////////////////////////////////////////////////////////////
 
-  Capability c0( 0 ); // id 0
-  Capability c1( 1 ); // id 1
-  Capability cD;      // default constructed empty
-  Capability cE( "" );// empty
+  Capability c0( 0 );  // id 0
+  Capability c1( 1 );  // id 1
+  Capability cD;       // default constructed empty
+  Capability cE( "" ); // empty
 
   BOOST_CHECK_EQUAL( c0.id(), 0 );
   BOOST_CHECK_EQUAL( c1.id(), 1 );
@@ -81,6 +48,9 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
   BOOST_CHECK_EQUAL( ( c0 == c1 ), false );
   BOOST_CHECK_EQUAL( Capability::matches( c0, c1 ), CapMatch::yes );
 
+  //////////////////////////////////////////////////////////////////////
+  // skipping internal marker in Capabilities
+  //////////////////////////////////////////////////////////////////////
 
   Capability r( "req" );
   Capability p( "prereq" );
@@ -93,7 +63,7 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
 
   // Capabilities with and without prereq (skip marker in ++)
   Capabilities c( caps );
-  cout << c << endl;
+  //cout << c << endl;
   BOOST_CHECK_EQUAL( c.size(), 2 );
   Capabilities::const_iterator it( c.begin() );
   BOOST_CHECK_EQUAL( *it, r );
@@ -104,11 +74,39 @@ BOOST_AUTO_TEST_CASE(capabilities_test)
 
   // Capabilities with prereq only (skip marker in ctor)
   c = Capabilities( caps+1 );
-  cout << c << endl;
+  //cout << c << endl;
   BOOST_CHECK_EQUAL( c.size(), 1 );
   it = c.begin();
   BOOST_CHECK_EQUAL( *it, p );
   BOOST_CHECK_EQUAL( it.tagged(), true );
 
+
+  //////////////////////////////////////////////////////////////////////
+  //
+  //////////////////////////////////////////////////////////////////////
+  Capability n( "na.me" );
+  Capability na( "na.me.i386" );
+  Capability noe( "na.me == 1" );
+  Capability naoe( "na.me.i386 == 1" );
+
+  BOOST_CHECK_EQUAL( n.detail().kind(), CapDetail::NAMED );
+  BOOST_CHECK_EQUAL( na.detail().kind(), CapDetail::NAMED );
+  BOOST_CHECK_EQUAL( noe.detail().kind(), CapDetail::VERSIONED );
+  BOOST_CHECK_EQUAL( naoe.detail().kind(), CapDetail::VERSIONED );
+
+  BOOST_CHECK_EQUAL( n.detail().hasArch(), false );
+  BOOST_CHECK_EQUAL( na.detail().hasArch(), true );
+  BOOST_CHECK_EQUAL( noe.detail().hasArch(), false );
+  BOOST_CHECK_EQUAL( naoe.detail().hasArch(), true );
+
+  BOOST_REQUIRE    ( n.detail().arch().empty() );
+  BOOST_CHECK_EQUAL( na.detail().arch(), Arch_i386.idStr() );
+  BOOST_REQUIRE    ( noe.detail().arch().empty() );
+  BOOST_CHECK_EQUAL( naoe.detail().arch(), Arch_i386.idStr() );
+
+  BOOST_CHECK_EQUAL( Capability( "",     "na.me", "",   "" ), n );
+  BOOST_CHECK_EQUAL( Capability( "i386", "na.me", "",   "" ), na );
+  BOOST_CHECK_EQUAL( Capability( "",     "na.me", "==", "1" ), noe );
+  BOOST_CHECK_EQUAL( Capability( "i386", "na.me", "==", "1" ), naoe );
 }
 

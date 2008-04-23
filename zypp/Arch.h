@@ -36,29 +36,51 @@ namespace zypp
   class Arch
   {
   public:
-    /** Default ctor 'noarch' */
+    /** Default ctor \ref Arc_noarch. */
     Arch();
-    /** Ctor from string. */
-    explicit
-    Arch( const std::string & rhs );
+
+    /** Ctor taking Arch as string. */
+    explicit Arch( IdString::IdType id_r );
+    explicit Arch( const IdString & idstr_r );
+    explicit Arch( const std::string & str_r );
+    explicit Arch( const char * cstr_r );
 
   public:
+    /** \name IdStringType like interface.
+     * We can't use the complete \ref IdStringType mixin until
+     * _doCompare can be redefined on any level, not just as char*.
+    */
+    //@{
     /** String representation of Arch. */
-    IdString idStr() const
-    { return IdString( asString() ); }
-    /** \overload */
+    IdString idStr() const;
+     /** \overload */
     const std::string & asString() const;
     /** \overload */
     const char * c_str() const
     { return asString().c_str(); }
 
-    IdString::IdType id() const
-    { return idStr().id(); }
-
-    /** Test for an empty Arch (this is "", not Arch_noarch). */
+    /** Test for an empty Arch (this is \ref Arch_epmty, not \ref Arch_noarch ). */
     bool empty() const
     { return asString().empty(); }
 
+    /** Size of the string representation. */
+    unsigned size() const
+    { return asString().size(); }
+
+    /** Expert backdoor. */
+    IdString::IdType id() const
+    { return idStr().id(); }
+    //@}
+
+  public:
+    /** Whether this is a buitin (or known) architecture.
+     * Used e.g. in \ref Capability to determine whether
+     * some trailing \c ".string" is part ot the name or
+     * restriction to an architecture.
+    */
+    bool isBuiltIn() const;
+
+  public:
     /** Compatibility relation.
      * \return \c True iff \c this is compatible with \a targetArch_r.
      * \code
@@ -121,8 +143,21 @@ namespace zypp
    * like \c Arch::i386.
   */
   //@{
+  /** \relates Arch
+   * This is an empty \ref Arch represented by an empty string.
+   * Sometimes used to indicate an any or an unknown Arch. Don't
+   * confuse this with \ref Arch_noarch, which is in fact an
+   * architecture.
+  */
+  extern const Arch Arch_empty;
+
   /** \relates Arch */
   extern const Arch Arch_noarch;
+
+  /** \relates Arch */
+  extern const Arch Arch_pentium4;
+  /** \relates Arch */
+  extern const Arch Arch_pentium3;
 
   /** \relates Arch */
   extern const Arch Arch_x86_64;
@@ -149,6 +184,28 @@ namespace zypp
 
   /** \relates Arch */
   extern const Arch Arch_ia64;
+
+  /** \relates Arch */
+  extern const Arch Arch_alphaev67;
+  /** \relates Arch */
+  extern const Arch Arch_alphaev6;
+  /** \relates Arch */
+  extern const Arch Arch_alphapca56;
+  /** \relates Arch */
+  extern const Arch Arch_alphaev56;
+  /** \relates Arch */
+  extern const Arch Arch_alphaev5;
+  /** \relates Arch */
+  extern const Arch Arch_alpha;
+
+  /** \relates Arch */
+  extern const Arch Arch_sparc64;
+  /** \relates Arch */
+  extern const Arch Arch_sparcv9;
+  /** \relates Arch */
+  extern const Arch Arch_sparcv8;
+  /** \relates Arch */
+  extern const Arch Arch_sparc;
   //@}
 
   ///////////////////////////////////////////////////////////////////

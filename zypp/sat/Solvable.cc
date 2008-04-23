@@ -423,16 +423,16 @@ namespace zypp
             case CapDetail::CAP_AND:
             case CapDetail::CAP_OR:
                 // expand
-            {
-              int res = invokeOnEachSupportedLocale( detail.lhs(), fnc_r );
-              if ( res < 0 )
-                return res; // negative on abort.
-              int res2 = invokeOnEachSupportedLocale( detail.rhs(), fnc_r );
-              if ( res2 < 0 )
-                return -res + res2; // negative on abort.
-              return res + res2;
-            }
-            break;
+              {
+                int res = invokeOnEachSupportedLocale( detail.lhs(), fnc_r );
+                if ( res < 0 )
+                  return res; // negative on abort.
+                int res2 = invokeOnEachSupportedLocale( detail.rhs(), fnc_r );
+                if ( res2 < 0 )
+                  return -res + res2; // negative on abort.
+                return res + res2;
+              }
+              break;
 
             case CapDetail::CAP_NAMESPACE:
               if ( detail.lhs().id() == NAMESPACE_LANGUAGE )
@@ -443,6 +443,7 @@ namespace zypp
 
             case CapDetail::REL_NONE:
             case CapDetail::CAP_WITH:
+            case CapDetail::CAP_ARCH:
               break; // unwanted
           }
         }

@@ -14,6 +14,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/Tr1hash.h"
 #include "zypp/Arch.h"
 #include "zypp/Bit.h"
 
@@ -29,7 +30,7 @@ namespace zypp
   //
   /** Holds an architecture ID and it's compatible relation.
    * An architecture is compatibleWith, if it's _idBit is set in
-   * _compatBits. noarch has ID 0, non builtin archs id 1 and
+   * _compatBits. noarch has ID 0, non builtin archs ID 1 and
    * have to be treated specialy.
   */
   struct Arch::CompatEntry
@@ -37,11 +38,21 @@ namespace zypp
     /** Bitfield for architecture IDs and compatBits relation.
      * \note Need one bit for each builtin Arch.
     */
-    typedef bit::BitField<uint16_t> CompatBits;
+    typedef bit::BitField<uint32_t> CompatBits;
 
     CompatEntry( const std::string & archStr_r,
-                 CompatBits::IntT idBit_r = CompatBits::IntT(1) )
-    : _archStr( archStr_r )
+                 CompatBits::IntT idBit_r = 1 )
+    : _idStr( archStr_r )
+    , _archStr( archStr_r )
+    , _idBit( idBit_r )
+    , _compatBits( idBit_r )
+    , _compatScore( idBit_r ? 1 : 0 ) // number of compatible archs
+    {}
+
+    CompatEntry( IdString archStr_r,
+                 CompatBits::IntT idBit_r = 1 )
+    : _idStr( archStr_r )
+    , _archStr( archStr_r.asString() )
     , _idBit( idBit_r )
     , _compatBits( idBit_r )
     , _compatScore( idBit_r ? 1 : 0 ) // number of compatible archs
@@ -82,7 +93,14 @@ namespace zypp
       return _archStr.compare( rhs._archStr );
     }
 
-    std::string         _archStr;
+    bool isBuiltIn() const
+    { return( _idBit != CompatBits(1) ); }
+
+    IdString::IdType id() const
+    { return _idStr.id(); }
+
+    IdString            _idStr;
+    std::string         _archStr; // frequently used by the UI so we keep a reference
     CompatBits          _idBit;
     mutable CompatBits  _compatBits;
     mutable unsigned    _compatScore;
@@ -92,23 +110,33 @@ namespace zypp
   /** \relates Arch::CompatEntry Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Arch::CompatEntry & obj )
   {
-    return str << obj._archStr << '\t' << obj._idBit << ' '
+    return str << str::form( "%-15s ", obj._archStr.c_str() ) << obj._idBit << ' '
                << obj._compatBits << ' ' << obj._compatScore;
   }
 
-  /** \relates Arch::CompatEntry ComaptSet ordering.
-   * \note This is purely based on _archStr, as required by class CompatSet.
-  */
-  inline bool operator<( const Arch::CompatEntry & lhs, const Arch::CompatEntry & rhs )
-  { return lhs._archStr < rhs._archStr; }
+  /** \relates Arch::CompatEntry */
+  inline bool operator==( const Arch::CompatEntry & lhs, const Arch::CompatEntry & rhs )
+  { return lhs._idStr == rhs._idStr; }
+  /** \relates Arch::CompatEntry */
+  inline bool operator!=( const Arch::CompatEntry & lhs, const Arch::CompatEntry & rhs )
+  { return ! ( lhs == rhs ); }
+
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+
+ZYPP_DEFINE_ID_HASHABLE( zypp::Arch::CompatEntry );
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   namespace
   { /////////////////////////////////////////////////////////////////
 
     // builtin architecture STRING VALUES
-#define DEF_BUILTIN(A) const std::string  _##A( #A )
-
+#define DEF_BUILTIN(A) const IdString  _##A( #A )
     DEF_BUILTIN( noarch );
 
     DEF_BUILTIN( i386 );
@@ -118,7 +146,8 @@ namespace zypp
     DEF_BUILTIN( athlon );
     DEF_BUILTIN( x86_64 );
 
-    DEF_BUILTIN( ia64 );
+    DEF_BUILTIN( pentium3 );
+    DEF_BUILTIN( pentium4 );
 
     DEF_BUILTIN( s390 );
     DEF_BUILTIN( s390x );
@@ -126,6 +155,19 @@ namespace zypp
     DEF_BUILTIN( ppc );
     DEF_BUILTIN( ppc64 );
 
+    DEF_BUILTIN( ia64 );
+
+    DEF_BUILTIN( alphaev67 );
+    DEF_BUILTIN( alphaev6 );
+    DEF_BUILTIN( alphapca56 );
+    DEF_BUILTIN( alphaev56 );
+    DEF_BUILTIN( alphaev5 );
+    DEF_BUILTIN( alpha );
+
+    DEF_BUILTIN( sparc64 );
+    DEF_BUILTIN( sparcv9 );
+    DEF_BUILTIN( sparcv8 );
+    DEF_BUILTIN( sparc );
 #undef DEF_BUILTIN
 
     ///////////////////////////////////////////////////////////////////
@@ -144,7 +186,7 @@ namespace zypp
       typedef Arch::CompatEntry       CompatEntry;
       typedef CompatEntry::CompatBits CompatBits;
 
-      typedef std::set<CompatEntry>   Set;
+      typedef std::tr1::unordered_set<CompatEntry> Set;
       typedef Set::iterator           iterator;
       typedef Set::const_iterator     const_iterator;
 
@@ -159,10 +201,10 @@ namespace zypp
        * Creates an entry for nonbuiltin archs.
       */
       const Arch::CompatEntry & assertDef( const std::string & archStr_r )
-      {
-        return *_compatSet.insert( Arch::CompatEntry( archStr_r )
-                                 ).first;
-      }
+      { return *_compatSet.insert( Arch::CompatEntry( archStr_r ) ).first; }
+      /** \overload */
+      const Arch::CompatEntry & assertDef( IdString archStr_r )
+      { return *_compatSet.insert( Arch::CompatEntry( archStr_r ) ).first; }
 
       const_iterator begin() const
       { return _compatSet.begin(); }
@@ -191,51 +233,36 @@ namespace zypp
         ///////////////////////////////////////////////////////////////////
         // Define the CompatibleWith relation:
         //
-        defCompatibleWith( _noarch,	_i386 );
+        defCompatibleWith( _i386,	_noarch );
+        defCompatibleWith( _i486,	_noarch,_i386 );
+        defCompatibleWith( _i586,	_noarch,_i386,_i486 );
+        defCompatibleWith( _i686,	_noarch,_i386,_i486,_i586 );
+        defCompatibleWith( _athlon,	_noarch,_i386,_i486,_i586,_i686 );
+        defCompatibleWith( _x86_64,	_noarch,_i386,_i486,_i586,_i686,_athlon );
 
-        defCompatibleWith( _noarch,	_i486 );
-        defCompatibleWith( _i386,	_i486 );
+        defCompatibleWith( _pentium3,	_noarch,_i386,_i486,_i586,_i686 );
+        defCompatibleWith( _pentium4,	_noarch,_i386,_i486,_i586,_i686,_pentium3 );
 
-        defCompatibleWith( _noarch,	_i586 );
-        defCompatibleWith( _i386,	_i586 );
-        defCompatibleWith( _i486,	_i586 );
-
-        defCompatibleWith( _noarch,	_i686 );
-        defCompatibleWith( _i386,	_i686 );
-        defCompatibleWith( _i486,	_i686 );
-        defCompatibleWith( _i586,	_i686 );
-
-        defCompatibleWith( _noarch,	_athlon );
-        defCompatibleWith( _i386,	_athlon );
-        defCompatibleWith( _i486,	_athlon );
-        defCompatibleWith( _i586,	_athlon );
-        defCompatibleWith( _i686,	_athlon );
-
-        defCompatibleWith( _noarch,	_x86_64 );
-        defCompatibleWith( _i386,	_x86_64 );
-        defCompatibleWith( _i486,	_x86_64 );
-        defCompatibleWith( _i586,	_x86_64 );
-        defCompatibleWith( _i686,	_x86_64 );
-        defCompatibleWith( _athlon,	_x86_64 );
-
-        /////
-        defCompatibleWith( _noarch,	_ia64 );
-        defCompatibleWith( _i386,	_ia64 );
-        defCompatibleWith( _i486,	_ia64 );
-        defCompatibleWith( _i586,	_ia64 );
-        defCompatibleWith( _i686,	_ia64 );
-
-        /////
-        defCompatibleWith( _noarch,	_s390 );
-
-        defCompatibleWith( _noarch,	_s390x );
-        defCompatibleWith( _s390,	_s390x );
-
-        /////
-        defCompatibleWith( _noarch,	_ppc );
-
-        defCompatibleWith( _noarch,	_ppc64 );
-        defCompatibleWith( _ppc,	_ppc64 );
+        defCompatibleWith( _ia64,	_noarch,_i386,_i486,_i586,_i686 );
+        //
+        defCompatibleWith( _s390,	_noarch );
+        defCompatibleWith( _s390x,	_noarch,_s390 );
+        //
+        defCompatibleWith( _ppc,	_noarch );
+        defCompatibleWith( _ppc64,	_noarch,_ppc );
+        //
+        defCompatibleWith( _alpha,	_noarch );
+        defCompatibleWith( _alphaev5,	_noarch,_alpha );
+        defCompatibleWith( _alphaev56,	_noarch,_alpha,_alphaev5 );
+        defCompatibleWith( _alphapca56,	_noarch,_alpha,_alphaev5,_alphaev56 );
+        defCompatibleWith( _alphaev6,	_noarch,_alpha,_alphaev5,_alphaev56,_alphapca56 );
+        defCompatibleWith( _alphaev67,	_noarch,_alpha,_alphaev5,_alphaev56,_alphapca56,_alphaev6 );
+        //
+        defCompatibleWith( _sparc,	_noarch );
+        defCompatibleWith( _sparcv8,	_noarch,_sparc );
+        //
+        defCompatibleWith( _sparcv9,	_noarch,_sparc );
+        defCompatibleWith( _sparc64,	_noarch,_sparc,_sparcv9 );
         //
         ///////////////////////////////////////////////////////////////////
         //dumpOn( USR ) << endl;
@@ -249,7 +276,7 @@ namespace zypp
       */
       CompatBits::IntT nextIdBit() const
       {
-        CompatBits::IntT nextBit = 1 << (_compatSet.size());
+        CompatBits::IntT nextBit = CompatBits::IntT(1) << (_compatSet.size());
         assert( nextBit ); // need more bits in CompatBits::IntT
         return nextBit;
       }
@@ -257,19 +284,29 @@ namespace zypp
       /** Assert each builtin Arch gets an unique _idBit when
        *  inserted into the _compatSet.
       */
-      const CompatEntry & assertCompatSetEntry( const std::string & archStr_r )
-      {
-        return *_compatSet.insert( Arch::CompatEntry( archStr_r, nextIdBit() )
-                                 ).first;
-      }
+      const CompatEntry & assertCompatSetEntry( IdString archStr_r )
+      { return *_compatSet.insert( Arch::CompatEntry( archStr_r, nextIdBit() ) ).first; }
 
       /** Initialize builtin Archs and set _compatBits.
       */
-      void defCompatibleWith( const std::string & arch_r, const std::string & targetArch_r )
+      void defCompatibleWith( IdString targetArch_r,
+                              IdString arch0_r,
+                              IdString arch1_r = IdString(),
+                              IdString arch2_r = IdString(),
+                              IdString arch3_r = IdString(),
+                              IdString arch4_r = IdString(),
+                              IdString arch5_r = IdString(),
+                              IdString arch6_r = IdString(),
+                              IdString arch7_r = IdString(),
+                              IdString arch8_r = IdString(),
+                              IdString arch9_r = IdString() )
       {
-        const CompatEntry & arch  ( assertCompatSetEntry( arch_r ) );
         const CompatEntry & target( assertCompatSetEntry( targetArch_r ) );
-        target.addCompatBit( arch._idBit );
+        target.addCompatBit( assertCompatSetEntry( arch0_r )._idBit );
+#define _SETARG(N) if ( arch##N##_r.empty() ) return; target.addCompatBit( assertCompatSetEntry( arch##N##_r )._idBit )
+        _SETARG(1); _SETARG(2); _SETARG(3); _SETARG(4);
+        _SETARG(5); _SETARG(6); _SETARG(7); _SETARG(8); _SETARG(9);
+#undef _SETARG
       }
 
     private:
@@ -286,7 +323,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  const Arch Arch_empty ( IdString::Empty );
+
   const Arch Arch_noarch( _noarch );
+
+  const Arch Arch_pentium4( _pentium4 );
+  const Arch Arch_pentium3( _pentium3 );
 
   const Arch Arch_x86_64( _x86_64 );
   const Arch Arch_athlon( _athlon );
@@ -303,6 +345,18 @@ namespace zypp
 
   const Arch Arch_ia64  ( _ia64 );
 
+  const Arch Arch_alphaev67 ( _alphaev67 );
+  const Arch Arch_alphaev6  ( _alphaev6 );
+  const Arch Arch_alphapca56( _alphapca56 );
+  const Arch Arch_alphaev56 ( _alphaev56 );
+  const Arch Arch_alphaev5  ( _alphaev5 );
+  const Arch Arch_alpha     ( _alpha );
+
+  const Arch Arch_sparc64( _sparc64 );
+  const Arch Arch_sparcv9( _sparcv9 );
+  const Arch Arch_sparcv8( _sparcv8 );
+  const Arch Arch_sparc  ( _sparc );
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Arch::Arch
@@ -310,25 +364,35 @@ namespace zypp
   //
   Arch::Arch()
   : _entry( &ArchCompatSet::instance().assertDef( _noarch ) )
-  { assert( _entry ); }
+  {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Arch::Arch
-  //	METHOD TYPE : Ctor
-  //
-  Arch::Arch( const std::string & rhs )
-  : _entry( &ArchCompatSet::instance().assertDef( rhs ) )
-  { assert( _entry ); }
+  Arch::Arch( IdString::IdType id_r )
+  : _entry( &ArchCompatSet::instance().assertDef( IdString(id_r) ) )
+  {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Arch::Arch
-  //	METHOD TYPE : Ctor
-  //
+  Arch::Arch( const IdString & idstr_r )
+  : _entry( &ArchCompatSet::instance().assertDef( idstr_r ) )
+  {}
+
+  Arch::Arch( const std::string & str_r )
+  : _entry( &ArchCompatSet::instance().assertDef( str_r ) )
+  {}
+
+  Arch::Arch( const char * cstr_r )
+  : _entry( &ArchCompatSet::instance().assertDef( cstr_r ) )
+  {}
+
   Arch::Arch( const CompatEntry & rhs )
   : _entry( &rhs )
-  { assert( _entry ); }
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::idStr
+  //	METHOD TYPE : IdString
+  //
+  IdString Arch::idStr() const
+  { return _entry->_idStr; }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -337,6 +401,14 @@ namespace zypp
   //
   const std::string & Arch::asString() const
   { return _entry->_archStr; }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::isBuiltIn
+  //	METHOD TYPE : bool
+  //
+  bool Arch::isBuiltIn() const
+  { return _entry->isBuiltIn(); }
 
   ///////////////////////////////////////////////////////////////////
   //

@@ -60,6 +60,7 @@ namespace zypp
       BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_OR,        ==, REL_OR );
       BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_WITH,      ==, REL_WITH );
       BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_NAMESPACE, ==, REL_NAMESPACE );
+      BOOST_MPL_ASSERT_RELATION( CapDetail::CAP_ARCH,      ==, REL_ARCH );
 
      /////////////////////////////////////////////////////////////////
 

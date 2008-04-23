@@ -512,8 +512,17 @@ namespace zypp
   }
 }
 
-void ditest( const PoolItem & pi_r )
+void ditest( Capability cap_r )
 {
+  DBG << "    (" << cap_r.id() << ") " << endl;
+  DBG << "    " << cap_r << endl;
+  DBG << "    " << dump(cap_r) << endl;
+}
+
+void ditest( const std::string & str_r )
+{
+  MIL <<  str_r << endl;
+  ditest( Capability(str_r) );
 }
 
 /******************************************************************
@@ -591,13 +600,12 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
       getZYpp()->initializeTarget( sysRoot );
       getZYpp()->target()->load();
-      SEC << getZYpp()->target()->release() << endl;
     }
   }
 
@@ -613,6 +621,20 @@ try {
   }
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
+  ditest("foo");
+  ditest("foo.baa");
+  ditest("foo.i386");
+  ditest("foo.baa < 13");
+  ditest("foo.foo.baa < 13");
+  ditest("foo.foo.i386 < 13");
+  ditest("");
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 
   if ( 0 ) {
     Measure x( "PROXY" );
