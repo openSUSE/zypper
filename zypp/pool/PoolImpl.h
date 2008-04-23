@@ -49,10 +49,9 @@ namespace zypp
         typedef PoolTraits::const_iterator		const_iterator;
 	typedef PoolTraits::Id2ItemT			Id2ItemT;
 
-        typedef sat::detail::SolvableIdType		SolvableIdType;
+        typedef PoolTraits::repository_iterator		repository_iterator;
 
-        typedef PoolTraits::AdditionalCapabilities	AdditionalCapabilities;
-        typedef PoolTraits::RepoContainerT		KnownRepositories;
+        typedef sat::detail::SolvableIdType		SolvableIdType;
 
       public:
         /** Default ctor */
@@ -114,79 +113,26 @@ namespace zypp
         //
         ///////////////////////////////////////////////////////////////////
       public:
-        /**
-         *  Handling additional requirement. E.G. need package "foo" and package
-         *  "foo1" which has a greater version than 1.0:
-         *
-         *  Capset capset;
-         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo1 > 1.0"));
-         *
-         *  setAdditionalRequire( capset );
-         */
-        void setAdditionalRequire( const AdditionalCapabilities & capset ) const
-        { _additionalRequire = capset; }
-        AdditionalCapabilities & additionalRequire() const
-        { return _additionalRequire; }
-
-        /**
-         *  Handling additional conflicts. E.G. do not install anything which provides "foo":
-         *
-         *  Capset capset;
-         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-         *
-         *  setAdditionalConflict( capset );
-         */
-        void setAdditionalConflict( const AdditionalCapabilities & capset ) const
-        { _additionaConflict = capset; }
-        AdditionalCapabilities & additionaConflict() const
-        { return _additionaConflict; }
-
-	/**
-         *  Handling additional provides. This is used for ignoring a requirement.
-	 *  e.G. Do ignore the requirement "foo":
-         *
-         *  Capset capset;
-         *  capset.insert (CapFactory().parse( ResTraits<Package>::kind, "foo"));
-         *
-         *  setAdditionalProvide( cap );
-         */
-        void setAdditionalProvide( const AdditionalCapabilities & capset ) const
-        { _additionaProvide = capset; }
-        AdditionalCapabilities & additionaProvide() const
-        { return _additionaProvide; }
-
-        ///////////////////////////////////////////////////////////////////
-        //
-        ///////////////////////////////////////////////////////////////////
-      public:
         ResPoolProxy proxy( ResPool self ) const
         {
           checkSerial();
           if ( !_poolProxy )
+          {
             _poolProxy.reset( new ResPoolProxy( self, *this ) );
+          }
           return *_poolProxy;
         }
 
       public:
-        /** Access list of Repositories that contribute ResObjects.
-         * Built on demand.
-         */
-        const KnownRepositories & knownRepositories() const
-        {
-          checkSerial();
-          if ( ! _knownRepositoriesPtr )
-          {
-            _knownRepositoriesPtr.reset( new KnownRepositories );
+        /** Forward list of Repositories that contribute ResObjects from \ref sat::Pool */
+        size_type knownRepositoriesSize() const
+        { checkSerial(); return satpool().reposSize(); }
 
-            sat::Pool pool( satpool() );
-            for_( it, pool.reposBegin(), pool.reposEnd() )
-            {
-              _knownRepositoriesPtr->push_back( *it );
-            }
-          }
-          return *_knownRepositoriesPtr;
-        }
+        repository_iterator knownRepositoriesBegin() const
+        { checkSerial(); return satpool().reposBegin(); }
+
+        repository_iterator knownRepositoriesEnd() const
+        { checkSerial(); return satpool().reposEnd(); }
 
         ///////////////////////////////////////////////////////////////////
         //
@@ -211,9 +157,15 @@ namespace zypp
                 sat::Solvable s( i );
                 PoolItem & pi( _store[i] );
                 if ( ! s &&  pi )
+                {
+                  // the PoolItem got invalidated (e.g unloaded repo)
                   pi = PoolItem();
+                }
                 else if ( s && ! pi )
+                {
+                  // new PoolItem to add
                   pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
+                }
               }
             }
             _storeDirty = false;
@@ -260,7 +212,6 @@ namespace zypp
 	  _id2itemDirty = true;
 	  _id2item.clear();
           _poolProxy.reset();
-          _knownRepositoriesPtr.reset();
         }
 
       private:
@@ -272,12 +223,7 @@ namespace zypp
         mutable DefaultIntegral<bool,true>    _id2itemDirty;
 
       private:
-        mutable AdditionalCapabilities        _additionalRequire;
-        mutable AdditionalCapabilities        _additionaConflict;
-        mutable AdditionalCapabilities        _additionaProvide;
-
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
-        mutable scoped_ptr<KnownRepositories> _knownRepositoriesPtr;
     };
     ///////////////////////////////////////////////////////////////////
 

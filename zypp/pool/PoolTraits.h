@@ -139,16 +139,11 @@ namespace zypp
                                                         byIdent_iterator;
 
       /* list of known Repositories */
-      typedef std::list<Repository>	                RepoContainerT;
-      typedef RepoContainerT::const_iterator		repository_iterator;
+      typedef sat::Pool::RepositoryIterator	        repository_iterator;
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
       typedef shared_ptr<const PoolImpl> Impl_constPtr;
-
-      /** Map of Capabilities and "who" has set it*/
-      typedef std::map<ResStatus::TransactByValue,Capabilities>		AdditionalCapabilities;
-
     };
     ///////////////////////////////////////////////////////////////////
 

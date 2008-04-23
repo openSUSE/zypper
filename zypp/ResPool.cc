@@ -67,29 +67,13 @@ namespace zypp
   { return _pimpl->find( slv_r ); }
 
   ResPool::size_type ResPool::knownRepositoriesSize() const
-  { return _pimpl->knownRepositories().size(); }
+  { return _pimpl->knownRepositoriesSize(); }
 
   ResPool::repository_iterator ResPool::knownRepositoriesBegin() const
-  { return _pimpl->knownRepositories().begin(); }
+  { return _pimpl->knownRepositoriesBegin(); }
 
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
-  { return _pimpl->knownRepositories().end(); }
-
-
-  void ResPool::setAdditionalRequire( const AdditionalCapabilities & capset ) const
-  { _pimpl->setAdditionalRequire( capset ); }
-  ResPool::AdditionalCapabilities & ResPool::additionalRequire() const
-  { return _pimpl->additionalRequire(); }
-
-  void ResPool::setAdditionalConflict( const AdditionalCapabilities & capset ) const
-  { _pimpl->setAdditionalConflict( capset ); }
-  ResPool::AdditionalCapabilities & ResPool::additionaConflict() const
-  { return _pimpl->additionaConflict(); }
-
-  void ResPool::setAdditionalProvide( const AdditionalCapabilities & capset ) const
-  { _pimpl->setAdditionalProvide( capset ); }
-  ResPool::AdditionalCapabilities & ResPool::additionaProvide() const
-  { return _pimpl->additionaProvide(); }
+  { return _pimpl->knownRepositoriesEnd(); }
 
   const pool::PoolTraits::ItemContainerT & ResPool::store() const
   { return _pimpl->store(); }

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 23 22:24:00 CEST 2008 - ma@suse.de
+
+- Remove obsolete AdditionalCapabilities interface from ResPool.
+  Forward sat::Pool::RepositoryIterator. There's no more need to
+  maintain an extra Repository list in ResPool.
+- revision 9806
+
+-------------------------------------------------------------------
 Wed Apr 23 21:12:56 CEST 2008 - ma@suse.de
 
 - Support dependencies requiring a specific architecture: 
