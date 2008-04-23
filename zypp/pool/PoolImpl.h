@@ -138,6 +138,16 @@ namespace zypp
         //
         ///////////////////////////////////////////////////////////////////
       public:
+        bool hardLockAppliesTo( sat::Solvable solv_r ) const
+        {
+          return false;
+        }
+
+        bool softLockAppliesTo( sat::Solvable solv_r ) const
+        {
+          return false;
+        }
+
         const ContainerT & store() const
         {
           checkSerial();
@@ -165,6 +175,15 @@ namespace zypp
                 {
                   // new PoolItem to add
                   pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
+                  // and a few checks...
+                  if ( hardLockAppliesTo( s ) )
+                  {
+                    pi.status().setLock( true, ResStatus::USER );
+                  }
+                  else if ( softLockAppliesTo( s ) )
+                  {
+                    pi.status().setSoftLock( ResStatus::USER );
+                  }
                 }
               }
             }
