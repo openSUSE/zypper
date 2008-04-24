@@ -299,15 +299,49 @@ namespace zypp
       bool isAvailableLocale( const Locale & locale_r ) const;
       //@}
 
+    public:
+      /** \name Handle automatic soft-locks.
+       *
+       * Solvables with and ident listed here are per default created with
+       * a setSoftLock applied. I.e. the \ref Resolver should not automatically
+       * select them, if they are just recommended.
+       *
+       * This list is considered when adding new repos to the pool. It is
+       * \b not the list of currently softLocked items.
+       *
+       * Mainly used to re-apply soft-locks remembered during the last commit.
+       */
+      //@{
+      typedef pool::PoolTraits::AutoSoftLocks          AutoSoftLocks;
+      typedef pool::PoolTraits::autoSoftLocks_iterator autoSoftLocks_iterator;
+
+      bool autoSoftLocksEmpty() const;
+      size_type autoSoftLocksSize() const;
+      autoSoftLocks_iterator autoSoftLocksBegin() const;
+      autoSoftLocks_iterator autoSoftLocksEnd() const;
+
+      /** Set a new soft-lock list.
+       * The soft-locks of existing PoolItems are adjusted according
+       * to the list. (usually called on target load)
+      */
+      void setAutoSoftLocks( const AutoSoftLocks & newLocks_r );
+
+      /** Suggest a new soft-lock list based on the current selection.
+       * Based on the the current soft-lock list. Items tagged to be
+       * installed are removed, and those tagged to be deleted are added.
+       * (usually remembered on commit).
+      */
+      void getActiveSoftLocks( AutoSoftLocks & activeLocks_r );
+      //@}
     private:
       const pool::PoolTraits::ItemContainerT & store() const;
       const pool::PoolTraits::Id2ItemT & id2item() const;
 
     private:
       /** Ctor */
-      ResPool( pool::PoolTraits::Impl_constPtr impl_r );
-      /** Const access to implementation. */
-      pool::PoolTraits::Impl_constPtr _pimpl;
+      ResPool( pool::PoolTraits::Impl_Ptr impl_r );
+      /** Access to implementation. */
+      RW_pointer<pool::PoolTraits::Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

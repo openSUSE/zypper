@@ -495,35 +495,20 @@ void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
   }
 }
 
-bool myfilter( const PoolItem & pi )
+void sslk( const std::string & t = std::string() )
 {
-  if ( pi->name() == "ruby" )
-    return true;
-  return false;
-}
-
-struct Foo : private debug::TraceCAD<Foo>
-{};
-
-namespace zypp
-{
-  namespace sat
+  ResPool pool( ResPool::instance() );
+  ostream & outs( SEC );
+  outs << t << ": {" << endl;
+  for_( it, pool.begin(), pool.end() )
   {
+    if ( it->status().isSoftLocked() )
+      outs << "    " << *it << endl;
   }
+  outs << '}' << endl;
 }
 
-void ditest( Capability cap_r )
-{
-  DBG << "    (" << cap_r.id() << ") " << endl;
-  DBG << "    " << cap_r << endl;
-  DBG << "    " << dump(cap_r) << endl;
-}
 
-void ditest( const std::string & str_r )
-{
-  MIL <<  str_r << endl;
-  ditest( Capability(str_r) );
-}
 
 /******************************************************************
 **
@@ -541,6 +526,14 @@ try {
   ResPool   pool( ResPool::instance() );
   USR << "pool: " << pool << endl;
   sat::Pool satpool( sat::Pool::instance() );
+
+  typedef ResPool::AutoSoftLocks          AutoSoftLocks;
+  typedef ResPool::autoSoftLocks_iterator autoSoftLocks_iterator;
+
+  AutoSoftLocks s;
+  //s.insert( IdString("xorg-x11") );
+  pool.setAutoSoftLocks( s );
+  sslk( "START" );
 
   if ( 1 )
   {
@@ -600,11 +593,14 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
-      getZYpp()->initializeTarget( sysRoot );
+      {
+        zypp::base::LogControl::TmpLineWriter shutUp;
+        getZYpp()->initializeTarget( sysRoot );
+      }
       getZYpp()->target()->load();
     }
   }
@@ -613,6 +609,7 @@ try {
   USR << "pool: " << pool << endl;
 
   ///////////////////////////////////////////////////////////////////
+
   if ( 0 )
   {
     Measure x( "Upgrade" );
@@ -622,43 +619,35 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  ditest("foo");
-  ditest("foo.baa");
-  ditest("foo.i386");
-  ditest("foo.baa < 13");
-  ditest("foo.foo.baa < 13");
-  ditest("foo.foo.i386 < 13");
-  ditest("");
+  sslk( "AFTER LOAD" );
+
+  //s.clear();
+  s.insert( IdString("pattern:office") );
+  pool.setAutoSoftLocks( s );
+  sslk( "AFTER RESET" );
+
+
+  AutoSoftLocks n;
+  pool.getActiveSoftLocks( s );
+  INT << s << endl;
+
+  PoolItem( sat::Solvable(10340) ).status().setTransact( true, ResStatus::USER );
+  PoolItem( sat::Solvable(3500) ).status().setTransact( true, ResStatus::USER );
+  vdumpPoolStats( USR << "Transacting:"<< endl,
+                      make_filter_begin<resfilter::ByTransact>(pool),
+                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  pool.getActiveSoftLocks( s );
+  INT << s << endl;
+
+
+  ///////////////////////////////////////////////////////////////////
+
+  //vdumpPoolStats( USR << "Pool:"<< endl, pool.byKindBegin<Package>(), pool.byKindEnd<Package>() ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
-
-
-  if ( 0 ) {
-    Measure x( "PROXY" );
-    pool.proxy();
-  }
-
-  if ( 0 ) {
-    Measure x( "ALL PATTERNS" );
-
-    for_( it, pool.byKindBegin<Pattern>(), pool.byKindEnd<Pattern>() )
-    {
-      Measure x( string("  ") + (*it)->name() );
-      Pattern::Contents c( asKind<Pattern>(*it)->contents() );
-      {
-        Measure x( "    poolitem" );
-        dumpRange( WAR, c.poolItemBegin(), c.poolItemEnd() ) << endl;
-      }
-      {
-        Measure x( "    selectable" );
-        dumpRange( ERR, c.selectableBegin(), c.selectableEnd() ) << endl;
-      }
-      break;
-    }
-  }
 
   SEC << zypp::getZYpp()->diskUsage() << endl;
 

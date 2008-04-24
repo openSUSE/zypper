@@ -31,7 +31,7 @@ namespace zypp
   //
   ResPool ResPool::instance()
   {
-    static ResPool _val( pool::PoolTraits::Impl_constPtr( new pool::PoolImpl ) );
+    static ResPool _val( pool::PoolTraits::Impl_Ptr( new pool::PoolImpl ) );
     return _val;
   }
 
@@ -40,7 +40,7 @@ namespace zypp
   //	METHOD NAME : ResPool::ResPool
   //	METHOD TYPE : Ctor
   //
-  ResPool::ResPool( pool::PoolTraits::Impl_constPtr impl_r )
+  ResPool::ResPool( pool::PoolTraits::Impl_Ptr impl_r )
   : _pimpl( impl_r )
   {}
 
@@ -66,6 +66,7 @@ namespace zypp
   PoolItem ResPool::find( const sat::Solvable & slv_r ) const
   { return _pimpl->find( slv_r ); }
 
+
   ResPool::size_type ResPool::knownRepositoriesSize() const
   { return _pimpl->knownRepositoriesSize(); }
 
@@ -74,6 +75,25 @@ namespace zypp
 
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
   { return _pimpl->knownRepositoriesEnd(); }
+
+
+  bool ResPool::autoSoftLocksEmpty() const
+  { return _pimpl->autoSoftLocks().empty(); }
+
+  ResPool::size_type ResPool::autoSoftLocksSize() const
+  { return _pimpl->autoSoftLocks().size(); }
+
+  ResPool::autoSoftLocks_iterator ResPool::autoSoftLocksBegin() const
+  { return _pimpl->autoSoftLocks().begin(); }
+
+  ResPool::autoSoftLocks_iterator ResPool::autoSoftLocksEnd() const
+  { return _pimpl->autoSoftLocks().end(); }
+
+  void ResPool::setAutoSoftLocks( const AutoSoftLocks & newLocks_r )
+  { _pimpl->setAutoSoftLocks( newLocks_r ); }
+
+  void ResPool::getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
+  { _pimpl->getActiveSoftLocks( activeLocks_r ); }
 
   const pool::PoolTraits::ItemContainerT & ResPool::store() const
   { return _pimpl->store(); }

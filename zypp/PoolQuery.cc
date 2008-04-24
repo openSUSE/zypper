@@ -570,7 +570,7 @@ attremptycheckend:
     bool got_match = false;
     if (_has_next)
     {
-      DBG << "last: " << _sid << endl;
+      XXX << "last: " << _sid << endl;
       while (_has_next && !(got_match = matchSolvable()));
     }
 
@@ -581,7 +581,7 @@ attremptycheckend:
       _sid = 0;
     }
 
-    DBG << "next: " << _sid << endl;
+    XXX << "next: " << _sid << endl;
   }
 
   bool PoolQueryIterator::matchSolvable()

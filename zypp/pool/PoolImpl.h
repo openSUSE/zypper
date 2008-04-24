@@ -143,11 +143,69 @@ namespace zypp
           return false;
         }
 
-        bool softLockAppliesTo( sat::Solvable solv_r ) const
+      public:
+        typedef PoolTraits::AutoSoftLocks          AutoSoftLocks;
+        typedef PoolTraits::autoSoftLocks_iterator autoSoftLocks_iterator;
+
+        const AutoSoftLocks & autoSoftLocks() const
+        { return _autoSoftLocks; }
+
+        bool autoSoftLockAppliesTo( sat::Solvable solv_r ) const
+        { return( _autoSoftLocks.find( solv_r.ident() ) != _autoSoftLocks.end() ); }
+
+        void setAutoSoftLocks( const AutoSoftLocks & newLocks_r )
         {
-          return false;
+          MIL << "Apply " << newLocks_r.size() << " AutoSoftLocks: " << newLocks_r << endl;
+          _autoSoftLocks = newLocks_r;
+          // now adjust the pool status
+          for_( it, begin(), end() )
+          {
+            if ( ! it->status().isKept() )
+              continue;
+
+            if ( newLocks_r.find( it->satSolvable().ident() ) != newLocks_r.end() )
+              it->status().setSoftLock( ResStatus::USER );
+            else
+              it->status().resetTransact( ResStatus::USER );
+          }
         }
 
+        void getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
+        {
+          activeLocks_r = _autoSoftLocks; // currentsoft-locks
+          AutoSoftLocks todel;            // + names to be deleted
+          AutoSoftLocks toins;            // - names to be installed
+
+          for_( it, begin(), end() )
+          {
+            ResStatus & status( it->status() );
+            if ( ! status.isByUser() )
+              continue;
+
+            switch ( status.getTransactValue() )
+            {
+              case ResStatus::KEEP_STATE:
+                activeLocks_r.insert( it->satSolvable().ident() );
+                break;
+              case ResStatus::LOCKED:
+                //  NOOP
+                break;
+              case ResStatus::TRANSACT:
+                (status.isInstalled() ? todel : toins).insert( it->satSolvable().ident() );
+                break;
+            }
+          }
+          for_( it, todel.begin(), todel.end() )
+          {
+            activeLocks_r.insert( *it );
+          }
+          for_( it, toins.begin(), toins.end() )
+          {
+            activeLocks_r.erase( *it );
+          }
+        }
+
+      public:
         const ContainerT & store() const
         {
           checkSerial();
@@ -180,7 +238,7 @@ namespace zypp
                   {
                     pi.status().setLock( true, ResStatus::USER );
                   }
-                  else if ( softLockAppliesTo( s ) )
+                  else if ( autoSoftLockAppliesTo( s ) )
                   {
                     pi.status().setSoftLock( ResStatus::USER );
                   }
@@ -213,7 +271,6 @@ namespace zypp
 	  return _id2item;
 	}
 
-
         ///////////////////////////////////////////////////////////////////
         //
         ///////////////////////////////////////////////////////////////////
@@ -243,6 +300,10 @@ namespace zypp
 
       private:
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
+
+      private:
+        /** Set of solvable idents that should be soft locked per default. */
+        AutoSoftLocks                         _autoSoftLocks;
     };
     ///////////////////////////////////////////////////////////////////
 

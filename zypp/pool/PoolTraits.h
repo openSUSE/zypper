@@ -141,6 +141,10 @@ namespace zypp
       /* list of known Repositories */
       typedef sat::Pool::RepositoryIterator	        repository_iterator;
 
+      /* soft locks */
+      typedef std::tr1::unordered_set<IdString>		AutoSoftLocks;
+      typedef AutoSoftLocks::const_iterator             autoSoftLocks_iterator;
+
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
       typedef shared_ptr<const PoolImpl> Impl_constPtr;

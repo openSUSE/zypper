@@ -32,6 +32,10 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 
+#define for_providers_(IT,CAP) for ( sat::WhatProvides::const_iterator IT = sat::WhatProvides( Capability CAP ).begin(), _for_end = sat::WhatProvides().end(); IT != _for_end; ++IT )
+
+///////////////////////////////////////////////////////////////////
+
 void waitForInput()
 {
   int i;
