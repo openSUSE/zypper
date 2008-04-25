@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 25 17:16:14 CEST 2008 - jreidinger@suse.cz
+
+- add richtext support also in license confirmation
+- r9823 
+
+-------------------------------------------------------------------
 Tue Apr 22 20:37:32 CEST 2008 - jkupec@suse.cz
 
 - bash-completion: rename variable conflicting with yast
