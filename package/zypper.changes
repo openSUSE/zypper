@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 25 23:25:28 CEST 2008 - jkupec@suse.cz
+
+- some fixes in the help texts (bnc #383089)
+- r9831
+
+-------------------------------------------------------------------
 Fri Apr 25 23:07:30 CEST 2008 - jkupec@suse.cz
 
 - in 'search -s', show the system packages only if no counterpart
