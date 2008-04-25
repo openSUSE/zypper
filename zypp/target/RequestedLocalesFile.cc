@@ -54,6 +54,7 @@ namespace zypp
     void RequestedLocalesFile::store( const Pathname & file_r, const LocaleSet & locales_r )
     {
       filesystem::TmpFile tmp( filesystem::TmpFile::makeSibling( file_r ) );
+      filesystem::chmod( tmp.path(), 0644 );
 
       std::ofstream outs( tmp.path().c_str() );
       outs << "# zypp::RequestedLocales generated " << Date::now() << endl;
