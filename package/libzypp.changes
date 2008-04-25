@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Apr 25 14:15:17 CEST 2008 - ma@suse.de
+
+- Prevent deselected or deleted items from being re-selected due to 
+  recommends (aka. persistent soft locks). Unlike hard locked, those 
+  items will be automatically selected if required. The list of soft 
+  locked items is stored in /var/lib/zypp/SoftLocks.
+- version 4.15.1
+- revision 9818
+
+-------------------------------------------------------------------
 Wed Apr 23 22:24:00 CEST 2008 - ma@suse.de
 
 - Remove obsolete AdditionalCapabilities interface from ResPool.

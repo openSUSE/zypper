@@ -282,6 +282,7 @@ namespace zypp
     TargetImpl::TargetImpl( const Pathname & root_r, bool doRebuild_r )
     : _root( root_r )
     , _requestedLocalesFile( home() / "RequestedLocales" )
+    , _softLocksFile( home() / "SoftLocks" )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
       MIL << "Initialized target on " << _root << endl;
@@ -434,7 +435,7 @@ namespace zypp
         system.addSolv( rpmsolv );
       }
 
-      // (Re)Load the requested locales.
+      // (Re)Load the requested locales et al.
       // If the requested locales are empty, we leave the pool untouched
       // to avoid undoing changes the application applied. We expect this
       // to happen on a bare metal installation only. An already existing
@@ -444,6 +445,13 @@ namespace zypp
       {
         satpool.setRequestedLocales( requestedLocales );
       }
+
+      const SoftLocksFile::Data & softLocks( _softLocksFile.data() );
+      if ( ! softLocks.empty() )
+      {
+        ResPool::instance().setAutoSoftLocks( softLocks );
+      }
+
 
       MIL << "Target loaded: " << system.solvablesSize() << " resolvables" << endl;
     }
@@ -463,6 +471,11 @@ namespace zypp
       // Store non-package data:
       filesystem::assert_dir( home() );
       _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
+      {
+        SoftLocksFile::Data newdata;
+        pool_r.getActiveSoftLocks( newdata );
+        _softLocksFile.setData( newdata );
+      }
 
       // Process packages:
       ZYppCommitResult result;

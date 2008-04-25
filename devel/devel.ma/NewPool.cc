@@ -259,7 +259,7 @@ bool solve()
 
 bool install()
 {
-  SEC << getZYpp()->commit( ZYppCommitPolicy() ) << endl;
+  SEC << getZYpp()->commit( ZYppCommitPolicy().dryRun() ) << endl;
   return true;
 }
 
@@ -521,19 +521,9 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
-  ZConfig::instance().setTextLocale(Locale("de"));
 
   ResPool   pool( ResPool::instance() );
-  USR << "pool: " << pool << endl;
   sat::Pool satpool( sat::Pool::instance() );
-
-  typedef ResPool::AutoSoftLocks          AutoSoftLocks;
-  typedef ResPool::autoSoftLocks_iterator autoSoftLocks_iterator;
-
-  AutoSoftLocks s;
-  //s.insert( IdString("xorg-x11") );
-  pool.setAutoSoftLocks( s );
-  sslk( "START" );
 
   if ( 1 )
   {
@@ -619,39 +609,9 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  sslk( "AFTER LOAD" );
-
-  //s.clear();
-  s.insert( IdString("pattern:office") );
-  pool.setAutoSoftLocks( s );
-  sslk( "AFTER RESET" );
-
-
-  AutoSoftLocks n;
-  pool.getActiveSoftLocks( s );
-  INT << s << endl;
-
-  PoolItem( sat::Solvable(10340) ).status().setTransact( true, ResStatus::USER );
-  PoolItem( sat::Solvable(3500) ).status().setTransact( true, ResStatus::USER );
-  vdumpPoolStats( USR << "Transacting:"<< endl,
-                      make_filter_begin<resfilter::ByTransact>(pool),
-                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  pool.getActiveSoftLocks( s );
-  INT << s << endl;
-
-
-  ///////////////////////////////////////////////////////////////////
-
-  //vdumpPoolStats( USR << "Pool:"<< endl, pool.byKindBegin<Package>(), pool.byKindEnd<Package>() ) << endl;
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
   SEC << zypp::getZYpp()->diskUsage() << endl;
 
-  if ( 1 )
+  if ( 0 )
   {
     PoolItem pi ( getPi<Package>("amarok") );
     MIL << pi << endl;

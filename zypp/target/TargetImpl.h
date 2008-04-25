@@ -29,6 +29,7 @@
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/TargetException.h"
 #include "zypp/target/RequestedLocalesFile.h"
+#include "zypp/target/SoftLocksFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -151,6 +152,8 @@ namespace zypp
       rpm::RpmDb _rpm;
       /** Requested Locales database */
       RequestedLocalesFile _requestedLocalesFile;
+      /** Soft-locks database */
+      SoftLocksFile _softLocksFile;
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;

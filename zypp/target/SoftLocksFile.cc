@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/target/RequestedLocalesFile.cc
+/** \file	zypp/target/SoftLocksFile.cc
  *
 */
 #include <iostream>
@@ -20,7 +20,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/Date.h"
 
-#include "zypp/target/RequestedLocalesFile.h"
+#include "zypp/target/SoftLocksFile.h"
 
 using std::endl;
 
@@ -31,7 +31,7 @@ namespace zypp
   namespace target
   { /////////////////////////////////////////////////////////////////
 
-    void RequestedLocalesFile::load( const Pathname & file_r, LocaleSet & locales_r )
+    void SoftLocksFile::load( const Pathname & file_r, Data & data_r )
     {
       PathInfo pi( file_r );
       if ( ! pi.isFile() )
@@ -45,19 +45,19 @@ namespace zypp
         std::string l( str::trim(*in) );
         if ( ! l.empty() && l[0] != '#' )
         {
-          locales_r.insert( Locale(l) );
+          data_r.insert( IdString(l) );
         }
       }
       MIL << "Read " << pi << endl;
     }
 
-    void RequestedLocalesFile::store( const Pathname & file_r, const LocaleSet & locales_r )
+    void SoftLocksFile::store( const Pathname & file_r, const Data & data_r )
     {
       filesystem::TmpFile tmp( filesystem::TmpFile::makeSibling( file_r ) );
 
       std::ofstream outs( tmp.path().c_str() );
-      outs << "# zypp::RequestedLocales generated " << Date::now() << endl;
-      dumpRange( outs, locales_r.begin(), locales_r.end(), "#", "\n", "\n", "\n", "#\n" );
+      outs << "# zypp::SoftLocksFile generated " << Date::now() << endl;
+      dumpRange( outs, data_r.begin(), data_r.end(), "#", "\n", "\n", "\n", "#\n" );
       outs.close();
 
       if ( outs.good() )
@@ -76,11 +76,11 @@ namespace zypp
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
-    std::ostream & operator<<( std::ostream & str, const RequestedLocalesFile & obj )
+    std::ostream & operator<<( std::ostream & str, const SoftLocksFile & obj )
     {
       str << obj.file() << ' ';
-      if ( obj._localesPtr )
-        str << obj.locales();
+      if ( obj._dataPtr )
+        str << obj.data();
       else
         str << "(unloaded)";
       return str;
