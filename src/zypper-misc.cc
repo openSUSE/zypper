@@ -26,6 +26,7 @@
 #include "zypper-main.h"
 #include "zypper-utils.h"
 #include "zypper-getopt.h"
+#include "zypper-richtext.h"
 #include "zypper-prompt.h"
 #include "output/prompt.h"
 
@@ -2335,8 +2336,12 @@ static bool confirm_licenses(Zypper & zypper)
       // license text
       ostringstream s;
       s << format(_("%s %s license:")) % it->resolvable()->name()
-          % kind_to_string_localized(it->resolvable()->kind(), 1)
-        << it->resolvable()->licenseToConfirm();
+          % kind_to_string_localized(it->resolvable()->kind(), 1);
+      const string& licenseText = it->resolvable()->licenseToConfirm();
+      if (licenseText.find("DT:Rich")==licenseText.npos)
+        s << licenseText;
+      else
+        s << processRichText(licenseText);
       zypper.out().info(s.str(), Out::QUIET);
 
       // lincense prompt
