@@ -83,7 +83,7 @@ static void display_progress ( const std::string & id, const string & s, int per
 {
   static AliveCursor cursor;
 
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
   {
     cout << CLEARLN << cursor++ << " " << s;
     // dont display percents if invalid
@@ -101,7 +101,7 @@ static void display_tick ( const std::string & id, const string & s)
 {
   static AliveCursor cursor;
 
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
   {
     cursor++;
     cout << CLEARLN << cursor << " " << s;
@@ -122,7 +122,7 @@ void OutNormal::progressStart(const std::string & id,
   if (progressFilter())
     return;
 
-  if (!isatty(1))
+  if (!isatty(STDOUT_FILENO))
     cout << label << ' ';  
   
   if (is_tick)
@@ -148,7 +148,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     return;
 
   static AliveCursor cursor;
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
     cout << CLEARLN << cursor.done() << " " << label << std::flush << endl;
   else
    cout << cursor.done() << std::flush << endl;
@@ -161,7 +161,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
     return;
 
   static AliveCursor cursor;
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
     cout << CLEARLN << cursor << " " << _("Downloading:") << " ";
   else
     cout << _("Downloading:") << " ";
@@ -169,7 +169,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
     cout << zypp::Pathname(uri.getPathName()).basename();
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
     cout << " [" << _("starting") << "]"; //! \todo align to the right
   else
     cout << " [" ;
@@ -182,7 +182,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
 {
   if (verbosity() < NORMAL)
     return;
-  if (!isatty(1))
+  if (!isatty(STDOUT_FILENO))
   {
     cout << '.' << std::flush;
     return;
@@ -214,7 +214,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
     return;
 
   static AliveCursor cursor;
-  if (isatty(1))
+  if (isatty(STDOUT_FILENO))
   {
     cout << CLEARLN << cursor.done() << " " << _("Downloading:") << " ";
     if (verbosity() == DEBUG)
