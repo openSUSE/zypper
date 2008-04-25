@@ -43,7 +43,7 @@ namespace zypp
     {
       public:
         typedef detail::SolvableIterator SolvableIterator;
-	typedef zypp::detail::RepositoryIterator     RepositoryIterator;	
+	typedef zypp::detail::RepositoryIterator     RepositoryIterator;
         typedef detail::size_type        size_type;
 
       public:
@@ -99,7 +99,11 @@ namespace zypp
         /** Reserved system repository name \c @System. */
         static const std::string & systemRepoName();
 
-        /** Return the system repository. */
+        /** Return the system repository if it is on the pool. */
+        Repository findSystemRepo() const
+        { return reposFind( systemRepoName() ); }
+
+        /** Return the system repository, create it if missing. */
         Repository systemRepo()
         { return reposInsert( systemRepoName() ); }
 

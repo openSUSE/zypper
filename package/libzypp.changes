@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 25 16:12:12 CEST 2008 - ma@suse.de
+
+- Prevent target::unload from creating a system repo in order 
+  to unload it. (bnc 382297)
+- version 4.15.2
+- revision 9822
+
+-------------------------------------------------------------------
 Fri Apr 25 14:15:17 CEST 2008 - ma@suse.de
 
 - Prevent deselected or deleted items from being re-selected due to 

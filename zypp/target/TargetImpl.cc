@@ -404,9 +404,9 @@ namespace zypp
 
     void TargetImpl::unload()
     {
-      sat::Pool satpool( sat::Pool::instance() );
-      Repository system( satpool.systemRepo() );
-      system.eraseFromPool();
+      Repository system( sat::Pool::instance().findSystemRepo() );
+      if ( system )
+        system.eraseFromPool();
     }
 
 
