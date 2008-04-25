@@ -75,39 +75,8 @@ struct FillSearchTableSolvable
 
   bool operator()(const zypp::ui::Selectable::constPtr & s) const
   {
-    // show installed objects
-    for_(it, s->installedBegin(), s->installedEnd())
-    {
-      TableRow row;
-      zypp::PoolItem pi = *it;
-      row << "i";
-      if (_gopts.is_rug_compatible)
-      {
-        row
-          << pi->repository().info().name()
-          // TODO what about rug's Bundle?
-          << ""
-          << pi->name()
-          << pi->edition().asString()
-          << pi->arch().asString();
-      }
-      else
-      {
-        row
-          << pi->name()
-          << kind_to_string_localized(pi->kind(), 1)
-          << pi->edition().asString()
-          << pi->arch().asString()
-          << pi->repository().info().name();
-      }
-
-      *_table << row;
-    }
-
-    // get the first installed object
-    zypp::PoolItem installed;
-    if (!s->installedEmpty())
-      installed = s->installedObj();
+    static bool show_installed;
+    show_installed = true;
 
     // show available objects
     for_(it, s->availableBegin(), s->availableEnd())
@@ -115,15 +84,27 @@ struct FillSearchTableSolvable
       TableRow row;
 
       zypp::PoolItem pi = *it;
-      if (installed)
+      if (!s->installedEmpty())
       {
-        row << (equalNVRA(*installed.resolvable(), *pi.resolvable()) ?  "i" : "v");
+        static bool installed;
+        installed = false;
+        for_(instit, s->installedBegin(), s->installedEnd())
+        {
+          if (equalNVRA(*instit->resolvable(), *pi.resolvable()))
+          {
+            installed = true;
+            show_installed = false;
+            break;
+          }
+        }
+
+        row << (installed ? "i" : "v");
       }
       else if (pi.isSatisfied()) // patches/patterns/products are installed if satisfied
         row << "i";
       else
         row << "";
-      
+
       if (_gopts.is_rug_compatible)
       {
         row
@@ -145,6 +126,42 @@ struct FillSearchTableSolvable
 
       *_table << row;
     }
+
+    // show installed objects only if there is no counterpart in repos
+    if (show_installed || s->availableEmpty())
+    {
+      for_(it, s->installedBegin(), s->installedEnd())
+      {
+        TableRow row;
+        zypp::PoolItem pi = *it;
+        row << "i";
+        if (_gopts.is_rug_compatible)
+        {
+          row
+            << _("System Packages")
+            // TODO what about rug's Bundle?
+            << ""
+            << pi->name()
+            << pi->edition().asString()
+            << pi->arch().asString();
+        }
+        else
+        {
+          row
+            << pi->name()
+            << kind_to_string_localized(pi->kind(), 1)
+            << pi->edition().asString()
+            << pi->arch().asString()
+            << (string("(") + _("System Packages") + ")");
+        }
+  
+        *_table << row;pi->repository().info().name();
+      }
+    }
+
+    //! \todo mainain an internal plaindir repo named "Local Packages"
+    // for plain rpms (as rug does). ?
+    
     return true;
   }
 };
