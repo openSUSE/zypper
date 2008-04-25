@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 25 23:07:30 CEST 2008 - jkupec@suse.cz
+
+- in 'search -s', show the system packages only if no counterpart
+  can be found in the repositories (bnc #383182)
+- r9829
+
+-------------------------------------------------------------------
 Fri Apr 25 17:16:14 CEST 2008 - jreidinger@suse.cz
 
 - add richtext support also in license confirmation
