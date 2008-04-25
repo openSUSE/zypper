@@ -196,9 +196,9 @@ void print_main_help(Zypper & zypper)
   static string help_query_commands = _("\tQuerying:\n"
     "\tsearch, se\t\tSearch for packages matching a pattern.\n"
     "\tinfo, if\t\tShow full information for specified packages.\n"
-    "\tpatch-info\t\tShow full information for specied patches.\n"
-    "\tpattern-info\t\tShow full information for specied patterns.\n"
-    "\tproduct-info\t\tShow full information for specied products.\n"
+    "\tpatch-info\t\tShow full information for specified patches.\n"
+    "\tpattern-info\t\tShow full information for specified patterns.\n"
+    "\tproduct-info\t\tShow full information for specified products.\n"
     "\tpatch-check, pchk\tCheck for patches.\n"
     "\tlist-updates, lu\tList available updates.\n"
     "\tpatches, pch\t\tList all available patches.\n"
@@ -1377,8 +1377,8 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-      "-i, --installed-only      Show only installed patterns.\n"
-      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
+      "-i, --installed-only      Show only installed packages.\n"
+      "-u, --uninstalled-only    Show only packages wich are not installed.\n"
       "-N, --sort-by-name        Sort the list by package name.\n"
       "-R, --sort-by-repo        Sort the list by repository.\n"
     );
@@ -1431,8 +1431,8 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
-      "-i, --installed-only      Show only installed patterns.\n"
-      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
+      "-i, --installed-only      Show only installed products.\n"
+      "-u, --uninstalled-only    Show only products wich are not installed.\n"
     );
     break;
   }
