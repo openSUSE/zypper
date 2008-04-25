@@ -213,6 +213,9 @@ namespace zypp
 
     const StrContainer & repos() const;
 
+    /**
+     * returns true if search is case sensitive
+     */
     bool caseSensitive() const;
 
     bool matchExact() const;

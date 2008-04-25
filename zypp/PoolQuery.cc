@@ -816,7 +816,7 @@ attremptycheckend:
   { return _pimpl->_repos; }
 
   bool PoolQuery::caseSensitive() const
-  { return _pimpl->_flags & SEARCH_NOCASE; }
+  { return !(_pimpl->_flags & SEARCH_NOCASE); }
 
   bool PoolQuery::matchExact() const
   { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_STRING; }
