@@ -624,66 +624,107 @@ namespace zypp
 
   class PoolQuery;
 
+  /** \name Locks */
+  //@{
+  /**
+   * Callback for cleaning locks which doesn't lock anything in pool.
+   */
+
   struct CleanEmptyLocksReport : public callback::ReportBase
   {
+    /**
+     * action performed by cleaning api to specific lock
+     */
     enum Action {
-      ABORT,  // abort and return error
-      DELETE, // delete empty lock    
-      IGNORE  // skip empty lock
+      ABORT,  /**< abort and return error */
+      DELETE, /**< delete empty lock    */
+      IGNORE  /**< skip empty lock */
     };
 
+    /**
+     * result of cleaning
+     */
     enum Error {
-      NO_ERROR,
-      ABORTED // cleaning aborted
+      NO_ERROR, /**< no problem */
+      ABORTED /** cleaning aborted by user */
     };
 
+    /**
+     * cleaning is started
+     */
     virtual void start(
     ) {}
 
+    /**
+     * progress of cleaning specifies in percents
+     * \return if continue
+     */
     virtual bool progress(int /*value*/)
     { return true; }
 
     /**
      * When find empty lock ask what to do with it
+     * \return action
      */
     virtual Action execute(
         const PoolQuery& /*error*/
      ) { return DELETE; }
 
+      /**
+       * cleaning is done
+       */
      virtual void finish(
        Error /*error*/
       ) {}
 
   };
 
+  /**
+   * this callback handles merging old locks with newly added or removed
+   */
   struct SavingLocksReport : public callback::ReportBase
   {
+    /**
+     * action for old lock which is in conflict
+     * \see ConflictState
+     */
     enum Action {
-      ABORT,  // abort and return error
-      DELETE, // delete conflicted lock    
-      IGNORE  // skip conflict lock
+      ABORT,  /**< abort and return error*/
+      DELETE, /**< delete conflicted lock    */
+      IGNORE  /**< skip conflict lock */
     };
 
+    /**
+     * result of merging
+     */
     enum Error {
-      NO_ERROR,
-      ABORTED  // cleaning aborted
+      NO_ERROR, /**< no problem */
+      ABORTED  /**< cleaning aborted by user */
     };
 
+    /**
+     * type of conflict of old and new lock
+     */
     enum ConflictState{
-      SAME_RESULTS,
-      INTERSECT
+      SAME_RESULTS, /**< locks lock same item in pool but his parameters is different */
+      INTERSECT /**< locks lock some file and unlocking lock unlock only part
+      * of iti, so removing old lock can unlock more items in pool */
     };
 
     virtual void start() {}
 
-    virtual bool progress() /*still alive*/
+    /**
+     * merging still live
+     * \return if continue
+     */
+    virtual bool progress()
     { return true; }
 
     /**
      * When user unlock something which is locked by non-identical query
      */
     virtual Action conflict(
-	 const PoolQuery&, /*problematic query*/
+	 const PoolQuery&, /**< problematic query*/
        ConflictState 
      ) { return DELETE; }
 
