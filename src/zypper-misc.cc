@@ -1,9 +1,8 @@
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <ctype.h>
 #include <boost/format.hpp>
-#include <boost/logic/tribool.hpp>
-#include <boost/logic/tribool_io.hpp>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
@@ -1120,15 +1119,24 @@ static void show_summary_of_type(Zypper & zypper,
   }
 }
 
+enum
+{
+  SUMMARY_OK = 0,
+  SUMMARY_NOTHING_TO_DO,
+  SUMMARY_INSTALL_DOES_REMOVE,
+  SUMMARY_REMOVE_DOES_INSTALL
+};
+
 /**
- * @return (-1) - nothing to do,
- *  0 - there is at least 1 resolvable to be installed/uninstalled,
+ * sets zypper exit code to:
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
+ * 
+ * @return SUMMARY_*
  */
 static int summary(Zypper & zypper)
 {
-  int retv = -1; // nothing to do;
+  int retv = SUMMARY_NOTHING_TO_DO;
 
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
@@ -1143,19 +1151,17 @@ static int summary(Zypper & zypper)
     ResObject::constPtr res = it->resolvable();
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
-      if (retv == -1) retv = 0;
-
       if (it->resolvable()->kind() == ResTraits<Patch>::kind)
       {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
 
         // set return value to 'reboot needed'
         if (patch->reboot_needed())
-          retv = ZYPPER_EXIT_INF_REBOOT_NEEDED;
+          zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
         // set return value to 'restart needed' (restart of package manager)
         // however, 'reboot needed' takes precedence
-        else if (retv != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->affects_pkg_manager())
-          retv = ZYPPER_EXIT_INF_RESTART_NEEDED;
+        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->affects_pkg_manager())
+          zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
       }
 
       if ( it->status().isToBeInstalled()
@@ -1174,7 +1180,10 @@ static int summary(Zypper & zypper)
     }
   }
 
-  if (retv == -1 && zypper.runtimeData().srcpkgs_to_install.empty())
+  if (!to_be_removed.empty() || !to_be_installed.empty())
+    retv = SUMMARY_OK;
+
+  if (retv == SUMMARY_NOTHING_TO_DO && zypper.runtimeData().srcpkgs_to_install.empty())
   {
     if (zypper.command() == ZypperCommand::VERIFY)
       zypper.out().info(_("Dependencies of all installed packages are satisfied."));
@@ -1254,11 +1263,19 @@ static int summary(Zypper & zypper)
     }
   }
 
+  bool toremove_by_solver = false;
   for (KindToResObjectSet::const_iterator it = to_be_removed.begin();
       it != to_be_removed.end(); ++it)
     for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
         resit != it->second.end(); ++resit)
     {
+      /** \todo this does not work
+      if (!toremove_by_solver)
+      {
+        PoolItem pi(*resit);
+        if (pi.status() == ResStatus::SOLVER)
+          toremove_by_solver = true;
+      }*/
       toremove[it->first].insert(*resit);
       new_installed_size -= (*resit)->installsize();
     }
@@ -1266,6 +1283,14 @@ static int summary(Zypper & zypper)
   for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
       it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
     toinstall[ResTraits<SrcPackage>::kind].insert(*it);
+
+  if (!toremove.empty() && (
+      zypper.command() == ZypperCommand::INSTALL ||
+      zypper.command() == ZypperCommand::UPDATE))
+    retv = SUMMARY_INSTALL_DOES_REMOVE;
+  else if ((!toinstall.empty() || toremove_by_solver)
+      && zypper.command() == ZypperCommand::REMOVE)
+    retv = SUMMARY_REMOVE_DOES_INSTALL;
 
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
@@ -1387,7 +1412,7 @@ static int apply_locks(Zypper & zypper)
 static void set_force_resolution(Zypper & zypper)
 {
   // --force-resolution command line parameter value
-  tribool force_resolution = indeterminate;
+  TriBool force_resolution = zypper.runtimeData().force_resolution;
 
   if (zypper.cOpts().count("force-resolution"))
     force_resolution = true;
@@ -1417,6 +1442,9 @@ static void set_force_resolution(Zypper & zypper)
       force_resolution = false;
   }
 
+  // save the setting
+  zypper.runtimeData().force_resolution = force_resolution; 
+
   DBG << "force resolution: " << force_resolution << endl;
   ostringstream s;
   s << _("Force resolution:") << " " << (force_resolution ? _("Yes") : _("No"));
@@ -1435,8 +1463,12 @@ bool resolve(Zypper & zypper)
   apply_locks(zypper);
   dump_pool(); // debug
   set_force_resolution(zypper);
-  // install also recommended packages unless --no-recommends is specified
-  God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
+  if (zypper.command() == ZypperCommand::REMOVE)
+    // never install recommends when removing packages
+    God->resolver()->setOnlyRequires(true);
+  else
+    // install also recommended packages unless --no-recommends is specified
+    God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
@@ -2129,179 +2161,211 @@ void solve_and_commit (Zypper & zypper)
     return;
   }
 
-  MIL << "solving..." << endl;
-
-  while (true) {
-    bool success;
-    if (zypper.command() == ZypperCommand::VERIFY)
-      success = verify(zypper);
-    else
-      success = resolve(zypper);
-    if (success)
-      break;
-
-    success = show_problems(zypper);
-    if (! success) {
-      // TODO cancel transaction?
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
-      return;
-    }
-  }
-
-
-  // returns -1, 0, ZYPPER_EXIT_INF_REBOOT_NEEDED, or ZYPPER_EXIT_INF_RESTART_NEEDED
-  int retv = summary(zypper);
-  bool was_installed = false;
-  if (retv >= 0 || !zypper.runtimeData().srcpkgs_to_install.empty())
+  bool show_forced_problems = true;
+  bool commit_done = false;
+  do
   {
-    // check root user
-    if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0)
+    MIL << "solving..." << endl;
+  
+    while (true)
     {
-      zypper.out().error(
-        _("Root privileges are required to fix broken package dependencies."));
-      zypper.setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
-      return;
-    }
+      bool success;
+      if (zypper.command() == ZypperCommand::VERIFY)
+        success = verify(zypper);
+      else
+        success = resolve(zypper);
+      if (success)
+        break;
 
-    if (false)
-    {
-      // translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
-      string prompt_lablel = _("Continue? (Choose 'p' to show dependency problems.)");
-      // translators: Yes / No / show Problems. This prompt will appear
-      // after install/update command summary if there will be any package
-      // to-be-removed automatically to show why, if asked.
-      string prompt_with_p = _("y/n/p");
+      success = show_problems(zypper);
+      if (! success) {
+        // TODO cancel transaction?
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
+        return;
+      }
     }
-
-    // there are resolvables to install/uninstall
-    if (read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true))
+  
+  
+    // returns SUMMARY_*
+    int retv = summary(zypper);
+    if (retv != SUMMARY_NOTHING_TO_DO || !zypper.runtimeData().srcpkgs_to_install.empty())
     {
-      if (!confirm_licenses(zypper)) return;
-      if (retv >= 0)
+      // check root user
+      if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0)
       {
-        try
+        zypper.out().error(
+          _("Root privileges are required to fix broken package dependencies."));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+        return;
+      }
+  
+      bool do_commit = false;
+      if (zypper.runtimeData().force_resolution &&
+          (retv == SUMMARY_INSTALL_DOES_REMOVE || retv == SUMMARY_REMOVE_DOES_INSTALL))
+      {
+        PromptOptions popts;
+        // translators: Yes / No / show Problems. This prompt will appear
+        // after install/update command summary if there will be any package
+        // to-be-removed automatically to show why, if asked.
+        popts.setOptions(_("y/n/p"), 0);
+        // translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
+        string prompt_text = _("Continue? (Choose 'p' to show dependency problems.)");
+        zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
+        unsigned int reply =
+          get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
+        
+        if (reply == 2)
         {
-          gData.show_media_progress_hack = true;
-  
-          ostringstream s;
-          s << _("committing"); MIL << "committing...";
-  
-          ZYppCommitResult result;
-          if (copts.count("dry-run"))
-          {
-            s << " " << _("(dry run)") << endl; MIL << "(dry run)";
-            zypper.out().info(s.str(), Out::HIGH);
-  
-            result = God->commit(ZYppCommitPolicy().dryRun(true));
-          }
-          else
-          {
-            zypper.out().info(s.str(), Out::HIGH);
-  
-            result = God->commit(
-              ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-  
-            was_installed = true;
-          }
-          
-  
-          MIL << endl << "DONE" << endl;
-  
-          gData.show_media_progress_hack = false;
-          
-          if (!result._errors.empty())
-            retv = ZYPPER_EXIT_ERR_ZYPP;
-  
-          s.clear(); s << result;
-          zypper.out().info(s.str(), Out::HIGH);
+          // one more solver solver run with force-resoltion off
+          zypper.runtimeData().force_resolution = false;
+          God->resolver()->undo();
+          continue;
         }
-        catch ( const media::MediaException & e ) {
-          ZYPP_CAUGHT(e);
-          zypper.out().error(e,
-              _("Problem downloading the package file from the repository:"),
-              _("Please see the above error message for a hint."));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-          return;
-        }
-        catch ( zypp::repo::RepoException & e ) {
-          ZYPP_CAUGHT(e);
-          
-          RepoManager manager(zypper.globalOpts().rm_options );
-
-          bool refresh_needed = false;
-          for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
-                    it != e.info().baseUrlsEnd(); ++it)
-            {
-              RepoManager::RefreshCheckStatus stat = manager.
-                            checkIfToRefreshMetadata(e.info(), *it,
-                            RepoManager::RefreshForced );
-              if ( stat == RepoManager::REFRESH_NEEDED )
-              {
-                refresh_needed = true;
-                break;
-              }
-            }
-          
-          std::string hint = _("Please see the above error message for a hint.");
-          if (refresh_needed)
-          {
-            hint = boost::str(format(
-                // translators: the first %s is 'zypper refresh' and the second
-                // is repo allias
-                _("Repository '%s' is out of date. Running '%s' might help.")) %
-                e.info().alias() % "zypper refresh" );
-          }
-          zypper.out().error(e,
-              _("Problem downloading the package file from the repository:"),
-              hint);
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-          return;
-        }
-        catch ( const zypp::FileCheckException & e ) {
-          ZYPP_CAUGHT(e);
-          zypper.out().error(e,
-              _("The package integrity check failed. This may be a problem"
-              " with the repository or media. Try one of the following:\n"
-              "\n"
-              "- just retry previous command\n"
-              "- refresh the repositories using 'zypper refresh'\n"
-              "- use another installation medium (if e.g. damaged)\n"
-              "- use another repository"));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-          return;
-        }
-        catch ( const Exception & e ) {
-          ZYPP_CAUGHT(e);
-          zypper.out().error(e,
-              _("Problem occured during or after installation or removal of packages:"),
-              _("Please see the above error message for a hint."));
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        else if (reply == 1)
+          show_forced_problems = false;
+        else
+        {
+          do_commit = true;
+          show_forced_problems = false;
         }
       }
-      // install any pending source packages
-      if (!zypper.runtimeData().srcpkgs_to_install.empty())
-        install_src_pkgs(zypper);
-    }
-  }
+      // no dependency problems
+      else
+      {
+        do_commit = read_bool_answer(PROMPT_YN_INST_REMOVE_CONTINUE, _("Continue?"), true);
+        show_forced_problems = false;
+      }
 
-  if (retv < 0)
-    retv = ZYPPER_EXIT_OK;
-  else if (was_installed)
+      if (do_commit)
+      {
+        if (!confirm_licenses(zypper))
+          return;
+
+        if (retv >= 0)
+        {
+          try
+          {
+            gData.show_media_progress_hack = true;
+    
+            ostringstream s;
+            s << _("committing"); MIL << "committing...";
+    
+            ZYppCommitResult result;
+            if (copts.count("dry-run"))
+            {
+              s << " " << _("(dry run)") << endl; MIL << "(dry run)";
+              zypper.out().info(s.str(), Out::HIGH);
+    
+              result = God->commit(ZYppCommitPolicy().dryRun(true));
+            }
+            else
+            {
+              zypper.out().info(s.str(), Out::HIGH);
+    
+              result = God->commit(
+                ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
+    
+              commit_done = true;
+            }
+            
+    
+            MIL << endl << "DONE" << endl;
+    
+            gData.show_media_progress_hack = false;
+            
+            if (!result._errors.empty())
+              retv = ZYPPER_EXIT_ERR_ZYPP;
+    
+            s.clear(); s << result;
+            zypper.out().info(s.str(), Out::HIGH);
+          }
+          catch ( const media::MediaException & e ) {
+            ZYPP_CAUGHT(e);
+            zypper.out().error(e,
+                _("Problem downloading the package file from the repository:"),
+                _("Please see the above error message for a hint."));
+            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+            return;
+          }
+          catch ( zypp::repo::RepoException & e ) {
+            ZYPP_CAUGHT(e);
+            
+            RepoManager manager(zypper.globalOpts().rm_options );
+  
+            bool refresh_needed = false;
+            for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
+                      it != e.info().baseUrlsEnd(); ++it)
+              {
+                RepoManager::RefreshCheckStatus stat = manager.
+                              checkIfToRefreshMetadata(e.info(), *it,
+                              RepoManager::RefreshForced );
+                if ( stat == RepoManager::REFRESH_NEEDED )
+                {
+                  refresh_needed = true;
+                  break;
+                }
+              }
+            
+            std::string hint = _("Please see the above error message for a hint.");
+            if (refresh_needed)
+            {
+              hint = boost::str(format(
+                  // translators: the first %s is 'zypper refresh' and the second
+                  // is repo allias
+                  _("Repository '%s' is out of date. Running '%s' might help.")) %
+                  e.info().alias() % "zypper refresh" );
+            }
+            zypper.out().error(e,
+                _("Problem downloading the package file from the repository:"),
+                hint);
+            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+            return;
+          }
+          catch ( const zypp::FileCheckException & e ) {
+            ZYPP_CAUGHT(e);
+            zypper.out().error(e,
+                _("The package integrity check failed. This may be a problem"
+                " with the repository or media. Try one of the following:\n"
+                "\n"
+                "- just retry previous command\n"
+                "- refresh the repositories using 'zypper refresh'\n"
+                "- use another installation medium (if e.g. damaged)\n"
+                "- use another repository"));
+            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+            return;
+          }
+          catch ( const Exception & e ) {
+            ZYPP_CAUGHT(e);
+            zypper.out().error(e,
+                _("Problem occured during or after installation or removal of packages:"),
+                _("Please see the above error message for a hint."));
+            zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+          }
+        }
+        // install any pending source packages
+        if (!zypper.runtimeData().srcpkgs_to_install.empty())
+          install_src_pkgs(zypper);
+      }
+    }
+    // noting to do
+    else
+      break;
+  }
+  while (show_forced_problems);
+
+  if (commit_done)
   {
-    if (retv == ZYPPER_EXIT_INF_REBOOT_NEEDED)
+    if (zypper.exitCode() == ZYPPER_EXIT_INF_REBOOT_NEEDED)
       zypper.out().warning(
         _("One of installed patches requires reboot of"
-          " your machine. Reboot as soon as possible."));
-    else if (retv == ZYPPER_EXIT_INF_RESTART_NEEDED)
+          " your machine. Reboot as soon as possible."), Out::QUIET);
+    else if (zypper.exitCode() == ZYPPER_EXIT_INF_RESTART_NEEDED)
       zypper.out().warning(
         _("One of installed patches affects the package"
           " manager itself, thus it requires its restart before executing"
           " any further operations."),
-        Out::NORMAL, Out::TYPE_NORMAL);
+        Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
   }
-
-  if (zypper.exitCode() == ZYPPER_EXIT_OK) // don't overwrite previously set exit code
-    zypper.setExitCode(retv);
 }
 
 // TODO confirm licenses

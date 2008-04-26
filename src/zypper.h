@@ -7,9 +7,10 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/TriBool.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/RepoManager.h"
+#include "zypp/RepoManager.h" // for RepoManagerOptions 
 #include "zypp/SrcPackage.h"
 
 #include "output/Out.h"
@@ -81,7 +82,9 @@ struct CommandOptions
 struct RuntimeData
 {
   RuntimeData()
-    : patches_count(0), security_patches_count(0), show_media_progress_hack(false)
+    : patches_count(0), security_patches_count(0)
+    , show_media_progress_hack(false)
+    , force_resolution(zypp::indeterminate)
   {}
 
   std::list<zypp::RepoInfo> repos;
@@ -104,6 +107,9 @@ struct RuntimeData
   // all the way up from the media back-end through fetcher and downloader
   // into the RepoManager::refreshMetadata(), so that we get a combined percentage
   std::string raw_refresh_progress_label;
+
+  /** Used to override the command line option */
+  zypp::TriBool force_resolution;
 };
 
 class Zypper : private zypp::base::NonCopyable
