@@ -12,7 +12,12 @@ various searches, and more.
 
 .SH "COMMANDS"
 .LP
-zypper provides a number of \fBcommands\fR. Each command accepts the options listed in the GLOBAL OPTIONS section. In addition, many commands have specific options, which are listed in this section.
+zypper provides a number of \fBcommands\fR. Each command accepts the options
+listed in the GLOBAL OPTIONS section. These options must be specified
+\fIbefore\fR the command name. In addition, many commands have specific
+options, which are listed in this section. These command-specific options must
+be specified \fIafter\fR the name of the command and \fIbefore\fR any
+of the command arguments.
 
 .SS General Commands
 
@@ -26,7 +31,7 @@ End it by "exit", "quit", or Ctrl-D.
 .LP
 zypper works with several types of resource objects, called
 .BR resolvables .
-A resolvable is a package, patch, pattern, language, or a product.
+A resolvable is a package, patch, pattern, or a product.
 .LP
 .B package
 \- all RPM packages including patch and delta packages
