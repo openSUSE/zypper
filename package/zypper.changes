@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Apr 26 22:42:46 CEST 2008 - jkupec@suse.cz
+
+- added support for prompt help
+- added help for Continue? [y/n/p/?] prompt (bnc #381137)
+- r9837
+
+-------------------------------------------------------------------
 Sat Apr 26 16:18:34 CEST 2008 - jkupec@suse.cz
 
 - add 'p' option to the Continue? prompt to restart the solver with
