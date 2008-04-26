@@ -58,6 +58,8 @@ public:
                       const PromptOptions & poptions,
                       const std::string & startdesc = "");
 
+  virtual void promptHelp(const PromptOptions & poptions);
+
 protected:
   virtual bool mine(Type type);
 
