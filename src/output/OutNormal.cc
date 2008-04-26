@@ -235,19 +235,33 @@ void OutNormal::prompt(PromptId id,
                        const PromptOptions & poptions,
                        const std::string & startdesc)
 {
-  string option_str;
-  PromptOptions::OptionList::const_iterator it;
-  if ((it = poptions.options().begin()) != poptions.options().end())
-  {
-    option_str += (poptions.defaultOpt() == 0 ? zypp::str::toUpper(*it) : *it);
-    ++it;
-  }
-  for (unsigned int i = 1; it != poptions.options().end(); ++it, i++)
-    option_str += "/" + (poptions.defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
-
   if (startdesc.empty())
     cout << CLEARLN;
   else
     cout << startdesc << endl;
-  cout << prompt << " [" << option_str << "]: " << std::flush;
+  cout << prompt << " [" << poptions.optionString() << "]: " << std::flush;
+}
+
+void OutNormal::promptHelp(const PromptOptions & poptions)
+{
+  cout << endl;
+  if (poptions.helpEmpty())
+    cout << _("No help available for this prompt.") << endl;
+  else
+  {
+    unsigned int pos = 0;
+    for(PromptOptions::StrVector::const_iterator it = poptions.options().begin();
+        it != poptions.options().end(); ++it, ++pos)
+    {
+      cout << *it << " - ";
+      const string & hs_r = poptions.optionHelp(pos); 
+      if (hs_r.empty())
+        cout << "(" << _("no help available for this option") << ")";
+      else
+        cout << hs_r;
+      cout << endl;
+    }
+  }
+
+  cout << endl << "[" << poptions.optionString() << "]: " << std::flush;
 }

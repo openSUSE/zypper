@@ -225,6 +225,8 @@ public:
                       const std::string & prompt,
                       const PromptOptions & poptions,
                       const std::string & startdesc = "") = 0;
+  
+  virtual void promptHelp(const PromptOptions & poptions) = 0;
 
 public:
   /** Get current verbosity. */

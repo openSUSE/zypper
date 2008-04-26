@@ -197,15 +197,21 @@ void OutXML::prompt(PromptId id,
   cout << "<text>" << xml_encode(prompt) << "</text>" << endl;
 
   unsigned int i = 0;
-  for (PromptOptions::OptionList::const_iterator it = poptions.options().begin();
-       it != poptions.options().end(); ++it, i++)
+  for (PromptOptions::StrVector::const_iterator it = poptions.options().begin();
+       it != poptions.options().end(); ++it, ++i)
   {
     string option = *it;
     cout << "<option";
     if (poptions.defaultOpt() == i)
       cout << " default=\"1\"";
     cout << " value=\"" << xml_encode(option) << "\"";
+    cout << " desc=\"" << xml_encode(poptions.optionHelp(i)) << "\"";
     cout << "/>" << endl;
   }
   cout << "</prompt>" << endl;
+}
+
+void OutXML::promptHelp(const PromptOptions & poptions)
+{
+  // nothing to do here
 }

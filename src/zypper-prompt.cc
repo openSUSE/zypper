@@ -40,6 +40,44 @@ void PromptOptions::setOptions(const std::string & option_str, unsigned int defa
     _default = default_opt; 
 }
 
+const string PromptOptions::optionString() const
+{
+  string option_str;
+  StrVector::const_iterator it;
+  if ((it = options().begin()) != options().end())
+  {
+    option_str += (defaultOpt() == 0 ? zypp::str::toUpper(*it) : *it);
+    ++it;
+  }
+  for (unsigned int i = 1; it != options().end(); ++it, i++)
+    option_str += "/" + (defaultOpt() == i ? zypp::str::toUpper(*it) : *it);
+  
+  if (!_opt_help.empty())
+    option_str += "/?";
+
+  return option_str;
+}
+
+void PromptOptions::setOptionHelp(unsigned int opt, const std::string & help_str)
+{
+  if (help_str.empty())
+    return;
+
+  if (opt >= _options.size())
+  {
+    WAR << "attempt to set option help for non-existing option."
+        << " text: " << help_str << endl;
+    return;
+  }
+
+  if (opt >= _opt_help.capacity())
+    _opt_help.reserve(_options.size());
+  if (opt >= _opt_help.size())
+    _opt_help.resize(_options.size());
+
+  _opt_help[opt] = help_str;
+}
+
 // ----------------------------------------------------------------------------
 
 const std::string ari_mapping[] = { string(_("abort")),string(_("retry")),string(_("ignore"))};
@@ -54,7 +92,7 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
     default_action = 0;
   }
 
-  out.info (_("Abort,retry, ignore?\n"));
+  out.info (_("Abort, retry, ignore?\n"));
   
   //FIXME XML output
   cout << endl;
@@ -162,6 +200,12 @@ unsigned int get_prompt_reply(Zypper & zypper,
     if (reply.empty())
       break;
 
+    if (reply == "?")
+    {
+      zypper.out().promptHelp(poptions);
+      continue;
+    }
+
     if (is_yn_prompt && rpmatch(reply.c_str()) >= 0)
     {
       if (rpmatch(reply.c_str()))
@@ -172,12 +216,12 @@ unsigned int get_prompt_reply(Zypper & zypper,
     }
     else
     {
+      DBG << " reply: " << reply << " (" << zypp::str::toLower(reply) << " lowercase)" << endl;
       bool got_valid_reply = false;
       for (unsigned int i = 0; i < poptions.options().size(); i++)
       {
         DBG << "index: " << i << " option: "
-            << poptions.options()[i] << " reply: " << reply
-            << " (" << zypp::str::toLower(reply) << " lowercase)" << endl; 
+            << poptions.options()[i] << endl; 
         if (poptions.options()[i] == zypp::str::toLower(reply))
         {
           reply_int = i;

@@ -2208,8 +2208,11 @@ void solve_and_commit (Zypper & zypper)
         // after install/update command summary if there will be any package
         // to-be-removed automatically to show why, if asked.
         popts.setOptions(_("y/n/p"), 0);
+        popts.setOptionHelp(0, _("Accept the summary and proceed with installation/removal of packages."));
+        popts.setOptionHelp(1, _("Cancel the operation."));
+        popts.setOptionHelp(2, _("Restart solver in no-force-resolution mode in order to show dependency problems."));
         // translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
-        string prompt_text = _("Continue? (Choose 'p' to show dependency problems.)");
+        string prompt_text = _("Continue?");
         zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
         unsigned int reply =
           get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
