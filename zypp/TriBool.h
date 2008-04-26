@@ -12,6 +12,7 @@
 #ifndef ZYPP_TRIBOOL_H
 #define ZYPP_TRIBOOL_H
 
+#include <iosfwd>
 #include <boost/logic/tribool.hpp>
 
 ///////////////////////////////////////////////////////////////////
@@ -33,6 +34,18 @@ namespace zypp
   typedef boost::logic::tribool TriBool;
   using   boost::logic::tribool;
   using   boost::logic::indeterminate;
+
+  /** \relates TriBool stream output */
+  inline std::ostream & operator<<(std::ostream & s, const TriBool & obj)
+  {
+    if (obj == indeterminate)
+      s << "indeterminate";
+    else if (obj)
+      s << "true";
+    else
+      s << "false";
+    return s;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
