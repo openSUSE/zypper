@@ -2184,8 +2184,8 @@ void solve_and_commit (Zypper & zypper)
         return;
       }
     }
-  
-  
+
+
     // returns SUMMARY_*
     int retv = summary(zypper);
     if (retv != SUMMARY_NOTHING_TO_DO || !zypper.runtimeData().srcpkgs_to_install.empty())
@@ -2208,19 +2208,22 @@ void solve_and_commit (Zypper & zypper)
         // after install/update command summary if there will be any package
         // to-be-removed automatically to show why, if asked.
         popts.setOptions(_("y/n/p"), 0);
+        // translators: help text for 'y' option in the y/n/p prompt
         popts.setOptionHelp(0, _("Accept the summary and proceed with installation/removal of packages."));
+        // translators: help text for 'n' option in the y/n/p prompt
         popts.setOptionHelp(1, _("Cancel the operation."));
+        // translators: help text for 'p' option in the y/n/p prompt
         popts.setOptionHelp(2, _("Restart solver in no-force-resolution mode in order to show dependency problems."));
-        // translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
         string prompt_text = _("Continue?");
         zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
         unsigned int reply =
           get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
-        
+
         if (reply == 2)
         {
           // one more solver solver run with force-resoltion off
           zypper.runtimeData().force_resolution = false;
+          // undo solver changes before retrying
           God->resolver()->undo();
           continue;
         }
@@ -2270,12 +2273,12 @@ void solve_and_commit (Zypper & zypper)
     
               commit_done = true;
             }
-            
-    
+
+
             MIL << endl << "DONE" << endl;
-    
+
             gData.show_media_progress_hack = false;
-            
+
             if (!result._errors.empty())
               retv = ZYPPER_EXIT_ERR_ZYPP;
     

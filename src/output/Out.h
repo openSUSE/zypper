@@ -225,7 +225,11 @@ public:
                       const std::string & prompt,
                       const PromptOptions & poptions,
                       const std::string & startdesc = "") = 0;
-  
+
+  /**
+   * Print help for prompt, if available.
+   * This method should be called after '?' prompt option has been entered.
+   */
   virtual void promptHelp(const PromptOptions & poptions) = 0;
 
 public:

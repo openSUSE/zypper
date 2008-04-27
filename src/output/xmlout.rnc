@@ -66,7 +66,8 @@ prompt-element =
     element text { text },
     element option {
       attribute default { xsd:boolean }?,
-      attribute value { xsd:string }
+      attribute value { xsd:string },
+      attribute desc { xsd:string }?
     }*
   }
 
