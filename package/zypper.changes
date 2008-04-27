@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sun Apr 27 17:06:37 CEST 2008 - jkupec@suse.cz
+
+- fixed malformed repo metadata download progress output
+  (bnc #377834)
+- unify progress report output (bnc #304277)
+- fix incorrect status 'done' report on error (bnc #377995)
+- r9848
+
+-------------------------------------------------------------------
 Sun Apr 27 15:59:15 CEST 2008 - jkupec@suse.cz
 
 - show also vendor changes in the install summary (bnc #381772)
