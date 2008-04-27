@@ -1145,11 +1145,11 @@ static int summary(Zypper & zypper)
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
 
         // set return value to 'reboot needed'
-        if (patch->reboot_needed())
+        if (patch->rebootSuggested())
           zypper.setExitCode(ZYPPER_EXIT_INF_REBOOT_NEEDED);
         // set return value to 'restart needed' (restart of package manager)
         // however, 'reboot needed' takes precedence
-        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->affects_pkg_manager())
+        else if (zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && patch->restartSuggested())
           zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
       }
 
@@ -1538,7 +1538,7 @@ void patch_check ()
 
 bool xml_list_patches ()
 {
-  // returns true if affects_pkg_manager patches are availble
+  // returns true if restartSuggested() patches are availble
 
   bool pkg_mgr_available = false;
 
@@ -1556,7 +1556,7 @@ bool xml_list_patches ()
     {
       Patch::constPtr patch = asKind<Patch>(res);
 
-      if (patch->affects_pkg_manager())
+      if (patch->restartSuggested())
 	pkg_mgr_available = true;
     }
   }
@@ -1575,15 +1575,15 @@ bool xml_list_patches ()
     if ( it->isBroken())
     {
       Patch::constPtr patch = asKind<Patch>(res);
-      if ((pkg_mgr_available && patch->affects_pkg_manager())  ||
+      if ((pkg_mgr_available && patch->restartSuggested())  ||
 	!pkg_mgr_available )
       {
         cout << " <update ";
         cout << "name=\"" << res->name () << "\" ";
         cout << "edition=\""  << res->edition ().asString() << "\" ";
         cout << "category=\"" <<  patch->category() << "\" ";
-        cout << "pkgmanager=\"" << (patch->affects_pkg_manager() ? "true" : "false") << "\" ";
-        cout << "restart=\"" << (patch->reboot_needed() ? "true" : "false") << "\" ";
+        cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
+        cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
         cout << "interactive=\"" << (patch->interactive() ? "true" : "false") << "\" ";
         cout << "kind=\"patch\"";
         cout << ">" << endl;
@@ -1614,10 +1614,10 @@ bool xml_list_patches ()
 
 // ----------------------------------------------------------------------------
 
-static void list_patch_updates(Zypper & zypper, bool best_effort)
+static void list_patch_updates(Zypper & zypper)
 {
   Table tbl;
-  Table pm_tbl;	// only those that affect packagemanager: they have priority
+  Table pm_tbl;	// only those that affect packagemanager (restartSuggested()), they have priority
   TableHeader th;
   unsigned cols;
 
@@ -1646,7 +1646,7 @@ static void list_patch_updates(Zypper & zypper, bool best_effort)
         tr << patch->category();
         tr <<  _("Needed");        
 
-        if (patch->affects_pkg_manager ())
+        if (patch->restartSuggested ())
           pm_tbl << tr;
         else
           tbl << tr;
@@ -1803,7 +1803,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     {
       zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
-      list_patch_updates(zypper, best_effort );
+      list_patch_updates(zypper);
     }
     localkinds.erase(it);
   }
@@ -1904,7 +1904,7 @@ mark_item_install (const PoolItem & pi)
 //   use LookForArchUpdate as callback handler in order to cope with
 //   multiple installed resolvables of the same name.
 //   LookForArchUpdate will return the one with the highest edition.
-
+/*
 static PoolItem
 findInstalledItem( PoolItem item )
 {
@@ -1919,13 +1919,14 @@ findInstalledItem( PoolItem item )
   _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
   return info.best;
 }
-
+*/
 
 // require update of installed item
 //   The PoolItem passed to require_item_update() is the installed resolvable
 //   to which an update candidate is guaranteed to exist.
 //
 // may be useful as a functor
+/*
 static bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
@@ -1944,7 +1945,7 @@ static bool require_item_update (const PoolItem& pi) {
 
   return true;
 }
-
+*/
 // ----------------------------------------------------------------------------
 
 void xml_list_updates(const ResKindSet & kinds)
@@ -1982,7 +1983,7 @@ mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affect
   Patch::constPtr patch = asKind<Patch>(pi.resolvable());
   if (pi.isRelevant() && ! pi.isSatisfied())
   {
-    if (ignore_affects_pm || patch->affects_pkg_manager ())
+    if (ignore_affects_pm || patch->restartSuggested())
     {
       // #221476
       if (skip_interactive
@@ -2013,7 +2014,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
 {
   DBG << "going to mark patches to install" << endl;
 
-  // search twice: if there are none with affects_pkg_manager, retry on all
+  // search twice: if there are none with restartSuggested(), retry on all
   bool any_marked = false;
   for(unsigned ignore_affects_pm = 0;
       !any_marked && ignore_affects_pm < 2; ++ignore_affects_pm)
