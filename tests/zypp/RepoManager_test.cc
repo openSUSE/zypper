@@ -117,9 +117,9 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK_MESSAGE( ref_stat== RepoManager::REPO_UP_TO_DATE || ref_stat == RepoManager::REPO_CHECK_DELAYED, "Metadata should be up to date" );
 
    // the solv file should exists now
-  Pathname base = (opts.repoCachePath + repo.alias());
-  Pathname solvfile = base.extend(".solv");
-  Pathname cookiefile = base.extend(".cookie");
+  Pathname base = (opts.repoCachePath / "solv" / repo.alias());
+  Pathname solvfile = base / "solv";
+  Pathname cookiefile = base / "cookie";
   BOOST_CHECK_MESSAGE( PathInfo(solvfile).isExist(), "Solv file is created after caching: " + solvfile.asString());
   BOOST_CHECK_MESSAGE( PathInfo(cookiefile).isExist(), "Cookie file is created after caching: " + cookiefile.asString());
 

@@ -203,6 +203,12 @@ namespace zypp
     return opt.repoPackagesCachePath / info.escaped_alias();
   }
 
+  static Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
+  {
+    assert_alias(info);
+    return opt.repoCachePath / "solv" / info.escaped_alias();
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManager::Impl
@@ -678,9 +684,9 @@ namespace zypp
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
     filesystem::assert_dir(_pimpl->options.repoCachePath);
-    Pathname base = _pimpl->options.repoCachePath + info.escaped_alias();
-    Pathname solvfile = base.extend(".solv");
-
+    Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
+    filesystem::assert_dir(base);
+    Pathname solvfile = base / "solv";
 
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
@@ -810,7 +816,7 @@ namespace zypp
 #endif
     // update timestamp and checksum
     //store.updateRepositoryStatus(id, raw_metadata_status);
-    setCacheStatus(info.escaped_alias(), raw_metadata_status);
+    setCacheStatus(info, raw_metadata_status);
     MIL << "Commit cache.." << endl;
     //store.commit();
     //progress.toMax();
@@ -873,9 +879,7 @@ namespace zypp
     progress.sendTo(progressrcv);
     progress.toMin();
 
-    unlink (_pimpl->options.repoCachePath / (info.escaped_alias() + ".solv"));
-    progress.set(99);
-    unlink (_pimpl->options.repoCachePath / (info.escaped_alias() + ".cookie"));
+    filesystem::recursive_rmdir(solv_path_for_repoinfo(_pimpl->options, info));
 
     progress.toMax();
   }
@@ -890,24 +894,22 @@ namespace zypp
 
   bool RepoManager::isCached( const RepoInfo &info ) const
   {
-    Pathname name = _pimpl->options.repoCachePath;
-    return PathInfo(name + Pathname(info.escaped_alias()).extend(".solv")).isExist();
+    return PathInfo(solv_path_for_repoinfo( _pimpl->options, info ) / "solv").isExist();
   }
 
   RepoStatus RepoManager::cacheStatus( const RepoInfo &info ) const
   {
 
-    Pathname base = _pimpl->options.repoCachePath + info.escaped_alias();
-    Pathname cookiefile = base.extend(".cookie");
+    Pathname cookiefile = solv_path_for_repoinfo(_pimpl->options, info) / "cookie";
 
     return RepoStatus::fromCookieFile(cookiefile);
   }
 
-  void RepoManager::setCacheStatus( const string &alias, const RepoStatus &status )
+  void RepoManager::setCacheStatus( const RepoInfo &info, const RepoStatus &status )
   {
-    filesystem::assert_dir(_pimpl->options.repoCachePath);
-    Pathname base = _pimpl->options.repoCachePath + alias;
-    Pathname cookiefile = base.extend(".cookie");
+    Pathname base = solv_path_for_repoinfo(_pimpl->options, info);
+    filesystem::assert_dir(base);
+    Pathname cookiefile = base / "cookie";
 
     status.saveToCookieFile(cookiefile);
   }
@@ -916,8 +918,7 @@ namespace zypp
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
     assert_alias(info);
-    string alias = info.escaped_alias();
-    Pathname solvfile = (_pimpl->options.repoCachePath / alias).extend(".solv");
+    Pathname solvfile = solv_path_for_repoinfo(_pimpl->options, info) / "solv";
 
     if ( ! PathInfo(solvfile).isExist() )
       ZYPP_THROW(RepoNotCachedException(info));
