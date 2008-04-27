@@ -112,7 +112,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
     if (do_refresh)
     {
       plabel = str::form(
-          _("Downloading repository '%s' metadata."), repo.name().c_str());
+          _("Downloading repository '%s' metadata"), repo.name().c_str());
       zypper.out().progressStart("raw-refresh", plabel, true);
 
       manager.refreshMetadata(repo,
