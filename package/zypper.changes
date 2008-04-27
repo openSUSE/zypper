@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Sun Apr 27 15:59:15 CEST 2008 - jkupec@suse.cz
+
+- show also vendor changes in the install summary (bnc #381772)
+- the lists in the summary don't have to be mutually exclusive
+  only upgrade/downgrade/install/remove/reinstall lists must be.
+  The vendor/arch change lists then contains packages from the
+  above.
+- r9841
+
+-------------------------------------------------------------------
 Sat Apr 26 22:42:46 CEST 2008 - jkupec@suse.cz
 
 - added support for prompt help
