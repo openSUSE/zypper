@@ -85,14 +85,17 @@ static void display_progress ( const std::string & id, const string & s, int per
 
   if (isatty(STDOUT_FILENO))
   {
-    cout << CLEARLN << cursor++ << " " << s;
+    cout << CLEARLN << s << " [";
     // dont display percents if invalid
     if (percent >= 0 && percent <= 100)
-      cout << " [" << percent << "%]";
-    cout << std::flush;
+      cout << percent << "%";
+    else
+      cout << ++cursor;
+    cout << "]";
   }
   else
-    cout << '.' << std::flush;
+    cout << '.';
+  cout << std::flush;
 }
 
 // ----------------------------------------------------------------------------
@@ -103,14 +106,11 @@ static void display_tick ( const std::string & id, const string & s)
 
   if (isatty(STDOUT_FILENO))
   {
-    cursor++;
-    cout << CLEARLN << cursor << " " << s;
+    cout << CLEARLN << s << " [" << ++cursor << "]";
     cout << std::flush;
   }
   else
-  {
-    cout << '.';
-  }
+    cout << '.' << std::flush;
 }
 
 // ----------------------------------------------------------------------------
@@ -123,8 +123,8 @@ void OutNormal::progressStart(const std::string & id,
     return;
 
   if (!isatty(STDOUT_FILENO))
-    cout << label << ' ';  
-  
+    cout << label << " [";
+
   if (is_tick)
     display_tick(id, label);
   else
@@ -147,11 +147,11 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
   if (progressFilter())
     return;
 
-  static AliveCursor cursor;
   if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << cursor.done() << " " << label << std::flush << endl;
+    cout << CLEARLN << label << " [" << _("done") << "]";
   else
-   cout << cursor.done() << std::flush << endl;
+   cout << "]";
+  cout << endl << std::flush;
 }
 
 // progress with download rate
@@ -162,7 +162,7 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
   static AliveCursor cursor;
   if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << cursor << " " << _("Downloading:") << " ";
+    cout << CLEARLN << ++cursor << " " << _("Downloading:") << " ";
   else
     cout << _("Downloading:") << " ";
   if (verbosity() == DEBUG)
@@ -188,8 +188,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     return;
   }
 
-  static AliveCursor cursor;
-  cout << CLEARLN << cursor++ << " " << _("Downloading:") << " ";
+  cout << CLEARLN << _("Downloading:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
@@ -213,10 +212,9 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
   if (verbosity() < NORMAL)
     return;
 
-  static AliveCursor cursor;
   if (isatty(STDOUT_FILENO))
   {
-    cout << CLEARLN << cursor.done() << " " << _("Downloading:") << " ";
+    cout << CLEARLN << _("Downloading:") << " ";
     if (verbosity() == DEBUG)
       cout << uri; //! \todo shorten to fit the width of the terminal
     else
