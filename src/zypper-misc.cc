@@ -426,6 +426,7 @@ void install_remove(Zypper & zypper,
 
   string str, arch, repo;
   bool by_capability;
+  const ResPool & pool = God->pool();
   for_(it, argsnew.begin(), argsnew.end())
   {
     str = *it; arch.clear(); repo.clear();
@@ -471,11 +472,10 @@ void install_remove(Zypper & zypper,
     if (!by_capability && str.find('-') != string::npos)
     {
       // try to find the original string first as name
-      // to avoid treating foo-3 as foo=3 which could exist
-      Capability cap = safe_parse_cap (zypper, str, kind);
-      sat::WhatProvides q(cap);
+      // search by name, not in whatprovides, since there can be provider even
+      // for cracklib-dict=small
       // continue only if nothing has been found this way
-      if (q.empty())
+      if (pool.byIdentBegin(kind, str) == pool.byIdentEnd(kind, str))
       {
         // try to replace '-' for '=' from right to the left and check
         // whether there is something providing such capability
@@ -484,19 +484,24 @@ void install_remove(Zypper & zypper,
         {
           string trythis = str;
           trythis.replace(pos, 1, 1, '=');
-  
-          DBG << "trying: " << trythis << endl;
-  
+          string tryver = str.substr(pos + 1, str.size() - 1);
+
+          DBG << "trying: " << trythis << " edition: " << tryver << endl;
+
           Capability cap = safe_parse_cap (zypper, trythis, kind);
           sat::WhatProvides q(cap);
-  
-          if (!q.empty())
+          for_(sit, q.begin(), q.end())
           {
-            str = trythis;
-            by_capability = true;
-            DBG << str << "might be what we wanted" << endl;
-            break;
+            if (sit->edition().match(tryver) == 0)
+            {
+              str = trythis;
+              by_capability = true;
+              DBG << str << "might be what we wanted" << endl;
+              break;
+            }
           }
+          if (by_capability)
+            break;
           --pos;
         }
       }
@@ -535,7 +540,7 @@ void install_remove(Zypper & zypper,
       continue;
     }
 
-    // is the provider alrady installed?
+    // is the provider already installed?
     bool installed = false;
     for_(solvit, q.poolItemBegin(), q.poolItemEnd())
       if (solvit->status().isInstalled())
