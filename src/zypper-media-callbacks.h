@@ -176,7 +176,8 @@ namespace ZmartRecipients
       if (_be_quiet)
         return;
 
-      Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg);
+      Zypper::instance()->out().dwnldProgressEnd(
+          uri, _last_drate_avg, error != NO_ERROR);
     }
 
   private:
