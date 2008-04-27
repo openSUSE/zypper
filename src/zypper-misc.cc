@@ -826,9 +826,19 @@ static void show_summary_resolvable_list(const string & label,
     if (out.verbosity() > Out::NORMAL)
     {
       s << "-" << res->edition() << "." << res->arch();
-      // plus repo providing this package
-      if (!res->repoInfo().alias().empty())
-        s << "  (" << res->repoInfo().name() << ")";
+
+      const string & reponame =  res->repoInfo().name();
+      if (!res->vendor().empty() || !reponame.empty())
+      {
+        s << "  (";
+        // plus repo providing this package
+        if (!reponame.empty())
+          s << reponame;
+        // plus package vendor
+        if (!res->vendor().empty())
+          s << (reponame.empty() ? "" : ", ") << res->vendor();
+        s << ")";
+      }
       // new line after each package in the verbose mode
       s << endl;
     }
@@ -847,7 +857,8 @@ typedef enum
   TO_INSTALL,
   TO_REINSTALL,
   TO_REMOVE,
-  TO_CHANGE_ARCH
+  TO_CHANGE_ARCH,
+  TO_CHANGE_VENDOR
 } SummaryType;
 
 static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
@@ -871,6 +882,9 @@ static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
     break;
   case TO_CHANGE_ARCH:
     cout << "<" << (end ? "/" : "") << "to-change-arch>" << endl;
+    break;
+  case TO_CHANGE_VENDOR:
+    cout << "<" << (end ? "/" : "") << "to-change-vendor>" << endl;
     break;
   }
 }
@@ -1061,6 +1075,28 @@ static void show_summary_of_type(Zypper & zypper,
           "The following products are going to change architecture:",
           it->second.size());
       break;
+    case TO_CHANGE_VENDOR:
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is going to change vendor:",
+          "The following packages are going to change vendor:",
+          it->second.size());
+      else if (it->first == ResKind::patch)
+        title = _PL(
+          "The following patch is going to change vendor:",
+          "The following patches are going to change vendor:",
+          it->second.size());
+      else if (it->first == ResKind::pattern)
+        title = _PL(
+          "The following pattern is going to change vendor:",
+          "The following patterns are going to change vendor:",
+          it->second.size());
+      else if (it->first == ResKind::product)
+        title = _PL(
+          "The following product is going to change vendor:",
+          "The following products are going to change vendor:",
+          it->second.size());
+      break;
     }
 
     show_summary_resolvable_list(title, it, zypper.out());
@@ -1150,6 +1186,7 @@ static int summary(Zypper & zypper)
   KindToResObjectSet toreinstall;
   KindToResObjectSet toremove;
   KindToResObjectSet tochangearch;
+  KindToResObjectSet tochangevendor;
 
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   ByteCount download_size, new_installed_size;
@@ -1169,23 +1206,32 @@ static int summary(Zypper & zypper)
       {
         if (res->name() == (*rmit)->name())
         {
+          // upgrade
           if (res->edition() > (*rmit)->edition())
           {
             toupgrade[res->kind()].insert(res);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(res);
+            if (res->vendor() != (*rmit)->vendor())
+              tochangevendor[res->kind()].insert(res);
           }
+          // reinstall
           else if (res->edition() == (*rmit)->edition())
           {
             toreinstall[res->kind()].insert(res);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(res);
+            if (res->vendor() != (*rmit)->vendor())
+              tochangevendor[res->kind()].insert(res);
           }
+          // downgrade
           else
           {
             todowngrade[res->kind()].insert(res);
             if (res->arch() != (*rmit)->arch())
               tochangearch[res->kind()].insert(res);
+            if (res->vendor() != (*rmit)->vendor())
+              tochangevendor[res->kind()].insert(res);
           }
 
           new_installed_size += res->installsize() - (*rmit)->installsize();
@@ -1251,6 +1297,7 @@ static int summary(Zypper & zypper)
   show_summary_of_type(zypper, TO_REINSTALL, toreinstall);
   show_summary_of_type(zypper, TO_REMOVE, toremove);
   show_summary_of_type(zypper, TO_CHANGE_ARCH, tochangearch);
+  show_summary_of_type(zypper, TO_CHANGE_VENDOR, tochangevendor);
 
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
