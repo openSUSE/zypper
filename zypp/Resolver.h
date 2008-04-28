@@ -29,13 +29,20 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
 
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Resolver
   //
-  /** Resolver interface.
-  */
+  /**
+   * Dependency resolver interface.
+   *
+   * To resolve dependencies after making changes to the \ref ResPool (using
+   * \ref addRequire(), \ref addConflict(), \ref applySolutions(), or by making
+   * the changes directly on the \ref PoolItem status objects,
+   * call the \ref resolvePool() method.
+   * Do not use this method after \ref verifySystem(), \ref doUpdate(), or
+   * \ref doUpgrade().
+   */
   class Resolver : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
