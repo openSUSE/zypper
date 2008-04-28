@@ -402,11 +402,13 @@ void install_remove(Zypper & zypper,
   bool force_by_capability = zypper.cOpts().count("capability");
   bool force_by_name = zypper.cOpts().count("name");
   bool force = zypper.cOpts().count("force");
+  if (force)
+    force_by_name = true;
 
   if (force_by_capability && force_by_name)
   {
     zypper.out().error(boost::str(
-      format(_("%s contradicts %s")) % "--capability" % "--name"));
+      format(_("%s contradicts %s")) % "--capability" % (force? "--force" : "--name")));
     
     zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     ZYPP_THROW(ExitRequestException());
@@ -446,7 +448,6 @@ void install_remove(Zypper & zypper,
 
     string::size_type pos;
 
-    //! \todo force repo with ':'
     if ((pos = str.rfind(':')) != string::npos)
     {
       repo = str.substr(0, pos);
