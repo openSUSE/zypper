@@ -217,13 +217,13 @@ void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category: ") << patch->category() << endl;
   cout << _("Created On: ") << patch->timestamp().asString() << endl;
-  cout << _("Reboot Required: ") << (patch->reboot_needed() ? _("Yes") : _("No")) << endl;
+  cout << _("Reboot Required: ") << (patch->rebootSuggested() ? _("Yes") : _("No")) << endl;
 
   if (!zypper.globalOpts().is_rug_compatible)
     cout << _("Package Manager Restart Required") << ": ";
   else
     cout << _("Restart Required: ");
-  cout << (patch->affects_pkg_manager() ? _("Yes") : _("No")) << endl;
+  cout << (patch->restartSuggested() ? _("Yes") : _("No")) << endl;
 
   cout << _("Interactive: ") << (patch->interactive() ? _("Yes") : _("No")) << endl;
 

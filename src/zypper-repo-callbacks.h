@@ -186,7 +186,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
 
   // implementation not needed prehaps - the media backend reports the download progress
   /*
-  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr*//*, Error error, const std::string & reason )
+  virtual void finish( zypp::Resolvable::constPtr **resolvable_ptr**, Error error, const std::string & reason )
   {
     display_done ("download-resolvable", cout_v);
     display_error (error, reason);
