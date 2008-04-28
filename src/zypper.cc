@@ -2898,12 +2898,10 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
-    zypp::UpgradeStatistics opt_stats;
-    God->resolver()->doUpgrade(opt_stats);
 
     solve_and_commit(*this);
 
-    break; 
+    break;
   }
 
   // -----------------------------( info )------------------------------------

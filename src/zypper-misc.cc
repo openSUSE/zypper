@@ -1888,6 +1888,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 }
 
 // may be useful as a functor
+/*
 static bool
 mark_item_install (const PoolItem & pi)
 {
@@ -1896,7 +1897,7 @@ mark_item_install (const PoolItem & pi)
     ERR << "Marking " << pi << "for installation failed" << endl;
   return result;
 }
-
+*/
 // ----------------------------------------------------------------------------
 // best-effort update
 
@@ -1977,7 +1978,7 @@ void xml_list_updates(const ResKindSet & kinds)
   }
 }
 
-
+/*
 static bool
 mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affects_pm)
 {
@@ -2007,9 +2008,9 @@ mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affect
 
   return false;
 }
-
+*/
 // ----------------------------------------------------------------------------
-
+/*
 static void
 mark_patch_updates( Zypper & zypper, bool skip_interactive )
 {
@@ -2063,24 +2064,21 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
     }
   }
 }
-
+*/
 // ----------------------------------------------------------------------------
 
 void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
   ResKindSet localkinds = kinds;
 
-  ResKindSet::iterator it;
-  it = localkinds.find(ResKind::patch);
-  if(it != localkinds.end()) // patches wanted
-  {
-    mark_patch_updates(zypper, skip_interactive);
-    localkinds.erase(it);
-  }
-
   if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
   {
-    God->resolver()->doUpdate(); //! \todo what about patch updates?
+    // this will do a complete pppp update as far as possible
+    God->resolver()->doUpdate();
+    // no need to call Resolver::resolvePool() afterwards
+    zypper.runtimeData().solve_before_commit = false;
+
+    //! \todo update specified types only. Or should we drop this option? 
 
     /*
     Candidates candidates;
@@ -2160,23 +2158,36 @@ void solve_and_commit (Zypper & zypper)
   bool commit_done = false;
   do
   {
-    MIL << "solving..." << endl;
-  
-    while (true)
+    if (zypper.runtimeData().solve_before_commit) // doUpdate was called, no need for solving
     {
-      bool success;
-      if (zypper.command() == ZypperCommand::VERIFY)
-        success = verify(zypper);
-      else
-        success = resolve(zypper);
-      if (success)
-        break;
+      MIL << "solving..." << endl;
 
-      success = show_problems(zypper);
-      if (! success) {
-        // TODO cancel transaction?
-        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
-        return;
+      while (true)
+      {
+        bool success;
+        if (zypper.command() == ZypperCommand::VERIFY)
+          success = verify(zypper);
+        else if (zypper.command() == ZypperCommand::DIST_UPGRADE)
+        {
+          zypp::UpgradeStatistics opt_stats;
+          //! \todo set success to doUpgrade return value if there are problems
+          success = false;
+          God->resolver()->doUpgrade(opt_stats);
+          //! \todo remove this hack once the doUpgrade returns bool
+          if (God->resolver()->problems().empty())
+            break;
+        }
+        else
+          success = resolve(zypper);
+        if (success)
+          break;
+
+        success = show_problems(zypper);
+        if (! success) {
+          // TODO cancel transaction?
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
+          return;
+        }
       }
     }
 

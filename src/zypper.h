@@ -85,6 +85,7 @@ struct RuntimeData
     : patches_count(0), security_patches_count(0)
     , show_media_progress_hack(false)
     , force_resolution(zypp::indeterminate)
+    , solve_before_commit(true)
   {}
 
   std::list<zypp::RepoInfo> repos;
@@ -110,6 +111,12 @@ struct RuntimeData
 
   /** Used to override the command line option */
   zypp::TriBool force_resolution;
+
+  /**
+   * Set to <tt>false</tt> to avoid calling of the solver
+   * in \ref solve_and_commit(). Needed after Resolver::doUpdate()
+   */
+  bool solve_before_commit;
 };
 
 class Zypper : private zypp::base::NonCopyable
