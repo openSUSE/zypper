@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 28 11:15:47 CEST 2008 - jkupec@suse.cz
+
+- ostream operator<<(ostream,TriBool) added
+- r9833
+
+-------------------------------------------------------------------
 Fri Apr 25 16:12:12 CEST 2008 - ma@suse.de
 
 - Prevent target::unload from creating a system repo in order 
