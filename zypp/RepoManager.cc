@@ -684,10 +684,6 @@ namespace zypp
     Pathname rawpath = rawcache_path_for_repoinfo(_pimpl->options, info);
 
     filesystem::assert_dir(_pimpl->options.repoCachePath);
-    Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
-    filesystem::assert_dir(base);
-    Pathname solvfile = base / "solv";
-
     RepoStatus raw_metadata_status = metadataStatus(info);
     if ( raw_metadata_status.empty() )
     {
@@ -731,6 +727,11 @@ namespace zypp
     }
 
     MIL << info.alias() << " building cache..." << endl;
+
+    Pathname base = solv_path_for_repoinfo( _pimpl->options, info);
+    filesystem::assert_dir(base);
+    Pathname solvfile = base / "solv";
+
     // do we have type?
     repo::RepoType repokind = info.type();
 
