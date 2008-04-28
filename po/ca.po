@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
 "PO-Revision-Date: 2007-02-26 19:15+0100\n"
 "Last-Translator: Olga López\n"
 "Language-Team: Catalan\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../zypp/sat/SATResolver.cc:757
+#: ../zypp/solver/detail/SATResolver.cc:933
 #, fuzzy
 msgid ""
 "\n"
@@ -29,61 +29,49 @@ msgstr "No hi ha proveïdors instal·lables de %s"
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:709
+#: ../zypp/solver/detail/SATResolver.cc:880
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s entra en conflicte amb %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "S'ha produït un error en instal·lar %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "%s s'ha instal·lat correctament"
 
-#: ../zypp/sat/SATResolver.cc:695
+#: ../zypp/solver/detail/SATResolver.cc:866
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "no instal·lat"
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s desactualitza %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, fuzzy, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s proporciona aquesta dependència però canviaria l'arquitectura de l'element instal·lat"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, fuzzy, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s proporciona aquesta dependència però canviaria l'arquitectura de l'element instal·lat"
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "S'ha produït un error en suprimir %s"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "%s s'ha suprimit correctament"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -108,12 +96,12 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "S'estan afegint recursos"
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "Sortida addicional de l'rpm:"
 
@@ -344,7 +332,7 @@ msgstr "Àustria"
 msgid "Austronesian (Other)"
 msgstr "Llengües autronèsies (altres)"
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, fuzzy, c-format
 msgid "Authentication required for '%s'"
 msgstr "Cal autenticació"
@@ -638,7 +626,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "Bugui"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -695,7 +683,7 @@ msgstr "Cambodja"
 msgid "Cameroon"
 msgstr "Camerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
+#: ../zypp/sat/detail/PoolImpl.cc:147
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "No es pot crear el fitxer."
@@ -703,10 +691,6 @@ msgstr "No es pot crear el fitxer."
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "No es pot obtenir el bloqueig de mutex"
-
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
-msgstr ""
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
@@ -737,6 +721,11 @@ msgstr "No es poden inicialitzar els atributs de mutex"
 msgid "Can't initialize recursive mutex"
 msgstr "No es pot inicialitzar el mutex recursiu"
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, fuzzy, c-format
+msgid "Can't open lock file: %s"
+msgstr "No es pot obrir el fitxer %1."
+
 #: ../zypp/ExternalProgram.cc:174
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
@@ -747,12 +736,7 @@ msgstr "No es pot obrir el fitxer %1."
 msgid "Can't open pty (%s)."
 msgstr "Couldn't open file: %s."
 
-#: ../zypp/Repository.cc:136
-#, fuzzy
-msgid "Can't open solv-file: "
-msgstr "No es pot obrir el fitxer %1."
-
-#: ../zypp/repo/RepoProvideFile.cc:207
+#: ../zypp/repo/RepoProvideFile.cc:216
 #, fuzzy, c-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "No es pot proporcionar %s des de %s"
@@ -760,10 +744,6 @@ msgstr "No es pot proporcionar %s des de %s"
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr "No es pot alliberar el bloqueig de mutex"
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
-msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -867,7 +847,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Fitxers de configuració modificats per a %s:"
@@ -1153,11 +1133,6 @@ msgstr "Divehi"
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
-msgid "Do not install or delete the resolvables concerned"
-msgstr "No instal·lis ni suprimeixis els ítems amb dependències relacionats"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1206,7 +1181,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1325,11 +1300,6 @@ msgstr "Eritrea"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:141
-#, fuzzy
-msgid "Error reading solv-file: "
-msgstr "Error en llegir el sector %u."
-
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
@@ -1372,7 +1342,7 @@ msgstr "Ewondo"
 msgid "Failed to delete key."
 msgstr "No s'ha pogut iniciar la màquina virtual."
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1382,7 +1352,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "No es pot obrir %s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
+#: ../zypp/target/rpm/RpmDb.cc:1122
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "No s'ha pogut obtenir la clau pública."
@@ -1643,9 +1613,9 @@ msgstr "Gbaya"
 msgid "Geez"
 msgstr "Gueez"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
 #, fuzzy
-msgid "Generally ignore this requirement"
+msgid "Generally ignore of some dependecies"
 msgstr "Ignora aquest requisit només en aquest cas"
 
 # GE
@@ -1968,27 +1938,10 @@ msgid "Igbo"
 msgstr "Igbo"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
-#, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "Ignora que %s ja s'ha definit per a instal·lar-se"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "Ignora l'obsolet %s a %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "Ignora aquest conflicte de %s"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-msgid "Ignore this requirement just here"
-msgstr "Ignora aquest requisit només en aquest cas"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
+#, fuzzy, c-format
+msgid "Ignore some dependencies of %s"
+msgstr "no s'han pogut resoldre dependències"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -2037,23 +1990,7 @@ msgstr "Indonesi"
 msgid "Ingush"
 msgstr "Ingúix"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "Instal·la %s, encara que canviï l'arquitectura"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, fuzzy, c-format
-msgid "Install %s although it would change the vendor"
-msgstr "Instal·la %s, encara que canviï l'arquitectura"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "Instal·la els ítems amb dependències que falten"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr "La instal·lació s'ha avortat tal com heu indicat."
 
@@ -2128,7 +2065,12 @@ msgstr "El caràcter separador de divisió d'assignació de paràmetres no és v
 msgid "Invalid port component '%s'"
 msgstr "El component de port '%s' no és vàlid"
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "La contrasenya de la CA no és vàlida."
@@ -2182,11 +2124,6 @@ msgstr "Iroquès"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "Israel"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "No es pot obrir el fitxer %1."
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2325,10 +2262,6 @@ msgstr "Kazakh"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "Conserva els ítems amb dependències"
 
 # KE
 #. :JPN:392:
@@ -3133,7 +3066,7 @@ msgstr "Niuean"
 msgid "No Code"
 msgstr "Sense codi"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 #, fuzzy
 msgid "No url in repository."
 msgstr "No s'ha trobat el fitxer %1 al dipòsit."
@@ -3376,14 +3309,6 @@ msgstr "%1 no és un directori."
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "No s'admet l'anàlisi de paràmetres de camí per a aquesta URL"
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr "No s'admet l'anàlisi de paràmetres de camí per a aquesta URL"
-
 #: ../zypp/media/MediaException.cc:200
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
@@ -3492,8 +3417,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "No s'admet l'anàlisi de cadenes de consulta per a aquesta URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ha fallat"
@@ -3524,15 +3449,10 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "No es permet un camí relatiu si existeix una autoritat"
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "S'estan afegint recursos"
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3868,6 +3788,11 @@ msgstr "Sogdià"
 msgid "Solomon Islands"
 msgstr "Illes Salomó"
 
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, fuzzy, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "%s entra en conflicte amb %s"
+
 # SO
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -4136,7 +4061,7 @@ msgstr "Tai"
 msgid "Thailand"
 msgstr "Tailàndia"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
 
@@ -4401,10 +4326,6 @@ msgstr "País desconegut:"
 #: ../zypp/LanguageCode.cc:145
 msgid "Unknown language: "
 msgstr "L'idioma és desconegut: "
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-msgid "Unlock these resolvables"
-msgstr "Desbloqueja aquests ítems amb dependències"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -4688,90 +4609,74 @@ msgstr "La comprovació de l'applydeltarpm ha fallat."
 msgid "applydeltarpm failed."
 msgstr "L'applydeltarpm ha fallat."
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:704
+#: ../zypp/solver/detail/SATResolver.cc:875
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "No es pot instal·lar %s"
 
-#: ../zypp/sat/SATResolver.cc:688
+#: ../zypp/solver/detail/SATResolver.cc:859
 #, fuzzy
 msgid "conflicting requests"
 msgstr "La sol·licitud de connexió a:"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, c-format
 msgid "created backup %s"
 msgstr "còpia de seguretat creada %s"
 
-#: ../zypp/sat/SATResolver.cc:978
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Instal·lació"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, c-format
-msgid "delete %s"
-msgstr "suprimeix %s"
-
-#: ../zypp/sat/SATResolver.cc:747
+#: ../zypp/solver/detail/SATResolver.cc:923
 #, fuzzy
 msgid "deleted providers: "
 msgstr "No es proporciona %s"
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "No instal·lis ni suprimeixis els ítems amb dependències relacionats"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "No hi ha proveïdors instal·lables de %s"
 
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "no instal·lis %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "no instal·lis %s"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:811
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "no instal·lat"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "S'ha baixat %s de %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "instal·la %s"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4780,10 +4685,8 @@ msgid ""
 "  %s"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "conserva %s"
@@ -4796,34 +4699,34 @@ msgstr "libhal_ctx_new: No es pot crear el context libhal"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: No es pot definir la connexió de dbus"
 
-#: ../zypp/sat/SATResolver.cc:699
+#: ../zypp/solver/detail/SATResolver.cc:870
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s requereix %s"
 
-#: ../zypp/sat/SATResolver.cc:691
+#: ../zypp/solver/detail/SATResolver.cc:862
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "No es proporciona %s"
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/solver/detail/SATResolver.cc:856
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "ordre per a desinstal·lar paquets"
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "L'rpm ha creat %s com a %s però no ha estat possible determinar la diferència"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4832,18 +4735,18 @@ msgstr ""
 "L'rpm ha creat %s com a %s.\n"
 "Aquestes són les primeres 25 línies de diferència:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "Sortida de l'rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "L'rpm ha desat %s com a %s però no ha estat possible determinar la diferència"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4852,20 +4755,76 @@ msgstr ""
 "L'rpm ha desat %s com a %s.\n"
 "Aquestes són les primeres 25 línies de diferència:\n"
 
-#: ../zypp/sat/SATResolver.cc:759
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "No hi ha proveïdors instal·lables de %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "desbloqueja %s"
+#, fuzzy
+#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
+#~ msgstr "%s proporciona aquesta dependència però canviaria l'arquitectura de l'element instal·lat"
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "desbloqueja tots els ítems amb dependències"
+#, fuzzy
+#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
+#~ msgstr "%s proporciona aquesta dependència però canviaria l'arquitectura de l'element instal·lat"
+
+#, fuzzy
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "No instal·lis ni suprimeixis els ítems amb dependències relacionats"
+
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "Ignora que %s ja s'ha definit per a instal·lar-se"
+
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "Ignora l'obsolet %s a %s"
+
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "Ignora aquest conflicte de %s"
+
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "Ignora aquest requisit només en aquest cas"
+
+#~ msgid "Install %s although it would change the architecture"
+#~ msgstr "Instal·la %s, encara que canviï l'arquitectura"
+
+#, fuzzy
+#~ msgid "Install %s although it would change the vendor"
+#~ msgstr "Instal·la %s, encara que canviï l'arquitectura"
+
+#~ msgid "Install missing resolvables"
+#~ msgstr "Instal·la els ítems amb dependències que falten"
+
+#~ msgid "Keep resolvables"
+#~ msgstr "Conserva els ítems amb dependències"
+
+#~ msgid "Unlock these resolvables"
+#~ msgstr "Desbloqueja aquests ítems amb dependències"
+
+#~ msgid "delete %s"
+#~ msgstr "suprimeix %s"
+
+#~ msgid "install %s"
+#~ msgstr "instal·la %s"
+
+#~ msgid "unlock %s"
+#~ msgstr "desbloqueja %s"
+
+#~ msgid "unlock all resolvables"
+#~ msgstr "desbloqueja tots els ítems amb dependències"
+
+#, fuzzy
+#~ msgid "Can't open solv-file: "
+#~ msgstr "No es pot obrir el fitxer %1."
+
+#, fuzzy
+#~ msgid "Error reading solv-file: "
+#~ msgstr "Error en llegir el sector %u."
+
+#~ msgid "Path Parameter parsing not supported for this URL"
+#~ msgstr "No s'admet l'anàlisi de paràmetres de camí per a aquesta URL"
+
+#~ msgid "Path parameter parsing not supported for this URL"
+#~ msgstr "No s'admet l'anàlisi de paràmetres de camí per a aquesta URL"
 
 #~ msgid "Software management is already running."
 #~ msgstr "Ja s'està executant la gestió del programari."

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
-"PO-Revision-Date: 2008-02-15 15:15+0100\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
+"PO-Revision-Date: 2008-04-21 21:36+0200\n"
 "Last-Translator: Marek Stopka <marekstopka@gmail.com>\n"
 "Language-Team: czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,26 +23,27 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/sat/SATResolver.cc:757
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:933
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "K dispozici není žádný balíček obsahující %s"
+msgstr ""
+"\n"
+"neodinstalovatelní poskytovatelé: "
 
 #: ../zypp/media/MediaException.cc:214
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr "Problém s SSL certifikátem, ověřte, že je certifikát certifikační autority pro '%s' v pořádku "
 
-#: ../zypp/sat/SATResolver.cc:709
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:880
+#, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s koliduje s %s"
+msgstr "%s koliduje s %s, který poskytuje %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "Instalace %s selhala"
@@ -50,50 +51,38 @@ msgstr "Instalace %s selhala"
 #
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "%s nainstalován ok"
 
-#: ../zypp/sat/SATResolver.cc:695
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:866
+#, c-format
 msgid "%s is not installable"
-msgstr "není nainstalováno"
+msgstr "%s nelze nainstalovat"
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s je novější než %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s poskytuje tuto závislost, ale změní architekturu nainstalované položky"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s poskytuje tuto závislost, ale změní dodavatele nainstalované položky"
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "Odstranění %s se nezdařilo"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "%s odstranění ok"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s vyžaduje %s, ale tento požadavek nemůže být splněn"
 
 #. language code: abk ab
 #: ../zypp/LanguageCode.cc:240
@@ -115,12 +104,12 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Přidává se repozitář '%s'"
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "Další výstup programu rpm:"
 
@@ -345,7 +334,7 @@ msgstr "Rakousko"
 msgid "Austronesian (Other)"
 msgstr "Austronéské (jiné)"
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Pro '%s' je vyžadováno ověřování"
@@ -386,11 +375,11 @@ msgstr "Azerbajdžánština"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Špatný název souboru: %s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Špatný bod připojení média"
 
 # BS
 #. :BRA:076:
@@ -625,7 +614,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Bugiština"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváří se vyrovnávací paměť repozitáře '%s'"
@@ -679,34 +668,29 @@ msgstr "Cambodia"
 msgid "Cameroon"
 msgstr "Cameroon"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
-#, fuzzy
+#: ../zypp/sat/detail/PoolImpl.cc:147
 msgid "Can not create sat-pool."
-msgstr "Nelze vytvořit soubor."
+msgstr ""
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "Nelze získat zámek mutex."
 
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
-msgstr ""
-
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr ""
+msgstr "Nemůžu změnit adresář na '/' uvnitř chrootu (%s)."
 
 #: ../zypp/ExternalProgram.cc:238
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "Nemůžu změnit kořenový adresář na '%s' (%s)."
 
 #. don't want to get here
 #: ../zypp/ExternalProgram.cc:259
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "Nemůžu spustit '%s' (%s)."
 
 #: ../zypp/ExternalProgram.cc:267
 #, fuzzy, c-format
@@ -721,6 +705,11 @@ msgstr "Nelze inicializovat atributy mutex."
 msgid "Can't initialize recursive mutex"
 msgstr "Nelze inicializovat rekurzivní mutex."
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, c-format
+msgid "Can't open lock file: %s"
+msgstr "Nelze otevřít soubor zámku: %s"
+
 #: ../zypp/ExternalProgram.cc:174
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
@@ -731,23 +720,14 @@ msgstr "Nelze otevřít soubor: %1."
 msgid "Can't open pty (%s)."
 msgstr "Nelze otevřít soubor: %s."
 
-#: ../zypp/Repository.cc:136
-#, fuzzy
-msgid "Can't open solv-file: "
-msgstr "Nelze otevřít soubor: %1."
-
-#: ../zypp/repo/RepoProvideFile.cc:207
-#, fuzzy, c-format
+#: ../zypp/repo/RepoProvideFile.cc:216
+#, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Nelze poskytnout soubor %s z repozitáře %s"
+msgstr "Nelze poskytnout soubor '%s' z repozitáře '%s'"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr "Nelze uvolnit zámek mutex."
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
-msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -761,22 +741,21 @@ msgstr "Kanada"
 #: ../zypp/KeyRing.cc:276
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "Nemůžu vytvořit veřejný klíč %s z klíčenky %s do souboru %s"
 
 #: ../zypp/media/MediaException.cc:182
-#, fuzzy
 msgid "Cannot eject any media"
-msgstr "Nemohu najít žádné schéma."
+msgstr "Nemůžu vysunout žádné médium"
 
 #: ../zypp/media/MediaException.cc:184
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot eject media '%s'"
-msgstr "Nelze otevřít položku plochy '%s'"
+msgstr "Nemůžu vysunout médium '%s'"
 
 #: ../zypp/media/MediaException.cc:67
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot write file '%s'."
-msgstr "Nelze zapisovat do souboru %1."
+msgstr "Nemůžu zapsat do souboru '%s'."
 
 # CV
 #. :CUB:192:
@@ -850,7 +829,7 @@ msgstr "Čamorština"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Změněné konfigurační soubory pro %s:"
@@ -953,14 +932,13 @@ msgid "Command exited with status %d."
 msgstr ""
 
 #: ../zypp/ExternalProgram.cc:371
-#, fuzzy
 msgid "Command exited with unknown error."
-msgstr "Příkaz spouštění při připojování"
+msgstr "Příkaz byl ukončen s neznámou chybou."
 
 #: ../zypp/ExternalProgram.cc:366
 #, c-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "Příkaz byl zabit signálem %d (%s)."
 
 # KM
 #. :KIR:296:
@@ -1125,10 +1103,6 @@ msgstr "Divehi"
 msgid "Djibouti"
 msgstr "Džibuti"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-msgid "Do not install or delete the resolvables concerned"
-msgstr "Neinstalovat a nemazat příslušné závislosti"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1174,7 +1148,7 @@ msgid "Duala"
 msgstr "Duala"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1242,16 +1216,15 @@ msgstr "Elamština"
 
 #: ../zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "Chybí cíl v URI"
 
 #: ../zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "Prázdný souborový systém v URI"
 
 #: ../zypp/media/MediaException.cc:125
-#, fuzzy
 msgid "Empty host name in URI"
-msgstr "Prázdné jméno CA."
+msgstr "Není vyplněno hostname v URI"
 
 #: ../zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
@@ -1289,11 +1262,6 @@ msgstr "Eritrea"
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
-
-#: ../zypp/Repository.cc:141
-#, fuzzy
-msgid "Error reading solv-file: "
-msgstr "Chyba při čtení repozitářů:"
 
 # SY
 # fuzzy
@@ -1334,29 +1302,28 @@ msgid "Ewondo"
 msgstr "Ewondo"
 
 #: ../zypp/KeyRing.cc:558
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "Nepodařilo se spustit virtuální stroj."
+msgstr "Nepodařilo se smazat klíč."
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "Nepodařilo se importovat klíč ze souboru %s: %s"
 
 #: ../zypp/media/MediaException.cc:31
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Chyba parsování: %s."
+msgstr "Nepodařilo se připojit %s do %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
-#, fuzzy, c-format
+#: ../zypp/target/rpm/RpmDb.cc:1122
+#, c-format
 msgid "Failed to remove public key %s: %s"
-msgstr "Nelze získat veřejný klíč."
+msgstr "Nepodařilo se smazat veřejný klíč %s: %s"
 
 #: ../zypp/media/MediaException.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to unmount %s"
-msgstr "Chyba při zavádění modulu \"%s\"."
+msgstr "Nepodařilo se odpojit %s"
 
 # FK
 #. :FJI:242:
@@ -1460,9 +1427,9 @@ msgstr ""
 " Chcete soubor přesto použít?"
 
 #: ../zypp/media/MediaException.cc:60
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Soubor '%1' nebyl nalezen v repozitáři."
+msgstr "Soubor '%s' nebyl nalezen na médiu '%s'"
 
 #. language code: fil
 #: ../zypp/LanguageCode.cc:514
@@ -1485,9 +1452,8 @@ msgid "Finno-Ugrian (Other)"
 msgstr "Ugrofinské (jiné)"
 
 #: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
-#, fuzzy
 msgid "Following actions will be done:"
-msgstr "Následující balíčky budou aktualizovány:\n"
+msgstr "Budou provedeny následující akce:"
 
 #. language code: fon
 #: ../zypp/LanguageCode.cc:520
@@ -1598,8 +1564,9 @@ msgstr "Gbejština"
 msgid "Geez"
 msgstr "Giiz"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
-msgid "Generally ignore this requirement"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
+#, fuzzy
+msgid "Generally ignore of some dependecies"
 msgstr "Obecně ignorovat tento požadavek"
 
 #. :GRD:308:
@@ -1904,27 +1871,10 @@ msgid "Igbo"
 msgstr "Igbo"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
-#, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "Ignorovat nastavení %s k instalaci"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "Ignorovat zastaralé %s v %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "Ignorovat konflikt %s"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-msgid "Ignore this requirement just here"
-msgstr "Ignorovat požadavky pouze nyní"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
+#, fuzzy, c-format
+msgid "Ignore some dependencies of %s"
+msgstr "závislosti nelze vyřešit"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1971,23 +1921,7 @@ msgstr "Indonézština"
 msgid "Ingush"
 msgstr "Ingush"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "Instalovat %s i přes změnu architektury"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr "Instalovat %s i přes změnu dodavatele"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "Nainstalovat chybějící závislosti"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr "Instalace byla zrušena podle příkazu."
 
@@ -2061,7 +1995,12 @@ msgstr "Neplatný oddělovací znak mapy parametrů"
 msgid "Invalid port component '%s'"
 msgstr "Neplatná součást portu %s"
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "Chybný regulární výraz '%s': regcomp vrátil %d"
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr "Neplatné uživatelské jméno nebo heslo."
 
@@ -2111,11 +2050,6 @@ msgstr "Irokézské jazyky"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "Izrael"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "Nelze otevřít soubor: %1."
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2245,10 +2179,6 @@ msgstr "Kazaština"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "Ponechat"
 
 # KE
 #. :JPN:392:
@@ -2747,7 +2677,7 @@ msgstr ""
 #: ../zypp/media/MediaException.cc:175
 #, c-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "Médium '%s' je používáno jinou instancí"
 
 #: ../zypp/media/MediaException.cc:72
 msgid "Medium not attached"
@@ -3019,7 +2949,7 @@ msgstr "Niuečtina"
 msgid "No Code"
 msgstr "Žádný kód"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
 msgstr "Adresa URL nebyla nalezena v repozitáři."
 
@@ -3135,9 +3065,8 @@ msgid "Oman"
 msgstr "Omán"
 
 #: ../zypp/media/MediaException.cc:145
-#, fuzzy
 msgid "Operation not supported by medium"
-msgstr "Verze profilu není podporována modulem Apparmor\n"
+msgstr "Operace není médiem podporována"
 
 # SY
 # fuzzy
@@ -3245,27 +3174,19 @@ msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../zypp/media/MediaException.cc:106
-#, fuzzy, c-format
+#, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "'%1' není adresář."
+msgstr "Cesta '%s' na médiu '%s' není adresářem."
 
 #: ../zypp/media/MediaException.cc:98
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "Pro toto URL není podporována analýza parametru cesty."
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr "Pro toto URL není podporována analýza parametru cesty."
+msgstr "Cesta '%s' na médiu '%s' není souborem."
 
 #: ../zypp/media/MediaException.cc:200
-#, fuzzy, c-format
+#, c-format
 msgid "Permission to access '%s' denied."
-msgstr "Přístup nepovolen"
+msgstr "Přístup k '%s' byl zamítnut."
 
 #. language code: per fas fa
 #: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
@@ -3362,11 +3283,10 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Pro toto URL není podporována analýza řetězce dotazu."
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
-#, fuzzy
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 msgid "RPM failed: "
-msgstr "chyba"
+msgstr "RPM selhalo: "
 
 #. language code: roh rm
 #: ../zypp/LanguageCode.cc:970
@@ -3394,15 +3314,10 @@ msgstr "Rarotongánština"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativní cesta není povolena, pokud existuje autorita"
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Odebírá se repozitář '%s'"
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3642,9 +3557,9 @@ msgid "Sign Languages"
 msgstr "Znakové řeči"
 
 #: ../zypp/KeyRing.cc:568
-#, fuzzy, c-format
+#, c-format
 msgid "Signature file %s not found"
-msgstr "Zdrojový balík '%s' nebyl nalezen."
+msgstr "Soubor s podpisem %s nebyl nalezen"
 
 #. language code: bla
 #: ../zypp/LanguageCode.cc:354
@@ -3722,6 +3637,11 @@ msgstr "Soghdština"
 #: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "Solomon Islands"
+
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, fuzzy, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "%s koliduje s %s, který poskytuje %s"
 
 # SO
 #. language code: som so
@@ -3891,12 +3811,12 @@ msgstr "Syrština"
 #: ../zypp/media/MediaException.cc:91
 #, c-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "Systémová vyjímka '%s' na médiu '%s'."
 
 #: ../zypp/ZYppFactory.cc:354
 #, c-format
 msgid "System management is locked by the application with pid %d. Please close this application before trying again."
-msgstr ""
+msgstr "Systémová správa je zamknut aplikací, která má pid %d. Prosím uzavřete tuto aplikaci, než se budete znovu pokoušet o práci se systémovou správou."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3973,7 +3893,7 @@ msgstr "Thajština"
 msgid "Thailand"
 msgstr "Thajsko"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
 
@@ -4227,19 +4147,15 @@ msgstr "Neznámá země: "
 msgid "Unknown language: "
 msgstr "Neznámý jazyk: "
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-msgid "Unlock these resolvables"
-msgstr "Odemknout"
-
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nepodporovaná HTTP ověřovací metoda '%s'"
 
 #: ../zypp/media/MediaException.cc:140
-#, fuzzy, c-format
+#, c-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Neplatné schéma URL '%1'."
+msgstr "Nepodporované URI ve schématu '%s'."
 
 #: ../devel/devel.mvidner/installation_sources.cc:75
 #, c-format
@@ -4504,90 +4420,72 @@ msgstr "Kontrola aplikování delta RPM se nezdařila."
 msgid "applydeltarpm failed."
 msgstr "Aplikování delta RPM se nezdařilo."
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "změna architektury z %s na %s"
 
-#: ../zypp/sat/SATResolver.cc:704
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:875
+#, c-format
 msgid "cannot install both %s and %s"
-msgstr "Nelze nainstalovat %s"
+msgstr "Nelze nainstalovat %s a zároveň %s"
 
-#: ../zypp/sat/SATResolver.cc:688
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:859
 msgid "conflicting requests"
-msgstr "Požadavek na připojení k: "
+msgstr "protichůdné požadavky"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, c-format
 msgid "created backup %s"
 msgstr "vytvořena záloha %s"
 
-#: ../zypp/sat/SATResolver.cc:978
-#, fuzzy, c-format
-msgid "deinstallation of %s"
-msgstr "Instalace %s selhala:"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, c-format
-msgid "delete %s"
-msgstr "smazat %s"
+msgid "deinstallation of %s"
+msgstr "odstraňování %s"
 
-#: ../zypp/sat/SATResolver.cc:747
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "deleted providers: "
-msgstr "Žádný balíček neposkytuje %s"
+msgstr "odstranění poskytovatelé:"
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "Neinstalovat a nemazat příslušné závislosti"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "K dispozici není žádný balíček obsahující %s"
 
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "neinstalovat %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "neinstalovat %s"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "neinstalovat moc novou verzi %s"
 
-#: ../zypp/sat/SATResolver.cc:811
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:989
+#, c-format
 msgid "do not keep %s installed"
-msgstr "není nainstalováno"
+msgstr "neudržovat %s nainstalován"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "Aktualizace %s na %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "instalovat %s"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4595,11 +4493,13 @@ msgid ""
 "-->\n"
 "  %s"
 msgstr ""
+"instalovat %s (i se změnou poskytovatele)\n"
+"  %s\n"
+"-->\n"
+"  %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "ponechat %s"
@@ -4612,34 +4512,34 @@ msgstr "libhal_ctx_new: Nelze vytvořit kontext libhal."
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: Nelze nastavit připojení dbus."
 
-#: ../zypp/sat/SATResolver.cc:699
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:870
+#, c-format
 msgid "nothing provides %s needed by %s"
-msgstr "%s je požadován pro %s"
+msgstr "nic neposkytuje %s, který je požadován %s"
 
-#: ../zypp/sat/SATResolver.cc:691
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:862
+#, c-format
 msgid "nothing provides requested %s"
-msgstr "Žádný balíček neposkytuje %s"
+msgstr "nic neposkytuje vyžádaný %s"
 
-#: ../zypp/sat/SATResolver.cc:685
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:856
+#, c-format
 msgid "problem with installed package %s"
-msgstr "Problém při instalaci zdrojového balíku %s-%s:"
+msgstr "problém s nainstalovaným balíčkem %s"
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm vytvořil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4648,18 +4548,18 @@ msgstr ""
 "Program rpm vytvořil %s jako %s.\n"
 "Prvních odlišných 25 řádek:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "Výstup programu rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Program rpm uložil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4668,336 +4568,54 @@ msgstr ""
 "Program rpm uložil %s jako %s.\n"
 "Prvních 25 řádek rozdílů:\n"
 
-#: ../zypp/sat/SATResolver.cc:759
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:935
 msgid "uninstallable providers: "
-msgstr "K dispozici není žádný balíček obsahující %s"
+msgstr "neodinstalovatelní poskytovatelé:"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "odemknout %s"
+#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
+#~ msgstr "%s poskytuje tuto závislost, ale změní architekturu nainstalované položky"
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "odemknout všechny závisející balíčky"
+#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
+#~ msgstr "%s poskytuje tuto závislost, ale změní dodavatele nainstalované položky"
 
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "Načítá se vyrovnávací paměť repozitáře '%s'"
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "Neinstalovat a nemazat příslušné závislosti"
 
-#~ msgid "Reading patch and delta rpms from '%s' repository cache"
-#~ msgstr "Načítají se balíčky oprav RPM a delta RPM z vyrovnávací paměti repozitáře '%s'"
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "Ignorovat nastavení %s k instalaci"
 
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "Probíhá čistění vyrovnávací paměti repozitáře '%s'."
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "Ignorovat zastaralé %s v %s"
 
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "Načítá se vyrovnávací paměť repozitáře '%s'"
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "Ignorovat konflikt %s"
 
-#~ msgid "Software management is already running."
-#~ msgstr "Správa softwaru již je spuštěna."
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "Ignorovat požadavky pouze nyní"
 
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s je nahrazen %s"
+#~ msgid "Install %s although it would change the architecture"
+#~ msgstr "Instalovat %s i přes změnu architektury"
 
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s nahrazen %s"
+#~ msgid "Install %s although it would change the vendor"
+#~ msgstr "Instalovat %s i přes změnu dodavatele"
 
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s bude odstraněn uživatelem.\n"
+#~ msgid "Install missing resolvables"
+#~ msgstr "Nainstalovat chybějící závislosti"
 
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s bude odstraněn jinou aplikací. (ApplLow/ApplHigh)\n"
+#~ msgid "Keep resolvables"
+#~ msgstr "Ponechat"
 
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s bude nainstalován uživatelem.\n"
+#~ msgid "Unlock these resolvables"
+#~ msgstr "Odemknout"
 
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s bude nainstalován jinou aplikací. (ApplLow/ApplHigh)\n"
+#~ msgid "delete %s"
+#~ msgstr "smazat %s"
 
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "V časovém limitu %d s nebylo nalezeno žádné platné řešení"
+#~ msgid "install %s"
+#~ msgstr "instalovat %s"
 
-#~ msgid "The solver has reached a defined timout"
-#~ msgstr "Řešitel vyčerpal zadaný časový limit"
+#~ msgid "unlock %s"
+#~ msgstr "odemknout %s"
 
-#~ msgid "No valid solution found with just resolvables of best architecture."
-#~ msgstr "Nebylo nalezeno žádné platné řešení se závislostmi pouze nejlepší architektury."
-
-#~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
-#~ msgstr "Při této operaci byly vzaty v úvahu pouze závislosti s nejlepší architekturou.\n"
-
-#~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-#~ msgstr "Pokud jsou zahrnuty všechny možné závislosti, může operace trvat delší dobu, ale dospěje k platnému výsledku."
-
-#~ msgid "Invalid information"
-#~ msgstr "Chybná informace"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "%s je požadován jinými balíčky"
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s je požadován pro:\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s koliduje"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s koliduje s:\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s je novější než jiné závisející balíčky"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s je novější než: %s"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "Tyto balíčky budou smazány."
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s závislí na jiných balíčcích"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s závisí na %s"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s závisí na: %s"
-
-#~ msgid "Child of"
-#~ msgstr "Potomek"
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "Požadavky nelze uspokojit z žádného dostupného zdroje."
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "Kvůli uvedeným nebo následujícím problémům nevyřeší toto řešení všechny závislosti"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "Nelze nainstalovat %s, protože způsobuje konflikt s %s"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "%s nebude nainstalován a byl označen jako nenainstalovatelný"
-
-#~ msgid "Cannot install %s due to dependency problems"
-#~ msgstr "Vzhledem k problémům se závislostí nelze nainstalovat %s"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "%s obsahuje nevyřešené závislosti"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "%s má nesplněné závislosti"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "%s nelze nainstalovat kvůli nesplněným závislostem"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s splňuje závislosti %s, bude však odinstalován"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "%s splňuje závislosti %s, bude však ponechán v systému"
-
-#~ msgid "No need to install %s"
-#~ msgstr "Není potřeba instalovat %s"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "Nelze nainstalovat %s ke splnění závislostí %s"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "Nelze nainstalovat %s ke splnění závislostí %s"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s nebude odinstalován, protože je stále vyžadován"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s je novější než %s, ale %s nelze odstranit, protože je uzamčený."
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "Nelze nainstalovat %s, protože způsobuje konflikt"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "%s nelze nainstalovat, koliduje s %s"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "Požadavek %s nelze splnit."
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "vyžadující %s pro %s při aktualizaci %s"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "Pro %s není splněn požadavek %s"
-
-#~ msgid ", Action: "
-#~ msgstr ", Akce: "
-
-#~ msgid ", Trigger: "
-#~ msgstr ", spouštěč: "
-
-#~ msgid "package"
-#~ msgstr "balíček"
-
-#~ msgid "selection"
-#~ msgstr "výběr"
-
-#~ msgid "pattern"
-#~ msgstr "vzor"
-
-#~ msgid "product"
-#~ msgstr "produkt"
-
-#~ msgid "patch"
-#~ msgstr "aktualizace"
-
-#~ msgid "script"
-#~ msgstr "skript"
-
-#~ msgid "message"
-#~ msgstr "zpráva"
-
-#~ msgid "atom"
-#~ msgstr "atom"
-
-#~ msgid "system"
-#~ msgstr "systém"
-
-#~ msgid "Resolvable"
-#~ msgstr "Rozhodnuté"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "Označit toto řešení jako chybné."
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "Nastavuje se %s jako neinstalovatelný"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "%s čeká na instalaci, ale instalaci nelze provést kvůli problémům se závislostmi."
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "Nelze nainstalovat %s, je již označen jako určený k odinstalování"
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "Nelze nainstalovat %s, protože ho nelze použít pro tento systém."
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "Nelze nainstalovat %s, protože %s je již označen jako potřebný k instalaci"
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "Tím poškodíte %s."
-
-#~ msgid "Establishing %s"
-#~ msgstr "Navazuje se %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "Instaluje se %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "Přeskakuji %s: je již nainstalován"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "Neexistuje žádný alternativní poskytovatel nainstalované závislosti %s"
-
-#~ msgid "for %s"
-#~ msgstr "pro %s"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "Aktualizaci %s s cílem vyhnout se odinstalování %s nelze provést."
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s poskytuje %s, ale čeká na odinstalování."
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s poskytuje %s, ale je již nainstalována jiná verze %s."
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s poskytuje %s, ale je neinstalovatelný. Více informací získáte při ruční instalaci."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s poskytuje %s, ale je uzamčen."
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "%s poskytuje %s, ale je naplánováno, že bude ponechán."
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s poskytuje %s, ale je určen pro jinou architekturu."
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s poskytuje %s, poskytuje ho však jiný dodavatel (%s)."
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "Nelze splnit požadavky %s pro %s"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "%s je požadován jinou závislostí určenou k instalaci, proto na něj nebude zrušen odkaz."
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "%s je požadován jinou nainstalovanou závislostí, proto na něj nebude zrušen odkaz."
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s je uzamčen a nelze odinstalovat."
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "Konflikt s %s (%s) vyžaduje odstranění závislosti %s, která čeká na instalaci"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "%s označen jako neinstalovatelný kvůli konfliktu s %s"
-
-#~ msgid "from %s"
-#~ msgstr "z %s"
-
-#~ msgid " Error!"
-#~ msgstr " Chyba!"
-
-#~ msgid " Important!"
-#~ msgstr " Důležité!"
-
-#~ msgid "Make a solver run with ALL possibilities."
-#~ msgstr "Spustí řešitel se zvážením VŠECH možností"
-
-#~ msgid "Regarding all resolvables with a compatible architecture."
-#~ msgstr "V úvahu jsou brány všechny závislosti s kompatibilní architekturou."
-
-#~ msgid "Make a solver run with best architecture only."
-#~ msgstr "Spustí řešitel pouze pro nejlepší architekturu."
-
-#~ msgid "Regarding resolvables with best architecture only."
-#~ msgstr "V úvahu jsou brány pouze závislosti s nejlepší architekturou."
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s závisí na %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "%s je doporučen závislostí %s"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s je navrhován závislostí %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s je vylepšen %s"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "%s je doplněn %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s část ze %s"
-
-#~ msgid "Double timeout"
-#~ msgstr "Dvojnásobný časový limit"
-
-#~ msgid "Start the next solver run with doubled timeout."
-#~ msgstr "Příště spustí řešitel s dvojnásobným časovým limitem."
+#~ msgid "unlock all resolvables"
+#~ msgstr "odemknout všechny závisející balíčky"

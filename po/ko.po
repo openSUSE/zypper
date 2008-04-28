@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
 "PO-Revision-Date: 2008-04-07 01:23+0900\n"
 "Last-Translator: YunSeok Choi <xein@naver.com>\n"
 "Language-Team: Korean <xein@naver.com>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: KOREA, REPUBLIC OF\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../zypp/sat/SATResolver.cc:757
+#: ../zypp/solver/detail/SATResolver.cc:933
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -33,61 +33,49 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 인증서에 문제, '%s'에 임해서 증명 기관에 문제가 있는지 확인 해보세요."
 
-#: ../zypp/sat/SATResolver.cc:709
+#: ../zypp/solver/detail/SATResolver.cc:880
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%1은 %2와 충돌합니다"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "%s 설치 실패"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "%s 설치 완료"
 
-#: ../zypp/sat/SATResolver.cc:695
+#: ../zypp/solver/detail/SATResolver.cc:866
 #, c-format
 msgid "%s is not installable"
 msgstr "%s 는 설치 할 수 없음"
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "저자로 찾기"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr ""
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "%s 제거 실패"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "%s 제거 완료"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -114,14 +102,13 @@ msgstr "아촐리어"
 msgid "Adangme"
 msgstr "아당메어"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "'%s' 저장소 추가 중"
 
 #  dialog caption
-#: ../zypp/target/rpm/RpmDb.cc:2068
-#: ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 #, fuzzy
 msgid "Additional rpm output:"
 msgstr "C 헤더 파일을 출력합니다"
@@ -186,8 +173,7 @@ msgid "Albania"
 msgstr "알바니아"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262
-#: ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "알바니아어"
 
@@ -299,8 +285,7 @@ msgstr "아르메니아"
 
 # AM
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284
-#: ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "아르메니아어"
 
@@ -352,8 +337,7 @@ msgstr "오스트리아"
 msgid "Austronesian (Other)"
 msgstr "오스트로네시아어족 (기타)"
 
-#: ../zypp/media/MediaCurl.cc:752
-#: ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, fuzzy, c-format
 msgid "Authentication required for '%s'"
 msgstr "%s 인증 방법을 지원하지 않습니다"
@@ -464,8 +448,7 @@ msgid "Bashkir"
 msgstr "바슈키르어"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326
-#: ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "바스크어"
 
@@ -625,7 +608,7 @@ msgstr "브루나이"
 msgid "Buginese"
 msgstr "부기어"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, fuzzy, c-format
 msgid "Building repository '%s' cache"
 msgstr "타일 캐쉬 크기(_s):"
@@ -651,8 +634,7 @@ msgid "Burkina Faso"
 msgstr "부르키나 파소"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372
-#: ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "브루나이"
 
@@ -678,19 +660,13 @@ msgstr "캄보디아"
 msgid "Cameroon"
 msgstr "카메룬"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
+#: ../zypp/sat/detail/PoolImpl.cc:147
 msgid "Can not create sat-pool."
 msgstr ""
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr ""
-
-#: ../zypp/Repository.cc:130
-#: ../zypp/Repository.cc:147
-#, fuzzy
-msgid "Can't add solvables to norepo."
-msgstr "압축 파일 자신을 더할 수 없습니다."
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
@@ -721,6 +697,11 @@ msgstr ""
 msgid "Can't initialize recursive mutex"
 msgstr ""
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, fuzzy, c-format
+msgid "Can't open lock file: %s"
+msgstr "Couldn't open file: %s."
+
 #: ../zypp/ExternalProgram.cc:174
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
@@ -731,12 +712,7 @@ msgstr "파일을 열 수 없습니다"
 msgid "Can't open pty (%s)."
 msgstr "파일을 열 수 없습니다"
 
-#: ../zypp/Repository.cc:136
-#, fuzzy
-msgid "Can't open solv-file: "
-msgstr "파일을 열 수 없습니다"
-
-#: ../zypp/repo/RepoProvideFile.cc:207
+#: ../zypp/repo/RepoProvideFile.cc:216
 #, c-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr ""
@@ -744,11 +720,6 @@ msgstr ""
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr ""
-
-#: ../zypp/Repository.cc:101
-#, fuzzy
-msgid "Can't set RepoInfo for norepo."
-msgstr "찾은 결과에 대한 바로가기를 설정할 수 있습니다."
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -850,7 +821,7 @@ msgstr "차모로어"
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 의 설정 파일 변경됨:"
@@ -895,8 +866,7 @@ msgid "China"
 msgstr "중국"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400
-#: ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "중국어"
 
@@ -973,8 +943,7 @@ msgstr "코모로"
 # CG
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:262
-#: ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "콩고"
 
@@ -1050,8 +1019,7 @@ msgid "Croatia"
 msgstr "크로아티아"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008
-#: ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "크로아티아어"
 
@@ -1072,8 +1040,7 @@ msgid "Cyprus"
 msgstr "키프로스"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446
-#: ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "체코어"
 
@@ -1130,11 +1097,6 @@ msgstr "디베히어"
 msgid "Djibouti"
 msgstr "디보우티"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
-msgid "Do not install or delete the resolvables concerned"
-msgstr "%1은 %2와 충돌합니다"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1180,14 +1142,13 @@ msgid "Duala"
 msgstr "두알라어"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478
-#: ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "화란어"
 
@@ -1298,11 +1259,6 @@ msgstr "에리트레아"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:141
-#, fuzzy
-msgid "Error reading solv-file: "
-msgstr "메일파일을 읽는 중 오류 발생: %s"
-
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
@@ -1344,7 +1300,7 @@ msgstr "에원도어"
 msgid "Failed to delete key."
 msgstr "연락처를 지우는 데 실패했습니다"
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1354,7 +1310,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "`%s'의 허가권을 설정하는 데 실패: %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
+#: ../zypp/target/rpm/RpmDb.cc:1122
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "중단 키 %s을(를) 설정 해제하는 데 실패했습니다: %s\n"
@@ -1491,8 +1447,7 @@ msgid "France"
 msgstr "프랑스"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522
-#: ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "프랑스어"
 
@@ -1591,9 +1546,9 @@ msgid "Geez"
 msgstr "게에즈어"
 
 #  text is shown in a column of a package list entry
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
 #, fuzzy
-msgid "Generally ignore this requirement"
+msgid "Generally ignore of some dependecies"
 msgstr "해결할수 없는 요구사항..."
 
 #. :GRD:308:
@@ -1602,14 +1557,12 @@ msgid "Georgia"
 msgstr "조지아"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544
-#: ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "그루지야어"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548
-#: ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "독어"
 
@@ -1682,8 +1635,7 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "그리스어 (고대) (1453년 이전)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578
-#: ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "그리스어 (현대) (1453년 이후)"
 
@@ -1761,8 +1713,7 @@ msgstr "하이티"
 msgid "Haitian"
 msgstr "아이티 크리올어"
 
-#: ../zypp/target/hal/HalException.h:46
-#: ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 #, fuzzy
 msgid "Hal Exception"
@@ -1889,8 +1840,7 @@ msgid "Iceland"
 msgstr "아이스란드"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622
-#: ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "아이슬란드어"
 
@@ -1906,29 +1856,10 @@ msgid "Igbo"
 msgstr "이그보어"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
 #, fuzzy, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "%1 디렉토리는 이미 목록에 있습니다."
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, fuzzy, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "최상위 위젯의 포커스"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, fuzzy, c-format
-msgid "Ignore this conflict of %s"
-msgstr "쪽지 충돌 감지"
-
-#  text is shown in a column of a package list entry
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-#, fuzzy
-msgid "Ignore this requirement just here"
-msgstr "해결할수 없는 요구사항..."
+msgid "Ignore some dependencies of %s"
+msgstr "의존성을 만족하지 못함:"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1975,24 +1906,7 @@ msgstr "인도네시아어"
 msgid "Ingush"
 msgstr "인구시어"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
-msgid "Install missing resolvables"
-msgstr "%s에 대한 인자가 빠졌습니다"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr ""
 
@@ -2066,8 +1980,12 @@ msgstr ""
 msgid "Invalid port component '%s'"
 msgstr "찾기 요소"
 
-#: ../zypp/media/MediaCurl.cc:749
-#: ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "사용자 이름에 잘못된 글자가 있습니다"
@@ -2119,11 +2037,6 @@ msgstr "이로쿼이어족"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "이스라엘"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "Couldn't open file: %s."
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2253,11 +2166,6 @@ msgstr "카자흐어"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "카자흐스탄"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
-msgid "Keep resolvables"
-msgstr "배경 유지"
 
 # KE
 #. :JPN:392:
@@ -2564,8 +2472,7 @@ msgid "Macedonia"
 msgstr "마케도니아"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772
-#: ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "마케도니아어"
 
@@ -2611,8 +2518,7 @@ msgid "Malawi"
 msgstr "말라위"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800
-#: ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "말레이어"
 
@@ -2704,8 +2610,7 @@ msgstr "맨어; 맹크스어"
 
 #  tree node string
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790
-#: ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "마오리어"
 
@@ -2930,8 +2835,7 @@ msgstr "나미비아"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858
-#: ../zypp/CountryCode.cc:387
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "나우루"
 
@@ -3048,13 +2952,12 @@ msgstr "니우에어"
 #  TextEntry label for phone network Areacode (german Vorwahl)
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225
-#: ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
 #, fuzzy
 msgid "No Code"
 msgstr "C 소스 코드"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 #, fuzzy
 msgid "No url in repository."
 msgstr "'%s'에서 경로를 찾을 수 없습니다"
@@ -3287,22 +3190,13 @@ msgstr ""
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "이 파일시스템에서 파일 감시는 지원되지 않습니다.\n"
 
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr ""
-
 #: ../zypp/media/MediaException.cc:200
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
 msgstr "키 모음에 접근할 수 없습니다."
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938
-#: ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "페르시아어"
 
@@ -3391,15 +3285,13 @@ msgstr "카타르"
 msgid "Quechua"
 msgstr "케추아어"
 
-#: ../zypp/url/UrlBase.cc:782
-#: ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890
-#: ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 #, fuzzy
 msgid "RPM failed: "
 msgstr "불러오기 실패"
@@ -3427,20 +3319,14 @@ msgstr "라파누이어"
 msgid "Rarotongan"
 msgstr "라로통가어"
 
-#: ../zypp/url/UrlBase.cc:1117
-#: ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "저장소 인증"
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 #, fuzzy
@@ -3463,8 +3349,7 @@ msgid "Romania"
 msgstr "루마니아"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974
-#: ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "루마니아어"
 
@@ -3594,7 +3479,7 @@ msgstr "사우디 아라비아"
 #. language code: sco
 #: ../zypp/LanguageCode.cc:1006
 msgid "Scots"
-msgstr "	스코트어"
+msgstr "\t스코트어"
 
 #. language code: sel
 #: ../zypp/LanguageCode.cc:1012
@@ -3618,8 +3503,7 @@ msgid "Serbia and Montenegro"
 msgstr ""
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000
-#: ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "세르비아어"
 
@@ -3721,8 +3605,7 @@ msgid "Slavic (Other)"
 msgstr "슬라브어파 (기타)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032
-#: ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "슬로바키아어"
 
@@ -3750,6 +3633,11 @@ msgstr "소그드어"
 #: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "솔로몬 제도"
+
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, fuzzy, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "%1은 %2와 충돌합니다"
 
 # SO
 #. language code: som so
@@ -3998,15 +3886,14 @@ msgstr "태국어"
 msgid "Thailand"
 msgstr "태국"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
 
 # TW
 # fuzzy
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112
-#: ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "티베트어"
 
@@ -4055,8 +3942,7 @@ msgstr "톡 피신어"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122
-#: ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "토켈라우"
 
@@ -4149,8 +4035,7 @@ msgstr "터크스 케이커스 제도"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152
-#: ../zypp/CountryCode.cc:442
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "투발루어"
 
@@ -4216,8 +4101,7 @@ msgstr "버그 보고를 만들 수 없습니다: %s\n"
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr ""
 
-#: ../zypp/Url.cc:322
-#: ../zypp/Url.cc:336
+#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
 #, fuzzy
 msgid "Unable to parse Url components"
 msgstr "메세지 내용을 파싱할 수 없습니다"
@@ -4257,11 +4141,6 @@ msgstr "국가 코드"
 #, fuzzy
 msgid "Unknown language: "
 msgstr "알 수 없음(%s)"
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-#, fuzzy
-msgid "Unlock these resolvables"
-msgstr "메모 잠그기/잠금 해제"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -4425,8 +4304,7 @@ msgid "Washo"
 msgstr "와쇼어"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192
-#: ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "웨일스어"
 
@@ -4535,94 +4413,77 @@ msgstr "보안 검사가 실패했습니다"
 msgid "applydeltarpm failed."
 msgstr "불러오기 실패"
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, fuzzy, c-format
 msgid "architecture change of %s to %s"
 msgstr "%s 장치로 바꾸기"
 
 #  Frame title for installation target hard disk / partition(s)
-#: ../zypp/sat/SATResolver.cc:704
+#: ../zypp/solver/detail/SATResolver.cc:875
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "글꼴을 설치하고 지웁니다"
 
-#: ../zypp/sat/SATResolver.cc:688
+#: ../zypp/solver/detail/SATResolver.cc:859
 #, fuzzy
 msgid "conflicting requests"
 msgstr "무제한 요청"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, fuzzy, c-format
 msgid "created backup %s"
 msgstr "모두 백업"
 
-#: ../zypp/sat/SATResolver.cc:978
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "설치"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, c-format
-msgid "delete %s"
-msgstr "%s 삭제"
-
-#: ../zypp/sat/SATResolver.cc:747
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "deleted providers: "
 msgstr "지워진 제공자: "
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%s 로 제공되는 사항의 삭제에 대해 묻지 않음"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
 
 #  Frame title for installation target hard disk / partition(s)
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "%s 의 설치를 금지하지 않음"
 
 #  Frame title for installation target hard disk / partition(s)
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816
-#: ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "%s 설치하지 않음"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
 #  Frame title for installation target hard disk / partition(s)
-#: ../zypp/sat/SATResolver.cc:811
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, c-format
 msgid "do not keep %s installed"
 msgstr "%s 의 설치를 그대로 두지 않음"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "%s 를 %s 로 다운그레이드"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "%s 설치"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4635,11 +4496,8 @@ msgstr ""
 "-->\n"
 "  %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832
-#: ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "%s 유지"
@@ -4652,72 +4510,122 @@ msgstr ""
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:699
+#: ../zypp/solver/detail/SATResolver.cc:870
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:691
+#: ../zypp/solver/detail/SATResolver.cc:862
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "요구한 %s 는 어디에서도 제공되지 않음"
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/solver/detail/SATResolver.cc:856
 #, c-format
 msgid "problem with installed package %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "%s 를 %s 로 옮김"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2057
-#: ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "RPM 출력:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:759
+#: ../zypp/solver/detail/SATResolver.cc:935
 msgid "uninstallable providers: "
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "%s 잠금 해제"
+#, fuzzy
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "%1은 %2와 충돌합니다"
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "모든 사항 잠금을 해제"
+#, fuzzy
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "%1 디렉토리는 이미 목록에 있습니다."
+
+#, fuzzy
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "최상위 위젯의 포커스"
+
+#, fuzzy
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "쪽지 충돌 감지"
+
+#  text is shown in a column of a package list entry
+#, fuzzy
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "해결할수 없는 요구사항..."
+
+#, fuzzy
+#~ msgid "Install missing resolvables"
+#~ msgstr "%s에 대한 인자가 빠졌습니다"
+
+#, fuzzy
+#~ msgid "Keep resolvables"
+#~ msgstr "배경 유지"
+
+#, fuzzy
+#~ msgid "Unlock these resolvables"
+#~ msgstr "메모 잠그기/잠금 해제"
+
+#~ msgid "delete %s"
+#~ msgstr "%s 삭제"
+
+#~ msgid "install %s"
+#~ msgstr "%s 설치"
+
+#~ msgid "unlock %s"
+#~ msgstr "%s 잠금 해제"
+
+#~ msgid "unlock all resolvables"
+#~ msgstr "모든 사항 잠금을 해제"
+
+#, fuzzy
+#~ msgid "Can't add solvables to norepo."
+#~ msgstr "압축 파일 자신을 더할 수 없습니다."
+
+#, fuzzy
+#~ msgid "Can't open solv-file: "
+#~ msgstr "파일을 열 수 없습니다"
+
+#, fuzzy
+#~ msgid "Can't set RepoInfo for norepo."
+#~ msgstr "찾은 결과에 대한 바로가기를 설정할 수 있습니다."
+
+#, fuzzy
+#~ msgid "Error reading solv-file: "
+#~ msgstr "메일파일을 읽는 중 오류 발생: %s"
 
 #, fuzzy
 #~ msgid "%s conflicts with other resolvables"
@@ -4751,10 +4659,6 @@ msgstr "모든 사항 잠금을 해제"
 #~ msgstr "다시 설치해야 합니다."
 
 #, fuzzy
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "의존성을 만족하지 못함:"
-
-#, fuzzy
 #~ msgid "%s will not be uninstalled, because it is still required"
 #~ msgstr "의존성을 만족하지 못함:"
 
@@ -4765,6 +4669,7 @@ msgstr "모든 사항 잠금을 해제"
 #, fuzzy
 #~ msgid ", Action: "
 #~ msgstr "작동"
+
 #~ msgid "patch"
 #~ msgstr "패치"
 
@@ -4798,4 +4703,3 @@ msgstr "모든 사항 잠금을 해제"
 #, fuzzy
 #~ msgid "Ignore this requirement generally"
 #~ msgstr "해결할수 없는 요구사항..."
-

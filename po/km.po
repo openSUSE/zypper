@@ -1,94 +1,83 @@
-# translation of zypp.km.po to Khmer
+# translation of zypp.km.po to khmer
 # Copyright (C) YEAR SuSE Linux Products GmbH, Nuernberg
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Eng Vannak <evannak@khmeros.info>, 2006.
-# Khoem Sokhem <khoemsokhem@khmeros.info>, 2006, 2007.
-# Auk Piseth <piseth_dv@khmeros.info>, 2007.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2006, 2007, 2008.
+# Auk Piseth <piseth_dv@khmeros.info>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
-"PO-Revision-Date: 2007-09-07 08:39+0700\n"
-"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
-"Language-Team: Khmer <support@khmeros.info>\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
+"PO-Revision-Date: 2008-04-23 07:33+0700\n"
+"Last-Translator: Auk Piseth <piseth_dv@khmeros.info>\n"
+"Language-Team: khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: 0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/sat/SATResolver.cc:757
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:933
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "មិន​មាន​អ្នក​ផ្ដល់ %s ដែល​អាច​ដំឡើង​បាន"
+msgstr ""
+"\n"
+"លុបក្រុមហ៊ុនផ្ដល់ ៖ "
 
 #: ../zypp/media/MediaException.cc:214
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr " បញ្ហា​វិញ្ញាបនបត្រ SSL ផ្ទៀងផ្ទាត់​ថា​វិញ្ញាបនបត្រ CA គឺ​ត្រឹមត្រូវ​សម្រាប់ '%s'."
 
-#: ../zypp/sat/SATResolver.cc:709
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:880
+#, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s ប៉ះ​ទង្គិច​ជាមួយ​នឹង %s"
+msgstr "%s ប៉ះទង្គិច​ជាមួយ %s ដែល​បាន​ផ្ដល់​ដោយ %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "ការ​ដំឡើង %s បាន​បរាជ័យ"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "បាន​ដំឡើង %s ដោយ​ជោគជ័យ"
 
-#: ../zypp/sat/SATResolver.cc:695
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:866
+#, c-format
 msgid "%s is not installable"
-msgstr "មិន​បាន​ដំឡើង"
+msgstr "%s មិនអាច​ដំឡើងបាន"
 
-#: ../zypp/sat/SATResolver.cc:714
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:885
+#, c-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s លែង​ប្រើ %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s ផ្ដល់​នូវ​ភាព​អាស្រ័យ​នេះ ប៉ុន្តែ​នឹង​ផ្លាស់ប្ដូរ​ស្ថាបនត្យកម្ម​របស់​ធាតុ​ដែល​បាន​ដំឡើង"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s ផ្ដល់​ភាព​អាស្រ័យ​នេះ​ ប៉ុន្តែ​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់​របស់​ធាតុ​ដែល​បាន​ដំឡើង"
+msgstr "%s លែងប្រើ %s ដែល​ផ្ដល់ដោយ %s"
 
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "បរាជ័យ​ក្នុងការ​យក %s ចេញ"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "បាន​យក %s ចេញ​ដោយ​ជោគជ័យ"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s ត្រូវការ %s ប៉ុន្តែ​តម្រូវការ​នេះ​មិនអាច​ផ្ដល់​បានទេ"
 
 #. language code: abk ab
 #: ../zypp/LanguageCode.cc:240
@@ -110,12 +99,12 @@ msgstr "អាកូលី"
 msgid "Adangme"
 msgstr "អាដង់ម៉េ"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "កំពុង​បន្ថែម​ឃ្លាំង '%s'"
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "លទ្ធផល rpm បន្ថែមទៀត ៖"
 
@@ -328,7 +317,7 @@ msgstr "អូទ្រីស"
 msgid "Austronesian (Other)"
 msgstr "អូស្ត្រូណេស៊ី (ផ្សេង​ទៀត)"
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​សម្រាប់ '%s'"
@@ -366,11 +355,11 @@ msgstr "អាហ្ស៊ែរបែហ្សង់"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "ឯកសារ​ខូច​ឈ្មោះ ៖ %s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "ចំណុច​ភ្ជាប់​ឧបករណ៍​ផ្ទុក​មិនត្រឹមត្រូវ"
 
 #. :BRA:076:
 #: ../zypp/CountryCode.cc:254
@@ -592,7 +581,7 @@ msgstr "ប៊្រុយណេ ដារូសាឡាម"
 msgid "Buginese"
 msgstr "ប៊ុយហ្គីណេសេ"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "កំពុង​ស្ថាបនា​ឃ្លាំង '%s'"
@@ -620,7 +609,7 @@ msgstr "ប៊ូរគីណាហ្វាសូ"
 #. language code: bur mya my
 #: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
 msgid "Burmese"
-msgstr "ប៊ុយហ្គីណេសេ"
+msgstr "ភូមា"
 
 #. :BHR:048:
 #: ../zypp/CountryCode.cc:248
@@ -642,39 +631,34 @@ msgstr "កម្ពុជា"
 msgid "Cameroon"
 msgstr "កាមេរ៉ូន"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
-#, fuzzy
+#: ../zypp/sat/detail/PoolImpl.cc:147
 msgid "Can not create sat-pool."
-msgstr "មិន​អាច​បង្កើត​ឯកសារ​បាន​ឡើយ ។"
+msgstr "មិនអាច​បង្កើត sat-pool បានទេ ។"
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "មិនអាច​យក​សោ mutex បានឡើយ"
 
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
-msgstr ""
-
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr ""
+msgstr "មិនអាច chdir ទៅ '/' ក្នុង chroot (%s) បានទេ ។"
 
 #: ../zypp/ExternalProgram.cc:238
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "មិនអាច chroot ទៅ '%s' (%s) បានទេ ។"
 
 #. don't want to get here
 #: ../zypp/ExternalProgram.cc:259
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "មិនអាច​ប្រតិបត្តិ '%s' (%s) បានទេ ។"
 
 #: ../zypp/ExternalProgram.cc:267
-#, fuzzy, c-format
+#, c-format
 msgid "Can't fork (%s)."
-msgstr "មិន​អាច​រក %s ។"
+msgstr "មិនអាច​បែងចែក (%s) បានទេ ។"
 
 #: ../zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -684,33 +668,29 @@ msgstr "មិនអាច​ចាប់ផ្ដើម​គុណលក្ខ
 msgid "Can't initialize recursive mutex"
 msgstr "មិនអាច​ចាប់ផ្ដើម mutex ហៅខ្លួន​ឯង​បាន​ឡើយ"
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, c-format
+msgid "Can't open lock file: %s"
+msgstr "មិនអាច​បើក​ឯកសារ​សោ ៖ %s"
+
 #: ../zypp/ExternalProgram.cc:174
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pipe (%s)."
-msgstr "មិន​អាច​បើក​ឯកសារ %1 បាន​ឡើយ ។"
+msgstr "មិនអាច​បើក​បំពង់ (%s) ។"
 
 #: ../zypp/ExternalProgram.cc:163
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pty (%s)."
-msgstr "មិន​អាច​បើក​ឯកសារ ៖ %s ។"
+msgstr "មិនអាច​បើក pty (%s) ។"
 
-#: ../zypp/Repository.cc:136
-#, fuzzy
-msgid "Can't open solv-file: "
-msgstr "មិន​អាច​បើក​ឯកសារ %1 បាន​ឡើយ ។"
-
-#: ../zypp/repo/RepoProvideFile.cc:207
-#, fuzzy, c-format
+#: ../zypp/repo/RepoProvideFile.cc:216
+#, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "មិន​អាច​ផ្ដល់​ឯកសារ %s ពី​ឃ្លាំង %s"
+msgstr "មិនអាច​ផ្ដល់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' បានទេ"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr "មិនអាច​លែង​សោ mutex បាន​ឡើយ"
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
-msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -724,22 +704,21 @@ msgstr "កាណាដា"
 #: ../zypp/KeyRing.cc:276
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "មិនអាច​បង្កើត​សោ​សាធារណៈ %s ពី keyring %s ទៅ​ឯកសារ %s បានទេ"
 
 #: ../zypp/media/MediaException.cc:182
-#, fuzzy
 msgid "Cannot eject any media"
-msgstr "មិន​អាច​រក​គ្រោងការណ៍ ។"
+msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក​ណាមួយ​ចេញ​ឡើយ"
 
 #: ../zypp/media/MediaException.cc:184
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot eject media '%s'"
-msgstr "មិន​អាច​បើក​ធាតុ​របស់​ផ្ទៃតុ '%s'"
+msgstr "មិនអាច​ច្រាន​ឧបករណ៍​ផ្ទុក '%s' ចេញបានទេ"
 
 #: ../zypp/media/MediaException.cc:67
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot write file '%s'."
-msgstr "មិនអាច​សរសេរ​ទៅ​កាន់​ឯកសារ %1 បាន​ឡើយ ។"
+msgstr "មិនអាច​សរសេរ​ឯកសារ '%s' បានទេ ។"
 
 #. :CUB:192:
 #: ../zypp/CountryCode.cc:275
@@ -808,7 +787,7 @@ msgstr "ចាមូរូ"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​សម្រាប់ %s ៖"
@@ -906,17 +885,16 @@ msgstr "កូឡុំប៊ី"
 #: ../zypp/ExternalProgram.cc:346
 #, c-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ​ដោយ​ស្ថានភាព %d ។"
 
 #: ../zypp/ExternalProgram.cc:371
-#, fuzzy
 msgid "Command exited with unknown error."
-msgstr "ពាក្យ​បញ្ជា​បានប្រតិបត្តិ នៅ​ពេល​តភ្ជាប់"
+msgstr "ពាក្យ​បញ្ជា​បាន​ចេញ ដោយ​មាន​កំហុស​មិន​ស្គាល់ ។"
 
 #: ../zypp/ExternalProgram.cc:366
 #, c-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "ពាក្យ​បញ្ជា​ត្រូវ​បាន​ផ្ដាច់​ដោយ​សញ្ញា %d (%s) ។"
 
 #. :KIR:296:
 #: ../zypp/CountryCode.cc:339
@@ -1074,10 +1052,6 @@ msgstr "ឌីវេហី"
 msgid "Djibouti"
 msgstr "ហ្ស៊ីបូទី"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-msgid "Do not install or delete the resolvables concerned"
-msgstr "កុំ​ដំឡើង ឬ​លុប​អ្វី​ដែលអាច​ដោះស្រាយ​បាន​ដែល​ទាក់ទង"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1105,12 +1079,15 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"ទាញយក​កំហុស​សម្រាប់ '%s' ៖\n"
+"កូដ​កំហុស ៖ %s\n"
+"សារ​កំហុស ៖ %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:84
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr ""
+msgstr "ទាញយក​ការ​ចាប់ផ្ដើម​បាន​បរាជ័យ​សម្រាប់ '%s'"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1123,10 +1100,10 @@ msgid "Duala"
 msgstr "ឌុយអាឡា"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
+msgstr "ប្រភេទ​មិនច្បាស់ '%s' សម្រាប់ %u បៃ ឆេកសាំ '%s'"
 
 #. language code: dut nld nl
 #: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
@@ -1190,16 +1167,15 @@ msgstr "អេឡាម៊ិតេ"
 
 #: ../zypp/media/MediaException.cc:135
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "គោលដៅ​ទទេ​នៅ​ក្នុង URI"
 
 #: ../zypp/media/MediaException.cc:130
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "ប្រព័ន្ធ​ឯកសា​ទទេ​នៅ​ក្នុង URI"
 
 #: ../zypp/media/MediaException.cc:125
-#, fuzzy
 msgid "Empty host name in URI"
-msgstr "ឈ្មោះ CA ទទេ ។"
+msgstr "ឈ្មោះ​ម៉ាស៊ីន​ទទេ​ក្នុង URI"
 
 #: ../zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
@@ -1234,12 +1210,7 @@ msgstr "អេរីទ្រា"
 #: ../zypp/media/MediaException.cc:161
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-
-#: ../zypp/Repository.cc:141
-#, fuzzy
-msgid "Error reading solv-file: "
-msgstr "កំហុស​ខណៈពេល​អាន​ឃ្លាំង ៖"
+msgstr "កំហុស​នៅពេល​កំណត់​ជម្រើស​ទាញយក​សម្រាប់ '%s' ៖"
 
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
@@ -1277,29 +1248,28 @@ msgid "Ewondo"
 msgstr "អេវ៉ុងដូ"
 
 #: ../zypp/KeyRing.cc:558
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "បរាជ័យ​ក្នុងការ​ចាប់ផ្ដើម VM ។"
+msgstr "បរាជ័យ​ក្នុង​ការ​លុប​សោ ។"
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "បរាជ័យក្នុង​ការ​នាំចូល​សោ​សាធារណៈ​ពី​ឯកសារ %s: %s"
 
 #: ../zypp/media/MediaException.cc:31
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount %s on %s"
-msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ញែក ៖ %s ។"
+msgstr "បរាជ័យ​ក្នុង​ការ​ម៉ោន %s លើ %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
-#, fuzzy, c-format
+#: ../zypp/target/rpm/RpmDb.cc:1122
+#, c-format
 msgid "Failed to remove public key %s: %s"
-msgstr "មិន​អាច​យក​សោរ​សាធារណៈ​បានទេ ។"
+msgstr "បរាជ័យ​ក្នុងការ​យក​សោ​សាធារណៈ %s: %s"
 
 #: ../zypp/media/MediaException.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to unmount %s"
-msgstr "បរាជ័យ​ក្នុង​ការ​ផ្ទុក​ម៉ូឌុល \"%s\" ។"
+msgstr "បរាជ័យ​ក្នុងការ​អាន់ម៉ោន %s"
 
 #. :FJI:242:
 #: ../zypp/CountryCode.cc:294
@@ -1402,9 +1372,9 @@ msgstr ""
 "ទោះ​ជាយ៉ាង​ណា​ក៏ដោយ ប្រើ​ឯកសារ​នេះ​ឬ ?"
 
 #: ../zypp/media/MediaException.cc:60
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "រក​មិន​ឃើញ​ឯកសារ %1 នៅ​ក្នុង​ឃ្លាំង​ទេ ។"
+msgstr "រក​មិនឃើញ​ឯកសារ '%s' នៅ​លើ​ឧបករណ៍​ផ្ទុក​ទេ '%s'"
 
 #. language code: fil
 #: ../zypp/LanguageCode.cc:514
@@ -1427,9 +1397,8 @@ msgid "Finno-Ugrian (Other)"
 msgstr "ហ្វាំងណូ អ៊ុយហ្គ្រីយ៉ាន (ផ្សេង​ទៀត)"
 
 #: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
-#, fuzzy
 msgid "Following actions will be done:"
-msgstr "កញ្ចប់​ដូច​ខាង​ក្រោម​នេះ​នឹង​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ទាន់សម័យ ៖\n"
+msgstr "អំពើ​ខាងក្រោម​នឹង​ត្រូវបាន​ធ្វើ​រួច ៖"
 
 #. language code: fon
 #: ../zypp/LanguageCode.cc:520
@@ -1531,9 +1500,9 @@ msgstr "ហ្កាយ៉ា"
 msgid "Geez"
 msgstr "ហ្គី"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
-msgid "Generally ignore this requirement"
-msgstr "ជា​ទូទៅ មិនអើពើ​តម្រូវ​កា​រនេះ"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
+msgid "Generally ignore of some dependecies"
+msgstr "ជាទូទៅ មិនអើពើ​នឹង​ភាព​អាស្រ័យ​មួយ​ចំនួន"
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1823,27 +1792,10 @@ msgid "Igbo"
 msgstr "អ៊ីកបូ"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
 #, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "មិន​អើពើថា​បាន​កំណត់ %s ដើម្បី​ដំឡើង​រួចហើយ"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "មិន​អើពើ​នឹង​ការ​លែង​ប្រើ %s នៅ​ក្នុង %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "មិន​អើពើ​នឹង​ការ​ប៉ះ​ទង្គិច​នៃ %s"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-msgid "Ignore this requirement just here"
-msgstr "មិន​អើពើ​នឹង​តម្រូវ​ការ​នេះ​តែនៅ​ទីនេះ"
+msgid "Ignore some dependencies of %s"
+msgstr "មិន​អើពើ​នឹង​ភាពអាស្រ័យ %s មួយ​ចំនួន"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1890,23 +1842,7 @@ msgstr "ឥណ្ឌូនេស៊ី"
 msgid "Ingush"
 msgstr "អ៊ីងហ្គូស"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "ដំឡើង %s ទោះ​បីជា​វា​នឹង​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម​ក៏ដោយ"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr "ដំឡើង %s ទោះ​បី​ជា​វា​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់​ក៏​ដោយ"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "ដំឡើង​កញ្ចប់​ដោះស្រាយ​ដែល​បាត់"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr "ការ​ដំឡើង ត្រូវបាន​បោះបង់​ដោយ​ផ្ទាល់ ។"
 
@@ -1980,7 +1916,12 @@ msgstr "តួអក្សរ​បំបែក​សម្រាប់​ពុ
 msgid "Invalid port component '%s'"
 msgstr "សមាសភាគ​ច្រក​មិន​ត្រឹមត្រូវ '%s'"
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "កន្សោម​ធម្មតា​មិនត្រឹមត្រូវ '%s' ៖ regcomp បាន​ត្រឡប់ %d"
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr "ឈ្មោះ​អ្នកប្រើ ឬ​ពាក្យ​សម្ងាត់ មិន​ត្រឹមត្រូវ ។"
 
@@ -2028,11 +1969,6 @@ msgstr "ភាសា​អ៊ីរ៉ូគុយអូអ៊ីយ៉ាន"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "អ៊ីស្រាអែល"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "មិន​អាច​បើក​ឯកសារ %1 បាន​ឡើយ ។"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2158,10 +2094,6 @@ msgstr "កាហ្សាក់ស្តង់"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "កាហ្សាក់ស្តង់"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "រក្សា​កញ្ចប់​ដោះស្រាយ"
 
 #. :JPN:392:
 #: ../zypp/CountryCode.cc:335
@@ -2515,7 +2447,7 @@ msgstr "ម៉ាល់ឌីវ"
 
 #: ../zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "URI មាន​ទ្រង់ទ្រាយ​មិនត្រឹមត្រូវ"
 
 #. :MKD:807:
 #: ../zypp/CountryCode.cc:363
@@ -2625,21 +2557,21 @@ msgstr "ម៉ាយុត"
 #: ../zypp/media/MediaException.cc:169
 #, c-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "ប្រភព​ឧបករណ៍​ផ្ទុក '%s' មិនមាន​ឧបករណ៍​ផ្ទុក​ដែល​ត្រូវការ​ទេ"
 
 #: ../zypp/media/MediaException.cc:175
 #, c-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "ឧបករណ៍​ផ្ទុក '%s' គឺ​កំពុង​ប្រើ​ដោយ​ឧបករណ៍​ផ្សេង"
 
 #: ../zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr ""
+msgstr "មិនបាន​ភ្ជាប់​ឧបករណ៍​ផ្ទុក"
 
 #: ../zypp/media/MediaException.cc:53
 #, c-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+msgstr "ឧបករណ៍​ផ្ទុក​មិនបាន​បើក នៅពេល​ធ្វើ​អំពើ '%s' ។"
 
 #. language code: men
 #: ../zypp/LanguageCode.cc:808
@@ -2878,7 +2810,7 @@ msgstr "នីអ៊ុយេអាន"
 msgid "No Code"
 msgstr "គ្មាន​កូដ"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
 msgstr "គ្មាន url នៅ​ក្នុង​ឃ្លាំង ។"
 
@@ -2987,9 +2919,8 @@ msgid "Oman"
 msgstr "អូម៉ង់"
 
 #: ../zypp/media/MediaException.cc:145
-#, fuzzy
 msgid "Operation not supported by medium"
-msgstr "ទម្រង់កំណែ​​មិន​ត្រូវ​បាន​គាំទ្រ​ដោ​យ​ម៉ូឌុល​ Apparmor ឡើយ\n"
+msgstr "ប្រតិបត្តិការ​មិនបាន​គាំទ្រ​ដោយ​ឧបករណ៍​ផ្ទុក​ទេ"
 
 #. language code: ori or
 #: ../zypp/LanguageCode.cc:910
@@ -2999,7 +2930,7 @@ msgstr "អូរីយ៉ា"
 #. language code: orm om
 #: ../zypp/LanguageCode.cc:912
 msgid "Oromo"
-msgstr "អុរុមុ"
+msgstr "អូរ៉ូម៉ូ​"
 
 #. language code: osa
 #: ../zypp/LanguageCode.cc:914
@@ -3093,27 +3024,19 @@ msgid "Paraguay"
 msgstr "ប៉ារ៉ាហ្គាយ"
 
 #: ../zypp/media/MediaException.cc:106
-#, fuzzy, c-format
+#, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "'%1' មិន​មែន​ជា​ថត​ទេ​ ។"
+msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ថត​ទេ ។"
 
 #: ../zypp/media/MediaException.cc:98
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "មិនបាន​គាំទ្រ​ការ​ញែក​ប៉ារ៉ាម៉ែត្រ​ផ្លូវ​សម្រាប់ URL នេះ​ឡើយ"
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr "មិនបាន​គាំទ្រ​ការញែក​ប៉ារ៉ាម៉ែត្រ​ផ្លូវ​សម្រាប់ URL នេះ​ឡើយ"
+msgstr "ផ្លូវ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' មិនមែន​ជា​ឯកសារ​ទេ ។"
 
 #: ../zypp/media/MediaException.cc:200
-#, fuzzy, c-format
+#, c-format
 msgid "Permission to access '%s' denied."
-msgstr "សិទ្ធិ​ត្រូវ​បាន​បដិសេធ ។"
+msgstr "សិទ្ធិ​ចូល​ដំណើរការ​ទៅ '%s' បាន​បដិសេធ ។"
 
 #. language code: per fas fa
 #: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
@@ -3193,7 +3116,7 @@ msgstr "ព័រតូរីកូ"
 #. language code: pus ps
 #: ../zypp/LanguageCode.cc:958
 msgid "Pushto"
-msgstr "ពុយហ្សតូ"
+msgstr "ពុហ្សតូ"
 
 #. :PRY:600:
 #: ../zypp/CountryCode.cc:405
@@ -3210,11 +3133,10 @@ msgid "Query string parsing not supported for this URL"
 msgstr "មិនបាន​គាំទ្រ​ការញែក​ខ្សែអក្សរ​សំណួរ​សម្រាប់ URL នេះ​ឡើយ"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
-#, fuzzy
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 msgid "RPM failed: "
-msgstr "បាន​បរាជ័យ"
+msgstr "RPM បាន​បរាជ័យ ៖ "
 
 #. language code: roh rm
 #: ../zypp/LanguageCode.cc:970
@@ -3240,15 +3162,10 @@ msgstr "រ៉ារ៉ូតុងហ្គង់"
 msgid "Relative path not allowed if authority exists"
 msgstr "មិនបាន​អនុញ្ញាត​ផ្លូវ​ដែល​ទាក់ទង​ទេ ប្រសិន​បើ​មាន​អាជ្ញាធរ"
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "យក​ឃ្លាំង '%s' ចេញ"
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3282,7 +3199,7 @@ msgstr "រ៉ូម៉ានី"
 #. language code: run rn
 #: ../zypp/LanguageCode.cc:978
 msgid "Rundi"
-msgstr "រ៉ុងឌី"
+msgstr "រុន្ឌី"
 
 #. language code: rus ru
 #: ../zypp/LanguageCode.cc:980
@@ -3470,9 +3387,9 @@ msgid "Sign Languages"
 msgstr "ភាសា​សញ្ញា"
 
 #: ../zypp/KeyRing.cc:568
-#, fuzzy, c-format
+#, c-format
 msgid "Signature file %s not found"
-msgstr "រក​មិន​​ឃើញ​កញ្ចប់​ប្រភព '%s' ។"
+msgstr "រក​មិនឃើញ​ឯកសារ​ហត្ថលេខា %s ទេ"
 
 #. language code: bla
 #: ../zypp/LanguageCode.cc:354
@@ -3548,6 +3465,11 @@ msgstr "សូដ្យ៊ាន"
 #: ../zypp/CountryCode.cc:411
 msgid "Solomon Islands"
 msgstr "កោះ​សូឡូម៉ូន"
+
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "កញ្ចប់​ដោះស្រាយ %s ប៉ះទង្គិច​នឹង %s ដែល​បាន​ផ្ដល់​ដោយ​ខ្លួនវា​ផ្ទាល់"
 
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -3702,12 +3624,12 @@ msgstr "ស៊ីរី"
 #: ../zypp/media/MediaException.cc:91
 #, c-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "ករណី​លើកលែង​ប្រព័ន្ធ '%s' នៅលើ​ឧបករណ៍​ផ្ទុក '%s' ។"
 
 #: ../zypp/ZYppFactory.cc:354
 #, c-format
 msgid "System management is locked by the application with pid %d. Please close this application before trying again."
-msgstr ""
+msgstr "ការ​គ្រប់គ្រង​ប្រព័ន្ធ​ត្រូវបាន​ចាក់សោ​ដោយ​កម្មវិធី​ដែល​មាន pid %d ។ សូម​បិទ​កម្មវិធី​នេះ មុនពេល​ព្យាយាម​ម្ដងទៀត ។"
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3784,9 +3706,9 @@ msgstr "ថៃ"
 msgid "Thailand"
 msgstr "ថៃ"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
-msgstr ""
+msgstr "អំពើ​នេះ កំពុង​រត់​ដោយ​កម្មវិធី​ផ្សេង​មួយ​ទៀត ។"
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -3801,12 +3723,12 @@ msgstr "ធីហ្គ្រី"
 #. language code: tir ti
 #: ../zypp/LanguageCode.cc:1118
 msgid "Tigrinya"
-msgstr "ទី​ក្រីនយ៉ា"
+msgstr "ទី​គ្រីនយ៉ា"
 
 #: ../zypp/media/MediaException.cc:207
 #, c-format
 msgid "Timeout exceed when access '%s'."
-msgstr ""
+msgstr "អស់ពេល នៅពេល​ចូល​ដំណើរការ '%s' ។"
 
 #. language code: tem
 #: ../zypp/LanguageCode.cc:1100
@@ -3831,7 +3753,7 @@ msgstr "តូហ្គោ"
 #. language code: tpi
 #: ../zypp/LanguageCode.cc:1134
 msgid "Tok Pisin"
-msgstr "តុក ពិសាំង"
+msgstr "Tok Pisin"
 
 #. language code: tkl
 #. :TJK:762:
@@ -3857,7 +3779,7 @@ msgstr "តុងហ្គា (កោះ​តុងហ្គា)"
 #: ../zypp/KeyRing.cc:507
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
-msgstr ""
+msgstr "នាំចូល​សោ %s ដែល​មិនមាន​ទៅ​ក្នុង keyring %s"
 
 #. :TUR:792:
 #: ../zypp/CountryCode.cc:441
@@ -3877,7 +3799,7 @@ msgstr "សុងហ្កា"
 #. language code: tsn tn
 #: ../zypp/LanguageCode.cc:1138
 msgid "Tswana"
-msgstr "វ៉ាន់ណា"
+msgstr "ស្វាណា"
 
 #. language code: tum
 #: ../zypp/LanguageCode.cc:1144
@@ -4026,19 +3948,15 @@ msgstr "ប្រទេស​ដែល​មិន​ស្គាល់ ៖ "
 msgid "Unknown language: "
 msgstr "មិន​ស្គាល់​ភាសា ៖ "
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-msgid "Unlock these resolvables"
-msgstr "ដោះសោរ​កញ្ចប់​ដោះ​ស្រាយ​ទាំងនេះ"
-
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "មិនបាន​គាំទ្រ​វិធីសាស្ត្រ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ HTTP '%s' ឡើយ"
 
 #: ../zypp/media/MediaException.cc:140
-#, fuzzy, c-format
+#, c-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "គ្រោងការណ៍ URL '%1' មិនត្រឹមត្រូវ ។"
+msgstr "គ្រោងការណ៍ URI ដែល​មិនបាន​គាំទ្រ​នៅ​ក្នុង '%s' ។"
 
 #: ../devel/devel.mvidner/installation_sources.cc:75
 #, c-format
@@ -4292,90 +4210,72 @@ msgstr "ការ​ពិនិត្យ applydeltarpm បាន​បរាជ
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm បាន​បរាជ័យ ។"
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "ការ​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម​នៃ %s ទៅ %s"
 
-#: ../zypp/sat/SATResolver.cc:704
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:875
+#, c-format
 msgid "cannot install both %s and %s"
-msgstr "មិន​អាច​ដំឡើង %s"
+msgstr "មិនអាច​ដំឡើង​ទាំង %s និង %s"
 
-#: ../zypp/sat/SATResolver.cc:688
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:859
 msgid "conflicting requests"
-msgstr "សំណើ​ការតភ្ជាប់​ទៅ ៖ "
+msgstr "សំណើ​ការ​ប៉ះទង្គិច"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, c-format
 msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង %s"
 
-#: ../zypp/sat/SATResolver.cc:978
-#, fuzzy, c-format
-msgid "deinstallation of %s"
-msgstr "ការ​ដំឡើង %s បាន​បរាជ័យ ៖"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, c-format
-msgid "delete %s"
-msgstr "លុប %s"
+msgid "deinstallation of %s"
+msgstr "ការ​លុប​នៃ %s"
 
-#: ../zypp/sat/SATResolver.cc:747
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "deleted providers: "
-msgstr "គ្មាន​កញ្ចប់​ណា​ផ្ដល់ %s"
+msgstr "ក្រុមហ៊ុន​ផ្ដល់​ដែល​បាន​លុប ៖ "
 
-#: ../zypp/sat/SATResolver.cc:899
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:1077
+#, c-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "កុំ​ដំឡើង ឬ​លុប​អ្វី​ដែលអាច​ដោះស្រាយ​បាន​ដែល​ទាក់ទង"
+msgstr "កុំ​ស្នើ​ឲ្យ​លុប​កញ្ចប់​ដោះស្រាយ​ទាំងអស់​ដោយ​ផ្ដល់ %s"
 
-#: ../zypp/sat/SATResolver.cc:884
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:1062
+#, c-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "មិន​មាន​អ្នក​ផ្ដល់ %s ដែល​អាច​ដំឡើង​បាន"
+msgstr "កុំ​ស្នើ​ឲ្យ​ដំឡើង​កញ្ចប់​ដោះស្រាយ​ដោយ​ផ្ដល់ %s"
 
-#: ../zypp/sat/SATResolver.cc:837
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:1015
+#, c-format
 msgid "do not forbid installation of %s"
-msgstr "កុំ​ដំឡើង %s"
+msgstr "កុំ​ហាម​ការ​ដំឡើង​នៃ %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "កុំ​ដំឡើង %s"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "កុំ​ដំឡើង​កំណែ​ថ្មីរបស់ %s"
 
-#: ../zypp/sat/SATResolver.cc:811
-#, fuzzy, c-format
-msgid "do not keep %s installed"
-msgstr "មិន​បាន​ដំឡើង"
-
-#: ../zypp/sat/SATResolver.cc:944
-#, fuzzy, c-format
-msgid "downgrade of %s to %s"
-msgstr "កំពុង​ធ្វើ​ឲ្យ %s ទាន់​សម័យ​ទៅ %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, c-format
-msgid "install %s"
-msgstr "ដំឡើង %s"
+msgid "do not keep %s installed"
+msgstr "កុំ​ទុក %s ឲ្យ​នៅ​ដំឡើង"
 
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1122
+#, c-format
+msgid "downgrade of %s to %s"
+msgstr "បន្ទាប %s ទៅ %s"
+
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4383,11 +4283,13 @@ msgid ""
 "-->\n"
 "  %s"
 msgstr ""
+"ដំឡើង %s (ជាមួយ​នឹង​ការ​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់)\n"
+"  %s\n"
+"-->\n"
+"  %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "រក្សា %s"
@@ -4400,34 +4302,34 @@ msgstr "libhal_ctx_new ៖ មិនអាច​បង្កើត​បរិ�
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection ៖ មិនអាច​​កំណត់​ការ​តភ្ជាប់ dbus បានឡើយ"
 
-#: ../zypp/sat/SATResolver.cc:699
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:870
+#, c-format
 msgid "nothing provides %s needed by %s"
-msgstr "%s ត្រូវការ​ដោយ %s"
+msgstr "គ្មាន​អ្វី​ផ្ដល់ %s ដែល​ត្រូវការ​ដោយ %s ទេ"
 
-#: ../zypp/sat/SATResolver.cc:691
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:862
+#, c-format
 msgid "nothing provides requested %s"
-msgstr "គ្មាន​កញ្ចប់​ណា​ផ្ដល់ %s"
+msgstr "គ្មាន​អ្វី​ផ្ដល់ %s ដែលបាន​ស្នើ​ទេ"
 
-#: ../zypp/sat/SATResolver.cc:685
-#, fuzzy, c-format
+#: ../zypp/solver/detail/SATResolver.cc:856
+#, c-format
 msgid "problem with installed package %s"
-msgstr "បញ្ហា​ក្នុង​ការ​ដំឡើង​កញ្ចប់​ប្រភព %s-%s ៖"
+msgstr "បញ្ហា​ជាមួយ​កញ្ចប់​ដែល​បាន​ដំឡើង %s"
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
-msgstr ""
+msgstr "ការ​ជំនួស %s ជាមួយ %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm បាន​បង្កើត %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4436,18 +4338,18 @@ msgstr ""
 "rpm បាន​កំណត់ %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា ៖​\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "លទ្ធផល rpm ៖"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm បានរ​ក្សា​ទុក %s ជា %s ប៉ុន្តែ​វា​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4456,339 +4358,7 @@ msgstr ""
 "rpm បាន​រក្សាទុក %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់ ២៥ ជួរ​ដំបូង​ខុសគ្នា៖\n"
 
-#: ../zypp/sat/SATResolver.cc:759
-#, fuzzy
+#: ../zypp/solver/detail/SATResolver.cc:935
 msgid "uninstallable providers: "
-msgstr "មិន​មាន​អ្នក​ផ្ដល់ %s ដែល​អាច​ដំឡើង​បាន"
+msgstr "ក្រុមហ៊ុន​លក់​ដែល​អាច​លុបបាន ៖ "
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "ដោះសោ %s"
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "ដោះសោរ​កញ្ចប់​ដោះ​ស្រាយ​ទាំងអស់"
-
-#~ msgid "Reading '%s' repository cache"
-#~ msgstr "កំពុង​អាន​ឃ្លាំង '%s'"
-
-#~ msgid "Reading patch and delta rpms from '%s' repository cache"
-#~ msgstr "កំពុង​អាន​បំណះ និង​ rpms ដែល​តា​ពីឃ្លាំង '%s'"
-
-#~ msgid "Cleaning repository '%s' cache"
-#~ msgstr "កំពុង​សម្អាតឃ្លាំង '%s'"
-
-#~ msgid "Reading repository '%s' cache"
-#~ msgstr "កំពុង​អាន​​ឃ្លាំង '%s'"
-
-#~ msgid "Software management is already running."
-#~ msgstr "ការ​គ្រប់គ្រង​​កម្មវិធី គឺ​កំពុង​រត់​រួចហើយ ។"
-
-#~ msgid "%s is replaced by %s"
-#~ msgstr "%s ត្រូវ​ជំនួស​ដោយ %s"
-
-#~ msgid "%s replaced by %s"
-#~ msgstr "%s បាន​ជំនួស​ដោយ %s"
-
-#~ msgid "%s will be deleted by the user.\n"
-#~ msgstr "%s នឹង​ត្រូវ​បាន​លុប​ដោយ​អ្នក​ប្រើ ។\n"
-
-#~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s នឹង​ត្រូវ​បានលុប​ដោយ​កម្មវិធី​ផ្សេង ។ (ApplLow/ApplHigh)\n"
-
-#~ msgid "%s will be installed by the user.\n"
-#~ msgstr "%s នឹង​ត្រូវ​បាន​ដំឡើង​ដោយ​​អ្នក​ប្រើ ។\n"
-
-#~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-#~ msgstr "%s នឹង​ត្រូវ​បាន​ដំឡើង​ដោយ​កម្មវិធី​ផ្សេង ។ (ApplLow/ApplHigh)\n"
-
-#~ msgid "No valid solution found within %d seconds"
-#~ msgstr "រក​មិន​ឃើញ​ដំណោះ​ស្រាយ​ត្រឹមត្រូវ​ក្នុង​រយៈ​ពេល %d វិនាទី ។"
-
-#~ msgid "The solver has reached a defined timout"
-#~ msgstr "កម្មវិធី​ដោះស្រាយ​បាន​ឈាន​ដល់​ពេល​សម្រាក​ដែល​បាន​កំណត់"
-
-#~ msgid "No valid solution found with just resolvables of best architecture."
-#~ msgstr "រក​មិន​ឃើញ​ដំណោះ​ស្រាយ​ ដែល​មិន​អាច​ដោះស្រាយ​នៃ​ស្ថាបត្យកម្ម​ដ៏​ល្អ​បំផុត ។"
-
-#~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
-#~ msgstr "ដោយ​ឲ្យវា​រត់​សម្រាប់​តែ​អ្វី​អាច​ដោះស្រាយ​បាន​ជា​មួយ​ស្ថាបត្យកម្ម​ដ៏​ល្អ​បំផុត​ត្រូវ​បាន​គេ​ពិចារណា ។\n"
-
-#~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
-#~ msgstr "ដោយ​ទាក់ទង​ទៅ​នឹង​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ទាំង​អស់​ត្រូវ​ការ​ពេលវេលា​ ប៉ុន្តែ​អាច​ទទួល​បានលទ្ធផល​ត្រឹមត្រូវ ។"
-
-#~ msgid "Invalid information"
-#~ msgstr "ព័ត៌មាន​មិន​ត្រឹមត្រូវ"
-
-#~ msgid "%s is needed by other resolvables"
-#~ msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​ដោះស្រាយ​ផ្សេងៗ"
-
-#~ msgid ""
-#~ "%s is needed by:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s ត្រូវ​ការ​ដោយ ៖\n"
-#~ "%s"
-
-#~ msgid "%s conflicts with other resolvables"
-#~ msgstr "%s ប៉ះទង្គិច​ជាមួយ​កញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
-
-#~ msgid ""
-#~ "%s conflicts with:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "%s ប៉ះ​ទង្គិច​ជាមួយ ៖\n"
-#~ "%s"
-
-#~ msgid "%s obsoletes other resolvables"
-#~ msgstr "%s លែង​ប្រើ​កញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
-
-#~ msgid "%s obsoletes:%s"
-#~ msgstr "%s លែង​ប្រើ  ៖ %s"
-
-#~ msgid ""
-#~ "\n"
-#~ "These resolvables will be deleted from the system."
-#~ msgstr ""
-#~ "\n"
-#~ "កញ្ចប់ដោះស្រាយទាំងនេះ​នឹង​ត្រូវ​បាន​លុប​ចេញ​ពី​ប្រព័ន្ធ ។"
-
-#~ msgid "%s depends on other resolvables"
-#~ msgstr "%s ផ្អែក​លើកញ្ចប់ដោះស្រាយ​ផ្សេងៗ"
-
-#~ msgid "%s depends on %s"
-#~ msgstr "%s ផ្អែកលើ %s"
-
-#~ msgid "%s depends on:%s"
-#~ msgstr "%s ផ្អែកលើ ៖ %s"
-
-#~ msgid "Child of"
-#~ msgstr "កូន​របស់"
-
-#~ msgid ""
-#~ "\n"
-#~ "There is no resource available which supports this requirement."
-#~ msgstr ""
-#~ "\n"
-#~ "មិនមាន​ធនធាន​ដែល​គាំទ្រ​តម្រូវ​ការ​នេះ ។"
-
-#~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
-#~ msgstr "ដោយ​សារ​តែ​មាន​បញ្ហា​​ដូច​បាន​ពិពណ៌នា​ខាង​លើ/ខាង​ក្រោម ដំណោះស្រាយ​នេះ​នឹង​មិន​អាច​ដោះស្រាយ​ភាព​អាស្រ័យ​ទាំងអស់​បាន​ទេ"
-
-#~ msgid "Cannot install %s, because it is conflicting with %s"
-#~ msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​ប៉ះទង្គិច​ជា​មួយ %s"
-
-#~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "មិន​បាន​ដំឡើង %s ឡើយ ហើយ​បាន​សម្គាល់​វា​ថា អាច​លុប​បាន"
-
-#~ msgid "Cannot install %s due to dependency problems"
-#~ msgstr "មិន​អាច​ដំឡើង %s ដោយ​សារ​តែមានបញ្ហា​ភាព​អាស្រ័យ"
-
-#~ msgid "%s has unfulfilled requirements"
-#~ msgstr "%s មាន​តម្រូវ​ការ​ដែល​មិន​បាន​បំពេញ"
-
-#~ msgid "%s has missing dependencies"
-#~ msgstr "%s មាន​ភាព​អាស្រ័យ​ដែល​បាត់"
-
-#~ msgid "%s cannot be installed due to missing dependencies"
-#~ msgstr "មិន​អាច​ដំឡើង %s បានទេ ដោយ​សារ​បាត់​ភាព​អាស្រ័យ"
-
-#~ msgid "%s fulfills dependencies of %s but will be uninstalled"
-#~ msgstr "%s បំពេញ​ភាព​អាស្រ័យ​របស់ %s ប៉ុន្តែ​នឹង​ត្រូវ​បានលុប"
-
-#~ msgid "%s fulfills dependencies of %s but will be kept on your system"
-#~ msgstr "%s បំពេញ​ភាពអាស្រ័យ​របស់ %s ប៉ុន្តែ​នឹង​ត្រូវ​បាន​រក្សាទុក​នៅ​ក្នុង​ប្រព័ន្ធ​របស់​អ្នក"
-
-#~ msgid "No need to install %s"
-#~ msgstr "មិន​ចាំបាច់​ដំឡើង %s"
-
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "មិន​អាច​ដំឡើង %s ដើម្បី​បំពេញ​ភាព​អាស្រ័យ​របស់ %s"
-
-#~ msgid "Cannot install %s to fulfil the dependencies of %s"
-#~ msgstr "មិន​អាច​ដំឡើង %s ដើម្បី​បំពេញកញ្ចប់​តម្រូវការ​របស់ %s"
-
-#~ msgid "%s will not be uninstalled, because it is still required"
-#~ msgstr "%s នឹង​មិន​ត្រូវ​បាន​លុប​ទេ ពីព្រោះ​វា​នៅ​តែ​ត្រូវ​ការ"
-
-#~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-#~ msgstr "%s លែងប្រើ %s ។ ប៉ុន្តែ %s មិន​អាច​ត្រូវ​បានលុប ពីព្រោះ​វា​ជាប់សោ ។"
-
-#~ msgid "Cannot install %s, because it is conflicting"
-#~ msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​កំពុង​ប៉ះទង្គិច"
-
-#~ msgid "%s is uninstallable due to conflicts with %s"
-#~ msgstr "មិន​អាច​លុប %s បានទេ​ ព្រោះ​វា​ប៉ះទង្គិច​ជា​មួយ​នឹង %s"
-
-#~ msgid "Requirememt %s cannot be fulfilled."
-#~ msgstr "មិន​អាច​បំពេញ​តម្រូវ​ការ %s"
-
-#~ msgid "for requiring %s for %s when upgrading %s"
-#~ msgstr "សម្រាប់​ការទាមទារ %s ចំពោះ %s ខណៈពេល​ធ្វើ​ឲ្យ %s ទាន់​សម័យ"
-
-#~ msgid "%s is lacking the requirement %s"
-#~ msgstr "%s ខ្វះ​តម្រូវ​ការ %s"
-
-#~ msgid ", Action: "
-#~ msgstr " សកម្មភាព ៖ "
-
-#~ msgid ", Trigger: "
-#~ msgstr " គន្លឹះ ៖ "
-
-#~ msgid "package"
-#~ msgstr "កញ្ចប់"
-
-#~ msgid "selection"
-#~ msgstr "ការជ្រើស​រើស"
-
-#~ msgid "pattern"
-#~ msgstr "លំនាំ"
-
-#~ msgid "product"
-#~ msgstr "ផលិតផល"
-
-#~ msgid "patch"
-#~ msgstr "បំណះ"
-
-#~ msgid "script"
-#~ msgstr "ស្គ្រីប"
-
-#~ msgid "message"
-#~ msgstr "សារ"
-
-#~ msgid "atom"
-#~ msgstr "អាតូម"
-
-#~ msgid "system"
-#~ msgstr "ប្រព័ន្ធ"
-
-#~ msgid "Resolvable"
-#~ msgstr "កញ្ចប់​ដោះស្រាយ"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "សម្គាល់​ការដោះស្រាយ​នេះ​ជា មិនត្រឹមត្រូវ ។"
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "សម្គាល់​កញ្ចប់​ដោះស្រាយ %s ជា អាច​លុប​បាន"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "%s ត្រូវ​បាន​កំណត់​ពេលវេលា​ដំឡើង ប៉ុន្តែ​វា​មិនអាច​ ដោយសារ​តែ​បញ្ហា​ភាព​អាស្រ័យ ។"
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "មិនអាច​ដំឡើង %s ព្រោះថា​វា​ត្រូវ​បាន​សម្គាល់​ជា​ចាំបាច់​ត្រូវ​លុប"
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ​វា​មិន​អនុវត្ត​ប្រព័ន្ធ​នេះ ។"
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "មិន​អាច​ដំឡើង %s ពីព្រោះ %s ត្រូវ​បាន​សម្គាល់​ថា​ចាំបាច់​​សម្រាប់​ដំឡើង"
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "វានេះ​នឹង​ធ្វើ​ឲ្យ %s គ្មាន​តម្លៃ ។"
-
-#~ msgid "Establishing %s"
-#~ msgstr "កំពុង​ស្ថាបនា %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "កំពុង​ដំឡើង %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "កំពុង​រំលង %s ៖ បាន​ដំឡើង​រួច​ហើយ"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "គ្មាន​ក្រុមហ៊ុន​ផ្ដល់​ជា​ជំនួស​​របស់ %s បាន​ដំឡើង"
-
-#~ msgid "for %s"
-#~ msgstr "សម្រាប់ %s"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "មិន​អាច​ធ្វើ​ឲ្យ %s ប្រសើរ ដើម្បីជៀសវាងការ​​យក %s ចេញ​ ។"
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​ត្រូវ​បាន​កំណត់​ថា លុប ។"
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​កំណែ​មួយ​ផ្សេងរបស់ %s នោះ​ត្រូវ​បាន​ដំឡើងហើយ ។"
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​វា​អាច​លុប​បាន ។ ព្យាយាយាយាម​ដំវាឡើង​ដោយ​ផ្ទដើម្បី​ទទួលបាន​លម្អិត្ថែម ។"
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​វា​ជាប់​សោហើយ ។"
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​ត្រូវ​បាន​កំណត់​ថា ត្រូវ​រក្សាទុក ។"
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​មាន​ស្ថាបត្យកម្ម​ផ្សេង ។"
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s ផ្ដល់ %s ប៉ុន្តែ​មាន​ក្រុមហ៊ុន​លក់​ផ្សេង (%s) ។"
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "មិន​អាច​បំពេញ​តាម​តម្រូវការ %s សម្រាប់ %s"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "%s ត្រូវ​បានទាមទារ​ដោយ​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ផ្សេង​ទៀត​ដែល​បាន​ជ្រើស​សម្រាប់​ដំឡើង ដូច្នេះ​វា​នឹង​មិន​ត្រូវបាន​តភ្ជាប់ទេ ។"
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "%s ត្រូវ​បាន​ទាមទារ​ដោយ​អ្វី​ដែល​អាច​ដែល​អាច​ដោះស្រាយ​បាន​ផ្សេង ដូច្នេះ​វា​នឹង​មិន​ត្រូវ​បាន​តភ្ជាប់​ទេ ។"
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s ជាប់សោ និង​មិន​អាច​លុប​បាន​ឡើយ ។"
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "ការ​ប៉ះទង្គិច %s (%s) ទាមទារ​ឲ្យ​យក %s ចេញ ដែល​ត្រូវ​បាន​កំណត់​ពេលវេលា​សម្រាប់​ដំឡើង"
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "សម្គាល់ %s ថា អាច​លុប​បាន ដោយ​សារ​តែ​ការ​ប៉ះទង្គិចលើ %s"
-
-#~ msgid "from %s"
-#~ msgstr "ពី %s"
-
-#~ msgid " Error!"
-#~ msgstr " កំហុស!"
-
-#~ msgid " Important!"
-#~ msgstr " សំខាន់!"
-
-#~ msgid "Make a solver run with ALL possibilities."
-#~ msgstr "ធ្វើឲ្យ​អ្នក​ដោះស្រាយ​រត់​ជាមួយ​លទ្ធភាព​ទាំងអស់ ។"
-
-#~ msgid "Regarding all resolvables with a compatible architecture."
-#~ msgstr "ទាក់ទង​នឹង​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ទាំង​អស់​​ជា​មួយ​ស្ថាបត្យ​កម្ម​ដែល​ឆប​គ្នា ។"
-
-#~ msgid "Make a solver run with best architecture only."
-#~ msgstr "ធ្វើឲ្យ​កម្មវិធី​​ដោះស្រាយ​រត់​​តែ​ជា​មួយ​ស្ថាបត្យកម្ម​ដែល​ល្អ​បំផុត​​​ប៉ុណ្ណោះ ។"
-
-#~ msgid "Regarding resolvables with best architecture only."
-#~ msgstr "ទាក់ទង​នឹង​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​​តែ​​​ជា​មួយ​ស្ថាបត្យកម្ម​ដែល​ល្អ​បំផុត​ប៉ុណ្ណោះ ។"
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s អាស្រ័យ​លើ %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "%s ត្រូវ​បាន​ផ្ដល់​អនុសាសន៍​ដោយ %s"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s ត្រូវ​បាន​ស្នើ​ដោយ %s"
-
-#~ msgid "%s will be evaluated for installation (freshened) by %s"
-#~ msgstr "%s នឹង​ត្រូវ​បាន​វាយ​តម្លៃ​សម្រាប់​កា​រដំឡើង (បាន​ធ្វើ​ឲ្យ​ស្រស់) ដោយ %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s ត្រូវ​បាន​ធ្វើ​ឲ្យ​ប្រសើរ​ដោយ %s"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "%s ត្រូវ​បាន​បន្ថែម​ដោយ %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s ជា​ផ្នែក​នៃ %s"
-
-#~ msgid "Double timeout"
-#~ msgstr "ពេលសម្រាក​ទ្វេដង"
-
-#~ msgid "Start the next solver run with doubled timeout."
-#~ msgstr "ចាប់ផ្ដើម​កម្មវិធី​ដោះស្រាយ​បន្ទាប់​​រត់​ជា​មួយ​ពេល​សម្រាក​ទ្វេដង ។"

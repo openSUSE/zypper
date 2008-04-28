@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
 "PO-Revision-Date: 2007-08-24 22:33+0530\n"
 "Last-Translator: Sangeeta Kumari <k.sangeeta09@gmail.com>\n"
 "Language-Team: Hindi <en@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/sat/SATResolver.cc:757
+#: ../zypp/solver/detail/SATResolver.cc:933
 #, fuzzy
 msgid ""
 "\n"
@@ -26,61 +26,49 @@ msgstr "%s का कोई संस्थापनयोग्य प्रद
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:709
+#: ../zypp/solver/detail/SATResolver.cc:880
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s का %s से टकराव है "
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "%s संस्थापन असफल "
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "%s संस्थापन ठीक"
 
-#: ../zypp/sat/SATResolver.cc:695
+#: ../zypp/solver/detail/SATResolver.cc:866
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "इंस्टाल नहीं हुआ"
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s को %s पुराना कर देता है"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, fuzzy, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, fuzzy, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "%s स्थानांतरण असफल रहा"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "%s स्थानांतरण ठीक"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -105,12 +93,12 @@ msgstr "अकोली"
 msgid "Adangme"
 msgstr "अदांगमे"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "संसाधन जोड़ रहा"
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "अतिरिक्त rpm आउटपुट :"
 
@@ -323,7 +311,7 @@ msgstr "आस्ट्रिया"
 msgid "Austronesian (Other)"
 msgstr "असट्रोनेसियाई (अन्य)"
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -587,7 +575,7 @@ msgstr "ब्रुनेई दारूस्सलम"
 msgid "Buginese"
 msgstr "बुगीनीज़"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -637,7 +625,7 @@ msgstr "कंबोडिया"
 msgid "Cameroon"
 msgstr "कैमरून"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
+#: ../zypp/sat/detail/PoolImpl.cc:147
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "फाइल को सृजित नहीं कर सकता है।"
@@ -645,10 +633,6 @@ msgstr "फाइल को सृजित नहीं कर सकता ह
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "म्यूटेक्स लॉक को हासिल नहीं कर सकता"
-
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
-msgstr ""
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
@@ -679,6 +663,11 @@ msgstr "म्यूटेक्स गुण को आरंभ नहीं �
 msgid "Can't initialize recursive mutex"
 msgstr "रिकर्सिव म्यूटेक्स को आरंभ नहीं कर सकता"
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, fuzzy, c-format
+msgid "Can't open lock file: %s"
+msgstr "फाइल %1 को नहीं खोल सकता है।"
+
 #: ../zypp/ExternalProgram.cc:174
 #, fuzzy, c-format
 msgid "Can't open pipe (%s)."
@@ -689,12 +678,7 @@ msgstr "फाइल %1 को नहीं खोल सकता है।"
 msgid "Can't open pty (%s)."
 msgstr "Couldn't open file: %s."
 
-#: ../zypp/Repository.cc:136
-#, fuzzy
-msgid "Can't open solv-file: "
-msgstr "फाइल %1 को नहीं खोल सकता है।"
-
-#: ../zypp/repo/RepoProvideFile.cc:207
+#: ../zypp/repo/RepoProvideFile.cc:216
 #, fuzzy, c-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "%s से %s प्रदान नहीं कर सकता"
@@ -702,10 +686,6 @@ msgstr "%s से %s प्रदान नहीं कर सकता"
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr "म्यूटेक्स लॉक को रिलीज़ नहीं कर सकता"
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
-msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -802,7 +782,7 @@ msgstr "चमोरो"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s: के लिए परिवर्तित कंफिगरेशन फाइलें"
@@ -1068,11 +1048,6 @@ msgstr "दिवेही"
 msgid "Djibouti"
 msgstr "जिबूती"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
-msgid "Do not install or delete the resolvables concerned"
-msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1118,7 +1093,7 @@ msgid "Duala"
 msgstr "ड्यूला"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1231,11 +1206,6 @@ msgstr "इरीट्रिया"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:141
-#, fuzzy
-msgid "Error reading solv-file: "
-msgstr "सेक्टर %u पढ़ने में त्रुटि।"
-
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
@@ -1276,7 +1246,7 @@ msgstr "इवॉन्डो"
 msgid "Failed to delete key."
 msgstr "Failed to parse: %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1286,7 +1256,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "%s - %s को खोलने में अक्षम\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
+#: ../zypp/target/rpm/RpmDb.cc:1122
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "सार्वजनिक कुंजी को प्राप्त करने में अक्षम।"
@@ -1525,9 +1495,9 @@ msgstr "ग्बाया"
 msgid "Geez"
 msgstr "गीज"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
 #, fuzzy
-msgid "Generally ignore this requirement"
+msgid "Generally ignore of some dependecies"
 msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
 
 #. :GRD:308:
@@ -1818,27 +1788,10 @@ msgid "Igbo"
 msgstr "इग्बो"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
-#, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "%s संस्थापित होने के तैयार है इसको अनदेखा करें"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "%s को %s में हटाए जाने को अनदेखा करें"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "%s के इस टकराव की अनदेखी कर दें"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-msgid "Ignore this requirement just here"
-msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
+#, fuzzy, c-format
+msgid "Ignore some dependencies of %s"
+msgstr "निर्भरता हल नहीं की जा सकती"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1885,23 +1838,7 @@ msgstr "इंडोनेशियाई"
 msgid "Ingush"
 msgstr "इंगुश"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, fuzzy, c-format
-msgid "Install %s although it would change the vendor"
-msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "छूटे रिजॉल्वेबल्स को संस्थापित करें"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr "जैसा निर्देशित था, संस्थापन छोड़ दिया गया।"
 
@@ -1975,7 +1912,12 @@ msgstr "अमान्य मानक मानचित्र सेपरे
 msgid "Invalid port component '%s'"
 msgstr "अमान्य पोर्ट अवयव '%s'"
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "कूटशब्द बदलो"
@@ -2024,11 +1966,6 @@ msgstr "इरोक्योइयाई भाषाएं"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "इज़रायल"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, fuzzy, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "फाइल %1 को नहीं खोल सकता है।"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2154,10 +2091,6 @@ msgstr "कजाक"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "कज़ाकिस्तान"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "रिजॉल्वेबल्स रखें"
 
 #. :JPN:392:
 #: ../zypp/CountryCode.cc:335
@@ -2874,7 +2807,7 @@ msgstr "नियूएन"
 msgid "No Code"
 msgstr "कोई कोड नहीं"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 #, fuzzy
 msgid "No url in repository."
 msgstr "कोष में फाइल %1 नहीं प्राप्त हुई।"
@@ -3098,14 +3031,6 @@ msgstr "%1 एक डायरेक्टरी नहीं है।"
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "इस URL के लिए पथ मानक पार्जिंग समर्थित नहीं है"
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr "पथ मानक पार्जिंग इस URL के लिए समर्थित नहीं है"
-
 #: ../zypp/media/MediaException.cc:200
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
@@ -3206,8 +3131,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "इस URL के लिए क्वेरी स्ट्रिंग पार्जिंग समर्थित नहीं है"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 #, fuzzy
 msgid "RPM failed: "
 msgstr "विफल"
@@ -3236,15 +3161,10 @@ msgstr "रारोतांगन"
 msgid "Relative path not allowed if authority exists"
 msgstr "यदि प्राधिकरण मौजूद है तो सापेक्ष पथ को अनुमति नहीं है"
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "संसाधन जोड़ रहा"
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3545,6 +3465,11 @@ msgstr "सोगदिया"
 msgid "Solomon Islands"
 msgstr "सोलोमन आइलैंड"
 
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, fuzzy, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "%s का %s से टकराव है "
+
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
 msgid "Somali"
@@ -3780,7 +3705,7 @@ msgstr "थाई"
 msgid "Thailand"
 msgstr "थाईलैंड"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
 
@@ -4019,10 +3944,6 @@ msgstr "अज्ञात देश :"
 #: ../zypp/LanguageCode.cc:145
 msgid "Unknown language: "
 msgstr "अज्ञात भाषा : "
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-msgid "Unlock these resolvables"
-msgstr "इन रिजॉल्वेबल्स को अनलॉक करें"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -4286,90 +4207,74 @@ msgstr "applydeltarpm जांच नाकाम रही।"
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm नाकाम रहा।"
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:704
+#: ../zypp/solver/detail/SATResolver.cc:875
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "%s का संस्थापन नहीं कर सकता"
 
-#: ../zypp/sat/SATResolver.cc:688
+#: ../zypp/solver/detail/SATResolver.cc:859
 #, fuzzy
 msgid "conflicting requests"
 msgstr "के लिए कनेक्शन आवेदन : "
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, c-format
 msgid "created backup %s"
 msgstr "बैकअप %s सृजित"
 
-#: ../zypp/sat/SATResolver.cc:978
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "अधिष्ठापन"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, c-format
-msgid "delete %s"
-msgstr "%s मिटाएं"
-
-#: ../zypp/sat/SATResolver.cc:747
+#: ../zypp/solver/detail/SATResolver.cc:923
 #, fuzzy
 msgid "deleted providers: "
 msgstr "कोई नहीं %s प्रदान करता"
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "%s संस्थापित न करें"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "%s संस्थापित न करें"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:811
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "इंस्टाल नहीं हुआ"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "%s से %s तक अपडेट कर रहा है"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "%s को संस्थापित करें"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4378,10 +4283,8 @@ msgid ""
 "  %s"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "%s रखें"
@@ -4394,34 +4297,34 @@ msgstr "libhal_ctx_new: libhal संदर्भ को सृजित नह�
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection : dbus कनेक्शन को सेट नहीं कर सकता"
 
-#: ../zypp/sat/SATResolver.cc:699
+#: ../zypp/solver/detail/SATResolver.cc:870
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s को %s की आवश्यकता है"
 
-#: ../zypp/sat/SATResolver.cc:691
+#: ../zypp/solver/detail/SATResolver.cc:862
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "कोई नहीं %s प्रदान करता"
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/solver/detail/SATResolver.cc:856
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "पैकेजों को असंस्थापित करने का कमांड"
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s के  रूप में %s सृजित किया लेकिन अंतर निर्धारित करना असंभव था"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4430,18 +4333,18 @@ msgstr ""
 "rpm ने %s के  रूप में %s सृजित किया।\n"
 "यहां अंतर की पहली 25 पंक्तियां हैं :\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "rpm आउटपुट :"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s के  रूप में %s सहेजा लेकिन अंतर निर्धारित करना असंभव था "
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4450,20 +4353,76 @@ msgstr ""
 "rpm ने %s के  रूप में %s सहेजा।\n"
 "यहां अंतर की पहली 25 पंक्तियां हैं :\n"
 
-#: ../zypp/sat/SATResolver.cc:759
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "%s को अनलॉक करें"
+#, fuzzy
+#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
+#~ msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
 
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "समस्त रिजॉल्वेबल्स को अनलॉक करें"
+#, fuzzy
+#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
+#~ msgstr "यह निर्भरता %s प्रदान करता है लेकिन यह संस्थापित वस्तु केस्थापत्य को बदल देगा"
+
+#, fuzzy
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
+
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "%s संस्थापित होने के तैयार है इसको अनदेखा करें"
+
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "%s को %s में हटाए जाने को अनदेखा करें"
+
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "%s के इस टकराव की अनदेखी कर दें"
+
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
+
+#~ msgid "Install %s although it would change the architecture"
+#~ msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
+
+#, fuzzy
+#~ msgid "Install %s although it would change the vendor"
+#~ msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
+
+#~ msgid "Install missing resolvables"
+#~ msgstr "छूटे रिजॉल्वेबल्स को संस्थापित करें"
+
+#~ msgid "Keep resolvables"
+#~ msgstr "रिजॉल्वेबल्स रखें"
+
+#~ msgid "Unlock these resolvables"
+#~ msgstr "इन रिजॉल्वेबल्स को अनलॉक करें"
+
+#~ msgid "delete %s"
+#~ msgstr "%s मिटाएं"
+
+#~ msgid "install %s"
+#~ msgstr "%s को संस्थापित करें"
+
+#~ msgid "unlock %s"
+#~ msgstr "%s को अनलॉक करें"
+
+#~ msgid "unlock all resolvables"
+#~ msgstr "समस्त रिजॉल्वेबल्स को अनलॉक करें"
+
+#, fuzzy
+#~ msgid "Can't open solv-file: "
+#~ msgstr "फाइल %1 को नहीं खोल सकता है।"
+
+#, fuzzy
+#~ msgid "Error reading solv-file: "
+#~ msgstr "सेक्टर %u पढ़ने में त्रुटि।"
+
+#~ msgid "Path Parameter parsing not supported for this URL"
+#~ msgstr "इस URL के लिए पथ मानक पार्जिंग समर्थित नहीं है"
+
+#~ msgid "Path parameter parsing not supported for this URL"
+#~ msgstr "पथ मानक पार्जिंग इस URL के लिए समर्थित नहीं है"
 
 #~ msgid "Software management is already running."
 #~ msgstr "सॉफ्टवेयर प्रबंधन पहले से ही रन कर रहा है।"

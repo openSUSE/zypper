@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
 "PO-Revision-Date: 2001-10-18 10:13+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: turkish <i18n@suse.de>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../zypp/sat/SATResolver.cc:757
+#: ../zypp/solver/detail/SATResolver.cc:933
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -30,7 +30,7 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:709
+#: ../zypp/solver/detail/SATResolver.cc:880
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%1, %2 ile çakışıyor"
@@ -38,55 +38,43 @@ msgstr "%1, %2 ile çakışıyor"
 # clients/online_update_start.ycp:171
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, fuzzy, c-format
 msgid "%s install failed"
 msgstr "Kurulum işlemi başarısız oldu."
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, fuzzy, c-format
 msgid "%s installed ok"
 msgstr "&Evet, kur"
 
 # clients/online_update_start.ycp:171
-#: ../zypp/sat/SATResolver.cc:695
+#: ../zypp/solver/detail/SATResolver.cc:866
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "Kurulum işlemi başarısız oldu."
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr ""
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, fuzzy, c-format
 msgid "%s remove failed"
 msgstr "rpm başarısız oldu."
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -116,12 +104,12 @@ msgstr "Sessiz"
 msgid "Adangme"
 msgstr "Aralık"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 #, fuzzy
 msgid "Additional rpm output:"
 msgstr "Ek grıp ayarları"
@@ -373,7 +361,7 @@ msgstr "Avusturya"
 msgid "Austronesian (Other)"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -682,7 +670,7 @@ msgstr "Bruney Darüsselam"
 msgid "Buginese"
 msgstr "Çince"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -743,16 +731,12 @@ msgstr "Kamboçya"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
+#: ../zypp/sat/detail/PoolImpl.cc:147
 msgid "Can not create sat-pool."
 msgstr ""
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
-msgstr ""
-
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
 msgstr ""
 
 #: ../zypp/ExternalProgram.cc:245
@@ -784,6 +768,11 @@ msgstr ""
 msgid "Can't initialize recursive mutex"
 msgstr ""
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, fuzzy, c-format
+msgid "Can't open lock file: %s"
+msgstr "Modem kilit dosyası"
+
 #: ../zypp/ExternalProgram.cc:174
 #, c-format
 msgid "Can't open pipe (%s)."
@@ -794,21 +783,13 @@ msgstr ""
 msgid "Can't open pty (%s)."
 msgstr ""
 
-#: ../zypp/Repository.cc:136
-msgid "Can't open solv-file: "
-msgstr ""
-
-#: ../zypp/repo/RepoProvideFile.cc:207
+#: ../zypp/repo/RepoProvideFile.cc:216
 #, c-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr ""
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
-msgstr ""
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
 msgstr ""
 
 #: ../zypp/thread/Mutex.cc:40
@@ -921,7 +902,7 @@ msgstr "Komoros"
 # clients/sw_single.ycp:310
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, fuzzy, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Yapılandırma dosyalarını kaydet"
@@ -1225,11 +1206,6 @@ msgstr "Sürücü"
 msgid "Djibouti"
 msgstr "Cibuti"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
-msgid "Do not install or delete the resolvables concerned"
-msgstr "%1, %2 ile çakışıyor"
-
 # include/security/ui.ycp:695
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
@@ -1279,7 +1255,7 @@ msgid "Duala"
 msgstr "Palau"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
@@ -1400,10 +1376,6 @@ msgstr "Eritre"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: ../zypp/Repository.cc:141
-msgid "Error reading solv-file: "
-msgstr ""
-
 #. language code: myv
 #: ../zypp/LanguageCode.cc:850
 msgid "Erzya"
@@ -1447,7 +1419,7 @@ msgstr "Bitiş"
 msgid "Failed to delete key."
 msgstr "Failed to parse: %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1457,7 +1429,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "%s açılamadı - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1124
+#: ../zypp/target/rpm/RpmDb.cc:1122
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr ""
@@ -1717,9 +1689,9 @@ msgstr "Gaza"
 msgid "Geez"
 msgstr "Yunanca"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
 #, fuzzy
-msgid "Generally ignore this requirement"
+msgid "Generally ignore of some dependecies"
 msgstr "şu çözülmemiş gereksinimlere sahip:"
 
 # /usr/lib/YaST2/keyboard_raw.ycp:410
@@ -2062,29 +2034,12 @@ msgstr "Tanıtıcı"
 msgid "Igbo"
 msgstr "Görmezden gel"
 
+# clients/inst_sw_single.ycp:742
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
 #, fuzzy, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "%1 dizini zaten listede."
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, fuzzy, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "%1, %2 ile çakışıyor"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, fuzzy, c-format
-msgid "Ignore this conflict of %s"
-msgstr "%1, %2 ile çakışıyor"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-#, fuzzy
-msgid "Ignore this requirement just here"
-msgstr "şu çözülmemiş gereksinimlere sahip:"
+msgid "Ignore some dependencies of %s"
+msgstr "Yetersiz bağımlılıklar:"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -2134,24 +2089,7 @@ msgstr "Endonezyaca"
 msgid "Ingush"
 msgstr "İngilizce"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr ""
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
-msgid "Install missing resolvables"
-msgstr "Eksik paketleri kur"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr ""
 
@@ -2233,7 +2171,12 @@ msgstr ""
 msgid "Invalid port component '%s'"
 msgstr "Geçersiz özellik '{0}'"
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr ""
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr ""
 
@@ -2284,11 +2227,6 @@ msgstr "Dil yapılandırılıyor..."
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "İsrail"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr ""
 
 # /usr/lib/YaST2/keyboard_raw.ycp:230
 #. language code: ita it
@@ -2437,11 +2375,6 @@ msgstr "Kazakistan"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Kazakistan"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
-msgid "Keep resolvables"
-msgstr "Eksik paketleri kur"
 
 # KE
 #. :JPN:392:
@@ -3307,7 +3240,7 @@ msgstr "Nie"
 msgid "No Code"
 msgstr "&Kod"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
 msgstr ""
 
@@ -3574,14 +3507,6 @@ msgstr "Hata: %s temel dizini bir dizin değil, atlanıyor.\n"
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr ""
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr ""
-
 #: ../zypp/media/MediaException.cc:200
 #, fuzzy, c-format
 msgid "Permission to access '%s' denied."
@@ -3696,8 +3621,8 @@ msgstr ""
 
 # clients/online_update_load.ycp:380
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 #, fuzzy
 msgid "RPM failed: "
 msgstr "İndirme işlemi başarısız oldu:"
@@ -3732,14 +3657,9 @@ msgstr "Yönlendirme oku"
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, c-format
 msgid "Removing repository '%s'"
-msgstr ""
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
 msgstr ""
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
@@ -4107,6 +4027,11 @@ msgstr "Kullanıcı girişi"
 msgid "Solomon Islands"
 msgstr "Solomon Adaları"
 
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, fuzzy, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "%1, %2 ile çakışıyor"
+
 # SO
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -4397,7 +4322,7 @@ msgstr "Taylandça"
 msgid "Thailand"
 msgstr "Tayland"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
 
@@ -4682,11 +4607,6 @@ msgstr ""
 #: ../zypp/LanguageCode.cc:145
 msgid "Unknown language: "
 msgstr ""
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-#, fuzzy
-msgid "Unlock these resolvables"
-msgstr "%1, %2 ile çakışıyor"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -4985,93 +4905,77 @@ msgstr ""
 msgid "applydeltarpm failed."
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: ../zypp/sat/SATResolver.cc:704
+#: ../zypp/solver/detail/SATResolver.cc:875
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "Kurulan disk:"
 
-#: ../zypp/sat/SATResolver.cc:688
+#: ../zypp/solver/detail/SATResolver.cc:859
 msgid "conflicting requests"
 msgstr ""
 
 # clients/inst_sw_backup.ycp:260
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, fuzzy, c-format
 msgid "created backup %s"
 msgstr "Yedek oluşturma"
 
-#: ../zypp/sat/SATResolver.cc:978
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "Kurulum"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
-msgid "delete %s"
-msgstr "%1 paketini sil"
-
-#: ../zypp/sat/SATResolver.cc:747
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "deleted providers: "
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%1, %2 ile çakışıyor"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr ""
 
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "Kurulan disk:"
 
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, fuzzy, c-format
 msgid "do not install %s"
 msgstr "Kurulan disk:"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: ../zypp/sat/SATResolver.cc:811
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "Kurulan disk:"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, fuzzy, c-format
-msgid "install %s"
-msgstr "%1 paketini kur"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -5080,10 +4984,8 @@ msgid ""
 "  %s"
 msgstr ""
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr ""
@@ -5096,75 +4998,112 @@ msgstr ""
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:699
+#: ../zypp/solver/detail/SATResolver.cc:870
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:691
+#: ../zypp/solver/detail/SATResolver.cc:862
 #, c-format
 msgid "nothing provides requested %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/solver/detail/SATResolver.cc:856
 #, c-format
 msgid "problem with installed package %s"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 #, fuzzy
 msgid "rpm output:"
 msgstr "Program çıktısı:\n"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/sat/SATResolver.cc:759
+#: ../zypp/solver/detail/SATResolver.cc:935
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "Otomatikman kur"
 
-# include/security/ui.ycp:774
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, fuzzy, c-format
-msgid "unlock %s"
-msgstr "Saatler"
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
 #, fuzzy
-msgid "unlock all resolvables"
-msgstr "%1, %2 ile çakışıyor"
+#~ msgid "Do not install or delete the resolvables concerned"
+#~ msgstr "%1, %2 ile çakışıyor"
+
+#, fuzzy
+#~ msgid "Ignore that %s is already set to install"
+#~ msgstr "%1 dizini zaten listede."
+
+#, fuzzy
+#~ msgid "Ignore the obsolete %s in %s"
+#~ msgstr "%1, %2 ile çakışıyor"
+
+#, fuzzy
+#~ msgid "Ignore this conflict of %s"
+#~ msgstr "%1, %2 ile çakışıyor"
+
+#, fuzzy
+#~ msgid "Ignore this requirement just here"
+#~ msgstr "şu çözülmemiş gereksinimlere sahip:"
+
+#, fuzzy
+#~ msgid "Install missing resolvables"
+#~ msgstr "Eksik paketleri kur"
+
+#, fuzzy
+#~ msgid "Keep resolvables"
+#~ msgstr "Eksik paketleri kur"
+
+#, fuzzy
+#~ msgid "Unlock these resolvables"
+#~ msgstr "%1, %2 ile çakışıyor"
+
+#, fuzzy
+#~ msgid "delete %s"
+#~ msgstr "%1 paketini sil"
+
+#, fuzzy
+#~ msgid "install %s"
+#~ msgstr "%1 paketini kur"
+
+# include/security/ui.ycp:774
+#, fuzzy
+#~ msgid "unlock %s"
+#~ msgstr "Saatler"
+
+#, fuzzy
+#~ msgid "unlock all resolvables"
+#~ msgstr "%1, %2 ile çakışıyor"
 
 #, fuzzy
 #~ msgid "%s conflicts with other resolvables"
@@ -5198,11 +5137,6 @@ msgstr "%1, %2 ile çakışıyor"
 #, fuzzy
 #~ msgid "No need to install %s"
 #~ msgstr "yeniden kurulmalı"
-
-# clients/inst_sw_single.ycp:742
-#, fuzzy
-#~ msgid "Cannot install %s to fulfill the dependencies of %s"
-#~ msgstr "Yetersiz bağımlılıklar:"
 
 # clients/inst_sw_single.ycp:742
 #, fuzzy

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-31 15:30+0200\n"
-"PO-Revision-Date: 2008-04-02 16:32+0300\n"
+"POT-Creation-Date: 2008-04-21 18:58+0200\n"
+"PO-Revision-Date: 2008-04-23 18:53+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../zypp/sat/SATResolver.cc:757
+#: ../zypp/solver/detail/SATResolver.cc:933
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -34,61 +34,49 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " Проблема з сертифікатом SSL, перевірте чи все гаразд з сертифікатом CA для \"%s\"."
 
-#: ../zypp/sat/SATResolver.cc:709
+#: ../zypp/solver/detail/SATResolver.cc:880
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s конфліктує з %s, що надається %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2056
+#: ../zypp/target/rpm/RpmDb.cc:2054
 #, c-format
 msgid "%s install failed"
 msgstr "Встановлення %s зазнало невдачі"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "%s installed ok"
 msgstr "%s встановлено без помилок"
 
-#: ../zypp/sat/SATResolver.cc:695
+#: ../zypp/solver/detail/SATResolver.cc:866
 #, c-format
 msgid "%s is not installable"
 msgstr "%s не можливо встановити"
 
-#: ../zypp/sat/SATResolver.cc:714
+#: ../zypp/solver/detail/SATResolver.cc:885
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s робить застарілим %s, що надається %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:80
-#, c-format
-msgid "%s provides this dependency, but would change the architecture of the installed item"
-msgstr "%s задовольняє цю залежність, але змінить архітектуру встановленого"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:93
-#, c-format
-msgid "%s provides this dependency, but would change the vendor of the installed item"
-msgstr "%s задовольняє цю залежність, але змінить виробника встановленого"
-
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2176
+#: ../zypp/target/rpm/RpmDb.cc:2174
 #, c-format
 msgid "%s remove failed"
 msgstr "Вилучення %s зазнало невдачі"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2184
+#: ../zypp/target/rpm/RpmDb.cc:2182
 #, c-format
 msgid "%s remove ok"
 msgstr "%s вилучено без помилок"
 
-#: ../zypp/sat/SATResolver.cc:745
+#: ../zypp/solver/detail/SATResolver.cc:921
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s потребує %s, але цю залежність неможливо вдовольнити"
@@ -113,12 +101,12 @@ msgstr "Аколі"
 msgid "Adangme"
 msgstr "Адангме"
 
-#: ../zypp/RepoManager.cc:1005
+#: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Додавання сховища \"%s\""
 
-#: ../zypp/target/rpm/RpmDb.cc:2068 ../zypp/target/rpm/RpmDb.cc:2187
+#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "Додатковий вивід rpm:"
 
@@ -226,7 +214,7 @@ msgstr "Ангола"
 #. :ATG:028:
 #: ../zypp/CountryCode.cc:228
 msgid "Anguilla"
-msgstr "Ангілла"
+msgstr "Ангілья"
 
 #. :AGO:024:
 #: ../zypp/CountryCode.cc:233
@@ -342,7 +330,7 @@ msgstr "Австрія"
 msgid "Austronesian (Other)"
 msgstr "Австронезійські (інші)"
 
-#: ../zypp/media/MediaCurl.cc:752 ../zypp/media/MediaCurl.cc:820
+#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Потрібна автентифікація для \"%s\""
@@ -624,7 +612,7 @@ msgstr "Бруней Даруссалам"
 msgid "Buginese"
 msgstr "Бугійська"
 
-#: ../zypp/RepoManager.cc:718
+#: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Створення кешу сховища \"%s\""
@@ -676,17 +664,13 @@ msgstr "Колумбія"
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: ../zypp/sat/detail/PoolImpl.cc:100
+#: ../zypp/sat/detail/PoolImpl.cc:147
 msgid "Can not create sat-pool."
 msgstr "Неможливо створити sat-pool."
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
 msgstr "Неможливо отримати блокування mutex"
-
-#: ../zypp/Repository.cc:130 ../zypp/Repository.cc:147
-msgid "Can't add solvables to norepo."
-msgstr "Не вдалося додати розв’язувачі до norepo."
 
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
@@ -717,6 +701,11 @@ msgstr "Неможливо започаткувати атрибути mutex"
 msgid "Can't initialize recursive mutex"
 msgstr "Неможливо започаткувати рекурсивний mutex"
 
+#: ../zypp/base/InterProcessMutex.cc:79
+#, c-format
+msgid "Can't open lock file: %s"
+msgstr "Не вдалося відкрити файл замка: %s"
+
 #: ../zypp/ExternalProgram.cc:174
 #, c-format
 msgid "Can't open pipe (%s)."
@@ -727,11 +716,7 @@ msgstr "Неможливо відкрити канал (%s)."
 msgid "Can't open pty (%s)."
 msgstr "Не вдалося відкрити pty (%s)."
 
-#: ../zypp/Repository.cc:136
-msgid "Can't open solv-file: "
-msgstr "Неможливо відкрити solv-файл: "
-
-#: ../zypp/repo/RepoProvideFile.cc:207
+#: ../zypp/repo/RepoProvideFile.cc:216
 #, c-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Неможливо надати файл \"%s\" зі сховища \"%s\""
@@ -739,10 +724,6 @@ msgstr "Неможливо надати файл \"%s\" зі сховища \"%s
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
 msgstr "Неможливо відпустити блокування mutex"
-
-#: ../zypp/Repository.cc:101
-msgid "Can't set RepoInfo for norepo."
-msgstr "Не вдалося встановити RepoInfo для norepo."
 
 #: ../zypp/thread/Mutex.cc:40
 msgid "Can't set recursive mutex attribute"
@@ -843,7 +824,7 @@ msgstr "Чаморо"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1879
+#: ../zypp/target/rpm/RpmDb.cc:1877
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Змінено конфігураційні файли для %s:"
@@ -1112,10 +1093,6 @@ msgstr "Дайвегі"
 msgid "Djibouti"
 msgstr "Джибуті"
 
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:81
-msgid "Do not install or delete the resolvables concerned"
-msgstr "Не встановлювати і не вилучати дані пакунки"
-
 #. language code: doi
 #: ../zypp/LanguageCode.cc:468
 msgid "Dogri"
@@ -1166,7 +1143,7 @@ msgid "Duala"
 msgstr "Дуала"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
-#: ../zypp/CheckSum.cc:96
+#: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr "Сумнівний тип \"%s\" для %u байтової контрольної суми \"%s\""
@@ -1278,10 +1255,6 @@ msgstr "Еритрея"
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Під час встановлення параметрів завантаження (curl) для \"%s\" сталася помилка:"
 
-#: ../zypp/Repository.cc:141
-msgid "Error reading solv-file: "
-msgstr "Помилка читання solv-файла: "
-
 # SY
 # fuzzy
 #. language code: myv
@@ -1325,7 +1298,7 @@ msgstr "Евондо"
 msgid "Failed to delete key."
 msgstr "Не вдалось вилучити ключ."
 
-#: ../zypp/target/rpm/RpmDb.cc:1047
+#: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Не вдалося імпортувати відкритий ключ з файла %s: %s"
@@ -1337,7 +1310,7 @@ msgstr "Не вдалося змонтувати %s у %s"
 
 # ###############################################################################
 # Old yast2-agents.po
-#: ../zypp/target/rpm/RpmDb.cc:1124
+#: ../zypp/target/rpm/RpmDb.cc:1122
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Не вдалося вилучити відкрити ключ %s: %s"
@@ -1586,9 +1559,9 @@ msgstr "Ґбая"
 msgid "Geez"
 msgstr "Ґіз"
 
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:65
-msgid "Generally ignore this requirement"
-msgstr "Ігнорувати цю вимогу в загальному"
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
+msgid "Generally ignore of some dependecies"
+msgstr "Загалом ігнорувати деякі залежності"
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1889,27 +1862,10 @@ msgid "Igbo"
 msgstr "Ігбо"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:145
+#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
 #, c-format
-msgid "Ignore that %s is already set to install"
-msgstr "Ігнорувати, що вже заплановано встановити %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:132
-#, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "Ігнорувати застарілий %s в %s"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:105
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:117
-#, c-format
-msgid "Ignore this conflict of %s"
-msgstr "Ігнорувати цей конфлікт %s"
-
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:56
-msgid "Ignore this requirement just here"
-msgstr "Ігнорувати цю вимогу тільки тут"
+msgid "Ignore some dependencies of %s"
+msgstr "Ігнорувати деякі з залежностей %s"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1956,23 +1912,7 @@ msgstr "Індонезійська"
 msgid "Ingush"
 msgstr "Інгуш"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, c-format
-msgid "Install %s although it would change the architecture"
-msgstr "Встановити %s, незважаючи на те, що це змінить архітектуру"
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionIgnore.cc:90
-#, c-format
-msgid "Install %s although it would change the vendor"
-msgstr "Встановити %s, незважаючи на те, що це змінить виробника"
-
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:66
-msgid "Install missing resolvables"
-msgstr "Встановити потрібні пакунки"
-
-#: ../zypp/target/TargetImpl.cc:678
+#: ../zypp/target/TargetImpl.cc:762
 msgid "Installation has been aborted as directed."
 msgstr "Встановлення перервано відповідно до вказівки."
 
@@ -2046,7 +1986,12 @@ msgstr "Не чинний символ розділення карти пара�
 msgid "Invalid port component '%s'"
 msgstr "Не чинний компонент порту \"%s\""
 
-#: ../zypp/media/MediaCurl.cc:749 ../zypp/media/MediaCurl.cc:817
+#: ../zypp/PoolQuery.cc:419
+#, c-format
+msgid "Invalid regular expression '%s': regcomp returned %d"
+msgstr "Некоректний формальний вираз \"%s\": regcomp повернула %d"
+
+#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr "Не чинне ім'я користувача або пароль."
 
@@ -2096,11 +2041,6 @@ msgstr "Ірокезькі мови"
 #: ../zypp/CountryCode.cc:325
 msgid "Israel"
 msgstr "Ізраїль"
-
-#: ../zypp/base/InterProcessMutex.cc:68
-#, c-format
-msgid "It %d, Can't open lock file: %s"
-msgstr "Це %d, не вдалося відкрити файл замка: %s"
 
 #. language code: ita it
 #: ../zypp/LanguageCode.cc:654
@@ -2232,10 +2172,6 @@ msgstr "Казахська"
 #: ../zypp/CountryCode.cc:345
 msgid "Kazakhstan"
 msgstr "Тайвань"
-
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:65
-msgid "Keep resolvables"
-msgstr "Залишити потрібні пакунки"
 
 #. :JPN:392:
 #: ../zypp/CountryCode.cc:335
@@ -3006,7 +2942,7 @@ msgstr "Ніу"
 msgid "No Code"
 msgstr "Немає коду"
 
-#: ../zypp/repo/RepoProvideFile.cc:213
+#: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
 msgstr "В сховищі немає url."
 
@@ -3149,7 +3085,7 @@ msgstr "Отомійські мови"
 #: ../zypp/repo/PackageProvider.cc:314
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
-msgstr "Пакунок %s не прошов перевірку достовірності. Повторити спробу?"
+msgstr "Пакунок %s не пройшов перевірку достовірності. Повторити спробу?"
 
 # ML
 # fuzzy
@@ -3238,14 +3174,6 @@ msgstr "Шлях \"%s\" на носії \"%s\" не є каталогом."
 #, c-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Шлях \"%s\" на носії \"%s\" не є файлом."
-
-#: ../zypp/url/UrlBase.cc:1184
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "Розбір параметрів шляху не підтримується для цього URL"
-
-#: ../zypp/url/UrlBase.cc:727
-msgid "Path parameter parsing not supported for this URL"
-msgstr "Розбір параметрів шляху не підтримується для цього URL"
 
 #: ../zypp/media/MediaException.cc:200
 #, c-format
@@ -3347,8 +3275,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Розбір рядка запиту не підтримується для цього URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:890 ../zypp/target/rpm/RpmDb.cc:2059
-#: ../zypp/target/rpm/RpmDb.cc:2179
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:2177
 msgid "RPM failed: "
 msgstr "Помилка RPM: "
 
@@ -3378,15 +3306,10 @@ msgstr "Раротонгська"
 msgid "Relative path not allowed if authority exists"
 msgstr "Відносний шлях не дозволяється при існуванні повноваження"
 
-#: ../zypp/RepoManager.cc:1112
+#: ../zypp/RepoManager.cc:1114
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Вилучення сховища \"%s\""
-
-#: ../zypp/Repository.cc:104
-#, c-format
-msgid "RepoInfo alias (%s) does not match repository name (%s)"
-msgstr "Псевдонім RepoInfo (%s) не збігається з назвою сховища (%s)"
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -3699,6 +3622,11 @@ msgstr "Согдійська"
 msgid "Solomon Islands"
 msgstr "Соломонові острови"
 
+#: ../zypp/solver/detail/SATResolver.cc:889
+#, c-format
+msgid "Solvable %s conflicts with %s provided by itself"
+msgstr "Розв’язок %s конфліктує з %s, що у ньому міститься"
+
 # SO
 # fuzzy
 #. language code: som so
@@ -3946,7 +3874,7 @@ msgstr "Таїландська"
 msgid "Thailand"
 msgstr "Таїланд"
 
-#: ../zypp/base/InterProcessMutex.cc:130
+#: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr "Цю дію вже запущено іншою програмою."
 
@@ -4194,10 +4122,6 @@ msgstr "Невідома країна: "
 #: ../zypp/LanguageCode.cc:145
 msgid "Unknown language: "
 msgstr "Невідома мова: "
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:91
-msgid "Unlock these resolvables"
-msgstr "Розблокувати ці потрібні пакунки"
 
 #: ../zypp/media/MediaUserAuth.cc:97
 #, c-format
@@ -4470,88 +4394,72 @@ msgstr "перевірка applydeltarpm зазнала невдачі."
 msgid "applydeltarpm failed."
 msgstr "застосування дельти rpm зазнало невдачі."
 
-#: ../zypp/sat/SATResolver.cc:951
+#: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "зміна архітектури з %s на %s"
 
-#: ../zypp/sat/SATResolver.cc:704
+#: ../zypp/solver/detail/SATResolver.cc:875
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "неможливо встановити одночасно %s і %s"
 
-#: ../zypp/sat/SATResolver.cc:688
+#: ../zypp/solver/detail/SATResolver.cc:859
 msgid "conflicting requests"
 msgstr "конфлікт запитів"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2329
+#: ../zypp/target/rpm/RpmDb.cc:2327
 #, c-format
 msgid "created backup %s"
 msgstr "створено резервну копію %s"
 
-#: ../zypp/sat/SATResolver.cc:978
+#: ../zypp/solver/detail/SATResolver.cc:1156
 #, c-format
 msgid "deinstallation of %s"
 msgstr "вилучення %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:64
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, c-format
-msgid "delete %s"
-msgstr "вилучити %s"
-
-#: ../zypp/sat/SATResolver.cc:747
+#: ../zypp/solver/detail/SATResolver.cc:923
 msgid "deleted providers: "
 msgstr "вилучені залежності: "
 
-#: ../zypp/sat/SATResolver.cc:899
+#: ../zypp/solver/detail/SATResolver.cc:1077
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "не питати про вилучення всіх розв’язувачів, що надаються %s"
 
-#: ../zypp/sat/SATResolver.cc:884
+#: ../zypp/solver/detail/SATResolver.cc:1062
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "не питати про встановлення розв’язувача, що надає %s"
 
-#: ../zypp/sat/SATResolver.cc:837
+#: ../zypp/solver/detail/SATResolver.cc:1015
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "не забороняти встановлення %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:816 ../zypp/sat/SATResolver.cc:855
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:69
-#: ../zypp/solver/detail/ProblemSolutionUninstall.cc:71
+#: ../zypp/solver/detail/SATResolver.cc:994
+#: ../zypp/solver/detail/SATResolver.cc:1033
 #, c-format
 msgid "do not install %s"
 msgstr "не встановлювати %s"
 
-#: ../zypp/sat/SATResolver.cc:911
+#: ../zypp/solver/detail/SATResolver.cc:1089
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "не встановлювати ранішу версію %s"
 
-#: ../zypp/sat/SATResolver.cc:811
+#: ../zypp/solver/detail/SATResolver.cc:989
 #, c-format
 msgid "do not keep %s installed"
 msgstr "не залишати встановленим %s"
 
-#: ../zypp/sat/SATResolver.cc:944
+#: ../zypp/solver/detail/SATResolver.cc:1122
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "повернення замість %s %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:54
-#: ../zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, c-format
-msgid "install %s"
-msgstr "встановити %s"
-
-#: ../zypp/sat/SATResolver.cc:958
+#: ../zypp/solver/detail/SATResolver.cc:1136
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4564,10 +4472,8 @@ msgstr ""
 "-->\n"
 "  %s"
 
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/sat/SATResolver.cc:832 ../zypp/sat/SATResolver.cc:869
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:53
-#: ../zypp/solver/detail/ProblemSolutionKeep.cc:55
+#: ../zypp/solver/detail/SATResolver.cc:1010
+#: ../zypp/solver/detail/SATResolver.cc:1047
 #, c-format
 msgid "keep %s"
 msgstr "залишити %s"
@@ -4580,34 +4486,34 @@ msgstr "libhal_ctx_new: неможливо створити контекст lib
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: неможливо встановити з'єднання з dbus"
 
-#: ../zypp/sat/SATResolver.cc:699
+#: ../zypp/solver/detail/SATResolver.cc:870
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "жоден з пакунків не надає %s, потрібного %s"
 
-#: ../zypp/sat/SATResolver.cc:691
+#: ../zypp/solver/detail/SATResolver.cc:862
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "жоден з пакунків не надає потрібного %s"
 
-#: ../zypp/sat/SATResolver.cc:685
+#: ../zypp/solver/detail/SATResolver.cc:856
 #, c-format
 msgid "problem with installed package %s"
 msgstr "проблема з встановленим пакунком %s"
 
-#: ../zypp/sat/SATResolver.cc:966
+#: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "заміна %s на %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2046
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm створила %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2050
+#: ../zypp/target/rpm/RpmDb.cc:2048
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4616,18 +4522,18 @@ msgstr ""
 "Програма rpm створили %s як %s.\n"
 "Ось перші 25 рядків відмінностей:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2057 ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "Вивід rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2041
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm зберегла %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2045
+#: ../zypp/target/rpm/RpmDb.cc:2043
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4636,17 +4542,7 @@ msgstr ""
 "Програма rpm зберегла %s як %s.\n"
 "Ось перші 25 рядків відмінностей:\n"
 
-#: ../zypp/sat/SATResolver.cc:759
+#: ../zypp/solver/detail/SATResolver.cc:935
 msgid "uninstallable providers: "
 msgstr "залежності без можливості встановлення: "
-
-#. TranslatorExplanation %s = name of package, patch, selection ...
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:82
-#, c-format
-msgid "unlock %s"
-msgstr "розблокувати           %s"
-
-#: ../zypp/solver/detail/ProblemSolutionUnlock.cc:69
-msgid "unlock all resolvables"
-msgstr "розблокувати ці потрібні пакунки"
 
