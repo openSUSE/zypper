@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 28 15:40:09 CEST 2008 - mvidner@suse.cz
+
+- Updated package-manager-su from xdg-utils-1.0.2-48 (bnc#339549).
+
+-------------------------------------------------------------------
 Mon Apr 28 15:25:46 CEST 2008 - schubi@suse.de
 
 - added translations 
