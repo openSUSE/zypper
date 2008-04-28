@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 28 15:25:46 CEST 2008 - schubi@suse.de
+
+- added translations 
+
+-------------------------------------------------------------------
 Mon Apr 28 11:15:47 CEST 2008 - jkupec@suse.cz
 
 - ostream operator<<(ostream,TriBool) added
