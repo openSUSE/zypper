@@ -119,8 +119,11 @@ namespace zypp
       
 
     /**
-     * Return the list of problematic update items
-     * i.e. locked ones (due to foreign vendor)
+     * Unmaintained packages which does not fit to 
+     * the updated system (broken dependencies) will be
+     * deleted.       
+     * Return the list of deleted items.
+     * Note : This list is valid after the call doUpgrade() only.
      **/
     std::list<PoolItem> problematicUpdateItems( void ) const;
 
