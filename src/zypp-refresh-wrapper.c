@@ -61,31 +61,25 @@ int main (void)
 
   if (initgroups("root", 0) != 0 || setgid (0) != 0)
   {
-    fprintf (stdout, "<?xml version='1.0'?>\n");
-    fprintf (stdout, "<stream>\n");
-    fprintf (stdout, "<message type=\"error\">"
+    fprintf (stdout,
         "Unable to refresh repositories because /usr/sbin/zypp-refresh-wrapper"
         " helper programm is not set SUID root.\n"
-        "This problem might be solved by setting \"File Permissons\" in YaST"
-        " \"Local Security\" tab to \"easy\" or by modifying"
-        " /etc/permissions.local</message>\n");
-    fprintf (stdout, "</stream>\n");
+        "This problem might be solved by setting 'File Permissons' in YaST"
+        " 'Local Security' tab to 'easy' or by modifying"
+        " /etc/permissions.local\n");
     return WRAPPER_ERROR;
   }
 
   if (setuid (0) != 0)
   {
     // perror ("setuid");
-    // fprintf (stderr, "Forgot to chmod this program?\n");
-    fprintf (stdout, "<?xml version='1.0'?>\n");
-    fprintf (stdout, "<stream>\n");
-    fprintf (stdout, "<message type=\"error\">Unable to refresh repositories"
-        " because /usr/sbin/zypp-refresh-wrapper helper programm is not set"
-        " SUID root.\n"
-        "This problem might be solved by setting \"File Permissons\" in YaST"
-        " \"Local Security\" tab to \"easy\" or by modifying"
-        " /etc/permissions.local</message>\n");
-    fprintf (stdout, "</stream>\n");
+    // Forgot to chmod this program?
+    fprintf (stdout,
+        "Unable to refresh repositories because /usr/sbin/zypp-refresh-wrapper"
+        " helper programm is not set SUID root.\n"
+        "This problem might be solved by setting 'File Permissons' in YaST"
+        " 'Local Security' tab to 'easy' or by modifying"
+        " /etc/permissions.local\n");
     return WRAPPER_ERROR;
   }
 
