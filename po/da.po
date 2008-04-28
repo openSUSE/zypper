@@ -1,3 +1,4 @@
+# translation of zypper.po to dansk
 # translation of zypper.po to
 # # translation of zypper.po to
 # @TITLE@
@@ -8,14 +9,15 @@
 # Ib Larsen <i.la@tele2adsl.dk>, 2007.
 # Martin Schlander <suse@linuxin.dk>, 2007.
 # Martin Schlander <mschlander@opensuse.org>, 2008.
+# Jan Madsen <jan.madsen.pt@gmail.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 12:51+0200\n"
-"PO-Revision-Date: 2008-04-20 15:41+0200\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
-"Language-Team:  <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2008-04-25 20:20+0100\n"
+"Last-Translator: Jan Madsen <jan.madsen.pt@gmail.com>\n"
+"Language-Team: dansk <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -122,6 +124,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
+"  Kommander:\n"
+"\thelp, ?\t\t\tSkriv hjælpevejledning.\n"
+"\tshell, sh\t\tAcceptér flere kommandoer på én gang.\n"
 
 #: ../src/zypper.cc:177
 msgid ""
@@ -134,6 +139,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
+"\tHåndtering af softwarekilder:\n"
+"\trepos, lr\t\tVis liste over alle angivne softwarekilder.\n"
+"\taddrepo, ar\t\tTilføj en ny softwarekilde.\n"
+"\tremoverepo, rr\t\tFjern en given softwarekilde.\n"
+"\trenamerepo, nr\t\tOmdøb en given softwarekilde.\n"
+"\tmodifyrepo, mr\t\tModificér en given softwarekilde.\n"
+"\trefresh, ref\t\tGenopfrisk alle softwarekilder.\n"
+"\tclean\t\t\tRyd op i lokale cacher.\n"
 
 #: ../src/zypper.cc:187
 msgid ""
@@ -145,6 +158,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tsource-install, si\tInstall source packages and their build dependencies.\n"
 msgstr ""
+"\tSoftwarehåndtering:\n"
+"\tinstall, in\t\tInstallér pakker.\n"
+"\tremove, rm\t\tFjern pakker.\n"
+"\tverify, ve\t\tVerificér integriteten af pakkeafhængigheder.\n"
+"\tupdate, up\t\tOpdatér installerede pakker til nyere versioner.\n"
+"\tdist-upgrade, dup\tUdfør en distributionsopgradering.\n"
+"\tsource-install, si\tInstallér kildepakker og deres opbygningsafhængigheder.\n"
 
 #: ../src/zypper.cc:196
 msgid ""
@@ -162,6 +182,19 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
+"\tForespørgsel:\n"
+"\tsearch, se\t\tSøg efter pakker, der matcher et mønster.\n"
+"\tinfo, if\t\tVis fuld information om angivne pakker.\n"
+"\tpatch-info\t\tVis fuld information om angivne rettelser.\n"
+"\tpattern-info\t\tVis fuld information om angivne mønstre.\n"
+"\tproduct-info\t\tVis fuld information om angivne produkter.\n"
+"\tpatch-check, pchk\tTjek efter rettelser.\n"
+"\tlist-updates, lu\tVis liste over tilgængelige opdateringer.\n"
+"\tpatches, pch\t\tVis liste over alle tilgængelige rettelser.\n"
+"\tpackages, pa\t\tVis liste over alle tilgængelige pakker.\n"
+"\tpatterns, pt\t\tVis liste over alle tilgængelige mønstre.\n"
+"\tproducts, pd\t\tVis liste over alle tilgængelige produkter.\n"
+"\twhat-provides, wp\tVis liste over pakker, der har specificeret kapabilitet.\n"
 
 #: ../src/zypper.cc:213
 msgid ""
@@ -170,6 +203,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
+"\tPakkelåse:\n"
+"\taddlock, al\t\tTilføj en pakkelås.\n"
+"\tremovelock, rl\t\tFjern en pakkelås.\n"
+"\tlocks, ll\t\tVis liste over nuværende pakkelåse.\n"
 
 #: ../src/zypper.cc:219
 msgid ""
@@ -189,7 +226,7 @@ msgstr "Indtast '%s' for at få en liste over globale valgmuligheder og kommando
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/zypper.cc:250
-#, fuzzy, c-format
+#, c-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Indtast '%s' for at få kommandospecifik hjælp."
 
@@ -199,14 +236,14 @@ msgid "Verbosity: %d"
 msgstr "Uddybende: %d"
 
 #: ../src/zypper.cc:365
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid table style %d."
-msgstr "Ugyldig tabelstil %s"
+msgstr "Ugyldig tabelstil %d."
 
 #: ../src/zypper.cc:366
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr ""
+msgstr "Benyt et heltal fra %d til %d"
 
 #: ../src/zypper.cc:396
 msgid "Entering non-interactive mode."
@@ -341,7 +378,6 @@ msgstr ""
 "-r, --repo <alias|#|URI> Installér kun pakker fra angivne softwarekilder.\n"
 
 #: ../src/zypper.cc:923
-#, fuzzy
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -354,7 +390,7 @@ msgid ""
 msgstr ""
 "verify (ve) [valgmuligheder]\n"
 "\n"
-"Tjek hvorvidt afhængigheder for installerede pakker er opfyldt.\n"
+"Tjek hvorvidt afhængigheder for installerede pakker er opfyldt, og reparér eventuelle afhængighedsproblemer.\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "    --no-recommends      Installér ikke anbefalede pakker, kun påkrævede.\n"
@@ -363,7 +399,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/zypper.cc:952
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -381,7 +417,7 @@ msgstr ""
 "addrepo (ar) [valgmuligheder] <URI> <alias>\n"
 "addrepo (ar) [valgmuligheder] <FIL.repo>\n"
 "\n"
-"Tilføj softwarekilde til systemet. Softwarekilden kan angives ved URI eller kan læses fra en specificeret .repo-fil (også eksternt).\n"
+"Tilføj softwarekilde til systemet. Softwarekilden kan angives ved URI eller læses fra en specificeret .repo-fil (også eksternt).\n"
 "\n"
 "   Kommando-valgmuligheder:\n"
 "-r, --repo <FIL.repo>  Læs URI og alias fra en fil (også eksternt).\n"
@@ -389,6 +425,7 @@ msgstr ""
 "-d, --disable          Tilføj softwarekilde som deaktiveret.\n"
 "-c, --check             Afprøv URI.\n"
 "-x, --nocheck           Afprøv ikke URI, afprøv senere under genopfriskning.\n"
+"-n, --name              Angiv et beskrivende navn på softwarekilden.\n"
 
 #: ../src/zypper.cc:996 ../src/zypper.cc:1731
 msgid ""
@@ -396,6 +433,9 @@ msgid ""
 "\n"
 "List available resolvable types.\n"
 msgstr ""
+"list-resolvables (lr)\n"
+"\n"
+"Vis liste over tilgængelige typer af resolvables.\n"
 
 #: ../src/zypper.cc:1004
 msgid ""
@@ -413,6 +453,19 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
+"repos (lr)\n"
+"\n"
+"Vis liste over alle angivne softwarekilder.\n"
+"\n"
+"  Kommando-valgmuligheder:\n"
+"-e, --export <FIL.repo>  Eksportér alle angivne softwarekilder som en enkelt .repo-fil.\n"
+"-u, --uri                 Vis også softwarekildernes basale URI.\n"
+"-p, --priority            Vis også softwarekildens prioritet.\n"
+"-d, --details             Vis mere information - såsom URI, prioritet, type.\n"
+"-U, --sort-by-uri         Sortér listen efter URI.\n"
+"-P, --sort-by-priority    Sortér listen efter softwarekildernes prioritet.\n"
+"-A, --sort-by-alias       Sortér listen efter alias.\n"
+"-N, --sort-by-name        Sortér listen efter navn.\n"
 
 #: ../src/zypper.cc:1031
 msgid ""
@@ -622,7 +675,6 @@ msgstr ""
 "-D, --dry-run                   Test opgraderingen, uden at udføre den.\n"
 
 #: ../src/zypper.cc:1287
-#, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -665,8 +717,10 @@ msgstr ""
 "-r, --repo <alias|#|URI>   Søg kun i softwarekilde specificeret ved alias.\n"
 "    --sort-by-name         Sortér pakker efter navn (standard).\n"
 "    --sort-by-repo         Sortér pakker efter softwarekilde.\n"
+"    --details              Vis hver tilgængelig version i hver softwarekilde\n"
+"                           på en separat linje.\n"
 " \n"
-"Trunkeringstegnene * og ? kan også bruges i søgestrenge.\n"
+"Wildcards  * og ? kan også bruges i søgestrenge.\n"
 
 #: ../src/zypper.cc:1324
 msgid ""
@@ -705,7 +759,6 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Blot en anden måde at specificere softwarekilde på.\n"
 
 #: ../src/zypper.cc:1373
-#, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -728,9 +781,10 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Blot en anden måde at specificere softwarekilde på.\n"
 "-i, --installed-only      Vis kun installerede mønstre.\n"
 "-u, --uninstalled-only    Vis kun mønstre som ikke er installerede.\n"
+"-N, --sort-by-name        Sortér listen efter pakkenavn.\n"
+"-R, --sort-by-repo        Sortér listen efter softwarekilde.\n"
 
 #: ../src/zypper.cc:1401
-#, fuzzy
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -744,16 +798,15 @@ msgid ""
 msgstr ""
 "patterns (pt) [valgmuligheder] [softwarekilde] ...\n"
 "\n"
-"Vis liste over alle mønstre tilgængelige på specificerede softwarekilder.\n"
+"Vis liste over alle tilgængelige mønstre på specificerede softwarekilder.\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "\n"
 "-r, --repo <alias|#|URI>  Blot en anden måde at specificere softwarekilde på.\n"
 "-i, --installed-only      Vis kun installerede mønstre.\n"
-"-u, --uninstalled-only    Vis kun mønstre som ikke er installerede.\n"
+"-u, --uninstalled-only    Vis kun mønstre, som ikke er installerede.\n"
 
 #: ../src/zypper.cc:1427
-#, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -765,9 +818,9 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
 msgstr ""
-"patterns (pt) [valgmuligheder] [softwarekilde] ...\n"
+"products (pd) [valgmuligheder] [softwarekilde] ...\n"
 "\n"
-"Vis liste over alle mønstre tilgængelige på specificerede softwarekilder.\n"
+"Vis liste over alle tilgængelige produkter på specificerede softwarekilder.\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "\n"
@@ -842,7 +895,6 @@ msgstr ""
 "Dette er et alias til rug-kompatibilitet for '%s'.\n"
 
 #: ../src/zypper.cc:1530
-#, fuzzy
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -850,9 +902,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"source-install (si) <navn> ...\n"
+"what-provides (wp) <kapabilitet>\n"
 "\n"
-"Installér kildepakker specificeret ved deres navne.\n"
+"Vis liste over alle pakker, der har den specificerede kapabilitet.\n"
 "\n"
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
@@ -871,7 +923,7 @@ msgstr ""
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
 #: ../src/zypper.cc:1599
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "xml-updates\n"
 "\n"
@@ -882,7 +934,7 @@ msgid ""
 msgstr ""
 "xml-updates\n"
 "\n"
-"Vis opdateringer og rettelser i XML-format. Denne kommando er forældet og vil før eller siden blive droppet til fordel for '%s'.\n"
+"Vis opdateringer og rettelser i XML-format. Denne kommando misbilliges og vil før eller siden blive droppet til fordel for '%s'.\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "-r, --repo <alias|#|URI>  Arbejd kun med opdateringer fra specificeret softwarekilde.\n"
@@ -909,7 +961,6 @@ msgstr ""
 "                          Standard: %s.\n"
 
 #: ../src/zypper.cc:1646
-#, fuzzy
 msgid ""
 "removelock (rl) <lock-number>\n"
 "\n"
@@ -917,9 +968,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"removelock (rl) <låsnummmer>\n"
+"removelock (rl) <låsnummer>\n"
 "\n"
-"Fjern en pakkelås. Angiv låsen der skal fjernes ved dens nummer som oplyses ved 'zypper locks'.\n"
+"Fjern en pakkelås. Angiv låsen, der skal fjernes, ved dens nummer hentet med 'zypper locks'.\n"
 "\n"
 "Denne kommando har ikke yderligere valgmuligheder.\n"
 
@@ -971,6 +1022,9 @@ msgid ""
 "\n"
 "List available service types.\n"
 msgstr ""
+"service-types\n"
+"\n"
+"Vis liste over tilgængelige tjenestetyper.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -986,6 +1040,14 @@ msgid ""
 "-n, --name <name>    Use given string as service name.\n"
 "-r, --recurse        Dive into subdirectories.\n"
 msgstr ""
+"mount\n"
+"\n"
+"Montér mappe med RPMer som en kanal.\n"
+"\n"
+"  Kommando-valgmuligheder:\n"
+"-a, --alias <alias>  Bruger en given streng som tjeneste-alias.\n"
+"-n, --name <navn>    Bruger en given streng som tjeneste-navn.\n"
+"-r, --recurse        Går ind i undermapper.\n"
 
 #: ../src/zypper.cc:1784
 #, c-format
@@ -994,6 +1056,9 @@ msgid ""
 "\n"
 "Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
+"patch-search [valgmuligheder] [søgestreng...]\n"
+"\n"
+"Søger efter rettelser, der matcher en given søgestreng. Dette er et kompatibilitetsalias for '%s'. Se zypper's manualside for detaljer.\n"
 
 #: ../src/zypper.cc:1798 ../src/zypper.cc:3066
 msgid "Unexpected program flow."
@@ -1052,12 +1117,12 @@ msgstr "For få argumenter."
 
 #: ../src/zypper.cc:1966
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr ""
+msgstr "Hvis der kun anvendes et argument, skal det være en URI, der peger til en .repo-fil."
 
 #: ../src/zypper.cc:1993
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Kan ikke bruge --check sammen med --nocheck. Brugte indstillinger fra zypp.conf."
+msgstr "Kan ikke bruge %s sammen med %s. At bruge indstillingen %s."
 
 #: ../src/zypper.cc:2014
 msgid "Specified type is not a valid repository type:"
@@ -1236,9 +1301,8 @@ msgid "Description"
 msgstr "Beskrivelse"
 
 #: ../src/zypper.cc:3136
-#, fuzzy
 msgid "Resolvable Type"
-msgstr "Resolvable"
+msgstr "Resolvable-type"
 
 #: ../src/zypper-command.cc:137
 #, c-format
@@ -1318,21 +1382,18 @@ msgstr "Forælder"
 
 #. translators: package requirements table header
 #: ../src/zypper-info.cc:113
-#, fuzzy
 msgid "Requirement"
-msgstr "Kræver"
+msgstr "Krav"
 
 #. translators: package requirements table header
 #: ../src/zypper-info.cc:115
-#, fuzzy
 msgid "Provided By"
-msgstr "Udbyder"
+msgstr "Leveret af"
 
 #. translators: package conflicts table header
 #: ../src/zypper-info.cc:117
-#, fuzzy
 msgid "Conflict"
-msgstr "Konflikter"
+msgstr "Konflikt"
 
 #: ../src/zypper-info.cc:145 ../src/zypper-info.cc:271
 #: ../src/zypper-info.cc:334 ../src/zypper-search.cc:65
@@ -1377,9 +1438,9 @@ msgid "up-to-date"
 msgstr "opdateret"
 
 #: ../src/zypper-info.cc:161
-#, fuzzy, c-format
+#, c-format
 msgid "out-of-date (version %s installed)"
-msgstr "uddateret (version "
+msgstr "uddateret (version %s er installeret)"
 
 #: ../src/zypper-info.cc:166
 msgid "not installed"
@@ -1762,235 +1823,202 @@ msgid "Resolving dependencies..."
 msgstr "Løser afhængigheder..."
 
 #: ../src/zypper-misc.cc:938
-#, fuzzy
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende pakke vil blive opgraderet:"
+msgstr[1] "De følgende pakker vil blive opgraderet:"
 
 #: ../src/zypper-misc.cc:943
-#, fuzzy
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende rettelse vil blive opgraderet:"
+msgstr[1] "De følgende rettelser vil blive opgraderet:"
 
 #: ../src/zypper-misc.cc:948
-#, fuzzy
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende mønster vil blive opgraderet:"
+msgstr[1] "De følgende mønstre vil blive opgraderet:"
 
 #: ../src/zypper-misc.cc:953
-#, fuzzy
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende produkt vil blive opgraderet:"
+msgstr[1] "De følgende produkter vil blive opgraderet:"
 
 #: ../src/zypper-misc.cc:960
-#, fuzzy
 msgid "The following package is going to be upgraded and change architecture:"
 msgid_plural "The following packages are going to be upgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende pakke vil blive opgraderet og ændre arkitektur:"
+msgstr[1] "De følgende pakker vil blive opgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:965
-#, fuzzy
 msgid "The following patch is going to be upgraded and change architecture:"
 msgid_plural "The following patches are going to be upgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende rettelse vil blive opgraderet og ændre arkitektur:"
+msgstr[1] "De følgende rettelser vil blive opgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:970
-#, fuzzy
 msgid "The following pattern is going to be upgraded and change architecture:"
 msgid_plural "The following patterns are going to be upgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende mønsterer vil blive opgraderet og ændre arkitektur:"
+msgstr[1] "De følgende mønstre vil blive opgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:975
-#, fuzzy
 msgid "The following product is going to be upgraded and change architecture:"
 msgid_plural "The following products are going to be upgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende produkt vil blive opgraderet og ændre arkitektur:"
+msgstr[1] "De følgende produkter vil blive opgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:982
-#, fuzzy
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Den følgende pakke vil blive nedgraderet:"
+msgstr[1] "De følgende pakker vil blive nedgraderet:"
 
 #: ../src/zypper-misc.cc:987
-#, fuzzy
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Den følgende rettelse vil blive nedgraderet:"
+msgstr[1] "De følgende rettelser vil blive nedgraderet:"
 
 #: ../src/zypper-misc.cc:992
-#, fuzzy
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Det følgende mønster vil blive nedgraderet:"
+msgstr[1] "De følgende mønstre vil blive nedgraderet:"
 
 #: ../src/zypper-misc.cc:997
-#, fuzzy
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Det følgende produkt vil blive nedgraderet:"
+msgstr[1] "De følgende produkter vil blive nedgraderet:"
 
 #: ../src/zypper-misc.cc:1004
-#, fuzzy
 msgid "The following package is going to be downgraded and change architecture:"
 msgid_plural "The following packages are going to be downgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Den følgende pakke vil blive nedgraderet og ændre arkitektur:"
+msgstr[1] "De følgende pakker vil blive nedgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1009
-#, fuzzy
 msgid "The following patch is going to be downgraded and change architecture:"
 msgid_plural "The following patches are going to be downgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Den følgende rettelse vil blive nedgraderet og ændre arkitektur:"
+msgstr[1] "De følgende rettelser vil blive nedgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1014
-#, fuzzy
 msgid "The following pattern is going to be downgraded and change architecture:"
 msgid_plural "The following patterns are going to be downgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Det følgende mønster vil blive nedgraderet og ændre arkitektur:"
+msgstr[1] "De følgende mønstre vil blive nedgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1019
-#, fuzzy
 msgid "The following product is going to be downgraded and change architecture:"
 msgid_plural "The following products are going to be downgraded and change architecture:"
-msgstr[0] "Følgende %s vil blive nedgraderet:"
-msgstr[1] "Følgende %s vil blive nedgraderet:"
+msgstr[0] "Det følgende produkt vil blive nedgraderet og ændre arkitektur:"
+msgstr[1] "De følgende produkter vil blive nedgraderet og ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1026
-#, fuzzy
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "Følgende NYE %s vil blive installeret:"
-msgstr[1] "Følgende NYE %s vil blive installeret:"
+msgstr[0] "Den følgende NYE pakke vil blive installeret:"
+msgstr[1] "De følgende NYE pakker vil blive installeret:"
 
 #: ../src/zypper-misc.cc:1031
-#, fuzzy
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "Følgende NYE %s vil blive installeret:"
-msgstr[1] "Følgende NYE %s vil blive installeret:"
+msgstr[0] "Den følgende NYE rettelse vil blive installeret:"
+msgstr[1] "De følgende NYE rettelser vil blive installeret:"
 
 #: ../src/zypper-misc.cc:1036
-#, fuzzy
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "Følgende NYE %s vil blive installeret:"
-msgstr[1] "Følgende NYE %s vil blive installeret:"
+msgstr[0] "Det følgende NYE mønster vil blive installeret:"
+msgstr[1] "De følgende NYE mønstre vil blive installeret:"
 
 #: ../src/zypper-misc.cc:1041
-#, fuzzy
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "Følgende NYE %s vil blive installeret:"
-msgstr[1] "Følgende NYE %s vil blive installeret:"
+msgstr[0] "Det følgende NYE produkt vil blive installeret:"
+msgstr[1] "De følgende NYE produkter vil blive installeret:"
 
 #: ../src/zypper-misc.cc:1046
-#, fuzzy
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "Følgende %s vil blive installeret:"
-msgstr[1] "Følgende %s vil blive installeret:"
+msgstr[0] "Den følgende kildepakke vil blive installeret:"
+msgstr[1] "De følgende kildepakker vil blive installeret:"
 
 #: ../src/zypper-misc.cc:1053
-#, fuzzy
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "Følgende %s vil blive installeret:"
-msgstr[1] "Følgende %s vil blive installeret:"
+msgstr[0] "Den følgende pakke vil blive geninstalleret:"
+msgstr[1] "De følgende pakker vil blive geninstalleret:"
 
 #: ../src/zypper-misc.cc:1058
-#, fuzzy
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "Følgende %s vil blive installeret:"
-msgstr[1] "Følgende %s vil blive installeret:"
+msgstr[0] "Den følgende rettelse vil blive geninstalleret:"
+msgstr[1] "De følgende rettelser vil blive geninstalleret:"
 
 #: ../src/zypper-misc.cc:1063
-#, fuzzy
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "Følgende %s vil blive installeret:"
-msgstr[1] "Følgende %s vil blive installeret:"
+msgstr[0] "Det følgende mønster vil blive geninstalleret:"
+msgstr[1] "De følgende mønstre vil blive geninstalleret:"
 
 #: ../src/zypper-misc.cc:1068
-#, fuzzy
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "Følgende %s vil blive installeret:"
-msgstr[1] "Følgende %s vil blive installeret:"
+msgstr[0] "Det følgende produkt vil blive installeret:"
+msgstr[1] "De følgende produkter vil blive geninstalleret:"
 
 #: ../src/zypper-misc.cc:1075
-#, fuzzy
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "Følgende %s vil blive SLETTET:"
-msgstr[1] "Følgende %s vil blive SLETTET:"
+msgstr[0] "Den følgende pakke vil blive FJERNET:"
+msgstr[1] "De følgende pakker vil blive FJERNET:"
 
 #: ../src/zypper-misc.cc:1080
-#, fuzzy
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "Følgende %s vil blive SLETTET:"
-msgstr[1] "Følgende %s vil blive SLETTET:"
+msgstr[0] "Den følgende rettelse vil blive FJERNET:"
+msgstr[1] "De følgende rettelser vil blive FJERNET:"
 
 #: ../src/zypper-misc.cc:1085
-#, fuzzy
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "Følgende %s vil blive SLETTET:"
-msgstr[1] "Følgende %s vil blive SLETTET:"
+msgstr[0] "Det følgende mønster vil blive FJERNET:"
+msgstr[1] "De følgende mønstre vil blive FJERNET:"
 
 #: ../src/zypper-misc.cc:1090
-#, fuzzy
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "Følgende %s vil blive SLETTET:"
-msgstr[1] "Følgende %s vil blive SLETTET:"
+msgstr[0] "Det følgende produkt vil blive FJERNET:"
+msgstr[1] "De følgende produkter vil blive FJERNET:"
 
 #: ../src/zypper-misc.cc:1097
-#, fuzzy
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende pakke vil ændre arkitektur:"
+msgstr[1] "De følgende pakker vil ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1102
-#, fuzzy
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Den følgende rettelse vil ændre arkitektur:"
+msgstr[1] "De følgende rettelser vil ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1107
-#, fuzzy
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende mønster vil ændre arkitektur:"
+msgstr[1] "De følgende mønstre vil ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1112
-#, fuzzy
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "Følgende %s vil blive opgraderet:"
-msgstr[1] "Følgende %s vil blive opgraderet:"
+msgstr[0] "Det følgende produkt vil ændre arkitektur:"
+msgstr[1] "De følgende produkter vil ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1179
 msgid "Dependencies of all installed packages are satisfied."
@@ -2172,9 +2200,9 @@ msgid "Package '%s' is not installed."
 msgstr "Pakken '%s' er ikke installeret."
 
 #: ../src/zypper-misc.cc:2099
-#, fuzzy, c-format
+#, c-format
 msgid "No update candidate for '%s'."
-msgstr "Ingen opdateringskandidat til '%s'"
+msgstr "Ingen opdateringskandidat til '%s'."
 
 #: ../src/zypper-misc.cc:2160
 msgid "Root privileges are required to fix broken package dependencies."
@@ -2182,16 +2210,15 @@ msgstr "Der kræves root-rettigheder for løse uopfyldte pakkeafhængigheder."
 
 #. translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
 #: ../src/zypper-misc.cc:2168
-#, fuzzy
 msgid "Continue? (Choose 'p' to show dependency problems.)"
-msgstr "Kan ikke installere %s grundet afhængighedsproblemer"
+msgstr "Fortsæt? (Vælg 'p' for at vise afhængighedsproblemer.)"
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
 #. to-be-removed automatically to show why, if asked.
 #: ../src/zypper-misc.cc:2172
 msgid "y/n/p"
-msgstr ""
+msgstr "j/n/v"
 
 #: ../src/zypper-misc.cc:2186
 msgid "committing"
@@ -2541,11 +2568,11 @@ msgstr "Genopfrisk"
 #. translators: repository priority (in zypper repos -p or -d)
 #: ../src/zypper-repos.cc:624
 msgid "Priority"
-msgstr ""
+msgstr "Prioritet"
 
 #: ../src/zypper-repos.cc:628
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../src/zypper-repos.cc:669
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
@@ -2926,20 +2953,18 @@ msgstr "Ingen mønstre fundet."
 
 #
 #: ../src/zypper-search.cc:199
-#, fuzzy
 msgid "No packages found."
-msgstr "Ingen opdateringer fundet."
+msgstr "Ingen pakker fundet."
 
 #
 #: ../src/zypper-search.cc:254
-#, fuzzy
 msgid "No products found."
-msgstr "Ingen opdateringer fundet."
+msgstr "Ingen produkter fundet."
 
 #: ../src/zypper-search.cc:269
-#, fuzzy, c-format
+#, c-format
 msgid "No providers of '%s' found."
-msgstr "Ingen rettelser som matcher '%s' fundet."
+msgstr "Ingen, der tilbyder '%s', fundet."
 
 #. translators: package summary (header)
 #: ../src/zypper-search.h:184
@@ -3022,7 +3047,7 @@ msgstr[1] "resolvables"
 
 #: ../src/zypper-utils.cc:214
 msgid "Specified local path does not exist or is not accessible."
-msgstr ""
+msgstr "Den angivne lokale søgesti eksisterer ikke, eller er ikke tilgængelig."
 
 #: ../src/zypper-utils.cc:226
 msgid "Given URI is invalid"
@@ -3047,77 +3072,5 @@ msgstr "Tjek venligst om filen er tilgængelig."
 #: ../src/zypper-utils.cc:356
 #, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "Kan ikke kapabilitet '%s'."
+msgstr "Kan ikke fortolke kapabilitet '%s'."
 
-#~ msgid ""
-#~ "  Commands:\n"
-#~ "\thelp, ?\t\t\tPrint help.\n"
-#~ "\tshell, sh\t\tAccept multiple commands at once.\n"
-#~ "\tinstall, in\t\tInstall packages.\n"
-#~ "\tremove, rm\t\tRemove packages.\n"
-#~ "\tverify, ve\t\tVerify integrity of package dependencies.\n"
-#~ "\tsearch, se\t\tSearch for packages matching a pattern.\n"
-#~ "\trepos, lr\t\tList all defined repositories.\n"
-#~ "\taddrepo, ar\t\tAdd a new repository.\n"
-#~ "\tremoverepo, rr\t\tRemove specified repository.\n"
-#~ "\trenamerepo, nr\t\tRename specified repository.\n"
-#~ "\tmodifyrepo, mr\t\tModify specified repository.\n"
-#~ "\trefresh, ref\t\tRefresh all repositories.\n"
-#~ "\tpatch-check, pchk\tCheck for patches.\n"
-#~ "\tpatches, pch\t\tList patches.\n"
-#~ "\tlist-updates, lu\tList updates.\n"
-#~ "\txml-updates, xu\t\tList updates and patches in xml format.\n"
-#~ "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
-#~ "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
-#~ "\tinfo, if\t\tShow full information for packages.\n"
-#~ "\tpatch-info\t\tShow full information for patches.\n"
-#~ "\tsource-install, si\tInstall source packages.\n"
-#~ "\tclean\t\t\tClean local caches.\n"
-#~ "\taddlock\t\t\tAdd a package lock.\n"
-#~ "\tremovelock\t\tRemove a package lock.\n"
-#~ "\tlocks\t\t\tList current package locks.\n"
-#~ msgstr ""
-#~ "  Kommandoer:\n"
-#~ "\thelp\t\t\tVis hjælp.\n"
-#~ "\tshell, sh\t\tAcceptér flere kommandoer på en gang.\n"
-#~ "\tinstall, in\t\tInstallér pakker.\n"
-#~ "\tremove, rm\t\tFjern pakker.\n"
-#~ "\tverify, ve\t\tVerificér integritet af pakkeafhængigheder.\n"
-#~ "\tsearch, se\t\tSøg efter pakker der matcher et mønster.\n"
-#~ "\trepos, lr\t\tVis liste over alle definerede softwarekilder.\n"
-#~ "\taddrepo, ar\t\tTilføj ny softwarekilde.\n"
-#~ "\tremoverepo, rr\t\tFjern specificeret softwarekilde.\n"
-#~ "\trenamerepo, nr\t\tOmdøb specificeret softwarekilde.\n"
-#~ "\tmodifyrepo, mr\t\tÆndr specificeret softwarekilde.\n"
-#~ "\trefresh, ref\t\tGenopfrisk alle softwarekilder.\n"
-#~ "\tpatch-check, pchk\tTjek efter rettelser.\n"
-#~ "\tpatches, pch\t\tVis liste over rettelser.\n"
-#~ "\tlist-updates, lu\tVis liste over opdateringer.\n"
-#~ "\txml-updates, xu\t\tVis liste over opdateringer og rettelser i XML-format.\n"
-#~ "\tupdate, up\t\tOpdatér installerede resolvables med nyere versioner.\n"
-#~ "\tdist-upgrade, dup\tUdfør opgradering af distributionen.\n"
-#~ "\tinfo, if\t\tVis fuld information om pakker.\n"
-#~ "\tpatch-info\t\tVis fuld information om rettelser.\n"
-#~ "\tsource-install, si\tInstallér kildepakker.\n"
-#~ "\tclean\t\t\tRyd lokal cache.\n"
-#~ "\taddlock\t\t\tTilføj en pakkelås.\n"
-#~ "\tremovelock\t\tFjern en pakkelås.\n"
-#~ "\tlocks\t\t\tVis liste over nuværende pakkelåse.\n"
-
-#~ msgid ""
-#~ "repos (lr)\n"
-#~ "\n"
-#~ "List all defined repositories.\n"
-#~ "\n"
-#~ "  Command options:\n"
-#~ "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
-#~ msgstr ""
-#~ "repos (lr)\n"
-#~ "\n"
-#~ "Vis liste over alle definerede softwarekilder.\n"
-#~ "\n"
-#~ "  Kommando-valgmuligheder:\n"
-#~ "-e, --export <FIL.repo>  Eksportér alle definerede softwarekilder som en enkelt lokal .repo-fil.\n"
-
-#~ msgid " installed) "
-#~ msgstr " installeret) "

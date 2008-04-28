@@ -1,18 +1,18 @@
-# translation of zypper.km.po to khmer
+# translation of zypper.km.po to Khmer
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 # Auk Piseth <piseth_dv@khmeros.info>, 2007, 2008.
-# Khoem Sokhem <khoemsokhem@khmeros.info>, 2007.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 12:51+0200\n"
-"PO-Revision-Date: 2008-04-22 04:18+0700\n"
-"Last-Translator: Auk Piseth <piseth_dv@khmeros.info>\n"
-"Language-Team: khmer <support@khmeros.info>\n"
+"PO-Revision-Date: 2008-04-25 16:33+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khemros.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

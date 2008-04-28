@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: Wed Apr 23 19:39:42 UTC 2008\n"
 "POT-Creation-Date: 2008-04-21 12:51+0200\n"
-"PO-Revision-Date: Tue Apr 22 20:25:15 UTC 2008\n"
+"PO-Revision-Date: Fri Apr 25 17:59:28 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -258,7 +258,7 @@ msgstr "Betritt 'no-gpg-checks'-Modus."
 
 #: ../src/zypper.cc:412
 msgid "The path specified in the --root option must be absolute."
-msgstr "Der in der --root-Option festgelegte Pfad muss absolut sein."
+msgstr "Der in der Option --root festgelegte Pfad muss absolut sein."
 
 #: ../src/zypper.cc:446
 msgid "Repositories disabled, using the database of installed packages only."
@@ -276,7 +276,7 @@ msgstr "Ignoriere installierte auflösbare Abhängigkeiten."
 #: ../src/zypper.cc:560
 #, c-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "Die %s-Option hat hier keinen Effekt, ignoriere sie."
+msgstr "Die Option %s hat hier keinen Effekt, ignoriere sie."
 
 #: ../src/zypper.cc:733
 msgid "Unexpected exception."
@@ -319,10 +319,10 @@ msgstr ""
 "-f, --force                     Installiere selbst, wenn das Element bereits installiert ist (Reinstallation).\n"
 "-l, --auto-agree-with-licenses  Sage automatisch 'ja' zu Dittparteilizenz-Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --debug-solver              Erstelle Solver-Testfall für das Debugging.\n"
+"    --debug-solver              Erstelle Auflöser-Testfall für das Debugging.\n"
 "    --no-recommends             Installiere keine empfohlenen Pakete, nur benötigte.\n"
-"-R, --no-force-resolution       Zwinge den Solver nicht zur Suche einer Lösung, lasse ihn fragen.\n"
-"    --force-resolution          Zwinge den Solver zur Suche einer Lösung (selbst eine aggressive).\n"
+"-R, --no-force-resolution       Zwinge den Auflöser nicht zur Suche einer Lösung, lasse ihn fragen.\n"
+"    --force-resolution          Zwinge den Auflöser zur Suche einer Lösung (selbst eine aggressive).\n"
 "-D, --dry-run                   Probe die Installation, installiere nicht wirklich.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
@@ -355,9 +355,9 @@ msgstr ""
 "                                Standard: %s.\n"
 "-n, --name                      Wähle auflösbare Abhängigkeiten durch einfachem Namen, nicht durch Fähigkeit.\n"
 "-C, --capability                Wähle auflösbare Abhängigkeiten durch Fähigkeit.\n"
-"    --debug-solver              Erstelle Solver-Testfall für das Debugging.\n"
-"-R, --no-force-resolution       Zwinge den Solver nicht zur Suche einer Lösung, lasse ihn fragen.\n"
-"    --force-resolution          Zwinge den Solver zur Suche einer Lösung (selbst eine aggressive).\n"
+"    --debug-solver              Erstelle Auflöser-Testfall für das Debugging.\n"
+"-R, --no-force-resolution       Zwinge den Auflöser nicht zur Suche einer Lösung, lasse ihn fragen.\n"
+"    --force-resolution          Zwinge den Auflöser zur Suche einer Lösung (selbst eine aggressive).\n"
 "-D, --dry-run                   Probe die Entfernung, entferne nicht wirklich.\n"
 
 #: ../src/zypper.cc:896
@@ -608,7 +608,7 @@ msgstr ""
 "-t, --type <Typ>                Typ der auflösbaren Abhängigkeit (%s).\n"
 "                                Standard: %s.\n"
 "-r, --repo <Alias|#|URI>        Liste nur Aktualisierungen der festgelegten Repositorien auf.\n"
-"    --best-effort               Führe einen 'bestmöglichen'-Ansatz zur Aktualisierung durch. Aktualisierungen\n"
+"    --best-effort               Führe einen 'bestmöglichen' Ansatz zur Aktualisierung durch. Aktualisierungen\n"
 "                                zu einer niedrigeren als der letzten Version sind\n"
 "                                auch akzeptable.\n"
 
@@ -650,11 +650,11 @@ msgstr ""
 "    --skip-interactive          Überspringe interaktive Aktualisierungen.\n"
 "-l, --auto-agree-with-licenses  Sage automatisch 'ja' zu Drittparteilizenz-Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --best-effort               Führe einen 'bestmöglichen'-Ansatz zur Aktualisierung durch. Aktualisierungen zu einer niedrigeren als der letzten Version sind auch akzeptabel.\n"
-"    --debug-solver              Erstelle einen Solver-Testfall für das Debugging.\n"
+"    --best-effort               Führe einen 'bestmöglichen' Ansatz zur Aktualisierung durch. Aktualisierungen zu einer niedrigeren als der letzten Version sind auch akzeptabel.\n"
+"    --debug-solver              Erstelle einen Auflöser-Testfall für das Debugging.\n"
 "    --no-recommends             Installiere keine empfohlenen Pakete, nur die benötigten.\n"
-"-R, --no-force-resolution       Zwinge den Solver nicht dazu eine Lösung zu finden, lasse ihn fragen.\n"
-"    --force-resolution          Zwinge den Solver dazu eine Lösung zu finden (selbst eine aggressive).\n"
+"-R, --no-force-resolution       Zwinge den Auflöser nicht dazu eine Lösung zu finden, lasse ihn fragen.\n"
+"    --force-resolution          Zwinge den Auflöser dazu eine Lösung zu finden (selbst eine aggressive).\n"
 "-D, --dry-run                   Probe die Aktualisierng, aktualisiere nicht wirklich.\n"
 
 #: ../src/zypper.cc:1245
@@ -685,7 +685,7 @@ msgstr ""
 "-l, --auto-agree-with-licenses  Sage automatisch 'ja' zu Drittparteilizenz-"
 "Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
-"    --debug-solver              Erstelle Solver-Testfall für das Debugging\n"
+"    --debug-solver              Erstelle Auflöser-Testfall für das Debugging\n"
 
 #: ../src/zypper.cc:1287
 msgid ""
@@ -1264,7 +1264,7 @@ msgstr "Um Pakete zu aktualisieren, sind Root-Rechte erforderlich."
 #: ../src/zypper.cc:2808
 #, c-format
 msgid "Running as '%s', cannot do '%s' approach to update."
-msgstr "Laufe als '%s', kann keinen '%s'-Ansatz durchführen, um zu aktualisieren."
+msgstr "Laufe als '%s', kann keinen '%s' Ansatz durchführen, um zu aktualisieren."
 
 #: ../src/zypper.cc:2845
 msgid "Root privileges are required for performing a distribution upgrade."
@@ -2096,16 +2096,16 @@ msgstr "Überprüfe Abhängigkeiten..."
 
 #: ../src/zypper-misc.cc:1464
 msgid "Generating solver test case..."
-msgstr "Erzeuge Solver-Testfall..."
+msgstr "Erzeuge Auflöser-Testfall..."
 
 #: ../src/zypper-misc.cc:1467
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Solver-Testfall erfolgreich generiert bei %s."
+msgstr "Auflöser-Testfall erfolgreich generiert bei %s."
 
 #: ../src/zypper-misc.cc:1471
 msgid "Error creating the solver test case."
-msgstr "Fehler beim Erstellen des Solver-Testfalls."
+msgstr "Fehler beim Erstellen des Auflöser-Testfalls."
 
 #. translators: %d is the number of needed patches
 #: ../src/zypper-misc.cc:1501
@@ -2384,7 +2384,7 @@ msgstr "Wähle %s nach %u automatisch "
 #. The answers should be lower case letters.
 #: ../src/zypper-prompt.cc:116
 msgid "a/r/i"
-msgstr "abbrechen/wiederholen/ignorieren"
+msgstr "a/w/i"
 
 #: ../src/zypper-prompt.cc:117
 msgid "Abort, retry, ignore?"

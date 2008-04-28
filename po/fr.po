@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 12:51+0200\n"
-"PO-Revision-Date: 2008-04-17 22:19+0200\n"
+"PO-Revision-Date: 2008-04-24 19:45+0200\n"
 "Last-Translator: Rémy Marquis <remy.marquis@gmail.com>\n"
 "Language-Team:  <opensuse-fr@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -121,6 +121,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
+"  Commandes:\n"
+"\thelp, ?\t\t\tAffiche l'aide.\n"
+"\tshell, sh\t\tAccepte des commandes multiples à la fois.\n"
 
 #: ../src/zypper.cc:177
 msgid ""
@@ -133,6 +136,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
+"\tGestion des dépôts:\n"
+"\trepos, lr\t\tListe tous les dépôts définis.\n"
+"\taddrepo, ar\t\tAjoute un nouveau dépôt.\n"
+"\tremoverepo, rr\t\tSupprime le dépôt spécifié.\n"
+"\trenamerepo, nr\t\tRenomme le dépôt spécifié.\n"
+"\tmodifyrepo, mr\t\tModifie le dépôt spécifié.\n"
+"\trefresh, ref\t\tRefraichit tous les dépôts.\n"
+"\tclean\t\t\tNettoye les caches locaux.\n"
 
 #: ../src/zypper.cc:187
 msgid ""
@@ -144,6 +155,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tsource-install, si\tInstall source packages and their build dependencies.\n"
 msgstr ""
+"\tGestion des paquets:\n"
+"\tinstall, in\t\tInstalle des paquets.\n"
+"\tremove, rm\t\tSupprime des paquets.\n"
+"\tverify, ve\t\tVerifie l'intégrité des dépendances des paquets.\n"
+"\tupdate, up\t\tMet à jour les paquets installés avec des versions plus récentes.\n"
+"\tdist-upgrade, dup\tEffectue la mise à jour de la distribution.\n"
+"\tsource-install, si\tInstalle un paquet source et ses dépendances de compilation.\n"
 
 #: ../src/zypper.cc:196
 msgid ""
@@ -161,6 +179,19 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
+"\tRequêtes:\n"
+"\tsearch, se\t\tRecherche les paquets correspondants à un pattern.\n"
+"\tinfo, if\t\tAffiche les informations complètes pour les paquets spécifiés.\n"
+"\tpatch-info\t\tAffiche les informations complètes pour les correctifs spécifiés.\n"
+"\tpattern-info\t\tAffiche les informations complètes pour les patterns spécifiés.\n"
+"\tproduct-info\t\tAffiche les informations complètes pour les produits spécifiés.\n"
+"\tpatch-check, pchk\tVérifie la disponibilité de correctifs.\n"
+"\tlist-updates, lu\tListe les mises à jour disponibles.\n"
+"\tpatches, pch\t\tListe tous les correctifs disponibles.\n"
+"\tpackages, pa\t\tListe tous les paquets disponibles.\n"
+"\tpatterns, pt\t\tListe tous les patterns disponibles.\n"
+"\tproducts, pd\t\tListe tous les produits disponibles.\n"
+"\twhat-provides, wp\tListe les paquets fournissants la capacité spécifiée.\n"
 
 #: ../src/zypper.cc:213
 msgid ""
@@ -169,6 +200,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
+"\tVerrouillage de paquets:\n"
+"\taddlock, al\t\tAjoute un verrouillage sur un paquet.\n"
+"\tremovelock, rl\t\tSupprime un verrouillage sur un paquet.\n"
+"\tlocks, ll\t\tListe les verrouillages de paquets actuels.\n"
 
 #: ../src/zypper.cc:219
 msgid ""
@@ -188,9 +223,9 @@ msgstr "Taper '%s' pour obtenir une liste des commandes et options globales."
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/zypper.cc:250
-#, fuzzy, c-format
+#, c-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Taper '%s' pour obtenir l'aide specifique d'une commande."
+msgstr "Tapez '%s' pour obtenir l'aide spécifique d'une commande."
 
 #: ../src/zypper.cc:351
 #, c-format
@@ -198,14 +233,14 @@ msgid "Verbosity: %d"
 msgstr "Verbosité: %d"
 
 #: ../src/zypper.cc:365
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid table style %d."
-msgstr "Style de table %s non valide"
+msgstr "Style de table %d non valide."
 
 #: ../src/zypper.cc:366
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr ""
+msgstr "Utilisez un nombre entier entre %d et %d"
 
 #: ../src/zypper.cc:396
 msgid "Entering non-interactive mode."
@@ -340,7 +375,6 @@ msgstr ""
 "-r, --repo <alias|#|URI> Installe les paquets seulement depuis les dépôts spécifiés.\n"
 
 #: ../src/zypper.cc:923
-#, fuzzy
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -353,7 +387,7 @@ msgid ""
 msgstr ""
 "verify (ve) [options]\n"
 "\n"
-"Vérifie si les dépendances des paquets installés sont satisfaites.\n"
+"Vérifie si les dépendances des paquets installés sont satisfaites et répare les éventuels problèmes de dépendance.\n"
 "\n"
 "  Options de la commande:\n"
 "    --no-recommends      Ne pas installer les paquets recommandés, seulement les paquets requis.\n"
@@ -362,7 +396,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/zypper.cc:952
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -387,7 +421,8 @@ msgstr ""
 "-t, --type <TYPE>       Type de dépôt (%s).\n"
 "-d, --disabled          Ajoute le dépôt avec le statut désactivé.\n"
 "-c, --check             Vérifie l'URI.\n"
-"-x, --nocheck           Ne vérifie pas l'URI, vérifie plus tard, lors du rafraîchissement.\n"
+"-x, --no-check          Ne vérifie pas l'URI, vérifie plus tard lors du rafraîchissement.\n"
+"-n, --name              Spécifie un nom descriptif pour le dépôt.\n"
 
 #: ../src/zypper.cc:996 ../src/zypper.cc:1731
 msgid ""
@@ -395,6 +430,9 @@ msgid ""
 "\n"
 "List available resolvable types.\n"
 msgstr ""
+"list-resolvables (lr)\n"
+"\n"
+"Liste les types d'éléments disponibles.\n"
 
 #: ../src/zypper.cc:1004
 msgid ""
@@ -412,6 +450,19 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
+"repos (lr)\n"
+"\n"
+"Liste tous les dépôts définis.\n"
+"\n"
+"  Option de la commande:\n"
+"-e, --export <FILE.repo>  Exporte tous les dépôts définis dans un fichier .repo local..\n"
+"-u, --uri                 Affiche aussi l'URI de base des dépôts.\n"
+"-p, --priority            Affiche aussi la priorité des dépôts.\n"
+"-d, --details             Affiche plus d'information comme l'URI, la priorité, le type.\n"
+"-U, --sort-by-uri         Trie la liste par URI.\n"
+"-P, --sort-by-priority    Trie la liste par priorité de dépôt.\n"
+"-A, --sort-by-alias       Trie la liste par alias.\n"
+"-N, --sort-by-name        Trie la liste par nom.\n"
 
 #: ../src/zypper.cc:1031
 msgid ""
@@ -488,11 +539,11 @@ msgstr ""
 "Actualise les dépôts spécifiés par leur alias, numéro ou URI. Si rien n'est spécifié, tous les dépôts actifs seront actualisés.\n"
 "\n"
 "  Options de la commande:\n"
-"-f, --force             Force un rafraichissement complet.\n"
-"-b, --force-build       Force la reconstruction de la base de données.\n"
-"-d, --force-download    Force le téléchargement des méta-données brutes.\n"
-"-B, --build-only        Construit seulement la base de données, sans télécharger les méta-données.\n"
-"-D, --download-only     Télécharge uniquement les méta-données, sans reconstruire la base de données.\n"
+"-f, --force              Force un rafraichissement complet.\n"
+"-b, --force-build        Force la reconstruction de la base de données.\n"
+"-d, --force-download     Force le téléchargement des méta-données brutes.\n"
+"-B, --build-only         Construit seulement la base de données, sans télécharger les méta-données.\n"
+"-D, --download-only      Télécharge uniquement les méta-données, sans reconstruire la base de données.\n"
 "-r, --repo <alias|#|URI> Rafraichit uniquement les dépôts spécifiés.\n"
 
 #: ../src/zypper.cc:1130
@@ -544,8 +595,8 @@ msgstr ""
 "                                Défaut: %s.\n"
 "-r, --repo <alias|#|URI>        Liste uniquement les mises à jour depuis le dépôt spécifié par l'alias.\n"
 "    --best-effort               Utilise une approche 'best effort' pour la mise à jour. Les mises à jour\n"
-"                                vers une version inférieure plutôt que vers\n"
-"                                la toute dernière version est aussi possible.\n"
+"                                vers une version inférieure plutôt que vers la toute dernière version\n"
+"                                est aussi possible.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -621,7 +672,6 @@ msgstr ""
 "-D, --dry-run                   Teste la mise à niveau, n'effectue pas la mise à niveau.\n"
 
 #: ../src/zypper.cc:1287
-#, fuzzy
 msgid ""
 "search [options] [querystring...]\n"
 "\n"
@@ -657,13 +707,15 @@ msgstr ""
 "    --match-words          Les correspondances aux chaînes de recherche ne peuvent être que des mots complets.\n"
 "    --match-exact          Recherche un nom de paquet exact.\n"
 "-d, --search-descriptions  Recherche également dans les résumés et les descriptions des paquets.\n"
-"-c, --case-sensitive       Effectuer une recherche respectant la casse.\n"
+"-C, --case-sensitive       Effectuer une recherche respectant la casse.\n"
 "-i, --installed-only       N'afficher que les paquets déjà installés.\n"
 "-u, --uninstalled-only     N'afficher que les paquets qui ne sont pas installés.\n"
 "-t, --type                 Ne rechercher que les paquets du type indiqué.\n"
 "-r, --repo <alias|#|URI>   Recherche uniquement dans le dépôt spécifié.\n"
-"    --sort-by-name         Trier les paquets par nom (par défaut).\n"
-"    --sort-by-repo         Trier les paquets par dépôt.\n"
+"    --sort-by-name         Trie les paquets par nom (par défaut).\n"
+"    --sort-by-repo         Trie les paquets par dépôt.\n"
+"    --details              Affiche la version disponible dans chaque dépôt\n"
+"                           sur une ligne distincte.\n"
 "\n"
 "Les caractères génériques * et ? peuvent être également utilisés au sein des chaînes de recherche.\n"
 
@@ -704,7 +756,6 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Juste un autre moyen de spécifier un dépôt.\n"
 
 #: ../src/zypper.cc:1373
-#, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -718,18 +769,19 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"patterns (pt) [options] [dépôt] ...\n"
+"packages (pa) [options] [dépôt] ...\n"
 "\n"
-"Liste tous les patterns disponibles dans les dépôts spécifiés..\n"
+"Liste tous les paquets disponibles dans les dépôts spécifiés.\n"
 "\n"
 "  Options de la commande:\n"
 "\n"
 "-r, --repo <alias|#|URI>  Juste un autre moyen de spécifier un dépôt.\n"
 "-i, --installed-only      Montre seulement les patterns installés.\n"
 "-u, --uninstalled-only    Montre seulement les patterns qui ne sont pas installés.\n"
+"-N, --sort-by-name        Trie les paquets par nom.\n"
+"-R, --sort-by-repo        Trie les paquets par dépôt.\n"
 
 #: ../src/zypper.cc:1401
-#, fuzzy
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -743,7 +795,7 @@ msgid ""
 msgstr ""
 "patterns (pt) [options] [dépôt] ...\n"
 "\n"
-"Liste tous les patterns disponibles dans les dépôts spécifiés..\n"
+"Liste tous les patterns disponibles dans les dépôts spécifiés.\n"
 "\n"
 "  Options de la commande:\n"
 "\n"
@@ -752,7 +804,6 @@ msgstr ""
 "-u, --uninstalled-only    Montre seulement les patterns qui ne sont pas installés.\n"
 
 #: ../src/zypper.cc:1427
-#, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -764,9 +815,9 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
 msgstr ""
-"patterns (pt) [options] [dépôt] ...\n"
+"products (pd) [options] [dépôt] ...\n"
 "\n"
-"Liste tous les patterns disponibles dans les dépôts spécifiés..\n"
+"Liste tous les produits disponibles dans les dépôts spécifiés.\n"
 "\n"
 "  Options de la commande:\n"
 "\n"
@@ -841,7 +892,6 @@ msgstr ""
 "Ceci est un alias rug pour la compatibilité avec '%s'.\n"
 
 #: ../src/zypper.cc:1530
-#, fuzzy
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -849,9 +899,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"source-install (si) <name> ...\n"
+"what-provides (wp) <capacité> ...\n"
 "\n"
-"Installe des paquetages sources spécifiés par leurs noms.\n"
+"Liste tous les paquets fournissant la capacité spécifiéé.\n"
 "\n"
 "Cette commande n'a pas d'option.\n"
 
@@ -870,7 +920,7 @@ msgstr ""
 "Cette commande n'a pas d'options.\n"
 
 #: ../src/zypper.cc:1599
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "xml-updates\n"
 "\n"
@@ -884,7 +934,7 @@ msgstr ""
 "Affiche les mises à jour et les correctifs au format xml. Cette commande est obsolète et va éventuellement être abandonnée au profit de '%s'.\n"
 "\n"
 "  Options de la commande:\n"
-"-r, --repo <alias|#|URI>  Fonctionne uniquement avec les mises à jour depuis le dépôt spécifié.\n"
+"-r, --repo <alias|#|URI>  Fonctionne uniquement avec les mises à jour du dépôt spécifié.\n"
 
 #: ../src/zypper.cc:1623
 #, c-format
@@ -908,7 +958,6 @@ msgstr ""
 "                          Defaut: %s.\n"
 
 #: ../src/zypper.cc:1646
-#, fuzzy
 msgid ""
 "removelock (rl) <lock-number>\n"
 "\n"
@@ -916,7 +965,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"removelock (rl) <numéroverrouillage>\n"
+"removelock (rl) <numéro-verrouillage>\n"
 "\n"
 "Supprime un verrouillage sur un paquet. Spécifiez le verrouillage à supprimer par son numéro obtenu avec 'zypper locks'.\n"
 "\n"
@@ -970,6 +1019,9 @@ msgid ""
 "\n"
 "List available service types.\n"
 msgstr ""
+"service-types\n"
+"\n"
+"Liste les types de service disponibles.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -985,6 +1037,14 @@ msgid ""
 "-n, --name <name>    Use given string as service name.\n"
 "-r, --recurse        Dive into subdirectories.\n"
 msgstr ""
+"mount\n"
+"\n"
+"Monte un répertoire contenant des RPMs comme un canal.\n"
+"\n"
+"  Option de la commande:\n"
+"-a, --alias <alias>  Utilise la chaîne donnée comme un alias du service.\n"
+"-n, --name <name>    Utilise la chaîne donnée comme un nom de service.\n"
+"-r, --recurse        Navigue dans les sous-répertoires.\n"
 
 #: ../src/zypper.cc:1784
 #, c-format
@@ -993,6 +1053,9 @@ msgid ""
 "\n"
 "Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
+"patch-search [options] [chainederequête...]\n"
+"\n"
+"Recherche de correctifs correspondants à la chaîne de recherche donnée. Ceci est un alias de compatibilité rug pour '%s'. Voir la page de manuel de zypper pour les détails.\n"
 
 #: ../src/zypper.cc:1798 ../src/zypper.cc:3066
 msgid "Unexpected program flow."
@@ -1052,12 +1115,12 @@ msgstr "Pas assez d'arguments."
 
 #: ../src/zypper.cc:1966
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr ""
+msgstr "Si un seul argument est utilisé, il doit être un URI pointant vers un fichier .repo."
 
 #: ../src/zypper.cc:1993
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Impossible d'utiliser --check en même temps que --nocheck. Les paramètres de zypp.conf ont été utilisés."
+msgstr "Impossible d'utiliser %s en même temps que %s. Le paramètre %s est utilisé."
 
 #: ../src/zypper.cc:2014
 msgid "Specified type is not a valid repository type:"
@@ -1238,9 +1301,8 @@ msgid "Description"
 msgstr "Description"
 
 #: ../src/zypper.cc:3136
-#, fuzzy
 msgid "Resolvable Type"
-msgstr "Correctif"
+msgstr "Type d'élément"
 
 #: ../src/zypper-command.cc:137
 #, c-format
@@ -1325,23 +1387,20 @@ msgstr "Obsolètes"
 # TLABEL hwinfo_2002_01_04_0147__14
 #. translators: package requirements table header
 #: ../src/zypper-info.cc:113
-#, fuzzy
 msgid "Requirement"
 msgstr "Requiert"
 
 # TLABEL kinternet_2002_02_20_2255__17
 #. translators: package requirements table header
 #: ../src/zypper-info.cc:115
-#, fuzzy
 msgid "Provided By"
-msgstr "Fournisseur d'accès"
+msgstr "Fournit par"
 
 # TLABEL profile-manager_2002_08_07_0216__43
 #. translators: package conflicts table header
 #: ../src/zypper-info.cc:117
-#, fuzzy
 msgid "Conflict"
-msgstr "Conflits"
+msgstr "En conflit"
 
 #: ../src/zypper-info.cc:145 ../src/zypper-info.cc:271
 #: ../src/zypper-info.cc:334 ../src/zypper-search.cc:65
@@ -1386,9 +1445,9 @@ msgid "up-to-date"
 msgstr "A jour"
 
 #: ../src/zypper-info.cc:161
-#, fuzzy, c-format
+#, c-format
 msgid "out-of-date (version %s installed)"
-msgstr "pas à jour (version "
+msgstr "pas à jour (version %s installée)"
 
 # TLABEL partitioning_2002_01_04_0147__180
 #: ../src/zypper-info.cc:166
@@ -1775,235 +1834,202 @@ msgid "Resolving dependencies..."
 msgstr "Résolution des dépendances..."
 
 #: ../src/zypper-misc.cc:938
-#, fuzzy
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le paquet suivant va être mis à jour:"
+msgstr[1] "Les paquets suivants vont être mis à jour:"
 
 #: ../src/zypper-misc.cc:943
-#, fuzzy
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le correctif suivant va être mis à jour:"
+msgstr[1] "Les correctifs suivants vont être mis à jour:"
 
 #: ../src/zypper-misc.cc:948
-#, fuzzy
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le pattern suivant va être mis à jour:"
+msgstr[1] "Les patterns suivants vont être mis à jour:"
 
 #: ../src/zypper-misc.cc:953
-#, fuzzy
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le produit suivant va être mis à jour:"
+msgstr[1] "Les produits suivants vont être mis à jour:"
 
 #: ../src/zypper-misc.cc:960
-#, fuzzy
 msgid "The following package is going to be upgraded and change architecture:"
 msgid_plural "The following packages are going to be upgraded and change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le paquet suivant va être mis à jour et l'architecture sera changée:"
+msgstr[1] "Les paquets suivants vont être mis à jour et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:965
-#, fuzzy
 msgid "The following patch is going to be upgraded and change architecture:"
 msgid_plural "The following patches are going to be upgraded and change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le correctif suivant va être mis à jour et l'architecture sera changée:"
+msgstr[1] "Les correctifs suivants vont être mis à jour et l'architecture sera changé:"
 
 #: ../src/zypper-misc.cc:970
-#, fuzzy
 msgid "The following pattern is going to be upgraded and change architecture:"
 msgid_plural "The following patterns are going to be upgraded and change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le pattern suivant va être mis à jour et l'architecture sera changée:"
+msgstr[1] "Les pattern suivants vont être mis à jour et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:975
-#, fuzzy
 msgid "The following product is going to be upgraded and change architecture:"
 msgid_plural "The following products are going to be upgraded and change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le produit suivant va être mis à jour et l'architecture sera changée:"
+msgstr[1] "Les produits suivants seront mis à jour et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:982
-#, fuzzy
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le paquet suivant va être remis à une version inférieure:"
+msgstr[1] "Les paquets suivants vont être remis à une version inférieure:"
 
 #: ../src/zypper-misc.cc:987
-#, fuzzy
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le correctif suivant va être remis à une version inférieure:"
+msgstr[1] "Les correctifs suivants vont être remis à une version inférieure:"
 
 #: ../src/zypper-misc.cc:992
-#, fuzzy
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le pattern suivant va être remis à une version inférieure:"
+msgstr[1] "Les patterns suivants vont être remis à une version inférieure:"
 
 #: ../src/zypper-misc.cc:997
-#, fuzzy
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le produit suivant va être remis à une version inférieure:"
+msgstr[1] "Les produits suivants vont être remis à une version inférieure:"
 
 #: ../src/zypper-misc.cc:1004
-#, fuzzy
 msgid "The following package is going to be downgraded and change architecture:"
 msgid_plural "The following packages are going to be downgraded and change architecture:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le paquet suivant va être remis à une version inférieure et l'architecture sera changée:"
+msgstr[1] "Les paquets suivants vont être remis à une version inférieure et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:1009
-#, fuzzy
 msgid "The following patch is going to be downgraded and change architecture:"
 msgid_plural "The following patches are going to be downgraded and change architecture:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le correctif suivant va être remis à une version inférieure et l'architecture sera changée:"
+msgstr[1] "Les correctifs suivants vont être remis à une version inférieure et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:1014
-#, fuzzy
 msgid "The following pattern is going to be downgraded and change architecture:"
 msgid_plural "The following patterns are going to be downgraded and change architecture:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le pattern suivant va être remis à une version inférieure et l'architecture sera changée:"
+msgstr[1] "Les patterns suivants vont être remis à une version inférieure et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:1019
-#, fuzzy
 msgid "The following product is going to be downgraded and change architecture:"
 msgid_plural "The following products are going to be downgraded and change architecture:"
-msgstr[0] "%s va être remis à une version inférieure:"
-msgstr[1] "%s vont être remis à une version inférieure:"
+msgstr[0] "Le produit suivant va être remis à une version inférieure et l'architecture sera changée:"
+msgstr[1] "Les produits suivants vont être remis à une version inférieure et l'architecture sera changée:"
 
 #: ../src/zypper-misc.cc:1026
-#, fuzzy
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "Le NOUVEAU %s va être installé:"
-msgstr[1] "Les NOUVEAUX %s vont être installés:"
+msgstr[0] "Le NOUVEAU paquet suivant va être installé:"
+msgstr[1] "Les NOUVEAUX paquets suivants vont être installés:"
 
 #: ../src/zypper-misc.cc:1031
-#, fuzzy
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "Le NOUVEAU %s va être installé:"
-msgstr[1] "Les NOUVEAUX %s vont être installés:"
+msgstr[0] "Le NOUVEAU correctif suivant va être installé:"
+msgstr[1] "Les NOUVEAUX correctifs suivants vont être installés:"
 
 #: ../src/zypper-misc.cc:1036
-#, fuzzy
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "Le NOUVEAU %s va être installé:"
-msgstr[1] "Les NOUVEAUX %s vont être installés:"
+msgstr[0] "Le NOUVEAU pattern suivant va être installé:"
+msgstr[1] "Les NOUVEAUX patterns suivants vont être installés:"
 
 #: ../src/zypper-misc.cc:1041
-#, fuzzy
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "Le NOUVEAU %s va être installé:"
-msgstr[1] "Les NOUVEAUX %s vont être installés:"
+msgstr[0] "Le NOUVEAU produit suivant va être installé:"
+msgstr[1] "Les NOUVEAUX produits suivants vont être installés:"
 
 #: ../src/zypper-misc.cc:1046
-#, fuzzy
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "Le %s suivant va être réinstallé:"
-msgstr[1] "Les %s vont être réinstallés:"
+msgstr[0] "Le paquet source suivant va être installé:"
+msgstr[1] "Les paquets sources suivants vont être installés:"
 
 #: ../src/zypper-misc.cc:1053
-#, fuzzy
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "Le %s suivant va être réinstallé:"
-msgstr[1] "Les %s vont être réinstallés:"
+msgstr[0] "Le paquet suivant va être réinstallé:"
+msgstr[1] "Les paquets suivants vont être réinstallés:"
 
 #: ../src/zypper-misc.cc:1058
-#, fuzzy
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "Le %s suivant va être réinstallé:"
-msgstr[1] "Les %s vont être réinstallés:"
+msgstr[0] "Le correctif suivant va être réinstallé:"
+msgstr[1] "Les correctifs suivant vont être réinstallés:"
 
 #: ../src/zypper-misc.cc:1063
-#, fuzzy
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "Le %s suivant va être réinstallé:"
-msgstr[1] "Les %s vont être réinstallés:"
+msgstr[0] "Le pattern suivant va être réinstallé:"
+msgstr[1] "Les patterns suivants vont être réinstallés:"
 
 #: ../src/zypper-misc.cc:1068
-#, fuzzy
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "Le %s suivant va être réinstallé:"
-msgstr[1] "Les %s vont être réinstallés:"
+msgstr[0] "Le produit suivant va être réinstallé:"
+msgstr[1] "Les produits suivants vont être réinstallés:"
 
 #: ../src/zypper-misc.cc:1075
-#, fuzzy
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "Le %s suivant va être SUPPRIME :"
-msgstr[1] "Les %s suivants vont être SUPPRIMES :"
+msgstr[0] "Le paquet suivant va être SUPPRIME:"
+msgstr[1] "Les paquets suivants vont être SUPPRIMES:"
 
 #: ../src/zypper-misc.cc:1080
-#, fuzzy
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "Le %s suivant va être SUPPRIME :"
-msgstr[1] "Les %s suivants vont être SUPPRIMES :"
+msgstr[0] "Le correctif suivant va être SUPPRIME:"
+msgstr[1] "Les correctifs suivants vont être SUPPRIMES:"
 
 #: ../src/zypper-misc.cc:1085
-#, fuzzy
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "Le %s suivant va être SUPPRIME :"
-msgstr[1] "Les %s suivants vont être SUPPRIMES :"
+msgstr[0] "Le pattern suivant va être SUPPRIME:"
+msgstr[1] "Les patterns suivants vont être SUPPRIMES:"
 
 #: ../src/zypper-misc.cc:1090
-#, fuzzy
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "Le %s suivant va être SUPPRIME :"
-msgstr[1] "Les %s suivants vont être SUPPRIMES :"
+msgstr[0] "Le produit suivant va être SUPPRIME:"
+msgstr[1] "Les produits suivants vont être SUPPRIMES:"
 
 #: ../src/zypper-misc.cc:1097
-#, fuzzy
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le paquet suivant va changer d'architecture:"
+msgstr[1] "Les paquets suivants vont changer d'architecture:"
 
 #: ../src/zypper-misc.cc:1102
-#, fuzzy
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le correctif suivant va changer d'architecture:"
+msgstr[1] "Les correctifs suivants vont changer d'architecture:"
 
 #: ../src/zypper-misc.cc:1107
-#, fuzzy
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le pattern suivant va changer d'architecture:"
+msgstr[1] "Les patterns suivants vont changer d'architecture:"
 
 #: ../src/zypper-misc.cc:1112
-#, fuzzy
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "Le %s suivant sera mis à jour :"
-msgstr[1] "Les %s suivants seront mis à jour :"
+msgstr[0] "Le produit suivant va changer d'architecture:"
+msgstr[1] "Les produits suivants vont changer d'architecture:"
 
 #: ../src/zypper-misc.cc:1179
 msgid "Dependencies of all installed packages are satisfied."
@@ -2187,9 +2213,9 @@ msgid "Package '%s' is not installed."
 msgstr "Le paquet '%s' n'est pas installé."
 
 #: ../src/zypper-misc.cc:2099
-#, fuzzy, c-format
+#, c-format
 msgid "No update candidate for '%s'."
-msgstr "Pas de candidat à la mise à jour pour '%s'"
+msgstr "Pas de candidat à la mise à jour pour '%s'."
 
 #: ../src/zypper-misc.cc:2160
 msgid "Root privileges are required to fix broken package dependencies."
@@ -2197,16 +2223,15 @@ msgstr "Les privilèges root sont nécessaires pour réparer les dépendances de
 
 #. translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
 #: ../src/zypper-misc.cc:2168
-#, fuzzy
 msgid "Continue? (Choose 'p' to show dependency problems.)"
-msgstr "Impossible d'installer %s à cause de problèmes de dépendance"
+msgstr "Continuer ? (Choississez 'p' pour afficher les problèmes de dépendance.)"
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
 #. to-be-removed automatically to show why, if asked.
 #: ../src/zypper-misc.cc:2172
 msgid "y/n/p"
-msgstr ""
+msgstr "y/n/p"
 
 #: ../src/zypper-misc.cc:2186
 msgid "committing"
@@ -2568,11 +2593,11 @@ msgstr "Rafraîchir"
 #. translators: repository priority (in zypper repos -p or -d)
 #: ../src/zypper-repos.cc:624
 msgid "Priority"
-msgstr ""
+msgstr "Priorité"
 
 #: ../src/zypper-repos.cc:628
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: ../src/zypper-repos.cc:669
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
@@ -2947,26 +2972,24 @@ msgstr "Corrompu"
 
 #: ../src/zypper-search.cc:89
 msgid "No needed patches found."
-msgstr "Aucun patchs trouvés."
+msgstr "Aucun patch nécessaire trouvé."
 
 #: ../src/zypper-search.cc:129
 msgid "No patterns found."
 msgstr "Aucun pattern trouvé."
 
 #: ../src/zypper-search.cc:199
-#, fuzzy
 msgid "No packages found."
-msgstr "Aucune mise à jour trouvée."
+msgstr "Aucun paquet trouvé."
 
 #: ../src/zypper-search.cc:254
-#, fuzzy
 msgid "No products found."
-msgstr "Aucune mise à jour trouvée."
+msgstr "Aucun produit trouvé."
 
 #: ../src/zypper-search.cc:269
-#, fuzzy, c-format
+#, c-format
 msgid "No providers of '%s' found."
-msgstr "Aucun correctif correspondant à '%s' trouvé."
+msgstr "Aucun fournisseur de '%s' trouvé."
 
 # TLABEL network_2002_08_07_0216__125
 #. translators: package summary (header)
@@ -3050,7 +3073,7 @@ msgstr[1] "éléments"
 
 #: ../src/zypper-utils.cc:214
 msgid "Specified local path does not exist or is not accessible."
-msgstr ""
+msgstr "Le chemin local spécifié n'existe pas ou n'est pas accessible."
 
 #: ../src/zypper-utils.cc:226
 msgid "Given URI is invalid"
@@ -3079,76 +3102,3 @@ msgstr "Veuillez vérifier si le fichier est accessible."
 msgid "Cannot parse capability '%s'."
 msgstr "Impossible d'analyser la capacité '%s'."
 
-#~ msgid ""
-#~ "  Commands:\n"
-#~ "\thelp, ?\t\t\tPrint help.\n"
-#~ "\tshell, sh\t\tAccept multiple commands at once.\n"
-#~ "\tinstall, in\t\tInstall packages.\n"
-#~ "\tremove, rm\t\tRemove packages.\n"
-#~ "\tverify, ve\t\tVerify integrity of package dependencies.\n"
-#~ "\tsearch, se\t\tSearch for packages matching a pattern.\n"
-#~ "\trepos, lr\t\tList all defined repositories.\n"
-#~ "\taddrepo, ar\t\tAdd a new repository.\n"
-#~ "\tremoverepo, rr\t\tRemove specified repository.\n"
-#~ "\trenamerepo, nr\t\tRename specified repository.\n"
-#~ "\tmodifyrepo, mr\t\tModify specified repository.\n"
-#~ "\trefresh, ref\t\tRefresh all repositories.\n"
-#~ "\tpatch-check, pchk\tCheck for patches.\n"
-#~ "\tpatches, pch\t\tList patches.\n"
-#~ "\tlist-updates, lu\tList updates.\n"
-#~ "\txml-updates, xu\t\tList updates and patches in xml format.\n"
-#~ "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
-#~ "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
-#~ "\tinfo, if\t\tShow full information for packages.\n"
-#~ "\tpatch-info\t\tShow full information for patches.\n"
-#~ "\tsource-install, si\tInstall source packages.\n"
-#~ "\tclean\t\t\tClean local caches.\n"
-#~ "\taddlock\t\t\tAdd a package lock.\n"
-#~ "\tremovelock\t\tRemove a package lock.\n"
-#~ "\tlocks\t\t\tList current package locks.\n"
-#~ msgstr ""
-#~ "  Commandes :\n"
-#~ "\thelp\t\t\tAide.\n"
-#~ "\tshell, sh\t\tAccepte plusieurs commandes simultanément.\n"
-#~ "\tinstall, in\t\tInstalle des paquets ou des élements.\n"
-#~ "\tremove, rm\t\tSupprime des paquets ou des élements.\n"
-#~ "\tverify, ve\t\tVerifie l'intégrité des dépendances des paquet.\n"
-#~ "\tsearch, se\t\tRecherche des paquets correspondant à un pattern.\n"
-#~ "\trepos, lr\t\tListe tous les dépôts définis.\n"
-#~ "\taddrepo, ar\t\tAjoute un nouveau dépôt.\n"
-#~ "\tremoverepo, rr\t\tSupprime le dépôt spécifié.\n"
-#~ "\trenamerepo, nr\t\tRenomme le dépôt spécifié.\n"
-#~ "\tmodifyrepo, mr\t\tModifie le dépôt spécifié.\n"
-#~ "\trefresh, ref\t\tRafraichit tous les dépôts.\n"
-#~ "\tpatch-check, pchk\tVérifie l'existence de correctifs.\n"
-#~ "\tpatches, pch\t\tListe les correctifs.\n"
-#~ "\tlist-updates, lu\tListe les mises à jour.\n"
-#~ "\txml-updates, xu\t\tListe les mises à jour et les correctifs au format xml.\n"
-#~ "\tupdate, up\t\tMet à jour les élements installés avec une version plus récente.\n"
-#~ "\tdist-upgrade, dup\tEffectue une mise à niveau de la distribution.\n"
-#~ "\tinfo, if\t\tAffiche les informations complètes des paquets.\n"
-#~ "\tpatch-info\t\tAffiche des informations complètes sur les correctifs.\n"
-#~ "\tsource-install, si\tInstalle un paquet source.\n"
-#~ "\tclean\t\t\tVide les caches locaux.\n"
-#~ "\taddlock\t\t\tAjouter le verrouillage sur un paquet.\n"
-#~ "\tremovelock\t\tSupprimer le verrouillage sur un paquet.\n"
-#~ "\tlocks\t\t\tLister les paquets actuellement verrouillés.\n"
-
-#~ msgid ""
-#~ "repos (lr)\n"
-#~ "\n"
-#~ "List all defined repositories.\n"
-#~ "\n"
-#~ "  Command options:\n"
-#~ "-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
-#~ msgstr ""
-#~ "repos (lr)\n"
-#~ "\n"
-#~ "Affiche tous les dépôts définis.\n"
-#~ "\n"
-#~ "  Options de la commande:\n"
-#~ "-e, --export <FILE.repo>  Exporte tous les dépôts définis dans un fichier .repo local.\n"
-
-# TLABEL online_update_2002_01_04_0147__83
-#~ msgid " installed) "
-#~ msgstr " installée)"
