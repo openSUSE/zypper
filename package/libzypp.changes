@@ -3,6 +3,7 @@ Mon Apr 28 18:27:54 CEST 2008 - jkupec@suse.cz
 
 - check for valid pool in begin(), improve the code (bnc #384337)
 - r9872
+- 4.16.0
 
 -------------------------------------------------------------------
 Mon Apr 28 15:40:09 CEST 2008 - mvidner@suse.cz
