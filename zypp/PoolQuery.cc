@@ -364,20 +364,27 @@ attremptycheckend:
   {
     compile();
 
-    // if only one repository has been specified, find it in the pool
     sat::Pool pool(sat::Pool::instance());
-    sat::Pool::RepositoryIterator itr = pool.reposBegin();
+    // no pool or no repos
+    if (!pool.get() || pool.reposEmpty())
+      return end();
+
+    // if only one repository has been specified, find it in the pool
+    Repository repo;
     if (!(_cflags & SEARCH_ALL_REPOS) && _repos.size() == 1)
     {
       string theone = *_repos.begin();
-      for (; itr->info().alias() != theone && itr != pool.reposEnd(); ++itr);
-      if (itr == pool.reposEnd())
+      repo = pool.reposFind(theone);
+      if (repo == Repository::noRepository)
       {
         RepoInfo info; info.setAlias(theone);
-        ERR << "Repository not found in sat pool." <<  endl;
+        ERR << "Repository not found in sat pool." << endl;
         ZYPP_THROW(repo::RepoNotFoundException(info));
       }
     }
+
+    if ((_cflags & SEARCH_ALL_REPOS) || repo == Repository::noRepository)
+      repo = *pool.reposBegin();
 
     DBG << "_cflags:" << _cflags << endl;
 
@@ -385,19 +392,20 @@ attremptycheckend:
     // needed while LookupAttr::iterator::dip_equal does ::memcmp:
     ::memset( _rdit.get(), 0, sizeof(::_Dataiterator) );
 
+    // initialize the Dataiterator for different cases
     if (_rcattrs.empty())
     {
-    ::dataiterator_init(_rdit.get(),
-      _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this
-      0,                                           // search all solvables
-      0,                                           // attribute id - only if 1 attr key specified
-      _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
-      _cflags);
+      ::dataiterator_init(_rdit.get(),
+        repo.get(),                                  // either the first repo or the repo to search
+        0,                                           // search all solvables
+        0,                                           // attribute id - only if 1 attr key specified
+        _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
+        _cflags);
     }
     else if (_rcattrs.size() == 1)
     {
       ::dataiterator_init(_rdit.get(),
-        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), // repository \todo fix this
+        repo.get(),                                  // either the first repo or the repo to search
         0,                                           // search all solvables
         _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
         _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
@@ -406,7 +414,7 @@ attremptycheckend:
     else
     {
       ::dataiterator_init(_rdit.get(),
-        _cflags & SEARCH_ALL_REPOS ? pool.get()->repos[0] : itr->get(), /* repository - switch to next at the end of current one in increment() */
+        repo.get(),                                  // either the first repo or the repo to search
         0, /*search all resolvables */
         0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
         0, //qs.empty() ? 0 : qs.c_str(), /* create regex, pass it here */
@@ -423,9 +431,9 @@ attremptycheckend:
     return it;
   }
 
+
   PoolQuery::const_iterator PoolQuery::Impl::end() const
   {
-    //INT << "end" << endl;
     return PoolQuery::const_iterator();
   }
 
@@ -569,10 +577,7 @@ attremptycheckend:
 
     bool got_match = false;
     if (_has_next)
-    {
-      XXX << "last: " << _sid << endl;
       while (_has_next && !(got_match = matchSolvable()));
-    }
 
     // no more solvables and the last did not match
     if (!got_match && !_has_next)
@@ -580,8 +585,6 @@ attremptycheckend:
       base_reference() = LookupAttr::iterator();
       _sid = 0;
     }
-
-    XXX << "next: " << _sid << endl;
   }
 
   bool PoolQueryIterator::matchSolvable()

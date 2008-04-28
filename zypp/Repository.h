@@ -56,7 +56,9 @@ namespace zypp
         bool isSystemRepo() const;
 
     public:
-        /** The repos name (alias). */
+        /** The repos name (alias).
+         * \todo FIXME why is this not called alias if it <b>is</b> alias?
+         */
         std::string name() const;
 
         /** Whether \ref Repository contains solvables. */
