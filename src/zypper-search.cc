@@ -42,17 +42,21 @@ string selectable_search_repo_str(const ui::Selectable & s)
 
 string string_ppp_status(const PoolItem & pi)
 {
+  // make sure this will not happen
+  if (pi.isUndetermined())
+    return _("Unknown");
+
   if (pi.isRelevant())
   {
     if (pi.isSatisfied())
-      return _("Installed");
+      return _("Installed"); //! \todo make this "Applied" instead?
     if (pi.isBroken())
       return _("Needed");
     // can this ever happen?
     return "";
   }
 
-  return _("Not Applicable");
+  return _("Not Applicable"); //! \todo make this "Not Needed" after 11.0
 }
 
 

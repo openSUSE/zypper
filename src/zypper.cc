@@ -2954,7 +2954,8 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
-    resolve(*this); // needed to compute status of PPP?
+    // needed to compute status of PPP
+    resolve(*this);
 
     printInfo(*this, kind);
 

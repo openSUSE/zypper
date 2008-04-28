@@ -15,6 +15,8 @@
 #include "zypper-tabulator.h"
 #include "zypper-info.h"
 #include "zypper-richtext.h"
+#include "zypper-search.h"
+
 
 using namespace std;
 using namespace zypp;
@@ -205,14 +207,9 @@ atom: xv = 3.10a-1091.2
 void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj();
-  const PoolItem & ins_pool_item = s.installedObj();
   printNVA(pool_item.resolvable());
 
-  cout << _("Status: "); // TODO debug
-  bool i = bool(ins_pool_item);
-  if (pool_item.isBroken ())
-    cout << (i ? _("broken"): _("satisfied"));
-  cout << endl;
+  cout << _("Status: ") << string_ppp_status(pool_item) << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category: ") << patch->category() << endl;
@@ -274,7 +271,6 @@ This pattern provides a graphical application and a command line tool for keepin
 void printPatternInfo(const Zypper & zypper, const ui::Selectable & s)
 {
   const PoolItem & pool_item = s.theObj();
-  const PoolItem & ins_pool_item = s.installedObj();
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
@@ -336,8 +332,7 @@ Description:
  */
 void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
 {
-  const PoolItem & pool_item = s.theObj();
-  const PoolItem & ins_pool_item = s.installedObj();
+  const PoolItem & pool_item = s.theObj(); // should be the only one
 
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << pool_item.resolvable()->repository().info().name() << endl;
@@ -346,7 +341,7 @@ void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
 
   Product::constPtr product = asKind<Product>(pool_item.resolvable());
   cout << _("Category: ") << product->type() << endl;
-  cout << _("Installed: ") << (!ins_pool_item ? "No" : "Yes") << endl;
+  cout << _("Installed: ") << (pool_item.status().isSatisfied() ? "Yes" : "No") << endl;
   cout << _("Short Name: ") << product->shortName() << endl;
   cout << _("Long Name: ") << product->longName() << endl;
 
