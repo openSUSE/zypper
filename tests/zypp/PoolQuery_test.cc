@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
   PoolQuery q2;
   q2.addString("zypp\\");
   q2.setMatchRegex();
-  BOOST_CHECK_THROW(q2.size(), Exception);
+  BOOST_CHECK_THROW(q2.begin(), Exception);
 }
 
 

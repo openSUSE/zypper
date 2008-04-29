@@ -66,15 +66,28 @@ namespace zypp
 
     /** Query result accessers. */
     //@{
-    class PoolQueryIterator;
 
-    /** */
+    /**
+     * Compile the query and return an iterator to the result.
+     *
+     * \return An iterator (\ref detail::PoolQueryIterator) returning
+     *         sat::Solvable objects pointing at the beginning of the query result.
+     * \throws \ref Exception if the query was about to use a regex which
+     *         failed to compile.
+     * 
+     * \note Note that PoolQuery is derived from \ref sat::SolvIterMixin which
+     *       makes PoolItem and Selectable iterators automatically available.
+     * \see sat::SolvIterMixin
+     */
     const_iterator begin() const;
-    /** */
+
+    /** An iterator pointing to the end of the query result. */
     const_iterator end() const;
-    /** */
+
+    /** Whether the result is empty. */
     bool empty() const;
-    /** */
+
+    /** Number of solvables in the query result. */
     size_type size() const;
     //@}
 

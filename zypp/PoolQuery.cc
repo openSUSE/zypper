@@ -377,9 +377,8 @@ attremptycheckend:
       repo = pool.reposFind(theone);
       if (repo == Repository::noRepository)
       {
-        RepoInfo info; info.setAlias(theone);
-        ERR << "Repository not found in sat pool." << endl;
-        ZYPP_THROW(repo::RepoNotFoundException(info));
+        DBG << "Repository '" << theone << "' not found in sat pool." << endl;
+        return end();
       }
     }
 
@@ -850,13 +849,22 @@ attremptycheckend:
 
 
   bool PoolQuery::empty() const
-  { return _pimpl->begin() == _pimpl->end(); }
+  {
+    try { return _pimpl->begin() == _pimpl->end(); }
+    catch (const Exception & ex) {}
+    return true;
+  }
 
-  //! \todo collect the result, reuse if not dirty
+
   PoolQuery::size_type PoolQuery::size() const
   {
     size_type count = 0;
-    for(const_iterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
+    try
+    {
+      for(const_iterator it = _pimpl->begin(); it != _pimpl->end(); ++it, ++count);
+    }
+    catch (const Exception & ex) {}
+
     return count;
   }
 
