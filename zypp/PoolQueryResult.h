@@ -156,7 +156,7 @@ namespace zypp
       /** Remove Items from the result. */
       PoolQueryResult & operator-=( const PoolQueryResult & query_r )
       {
-        if ( &query_r == this ) // catch self intersection!
+        if ( &query_r == this ) // catch self removal!
           clear();
         else
           for_( it, query_r.begin(), query_r.end() )
