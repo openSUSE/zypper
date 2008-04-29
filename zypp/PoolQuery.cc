@@ -43,7 +43,7 @@ namespace zypp
   {
   public:
     Impl()
-      : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING )
+      : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING | SEARCH_SKIP_KIND )
       , _status_flags(ALL)
       , _match_word(false)
       , _require_all(false)
