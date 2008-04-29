@@ -159,6 +159,8 @@ bool show_in_pager(const string& text)
       dup2(termout,1);               
       execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
       WAR << "exec failed with " << strerror(errno) << endl;
+      close(termin);
+      close(termout);
       exit(1); //cannot return false here, due to here is another process
       //so only kill itself
 
@@ -167,6 +169,8 @@ bool show_in_pager(const string& text)
       //restore terminal access after end of pager
       dup2(termin,0);
       dup2(termout,1);               
+      close(termin);
+      close(termout);
   }
 
   return true;
