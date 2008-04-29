@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 29 13:41:25 CEST 2008 - jreidinger@suse.cz
+
+- show license in pager (bnc #260883)
+- r9882 
+
+-------------------------------------------------------------------
 Tue Apr 29 09:55:24 CEST 2008 - jreidinger@suse.cz
 
 - provide better info for allready installed capabilities.
