@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 29 22:56:48 CEST 2008 - jkupec@suse.cz
+
+- basic cleanup upon SIGINT and SIGTERM (will remove
+  temporary repos) (bnc #340505)
+- r9893
+
+-------------------------------------------------------------------
 Tue Apr 29 13:41:25 CEST 2008 - jreidinger@suse.cz
 
 - show license in pager (bnc #260883)
