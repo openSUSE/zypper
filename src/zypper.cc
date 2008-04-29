@@ -62,7 +62,7 @@ Zypper::Zypper()
   : _argc(0), _argv(NULL), _out_ptr(NULL),
     _command(ZypperCommand::NONE),
     _exit_code(ZYPPER_EXIT_OK),
-    _running_shell(false), _running_help(false),
+    _running_shell(false), _running_help(false), _exit_requested(false),
     _sh_argc(0), _sh_argv(NULL)
 {
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -642,7 +642,7 @@ void Zypper::commandShell()
       else
         safeDoCommand();
     }
-    catch (Exception & e)
+    catch (const Exception & e)
     {
       out().error(e.msg());
       print_unknown_command_hint(*this);

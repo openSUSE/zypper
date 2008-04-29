@@ -142,9 +142,13 @@ public:
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
   bool runningHelp() const { return _running_help; }
-  
+  bool exitRequested() const { return _exit_requested; } 
+  void requestExit() { _exit_requested = true; }
+
   int argc() { return _running_shell ? _sh_argc : _argc; } 
   char ** argv() { return _running_shell ? _sh_argv : _argv; }
+
+  void cleanup();
 
 public:
   ~Zypper();
@@ -157,7 +161,6 @@ private:
   void shellCleanup();
   void safeDoCommand();
   void doCommand();
-  void cleanup();
 
   void setCommand(const ZypperCommand & command) { _command = command; }
   void setRunningShell(bool value = true) { _running_shell = value; }
@@ -179,6 +182,7 @@ private:
   int   _exit_code;
   bool  _running_shell;
   bool  _running_help;
+  bool  _exit_requested;
 
   RuntimeData _rdata;
 
@@ -196,11 +200,6 @@ class ExitRequestException : public zypp::Exception
 {
 public:
   ExitRequestException(const std::string & msg = "") : zypp::Exception(msg) {}
-//  ExitRequestException(const std::string & msg = "") : _msg(msg) {}
-
-//  const std::string & msg() const { return _msg; }
-private:
-//  std::string _msg;
 };
 
 #endif /*ZYPPER_H*/

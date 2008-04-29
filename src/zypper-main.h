@@ -21,6 +21,7 @@
 #define ZYPPER_EXIT_INF_REBOOT_NEEDED      102 // reboot needed after install/upgrade 
 #define ZYPPER_EXIT_INF_RESTART_NEEDED     103 // restart of package manager itself needed
 #define ZYPPER_EXIT_INF_CAP_NOT_FOUND      104 // given capability not found (for install/remove)
+#define ZYPPER_EXIT_ON_SIGNAL              105 // SIGINT or SIGTERM received
 
 // undefine _ and _PL macros from libzypp
 #ifdef _

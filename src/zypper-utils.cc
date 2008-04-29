@@ -32,8 +32,9 @@ string readline_getline()
     line_read = NULL;
   }
 
-  /* Get a line from the user. */
-  line_read = readline ("zypper> ");
+  //::rl_catch_signals = 0;
+  /* Get a line from the user. */  
+  line_read = ::readline ("zypper> ");
 
   /* If the line has any text in it,
      save it on the history. */
