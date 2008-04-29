@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 29 09:55:24 CEST 2008 - jreidinger@suse.cz
+
+- provide better info for allready installed capabilities.
+ (bnc #384412)
+- r9876
+
+-------------------------------------------------------------------
 Mon Apr 28 16:54:31 CEST 2008 - jkupec@suse.cz
 
 - translations update
