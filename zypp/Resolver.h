@@ -111,7 +111,7 @@ namespace zypp
      * Quite helpful to get back to a 'sane state'. Quite disastrous
      * since you'll loose all non-distribution packages
      **/
-    void doUpgrade( UpgradeStatistics & opt_stats_r );
+    bool doUpgrade( UpgradeStatistics & opt_stats_r );
 
     /**
      * Update to newest package

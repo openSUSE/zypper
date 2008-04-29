@@ -97,7 +97,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // Unmaintained packages which does not fit to the updated system
     // (broken dependencies) will be deleted.
-    void checkUnmaintainedItems ();
+    // returns true if solving was successful
+    bool checkUnmaintainedItems ();
 
     void solverInit();
 
@@ -137,9 +138,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool verifySystem ();
     bool resolvePool();
     bool resolveQueue(solver::detail::SolverQueueItemList & queue);    
-    bool doUpdate();
+    void doUpdate();
 
-    void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
+    bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
     PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
 
     ResolverProblemList problems () const;

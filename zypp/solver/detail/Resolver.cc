@@ -103,15 +103,10 @@ Resolver::reset (bool keepExtras )
     }
 }
 
-bool
+void
 Resolver::doUpdate()
 {
-    if (_satResolver) {
-	return _satResolver->doUpdate();
-    } else {
-	ERR << "SAT solver has not been initialized." << endl;
-	return false;
-    }
+    return _satResolver->doUpdate();
 }
 
 void
@@ -281,12 +276,14 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 //	DESCRIPTION : Unmaintained packages which does not fit to 
 //                    the updated system (broken dependencies) will be
 //                    deleted.
+//                    returns true if solving was successful
 //
-void Resolver::checkUnmaintainedItems () {
+bool Resolver::checkUnmaintainedItems () {
     int solverRuns = 1;
+    bool solverRet = resolvePool();
     MIL << "Checking unmaintained items....." << endl;
 
-    while (!resolvePool() && solverRuns++ < MAXSOLVERRUNS) {
+    while (!solverRet && solverRuns++ < MAXSOLVERRUNS) {
 	ResolverProblemList problemList = problems();
 	ProblemSolutionList solutionList;
 	PoolItemList problemItemList;	
@@ -344,6 +341,8 @@ void Resolver::checkUnmaintainedItems () {
 	    // break cause there is no other solution available by the next run
 	    solverRuns = MAXSOLVERRUNS;
 	}
+	// next try
+	solverRet = resolvePool();	
     }
 }
 

@@ -116,7 +116,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolveQueue(const SolverQueueItemList &requestQueue,
 		      const PoolItemList & weakItems);
     // searching for new packages
-    bool doUpdate();
+    void doUpdate();
 
     ResolverProblemList problems ();
     void applySolutions (const ProblemSolutionList &solutions);

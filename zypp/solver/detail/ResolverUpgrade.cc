@@ -200,12 +200,12 @@ bool setForInstallation (const ResPool &pool, PoolItem item) {
 //
 //
 //	METHOD NAME : Resolver::doUpgrade
-//	METHOD TYPE : int
+//	METHOD TYPE : bool
 //
 //	DESCRIPTION : go through all installed (but not yet touched by user)
 //		packages and look for update candidates
 //
-void
+bool
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
   typedef map<PoolItem,PoolItem> CandidateMap;
@@ -223,7 +223,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   catch( const Exception & excpt_r) {
 	ERR << "Huh, no target ?";
 	ZYPP_CAUGHT(excpt_r);
-	if (!_testing) return;		// can't continue without target
+	if (!_testing) return false;		// can't continue without target
 	MIL << "Running in test mode, continuing without target" << endl;
   }
   MIL << "target at " << target << endl;
@@ -643,7 +643,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   // Unmaintained packages which does not fit to the updated system
   // (broken dependencies) will be deleted.
-  checkUnmaintainedItems ();  
+  // Make a solverrun and return it to the calling function
+  return checkUnmaintainedItems ();  
   
 }
 

@@ -741,7 +741,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 }
 
 
-bool SATResolver::doUpdate()
+void SATResolver::doUpdate()
 {
     MIL << "SATResolver::doUpdate()" << endl;
 
@@ -812,7 +812,6 @@ bool SATResolver::doUpdate()
     solverEnd();
 
     MIL << "SATResolver::doUpdate() done" << endl;
-    return true;
 }
 
 
