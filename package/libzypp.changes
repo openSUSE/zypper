@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 29 16:37:19 CEST 2008 - schubi@suse.de
+
+- cleanup in return values of doUpgrade and doUpdate
+- r9886 
+- 4.17.0
+
+-------------------------------------------------------------------
 Mon Apr 28 18:27:54 CEST 2008 - jkupec@suse.cz
 
 - check for valid pool in begin(), improve the code (bnc #384337)
