@@ -17,13 +17,21 @@ using std::string;
 using namespace zypp;
 using namespace boost::unit_test;
 
-bool result_cb( const sat::Solvable & solvable )
+struct PrintAndCount
 {
-  zypp::PoolItem pi( zypp::ResPool::instance().find( solvable ) );
-  cout << pi.resolvable() << endl;
-  // name: yast2-sound 2.16.2-9 i586
-  return true;
-}
+  PrintAndCount() : _count(0) {}
+
+  bool operator()( const sat::Solvable & solvable )
+  {
+    zypp::PoolItem pi( zypp::ResPool::instance().find( solvable ) );
+    cout << pi.resolvable() << endl;
+    // name: yast2-sound 2.16.2-9 i586
+    ++_count;
+    return true;
+  }
+
+  unsigned _count;
+};
 
 static void init_pool()
 {
@@ -48,6 +56,7 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
   init_pool();
 }
 
+#if 0
 BOOST_AUTO_TEST_CASE(pool_query_exp)
 {
   cout << "****exp****"  << endl;
@@ -65,8 +74,11 @@ BOOST_AUTO_TEST_CASE(pool_query_exp)
     cout << s->kind() << ":" << s->name() << " hasinstalled: " << s->installedEmpty() << endl;
   }
   cout << "****solvables****" << endl;
-  std::for_each(q.begin(), q.end(), &result_cb);
+  PrintAndCount cb;
+  std::for_each(q.begin(), q.end(), cb);
 }
+#endif
+
 
 /////////////////////////////////////////////////////////////////////////////
 //  0xx basic queries
@@ -78,7 +90,7 @@ BOOST_AUTO_TEST_CASE(pool_query_000)
 {
   cout << "****000****"  << endl;
   PoolQuery q;
-  cout << q.size() << endl;
+  //cout << q.size() << endl;
   BOOST_CHECK(q.size() == 11451);
   /**!\todo should be 11453 probably according to:
    * dumpsolv factory.solv factory-nonoss.solv zypp_svn.solv \@System.solv | \
@@ -95,8 +107,7 @@ BOOST_AUTO_TEST_CASE(pool_query_001)
   PoolQuery q;
   q.addString("zypper");
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 16);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 16);
 }
 
 // default query + one attribute + one string
@@ -111,16 +122,14 @@ BOOST_AUTO_TEST_CASE(pool_query_002)
   q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 6);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 
   cout << endl;
 
   PoolQuery q1;
   q1.addAttribute(sat::SolvAttr::name, "zypper");
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 6);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 6);
 }
 
 // kind filter
@@ -130,10 +139,9 @@ BOOST_AUTO_TEST_CASE(pool_query_003)
   PoolQuery q;
   q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
-  q.addKind(ResTraits<Package>::kind);
+  q.addKind(ResKind::package);
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 3);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 3);
 }
 
 // match exact
@@ -145,15 +153,14 @@ BOOST_AUTO_TEST_CASE(pool_query_004)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchExact();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 3);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 3);
 
   PoolQuery q1;
   q1.addString("zypp");
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchExact();
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
+  std::for_each(q1.begin(), q1.end(), PrintAndCount());
   BOOST_CHECK(q1.empty());
 }
 
@@ -166,8 +173,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchGlob();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 11);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
 
   cout << "****005.2****"  << endl;
 
@@ -176,8 +182,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchGlob();
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 28);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 28);
 
   cout << "****005.3****"  << endl;
 
@@ -200,8 +205,7 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchRegex();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 11);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
 
   cout << "****006.2***"  << endl;
 
@@ -210,8 +214,7 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchRegex();
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 21);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 21);
 
   cout << "****006.3***"  << endl;
 
@@ -233,8 +236,7 @@ BOOST_AUTO_TEST_CASE(pool_query_050)
   q.setMatchExact();
   q.setInstalledOnly();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 1);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
 
   cout << endl;
 
@@ -244,8 +246,7 @@ BOOST_AUTO_TEST_CASE(pool_query_050)
   q1.setMatchExact();
   q1.setUninstalledOnly();
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 5);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 5);
 }
 
 
@@ -268,8 +269,7 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 74);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 74);
 
   cout << endl;
 
@@ -277,8 +277,7 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
   q1.addString("mp3");
   q1.addAttribute(sat::SolvAttr::name);
 
-  std::for_each(q1.begin(), q1.end(), &result_cb);
-  BOOST_CHECK(q1.size() == 7);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 7);
 }
 
 
@@ -293,8 +292,7 @@ BOOST_AUTO_TEST_CASE(pool_query_101)
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 30);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 30);
 
   cout << endl;
 
@@ -305,8 +303,7 @@ BOOST_AUTO_TEST_CASE(pool_query_101)
   q2.addAttribute(sat::SolvAttr::description);
   q2.setCaseSensitive();
 
-  std::for_each(q2.begin(), q2.end(), &result_cb);
-  BOOST_CHECK(q2.size() == 2);
+  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 2);
 }
 
 
@@ -320,8 +317,7 @@ BOOST_AUTO_TEST_CASE(pool_query_102)
   q.addAttribute(sat::SolvAttr::summary);
   q.setMatchGlob();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 35);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 35);
 }
 
 
@@ -333,7 +329,7 @@ BOOST_AUTO_TEST_CASE(pool_query_103)
   q.addAttribute(sat::SolvAttr::name, "novell");
   q.addAttribute(sat::SolvAttr::summary, "novell");
 
-//  std::for_each(q.begin(), q.end(), &result_cb);
+  //std::for_each(q.begin(), q.end(), cb);
   BOOST_CHECK(q.size() == 42);
 
   cout << "****103.2****"  << endl;
@@ -343,7 +339,7 @@ BOOST_AUTO_TEST_CASE(pool_query_103)
   q1.addAttribute(sat::SolvAttr::name);
   q1.addAttribute(sat::SolvAttr::summary);
 
-//  std::for_each(q1.begin(), q1.end(), &result_cb);
+//  std::for_each(q1.begin(), q1.end(), cb);
   BOOST_CHECK(q1.size() == 42);
 
   cout << endl;
@@ -357,8 +353,7 @@ BOOST_AUTO_TEST_CASE(pool_query_104)
   q.addAttribute(sat::SolvAttr::name, "novell");
   q.addAttribute(sat::SolvAttr::summary, "package management");
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 22);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 22);
 }
 
 // multiple attributes, different search strings (one string per attrbute), regex matching
@@ -370,8 +365,7 @@ BOOST_AUTO_TEST_CASE(pool_query_105)
   q.addAttribute(sat::SolvAttr::summary, "package management");
   q.setMatchRegex();
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 22);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 22);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -386,8 +380,7 @@ BOOST_AUTO_TEST_CASE(pool_query_300)
   q.addAttribute(sat::SolvAttr::name, "zypper");
   q.addRepo("zypp_svn");
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 3);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 3);
 }
 
 // default query + one repo
@@ -397,8 +390,7 @@ BOOST_AUTO_TEST_CASE(pool_query_301)
   PoolQuery q;
   q.addRepo("zypp_svn");
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 21);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 21);
 }
 
 // multiple repos + one attribute
@@ -411,8 +403,35 @@ BOOST_AUTO_TEST_CASE(pool_query_302)
   q.addRepo("factory-nonoss");
   q.addRepo("zypp_svn");
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 8);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//  4xx repo kind queries (addKind(ResKind))
+/////////////////////////////////////////////////////////////////////////////
+
+BOOST_AUTO_TEST_CASE(pool_query_400)
+{
+  cout << "****400****"  << endl;
+  PoolQuery q;
+  q.addString("lamp_server");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addKind(ResKind::pattern);
+  q.setMatchExact();
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
+}
+
+// should find packages and patterns
+BOOST_AUTO_TEST_CASE(pool_query_401)
+{
+  cout << "****401****"  << endl;
+  PoolQuery q;
+  q.addString("mail*");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchGlob();
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
 }
 
 /*
@@ -423,10 +442,10 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
   q.addString("pack*");
   q.addAttribute(sat::SolvAttr::name);
 
-  std::for_each(q.begin(), q.end(), &result_cb);
-  BOOST_CHECK(q.size() == 28);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 28);
 }
 */
+
 
 #if 1
 BOOST_AUTO_TEST_CASE(pool_query_recovery)
@@ -437,12 +456,12 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   std::vector<PoolQuery> queries;
   std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.begin());
   readPoolQueriesFromFile(testfile,ii);
-  BOOST_REQUIRE_MESSAGE(queries.size()==2,"Bad count of readed queries.");
+  BOOST_REQUIRE_MESSAGE(queries.size()==2,"Bad count of read queries.");
   BOOST_CHECK(queries[0].size() == 8);
   PoolQuery q;
   q.addString("ma*");
   q.addRepo("factory");
-  q.addKind(Resolvable::Kind::patch);
+  q.addKind(ResKind::patch);
   q.setMatchRegex();
   q.setRequireAll();
   q.setCaseSensitive();
