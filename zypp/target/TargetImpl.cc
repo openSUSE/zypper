@@ -130,7 +130,7 @@ namespace zypp
 	}
 
 	// compute the name-version.release- prefix
-	std::string prefix = name + "-" + version + "." + release + "-";
+	std::string prefix = name + "-" + version + "-" + release + "-";
 	size_t pfx_size = prefix.length();
 	if (pfx_size > 255)
 	{
