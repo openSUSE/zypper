@@ -2,6 +2,7 @@ PROJECT(libzypp)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
+cmake_minimum_required(VERSION 2.4.5)
 
 INCLUDE(ZyppCommon)
 INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
