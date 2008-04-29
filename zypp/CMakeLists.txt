@@ -44,6 +44,7 @@ SET( zypp_SRCS
   Pattern.cc
   PoolItem.cc
   PoolQuery.cc
+  PoolQueryResult.cc
   ProblemSolution.cc
   Product.cc
   ProgressData.cc
@@ -135,6 +136,7 @@ SET( zypp_HEADERS
   PoolItem.h
   PoolQuery.h
   PoolQueryUtil.tcc
+  PoolQueryResult.h
   ProblemSolution.h
   ProblemTypes.h
   Product.h

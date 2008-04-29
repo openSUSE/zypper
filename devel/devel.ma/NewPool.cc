@@ -1,5 +1,7 @@
 #include "Tools.h"
 
+#include "zypp/PoolQueryResult.h"
+
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Gettext.h>
@@ -454,112 +456,6 @@ void testCMP( const L & lhs, const R & rhs )
 
 namespace zypp
 {
-  /** Helper class to collect (not only) \ref PoolQuery results.
-   *
-   * \note Unfortunately \ref PoolQuery::begin might throw. Exceptions
-   * are caught and the query is treated as empty.
-   *
-   * \ref PoolQueryResult maintains a set of \ref sat::Solvable. You can
-   * add/remove solvables to/from the set defined by:
-   *
-   * \li a single \ref sat::Solvable
-   * \li a \ref PoolQuery
-   * \li an other \ref PoolQueryResult
-   * \li any iterator pair with \c value_type \ref sat::Solvable or \ref PoolQuery
-   *     or \ref PoolQueryResult (any type that fits \c operator+=)
-  */
-  class PoolQueryResult : public sat::SolvIterMixin<PoolQueryResult,std::tr1::unordered_set<sat::Solvable>::const_iterator>
-  {
-    public:
-      typedef std::tr1::unordered_set<sat::Solvable>	ResultSet;
-      typedef ResultSet::size_type                      size_type;
-      typedef ResultSet::const_iterator                 const_iterator;
-
-    public:
-      PoolQueryResult()
-      {}
-
-      explicit PoolQueryResult( sat::Solvable result_r )
-      { _result.insert( result_r ); }
-
-      explicit PoolQueryResult( const PoolQuery & query_r )
-      { operator+=( query_r ); }
-
-      template<class _QueryResultIter>
-      PoolQueryResult( _QueryResultIter begin_r, _QueryResultIter end_r )
-      {
-        for_( it, begin_r, end_r )
-        {
-          operator+=( *it );
-        }
-      }
-
-    public:
-      /***/
-      bool empty() const
-      { return _result.empty(); }
-      /***/
-      size_type size() const
-      { return _result.size(); }
-      /***/
-      const_iterator begin() const
-      { return _result.begin(); }
-      /***/
-      const_iterator end() const
-      { return _result.end(); }
-
-    public:
-      /**
-      */
-      PoolQueryResult & operator+=( const PoolQueryResult & query_r )
-      {
-        if ( ! query_r.empty() )
-          _result.insert( query_r.begin(), query_r.end() );
-        return *this;
-      }
-      /** \overload */
-      PoolQueryResult & operator+=( const PoolQuery & query_r )
-      { return operator+=( PoolQueryResult( query_r ) ); }
-      /** \overload */
-      PoolQueryResult & operator+=( sat::Solvable result_r )
-      { _result.insert( result_r ); return *this; }
-
-      /**
-      */
-      PoolQueryResult & operator-=( const PoolQueryResult & query_r );
-      /** \overload */
-      PoolQueryResult & operator-=( const PoolQuery & query_r )
-      { return operator-=( PoolQueryResult( query_r ) ); }
-      /** \overload */
-      PoolQueryResult & operator-=( sat::Solvable result_r )
-      { return operator+=( PoolQueryResult( result_r ) ); }
-
-    public:
-      /**
-      */
-      PoolQueryResult operator+( const PoolQueryResult & query_r ) const
-      { return PoolQueryResult(*this) += query_r; }
-      /** \overload */
-      PoolQueryResult operator+( const PoolQuery & query_r ) const
-      { return PoolQueryResult(*this) += query_r; }
-      /** \overload */
-      PoolQueryResult operator+( sat::Solvable result_r ) const
-      { return PoolQueryResult(*this) += result_r; }
-
-      /**
-      */
-      PoolQueryResult operator-( const PoolQueryResult & query_r ) const
-      { return PoolQueryResult(*this) -= query_r; }
-      /** \overload */
-      PoolQueryResult operator-( const PoolQuery & query_r ) const
-      { return PoolQueryResult(*this) -= query_r; }
-      /** \overload */
-      PoolQueryResult operator-( sat::Solvable result_r ) const
-      { return PoolQueryResult(*this) -= result_r; }
-
-    private:
-      ResultSet _result;
-  };
 }
 
 void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
@@ -719,7 +615,28 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  //ResPool pool( ResPool::instance() );
 
+  //
+  PoolQueryResult result( pool.byKindBegin<Package>(), pool.byKindEnd<Package>() );
+  MIL << result.size() << endl;
+
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "[a-zA-Z]*" );
+    q.setMatchGlob();
+    result -= q;
+    MIL << result.size() << endl;
+  }
+  MIL << result << endl;
+
+  sat::WhatProvides poviders( Capability("3ddiag") );
+  result -= PoolQueryResult( poviders.begin(), poviders.end() );
+  MIL << result << endl;
+
+
+  result -= result;
+  MIL << result << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
