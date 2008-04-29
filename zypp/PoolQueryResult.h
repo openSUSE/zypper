@@ -45,6 +45,10 @@ namespace zypp
    *     or \ref PoolItem or \ref PoolQuery or any type that fits
    *     \c operator+=.
    *
+   * The class is a \ref sat::SolvIterMixin, so you can iterate the result
+   * not just as \ref sat::Solvable, but also as \ref PoolItem or
+   * \ref ui::Selectable.
+   *
    * \code
    *   // Constructed from PoolItem iterator pair
    *   PoolQueryResult result( pool.byKindBegin<Package>(), pool.byKindEnd<Package>() );
