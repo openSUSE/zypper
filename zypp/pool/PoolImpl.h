@@ -21,6 +21,7 @@
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
+#include "zypp/PoolQuery.h"
 
 #include "zypp/sat/Pool.h"
 
@@ -138,9 +139,31 @@ namespace zypp
         //
         ///////////////////////////////////////////////////////////////////
       public:
-        bool hardLockAppliesTo( sat::Solvable solv_r ) const
+        typedef PoolTraits::HardLockQueries           HardLockQueries;
+        typedef PoolTraits::hardLockQueries_iterator  hardLockQueries_iterator;
+
+        const HardLockQueries & hardLockQueries() const
+        { return _hardLockQueries; }
+
+        void reapplyHardLocks() const
         {
-          return false;
+#ifdef HARDLOCKTEST
+          SEC << "reapplyHardLocks " << endl;
+#endif
+        }
+
+        void setHardLockQueries( const HardLockQueries & newLocks_r )
+        {
+          MIL << "Apply " << newLocks_r.size() << " HardLockQueries" << endl;
+          _hardLockQueries = newLocks_r;
+          // now adjust the pool status
+          // TBD
+        }
+
+        void getHardLockQueries( HardLockQueries & activeLocks_r )
+        {
+          activeLocks_r = _hardLockQueries; // current queries
+          // TBD
         }
 
       public:
@@ -163,7 +186,7 @@ namespace zypp
             if ( ! it->status().isKept() )
               continue;
 
-            if ( newLocks_r.find( it->satSolvable().ident() ) != newLocks_r.end() )
+            if ( autoSoftLockAppliesTo( it->satSolvable() ) )
               it->status().setSoftLock( ResStatus::USER );
             else
               it->status().resetTransact( ResStatus::USER );
@@ -172,7 +195,7 @@ namespace zypp
 
         void getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
         {
-          activeLocks_r = _autoSoftLocks; // currentsoft-locks
+          activeLocks_r = _autoSoftLocks; // current soft-locks
           AutoSoftLocks todel;            // + names to be deleted
           AutoSoftLocks toins;            // - names to be installed
 
@@ -180,7 +203,7 @@ namespace zypp
           {
             ResStatus & status( it->status() );
             if ( ! status.isByUser() )
-              continue;
+              continue; // ignore non-uer requests
 
             switch ( status.getTransactValue() )
             {
@@ -212,7 +235,12 @@ namespace zypp
           if ( _storeDirty )
           {
             sat::Pool pool( satpool() );
+            bool addedItems = false;
 
+#ifdef HARDLOCKTEST
+#warning REMOVE FAKE REMOVE FAKE REMOVE FAKE REMOVE FAKE
+            addedItems = true;
+#endif
             if ( pool.capacity() != _store.capacity() )
             {
               _store.resize( pool.capacity() );
@@ -233,19 +261,24 @@ namespace zypp
                 {
                   // new PoolItem to add
                   pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
-                  // and a few checks...
-                  if ( hardLockAppliesTo( s ) )
-                  {
-                    pi.status().setLock( true, ResStatus::USER );
-                  }
-                  else if ( autoSoftLockAppliesTo( s ) )
+                  // and on the fly check for wek locks...
+                  if ( autoSoftLockAppliesTo( s ) )
                   {
                     pi.status().setSoftLock( ResStatus::USER );
                   }
+                  if ( !addedItems )
+                    addedItems = true;
                 }
               }
             }
             _storeDirty = false;
+
+            // Now, as the pool is adjusted, we must reapply those query
+            // based hard locks...
+            if ( addedItems )
+            {
+              reapplyHardLocks();
+            }
           }
           return _store;
         }
@@ -304,6 +337,8 @@ namespace zypp
       private:
         /** Set of solvable idents that should be soft locked per default. */
         AutoSoftLocks                         _autoSoftLocks;
+        /** Set of queries that define hardlocks. */
+        HardLockQueries                       _hardLockQueries;
     };
     ///////////////////////////////////////////////////////////////////
 

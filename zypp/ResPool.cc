@@ -95,6 +95,26 @@ namespace zypp
   void ResPool::getActiveSoftLocks( AutoSoftLocks & activeLocks_r )
   { _pimpl->getActiveSoftLocks( activeLocks_r ); }
 
+
+  bool ResPool::hardLockQueriesEmpty() const
+  { return _pimpl->hardLockQueries().empty(); }
+
+  ResPool::size_type ResPool::hardLockQueriesSize() const
+  { return _pimpl->hardLockQueries().size(); }
+
+  ResPool::hardLockQueries_iterator ResPool::hardLockQueriesBegin() const
+  { return _pimpl->hardLockQueries().begin(); }
+
+  ResPool::hardLockQueries_iterator ResPool::hardLockQueriesEnd() const
+  { return _pimpl->hardLockQueries().end(); }
+
+  void ResPool::setHardLockQueries( const HardLockQueries & newLocks_r )
+  { _pimpl->setHardLockQueries( newLocks_r ); }
+
+  void ResPool::getHardLockQueries( HardLockQueries & activeLocks_r )
+  { _pimpl->getHardLockQueries( activeLocks_r ); }
+
+
   const pool::PoolTraits::ItemContainerT & ResPool::store() const
   { return _pimpl->store(); }
 

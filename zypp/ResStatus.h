@@ -20,6 +20,11 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace resstatus
+  {
+    class UserLockQueryManip;
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResStatus
@@ -67,6 +72,7 @@ namespace zypp
     typedef bit::Range<FieldType,TransactDetailField::end,   1> SolverStateField;
     typedef bit::Range<FieldType,SolverStateField::end,      1> LicenceConfirmedField;
     typedef bit::Range<FieldType,LicenceConfirmedField::end, 2> WeakField;
+    typedef bit::Range<FieldType,WeakField::end,             1> UserLockQueryField; // internal
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -141,6 +147,12 @@ namespace zypp
         SUGGESTED   		= bit::RangeValue<WeakField,1>::value,
 	RECOMMENDED 		= bit::RangeValue<WeakField,2>::value,
 	SUGGESTED_AND_RECOMMENDED = bit::RangeValue<WeakField,3>::value
+      };
+
+    enum UserLockQuery // internal
+      {
+        USERLOCK_NOMATCH	= bit::RangeValue<UserLockQueryField,0>::value,
+        USERLOCK_MATCH		= bit::RangeValue<UserLockQueryField,1>::value
       };
     //@}
 
@@ -283,6 +295,19 @@ namespace zypp
 
     bool isToBeUninstalledSoft () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
+
+  private:
+
+    /** \name Internal hard lock maintainance */
+    //@{
+    friend class resstatus::UserLockQueryManip;
+
+    bool isUserLockQueryMatch() const
+    { return fieldValueIs<UserLockQueryField>( USERLOCK_MATCH ); }
+
+    void setUserLockQueryMatch( bool match_r )
+    { fieldValueAssign<UserLockQueryField>( match_r ? USERLOCK_MATCH : USERLOCK_NOMATCH ); }
+    //@}
 
   public:
 

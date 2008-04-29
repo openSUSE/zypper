@@ -117,7 +117,7 @@ namespace zypp
       // path: directory where to look
       // name,version,release: Script name must match 'name-version.release-' prefix
       //
-#warning nedds to be reimplemented excetion safe
+#warning needs to be reimplemented exception safe
       void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
       {
 	// open the scripts directory

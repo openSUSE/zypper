@@ -333,6 +333,35 @@ namespace zypp
       */
       void getActiveSoftLocks( AutoSoftLocks & activeLocks_r );
       //@}
+
+    public:
+      /** \name Handle hard locks (e.g set from /etc/zypp/locks).
+       *
+       * As this kind of lock is query based, it's quite expensive.
+       *
+       * These queries are re-evaluated when adding new repos to the pool.
+       */
+      //@{
+      typedef pool::PoolTraits::HardLockQueries           HardLockQueries;
+      typedef pool::PoolTraits::hardLockQueries_iterator  hardLockQueries_iterator;
+
+      bool hardLockQueriesEmpty() const;
+      size_type hardLockQueriesSize() const;
+      hardLockQueries_iterator hardLockQueriesBegin() const;
+      hardLockQueries_iterator hardLockQueriesEnd() const;
+
+      /** Set a new set of queries.
+       * The hard-locks of existing PoolItems are adjusted according
+       * to the queries. (usually called on target load)
+       */
+      void setHardLockQueries( const HardLockQueries & newLocks_r );
+
+      /** Suggest a new set of queries based on the current selection.
+       * (usually remembered on commit).
+       */
+      void getHardLockQueries( HardLockQueries & activeLocks_r );
+      //@}
+
     private:
       const pool::PoolTraits::ItemContainerT & store() const;
       const pool::PoolTraits::Id2ItemT & id2item() const;

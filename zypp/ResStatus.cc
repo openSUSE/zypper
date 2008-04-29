@@ -58,7 +58,7 @@ namespace zypp
   ResStatus::ResStatus (enum StateValue s, enum ValidateValue v, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
     : _bitfield (s)
   {
-    fieldValueAssign<ValidateField>(v);      
+    fieldValueAssign<ValidateField>(v);
     fieldValueAssign<TransactField>(t);
     if (t == TRANSACT) {
 	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
@@ -99,8 +99,10 @@ namespace zypp
 
     str << (obj.isRecommended() ? "r" : "" );
 
-    str << (obj.isSuggested() ? "s" : "" );    
-
+    str << (obj.isSuggested() ? "s" : "" );
+#ifdef HARDLOCKTEST
+    str << (obj.isUserLockQueryMatch() ?  "L" : "_" );
+#endif
     return str;
   }
 
