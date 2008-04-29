@@ -543,24 +543,21 @@ void install_remove(Zypper & zypper,
 
     // is the provider already installed?
     bool installed = false;
-    string provider;
+    string provider; 
     for_(solvit, q.poolItemBegin(), q.poolItemEnd())
-    {
       if (solvit->status().isInstalled())
-      { 
-        installed = true; 
-        provider = solvit->resolvable()->name();
-        break; 
-      }
-    }
+      {
+         installed = true;
+         provider = solvit->resolvable()->name(); 
+         break; }
     // already installed, nothing to do
     if (installed && install_not_remove)
     {
-      // translators: meaning a package %s providing capability %s
-      string s = boost::str(format(_("'%s' providing '%s' is already installed."))
-        % provider % str.c_str());
-      zypper.out().info(s);
-      MIL << s << endl;
+      string s = (provider==str) ? str : boost::str(format("%s(%s)")
+        % str % provider);
+      // translators: meaning a package %s or provider of capability %s
+      zypper.out().info(str::form(_("'%s' is already installed."), s.c_str()));
+      MIL << str::form("skipping '%s': already installed", str.c_str()) << endl;
       continue;
     }
     // not installed, nothing to do
