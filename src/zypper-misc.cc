@@ -3,6 +3,7 @@
 #include <sstream>
 #include <ctype.h>
 #include <boost/format.hpp>
+#include <sys/wait.h> //for wait()
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
@@ -14,6 +15,7 @@
 #include "zypp/SrcPackage.h"
 #include "zypp/Capabilities.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/TmpPath.h"
 
 
 #include "zypp/media/MediaException.h"
@@ -122,6 +124,49 @@ bool ProvideProcess::operator()( const PoolItem& provider )
     // store encountered target item (installed)
     installed_item = provider;
     if (!item) item = provider;
+  }
+
+  return true;
+}
+
+//gets true if successfully display in pager
+bool show_in_pager(const string& text)
+{
+  const char* envpager = getenv("PAGER");
+  if (!envpager)
+    envpager="more"; //basic posix default, must be in PATH
+  string pager(envpager);
+  filesystem::TmpFile tfile;
+  string tpath = tfile.path().absolutename().c_str();
+  ofstream os(tpath.c_str());
+  os << text;
+  os.close();
+  ostringstream cmdline;
+  cmdline << pager <<" "<<tpath;
+  int termin = dup(0);
+  close(0);
+  int termout = dup(1);
+  close(1);
+
+  switch(fork()){
+    case -1:
+      WAR << "fork failed" << endl;
+      return false;
+
+    case 0:
+      //allow terminal only for pager
+      dup2(termin,0);
+      dup2(termout,1);               
+      execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
+      WAR << "exec failed with " << strerror(errno) << endl;
+      exit(1); //cannot return false here, due to here is another process
+      //so only kill itself
+
+    default: 
+      wait(0);
+      //restore terminal access after end of pager
+      dup2(termin,0);
+      dup2(termout,1);               
   }
 
   return true;
@@ -2424,7 +2469,8 @@ static bool confirm_licenses(Zypper & zypper)
         s << licenseText;
       else
         s << processRichText(licenseText);
-      zypper.out().info(s.str(), Out::QUIET);
+      if (!show_in_pager(s.str())) //pager fail, show normal
+        zypper.out().info(s.str(), Out::QUIET);
 
       // lincense prompt
       string question = _("In order to install this package, you must agree"
