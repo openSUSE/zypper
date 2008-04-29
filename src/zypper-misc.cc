@@ -553,7 +553,7 @@ void install_remove(Zypper & zypper,
     // already installed, nothing to do
     if (installed && install_not_remove)
     {
-      string s = (provider==str) ? str : boost::str(format("%s(%s)")
+      string s = (provider==str) ? str : boost::str(format("%s (%s)")
         % str % provider);
       // translators: meaning a package %s or provider of capability %s
       zypper.out().info(str::form(_("'%s' is already installed."), s.c_str()));
