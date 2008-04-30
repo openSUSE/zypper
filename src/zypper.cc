@@ -272,7 +272,7 @@ void Zypper::processGlobalOptions()
     {"normal-output",              no_argument,       0,  0 },
     // not implemented currently => ignored
     {"terse",                      no_argument,       0, 't'},
-    {"no-abbrev",                  no_argument,       0,  0 },
+    {"no-abbrev",                  no_argument,       0, 'A'},
     {"table-style",                required_argument, 0, 's'},
     {"rug-compatible",             no_argument,       0, 'r'},
     {"non-interactive",            no_argument,       0, 'n'},
