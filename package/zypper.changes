@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr 30 18:48:16 CEST 2008 - jkupec@suse.cz
+
+- abbreviate package summary in the search to fit screen width
+- r9915
+- 0.11.2
+
+-------------------------------------------------------------------
 Tue Apr 29 22:56:48 CEST 2008 - jkupec@suse.cz
 
 - basic cleanup upon SIGINT and SIGTERM (will remove
