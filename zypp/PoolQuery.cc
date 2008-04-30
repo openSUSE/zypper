@@ -28,6 +28,9 @@ extern "C"
 #include "satsolver/repo.h"
 }
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "PoolQuery"
+
 using namespace std;
 using namespace zypp::sat;
 
