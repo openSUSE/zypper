@@ -30,17 +30,11 @@ using namespace zypp::repo;
 
 BOOST_AUTO_TEST_CASE(repomanager_test)
 {
-  RepoManagerOptions opts;
-
   TmpDir tmpCachePath;
-  TmpDir tmpRawCachePath;
-  TmpDir tmpKnownReposPath;
+  RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
 
-  BOOST_CHECK_EQUAL( filesystem::copy_dir_content( DATADIR + "/repos.d", tmpKnownReposPath.path() ), 0 );
-
-  opts.repoCachePath = tmpCachePath.path();
-  opts.repoRawCachePath = tmpRawCachePath.path();
-  opts.knownReposPath = tmpKnownReposPath.path();
+  filesystem::mkdir( opts.knownReposPath );
+  BOOST_CHECK_EQUAL( filesystem::copy_dir_content( DATADIR + "/repos.d", opts.knownReposPath ), 0 );
 
   RepoManager manager(opts);
 
@@ -55,7 +49,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   manager.addRepositories(url);
 
   // check it was not overwriten the proprietary.repo file
-  BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
+  BOOST_CHECK( PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
 
   // now there should be 6 repos
   repos = manager.knownRepositories();
@@ -73,7 +67,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 5);
   // the file still contained one repo, so it should still exists
-  BOOST_CHECK( PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
+  BOOST_CHECK( PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
 
   // now delete the macromedia one
   RepoInfo macromedia;
@@ -82,7 +76,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   repos = manager.knownRepositories();
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
   // the file should not exist anymore
-  BOOST_CHECK( ! PathInfo(tmpKnownReposPath.path() + "/proprietary.repo_1").isExist() );
+  BOOST_CHECK( ! PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
 
 
   // let test cache creation

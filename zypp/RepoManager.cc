@@ -74,6 +74,17 @@ namespace zypp
     probe                 = ZConfig::instance().repo_add_probe();
   }
 
+  RepoManagerOptions RepoManagerOptions::makeTestSetup( const Pathname & root_r )
+  {
+    RepoManagerOptions ret;
+    ret.repoCachePath         = root_r;
+    ret.repoRawCachePath      = root_r/"raw";
+    ret.repoSolvCachePath     = root_r/"solv";
+    ret.repoPackagesCachePath = root_r/"packages";
+    ret.knownReposPath        = root_r/"repos.d";
+    return ret;
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 
   /**
