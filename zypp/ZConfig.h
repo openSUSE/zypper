@@ -83,21 +83,25 @@ namespace zypp
       { setTextLocale( defaultTextLocale() ); }
 
     public:
+      /**
+       * Path where the caches are kept.
+       */
+      Pathname repoCachePath() const;
+
      /**
        * Path where the repo metadata is downloaded and kept.
        */
       Pathname repoMetadataPath() const;
 
+     /**
+       * Path where the repo solv files are created and kept.
+       */
+      Pathname repoSolvfilesPath() const;
+
       /**
        * Path where the repo packages are downloaded and kept.
        */
       Pathname repoPackagesPath() const;
-
-      /**
-       * Path where the processed cache is kept
-       * (this is where zypp.db is located.
-       */
-      Pathname repoCachePath() const;
 
       /**
        * Path where the known repositories
@@ -140,7 +144,7 @@ namespace zypp
 
       /**
        * Solver regards required packages,patterns,... only
-       */      
+       */
       bool solver_onlyRequires() const;
 
       /**

@@ -198,17 +198,25 @@ namespace zypp
                     cfg_arch = carch;
                   }
                 }
+                else if ( entry == "cachedir" )
+                {
+                  cfg_cache_path = Pathname(value);
+                }
                 else if ( entry == "metadatadir" )
                 {
                   cfg_metadata_path = Pathname(value);
                 }
+                else if ( entry == "solvfilesdir" )
+                {
+                  cfg_solvfiles_path = Pathname(value);
+                }
+                else if ( entry == "packagesdir" )
+                {
+                  cfg_packages_path = Pathname(value);
+                }
                 else if ( entry == "reposdir" )
                 {
                   cfg_known_repos_path = Pathname(value);
-                }
-                else if ( entry == "cachedir" )
-                {
-                  cfg_cache_path = Pathname(value);
                 }
                 else if ( entry == "repo.add.probe" )
                 {
@@ -229,10 +237,6 @@ namespace zypp
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
-                }
-                else if ( entry == "packagesdir" )
-                {
-                  cfg_packages_path = Pathname(value);
                 }
                 else if ( entry == "solver.onlyRequires" )
                 {
@@ -283,6 +287,7 @@ namespace zypp
     Locale   cfg_textLocale;
 
     Pathname cfg_metadata_path;
+    Pathname cfg_solvfiles_path;
     Pathname cfg_packages_path;
     Pathname cfg_cache_path;
     Pathname cfg_known_repos_path;
@@ -389,23 +394,30 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  Pathname ZConfig::repoMetadataPath() const
-  {
-    return ( _pimpl->cfg_metadata_path.empty()
-        ? Pathname("/var/cache/zypp/raw") : _pimpl->cfg_metadata_path );
-  }
-
-  Pathname ZConfig::repoPackagesPath() const
-  {
-    return ( _pimpl->cfg_packages_path.empty()
-        ? Pathname("/var/cache/zypp/packages") : _pimpl->cfg_packages_path );
-  }
-
   Pathname ZConfig::repoCachePath() const
   {
     return ( _pimpl->cfg_cache_path.empty()
         ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
   }
+
+  Pathname ZConfig::repoMetadataPath() const
+  {
+    return ( _pimpl->cfg_metadata_path.empty()
+        ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path );
+  }
+
+  Pathname ZConfig::repoSolvfilesPath() const
+  {
+    return ( _pimpl->cfg_solvfiles_path.empty()
+        ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path );
+  }
+
+  Pathname ZConfig::repoPackagesPath() const
+  {
+    return ( _pimpl->cfg_packages_path.empty()
+        ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path );
+  }
+
 
   Pathname ZConfig::knownReposPath() const
   {

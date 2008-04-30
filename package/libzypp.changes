@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Apr 30 16:27:49 CEST 2008 - ma@suse.de
+
+- Add zypp.conf option solvfilesdir: Path where the repo solv files 
+  are created. Default value: {cachedir}/solv.
+- Target and repositories now save their solvfiles below {solvfilesdir}
+  in directories named after the repositories alias.
+- version 4.18.0
+- revision 9913
+
+-------------------------------------------------------------------
 Wed Apr 30 14:19:16 CEST 2008 - jkupec@suse.cz
 
 - fixed filesystem::expandlink(Pathname) (bnc #368477)

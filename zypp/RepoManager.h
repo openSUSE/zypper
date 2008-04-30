@@ -51,6 +51,7 @@ namespace zypp
 
     Pathname repoCachePath;
     Pathname repoRawCachePath;
+    Pathname repoSolvCachePath;
     Pathname repoPackagesCachePath;
     Pathname knownReposPath;
     bool probe;
@@ -162,7 +163,7 @@ namespace zypp
      * \param info
      * \param url
      * \param policy
-     * \return state of repository 
+     * \return state of repository
      * \see RefreshCheckStatus
      * \throws RepoUnknownTypeException
      * \throws repo::RepoNoAliasException if can't figure an alias
@@ -266,11 +267,6 @@ namespace zypp
     */
    void cleanCache( const RepoInfo &info,
                     const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
-
-   /**
-    * Clean target system (rpm db) cache.
-    */
-   void cleanTargetCache(const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc());
 
    /**
     * \short Whether a repository exists in cache

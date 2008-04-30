@@ -66,11 +66,12 @@ namespace zypp
 
   RepoManagerOptions::RepoManagerOptions()
   {
-    repoCachePath    = ZConfig::instance().repoCachePath();
-    repoRawCachePath = ZConfig::instance().repoMetadataPath();
+    repoCachePath         = ZConfig::instance().repoCachePath();
+    repoRawCachePath      = ZConfig::instance().repoMetadataPath();
+    repoSolvCachePath     = ZConfig::instance().repoSolvfilesPath();
     repoPackagesCachePath = ZConfig::instance().repoPackagesPath();
-    knownReposPath   = ZConfig::instance().knownReposPath();
-    probe            = ZConfig::instance().repo_add_probe();
+    knownReposPath        = ZConfig::instance().knownReposPath();
+    probe                 = ZConfig::instance().repo_add_probe();
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -206,7 +207,7 @@ namespace zypp
   static Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
   {
     assert_alias(info);
-    return opt.repoCachePath / "solv" / info.escaped_alias();
+    return opt.repoSolvCachePath / info.escaped_alias();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -603,7 +604,7 @@ namespace zypp
                 ++it )
           {
             Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
-            if ( PathInfo(cachepath).isExist() )  
+            if ( PathInfo(cachepath).isExist() )
               downloader_ptr->addCachePath(cachepath);
           }
 
@@ -883,12 +884,6 @@ namespace zypp
     filesystem::recursive_rmdir(solv_path_for_repoinfo(_pimpl->options, info));
 
     progress.toMax();
-  }
-
-  void RepoManager::cleanTargetCache(const ProgressData::ReceiverFnc & progressrcv)
-  {
-    unlink (_pimpl->options.repoCachePath / (sat::Pool::systemRepoName() + ".solv"));
-    unlink (_pimpl->options.repoCachePath / (sat::Pool::systemRepoName() + ".cookie"));
   }
 
   ////////////////////////////////////////////////////////////////////////////

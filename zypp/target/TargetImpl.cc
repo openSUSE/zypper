@@ -303,17 +303,16 @@ namespace zypp
     void TargetImpl::clearCache()
     {
       Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoCachePath() / sat::Pool::instance().systemRepoName() );
-      filesystem::unlink( base.extend(".solv") );
-      filesystem::unlink( base.extend(".cookie") );
+                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoName() );
+      filesystem::recursive_rmdir( base );
     }
 
     void TargetImpl::buildCache()
     {
       Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoCachePath() / sat::Pool::instance().systemRepoName() );
-      Pathname rpmsolv = base.extend(".solv");
-      Pathname rpmsolvcookie = base.extend(".cookie");
+                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoName() );
+      Pathname rpmsolv       = base/"solv";
+      Pathname rpmsolvcookie = base/"cookie";
 
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
@@ -339,27 +338,22 @@ namespace zypp
       if ( build_rpm_solv )
       {
         // Take care we unlink the solvfile on exception
-        ManagedFile guard( rpmsolv, filesystem::unlink );
-        ManagedFile guardcookie( rpmsolvcookie, filesystem::unlink );
-
-        filesystem::Pathname cachePath = Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() );
+        ManagedFile guard( base, filesystem::recursive_rmdir );
 
         // if it does not exist yet, we better create it
-        filesystem::assert_dir( cachePath );
+        filesystem::assert_dir( base );
 
-        filesystem::TmpFile tmpsolv( cachePath /*dir*/,
-                                     sat::Pool::instance().systemRepoName() /* prefix */ );
+        filesystem::TmpFile tmpsolv( filesystem::TmpFile::makeSibling( rpmsolv ) );
         if (!tmpsolv)
         {
           Exception ex("Failed to cache rpm database.");
           ex.remember(str::form(
-              "Cannot create temporary file under %s.", cachePath.asString().c_str()));
+              "Cannot create temporary file under %s.", base.c_str()));
           ZYPP_THROW(ex);
         }
 
         ostringstream cmd;
         cmd << "rpmdb2solv";
-
         if ( ! _root.empty() )
           cmd << " -r '" << _root << "'";
 #warning DIFF TO EXISTING SOLV FILE DISABLED
@@ -399,7 +393,6 @@ namespace zypp
 
         // We keep it.
         guard.resetDispose();
-        guardcookie.resetDispose();
       }
     }
 
@@ -417,10 +410,21 @@ namespace zypp
 
       // now add the repos to the pool
       sat::Pool satpool( sat::Pool::instance() );
-      Repository system( satpool.systemRepo() );
-      Pathname rpmsolv( Pathname::assertprefix( _root, ZConfig::instance().repoCachePath() + system.name() ).extend(".solv") );
-      MIL << "adding " << rpmsolv << " to pool(" << system.name() << ")" << endl;
+      Pathname rpmsolv( Pathname::assertprefix( _root,
+                        ZConfig::instance().repoSolvfilesPath() / satpool.systemRepoName() / "solv" ) );
+      MIL << "adding " << rpmsolv << " to pool(" << satpool.systemRepoName() << ")" << endl;
 #warning PROBABLY CLEAR NONEMTY SYSTEM REPO
+
+      // Providing an empty system repo, unload any old content
+      Repository system( sat::Pool::instance().findSystemRepo() );
+      if ( system && ! system.solvablesEmpty() )
+      {
+        system.eraseFromPool(); // invalidates system
+      }
+      if ( ! system )
+      {
+        system = satpool.systemRepo();
+      }
 
       try
       {
