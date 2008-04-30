@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
+#include <readline/readline.h>
 
 #include "zypp/base/Logger.h"
 
@@ -97,7 +99,7 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
   container::const_iterator
     i = _columns.begin (),
     e = _columns.end ();
-  
+
   stream.setf (ios::left, ios::adjustfield);
   for (unsigned c = 0; i != e ; ++i, ++c) {
     if (seen_first) {
@@ -107,12 +109,46 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
     }
     seen_first = true;
 
-//    stream.width (widths[c]);// that does not work with multibyte chars
-    stream << *i;
-    stream.width (widths[c] - string_to_columns (*i));
+    // stream.width (widths[c]); // that does not work with multibyte chars
+    const string & s = *i;
+    if (s.size() > widths[c])
+      stream << (s.substr(0, widths[c] - 2) + "->");
+    else
+    {
+      stream << s;
+      stream.width (widths[c] - string_to_columns (s));
+    } 
     stream << "";
   }
   stream << endl;
+}
+
+// ----------------------( Table )---------------------------------------------
+
+Table::Table() :
+  _has_header (false),
+  _max_col (0),
+  _width(0),
+  _style (defaultStyle)
+{
+  //! \todo move this to utils
+
+  const char *cols_env = getenv("COLUMNS");
+  if (cols_env)
+    _screen_width  = ::atoi (cols_env);
+  else
+  {
+    ::rl_initialize();
+    //::rl_reset_screen_size();
+    ::rl_get_screen_size (NULL, &_screen_width);
+    DBG << "readline says we have " << _screen_width << " char wide console screen" << endl;
+  }
+
+  // safe default
+  if (!_screen_width)
+     _screen_width = 80;
+
+  DBG << "got screen width of " << _screen_width << endl;
 }
 
 void Table::add (const TableRow& tr) {
@@ -126,7 +162,17 @@ void Table::setHeader (const TableHeader& tr) {
   updateColWidths (tr);
 }
 
+void Table::allowAbbrev(unsigned column) {
+  if (column >= _abbrev_col.size()) {
+    _abbrev_col.reserve(column + 1);
+    _abbrev_col.insert(_abbrev_col.end(), column - _abbrev_col.size() + 1, false);
+  }
+  _abbrev_col[column] = true;
+}
+
 void Table::updateColWidths (const TableRow& tr) {
+  _width = -3;
+
   TableRow::container::const_iterator
     i = tr._columns.begin (),
     e = tr._columns.end ();
@@ -141,6 +187,8 @@ void Table::updateColWidths (const TableRow& tr) {
 
     if (max < cur)
       max = cur;
+
+    _width += max + 3;
   }
 }
 
@@ -165,6 +213,18 @@ void Table::dumpRule (ostream &stream) const {
 }
 
 void Table::dumpTo (ostream &stream) const {
+
+  // reset column widths for columns that can be abbreviated
+  //! \todo allow abbrev of multiple columns?
+  unsigned c = 0;
+  for (vector<bool>::const_iterator it = _abbrev_col.begin();
+      it != _abbrev_col.end() && c <= _max_col; ++it, ++c) {
+    if (*it && _width > _screen_width) {
+      _max_width[c] -= _width - _screen_width;
+      break;
+    }
+  }
+
   if (_has_header) {
     _header.dumpTo (stream, _max_width, _style);
     dumpRule (stream);

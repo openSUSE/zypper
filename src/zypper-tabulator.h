@@ -93,12 +93,10 @@ public:
 
   void style (TableStyle st);
   void sort (unsigned by_column);	// columns start with 0...
+  void allowAbbrev(unsigned column);
 
-  Table () :
-    _has_header (false),
-    _max_col (0),
-    _style (defaultStyle)
-    {}
+  Table ();
+
 private:
   void dumpRule (ostream &stream) const;
   void updateColWidths (const TableRow& tr);
@@ -109,9 +107,15 @@ private:
   //! maximum column index seen in this table
   unsigned _max_col;
   //! maximum width of respective columns
-  vector<unsigned> _max_width;
+  mutable vector<unsigned> _max_width;
+  //! table width (columns)
+  int _width;
   //! table drawing style
   TableStyle _style;
+  //! console screen width as retrieved by readline
+  int _screen_width;
+  //! whether to abbreviate the column if needed
+  vector<bool> _abbrev_col;
 };
 
 inline

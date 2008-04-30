@@ -2578,6 +2578,8 @@ void Zypper::doCommand()
         {
           // sort by name (can't sort by repo)
           t.sort(1);
+          if (!globalOpts().no_abbrev)
+            t.allowAbbrev(2);
         }
 
         cout << t; //! \todo out().table()?
