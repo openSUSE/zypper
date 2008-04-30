@@ -100,9 +100,7 @@ namespace zypp
     str << (obj.isRecommended() ? "r" : "" );
 
     str << (obj.isSuggested() ? "s" : "" );
-#ifdef HARDLOCKTEST
-    str << (obj.isUserLockQueryMatch() ?  "L" : "_" );
-#endif
+
     return str;
   }
 

@@ -21,7 +21,7 @@
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
-#include "zypp/PoolQuery.h"
+#include "zypp/PoolQueryResult.h"
 
 #include "zypp/sat/Pool.h"
 
@@ -30,6 +30,78 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  namespace resstatus
+  {
+    /** Manipulator for \ref ResStatus::UserLockQueryField.
+     * Field is not public available. It is intended to remember the
+     * initial lock status usually derived from /etc/zypp/locks. So
+     * we are able to detect changes we have to write back on commit.
+    */
+    struct UserLockQueryManip
+    {
+      /** Set lock and UserLockQuery bit according to \c yesno_r. */
+      static void setLock( ResStatus & status_r, bool yesno_r )
+      {
+        status_r.setLock( yesno_r, ResStatus::USER );
+        status_r.setUserLockQueryMatch( yesno_r );
+      }
+
+      /** Update lock and UserLockQuery bit IFF the item gained the bit. */
+      static void reapplyLock( ResStatus & status_r, bool yesno_r )
+      {
+        if ( yesno_r && ! status_r.isUserLockQueryMatch() )
+        {
+          status_r.setLock( yesno_r, ResStatus::USER );
+          status_r.setUserLockQueryMatch( yesno_r );
+        }
+      }
+
+      /** Test whether the lock status differs from the remembered UserLockQuery bit. */
+      static int diffLock( const ResStatus & status_r )
+      {
+        if ( status_r.isLocked() == status_r.isUserLockQueryMatch() )
+          return 0;
+        return status_r.isLocked() ? 1 : -1;
+      }
+
+    };
+  }
+
+  namespace
+  {
+    inline PoolQuery makeTrivialQuery( IdString ident_r )
+    {
+      sat::Solvable::SplitIdent ident( ident_r );
+
+      PoolQuery q;
+      q.addAttribute( sat::SolvAttr::name, ident.name().asString() );
+      q.addKind( ident.kind() );
+      q.setMatchExact();
+      q.setCaseSensitive(true);
+      return q;
+   }
+
+    inline bool hardLockQueriesRemove( pool::PoolTraits::HardLockQueries & activeLocks_r, IdString ident_r )
+    {
+      unsigned s( activeLocks_r.size() );
+      activeLocks_r.remove( makeTrivialQuery( ident_r ) );
+      return( activeLocks_r.size() != s );
+    }
+
+    inline bool hardLockQueriesAdd( pool::PoolTraits::HardLockQueries & activeLocks_r, IdString ident_r )
+    {
+      PoolQuery q( makeTrivialQuery( ident_r ) );
+      for_( it, activeLocks_r.begin(), activeLocks_r.end() )
+      {
+        if ( *it == q )
+          return false;
+      }
+      activeLocks_r.push_back( q );
+      return true;
+    }
+  }
+
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
@@ -147,9 +219,21 @@ namespace zypp
 
         void reapplyHardLocks() const
         {
-#ifdef HARDLOCKTEST
-          SEC << "reapplyHardLocks " << endl;
-#endif
+          // It is assumed that reapplyHardLocks is called after new
+          // items were added to the pool, but the _hardLockQueries
+          // did not change since. Action is to be performed only on
+          // those items that gained the bit in the UserLockQueryField.
+          MIL << "Re-apply " << _hardLockQueries.size() << " HardLockQueries" << endl;
+          PoolQueryResult locked;
+          for_( it, _hardLockQueries.begin(), _hardLockQueries.end() )
+          {
+            locked += *it;
+          }
+          MIL << "HardLockQueries match " << locked.size() << " Solvables." << endl;
+          for_( it, begin(), end() )
+          {
+            resstatus::UserLockQueryManip::reapplyLock( it->status(), locked.contains( *it ) );
+          }
         }
 
         void setHardLockQueries( const HardLockQueries & newLocks_r )
@@ -157,14 +241,57 @@ namespace zypp
           MIL << "Apply " << newLocks_r.size() << " HardLockQueries" << endl;
           _hardLockQueries = newLocks_r;
           // now adjust the pool status
-          // TBD
+          PoolQueryResult locked;
+          for_( it, _hardLockQueries.begin(), _hardLockQueries.end() )
+          {
+            locked += *it;
+          }
+          MIL << "HardLockQueries match " << locked.size() << " Solvables." << endl;
+          for_( it, begin(), end() )
+          {
+            resstatus::UserLockQueryManip::setLock( it->status(), locked.contains( *it ) );
+          }
         }
 
-        void getHardLockQueries( HardLockQueries & activeLocks_r )
+        bool getHardLockQueries( HardLockQueries & activeLocks_r )
         {
           activeLocks_r = _hardLockQueries; // current queries
-          // TBD
-        }
+          // Now diff to the pool collecting names only.
+          // Thus added and removed locks are not necessarily
+          // disjoint. Added locks win.
+          typedef std::tr1::unordered_set<IdString> IdentSet;
+          IdentSet addedLocks;
+          IdentSet removedLocks;
+          for_( it, begin(), end() )
+          {
+            switch ( resstatus::UserLockQueryManip::diffLock( it->status() ) )
+            {
+              case 0:  // unchanged
+                break;
+              case 1:
+                addedLocks.insert( it->satSolvable().ident() );
+                break;
+              case -1:
+                removedLocks.insert( it->satSolvable().ident() );
+               break;
+            }
+          }
+          // now the bad part - adjust the queries
+          bool setChanged = false;
+          for_( it, removedLocks.begin(), removedLocks.end() )
+          {
+            if ( addedLocks.find( *it ) != addedLocks.end() )
+              continue; // Added locks win
+            if ( hardLockQueriesRemove( activeLocks_r, *it ) && ! setChanged )
+              setChanged = true;
+          }
+          for_( it, addedLocks.begin(), addedLocks.end() )
+          {
+            if ( hardLockQueriesAdd( activeLocks_r, *it ) && ! setChanged )
+              setChanged = true;
+          }
+          return setChanged;
+       }
 
       public:
         typedef PoolTraits::AutoSoftLocks          AutoSoftLocks;
@@ -237,10 +364,6 @@ namespace zypp
             sat::Pool pool( satpool() );
             bool addedItems = false;
 
-#ifdef HARDLOCKTEST
-#warning REMOVE FAKE REMOVE FAKE REMOVE FAKE REMOVE FAKE
-            addedItems = true;
-#endif
             if ( pool.capacity() != _store.capacity() )
             {
               _store.resize( pool.capacity() );

@@ -357,9 +357,11 @@ namespace zypp
       void setHardLockQueries( const HardLockQueries & newLocks_r );
 
       /** Suggest a new set of queries based on the current selection.
-       * (usually remembered on commit).
+       * (usually remembered on commit). Returns whether the sugested
+       * set differs from the one that was previously set via
+       * \ref setHardLockQueries.
        */
-      void getHardLockQueries( HardLockQueries & activeLocks_r );
+      bool getHardLockQueries( HardLockQueries & activeLocks_r );
       //@}
 
     private:
