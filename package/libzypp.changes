@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 30 14:19:16 CEST 2008 - jkupec@suse.cz
+
+- fixed filesystem::expandlink(Pathname) (bnc #368477)
+- r9906
+
+-------------------------------------------------------------------
 Tue Apr 29 16:37:19 CEST 2008 - schubi@suse.de
 
 - cleanup in return values of doUpgrade and doUpdate
