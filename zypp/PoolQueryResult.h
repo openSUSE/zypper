@@ -120,6 +120,13 @@ namespace zypp
       const_iterator end() const
       { return _result.end(); }
 
+      /** Test whether some item is in the result set. */
+      bool contains(sat::Solvable result_r ) const
+      { return( _result.find( result_r ) != _result.end() ); }
+      /** \overload */
+      bool contains( const PoolItem & result_r ) const
+      { return contains( result_r.satSolvable() ); }
+
     public:
       /** Clear the result. */
       void clear()
