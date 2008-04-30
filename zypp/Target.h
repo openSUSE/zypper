@@ -60,6 +60,11 @@ namespace zypp
     void buildCache();
 
     /**
+     * cleans the target cache (.solv files)
+     */
+    void cleanCache();
+
+   /**
      * load resolvables into the pool
      */
     void load();

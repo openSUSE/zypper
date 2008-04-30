@@ -118,7 +118,8 @@ namespace zypp
       // name,version,release: Script name must match 'name-version.release-' prefix
       //
 #warning needs to be reimplemented exception safe
-      void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
+#warning needs to take root prefix into account and execute chroot
+     void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
       {
 	// open the scripts directory
 

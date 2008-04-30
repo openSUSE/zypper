@@ -67,6 +67,9 @@ namespace zypp
   void Target::buildCache()
   { _pimpl->buildCache(); }
 
+  void Target::cleanCache()
+  { _pimpl->clearCache(); }
+
   void Target::load()
   { _pimpl->load(); }
 
