@@ -88,9 +88,9 @@ BOOST_AUTO_TEST_CASE(pathinfo_expandlink_test)
 
   // ---- valid link
 
-  // create a link to that file
+  // create a (relative!) link to that file
   Pathname link1(dir / "link1");
-  BOOST_CHECK_EQUAL( filesystem::symlink(file, link1), 0);
+  BOOST_CHECK_EQUAL( filesystem::symlink(file.basename(), link1), 0);
 
   // does the link expand to the file?
   BOOST_CHECK_EQUAL( file, filesystem::expandlink(link1) );
