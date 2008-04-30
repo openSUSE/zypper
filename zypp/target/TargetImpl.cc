@@ -282,6 +282,7 @@ namespace zypp
     : _root( root_r )
     , _requestedLocalesFile( home() / "RequestedLocales" )
     , _softLocksFile( home() / "SoftLocks" )
+    , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
       MIL << "Initialized target on " << _root << endl;
@@ -442,16 +443,27 @@ namespace zypp
       // to avoid undoing changes the application applied. We expect this
       // to happen on a bare metal installation only. An already existing
       // target should be loaded before its settings are changed.
-      const LocaleSet & requestedLocales( _requestedLocalesFile.locales() );
-      if ( ! requestedLocales.empty() )
       {
-        satpool.setRequestedLocales( requestedLocales );
+        const LocaleSet & requestedLocales( _requestedLocalesFile.locales() );
+        if ( ! requestedLocales.empty() )
+        {
+          satpool.setRequestedLocales( requestedLocales );
+        }
       }
-
-      const SoftLocksFile::Data & softLocks( _softLocksFile.data() );
-      if ( ! softLocks.empty() )
       {
-        ResPool::instance().setAutoSoftLocks( softLocks );
+        const SoftLocksFile::Data & softLocks( _softLocksFile.data() );
+        if ( ! softLocks.empty() )
+        {
+          ResPool::instance().setAutoSoftLocks( softLocks );
+        }
+      }
+      if ( ZConfig::instance().apply_locks_file() )
+      {
+        const HardLocksFile::Data & hardLocks( _hardLocksFile.data() );
+        if ( ! hardLocks.empty() )
+        {
+          ResPool::instance().setHardLockQueries( hardLocks );
+        }
       }
 
 
@@ -477,6 +489,12 @@ namespace zypp
         SoftLocksFile::Data newdata;
         pool_r.getActiveSoftLocks( newdata );
         _softLocksFile.setData( newdata );
+      }
+      if ( ZConfig::instance().apply_locks_file() )
+      {
+        HardLocksFile::Data newdata;
+        pool_r.getHardLockQueries( newdata );
+        _hardLocksFile.setData( newdata );
       }
 
       // Process packages:

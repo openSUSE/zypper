@@ -474,13 +474,17 @@ void sslk( const std::string & t = std::string() )
 {
   ResPool pool( ResPool::instance() );
   ostream & outs( SEC );
+  unsigned cnt = 0;
   outs << t << ": {" << endl;
   for_( it, pool.begin(), pool.end() )
   {
     if ( it->status().isLocked() )
+    {
       outs << "    " << *it << endl;
+      ++cnt;
+    }
   }
-  outs << '}' << endl;
+  outs << '}' << cnt << endl;
 }
 
 void ssup()
@@ -500,6 +504,15 @@ void ssup()
     PoolQuery q;
     q.addAttribute( sat::SolvAttr::name, "kde4*" );
     q.setMatchGlob();
+    dumpRange( DBG, q.begin(), q.end() ) << endl;
+    newLocks.push_back( q );
+  }
+  {
+    PoolQuery q;
+    q.addAttribute( sat::SolvAttr::name, "amarok" );
+    q.addKind( ResKind::package );
+    q.setMatchExact();
+    q.setCaseSensitive(true);
     dumpRange( DBG, q.begin(), q.end() ) << endl;
     newLocks.push_back( q );
   }
@@ -524,9 +537,6 @@ try {
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
-
-  ssup();
-  //sslk( "START" );
 
   if ( 1 )
   {
@@ -582,8 +592,6 @@ try {
         }
 
         USR << "pool: " << pool << endl;
-
-        sslk( nrepo.alias() );
       }
     }
   }
@@ -597,7 +605,6 @@ try {
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();
-      sslk( "TARGET" );
     }
   }
 
@@ -615,32 +622,14 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-  //ResPool pool( ResPool::instance() );
+  //ssup();
+  //sslk("X");
 
-  //
-  PoolQueryResult result( pool.byKindBegin<Package>(), pool.byKindEnd<Package>() );
-  MIL << result.size() << endl;
+  ResPool::HardLockQueries newLocks;
+  pool.getHardLockQueries( newLocks );
+  SEC << newLocks << endl;
 
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "[a-zA-Z]*" );
-    q.setMatchGlob();
-    result -= q;
-    MIL << result.size() << endl;
-  }
-  MIL << result << endl;
-
-  sat::WhatProvides poviders( Capability("3ddiag") );
-  result -= PoolQueryResult( poviders.begin(), poviders.end() );
-  MIL << result << endl;
-
-
-  result -= result;
-  MIL << result << endl;
+  install();
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

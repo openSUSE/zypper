@@ -6,18 +6,19 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/target/SoftLocksFile.h
+/** \file	zypp/target/HardLocksFile.h
  *
 */
-#ifndef ZYPP_TARGET_SOFTLOCKSFILE_H
-#define ZYPP_TARGET_SOFTLOCKSFILE_H
+#ifndef ZYPP_TARGET_HARDLOCKSFILE_H
+#define ZYPP_TARGET_HARDLOCKSFILE_H
 
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/IdString.h"
 #include "zypp/Pathname.h"
+#include "zypp/pool/PoolTraits.h"
+#include "zypp/PoolQuery.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,19 +29,20 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : SoftLocksFile
+    //	CLASS NAME : HardLocksFile
     //
-    /** Save and restore soft locks.
+    /** Save and restore hardlocks.
      */
-    class SoftLocksFile
+    class HardLocksFile
     {
-      friend std::ostream & operator<<( std::ostream & str, const SoftLocksFile & obj );
+      friend std::ostream & operator<<( std::ostream & str, const HardLocksFile & obj );
       public:
-        typedef std::tr1::unordered_set<IdString> Data;
+
+        typedef pool::PoolTraits::HardLockQueries Data;
 
       public:
         /** Ctor taking the file to read/write. */
-        SoftLocksFile( const Pathname & file_r )
+        HardLocksFile( const Pathname & file_r )
         : _file( file_r )
         {}
 
@@ -84,13 +86,16 @@ namespace zypp
         /** Helper testing whether two \ref Data differ. */
         bool differs( const Data & lhs, const Data & rhs ) const
         {
-
           if ( lhs.size() != rhs.size() )
             return true;
+          // Complete diff is too expensive and not necessary here.
+          // Just check for the same sequence of items.
+          Data::const_iterator rit = rhs.begin();
           for_( it, lhs.begin(), lhs.end() )
           {
-            if ( rhs.find( *it ) == rhs.end() )
+            if ( *it != *rit )
               return true;
+            ++rit;
           }
           return false;
         }
@@ -105,8 +110,8 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates SoftLocksFile Stream output */
-    std::ostream & operator<<( std::ostream & str, const SoftLocksFile & obj );
+    /** \relates HardLocksFile Stream output */
+    std::ostream & operator<<( std::ostream & str, const HardLocksFile & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace target
@@ -114,4 +119,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_TARGET_SOFTLOCKSFILE_H
+#endif // ZYPP_TARGET_HARDLOCKSFILE_H

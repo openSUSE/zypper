@@ -30,6 +30,7 @@
 #include "zypp/target/TargetException.h"
 #include "zypp/target/RequestedLocalesFile.h"
 #include "zypp/target/SoftLocksFile.h"
+#include "zypp/target/HardLocksFile.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -154,6 +155,8 @@ namespace zypp
       RequestedLocalesFile _requestedLocalesFile;
       /** Soft-locks database */
       SoftLocksFile _softLocksFile;
+      /** Hard-Locks database */
+      HardLocksFile _hardLocksFile;
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;

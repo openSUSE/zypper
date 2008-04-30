@@ -180,12 +180,11 @@ namespace zypp
   public:
 
    /**
-    * \short Apply persistant locks to current pool.
-    * Call this before solving
-    *
-    * \returns Number of items locked
+    * \deprecated Persistent locks are automatically maintained, kept in the pool, loaded and saved together with the Target.
+    * \ref ZConfig::apply_locks_file tells whether locks are applied or not.
     */
-   int applyLocks();
+    ZYPP_DEPRECATED int applyLocks()
+    { return 0; }
 
   protected:
     /** Dtor */

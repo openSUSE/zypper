@@ -22,7 +22,6 @@
 #include "zypp/NVRAD.h"
 #include "zypp/DiskUsageCounter.h"
 #include "zypp/NameKindProxy.h"
-#include "zypp/Locks.h"
 #include "zypp/ZConfig.h"
 #include "zypp/sat/Pool.h"
 #include "zypp/PoolItem.h"
@@ -177,27 +176,6 @@ namespace zypp
       return zypp_tmp_dir.path();
     }
 
-    int ZYppImpl::applyLocks()
-    {
-      if (!ZConfig::instance().apply_locks_file())
-        return 0;
-
-      //TODO catch posibble exceptions
-      Locks::instance().readAndApply();
-
-      //current locks api doesn't support counting locked solvables
-      //so count it after
-      int count = 0;
-      for_(it, sat::Pool::instance().solvablesBegin(),
-          sat::Pool::instance().solvablesEnd())
-      {
-        PoolItem i(*it);
-        if ( i.status().isLocked() )
-          count++;
-      }
-
-      return count;
-    }
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

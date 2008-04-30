@@ -564,6 +564,7 @@ INSTALL(  FILES
 SET( zypp_target_SRCS
   target/RequestedLocalesFile.cc
   target/SoftLocksFile.cc
+  target/HardLocksFile.cc
   target/CommitLog.cc
   target/CommitPackageCache.cc
   target/CommitPackageCacheImpl.cc
@@ -576,6 +577,7 @@ SET( zypp_target_SRCS
 SET( zypp_target_HEADERS
   target/RequestedLocalesFile.h
   target/SoftLocksFile.h
+  target/HardLocksFile.h
   target/CommitLog.h
   target/CommitPackageCache.h
   target/CommitPackageCacheImpl.h

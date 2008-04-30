@@ -111,8 +111,8 @@ namespace zypp
   void ResPool::setHardLockQueries( const HardLockQueries & newLocks_r )
   { _pimpl->setHardLockQueries( newLocks_r ); }
 
-  bool  ResPool::getHardLockQueries( HardLockQueries & activeLocks_r )
-  { return _pimpl->getHardLockQueries( activeLocks_r ); }
+  void ResPool::getHardLockQueries( HardLockQueries & activeLocks_r )
+  { _pimpl->getHardLockQueries( activeLocks_r ); }
 
 
   const pool::PoolTraits::ItemContainerT & ResPool::store() const

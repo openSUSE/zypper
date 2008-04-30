@@ -101,10 +101,6 @@ namespace zypp
       void setPartitions(const DiskUsageCounter::MountPointSet &mp);
       DiskUsageCounter::MountPointSet getPartitions() const;
 
-    public:
-
-      int applyLocks();
-
     private:
       /** */
       Target_Ptr _target;
