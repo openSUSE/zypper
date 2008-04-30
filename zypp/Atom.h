@@ -22,6 +22,9 @@ namespace zypp
   //
   //	CLASS NAME : Atom
   //
+  /**
+   * \deprecated class is obsolete
+   */
   class Atom : public ResObject
   {
   public:
@@ -33,7 +36,7 @@ namespace zypp
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
-    Atom( const sat::Solvable & solvable_r );
+    Atom( const sat::Solvable & solvable_r ) ZYPP_DEPRECATED;
     /** Dtor */
     virtual ~Atom();
   };

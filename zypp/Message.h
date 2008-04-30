@@ -24,6 +24,7 @@ namespace zypp
   //	CLASS NAME : Message
   //
   /** Class representing the message to be shown during update.
+   * \deprecated class is obsolete
   */
   class Message : public ResObject
   {
@@ -35,14 +36,14 @@ namespace zypp
 
   public:
     /** Get the text of the message */
-    TranslatedText text() const;
+    TranslatedText text() const ZYPP_DEPRECATED;
     /** Patch the message belongs to - if any */
-    ResTraits<Patch>::constPtrType patch() const;
+    ResTraits<Patch>::constPtrType patch() const ZYPP_DEPRECATED;
 
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
-    Message( const sat::Solvable & solvable_r );
+    Message( const sat::Solvable & solvable_r ) ZYPP_DEPRECATED;
     /** Dtor */
     virtual ~Message();
   };

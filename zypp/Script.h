@@ -23,7 +23,8 @@ namespace zypp
   //	CLASS NAME : Script
   //
   /** Class representing an update script.
-  */
+    * \deprecated class is obsolete
+ */
   class Script : public ResObject
   {
   public:
@@ -34,17 +35,17 @@ namespace zypp
 
   public:
      /** Check whether a script is available. */
-    bool doAvailable() const;
+    bool doAvailable() const ZYPP_DEPRECATED;
 
    /** Return an inlined script if available.
      * Otherwise it is available at \ref doScriptLocation.
      */
-    std::string doScriptInlined() const;
+    std::string doScriptInlined() const ZYPP_DEPRECATED;
 
     /** Location of the script, unless it is available inlined.
      * \see \ref doScriptInlined
      */
-    OnMediaLocation doScriptLocation() const;
+    OnMediaLocation doScriptLocation() const ZYPP_DEPRECATED;
 
     /** Check whether a script to undo the change is available. */
     bool undoAvailable() const;
@@ -52,17 +53,17 @@ namespace zypp
     /** Return an inlined undo script if available.
      * Otherwise it is available at \ref undoScriptLocation.
      */
-    std::string undoScriptInlined() const;
+    std::string undoScriptInlined() const ZYPP_DEPRECATED;
 
     /** Location of the undo script, unless it is available inlined.
      * \see \ref undoScriptInlined
      */
-    OnMediaLocation undoScriptLocation() const;
+    OnMediaLocation undoScriptLocation() const ZYPP_DEPRECATED;
 
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
-    Script( const sat::Solvable & solvable_r );
+    Script( const sat::Solvable & solvable_r ) ZYPP_DEPRECATED;
     /** Dtor */
     virtual ~Script();
   };

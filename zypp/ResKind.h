@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/Deprecated.h"
 #include "zypp/base/String.h"
 #include "zypp/IdStringType.h"
 
@@ -39,13 +40,13 @@ namespace zypp
       /** Value representing \c nokind (<tt>""</tt>)*/
       static const ResKind nokind;
 
-      static const ResKind atom;
-      static const ResKind message;
+      static const ResKind atom ZYPP_DEPRECATED;
+      static const ResKind message ZYPP_DEPRECATED;
       static const ResKind package;
       static const ResKind patch;
       static const ResKind pattern;
       static const ResKind product;
-      static const ResKind script;
+      static const ResKind script ZYPP_DEPRECATED;
       static const ResKind srcpackage;
       //@}
 
