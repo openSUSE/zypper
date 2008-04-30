@@ -259,8 +259,8 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> known = manager.knownRepositories();
-  bool founded = false;  
-  
+  bool founded = false;
+
   unsigned int number = 1; // repo number
   for (list<RepoInfo>::const_iterator known_it = known.begin();
       known_it != known.end(); ++known_it, number++)
@@ -283,7 +283,7 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
     catch(const url::UrlException &){}
 
   } // END for all known repos
-  
+
   return founded;
 }
 
@@ -313,13 +313,13 @@ void get_repos(Zypper & zypper,
 
     // repo found
     // is it a duplicate? compare by alias and URIs
-    //! \todo operator== in RepoInfo? 
+    //! \todo operator== in RepoInfo?
     bool duplicate = false;
     for (list<RepoInfo>::const_iterator repo_it = repos.begin();
         repo_it != repos.end(); ++repo_it)
     {
       bool equals = true;
-      
+
       // alias
       if (repo_it->alias() != repo.alias())
       {
@@ -892,12 +892,12 @@ void refresh_repos(Zypper & zypper)
       {
         string msg = boost::str(
           format(_("Skipping disabled repository '%s'")) % repo.name());
-  
+
         if (specified.empty())
           zypper.out().info(msg, Out::HIGH);
         else
           zypper.out().error(msg);
-  
+
         enabled_repo_count--;
         continue;
       }
@@ -1049,7 +1049,7 @@ void clean_repos(Zypper & zypper)
          it !=  repos.end(); ++it)
     {
       RepoInfo repo(*it);
-  
+
       if (!specified.empty())
       {
         bool found = false;
@@ -1060,7 +1060,7 @@ void clean_repos(Zypper & zypper)
             found = true;
             break;
           }
-  
+
         if (!found)
         {
           DBG << repo.alias() << "(#" << ") not specified,"
@@ -1069,7 +1069,7 @@ void clean_repos(Zypper & zypper)
           continue;
         }
       }
-  
+
       try
       {
         if( clean_metadata )
@@ -1115,7 +1115,8 @@ void clean_repos(Zypper & zypper)
     zypper.out().info(_("Cleaning installed packages cache."), Out::HIGH);
     try
     {
-      manager.cleanTargetCache();
+#warning NEED TO CALL Target::cleanCache()
+      // manager.cleanTargetCache();
     }
     catch (...)
     {
@@ -1303,7 +1304,7 @@ void add_repo_by_url( Zypper & zypper,
     repo.setType(RepoType(type));
 
   repo.setAlias(alias.empty() ? timestamp() : alias);
-  parsed_opts::const_iterator it = zypper.cOpts().find("name"); 
+  parsed_opts::const_iterator it = zypper.cOpts().find("name");
   if (it != zypper.cOpts().end())
     repo.setName(it->second.front());
   repo.addBaseUrl(url);
@@ -1519,7 +1520,7 @@ void modify_repo(Zypper & zypper, const string & alias)
         changed_autoref = true;
       repo.setAutorefresh(autoref);
     }
-    
+
     int prio = 0;
     parsed_opts::const_iterator tmp1;
     if ((tmp1 = zypper.cOpts().find("priority")) != zypper.cOpts().end())
