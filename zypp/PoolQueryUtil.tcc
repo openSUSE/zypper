@@ -19,6 +19,9 @@
 #include "zypp/Pathname.h"
 #include "zypp/PoolQuery.h"
 
+namespace zypp
+{
+
   /**
    * sends to output iterator all queries readed from file.
    *
@@ -70,4 +73,5 @@
     fout.close();
   }
 
+}
 #endif // ZYPP_POOLQUERYUTIL_H
