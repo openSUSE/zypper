@@ -1115,8 +1115,8 @@ void clean_repos(Zypper & zypper)
     zypper.out().info(_("Cleaning installed packages cache."), Out::HIGH);
     try
     {
-#warning NEED TO CALL Target::cleanCache()
-      // manager.cleanTargetCache();
+      init_target(zypper);
+      God->target()->cleanCache();
     }
     catch (...)
     {
