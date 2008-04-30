@@ -358,6 +358,7 @@ namespace zypp
           case CapDetail::CAP_AND:
           case CapDetail::CAP_OR:
           case CapDetail::CAP_WITH:
+          case CapDetail::CAP_ARCH:
             return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
             break;
           case CapDetail::CAP_NAMESPACE:
@@ -389,6 +390,7 @@ namespace zypp
       case CapDetail::CAP_OR:        return str << "OR"; break;
       case CapDetail::CAP_WITH:      return str << "WITH"; break;
       case CapDetail::CAP_NAMESPACE: return str << "NAMESPACE"; break;
+      case CapDetail::CAP_ARCH:      return str << "ARCH"; break;
    }
     return str << "UnknownCapRel";
   }
