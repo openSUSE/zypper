@@ -58,8 +58,6 @@ using namespace zypp;
 using namespace zypp::resfilter;
 using zypp::solver::detail::Helper;
 
-#define ZYPP_DB ( "/var/lib/zypp/db/" )
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -413,7 +411,6 @@ namespace zypp
       Pathname rpmsolv( Pathname::assertprefix( _root,
                         ZConfig::instance().repoSolvfilesPath() / satpool.systemRepoName() / "solv" ) );
       MIL << "adding " << rpmsolv << " to pool(" << satpool.systemRepoName() << ")" << endl;
-#warning PROBABLY CLEAR NONEMTY SYSTEM REPO
 
       // Providing an empty system repo, unload any old content
       Repository system( sat::Pool::instance().findSystemRepo() );

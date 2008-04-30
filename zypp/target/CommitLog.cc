@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/target/CommitLog.h"
+#include "zypp/PathInfo.h"
 #include "zypp/Date.h"
 
 using std::endl;
@@ -65,9 +66,14 @@ namespace zypp {
       if ( _refcnt )
         closeLog();
       _fname = fname_r;
+      if ( ! _fname.empty() )
+        filesystem::assert_dir( _fname.dirname() );
       if ( _refcnt )
         openLog();
     }
+
+    const Pathname & CommitLog::fname()
+    { return _fname; }
 
   } // namespace target
 } // namespace zypp

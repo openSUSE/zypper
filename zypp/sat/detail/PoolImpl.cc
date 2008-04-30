@@ -351,6 +351,7 @@ namespace zypp
 
             case CapDetail::REL_NONE:
             case CapDetail::CAP_WITH:
+            case CapDetail::CAP_ARCH:
               break; // unwanted
           }
         }

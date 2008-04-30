@@ -56,6 +56,7 @@ namespace zypp {
       ~CommitLog() { refDown(); }
       std::ostream & operator()( bool timestamp = false );
       static void setFname( const Pathname & fname_r );
+      static const Pathname & fname();
     };
     ///////////////////////////////////////////////////////////////////
 
