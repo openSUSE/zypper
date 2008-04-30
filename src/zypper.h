@@ -92,6 +92,10 @@ struct RuntimeData
   std::list<zypp::RepoInfo> additional_repos;
   int patches_count;
   int security_patches_count;
+  /**
+   * Used by requestMedia callback
+   * \todo but now it uses label, remove this variable?
+   */
   zypp::RepoInfo current_repo;
 
   std::list<zypp::SrcPackage::constPtr> srcpkgs_to_install;

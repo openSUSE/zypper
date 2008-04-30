@@ -80,7 +80,7 @@ namespace ZmartRecipients
             // You can also have a look at the regular expressions used to check the answer here:
             // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
             _("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
-            % gData.current_repo.name() % mediumNr);
+            % label % mediumNr);
         if (read_bool_answer(PROMPT_YN_MEDIA_CHANGE, request, false))
           return MediaChangeReport::RETRY; 
         else
