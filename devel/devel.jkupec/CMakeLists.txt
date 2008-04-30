@@ -23,3 +23,6 @@ TARGET_LINK_LIBRARIES( bridge zypp )
 
 ADD_EXECUTABLE( poolquery poolquery.cc )
 TARGET_LINK_LIBRARIES( poolquery zypp )
+
+ADD_EXECUTABLE( pathinfo pathinfo.cc )
+TARGET_LINK_LIBRARIES( pathinfo zypp )

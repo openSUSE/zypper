@@ -768,8 +768,9 @@ namespace zypp
 
       for (count = level_limit; info.isLink() && count; count--)
       {
-        DBG << "following symlink " << path << std::endl;
-        path = readlink(path);
+        DBG << "following symlink " << path;
+        path = path.dirname() / readlink(path);
+        DBG << "->" << path << std::endl;
         info = PathInfo(path, PathInfo::LSTAT);
       }
 
@@ -785,7 +786,7 @@ namespace zypp
         // check for a broken link
         if (PathInfo(path).isExist())
           return path;
-        // broken link, return and empty path
+        // broken link, return an empty path
         else
         {
           ERR << path << " is broken (expanded from " << path_r << ")" << endl;
