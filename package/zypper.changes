@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri May  2 13:22:02 CEST 2008 - jreidinger@suse.cz
+
+- implement keep-packages option to ar and mr
+- Implement mr filter by local, remote or protocol specific
+  repositories and all option (no filter). 
+- r9935
+
+-------------------------------------------------------------------
 Wed Apr 30 18:48:16 CEST 2008 - jkupec@suse.cz
 
 - abbreviate package summary in the search to fit screen width
