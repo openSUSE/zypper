@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri May  2 16:28:05 CEST 2008 - schubi@suse.de
+
+- Bugfix: keep states by user has been removed it the
+  package has not been installed BUT has been recommended by another package.
+  (bnc #385832)
+- rev 9938 
+
+-------------------------------------------------------------------
 Fri May  2 12:19:22 CEST 2008 - jreidinger@suse.cz
 
 - add isLocal function to Url which say if scheme is local or
