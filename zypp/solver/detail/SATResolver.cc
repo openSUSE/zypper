@@ -276,17 +276,7 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 	r = item.status().setToBeUninstalled (causer);
 	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") remove !" << r);
     }
-
-    // recommend/suggest
-    if (status.isRecommended()) {
-	item.status().setRecommended(true);
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") recommended !" << r);
-    }
-    else if (status.isSuggested()) {
-	item.status().setSuggested(true);
-	_XDEBUG("SATSolutionToPool(" << item << ", " << status << ") suggested !" << r);    	
-    }
-
+    
     return;
 }
 
@@ -512,9 +502,8 @@ SATResolver::solving()
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
-	  ResStatus status = poolItem.status();
-	  status.setRecommended (true);
-	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
+	  poolItem.status().setRecommended(true);
+	  _XDEBUG("SATSolutionToPool(" << poolItem << ") recommended !");	  
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
@@ -530,9 +519,8 @@ SATResolver::solving()
 
       PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
-	  ResStatus status = poolItem.status();
-	  status.setSuggested (true);
-	  SATSolutionToPool (poolItem, status, ResStatus::SOLVER);
+	  poolItem.status().setSuggested(true);
+	  _XDEBUG("SATSolutionToPool(" << poolItem << ") suggested !");
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
@@ -603,7 +591,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 	if (id == ID_NULL) {
 	    ERR << "Weaken: " << *iter << " not found" << endl;
 	}
-	MIL << "Weaken dependencies of " << *iter << " with the SAT-Pool ID: " << id << endl;
+	MIL << "Weaken dependencies of " << *iter << endl;
 	queue_push( &(_jobQueue), SOLVER_WEAKEN_SOLVABLE_DEPS );
         queue_push( &(_jobQueue), id );	
     }
@@ -634,14 +622,14 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
-	MIL << "Install " << *iter << " with the SAT-Pool ID: " << id << endl;
+	MIL << "Install " << *iter << endl;
 	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
         queue_push( &(_jobQueue), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
-	MIL << "Delete " << *iter << " with the string ID: " << ident << endl;
+	MIL << "Delete " << *iter << endl;
 	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(_jobQueue), ident);
     }
@@ -661,11 +649,11 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Lock installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Lock installed item " << *iter << endl;
 	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Lock NOT installed item " << *iter << endl;
 	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	}
@@ -674,11 +662,11 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); iter++) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Keep installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Keep installed item " << *iter << endl;
 	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK);
 	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Keep NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Keep NOT installed item " << *iter << ident << endl;
 	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK);
 	    queue_push( &(_jobQueue), ident );
 	}
@@ -715,24 +703,24 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
 	}
-	MIL << "Install " << *iter << " with the SAT-Pool ID: " << id << endl;
+	MIL << "Install " << *iter << endl;
 	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
         queue_push( &(_jobQueue), id );
     }
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
-	MIL << "Delete " << *iter << " with the string ID: " << ident << endl;
+	MIL << "Delete " << *iter << ident << endl;
 	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
 	queue_push( &(_jobQueue), ident);
     }
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Lock installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Lock installed item " << *iter << ident << endl;
 	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Lock NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Lock NOT installed item " << *iter << ident << endl;
 	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	}
@@ -740,11 +728,11 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
     for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); iter++) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Keep installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Keep installed item " << *iter << ident << endl;
 	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK);
 	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Keep NOT installed item " << *iter << " with the string ID: " << ident << endl;
+	    MIL << "Keep NOT installed item " << *iter << endl;
 	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK);
 	    queue_push( &(_jobQueue), ident );
 	}
