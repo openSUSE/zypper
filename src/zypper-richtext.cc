@@ -76,6 +76,7 @@ string closeTag(vector<tags>& tagStack)
   if(tagStack.empty())
   {
     WAR << "closing tag before any opening" << endl;;
+    return "";
   }
   tags t = tagStack.back();
   tagStack.pop_back();
@@ -111,9 +112,14 @@ string openTag(vector<tags>& tagStack, string& tag)
   tagStack.push_back(t);
   switch(t)
   {
+    case HR:
+      tagStack.pop_back(); //hr haven't closing tag
+      return "--------------------";
+    
     case PARAGRAPH:
       return "";
     case BREAK_LINE:
+      tagStack.pop_back(); //br haven't closing tag
       return "\n";
     case OL:
       ordered = true;
