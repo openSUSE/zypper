@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  2 12:19:22 CEST 2008 - jreidinger@suse.cz
+
+- add isLocal function to Url which say if scheme is local or
+  internet. 
+- r9932
+
+-------------------------------------------------------------------
 Fri May  2 09:36:18 CEST 2008 - jreidinger@suse.cz
 
 - cache decision for repository depend on his url.
