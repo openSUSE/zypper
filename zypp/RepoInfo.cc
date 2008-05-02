@@ -148,11 +148,10 @@ namespace zypp
   {
     if ( _pimpl->baseUrls.size()==0 ) //first url
     {
-      string scheme = url.getScheme();
-      if ( scheme == "http" || scheme == "ftp" || scheme == "smb" )
-        setKeepPackages(true);
-      else
+      if ( url.isLocal() )
         setKeepPackages(false);
+      else
+        setKeepPackages(true);
     }
 
     _pimpl->baseUrls.insert(url);

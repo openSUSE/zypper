@@ -22,6 +22,7 @@
 #include <arpa/inet.h>
 
 #include <iostream>
+#include <set>
 
 // in the Estonian locale, a-z excludes t, for example. #302525
 // http://en.wikipedia.org/wiki/Estonian_alphabet
@@ -428,6 +429,30 @@ namespace zypp
       return true;
     }
 
+    // ---------------------------------------------------------------
+    bool
+    UrlBase::isLocal() const
+    {
+      static std::set<std::string> remote;
+      if (remote.empty()) //fill set
+      {
+        remote.insert("http");
+        remote.insert("ftp");
+        remote.insert("smb");
+        remote.insert("ldap");
+        remote.insert("ldaps");
+        remote.insert("https");
+        remote.insert("sftp");
+        remote.insert("cifs");
+      }
+
+      if ( remote.find(getScheme())!=remote.end() )
+      {
+        return false;
+      }
+
+      return true;
+    }
 
     // ---------------------------------------------------------------
     std::string
