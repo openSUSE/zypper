@@ -137,3 +137,18 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   manager.buildCache(repo);
 }
 
+BOOST_AUTO_TEST_CASE(repo_seting_test)
+{
+  RepoInfo repo;
+  repo.setAlias("foo");
+  repo.addBaseUrl(string("http://test.org"));
+  BOOST_CHECK_MESSAGE( repo.keepPackages(), "http scheme is not cached");
+  repo.setBaseUrl(string("ftp://test.org"));
+  BOOST_CHECK_MESSAGE( repo.keepPackages(), "ftp scheme is not cached");
+  repo.setBaseUrl(string("smb://test.org"));
+  BOOST_CHECK_MESSAGE( repo.keepPackages(), "smb scheme is not cached");
+  repo.setBaseUrl(string("file:///test.txt"));
+  BOOST_CHECK_MESSAGE( !repo.keepPackages(), "file scheme is cached");
+  repo.setBaseUrl(string("http://test.org"));
+  BOOST_CHECK_MESSAGE( repo.keepPackages(), "cache is depend on second url.");
+}

@@ -146,6 +146,15 @@ namespace zypp
 
   RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
+    if ( _pimpl->baseUrls.size()==0 ) //first url
+    {
+      string scheme = url.getScheme();
+      if ( scheme == "http" || scheme == "ftp" || scheme == "smb" )
+        setKeepPackages(true);
+      else
+        setKeepPackages(false);
+    }
+
     _pimpl->baseUrls.insert(url);
     return *this;
   }
