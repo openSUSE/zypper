@@ -208,7 +208,7 @@ namespace zypp
             ZYPP_THROW( Exception("Can't copy " + tmp_file.asString() + " to " + dest_dir.asString()));
           }
 
-
+          media.releaseFile((*it_res)->location); //not needed anymore, only eat space
         }
         catch (Exception & excpt_r)
         {

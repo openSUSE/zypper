@@ -79,6 +79,25 @@ IMPL_PTR_TYPE(MediaSetAccess);
 //       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
 //       return file;
 
+  void MediaSetAccess::releaseFile( const OnMediaLocation & on_media_file )
+  {
+    releaseFile( on_media_file.filename(), on_media_file.medianr() );
+  }
+
+  void MediaSetAccess::releaseFile( const Pathname & file, unsigned media_nr)
+  {
+    media::MediaManager media_mgr;
+    media::MediaAccessId media;
+  
+    media = getMediaAccessId( media_nr);
+    DBG << "Going to release file " << file
+        << " from media number " << media_nr << endl;
+      
+    if ( ! media_mgr.isAttached(media) )
+      return; //disattached media is free
+      
+    media_mgr.releaseFile (media, file);
+  }
 
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {

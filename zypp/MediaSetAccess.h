@@ -131,6 +131,24 @@ namespace zypp
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
 
       /**
+       * Release file from media.
+       * This signal that file is not needed anymore.
+       *
+       * \param on_media_file location of the file on media
+       */
+      void releaseFile( const OnMediaLocation & on_media_file );
+
+      
+      /**
+       * Release file from media.
+       * This signal that file is not needed anymore.
+       *
+       * \param file path to the file relative to media URL
+       * \param media_nr the media number in the media set
+       */
+      void releaseFile(const Pathname & file, unsigned media_nr = 1 );
+
+      /**
        * Provides direcotry \a dir from media number \a media_nr.
        *
        * \param dir path to the directory relative to media URL
