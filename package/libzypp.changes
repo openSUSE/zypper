@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  2 16:36:04 CEST 2008 - jreidinger@suse.cz
+
+- release file after copy to cache as soon as possible.
+  (bnc #381311)
+- r9940 
+
+-------------------------------------------------------------------
 Fri May  2 16:28:05 CEST 2008 - schubi@suse.de
 
 - Bugfix: keep states by user has been removed it the
