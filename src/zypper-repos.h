@@ -80,7 +80,8 @@ void add_repo_by_url(Zypper & zypper,
                      const std::string & alias,
                      const std::string & type = "",
                      boost::tribool enabled = boost::indeterminate,
-                     boost::tribool autorefresh = boost::indeterminate);
+                     boost::tribool autorefresh = boost::indeterminate,
+                     boost::tribool keepPackages = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -94,7 +95,9 @@ void add_repo_by_url(Zypper & zypper,
 void add_repo_from_file(Zypper & zypper,
                         const std::string & repo_file_url,
                         boost::tribool enabled = boost::indeterminate,
-                        boost::tribool autorefresh = boost::indeterminate);
+                        boost::tribool autorefresh = boost::indeterminate,
+                        boost::tribool keepPackages = boost::indeterminate);
+
 
 /**
  * Add repository specified by \repo to system repositories. 
@@ -118,6 +121,18 @@ void rename_repo(Zypper & zypper,
  * \param alias repository alias
  */
 void modify_repo(Zypper & zypper, const std::string & alias);
+
+/**
+ * Modify all repositories properties.
+ * 
+ */
+void modify_all_repos(Zypper & zypper);
+
+/**
+ * Modify repositories which is matching filter options
+ * like all, local, remote or medium-type
+ */
+void modify_repos_by_option( Zypper & zypper );
 
 /**
  * Load both repository and target resolvables.

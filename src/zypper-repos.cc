@@ -3,10 +3,12 @@
 #include <boost/format.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
+#include <iterator>
 
 #include "zypp/ZYpp.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/String.h"
 
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
@@ -1293,7 +1295,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 void add_repo_by_url( Zypper & zypper,
                      const zypp::Url & url, const string & alias,
                      const string & type,
-                     tribool enabled, tribool autorefresh)
+                     tribool enabled, tribool autorefresh, tribool keepPackages)
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
@@ -1313,6 +1315,8 @@ void add_repo_by_url( Zypper & zypper,
     repo.setEnabled((enabled == true));
   if ( !indeterminate(autorefresh) )
     repo.setAutorefresh((autorefresh == false));
+  if ( !indeterminate(keepPackages) )
+    repo.setKeepPackages(keepPackages);
 
   add_repo(zypper, repo);
 }
@@ -1321,8 +1325,8 @@ void add_repo_by_url( Zypper & zypper,
 
 //! \todo handle zypp exceptions
 void add_repo_from_file( Zypper & zypper,
-                         const std::string & repo_file_url,
-                         tribool enabled, tribool autorefresh)
+                         const std::string & repo_file_url, tribool enabled,
+                         tribool autorefresh, tribool keepPackages)
 {
   //! \todo handle local .repo files, validate the URI
   Url url = make_url(repo_file_url);
@@ -1391,6 +1395,8 @@ void add_repo_from_file( Zypper & zypper,
       repo.setEnabled((enabled == true));
     if ( !indeterminate(autorefresh) )
       repo.setAutorefresh((autorefresh == false));
+    if ( !indeterminate(keepPackages) )
+      repo.setKeepPackages(keepPackages);
     MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
 
     add_repo(zypper, repo);
@@ -1453,7 +1459,81 @@ void rename_repo(Zypper & zypper,
 }
 
 // ----------------------------------------------------------------------------
+void modify_repos_by_option( Zypper & zypper )
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  const std::list<RepoInfo>& repos = manager.knownRepositories();
+  std::set<std::string> toModify;
 
+  if ( copts.count("all") )
+  {
+    for_(it, repos.begin(),repos.end())
+    {
+      string alias = it->alias();
+      modify_repo( zypper, alias );
+    }
+    return; //no more repository is possible
+  }
+  
+  if ( copts.count("local") )
+  {
+    for_(it, repos.begin(),repos.end())
+    {
+      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      {
+        if ( it2->isLocal() )
+        {
+          string alias = it->alias();
+          toModify.insert( alias );
+          break;
+        }
+      }
+    }
+  }
+
+  if ( copts.count("remote") )
+  {
+    for_(it, repos.begin(),repos.end())
+    {
+      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      {
+        if ( !it2->isLocal() )
+        {
+          string alias = it->alias();
+          toModify.insert( alias );
+          break;
+        }
+      }
+    }
+  }
+
+  if ( copts.count("medium-type") )
+  {
+    string par = copts["medium-type"].front();
+    std::set<string> scheme;
+    insert_iterator<std::set<string> > ii (scheme,scheme.begin());
+    str::split( par, ii, ",");
+
+    for_(it, repos.begin(),repos.end())
+    {
+      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      {
+        if ( scheme.find(it2->getScheme())!= scheme.end() )
+        {
+          string alias = it->alias();
+          toModify.insert( alias );
+          break;
+        }
+      }
+    }
+  }
+
+  for_(it, toModify.begin(), toModify.end())
+  {
+    modify_repo( zypper, *it );
+  }
+
+}
 void modify_repo(Zypper & zypper, const string & alias)
 {
   // tell whether currenlty processed options are contradicting each other
@@ -1499,6 +1579,24 @@ void modify_repo(Zypper & zypper, const string & alias)
   }
   DBG << "autoref = " << autoref << endl;
 
+  tribool keepPackages = indeterminate;
+  if (copts.count("keep-packages"))
+    keepPackages = true;
+  if (copts.count("no-keep-packages"))
+  {
+    if (keepPackages)
+    {
+      zypper.out().warning(boost::str(format(msg_contradition)
+          % "--keep-packages" % "--no-keep-package"));
+
+      keepPackages = indeterminate;
+    }
+    else
+      keepPackages = false;
+  }
+  DBG << "keepPackages = " << keepPackages << endl;
+
+
   try
   {
     RepoManager manager(zypper.globalOpts().rm_options);
@@ -1506,6 +1604,7 @@ void modify_repo(Zypper & zypper, const string & alias)
     bool chnaged_enabled = false;
     bool changed_autoref = false;
     bool changed_prio = false;
+    bool changed_keeppackages = false;
 
     if (!indeterminate(enable))
     {
@@ -1519,6 +1618,13 @@ void modify_repo(Zypper & zypper, const string & alias)
       if (autoref != repo.autorefresh())
         changed_autoref = true;
       repo.setAutorefresh(autoref);
+    }
+
+    if (!indeterminate(keepPackages))
+    {
+      if (keepPackages != repo.keepPackages())
+        changed_keeppackages = true;
+      repo.setKeepPackages(keepPackages);
     }
 
     int prio = 0;
@@ -1549,7 +1655,8 @@ void modify_repo(Zypper & zypper, const string & alias)
       }
     }
 
-    if (chnaged_enabled || changed_autoref || changed_prio)
+    if (chnaged_enabled || changed_autoref || changed_prio
+        || changed_keeppackages)
     {
       manager.modifyRepository(alias, repo);
 
@@ -1571,6 +1678,16 @@ void modify_repo(Zypper & zypper, const string & alias)
         else
           zypper.out().info(boost::str(format(
             _("Autorefresh has been disabled for repository '%s'.")) % alias));
+      }
+
+      if (changed_keeppackages)
+      {
+        if (repo.keepPackages())
+          zypper.out().info(boost::str(format(
+            _("Keep packages has been enabled for repository '%s'.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("Keep packages has been disabled for repository '%s'.")) % alias));
       }
 
       if (changed_prio)

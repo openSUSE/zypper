@@ -944,6 +944,8 @@ void Zypper::processCommandOptions()
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'x'},
       {"name", no_argument, 0, 'n'},
+      {"keep-packages", no_argument, 0, 'k'},
+      {"no-keep-packages", no_argument, 0, 'K'}, //TODO not documented
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -1067,6 +1069,12 @@ void Zypper::processCommandOptions()
       {"no-refresh", no_argument, 0, 'n'},
       {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
       {"priority", required_argument, 0, 'p'},
+      {"keep-packages", no_argument, 0, 'k'},
+      {"no-keep-packages", no_argument, 0, 'K'}, //TODO not documented
+      {"all", no_argument, 0, 'A' }, //TODO not documented
+      {"local", no_argument, 0, 'l' }, //TODO not documented
+      {"remote", no_argument, 0, 't' }, //TODO not documented
+      {"medium-type", required_argument, 0, 'm' }, //TODO not documented
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
@@ -1919,12 +1927,18 @@ void Zypper::doCommand()
     if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
 
+    tribool keepPackages;
+    if (copts.count("keep-packages"))
+      keepPackages = true;
+    else if (copts.count("no-keep-packages"))
+      keepPackages = false;
+
     try
     {
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        add_repo_from_file(*this,copts["repo"].front(), enabled);
+        add_repo_from_file(*this,copts["repo"].front(), enabled, keepPackages);
         return;
       }
   
@@ -1971,7 +1985,7 @@ void Zypper::doCommand()
         }
         else
         {
-          add_repo_from_file(*this,_arguments[0], enabled);
+          add_repo_from_file(*this,_arguments[0], enabled, keepPackages);
           break;
         }
       case 2:
@@ -2003,7 +2017,7 @@ void Zypper::doCommand()
         init_target(*this);
 
         add_repo_by_url(
-	    *this, url, _arguments[1]/*alias*/, type, enabled);
+	    *this, url, _arguments[1]/*alias*/, type, enabled, keepPackages);
         return;
       }
     }
@@ -2145,8 +2159,12 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_arguments.size() < 1)
+    bool non_alias = copts.count("all") || copts.count("local") || 
+        copts.count("remote") || copts.count("medium-type");
+
+    if (_arguments.size() < 1 && !non_alias)
     {
+      //TODO add all option to help text
       out().error(_("Alias is a required argument."));
       ERR << "No alias argument given." << endl;
       out().info(_command_help);
@@ -2154,23 +2172,31 @@ void Zypper::doCommand()
       return;
     }
     // too many arguments
-    if (_arguments.size() > 1)
+    if (_arguments.size() > 1
+       || (_arguments.size() > 0 && non_alias))
     {
       report_too_many_arguments(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-  
-    RepoInfo repo;
-    if (match_repo(*this,_arguments[0],&repo))
+    
+    if (non_alias)
     {
-      modify_repo(*this, repo.alias());
+      modify_repos_by_option(*this);
     }
-    else 
+    else
     {
-      out().error(
-        boost::str(format(_("Repository %s not found.")) % _arguments[0]));
-      ERR << "Repo " << _arguments[0] << " not found" << endl;
+      RepoInfo repo;
+      if (match_repo(*this,_arguments[0],&repo))
+      {
+        modify_repo(*this, repo.alias());
+      }
+      else 
+      {
+        out().error(
+          boost::str(format(_("Repository %s not found.")) % _arguments[0]));
+        ERR << "Repo " << _arguments[0] << " not found" << endl;
+      }
     }
     
     break;
@@ -2338,6 +2364,7 @@ void Zypper::doCommand()
       repo.setAutorefresh(true);
       repo.setAlias(TMP_RPM_REPO_ALIAS);
       repo.setName(_("Plain RPM files cache"));
+      repo.setKeepPackages(false);
 
       // shut up zypper
       Out::Verbosity tmp = out().verbosity();
