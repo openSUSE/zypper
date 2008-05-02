@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  2 09:36:18 CEST 2008 - jreidinger@suse.cz
+
+- cache decision for repository depend on his url.
+- http,ftp and smb cache packages. 
+- revision 9929
+
+-------------------------------------------------------------------
 Thu May  1 00:50:51 CEST 2008 - ma@suse.de
 
 - Load and maintain persistent hard locks stored in /etc/zypp/locks.
