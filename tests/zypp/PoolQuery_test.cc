@@ -226,6 +226,20 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
 }
 
 
+// match whole words
+BOOST_AUTO_TEST_CASE(pool_query_007)
+{
+  cout << "****007***"  << endl;
+
+  PoolQuery q;
+  q.addString("zypp");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchWord();
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+}
+
+
 // match by installed status (basically by system vs. repo)
 BOOST_AUTO_TEST_CASE(pool_query_050)
 {
@@ -407,7 +421,7 @@ BOOST_AUTO_TEST_CASE(pool_query_302)
 }
 
 /////////////////////////////////////////////////////////////////////////////
-//  4xx repo kind queries (addKind(ResKind))
+//  4xx kind queries (addKind(ResKind))
 /////////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_CASE(pool_query_400)
@@ -432,6 +446,88 @@ BOOST_AUTO_TEST_CASE(pool_query_401)
   q.setMatchGlob();
 
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////
+//  5xx multiple string/attribute queries
+/////////////////////////////////////////////////////////////////////////////
+
+// multiple strings for one attribute
+BOOST_AUTO_TEST_CASE(pool_query_500)
+{
+  cout << "****500.1****"  << endl;
+  PoolQuery q;
+  q.addString("zypper");
+  q.addString("apt");
+  q.addAttribute(sat::SolvAttr::name);
+  q.setMatchExact();
+  // creates: ^(apt|zypper)$
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+
+  cout << "****500.2****"  << endl;
+  q.addString("*zy?p");
+  q.setMatchGlob();
+  // creates: ^(.*zy.p|apt|zypper)$
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 16);
+  
+  cout << "****500.3****"  << endl;
+  PoolQuery q1;
+  q1.addString("^libsm[a-z]*[0-9]$");
+  q1.addAttribute(sat::SolvAttr::name, "os.libs$");
+  q1.addKind(ResKind::package);
+  q1.setMatchRegex();
+  // creates: (^libsm[a-z]*[0-9]$|os.libs$)
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 3);
+
+  cout << "****500.4****"  << endl;
+  PoolQuery q2;
+  q2.addString("thunder");
+  q2.addAttribute(sat::SolvAttr::name, "sun");
+  q2.addKind(ResKind::package);
+  q2.addRepo("factory");
+  q2.setCaseSensitive();
+  // creates: (sun|thunder)
+  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 2);
+
+  cout << "****500.5****"  << endl;
+  PoolQuery q3;
+  q3.addString("zypp");
+  q3.addAttribute(sat::SolvAttr::name, "zip");
+  q3.addKind(ResKind::package);
+  q3.addRepo("factory");
+  q3.setMatchWord();
+  // creates: \b(zip|zypp)\b
+  BOOST_CHECK(std::for_each(q3.begin(), q3.end(), PrintAndCount())._count == 4);
+}
+
+// multiple strings, multiple attributes, same strings
+BOOST_AUTO_TEST_CASE(pool_query_501)
+{
+  cout << "****501****"  << endl;
+  PoolQuery q;
+  q.addString("thunder");
+  q.addString("storm");
+  q.addAttribute(sat::SolvAttr::name);
+  q.addAttribute(sat::SolvAttr::description);
+  q.addKind(ResKind::package);
+  q.addRepo("factory");
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
+}
+
+// multiple strings, multiple attributes, same strings
+BOOST_AUTO_TEST_CASE(pool_query_502)
+{
+  cout << "****502****"  << endl;
+  PoolQuery q;
+  q.addString("weather");
+  q.addAttribute(sat::SolvAttr::name, "thunder");
+  q.addAttribute(sat::SolvAttr::description, "storm");
+  q.addKind(ResKind::package);
+  q.addRepo("factory");
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
 }
 
 /*

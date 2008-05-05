@@ -9,6 +9,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/Arch.h"
 #include "zypp/Pathname.h"
+#include "zypp/base/Regex.h"
 
 using std::cout;
 using std::endl;
@@ -46,14 +47,23 @@ static void init_pool()
 
 int main (int argc, const char ** argv)
 {
+  // ./poolquery regex string
+  if (argc == 3)
+  {
+    str::regex regex(argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE | REG_ICASE);
+    cout << (str::regex_match(argv[2], regex) ? "" : "no") << "match" << endl;
+  }
+
   init_pool();
 
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "novell");
-  q.addAttribute(sat::SolvAttr::summary, "package management");
+  q.addString("weather");
+  q.addAttribute(sat::SolvAttr::name, "thunder");
+  q.addAttribute(sat::SolvAttr::description, "storm");
+  q.addKind(ResKind::package);
+  q.addRepo("factory");
 
   std::for_each(q.begin(), q.end(), &result_cb);
-
-  cout << q.size() << endl;
+//  cout << q.size() << endl;
   cout << q << endl;
 }

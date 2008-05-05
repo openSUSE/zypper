@@ -161,6 +161,12 @@ namespace zypp
       invokeOnEach(_attrs.begin()->second.begin(), _attrs.begin()->second.end(), EmptyFilter(), MyInserter(joined));
       _rcstrings = createRegex(joined);
       _rcattrs.insert(pair<sat::SolvAttr, string>(_attrs.begin()->first, string()));
+      // switch to regex for multiple strings
+      if (joined.size() > 1)
+        _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
+      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
+        /* We feed multiple lines eventually (e.g. authors or descriptions), so set REG_NEWLINE. */
+        _regex = str::regex(_rcstrings, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
     }
 
     // // MULTIPLE ATTRIBUTES
@@ -220,6 +226,10 @@ attremptycheckend:
         for_(ai, _attrs.begin(), _attrs.end())
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, string()));
 
+        // switch to regex for multiple strings
+        if (joined.size() > 1)
+          _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
+
         if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
           /* We feed multiple lines eventually (e.g. authors or descriptions), so set REG_NEWLINE. */
           _regex = str::regex(_rcstrings, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
@@ -238,7 +248,10 @@ attremptycheckend:
           invokeOnEach(ai->second.begin(), ai->second.end(), EmptyFilter(), MyInserter(joined));
           string s = createRegex(joined);
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, s));
-
+          
+          // switch to regex for multiple strings
+          if (joined.size() > 1)
+            _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
           if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX)
           {
             str::regex regex(s, REG_EXTENDED | REG_NOSUB | REG_NEWLINE | (_cflags & SEARCH_NOCASE ? REG_ICASE : 0));
@@ -257,6 +270,7 @@ attremptycheckend:
     DBG << asString() << endl;
   }
 
+
   /**
    * Converts '*' and '?' wildcards within str into their regex equivalents.
    */
@@ -264,8 +278,6 @@ attremptycheckend:
   {
     string regexed = str;
 
-    str::regex all("\\*"); // regex to search for '*'
-    str::regex one("\\?"); // regex to search for '?'
     string r_all(".*"); // regex equivalent of '*'
     string r_one(".");  // regex equivalent of '?'
     string::size_type pos;
@@ -277,8 +289,6 @@ attremptycheckend:
     // replace all "?" in input with "."
     for (pos = 0; (pos = regexed.find('?', pos)) != std::string::npos; ++pos)
       regexed = regexed.replace(pos, 1, r_one);
-
-    DBG << " -> " << regexed << endl;
 
     return regexed;
   }
@@ -295,10 +305,7 @@ attremptycheckend:
 
     if (container.size() == 1)
     {
-      if (_match_word)
-        return ".*" + WB + *container.begin() + WB + ".*";
-
-      return *container.begin();
+      return WB + *container.begin() + WB;
     }
 
     // multiple strings
@@ -309,21 +316,22 @@ attremptycheckend:
 
     if (use_wildcards)
       tmp = wildcards2regex(*it);
+    else
+      tmp = *it;
 
     if (_require_all)
     {
-      if (!(_cflags & SEARCH_STRING)) // not match exact
+      if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
         tmp += ".*" + WB + tmp;
       rstr = "(?=" + tmp + ")";
     }
     else
     {
-      if (_cflags & SEARCH_STRING) // match exact
+      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_STRING || // match exact
+          (_cflags & SEARCH_STRINGMASK) == SEARCH_GLOB)     // match glob
         rstr = "^";
-      else
-        rstr = ".*" + WB;
 
-      rstr += "(" + tmp;
+      rstr += WB + "(" + tmp;
     }
 
     ++it;
@@ -332,10 +340,12 @@ attremptycheckend:
     {
       if (use_wildcards)
         tmp = wildcards2regex(*it);
+      else
+        tmp = *it;
 
       if (_require_all)
       {
-        if (!(_cflags & SEARCH_STRING)) // not match exact
+        if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
           tmp += ".*" + WB + tmp;
         rstr += "(?=" + tmp + ")";
       }
@@ -347,16 +357,15 @@ attremptycheckend:
 
     if (_require_all)
     {
-      if (!(_cflags & SEARCH_STRING)) // not match exact
+      if ((_cflags & SEARCH_STRINGMASK) != SEARCH_STRING) // not match exact
         rstr += WB + ".*";
     }
     else
     {
-      rstr += ")";
-      if (_cflags & SEARCH_STRING) // match exact
+      rstr += ")" + WB;
+      if ((_cflags & SEARCH_STRINGMASK) == SEARCH_STRING || // match exact
+          (_cflags & SEARCH_STRINGMASK) == SEARCH_GLOB)     // match glob
         rstr += "$";
-      else
-        rstr += WB + ".*";
     }
 
     return rstr;
@@ -668,6 +677,7 @@ attremptycheckend:
               }
               else
                 regex_p = _regex.get();
+
               matches = ::dataiterator_match(base().get(), _flags, regex_p);
             }
             else
@@ -680,8 +690,8 @@ attremptycheckend:
               // if (matches)
 	      /* After calling dataiterator_match (with any string matcher set)
 	         the kv.str member will be filled with something sensible.  */
-              /* INT << "value: " << base().get()->kv.str << endl
-                  << " mstr: " <<  sstr << endl; */
+               /*INT << "value: " << base().get()->kv.str << endl
+                  << " str: " <<  _str << endl;*/
           }
         }
       }
