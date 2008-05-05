@@ -233,7 +233,7 @@ Resolver::solverInit()
 	
 	if (_upgradeMode) {
 	    _satResolver->setAllowdowngrade(true);
-	    _satResolver->setUpdatesystem(true);
+	    _satResolver->setUpdatesystem(false); // not needed cause packages has already been evaluteted by distupgrade
 	    _satResolver->setDosplitprovides(true);   
 	}
 
