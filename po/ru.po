@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-15 11:35+0200\n"
-"PO-Revision-Date: 2008-04-23 23:34+0400\n"
+"PO-Revision-Date: 2008-04-27 01:04+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1189,7 +1189,7 @@ msgstr "не установлен"
 
 #: ../src/zypper-info.cc:152
 msgid "Installed Size: "
-msgstr "Размер после установки:"
+msgstr "Размер после установки: "
 
 #: ../src/zypper-info.cc:190
 msgid "broken"
@@ -1223,7 +1223,7 @@ msgstr "Требуется перезапуск: "
 
 #: ../src/zypper-info.cc:204
 msgid "Interactive: "
-msgstr "Интерактивно: "
+msgstr "Интерактивный: "
 
 #: ../src/zypper-info.cc:208
 msgid "Provides:"
@@ -2035,7 +2035,7 @@ msgstr "Проверяется, обновлять ли метаданные д�
 #: ../src/zypper-repos.cc:86
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "Репозитарий '%s' обновлен."
+msgstr "Репозитарий '%s' актуален."
 
 #: ../src/zypper-repos.cc:90
 #, c-format

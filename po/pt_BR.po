@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 12:51+0200\n"
-"PO-Revision-Date: 2008-04-28 02:58-0300\n"
+"PO-Revision-Date: 2008-04-30 20:14-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,8 +82,8 @@ msgid ""
 msgstr ""
 "  Opções Globais:\n"
 "\t--help, -h\t\tAjuda.\n"
-"\t--version, -V\t\tMostra o número da versão.\n"
-"\t--quiet, -q\t\tSuprime a saída comum, mostra apenas mensagens de erro.\n"
+"\t--version, -V\t\tExibe o número da versão.\n"
+"\t--quiet, -q\t\tSuprime a saída comum, exibe apenas mensagens de erro.\n"
 "\t--verbose, -v\t\tAumentar o detalhamento.\n"
 "\t--terse, -t\t\t Saída concisa para o consumo de máquina.\n"
 "\t--table-style, -s\tEstilo da tabela (inteiro).\n"
@@ -125,7 +125,7 @@ msgid ""
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
 "  Comandos:\n"
-"\thelp, ?\t\t\tMostra a ajuda.\n"
+"\thelp, ?\t\t\tExibe a ajuda.\n"
 "\tshell, sh\t\tAceita múltiplos comandos por vez.\n"
 
 #: ../src/zypper.cc:177
@@ -144,7 +144,7 @@ msgstr ""
 "\taddrepo, ar\t\tAdicionar um novo repositório.\n"
 "\tremoverepo, rr\t\tRemover um repositório especificado.\n"
 "\trenamerepo, nr\t\tRenomear um repositório especificado.\n"
-"\tmodifyrepo, mr\t\tModificar um repositório especificado.\n"
+"\tmodifyrepo, mr\t\tAlterar um repositório especificado.\n"
 "\trefresh, ref\t\tAtualizar todos os repositórios.\n"
 "\tclean\t\t\tLimpar os caches locais.\n"
 
@@ -184,10 +184,10 @@ msgid ""
 msgstr ""
 "\tPesquisando:\n"
 "\tsearch, se\t\tProcurar por pacotes que coincidam com um padrão.\n"
-"\tinfo, if\t\tMostrar todas as informações dos pacotes especificados.\n"
-"\tpatch-info\t\tMostrar todas as informações das correções especificadas.\n"
-"\tpattern-info\t\tMostrar todas as informações dos padrões especificados.\n"
-"\tproduct-info\t\tMostrar todas as informações dos produtos especificados.\n"
+"\tinfo, if\t\tExibir todas as informações dos pacotes especificados.\n"
+"\tpatch-info\t\tExibir todas as informações das correções especificadas.\n"
+"\tpattern-info\t\tExibir todas as informações dos padrões especificados.\n"
+"\tproduct-info\t\tExibir todas as informações dos produtos especificados.\n"
 "\tpatch-check, pchk\tVerificar por correções.\n"
 "\tlist-updates, lu\tListar as atualizações disponíveis.\n"
 "\tpatches, pch\t\tListar todas as correções disponíveis.\n"
@@ -221,7 +221,7 @@ msgstr ""
 #: ../src/zypper.cc:241
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Digite '%s' para mostrar uma lista com as opções e comandos globais."
+msgstr "Digite '%s' para exibir uma lista com as opções e comandos globais."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -251,7 +251,7 @@ msgstr "Entrando no modo não-interativo."
 
 #: ../src/zypper.cc:402
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Entrando no modo sem checagem gpg ('no-gpg-checks')."
+msgstr "Entrando no modo sem verificação gpg ('no-gpg-checks')."
 
 #: ../src/zypper.cc:412
 msgid "The path specified in the --root option must be absolute."
@@ -460,9 +460,9 @@ msgstr ""
 "\n"
 "  Opções de comando:\n"
 "-e, --export <ARQUIVO.repo>  Exporta todos os repositórios definidos como um único arquivo local .repo.\n"
-"-u, --uri                 Mostrar também a URL base dos repositórios.\n"
-"-p, --priority            Mostrar também a prioridade do repositório.\n"
-"-d, --details             Mostrar mais informações como a URL, prioridade e tipo.\n"
+"-u, --uri                 Exibir também a URL base dos repositórios.\n"
+"-p, --priority            Exibir também a prioridade do repositório.\n"
+"-d, --details             Exibir mais informações como a URL, prioridade e tipo.\n"
 "-U, --sort-by-uri         Ordenar a lista pela URL.\n"
 "-P, --sort-by-priority    Ordenar a lista pela prioridade do repositório.\n"
 "-A, --sort-by-alias       Ordenar a lista pelo apelido.\n"
@@ -515,7 +515,7 @@ msgid ""
 msgstr ""
 "modifyrepo (mr) <opções> <apelido|#|URL>\n"
 "\n"
-"Modifica as propriedades do repositório especificado pelo apelido, número ou URL.\n"
+"Alterar as propriedades do repositório especificado pelo apelido, número ou URL.\n"
 "\n"
 "  Opções de commando:\n"
 "-d, --disable             Desabilitar repositório (mas não o remove)\n"
@@ -709,13 +709,13 @@ msgstr ""
 "    --match-exact          Procura por um nome exato de pacote\n"
 "-d, --search-descriptions  Procura também nos resumos e descrições dos pacotes.\n"
 "-C, --case-sensitive       Realizar pesquisa diferenciando minúsculas e maiúsculas.\n"
-"-i, --installed-only       Mostrar apenas pacotes já instalados.\n"
-"-u, --uninstalled-only     Mostrar apenas pacotes ainda não instalados.\n"
+"-i, --installed-only       Exibir apenas pacotes já instalados.\n"
+"-u, --uninstalled-only     Exibir apenas pacotes ainda não instalados.\n"
 "-t, --type <tipo>          Pesquisa pacotes apenas do tipo especificado.\n"
 "-r,  --repo <apelido|#|URL>   Pesquisa apenas no repositório especificado.\n"
 "    --sort-by-name         Listar os pacotes pelo nome (padrão).\n"
 "    --sort-by-repo         Listar os pacotes pelo repositório.\n"
-"    --details              Mostrar cada versão disponível em cada repositório\n"
+"    --details              Exibir cada versão disponível em cada repositório\n"
 "                           em uma linha separada.\n"
 "\n"
 "Os caracteres curinga * e ? também podem ser utilizados dentro das strings de pesquisa.\n"
@@ -776,8 +776,8 @@ msgstr ""
 "  Opções de comando:\n"
 "\n"
 "-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Mostrar apenas os pacotes instalados.\n"
-"-u, --uninstalled-only    Mostrar apenas os pacotes que não estão instalados.\n"
+"-i, --installed-only      Exibir apenas os pacotes instalados.\n"
+"-u, --uninstalled-only    Exibir apenas os pacotes que não estão instalados.\n"
 "-N, --sort-by-name        Ordenar a lista pelo nome do pacote.\n"
 "-R, --sort-by-repo        Ordenar a lista pelo repositório.\n"
 
@@ -800,8 +800,8 @@ msgstr ""
 "  Opções de comando:\n"
 "\n"
 "-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Mostrar apenas os padrões instalados.\n"
-"-u, --uninstalled-only    Mostrar apenas os padrões que não estão instalados.\n"
+"-i, --installed-only      Exibir apenas os padrões instalados.\n"
+"-u, --uninstalled-only    Exibir apenas os padrões que não estão instalados.\n"
 
 #: ../src/zypper.cc:1427
 msgid ""
@@ -822,8 +822,8 @@ msgstr ""
 "  Opções de comando:\n"
 "\n"
 "-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Mostrar apenas os produtos instalados.\n"
-"-u, --uninstalled-only    Mostrar apenas os produtos que não estão instalados.\n"
+"-i, --installed-only      Exibir apenas os produtos instalados.\n"
+"-u, --uninstalled-only    Exibir apenas os produtos que não estão instalados.\n"
 
 #: ../src/zypper.cc:1452
 #, c-format
@@ -839,7 +839,7 @@ msgid ""
 msgstr ""
 "info <nome> ...\n"
 "\n"
-"Mostrar informações detalhadas dos pacotes\n"
+"Exibir informações detalhadas dos pacotes\n"
 "\n"
 "  Opções de comando:\n"
 "-r, --repo <apelido|#|URL>  Trabalhar somente com o repositório especificado.\n"
@@ -857,7 +857,7 @@ msgid ""
 msgstr ""
 "patch-info <nome_da_correção> ...\n"
 "\n"
-"Mostra informações detalhadas para as correções\n"
+"Exibir informações detalhadas para as correções\n"
 "\n"
 "Este é um apelido de compatibilidade do rug para '%s'.\n"
 
@@ -872,7 +872,7 @@ msgid ""
 msgstr ""
 "pattern-info <nome_do_padrão> ...\n"
 "\n"
-"Mostra informações detalhadas dos padrões\n"
+"Exibir informações detalhadas dos padrões\n"
 "\n"
 "Este é um apelido de compatibilidade do rug para '%s'.\n"
 
@@ -887,7 +887,7 @@ msgid ""
 msgstr ""
 "product-info <nome_do_produto> ...\n"
 "\n"
-"Mostra informações detalhadas para os produtos\n"
+"Exibir informações detalhadas para os produtos\n"
 "\n"
 "Este é um apelido de compatibilidade do rug para '%s'.\n"
 
@@ -915,7 +915,7 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"Mostra um animal\n"
+"Exibir um animal\n"
 "\n"
 "Este comando não possui opções adicionais.\n"
 
@@ -931,7 +931,7 @@ msgid ""
 msgstr ""
 "xml-updates\n"
 "\n"
-"Mostra atualizações e correções em formato xml. Este comando é obsoleto e eventualmente será retirado em favor de '%s'.\n"
+"Exibir atualizações e correções em formato xml. Este comando é obsoleto e eventualmente será retirado em favor de '%s'.\n"
 "\n"
 "  Opções de comando:\n"
 "-r, --repo <apelido|#|URL>  Trabalhar somente com as atualizações do repositório especificado.\n"
@@ -1091,7 +1091,7 @@ msgstr ""
 #: ../src/zypper.cc:2087
 #: ../src/zypper.cc:2143
 msgid "Root privileges are required for modifying system repositories."
-msgstr "São necessários privilégios de root para modificar os repositórios do sistema."
+msgstr "São necessários privilégios de root para alterar os repositórios do sistema."
 
 #: ../src/zypper.cc:1942
 #: ../src/zypper.cc:2231
@@ -1331,7 +1331,7 @@ msgstr "Arquitetura: "
 
 #: ../src/zypper-info.cc:30
 msgid "Vendor: "
-msgstr "Fornecedor:"
+msgstr "Fabricante:"
 
 #: ../src/zypper-info.cc:35
 msgid "Summary: "
@@ -1574,7 +1574,7 @@ msgstr "Aceitando um arquivo %s não assinado."
 #: ../src/zypper-keyring-callbacks.h:49
 #, c-format
 msgid "%s is unsigned, continue?"
-msgstr "%s não está assinado, deseja continuar?"
+msgstr "%s não está assinado, continuar?"
 
 #: ../src/zypper-keyring-callbacks.h:59
 #, c-format
@@ -1609,7 +1609,7 @@ msgid ""
 "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Ignorando a falha na verificação de assinatura para %s com chave pública de id %s, %s, fingerprint %s!\n"
-"Cheque novamente se isto não é causado por alterações maliciosas no arquivos!"
+"Verifique novamente se isto não é causado por alterações maliciosas no arquivos!"
 
 #: ../src/zypper-keyring-callbacks.h:123
 #, c-format
@@ -1620,7 +1620,7 @@ msgid ""
 msgstr ""
 "Verificação da assinatura falhou para %s com chave publica id %s, %s, fingerprint %s.\n"
 "Atenção: Isto pode ter sido causado por uma alteração maliciosa no arquivo!\n"
-"Continuar é arriscado! Continuar do mesmo jeito?"
+"Continuar é arriscado! Continuar mesmo assim?"
 
 #: ../src/zypper-keyring-callbacks.h:142
 #, c-format
@@ -1634,7 +1634,7 @@ msgstr "Nenhuma digest para arquivo %s."
 #: ../src/zypper-keyring-callbacks.h:170
 #: ../src/zypper-misc.cc:2176
 msgid "Continue?"
-msgstr "Deseja continuar?"
+msgstr "Continuar?"
 
 #: ../src/zypper-keyring-callbacks.h:149
 #, c-format
@@ -2258,7 +2258,7 @@ msgstr "São necessários privilégios de root para resolver problemas de depend
 #. translators: Translate 'p' to whathever you translated it in the y/n/p prompt text.
 #: ../src/zypper-misc.cc:2168
 msgid "Continue? (Choose 'p' to show dependency problems.)"
-msgstr "Continuar? (Escolha 'p' para mostrar os problemas de dependência.)"
+msgstr "Continuar? (Escolha 'p' para exibir os problemas de dependência.)"
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
@@ -2337,7 +2337,7 @@ msgstr "%s %s licença:"
 #. lincense prompt
 #: ../src/zypper-misc.cc:2343
 msgid "In order to install this package, you must agree to terms of the above license. Continue?"
-msgstr "Para instalar este pacote, é necessário que você concorde com os termos da licença acima. Deseja continuar?"
+msgstr "Para instalar este pacote, é necessário que você concorde com os termos da licença acima. Continuar?"
 
 #: ../src/zypper-misc.cc:2352
 msgid "Aborting installation due to the need for license confirmation."
@@ -2483,7 +2483,7 @@ msgstr "(%s descomprimido)"
 #: ../src/zypper-repos.cc:67
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Checando se necessário  atualizar metadata para %s"
+msgstr "Verificando se necessário  atualizar metadata para %s"
 
 #: ../src/zypper-repos.cc:86
 #, c-format
@@ -2531,7 +2531,7 @@ msgstr "Repositório '%s' é inválido."
 
 #: ../src/zypper-repos.cc:182
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Por favor cheque se as URLs definidas para este repositórios apontam para um repositório válido."
+msgstr "Por favor verifique se as URLs definidas para este repositórios apontam para um repositório válido."
 
 #: ../src/zypper-repos.cc:195
 #, c-format
@@ -2754,7 +2754,7 @@ msgstr "Um repositório chamado '%s' já existe. Por favor escolha outro apelido
 
 #: ../src/zypper-repos.cc:1214
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Não foi possível determinar o tipo do repositório. Favor checar se as URLs definidas (veja abaixo) apontam para um repositório válido:"
+msgstr "Não foi possível determinar o tipo do repositório. Favor verificar se as URLs definidas (veja abaixo) apontam para um repositório válido:"
 
 #: ../src/zypper-repos.cc:1221
 msgid "Can't find a valid repository at given location:"
@@ -2766,7 +2766,7 @@ msgstr "Problema ao transferir dados do repositório da URL especificada:"
 
 #: ../src/zypper-repos.cc:1231
 msgid "Please check whether the specified URI is accessible."
-msgstr "Favor checar se a URL especificada está acessível."
+msgstr "Favor verificar se a URL especificada está acessível."
 
 #: ../src/zypper-repos.cc:1239
 msgid "Unknown problem when adding repository:"
@@ -2794,7 +2794,7 @@ msgstr "Problema ao ler dados da mídia '%s' "
 
 #: ../src/zypper-repos.cc:1282
 msgid "Please check if your installation media is valid and readable."
-msgstr "Por favor checar se sua mídia de instalação é válida e legível."
+msgstr "Por favor verificar se sua mídia de instalação é válida e legível."
 
 #: ../src/zypper-repos.cc:1342
 msgid "Problem accessing the file at the specified URI"
@@ -2802,7 +2802,7 @@ msgstr "Problema ao acessar o arquivo na URL especificada"
 
 #: ../src/zypper-repos.cc:1343
 msgid "Please check if the URI is valid and accessible."
-msgstr "Favor checar se a URL é válida e acessível."
+msgstr "Favor verificar se a URL é válida e acessível."
 
 #: ../src/zypper-repos.cc:1351
 msgid "Problem parsing the file at the specified URI"
@@ -2840,7 +2840,7 @@ msgstr "Repositório '%s' renomeado para '%s'."
 #: ../src/zypper-repos.cc:1446
 #: ../src/zypper-repos.cc:1590
 msgid "Error while modifying the repository:"
-msgstr "Erro enquanto modificava o repositório:"
+msgstr "Erro enquanto alterava o repositório:"
 
 #: ../src/zypper-repos.cc:1447
 #, c-format
@@ -2891,7 +2891,7 @@ msgstr "A prioridade do repositório '%s' foi mudada para %d."
 #: ../src/zypper-repos.cc:1583
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nada a modificar para o repositório '%s'."
+msgstr "Nada a alterar para o repositório '%s'."
 
 #: ../src/zypper-repos.cc:1591
 #, c-format
@@ -2942,7 +2942,7 @@ msgid ""
 "Use rug or yast2 for that."
 msgstr ""
 "O Daemon do Gerenciador ZENworks está em execução.\n"
-"AVISO: este comando não sincronizará mudanças.\n"
+"AVISO: este comando não sincronizará alterações.\n"
 "Use rug ou yast2 para isso."
 
 #. TranslatorExplanation speaking of a script
@@ -3123,7 +3123,7 @@ msgstr "Problema ao fazer o download do arquivos RPM específicado."
 
 #: ../src/zypper-utils.cc:287
 msgid "Please check whether the file is accessible."
-msgstr "Por favor cheque se o arquivo é acessível."
+msgstr "Por favor verifique se o arquivo é acessível."
 
 #: ../src/zypper-utils.cc:356
 #, c-format
