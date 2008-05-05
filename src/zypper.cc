@@ -2495,7 +2495,8 @@ void Zypper::doCommand()
     if (copts.count("installed-only"))
       query.setInstalledOnly();
     //if (copts.count("match-any")) options.setMatchAny();
-    //if (copts.count("match-words")) options.setMatchWords();
+    if (copts.count("match-words"))
+      query.setMatchWord();
     if (copts.count("match-exact"))
       query.setMatchExact();
     if (copts.count("case-sensitive"))
@@ -2537,14 +2538,17 @@ void Zypper::doCommand()
 
     for(vector<string>::const_iterator it = _arguments.begin();
         it != _arguments.end(); ++it)
+    {
       query.addString(*it);
+      if (!query.matchGlob() && it->find_first_of("?*") != string::npos)
+        query.setMatchGlob();
+    }
     query.addAttribute(sat::SolvAttr::name);
     if (cOpts().count("search-descriptions"))
     {
       query.addAttribute(sat::SolvAttr::summary);
       query.addAttribute(sat::SolvAttr::description);
     }
-    //query.setMatchGlob(); \todo switch this on if the input contains * or ?
 
     init_target(*this);
 
