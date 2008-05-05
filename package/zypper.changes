@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  5 14:22:03 CEST 2008 - jkupec@suse.cz
+
+- search: reenable multiple search strings,--match-words, wildcards
+- r9947
+
+-------------------------------------------------------------------
 Fri May  2 13:22:02 CEST 2008 - jreidinger@suse.cz
 
 - implement keep-packages option to ar and mr
