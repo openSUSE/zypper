@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon May  5 09:55:29 CEST 2008 - schubi@suse.de
+
+- Switch off the upgrade mode of the         
+  SAT solver cause the packages have already been evaluated by    
+  the distupgrade machanism of libzypp. (bnc #386375)
+- rev 9943 
+
+-------------------------------------------------------------------
 Fri May  2 16:36:04 CEST 2008 - jreidinger@suse.cz
 
 - release file after copy to cache as soon as possible.
