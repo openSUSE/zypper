@@ -1,3 +1,10 @@
+Tue May  6 17:35:59 CEST 2008 - dmacvicar@suse.de
+-------------------------------------------------------------------
+
+- add flag --registrable (-r) to query pool to avoid
+  using system as a filter
+- 4.17.1
+
 -------------------------------------------------------------------
 Tue May  6 07:37:22 CEST 2008 - coolo@suse.de
 
