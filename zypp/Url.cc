@@ -445,12 +445,6 @@ namespace zypp
     return m_impl->isValid();
   }
 
-  // -----------------------------------------------------------------
-  bool
-  Url::isLocal() const
-  {
-    return m_impl->isLocal();
-  }
 
   // -----------------------------------------------------------------
   std::string

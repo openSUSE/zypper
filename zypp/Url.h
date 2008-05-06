@@ -259,17 +259,6 @@ namespace zypp
     bool
     isValid() const;
 
-    /**
-     * \brief Gets if url uses local network or pc scheme.
-     *
-     * Looks if url use local network scheme or uses internet
-     * scheme like http, ftp, smb.
-     *
-     *  \return True if url uses local network or pc scheme
-     */
-    bool
-    isLocal() const;
-
 
     // -----------------
     /**

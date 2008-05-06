@@ -13,6 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
+#include "zypp/media/MediaAccess.h"
 
 #include "zypp/RepoInfo.h"
 
@@ -148,10 +149,10 @@ namespace zypp
   {
     if ( _pimpl->baseUrls.size()==0 ) //first url
     {
-      if ( url.isLocal() )
-        setKeepPackages(false);
-      else
+      if ( media::MediaAccess::downloads( url ) )
         setKeepPackages(true);
+      else
+        setKeepPackages(false);
     }
 
     _pimpl->baseUrls.insert(url);
