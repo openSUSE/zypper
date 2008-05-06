@@ -42,6 +42,12 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace target
   { /////////////////////////////////////////////////////////////////
+
+struct modalias_list {
+	char *modalias;
+	struct modalias_list *next;
+};
+
     ///////////////////////////////////////////////////////////////////
     namespace
     { /////////////////////////////////////////////////////////////////
@@ -75,11 +81,6 @@ foreach_file(const char *path, int (*func)(const char *, const char *, void *),
 		return -1;
 	return ret;
 }
-
-struct modalias_list {
-	char *modalias;
-	struct modalias_list *next;
-};
 
 /*
  * If DIR/FILE/modalias exists, remember this modalias on the linked modalias list
