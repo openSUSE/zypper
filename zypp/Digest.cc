@@ -101,8 +101,7 @@ namespace zypp {
     	md_len = 0;
     	::memset(md_value, 0, sizeof(md_value));
     	initialized = true;
-      }
-    
+      }    
       return true;
     }
     
@@ -194,7 +193,6 @@ namespace zypp {
     	return string();
     
       char buf[bufsize];
-      size_t num = 0;
     
       Digest digest;
       if(!digest.create(name))
