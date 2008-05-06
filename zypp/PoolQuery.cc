@@ -928,9 +928,9 @@ attremptycheckend:
   const PoolQueryAttr PoolQueryAttr::noAttr;
 
   const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
-  const PoolQueryAttr PoolQueryAttr::kindAttr( "kind" );
-  const PoolQueryAttr PoolQueryAttr::stringAttr( "global_string" );
-  const PoolQueryAttr PoolQueryAttr::stringTypeAttr("string_type");
+  const PoolQueryAttr PoolQueryAttr::kindAttr( "type" );
+  const PoolQueryAttr PoolQueryAttr::stringAttr( "query_string" );
+  const PoolQueryAttr PoolQueryAttr::stringTypeAttr("match_type");
   const PoolQueryAttr PoolQueryAttr::requireAllAttr("require_all");
   const PoolQueryAttr PoolQueryAttr::caseSensitiveAttr("case_sensitive");
   const PoolQueryAttr PoolQueryAttr::installStatusAttr("install_status");
@@ -1126,7 +1126,8 @@ attremptycheckend:
 
     for_( it, kinds().begin(), kinds().end() )
     {
-      str << "kind: " << it->idStr() << delim ;
+      str << PoolQueryAttr::kindAttr.asString() << ": " 
+          << it->idStr() << delim ;
     }
 
     if (matchType()!=q.matchType())
@@ -1134,16 +1135,17 @@ attremptycheckend:
       switch( matchType() )
       {
       case SEARCH_STRING:
-        str << "string_type: exact" << delim;
+        str << PoolQueryAttr::stringTypeAttr.asString() << ": exact" << delim;
         break;
       case SEARCH_SUBSTRING:
-        str << "string_type: substring" << delim;
+        str << PoolQueryAttr::stringTypeAttr.asString() 
+            << ": substring" << delim;
         break;
       case SEARCH_GLOB:
-        str << "string_type: glob" << delim;
+        str << PoolQueryAttr::stringTypeAttr.asString() << ": glob" << delim;
         break;
       case SEARCH_REGEX:
-        str << "string_type: regex" << delim;
+        str << PoolQueryAttr::stringTypeAttr.asString() << ": regex" << delim;
         break;
       default:
         WAR << "unknown match type "  << matchType() << endl;
@@ -1194,7 +1196,7 @@ attremptycheckend:
 
     for_( it, strings().begin(), strings().end() )
     {
-      str << "global_string: " << *it << delim;
+      str << PoolQueryAttr::stringAttr.asString()<< ": " << *it << delim;
     }
 
     for_( it, attributes().begin(), attributes().end() )
