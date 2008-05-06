@@ -10,6 +10,8 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/Product.h>
+#include <zypp/ResFilters.h>
+#include <zypp/PoolItem.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-query-pool"
@@ -18,6 +20,19 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::resfilter;
+
+struct ByPresent : public PoolItemFilterFunctor
+{
+    bool operator()( const PoolItem & p ) const
+    {
+	if ( isKind<Package>(p.resolvable()) )    
+	    return p.status().isInstalled();
+	else
+	    return p.status().isSatisfied();
+    }
+};
+
 
 //-----------------------------------------------------------------------------
 
@@ -64,7 +79,10 @@ public:
 
 
 static void
-query_pool( ZYpp::Ptr Z, string filter, const string & repository)
+query_pool( ZYpp::Ptr Z,
+	    string filter,
+	    const string & repository,
+	    bool installed_only )
 {
   Resolvable::Kind kind;
 
@@ -77,80 +95,75 @@ query_pool( ZYpp::Ptr Z, string filter, const string & repository)
   else if (filter == "products") kind = ResTraits<zypp::Product>::kind;
   else if (filter != FILTER_ALL)
   {
-    std::cerr << "usage: zypp-query-pool [packages|patches|patterns|products] [<alias>]" << endl;
+    std::cerr << "usage: zypp-query-pool [-i] [packages|patches|patterns|products] [<alias>]" << endl;
     exit( 1 );
   }
 
-  bool system = (repository == "@system");
-
   MIL << "query_pool kind '" << kind << "', repository '" << repository << "'" << endl;
 
-  if (!system)
+  try
   {
-    try
-    {
       MIL << "Load enabled repositories..." << endl;
       RepoManager  repoManager;
       RepoInfoList repos = repoManager.knownRepositories();
       for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
       {
-        RepoInfo & repo( *it );
-
-        if ( ! repo.enabled() )
-          continue;
-
-        MIL << "Loading " << repo << endl;
-        if ( ! repoManager.isCached( repo ) )
-        {
-          MIL << "Must build cache..." << repo << endl;
-          repoManager.buildCache( repo );
-        }
-        repoManager.loadFromCache( repo );
+	  RepoInfo & repo( *it );
+	  
+	  if ( ! repo.enabled() )
+	      continue;
+	  
+	  MIL << "Loading " << repo << endl;
+	  if ( ! repoManager.isCached( repo ) )
+	  {
+	      MIL << "Must build cache..." << repo << endl;
+	      repoManager.buildCache( repo );
+	  }
+	  repoManager.loadFromCache( repo );
       }
       MIL << "Loaded enabled repositories." << endl;
-    }
-    catch (Exception & excpt_r)
-    {
+  }
+  catch (Exception & excpt_r)
+  {
       ZYPP_CAUGHT( excpt_r );
       ERR << "Couldn't restore sources" << endl;
       exit( 1 );
-    }
   }
 
-  // add resolvables from the system
+// add resolvables from the system
   MIL << "Loading target..." << endl;
   Z->target()->load();
  
   MIL << "Loaded target." << endl;
-
+  
   MIL << "Pool has " << Z->pool().size() << " entries" << endl;
-
-  // solve to get the status satisfied available
+  
+// solve to get the status satisfied available
   getZYpp()->resolver()->resolvePool();
-
+  
   if ( filter == FILTER_ALL)
   {
-    PrintItem printitem( system ? "" : repository );
-    if (system)
-      zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
-                          zypp::resfilter::ByInstalled(),
-                          zypp::functor::functorRef<bool,PoolItem> (printitem) );
-    else
-      zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
-                          zypp::functor::functorRef<bool,PoolItem> (printitem) );
-
+      PrintItem printitem( repository );
+      if (installed_only)
+	  zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
+			      ByPresent(),
+			      zypp::functor::functorRef<bool,PoolItem> (printitem) );
+      else
+	  zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
+			      zypp::functor::functorRef<bool,PoolItem> (printitem) );
+      
   }
-  else
-  {
-    PrintItem printitem( system ? "" : repository );
-    if (system)
-      zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
-                          zypp::resfilter::ByInstalled(),
-                          zypp::functor::functorRef<bool,PoolItem> (printitem) );
+else
+{
+    PrintItem printitem( repository );
+    if (installed_only)
+	zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
+			    ByPresent(),
+			    zypp::functor::functorRef<bool,PoolItem> (printitem) );
     else
-      zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
-                          zypp::functor::functorRef<bool,PoolItem> (printitem) );
-  }
+	zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
+			    zypp::functor::functorRef<bool,PoolItem> (printitem) );
+}
   return;
 }
 
@@ -161,11 +174,27 @@ main (int argc, char **argv)
 {
   MIL << "-------------------------------------" << endl;
   string filter;
-  if (argc > 1)
-    filter = argv[1];
   string repository;
-  if (argc > 2)
-    repository = argv[2];
+  bool only_installed = false;
+  int offset = 1;
+  
+  if ( (argc>1) && (string(argv[offset]) == "-i"))
+  {
+      only_installed = true;
+      ++offset; --argc;
+  }
+
+  if ( argc > 1 )
+  {
+      filter = argv[offset];
+      --argc; ++offset; 
+      
+      if ( argc > 1 )
+      {
+	  repository = argv[offset];
+	  ++offset; --argc;
+      }
+  }
 
   MIL << "START zypp-query-pool " << filter << " " << repository << endl;
 
@@ -177,7 +206,9 @@ main (int argc, char **argv)
 
   Z->initializeTarget( "/" );
 
-  query_pool( Z, filter, repository );
+   std::cout << argc << "#" << filter << std::endl;
+
+  query_pool( Z, filter, repository, only_installed );
 
   MIL << "END zypp-query-pool, result 0" << endl;
 
