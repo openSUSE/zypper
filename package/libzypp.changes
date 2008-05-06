@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May  6 07:37:22 CEST 2008 - coolo@suse.de
+
+- return values in non-void functions
+
+-------------------------------------------------------------------
 Mon May  5 14:08:20 CEST 2008 - jkupec@suse.cz
 
 - support multiple search strings in PoolQuery (ORed)

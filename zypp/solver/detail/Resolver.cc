@@ -344,6 +344,7 @@ bool Resolver::checkUnmaintainedItems () {
 	// next try
 	solverRet = resolvePool();	
     }
+    return solverRet;
 }
 
 
