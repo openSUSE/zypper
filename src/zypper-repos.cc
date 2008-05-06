@@ -4,6 +4,7 @@
 #include <boost/logic/tribool.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iterator>
+#include <list>
 
 #include "zypp/ZYpp.h"
 #include "zypp/base/Logger.h"
@@ -15,6 +16,7 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/parser/ParseException.h"
 #include "zypp/media/MediaException.h"
+#include "zypp/media/MediaAccess.h"
 
 #include "zypper.h"
 #include "output/Out.h"
@@ -1479,13 +1481,12 @@ void modify_repos_by_option( Zypper & zypper )
   {
     for_(it, repos.begin(),repos.end())
     {
-      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      if (!it->baseUrlsEmpty())
       {
-        if ( it2->isLocal() )
+        if ( !MediaAccess::downloads( *it->baseUrlsBegin()) )
         {
           string alias = it->alias();
           toModify.insert( alias );
-          break;
         }
       }
     }
@@ -1495,13 +1496,12 @@ void modify_repos_by_option( Zypper & zypper )
   {
     for_(it, repos.begin(),repos.end())
     {
-      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      if (!it->baseUrlsEmpty())
       {
-        if ( !it2->isLocal() )
+        if ( MediaAccess::downloads( *it->baseUrlsBegin()) )
         {
           string alias = it->alias();
           toModify.insert( alias );
-          break;
         }
       }
     }
@@ -1509,20 +1509,17 @@ void modify_repos_by_option( Zypper & zypper )
 
   if ( copts.count("medium-type") )
   {
-    string par = copts["medium-type"].front();
-    std::set<string> scheme;
-    insert_iterator<std::set<string> > ii (scheme,scheme.begin());
-    str::split( par, ii, ",");
+    list<string> pars = copts["medium-type"];
+    set<string> scheme(pars.begin(),pars.end());
 
     for_(it, repos.begin(),repos.end())
     {
-      for_( it2,it->baseUrlsBegin(), it->baseUrlsEnd() )
+      if (!it->baseUrlsEmpty())
       {
-        if ( scheme.find(it2->getScheme())!= scheme.end() )
+        if ( scheme.find(it->baseUrlsBegin()->getScheme())!= scheme.end() )
         {
           string alias = it->alias();
           toModify.insert( alias );
-          break;
         }
       }
     }
