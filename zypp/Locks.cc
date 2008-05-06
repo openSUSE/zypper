@@ -48,8 +48,11 @@ public:
   LockList locks;
   LockList toAdd;
   LockList toRemove;
+  bool     locksDirty;
 
   bool mergeList(callback::SendReport<SavingLocksReport>& report);
+  
+  Impl():locksDirty(false){}
 };
 
 Locks::Locks() : _pimpl(new Impl){}
@@ -291,6 +294,9 @@ void Locks::removeEmpty()
     report->finish(CleanEmptyLocksReport::NO_ERROR);
 
   }
+
+  if ( sum != _pimpl->locks.size() ) //some locks has been removed
+    _pimpl->locksDirty = true;
 }
 
 class LocksRemovePredicate
@@ -396,7 +402,8 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 
 void Locks::save( const Pathname& file )
 {
-  if( (_pimpl->toAdd.size() | _pimpl->toRemove.size())==0 )
+  if( ((_pimpl->toAdd.size() | _pimpl->toRemove.size())==0)
+      || _pimpl->locksDirty )
   {
     DBG << "nothing changed in locks - no write to file" << endl;
     return;
