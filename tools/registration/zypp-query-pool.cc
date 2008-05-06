@@ -95,7 +95,7 @@ query_pool( ZYpp::Ptr Z,
   else if (filter == "products") kind = ResTraits<zypp::Product>::kind;
   else if (filter != FILTER_ALL)
   {
-    std::cerr << "usage: zypp-query-pool [-i] [packages|patches|patterns|products] [<alias>]" << endl;
+    std::cerr << "usage: zypp-query-pool [--registrable|-r] [packages|patches|patterns|products] [<alias>]" << endl;
     exit( 1 );
   }
 
@@ -178,7 +178,8 @@ main (int argc, char **argv)
   bool only_installed = false;
   int offset = 1;
   
-  if ( (argc>1) && (string(argv[offset]) == "-i"))
+  if ( (argc>1) && ( (string(argv[offset]) == "--registrable")
+		     || ( string(argv[offset]) == "-r" ) ) )
   {
       only_installed = true;
       ++offset; --argc;
@@ -205,8 +206,6 @@ main (int argc, char **argv)
   DigestCallbacks digest_callbacks;
 
   Z->initializeTarget( "/" );
-
-   std::cout << argc << "#" << filter << std::endl;
 
   query_pool( Z, filter, repository, only_installed );
 
