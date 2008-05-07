@@ -425,7 +425,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // If unique provides exists check if obsoleted (replaced).
       // Remember new package for 2nd pass.
 
-      Capability installedCap( installed->name(), Rel::EQ, installed->edition(), installed->kind());
+      Capability installedCap( installed->name(), installed->kind());
       
       // find ALL providers
       sat::WhatProvides possibleProviders(installedCap);
