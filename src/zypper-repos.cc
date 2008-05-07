@@ -1689,10 +1689,10 @@ void modify_repo(Zypper & zypper, const string & alias)
       {
         if (repo.keepPackages())
           zypper.out().info(boost::str(format(
-            _("Keep packages has been enabled for repository '%s'.")) % alias));
+            _("RPM files caching has been enabled for repository '%s'.")) % alias));
         else
           zypper.out().info(boost::str(format(
-            _("Keep packages has been disabled for repository '%s'.")) % alias));
+            _("RPM files caching has been disabled for repository '%s'.")) % alias));
       }
 
       if (changed_prio)

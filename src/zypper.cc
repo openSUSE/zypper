@@ -938,11 +938,11 @@ void Zypper::processCommandOptions()
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disable", no_argument, 0, 'd'},
-      {"disabled", no_argument, 0, 0}, // backward compatibility
+      {"disabled", no_argument, 0, 'd'}, // backward compatibility
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
-      {"no-check", no_argument, 0, 'x'},
+      {"no-check", no_argument, 0, 'C'},
       {"name", no_argument, 0, 'n'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
@@ -962,8 +962,10 @@ void Zypper::processCommandOptions()
       "-t, --type <TYPE>       Type of repository (%s).\n"
       "-d, --disable           Add the repository as disabled.\n"
       "-c, --check             Probe URI.\n"
-      "-x, --no-check          Don't probe URI, probe later during refresh.\n"
+      "-C, --no-check          Don't probe URI, probe later during refresh.\n"
       "-n, --name              Specify descriptive name for the repository.\n"
+      "-k, --keep-packages     Enable RPM files caching.\n"
+      "-K, --no-keep-packages  Disable RPM files caching.\n"
     ), "yast2, rpm-md, plaindir");
     break;
   }
