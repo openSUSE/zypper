@@ -1065,31 +1065,44 @@ void Zypper::processCommandOptions()
       {"disable", no_argument, 0, 'd'},
       {"enable", no_argument, 0, 'e'},
       {"refresh", no_argument, 0, 'r'},
-      {"enable-autorefresh", no_argument, 0, 'a'}, // backward compatibility
-      {"no-refresh", no_argument, 0, 'n'},
+      {"enable-autorefresh", no_argument, 0, 0 }, // backward compatibility
+      {"no-refresh", no_argument, 0, 'R'},
       {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
+      {"name", required_argument, 0, 'n'},
       {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
-      {"no-keep-packages", no_argument, 0, 'K'}, //TODO not documented
-      {"all", no_argument, 0, 'A' }, //TODO not documented
-      {"local", no_argument, 0, 'l' }, //TODO not documented
-      {"remote", no_argument, 0, 't' }, //TODO not documented
-      {"medium-type", required_argument, 0, 'm' }, //TODO not documented
+      {"no-keep-packages", no_argument, 0, 'K'},
+      {"all", no_argument, 0, 'a' },
+      {"local", no_argument, 0, 'l' },
+      {"remote", no_argument, 0, 't' },
+      {"medium-type", required_argument, 0, 'm' },
       {0, 0, 0, 0}
     };
     specific_options = service_modify_options;
-    _command_help = _(
+    _command_help = str::form(_(
+      // translators: %s is "--all|--remote|--local|--medium-type"
+      // and "--all, --remote, --local, --medium-type" 
       "modifyrepo (mr) <options> <alias|#|URI>\n"
+      "modifyrepo (mr) <options> <%s>\n"
       "\n"
-      "Modify properties of the repository specified by alias, number or URI.\n"
+      "Modify properties of repositories specified by alias, number or URI or by"
+      " the '%s' aggregate options.\n"
       "\n"
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it).\n"
       "-e, --enable              Enable a disabled repository.\n"
       "-r, --refresh             Enable auto-refresh of the repository.\n"
-      "-n, --no-refresh          Disable auto-refresh of the repository.\n"
-      "-p, --priority <1-99>     Set priority of the repository. See the manual page for details.\n"
-    );
+      "-R, --no-refresh          Disable auto-refresh of the repository.\n"
+      "-n, --name                Set a descriptive name for the repository.\n"
+      "-p, --priority <1-99>     Set priority of the repository.\n"
+      "-k, --keep-packages       Enable RPM files caching.\n"
+      "-K, --no-keep-packages    Disable RPM files caching.\n"
+      "-a, --all                 Apply changes to all repositories.\n"
+      "-l, --local               Apply changes to all local repositories.\n"
+      "-t, --remote              Apply changes to all remote repositories.\n"
+      "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+    ), "--all|--remote|--local|--medium-type"
+     , "--all, --remote, --local, --medium-type");
     break;
   }
 
@@ -2159,13 +2172,20 @@ void Zypper::doCommand()
       return;
     }
 
+    //! \todo drop before 11.1
+    if (_copts.count("enable-autorefresh"))
+      out().warning(str::form(_("'%s' option is deprecated and will be dropped soon."), "enable-autorefresh"));
+    if (_copts.count("disable-autorefresh"))
+      out().warning(str::form(_("'%s' option is deprecated and will be dropped soon."), "disable-autorefresh"));
+
     bool non_alias = copts.count("all") || copts.count("local") || 
         copts.count("remote") || copts.count("medium-type");
 
     if (_arguments.size() < 1 && !non_alias)
     {
-      //TODO add all option to help text
-      out().error(_("Alias is a required argument."));
+      // translators: aggregate option is e.g. "--all". This message will be
+      // followed by mr command help text which will explain it
+      out().error(_("Alias or an aggregate option is required."));
       ERR << "No alias argument given." << endl;
       out().info(_command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);

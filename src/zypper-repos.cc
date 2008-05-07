@@ -1652,8 +1652,16 @@ void modify_repo(Zypper & zypper, const string & alias)
       }
     }
 
+    string name;
+    if ((tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end())
+    {
+      name = *tmp1->second.begin();
+      if (!name.empty())
+        repo.setName(name);
+    }
+
     if (chnaged_enabled || changed_autoref || changed_prio
-        || changed_keeppackages)
+        || changed_keeppackages || !name.empty())
     {
       manager.modifyRepository(alias, repo);
 
@@ -1691,6 +1699,12 @@ void modify_repo(Zypper & zypper, const string & alias)
       {
         zypper.out().info(boost::str(format(
           _("Repository '%s' priority has been set to %d.")) % alias % prio));
+      }
+      
+      if (!name.empty())
+      {
+        zypper.out().info(boost::str(format(
+          _("Name of repository '%s' has been set to '%s'.")) % alias % name));
       }
     }
     else
