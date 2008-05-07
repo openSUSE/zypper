@@ -36,11 +36,8 @@ BuildRequires: glib2-devel popt-devel dbus-glib-devel rpm-devel
 %endif
 
 %if 0%{?mandriva_version}
-BuildRequires:  sqlite3-devel
 BuildRequires:  glib2-devel
 BuildRequires:  librpm-devel
-%else
-BuildRequires:  sqlite-devel
 %endif
 
 
