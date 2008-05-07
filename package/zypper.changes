@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed May  7 12:51:16 CEST 2008 - jkupec@suse.cz
+
+- modifyrepo cleanup: --name added, -R is now used for
+  --no-refresh, -a is now used for --all, deprecated warning added
+  for --enable-autorefresh and --disable-autorefresh options.
+- one more update of texts due to several bugs
+- r9970
+
+-------------------------------------------------------------------
 Mon May  5 14:22:03 CEST 2008 - jkupec@suse.cz
 
 - search: reenable multiple search strings,--match-words, wildcards
