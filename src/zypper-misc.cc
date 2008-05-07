@@ -1449,14 +1449,6 @@ static void dump_pool ()
   full_pool_shown = true;
 }
 
-static int apply_locks(Zypper & zypper)
-{
-  int locks = God->applyLocks();
-  zypper.out().info(
-    boost::str(format(_PL("%s item locked", "%s items locked", locks)) % locks),
-    Out::HIGH);
-  return locks;
-}
 
 static void set_force_resolution(Zypper & zypper)
 {
@@ -1509,7 +1501,6 @@ static void set_force_resolution(Zypper & zypper)
  */
 bool resolve(Zypper & zypper)
 {
-  apply_locks(zypper);
   dump_pool(); // debug
   set_force_resolution(zypper);
   if (zypper.command() == ZypperCommand::REMOVE)
@@ -1525,7 +1516,6 @@ bool resolve(Zypper & zypper)
 
 static bool verify(Zypper & zypper)
 {
-  apply_locks(zypper);
   dump_pool();
   zypper.out().info(_("Verifying dependencies..."), Out::HIGH);
   // don't force aggressive solutions
@@ -1538,7 +1528,6 @@ static bool verify(Zypper & zypper)
 
 static void make_solver_test_case(Zypper & zypper)
 {
-  apply_locks(zypper);
   set_force_resolution(zypper);
   
   string testcase_dir("/var/log/zypper.solverTestCase");
