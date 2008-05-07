@@ -145,7 +145,7 @@ void print_main_help(Zypper & zypper)
     "\t--version, -V\t\tOutput the version number.\n"
     "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
-    "\t--terse, -t\t\tTerse output for machine consumption.\n"
+    "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n"
@@ -893,7 +893,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = src_install_options;
     _command_help = _(
-      "source-install (si) <name> ...\n"
+      "source-install (si) [options] <name> ...\n"
       "\n"
       "Install specified source packages and their build dependencies.\n"
       "\n"
@@ -945,7 +945,7 @@ void Zypper::processCommandOptions()
       {"no-check", no_argument, 0, 'x'},
       {"name", no_argument, 0, 'n'},
       {"keep-packages", no_argument, 0, 'k'},
-      {"no-keep-packages", no_argument, 0, 'K'}, //TODO not documented
+      {"no-keep-packages", no_argument, 0, 'K'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -995,6 +995,7 @@ void Zypper::processCommandOptions()
       specific_options = options;
 
       _command_help = _(
+        // translators: this is just a rug compatiblity command
         "list-resolvables (lr)\n"
         "\n"
         "List available resolvable types.\n"
@@ -1003,7 +1004,7 @@ void Zypper::processCommandOptions()
     }
 
     _command_help = _(
-      "repos (lr)\n"
+      "repos (lr) [options]\n"
       "\n"
       "List all defined repositories.\n"
       "\n"
@@ -1049,7 +1050,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = service_rename_options;
     _command_help = _(
-      "renamerepo [options] <alias|#|URI> <new-alias>\n"
+      "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
       "\n"
       "Assign new alias to the repository specified by alias, number or URI.\n"
       "\n"
@@ -1176,9 +1177,9 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
-      "list-updates [options]\n"
+      "list-updates (lu) [options]\n"
       "\n"
-      "List all available updates\n"
+      "List all available updates.\n"
       "\n"
       "  Command options:\n"
       "-t, --type <type>               Type of resolvable (%s).\n"
@@ -1305,7 +1306,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = _(
-      "search [options] [querystring...]\n"
+      "search (se) [options] [querystring] ...\n"
       "\n"
       "Search for packages matching given search strings.\n"
       "\n"
@@ -1342,9 +1343,9 @@ void Zypper::processCommandOptions()
     };
     specific_options = patch_check_options;
     _command_help = _(
-      "patch-check\n"
+      "patch-check (pchk) [options]\n"
       "\n"
-      "Check for available patches\n"
+      "Check for available patches.\n"
       "\n"
       "  Command options:\n"
       "\n"
@@ -1470,15 +1471,15 @@ void Zypper::processCommandOptions()
     };
     specific_options = info_options;
     _command_help = str::form(_(
-        "info <name> ...\n"
+        "info (if) [options] <name> ...\n"
         "\n"
-        "Show detailed information for packages\n"
+        "Show detailed information for specified packages.\n"
         "\n"
         "  Command options:\n"
         "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
         "-t, --type <type>         Type of resolvable (%s).\n"
         "                          Default: %s."
-      ), "package, patch, pattern, product", "package"); 
+      ), "package, patch, pattern, product", "package");
 
     break;
   }
@@ -1641,7 +1642,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = str::form(_(
-      "addlock (al) <packagename>\n"
+      "addlock (al) [options] <packagename>\n"
       "\n"
       "Add a package lock. Specify packages to lock by exact name or by a"
       " glob pattern using '*' and '?' wildcard characters.\n"
@@ -1717,7 +1718,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = quit_options;
     _command_help = _(
-      "shell\n"
+      "shell (sh)\n"
       "\n"
       "Enter the zypper command shell.\n"
       "\n"
@@ -1734,7 +1735,8 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = _(
-      "service-types\n"
+      // translators: this is just a rug-compatiblity command
+      "service-types (st)\n"
       "\n"
       "List available service types.\n"
     );
@@ -1749,6 +1751,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = _(
+      // translators: this is just a rug-compatiblity command
       "list-resolvables (lr)\n"
       "\n"
       "List available resolvable types.\n"
