@@ -61,6 +61,8 @@ namespace zypp
   inline bool operator==(const RepoType & obj1, const RepoType & obj2)
   { return obj1._type == obj2._type; }
 
+  inline bool operator!=(const RepoType & obj1, const RepoType & obj2)
+  { return ! (obj1 == obj2); }
 
   } // ns repo
 } // ns zypp
