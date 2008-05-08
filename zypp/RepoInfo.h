@@ -292,6 +292,14 @@ namespace zypp
     RepoInfo & setType( const repo::RepoType &t );
 
     /**
+     * This allows to adjust the \ref  RepoType lazy, from \c NONE to
+     * some probed value, even for const objects.
+     *
+     * This is a NOOP if the current type is not \c NONE.
+     */
+    void setProbedType( const repo::RepoType &t ) const;
+
+    /**
      * set the repository name \see name
      * \param name
      */

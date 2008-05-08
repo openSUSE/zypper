@@ -46,6 +46,16 @@ namespace zypp
   public:
     static const unsigned defaultPriority = 99;
 
+    void setProbedType( const repo::RepoType & t ) const
+    {
+      if ( type == repo::RepoType::NONE
+           && t != repo::RepoType::NONE )
+      {
+        // lazy init!
+        const_cast<Impl*>(this)->type = t;
+      }
+    }
+
   public:
     bool enabled;
     bool autorefresh;
@@ -194,6 +204,9 @@ namespace zypp
     _pimpl->type = t;
     return *this;
   }
+
+  void RepoInfo::setProbedType( const repo::RepoType &t ) const
+  { _pimpl->setProbedType( t ); }
 
   RepoInfo & RepoInfo::setName( const std::string &name )
   {

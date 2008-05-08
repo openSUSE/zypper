@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  8 18:13:54 CEST 2008 - ma@suse.de
+
+- Fix failed package download due to unkown repository type (bnc #386386)
+- revision 9995
+
+-------------------------------------------------------------------
 Thu May  8 16:33:37 CEST 2008 - ma@suse.de
 
 - Support optional root argument to RepoManagerOptions, to prefix all 

@@ -568,6 +568,8 @@ namespace zypp
 
             if (repokind.toEnum() != RepoType::NONE_e)
             {
+              // Adjust the probed type in RepoInfo
+              info.setProbedType( repokind ); // lazy init!
               //save probed type only for repos in system
               std::list<RepoInfo> repos = knownRepositories();
               for ( std::list<RepoInfo>::const_iterator it = repos.begin();
