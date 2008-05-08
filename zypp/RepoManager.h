@@ -47,8 +47,18 @@ namespace zypp
    */
   struct RepoManagerOptions
   {
-    /** Default ctor following \ref ZConfig global settings. */
-    RepoManagerOptions();
+    /** Default ctor following \ref ZConfig global settings.
+     * If an optional \c root_r directory is given, all paths  will
+     * be prefixed accordingly.
+     * \code
+     *    root_r\repoCachePath
+     *          \repoRawCachePath
+     *          \repoSolvCachePath
+     *          \repoPackagesCachePath
+     *          \knownReposPath
+     * \endcode
+     */
+    RepoManagerOptions( const Pathname & root_r = Pathname() );
 
     /** Test setup adjusting all paths to be located below one \c root_r directory.
      * \code
@@ -58,7 +68,7 @@ namespace zypp
      *          \packages  - repoPackagesCachePath
      *          \repos.d   - knownReposPath
      * \endcode
-    */
+     */
     static RepoManagerOptions makeTestSetup( const Pathname & root_r );
 
     Pathname repoCachePath;

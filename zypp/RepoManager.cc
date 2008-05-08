@@ -64,13 +64,13 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  RepoManagerOptions::RepoManagerOptions()
+  RepoManagerOptions::RepoManagerOptions( const Pathname & root_r )
   {
-    repoCachePath         = ZConfig::instance().repoCachePath();
-    repoRawCachePath      = ZConfig::instance().repoMetadataPath();
-    repoSolvCachePath     = ZConfig::instance().repoSolvfilesPath();
-    repoPackagesCachePath = ZConfig::instance().repoPackagesPath();
-    knownReposPath        = ZConfig::instance().knownReposPath();
+    repoCachePath         = Pathname::assertprefix( root_r, ZConfig::instance().repoCachePath() );
+    repoRawCachePath      = Pathname::assertprefix( root_r, ZConfig::instance().repoMetadataPath() );
+    repoSolvCachePath     = Pathname::assertprefix( root_r, ZConfig::instance().repoSolvfilesPath() );
+    repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
+    knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     probe                 = ZConfig::instance().repo_add_probe();
   }
 
