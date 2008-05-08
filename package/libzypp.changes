@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu May  8 16:33:37 CEST 2008 - ma@suse.de
+
+- Support optional root argument to RepoManagerOptions, to prefix all 
+  path names taken from ZConfig. (bnc #388265)
+- version 4.20.0
+- revision 9993
+
+-------------------------------------------------------------------
 Thu May  8 14:21:51 CEST 2008 - schubi@suse.de
 
 - new solution action for removing requirements/conflicts (bnc #387631)
