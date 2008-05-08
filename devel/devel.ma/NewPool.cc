@@ -9,6 +9,7 @@
 #include <zypp/base/Debug.h>
 #include <zypp/base/Functional.h>
 #include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
 #include <zypp/base/ProvideNumericId.h>
 #include <zypp/AutoDispose.h>
 
@@ -44,6 +45,7 @@
 #include "zypp/PoolQuery.h"
 
 #include <zypp/base/GzStream.h>
+#include <zypp/parser/IniDict.h>
 
 #include <boost/mpl/int.hpp>
 
@@ -456,71 +458,73 @@ void testCMP( const L & lhs, const R & rhs )
 
 namespace zypp
 {
-}
-
-void tt( const std::string & name_r, ResKind kind_r = ResKind::package )
-{
-  Capability cap( name_r, kind_r );
-  sat::WhatProvides possibleProviders(cap);
-  (possibleProviders.empty()?WAR:MIL) << name_r << endl;
-  for_(iter, possibleProviders.begin(), possibleProviders.end())
+  struct ProductConfData
   {
-    MIL << name_r << endl;
-    PoolItem provider = ResPool::instance().find(*iter);
-  }
-}
+    IdString  _name;
+    Edition   _edition;
+    Arch      _arch;
 
-void sslk( const std::string & t = std::string() )
-{
-  ResPool pool( ResPool::instance() );
-  ostream & outs( SEC );
-  unsigned cnt = 0;
-  outs << t << ": {" << endl;
-  for_( it, pool.begin(), pool.end() )
+    IdString  _distName;
+    Edition   _distEdition;
+  };
+
+  class ProductConfReader
   {
-    if ( it->status().isLocked() )
+    public:
+      typedef function<bool( const ProductConfData & )> Consumer;
+
+    public:
+      ProductConfReader()
+      {}
+
+      ProductConfReader( const Consumer & consumer_r )
+      : _consumer( consumer_r )
+      {}
+
+      ProductConfReader( const Consumer & consumer_r, const InputStream & input_r )
+      : _consumer( consumer_r )
+      { parse( input_r ); }
+
+    public:
+      const Consumer & consumer() const
+      { return _consumer; }
+
+      void setConsumer( const Consumer & consumer_r )
+      { _consumer = consumer_r; }
+
+    public:
+      void parse( const InputStream & input = InputStream() ) const;
+
+    private:
+      Consumer _consumer;
+  };
+
+  void ProductConfReader::parse( const InputStream & input_r ) const
+  {
+    WAR << "+++" << input_r << endl;
+    parser::IniDict dict( input_r );
+
+    for_( sit, dict.sectionsBegin(), dict.sectionsEnd() )
     {
-      outs << "    " << *it << endl;
-      ++cnt;
+      string section(*sit);
+      MIL << section << endl;
+      for_( it, dict.entriesBegin(*sit), dict.entriesEnd(*sit) )
+      {
+        string entry( it->first );
+        string value( it->second );
+        DBG << (*it).first << "=" << (*it).second << endl;
+      }
+
     }
+    WAR << "---" << input_r << endl;
   }
-  outs << '}' << cnt << endl;
 }
 
-void ssup()
+bool PCDC( const ProductConfData & d )
 {
-  ResPool pool( ResPool::instance() );
-
-  ResPool::HardLockQueries newLocks;
-
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "kde3*" );
-    q.setMatchGlob();
-    dumpRange( DBG, q.begin(), q.end() ) << endl;
-    newLocks.push_back( q );
-  }
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "kde4*" );
-    q.setMatchGlob();
-    dumpRange( DBG, q.begin(), q.end() ) << endl;
-    newLocks.push_back( q );
-  }
-  {
-    PoolQuery q;
-    q.addAttribute( sat::SolvAttr::name, "amarok" );
-    q.addKind( ResKind::package );
-    q.setMatchExact();
-    q.setCaseSensitive(true);
-    dumpRange( DBG, q.begin(), q.end() ) << endl;
-    newLocks.push_back( q );
-  }
-
-  pool.setHardLockQueries( newLocks );
-
+  SEC << endl;
+  return true;
 }
-
 
 /******************************************************************
 **
@@ -534,6 +538,13 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
+
+  ProductConfReader r( &PCDC, "test.prod" );
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
