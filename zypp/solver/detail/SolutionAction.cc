@@ -63,13 +63,14 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 {
     os << "TransactionSolutionAction: ";
     switch (_action) {
-	case KEEP:	os << "Keep"; break;
-	case INSTALL:	os << "Install"; break;
-	case REMOVE:	os << "Remove"; break;
-	case UNLOCK:	os << "Unlock"; break;
+	case KEEP:		os << "Keep " << _item; break;
+	case INSTALL:		os << "Install " << _item; break;
+	case REMOVE:		os << "Remove " << _item; break;
+	case UNLOCK:		os << "Unlock " << _item; break;
+	case REMOVE_REQUIRE:	os << "Remove require " << _capability; break;
+	case REMOVE_CONFLICT:	os << "Remove conflict " << _capability; break;	    
     }
-    os << " ";
-    os << _item;
+
     os << endl;
     return os;
 }
@@ -151,6 +152,12 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
+	case REMOVE_REQUIRE:
+	    resolver.removeExtraRequire (_capability);
+	    break;	    
+	case REMOVE_CONFLICT:
+	    resolver.removeExtraConflict (_capability);
+	    break;	    
 	default:
 	    ERR << "Wrong TransactionKind" << endl;
 	    ret = false;

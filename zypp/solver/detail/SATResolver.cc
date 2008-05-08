@@ -1067,14 +1067,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
 				{
-				Id p, *pp;
-				FOR_PROVIDES(p, pp, what);
-				{
-				    PoolItem poolItem = _pool.find (sat::Solvable(p));
-				    if (poolItem.status().isToBeInstalled()
-					|| poolItem.status().staysUninstalled())
-					problemSolution->addSingleAction (poolItem, KEEP);
-				}
+				problemSolution->addSingleAction (Capability(what), REMOVE_REQUIRE);
 				string description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
@@ -1082,14 +1075,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
 				{
-				Id p, *pp;
-				FOR_PROVIDES(p, pp, what);
-				{
-				    PoolItem poolItem = _pool.find (sat::Solvable(p));
-				    if (poolItem.status().isToBeUninstalled()
-					|| poolItem.status().staysInstalled())
-					problemSolution->addSingleAction (poolItem, KEEP);
-				}
+				problemSolution->addSingleAction (Capability(what), REMOVE_CONFLICT);				    
 				string description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);

@@ -53,9 +53,14 @@ namespace zypp
 	     **/
 	    ProblemSolutionCombi( ResolverProblem_Ptr parent );
 	    /**
-	     * Add a single action
+	     * Add a single action of an item
 	     */
 	    void addSingleAction( PoolItem item, const TransactionKind action);
+
+	    /**
+	     * Add a single action of an capability
+	     */
+	    void addSingleAction( Capability capability, const TransactionKind action);	    
 
 	    /**
 	     * returns the number of actions

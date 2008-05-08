@@ -53,6 +53,12 @@ ProblemSolutionCombi::ProblemSolutionCombi( ResolverProblem_Ptr parent)
     _details = "";
 }
 
+void ProblemSolutionCombi::addSingleAction( Capability capability, const TransactionKind action)
+{
+    addAction (new TransactionSolutionAction(capability, action));
+    actNumber++;
+}
+	
 void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind action)
 {
     addAction (new TransactionSolutionAction(item, action));

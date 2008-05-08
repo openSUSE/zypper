@@ -67,7 +67,9 @@ namespace zypp
 	    KEEP,
 	    INSTALL,
 	    REMOVE,
-	    UNLOCK
+	    UNLOCK,
+	    REMOVE_REQUIRE,
+	    REMOVE_CONFLICT,
 	} TransactionKind;
 
 
@@ -78,6 +80,11 @@ namespace zypp
 				       TransactionKind action )
 		: SolutionAction(),
 		  _item( item ), _action( action ) {}
+
+	    TransactionSolutionAction( Capability capability,
+				       TransactionKind action )
+		: SolutionAction(),
+		  _capability( capability ), _action( action ) {}
 
 	    TransactionSolutionAction( TransactionKind action )
 		: SolutionAction(),
@@ -99,6 +106,7 @@ namespace zypp
 	protected:
 
 	    PoolItem _item;
+	    Capability _capability;
 	    const TransactionKind _action;
 	};
 
