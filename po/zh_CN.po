@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-23 19:40+0800\n"
-"Last-Translator: Eric Shan <ericalways@gmail.com>\n"
+"PO-Revision-Date: 2008-05-01 22:54+0800\n"
+"Last-Translator: Thruth Wang <gubotruth@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +101,8 @@ msgstr "阿当梅语"
 msgid "Adding repository '%s'"
 msgstr "正在添加安装源 '%s'"
 
-#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
+#: ../zypp/target/rpm/RpmDb.cc:2066
+#: ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "其他 rpm 输出："
 
@@ -161,7 +162,8 @@ msgid "Albania"
 msgstr "阿尔巴尼亚"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "阿尔巴尼亚语"
 
@@ -265,7 +267,8 @@ msgid "Armenia"
 msgstr "亚美尼亚"
 
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "亚美尼亚语"
 
@@ -314,7 +317,8 @@ msgstr "奥地利"
 msgid "Austronesian (Other)"
 msgstr "澳斯特罗尼西亚诸语言（其它）"
 
-#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
+#: ../zypp/media/MediaCurl.cc:761
+#: ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要身份验证"
@@ -424,7 +428,8 @@ msgid "Bashkir"
 msgstr "巴什基尔语"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "巴斯克语"
 
@@ -604,7 +609,8 @@ msgid "Burkina Faso"
 msgstr "布基纳法索"
 
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "缅甸语"
 
@@ -825,7 +831,8 @@ msgid "China"
 msgstr "中国"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "中文"
 
@@ -900,7 +907,8 @@ msgstr "科摩罗"
 
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "刚果"
 
@@ -975,7 +983,8 @@ msgid "Croatia"
 msgstr "克罗地亚"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "克罗地亚语"
 
@@ -995,7 +1004,8 @@ msgid "Cyprus"
 msgstr "塞浦路斯"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "捷克语"
 
@@ -1100,10 +1110,11 @@ msgstr "都阿拉语"
 #: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
+msgstr "可疑类型 '%s' 在 %u 字节校验码 '%s'"
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "荷兰语"
 
@@ -1407,7 +1418,8 @@ msgid "France"
 msgstr "法国"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "法语"
 
@@ -1506,12 +1518,14 @@ msgid "Georgia"
 msgstr "乔治亚州"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "乔治亚语"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "德语"
 
@@ -1581,7 +1595,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "古希腊语（1453 以前）"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "现代希腊语 (1453-)"
 
@@ -1655,7 +1670,8 @@ msgstr "海地"
 msgid "Haitian"
 msgstr "海地语"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Hal 例外"
@@ -1773,7 +1789,8 @@ msgid "Iceland"
 msgstr "冰岛"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "冰岛语"
 
@@ -1917,7 +1934,8 @@ msgstr "无效的端口组件“%s”"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "无效的正则表达式“%s”：regcomp 返回 %d"
 
-#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
+#: ../zypp/media/MediaCurl.cc:758
+#: ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr "无效用户名或密码。"
 
@@ -2382,7 +2400,8 @@ msgid "Macedonia"
 msgstr "马其顿王国"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "马其顿语"
 
@@ -2422,7 +2441,8 @@ msgid "Malawi"
 msgstr "马拉维"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "马来语"
 
@@ -2491,7 +2511,8 @@ msgid "Manx"
 msgstr "马恩岛语"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "毛利语"
 
@@ -2696,7 +2717,8 @@ msgstr "纳米比亚"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "瑙鲁语"
 
@@ -2802,7 +2824,8 @@ msgstr "纽埃语"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "无代码"
 
@@ -3035,7 +3058,8 @@ msgid "Permission to access '%s' denied."
 msgstr "访问“%s”的权限被拒绝。"
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "波斯语"
 
@@ -3124,12 +3148,14 @@ msgstr "卡塔尔"
 msgid "Quechua"
 msgstr "盖丘亚语"
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "不支持对此 URL 的查询字符串进行语法分析"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:888
+#: ../zypp/target/rpm/RpmDb.cc:2057
 #: ../zypp/target/rpm/RpmDb.cc:2177
 msgid "RPM failed: "
 msgstr "RPM 失败："
@@ -3154,7 +3180,8 @@ msgstr "拉帕努伊语"
 msgid "Rarotongan"
 msgstr "拉罗汤加语"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "如果存在认证，则不允许相对路径"
 
@@ -3183,7 +3210,8 @@ msgid "Romania"
 msgstr "罗马尼亚"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
@@ -3333,7 +3361,8 @@ msgid "Serbia and Montenegro"
 msgstr "塞尔维亚和黑山"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "塞尔维亚语"
 
@@ -3433,7 +3462,8 @@ msgid "Slavic (Other)"
 msgstr "斯拉夫诸语言（其它）"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
@@ -3620,7 +3650,7 @@ msgstr "古叙利亚语"
 #: ../zypp/media/MediaException.cc:91
 #, c-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "系统例外 '%s'  于媒介 '%s'。"
 
 #: ../zypp/ZYppFactory.cc:354
 #, c-format
@@ -3707,7 +3737,8 @@ msgid "This action is being run by another program already."
 msgstr "这个动作正在被另外一个程序运行着。"
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "西藏语"
 
@@ -3753,7 +3784,8 @@ msgstr "托克皮辛语"
 
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "托克劳语"
 
@@ -3844,7 +3876,8 @@ msgstr "特克斯和凯科斯群岛"
 
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "图瓦卢语"
 
@@ -3905,7 +3938,8 @@ msgstr "无法创建 dbus 连接"
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "无法初始化 HAL 环境 － hald 未运行？"
 
-#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
+#: ../zypp/Url.cc:322
+#: ../zypp/Url.cc:336
 msgid "Unable to parse Url components"
 msgstr "无法对 URL 组件进行语法分析"
 
@@ -4102,7 +4136,8 @@ msgid "Washo"
 msgstr "瓦肖语"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "威尔士语"
 
@@ -4277,8 +4312,7 @@ msgid ""
 "-->\n"
 "  %s"
 msgstr ""
-"安装 %s (包括供应商的更改)"
-" %s\n"
+"安装 %s (包括供应商的更改) %s\n"
 "-->\n"
 "  %s"
 
@@ -4332,7 +4366,8 @@ msgstr ""
 "rpm 已将 %s 创建为 %s。\n"
 "以下是前 25 行差异：\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
+#: ../zypp/target/rpm/RpmDb.cc:2055
+#: ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "rpm 输出："
 
@@ -4355,3 +4390,4 @@ msgstr ""
 #: ../zypp/solver/detail/SATResolver.cc:935
 msgid "uninstallable providers: "
 msgstr "不可安装的提供者："
+

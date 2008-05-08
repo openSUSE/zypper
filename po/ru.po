@@ -1,4 +1,4 @@
-# translation of zypp.ru.po to Russian
+# translation of zypp.po to Russian
 # translation of zypp.po to
 # Russian message file for YaST2 (@memory@).
 # Copyright (C) 2005, 2006 SUSE Linux Products GmbH.
@@ -11,10 +11,10 @@
 # Nikolay Derkach <nderkach@gmail.com>, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.ru\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-11 21:28+0400\n"
+"PO-Revision-Date: 2008-04-27 00:54+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -701,9 +701,9 @@ msgid "Can't initialize recursive mutex"
 msgstr "Не удаётся инициализировать рекурсивное взаимоисключение"
 
 #: ../zypp/base/InterProcessMutex.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open lock file: %s"
-msgstr "Не удаётся открыть solv-файл: "
+msgstr "Не удаётся открыть файл блокировки: %s"
 
 #: ../zypp/ExternalProgram.cc:174
 #, c-format
@@ -736,7 +736,7 @@ msgstr "Канада"
 #: ../zypp/KeyRing.cc:276
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "Невозможно записать публичный ключ %s из хранилища %s в файл %s"
 
 #  Error message
 #: ../zypp/media/MediaException.cc:182
@@ -1550,9 +1550,8 @@ msgid "Geez"
 msgstr "Геэз"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
-#, fuzzy
 msgid "Generally ignore of some dependecies"
-msgstr "Игнорировать это требование везде"
+msgstr "J,ottИгнорировать это требование везде"
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1851,9 +1850,9 @@ msgstr "Игбо"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore some dependencies of %s"
-msgstr "невозможно разрешить зависимости"
+msgstr "Игнорировать некоторые зависимости %s"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1981,7 +1980,7 @@ msgstr "Неверный компонент порта '%s'"
 #: ../zypp/PoolQuery.cc:419
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
+msgstr "Неверное регулярное выражение '%s': regcomp вернул %d"
 
 #: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
@@ -3597,9 +3596,9 @@ msgid "Solomon Islands"
 msgstr "Соломоновы острова"
 
 #: ../zypp/solver/detail/SATResolver.cc:889
-#, fuzzy, c-format
+#, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
-msgstr "%s конфликтует с %s, который предоставляется %s"
+msgstr "Объект разрешения зависимостей %s конфликтует с %s, который предоставляется им самим"
 
 # SO
 # fuzzy
@@ -4520,59 +4519,3 @@ msgstr ""
 msgid "uninstallable providers: "
 msgstr "поставщики, которые невозможно установить: "
 
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s предоставляет эту зависимость, но будет изменена архитектура установленного пакета"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s предоставляет эту зависимость, но будет изменен производитель установленного пакета"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Не выполнять установку или удаление затрагиваемых объектов разрешения зависимостей"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Игнорировать, что %s уже определен, как подлежащий установке"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Игнорировать устаревший %s в %s"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "Игнорировать этот конфликт для %s"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Игнорировать это требование только здесь"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "Установить %s несмотря на то, что он изменит архитектуру"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "Установить %s несмотря на то, что он изменит производителя"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Установить отсутствующие объекты разрешения зависимостей"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Оставить объекты разрешения зависимостей"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Разблокировать эти объекты разрешения зависимостей"
-
-#~ msgid "delete %s"
-#~ msgstr "удалить %s"
-
-#~ msgid "install %s"
-#~ msgstr "установить %s"
-
-#~ msgid "unlock %s"
-#~ msgstr "разблокировать %s"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "разблокировать все объекты разрешения зависимостей"
-
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Ошибка при чтении solv-файла: "
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Для данного URL-адреса разбор параметра пути не поддерживается"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Для данного URL-адреса анализ параметров пути не поддерживается"

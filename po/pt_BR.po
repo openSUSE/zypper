@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-28 02:50-0300\n"
+"PO-Revision-Date: 2008-04-30 20:04-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -163,7 +163,7 @@ msgstr "Acadiano"
 #. :ABW:533:
 #: ../zypp/CountryCode.cc:239
 msgid "Aland Islands"
-msgstr "Aland Islands"
+msgstr "Ilhas Åland"
 
 #. :AIA:660:
 #: ../zypp/CountryCode.cc:229
@@ -1016,12 +1016,12 @@ msgstr "Chipre"
 #: ../zypp/LanguageCode.cc:446
 #: ../zypp/LanguageCode.cc:448
 msgid "Czech"
-msgstr "Tcheco"
+msgstr "Checo"
 
 #. :CYP:196:
 #: ../zypp/CountryCode.cc:278
 msgid "Czech Republic"
-msgstr "República Tcheca"
+msgstr "República Checa"
 
 #. language code: dak
 #: ../zypp/LanguageCode.cc:450
@@ -1119,7 +1119,7 @@ msgstr "Duala"
 #: ../zypp/CheckSum.cc:97
 #, c-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipo duvidoso '%s' para %u byte checksum '%s'"
+msgstr "Tipo duvidoso '%s' para %u byte da soma de verificação '%s'"
 
 #. language code: dut nld nl
 #: ../zypp/LanguageCode.cc:478
@@ -1334,8 +1334,8 @@ msgid ""
 "File %s does not have a checksum.\n"
 "Use the file anyway?"
 msgstr ""
-"O arquivo %s não tem um checksum.\n"
-"Deseja usar o arquivo mesmo assim?"
+"O arquivo %s não tem uma soma de verificação.\n"
+"Usar o arquivo mesmo assim?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:85
 #, c-format
@@ -1346,7 +1346,7 @@ msgid ""
 msgstr ""
 "Falha na verificação de integridade do arquivo %s usando a seguinte chave:\n"
 "%s|%s|%s\n"
-" Deseja usar o arquivo mesmo assim?"
+"Usar o arquivo mesmo assim?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:117
 #, c-format
@@ -1355,9 +1355,9 @@ msgid ""
 "Expected %s, found %s\n"
 "Use the file anyway?"
 msgstr ""
-"O arquivo %s tem um checksum inválido.\n"
+"O arquivo %s tem uma soma de verificação inválida.\n"
 "Era esperado %s, foi encontrado %s\n"
-" Deseja usar o arquivo mesmo assim?"
+"Usar o arquivo mesmo assim?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:108
 #, c-format
@@ -1365,8 +1365,8 @@ msgid ""
 "File %s has an unknown checksum %s.\n"
 "Use the file anyway?"
 msgstr ""
-"O arquivo %s tem um checksum desconhecido %s.\n"
-"Deseja usar o arquivo mesmo assim?"
+"O arquivo %s tem uma soma de verificação desconhecida %s.\n"
+"Usar o arquivo mesmo assim?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:56
 #, c-format
@@ -1375,7 +1375,7 @@ msgid ""
 "Use it anyway?"
 msgstr ""
 "O arquivo %s não está assinado.\n"
-"Deseja usá-lo mesmo assim?"
+"Usá-lo mesmo assim?"
 
 #: ../devel/devel.mvidner/installation_sources.cc:65
 #, c-format
@@ -1386,7 +1386,7 @@ msgid ""
 msgstr ""
 "O arquivo %s está assinado com uma chave desconhecida:\n"
 "%s|%s|%s\n"
-" Deseja usar o arquivo mesmo assim?"
+"Usar o arquivo mesmo assim?"
 
 #: ../zypp/media/MediaException.cc:60
 #, c-format
@@ -1915,7 +1915,7 @@ msgstr "Esquema de Url '%s' inválido"
 
 #: ../zypp/Url.cc:309
 msgid "Invalid empty Url object reference"
-msgstr "Referência a objeto Url vazio inválida"
+msgstr "Referência ao objeto Url vazio inválida"
 
 #: ../zypp/url/UrlBase.cc:1047
 #, c-format
@@ -4005,7 +4005,7 @@ msgid ""
 msgstr ""
 "Chave não confiável encontrada:\n"
 "%s|%s|%s\n"
-" Deseja confiar na chave?"
+"Confiar na chave?"
 
 #. language code: hsb
 #: ../zypp/LanguageCode.cc:612
@@ -4252,7 +4252,7 @@ msgstr "Falha de applydeltarpm."
 #: ../zypp/solver/detail/SATResolver.cc:1129
 #, c-format
 msgid "architecture change of %s to %s"
-msgstr "mudança de arquitetura de %s para %s"
+msgstr "alteração de arquitetura de %s para %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:875
 #, c-format
@@ -4322,7 +4322,7 @@ msgid ""
 "-->\n"
 "  %s"
 msgstr ""
-"instalar %s (com mudanças do vendedor)\n"
+"instalar %s (com alteração do fabricante)\n"
 "  %s\n"
 "-->\n"
 "  %s"

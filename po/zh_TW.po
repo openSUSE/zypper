@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-05 01:03+0800\n"
+"PO-Revision-Date: 2008-05-04 03:42+0800\n"
 "Last-Translator: swyear <swyear@gmail.com>\n"
 "Language-Team: Chinese Traditional <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -669,9 +669,9 @@ msgid "Can't initialize recursive mutex"
 msgstr "無法啟始化遞迴 mutex"
 
 #: ../zypp/base/InterProcessMutex.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open lock file: %s"
-msgstr "%d，無法開啟鎖定檔案： %s"
+msgstr "無法開啟鎖定檔案： %s"
 
 #: ../zypp/ExternalProgram.cc:174
 #, c-format
@@ -1501,9 +1501,8 @@ msgid "Geez"
 msgstr "吉茲語"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
-#, fuzzy
 msgid "Generally ignore of some dependecies"
-msgstr "完全忽略此需求"
+msgstr "一般忽略某些需求"
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1794,9 +1793,9 @@ msgstr "伊博語"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore some dependencies of %s"
-msgstr "無法解析相依性"
+msgstr "忽略 %s 的某些相依性"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -3468,9 +3467,9 @@ msgid "Solomon Islands"
 msgstr "所羅門群島"
 
 #: ../zypp/solver/detail/SATResolver.cc:889
-#, fuzzy, c-format
+#, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
-msgstr "%s 與 %s 衝突(由 %s 提供)"
+msgstr "解決方案 %s 與 %s 衝突(由自己提供)"
 
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -4361,71 +4360,3 @@ msgstr ""
 msgid "uninstallable providers: "
 msgstr "無法安裝的提供者： "
 
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s 可提供這項相依性，但是它會變更已安裝項目的架構"
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s 可提供這項相依性，但是它會變更已安裝項目的廠商"
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "請勿安裝或刪除相關解決方案"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "忽略 %s 已設定為要安裝"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "忽略淘汰 %s 在 %s 中的情形"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "忽略 %s 的衝突"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "只在這裡忽略此需求"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "安裝 %s，即使它會變更架構"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "安裝 %s，即使它會變更廠商"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "安裝缺少的解決方案"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "保留解決方案"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "取消鎖住這些解決方案"
-
-#~ msgid "delete %s"
-#~ msgstr "刪除 %s"
-
-#~ msgid "install %s"
-#~ msgstr "安裝%s"
-
-#~ msgid "unlock %s"
-#~ msgstr "取消鎖定 %s"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "解除鎖定所有解決方案"
-
-#~ msgid "Can't add solvables to norepo."
-#~ msgstr "無法附加解決方案到虛無的套件庫。"
-
-#~ msgid "Can't open solv-file: "
-#~ msgstr "無法開啟 solv-file： "
-
-#~ msgid "Can't set RepoInfo for norepo."
-#~ msgstr "無法對虛無的套件庫設定套件庫資訊。"
-
-#~ msgid "Error reading solv-file: "
-#~ msgstr "讀取 sol-file 發生錯誤： "
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "此 URL 不支援路徑參數分析"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "此 URL 不支援路徑參數分析"
-
-#~ msgid "RepoInfo alias (%s) does not match repository name (%s)"
-#~ msgstr "套件庫資訊別名 (%s) 不符合套件庫名稱 (%s)"

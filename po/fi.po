@@ -1,3 +1,4 @@
+# translation of zypp.po to suomi
 # translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -16,13 +17,13 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-27 14:51+0300\n"
-"Last-Translator: Sami Vento <sami.vento@opensuse.fi>\n"
-"Language-Team:  <fi@li.org>\n"
+"PO-Revision-Date: 2008-05-07 17:55+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms:  nplurals=2; plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:933
@@ -31,7 +32,7 @@ msgid ""
 "uninstallable providers: "
 msgstr ""
 "\n"
-"Postettavissaolevat: "
+"Poistettavissa olevat: "
 
 #: ../zypp/media/MediaException.cc:214
 #, c-format
@@ -932,7 +933,7 @@ msgstr "Komento päättyi tuntemattomaan virheeseen."
 #: ../zypp/ExternalProgram.cc:366
 #, c-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Komento lopetettiin signaalilla %d (%s)"
+msgstr "Komento lopetettiin signaalilla %d (%s)."
 
 #. :KIR:296:
 #: ../zypp/CountryCode.cc:339
@@ -1561,7 +1562,7 @@ msgstr "ge'ez"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
 msgid "Generally ignore of some dependecies"
-msgstr "Jätä joitain vaatimuksia huomiotta"
+msgstr "Jätä joitakin vaatimuksia huomiotta"
 
 # GE
 #. :GRD:308:
@@ -2475,7 +2476,7 @@ msgstr "luxemburg"
 #. :MNG:496:
 #: ../zypp/CountryCode.cc:366
 msgid "Macao"
-msgstr "Macao, Kiinan e.h.a."
+msgstr "Macao"
 
 # MK
 #. :MHL:584:
@@ -2943,7 +2944,7 @@ msgstr "Ei koodia"
 
 #: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
-msgstr "Asennuslähteen URL puuttuu"
+msgstr "Asennuslähteen URL puuttuu."
 
 #. language code: nog
 #: ../zypp/LanguageCode.cc:884
@@ -4983,5 +4984,5 @@ msgid "Double timeout"
 msgstr "Kaksinkertainen aikakatkaisu"
 
 msgid "Start the next solver run with doubled timeout."
-msgstr "Käynnistä seuraava ratkaisin kaksikertaisella aikakatkaisu ajalla."
+msgstr "Käynnistä seuraava ratkaisin kaksinkertaisella aikakatkaisurajalla."
 
