@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  8 14:21:51 CEST 2008 - schubi@suse.de
+
+- new solution action for removing requirements/conflicts (bnc #387631)
+- revision 9988 
+
+-------------------------------------------------------------------
 Thu May  8 10:56:49 CEST 2008 - ma@suse.de
 
 - Provide enumerated patch category 'Patch::categoryEnum()' (bnc #159100) 
