@@ -43,6 +43,15 @@ namespace zypp
     public:
       typedef sat::SolvableSet Contents;
 
+      enum Category {
+        CAT_OTHER,
+        CAT_YAST,
+        CAT_SECURITY,
+        CAT_RECOMMENDED,
+        CAT_OPTIONAL,
+        CAT_DOCUMENT
+      };
+
     public:
       /**
        * Issue date time. For now it is the same as
@@ -56,11 +65,16 @@ namespace zypp
        */
       std::string category() const;
 
+      /** Patch category as enum of wellknown categories.
+       * Unknown values are mapped to \ref CAT_OTHER.
+       */
+      Category categoryEnum() const;
+
       /**
        * Does the system need to reboot to finish the update process?
        */
       bool rebootSuggested() const;
-      
+
       /**
        * Does the patch affect the package manager itself?
        * restart is suggested then

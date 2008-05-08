@@ -396,7 +396,7 @@ namespace zypp
     {
       const ::_Dataiterator * dip = obj.get();
       if ( ! dip )
-        return str << "EndOfQuery" << endl;
+        return str << "EndOfQuery";
 
       if ( obj.inSolvable() )
         str << obj.inSolvable();

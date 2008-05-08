@@ -45,6 +45,30 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  Patch::Category Patch::categoryEnum() const
+  {
+    static const IdString cat_yast( "yast" );
+    static const IdString cat_security( "security" );
+    static const IdString cat_recommended( "recommended" );
+    static const IdString cat_optional( "optional" );
+    static const IdString cat_document( "document" );
+
+    IdString cat( sat::LookupAttr( sat::SolvAttr::patchcategory ).begin().idStr() );
+
+    if ( cat == cat_yast )
+      return CAT_YAST;
+    if ( cat == cat_security )
+      return CAT_SECURITY;
+    if ( cat == cat_recommended )
+      return CAT_RECOMMENDED;
+    if ( cat == cat_optional )
+      return CAT_OPTIONAL;
+    if ( cat == cat_document )
+      return CAT_DOCUMENT;
+
+    return CAT_OTHER;
+  }
+
   std::string Patch::category() const
   { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
 
@@ -79,9 +103,9 @@ namespace zypp
   Patch::Contents Patch::contents() const
   {
     Contents result;
-    sat::LookupAttr col_name(sat::LookupAttr( sat::SolvAttr::updateCollectionName, *this ));
-    sat::LookupAttr col_evr(sat::LookupAttr( sat::SolvAttr::updateCollectionEvr, *this ));
-    sat::LookupAttr col_arch(sat::LookupAttr( sat::SolvAttr::updateCollectionArch, *this ));
+    sat::LookupAttr col_name( sat::SolvAttr::updateCollectionName, *this );
+    sat::LookupAttr col_evr( sat::SolvAttr::updateCollectionEvr, *this );
+    sat::LookupAttr col_arch( sat::SolvAttr::updateCollectionArch, *this );
 
     sat::LookupAttr::iterator col_name_it(col_name.begin());
     sat::LookupAttr::iterator col_evr_it(col_evr.begin());
@@ -100,24 +124,24 @@ namespace zypp
 
       IdString nameid( col_name_it.asString() ); /* IdString for fast compare */
       Arch arch( col_arch_it.asString() );
-      
+
       /* search providers of name */
       sat::WhatProvides providers( Capability( col_name_it.asString() ) );
       MIL << *this << " providers: " << endl;
       MIL << providers << endl;
-      
+
       if (providers.empty())
       {
           WAR << *this << " misses provider for '" << col_name_it.asString() << "'" << endl;
           continue;
       }
-      
+
       bool is_relevant = false;
       for_( it, providers.begin(), providers.end() )
       {
           if (it->ident() != nameid) /* package _name_ must match */
               continue;
-	
+
           if (it->isSystem()  /* only look at installed providers with same arch */
               && it->arch() == arch)
           {
@@ -127,10 +151,10 @@ namespace zypp
       if (!is_relevant)
       {
           MIL << *this << " is not relevant to the system" << endl;
-          
+
           continue;        /* skip if name.arch is not installed */
       }
-      
+
 
       /* find exact providers first (this matches the _real_ 'collection content' of the patch */
       sat::WhatProvides exact_providers( Capability( col_name_it.asString(), Rel::EQ, col_evr_it.asString(), ResKind::package ) );
