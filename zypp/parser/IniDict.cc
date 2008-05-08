@@ -59,14 +59,12 @@ namespace zypp
 
     void IniDict::consume( const std::string &section )
     {
-      // do nothing for now.
+      _dict[section]; // remember even empty sections
     }
 
     void IniDict::consume( const std::string &section, const std::string &key, const std::string &value )
     {
-      //MIL << endl;
       _dict[section][key] = value;
-      //MIL << this->size() << endl;
     }
 
 
@@ -77,10 +75,10 @@ namespace zypp
       {
         return _empty_map.begin();
       }
-      
+
       return (secit->second).begin();
     }
-    
+
     IniDict::entry_const_iterator IniDict::entriesEnd(const std::string &section) const
     {
       SectionSet::const_iterator secit = _dict.find(section);
@@ -88,33 +86,33 @@ namespace zypp
       {
         return _empty_map.end();
       }
-      
+
       return (secit->second).end();
     }
-    
-    
+
+
     IniDict::section_const_iterator IniDict::sectionsBegin() const
     {
       return make_map_key_begin( _dict );
     }
-    
+
     IniDict::section_const_iterator IniDict::sectionsEnd() const
     {
       return make_map_key_end( _dict );
     }
-    
+
     void IniDict::insertEntry( const std::string &section,
                                const std::string &key,
                                const std::string &value )
     {
       consume( section, key, value );
     }
-      
+
     void IniDict::deleteSection( const std::string &section )
     {
       _dict.erase(section);
     }
-    
+
     bool IniDict::hasSection( const std::string &section ) const
     {
       SectionSet::const_iterator secit = _dict.find(section);
@@ -129,7 +127,7 @@ namespace zypp
       SectionSet::const_iterator secit = _dict.find(section);
       if ( secit == _dict.end() )
         return false;
-      
+
       EntrySet::const_iterator entryit = (secit->second).find(entry);
       if ( entryit == (secit->second).end() )
         return false;
