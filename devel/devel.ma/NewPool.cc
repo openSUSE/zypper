@@ -622,14 +622,10 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  //ssup();
-  //sslk("X");
-
-  ResPool::HardLockQueries newLocks;
-  pool.getHardLockQueries( newLocks );
-  SEC << newLocks << endl;
-
-  install();
+  MIL << sat::LookupAttr( sat::SolvAttr("foo") ) << endl;
+  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin() << endl;
+  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin().idStr() << endl;
+  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin().idStr().id() << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

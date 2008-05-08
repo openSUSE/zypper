@@ -1,15 +1,21 @@
 -------------------------------------------------------------------
+Thu May  8 10:56:49 CEST 2008 - ma@suse.de
+
+- Provide enumerated patch category 'Patch::categoryEnum()' (bnc #159100) 
+- revision 9984
+
+-------------------------------------------------------------------
 Wed May  7 13:52:24 CEST 2008 - schubi@suse.de
 
 - DistUpgrade: searching for providers -> regarding name onl
 - r 9977 
 
-Tue May  6 17:35:59 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
+Tue May  6 17:35:59 CEST 2008 - dmacvicar@suse.de
 
 - add flag --registrable (-r) to query pool to avoid
   using system as a filter
-- 4.17.1
+- 4.19.1
 
 -------------------------------------------------------------------
 Tue May  6 07:37:22 CEST 2008 - coolo@suse.de
