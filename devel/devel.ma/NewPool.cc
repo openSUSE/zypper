@@ -44,8 +44,7 @@
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/PoolQuery.h"
 
-#include <zypp/base/GzStream.h>
-#include <zypp/parser/IniDict.h>
+#include "zypp/parser/ProductConfReader.h"
 
 #include <boost/mpl/int.hpp>
 
@@ -458,71 +457,11 @@ void testCMP( const L & lhs, const R & rhs )
 
 namespace zypp
 {
-  struct ProductConfData
-  {
-    IdString  _name;
-    Edition   _edition;
-    Arch      _arch;
-
-    IdString  _distName;
-    Edition   _distEdition;
-  };
-
-  class ProductConfReader
-  {
-    public:
-      typedef function<bool( const ProductConfData & )> Consumer;
-
-    public:
-      ProductConfReader()
-      {}
-
-      ProductConfReader( const Consumer & consumer_r )
-      : _consumer( consumer_r )
-      {}
-
-      ProductConfReader( const Consumer & consumer_r, const InputStream & input_r )
-      : _consumer( consumer_r )
-      { parse( input_r ); }
-
-    public:
-      const Consumer & consumer() const
-      { return _consumer; }
-
-      void setConsumer( const Consumer & consumer_r )
-      { _consumer = consumer_r; }
-
-    public:
-      void parse( const InputStream & input = InputStream() ) const;
-
-    private:
-      Consumer _consumer;
-  };
-
-  void ProductConfReader::parse( const InputStream & input_r ) const
-  {
-    WAR << "+++" << input_r << endl;
-    parser::IniDict dict( input_r );
-
-    for_( sit, dict.sectionsBegin(), dict.sectionsEnd() )
-    {
-      string section(*sit);
-      MIL << section << endl;
-      for_( it, dict.entriesBegin(*sit), dict.entriesEnd(*sit) )
-      {
-        string entry( it->first );
-        string value( it->second );
-        DBG << (*it).first << "=" << (*it).second << endl;
-      }
-
-    }
-    WAR << "---" << input_r << endl;
-  }
 }
 
-bool PCDC( const ProductConfData & d )
+bool PCDC( const parser::ProductConfData & d )
 {
-  SEC << endl;
+  SEC << d << endl;
   return true;
 }
 
@@ -539,7 +478,8 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-  ProductConfReader r( &PCDC, "test.prod" );
+  //parser::ProductConfReader r( &PCDC, "test.prod" );
+  parser::ProductConfReader::scanDir( &PCDC, "." );
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

@@ -338,6 +338,7 @@ SET( zypp_parser_SRCS
   parser/LibXMLHelper.cc
   parser/XMLNodeIterator.cc
   parser/RepoFileReader.cc
+  parser/ProductConfReader.cc
   parser/xml_escape_parser.cpp
 )
 
@@ -351,6 +352,7 @@ SET( zypp_parser_HEADERS
   parser/XMLNodeIterator.h
   parser/xml_parser_assert.h
   parser/RepoFileReader.h
+  parser/ProductConfReader.h
   parser/xml_escape_parser.hpp
 )
 
