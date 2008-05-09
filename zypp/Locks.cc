@@ -77,6 +77,7 @@ struct ApplyLock
     {
       PoolItem item(*it);
       item.status().setLock(true,ResStatus::USER);
+      DBG << "lock "<< item.resolvable()->name();
     }
   }
 };
