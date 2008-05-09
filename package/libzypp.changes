@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri May  9 15:30:40 CEST 2008 - jreidinger@suse.cz
+
+- implement remove duplicate entries in lock file (bnc#385967) 
+
+-------------------------------------------------------------------
 Fri May  9 15:15:32 CEST 2008 - ma@suse.de
 
 - Speedup rpmdb2solv by reusing an existing solv file.
