@@ -405,7 +405,7 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 void Locks::save( const Pathname& file )
 {
   if( ((_pimpl->toAdd.size() | _pimpl->toRemove.size())==0)
-      || _pimpl->locksDirty )
+      && !_pimpl->locksDirty )
   {
     DBG << "nothing changed in locks - no write to file" << endl;
     return;
@@ -421,6 +421,19 @@ void Locks::save( const Pathname& file )
   DBG << "writed "<< _pimpl->locks.size() << "locks" << endl;
   writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
   report->finish(SavingLocksReport::NO_ERROR);
+}
+
+void Locks::removeDuplicates()
+{
+  size_type sum = size();
+  for_(it,_pimpl->locks.begin(),_pimpl->locks.end())
+  {
+    if ( find(_pimpl->locks.begin(),it,*it) != it )
+      _pimpl->locks.erase(it--); //-- to avoid using break iterator
+  }
+  
+  if (sum!=size())
+    _pimpl->locksDirty = true;
 }
 
 } // ns zypp

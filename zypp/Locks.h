@@ -129,6 +129,11 @@ namespace zypp
      */
     void removeEmpty();
 
+    /**
+     * Delete all query duplicate in loaded locks.
+     * \note you must call \a save to write cleaned locks to file
+     */
+    void removeDuplicates();
     //@}
   private:
     Locks();
