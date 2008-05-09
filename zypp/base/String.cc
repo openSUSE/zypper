@@ -152,12 +152,11 @@ namespace zypp
 
       return ret;
     }
+
     /******************************************************************
     **
     **	FUNCTION NAME : stripFirstWord
     **	FUNCTION TYPE : std::string
-    **
-    **	DESCRIPTION :
     */
     std::string stripFirstWord( std::string & line, const bool ltrim_first )
     {
@@ -183,6 +182,39 @@ namespace zypp
         // strip word and ltim line
         ret = line.substr( 0, p );
         line = ltrim( line.erase( 0, p ) );
+      }
+      return ret;
+    }
+
+    /******************************************************************
+    **
+    **	FUNCTION NAME : stripLastWord
+    **	FUNCTION TYPE : std::string
+    */
+    std::string stripLastWord( std::string & line, const bool rtrim_first )
+    {
+      if ( rtrim_first )
+        line = rtrim( line );
+
+      if ( line.empty() )
+        return line;
+
+      std::string ret;
+      std::string::size_type p = line.find_last_of( " \t" );
+
+      if ( p == std::string::npos ) {
+        // no ws on line
+        ret = line;
+        line.erase();
+      } else if ( p == line.size()-1 ) {
+        // ends with ws
+        // ret remains empty
+        line = rtrim( line );
+      }
+      else {
+        // strip word and rtim line
+        ret = line.substr( p+1 );
+        line = rtrim( line.erase( p ) );
       }
       return ret;
     }

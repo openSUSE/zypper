@@ -392,7 +392,7 @@ namespace zypp
                 cont = (escCount % 2 == 1); // find some non escaped escape char
                 cur++; //skip quote
               }
-              
+
               std::string s( beg+1, cur-beg-2 ); //without quotes
               //transform escaped escape
               replace_all( s, "\\\\", "\\" );
@@ -419,7 +419,7 @@ namespace zypp
               std::string s( beg, cur-beg );
               //transform escaped escape
               replace_all( s, "\\\\", "\\" );
-              
+
               const char *delimeter = sepchars_r;
               while ( *delimeter )
               {
@@ -521,6 +521,8 @@ namespace zypp
     //@}
 
     std::string stripFirstWord( std::string & line, const bool ltrim_first );
+
+    std::string stripLastWord( std::string & line, const bool rtrim_first );
 
     std::string getline( std::istream & str, bool trim = false );
 
