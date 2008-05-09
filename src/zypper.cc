@@ -416,12 +416,7 @@ void Zypper::processGlobalOptions()
     }
 
     DBG << "root dir = " << _gopts.root_dir << endl;
-    _gopts.rm_options.knownReposPath = _gopts.root_dir
-      + _gopts.rm_options.knownReposPath;
-    _gopts.rm_options.repoCachePath = _gopts.root_dir
-      + _gopts.rm_options.repoCachePath;
-    _gopts.rm_options.repoRawCachePath = _gopts.root_dir
-      + _gopts.rm_options.repoRawCachePath;
+    _gopts.rm_options = RepoManagerOptions(_gopts.root_dir);
   }
 
   if ((it = gopts.find("reposd-dir")) != gopts.end()) {
