@@ -478,14 +478,19 @@ namespace zypp
 
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
 
+      ///////////////////////////////////////////////////////////////////
       // Store non-package data:
+      ///////////////////////////////////////////////////////////////////
       filesystem::assert_dir( home() );
+      // requested locales
       _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
+      // weak locks
       {
         SoftLocksFile::Data newdata;
         pool_r.getActiveSoftLocks( newdata );
         _softLocksFile.setData( newdata );
       }
+      // hard locks
       if ( ZConfig::instance().apply_locks_file() )
       {
         HardLocksFile::Data newdata;
@@ -493,7 +498,16 @@ namespace zypp
         _hardLocksFile.setData( newdata );
       }
 
+      ///////////////////////////////////////////////////////////////////
       // Process packages:
+      ///////////////////////////////////////////////////////////////////
+      if ( root() == "/" && CommitLog::fname().empty() )
+      {
+        // Yes, we simply hijack /var/log/YaST2/y2logRPM
+        // until we maintain some zypp history database.
+        CommitLog::setFname( "/var/log/YaST2/y2logRPM" );
+      }
+
       ZYppCommitResult result;
 
       TargetImpl::PoolItemList to_uninstall;
