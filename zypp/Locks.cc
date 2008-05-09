@@ -346,12 +346,13 @@ public:
     switch( contains(q,solvs) )
     {
     case 0:
-      return false;
+      return false; //another lock
     case 1:
       cs = SavingLocksReport::SAME_RESULTS;
       break;
     case 2:
       cs = SavingLocksReport::INTERSECT;
+      break;
     default:
       return true;
     }
