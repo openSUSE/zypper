@@ -20,6 +20,7 @@ namespace zypp
   public:
     typedef std::list<PoolQuery> LockList;
     typedef LockList::const_iterator const_iterator;
+    typedef LockList::size_type size_type;
   public:
     class Impl;
 
