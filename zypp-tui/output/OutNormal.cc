@@ -148,7 +148,7 @@ void OutNormal::progressEnd(const std::string & id, const string & label, bool e
     return;
 
   if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << label << " [" << _("done") << "]";
+    cout << CLEARLN << label << " [" << (error ? _("error") : _("done")) << "]";
   else
    cout << "]";
   cout << endl << std::flush;
