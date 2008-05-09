@@ -1,0 +1,171 @@
+.TH "locks" "5" "0.4.20" "libzypp" "System Tools"
+.SH "NAME"
+.LP
+locks - libzypp locking file
+
+.SH "DESCRIPTION"
+.LP
+The file \fI/etc/zypp/locks\fR has been read by libzypp at startup if zypp.conf allow it. The entries is used for initial lock of package. Lock package mean does't allow install or uninstall package. Valid entries are
+.TP
+\fI attribute\fR\fB:\fR \fIvalue\fR
+Where attributes and its values is described below.
+.br
+Locks is separated by empty line.
+
+
+.SH "ATTRIBUTES"
+.LP
+description of attributes. All attributes are lower-case.
+
+.TP
+.B repo
+specifies repository restriction. Only allias is accepted.
+.br
+Default is allowed all repositories.
+
+.TP
+.B type
+type restriction - kind can be package,patch,pattern,product and srcpackage.
+.br
+default is all kind 
+
+.TP
+.B case_sensitive
+if string is matched case sensitive.
+.br
+default is case insensitive 
+
+.TP
+.B require_all
+if all string must match or at least one
+.br
+values are \fBtrue\fR for all match and \fBfalse\fR for at least one
+.br
+default is false
+
+.TP
+.B install_status
+status of object. Possibly states is installed,not-installed and all. If more install status is specified then last is used.
+.br
+values are \fBinstalled\fR for all packages which is installed,\fBnon-installed\fR for packages which can be install or reinstall and \fBall\fR for both.
+.br
+default is all 
+
+.TP
+.B match_type 
+type of string in value. Not affect kind and repo which must be exactly specified.
+.br
+values are \fBexact\fR for exact match, \fBsubstring\fR if string contains value, \fBregex\fR for regular expressions, \fBglob\fR for matching as in command line and \fBword\fR.
+.br
+default is substring 
+
+.TP
+.B query_string
+string for all attributes. Can be restricted by attribute with empty value. 
+
+.TP
+.B solvable_name 
+name of object 
+
+.TP
+.B solvable_summary
+summary of object 
+
+.TP
+.B solvable_description
+description of object 
+
+.TP
+.B solvable_eula 
+license text of non-opensource object
+
+.TP
+.B solvable_license 
+license of package (only for package)
+
+.TP
+.B solvable_keywords 
+keywords which specify object
+
+.TP
+.B solvable_authors
+authors of object
+
+.TP
+.B update_reference_type 
+reference for update (e.g. bugzilla,cve) (only for patch)
+
+.SH "EXAMPLES"
+.LP
+examples of usage
+
+.TP
+.B all kde
+locks everything which contains kde 
+.br
+-----locks-----
+.br
+solvable_name: kde
+
+.TP
+.B shareware from repository non-oss or factory
+locks each package which is shareware from repository non-oss or factory 
+.br
+-----locks-----
+.br
+solvable_license: shareware
+.br
+repo: non-oss
+.br
+repo: factory
+
+.TP
+.B all patches
+locks all patches
+.br
+-----locks-----
+.br
+kind:patch
+
+.TP
+.B Two locks
+all objects which contains kde(only low letters) in name and description and second lock for everything which have x11 keyword 
+.br
+-----locks-----
+.br
+global_string: kde
+.br
+solvable_name:
+.br
+solvable_description:
+.br
+case_sensitive: on
+.br
+require_all: on
+.br
+ 
+.br
+solvable_keywords: x11
+
+.TP
+.B exact package 
+lock k3b (e.g. don't want update it)
+.br
+preferred way is use zypper addlock command (or Yast when they support new locks api-not now)
+.br
+-----locks-----
+.br
+solvable_name: k3b
+.br
+string_type: exact
+
+.SH "HOMEPAGE"
+
+http://en.opensuse.org/Libzypp/Locksfile
+
+.SH "AUTHORS"
+.LP
+Josef Reidinger <jreidinger@suse.cz>
+
+.SH "SEE ALSO"
+.LP
