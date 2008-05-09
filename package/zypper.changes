@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  9 16:10:45 CEST 2008 - jreidinger@suse.cz
+
+- fix writing files outside specified root (bnc#388265)
+- r10019 
+
+-------------------------------------------------------------------
 Fri May  9 15:36:36 CEST 2008 - jreidinger@suse.cz
 
 - implement cleaning locks (bnc#385967)
