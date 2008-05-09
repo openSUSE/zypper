@@ -41,6 +41,8 @@ namespace sat
       /** Value representing \c noAttr (<tt>""</tt>)*/
       static const SolvAttr noAttr;
 
+      /** \name common */
+      //@{
       static const SolvAttr name;
       static const SolvAttr summary;
       static const SolvAttr description;
@@ -52,8 +54,10 @@ namespace sat
       static const SolvAttr installsize;
       static const SolvAttr downloadsize;
       static const SolvAttr diskusage;
+      //@}
 
-      //package
+      /** \name package */
+      //@{
       static const SolvAttr checksum;
       static const SolvAttr mediadir;
       static const SolvAttr medianr;
@@ -73,8 +77,10 @@ namespace sat
       static const SolvAttr sourcename;
       static const SolvAttr sourceevr;
       static const SolvAttr headerend;
+      //@}
 
-      // patch
+       /** \name patch */
+      //@{
       static const SolvAttr patchcategory;
       static const SolvAttr rebootSuggested;
       static const SolvAttr restartSuggested;
@@ -87,8 +93,10 @@ namespace sat
       static const SolvAttr updateReferenceHref;
       static const SolvAttr updateReferenceId;
       static const SolvAttr updateReferenceTitle;
-    
-      // pattern
+      //@}
+
+      /** \name pattern */
+      //@{
       static const SolvAttr isvisible;
       static const SolvAttr icon;
       static const SolvAttr order;
@@ -97,9 +105,22 @@ namespace sat
       static const SolvAttr script;
       static const SolvAttr includes;
       static const SolvAttr extends;
-
       //@}
 
+      /** \name product */
+      //@{
+      static const SolvAttr productShortlabel;
+      static const SolvAttr productDistproduct;
+      static const SolvAttr productDistversion;
+      static const SolvAttr productType;
+      static const SolvAttr productRelnotesurl;
+      static const SolvAttr productUpdateurls;
+      static const SolvAttr productExtraurls;
+      static const SolvAttr productOptionalurls;
+      static const SolvAttr productFlags;
+      //@}
+
+      //@}
     public:
       /** Default ctor: \ref noAttr */
       SolvAttr() {}

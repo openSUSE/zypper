@@ -459,12 +459,6 @@ namespace zypp
 {
 }
 
-bool PCDC( const parser::ProductConfData & d )
-{
-  SEC << d << endl;
-  return true;
-}
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -477,12 +471,6 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
-
-  parser::ProductConfReader::scanDir( &PCDC, ZConfig::instance().productsPath() );
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
@@ -570,6 +558,21 @@ try {
   }
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
+  for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+  {
+    Product::constPtr p( asKind<Product>( *it ) );
+    USR << p << endl;
+    MIL << p->type() << endl;
+    MIL << p->releaseNotesUrl() << endl;
+    MIL << p->updateUrls() << endl;
+    MIL << p->extraUrls() << endl;
+    MIL << p->optionalUrls() << endl;
+    MIL << p->flags() << endl;
+    MIL << p->shortName() << endl;
+    MIL << p->distributionName() << endl;
+    MIL << p->distributionEdition() << endl;
+  }
 
 
   ///////////////////////////////////////////////////////////////////

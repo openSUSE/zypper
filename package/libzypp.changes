@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  9 23:15:53 CEST 2008 - ma@suse.de
+
+- Product now retrieves all attributes from the solv file.
+- version 4.21.1
+- revision 10031
+
+-------------------------------------------------------------------
 Fri May  9 21:28:42 CEST 2008 - ma@suse.de
 
 - Add zypp.conf option configdir (/etc/zypp) and arrange 

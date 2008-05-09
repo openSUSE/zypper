@@ -9,14 +9,47 @@
 /** \file zypp/Product.cc
  *
 */
+#include <iostream>
+#include "zypp/base/LogTools.h"
+
 #include "zypp/Product.h"
 #include "zypp/Url.h"
+
+#include "zypp/sat/LookupAttr.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(Product);
+
+  namespace
+  {
+    void fillList( std::list<Url> & ret_r, sat::Solvable solv_r, sat::SolvAttr attr_r )
+    {
+      sat::LookupAttr query( attr_r, solv_r );
+      for_( it, query.begin(), query.end() )
+      {
+        try // ignore malformed urls
+        {
+          ret_r.push_back( Url( it.asString() ) );
+        }
+        catch( const url::UrlException & )
+        {}
+      }
+    }
+
+    void fillList( std::list<std::string> & ret_r, sat::Solvable solv_r, sat::SolvAttr attr_r )
+    {
+      sat::LookupAttr query( attr_r, solv_r );
+      for_( it, query.begin(), query.end() )
+      {
+        ret_r.push_back( it.asString() );
+      }
+    }
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -40,44 +73,58 @@ namespace zypp
   //	Package interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
-#warning DUMMY type
+
   std::string Product::type() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::productType ); }
 
-#warning DUMMY releaseNotesUrl
   Url Product::releaseNotesUrl() const
-  { return Url(); }
+  {
+    std::list<Url> ret;
+    fillList( ret, satSolvable(), sat::SolvAttr::productRelnotesurl );
+    if ( ! ret.empty() )
+      return  ret.front();
+    return Url();
+  }
 
-#warning DUMMY updateUrls
   std::list<Url> Product::updateUrls() const
-  { return std::list<Url>(); }
+  {
+    std::list<Url> ret;
+    fillList( ret, satSolvable(), sat::SolvAttr::productUpdateurls );
+    return ret;
+  }
 
-#warning DUMMY extraUrls
   std::list<Url> Product::extraUrls() const
-  { return std::list<Url>(); }
+  {
+    std::list<Url> ret;
+    fillList( ret, satSolvable(), sat::SolvAttr::productExtraurls );
+    return ret;
+  }
 
-#warning DUMMY optionalUrls
   std::list<Url> Product::optionalUrls() const
-  { return std::list<Url>(); }
+  {
+    std::list<Url> ret;
+    fillList( ret, satSolvable(), sat::SolvAttr::productOptionalurls );
+    return ret;
+  }
 
-#warning DUMMY flags
   std::list<std::string> Product::flags() const
-  { return std::list<std::string>(); }
+  {
+    std::list<std::string> ret;
+    fillList( ret, satSolvable(), sat::SolvAttr::productFlags );
+    return ret;
+  }
 
-#warning DUMMY shortName
   std::string Product::shortName() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }
 
   std::string Product::longName( const Locale & lang_r ) const
   { return summary( lang_r ); }
 
-#warning DUMMY distributionName
   std::string Product::distributionName() const
-  { return std::string(); }
+  { return lookupStrAttribute( sat::SolvAttr::productDistproduct ); }
 
-#warning DUMMY distributionEdition
   Edition Product::distributionEdition() const
-  { return Edition(); }
+  { return Edition( lookupStrAttribute( sat::SolvAttr::productDistversion ) ); }
 
 
   /////////////////////////////////////////////////////////////////

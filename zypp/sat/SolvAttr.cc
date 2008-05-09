@@ -69,7 +69,7 @@ namespace sat
   // patch
   const SolvAttr SolvAttr::patchcategory            ( SOLVABLE_PATCHCATEGORY );
   const SolvAttr SolvAttr::rebootSuggested          ( UPDATE_REBOOT );
-  const SolvAttr SolvAttr::restartSuggested          ( UPDATE_RESTART );
+  const SolvAttr SolvAttr::restartSuggested         ( UPDATE_RESTART );
   const SolvAttr SolvAttr::updateCollectionName     ( UPDATE_COLLECTION_NAME );
   const SolvAttr SolvAttr::updateCollectionEvr      ( UPDATE_COLLECTION_EVR );
   const SolvAttr SolvAttr::updateCollectionArch     ( UPDATE_COLLECTION_ARCH );
@@ -89,6 +89,17 @@ namespace sat
   const SolvAttr SolvAttr::script       ( "script" );
   const SolvAttr SolvAttr::includes     ( SOLVABLE_INCLUDES );
   const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
+
+  // product
+  const SolvAttr SolvAttr::productShortlabel   ( PRODUCT_SHORTLABEL );
+  const SolvAttr SolvAttr::productDistproduct  ( PRODUCT_DISTPRODUCT );
+  const SolvAttr SolvAttr::productDistversion  ( PRODUCT_DISTVERSION );
+  const SolvAttr SolvAttr::productType         ( PRODUCT_TYPE );
+  const SolvAttr SolvAttr::productRelnotesurl  ( PRODUCT_RELNOTESURL );
+  const SolvAttr SolvAttr::productUpdateurls   ( PRODUCT_UPDATEURLS );
+  const SolvAttr SolvAttr::productExtraurls    ( PRODUCT_EXTRAURLS );
+  const SolvAttr SolvAttr::productOptionalurls ( PRODUCT_OPTIONALURLS );
+  const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////
