@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  9 17:08:34 CEST 2008 - jkupec@suse.cz
+
+- set proper exit status after installation/removal failed (bnc #381203)
+- r10021
+
+-------------------------------------------------------------------
 Fri May  9 16:10:45 CEST 2008 - jreidinger@suse.cz
 
 - fix writing files outside specified root (bnc#388265)
