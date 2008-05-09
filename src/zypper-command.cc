@@ -46,6 +46,7 @@ const ZypperCommand ZypperCommand::XML_LIST_UPDATES_PATCHES(ZypperCommand::XML_L
 const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
 const ZypperCommand ZypperCommand::REMOVE_LOCK(ZypperCommand::REMOVE_LOCK_e);
 const ZypperCommand ZypperCommand::LIST_LOCKS(ZypperCommand::LIST_LOCKS_e);
+const ZypperCommand ZypperCommand::CLEAN_LOCKS(ZypperCommand::CLEAN_LOCKS_e);
 
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
@@ -107,6 +108,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;
     _table["removelock"] = _table["rl"] = _table["lock-delete"] = _table["ld"] = ZypperCommand::REMOVE_LOCK_e;
     _table["locks"] = _table["ll"] = _table["lock-list"] = ZypperCommand::LIST_LOCKS_e;
+    _table["cleanlocks"] = _table["cl"] = _table["lock-clean"] = ZypperCommand::CLEAN_LOCKS_e;
 
     _table["help"] = _table["?"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;

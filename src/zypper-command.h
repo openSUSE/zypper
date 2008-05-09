@@ -41,6 +41,7 @@ struct ZypperCommand
   static const ZypperCommand ADD_LOCK;
   static const ZypperCommand REMOVE_LOCK;
   static const ZypperCommand LIST_LOCKS;
+  static const ZypperCommand CLEAN_LOCKS;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -98,6 +99,7 @@ struct ZypperCommand
     ADD_LOCK_e,
     REMOVE_LOCK_e,
     LIST_LOCKS_e,
+    CLEAN_LOCKS_e,
 
     HELP_e,
     SHELL_e,

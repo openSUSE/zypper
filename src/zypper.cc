@@ -29,6 +29,7 @@
 
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/Locks.h"
 
 #include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
 
@@ -1695,6 +1696,28 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::CLEAN_LOCKS_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {"only-duplicates", no_argument, 0, 'd' },
+      {"only-empty", no_argument, 0, 'e' },
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = ( //TODO localize
+      "clean locks (ll)\n"
+      "\n"
+      "Removes useless locks. Before removing locks which doesn't lock anything, ask user.\n"
+      "\n"
+      "  Command options:\n"
+      "-d, --only-duplicates     Clean only duplicate locks.\n"
+      "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -3129,6 +3152,30 @@ void Zypper::doCommand()
 
     list_locks(*this);
 
+    break;
+  }
+  
+  case ZypperCommand::CLEAN_LOCKS_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+   
+    init_target(*this);
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    load_resolvables(*this);
+
+    Locks::instance().read();
+    Locks::size_type start = Locks::instance().size();
+    if ( !copts.count("only-duplicate") )
+      Locks::instance().removeEmpty();
+    if ( !copts.count("only-empty") )
+      Locks::instance().removeDuplicates();
+
+    Locks::instance().save();
+
+    out().info(str::form("removed locks: %lu",start-Locks::instance().size()));
+    
     break;
   }
 
