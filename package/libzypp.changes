@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May  9 15:15:32 CEST 2008 - ma@suse.de
+
+- Speedup rpmdb2solv by reusing an existing solv file.
+- version 4.20.1
+- revision 10012
+
+-------------------------------------------------------------------
 Thu May  8 18:13:54 CEST 2008 - ma@suse.de
 
 - Fix failed package download due to unkown repository type (bnc #386386)
