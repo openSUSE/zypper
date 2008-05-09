@@ -214,6 +214,10 @@ namespace zypp
                 {
                   cfg_packages_path = Pathname(value);
                 }
+                else if ( entry == "configdir" )
+                {
+                  cfg_config_path = Pathname(value);
+                }
                 else if ( entry == "reposdir" )
                 {
                   cfg_known_repos_path = Pathname(value);
@@ -237,6 +241,10 @@ namespace zypp
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
+                }
+                else if ( entry == "productsdir" )
+                {
+                  cfg_products_path = Pathname(value);
                 }
                 else if ( entry == "solver.onlyRequires" )
                 {
@@ -286,13 +294,17 @@ namespace zypp
     Arch     cfg_arch;
     Locale   cfg_textLocale;
 
+    Pathname cfg_cache_path;
     Pathname cfg_metadata_path;
     Pathname cfg_solvfiles_path;
     Pathname cfg_packages_path;
-    Pathname cfg_cache_path;
+
+    Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
     Pathname cfg_vendor_path;
+    Pathname cfg_products_path;
     Pathname locks_file;
+
     Pathname update_scripts_path;
 
     bool repo_add_probe;
@@ -418,12 +430,38 @@ namespace zypp
         ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path );
   }
 
+  ///////////////////////////////////////////////////////////////////
+
+  Pathname ZConfig::configPath() const
+  {
+    return ( _pimpl->cfg_config_path.empty()
+        ? Pathname("/etc/zypp") : _pimpl->cfg_config_path );
+  }
 
   Pathname ZConfig::knownReposPath() const
   {
     return ( _pimpl->cfg_known_repos_path.empty()
-        ? Pathname("/etc/zypp/repos.d") : _pimpl->cfg_known_repos_path );
+        ? (configPath()/"repos.d") : _pimpl->cfg_known_repos_path );
   }
+  Pathname ZConfig::vendorPath() const
+  {
+    return ( _pimpl->cfg_vendor_path.empty()
+        ? (configPath()/"vendors.d") : _pimpl->cfg_vendor_path );
+  }
+
+  Pathname ZConfig::productsPath() const
+  {
+    return ( _pimpl->cfg_products_path.empty()
+        ? (configPath()/"products.d") : _pimpl->cfg_products_path );
+  }
+
+  Pathname ZConfig::locksFile() const
+  {
+    return ( _pimpl->locks_file.empty()
+        ? (configPath()/"locks") : _pimpl->locks_file );
+  }
+
+  ///////////////////////////////////////////////////////////////////
 
   const std::string & ZConfig::cacheDBSplitJoinSeparator() const
   {
@@ -447,20 +485,9 @@ namespace zypp
   bool ZConfig::download_use_deltarpm() const
   { return _pimpl->download_use_deltarpm; }
 
-  Pathname ZConfig::vendorPath() const
-  {
-    return ( _pimpl->cfg_vendor_path.empty()
-        ? Pathname("/etc/zypp/vendors.d") : _pimpl->cfg_vendor_path );
-  }
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }
-
-  Pathname ZConfig::locksFile() const
-  {
-    return ( _pimpl->locks_file.empty()
-        ? Pathname("/etc/zypp/locks") : _pimpl->locks_file );
-  }
 
   bool ZConfig::apply_locks_file() const
   {

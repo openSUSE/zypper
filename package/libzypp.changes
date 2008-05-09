@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri May  9 21:28:42 CEST 2008 - ma@suse.de
+
+- Add zypp.conf option configdir (/etc/zypp) and arrange 
+  all config files and directories to follow {configdir}
+  per default.
+- Fix zypp-query-pool to print satisfied products and additional 
+  products defined in {configdir}/products.d for registration. 
+  (bnc #385868)
+- version 4.21.0
+- revision 10029
+
+-------------------------------------------------------------------
 Fri May  9 15:30:40 CEST 2008 - jreidinger@suse.cz
 
 - implement remove duplicate entries in lock file (bnc#385967) 

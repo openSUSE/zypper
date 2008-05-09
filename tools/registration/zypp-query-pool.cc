@@ -4,6 +4,7 @@
 
 #include <zypp/ZYpp.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+#include <zypp/parser/ProductConfReader.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/RepoManager.h>
 #include <zypp/base/Logger.h>
@@ -26,7 +27,7 @@ struct ByPresent : public PoolItemFilterFunctor
 {
     bool operator()( const PoolItem & p ) const
     {
-	if ( isKind<Package>(p.resolvable()) )    
+	if ( isKind<Package>(p.resolvable()) )
 	    return p.status().isInstalled();
 	else
 	    return p.status().isSatisfied();
@@ -76,6 +77,16 @@ public:
 };
 
 
+bool printAdditionalProducts( const zypp::parser::ProductConfData & d )
+{
+  cout << str::form( "i|product|%s|%s|%s|%s|%s\n",
+                        d.name().c_str(),
+                        d.edition().c_str(),
+                        d.arch().c_str(),
+                        d.distName().c_str(),
+                        d.distEdition().c_str() );
+  return true;
+}
 
 
 static void
@@ -109,10 +120,10 @@ query_pool( ZYpp::Ptr Z,
       for ( RepoInfoList::iterator it = repos.begin(); it != repos.end(); ++it )
       {
 	  RepoInfo & repo( *it );
-	  
+
 	  if ( ! repo.enabled() )
 	      continue;
-	  
+
 	  MIL << "Loading " << repo << endl;
 	  if ( ! repoManager.isCached( repo ) )
 	  {
@@ -133,14 +144,15 @@ query_pool( ZYpp::Ptr Z,
 // add resolvables from the system
   MIL << "Loading target..." << endl;
   Z->target()->load();
- 
+
   MIL << "Loaded target." << endl;
-  
+
   MIL << "Pool has " << Z->pool().size() << " entries" << endl;
-  
+
 // solve to get the status satisfied available
+  getZYpp()->resolver()->setOnlyRequires( true );
   getZYpp()->resolver()->resolvePool();
-  
+
   if ( filter == FILTER_ALL)
   {
       PrintItem printitem( repository );
@@ -151,10 +163,10 @@ query_pool( ZYpp::Ptr Z,
       else
 	  zypp::invokeOnEach( Z->pool().begin(), Z->pool().end(),				// all kinds
 			      zypp::functor::functorRef<bool,PoolItem> (printitem) );
-      
+
   }
-else
-{
+  else
+  {
     PrintItem printitem( repository );
     if (installed_only)
 	zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
@@ -163,7 +175,18 @@ else
     else
 	zypp::invokeOnEach( Z->pool().byKindBegin( kind ), Z->pool().byKindEnd( kind ),	// filter kind
 			    zypp::functor::functorRef<bool,PoolItem> (printitem) );
-}
+  }
+
+  if ( installed_only
+       && repository.empty()
+       && ( filter == FILTER_ALL || filter == "products" ) )
+  {
+    // write out additional products from /etc/zypp/products.d
+    // if -r is active and no repo filter is defined.
+    zypp::parser::ProductConfReader::scanDir( &printAdditionalProducts,
+                                              ZConfig::instance().productsPath() );
+  }
+
   return;
 }
 
@@ -177,7 +200,7 @@ main (int argc, char **argv)
   string repository;
   bool only_installed = false;
   int offset = 1;
-  
+
   if ( (argc>1) && ( (string(argv[offset]) == "--registrable")
 		     || ( string(argv[offset]) == "-r" ) ) )
   {
@@ -188,8 +211,8 @@ main (int argc, char **argv)
   if ( argc > 1 )
   {
       filter = argv[offset];
-      --argc; ++offset; 
-      
+      --argc; ++offset;
+
       if ( argc > 1 )
       {
 	  repository = argv[offset];

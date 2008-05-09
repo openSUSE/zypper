@@ -478,9 +478,7 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-  //parser::ProductConfReader r( &PCDC, "test.prod" );
-  parser::ProductConfReader::scanDir( &PCDC, "." );
-
+  parser::ProductConfReader::scanDir( &PCDC, ZConfig::instance().productsPath() );
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
@@ -573,10 +571,6 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  MIL << sat::LookupAttr( sat::SolvAttr("foo") ) << endl;
-  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin() << endl;
-  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin().idStr() << endl;
-  MIL << sat::LookupAttr( sat::SolvAttr("foo") ).begin().idStr().id() << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

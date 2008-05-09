@@ -84,28 +84,38 @@ namespace zypp
 
     public:
       /**
-       * Path where the caches are kept.
+       * Path where the caches are kept (/var/cache/zypp)
+       * \ingroup g_ZC_REPOCACHE
        */
       Pathname repoCachePath() const;
 
      /**
-       * Path where the repo metadata is downloaded and kept.
-       */
+       * Path where the repo metadata is downloaded and kept (repoCachePath()/raw).
+        * \ingroup g_ZC_REPOCACHE
+      */
       Pathname repoMetadataPath() const;
 
      /**
-       * Path where the repo solv files are created and kept.
-       */
+       * Path where the repo solv files are created and kept (repoCachePath()/solv).
+        * \ingroup g_ZC_REPOCACHE
+      */
       Pathname repoSolvfilesPath() const;
 
       /**
-       * Path where the repo packages are downloaded and kept.
-       */
+       * Path where the repo packages are downloaded and kept (repoCachePath()/packages).
+        * \ingroup g_ZC_REPOCACHE
+      */
       Pathname repoPackagesPath() const;
 
       /**
-       * Path where the known repositories
-       * .repo files are kept
+       * Path where the configfiles are kept (/etc/zypp).
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname configPath() const;
+
+      /**
+       * Path where the known repositories .repo files are kept (configPath()/repos.d).
+       * \ingroup g_ZC_CONFIGFILES
        */
       Pathname knownReposPath() const;
 
@@ -138,9 +148,16 @@ namespace zypp
       bool download_use_deltarpm() const;
 
       /**
-       * Directory for equivalent vendor definitions
+       * Directory for equivalent vendor definitions  (configPath()/vendors.d)
+       * \ingroup g_ZC_CONFIGFILES
        */
       Pathname vendorPath() const;
+
+      /**
+       * Directory for additional product information  (configPath()/products.d)
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname productsPath() const;
 
       /**
        * Solver regards required packages,patterns,... only
@@ -148,12 +165,13 @@ namespace zypp
       bool solver_onlyRequires() const;
 
       /**
-       * Path where zypp can find or create lock file
+       * Path where zypp can find or create lock file (configPath()/locks)
+       * \ingroup g_ZC_CONFIGFILES
        */
-      Pathname  locksFile() const;
+      Pathname locksFile() const;
 
       /**
-       * Whetever locks file should be readed and applied after start
+       * Whether locks file should be read and applied after start
        */
       bool apply_locks_file() const;
 
