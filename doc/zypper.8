@@ -587,29 +587,7 @@ To delay the up-to-date check (and thus the automatic refresh) for a certain num
 
 .SH "LOCKS"
 .LP
-The file
-.B /etc/zypp/locks
-can contain a list of packages to be locked. Installed packages which match one
-of the items in this list will not be updated or removed by the solver.
-Similarly, those matching packages which have not yet been installed, will not be
-considered for installation. 
-
-Empty lines and lines beginning with \fB#\fR are ignored. Each line is of the form
-"\fIPATTERN \fR[ \fIOP EDITION \fR]"
-where
-.I PATTERN
-is a name with shell wildcards \fB?\fR and \fB*\fR,
-.I OP
-is one of \fB< <=  = >=  >\fR,  and 
-.I EDITION
-is \fI VERSION\fR[\fB-\fIRELEASE\fR].
-
-.TP
-Example:
-# Don't update the old KDE
-.br
-kde* < 3.5
-
+see locks(5)
 
 .SH "FILES"
 .TP
