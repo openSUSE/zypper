@@ -94,6 +94,7 @@ struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   {
     Zypper::instance()->out().progressEnd("run-script", _label, true);
     Zypper::instance()->out().error(description);
+    Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
 
   /** Report success. */
@@ -142,9 +143,12 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
   virtual void finish( Error error, const std::string & reason )
   {
     Zypper::instance()->out()
-      .progressEnd("read-installed-packages", _("Reading installed packages"));
+      .progressEnd("read-installed-packages", _("Reading installed packages"), error != NO_ERROR);
     if (error != NO_ERROR)
+    {
       Zypper::instance()->out().error(zcb_error2str(error, reason));
+      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    }
   }
 };
 
@@ -180,15 +184,18 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
-    Zypper::instance()->out().progressEnd("remove-resolvable", _label);
     if (error != NO_ERROR)
-      Zypper::instance()->out().error(zcb_error2str(error, reason));
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+      Zypper::instance()->out().progressEnd("remove-resolvable", _label);
   }
 };
 
 ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::RpmLevel level) {
   static const char * level_s[] = {
-    // TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate 
+    // TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
+    //! \todo use format
     "", _("(with --nodeps)"), _("(with --nodeps --force)")
   };
   return stm << level_s[level];
@@ -225,7 +232,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     if (level < RPM_NODEPS_FORCE)
     {
       DBG << "Install failed, will retry more aggressively"
-             " (with --no-deps, --force)." << std::endl;
+             " (with --nodeps, --force)." << std::endl;
       return ABORT;
     }
 
@@ -247,13 +254,11 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
       return;
     }
 
-    Zypper::instance()->out().progressEnd("remove-resolvable", _label);
     if (error != NO_ERROR)
-    {
-      ostringstream s;
-      s << level << " " << zcb_error2str(error, reason);
-      Zypper::instance()->out().error(s.str());
-    }
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+      Zypper::instance()->out().progressEnd("install-resolvable", _label);
   }
 };
 
