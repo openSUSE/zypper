@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  9 14:08:55 CEST 2008 - jreidinger@suse.cz
+
+- add removelock with name (bnc#385966) 
+- r10006
+
+-------------------------------------------------------------------
 Wed May  7 12:51:16 CEST 2008 - jkupec@suse.cz
 
 - modifyrepo cleanup: --name added, -R is now used for
