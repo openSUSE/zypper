@@ -128,7 +128,7 @@ int read_action_ari_with_timeout (PromptId pid, unsigned timeout,
     //FIXME XML output
     cout << "\r";
     cout << boost::str(format(_("autoselect %s after %u ")) % ari_mapping[default_action]
-      % timeout);
+      % timeout); //! \todo fix english after 11.0
     cout.flush();
 
     sleep(1);
