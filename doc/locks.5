@@ -25,9 +25,11 @@ Default is allowed all repositories.
 
 .TP
 .B type
-type restriction - kind can be package,patch,pattern,product and srcpackage.
+type restriction
 .br
-default is all kind 
+values can be \fBpackage\fR, \fBpatch\fR, \fBpattern\fR, \fBproduct\fR and \fBsrcpackage\fR.
+.br
+default is all type 
 
 .TP
 .B case_sensitive
@@ -53,7 +55,7 @@ default is all
 
 .TP
 .B match_type 
-type of string in value. Not affect kind and repo which must be exactly specified.
+type of string in value. Not affect type and repo which must be exactly specified.
 .br
 values are \fBexact\fR for exact match, \fBsubstring\fR if string contains value, \fBregex\fR for regular expressions, \fBglob\fR for matching as in command line and \fBword\fR.
 .br
@@ -125,7 +127,7 @@ locks all patches
 .br
 -----locks-----
 .br
-kind:patch
+type:patch
 
 .TP
 .B Two locks
@@ -133,7 +135,7 @@ all objects which contains kde(only low letters) in name and description and sec
 .br
 -----locks-----
 .br
-global_string: kde
+query_string: kde
 .br
 solvable_name:
 .br
@@ -157,7 +159,7 @@ preferred way is use zypper addlock command (or Yast when they support new locks
 .br
 solvable_name: k3b
 .br
-string_type: exact
+match_type: exact
 
 .SH "HOMEPAGE"
 
