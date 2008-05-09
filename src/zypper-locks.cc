@@ -14,14 +14,14 @@ using namespace zypp;
 using namespace std;
 
 static const string
-get_string_for_table(const set<string> & repos)
+get_string_for_table(const set<string> & attrvals)
 {
-  if (repos.empty())
+  if (attrvals.empty())
     return _("(any)");
-  else if (repos.size() > 1)
+  else if (attrvals.size() > 1)
     return _("(multiple)");
   else
-    return *repos.begin();
+    return *attrvals.begin();
 }
 
 void list_locks(Zypper & zypper)
@@ -63,11 +63,6 @@ void list_locks(Zypper & zypper)
         tr << *it->strings().begin();
       else
         tr << *attr.begin();
-
-      if (it->repos().empty())
-      {
-        
-      }
 
       set<string> strings;
       if (zypper.globalOpts().is_rug_compatible)
