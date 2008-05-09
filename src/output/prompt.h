@@ -42,7 +42,8 @@ typedef enum
   PROMPT_YN_GPG_CHECK_FAILED_IGNORE      = 15,
   PROMPT_GPG_NO_DIGEST_ACCEPT            = 16,
   PROMPT_GPG_UNKNOWN_DIGEST_ACCEPT       = 17,
-  PROMPT_GPG_WRONG_DIGEST_ACCEPT         = 18
+  PROMPT_GPG_WRONG_DIGEST_ACCEPT         = 18,
+  PROMPT_YN_REMOVE_LOCK                  = 19
 } PromptId;
 
 #endif /*PROMPT_H_*/

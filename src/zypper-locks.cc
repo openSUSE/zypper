@@ -118,6 +118,7 @@ void safe_lexical_cast (Source s, Target &tr) {
 
 void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds)
 {
+  Locks::size_type start = 0;
   try
   {
     PoolQuery q;
@@ -130,6 +131,7 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
 
     Locks & locks = Locks::instance();
     locks.readAndApply();
+    start = locks.size();
     locks.addLock(q);
     locks.save();
   }
@@ -139,8 +141,8 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     zypper.out().error(e, _("Problem adding the package lock:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
-
-  zypper.out().info(_("Specified lock has been successfully added."));
+  if ( start != Locks::instance().size() )
+    zypper.out().info(_("Specified lock has been successfully added."));
 }
 
 
@@ -150,6 +152,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
   {
     Locks & locks = Locks::instance();
     locks.readAndApply();
+    Locks::size_type start = locks.size();
     Locks::const_iterator it = locks.begin();
     Locks::LockList::size_type i = 0;
     safe_lexical_cast(args[0], i);
@@ -158,11 +161,45 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
       advance(it, i-1);
       locks.removeLock(*it);
       locks.save();
-
+  
       zypper.out().info(_("Specified lock has been successfully removed."));
     }
-    else
-      zypper.out().error(str::form(_("Invalid lock number: %s"), args[0].c_str()));
+    else //package name
+    {
+      //TODO localize
+      PoolQuery q;
+      q.addAttribute(sat::SolvAttr::name, args[0]);
+      q.setMatchGlob();
+      //! \todo addRepo()
+      q.setCaseSensitive();
+
+      int res = 0;
+      PoolQuery& last = q;
+      for_( it, locks.begin(),locks.end() ) //if one package have identical name remove it directly
+      {
+        PoolQuery::StrContainer sc = it->attribute(sat::SolvAttr::name);
+        if (sc.size()==1 && sc.count(args[0]) )
+        {
+          res++;
+          last = *it;
+        }
+      }
+      if ( res == 1 ) //only one exact name matching
+        locks.removeLock(last);
+      else
+        locks.removeLock(q);
+
+      locks.save();
+
+      if (start==locks.size())
+      {
+        zypper.out().info("No lock has been removed.");
+        // nothing removed
+      } else {
+        zypper.out().info(str::form("Lock count has been succesfully decreased by: %lu",start-locks.size()));
+        //removed something
+      }
+    }
   }
   catch(const Exception & e)
   {

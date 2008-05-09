@@ -12,6 +12,7 @@
 #include "zypper-keyring-callbacks.h"
 #include "zypper-repo-callbacks.h"
 #include "zypper-media-callbacks.h"
+#include "zypper-locks-callbacks.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ SourceCallbacks source_callbacks;
 MediaCallbacks media_callbacks;
 KeyRingCallbacks keyring_callbacks;
 DigestCallbacks digest_callbacks;
+LocksCallbacks locks_callbacks;
 
 
 void signal_handler(int sig)
