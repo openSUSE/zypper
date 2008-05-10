@@ -151,6 +151,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/bin/package-manager
 %{prefix}/bin/package-manager-su
 %{_libdir}/libzypp*so.*
+%doc %_mandir/man5/locks.5.*
 
 %files devel
 %defattr(-,root,root)

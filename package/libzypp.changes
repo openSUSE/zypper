@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sat May 10 21:57:29 CEST 2008 - coolo@suse.de
+
+- fix file list
+
+-------------------------------------------------------------------
 Fri May  9 23:15:53 CEST 2008 - ma@suse.de
 
 - Product now retrieves all attributes from the solv file.
