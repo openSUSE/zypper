@@ -1499,6 +1499,19 @@ static void set_force_resolution(Zypper & zypper)
   God->resolver()->setForceResolve(force_resolution);
 }
 
+static void set_no_recommends(Zypper & zypper)
+{
+  bool no_recommends = false;
+  if (zypper.command() == ZypperCommand::REMOVE)
+    // never install recommends when removing packages
+    no_recommends = true;
+  else
+    // install also recommended packages unless --no-recommends is specified
+    no_recommends = zypper.cOpts().count("no-recommends");
+  DBG << "no recommends (only requires): " << no_recommends << endl;
+  God->resolver()->setOnlyRequires(no_recommends);
+}
+
 /**
  * Run the solver.
  * 
@@ -1508,12 +1521,7 @@ bool resolve(Zypper & zypper)
 {
   dump_pool(); // debug
   set_force_resolution(zypper);
-  if (zypper.command() == ZypperCommand::REMOVE)
-    // never install recommends when removing packages
-    God->resolver()->setOnlyRequires(true);
-  else
-    // install also recommended packages unless --no-recommends is specified
-    God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
+  set_no_recommends(zypper);
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
@@ -1524,9 +1532,8 @@ static bool verify(Zypper & zypper)
   dump_pool();
   zypper.out().info(_("Verifying dependencies..."), Out::HIGH);
   // don't force aggressive solutions
-  God->resolver()->setForceResolve(false);
-  // install also recommended packages unless --no-recommends is specified
-  God->resolver()->setOnlyRequires(zypper.cOpts().count("no-recommends"));
+  God->resolver()->setForceResolve(false); //! \todo move to set_force_resolution()
+  set_no_recommends(zypper);
   DBG << "Calling the solver to verify system..." << endl;
   return God->resolver()->verifySystem();
 }
@@ -1534,7 +1541,8 @@ static bool verify(Zypper & zypper)
 static void make_solver_test_case(Zypper & zypper)
 {
   set_force_resolution(zypper);
-  
+  set_no_recommends(zypper);
+
   string testcase_dir("/var/log/zypper.solverTestCase");
 
   zypper.out().info(_("Generating solver test case..."));
