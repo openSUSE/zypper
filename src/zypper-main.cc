@@ -53,6 +53,7 @@ void signal_handler(int sig)
 
 int main(int argc, char **argv)
 {
+  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
   struct Bye {
     ~Bye() {
       MIL << "Exiting main()" << endl;
