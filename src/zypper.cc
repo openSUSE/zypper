@@ -2687,7 +2687,6 @@ void Zypper::doCommand()
     }
 
     init_target(*this);
-
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2698,8 +2697,10 @@ void Zypper::doCommand()
 
     // now load resolvables:
     load_resolvables(*this);
+    // needed to compute status of PPP
+    resolve(*this);
 
-    patch_check ();
+    patch_check();
 
     if (gData.security_patches_count > 0)
     {
@@ -3169,7 +3170,7 @@ void Zypper::doCommand()
 
     Locks::instance().save();
 
-    out().info(str::form("removed locks: %lu",start-Locks::instance().size()));
+    out().info(str::form("removed locks: %lu", start - Locks::instance().size()));
     
     break;
   }

@@ -1549,6 +1549,24 @@ static void make_solver_test_case(Zypper & zypper)
   }
 }
 
+// ----------------------------------------------------------------------------
+//
+// Updates
+//
+// The following scenarios are handled distinctly:
+// * -t patch (default), no arguments
+// * -t package, no arguments
+//   - uses Resolver::doUpdate()
+// * -t {other}, no arguments
+// * -t patch foo
+// * -t package foo
+//   - addRequires(>installed-version) if available
+// * -t {other} foo
+//   - addRequires(>installed-version) if available
+//
+// update summary must correspond to list-updates and patch-check
+// ----------------------------------------------------------------------------
+
 void patch_check ()
 {
   Out & out = Zypper::instance()->out();
@@ -1557,14 +1575,14 @@ void patch_check ()
   gData.patches_count = gData.security_patches_count = 0;
 
   ResPool::byKind_iterator
-    it = God->pool().byKindBegin<Patch>(),
-    e = God->pool().byKindEnd<Patch>();
+    it = God->pool().byKindBegin(ResKind::patch),
+    e = God->pool().byKindEnd(ResKind::patch);
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
     Patch::constPtr patch = asKind<Patch>(res);
 
-    if ( it->isBroken() )
+    if (it->isRelevant() && !it->isSatisfied())
     {
       gData.patches_count++;
       if (patch->category() == "security")
@@ -1577,7 +1595,7 @@ void patch_check ()
   s << format(_PL("%d patch needed", "%d patches needed", gData.patches_count))
       % gData.patches_count
     << " ("
-    // translators: %d is the number of needed patches
+    // translators: %d is the number of security patches
     << format(_PL("%d security patch", "%d security patches", gData.security_patches_count))
       % gData.security_patches_count
     << ")";
@@ -1586,47 +1604,29 @@ void patch_check ()
 
 // ----------------------------------------------------------------------------
 
+// returns true if restartSuggested() patches are availble
 bool xml_list_patches ()
 {
-  // returns true if restartSuggested() patches are availble
+  const zypp::ResPool& pool = God->pool();
 
+  unsigned int patchcount=0;
   bool pkg_mgr_available = false;
 
-
-  const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
-    it = pool.byKindBegin<Patch> (),
-    e  = pool.byKindEnd<Patch> ();
-
-
-  for (; it != e; ++it )
+    it = pool.byKindBegin(ResKind::patch),
+    e  = pool.byKindEnd(ResKind::patch);
+  for (; it != e; ++it, ++patchcount)
   {
-    ResObject::constPtr res = it->resolvable();
-    if ( it->isRelevant() )
+    if (it->isRelevant() && !it->isSatisfied())
     {
+      ResObject::constPtr res = it->resolvable();
       Patch::constPtr patch = asKind<Patch>(res);
 
       if (patch->restartSuggested())
-	pkg_mgr_available = true;
-    }
-  }
+        pkg_mgr_available = true;
 
-
-  unsigned int patchcount=0;
-
-  it = pool.byKindBegin<Patch> ();
-
-  for (; it != e; ++it )
-  {
-    ResObject::constPtr res = it->resolvable();
-
-    patchcount++;
-
-    if ( it->isBroken())
-    {
-      Patch::constPtr patch = asKind<Patch>(res);
-      if ((pkg_mgr_available && patch->restartSuggested())  ||
-	!pkg_mgr_available )
+      // if updates stack patches are available, show only those
+      if ((pkg_mgr_available && patch->restartSuggested()) || pkg_mgr_available)
       {
         cout << " <update ";
         cout << "name=\"" << res->name () << "\" ";
@@ -1653,14 +1653,10 @@ bool xml_list_patches ()
   }
 
   if (patchcount == 0)
-  {
     cout << "<appletinfo status=\"no-update-repositories\"/>" << endl;
-  }
 
   return pkg_mgr_available;
-
 }
-
 
 // ----------------------------------------------------------------------------
 
@@ -1679,8 +1675,8 @@ static void list_patch_updates(Zypper & zypper)
 
   const zypp::ResPool& pool = God->pool();
   ResPool::byKind_iterator
-    it = pool.byKindBegin<Patch> (),
-    e  = pool.byKindEnd<Patch> ();
+    it = pool.byKindBegin(ResKind::patch),
+    e  = pool.byKindEnd(ResKind::patch);
   for (; it != e; ++it )
   {
     ResObject::constPtr res = it->resolvable();
@@ -1787,7 +1783,7 @@ find_updates( const ResKind & kind, Candidates & candidates )
   ResPool::byKind_iterator
     it = pool.byKindBegin (kind),
     e  = pool.byKindEnd (kind);
-  DBG << "Finding update candidates of kind " << kind << endl;
+  DBG << "Looking for update candidates of kind " << kind << endl;
   for (; it != e; ++it)
   {
     if (it->status().isUninstalled())
@@ -1803,6 +1799,8 @@ find_updates( const ResKind & kind, Candidates & candidates )
   }
 }
 
+// ----------------------------------------------------------------------------
+
 /**
  * Find all available updates of given kinds.
  */
@@ -1815,6 +1813,8 @@ find_updates( const ResKindSet & kinds, Candidates & candidates )
   if (kinds.empty())
     WAR << "called with empty kinds set" << endl;
 }
+
+// ----------------------------------------------------------------------------
 
 string i18n_kind_updates(const ResKind & kind)
 {
@@ -1844,7 +1844,9 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   unsigned kind_size = kinds.size();
   ResKindSet localkinds = kinds;
   ResKindSet::iterator it;
-  it = localkinds.find(ResTraits<Patch>::kind);
+
+  // patch updates
+  it = localkinds.find(ResKind::patch);
   if(it != localkinds.end())
   {
     if (zypper.out().type() == Out::TYPE_XML)
@@ -1858,6 +1860,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     localkinds.erase(it);
   }
 
+  // other kinds
+  //! \todo list package updates according to Resolver::doUpdate()
   if (zypper.out().type() == Out::TYPE_XML)
   {
     if (not_affects_pkgmgr)
@@ -1936,8 +1940,9 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   }
 }
 
+// ----------------------------------------------------------------------------
+
 // may be useful as a functor
-/*
 static bool
 mark_item_install (const PoolItem & pi)
 {
@@ -1946,16 +1951,16 @@ mark_item_install (const PoolItem & pi)
     ERR << "Marking " << pi << "for installation failed" << endl;
   return result;
 }
-*/
+
 // ----------------------------------------------------------------------------
 // best-effort update
-
+// ----------------------------------------------------------------------------
 
 // find installed item matching passed one
 //   use LookForArchUpdate as callback handler in order to cope with
 //   multiple installed resolvables of the same name.
 //   LookForArchUpdate will return the one with the highest edition.
-/*
+
 static PoolItem
 findInstalledItem( PoolItem item )
 {
@@ -1970,14 +1975,15 @@ findInstalledItem( PoolItem item )
   _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
   return info.best;
 }
-*/
+
+// ----------------------------------------------------------------------------
 
 // require update of installed item
 //   The PoolItem passed to require_item_update() is the installed resolvable
 //   to which an update candidate is guaranteed to exist.
 //
 // may be useful as a functor
-/*
+
 static bool require_item_update (const PoolItem& pi) {
   Resolver_Ptr resolver = zypp::getZYpp()->resolver();
 
@@ -1996,7 +2002,7 @@ static bool require_item_update (const PoolItem& pi) {
 
   return true;
 }
-*/
+
 // ----------------------------------------------------------------------------
 
 void xml_list_updates(const ResKindSet & kinds)
@@ -2027,13 +2033,16 @@ void xml_list_updates(const ResKindSet & kinds)
   }
 }
 
-/*
+// ----------------------------------------------------------------------------
+
 static bool
 mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affects_pm)
 {
   Patch::constPtr patch = asKind<Patch>(pi.resolvable());
-  if (pi.isRelevant() && ! pi.isSatisfied())
+  if (pi.isRelevant() && !pi.isSatisfied())
   {
+    DBG << "patch " << patch->name() << " " << ignore_affects_pm << ", "
+      << patch->restartSuggested() << endl;
     if (ignore_affects_pm || patch->restartSuggested())
     {
       // #221476
@@ -2057,9 +2066,9 @@ mark_patch_update(const PoolItem & pi, bool skip_interactive, bool ignore_affect
 
   return false;
 }
-*/
+
 // ----------------------------------------------------------------------------
-/*
+
 static void
 mark_patch_updates( Zypper & zypper, bool skip_interactive )
 {
@@ -2072,10 +2081,13 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
   {
     if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
     {
+      DBG << "marking all needed patches" << endl;
+
       for_(it, God->pool().byKindBegin(ResKind::patch), 
                God->pool().byKindEnd  (ResKind::patch))
       {
-        any_marked = mark_patch_update(*it, skip_interactive, ignore_affects_pm);
+        if (mark_patch_update(*it, skip_interactive, ignore_affects_pm))
+          any_marked = true;
       }
     }
     else if (!zypper.arguments().empty())
@@ -2113,7 +2125,7 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
     }
   }
 }
-*/
+
 // ----------------------------------------------------------------------------
 
 void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
@@ -2122,21 +2134,29 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
 
   if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
   {
-    // this will do a complete pppp update as far as possible
-    God->resolver()->doUpdate();
-    // no need to call Resolver::resolvePool() afterwards
-    zypper.runtimeData().solve_before_commit = false;
-
-    //! \todo update specified types only. Or should we drop this option? 
-
-    /*
-    Candidates candidates;
-    find_updates (localkinds, candidates);
-    if (best_effort)
-      invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
-    else
-      invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
-    */
+    for_(kindit, localkinds.begin(), localkinds.end())
+    {
+      if (*kindit == ResKind::package)
+      {
+        // this will do a complete pacakge update as far as possible
+        God->resolver()->doUpdate();
+        // no need to call Resolver::resolvePool() afterwards
+        zypper.runtimeData().solve_before_commit = false;
+      }
+      else if (*kindit == ResKind::patch)
+      {
+        mark_patch_updates(zypper, skip_interactive);
+      }
+      else
+      {
+        Candidates candidates;
+        find_updates (localkinds, candidates);
+        if (best_effort)
+          invokeOnEach (candidates.begin(), candidates.end(), require_item_update);
+        else
+          invokeOnEach (candidates.begin(), candidates.end(), mark_item_install);
+      } 
+    }
   }
   // treat arguments as package names (+allow wildcards)
   else if (!zypper.arguments().empty())
@@ -2187,6 +2207,8 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
   }
 }
 
+// ----------------------------------------------------------------------------
+// commit
 // ----------------------------------------------------------------------------
 
 /**

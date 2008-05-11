@@ -1,12 +1,19 @@
-0.10.x
-- improve command line arguments handling (be more user-friendly,
-  do the obvious stuff automatically, e.g. use -C automatically after typing
-  zypper in subversion=1.5.0)
-- xml output for all (or most of the) commands
-- xml input (feed a xml with operation specification to zypper)
+1.0.x
+- bugfixing
+
+before 1.0.0
 - implement all rug commands (where it makes sense)
-- system consistency verification command
-- drop xu command (as soon as 'zypper -x lu -t patch -t package is ready')
+- zypper [help] rug
+- add help texts for prompts
+- code reorganization
+  - remove zypper- prefix from sources
+  - split misc.cc into common/commit(solver dialog, summary, commit)/update/install-srcinstall-remove code
+  - clean up/split utils.cc
+- drop xu command
+- show recommended and suggested in the summary
+
+0.11.x
+- bugfixing
 
 
 NOT SCHEDULED
@@ -14,14 +21,14 @@ NOT SCHEDULED
 
 General
 
+- xml input (feed a xml with operation specification to zypper)
 - detect whether the terminal we are writing to supports used control sequences
   and fall back to OutNoTerminal (make it a child of OutNormal) if not. Usefull
   also in cases where the output is redirected to a file or pipe.
+  DONE in OutNormal, TODO via OutNoTerminal?
 - enumerate prompt answers for all prompts
-- provide ? for help on prompts (except for Yes/No)
 ? script progress: does the output contain newline?
 - installation and deletion notifications
-- confirm license: more user friendly (see confirm_licenses() comment)
 - testsuite
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
 
@@ -30,17 +37,11 @@ Patches
 - respect license-to-confirm (test on kernel patch)
  (svn up ncurses)
 ? reboot-needed: ?
-? cron updater:
-- wrapper script for restart-packager
-- zypper patch-search (for rug compatibility)
+- cron updater: wrapper script for restart-packager
 
 Packages
 
-- install
-	--force-install option
 - just download, not install. compare to YOU: do not delete after installing
-
-
 
 Cool Stuff
 
