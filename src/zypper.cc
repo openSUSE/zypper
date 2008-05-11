@@ -3170,7 +3170,7 @@ void Zypper::doCommand()
 
     Locks::instance().save();
 
-    out().info(str::form("removed locks: %lu", start - Locks::instance().size()));
+    out().info(str::form("removed locks: %u", start - Locks::instance().size()));
     
     break;
   }
