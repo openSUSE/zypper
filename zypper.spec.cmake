@@ -70,14 +70,13 @@ cd ..
 touch %buildroot%_var/log/zypper.log
 
 %post
-%run_ldconfig
+/sbin/ldconfig
 %run_permissions
 
 %verifyscript
 %verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
 
-%postun
-%run_ldconfig
+%postun -p /sbin/ldconfig
 
 %clean
 
