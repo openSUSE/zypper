@@ -1,4 +1,3 @@
-# translation of zypper.po to dansk
 # translation of zypper.po to
 # # translation of zypper.po to
 # @TITLE@
@@ -15,9 +14,9 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-07 13:45+0200\n"
-"PO-Revision-Date: 2008-05-01 01:03+0100\n"
-"Last-Translator: Jan Madsen <jan.madsen.pt@gmail.com>\n"
-"Language-Team: dansk <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2008-05-09 21:42+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team:  <opensuse-translation@opensuse.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,11 +47,11 @@ msgstr "fejl"
 
 #: ../src/output/OutNormal.cc:247
 msgid "No help available for this prompt."
-msgstr ""
+msgstr "Ingen hjælp tilgængelig for denne forespørgsel."
 
 #: ../src/output/OutNormal.cc:257
 msgid "no help available for this option"
-msgstr ""
+msgstr "ingen hjælp tilgængelig for denne valgmulighed"
 
 #: ../src/zypp-checkpatches.cc:124
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
@@ -73,7 +72,6 @@ msgid "There are no update repositories defined. Please add one or more update r
 msgstr "Der er ingen softwarekilder til opdatering defineret. Tilføj en eller flere softwarekilder til opdatering for at blive bekendtgjort om opdateringer."
 
 #: ../src/zypper.cc:143
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -94,7 +92,7 @@ msgstr ""
 "\t--version, -V\t\tSkriv versionsnummer.\n"
 "\t--quiet, -q\t\tUndertryk normalt output, skriv kun fejlmeddelelser.\n"
 "\t--verbose, -v\t\tForøg informationsniveau.\n"
-"\t--terse, -t\t\tKortfattet output til maskine-forbrug.\n"
+"\t--no-abbrev, -A\t\tForkort ikke tekst i tabeller.\n"
 "\t--table-style, -s\tTabelstil (heltal).\n"
 "\t--rug-compatible, -r\tSlå rug-kompatibilitet til\n"
 "\t--non-interactive\tSpørg ikke om noget, brug standardsvar automatisk.\n"
@@ -176,7 +174,6 @@ msgstr ""
 "\tsource-install, si\tInstallér kildepakker og deres opbygningsafhængigheder.\n"
 
 #: ../src/zypper.cc:196
-#, fuzzy
 msgid ""
 "\tQuerying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -368,7 +365,6 @@ msgstr ""
 "-D, --dry-run                   Test fjernelse, uden at udføre den.\n"
 
 #: ../src/zypper.cc:896
-#, fuzzy
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -379,7 +375,7 @@ msgid ""
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
-"source-install (si) <navn> ...\n"
+"source-install (si) [valgmuligheder] <navn> ...\n"
 "\n"
 "Installér angivne kildepakker og deres bygningsafhængigheder.\n"
 "\n"
@@ -410,7 +406,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/zypper.cc:954
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -437,8 +433,10 @@ msgstr ""
 "-t, --type <TYPE>       Type af softwarekilde (%s).\n"
 "-d, --disable          Tilføj softwarekilde som deaktiveret.\n"
 "-c, --check             Undersøg URI.\n"
-"-x, --nocheck           Undersøg ikke URI, undersøg senere under genopfriskning.\n"
+"-C, --nocheck           Undersøg ikke URI, undersøg senere under genopfriskning.\n"
 "-n, --name              Angiv et beskrivende navn på softwarekilden.\n"
+"-k, --keep-packages     Aktivér caching af RPM-filer.\n"
+"-K, --no-keep-packages  Deaktivér caching af RPM-filer.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -453,7 +451,6 @@ msgstr ""
 "Vis liste over tilgængelige typer af resolvables.\n"
 
 #: ../src/zypper.cc:1009
-#, fuzzy
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -469,7 +466,7 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr)\n"
+"repos (lr) [valgmuligheder]\n"
 "\n"
 "Vis liste over alle angivne softwarekilder.\n"
 "\n"
@@ -502,7 +499,6 @@ msgstr ""
 "    --loose-query  Ignorér forespørgsels-streng i URI.\n"
 
 #: ../src/zypper.cc:1055
-#, fuzzy
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -510,7 +506,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo [valgmuligheder] <alias|#|URL> <nyt-alias>\n"
+"renamerepo (nr) [valgmuligheder] <alias|#|URL> <nyt-alias>\n"
 "\n"
 "Tildel nyt alias til softwarekilde, angivet ved alias, nummer eller URI.\n"
 "\n"
@@ -519,7 +515,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/zypper.cc:1088
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -541,14 +537,23 @@ msgid ""
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
 "modifyrepo (mr) <valgmuligheder> <alias|#|URL>\n"
+"modifyrepo (mr) <valgmuligheder> <%s>\n"
 "\n"
-"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URL.\n"
+"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller ved de samlende valgmuligheder '%s'.\n"
 "\n"
+"  Kommando-valgmuligheder:\n"
 "-d, --disable             Deaktivér softwarekilden (uden at fjerne den).\n"
 "-e, --enable              Aktivér en deaktiveret softwarekilde.\n"
 "-r, --refresh             Aktivér automatisk genopfriskning af softwarekilden.\n"
-"-n, --no-refresh          Deaktivér automatisk genopfriskning af softwarekilden.\n"
-"-p, --priority <1-99>     Angiv prioritet af softwarekilden. Se manual-siden for detaljer.\n"
+"-R, --no-refresh          Deaktivér automatisk genopfriskning af softwarekilden.\n"
+"-n, --name                Angiv et beskrivende navn for softwarekilden.\n"
+"-p, --priority <1-99>     Angiv prioritet af softwarekilden.\n"
+"-k, --keep-packages       Aktivér caching af RPM-filer.\n"
+"-K, --no-keep-packages    Deaktivér caching af RPM-filer.\n"
+"-a, --all                 Anvend ændringer på alle softwarekilder.\n"
+"-l, --local               Anvend ændringer på alle softwarekilder lokale softwarekilder.\n"
+"-t, --remote              Anvend ændringer på alle eksterne softwarekilder.\n"
+"-m, --medium-type <type>  Anvend ændringer på alle softwarekilder af angiven type.\n"
 
 #: ../src/zypper.cc:1126
 msgid ""
@@ -601,7 +606,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/zypper.cc:1182
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "list-updates (lu) [options]\n"
 "\n"
@@ -615,7 +620,7 @@ msgid ""
 "                                to a lower than the latest version are\n"
 "                                also acceptable.\n"
 msgstr ""
-"list-updates [valgmuligheder]\n"
+"list-updates (lu) [valgmuligheder]\n"
 "\n"
 "Vis liste over alle tilgængelige opdateringer\n"
 "\n"
@@ -703,7 +708,6 @@ msgstr ""
 "-D, --dry-run                   Test opgraderingen, uden at opgradere.\n"
 
 #: ../src/zypper.cc:1311
-#, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -728,7 +732,7 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search [valgmuligheder] [søgestreng...]\n"
+"search (se) [valgmuligheder] [søgestreng...]\n"
 "\n"
 "Søg efter pakker, der matcher bestemte søgestrenge\n"
 " \n"
@@ -752,7 +756,6 @@ msgstr ""
 "Wildcardene  * og ? kan også bruges i søgestrenge.\n"
 
 #: ../src/zypper.cc:1348
-#, fuzzy
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -762,7 +765,7 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
 msgstr ""
-"patch-check\n"
+"patch-check (pchk) [valgmuligheder]\n"
 "\n"
 "Tjek efter tilgængelige rettelser\n"
 "\n"
@@ -789,7 +792,6 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Blot en anden måde at angive softwarekilde på.\n"
 
 #: ../src/zypper.cc:1397
-#, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -803,7 +805,7 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"patterns (pt) [valgmuligheder] [softwarekilde] ...\n"
+"patterns (pa) [valgmuligheder] [softwarekilde] ...\n"
 "\n"
 "Vis liste over alle tilgængelige mønstre i angivne softwarekilder.\n"
 "\n"
@@ -838,7 +840,6 @@ msgstr ""
 "-u, --uninstalled-only    Vis kun mønstre, som ikke er installerede.\n"
 
 #: ../src/zypper.cc:1451
-#, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -856,12 +857,12 @@ msgstr ""
 "\n"
 "  Kommando-valgmuligheder:\n"
 "\n"
-"-r, --repo <alias|#|URI>  Blot en anden måde at angiv en softwarekilde på.\n"
-"-i, --installed-only      Vis kun installerede mønstre.\n"
-"-u, --uninstalled-only    Vis kun mønstre som ikke er installerede.\n"
+"-r, --repo <alias|#|URI>  Blot en anden måde at angive en softwarekilde på.\n"
+"-i, --installed-only      Vis kun installerede produkter.\n"
+"-u, --uninstalled-only    Vis kun produkter som ikke er installerede.\n"
 
 #: ../src/zypper.cc:1476
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -872,9 +873,9 @@ msgid ""
 "-t, --type <type>         Type of resolvable (%s).\n"
 "                          Default: %s."
 msgstr ""
-"info <navn> ...\n"
+"info (if) [valgmuligheder] <navn> ...\n"
 "\n"
-"Vis detaljeret information for pakker\n"
+"Vis detaljeret information for angivne pakker\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "-r, --repo <alias|#|URI>  Arbejd kun med den angivne softwarekilde.\n"
@@ -972,7 +973,7 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Arbejd kun med opdateringer fra den angivne softwarekilde.\n"
 
 #: ../src/zypper.cc:1647
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addlock (al) [options] <packagename>\n"
 "\n"
@@ -983,7 +984,7 @@ msgid ""
 "-t, --type <type>         Type of resolvable (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
-"addlock (al) <pakkenavn>\n"
+"addlock (al) [valgmuligheder] <pakkenavn>\n"
 "\n"
 "Tilføj en pakkelås. Angiv pakker, der skal låses, med præcist navn eller et globalt mønster med wildcardene '*' og '?'.\n"
 "\n"
@@ -1035,7 +1036,6 @@ msgstr ""
 "Denne kommando har ingen yderligere valgmuligheder.\n"
 
 #: ../src/zypper.cc:1723
-#, fuzzy
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -1043,7 +1043,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"shell\n"
+"shell (sh)\n"
 "\n"
 "Gå til zyppers kommando-skal\n"
 "\n"
@@ -1051,13 +1051,12 @@ msgstr ""
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/zypper.cc:1741
-#, fuzzy
 msgid ""
 "service-types (st)\n"
 "\n"
 "List available service types.\n"
 msgstr ""
-"service-types\n"
+"service-types (st)\n"
 "\n"
 "Vis liste over tilgængelige tjenestetyper.\n"
 
@@ -1195,14 +1194,13 @@ msgstr "Softwarekilden '%s' blev ikke fundet."
 #: ../src/zypper.cc:2182 ../src/zypper.cc:2184
 #, c-format
 msgid "'%s' option is deprecated and will be dropped soon."
-msgstr ""
+msgstr "Valgmuligheden '%s' er afskrevet og vil snart blive droppet."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
 #: ../src/zypper.cc:2193
-#, fuzzy
 msgid "Alias or an aggregate option is required."
-msgstr "Eksportindstillingen er krævet."
+msgstr "Alias eller en samlende valgmulighed er påkrævet."
 
 #: ../src/zypper.cc:2222
 #, c-format
@@ -1787,9 +1785,9 @@ msgstr "'%s' blev ikke fundet."
 
 #. translators: %s are package names
 #: ../src/zypper-misc.cc:611
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' er allerede installeret."
+msgstr "'%s' som leverer '%s' er allerede installeret."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/zypper-misc.cc:697
@@ -2015,32 +2013,28 @@ msgstr[0] "Det følgende produkt vil ændre arkitektur:"
 msgstr[1] "De følgende produkter vil ændre arkitektur:"
 
 #: ../src/zypper-misc.cc:1147
-#, fuzzy
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "Den følgende pakke vil ændre arkitektur:"
-msgstr[1] "De følgende pakker vil ændre arkitektur:"
+msgstr[0] "Den følgende pakke vil ændre leverandør:"
+msgstr[1] "De følgende pakker vil ændre leverandør:"
 
 #: ../src/zypper-misc.cc:1152
-#, fuzzy
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "Den følgende rettelse vil ændre arkitektur:"
-msgstr[1] "De følgende rettelser vil ændre arkitektur:"
+msgstr[0] "Den følgende rettelse vil ændre leverandør:"
+msgstr[1] "De følgende rettelser vil ændre leverandør:"
 
 #: ../src/zypper-misc.cc:1157
-#, fuzzy
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "Det følgende mønster vil ændre arkitektur:"
-msgstr[1] "De følgende mønstre vil ændre arkitektur:"
+msgstr[0] "Det følgende mønster vil ændre leverandør:"
+msgstr[1] "De følgende mønstre vil ændre leverandør:"
 
 #: ../src/zypper-misc.cc:1162
-#, fuzzy
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Det følgende produkt vil ændre arkitektur:"
-msgstr[1] "De følgende produkter vil ændre arkitektur:"
+msgstr[0] "Det følgende produkt vil ændre leverandør:"
+msgstr[1] "De følgende produkter vil ændre leverandør:"
 
 #: ../src/zypper-misc.cc:1239
 msgid "Dependencies of all installed packages are satisfied."
@@ -2213,19 +2207,18 @@ msgstr "j/n/v"
 
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2267
-#, fuzzy
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr "Der opstod en problem under eller efter installation eller fjernelse af pakker:"
+msgstr "Acceptér oversigten og fortsæt med installation/fjernelse af pakker."
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2269
 msgid "Cancel the operation."
-msgstr ""
+msgstr "Annullér operationen."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2271
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr ""
+msgstr "Genstart afhængighedsløseren i 'no-force-resolution'-tilstand for at vise afhængighedsproblemer."
 
 #: ../src/zypper-misc.cc:2312
 msgid "committing"
@@ -2347,9 +2340,8 @@ msgid "ignore"
 msgstr "ignorér"
 
 #: ../src/zypper-prompt.cc:95
-#, fuzzy
 msgid "Abort, retry, ignore?\n"
-msgstr "Afbryd, Forsøg igen, Ignorér?\n"
+msgstr "Afbryd, forsøg igen, ignorér?\n"
 
 #: ../src/zypper-prompt.cc:130
 #, c-format
@@ -2454,9 +2446,9 @@ msgid "Forcing raw metadata refresh"
 msgstr "Gennemtvinger genopfriskning af 'raw' metadata"
 
 #: ../src/zypper-repos.cc:119
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading repository '%s' metadata"
-msgstr "Downloader metadata for softwarekilden '%s'."
+msgstr "Downloader metadata for softwarekilden '%s'"
 
 #: ../src/zypper-repos.cc:142
 #, c-format
@@ -2833,14 +2825,14 @@ msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Automatisk genopfriskning blev deaktiveret for softwarekilden '%s'."
 
 #: ../src/zypper-repos.cc:1692
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Automatisk genopfriskning blev aktiveret for softwarekilden '%s'."
+msgstr "Caching af RPM-filer er blevet aktiveret for softwarekilden '%s'."
 
 #: ../src/zypper-repos.cc:1695
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Automatisk genopfriskning blev deaktiveret for softwarekilden '%s'."
+msgstr "Caching af RPM-filer er blevet deaktiveret for softwarekilden '%s'."
 
 #: ../src/zypper-repos.cc:1701
 #, c-format
@@ -2848,9 +2840,9 @@ msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioritet for softwarekilden '%s' blev sat til %d."
 
 #: ../src/zypper-repos.cc:1707
-#, fuzzy, c-format
+#, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Prioritet for softwarekilden '%s' blev sat til %d."
+msgstr "Navnet på softwarekilden '%s' blev sat til '%s'."
 
 #: ../src/zypper-repos.cc:1713
 #, c-format
@@ -2989,9 +2981,8 @@ msgid "No providers of '%s' found."
 msgstr "Ingen, der tilbyder '%s', fundet."
 
 #: ../src/zypper-search.h:141 ../src/zypper-search.h:155
-#, fuzzy
 msgid "System Packages"
-msgstr "Systemområde-punkter"
+msgstr "Systempakker"
 
 #. translators: package summary (header)
 #: ../src/zypper-search.h:184
@@ -3101,78 +3092,3 @@ msgstr "Tjek venligst om filen er tilgængelig."
 msgid "Cannot parse capability '%s'."
 msgstr "Kan ikke fortolke kapabilitet '%s'."
 
-#~ msgid "Alias is a required argument."
-#~ msgstr "Alias er et krævet argument."
-
-#~ msgid "broken"
-#~ msgstr "brudt"
-
-#~ msgid "satisfied"
-#~ msgstr "dækket"
-
-#~ msgid "%s item locked"
-#~ msgid_plural "%s items locked"
-#~ msgstr[0] "%s element er låst"
-#~ msgstr[1] "%s elementer er låste"
-
-#~ msgid "'%s' is interactive, skipping."
-#~ msgstr "'%s' er interaktiv, springer over."
-
-#~ msgid "No patches matching '%s' found."
-#~ msgstr "Ingen rettelser, som matcher '%s', fundet."
-
-#~ msgid "Patch '%s' not found."
-#~ msgstr "Rettelsen '%s' blev ikke fundet."
-
-#~ msgid "The following package is going to be upgraded and change architecture:"
-#~ msgid_plural "The following packages are going to be upgraded and change architecture:"
-#~ msgstr[0] "Den følgende pakke vil blive opgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende pakker vil blive opgraderet og ændre arkitektur:"
-
-#~ msgid "The following patch is going to be upgraded and change architecture:"
-#~ msgid_plural "The following patches are going to be upgraded and change architecture:"
-#~ msgstr[0] "Den følgende rettelse vil blive opgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende rettelser vil blive opgraderet og ændre arkitektur:"
-
-#~ msgid "The following pattern is going to be upgraded and change architecture:"
-#~ msgid_plural "The following patterns are going to be upgraded and change architecture:"
-#~ msgstr[0] "Det følgende mønster vil blive opgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende mønstre vil blive opgraderet og ændre arkitektur:"
-
-#~ msgid "The following product is going to be upgraded and change architecture:"
-#~ msgid_plural "The following products are going to be upgraded and change architecture:"
-#~ msgstr[0] "Det følgende produkt vil blive opgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende produkter vil blive opgraderet og ændre arkitektur:"
-
-#~ msgid "The following package is going to be downgraded and change architecture:"
-#~ msgid_plural "The following packages are going to be downgraded and change architecture:"
-#~ msgstr[0] "Den følgende pakke vil blive nedgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende pakker vil blive nedgraderet og ændre arkitektur:"
-
-#~ msgid "The following patch is going to be downgraded and change architecture:"
-#~ msgid_plural "The following patches are going to be downgraded and change architecture:"
-#~ msgstr[0] "Den følgende rettelse vil blive nedgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende rettelser vil blive nedgraderet og ændre arkitektur:"
-
-#~ msgid "The following pattern is going to be downgraded and change architecture:"
-#~ msgid_plural "The following patterns are going to be downgraded and change architecture:"
-#~ msgstr[0] "Det følgende mønster vil blive nedgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende mønstre vil blive nedgraderet og ændre arkitektur:"
-
-#~ msgid "The following product is going to be downgraded and change architecture:"
-#~ msgid_plural "The following products are going to be downgraded and change architecture:"
-#~ msgstr[0] "Det følgende produkt vil blive nedgraderet og ændre arkitektur:"
-#~ msgstr[1] "De følgende produkter vil blive nedgraderet og ændre arkitektur:"
-
-#~ msgid "Cannot parse '%s < %s'"
-#~ msgstr "Kan ikke fortolke '%s < %s'"
-
-#~ msgid "Continue? (Choose 'p' to show dependency problems.)"
-#~ msgstr "Fortsæt? (Vælg 'p' for at vise afhængighedsproblemer.)"
-
-#
-#~ msgid "Uninstalled"
-#~ msgstr "Afinstalleret"
-
-#~ msgid "Broken"
-#~ msgstr "Brudt"

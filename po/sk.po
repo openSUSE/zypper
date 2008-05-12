@@ -90,9 +90,8 @@ msgstr ""
 "\t--version, -V\t\tVýpis čísla verzie.\n"
 "\t--quiet, -q\t\tPotlač normálny výstup, zobrazuj len chybové správy.\n"
 "\t--verbose, -v\t\tZvýšenie podrobnosti výstupu.\n"
-"\t--no-abbrev, -A\t\tNeskracuj text v tabuľkách.\n"
 "\t--table-style, -s\tŠtýl výstupnej tabuľky (celé číslo).\n"
-"\t--no-abbrev, -A\tNeskracuj texty v tabuľkách.\n"
+"\t--no-abbrev, -A\t\tNeskracuj text v tabuľkách.\n"
 "\t--rug-compatible, -r\tZapnutie kompatibility s programom rug.\n"
 "\t--non-interactive\tNa nič sa nepýtaj, automaticky použi prednastavené odpovede.\n"
 "\t--reposd-dir, -D <dir>\tPouži alternatívny adresár pre konfiguračné súbory repozitárov.\n"
@@ -748,7 +747,7 @@ msgstr ""
 "-r, --repo <alias|#|URI>   Hľadaj iba balíčky zo zadaného repozitára.\n"
 "    --sort-by-name         Zotrieď nájdené balíčky podľa mena (predvolené).\n"
 "    --sort-by-repo         Zotrieď balíčky podľa repozitára.\n"
-"-s, --details              Zobraz každu dostupnú verziu v každom repozitári\n"
+"-s, --details              Zobraz každú dostupnú verziu v každom repozitári\n"
 "                           na osobitnom riadku.\n"
 "\n"
 "Znaky * a ? môžu byť v hľadaných výrazoch použité ako náhrada ľubovoľného reťazca alebo znaku.\n"
@@ -1229,7 +1228,7 @@ msgstr "Medzipamäť RPM súborov"
 
 #: ../src/zypper.cc:2406
 msgid "No valid arguments specified."
-msgstr "Neboli zadané žiadne platné parametre."
+msgstr "Neboli zadané žiadne platné argumenty."
 
 #: ../src/zypper.cc:2420 ../src/zypper.cc:2491
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
@@ -1286,7 +1285,7 @@ msgstr "Pre prídávanie zámkov balíčkov sú potrebné práva správcu systé
 #. translators: 'zypper addlock foo' takes only one argument.
 #: ../src/zypper.cc:3051
 msgid "Only the first command argument considered. Zypper currently does not support versioned locks."
-msgstr "Bude použitý len prvý parameter. Zypper momentálne nepodporuje zámky s verziami."
+msgstr "Bude použitý len prvý argument príkazu. Zypper momentálne nepodporuje zámky s verziami."
 
 #: ../src/zypper.cc:3143
 msgid "This command only makes sense in the zypper shell."
@@ -1781,8 +1780,8 @@ msgstr " Riešenie %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte preskočiť, znova alebo ukončiť"
-msgstr[1] "Zvoľte číslo, pre(s)kočiť, (z)opakovať alebo (u)končiť > "
-msgstr[2] "Zvoľte číslo, pre(s)kočiť, (z)opakovať alebo (u)končiť > "
+msgstr[1] "Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
+msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte preskočiť, znova alebo ukončiť"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -1790,8 +1789,8 @@ msgstr[2] "Zvoľte číslo, pre(s)kočiť, (z)opakovať alebo (u)končiť > "
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Zvoľte horeuvedené riešenie pomocou '1' alebo zvoľte ukončiť pomocou 'k'."
-msgstr[1] "Zvoľte číslo, pre(s)kočiť, (z)opakovať alebo (u)končiť > "
-msgstr[2] "Zvoľte číslo, pre(s)kočiť, (z)opakovať alebo (u)končiť > "
+msgstr[1] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť pomocou 'k'"
+msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť pomocou 'k'"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -2086,7 +2085,7 @@ msgstr "Voľba %s protirečí voľbe %s, použijem menej agresívnu %s"
 
 #: ../src/zypper-misc.cc:1496
 msgid "Force resolution:"
-msgstr "Vnúť riešenie:"
+msgstr "Vynucovať riešenie:"
 
 #: ../src/zypper-misc.cc:1525
 msgid "Verifying dependencies..."
@@ -2245,7 +2244,7 @@ msgstr "Problém pri sťahovaní balíčka z repozitára:"
 #: ../src/zypper-misc.cc:2402 ../src/zypper-repos.cc:143
 #: ../src/zypper-repos.cc:1823
 msgid "Please see the above error message for a hint."
-msgstr "Pozrite si vyššie vypísanú chybu pre informáciu o príčine chyby."
+msgstr "Pozrite vyššie vypísanú chybu pre informáciu o jej príčine."
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-07 13:45+0200\n"
-"PO-Revision-Date: 2008-04-21 22:01+0300\n"
+"PO-Revision-Date: 2008-05-07 21:03+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -46,11 +46,11 @@ msgstr "помилка"
 
 #: ../src/output/OutNormal.cc:247
 msgid "No help available for this prompt."
-msgstr ""
+msgstr "Для цього запрошення немає довідки."
 
 #: ../src/output/OutNormal.cc:257
 msgid "no help available for this option"
-msgstr ""
+msgstr "для цього параметра немає довідки"
 
 #: ../src/zypp-checkpatches.cc:124
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
@@ -71,7 +71,6 @@ msgid "There are no update repositories defined. Please add one or more update r
 msgstr "Немає визначених сховищ оновлення. Будь ласка, додайте одне або декілька сховищ, щоб отримувати сповіщення про наявні оновлення."
 
 #: ../src/zypper.cc:143
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -92,10 +91,9 @@ msgstr ""
 "\t--version, -V\t\tПоказати номер версії\n"
 "\t--quiet, -q\t\tДрукувати тільки повідомлення про помилки.\n"
 "\t--verbose, -v\t\tДокладна інформація\n"
-"\t--terse, -t\t\tОбмежений вивід машинної інформації\n"
 "\t--table-style, -s\tВ стилі таблиці (ціле число)\n"
 "\t--rug-compatible, -r\tУвімкнути сумісність з rug\n"
-"\t--non-interactive\tНічого не питати, автоматично вживати типові відповіді. (в стадії розробки)\n"
+"\t--non-interactive\tНічого не питати, автоматично вживати типові відповіді.\n"
 "\t--xmlout, -x\t\tПеремкнутися на вивід у XML.\n"
 "\t--reposd-dir, -D <тека>\tВикористовувати альтернативну теку визначення файлів.\n"
 "\t--cache-dir, -C <тека>\tВикористовувати альтернативну теку для бази даних кешу метаданих.\n"
@@ -174,7 +172,6 @@ msgstr ""
 "\tsource-install, si\tВстановити пакунки з вихідними кодами і пакунки, потрібні для їх збирання.\n"
 
 #: ../src/zypper.cc:196
-#, fuzzy
 msgid ""
 "\tQuerying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -363,7 +360,6 @@ msgstr ""
 "-D, --dry-run                   Випробувати можливість вилучення, не вилучати насправді\n"
 
 #: ../src/zypper.cc:896
-#, fuzzy
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -374,7 +370,7 @@ msgid ""
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
-"source-install (si) <назва> ...\n"
+"source-install (si) [параметри] <назва> ...\n"
 "\n"
 "Встановити зазначені пакунки з вихідними кодами програм і залежності для їх збирання.\n"
 "\n"
@@ -405,7 +401,7 @@ msgstr ""
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/zypper.cc:954
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
 "addrepo (ar) [options] <FILE.repo>\n"
@@ -432,8 +428,10 @@ msgstr ""
 "-t, --type <ТИП>        Тип сховища (%s)\n"
 "-d, --disabled               Додати сховище як вимкнене\n"
 "-c, --check             Зондувати URI\n"
-"-x, --nocheck           Не зондувати URI, прозондувати його під час освіження.\n"
+"-C, --no-check          Не зондувати URI, прозондувати його під час освіження.\n"
 "-n, --name              Вказати описову назву сховища.\n"
+"-k, --keep-packages     Увімкнути кешування файлів RPM.\n"
+"-K, --no-keep-packages  Вимкнути кешування файлів RPM.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
@@ -448,7 +446,6 @@ msgstr ""
 "Надає список типів розв’язань.\n"
 
 #: ../src/zypper.cc:1009
-#, fuzzy
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -464,7 +461,7 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr)\n"
+"repos (lr) [параметри]\n"
 "\n"
 "Надає список всіх визначених сховищ.\n"
 "\n"
@@ -497,7 +494,6 @@ msgstr ""
 "    --loose-query\tІгнорувати рядок запиту у URL\n"
 
 #: ../src/zypper.cc:1055
-#, fuzzy
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -505,7 +501,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo [параметри] <псевдонім|#|URL> <новий-псевдонім>\n"
+"renamerepo (nr) [параметри] <псевдонім|#|URL> <новий-псевдонім>\n"
 "\n"
 "Надати новий псевдонім сховищу вказаному псевдонімом, номером або адресою URI.\n"
 "\n"
@@ -514,7 +510,7 @@ msgstr ""
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
 #: ../src/zypper.cc:1088
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
 "modifyrepo (mr) <options> <%s>\n"
@@ -536,8 +532,9 @@ msgid ""
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
 "modifyrepo (mr) <параметри> <псевдонім|#|URL>\n"
+"modifyrepo (mr) <параметри> <%s>\n"
 "\n"
-"Змінити властивості вказаного сховища.\n"
+"Змінити властивості сховища, вказаного за допомогою псевдоніма, номера або URI, або за допомогою сукупності параметрів \"%s\".\n"
 "\n"
 "  Параметри команди:\n"
 "-d, --disable             Вимкнути сховище (але не вилучати його)\n"
@@ -597,7 +594,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/zypper.cc:1182
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "list-updates (lu) [options]\n"
 "\n"
@@ -611,9 +608,9 @@ msgid ""
 "                                to a lower than the latest version are\n"
 "                                also acceptable.\n"
 msgstr ""
-"list-updates [параметри]\n"
+"list-updates (lu) [параметри]\n"
 "\n"
-"Показати список доступних оновлень\n"
+"Показати список доступних оновлень.\n"
 "\n"
 "  Параметри команди:\n"
 "-t, --type <тип>         Тип залежності (%s)\n"
@@ -694,7 +691,6 @@ msgstr ""
 "-D, --dry-run                   Випробувати можливість оновлення, не оновлювати насправді\n"
 
 #: ../src/zypper.cc:1311
-#, fuzzy
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -719,9 +715,9 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search [параметри] [рядок запиту...]\n"
+"search (se) [параметри] [рядок запиту] ...\n"
 "\n"
-"'search' - Шукати за пакунками, які збігаються з даними рядками пошуку\n"
+"Шукати пакунки, які збігаються з даними рядка пошуку\n"
 "\n"
 "  Параметри команди:\n"
 "    --match-all                Шукати за збігом до всіх рядків пошуку (типовий)\n"
@@ -740,10 +736,9 @@ msgstr ""
 "    --details              Показувати кожну доступну версію у кожному зі сховищ\n"
 "                           у окремому рядку.\n"
 "\n"
-"Також можна вживати шаблони заміни * і ? для пошуку в рядках.\n"
+"Також можна використовувати шаблони заміни * і ? для пошуку в рядках.\n"
 
 #: ../src/zypper.cc:1348
-#, fuzzy
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -753,13 +748,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
 msgstr ""
-"patch-check\n"
+"patch-check (pchk) [параметри]\n"
 "\n"
-"Перевірити наявність латок\n"
+"Перевірити наявність латок.\n"
 "\n"
 "  Параметри команди:\n"
 "\n"
-"-r, --repo <псевдонім|#|URI>  Перевіряти наявність латок тільки у сховищі, вказаному псевдонімом .\n"
+"-r, --repo <псевдонім|#|URI>  Перевіряти наявність латок тільки у вказаному сховищі.\n"
 
 #: ../src/zypper.cc:1370
 msgid ""
@@ -780,7 +775,6 @@ msgstr ""
 "-r, --repo <псевдонім|#|URI>  Ще один спосіб вказати сховище.\n"
 
 #: ../src/zypper.cc:1397
-#, fuzzy
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -794,15 +788,15 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"patterns (pt) [параметри] [сховище] ...\n"
+"packages (pa) [параметри] [сховище] ...\n"
 "\n"
-"Надати список всіх шаблонів, які доступні у вказаних сховищах.\n"
+"Надати список всіх пакунків, які доступні у вказаних сховищах.\n"
 "\n"
 "  Параметри команди:\n"
 "\n"
 "-r, --repo <псевдонім|#|URI>  Ще один спосіб вказати сховище.\n"
-"-i, --installed-only      Показати лише встановлені шаблони.\n"
-"-u, --uninstalled-only    Показати лише невстановлені шаблони.\n"
+"-i, --installed-only      Показати лише встановлені пакунки.\n"
+"-u, --uninstalled-only    Показати лише невстановлені пакунки.\n"
 "-N, --sort-by-name        Впорядкувати список за назвами пакунків.\n"
 "-R, --sort-by-repo        Впорядкувати список за сховищами.\n"
 
@@ -829,7 +823,6 @@ msgstr ""
 "-u, --uninstalled-only    Показати лише невстановлені шаблони.\n"
 
 #: ../src/zypper.cc:1451
-#, fuzzy
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -852,7 +845,7 @@ msgstr ""
 "-u, --uninstalled-only    Показати лише невстановлені продукти.\n"
 
 #: ../src/zypper.cc:1476
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -863,7 +856,7 @@ msgid ""
 "-t, --type <type>         Type of resolvable (%s).\n"
 "                          Default: %s."
 msgstr ""
-"info <name> ...\n"
+"info (if) [параметри] <назва> ...\n"
 "\n"
 "Показати докладну інформацію щодо пакунків\n"
 "\n"
@@ -963,7 +956,7 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Працювати тільки з оновленнями з вказаного сховища.\n"
 
 #: ../src/zypper.cc:1647
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addlock (al) [options] <packagename>\n"
 "\n"
@@ -974,7 +967,7 @@ msgid ""
 "-t, --type <type>         Type of resolvable (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
-"addlock (al) <назва пакунка>\n"
+"addlock (al) [параметри] <назва пакунка>\n"
 "\n"
 "Блокує пакунок. Вкажіть назви пакунків для блокування повністю або за допомогою шаблонів, використовуючи шаблони заміни \"*\" і \"?\".\n"
 "\n"
@@ -991,7 +984,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"removelock (rl) <номер-блока>\n"
+"removelock (rl) <номер-блоку>\n"
 "\n"
 "Вилучає блокування пакунка. Вкажіть блок за його номером, який можна отримати за допомогою команди \"zypper locks\".\n"
 "\n"
@@ -1026,7 +1019,6 @@ msgstr ""
 "Ця команда не має додаткових параметрів.\n"
 
 #: ../src/zypper.cc:1723
-#, fuzzy
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -1034,7 +1026,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"shell\n"
+"shell (sh)\n"
 "\n"
 "Вхід до командної оболонки zypper.\n"
 "\n"
@@ -1042,13 +1034,12 @@ msgstr ""
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/zypper.cc:1741
-#, fuzzy
 msgid ""
 "service-types (st)\n"
 "\n"
 "List available service types.\n"
 msgstr ""
-"service-types\n"
+"service-types (st)\n"
 "\n"
 "Надає список всіх доступних типів служб.\n"
 
@@ -1163,14 +1154,13 @@ msgstr "Сховище \"%s\" не знайдено."
 #: ../src/zypper.cc:2182 ../src/zypper.cc:2184
 #, c-format
 msgid "'%s' option is deprecated and will be dropped soon."
-msgstr ""
+msgstr "Параметр \"%s\" є застарілим, скоро його буде вилучено."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
 #: ../src/zypper.cc:2193
-#, fuzzy
 msgid "Alias or an aggregate option is required."
-msgstr "Потрібний параметр експорту."
+msgstr "Потрібен псевдонім або сукупність параметрів сховища."
 
 #: ../src/zypper.cc:2222
 #, c-format
@@ -1751,9 +1741,9 @@ msgstr "«%s» не знайдено."
 
 #. translators: %s are package names
 #: ../src/zypper-misc.cc:611
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "«%s» вже встановлено."
+msgstr "«%s», що містить «%s» вже встановлено."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/zypper-misc.cc:697
@@ -2007,36 +1997,32 @@ msgstr[1] "Буде змінено архітектуру таких проду�
 msgstr[2] "Буде змінено архітектуру таких продуктів:"
 
 #: ../src/zypper-misc.cc:1147
-#, fuzzy
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "Буде змінено архітектуру пакунка:"
-msgstr[1] "Буде змінено архітектуру таких пакунків:"
-msgstr[2] "Буде змінено архітектуру таких пакунків:"
+msgstr[0] "Буде змінено постачальника пакунка:"
+msgstr[1] "Буде змінено постачальника таких пакунків:"
+msgstr[2] "Буде змінено постачальника таких пакунків:"
 
 #: ../src/zypper-misc.cc:1152
-#, fuzzy
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "Буде змінено архітектуру латки:"
-msgstr[1] "Буде змінено архітектуру таких латок:"
-msgstr[2] "Буде змінено архітектуру таких латок:"
+msgstr[0] "Буде змінено постачальника латки:"
+msgstr[1] "Буде змінено постачальника таких латок:"
+msgstr[2] "Буде змінено постачальника таких латок:"
 
 #: ../src/zypper-misc.cc:1157
-#, fuzzy
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "Буде змінено архітектуру шаблона:"
-msgstr[1] "Буде змінено архітектуру таких шаблонів:"
-msgstr[2] "Буде змінено архітектуру таких шаблонів:"
+msgstr[0] "Буде змінено постачальника шаблона:"
+msgstr[1] "Буде змінено постачальника таких шаблонів:"
+msgstr[2] "Буде змінено постачальника таких шаблонів:"
 
 #: ../src/zypper-misc.cc:1162
-#, fuzzy
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "Буде змінено архітектуру продукту:"
-msgstr[1] "Буде змінено архітектуру таких продуктів:"
-msgstr[2] "Буде змінено архітектуру таких продуктів:"
+msgstr[0] "Буде змінено постачальника продукту:"
+msgstr[1] "Буде змінено постачальника таких продуктів:"
+msgstr[2] "Буде змінено постачальника таких продуктів:"
 
 #: ../src/zypper-misc.cc:1239
 msgid "Dependencies of all installed packages are satisfied."
@@ -2210,19 +2196,18 @@ msgstr "y/n/p"
 
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2267
-#, fuzzy
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr "Під час або після встановлення або вилучення пакунків сталася помилка:"
+msgstr "Взяти до уваги резюме і продовжити встановлення або вилучення пакунків."
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2269
 msgid "Cancel the operation."
-msgstr ""
+msgstr "Скасувати дію."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2271
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr ""
+msgstr "Перезапустити розв’язувач у режимі без примусового розв’язання, щоб подивитися на проблеми у залежностях."
 
 #: ../src/zypper-misc.cc:2312
 msgid "committing"
@@ -2344,7 +2329,6 @@ msgid "ignore"
 msgstr "ігнорувати"
 
 #: ../src/zypper-prompt.cc:95
-#, fuzzy
 msgid "Abort, retry, ignore?\n"
 msgstr "(A) перервати, (R) повторити спробу, (I) ігнорувати?\n"
 
@@ -2451,7 +2435,7 @@ msgid "Forcing raw metadata refresh"
 msgstr "Примусове освіження сирих метаданих"
 
 #: ../src/zypper-repos.cc:119
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading repository '%s' metadata"
 msgstr "Завантаження метаданих сховища «%s»."
 
@@ -2829,14 +2813,14 @@ msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Для сховища «%s» було вимкнено автоматичне освіження."
 
 #: ../src/zypper-repos.cc:1692
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Для сховища \"%s\" було увімкнено автоматичне освіження."
+msgstr "Для сховища \"%s\" було увімкнено кешування файлів RPM."
 
 #: ../src/zypper-repos.cc:1695
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Для сховища «%s» було вимкнено автоматичне освіження."
+msgstr "Для сховища «%s» було вимкнено кешування файлів RPM."
 
 #: ../src/zypper-repos.cc:1701
 #, c-format
@@ -2844,9 +2828,9 @@ msgid "Repository '%s' priority has been set to %d."
 msgstr "Пріоритет сховища «%s» було встановлено у значення %d."
 
 #: ../src/zypper-repos.cc:1707
-#, fuzzy, c-format
+#, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "Пріоритет сховища «%s» було встановлено у значення %d."
+msgstr "Назву сховища «%s» було встановлено у значення «%s»."
 
 #: ../src/zypper-repos.cc:1713
 #, c-format
@@ -2979,9 +2963,8 @@ msgid "No providers of '%s' found."
 msgstr "Не знайдено пакунків з вмістом «%s»."
 
 #: ../src/zypper-search.h:141 ../src/zypper-search.h:155
-#, fuzzy
 msgid "System Packages"
-msgstr "Елементи системної ділянки"
+msgstr "Системні пакунки"
 
 #. translators: package summary (header)
 #: ../src/zypper-search.h:184
@@ -3100,86 +3083,3 @@ msgstr "Будь ласка, перевірте чи доступний файл
 msgid "Cannot parse capability '%s'."
 msgstr "Не вдалося розібрати функціональність «%s»."
 
-#~ msgid "Alias is a required argument."
-#~ msgstr "Псевдонім - це потрібний аргумент."
-
-#~ msgid "broken"
-#~ msgstr "пошкоджено"
-
-#~ msgid "satisfied"
-#~ msgstr "задоволено"
-
-#~ msgid "%s item locked"
-#~ msgid_plural "%s items locked"
-#~ msgstr[0] "%s елемент заблоковано"
-#~ msgstr[1] "%s елементи заблоковано"
-#~ msgstr[2] "%s елементів заблоковано"
-
-#~ msgid "'%s' is interactive, skipping."
-#~ msgstr "«%s» є інтерактивним, пропускається."
-
-#~ msgid "No patches matching '%s' found."
-#~ msgstr "Не знайдено латок, що відповідають «%s»."
-
-#~ msgid "Patch '%s' not found."
-#~ msgstr "Латку «%s» не знайдено"
-
-#~ msgid "The following package is going to be upgraded and change architecture:"
-#~ msgid_plural "The following packages are going to be upgraded and change architecture:"
-#~ msgstr[0] "Буде оновлено і змінено архітектуру пакунка:"
-#~ msgstr[1] "Буде оновлено і змінено архітектуру таких пакунків:"
-#~ msgstr[2] "Буде оновлено і змінено архітектуру таких пакунків:"
-
-#~ msgid "The following patch is going to be upgraded and change architecture:"
-#~ msgid_plural "The following patches are going to be upgraded and change architecture:"
-#~ msgstr[0] "Буде оновлено і змінено архітектуру латки:"
-#~ msgstr[1] "Буде оновлено і змінено архітектуру таких латок:"
-#~ msgstr[2] "Буде оновлено і змінено архітектуру таких латок:"
-
-#~ msgid "The following pattern is going to be upgraded and change architecture:"
-#~ msgid_plural "The following patterns are going to be upgraded and change architecture:"
-#~ msgstr[0] "Буде оновлено і змінено архітектуру шаблона:"
-#~ msgstr[1] "Буде оновлено і змінено архітектуру таких шаблонів:"
-#~ msgstr[2] "Буде оновлено і змінено архітектуру таких шаблонів:"
-
-#~ msgid "The following product is going to be upgraded and change architecture:"
-#~ msgid_plural "The following products are going to be upgraded and change architecture:"
-#~ msgstr[0] "Буде оновлено і змінено архітектуру продукту:"
-#~ msgstr[1] "Буде оновлено і змінено архітектуру таких продуктів:"
-#~ msgstr[2] "Буде оновлено і змінено архітектуру таких продуктів:"
-
-#~ msgid "The following package is going to be downgraded and change architecture:"
-#~ msgid_plural "The following packages are going to be downgraded and change architecture:"
-#~ msgstr[0] "Буде повернено до старішої версії і змінено архітектуру пакунка:"
-#~ msgstr[1] "Буде повернено до старішої версії і змінено архітектуру таких пакунків:"
-#~ msgstr[2] "Буде повернено до старішої версії і змінено архітектуру таких пакунків:"
-
-#~ msgid "The following patch is going to be downgraded and change architecture:"
-#~ msgid_plural "The following patches are going to be downgraded and change architecture:"
-#~ msgstr[0] "Буде повернено до старішої версії і змінено архітектуру латку:"
-#~ msgstr[1] "Буде повернено до старішої версії і змінено архітектуру таких латок:"
-#~ msgstr[2] "Буде повернено до старішої версії і змінено архітектуру таких латок:"
-
-#~ msgid "The following pattern is going to be downgraded and change architecture:"
-#~ msgid_plural "The following patterns are going to be downgraded and change architecture:"
-#~ msgstr[0] "Буде повернено до старішої версії і змінено архітектуру шаблона:"
-#~ msgstr[1] "Буде повернено до старішої версії і змінено архітектуру таких шаблонів:"
-#~ msgstr[2] "Буде повернено до старішої версії і змінено архітектуру таких шаблонів:"
-
-#~ msgid "The following product is going to be downgraded and change architecture:"
-#~ msgid_plural "The following products are going to be downgraded and change architecture:"
-#~ msgstr[0] "Буде повернено до старішої версії і змінено архітектуру продукту:"
-#~ msgstr[1] "Буде повернено до старішої версії і змінено архітектуру таких продуктів:"
-#~ msgstr[2] "Буде повернено до старішої версії і змінено архітектуру таких продуктів:"
-
-#~ msgid "Cannot parse '%s < %s'"
-#~ msgstr "Не вдається обробити \"%s < %s\""
-
-#~ msgid "Continue? (Choose 'p' to show dependency problems.)"
-#~ msgstr "Продовжити? (Оберіть \"p\", щоб побачити проблеми у залежностях.)"
-
-#~ msgid "Uninstalled"
-#~ msgstr "Прибрані"
-
-#~ msgid "Broken"
-#~ msgstr "Поламані"

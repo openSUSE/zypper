@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-07 13:45+0200\n"
-"PO-Revision-Date: 2008-05-09 00:23-0300\n"
+"PO-Revision-Date: 2008-05-12 11:15-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -578,11 +578,11 @@ msgstr ""
 "Atualiza os repositórios especificados pelos seus apelidos, números ou URL.  Se nada for especificado, todos os repositórios ativados serão atualizados.\n"
 "\n"
 "  Opções de comando:\n"
-"-f, --force             Força uma atualização completa.\n"
-"-b, --force-build       Força a reconstrução da banco de dados.\n"
-"-d, --force-download    Força o download de metadados brutos.\n"
-"-B, --build-only        Apenas construir o banco de dados, não fazer o download dos metadados.\n"
-"-D, --download-only     Apenas fazer o download dos metadados brutos, não construir o banco de dados.\n"
+"-f, --force             Forçar uma atualização completa.\n"
+"-b, --force-build       Forçar a reconstrução da banco de dados.\n"
+"-d, --force-download    Forçar o download de metadados brutos.\n"
+"-B, --build-only        Apenas construir o banco de dados, não baixar os metadados.\n"
+"-D, --download-only     Apenas baixar os metadados brutos, não construir o banco de dados.\n"
 "-r, --repo <apelido|#|URL> Atualizar apenas os repositórios especificados.\n"
 
 #: ../src/zypper.cc:1154
@@ -1226,7 +1226,7 @@ msgstr "Tipo de resolvível desconhecido: %s "
 #: ../src/zypper.cc:2330
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' se parece com um arquivo RPM. Tentará ser feito o download dele."
+msgstr "'%s' parece com um arquivo RPM. Tentará ser baixado."
 
 #: ../src/zypper.cc:2343
 #, c-format
@@ -2090,7 +2090,7 @@ msgstr "Algumas dependências de pacotes instalados estão quebtadas. Para resol
 #: ../src/zypper-misc.cc:1378
 #, c-format
 msgid "Overall download size: %s."
-msgstr "Tamanho da transferência: %s."
+msgstr "Tamanho total do download: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/zypper-misc.cc:1383
@@ -2280,7 +2280,7 @@ msgstr "(corrida a seco)"
 #: ../src/zypper-misc.cc:2346
 #: ../src/zypper-misc.cc:2380
 msgid "Problem downloading the package file from the repository:"
-msgstr "Problema durante o download do pacote do repositório:"
+msgstr "Problema enquanto baixava o pacote do repositório:"
 
 #: ../src/zypper-misc.cc:2347
 #: ../src/zypper-misc.cc:2370
@@ -2460,7 +2460,7 @@ msgstr "Erro"
 
 #: ../src/zypper-repo-callbacks.h:51
 msgid "Downloading delta"
-msgstr "Realizando download de delta"
+msgstr "Baixando o delta"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: ../src/zypper-repo-callbacks.h:87
@@ -2469,12 +2469,12 @@ msgstr "Aplicando delta"
 
 #: ../src/zypper-repo-callbacks.h:117
 msgid "Downloading patch rpm"
-msgstr "Realizando o download da correção rpm"
+msgstr "Baixando a correção rpm"
 
 #: ../src/zypper-repo-callbacks.h:153
 #, c-format
 msgid "Downloading %s %s-%s.%s"
-msgstr "Realizando o download de %s %s-%s.%s"
+msgstr "Baixando %s %s-%s.%s"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/zypper-repo-callbacks.h:165
@@ -2509,7 +2509,7 @@ msgstr "Baixando os metadados do repositório '%s'"
 #: ../src/zypper-repos.cc:142
 #, c-format
 msgid "Problem downloading files from '%s'."
-msgstr "Problemas ao realizar download de arquivos de '%s'."
+msgstr "Problemas ao baixar os arquivos de '%s'."
 
 #: ../src/zypper-repos.cc:156
 #, c-format
@@ -2538,7 +2538,7 @@ msgstr "Por favor verifique se as URLs definidas para este repositórios apontam
 #: ../src/zypper-repos.cc:200
 #, c-format
 msgid "Error downloading metadata for '%s':"
-msgstr "Erro ao realizar download de metadados para '%s':"
+msgstr "Erro ao baixar os metadados para '%s':"
 
 #: ../src/zypper-repos.cc:215
 msgid "Forcing building of repository cache"
@@ -3141,7 +3141,7 @@ msgstr "Talvez você esteja ficando sem espaço no disco."
 
 #: ../src/zypper-utils.cc:288
 msgid "Problem downloading the specified RPM file"
-msgstr "Problema ao fazer o download do arquivos RPM específicado."
+msgstr "Problema ao baixar o arquivo RPM especificado."
 
 #: ../src/zypper-utils.cc:289
 msgid "Please check whether the file is accessible."
