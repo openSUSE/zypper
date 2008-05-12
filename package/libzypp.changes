@@ -1,8 +1,9 @@
 -------------------------------------------------------------------
 Mon May 12 17:21:19 CEST 2008 - jkupec@suse.cz
 
-- /etc/zypp/products.d added (bnc #385868)
+- /etc/zypp/products.d added to file list (bnc #385868)
 - revision 10049
+- version 4.21.2
 
 -------------------------------------------------------------------
 Mon May 12 17:15:34 CEST 2008 - jkupec@suse.cz
