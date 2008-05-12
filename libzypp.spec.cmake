@@ -140,6 +140,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %defattr(-,root,root)
 %dir               /etc/zypp
 %dir               /etc/zypp/repos.d
+%dir               /etc/zypp/products.d
 %config(noreplace) /etc/zypp/zypp.conf
 %{prefix}/lib/zypp
 %{prefix}/share/zypp
