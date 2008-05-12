@@ -2099,6 +2099,7 @@ void RpmDb::removePackage( const string & name_r, unsigned flags )
   }
   catch (RpmException & excpt_r)
   {
+    report->problem(excpt_r); //! partial fix to bug #388810, \todo allow to abort/retry failed rpm removal 
     report->finish(excpt_r);
     ZYPP_RETHROW(excpt_r);
   }
