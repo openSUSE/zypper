@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 12 16:47:47 CEST 2008 - jkupec@suse.cz
+
+- bash completion fixes by m4r3k: adapted to new command help; fall
+  back to path completion if there's nothing else to complete
+- r10043
+
+-------------------------------------------------------------------
 Sun May 11 23:14:32 CEST 2008 - jkupec@suse.cz
 
 - fixed update -t {patch,patter,product} (bnc #388201)
