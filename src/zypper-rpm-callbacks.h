@@ -184,14 +184,11 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual void finish( zypp::Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
   {
-    // the error should have been reported in problem() but it isn't! (bnc #388810)
-    Zypper::instance()->out().progressEnd("remove-resolvable", _label, error != NO_ERROR);
     if (error != NO_ERROR)
-    {
-      // set proper exit code
-      Zypper::instance()->out().error(zcb_error2str(error, reason));
+      // set proper exit code, don't write to output, the error should have been reported in problem()
       Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    }
+    else
+      Zypper::instance()->out().progressEnd("remove-resolvable", _label);
   }
 };
 
