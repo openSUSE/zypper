@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 12 17:15:34 CEST 2008 - jkupec@suse.cz
+
+- call RemoveResolvableReport::problem() before finish() on error
+  (bnc #388810)
+- r10045
+
+-------------------------------------------------------------------
 Sat May 10 21:57:29 CEST 2008 - coolo@suse.de
 
 - fix file list
