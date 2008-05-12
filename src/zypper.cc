@@ -2534,7 +2534,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
-      query.setUninstalledOnly();
+      query.setUninstalledOnly(); // beware: this is not all to it, look at zypper-search, _only_not_installed
     if (copts.count("installed-only"))
       query.setInstalledOnly();
     //if (copts.count("match-any")) options.setMatchAny();
@@ -2607,17 +2607,17 @@ void Zypper::doCommand()
     {
       if (command() == ZypperCommand::RUG_PATCH_SEARCH)
       {
-        FillPatchesTable callback(t);
+        FillPatchesTable callback(t, query.statusFilterFlags() & PoolQuery::UNINSTALLED_ONLY);
         invokeOnEach(query.poolItemBegin(), query.poolItemEnd(), callback);
       }
       else if (_gopts.is_rug_compatible || _copts.count("details"))
       {
-        FillSearchTableSolvable callback(t);
+        FillSearchTableSolvable callback(t, query.statusFilterFlags() & PoolQuery::UNINSTALLED_ONLY);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
       }
       else
       {
-        FillSearchTableSelectable callback(t);
+        FillSearchTableSelectable callback(t, query.statusFilterFlags() & PoolQuery::UNINSTALLED_ONLY);
         invokeOnEach(query.selectableBegin(), query.selectableEnd(), callback);
       }
 

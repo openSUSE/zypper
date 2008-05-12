@@ -30,10 +30,12 @@ struct FillSearchTableSolvable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
+  bool _only_not_installed;
 
-  FillSearchTableSolvable( Table & table )
+  FillSearchTableSolvable( Table & table, bool only_not_installed = false )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
+  , _only_not_installed(only_not_installed)
   {
     TableHeader header;
 
@@ -98,10 +100,21 @@ struct FillSearchTableSolvable
           }
         }
 
-        row << (installed ? "i" : "v");
+        if (installed)
+        {
+          if (_only_not_installed)
+            continue;
+          row << "i";
+        }
+        else 
+          row << "v";
       }
       else if (pi.isSatisfied()) // patches/patterns/products are installed if satisfied
+      {
+        if (_only_not_installed)
+          continue;
         row << "i";
+      }
       else
         row << "";
 
@@ -126,6 +139,9 @@ struct FillSearchTableSolvable
 
       *_table << row;
     }
+
+    if (_only_not_installed)
+      return true;
 
     // show installed objects only if there is no counterpart in repos
     if (show_installed || s->availableEmpty())
@@ -171,10 +187,12 @@ struct FillSearchTableSelectable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
+  bool _only_not_installed;
 
-  FillSearchTableSelectable( Table & table )
+  FillSearchTableSelectable( Table & table, bool only_not_installed = false )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
+  , _only_not_installed(only_not_installed)
   {
     TableHeader header;
     // translators: S for installed Status
@@ -190,7 +208,14 @@ struct FillSearchTableSelectable
   {
     TableRow row;
 
-    row << (s->installedEmpty() ? (s->theObj().isSatisfied() ? "i" : "") : "i");
+    if (!s->installedEmpty() | s->theObj().isSatisfied())
+    {
+      if (_only_not_installed)
+        return true;
+      row << "i";
+    }
+    else
+      row << "";
     row << s->name();
     row << s->theObj()->summary();
     row << kind_to_string_localized(s->kind(), 1);
@@ -208,10 +233,12 @@ struct FillPatchesTable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
-
-  FillPatchesTable( Table & table )
+  bool _only_not_installed;
+  
+  FillPatchesTable( Table & table, bool only_not_installed = false )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
+  , _only_not_installed(only_not_installed)
   {
     TableHeader header;
 
@@ -230,10 +257,13 @@ struct FillPatchesTable
 
   bool operator()(const zypp::PoolItem & pi) const
   {
+    if (pi.isSatisfied() && _only_not_installed)
+      return true;
+
     TableRow row;
 
     zypp::Patch::constPtr patch = zypp::asKind<zypp::Patch>(pi.resolvable());
-
+    
     row
       << pi->repository().info().name()
       << pi->name()
