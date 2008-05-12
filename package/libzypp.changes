@@ -1,9 +1,15 @@
 -------------------------------------------------------------------
+Mon May 12 17:21:19 CEST 2008 - jkupec@suse.cz
+
+- /etc/zypp/products.d added (bnc #385868)
+- revision 10049
+
+-------------------------------------------------------------------
 Mon May 12 17:15:34 CEST 2008 - jkupec@suse.cz
 
 - call RemoveResolvableReport::problem() before finish() on error
   (bnc #388810)
-- r10045
+- revision 10045
 
 -------------------------------------------------------------------
 Sat May 10 21:57:29 CEST 2008 - coolo@suse.de
