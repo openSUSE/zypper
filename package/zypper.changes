@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Mon May 12 18:16:35 CEST 2008 - jkupec@suse.cz
+
+- fixed --uninstalled-only in search
+- r10053
+
+-------------------------------------------------------------------
 Mon May 12 17:17:12 CEST 2008 - jkupec@suse.cz
 
-- fix rpm removal error reporting (bnc #388810)
+- fixed rpm removal error reporting (bnc #388810)
 - r10046
 
 -------------------------------------------------------------------
