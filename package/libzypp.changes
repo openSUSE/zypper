@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May 13 17:37:11 CEST 2008 - dmacvicar@suse.de
+
+- report non packages as keep installed if satisfied to the
+  user interace (Selectables)
+- 4.21.3 
+
+-------------------------------------------------------------------
 Tue May 13 15:50:28 CEST 2008 - jkupec@suse.cz
 
 - create /etc/zypp/products.d on install
