@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           @PACKAGE@
-BuildRequires:  libzypp-devel >= 4.19.0 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
+BuildRequires:  libzypp-devel >= 4.21.2 boost-devel >= 1.33.1 gettext-devel >= 0.15 readline-devel >= 5.1
 BuildRequires:  gcc-c++ >= 4.1 cmake >= 2.4.6
 Requires:	procps
 Recommends:     logrotate cron 

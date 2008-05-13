@@ -1,8 +1,9 @@
 -------------------------------------------------------------------
 Tue May 13 11:59:04 CEST 2008 - jreidinger@suse.cz
 
-- user needn't be root when manipulate with spicified root dir
+- user needn't to be root to operate on specified --root dir
 - r10059 
+- 0.11.3
 
 -------------------------------------------------------------------
 Mon May 12 18:16:35 CEST 2008 - jkupec@suse.cz
