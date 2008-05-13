@@ -52,7 +52,8 @@ namespace zypp {
 
       virtual bool askUserToImportKey( const PublicKey &key )
       {
-        if ( geteuid() != 0 )
+        //this is because only root have access to rpm db where is keys stored
+        if ( geteuid() != 0 && !_gopts.changedRoot)
           return false;
 
         std::string question = boost::str(boost::format(

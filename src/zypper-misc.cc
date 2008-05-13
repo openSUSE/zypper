@@ -2276,7 +2276,8 @@ void solve_and_commit (Zypper & zypper)
     if (retv != SUMMARY_NOTHING_TO_DO || !zypper.runtimeData().srcpkgs_to_install.empty())
     {
       // check root user
-      if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0)
+      if (zypper.command() == ZypperCommand::VERIFY && geteuid() != 0
+        && !zypper.globalOpts().changedRoot)
       {
         zypper.out().error(
           _("Root privileges are required to fix broken package dependencies."));

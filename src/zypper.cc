@@ -406,6 +406,7 @@ void Zypper::processGlobalOptions()
 
   if ((it = gopts.find("root")) != gopts.end()) {
     _gopts.root_dir = it->second.front();
+    _gopts.changedRoot = true;
     Pathname tmp(_gopts.root_dir);
     if (!tmp.absolute())
     {
@@ -1941,7 +1942,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for modifying system repositories."));
@@ -2076,7 +2077,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for modifying system repositories."));
@@ -2131,7 +2132,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for modifying system repositories."));
@@ -2187,7 +2188,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for modifying system repositories."));
@@ -2252,7 +2253,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for refreshing system repositories."));
@@ -2276,7 +2277,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for cleaning local caches."));
@@ -2309,7 +2310,7 @@ void Zypper::doCommand()
       _cmdopts.license_auto_agree = true;
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for installing or uninstalling packages."));
@@ -2867,7 +2868,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for updating packages."));
@@ -2951,7 +2952,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for performing a distribution upgrade."));
@@ -3046,7 +3047,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for adding of package locks."));
@@ -3112,7 +3113,7 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
     // check root user
-    if (geteuid() != 0)
+    if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
         _("Root privileges are required for adding of package locks."));
@@ -3170,7 +3171,7 @@ void Zypper::doCommand()
 
     Locks::instance().save();
 
-    out().info(str::form("removed locks: %u", start - Locks::instance().size()));
+    out().info(str::form("removed locks: %lu", (long unsigned)(start - Locks::instance().size())));
     
     break;
   }

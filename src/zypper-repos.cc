@@ -437,7 +437,7 @@ static void do_init_repos(Zypper & zypper, const Container & container)
       MIL << "calling refresh for " << repo.name() << endl;
 
       // handle root user differently
-      if (geteuid() == 0)
+      if (geteuid() == 0 && !zypper.globalOpts().changedRoot)
       {
         if (refresh_raw_metadata(zypper, repo, false)
             || build_cache(zypper, repo, false))
@@ -474,7 +474,7 @@ static void do_init_repos(Zypper & zypper, const Container & container)
     else if (repo.enabled())
     {
       // handle root user differently
-      if (geteuid() == 0)
+      if (geteuid() == 0 && !zypper.globalOpts().changedRoot)
       {
         if (build_cache(zypper, repo, false))
         {
