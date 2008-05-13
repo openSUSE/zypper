@@ -183,6 +183,12 @@ namespace zypp
       if ( !installedObj() && allCandidatesLocked() )
 	  return S_Taboo;
 
+      // non packages are handled differently
+      if ( ! isKind<Package>(cand.resolvable()) )
+      {
+          return( cand.status().isSatisfied() ? S_KeepInstalled : S_NoInst );
+      }
+
       return( installedObj() ? S_KeepInstalled : S_NoInst );
     }
 
