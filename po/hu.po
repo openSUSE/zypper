@@ -748,7 +748,7 @@ msgstr ""
 "-r, --repo <álnév|#|URI>        Csak a megadott álnevű telepítési forrásban keressen.\n"
 "    --sort-by-name         Csomagok rendezése név szerint (alapértelmezett).\n"
 "    --sort-by-repo         Csomagok rendezése telepítési forrás szerint.\n"
-"    --details              Minden telepítési forrásban mindegyik elérhető verziót külön sorban mutassa.\n"
+"-s, --details              Minden telepítési forrásban mindegyik elérhető verziót külön sorban mutassa.\n"
 "\n"
 "A * és ? helyettesítő karakterek is használhatók a keresőkifejezésekben.\n"
 

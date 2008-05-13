@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-07 13:45+0200\n"
-"PO-Revision-Date: 2008-05-12 11:15-0300\n"
+"PO-Revision-Date: 2008-05-13 15:00-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -743,14 +743,14 @@ msgstr ""
 "    --match-words          Procura por uma coincidência em todas as palavras somente.\n"
 "    --match-exact          Procura por um nome exato de pacote.\n"
 "-d, --search-descriptions  Procura também nos resumos e descrições dos pacotes.\n"
-"-C, --case-sensitive       Realizar pesquisa diferenciando minúsculas e maiúsculas.\n"
+"-C, --case-sensitive       Pesquisar diferenciando minúsculas e maiúsculas.\n"
 "-i, --installed-only       Exibir apenas pacotes já instalados.\n"
 "-u, --uninstalled-only     Exibir apenas pacotes ainda não instalados.\n"
 "-t, --type <tipo>          Pesquisa pacotes apenas do tipo especificado.\n"
 "-r,  --repo <apelido|#|URL>   Pesquisa apenas no repositório especificado.\n"
 "    --sort-by-name         Listar os pacotes pelo nome (padrão).\n"
 "    --sort-by-repo         Listar os pacotes pelo repositório.\n"
-"    --details              Exibir cada versão disponível em cada repositório\n"
+"-s, --details              Exibir cada versão disponível em cada repositório\n"
 "                           em uma linha separada.\n"
 "\n"
 "Os caracteres curinga * e ? também podem ser utilizados dentro das strings de pesquisa.\n"
@@ -1283,7 +1283,7 @@ msgstr "Executar 'zypper refresh' como root deve resolver este problema."
 
 #: ../src/zypper.cc:2806
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
-msgstr "Executando como 'rug', não é possível realizar a abordagem 'melhor esforço' para a atualização."
+msgstr "Executando como 'rug', não é possível fazer a abordagem 'melhor esforço' para a atualização."
 
 #: ../src/zypper.cc:2854
 msgid "Root privileges are required for updating packages."
@@ -1293,7 +1293,7 @@ msgstr "São necessários privilégios de root para atualizar pacotes."
 #: ../src/zypper.cc:2901
 #, c-format
 msgid "Running as '%s', cannot do '%s' approach to update."
-msgstr "Executando como '%s', não é possível realizar a abordagem '%s' para a atualização."
+msgstr "Executando como '%s', não é possível fazer a abordagem '%s' para a atualização."
 
 #: ../src/zypper.cc:2938
 msgid "Root privileges are required for performing a distribution upgrade."
@@ -1757,7 +1757,7 @@ msgstr "Número de trava inválida: %s"
 #: ../src/zypper-media-callbacks.h:82
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Por favor inserir mídia [%s] #%d e digite 's' para continuar ou 'n' para cancelar a operação."
+msgstr "Por favor inserir a mídia [%s] #%d e digite 's' para continuar ou 'n' para cancelar a operação."
 
 #: ../src/zypper-media-callbacks.h:213
 msgid "User Name"
@@ -2742,7 +2742,7 @@ msgstr "Os repositórios especificados foram limpos."
 
 #: ../src/zypper-repos.cc:1149
 msgid "All repositories have been cleaned up."
-msgstr "Todos os repositórios foram limpados."
+msgstr "Todos os repositórios foram limpos."
 
 #: ../src/zypper-repos.cc:1188
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
