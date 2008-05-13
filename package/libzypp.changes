@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 13 15:50:28 CEST 2008 - jkupec@suse.cz
+
+- create /etc/zypp/products.d on install
+
+-------------------------------------------------------------------
 Mon May 12 17:21:19 CEST 2008 - jkupec@suse.cz
 
 - /etc/zypp/products.d added to file list (bnc #385868)
