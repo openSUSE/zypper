@@ -698,7 +698,7 @@ namespace zypp
 
   void KeyRing::importKey( const PublicKey &key, bool trusted )
   {
-    _pimpl->importKey( key.path(), trusted );
+    _pimpl->importKey( key, trusted );
   }
 
   string KeyRing::readSignatureKeyId( const Pathname &signature )
