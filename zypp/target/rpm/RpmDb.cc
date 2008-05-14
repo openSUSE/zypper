@@ -898,11 +898,15 @@ void RpmDb::importZyppKeyRingTrustedKeys()
 {
   MIL << "Importing zypp trusted keyring" << std::endl;
 
-  std::list<PublicKey> rpm_keys = pubkeys();
-
   std::list<PublicKey> zypp_keys;
-
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
+  /* The pubkeys() call below is expensive.  It calls gpg2 for each
+     gpg-pubkey in the rpm db.  Useless if we don't have any keys in
+     zypp yet.  */
+  if (zypp_keys.empty())
+    return;
+
+  std::list<PublicKey> rpm_keys = pubkeys();
 
   for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
     {
