@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 15 15:37:03 CEST 2008 - jreidinger@suse.cz
+
+- support for symlink named rug - autoenable rug compatibility
+- r10106 
+
+-------------------------------------------------------------------
 Thu May 15 14:47:45 CEST 2008 - jreidinger@suse.cz
 
 - fix input after showing in pager (bnc #390027) 
