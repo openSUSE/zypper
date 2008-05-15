@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 15 14:47:45 CEST 2008 - jreidinger@suse.cz
+
+- fix input after showing in pager (bnc #390027) 
+- r10102
+
+-------------------------------------------------------------------
 Tue May 13 11:59:04 CEST 2008 - jreidinger@suse.cz
 
 - user needn't to be root to operate on specified --root dir
