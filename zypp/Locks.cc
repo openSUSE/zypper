@@ -402,6 +402,25 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
   return true;
 }
 
+void Locks::merge()
+{
+  if( (_pimpl->toAdd.size() | _pimpl->toRemove.size())==0)
+  {
+    return; //nothing to merge
+  }
+
+  callback::SendReport<SavingLocksReport> report;
+  report->start();
+  if (!_pimpl->mergeList(report))
+  {
+    report->finish(SavingLocksReport::ABORTED);
+    return;
+  }
+  DBG << "locks merged" << endl;
+  report->finish(SavingLocksReport::NO_ERROR);
+  _pimpl->locksDirty = true;
+}
+
 void Locks::save( const Pathname& file )
 {
   if( ((_pimpl->toAdd.size() | _pimpl->toRemove.size())==0)

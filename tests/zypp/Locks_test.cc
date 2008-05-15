@@ -101,13 +101,13 @@ BOOST_AUTO_TEST_CASE(locks_save_without_redundancy)
   Locks& locks = Locks::instance();
   locks.addLock(q);
   locks.addLock(q);
-  locks.save("/dev/null");
+  locks.merge();
   BOOST_CHECK( locks.size()==1 );
   locks.addLock(q);
-  locks.save("/dev/null");
+  locks.merge();
   BOOST_CHECK( locks.size()==1 );
   locks.removeLock(q);
-  locks.save("/dev/null");
+  locks.merge();
   BOOST_CHECK( locks.size() == 0 );
 }
 
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE( locks_empty )
   q.addString("foo-bar-nonexist");
   Locks& locks = Locks::instance();
   locks.addLock(q);
-  locks.save( "/dev/null" ); //only need merge list
+  locks.merge(); //only need merge list
   BOOST_CHECK( locks.existEmpty() );
   locks.removeEmpty();
   BOOST_CHECK( locks.size() == 0 );

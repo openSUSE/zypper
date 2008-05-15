@@ -113,6 +113,13 @@ namespace zypp
      * \see SavingLocksReport
      */
     void save( const Pathname& file = ZConfig::instance().locksFile() );
+
+    /**
+     * Merges toAdd and ToRemove list to stable list.
+     * \note Can call callback if problem during merging occure
+     * \see SavingLocksReport
+     */
+    void merge();
     
     /**
      * Gets true if some lock doesn't lock any object in pool
