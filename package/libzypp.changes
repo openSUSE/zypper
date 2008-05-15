@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 15 15:15:59 CEST 2008 - jreidinger@suse.cz
+
+- allow call only merge old locks and newly added/removed without
+  saving it to file 
+- -revision 10104 
+
+-------------------------------------------------------------------
 Tue May 13 17:37:11 CEST 2008 - dmacvicar@suse.de
 
 - report non packages as keep installed if satisfied to the
