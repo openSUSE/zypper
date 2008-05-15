@@ -143,10 +143,6 @@ bool show_in_pager(const string& text)
   os.close();
   ostringstream cmdline;
   cmdline << pager <<" "<<tpath;
-  int termin = dup(0);
-  close(0);
-  int termout = dup(1);
-  close(1);
 
   switch(fork()){
     case -1:
@@ -154,23 +150,13 @@ bool show_in_pager(const string& text)
       return false;
 
     case 0:
-      //allow terminal only for pager
-      dup2(termin,0);
-      dup2(termout,1);               
       execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
       WAR << "exec failed with " << strerror(errno) << endl;
-      close(termin);
-      close(termout);
       exit(1); //cannot return false here, due to here is another process
       //so only kill itself
 
     default: 
-      wait(0);
-      //restore terminal access after end of pager
-      dup2(termin,0);
-      dup2(termout,1);               
-      close(termin);
-      close(termout);
+      wait(0); //wait until pager end to disallow possibly terminal collision
   }
 
   return true;
