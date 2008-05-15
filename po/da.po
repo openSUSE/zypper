@@ -201,7 +201,7 @@ msgstr ""
 "\tpackages, pa\t\tVis liste over alle tilgængelige pakker.\n"
 "\tpatterns, pt\t\tVis liste over alle tilgængelige mønstre.\n"
 "\tproducts, pd\t\tVis liste over alle tilgængelige produkter.\n"
-"\twhat-provides, wp\tVis liste over pakker, der har specificeret kapabilitet.\n"
+"\twhat-provides, wp\tVis liste over pakker, der lever den angivne kapabilitet.\n"
 
 #: ../src/zypper.cc:213
 msgid ""
@@ -539,7 +539,7 @@ msgstr ""
 "modifyrepo (mr) <valgmuligheder> <alias|#|URL>\n"
 "modifyrepo (mr) <valgmuligheder> <%s>\n"
 "\n"
-"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller ved de samlende valgmuligheder '%s'.\n"
+"Ændr egenskaber for softwarekilde angivet ved alias, nummer eller URI eller ved de samlede valgmuligheder '%s'.\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "-d, --disable             Deaktivér softwarekilden (uden at fjerne den).\n"
@@ -551,7 +551,7 @@ msgstr ""
 "-k, --keep-packages       Aktivér caching af RPM-filer.\n"
 "-K, --no-keep-packages    Deaktivér caching af RPM-filer.\n"
 "-a, --all                 Anvend ændringer på alle softwarekilder.\n"
-"-l, --local               Anvend ændringer på alle softwarekilder lokale softwarekilder.\n"
+"-l, --local               Anvend ændringer på alle lokale softwarekilder.\n"
 "-t, --remote              Anvend ændringer på alle eksterne softwarekilder.\n"
 "-m, --medium-type <type>  Anvend ændringer på alle softwarekilder af angiven type.\n"
 
@@ -875,7 +875,7 @@ msgid ""
 msgstr ""
 "info (if) [valgmuligheder] <navn> ...\n"
 "\n"
-"Vis detaljeret information for angivne pakker\n"
+"Vis detaljeret information om angivne pakker\n"
 "\n"
 "  Kommando-valgmuligheder:\n"
 "-r, --repo <alias|#|URI>  Arbejd kun med den angivne softwarekilde.\n"
@@ -1200,7 +1200,7 @@ msgstr "Valgmuligheden '%s' er afskrevet og vil snart blive droppet."
 #. followed by mr command help text which will explain it
 #: ../src/zypper.cc:2193
 msgid "Alias or an aggregate option is required."
-msgstr "Alias eller en samlende valgmulighed er påkrævet."
+msgstr "Alias eller en samlet valgmulighed kræves."
 
 #: ../src/zypper.cc:2222
 #, c-format
@@ -1787,7 +1787,7 @@ msgstr "'%s' blev ikke fundet."
 #: ../src/zypper-misc.cc:611
 #, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' som leverer '%s' er allerede installeret."
+msgstr "'%s', som leverer '%s', er allerede installeret."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/zypper-misc.cc:697
@@ -2827,12 +2827,12 @@ msgstr "Automatisk genopfriskning blev deaktiveret for softwarekilden '%s'."
 #: ../src/zypper-repos.cc:1692
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Caching af RPM-filer er blevet aktiveret for softwarekilden '%s'."
+msgstr "Caching af RPM-filer blev aktiveret for softwarekilden '%s'."
 
 #: ../src/zypper-repos.cc:1695
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Caching af RPM-filer er blevet deaktiveret for softwarekilden '%s'."
+msgstr "Caching af RPM-filer blev deaktiveret for softwarekilden '%s'."
 
 #: ../src/zypper-repos.cc:1701
 #, c-format
