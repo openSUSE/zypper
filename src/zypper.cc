@@ -375,8 +375,9 @@ void Zypper::processGlobalOptions()
   }
 
   // ======== other global options ========
-
-  if (gopts.count("rug-compatible"))
+  
+  string rug_test(_argv[0]);
+  if (gopts.count("rug-compatible") || rug_test.rfind("rug") == rug_test.size()-3 )
   {
     _gopts.is_rug_compatible = true;
     out().info("Switching to rug-compatible mode.", Out::DEBUG);
