@@ -91,6 +91,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
                                   // no recommended resolvables, language
                                   // packages, hardware packages (modalias)  
 
+    // Additional QueueItems which has to be regarded by the solver
+    // This will be used e.g. by solution actions
+    solver::detail::SolverQueueItemList _removed_queue_items;
+    solver::detail::SolverQueueItemList _added_queue_items;    
+    
     // helpers
     bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
@@ -121,7 +126,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addExtraRequire (const Capability & capability);
     void removeExtraRequire (const Capability & capability);
     void addExtraConflict (const Capability & capability);
-    void removeExtraConflict (const Capability & capability);    
+    void removeExtraConflict (const Capability & capability);
+
+    void removeQueueItem (const SolverQueueItem_Ptr item);
+    void addQueueItem (const SolverQueueItem_Ptr item);    
 
     const CapabilitySet extraRequires () { return _extra_requires; }
     const CapabilitySet extraConflicts () { return _extra_conflicts; }
@@ -153,7 +161,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool testing(void) const { return _testing; }
     void setTesting( bool testing ) { _testing = testing; }    
-
+    
 };
 
 ///////////////////////////////////////////////////////////////////

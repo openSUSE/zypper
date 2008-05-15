@@ -69,6 +69,7 @@ Resolver::Resolver (const ResPool & pool)
     : _pool(pool)
     , _satResolver(NULL)
     , _poolchanged(_pool.serial() )
+    , _testing(false)
     , _forceResolve(false)
     , _upgradeMode(false)
     , _verifying(false)
@@ -131,6 +132,40 @@ void
 Resolver::removeExtraConflict (const Capability & capability)
 {
     _extra_conflicts.erase (capability);
+}
+
+
+void Resolver::removeQueueItem (const SolverQueueItem_Ptr item)
+{
+    bool found = false;
+    for (SolverQueueItemList::const_iterator iter = _added_queue_items.begin();
+	 iter != _added_queue_items.end(); iter++) {
+	if (*iter == item) {
+	    _added_queue_items.remove(*iter);
+	    found = true;
+	    break;
+	}
+    }
+    if (!found) {
+	_removed_queue_items.push_back (item);
+	_removed_queue_items.unique ();
+    }
+}
+void Resolver::addQueueItem (const SolverQueueItem_Ptr item)
+{
+    bool found = false;
+    for (SolverQueueItemList::const_iterator iter = _removed_queue_items.begin();
+	 iter != _removed_queue_items.end(); iter++) {
+	if (*iter == item) {
+	    _removed_queue_items.remove(*iter);
+	    found = true;
+	    break;
+	}
+    }
+    if (!found) {
+	_added_queue_items.push_back (item);
+	_added_queue_items.unique ();
+    }    
 }
 
 void
@@ -202,6 +237,10 @@ Resolver::undo(void)
     //  Regard dependencies of the item weak onl
     _addWeak.clear();
 
+    // Additional QueueItems which has to be regarded by the solver
+    _removed_queue_items.clear();
+    _added_queue_items.clear();    
+
     return;
 }
 
@@ -262,6 +301,34 @@ bool
 Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 {
     solverInit();
+    
+    // add/remove additional SolverQueueItems
+    for (SolverQueueItemList::const_iterator iter = _removed_queue_items.begin();
+	 iter != _removed_queue_items.end(); iter++) {
+	for (SolverQueueItemList::const_iterator iterQueue = queue.begin(); iterQueue != queue.end(); iterQueue++) {
+	    if ( (*iterQueue)->cmp(*iter) == 0) {	    
+		MIL << "remove from queue" << *iter;
+		queue.remove(*iterQueue);
+		break;
+	    }	    
+	}
+    }
+
+    for (SolverQueueItemList::const_iterator iter = _added_queue_items.begin();
+	 iter != _added_queue_items.end(); iter++) {
+	bool found = false;
+	for (SolverQueueItemList::const_iterator iterQueue = queue.begin(); iterQueue != queue.end(); iterQueue++) {
+	    if ( (*iterQueue)->cmp(*iter) == 0) {
+		found = true;
+		break;
+	    }	    
+	}
+	if (!found) {
+	    MIL << "add to queue" << *iter;	    
+	    queue.push_back(*iter);
+	}
+    }
+    
     return _satResolver->resolveQueue(queue, _addWeak);
 }
 

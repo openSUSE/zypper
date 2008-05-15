@@ -100,16 +100,8 @@ SolverQueueItemInstall::cmp (SolverQueueItem_constPtr item) const
     SolverQueueItemInstall_constPtr ins = dynamic_pointer_cast<const SolverQueueItemInstall>(item);
     if (_name != ins->_name) {
 	return _name.compare(ins->_name);
-    } else {
-	if (_soft == ins->_soft) {
-	    return 0;
-	} else {
-	    if (_soft)
-		return 1;
-	    else
-		return -1;
-	}
-    }
+    } 
+    return 0;
 }
 
 

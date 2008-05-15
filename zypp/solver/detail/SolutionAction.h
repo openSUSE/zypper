@@ -20,6 +20,7 @@
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -68,8 +69,10 @@ namespace zypp
 	    INSTALL,
 	    REMOVE,
 	    UNLOCK,
-	    REMOVE_REQUIRE,
-	    REMOVE_CONFLICT,
+	    REMOVE_EXTRA_REQUIRE,
+	    REMOVE_EXTRA_CONFLICT,
+	    ADD_SOLVE_QUEUE_ITEM,
+	    REMOVE_SOLVE_QUEUE_ITEM,
 	} TransactionKind;
 
 
@@ -86,6 +89,12 @@ namespace zypp
 		: SolutionAction(),
 		  _capability( capability ), _action( action ) {}
 
+
+	    TransactionSolutionAction( SolverQueueItem_Ptr item,
+				       TransactionKind action )
+		: SolutionAction(),
+		  _solverQueueItem( item ), _action( action ) {}
+
 	    TransactionSolutionAction( TransactionKind action )
 		: SolutionAction(),
 		  _item(), _action( action ) {}
@@ -98,6 +107,7 @@ namespace zypp
 	  // ---------------------------------- accessors
 
 	  const PoolItem item() const { return _item; }
+	  const Capability capability() const { return _capability; }	    
 	  TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
@@ -107,6 +117,8 @@ namespace zypp
 
 	    PoolItem _item;
 	    Capability _capability;
+	    SolverQueueItem_Ptr _solverQueueItem;
+	    
 	    const TransactionKind _action;
 	};
 

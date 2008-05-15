@@ -65,6 +65,12 @@ void ProblemSolutionCombi::addSingleAction( PoolItem item, const TransactionKind
     actNumber++;
 }
 
+void ProblemSolutionCombi::addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action)
+{
+    addAction (new TransactionSolutionAction(item, action));
+    actNumber++;
+}
+
 void ProblemSolutionCombi::addDescription( const std::string description)
 {
     if ( _description.size() == 0

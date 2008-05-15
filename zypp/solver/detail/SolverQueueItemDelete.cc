@@ -98,16 +98,8 @@ SolverQueueItemDelete::cmp (SolverQueueItem_constPtr item) const
     SolverQueueItemDelete_constPtr del = dynamic_pointer_cast<const SolverQueueItemDelete>(item);
     if (_name != del->_name) {
 	return _name.compare(del->_name);
-    } else {
-	if (_soft == del->_soft) {
-	    return 0;
-	} else {
-	    if (_soft)
-		return 1;
-	    else
-		return -1;
-	}
     }
+    return 0;
 }
 
 //---------------------------------------------------------------------------

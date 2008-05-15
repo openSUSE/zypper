@@ -36,6 +36,8 @@
 #include "zypp/solver/detail/SATResolver.h"
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
+#include "zypp/solver/detail/SolverQueueItemInstall.h"
+#include "zypp/solver/detail/SolverQueueItemDelete.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -836,23 +838,6 @@ void SATResolver::doUpdate()
 // helper function
 //----------------------------------------------------------------------------
 
-struct FindPackage : public resfilter::ResObjectFilterFunctor
-{
-    ProblemSolutionCombi *problemSolution;
-    TransactionKind action;
-    FindPackage (ProblemSolutionCombi *p, const TransactionKind act)
-       : problemSolution (p)
-	 , action (act)
-    {
-    }
-
-    bool operator()( PoolItem p)
-    {
-	problemSolution->addSingleAction (p, action);
-	return true;
-    }
-};
-
 
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
@@ -1040,12 +1025,11 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
 				{
-				FindPackage info (problemSolution, KEEP);
-                                IdString ident( what );
-				invokeOnEach( _pool.byIdentBegin( ident ),
-					      _pool.byIdentEnd( ident ),
-					      resfilter::ByUninstalled (),
-					      functor::functorRef<bool,PoolItem> (info) );
+				IdString ident( what );				    
+				SolverQueueItemInstall_Ptr install =
+				    new SolverQueueItemInstall(_pool, ident.asString(), false );
+				problemSolution->addSingleAction (install, REMOVE_SOLVE_QUEUE_ITEM);				
+				
 				string description = str::form (_("do not install %s"), ident.c_str() );
 				MIL << description << endl;
 				problemSolution->addDescription (description);
@@ -1053,13 +1037,11 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE_NAME:
 				{
-				FindPackage info (problemSolution, KEEP);
                                 IdString ident( what );
-				invokeOnEach( _pool.byIdentBegin( ident ),
-					      _pool.byIdentEnd( ident ),
-					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
-							      resfilter::ByTransact ()),			// will be deinstalled
-					      functor::functorRef<bool,PoolItem> (info) );
+				SolverQueueItemDelete_Ptr del =
+				    new SolverQueueItemDelete(_pool, ident.asString(), false );
+				problemSolution->addSingleAction (del, REMOVE_SOLVE_QUEUE_ITEM);				
+				
 				string description = str::form (_("keep %s"), ident.c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
@@ -1067,7 +1049,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
 				{
-				problemSolution->addSingleAction (Capability(what), REMOVE_REQUIRE);
+				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_REQUIRE);
 				string description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
@@ -1075,7 +1057,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
 				{
-				problemSolution->addSingleAction (Capability(what), REMOVE_CONFLICT);				    
+				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_CONFLICT);				    
 				string description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
 				MIL << description << endl;
 				problemSolution->addDescription (description);

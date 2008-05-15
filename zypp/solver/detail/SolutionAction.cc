@@ -63,12 +63,14 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 {
     os << "TransactionSolutionAction: ";
     switch (_action) {
-	case KEEP:		os << "Keep " << _item; break;
-	case INSTALL:		os << "Install " << _item; break;
-	case REMOVE:		os << "Remove " << _item; break;
-	case UNLOCK:		os << "Unlock " << _item; break;
-	case REMOVE_REQUIRE:	os << "Remove require " << _capability; break;
-	case REMOVE_CONFLICT:	os << "Remove conflict " << _capability; break;	    
+	case KEEP:			os << "Keep " << _item; break;
+	case INSTALL:			os << "Install " << _item; break;
+	case REMOVE:			os << "Remove " << _item; break;
+	case UNLOCK:			os << "Unlock " << _item; break;
+	case REMOVE_EXTRA_REQUIRE:	os << "Remove require " << _capability; break;
+	case REMOVE_EXTRA_CONFLICT:	os << "Remove conflict " << _capability; break;
+	case ADD_SOLVE_QUEUE_ITEM:	os << "Add SolveQueueItem " <<  _solverQueueItem; break;
+	case REMOVE_SOLVE_QUEUE_ITEM:	os << "Remove SolveQueueItem " <<  _solverQueueItem; break;   	    
     }
 
     os << endl;
@@ -152,12 +154,18 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    ret = _item.status().setLock (false, ResStatus::USER);
 	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
-	case REMOVE_REQUIRE:
+	case REMOVE_EXTRA_REQUIRE:
 	    resolver.removeExtraRequire (_capability);
 	    break;	    
-	case REMOVE_CONFLICT:
+	case REMOVE_EXTRA_CONFLICT:
 	    resolver.removeExtraConflict (_capability);
-	    break;	    
+	    break;
+	case ADD_SOLVE_QUEUE_ITEM:
+	    resolver.addQueueItem(_solverQueueItem);
+	    break;
+	case REMOVE_SOLVE_QUEUE_ITEM:
+	    resolver.removeQueueItem(_solverQueueItem);
+	    break;
 	default:
 	    ERR << "Wrong TransactionKind" << endl;
 	    ret = false;

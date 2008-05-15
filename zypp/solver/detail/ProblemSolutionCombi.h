@@ -25,6 +25,7 @@
 #include <string>
 #include "zypp/ProblemSolution.h"
 #include "zypp/solver/detail/Types.h"
+#include "zypp/solver/detail/SolverQueueItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -58,9 +59,14 @@ namespace zypp
 	    void addSingleAction( PoolItem item, const TransactionKind action);
 
 	    /**
-	     * Add a single action of an capability
+	     * Add a single action of a capability
 	     */
-	    void addSingleAction( Capability capability, const TransactionKind action);	    
+	    void addSingleAction( Capability capability, const TransactionKind action);
+
+	    /**
+	     * Add a single action of a SolverQueueItem
+	     */
+	    void addSingleAction( SolverQueueItem_Ptr item, const TransactionKind action);	    
 
 	    /**
 	     * returns the number of actions
