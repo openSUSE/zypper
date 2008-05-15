@@ -328,6 +328,11 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
 	    queue.push_back(*iter);
 	}
     }
+
+    // The application has to take care to write these solutions back to e.g. selectables in order
+    // give the user a chance for changing these decisions again.
+    _removed_queue_items.clear();
+    _added_queue_items.clear();
     
     return _satResolver->resolveQueue(queue, _addWeak);
 }

@@ -88,6 +88,12 @@ namespace zypp
      * need user interaction) and "false" if there were problems.  In
      * the latter case, use problems() and later applySolutions()
      * below.
+     * The solution could be that the solver remove/add some entries
+     * in the task queue. So make a new call of resolveQueue after you
+     * have applied any solution AND check the parameter "queue" if
+     * there has been any changes by the solver and adapt these changes
+     * to e.g. the selectables.
+     * 
      **/
     bool resolveQueue (solver::detail::SolverQueueItemList & queue);      
 
