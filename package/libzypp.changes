@@ -1,5 +1,5 @@
 -------------------------------------------------------------------
-Fri May 16 16:46:04 CEST 2008 - schubi@suse.de
+Fri May 16 16:56:04 CEST 2008 - schubi@suse.de
 
 - Added new calls : isInstalledBy (const PoolItem item);
                     installs (const PoolItem item);
