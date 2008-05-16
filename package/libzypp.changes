@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 16 09:59:09 CEST 2008 - jreidinger@suse.cz
+
+- throw more describing exception when repo probing failed
+  (bnc #389690) 
+- revision 10118
+
+-------------------------------------------------------------------
 Thu May 15 15:15:59 CEST 2008 - jreidinger@suse.cz
 
 - allow call only merge old locks and newly added/removed without
