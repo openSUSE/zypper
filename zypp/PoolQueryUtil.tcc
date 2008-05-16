@@ -18,6 +18,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/base/String.h"
 
 namespace zypp
 {
@@ -39,7 +40,7 @@ namespace zypp
     std::ifstream fin( file.c_str() );
 
     if (!fin)
-      return; //TODO exception
+      ZYPP_THROW(Exception(str::form("Cannot open file %s",file.c_str())));
 
     do
     {
@@ -63,7 +64,7 @@ namespace zypp
     std::ofstream fout( file.c_str(), std::ios_base::out | std::ios_base::trunc );
 
     if (!fout)
-      return; //TODO exception
+      ZYPP_THROW(Exception(str::form("Cannot open file %s",file.c_str())));
 
     for_( it, begin, end )
     {

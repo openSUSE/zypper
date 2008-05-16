@@ -432,11 +432,16 @@ void Locks::save( const Pathname& file )
 
   callback::SendReport<SavingLocksReport> report;
   report->start();
-  if (!_pimpl->mergeList(report))
+
+  if ((_pimpl->toAdd.size() | _pimpl->toRemove.size())!=0)
   {
-    report->finish(SavingLocksReport::ABORTED);
-    return;
+    if (!_pimpl->mergeList(report))
+    {
+      report->finish(SavingLocksReport::ABORTED);
+      return;
+    }
   }
+
   DBG << "writed "<< _pimpl->locks.size() << "locks" << endl;
   writePoolQueriesToFile( file, _pimpl->locks.begin(), _pimpl->locks.end() );
   report->finish(SavingLocksReport::NO_ERROR);
