@@ -102,6 +102,9 @@ Resolver::reset (bool keepExtras )
       _extra_requires.clear();
       _extra_conflicts.clear();
     }
+
+    _isInstalledBy.clear();
+    _installs.clear();
 }
 
 void
@@ -288,6 +291,11 @@ Resolver::solverInit()
 
 	if (_verifying)
 	    _satResolver->setFixsystem(true);
+
+	// Resetting additional solver information
+	_isInstalledBy.clear();
+	_installs.clear();
+	
 }
 
 bool
@@ -418,6 +426,165 @@ bool Resolver::checkUnmaintainedItems () {
     }
     return solverRet;
 }
+
+
+//----------------------------------------------------------------------------
+// Getting more information about the solve results
+
+
+void
+Resolver::collectResolverInfo(void)
+{
+    if ( _satResolver
+	 && _isInstalledBy.empty()
+	 && _installs.empty()) {
+	
+	// generating new
+	PoolItemList itemsToInstall = _satResolver->resultItemsToInstall();
+
+	for (PoolItemList::const_iterator instIter = itemsToInstall.begin();
+	     instIter != itemsToInstall.end(); instIter++) {
+
+	    // Requires
+	    for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::REQUIRES).begin(); capIt != (*instIter)->dep (Dep::REQUIRES).end(); ++capIt)
+	    {
+		sat::WhatProvides possibleProviders(*capIt);
+		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+		    PoolItem provider = ResPool::instance().find( *iter );
+		    
+		    // searching if this provider will already be installed
+		    bool found = false;
+		    bool alreadySetForInstallation = false;
+		    ItemCapKindMap::const_iterator pos = _isInstalledBy.find(provider);
+		    while (pos != _isInstalledBy.end()
+			   && pos->first == provider
+			   && !found) {
+			alreadySetForInstallation = true;
+			ItemCapKind capKind = pos->second;
+			if (capKind.item == *instIter)  found = true;
+			pos++;
+		    }
+
+		    if (!found
+			&& provider.status().isToBeInstalled()) {
+			if (provider.status().isBySolver()) {
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::REQUIRES, !alreadySetForInstallation );
+			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
+			} else {
+			    // no initial installation cause it has been set be e.g. user
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::REQUIRES, false ); 
+			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+			}
+			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::REQUIRES, !alreadySetForInstallation );
+			_installs.insert (make_pair( *instIter, capKindisInstalledBy));			
+		    }
+		}
+	    }
+	    
+	    //Recommends
+	    for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::RECOMMENDS).begin(); capIt != (*instIter)->dep (Dep::RECOMMENDS).end(); ++capIt)
+	    {
+		sat::WhatProvides possibleProviders(*capIt);
+		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+		    PoolItem provider = ResPool::instance().find( *iter );
+		    
+		    // searching if this provider will already be installed
+		    bool found = false;
+		    bool alreadySetForInstallation = false;
+		    ItemCapKindMap::const_iterator pos = _isInstalledBy.find(provider);
+		    while (pos != _isInstalledBy.end()
+			   && pos->first == provider
+			   && !found) {
+			alreadySetForInstallation = true;
+			ItemCapKind capKind = pos->second;
+			if (capKind.item == *instIter)  found = true;
+			pos++;
+		    }
+
+		    if (!found
+			&& provider.status().isToBeInstalled()) {
+			if (provider.status().isBySolver()) {
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
+			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
+			} else {
+			    // no initial installation cause it has been set be e.g. user
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, false ); 
+			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+			}
+			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
+			_installs.insert (make_pair( *instIter, capKindisInstalledBy));			
+		    }
+		}
+	    }
+
+	    //Suggests
+	    for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::SUGGESTS).begin(); capIt != (*instIter)->dep (Dep::SUGGESTS).end(); ++capIt)
+	    {
+		sat::WhatProvides possibleProviders(*capIt);
+		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+		    PoolItem provider = ResPool::instance().find( *iter );
+		    
+		    // searching if this provider will already be installed
+		    bool found = false;
+		    bool alreadySetForInstallation = false;
+		    ItemCapKindMap::const_iterator pos = _isInstalledBy.find(provider);
+		    while (pos != _isInstalledBy.end()
+			   && pos->first == provider
+			   && !found) {
+			alreadySetForInstallation = true;
+			ItemCapKind capKind = pos->second;
+			if (capKind.item == *instIter)  found = true;
+			pos++;
+		    }
+
+		    if (!found) {
+			ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUGGESTS, !alreadySetForInstallation );
+			_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
+		    }
+		}
+	    }   	    
+	}
+    }
+}
+
+
+const ItemCapKindList Resolver::isInstalledBy (const PoolItem item) {
+    ItemCapKindList ret;
+    collectResolverInfo();
+
+    for (ItemCapKindMap::const_iterator iter = _isInstalledBy.find(item); iter != _isInstalledBy.end();) {
+	ItemCapKind info = iter->second;
+	PoolItem iterItem = iter->first;
+	if (iterItem == item) {
+	    ret.push_back(info);
+	    iter++;
+	} else {
+	    // exit
+	    iter = _isInstalledBy.end();
+	}
+    }
+    return ret;
+}
+
+const ItemCapKindList Resolver::installs (const PoolItem item) {
+    ItemCapKindList ret;
+    collectResolverInfo();
+
+    for (ItemCapKindMap::const_iterator iter = _installs.find(item); iter != _installs.end();) {
+	ItemCapKind info = iter->second;
+	PoolItem iterItem = iter->first;
+	if (iterItem == item) {
+	    ret.push_back(info);
+	    iter++;
+	} else {
+	    // exit
+	    iter = _installs.end();
+	}
+    }
+    return ret;
+}
+
+
 
 
 ///////////////////////////////////////////////////////////////////

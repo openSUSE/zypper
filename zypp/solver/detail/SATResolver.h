@@ -69,7 +69,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
-    PoolItemList _items_to_keep;    
+    PoolItemList _items_to_keep;
+
+    // solve results
+    PoolItemList _result_items_to_install;
+    PoolItemList _result_items_to_remove;
 
     bool _fixsystem;			// repair errors in rpm dependency graph 
     bool _allowdowngrade;		// allow to downgrade installed solvable 
@@ -160,6 +164,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void setOnlyRequires ( const bool onlyRequires) { _onlyRequires = onlyRequires;}
 
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
+
+    PoolItemList resultItemsToInstall () { return _result_items_to_install; }
+    PoolItemList resultItemsToRemove () { return _result_items_to_remove; }
+    
 };
 
 ///////////////////////////////////////////////////////////////////

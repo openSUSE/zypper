@@ -58,6 +58,32 @@ namespace zypp
     class SATResolver;
 
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ItemCapKind
+    //
+    /** */
+    struct ItemCapKind
+    {
+	public:
+	Capability cap; //Capability which has triggerd this selection
+	Dep capKind; //Kind of that capability
+	PoolItem item; //Item which has triggered this selection
+	bool initialInstallation; //This item has triggered the installation
+	                          //Not already fullfilled requierement only.
+
+    ItemCapKind() : capKind("FRESHENS") {}
+	    ItemCapKind( PoolItem i, Capability c, Dep k, bool initial)
+		: cap( c )
+		, capKind( k )
+		, item( i )
+		, initialInstallation( initial )
+	    { }
+    };
+    typedef std::multimap<PoolItem,ItemCapKind> ItemCapKindMap;
+    typedef std::list<ItemCapKind> ItemCapKindList;
+	
+
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Resolver
@@ -94,11 +120,16 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // Additional QueueItems which has to be regarded by the solver
     // This will be used e.g. by solution actions
     solver::detail::SolverQueueItemList _removed_queue_items;
-    solver::detail::SolverQueueItemList _added_queue_items;    
+    solver::detail::SolverQueueItemList _added_queue_items;
+
+    // Additional information about the solverrun
+    ItemCapKindMap _isInstalledBy;
+    ItemCapKindMap _installs;
     
     // helpers
     bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
+    void collectResolverInfo (void);    
 
     // Unmaintained packages which does not fit to the updated system
     // (broken dependencies) will be deleted.
@@ -160,7 +191,14 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void reset (bool keepExtras = false );
 
     bool testing(void) const { return _testing; }
-    void setTesting( bool testing ) { _testing = testing; }    
+    void setTesting( bool testing ) { _testing = testing; }
+
+    // Get more information about the solverrun
+    // Which item will be installed by another item or triggers an item for
+    // installation
+    const ItemCapKindList isInstalledBy (const PoolItem item);
+    const ItemCapKindList installs (const PoolItem item);
+    
     
 };
 

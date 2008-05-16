@@ -444,12 +444,8 @@ SATResolver::solving()
 
     // copying solution back to zypp pool
     //-----------------------------------------
-
-    if (_solv->problems.count > 0 )
-    {
-	ERR << "Solverrun finished with an ERROR" << endl;
-	return false;
-    }
+    _result_items_to_install.clear();
+    _result_items_to_remove.clear();
 
     /*  solvables to be installed */
     for (int i = 0; i < _solv->decisionq.count; i++)
@@ -464,6 +460,7 @@ SATResolver::solving()
       PoolItem poolItem = _pool.find (sat::Solvable(p));
       if (poolItem) {
 	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
+	  _result_items_to_install.push_back (poolItem);
       } else {
 	  ERR << "id " << p << " not found in ZYPP pool." << endl;
       }
@@ -489,6 +486,7 @@ SATResolver::solving()
 	  } else {
 	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
 	  }
+	  _result_items_to_remove.push_back (poolItem);	  
       } else {
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
@@ -557,6 +555,13 @@ SATResolver::solving()
 	    _XDEBUG("SATSolutionToPool(" << item << " ) broken !");    		    
 	}
     }
+
+    if (_solv->problems.count > 0 )
+    {
+	ERR << "Solverrun finished with an ERROR" << endl;
+	return false;
+    }
+    
     map_free(&installedmap);
     queue_free(&(solvableQueue));
     queue_free(&flags);    

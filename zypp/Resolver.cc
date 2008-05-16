@@ -109,6 +109,10 @@ namespace zypp
   bool Resolver::createSolverTestcase (const std::string & dumpPath)
   { solver::detail::Testcase testcase (dumpPath);
     return testcase.createTestcase(*_pimpl);}
+  const solver::detail::ItemCapKindList Resolver::isInstalledBy (const PoolItem item)
+  { return _pimpl->isInstalledBy (item); }
+  const solver::detail::ItemCapKindList Resolver::installs (const PoolItem item)
+  { return _pimpl->installs (item); }
 
 
   /////////////////////////////////////////////////////////////////

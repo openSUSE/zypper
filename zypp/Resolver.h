@@ -216,8 +216,33 @@ namespace zypp
      */
     bool createSolverTestcase (const std::string & dumpPath = "/var/log/YaST2/solverTestcase");
 
+    /**
+     * Gives information about WHO has pused an installation of an given item.
+     *
+     * \param item    Evaluate additional information for this resolvable.
+     * \return A list of structures which contains:
+     *		item     Item which has triggered the installation of the given param item.
+     *		cap      Capability which has triggerd this installation
+     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *
+     * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
+     *
+     */
+    const solver::detail::ItemCapKindList isInstalledBy (const PoolItem item);
 
-  protected:
+    /**
+     * Gives information about WHICH additional items will be installed due the installation of an item.
+     *
+     * \param item     Evaluate additional information for this resolvable.
+     * \return A list of structures which contains:
+     *		item     Item which will be installed due to the installation of the given param item too.
+     *		cap      Capability which causes the installation
+     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *
+     * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
+     *
+     */      
+    const solver::detail::ItemCapKindList installs (const PoolItem item);
 
   private:
     solver::detail::Resolver_Ptr _pimpl;
