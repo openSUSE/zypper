@@ -133,6 +133,8 @@ namespace zypp
         : RepoException(msg_r)
       {}
 
+      RepoUnknownTypeException( const RepoInfo &info );
+
       RepoUnknownTypeException()
       {}
 

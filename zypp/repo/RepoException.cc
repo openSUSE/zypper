@@ -12,6 +12,7 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 #include "zypp/repo/RepoException.h"
+#include "zypp/base/String.h"
 
 using std::endl;
 
@@ -46,6 +47,11 @@ namespace zypp
     RepoNotCachedException::RepoNotCachedException(  const RepoInfo& info, 
         const std::string & msg_r )
     : RepoException( info, msg_r )
+    {}
+
+    RepoUnknownTypeException::RepoUnknownTypeException( const RepoInfo &info)
+    : RepoException( info,
+        str::form("Cannot determine type for repository %s.",info.alias().c_str()))
     {}
 
 

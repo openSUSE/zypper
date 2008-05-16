@@ -520,7 +520,7 @@ namespace zypp
       }
       else
       {
-        ZYPP_THROW(RepoUnknownTypeException());
+        ZYPP_THROW(RepoUnknownTypeException(info));
       }
     }
     catch ( const Exception &e )
