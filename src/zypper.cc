@@ -1881,7 +1881,7 @@ void Zypper::processCommandOptions()
   
       God = zypp::getZYpp();
     }
-    catch (Exception & excpt_r) {
+    catch (ZYppFactoryException & excpt_r) {
       ZYPP_CAUGHT (excpt_r);
       ERR  << "A ZYpp transaction is already in progress." << endl;
       out().error(
@@ -1890,6 +1890,12 @@ void Zypper::processCommandOptions()
           " package management running. All such applications must be closed before"
           " using this command."));
 
+      setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      throw (ExitRequestException("ZYpp locked"));
+    }
+    catch (Exception & excpt_r) {
+      ZYPP_CAUGHT (excpt_r);
+      out().error(excpt_r.msg());
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       throw (ExitRequestException("ZYpp locked"));
     }
