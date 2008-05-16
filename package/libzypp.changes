@@ -7,6 +7,13 @@ Fri May 16 16:46:04 CEST 2008 - schubi@suse.de
 - 4.23.0
 
 -------------------------------------------------------------------
+Fri May 16 16:49:04 CEST 2008 - jreidinger@suse.cz
+
+- don't run merge in save when toAdd/Remove queue is empty
+- throw when locks cannot load its file
+- r10124
+
+-------------------------------------------------------------------
 Fri May 16 09:59:09 CEST 2008 - jreidinger@suse.cz
 
 - throw more describing exception when repo probing failed
