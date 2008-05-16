@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 16 12:06:54 CEST 2008 - jreidinger@suse.cz
+
+- correctly report when libzypp cannot lock due to error instead of
+  allready existing lock. (bnc#300103)
+- r10120
+
+-------------------------------------------------------------------
 Thu May 15 15:37:03 CEST 2008 - jreidinger@suse.cz
 
 - support for symlink named rug - autoenable rug compatibility
