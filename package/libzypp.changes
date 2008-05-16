@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri May 16 16:46:04 CEST 2008 - schubi@suse.de
+
+- Added new calls : isInstalledBy (const PoolItem item);
+                    installs (const PoolItem item);
+- r 10125 
+- 4.23.0
+
+-------------------------------------------------------------------
 Fri May 16 09:59:09 CEST 2008 - jreidinger@suse.cz
 
 - throw more describing exception when repo probing failed
