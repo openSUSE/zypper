@@ -20,6 +20,9 @@
 #include "zypp/Arch.h"
 #include "zypp/Date.h"
 
+#include "zypp/sat/detail/PoolMember.h"
+#include "zypp/Repository.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -86,28 +89,29 @@ namespace zypp
 
       public:
         const Edition &     edition()      const { return _edition; }
-        const Date &        buildtime()    const { return _buildtime; }
-        const CheckSum &    checksum()     const { return _checksum; }
+        //const Date &        buildtime()    const { return _buildtime; }
+        //const CheckSum &    checksum()     const { return _checksum; }
         const std::string & sequenceinfo() const { return _sequenceinfo; }
 
       public:
         BaseVersion & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
-        BaseVersion & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
-        BaseVersion & setChecksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
+        //BaseVersion & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
+        //BaseVersion & setChecksum( const CheckSum & val_r )        { _checksum = val_r; return *this; }
         BaseVersion & setSequenceinfo( const std::string & val_r ) { _sequenceinfo = val_r; return *this; }
 
       private:
         Edition     _edition;
-        Date        _buildtime;
-        CheckSum    _checksum;
+        //Date        _buildtime;
+        //CheckSum    _checksum;
         std::string _sequenceinfo;
       };
 
-      typedef std::list<BaseVersion> BaseVersions;
+      //typedef std::list<BaseVersion> BaseVersions;
 
     public:
       DeltaRpm()
       {}
+      DeltaRpm(const Repository & repo, sat::detail::IdType id);
 
     public:
       /** \name Target package ident. */
@@ -118,7 +122,7 @@ namespace zypp
       //@}
       const OnMediaLocation & location()     const { return _location; }
       const BaseVersion &     baseversion()  const { return _baseversion; }
-      const Date &            buildtime()    const { return _buildtime;}
+      //const Date &            buildtime()    const { return _buildtime;}
 
     public:
       DeltaRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
@@ -126,7 +130,7 @@ namespace zypp
       DeltaRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
       DeltaRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
       DeltaRpm & setBaseversion( const BaseVersion & val_r )  { _baseversion = val_r; return *this; }
-      DeltaRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
+      //DeltaRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
 
     private:
       std::string     _name;
@@ -134,7 +138,7 @@ namespace zypp
       Arch            _arch;
       OnMediaLocation _location;
       BaseVersion     _baseversion;
-      Date            _buildtime;
+      //Date            _buildtime;
     };
 
     /** \relates DeltaRpm Stream output. */

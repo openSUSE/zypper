@@ -254,7 +254,7 @@ namespace zypp
         // Build a repository list for repos
         // contributing to the pool
         std::list<Repository> repos( _pool.knownRepositoriesBegin(), _pool.knownRepositoriesEnd() );
-        repo::DeltaCandidates deltas(repos);
+        repo::DeltaCandidates deltas(repos, p->name());
         repo::PackageProvider pkgProvider( _access, p, deltas, packageProviderPolicy );
         return pkgProvider.providePackage();
       }
