@@ -90,7 +90,7 @@ namespace zypp
         if ( cand )
           {
 	      if ( inst ) {
-		  inst.status().setTransact( false, ResStatus::USER );
+		  inst.status().resetTransact( ResStatus::USER );
 		  inst.status().setLock    ( false, ResStatus::USER );
                   if ( ! cand->installOnly() )
                   {
@@ -102,7 +102,7 @@ namespace zypp
                   }
 	      }
               unlockCandidates();
-	      return cand.status().setTransact( true, ResStatus::USER );
+	      return cand.status().setToBeInstalled( ResStatus::USER );
           }
         return false;
       }
@@ -113,7 +113,7 @@ namespace zypp
           {
             resetTransactingCandidates();
 	    inst.status().setLock( false, ResStatus::USER );
-            return inst.status().setTransact( true, ResStatus::USER );
+            return inst.status().setToDelete( ResStatus::USER );
           }
         return false;
       }
@@ -121,7 +121,7 @@ namespace zypp
       bool unset() const
       {
 	  if ( inst ) {
-	      inst.status().setTransact( false, ResStatus::USER );
+	      inst.status().resetTransact( ResStatus::USER );
 	      inst.status().setLock( false, ResStatus::USER );
 	  }
           unlockCandidates();
@@ -132,7 +132,7 @@ namespace zypp
       {
 	  if ( inst ) {
               resetTransactingCandidates();
-	      inst.status().setTransact( false, ResStatus::USER );
+	      inst.status().tesetTransact( ResStatus::USER );
 	      return inst.status().setLock( true, ResStatus::USER );
 	  } else
 	      return false;
