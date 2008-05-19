@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 19 21:11:41 CEST 2008 - jkupec@suse.cz
+
+- delta rpm support reenabled
+- r10150
+
+-------------------------------------------------------------------
 Mon May 19 18:13:19 CEST 2008 - schubi@suse.de
 
 - Resetting Delete Details in ResStatus correctly (bnc #391785)
