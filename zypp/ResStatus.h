@@ -13,7 +13,6 @@
 #define ZYPP_RESSTATUS_H
 
 #include <iosfwd>
-
 #include "zypp/Bit.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -402,27 +401,26 @@ namespace zypp
           // we're already in the desired state, but in case of
           // TRANSACT, remember a superior causer.
           if ( transacts() && isLessThan<TransactByField>( causer_r ) )
-            {
               fieldValueAssign<TransactByField>( causer_r );
-              // ??? adapt TransactDetailField ?
-            }
+
+	  fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again
           return true;
         }
       // Here: transact status is to be changed:
       if (    ! fieldValueIs<TransactField>( KEEP_STATE )
-           && isGreaterThan<TransactByField>( causer_r ) )
+	      && isGreaterThan<TransactByField>( causer_r ) ) {
         return false;
+      }
 
       if ( toTansact_r )
-        {
+      {
           fieldValueAssign<TransactField>( TRANSACT );
-          // ??? adapt TransactDetailField ?
-        }
+      }
       else
-        {
+      {
           fieldValueAssign<TransactField>( KEEP_STATE );
-          fieldValueAssign<TransactDetailField>( NO_DETAIL );
-        }
+      }
+      fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again     
       fieldValueAssign<TransactByField>( causer_r );
       return true;
     }
