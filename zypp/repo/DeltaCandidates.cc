@@ -95,8 +95,6 @@ namespace zypp
     {
       std::list<DeltaRpm> candidates;
 
-#warning deltaRpms are not completely implemented
-
       // query all repos
       for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end(); ++it )
@@ -114,11 +112,13 @@ namespace zypp
           {
             DeltaRpm delta(*it, di.solvid);
             DBG << "got delta: " << delta << endl;
+            DBG << "package: " << package << endl;
             if ( ! package
                 || (    package->name()    == delta.name()
                      && package->edition() == delta.edition()
                      && package->arch()    == delta.arch() ) )
             {
+              DBG << "got delta candidate: " << delta << endl;
               candidates.push_back( delta );
             }
           }

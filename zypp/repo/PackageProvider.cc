@@ -218,7 +218,7 @@ namespace zypp
         {
           ProvideFilePolicy policy;
           policy.progressCB( bind( &PackageProvider::progressDeltaDownload, this, _1 ) );
-          delta = _access.provideFile( _package->repoInfo(), delta_r.location(), policy );
+          delta = _access.provideFile( delta_r.repository().info(), delta_r.location(), policy );
         }
       catch ( const Exception & excpt )
         {

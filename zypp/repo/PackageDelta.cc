@@ -43,6 +43,7 @@ namespace zypp
     }
 
     DeltaRpm::DeltaRpm(const Repository & repo, sat::detail::IdType extraid)
+      : _repo(repo)
     {
       MIL << "creating deltarpm from repo " << repo.name() << ", id " << extraid << endl;
       ::Dataiterator di;
@@ -69,18 +70,16 @@ namespace zypp
             setName(IdString(di.kv.id).asString());
             break;
           }
-          /* \todo add this to the deltainfo parser in sat
           case DELTA_PACKAGE_EVR:
           {
-            setEdition(Edition(di.kv.str));
+            setEdition(Edition(IdString(di.kv.id).asString()));
             break;
           }
           case DELTA_PACKAGE_ARCH:
           {
-            setArch(Arch(di.kv.str));
+            setArch(Arch(IdString(di.kv.id).asString()));
             break;
           }
-          */
           case DELTA_LOCATION_DIR:
           {
             locdir = IdString(di.kv.id).asString();

@@ -123,6 +123,7 @@ namespace zypp
       const OnMediaLocation & location()     const { return _location; }
       const BaseVersion &     baseversion()  const { return _baseversion; }
       //const Date &            buildtime()    const { return _buildtime;}
+      const Repository &      repository()   const { return _repo; }
 
     public:
       DeltaRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
@@ -139,6 +140,7 @@ namespace zypp
       OnMediaLocation _location;
       BaseVersion     _baseversion;
       //Date            _buildtime;
+      Repository      _repo;
     };
 
     /** \relates DeltaRpm Stream output. */

@@ -90,20 +90,16 @@ int main (int argc, const char ** argv)
           cout << IdString(di.kv.id);
           break;
         }
-        /*
         case DELTA_PACKAGE_EVR:
         {
-          if (di.key->type == REPOKEY_TYPE_STR)
-            cout << di.kv.str;
-          else
-            cout << "...";
+          cout << IdString(di.kv.id);
           break;
         }
         case DELTA_PACKAGE_ARCH:
         {
+          cout << IdString(di.kv.id);
           break;
         }
-        */
         case DELTA_LOCATION_DIR:
         {
           cout << IdString(di.kv.id);
