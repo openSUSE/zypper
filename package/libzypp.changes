@@ -21,6 +21,13 @@ Fri May 16 09:59:09 CEST 2008 - jreidinger@suse.cz
 - revision 10118
 
 -------------------------------------------------------------------
+Mon May 19 11:47:06 CEST 2008 - dmacvicar@suse.de
+
+- when setting status to non installed for uninstalled packages
+  set the user transaction so they go to soft locks.
+  (related to bnc#389739 )
+
+-------------------------------------------------------------------
 Thu May 15 15:15:59 CEST 2008 - jreidinger@suse.cz
 
 - allow call only merge old locks and newly added/removed without
