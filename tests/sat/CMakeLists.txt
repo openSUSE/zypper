@@ -1,6 +1,5 @@
 
-ADD_TESTS(WhatProvides)
-
-
+#ADD_TESTS(WhatProvides Solvable)
+ADD_TESTS(Solvable)
 
 
