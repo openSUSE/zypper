@@ -26,3 +26,7 @@ TARGET_LINK_LIBRARIES( poolquery zypp )
 
 ADD_EXECUTABLE( pathinfo pathinfo.cc )
 TARGET_LINK_LIBRARIES( pathinfo zypp )
+
+ADD_EXECUTABLE( deltarpm deltarpm.cc )
+TARGET_LINK_LIBRARIES( deltarpm zypp )
+
