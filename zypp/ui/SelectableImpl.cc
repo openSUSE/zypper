@@ -113,7 +113,7 @@ namespace zypp
           {
             resetTransactingCandidates();
 	    inst.status().setLock( false, ResStatus::USER );
-            return inst.status().setToDelete( ResStatus::USER );
+            return inst.status().setToBeUninstalled( ResStatus::USER );
           }
         return false;
       }
@@ -132,7 +132,7 @@ namespace zypp
       {
 	  if ( inst ) {
               resetTransactingCandidates();
-	      inst.status().tesetTransact( ResStatus::USER );
+	      inst.status().resetTransact( ResStatus::USER );
 	      return inst.status().setLock( true, ResStatus::USER );
 	  } else
 	      return false;
