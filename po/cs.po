@@ -1786,9 +1786,9 @@ msgstr[2] "Vyberte číslo jednoho z uvedených řešení, (p)řeskočit, (o)pak
 #: ../src/zypper-misc.cc:736
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Vyberte uvedené řešení číslem '1' nebo akci zrušte znakem 'c'"
-msgstr[1] "Vyberte jedno z uvedených řešení nebo akci zrušte (c)"
-msgstr[2] "Vyberte jedno z uvedených řešení nebo akci zrušte (c)"
+msgstr[0] "Vyberte uvedené řešení číslem '1' nebo akci zrušte znakem 'z'"
+msgstr[1] "Vyberte jedno z uvedených řešení nebo akci zrušte (z)"
+msgstr[2] "Vyberte jedno z uvedených řešení nebo akci zrušte (z)"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
