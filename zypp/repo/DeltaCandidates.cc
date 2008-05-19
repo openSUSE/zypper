@@ -113,7 +113,7 @@ namespace zypp
           while (::dataiterator_step(&di))
           {
             DeltaRpm delta(*it, di.solvid);
-            std::cout << delta << endl;
+            DBG << "got delta: " << delta << endl;
             if ( ! package
                 || (    package->name()    == delta.name()
                      && package->edition() == delta.edition()
