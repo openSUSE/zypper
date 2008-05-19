@@ -1306,6 +1306,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = _(
+      //! \todo add '-s' to --details after 11.0 is out
       "search (se) [options] [querystring] ...\n"
       "\n"
       "Search for packages matching given search strings.\n"
@@ -1971,18 +1972,18 @@ void Zypper::doCommand()
     if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
 
-    tribool keepPackages;
+    tribool keep_pkgs;
     if (copts.count("keep-packages"))
-      keepPackages = true;
+      keep_pkgs = true;
     else if (copts.count("no-keep-packages"))
-      keepPackages = false;
+      keep_pkgs = false;
 
     try
     {
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        add_repo_from_file(*this,copts["repo"].front(), enabled, keepPackages);
+        add_repo_from_file(*this,copts["repo"].front(), enabled, false, keep_pkgs);
         return;
       }
   
@@ -2029,7 +2030,7 @@ void Zypper::doCommand()
         }
         else
         {
-          add_repo_from_file(*this,_arguments[0], enabled, keepPackages);
+          add_repo_from_file(*this,_arguments[0], enabled, false, keep_pkgs);
           break;
         }
       case 2:
@@ -2061,7 +2062,7 @@ void Zypper::doCommand()
         init_target(*this);
 
         add_repo_by_url(
-	    *this, url, _arguments[1]/*alias*/, type, enabled, keepPackages);
+	    *this, url, _arguments[1]/*alias*/, type, enabled, false, keep_pkgs);
         return;
       }
     }

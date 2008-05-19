@@ -1315,8 +1315,10 @@ void add_repo_by_url( Zypper & zypper,
 
   if ( !indeterminate(enabled) )
     repo.setEnabled((enabled == true));
-  if ( !indeterminate(autorefresh) )
-    repo.setAutorefresh((autorefresh == false));
+  if ( indeterminate(autorefresh) )
+    repo.setAutorefresh(false);
+  else
+    repo.setAutorefresh((autorefresh == true));
   if ( !indeterminate(keepPackages) )
     repo.setKeepPackages(keepPackages);
 
