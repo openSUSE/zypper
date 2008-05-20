@@ -1008,15 +1008,18 @@ attremptycheckend:
       {
         addRepo( attrValue );
       }
-      else if ( attribute==PoolQueryAttr::kindAttr )
+      /* some backwards compatibility */
+      else if ( attribute==PoolQueryAttr::kindAttr || attribute=="kind" )
       {
         addKind( ResKind(attrValue) );
       }
-      else if ( attribute==PoolQueryAttr::stringAttr )
+      else if ( attribute==PoolQueryAttr::stringAttr
+        || attribute=="global_string")
       {
         addString( attrValue );
       }
-      else if ( attribute==PoolQueryAttr::stringTypeAttr )
+      else if ( attribute==PoolQueryAttr::stringTypeAttr
+        || attribute=="string_type" )
       {
         StringTypeAttr s(attrValue);
         if( s == StringTypeAttr::regexAttr )
