@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May 20 13:18:30 CEST 2008 - jkupec@suse.cz
+
+- info: show correct available version (bnc #386703)
+- info: look for exact package name matches, not substrings
+- r10160
+
+-------------------------------------------------------------------
 Fri May 20 08:54:54 CEST 2008 - jreidinger@suse.cz
 
 - exit if bad arguments is passed to whatprovides (bnc #391576).
