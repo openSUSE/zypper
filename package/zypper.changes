@@ -8,7 +8,8 @@ Tue May 20 13:37:04 CEST 2008 - jkupec@suse.cz
 Tue May 20 13:18:30 CEST 2008 - jkupec@suse.cz
 
 - info: show correct available version (bnc #386703)
-- info: look for exact package name matches, not substrings
+- info: look for exact package name matches, not substrings 
+  (bnc #392723)
 - r10160
 
 -------------------------------------------------------------------
