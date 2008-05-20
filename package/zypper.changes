@@ -18,6 +18,12 @@ Fri May 20 08:54:54 CEST 2008 - jreidinger@suse.cz
 - r10152
 
 -------------------------------------------------------------------
+Tue May 20 15:18:36 CEST 2008 - dmacvicar@suse.de
+
+- fix zypper looping when arguments are parsed as
+  capabilities. (bnc#391644)
+
+-------------------------------------------------------------------
 Fri May 16 12:06:54 CEST 2008 - jreidinger@suse.cz
 
 - correctly report when libzypp cannot lock due to error instead of

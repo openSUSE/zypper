@@ -501,6 +501,18 @@ void install_remove(Zypper & zypper,
       continue;
     }
 
+    // recognize missplaced command line options given as packages
+    // bnc#391644
+    if ( str[0] == '-' )
+    {
+      // FIXME show a message here, after string freeze
+      //zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
+      zypper.out().error(_("No valid arguments specified."));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      ZYPP_THROW(ExitRequestException());
+    }
+    
+
     // is version specified?
     by_capability = str.find_first_of("=<>") != string::npos;
 
