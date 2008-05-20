@@ -1605,19 +1605,30 @@ bool xml_list_patches ()
 
   unsigned int patchcount=0;
   bool pkg_mgr_available = false;
+  Patch::constPtr patch;
 
   ResPool::byKind_iterator
     it = pool.byKindBegin(ResKind::patch),
     e  = pool.byKindEnd(ResKind::patch);
+
+  // check whether there are packages affecting the update stack
+  for (; it != e; ++it)
+  {
+    patch = asKind<Patch>(it->resolvable());
+    if (it->isRelevant() && !it->isSatisfied() && patch->restartSuggested())
+    {
+      pkg_mgr_available = true;
+      break;
+    }
+  }
+
+  it = pool.byKindBegin(ResKind::patch);
   for (; it != e; ++it, ++patchcount)
   {
     if (it->isRelevant() && !it->isSatisfied())
     {
       ResObject::constPtr res = it->resolvable();
       Patch::constPtr patch = asKind<Patch>(res);
-
-      if (patch->restartSuggested())
-        pkg_mgr_available = true;
 
       // if updates stack patches are available, show only those
       if ((pkg_mgr_available && patch->restartSuggested()) || !pkg_mgr_available)
