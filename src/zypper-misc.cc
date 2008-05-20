@@ -1620,7 +1620,7 @@ bool xml_list_patches ()
         pkg_mgr_available = true;
 
       // if updates stack patches are available, show only those
-      if ((pkg_mgr_available && patch->restartSuggested()) || pkg_mgr_available)
+      if ((pkg_mgr_available && patch->restartSuggested()) || !pkg_mgr_available)
       {
         cout << " <update ";
         cout << "name=\"" << res->name () << "\" ";
