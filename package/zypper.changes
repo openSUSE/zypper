@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
 Tue May 20 13:37:04 CEST 2008 - jkupec@suse.cz
 
-- display patch updates in --xmlout (bnc #390769)
-- r10162
+- display patch updates in --xmlout (bnc #390769) (r10162)
+- show correct patch list (r10164)
 
 -------------------------------------------------------------------
 Tue May 20 13:18:30 CEST 2008 - jkupec@suse.cz
