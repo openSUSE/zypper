@@ -59,31 +59,15 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
   for(vector<string>::const_iterator nameit = zypper.arguments().begin();
       nameit != zypper.arguments().end(); ++nameit )
   {
-
-    // find the resolvable among installed
-    /*
-    PoolItem installed;
-    for_( it, pool.byIdentBegin( kind, *nameit ),
-        pool.byIdentEnd( kind, *nameit ) )
-    {
-      if (it->status().isInstalled()) { installed = *it; break; }
-    }
-*/
-    // find installation candidate
-//    ProvideProcess installer (ZConfig::instance().systemArchitecture(), "" /*version*/);
     PoolQuery q;
     q.addKind(kind);
     q.addAttribute(sat::SolvAttr::name, *nameit);
-    /*
-    invokeOnEach( pool.byIdentBegin( kind, *nameit ), 
-        pool.byIdentEnd( kind, *nameit ),
-        zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer) );
-*/
-    
-    //if (!installer.item) {
+    q.setMatchExact();
+
     if (q.empty())
     {
       // TranslatorExplanation E.g. "package 'zypper' not found."
+      //! \todo use a separate string for each kind so that it is translatable.
       cout << "\n" << format(_("%s '%s' not found."))
           % kind_to_string_localized(kind, 1) % *nameit
           << endl;
@@ -111,7 +95,7 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
         cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
     }
   }
-  
+
   if (false)
   {
     string s00 = _("None");
@@ -155,7 +139,7 @@ void printPkgInfo(const Zypper & zypper, const ui::Selectable & s)
   cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
        << theone.resolvable()->repository().info().name() << endl;
 
-  printNVA(installed ? installed.resolvable() : theone.resolvable());
+  printNVA(theone.resolvable());
 
   cout << _("Installed: ") << (installed ? _("Yes") : _("No")) << endl;
 
