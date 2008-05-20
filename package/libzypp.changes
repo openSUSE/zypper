@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May 20 12:12:27 CEST 2008 - jreidinger@suse.cz
+
+- allow installation and refreshing from repository with alias that
+  contains ' or " (bnc #392426) 
+- r10158
+
+-------------------------------------------------------------------
 Mon May 19 21:11:41 CEST 2008 - jkupec@suse.cz
 
 - delta rpm support reenabled
