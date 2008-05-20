@@ -57,7 +57,7 @@ namespace rpm
 {
 namespace
 {
-const char* quoteInFilename_m = " \t";
+const char* quoteInFilename_m = " \t\'\"";
 inline string rpmQuoteFilename( const Pathname & path_r )
 {
   string path( path_r.asString() );

@@ -772,12 +772,17 @@ namespace zypp
         ManagedFile guard( solvfile, filesystem::unlink );
 
         ostringstream cmd;
+        const char *toFile = str::gsub(solvfile.asString(),"\"","\\\"").c_str();
         if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
-          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", info.baseUrlsBegin()->getPathName().c_str(), solvfile.c_str() );
+          const char * from = str::gsub(
+            info.baseUrlsBegin()->getPathName(),"\"","\\\"").c_str();
+          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", from , toFile );
         } else
-          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", rawpath.c_str(), solvfile.c_str() );
-
+        {
+          const char * from = str::gsub(rawpath.asString(),"\"","\\\"").c_str();
+          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"", from, toFile );
+        }
         MIL << "Executing: " << cmd.str() << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
 
