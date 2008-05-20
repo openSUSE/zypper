@@ -55,12 +55,21 @@ BOOST_AUTO_TEST_CASE(delta)
   std::list<packagedelta::DeltaRpm> deltas = dc.deltaRpms(0);
   for_ (it,deltas.begin(),deltas.end())
   {
-    BOOST_CHECK(it->name()=="libzypp");
-//    BOOST_CHECK((it->edition()==Edition("0:4.21.3-2"))); 
-//    BOOST_CHECK(it->arch()=="i386");
-    BOOST_CHECK((it->baseversion().edition() == Edition("4.21.3-1")) 
-      ||(it->baseversion().edition() == Edition("4.21.2-3")));
-    cout << it->name() << " - " << it->edition() << " - " <<  it->arch() << " base: " << it->baseversion().edition() << endl;
+    BOOST_CHECK(it->name() == "libzypp");
+    BOOST_CHECK(it->edition() == Edition("4.21.3-2"));
+    BOOST_CHECK(it->arch() == "i386");
+    BOOST_CHECK(it->baseversion().edition().match(Edition("4.21.3-1")) 
+      ||it->baseversion().edition().match(Edition("4.21.2-3")));
+
+    cout << it->name() << " - " << it->edition() << " - " <<  it->arch()
+      << " base: " << it->baseversion().edition() << endl;
+
+    cout << (it->edition() == "4.21.3-2") << endl;              // fine
+    cout << (it->edition() == Edition("4.21.3-2")) << endl;     // fine
+    cout << (it->edition().match(Edition("4.21.3-2"))) << endl; //! \todo FIXME says no 
+    cout << (it->edition().match("4.21.3-2")) << endl;          //! \todo FIXME says no
   }
+
+  //! \todo FIXME Edition("0:4.21.3-2") != Edition("4.21.3-2") (not even does Edition("0:4.21.3-2").match(Edition("4.21.3-2"))
   rm.cleanCache(updates);
 }

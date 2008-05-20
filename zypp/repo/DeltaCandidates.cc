@@ -99,6 +99,7 @@ namespace zypp
       for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
             it != _pimpl->repos.end(); ++it )
       {
+        DBG << "package: " << package << endl;
         for (int i = 0; i < it->get()->nextra; ++i)
         {
           ::Dataiterator di;
@@ -111,14 +112,13 @@ namespace zypp
           while (::dataiterator_step(&di))
           {
             DeltaRpm delta(*it, di.solvid);
-            DBG << "got delta: " << delta << endl;
-            DBG << "package: " << package << endl;
+            DBG << "checking delta: " << delta << endl;
             if ( ! package
                 || (    package->name()    == delta.name()
                      && package->edition() == delta.edition()
                      && package->arch()    == delta.arch() ) )
             {
-              DBG << "got delta candidate: " << delta << endl;
+              DBG << "got delta candidate" << endl;
               candidates.push_back( delta );
             }
           }
