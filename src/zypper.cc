@@ -2767,9 +2767,17 @@ void Zypper::doCommand()
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     
     if (_arguments.empty())
+    {
       report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
     else if (_arguments.size() > 1)
+    {
       report_too_many_arguments(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
 
     init_target(*this);
     init_repos(*this);
