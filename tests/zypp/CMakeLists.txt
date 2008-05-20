@@ -12,6 +12,7 @@ ADD_TESTS(
   Capabilities
   CheckSum
   Digest
+  Deltarpm
   Edition
   Fetcher
   FileChecker
