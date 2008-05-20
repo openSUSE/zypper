@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 20 08:54:54 CEST 2008 - jreidinger@suse.cz
+
+- exit if bad arguments is passed to whatprovides (bnc #391576).
+- r10152
+
+-------------------------------------------------------------------
 Fri May 16 12:06:54 CEST 2008 - jreidinger@suse.cz
 
 - correctly report when libzypp cannot lock due to error instead of
