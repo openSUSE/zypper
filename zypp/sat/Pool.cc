@@ -35,7 +35,7 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
-    const std::string & Pool::systemRepoName()
+    const std::string & Pool::systemRepoAlias()
     {
       static const std::string _val( "@System" );
       return _val;
@@ -97,40 +97,40 @@ namespace zypp
     Pool::SolvableIterator Pool::solvablesEnd() const
     { return SolvableIterator(); }
 
-    Repository Pool::reposInsert( const std::string & name_r )
+    Repository Pool::reposInsert( const std::string & alias_r )
     {
-      Repository ret( reposFind( name_r ) );
+      Repository ret( reposFind( alias_r ) );
       if ( ret )
         return ret;
 
-      ret = Repository( myPool()._createRepo( name_r ) );
-      if ( name_r == systemRepoName() )
+      ret = Repository( myPool()._createRepo( alias_r ) );
+      if ( alias_r == systemRepoAlias() )
       {
         // autoprovide (dummy) RepoInfo
         ret.setInfo( RepoInfo()
-                     .setAlias( name_r )
-                     .setName( name_r )
+                     .setAlias( alias_r )
+                     .setName( alias_r )
                      .setAutorefresh( true )
                      .setEnabled( true ) );
       }
       return ret;
     }
 
-    Repository Pool::reposFind( const std::string & name_r ) const
+    Repository Pool::reposFind( const std::string & alias_r ) const
     {
       for_( it, reposBegin(), reposEnd() )
       {
-        if ( name_r == it->name() )
+        if ( alias_r == it->alias() )
           return *it;
       }
       return Repository();
     }
 
-    Repository Pool::addRepoSolv( const Pathname & file_r, const std::string & name_r )
+    Repository Pool::addRepoSolv( const Pathname & file_r, const std::string & alias_r )
     {
       // Using a temporay repo! (The additional parenthesis are required.)
       AutoDispose<Repository> tmprepo( (Repository::EraseFromPool()) );
-      *tmprepo = reposInsert( name_r );
+      *tmprepo = reposInsert( alias_r );
       tmprepo->addSolv( file_r );
 
       // no exceptions so we keep it:

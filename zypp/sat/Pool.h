@@ -78,34 +78,39 @@ namespace zypp
         /** Iterator behind the last \ref Repository. */
         RepositoryIterator reposEnd() const;
 
-        /** Return a \ref Repository named \c name_r.
+        /** Return a \ref Repository named \c alias_r.
          * It a such a \ref Repository does not already exist
          * a new empty \ref Repository is created.
          */
-        Repository reposInsert( const std::string & name_r );
+        Repository reposInsert( const std::string & alias_r );
 
-        /** Find a \ref Repository named \c name_r.
+        /** Find a \ref Repository named \c alias_r.
          * Returns \ref norepository if there is no such \ref Repository.
          */
-        Repository reposFind( const std::string & name_r ) const;
+        Repository reposFind( const std::string & alias_r ) const;
 
-        /** Remove a \ref Repository named \c name_r.
+        /** Remove a \ref Repository named \c alias_r.
          * \see \ref Repository::eraseFromPool
          */
-        void reposErase( const std::string & name_r )
-        { reposFind( name_r ).eraseFromPool(); }
+        void reposErase( const std::string & alias_r )
+        { reposFind( alias_r ).eraseFromPool(); }
 
       public:
-        /** Reserved system repository name \c @System. */
-        static const std::string & systemRepoName();
+        /** Reserved system repository alias \c @System. */
+        static const std::string & systemRepoAlias();
+
+        /** Deprecated, use \ref systemRepoAlias() */
+        ZYPP_DEPRECATED static const std::string & systemRepoName()
+        { return systemRepoAlias(); } 
+
 
         /** Return the system repository if it is on the pool. */
         Repository findSystemRepo() const
-        { return reposFind( systemRepoName() ); }
+        { return reposFind( systemRepoAlias() ); }
 
         /** Return the system repository, create it if missing. */
         Repository systemRepo()
-        { return reposInsert( systemRepoName() ); }
+        { return reposInsert( systemRepoAlias() ); }
 
       public:
         /** Load \ref Solvables from a solv-file into a \ref Repository named \c name_r.

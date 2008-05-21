@@ -525,7 +525,7 @@ namespace zypp
       return str << "(" << obj.id() << ")"
           << ( obj.isKind( ResKind::srcpackage ) ? "srcpackage:" : "" ) << obj.ident()
           << '-' << obj.edition() << '.' << obj.arch() << "("
-          << obj.repository().name() << ")";
+          << obj.repository().alias() << ")";
     }
 
     /******************************************************************

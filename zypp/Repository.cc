@@ -50,7 +50,7 @@ namespace zypp
 	return( sat::Pool::systemRepoName() == _repo->name );
     }
 
-    std::string Repository::name() const
+    std::string Repository::alias() const
     {
 	NO_REPOSITORY_RETURN( std::string() );
 	if ( ! _repo->name )
@@ -99,10 +99,10 @@ namespace zypp
     void Repository::setInfo( const RepoInfo & info_r )
     {
 	NO_REPOSITORY_THROW( Exception( "Can't set RepoInfo for norepo." ) );
-	if ( info_r.alias() != name() )
+	if ( info_r.alias() != alias() )
 	{
-	    ZYPP_THROW( Exception( str::form( "RepoInfo alias (%s) does not match repository name (%s)",
-					      info_r.alias().c_str(), name().c_str() ) ) );
+	    ZYPP_THROW( Exception( str::form( "RepoInfo alias (%s) does not match repository alias (%s)",
+					      info_r.alias().c_str(), alias().c_str() ) ) );
 	}
 	myPool().setRepoInfo( _repo, info_r );
 
@@ -173,7 +173,7 @@ namespace zypp
 	if ( ! obj )
 	    return str << "noRepository";
 
-	return str << "sat::repo(" << obj.name() << ")"
+	return str << "sat::repo(" << obj.alias() << ")"
 		   << "{"
                    << "prio " << obj.get()->priority
 		   << ", size " << obj.solvablesSize()

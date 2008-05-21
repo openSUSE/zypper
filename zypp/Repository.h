@@ -56,10 +56,33 @@ namespace zypp
         bool isSystemRepo() const;
 
     public:
-        /** The repos name (alias).
-         * \todo FIXME why is this not called alias if it <b>is</b> alias?
-         */
-        std::string name() const;
+         /** 
+          * Short unique, convenience string to refer to a repo.
+          * ie: openSUSE-10.3
+          *
+          * If you are looking for a label to display
+          * see \ref info() which provides \ref RepoInfo::name()
+          * ie: "openSUSE 10.3 Main repository"
+          *
+          */
+        std::string alias() const;
+
+         /** 
+          * Short unique, convenience string to refer to a repo.
+          * ie: openSUSE-10.3
+          *
+          * The sat solver uses name for what we know as alias
+          * In rpm repositories, name is a label string
+          * ie: "openSUSE 10.3 Main repository"
+          *
+          * We know follow rpm conventions and ignore satsolver
+          * wording for name.
+          *
+          * Use \ref alias() instead
+          */
+        ZYPP_DEPRECATED std::string name() const
+        { return alias(); }
+        
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;

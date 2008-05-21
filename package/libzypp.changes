@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 21 13:50:00 CEST 2008 - dmacvicar@suse.de
+
+- deprecate Repository::name() and use alias() to
+  be consistent. Related to (bnc#383553)
+- 4.25.0
+
+-------------------------------------------------------------------
 Wed May 21 11:37:23 CEST 2008 - schubi@suse.de
 
 - added onlyRequires in the testcase (bnc #389184) 
