@@ -101,7 +101,8 @@ class  HelixControl {
 		  const Arch & systemArchitecture,
 		  const LocaleSet &languages,		  
 		  const std::string & systemPath = "solver-system.xml.gz",
-		  const bool forceResolve = false);
+		  const bool forceResolve = false,
+		  const bool onlyRequires = false);
     HelixControl ();    
     ~HelixControl ();
 
