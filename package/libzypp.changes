@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May 21 11:37:23 CEST 2008 - schubi@suse.de
+
+- added onlyRequires in the testcase (bnc #389184) 
+
+-------------------------------------------------------------------
 Tue May 20 12:12:27 CEST 2008 - jreidinger@suse.cz
 
 - allow installation and refreshing from repository with alias that
