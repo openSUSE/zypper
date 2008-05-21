@@ -109,15 +109,16 @@ void Downloader::download( MediaSetAccess &media,
 
   if ( _media_ptr->doesFileExist(sigpath) )
   {
-     this->enqueue( OnMediaLocation(sigpath,1) );
+      this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
      this->start( dest_dir, *_media_ptr);
      this->reset();
      sigchecker = SignatureFileChecker(dest_dir + sigpath);
   }
  
+
   if ( _media_ptr->doesFileExist(keypath) )
   {
-    this->enqueue( OnMediaLocation(keypath,1) );
+      this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
     this->start( dest_dir, *_media_ptr);
     this->reset();
     sigchecker.addPublicKey(dest_dir + keypath);

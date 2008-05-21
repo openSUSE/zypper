@@ -44,6 +44,7 @@ namespace zypp
     /** Default ctor indicating no media access. */
     OnMediaLocation()
     : _medianr( 0 )
+    , _optional(false)
     {}
 
     /** Ctor taking a filename and media number (defaults to 1). */
@@ -53,12 +54,49 @@ namespace zypp
     {}
 
   public:
+    /**
+     * media number where the resource is located.
+     * for a url cd:// this could be 1..N.
+     * for a url of type http://host/path/CD1, a media number 2 
+     * means looking on http://host/path/CD1/../CD2
+     */
     unsigned          medianr()        const { return _medianr; }
+    /**
+     * The path to the resource relatve to the url and path.
+     * If the base is http://novell.com/download/repository, the
+     * resource filename could be "/repodata/repomd.xml"
+     */
     const Pathname &  filename()       const { return _filename; }
+    /**
+     * the checksum of the resource
+     */
     const CheckSum &  checksum()       const { return _checksum; }
+    /**
+     * The size of the resource on the server. Therefore
+     * the size of the download.
+     */
     const ByteCount & downloadSize()   const { return _downloadsize; }
+    /**
+     * The size of the resource once it has been uncompressed
+     * or unpacked.
+     * If the file is file.txt.gz then this is the size of
+     * file.txt
+     */
     const ByteCount & openSize()       const { return _opendownloadsize; }
+    /**
+     * The checksum of the resource once it has been uncompressed
+     * or unpacked.
+     * If the file is file.txt.gz then this is the checksum of
+     * file.txt
+     */
     const CheckSum &  openChecksum()   const { return _openchecksum; }
+    /**
+     * whether this is an optional resource. That is a file that
+     * may not be present. This is just a hint to the resource
+     * downloader to not error in case the not found resource is
+     * not found.
+     */
+    const bool optional() const { return _optional; }
 
   public:
     /** Unset \c filename and set \c medianr to \c 0. */
@@ -86,18 +124,41 @@ namespace zypp
     OnMediaLocation & setOpenChecksum( const CheckSum & val_r )
     { _openchecksum = val_r; return *this; }
 
+    /** 
+     * Set the wether the resource is optional or not
+     * \see optional
+     */
+    OnMediaLocation & setOptional( bool val )
+    { _optional = val; return *this; }
+
   public:
-    /** Individual manipulation of \c medianr.
-     * Using \ref setLocation is prefered.
+   /** 
+    * Individual manipulation of \c medianr.
+    * Using \ref setLocation is prefered.
     */
-    OnMediaLocation & changeMedianr( unsigned val_r )
+    OnMediaLocation & setMedianr( unsigned val_r )
     { _medianr = val_r; return *this; }
 
-    /** Individual manipulation of \c filename.
+    /**
+     * Individual manipulation of \c medianr.
+     * Use \ref setMediaNr instead
+     */
+    ZYPP_DEPRECATED OnMediaLocation & changeMedianr( unsigned val_r )
+    { return setMedianr(val_r); }
+
+    /** 
+     * Individual manipulation of \c filename.
      * Using \ref setLocation is prefered.
-    */
-    OnMediaLocation & changeFilename( const Pathname & val_r )
+     */
+    OnMediaLocation &setFilename( const Pathname & val_r )
     { _filename = val_r; return *this; }
+
+    /** 
+     * Individual manipulation of \c filename.
+     * Use \ref setFilename instead.
+    */
+    ZYPP_DEPRECATED OnMediaLocation & changeFilename( const Pathname & val_r )
+    { return setFilename(val_r); }
 
   private:
     unsigned  _medianr;
@@ -106,6 +167,7 @@ namespace zypp
     ByteCount _downloadsize;
     ByteCount _opendownloadsize;
     CheckSum  _openchecksum;
+    bool      _optional;
   };
   ///////////////////////////////////////////////////////////////////
 
