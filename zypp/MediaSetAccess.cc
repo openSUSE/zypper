@@ -69,16 +69,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     }
   }
 
-//       callback::SendReport<source::DownloadFileReport> report;
-//       DownloadProgressFileReceiver download_report( report );
-//       SourceFactory source_factory;
-//       Url file_url( url().asString() + file_r.asString() );
-//       report->start( source_factory.createFrom(this), file_url );
-//       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
-//       Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
-//       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
-//       return file;
-
   void MediaSetAccess::releaseFile( const OnMediaLocation & on_media_file )
   {
     releaseFile( on_media_file.filename(), on_media_file.medianr() );
@@ -101,13 +91,23 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {
-    return provideFile( on_media_file.filename(), on_media_file.medianr() );
+    // if the file is optional we don't want a retry, ignore, abort
+    // callback, but just abort inmediately if it does not exist
+    // therefore we pass checkonly true
+    if (on_media_file.optional() )
+      return provideFileInternal( on_media_file.filename(), 
+                                  on_media_file.medianr(),
+                                  true, true);
+          
+    return provideFileInternal( on_media_file.filename(),
+                                on_media_file.medianr(),
+                                true, false );
   }
 
 
   Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr )
   {
-    return provideFileInternal( file, media_nr, false, false);
+    return provideFileInternal( file, media_nr, false, false );
   }
 
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )

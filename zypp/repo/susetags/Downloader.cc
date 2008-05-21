@@ -49,24 +49,22 @@ void Downloader::download( MediaSetAccess &media,
   SignatureFileChecker sigchecker;
 
   Pathname sig = _path + "/content.asc";
-  if ( media.doesFileExist(sig) )
-  {
-    this->enqueue( OnMediaLocation( sig, 1 ) );
-    this->start( dest_dir, media );
-    this->reset();
 
-    sigchecker = SignatureFileChecker( dest_dir + sig );
-  }
+  this->enqueue( OnMediaLocation( sig, 1 ).setOptional(true) );
+  this->start( dest_dir, media );
+  this->reset();
+
+  if ( PathInfo(dest_dir + sig).isExist() )
+      sigchecker = SignatureFileChecker( dest_dir + sig );
 
   Pathname key = _path + "/content.key";
-  if ( media.doesFileExist(key) )
-  {
-    this->enqueue( OnMediaLocation( key, 1 ) );
-    this->start( dest_dir, media );
-    this->reset();
-    sigchecker.addPublicKey(dest_dir + key);
-  }
 
+  // the key may not exist
+  this->enqueue( OnMediaLocation( key, 1 ).setOptional(true) );
+  this->start( dest_dir, media );
+  this->reset();
+  if ( PathInfo(dest_dir + key).isExist() )
+      sigchecker.addPublicKey(dest_dir + key);
 
   this->enqueue( OnMediaLocation( _path + "/content", 1 ), sigchecker );
   this->start( dest_dir, media );
