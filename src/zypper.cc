@@ -2453,6 +2453,8 @@ void Zypper::doCommand()
     init_target(*this);
     // load metadata
     load_resolvables(*this);
+    // needed to compute status of PPP
+    resolve(*this);
 
     // tell the solver what we want
     install_remove(*this, _arguments, install_not_remove, kind);
@@ -2865,6 +2867,8 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
     load_resolvables(*this);
+    // needed to compute status of PPP
+    resolve(*this);
 
     cout << "<update-status version=\"0.6\">" << endl;
     cout << "<update-list>" << endl;

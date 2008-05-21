@@ -94,7 +94,14 @@ bool ProvideProcess::operator()( const PoolItem& provider )
     return true;
   }
 
-  if (!provider.status().isInstalled()) {
+  bool is_installed;
+  if (provider->isKind(ResKind::package))
+    is_installed = provider.status().isInstalled();
+  else
+    is_installed = provider.isSatisfied();
+
+  if (!is_installed)
+  {
     // deselect the item if it's already selected,
     // only one item should be selected
     if (provider.status().isToBeInstalled()) {
@@ -378,8 +385,12 @@ mark_selectable(Zypper & zypper,
 {
   PoolItem theone = s.theObj();
   //! \todo handle multiple installed case 
-  bool installed = !s.installedEmpty() && theone &&
-    equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
+  bool installed;
+  if (s.kind() == ResKind::package)
+    installed = !s.installedEmpty() && theone &&
+      equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
+  else
+    installed = theone.isSatisfied();
 
   if (install_not_remove)
   {
@@ -592,11 +603,17 @@ void install_remove(Zypper & zypper,
     bool installed = false;
     string provider; 
     for_(solvit, q.poolItemBegin(), q.poolItemEnd())
-      if (solvit->status().isInstalled())
+    {
+      if (solvit->resolvable()->isKind(ResKind::package))
+        installed = solvit->status().isInstalled();
+      else
+        installed = solvit->isSatisfied();
+      if (installed)
       {
-         installed = true;
-         provider = solvit->resolvable()->name(); 
-         break; }
+        provider = solvit->resolvable()->name(); 
+        break;
+      }
+    }
     // already installed, nothing to do
     if (installed && install_not_remove)
     {
