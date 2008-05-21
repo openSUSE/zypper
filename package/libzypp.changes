@@ -3,6 +3,8 @@ Wed May 21 13:50:00 CEST 2008 - dmacvicar@suse.de
 
 - deprecate Repository::name() and use alias() to
   be consistent. Related to (bnc#383553)
+- don't check for existence of keys, to avoid a non needed
+  HEAD request. (helps bnc#381280)
 - 4.25.0
 
 -------------------------------------------------------------------
