@@ -372,6 +372,7 @@ Management servers, as well as local files.
 
 .TP
 .B addrepo (ar) [options] <URI> <alias> 
+.TP
 .B addrepo (ar) [options] <FILE.repo>
 
 Add a new repository specified by URI and assign specified alias to it or specify URI to repo file.
@@ -402,8 +403,17 @@ Add the repository as disabled.
 \fI\-c, \-\-check\fR
 Probe given URI.
 .TP
-\fI\-x, \-\-nocheck\fR
+\fI\-C, \-\-nocheck\fR
 Don't probe URI, probe later during refresh.
+.TP
+\fI\-n, \-\-name\fR
+Specify descriptive name for the repository.
+.TP
+\fI\-k, \-\-keep\-packages\fR
+Enable RPM files caching for the repository.
+.TP
+\fI\-K, \-\-no-keep-packages\fR
+Disable RPM files caching.
 
 .TP
 .B removerepo (rr) [options] <alias|#|URI> ...
