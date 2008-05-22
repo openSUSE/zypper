@@ -1876,13 +1876,18 @@ void Zypper::processCommandOptions()
     }
 
     // here come commands that need the lock
-    try {
-      if (command() == ZypperCommand::LIST_REPOS)
+    try
+    {
+      const char *roh = getenv("ZYPP_READONLY_HACK");
+      if (roh != NULL && roh[0] == '1')
+        zypp_readonly_hack::IWantIt ();
+      else if (command() == ZypperCommand::LIST_REPOS)
         zypp_readonly_hack::IWantIt (); // #247001, #302152
-  
+
       God = zypp::getZYpp();
     }
-    catch (ZYppFactoryException & excpt_r) {
+    catch (ZYppFactoryException & excpt_r)
+    {
       ZYPP_CAUGHT (excpt_r);
       ERR  << "A ZYpp transaction is already in progress." << endl;
       out().error(
@@ -1894,7 +1899,8 @@ void Zypper::processCommandOptions()
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       throw (ExitRequestException("ZYpp locked"));
     }
-    catch (Exception & excpt_r) {
+    catch (Exception & excpt_r)
+    {
       ZYPP_CAUGHT (excpt_r);
       out().error(excpt_r.msg());
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
