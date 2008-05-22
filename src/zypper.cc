@@ -941,7 +941,7 @@ void Zypper::processCommandOptions()
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
       {"no-check", no_argument, 0, 'C'},
-      {"name", no_argument, 0, 'n'},
+      {"name", required_argument, 0, 'n'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
       {0, 0, 0, 0}
