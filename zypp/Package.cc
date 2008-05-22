@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/Package.h"
+#include "zypp/sat/LookupAttr.h"
 
 using namespace std;
 
@@ -86,10 +87,16 @@ namespace zypp
     return ret;
   }
 
-  /** */
-#warning DUMMY filenames
   std::list<std::string> Package::filenames() const
-  { return std::list<std::string>(); }
+  { 
+    std::list<std::string> files; 
+    sat::LookupAttr q( sat::SolvAttr::filelist, *this );
+    for_( it, q.begin(), q.end() )
+    {
+        files.push_back(it.asString());
+    }
+    return files;
+  }
 
   CheckSum Package::checksum() const
   { return lookupCheckSumAttribute( sat::SolvAttr::checksum ); }

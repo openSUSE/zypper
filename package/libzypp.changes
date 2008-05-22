@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May 22 02:22:29 CEST 2008 - dmacvicar@suse.de
+
+- fix filelist for installed packages (bnc#392544)
+
+-------------------------------------------------------------------
 Wed May 21 13:50:00 CEST 2008 - dmacvicar@suse.de
 
 - deprecate Repository::name() and use alias() to
