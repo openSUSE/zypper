@@ -10,6 +10,7 @@
 ../src/zypper-info.cc
 ../src/zypper-keyring-callbacks.h
 ../src/zypper-locks.cc
+../src/zypper-main.cc
 ../src/zypper-main.h
 ../src/zypper-media-callbacks.h
 ../src/zypper-misc.cc
