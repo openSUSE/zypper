@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 22 15:54:32 CEST 2008 - jkupec@suse.cz
+
+- fixed addrepo -n (bnc #393579)
+- translations update
+- r10187
+
+-------------------------------------------------------------------
 Tue May 20 13:37:04 CEST 2008 - jkupec@suse.cz
 
 - display patch updates in --xmlout (bnc #390769) (r10162)
