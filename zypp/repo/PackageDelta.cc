@@ -45,7 +45,7 @@ namespace zypp
     DeltaRpm::DeltaRpm(const Repository & repo, sat::detail::IdType extraid)
       : _repo(repo)
     {
-      MIL << "creating deltarpm from repo " << repo.name() << ", id " << extraid << endl;
+      MIL << "creating deltarpm from repo " << repo.alias() << ", id " << extraid << endl;
       ::Dataiterator di;
       ::dataiterator_init(&di, repo.get(), extraid, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
 

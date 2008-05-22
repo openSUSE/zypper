@@ -137,14 +137,14 @@ namespace zypp
 
       if (! policy_r.dryRun() ) {
 
-          DBG << "unloading " << sat::Pool::instance().systemRepoName() << " repo from pool" << endl;
+          DBG << "unloading " << sat::Pool::instance().systemRepoAlias() << " repo from pool" << endl;
 
         _target->unload();
 
         if ( policy_r.syncPoolAfterCommit() )
           {
             // reload new status from target
-            DBG << "reloading " << sat::Pool::instance().systemRepoName() << " repo to pool" << endl;
+            DBG << "reloading " << sat::Pool::instance().systemRepoAlias() << " repo to pool" << endl;
             _target->load();
           }
       }

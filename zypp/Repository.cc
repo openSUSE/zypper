@@ -47,7 +47,7 @@ namespace zypp
     bool Repository::isSystemRepo() const
     {
 	NO_REPOSITORY_RETURN( false );
-	return( sat::Pool::systemRepoName() == _repo->name );
+	return( sat::Pool::systemRepoAlias() == _repo->name );
     }
 
     std::string Repository::alias() const
