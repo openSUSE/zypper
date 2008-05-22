@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-07 13:45+0200\n"
+"POT-Creation-Date: 2008-05-22 13:19+0200\n"
 "PO-Revision-Date: 2008-05-08 15:25+0200\n"
 "Last-Translator: Ervin Novak <enovak@novell.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -29,6 +29,10 @@ msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
 #: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
+msgid "error"
+msgstr "hiba"
+
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "done"
 msgstr "kész"
 
@@ -41,10 +45,6 @@ msgstr "Letöltés:"
 #: ../src/output/OutNormal.cc:173
 msgid "starting"
 msgstr "indítás"
-
-#: ../src/output/OutNormal.cc:224
-msgid "error"
-msgstr "hiba"
 
 #: ../src/output/OutNormal.cc:247
 msgid "No help available for this prompt."
@@ -72,7 +72,7 @@ msgstr ""
 msgid "There are no update repositories defined. Please add one or more update repositories in order to be notified of updates."
 msgstr "Nincsenek megadva frissítési források. Vegyen fel legalább egy frissítési forrást a frissítésekről történő értesítéshez."
 
-#: ../src/zypper.cc:143
+#: ../src/zypper.cc:144
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -102,7 +102,7 @@ msgstr ""
 "\t--cache-dir, -C <dir>\tMetaadat gyorsítótár-adatbázis alternatív könyvtárának használata.\n"
 "\t--raw-cache-dir <dir>\tNyers metaadat gyorsítótár-adatbázis alternatív könyvtárának használata.\n"
 
-#: ../src/zypper.cc:159
+#: ../src/zypper.cc:160
 msgid ""
 "\tRepository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -116,7 +116,7 @@ msgstr ""
 "\t--disable-repositories\tNem olvassa ki a metaadatokat a telepítési forrásból.\n"
 "\t--no-refresh\tA telepítési források frissítésének mellőzése.\n"
 
-#: ../src/zypper.cc:166
+#: ../src/zypper.cc:167
 msgid ""
 "\tTarget Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -126,7 +126,7 @@ msgstr ""
 "\t--root, -R <dir>\tMűködés másik root könyvtárban.\n"
 "\t--disable-system-resolvables, -T\t\tNe olvassa be a rendszer által telepített feloldhatókat.\n"
 
-#: ../src/zypper.cc:172
+#: ../src/zypper.cc:173
 msgid ""
 "  Commands:\n"
 "\thelp, ?\t\t\tPrint help.\n"
@@ -136,7 +136,7 @@ msgstr ""
 "\thelp, ?\t\t\tSegítség megjelenítése.\n"
 "\tshell, sh\t\tTöbb parancs elfogadása egyszerre.\n"
 
-#: ../src/zypper.cc:177
+#: ../src/zypper.cc:178
 msgid ""
 "\tRepository Handling:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -156,7 +156,7 @@ msgstr ""
 "\trefresh, ref\t\tTelepítési forrás frissítése.\n"
 "\tclean\t\t\tHelyi gyorsítótárak kiürítése.\n"
 
-#: ../src/zypper.cc:187
+#: ../src/zypper.cc:188
 msgid ""
 "\tSoftware Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -174,7 +174,7 @@ msgstr ""
 "\tdist-upgrade, dup\tDisztribúció frissítése.\n"
 "\tsource-install, si\tA forráscsomagok és a fordítási függőségeik telepítése.\n"
 
-#: ../src/zypper.cc:196
+#: ../src/zypper.cc:197
 msgid ""
 "\tQuerying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -204,7 +204,7 @@ msgstr ""
 "\tproducts, pd\t\tElérhető termékek listázása.\n"
 "\twhat-provides, wp\tA megadott képességet biztosító csomagok listázása.\n"
 
-#: ../src/zypper.cc:213
+#: ../src/zypper.cc:214
 msgid ""
 "\tPackage Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
@@ -216,7 +216,7 @@ msgstr ""
 "\tremovelock, rl\t\tCsomagzárolás eltávolítása.\n"
 "\tlocks, ll\t\tCsomagzárolások listázása.\n"
 
-#: ../src/zypper.cc:219
+#: ../src/zypper.cc:220
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -226,70 +226,70 @@ msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/zypper.cc:241
+#: ../src/zypper.cc:242
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "A globális kapcsolók és parancsok listájához írja be a következőt: '%s'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: ../src/zypper.cc:250
+#: ../src/zypper.cc:251
 #, c-format
 msgid "Type '%s' to get command-specific help."
 msgstr "A parancsspecifikus súgó használatához írja be a következőt: '%s'."
 
-#: ../src/zypper.cc:351
+#: ../src/zypper.cc:352
 #, c-format
 msgid "Verbosity: %d"
 msgstr "Részletesség: %d"
 
-#: ../src/zypper.cc:365
+#: ../src/zypper.cc:366
 #, c-format
 msgid "Invalid table style %d."
 msgstr "Érvénytelen táblázatstílus %d."
 
-#: ../src/zypper.cc:366
+#: ../src/zypper.cc:367
 #, c-format
 msgid "Use an integer number from %d to %d"
 msgstr "Használjon egy %d és %d közötti egész számot"
 
-#: ../src/zypper.cc:396
+#: ../src/zypper.cc:398
 msgid "Entering non-interactive mode."
 msgstr "Belépés a nem interaktív módba."
 
-#: ../src/zypper.cc:402
+#: ../src/zypper.cc:404
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Belépés a 'gpg ellenőrzések kihagyása' módba."
 
-#: ../src/zypper.cc:412
+#: ../src/zypper.cc:415
 msgid "The path specified in the --root option must be absolute."
 msgstr "A --root kapcsoló használatánál abszolút elérési útvonalat kell megadni."
 
-#: ../src/zypper.cc:446
+#: ../src/zypper.cc:444
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "Telepítési forrás letiltva, csak a telepített csomagok adatbázisát használja."
 
-#: ../src/zypper.cc:458
+#: ../src/zypper.cc:456
 msgid "Autorefresh disabled."
 msgstr "Automatikus frissítés kikapcsolva."
 
-#: ../src/zypper.cc:465
+#: ../src/zypper.cc:463
 msgid "Ignoring installed resolvables."
 msgstr "Telepített feloldhatók figyelmen kívül hagyása."
 
 #. TranslatorExplanation The %s is "--plus-repo"
-#: ../src/zypper.cc:560
+#: ../src/zypper.cc:558
 #, c-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
-#: ../src/zypper.cc:733
+#: ../src/zypper.cc:731
 msgid "Unexpected exception."
 msgstr "Váratlan kivétel."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/zypper.cc:817
+#: ../src/zypper.cc:815
 #, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
@@ -332,7 +332,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
-#: ../src/zypper.cc:866
+#: ../src/zypper.cc:864
 #, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
@@ -365,7 +365,7 @@ msgstr ""
 "    --force-resolution          A solver kényszerítése a megoldás megtalálására (akár agresszív módon is).\n"
 "-D, --dry-run               Az eltávolítás tesztelése, valójában ne töröljön semmit.\n"
 
-#: ../src/zypper.cc:896
+#: ../src/zypper.cc:894
 msgid ""
 "source-install (si) [options] <name> ...\n"
 "\n"
@@ -385,7 +385,7 @@ msgstr ""
 "-D, --no-build-deps       Ne telepítse a fordítási függőségeket.\n"
 "-r, --repo <álnév|#|URI> Csak a megadott telepítési forrásból telepítsen.\n"
 
-#: ../src/zypper.cc:923
+#: ../src/zypper.cc:921
 msgid ""
 "verify (ve) [options]\n"
 "\n"
@@ -406,7 +406,7 @@ msgstr ""
 "-r, --repo <álnév|#|URI> Csak a megadott álnevű telepítési forrásból telepíti a hiányzó csomagokat.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
-#: ../src/zypper.cc:954
+#: ../src/zypper.cc:952
 #, c-format
 msgid ""
 "addrepo (ar) [options] <URI> <alias>\n"
@@ -441,7 +441,7 @@ msgstr ""
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/zypper.cc:1001 ../src/zypper.cc:1757
+#: ../src/zypper.cc:999 ../src/zypper.cc:1778
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -451,7 +451,7 @@ msgstr ""
 "\n"
 "Az elérhető feloldható típusok listázása.\n"
 
-#: ../src/zypper.cc:1009
+#: ../src/zypper.cc:1007
 msgid ""
 "repos (lr) [options]\n"
 "\n"
@@ -481,7 +481,7 @@ msgstr ""
 "-A, --sort-by-alias        A lista rendezése az álnév alapján.\n"
 "-N, --sort-by-name       A lista rendezése név alapján.\n"
 
-#: ../src/zypper.cc:1036
+#: ../src/zypper.cc:1034
 msgid ""
 "removerepo (rr) [options] <alias|#|URI>\n"
 "\n"
@@ -499,7 +499,7 @@ msgstr ""
 "    --loose-auth\tAz URI címen található felhasználóhitelesítési adatok figyelmen kívül hagyása\n"
 "    --loose-query\tAz URI címen található lekérdezés figyelmen kívül hagyása\n"
 
-#: ../src/zypper.cc:1055
+#: ../src/zypper.cc:1053
 msgid ""
 "renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
 "\n"
@@ -515,7 +515,7 @@ msgstr ""
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
-#: ../src/zypper.cc:1088
+#: ../src/zypper.cc:1086
 #, c-format
 msgid ""
 "modifyrepo (mr) <options> <alias|#|URI>\n"
@@ -555,7 +555,7 @@ msgstr ""
 "-t, --remote            A változtatások életbe léptetése minden távoli telepítési forrásra.\n"
 "-m, --medium-type <típus>  A változtatások életbe léptetése a megadott típusú telepítési forrásokra.\n"
 
-#: ../src/zypper.cc:1126
+#: ../src/zypper.cc:1124
 msgid ""
 "refresh (ref) [alias|#|URI] ...\n"
 "\n"
@@ -581,7 +581,7 @@ msgstr ""
 "-D, --download-only     A metaadat letöltése az adatbázis újraépítése nélkül.\n"
 "-r, --repo <álnév|#|URI> Csak a megadott telepítési forrás frissítése.\n"
 
-#: ../src/zypper.cc:1154
+#: ../src/zypper.cc:1152
 msgid ""
 "clean [alias|#|URI] ...\n"
 "\n"
@@ -604,7 +604,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/zypper.cc:1182
+#: ../src/zypper.cc:1180
 #, c-format
 msgid ""
 "list-updates (lu) [options]\n"
@@ -633,7 +633,7 @@ msgstr ""
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
-#: ../src/zypper.cc:1230
+#: ../src/zypper.cc:1228
 #, c-format
 msgid ""
 "update (up) [options]\n"
@@ -678,7 +678,7 @@ msgstr ""
 "    --force-resolution          A solver kényszerítése a megoldás megtalálására (akár agresszív módon is).\n"
 "-D, --dry-run               Az eltávolítás tesztelése, valójában ne töröljön semmit.\n"
 
-#: ../src/zypper.cc:1269
+#: ../src/zypper.cc:1267
 msgid ""
 "dist-upgrade (dup) [options]\n"
 "\n"
@@ -705,7 +705,8 @@ msgstr ""
 "    --debug-solver              Hibakereséshez feloldási teszteset létrehozása\n"
 "-D, --dry-run               A disztribúció-frissítés tesztelése, valójában ne végezze el a frissítést\n"
 
-#: ../src/zypper.cc:1311
+#. ! \todo add '-s' to --details after 11.0 is out
+#: ../src/zypper.cc:1310
 msgid ""
 "search (se) [options] [querystring] ...\n"
 "\n"
@@ -725,12 +726,12 @@ msgid ""
 "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
 "    --sort-by-name         Sort packages by name (default).\n"
 "    --sort-by-repo         Sort packages by repository.\n"
-"    --details              Show each available version in each repository\n"
+"-s, --details              Show each available version in each repository\n"
 "                           on a separate line.\n"
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search (se) [kapcsolók] [lekérdezés...]\n"
+"search (se) [kapcsolók] [lekérdezés] ...\n"
 "\n"
 "A megadott keresési kifejezéseknek megfelelő csomagok keresése\n"
 "\n"
@@ -752,7 +753,7 @@ msgstr ""
 "\n"
 "A * és ? helyettesítő karakterek is használhatók a keresőkifejezésekben.\n"
 
-#: ../src/zypper.cc:1348
+#: ../src/zypper.cc:1347
 msgid ""
 "patch-check (pchk) [options]\n"
 "\n"
@@ -770,7 +771,7 @@ msgstr ""
 "\n"
 "-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásainak frissítéseit adja vissza.\n"
 
-#: ../src/zypper.cc:1370
+#: ../src/zypper.cc:1369
 msgid ""
 "patches (pch) [repository] ...\n"
 "\n"
@@ -788,7 +789,7 @@ msgstr ""
 "\n"
 "-r, --repo <álnév|#|URI>  Csak egy másik módszer a telepítési forrás megadására.\n"
 
-#: ../src/zypper.cc:1397
+#: ../src/zypper.cc:1396
 msgid ""
 "packages (pa) [options] [repository] ...\n"
 "\n"
@@ -814,7 +815,7 @@ msgstr ""
 "-N, --sort-by-name    Csomagok rendezése név szerint.\n"
 "-R, --sort-by-repo       Csomagok rendezése telepítési forrás szerint.\n"
 
-#: ../src/zypper.cc:1425
+#: ../src/zypper.cc:1424
 msgid ""
 "patterns (pt) [options] [repository] ...\n"
 "\n"
@@ -836,7 +837,7 @@ msgstr ""
 "-i, --installed-only Csak a telepített minták listázása.\n"
 "-u, --uninstalled-only Csak a nem telepített minták listázása.\n"
 
-#: ../src/zypper.cc:1451
+#: ../src/zypper.cc:1450
 msgid ""
 "products (pd) [options] [repository] ...\n"
 "\n"
@@ -858,7 +859,7 @@ msgstr ""
 "-i, --installed-only Csak a telepített termékek listázása.\n"
 "-u, --uninstalled-only Csak a nem telepített termékek listázása.\n"
 
-#: ../src/zypper.cc:1476
+#: ../src/zypper.cc:1475
 #, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
@@ -879,7 +880,7 @@ msgstr ""
 "-t, --type <típus>           A feloldható típusa (%s).\n"
 "                            Alapértelmezett: %s."
 
-#: ../src/zypper.cc:1499
+#: ../src/zypper.cc:1498
 #, c-format
 msgid ""
 "patch-info <patchname> ...\n"
@@ -894,7 +895,7 @@ msgstr ""
 "\n"
 "Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
-#: ../src/zypper.cc:1518
+#: ../src/zypper.cc:1517
 #, c-format
 msgid ""
 "pattern-info <pattern_name> ...\n"
@@ -909,7 +910,7 @@ msgstr ""
 "\n"
 "Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
-#: ../src/zypper.cc:1537
+#: ../src/zypper.cc:1536
 #, c-format
 msgid ""
 "product-info <product_name> ...\n"
@@ -924,7 +925,7 @@ msgstr ""
 "\n"
 "Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
-#: ../src/zypper.cc:1554
+#: ../src/zypper.cc:1553
 msgid ""
 "what-provides (wp) <capability>\n"
 "\n"
@@ -938,7 +939,7 @@ msgstr ""
 "\n"
 "Ennek a parancsnak nincsenek további kapcsolói.\n"
 
-#: ../src/zypper.cc:1605
+#: ../src/zypper.cc:1604
 msgid ""
 "moo\n"
 "\n"
@@ -952,7 +953,7 @@ msgstr ""
 "\n"
 "Ehhez a parancshoz nincs más kapcsoló.\n"
 
-#: ../src/zypper.cc:1623
+#: ../src/zypper.cc:1622
 #, c-format
 msgid ""
 "xml-updates\n"
@@ -969,7 +970,7 @@ msgstr ""
 "  Parancs kapcsolói:\n"
 "-r, --repo <álnév|#|URI>  Csak a megadott álnév telepítési forrásainak frissítéseit adja vissza.\n"
 
-#: ../src/zypper.cc:1647
+#: ../src/zypper.cc:1646
 #, c-format
 msgid ""
 "addlock (al) [options] <packagename>\n"
@@ -990,7 +991,7 @@ msgstr ""
 "-t, --type <típus>         A feloldható típusa (%s).\n"
 "                            Alapértelmezett: %s.\n"
 
-#: ../src/zypper.cc:1670
+#: ../src/zypper.cc:1669
 msgid ""
 "removelock (rl) <lock-number>\n"
 "\n"
@@ -1004,7 +1005,7 @@ msgstr ""
 "\n"
 "Ehhez a parancshoz nincs más kapcsoló.\n"
 
-#: ../src/zypper.cc:1689
+#: ../src/zypper.cc:1688
 msgid ""
 "locks (ll)\n"
 "\n"
@@ -1018,7 +1019,7 @@ msgstr ""
 "\n"
 "Ennek a parancsnak nincsenek további kapcsolói.\n"
 
-#: ../src/zypper.cc:1706
+#: ../src/zypper.cc:1727
 msgid ""
 "quit (exit, ^D)\n"
 "\n"
@@ -1032,7 +1033,7 @@ msgstr ""
 "\n"
 "Ennek a parancsnak nincsenek további kapcsolói.\n"
 
-#: ../src/zypper.cc:1723
+#: ../src/zypper.cc:1744
 msgid ""
 "shell (sh)\n"
 "\n"
@@ -1047,7 +1048,7 @@ msgstr ""
 "Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #. translators: this is just a rug-compatiblity command
-#: ../src/zypper.cc:1741
+#: ../src/zypper.cc:1762
 msgid ""
 "service-types (st)\n"
 "\n"
@@ -1060,7 +1061,7 @@ msgstr ""
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
 #. for how to translate specific terms like channel or service if in doubt.
-#: ../src/zypper.cc:1779
+#: ../src/zypper.cc:1800
 msgid ""
 "mount\n"
 "\n"
@@ -1080,7 +1081,7 @@ msgstr ""
 "-n, --name <név>    A megadott kifejezés használata a szolgáltatás neveként.\n"
 "-r, --recurse        Nézze végig az alkönyvtárakat is.\n"
 
-#: ../src/zypper.cc:1810
+#: ../src/zypper.cc:1831
 #, c-format
 msgid ""
 "patch-search [options] [querystring...]\n"
@@ -1091,20 +1092,20 @@ msgstr ""
 "\n"
 "Az adott keresési feltételnek megfelelő javítások keresése. Ez egy rug-kompatibilitási álnév ehhez: '%s'. További információ a zypper man oldalán található.\n"
 
-#: ../src/zypper.cc:1824 ../src/zypper.cc:3158
+#: ../src/zypper.cc:1845 ../src/zypper.cc:3228
 msgid "Unexpected program flow."
 msgstr "Váratlan programmenet."
 
-#: ../src/zypper.cc:1848
+#: ../src/zypper.cc:1869
 msgid "Non-option program arguments: "
 msgstr "Nem kapcsoló jellegű paraméterek: "
 
-#: ../src/zypper.cc:1868
+#: ../src/zypper.cc:1894
 msgid "A ZYpp transaction is already in progress. This means, there is another application using the libzypp library for package management running. All such applications must be closed before using this command."
 msgstr "Egy ZYpp tranzakció már folyamatban van. Ez azt jelenti, hogy egy másik futó alkalmazás már használja a libzypp csomagkezelő programkönyvtárat. A parancs használata előtt minden ilyen alkalmazást be kell zárni."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: ../src/zypper.cc:1900
+#: ../src/zypper.cc:1933
 msgid ""
 "   \\\\\\\\\\\n"
 "  \\\\\\\\\\\\\\__o\n"
@@ -1114,58 +1115,58 @@ msgstr ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 
-#: ../src/zypper.cc:1929 ../src/zypper.cc:2064 ../src/zypper.cc:2119
-#: ../src/zypper.cc:2175
+#: ../src/zypper.cc:1962 ../src/zypper.cc:2097 ../src/zypper.cc:2152
+#: ../src/zypper.cc:2208
 msgid "Root privileges are required for modifying system repositories."
 msgstr "A rendszer forrásainak módosításához root jogosultság szükséges."
 
-#: ../src/zypper.cc:1974 ../src/zypper.cc:2282
+#: ../src/zypper.cc:2007 ../src/zypper.cc:2315
 msgid "Too few arguments."
 msgstr "Túl kevés paraméter."
 
-#: ../src/zypper.cc:1998
+#: ../src/zypper.cc:2031
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr "Amennyiben egyetlen paramétert ad meg, az a .repo fájlra mutató URI kell, hogy legyen."
 
-#: ../src/zypper.cc:2025
+#: ../src/zypper.cc:2058
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "A %s nem használható együtt a %s -el. A %s beállításainak használata."
 
-#: ../src/zypper.cc:2046
+#: ../src/zypper.cc:2079
 msgid "Specified type is not a valid repository type:"
 msgstr "A megadott típus nem érvényes telepítési forrástípus:"
 
-#: ../src/zypper.cc:2047
+#: ../src/zypper.cc:2080
 msgid "See 'zypper -h addrepo' or man zypper to get a list of known repository types."
 msgstr "Az ismert telepítési forrás típusainak listázásához használja a 'zypper -h addrepo' vagy a man zypper parancsot."
 
-#: ../src/zypper.cc:2071 ../src/zypper.cc:2976 ../src/zypper-utils.cc:83
+#: ../src/zypper.cc:2104 ../src/zypper.cc:3022 ../src/zypper-utils.cc:83
 msgid "Required argument missing."
 msgstr "Szükséges paraméter hiányzik."
 
-#: ../src/zypper.cc:2074 ../src/zypper.cc:2979 ../src/zypper-utils.cc:75
+#: ../src/zypper.cc:2107 ../src/zypper.cc:3025 ../src/zypper-utils.cc:75
 #: ../src/zypper-utils.cc:85
 msgid "Usage"
 msgstr "Használat"
 
 #. TranslatorExplanation %s is string which was not found (can be url,
 #. alias or the repo number)
-#: ../src/zypper.cc:2098
+#: ../src/zypper.cc:2131
 #, c-format
 msgid "Repository %s not found by alias, number or URI."
 msgstr "A(z) '%s' telepítési forrás nem található az álneve, száma vagy az URi alapján."
 
-#: ../src/zypper.cc:2126
+#: ../src/zypper.cc:2159
 msgid "Too few arguments. At least URI and alias are required."
 msgstr "Kevés paraméter. Legalább az URI és álnév megadása szükséges."
 
-#: ../src/zypper.cc:2151
+#: ../src/zypper.cc:2184
 #, c-format
 msgid "Repository '%s' not found."
 msgstr "A(z) '%s' telepítési forrás nem található."
 
-#: ../src/zypper.cc:2182 ../src/zypper.cc:2184
+#: ../src/zypper.cc:2215 ../src/zypper.cc:2217
 #, c-format
 msgid "'%s' option is deprecated and will be dropped soon."
 msgstr "A '%s' kapcsoló elavult, és a jövőben eltávolításra kerül."
@@ -1173,154 +1174,156 @@ msgstr "A '%s' kapcsoló elavult, és a jövőben eltávolításra kerül."
 # 50168 AttribValues/delnotify
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/zypper.cc:2193
+#: ../src/zypper.cc:2226
 msgid "Alias or an aggregate option is required."
 msgstr "Álnév vagy összesített kapcsoló szükséges."
 
-#: ../src/zypper.cc:2222
+#: ../src/zypper.cc:2255
 #, c-format
 msgid "Repository %s not found."
 msgstr "A(z) %s telepítési forrás nem található."
 
-#: ../src/zypper.cc:2240
+#: ../src/zypper.cc:2273
 msgid "Root privileges are required for refreshing system repositories."
 msgstr "A rendszer telepítő forrásainak frissítéséhez root jogosultság szükséges."
 
-#: ../src/zypper.cc:2247
+#: ../src/zypper.cc:2280
 #, c-format
 msgid "The '%s' global option has no effect here."
 msgstr "Az '%s' kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
-#: ../src/zypper.cc:2264
+#: ../src/zypper.cc:2297
 msgid "Root privileges are required for cleaning local caches."
 msgstr "A helyi gyorsítótárak frissítéséhez root jogosultság szükséges."
 
 # 50168 AttribValues/delnotify
-#: ../src/zypper.cc:2283
+#: ../src/zypper.cc:2316
 msgid "At least one package name is required."
 msgstr "Legalább egy csomagnévre szükség van."
 
-#: ../src/zypper.cc:2297
+#: ../src/zypper.cc:2330
 msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "A csomagok telepítéséhez és eltávolításához root jogosultság szükséges."
 
-#: ../src/zypper.cc:2312
+#: ../src/zypper.cc:2345
 #, c-format
 msgid "Unknown resolvable type: %s"
 msgstr "Ismeretlen feloldható típus: %s"
 
-#: ../src/zypper.cc:2330
+#: ../src/zypper.cc:2363
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "A '%s' egy RPM fájlnak tűnik. Letöltés megkísérlése."
 
-#: ../src/zypper.cc:2343
+#: ../src/zypper.cc:2376
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Probléma van az RPM fájl '%s' típusként történő megadásával, ezért figyelmen kívül marad."
 
-#: ../src/zypper.cc:2366
+#: ../src/zypper.cc:2399
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Hiba történt a(z) %s RPM-fejléc beolvasása közben. Ez valóban RPM fájl?"
 
-#: ../src/zypper.cc:2391
+#: ../src/zypper.cc:2424
 msgid "Plain RPM files cache"
 msgstr "RPM-fájlok gyorsítótára"
 
-#: ../src/zypper.cc:2406
+#. FIXME show a message here, after string freeze
+#. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
+#: ../src/zypper.cc:2439 ../src/zypper-misc.cc:521
 msgid "No valid arguments specified."
 msgstr "Nincs megadva érvényes paraméter."
 
-#: ../src/zypper.cc:2420 ../src/zypper.cc:2491
+#: ../src/zypper.cc:2453 ../src/zypper.cc:2526
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
 msgstr "Figyelem: Nincsenek források. Csak a telepített feloldhatókkal lehet dolgozni. Semmi sem telepíthető."
 
-#: ../src/zypper.cc:2447
+#: ../src/zypper.cc:2482
 msgid "Source package name is a required argument."
 msgstr "A forráscsomag nevének megadása szükséges."
 
-#: ../src/zypper.cc:2543 ../src/zypper.cc:2787 ../src/zypper.cc:2883
-#: ../src/zypper.cc:3004 ../src/zypper.cc:3070
+#: ../src/zypper.cc:2578 ../src/zypper.cc:2831 ../src/zypper.cc:2929
+#: ../src/zypper.cc:3050 ../src/zypper.cc:3116
 #, c-format
 msgid "Unknown resolvable type '%s'."
 msgstr "Ismeretlen feloldható típus: '%s'."
 
-#: ../src/zypper.cc:2607
+#: ../src/zypper.cc:2642
 msgid "No resolvables found."
 msgstr "Nem található feloldandó."
 
-#: ../src/zypper.cc:2647
+#: ../src/zypper.cc:2682
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Probléma történt a keresés előkészítése vagy végrehajtásakor"
 
-#: ../src/zypper.cc:2648
+#: ../src/zypper.cc:2683
 msgid "See the above message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet."
 
-#: ../src/zypper.cc:2649 ../src/zypper-repos.cc:554
+#: ../src/zypper.cc:2684 ../src/zypper-repos.cc:554
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "A 'zypper refresh' root felhasználóként való futtatása megoldhatja a problémát."
 
-#: ../src/zypper.cc:2806
+#: ../src/zypper.cc:2850
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
 msgstr "A 'rug' futtatásával nem alkalmazható a 'best-effort'."
 
-#: ../src/zypper.cc:2854
+#: ../src/zypper.cc:2900
 msgid "Root privileges are required for updating packages."
 msgstr "A csomagok frissítéséhez root jogosultság szükséges."
 
 #. translators: Running as 'rug', can't do 'best-effort' approach to update.
-#: ../src/zypper.cc:2901
+#: ../src/zypper.cc:2947
 #, c-format
 msgid "Running as '%s', cannot do '%s' approach to update."
 msgstr "'%s'-ként futtatva nem lehet '%s' módban frissíteni."
 
-#: ../src/zypper.cc:2938
+#: ../src/zypper.cc:2984
 msgid "Root privileges are required for performing a distribution upgrade."
 msgstr "A disztribúciófrissítéshez root jogosultság szükséges."
 
-#: ../src/zypper.cc:3033 ../src/zypper.cc:3099
+#: ../src/zypper.cc:3079 ../src/zypper.cc:3145
 msgid "Root privileges are required for adding of package locks."
 msgstr "A csomagok zárolásához root jogosultság szükséges."
 
 #. translators: 'zypper addlock foo' takes only one argument.
-#: ../src/zypper.cc:3051
+#: ../src/zypper.cc:3097
 msgid "Only the first command argument considered. Zypper currently does not support versioned locks."
 msgstr "Csak az első paraméter figyelembevétele. A zypper jelenleg nem támogatja a verziózott zárolásokat."
 
-#: ../src/zypper.cc:3143
+#: ../src/zypper.cc:3213
 msgid "This command only makes sense in the zypper shell."
 msgstr "Ez a parancs csak a zypper héjprogramban értelmezhető."
 
-#: ../src/zypper.cc:3155
+#: ../src/zypper.cc:3225
 msgid "You already are running zypper's shell."
 msgstr "A zypper shell már fut."
 
-#: ../src/zypper.cc:3172 ../src/zypper-repos.cc:621
+#: ../src/zypper.cc:3242 ../src/zypper-repos.cc:621
 msgid "Alias"
 msgstr "Álnév"
 
 #. translators: name (general header)
-#: ../src/zypper.cc:3172 ../src/zypper-info.cc:290 ../src/zypper-locks.cc:37
-#: ../src/zypper-misc.cc:1675 ../src/zypper-misc.cc:1890
+#: ../src/zypper.cc:3242 ../src/zypper-info.cc:274 ../src/zypper-locks.cc:37
+#: ../src/zypper-misc.cc:1705 ../src/zypper-misc.cc:1928
 #: ../src/zypper-repos.cc:574 ../src/zypper-repos.cc:622
 #: ../src/zypper-search.cc:104 ../src/zypper-search.cc:149
-#: ../src/zypper-search.cc:214 ../src/zypper-search.h:50
-#: ../src/zypper-search.h:62 ../src/zypper-search.h:182
-#: ../src/zypper-search.h:221
+#: ../src/zypper-search.cc:214 ../src/zypper-search.h:52
+#: ../src/zypper-search.h:64 ../src/zypper-search.h:200
+#: ../src/zypper-search.h:248
 msgid "Name"
 msgstr "Név"
 
-#: ../src/zypper.cc:3172
+#: ../src/zypper.cc:3242
 msgid "Description"
 msgstr "Leírás"
 
-#: ../src/zypper.cc:3228
+#: ../src/zypper.cc:3298
 msgid "Resolvable Type"
 msgstr "feloldható típusa"
 
-#: ../src/zypper-command.cc:137
+#: ../src/zypper-command.cc:139
 #, c-format
 msgid "Unknown command '%s'"
 msgstr "Ismeretlen parancs: '%s'"
@@ -1358,153 +1361,154 @@ msgid "Description: "
 msgstr "Leírás: "
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: ../src/zypper-info.cc:87
+#. ! \todo use a separate string for each kind so that it is translatable.
+#: ../src/zypper-info.cc:71
 #, c-format
 msgid "%s '%s' not found."
 msgstr "A(z) %s '%s' nem található."
 
 #. print info
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: ../src/zypper-info.cc:96
+#: ../src/zypper-info.cc:80
 #, c-format
 msgid "Information for %s %s:"
 msgstr "%s %s információ:"
 
 #. TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-#: ../src/zypper-info.cc:111
+#: ../src/zypper-info.cc:95
 #, c-format
 msgid "Info for type '%s' not implemented."
 msgstr "A '%s' típushoz nincs információ."
 
-#: ../src/zypper-info.cc:117
+#: ../src/zypper-info.cc:101
 msgid "None"
 msgstr "Nincs"
 
-#: ../src/zypper-info.cc:118
+#: ../src/zypper-info.cc:102
 msgid "Requires"
 msgstr "Igényli"
 
-#: ../src/zypper-info.cc:119
+#: ../src/zypper-info.cc:103
 msgid "Provides"
 msgstr "Biztosítja"
 
-#: ../src/zypper-info.cc:120
+#: ../src/zypper-info.cc:104
 msgid "Conflicts"
 msgstr "Ütközik"
 
-#: ../src/zypper-info.cc:121
+#: ../src/zypper-info.cc:105
 msgid "Obsoletes"
 msgstr "Elavulttá teszi"
 
 #. translators: package requirements table header
-#: ../src/zypper-info.cc:123
+#: ../src/zypper-info.cc:107
 msgid "Requirement"
 msgstr "Követelmény"
 
 #. translators: package requirements table header
-#: ../src/zypper-info.cc:125
+#: ../src/zypper-info.cc:109
 msgid "Provided By"
 msgstr "Biztosítja"
 
 #. translators: package conflicts table header
-#: ../src/zypper-info.cc:127
+#: ../src/zypper-info.cc:111
 msgid "Conflict"
 msgstr "Ütközés"
 
 #. should be the only one
-#: ../src/zypper-info.cc:155 ../src/zypper-info.cc:275
-#: ../src/zypper-info.cc:337
+#: ../src/zypper-info.cc:139 ../src/zypper-info.cc:259
+#: ../src/zypper-info.cc:321
 msgid "Catalog: "
 msgstr "Katalógus: "
 
-#: ../src/zypper-info.cc:155 ../src/zypper-info.cc:275
-#: ../src/zypper-info.cc:337
+#: ../src/zypper-info.cc:139 ../src/zypper-info.cc:259
+#: ../src/zypper-info.cc:321
 msgid "Repository: "
 msgstr "Telepítési forrás: "
 
-#: ../src/zypper-info.cc:160 ../src/zypper-info.cc:280
-#: ../src/zypper-info.cc:344
+#: ../src/zypper-info.cc:144 ../src/zypper-info.cc:264
+#: ../src/zypper-info.cc:328
 msgid "Installed: "
 msgstr "Telepítés ideje: "
 
 #. enabled?
 #. autorefresh?
-#: ../src/zypper-info.cc:160 ../src/zypper-info.cc:217
-#: ../src/zypper-info.cc:223 ../src/zypper-info.cc:225
-#: ../src/zypper-info.cc:280 ../src/zypper-misc.cc:1496
+#: ../src/zypper-info.cc:144 ../src/zypper-info.cc:201
+#: ../src/zypper-info.cc:207 ../src/zypper-info.cc:209
+#: ../src/zypper-info.cc:264 ../src/zypper-misc.cc:1511
 #: ../src/zypper-repos.cc:651 ../src/zypper-repos.cc:653
 #: ../src/zypper-repos.cc:1263 ../src/zypper-repos.cc:1265
 msgid "Yes"
 msgstr "Igen"
 
-#: ../src/zypper-info.cc:160 ../src/zypper-info.cc:217
-#: ../src/zypper-info.cc:223 ../src/zypper-info.cc:225
-#: ../src/zypper-info.cc:280 ../src/zypper-misc.cc:1496
+#: ../src/zypper-info.cc:144 ../src/zypper-info.cc:201
+#: ../src/zypper-info.cc:207 ../src/zypper-info.cc:209
+#: ../src/zypper-info.cc:264 ../src/zypper-misc.cc:1511
 #: ../src/zypper-repos.cc:651 ../src/zypper-repos.cc:653
 #: ../src/zypper-repos.cc:1263 ../src/zypper-repos.cc:1265
 msgid "No"
 msgstr "Nem"
 
 #. ! \todo fix this - arch?
-#: ../src/zypper-info.cc:163 ../src/zypper-info.cc:212
+#: ../src/zypper-info.cc:147 ../src/zypper-info.cc:196
 msgid "Status: "
 msgstr "Állapot: "
 
-#: ../src/zypper-info.cc:167
+#: ../src/zypper-info.cc:151
 msgid "up-to-date"
 msgstr "naprakész"
 
-#: ../src/zypper-info.cc:171
+#: ../src/zypper-info.cc:155
 #, c-format
 msgid "out-of-date (version %s installed)"
 msgstr "elavult (%s verziószám telepítve)"
 
 # modules/inst_target_part.ycp:676
-#: ../src/zypper-info.cc:176
+#: ../src/zypper-info.cc:160
 msgid "not installed"
 msgstr "nincs telepítve"
 
-#: ../src/zypper-info.cc:178
+#: ../src/zypper-info.cc:162
 msgid "Installed Size: "
 msgstr "Telepített méret: "
 
-#: ../src/zypper-info.cc:215 ../src/zypper-info.cc:343
+#: ../src/zypper-info.cc:199 ../src/zypper-info.cc:327
 msgid "Category: "
 msgstr "Kategória: "
 
-#: ../src/zypper-info.cc:216
+#: ../src/zypper-info.cc:200
 msgid "Created On: "
 msgstr "Létrehozás dátuma: "
 
-#: ../src/zypper-info.cc:217
+#: ../src/zypper-info.cc:201
 msgid "Reboot Required: "
 msgstr "Hideg újraindítás szükséges: "
 
-#: ../src/zypper-info.cc:220
+#: ../src/zypper-info.cc:204
 msgid "Package Manager Restart Required"
 msgstr "A csomagkezelő újraindítása szükséges"
 
-#: ../src/zypper-info.cc:222
+#: ../src/zypper-info.cc:206
 msgid "Restart Required: "
 msgstr "Újraindítás szükséges: "
 
-#: ../src/zypper-info.cc:225
+#: ../src/zypper-info.cc:209
 msgid "Interactive: "
 msgstr "Interaktív: "
 
-#: ../src/zypper-info.cc:229
+#: ../src/zypper-info.cc:213
 msgid "Provides:"
 msgstr "Biztosítja:"
 
-#: ../src/zypper-info.cc:236
+#: ../src/zypper-info.cc:220
 msgid "Requires:"
 msgstr "Igényli:"
 
-#: ../src/zypper-info.cc:247 ../src/zypper-search.cc:66
+#: ../src/zypper-info.cc:231 ../src/zypper-search.cc:66
 msgid "Recommended"
 msgstr "Ajánlott"
 
-#: ../src/zypper-info.cc:249 ../src/zypper-search.cc:68
+#: ../src/zypper-info.cc:233 ../src/zypper-search.cc:68
 msgid "Suggested"
 msgstr "Javasolt"
 
@@ -1512,40 +1516,40 @@ msgstr "Javasolt"
 #. translators: S for installed Status
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
-#: ../src/zypper-info.cc:290 ../src/zypper-misc.cc:1882
+#: ../src/zypper-info.cc:274 ../src/zypper-misc.cc:1920
 #: ../src/zypper-search.cc:103 ../src/zypper-search.cc:143
-#: ../src/zypper-search.cc:213 ../src/zypper-search.h:44
-#: ../src/zypper-search.h:60 ../src/zypper-search.h:181
+#: ../src/zypper-search.cc:213 ../src/zypper-search.h:46
+#: ../src/zypper-search.h:62 ../src/zypper-search.h:199
 msgid "S"
 msgstr "S"
 
 #. translators: product type (addon/base) (rug calls it Category)
 #. translators: type (general header)
-#: ../src/zypper-info.cc:290 ../src/zypper-locks.cc:41
+#: ../src/zypper-info.cc:274 ../src/zypper-locks.cc:41
 #: ../src/zypper-repos.cc:574 ../src/zypper-repos.cc:631
-#: ../src/zypper-search.cc:221 ../src/zypper-search.h:64
-#: ../src/zypper-search.h:185
+#: ../src/zypper-search.cc:221 ../src/zypper-search.h:66
+#: ../src/zypper-search.h:203
 msgid "Type"
 msgstr "Típus"
 
 # clients/inst_sw_single.ycp:705
-#: ../src/zypper-info.cc:290 ../src/zypper-search.cc:106
+#: ../src/zypper-info.cc:274 ../src/zypper-search.cc:106
 msgid "Dependency"
 msgstr "Függőség"
 
-#: ../src/zypper-info.cc:308
+#: ../src/zypper-info.cc:292
 msgid "Contents"
 msgstr "Tartalom"
 
-#: ../src/zypper-info.cc:310
+#: ../src/zypper-info.cc:294
 msgid "(empty)"
 msgstr "(üres)"
 
-#: ../src/zypper-info.cc:345
+#: ../src/zypper-info.cc:329
 msgid "Short Name: "
 msgstr "Rövid név: "
 
-#: ../src/zypper-info.cc:346
+#: ../src/zypper-info.cc:330
 msgid "Long Name: "
 msgstr "Hosszú név: "
 
@@ -1560,34 +1564,34 @@ msgstr "A(z) %s aláírás nélküli fájl elfogadása."
 msgid "%s is unsigned, continue?"
 msgstr "A(z) %s csomag nincs aláírva, folytatja?"
 
-#: ../src/zypper-keyring-callbacks.h:59
+#: ../src/zypper-keyring-callbacks.h:60
 #, c-format
 msgid "Import key %s to trusted keyring?"
 msgstr "Felteszi a(z) %s kulcsot a megbízható kulcstartóra?"
 
-#: ../src/zypper-keyring-callbacks.h:69
+#: ../src/zypper-keyring-callbacks.h:70
 #, c-format
 msgid "Accepting file %s signed with an unknown key %s."
 msgstr "A(z) %s fájl elfogadása, de ismeretlen azonosítójú kulccsal (%s) lett aláírva."
 
 #. TranslatorExplanation: speaking of a file
-#: ../src/zypper-keyring-callbacks.h:76
+#: ../src/zypper-keyring-callbacks.h:77
 #, c-format
 msgid "%s is signed with an unknown key %s. Continue?"
 msgstr "A(z) %s csomag ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
 
-#: ../src/zypper-keyring-callbacks.h:90
+#: ../src/zypper-keyring-callbacks.h:91
 #, c-format
 msgid "Automatically trusting key id %s, %s, fingerprint %s"
 msgstr "Automatikusan megbízik a(z) %s, %s azonosítójú kulcsban, ujjlenyomat: %s"
 
 # power-off message
-#: ../src/zypper-keyring-callbacks.h:96
+#: ../src/zypper-keyring-callbacks.h:97
 #, c-format
 msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "Megbízik a következő kulcsazonosítóban: %s, %s, ujjlenyomat: %s ?"
 
-#: ../src/zypper-keyring-callbacks.h:113
+#: ../src/zypper-keyring-callbacks.h:114
 #, c-format
 msgid ""
 "Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!\n"
@@ -1596,7 +1600,7 @@ msgstr ""
 "A(z) %s meghiúsult aláírás-ellenőrzését (nyilvános kulcsazonosító: %s, %s; ujjlenyomat: %s) figyelmen kívül hagyta!\n"
 "Ellenőrizze, hogy ezt nem a fájl ártó szándékú módosítása okozta!"
 
-#: ../src/zypper-keyring-callbacks.h:123
+#: ../src/zypper-keyring-callbacks.h:124
 #, c-format
 msgid ""
 "Signature verification failed for %s with public key id %s, %s, fingerprint %s.\n"
@@ -1607,28 +1611,28 @@ msgstr ""
 "Figyelem: ezt a fájl ártó szándékú módosítása is okozhatta!\n"
 "A folytatás kockázatos. Mindenképp folytatja?"
 
-#: ../src/zypper-keyring-callbacks.h:142
+#: ../src/zypper-keyring-callbacks.h:143
 #, c-format
 msgid "No digest for file %s."
 msgstr "Nincs kivonat a(z) %s fájlhoz."
 
-#: ../src/zypper-keyring-callbacks.h:142 ../src/zypper-keyring-callbacks.h:150
-#: ../src/zypper-keyring-callbacks.h:170 ../src/zypper-misc.cc:2272
-#: ../src/zypper-misc.cc:2296
+#: ../src/zypper-keyring-callbacks.h:143 ../src/zypper-keyring-callbacks.h:151
+#: ../src/zypper-keyring-callbacks.h:171 ../src/zypper-misc.cc:2329
+#: ../src/zypper-misc.cc:2353
 msgid "Continue?"
 msgstr "Folytatja?"
 
-#: ../src/zypper-keyring-callbacks.h:149
+#: ../src/zypper-keyring-callbacks.h:150
 #, c-format
 msgid "Unknown digest %s for file %s."
 msgstr "Ismeretlen %s kivonat a(z) %s fájlhoz."
 
-#: ../src/zypper-keyring-callbacks.h:162
+#: ../src/zypper-keyring-callbacks.h:163
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
 msgstr "%s meghiúsult kivonat-ellenőrzésének figyelmen kívül hagyása (várt: %s, megtalálható: %s)."
 
-#: ../src/zypper-keyring-callbacks.h:169
+#: ../src/zypper-keyring-callbacks.h:170
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
 msgstr "A kivonat-ellenőrzés meghiúsult ehhez: %s. A várt %s helyett a kapott érték: %s."
@@ -1636,7 +1640,7 @@ msgstr "A kivonat-ellenőrzés meghiúsult ehhez: %s. A várt %s helyett a kapot
 #. translators: locks table value
 #. importance
 #: ../src/zypper-locks.cc:20 ../src/zypper-locks.cc:61
-#: ../src/zypper-locks.cc:79
+#: ../src/zypper-locks.cc:74
 msgid "(any)"
 msgstr "(bármely)"
 
@@ -1647,9 +1651,9 @@ msgid "(multiple)"
 msgstr "(több)"
 
 #. translators: catalog (rug's word for repository) (header)
-#: ../src/zypper-locks.cc:39 ../src/zypper-misc.cc:1674
-#: ../src/zypper-misc.cc:1884 ../src/zypper-search.h:46
-#: ../src/zypper-search.h:220
+#: ../src/zypper-locks.cc:39 ../src/zypper-misc.cc:1704
+#: ../src/zypper-misc.cc:1922 ../src/zypper-search.h:48
+#: ../src/zypper-search.h:247
 msgid "Catalog"
 msgstr "Katalógus"
 
@@ -1658,36 +1662,36 @@ msgid "Importance"
 msgstr "Fontosság"
 
 #. translators: package's repository (header)
-#: ../src/zypper-locks.cc:41 ../src/zypper-misc.cc:1674
-#: ../src/zypper-misc.cc:1884 ../src/zypper-search.cc:106
-#: ../src/zypper-search.cc:148 ../src/zypper-search.h:70
+#: ../src/zypper-locks.cc:41 ../src/zypper-misc.cc:1704
+#: ../src/zypper-misc.cc:1922 ../src/zypper-search.cc:106
+#: ../src/zypper-search.cc:148 ../src/zypper-search.h:72
 msgid "Repository"
 msgstr "Telepítési forrás"
 
-#: ../src/zypper-locks.cc:98
+#: ../src/zypper-locks.cc:93
 msgid "There are no package locks defined."
 msgstr "Nincs csomagzárolás megadva."
 
-#: ../src/zypper-locks.cc:105
+#: ../src/zypper-locks.cc:100
 msgid "Error reading the locks file:"
 msgstr "Hiba a zárolási fájl megnyitása közben:"
 
-#: ../src/zypper-locks.cc:139 ../src/zypper-locks.cc:170
+#: ../src/zypper-locks.cc:136 ../src/zypper-locks.cc:202
 msgid "Problem adding the package lock:"
 msgstr "Hiba történt a csomag zárolása közben:"
 
-#: ../src/zypper-locks.cc:143
+#: ../src/zypper-locks.cc:140
 msgid "Specified lock has been successfully added."
 msgstr "A megadott csomag zárolása sikeres."
 
-#: ../src/zypper-locks.cc:162
+#: ../src/zypper-locks.cc:160
 msgid "Specified lock has been successfully removed."
 msgstr "A megadott csomag zárolásának eltávolítása sikeres."
 
-#: ../src/zypper-locks.cc:165
-#, c-format
-msgid "Invalid lock number: %s"
-msgstr "Érvénytelen zárolásszám: %s"
+#. translators: this will show up if you press ctrl+c twice outside of zypper shell
+#: ../src/zypper-main.cc:44
+msgid "OK OK! Exitting immediately..."
+msgstr ""
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -1708,75 +1712,75 @@ msgid "Password"
 msgstr "Jelszó"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/zypper-misc.cc:200 ../src/zypper-misc.cc:283
+#: ../src/zypper-misc.cc:193 ../src/zypper-misc.cc:276
 #, c-format
 msgid "'%s' not found"
 msgstr "'%s' nem található"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
-#: ../src/zypper-misc.cc:219
+#: ../src/zypper-misc.cc:212
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
 msgstr "a(z) %s '%s' kihagyása (már telepítve van frissebb verzió)"
 
-#: ../src/zypper-misc.cc:233
+#: ../src/zypper-misc.cc:226
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
 msgstr "\"%s\" hozzáadása a telepítendő alkalmazások listájához meghiúsult."
 
-#: ../src/zypper-misc.cc:255
+#: ../src/zypper-misc.cc:248
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
 msgstr "\"%s\" hozzáadása az eltávolítandó alkalmazások listájához meghiúsult."
 
-#: ../src/zypper-misc.cc:404 ../src/zypper-misc.cc:607
+#: ../src/zypper-misc.cc:401 ../src/zypper-misc.cc:622
 #, c-format
 msgid "'%s' is already installed."
 msgstr "'%s' már telepítve van."
 
 # modules/inst_target_part.ycp:676
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/zypper-misc.cc:430 ../src/zypper-misc.cc:621
+#: ../src/zypper-misc.cc:427 ../src/zypper-misc.cc:636
 #, c-format
 msgid "'%s' is not installed."
 msgstr "'%s' nincs telepítve."
 
-#: ../src/zypper-misc.cc:460
+#: ../src/zypper-misc.cc:457
 #, c-format
 msgid "%s contradicts %s"
 msgstr "%s és %s ütközik"
 
 #. translators: meaning --force with --capability
-#: ../src/zypper-misc.cc:469
+#: ../src/zypper-misc.cc:466
 #, c-format
 msgid "%s cannot currently be used with %s"
 msgstr "%s jelenleg nem használható együtt ezzel: %s"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/zypper-misc.cc:587
+#: ../src/zypper-misc.cc:596
 #, c-format
 msgid "'%s' not found."
 msgstr "'%s' nem található."
 
 #. translators: %s are package names
-#: ../src/zypper-misc.cc:611
+#: ../src/zypper-misc.cc:626
 #, c-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s'-t biztosító '%s' már telepítve van."
 
 #. translators: meaning 'dependency problem' found during solving
-#: ../src/zypper-misc.cc:697
+#: ../src/zypper-misc.cc:712
 msgid "Problem: "
 msgstr "Probléma: "
 
 # /tmp/intro:68 /tmp/xapi:465
 #. TranslatorExplanation %d is the solution number
-#: ../src/zypper-misc.cc:710
+#: ../src/zypper-misc.cc:725
 #, c-format
 msgid " Solution %d: "
 msgstr " %d. megoldás: "
 
-#: ../src/zypper-misc.cc:729
+#: ../src/zypper-misc.cc:744
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "A fenti '1' megoldás választása, (k)ihagy, új(r)a vagy (m)égsem"
@@ -1784,7 +1788,7 @@ msgstr[1] "darab, új(r)a (k)ihagy vagy (m)égsem> "
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: ../src/zypper-misc.cc:736
+#: ../src/zypper-misc.cc:751
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "A fenti '1' megoldás választása, vagy (m)égsem"
@@ -1796,7 +1800,7 @@ msgstr[1] "Választás a fenti megoldások közül a számmal, vagy (m)égsem"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: ../src/zypper-misc.cc:755
+#: ../src/zypper-misc.cc:770
 msgid "s/r/c"
 msgstr "k/r/m"
 
@@ -1807,17 +1811,17 @@ msgstr "k/r/m"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: ../src/zypper-misc.cc:767
+#: ../src/zypper-misc.cc:782
 msgid "c"
 msgstr "m"
 
 #. continue with next problem
-#: ../src/zypper-misc.cc:787
+#: ../src/zypper-misc.cc:802
 #, c-format
 msgid "Applying solution %s"
 msgstr "%s megoldás végrehajtása"
 
-#: ../src/zypper-misc.cc:811
+#: ../src/zypper-misc.cc:826
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -1825,255 +1829,255 @@ msgstr[0] "%d probléma:"
 msgstr[1] "%d problémák:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: ../src/zypper-misc.cc:815
+#: ../src/zypper-misc.cc:830
 msgid "Specified capability not found"
 msgstr "A megadott képesség nem található"
 
-#: ../src/zypper-misc.cc:826
+#: ../src/zypper-misc.cc:841
 #, c-format
 msgid "Problem: %s"
 msgstr "Probléma: %s"
 
-#: ../src/zypper-misc.cc:841 ../src/zypper-misc.cc:1517
+#: ../src/zypper-misc.cc:856 ../src/zypper-misc.cc:1540
 msgid "Resolving dependencies..."
 msgstr "Függőségek feloldása..."
 
-#: ../src/zypper-misc.cc:1010
+#: ../src/zypper-misc.cc:1025
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
 msgstr[0] "Az alábbi csomag kerül frissítésre:"
 msgstr[1] "Az alábbi csomagok kerülnek frissítésre:"
 
-#: ../src/zypper-misc.cc:1015
+#: ../src/zypper-misc.cc:1030
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
 msgstr[0] "Az alábbi javítás kerül frissítésre:"
 msgstr[1] "Az alábbi javítások kerülnek frissítésre:"
 
-#: ../src/zypper-misc.cc:1020
+#: ../src/zypper-misc.cc:1035
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
 msgstr[0] "Az alábbi minta kerül frissítésre:"
 msgstr[1] "Az alábbi minták kerülnek frissítésre:"
 
-#: ../src/zypper-misc.cc:1025
+#: ../src/zypper-misc.cc:1040
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
 msgstr[0] "Az alábbi termék kerül frissítésre:"
 msgstr[1] "Az alábbi termékek kerülnek frissítésre:"
 
-#: ../src/zypper-misc.cc:1032
+#: ../src/zypper-misc.cc:1047
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
 msgstr[0] "Az alábbi csomag régebbi verziója kerül telepítésre:"
 msgstr[1] "Az alábbi csomagok régebbi verziói kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1037
+#: ../src/zypper-misc.cc:1052
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
 msgstr[0] "Az alábbi javítás régebbi verziója kerül telepítésre:"
 msgstr[1] "Az alábbi javítások régebbi verziói kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1042
+#: ../src/zypper-misc.cc:1057
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
 msgstr[0] "Az alábbi mint régebbi verziója kerül telepítésre:"
 msgstr[1] "Az alábbi minták régebbi verziói kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1047
+#: ../src/zypper-misc.cc:1062
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
 msgstr[0] "Az alábbi termék régebbi verziója kerül telepítésre:"
 msgstr[1] "Az alábbi termékek régebbi verziói kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1054
+#: ../src/zypper-misc.cc:1069
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
 msgstr[0] "A következő ÚJ csomag kerül telepítésre:"
 msgstr[1] "A következő ÚJ csomagok kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1059
+#: ../src/zypper-misc.cc:1074
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
 msgstr[0] "A következő ÚJ javítás kerül telepítésre:"
 msgstr[1] "A következő ÚJ javítások kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1064
+#: ../src/zypper-misc.cc:1079
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
 msgstr[0] "A következő ÚJ minta kerül telepítésre:"
 msgstr[1] "A következő ÚJ minták kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1069
+#: ../src/zypper-misc.cc:1084
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
 msgstr[0] "A következő ÚJ termék kerül telepítésre:"
 msgstr[1] "A következő ÚJ termékek kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1074
+#: ../src/zypper-misc.cc:1089
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
 msgstr[0] "A következő forráscsomag kerül újratelepítésre:"
 msgstr[1] "A következő forráscsomagok kerülnek telepítésre:"
 
-#: ../src/zypper-misc.cc:1081
+#: ../src/zypper-misc.cc:1096
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
 msgstr[0] "A következő csomag kerül újratelepítésre:"
 msgstr[1] "A következő csomagok kerülnek újratelepítésre:"
 
-#: ../src/zypper-misc.cc:1086
+#: ../src/zypper-misc.cc:1101
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
 msgstr[0] "A következő javítás kerül újratelepítésre:"
 msgstr[1] "A következő javítások kerülnek újratelepítésre:"
 
-#: ../src/zypper-misc.cc:1091
+#: ../src/zypper-misc.cc:1106
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
 msgstr[0] "A következő minta kerül újratelepítésre:"
 msgstr[1] "A következő minták kerülnek újratelepítésre:"
 
-#: ../src/zypper-misc.cc:1096
+#: ../src/zypper-misc.cc:1111
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
 msgstr[0] "A következő termék kerül újratelepítésre:"
 msgstr[1] "A következő termékek kerülnek újratelepítésre:"
 
-#: ../src/zypper-misc.cc:1103
+#: ../src/zypper-misc.cc:1118
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
 msgstr[0] "A következő csomag kerül eltávolításra:"
 msgstr[1] "A következő csomagok kerülnek ELTÁVOLÍTÁSRA:"
 
-#: ../src/zypper-misc.cc:1108
+#: ../src/zypper-misc.cc:1123
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
 msgstr[0] "A következő javítások kerül eltávolításra:"
 msgstr[1] "A következő javítások kerülnek ELTÁVOLÍTÁSRA:"
 
-#: ../src/zypper-misc.cc:1113
+#: ../src/zypper-misc.cc:1128
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
 msgstr[0] "A következő minta kerül eltávolításra:"
 msgstr[1] "A következő minták kerülnek ELTÁVOLÍTÁSRA:"
 
-#: ../src/zypper-misc.cc:1118
+#: ../src/zypper-misc.cc:1133
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
 msgstr[0] "A következő termék kerül eltávolításra:"
 msgstr[1] "A következő termékek kerülnek ELTÁVOLÍTÁSRA:"
 
-#: ../src/zypper-misc.cc:1125
+#: ../src/zypper-misc.cc:1140
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
 msgstr[0] "Az alábbi csomag változtatja meg az architektúrát:"
 msgstr[1] "Az alábbi csomagok változtatják meg az architektúrát:"
 
-#: ../src/zypper-misc.cc:1130
+#: ../src/zypper-misc.cc:1145
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
 msgstr[0] "Az alábbi javítás változtatja meg az architektúrát:"
 msgstr[1] "Az alábbi javítások változtatják meg az architektúrát:"
 
-#: ../src/zypper-misc.cc:1135
+#: ../src/zypper-misc.cc:1150
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
 msgstr[0] "Az alábbi minta változtatja meg az architektúrát:"
 msgstr[1] "Az alábbi minták változtatják meg az architektúrát:"
 
-#: ../src/zypper-misc.cc:1140
+#: ../src/zypper-misc.cc:1155
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
 msgstr[0] "Az alábbi termék változtatja meg az architektúrát:"
 msgstr[1] "Az alábbi termékek változtatják meg az architektúrát:"
 
-#: ../src/zypper-misc.cc:1147
+#: ../src/zypper-misc.cc:1162
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
 msgstr[0] "Az alábbi csomag változtatja meg a gyártót:"
 msgstr[1] "Az alábbi csomagok változtatják meg a gyártót:"
 
-#: ../src/zypper-misc.cc:1152
+#: ../src/zypper-misc.cc:1167
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
 msgstr[0] "Az alábbi javítás változtatja meg a gyártót:"
 msgstr[1] "Az alábbi javítások változtatják meg a gyártót:"
 
-#: ../src/zypper-misc.cc:1157
+#: ../src/zypper-misc.cc:1172
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
 msgstr[0] "Az alábbi minta változtatja meg a gyártót:"
 msgstr[1] "Az alábbi minták változtatják meg a gyártót:"
 
-#: ../src/zypper-misc.cc:1162
+#: ../src/zypper-misc.cc:1177
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
 msgstr[0] "Az alábbi termék változtatja meg a gyártót:"
 msgstr[1] "Az alábbi termékek változtatják meg a gyártót:"
 
-#: ../src/zypper-misc.cc:1239
+#: ../src/zypper-misc.cc:1254
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Minden telepített csomag függősége rendben."
 
-#: ../src/zypper-misc.cc:1241
+#: ../src/zypper-misc.cc:1256
 msgid "Nothing to do."
 msgstr "Nincs teendő."
 
-#: ../src/zypper-misc.cc:1246
+#: ../src/zypper-misc.cc:1261
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
 msgstr "A telepített csomagok bizonyos függőségeivel problémák adódtak. A problémák kijavításának érdekében a következő műveleteket kell végrehajtani:"
 
-#: ../src/zypper-misc.cc:1378
+#: ../src/zypper-misc.cc:1393
 #, c-format
 msgid "Overall download size: %s."
 msgstr "Letöltés mérete: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:1383
+#: ../src/zypper-misc.cc:1398
 #, c-format
 msgid "After the operation, additional %s will be used."
 msgstr "A művelet után további %s kerül felhasználásra."
 
-#: ../src/zypper-misc.cc:1386
+#: ../src/zypper-misc.cc:1401
 msgid "No additional space will be used or freed after the operation."
 msgstr "A művelet elvégzése nem igényel, vagy szabadít fel további tárhelyet."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: ../src/zypper-misc.cc:1393
+#: ../src/zypper-misc.cc:1408
 #, c-format
 msgid "After the operation, %s will be freed."
 msgstr "A művelet után további %s szabadul fel."
 
 #. translators: meaning --force-resolution and --no-force-resolution
-#: ../src/zypper-misc.cc:1470
+#: ../src/zypper-misc.cc:1485
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
 msgstr "%s ütközik ezzel: %s, a kevésbé agresszív %s alkalmazása"
 
-#: ../src/zypper-misc.cc:1496
+#: ../src/zypper-misc.cc:1511
 msgid "Force resolution:"
 msgstr "Kikényszerített megoldás:"
 
-#: ../src/zypper-misc.cc:1525
+#: ../src/zypper-misc.cc:1548
 msgid "Verifying dependencies..."
 msgstr "Függőségek ellenőrzése..."
 
-#: ../src/zypper-misc.cc:1540
+#: ../src/zypper-misc.cc:1563
 msgid "Generating solver test case..."
 msgstr "Feloldási tesztesét létrehozása..."
 
-#: ../src/zypper-misc.cc:1543
+#: ../src/zypper-misc.cc:1566
 #, c-format
 msgid "Solver test case generated successfully at %s."
 msgstr "A feloldási teszteset sikeresen létrejött itt: %s."
 
-#: ../src/zypper-misc.cc:1547
+#: ../src/zypper-misc.cc:1570
 msgid "Error creating the solver test case."
 msgstr "A feloldási teszteset létrehozása sikertelen."
 
 #. translators: %d is the number of needed patches
-#: ../src/zypper-misc.cc:1577
+#: ../src/zypper-misc.cc:1618
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -2082,8 +2086,8 @@ msgstr[1] "%d javítás szükséges"
 
 # modules/inst_config_x11.ycp:216
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:865
-#. translators: %d is the number of needed patches
-#: ../src/zypper-misc.cc:1581
+#. translators: %d is the number of security patches
+#: ../src/zypper-misc.cc:1622
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -2092,31 +2096,31 @@ msgstr[1] "%d biztonsági frissítések"
 
 #. best_effort does not know version or arch yet
 #. translators: package version (header)
-#: ../src/zypper-misc.cc:1675 ../src/zypper-misc.cc:1892
+#: ../src/zypper-misc.cc:1705 ../src/zypper-misc.cc:1930
 #: ../src/zypper-search.cc:104 ../src/zypper-search.cc:149
-#: ../src/zypper-search.cc:215 ../src/zypper-search.h:52
-#: ../src/zypper-search.h:66 ../src/zypper-search.h:222
+#: ../src/zypper-search.cc:215 ../src/zypper-search.h:54
+#: ../src/zypper-search.h:68 ../src/zypper-search.h:249
 msgid "Version"
 msgstr "Verzió"
 
 #. translators: product category (the rug term)
 #. translators: patch category (recommended, security)
-#: ../src/zypper-misc.cc:1675 ../src/zypper-search.cc:218
-#: ../src/zypper-search.h:224
+#: ../src/zypper-misc.cc:1705 ../src/zypper-search.cc:218
+#: ../src/zypper-search.h:251
 msgid "Category"
 msgstr "Kategória"
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/zypper-misc.cc:1675 ../src/zypper-repos.cc:574
-#: ../src/zypper-search.h:226
+#: ../src/zypper-misc.cc:1705 ../src/zypper-repos.cc:574
+#: ../src/zypper-search.h:253
 msgid "Status"
 msgstr "Állapot"
 
-#: ../src/zypper-misc.cc:1697 ../src/zypper-search.cc:54
+#: ../src/zypper-misc.cc:1727 ../src/zypper-search.cc:54
 msgid "Needed"
 msgstr "Szükséges"
 
-#: ../src/zypper-misc.cc:1713
+#: ../src/zypper-misc.cc:1743
 msgid ""
 "These are only the updates affecting the updater itself.\n"
 "Other updates are available too.\n"
@@ -2124,107 +2128,128 @@ msgstr ""
 "Ezek a frissítések csak magát a frissítőt érintik.\n"
 "Ezen kívül más frissítések is elérhetők.\n"
 
-#: ../src/zypper-misc.cc:1721 ../src/zypper-misc.cc:1933
+#: ../src/zypper-misc.cc:1751 ../src/zypper-misc.cc:1971
 msgid "No updates found."
 msgstr "Nem találhatók frissítések."
 
-#: ../src/zypper-misc.cc:1822
+#: ../src/zypper-misc.cc:1856
 msgid "Package updates"
 msgstr "Csomagfrissítések"
 
-#: ../src/zypper-misc.cc:1824
+#: ../src/zypper-misc.cc:1858
 msgid "Patches"
 msgstr "Javítások"
 
 # modules/inst_config_x11.ycp:216
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:865
-#: ../src/zypper-misc.cc:1826
+#: ../src/zypper-misc.cc:1860
 msgid "Pattern updates"
 msgstr "Minták frissítései"
 
-#: ../src/zypper-misc.cc:1828
+#: ../src/zypper-misc.cc:1862
 msgid "Product updates"
 msgstr "Termék frissítések"
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/zypper-misc.cc:1887 ../src/zypper-search.cc:146
-#: ../src/zypper-search.h:48
+#: ../src/zypper-misc.cc:1925 ../src/zypper-search.cc:146
+#: ../src/zypper-search.h:50
 msgid "Bundle"
 msgstr "Köteg"
 
 #. translators: package architecture (header)
-#: ../src/zypper-misc.cc:1892 ../src/zypper-search.cc:149
-#: ../src/zypper-search.h:54 ../src/zypper-search.h:68
+#: ../src/zypper-misc.cc:1930 ../src/zypper-search.cc:149
+#: ../src/zypper-search.h:56 ../src/zypper-search.h:70
 msgid "Arch"
 msgstr "Architektúra"
 
-#: ../src/zypper-misc.cc:2159
+#: ../src/zypper-misc.cc:2034
+#, fuzzy, c-format
+msgid "Cannot parse '%s < %s'"
+msgstr "%s nem nyitható meg: %m"
+
+#. translators: %s is the name of a patch
+#: ../src/zypper-misc.cc:2090
+#, c-format
+msgid "'%s' is interactive, skipping."
+msgstr ""
+
+#: ../src/zypper-misc.cc:2145
+#, fuzzy, c-format
+msgid "No patches matching '%s' found."
+msgstr "Nincs telepítve '%s'-nek megfelelő csomag."
+
+#: ../src/zypper-misc.cc:2148
+#, fuzzy, c-format
+msgid "Patch '%s' not found."
+msgstr "'%s' nem található."
+
+#: ../src/zypper-misc.cc:2213
 #, c-format
 msgid "No packages matching '%s' are installed."
 msgstr "Nincs telepítve '%s'-nek megfelelő csomag."
 
-#: ../src/zypper-misc.cc:2162
+#: ../src/zypper-misc.cc:2216
 #, c-format
 msgid "Package '%s' is not installed."
 msgstr "'%s' csomag nincs telepítve."
 
-#: ../src/zypper-misc.cc:2174
+#: ../src/zypper-misc.cc:2228
 #, c-format
 msgid "No update candidate for '%s'."
 msgstr "Nincs jelölt a következő frissítésére: '%s'."
 
-#: ../src/zypper-misc.cc:2252
+#: ../src/zypper-misc.cc:2309
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "A csomagok függőségi problémáinak javításához root jogosultság szükséges."
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
 #. to-be-removed automatically to show why, if asked.
-#: ../src/zypper-misc.cc:2265
+#: ../src/zypper-misc.cc:2322
 msgid "y/n/p"
 msgstr "i/n/p"
 
 #. translators: help text for 'y' option in the y/n/p prompt
-#: ../src/zypper-misc.cc:2267
+#: ../src/zypper-misc.cc:2324
 msgid "Accept the summary and proceed with installation/removal of packages."
 msgstr "Fogadja el az összegzést és folytassa a csomagok telepítésével/eltávolításával."
 
 #. translators: help text for 'n' option in the y/n/p prompt
-#: ../src/zypper-misc.cc:2269
+#: ../src/zypper-misc.cc:2326
 msgid "Cancel the operation."
 msgstr "A művelet megszakítása."
 
 #. translators: help text for 'p' option in the y/n/p prompt
-#: ../src/zypper-misc.cc:2271
+#: ../src/zypper-misc.cc:2328
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
 msgstr "A no-force-resolution módban indítsa újra a solvert a függőségi problémák megjelenítéséhez."
 
-#: ../src/zypper-misc.cc:2312
+#: ../src/zypper-misc.cc:2369
 msgid "committing"
 msgstr "véglegesítés"
 
-#: ../src/zypper-misc.cc:2317
+#: ../src/zypper-misc.cc:2374
 msgid "(dry run)"
 msgstr "(üresjárat)"
 
-#: ../src/zypper-misc.cc:2346 ../src/zypper-misc.cc:2380
+#: ../src/zypper-misc.cc:2403 ../src/zypper-misc.cc:2437
 msgid "Problem downloading the package file from the repository:"
 msgstr "Hiba történt az adatok letöltésekor a következő telepítési forrásról:"
 
-#: ../src/zypper-misc.cc:2347 ../src/zypper-misc.cc:2370
-#: ../src/zypper-misc.cc:2402 ../src/zypper-repos.cc:143
-#: ../src/zypper-repos.cc:1823
+#: ../src/zypper-misc.cc:2404 ../src/zypper-misc.cc:2427
+#: ../src/zypper-misc.cc:2459 ../src/zypper-repos.cc:143
+#: ../src/zypper-repos.cc:1825
 msgid "Please see the above error message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet javaslatért."
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
-#: ../src/zypper-misc.cc:2376
+#: ../src/zypper-misc.cc:2433
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "A(z) %s telepítési forrás nem naprakész. Frissítheti a '%s' parancs futtatásával."
 
-#: ../src/zypper-misc.cc:2388
+#: ../src/zypper-misc.cc:2445
 msgid ""
 "The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
 "\n"
@@ -2240,67 +2265,67 @@ msgstr ""
 " - használjon másik telepítő adathordozót (ha az sérült)\n"
 " - használjon másik telepítési forrást"
 
-#: ../src/zypper-misc.cc:2401
+#: ../src/zypper-misc.cc:2458
 msgid "Problem occured during or after installation or removal of packages:"
 msgstr "A telepítés során hiba történt:"
 
-#: ../src/zypper-misc.cc:2421
+#: ../src/zypper-misc.cc:2478
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
 msgstr "A telepített frissítések egyike a számítógép újraindítását igényli. Ezt amint lehet, tegye meg."
 
-#: ../src/zypper-misc.cc:2425
+#: ../src/zypper-misc.cc:2482
 msgid "One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
 msgstr "A telepített frissítések egyike magát a csomagkezelőt érinti, így az az új műveletek végrehajtása előtt újraindítást igényel."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
-#: ../src/zypper-misc.cc:2450
+#: ../src/zypper-misc.cc:2507
 #, c-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "A(z) %s %s licencének automatikus elfogadása."
 
-#: ../src/zypper-misc.cc:2463
+#: ../src/zypper-misc.cc:2520
 #, c-format
 msgid "%s %s license:"
 msgstr "%s %s licenc:"
 
 #. lincense prompt
-#: ../src/zypper-misc.cc:2474
+#: ../src/zypper-misc.cc:2531
 msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "A csomag telepítése érdekében el kell fogadnia a fenti licenc feltételeit. Folytatja?"
 
-#: ../src/zypper-misc.cc:2483
+#: ../src/zypper-misc.cc:2540
 msgid "Aborting installation due to the need for license confirmation."
 msgstr "A telepítés megszakítva a licencek elfogadásának szükségessége miatt."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
-#: ../src/zypper-misc.cc:2488
+#: ../src/zypper-misc.cc:2545
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
 msgstr "Indítsa újra a folyamatot interaktív módban és fogadja el a szükséges licenceket, vagy használja a %s kapcsolót."
 
 #. translators: e.g. "... with flash package license."
-#: ../src/zypper-misc.cc:2499
+#: ../src/zypper-misc.cc:2556
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Telepítés megszakítva a felhasználó a %s %s licencekkel való egyet nem értése miatt."
 
-#: ../src/zypper-misc.cc:2591 ../src/zypper-misc.cc:2616
+#: ../src/zypper-misc.cc:2648 ../src/zypper-misc.cc:2673
 #, c-format
 msgid "Source package '%s' not found."
 msgstr "A(z) '%s' forráscsomag nem található."
 
-#: ../src/zypper-misc.cc:2626
+#: ../src/zypper-misc.cc:2683
 #, c-format
 msgid "Installing source package %s-%s"
 msgstr "A(z) %s-%s forráscsomag telepítése"
 
-#: ../src/zypper-misc.cc:2635
+#: ../src/zypper-misc.cc:2692
 #, c-format
 msgid "Source package %s-%s successfully installed."
 msgstr "A(z) %s-%s forráscsomag telepítése sikeresen befejeződött."
 
-#: ../src/zypper-misc.cc:2642
+#: ../src/zypper-misc.cc:2699
 #, c-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
@@ -2667,7 +2692,7 @@ msgstr "Az összes telepítési forrás frissítése megtörtént."
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "Ez egy csak olvasható, cserélhető adathordozó (CD/DVD), ezért az automatikus frissítés letiltásra kerül."
 
-#: ../src/zypper-repos.cc:1209 ../src/zypper-repos.cc:1450
+#: ../src/zypper-repos.cc:1209 ../src/zypper-repos.cc:1452
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Ilyen nevű ('%s') telepítési forrás már létezik. Adjon egy másik álnevet."
@@ -2716,158 +2741,158 @@ msgstr "Az adatok betöltése  a(z) '%s' adathordozóról sikertelen"
 msgid "Please check if your installation media is valid and readable."
 msgstr "Ellenőrizze, hogy a telepítési adathordozó valóban érvényes és olvasható."
 
-#: ../src/zypper-repos.cc:1350
+#: ../src/zypper-repos.cc:1352
 msgid "Problem accessing the file at the specified URI"
 msgstr "A fájl adatainak lekérdezése a megadott URI-ról sikertelen"
 
-#: ../src/zypper-repos.cc:1351
+#: ../src/zypper-repos.cc:1353
 msgid "Please check if the URI is valid and accessible."
 msgstr "Ellenőrizze, hogy a megadott URI érvényes és valóban elérhető."
 
-#: ../src/zypper-repos.cc:1359
+#: ../src/zypper-repos.cc:1361
 msgid "Problem parsing the file at the specified URI"
 msgstr "A fájl feldolgozása a megadott URI-ról sikertelen"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
-#: ../src/zypper-repos.cc:1362
+#: ../src/zypper-repos.cc:1364
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
 msgstr "Ez egy .repo fájl? A szabványos .repo fájl leírása a http://en.opensuse.org/Standards/RepoInfo oldalon található."
 
-#: ../src/zypper-repos.cc:1370
+#: ../src/zypper-repos.cc:1372
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Hiba történt a megadott URI-n található fájl beolvasása közben"
 
-#: ../src/zypper-repos.cc:1384
+#: ../src/zypper-repos.cc:1386
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "A fájlban egy álnévvel nem rendelkező telepítési forrás lett megadva, amely így kihagyásra kerül."
 
-#: ../src/zypper-repos.cc:1391
+#: ../src/zypper-repos.cc:1393
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "A(z) %s telepítési forráshoz nincs megadva URI, ezért kihagyásra kerül."
 
-#: ../src/zypper-repos.cc:1425
+#: ../src/zypper-repos.cc:1427
 #, c-format
 msgid "Repository '%s' has been removed."
 msgstr "A(z) '%s' telepítési forrás eltávolítása megtörtént."
 
-#: ../src/zypper-repos.cc:1444
+#: ../src/zypper-repos.cc:1446
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
 msgstr "A(z) '%s' telepítési forrás átnevezése megtörtént. Az új neve '%s'."
 
-#: ../src/zypper-repos.cc:1456 ../src/zypper-repos.cc:1720
+#: ../src/zypper-repos.cc:1458 ../src/zypper-repos.cc:1722
 msgid "Error while modifying the repository:"
 msgstr "Hiba a telepítési forrás módosítása közben:"
 
-#: ../src/zypper-repos.cc:1457
+#: ../src/zypper-repos.cc:1459
 #, c-format
 msgid "Leaving repository '%s' unchanged."
 msgstr "A(z) '%s' telepítési forrás változatlan maradt."
 
 #. translators: speaking of two mutually contradicting command line options
-#: ../src/zypper-repos.cc:1540
+#: ../src/zypper-repos.cc:1542
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
 msgstr "%s és %s ellentmondanak egymásnak. Ez a tulajdonság változatlan marad."
 
-#: ../src/zypper-repos.cc:1638
+#: ../src/zypper-repos.cc:1640
 #, c-format
 msgid "Invalid priority '%s'. Use an integer number between 1 (highest priority) and 99 (lowest priority)."
 msgstr "Érvénytelen prioritás: '%s'. Használjon 1 (legmagasabb prioritás) és 99 (legalacsonyabb prioritás) közötti egész számokat."
 
-#: ../src/zypper-repos.cc:1646
+#: ../src/zypper-repos.cc:1648
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "A(z) '%s' telepítési forrás prioritása változatlan maradt (%d)"
 
-#: ../src/zypper-repos.cc:1672
+#: ../src/zypper-repos.cc:1674
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
 msgstr "A(z) %s telepítési forrás engedélyezése sikeres."
 
-#: ../src/zypper-repos.cc:1675
+#: ../src/zypper-repos.cc:1677
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
 msgstr "A(z) %s telepítési forrás letiltása sikeres."
 
-#: ../src/zypper-repos.cc:1682
+#: ../src/zypper-repos.cc:1684
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "A(z) '%s' telepítési forrás automatikus frissítése engedélyezve."
 
-#: ../src/zypper-repos.cc:1685
+#: ../src/zypper-repos.cc:1687
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "A(z) '%s' telepítési forrás automatikus frissítése letiltva."
 
-#: ../src/zypper-repos.cc:1692
+#: ../src/zypper-repos.cc:1694
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Az RPM fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz engedélyezve lett."
 
-#: ../src/zypper-repos.cc:1695
+#: ../src/zypper-repos.cc:1697
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Az RPM fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz kikapcsolva."
 
-#: ../src/zypper-repos.cc:1701
+#: ../src/zypper-repos.cc:1703
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "A(z) '%s' telepítési forrás %d prioritásának beállítása megtörtént."
 
-#: ../src/zypper-repos.cc:1707
+#: ../src/zypper-repos.cc:1709
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "A(z) '%s' telepítési forrás neve átállítva erre:'%s'."
 
-#: ../src/zypper-repos.cc:1713
+#: ../src/zypper-repos.cc:1715
 #, c-format
 msgid "Nothing to change for repository '%s'."
 msgstr "A(z) '%s' telepítési forrásban nincs módosítás."
 
-#: ../src/zypper-repos.cc:1721
+#: ../src/zypper-repos.cc:1723
 #, c-format
 msgid "Leaving repository %s unchanged."
 msgstr "A(z) %s telepítési forrás változatlan maradt."
 
-#: ../src/zypper-repos.cc:1769
+#: ../src/zypper-repos.cc:1771
 #, c-format
 msgid "Retrieving repository '%s' data..."
 msgstr "A(z) %s telepítési forrás adatainak beolvasása..."
 
-#: ../src/zypper-repos.cc:1776
+#: ../src/zypper-repos.cc:1778
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "A(z) '%s' telepítési forrás nincs a gyorsítótárban. Beolvasás folyamatban..."
 
-#: ../src/zypper-repos.cc:1783 ../src/zypper-repos.cc:1796
+#: ../src/zypper-repos.cc:1785 ../src/zypper-repos.cc:1798
 #, c-format
 msgid "Problem loading data from '%s'"
 msgstr "Az adatok betöltése sikertelen a következő helyről: '%s'"
 
-#: ../src/zypper-repos.cc:1784 ../src/zypper-repos.cc:1802
+#: ../src/zypper-repos.cc:1786 ../src/zypper-repos.cc:1804
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Hiba történt, így \"%s\" feloldhatói nem tölthetők be."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: ../src/zypper-repos.cc:1798
+#: ../src/zypper-repos.cc:1800
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Próbálja ki ezt: '%s', vagy ezt: '%s', mielőtt tovább lép."
 
-#: ../src/zypper-repos.cc:1811
+#: ../src/zypper-repos.cc:1813
 msgid "Reading installed packages..."
 msgstr "Telepített csomagok beolvasása..."
 
-#: ../src/zypper-repos.cc:1822
+#: ../src/zypper-repos.cc:1824
 msgid "Problem occured while reading the installed packages:"
 msgstr "A telepített csomagok beolvasása során hiba történt:"
 
 #. list name, exact match
-#: ../src/zypper-repos.cc:1905
+#: ../src/zypper-repos.cc:1907
 msgid ""
 "ZENworks Management Daemon is running.\n"
 "WARNING: this command will not synchronize changes.\n"
@@ -2883,39 +2908,40 @@ msgstr ""
 msgid "Running: %s  (%s, %s)"
 msgstr "Futtatás: %s  (%s, %s)"
 
-#: ../src/zypper-rpm-callbacks.h:121 ../src/zypper-rpm-callbacks.h:130
-#: ../src/zypper-rpm-callbacks.h:138 ../src/zypper-rpm-callbacks.h:145
+#: ../src/zypper-rpm-callbacks.h:122 ../src/zypper-rpm-callbacks.h:131
+#: ../src/zypper-rpm-callbacks.h:139 ../src/zypper-rpm-callbacks.h:146
 msgid "Reading installed packages"
 msgstr "Telepített csomagok beolvasása"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: ../src/zypper-rpm-callbacks.h:160
+#: ../src/zypper-rpm-callbacks.h:164
 #, c-format
 msgid "Removing %s-%s"
 msgstr "Eltávolítás: %s-%s"
 
-#: ../src/zypper-rpm-callbacks.h:175
+#: ../src/zypper-rpm-callbacks.h:179
 #, c-format
 msgid "Removal of %s failed:"
 msgstr "%s eltávolítása meghiúsult:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
-#: ../src/zypper-rpm-callbacks.h:192
+#. ! \todo use format
+#: ../src/zypper-rpm-callbacks.h:199
 msgid "(with --nodeps)"
 msgstr "(--nodeps használatával)"
 
-#: ../src/zypper-rpm-callbacks.h:192
+#: ../src/zypper-rpm-callbacks.h:199
 msgid "(with --nodeps --force)"
 msgstr "(--nodeps --force használatával)"
 
 # modules/inst_target_part.ycp:676
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
-#: ../src/zypper-rpm-callbacks.h:212
+#: ../src/zypper-rpm-callbacks.h:219
 #, c-format
 msgid "Installing: %s-%s"
 msgstr "%s-%s telepítése"
 
-#: ../src/zypper-rpm-callbacks.h:234
+#: ../src/zypper-rpm-callbacks.h:241
 #, c-format
 msgid "Installation of %s-%s failed:"
 msgstr "A(z) %s-%s telepítése meghiúsult:"
@@ -2953,12 +2979,12 @@ msgstr "Nem találhatók termékek."
 msgid "No providers of '%s' found."
 msgstr "Semmi sem szolgáltatja '%s'-t."
 
-#: ../src/zypper-search.h:141 ../src/zypper-search.h:155
+#: ../src/zypper-search.h:157 ../src/zypper-search.h:171
 msgid "System Packages"
 msgstr "Rendszercsomagok"
 
 #. translators: package summary (header)
-#: ../src/zypper-search.h:184
+#: ../src/zypper-search.h:202
 msgid "Summary"
 msgstr "Összegzés"
 
@@ -3065,3 +3091,5 @@ msgstr "Ellenőrizze, hogy a megadott fájl valóban elérhető."
 msgid "Cannot parse capability '%s'."
 msgstr "A képesség feldolgozása sikertelen: %s."
 
+#~ msgid "Invalid lock number: %s"
+#~ msgstr "Érvénytelen zárolásszám: %s"
