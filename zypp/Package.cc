@@ -9,8 +9,13 @@
 /** \file	zypp/Package.cc
  *
 */
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/Package.h"
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/target/rpm/RpmDb.h"
+#include "zypp/target/rpm/RpmHeader.h"
 
 using namespace std;
 
@@ -43,9 +48,29 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-#warning DUMMY changelog
   Changelog Package::changelog() const
-  { return Changelog(); }
+  {
+      Target_Ptr target;
+      try 
+      {
+          target = getZYpp()->target();
+      }
+      catch ( const Exception &e )
+      {
+           ERR << "Target not initialized. Changelog is not available." << std::endl;
+           return Changelog();
+      }
+      
+          
+      if ( repository().isSystemRepo() )
+      {
+          target::rpm::RpmHeader::constPtr header;
+          target->rpmDb().getData(name(), header);
+          return header->tag_changelog();
+      }
+      WAR << "changelog is not available for uninstalled packages" << std::endl;
+      return Changelog();
+  }
 
   /** */
   std::string Package::buildhost() const

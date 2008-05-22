@@ -2,6 +2,7 @@
 Thu May 22 02:22:29 CEST 2008 - dmacvicar@suse.de
 
 - fix filelist for installed packages (bnc#392544)
+- fix changelog retrieval for installed packages
 
 -------------------------------------------------------------------
 Wed May 21 13:50:00 CEST 2008 - dmacvicar@suse.de
