@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 23 14:42:34 CEST 2008 - schubi@suse.de
+
+- Added IgnoreAlreadyRecommended flag. So recomments/suggest will 
+  be ignored for already INSTALLED packages (bnc #389694)
+- r 10202 
+
+-------------------------------------------------------------------
 Fri May 23 10:22:47 CEST 2008 - schubi@suse.de
 
 - Packages which obsoletes and do NOT required other installed
