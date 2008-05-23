@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri May 23 10:22:47 CEST 2008 - schubi@suse.de
+
+- Packages which obsoletes and do NOT required other installed
+  packages will be installed if no other packages obsolete the installed package too.
+- r 10196 
+
+-------------------------------------------------------------------
 Thu May 22 02:22:29 CEST 2008 - dmacvicar@suse.de
 
 - fix filelist for installed packages (bnc#392544)
