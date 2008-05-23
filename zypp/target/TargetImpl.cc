@@ -685,7 +685,7 @@ namespace zypp
             {
               it->status().resetTransact( ResStatus::USER );
 	      // check for and run an update script
-	      RunUpdateScript(ZConfig::instance().updateScriptsPath(), p->name(), p->edition().version(), p->edition().release());
+	      RunUpdateScript(ZConfig::instance().update_scriptsPath(), p->name(), p->edition().version(), p->edition().release());
             }
             progress.disconnect();
           }

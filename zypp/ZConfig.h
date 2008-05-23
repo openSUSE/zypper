@@ -38,6 +38,15 @@ namespace zypp
    * It reads /etc/zypp/zypp.conf, the filename can be overridden by
    * setting the ZYPP_CONF environment variable to a different file.
    *
+   * Note, if you add settings to this file, please follow the following
+   * convention:
+   *
+   * namespace.settingname
+   *
+   * should become
+   *
+   * namespace_settingName()
+   *
    * \ingroup Singleton
   */
   class ZConfig : private base::NonCopyable
@@ -175,10 +184,22 @@ namespace zypp
        */
       bool apply_locks_file() const;
 
-     /**
-       * Path where update scripts are stored
+      /**
+       * Path where the update items are kept (/var/adm)
        */
-      Pathname updateScriptsPath() const;
+      Pathname update_dataPath() const;
+
+     /**
+       * Path where the repo metadata is downloaded and kept (update_dataPath()/).
+        * \ingroup g_ZC_REPOCACHE
+      */
+      Pathname update_scriptsPath() const;
+
+     /**
+       * Path where the repo solv files are created and kept (update_dataPath()/solv).
+        * \ingroup g_ZC_REPOCACHE
+      */
+      Pathname update_messagesPath() const;
 
     public:
       class Impl;

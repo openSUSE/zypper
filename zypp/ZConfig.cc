@@ -258,10 +258,19 @@ namespace zypp
                 {
                   apply_locks_file = str::strToBool( value, apply_locks_file );
                 }
+                else if ( entry == "update.datadir" )
+                {
+                  update_data_path = Pathname(value);
+                }
                 else if ( entry == "update.scriptsdir" )
                 {
                   update_scripts_path = Pathname(value);
                 }
+                else if ( entry == "update.messagessdir" )
+                {
+                  update_messages_path = Pathname(value);
+                }
+
               }
             }
           }
@@ -305,7 +314,9 @@ namespace zypp
     Pathname cfg_products_path;
     Pathname locks_file;
 
+    Pathname update_data_path;
     Pathname update_scripts_path;
+    Pathname update_messages_path;
 
     bool repo_add_probe;
     unsigned repo_refresh_delay;
@@ -494,10 +505,23 @@ namespace zypp
     return _pimpl->apply_locks_file;
   }
 
-  Pathname ZConfig::updateScriptsPath() const
+  Pathname ZConfig::update_dataPath() const
+  {
+    return ( _pimpl->update_data_path.empty()
+        ? Pathname("/var/adm") : _pimpl->update_data_path );
+  }
+
+  Pathname ZConfig::update_messagesPath() const
+  {
+    return ( _pimpl->update_messages_path.empty()
+             ? Pathname(update_dataPath()/"update-messages") : _pimpl->update_messages_path );
+  }
+
+
+  Pathname ZConfig::update_scriptsPath() const
   {
     return ( _pimpl->update_scripts_path.empty()
-        ? Pathname("/var/adm/update-scripts") : _pimpl->update_scripts_path );
+             ? Pathname(update_dataPath()/"update-scripts") : _pimpl->update_scripts_path );
   }
 
   /////////////////////////////////////////////////////////////////
