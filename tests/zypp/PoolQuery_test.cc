@@ -592,6 +592,7 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   q.setRequireAll();
   q.setCaseSensitive();
   q.setUninstalledOnly();
+  q.setEdition(Edition("0.8.3"),Rel::NE);
   BOOST_CHECK(q==queries[1]);
 }
 

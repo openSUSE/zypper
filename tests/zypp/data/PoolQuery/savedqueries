@@ -9,3 +9,4 @@ match_type: regex
 require_all: on
 case_sensitive: on
 install_status: not-installed
+version: != 0.8.3

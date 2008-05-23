@@ -478,6 +478,7 @@ attremptycheckend:
     o << "* SEARCH_NOCASE: " << ((_cflags & SEARCH_NOCASE) ? "yes" : "no") << endl;
     o << "* SEARCH_ALL_REPOS: " << ((_cflags & SEARCH_ALL_REPOS) ? "yes" : "no") << endl;
     o << "status filter flags:" << _status_flags << endl;
+    o << "version: "<< _op << " " << _edition.asString() << endl;
 
     // raw
 
@@ -732,7 +733,7 @@ attremptycheckend:
 
       // copy the iterator to forward check for the next attribute ***
       _tmpit = base_reference();
-      _has_next = (*(++_tmpit) != sat::detail::noId);
+      _has_next = ++_tmpit != LookupAttr::iterator();
 
       if (_has_next)
       {
@@ -1142,12 +1143,12 @@ attremptycheckend:
       else if ( attribute == PoolQueryAttr::editionAttr)
       {
         string::size_type pos;
-        Rel rel;
-        if (attrValue.find_first_of("=<>") == 0)
+        Rel rel("==");
+        if (attrValue.find_first_of("=<>!") == 0)
         {
           pos = attrValue.find_last_of("=<>");
           rel = Rel(attrValue.substr(0, pos+1));
-          attrValue = attrValue.substr(pos+1, attrValue.npos);
+          attrValue = str::trim(attrValue.substr(pos+1, attrValue.npos));
         }
 
         setEdition(Edition(attrValue), rel);
@@ -1329,6 +1330,11 @@ attremptycheckend:
       return false;
     if(a._pimpl->_cflags!= _pimpl->_cflags)
       return false;
+    if(a.edition()!=edition())
+      return false;
+    if(a.editionRel()!= editionRel())
+      return false;
+    
 
     return true;
   }
