@@ -57,12 +57,17 @@ int main (int argc, const char ** argv)
   init_pool();
 
   PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, "zypper");
+  q.setEdition(Edition("0.10.5-5"), Rel::LE);
+
+  /*
+  PoolQuery q;
   q.addString("weather");
   q.addAttribute(sat::SolvAttr::name, "thunder");
   q.addAttribute(sat::SolvAttr::description, "storm");
   q.addKind(ResKind::package);
   q.addRepo("factory");
-
+*/
   std::for_each(q.begin(), q.end(), &result_cb);
 //  cout << q.size() << endl;
   cout << q << endl;

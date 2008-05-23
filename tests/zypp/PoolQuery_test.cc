@@ -530,6 +530,36 @@ BOOST_AUTO_TEST_CASE(pool_query_502)
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+//  6xx queries with edition
+/////////////////////////////////////////////////////////////////////////////
+
+BOOST_AUTO_TEST_CASE(pool_query_X)
+{
+  cout << "****600.1****"  << endl;
+  PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, "zypper");
+  q.setMatchExact();
+  q.setEdition(Edition("0.10.5"), Rel::GT);
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 4);
+  
+  cout << "****600.2****"  << endl;
+  q.setEdition(Edition("0.10.5"), Rel::LT);
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 0);
+
+  cout << "****600.3****"  << endl;
+  q.setEdition(Edition("0.10.5"), Rel::LE);
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+
+  cout << "****600.4****"  << endl;
+  q.setEdition(Edition("0.10.5-5"), Rel::LT);
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+}
+
 /*
 BOOST_AUTO_TEST_CASE(pool_query_X)
 {

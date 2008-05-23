@@ -34,6 +34,9 @@ namespace sat
 // At least the ones that do nat have a satsolver/knownid.
 
   const SolvAttr SolvAttr::name         ( SOLVABLE_NAME );
+  const SolvAttr SolvAttr::edition      ( SOLVABLE_EVR );
+  const SolvAttr SolvAttr::arch         ( SOLVABLE_ARCH );
+
   const SolvAttr SolvAttr::summary      ( SOLVABLE_SUMMARY );       // translated
   const SolvAttr SolvAttr::description  ( SOLVABLE_DESCRIPTION );   // translated
   const SolvAttr SolvAttr::insnotify    ( SOLVABLE_MESSAGEINS );    // translated

@@ -17,6 +17,7 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
+#include "zypp/RelCompare.h"
 
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/Solvable.h"
@@ -78,6 +79,11 @@ namespace zypp
     /** Regex-compiled attributes */
     mutable AttrCompiledStrMap _rcattrs;
     mutable AttrRegexMap _rattrs;
+
+    /** Edition condition operand */
+    mutable Edition _edition;
+    /** Operator for edition condition */
+    mutable Rel _op;
 
     /** Repos to search. */
     StrContainer _repos;
@@ -538,6 +544,8 @@ attremptycheckend:
   , _repos(pqimpl->_repos)
   , _kinds(pqimpl->_kinds)
   , _status_flags(pqimpl->_status_flags)
+  , _edition(pqimpl->_edition)
+  , _op(pqimpl->_op)
   {
     this->base_reference() = LookupAttr::iterator(dip_r, true); //!\todo pass chain_repos
     _has_next = (*base_reference() != sat::detail::noId);
@@ -556,6 +564,8 @@ attremptycheckend:
     , _repos(rhs._repos)
     , _kinds(rhs._kinds)
     , _status_flags(rhs._status_flags)
+    , _edition(rhs._edition)
+    , _op(rhs._op)
   { base_reference() = LookupAttr::iterator(rhs.base()); }
 
 
@@ -577,6 +587,8 @@ attremptycheckend:
     _repos = rhs._repos;
     _kinds = rhs._kinds;
     _status_flags = rhs._status_flags;
+    _edition = rhs._edition;
+    _op = rhs._op;
     return *this;
   }
 
@@ -604,7 +616,7 @@ attremptycheckend:
 
     bool new_solvable = true;
     bool matches = !_do_matching;
-    bool drop_by_kind_status = false;
+    bool drop_by_kind_status_edition = false;
     bool drop_by_repo = false;
     do
     {
@@ -612,6 +624,7 @@ attremptycheckend:
       {
         while(1)
         {
+          // whether to drop a resolvable not belonging to this repo
           drop_by_repo = false;
           if(!_repos.empty() &&
              _repos.find(base().get()->repo->name) == _repos.end())
@@ -620,13 +633,24 @@ attremptycheckend:
             break;
           }
 
-          drop_by_kind_status = false;
+          drop_by_kind_status_edition = false;
+
+          // whether to drop a resolvable not matching the edition condition
+          if (_op != Rel::ANY)
+          {
+            sat::Solvable s(_sid);
+            if (!compareByRel<Edition>( _op, s.edition(), _edition, Edition::Match()))
+            {
+              drop_by_kind_status_edition = true;
+              break;
+            }
+          }
 
           // whether to drop an uninstalled (repo) solvable
           if ( (_status_flags & PoolQuery::INSTALLED_ONLY) &&
               base().get()->repo->name != sat::Pool::instance().systemRepoName() )
           {
-            drop_by_kind_status = true;
+            drop_by_kind_status_edition = true;
             break;
           }
 
@@ -634,7 +658,7 @@ attremptycheckend:
           if ((_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
               base().get()->repo->name == sat::Pool::instance().systemRepoName())
           {
-            drop_by_kind_status = true;
+            drop_by_kind_status_edition = true;
             break;
           }
 
@@ -642,18 +666,17 @@ attremptycheckend:
           if (!_kinds.empty())
           {
             sat::Solvable s(_sid);
-            // the user wants to filter by kind.
             if (_kinds.find(s.kind()) == _kinds.end())
-              drop_by_kind_status = true;
+              drop_by_kind_status_edition = true;
           }
 
           break;
         }
 
-        matches = matches && !drop_by_kind_status && !drop_by_repo;
+        matches = matches && !drop_by_kind_status_edition && !drop_by_repo;
       }
 
-      if (_do_matching && !drop_by_kind_status)
+      if (_do_matching && !drop_by_kind_status_edition)
       {
         if (!matches)
         {
@@ -701,10 +724,10 @@ attremptycheckend:
         base_reference().nextSkipRepo();
         drop_by_repo = false;
       }
-      else if (drop_by_kind_status)
+      else if (drop_by_kind_status_edition)
       {
         base_reference().nextSkipSolvable();
-        drop_by_kind_status = false;
+        drop_by_kind_status_edition = false;
       }
 
       // copy the iterator to forward check for the next attribute ***
@@ -767,6 +790,13 @@ attremptycheckend:
   { _pimpl->_attrs[attr].insert(value); }
 
 
+  void PoolQuery::setEdition(const Edition & edition, const Rel & op)
+  { 
+    _pimpl->_edition = edition;
+    _pimpl->_op = op;
+  }
+
+
   void PoolQuery::setCaseSensitive(const bool value)
   {
     if (value)
@@ -821,6 +851,12 @@ attremptycheckend:
     AttrRawStrMap::const_iterator it = _pimpl->_attrs.find(attr);
     return it != _pimpl->_attrs.end() ? it->second : nocontainer;
   }
+
+  const Edition PoolQuery::edition() const
+  { return _pimpl->_edition; }
+  const Rel PoolQuery::editionRel() const
+  { return _pimpl->_op; }
+
 
   const PoolQuery::Kinds &
   PoolQuery::kinds() const
@@ -896,10 +932,10 @@ attremptycheckend:
    */
   struct PoolQueryAttr : public IdStringType<PoolQueryAttr>
   {
-    private:
-      friend class IdStringType<PoolQueryAttr>;
-      IdString _str;
-    public:
+  private:
+    friend class IdStringType<PoolQueryAttr>;
+    IdString _str;
+  public:
 
     //noAttr
     PoolQueryAttr(){}
@@ -912,10 +948,10 @@ attremptycheckend:
         : _str( str_r )
       {}
 
-    //unknown atributes
+    // unknown atributes
     static const PoolQueryAttr noAttr;
 
-    // own attributes
+    // PoolQuery's own attributes
     static const PoolQueryAttr repoAttr;
     static const PoolQueryAttr kindAttr;
     static const PoolQueryAttr stringAttr;
@@ -923,6 +959,7 @@ attremptycheckend:
     static const PoolQueryAttr requireAllAttr;
     static const PoolQueryAttr caseSensitiveAttr;
     static const PoolQueryAttr installStatusAttr;
+    static const PoolQueryAttr editionAttr;
   };
 
   const PoolQueryAttr PoolQueryAttr::noAttr;
@@ -934,6 +971,7 @@ attremptycheckend:
   const PoolQueryAttr PoolQueryAttr::requireAllAttr("require_all");
   const PoolQueryAttr PoolQueryAttr::caseSensitiveAttr("case_sensitive");
   const PoolQueryAttr PoolQueryAttr::installStatusAttr("install_status");
+  const PoolQueryAttr PoolQueryAttr::editionAttr("version");
 
   class StringTypeAttr : public IdStringType<PoolQueryAttr>
   {
@@ -955,13 +993,14 @@ attremptycheckend:
     static const StringTypeAttr globAttr;
     static const StringTypeAttr wordAttr;
   };
-    const StringTypeAttr StringTypeAttr::noAttr;
 
-    const StringTypeAttr StringTypeAttr::exactAttr("exact");
-    const StringTypeAttr StringTypeAttr::substringAttr("substring");
-    const StringTypeAttr StringTypeAttr::regexAttr("regex");
-    const StringTypeAttr StringTypeAttr::globAttr("glob");
-    const StringTypeAttr StringTypeAttr::wordAttr("word");
+  const StringTypeAttr StringTypeAttr::noAttr;
+
+  const StringTypeAttr StringTypeAttr::exactAttr("exact");
+  const StringTypeAttr StringTypeAttr::substringAttr("substring");
+  const StringTypeAttr StringTypeAttr::regexAttr("regex");
+  const StringTypeAttr StringTypeAttr::globAttr("glob");
+  const StringTypeAttr StringTypeAttr::wordAttr("word");
 
   ///////////////////////////////////////////////////////////////////
 
@@ -1100,6 +1139,19 @@ attremptycheckend:
           WAR << "Unknown value for install status " << attrValue << endl;
         }
       }
+      else if ( attribute == PoolQueryAttr::editionAttr)
+      {
+        string::size_type pos;
+        Rel rel;
+        if (attrValue.find_first_of("=<>") == 0)
+        {
+          pos = attrValue.find_last_of("=<>");
+          rel = Rel(attrValue.substr(0, pos+1));
+          attrValue = attrValue.substr(pos+1, attrValue.npos);
+        }
+
+        setEdition(Edition(attrValue), rel);
+      }
       else if ( attribute==PoolQueryAttr::noAttr )
       {
         WAR << "empty attribute name" << endl;
@@ -1134,6 +1186,9 @@ attremptycheckend:
       str << PoolQueryAttr::kindAttr.asString() << ": " 
           << it->idStr() << delim ;
     }
+
+    if (editionRel() != Rel::ANY && edition() != Edition::noedition)
+      str << PoolQueryAttr::editionAttr.asString() << ": " << editionRel() << " " << edition() << delim;
 
     if (matchType()!=q.matchType())
     {

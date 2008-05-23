@@ -21,6 +21,7 @@
 
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Function.h"
+#include "zypp/Edition.h"
 
 extern "C"
 {
@@ -152,13 +153,13 @@ namespace zypp
     void addAttribute(const sat::SolvAttr & attr, const std::string & value = "");
 
     /**
-     * Filter by Selectable status.
-     *
-     * This should cover also plain 'is installed' and 'not installed' statuses.
-     *
-     * \param status Selectable status (zypp::ui::Status enum)
+     * Set version condition. This will filter out solvables not matching
+     * <tt>solvableEdition \a op \a edition</tt>.
+     * 
+     * \param edition Edition to look for.
+     * \param op      Found-wanted relation operator.
      */
-    //void addStatus(const Status status);
+    void setEdition(const Edition & edition, const Rel & op = Rel::EQ);
 
     /**
      * Add dependency filter.
@@ -205,10 +206,13 @@ namespace zypp
 
 
     /**
-     * Require that all of the values set by addString, addAttribute, addDep
-     * match the values of respective attributes. 
+     * Require that all of the values set by addString or addAttribute
+     * match the values of respective attributes.
+     * 
+     * \todo doesn't work yet, don't use this function
      */
     void setRequireAll(const bool require_all = true);
+
 
     /** \name getters */
     //@{
@@ -226,6 +230,9 @@ namespace zypp
 
     const StrContainer & repos() const;
 
+    const Edition edition() const;
+    const Rel editionRel() const;
+
     /**
      * returns true if search is case sensitive
      */
@@ -235,14 +242,18 @@ namespace zypp
     bool matchSubstring() const;
     bool matchGlob() const;
     bool matchRegex() const;
+    bool matchWord() const;
+
     /**
      * Returns currently used string matching type.
      * \see satsolver/repo.h
      */
     int  matchType() const;
 
-    bool matchWord() const;
-
+    /**
+     * Whether all values added via addString() or addAttribute() are required
+     * to match the values of the respective attributes.
+     */
     bool requireAll() const;
 
     StatusFilter statusFilterFlags() const;
@@ -385,6 +396,9 @@ namespace zypp
     PoolQuery::Kinds _kinds;
     /** Installed status filter flags. \see PoolQuery::StatusFilter */
     int _status_flags;
+
+    Edition _edition;
+    Rel _op;
     //@}
 
     /** used to copy current iterator in order to forward check for next attributes */
