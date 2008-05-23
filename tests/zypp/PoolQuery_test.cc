@@ -560,6 +560,19 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
 }
 
+//! \todo FIXME this segfaults currently - one addString() + (version or kind or installed status condition)
+/*
+BOOST_AUTO_TEST_CASE(pool_query_FIXME)
+{
+  cout << "****FIXME****"  << endl;
+  PoolQuery q;
+  q.addString("zypper");
+  q.setEdition(Edition("0.10.3-4"), Rel::GE);
+
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+}
+*/
+
 /*
 BOOST_AUTO_TEST_CASE(pool_query_X)
 {
