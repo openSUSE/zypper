@@ -216,6 +216,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
 
+  PoolItemSet obsoletedItems;
+
   Target_Ptr target;
   try {
 	target = getZYpp()->target();
@@ -556,6 +558,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       if ( doesObsoleteItem (provider, it->first ) ) {
 	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
+      obsoletedItems.insert (it->first);
     }
 
   }
@@ -579,6 +582,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    if ( ! doesObsoleteItem (item, it->first ) ) {
 		it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 	    }
+	    obsoletedItems.insert (it->first);	    
 	    guess = PoolItem();
 	    break;
 	} else {
@@ -609,6 +613,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		    if ( ! doesObsoleteItem (item, it->first ) ) {
 			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 		    }
+		    obsoletedItems.insert (it->first);	    		    
 		    guess = PoolItem();
 		    break;
 		} else {
@@ -629,6 +634,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       if ( ! doesObsoleteItem (guess, it->first ) ) {
 	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
+      obsoletedItems.insert (it->first);	          
       ++opt_stats_r.chk_replaced_guessed;
     }
   }
@@ -644,8 +650,51 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   // Unmaintained packages which does not fit to the updated system
   // (broken dependencies) will be deleted.
   // Make a solverrun and return it to the calling function
-  return checkUnmaintainedItems ();  
   
+  bool ret=checkUnmaintainedItems ();
+
+  // Packages which obsoletes and do NOT required other installed packages will be installed if
+  // no other packages obsolete the installed package too.
+  for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
+      PoolItem item = *it;
+      if (item.status().staysUninstalled()) {
+	  for( Capabilities::const_iterator pit = item->dep( Dep::OBSOLETES ).begin(); pit != item->dep( Dep::OBSOLETES ).end(); ++pit) {
+	      // find ALL providers
+	      sat::WhatProvides possibleProviders(*pit);
+	      for_( provIter, possibleProviders.begin(), possibleProviders.end() ) {
+		  PoolItem provider = ResPool::instance().find( *provIter );
+		  if (provider.status().isInstalled()
+		      && !provider.status().isToBeUninstalled()
+		      && obsoletedItems.find(provider) == obsoletedItems.end()) {
+		      
+		      // checking if there is another item with the same obsoletes. If there is one
+		      // it would be randomly which package will be taken for update. So it is
+		      // safier not to update at all.
+		      bool found = false;
+		      for ( ResPool::const_iterator itOther = _pool.begin(); itOther != _pool.end() && !found; ++itOther ) {
+			  PoolItem itemOther = *itOther;
+			  if (itemOther != item
+			      && itemOther.status().staysUninstalled()
+			      && doesObsoleteItem(itemOther,provider)) {
+			      found = true;
+			      break;
+			  }
+		      }
+		      if (!found) {
+			  MIL << item << " obsoletes " << provider << " but do not provides it. --> replace it" << endl;
+			  it->status().setToBeInstalled( ResStatus::APPL_HIGH );
+		      } else {
+			  MIL << item << " obsoletes " << provider << " but do not provides it." << endl;
+			  MIL << "  There is another item which obsoletes it too. I do not know whichone has to be taken" << endl;			  
+		      }
+		      obsoletedItems.insert (provider);	          		  
+		  }	
+	      }
+	  }
+      }
+  }
+
+  return ret;
 }
 
 
