@@ -107,23 +107,24 @@ void Downloader::download( MediaSetAccess &media,
   
   SignatureFileChecker sigchecker;
 
-  // this file is optional, may be the signature is not there
-  this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
-  this->start( dest_dir, *_media_ptr);
-  this->reset();
+  if ( _media_ptr->doesFileExist(sigpath) )
+  {
+      this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
+     this->start( dest_dir, *_media_ptr);
+     this->reset();
+     sigchecker = SignatureFileChecker(dest_dir + sigpath);
+  }
+ 
 
-  // only need a checker if the signature exist.
-  if ( PathInfo(dest_dir + sigpath).isExist() )
-      sigchecker = SignatureFileChecker(dest_dir + sigpath);
+  if ( _media_ptr->doesFileExist(keypath) )
+  {
+      this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
+    this->start( dest_dir, *_media_ptr);
+    this->reset();
+    sigchecker.addPublicKey(dest_dir + keypath);
+  }
 
-  // the key path may also not be there
-  this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
-  this->start( dest_dir, *_media_ptr);
-  this->reset();
-  
-  if ( PathInfo(dest_dir + keypath).isExist() )
-      sigchecker.addPublicKey(dest_dir + keypath);
-
+ 
   this->start( dest_dir, *_media_ptr );
 
   if ( ! progress.tick() )

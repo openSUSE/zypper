@@ -213,14 +213,6 @@ namespace zypp
         catch (Exception & excpt_r)
         {
           ZYPP_CAUGHT(excpt_r);
-
-          // do not error on optional files
-          if ((*it_res)->location.optional() )
-          {
-              MIL << "Skipping optional file " << (*it_res)->location << endl;
-              continue;
-          }
-          
           excpt_r.remember("Can't provide " + (*it_res)->location.filename().asString() + " : " + excpt_r.msg());
           ZYPP_RETHROW(excpt_r);
         }

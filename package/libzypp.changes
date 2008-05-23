@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sat May 24 01:23:44 CEST 2008 - dmacvicar@suse.de
+
+- revert commit don't check for existence of keys,
+  to avoid a non needed HEAD request. (related bnc#381280)
+  as it creates popup error callbacks due to the 404's in
+  the keys. Leave however the OnMediaLocation::optional()
+  API to look for another fix strategy.
+
+-------------------------------------------------------------------
 Fri May 23 15:52:20 CEST 2008 - dmacvicar@suse.de
 
 - define path for messages and scripts and document

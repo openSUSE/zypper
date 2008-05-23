@@ -113,11 +113,6 @@ namespace zypp
        * \param on_media_file location of the file on media
        * \return local pathname of the requested file
        *
-       * If \p on_media_file is marked as optional, then
-       * in case of failure the user interaction callbacks
-       * will be ignored and the exception will throw
-       * inmediately.
-       *
        * \throws MediaException if a problem occurs,
        *        see \ref media::MediaManager::provideFile()
        */
