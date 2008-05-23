@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: Wed Apr 23 19:50:43 UTC 2008\n"
+"PO-Revision-Date: Mon May 12 09:37:49 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr "Adangme-Sprache"
 #: ../zypp/RepoManager.cc:1007
 #, c-format
 msgid "Adding repository '%s'"
-msgstr "Füge Repositorium '%s' hinzu"
+msgstr "Füge Repository '%s' hinzu"
 
 #: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
@@ -584,7 +584,7 @@ msgstr "Bugi-Sprache"
 #: ../zypp/RepoManager.cc:719
 #, c-format
 msgid "Building repository '%s' cache"
-msgstr "Erzeuge Zwischenspeicher für Repositorium '%s'"
+msgstr "Erzeuge Zwischenspeicher für Repository '%s'"
 
 #. :BFA:854:
 #: ../zypp/CountryCode.cc:246
@@ -686,7 +686,7 @@ msgstr "Kann PTY nicht öffnen (%s)."
 #: ../zypp/repo/RepoProvideFile.cc:216
 #, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Kann Datei '%s' aus Repositorium '%s' nicht anbieten."
+msgstr "Kann Datei '%s' aus Repository '%s' nicht anbieten."
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -2810,7 +2810,7 @@ msgstr "Kein Code"
 
 #: ../zypp/repo/RepoProvideFile.cc:222
 msgid "No url in repository."
-msgstr "Das Repositorium enthält keine URL."
+msgstr "Das Repository enthält keine URL."
 
 #. language code: nog
 #: ../zypp/LanguageCode.cc:884
@@ -3163,7 +3163,7 @@ msgstr "Die Angabe des relativen Pfads ist nicht erlaubt, wenn die Zertifizierun
 #: ../zypp/RepoManager.cc:1114
 #, c-format
 msgid "Removing repository '%s'"
-msgstr "Entferne Repositorium '%s'"
+msgstr "Entferne Repository '%s'"
 
 #: ../zypp/parser/susetags/RepoParser.cc:232
 msgid "Required file is missing: "
@@ -4426,7 +4426,7 @@ msgstr "uninstallierbare Anbieter: "
 #~ msgstr "Die Analyse von Pfadparametern wird für diese URL nicht unterstützt"
 
 #~ msgid "RepoInfo alias (%s) does not match repository name (%s)"
-#~ msgstr "RepoInfo-Alias (%s) passt nicht zum Namen des Repositorium (%s)"
+#~ msgstr "RepoInfo-Alias (%s) passt nicht zum Namen des Repositorys (%s)"
 
 #~ msgid "Reading '%s' repository cache"
 #~ msgstr "Lese '%s' Repository Cache"

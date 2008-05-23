@@ -4,17 +4,17 @@
 # Copyright (C) 2002, 2003 SuSE Linux AG.
 # Copyright (C) 2000, 2001 SuSE GmbH.
 #
-# Jan Kupec <jkupec@suse.cz>, 2007.
 # Stanislav Visnovsky <visnovsky@kde.org>, 2003.
 # Milan Hromada <mhromada@elas.sk>, 2000.
+# Ladislav Michnovič <lmichnovic@suse.cz>, 2008.
 # Ján Kupec <jkupec@suse.cz>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2007-09-15 19:06+0200\n"
-"Last-Translator: Ján Kupec <jkupec@suse.cz>\n"
+"PO-Revision-Date: 2008-05-14 14:32+0100\n"
+"Last-Translator: Ladislav Michnovič <lmichnovic@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,21 +23,22 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:933
-#, fuzzy
 msgid ""
 "\n"
 "uninstallable providers: "
-msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"
+msgstr ""
+"\n"
+"neinštalovateľní poskytovatelia:"
 
 #: ../zypp/media/MediaException.cc:214
 #, c-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
+msgstr " problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre '%s'."
 
 #: ../zypp/solver/detail/SATResolver.cc:880
-#, fuzzy, c-format
+#, c-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s je v konflikte s %s"
+msgstr "%s je v konflikte s %s poskytovaný %s"
 
 #. %s = filename of rpm package
 #. timestamp
@@ -54,14 +55,14 @@ msgid "%s installed ok"
 msgstr "%s bol úspešne nainštalovaný"
 
 #: ../zypp/solver/detail/SATResolver.cc:866
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not installable"
-msgstr "nenainštalovaný"
+msgstr "%s nie je inštalovateľný"
 
 #: ../zypp/solver/detail/SATResolver.cc:885
-#, fuzzy, c-format
+#, c-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s nahrádza %s"
+msgstr "%s nahrádzuje %s poskytovaný %s"
 
 #. %s = name of rpm package
 #. timestamp
@@ -108,7 +109,8 @@ msgstr "Adangme"
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
 
-#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
+#: ../zypp/target/rpm/RpmDb.cc:2066
+#: ../zypp/target/rpm/RpmDb.cc:2185
 msgid "Additional rpm output:"
 msgstr "Ďalší výstup príkazu rpm:"
 
@@ -172,7 +174,8 @@ msgid "Albania"
 msgstr "Albánsko"
 
 #. language code: alb sqi sq
-#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+#: ../zypp/LanguageCode.cc:262
+#: ../zypp/LanguageCode.cc:264
 msgid "Albanian"
 msgstr "Albánsky"
 
@@ -284,7 +287,8 @@ msgstr "Arménsko"
 
 # AM
 #. language code: arm hye hy
-#: ../zypp/LanguageCode.cc:284 ../zypp/LanguageCode.cc:286
+#: ../zypp/LanguageCode.cc:284
+#: ../zypp/LanguageCode.cc:286
 msgid "Armenian"
 msgstr "Arménsky"
 
@@ -334,7 +338,8 @@ msgstr "Rakúsko"
 msgid "Austronesian (Other)"
 msgstr "Austronézsky (ostatné)"
 
-#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
+#: ../zypp/media/MediaCurl.cc:761
+#: ../zypp/media/MediaCurl.cc:829
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
@@ -375,11 +380,11 @@ msgstr "Ázerbajdžánsky"
 #: ../zypp/media/MediaException.cc:47
 #, c-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Nesprávne meno súboru: %s"
 
 #: ../zypp/media/MediaException.cc:77
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Nesprávny prípojný bod média"
 
 # BS
 #. :BRA:076:
@@ -448,7 +453,8 @@ msgid "Bashkir"
 msgstr "Bashkir"
 
 #. language code: baq eus eu
-#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+#: ../zypp/LanguageCode.cc:326
+#: ../zypp/LanguageCode.cc:328
 msgid "Basque"
 msgstr "Baskitský"
 
@@ -642,7 +648,8 @@ msgstr "Burkina Faso"
 
 #  tree node string - means "hardware bus"
 #. language code: bur mya my
-#: ../zypp/LanguageCode.cc:372 ../zypp/LanguageCode.cc:374
+#: ../zypp/LanguageCode.cc:372
+#: ../zypp/LanguageCode.cc:374
 msgid "Burmese"
 msgstr "Burmese"
 
@@ -670,9 +677,8 @@ msgid "Cameroon"
 msgstr "Kamerun"
 
 #: ../zypp/sat/detail/PoolImpl.cc:147
-#, fuzzy
 msgid "Can not create sat-pool."
-msgstr "Nepodarilo sa vytvoriť dočasný súbor %s: %m"
+msgstr "Nepodarilo sa vytvoriť sat-spoločné pole."
 
 #: ../zypp/thread/Mutex.cc:77
 msgid "Can't acquire the mutex lock"
@@ -681,23 +687,23 @@ msgstr "Nemôžem získať zámok mutexu"
 #: ../zypp/ExternalProgram.cc:245
 #, c-format
 msgid "Can't chdir to '/' inside chroot (%s)."
-msgstr ""
+msgstr "Nemôžem zmeniť adresár na '/' vo vnútri chroot-u (%s)."
 
 #: ../zypp/ExternalProgram.cc:238
 #, c-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "Nemôžem spraviť chroot do '%s' (%s)."
 
 #. don't want to get here
 #: ../zypp/ExternalProgram.cc:259
 #, c-format
 msgid "Can't exec '%s' (%s)."
-msgstr ""
+msgstr "Nemôžem spustiť '%s' (%s)."
 
 #: ../zypp/ExternalProgram.cc:267
 #, c-format
 msgid "Can't fork (%s)."
-msgstr ""
+msgstr "Nemôžem spraviť rozdelenie programu (%s)."
 
 #: ../zypp/thread/Mutex.cc:33
 msgid "Can't initialize mutex attributes"
@@ -708,24 +714,24 @@ msgid "Can't initialize recursive mutex"
 msgstr "Nemôžem inicializovať rekurzívny mutex"
 
 #: ../zypp/base/InterProcessMutex.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open lock file: %s"
-msgstr "Nemôžem otvoriť súbor '%1'."
+msgstr "Nemôžem otvoriť súbor so zámkom: %s."
 
 #: ../zypp/ExternalProgram.cc:174
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pipe (%s)."
-msgstr "Nemôžem otvoriť súbor '%1'."
+msgstr "Nemôžem otvoriť rúru (%s)"
 
 #: ../zypp/ExternalProgram.cc:163
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open pty (%s)."
-msgstr "Nepodarilo sa otvoriť %s: %m"
+msgstr "Nemôžem otvoriť pty (%s)"
 
 #: ../zypp/repo/RepoProvideFile.cc:216
-#, fuzzy, c-format
+#, c-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Nepodarilo sa poskytnúť súbor %s z repozitára %s"
+msgstr "Nemôžem poskytnúť súbor '%s' z repozitára '%s'"
 
 #: ../zypp/thread/Mutex.cc:87
 msgid "Can't release the mutex lock"
@@ -743,21 +749,21 @@ msgstr "Kanada"
 #: ../zypp/KeyRing.cc:276
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
-msgstr ""
+msgstr "Nemôžem vytvoriť verejný kľúč %s zo zväzku %s do súboru %s"
 
 #: ../zypp/media/MediaException.cc:182
 msgid "Cannot eject any media"
-msgstr ""
+msgstr "Nemôžem vysunúť žiadne médium"
 
 #: ../zypp/media/MediaException.cc:184
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot eject media '%s'"
-msgstr "Nie je možné otvoriť položku plochy '%s'"
+msgstr "Nemôžem vysunúť médium '%s'"
 
 #: ../zypp/media/MediaException.cc:67
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot write file '%s'."
-msgstr "Nemôžem otvoriť súbor '%1'."
+msgstr "Nemôžem zapísať súbor '%s'."
 
 # CV
 #. :CUB:192:
@@ -879,7 +885,8 @@ msgid "China"
 msgstr "Čína"
 
 #. language code: chi zho zh
-#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+#: ../zypp/LanguageCode.cc:400
+#: ../zypp/LanguageCode.cc:402
 msgid "Chinese"
 msgstr "Čínsky"
 
@@ -938,17 +945,16 @@ msgstr "Kolumbia"
 #: ../zypp/ExternalProgram.cc:346
 #, c-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "Stav príkazu po skončení je %d."
 
 #: ../zypp/ExternalProgram.cc:371
-#, fuzzy
 msgid "Command exited with unknown error."
-msgstr "Príkaz, ktorý sa má vykonať pri pripájaní"
+msgstr "Príkaz skončil s neznámou chybou."
 
 #: ../zypp/ExternalProgram.cc:366
 #, c-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "Príkaz bol zabitý signálom %d (%s)."
 
 # KM
 #. :KIR:296:
@@ -959,7 +965,8 @@ msgstr "Comoros"
 # CG
 #. :CCK:166:
 #. :CAF:140:
-#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+#: ../zypp/CountryCode.cc:262
+#: ../zypp/CountryCode.cc:264
 msgid "Congo"
 msgstr "Kongo"
 
@@ -1037,7 +1044,8 @@ msgid "Croatia"
 msgstr "Chorvátsko"
 
 #. language code: scr hrv hr
-#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+#: ../zypp/LanguageCode.cc:1008
+#: ../zypp/LanguageCode.cc:1010
 msgid "Croatian"
 msgstr "Chorvátsky"
 
@@ -1059,7 +1067,8 @@ msgid "Cyprus"
 msgstr "Cyprus"
 
 #. language code: cze ces cs
-#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+#: ../zypp/LanguageCode.cc:446
+#: ../zypp/LanguageCode.cc:448
 msgid "Czech"
 msgstr "Český"
 
@@ -1142,12 +1151,15 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"Chyba sťahovania (curl) pre '%s':\n"
+"Kód chyby: %s\n"
+"Chybová správa: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: ../zypp/media/MediaException.cc:84
-#, fuzzy, c-format
+#, c-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Zlyhala inicializácia cieľa:"
+msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
 
 #. language code: dra
 #: ../zypp/LanguageCode.cc:470
@@ -1166,7 +1178,8 @@ msgid "Dubious type '%s' for %u byte checksum '%s'"
 msgstr ""
 
 #. language code: dut nld nl
-#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+#: ../zypp/LanguageCode.cc:478
+#: ../zypp/LanguageCode.cc:480
 msgid "Dutch"
 msgstr "Holandský"
 
@@ -1274,7 +1287,7 @@ msgstr "Eritrea"
 #: ../zypp/media/MediaException.cc:161
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
+msgstr "Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre '%s':"
 
 # SY
 # fuzzy
@@ -1315,29 +1328,28 @@ msgid "Ewondo"
 msgstr "Ewondo"
 
 #: ../zypp/KeyRing.cc:558
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "Nepodarilo sa načítať modul \"%s\"."
+msgstr "Nepodarilo zmazať kľúč."
 
 #: ../zypp/target/rpm/RpmDb.cc:1045
 #, c-format
 msgid "Failed to import public key from file %s: %s"
-msgstr ""
+msgstr "Nepodarilo sa importovať verejný kľúč zo súboru %s: %s"
 
 #: ../zypp/media/MediaException.cc:31
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Nepodarilo sa načítať modul \"%s\"."
+msgstr "Nepodarilo sa pripojiť %s na %s."
 
 #: ../zypp/target/rpm/RpmDb.cc:1122
 #, c-format
 msgid "Failed to remove public key %s: %s"
-msgstr ""
+msgstr "Nepodarilo zmazať verejný kľúč %s: %s"
 
 #: ../zypp/media/MediaException.cc:41
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to unmount %s"
-msgstr "Nepodarilo sa načítať modul \"%s\"."
+msgstr "Nepodarilo sa odpojiť %s."
 
 # FK
 #. :FJI:242:
@@ -1481,7 +1493,8 @@ msgid "France"
 msgstr "Francúzsko"
 
 #. language code: fre fra fr
-#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+#: ../zypp/LanguageCode.cc:522
+#: ../zypp/LanguageCode.cc:524
 msgid "French"
 msgstr "Francúzsky"
 
@@ -1580,9 +1593,8 @@ msgid "Geez"
 msgstr "Geez"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
-#, fuzzy
 msgid "Generally ignore of some dependecies"
-msgstr "Ignoruj túto požiadavku pre všetky prípady"
+msgstr "Ignorovať všeobecne pre niektoré závislosti"
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1590,12 +1602,14 @@ msgid "Georgia"
 msgstr "Gruzínsko"
 
 #. language code: geo kat ka
-#: ../zypp/LanguageCode.cc:544 ../zypp/LanguageCode.cc:546
+#: ../zypp/LanguageCode.cc:544
+#: ../zypp/LanguageCode.cc:546
 msgid "Georgian"
 msgstr "Gruzínsky"
 
 #. language code: ger deu de
-#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+#: ../zypp/LanguageCode.cc:548
+#: ../zypp/LanguageCode.cc:550
 msgid "German"
 msgstr "Nemecký"
 
@@ -1666,7 +1680,8 @@ msgid "Greek, Ancient (to 1453)"
 msgstr "Grécky starobylý (do r. 1453)"
 
 #. language code: gre ell el
-#: ../zypp/LanguageCode.cc:578 ../zypp/LanguageCode.cc:580
+#: ../zypp/LanguageCode.cc:578
+#: ../zypp/LanguageCode.cc:580
 msgid "Greek, Modern (1453-)"
 msgstr "Grécky moderný (od r. 1453)"
 
@@ -1746,7 +1761,8 @@ msgstr "Haiti"
 msgid "Haitian"
 msgstr "Haitian"
 
-#: ../zypp/target/hal/HalException.h:46 ../zypp/target/hal/HalException.h:55
+#: ../zypp/target/hal/HalException.h:46
+#: ../zypp/target/hal/HalException.h:55
 #: ../zypp/target/hal/HalException.h:64
 msgid "Hal Exception"
 msgstr "Výnimka HAL"
@@ -1872,7 +1888,8 @@ msgid "Iceland"
 msgstr "Island"
 
 #. language code: ice isl is
-#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+#: ../zypp/LanguageCode.cc:622
+#: ../zypp/LanguageCode.cc:624
 msgid "Icelandic"
 msgstr "Islandský"
 
@@ -1888,9 +1905,9 @@ msgstr "Igbo"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore some dependencies of %s"
-msgstr "nie je možné vyriešiť závislosti"
+msgstr "Ignorovať niektoré závislosti %s"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -2014,9 +2031,10 @@ msgstr "Neplatný port '%s'"
 #: ../zypp/PoolQuery.cc:419
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
+msgstr "Neplatný regulárny výraz '%s': regcomp vrátil %d"
 
-#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
+#: ../zypp/media/MediaCurl.cc:758
+#: ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
 msgstr "Neplatné meno používateľa alebo heslo."
 
@@ -2503,7 +2521,8 @@ msgid "Macedonia"
 msgstr "Macedónsko"
 
 #. language code: mac mkd mk
-#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+#: ../zypp/LanguageCode.cc:772
+#: ../zypp/LanguageCode.cc:774
 msgid "Macedonian"
 msgstr "Macedónsky"
 
@@ -2548,7 +2567,8 @@ msgid "Malawi"
 msgstr "Malawi"
 
 #. language code: may msa ms
-#: ../zypp/LanguageCode.cc:800 ../zypp/LanguageCode.cc:802
+#: ../zypp/LanguageCode.cc:800
+#: ../zypp/LanguageCode.cc:802
 msgid "Malay"
 msgstr "Malajský"
 
@@ -2571,7 +2591,7 @@ msgstr "Mali"
 
 #: ../zypp/media/MediaException.cc:115
 msgid "Malformed URI"
-msgstr ""
+msgstr "Chybné URI"
 
 # ML
 #. :MKD:807:
@@ -2621,7 +2641,8 @@ msgid "Manx"
 msgstr "Manx"
 
 #. language code: mao mri mi
-#: ../zypp/LanguageCode.cc:790 ../zypp/LanguageCode.cc:792
+#: ../zypp/LanguageCode.cc:790
+#: ../zypp/LanguageCode.cc:792
 msgid "Maori"
 msgstr "Maori"
 
@@ -2699,7 +2720,7 @@ msgstr ""
 
 #: ../zypp/media/MediaException.cc:72
 msgid "Medium not attached"
-msgstr ""
+msgstr "Médium nie je pripojené"
 
 #: ../zypp/media/MediaException.cc:53
 #, c-format
@@ -2844,7 +2865,8 @@ msgstr "Namíbia"
 
 #. language code: nau na
 #. :NPL:524:
-#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+#: ../zypp/LanguageCode.cc:858
+#: ../zypp/CountryCode.cc:387
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -2965,7 +2987,8 @@ msgstr "Niuean"
 
 #. Defined LanguageCode constants
 #. Defined CountryCode constants
-#: ../zypp/LanguageCode.cc:225 ../zypp/CountryCode.cc:215
+#: ../zypp/LanguageCode.cc:225
+#: ../zypp/CountryCode.cc:215
 msgid "No Code"
 msgstr "Žiadny kód"
 
@@ -3206,7 +3229,8 @@ msgid "Permission to access '%s' denied."
 msgstr ""
 
 #. language code: per fas fa
-#: ../zypp/LanguageCode.cc:938 ../zypp/LanguageCode.cc:940
+#: ../zypp/LanguageCode.cc:938
+#: ../zypp/LanguageCode.cc:940
 msgid "Persian"
 msgstr "Perzský"
 
@@ -3295,16 +3319,17 @@ msgstr "Katar"
 msgid "Quechua"
 msgstr "Quechua"
 
-#: ../zypp/url/UrlBase.cc:782 ../zypp/url/UrlBase.cc:1229
+#: ../zypp/url/UrlBase.cc:782
+#: ../zypp/url/UrlBase.cc:1229
 msgid "Query string parsing not supported for this URL"
 msgstr "Query string nie je pre túto URL povolený"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
+#: ../zypp/target/rpm/RpmDb.cc:888
+#: ../zypp/target/rpm/RpmDb.cc:2057
 #: ../zypp/target/rpm/RpmDb.cc:2177
-#, fuzzy
 msgid "RPM failed: "
-msgstr "zlyhalo"
+msgstr "RPM zlyhalo:"
 
 #. language code: roh rm
 #: ../zypp/LanguageCode.cc:970
@@ -3328,7 +3353,8 @@ msgstr "Rapanui"
 msgid "Rarotongan"
 msgstr "Rarotongan"
 
-#: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
+#: ../zypp/url/UrlBase.cc:1117
+#: ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
 msgstr "Relatívna cesta nie je povolená v prípade, že je zadaná autorita"
 
@@ -3358,7 +3384,8 @@ msgid "Romania"
 msgstr "Rumunsko"
 
 #. language code: rum ron ro
-#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+#: ../zypp/LanguageCode.cc:974
+#: ../zypp/LanguageCode.cc:976
 msgid "Romanian"
 msgstr "Rumunský"
 
@@ -3524,7 +3551,8 @@ msgid "Serbia and Montenegro"
 msgstr "Srbsko a Čierna hora"
 
 #. language code: scc srp sr
-#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+#: ../zypp/LanguageCode.cc:1000
+#: ../zypp/LanguageCode.cc:1002
 msgid "Serbian"
 msgstr "Srbský"
 
@@ -3576,9 +3604,9 @@ msgid "Sign Languages"
 msgstr "Sign Languages"
 
 #: ../zypp/KeyRing.cc:568
-#, fuzzy, c-format
+#, c-format
 msgid "Signature file %s not found"
-msgstr "Zdrojový balík '%s' nebol nájdený."
+msgstr "Podpis súboru %s nebol nájdený."
 
 #. language code: bla
 #: ../zypp/LanguageCode.cc:354
@@ -3627,7 +3655,8 @@ msgid "Slavic (Other)"
 msgstr "Slovanský (ostatné)"
 
 #. language code: slo slk sk
-#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+#: ../zypp/LanguageCode.cc:1032
+#: ../zypp/LanguageCode.cc:1034
 msgid "Slovak"
 msgstr "Slovenský"
 
@@ -3832,7 +3861,7 @@ msgstr "Syriac"
 #: ../zypp/media/MediaException.cc:91
 #, c-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "Systémová výnimka '%s' na médiu '%s'."
 
 #: ../zypp/ZYppFactory.cc:354
 #, c-format
@@ -3919,7 +3948,8 @@ msgid "This action is being run by another program already."
 msgstr ""
 
 #. language code: tib bod bo
-#: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
+#: ../zypp/LanguageCode.cc:1112
+#: ../zypp/LanguageCode.cc:1114
 msgid "Tibetan"
 msgstr "Tibetský"
 
@@ -3968,7 +3998,8 @@ msgstr "Tok Pisin"
 # TK
 #. language code: tkl
 #. :TJK:762:
-#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+#: ../zypp/LanguageCode.cc:1122
+#: ../zypp/CountryCode.cc:435
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -4067,7 +4098,8 @@ msgstr "Ostrovy Turks a Caicos"
 # TV
 #. language code: tvl
 #. :TTO:780:
-#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+#: ../zypp/LanguageCode.cc:1152
+#: ../zypp/CountryCode.cc:442
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -4130,7 +4162,8 @@ msgstr "Nie je možné vytvoriť spojenie pomocou dbus"
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "Nie je možné inicializovať HAL context - overte či je spustený hald."
 
-#: ../zypp/Url.cc:322 ../zypp/Url.cc:336
+#: ../zypp/Url.cc:322
+#: ../zypp/Url.cc:336
 msgid "Unable to parse Url components"
 msgstr "Nie je možné prečítať zložky URL"
 
@@ -4336,7 +4369,8 @@ msgid "Washo"
 msgstr "Washo"
 
 #. language code: wel cym cy
-#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+#: ../zypp/LanguageCode.cc:1192
+#: ../zypp/LanguageCode.cc:1194
 msgid "Welsh"
 msgstr "Welšský"
 
@@ -4448,9 +4482,9 @@ msgid "architecture change of %s to %s"
 msgstr ""
 
 #: ../zypp/solver/detail/SATResolver.cc:875
-#, fuzzy, c-format
+#, c-format
 msgid "cannot install both %s and %s"
-msgstr "Nie je možné nainštalovať %s"
+msgstr "Nie je možné nainštalovať oboje %s a %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:859
 #, fuzzy
@@ -4543,9 +4577,9 @@ msgid "nothing provides requested %s"
 msgstr "Žiaden balíček neposkytuje %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:856
-#, fuzzy, c-format
+#, c-format
 msgid "problem with installed package %s"
-msgstr "Problém pri inštalovaní zdrojového balíka %s-%s:"
+msgstr "Problém s nainštalovaným balíkom %s"
 
 #: ../zypp/solver/detail/SATResolver.cc:1144
 #, c-format
@@ -4568,7 +4602,8 @@ msgstr ""
 "Balíček rpm vytvoril %s as %s.\n"
 "Tu je prvých 25 riadkov rozdielov:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
+#: ../zypp/target/rpm/RpmDb.cc:2055
+#: ../zypp/target/rpm/RpmDb.cc:2175
 msgid "rpm output:"
 msgstr "Výstup príkazu rpm:"
 
@@ -4589,55 +4624,39 @@ msgstr ""
 "Tu je prvých 25 riadkov rozdielov:\n"
 
 #: ../zypp/solver/detail/SATResolver.cc:935
-#, fuzzy
 msgid "uninstallable providers: "
-msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by poskytovali %s"
+msgstr "neinštalovateľní poskytovatelia: "
 
 #~ msgid "%s provides this dependency, but would change the architecture of the installed item"
 #~ msgstr "%s poskytuje túto závislosť, ale zmenil by architektúru nainštalovaného systému"
-
 #~ msgid "%s provides this dependency, but would change the vendor of the installed item"
 #~ msgstr "%s poskytuje túto závislosť, ale zmenil by dodávateľa nainštalovaného balíčka"
-
 #~ msgid "Do not install or delete the resolvables concerned"
 #~ msgstr "Neinštaluj ani neodstraňuj dotknuté balíčky"
-
 #~ msgid "Ignore that %s is already set to install"
 #~ msgstr "Ignoruj fakt, že %s je už označený pre inštaláciu"
-
 #~ msgid "Ignore the obsolete %s in %s"
 #~ msgstr "Ignoruj nahradený %s v %s"
-
 #~ msgid "Ignore this conflict of %s"
 #~ msgstr "Ignoruj tento konflikt s balíčkom %s"
-
 #~ msgid "Ignore this requirement just here"
 #~ msgstr "Ignoruj túto požiadavku len pre tento prípad"
-
 #~ msgid "Install %s although it would change the architecture"
 #~ msgstr "Nainštaluj %s, hoci to spôsobí zmenu architektúry"
-
 #~ msgid "Install %s although it would change the vendor"
 #~ msgstr "Nainštaluj %s, hoci to spôsobí zmenu dodávateľa"
-
 #~ msgid "Install missing resolvables"
 #~ msgstr "Nainštaluj chýbajúce balíčky"
-
 #~ msgid "Keep resolvables"
 #~ msgstr "Ponechať balíčky"
-
 #~ msgid "Unlock these resolvables"
 #~ msgstr "Odomkni tieto balíčky"
-
 #~ msgid "delete %s"
 #~ msgstr "odstrániť %s"
-
 #~ msgid "install %s"
 #~ msgstr "nainštalovať %s"
-
 #~ msgid "unlock %s"
 #~ msgstr "odomkni %s"
-
 #~ msgid "unlock all resolvables"
 #~ msgstr "odomkni všetky balíčky"
 
@@ -4648,333 +4667,120 @@ msgstr "Nie sú k dispozícii žiadne inštalovateľné balíčky, ktoré by pos
 #, fuzzy
 #~ msgid "Error reading solv-file: "
 #~ msgstr "Chyba pri čítaní repozitárov:"
-
 #~ msgid "Path Parameter parsing not supported for this URL"
 #~ msgstr "Path parametre nie sú pre túto URL podporované"
-
 #~ msgid "Path parameter parsing not supported for this URL"
 #~ msgstr "Path parametre nie sú pre túto URL podporované"
-
 #~ msgid "Reading '%s' repository cache"
 #~ msgstr "Načítavam medzipamäť pre repozitár '%s'"
-
 #~ msgid "Reading patch and delta rpms from '%s' repository cache"
 #~ msgstr "Načítavam informácie o záplatách a delta rpm súboroch z medzipamäte repozitára '%s'"
-
 #~ msgid "Cleaning repository '%s' cache"
 #~ msgstr "Čistím medzipamäť repozitára '%s'"
-
 #~ msgid "Reading repository '%s' cache"
 #~ msgstr "Načítavam medzipamäť repozitára '%s'"
-
 #~ msgid "Software management is already running."
 #~ msgstr "Správa softvéru je už spustená."
-
 #~ msgid "%s is replaced by %s"
 #~ msgstr "%s je nahradené %s"
-
 #~ msgid "%s replaced by %s"
 #~ msgstr "%s nahradené %s"
-
 #~ msgid "%s will be deleted by the user.\n"
 #~ msgstr "%s bude ostránený používateľom.\n"
-
 #~ msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
 #~ msgstr "%s bude odstránený inou aplikáciou. (ApplLow/ApplHigh)\n"
-
 #~ msgid "%s will be installed by the user.\n"
 #~ msgstr "%s bude nainštalovaný používateľom.\n"
-
 #~ msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
 #~ msgstr "%s bude nainštalovaný inou aplikáciou. (ApplLow/ApplHigh)\n"
-
 #~ msgid "No valid solution found within %d seconds"
 #~ msgstr "Počas %d sekúnd nebolo nájdené žiadne platné riešenie"
-
 #~ msgid "The solver has reached a defined timout"
 #~ msgstr "Solver prekročil definovaný čas"
-
 #~ msgid "No valid solution found with just resolvables of best architecture."
 #~ msgstr "Len s objektami najvhodnejšej architektúry nebolo nájdené riešenie."
-
 #~ msgid "With this run only resolvables with the best architecture have been regarded.\n"
 #~ msgstr "Pri hľadaní riešenia bolo v tomto behu uvažované len s objektami s najvhodnejšou architektúrou.\n"
-
 #~ msgid "Regarding all possible resolvables takes time, but can come to a valid result."
 #~ msgstr "Pri uvažovaní všetkých možných architektúr môže hľadanie trvať dlho, no môže viesť k riešeniu."
-
 #~ msgid "Invalid information"
 #~ msgstr "Neplatná informácia"
-
 #~ msgid "%s is needed by other resolvables"
 #~ msgstr "%s je vyžadovaný inými balíčkami"
-
 #~ msgid ""
 #~ "%s is needed by:\n"
 #~ "%s"
 #~ msgstr ""
 #~ "%s je vyžadovaný balíčkami:\n"
 #~ "%s"
-
 #~ msgid "%s conflicts with other resolvables"
 #~ msgstr "%s je v konflikte s inými balíčkami"
-
 #~ msgid ""
 #~ "%s conflicts with:\n"
 #~ "%s"
 #~ msgstr ""
 #~ "%s je v konflikte s:\n"
 #~ "%s"
-
 #~ msgid "%s obsoletes other resolvables"
 #~ msgstr "%s nahrádza iné balíčky"
-
 #~ msgid "%s obsoletes:%s"
 #~ msgstr "%s nahradzuje: %s"
-
 #~ msgid ""
 #~ "\n"
 #~ "These resolvables will be deleted from the system."
 #~ msgstr ""
 #~ "\n"
 #~ "Tieto balíčky budú zo systému odstánené."
-
 #~ msgid "%s depends on other resolvables"
 #~ msgstr "%s závisí na iných balíčkoch"
-
 #~ msgid "%s depends on %s"
 #~ msgstr "%s závisí na %s"
-
 #~ msgid "%s depends on:%s"
 #~ msgstr "%s závisí na: %s"
-
 #~ msgid "Child of"
 #~ msgstr "Potomok"
-
 #~ msgid ""
 #~ "\n"
 #~ "There is no resource available which supports this requirement."
 #~ msgstr ""
 #~ "\n"
 #~ "Nie je k dispozícii žiaden prostriedok, ktorý by mohol splniť tento požiadavok."
-
 #~ msgid "Due to the problems described above/below, this resolution will not solve all dependencies"
 #~ msgstr "Kvôli vyššie/nižšie popísaným problémom nie je možné vyriešiť všetky závislosti"
-
 #~ msgid "Cannot install %s, because it is conflicting with %s"
 #~ msgstr "Nie je možné nainštalovať %s pretože je v konflikte s %s"
-
 #~ msgid "%s is not installed and has been marked as uninstallable"
 #~ msgstr "Balík %s nie je nainštalovaný a je označený ako nenainštalovateľný"
-
 #~ msgid "Cannot install %s due to dependency problems"
 #~ msgstr "Nie je možné nainštalovať %s kvôli problémom so závislosťami"
-
 #~ msgid "%s has unfulfilled requirements"
 #~ msgstr "%s má nesplnené požiadavky"
-
 #~ msgid "%s has missing dependencies"
 #~ msgstr "Balíku %s chýbajú závislé balíky"
-
 #~ msgid "%s cannot be installed due to missing dependencies"
 #~ msgstr "%s nie je možné nainštalovať kvôli chýbajúcim závislostiam"
-
 #~ msgid "%s fulfills dependencies of %s but will be uninstalled"
 #~ msgstr "%s spĺňa závislosti %s ale má byť odinštalovaný"
-
 #~ msgid "%s fulfills dependencies of %s but will be kept on your system"
 #~ msgstr "%s spĺňa závislosti %s ale má byť ponechaný v systéme"
-
 #~ msgid "No need to install %s"
 #~ msgstr "nie je potrebné inštalovať %s"
-
 #~ msgid "Cannot install %s to fulfill the dependencies of %s"
 #~ msgstr "Nie je možné nainštalovať %s aby splnil závislosti balíka %s"
-
 #~ msgid "Cannot install %s to fulfil the dependencies of %s"
 #~ msgstr "Nie je možné nainštalovať %s aby splnil závislosti balíka %s"
-
 #~ msgid "%s will not be uninstalled, because it is still required"
 #~ msgstr "%s nie je možné odinštalovať pretože je stále vyžadovaný iným balíčkom"
-
 #~ msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
 #~ msgstr "%s nahradzuje %s, ale %s nie je možné odstrániť pretože je zamknutý"
-
 #~ msgid "Cannot install %s, because it is conflicting"
 #~ msgstr "Nie je možné nainštalovať %s lebo je v konflikte s iným balíkom"
-
 #~ msgid "%s is uninstallable due to conflicts with %s"
 #~ msgstr "%s nie je možné nainštalovať kvôli konfliktom s %s"
-
 #~ msgid "Requirememt %s cannot be fulfilled."
 #~ msgstr "Nie je možné splniť požiadavku %s."
-
 #~ msgid "for requiring %s for %s when upgrading %s"
 #~ msgstr "pre vyžadovanie %s pre %s kvôli aktualizácii %s"
-
 #~ msgid "%s is lacking the requirement %s"
 #~ msgstr "Balíčku %s chýba vyžadovaný balíček %s"
 
-#  Table header 5/5
-#  Table header 4/6
-#~ msgid ", Action: "
-#~ msgstr ", Akcia: "
-
-#~ msgid ", Trigger: "
-#~ msgstr ", Spúšťač: "
-
-#~ msgid "package"
-#~ msgstr "balíček"
-
-#~ msgid "selection"
-#~ msgstr "výber"
-
-#~ msgid "pattern"
-#~ msgstr "vzor"
-
-#~ msgid "product"
-#~ msgstr "produkt"
-
-#~ msgid "patch"
-#~ msgstr "záplata"
-
-#~ msgid "script"
-#~ msgstr "skript"
-
-#~ msgid "message"
-#~ msgstr "správa"
-
-#~ msgid "atom"
-#~ msgstr "atóm"
-
-#~ msgid "system"
-#~ msgstr "systém"
-
-#~ msgid "Resolvable"
-#~ msgstr "Balíček"
-
-#~ msgid "Marking this resolution attempt as invalid."
-#~ msgstr "Označujem tento pokus o vyriešenie závislostí ako neplatný."
-
-#~ msgid "Marking resolvable %s as uninstallable"
-#~ msgstr "Označujem balíček %s ako nenainštalovateľný"
-
-#~ msgid "%s is scheduled to be installed, but this is impossible due to dependency problems."
-#~ msgstr "%s je označený pre inštaláciu, ale tá nie je kvôli problémom so závislosťami možná."
-
-#~ msgid "Can't install %s since it is already marked as needed to be uninstalled"
-#~ msgstr "Nemôžem nainštalovať %s pretože je už označený, že sa má odinštalovať."
-
-#~ msgid "Can't install %s, because it does not apply to this system."
-#~ msgstr "Nemôžem nainštalovať %s pretože nie je aplikovateľný na tento systém."
-
-#~ msgid "Can't install %s, because %s is already marked as needed to for installation"
-#~ msgstr "Nemôžem nainštalovať %s pretože sa má inštalovať %s."
-
-#~ msgid "This would invalidate %s."
-#~ msgstr "Toto by zneplatnilo %s"
-
-#~ msgid "Establishing %s"
-#~ msgstr "Vytváram %s"
-
-#~ msgid "Installing %s"
-#~ msgstr "Inštalujem %s"
-
-#~ msgid "Skipping %s: already installed"
-#~ msgstr "Preskakujem %s: balíček je už nainštalovaný"
-
-#~ msgid "There are no alternative providers of %s installed"
-#~ msgstr "Nie sú nainštalované iné balíčky, ktoré by poskytovali %s"
-
-#~ msgid "for %s"
-#~ msgstr "pre %s"
-
-#~ msgid "Upgrading to %s to avoid removing %s is not possible."
-#~ msgstr "Aktualizácia na %s aby sa predišlo odstráneniu %s nie je možná."
-
-#~ msgid "%s provides %s, but is scheduled to be uninstalled."
-#~ msgstr "%s poskytuje %s, ale je označený pre odinštalovanie"
-
-#~ msgid "%s provides %s, but another version of that %s is already installed."
-#~ msgstr "%s poskytuje %s, ale už je nainštalovaná iná verzia %s."
-
-#~ msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-#~ msgstr "%s poskytuje %s, ale nie je nainštalovateľný. Pre získanie viac podrobností sa ho pokúste nainštalovať samostatne."
-
-#~ msgid "%s provides %s, but it is locked."
-#~ msgstr "%s poskytuje %s, ale je zamknutý."
-
-#~ msgid "%s provides %s,  but is scheduled to be kept."
-#~ msgstr "%s poskytuje %s, ale má byť ponechaný."
-
-#~ msgid "%s provides %s, but has another architecture."
-#~ msgstr "%s poskytuje %s, ale má inú architektúru."
-
-#~ msgid "%s provides %s, but has another vendor (%s)."
-#~ msgstr "%s poskytuje %s, ale má iného dodávateľa (%s)."
-
-#~ msgid "Can't satisfy requirement %s for %s"
-#~ msgstr "Nemôžem uspokojiť požiadavok %s na %s"
-
-#~ msgid "%s is required by another resolvable selected for installation, so it won't be unlinked."
-#~ msgstr "%s je vyžadovaný iným nainštalovaným balíčkom, takže odkaz na neho nebude zrušený."
-
-#~ msgid "%s is required by another installed resolvable, so it won't be unlinked."
-#~ msgstr "%s je vyžadovaný iným nainštalovaným balíčkom, takže odkaz na neho nebude zrušený."
-
-#~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "%s je zamknutý, nie je možné ho odinštalovať."
-
-#~ msgid "A conflict over %s (%s) requires the removal of %s which is scheduled for installation"
-#~ msgstr "Konflikt balíčka %s (%s) vyžaduje odstránenie balíčka %s, ktorý má byť nainštalovaný."
-
-#~ msgid "Marking %s as uninstallable due to conflicts over %s"
-#~ msgstr "Označujem %s ako nenainštalovateľný kvôli konfliktom s %s"
-
-#~ msgid "from %s"
-#~ msgstr "z %s"
-
-#~ msgid " Error!"
-#~ msgstr "Chyba!"
-
-#~ msgid " Important!"
-#~ msgstr " Dôležité!"
-
-#~ msgid "Make a solver run with ALL possibilities."
-#~ msgstr "Spusti solver s VŠETKÝMI možnosťami."
-
-#~ msgid "Regarding all resolvables with a compatible architecture."
-#~ msgstr "Uvažujem so všetkými objektami s kompatibilnou architektúrou."
-
-#~ msgid "Make a solver run with best architecture only."
-#~ msgstr "Spusti solver len s objektami s najvhodnejšou architektúrou."
-
-#~ msgid "Regarding resolvables with best architecture only."
-#~ msgstr "Uvažujem iba s objektami s najvhodnejšou architektúrou."
-
-#~ msgid "%s depended on %s"
-#~ msgstr "%s závisel na %s"
-
-#~ msgid "%s is recommended by %s"
-#~ msgstr "%s je doporučovaný balíčkom %s"
-
-#~ msgid "%s is suggested by %s"
-#~ msgstr "%s je navrhovaný balíčkom %s"
-
-#~ msgid "%s will be evaluated for installation (freshened) by %s"
-#~ msgstr "%s bude vyhodnocovaný pre inštaláciu (freshened) balíčkom %s"
-
-#~ msgid "%s is enhanced by %s"
-#~ msgstr "%s je vylepšený balíčkom %s"
-
-#~ msgid "%s is supplemented by %s"
-#~ msgstr "%s je nahradený balíčkom %s"
-
-#~ msgid "%s part of %s"
-#~ msgstr "%s súčasťou %s"
-
-#~ msgid "Double timeout"
-#~ msgstr "Zdvojnásob časový limit"
-
-#~ msgid "Start the next solver run with doubled timeout."
-#~ msgstr "Spusti ďalší beh solveru s dvojnásobým časovým limitom."

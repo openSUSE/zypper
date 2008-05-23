@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-04-07 21:59+0200\n"
+"PO-Revision-Date: 2008-05-03 16:17+0200\n"
 "Last-Translator: Freek de Kruijf <f.de.kruijf@hetnet.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -677,9 +677,9 @@ msgid "Can't initialize recursive mutex"
 msgstr "Kan recursieve mutex niet initialiseren"
 
 #: ../zypp/base/InterProcessMutex.cc:79
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open lock file: %s"
-msgstr "Het %d, kan blokkeringsbestand niet openen: %s"
+msgstr "Kan het blokkeringsbestand niet openen: %s"
 
 #: ../zypp/ExternalProgram.cc:174
 #, c-format
@@ -1509,9 +1509,8 @@ msgid "Geez"
 msgstr "Geez"
 
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:61
-#, fuzzy
 msgid "Generally ignore of some dependecies"
-msgstr "Negeer deze vereiste normaliter"
+msgstr "Negeer normaliter enige afhankelijkheden "
 
 #. :GRD:308:
 #: ../zypp/CountryCode.cc:302
@@ -1802,9 +1801,9 @@ msgstr "Igbo"
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: ../zypp/solver/detail/ProblemSolutionIgnore.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore some dependencies of %s"
-msgstr "kon de afhankelijkheden niet oplossen"
+msgstr "Negeer enige afhankelijkheden van %s"
 
 #. language code: ijo
 #: ../zypp/LanguageCode.cc:630
@@ -1928,7 +1927,7 @@ msgstr "Ongeldige poortcomponent '%s'"
 #: ../zypp/PoolQuery.cc:419
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr ""
+msgstr "Ongeldige reguliere expressie '%s': regcomp returned %d"
 
 #: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
 msgid "Invalid user name or password."
@@ -3309,7 +3308,7 @@ msgstr "Sao Tome en Principe"
 #. language code: srd sc
 #: ../zypp/LanguageCode.cc:1068
 msgid "Sardinian"
-msgstr "Sardinisch"
+msgstr "Sardijns"
 
 #. language code: sas
 #: ../zypp/LanguageCode.cc:996
@@ -3477,9 +3476,9 @@ msgid "Solomon Islands"
 msgstr "Solomon Eilanden"
 
 #: ../zypp/solver/detail/SATResolver.cc:889
-#, fuzzy, c-format
+#, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
-msgstr "%s is in conflict met %s die geleverd is door %s"
+msgstr "Oplosser %s is in conflict met %s die geleverd is door zichzelf"
 
 #. language code: som so
 #: ../zypp/LanguageCode.cc:1060
@@ -4371,71 +4370,3 @@ msgstr ""
 msgid "uninstallable providers: "
 msgstr "niet-installeerbare aanbieders: "
 
-#~ msgid "%s provides this dependency, but would change the architecture of the installed item"
-#~ msgstr "%s levert deze afhankelijkheid maar zou de architectuur van het geïnstalleerde item wijzigen."
-
-#~ msgid "%s provides this dependency, but would change the vendor of the installed item"
-#~ msgstr "%s levert deze afhankelijkheid maar zou de uitgever van het geïnstalleerde item wijzigen."
-
-#~ msgid "Do not install or delete the resolvables concerned"
-#~ msgstr "Installeer of verwijder de desbetreffende oplossingspakketten niet"
-
-#~ msgid "Ignore that %s is already set to install"
-#~ msgstr "Negeer dat %s al is ingesteld op installeren"
-
-#~ msgid "Ignore the obsolete %s in %s"
-#~ msgstr "Negeer oude %s in %s"
-
-#~ msgid "Ignore this conflict of %s"
-#~ msgstr "Negeer dit conflict van %s"
-
-#~ msgid "Ignore this requirement just here"
-#~ msgstr "Negeer deze vereiste hier"
-
-#~ msgid "Install %s although it would change the architecture"
-#~ msgstr "%s installeren alhoewel het de architectuur zal wijzigen"
-
-#~ msgid "Install %s although it would change the vendor"
-#~ msgstr "%s installeren alhoewel het de uitgever zal wijzigen"
-
-#~ msgid "Install missing resolvables"
-#~ msgstr "Ontbrekende oplossingspakketten installeren"
-
-#~ msgid "Keep resolvables"
-#~ msgstr "Oplossingspakketten behouden"
-
-#~ msgid "Unlock these resolvables"
-#~ msgstr "Deze oplossingspakketten ontgrendelen"
-
-#~ msgid "delete %s"
-#~ msgstr "%s verwijderen"
-
-#~ msgid "install %s"
-#~ msgstr "%s installeren"
-
-#~ msgid "unlock %s"
-#~ msgstr "%s ontgrendelen"
-
-#~ msgid "unlock all resolvables"
-#~ msgstr "alle oplossingspakketten ontgrendelen"
-
-#~ msgid "Can't add solvables to norepo."
-#~ msgstr "Kan oplossingen niet toevoegen aan norepo."
-
-#~ msgid "Can't open solv-file: "
-#~ msgstr "Kan solv-bestand niet openen:"
-
-#~ msgid "Can't set RepoInfo for norepo."
-#~ msgstr "Kan RepoInfo niet installen voor norepo."
-
-#~ msgid "Error reading solv-file: "
-#~ msgstr "Fout bij lezen van solv-bestand: "
-
-#~ msgid "Path Parameter parsing not supported for this URL"
-#~ msgstr "Parseren van padparameter wordt niet ondersteund voor deze URL"
-
-#~ msgid "Path parameter parsing not supported for this URL"
-#~ msgstr "Parseren van padparameter wordt niet ondersteund voor deze URL"
-
-#~ msgid "RepoInfo alias (%s) does not match repository name (%s)"
-#~ msgstr "RepoInfo-alias (%s) komt niet overeen met naam installatiebron (%s)"

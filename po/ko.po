@@ -4669,7 +4669,7 @@ msgstr "설치 할 수 없는 제공자:"
 
 #, fuzzy
 #~ msgid "%s is not installed and has been marked as uninstallable"
-#~ msgstr "이 패키지는 이미 설치되어 있어서 설치가 되지 않습니다."
+#~ msgstr "이 꾸러미는 이미 설치되어 있어서 설치가 되지 않습니다."
 
 #, fuzzy
 #~ msgid "%s has missing dependencies"
@@ -4714,7 +4714,7 @@ msgstr "설치 할 수 없는 제공자:"
 
 #, fuzzy
 #~ msgid "%s is locked and cannot be uninstalled."
-#~ msgstr "이 패키지는 이미 설치되어 있어서 설치가 되지 않습니다."
+#~ msgstr "이 꾸러미는 이미 설치되어 있어서 설치가 되지 않습니다."
 
 #, fuzzy
 #~ msgid " Error!"
