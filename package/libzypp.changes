@@ -6,6 +6,12 @@ Fri May 23 14:42:34 CEST 2008 - schubi@suse.de
 - r 10202 
 
 -------------------------------------------------------------------
+Fri May 23 15:52:20 CEST 2008 - dmacvicar@suse.de
+
+- define path for messages and scripts and document
+  them in zypp.conf
+
+-------------------------------------------------------------------
 Fri May 23 10:22:47 CEST 2008 - schubi@suse.de
 
 - Packages which obsoletes and do NOT required other installed
