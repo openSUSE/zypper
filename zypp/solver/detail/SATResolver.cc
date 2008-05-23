@@ -117,6 +117,7 @@ SATResolver::dumpOn( std::ostream & os ) const
     os << "  noupdateprovide = " << _noupdateprovide << endl;
     os << "  dosplitprovides = " << _dosplitprovides << endl;
     os << "  onlyRequires = " << _onlyRequires << endl;
+    os << "  ignorealreadyrecommended = " << _ignorealreadyrecommended << endl;
     return os << "<resolver/>" << endl;
 }
 
@@ -136,6 +137,7 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _noupdateprovide(false)
     , _dosplitprovides(false)
     , _onlyRequires(ZConfig::instance().solver_onlyRequires())
+    , _ignorealreadyrecommended(false)
 
 {
 }
@@ -423,6 +425,7 @@ SATResolver::solving()
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;
     _solv->fixsystem = _fixsystem;
+    _solv->ignorealreadyrecommended = _ignorealreadyrecommended;
     _solv->updatesystem = _updatesystem;
     _solv->allowdowngrade = _allowdowngrade;
     _solv->allowuninstall = _allowuninstall;

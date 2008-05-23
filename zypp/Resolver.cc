@@ -80,6 +80,11 @@ namespace zypp
   { _pimpl->setForceResolve( force ); }
   bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
+  void Resolver::setIgnoreAlreadyRecommended
+       (const bool ignoreAlreadyRecommended)
+  { _pimpl->setIgnorealreadyrecommended (ignoreAlreadyRecommended); }
+  bool Resolver::ignoreAlreadyRecommended()
+  { return _pimpl->ignorealreadyrecommended(); }    
   void Resolver::setOnlyRequires( const bool onlyRequires )
   { onlyRequires ? _pimpl->setOnlyRequires( true ) : _pimpl->setOnlyRequires( false ); }
   void Resolver::resetOnlyRequires()

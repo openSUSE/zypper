@@ -74,6 +74,7 @@ Resolver::Resolver (const ResPool & pool)
     , _upgradeMode(false)
     , _verifying(false)
     , _onlyRequires(indeterminate)
+    , _ignorealreadyrecommended(false)
 
 {
     sat::Pool satPool( sat::Pool::instance() );
@@ -264,6 +265,7 @@ Resolver::solverInit()
 	}
 
 	_satResolver->setFixsystem(false);
+	_satResolver->setIgnorealreadyrecommended(false);	
 	_satResolver->setAllowdowngrade(false);
 	_satResolver->setAllowarchchange(false);
 	_satResolver->setAllowvendorchange(false);
@@ -291,6 +293,9 @@ Resolver::solverInit()
 
 	if (_verifying)
 	    _satResolver->setFixsystem(true);
+
+	if (_ignorealreadyrecommended)
+	    _satResolver->setIgnorealreadyrecommended(true);	
 
 	// Resetting additional solver information
 	_isInstalledBy.clear();

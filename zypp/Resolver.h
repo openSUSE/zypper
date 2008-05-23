@@ -163,6 +163,13 @@ namespace zypp
     void setForceResolve (const bool force);
     bool forceResolve();
 
+    /**      
+     * Ignore recommended packages that were already recommended by
+     * the installed packages
+     **/
+    void setIgnoreAlreadyRecommended (const bool ignoreAlreadyRecommended);
+    bool ignoreAlreadyRecommended();
+
     /**
      * Setting whether required packages are installed ONLY
      * So recommended packages, language packages and packages which depend 

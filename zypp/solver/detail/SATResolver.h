@@ -84,7 +84,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides 
     bool _noupdateprovide;		// true: update packages needs not to provide old package 
     bool _dosplitprovides;		// true: consider legacy split provides 
-    bool _onlyRequires;	                // true: consider required packages only 
+    bool _onlyRequires;	                // true: consider required packages only
+    bool _ignorealreadyrecommended;	// true: ignore recommended packages that were already recommended by the installed packages
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
@@ -135,6 +136,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool fixsystem () const {return _fixsystem;}
     void setFixsystem ( const bool fixsystem) { _fixsystem = fixsystem;}
+
+    bool ignorealreadyrecommended () const {return _ignorealreadyrecommended;}
+    void setIgnorealreadyrecommended ( const bool ignorealreadyrecommended) { _ignorealreadyrecommended = ignorealreadyrecommended;}
 
     bool allowdowngrade () const {return _allowdowngrade;}
     void setAllowdowngrade ( const bool allowdowngrade) { _allowdowngrade = allowdowngrade;}

@@ -115,7 +115,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _verifying;              // The system will be checked
     TriBool _onlyRequires; 	  // do install required resolvables only
                                   // no recommended resolvables, language
-                                  // packages, hardware packages (modalias)  
+                                  // packages, hardware packages (modalias)
+
+    bool _ignorealreadyrecommended;   //ignore recommended packages that were already recommended by the installed packages
 
     // Additional QueueItems which has to be regarded by the solver
     // This will be used e.g. by solution actions
@@ -169,6 +171,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     bool forceResolve() { return _forceResolve; }
+
+    void setIgnorealreadyrecommended (const bool ignorealreadyrecommended)
+	{ _ignorealreadyrecommended = ignorealreadyrecommended; }
+    bool ignorealreadyrecommended() { return _ignorealreadyrecommended; }    
 
     void setOnlyRequires (const TriBool state)
 	{ _onlyRequires = state; }
