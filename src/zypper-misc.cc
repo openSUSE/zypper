@@ -1261,6 +1261,13 @@ static int summary(Zypper & zypper)
     zypper.out().info(_("Some of the dependencies of installed packages are broken."
         " In order to fix these dependencies, the following actions need to be taken:"));
 
+  // total packages to download&install.
+  zypper.runtimeData().commit_pkgs_total;
+  for (KindToResObjectSet::const_iterator it = to_be_installed.begin();
+      it != to_be_installed.end(); ++it)
+    zypper.runtimeData().commit_pkgs_total += it->second.size();
+  zypper.runtimeData().commit_pkg_current = 0;
+
   KindToResObjectSet toinstall;
   KindToResObjectSet toupgrade;
   KindToResObjectSet todowngrade;
@@ -2296,6 +2303,7 @@ void solve_and_commit (Zypper & zypper)
       }
     }
 
+    MIL << "got solution, showing summary" << endl;
 
     // returns SUMMARY_*
     int retv = summary(zypper);

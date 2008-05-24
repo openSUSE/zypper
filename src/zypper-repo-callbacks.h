@@ -148,12 +148,16 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
+    Zypper & zypper = *Zypper::instance();
 
     ostringstream s;
     s << boost::format(_("Downloading %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
+
+    s << " (" << ++zypper.runtimeData().commit_pkg_current
+      << "/" << zypper.runtimeData().commit_pkgs_total << ")";
 
 // grr, bad class??
 //    zypp::ResObject::constPtr ro =
@@ -164,7 +168,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
           // TranslatorExplanation %s is package size like "5.6 M"
           << boost::format(_("(%s unpacked)")) % ro->installsize();
     }
-    Zypper::instance()->out().info(s.str());
+    zypper.out().info(s.str());
   }
 
   // return false if the download should be aborted right now
@@ -180,6 +184,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     Zypper::instance()->out().error(description);
+    ++Zypper::instance()->runtimeData().commit_pkg_current;
     DBG << "error report" << endl;
     return (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
   }

@@ -88,6 +88,8 @@ struct RuntimeData
     , show_media_progress_hack(false)
     , force_resolution(zypp::indeterminate)
     , solve_before_commit(true)
+    , commit_pkgs_total(0)
+    , commit_pkg_current(0)
   {}
 
   std::list<zypp::RepoInfo> repos;
@@ -123,6 +125,9 @@ struct RuntimeData
    * in \ref solve_and_commit(). Needed after Resolver::doUpdate()
    */
   bool solve_before_commit;
+
+  unsigned int commit_pkgs_total;
+  unsigned int commit_pkg_current;
 };
 
 class Zypper : private zypp::base::NonCopyable
