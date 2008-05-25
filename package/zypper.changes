@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun May 25 15:49:30 CEST 2008 - jkupec@suse.cz
+
+- ignore recommends of installed packages (bnc #389694)
+- new command 'install-new-recommends' to install these recommends
+- r10214
+
+-------------------------------------------------------------------
 Sat May 24 13:59:42 CEST 2008 - jkupec@suse.cz
 
 - basic overall install progress (bnc #240588)
