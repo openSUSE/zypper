@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: Mon May 12 10:41:46 UTC 2008\n"
+"PO-Revision-Date: Fri May 23 18:26:25 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1690,7 +1690,7 @@ msgstr "Festgelegte Sperre wurde erfolgreich entfernt."
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "OK OK! Beende sofort..."
 
 # y/n dialog is i18n'ed; translating as j/n is possible
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.

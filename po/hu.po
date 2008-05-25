@@ -1,4 +1,3 @@
-# translation of zypper.po to Hungarian
 # translation of zypper.po to
 # translation of zypper.hu.po to
 # @TITLE@
@@ -12,17 +11,17 @@
 # Novák Ervin <enovak@novell.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-08 15:25+0200\n"
-"Last-Translator: Ervin Novak <enovak@novell.com>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2008-05-23 14:00+0200\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team:  <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../src/output/OutNormal.cc:54
 msgid "Warning: "
@@ -1691,7 +1690,7 @@ msgstr "A megadott csomag zárolásának eltávolítása sikeres."
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "Renden! Kilépés folyamatban..."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2163,30 +2162,30 @@ msgid "Arch"
 msgstr "Architektúra"
 
 #: ../src/zypper-misc.cc:2034
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "%s nem nyitható meg: %m"
+msgstr "Nem dolgozható fel: '%s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr ""
+msgstr "'%s' interacktív, kihagyásra kerül."
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "Nincs telepítve '%s'-nek megfelelő csomag."
+msgstr "Nem található illeszkedő csomag erre: '%s'."
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
 msgstr "'%s' nem található."
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr "Nincs telepítve '%s'-nek megfelelő csomag."
+msgstr "Nincs telepítve illeszkedő csomag ehhez: '%s'."
 
 #: ../src/zypper-misc.cc:2216
 #, c-format
@@ -3091,5 +3090,3 @@ msgstr "Ellenőrizze, hogy a megadott fájl valóban elérhető."
 msgid "Cannot parse capability '%s'."
 msgstr "A képesség feldolgozása sikertelen: %s."
 
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "Érvénytelen zárolásszám: %s"

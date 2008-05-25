@@ -1,4 +1,4 @@
-# translation of zypper.po to Chinese Traditional
+# translation of zypper.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-14 01:36+0800\n"
+"PO-Revision-Date: 2008-05-23 14:40+0800\n"
 "Last-Translator: swyear <swyear@gmail.com>\n"
-"Language-Team: Chinese Traditional <zh@li.org>\n"
+"Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgstr ""
 
 #: ../src/output/OutNormal.cc:257
 msgid "no help available for this option"
-msgstr ""
+msgstr "此選項沒有說明訊息"
 
 #: ../src/zypp-checkpatches.cc:124
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
@@ -127,6 +127,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
+"  指令：\n"
+"\thelp, ?\t\t\t印出說明。\n"
+"\tshell, sh\t\t同時接受多重指令。\n"
 
 #: ../src/zypper.cc:178
 msgid ""
@@ -139,6 +142,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
+"\t套件庫處理：\n"
+"\trepos, lr\t\t列出所有已定義的套件庫。\n"
+"\taddrepo, ar\t\t加入一個新的套件庫。\n"
+"\tremoverepo, rr\t\t移除指定的套件庫。\n"
+"\trenamerepo, nr\t\t更名指定的套件庫。\n"
+"\tmodifyrepo, mr\t\t修改指定的套件庫。\n"
+"\trefresh, ref\t\t重新整理所有套件庫。\n"
+"\tclean\t\t\t清理本機快取。\n"
 
 #: ../src/zypper.cc:188
 msgid ""
@@ -150,6 +161,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tsource-install, si\tInstall source packages and their build dependencies.\n"
 msgstr ""
+"\t軟體管理：\n"
+"\tinstall, in\t\t安裝套件。\n"
+"\tremove, rm\t\t移除套件。\n"
+"\tverify, ve\t\t確認套件相依性整合。\n"
+"\tupdate, up\t\t更新已安裝的套件到較新版本。\n"
+"\tdist-upgrade, dup\t進行發行版本升級。\n"
+"\tsource-install, si\t安裝源碼套件和建構軟體所需相依套件。\n"
 
 #: ../src/zypper.cc:197
 msgid ""
@@ -167,6 +185,19 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
+"\t查詢：\n"
+"\tsearch, se\t\t搜尋符合樣式的套件。\n"
+"\tinfo, if\t\t顯示指定套件的完整資訊。\n"
+"\tpatch-info\t\t顯示指定修補程式的完整資訊。\n"
+"\tpattern-info\t\t顯示指定樣式的完整資訊。\n"
+"\tproduct-info\t\t顯示指定產品的完整資訊。\n"
+"\tpatch-check, pchk\t檢查修補程式。\n"
+"\tlist-updates, lu\t列出可用更新。\n"
+"\tpatches, pch\t\t列出所有可用的修補程式。\n"
+"\tpackages, pa\t\t列出所有可用的套件。\n"
+"\tpatterns, pt\t\t列出所有可用的樣式。\n"
+"\tproducts, pd\t\t列出所有可用的產品。\n"
+"\twhat-provides, wp\t列出提供指定相容性的套件。\n"
 
 #: ../src/zypper.cc:214
 msgid ""
@@ -175,6 +206,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
+"\t套件鎖定：\n"
+"\taddlock, al\t\t加入一個套件鎖定。\n"
+"\tremovelock, rl\t\t解除一個套件鎖定。\n"
+"\tlocks, ll\t\t列出目前的套件鎖定。\n"
 
 #: ../src/zypper.cc:220
 msgid ""
@@ -211,7 +246,7 @@ msgstr "無效的表格樣式 %d"
 #: ../src/zypper.cc:367
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr ""
+msgstr "使用由 %d 到 %d 的整數"
 
 #: ../src/zypper.cc:398
 msgid "Entering non-interactive mode."
@@ -424,6 +459,19 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
+"repos (lr) [選項]\n"
+"\n"
+"列出所有已定義的套件庫。\n"
+"\n"
+"  指令選項：\n"
+"-e, --export <FILE.repo>  匯出所有已定義的套件庫成為單一的本機 .repo 檔。\n"
+"-u, --uri                 同時顯示套件庫的基礎 URI。\n"
+"-p, --priority            同時顯示套件庫的優先等級。\n"
+"-d, --details             顯示更多資訊像是 URI、優先等級和類型。\n"
+"-U, --sort-by-uri         用 URI 排列清單。\n"
+"-P, --sort-by-priority    用套件優先等級排列清單。\n"
+"-A, --sort-by-alias       用別名排列清單。\n"
+"-N, --sort-by-name        用名稱排列清單。\n"
 
 #: ../src/zypper.cc:1034
 msgid ""
@@ -748,6 +796,17 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
+"packages (pa) [選項] [套件庫] ...\n"
+"\n"
+"列出指定套件庫中所有可用的套件。\n"
+"\n"
+"  指令選項：\n"
+"\n"
+"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-i, --installed-only      僅顯示已安裝的套件。\n"
+"-u, --uninstalled-only    僅顯示未安裝的套件。\n"
+"-N, --sort-by-name        以套件名稱排列清單。\n"
+"-R, --sort-by-repo        以套件庫排列清單。\n"
 
 #: ../src/zypper.cc:1424
 msgid ""
@@ -761,6 +820,15 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
 msgstr ""
+"patterns (pt) [選項] [套件庫] ...\n"
+"\n"
+"列出指定套件庫中所有可用的樣式。\n"
+"\n"
+"  指令選項：\n"
+"\n"
+"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-i, --installed-only      僅顯示已安裝的樣式。\n"
+"-u, --uninstalled-only    僅顯示未安裝的樣式。\n"
 
 #: ../src/zypper.cc:1450
 msgid ""
@@ -774,6 +842,15 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --uninstalled-only    Show only products wich are not installed.\n"
 msgstr ""
+"products (pd) [選項] [套件庫] ...\n"
+"\n"
+"列出指定套件庫中所有可用的產品。\n"
+"\n"
+"  指令選項：\n"
+"\n"
+"-r, --repo <別名|編號|URI>  這是指定套件庫的另一種方法。\n"
+"-i, --installed-only      僅顯示已安裝的產品。\n"
+"-u, --uninstalled-only    僅顯示未安裝的產品。\n"
 
 #: ../src/zypper.cc:1475
 #, c-format
@@ -787,6 +864,14 @@ msgid ""
 "-t, --type <type>         Type of resolvable (%s).\n"
 "                          Default: %s."
 msgstr ""
+"info (if) [選項] <名稱> ...\n"
+"\n"
+"顯示指定套件的詳細資訊。\n"
+"\n"
+"  指令選項：\n"
+"-r, --repo <別名|編號|URI>  只有在指定套件庫時才能工作。\n"
+"-t, --type <type>         解決方案的類型 (%s).\n"
+"                          預設： %s."
 
 #: ../src/zypper.cc:1498
 #, c-format
@@ -841,6 +926,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
+"what-provides (wp) <相容性>\n"
+"\n"
+"列出所有提供指定相容性的套件。\n"
+"\n"
+"此指令無其他選項。\n"
 
 #: ../src/zypper.cc:1604
 msgid ""
@@ -1990,9 +2080,9 @@ msgid "Arch"
 msgstr "結構"
 
 #: ../src/zypper-misc.cc:2034
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "無法開啟 %s：%m"
+msgstr ""
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
@@ -2001,24 +2091,24 @@ msgid "'%s' is interactive, skipping."
 msgstr ""
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "沒有發現樣式。"
+msgstr "沒有發現符合 '%s' 的修補程式。"
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
-msgstr "'%s' 找不到。"
+msgstr "修補程式 '%s' 找不到。"
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr ""
+msgstr "沒有發現符合 '%s' 的已安裝套件。"
 
 #: ../src/zypper-misc.cc:2216
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr ""
+msgstr "套件 '%s' 尚未安裝。"
 
 #: ../src/zypper-misc.cc:2228
 #, c-format
@@ -2039,12 +2129,12 @@ msgstr ""
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2324
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr ""
+msgstr "接受此摘要並進行套件的安裝/移除。"
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2326
 msgid "Cancel the operation."
-msgstr ""
+msgstr "取消此操作。"
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2328
@@ -2074,7 +2164,7 @@ msgstr "請檢視上面的錯誤訊息以獲得提示。"
 #: ../src/zypper-misc.cc:2433
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr ""
+msgstr "套件庫 '%s' 已過期。執行 '%s' 可能會有幫助。"
 
 #: ../src/zypper-misc.cc:2445
 msgid ""
@@ -2908,3 +2998,4 @@ msgstr "請檢查此檔案是否可存取。"
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "無法剖析相容性 '%s'。"
+

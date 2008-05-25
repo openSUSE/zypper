@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-10 19:28+0300\n"
+"PO-Revision-Date: 2008-05-23 22:06+0300\n"
 "Last-Translator: Mikko Piippo <mikko.piippo@opensuse.fi>\n"
 "Language-Team:  <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1696,7 +1696,7 @@ msgstr "Pakettilukon poistaminen onnistui."
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "OK! Poistutaan välittömästi..."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2162,25 +2162,25 @@ msgid "Arch"
 msgstr "Arkkitehtuuri"
 
 #: ../src/zypper-misc.cc:2034
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Ei voi avata %s: %m"
+msgstr "Ei voi tulkita ' %s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr ""
+msgstr "'%s' on vuorovaikutteinen, ohitetaan."
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "Yhtään '%s' vastaavaa pakettia ei ole asennettuna."
+msgstr "Yhtään hakua '%s' vastaavaa pakettia ei ole asennettu."
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
-msgstr "'%s' ei löytynyt."
+msgstr "Korjausta '%s' ei löytynyt."
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
@@ -2190,7 +2190,7 @@ msgstr "Yhtään '%s' vastaavaa pakettia ei ole asennettuna."
 #: ../src/zypper-misc.cc:2216
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "Paketti '%s' ei ole asennetuna."
+msgstr "Pakettia '%s' ei ole asennettu."
 
 #: ../src/zypper-misc.cc:2228
 #, c-format
@@ -3090,5 +3090,3 @@ msgstr "Tarkista, että tiedosto on saatavissa."
 msgid "Cannot parse capability '%s'."
 msgstr "Ominaisuuden '%s' jäsentäminen ei onnistu."
 
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "Virheellinen lukon numero: %s"

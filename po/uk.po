@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-07 21:03+0300\n"
+"PO-Revision-Date: 2008-05-22 17:22+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -1673,7 +1673,7 @@ msgstr "Вказане блокування було успішно знято."
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "Добре, добре! Негайно виходжу..."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2179,19 +2179,19 @@ msgstr "Не вдається обробити \"%s < %s\""
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "%s є інтерактивною, пропускається."
+msgstr "«%s» є інтерактивною, пропускається."
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "Не встановлено пакунків, що відповідають \"%s\"."
+msgstr "Не знайдено латок, що відповідають «%s»."
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
-msgstr "«%s» не знайдено."
+msgstr "Латку «%s» не знайдено."
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
@@ -3109,5 +3109,3 @@ msgstr "Будь ласка, перевірте чи доступний файл
 msgid "Cannot parse capability '%s'."
 msgstr "Не вдалося розібрати функціональність «%s»."
 
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "Некоректний номер блока: %s"

@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-08 02:20+0700\n"
+"PO-Revision-Date: 2008-05-23 00:32+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
-"Language-Team: Khmer <support@khemros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1685,7 +1685,7 @@ msgstr "សោ​ដែលបាន​បញ្ជាក់ ត្រូវប�
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "គ្មាន​បញ្ហា គ្មាន​បញ្ហា ! កំពុង​ចាកចេញ​ឥឡូវ​នេះ..."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2117,25 +2117,25 @@ msgid "Arch"
 msgstr "ស្ថាបត្យកម្ម"
 
 #: ../src/zypper-misc.cc:2034
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "មិន​អាច​បើក %s បាន​ឡើយ ៖ %m"
+msgstr "មិន​អាច​ញែក '%s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr ""
+msgstr "'%s' គឺ​អន្តរសកម្ម រំលង ។"
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "គ្មាន​កញ្ចប់​ដែល​ផ្គូផ្គង​នឹង '%s' ត្រូវបាន​ដំឡើង​ទេ ។"
+msgstr "រក​មិន​ឃើញ​កា​រផ្គូផ្គង '%s' ។"
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
-msgstr "រក​មិនឃើញ '%s' ។"
+msgstr "រក​មិន​ឃើញ​បំណះ '%s' ។"
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
@@ -3035,5 +3035,3 @@ msgstr "សូ​ម​ពិនិត្យ​មើល ថាតើ​អា�
 msgid "Cannot parse capability '%s'."
 msgstr "មិន​អាច​ញែក​ភាព​ឆបគ្នា '%s' ។"
 
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "លេខ​សោ​មិនត្រឹមត្រូវ ៖ %s"
