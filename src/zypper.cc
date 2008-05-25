@@ -931,6 +931,29 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
+  {
+    static struct option options[] = {
+      {"dry-run", no_argument, 0, 'D'},
+      {"repo", required_argument, 0, 'r'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "install-new-recommends (inr) [options]\n"
+      "\n"
+      "Install newly added packages recommended by already installed packages."
+      " This can typically be used to install new language packages or drivers"
+      " for newly added hardware.\n"
+      "\n"
+      "  Command options:\n"
+      "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
+      "-D, --dry-run            Test the installation, do not actually install anything.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::ADD_REPO_e:
   {
     static struct option service_add_options[] = {
@@ -2501,6 +2524,7 @@ void Zypper::doCommand()
   }
 
   case ZypperCommand::VERIFY_e:
+  case ZypperCommand::INSTALL_NEW_RECOMMENDS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -2534,7 +2558,7 @@ void Zypper::doCommand()
     load_resolvables(*this);
 
     solve_and_commit(*this);
-    
+
     break;
   }
 

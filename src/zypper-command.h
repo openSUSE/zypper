@@ -24,7 +24,8 @@ struct ZypperCommand
   static const ZypperCommand DIST_UPGRADE;
   static const ZypperCommand SRC_INSTALL;
   static const ZypperCommand VERIFY;
-  
+  static const ZypperCommand INSTALL_NEW_RECOMMENDS;
+
   static const ZypperCommand SEARCH;
   static const ZypperCommand INFO;
   static const ZypperCommand LIST_UPDATES;
@@ -82,6 +83,7 @@ struct ZypperCommand
     DIST_UPGRADE_e,
     SRC_INSTALL_e,
     VERIFY_e,
+    INSTALL_NEW_RECOMMENDS_e,
 
     SEARCH_e,
     INFO_e,

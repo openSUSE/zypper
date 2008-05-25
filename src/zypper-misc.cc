@@ -1534,6 +1534,18 @@ static void set_no_recommends(Zypper & zypper)
   God->resolver()->setOnlyRequires(no_recommends);
 }
 
+
+static void set_ignore_recommends_of_installed(Zypper & zypper)
+{
+  bool ignore = true;
+  if (zypper.command() == ZypperCommand::DIST_UPGRADE ||
+      zypper.command() == ZypperCommand::INSTALL_NEW_RECOMMENDS)
+    ignore = false;
+  DBG << "ignore recommends of already installed packages: " << ignore << endl;
+  God->resolver()->setIgnoreAlreadyRecommended(ignore);
+}
+
+
 /**
  * Run the solver.
  * 
@@ -1544,6 +1556,7 @@ bool resolve(Zypper & zypper)
   dump_pool(); // debug
   set_force_resolution(zypper);
   set_no_recommends(zypper);
+  set_ignore_recommends_of_installed(zypper);
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();

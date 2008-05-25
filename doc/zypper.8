@@ -172,6 +172,19 @@ Test the repair, do not actually do anything to the system.
 Use only specified repositories to install missing packages.
 
 .TP
+.B install-new-recommends (inr) [options]
+Install newly added packages recommended by already installed ones.
+This can typically be used to install language packages recently added
+to repositories or drivers for newly added hardware.
+
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Use only specified repositories to install packages.
+.TP
+.I \-D, \-\-dry-run
+Test the installation, do not actually install anything.
+
+.TP
 .B list-updates (lu) [options]
 List available updates.
 .TP

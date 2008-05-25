@@ -29,6 +29,7 @@ const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
 const ZypperCommand ZypperCommand::DIST_UPGRADE(ZypperCommand::DIST_UPGRADE_e);
 const ZypperCommand ZypperCommand::SRC_INSTALL(ZypperCommand::SRC_INSTALL_e);
 const ZypperCommand ZypperCommand::VERIFY(ZypperCommand::VERIFY_e);
+const ZypperCommand ZypperCommand::INSTALL_NEW_RECOMMENDS(ZypperCommand::INSTALL_NEW_RECOMMENDS_e);
 
 const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
@@ -91,6 +92,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["dist-upgrade"] = _table["dup"] = ZypperCommand::DIST_UPGRADE_e;
     _table["source-install"] = _table["si"] = ZypperCommand::SRC_INSTALL_e;
     _table["verify"] = _table["ve"] = ZypperCommand::VERIFY_e;
+    _table["install-new-recommends"] = _table["inr"] = ZypperCommand::INSTALL_NEW_RECOMMENDS_e;
 
     _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
