@@ -3,7 +3,9 @@ Mon May 26 14:31:57 CEST 2008 - jkupec@suse.cz
 
 - fixed layout of tables when the text contains special characters
   (bnc #393723)
+- translations updated
 - r10223
+- 0.11.5
 
 -------------------------------------------------------------------
 Sun May 25 15:49:30 CEST 2008 - jkupec@suse.cz
