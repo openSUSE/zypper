@@ -131,6 +131,65 @@ cd ..
 if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
 #%{prefix}/lib/zypp/zypp-migrate-sources
 
+# convert old lock file to new
+# TODO make this a separate file?
+# TODO run the sript only when updating form pre-11.0 libzypp versions
+LOCKSFILE=/etc/zypp/locks
+OLDLOCKSFILE=/etc/zypp/locks.old
+
+is_old(){
+  TEMP_FILE=`mktemp`
+  cat ${LOCKSFILE} | sed '/^\#.*/ d;/.*:.*/d;/^[^[a-zA-Z\*?.0-9]*$/d' > ${TEMP_FILE}
+  if [ -s ${TEMP_FILE} ]
+  then
+    RES=0
+  else
+    RES=1
+  fi
+  rm -f ${TEMP_FILE}
+  return ${RES}
+}
+
+append_new_lock(){
+  case "$#" in
+    1 )
+  echo "
+solvable_name: $1
+match_type: glob
+" >> ${LOCKSFILE}
+;;
+    2 ) #TODO version
+  echo "
+solvable_name: $1
+match_type: glob
+version: $2
+" >> ${LOCKSFILE}
+;;
+    3 ) #TODO version
+  echo "
+solvable_name: $1
+match_type: glob
+version: $2 $3
+" >> ${LOCKSFILE}
+  ;;
+esac
+}
+
+die() {
+  echo $1
+  exit 1
+}
+
+if is_old ${LOCKSFILE}
+  then
+  mv -f ${LOCKSFILE} ${OLDLOCKSFILE} || die "cannot backup old locks"
+  cat ${OLDLOCKSFILE}| sed "/^\#.*/d"| while read line
+  do
+    append_new_lock $line
+  done
+fi
+
+
 %postun
 %run_ldconfig
 
