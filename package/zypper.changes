@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 26 14:31:57 CEST 2008 - jkupec@suse.cz
+
+- fixed layout of tables when the text contains special characters
+  (bnc #393723)
+- r10223
+
+-------------------------------------------------------------------
 Sun May 25 15:49:30 CEST 2008 - jkupec@suse.cz
 
 - ignore recommends of installed packages (bnc #389694)
