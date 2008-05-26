@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 26 11:48:35 CEST 2008 - schubi@suse.de
+
+- Do not regard packages with the same name while upgrading obsoleted
+  packages (bnc#394367)
+- r 10219 
+
+-------------------------------------------------------------------
 Sat May 24 01:23:44 CEST 2008 - dmacvicar@suse.de
 
 - revert commit don't check for existence of keys,
