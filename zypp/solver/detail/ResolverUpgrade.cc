@@ -663,7 +663,8 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	      sat::WhatProvides possibleProviders(*pit);
 	      for_( provIter, possibleProviders.begin(), possibleProviders.end() ) {
 		  PoolItem provider = ResPool::instance().find( *provIter );
-		  if (provider.status().isInstalled()
+		  if (item->name() != provider->name()
+		      && provider.status().isInstalled()
 		      && !provider.status().isToBeUninstalled()
 		      && obsoletedItems.find(provider) == obsoletedItems.end()) {
 		      
@@ -681,10 +682,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 			  }
 		      }
 		      if (!found) {
-			  MIL << item << " obsoletes " << provider << " but do not provides it. --> replace it" << endl;
+			  MIL << item << " obsoletes " << provider << " but does not provide it. --> replace it" << endl;
 			  it->status().setToBeInstalled( ResStatus::APPL_HIGH );
 		      } else {
-			  MIL << item << " obsoletes " << provider << " but do not provides it." << endl;
+			  MIL << item << " obsoletes " << provider << " but does not provide it." << endl;
 			  MIL << "  There is another item which obsoletes it too. I do not know whichone has to be taken" << endl;			  
 		      }
 		      obsoletedItems.insert (provider);	          		  
