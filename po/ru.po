@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-21 16:27+0400\n"
+"PO-Revision-Date: 2008-05-22 19:23+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1687,7 +1687,7 @@ msgstr "Указанная блокировка успешно удалена."
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/zypper-main.cc:44
 msgid "OK OK! Exitting immediately..."
-msgstr ""
+msgstr "Ладно, ладно! Выхожу немедленно..."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2191,25 +2191,25 @@ msgid "Arch"
 msgstr "Арх"
 
 #: ../src/zypper-misc.cc:2034
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Невозможно открыть %s: %m"
+msgstr "Невозможно проанализировать'%s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/zypper-misc.cc:2090
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr ""
+msgstr "'%s' интерактивно, пропуск."
 
 #: ../src/zypper-misc.cc:2145
-#, fuzzy, c-format
+#, c-format
 msgid "No patches matching '%s' found."
-msgstr "Не установлено пакетов, соответствующих '%s'."
+msgstr "Не найдено шаблонов, соответствующих '%s'."
 
 #: ../src/zypper-misc.cc:2148
-#, fuzzy, c-format
+#, c-format
 msgid "Patch '%s' not found."
-msgstr "'%s' не найден."
+msgstr "Исправление '%s' не найдено."
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
@@ -3134,5 +3134,3 @@ msgstr "Проверьте, доступен ли этот файл."
 msgid "Cannot parse capability '%s'."
 msgstr "Невозможно обработать способность '%s'."
 
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "Неверный номер блокировки: %s"
