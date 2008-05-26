@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 26 17:23:24 CEST 2008 - jkupec@suse.cz
+
+- old2new locks file converter script added to %post (jredinger)
+- r 10227
+
+-------------------------------------------------------------------
 Mon May 26 11:48:35 CEST 2008 - schubi@suse.de
 
 - Do not regard packages with the same name while upgrading obsoleted
