@@ -95,6 +95,7 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
 		       TableStyle st) const {
   const char * vline = lines[st][0];
 
+  unsigned int ssize = 0; // string size in columns
   bool seen_first = false;
   container::const_iterator
     i = _columns.begin (),
@@ -111,12 +112,13 @@ void TableRow::dumpTo (ostream &stream, const vector<unsigned>& widths,
 
     // stream.width (widths[c]); // that does not work with multibyte chars
     const string & s = *i;
-    if (s.size() > widths[c])
-      stream << (s.substr(0, widths[c] - 2) + "->");
+    ssize = string_to_columns (s);
+    if (ssize > widths[c])
+      stream << (s.substr(0, widths[c] - 2) + "->"); //! \todo FIXME cut at the correct place
     else
     {
       stream << s;
-      stream.width (widths[c] - string_to_columns (s));
+      stream.width (widths[c] - ssize);
     } 
     stream << "";
   }
