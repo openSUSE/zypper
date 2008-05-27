@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 27 22:35:37 CEST 2008 - coolo@suse.de
+
+- compile with RPM_OPT_FLAGS
+
+-------------------------------------------------------------------
 Mon May 26 17:23:24 CEST 2008 - jkupec@suse.cz
 
 - old2new locks file converter script added to %post (jredinger)

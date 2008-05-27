@@ -94,11 +94,11 @@ Authors:
 %build
 mkdir build
 cd build
+export CFLAGS="$RPM_OPT_FLAGS"
+export CXXFLAGS="$CFLAGS"
 cmake -DCMAKE_INSTALL_PREFIX=%{prefix} \
       -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
-      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
-      -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       ..
