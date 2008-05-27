@@ -45,7 +45,43 @@ namespace zypp
    * Meta-data query API. Returns solvables of specified kinds from specified
    * repositories with attributes matching the specified search strings.
    *
-   * TODO: details, examples.
+   * The search strings can be specified via \ref addString() and
+   * \ref addAttribute() methods. String matching type can be set using the
+   * setMatch*() methods. Multiple search strings for a particular attribute
+   * will be combined into a regex (see \ref addString() and
+   * \ref addAttribute() for more details).
+   *
+   * The begin() and end() methods return a PoolQueryIterator returning
+   * \ref sat::Solvable objects which can easily be turned into \ref Resolvable
+   * objects. Additionally, thanx to the \ref sat::SolvIterMixin, a Selectable
+   * and PoolItem iterators are automatically available.
+   *
+   * <code>
+   * PoolQuery q;
+   * q.addAttribute(sat::SolvAttr::name, "zypp*");
+   * q.addKind(ResKind::package);
+   * q.setMatchGlob();
+   *
+   * for (PoolQuery::Selectable_iterator it = q.selectableBegin();
+   *     it != q.selectableEnd(); ++it)
+   * {
+   *   ui::Selectable::constPtr s = *it;
+   *   // ...
+   * }
+   * </code>
+   *
+   * Performance considerations
+   *
+   * Results of simple queries like those using one string and/or one attribute
+   * and/or one repository are filtered by sat-solver's Dataiterator directly,
+   * and thus it is fast.
+   * 
+   * Queries with multiple strings are implemented using regexes. Queries based
+   * on kinds, multiple repos, and multiple attributes are filtered inside
+   * the PoolQuery, so these tend to be slower.
+   *
+   * \see tests/zypp/PoolQuery_test.cc for more examples
+   * \see sat::SolvIterMixin
    */
   class PoolQuery : public sat::SolvIterMixin<PoolQuery, detail::PoolQueryIterator>
   {
@@ -93,9 +129,8 @@ namespace zypp
     //@}
 
     /**
-     * executes the query with the current settings
-     * results are yielded on the callback passed on
-     * construction
+     * Executes the query with the current settings.
+     * Results are yielded via the \a fnc callback.
      */
     void execute(ProcessResolvable fnc);
 
@@ -105,8 +140,7 @@ namespace zypp
      * By default, all kinds will be returned. If addKind() is used,
      * only the specified kinds will be returned (multiple kinds will be ORed).
      *
-     * Pass ResTraits<T>::kind to this method, where T is one of the
-     * \ref Resolvable child classes (e.g. ResTraits<Pattern>::kind).
+     * Pass ResKind constants to this method, (e.g. ResKind::package).
      */
     void addKind(const ResKind & kind);
 
@@ -129,19 +163,39 @@ namespace zypp
       INSTALLED_ONLY = 1,
       UNINSTALLED_ONLY = 2
     };
+
+    /** Return only @System repo packages */
     void setInstalledOnly();
+    /** Return only packages from repos other than @System. */
     void setUninstalledOnly();
+    /** Set status filter directly \see StatusFilter */
     void setStatusFilterFlags( StatusFilter flags );
 
     //@}
 
     /**
-     * 
+     * Add a global query string. The string added via this method is applied
+     * to all query attributes as if addAttribute(..., \value) was called
+     * for all of them.
+     *
+     * This method can be used multiple times in which case the query strings
+     * will be combined (together with strings added via addAttribute()) into
+     * a regex. Searched attribute value will match this regex if <b>any</b>
+     * of these strings will match the value. This can be changed by
+     * (not yet implemented) \ref setRequireAll() method.
      */
     void addString(const std::string & value);
 
     /**
-     * Filter by the \a value of any available solvable attribute.
+     * Filter by the \a value of the specified \a attr attribute. This can
+     * be any of the available solvable attributes.
+     *
+     * This method can be used multiple times with the same \a attr in which
+     * case the query strings will be combined (together with strings added
+     * via addString()) into a regex. Searched attribute value will match
+     * this regex if <b>any</b> of these strings will match the value.
+     * This can be changed by (not yet implemented) \ref setRequireAll()
+     * method.
      *
      * \note Solvables of a kind not supporting the specified attribute will
      * <b>not</b> be returned.
@@ -149,6 +203,8 @@ namespace zypp
      *
      * \param attr Attribute identfier. Use sat::Solvattr::* constants
      * \param value What to search for.
+     *
+     * \see sat::SolvAttr
      */
     void addAttribute(const sat::SolvAttr & attr, const std::string & value = "");
 
