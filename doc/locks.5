@@ -63,7 +63,17 @@ default is substring
 
 .TP
 .B query_string
-string for all attributes. Can be restricted by attribute with empty value. 
+string for all attributes. Can be restricted by attribute with empty value ( it is recommended, because without restriction expect some performance problems ). 
+
+.TP
+.B version
+restrict lock only to some versions. It contains two part, first is operator and second is version.
+.br
+Operator is \fB==\fR,\fB!=\fR,\fB<\fR,\fB>\fR,\fB<=\fR,\fB>=\fR. If operator is not specified then == is used.
+.br
+Version have format \fBepoch:version-release\fR. Only version is mandatory.
+.br
+example - version: < 0:0.11.4-2
 
 .TP
 .B solvable_name 
@@ -72,6 +82,10 @@ name of object
 .TP
 .B solvable_summary
 summary of object 
+
+.TP
+.B solvable_arch
+architecture of object (e.g. x86_64, i586) 
 
 .TP
 .B solvable_description
