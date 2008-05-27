@@ -277,6 +277,8 @@ namespace zypp
                 err << retChecksum;
               err << "]";
 
+              WAR << err.str() << endl;
+
               if ( policy_r.failOnChecksumError() )
                 ZYPP_THROW( FileCheckException( err.str() ) );
               else
