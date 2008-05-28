@@ -2,7 +2,7 @@
 Wed May 28 16:26:09 CEST 2008 - jkupec@suse.cz
 
 - RepoInfo: don't overwrite flags that have already been set externally
-  (bnc #395026)
+  (bnc #394728)
 - revision 10256
 
 -------------------------------------------------------------------
