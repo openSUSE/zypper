@@ -169,13 +169,16 @@ namespace zypp
 
   RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
-    // set only if not already set (bnc #394728)
-    if (!(_pimpl->flags_determined & Impl::FLAG_KEEPPACKAGES))
+    // set only if not already set externally (bnc #394728)
+    if (!(_pimpl->flags_determined & Impl::FLAG_KEEPPACKAGES) &&
+        _pimpl->baseUrls.empty())
     {
       if ( media::MediaAccess::downloads( url ) )
-        setKeepPackages(true);
+        // don't do this via setKeepPackages, it would set the flags_determined
+        // for FLAG_KEEPPACKAGES  
+        _pimpl->keeppackages = true;
       else
-        setKeepPackages(false);
+        _pimpl->keeppackages = false;
     }
 
     _pimpl->baseUrls.insert(url);
