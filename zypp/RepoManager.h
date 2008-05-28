@@ -210,6 +210,20 @@ namespace zypp
      */
     Pathname metadataPath( const RepoInfo &info ) const;
 
+
+    /**
+     * \short Path where the rpm packages are downloaded and kept
+     *
+     * Given a repoinfo, tells where \ref RepoProvidePackage will download
+     * and keep the .rpm files.
+     *
+     * \param info Repository information
+     *
+     * \throws repo::RepoNoAliasException if can't figure an alias
+     */
+    Pathname packagesPath( const RepoInfo &info ) const;
+
+
    /**
     * \short Refresh local raw cache
     *

@@ -321,6 +321,11 @@ namespace zypp
     return rawcache_path_for_repoinfo(_pimpl->options, info );
   }
 
+  Pathname RepoManager::packagesPath( const RepoInfo &info ) const
+  {
+    return packagescache_path_for_repoinfo(_pimpl->options, info );
+  }
+
   ////////////////////////////////////////////////////////////////////////////
 
   RepoStatus RepoManager::metadataStatus( const RepoInfo &info ) const
