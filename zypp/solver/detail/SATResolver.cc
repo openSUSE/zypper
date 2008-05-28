@@ -846,6 +846,24 @@ void SATResolver::doUpdate()
 // helper function
 //----------------------------------------------------------------------------
 
+struct FindPackage : public resfilter::ResObjectFilterFunctor
+{
+    ProblemSolutionCombi *problemSolution;
+    TransactionKind action;
+    FindPackage (ProblemSolutionCombi *p, const TransactionKind act)
+       : problemSolution (p)
+       , action (act)
+	{
+	}
+ 
+    bool operator()( PoolItem p)
+   {
+       problemSolution->addSingleAction (p, action);
+       return true;
+   }
+};
+
+
 
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
@@ -1036,7 +1054,7 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_NAME:
 				{
-				IdString ident( what );				    
+				IdString ident( what );
 				SolverQueueItemInstall_Ptr install =
 				    new SolverQueueItemInstall(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (install, REMOVE_SOLVE_QUEUE_ITEM);				
@@ -1048,7 +1066,16 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_ERASE_SOLVABLE_NAME:
 				{
+				// As we do not know, if this request has come from resolvePool or
+				// resolveQueue we will have to take care for both cases.				    
                                 IdString ident( what );
+				FindPackage info (problemSolution, KEEP);
+				invokeOnEach( _pool.byIdentBegin( ident ),
+					      _pool.byIdentEnd( ident ),
+					      functor::chain (resfilter::ByInstalled (),			// ByInstalled
+							      resfilter::ByTransact ()),			// will be deinstalled
+					      functor::functorRef<bool,PoolItem> (info) );
+				
 				SolverQueueItemDelete_Ptr del =
 				    new SolverQueueItemDelete(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (del, REMOVE_SOLVE_QUEUE_ITEM);				
