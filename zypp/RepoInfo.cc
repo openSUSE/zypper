@@ -30,13 +30,21 @@ namespace zypp
   /** RepoInfo implementation. */
   struct RepoInfo::Impl
   {
+    enum FlagsDeterminedState
+    {
+      FLAG_ENABLED      = 1,
+      FLAG_AUTOREFRESH  = 2,
+      FLAG_GPGCHECK     = 4,
+      FLAG_KEEPPACKAGES = 8
+    };
 
     Impl()
       : enabled (false),
         autorefresh(false),
         gpgcheck(true),
 	keeppackages(false),
-        type(repo::RepoType::NONE_e)
+        type(repo::RepoType::NONE_e),
+        flags_determined(0)
     {}
 
     ~Impl()
@@ -73,6 +81,7 @@ namespace zypp
     Pathname metadatapath;
     Pathname packagespath;
     DefaultIntegral<unsigned,defaultPriority> priority;
+    int flags_determined;
   public:
 
   private:
@@ -128,18 +137,21 @@ namespace zypp
   RepoInfo & RepoInfo::setEnabled( bool enabled )
   {
     _pimpl->enabled = enabled;
+    _pimpl->flags_determined |= Impl::FLAG_ENABLED;
     return *this;
   }
 
   RepoInfo & RepoInfo::setAutorefresh( bool autorefresh )
   {
     _pimpl->autorefresh = autorefresh;
+    _pimpl->flags_determined |= Impl::FLAG_AUTOREFRESH;
     return *this;
   }
 
   RepoInfo & RepoInfo::setGpgCheck( bool check )
   {
     _pimpl->gpgcheck = check;
+    _pimpl->flags_determined |= Impl::FLAG_GPGCHECK;
     return *this;
   }
 
@@ -157,7 +169,8 @@ namespace zypp
 
   RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
-    if ( _pimpl->baseUrls.size()==0 ) //first url
+    // set only if not already set (bnc #394728)
+    if (!(_pimpl->flags_determined & Impl::FLAG_KEEPPACKAGES))
     {
       if ( media::MediaAccess::downloads( url ) )
         setKeepPackages(true);
@@ -235,6 +248,7 @@ namespace zypp
   RepoInfo & RepoInfo::setKeepPackages( bool keep )
   {
     _pimpl->keeppackages = keep;
+    _pimpl->flags_determined |= Impl::FLAG_KEEPPACKAGES;
     return *this;
   }
 
