@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 28 16:26:09 CEST 2008 - jkupec@suse.cz
+
+- RepoInfo: don't overwrite flags that have already been set externally
+  (bnc #395026)
+- revision 10256
+
+-------------------------------------------------------------------
 Wed May 28 15:30:24 CEST 2008 - ma@suse.de
 
 - Create missing directories when saving config files. (bnc #395026)
