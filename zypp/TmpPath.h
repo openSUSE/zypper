@@ -109,7 +109,6 @@ namespace zypp {
      * name unique. Different location and file prefix may be passed to
      * the ctor. TmpFile is created with mode 0600.
      *
-     * The directory where the temporary file is to be created must exist.
      * TmpFile provides the Pathname of the temporary file, or an empty
      * path in case of any error.
      **/
@@ -154,7 +153,6 @@ namespace zypp {
      * the  name unique. Different location and file prefix may be passed
      * to the ctor. TmpDir is created with mode 0700.
      *
-     * The directory where the temporary directory is to be created must exist.
      * TmpDir provides the Pathname of the temporary directory , or an empty
      * path in case of any error.
      **/

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 28 15:30:24 CEST 2008 - ma@suse.de
+
+- Create missing directories when saving config files. (bnc #395026)
+- Fix undefined behaviour in RepoManager.
+- revision 10255
+
+-------------------------------------------------------------------
 Wed May 28 15:23:44 CEST 2008 - schubi@suse.de
 
 - SOLVER_ERASE_SOLVABLE_NAME: As we do not know, if this request has come

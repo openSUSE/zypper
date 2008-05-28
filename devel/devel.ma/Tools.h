@@ -112,6 +112,7 @@ template<class _Container>
 
 inline RepoManager makeRepoManager( const Pathname & mgrdir_r )
 {
+  return RepoManager();
 
   RepoManagerOptions mgropt;
   mgropt.repoCachePath    = mgrdir_r/"cache";

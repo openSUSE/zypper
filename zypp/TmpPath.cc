@@ -175,8 +175,13 @@ namespace zypp {
       PathInfo p( inParentDir_r );
       if ( ! p.isDir() )
         {
-          ERR << "Parent directory does not exist: " << p << endl;
-          return;
+          filesystem::assert_dir( inParentDir_r );
+          p(); // re-stat
+          if ( ! p.isDir() )
+          {
+            ERR << "Parent directory can't be created: " << p << endl;
+            return;
+          }
         }
 
       // create the temp file
@@ -185,6 +190,7 @@ namespace zypp {
       if ( ! buf )
         {
           ERR << "Out of memory" << endl;
+          ::free( buf );
           return;
         }
 
@@ -248,8 +254,13 @@ namespace zypp {
       PathInfo p( inParentDir_r );
       if ( ! p.isDir() )
         {
-          ERR << "Parent directory does not exist: " << p << endl;
-          return;
+          filesystem::assert_dir( inParentDir_r );
+          p(); // re-stat
+          if ( ! p.isDir() )
+          {
+            ERR << "Parent directory does not exist: " << p << endl;
+            return;
+          }
         }
 
       // create the temp dir
