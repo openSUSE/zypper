@@ -18,11 +18,12 @@ extern "C"
 #include <fstream>
 
 #include "zypp/base/Easy.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 
 #include "zypp/DiskUsageCounter.h"
-#include "zypp/Package.h"
+#include "zypp/sat/Pool.h"
+#include "zypp/sat/detail/PoolImpl.h"
 
 using std::endl;
 
@@ -30,43 +31,7 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
-
-    inline void addDu( DiskUsageCounter::MountPointSet & result_r, DiskUsage & du_r )
-    {
-      // traverse mountpoints in reverse order. This is done beacuse
-      // DiskUsage::extract computes the mountpoint size, and then
-      // removes the entry. So we must process leaves first.
-      for_( mpit, result_r.rbegin(), result_r.rend() )
-      {
-        // Extract usage for the mount point
-        DiskUsage::Entry entry = du_r.extract( mpit->dir );
-        // Adjust the data.
-        mpit->pkg_size += entry._size;
-      }
-    }
-
-    inline void delDu( DiskUsageCounter::MountPointSet & result_r, DiskUsage & du_r )
-    {
-      // traverse mountpoints in reverse order. This is done beacuse
-      // DiskUsage::extract computes the mountpoint size, and then
-      // removes the entry. So we must process leaves first.
-      for_( mpit, result_r.rbegin(), result_r.rend() )
-      {
-        // Extract usage for the mount point
-        DiskUsage::Entry entry = du_r.extract( mpit->dir );
-        // Adjust the data.
-        mpit->pkg_size -= entry._size;
-      }
-    }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace
-  ///////////////////////////////////////////////////////////////////
-
- DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
   {
     DiskUsageCounter::MountPointSet result = mps;
 
@@ -76,56 +41,53 @@ namespace zypp
       return result;
     }
 
-    // set used size after commit to the current used size
-    for_( it, result.begin(), result.end() )
+    sat::Pool satpool( sat::Pool::instance() );
+
+    // init satsolver result vector with mountpoints
+    static const ::DUChanges _initdu = { 0, 0, 0 };
+    std::vector< ::DUChanges> duchanges( result.size(), _initdu );
     {
-      it->pkg_size = it->used_size;
+      unsigned idx = 0;
+      for_( it, result.begin(), result.end() )
+      {
+        duchanges[idx].path = it->dir.c_str();
+        ++idx;
+      }
     }
 
-    // iterate through all items
+    // build installedmap (installed != transact)
+    // stays installed or gets installed
+    ::Map installedmap;
+    ::map_init( &installedmap, satpool.capacity() );
     for_( it, pool_r.begin(), pool_r.end() )
     {
-      // skip items that do not transact
-      if ( ! it->status().transacts() )
-        continue;
-
-      DiskUsage du( (*it)->diskusage() );
-
-      // skip items without du info
-      if ( du.empty() )
-        continue; // or find some substitute info
-
-      // Adjust the data.
-      if ( it->status().isUninstalled() )
+      if ( it->status().isInstalled() != it->status().transacts() )
       {
-        // an uninstalled item gets installed:
-        addDu( result, du );
-
-        // While there is no valid solver result, items to update
-        // are selected, but installed old versions are not yet
-        // deselected. We try to compensate this:
-        if ( ! (*it)->installOnly() )
-        {
-          // Item to update -> check the installed ones.
-          for_( nit, pool_r.byIdentBegin( *it ), pool_r.byIdentEnd( *it ) )
-          {                                       // same kind and name
-            if ( nit->status().staysInstalled() ) // and unselected installed
-            {
-              DiskUsage ndu( (*nit)->diskusage() );
-              if ( ! ndu.empty() )
-              {
-                delDu( result, ndu );
-              }
-            }
-          }
-        }
-      }
-      else
-      {
-        // an installed item gets deleted:
-        delDu( result, du );
+        MAPSET( &installedmap, it->satSolvable().id() );
       }
     }
+
+    // now calc...
+    ::pool_calc_duchanges( satpool.get(),
+                           satpool.systemRepo().get(),
+                           &installedmap,
+                           &duchanges[0],
+                           duchanges.size() );
+
+    // and process the result
+    {
+      unsigned idx = 0;
+      for_( it, result.begin(), result.end() )
+      {
+        static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / (2 * 1K)
+
+        it->pkg_size = it->used_size          // current usage
+                     + duchanges[idx].kbytes  // package data size
+                     + ( duchanges[idx].files * it->block_size / blockAdjust ); // half block per file
+        ++idx;
+      }
+    }
+
     return result;
   }
 
@@ -274,7 +236,7 @@ namespace zypp
         << " ts: " << obj.total_size
         << " us: " << obj.used_size
         << " (+-: " << (obj.pkg_size-obj.used_size)
-        << ")]" << std::endl;
+        << ")]";
     return str;
   }
 

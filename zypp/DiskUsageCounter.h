@@ -40,15 +40,15 @@ namespace zypp
       /**
        * Block size of the mount point
        **/
-      long long block_size;       
+      long long block_size;
 
       /**
-       * Total size in kB (1024)
+       * Total size in K (1024)
        **/
       long long total_size;
 
       /**
-       * Used size in kB (1024)
+       * Used size in  (1024)
        **/
       long long used_size;
 
@@ -99,10 +99,10 @@ namespace zypp
     MountPointSet mps;
   };
   ///////////////////////////////////////////////////////////////////
-  
+
   /** \relates DiskUsageCounter::MountPoint Stream output */
   std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPoint & obj );
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

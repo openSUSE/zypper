@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May 28 18:54:27 CEST 2008 - ma@suse.de
+
+- Reenable diskusage calculation (bnc #395051)
+- version 4.25.1
+- revision 10273
+
+-------------------------------------------------------------------
 Wed May 28 18:50:11 CEST 2008 - jkupec@suse.cz
 
 - RepoManager::packagesPath(RepoInfo) added (bnc #394728)
