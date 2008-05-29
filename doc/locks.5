@@ -5,21 +5,21 @@ locks - libzypp locking file
 
 .SH "DESCRIPTION"
 .LP
-The file \fI/etc/zypp/locks\fR has been read by libzypp at startup if zypp.conf allow it. The entries is used for initial lock of package. Lock package mean does't allow install or uninstall package. Valid entries are
+The file \fI/etc/zypp/locks\fR has been read by libzypp at startup if zypp.conf allow it. The entries is used for initial lock of package. Lock package mean does't allow install, update or uninstall package. Valid entries are
 .TP
 \fI attribute\fR\fB:\fR \fIvalue\fR
 Where attributes and its values is described below.
 .br
-Locks is separated by empty line.
+Each lock is separated by empty line.
 
 
 .SH "ATTRIBUTES"
 .LP
-description of attributes. All attributes are lower-case.
+description of attributes. All attributes are \fBlower-case\fR.
 
 .TP
 .B repo
-specifies repository restriction. Only allias is accepted.
+specifies repository restriction. Only alias is allowed.
 .br
 Default is allowed all repositories.
 
@@ -35,7 +35,7 @@ default is all type
 .B case_sensitive
 if string is matched case sensitive.
 .br
-default is case insensitive 
+default is case \fBin\fRsensitive 
 
 .TP
 .B require_all
@@ -57,7 +57,7 @@ default is all
 .B match_type 
 type of string in value. Not affect type and repo which must be exactly specified.
 .br
-values are \fBexact\fR for exact match, \fBsubstring\fR if string contains value, \fBregex\fR for regular expressions, \fBglob\fR for matching as in command line and \fBword\fR.
+values are \fBexact\fR for exact match, \fBsubstring\fR if string contains value, \fBregex\fR for POSIX extended regular expressions, \fBglob\fR for matching as in command line and \fBword\fR for matching by whole words.
 .br
 default is substring 
 
@@ -69,7 +69,7 @@ string for all attributes. Can be restricted by attribute with empty value ( it 
 .B version
 restrict lock only to some versions. It contains two part, first is operator and second is version.
 .br
-Operator is \fB==\fR,\fB!=\fR,\fB<\fR,\fB>\fR,\fB<=\fR,\fB>=\fR. If operator is not specified then == is used.
+Allowed Operators are \fB==\fR,\fB!=\fR,\fB<\fR,\fB>\fR,\fB<=\fR and \fB>=\fR. If operator is not specified then == is used.
 .br
 Version have format \fBepoch:version-release\fR. Only version is mandatory.
 .br
@@ -77,11 +77,11 @@ example - version: < 0:0.11.4-2
 
 .TP
 .B solvable_name 
-name of object 
+name of object (e.g. zypper)
 
 .TP
 .B solvable_summary
-summary of object 
+summary of object
 
 .TP
 .B solvable_arch
@@ -93,19 +93,23 @@ description of object
 
 .TP
 .B solvable_eula 
-license text of non-opensource object
+license text of objects which request accepting license by user
 
 .TP
 .B solvable_license 
-license of package (only for package)
+license of package (only for package) (e.g. GPL2)
 
 .TP
 .B solvable_keywords 
-keywords which specify object
+keywords which specify package (only for package)
 
 .TP
 .B solvable_authors
-authors of object
+authors of package (only for package)
+
+.TP
+.B solvable_group
+package group (only for package) (e.g. Development/Tools/Version Control )
 
 .TP
 .B update_reference_type 
@@ -117,7 +121,7 @@ examples of usage
 
 .TP
 .B all kde
-locks everything which contains kde 
+locks everything which contains kde substring
 .br
 -----locks-----
 .br
@@ -167,7 +171,7 @@ solvable_keywords: x11
 .B exact package 
 lock k3b (e.g. don't want update it)
 .br
-preferred way is use zypper addlock command (or Yast when they support new locks api-not now)
+preferred way is use zypper addlock command or Yast
 .br
 -----locks-----
 .br
