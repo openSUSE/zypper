@@ -386,9 +386,9 @@ namespace zypp
     switch ( obj )
     {
       case CapDetail::REL_NONE:      return str << "NoCapRel"; break;
-      case CapDetail::CAP_AND:       return str << "AND"; break;
-      case CapDetail::CAP_OR:        return str << "OR"; break;
-      case CapDetail::CAP_WITH:      return str << "WITH"; break;
+      case CapDetail::CAP_AND:       return str << "&"; break; // AND
+      case CapDetail::CAP_OR:        return str << "|"; break; // OR
+      case CapDetail::CAP_WITH:      return str << "+"; break; // WITH
       case CapDetail::CAP_NAMESPACE: return str << "NAMESPACE"; break;
       case CapDetail::CAP_ARCH:      return str << "ARCH"; break;
    }
