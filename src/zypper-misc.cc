@@ -136,6 +136,31 @@ bool ProvideProcess::operator()( const PoolItem& provider )
   return true;
 }
 
+string helpPagerExit(const string &pager)
+{
+  string endfour = pager.substr(pager.size()-4,4);
+  if (endfour == "less")
+  {
+    return _("Press 'q' to exit.");
+  }
+  return string();
+}
+
+string helpPagerNavigation(const string &pager)
+{
+  string endfour = pager.substr(pager.size()-4,4);
+  if (endfour == "less")
+  {
+    return _("Use arrows to scroll by line or pgnUp/Down to scroll by screens."
+        " Also Home/End work.");
+  }
+  else if (endfour == "more")
+  {
+    return _("Use Enter to go to next line and space for scroll whole screen.");
+  }
+  return string();
+}
+
 //gets true if successfully display in pager
 bool show_in_pager(const string& text)
 {
@@ -146,7 +171,13 @@ bool show_in_pager(const string& text)
   filesystem::TmpFile tfile;
   string tpath = tfile.path().absolutename().c_str();
   ofstream os(tpath.c_str());
+  string help = helpPagerNavigation(pager);
+  if (!help.empty())
+    os << help << endl << endl;
   os << text;
+  help = helpPagerExit(pager);
+  if (!help.empty())
+    os << endl << endl << help;
   os.close();
   ostringstream cmdline;
   cmdline << pager <<" "<<tpath;
@@ -2538,6 +2569,8 @@ static bool confirm_licenses(Zypper & zypper)
 
       // license text
       ostringstream s;
+      s <<  _("In order to install this package, you must agree"
+              " to terms of the license.") << endl;
       s << format(_("%s %s license:")) % it->resolvable()->name()
           % kind_to_string_localized(it->resolvable()->kind(), 1);
       const string& licenseText = it->resolvable()->licenseToConfirm();
