@@ -106,17 +106,28 @@ struct LockingOutputIterator
 void Locks::readAndApply( const Pathname& file )
 {
   MIL << "read and apply locks from "<<file << endl;
-  insert_iterator<LockList> ii( _pimpl->locks,
-      _pimpl->locks.end() );
-  LockingOutputIterator<insert_iterator<LockList> > lout(ii);
-  readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
+  PathInfo pinfo(file);
+  if ( pinfo.isExist() )
+  {
+    insert_iterator<LockList> ii( _pimpl->locks,
+        _pimpl->locks.end() );
+    LockingOutputIterator<insert_iterator<LockList> > lout(ii);
+    readPoolQueriesFromFile( file, boost::make_function_output_iterator(lout) );
+  }
+  else
+    MIL << "file not exist(or cannot be stat), no lock added." << endl;
+
 }
 
 void Locks::read( const Pathname& file )
 {
   MIL << "read locks from "<<file << endl;
-  readPoolQueriesFromFile(
-    file, insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
+  PathInfo pinfo(file);
+  if ( pinfo.isExist() )
+    readPoolQueriesFromFile(
+       file, insert_iterator<LockList>(_pimpl->locks, _pimpl->locks.end()) );
+  else 
+    MIL << "file not exist(or cannot be stat), no lock added." << endl;
 }
 
 
