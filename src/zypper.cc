@@ -664,7 +664,7 @@ void Zypper::shellCleanup()
   {
   case ZypperCommand::INSTALL_e:
   case ZypperCommand::REMOVE_e:
-  //case Zyppercommand::UPDATE_e: TODO once the update will take arguments
+  case ZypperCommand::UPDATE_e:
   {
     remove_selections(*this);
     break;
@@ -2957,10 +2957,10 @@ void Zypper::doCommand()
         kinds.insert(kind);
       }
     }
-    else if (globalOpts().is_rug_compatible)
-      kinds.insert(ResTraits<Package>::kind);
+    else if (globalOpts().is_rug_compatible || !_arguments.empty() /* bnc #385990*/)
+      kinds.insert(ResKind::package);
     else
-      kinds.insert(ResTraits<Patch>::kind);
+      kinds.insert(ResKind::patch);
 
     bool best_effort = copts.count( "best-effort" ); 
     if (globalOpts().is_rug_compatible && best_effort)
