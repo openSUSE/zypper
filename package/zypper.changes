@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 30 15:38:00 CEST 2008 - jreidinger@suse.cz
+
+- show help messages when show license in pager (bnc #394394)
+- r10284 
+
+-------------------------------------------------------------------
 Mon May 26 14:31:57 CEST 2008 - jkupec@suse.cz
 
 - fixed layout of tables when the text contains special characters
