@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri May 30 12:14:47 CEST 2008 - tgoettlicher@suse.de
+
+- fixed typo
+
+-------------------------------------------------------------------
 Wed May 28 18:54:27 CEST 2008 - ma@suse.de
 
 - Reenable diskusage calculation (bnc #395051)

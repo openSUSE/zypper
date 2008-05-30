@@ -49,7 +49,7 @@ namespace zypp
       case ABORT:       str << "ABORT";       break;
 	// no default !
     }
-    return str << " reqest: " << msg();
+    return str << " request: " << msg();
   }
 
   /////////////////////////////////////////////////////////////////
