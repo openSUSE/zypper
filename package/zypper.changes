@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 30 18:30:11 CEST 2008 - jkupec@suse.cz
+
+- zypper up <foo> to defaults to -t package (bnc #385990)
+- r10288
+
+-------------------------------------------------------------------
 Fri May 30 15:38:00 CEST 2008 - jreidinger@suse.cz
 
 - show help messages when show license in pager (bnc #394394)
