@@ -136,27 +136,26 @@ bool ProvideProcess::operator()( const PoolItem& provider )
   return true;
 }
 
-string helpPagerExit(const string &pager)
+string pager_help_exit(const string &pager)
 {
   string endfour = pager.substr(pager.size()-4,4);
   if (endfour == "less")
   {
-    return _("Press 'q' to exit.");
+    return str::form(_("Press '%c' to exit the pager."), 'q');
   }
   return string();
 }
 
-string helpPagerNavigation(const string &pager)
+string pager_help_navigation(const string &pager)
 {
   string endfour = pager.substr(pager.size()-4,4);
   if (endfour == "less")
   {
-    return _("Use arrows to scroll by line or pgnUp/Down to scroll by screens."
-        " Also Home/End work.");
+    return _("Use arrows or pgUp/pgDown keys to scroll the text by lines or pages.");
   }
   else if (endfour == "more")
   {
-    return _("Use Enter to go to next line and space for scroll whole screen.");
+    return _("Use the Enter or Space key to scroll the text by lines or pages.");
   }
   return string();
 }
@@ -171,30 +170,35 @@ bool show_in_pager(const string& text)
   filesystem::TmpFile tfile;
   string tpath = tfile.path().absolutename().c_str();
   ofstream os(tpath.c_str());
-  string help = helpPagerNavigation(pager);
+
+  string help = pager_help_navigation(pager);
   if (!help.empty())
-    os << help << endl << endl;
+    os << "(" << help << ")" << endl << endl;
   os << text;
-  help = helpPagerExit(pager);
+
+  help = pager_help_exit(pager);
   if (!help.empty())
-    os << endl << endl << help;
+    os << endl << endl << "(" << help << ")";
   os.close();
+
   ostringstream cmdline;
   cmdline << pager <<" "<<tpath;
 
-  switch(fork()){
-    case -1:
-      WAR << "fork failed" << endl;
-      return false;
+  switch(fork())
+  {
+  case -1:
+    WAR << "fork failed" << endl;
+    return false;
 
-    case 0:
-      execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
-      WAR << "exec failed with " << strerror(errno) << endl;
-      exit(1); //cannot return false here, due to here is another process
-      //so only kill itself
+  case 0:
+    execlp("sh","sh","-c",cmdline.str().c_str(),(char *)0);
+    WAR << "exec failed with " << strerror(errno) << endl;
+    exit(1); // cannot return false here, because here is another process
+             // so only kill myself
+             //! \todo FIXME proper exit code, message?
 
-    default: 
-      wait(0); //wait until pager end to disallow possibly terminal collision
+  default: 
+    wait(0); //wait until pager end to disallow possibly terminal collision
   }
 
   return true;
@@ -2567,23 +2571,35 @@ static bool confirm_licenses(Zypper & zypper)
         continue;
       }
 
-      // license text
       ostringstream s;
-      s <<  _("In order to install this package, you must agree"
-              " to terms of the license.") << endl;
-      s << format(_("%s %s license:")) % it->resolvable()->name()
-          % kind_to_string_localized(it->resolvable()->kind(), 1);
+      string kindstr =
+        it->resolvable()->kind() != ResKind::package ?
+          " (" + kind_to_string_localized(it->resolvable()->kind(), 1) + ")" :
+          string();
+
+      // introduction
+      s << str::form(
+          // translators: the first %s is the name of the package, the second
+          // is " (package-type)" if other than "package" (patch/product/pattern)
+          _("In order to install '%s'%s, you must agree"
+            " to terms of the following license agreement:"),
+            it->resolvable()->name().c_str(), kindstr.c_str());
+      s << endl << endl;
+
+      // license text
       const string& licenseText = it->resolvable()->licenseToConfirm();
       if (licenseText.find("DT:Rich")==licenseText.npos)
         s << licenseText;
       else
         s << processRichText(licenseText);
-      if (!show_in_pager(s.str())) //pager fail, show normal
+
+      // show in pager unless we are read by a machine or the pager fails
+      if (zypper.globalOpts().machine_readable || !show_in_pager(s.str()))
         zypper.out().info(s.str(), Out::QUIET);
 
       // lincense prompt
-      string question = _("In order to install this package, you must agree"
-        " to terms of the above license. Continue?");
+      string question = _("Do you agree with the terms of the license?");
+      //! \todo add 'v' option to view the license again, add prompt help
       if (!read_bool_answer(PROMPT_YN_LICENSE_AGREE, question, zypper.cmdOpts().license_auto_agree))
       {
         confirmed = false;
@@ -2607,6 +2623,7 @@ static bool confirm_licenses(Zypper & zypper)
         {
           zypper.out().info(boost::str(format(
               // translators: e.g. "... with flash package license."
+              //! \todo fix this to allow proper translation
               _("Aborting installation due to user disagreement with %s %s license."))
                 % it->resolvable()->name()
                 % kind_to_string_localized(it->resolvable()->kind(), 1)),
