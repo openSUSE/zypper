@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sun Jun  1 23:14:34 CEST 2008 - - ma@suse.de
+
+- Revert inappropriate Selectable cleanup. Fix Selectable 
+  status computation. Unmaintained packages were wrongly
+  reported as unsinstalled. (bnc #394630)
+- version 5.0.0 (4.x continued in SuSE-Linux-11_0-Branch)
+- revision 10295
+
+-------------------------------------------------------------------
 Fri May 30 12:14:47 CEST 2008 - tgoettlicher@suse.de
 
 - fixed typo

@@ -37,6 +37,8 @@ namespace zypp
       , cand( impl.candidateObj() )
       {}
 
+      typedef Selectable::Impl::available_const_iterator available_const_iterator;
+
       //
       // Queries
       //
@@ -60,7 +62,7 @@ namespace zypp
       //
       void resetTransactingCandidates() const
       {
-          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
+        for ( available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -68,7 +70,7 @@ namespace zypp
       }
       void unlockCandidates() const
       {
-          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
+        for ( available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -77,7 +79,7 @@ namespace zypp
       }
       void lockCandidates() const
       {
-          for ( Selectable::Impl::available_const_iterator it = _impl.availableBegin();
+        for ( available_const_iterator it = _impl.availableBegin();
               it != _impl.availableEnd(); ++it )
           {
             (*it).status().setTransact( false, ResStatus::USER );
@@ -90,7 +92,7 @@ namespace zypp
         if ( cand )
           {
 	      if ( inst ) {
-		  inst.status().resetTransact( ResStatus::USER );
+		  inst.status().setTransact( false, ResStatus::USER );
 		  inst.status().setLock    ( false, ResStatus::USER );
                   if ( ! cand->installOnly() )
                   {
@@ -102,7 +104,7 @@ namespace zypp
                   }
 	      }
               unlockCandidates();
-	      return cand.status().setToBeInstalled( ResStatus::USER );
+	      return cand.status().setTransact( true, ResStatus::USER );
           }
         return false;
       }
@@ -113,7 +115,7 @@ namespace zypp
           {
             resetTransactingCandidates();
 	    inst.status().setLock( false, ResStatus::USER );
-            return inst.status().setToBeUninstalled( ResStatus::USER );
+            return inst.status().setTransact( true, ResStatus::USER );
           }
         return false;
       }
@@ -121,7 +123,7 @@ namespace zypp
       bool unset() const
       {
 	  if ( inst ) {
-	      inst.status().resetTransact( ResStatus::USER );
+	      inst.status().setTransact( false, ResStatus::USER );
 	      inst.status().setLock( false, ResStatus::USER );
 	  }
           unlockCandidates();
@@ -132,7 +134,7 @@ namespace zypp
       {
 	  if ( inst ) {
               resetTransactingCandidates();
-	      inst.status().resetTransact( ResStatus::USER );
+	      inst.status().setTransact( false, ResStatus::USER );
 	      return inst.status().setLock( true, ResStatus::USER );
 	  } else
 	      return false;
@@ -183,13 +185,15 @@ namespace zypp
       if ( !installedObj() && allCandidatesLocked() )
 	  return S_Taboo;
 
-      // non packages are handled differently
-      if ( ! isKind<Package>(cand.resolvable()) )
-      {
-          return( cand.status().isSatisfied() ? S_KeepInstalled : S_NoInst );
-      }
+      // KEEP state: non packages count as installed if they are satisfied.
+      if ( installedObj() )
+          return S_KeepInstalled;
 
-      return( installedObj() ? S_KeepInstalled : S_NoInst );
+      if ( kind() != ResKind::package
+           && cand.status().isSatisfied() ) // no installed, so we must have candidate
+          return S_KeepInstalled;
+
+      return S_NoInst;
     }
 
     bool Selectable::Impl::setStatus( const Status state_r )
