@@ -914,6 +914,7 @@ void Zypper::processCommandOptions()
       {"repo", required_argument, 0, 'r'},
       {"no-recommends", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
+      {"debug-solver", no_argument, 0, 0},
       {0, 0, 0, 0}
     };
     specific_options = verify_options;
@@ -936,6 +937,7 @@ void Zypper::processCommandOptions()
     static struct option options[] = {
       {"dry-run", no_argument, 0, 'D'},
       {"repo", required_argument, 0, 'r'},
+      {"debug-solver", no_argument, 0, 0},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -950,6 +952,7 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
       "-D, --dry-run            Test the installation, do not actually install anything.\n"
+      "    --debug-solver       Create solver test case for debugging.\n"
     );
     break;
   }
