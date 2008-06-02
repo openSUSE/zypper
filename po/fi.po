@@ -10,13 +10,14 @@
 # Sami Vento <sami.vento@opensuse.fi>, 2007.
 # Jyri Palokangas <jyri.palokangas@opensuse.org>, 2008.
 # Mikko Piippo <mikko.piippo@opensuse.fi>, 2008.
+# Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-23 22:06+0300\n"
-"Last-Translator: Mikko Piippo <mikko.piippo@opensuse.fi>\n"
+"PO-Revision-Date: 2008-05-29 22:29+0300\n"
+"Last-Translator: Mikko Piippo <piippo@cc.helsinki.fi>\n"
 "Language-Team:  <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +101,7 @@ msgstr ""
 "\t--xmlout, -x\t\tTulostus XML-muodossa.\n"
 "\t--reposd-dir, -D <dir>\tKäytä vaihtoehtoista asennuslähdehakemistoa.\n"
 "\t--cache-dir, -C <dir>\tKäytä vaihtoehtoista välimuistihakemistoa.\n"
-"\t--raw-cache-dir <dir>\tKäytä vaihtoehtoinen raakametatietojen välimuistihakemistoa.\n"
+"\t--raw-cache-dir <dir>\tKäytä vaihtoehtoista raakametatietojen välimuistihakemistoa.\n"
 
 #: ../src/zypper.cc:160
 msgid ""

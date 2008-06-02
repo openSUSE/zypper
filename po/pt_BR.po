@@ -1,4 +1,4 @@
-# translation of zypper.po to Brazilian Portuguese
+# translation of zypper.pt_BR.po to Brazilian Portuguese
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -8,10 +8,10 @@
 # Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-22 13:57-0300\n"
+"PO-Revision-Date: 2008-05-30 18:02-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgstr ""
 "\t--no-gpg-checks\t\tIgnorar falhas na verificação GPG e continuar.\n"
 "\t--plus-repo, -p <URL>\tUsar um repositório adicional\n"
 "\t--disable-repositories\tNão ler os metadados do repositório.\n"
-"\t--no-refresh\tNão atualizar os repositórios.\n"
+"\t--no-refresh\t\tNão atualizar os repositórios.\n"
 
 #: ../src/zypper.cc:167
 msgid ""
@@ -126,7 +126,7 @@ msgid ""
 "\t--disable-system-resolvables  Do not read installed resolvables.\n"
 msgstr ""
 "\tOpções de Destino:\n"
-"\t--root, -R <dir>\tOperar em um diretório raiz diferente.\n"
+"\t--root, -R <dir>\t\tOperar em um diretório raiz diferente.\n"
 "\t--disable-system-resolvables  Não ler os resolvíveis instalados\n"
 
 #: ../src/zypper.cc:173
@@ -2272,7 +2272,7 @@ msgstr "O pacotes '%s' não está instalado."
 #: ../src/zypper-misc.cc:2228
 #, c-format
 msgid "No update candidate for '%s'."
-msgstr "Nenhum atualização se candidata para '%s'."
+msgstr "Nenhuma atualização se candidata para '%s'."
 
 #: ../src/zypper-misc.cc:2309
 msgid "Root privileges are required to fix broken package dependencies."
@@ -2361,7 +2361,7 @@ msgstr "Uma das correções instaladas afeta o gerenciador de pacotes propriamen
 #: ../src/zypper-misc.cc:2507
 #, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Aceitando automaticamente as licenças de %s %s."
+msgstr "Aceitando automaticamente as licenças de %s (%s)."
 
 #: ../src/zypper-misc.cc:2520
 #, c-format
@@ -2388,7 +2388,7 @@ msgstr "Por favor reinicie a operação em modo interativo e confirme sua concor
 #: ../src/zypper-misc.cc:2556
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Cancelando a instalação devido ao usuário não estar de acordo com a licença %s %s"
+msgstr "Cancelando a instalação devido ao usuário não estar de acordo com a licença %s (%s)."
 
 #: ../src/zypper-misc.cc:2648
 #: ../src/zypper-misc.cc:2673
@@ -3184,7 +3184,4 @@ msgstr "Por favor verifique se o arquivo é acessível."
 #, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "Não foi possível interpretar o recurso '%s'."
-
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "Número de trava inválida: %s"
 

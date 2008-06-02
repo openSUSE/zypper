@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-26 10:15+0800\n"
-"Last-Translator: Thruth Wang <gubotruth@gmail.com>\n"
+"PO-Revision-Date: 2008-06-02 10:54+0800\n"
+"Last-Translator: Thruth Wang <lihaow@opera.com>\n"
 "Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -819,7 +819,7 @@ msgid ""
 msgstr ""
 "xml-updates\n"
 "\n"
-"用 XML 格式显示更新和补丁。这个命令已经过时，将会被“%s”代替。\n"
+"用 XML 格式显示更新和补丁。这个命令已经过时，将会被'%s'代替。\n"
 "\n"
 "  命令选项：\n"
 "-r, --repo <别名|#|URI>   指定安装源。\n"
@@ -1015,13 +1015,13 @@ msgstr "参数过少。至少需要 URI 和别名。"
 #: ../src/zypper.cc:2184
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "找不到安装源“%s”。"
+msgstr "找不到安装源'%s'。"
 
 #: ../src/zypper.cc:2215
 #: ../src/zypper.cc:2217
 #, c-format
 msgid "'%s' option is deprecated and will be dropped soon."
-msgstr "选项“%s”已经过时，将会被去除。"
+msgstr "选项'%s'已经过时，将会被去除。"
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
@@ -1041,7 +1041,7 @@ msgstr "刷新系统安装源需要有 root 特权。"
 #: ../src/zypper.cc:2280
 #, c-format
 msgid "The '%s' global option has no effect here."
-msgstr "全局选项“%s”在这里无效。"
+msgstr "全局选项'%s'在这里无效。"
 
 #: ../src/zypper.cc:2297
 msgid "Root privileges are required for cleaning local caches."
@@ -1063,7 +1063,7 @@ msgstr "未知的可解析项类型：%s"
 #: ../src/zypper.cc:2363
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "“%s”貌似是一个 RPM 文件，将尝试下载之。"
+msgstr "'%s'貌似是一个 RPM 文件，将尝试下载之。"
 
 #: ../src/zypper.cc:2376
 #, c-format
@@ -1609,7 +1609,7 @@ msgstr "口令"
 #: ../src/zypper-misc.cc:276
 #, c-format
 msgid "'%s' not found"
-msgstr "没有找到 “%s”。"
+msgstr "没有找到 '%s'。"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #: ../src/zypper-misc.cc:212
@@ -1620,25 +1620,25 @@ msgstr "正在跳过 %s '%s'（已经安装了最新版本）"
 #: ../src/zypper-misc.cc:226
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "未能将“%s”添加到要安装的包列表。"
+msgstr "未能将'%s'添加到要安装的包列表。"
 
 #: ../src/zypper-misc.cc:248
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "未能将“%s”添加到要删除的包列表。"
+msgstr "未能将'%s'添加到要删除的包列表。"
 
 #: ../src/zypper-misc.cc:401
 #: ../src/zypper-misc.cc:622
 #, c-format
 msgid "'%s' is already installed."
-msgstr "“%s”已安装。"
+msgstr "'%s'已安装。"
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/zypper-misc.cc:427
 #: ../src/zypper-misc.cc:636
 #, c-format
 msgid "'%s' is not installed."
-msgstr "“%s”未安装。"
+msgstr "'%s'未安装。"
 
 #: ../src/zypper-misc.cc:457
 #, c-format
@@ -1655,13 +1655,13 @@ msgstr "%s 现在不能和 %s 一起使用"
 #: ../src/zypper-misc.cc:596
 #, c-format
 msgid "'%s' not found."
-msgstr "没有找到 “%s”。"
+msgstr "没有找到 '%s'。"
 
 #. translators: %s are package names
 #: ../src/zypper-misc.cc:626
 #, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "“%s” 提供 “%s” 已安装。"
+msgstr "'%s' 提供 '%s' 已安装。"
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/zypper-misc.cc:712
@@ -2040,7 +2040,7 @@ msgstr "无法分析 '%s < %s'"
 #: ../src/zypper-misc.cc:2090
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "“%s”是交互的，跳过。"
+msgstr "'%s'是交互的，跳过。"
 
 #: ../src/zypper-misc.cc:2145
 #, c-format
@@ -2050,7 +2050,7 @@ msgstr "没有找到匹配 '%s' 的补丁。"
 #: ../src/zypper-misc.cc:2148
 #, c-format
 msgid "Patch '%s' not found."
-msgstr "没有找到补丁 “%s”。"
+msgstr "没有找到补丁 '%s'。"
 
 #: ../src/zypper-misc.cc:2213
 #, c-format
@@ -2065,7 +2065,7 @@ msgstr "软件包 '%s' 没有安装。"
 #: ../src/zypper-misc.cc:2228
 #, c-format
 msgid "No update candidate for '%s'."
-msgstr "没有“%s”的更新候选。"
+msgstr "没有'%s'的更新候选。"
 
 #: ../src/zypper-misc.cc:2309
 msgid "Root privileges are required to fix broken package dependencies."
@@ -2121,7 +2121,7 @@ msgstr "请更正错误并重试。"
 #: ../src/zypper-misc.cc:2433
 #, fuzzy, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "软件源“%s”是最新的。"
+msgstr "软件源'%s'是最新的。"
 
 #: ../src/zypper-misc.cc:2445
 msgid ""
@@ -2192,7 +2192,7 @@ msgstr "由于用户不同意 %s %s 许可，正在中止安装"
 #: ../src/zypper-misc.cc:2673
 #, c-format
 msgid "Source package '%s' not found."
-msgstr "源程序包“%s”未找到。"
+msgstr "源程序包'%s'未找到。"
 
 #: ../src/zypper-misc.cc:2683
 #, c-format
@@ -2224,7 +2224,6 @@ msgid "ignore"
 msgstr "忽略"
 
 #: ../src/zypper-prompt.cc:95
-#, fuzzy
 msgid "Abort, retry, ignore?\n"
 msgstr "中止、重试、忽略？\n"
 
@@ -2262,7 +2261,7 @@ msgstr "否"
 #: ../src/zypper-prompt.cc:237
 #, c-format
 msgid "Invalid answer '%s'."
-msgstr "无效的回复 “%s”。"
+msgstr "无效的回复 '%s'。"
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
@@ -2321,7 +2320,7 @@ msgstr "正在检查是否需要刷新 %s 的元数据"
 #: ../src/zypper-repos.cc:90
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "软件源“%s”是最新的。"
+msgstr "软件源'%s'是最新的。"
 
 #: ../src/zypper-repos.cc:94
 #, fuzzy, c-format
@@ -2333,19 +2332,19 @@ msgid "Forcing raw metadata refresh"
 msgstr "强制执行原始元数据刷新"
 
 #: ../src/zypper-repos.cc:119
-#, fuzzy, c-format
+#, c-format
 msgid "Downloading repository '%s' metadata"
-msgstr "正在下载安装源“%s”的元数据。"
+msgstr "正在下载安装源'%s'的元数据"
 
 #: ../src/zypper-repos.cc:142
 #, c-format
 msgid "Problem downloading files from '%s'."
-msgstr "从“%s”下载文件时出现问题。"
+msgstr "从'%s'下载文件时出现问题。"
 
 #: ../src/zypper-repos.cc:156
-#, fuzzy, c-format
+#, c-format
 msgid "No URIs defined for '%s'."
-msgstr "没有为“%s”定义 URLs。"
+msgstr "没有为 '%s' 定义 URI。"
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/zypper-repos.cc:160
@@ -2360,7 +2359,7 @@ msgstr "该软件源没有定义别名。"
 #: ../src/zypper-repos.cc:186
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "安装源 “%s” 无效。"
+msgstr "安装源 '%s' 无效。"
 
 #: ../src/zypper-repos.cc:187
 #, fuzzy
@@ -2370,7 +2369,7 @@ msgstr "请检查这个安装源的 URLs 指向一个有效的源地址。"
 #: ../src/zypper-repos.cc:200
 #, c-format
 msgid "Error downloading metadata for '%s':"
-msgstr "下载“%s”的元数据时出错："
+msgstr "下载'%s'的元数据时出错："
 
 #: ../src/zypper-repos.cc:215
 msgid "Forcing building of repository cache"
@@ -2379,7 +2378,7 @@ msgstr "强制构建软件源缓存"
 #: ../src/zypper-repos.cc:228
 #, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "分析“%s”的元数据时出错："
+msgstr "分析'%s'的元数据时出错："
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/zypper-repos.cc:230
@@ -2389,7 +2388,7 @@ msgstr "这可能是由安装源中错误的原数据或者原数据分析程序
 #: ../src/zypper-repos.cc:244
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "在本地缓存中找不到“%s”的软件源元数据。"
+msgstr "在本地缓存中找不到'%s'的软件源元数据。"
 
 #: ../src/zypper-repos.cc:252
 msgid "Error building the cache database:"
@@ -2423,7 +2422,7 @@ msgstr "需要建立安装源 '%s' 的数据缓存。以 root 身份运行 'zypp
 #: ../src/zypper-repos.cc:506
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "正在禁用软件源“%s”。"
+msgstr "正在禁用软件源'%s'。"
 
 #: ../src/zypper-repos.cc:543
 msgid "Initializing Target"
@@ -2536,14 +2535,14 @@ msgid "All repositories have been refreshed."
 msgstr "所有安装源均已刷新。"
 
 #: ../src/zypper-repos.cc:1082
-#, fuzzy, c-format
+#, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "正在清除“%s”的元数据。"
+msgstr "正在清除'%s'的元数据。"
 
 #: ../src/zypper-repos.cc:1089
 #, fuzzy, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "正在清除“%s”的元数据。"
+msgstr "正在清除'%s'的元数据。"
 
 #. translators: meaning the cached rpm files
 #: ../src/zypper-repos.cc:1097
@@ -2630,7 +2629,7 @@ msgstr "自动刷新"
 #: ../src/zypper-repos.cc:1280
 #, c-format
 msgid "Reading data from '%s' media"
-msgstr "正在从媒介 '%s' 读取数据"
+msgstr "正在从介质 '%s' 读取数据"
 
 #: ../src/zypper-repos.cc:1287
 #, fuzzy, c-format
@@ -2726,12 +2725,12 @@ msgstr "成功删除了用户“{0}”"
 #: ../src/zypper-repos.cc:1684
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "已启用安装源“%s”的自动刷新。"
+msgstr "已启用安装源'%s'的自动刷新。"
 
 #: ../src/zypper-repos.cc:1687
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "已禁用安装源“%s”的自动刷新。"
+msgstr "已禁用安装源'%s'的自动刷新。"
 
 #: ../src/zypper-repos.cc:1694
 #, fuzzy, c-format
@@ -2754,19 +2753,19 @@ msgid "Name of repository '%s' has been set to '%s'."
 msgstr "必须去除 %s。"
 
 #: ../src/zypper-repos.cc:1715
-#, fuzzy, c-format
+#, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "正在禁用软件源“%s”。"
+msgstr "对安装源 '%s' 未作任何改变。"
 
 #: ../src/zypper-repos.cc:1723
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "正在添加资源"
+msgstr "安装源 %s 未有改变。"
 
 #: ../src/zypper-repos.cc:1771
-#, fuzzy, c-format
+#, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "正在读取资源 %s..."
+msgstr "正在接受安装源 %s 的数据..."
 
 #: ../src/zypper-repos.cc:1778
 #, c-format
@@ -2966,7 +2965,7 @@ msgstr[0] "可解析项"
 
 #: ../src/zypper-utils.cc:216
 msgid "Specified local path does not exist or is not accessible."
-msgstr ""
+msgstr "指定的本地路径不存在或者无权限访问。"
 
 #: ../src/zypper-utils.cc:228
 msgid "Given URI is invalid"
@@ -2993,7 +2992,4 @@ msgstr "请检查文件是否可以访问。"
 #, fuzzy, c-format
 msgid "Cannot parse capability '%s'."
 msgstr "无法对 “%1” 进行解析。"
-
-#~ msgid "Invalid lock number: %s"
-#~ msgstr "无效的锁定号码：%s"
 

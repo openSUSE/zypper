@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-25 12:22+0200\n"
+"PO-Revision-Date: 2008-05-28 22:50+0200\n"
 "Last-Translator: Freek de Kruijf <f.de.kruijf@hetnet.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -94,9 +94,9 @@ msgstr ""
 "\t--rug-compatible, -r\tschakel rug-compatibiliteit in\n"
 "\t--non-interactive\tvraag niets, gebruik automatisch standaardantwoorden\n"
 "\t--xmlout, -x\t\tschakel naar XML-uitvoer\n"
-"\t--reposd-dir, -D <dir>\tgebruik alternatieve 'repository definition files directory'\n"
-"\t--cache-dir, -C <dir>\tgebruik alternatieve directory voor database met meta-data-cache\n"
-"\t--raw-cache-dir <dir>\tgebruik alternatieve directory voor 'raw meta-data-cache'\n"
+"\t--reposd-dir, -D <dir>\tgebruik alternatieve 'repository definition files map'\n"
+"\t--cache-dir, -C <dir>\tgebruik alternatieve map voor database met meta-data-cache\n"
+"\t--raw-cache-dir <dir>\tgebruik alternatieve map voor 'raw meta-data-cache'\n"
 
 #: ../src/zypper.cc:160
 msgid ""
@@ -119,7 +119,7 @@ msgid ""
 "\t--disable-system-resolvables  Do not read installed resolvables.\n"
 msgstr ""
 "\tDoelopties:\n"
-"\t--root, -R <dir>\twerk vanuit een andere hoofddirectory\n"
+"\t--root, -R <dir>\twerk vanuit een andere hoofdmap\n"
 "\t--disable-system-resolvables  op het systeem geïnstalleerde oplosbaren niet lezen\n"
 
 #: ../src/zypper.cc:173
@@ -1070,12 +1070,12 @@ msgid ""
 msgstr ""
 "mount\n"
 "\n"
-"Koppel de directory met RPM's als een kanaal\n"
+"Koppel de map met RPM's als een kanaal\n"
 "\n"
 "  Opdrachtopties:\n"
 "-a, --alias <alias>  gebruik gegeven tekenreeks als service-alias\n"
 "-n, --name <name>    gebruik de gegeven tekenreeks als service-naam\n"
-"-r, --recurse        ga subdirectories in\n"
+"-r, --recurse        ga submappen in\n"
 
 #: ../src/zypper.cc:1831
 #, c-format
@@ -1156,7 +1156,7 @@ msgstr "Installatiebron %s is niet gevonden aan de hand van de alias, het nummer
 
 #: ../src/zypper.cc:2159
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Onvoldoende argumenten. Er is tenminste een URI en alias nodig."
+msgstr "Onvoldoende argumenten. Er is minstens een URI en alias nodig."
 
 #: ../src/zypper.cc:2184
 #, c-format
@@ -1194,7 +1194,7 @@ msgstr "Er zijn root-privileges vereist voor het opschonen van lokale caches."
 
 #: ../src/zypper.cc:2316
 msgid "At least one package name is required."
-msgstr "Tenminste één naam van een pakket is vereist."
+msgstr "Minstens één naam van een pakket is vereist."
 
 #: ../src/zypper.cc:2330
 msgid "Root privileges are required for installing or uninstalling packages."
@@ -3063,7 +3063,7 @@ msgstr "Opgegeven URI is ongeldig"
 
 #: ../src/zypper-utils.cc:279
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Probleem bij het kopiëren van het gespecificeerde RPM-bestand naar de cache-directory."
+msgstr "Probleem bij het kopiëren van het gespecificeerde RPM-bestand naar de cachemap."
 
 #: ../src/zypper-utils.cc:280
 msgid "Perhaps you are running out of disk space."
