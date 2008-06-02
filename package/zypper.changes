@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun  2 17:23:07 CEST 2008 - jkupec@suse.cz
+
+- --debug-solver for inr and ve (bnc #396353)
+- r10310
+
+-------------------------------------------------------------------
 Mon May 26 14:31:57 CEST 2008 - jkupec@suse.cz
 
 - fixed layout of tables when the text contains special characters
