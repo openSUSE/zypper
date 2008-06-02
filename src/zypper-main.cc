@@ -53,7 +53,6 @@ void signal_handler(int sig)
 
 int main(int argc, char **argv)
 {
-  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
   struct Bye {
     ~Bye() {
       MIL << "Exiting main()" << endl;
@@ -70,6 +69,8 @@ int main(int argc, char **argv)
   if (logfile == NULL)
     logfile = ZYPPER_LOG;
   zypp::base::LogControl::instance().logfile( logfile );
+
+  MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
 
   if (::signal(SIGINT, signal_handler) == SIG_ERR)
     cerr << "Failed to set SIGINT handler." << endl; 
