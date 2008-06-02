@@ -8,7 +8,7 @@ zypper \fI\-\-help\fR [\fBcommand\fR]
 .LP
 zypper is a command\-line interface to ZYpp system management library.
 It can be used to install, update, remove software, manage repositories, perform
-various searches, and more.
+various queries, and more.
 
 .SH "COMMANDS"
 .LP
@@ -24,13 +24,18 @@ of the command arguments.
 .TP
 .B shell (sh)
 Starts a shell for entering multiple commands in one session.
-End it by "exit", "quit", or Ctrl-D.
+Exit the shell using "exit", "quit", or Ctrl-D.
+
+The shell support is not complete
+so expect bugs there. However, there's no urgent need to use the shell
+since libzypp became so fast (opensSUSE 11.0), but still, you're welcome
+to experiment with it.
 
 .SS Package Management Commands
 
 .LP
 zypper works with several types of resource objects, called
-.BR resolvables .
+.BR resolvables.
 A resolvable is a package, patch, pattern, or a product.
 .LP
 .B package
@@ -44,19 +49,21 @@ A resolvable is a package, patch, pattern, or a product.
 .br
 .B product
 \- group of packages, which are necessary to install a product
-
+.LP
+Throughout this manual we will refer to resolvables simply as \fIpackages\fR
+and to resolvable types as \fIpackages types\fR.
 
 .TP
 .B info (if) <name> ...
-Displays full info for the specified packages or other resolvables.
+Displays full info for the specified packages.
 
 .TP
-.I \-r, \-\-repo <alias|#|URL>
-Work only with the repository specified by the alias, number or URL. This
+.I \-r, \-\-repo <alias|#|URI>
+Work only with the repository specified by the alias, number or URI. This
 option can be used multiple times.
 .TP
 .I \-t, \-\-type <type>
-Type of resolvable (default: package). Currently supported resolvable types for
+Type of package (default: package). Currently supported package types for
 the info command are: package, patch, pattern, product.
 
 .TP
@@ -103,21 +110,22 @@ interpretation as a command option.
 .B $ zypper install -- -boring-game great-game great-game-manual
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URL>
-Install resolvables only from the repository specified by the alias, number or URL.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Install packages only from the repository specified by the alias, number or URI.
 This option can be used multiple times.
 .TP
-\fI\-t, \-\-type\fR <resolvable_type>
-Type of resolvable (default: package)
+\fI\-t, \-\-type\fR <type>
+Type of package (default: package). See the beginning of this subsection for the list
+of available package types.
 .TP
 .I \-n, \-\-name
-Select resolvables by their name (default).
+Select packages by their name, don't try to select by capabilities.
 .TP
 .I \-f, \-\-force
 Install even if the item is already installed (reinstall)
 .TP
 .I \-C, \-\-capability
-Select resolvables by capabilities.
+Select packages by capabilities.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
@@ -188,11 +196,12 @@ Test the installation, do not actually install anything.
 .B list-updates (lu) [options]
 List available updates.
 .TP
-\fI\-t, --type\fR <resolvable_type>
-Type of resolvable (default: patch)
+\fI\-t, --type\fR <type>
+Type of package (default: patch). See the beginning of this subsection for the list
+of available package types.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URL>
-List only updates from the repository specified by the alias, number or URL.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+List only updates from the repository specified by the alias, number or URI.
 This option can be used multiple times.
 
 See also the NOTE at
@@ -202,24 +211,25 @@ See also the NOTE at
 .B remove (rm) [options] <name> ...
 .TP
 .B remove (rm) [options] --capability <capability> ...
-Remove packages or other resolvables.
+Remove (uninstall) packages.
 
-The resolvables can be selected by their name or by a capability they provide.
+The packages can be selected by their name or by a capability they provide.
 For details see the install command
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URL>		
-Operate only with resolvables from repository specified by alias, number or URL.
+\fI\-r, \-\-repo\fR <alias|#|URI>		
+Operate only with packages from repository specified by alias, number or URI.
 This option can be used multiple times.
 .TP
-\fI\-t, -\-type\fR <resolvable_type>
-Type of resolvable (default: package)
+\fI\-t, -\-type\fR <type>
+Type of package (default: package). See the beginning of this subsection for the list
+of available package types.
 .TP
 .I \-n, \-\-name
-Select resolvables by their name (default).
+Select packages by their name (default).
 .TP
 .I \-C, \-\-capability
-Select resolvables by capabilities.
+Select packages by capabilities.
 .TP
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
@@ -251,11 +261,12 @@ packages for which there is a better version instead, select \fI--type
 package\fR which is also the default in rug compatibility mode.
 
 .TP
-\fI\-t, -\-type\fR <resolvable_type>
-Type of resolvable (default: patch)
+\fI\-t, -\-type\fR <type>
+Type of package (default: patch). See the beginning of this subsection for the list
+of available package types.
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URL>
-Limit updates to repository specified by alias, number or URL.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Limit updates to repository specified by alias, number or URI.
 This option can be used multiple times.
 .TP
 .I     \-\-skip\-interactive
@@ -287,8 +298,8 @@ with a special resolver algorithm which takes care of package splits, pattern
 and product updates, etc.
 
 .TP
-\fI\-r, \-\-repo\fR <alias|#|URL>
-Limit updates to repository specified by alias, number or URL.
+\fI\-r, \-\-repo\fR <alias|#|URI>
+Limit updates to repository specified by alias, number or URI.
 This option can be used multiple times.
 .TP
 .I \-l, \-\-auto\-agree\-with\-licenses
@@ -303,9 +314,9 @@ add the \-\-test option to the rpm commands run by the dist-upgrade command.
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
-Search for resolvables matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
+Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.
 .IP
-Results of search are printed in a table with following columns: S (status), Catalog, Type (type of resolvable), Name, Version, Arch (architecture). Status column can contain following values: i - installed, v - another version installed, or an empty space for neither of the former cases.
+Results of search are printed in a table with following columns: S (status), Catalog, Type (type of package), Name, Version, Arch (architecture). Status column can contain following values: i - installed, v - another version installed, or an empty space for neither of the former cases.
 .IP
 In \fBrug compatibility mode\fR the --type option defaults to \fBpackage\fR. Furthermore, Instead of the Type column, rug's Bundle column is printed, however, with no contents.
 .IP
@@ -325,7 +336,7 @@ Matches for search strings may be partial words (default).
 Matches for search strings may only be whole words.
 .TP
 \fI    \-\-match-exact\fR
-Searches for an exact name of the resolvable.
+Searches for an exact name of the package.
 .TP
 .I \-d, \-\-search\-descriptions
 Search also in summaries and descriptions.
@@ -334,24 +345,24 @@ Search also in summaries and descriptions.
 Perform case-sensitive search.
 .TP
 .I \-i, \-\-installed\-only
-Show only resolvables that are already installed.
+Show only packages that are already installed.
 .TP
 .I \-u, \-\-uninstalled\-only
-Show only resolvables that are not currently installed.
+Show only packages that are not currently installed.
 .TP
 .I \-t, -\-type <type>
-Search only for resolvables of specified type. See the beginning of the subsection for the list of available resolvable types.
+Search only for packages of specified type. See the beginning of the subsection for the list of available package types.
 Multiple \-t option are allowed.
 .TP
-.I \-r, \-\-repo <alias|#|URL>
-Search only in the repository specified by the alias, number or URL.		
+.I \-r, \-\-repo <alias|#|URI>
+Search only in the repository specified by the alias, number or URI.		
 Multiple \-r options are allowed.
 .TP
 \fI    \-\-sort\-by\-name\fR
-Sort resolvables by name (default).
+Sort packages by name (default).
 .TP
 \fI    \-\-sort\-by\-repo\fR
-Sort resolvables by catalog, not by name.
+Sort packages by catalog, not by name.
 
 .SS Patch Management
 
@@ -363,8 +374,8 @@ of them have the security category.
 See also the EXIT CODES section for details on exit status of 0, 100, and 101
 returned by this command.
 .TP
-.I \-r, \-\-repo <alias|#|URL>
-Check for patches only in the repository specified by the alias, number or URL.
+.I \-r, \-\-repo <alias|#|URI>
+Check for patches only in the repository specified by the alias, number or URI.
 This option can be used multiple times.
 
 .TP
@@ -372,8 +383,8 @@ This option can be used multiple times.
 List patches. Lists all patches that are available, including
 installed and not applicable ones.
 .TP
-.I \-r, \-\-repo <alias|#|URL>
-Check for patches only in the repository specified by the alias, number or URL.
+.I \-r, \-\-repo <alias|#|URI>
+Check for patches only in the repository specified by the alias, number or URI.
 This option can be used multiple times.
 
 .SS Repository Management
@@ -400,10 +411,10 @@ the \fBrefresh\fR command after finishing your modifications with \fB*repo\fR co
 See also METADATA REFRESH POLICY section for more details.
 
 .TP
-\fI\-r, \-\-repo\fR <FILE.repo>
+\fI\-r, \-\-repo\fR <file.repo>
 Read URI and alias from specified .repo file
 .TP
-\fI\-t, \-\-type\fR <TYPE>
+\fI\-t, \-\-type\fR <type>
 Type of repository (yast2, rpm-md, or plaindir). There are several aliases
 defined for these types:
 \fByast2\fR - susetags, yast, YaST, YaST2, YAST;
@@ -454,12 +465,12 @@ If '\-' is specified instead of a file name,
 the repositories will be written to the standard output.   
 
 .TP
-.B renamerepo (nr) <alias|#|URL> <new-alias>
-Assign new alias to the repository specified by alias, number or URL.
+.B renamerepo (nr) <alias|#|URI> <new-alias>
+Assign new alias to the repository specified by alias, number or URI.
 
 .TP
-.B modifyrepo (mr) <options> <alias|#|URL>
-Modify properties of the repository specified by alias, number or URL.
+.B modifyrepo (mr) <options> <alias|#|URI>
+Modify properties of the repository specified by alias, number or URI.
 .TP
 \fI\-e, \-\-enable\fR
 Enable the repository.
@@ -574,8 +585,8 @@ at the end. You can specify this option multiple times.
 .TP
 .I \-\-disable\-repositories
 Do not read meta-data from repositories. This option will prevent loading of
-resolvables from repositories, thus making zypper work only with the installed
-resolvables (if \-\-disable\-system\-resolvables was not specified).
+packages from repositories, thus making zypper work only with the installed
+packages (if \-\-disable\-system\-resolvables was not specified).
 .TP
 .I \-\-no\-refresh
 Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
@@ -600,17 +611,13 @@ can damage your system using this option.
 .LP
 Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working with up-to-date metadata.
 .LP
-Refreshing a repository means downloading metadata of resolvables from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv files (/var/cache/zypp/*.solv).
+Refreshing a repository means downloading metadata of packages from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv files (/var/cache/zypp/*.solv).
 .LP
 The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBauto-refresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBauto-refresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
 .LP
 The status of the repository metadata is checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
 .LP
 To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp config file (/etc/zypp/zypp.conf). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.
-
-.SH "LOCKS"
-.LP
-see locks(5)
 
 .SH "FILES"
 .TP
@@ -683,7 +690,7 @@ Returned after a successfull installation of a patch which requires restart of t
 .TP
 104 - ZYPPER_EXIT_INF_CAP_NOT_FOUND
 Returned by the \fBinstall\fR and the \fBremove\fR command in case any of the
-arguments does not match any of the available (or installed) resolvable names
+arguments does not match any of the available (or installed) package names
 or other capabilities.
 105 - ZYPPER_EXIT_ON_SIGNAL
 Returned upon exiting after receiving a SIGINT or SIGTERM.
@@ -799,7 +806,7 @@ This option has currently no effect.
 zypper search (se)
 .TP
 \fI    \-\-sort\-by\-catalog\fR
-Sort resolvables by catalog, not by name. This option is an alias to zypper's
+Sort packages by catalog, not by name. This option is an alias to zypper's
 \-\-sort\-by\-repo option.
 
 .SS Patch Management Commands
@@ -851,4 +858,4 @@ Stanislav Visnovsky <visnov@suse.cz>
 
 .SH "SEE ALSO"
 .LP
-rug(1), YaST2(8)
+rug(1), YaST2(8), locks(5)
