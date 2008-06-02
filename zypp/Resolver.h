@@ -180,6 +180,25 @@ namespace zypp
     bool onlyRequires();
 
     /**
+     * Ignore Obsoletes. This is used for installing more than
+     * one pacakges with the same name but different versions.
+     * Often needed by kernels.
+     **/
+    /* via capability who provides it */
+    void addNoObsoletesCapability (const Capability & capability);
+    void removeNoObsoletesCapability (const Capability & capability);
+    CapabilitySet noObsoletesCapability();
+    /* via poolItem */
+    void addNoObsoletesItem (const PoolItem & item);
+    void removeNoObsoletesItem (const PoolItem & item);
+    solver::detail::PoolItemSet noObsoletesItem();
+
+    // via package name
+    void addNoObsoletesName (const std::string & name);
+    void removeNoObsoletesName (const std::string & name);
+    solver::detail::ObsoleteStrings noObsoletesString ();
+
+    /**
      * Adding additional requirement
      *
      */

@@ -138,7 +138,6 @@ Resolver::removeExtraConflict (const Capability & capability)
     _extra_conflicts.erase (capability);
 }
 
-
 void Resolver::removeQueueItem (const SolverQueueItem_Ptr item)
 {
     bool found = false;
@@ -241,6 +240,11 @@ Resolver::undo(void)
     //  Regard dependencies of the item weak onl
     _addWeak.clear();
 
+    // Ignore Obsoletes
+    _noObsoletesCapability.clear();
+    _noObsoletesItem.clear();
+    _noObsoletesString.clear();   
+
     // Additional QueueItems which has to be regarded by the solver
     _removed_queue_items.clear();
     _added_queue_items.clear();    
@@ -307,7 +311,9 @@ bool
 Resolver::resolvePool()
 {
     solverInit();
-    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak);
+    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak,
+				     _noObsoletesCapability, _noObsoletesItem, _noObsoletesString   
+				     );
 }
 
 bool
@@ -347,7 +353,8 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
     _removed_queue_items.clear();
     _added_queue_items.clear();
     
-    return _satResolver->resolveQueue(queue, _addWeak);
+    return _satResolver->resolveQueue(queue, _addWeak,
+				      _noObsoletesCapability, _noObsoletesItem, _noObsoletesString);
 }
 
 

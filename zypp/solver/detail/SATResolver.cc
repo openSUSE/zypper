@@ -574,7 +574,10 @@ SATResolver::solving()
 
 
 void
-SATResolver::solverInit(const PoolItemList & weakItems)
+SATResolver::solverInit(const PoolItemList & weakItems,
+			const CapabilitySet & noObsoletesCapability,
+			const PoolItemSet & noObsoletesItem,
+			const ObsoleteStrings & noObsoletesString)
 {
     SATCollectTransact info (*this);
     
@@ -605,6 +608,30 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 	queue_push( &(_jobQueue), SOLVER_WEAKEN_SOLVABLE_DEPS );
         queue_push( &(_jobQueue), id );	
     }
+
+    for (CapabilitySet::const_iterator iter = noObsoletesCapability.begin(); iter != noObsoletesCapability.end(); iter++) {
+	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), iter->id() );
+	MIL << "Ignore Obsoletes of provided capability: " << *iter << endl;
+    }
+
+    for (PoolItemSet::iterator it = noObsoletesItem.begin(); it != noObsoletesItem.end(); ++it) {
+	Id id = (*it)->satSolvable().id();
+	if (id == ID_NULL) {
+	    ERR << "Item " << *it << " not found" << endl;
+	} else {
+	    MIL << "Ignore Obsoletes of item: " << *it << endl;
+	    queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE );
+	    queue_push( &(_jobQueue), id );
+	}
+    }
+
+    for (ObsoleteStrings::iterator it = noObsoletesString.begin(); it != noObsoletesString.end(); ++it) {
+	MIL << "Ignore Obsoletes of name: " << *it << endl;
+	::Id id = IdString(*it).id();
+	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
+	queue_push( &(_jobQueue), id );
+    }    
 }
 
 void
@@ -620,21 +647,28 @@ SATResolver::solverEnd()
 bool
 SATResolver::resolvePool(const CapabilitySet & requires_caps,
 			 const CapabilitySet & conflict_caps,
-			 const PoolItemList & weakItems)
+			 const PoolItemList & weakItems,
+			 const CapabilitySet & noObsoletesCapability,
+			 const PoolItemSet & noObsoletesItem,
+			 const ObsoleteStrings & noObsoletesString)
 {
     MIL << "SATResolver::resolvePool()" << endl;
     
     // initialize
-    solverInit(weakItems);
+    solverInit(weakItems,
+	       noObsoletesCapability,
+	       noObsoletesItem,
+	       noObsoletesString);
     
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
+	} else {
+	    MIL << "Install " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), id );
 	}
-	MIL << "Install " << *iter << endl;
-	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
-        queue_push( &(_jobQueue), id );
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
@@ -695,12 +729,18 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 
 bool
 SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
-			  const PoolItemList & weakItems)
+			  const PoolItemList & weakItems,
+			  const CapabilitySet & noObsoletesCapability,
+			  const PoolItemSet & noObsoletesItem,
+			  const ObsoleteStrings & noObsoletesString)
 {
     MIL << "SATResolver::resolvQueue()" << endl;
     
     // initialize
-    solverInit(weakItems);
+    solverInit(weakItems,
+	       noObsoletesCapability,
+	       noObsoletesItem,
+	       noObsoletesString);
 
     // generate solver queue
     for (SolverQueueItemList::const_iterator iter = requestQueue.begin(); iter != requestQueue.end(); iter++) {
@@ -712,10 +752,11 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 	Id id = (*iter)->satSolvable().id();
 	if (id == ID_NULL) {
 	    ERR << "Install: " << *iter << " not found" << endl;
+	} else {
+	    MIL << "Install " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), id );
 	}
-	MIL << "Install " << *iter << endl;
-	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
-        queue_push( &(_jobQueue), id );
     }
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
         sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
@@ -766,7 +807,10 @@ void SATResolver::doUpdate()
     MIL << "SATResolver::doUpdate()" << endl;
 
     // initialize
-    solverInit(PoolItemList());
+    solverInit(PoolItemList(),
+	       CapabilitySet(),
+	       PoolItemSet(),
+	       ObsoleteStrings());
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;
