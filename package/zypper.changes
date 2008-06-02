@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun  2 17:28:54 CEST 2008 - jkupec@suse.cz
+
+- --debug-solver for inr and ve (bnc #396353)
+- r10309
+
+-------------------------------------------------------------------
 Fri May 30 18:30:11 CEST 2008 - jkupec@suse.cz
 
 - zypper up <foo> to defaults to -t package (bnc #385990)
