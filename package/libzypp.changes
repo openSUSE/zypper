@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jun  2 15:31:36 CEST 2008 - schubi@suse.de
+
+- New option for ignoring Obsoletes. This is used for installing more than
+  one pacakges with the same name but different versions.
+  Often used by kernel.
+- r 10299 
+
+-------------------------------------------------------------------
 Sun Jun  1 23:14:34 CEST 2008 - - ma@suse.de
 
 - Revert inappropriate Selectable cleanup. Fix Selectable 
