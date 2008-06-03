@@ -1637,8 +1637,7 @@ void modify_repo(Zypper & zypper, const string & alias)
       if (prio < 1)
       {
         zypper.out().error(boost::str(format(
-          //! \todo Don't tell about the upper limit and use %d instead of number.
-          _("Invalid priority '%s'. Use an integer number between 1 (highest priority) and 99 (lowest priority)."))
+          _("Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."))
           % prio_str));
         zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
