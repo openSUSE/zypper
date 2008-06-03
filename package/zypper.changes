@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun  3 11:48:59 CEST 2008 - jkupec@suse.cz
+
+- repo priority allowed to be > 99
+- r10327
+
+-------------------------------------------------------------------
 Mon Jun  2 17:23:07 CEST 2008 - jkupec@suse.cz
 
 - translations updated
