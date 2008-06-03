@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun  3 11:59:20 CEST 2008 - jkupec@suse.cz
+
+- repo priority allowed to be > 99
+- r10329
+
+-------------------------------------------------------------------
 Mon Jun  2 17:28:54 CEST 2008 - jkupec@suse.cz
 
 - --debug-solver for inr and ve (bnc #396353)
