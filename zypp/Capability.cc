@@ -48,6 +48,13 @@ namespace zypp
       {
         nid = IdString( name_r ).id();
       }
+      else if ( kind_r == ResKind::srcpackage )
+      {
+        // map 'kind srcpackage' to 'arch src', the pseudo architecture
+        // satsolver uses.
+        nid = IdString( name_r ).id();
+        nid = ::rel2id( pool_r, nid, IdString(ARCH_SRC).id(), REL_ARCH, /*create*/true );
+      }
       else
       {
         nid = IdString( str::form( "%s:%s",
@@ -56,8 +63,8 @@ namespace zypp
       }
 
 
-      // Extend name by architecture, if provided
-      if ( ! arch_r.empty() )
+      // Extend name by architecture, if provided and not a srcpackage
+      if ( ! arch_r.empty() && kind_r != ResKind::srcpackage )
       {
         nid = ::rel2id( pool_r, nid, arch_r.id(), REL_ARCH, /*create*/true );
       }
@@ -71,12 +78,22 @@ namespace zypp
       return nid;
     }
 
-    /** Build \ref Capability from data, just parsing name for '[.arch]'.
+   /** Build \ref Capability from data, just parsing name for '[.arch]' and detect
+    * 'kind srcpackage' (will be mapped to arch \c src).
     */
     sat::detail::IdType relFromStr( ::_Pool * pool_r,
                                     const std::string & name_r, Rel op_r, const Edition & ed_r,
                                     const ResKind & kind_r )
     {
+      static const Arch srcArch( IdString(ARCH_SRC).asString() );
+      static const std::string srcKindPrefix( ResKind::srcpackage.asString() + ':' );
+
+      // check for an embedded 'srcpackage:foo' to be mapped to 'foo' and 'ResKind::srcpackage'.
+      if ( kind_r.empty() && str::hasPrefix( name_r, srcKindPrefix ) )
+      {
+        return relFromStr( pool_r, Arch_empty, name_r.substr( srcKindPrefix.size() ), op_r, ed_r, ResKind::srcpackage );
+      }
+
       Arch arch( Arch_empty );
       std::string name( name_r );
 
@@ -84,7 +101,7 @@ namespace zypp
       if ( asep != std::string::npos )
       {
         Arch ext( name_r.substr( asep+1 ) );
-        if ( ext.isBuiltIn() )
+        if ( ext.isBuiltIn() || ext == srcArch )
         {
           arch = ext;
           name.erase( asep );
@@ -325,6 +342,12 @@ namespace zypp
       _kind = EXPRESSION;
       return;
     }
+    // map back satsolvers pseudo arch 'src' to kind srcpackage
+    if ( _archIfSimple == ARCH_SRC )
+    {
+      _lhs = IdString( (ResKind::srcpackage.asString() + ":" + IdString(_lhs).c_str()).c_str() ).id();
+      _archIfSimple = 0;
+    }
   }
 
   /******************************************************************
@@ -334,6 +357,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const CapDetail & obj )
   {
+    static const char archsep = '.';
     switch ( obj.kind() )
     {
       case CapDetail::NOCAP:
@@ -342,13 +366,13 @@ namespace zypp
       case CapDetail::NAMED:
         str << obj.name();
         if ( obj.hasArch() )
-          str << '.' << obj.arch();
+          str << archsep << obj.arch();
         return str;
         break;
       case CapDetail::VERSIONED:
         str << obj.name();
         if ( obj.hasArch() )
-          str << '.' << obj.arch();
+          str << archsep << obj.arch();
         return str << " " << obj.op() << " " << obj.ed();
         break;
       case CapDetail::EXPRESSION:
