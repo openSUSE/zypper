@@ -67,6 +67,8 @@ namespace zypp
     {
 	callback::SendReport <rpm::RemoveResolvableReport> _report;
 	Resolvable::constPtr _resolvable;
+	bool _abort;
+
 
       public:
 
@@ -85,6 +87,11 @@ namespace zypp
          * Return true on abort
          */
         virtual bool progress( unsigned percent );
+
+        /**
+         *  Returns true if removing is aborted during progress
+         */
+	bool aborted() const { return _abort; }
 
 	/** inform user about a problem */
 	virtual rpm::RpmRemoveReport::Action problem( Exception & excpt_r );

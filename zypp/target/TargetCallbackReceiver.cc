@@ -105,6 +105,7 @@ namespace zypp
 	RpmRemovePackageReceiver::RpmRemovePackageReceiver (Resolvable::constPtr res)
 	    : callback::ReceiveReport<rpm::RpmRemoveReport> ()
 	    , _resolvable (res)
+            , _abort(false)
 	{
 	}
 
@@ -132,7 +133,8 @@ namespace zypp
          */
         bool RpmRemovePackageReceiver::progress( unsigned percent )
 	{
-	    return _report->progress( percent, _resolvable );
+	    _abort = ! _report->progress( percent, _resolvable );
+	    return _abort;
 	}
 	
 	rpm::RpmRemoveReport::Action 
