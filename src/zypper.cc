@@ -192,6 +192,7 @@ void print_main_help(Zypper & zypper)
     "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
     "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
     "\tsource-install, si\tInstall source packages and their build dependencies.\n"
+    "\tinstall-new-recommends, inr  Install newly added packages recommended by installed packages.\n"
   );
 
   static string help_query_commands = _("\tQuerying:\n"
