@@ -1634,9 +1634,10 @@ void modify_repo(Zypper & zypper, const string & alias)
 
       string prio_str = *tmp1->second.begin();
       safe_lexical_cast(prio_str, prio); // try to make an int out of the string
-      if (prio < 1 || prio > 99)
+      if (prio < 1)
       {
         zypper.out().error(boost::str(format(
+          //! \todo Don't tell about the upper limit and use %d instead of number.
           _("Invalid priority '%s'. Use an integer number between 1 (highest priority) and 99 (lowest priority)."))
           % prio_str));
         zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
