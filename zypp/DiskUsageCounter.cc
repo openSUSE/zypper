@@ -42,6 +42,13 @@ namespace zypp
     }
 
     sat::Pool satpool( sat::Pool::instance() );
+    if ( ! satpool.findSystemRepo() )
+    {
+      // take care we have at least an empty stystem repo.
+      // ::pool_calc_duchanges requires it.
+      satpool.systemRepo();
+      satpool.prepare();
+    }
 
     // init satsolver result vector with mountpoints
     static const ::DUChanges _initdu = { 0, 0, 0 };

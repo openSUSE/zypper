@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun  4 14:57:13 CEST 2008 - ma@suse.de
+
+- Fix crash when requesting disk usage without a target loaded. (bnc #396755) 
+- revision 10340
+
+-------------------------------------------------------------------
 Wed Jun  4 14:05:09 CEST 2008 - ma@suse.de
 
 - Fix memory corruption in curl media handler (bnc #396979) 
