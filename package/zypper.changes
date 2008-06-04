@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun  4 16:42:40 CEST 2008 - jkupec@suse.cz
+
+- count packages correctly on error (bnc #397037)
+- r10341
+
+-------------------------------------------------------------------
 Tue Jun  3 11:59:20 CEST 2008 - jkupec@suse.cz
 
 - repo priority allowed to be > 99
