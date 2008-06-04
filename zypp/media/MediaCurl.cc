@@ -148,38 +148,47 @@ namespace zypp {
       double                                        uload;
       zypp::Url                                     url;
     };
+
+    ///////////////////////////////////////////////////////////////////
+
+    inline void escape( string & str_r,
+                        const char char_r, const string & escaped_r ) {
+      for ( string::size_type pos = str_r.find( char_r );
+            pos != string::npos; pos = str_r.find( char_r, pos ) ) {
+              str_r.replace( pos, 1, escaped_r );
+            }
+    }
+
+    inline string escapedPath( string path_r ) {
+      escape( path_r, ' ', "%20" );
+      return path_r;
+    }
+
+    inline string unEscape( string text_r ) {
+      char * tmp = curl_unescape( text_r.c_str(), 0 );
+      string ret( tmp );
+      curl_free( tmp );
+      return ret;
+    }
+
   }
-
-Pathname    MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
-std::string MediaCurl::_agent = "Novell ZYPP Installer";
-
-///////////////////////////////////////////////////////////////////
-
-static inline void escape( string & str_r,
-                           const char char_r, const string & escaped_r ) {
-  for ( string::size_type pos = str_r.find( char_r );
-        pos != string::npos; pos = str_r.find( char_r, pos ) ) {
-    str_r.replace( pos, 1, escaped_r );
-  }
-}
-
-static inline string escapedPath( string path_r ) {
-  escape( path_r, ' ', "%20" );
-  return path_r;
-}
-
-static inline string unEscape( string text_r ) {
-  char * tmp = curl_unescape( text_r.c_str(), 0 );
-  string ret( tmp );
-  curl_free( tmp );
-  return ret;
-}
 
 ///////////////////////////////////////////////////////////////////
 //
 //        CLASS NAME : MediaCurl
 //
 ///////////////////////////////////////////////////////////////////
+
+Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
+
+const char *const MediaCurl::agentString()
+{
+  static const std::string _value( str::form( "ZYpp %s (curl %s)",
+                                              VERSION,
+                                              curl_version_info(CURLVERSION_NOW)->version ) );
+  return _value.c_str();
+}
+
 
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
@@ -214,12 +223,6 @@ MediaCurl::MediaCurl( const Url &      url_r,
     if( atemp != NULL)
       ::free(atemp);
   }
-
-  // set the right user agent string
-  curl_version_info_data *version_data;
-  version_data = curl_version_info(CURLVERSION_NOW);
-  _agent = str::form("ZYpp %s (curl %s)", VERSION, version_data->version);
-
 }
 
 void MediaCurl::setCookieFile( const Pathname &fileName )
@@ -351,7 +354,7 @@ void MediaCurl::attachTo (bool next)
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
-    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
+    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, agentString() );
 
 
     if ( ret != 0) {
@@ -434,7 +437,7 @@ void MediaCurl::attachTo (bool next)
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
-    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
+    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, agentString() );
     if ( ret != 0) {
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
@@ -1537,7 +1540,7 @@ int MediaCurl::progressCallback( void *clientp,
 	// (this callback is called much more often than a second)
 	// otherwise the values would be far from accurate when measuring
 	// the time in seconds
-	//! \todo more accurate download rate computationn, e.g. compute average value from last 5 seconds, or work with milliseconds instead of seconds 
+	//! \todo more accurate download rate computationn, e.g. compute average value from last 5 seconds, or work with milliseconds instead of seconds
 
         if ( pdata->secs > 1 && (dif > 0 || dlnow == dltotal ))
           pdata->drate_avg = (dlnow / pdata->secs);

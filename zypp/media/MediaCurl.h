@@ -42,7 +42,7 @@ class MediaCurl : public MediaHandler {
     /**
      * Repeatedly calls doGetDoesFileExist() until it successfully returns,
      * fails unexpectedly, or user cancels the operation. This is used to
-     * handle authentication or similar retry scenarios on media level. 
+     * handle authentication or similar retry scenarios on media level.
      */
     virtual bool getDoesFileExist( const Pathname & filename ) const;
 
@@ -94,6 +94,10 @@ class MediaCurl : public MediaHandler {
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow );
+
+    /** The user agent string */
+    static const char *const agentString();
+
   private:
     /**
      * Return a comma separated list of available authentication methods
@@ -114,7 +118,6 @@ class MediaCurl : public MediaHandler {
     long        _xfer_timeout;
 
     static Pathname _cookieFile;
-    static std::string _agent;
 };
 
 ///////////////////////////////////////////////////////////////////
