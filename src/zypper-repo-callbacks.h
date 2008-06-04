@@ -184,9 +184,12 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     Zypper::instance()->out().error(description);
-    ++Zypper::instance()->runtimeData().commit_pkg_current;
     DBG << "error report" << endl;
-    return (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
+
+    Action action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
+    if (action == DownloadResolvableReport::RETRY)
+      --Zypper::instance()->runtimeData().commit_pkg_current;
+    return action;
   }
 
   // implementation not needed prehaps - the media backend reports the download progress
