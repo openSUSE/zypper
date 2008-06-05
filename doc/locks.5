@@ -1,79 +1,80 @@
-.TH "locks" "5" "0.4.20" "libzypp" "System Tools"
+.TH "locks" "5" "4.25.0" "libzypp" "System Tools"
 .SH "NAME"
 .LP
 locks - libzypp locking file
 
 .SH "DESCRIPTION"
 .LP
-The file \fI/etc/zypp/locks\fR has been read by libzypp at startup if zypp.conf allow it. The entries is used for initial lock of package. Lock package mean does't allow install, update or uninstall package. Valid entries are
+The file \fI/etc/zypp/locks\fR is read by libzypp at startup if
+\fIzypp.conf\fR allows it. The entries are used for initial locking of
+packages. Locking a package means not allowing to install or uninstall
+it. Valid entries are
 .TP
 \fI attribute\fR\fB:\fR \fIvalue\fR
-Where attributes and its values is described below.
+Where attributes and their values are described below.
 .br
-Each lock is separated by empty line.
-
+Locks are separated by empty lines.
 
 .SH "ATTRIBUTES"
 .LP
-description of attributes. All attributes are \fBlower-case\fR.
+All attributes are lower-case.
 
 .TP
 .B repo
-specifies repository restriction. Only alias is allowed.
+specifies repository restriction. Only alias is accepted.
 .br
-Default is allowed all repositories.
+By default all repositories match.
 
 .TP
 .B type
-type restriction
+resolvable type restriction
 .br
-values can be \fBpackage\fR, \fBpatch\fR, \fBpattern\fR, \fBproduct\fR and \fBsrcpackage\fR.
+The values can be \fBpackage\fR, \fBpatch\fR, \fBpattern\fR, \fBproduct\fR and \fBsrcpackage\fR.
 .br
-default is all type 
+By default all types match.
 
 .TP
 .B case_sensitive
-if string is matched case sensitive.
+if strings are matched case sensitive.
+The values are \fBtrue\fR, \fBfalse\fR, \fBon\fR, \fBoff\fR.
 .br
-default is case \fBin\fRsensitive 
-
-.TP
-.B require_all
-if all string must match or at least one
-.br
-values are \fBtrue\fR for all match and \fBfalse\fR for at least one
-.br
-default is false
+The default is case insensitive.
 
 .TP
 .B install_status
-status of object. Possibly states is installed,not-installed and all. If more install status is specified then last is used.
+status of object. Possible states are \fBinstalled\fR,
+\fBnot-installed\fR and \fBall\fR. If more install statuses are
+specified then the last one is used.
 .br
-values are \fBinstalled\fR for all packages which is installed,\fBnon-installed\fR for packages which can be install or reinstall and \fBall\fR for both.
+The values are \fBinstalled\fR for all packages which are installed, \fBnon-installed\fR for packages which can be installed or reinstalled and \fBall\fR for both.
 .br
-default is all 
+The default is \fBall\fR.
 
 .TP
 .B match_type 
-type of string in value. Not affect type and repo which must be exactly specified.
+type of string matching in values. Does not affect \fBtype\fR and \fBrepo\fR which must be specified exactly.
 .br
-values are \fBexact\fR for exact match, \fBsubstring\fR if string contains value, \fBregex\fR for POSIX extended regular expressions, \fBglob\fR for matching as in command line and \fBword\fR for matching by whole words.
+The values are \fBexact\fR, \fBsubstring\fR, \fBregex\fR for regular
+expressions, \fBglob\fR for matching as on the command line, and \fBword\fR.
 .br
-default is substring 
+The default is \fBsubstring\fR.
 
 .TP
 .B query_string
-string for all attributes. Can be restricted by attribute with empty value ( it is recommended, because without restriction expect some performance problems ). 
+String to be matched in multiple attributes. Should be restricted by
+another attribute with empty value ( it is recommended, because without restriction expect some performance problems ). 
 
 .TP
 .B version
-restrict lock only to some versions. It contains two part, first is operator and second is version.
+Restrict the lock only to some versions. It contains two parts: an
+optional operator and the version.
 .br
-Allowed Operators are \fB==\fR,\fB!=\fR,\fB<\fR,\fB>\fR,\fB<=\fR and \fB>=\fR. If operator is not specified then == is used.
+The operator is \fB==\fR,\fB!=\fR,\fB<\fR,\fB>\fR,\fB<=\fR,\fB>=\fR. If operator is not specified then \fB==\fR is used.
 .br
-Version have format \fBepoch:version-release\fR. Only version is mandatory.
+The version has the format 
+.RB [ epoch: ] version [ -release ].
 .br
-example - version: < 0:0.11.4-2
+Example: version: < 0:0.11.4-2
 
 .TP
 .B solvable_name 
@@ -112,44 +113,64 @@ authors of package (only for package)
 package group (only for package) (e.g. Development/Tools/Version Control )
 
 .TP
-.B update_reference_type 
-reference for update (e.g. bugzilla,cve) (only for patch)
+.B update_reference_type
+reference for update (e.g. bugzilla,cve) (only for patches)
 
 .SH "EXAMPLES"
 .LP
-examples of usage
 
 .TP
-.B all kde
-locks everything which contains kde substring
+.B Exact Package
+This is the way YaST UI does it. Lock k3b (e.g. you don't want to update it).
+.br
+-----locks-----
+.br
+type: package
+.br
+solvable_name: k3b
+.br
+match_type: exact
+.br
+case_sensitive: on
+
+.TP
+.B Package Wildcard
+This is the way "zypper addlock cross-*-gcc-icecream-backend" does it.
+.br
+-----locks-----
+.br
+type: package
+.br
+solvable_name: cross-*-gcc-icecream-backend
+.br
+match_type: glob
+.br
+case_sensitive: on
+
+.TP
+.B Versioned Lock
+Do not install new GCC. This format is used when converting from the
+openSUSE-10.3 lock format.
+.br
+-----locks-----
+.br
+solvable_name: gcc
+.br
+match_type: glob
+.br
+version: > 4.2
+
+.TP
+.B Anything named KDE
+Locks everything which contains kde in the name.
 .br
 -----locks-----
 .br
 solvable_name: kde
 
 .TP
-.B shareware from repository non-oss or factory
-locks each package which is shareware from repository non-oss or factory 
-.br
------locks-----
-.br
-solvable_license: shareware
-.br
-repo: non-oss
-.br
-repo: factory
-
-.TP
-.B all patches
-locks all patches
-.br
------locks-----
-.br
-type:patch
-
-.TP
-.B Two locks
-all objects which contains kde(only low letters) in name and description and second lock for everything which have x11 keyword 
+.B Anything mentioning KDE
+Locks everything which contains kde in the name, summary, or description.
 .br
 -----locks-----
 .br
@@ -157,35 +178,22 @@ query_string: kde
 .br
 solvable_name:
 .br
+solvable_summary:
+.br
 solvable_description:
-.br
-case_sensitive: on
-.br
-require_all: on
-.br
- 
-.br
-solvable_keywords: x11
-
-.TP
-.B exact package 
-lock k3b (e.g. don't want update it)
-.br
-preferred way is use zypper addlock command or Yast
-.br
------locks-----
-.br
-solvable_name: k3b
-.br
-match_type: exact
 
 .SH "HOMEPAGE"
 
+This manual page only covers the most important attributes. The
+complete list is available at
 http://en.opensuse.org/Libzypp/Locksfile
 
 .SH "AUTHORS"
 .LP
 Josef Reidinger <jreidinger@suse.cz>
+.br
+Manual page contributions by Martin Vidner <mvidner@suse.cz>.
 
 .SH "SEE ALSO"
 .LP
+zypper(8)
