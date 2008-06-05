@@ -1428,7 +1428,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed packages.\n"
-      "-u, --uninstalled-only    Show only packages wich are not installed.\n"
+      "-u, --uninstalled-only    Show only packages which are not installed.\n"
       "-N, --sort-by-name        Sort the list by package name.\n"
       "-R, --sort-by-repo        Sort the list by repository.\n"
     );
@@ -1456,7 +1456,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed patterns.\n"
-      "-u, --uninstalled-only    Show only patterns wich are not installed.\n"
+      "-u, --uninstalled-only    Show only patterns which are not installed.\n"
     );
     break;
   }
@@ -1482,7 +1482,7 @@ void Zypper::processCommandOptions()
       "\n"
       "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
       "-i, --installed-only      Show only installed products.\n"
-      "-u, --uninstalled-only    Show only products wich are not installed.\n"
+      "-u, --uninstalled-only    Show only products which are not installed.\n"
     );
     break;
   }
