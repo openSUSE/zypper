@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun  5 18:01:15 CEST 2008 - jkupec@suse.cz
+
+- X-SuSE-ControlCenter-System category added
+  to package-manager.desktop (bnc #302324)
+- revision 10353
+
+-------------------------------------------------------------------
 Wed Jun  4 14:57:13 CEST 2008 - ma@suse.de
 
 - Fix crash when requesting disk usage without a target loaded. (bnc #396755) 
