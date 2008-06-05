@@ -5,6 +5,6 @@ Exec=package-manager --install %F
 Icon=package-manager-icon
 Terminal=false
 Type=Application
-Categories=PackageManager;
+Categories=PackageManager;X-SuSE-ControlCenter-System;
 MimeType=application/x-rpm;
 StartupNotify=true
