@@ -10,6 +10,76 @@ zypper is a command\-line interface to ZYpp system management library.
 It can be used to install, update, remove software, manage repositories, perform
 various queries, and more.
 
+.SH CONCEPTS
+
+Most of the following concepts are common for all applications based on the
+libzypp package management library, but there are some zypper specifics.
+
+.SS Repositories
+.LP
+Libzypp works with package metadata, that is information about packages and their
+relations extracted from RPM packages and other data like patch information,
+pattern definitions, etc. These data are stored together with the RPM files in
+folders called \fBrepositories\fR. Repositories can be placed on various media
+like an HTTP or FTP server, DVD, or a folder on a local disc.
+
+.SS Resource Identfiers (URI)
+To specify locations of repositories or other resources (RPM files, .repo
+files) you can use any type of URIs supported by libzypp. See
+http://en.opensuse.org/Libzypp/URI for a complete list and usage examples.
+
+In addition to these URIs you can use plain directory and file paths in which
+case zypper automatically treats them as dir:/path URIs.
+
+.SS Refresh
+.LP
+Refreshing a repository means downloading metadata of packages from the medium
+(if needed), storing it in local cache (typically under
+/var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv
+files (building the solv cache), typically under /var/cache/zypp/solv/<alias>.
+.LP
+The metadata get refreshed either automatically or on user request. An
+\fBautomatic refresh\fR takes place right before reading metadata from
+the database if the \fBauto-refresh is enabled\fR for the repository and the
+metada is reported to be out of date. If the \fBauto-refresh is disabled\fR,
+the repository will only be refreshed on user request. You can request
+a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh
+command for details).
+.LP
+The repository metadata are checked for changes before actually doing the
+refresh. A change is detected by downloading one or two metadata index files
+(small files) and comparing the checksums of the cached ones and the remote
+ones. If the files differ, the repository is out of date and will be refreshed.
+.LP
+To delay the up-to-date check (and thus the automatic refresh) for a certain
+number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp
+config file (/etc/zypp/zypp.conf). This means, zypper will not even try
+to download and check the index files, and you will be able to use zypper for
+operations like search or info without internet access or root privileges.
+
+.SS Package Types
+.LP
+zypper works with several types of resource objects, called
+.BR resolvables.
+A resolvable is a package, patch, pattern, or a product.
+.LP
+.B package
+\- an ordinary RPM package
+.br
+.B patch
+\- update of one or more packages. A patch can include special scripts and
+messages to be run or shown during installation of the update.
+.br
+.B pattern
+\- group of packages required or recommended to install some functionality
+.br
+.B product
+\- group of packages which are necessary to install a product
+.LP
+Throughout this manual we will refer to resolvables simply as \fIpackages\fR
+and to resolvable types as \fIpackages types\fR.
+
+
 .SH "COMMANDS"
 .LP
 zypper provides a number of \fBcommands\fR. Each command accepts the options
@@ -33,25 +103,6 @@ to experiment with it.
 
 .SS Package Management Commands
 
-.LP
-zypper works with several types of resource objects, called
-.BR resolvables.
-A resolvable is a package, patch, pattern, or a product.
-.LP
-.B package
-\- all RPM packages including patch and delta packages
-.br
-.B patch
-\- update of the packages, it can include special scripts and messages
-.br
-.B pattern
-\- group of packages 
-.br
-.B product
-\- group of packages, which are necessary to install a product
-.LP
-Throughout this manual we will refer to resolvables simply as \fIpackages\fR
-and to resolvable types as \fIpackages types\fR.
 
 .TP
 .B info (if) <name> ...
@@ -613,18 +664,6 @@ This option servers mainly for testing purposes. It will cause zypper to act
 as if there were no packages installed in the system. Use with causion as you
 can damage your system using this option. 
 
-.SH "METADATA REFRESH POLICY"
-.LP
-Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working with up-to-date metadata.
-.LP
-Refreshing a repository means downloading metadata of packages from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv files (/var/cache/zypp/*.solv).
-.LP
-The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBauto-refresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBauto-refresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
-.LP
-The status of the repository metadata is checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
-.LP
-To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp config file (/etc/zypp/zypp.conf). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.
-
 .SH "FILES"
 .TP
 .B /etc/zypp/repos.d
@@ -721,7 +760,7 @@ Currently, a Repository in zypper is a synonym for both Service and Catalog in Z
 zypper addrepo (ar)
 
 .TP
-.I rug service-delte (sd)
+.I rug service-delete (sd)
 zypper removerepo (rr)
 
 .TP
