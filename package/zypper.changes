@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun  5 16:37:36 CEST 2008 - jkupec@suse.cz
+
+- fix installation of patches/patterns/products (bnc #395326)
+- r10384
+
+-------------------------------------------------------------------
 Wed Jun  4 16:42:40 CEST 2008 - jkupec@suse.cz
 
 - count packages correctly on error (bnc #397037)
