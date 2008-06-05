@@ -419,17 +419,70 @@ mark_selectable(Zypper & zypper,
                 const string & arch = "")
 {
   PoolItem theone = s.theObj();
-  //! \todo handle multiple installed case 
-  bool installed;
+  //! \todo handle multiple installed case
+  bool theoneinstalled; // is the One installed ?
   if (s.kind() == ResKind::package)
-    installed = !s.installedEmpty() && theone &&
+    theoneinstalled = !s.installedEmpty() && theone &&
       equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
+  else if (s.kind() == ResKind::patch)
+    theoneinstalled = theone.isRelevant() && theone.isSatisfied();
   else
-    installed = theone.isSatisfied();
+    theoneinstalled = theone.isSatisfied();
+
+  bool anyinstalled = theoneinstalled;
+  PoolItem installed;
+  if (theoneinstalled)
+    installed = theone;
+  else
+  {
+    if (s.kind() == ResKind::package)
+    {
+      anyinstalled = s.hasInstalledObj();
+      installed = s.installedObj();
+    }
+    else if (s.kind() == ResKind::patch)
+    {
+      for_(it, s.availableBegin(), s.availableEnd())
+      {
+        if (it->isRelevant() && it->isSatisfied())
+        {
+          if (installed)
+          {
+            if (it->resolvable()->edition() > installed->edition())
+              installed = *it;
+          }
+          else
+          {
+            installed = *it;
+            anyinstalled = true;
+          }
+        }
+      }
+    }
+    else
+    {
+      for_(it, s.availableBegin(), s.availableEnd())
+      {
+        if (it->status().isSatisfied())
+        {
+          if (installed)
+          {
+            if (it->resolvable()->edition() > installed->edition())
+              installed = *it;
+          }
+          else
+          {
+            installed = *it;
+            anyinstalled = true;
+          }
+        }
+      }
+    }
+  }
 
   if (install_not_remove)
   {
-    if (installed && !force)
+    if (theoneinstalled && !force)
     {
       DBG << "the One (" << theone << ") is installed, skipping." << endl;
       zypper.out().info(str::form(
@@ -437,7 +490,7 @@ mark_selectable(Zypper & zypper,
       return;
     }
 
-    if (installed && force)
+    if (theoneinstalled && force)
     {
       s.setStatus(ui::S_Install);
       DBG << s << " install: forcing reinstall" << endl;
@@ -445,18 +498,32 @@ mark_selectable(Zypper & zypper,
     else
     {
       Capability c;
-      if (s.installedEmpty())
-        c = Capability(s.name(), s.kind());
+
+      // require version greater than the installed. The solver should pick up
+      // the latest installable in this case, which is what we want for all
+      // kinds (and for patches having the latest installed should automatically
+      // satisfy all older version, or make them irrelevant)
+
+      //! could be a problem for patches if there would a greater version
+      //! of a patch appear that would be irrelevant at the same time. Should
+      //! happen probably.
+      if (anyinstalled)
+        c = Capability(s.name(), Rel::GT, installed->edition(), s.kind());
+      // require any version
       else
-        c = Capability(s.name(), Rel::GT, s.installedObj()->edition(), s.kind());
+        c = Capability(s.name(), s.kind());
+
       God->resolver()->addRequire(c);
       DBG << s << " install: adding requirement " << c << endl;
     }
   }
   // removing is simpler, as usually
+  //! \todo but not that simple - simply adding a conflict with a pattern
+  //! or patch does not make the packages it requires to be removed.
+  //! we still need to define what response of zypper -t foo bar should be for PPP
   else
   {
-    if (s.installedEmpty())
+    if (!anyinstalled)
     {
       zypper.out().info(str::form(
           _("'%s' is not installed."), s.name().c_str()));
