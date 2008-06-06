@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.10.5" "zypper" "System Tools"
+.TH "zypper" "8" "0.11.7" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -597,6 +597,11 @@ Increase verbosity. For debugging output specify this option twice.
 .I \-q, \-\-quiet
 Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.
 .TP
+.I \-A, \-\-no\-abbrev
+Do not abbreviate text in tables. By default zypper will try to abbreviate
+texts in some columns so that the table fits the width of the screen. If you
+need to see the whole text, use this option.
+.TP
 .I \-t, \-\-terse
 Terse output for machine consumption. Currently not used and provided only for
 compatibility with rug.
@@ -620,16 +625,16 @@ Use the specified directory to look for the repository definition (*.repo) files
 The default value is /etc/zypp/repos.d.
 .TP
 .I \-C, \-\-cache\-dir <dir>
-Use an alternative directory to look for the repository meta-data cache database file (zypp.db).
-The default value is /var/cache/zypp. 
+Use an alternative directory to look for the repository meta-data cache database files (solv files).
+The default value is /var/cache/zypp/solv.
 .TP
-.I    \-\-raw\-cache\-dir <dir>
+.I \ \ \ \ \-\-raw\-cache\-dir <dir>
 Use the specified directory for storing raw copies of repository meta-data files.
 The default value is /var/cache/zypp/raw.
 .LP
 Repository Options:
 .TP
-.I      \-\-no\-gpg\-checks
+.I \ \ \ \ \-\-no\-gpg\-checks
 Ignore GPG check failures and continue. If a GPG issue occurs when using this
 option zypper prints and logs a warning and automatically continues without
 interrupting the operation. Use this option with causion, as you can easily
@@ -640,12 +645,12 @@ Use an additional repository for this operation. The repository aliased tmp#
 and named by the specified URI will be added for this operation and removed
 at the end. You can specify this option multiple times.
 .TP
-.I \-\-disable\-repositories
+.I \ \ \ \ \-\-disable\-repositories
 Do not read meta-data from repositories. This option will prevent loading of
 packages from repositories, thus making zypper work only with the installed
 packages (if \-\-disable\-system\-resolvables was not specified).
 .TP
-.I \-\-no\-refresh
+.I \ \ \ \ \-\-no\-refresh
 Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
 time when doing operations like search, if there is not a need to have
 a completely up to date meta-data.
@@ -659,7 +664,7 @@ to be run with the --root option to do the actual installation or removal of
 packages. Note that the ZYpp lock is still created in the original system,
 as well as temporary files. See also the FILES section.
 .TP
-.I \-\-disable\-system\-resolvables
+.I \ \ \ \ \-\-disable\-system\-resolvables
 This option servers mainly for testing purposes. It will cause zypper to act
 as if there were no packages installed in the system. Use with causion as you
 can damage your system using this option. 
