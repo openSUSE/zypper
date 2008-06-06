@@ -200,18 +200,21 @@ Select packages by capabilities.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. Use this option, if you think the
 dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
 directory to your bug report. To use this option, simply add it to the problematic
 install or remove command. 
 .TP
-.I \-R, \-\-force\-resolution <on|off>
-If 'on' is specified the solver is forced to find a solution, even if it would
-mean removing all packages with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'on' in the interactive mode and 'off' in the
+The default behavior is 'force' in the interactive mode and 'no-force' in the
 non-interactive mode. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
@@ -249,7 +252,7 @@ Test the repair, do not actually do anything to the system.
 .I \-r, \-\-repo <alias|#|URI>
 Use only specified repositories to install missing packages.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 
 .TP
@@ -265,7 +268,7 @@ Use only specified repositories to install packages.
 .I \-D, \-\-dry-run
 Test the installation, do not actually install anything.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 
 .TP
@@ -310,12 +313,15 @@ Select packages by capabilities.
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
-.I \-R, \-\-force\-resolution
-Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'on' in the interactive mode and 'off' in the
+The default behavior is 'force' in the interactive mode and 'no-force' in the
 non-interactive mode. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
@@ -353,15 +359,18 @@ confirmed.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
-.I \-R, \-\-force\-resolution
-Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'off'. If this option is specified, it takes the preference.
+The default behavior is 'no-force'. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
@@ -381,7 +390,7 @@ This option can be used multiple times.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
 .I \-D, \-\-dry\-run
