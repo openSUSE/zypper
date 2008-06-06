@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun  6 13:29:59 CEST 2008 - ma@suse.de
+
+- Handle application/x-redhat-package-manager in package-manager.desktop 
+  (bnc #391183)
+- revision 10361
+
+-------------------------------------------------------------------
 Thu Jun  5 18:01:15 CEST 2008 - jkupec@suse.cz
 
 - X-SuSE-ControlCenter-System category added

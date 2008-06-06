@@ -6,5 +6,5 @@ Icon=package-manager-icon
 Terminal=false
 Type=Application
 Categories=PackageManager;X-SuSE-ControlCenter-System;
-MimeType=application/x-rpm;
+MimeType=application/x-rpm;application/x-redhat-package-manager;
 StartupNotify=true
