@@ -526,19 +526,48 @@ Ignore user authentication data in the URI
 Ignore query string in the URI
 
 .TP
-.B repos (lr)
+.B repos (lr) [options]
 List all defined repositories.
 .IP
-The following data are printed for each repository found: # (repository number), Enabled (whether the repository is enabled), Refresh (whether auto-refresh is enabled for the repository), Type (rpm-md, yast2, plaindir), Alias (shorthand for Name), and Name. If -v global option is used, an additional URI column will be displayed containing the base URI of the repository.
+The following data are printed for each repository found:
+# (repository number), Enabled (whether the repository is enabled), Refresh
+(whether auto-refresh is enabled for the repository), Type (rpm-md, yast2,
+plaindir), Alias (shorthand for Name), and Name. Other columns can be added
+using the options listed below.
 
-Repository number is a unique identifier of the repository in current repository set. If you add, remove or change a repository, the numbers may change. Beware of that when using the numbers with the repository handling commands (although not possible right now, the feature will be reimplmented soon). On the other hand, using the alias instead of the number is always safe.
+Repository number is a unique identifier of the repository in current
+set of repositories. If you add, remove or change a repository, the numbers may
+change. Keep that in mind when using the numbers with the repository handling
+commands. On the other hand, using the alias instead of the number is always
+safe.
 
 .TP
-.I \-e, \-\-export <FILE|->
+.I \-e, \-\-export <FILE.repo|->
 This option causes zypper to write repository definition of all defined
 repositories into a single file in repo file format.
 If '\-' is specified instead of a file name,
-the repositories will be written to the standard output.   
+the repositories will be written to the standard output.
+.TP
+.I \-u, \-\-uri
+Add base URI column to the output.
+.TP
+.I \-p, \-\-priority
+Add repository priority column to the output.
+.TP
+.I \-d, \-\-details
+Show more information like URI, priority, type, etc.
+.TP
+.I \-U, \-\-sort\-by\-uri
+Add base URI column and sort the list it.
+.TP
+.I \-P, \-\-sort\-by\-priority
+Add repository priority column and sort the list by it.
+.TP
+.I \-A, \-\-sort\-by\-alias
+Sort the list by alias.
+.TP
+.I \-N, \-\-sort\-by\-name
+Sort the list by name.
 
 .TP
 .B renamerepo (nr) <alias|#|URI> <new-alias>
@@ -557,14 +586,37 @@ Disable the repository.
 \fI\-r, \-\-refresh\fR
 Enable auto-refresh for the repository.
 .TP
-\fI\-n, \-\-no\-refresh\fR
+\fI\-R, \-\-no\-refresh\fR
 Disable auto-refresh for the repository.
 .TP
-.I \-p, \-\-priority <1-99>
-Set priority of the repository. Priority of 1 is the highest, 99 is the lowest
-and the default. Packages from repositories with higher priority will be
-preferred even in case there is a higher installable version of available
-in the repository with a lower priority.
+.I \-p, \-\-priority <positive-integer>
+Set priority of the repository. Priority of 1 is the highest, the higher the
+number the lower the priority. Default priority is 99. Packages from
+repositories with higher priority will be preferred even in case there is
+a higher installable version available in the repository with a lower priority.
+.TP
+.I \-n, \-\-name
+Set a descriptive name for the repository.
+.TP
+.I \-k, \-\-keep\-packages
+Enable RPM files caching.
+.TP
+.I \-K, \-\-no\-keep\-packages
+Disable RPM files caching.
+.TP
+.I \-a, \-\-all
+Apply changes to all repositories.
+.TP
+.I \-l, \-\-local
+Apply changes to all local repositories.
+.TP
+.I \-t, \-\-remote
+Apply changes to all remote repositories (http/https/ftp).
+.TP
+.I \-m, \-\-medium\-type <type>
+Apply changes to repositories of specified type. The type corresponds to the
+repository URI scheme identifier like http, dvd, etc. You can find complete
+list of valid types at http://en.opensuse.org/Libzypp/URI.
 
 .TP
 .B refresh (ref) [alias|#] ...
@@ -589,17 +641,17 @@ Only download the raw metadata, don't parse it or build the database.
 
 .TP
 .B clean [alias|#|URI] ...
-Clean up the local caches for all known or specified repositories. By default,
+Clean the local caches for all known or specified repositories. By default,
  only caches of downloaded packages are cleaned.
 .TP
 .I \-m, \-\-metadata
-Clean up repository metadata cache instead of package cache.
+Clean repository metadata cache instead of package cache.
 .TP
 .I \-M, \-\-raw\-metadata
-Clean up repository raw metadata cache instead of package cache.
+Clean repository raw metadata cache instead of package cache.
 .TP
 .I \-a, \-\-all
-Clean up both repository metadata and package caches.
+Clean both repository metadata and package caches.
 
 .SH "GLOBAL OPTIONS"
 
