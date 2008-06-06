@@ -649,7 +649,7 @@ attremptycheckend:
 
           // whether to drop an uninstalled (repo) solvable
           if ( (_status_flags & PoolQuery::INSTALLED_ONLY) &&
-              base().get()->repo->name != sat::Pool::instance().systemRepoName() )
+              base().get()->repo->name != sat::Pool::instance().systemRepoAlias() )
           {
             drop_by_kind_status_edition = true;
             break;
@@ -657,7 +657,7 @@ attremptycheckend:
 
           // whether to drop an installed (target) solvable
           if ((_status_flags & PoolQuery::UNINSTALLED_ONLY) &&
-              base().get()->repo->name == sat::Pool::instance().systemRepoName())
+              base().get()->repo->name == sat::Pool::instance().systemRepoAlias())
           {
             drop_by_kind_status_edition = true;
             break;

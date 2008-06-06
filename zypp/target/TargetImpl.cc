@@ -302,14 +302,14 @@ namespace zypp
     void TargetImpl::clearCache()
     {
       Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoName() );
+                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoAlias() );
       filesystem::recursive_rmdir( base );
     }
 
     void TargetImpl::buildCache()
     {
       Pathname base = Pathname::assertprefix( _root,
-                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoName() );
+                                              ZConfig::instance().repoSolvfilesPath() / sat::Pool::instance().systemRepoAlias() );
       Pathname rpmsolv       = base/"solv";
       Pathname rpmsolvcookie = base/"cookie";
 
@@ -406,8 +406,8 @@ namespace zypp
       // now add the repos to the pool
       sat::Pool satpool( sat::Pool::instance() );
       Pathname rpmsolv( Pathname::assertprefix( _root,
-                        ZConfig::instance().repoSolvfilesPath() / satpool.systemRepoName() / "solv" ) );
-      MIL << "adding " << rpmsolv << " to pool(" << satpool.systemRepoName() << ")" << endl;
+                        ZConfig::instance().repoSolvfilesPath() / satpool.systemRepoAlias() / "solv" ) );
+      MIL << "adding " << rpmsolv << " to pool(" << satpool.systemRepoAlias() << ")" << endl;
 
       // Providing an empty system repo, unload any old content
       Repository system( sat::Pool::instance().findSystemRepo() );
