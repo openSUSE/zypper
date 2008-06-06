@@ -3,7 +3,7 @@
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
 
-zypper \fI\-\-help\fR [\fBcommand\fR]
+zypper \fBhelp\fR [\fBcommand\fR]
 .SH "DESCRIPTION"
 .LP
 zypper is a command\-line interface to ZYpp system management library.
@@ -92,6 +92,25 @@ of the command arguments.
 .SS General Commands
 
 .TP
+.B help [command]
+Shows help texts. If invoked without any argument (just \'zypper\' or
+\'zypper\ help\'), zypper displays global help text which lists all available
+global options and commands (except those provided only for compatibility
+with rug).
+
+If invoked with a command name argument, zypper displays help for the
+specified command, if such command exists. Long as well as short variants
+of the command names can be used.
+
+For your convenience, zypper help can be invoked in any of the following ways:
+
+.B $ zypper help [command]
+.br
+.B $ zypper -h|--help [command]
+.br
+.B $ zypper [command] -h|--help
+
+.TP
 .B shell (sh)
 Starts a shell for entering multiple commands in one session.
 Exit the shell using "exit", "quit", or Ctrl-D.
@@ -101,8 +120,8 @@ so expect bugs there. However, there's no urgent need to use the shell
 since libzypp became so fast (opensSUSE 11.0), but still, you're welcome
 to experiment with it.
 
-.SS Package Management Commands
 
+.SS Package Management Commands
 
 .TP
 .B info (if) <name> ...
