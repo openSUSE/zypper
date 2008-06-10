@@ -221,29 +221,32 @@ namespace zypp
 
     string gsub(const string& sData, const string& sFrom, const string& sTo)
     {
-      string sNew = sData;
+      string sNew;
+      sNew.reserve(sData.size());
 
-      if (! sNew.empty())
+      if (! sData.empty())
       {
-        string::size_type toLen = sTo.length();
         string::size_type frLen = sFrom.length();
         string::size_type loc = 0;
+        string::size_type oldLoc = 0;
 
-        while (string::npos != (loc = sNew.find(sFrom, loc)))
+        while (string::npos != (loc = sData.find(sFrom, loc)))
         {
-          sNew.replace(loc, frLen, sTo);
-          loc += toLen;
-
-          if (loc >= sNew.length())
-          break;
+          sNew.append(sData,oldLoc,loc-oldLoc);
+          sNew.append(sTo);
+          loc += frLen;
+          oldLoc = loc;
+          if (loc >= sData.length())
+            break;
         }
+        if (oldLoc!=sData.size())
+            sNew.append(sData,oldLoc,sData.size()-oldLoc);
       }
-
 
       return sNew;
     }
 
-    string & replace_all(string & str, const string & from, const string & to)
+    string & replaceAll(string & str, const string & from, const string & to)
     {
       string::size_type pos = 0;
       while((pos = str.find(from, pos)) != string::npos)

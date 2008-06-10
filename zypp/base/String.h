@@ -299,7 +299,7 @@ namespace zypp
      * \note It only perform substtution in one pass
      * \note use only if you replace same lenght strings, otherwise use gsub
      */
-    std::string& replace_all( std::string & str, const std::string & from, const std::string & to);
+    std::string& replaceAll( std::string & str, const std::string & from, const std::string & to);
 
     ///////////////////////////////////////////////////////////////////
     /** \name Split. */
@@ -395,11 +395,11 @@ namespace zypp
 
               std::string s( beg+1, cur-beg-2 ); //without quotes
               //transform escaped escape
-              replace_all( s, "\\\\", "\\" );
+              replaceAll( s, "\\\\", "\\" );
               //transform escaped quotes (only same as open
               char tmpn[2] = { closeChar, 0 };
               char tmpo[3] = { '\\', closeChar, 0 };
-              replace_all( s, tmpo, tmpn );
+              replaceAll( s, tmpo, tmpn );
 
               *result_r = s;
             }
@@ -418,7 +418,7 @@ namespace zypp
               // build string
               std::string s( beg, cur-beg );
               //transform escaped escape
-              replace_all( s, "\\\\", "\\" );
+              replaceAll( s, "\\\\", "\\" );
 
               const char *delimeter = sepchars_r;
               while ( *delimeter )
@@ -427,7 +427,7 @@ namespace zypp
                 const char tmp[2] = { *delimeter, '\0' };
                 std::string del(tmp);
                 ds+= del;
-                replace_all( s, ds, del );
+                replaceAll( s, ds, del );
                 ++delimeter;
               }
 

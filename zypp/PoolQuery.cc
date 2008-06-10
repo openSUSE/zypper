@@ -1160,7 +1160,7 @@ attremptycheckend:
       else
       {
         string s = attrName;
-        str::replace_all( s,"_",":" );
+        str::replaceAll( s,"_",":" );
         SolvAttr a(s);
         addAttribute(a,attrValue);
       }
@@ -1263,7 +1263,7 @@ attremptycheckend:
     for_( it, attributes().begin(), attributes().end() )
     {
       string s = it->first.asString();
-      str::replace_all(s,":","_");
+      str::replaceAll(s,":","_");
       for_( it2,it->second.begin(),it->second.end() )
       {
         str << s <<": "<< *it2 << delim;

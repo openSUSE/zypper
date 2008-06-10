@@ -164,10 +164,8 @@ namespace zypp
             if ( what[1] == "pub" )
             {
               _id = what[5];
-              _name = what[10];
               //replace all escaped semicolon with real
-              str::replace_all(_name,"\\x3a",":");
-
+              _name = str::gsub(what[10],"\\x3a",":");
 	      _created = createDate(what[6]);
 	      _expires = createDate(what[7]);
             //return key;

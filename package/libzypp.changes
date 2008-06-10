@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jun 10 09:52:03 CEST 2008 - jreidinger@suse.cz
+
+- improve performance of gsub
+- change replace_all to replaceAll (same name convency)
+- add tests for gsub and replaceAll
+- revision 10366 
+
+-------------------------------------------------------------------
 Fri Jun  6 13:29:59 CEST 2008 - ma@suse.de
 
 - Handle application/x-redhat-package-manager in package-manager.desktop 

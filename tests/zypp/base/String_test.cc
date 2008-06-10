@@ -14,6 +14,35 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::str;
 
+BOOST_AUTO_TEST_CASE(gsubTest)
+{
+  string olds = "olds";
+  string news = "new string";
+
+  BOOST_CHECK_EQUAL(gsub("test olds string",olds,news), "test new string string");
+  BOOST_CHECK_EQUAL(gsub("no string",olds,news),"no string");
+  BOOST_CHECK_EQUAL(gsub("oldsolds",olds,news),"new stringnew string");
+}
+
+BOOST_AUTO_TEST_CASE(replaceAllTest)
+{
+  string olds = "olds";
+  string news = "new string";
+  string tests;
+
+  tests = "test olds string";
+  replaceAll(tests,olds,news);
+  BOOST_CHECK_EQUAL(tests, "test new string string");
+
+  tests = "no string";
+  replaceAll(tests,olds,news);
+  BOOST_CHECK_EQUAL(tests, "no string");
+
+  tests = "oldsolds";
+  replaceAll(tests,olds,news);
+  BOOST_CHECK_EQUAL(tests, "new stringnew string");
+}
+
 BOOST_AUTO_TEST_CASE(testsplitEscaped)
 {
   string s( "simple non-escaped string" );
