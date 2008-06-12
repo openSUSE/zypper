@@ -3117,7 +3117,8 @@ void Zypper::doCommand()
       return;
     }
     // too many arguments
-    else if (_arguments.size() > 1)
+    //TODO rug compatibility
+/*    else if (_arguments.size() > 1)
     {
       // rug compatibility
       if (_gopts.is_rug_compatible)
@@ -3129,7 +3130,7 @@ void Zypper::doCommand()
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       }
-    }
+    }*/
 
     ResKindSet kinds;
     if (copts.count("type"))
@@ -3151,12 +3152,6 @@ void Zypper::doCommand()
     else
       kinds.insert(ResKind::package);
 
-    init_target(*this);
-    init_repos(*this);
-    if (exitCode() != ZYPPER_EXIT_OK)
-      return;
-    load_resolvables(*this);
-
     add_locks(*this, _arguments, kinds);
 
     break;
@@ -3175,13 +3170,9 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_arguments.size() != 1)
+    if (_arguments.size() == 1)
     {
-      if (_arguments.empty())
-        report_required_arg_missing(out(), _command_help);
-      else
-        report_too_many_arguments(_command_help); 
-        
+      report_required_arg_missing(out(), _command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }

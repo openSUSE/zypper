@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jun 12 10:13:02 CEST 2008 - jreidinger@suse.cz
+
+- support multiple arguments to add/remove lock (bnc #398844)
+- enable specify repository for add/remove lock
+- read only locks file, apply is not needed
+- doesn't initialize pool for add repo (bnc #398839)
+- r10370 
+
+-------------------------------------------------------------------
 Thu Jun  5 16:37:36 CEST 2008 - jkupec@suse.cz
 
 - fix installation of patches/patterns/products (bnc #395326)

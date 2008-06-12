@@ -2,6 +2,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
 #include "zypp/Locks.h"
 
 #include "output/Out.h"
@@ -9,6 +10,7 @@
 #include "zypper-tabulator.h"
 #include "zypper-utils.h"
 #include "zypper-locks.h"
+#include "zypper-repos.h"
 
 using namespace zypp;
 using namespace std;
@@ -116,18 +118,34 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
   Locks::size_type start = 0;
   try
   {
-    PoolQuery q;
-    q.addAttribute(sat::SolvAttr::name, args[0]);
-    for_(it, kinds.begin(), kinds.end())
-      q.addKind(*it);
-    q.setMatchGlob();
-    //! \todo addRepo()
-    q.setCaseSensitive();
 
     Locks & locks = Locks::instance();
-    locks.readAndApply();
+    locks.read();
     start = locks.size();
-    locks.addLock(q);
+    for_(it,args.begin(),args.end())
+    {
+      PoolQuery q;
+      q.addAttribute(sat::SolvAttr::name, *it);
+      for_(itk, kinds.begin(), kinds.end())
+        q.addKind(*itk);
+      q.setMatchGlob();
+      parsed_opts::const_iterator itr;
+      //TODO rug compatibility for more arguments with version restrict
+      if ((itr = copts.find("repo")) != copts.end())
+      {
+        for_(it_repo,itr->second.begin(), itr->second.end())
+        {
+          RepoInfo info;
+          if( match_repo( zypper, *it_repo, &info))
+            q.addRepo(info.alias());
+          else //TODO some error handling
+            WAR << "unknown repository" << *it_repo << endl;
+        }
+      }
+      q.setCaseSensitive();
+
+      locks.addLock(q);
+    }
     locks.save();
   }
   catch(const Exception & e)
@@ -137,7 +155,7 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
   if ( start != Locks::instance().size() )
-    zypper.out().info(_("Specified lock has been successfully added."));
+    zypper.out().info(_("Specified lock(-s) has been successfully added."));
 }
 
 
@@ -146,60 +164,77 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
   try
   {
     Locks & locks = Locks::instance();
-    locks.readAndApply();
+    locks.read();
     Locks::size_type start = locks.size();
-    Locks::const_iterator it = locks.begin();
-    Locks::LockList::size_type i = 0;
-    safe_lexical_cast(args[0], i);
-    if (i > 0 && i <= locks.size())
+    for_( args_it, args.begin(), args.end() )
     {
-      advance(it, i-1);
-      locks.removeLock(*it);
-      locks.save();
+      Locks::const_iterator it = locks.begin();
+      Locks::LockList::size_type i = 0;
+      safe_lexical_cast(*args_it, i);
+      if (i > 0 && i <= locks.size())
+      {
+        advance(it, i-1);
+        locks.removeLock(*it);
   
-      zypper.out().info(_("Specified lock has been successfully removed."));
-    }
-    else //package name
-    {
-      //TODO localize
-      PoolQuery q;
-      q.addAttribute(sat::SolvAttr::name, args[0]);
-      q.setMatchGlob();
-      //! \todo addRepo()
-      q.setCaseSensitive();
-
-      int res = 0;
-      PoolQuery& last = q;
-      for_( it, locks.begin(),locks.end() ) //if one package have identical name remove it directly
+        zypper.out().info(_("Specified lock has been successfully removed."));
+      }
+      else //package name
       {
-        PoolQuery::StrContainer sc = it->attribute(sat::SolvAttr::name);
-        if (sc.size()==1 && sc.count(args[0]) )
+        //TODO localize
+        //TODO fill query in one method to have consistent add/remove
+        //TODO what to do with repo and kinds?
+        PoolQuery q;
+        q.addAttribute(sat::SolvAttr::name, *args_it);
+        q.setMatchGlob();
+        parsed_opts::const_iterator itr;
+        if ((itr = copts.find("repo")) != copts.end())
         {
-          res++;
-          last = *it;
+          for_(it_repo,itr->second.begin(), itr->second.end())
+          {
+            RepoInfo info;
+            if( match_repo( zypper, *it_repo, &info))
+              q.addRepo(info.alias());
+            else //TODO some error handling
+              WAR << "unknown repository" << *it_repo << endl;
+          }
         }
-      }
-      if ( res == 1 ) //only one exact name matching
-        locks.removeLock(last);
-      else
-        locks.removeLock(q);
+        q.setCaseSensitive();
 
-      locks.save();
+        //hack to remove unique lock added by zypper
+        int res = 0;
+        PoolQuery& last = q;
+        for_( it, locks.begin(),locks.end() )
+        {
+          PoolQuery::StrContainer sc = it->attribute(sat::SolvAttr::name);
+          if (sc.size()==1 && sc.count(*args_it) )
+          {
+            res++;
+            last = *it;
+          }
+        }
 
-      if (start==locks.size())
-      {
-        zypper.out().info("No lock has been removed.");
-        // nothing removed
-      } else {
-        zypper.out().info(str::form("Lock count has been succesfully decreased by: %lu",start-locks.size()));
-        //removed something
+        if (res == 1) //only one with identical name, then remove it
+          locks.removeLock(last);
+        else
+          locks.removeLock(q);
       }
+    }
+
+    locks.save();
+
+    if (start==locks.size())
+    {
+      zypper.out().info("No lock has been removed.");
+      // nothing removed
+    } else {
+      zypper.out().info(str::form("Lock count has been succesfully decreased by: %lu",start-locks.size()));
+      //removed something
     }
   }
   catch(const Exception & e)
   {
     ZYPP_CAUGHT(e);
-    zypper.out().error(e, _("Problem adding the package lock:"));
+    zypper.out().error(e, _("Problem removing the package lock:"));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
 }
