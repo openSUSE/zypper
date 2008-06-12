@@ -2584,8 +2584,8 @@ void solve_and_commit (Zypper & zypper)
           }
         }
         // install any pending source packages
-/*        if (!zypper.runtimeData().srcpkgs_to_install.empty())
-          install_src_pkgs(zypper);*/
+        if (!zypper.runtimeData().srcpkgs_to_install.empty())
+          install_src_pkgs(zypper);
       }
     }
     // noting to do
