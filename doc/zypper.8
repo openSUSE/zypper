@@ -1,14 +1,84 @@
-.TH "zypper" "8" "0.10.5" "zypper" "System Tools"
+.TH "zypper" "8" "0.11.7" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
 
-zypper \fI\-\-help\fR [\fBcommand\fR]
+zypper \fBhelp\fR [\fBcommand\fR]
 .SH "DESCRIPTION"
 .LP
 zypper is a command\-line interface to ZYpp system management library.
 It can be used to install, update, remove software, manage repositories, perform
 various queries, and more.
+
+.SH CONCEPTS
+
+Most of the following concepts are common for all applications based on the
+libzypp package management library, but there are some zypper specifics.
+
+.SS Repositories
+.LP
+Libzypp works with package metadata, that is information about packages and their
+relations extracted from RPM packages and other data like patch information,
+pattern definitions, etc. These data are stored together with the RPM files in
+folders called \fBrepositories\fR. Repositories can be placed on various media
+like an HTTP or FTP server, DVD, or a folder on a local disc.
+
+.SS Resource Identfiers (URI)
+To specify locations of repositories or other resources (RPM files, .repo
+files) you can use any type of URIs supported by libzypp. See
+http://en.opensuse.org/Libzypp/URI for a complete list and usage examples.
+
+In addition to these URIs you can use plain directory and file paths in which
+case zypper automatically treats them as dir:/path URIs.
+
+.SS Refresh
+.LP
+Refreshing a repository means downloading metadata of packages from the medium
+(if needed), storing it in local cache (typically under
+/var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv
+files (building the solv cache), typically under /var/cache/zypp/solv/<alias>.
+.LP
+The metadata get refreshed either automatically or on user request. An
+\fBautomatic refresh\fR takes place right before reading metadata from
+the database if the \fBauto-refresh is enabled\fR for the repository and the
+metada is reported to be out of date. If the \fBauto-refresh is disabled\fR,
+the repository will only be refreshed on user request. You can request
+a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh
+command for details).
+.LP
+The repository metadata are checked for changes before actually doing the
+refresh. A change is detected by downloading one or two metadata index files
+(small files) and comparing the checksums of the cached ones and the remote
+ones. If the files differ, the repository is out of date and will be refreshed.
+.LP
+To delay the up-to-date check (and thus the automatic refresh) for a certain
+number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp
+config file (/etc/zypp/zypp.conf). This means, zypper will not even try
+to download and check the index files, and you will be able to use zypper for
+operations like search or info without internet access or root privileges.
+
+.SS Package Types
+.LP
+zypper works with several types of resource objects, called
+.BR resolvables.
+A resolvable is a package, patch, pattern, or a product.
+.LP
+.B package
+\- an ordinary RPM package
+.br
+.B patch
+\- update of one or more packages. A patch can include special scripts and
+messages to be run or shown during installation of the update.
+.br
+.B pattern
+\- group of packages required or recommended to install some functionality
+.br
+.B product
+\- group of packages which are necessary to install a product
+.LP
+Throughout this manual we will refer to resolvables simply as \fIpackages\fR
+and to resolvable types as \fIpackages types\fR.
+
 
 .SH "COMMANDS"
 .LP
@@ -22,6 +92,25 @@ of the command arguments.
 .SS General Commands
 
 .TP
+.B help [command]
+Shows help texts. If invoked without any argument (just \'zypper\' or
+\'zypper\ help\'), zypper displays global help text which lists all available
+global options and commands (except those provided only for compatibility
+with rug).
+
+If invoked with a command name argument, zypper displays help for the
+specified command, if such command exists. Long as well as short variants
+of the command names can be used.
+
+For your convenience, zypper help can be invoked in any of the following ways:
+
+.B $ zypper help [command]
+.br
+.B $ zypper -h|--help [command]
+.br
+.B $ zypper [command] -h|--help
+
+.TP
 .B shell (sh)
 Starts a shell for entering multiple commands in one session.
 Exit the shell using "exit", "quit", or Ctrl-D.
@@ -31,27 +120,8 @@ so expect bugs there. However, there's no urgent need to use the shell
 since libzypp became so fast (opensSUSE 11.0), but still, you're welcome
 to experiment with it.
 
-.SS Package Management Commands
 
-.LP
-zypper works with several types of resource objects, called
-.BR resolvables.
-A resolvable is a package, patch, pattern, or a product.
-.LP
-.B package
-\- all RPM packages including patch and delta packages
-.br
-.B patch
-\- update of the packages, it can include special scripts and messages
-.br
-.B pattern
-\- group of packages 
-.br
-.B product
-\- group of packages, which are necessary to install a product
-.LP
-Throughout this manual we will refer to resolvables simply as \fIpackages\fR
-and to resolvable types as \fIpackages types\fR.
+.SS Package Management Commands
 
 .TP
 .B info (if) <name> ...
@@ -130,18 +200,21 @@ Select packages by capabilities.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. Use this option, if you think the
 dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase
 directory to your bug report. To use this option, simply add it to the problematic
 install or remove command. 
 .TP
-.I \-R, \-\-force\-resolution <on|off>
-If 'on' is specified the solver is forced to find a solution, even if it would
-mean removing all packages with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'on' in the interactive mode and 'off' in the
+The default behavior is 'force' in the interactive mode and 'no-force' in the
 non-interactive mode. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
@@ -178,6 +251,9 @@ Test the repair, do not actually do anything to the system.
 .TP
 .I \-r, \-\-repo <alias|#|URI>
 Use only specified repositories to install missing packages.
+.TP
+.I \ \ \ \ \-\-debug\-solver
+Create solver test case for debugging. See the install command for details.
 
 .TP
 .B install-new-recommends (inr) [options]
@@ -191,6 +267,9 @@ Use only specified repositories to install packages.
 .TP
 .I \-D, \-\-dry-run
 Test the installation, do not actually install anything.
+.TP
+.I \ \ \ \ \-\-debug\-solver
+Create solver test case for debugging. See the install command for details.
 
 .TP
 .B list-updates (lu) [options]
@@ -234,12 +313,15 @@ Select packages by capabilities.
 .I      \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
-.I \-R, \-\-force\-resolution
-Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'on' in the interactive mode and 'off' in the
+The default behavior is 'force' in the interactive mode and 'no-force' in the
 non-interactive mode. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
@@ -277,15 +359,18 @@ confirmed.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
-.I \-R, \-\-force\-resolution
-Force the solver to find a solution, even if it would mean removing all packages
-with unfulfilled requirements. Otherwise it reports
-a dependency problem and prompt the user to resolve it manually.
+.I \-R, \-\-no\-force\-resolution 
+Do not force the solver to find a solution. Instead, report
+dependency problem and prompt the user to resolve it manually.
+.TP
+.I \ \ \ \ \-\-force\-resolution
+Force the solver to find a solution, even if it would
+mean removing all packages with unfulfilled requirements.
 
-The default value is 'off'. If this option is specified, it takes the preference.
+The default behavior is 'no-force'. If this option is specified, it takes the preference.
 .TP
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
@@ -305,7 +390,7 @@ This option can be used multiple times.
 .I \-l, \-\-auto\-agree\-with\-licenses
 Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 .TP
-.I      \-\-debug\-solver
+.I \ \ \ \ \-\-debug\-solver
 Create solver test case for debugging. See the install command for details.
 .TP
 .I \-D, \-\-dry\-run
@@ -450,19 +535,48 @@ Ignore user authentication data in the URI
 Ignore query string in the URI
 
 .TP
-.B repos (lr)
+.B repos (lr) [options]
 List all defined repositories.
 .IP
-The following data are printed for each repository found: # (repository number), Enabled (whether the repository is enabled), Refresh (whether auto-refresh is enabled for the repository), Type (rpm-md, yast2, plaindir), Alias (shorthand for Name), and Name. If -v global option is used, an additional URI column will be displayed containing the base URI of the repository.
+The following data are printed for each repository found:
+# (repository number), Enabled (whether the repository is enabled), Refresh
+(whether auto-refresh is enabled for the repository), Type (rpm-md, yast2,
+plaindir), Alias (shorthand for Name), and Name. Other columns can be added
+using the options listed below.
 
-Repository number is a unique identifier of the repository in current repository set. If you add, remove or change a repository, the numbers may change. Beware of that when using the numbers with the repository handling commands (although not possible right now, the feature will be reimplmented soon). On the other hand, using the alias instead of the number is always safe.
+Repository number is a unique identifier of the repository in current
+set of repositories. If you add, remove or change a repository, the numbers may
+change. Keep that in mind when using the numbers with the repository handling
+commands. On the other hand, using the alias instead of the number is always
+safe.
 
 .TP
-.I \-e, \-\-export <FILE|->
+.I \-e, \-\-export <FILE.repo|->
 This option causes zypper to write repository definition of all defined
 repositories into a single file in repo file format.
 If '\-' is specified instead of a file name,
-the repositories will be written to the standard output.   
+the repositories will be written to the standard output.
+.TP
+.I \-u, \-\-uri
+Add base URI column to the output.
+.TP
+.I \-p, \-\-priority
+Add repository priority column to the output.
+.TP
+.I \-d, \-\-details
+Show more information like URI, priority, type, etc.
+.TP
+.I \-U, \-\-sort\-by\-uri
+Add base URI column and sort the list it.
+.TP
+.I \-P, \-\-sort\-by\-priority
+Add repository priority column and sort the list by it.
+.TP
+.I \-A, \-\-sort\-by\-alias
+Sort the list by alias.
+.TP
+.I \-N, \-\-sort\-by\-name
+Sort the list by name.
 
 .TP
 .B renamerepo (nr) <alias|#|URI> <new-alias>
@@ -481,14 +595,37 @@ Disable the repository.
 \fI\-r, \-\-refresh\fR
 Enable auto-refresh for the repository.
 .TP
-\fI\-n, \-\-no\-refresh\fR
+\fI\-R, \-\-no\-refresh\fR
 Disable auto-refresh for the repository.
 .TP
-.I \-p, \-\-priority <1-99>
-Set priority of the repository. Priority of 1 is the highest, 99 is the lowest
-and the default. Packages from repositories with higher priority will be
-preferred even in case there is a higher installable version of available
-in the repository with a lower priority.
+.I \-p, \-\-priority <positive-integer>
+Set priority of the repository. Priority of 1 is the highest, the higher the
+number the lower the priority. Default priority is 99. Packages from
+repositories with higher priority will be preferred even in case there is
+a higher installable version available in the repository with a lower priority.
+.TP
+.I \-n, \-\-name
+Set a descriptive name for the repository.
+.TP
+.I \-k, \-\-keep\-packages
+Enable RPM files caching.
+.TP
+.I \-K, \-\-no\-keep\-packages
+Disable RPM files caching.
+.TP
+.I \-a, \-\-all
+Apply changes to all repositories.
+.TP
+.I \-l, \-\-local
+Apply changes to all local repositories.
+.TP
+.I \-t, \-\-remote
+Apply changes to all remote repositories (http/https/ftp).
+.TP
+.I \-m, \-\-medium\-type <type>
+Apply changes to repositories of specified type. The type corresponds to the
+repository URI scheme identifier like http, dvd, etc. You can find complete
+list of valid types at http://en.opensuse.org/Libzypp/URI.
 
 .TP
 .B refresh (ref) [alias|#] ...
@@ -513,17 +650,17 @@ Only download the raw metadata, don't parse it or build the database.
 
 .TP
 .B clean [alias|#|URI] ...
-Clean up the local caches for all known or specified repositories. By default,
+Clean the local caches for all known or specified repositories. By default,
  only caches of downloaded packages are cleaned.
 .TP
 .I \-m, \-\-metadata
-Clean up repository metadata cache instead of package cache.
+Clean repository metadata cache instead of package cache.
 .TP
 .I \-M, \-\-raw\-metadata
-Clean up repository raw metadata cache instead of package cache.
+Clean repository raw metadata cache instead of package cache.
 .TP
 .I \-a, \-\-all
-Clean up both repository metadata and package caches.
+Clean both repository metadata and package caches.
 
 .SH "GLOBAL OPTIONS"
 
@@ -539,6 +676,11 @@ Increase verbosity. For debugging output specify this option twice.
 .TP
 .I \-q, \-\-quiet
 Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.
+.TP
+.I \-A, \-\-no\-abbrev
+Do not abbreviate text in tables. By default zypper will try to abbreviate
+texts in some columns so that the table fits the width of the screen. If you
+need to see the whole text, use this option.
 .TP
 .I \-t, \-\-terse
 Terse output for machine consumption. Currently not used and provided only for
@@ -563,16 +705,16 @@ Use the specified directory to look for the repository definition (*.repo) files
 The default value is /etc/zypp/repos.d.
 .TP
 .I \-C, \-\-cache\-dir <dir>
-Use an alternative directory to look for the repository meta-data cache database file (zypp.db).
-The default value is /var/cache/zypp. 
+Use an alternative directory to look for the repository metadata cache database files (solv files).
+The default value is /var/cache/zypp/solv.
 .TP
-.I    \-\-raw\-cache\-dir <dir>
-Use the specified directory for storing raw copies of repository meta-data files.
+.I \ \ \ \ \-\-raw\-cache\-dir <dir>
+Use the specified directory for storing raw copies of repository metadata files.
 The default value is /var/cache/zypp/raw.
 .LP
 Repository Options:
 .TP
-.I      \-\-no\-gpg\-checks
+.I \ \ \ \ \-\-no\-gpg\-checks
 Ignore GPG check failures and continue. If a GPG issue occurs when using this
 option zypper prints and logs a warning and automatically continues without
 interrupting the operation. Use this option with causion, as you can easily
@@ -583,41 +725,29 @@ Use an additional repository for this operation. The repository aliased tmp#
 and named by the specified URI will be added for this operation and removed
 at the end. You can specify this option multiple times.
 .TP
-.I \-\-disable\-repositories
-Do not read meta-data from repositories. This option will prevent loading of
+.I \ \ \ \ \-\-disable\-repositories
+Do not read metadata from repositories. This option will prevent loading of
 packages from repositories, thus making zypper work only with the installed
 packages (if \-\-disable\-system\-resolvables was not specified).
 .TP
-.I \-\-no\-refresh
+.I \ \ \ \ \-\-no\-refresh
 Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save
 time when doing operations like search, if there is not a need to have
-a completely up to date meta-data.
+a completely up to date metadata.
 .LP
 Target Options:
 .TP
 .I \-R, \-\-root <dir>
 Operates on a different root directory. This option influences the location
-of the repos.d directory and the meta-data cache directory and also causes rpm
+of the repos.d directory and the metadata cache directory and also causes rpm
 to be run with the --root option to do the actual installation or removal of
 packages. Note that the ZYpp lock is still created in the original system,
 as well as temporary files. See also the FILES section.
 .TP
-.I \-\-disable\-system\-resolvables
+.I \ \ \ \ \-\-disable\-system\-resolvables
 This option servers mainly for testing purposes. It will cause zypper to act
 as if there were no packages installed in the system. Use with causion as you
 can damage your system using this option. 
-
-.SH "METADATA REFRESH POLICY"
-.LP
-Zypper works with the metadata (information extracted from the RPM packages and other data) stored within repositories. The following refresh (metadata update) policy has been established in order to ensure zypper is working with up-to-date metadata.
-.LP
-Refreshing a repository means downloading metadata of packages from media (if needed), storing it in local cache (typically under /var/cache/zypp/raw/<alias> directory) and preparsing the metadata into .solv files (/var/cache/zypp/*.solv).
-.LP
-The metadata get refreshed either automatically or on user request. An \fBautomatic refresh\fR takes place right before reading metadata from the database if the \fBauto-refresh is enabled\fR for the repository and the metada is reported as being out of date. If the \fBauto-refresh is disabled\fR, the repository will only be refreshed on user request. You can request a refresh by calling \fBzypper refresh\fR (see the documentation of the refresh command for details).
-.LP
-The status of the repository metadata is checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
-.LP
-To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp config file (/etc/zypp/zypp.conf). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.
 
 .SH "FILES"
 .TP
@@ -635,7 +765,7 @@ specified root directory.
 ZYpp configuration file.
 .TP
 .B /etc/zypp/locks
-File with package lock definitions, see the section LOCKS.
+File with package lock definitions, see locks(5) manual page for details.
 .TP
 .B /var/cache/zypp/raw
 Directory for storing raw metadata contained in repositories.
@@ -643,8 +773,14 @@ Use the \-\-raw\-cache\-dir global option to use an alternative directory
 for this purpose or the \-\-root option to make this directory relative to the
 specified root directory.
 .TP
-.B /var/cache/zypp/*.solv
-TODO
+.B /var/cache/zypp/solv
+Directory containing preparsed metadata in form of \fBsolv\fR files.
+.TP
+.B /var/cache/zypp/packages
+If \fBkeeppackages\fR property is set for a repository (see the
+\fBmodifyrepo\fR command), all the RPM file downloaded during installation
+will be kept here. See also the \fBclean\fR command for cleaning these
+cache directories.
 .TP
 .B ~/.zypper_history
 Command history for the shell.
@@ -716,7 +852,7 @@ Currently, a Repository in zypper is a synonym for both Service and Catalog in Z
 zypper addrepo (ar)
 
 .TP
-.I rug service-delte (sd)
+.I rug service-delete (sd)
 zypper removerepo (rr)
 
 .TP
