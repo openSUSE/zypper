@@ -29,7 +29,8 @@ namespace zypp {
     static bool
         readCallbackAnswer()
     {
-        return true;
+      // bnc #398530
+      return false;
     }
 
     ///////////////////////////////////////////////////////////////////
