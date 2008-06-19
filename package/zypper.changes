@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jun 19 11:11:20 CEST 2008 - jkupec@suse.cz
+
+- zypp-refresh: don't accept files with GPG problems (bnc #398530),
+  report an error instead. r398530
+- adapted to new patch message and script handling (bnc #401220).
+  r10392
+- man page updated
+- 0.11.7
+
+-------------------------------------------------------------------
 Tue Jun  3 11:48:59 CEST 2008 - jkupec@suse.cz
 
 - repo priority allowed to be > 99
