@@ -115,6 +115,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/products.d
+mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
 
 %if 0%{?suse_version}
 %suse_update_desktop_file -G "" -C "" package-manager

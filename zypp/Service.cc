@@ -80,6 +80,9 @@ namespace zypp
     RepoInfoCollector collector;
     parser::RepoindexFileReader reader( path,
       bind( &RepoInfoCollector::collect, &collector, _1 ) );
+    mediamanager.close( mid );
+
+    bool ret = false;
 
     // set base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end())
@@ -105,7 +108,10 @@ namespace zypp
         }
 
       if( !found )
+      {
+        ret = true;
         repomanager.removeRepository( repomanager.getRepositoryInfo( *it ) );
+      }
     }
 
     //find new to add
@@ -121,17 +127,22 @@ namespace zypp
         }
 
       if (!found)
+      {
+        ret = true;
         repomanager.addRepository( *it );
+      }
     }
 
     //update internal alias storage
-    _pimpl->repos.clear();
-    for_( it, collector.repos.begin(), collector.repos.end() )
+    if (ret)
     {
-      _pimpl->repos.push_back(it->alias());
+      _pimpl->repos.clear();
+      for_( it, collector.repos.begin(), collector.repos.end() )
+      {
+        _pimpl->repos.push_back(it->alias());
+      }
+      repomanager.modifyService(*this);
     }
-    
-    mediamanager.close( mid );
   }
 
   Pathname Service::location() const

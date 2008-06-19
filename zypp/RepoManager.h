@@ -446,6 +446,12 @@ namespace zypp
 
     void refreshServices();
 
+    /**
+     * modify service, except name change
+     * ( you need remove and add if you want change name )
+     */
+    void modifyService(const Service& service) const;
+
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     void setCacheStatus( const RepoInfo &info, const RepoStatus &status );

@@ -1454,6 +1454,37 @@ namespace zypp
     }
   }
 
+  void RepoManager::modifyService(const Service& service) const
+  {
+    MIL << "Going to modify service " << service.name() << endl;
+
+    Pathname location = service.location();
+    if( location.empty() )
+    {
+      ZYPP_THROW(RepoException("Can't figure where the service is stored"));
+    }
+
+    ServiceSet tmpSet;
+    Impl::ServiceCollector collector(tmpSet);
+
+    parser::ServiceFileReader reader( location,
+        bind(&Impl::ServiceCollector::collect,collector,_1) );
+
+    filesystem::assert_dir(location.dirname());
+
+    std::ofstream file(location.c_str());
+
+    for_(it, tmpSet.begin(), tmpSet.end())
+    {
+      if( *it != service )
+        it->dumpServiceOn(file);
+    }
+
+    service.dumpServiceOn(file);
+
+    file.close();
+  }
+
   void RepoManager::Impl::knownServices()
   {
     ServiceCollector collector(services);
