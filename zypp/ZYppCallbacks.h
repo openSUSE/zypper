@@ -17,6 +17,8 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
 #include "zypp/Message.h"
+#include "zypp/Package.h"
+#include "zypp/Patch.h"
 #include "zypp/Url.h"
 #include "zypp/ProgressData.h"
 #include "zypp/media/MediaUserAuth.h"
@@ -297,7 +299,7 @@ namespace zypp
       };
 
       /**
-       * 
+       *
        * \param url         in: url for which the media is requested,
        *                    out: url to use instead of the original one
        * \param mediumNr    requested medium number
@@ -306,7 +308,7 @@ namespace zypp
        * \param description error message (media not desired or error foo occured)
        * \param devices     list of the available devices (for eject)
        * \param dev_current in: index of the currently used device in the \a devices list
-       *                    out: index of the devices to be ejected in the \a devices list 
+       *                    out: index of the devices to be ejected in the \a devices list
        * \return \ref Action (ABORT by default)
        */
       virtual Action requestMedia(
@@ -341,7 +343,7 @@ namespace zypp
 
         /**
          * Download progress.
-         * 
+         *
          * \param value        Percentage value.
          * \param file         File URI.
          * \param dbps_avg     Average download rate so far. -1 if unknown.
@@ -397,9 +399,52 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace target
   {
+    /** Request to display the pre commit message of a patch. */
+    struct PatchMessageReport : public callback::ReportBase
+    {
+      /** Display \c patch->message().
+       * Return \c true to continue, \c false to abort commit.
+      */
+      virtual bool show( Patch::constPtr /*patch*/ )
+      { return true; }
+    };
+
+    /** Indicate execution of a patch script. This is a sort of
+     * \c %post script shipped by a package and to be executed
+     * after the package was installed.
+    */
+    struct PatchScriptReport : public callback::ReportBase
+    {
+      enum Notify { OUTPUT, PING };
+      enum Action {
+        ABORT,  // abort commit and return error
+        IGNORE,	// ignore any failue and continue
+        RETRY,	// (re)try to execute this script
+      };
+
+      /** Start executing the script provided by package.
+      */
+      virtual void start( const Package::constPtr & /*package*/,
+                          const Pathname & /*script path*/ )
+      {}
+      /** Progress provides the script output. If the script is quiet,
+       * from time to time still-alive pings are sent to the ui. Returning \c FALSE
+       * aborts script execution.
+      */
+      virtual bool progress( Notify /*OUTPUT or PING*/,
+                             const std::string & /*output*/ = std::string() )
+      { return true; }
+      /** Report error. */
+      virtual Action problem( const std::string & /*description*/ )
+      { return ABORT; }
+      /** Report success. */
+      virtual void finish()
+      {}
+    };
 
     // resolvable Message
-    struct MessageResolvableReport : public callback::ReportBase
+    // DEPRECATED: replaced by PatchMessageReport
+    struct ZYPP_DEPRECATED MessageResolvableReport : public callback::ReportBase
     {
         virtual void show(
 	  Message::constPtr /*message*/
@@ -407,7 +452,8 @@ namespace zypp
     };
 
     // resolvable Script
-    struct ScriptResolvableReport : public callback::ReportBase
+    // DEPRECATED: replaced by PatchScriptReport
+    struct ZYPP_DEPRECATED ScriptResolvableReport : public callback::ReportBase
     {
       enum Task   { DO, UNDO };
       enum Notify { OUTPUT, PING };
@@ -725,7 +771,7 @@ namespace zypp
      */
     virtual Action conflict(
 	 const PoolQuery&, /**< problematic query*/
-       ConflictState 
+       ConflictState
      ) { return DELETE; }
 
      virtual void finish(
