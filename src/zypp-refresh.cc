@@ -29,6 +29,9 @@
 
 #define ZYPP_REFRESH_LOG "/var/log/zypp-refresh.log"
 
+using namespace std;
+using namespace zypp;
+
 // keyring and digest callbacks: accept everything, but don't import any keys
 
 ///////////////////////////////////////////////////////////////////
@@ -36,7 +39,7 @@ namespace zypp {
 ///////////////////////////////////////////////////////////////////
 
   static bool readCallbackAnswer()
-  { return true; }
+  { return false; }
 
   ///////////////////////////////////////////////////////////////////
   // KeyRingReceive
@@ -44,23 +47,23 @@ namespace zypp {
   struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
   {
     virtual bool askUserToAcceptUnsignedFile( const std::string &file )
-    { return readCallbackAnswer(); }
-    virtual bool askUserToAcceptUnknownKey( const std::string &/*file*/, const std::string &/*id*/ )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "refusing unsigned file " << file << endl;  return readCallbackAnswer(); }
+    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+    { cerr << ". Error:" << endl << "refusing unknown key, id: '" << id << "' from file '" << file << "'" << endl; return readCallbackAnswer(); }
     virtual bool askUserToTrustKey( const PublicKey &key )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "not trusting key '" << key << "'" << endl;return readCallbackAnswer(); }
     virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "verification of '" << file << "' with key '" << key << "' failed" << endl; return readCallbackAnswer(); }
   };
 
   struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
   {
     virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "refusing file '" << file << "': no digest" << endl; return readCallbackAnswer(); }
     virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "refusing file '" << file << "': unknown digest" << endl; return readCallbackAnswer(); }
     virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
-    { return readCallbackAnswer(); }
+    { cerr << ". Error:" << endl << "refusing file '" << file << "': wrong digest" << endl; return readCallbackAnswer(); }
   };
     ///////////////////////////////////////////////////////////////////
 }; // namespace zypp
@@ -83,9 +86,6 @@ class DigestCallbacks
     DigestCallbacks() { _digestReport.connect(); }
     ~DigestCallbacks() { _digestReport.disconnect(); }
 };
-
-using namespace std;
-using namespace zypp;
 
 int main(int argc, char **argv)
 {
@@ -153,20 +153,19 @@ int main(int argc, char **argv)
 
     try
     {
-      cout << "refreshing '" << it->alias() << "' .";
+      cout << "refreshing '" << it->alias() << "' ." << flush;
       manager.refreshMetadata(*it);
-      cout << ".";
+      cout << "." << flush;
       manager.buildCache(*it);
       cout << ". Done." << endl;
     }
     catch (const Exception &excpt_r )
     {
-      cerr << ". Error." << endl;
-      // translators the first %s is the repository name and the second is an error message
       cerr
+        << " Error:" << endl
         << str::form(
-          "Could not refresh repository '%s':\n%s",
-          it->name().c_str(), excpt_r.msg().c_str())
+          "Could not refresh repository '%s':\n%s\n%s",
+          it->name().c_str(), excpt_r.msg().c_str(), excpt_r.historyAsString().c_str())
         << endl;
       ++errcount;
     }
