@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Thu Jun 19 13:32:09 CEST 2008 - jkupec@suse.cz
+
+- zypp-refresh: don't accept files with GPG problems (bnc #398530),
+  report an error instead. r10400
+- zypp-checkpatches utility removed (zypp-refresh + zypper is a
+  replacement) r10399
+- man page updated
+
+-------------------------------------------------------------------
+Mon Jun 16 13:20:22 CEST 2008 - jkupec@suse.cz
+
+- fixed typo in texts (bnc #389087)
+- r10352
+
+-------------------------------------------------------------------
 Thu Jun 12 10:13:02 CEST 2008 - jreidinger@suse.cz
 
 - support multiple arguments to add/remove lock (bnc #398844)
