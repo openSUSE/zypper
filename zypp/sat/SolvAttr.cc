@@ -73,6 +73,8 @@ namespace sat
   const SolvAttr SolvAttr::patchcategory            ( SOLVABLE_PATCHCATEGORY );
   const SolvAttr SolvAttr::rebootSuggested          ( UPDATE_REBOOT );
   const SolvAttr SolvAttr::restartSuggested         ( UPDATE_RESTART );
+  const SolvAttr SolvAttr::message                  ( UPDATE_MESSAGE );
+
   const SolvAttr SolvAttr::updateCollectionName     ( UPDATE_COLLECTION_NAME );
   const SolvAttr SolvAttr::updateCollectionEvr      ( UPDATE_COLLECTION_EVR );
   const SolvAttr SolvAttr::updateCollectionArch     ( UPDATE_COLLECTION_ARCH );

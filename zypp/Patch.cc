@@ -69,6 +69,9 @@ namespace zypp
     return CAT_OTHER;
   }
 
+  std::string Patch::message( const Locale & lang_r ) const
+  { return lookupStrAttribute( sat::SolvAttr::message, lang_r ); }
+
   std::string Patch::category() const
   { return lookupStrAttribute( sat::SolvAttr::patchcategory ); }
 

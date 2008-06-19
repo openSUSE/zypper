@@ -82,6 +82,11 @@ namespace zypp
       bool restartSuggested() const;
 
       /**
+       * \short Information or warning to be displayed to the user
+       */
+      std::string message( const Locale & lang_r = Locale() ) const;
+
+      /**
        * Use \ref rebootSuggested()
        */
       ZYPP_DEPRECATED bool reboot_needed() const
