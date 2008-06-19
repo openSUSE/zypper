@@ -1,0 +1,28 @@
+# NU service index file schema.
+#
+# Elements:
+#
+# repoindex
+#   Root element. Contains only repo elements.
+#   repo element contains only attributes - 
+#     name - name of repository
+#     alias - unique alias of repository
+#     description - description of repository
+#     distro_target - target distribution
+#     priority - priority of repository
+#     pub - ???
+#     path - relative path to repository
+#
+
+element repoindex {
+  element repo {
+    attribute name { xsd:string }?,
+    attribute alias { xsd:string },
+    attribute description { xsd:string }?,
+    attribute distro_target { xsd:string },
+    attribute priority { xsd:integer }?,
+    attribute pub { xsd:integer }?,
+    attribute path { xsd:string }
+  }+,
+  empty
+}

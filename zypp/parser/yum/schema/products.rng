@@ -33,11 +33,37 @@
               <ref name="localized-string"/>
             </element>
           </zeroOrMore>
+          <element name="ns1:distribution-name">
+            <text/>
+          </element>
+          <element name="ns1:distribution-edition">
+            <text/>
+          </element>
           <oneOrMore>
             <element name="ns1:description">
               <ref name="localized-string"/>
             </element>
           </oneOrMore>
+          <optional>
+            <element name="ns1:release-notes-url">
+              <text/>
+            </element>
+          </optional>
+          <zeroOrMore>
+            <element name="ns1:update-url">
+              <text/>
+            </element>
+          </zeroOrMore>
+          <zeroOrMore>
+            <element name="ns1:optional-url">
+              <text/>
+            </element>
+          </zeroOrMore>
+          <zeroOrMore>
+            <element name="ns1:extra-url">
+              <text/>
+            </element>
+          </zeroOrMore>
           <ref name="dependencies"/>
         </element>
       </oneOrMore>

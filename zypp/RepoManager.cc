@@ -24,6 +24,7 @@
 #include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Service.h"
 
 #include "zypp/repo/RepoException.h"
 #include "zypp/RepoManager.h"
@@ -34,6 +35,7 @@
 #include "zypp/ManagedFile.h"
 
 #include "zypp/parser/RepoFileReader.h"
+#include "zypp/parser/ServiceFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/parser/yum/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
@@ -71,6 +73,7 @@ namespace zypp
     repoSolvCachePath     = Pathname::assertprefix( root_r, ZConfig::instance().repoSolvfilesPath() );
     repoPackagesCachePath = Pathname::assertprefix( root_r, ZConfig::instance().repoPackagesPath() );
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
+    knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
   }
 
@@ -82,6 +85,7 @@ namespace zypp
     ret.repoSolvCachePath     = root_r/"solv";
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
+    ret.knownServicesPath        = root_r/"services.d";
     return ret;
   }
 
@@ -246,6 +250,8 @@ namespace zypp
     RepoManagerOptions options;
 
     map<string, RepoInfo> _repoinfos;
+    
+    ServiceSet services;
 
   public:
     /** Offer default Impl. */
@@ -254,6 +260,23 @@ namespace zypp
       static shared_ptr<Impl> _nullimpl( new Impl );
       return _nullimpl;
     }
+
+    void saveService( const Service& service );
+  
+    Pathname generateNonExistingName( const Pathname &dir,
+                                         const std::string &basefilename ) const;
+  
+    std::string generateFilename( const RepoInfo &info ) const;
+    std::string generateFilename( const Service &info ) const;
+
+    struct ServiceCollector {
+      ServiceCollector(ServiceSet& services_) : services(services_) {}
+      bool collect(Service service) { services.insert(service); return true; }
+      private:
+        ServiceSet& services;
+    };
+
+    void knownServices();
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -976,8 +999,8 @@ namespace zypp
    * \param dir Directory where the file needs to be unique
    * \param basefilename string to base the filename on.
    */
-  static Pathname generate_non_existing_name( const Pathname &dir,
-                                              const std::string &basefilename )
+  Pathname RepoManager::Impl::generateNonExistingName( const Pathname &dir,
+                                       const std::string &basefilename ) const
   {
     string final_filename = basefilename;
     int counter = 1;
@@ -998,23 +1021,27 @@ namespace zypp
    * escaping it if necessary. Other fallbacks can be added to
    * this function in case there is no way to use the alias
    */
-  static std::string generate_filename( const RepoInfo &info )
+  std::string RepoManager::Impl::generateFilename( const RepoInfo &info ) const
   {
-    std::string fnd="/";
-    std::string rep="_";
     std::string filename = info.alias();
     // replace slashes with underscores
-    size_t pos = filename.find(fnd);
-    while(pos!=string::npos)
-    {
-      filename.replace(pos,fnd.length(),rep);
-      pos = filename.find(fnd,pos+rep.length());
-    }
+    str::replaceAll( filename, "/", "_" );
+
     filename = Pathname(filename).extend(".repo").asString();
     MIL << "generating filename for repo [" << info.alias() << "] : '" << filename << "'" << endl;
     return filename;
   }
 
+  std::string RepoManager::Impl::generateFilename( const Service &info ) const
+  {
+    std::string filename = info.name();
+    // replace slashes with underscores
+    str::replaceAll( filename, "/", "_" );
+
+    filename = Pathname(filename).extend(".service").asString();
+    MIL << "generating filename for service [" << info.name() << "] : '" << filename << "'" << endl;
+    return filename;
+  }
 
   ////////////////////////////////////////////////////////////////////////////
 
@@ -1061,8 +1088,8 @@ namespace zypp
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
 
-    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath,
-                                                    generate_filename(tosave));
+    Pathname repofile = _pimpl->generateNonExistingName(
+        _pimpl->options.knownReposPath, _pimpl->generateFilename(tosave));
     // now we have a filename that does not exists
     MIL << "Saving repo in " << repofile << endl;
 
@@ -1106,7 +1133,7 @@ namespace zypp
     // assert the directory exists
     filesystem::assert_dir(_pimpl->options.knownReposPath);
 
-    Pathname repofile = generate_non_existing_name(_pimpl->options.knownReposPath, filename);
+    Pathname repofile = _pimpl->generateNonExistingName(_pimpl->options.knownReposPath, filename);
     // now we have a filename that does not exists
     MIL << "Saving " << repos.size() << " repo" << ( repos.size() ? "s" : "" ) << " in " << repofile << endl;
 
@@ -1308,6 +1335,140 @@ namespace zypp
     info.setAlias(info.alias());
     info.setBaseUrl(url);
     ZYPP_THROW(RepoNotFoundException(info));
+  }
+
+  void RepoManager::addService( const std::string& name, const Url& url )
+  {
+    Service service(name, url);
+
+    //check if service isn't already exist
+    if( _pimpl->services.find(service)!= _pimpl->services.end() )
+      return; //TODO throw exception
+
+    _pimpl->services.insert( service );
+
+    _pimpl->saveService( service );
+  }
+
+  void RepoManager::removeService( const string& name)
+  {
+    MIL << "Going to delete repo " << name << endl;
+
+    const Service& service = getService( name );
+
+    Pathname location = service.location();
+    if( location.empty() )
+    {
+      ZYPP_THROW(RepoException("Can't figure where the service is stored"));
+    }
+
+    ServiceSet tmpSet;
+    Impl::ServiceCollector collector(tmpSet);
+
+    parser::ServiceFileReader reader( location,
+        bind(&Impl::ServiceCollector::collect,collector,_1) );
+
+    if ( tmpSet.size() == 1 ) //only one record
+    {
+      if ( filesystem::unlink(location) != 0 )
+      {
+        ZYPP_THROW(RepoException("Can't delete " + location.asString()));
+      }
+      MIL << name << " sucessfully deleted." << endl;
+    }
+    else
+    {
+      filesystem::assert_dir(location.dirname());
+
+      std::ofstream file(location.c_str());
+
+      for_(it, tmpSet.begin(), tmpSet.end())
+      {
+        if( it->name() != name )
+          it->dumpServiceOn(file);
+      }
+    }
+
+    //now remove all repositories added by this service
+    for_( it, service.begin(), service.end() )
+      removeRepository(getRepositoryInfo(*it));
+  }
+
+
+  void RepoManager::Impl::saveService( const Service& service )
+  {
+    filesystem::assert_dir( options.knownServicesPath );
+
+    Pathname servfile = generateNonExistingName( options.knownServicesPath,
+        generateFilename( service ) );
+
+    MIL << "saving service in " << servfile << endl;
+
+    std::ofstream file(servfile.c_str());
+    if (!file) {
+      ZYPP_THROW (Exception( "Can't open " + servfile.asString() ) );
+    }
+
+    service.dumpServiceOn( file );
+
+    service.setLocation( servfile );
+    MIL << "done" << endl;
+  }
+
+  const Service& RepoManager::getService( const std::string& name ) const
+  {
+    //little trick for Set, because it is sorted by Service name
+    Service tmpServ(name);
+
+    ServiceConstIterator it = _pimpl->services.find(name);
+    if ( it == serviceEnd() )
+      return Service::noService;
+    else
+      return *it;
+  }
+
+  bool RepoManager::serviceEmpty() const { return _pimpl->services.empty(); }
+
+  RepoManager::ServiceSizeType RepoManager::serviceSize() const
+  {
+    return _pimpl->services.size();
+  }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceBegin() const
+  {
+    return _pimpl->services.begin();
+  }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceEnd() const
+  {
+    return _pimpl->services.end();
+  }
+
+  void RepoManager::refreshServices()
+  {
+    //cannot user for_, because it uses const version
+    for (std::set<Service>::iterator it = _pimpl->services.begin();
+      it != _pimpl->services.end(); ++it)
+    {
+      it->refresh(*this);
+    }
+  }
+
+  void RepoManager::Impl::knownServices()
+  {
+    ServiceCollector collector(services);
+    Pathname dir = options.knownServicesPath;
+    list<Pathname> entries;
+    
+    if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
+        ZYPP_THROW(Exception("failed to read directory"));
+
+    str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
+    for_(it, entries.begin(), entries.end() )
+    {
+      parser::ServiceFileReader reader(*it, 
+          bind(&ServiceCollector::collect, collector, _1) );
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////

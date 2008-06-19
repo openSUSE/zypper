@@ -31,6 +31,7 @@ namespace yum
 #define PATCHSCHEMA (SCHEMABASE "patch.rng")
 #define PATCHESSCHEMA (SCHEMABASE "patches.rng")
 #define PRODUCTSCHEMA (SCHEMABASE "product.rng")
+#define REPOINDEXSCHEMA (SCHEMABASE "product.rng")
 } // namespace yum
 } // namespace parser
 } // namespace zypp

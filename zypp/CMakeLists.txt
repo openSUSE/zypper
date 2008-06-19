@@ -64,6 +64,7 @@ SET( zypp_SRCS
   ResPoolProxy.cc
   ResStatus.cc
   Script.cc
+  Service.cc
   Signature.cc
   SrcPackage.cc
   SysContent.cc
@@ -162,6 +163,7 @@ SET( zypp_HEADERS
   ResStatus.h
   ResTraits.h
   Script.h
+  Service.h
   Signature.h
   SrcPackage.h
   SysContent.h
@@ -338,7 +340,9 @@ SET( zypp_parser_SRCS
   parser/LibXMLHelper.cc
   parser/XMLNodeIterator.cc
   parser/RepoFileReader.cc
+  parser/RepoindexFileReader.cc
   parser/ProductConfReader.cc
+  parser/ServiceFileReader.cc
   parser/xml_escape_parser.cpp
 )
 
@@ -354,6 +358,8 @@ SET( zypp_parser_HEADERS
   parser/RepoFileReader.h
   parser/ProductConfReader.h
   parser/xml_escape_parser.hpp
+  parser/RepoindexFileReader.h
+  parser/ServiceFileReader.h
 )
 
 INSTALL(  FILES

@@ -310,6 +310,7 @@ namespace zypp
 
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
+    Pathname cfg_known_services_path;
     Pathname cfg_vendor_path;
     Pathname cfg_products_path;
     Pathname locks_file;
@@ -454,6 +455,13 @@ namespace zypp
     return ( _pimpl->cfg_known_repos_path.empty()
         ? (configPath()/"repos.d") : _pimpl->cfg_known_repos_path );
   }
+
+  Pathname ZConfig::knownServicesPath() const
+  {
+    return ( _pimpl->cfg_known_services_path.empty()
+        ? (configPath()/"services.d") : _pimpl->cfg_known_repos_path );
+  }
+
   Pathname ZConfig::vendorPath() const
   {
     return ( _pimpl->cfg_vendor_path.empty()

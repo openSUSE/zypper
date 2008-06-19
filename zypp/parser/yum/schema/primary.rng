@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://linux.duke.edu/metadata/common" xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar xmlns:suse="http://novell.com/package/metadata/suse/common" ns="http://linux.duke.edu/metadata/common" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!-- defines element-format and format -->
   <include href="rpm-ns.rng"/>
   <start>

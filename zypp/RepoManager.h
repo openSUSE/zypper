@@ -27,6 +27,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  class Service; //predef
 
    /**
     * Parses \a repo_file and returns a list of \ref RepoInfo objects
@@ -76,6 +77,7 @@ namespace zypp
     Pathname repoSolvCachePath;
     Pathname repoPackagesCachePath;
     Pathname knownReposPath;
+    Pathname knownServicesPath;
     bool probe;
   };
 
@@ -92,6 +94,11 @@ namespace zypp
   public:
     /** Implementation  */
     class Impl;
+
+    /** service typedefs */
+    typedef std::set<Service> ServiceSet;
+    typedef ServiceSet::const_iterator ServiceConstIterator;
+    typedef ServiceSet::size_type ServiceSizeType;
 
   public:
    RepoManager( const RepoManagerOptions &options = RepoManagerOptions() );
@@ -422,6 +429,22 @@ namespace zypp
     RepoInfo getRepositoryInfo( const Url & url,
                                 const url::ViewOption & urlview = url::ViewOption::DEFAULTS,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+    void addService( const std::string& name, const Url& url );
+
+    void removeService( const std::string& name );
+
+    bool serviceEmpty() const;
+
+    ServiceSizeType serviceSize() const;
+
+    ServiceConstIterator serviceBegin() const;
+
+    ServiceConstIterator serviceEnd() const;
+
+    const Service& getService( const std::string& name ) const;
+
+    void refreshServices();
 
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );

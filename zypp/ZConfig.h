@@ -129,6 +129,12 @@ namespace zypp
       Pathname knownReposPath() const;
 
       /**
+       * Path where the known services .service files are kept (configPath()/services.d).
+       * \ingroup g_ZC_CONFIGFILES
+       */
+      Pathname knownServicesPath() const;
+
+      /**
        * Separator string for storing/reading sets of strings to/from
        * metadata cache DB.
        */
