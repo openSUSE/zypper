@@ -72,7 +72,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   virtual bool progress( Notify kind, const std::string &output )
   {
     Zypper & zypper = *Zypper::instance();
-    static bool was_ping_before = false;
+    static bool was_ping_before = true;
     if (kind == PING)
     {
       zypper.out().progress("run-script", _label);
