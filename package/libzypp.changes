@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Thu Jun 19 17:55:35 CEST 2008 - ma@suse.de
+
+- Handle new patch messages and scripts in commit. Provide callbacks
+  to display the patch messages and give visual feedback on script 
+  execution. (bnc #401220)
+- revision 10411
+
+-------------------------------------------------------------------
+Thu Jun 19 17:35:59 CEST 2008 - ma@suse.de
+
+- Fix wrong parenthesis causing bug 399320 
+- version 
+- revision 
+
+-------------------------------------------------------------------
 Tue Jun 10 09:52:03 CEST 2008 - jreidinger@suse.cz
 
 - improve performance of gsub

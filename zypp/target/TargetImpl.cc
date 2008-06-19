@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Gettext.h"
@@ -53,10 +53,7 @@
 
 #include "zypp/sat/Pool.h"
 
-using namespace std;
-using namespace zypp;
-using namespace zypp::resfilter;
-using zypp::solver::detail::Helper;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -69,138 +66,144 @@ namespace zypp
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      // Execute file (passed as pi_t) as script
-      // report against report_r
-      //
-      void ExecuteScript( const Pathname & pn_r,
-			  callback::SendReport<ScriptResolvableReport> * report)
+      /** Execute script and report against report_r.
+       * Return \c std::pair<bool,PatchScriptReport::Action> to indicate if
+       * execution was successfull (<tt>first = true</tt>), or the desired
+       * \c PatchScriptReport::Action in case execution failed
+       * (<tt>first = false</tt>).
+       *
+       * \note The packager is responsible for setting the correct permissions
+       * of the script. If the script is not executable it is reported as an
+       * error. We must not modify the permessions.
+       */
+      std::pair<bool,PatchScriptReport::Action> doExecuteScript( const Pathname & root_r,
+                                                                 const Pathname & script_r,
+                                                                 callback::SendReport<PatchScriptReport> & report_r )
       {
-        PathInfo pi( pn_r );
-        if ( ! pi.isFile() )
-        {
-          std::ostringstream err;
-          err << "Script is not a file: " << pi.fileType() << " " << pn_r;
-	  if (report)
-	    (*report)->problem( err.str() );
-          ZYPP_THROW(Exception(err.str()));
-        }
+        MIL << "Execute script " << PathInfo(script_r) << endl;
 
-        filesystem::chmod( pn_r, S_IRUSR|S_IWUSR|S_IXUSR );	// "rwx------"
-        ExternalProgram prog( pn_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true );
+        CommitLog progresslog;
+        progresslog(/*timestamp*/true) << script_r << _(" executed") << endl;
+        ExternalProgram prog( script_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true /*, root_r*/ );
 
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {
-	  // hmm, this depends on a ScriptResolvableReport :-(
-          if ( report
-	       && ! (*report)->progress( ScriptResolvableReport::OUTPUT, output ) )
+          progresslog() << output;
+          if ( ! report_r->progress( PatchScriptReport::OUTPUT, output ) )
+          {
+            WAR << "User request to abort script " << script_r << endl;
+            prog.kill();
+            // the rest is handled by exit code evaluation
+            // in case the script has meanwhile finished.
+          }
+        }
+
+        std::pair<bool,PatchScriptReport::Action> ret( std::make_pair( false, PatchScriptReport::ABORT ) );
+
+        if ( prog.close() != 0 )
+        {
+          ret.second = report_r->problem( prog.execError() );
+          WAR << "ACTION" << ret.second << "(" << prog.execError() << ")" << endl;
+          progresslog(/*timestamp*/true)<< script_r << _(" execution failed") << " (" << prog.execError() << ")" << endl;
+          return ret;
+        }
+
+        report_r->finish();
+        ret.first = true;
+        return ret;
+      }
+
+      /** Execute script and report against report_r.
+       * Return \c false if user requested \c ABORT.
+       */
+      bool executeScript( const Pathname & root_r,
+                          const Pathname & script_r,
+                          callback::SendReport<PatchScriptReport> & report_r )
+      {
+        std::pair<bool,PatchScriptReport::Action> action( std::make_pair( false, PatchScriptReport::ABORT ) );
+
+        do {
+          action = doExecuteScript( root_r, script_r, report_r );
+          if ( action.first )
+            return true; // success
+
+          switch ( action.second )
+          {
+            case PatchScriptReport::ABORT:
+              WAR << "User request to abort at script " << script_r << endl;
+              return false; // requested abort.
+              break;
+
+            case PatchScriptReport::IGNORE:
+              WAR << "User request to skip script " << script_r << endl;
+              return true; // requested skip.
+              break;
+
+            case PatchScriptReport::RETRY:
+              break; // again
+          }
+        } while ( action.second == PatchScriptReport::RETRY );
+
+        // THIS is not intended to be reached:
+        INT << "Abort on unknown ACTION request " << action.second << " returned" << endl;
+        return false; // abort.
+      }
+
+      /** Look for patch scripts named 'name-version-release-*' and
+       *  execute them. Return \c false if \c ABORT was requested.
+       */
+      bool RunUpdateScripts( const Pathname & root_r,
+                             const Pathname & scriptsPath_r,
+                             const std::vector<sat::Solvable> & checkPackages_r,
+                             bool aborting_r )
+      {
+        if ( checkPackages_r.empty() )
+          return true; // no installed packages to check
+
+        MIL << "Looking for new patch scripts in (" <<  root_r << ")" << scriptsPath_r << endl;
+        Pathname scriptsDir( Pathname::assertprefix( root_r, scriptsPath_r ) );
+        if ( ! PathInfo( scriptsDir ).isDir() )
+          return true; // no script dir
+
+        std::list<std::string> scripts;
+        filesystem::readdir( scripts, scriptsDir, /*dots*/false );
+        if ( scripts.empty() )
+          return true; // no scripts in script dir
+
+        // Now collect and execute all matching scripts.
+        // On ABORT: at least log all outstanding scripts.
+        bool abort = false;
+        for_( it, checkPackages_r.begin(), checkPackages_r.end() )
+        {
+          std::string prefix( str::form( "%s-%s-", it->name().c_str(), it->edition().c_str() ) );
+          for_( sit, scripts.begin(), scripts.end() )
+          {
+            if ( ! str::hasPrefix( *sit, prefix ) )
+              continue;
+
+            PathInfo script( scriptsDir / *sit );
+            if ( ! script.isFile() )
+              continue;
+
+            if ( abort || aborting_r )
             {
-              WAR << "User request to abort script." << endl;
-              prog.kill(); // the rest is handled by exit code evaluation.
+              WAR << "Aborting: Skip patch script " << *sit << endl;
+              CommitLog()(/*timestamp*/true) << script.path() << _(" execution skipped while aborting") << endl;
             }
+            else
+            {
+              MIL << "Found patch script " << *sit << endl;
+              callback::SendReport<PatchScriptReport> report;
+              report->start( make<Package>( *it ), script.path() );
+
+              if ( ! executeScript( root_r, script.path(), report ) )
+                abort = true; // requested abort.
+            }
+          }
         }
-
-        int exitCode = prog.close();
-        if ( exitCode != 0 )
-        {
-          std::ostringstream err;
-          err << "Script failed with exit code " << exitCode;
-	  if (report)
-            (*report)->problem( err.str() );
-          ZYPP_THROW(Exception(err.str()));
-        }
-	return;
+        return !abort;
       }
 
-      // Check for (and run) update script
-      // path: directory where to look
-      // name,version,release: Script name must match 'name-version.release-' prefix
-      //
-#warning needs to be reimplemented exception safe
-#warning needs to take root prefix into account and execute chroot
-     void RunUpdateScript(Pathname path, std::string name, std::string version, std::string release)
-      {
-	// open the scripts directory
-
-	DIR *dir = opendir(path.asString().c_str());
-	if (!dir)
-	{
-	  WAR << "Cannot access directory " << path << endl;
-	  return;
-	}
-
-	// compute the name-version.release- prefix
-	std::string prefix = name + "-" + version + "-" + release + "-";
-	size_t pfx_size = prefix.length();
-	if (pfx_size > 255)
-	{
-	  ERR << "Prefix size (" << pfx_size << ") larger than supported (255)" << endl;
-	  pfx_size = 255;
-	}
-
-	// scan directory for match
-	const char *found = NULL;
-	struct dirent *dentry;
-	while ((dentry = readdir(dir)))
-	{
-	  if (strncmp( dentry->d_name, prefix.c_str(), pfx_size) == 0) {
-	    found = dentry->d_name;
-	    break;
-	  }
-	}
-	if (found)
-	{
-	  ExecuteScript( Pathname(path / found), NULL );
-	}
-	closedir(dir);
-	return;
-      }
-
-      // Fetch and execute remote script
-      // access_r: remote access handle
-      // script_r: script (resolvable) handle
-      // do_r: true for 'do', false for 'undo'
-      //
-      void ExecuteScriptHelper( repo::RepoMediaAccess & access_r,
-                                Script::constPtr script_r,
-                                bool do_r )
-      {
-        MIL << "Execute script " << script_r << endl;
-        if ( ! script_r )
-        {
-          INT << "NULL Script passed." << endl;
-          return;
-        }
-
-        repo::ScriptProvider prov( access_r );
-        ManagedFile localfile = prov.provideScript( script_r, do_r );
-
-        if ( localfile->empty() )
-        {
-          DBG << "No " << (do_r?"do":"undo") << " script for " << script_r << endl;
-          return; // success
-        }
-
-        // Go...
-        callback::SendReport<ScriptResolvableReport> report;
-        report->start( script_r, localfile,
-                       (do_r ? ScriptResolvableReport::DO
-                        : ScriptResolvableReport::UNDO ) );
-
-	ExecuteScript( localfile, &report );
-        report->finish();
-
-        return;
-      }
-
-      inline void ExecuteDoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
-      {
-        ExecuteScriptHelper( access_r, script_r, true );
-      }
-
-      inline void ExecuteUndoScript( repo::RepoMediaAccess & access_r, const Script::constPtr & script_r )
-      {
-        ExecuteScriptHelper( access_r, script_r, false );
-      }
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -351,7 +354,7 @@ namespace zypp
           ZYPP_THROW(ex);
         }
 
-        ostringstream cmd;
+        std::ostringstream cmd;
         cmd << "rpmdb2solv";
         if ( ! _root.empty() )
           cmd << " -r '" << _root << "'";
@@ -365,7 +368,7 @@ namespace zypp
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
 
         cmd << endl;
-        for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+        for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
           cmd << "     " << output;
         }
@@ -529,7 +532,34 @@ namespace zypp
         MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
       }
 
-      commit (to_uninstall, policy_r, pool_r );
+      ///////////////////////////////////////////////////////////////////
+      // First collect and display all messages
+      // associated with patches to be installed.
+      ///////////////////////////////////////////////////////////////////
+      for_( it, to_install.begin(), to_install.end() )
+      {
+        if ( ! isKind<Patch>(it->resolvable()) )
+          continue;
+        if ( ! it->status().isToBeInstalled() )
+          continue;
+
+        Patch::constPtr patch( asKind<Patch>(it->resolvable()) );
+        if ( ! patch->message().empty() )
+        {
+          MIL << "Show message for " << patch << endl;
+          callback::SendReport<target::PatchMessageReport> report;
+          if ( ! report->show( patch ) )
+          {
+            WAR << "commit aborted by the user" << endl;
+            ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+          }
+        }
+      }
+
+      ///////////////////////////////////////////////////////////////////
+      // Remove/install packages.
+      ///////////////////////////////////////////////////////////////////
+     commit (to_uninstall, policy_r, pool_r );
 
       if (policy_r.restrictToMedia() == 0)
       {			// commit all
@@ -581,7 +611,9 @@ namespace zypp
         result._srcremaining.insert(result._srcremaining.end(), bad.begin(), bad.end());
       }
 
+      ///////////////////////////////////////////////////////////////////
       // Try to rebuild solv file while rpm database is still in cache.
+      ///////////////////////////////////////////////////////////////////
       buildCache();
 
       result._result = (to_install.size() - result._remaining.size());
@@ -597,12 +629,10 @@ namespace zypp
     {
       TargetImpl::PoolItemList remaining;
       repo::RepoMediaAccess access;
-      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << endl;
+      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << items_r.size() << endl;
 
       bool abort = false;
-
-      // remember the last used source (if any)
-      Repository lastUsedRepo;
+      std::vector<sat::Solvable> successfullyInstalledPackages;
 
       RepoProvidePackage repoProvidePackage( access, pool_r);
       // prepare the package cache.
@@ -627,8 +657,15 @@ namespace zypp
               WAR << "Skipping package " << p << " in commit" << endl;
               continue;
             }
-
-            lastUsedRepo = p->repository();			// remember the package source
+#if 0
+            // bnc #395704: missing catch causes abort. see if packageCache fails to handle
+            // errors correctly.
+            catch ( const Exception &e )
+            {
+              ZYPP_CAUGHT( e );
+              SEC << e << endl;
+            }
+#endif
 
 #warning Exception handling
             // create a installation progress report proxy
@@ -684,8 +721,8 @@ namespace zypp
             if ( success && !policy_r.dryRun() )
             {
               it->status().resetTransact( ResStatus::USER );
-	      // check for and run an update script
-	      RunUpdateScript(ZConfig::instance().update_scriptsPath(), p->name(), p->edition().version(), p->edition().release());
+              // Remember to check this package for presence of patch scripts.
+              successfullyInstalledPackages.push_back( it->satSolvable() );
             }
             progress.disconnect();
           }
@@ -726,103 +763,29 @@ namespace zypp
         }
         else if (!policy_r.dryRun()) // other resolvables (non-Package)
         {
-          if (it->status().isToBeInstalled())
-          {
-            bool success = false;
-            try
-            {
-              if (isKind<Message>(it->resolvable()))
-              {
-                Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
-                std::string text = m->text().asString();
-
-                callback::SendReport<target::MessageResolvableReport> report;
-
-                report->show( m );
-
-                MIL << "Displaying the text '" << text << "'" << endl;
-              }
-              else if (isKind<Script>(it->resolvable()))
-              {
-                ExecuteDoScript( access, asKind<Script>(it->resolvable()));
-              }
-              else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
-              {
-                // #160792 do not just add, also remove older versions
-                if (true) // !installOnly - only on Package?!
-                {
-                  // this would delete the same item over and over
-                  //for (PoolItem old = Helper::findInstalledItem (pool_r, *it); old; )
-                  #warning REMOVE ALL OLD VERSIONS AND NOT JUST ONE
-                  PoolItem old = Helper::findInstalledItem (pool_r, *it);
-                  if (old)
-                  {
-                    // FIXME _storage.deleteObject(old.resolvable());
-                  }
-                }
-                // FIXME _storage.storeObject(it->resolvable());
-              }
-              success = true;
-            }
-            catch (Exception & excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              WAR << "Install of Resolvable from storage failed" << endl;
-            }
-            if (success)
-              it->status().resetTransact( ResStatus::USER );
-          }
-          else
-          {					// isToBeUninstalled
-            bool success = false;
-            try
-            {
-              if (isKind<Atom>(it->resolvable()))
-              {
-                DBG << "Uninstalling atom - no-op" << endl;
-              }
-              else if (isKind<Message>(it->resolvable()))
-              {
-                DBG << "Uninstalling message - no-op" << endl;
-              }
-              else if (isKind<Script>(it->resolvable()))
-              {
-                ExecuteUndoScript( access, asKind<Script>(it->resolvable()));
-              }
-              else
-              {
-                //FIXME _storage.deleteObject(it->resolvable());
-              }
-              success = true;
-            }
-            catch (Exception & excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              WAR << "Uninstall of Resolvable from storage failed" << endl;
-            }
-            if (success)
-              it->status().resetTransact( ResStatus::USER );
-          }
-
+          it->status().resetTransact( ResStatus::USER );
         }  // other resolvables
 
       } // for
 
-      // we're done with the commit, release the source media
-      //   In the case of a single media, end of commit means we don't need _this_
-      //   media any more.
-      //   In the case of 'commit any media', end of commit means we're completely
-      //   done and don't need the source's media anyways.
-
-      if (lastUsedRepo)
-      {		// if a source was used
-        //lastUsedRepo.release();	//  release their medias
+      // Check presence of patch scripts. If aborting, at least log
+      // omitted scripts.
+      if ( ! successfullyInstalledPackages.empty() )
+      {
+        if ( ! RunUpdateScripts( _root, ZConfig::instance().update_scriptsPath(),
+                                 successfullyInstalledPackages, abort ) )
+        {
+          WAR << "Commit aborted by the user" << endl;
+          abort = true;
+        }
       }
 
       if ( abort )
-        ZYPP_THROW( TargetAbortedException( N_("Installation/Removing has been aborted as directed.") ) );
+      {
+        ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+      }
 
-      return remaining;
+     return remaining;
     }
 
     rpm::RpmDb & TargetImpl::rpm()
