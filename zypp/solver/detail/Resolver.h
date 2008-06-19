@@ -129,6 +129,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // Additional information about the solverrun
     ItemCapKindMap _isInstalledBy;
     ItemCapKindMap _installs;
+    ItemCapKindMap _satifiedByInstalled;    
 
 
     // Ignore Obsoletes
@@ -238,6 +239,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // installation
     const ItemCapKindList isInstalledBy (const PoolItem item);
     const ItemCapKindList installs (const PoolItem item);
+    const ItemCapKindList satifiedByInstalled (const PoolItem item);    
     
     
 };
