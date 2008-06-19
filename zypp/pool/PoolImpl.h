@@ -335,6 +335,7 @@ namespace zypp
             switch ( status.getTransactValue() )
             {
               case ResStatus::KEEP_STATE:
+                // ma@: Filter only items included in the recommended set?
                 activeLocks_r.insert( it->satSolvable().ident() );
                 break;
               case ResStatus::LOCKED:
