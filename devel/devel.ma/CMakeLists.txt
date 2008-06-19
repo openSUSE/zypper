@@ -44,7 +44,7 @@ FOREACH( loop_var MaTest )
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp
+      zypp boost_signals
       ${QT_LIBRARIES}
    )
 ENDFOREACH( loop_var )
