@@ -77,23 +77,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypper/xml
 )
 
-
-# zypp-checkpatches utility
-# DEPRECATED - use zypp-refresh + 'zypper --xmlout lu' instead
-ADD_EXECUTABLE( zypp-checkpatches zypp-checkpatches.cc zypper-updates.cc )
-TARGET_LINK_LIBRARIES( zypp-checkpatches ${ZYPP_LIBRARY} )
-INSTALL(
-  TARGETS zypp-checkpatches
-  RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
-)
-
-ADD_EXECUTABLE( zypp-checkpatches-wrapper zypp-checkpatches-wrapper.c )
-TARGET_LINK_LIBRARIES( zypp-checkpatches-wrapper ${ZYPP_LIBRARY} )
-INSTALL(
-  TARGETS zypp-checkpatches-wrapper
-  RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
-)
-
 # zypp-refresh utility
 ADD_EXECUTABLE( zypp-refresh zypp-refresh.cc )
 TARGET_LINK_LIBRARIES( zypp-refresh ${ZYPP_LIBRARY} )

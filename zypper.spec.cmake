@@ -62,10 +62,9 @@ cd build
 make install DESTDIR=$RPM_BUILD_ROOT
 make -C po install DESTDIR=$RPM_BUILD_ROOT
 
-# Create filelist with translatins
+# Create filelist with translations
 cd ..
 %{find_lang} zypper
-#rm -f ${RPM_BUILD_ROOT}%{_sbindir}/zypp-checkpatches-wrapper
 %{__install} -d -m755 %buildroot%_var/log
 touch %buildroot%_var/log/zypper.log
 
@@ -74,7 +73,7 @@ touch %buildroot%_var/log/zypper.log
 %run_permissions
 
 %verifyscript
-%verify_permissions -e %{_sbindir}/zypp-checkpatches-wrapper
+%verify_permissions -e %{_sbindir}/zypp-refresh-wrapper
 
 %postun -p /sbin/ldconfig
 
@@ -87,8 +86,6 @@ touch %buildroot%_var/log/zypper.log
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/installation_sources
-%{_sbindir}/zypp-checkpatches
-%verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-checkpatches-wrapper
 %{_sbindir}/zypp-refresh
 %verify(not mode) %attr (755,root,root) %{_sbindir}/zypp-refresh-wrapper
 %dir %{prefix}/share/zypper

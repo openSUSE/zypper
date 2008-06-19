@@ -212,6 +212,8 @@ void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
 
   cout << _("Provides:") << endl;
   Capabilities capSet = pool_item.resolvable()->dep(zypp::Dep::PROVIDES);
+  // WhatProvides can be used here. The result can be represented as a table of
+  // a "Capability" (it->asString()) | "Provided By" (WhatProvides(c))
   for (Capabilities::const_iterator it = capSet.begin(); it != capSet.end(); ++it) {
     // FIXME cout << it->refers().asString() << ": " << it->asString() << endl;
     cout << *it << endl;
