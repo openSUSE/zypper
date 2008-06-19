@@ -163,11 +163,8 @@ namespace zypp
       bool hasObject() const
       { return (! installedEmpty()) || candidateObj(); }
 
-      /**
-       * True if installed object is present.
-       * \deprecated Use ! installedEmpty()
-       */
-      ZYPP_DEPRECATED bool hasInstalledObj() const
+      /** True if installed object is present. */
+      bool hasInstalledObj() const
       { return ! installedEmpty(); }
 
       /** True if candidate object is present. */
