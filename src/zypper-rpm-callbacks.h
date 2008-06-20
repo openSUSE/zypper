@@ -61,7 +61,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
     _label = boost::str(
         // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
         boost::format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname());
-    Zypper::instance()->out().progressStart("run-script", _label, false);
+    cout << _label << endl;
   }
 
   /**
@@ -72,17 +72,17 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   virtual bool progress( Notify kind, const std::string &output )
   {
     Zypper & zypper = *Zypper::instance();
-    static bool was_ping_before = true;
+    static bool was_ping_before = false;
     if (kind == PING)
     {
-      zypper.out().progress("run-script", _label);
+      cout << "." << flush;
       was_ping_before = true;
     }
     else
     {
       if (was_ping_before)
-        zypper.out().info("\n");
-      zypper.out().info(output);
+       cout << endl;
+      cout << output;
       was_ping_before = false;
     }
 
@@ -94,7 +94,6 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
   {
     Zypper & zypper = *Zypper::instance();
 
-    zypper.out().progressEnd("run-script", _label, true);
     zypper.out().error(description);
 
     Action action = (Action) read_action_ari (PROMPT_ARI_PATCH_SCRIPT_PROBLEM, ABORT);
