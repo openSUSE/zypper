@@ -1416,11 +1416,8 @@ namespace zypp
     MIL << "done" << endl;
   }
 
-  const Service& RepoManager::getService( const std::string& name ) const
+  Service RepoManager::getService( const std::string& name ) const
   {
-    //little trick for Set, because it is sorted by Service name
-    Service tmpServ(name);
-
     ServiceConstIterator it = _pimpl->services.find(name);
     if ( it == serviceEnd() )
       return Service::noService;

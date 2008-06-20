@@ -457,7 +457,7 @@ namespace zypp
 
     ServiceConstIterator serviceEnd() const;
 
-    const Service& getService( const std::string& name ) const;
+    Service getService( const std::string& name ) const;
 
     void refreshServices();
 
