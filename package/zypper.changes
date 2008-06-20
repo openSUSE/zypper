@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun 20 13:21:51 CEST 2008 - jkupec@suse.cz
+
+- adapted to new patch message and script handling (bnc #401220)
+- r10413-10420
+- 0.11.8
+
+-------------------------------------------------------------------
 Thu Jun 19 11:11:20 CEST 2008 - jkupec@suse.cz
 
 - zypp-refresh: don't accept files with GPG problems (bnc #398530),
