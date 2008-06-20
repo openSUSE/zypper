@@ -418,8 +418,8 @@ namespace zypp
       enum Notify { OUTPUT, PING };
       enum Action {
         ABORT,  // abort commit and return error
-        IGNORE,	// ignore any failue and continue
         RETRY,	// (re)try to execute this script
+        IGNORE	// ignore any failue and continue
       };
 
       /** Start executing the script provided by package.
