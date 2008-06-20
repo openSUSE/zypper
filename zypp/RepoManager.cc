@@ -1306,7 +1306,7 @@ namespace zypp
                                            const ProgressData::ReceiverFnc & progressrcv )
   {
     RepoInfo info;
-    info.setAlias(info.alias());
+    info.setAlias(alias);
     RepoConstIterator it = _pimpl->repos.find( info );
     if( it == repoEnd() )
       ZYPP_THROW(RepoNotFoundException(info));
@@ -1346,6 +1346,7 @@ namespace zypp
     if( _pimpl->services.find(service)!= _pimpl->services.end() )
       return; //TODO throw exception
 
+    //this is need to save location to correct service
     const Service& savedService = *(_pimpl->services.insert( service )).first;
 
     _pimpl->saveService( savedService );
