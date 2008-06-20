@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jun 20 14:01:11 CEST 2008 - jkupec@suse.cz
+
+- zypp-checkpatches: don't accept files with GPG problems, report an
+  error instead (bnc #398530)
+- r10426
+- 0.6.22
+
+-------------------------------------------------------------------
 Wed Oct  3 17:05:48 CEST 2007 - jkupec@suse.cz
 
 - missing --auto-agree-with-licenses option added to 'update'
