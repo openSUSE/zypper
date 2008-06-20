@@ -15,6 +15,8 @@
 #include <iosfwd>
 #include <list>
 
+#include <boost/iterator.hpp>
+
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
@@ -100,6 +102,11 @@ namespace zypp
     typedef ServiceSet::const_iterator ServiceConstIterator;
     typedef ServiceSet::size_type ServiceSizeType;
 
+    //RepoInfo typedefs
+    typedef std::set<RepoInfo> RepoSet;
+    typedef RepoSet::const_iterator RepoConstIterator;
+    typedef RepoSet::size_type RepoSizeType;
+
   public:
    RepoManager( const RepoManagerOptions &options = RepoManagerOptions() );
    /** Dtor */
@@ -129,9 +136,16 @@ namespace zypp
     * The known repositories are read from
     * \ref RepoManagerOptions::knownReposPath passed on the Ctor.
     * Which defaults to ZYpp global settings.
+    * \deprecated use iterator instead which read only one time directory
     * \return found list<RepoInfo>
     */
-   std::list<RepoInfo> knownRepositories() const;
+   ZYPP_DEPRECATED std::list<RepoInfo> knownRepositories() const;
+
+   bool repoEmpty() const;
+   RepoSizeType repoSize() const;
+   RepoConstIterator repoBegin() const;
+   RepoConstIterator repoEnd() const;
+
 
    /**
     * \short Status of local metadata
@@ -431,6 +445,7 @@ namespace zypp
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
     void addService( const std::string& name, const Url& url );
+    void addService( const Service& name );
 
     void removeService( const std::string& name );
 
@@ -446,11 +461,35 @@ namespace zypp
 
     void refreshServices();
 
+    void refreshService( const Service& name );
+
     /**
-     * modify service, except name change
-     * ( you need remove and add if you want change name )
+     * modify service
      */
-    void modifyService(const Service& service) const;
+    void modifyService(const std::string& oldName, const Service& service);
+
+    struct MatchServiceName {
+      private:
+        std::string name;
+      public:
+        MatchServiceName( const std::string& name_ ) : name(name_) {}
+        bool match( const RepoInfo& info ) { return info.service()==name; }
+    };
+
+    /**
+     * fill to output iterator repositories in service name
+     */ 
+
+    template<typename OutputIterator>
+    void getRepositoriesInService( const std::string& name, OutputIterator out ) const
+    {
+      MatchServiceName filter(name);
+
+      std::copy(boost::make_filter_iterator(bind(&MatchServiceName::match, 
+          filter, _1),repoBegin(),repoEnd()), boost::make_filter_iterator(
+          bind(&MatchServiceName::match, filter, _1),repoEnd(),repoEnd()),
+          out );
+    }
 
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );

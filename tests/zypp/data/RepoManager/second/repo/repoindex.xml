@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repoindex>
+  <repo name="SLES10-SP2-Online" 
+        alias="SLES10-SP2-Online" 
+        description="SLES10-SP2-Online for sles-10-i586" 
+        distro_target="sles-10-i586" path="$RCE/SLES10-SP2-Online/sles-10-i586" 
+        priority="0" 
+        pub="0" />
+  <repo name="SLES10-SP2-Updates" 
+        alias="SLES10-SP2-Updates" 
+        description="SLES10-SP2-Updates for sles-10-i586" 
+        distro_target="sles-10-i586" 
+        path="$RCE/SLES10-SP2-Updates/sles-10-i586" 
+        priority="0" 
+        pub="0" />
+</repoindex>
+

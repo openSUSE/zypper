@@ -238,6 +238,12 @@ namespace zypp
      */
     bool keepPackages() const;
 
+    /**
+     * Gets service name which add it or empty string if this repository
+     * is added manually.
+     */
+    std::string service() const;
+
     public:
     /**
      * Add a base url. \see baseUrls
@@ -366,6 +372,11 @@ namespace zypp
     RepoInfo & setKeepPackages( bool keep );
 
     /**
+     * sets service which added this repository
+     */
+    RepoInfo & setService( const std::string& name );
+
+    /**
      * Write a human-readable representation of this RepoInfo object
      * into the \a str stream. Useful for logging.
      */
@@ -385,6 +396,9 @@ namespace zypp
 
   /** \relates RepoInfo Stream output */
   std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
+
+  inline bool operator<( const RepoInfo& lhs, const RepoInfo & rhs )
+  { return lhs.alias() < rhs.alias(); }
 
   typedef std::list<RepoInfo> RepoInfoList;
 

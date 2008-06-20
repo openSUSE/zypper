@@ -74,6 +74,8 @@ namespace zypp
             info.setGpgCheck( str::strToTrue( it->second ) );
 	  else if ( it->first == "keeppackages" )
 	    info.setKeepPackages( str::strToTrue( it->second ) );
+	  else if ( it->first == "service" )
+	    info.setService( it->second );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }

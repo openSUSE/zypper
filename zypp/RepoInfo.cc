@@ -77,6 +77,7 @@ namespace zypp
     std::string alias;
     std::string escaped_alias;
     std::string name;
+    std::string service;
     Pathname filepath;
     Pathname metadatapath;
     Pathname packagespath;
@@ -255,6 +256,12 @@ namespace zypp
     return *this;
   }
 
+  RepoInfo & RepoInfo::setService( const std::string& name )
+  {
+    _pimpl->service = name;
+    return *this;
+  }
+
   bool RepoInfo::enabled() const
   { return _pimpl->enabled; }
 
@@ -317,6 +324,9 @@ namespace zypp
   Pathname RepoInfo::path() const
   { return _pimpl->path; }
 
+  std::string RepoInfo::service() const
+  { return _pimpl->service; }
+
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   {
     return make_transform_iterator( _pimpl->baseUrls.begin(),
@@ -359,6 +369,7 @@ namespace zypp
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
     str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
     str << "- keeppackages: " << keepPackages() << std::endl;
+    str << "- service     : " << service() << std::endl;
 
     return str;
   }
@@ -396,6 +407,9 @@ namespace zypp
       str << "gpgkey=" <<gpgKeyUrl() << endl;
 
     str << "keeppackages=" << keepPackages() << endl;
+
+    if( ! service().empty() )
+      str << "service=" << service() << endl;
 
     return str;
   }

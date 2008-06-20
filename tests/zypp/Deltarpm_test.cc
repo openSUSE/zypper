@@ -33,6 +33,9 @@ BOOST_AUTO_TEST_CASE(delta)
   RepoManagerOptions opts(rootdir);
   opts.repoRawCachePath = rootdir;
   opts.repoSolvCachePath = rootdir;
+  opts.knownReposPath = rootdir;
+  opts.knownServicesPath = rootdir;
+
   RepoManager rm(opts);
 
   RepoInfo updates;

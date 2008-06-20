@@ -10,6 +10,7 @@
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
+#include "zypp/Service.h"
 
 #include "zypp/RepoManager.h"
 
@@ -34,6 +35,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
 
   filesystem::mkdir( opts.knownReposPath );
+  filesystem::mkdir( opts.knownServicesPath );
   BOOST_CHECK_EQUAL( filesystem::copy_dir_content( DATADIR + "/repos.d", opts.knownReposPath ), 0 );
 
   RepoManager manager(opts);
@@ -73,10 +75,33 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   RepoInfo macromedia;
   macromedia.setAlias("macromedia");
   manager.removeRepository(macromedia);
-  repos = manager.knownRepositories();
-  BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
+  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 4);
   // the file should not exist anymore
   BOOST_CHECK( ! PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
+
+  //test service
+  Url urlS;
+  urlS.setPathName(DATADIR.asString());
+  urlS.setScheme("dir");
+  Service service("test",urlS);
+
+  manager.addService(service);
+  manager.refreshServices();
+  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 7); //+3 from repoindex
+
+  //simulate change of repoindex.xml
+  urlS.setPathName((DATADIR+"second").asString());
+  urlS.setScheme("dir");
+  service.setUrl(urlS);
+
+  manager.modifyService(service.name(),service);
+  manager.refreshServices();
+  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 6); //-1 from new repoindex
+
+  std::list<RepoInfo> infos;
+  manager.getRepositoriesInService("test",
+    insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
+  BOOST_CHECK_EQUAL(infos.size(), 2); //2 from new repoindex
 
 
   // let test cache creation

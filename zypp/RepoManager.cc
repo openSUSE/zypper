@@ -36,6 +36,7 @@
 
 #include "zypp/parser/RepoFileReader.h"
 #include "zypp/parser/ServiceFileReader.h"
+#include "zypp/parser/RepoindexFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
 #include "zypp/parser/yum/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
@@ -239,6 +240,8 @@ namespace zypp
     Impl( const RepoManagerOptions &opt )
       : options(opt)
     {
+      knownServices();
+      knownRepositories();
 
     }
 
@@ -249,7 +252,7 @@ namespace zypp
 
     RepoManagerOptions options;
 
-    map<string, RepoInfo> _repoinfos;
+    RepoSet repos;
     
     ServiceSet services;
 
@@ -261,7 +264,7 @@ namespace zypp
       return _nullimpl;
     }
 
-    void saveService( const Service& service );
+    void saveService( const Service& service ) const;
   
     Pathname generateNonExistingName( const Pathname &dir,
                                          const std::string &basefilename ) const;
@@ -277,6 +280,8 @@ namespace zypp
     };
 
     void knownServices();
+
+    void knownRepositories();
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -310,31 +315,44 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
+  bool RepoManager::repoEmpty() const { return _pimpl->repos.empty(); }
+  RepoManager::RepoSizeType RepoManager::repoSize() const
+  { return _pimpl->repos.size(); }
+  RepoManager::RepoConstIterator RepoManager::repoBegin() const
+  { return _pimpl->repos.begin(); }
+  RepoManager::RepoConstIterator RepoManager::repoEnd() const
+  { return _pimpl->repos.end(); }
+
+
   std::list<RepoInfo> RepoManager::knownRepositories() const
   {
-    MIL << endl;
+    return std::list<RepoInfo>(repoBegin(),repoEnd());
+  }
 
-    if ( PathInfo(_pimpl->options.knownReposPath).isExist() )
+  void RepoManager::Impl::knownRepositories()
+  {
+    MIL << "start construct known repos" << endl;
+
+    if ( PathInfo(options.knownReposPath).isExist() )
     {
-      RepoInfoList repos = repositories_in_dir(_pimpl->options.knownReposPath);
-      for ( RepoInfoList::iterator it = repos.begin();
-            it != repos.end();
+      RepoInfoList repol = repositories_in_dir(options.knownReposPath);
+      for ( RepoInfoList::iterator it = repol.begin();
+            it != repol.end();
             ++it )
       {
         // set the metadata path for the repo
-        Pathname metadata_path = rawcache_path_for_repoinfo(_pimpl->options, (*it));
+        Pathname metadata_path = rawcache_path_for_repoinfo(options, (*it));
         (*it).setMetadataPath(metadata_path);
 
 	// set the downloaded packages path for the repo
-	Pathname packages_path = packagescache_path_for_repoinfo(_pimpl->options, (*it));
+	Pathname packages_path = packagescache_path_for_repoinfo(options, (*it));
 	(*it).setPackagesPath(packages_path);
-      }
-      return repos;
-    }
-    else
-      return std::list<RepoInfo>();
 
-    MIL << endl;
+        repos.insert(*it);
+      }
+    }
+
+    MIL << "end construct known repos" << endl;
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -599,9 +617,7 @@ namespace zypp
               // Adjust the probed type in RepoInfo
               info.setProbedType( repokind ); // lazy init!
               //save probed type only for repos in system
-              std::list<RepoInfo> repos = knownRepositories();
-              for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-                   it != repos.end(); ++it )
+              for_( it, repoBegin(), repoEnd() )
               {
                 if ( info.alias() == (*it).alias() )
                 {
@@ -639,10 +655,7 @@ namespace zypp
            * repo has the same file, it will not download it
            * but copy it from the other repository
            */
-          std::list<RepoInfo> repos = knownRepositories();
-          for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-                it != repos.end();
-                ++it )
+          for_( it, repoBegin(), repoEnd() )
           {
             Pathname cachepath(rawcache_path_for_repoinfo( _pimpl->options, *it ));
             if ( PathInfo(cachepath).isExist() )
@@ -1056,16 +1069,10 @@ namespace zypp
     progress.name(str::form(_("Adding repository '%s'"), info.name().c_str()));
     progress.toMin();
 
-    std::list<RepoInfo> repos = knownRepositories();
-    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-          it != repos.end();
-          ++it )
-    {
-      if ( info.alias() == (*it).alias() )
-        ZYPP_THROW(RepoAlreadyExistsException(info));
-    }
-
     RepoInfo tosave = info;
+    if(_pimpl->repos.find(tosave)!= _pimpl->repos.end())
+        ZYPP_THROW(RepoAlreadyExistsException(info));
+
 
     // check the first url for now
     if ( _pimpl->options.probe )
@@ -1099,6 +1106,8 @@ namespace zypp
     }
 
     tosave.dumpRepoOn(file);
+    tosave.setFilepath(repofile);
+    _pimpl->repos.insert(tosave);
     progress.toMax();
     MIL << "done" << endl;
   }
@@ -1106,16 +1115,13 @@ namespace zypp
   void RepoManager::addRepositories( const Url &url,
                                      const ProgressData::ReceiverFnc & progressrcv )
   {
-    std::list<RepoInfo> knownrepos = knownRepositories();
     std::list<RepoInfo> repos = readRepoFile(url);
     for ( std::list<RepoInfo>::const_iterator it = repos.begin();
           it != repos.end();
           ++it )
     {
       // look if the alias is in the known repos.
-      for ( std::list<RepoInfo>::const_iterator kit = knownrepos.begin();
-          kit != knownrepos.end();
-          ++kit )
+      for_ ( kit, repoBegin(), repoEnd() )
       {
         if ( (*it).alias() == (*kit).alias() )
         {
@@ -1142,12 +1148,14 @@ namespace zypp
       ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
     }
 
-    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
+    for ( std::list<RepoInfo>::iterator it = repos.begin();
           it != repos.end();
           ++it )
     {
       MIL << "Saving " << (*it).alias() << endl;
-      (*it).dumpRepoOn(file);
+      it->setFilepath(repofile.asString());
+      it->dumpRepoOn(file);
+      _pimpl->repos.insert(*it);
     }
     MIL << "done" << endl;
   }
@@ -1164,10 +1172,7 @@ namespace zypp
 
     MIL << "Going to delete repo " << info.alias() << endl;
 
-    std::list<RepoInfo> repos = knownRepositories();
-    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-          it != repos.end();
-          ++it )
+    for_( it, repoBegin(), repoEnd() )
     {
       // they can be the same only if the provided is empty, that means
       // the provided repo has no alias
@@ -1228,6 +1233,7 @@ namespace zypp
           cleanCache( todelete, subprogrcv);
         // now delete metadata (#301037)
         cleanMetadata( todelete, cleansubprogrcv);
+        _pimpl->repos.erase(todelete);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
         return;
       } // else filepath is empty
@@ -1248,10 +1254,7 @@ namespace zypp
     // check if the new alias already exists when renaming the repo
     if (alias != newinfo.alias())
     {
-      std::list<RepoInfo> repos = knownRepositories();
-      for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-            it != repos.end();
-            ++it )
+      for_( it, repoBegin(), repoEnd() )
       {
         if ( newinfo.alias() == (*it).alias() )
           ZYPP_THROW(RepoAlreadyExistsException(newinfo));
@@ -1291,6 +1294,9 @@ namespace zypp
           else
             newinfo.dumpRepoOn(file);
       }
+
+      _pimpl->repos.erase(toedit);
+      _pimpl->repos.insert(newinfo);
     }
   }
 
@@ -1299,17 +1305,13 @@ namespace zypp
   RepoInfo RepoManager::getRepositoryInfo( const std::string &alias,
                                            const ProgressData::ReceiverFnc & progressrcv )
   {
-    std::list<RepoInfo> repos = knownRepositories();
-    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-          it != repos.end();
-          ++it )
-    {
-      if ( (*it).alias() == alias )
-        return *it;
-    }
     RepoInfo info;
     info.setAlias(info.alias());
-    ZYPP_THROW(RepoNotFoundException(info));
+    RepoConstIterator it = _pimpl->repos.find( info );
+    if( it == repoEnd() )
+      ZYPP_THROW(RepoNotFoundException(info));
+    else
+      return *it;
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -1318,10 +1320,7 @@ namespace zypp
                                            const url::ViewOption & urlview,
                                            const ProgressData::ReceiverFnc & progressrcv )
   {
-    std::list<RepoInfo> repos = knownRepositories();
-    for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-          it != repos.end();
-          ++it )
+    for_( it, repoBegin(), repoEnd() )
     {
       for(RepoInfo::urls_const_iterator urlit = (*it).baseUrlsBegin();
           urlit != (*it).baseUrlsEnd();
@@ -1332,22 +1331,24 @@ namespace zypp
       }
     }
     RepoInfo info;
-    info.setAlias(info.alias());
     info.setBaseUrl(url);
     ZYPP_THROW(RepoNotFoundException(info));
   }
-
+  
   void RepoManager::addService( const std::string& name, const Url& url )
   {
-    Service service(name, url);
+    addService( Service(name,url) );
+  }
 
+  void RepoManager::addService( const Service& service )
+  {
     //check if service isn't already exist
     if( _pimpl->services.find(service)!= _pimpl->services.end() )
       return; //TODO throw exception
 
-    _pimpl->services.insert( service );
+    const Service& savedService = *(_pimpl->services.insert( service )).first;
 
-    _pimpl->saveService( service );
+    _pimpl->saveService( savedService );
   }
 
   void RepoManager::removeService( const string& name)
@@ -1390,12 +1391,12 @@ namespace zypp
     }
 
     //now remove all repositories added by this service
-    for_( it, service.begin(), service.end() )
-      removeRepository(getRepositoryInfo(*it));
+    getRepositoriesInService( name, 
+      boost::make_function_output_iterator(bind(&RepoManager::removeRepository, this, _1, ProgressData::ReceiverFnc()) ) );
   }
 
 
-  void RepoManager::Impl::saveService( const Service& service )
+  void RepoManager::Impl::saveService( const Service& service ) const
   {
     filesystem::assert_dir( options.knownServicesPath );
 
@@ -1411,7 +1412,7 @@ namespace zypp
 
     service.dumpServiceOn( file );
 
-    service.setLocation( servfile );
+    const_cast<Service&>(service).setLocation( servfile );
     MIL << "done" << endl;
   }
 
@@ -1450,15 +1451,83 @@ namespace zypp
     for (std::set<Service>::iterator it = _pimpl->services.begin();
       it != _pimpl->services.end(); ++it)
     {
-      it->refresh(*this);
+      MIL << "refresh: "<<it->name() << " with url: "<< it->url().asString() << endl;
+      refreshService(*it);
     }
   }
 
-  void RepoManager::modifyService(const Service& service) const
+  void RepoManager::refreshService( const Service& service )
   {
-    MIL << "Going to modify service " << service.name() << endl;
+    //download index file
+    media::MediaManager mediamanager;
+    media::MediaAccessId mid = mediamanager.open( service.url() );
+    mediamanager.attachDesiredMedia( mid );
+    mediamanager.provideFile( mid, "repo/repoindex.xml" );
+    Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 
-    Pathname location = service.location();
+    //parse it
+    RepoCollector collector;
+    parser::RepoindexFileReader reader( path,
+      bind( &RepoCollector::collect, &collector, _1 ) );
+    mediamanager.release( mid );
+    mediamanager.close( mid );
+
+    // set base url for all collected repositories
+    for_( it, collector.repos.begin(), collector.repos.end())
+    {
+      it->setBaseUrl( service.url() );
+      it->setService(service.name());
+    }
+
+    //compare old and new repositories (hope not to much, if it change
+    // then construct set and use set operation on it)
+    
+    std::list<RepoInfo> oldRepos;
+    getRepositoriesInService(service.name(),
+        insert_iterator<std::list<RepoInfo> >
+        (oldRepos,oldRepos.begin()));
+
+    //find old to remove
+    for_( it, oldRepos.begin(), oldRepos.end() )
+    {
+      bool found = false;
+
+      for_( it2, collector.repos.begin(), collector.repos.end() )
+        if ( it->alias() == it2->alias() )
+        {
+          found = true;
+          break;
+        }
+
+      if( !found )
+        removeRepository( *it );
+    }
+
+    //find new to add
+    for_( it, collector.repos.begin(), collector.repos.end() )
+    {
+      bool found = false;
+
+      for_( it2, oldRepos.begin(), oldRepos.end() )
+        if( it->alias() == it2->alias() )
+        {
+          found = true;
+          break;
+        }
+
+      if (!found)
+        addRepository( *it );
+    }
+
+  }
+
+  void RepoManager::modifyService(const std::string& oldName, const Service& service)
+  {
+    MIL << "Going to modify service " << oldName << endl;
+
+    const Service& oldService = getService(oldName);
+
+    Pathname location = oldService.location();
     if( location.empty() )
     {
       ZYPP_THROW(RepoException("Can't figure where the service is stored"));
@@ -1476,13 +1545,29 @@ namespace zypp
 
     for_(it, tmpSet.begin(), tmpSet.end())
     {
-      if( *it != service )
+      if( *it != oldName )
         it->dumpServiceOn(file);
     }
 
     service.dumpServiceOn(file);
 
     file.close();
+
+    _pimpl->services.erase(oldName);
+    _pimpl->services.insert(service);
+
+    if( oldName != service.name() ) //changed name, must change also repository
+    {
+      std::vector<RepoInfo> toModify;
+      getRepositoriesInService(oldName,
+        insert_iterator<std::vector<RepoInfo> >( toModify, toModify.begin() ));
+      for_( it, toModify.begin(), toModify.end() )
+      {
+        it->setService(service.name());
+        modifyRepository(it->alias(), *it);
+      }
+    }
+
   }
 
   void RepoManager::Impl::knownServices()

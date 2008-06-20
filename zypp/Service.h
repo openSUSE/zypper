@@ -29,11 +29,6 @@ namespace zypp
     class Service
     {
     public:
-        typedef std::vector<std::string> RepoContainer;
-        typedef RepoContainer::const_iterator const_iterator;
-        typedef RepoContainer::size_type size_type;
-
-    public:
         /** Default ctor creates \ref noService.*/
         Service();
 
@@ -60,54 +55,24 @@ namespace zypp
 
         Pathname location() const;
 
-        void setLocation( const Pathname& location ) const;
+    public:
+
+        void setLocation( const Pathname& location );
 
         void setUrl( const Url& url );
 
-    public:
-
-        /** Whether \ref Service contains solvables. */
-        bool empty() const;
-
-        /** Number of solvables in \ref Service. */
-        size_type size() const;
-
-        /** Iterator to the first \ref Solvable. */
-        const_iterator begin() const;
-
-        /** Iterator behind the last \ref Solvable. */
-        const_iterator end() const;
+        void setName( const std::string& name );
 
    public:
-        /**
-         * Refreshes local information about service.
-         * It can addi, remove or modify repositories.
-         * it is const due to use Service in set or map and name doesn't change
-         */
-        void refresh( RepoManager& repomanager) const;
-
         /**
          * Writes Service to stream in ".service" format
          */
         void dumpServiceOn( std::ostream & str ) const;
 
-        /**
-         * set repositories by alias.
-         * Used only during local loading, for update repository use refresh
-         */
-        template<typename InputIterator>
-        void setRepos(InputIterator begin, InputIterator end)
-        {
-          for_(it,begin,end)
-            addRepo(*it);
-        }
-
-        void addRepo(const std::string& alias);
-
         class Impl;
 
     private:
-        mutable RW_pointer<Impl> _pimpl;
+        RWCOW_pointer<Impl> _pimpl;
     };
     ///////////////////////////////////////////////////////////////////
 

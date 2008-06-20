@@ -56,8 +56,6 @@ namespace zypp
           //MIL << (*it).first << endl;
           if (it->first == "url" )
             service.setUrl( Url (it->second) );
-          else if ( it->first == "alias" )
-            service.addRepo( it->second );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }
