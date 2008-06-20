@@ -18,6 +18,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Package.h"
+#include "zypp/Patch.h"
 //#include "zypp/target/rpm/RpmCallbacks.h"
 
 #include "zypper.h"
@@ -31,70 +32,74 @@ namespace ZmartRecipients
 
 
 // resolvable Message
-struct MessageResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::MessageResolvableReport>
+struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchMessageReport>
 {
-  virtual void show( zypp::Message::constPtr message )
+
+  /** Display \c patch->message().
+   * Return \c true to continue, \c false to abort commit.
+   */
+  virtual bool show( zypp::Patch::constPtr & patch )
   {
-    
     Out & out = Zypper::instance()->out();
     ostringstream s;
-    s << message; // [message]important-msg-1.0-1
+    s << patch; // [patch]important-patch-101 \todo make some meaningfull message out of this
     out.info(s.str(), Out::HIGH);
-    out.info(message->text().text());
-    
-    //! \todo in interactive mode, wait for ENTER?
+    out.info(patch->message());
+
+    return read_bool_answer(PROMPT_PATCH_MESSAGE_CONTINUE, _("Continue?"), true);
   }
 };
 
-ostream& operator<< (ostream& stm, zypp::target::ScriptResolvableReport::Task task) {
-  return stm << (task==zypp::target::ScriptResolvableReport::DO? "DO": "UNDO");
-}
 
-struct ScriptResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::ScriptResolvableReport>
+struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::target::PatchScriptReport>
 {
   std::string _label;
 
-  /** task: Whether executing do_script on install or undo_script on delete. */
-  virtual void start( const zypp::Resolvable::constPtr & script_r,
-		      const zypp::Pathname & path_r,
-		      Task task)
+  virtual void start( const zypp::Package::constPtr & package,
+		      const zypp::Pathname & path_r ) // script path
   {
     _label = boost::str(
-        // TranslatorExplanation speaking of a script
-        boost::format(_("Running: %s  (%s, %s)")) % script_r % task % path_r);
-    Zypper::instance()->out().progressStart("run-script", _label, false);
+        // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+        boost::format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname());
+    cout << _label << endl;
   }
 
-  /** Progress provides the script output. If the script is quiet ,
+  /**
+   * Progress provides the script output. If the script is quiet,
    * from time to time still-alive pings are sent to the ui. (Notify=PING)
-   * Returning \c FALSE
-   * aborts script execution.
+   * Returning \c FALSE aborts script execution.
    */
   virtual bool progress( Notify kind, const std::string &output )
   {
+    Zypper & zypper = *Zypper::instance();
     static bool was_ping_before = false;
     if (kind == PING)
     {
-      Zypper::instance()->out().progress("run-script", _label);
+      cout << "." << flush;
       was_ping_before = true;
     }
     else
     {
       if (was_ping_before)
-        Zypper::instance()->out().info("\n");
-      Zypper::instance()->out().info(output);
+       cout << endl;
+      cout << output;
       was_ping_before = false;
     }
-    //! hmm, how to signal abort in zypper? catch sigint? (document it) yup yup \todo
-    return true;
+
+    return !zypper.exitRequested();
   }
 
   /** Report error. */
-  virtual void problem( const std::string & description )
+  virtual Action problem( const std::string & description )
   {
-    Zypper::instance()->out().progressEnd("run-script", _label, true);
-    Zypper::instance()->out().error(description);
-    Zypper::instance()->setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    Zypper & zypper = *Zypper::instance();
+
+    zypper.out().error(description);
+
+    Action action = (Action) read_action_ari (PROMPT_ARI_PATCH_SCRIPT_PROBLEM, ABORT);
+    if (action == zypp::target::PatchScriptReport::ABORT)
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return action;
   }
 
   /** Report success. */
@@ -270,8 +275,8 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 class RpmCallbacks {
 
   private:
-    ZmartRecipients::MessageResolvableReportReceiver _messageReceiver;
-    ZmartRecipients::ScriptResolvableReportReceiver _scriptReceiver;
+    ZmartRecipients::PatchMessageReportReceiver _messageReceiver;
+    ZmartRecipients::PatchScriptReportReceiver _scriptReceiver;
     ZmartRecipients::ScanRpmDbReceive _readReceiver;
     ZmartRecipients::RemoveResolvableReportReceiver _installReceiver;
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
