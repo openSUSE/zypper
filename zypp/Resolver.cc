@@ -138,7 +138,10 @@ namespace zypp
   const solver::detail::ItemCapKindList Resolver::installs (const PoolItem item)
   { return _pimpl->installs (item); }
   const solver::detail::ItemCapKindList Resolver::satifiedByInstalled (const PoolItem item)
-  { return _pimpl->satifiedByInstalled (item); }    
+  { return _pimpl->satifiedByInstalled (item); }
+  const solver::detail::ItemCapKindList Resolver::installedSatisfied (const PoolItem item)
+  { return _pimpl->installedSatisfied (item); }    
+    
 
 
   /////////////////////////////////////////////////////////////////

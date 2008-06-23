@@ -285,6 +285,22 @@ namespace zypp
     const solver::detail::ItemCapKindList satifiedByInstalled(const PoolItem item);
       
 
+    /**
+     * Gives information about WHICH items require an already installed item.
+     *
+     * \param item     Evaluate additional information for this resolvable.
+     * \return A list of structures which contains:
+     *		item     Item which requires this capability.
+     *		cap      Capability which is needed
+     *		capKind  Kind of that capability (e.g.  Dep::REQUIRES,Dep::RECOMMENDS,... )
+     *
+     * Note: In order to have a result start a solver run before. Not matter if it is valid or invalid.
+     *
+     */      
+    const solver::detail::ItemCapKindList installedSatisfied(const PoolItem item);
+      
+
+      
   private:
     solver::detail::Resolver_Ptr _pimpl;
   };

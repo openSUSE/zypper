@@ -106,7 +106,8 @@ Resolver::reset (bool keepExtras )
 
     _isInstalledBy.clear();
     _installs.clear();
-    _satifiedByInstalled.clear();    
+    _satifiedByInstalled.clear();
+    _installedSatisfied.clear();
 }
 
 void
@@ -305,7 +306,8 @@ Resolver::solverInit()
 	// Resetting additional solver information
 	_isInstalledBy.clear();
 	_installs.clear();
-	_satifiedByInstalled.clear();    		
+	_satifiedByInstalled.clear();
+	_installedSatisfied.clear();
 }
 
 bool
@@ -493,7 +495,10 @@ Resolver::collectResolverInfo(void)
 
 		    if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
 			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::REQUIRES, false );
-			_satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));			
+			_satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));
+
+			ItemCapKind installedSatisfied( *instIter, *capIt, Dep::REQUIRES, false ); 
+			_installedSatisfied.insert (make_pair( provider, installedSatisfied));			    
 		    }
 		}
 	    }
@@ -535,7 +540,10 @@ Resolver::collectResolverInfo(void)
 
 			if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
 			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, false );
-			    _satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));			
+			    _satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));
+
+			    ItemCapKind installedSatisfied( *instIter, *capIt, Dep::RECOMMENDS, false ); 
+			    _installedSatisfied.insert (make_pair( provider, installedSatisfied));			    
 			}		    
 		    }
 		}
@@ -576,6 +584,9 @@ Resolver::collectResolverInfo(void)
 			if (instIter->status().staysInstalled()) { // Is already satisfied by an item which is installed
 			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
 			    _satifiedByInstalled.insert (make_pair( provider, capKindisInstalledBy));
+
+			    ItemCapKind installedSatisfied( provider, *capIt, Dep::SUPPLEMENTS, false ); 
+			    _installedSatisfied.insert (make_pair( *instIter, installedSatisfied));			    
 			}
 		    }
 		}
@@ -639,8 +650,23 @@ const ItemCapKindList Resolver::satifiedByInstalled (const PoolItem item) {
     return ret;
 }
 
+const ItemCapKindList Resolver::installedSatisfied (const PoolItem item) {
+    ItemCapKindList ret;
+    collectResolverInfo();
 
-
+    for (ItemCapKindMap::const_iterator iter = _installedSatisfied.find(item); iter != _installedSatisfied.end();) {
+	ItemCapKind info = iter->second;
+	PoolItem iterItem = iter->first;
+	if (iterItem == item) {
+	    ret.push_back(info);
+	    iter++;
+	} else {
+	    // exit
+	    iter = _installedSatisfied.end();
+	}
+    }
+    return ret;
+}
 
 
 ///////////////////////////////////////////////////////////////////
