@@ -497,87 +497,89 @@ Resolver::collectResolverInfo(void)
 		    }
 		}
 	    }
-	    
-	    //Recommends
-	    for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::RECOMMENDS).begin(); capIt != (*instIter)->dep (Dep::RECOMMENDS).end(); ++capIt)
-	    {
-		sat::WhatProvides possibleProviders(*capIt);
-		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
-		    PoolItem provider = ResPool::instance().find( *iter );
+
+	    if (!(_satResolver->onlyRequires())) {
+		//Recommends
+		for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::RECOMMENDS).begin(); capIt != (*instIter)->dep (Dep::RECOMMENDS).end(); ++capIt)
+		{
+		    sat::WhatProvides possibleProviders(*capIt);
+		    for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+			PoolItem provider = ResPool::instance().find( *iter );
 		    
-		    // searching if this provider will already be installed
-		    bool found = false;
-		    bool alreadySetForInstallation = false;
-		    ItemCapKindMap::const_iterator pos = _isInstalledBy.find(provider);
-		    while (pos != _isInstalledBy.end()
-			   && pos->first == provider
-			   && !found) {
-			alreadySetForInstallation = true;
-			ItemCapKind capKind = pos->second;
-			if (capKind.item == *instIter)  found = true;
-			pos++;
-		    }
-
-		    if (!found
-			&& provider.status().isToBeInstalled()) {
-			if (provider.status().isBySolver()) {
-			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
-			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
-			} else {
-			    // no initial installation cause it has been set be e.g. user
-			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, false ); 
-			    _isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+			// searching if this provider will already be installed
+			bool found = false;
+			bool alreadySetForInstallation = false;
+			ItemCapKindMap::const_iterator pos = _isInstalledBy.find(provider);
+			while (pos != _isInstalledBy.end()
+			       && pos->first == provider
+			       && !found) {
+			    alreadySetForInstallation = true;
+			    ItemCapKind capKind = pos->second;
+			    if (capKind.item == *instIter)  found = true;
+			    pos++;
 			}
-			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
-			_installs.insert (make_pair( *instIter, capKindisInstalledBy));			
-		    }
 
-		    if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
-			ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, false );
-			_satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));			
-		    }		    
-		}
-	    }
-
-	    //Supplements
-	    for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::SUPPLEMENTS).begin(); capIt != (*instIter)->dep (Dep::SUPPLEMENTS).end(); ++capIt)
-	    {
-		sat::WhatProvides possibleProviders(*capIt);
-		for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
-		    PoolItem provider = ResPool::instance().find( *iter );
-		    // searching if this item will already be installed
-		    bool found = false;
-		    bool alreadySetForInstallation = false;
-		    ItemCapKindMap::const_iterator pos = _isInstalledBy.find(*instIter);
-		    while (pos != _isInstalledBy.end()
-			   && pos->first == *instIter
-			   && !found) {
-			alreadySetForInstallation = true;
-			ItemCapKind capKind = pos->second;
-			if (capKind.item == provider)  found = true;
-			pos++;
-		    }
-
-		    if (!found
-			&& instIter->status().isToBeInstalled()) {
-			if (instIter->status().isBySolver()) {
-			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
-			    _isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));
-			} else {
-			    // no initial installation cause it has been set be e.g. user
-			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, false ); 
-			    _isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));			    
+			if (!found
+			    && provider.status().isToBeInstalled()) {
+			    if (provider.status().isBySolver()) {
+				ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
+				_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));
+			    } else {
+				// no initial installation cause it has been set be e.g. user
+				ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::RECOMMENDS, false ); 
+				_isInstalledBy.insert (make_pair( provider, capKindisInstalledBy));			    
+			    }
+			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, !alreadySetForInstallation );
+			    _installs.insert (make_pair( *instIter, capKindisInstalledBy));			
 			}
-			ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
-			_installs.insert (make_pair( provider, capKindisInstalledBy));
-		    }
 
-		    if (instIter->status().staysInstalled()) { // Is already satisfied by an item which is installed
-			ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
-			_satifiedByInstalled.insert (make_pair( provider, capKindisInstalledBy));
+			if (provider.status().staysInstalled()) { // Is already satisfied by an item which is installed
+			    ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::RECOMMENDS, false );
+			    _satifiedByInstalled.insert (make_pair( *instIter, capKindisInstalledBy));			
+			}		    
 		    }
 		}
-	    }   	    
+
+		//Supplements
+		for (Capabilities::const_iterator capIt = (*instIter)->dep (Dep::SUPPLEMENTS).begin(); capIt != (*instIter)->dep (Dep::SUPPLEMENTS).end(); ++capIt)
+		{
+		    sat::WhatProvides possibleProviders(*capIt);
+		    for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
+			PoolItem provider = ResPool::instance().find( *iter );
+			// searching if this item will already be installed
+			bool found = false;
+			bool alreadySetForInstallation = false;
+			ItemCapKindMap::const_iterator pos = _isInstalledBy.find(*instIter);
+			while (pos != _isInstalledBy.end()
+			       && pos->first == *instIter
+			       && !found) {
+			    alreadySetForInstallation = true;
+			    ItemCapKind capKind = pos->second;
+			    if (capKind.item == provider)  found = true;
+			    pos++;
+			}
+
+			if (!found
+			    && instIter->status().isToBeInstalled()) {
+			    if (instIter->status().isBySolver()) {
+				ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
+				_isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));
+			    } else {
+				// no initial installation cause it has been set be e.g. user
+				ItemCapKind capKindisInstalledBy( provider, *capIt, Dep::SUPPLEMENTS, false ); 
+				_isInstalledBy.insert (make_pair( *instIter, capKindisInstalledBy));			    
+			    }
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
+			    _installs.insert (make_pair( provider, capKindisInstalledBy));
+			}
+
+			if (instIter->status().staysInstalled()) { // Is already satisfied by an item which is installed
+			    ItemCapKind capKindisInstalledBy( *instIter, *capIt, Dep::SUPPLEMENTS, !alreadySetForInstallation );
+			    _satifiedByInstalled.insert (make_pair( provider, capKindisInstalledBy));
+			}
+		    }
+		}
+   	    }
 	}
     }
 }
