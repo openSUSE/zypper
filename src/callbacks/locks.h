@@ -7,9 +7,9 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/PoolQuery.h"
 
-#include "zypper-prompt.h"
-#include "zypper-utils.h"
-#include "output/prompt.h"
+#include "../prompt.h"
+#include "../utils.h"
+#include "../output/prompt.h"
 
 namespace zypp {
 

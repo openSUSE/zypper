@@ -20,9 +20,9 @@
 #include "zypp/Url.h"
 #include "zypp/media/MediaUserAuth.h"
 
-#include "zypper.h"
-#include "zypper-prompt.h"
-#include "output/prompt.h"
+#include "../Zypper.h"
+#include "../prompt.h"
+#include "../output/prompt.h"
 
 #define REPEAT_LIMIT 3
 

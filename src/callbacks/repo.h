@@ -18,9 +18,9 @@
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 
-#include "zypper.h"
-#include "zypper-prompt.h"
-#include "zypper-utils.h"
+#include "../Zypper.h"
+#include "../prompt.h"
+#include "../utils.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
