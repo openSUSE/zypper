@@ -37,6 +37,7 @@ Authors:
     Jan Kupec <jkupec@suse.cz>
     Duncan Mac-Vicar <dmacvicar@suse.de>
     Martin Vidner <mvidner@suse.cz>
+    Josef Reidinger <jreidinger@suse.cz>
 
 %prep
 %setup -q
