@@ -1,7 +1,7 @@
 1.0.x
-- bugfixing
+- bugfixing for 11.1
 
-before 1.0.0
+0.12.x
 - implement all rug commands (where it makes sense)
 - zypper [help] rug
 - add help texts for prompts
@@ -11,39 +11,27 @@ before 1.0.0
   - clean up/split utils.cc
 - drop xu command
 - show recommended and suggested in the summary
-
-0.11.x
-- bugfixing
+- report licenses of installed software
 
 
 NOT SCHEDULED
 -------------
 
+- - we want it
+? - idea
+
 General
 
-- xml input (feed a xml with operation specification to zypper)
-- detect whether the terminal we are writing to supports used control sequences
-  and fall back to OutNoTerminal (make it a child of OutNormal) if not. Usefull
-  also in cases where the output is redirected to a file or pipe.
-  DONE in OutNormal, TODO via OutNoTerminal?
-- enumerate prompt answers for all prompts
-? script progress: does the output contain newline?
-- installation and deletion notifications
-- testsuite
++ testsuite
+? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
+  -vv e.g. displays full urls of downloaded files
 
 Patches
 
-- respect license-to-confirm (test on kernel patch)
- (svn up ncurses)
-? reboot-needed: ?
-- cron updater: wrapper script for restart-packager
++ cron updater: wrapper script for restart-packager after packager-affecting
+  patches have been installed
 
 Packages
 
-- just download, not install. compare to YOU: do not delete after installing
-
-Cool Stuff
-
-(document it, brag around)
-- zypper in -t language zh_CN
++ just download, don't install. Compare to YOU: do not delete after installing
