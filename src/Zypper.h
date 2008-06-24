@@ -14,8 +14,8 @@
 #include "zypp/SrcPackage.h"
 
 #include "output/Out.h"
-#include "zypper-command.h"
-#include "zypper-getopt.h"
+#include "Command.h"
+#include "getopt.h"
 
 /** directory for storing manually installed (zypper install foo.rpm) RPM files
  */

@@ -18,13 +18,13 @@
 #include "zypp/media/MediaException.h"
 #include "zypp/media/MediaAccess.h"
 
-#include "zypper.h"
+#include "Zypper.h"
 #include "output/Out.h"
-#include "zypper-main.h"
-#include "zypper-getopt.h"
-#include "zypper-tabulator.h"
-#include "zypper-utils.h"
-#include "zypper-repos.h"
+#include "main.h"
+#include "getopt.h"
+#include "Table.h"
+#include "utils.h"
+#include "repos.h"
 
 using namespace std;
 using namespace boost;

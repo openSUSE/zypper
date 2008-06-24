@@ -6,11 +6,11 @@
 #include "zypp/Locks.h"
 
 #include "output/Out.h"
-#include "zypper-main.h" 
-#include "zypper-tabulator.h"
-#include "zypper-utils.h"
-#include "zypper-locks.h"
-#include "zypper-repos.h"
+#include "main.h" 
+#include "Table.h"
+#include "utils.h"
+#include "locks.h"
+#include "repos.h"
 
 using namespace zypp;
 using namespace std;

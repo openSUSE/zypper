@@ -5,7 +5,7 @@
 #include "zypp/ResKind.h"
 #include "zypp/ui/Selectable.h"
 
-#include "zypper.h"
+#include "Zypper.h"
 
 void printInfo(const Zypper & zypper, const zypp::ResKind & kind);
 

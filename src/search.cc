@@ -8,12 +8,12 @@
 
 #include "zypp/ResPoolProxy.h"
 
-#include "zypper.h"
-#include "zypper-main.h"
-#include "zypper-tabulator.h"
+#include "Zypper.h"
+#include "main.h"
+#include "Table.h"
 
 
-#include "zypper-search.h"
+#include "search.h"
 
 using namespace zypp;
 using namespace std;

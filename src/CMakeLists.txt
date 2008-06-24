@@ -6,39 +6,39 @@ ADD_DEFINITIONS (
 MESSAGE ( "** Locale dir is ${INSTALL_PREFIX}/share/locale" )
 
 SET (zypper_HEADERS
-  zypper.h
-  zypper-main.h
-  zypper-command.h
-  zypper-getopt.h
-  zypper-repos.h
-  zypper-misc.h
-  zypper-utils.h
-  zypper-search.h
-  zypper-info.h
-  zypper-prompt.h
-  zypper-richtext.h
-  zypper-tabulator.h
-  zypper-locks.h
-  zypper-keyring-callbacks.h
-  zypper-media-callbacks.h
-  zypper-rpm-callbacks.h
-  zypper-repo-callbacks.h
+  Zypper.h
+  main.h
+  Command.h
+  getopt.h
+  repos.h
+  misc.h
+  utils.h
+  search.h
+  info.h
+  prompt.h
+  richtext.h
+  Table.h
+  locks.h
+  callbacks/keyring.h
+  callbacks/media.h
+  callbacks/rpm.h
+  callbacks/repo.h
 )
 
 SET( zypper_SRCS
-  zypper.cc
-  zypper-main.cc
-  zypper-command.cc
-  zypper-getopt.cc
-  zypper-repos.cc
-  zypper-misc.cc
-  zypper-utils.cc
-  zypper-search.cc
-  zypper-info.cc
-  zypper-tabulator.cc
-  zypper-prompt.cc
-  zypper-richtext.cc
-  zypper-locks.cc
+  Zypper.cc
+  main.cc
+  Command.cc
+  getopt.cc
+  repos.cc
+  misc.cc
+  utils.cc
+  search.cc
+  info.cc
+  Table.cc
+  prompt.cc
+  richtext.cc
+  locks.cc
   ${zypper_HEADERS}
 )
 

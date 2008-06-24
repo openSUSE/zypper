@@ -11,9 +11,9 @@
 #include "zypp/parser/xml_escape_parser.hpp"
 #include "zypp/Capability.h"
 
-#include "zypper.h"
-#include "zypper-main.h"
-#include "zypper-utils.h"
+#include "Zypper.h"
+#include "main.h"
+#include "utils.h"
 
 
 using namespace std;

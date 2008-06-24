@@ -1,7 +1,7 @@
 #ifndef ZYPPERLOCKS_H_
 #define ZYPPERLOCKS_H_
 
-#include "zypper.h"
+#include "Zypper.h"
 
 void list_locks(Zypper & zypper);
 void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet & kinds);

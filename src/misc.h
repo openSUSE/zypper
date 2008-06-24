@@ -15,9 +15,9 @@
 #include "zypp/ResKind.h"
 #include "zypp/PoolItem.h"
 
-#include "zypper.h"
-#include "zypper-tabulator.h"
-#include "zypper-utils.h"
+#include "Zypper.h"
+#include "Table.h"
+#include "utils.h"
 
 
 zypp::ResKind string_to_kind (const std::string & skind);

@@ -3,8 +3,8 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
 
-#include "zypper-main.h"
-#include "zypper-command.h"
+#include "main.h"
+#include "Command.h"
 
 // redefine _ gettext macro defined by ZYpp
 #ifdef _

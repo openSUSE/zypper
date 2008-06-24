@@ -23,15 +23,15 @@
 
 #include "zypp/RepoInfo.h"
 
-#include "zypper.h"
-#include "zypper-main.h"
-#include "zypper-utils.h"
-#include "zypper-getopt.h"
-#include "zypper-richtext.h"
-#include "zypper-prompt.h"
+#include "Zypper.h"
+#include "main.h"
+#include "utils.h"
+#include "getopt.h"
+#include "richtext.h"
+#include "prompt.h"
 #include "output/prompt.h"
 
-#include "zypper-misc.h"
+#include "misc.h"
 
 using namespace std;
 using namespace zypp;

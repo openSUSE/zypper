@@ -6,7 +6,7 @@
 #include "zypp/Url.h"
 #include "zypp/RepoInfo.h"
 
-#include "zypper.h"
+#include "Zypper.h"
 
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
 

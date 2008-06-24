@@ -5,14 +5,14 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
 
-#include "zypper-main.h"
-#include "zypper.h"
+#include "main.h"
+#include "Zypper.h"
 
-#include "zypper-rpm-callbacks.h"
-#include "zypper-keyring-callbacks.h"
-#include "zypper-repo-callbacks.h"
-#include "zypper-media-callbacks.h"
-#include "zypper-locks-callbacks.h"
+#include "callbacks/rpm.h"
+#include "callbacks/keyring.h"
+#include "callbacks/repo.h"
+#include "callbacks/media.h"
+#include "callbacks/locks.h"
 
 using namespace std;
 

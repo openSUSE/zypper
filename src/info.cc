@@ -9,13 +9,13 @@
 #include "zypp/Product.h"
 #include "zypp/PoolQuery.h"
 
-#include "zypper.h"
-#include "zypper-main.h"
-#include "zypper-misc.h"
-#include "zypper-tabulator.h"
-#include "zypper-info.h"
-#include "zypper-richtext.h"
-#include "zypper-search.h"
+#include "Zypper.h"
+#include "main.h"
+#include "misc.h"
+#include "Table.h"
+#include "info.h"
+#include "richtext.h"
+#include "search.h"
 
 
 using namespace std;

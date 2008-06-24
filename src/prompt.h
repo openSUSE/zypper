@@ -2,7 +2,7 @@
 #define ZYPPERPROMPT_H_
 
 #include "output/prompt.h"
-#include "zypper-main.h" // for gettext macros
+#include "main.h" // for gettext macros
 
 class PromptOptions
 {

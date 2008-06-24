@@ -33,18 +33,18 @@
 
 #include "zypp/target/rpm/RpmHeader.h" // for install <.rpmURI>
 
-#include "zypper-main.h"
-#include "zypper.h"
-#include "zypper-repos.h"
-#include "zypper-misc.h"
-#include "zypper-locks.h"
+#include "main.h"
+#include "Zypper.h"
+#include "repos.h"
+#include "misc.h"
+#include "locks.h"
 
-#include "zypper-tabulator.h"
-#include "zypper-search.h"
-#include "zypper-info.h"
-#include "zypper-getopt.h"
-#include "zypper-command.h"
-#include "zypper-utils.h"
+#include "Table.h"
+#include "search.h"
+#include "info.h"
+#include "getopt.h"
+#include "Command.h"
+#include "utils.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"

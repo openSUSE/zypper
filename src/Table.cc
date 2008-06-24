@@ -5,7 +5,7 @@
 
 #include "zypp/base/Logger.h"
 
-#include "zypper-tabulator.h"
+#include "Table.h"
 using namespace std;
 #include <wchar.h>
 

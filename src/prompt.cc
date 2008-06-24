@@ -8,8 +8,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 
-#include "zypper.h"
-#include "zypper-prompt.h"
+#include "Zypper.h"
+#include "prompt.h"
 
 using namespace std;
 using namespace boost;

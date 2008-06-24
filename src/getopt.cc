@@ -1,5 +1,5 @@
-#include "zypper-getopt.h"
-#include "zypper-main.h"
+#include "getopt.h"
+#include "main.h"
 #include <iostream>
 #include "zypp/base/String.h"
 
