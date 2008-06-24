@@ -398,17 +398,17 @@ namespace zypp
     {
       if ( toTansact_r == transacts() )
         {
-          // we're already in the desired state, but in case of
-          // TRANSACT, remember a superior causer.
-          if ( transacts() && isLessThan<TransactByField>( causer_r ) )
+          // we're already in the desired state, but
+          // remember a superior causer.
+          if ( isLessThan<TransactByField>( causer_r ) )
               fieldValueAssign<TransactByField>( causer_r );
 
 	  fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again
           return true;
         }
       // Here: transact status is to be changed:
-      if (    ! fieldValueIs<TransactField>( KEEP_STATE )
-	      && isGreaterThan<TransactByField>( causer_r ) ) {
+      if ( ! fieldValueIs<TransactField>( KEEP_STATE )
+	   && isGreaterThan<TransactByField>( causer_r ) ) {
         return false;
       }
 
