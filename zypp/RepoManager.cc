@@ -1573,15 +1573,17 @@ namespace zypp
     ServiceCollector collector(services);
     Pathname dir = options.knownServicesPath;
     list<Pathname> entries;
-    
-    if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
-        ZYPP_THROW(Exception("failed to read directory"));
-
-    str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
-    for_(it, entries.begin(), entries.end() )
+    if (PathInfo(dir).isExist())
     {
-      parser::ServiceFileReader reader(*it, 
-          bind(&ServiceCollector::collect, collector, _1) );
+      if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
+          ZYPP_THROW(Exception("failed to read directory"));
+
+      str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
+      for_(it, entries.begin(), entries.end() )
+      {
+        parser::ServiceFileReader reader(*it, 
+            bind(&ServiceCollector::collect, collector, _1) );
+      }
     }
   }
 
