@@ -226,7 +226,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
 
     // nothing removed
     if (start == locks.size())
-      zypper.out().info("No lock has been removed.");
+      zypper.out().info(_("No lock has been removed."));
     //removed something
     else
       zypper.out().info(str::form(_PL(
