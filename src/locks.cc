@@ -118,7 +118,6 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
   Locks::size_type start = 0;
   try
   {
-
     Locks & locks = Locks::instance();
     locks.read();
     start = locks.size();
@@ -155,7 +154,10 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
   }
   if ( start != Locks::instance().size() )
-    zypper.out().info(_("Specified lock(-s) has been successfully added."));
+    zypper.out().info(_PL(
+      "Specified lock has been successfully added.",
+      "Specified locks have been successfully added.",
+      Locks::instance().size() - start));
 }
 
 
@@ -222,14 +224,15 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args)
 
     locks.save();
 
-    if (start==locks.size())
-    {
+    // nothing removed
+    if (start == locks.size())
       zypper.out().info("No lock has been removed.");
-      // nothing removed
-    } else {
-      zypper.out().info(str::form("Lock count has been succesfully decreased by: %lu",start-locks.size()));
-      //removed something
-    }
+    //removed something
+    else
+      zypper.out().info(str::form(_PL(
+        "%lu lock has been successfully removed.",
+        "%lu locks have been succesfully removed.",
+        start - locks.size()), start - locks.size()));
   }
   catch(const Exception & e)
   {

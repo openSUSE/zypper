@@ -17,15 +17,10 @@ namespace zypp {
   {
     virtual Action conflict( const PoolQuery& query, ConflictState state )
     {
-      //TODO localize
-      if (state==SAME_RESULTS)
-      {
-         Zypper::instance()->out().error("this query have lock same results as lock which you want remove:");
-      }
+      if (state == SAME_RESULTS)
+         Zypper::instance()->out().error("The following query locks the same packages as the lock which you want remove:");
       else
-      {
-         Zypper::instance()->out().error("this query lock some of objects, which you want unlock:");
-      }
+         Zypper::instance()->out().error(_("The following query locks some of the objects you want to unlock:"));
 
       query.serialize(std::cout);
 
@@ -38,7 +33,7 @@ namespace zypp {
   {
     virtual Action execute( const PoolQuery& query )
     {
-      Zypper::instance()->out().error("this query doesn't lock anything:");
+      Zypper::instance()->out().error(_("The following query does not lock anything:"));
 
       query.serialize(std::cout);
 
@@ -47,9 +42,8 @@ namespace zypp {
     }
   };
 
-
-
 }
+
 
 class LocksCallbacks {
   private:
