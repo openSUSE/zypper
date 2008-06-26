@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.11.7" "zypper" "System Tools"
+.TH "zypper" "8" "0.11.9" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -443,11 +443,48 @@ Multiple \-t option are allowed.
 Search only in the repository specified by the alias, number or URI.		
 Multiple \-r options are allowed.
 .TP
-\fI    \-\-sort\-by\-name\fR
+.I \ \ \ \ \-\-sort\-by\-name
 Sort packages by name (default).
 .TP
-\fI    \-\-sort\-by\-repo\fR
+.I \ \ \ \ \-\-sort\-by\-repo
 Sort packages by catalog, not by name.
+.TP
+.I \-s, \-\-details
+Show all available versions of found packages, each version in each repository
+on a separate line.
+
+.TP
+.B patterns (pt) [options] [repository] ...
+List all available patterns or all patterns from specified repositories.
+Similar to \fBzypper search -s -t pattern\fR
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Just another means to specify repositories.
+.TP
+.I \-i, \-\-installed\-only
+Show only installed patterns.
+.TP
+.I \-u, \-\-uninstalled\-only
+Show only patterns which are not installed.
+
+.TP
+.B products (pd) [options] [repository] ...
+List all available products or all products from specified repositories.
+Similar to \fBzypper search -s -t product\fR, but shows also the type of the product
+(base, add-on).
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Just another means to specify repositories.
+.TP
+.I \-i, \-\-installed\-only
+Show only installed products.
+.TP
+.I \-u, \-\-uninstalled\-only
+Show only products which are not installed.
+
+.TP
+.B what-provides (wp) <capability>
+List all packages providing the specified capability. See also the \fBinstall\fR command for hint about capabilities.
 
 .SS Patch Management
 
@@ -661,6 +698,36 @@ Clean repository raw metadata cache instead of package cache.
 .TP
 .I \-a, \-\-all
 Clean both repository metadata and package caches.
+
+.SS Package Locks Management
+Package locks server the purpose of preventing changes to the set of installed
+packages on the system. The locks are stored in form of a \fIquery\fR in
+/etc/zypp/locks file (see also locks(5)).
+Packages matching this query are then forbidden to change their installed
+status; an installed package can't be removed, not installed package can't be installed.
+When requesting to install or remove such locked package, you will get a dependency problem
+dialog.
+
+.TP
+.B locks (ll)
+List currently active package locks.
+
+.TP
+.B addlock (al) [options] <package-name>
+Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?'
+wildcard characters. 
+
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Restrict the lock to the specified repository.
+.TP
+.I \-t, \-\-type <type>
+Type of resolvable (package, patch, pattern, product). Default: package.
+
+.TP
+.B removelock (rl) <lock-number|package-name>
+Remove specified package lock. Specify the lock to remove by its number obtained with 'zypper locks'
+or by the package name.
 
 .SH "GLOBAL OPTIONS"
 
@@ -992,6 +1059,8 @@ Duncan Mac-Vicar <dmacvicar@suse.de>
 Jan Kupec <jkupec@suse.cz>
 .br
 Stanislav Visnovsky <visnov@suse.cz>
+.br
+Josef Reidinger <jreidinger@suse.cz>
 
 .SH "SEE ALSO"
 .LP

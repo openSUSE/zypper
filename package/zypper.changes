@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jun 26 14:41:55 CEST 2008 - jkupec@suse.cz
+
+- zypp-refresh-wrapper: don't close stderr (bnc #398530)
+- set correct solver flags in 'verify' and '--debug-solver'
+- r10469
+- 0.11.9
+
+-------------------------------------------------------------------
 Fri Jun 20 13:21:51 CEST 2008 - jkupec@suse.cz
 
 - adapted to new patch message and script handling (bnc #401220)
