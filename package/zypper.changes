@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Jun 26 14:55:25 CEST 2008 - jkupec@suse.cz
+
+- zypp-refresh-wrapper: don't close stderr (#398530)
+- r10471
+
+-------------------------------------------------------------------
+Wed Jun 25 14:30:29 CEST 2008 - jkupec@suse.cz
+
+- 'xu' removed, replaced by
+  zypper --xmlout install -t package -t patch. r10470
+- source tree cleanup. r10454-10456
+
+-------------------------------------------------------------------
 Fri Jun 20 13:52:31 CEST 2008 - jkupec@suse.cz
 
 - adapted to new patch message and script handling (#401220)
