@@ -42,7 +42,6 @@ const ZypperCommand ZypperCommand::PRODUCTS(ZypperCommand::PRODUCTS_e);
 const ZypperCommand ZypperCommand::WHAT_PROVIDES(ZypperCommand::WHAT_PROVIDES_e);
 //const ZypperCommand ZypperCommand::WHAT_REQUIRES(ZypperCommand::WHAT_REQUIRES_e);
 //const ZypperCommand ZypperCommand::WHAT_CONFLICTS(ZypperCommand::WHAT_CONFLICTS_e);
-const ZypperCommand ZypperCommand::XML_LIST_UPDATES_PATCHES(ZypperCommand::XML_LIST_UPDATES_PATCHES_e);
 
 const ZypperCommand ZypperCommand::ADD_LOCK(ZypperCommand::ADD_LOCK_e);
 const ZypperCommand ZypperCommand::REMOVE_LOCK(ZypperCommand::REMOVE_LOCK_e);
@@ -105,7 +104,6 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["what-provides"] = _table["wp"] = ZypperCommand::WHAT_PROVIDES_e;
     //_table["what-requires"] = _table["wr"] = ZypperCommand::WHAT_REQUIRES_e;
     //_table["what-conflicts"] = _table["wc"] = ZypperCommand::WHAT_CONFLICTS_e;
-    _table["xml-updates"] = _table["xu"] = ZypperCommand::XML_LIST_UPDATES_PATCHES_e;
 
     _table["addlock"] = _table["al"] = _table["lock-add"] = _table["la"] = ZypperCommand::ADD_LOCK_e;
     _table["removelock"] = _table["rl"] = _table["lock-delete"] = _table["ld"] = ZypperCommand::REMOVE_LOCK_e;

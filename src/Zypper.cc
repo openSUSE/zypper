@@ -1637,26 +1637,6 @@ void Zypper::processCommandOptions()
     break;
   }
 
-  case ZypperCommand::XML_LIST_UPDATES_PATCHES_e:
-  {
-    static struct option xml_updates_options[] = {
-      {"repo", required_argument, 0, 'r'},
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = xml_updates_options;
-    _command_help = str::form(_(
-      "xml-updates\n"
-      "\n"
-      "Show updates and patches in xml format. This command is deprecated and will"
-      " eventually be dropped in favor of '%s'.\n"
-      "\n"
-      "  Command options:\n"
-      "-r, --repo <alias|#|URI>  Work only with updates from the specified repository.\n"
-    ), "zypper --xmlout install -t package -t patch");
-    break;
-  }
-
   case ZypperCommand::ADD_LOCK_e:
   {
     static struct option options[] =
@@ -2885,32 +2865,6 @@ void Zypper::doCommand()
     resolve(*this);
     
     list_updates(*this, kinds, best_effort);
-
-    break;
-  }
-
-  // -----------------( xml list updates and patches )------------------------
-
-  //! \todo remove this command
-  case ZypperCommand::XML_LIST_UPDATES_PATCHES_e:
-  {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
-    init_target(*this);
-    init_repos(*this);
-    if (exitCode() != ZYPPER_EXIT_OK)
-      return;
-    load_resolvables(*this);
-    // needed to compute status of PPP
-    resolve(*this);
-
-    cout << "<update-status version=\"0.6\">" << endl;
-    cout << "<update-list>" << endl;
-    ResKindSet kinds; kinds.insert(ResTraits<Package>::kind);
-    if (!xml_list_patches ())	// Only list updates if no
-      xml_list_updates (kinds);	// affects-pkg-mgr patches are available
-    cout << "</update-list>" << endl;
-    cout << "</update-status>" << endl;
 
     break;
   }
