@@ -102,19 +102,19 @@ namespace zypp
   void Resolver::removeNoObsoletesCapability (const Capability & capability)
   { _pimpl->removeNoObsoletesCapability (capability); }
   CapabilitySet Resolver::noObsoletesCapability()
-  { _pimpl->noObsoletesCapability(); }	
+  { return _pimpl->noObsoletesCapability(); }	
   void Resolver::addNoObsoletesItem (const PoolItem & item)
   { _pimpl->addNoObsoletesItem (item); }
   void Resolver::removeNoObsoletesItem (const PoolItem & item)
   { _pimpl->removeNoObsoletesItem (item); }
   solver::detail::PoolItemSet Resolver::noObsoletesItem()
-  { _pimpl->noObsoletesItem(); }	
+  { return _pimpl->noObsoletesItem(); }	
   void Resolver::addNoObsoletesName (const std::string & name)
   { _pimpl->addNoObsoletesName (name); }
   void Resolver::removeNoObsoletesName (const std::string & name)
   { _pimpl->removeNoObsoletesName (name); }	
   solver::detail::ObsoleteStrings Resolver::noObsoletesString ()
-  { _pimpl->noObsoletesString (); }	
+  { return _pimpl->noObsoletesString (); }	
   
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraRequire( capability ); }
