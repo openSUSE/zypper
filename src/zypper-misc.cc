@@ -1569,6 +1569,7 @@ static bool verify(Zypper & zypper)
   // don't force aggressive solutions
   God->resolver()->setForceResolve(false); //! \todo move to set_force_resolution()
   set_no_recommends(zypper);
+  set_ignore_recommends_of_installed(zypper);
   DBG << "Calling the solver to verify system..." << endl;
   return God->resolver()->verifySystem();
 }
@@ -1577,6 +1578,7 @@ static void make_solver_test_case(Zypper & zypper)
 {
   set_force_resolution(zypper);
   set_no_recommends(zypper);
+  set_ignore_recommends_of_installed(zypper);
 
   string testcase_dir("/var/log/zypper.solverTestCase");
 
