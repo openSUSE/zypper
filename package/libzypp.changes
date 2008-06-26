@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jun 26 12:07:33 CEST 2008 - schubi@suse.de
+
+- version 5.0.1
+- revision 10464 
+
+-------------------------------------------------------------------
 Thu Jun 19 17:55:35 CEST 2008 - ma@suse.de
 
 - Handle new patch messages and scripts in commit. Provide callbacks
