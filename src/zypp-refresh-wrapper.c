@@ -34,7 +34,7 @@ int main (void)
 
   /* see http://rechner.lst.de/~okir/blackhats/node35.html */
   int fd = getdtablesize();
-  while (fd-- > 2)
+  while (--fd > 2)
       close(fd);
 
   /* cd / to avoid NFS problems */
