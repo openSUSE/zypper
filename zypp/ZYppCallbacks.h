@@ -405,7 +405,7 @@ namespace zypp
       /** Display \c patch->message().
        * Return \c true to continue, \c false to abort commit.
       */
-      virtual bool show( Patch::constPtr /*patch*/ )
+      virtual bool show( Patch::constPtr & /*patch*/ )
       { return true; }
     };
 
