@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Jun 30 10:28:27 CEST 2008 - ma@suse.de
+
+- Fix permanent duplication of gpg keys in the rpm database. Also 
+  retrieve correct creation and expire dates. (bnc #401259)
+- Invoke gpg with --homdir, otherwise command fails if executed 
+  within a wrapper. (bnc #401259)
+- revision 10487
+
+-------------------------------------------------------------------
 Thu Jun 26 12:07:33 CEST 2008 - schubi@suse.de
 
 - version 5.0.1

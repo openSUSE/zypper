@@ -1001,21 +1001,34 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   // check if the key is already in the rpm database and just
   // return if it does.
   set<Edition> rpm_keys = pubkeyEditions();
+  string keyshortid = pubkey_r.id().substr(8,8);
+  MIL << "Comparing '" << keyshortid << "' to: ";
   for ( set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
     string id = str::toUpper( (*it).version() );
-    string keyshortid = pubkey_r.id().substr(8,8);
-    MIL << "Comparing '" << id << "' to '" << keyshortid << "'" << endl;
+    MIL <<  ", '" << id << "'";
     if ( id == keyshortid )
     {
-      // they match id
-      // FIXME id is not sufficient?
-      MIL << "Key " << pubkey_r << " is already in the rpm trusted keyring." << endl;
-      return;
+        // they match id
+        // now check if timestamp is different
+        Date date = Date(str::strtonum<Date::ValueType>("0x" + (*it).release()));
+        if (  date == pubkey_r.created() )
+        {
+                
+            MIL << endl << "Key " << pubkey_r << " is already in the rpm trusted keyring." << endl;
+            return;
+        }
+        else
+        {
+            MIL << endl << "Key " << pubkey_r << " has another version in keyring. ( " << date << " & " << pubkey_r.created() << ")" << endl;
+
+        }
+            
     }
   }
   // key does not exists, lets import it
-
+  MIL <<  endl;
+    
   RpmArgVec opts;
   opts.push_back ( "--import" );
   opts.push_back ( "--" );
@@ -2097,17 +2110,28 @@ void RpmDb::removePackage( const string & name_r, unsigned flags )
 
   report->start( name_r );
 
-  try
-  {
-    doRemovePackage(name_r, flags, report);
-  }
-  catch (RpmException & excpt_r)
-  {
-    report->problem(excpt_r); //! partial fix to bug #388810, \todo allow to abort/retry failed rpm removal 
-    report->finish(excpt_r);
-    ZYPP_RETHROW(excpt_r);
-  }
-  report->finish();
+  do
+    try
+    {
+      doRemovePackage(name_r, flags, report);
+      report->finish();
+      break;
+    }
+    catch (RpmException & excpt_r)
+    {
+      RpmRemoveReport::Action user = report->problem( excpt_r );
+
+      if ( user == RpmRemoveReport::ABORT )
+      {
+        report->finish( excpt_r );
+        ZYPP_RETHROW(excpt_r);
+      }
+      else if ( user == RpmRemoveReport::IGNORE )
+      {
+        break;
+      }
+    }
+  while (true);
 }
 
 

@@ -439,6 +439,57 @@ namespace zypp
           }
         return ret;
       }
+
+    /** Split \a line_r into fields.
+     * Any single character in \a sepchars_r is treated as a
+     * field separator. The words are passed to OutputIterator
+     * \a result_r.
+     * \code
+     * ""        -> words 0
+     * ":"       -> words 2  |||
+     * "a"       -> words 1  |a|
+     * ":a"      -> words 2  ||a|
+     * "a:"      -> words 2  |a||
+     * ":a:"     -> words 3  ||a||
+     *
+     * \endcode
+    *
+     * \code
+     * std::vector<std::string> words;
+     * str::split( "some line", std::back_inserter(words) )
+     * \endcode
+     *
+    */
+    template<class _OutputIterator>
+      unsigned splitFields( const C_Str &   line_r,
+                            _OutputIterator result_r,
+                            const C_Str &   sepchars_r = ":" )
+      {
+        const char * beg = line_r;
+        const char * cur = beg;
+        unsigned ret = 0;
+        for ( beg = cur; *beg; beg = cur, ++result_r )
+          {
+            // skip non sepchars
+            while( *cur && !::strchr( sepchars_r, *cur ) )
+              ++cur;
+            // build string
+            *result_r = std::string( beg, cur-beg );
+            ++ret;
+            // skip sepchar
+            if ( *cur )
+            {
+              ++cur;
+              if ( ! *cur )                // ending with sepchar
+              {
+                *result_r = std::string(); // add final empty field
+                ++ret;
+                break;
+              }
+            }
+          }
+        return ret;
+      }
     //@}
 
     ///////////////////////////////////////////////////////////////////

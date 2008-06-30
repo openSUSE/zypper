@@ -249,6 +249,7 @@ namespace zypp
     for (list<PublicKey>::const_iterator it = keys.begin(); it != keys.end(); it++)
     {
       if ( id == (*it).id() )
+        
         return true;
     }
     return false;
@@ -339,6 +340,19 @@ namespace zypp
     {
       PublicKey key = exportKey( id, trustedKeyRing() );
 
+      // lets look if there is an updated key in the
+      // general keyring
+      if ( publicKeyExists( id, generalKeyRing() ) )
+      {
+        PublicKey untkey = exportKey( id, generalKeyRing() );
+        if ( untkey.created() > key.created() )
+        {
+          MIL << "Key " << key << " was updated. Saving new version into trusted keyring." << endl;
+          importKey( untkey, true );
+          key = untkey;
+        }
+      }
+       
       MIL << "Key " << id << " " << key.name() << " is trusted" << endl;
       // it exists, is trusted, does it validates?
       if ( verifyFile( file, signature, trustedKeyRing() ) )
