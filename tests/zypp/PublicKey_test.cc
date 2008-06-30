@@ -8,6 +8,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Date.h"
 
 #include <boost/test/auto_unit_test.hpp>
 
@@ -254,6 +255,7 @@ BOOST_AUTO_TEST_CASE(publickey_test)
   BOOST_CHECK_EQUAL( k2.id(), "A84EDAE89C800ACA" );
   BOOST_CHECK_EQUAL( k2.name(), "SuSE Package Signing Key <build@suse.de>" );
   BOOST_CHECK_EQUAL( k2.fingerprint(), "79C179B2E1C820C1890F9994A84EDAE89C800ACA" );
+  BOOST_CHECK_EQUAL( k2.created(), zypp::Date(1087899198) );
   BOOST_REQUIRE( k2.path() != Pathname() );
   BOOST_REQUIRE( k2 == k2 );
   // test for a empty key

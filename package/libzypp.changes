@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 30 23:55:20 CEST 2008 - dmacvicar@suse.de
+
+- forward port add message attribute to patches.
+- version 5.0.2
+
+-------------------------------------------------------------------
 Mon Jun 30 10:28:27 CEST 2008 - ma@suse.de
 
 - Fix permanent duplication of gpg keys in the rpm database. Also 

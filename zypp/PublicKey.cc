@@ -217,10 +217,7 @@ namespace zypp
 
   PublicKey::PublicKey( const Pathname &file )
   : _pimpl( new Impl(file) )
-  {
-    MIL << *this << endl;
-  }
-
+  {}
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : PublicKey::~PublicKey
