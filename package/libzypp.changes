@@ -2,6 +2,8 @@
 Mon Jun 30 23:55:20 CEST 2008 - dmacvicar@suse.de
 
 - forward port add message attribute to patches.
+- port import newer keys if a trusted key is updated
+- (bnc#393160)
 - version 5.0.2
 
 -------------------------------------------------------------------
