@@ -249,7 +249,7 @@ namespace zypp
     for (list<PublicKey>::const_iterator it = keys.begin(); it != keys.end(); it++)
     {
       if ( id == (*it).id() )
-        
+
         return true;
     }
     return false;
@@ -344,15 +344,18 @@ namespace zypp
       // general keyring
       if ( publicKeyExists( id, generalKeyRing() ) )
       {
+        // bnc #393160: Comment #30: Compare at least the fingerprint
+        // in case an attacker created a key the the same id.
         PublicKey untkey = exportKey( id, generalKeyRing() );
-        if ( untkey.created() > key.created() )
+        if ( untkey.fingerprint() == key.fingerprint()
+             && untkey.created() > key.created() )
         {
           MIL << "Key " << key << " was updated. Saving new version into trusted keyring." << endl;
           importKey( untkey, true );
           key = untkey;
         }
       }
-       
+
       MIL << "Key " << id << " " << key.name() << " is trusted" << endl;
       // it exists, is trusted, does it validates?
       if ( verifyFile( file, signature, trustedKeyRing() ) )

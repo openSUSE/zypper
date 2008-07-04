@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul  4 17:19:24 CEST 2008 - ma@suse.de
+
+- Also check if the fingerprint matches before importing updated keys.
+  (bnc #393160)
+- revision 10500
+
+-------------------------------------------------------------------
 Mon Jun 30 23:55:20 CEST 2008 - dmacvicar@suse.de
 
 - forward port add message attribute to patches.
@@ -9,9 +16,9 @@ Mon Jun 30 23:55:20 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Mon Jun 30 10:28:27 CEST 2008 - ma@suse.de
 
-- Fix permanent duplication of gpg keys in the rpm database. Also 
+- Fix permanent duplication of gpg keys in the rpm database. Also
   retrieve correct creation and expire dates. (bnc #401259)
-- Invoke gpg with --homdir, otherwise command fails if executed 
+- Invoke gpg with --homdir, otherwise command fails if executed
   within a wrapper. (bnc #401259)
 - revision 10487
 
@@ -19,22 +26,22 @@ Mon Jun 30 10:28:27 CEST 2008 - ma@suse.de
 Thu Jun 26 12:07:33 CEST 2008 - schubi@suse.de
 
 - version 5.0.1
-- revision 10464 
+- revision 10464
 
 -------------------------------------------------------------------
 Thu Jun 19 17:55:35 CEST 2008 - ma@suse.de
 
 - Handle new patch messages and scripts in commit. Provide callbacks
-  to display the patch messages and give visual feedback on script 
+  to display the patch messages and give visual feedback on script
   execution. (bnc #401220)
 - revision 10411
 
 -------------------------------------------------------------------
 Thu Jun 19 17:35:59 CEST 2008 - ma@suse.de
 
-- Fix wrong parenthesis causing bug 399320 
-- version 
-- revision 
+- Fix wrong parenthesis causing bug 399320
+- version
+- revision
 
 -------------------------------------------------------------------
 Tue Jun 10 09:52:03 CEST 2008 - jreidinger@suse.cz
@@ -42,12 +49,12 @@ Tue Jun 10 09:52:03 CEST 2008 - jreidinger@suse.cz
 - improve performance of gsub
 - change replace_all to replaceAll (same name convency)
 - add tests for gsub and replaceAll
-- revision 10366 
+- revision 10366
 
 -------------------------------------------------------------------
 Fri Jun  6 13:29:59 CEST 2008 - ma@suse.de
 
-- Handle application/x-redhat-package-manager in package-manager.desktop 
+- Handle application/x-redhat-package-manager in package-manager.desktop
   (bnc #391183)
 - revision 10361
 
@@ -61,13 +68,13 @@ Thu Jun  5 18:01:15 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Wed Jun  4 14:57:13 CEST 2008 - ma@suse.de
 
-- Fix crash when requesting disk usage without a target loaded. (bnc #396755) 
+- Fix crash when requesting disk usage without a target loaded. (bnc #396755)
 - revision 10340
 
 -------------------------------------------------------------------
 Wed Jun  4 14:05:09 CEST 2008 - ma@suse.de
 
-- Fix memory corruption in curl media handler (bnc #396979) 
+- Fix memory corruption in curl media handler (bnc #396979)
 - revision 10338
 
 -------------------------------------------------------------------
@@ -82,7 +89,7 @@ Tue Jun  3 20:00:00 CEST 2008 - ma@suse.de
 Tue Jun  3 15:40:37 CEST 2008 - jreidinger@suse.cz
 
 - allow aborting progress during removing packages. (bnc #389238)
-- revision 10331 
+- revision 10331
 
 -------------------------------------------------------------------
 Mon Jun  2 15:31:36 CEST 2008 - schubi@suse.de
@@ -90,12 +97,12 @@ Mon Jun  2 15:31:36 CEST 2008 - schubi@suse.de
 - New option for ignoring Obsoletes. This is used for installing more than
   one pacakges with the same name but different versions.
   Often used by kernel.
-- r 10299 
+- r 10299
 
 -------------------------------------------------------------------
 Sun Jun  1 23:14:34 CEST 2008 - - ma@suse.de
 
-- Revert inappropriate Selectable cleanup. Fix Selectable 
+- Revert inappropriate Selectable cleanup. Fix Selectable
   status computation. Unmaintained packages were wrongly
   reported as unsinstalled. (bnc #394630)
 - version 5.0.0 (4.x continued in SuSE-Linux-11_0-Branch)
@@ -138,7 +145,7 @@ Wed May 28 15:23:44 CEST 2008 - schubi@suse.de
 
 - SOLVER_ERASE_SOLVABLE_NAME: As we do not know, if this request has come
   from resolvePool or resolveQueue we will have to take care for both
-  cases. (bnc#393969) 
+  cases. (bnc#393969)
 - r 10252
 
 -------------------------------------------------------------------
@@ -157,7 +164,7 @@ Mon May 26 11:48:35 CEST 2008 - schubi@suse.de
 
 - Do not regard packages with the same name while upgrading obsoleted
   packages (bnc#394367)
-- r 10219 
+- r 10219
 
 -------------------------------------------------------------------
 Sat May 24 01:23:44 CEST 2008 - dmacvicar@suse.de
@@ -177,16 +184,16 @@ Fri May 23 15:52:20 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Fri May 23 14:42:34 CEST 2008 - schubi@suse.de
 
-- Added IgnoreAlreadyRecommended flag. So recomments/suggest will 
+- Added IgnoreAlreadyRecommended flag. So recomments/suggest will
   be ignored for already INSTALLED packages (bnc #389694)
-- r 10202 
+- r 10202
 
 -------------------------------------------------------------------
 Fri May 23 10:22:47 CEST 2008 - schubi@suse.de
 
 - Packages which obsoletes and do NOT required other installed
   packages will be installed if no other packages obsolete the installed package too.
-- r 10196 
+- r 10196
 
 -------------------------------------------------------------------
 Thu May 22 02:22:29 CEST 2008 - dmacvicar@suse.de
@@ -206,13 +213,13 @@ Wed May 21 13:50:00 CEST 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Wed May 21 11:37:23 CEST 2008 - schubi@suse.de
 
-- added onlyRequires in the testcase (bnc #389184) 
+- added onlyRequires in the testcase (bnc #389184)
 
 -------------------------------------------------------------------
 Tue May 20 12:12:27 CEST 2008 - jreidinger@suse.cz
 
 - allow installation and refreshing from repository with alias that
-  contains ' or " (bnc #392426) 
+  contains ' or " (bnc #392426)
 - r10158
 
 -------------------------------------------------------------------
@@ -225,7 +232,7 @@ Mon May 19 21:11:41 CEST 2008 - jkupec@suse.cz
 Mon May 19 18:13:19 CEST 2008 - schubi@suse.de
 
 - Resetting Delete Details in ResStatus correctly (bnc #391785)
-- r 10145 
+- r 10145
 
 -------------------------------------------------------------------
 Mon May 19 11:47:06 CEST 2008 - dmacvicar@suse.de
@@ -239,7 +246,7 @@ Fri May 16 16:56:04 CEST 2008 - schubi@suse.de
 
 - Added new calls : isInstalledBy (const PoolItem item);
                     installs (const PoolItem item);
-- r 10125 
+- r 10125
 - 4.23.0
 
 -------------------------------------------------------------------
@@ -253,22 +260,22 @@ Fri May 16 16:49:04 CEST 2008 - jreidinger@suse.cz
 Fri May 16 09:59:09 CEST 2008 - jreidinger@suse.cz
 
 - throw more describing exception when repo probing failed
-  (bnc #389690) 
+  (bnc #389690)
 - revision 10118
 
 -------------------------------------------------------------------
 Thu May 15 15:15:59 CEST 2008 - jreidinger@suse.cz
 
 - allow call only merge old locks and newly added/removed without
-  saving it to file 
-- -revision 10104 
+  saving it to file
+- -revision 10104
 
 -------------------------------------------------------------------
 Tue May 13 17:37:11 CEST 2008 - dmacvicar@suse.de
 
 - report non packages as keep installed if satisfied to the
   user interace (Selectables)
-- 4.21.3 
+- 4.21.3
 
 -------------------------------------------------------------------
 Tue May 13 15:50:28 CEST 2008 - jkupec@suse.cz
@@ -304,11 +311,11 @@ Fri May  9 23:15:53 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri May  9 21:28:42 CEST 2008 - ma@suse.de
 
-- Add zypp.conf option configdir (/etc/zypp) and arrange 
+- Add zypp.conf option configdir (/etc/zypp) and arrange
   all config files and directories to follow {configdir}
   per default.
-- Fix zypp-query-pool to print satisfied products and additional 
-  products defined in {configdir}/products.d for registration. 
+- Fix zypp-query-pool to print satisfied products and additional
+  products defined in {configdir}/products.d for registration.
   (bnc #385868)
 - version 4.21.0
 - revision 10029
@@ -316,7 +323,7 @@ Fri May  9 21:28:42 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri May  9 15:30:40 CEST 2008 - jreidinger@suse.cz
 
-- implement remove duplicate entries in lock file (bnc#385967) 
+- implement remove duplicate entries in lock file (bnc#385967)
 
 -------------------------------------------------------------------
 Fri May  9 15:15:32 CEST 2008 - ma@suse.de
@@ -334,7 +341,7 @@ Thu May  8 18:13:54 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Thu May  8 16:33:37 CEST 2008 - ma@suse.de
 
-- Support optional root argument to RepoManagerOptions, to prefix all 
+- Support optional root argument to RepoManagerOptions, to prefix all
   path names taken from ZConfig. (bnc #388265)
 - version 4.20.0
 - revision 9993
@@ -343,19 +350,19 @@ Thu May  8 16:33:37 CEST 2008 - ma@suse.de
 Thu May  8 14:21:51 CEST 2008 - schubi@suse.de
 
 - new solution action for removing requirements/conflicts (bnc #387631)
-- revision 9988 
+- revision 9988
 
 -------------------------------------------------------------------
 Thu May  8 10:56:49 CEST 2008 - ma@suse.de
 
-- Provide enumerated patch category 'Patch::categoryEnum()' (bnc #159100) 
+- Provide enumerated patch category 'Patch::categoryEnum()' (bnc #159100)
 - revision 9984
 
 -------------------------------------------------------------------
 Wed May  7 13:52:24 CEST 2008 - schubi@suse.de
 
 - DistUpgrade: searching for providers -> regarding name onl
-- r 9977 
+- r 9977
 
 -------------------------------------------------------------------
 Tue May  6 17:35:59 CEST 2008 - dmacvicar@suse.de
@@ -378,17 +385,17 @@ Mon May  5 14:08:20 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Mon May  5 09:55:29 CEST 2008 - schubi@suse.de
 
-- Switch off the upgrade mode of the         
-  SAT solver cause the packages have already been evaluated by    
+- Switch off the upgrade mode of the
+  SAT solver cause the packages have already been evaluated by
   the distupgrade machanism of libzypp. (bnc #386375)
-- rev 9943 
+- rev 9943
 
 -------------------------------------------------------------------
 Fri May  2 16:36:04 CEST 2008 - jreidinger@suse.cz
 
 - release file after copy to cache as soon as possible.
   (bnc #381311)
-- r9940 
+- r9940
 
 -------------------------------------------------------------------
 Fri May  2 16:28:05 CEST 2008 - schubi@suse.de
@@ -396,28 +403,28 @@ Fri May  2 16:28:05 CEST 2008 - schubi@suse.de
 - Bugfix: keep states by user has been removed it the
   package has not been installed BUT has been recommended by another package.
   (bnc #385832)
-- rev 9938 
+- rev 9938
 
 -------------------------------------------------------------------
 Fri May  2 12:19:22 CEST 2008 - jreidinger@suse.cz
 
 - add isLocal function to Url which say if scheme is local or
-  internet. 
+  internet.
 - r9932
 
 -------------------------------------------------------------------
 Fri May  2 09:36:18 CEST 2008 - jreidinger@suse.cz
 
 - cache decision for repository depend on his url.
-- http,ftp and smb cache packages. 
+- http,ftp and smb cache packages.
 - revision 9929
 
 -------------------------------------------------------------------
 Thu May  1 00:50:51 CEST 2008 - ma@suse.de
 
 - Load and maintain persistent hard locks stored in /etc/zypp/locks.
-  Locks are loaded together with the target, and changes are writen 
-  back on commit. zypp.conf option locksfile.apply can be used to turn 
+  Locks are loaded together with the target, and changes are writen
+  back on commit. zypp.conf option locksfile.apply can be used to turn
   this feature on or off. (FATE #120352)
 - version 4.18.0
 - revision 9927
@@ -425,7 +432,7 @@ Thu May  1 00:50:51 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Apr 30 16:27:49 CEST 2008 - ma@suse.de
 
-- Add zypp.conf option solvfilesdir: Path where the repo solv files 
+- Add zypp.conf option solvfilesdir: Path where the repo solv files
   are created. Default value: {cachedir}/solv.
 - Target and repositories now save their solvfiles below {solvfilesdir}
   in directories named after the repositories alias.
@@ -442,7 +449,7 @@ Wed Apr 30 14:19:16 CEST 2008 - jkupec@suse.cz
 Tue Apr 29 16:37:19 CEST 2008 - schubi@suse.de
 
 - cleanup in return values of doUpgrade and doUpdate
-- r9886 
+- r9886
 - 4.17.0
 
 -------------------------------------------------------------------
@@ -460,7 +467,7 @@ Mon Apr 28 15:40:09 CEST 2008 - mvidner@suse.cz
 -------------------------------------------------------------------
 Mon Apr 28 15:25:46 CEST 2008 - schubi@suse.de
 
-- added translations 
+- added translations
 
 -------------------------------------------------------------------
 Mon Apr 28 11:15:47 CEST 2008 - jkupec@suse.cz
@@ -471,7 +478,7 @@ Mon Apr 28 11:15:47 CEST 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Fri Apr 25 16:12:12 CEST 2008 - ma@suse.de
 
-- Prevent target::unload from creating a system repo in order 
+- Prevent target::unload from creating a system repo in order
   to unload it. (bnc 382297)
 - version 4.15.2
 - revision 9822
@@ -479,9 +486,9 @@ Fri Apr 25 16:12:12 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Fri Apr 25 14:15:17 CEST 2008 - ma@suse.de
 
-- Prevent deselected or deleted items from being re-selected due to 
-  recommends (aka. persistent soft locks). Unlike hard locked, those 
-  items will be automatically selected if required. The list of soft 
+- Prevent deselected or deleted items from being re-selected due to
+  recommends (aka. persistent soft locks). Unlike hard locked, those
+  items will be automatically selected if required. The list of soft
   locked items is stored in /var/lib/zypp/SoftLocks.
 - version 4.15.1
 - revision 9818
@@ -497,9 +504,9 @@ Wed Apr 23 22:24:00 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Apr 23 21:12:56 CEST 2008 - ma@suse.de
 
-- Support dependencies requiring a specific architecture: 
-  "name[.arch] [op edition]". See class Capability for details 
-  about how to construct dependencies. (bnc #305445)  
+- Support dependencies requiring a specific architecture:
+  "name[.arch] [op edition]". See class Capability for details
+  about how to construct dependencies. (bnc #305445)
 - version 4.15.0
 - revision 9805
 
@@ -514,7 +521,7 @@ Tue Apr 22 15:44:34 CEST 2008 - jreidinger@suse.cz
 
 - change locks api -
 - make more functions const
-- replace add/remove by selectable to add/remove by ident or name and kind 
+- replace add/remove by selectable to add/remove by ident or name and kind
 - rename iterator to const_iterator to avoid confusion
 - revision 9781
 
@@ -522,7 +529,7 @@ Tue Apr 22 15:44:34 CEST 2008 - jreidinger@suse.cz
 Tue Apr 22 13:55:14 CEST 2008 - schubi@suse.de
 
 - Do architecture changes while "dup" in the external distribution
-  upgrade ONLY. bnc #382274 
+  upgrade ONLY. bnc #382274
 - Added "ignore" to the solutions
 - Added "self-conflicts" to the solution
 - added new solver mechanism "resolveQueue"
@@ -539,8 +546,8 @@ Tue Apr 22 10:33:03 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Mon Apr 21 15:38:10 CEST 2008 - ma@suse.de
 
-- Added Target::release(), returning the targets distribution 
-  release string. 
+- Added Target::release(), returning the targets distribution
+  release string.
 - revision 9761
 
 -------------------------------------------------------------------
@@ -566,7 +573,7 @@ Thu Apr 17 16:29:15 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Wed Apr 16 15:00:19 CEST 2008 - ma@suse.de
 
-- Disable fast creation of @System.solv. It may produce wrong results 
+- Disable fast creation of @System.solv. It may produce wrong results
   e.g. after a rebuilddb.
 - version 4.13.1
 - revision 9666
@@ -586,7 +593,7 @@ Tue Apr 15 12:57:42 CEST 2008 - jreidinger@suse.cz
 - save do nothing if no locks added/removed
 - fix bug with multiple save lock
 - don't save same query multiple times
-- improve tests 
+- improve tests
 - revision 9644
 
 -------------------------------------------------------------------
@@ -595,7 +602,7 @@ Tue Apr 15 09:34:29 CEST 2008 - schubi@suse.de
 - added new translations
 - activate zypp-query-pool
 - Revision 9637
-- 4.12.1 
+- 4.12.1
 
 -------------------------------------------------------------------
 Tue Apr 15 00:54:07 CEST 2008 - jkupec@suse.cz
@@ -645,8 +652,8 @@ Fri Apr 11 18:02:14 CEST 2008 - kkaempf@suse.de
 Fri Apr 11 14:43:05 CEST 2008 - ma@suse.de
 
 - Fix SolvIterMixin to avioid multiple visits of the same Selectable.
-- Add Resolvable::poolItem() providing access to the corresponding 
-  PoolItem. API to query isRelevant/isSatisfied/isBroken was moved 
+- Add Resolvable::poolItem() providing access to the corresponding
+  PoolItem. API to query isRelevant/isSatisfied/isBroken was moved
   to PoolItem.
 - Add ResPool::satisfiedProductsBegin/End iterator over all products
   whose dependencies are satisfied. This reflects the status determined
@@ -657,19 +664,19 @@ Fri Apr 11 14:43:05 CEST 2008 - ma@suse.de
 Fri Apr 11 12:07:47 CEST 2008 - jreidinger@suse.cz
 
 - switch to new locks api
-- revision 9524 
+- revision 9524
 
 -------------------------------------------------------------------
 Wed Apr  9 21:24:54 CEST 2008 - ma@suse.de
 
 - Enable ui::Selectable lookup by Solvable/PoolItem in ResPoolProxy.
-- Add SolvIterMixin: Base class providing PoolItem_iterator and 
+- Add SolvIterMixin: Base class providing PoolItem_iterator and
   Selectable_iterator iterator types based on a Solvable iterator.
 - Enhanced WhatProvides and SolvableSet to PoolItem_iterator to offer
   PoolItem_iterator and Selectable_iterator.
-- Add Solvable::SplitIdent: Helper class that splits an identifier 
+- Add Solvable::SplitIdent: Helper class that splits an identifier
   into kind and name.
-- Provide methods Pattern::contents returning a collection of packages 
+- Provide methods Pattern::contents returning a collection of packages
   associated with the pattern/patch.
 - revision 9496
 
@@ -677,18 +684,18 @@ Wed Apr  9 21:24:54 CEST 2008 - ma@suse.de
 Tue Apr  8 15:50:48 CEST 2008 - jreidinger@suse.cz
 
 - add comparing to PoolQuery
-- revision 9466 
+- revision 9466
 
 -------------------------------------------------------------------
 Tue Apr  8 13:18:30 CEST 2008 - jreidinger@suse.cz
 
-- move RepoInfo to universal RepoException. This can enable more verbose output - for frontend. (helps with bnc #377137) 
+- move RepoInfo to universal RepoException. This can enable more verbose output - for frontend. (helps with bnc #377137)
 - revision 9452
 
 -------------------------------------------------------------------
 Tue Apr  8 10:52:30 CEST 2008 - jreidinger@suse.cz
 
-- initial implementation of new locks (FATE #120118 and #120352) 
+- initial implementation of new locks (FATE #120118 and #120352)
 - revision 9442
 
 -------------------------------------------------------------------
@@ -701,7 +708,7 @@ Tue Apr  7 15:18:22 CEST 2008 - dmacvicar@suse.de
 Fri Apr  4 14:01:45 CEST 2008 - jreidinger@suse.cz
 
 - add split with respect to escaped delimeters and also for quotes
-- revision 9373 
+- revision 9373
 
 -------------------------------------------------------------------
 Thu Apr  3 12:55:50 CEST 2008 - ma@suse.de
@@ -713,7 +720,7 @@ Thu Apr  3 12:55:50 CEST 2008 - ma@suse.de
 Thu Apr  3 11:59:13 CEST 2008 - ma@suse.de
 
 - Allow to store a media label in MediaSetAccess. This label is
-  passed to a media change requests to describe which CD is 
+  passed to a media change requests to describe which CD is
   requested.  (bnc #330094)
 - Fixed some missing package and source package attributes.
 - revision 9347
@@ -722,25 +729,25 @@ Thu Apr  3 11:59:13 CEST 2008 - ma@suse.de
 Wed Apr  2 13:48:52 CEST 2008 - schubi@suse.de
 
 - Moved poolItem.status().isSatisfied(),.... to poolItem.isSatisfied()
-- Removed establish state in ResStatus 
+- Removed establish state in ResStatus
 - revision 9337
 - version 4.7.0
 
 -------------------------------------------------------------------
 Wed Apr  2 10:24:17 CEST 2008 - ma@suse.de
 
-- Add PoolItem::isSatisfied()/isBroken() to test whether 
+- Add PoolItem::isSatisfied()/isBroken() to test whether
   the items requirements are met.
 - revision 9334
 
 -------------------------------------------------------------------
 Tue Apr  1 21:54:10 CEST 2008 - ma@suse.de
 
-- Extend sat::WhatProvides to allow to query for possible providers 
-  of a collection of capabilies. E.g. all providers of a packages 
+- Extend sat::WhatProvides to allow to query for possible providers
+  of a collection of capabilies. E.g. all providers of a packages
   requirements.
-- Fixed retrieval of translated texts from .solv files, provided the 
-  solv file contains them. 
+- Fixed retrieval of translated texts from .solv files, provided the
+  solv file contains them.
 - revision 9328
 
 -------------------------------------------------------------------
@@ -754,7 +761,7 @@ Tue Apr  1 16:17:44 CEST 2008 - jreidinger@suse.cz
 Wed Mar 26 16:15:24 CET 2008 - ma@suse.de
 
 - Allow prioritizing repos by adding a line 'priority=N' to the
-  .repo file. Where N is an integer number from 1 (highest prio) 
+  .repo file. Where N is an integer number from 1 (highest prio)
   to 99 (least and default). (bnc #369827, fate #302872)
 - version 4.6.1
 - revision 9276
@@ -785,13 +792,13 @@ Fri Mar 21 12:38:39 CET 2008 - jreidinger@suse.cz
 Thu Mar 20 15:00:24 CET 2008 - jreidinger@suse.cz
 
 - return more information from checking if metadata need refresh,
-  so user can get better info. (bnc #307249) 
+  so user can get better info. (bnc #307249)
 - revision 9231
 
 -------------------------------------------------------------------
 Tue Mar 18 21:59:04 CET 2008 - ma@suse.de
 
-- class sat::LocaleSupport: Convenience methods to manage support 
+- class sat::LocaleSupport: Convenience methods to manage support
   for language specific packages.
 - revision 9197
 
@@ -836,19 +843,19 @@ Fri Mar 14 14:27:43 CET 2008 - dmacvicar@suse.de
 Fri Mar 14 12:07:41 CET 2008 - jreidinger@suse.cz
 
 - Save repo type during refresh if type is NONE (f.e. lazy probing).
-- revision 9153 
+- revision 9153
 
 -------------------------------------------------------------------
 Fri Mar 14 11:34:24 CET 2008 - jreidinger@suse.cz
 
 - replace gpg escaped semicolon with real semicolon (bnc #355434)
-- revision 9151 
+- revision 9151
 
 -------------------------------------------------------------------
 Fri Mar 14 10:17:41 CET 2008 - jreidinger@suse.cz
 
 - make strings from RpmDb and Keyring exceptions translatable
-- revision 9146 
+- revision 9146
 
 -------------------------------------------------------------------
 Thu Mar 13 18:41:26 CET 2008 - dmacvicar@suse.de
@@ -859,7 +866,7 @@ Thu Mar 13 18:41:26 CET 2008 - dmacvicar@suse.de
 -------------------------------------------------------------------
 Thu Mar 13 18:40:57 CET 2008 - jreidinger@suse.cz
 
-- enable frontend to rewrite add_probe settings.(bnc #309612) 
+- enable frontend to rewrite add_probe settings.(bnc #309612)
 - Correct adding repo without type to lazy probing.
 - revision 9135
 
@@ -935,13 +942,13 @@ Thu Mar  6 13:42:53 CET 2008 - ma@suse.de
 
 -------------------------------------------------------------------
 Wed Mar  5 11:33:26 CET 2008 - ma@suse.de
-	
+
 - Try to rebuild broken solv files in Target::load.
 - revision 9015
 
 -------------------------------------------------------------------
 Tue Mar  4 18:17:41 CET 2008 - ma@suse.de
- 
+
 - Try to rebuild broken solv files in RepoManager::loadFromCache.
 - Fix RepoStatus::operator&& and RepoStatus testsuite.
 - revision 9008
@@ -955,7 +962,7 @@ Tue Mar  4 16:09:14 CET 2008 - schubi@suse.de
 
 -------------------------------------------------------------------
 Tue Mar  4 12:57:58 CET 2008 - ma@suse.de
- 
+
 - Save and restore requested locales on target load/commit.
 - revision 8999
 
@@ -963,7 +970,7 @@ Tue Mar  4 12:57:58 CET 2008 - ma@suse.de
 Mon Mar  3 17:10:26 CET 2008 - schubi@suse.de
 
 - (Update) Prevent reinstallation of installed packages.
-- revision 8984 
+- revision 8984
 
 -------------------------------------------------------------------
 Sun Mar  2 16:13:16 CET 2008 - coolo@suse.de
@@ -1001,7 +1008,7 @@ Tue Feb 26 13:59:03 CET 2008 - lslezak@suse.cz
 
 -------------------------------------------------------------------
 Tue Feb 26 13:26:30 CET 2008 - ma@suse.de
- 
+
 - Fixed Capabilites iterator exposing prereq marker.
 - revision 8914
 
@@ -1015,11 +1022,11 @@ Tue Feb 26 11:29:05 CET 2008 - schubi@suse.de
 Mon Feb 25 17:06:53 CET 2008 - schubi@suse.de
 
 - Testcases regards modaliases, rpmlib, ... correctly
-- Revision 8904 
+- Revision 8904
 
 -------------------------------------------------------------------
 Mon Feb 25 13:20:26 CET 2008 - ma@suse.de
- 
+
 - Remove obsolete sql database. (bnc#363224)
 - revision 8898
 
