@@ -7,7 +7,7 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Url.h"
 
-#include "../zypper-prompt.h"
+#include "../prompt.h"
 #include "prompt.h"
 
 /**

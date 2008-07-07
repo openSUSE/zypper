@@ -5,7 +5,7 @@
 #include "zypp/base/String.h"
 
 #include "OutXML.h"
-#include "../zypper-utils.h"
+#include "../utils.h"
 
 using std::cout;
 using std::endl;
