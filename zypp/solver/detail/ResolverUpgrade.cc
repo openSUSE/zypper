@@ -657,7 +657,9 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   // no other packages obsolete the installed package too.
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
       PoolItem item = *it;
-      if (item.status().staysUninstalled()) {
+      PoolItem installed = Helper::findInstalledItem( _pool, item );
+      if (( !installed || compareByNVR (installed.resolvable(), item.resolvable()) != 0) // is not already installed Bug 4000422
+	  && item.status().staysUninstalled()) {
 	  for( Capabilities::const_iterator pit = item->dep( Dep::OBSOLETES ).begin(); pit != item->dep( Dep::OBSOLETES ).end(); ++pit) {
 	      // find ALL providers
 	      sat::WhatProvides possibleProviders(*pit);
