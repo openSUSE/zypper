@@ -2,7 +2,13 @@ PROJECT(libzypp)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules )
-cmake_minimum_required(VERSION 2.4.5)
+cmake_minimum_required(VERSION 2.6)
+
+# allow name libraries by name mixed with full
+# paths
+if(COMMAND cmake_policy)
+  cmake_policy(SET CMP0003 NEW)
+endif(COMMAND cmake_policy)
 
 INCLUDE(ZyppCommon)
 INCLUDE( ${CMAKE_SOURCE_DIR}/VERSION.cmake )
@@ -20,7 +26,7 @@ set( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -O3" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3" )
 
 ADD_DEFINITIONS( -D_FILE_OFFSET_BITS=64 )
-ADD_DEFINITIONS( -DVERSION=\\\"${VERSION}\\\" )
+ADD_DEFINITIONS( -DVERSION="${VERSION}" )
 SET( LIBZYPP_VERSION_INFO "${LIBZYPP_SO_FIRST}.${LIBZYPP_AGE}.${LIBZYPP_PATCH}" )
 SET( LIBZYPP_SOVERSION_INFO "${LIBZYPP_SO_FIRST}" )
 
