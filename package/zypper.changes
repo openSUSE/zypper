@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul  7 15:31:11 CEST 2008 - jkupec@suse.cz
+
+- exit in non-interactive mode if given package cannot be found
+  (bnc #403216)
+- 10510
+- 0.6.105
+
+-------------------------------------------------------------------
 Wed Apr 23 10:47:48 CEST 2008 - jkupec@suse.cz
 
 - final translations update
