@@ -137,6 +137,10 @@ void mark_for_install( const ResObject::Kind &kind,
   cerr_vv << "... done" << endl;
   if (!installer.item) {
     cerr << kind << " '" << name << "' " << _("not found") << endl;
+    if (gSettings.non_interactive)
+      exit(ZYPPER_EXIT_INF_CAP_NOT_FOUND); // bnc #403216
+    else
+      WAR << kind << " '" << name << "' " << _("not found") << endl;
     return; //error?
   }
 
@@ -190,7 +194,11 @@ void mark_for_uninstall( const ResObject::Kind &kind,
 		);
   cerr_vv << "... done" << endl;
   if (!deleter.found) {
-    cerr << _("Not found") << endl;
+    cerr << kind << " '" << name << "' " << _("not found") << endl;
+    if (gSettings.non_interactive)
+      exit(ZYPPER_EXIT_INF_CAP_NOT_FOUND); // bnc #403216
+    else
+      WAR << kind << " '" << name << "' " << _("not found") << endl;
     return; //error?
   }
 }
