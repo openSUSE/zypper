@@ -7,7 +7,7 @@
 #include "zypp/ByteCount.h" // for download progress reporting
 #include "zypp/base/String.h" // for toUpper()
 
-#include "../zypper-main.h"
+#include "../main.h"
 #include "AliveCursor.h"
 
 #include "OutNormal.h"
