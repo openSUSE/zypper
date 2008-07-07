@@ -36,6 +36,9 @@ namespace zypp
     static const ResourceType PATCH;   // suse extension
     static const ResourceType PRODUCT; // suse extension
     static const ResourceType PATTERNS; // suse extension
+    // sqlite caches yum extensions:
+    static const ResourceType PRIMARY_DB; // yum extension
+    static const ResourceType OTHER_DB; // yum extension
 
     enum Type
     {
@@ -48,7 +51,9 @@ namespace zypp
       PATCHES_e,
       PATCH_e,
       PRODUCT_e,
-      PATTERNS_e
+      PATTERNS_e,
+      PRIMARY_DB_e,
+      OTHER_DB_e,
     };
 
     ResourceType(Type type) : _type(type) {}

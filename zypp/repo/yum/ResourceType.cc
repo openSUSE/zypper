@@ -32,7 +32,8 @@ namespace zypp
   const ResourceType ResourceType::PATCH(ResourceType::PATCH_e);
   const ResourceType ResourceType::PRODUCT(ResourceType::PRODUCT_e);
   const ResourceType ResourceType::PATTERNS(ResourceType::PATTERNS_e);
-
+  const ResourceType ResourceType::PRIMARY_DB(ResourceType::PRIMARY_DB_e);
+  const ResourceType ResourceType::OTHER_DB(ResourceType::OTHER_DB_e);
 
   ResourceType::ResourceType(const std::string & strval_r)
     : _type(parse(strval_r))
@@ -52,6 +53,8 @@ namespace zypp
       _table["patch"] = ResourceType::PATCH_e;
       _table["product"] = ResourceType::PRODUCT_e;
       _table["patterns"] = ResourceType::PATTERNS_e;
+      _table["primary_db"] = ResourceType::PRIMARY_DB_e;
+      _table["other_db"] = ResourceType::OTHER_DB_e;
       _table["NONE"] = _table["none"] = ResourceType::NONE_e;
     }
 
@@ -80,6 +83,8 @@ namespace zypp
       _table[PATCH_e]  = "patch";
       _table[PRODUCT_e]  = "product";
       _table[PATTERNS_e]  = "patterns";
+      _table[OTHER_DB_e]  = "other_db";
+      _table[PRIMARY_DB_e]  = "primary_db";
       _table[NONE_e] = "NONE";
     }
     return _table[_type];
