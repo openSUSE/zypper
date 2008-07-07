@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul  7 13:39:09 CEST 2008 - schubi@suse.de
+
+- Do not update an already updated package Bug 400422 
+- Revision 10504
+
+-------------------------------------------------------------------
 Fri Jul  4 17:19:24 CEST 2008 - ma@suse.de
 
 - Also check if the fingerprint matches before importing updated keys.
