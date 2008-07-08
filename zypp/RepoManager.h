@@ -558,7 +558,7 @@ namespace zypp
      *     int priority;
      *   public:
      *     ChangePriority(int prio) : priority(prio) {}
-     *     void doIt( RepoInfo info ) { info.setPriority(priority); }
+     *     void doIt( RepoInfo info ) { info.setPriority(priority); } //missing rewrite priority back via RepoManager::modifyRepo
      * }
      *
      * //somewhere in code
