@@ -34,13 +34,16 @@ namespace zypp
 
         /**
          *  Service with this name.
+         *
+         * \param name unique name of service
          */
         Service( const std::string& name );
 
         /**
-         * Creates service with name and it's url.
-         * Used for adding new services.
-         * \note internal, do not used outside libzypp
+         * Service with name and its URL
+         *
+         * \param name unique name of service
+         * \param url url to service
          */
         Service( const std::string& name, const Url& url );
 
@@ -49,23 +52,58 @@ namespace zypp
         static const Service noService;
 
     public:
+        /**
+         * Gets unique name
+         *
+         * \return name of service
+         */
         std::string name() const;
 
+        /**
+         * Gets url to service
+         *
+         * \return url to service
+         */
         Url url() const;
 
+        /**
+         * Gets from which file is this service loaded or saved.
+         *
+         * \note this is empty for newly created file until it is saved
+         * \return path to file storing this service
+         */
         Pathname location() const;
 
     public:
-
+        
+        /**
+         * Sets file where this service is stored.
+         *
+         * \warning don't use this function, only parses and serializer can
+         *          use it
+         * \param location path where service is stored
+         */
         void setLocation( const Pathname& location );
 
+        /**
+         * Sets url for this service
+         *
+         * \param url url to this service
+         */
         void setUrl( const Url& url );
 
+        /**
+         * Sets name for this service
+         *
+         * \param name new name of this service
+         */
         void setName( const std::string& name );
 
    public:
         /**
          * Writes Service to stream in ".service" format
+         *
+         * \param str stream where serialized version service is written
          */
         void dumpServiceOn( std::ostream & str ) const;
 

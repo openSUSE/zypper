@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/yum/RepoindexFileReader.h
+/** \file zypp/parser/RepoindexFileReader.h
  * Interface of repoindex.xml file reader.
  */
 #ifndef zypp_source_yum_RepoindexFileReader_H
@@ -16,10 +16,10 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/Function.h"
 
-#include "zypp/RepoInfo.h"
-
 namespace zypp
 {
+  class RepoInfo;
+
   namespace parser
   {
 
@@ -28,7 +28,7 @@ namespace zypp
    *
    * After each repository is read, a \ref RepoInfo
    * is prepared and \ref _callback
-   * is called with these two objects passed in.
+   * is called with this object passed in.
    *
    * The \ref _callback is provided on construction.
    *
@@ -44,7 +44,7 @@ namespace zypp
    /**
     * Callback definition.
     * First parameter is a \ref RepoInfo object with the resource
-    * second parameter is the resource type.
+    * FIXME return value is ignored
     */
     typedef function< bool(
         const RepoInfo & )>
@@ -53,13 +53,13 @@ namespace zypp
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
     * 
-    * \param repoindex_file is the repoindex.xml file you want to read
+    * \param repoindexFile is the repoindex.xml file you want to read
     * \param callback is a function.
     *
     * \see RepoindexFileReader::ProcessResource
     */
     RepoindexFileReader(
-      const Pathname & repoindex_file, const ProcessResource & callback);
+      const Pathname & repoindexFile, const ProcessResource & callback);
 
     /**
      * DTOR

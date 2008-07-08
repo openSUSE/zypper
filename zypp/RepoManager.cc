@@ -1344,7 +1344,7 @@ namespace zypp
   {
     //check if service isn't already exist
     if( _pimpl->services.find(service)!= _pimpl->services.end() )
-      return; //TODO throw exception
+      return; //FIXME ZYPP_THROW(RepoAlreadyExistsException(service.name()));
 
     //this is need to save location to correct service
     const Service& savedService = *(_pimpl->services.insert( service )).first;
@@ -1383,12 +1383,16 @@ namespace zypp
       filesystem::assert_dir(location.dirname());
 
       std::ofstream file(location.c_str());
+      if( file.fail() )
+        ZYPP_THROW(Exception("failed open file to write"));
 
       for_(it, tmpSet.begin(), tmpSet.end())
       {
         if( it->name() != name )
           it->dumpServiceOn(file);
       }
+
+      MIL << name << " sucessfully deleted from file " << location <<  endl;
     }
 
     //now remove all repositories added by this service
@@ -1458,7 +1462,7 @@ namespace zypp
   {
     //download index file
     media::MediaManager mediamanager;
-    media::MediaAccessId mid = mediamanager.open( service.url() );
+    media::MediaAccessId mid = mediamanager.open( service.url() ); //FIXME check if url is not empty
     mediamanager.attachDesiredMedia( mid );
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
     Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );

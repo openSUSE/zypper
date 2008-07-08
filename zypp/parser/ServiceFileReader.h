@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repo/ServiceFileReader.h
+/** \file	zypp/parser/ServiceFileReader.h
  *
 */
 #ifndef ZYPP_REPO_SERVICEFILEREADER_H
@@ -28,16 +28,16 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     /**
-     * \short Read repository data from a .repo file
+     * \short Read service data from a .service file
      *
-     * After each repo is read, a \ref RepoInfo is prepared and \ref _callback
+     * After each service is read, a \ref Service is prepared and \ref _callback
      * is called with the object passed in.
      *
      * The \ref _callback is provided on construction.
      *
      * \code
-     * ServiceFileReader reader(repo_file, 
-     *                bind( &SomeClass::callbackfunc, &SomeClassInstance, _1, _2 ) );
+     * ServiceFileReader reader(service_file, 
+     *                bind( &SomeClass::callbackfunc, &SomeClassInstance, _1 ) );
      * \endcode
      */
     class ServiceFileReader
@@ -47,8 +47,7 @@ namespace zypp
       
      /**
       * Callback definition.
-      * First parameter is a \ref RepoInfo object with the resource
-      * second parameter is the resource type.
+      * First parameter is a \ref Service object with the resource.
       *
       * Return false from the callback to get a \ref AbortRequestException
       * to be thrown and the processing to be cancelled.
@@ -62,17 +61,15 @@ namespace zypp
      /**
       * \short Constructor. Creates the reader and start reading.
       *
-      * \param repo_file A valid .repo file
+      * \param serviceFile A valid .repo file
       * \param callback Callback that will be called for each repository.
-      * \param progress Optional progress function. \see ProgressData
       *
       * \throws AbortRequestException If the callback returns false
       * \throws Exception If a error occurs at reading / parsing
       *
       */
-      ServiceFileReader( const Pathname & repo_file,
-                      const ProcessService & callback/*,
-                      const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc()*/);
+      ServiceFileReader( const Pathname & serviceFile,
+                      const ProcessService & callback);
      
       /**
        * Dtor

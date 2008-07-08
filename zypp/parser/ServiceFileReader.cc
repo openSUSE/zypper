@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/repo/RepoFileReader.cc
+/** \file	zypp/parser/RepoFileReader.cc
  *
 */
 #include <iostream>
@@ -40,6 +40,11 @@ namespace zypp
                                   const ProgressData::ReceiverFnc &progress*/ )
     {
       InputStream is(file);
+      if( is.stream().fail() )
+      {
+        ZYPP_THROW(Exception("Failed to open service file"));
+      }
+
       parser::IniDict dict(is);
       for ( parser::IniDict::section_const_iterator its = dict.sectionsBegin();
             its != dict.sectionsEnd();
@@ -63,7 +68,7 @@ namespace zypp
         service.setLocation(file);
         // add it to the list.
         if ( !callback(service) )
-          break;
+          ZYPP_THROW(AbortRequestException());
       }
     }
 

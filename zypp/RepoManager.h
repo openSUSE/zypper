@@ -102,7 +102,7 @@ namespace zypp
     typedef ServiceSet::const_iterator ServiceConstIterator;
     typedef ServiceSet::size_type ServiceSizeType;
 
-    //RepoInfo typedefs
+    /** RepoInfo typedefs */
     typedef std::set<RepoInfo> RepoSet;
     typedef RepoSet::const_iterator RepoConstIterator;
     typedef RepoSet::size_type RepoSizeType;
@@ -444,30 +444,98 @@ namespace zypp
                                 const url::ViewOption & urlview = url::ViewOption::DEFAULTS,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
+    /**
+     * Adds new service by it's name and url
+     *
+     * \param name unique name of service
+     * \param url url to service
+     *
+     * \throws FIXME RepoAlreadyExistException and as reponame is service name
+     */
     void addService( const std::string& name, const Url& url );
+
+    /**
+     * Adds new service
+     *
+     * \param name service info 
+     *
+     * \throws FIXME RepoAlreadyExistException and as reponame is service name
+     */
     void addService( const Service& name );
 
+    /**
+     * Removes service specified by its name
+     *
+     * \param name name of service to remove
+     *
+     * \throws RepoException if service is not found or file with Service cannot be deleted
+     * \throws Exception if file contain more services and rewrite file failed
+     */
     void removeService( const std::string& name );
 
+    /**
+     * Gets true if no service is in RepoManager (so no one in specified location)
+     *
+     * \return true if any Service is in RepoManager
+     */
     bool serviceEmpty() const;
 
+    /**
+     * Gets count of service in RepoManager (in specified location)
+     *
+     * \return count of service
+     */
     ServiceSizeType serviceSize() const;
 
+    /**
+     * Iterator to first service in internal storage.
+     * \note Iterator is immutable, so you cannot change pointed Service
+     * \return Iterator to first service
+     */
     ServiceConstIterator serviceBegin() const;
 
+    /**
+     * Iterator to place behind last service in internal storage.
+     * \return iterator to end
+     */
     ServiceConstIterator serviceEnd() const;
 
+    /**
+     * Finds Service by name or return noService
+     *
+     * \param name unique name of service
+     * \return information about Service
+     */
     Service getService( const std::string& name ) const;
 
+    /**
+     * Refreshs all services
+     * \see refreshService
+     */
     void refreshServices();
 
+    /**
+     * Refresh specific service. 
+     * \throws Exception if cannot download file
+     * \param name service structure
+     */
     void refreshService( const Service& name );
 
     /**
-     * modify service
+     * modify service, rewrite Service to filesystem.
+     * If change Service name, then can escalate to rewrite all repositories which it contain.
+     * 
+     * \param oldName oldName of service
+     * \param service Structure containing new datas
+     *
+     * \throws RepoException if sservice with oldName is not known
+     * \throws Exception if have problems with files
      */
     void modifyService(const std::string& oldName, const Service& service);
 
+    /**
+     * Functor thats filter RepoInfo by service which belongs to.
+     */
     struct MatchServiceName {
       private:
         std::string name;
@@ -477,7 +545,26 @@ namespace zypp
     };
 
     /**
-     * fill to output iterator repositories in service name
+     * fill to output iterator repositories in service name. This output iterator can perform
+     * any action on with Repo or service Container, because it is sets and it isn't dynamic recreate.
+     * \param name service name
+     * \param out output iterator which get all repositories in Service
+     *
+     * example how set priority for each RepoInfo in this service:
+     * \code
+     * //functor
+     * class ChangePriority{
+     *   private:
+     *     int priority;
+     *   public:
+     *     ChangePriority(int prio) : priority(prio) {}
+     *     void doIt( RepoInfo info ) { info.setPriority(priority); }
+     * }
+     *
+     * //somewhere in code
+     * ChangePriority changer(10);
+     * getRepositoriesInService(name,getRepositoriesInService( name, boost::make_function_output_iterator(bind(&ChangePriority::doIt, &changer, _1))));
+     * \endcode
      */ 
 
     template<typename OutputIterator>
