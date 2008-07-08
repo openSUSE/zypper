@@ -6,10 +6,7 @@
 - zypper [help] rug
 - add help texts for prompts
 - code reorganization
-  - remove zypper- prefix from sources
-  - split misc.cc into common/commit(solver dialog, summary, commit)/update/install-srcinstall-remove code
   - clean up/split utils.cc
-- drop xu command
 - show recommended and suggested in the summary
 - report licenses of installed software
 
@@ -17,7 +14,7 @@
 NOT SCHEDULED
 -------------
 
-- - we want it
++ - we want it
 ? - idea
 
 General

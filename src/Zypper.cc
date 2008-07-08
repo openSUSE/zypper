@@ -35,16 +35,20 @@
 
 #include "main.h"
 #include "Zypper.h"
-#include "repos.h"
-#include "misc.h"
-#include "locks.h"
+#include "Command.h"
 
 #include "Table.h"
+#include "utils.h"
+#include "getopt.h"
+
+#include "repos.h"
+#include "install.h"
+#include "update.h"
+#include "solve-commit.h"
+#include "misc.h"
+#include "locks.h"
 #include "search.h"
 #include "info.h"
-#include "getopt.h"
-#include "Command.h"
-#include "utils.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"

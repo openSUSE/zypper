@@ -19,6 +19,9 @@ SET (zypper_HEADERS
   richtext.h
   Table.h
   locks.h
+  install.h
+  update.h
+  solve-commit.h
   callbacks/keyring.h
   callbacks/media.h
   callbacks/rpm.h
@@ -39,6 +42,9 @@ SET( zypper_SRCS
   prompt.cc
   richtext.cc
   locks.cc
+  install.cc
+  update.cc
+  solve-commit.cc
   ${zypper_HEADERS}
 )
 
@@ -57,7 +63,16 @@ SET( zypper_out_SRCS
   ${zypper_out_HEADERS}
 )
 
-ADD_EXECUTABLE( zypper ${zypper_SRCS} ${zypper_out_SRCS} )
+SET( zypper_utils_HEADERS
+  utils/pager.h
+)
+
+SET( zypper_utils_SRCS
+  utils/pager.cc
+  ${zypper_utils_HEADERS}
+)
+
+ADD_EXECUTABLE( zypper ${zypper_SRCS} ${zypper_out_SRCS} ${zypper_utils_SRCS} )
 TARGET_LINK_LIBRARIES( zypper ${ZYPP_LIBRARY} ${READLINE_LIBRARY} )
 
 INSTALL(

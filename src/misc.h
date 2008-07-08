@@ -1,38 +1,28 @@
-/*-----------------------------------------------------------*- c++ -*-\
-|                          ____ _   __ __ ___                          |
-|                         |__  / \ / / . \ . \                         |
-|                           / / \ V /|  _/  _/                         |
-|                          / /__ | | | | | |                           |
-|                         /_____||_| |_| |_|                           |
-|                                                                      |
-\---------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
 
 #ifndef ZMART_MISC_H
 #define ZMART_MISC_H
 
 #include <string>
 
-#include "zypp/ResKind.h"
-#include "zypp/PoolItem.h"
-
 #include "Zypper.h"
-#include "Table.h"
-#include "utils.h"
 
-
-zypp::ResKind string_to_kind (const std::string & skind);
 
 /**
- * Run the solver.
+ * Loops through resolvables, checking if there is license to confirm. When
+ * run interactively, it displays a dialog, otherwise it answers automatically
+ * according to --auto-agree-with-licenses present or not present.
  * 
- * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
+ * \returns true if all licenses have been confirmed, false otherwise.  
  */
-bool resolve(Zypper & zypper);
+bool confirm_licenses(Zypper & zypper);
 
-void install_remove(Zypper & zypper,
-                    const Zypper::ArgList & args,
-                    bool install_not_remove,
-                    const zypp::ResKind & kind);
+zypp::ResKind string_to_kind (const std::string & skind);
 
 /**
  * Reset all selections made by mark_* methods. Needed in the shell to reset
@@ -40,68 +30,6 @@ void install_remove(Zypper & zypper,
  */
 void remove_selections(Zypper & zypper);
 
-/**
- * Are there applicable patches?
- */
-void patch_check();
-
-/**
- * Lists available updates of installed resolvables of specified \a kind.
- * if repo_alias != "", restrict updates to this repository.
- * if best_effort == true, any version greater than the installed one will do.
- * Prints the table of updates to stdout.
- * 
- * \param kind  resolvable type
- * \param best_effort
- */
-void list_updates(Zypper & zypper,
-                  const ResKindSet & kinds,
-                  bool best_effort);
-
-/** \todo remove from this header after xu is dropped */ 
-bool xml_list_patches();
-/** \todo remove from this header after xu is dropped */
-void xml_list_updates(const ResKindSet & kinds);
-
-/**
- * \param kind  resolvable type
- * \param skip_interactive whether to skip updates that need user interaction
- * \param best_effort
- */
-void mark_updates(Zypper & zypper,
-                  const ResKindSet & kinds,
-                  bool skip_interactive,
-                  bool best_effort);
-
-/**
- * Runs solver on the pool, asks to choose solution of eventual problems
- * (when run interactively) and commits the result.
- * 
- * \param have_extra_deps ?
- * \return ZYPPER_EXIT_INF_REBOOT_NEEDED, ZYPPER_EXIT_INF_RESTART_NEEDED,
- *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
- *  
- */
-void solve_and_commit(Zypper & zypper);
-
-
-// copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
-struct ProvideProcess
-{
-  zypp::PoolItem item;
-  zypp::PoolItem installed_item;
-  zypp::ResStatus::TransactByValue whoWantsIt;
-  std::string _repo;
-  zypp::Arch _architecture;
-
-  ProvideProcess(zypp::Arch arch, const std::string & repo)
-    : whoWantsIt(zypp::ResStatus::USER)
-    , _repo(repo)
-    , _architecture( arch )
-    { }
-
-  bool operator()( const zypp::PoolItem& provider );
-};
 
 /**
  * Find source packages by names specified as arguments.
