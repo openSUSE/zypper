@@ -23,6 +23,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResPoolProxy.h"
+#include "zypp/ui/Selectable.h"
 #include <zypp/Repository.h>
 #include <zypp/RepoManager.h>
 
