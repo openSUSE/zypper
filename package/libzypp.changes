@@ -1,10 +1,11 @@
 -------------------------------------------------------------------
-Wed Jul  9 13:13:58 CEST 2008 - ma@suse.de
+Wed Jul  9 18:13:58 CEST 2008 - ma@suse.de
 
 - Provide Package::url() if available in solv file. (bnc #402434)
 - A missing cookie file must not be treated as an error. Simply 
   rebuild the cache (bnc #405867)
-- revision 10525
+- Add 22x22 and 24x24 icons (bnc #329635)
+- revision 10528
 
 -------------------------------------------------------------------
 Mon Jul  7 13:39:09 CEST 2008 - schubi@suse.de

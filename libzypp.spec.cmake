@@ -208,6 +208,8 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
 %{prefix}/share/icons/hicolor/16x16/apps/package-manager-icon.png
+%{prefix}/share/icons/hicolor/22x22/apps/package-manager-icon.png
+%{prefix}/share/icons/hicolor/24x24/apps/package-manager-icon.png
 %{prefix}/share/icons/hicolor/32x32/apps/package-manager-icon.png
 %{prefix}/share/icons/hicolor/48x48/apps/package-manager-icon.png
 %{prefix}/bin/package-manager

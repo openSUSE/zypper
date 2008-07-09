@@ -8,5 +8,7 @@ INSTALL( FILES package-manager.desktop DESTINATION "${CMAKE_INSTALL_PREFIX}/shar
 # done
 INSTALL( FILES  package-manager-icon.svg       DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps" )
 INSTALL( FILES  package-manager-icon.16x16.png DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/16x16/apps" RENAME package-manager-icon.png )
+INSTALL( FILES  package-manager-icon.22x22.png DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/22x22/apps" RENAME package-manager-icon.png )
+INSTALL( FILES  package-manager-icon.24x24.png DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/24x24/apps" RENAME package-manager-icon.png )
 INSTALL( FILES  package-manager-icon.32x32.png DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/32x32/apps" RENAME package-manager-icon.png )
 INSTALL( FILES  package-manager-icon.48x48.png DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/48x48/apps" RENAME package-manager-icon.png )
