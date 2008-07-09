@@ -85,18 +85,6 @@ namespace zypp
      */
     OnMediaLocation location() const;
 
-
-    /** \deprecated no metadata always empty */
-    ZYPP_DEPRECATED std::string os() const { return std::string(); }
-    /** \deprecated no metadata always empty */
-    ZYPP_DEPRECATED std::string prein() const { return std::string(); }
-    /** \deprecated no metadata always empty */
-    ZYPP_DEPRECATED std::string postin() const { return std::string(); }
-    /** \deprecated no metadata always empty */
-    ZYPP_DEPRECATED std::string preun() const { return std::string(); }
-    /** \deprecated no metadata always empty */
-    ZYPP_DEPRECATED std::string postun() const { return std::string(); }
-
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */
