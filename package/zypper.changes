@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul  9 22:14:28 CEST 2008 - jkupec@suse.cz
+
+- fix setting of solver flags for dist-upgrade (bnc #406959)
+- r10529
+
+-------------------------------------------------------------------
 Thu Jun 26 14:55:25 CEST 2008 - jkupec@suse.cz
 
 - zypp-refresh-wrapper: don't close stderr (#398530)
