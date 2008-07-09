@@ -253,7 +253,7 @@ namespace zypp
     RepoManagerOptions options;
 
     RepoSet repos;
-    
+
     ServiceSet services;
 
   public:
@@ -265,10 +265,10 @@ namespace zypp
     }
 
     void saveService( const Service& service ) const;
-  
+
     Pathname generateNonExistingName( const Pathname &dir,
                                          const std::string &basefilename ) const;
-  
+
     std::string generateFilename( const RepoInfo &info ) const;
     std::string generateFilename( const Service &info ) const;
 
@@ -753,7 +753,6 @@ namespace zypp
     if ( isCached( info ) )
     {
       MIL << info.alias() << " is already cached." << endl;
-      //data::RecordId id = store.lookupRepository(info.alias());
       RepoStatus cache_status = cacheStatus(info);
 
       if ( cache_status.checksum() == raw_metadata_status.checksum() )
@@ -1334,7 +1333,7 @@ namespace zypp
     info.setBaseUrl(url);
     ZYPP_THROW(RepoNotFoundException(info));
   }
-  
+
   void RepoManager::addService( const std::string& name, const Url& url )
   {
     addService( Service(name,url) );
@@ -1396,7 +1395,7 @@ namespace zypp
     }
 
     //now remove all repositories added by this service
-    getRepositoriesInService( name, 
+    getRepositoriesInService( name,
       boost::make_function_output_iterator(bind(&RepoManager::removeRepository, this, _1, ProgressData::ReceiverFnc()) ) );
   }
 
@@ -1483,7 +1482,7 @@ namespace zypp
 
     //compare old and new repositories (hope not to much, if it change
     // then construct set and use set operation on it)
-    
+
     std::list<RepoInfo> oldRepos;
     getRepositoriesInService(service.name(),
         insert_iterator<std::list<RepoInfo> >
@@ -1585,7 +1584,7 @@ namespace zypp
       str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
       for_(it, entries.begin(), entries.end() )
       {
-        parser::ServiceFileReader reader(*it, 
+        parser::ServiceFileReader reader(*it,
             bind(&ServiceCollector::collect, collector, _1) );
       }
     }

@@ -11,10 +11,8 @@
 */
 #include <iostream>
 #include <sstream>
-#include <vector>
-#include <algorithm>
 #include <fstream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/PathInfo.h"
@@ -84,13 +82,13 @@ namespace zypp
 
   RepoStatus RepoStatus::fromCookieFile( const Pathname &cookiefile )
   {
-    RepoStatus status;
-
     std::ifstream file(cookiefile.c_str());
     if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + cookiefile.asString() ) );
+      WAR << "No cookie file " << cookiefile << endl;
+      return RepoStatus();
     }
 
+    RepoStatus status;
     std::string buffer;
     file >> buffer;
     status.setChecksum(buffer);

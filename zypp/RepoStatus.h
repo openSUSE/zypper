@@ -39,15 +39,16 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const RepoStatus & obj );
 
   public:
-    
+
     /**
      * reads the status from a file which contains the
      * checksum and timestamp in each line.
      *
-     * \throws Exception If the file is not valid or accessible
+     * \returns An empty \ref RepoStatus if the file does not
+     * exist or is not readable.
      */
     static RepoStatus fromCookieFile( const Pathname &path );
-  
+
     /**
      * save the status information to a cookie file
      * \throws Exception if the file can't be saved
@@ -61,14 +62,14 @@ namespace zypp
      * in any way is sufficient.
      */
     std::string checksum() const;
-    
+
     /**
      * timestamp of the repository. If the repository
      * changes, it has to be updated as well with the
      * new timestamp.
      */
     Date timestamp() const;
-    
+
     /**
      * \short Is the status empty?
      *
@@ -82,7 +83,7 @@ namespace zypp
      * \param checksum
      */
     RepoStatus & setChecksum( const std::string &checksum );
-    
+
     /**
      * set the repository timestamp \see timestamp
      * \param timestamp
@@ -95,7 +96,7 @@ namespace zypp
   public:
     /** Default ctor */
     RepoStatus();
-    
+
     /**
      * \short Status from a single file
      * As most repository state is represented
@@ -106,7 +107,7 @@ namespace zypp
      * file will result in an empty status
      */
     RepoStatus( const Pathname &file );
-    
+
     /** Dtor */
     ~RepoStatus();
 
