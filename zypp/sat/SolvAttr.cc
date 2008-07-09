@@ -68,6 +68,7 @@ namespace sat
   const SolvAttr SolvAttr::sourcename   ( SOLVABLE_SOURCENAME );
   const SolvAttr SolvAttr::sourceevr    ( SOLVABLE_SOURCEEVR );
   const SolvAttr SolvAttr::headerend    ( SOLVABLE_HEADEREND );
+  const SolvAttr SolvAttr::url          ( SOLVABLE_URL );
 
   // patch
   const SolvAttr SolvAttr::patchcategory            ( SOLVABLE_PATCHCATEGORY );

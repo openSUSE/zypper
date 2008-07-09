@@ -51,7 +51,7 @@ namespace zypp
   Changelog Package::changelog() const
   {
       Target_Ptr target;
-      try 
+      try
       {
           target = getZYpp()->target();
       }
@@ -60,8 +60,8 @@ namespace zypp
            ERR << "Target not initialized. Changelog is not available." << std::endl;
            return Changelog();
       }
-      
-          
+
+
       if ( repository().isSystemRepo() )
       {
           target::rpm::RpmHeader::constPtr header;
@@ -72,36 +72,27 @@ namespace zypp
       return Changelog();
   }
 
-  /** */
   std::string Package::buildhost() const
   { return lookupStrAttribute( sat::SolvAttr::buildhost ); }
 
-  /** */
   std::string Package::distribution() const
   { return lookupStrAttribute( sat::SolvAttr::distribution ); }
 
-  /** */
   std::string Package::license() const
   { return lookupStrAttribute( sat::SolvAttr::license ); }
 
-  /** */
   std::string Package::packager() const
   { return lookupStrAttribute( sat::SolvAttr::packager ); }
 
-  /** */
   std::string Package::group() const
   { return lookupStrAttribute( sat::SolvAttr::group ); }
 
   Package::Keywords Package::keywords() const
   { return Keywords( sat::SolvAttr::keywords, satSolvable() ); }
 
-  /** Don't ship it as class Url, because it might be
-   * in fact anything but a legal Url. */
-#warning DUMMY url
   std::string Package::url() const
-  { return string(); }
+  { return lookupStrAttribute( sat::SolvAttr::url ); }
 
-  /** */
   ByteCount Package::sourcesize() const
   { return lookupNumAttribute( sat::SolvAttr::sourcesize ); }
 
@@ -113,8 +104,8 @@ namespace zypp
   }
 
   std::list<std::string> Package::filenames() const
-  { 
-    std::list<std::string> files; 
+  {
+    std::list<std::string> files;
     sat::LookupAttr q( sat::SolvAttr::filelist, *this );
     for_( it, q.begin(), q.end() )
     {
@@ -129,20 +120,20 @@ namespace zypp
   OnMediaLocation Package::location() const
   { return lookupLocation(); }
 
- std::string Package::sourcePkgName() const
- {
+  std::string Package::sourcePkgName() const
+  {
    // no id means same as package
-   sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourcename ) );
-   id = lookupIdAttribute(sat::SolvAttr::sourcearch);
-   return id ? IdString( id ).asString() : name();
- }
+    sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourcename ) );
+    id = lookupIdAttribute(sat::SolvAttr::sourcearch);
+    return id ? IdString( id ).asString() : name();
+  }
 
- Edition Package::sourcePkgEdition() const
- {
+  Edition Package::sourcePkgEdition() const
+  {
    // no id means same as package
-   sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourceevr ) );
-   return id ? Edition( id ) : edition();
- }
+    sat::detail::IdType id( lookupIdAttribute( sat::SolvAttr::sourceevr ) );
+    return id ? Edition( id ) : edition();
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

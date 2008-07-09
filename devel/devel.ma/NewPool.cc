@@ -559,29 +559,6 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  SEC << zypp::getZYpp()->diskUsage() << endl;
-
-  for_( it, pool.begin(), pool.end() )
-  {
-    //MIL << *it << endl;
-    //DBG << (*it)->diskusage() << endl;
-  }
-
-  PoolItem pu ( getPi<Package>("amarok") );
-  PoolItem pi ( getPi<Package>("amarok",Edition("1.4.7-37")) );
-
-  pi.status().setTransact( true, ResStatus::USER );
-  SEC << zypp::getZYpp()->diskUsage() << endl;
-
-  pu.status().setTransact( true, ResStatus::USER );
-  SEC << zypp::getZYpp()->diskUsage() << endl;
-
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
   if ( 0 )
   {
     PoolItem pi ( getPi<Package>("amarok") );
@@ -596,7 +573,7 @@ try {
     }
   }
 
-  SEC << zypp::getZYpp()->diskUsage() << endl;
+  //SEC << zypp::getZYpp()->diskUsage() << endl;
 
   //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
   //waitForInput();
