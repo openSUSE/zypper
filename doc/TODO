@@ -32,3 +32,6 @@ Patches
 Packages
 
 + just download, don't install. Compare to YOU: do not delete after installing
+? zypper up -t package should show the difference between zypper lu -t package
+  and current summary as  "these packages have been kept back" (like apt does).
+  User can upgrade such packages with 'zypper in foo' then.

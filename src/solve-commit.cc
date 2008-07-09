@@ -775,6 +775,13 @@ static void dump_pool ()
 
 static void set_force_resolution(Zypper & zypper)
 {
+  // don't force resolution in 'verify'
+  if (zypper.command() == ZypperCommand::VERIFY)
+  {
+    God->resolver()->setForceResolve(false);
+    return;
+  }
+
   // --force-resolution command line parameter value
   TriBool force_resolution = zypper.runtimeData().force_resolution;
 
@@ -842,6 +849,14 @@ static void set_ignore_recommends_of_installed(Zypper & zypper)
 }
 
 
+static void set_solver_flags(Zypper & zypper)
+{
+  set_force_resolution(zypper);
+  set_no_recommends(zypper);
+  set_ignore_recommends_of_installed(zypper);
+}
+
+
 /**
  * Run the solver.
  * 
@@ -850,9 +865,7 @@ static void set_ignore_recommends_of_installed(Zypper & zypper)
 bool resolve(Zypper & zypper)
 {
   dump_pool(); // debug
-  set_force_resolution(zypper);
-  set_no_recommends(zypper);
-  set_ignore_recommends_of_installed(zypper);
+  set_solver_flags(zypper);
   zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
@@ -861,20 +874,24 @@ bool resolve(Zypper & zypper)
 static bool verify(Zypper & zypper)
 {
   dump_pool();
+  set_solver_flags(zypper);
   zypper.out().info(_("Verifying dependencies..."), Out::HIGH);
-  // don't force aggressive solutions
-  God->resolver()->setForceResolve(false); //! \todo move to set_force_resolution()
-  set_no_recommends(zypper);
-  set_ignore_recommends_of_installed(zypper);
   DBG << "Calling the solver to verify system..." << endl;
   return God->resolver()->verifySystem();
 }
 
+static bool dist_upgrade(Zypper & zypper, zypp::UpgradeStatistics & dup_stats)
+{
+  dump_pool();
+  set_solver_flags(zypper);
+  zypper.out().info(_("Computing upgrade..."), Out::HIGH);
+  DBG << "Calling the solver doUpgrade()..." << endl;
+  return God->resolver()->doUpgrade(dup_stats);
+}
+
 static void make_solver_test_case(Zypper & zypper)
 {
-  set_force_resolution(zypper);
-  set_no_recommends(zypper);
-  set_ignore_recommends_of_installed(zypper);
+  set_solver_flags(zypper);
 
   string testcase_dir("/var/log/zypper.solverTestCase");
 
@@ -923,13 +940,9 @@ void solve_and_commit (Zypper & zypper)
           success = verify(zypper);
         else if (zypper.command() == ZypperCommand::DIST_UPGRADE)
         {
-          zypp::UpgradeStatistics opt_stats;
-          //! \todo set success to doUpgrade return value if there are problems
-          success = false;
-          God->resolver()->doUpgrade(opt_stats);
-          //! \todo remove this hack once the doUpgrade returns bool
-          if (God->resolver()->problems().empty())
-            break;
+          zypp::UpgradeStatistics dup_stats;
+          success = dist_upgrade(zypper, dup_stats);
+          //! \todo make use of the upgrade stats
         }
         else
           success = resolve(zypper);
@@ -939,7 +952,7 @@ void solve_and_commit (Zypper & zypper)
         success = show_problems(zypper);
         if (! success) {
           // TODO cancel transaction?
-          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // #242736
+          zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP); // bnc #242736
           return;
         }
       }
