@@ -489,15 +489,15 @@ try {
       if ( ! nrepo.enabled() )
         continue;
 
-      if ( ! repoManager.isCached( nrepo ) || /*force*/false )
+      if ( ! repoManager.isCached( nrepo ) || nrepo.type() == repo::RepoType::RPMPLAINDIR )
       {
         if ( repoManager.isCached( nrepo ) )
         {
           SEC << "cleanCache" << endl;
           repoManager.cleanCache( nrepo );
         }
-        //SEC << "refreshMetadata" << endl;
-        //repoManager.refreshMetadata( nrepo, RepoManager::RefreshForced );
+        SEC << "refreshMetadata" << endl;
+        repoManager.refreshMetadata( nrepo );
         SEC << "buildCache" << endl;
         repoManager.buildCache( nrepo );
       }
@@ -533,7 +533,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {

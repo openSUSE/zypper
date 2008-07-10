@@ -45,6 +45,26 @@ void waitForInput()
 }
 
 ///////////////////////////////////////////////////////////////////
+
+void mksrc( const std::string & url, const std::string & alias, RepoManager & repoManager )
+{
+  RepoInfo nrepo;
+  nrepo
+      .setAlias( alias )
+      .setName( alias )
+      .setEnabled( true )
+      .setAutorefresh( false )
+      .addBaseUrl( Url(url) );
+
+  if ( ! repoManager.isCached( nrepo ) )
+  {
+    repoManager.buildCache( nrepo );
+  }
+
+  repoManager.loadFromCache( nrepo );
+}
+
+///////////////////////////////////////////////////////////////////
 //
 template<class _Condition>
   struct SetTrue
