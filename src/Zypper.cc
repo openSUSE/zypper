@@ -84,7 +84,7 @@ Zypper::~Zypper()
 Zypper::Ptr & Zypper::instance()
 {
   static Zypper::Ptr _instance;
-  
+
   if (!_instance)
     _instance.reset(new Zypper());
   else
@@ -106,7 +106,7 @@ int Zypper::main(int argc, char ** argv)
     MIL << "Caught exit request:" << endl << e.msg() << endl;
     return exitCode();
   }
-  
+
   if (runningHelp())
   {
     safeDoCommand();
@@ -138,7 +138,7 @@ Out & Zypper::out()
 {
   if (_out_ptr)
     return *_out_ptr;
-  
+
   cerr << "uninitialized output writer" << endl;
   ZYPP_THROW(ExitRequestException("no output writer"));
 }
@@ -154,7 +154,7 @@ void print_main_help(Zypper & zypper)
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
     "\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n"
-    "\t--xmlout, -x\t\tSwitch to XML output.\n"  
+    "\t--xmlout, -x\t\tSwitch to XML output.\n"
     "\t--reposd-dir, -D <dir>\tUse alternative repository definition files directory.\n"
     "\t--cache-dir, -C <dir>\tUse alternative meta-data cache database directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
@@ -188,7 +188,7 @@ void print_main_help(Zypper & zypper)
     "\trefresh, ref\t\tRefresh all repositories.\n"
     "\tclean\t\t\tClean local caches.\n"
   );
-  
+
   static string help_package_commands = _("\tSoftware Management:\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
@@ -259,9 +259,9 @@ void print_command_help_hint(Zypper & zypper)
 
 /*
  * parses global options, returns the command
- * 
+ *
  * \returns ZypperCommand object representing the command or ZypperCommand::NONE
- *          if an unknown command has been given. 
+ *          if an unknown command has been given.
  */
 void Zypper::processGlobalOptions()
 {
@@ -372,7 +372,7 @@ void Zypper::processGlobalOptions()
           str::form(_("Use an integer number from %d to %d"), 0, 8));
   }
 
-  if (gopts.count("terse")) 
+  if (gopts.count("terse"))
   {
     _gopts.machine_readable = true;
     _gopts.no_abbrev = true;
@@ -380,7 +380,7 @@ void Zypper::processGlobalOptions()
   }
 
   // ======== other global options ========
-  
+
   string rug_test(_argv[0]);
   if (gopts.count("rug-compatible") || rug_test.rfind("rug") == rug_test.size()-3 )
   {
@@ -677,7 +677,7 @@ void Zypper::shellCleanup()
   default:;
   }
 
-  // clear any previous arguments 
+  // clear any previous arguments
   _arguments.clear();
   // clear command options
   if (!_copts.empty())
@@ -698,7 +698,7 @@ void Zypper::shellCleanup()
   gData.current_repo = RepoInfo();
 
   // TODO:
-  // gData.repos re-read after repo operations or modify/remove these very repoinfos 
+  // gData.repos re-read after repo operations or modify/remove these very repoinfos
   // gData.repo_resolvables re-read only after certain repo operations (all?)
   // gData.target_resolvables re-read only after installation/removal/update
   // call target commit refresh pool after installation/removal/update (#328855)
@@ -725,13 +725,13 @@ void Zypper::safeDoCommand()
   }
   catch (const ExitRequestException & e)
   {
-    MIL << "Caught exit request:" << endl << e.msg() << endl; 
+    MIL << "Caught exit request:" << endl << e.msg() << endl;
   }
   catch (const Exception & ex)
   {
     ZYPP_CAUGHT(ex);
 
-    Out::Verbosity tmp = out().verbosity(); 
+    Out::Verbosity tmp = out().verbosity();
     out().setVerbosity(Out::DEBUG);
     out().error(ex, _("Unexpected exception."));
     out().setVerbosity(tmp);
@@ -877,7 +877,7 @@ void Zypper::processCommandOptions()
       "                                Default: %s.\n"
       "-n, --name                      Select resolvables by plain name, not by capability.\n"
       "-C, --capability                Select resolvables by capability.\n"
-      "    --debug-solver              Create solver test case for debugging.\n"  
+      "    --debug-solver              Create solver test case for debugging.\n"
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the removal, do not actually remove.\n"
@@ -1113,7 +1113,7 @@ void Zypper::processCommandOptions()
     specific_options = service_modify_options;
     _command_help = str::form(_(
       // translators: %s is "--all|--remote|--local|--medium-type"
-      // and "--all, --remote, --local, --medium-type" 
+      // and "--all, --remote, --local, --medium-type"
       "modifyrepo (mr) <options> <alias|#|URI>\n"
       "modifyrepo (mr) <options> <%s>\n"
       "\n"
@@ -1901,11 +1901,7 @@ void Zypper::processCommandOptions()
     {
       ZYPP_CAUGHT (excpt_r);
       ERR  << "A ZYpp transaction is already in progress." << endl;
-      out().error(
-        _("A ZYpp transaction is already in progress."
-          " This means, there is another application using the libzypp library for"
-          " package management running. All such applications must be closed before"
-          " using this command."));
+      out().error(excpt_r.asString());
 
       setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       throw (ExitRequestException("ZYpp locked"));
@@ -1930,7 +1926,7 @@ void Zypper::doCommand()
 
 
   // === execute command ===
-  
+
   switch(command().toEnum())
   {
 
@@ -1946,7 +1942,7 @@ void Zypper::doCommand()
   }
 
   // --------------------------( repo list )----------------------------------
-  
+
   case ZypperCommand::LIST_REPOS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
@@ -1984,7 +1980,7 @@ void Zypper::doCommand()
     }
 
     // indeterminate indicates the user has not specified the values
-    tribool enabled(indeterminate); 
+    tribool enabled(indeterminate);
 
     if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
@@ -2003,7 +1999,7 @@ void Zypper::doCommand()
         add_repo_from_file(*this,copts["repo"].front(), enabled, false, keep_pkgs);
         return;
       }
-  
+
       // force specific repository type. Validation is done in add_repo_by_url()
       string type = copts.count("type") ? copts["type"].front() : "";
       if (command() == ZypperCommand::RUG_MOUNT || type == "mount")
@@ -2227,7 +2223,7 @@ void Zypper::doCommand()
     if (_copts.count("disable-autorefresh"))
       out().warning(str::form(_("'%s' option is deprecated and will be dropped soon."), "disable-autorefresh"));
 
-    bool non_alias = copts.count("all") || copts.count("local") || 
+    bool non_alias = copts.count("all") || copts.count("local") ||
         copts.count("remote") || copts.count("medium-type");
 
     if (_arguments.size() < 1 && !non_alias)
@@ -2248,7 +2244,7 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-    
+
     if (non_alias)
     {
       modify_repos_by_option(*this);
@@ -2260,14 +2256,14 @@ void Zypper::doCommand()
       {
         modify_repo(*this, repo.alias());
       }
-      else 
+      else
       {
         out().error(
           boost::str(format(_("Repository %s not found.")) % _arguments[0]));
         ERR << "Repo " << _arguments[0] << " not found" << endl;
       }
     }
-    
+
     break;
   }
 
@@ -2309,7 +2305,7 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
-    
+
     clean_repos(*this);
     break;
   }
@@ -2377,7 +2373,7 @@ void Zypper::doCommand()
           // download the rpm into the cache
           //! \todo do we want this or a tmp dir? What about the files cached before?
           //! \todo optimize: don't mount the same media multiple times for each rpm
-          Pathname rpmpath = cache_rpm(*it, 
+          Pathname rpmpath = cache_rpm(*it,
               (_gopts.root_dir != "/" ? _gopts.root_dir : "")
               + ZYPPER_RPM_CACHE_DIR);
 
@@ -2398,10 +2394,10 @@ void Zypper::doCommand()
               string nvrcap =
                 header->tag_name() + "=" +
                 header->tag_version() + "-" +
-                header->tag_release(); 
+                header->tag_release();
               DBG << "rpm package capability: " << nvrcap << endl;
-  
-              // store the rpm file capability string (name=version-release) 
+
+              // store the rpm file capability string (name=version-release)
               rpms_files_caps.push_back(nvrcap);
             }
             else
@@ -2412,7 +2408,7 @@ void Zypper::doCommand()
             }
           }
 
-          // remove this rpm argument 
+          // remove this rpm argument
           it = _arguments.erase(it);
         }
         else
@@ -2420,7 +2416,7 @@ void Zypper::doCommand()
       }
     }
 
-    // if there were some rpm files, add the rpm cache as a temporary plaindir repo 
+    // if there were some rpm files, add the rpm cache as a temporary plaindir repo
     if (!rpms_files_caps.empty())
     {
       // add a plaindir repo
@@ -2557,7 +2553,7 @@ void Zypper::doCommand()
   {
     if (command() == ZypperCommand::RUG_PATCH_SEARCH)
       _gopts.is_rug_compatible = true;
-    
+
     zypp::PoolQuery query;
 
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
@@ -2785,7 +2781,7 @@ void Zypper::doCommand()
   case ZypperCommand::WHAT_PROVIDES_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-    
+
     if (_arguments.empty())
     {
       report_required_arg_missing(out(), _command_help);
@@ -2852,7 +2848,7 @@ void Zypper::doCommand()
     else
       kinds.insert(ResTraits<Patch>::kind);
 
-    bool best_effort = copts.count( "best-effort" ); 
+    bool best_effort = copts.count( "best-effort" );
 
     if (globalOpts().is_rug_compatible && best_effort) {
 	best_effort = false;
@@ -2867,7 +2863,7 @@ void Zypper::doCommand()
       return;
     load_resolvables(*this);
     resolve(*this);
-    
+
     list_updates(*this, kinds, best_effort);
 
     break;
@@ -2924,7 +2920,7 @@ void Zypper::doCommand()
     else
       kinds.insert(ResKind::patch);
 
-    bool best_effort = copts.count( "best-effort" ); 
+    bool best_effort = copts.count( "best-effort" );
     if (globalOpts().is_rug_compatible && best_effort)
     {
       best_effort = false;
@@ -2954,7 +2950,7 @@ void Zypper::doCommand()
 
     solve_and_commit(*this);
 
-    break; 
+    break;
   }
 
   // ----------------------------( dist-upgrade )------------------------------
@@ -3057,7 +3053,7 @@ void Zypper::doCommand()
   case ZypperCommand::ADD_LOCK_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-    
+
     // check root user
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
@@ -3134,7 +3130,7 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
-    
+
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3154,11 +3150,11 @@ void Zypper::doCommand()
 
     break;
   }
-  
+
   case ZypperCommand::CLEAN_LOCKS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-   
+
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3175,7 +3171,7 @@ void Zypper::doCommand()
     Locks::instance().save();
 
     out().info(str::form("removed locks: %lu", (long unsigned)(start - Locks::instance().size())));
-    
+
     break;
   }
 
@@ -3212,7 +3208,7 @@ void Zypper::doCommand()
   case ZypperCommand::RUG_SERVICE_TYPES_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-    
+
     Table t;
 
     TableHeader th;
@@ -3259,9 +3255,9 @@ void Zypper::cleanup()
       // shut up zypper
       Out::Verbosity tmp = out().verbosity();
       out().setVerbosity(Out::QUIET);
-    
+
       remove_repo(*this, *it);
-    
+
       out().setVerbosity(tmp);
       break;
     }
