@@ -16,7 +16,6 @@ SET (zypper_HEADERS
   utils.h
   search.h
   info.h
-  richtext.h
   Table.h
   locks.h
   install.h
@@ -38,7 +37,6 @@ SET( zypper_SRCS
   search.cc
   info.cc
   Table.cc
-  richtext.cc
   locks.cc
   install.cc
   update.cc
@@ -65,12 +63,14 @@ SET( zypper_utils_HEADERS
   utils/getopt.h
   utils/pager.h
   utils/prompt.h
+  utils/richtext.h
 )
 
 SET( zypper_utils_SRCS
   utils/getopt.cc
   utils/pager.cc
   utils/prompt.cc
+  utils/richtext.cc
   ${zypper_utils_HEADERS}
 )
 

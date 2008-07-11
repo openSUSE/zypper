@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #include <iostream>
 
 #include <boost/format.hpp>
@@ -13,10 +20,10 @@
 #include "main.h"
 #include "misc.h"
 #include "Table.h"
-#include "info.h"
-#include "richtext.h"
+#include "utils/richtext.h"
 #include "search.h"
 
+#include "info.h"
 
 using namespace std;
 using namespace zypp;

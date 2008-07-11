@@ -18,12 +18,12 @@
 
 #include "main.h"
 #include "utils.h"
-#include "getopt.h"
-#include "richtext.h"
-
-#include "misc.h"
 #include "utils/pager.h"
 #include "utils/prompt.h"
+#include "utils/getopt.h"
+#include "utils/richtext.h"
+
+#include "misc.h"
 
 using namespace std;
 using namespace zypp;
