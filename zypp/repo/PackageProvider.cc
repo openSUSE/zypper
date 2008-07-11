@@ -137,10 +137,13 @@ namespace zypp
           }
 
           std::list<PatchRpm> patchRpms;
+#warning cleanup patchrpm
+#if 0
           if ( ZConfig::instance().download_use_patchrpm() )
           {
             _deltas.patchRpms( _package ).swap( patchRpms );
           }
+#endif
 
           if ( ! ( deltaRpms.empty() && patchRpms.empty() )
                && queryInstalled() )
