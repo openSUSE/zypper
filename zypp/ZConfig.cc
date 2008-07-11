@@ -245,6 +245,10 @@ namespace zypp
                 {
                   solver_onlyRequires = str::strToBool( value, solver_onlyRequires );
                 }
+                else if ( entry == "solver.checkSystemFile" )
+                {
+                  solver_checkSystemFile = Pathname(value);
+                }		
                 else if ( entry == "locksfile.path" )
                 {
                   locks_file = Pathname(value);
@@ -320,6 +324,7 @@ namespace zypp
     bool download_use_deltarpm;
 
     bool solver_onlyRequires;
+    Pathname solver_checkSystemFile;  
 
     bool apply_locks_file;
 
@@ -498,6 +503,10 @@ namespace zypp
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }
+
+  Pathname ZConfig::solver_checkSystemFile() const
+  { return _pimpl->solver_checkSystemFile; }
+    
 
   bool ZConfig::apply_locks_file() const
   {

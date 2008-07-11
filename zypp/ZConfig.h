@@ -175,6 +175,12 @@ namespace zypp
       bool solver_onlyRequires() const;
 
       /**
+       * File in which dependencies described which has to be
+       * fulfilled for a running system.
+       */
+      Pathname solver_checkSystemFile() const;
+
+      /**
        * Path where zypp can find or create lock file (configPath()/locks)
        * \ingroup g_ZC_CONFIGFILES
        */
