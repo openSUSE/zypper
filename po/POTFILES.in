@@ -1,25 +1,28 @@
 # list of files containing translatable texts
-# grep -Pl '(\_\()|(\_PL\()' ../src/*.{cc,h} > tmp
-# grep -Pl '(\_\()|(\_PL\()' ../src/output/*.{cc,h} >> tmp
+# find ../src \( -name '*.cc' -o -name '*.h' \) -exec grep -Pl '(\_\()|(\_PL\()' {} \; > tmp
 # cat tmp | sort > POTFILES.in.new
+../src/callbacks/keyring.h
+../src/callbacks/locks.h
+../src/callbacks/media.h
+../src/callbacks/repo.h
+../src/callbacks/rpm.h
+../src/Command.cc
+../src/info.cc
+../src/install.cc
+../src/locks.cc
+../src/main.cc
+../src/main.h
+../src/misc.cc
 ../src/output/OutNormal.cc
-../src/zypp-checkpatches.cc
-../src/zypper.cc
-../src/zypper-command.cc
-../src/zypper-getopt.cc
-../src/zypper-info.cc
-../src/zypper-keyring-callbacks.h
-../src/zypper-locks.cc
-../src/zypper-main.cc
-../src/zypper-main.h
-../src/zypper-media-callbacks.h
-../src/zypper-misc.cc
-../src/zypper-prompt.cc
-../src/zypper-prompt.h
-../src/zypper-repo-callbacks.h
-../src/zypper-repos.cc
-../src/zypper-rpm-callbacks.h
-../src/zypper-search.cc
-../src/zypper-search.h
-../src/zypper-updates.h
-../src/zypper-utils.cc
+../src/repos.cc
+../src/search.cc
+../src/search.h
+../src/solve-commit.cc
+../src/update.cc
+../src/utils/getopt.cc
+../src/utils/messages.cc
+../src/utils/misc.cc
+../src/utils/pager.cc
+../src/utils/prompt.cc
+../src/utils/prompt.h
+../src/Zypper.cc
