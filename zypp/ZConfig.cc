@@ -146,7 +146,6 @@ namespace zypp
         , cfg_textLocale          	( defaultTextLocale() )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
-        , download_use_patchrpm   	( true )
         , download_use_deltarpm   	( true )
 	, solver_onlyRequires   	( false )
         , apply_locks_file              ( true )
@@ -229,10 +228,6 @@ namespace zypp
                 else if ( entry == "repo.refresh.delay" )
                 {
                   str::strtonum(value, repo_refresh_delay);
-                }
-                else if ( entry == "download.use_patchrpm" )
-                {
-                  download_use_patchrpm = str::strToBool( value, download_use_patchrpm );
                 }
                 else if ( entry == "download.use_deltarpm" )
                 {
@@ -322,7 +317,6 @@ namespace zypp
     bool repo_add_probe;
     unsigned repo_refresh_delay;
 
-    bool download_use_patchrpm;
     bool download_use_deltarpm;
 
     bool solver_onlyRequires;
@@ -497,9 +491,6 @@ namespace zypp
   {
     return _pimpl->repo_refresh_delay;
   }
-
-  bool ZConfig::download_use_patchrpm() const
-  { return _pimpl->download_use_patchrpm; }
 
   bool ZConfig::download_use_deltarpm() const
   { return _pimpl->download_use_deltarpm; }
