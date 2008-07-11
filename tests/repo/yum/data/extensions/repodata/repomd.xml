@@ -9,13 +9,13 @@
   <data type="filelists">
     <location href="repodata/filelists.xml.gz"/>
     <checksum type="sha">5df72494136a4e4b608ce3119802d6aa8d0f1167</checksum>
-    <timestamp>1215823452</timestamp>
+    <timestamp>1215823453</timestamp>
     <open-checksum type="sha">fdabcfd9c056109ab25acf0644823bdec94b6cfd</open-checksum>
   </data>
   <data type="primary">
     <location href="repodata/primary.xml.gz"/>
     <checksum type="sha">52969c92f9c595108376cd37df7d5ada41851f6a</checksum>
-    <timestamp>1215823452</timestamp>
+    <timestamp>1215823454</timestamp>
     <open-checksum type="sha">c6bd3c6099de74d97ed045163235be10ffa8a85f</open-checksum>
   </data>
 </repomd>

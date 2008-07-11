@@ -52,6 +52,10 @@ BOOST_AUTO_TEST_CASE(extensions)
   }
   sat::Pool pool(sat::Pool::instance());
 
+  Repository repo = pool.reposFind("updates");
+  
+  BOOST_CHECK_EQUAL( repo.generatedTimestamp(), Date(1215823454) );
+  BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1215823454 + 3600) );  
 
   rm.cleanCache(updates);
 }
