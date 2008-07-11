@@ -1,7 +1,12 @@
-// zypper - a command line interface for libzypp
-// http://en.opensuse.org/User:Mvidner
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
 
-// (initially based on dmacvicar's zmart)
+// zypper - command line interface for libzypp, the package management library
+// http://en.opensuse.org/Zypper
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
