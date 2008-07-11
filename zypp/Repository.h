@@ -90,17 +90,44 @@ namespace zypp
         
         /**
          * Timestamp when this repository was generated
+         *
+         * Usually this value is calculated as the newer
+         * timestamp from the timestamp of all the resources
+         * that conform the repository's metadata.
+         *
+         * For example in a rpm-md repository, it would be
+         * the resource specified in the xml file whith
+         * the newest timestamp attribute (which is the
+         * timestamp of the file in the server ).
+         * 
+         * The timestamp is 0 if the repository does not
+         * specify when it was generated.
+         *
          */
         zypp::Date generatedTimestamp() const;
 
         /**
-         * Expiration date
+         * Suggested expiration timestamp.
+         *
+         * Repositories can define an amount of time
+         * they expire, with the generated timestamp as
+         * the base point of time.
+         *
+         * Note that is the responsability of the repository
+         * to freshen the generated timestamp to tell the
+         * client that the repo is alive and updating the
+         * metadata.
+         *
+         * The timestamp is 0 if the repository does not specify
+         * an expiration date.
+         *
          */
-        zypp::Date expirationTimestamp() const;
+        zypp::Date suggestedExpirationTimestamp() const;
 
         /**
-         * The expiration date of this repository
+         * The suggested expiration date of this repository
          * already passed
+         *
          */
         bool maybeOutdated() const;
 

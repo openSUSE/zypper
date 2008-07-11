@@ -79,10 +79,12 @@ namespace zypp
       }
       else
         ERR << "the extra does not exist in the repo" << endl;
+
+        return Date();        
     }
     
 
-    zypp::Date Repository::expirationTimestamp() const
+    zypp::Date Repository::suggestedExpirationTimestamp() const
     {
         ::Dataiterator di;
         ::dataiterator_init(&di, get(), -1, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
@@ -103,12 +105,14 @@ namespace zypp
       }
       else
         ERR << "the extra does not exist in the repo" << endl;
+
+        return Date();
     }
 
     
     bool Repository::maybeOutdated() const
     {
-        return expirationTimestamp() < Date::now();
+        return suggestedExpirationTimestamp() < Date::now();
     }
     
     bool Repository::solvablesEmpty() const
