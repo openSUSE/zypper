@@ -58,6 +58,59 @@ namespace zypp
 	return _repo->name;
     }
 
+    zypp::Date Repository::generatedTimestamp() const
+    {
+        ::Dataiterator di;
+        ::dataiterator_init(&di, get(), -1, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+        if (::dataiterator_step(&di))
+        {
+            do
+            {
+                switch (di.key->name)
+                {
+                    case REPOSITORY_TIMESTAMP:
+                    {
+                        return di.kv.num;
+                        break;
+                    }
+                }
+            }
+            while (::dataiterator_step(&di));
+      }
+      else
+        ERR << "the extra does not exist in the repo" << endl;
+    }
+    
+
+    zypp::Date Repository::expirationTimestamp() const
+    {
+        ::Dataiterator di;
+        ::dataiterator_init(&di, get(), -1, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+        if (::dataiterator_step(&di))
+        {
+            do
+            {
+                switch (di.key->name)
+                {
+                    case REPOSITORY_EXPIRE:
+                    {
+                        return generatedTimestamp() + di.kv.num;
+                        break;
+                    }
+                }
+            }
+            while (::dataiterator_step(&di));
+      }
+      else
+        ERR << "the extra does not exist in the repo" << endl;
+    }
+
+    
+    bool Repository::maybeOutdated() const
+    {
+        return expirationTimestamp() < Date::now();
+    }
+    
     bool Repository::solvablesEmpty() const
     {
 	NO_REPOSITORY_RETURN( true );

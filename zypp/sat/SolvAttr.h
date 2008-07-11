@@ -132,6 +132,12 @@ namespace sat
       static const SolvAttr productFlags;
       //@}
 
+      /** \name repository */
+      //@{
+      static const SolvAttr repositoryTimestamp;
+      static const SolvAttr repositoryExpire;
+      //@}
+
       //@}
     public:
       /** Default ctor: \ref noAttr */

@@ -18,6 +18,11 @@
 #include "zypp/sat/detail/PoolMember.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/Date.h"
+extern "C"
+{
+#include "satsolver/repo.h"
+}
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -83,6 +88,21 @@ namespace zypp
         ZYPP_DEPRECATED std::string name() const
         { return alias(); }
         
+        /**
+         * Timestamp when this repository was generated
+         */
+        zypp::Date generatedTimestamp() const;
+
+        /**
+         * Expiration date
+         */
+        zypp::Date expirationTimestamp() const;
+
+        /**
+         * The expiration date of this repository
+         * already passed
+         */
+        bool maybeOutdated() const;
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;

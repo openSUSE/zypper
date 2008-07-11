@@ -106,6 +106,11 @@ namespace sat
   const SolvAttr SolvAttr::productOptionalurls ( PRODUCT_OPTIONALURLS );
   const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
 
+  // repository
+  const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );
+  const SolvAttr SolvAttr::repositoryExpire ( REPOSITORY_EXPIRE );
+
+
 } // namespace sat
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
