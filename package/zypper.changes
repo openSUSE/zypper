@@ -3,7 +3,10 @@ Fri Jul 11 12:02:52 CEST 2008 - jkupec@suse.cz
 
 - fixed too much progress output when installing/removing
   (bnc #404783)
+- zypp-refresh.lr added
+- some code cleanup, man page update
 - r10536
+- 0.12.0
 
 -------------------------------------------------------------------
 Thu Jul 10 18:15:43 CEST 2008 - ma@suse.de
