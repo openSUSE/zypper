@@ -20,10 +20,10 @@
 #include "utils.h"
 #include "getopt.h"
 #include "richtext.h"
-#include "prompt.h"
 
 #include "misc.h"
 #include "utils/pager.h"
+#include "utils/prompt.h"
 
 using namespace std;
 using namespace zypp;

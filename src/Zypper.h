@@ -13,9 +13,9 @@
 #include "zypp/RepoManager.h" // for RepoManagerOptions 
 #include "zypp/SrcPackage.h"
 
-#include "output/Out.h"
 #include "Command.h"
-#include "getopt.h"
+#include "utils/getopt.h"
+#include "output/Out.h"
 
 /** directory for storing manually installed (zypper install foo.rpm) RPM files
  */

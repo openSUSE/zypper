@@ -20,9 +20,9 @@
 #include "zypp/media/MediaException.h"
 
 #include "misc.h"
-#include "prompt.h"
 #include "utils.h"
-#include "getopt.h"
+#include "utils/getopt.h"
+#include "utils/prompt.h"
 
 #include "solve-commit.h"
 

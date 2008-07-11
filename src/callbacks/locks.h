@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef LOCKS_ZYPPER_CALLBACKS_H
 #define LOCKS_ZYPPER_CALLBACKS_H
 
@@ -7,9 +14,8 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/PoolQuery.h"
 
-#include "../prompt.h"
-#include "../utils.h"
-#include "../output/prompt.h"
+#include "utils/prompt.h"
+#include "utils.h"
 
 namespace zypp {
 

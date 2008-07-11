@@ -39,7 +39,7 @@
 
 #include "Table.h"
 #include "utils.h"
-#include "getopt.h"
+#include "utils/getopt.h"
 
 #include "repos.h"
 #include "install.h"

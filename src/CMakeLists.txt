@@ -5,17 +5,17 @@ ADD_DEFINITIONS (
 
 MESSAGE ( "** Locale dir is ${INSTALL_PREFIX}/share/locale" )
 
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/src)
+
 SET (zypper_HEADERS
   Zypper.h
   main.h
   Command.h
-  getopt.h
   repos.h
   misc.h
   utils.h
   search.h
   info.h
-  prompt.h
   richtext.h
   Table.h
   locks.h
@@ -32,14 +32,12 @@ SET( zypper_SRCS
   Zypper.cc
   main.cc
   Command.cc
-  getopt.cc
   repos.cc
   misc.cc
   utils.cc
   search.cc
   info.cc
   Table.cc
-  prompt.cc
   richtext.cc
   locks.cc
   install.cc
@@ -64,11 +62,15 @@ SET( zypper_out_SRCS
 )
 
 SET( zypper_utils_HEADERS
+  utils/getopt.h
   utils/pager.h
+  utils/prompt.h
 )
 
 SET( zypper_utils_SRCS
+  utils/getopt.cc
   utils/pager.cc
+  utils/prompt.cc
   ${zypper_utils_HEADERS}
 )
 

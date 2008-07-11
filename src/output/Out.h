@@ -7,8 +7,9 @@
 #include "zypp/base/Exception.h"
 #include "zypp/Url.h"
 
-#include "../prompt.h"
-#include "prompt.h"
+#include "utils/prompt.h"
+
+#include "output/prompt.h"
 
 /**
  * Base class for producing common (for now) zypper output.
