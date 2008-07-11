@@ -1660,7 +1660,7 @@ void Zypper::processCommandOptions()
     };
     specific_options = options;
     _command_help = str::form(_(
-      "addlock (al) [options] <packagename>\n"
+      "addlock (al) [options] <packagename> ...\n"
       "\n"
       "Add a package lock. Specify packages to lock by exact name or by a"
       " glob pattern using '*' and '?' wildcard characters.\n"
@@ -1678,18 +1678,22 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] =
     {
+      {"repo", required_argument, 0, 'r'},
+      // rug compatiblity (although rug does not seem to support this)
+      {"catalog", required_argument, 0, 'c'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
     specific_options = options;
-    _command_help = _(
-      "removelock (rl) <lock-number>\n"
+    _command_help = str::form(_(
+      "removelock (rl) [options] <lock-number|packagename> ...\n"
       "\n"
       "Remove a package lock. Specify the lock to remove by its number obtained"
-      " with 'zypper locks'.\n"
+      " with '%s' or by package name.\n"
       "\n"
-      "This command has no additional options.\n"
-    );
+      "  Command options:\n"
+      "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
+    ), "zypper locks");
     break;
   }
 
@@ -3130,7 +3134,7 @@ void Zypper::doCommand()
       return;
     }
 
-    if (_arguments.size() == 1)
+    if (_arguments.size() < 1)
     {
       report_required_arg_missing(out(), _command_help);
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);

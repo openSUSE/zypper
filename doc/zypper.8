@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.11.7" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.0" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -713,7 +713,7 @@ dialog.
 List currently active package locks.
 
 .TP
-.B addlock (al) [options] <package-name>
+.B addlock (al) [options] <package-name> ...
 Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?'
 wildcard characters. 
 
@@ -725,9 +725,13 @@ Restrict the lock to the specified repository.
 Type of resolvable (package, patch, pattern, product). Default: package.
 
 .TP
-.B removelock (rl) <lock-number|package-name>
+.B removelock (rl) [options] <lock-number|package-name> ...
 Remove specified package lock. Specify the lock to remove by its number obtained with 'zypper locks'
 or by the package name.
+
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Restrict the lock to the specified repository.
 
 .SH "GLOBAL OPTIONS"
 
