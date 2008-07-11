@@ -37,7 +37,7 @@ namespace zypp {
       {
         if (_gopts.no_gpg_checks)
         {
-          MIL << "Accepting unsigned file (" << file << ")" << endl;
+          MIL << "Accepting unsigned file (" << file << ")" << std::endl;
           Zypper::instance()->out().warning(boost::str(
             boost::format(_("Accepting an unsigned file %s.")) % file),
             Out::HIGH);
@@ -65,7 +65,7 @@ namespace zypp {
       {
         if (_gopts.no_gpg_checks)
         {
-          MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << endl;
+          MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << std::endl;
           Zypper::instance()->out().warning(boost::str(boost::format(
               _("Accepting file %s signed with an unknown key %s."))
               % file % id));
@@ -86,7 +86,7 @@ namespace zypp {
         if (_gopts.no_gpg_checks)
         {
           MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
-              % keyid % keyname % fingerprint << endl;
+              % keyid % keyname % fingerprint << std::endl;
           Zypper::instance()->out().info(boost::str(boost::format(
               _("Automatically trusting key id %s, %s, fingerprint %s"))
               % keyid % keyname % fingerprint));
@@ -109,7 +109,7 @@ namespace zypp {
           MIL << boost::format(
               "Ignoring failed signature verification for %s"
               " with public key id %s, %s, fingerprint %s")
-              % file % keyid % keyname % fingerprint << endl;
+              % file % keyid % keyname % fingerprint << std::endl;
           Zypper::instance()->out().warning(boost::str(boost::format(
               _("Ignoring failed signature verification for %s"
                 " with public key id %s, %s, fingerprint %s!\n"
@@ -158,7 +158,7 @@ namespace zypp {
         {
           WAR << boost::format(
               "Ignoring failed digest verification for %s (expected %s, found %s).")
-              % file % requested % found << endl;
+              % file % requested % found << std::endl;
           Zypper::instance()->out().warning(boost::str(boost::format(
               _("Ignoring failed digest verification for %s (expected %s, found %s)."))
               % file % requested % found),

@@ -211,13 +211,13 @@ namespace ZmartRecipients
 
         Zypper::instance()->out().prompt(
             PROMPT_AUTH_USERNAME, description, PromptOptions(_("User Name"), 0));
-        string username;
+        std::string username;
         std::cin >> username;
         auth_data_ptr->setUserName(username);
 
         Zypper::instance()->out().prompt(
             PROMPT_AUTH_PASSWORD, description, PromptOptions(_("Password"), 0));
-        string password;
+        std::string password;
         std::cin >> password;
         if (password.empty()) return false;
         auth_data_ptr->setPassword(password);
@@ -244,7 +244,7 @@ class MediaCallbacks {
   public:
     MediaCallbacks()
     {
-      MIL << "Set media callbacks.." << endl;
+      MIL << "Set media callbacks.." << std::endl;
       _mediaChangeReport.connect();
       _mediaDownloadReport.connect();
       _mediaAuthenticationReport.connect();

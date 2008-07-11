@@ -47,7 +47,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _delta = filename;
     _delta_size = downloadsize;
-    ostringstream s;
+    std::ostringstream s;
     s << _("Downloading delta") << ": "
         << _delta << ", " << _delta_size;
     Zypper::instance()->out().info(s.str());
@@ -56,7 +56,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progressDeltaDownload( int value )
   {
     // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << endl;
+    INT << "not impelmented" << std::endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
     //display_step( "apply-delta", ~("Downloading delta") /*+ _delta.asString()*/, value );
     return true;
@@ -82,7 +82,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual void startDeltaApply( const zypp::Pathname & filename )
   {
     _delta = filename.basename();
-    ostringstream s;
+    std::ostringstream s;
     // translators: this text is a progress display label e.g. "Applying delta foo [42%]"
     s << _("Applying delta") << ": " << _delta;
     _label_apply_delta = s.str();
@@ -113,7 +113,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     _patch = filename.basename();
     _patch_size = downloadsize;
-    ostringstream s;
+    std::ostringstream s;
     s << _("Downloading patch rpm") << ": " << _patch << ", " << _patch_size;
     Zypper::instance()->out().info(s.str());
   }
@@ -121,7 +121,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progressPatchDownload( int value )
   {
     // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << endl;
+    INT << "not impelmented" << std::endl;
     // TranslatorExplanation This text is a progress display label e.g. "Applying patch rpm [42%]"
     //display_step( "apply-delta", _("Applying patch rpm") /* + _patch.asString() */, value );
     return true;
@@ -150,7 +150,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     _url = url;
     Zypper & zypper = *Zypper::instance();
 
-    ostringstream s;
+    std::ostringstream s;
     s << boost::format(_("Downloading %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
@@ -175,7 +175,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual bool progress(int value, zypp::Resolvable::constPtr /*resolvable_ptr*/)
   {
     // seems this is never called, the progress is reported by the media backend anyway
-    INT << "not impelmented" << endl;
+    INT << "not impelmented" << std::endl;
     // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
 //    display_step( "download-resolvable", ~("Downloading") /* + resolvable_ptr->name() */, value );
     return true;
@@ -184,7 +184,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   virtual Action problem( zypp::Resolvable::constPtr resolvable_ptr, Error /*error*/, const std::string & description )
   {
     Zypper::instance()->out().error(description);
-    DBG << "error report" << endl;
+    DBG << "error report" << std::endl;
 
     Action action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
     if (action == DownloadResolvableReport::RETRY)

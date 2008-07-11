@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <ctime>
 
 #include <boost/format.hpp>
 
@@ -19,12 +20,25 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/Package.h"
 #include "zypp/Patch.h"
-//#include "zypp/target/rpm/RpmCallbacks.h"
 
 #include "../Zypper.h"
 #include "../prompt.h"
 
-using namespace std;
+
+static bool report_again(timespec * last)
+{
+  // don't report more often than 5 times per sec
+  timespec now;
+  clock_gettime(CLOCK_REALTIME, &now);
+  if (now.tv_sec > last->tv_sec ||
+      (now.tv_sec == last->tv_sec && now.tv_nsec > last->tv_nsec + 200000000L))
+  {
+    *last = now;
+    return true;
+  }
+  else
+    return false;
+}
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -41,7 +55,7 @@ struct PatchMessageReportReceiver : public zypp::callback::ReceiveReport<zypp::t
   virtual bool show( zypp::Patch::constPtr & patch )
   {
     Out & out = Zypper::instance()->out();
-    ostringstream s;
+    std::ostringstream s;
     s << patch; // [patch]important-patch-101 \todo make some meaningfull message out of this
     out.info(s.str(), Out::HIGH);
     out.info(patch->message());
@@ -61,7 +75,7 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
     _label = boost::str(
         // TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
         boost::format(_("Running: %s  (%s, %s)")) % path_r.basename() % package->name() % path_r.dirname());
-    cout << _label << endl;
+    std::cout << _label << std::endl;
   }
 
   /**
@@ -75,14 +89,14 @@ struct PatchScriptReportReceiver : public zypp::callback::ReceiveReport<zypp::ta
     static bool was_ping_before = false;
     if (kind == PING)
     {
-      cout << "." << flush;
+      std::cout << "." << std::flush;
       was_ping_before = true;
     }
     else
     {
       if (was_ping_before)
-       cout << endl;
-      cout << output;
+       std::cout << std::endl;
+      std::cout << output;
       was_ping_before = false;
     }
 
@@ -162,9 +176,11 @@ struct ScanRpmDbReceive : public zypp::callback::ReceiveReport<zypp::target::rpm
 struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zypp::target::rpm::RemoveResolvableReport>
 {
   std::string _label;
+  timespec _last_reported;
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    ::clock_gettime(CLOCK_REALTIME, &_last_reported);
     // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
     _label = boost::str(boost::format(_("Removing %s-%s"))
         % resolvable->name() % resolvable->edition()); 
@@ -173,6 +189,10 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
+    // don't report too often
+    if (!report_again(&_last_reported))
+      return true;
+
     Zypper::instance()->out().progress("remove-resolvable", _label, value);
     return true;
   }
@@ -180,7 +200,7 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   virtual Action problem( zypp::Resolvable::constPtr resolvable, Error error, const std::string & description )
   {
     Zypper::instance()->out().progressEnd("remove-resolvable", _label, true);
-    ostringstream s;
+    std::ostringstream s;
     s << boost::format(_("Removal of %s failed:")) % resolvable << std::endl;
     s << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
@@ -197,7 +217,9 @@ struct RemoveResolvableReportReceiver : public zypp::callback::ReceiveReport<zyp
   }
 };
 
-ostream& operator << (ostream& stm, zypp::target::rpm::InstallResolvableReport::RpmLevel level) {
+std::ostream & operator << (std::ostream & stm,
+                            zypp::target::rpm::InstallResolvableReport::RpmLevel level)
+{
   static const char * level_s[] = {
     // TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
     //! \todo use format
@@ -212,13 +234,15 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 {
   zypp::Resolvable::constPtr _resolvable;
   std::string _label;
-
+  timespec _last_reported;
+ 
   void display_step( zypp::Resolvable::constPtr resolvable, int value )
   {
   }
 
   virtual void start( zypp::Resolvable::constPtr resolvable )
   {
+    clock_gettime(CLOCK_REALTIME, &_last_reported);
     _resolvable = resolvable;
     // TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
     _label = boost::str(boost::format(_("Installing: %s-%s"))
@@ -228,6 +252,10 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
 
   virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
   {
+    // don't report too often
+    if (!report_again(&_last_reported))
+      return true;
+
     Zypper::instance()->out().progress("install-resolvable", _label, value);
     return true;
   }
@@ -242,7 +270,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     }
 
     Zypper::instance()->out().progressEnd("install-resolvable", _label, true);
-    ostringstream s;
+    std::ostringstream s;
     s << boost::format(_("Installation of %s-%s failed:")) % resolvable->name() % resolvable->edition() << std::endl;
     s << level << " " << zcb_error2str(error, description);
     Zypper::instance()->out().error(s.str());
@@ -255,7 +283,7 @@ struct InstallResolvableReportReceiver : public zypp::callback::ReceiveReport<zy
     if (error != NO_ERROR && level < RPM_NODEPS_FORCE)
     {
       DBG << "level < RPM_NODEPS_FORCE: aborting without displaying an error"
-          << endl;
+          << std::endl;
       return;
     }
 
