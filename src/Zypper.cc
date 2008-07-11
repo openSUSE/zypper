@@ -38,7 +38,8 @@
 #include "Command.h"
 
 #include "Table.h"
-#include "utils.h"
+#include "utils/misc.h"
+#include "utils/messages.h"
 #include "utils/getopt.h"
 
 #include "repos.h"

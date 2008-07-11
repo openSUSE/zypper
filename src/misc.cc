@@ -17,7 +17,7 @@
 #include "zypp/RepoInfo.h"
 
 #include "main.h"
-#include "utils.h"
+#include "utils/misc.h"
 #include "utils/pager.h"
 #include "utils/prompt.h"
 #include "utils/getopt.h"

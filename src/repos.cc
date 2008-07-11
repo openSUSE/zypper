@@ -23,7 +23,8 @@
 #include "main.h"
 #include "getopt.h"
 #include "Table.h"
-#include "utils.h"
+#include "utils/messages.h"
+#include "utils/misc.h" // for xml_encode
 #include "repos.h"
 
 using namespace std;

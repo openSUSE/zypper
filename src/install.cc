@@ -5,7 +5,7 @@
 #include "zypp/base/Algorithm.h"
 #include "zypp/PoolQuery.h"
 
-#include "utils.h"
+#include "utils/misc.h"
 
 #include "install.h"
 

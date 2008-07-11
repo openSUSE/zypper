@@ -18,7 +18,7 @@
 
 #include "Zypper.h"
 #include "utils/prompt.h"
-#include "utils.h"
+#include "utils/misc.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients

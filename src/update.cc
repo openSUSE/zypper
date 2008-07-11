@@ -9,7 +9,6 @@
 
 #include "zypp/Patch.h"
 
-//#include "utils.h"
 #include "Table.h"
 #include "update.h"
 

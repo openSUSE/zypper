@@ -16,7 +16,7 @@
 #include "zypp/Patch.h"
 
 #include "Zypper.h"
-#include "utils.h" // for kind_to_string_localized
+#include "utils/misc.h" // for kind_to_string_localized
 #include "Table.h"
 
 std::string selectable_search_repo_str(const zypp::ui::Selectable & s);

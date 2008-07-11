@@ -20,7 +20,7 @@
 #include "zypp/media/MediaException.h"
 
 #include "misc.h"
-#include "utils.h"
+#include "utils/misc.h"
 #include "utils/getopt.h"
 #include "utils/prompt.h"
 

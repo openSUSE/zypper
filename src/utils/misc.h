@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef ZYPPER_UTILS_H
 #define ZYPPER_UTILS_H
 
@@ -9,24 +16,11 @@
 #include "zypp/Pathname.h"
 #include "zypp/RepoInfo.h"
 
-#include "output/Out.h"
+#include "Zypper.h"
 
 typedef std::set<zypp::ResKind> ResKindSet;
 
 std::string readline_getline();
-
-/** Write a suggestion to report a bug to the output. */
-void report_a_bug (Out & out);
-
-/** Say that too many arguments have been specified */
-void report_too_many_arguments(const std::string & specific_help); // deprecated
-void report_too_many_arguments(Out & out, const std::string & specific_help);
-
-/** Say the specified option has no effect */
-void report_dummy_option(Out & out, const std::string & longoption_str);
-
-/** Say you miss a required argument and print command help */
-void report_required_arg_missing(Out & out, const std::string & cmd_help);
 
 bool is_changeable_media(const zypp::Url & url);
 

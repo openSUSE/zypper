@@ -1,6 +1,6 @@
 #include "Zypper.h"
 
-#include "utils.h"
+#include "utils/misc.h"
 
 /**
  * Are there applicable patches?

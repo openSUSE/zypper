@@ -13,7 +13,6 @@ SET (zypper_HEADERS
   Command.h
   repos.h
   misc.h
-  utils.h
   search.h
   info.h
   Table.h
@@ -33,7 +32,6 @@ SET( zypper_SRCS
   Command.cc
   repos.cc
   misc.cc
-  utils.cc
   search.cc
   info.cc
   Table.cc
@@ -61,6 +59,8 @@ SET( zypper_out_SRCS
 
 SET( zypper_utils_HEADERS
   utils/getopt.h
+  utils/messages.h
+  utils/misc.h
   utils/pager.h
   utils/prompt.h
   utils/richtext.h
@@ -68,6 +68,8 @@ SET( zypper_utils_HEADERS
 
 SET( zypper_utils_SRCS
   utils/getopt.cc
+  utils/messages.cc
+  utils/misc.cc
   utils/pager.cc
   utils/prompt.cc
   utils/richtext.cc
