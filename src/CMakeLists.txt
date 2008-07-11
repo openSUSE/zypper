@@ -125,7 +125,7 @@ INSTALL(
 
 # logrotate config file
 INSTALL(
-  FILES zypper.lr
+  FILES zypper.lr zypp-refresh.lr
   DESTINATION ${SYSCONFDIR}/logrotate.d
 )
 
