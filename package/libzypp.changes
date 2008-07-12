@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Jul 12 11:19:56 CEST 2008 - jkupec@suse.cz
+
+- reuse existing disk mounts (applied Marius' patch) (bnc #208222)
+- revision 10557
+
+-------------------------------------------------------------------
 Wed Jul  9 18:13:58 CEST 2008 - ma@suse.de
 
 - Provide Package::url() if available in solv file. (bnc #402434)
