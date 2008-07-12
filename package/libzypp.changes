@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sat Jul 12 22:14:32 CEST 2008 - jkupec@suse.cz
+
+- make curl use the right transfer mode
+  (CURLOPT_PROXY_TRANSFER_MODE) when proxy is used (bnc #306272)
+- revision 10559
+
+-------------------------------------------------------------------
 Sat Jul 12 11:19:56 CEST 2008 - jkupec@suse.cz
 
 - reuse existing disk mounts (applied Marius' patch) (bnc #208222)
