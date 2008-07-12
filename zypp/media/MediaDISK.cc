@@ -25,9 +25,21 @@
 #include <errno.h>
 #include <dirent.h>
 
-#define DELAYED_VERIFY    1
+/*
+** verify devices names as late as possible (while attach)
+*/
+#define DELAYED_VERIFY           1
 
-#define VOL_ID_TOOL_PATHS { "/sbin/vol_id", "/lib/udev/vol_id", NULL}
+/*
+** Reuse foreign (user/automounter) mount points.
+** 0 = don't use, 1 = automounted only, 2 = all
+*/
+#define  REUSE_FOREIGN_MOUNTS    2
+
+/*
+** Path to the vol_id tool (normal system, instsys)
+*/
+#define VOL_ID_TOOL_PATHS        { "/sbin/vol_id", "/lib/udev/vol_id", NULL}
 
 using namespace std;
 
@@ -297,13 +309,31 @@ namespace zypp {
 	if( is_device && media->maj_nr == dev_info.major() &&
 	                 media->min_nr == dev_info.minor())
 	{
-	  /*
-	  if( _filesystem != "auto" && _filesystem != e->type)
+#if REUSE_FOREIGN_MOUNTS > 0
+	  AttachPointRef ap( new AttachPoint(e->dir, false));
+	  AttachedMedia  am( media, ap);
+	  //
+	  // 1 = automounted only, 2 == all
+	  //
+#if REUSE_FOREIGN_MOUNTS == 1
+	  if( isAutoMountedMedia(am))
+#endif
 	  {
-	    ZYPP_THROW();
+	    DBG << "Using a system mounted media "
+		<< media->name
+		<< " attached on "
+		<< ap->path
+		<< endl;
+
+	    media->iown = false; // mark attachment as foreign
+
+	    setMediaSource(media);
+	    setAttachPoint(ap);
+	    return;
 	  }
-	  */
+#else
 	  media->bdir = e->dir;
+#endif
 	}
       }
 
@@ -385,8 +415,12 @@ namespace zypp {
     //
     void MediaDISK::releaseFrom( const std::string & ejectDev )
     {
-      Mount mount;
-      mount.umount(attachPoint().asString());
+      AttachedMedia am( attachedMedia());
+      if(am.mediaSource && am.mediaSource->iown)
+      {
+        Mount mount;
+        mount.umount(attachPoint().asString());
+      }
     }
 
     ///////////////////////////////////////////////////////////////////
