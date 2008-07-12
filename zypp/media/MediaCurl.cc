@@ -646,6 +646,14 @@ void MediaCurl::attachTo (bool next)
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
+  // bnc #306272
+  ret = curl_easy_setopt( _curl, CURLOPT_PROXY_TRANSFER_MODE, 1 );
+  if ( ret != 0 ) {
+    disconnectFrom();
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+  }
+
+
   // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
   setMediaSource(media);
