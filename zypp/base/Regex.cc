@@ -20,7 +20,8 @@ using namespace zypp;
 using namespace zypp::str;
 
 regex::regex()
-  : m_valid(false)
+  : m_flags(match_extended)
+  , m_valid(false)
 {
 
 }
