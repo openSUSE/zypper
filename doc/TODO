@@ -35,3 +35,5 @@ Packages
 ? zypper up -t package should show the difference between zypper lu -t package
   and current summary as  "these packages have been kept back" (like apt does).
   User can upgrade such packages with 'zypper in foo' then.
+? list packages newly added to repos since last update (might be easy once we
+  have package history)
