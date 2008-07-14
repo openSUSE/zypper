@@ -106,18 +106,22 @@ itemToString (PoolItem item, bool shortVersion)
 std::ostream &
 SATResolver::dumpOn( std::ostream & os ) const
 {
-    os << "<resolver>";	    
-    os << "  fixsystem = " << _fixsystem << endl;
-    os << "  allowdowngrade = " << _allowdowngrade << endl;
-    os << "  allowarchchange = " << _allowarchchange << endl;
-    os << "  allowvendorchange = " <<  _allowvendorchange << endl;
-    os << "  allowuninstall = " << _allowuninstall << endl;
-    os << "  updatesystem = " << _updatesystem << endl;
-    os << "  allowvirtualconflicts = " <<  _allowvirtualconflicts << endl;
-    os << "  noupdateprovide = " << _noupdateprovide << endl;
-    os << "  dosplitprovides = " << _dosplitprovides << endl;
-    os << "  onlyRequires = " << _onlyRequires << endl;
-    os << "  ignorealreadyrecommended = " << _ignorealreadyrecommended << endl;
+    os << "<resolver>" << endl;	    
+    if (_solv) {
+	os << "  fixsystem = " << _solv->fixsystem << endl;
+	os << "  allowdowngrade = " << _solv->allowdowngrade << endl;
+	os << "  allowarchchange = " << _solv->allowarchchange << endl;
+	os << "  allowvendorchange = " <<  _solv->allowvendorchange << endl;
+	os << "  allowuninstall = " << _solv->allowuninstall << endl;
+	os << "  updatesystem = " << _solv->updatesystem << endl;
+	os << "  allowvirtualconflicts = " <<  _solv->allowvirtualconflicts << endl;
+	os << "  noupdateprovide = " << _solv->noupdateprovide << endl;
+	os << "  dosplitprovides = " << _solv->dosplitprovides << endl;
+	os << "  onlyRequires = " << _solv->dontinstallrecommended << endl;
+	os << "  ignorealreadyrecommended = " << _solv->ignorealreadyrecommended << endl;
+    } else {
+	os << "<NULL>";
+    }
     return os << "<resolver/>" << endl;
 }
 
@@ -811,6 +815,32 @@ void SATResolver::doUpdate()
 	       CapabilitySet(),
 	       PoolItemSet(),
 	       ObsoleteStrings());
+
+    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); iter++) {
+        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
+	if (iter->status().isInstalled()) {
+	    MIL << "Lock installed item " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE );
+	    queue_push( &(_jobQueue), ident );
+	} else {
+	    MIL << "Lock NOT installed item " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(_jobQueue), ident );
+	}
+    }
+
+    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); iter++) {
+        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
+	if (iter->status().isInstalled()) {
+	    MIL << "Keep installed item " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), ident );
+	} else {
+	    MIL << "Keep NOT installed item " << *iter << ident << endl;
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE | SOLVER_WEAK);
+	    queue_push( &(_jobQueue), ident );
+	}
+    }
 
     _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
     _solv->vendorCheckCb = &vendorCheck;
