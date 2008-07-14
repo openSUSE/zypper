@@ -133,12 +133,10 @@ std::string helixXML( const Capability &cap )
 		str << IdString(detail.rhs().id()) << ")' />" << endl;
 	    } else {
 		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
-		MIL << "ignoring " << cap << " cause this format will be supported" << endl;
 	    }
 	}
     } else {
 	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
-	MIL << "ignoring " << cap << " cause this format will be supported" << endl;
     }
 
     return str.str();
