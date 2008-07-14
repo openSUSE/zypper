@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 14 11:26:30 CEST 2008 - schubi@suse.de
+
+- corrected logging onf solver settings
+- regard locking while doUpdate (bnc #405427)
+- revision 10564 
+
+-------------------------------------------------------------------
 Sat Jul 12 22:14:32 CEST 2008 - jkupec@suse.cz
 
 - make curl use the right transfer mode
