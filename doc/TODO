@@ -5,8 +5,6 @@
 - implement all rug commands (where it makes sense)
 - zypper [help] rug
 - add help texts for prompts
-- code reorganization
-  - clean up/split utils.cc
 - show recommended and suggested in the summary
 - report licenses of installed software
 
@@ -24,10 +22,12 @@ General
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
 
-Patches
+Updating
 
 + cron updater: wrapper script for restart-packager after packager-affecting
   patches have been installed
++ zypper up --some-option repofoo (like 'rug up repo'?) - update
+  packages from specified repos without disabling the others
 
 Packages
 
