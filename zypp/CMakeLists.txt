@@ -54,6 +54,7 @@ SET( zypp_SRCS
   Rel.cc
   RepoInfo.cc
   RepoManager.cc
+  Repository.cc
   RepoStatus.cc
   ResKind.cc
   ResObject.cc
@@ -78,7 +79,6 @@ SET( zypp_SRCS
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
   ZYppFactory.cc
-  Repository.cc
 )
 SET( zypp_EARLY_SRCS
   ZConfig.cc
@@ -149,6 +149,7 @@ SET( zypp_HEADERS
   Rel.h
   RepoInfo.h
   RepoManager.h
+  Repository.h
   RepoStatus.h
   Filter.h
   ResFilters.h
@@ -181,7 +182,6 @@ SET( zypp_HEADERS
   ZYppCommitResult.h
   ZYppFactory.h
   ZYpp.h
-  Repository.h
 )
 
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
@@ -466,6 +466,21 @@ INSTALL(  FILES
   ${zypp_parser_yum_HEADERS}
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
 )
+
+SET( zypp_parser_ws_SRCS
+  parser/ws/WebpinResultFileReader.cc
+
+)
+
+SET( zypp_parser_ws_HEADERS
+  parser/ws/WebpinResultFileReader.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_ws_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/ws
+)
+
 
 SET( zypp_pool_SRCS
   pool/GetResolvablesToInsDel.cc
@@ -787,12 +802,22 @@ SET( zypp_repo_susetags_HEADERS
   repo/susetags/Downloader.h
 )
 
+SET( zypp_ws_SRCS
+  ws/WebpinResult.cc
+)
+
+SET( zypp_ws_HEADERS
+  ws/WebpinResult.h
+)
+
+
 SET( zypp_lib_SRCS
 ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
 ${zypp_parser_plaindir_SRCS}
+${zypp_parser_ws_SRCS}
 ${zypp_parser_SRCS}
 ${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
@@ -809,6 +834,7 @@ ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_thread_SRCS}
+${zypp_ws_SRCS}
 ${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_sat_SRCS}
@@ -824,6 +850,7 @@ ${zypp_parser_susetags_HEADERS}
 ${zypp_parser_yum_HEADERS}
 ${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
+${zypp_parser_ws_HEADERS}
 ${zypp_parser_HEADERS}
 ${zypp_data_HEADERS}
 ${zypp_ui_HEADERS}
@@ -835,6 +862,7 @@ ${zypp_solver_detail_HEADERS}
 ${zypp_sat_HEADERS}
 ${zypp_sat_detail_HEADERS}
 ${zypp_url_HEADERS}
+${zypp_ws_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
 ${zypp_thread_HEADERS}
