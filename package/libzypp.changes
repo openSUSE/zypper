@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Jul 14 13:36:26 CEST 2008 - ma@suse.de
+
+- Also report the name of the locking process in ZYppFactoryException 
+  (bnc #280537)
+- revision 10572
+
+-------------------------------------------------------------------
+Mon Jul 14 13:31:28 CEST 2008 - ma@suse.de
+
+- Provide also the name of the locking process in
+  ZYppFactoryException ()
+- revision 10571
+
+-------------------------------------------------------------------
 Mon Jul 14 11:26:30 CEST 2008 - schubi@suse.de
 
 - corrected logging onf solver settings

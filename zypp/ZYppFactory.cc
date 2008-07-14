@@ -89,13 +89,19 @@ namespace zypp
       catch(...) {} // let no exception escape.
     }
 
-    pid_t locker_pid() const { return _locker_pid; }
+    pid_t locker_pid() const
+    { return _locker_pid; }
+
+    const std::string & locker_name() const
+    { return _locker_name; }
+
 
     bool _clean_lock;
 
     private:
     FILE *_zypp_lockfile;
     pid_t _locker_pid;
+    std::string _locker_name;
 
     void openLockFile(const char *mode)
     {
@@ -174,7 +180,8 @@ namespace zypp
       if ( still_running )
       {
         Pathname p( procdir/"exe" );
-        MIL << p << " -> " << filesystem::readlink( p ) << endl;
+        _locker_name = filesystem::readlink( p ).asString();
+        MIL << p << " -> " << _locker_name << endl;
 
         p = procdir/"cmdline";
         MIL << p << ": ";
@@ -351,9 +358,11 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-	std::string t = str::form(N_("System management is locked by the application with pid %d. "
+	std::string t = str::form(N_("System management is locked by the application with pid %d (%s). "
                                   "Please close this application before trying again."),
-                                  globalLock.locker_pid());
+                                  globalLock.locker_pid(),
+                                  globalLock.locker_name().c_str()
+                                 );
 	ZYPP_THROW(ZYppFactoryException(t, globalLock.locker_pid()));
       }
       else
