@@ -45,14 +45,6 @@ ResKind string_to_kind (const string &skind)
     return ResTraits<Product>::kind;
   if (lskind == "patch")
     return ResTraits<Patch>::kind;
-  if (lskind == "script")
-    return ResTraits<Script>::kind;
-  if (lskind == "message")
-    return ResTraits<Message>::kind;
-  if (lskind == "atom")
-    return ResTraits<Atom>::kind;
-//   if (lskind == "system")
-//     return ResTraits<SystemResObject>::kind;
   if (lskind == "srcpackage")
     return ResTraits<SrcPackage>::kind;
   // not recognized
@@ -227,7 +219,7 @@ static SrcPackage::constPtr source_find( const string & arg )
 
     ResPool pool(God->pool());
     DBG << "looking source for : " << arg << endl;
-    for_( srcit, pool.byIdentBegin<SrcPackage>(arg), 
+    for_( srcit, pool.byIdentBegin<SrcPackage>(arg),
               pool.byIdentEnd<SrcPackage>(arg) )
     {
       DBG << *srcit << endl;
@@ -330,11 +322,11 @@ void install_src_pkgs(Zypper & zypper)
         _("Installing source package %s-%s"))
         % srcpkg->name() % srcpkg->edition()));
     MIL << "Going to install srcpackage: " << srcpkg << endl;
-  
+
     try
     {
       God->installSrcPackage(srcpkg);
-  
+
       zypper.out().info(boost::str(format(
           _("Source package %s-%s successfully installed."))
           % srcpkg->name() % srcpkg->edition()));
@@ -345,7 +337,7 @@ void install_src_pkgs(Zypper & zypper)
       zypper.out().error(ex,
         boost::str(format(_("Problem installing source package %s-%s:"))
           % srcpkg->name() % srcpkg->edition()));
-  
+
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
     }
   }

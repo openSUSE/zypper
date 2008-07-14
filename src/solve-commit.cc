@@ -61,7 +61,7 @@ static TriBool show_problem (Zypper & zypper,
   }
 
   unsigned int problem_count = God->resolver()->problems().size();
-  unsigned int solution_count = solutions.size(); 
+  unsigned int solution_count = solutions.size();
 
   // without solutions, its useless to prompt
   if (solutions.empty())
@@ -211,7 +211,7 @@ static void show_summary_resolvable_list(const string & label,
     cols = 77;
 
 #define INDENT "  "
-//! \todo make function to wrap & indent the text 
+//! \todo make function to wrap & indent the text
   for (set<ResObject::constPtr>::const_iterator resit = it->second.begin();
       resit != it->second.end(); ++resit)
   {
@@ -329,7 +329,7 @@ static void show_summary_of_type(Zypper & zypper,
         cout << " type=\"" << it->first << "\"";
         cout << " name=\"" << res->name() << "\"";
         cout << " edition=\"" << res->edition() << "\"";
-        //! \todo cout << " edition-old=\"" << << "\""; 
+        //! \todo cout << " edition-old=\"" << << "\"";
         cout << " arch=\"" << res->arch() << "\"";
         if (!res->summary().empty())
           cout << " summary=\"" << xml_encode(res->summary()) << "\"";
@@ -528,7 +528,7 @@ enum
  * sets zypper exit code to:
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
- * 
+ *
  * @return SUMMARY_*
  */
 static int summary(Zypper & zypper)
@@ -561,14 +561,12 @@ static int summary(Zypper & zypper)
           zypper.setExitCode(ZYPPER_EXIT_INF_RESTART_NEEDED);
       }
 
-      if ( it->status().isToBeInstalled()
-           && it->resolvable()->kind() != ResTraits<Atom>::kind )
+      if ( it->status().isToBeInstalled()  )
       {
         DBG << "<install>   ";
         to_be_installed[it->resolvable()->kind()].insert(it->resolvable());
       }
-      if ( it->status().isToBeUninstalled()
-           && it->resolvable()->kind() != ResTraits<Atom>::kind )
+      if ( it->status().isToBeUninstalled() )
       {
         DBG << "<uninstall> ";
         to_be_removed[it->resolvable()->kind()].insert(it->resolvable());
@@ -814,7 +812,7 @@ static void set_force_resolution(Zypper & zypper)
   }
 
   // save the setting
-  zypper.runtimeData().force_resolution = force_resolution; 
+  zypper.runtimeData().force_resolution = force_resolution;
 
   DBG << "force resolution: " << force_resolution << endl;
   ostringstream s;
@@ -859,8 +857,8 @@ static void set_solver_flags(Zypper & zypper)
 
 /**
  * Run the solver.
- * 
- * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
+ *
+ * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise
  */
 bool resolve(Zypper & zypper)
 {
@@ -973,7 +971,7 @@ void solve_and_commit (Zypper & zypper)
         zypper.setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
         return;
       }
-  
+
       bool do_commit = false;
       if (zypper.runtimeData().force_resolution &&
           (retv == SUMMARY_INSTALL_DOES_REMOVE || retv == SUMMARY_REMOVE_DOES_INSTALL))
@@ -1027,25 +1025,25 @@ void solve_and_commit (Zypper & zypper)
           try
           {
             gData.show_media_progress_hack = true;
-    
+
             ostringstream s;
             s << _("committing"); MIL << "committing...";
-    
+
             ZYppCommitResult result;
             if (copts.count("dry-run"))
             {
               s << " " << _("(dry run)") << endl; MIL << "(dry run)";
               zypper.out().info(s.str(), Out::HIGH);
-    
+
               result = God->commit(ZYppCommitPolicy().dryRun(true));
             }
             else
             {
               zypper.out().info(s.str(), Out::HIGH);
-    
+
               result = God->commit(
                 ZYppCommitPolicy().syncPoolAfterCommit(zypper.runningShell()));
-    
+
               commit_done = true;
             }
 
@@ -1056,7 +1054,7 @@ void solve_and_commit (Zypper & zypper)
 
             if (!result._errors.empty())
               retv = ZYPPER_EXIT_ERR_ZYPP;
-    
+
             s.clear(); s << result;
             zypper.out().info(s.str(), Out::HIGH);
           }
@@ -1070,9 +1068,9 @@ void solve_and_commit (Zypper & zypper)
           }
           catch ( zypp::repo::RepoException & e ) {
             ZYPP_CAUGHT(e);
-            
+
             RepoManager manager(zypper.globalOpts().rm_options );
-  
+
             bool refresh_needed = false;
             for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
                       it != e.info().baseUrlsEnd(); ++it)
@@ -1086,7 +1084,7 @@ void solve_and_commit (Zypper & zypper)
                   break;
                 }
               }
-            
+
             std::string hint = _("Please see the above error message for a hint.");
             if (refresh_needed)
             {

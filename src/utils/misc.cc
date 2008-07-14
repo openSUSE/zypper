@@ -40,7 +40,7 @@ string readline_getline()
   }
 
   //::rl_catch_signals = 0;
-  /* Get a line from the user. */  
+  /* Get a line from the user. */
   line_read = ::readline ("zypper> ");
 
   /* If the line has any text in it,
@@ -88,14 +88,6 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
     return _PL("product", "product", count);
   if (kind == ResTraits<Patch>::kind)
     return _PL("patch", "patches", count);
-  if (kind == ResTraits<Script>::kind)
-    return _PL("script", "scripts", count);
-  if (kind == ResTraits<Message>::kind)
-    return _PL("message", "messages", count);
-  if (kind == ResTraits<Atom>::kind)
-    return _PL("atom", "atoms", count);
-//   if (kind == ResTraits<SystemResObject>::kind)
-//     return _PL("system", "systems", count);
   if (kind == ResTraits<SrcPackage>::kind)
     return _PL("srcpackage", "srcpackages", count);
   // default
@@ -221,14 +213,14 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
     media::MediaManager mm;
     media::MediaAccessId mid = mm.open(rpmurl);
     mm.attachDesiredMedia(mid);
-  
+
     mm.provideFile(mid, rpmpath.basename());
     Pathname localrpmpath = mm.localPath(mid, rpmpath.basename());
     Pathname cachedrpmpath = cache_dir;
     filesystem::assert_dir(cachedrpmpath);
     bool error =
       filesystem::copy(localrpmpath, cachedrpmpath / localrpmpath.basename());
-  
+
     mm.release(mid);
     mm.close(mid);
 
@@ -236,7 +228,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
     {
       Zypper::instance()->out().error(
         _("Problem copying the specified RPM file to the cache directory."),
-        _("Perhaps you are running out of disk space.")); 
+        _("Perhaps you are running out of disk space."));
       return Pathname();
     }
     return cachedrpmpath / localrpmpath.basename();
@@ -284,7 +276,7 @@ static string preparse_cap_str(const string & capstr)
       DBG << "new capstr: " << new_capstr << endl;
     }
   }
-  
+
   return new_capstr;
 }
 
