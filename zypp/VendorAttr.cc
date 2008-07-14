@@ -107,7 +107,6 @@ namespace zypp
   VendorAttr::VendorAttr ()
   {
       vendorGroupCounter = 1;
-      Pathname xxx = ZConfig::instance().repoCachePath();
       Pathname vendorPath (ZConfig::instance().vendorPath());
       try
       {
