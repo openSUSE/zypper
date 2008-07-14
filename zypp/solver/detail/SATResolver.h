@@ -100,6 +100,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool solving();
     // cleanup solver
     void solverEnd();
+    // set locks for the solver
+    void setLocks();
     
   public:
 
