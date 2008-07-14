@@ -74,7 +74,7 @@ namespace zypp
   std::string ResObject::licenseToConfirm( const Locale & lang_r ) const
   { return lookupStrAttribute( sat::SolvAttr::eula, lang_r ); }
 
-  ByteCount ResObject::installsize() const
+  ByteCount ResObject::installSize() const
   { return ByteCount( lookupNumAttribute( sat::SolvAttr::installsize ), ByteCount::K ); }
 
   ByteCount ResObject::downloadSize() const

@@ -110,10 +110,11 @@ namespace zypp
     { return Resolvable::vendor().asString(); }
 
     /** Installed size. */
-    ByteCount installsize() const;
-    /** \deprecated Use installsize which is more precise. */
-    ZYPP_DEPRECATED ByteCount size() const
-    { return installsize(); }
+    ByteCount installSize() const;
+    /** \deprecated Use installSize which is more precise.*/
+    ZYPP_DEPRECATED ByteCount installsize() const { return installSize(); }
+    /** \deprecated Use installSize which is more precise. */
+    ZYPP_DEPRECATED ByteCount size() const { return installSize(); }
 
     /** Size of the rpm package. */
     ByteCount downloadSize() const;
