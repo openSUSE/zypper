@@ -11,6 +11,7 @@
 
 #include "zypp/RepoManager.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/repo/PackageProvider.h"
 
 #include "zypp/ResPoolProxy.h"
 
@@ -39,24 +40,18 @@ bool solve()
   return true;
 }
 
-void mksrc( const std::string & url, const std::string & alias )
+ManagedFile providePkg( const PoolItem & pi )
 {
-  RepoManager repoManager( makeRepoManager( sysRoot ) );
+  Package::constPtr p = asKind<Package>( pi.resolvable() );
+  if ( ! pi )
+    return ManagedFile();
 
-  RepoInfo nrepo;
-  nrepo
-      .setAlias( alias )
-      .setName( alias )
-      .setEnabled( true )
-      .setAutorefresh( false )
-      .addBaseUrl( Url(url) );
+  repo::RepoMediaAccess access;
+  std::list<Repository> repos;
+  repo::DeltaCandidates deltas( repos );
+  repo::PackageProvider pkgProvider( access, p, deltas );
 
-  if ( ! repoManager.isCached( nrepo ) )
-  {
-    repoManager.buildCache( nrepo );
-  }
-
-  repoManager.loadFromCache( nrepo );
+  return pkgProvider.providePackage();
 }
 
 /******************************************************************
@@ -68,19 +63,27 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ResPool   pool( ResPool::instance() );
-  sat::Pool satpool( sat::Pool::instance() );
+  RepoManager repoManager( makeRepoManager( sysRoot ) );
+  ResPool     pool( ResPool::instance() );
+  sat::Pool   satpool( sat::Pool::instance() );
 
-  mksrc( "file:///schnell/CD-ARCHIVE/SLES10/SLE-10-SP1/SLES-10-SP1-GM/ia64/DVD1", "SLE" );
-  mksrc( "file:///mounts/dist/install/SLP/SLES-10-SP2-AS-LATEST/i386/CD1", "factorytest" );
+//   mksrc( "file:///schnell/CD-ARCHIVE/SLES10/SLE-10-SP1/SLES-10-SP1-GM/ia64/DVD1", "SLE" );
+//   mksrc( "file:///mounts/dist/install/SLP/SLES-10-SP2-AS-LATEST/i386/CD1", "factorytest" );
+//   mksrc( "iso:///?iso=openSUSE-10.3-GM-DVD9-BiArch-DVD1.iso&url=file:///schnell/CD-ARCHIVE/10.3/iso", "10.3.iso", repoManager );
+  mksrc( "file:///Local/SRC/test/", "test", repoManager );
 
   USR << "pool: " << pool << endl;
+  PoolItem pi ( getPi<Package>("BitTorrent-curses", Edition("4.0.3-115"), Arch_i586 ) );
+  MIL << pi << endl;
+  if ( pi )
+  {
+    providePkg( pi );
+  }
 
-  getSel<Product>( "SUSE_SLES_SP1" )->setStatus( ui::S_Install );
   //getSel<Pattern>( "basesystem" )->setStatus( ui::S_Install );
   //getSel<Pattern>( "slesas-ofed-base" )->setStatus( ui::S_Install );
 
-  if ( 1 )
+  if ( 0 )
   {
     vdumpPoolStats( USR << "Transacting:"<< endl,
                     make_filter_begin<resfilter::ByTransact>(pool),
