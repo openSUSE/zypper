@@ -1,0 +1,13 @@
+##
+## This file contains requirements/conflicts which fulfill the 
+## needs of a running system.
+## For example the system would be broken if not glibc or kernel is
+## installed. 
+## So the user will be informed if these packages will be deleted.
+## 
+## format: Each line represents one dependency:
+## e.g.
+## requires:kernel
+## requires:glibc
+
+requires:glibc
