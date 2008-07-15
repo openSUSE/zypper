@@ -61,7 +61,6 @@ namespace zypp
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames );
 
 	static void addPatternPackages		( set<string> & pkgNames );
- 	static void addLanguagePackages		( set<string> & pkgNames );
 	static void addPatchPackages		( set<string> & pkgNames );
 
 
@@ -74,7 +73,6 @@ namespace zypp
 
 	    addDirectlySelectedPackages	( pkgNames );
 	    addPatternPackages		( pkgNames );
-	    addLanguagePackages		( pkgNames );
 	    addPatchPackages		( pkgNames );
 
 	    return pkgNames;
@@ -137,53 +135,6 @@ namespace zypp
 	}
 
 
-	static void addLanguagePackages( set<string> & pkgNames )
-	{
-#warning NO MORE LANGUAGE RESOLVABLE
-#if 0
-	    // Build a set of all languages that are to be transacted
-
-	    set<string> wantedLanguages;
-
-	    for ( PoolProxyIterator lang_it = langBegin();
-		  lang_it != langEnd();
-		  ++lang_it )
-	    {
-		if ( (*lang_it)->toModify() )
-		{
-		    DBG << "Language will be transacted: \"" << (*lang_it)->name() << "\"" << endl;
-
-		    wantedLanguages.insert( (*lang_it)->name() );
-		}
-	    }
-
-
-	    // Check all packages if they support any of the wanted languages
-
-	    for ( PoolProxyIterator pkg_it = pkgBegin();
-		  pkg_it != pkgEnd();
-		  ++pkg_it )
-	    {
-		ResObject::constPtr obj = (*pkg_it)->theObj();
-
-		if ( obj )
-		{
-		    Capabilities freshens = obj->dep( Dep::FRESHENS );
-
-		    for ( Capabilities::const_iterator cap_it = freshens.begin();
-			  cap_it != freshens.end();
-			  ++cap_it )
-		    {
-			if ( contains( wantedLanguages, (*cap_it).index() ) )
-			    pkgNames.insert( obj->name() );
-		    }
-		}
-	    }
-#endif
-	}
-
-
-
         static void addPatchPackages( set<string> & pkgNames )
         {
             for ( PoolProxyIterator patch_it = patchesBegin();
@@ -197,14 +148,11 @@ namespace zypp
 		    DBG << "Patch will be transacted: \"" << patch->name()
 			<< "\" - \"" << patch->summary() << "\"" << endl;
 
-		    Patch::AtomList atomList = patch->atoms();
-
-		    for ( Patch::AtomList::iterator atom_it = atomList.begin();
-			  atom_it != atomList.end();
-			  ++atom_it )
-		    {
-			pkgNames.insert( (*atom_it)->name() );
-		    }
+                    Patch::Contents contents( patch->contents() );
+                    for_( it, contents.begin(), contents.end() )
+                    {
+                      pkgNames.insert( it->name() );
+                    }
 		}
 	    }
 	}

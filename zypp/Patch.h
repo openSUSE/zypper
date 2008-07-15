@@ -124,20 +124,12 @@ namespace zypp
        */
       ReferenceIterator referencesEnd() const;
 
-
     public:
       /** Patch ID
        * \deprecated Seems to be unsused autobuild interal data?
       */
       ZYPP_DEPRECATED std::string id() const
       { return std::string(); }
-
-      /** The list of all atoms building the patch
-       * \deprecated  Try contents().
-      */
-      typedef std::list<ResObject::Ptr> AtomList;
-      ZYPP_DEPRECATED AtomList atoms() const
-      { return AtomList(); }
 
     protected:
       friend Ptr make<Self>( const sat::Solvable & solvable_r );

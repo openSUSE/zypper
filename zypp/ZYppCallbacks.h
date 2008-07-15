@@ -16,7 +16,6 @@
 #include "zypp/Resolvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Pathname.h"
-#include "zypp/Message.h"
 #include "zypp/Package.h"
 #include "zypp/Patch.h"
 #include "zypp/Url.h"
@@ -437,41 +436,6 @@ namespace zypp
       /** Report error. */
       virtual Action problem( const std::string & /*description*/ )
       { return ABORT; }
-      /** Report success. */
-      virtual void finish()
-      {}
-    };
-
-    // resolvable Message
-    // DEPRECATED: replaced by PatchMessageReport
-    struct ZYPP_DEPRECATED MessageResolvableReport : public callback::ReportBase
-    {
-        virtual void show(
-	  Message::constPtr /*message*/
-        ) {}
-    };
-
-    // resolvable Script
-    // DEPRECATED: replaced by PatchScriptReport
-    struct ZYPP_DEPRECATED ScriptResolvableReport : public callback::ReportBase
-    {
-      enum Task   { DO, UNDO };
-      enum Notify { OUTPUT, PING };
-
-      /** Whether executing do_script on install or undo_script on delete. */
-      virtual void start( const Resolvable::constPtr & /*script_r*/,
-			  const Pathname & /*path_r*/,
-                          Task )
-      {}
-      /** Progress provides the script output. If the script is quiet,
-       * from time to time still-alive pings are sent to the ui. Returning \c FALSE
-       * aborts script execution.
-      */
-      virtual bool progress( Notify , const std::string & = std::string() )
-      { return true; }
-      /** Report error. */
-      virtual void problem( const std::string & /*description*/ )
-      {}
       /** Report success. */
       virtual void finish()
       {}

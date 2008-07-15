@@ -35,7 +35,6 @@
 
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
-#include "zypp/repo/ScriptProvider.h"
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/ui/PatchContents.h"
@@ -495,22 +494,6 @@ int main( int argc, char * argv[] )
 
   PoolItem pi = getPi<Patch>( "fetchmsttfonts.sh" );
   USR << pi << endl;
-
-  pi = getPi<Script>( "fetchmsttfonts.sh-4347-patch-fetchmsttfonts.sh-2" );
-  USR << pi << endl;
-
-  if ( pi )
-  {
-    Script::constPtr script_r( asKind<Script>( pi.resolvable() ) );
-    MIL << script_r << endl;
-    if ( script_r )
-    {
-      repo::RepoMediaAccess access_r;
-      repo::ScriptProvider prov( access_r );
-      ManagedFile localfile = prov.provideScript( script_r, true );
-      MIL << localfile << endl;
-    }
-  }
 
   //pi.status().setTransact( true, ResStatus::USER );
   //install();

@@ -114,13 +114,10 @@ namespace zypp
   {
     ResKind kind( solvable_r.kind() );
 #define OUTS(X)  if ( kind == ResTraits<X>::kind ) return make<X>( solvable_r );
-    OUTS( Atom );
-    OUTS( Message );
     OUTS( Package );
     OUTS( Patch );
     OUTS( Pattern );
     OUTS( Product );
-    OUTS( Script );
     OUTS( SrcPackage );
 #undef OUTS
     return 0;

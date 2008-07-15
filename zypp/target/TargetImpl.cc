@@ -48,7 +48,6 @@
 
 #include "zypp/repo/DeltaCandidates.h"
 #include "zypp/repo/PackageProvider.h"
-#include "zypp/repo/ScriptProvider.h"
 #include "zypp/repo/SrcPackageProvider.h"
 
 #include "zypp/sat/Pool.h"

@@ -8,7 +8,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 #FILE(WRITE filename "message to write"... )
 
 SET( zypp_SRCS
-  Atom.cc
   ByteCount.cc
   Capabilities.cc
   Capability.cc
@@ -31,7 +30,6 @@ SET( zypp_SRCS
   Locks.cc
   MediaProducts.cc
   MediaSetAccess.cc
-  Message.cc
   NameKindProxy.cc
   NVRA.cc
   NVRAD.cc
@@ -64,7 +62,6 @@ SET( zypp_SRCS
   ResPool.cc
   ResPoolProxy.cc
   ResStatus.cc
-  Script.cc
   Service.cc
   Signature.cc
   SrcPackage.cc
@@ -90,7 +87,6 @@ SET( zypp_EARLY_SRCS
 
 SET( zypp_HEADERS
   Arch.h
-  Atom.h
   AutoDispose.h
   Bit.h
   ByteCount.h
@@ -121,7 +117,6 @@ SET( zypp_HEADERS
   ManagedFile.h
   MediaProducts.h
   MediaSetAccess.h
-  Message.h
   NameKindProxy.h
   Vendor.h
   NVRAD.h
@@ -163,7 +158,6 @@ SET( zypp_HEADERS
   ResPoolProxy.h
   ResStatus.h
   ResTraits.h
-  Script.h
   Service.h
   Signature.h
   SrcPackage.h
@@ -370,23 +364,11 @@ INSTALL(  FILES
 SET( zypp_parser_susetags_SRCS
   parser/susetags/RepoIndex.cc
   parser/susetags/ContentFileReader.cc
-  #parser/susetags/PackagesFileReader.cc
-  #parser/susetags/PackagesLangFileReader.cc
-  #parser/susetags/PackagesDuFileReader.cc
-  #parser/susetags/PatternFileReader.cc
-  #parser/susetags/RepoParser.cc
 )
 
 SET( zypp_parser_susetags_HEADERS
   parser/susetags/RepoIndex.h
   parser/susetags/ContentFileReader.h
-  parser/susetags/FileReaderBase.h
-  parser/susetags/FileReaderBaseImpl.h
-  parser/susetags/PackagesFileReader.h
-  parser/susetags/PackagesLangFileReader.h
-  parser/susetags/PackagesDuFileReader.h
-  parser/susetags/PatternFileReader.h
-  parser/susetags/RepoParser.h
 )
 
 INSTALL(  FILES
@@ -434,32 +416,13 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_yum_SRCS
-  #parser/yum/RepoParser.cc
-  #parser/yum/FileReaderBaseImpl.cc
   parser/yum/RepomdFileReader.cc
   parser/yum/PatchesFileReader.cc
-  #parser/yum/PrimaryFileReader.cc
-  #parser/yum/OtherFileReader.cc
-  #parser/yum/FilelistsFileReader.cc
-  #parser/yum/PatchFileReader.cc
-  #parser/yum/PatternFileReader.cc
-  #parser/yum/ProductFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
-  parser/yum/RepoParser.h
-  parser/yum/RepoParserOpts.h
-  parser/yum/FileReaderBase.h
-  parser/yum/FileReaderBaseImpl.h
   parser/yum/RepomdFileReader.h
   parser/yum/PatchesFileReader.h
-  parser/yum/PrimaryFileReader.h
-  parser/yum/OtherFileReader.h
-  parser/yum/FilelistsFileReader.h
-  parser/yum/PatchFileReader.h
-  parser/yum/PatternFileReader.h
-  parser/yum/ProductFileReader.h
-  parser/yum/schemanames.h
 )
 
 INSTALL(  FILES
@@ -469,7 +432,6 @@ INSTALL(  FILES
 
 SET( zypp_parser_ws_SRCS
   parser/ws/WebpinResultFileReader.cc
-
 )
 
 SET( zypp_parser_ws_HEADERS
@@ -688,11 +650,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_ui_SRCS
-  ui/PatchContents.cc
-  ui/PatchContentsImpl.cc
-  ui/PatternContents.cc
-  ui/PatternContentsImpl.cc
-  ui/PatternExpander.cc
   ui/Selectable.cc
   ui/SelectableImpl.cc
   ui/Status.cc
@@ -700,11 +657,6 @@ SET( zypp_ui_SRCS
 )
 
 SET( zypp_ui_HEADERS
-  ui/PatchContents.h
-  ui/PatchContentsImpl.h
-  ui/PatternContents.h
-  ui/PatternContentsImpl.h
-  ui/PatternExpander.h
   ui/SelFilters.h
   ui/Selectable.h
   ui/SelectableImpl.h
@@ -754,7 +706,6 @@ SET( zypp_repo_SRCS
   repo/RepoType.cc
   repo/PackageProvider.cc
   repo/SrcPackageProvider.cc
-  repo/ScriptProvider.cc
   repo/RepoProvideFile.cc
   repo/DeltaCandidates.cc
   repo/Applydeltarpm.cc
@@ -770,7 +721,6 @@ SET( zypp_repo_HEADERS
   repo/RepoType.h
   repo/PackageProvider.h
   repo/SrcPackageProvider.h
-  repo/ScriptProvider.h
   repo/RepoProvideFile.h
   repo/DeltaCandidates.h
   repo/Applydeltarpm.h

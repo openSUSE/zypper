@@ -40,13 +40,10 @@ namespace zypp
       /** Value representing \c nokind (<tt>""</tt>)*/
       static const ResKind nokind;
 
-      static const ResKind atom ZYPP_DEPRECATED;
-      static const ResKind message ZYPP_DEPRECATED;
       static const ResKind package;
       static const ResKind patch;
       static const ResKind pattern;
       static const ResKind product;
-      static const ResKind script ZYPP_DEPRECATED;
       static const ResKind srcpackage;
       //@}
 

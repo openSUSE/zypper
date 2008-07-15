@@ -60,11 +60,8 @@ namespace zypp
           //             ----v
           case 'c': OUTS( patch, 5 );       return; break;
           case 'd': OUTS( product, 7 );     return; break;
-          case 'i': OUTS( script, 6 );      return; break;
           case 'k': OUTS( package, 7 );     return; break;
-          case 'm': OUTS( atom, 4 );        return; break;
           case 'p': OUTS( srcpackage, 10 ); return; break;
-          case 's': OUTS( message, 7 );     return; break;
           case 't': OUTS( pattern, 7 );     return; break;
 #undef OUTS
         }
@@ -255,11 +252,8 @@ namespace zypp
           //             ----v
           case 'c': OUTS( patch, 5 );       break;
           case 'd': OUTS( product, 7 );     break;
-          case 'i': OUTS( script, 6 );      break;
           case 'k': OUTS( package, 7 );     break;
-          case 'm': OUTS( atom, 4 );        break;
           case 'p': OUTS( srcpackage, 10 ); break;
-          case 's': OUTS( message, 7 );     break;
           case 't': OUTS( pattern, 7 );     break;
 #undef OUTS
         }

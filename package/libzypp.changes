@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul 16 01:10:37 CEST 2008 - ma@suse.de
+
+- Remove Atom, Script, Message and other obsolete classes.
+- version 5.2.0
+- revision 10592
+
+-------------------------------------------------------------------
 Mon Jul 14 13:36:26 CEST 2008 - ma@suse.de
 
 - Also report the name of the locking process in ZYppFactoryException

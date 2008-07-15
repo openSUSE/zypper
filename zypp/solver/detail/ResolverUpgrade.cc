@@ -239,7 +239,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   if ( !path.isExist() ) {
       Testcase testcase("/var/log/updateTestcase");
-      testcase.createTestcase (*this, true, false); // create pool, do not solve 
+      testcase.createTestcase (*this, true, false); // create pool, do not solve
   } else {
       Testcase testcase("/mnt/var/log/updateTestcase");
       testcase.createTestcase (*this, true, false); // create pool, do not solve
@@ -372,14 +372,11 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     }
 
     if ( isKind<Patch>(installed.resolvable())
-         || isKind<Atom>(installed.resolvable())
-         || isKind<Script>(installed.resolvable())
-         || isKind<Message>(installed.resolvable())
 	 || isKind<Pattern>(installed.resolvable()))
     {
 	MIL << "Delete old: " << installed << endl;
 	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
-        continue;	
+        continue;
     }
 
     CandidateMap::iterator cand_it = candidatemap.find( installed );
@@ -428,7 +425,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       // Remember new package for 2nd pass.
 
       Capability installedCap( installed->name(), installed->kind());
-      
+
       // find ALL providers
       sat::WhatProvides possibleProviders(installedCap);
 
@@ -448,13 +445,13 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	      MIL << "  IGNORE relation match (package is tagged to delete): " << provider << endl;
 	  } else if ( provider.status().isInstalled() ) {
 	      if (installed->name() == provider->name()) {
-		  MIL << "  IGNORE relation match (package is installed): " << provider << endl;		  
+		  MIL << "  IGNORE relation match (package is installed): " << provider << endl;
 	      } else {
 		  MIL << "  Take installed package ONLY: " << provider << endl;
 		  providersMap.clear();
 		  break; // exit for
 	      }
-	  }	  
+	  }
 	  else {
 	      FindMap::iterator it = providersMap.find( provider->name() );
 
@@ -582,7 +579,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	    if ( ! doesObsoleteItem (item, it->first ) ) {
 		it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 	    }
-	    obsoletedItems.insert (it->first);	    
+	    obsoletedItems.insert (it->first);
 	    guess = PoolItem();
 	    break;
 	} else {
@@ -613,7 +610,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		    if ( ! doesObsoleteItem (item, it->first ) ) {
 			it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 		    }
-		    obsoletedItems.insert (it->first);	    		    
+		    obsoletedItems.insert (it->first);
 		    guess = PoolItem();
 		    break;
 		} else {
@@ -634,7 +631,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       if ( ! doesObsoleteItem (guess, it->first ) ) {
 	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
-      obsoletedItems.insert (it->first);	          
+      obsoletedItems.insert (it->first);
       ++opt_stats_r.chk_replaced_guessed;
     }
   }
@@ -650,7 +647,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   // Unmaintained packages which does not fit to the updated system
   // (broken dependencies) will be deleted.
   // Make a solverrun and return it to the calling function
-  
+
   bool ret=checkUnmaintainedItems ();
 
   // Packages which obsoletes and do NOT required other installed packages will be installed if
@@ -669,7 +666,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 		      && provider.status().isInstalled()
 		      && !provider.status().isToBeUninstalled()
 		      && obsoletedItems.find(provider) == obsoletedItems.end()) {
-		      
+
 		      // checking if there is another item with the same obsoletes. If there is one
 		      // it would be randomly which package will be taken for update. So it is
 		      // safier not to update at all.
@@ -688,10 +685,10 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 			  it->status().setToBeInstalled( ResStatus::APPL_HIGH );
 		      } else {
 			  MIL << item << " obsoletes " << provider << " but does not provide it." << endl;
-			  MIL << "  There is another item which obsoletes it too. I do not know whichone has to be taken" << endl;			  
+			  MIL << "  There is another item which obsoletes it too. I do not know whichone has to be taken" << endl;
 		      }
-		      obsoletedItems.insert (provider);	          		  
-		  }	
+		      obsoletedItems.insert (provider);
+		  }
 	      }
 	  }
       }

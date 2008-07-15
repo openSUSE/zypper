@@ -50,14 +50,11 @@ namespace zypp
   DEFINE_PTR_TYPE( Resolvable );
   DEFINE_PTR_TYPE( ResObject );
 
-  DEFINE_PTR_TYPE( Atom );
   DEFINE_PTR_TYPE( Package );
   DEFINE_PTR_TYPE( SrcPackage );
   DEFINE_PTR_TYPE( Pattern );
   DEFINE_PTR_TYPE( Product );
   DEFINE_PTR_TYPE( Patch );
-  DEFINE_PTR_TYPE( Script );
-  DEFINE_PTR_TYPE( Message );
   //@}
 
   /** ResTraits. Defines common types and the ResKind value. */

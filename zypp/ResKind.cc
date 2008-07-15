@@ -23,19 +23,12 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   const ResKind ResKind::nokind;
-  const ResKind ResKind::atom      ( "atom" );
-  const ResKind ResKind::message   ( "message" );
   const ResKind ResKind::package   ( "package" );
   const ResKind ResKind::patch     ( "patch" );
   const ResKind ResKind::pattern   ( "pattern" );
   const ResKind ResKind::product   ( "product" );
-  const ResKind ResKind::script    ( "script" );
   const ResKind ResKind::srcpackage( "srcpackage" );
 
-  template<>
-    const ResKind ResTraits<Atom>      ::kind( ResKind::atom );
-  template<>
-    const ResKind ResTraits<Message>   ::kind( ResKind::message );
   template<>
     const ResKind ResTraits<Package>   ::kind( ResKind::package );
   template<>
@@ -44,8 +37,6 @@ namespace zypp
     const ResKind ResTraits<Pattern>   ::kind( ResKind::pattern );
   template<>
     const ResKind ResTraits<Product>   ::kind( ResKind::product );
-  template<>
-    const ResKind ResTraits<Script>    ::kind( ResKind::script );
   template<>
     const ResKind ResTraits<SrcPackage>::kind( ResKind::srcpackage );
 

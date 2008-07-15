@@ -12,7 +12,6 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/Patch.h"
-#include "zypp/Message.h"
 
 using std::endl;
 
@@ -84,6 +83,7 @@ namespace zypp
   bool Patch::interactive() const
   {
     if ( rebootSuggested()
+         || ! message().empty()
          || ! licenseToConfirm().empty() )
     {
       return true;
@@ -92,8 +92,7 @@ namespace zypp
     Patch::Contents c( contents() );
     for_( it, c.begin(), c.end() )
     {
-      if ( it->isKind( ResKind::message )
-           || ! licenseToConfirm().empty() )
+      if ( ! licenseToConfirm().empty() )
       {
         return true;
       }
