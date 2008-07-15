@@ -941,3 +941,8 @@ INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 # install XML schemas
 FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng )
 INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
+
+#install systemCheck
+MESSAGE(STATUS "systemCheck will be installed in ${SYSCONFDIR}/zypp")
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp/solver/detail/systemCheck DESTINATION ${SYSCONFDIR}/zypp )
+
