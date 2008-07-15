@@ -1003,6 +1003,9 @@ SATResolver::problems ()
 	Id problem, solution, element;
 	Solvable *s, *sd;
 
+	CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
+	CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
+
 	MIL << "Encountered problems! Here are the solutions:\n" << endl;
 	pcnt = 1;
 	problem = 0;
@@ -1104,17 +1107,37 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL_SOLVABLE_PROVIDES:
 				{
 				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_REQUIRE);
-				string description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
+				string description = "";
+
+				// Checking if this problem solution would break your system
+				if (system_requires.find(Capability(what)) != system_requires.end()) {
+				    // Show a better warning
+				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
+				    resolverProblem->setDescription(_("This request will break your system!"));
+				    description = _("ignore the warning of a broken system");
+				} else {
+				    description = str::form (_("do not ask to install a solvable providing %s"), dep2str(pool, what));
+				}
 				MIL << description << endl;
-				problemSolution->addDescription (description);
+				problemSolution->addDescription (description);				
 				}
 				break;
 			    case SOLVER_ERASE_SOLVABLE_PROVIDES:
 				{
-				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_CONFLICT);				    
-				string description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
+				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_CONFLICT);
+				string description = "";
+
+				// Checking if this problem solution would break your system
+				if (system_conflicts.find(Capability(what)) != system_conflicts.end()) {
+				    // Show a better warning
+				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
+				    resolverProblem->setDescription(_("This request will break your system!"));
+				    description = _("ignore the warning of a broken system");
+				} else {
+				    description = str::form (_("do not ask to delete all solvables providing %s"), dep2str(pool, what));
+				}
 				MIL << description << endl;
-				problemSolution->addDescription (description);
+				problemSolution->addDescription (description);				
 				}
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:

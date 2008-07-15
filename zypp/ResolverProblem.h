@@ -71,6 +71,18 @@ namespace zypp
 	std::string details() const { return _details; }
 
 	/**
+	 * Set description of the problem.
+	 **/
+	void setDescription(const std::string & description)
+	    { _description=description; }
+
+	/**
+	 * Set detail description of the problem.
+	 **/
+	void setDetails(const std::string & detail)
+	    { _details=detail; }
+
+	/**
 	 * Return the possible solutions to this problem.
 	 * All problems should have at least 2-3 (mutually exclusive) solutions:
 	 *
