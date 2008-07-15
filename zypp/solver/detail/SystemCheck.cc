@@ -29,14 +29,46 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-    Pathname		_file;
+    Pathname		_file = "";
     CapabilitySet	_require;
     CapabilitySet	_conflict;
 
-    typedef vector<string> CapList;    
+    typedef vector<string> CapList;
+
+    const SystemCheck & SystemCheck::instance()
+    {
+	static SystemCheck _val;
+	return _val;
+    }
+    
       
     SystemCheck::SystemCheck() {
-	_file = ZConfig::instance().solver_checkSystemFile();
+	if (_file.empty()) {
+	    _file = ZConfig::instance().solver_checkSystemFile();
+	    loadFile();
+	}
+    }
+
+    bool SystemCheck::setFile(const Pathname & file) const{
+	MIL << "Setting checkFile to : " << file << endl;
+	_file = file;
+	loadFile();
+	return true;
+    }
+
+    const Pathname & SystemCheck::file() {
+	return _file;
+    }
+
+    const CapabilitySet & SystemCheck::requiredSystemCap() const{
+	return _require;
+    }
+
+    const CapabilitySet & SystemCheck::conflictSystemCap() const{
+	return _conflict;
+    }
+
+    bool SystemCheck::loadFile() const{
 	try
 	{
 	    Target_Ptr trg( getZYpp()->target() );
@@ -50,9 +82,13 @@ namespace zypp
 
 	PathInfo pi( _file );
 	if ( ! pi.isFile() ) {
-	    WAR << "Can't read " << pi << endl;
-	    return;
+	    WAR << "Can't read " << _file << " " << pi << endl;
+	    return false;
 	}
+	
+	_require.clear();
+	_conflict.clear();
+	
 	std::ifstream infile( _file.c_str() );
 	for( iostr::EachLine in( infile ); in; in.next() ) {
 	    std::string l( str::trim(*in) );
@@ -75,18 +111,7 @@ namespace zypp
 	    }
 	}
 	MIL << "Read " << pi << endl;
-    }
-
-    const Pathname & file() {
-	return _file;
-    }
-
-    const CapabilitySet & requiredSystemCap() {
-	return _require;
-    }
-
-    const CapabilitySet & conflictSystemCap() {
-	return _conflict;
+	return true;
     }
       
 

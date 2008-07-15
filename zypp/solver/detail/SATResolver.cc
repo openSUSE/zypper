@@ -38,6 +38,7 @@
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
 #include "zypp/solver/detail/SolverQueueItemDelete.h"
+#include "zypp/solver/detail/SystemCheck.h"
 
 extern "C" {
 #include "satsolver/repo_solv.h"
@@ -694,6 +695,9 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 	MIL << "Conflicts " << *iter << endl;
     }
 
+    // set requirements for a running system
+    setSystemRequirements();
+
     // set locks for the solver
     setLocks();
 
@@ -746,6 +750,9 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 	queue_push( &(_jobQueue), ident);
     }
 
+    // set requirements for a running system
+    setSystemRequirements();
+    
     // set locks for the solver
     setLocks();
 
@@ -771,6 +778,9 @@ void SATResolver::doUpdate()
 	       PoolItemSet(),
 	       ObsoleteStrings());
 
+    // set requirements for a running system
+    setSystemRequirements();
+    
     // set locks for the solver
     void setLocks();
 
@@ -1252,7 +1262,24 @@ void SATResolver::setLocks()
     }    
 }
 
+void SATResolver::setSystemRequirements()
+{
+    CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
+    CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
+    
+    for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); iter++) {
+	queue_push( &(_jobQueue), SOLVER_INSTALL_SOLVABLE_PROVIDES );
+	queue_push( &(_jobQueue), iter->id() );
+	MIL << "SYSTEM Requires " << *iter << endl;
+    }
 
+    for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); iter++) {
+	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_PROVIDES);
+	queue_push( &(_jobQueue), iter->id() );
+	MIL << "SYSTEM Conflicts " << *iter << endl;
+    }
+}
+    
 
 ///////////////////////////////////////////////////////////////////
 };// namespace detail

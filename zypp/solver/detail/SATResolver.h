@@ -102,6 +102,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void solverEnd();
     // set locks for the solver
     void setLocks();
+    // set requirements for a running system
+    void setSystemRequirements();
     
   public:
 

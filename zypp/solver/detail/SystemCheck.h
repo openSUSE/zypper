@@ -32,8 +32,16 @@ namespace zypp
 
       public:
 
+	/** Singleton */
+	static const SystemCheck & instance();
+
         /** Return the file path. */
-        const Pathname & file() const;
+        const Pathname & file();
+
+        /** Set configuration file of system requirements
+	 *  Should be used for testcase only   
+	 */
+        bool setFile(const Pathname & file) const;
 
         /** Returns a list of required system capabilities.
         */
@@ -46,6 +54,7 @@ namespace zypp
       private:
         /** Ctor taking the file to read. */
         SystemCheck();
+	bool loadFile() const;
 
     };
     ///////////////////////////////////////////////////////////////////
