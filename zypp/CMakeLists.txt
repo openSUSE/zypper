@@ -517,6 +517,7 @@ SET( zypp_solver_detail_SRCS
   solver/detail/SolverQueueItemInstallOneOf.cc
   solver/detail/SolverQueueItemLock.cc
   solver/detail/SATResolver.cc
+  solver/detail/SystemCheck.cc
 )
 
 SET( zypp_solver_detail_HEADERS
@@ -535,6 +536,7 @@ SET( zypp_solver_detail_HEADERS
   solver/detail/SolverQueueItemInstallOneOf.h
   solver/detail/SolverQueueItemLock.h
   solver/detail/SATResolver.h
+  solver/detail/SystemCheck.h
 )
 
 INSTALL(  FILES
