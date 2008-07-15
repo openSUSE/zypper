@@ -134,8 +134,17 @@ MESSAGE(STATUS "FindZypp.cmake will be installed in ${CMAKE_INSTALL_PREFIX}/shar
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/FindZypp.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/cmake/modules/ZyppCommon.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules )
 
+####################################################################
+# config templates
+# (don't forget to mention them in the .spec file)
+####################################################################
+
 MESSAGE(STATUS "zypp.conf will be installed in ${SYSCONFDIR}/zypp")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
+
+#install systemCheck
+MESSAGE(STATUS "systemCheck will be installed in ${SYSCONFDIR}/zypp")
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp )
 
 ####################################################################
 # SUBDIRECTORIES                                                   #

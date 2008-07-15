@@ -1,23 +1,16 @@
 -------------------------------------------------------------------
 Mon Jul 14 13:36:26 CEST 2008 - ma@suse.de
 
-- Also report the name of the locking process in ZYppFactoryException 
+- Also report the name of the locking process in ZYppFactoryException
   (bnc #280537)
 - revision 10572
 
 -------------------------------------------------------------------
-Mon Jul 14 13:31:28 CEST 2008 - ma@suse.de
-
-- Provide also the name of the locking process in
-  ZYppFactoryException ()
-- revision 10571
-
--------------------------------------------------------------------
 Mon Jul 14 11:26:30 CEST 2008 - schubi@suse.de
 
-- corrected logging onf solver settings
+- corrected logging of solver settings
 - regard locking while doUpdate (bnc #405427)
-- revision 10564 
+- revision 10564
 
 -------------------------------------------------------------------
 Sat Jul 12 22:14:32 CEST 2008 - jkupec@suse.cz
@@ -36,7 +29,7 @@ Sat Jul 12 11:19:56 CEST 2008 - jkupec@suse.cz
 Wed Jul  9 18:13:58 CEST 2008 - ma@suse.de
 
 - Provide Package::url() if available in solv file. (bnc #402434)
-- A missing cookie file must not be treated as an error. Simply 
+- A missing cookie file must not be treated as an error. Simply
   rebuild the cache (bnc #405867)
 - Add 22x22 and 24x24 icons (bnc #329635)
 - revision 10528
