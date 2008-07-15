@@ -28,6 +28,7 @@
 #include "zypp/Capabilities.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/solver/detail/SystemCheck.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -373,6 +374,8 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     }
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
+    control.addDependencies (SystemCheck::instance().requiredSystemCap(),
+			     SystemCheck::instance().conflictSystemCap());    
 
     return true;
 }
