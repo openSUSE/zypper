@@ -19,9 +19,6 @@ namespace data
 
 IMPL_PTR_TYPE(Resolvable);
 IMPL_PTR_TYPE(ResObject);
-IMPL_PTR_TYPE(Script);
-IMPL_PTR_TYPE(Message);
-IMPL_PTR_TYPE(Atom);
 IMPL_PTR_TYPE(Patch);
 IMPL_PTR_TYPE(Pattern);
 IMPL_PTR_TYPE(Product);
@@ -30,8 +27,6 @@ IMPL_PTR_TYPE(Package);
 IMPL_PTR_TYPE(SrcPackage);
 
 IMPL_PTR_TYPE(DeltaRpm);
-IMPL_PTR_TYPE(PatchRpm);
-IMPL_PTR_TYPE(PackageAtom);
 IMPL_PTR_TYPE(BaseVersion);
 
 

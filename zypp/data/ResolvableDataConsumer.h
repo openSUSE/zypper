@@ -33,17 +33,14 @@ namespace data
     virtual data::RecordId consumeSourcePackage( const data::SrcPackage_Ptr & ) = 0;
     virtual data::RecordId consumeProduct      ( const data::Product_Ptr & ) = 0;
     virtual data::RecordId consumePatch        ( const data::Patch_Ptr & ) = 0;
-    virtual data::RecordId consumePackageAtom  ( const data::PackageAtom_Ptr & ) = 0;
-    virtual data::RecordId consumeMessage      ( const data::Message_Ptr & ) = 0;
-    virtual data::RecordId consumeScript       ( const data::Script_Ptr & ) = 0;
     virtual data::RecordId consumePattern      ( const data::Pattern_Ptr & ) = 0;
 
     virtual data::RecordId consumeChangelog    ( const data::RecordId & resolvable_id, const Changelog & ) = 0;
     virtual data::RecordId consumeFilelist     ( const data::RecordId & resolvable_id, const data::Filenames & ) = 0;
     virtual void consumeDiskUsage              ( const data::RecordId &resolvable_id, const DiskUsage &disk ) = 0;
-    
+
     virtual void updatePackageLang( const data::RecordId & resolvable_id, const data::Packagebase_Ptr & data_r ) = 0;
-    
+
   };
 
 } // namespace parser

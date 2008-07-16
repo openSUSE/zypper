@@ -118,55 +118,6 @@ namespace data
 
   ///////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(Atom);
-
-  /* Data Object for Atom resolvable. */
-  class Atom : public ResObject
-  {
-    public:
-      Atom()
-      {};
-  };
-
-  ///////////////////////////////////////////////////////////////////
-
-  DEFINE_PTR_TYPE(Script);
-
-  /* Data Object for Script resolvable. */
-  class Script : public ResObject
-  {
-    public:
-      Script()
-      {};
-
-      /** Inlined doScript. */
-      std::string doScript;
-      /** Location of doScript on the repositories media. */
-      OnMediaLocation doScriptLocation;
-
-      /** Inlined undoScript. */
-      std::string undoScript;
-      /** Location of undoScript on the repositories media. */
-      OnMediaLocation undoScriptLocation;
-  };
-
-  ///////////////////////////////////////////////////////////////////
-
-  DEFINE_PTR_TYPE(Message);
-
-  /* Data Object for Message resolvable. */
-  class Message : public ResObject
-  {
-    public:
-      Message()
-      {};
-
-      /** Inlined Text. */
-      TranslatedText text;
-  };
-
-  ///////////////////////////////////////////////////////////////////
-
   DEFINE_PTR_TYPE(Patch);
 
   /* Data Object for Patch resolvable. */
@@ -374,13 +325,6 @@ namespace data
       virtual std::ostream & dumpOn( std::ostream & str ) const;
   };
 
-  DEFINE_PTR_TYPE(PatchRpm);
-  /** Patch RPM data object */
-  struct PatchRpm : RpmBase
-  {
-    std::set<BaseVersion_Ptr> baseVersions;
-  };
-
   DEFINE_PTR_TYPE(DeltaRpm);
   /** Delta RPM data object */
   struct DeltaRpm : RpmBase
@@ -393,19 +337,6 @@ namespace data
     };
 
     DeltaBaseVersion baseVersion;
-  };
-
-  DEFINE_PTR_TYPE(PackageAtom);
-  /**
-   * Data Object for YUM package atom.
-   *
-   * \see zypp/parser/yum/schema/patch.rng
-   */
-  struct PackageAtom : public Package
-  {
-    std::set<PatchRpm_Ptr> patchRpms;
-    std::set<DeltaRpm_Ptr> deltaRpms;
-    // TODO support mulitple licenses (licenseToConfirm)
   };
 
   // --- ----------END--YUM-package-atom-metadata-----------------------------

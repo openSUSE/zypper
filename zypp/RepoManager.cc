@@ -848,38 +848,10 @@ namespace zypp
         ZYPP_THROW(RepoUnknownTypeException("Unhandled repository type"));
       break;
     }
-#if 0
-    switch ( repokind.toEnum() )
-    {
-      case RepoType::RPMMD_e :
-      if (0)
-      {
-        CombinedProgressData subprogrcv( progress, 100);
-        parser::yum::RepoParser parser(id, store, parser::yum::RepoParserOpts(), subprogrcv);
-        parser.parse(rawpath);
-          // no error
-      }
-      break;
-      case RepoType::YAST2_e :
-      if (0)
-      {
-        CombinedProgressData subprogrcv( progress, 100);
-        parser::susetags::RepoParser parser(id, store, subprogrcv);
-        parser.parse(rawpath);
-        // no error
-      }
-      break;
-
-      default:
-        ZYPP_THROW(RepoUnknownTypeException());
-    }
-#endif
     // update timestamp and checksum
-    //store.updateRepositoryStatus(id, raw_metadata_status);
     setCacheStatus(info, raw_metadata_status);
     MIL << "Commit cache.." << endl;
-    //store.commit();
-    //progress.toMax();
+    progress.toMax();
   }
 
   ////////////////////////////////////////////////////////////////////////////
