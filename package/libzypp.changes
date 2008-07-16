@@ -2,7 +2,8 @@
 Wed Jul 16 14:39:50 CEST 2008 - ma@suse.de
 
 - Add ui::Selectable::isNeeded to indicate patch relevance (bnc #409150)
-- revision 10595
+- version 5.2.1
+- revision 10596
 
 -------------------------------------------------------------------
 Wed Jul 16 01:10:37 CEST 2008 - ma@suse.de
