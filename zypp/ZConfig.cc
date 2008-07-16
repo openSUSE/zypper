@@ -248,6 +248,15 @@ namespace zypp
                 else if ( entry == "solver.checkSystemFile" )
                 {
                   solver_checkSystemFile = Pathname(value);
+                }
+                else if ( entry == "parallelInstallable" )
+                {
+		  std::list<std::string> parallel;  
+                  str::split( value, back_inserter(parallel), ", \t" );
+		  for ( std::list<string>::const_iterator it = parallel.begin();
+			it != parallel.end(); it++) {
+		      parallelInstallable.insert (IdString(*it));  
+		  }
                 }		
                 else if ( entry == "locksfile.path" )
                 {
@@ -324,7 +333,9 @@ namespace zypp
     bool download_use_deltarpm;
 
     bool solver_onlyRequires;
-    Pathname solver_checkSystemFile;  
+    Pathname solver_checkSystemFile;
+      
+    std::set<IdString> parallelInstallable;  
 
     bool apply_locks_file;
 
@@ -506,7 +517,16 @@ namespace zypp
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return _pimpl->solver_checkSystemFile; }
+
+
+  std::set<IdString> ZConfig::parallelInstallable() const
+  { return _pimpl->parallelInstallable; }
+
+  void ZConfig::addParallelInstallable(std::string &name)
+  { _pimpl->parallelInstallable.insert(IdString(name)); }
     
+  bool ZConfig::removeParallelInstallable(std::string &name)
+  { return _pimpl->parallelInstallable.erase(IdString(name)); }      
 
   bool ZConfig::apply_locks_file() const
   {

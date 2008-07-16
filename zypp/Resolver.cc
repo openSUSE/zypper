@@ -96,26 +96,7 @@ namespace zypp
       else
 	  return _pimpl->onlyRequires();
   }
-
-  void Resolver::addNoObsoletesCapability (const Capability & capability)
-  { _pimpl->addNoObsoletesCapability (capability); }
-  void Resolver::removeNoObsoletesCapability (const Capability & capability)
-  { _pimpl->removeNoObsoletesCapability (capability); }
-  CapabilitySet Resolver::noObsoletesCapability()
-  { return _pimpl->noObsoletesCapability(); }	
-  void Resolver::addNoObsoletesItem (const PoolItem & item)
-  { _pimpl->addNoObsoletesItem (item); }
-  void Resolver::removeNoObsoletesItem (const PoolItem & item)
-  { _pimpl->removeNoObsoletesItem (item); }
-  solver::detail::PoolItemSet Resolver::noObsoletesItem()
-  { return _pimpl->noObsoletesItem(); }	
-  void Resolver::addNoObsoletesName (const std::string & name)
-  { _pimpl->addNoObsoletesName (name); }
-  void Resolver::removeNoObsoletesName (const std::string & name)
-  { _pimpl->removeNoObsoletesName (name); }	
-  solver::detail::ObsoleteStrings Resolver::noObsoletesString ()
-  { return _pimpl->noObsoletesString (); }	
-  
+    
   void Resolver::addRequire (const Capability & capability)
   { _pimpl->addExtraRequire( capability ); }
   void Resolver::addConflict (const Capability & capability)

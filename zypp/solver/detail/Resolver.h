@@ -88,8 +88,6 @@ namespace zypp
 //
 //	CLASS NAME : Resolver
 
-typedef std::set<std::string> ObsoleteStrings;	
-
 class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
@@ -131,15 +129,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ItemCapKindMap _installs;
     ItemCapKindMap _satifiedByInstalled;
     ItemCapKindMap _installedSatisfied;
-
-
-    // Ignore Obsoletes
-    CapabilitySet _noObsoletesCapability;
-    PoolItemSet _noObsoletesItem;
-    ObsoleteStrings _noObsoletesString;   
     
     // helpers
-    bool doesObsoleteCapability (PoolItem candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
     void collectResolverInfo (void);    
 
@@ -165,32 +156,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
-
-
-    // Ignore Obsoletes. This is used for installing more than
-    // one pacakges with the same name but different versions.
-    // Often needed by kernels.
-
-    // via capability who provides it
-    void addNoObsoletesCapability (const Capability & capability)
-	{ _noObsoletesCapability.insert (capability); }    
-    void removeNoObsoletesCapability (const Capability & capability)
-	{ _noObsoletesCapability.erase (capability); }
-    CapabilitySet noObsoletesCapability() { return _noObsoletesCapability;}
-
-    // via poolItem
-    void addNoObsoletesItem (const PoolItem & item)
-	{ _noObsoletesItem.insert (item); }
-    void removeNoObsoletesItem (const PoolItem & item)
-	{ _noObsoletesItem.erase (item); }
-    PoolItemSet noObsoletesItem() { return _noObsoletesItem; }
-
-    // via package name
-    void addNoObsoletesName (const std::string & name)
-	{ _noObsoletesString.insert (name); }
-    void removeNoObsoletesName (const std::string & name)
-	{ _noObsoletesString.erase (name); }    
-    ObsoleteStrings noObsoletesString () { return _noObsoletesString; }
 
     void addExtraRequire (const Capability & capability);
     void removeExtraRequire (const Capability & capability);

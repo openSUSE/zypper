@@ -13,6 +13,8 @@
 #define ZYPP_ZCONFIG_H
 
 #include <iosfwd>
+#include <set>
+#include <string>
 
 #include "zypp/base/Deprecated.h"
 
@@ -22,6 +24,7 @@
 #include "zypp/Arch.h"
 #include "zypp/Locale.h"
 #include "zypp/Pathname.h"
+#include "zypp/IdString.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -179,6 +182,14 @@ namespace zypp
        * fulfilled for a running system.
        */
       Pathname solver_checkSystemFile() const;
+
+      /**
+       * Packages which can be installed parallel.
+       * Returning a set of package names (IdString)
+       */      
+      std::set<IdString> parallelInstallable() const;
+      void addParallelInstallable(std::string &name);
+      bool removeParallelInstallable(std::string &name);      
 
       /**
        * Path where zypp can find or create lock file (configPath()/locks)

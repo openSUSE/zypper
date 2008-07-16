@@ -70,6 +70,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
     PoolItemList _items_to_keep;
+    PoolItemList _items_parallel_install;
 
     // solve results
     PoolItemList _result_items_to_install;
@@ -92,10 +93,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void resetItemTransaction (PoolItem item);
 
     // Create a SAT solver and reset solver selection in the pool (Collecting 
-    void solverInit(const PoolItemList & weakItems,
-		    const CapabilitySet & noObsoletesCapability,
-		    const PoolItemSet & noObsoletesItem,
-		    const ObsoleteStrings & noObsoletesString);
+    void solverInit(const PoolItemList & weakItems);
     // common solver run with the _jobQueue; Save results back to pool
     bool solving();
     // cleanup solver
@@ -122,17 +120,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     // solver run with pool selected items
     bool resolvePool(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps,
-		     const PoolItemList & weakItems,
-		     const CapabilitySet & noObsoletesCapability,
-		     const PoolItemSet & noObsoletesItem,
-		     const ObsoleteStrings & noObsoletesString
+		     const PoolItemList & weakItems
 		     );
     // solver run with the given request queue
     bool resolveQueue(const SolverQueueItemList &requestQueue,
-		      const PoolItemList & weakItems,
-		      const CapabilitySet & noObsoletesCapability,
-		      const PoolItemSet & noObsoletesItem,
-		      const ObsoleteStrings & noObsoletesString		      
+		      const PoolItemList & weakItems
 		      );
     // searching for new packages
     void doUpdate();
@@ -144,7 +136,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
     void addPoolItemToLock (PoolItem item);
-    void addPoolItemToKeep (PoolItem item);    
+    void addPoolItemToKeep (PoolItem item);
+
+    void addPoolItemParallelInstall (PoolItem item);        
 
     void addPoolItemToRemove (PoolItem item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
