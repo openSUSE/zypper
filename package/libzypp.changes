@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 16 14:39:50 CEST 2008 - ma@suse.de
+
+- Add ui::Selectable::isNeeded to indicate patch relevance (bnc #409150)
+- revision 10595
+
+-------------------------------------------------------------------
 Wed Jul 16 01:10:37 CEST 2008 - ma@suse.de
 
 - Remove Atom, Script, Message and other obsolete classes.

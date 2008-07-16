@@ -165,6 +165,12 @@ namespace zypp
       bool isUnmaintained() const
       { return availableEmpty(); }
 
+      bool isNeeded() const
+      {
+        PoolItem cand( candidateObj() );
+        return cand && cand.isBroken();
+      }
+
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;
 

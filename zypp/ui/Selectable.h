@@ -190,6 +190,12 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
+      /** Whether the item is relevant but has broken requirements.
+       * A 'needed' Patch should be installed, while an 'unneeded' one
+       * is either applied or not relevant for the system.
+       */
+      bool isNeeded() const;
+
      public:
       /** \name Query objects fate in case of commit.
       */
@@ -251,6 +257,8 @@ namespace zypp
 
       /** Set LicenceConfirmed bit. */
       void setLicenceConfirmed( bool val_r = true );
+
+
       //@}
 
     public:

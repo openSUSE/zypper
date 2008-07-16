@@ -109,6 +109,9 @@ namespace zypp
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
 
+    bool Selectable::isNeeded() const
+    { return _pimpl->isNeeded(); }
+
     ResStatus::TransactByValue Selectable::modifiedBy() const
     { return _pimpl->modifiedBy(); }
 
