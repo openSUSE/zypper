@@ -22,7 +22,6 @@
 #include "zypp/data/RecordId.h"
 #include "zypp/Pathname.h"
 #include "zypp/Resolvable.h"
-#include "zypp/NVR.h"
 #include "zypp/Edition.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Arch.h"
@@ -334,9 +333,6 @@ namespace data
   struct Package : public Packagebase
   {
     virtual PackageType packageType() const { return BIN; }
-
-    /** NVR of the corresponding SrcPackage. */
-    NVR srcPackageIdent;
   };
 
   DEFINE_PTR_TYPE(SrcPackage);

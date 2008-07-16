@@ -13,6 +13,7 @@ using namespace std;
 
 namespace zypp
 {
+#warning figure out all the obsolete stuff here
 namespace data
 {
 

@@ -16,7 +16,6 @@ SET( zypp_SRCS
   CheckSum.cc
   Date.cc
   Dep.cc
-  Dependencies.cc
   Digest.cc
   DiskUsage.cc
   DiskUsageCounter.cc
@@ -31,9 +30,6 @@ SET( zypp_SRCS
   MediaProducts.cc
   MediaSetAccess.cc
   NameKindProxy.cc
-  NVRA.cc
-  NVRAD.cc
-  NVR.cc
   OnMediaLocation.cc
   Package.cc
   Patch.cc
@@ -98,7 +94,6 @@ SET( zypp_HEADERS
   CheckSum.h
   CountryCode.h
   Date.h
-  Dependencies.h
   Dep.h
   Digest.h
   DiskUsageCounter.h
@@ -119,9 +114,6 @@ SET( zypp_HEADERS
   MediaSetAccess.h
   NameKindProxy.h
   Vendor.h
-  NVRAD.h
-  NVRA.h
-  NVR.h
   OnMediaLocation.h
   Package.h
   PackageKeyword.h

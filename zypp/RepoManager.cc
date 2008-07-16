@@ -38,9 +38,7 @@
 #include "zypp/parser/ServiceFileReader.h"
 #include "zypp/parser/RepoindexFileReader.h"
 #include "zypp/repo/yum/Downloader.h"
-#include "zypp/parser/yum/RepoParser.h"
 #include "zypp/repo/susetags/Downloader.h"
-#include "zypp/parser/susetags/RepoParser.h"
 #include "zypp/parser/plaindir/RepoParser.h"
 
 #include "zypp/ZYppCallbacks.h"

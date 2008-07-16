@@ -25,8 +25,6 @@
 #include "zypp/solver/detail/SolutionAction.h"
 #include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
-#include "zypp/Dependencies.h"
-
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -70,7 +68,7 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 	case REMOVE_EXTRA_REQUIRE:	os << "Remove require " << _capability; break;
 	case REMOVE_EXTRA_CONFLICT:	os << "Remove conflict " << _capability; break;
 	case ADD_SOLVE_QUEUE_ITEM:	os << "Add SolveQueueItem " <<  _solverQueueItem; break;
-	case REMOVE_SOLVE_QUEUE_ITEM:	os << "Remove SolveQueueItem " <<  _solverQueueItem; break;   	    
+	case REMOVE_SOLVE_QUEUE_ITEM:	os << "Remove SolveQueueItem " <<  _solverQueueItem; break;
     }
 
     os << endl;
@@ -156,7 +154,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	    break;
 	case REMOVE_EXTRA_REQUIRE:
 	    resolver.removeExtraRequire (_capability);
-	    break;	    
+	    break;
 	case REMOVE_EXTRA_CONFLICT:
 	    resolver.removeExtraConflict (_capability);
 	    break;
