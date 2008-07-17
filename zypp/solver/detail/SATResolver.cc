@@ -611,8 +611,8 @@ SATResolver::solverInit(const PoolItemList & weakItems)
         queue_push( &(_jobQueue), id );	
     }
 
-    // Add rules for parallel installable resolvables
-    std::set<IdString> parallel = ZConfig::instance().parallelInstallable();
+    // Add rules for parallel installable resolvables with different versions
+    std::set<IdString> parallel = ZConfig::instance().multiversion();
     for (std::set<IdString>::const_iterator it = parallel.begin(); it != parallel.end(); ++it) {
 	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
 	queue_push( &(_jobQueue), it->id() );

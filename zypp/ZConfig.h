@@ -184,12 +184,12 @@ namespace zypp
       Pathname solver_checkSystemFile() const;
 
       /**
-       * Packages which can be installed parallel.
+       * Packages which can be installed parallel with different versions
        * Returning a set of package names (IdString)
        */      
-      std::set<IdString> parallelInstallable() const;
-      void addParallelInstallable(std::string &name);
-      bool removeParallelInstallable(std::string &name);      
+      std::set<IdString> multiversion() const;
+      void addMultiversion(std::string &name);
+      bool removeMultiversion(std::string &name);      
 
       /**
        * Path where zypp can find or create lock file (configPath()/locks)

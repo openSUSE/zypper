@@ -321,8 +321,8 @@ namespace zypp
 
     bool Solvable::installOnly() const
     {
-	std::set<IdString> parallel = ZConfig::instance().parallelInstallable();
-	if (parallel.find(ident()) != parallel.end())
+	std::set<IdString> multiversion = ZConfig::instance().multiversion();
+	if (multiversion.find(ident()) != multiversion.end())
 	      return true;
 	return false;
     }

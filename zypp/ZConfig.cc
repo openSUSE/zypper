@@ -249,13 +249,13 @@ namespace zypp
                 {
                   solver_checkSystemFile = Pathname(value);
                 }
-                else if ( entry == "parallelInstallable" )
+                else if ( entry == "multiversion" )
                 {
-		  std::list<std::string> parallel;  
-                  str::split( value, back_inserter(parallel), ", \t" );
-		  for ( std::list<string>::const_iterator it = parallel.begin();
-			it != parallel.end(); it++) {
-		      parallelInstallable.insert (IdString(*it));  
+		  std::list<std::string> multi;  
+                  str::split( value, back_inserter(multi), ", \t" );
+		  for ( std::list<string>::const_iterator it = multi.begin();
+			it != multi.end(); it++) {
+		      multiversion.insert (IdString(*it));  
 		  }
                 }		
                 else if ( entry == "locksfile.path" )
@@ -335,7 +335,7 @@ namespace zypp
     bool solver_onlyRequires;
     Pathname solver_checkSystemFile;
       
-    std::set<IdString> parallelInstallable;  
+    std::set<IdString> multiversion;  
 
     bool apply_locks_file;
 
@@ -519,14 +519,14 @@ namespace zypp
   { return _pimpl->solver_checkSystemFile; }
 
 
-  std::set<IdString> ZConfig::parallelInstallable() const
-  { return _pimpl->parallelInstallable; }
+  std::set<IdString> ZConfig::multiversion() const
+  { return _pimpl->multiversion; }
 
-  void ZConfig::addParallelInstallable(std::string &name)
-  { _pimpl->parallelInstallable.insert(IdString(name)); }
+  void ZConfig::addMultiversion(std::string &name)
+  { _pimpl->multiversion.insert(IdString(name)); }
     
-  bool ZConfig::removeParallelInstallable(std::string &name)
-  { return _pimpl->parallelInstallable.erase(IdString(name)); }      
+  bool ZConfig::removeMultiversion(std::string &name)
+  { return _pimpl->multiversion.erase(IdString(name)); }      
 
   bool ZConfig::apply_locks_file() const
   {
