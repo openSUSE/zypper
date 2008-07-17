@@ -2,7 +2,7 @@
 Thu Jul 17 09:49:40 CEST 2008 - schubi@suse.de
 
 - Allow parallel installation of packages which have been defined
-  in zypp.conv (parameter "parallelInstallable") Fate #302050 
+  in zypp.conf (parameter "parallelInstallable") Fate #302050 
 - Additional check for broken system.
   (defined in zypp.conv: solver.checkSystemFile)
 - revision 10600 
