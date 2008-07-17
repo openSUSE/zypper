@@ -1628,7 +1628,6 @@ void modify_repo(Zypper & zypper, const string & alias)
     }
 
     long long prio = 0;
-    cout << sizeof(prio) << endl;
     parsed_opts::const_iterator tmp1;
     if ((tmp1 = zypper.cOpts().find("priority")) != zypper.cOpts().end())
     {
