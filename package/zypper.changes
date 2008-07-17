@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jul 17 11:42:54 CEST 2008 - ma@suse.de
+
+- Remove obsolete references to Script/Message/Atom
+
+-------------------------------------------------------------------
 Fri Jul 11 12:02:52 CEST 2008 - jkupec@suse.cz
 
 - fixed too much progress output when installing/removing
@@ -62,7 +67,7 @@ Thu Jun 12 10:13:02 CEST 2008 - jreidinger@suse.cz
 - enable specify repository for add/remove lock
 - read only locks file, apply is not needed
 - doesn't initialize pool for add repo (bnc #398839)
-- r10370 
+- r10370
 
 -------------------------------------------------------------------
 Thu Jun  5 16:37:36 CEST 2008 - jkupec@suse.cz
@@ -98,7 +103,7 @@ Fri May 30 18:30:11 CEST 2008 - jkupec@suse.cz
 Fri May 30 15:38:00 CEST 2008 - jreidinger@suse.cz
 
 - show help messages when show license in pager (bnc #394394)
-- r10284 
+- r10284
 
 -------------------------------------------------------------------
 Mon May 26 14:31:57 CEST 2008 - jkupec@suse.cz
@@ -146,7 +151,7 @@ Tue May 20 13:37:04 CEST 2008 - jkupec@suse.cz
 Tue May 20 13:18:30 CEST 2008 - jkupec@suse.cz
 
 - info: show correct available version (bnc #386703)
-- info: look for exact package name matches, not substrings 
+- info: look for exact package name matches, not substrings
   (bnc #392723)
 - r10160
 
@@ -167,19 +172,19 @@ Fri May 16 12:06:54 CEST 2008 - jreidinger@suse.cz
 Thu May 15 15:37:03 CEST 2008 - jreidinger@suse.cz
 
 - support for symlink named rug - autoenable rug compatibility
-- r10106 
+- r10106
 
 -------------------------------------------------------------------
 Thu May 15 14:47:45 CEST 2008 - jreidinger@suse.cz
 
-- fix input after showing in pager (bnc #390027) 
+- fix input after showing in pager (bnc #390027)
 - r10102
 
 -------------------------------------------------------------------
 Tue May 13 11:59:04 CEST 2008 - jreidinger@suse.cz
 
 - user needn't to be root to operate on specified --root dir
-- r10059 
+- r10059
 - 0.11.3
 
 -------------------------------------------------------------------
@@ -218,18 +223,18 @@ Fri May  9 17:08:34 CEST 2008 - jkupec@suse.cz
 Fri May  9 16:10:45 CEST 2008 - jreidinger@suse.cz
 
 - fix writing files outside specified root (bnc#388265)
-- r10019 
+- r10019
 
 -------------------------------------------------------------------
 Fri May  9 15:36:36 CEST 2008 - jreidinger@suse.cz
 
 - implement cleaning locks (bnc#385967)
-- r10016 
+- r10016
 
 -------------------------------------------------------------------
 Fri May  9 14:08:55 CEST 2008 - jreidinger@suse.cz
 
-- add removelock with name (bnc#385966) 
+- add removelock with name (bnc#385966)
 - r10006
 
 -------------------------------------------------------------------
@@ -254,7 +259,7 @@ Fri May  2 13:22:02 CEST 2008 - jreidinger@suse.cz
 
 - implement keep-packages option to ar and mr
 - Implement mr filter by local, remote or protocol specific
-  repositories and all option (no filter). 
+  repositories and all option (no filter).
 - r9935
 
 -------------------------------------------------------------------
@@ -275,7 +280,7 @@ Tue Apr 29 22:56:48 CEST 2008 - jkupec@suse.cz
 Tue Apr 29 13:41:25 CEST 2008 - jreidinger@suse.cz
 
 - show license in pager (bnc #260883)
-- r9882 
+- r9882
 
 -------------------------------------------------------------------
 Tue Apr 29 09:55:24 CEST 2008 - jreidinger@suse.cz
@@ -361,7 +366,7 @@ Fri Apr 25 23:07:30 CEST 2008 - jkupec@suse.cz
 Fri Apr 25 17:16:14 CEST 2008 - jreidinger@suse.cz
 
 - add richtext support also in license confirmation
-- r9823 
+- r9823
 
 -------------------------------------------------------------------
 Tue Apr 22 20:37:32 CEST 2008 - jkupec@suse.cz
@@ -381,7 +386,7 @@ Tue Apr 22 16:02:52 CEST 2008 - jreidinger@suse.cz
 Tue Apr 22 09:30:25 CEST 2008 - jreidinger@suse.cz
 
 - add richtext support to zypper info (bnc #224677).
-- r9767 
+- r9767
 
 -------------------------------------------------------------------
 Mon Apr 21 13:02:36 CEST 2008 - jkupec@suse.cz
@@ -453,13 +458,13 @@ Fri Apr 18 12:33:12 CEST 2008 - jreidinger@suse.cz
 
 - add warning if as only one parameter is not specified repo file.
   (bnc #380322)
-- r9695 
+- r9695
 
 -------------------------------------------------------------------
 Thu Apr 17 16:00:19 CEST 2008 - jreidinger@suse.cz
 
 - fix multiple remove same repository
-- r9681 
+- r9681
 
 -------------------------------------------------------------------
 Wed Apr 16 16:42:34 CEST 2008 - jkupec@suse.cz
@@ -492,7 +497,7 @@ Tue Apr 15 14:43:51 CEST 2008 - jkupec@suse.cz
 Tue Apr 15 13:44:32 CEST 2008 - jreidinger@suse.cz
 
 - bash completion - if no option can be completed, return to
-  default behaviour. 
+  default behaviour.
 - r9646
 
 -------------------------------------------------------------------
@@ -505,7 +510,7 @@ Tue Apr 15 11:25:48 CEST 2008 - jkupec@suse.cz
 Tue Apr 15 08:54:47 CEST 2008 - jreidinger@suse.cz
 
 - remove redundant -f in the man page (bnc #379889)
-- r9633 
+- r9633
 
 -------------------------------------------------------------------
 Tue Apr 15 00:43:30 CEST 2008 - jkupec@suse.cz
@@ -610,8 +615,8 @@ Sat Apr 12 19:20:45 CEST 2008 - jkupec@suse.cz
 Tue Apr  8 13:20:47 CEST 2008 - jreidinger@suse.cz
 
 - give better hint if zypper cannot download file from out of date
-  repository. (bnc #377137). 
-- r9454 
+  repository. (bnc #377137).
+- r9454
 
 -------------------------------------------------------------------
 Fri Apr  4 16:14:49 CEST 2008 - jreidinger@suse.cz
@@ -643,7 +648,7 @@ Fri Mar 28 16:51:15 CET 2008 - jkupec@suse.cz
 Thu Mar 27 16:38:17 CET 2008 - jreidinger@suse.cz
 
 - same default for adding by URL & alias and by repo file.
-- Drop support for no-refresh parameter during addrepo. 
+- Drop support for no-refresh parameter during addrepo.
 - r9282
 
 -------------------------------------------------------------------
@@ -663,7 +668,7 @@ Tue Mar 25 15:42:11 CET 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Tue Mar 25 10:51:08 CET 2008 - jreidinger@suse.cz
 
-- add end of line to add repository output (bnc #373196) 
+- add end of line to add repository output (bnc #373196)
 - r9261
 
 -------------------------------------------------------------------
@@ -672,14 +677,14 @@ Fri Mar 21 12:45:00 CET 2008 - jreidinger@suse.cz
 - add new call for abort/request/ignore question with timeout
 - in media request callback add this call for temporary network
   problems, and first three run have retry as default and then
-  abort is default (bnc #328822) 
+  abort is default (bnc #328822)
 - r9248
 
 -------------------------------------------------------------------
 Thu Mar 20 15:36:57 CET 2008 - jreidinger@suse.cz
 
 - precise information why not update repository (bnc #307249)
-- r9235 
+- r9235
 
 -------------------------------------------------------------------
 Wed Mar 19 00:05:10 CET 2008 - jkupec@suse.cz
@@ -691,7 +696,7 @@ Wed Mar 19 00:05:10 CET 2008 - jkupec@suse.cz
 Tue Mar 18 11:54:57 CET 2008 - jreidinger@suse.cz
 
 - add abort/retry/ignore option when download fail (bnc #340345)
-- r9190 
+- r9190
 
 -------------------------------------------------------------------
 Fri Mar 14 14:58:27 CET 2008 - jkupec@suse.cz
@@ -810,7 +815,7 @@ Fri Feb 22 15:48:53 CET 2008 - jkupec@suse.cz
 -------------------------------------------------------------------
 Fri Feb 22 10:18:37 CET 2008 - visnov@suse.cz
 
-- After generating testcase, also show the location in the message 
+- After generating testcase, also show the location in the message
 
 -------------------------------------------------------------------
 Fri Feb 22 09:48:38 CET 2008 - ma@suse.de
