@@ -109,6 +109,9 @@ namespace zypp
 
   ResObject::Ptr makeResObject( const sat::Solvable & solvable_r )
   {
+    if ( ! solvable_r )
+      return 0;
+
     ResKind kind( solvable_r.kind() );
 #define OUTS(X)  if ( kind == ResTraits<X>::kind ) return make<X>( solvable_r );
     OUTS( Package );
@@ -117,7 +120,8 @@ namespace zypp
     OUTS( Product );
     OUTS( SrcPackage );
 #undef OUTS
-    return 0;
+    // unknow => return a plain ResObject
+    return new ResObject( solvable_r );
   }
 
   /////////////////////////////////////////////////////////////////

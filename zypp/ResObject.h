@@ -154,6 +154,7 @@ namespace zypp
     const DiskUsage & diskusage() const;
 
   protected:
+    friend ResObject::Ptr makeResObject( const sat::Solvable & solvable_r );
     /** Ctor */
     ResObject( const sat::Solvable & solvable_r );
     /** Dtor */
