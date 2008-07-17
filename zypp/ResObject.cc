@@ -16,7 +16,6 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/ZConfig.h"
 #include "zypp/IdString.h"
 
 using namespace zypp;
@@ -84,14 +83,6 @@ namespace zypp
 
   unsigned ResObject::mediaNr() const
   { return lookupNumAttribute( sat::SolvAttr::medianr ); }
-
-  bool ResObject::installOnly() const
-  {
-      std::set<IdString> parallel = ZConfig::instance().parallelInstallable();
-      if (parallel.find(ident()) != parallel.end())
-	      return true;
-      return false;
-  }
 
   Date ResObject::buildtime() const
   { return Date( lookupNumAttribute( sat::SolvAttr::buildtime ) ); }

@@ -63,6 +63,13 @@ namespace zypp
     using sat::Solvable::edition;
     using sat::Solvable::arch;
 
+      
+    /**
+     * Flag in the metadata indicating this should be
+     * installed unsing '-i' (not -U).
+     */
+    using sat::Solvable::installOnly;      
+
     /** \name Dependencies. */
     //@{
     /** Select by Dep. */

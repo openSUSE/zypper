@@ -135,13 +135,6 @@ namespace zypp
     unsigned mediaNr() const;
 
     /**
-     * \TODO FIXME what is this?
-     * Flag in the metadata indicating this should be
-     * installed unsing '-i' (not -U).
-     */
-    bool installOnly() const;
-
-    /**
      * \short build time of the resolvable
      */
     Date buildtime() const;

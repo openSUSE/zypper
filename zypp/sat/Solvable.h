@@ -156,6 +156,8 @@ namespace zypp
 
         IdString     vendor()   const;
 
+	bool	     installOnly() const;
+
       public:
 
         /** \name Access to the \ref Solvable dependencies.

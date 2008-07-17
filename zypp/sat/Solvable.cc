@@ -22,6 +22,7 @@
 #include "zypp/sat/Pool.h"
 #include "zypp/Repository.h"
 #include "zypp/OnMediaLocation.h"
+#include "zypp/ZConfig.h"
 
 using std::endl;
 
@@ -316,6 +317,14 @@ namespace zypp
       }
       return Arch( IdString(_solvable->arch).asString() );
       //return ArchId( _solvable->arch );
+    }
+
+    bool Solvable::installOnly() const
+    {
+	std::set<IdString> parallel = ZConfig::instance().parallelInstallable();
+	if (parallel.find(ident()) != parallel.end())
+	      return true;
+	return false;
     }
 
     IdString Solvable::vendor() const
