@@ -70,7 +70,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_lock;
     PoolItemList _items_to_keep;
-    PoolItemList _items_parallel_install;
 
     // solve results
     PoolItemList _result_items_to_install;
@@ -137,8 +136,6 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void addPoolItemToLock (PoolItem item);
     void addPoolItemToKeep (PoolItem item);
-
-    void addPoolItemParallelInstall (PoolItem item);        
 
     void addPoolItemToRemove (PoolItem item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);

@@ -251,13 +251,6 @@ SATResolver::addPoolItemToLock (PoolItem item)
 }
 
 void
-SATResolver::addPoolItemParallelInstall(PoolItem item)
-{
-    _items_parallel_install.push_back (item);
-    _items_parallel_install.unique ();
-}
-
-void
 SATResolver::addPoolItemToKeep (PoolItem item)
 {
     resetItemTransaction (item);    
@@ -354,10 +347,6 @@ struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem item )		// only transacts() items go here
     {
-	if (item->installOnly()) {
-	    resolver. addPoolItemParallelInstall(item);	    
-	}
-	
 	ResStatus status = item.status();
 	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
@@ -608,7 +597,6 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     _items_to_remove.clear();
     _items_to_lock.clear();
     _items_to_keep.clear();
-    _items_parallel_install.clear();
 
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   functor::functorRef<bool,PoolItem>(info) );
@@ -623,15 +611,11 @@ SATResolver::solverInit(const PoolItemList & weakItems)
         queue_push( &(_jobQueue), id );	
     }
 
-    for (PoolItemList::iterator it = _items_parallel_install.begin(); it != _items_parallel_install.end(); ++it) {
-	Id id = (*it)->satSolvable().id();
-	if (id == ID_NULL) {
-	    ERR << "Item " << *it << " not found" << endl;
-	} else {
-	    MIL << "Ignore Obsoletes of item: " << *it << endl;
-	    queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE );
-	    queue_push( &(_jobQueue), id );
-	}
+    // Add rules for parallel installable resolvables
+    std::set<IdString> parallel = ZConfig::instance().parallelInstallable();
+    for (std::set<IdString>::const_iterator it = parallel.begin(); it != parallel.end(); ++it) {
+	queue_push( &(_jobQueue), SOLVER_NOOBSOLETES_SOLVABLE_NAME );
+	queue_push( &(_jobQueue), it->id() );
     }
 }
 
