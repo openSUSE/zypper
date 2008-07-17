@@ -165,7 +165,22 @@ namespace zypp
       bool isUnmaintained() const
       { return availableEmpty(); }
 
-      bool isNeeded() const
+      bool isUndetermined() const;
+      {
+        PoolItem cand( candidateObj() );
+        return ! cand || cand.isUndetermined();
+      }
+      bool isRelevant() const;
+      {
+        PoolItem cand( candidateObj() );
+        return cand && cand.isRelevant();
+      }
+      bool isSatisfied() const;
+       {
+        PoolItem cand( candidateObj() );
+        return cand && cand.isSatisfied();
+      }
+      bool isBroken() const;
       {
         PoolItem cand( candidateObj() );
         return cand && cand.isBroken();

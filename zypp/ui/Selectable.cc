@@ -109,8 +109,22 @@ namespace zypp
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
 
+    bool Selectable::isUndetermined() const
+    { return _pimpl->isUndetermined(); }
+
+    bool Selectable::isRelevant() const
+    { return _pimpl->isRelevant(); }
+
+    bool Selectable::isSatisfied() const
+    { return _pimpl->isSatisfied(); }
+
+    bool Selectable::isBroken() const
+    { return _pimpl->isBroken(); }
+
     bool Selectable::isNeeded() const
-    { return _pimpl->isNeeded(); }
+    {
+      return fate() == TO_INSTALL || isBroken() ;
+    }
 
     ResStatus::TransactByValue Selectable::modifiedBy() const
     { return _pimpl->modifiedBy(); }

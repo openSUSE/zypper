@@ -190,11 +190,33 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
-      /** Whether the item is relevant but has broken requirements.
-       * A 'needed' Patch should be installed, while an 'unneeded' one
-       * is either applied or not relevant for the system.
+      /** \name Classification of available patches (patterns, products).
+       * A patch is either \c not \c relevant, \c satisfied or \c broken.
+      */
+      //@{
+      /** Returns true for packages, because  packages are not
+       * classified by the solver.
+      */
+      bool isUndetermined() const;
+
+      /** Returns true if the patch is relevant which means that at least
+       *  one package of the patch is installed.
+       */
+      bool isRelevant() const;
+
+      /** Whether a relevant patchs requirements are met. */
+      bool isSatisfied() const;
+
+      /** Whether a relevant patchs requirements are broken. */
+      bool isBroken() const;
+
+      /** This includes still broken patches, as well as those already
+       *  selected to be installed.
+       * This is because already selected patches will be classified as
+       * \c satisfied.
        */
       bool isNeeded() const;
+      //@}
 
      public:
       /** \name Query objects fate in case of commit.
@@ -257,8 +279,6 @@ namespace zypp
 
       /** Set LicenceConfirmed bit. */
       void setLicenceConfirmed( bool val_r = true );
-
-
       //@}
 
     public:
