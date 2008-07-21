@@ -49,8 +49,10 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+#ifndef SWIG // Swig treats it as syntax error
     /** Whether this represents a valid- or no-solvable. */
     using sat::Solvable::operator bool_type;
+#endif
     /** Whether this represents an installed solvable. */
     using sat::Solvable::isSystem;
 

@@ -457,7 +457,7 @@ namespace zypp
     /**
      * Adds new service
      *
-     * \param name service info 
+     * \param name service info
      *
      * \throws FIXME RepoAlreadyExistException and as reponame is service name
      */
@@ -515,7 +515,7 @@ namespace zypp
     void refreshServices();
 
     /**
-     * Refresh specific service. 
+     * Refresh specific service.
      * \throws Exception if cannot download file
      * \param name service structure
      */
@@ -524,7 +524,7 @@ namespace zypp
     /**
      * modify service, rewrite Service to filesystem.
      * If change Service name, then can escalate to rewrite all repositories which it contain.
-     * 
+     *
      * \param oldName oldName of service
      * \param service Structure containing new datas
      *
@@ -533,6 +533,7 @@ namespace zypp
      */
     void modifyService(const std::string& oldName, const Service& service);
 
+    private:
     /**
      * Functor thats filter RepoInfo by service which belongs to.
      */
@@ -544,6 +545,7 @@ namespace zypp
         bool match( const RepoInfo& info ) { return info.service()==name; }
     };
 
+    public:
     /**
      * fill to output iterator repositories in service name. This output iterator can perform
      * any action on with Repo or service Container, because it is sets and it isn't dynamic recreate.
@@ -565,14 +567,14 @@ namespace zypp
      * ChangePriority changer(10);
      * getRepositoriesInService(name,getRepositoriesInService( name, boost::make_function_output_iterator(bind(&ChangePriority::doIt, &changer, _1))));
      * \endcode
-     */ 
+     */
 
     template<typename OutputIterator>
     void getRepositoriesInService( const std::string& name, OutputIterator out ) const
     {
       MatchServiceName filter(name);
 
-      std::copy(boost::make_filter_iterator(bind(&MatchServiceName::match, 
+      std::copy(boost::make_filter_iterator(bind(&MatchServiceName::match,
           filter, _1),repoBegin(),repoEnd()), boost::make_filter_iterator(
           bind(&MatchServiceName::match, filter, _1),repoEnd(),repoEnd()),
           out );

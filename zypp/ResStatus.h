@@ -420,7 +420,7 @@ namespace zypp
       {
           fieldValueAssign<TransactField>( KEEP_STATE );
       }
-      fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again     
+      fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again
       fieldValueAssign<TransactByField>( causer_r );
       return true;
     }
@@ -633,21 +633,8 @@ namespace zypp
     /** \name Builtin ResStatus constants. */
     //@{
     static const ResStatus toBeInstalled;
-    static const ResStatus toBeInstalledSoft;
     static const ResStatus toBeUninstalled;
-    static const ResStatus toBeUninstalledSoft;
-    static const ResStatus toBeUninstalledDueToUnlink;
-    static const ResStatus toBeUninstalledDueToObsolete;
     static const ResStatus toBeUninstalledDueToUpgrade;
-    static const ResStatus installed;	// installed, status after successful target 'install' commit
-    static const ResStatus uninstalled;	// uninstalled, status after successful target 'uninstall' commit
-    static const ResStatus satisfied;	// uninstalled, satisfied
-    static const ResStatus complete;	// installed, satisfied
-    static const ResStatus unneeded;	// uninstalled, unneeded
-    static const ResStatus needed;	// uninstalled, incomplete
-    static const ResStatus incomplete;	// installed, incomplete
-    static const ResStatus recommended;	// recommended
-    static const ResStatus suggested;	// suggested
     //@}
 
   private:

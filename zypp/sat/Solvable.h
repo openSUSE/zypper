@@ -73,8 +73,10 @@ namespace zypp
         /** Represents no \ref Solvable. */
         static const Solvable noSolvable;
 
+#ifndef SWIG // Swig treats it as syntax error
         /** Evaluate \ref Solvable in a boolean context (\c != \c noSolvable). */
         using base::SafeBool<Solvable>::operator bool_type;
+#endif
 
         /** Return whether this \ref Solvable belongs to the system repo.
          * \note This includes the otherwise hidden systemSolvable.
@@ -231,7 +233,9 @@ namespace zypp
         /** Expert backdoor. */
         IdType id() const { return _id; }
       private:
+#ifndef SWIG // Swig treats it as syntax error
         friend base::SafeBool<Solvable>::operator bool_type() const;
+#endif
         bool boolTest() const { return get(); }
       private:
         IdType _id;
@@ -318,6 +322,6 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-ZYPP_DEFINE_ID_HASHABLE( ::zypp::sat::Solvable )
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::sat::Solvable );
 
 #endif // ZYPP_SAT_SOLVABLE_H

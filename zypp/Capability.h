@@ -123,9 +123,10 @@ namespace zypp
       static const Capability Empty;
 
     public:
+#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */
       using base::SafeBool<Capability>::operator bool_type;
-
+#endif
       /** Whether the \ref Capability is empty.
        * This is true for \ref Null and \ref Empty.
        */
@@ -207,7 +208,9 @@ namespace zypp
       /** Match two Capabilities */
       static CapMatch _doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs );
     private:
+#ifndef SWIG // Swig treats it as syntax error
       friend base::SafeBool<Capability>::operator bool_type() const;
+#endif
       bool boolTest() const { return ! empty(); }
     private:
       sat::detail::IdType _id;
@@ -336,6 +339,6 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-ZYPP_DEFINE_ID_HASHABLE( ::zypp::Capability )
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::Capability );
 
 #endif // ZYPP_CAPABILITY_H

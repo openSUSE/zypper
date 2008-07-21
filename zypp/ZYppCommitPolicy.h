@@ -60,15 +60,15 @@ namespace zypp
     { return restrictToMedia( 0 ); }
 
     /** Set dry run (default: false) */
-    ZYppCommitPolicy & dryRun( bool yesNo_r = true )
+    ZYppCommitPolicy & dryRun( bool yesNo_r )
     { _dryRun = yesNo_r; return *this; }
 
     /** Use rpm option --nosignature (default: false) */
-    ZYppCommitPolicy & rpmNoSignature( bool yesNo_r = true )
+    ZYppCommitPolicy & rpmNoSignature( bool yesNo_r )
     { _rpmNoSignature = yesNo_r; return *this; }
 
     /** Kepp pool in sync with the Target databases after commit (default: true) */
-    ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r = true )
+    ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r )
     { _syncPoolAfterCommit = yesNo_r; return *this; }
 
   private:

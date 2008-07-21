@@ -215,6 +215,6 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-ZYPP_DEFINE_ID_HASHABLE( ::zypp::IdString )
+ZYPP_DEFINE_ID_HASHABLE( ::zypp::IdString );
 
 #endif // ZYPP_SAT_IDSTR_H
