@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: Fri May 23 18:26:25 UTC 2008\n"
+"PO-Revision-Date: Tue Jun  3 19:31:57 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -1866,26 +1866,26 @@ msgstr[1] "Die folgenden Produkte werden aktualisiert:"
 #: ../src/zypper-misc.cc:1047
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "Das folgende Paket wird degradiert:"
-msgstr[1] "Die folgenden Pakete werden degradiert:"
+msgstr[0] "Das folgende Paket wird durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden Pakete werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/zypper-misc.cc:1052
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "Der folgende Patch wird degradiert:"
-msgstr[1] "Die folgenden Patches werden degradiert:"
+msgstr[0] "Der folgende Patch wird durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden Patches werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/zypper-misc.cc:1057
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "Das folgende Schema wird degradiert:"
-msgstr[1] "Die folgenden Schemata werden degradiert:"
+msgstr[0] "Das folgende Schema wird durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden Schemata werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/zypper-misc.cc:1062
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "Das folgende Produkt wird degradiert:"
-msgstr[1] "Die folgenden Produkte werden degradiert:"
+msgstr[0] "Das folgende Produkt wird durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden Produkte werden durch eine ältere Version ausgetauscht:"
 
 #: ../src/zypper-misc.cc:1069
 msgid "The following NEW package is going to be installed:"

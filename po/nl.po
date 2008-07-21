@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-28 22:50+0200\n"
+"PO-Revision-Date: 2008-06-03 17:07+0200\n"
 "Last-Translator: Freek de Kruijf <f.de.kruijf@hetnet.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -1346,7 +1346,7 @@ msgstr "Arch: "
 
 #: ../src/zypper-info.cc:32
 msgid "Vendor: "
-msgstr "Fabrikant: "
+msgstr "Leverancier: "
 
 #: ../src/zypper-info.cc:37
 msgid "Summary: "

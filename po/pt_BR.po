@@ -1,4 +1,4 @@
-# translation of zypper.pt_BR.po to Brazilian Portuguese
+# translation of zypper.po to Brazilian Portuguese
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -8,10 +8,10 @@
 # Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper.pt_BR\n"
+"Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-05-30 18:02-0300\n"
+"PO-Revision-Date: 2008-06-05 09:20-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr "nenhuma ajuda disponível para esta opção"
 
 #: ../src/zypp-checkpatches.cc:124
 msgid "The updater could not access the package manager engine. This usually happens when you have another application (like YaST) using it at the same time. Please close the other applications and check again for updates."
-msgstr "O atualizador não pôde acessar o mecanismo do gerenciador de pacotes. Isso geralmente acontece quando outro aplicativo (como o YaST) está usando o mesmo mecanismo simultaneamente. Por favor feche outros aplicativos e verifique se há atualizações novamente."
+msgstr "O atualizador não pode acessar o mecanismo do gerenciador de pacotes. Isso geralmente acontece quando outro aplicativo (como o YaST) está usando o mesmo mecanismo simultaneamente. Por favor feche outros aplicativos e verifique se há atualizações novamente."
 
 #. TranslatorExplanation %s = detailed low level (unstranslated) error message
 #: ../src/zypp-checkpatches.cc:184
@@ -2267,7 +2267,7 @@ msgstr "Nenhum pacote que corresponda a '%s' está instalado."
 #: ../src/zypper-misc.cc:2216
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "O pacotes '%s' não está instalado."
+msgstr "O pacote '%s' não está instalado."
 
 #: ../src/zypper-misc.cc:2228
 #, c-format
@@ -3104,7 +3104,7 @@ msgstr "A opção '--%s' atualmente não tem efeito."
 #: ../src/zypper-utils.cc:125
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "pacote "
+msgstr[0] "pacote"
 msgstr[1] "pacotes"
 
 #: ../src/zypper-utils.cc:127

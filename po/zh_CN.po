@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-05-22 13:19+0200\n"
-"PO-Revision-Date: 2008-06-02 10:54+0800\n"
-"Last-Translator: Thruth Wang <lihaow@opera.com>\n"
+"PO-Revision-Date: 2008-06-03 01:53+0800\n"
+"Last-Translator: Thruth Wang <gubotruth@gmail.com>\n"
 "Language-Team: Simplified Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,7 +153,7 @@ msgstr ""
 "\trenamerepo, nr\t\t重命名指定的安装源。\n"
 "\tmodifyrepo, mr\t\t修改指定的安装源。\n"
 "\trefresh, ref\t\t刷新所有安装源。\n"
-"\tclean\t\t\t清除本地缓存。\n"
+"\tclean\t\t\t清理本地缓存。\n"
 
 #: ../src/zypper.cc:188
 msgid ""
@@ -289,7 +289,7 @@ msgstr "意外异常。"
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/zypper.cc:815
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -310,6 +310,24 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgstr ""
+"install (in) [选项] <capability|rpm_file_uri> ...\n"
+"\n"
+"安装指定 capacity 的可解析项或指定位置的 RPM 文件。一个 capability 为 NAME[OP<VERSION>]，OP是 <, <=, =, >=, > 中一种。\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>        Install resolvables only from the specified repository.\n"
+"-t, --type <type>               Type of resolvable (%s).\n"
+"                                Default: %s.\n"
+"-n, --name                      Select resolvables by plain name, not by capability.\n"
+"-C, --capability                Select resolvables by capability.\n"
+"-f, --force                     Install even if the item is already installed (reinstall).\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+"                                See 'man zypper' for more details.\n"
+"    --debug-solver              Create solver test case for debugging.\n"
+"    --no-recommends             Do not install recommended packages, only required.\n"
+"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+"-D, --dry-run                   Test the installation, do not actually install.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -497,6 +515,15 @@ msgid ""
 "-M, --raw-metadata       Clean raw metadata cache.\n"
 "-a, --all                Clean both metadata and package caches.\n"
 msgstr ""
+"clean [别名|#|URI] ...\n"
+"\n"
+"清理本地缓存。\n"
+"\n"
+" 命令选项：\n"
+"-r, --repo <别名|#|URI> 仅清理指定软件源。\n"
+"-m, --metadata           清理元数据缓存。\n"
+"-M, --raw-metadata       清理原始元数据缓存。\n"
+"-a, --all                清理元数据和软件包缓存。\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -515,6 +542,16 @@ msgid ""
 "                                to a lower than the latest version are\n"
 "                                also acceptable.\n"
 msgstr ""
+"list-updates (lu) [选项]\n"
+"\n"
+"列出所有可用更新。\n"
+"\n"
+" 命令选项：\n"
+"-t, --type <类型>               可解析项类型(%s)。\n"
+"                               默认： %s.\n"
+"-r, --repo <别名|#|URI>        仅仅列出来自指定软件源的更新。\n"
+"    --best-effort               通过'best effort'方式更新。更新到非\n"
+"                                最新版本是可以接受的。\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -1045,7 +1082,7 @@ msgstr "全局选项'%s'在这里无效。"
 
 #: ../src/zypper.cc:2297
 msgid "Root privileges are required for cleaning local caches."
-msgstr "清除本地缓存需要有 root 特权。"
+msgstr "清理本地缓存需要有 root 特权。"
 
 #: ../src/zypper.cc:2316
 msgid "At least one package name is required."
@@ -1068,7 +1105,7 @@ msgstr "'%s'貌似是一个 RPM 文件，将尝试下载之。"
 #: ../src/zypper.cc:2376
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr ""
+msgstr "指定为 '%s' 的RPM 文件出现问题，正在跳过。"
 
 #: ../src/zypper.cc:2399
 #, c-format
@@ -1110,7 +1147,7 @@ msgstr "未找到可解析项。"
 
 #: ../src/zypper.cc:2682
 msgid "Problem occurred initializing or executing the search query"
-msgstr ""
+msgstr "在初始化或执行搜索请求时出现问题"
 
 #: ../src/zypper.cc:2683
 msgid "See the above message for a hint."
@@ -1123,7 +1160,7 @@ msgstr "以 root 运行 'zypper refresh' 或许会解决问题。"
 
 #: ../src/zypper.cc:2850
 msgid "Running as 'rug', can't do 'best-effort' approach to update."
-msgstr ""
+msgstr "以 'rug' 运行，无法通过 'best-effort' 方法进行更新。"
 
 #: ../src/zypper.cc:2900
 msgid "Root privileges are required for updating packages."
@@ -1133,7 +1170,7 @@ msgstr "更新软件包需要有 root 特权。"
 #: ../src/zypper.cc:2947
 #, c-format
 msgid "Running as '%s', cannot do '%s' approach to update."
-msgstr ""
+msgstr "以 '%s' 运行，无法通过 '%s' 方法进行更新。"
 
 #: ../src/zypper.cc:2984
 msgid "Root privileges are required for performing a distribution upgrade."
@@ -1479,19 +1516,24 @@ msgid "Do you want to trust key id %s, %s, fingerprint %s"
 msgstr "是否要信任密钥 id %s, %s, 指纹 %s"
 
 #: ../src/zypper-keyring-callbacks.h:114
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Ignoring failed signature verification for %s with public key id %s, %s, fingerprint %s!\n"
 "Double-check this is not caused by some malicious changes in the file!"
-msgstr "警告：忽略未通过的对 %s 的签名验证，公共关键码 id %s, %s, 指纹 %s ！"
+msgstr ""
+"警告：忽略未通过的对 %s 的签名验证，公钥 id %s, %s, 指纹 %s ！\n"
+"请务必检查这不是由一些文件中的恶意更改引起的！"
 
 #: ../src/zypper-keyring-callbacks.h:124
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Signature verification failed for %s with public key id %s, %s, fingerprint %s.\n"
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing is risky! Continue anyway?"
-msgstr "%s 签名验证失败：公共密钥 id %s, %s, 指纹 %s。"
+msgstr ""
+"%s 签名验证失败：公钥 id %s, %s, 指纹 %s。\n"
+"警告：这可能是由于文件中的恶意改变引起的！\n"
+"继续有风险！确定要继续么？"
 
 #: ../src/zypper-keyring-callbacks.h:143
 #, c-format
@@ -1928,17 +1970,16 @@ msgstr "正在检查依赖关系..."
 
 #: ../src/zypper-misc.cc:1563
 msgid "Generating solver test case..."
-msgstr "正在生成解决试例..."
+msgstr "正在生成解析程序试例..."
 
 #: ../src/zypper-misc.cc:1566
-#, fuzzy, c-format
+#, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "记事已成功导出"
+msgstr "解析程序试例在 %s 成功生成。"
 
 #: ../src/zypper-misc.cc:1570
-#, fuzzy
 msgid "Error creating the solver test case."
-msgstr "读取系统源时出错："
+msgstr "创建解析程序依赖关系的试例出错。"
 
 #. translators: %d is the number of needed patches
 #: ../src/zypper-misc.cc:1618
@@ -2091,7 +2132,7 @@ msgstr "取消操作。"
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/zypper-misc.cc:2328
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr ""
+msgstr "重新以无强制解决模式启动解析程序，以显示依赖性问题。"
 
 #: ../src/zypper-misc.cc:2369
 msgid "committing"
@@ -2103,25 +2144,23 @@ msgstr "(演习)"
 
 #: ../src/zypper-misc.cc:2403
 #: ../src/zypper-misc.cc:2437
-#, fuzzy
 msgid "Problem downloading the package file from the repository:"
-msgstr "正在从 %s 读取产品"
+msgstr "从软件源下载软件包文件出错："
 
 #: ../src/zypper-misc.cc:2404
 #: ../src/zypper-misc.cc:2427
 #: ../src/zypper-misc.cc:2459
 #: ../src/zypper-repos.cc:143
 #: ../src/zypper-repos.cc:1825
-#, fuzzy
 msgid "Please see the above error message for a hint."
-msgstr "请更正错误并重试。"
+msgstr "请参见以上错误信息找到线索。"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
 #: ../src/zypper-misc.cc:2433
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "软件源'%s'是最新的。"
+msgstr "软件源 '%s' 太旧。运行 '%s' 可能有效。"
 
 #: ../src/zypper-misc.cc:2445
 msgid ""
@@ -2140,19 +2179,16 @@ msgstr ""
 " － 使用其他安装源"
 
 #: ../src/zypper-misc.cc:2458
-#, fuzzy
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "安装期间出错。"
+msgstr "下列软件包在安装期间或安装后或移除时出现问题："
 
 #: ../src/zypper-misc.cc:2478
-#, fuzzy
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "安装的补丁需要重新启动计算机。请尽快重启。"
+msgstr "安装的补丁之一需要重新启动计算机。请尽快重启。"
 
 #: ../src/zypper-misc.cc:2482
-#, fuzzy
 msgid "One of installed patches affects the package manager itself, thus it requires its restart before executing any further operations."
-msgstr "警告： 其中一个已安装增补程序影响到包管理器本身，因此要求在执行下一个操作前重启动。"
+msgstr "其中一个已安装增补程序影响到包管理程序本身，因此要求在执行下一步操作前重新启动它。"
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/zypper-misc.cc:2507
@@ -2167,7 +2203,6 @@ msgstr "%s %s 许可证："
 
 #. lincense prompt
 #: ../src/zypper-misc.cc:2531
-#, fuzzy
 msgid "In order to install this package, you must agree to terms of the above license. Continue?"
 msgstr "要安装此包，必须同意以上许可证条款。 是否继续？"
 
@@ -2266,9 +2301,9 @@ msgstr "无效的回复 '%s'。"
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
 #: ../src/zypper-prompt.cc:244
-#, fuzzy, c-format
+#, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
-msgstr "错误的回复 '%s'。如果其他都行不通，要 '%s' 就输入 'y'，要 '%s' 就输入 'n'"
+msgstr "如果其它输入方法不可用，键入 'y' 为 '%s'，键入 'n' 为 '%s'。"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/zypper-prompt.h:98
@@ -2323,9 +2358,9 @@ msgid "Repository '%s' is up to date."
 msgstr "软件源'%s'是最新的。"
 
 #: ../src/zypper-repos.cc:94
-#, fuzzy, c-format
+#, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "必须去除 %s。"
+msgstr "对 '%s' 的更新检查被延迟。"
 
 #: ../src/zypper-repos.cc:112
 msgid "Forcing raw metadata refresh"
@@ -2348,9 +2383,9 @@ msgstr "没有为 '%s' 定义 URI。"
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/zypper-repos.cc:160
-#, fuzzy, c-format
+#, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "请为安装源 '%s' 添加一个或者更多的基本 URL 条目 (baseurl=URL) 至 %s 。"
+msgstr "请为安装源 '%2$s' 添加一个或者更多的基 URI 条目 (baseurl=URI) 至 %1$s 。"
 
 #: ../src/zypper-repos.cc:173
 msgid "No alias defined for this repository."
@@ -2362,9 +2397,8 @@ msgid "Repository '%s' is invalid."
 msgstr "安装源 '%s' 无效。"
 
 #: ../src/zypper-repos.cc:187
-#, fuzzy
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "请检查这个安装源的 URLs 指向一个有效的源地址。"
+msgstr "请检查这个安装源定义的 URI 指向一个有效的软件源。"
 
 #: ../src/zypper-repos.cc:200
 #, c-format
@@ -2395,9 +2429,9 @@ msgid "Error building the cache database:"
 msgstr "构建缓存数据库时出错"
 
 #: ../src/zypper-repos.cc:367
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "通过给定别名或 URL 未找到安装源。"
+msgstr "无法通过别名、编号或 URI 找到软件源 '%s'。"
 
 #: ../src/zypper-repos.cc:370
 msgid "Use 'zypper repos' to get the list of defined repositories."
@@ -2405,9 +2439,9 @@ msgstr "用 'zypper repos' 来获得已定义的安装源列表。"
 
 #: ../src/zypper-repos.cc:446
 #: ../src/zypper-repos.cc:482
-#, fuzzy, c-format
+#, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "正在跳过出现如上错误的安装源 '%s' 。"
+msgstr "由于如上错误禁用安装源 '%s' 。"
 
 #: ../src/zypper-repos.cc:464
 #, c-format
@@ -2415,9 +2449,9 @@ msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to u
 msgstr "安装源 '%s' 已经过时。以 root 身份运行 'zypper refresh' 来更新它。"
 
 #: ../src/zypper-repos.cc:499
-#, fuzzy, c-format
+#, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "需要建立安装源 '%s' 的数据缓存。以 root 身份运行 'zypper refresh' 即可。"
+msgstr "需要建立安装源 '%s' 的元数据缓存。您可以 root 身份运行 'zypper refresh' 执行此操作。"
 
 #: ../src/zypper-repos.cc:506
 #, c-format
@@ -2464,9 +2498,8 @@ msgid "URI"
 msgstr "URI"
 
 #: ../src/zypper-repos.cc:674
-#, fuzzy
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "没有定义安装源。使用 'zypper addrepo' 命令添加一个或多个安装源。"
+msgstr "没有定义软件源。使用 'zypper addrepo' 命令添加一个或多个软件源。"
 
 #: ../src/zypper-repos.cc:769
 #: ../src/zypper-repos.cc:840
@@ -2512,19 +2545,16 @@ msgid "Specified repositories are not enabled or defined."
 msgstr "所指定的安装源没有被启用或者定义。"
 
 #: ../src/zypper-repos.cc:932
-#, fuzzy
 msgid "There are no enabled repositories defined."
-msgstr "没有提供可安装的 %s"
+msgstr "未定义已经启用的软件源。"
 
 #: ../src/zypper-repos.cc:936
-#, fuzzy
 msgid "Could not refresh the repositories because of errors."
-msgstr "无法去除选定项。"
+msgstr "由于出错无法刷新软件安装源。"
 
 #: ../src/zypper-repos.cc:942
-#, fuzzy
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "所有系统源均已刷新。"
+msgstr "由于出错，一些软件源未被刷新。"
 
 #: ../src/zypper-repos.cc:947
 msgid "Specified repositories have been refreshed."
@@ -2537,42 +2567,39 @@ msgstr "所有安装源均已刷新。"
 #: ../src/zypper-repos.cc:1082
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "正在清除'%s'的元数据。"
+msgstr "正在清理'%s'的元数据。"
 
 #: ../src/zypper-repos.cc:1089
-#, fuzzy, c-format
+#, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "正在清除'%s'的元数据。"
+msgstr "正在为'%s'清理原始元数据。"
 
 #. translators: meaning the cached rpm files
 #: ../src/zypper-repos.cc:1097
-#, fuzzy, c-format
+#, c-format
 msgid "Cleaning packages for '%s'."
-msgstr "正在从 %s 读取包"
+msgstr "正在为 '%s' 清理软件包。"
 
 #: ../src/zypper-repos.cc:1105
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "正在跳过出现如上错误的安装源 '%s' 。"
+msgstr "由于出错无法清理软件源 '%s' 。"
 
 #: ../src/zypper-repos.cc:1119
 msgid "Cleaning installed packages cache."
-msgstr "正在清除已安装软件包缓存。"
+msgstr "正在清理已安装软件包缓存。"
 
 #: ../src/zypper-repos.cc:1127
-#, fuzzy
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "正在跳过出现如上错误的安装源 '%s' 。"
+msgstr "由于出错无法清理已安装软件包的缓存。"
 
 #: ../src/zypper-repos.cc:1135
-#, fuzzy
 msgid "Could not clean the repositories because of errors."
-msgstr "无法去除选定项。"
+msgstr "由于出错无法清理软件安装源。"
 
 #: ../src/zypper-repos.cc:1142
-#, fuzzy
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "所有系统源均已刷新。"
+msgstr "由于出错，一些软件源未被清理。"
 
 #: ../src/zypper-repos.cc:1147
 msgid "Specified repositories have been cleaned up."
@@ -2588,33 +2615,29 @@ msgstr "这是一个可以改变的只读介质（CD/DVD），禁用自动刷新
 
 #: ../src/zypper-repos.cc:1209
 #: ../src/zypper-repos.cc:1452
-#, fuzzy, c-format
+#, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "已经存在该名称的播放列表。请另外选择一个名称。"
+msgstr "已经存在名称为'%s'的软件源。请另外选择一个别名。"
 
 #: ../src/zypper-repos.cc:1220
-#, fuzzy
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "不能确定安装源的类型。请检查下面定义的 URLs 是否指向一个正确的安装源："
+msgstr "不能确定软件源的类型。请检查下面定义的 URI 是否指向一个有效的软件源："
 
 #: ../src/zypper-repos.cc:1227
 msgid "Can't find a valid repository at given location:"
 msgstr "不能在指定的位置找到一个正确的安装源："
 
 #: ../src/zypper-repos.cc:1236
-#, fuzzy
 msgid "Problem transferring repository data from specified URI:"
-msgstr "正在搜索 CD 的元数据..."
+msgstr "从指定 URI 传输软件源数据出现问题："
 
 #: ../src/zypper-repos.cc:1237
-#, fuzzy
 msgid "Please check whether the specified URI is accessible."
-msgstr "请检查指定的 URL 是否可访问。"
+msgstr "请检查指定的 URI 是否可访问。"
 
 #: ../src/zypper-repos.cc:1245
-#, fuzzy
 msgid "Unknown problem when adding repository:"
-msgstr "正在搜索 CD 的元数据..."
+msgstr "添加软件源时出现未知问题："
 
 #: ../src/zypper-repos.cc:1251
 #, c-format
@@ -2632,28 +2655,25 @@ msgid "Reading data from '%s' media"
 msgstr "正在从介质 '%s' 读取数据"
 
 #: ../src/zypper-repos.cc:1287
-#, fuzzy, c-format
+#, c-format
 msgid "Problem reading data from '%s' media"
-msgstr "正在从 %s 读取产品"
+msgstr "从介质 '%s' 读取数据出现问题"
 
 #: ../src/zypper-repos.cc:1288
 msgid "Please check if your installation media is valid and readable."
 msgstr "请检查您的安装介质是否正确和可读。"
 
 #: ../src/zypper-repos.cc:1352
-#, fuzzy
 msgid "Problem accessing the file at the specified URI"
-msgstr "正在搜索 CD 的元数据..."
+msgstr "访问指定 URI 处文件出现问题"
 
 #: ../src/zypper-repos.cc:1353
-#, fuzzy
 msgid "Please check if the URI is valid and accessible."
-msgstr "请检查 URL 是否正确和可访问。"
+msgstr "请检查 URI 是有效的且可访问的。"
 
 #: ../src/zypper-repos.cc:1361
-#, fuzzy
 msgid "Problem parsing the file at the specified URI"
-msgstr "正在搜索 CD 的元数据..."
+msgstr "解析指定 URI 的文件出现问题"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
@@ -2662,19 +2682,17 @@ msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for det
 msgstr "这是一个 .repo 文件吗？ 细节请看 http://en.opensuse.org/Standards/RepoInfo"
 
 #: ../src/zypper-repos.cc:1372
-#, fuzzy
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "尝试读取指定 URL 的文件时遇到问题"
+msgstr "尝试读取指定 URI 处文件时遇到问题"
 
 #: ../src/zypper-repos.cc:1386
-#, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "在文件中发现一个安装源没有定义别名，跳过。"
+msgstr "在文件中发现一个安装源没有定义别名，正在跳过。"
 
 #: ../src/zypper-repos.cc:1393
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "未找到安装源 '%s' 。"
+msgstr "安装源 '%s' 未定义 URI，正在跳过。"
 
 #: ../src/zypper-repos.cc:1427
 #, c-format
@@ -2708,19 +2726,19 @@ msgid "Invalid priority '%s'. Use an integer number between 1 (highest priority)
 msgstr "优先级 '%s' 无效。请使用介于 1(最高优先级) 和 99(最低优先级) 的整数。"
 
 #: ../src/zypper-repos.cc:1648
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "必须去除 %s。"
+msgstr "安装源 '%s' 的优先级未被改变(%d)"
 
 #: ../src/zypper-repos.cc:1674
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' has been sucessfully enabled."
-msgstr "成功删除了用户“{0}”"
+msgstr "成功启用软件源 '%s'。"
 
 #: ../src/zypper-repos.cc:1677
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' has been sucessfully disabled."
-msgstr "成功删除了用户“{0}”"
+msgstr "成功禁用软件源 '%s'。"
 
 #: ../src/zypper-repos.cc:1684
 #, c-format
@@ -2733,24 +2751,24 @@ msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "已禁用安装源'%s'的自动刷新。"
 
 #: ../src/zypper-repos.cc:1694
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "正在跳过已禁用的安装源 '%s'"
+msgstr "缓存 RPM 文件在软件源 '%s' 被启用。"
 
 #: ../src/zypper-repos.cc:1697
-#, fuzzy, c-format
+#, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "正在跳过已禁用的安装源 '%s'"
+msgstr "缓存 RPM 文件在软件源 '%s' 被禁用。"
 
 #: ../src/zypper-repos.cc:1703
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "必须去除 %s。"
+msgstr "安装源 '%s' 的优先级被设为 %d。"
 
 #: ../src/zypper-repos.cc:1709
-#, fuzzy, c-format
+#, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "必须去除 %s。"
+msgstr "安装源 '%s' 名称被设定为 '%s'。"
 
 #: ../src/zypper-repos.cc:1715
 #, c-format
@@ -2795,9 +2813,8 @@ msgid "Reading installed packages..."
 msgstr "正在读取已安装的软件包..."
 
 #: ../src/zypper-repos.cc:1824
-#, fuzzy
 msgid "Problem occured while reading the installed packages:"
-msgstr "从安装源读取数据时出错。"
+msgstr "读取已安装软件包时出现问题："
 
 #. list name, exact match
 #: ../src/zypper-repos.cc:1907
@@ -2972,9 +2989,8 @@ msgid "Given URI is invalid"
 msgstr "所给的 URL 无效"
 
 #: ../src/zypper-utils.cc:279
-#, fuzzy
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "正在从 %s 读取产品"
+msgstr "复制指定 RPM 文件到缓存目录时出现问题。"
 
 #: ../src/zypper-utils.cc:280
 msgid "Perhaps you are running out of disk space."
@@ -2989,7 +3005,7 @@ msgid "Please check whether the file is accessible."
 msgstr "请检查文件是否可以访问。"
 
 #: ../src/zypper-utils.cc:347
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "无法对 “%1” 进行解析。"
+msgstr "无法解析 capability '%s'。"
 

@@ -2,7 +2,9 @@
 Mon Jul 21 17:43:23 CEST 2008 - jkupec@suse.cz
 
 - don't mark mutliple patch solvables with the same name for
-  installation (bnc #400895)
+  installation (bnc #400895) (r10620)
+- translations update
+- 0.11.10
 
 -------------------------------------------------------------------
 Thu Jun 26 14:41:55 CEST 2008 - jkupec@suse.cz
