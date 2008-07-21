@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 21 19:16:09 CEST 2008 - jkupec@suse.cz
+
+- don't mark mutliple patch solvables with the same name for
+  installation (bnc #400895)
+- r10623
+
+-------------------------------------------------------------------
 Thu Jul 17 11:42:54 CEST 2008 - ma@suse.de
 
 - Remove obsolete references to Script/Message/Atom
