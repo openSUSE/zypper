@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 21 17:43:23 CEST 2008 - jkupec@suse.cz
+
+- don't mark mutliple patch solvables with the same name for
+  installation (bnc #400895)
+
+-------------------------------------------------------------------
 Thu Jun 26 14:41:55 CEST 2008 - jkupec@suse.cz
 
 - zypp-refresh-wrapper: don't close stderr (bnc #398530)
