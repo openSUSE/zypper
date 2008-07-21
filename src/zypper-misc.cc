@@ -2139,10 +2139,10 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
     {
       DBG << "marking all needed patches" << endl;
 
-      for_(it, God->pool().byKindBegin(ResKind::patch), 
-               God->pool().byKindEnd  (ResKind::patch))
+      for_(it, God->pool().proxy().byKindBegin(ResKind::patch), 
+               God->pool().proxy().byKindEnd  (ResKind::patch))
       {
-        if (mark_patch_update(*it, skip_interactive, ignore_affects_pm))
+        if (mark_patch_update((*it)->candidateObj(), skip_interactive, ignore_affects_pm))
           any_marked = true;
       }
     }
@@ -2172,9 +2172,9 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
         }
         else
         {
-          for_(pit, q.poolItemBegin(), q.poolItemEnd())
+          for_(pit, q.selectableBegin(), q.selectableEnd())
           {
-            any_marked = mark_patch_update(*pit, skip_interactive, ignore_affects_pm);
+            any_marked = mark_patch_update((*pit)->candidateObj(), skip_interactive, ignore_affects_pm);
           }
         }
       }
