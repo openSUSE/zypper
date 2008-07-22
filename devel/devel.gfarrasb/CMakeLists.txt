@@ -1,0 +1,911 @@
+####################################################################
+# SOURCES                                                          #
+####################################################################
+
+ADD_DEFINITIONS(-DLOCALEDIR=\\\"${CMAKE_INSTALL_PREFIX}/share/locale\\\" -DTEXTDOMAIN=\\\"zypp\\\" )
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+#FILE(WRITE filename "message to write"... )
+
+SET( zypp_SRCS
+  Atom.cc
+  ByteCount.cc
+  Capabilities.cc
+  Capability.cc
+  CapMatch.cc
+  Changelog.cc
+  CheckSum.cc
+  Date.cc
+  Dep.cc
+  Dependencies.cc
+  Digest.cc
+  DiskUsage.cc
+  DiskUsageCounter.cc
+  dummy.cc
+  Edition.cc
+  ExternalProgram.cc
+  Fetcher.cc
+  FileChecker.cc
+  IdString.cc
+  KeyRing.cc
+  Locks.cc
+  MediaProducts.cc
+  MediaSetAccess.cc
+  Message.cc
+  NameKindProxy.cc
+  NVRA.cc
+  NVRAD.cc
+  NVR.cc
+  OnMediaLocation.cc
+  Package.cc
+  Patch.cc
+  PathInfo.cc
+  Pathname.cc
+  Pattern.cc
+  PoolItem.cc
+  PoolQuery.cc
+  PoolQueryResult.cc
+  ProblemSolution.cc
+  Product.cc
+  ProgressData.cc
+  ProvideFilePolicy.cc
+  PublicKey.cc
+  Range.cc
+  Rel.cc
+  RepoInfo.cc
+  RepoManager.cc
+  RepoStatus.cc
+  ResKind.cc
+  ResObject.cc
+  Resolvable.cc
+  Resolver.cc
+  ResolverProblem.cc
+  ResPool.cc
+  ResPoolProxy.cc
+  ResStatus.cc
+  Script.cc
+  Signature.cc
+  SrcPackage.cc
+  SysContent.cc
+  Target.cc
+  TmpPath.cc
+  TranslatedText.cc
+  UpgradeStatistics.cc
+  Url.cc
+  VendorAttr.cc
+  ZYpp.cc
+  ZYppCommitPolicy.cc
+  ZYppCommitResult.cc
+  ZYppFactory.cc
+  Repository.cc
+)
+SET( zypp_EARLY_SRCS
+  ZConfig.cc
+  Arch.cc
+  Locale.cc
+  CountryCode.cc
+  LanguageCode.cc
+)
+
+SET( zypp_HEADERS
+  Arch.h
+  Atom.h
+  AutoDispose.h
+  Bit.h
+  ByteCount.h
+  Callback.h
+  Capabilities.h
+  Capability.h
+  CapMatch.h
+  Changelog.h
+  CheckSum.h
+  CountryCode.h
+  Date.h
+  Dependencies.h
+  Dep.h
+  Digest.h
+  DiskUsageCounter.h
+  DiskUsage.h
+  Edition.h
+  ExternalProgram.h
+  Fetcher.h
+  FileChecker.h
+  IdString.h
+  IdStringType.h
+  KeyRing.h
+  KVMap.h
+  LanguageCode.h
+  Locale.h
+  Locks.h
+  ManagedFile.h
+  MediaProducts.h
+  MediaSetAccess.h
+  Message.h
+  NameKindProxy.h
+  Vendor.h
+  NVRAD.h
+  NVRA.h
+  NVR.h
+  OnMediaLocation.h
+  Package.h
+  PackageKeyword.h
+  Patch.h
+  PathInfo.h
+  Pathname.h
+  Pattern.h
+  PoolItem.h
+  PoolQuery.h
+  PoolQueryUtil.tcc
+  PoolQueryResult.h
+  ProblemSolution.h
+  ProblemTypes.h
+  Product.h
+  ProgressData.h
+  ProvideFilePolicy.h
+  PublicKey.h
+  Range.h
+  RelCompare.h
+  Rel.h
+  RepoInfo.h
+  RepoManager.h
+  RepoStatus.h
+  Filter.h
+  ResFilters.h
+  ResKind.h
+  ResObject.h
+  ResObjects.h
+  Resolvable.h
+  Resolver.h
+  ResolverProblem.h
+  ResPool.h
+  ResPoolProxy.h
+  ResStatus.h
+  ResTraits.h
+  Script.h
+  Signature.h
+  SrcPackage.h
+  SysContent.h
+  Target.h
+  TmpPath.h
+  TranslatedText.h
+  TriBool.h
+  UpgradeStatistics.h
+  Url.h
+  VendorAttr.h
+  ZConfig.h
+  ZYppCallbacks.h
+  ZYppCommit.h
+  ZYppCommitPolicy.h
+  ZYppCommitResult.h
+  ZYppFactory.h
+  ZYpp.h
+  Repository.h
+)
+
+INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${CMAKE_INSTALL_PREFIX}/include/zypp" )
+
+SET( zypp_base_SRCS
+  base/InterProcessMutex.cc
+  base/SerialNumber.cc
+  base/Random.cc
+  base/Measure.cc
+  base/Fd.cc
+  base/Gettext.cc
+  base/GzStream.cc
+  base/IOStream.cc
+  base/InputStream.cc
+  base/ReferenceCounted.cc
+  base/String.cc
+  base/Regex.cc
+  base/Unit.cc
+  base/ExternalDataSource.cc
+  base/Exception.cc
+  base/UserRequestException.cc
+  base/Sysconfig.cc
+  base/ProfilingFormater.cc
+  base/LogControl.cc
+)
+
+SET( zypp_base_HEADERS
+  base/InterProcessMutex.h
+  base/Collector.h
+  base/SerialNumber.h
+  base/Easy.h
+  base/Random.h
+  base/Algorithm.h
+  base/Counter.h
+  base/Debug.h
+  base/DefaultFalseBool.h
+  base/DefaultIntegral.h
+  base/Deprecated.h
+  base/DtorReset.h
+  base/Exception.h
+  base/UserRequestException.h
+  base/ExternalDataSource.h
+  base/Fd.h
+  base/Function.h
+  base/Functional.h
+  base/Gettext.h
+  base/GzStream.h
+  base/IOStream.h
+  base/InputStream.h
+  base/Iterator.h
+  base/KindOf.h
+  base/LogControl.h
+  base/LogTools.h
+  base/Logger.h
+  base/Measure.h
+  base/NonCopyable.h
+  base/ProfilingFormater.h
+  base/ProvideNumericId.h
+  base/PtrTypes.h
+  base/ReferenceCounted.h
+  base/SafeBool.h
+  base/String.h
+  base/Regex.h
+  base/Sysconfig.h
+  base/Tr1hash.h
+  base/Unit.h
+  base/WatchFile.h
+)
+
+INSTALL(  FILES
+  ${zypp_base_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/base
+)
+
+SET( zypp_data_SRCS
+  data/ResolvableData.cc
+  data/RecordId.cc
+  data/ResolvableDataConsumer.cc
+)
+
+SET( zypp_data_HEADERS
+  data/ResolvableData.h
+  data/RecordId.h
+  data/ResolvableDataConsumer.h
+)
+
+INSTALL(  FILES
+  ${zypp_data_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/data
+)
+
+SET( zypp_media_SRCS
+  media/MediaException.cc
+  media/MediaAccess.cc
+  media/MediaHandler.cc
+  media/Mount.cc
+  media/MediaNFS.cc
+  media/MediaCD.cc
+  media/MediaDIR.cc
+  media/MediaDISK.cc
+  media/MediaSMB.cc
+  media/MediaCIFS.cc
+  media/ProxyInfo.cc
+  media/MediaCurl.cc
+  media/MediaMetalink.cc
+  media/MediaAria2c.cc
+  media/MediaISO.cc
+  media/MediaManager.cc
+  media/MediaUserAuth.cc
+  media/CurlConfig.cc
+)
+
+SET( zypp_media_HEADERS
+  media/MediaAccess.h
+  media/MediaCD.h
+  media/MediaCIFS.h
+  media/MediaCurl.h
+  media/MediaMetalink.h
+  media/MediaAria2c.h
+  media/MediaDIR.h
+  media/MediaDISK.h
+  media/MediaException.h
+  media/MediaHandler.h
+  media/MediaISO.h
+  media/MediaManager.h
+  media/MediaNFS.h
+  media/MediaSMB.h
+  media/MediaSource.h
+  media/MediaUserAuth.h
+  media/Mount.h
+  media/ProxyInfo.h
+  media/CurlConfig.h
+)
+
+INSTALL(  FILES
+  ${zypp_media_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media
+)
+
+SET( zypp_media_proxyinfo_SRCS
+  media/proxyinfo/ProxyInfoSysconfig.cc
+)
+
+SET( zypp_media_proxyinfo_HEADERS
+  media/proxyinfo/ProxyInfoImpl.h
+  media/proxyinfo/ProxyInfoSysconfig.h
+  media/proxyinfo/ProxyInfos.h
+)
+
+INSTALL(  FILES
+  ${zypp_media_proxyinfo_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/media/proxyinfo
+)
+
+SET( zypp_parser_SRCS
+  parser/ParseException.cc
+  parser/TagParser.cc
+  parser/IniParser.cc
+  parser/IniDict.cc
+  parser/LibXMLHelper.cc
+  parser/XMLNodeIterator.cc
+  parser/RepoFileReader.cc
+  parser/ProductConfReader.cc
+  parser/xml_escape_parser.cpp
+)
+
+SET( zypp_parser_HEADERS
+  parser/ParseException.h
+  parser/TagParser.h
+  parser/IniParser.h
+  parser/IniDict.h
+  parser/LibXMLHelper.h
+  parser/ParserProgress.h
+  parser/XMLNodeIterator.h
+  parser/xml_parser_assert.h
+  parser/RepoFileReader.h
+  parser/ProductConfReader.h
+  parser/xml_escape_parser.hpp
+)
+
+INSTALL(  FILES
+  ${zypp_parser_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser
+)
+
+SET( zypp_parser_susetags_SRCS
+  parser/susetags/RepoIndex.cc
+  parser/susetags/ContentFileReader.cc
+  #parser/susetags/PackagesFileReader.cc
+  #parser/susetags/PackagesLangFileReader.cc
+  #parser/susetags/PackagesDuFileReader.cc
+  #parser/susetags/PatternFileReader.cc
+  #parser/susetags/RepoParser.cc
+)
+
+SET( zypp_parser_susetags_HEADERS
+  parser/susetags/RepoIndex.h
+  parser/susetags/ContentFileReader.h
+  parser/susetags/FileReaderBase.h
+  parser/susetags/FileReaderBaseImpl.h
+  parser/susetags/PackagesFileReader.h
+  parser/susetags/PackagesLangFileReader.h
+  parser/susetags/PackagesDuFileReader.h
+  parser/susetags/PatternFileReader.h
+  parser/susetags/RepoParser.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_susetags_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/susetags
+)
+
+SET( zypp_parser_plaindir_SRCS
+  parser/plaindir/RepoParser.cc
+)
+
+SET( zypp_parser_plaindir_HEADERS
+  parser/plaindir/RepoParser.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_plaindir_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/plaindir
+)
+
+SET( zypp_parser_xml_SRCS
+  parser/xml/Node.cc
+  parser/xml/ParseDef.cc
+  parser/xml/ParseDefConsume.cc
+  parser/xml/ParseDefException.cc
+  parser/xml/Reader.cc
+  parser/xml/XmlString.cc
+  parser/xml/libxmlfwd.cc
+)
+
+SET( zypp_parser_xml_HEADERS
+  parser/xml/Node.h
+  parser/xml/ParseDef.h
+  parser/xml/ParseDefConsume.h
+  parser/xml/ParseDefException.h
+  parser/xml/ParseDefTraits.h
+  parser/xml/Reader.h
+  parser/xml/XmlString.h
+  parser/xml/libxmlfwd.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_xml_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/xml
+)
+
+SET( zypp_parser_yum_SRCS
+  #parser/yum/RepoParser.cc
+  #parser/yum/FileReaderBaseImpl.cc
+  parser/yum/RepomdFileReader.cc
+  parser/yum/PatchesFileReader.cc
+  #parser/yum/PrimaryFileReader.cc
+  #parser/yum/OtherFileReader.cc
+  #parser/yum/FilelistsFileReader.cc
+  #parser/yum/PatchFileReader.cc
+  #parser/yum/PatternFileReader.cc
+  #parser/yum/ProductFileReader.cc
+)
+
+SET( zypp_parser_yum_HEADERS
+  parser/yum/RepoParser.h
+  parser/yum/RepoParserOpts.h
+  parser/yum/FileReaderBase.h
+  parser/yum/FileReaderBaseImpl.h
+  parser/yum/RepomdFileReader.h
+  parser/yum/PatchesFileReader.h
+  parser/yum/PrimaryFileReader.h
+  parser/yum/OtherFileReader.h
+  parser/yum/FilelistsFileReader.h
+  parser/yum/PatchFileReader.h
+  parser/yum/PatternFileReader.h
+  parser/yum/ProductFileReader.h
+  parser/yum/schemanames.h
+)
+
+INSTALL(  FILES
+  ${zypp_parser_yum_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/parser/yum
+)
+
+SET( zypp_pool_SRCS
+  pool/GetResolvablesToInsDel.cc
+  pool/PoolImpl.cc
+  pool/PoolStats.cc
+)
+
+SET( zypp_pool_HEADERS
+  pool/GetResolvablesToInsDel.h
+  pool/PoolImpl.h
+  pool/PoolStats.h
+  pool/PoolTraits.h
+)
+
+INSTALL(  FILES
+  ${zypp_pool_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/pool
+)
+
+SET( zypp_solver_detail_SRCS
+  solver/detail/Helper.cc
+  solver/detail/InstallOrder.cc
+  solver/detail/ProblemSolutionIgnore.cc
+  solver/detail/ProblemSolutionCombi.cc
+  solver/detail/Resolver.cc
+  solver/detail/ResolverUpgrade.cc
+  solver/detail/Resolver_problems.cc
+  solver/detail/SolutionAction.cc
+  solver/detail/Testcase.cc
+  solver/detail/SolverQueueItem.cc
+  solver/detail/SolverQueueItemInstall.cc
+  solver/detail/SolverQueueItemDelete.cc
+  solver/detail/SolverQueueItemUpdate.cc
+  solver/detail/SolverQueueItemInstallOneOf.cc
+  solver/detail/SolverQueueItemLock.cc
+  solver/detail/SATResolver.cc
+)
+
+SET( zypp_solver_detail_HEADERS
+  solver/detail/Helper.h
+  solver/detail/InstallOrder.h
+  solver/detail/ProblemSolutionIgnore.h
+  solver/detail/ProblemSolutionCombi.h
+  solver/detail/Resolver.h
+  solver/detail/SolutionAction.h
+  solver/detail/Testcase.h
+  solver/detail/Types.h
+  solver/detail/SolverQueueItem.h
+  solver/detail/SolverQueueItemInstall.h
+  solver/detail/SolverQueueItemDelete.h
+  solver/detail/SolverQueueItemUpdate.h
+  solver/detail/SolverQueueItemInstallOneOf.h
+  solver/detail/SolverQueueItemLock.h
+  solver/detail/SATResolver.h
+)
+
+INSTALL(  FILES
+  ${zypp_solver_detail_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/solver/detail
+)
+
+SET( zypp_sat_SRCS
+  sat/Pool.cc
+  sat/Solvable.cc
+  sat/SolvableSet.cc
+  sat/SolvIterMixin.cc
+  sat/WhatProvides.cc
+  sat/LocaleSupport.cc
+  sat/LookupAttr.cc
+  sat/SolvAttr.cc
+)
+
+SET( zypp_sat_HEADERS
+  sat/Pool.h
+  sat/Solvable.h
+  sat/SolvableSet.h
+  sat/SolvIterMixin.h
+  sat/WhatProvides.h
+  sat/LocaleSupport.h
+  sat/LookupAttr.h
+  sat/SolvAttr.h
+)
+
+INSTALL(  FILES
+  ${zypp_sat_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat
+)
+
+SET( zypp_sat_detail_SRCS
+  sat/detail/PoolImpl.cc
+)
+
+SET( zypp_sat_detail_HEADERS
+  sat/detail/PoolMember.h
+  sat/detail/PoolImpl.h
+)
+
+INSTALL(  FILES
+  ${zypp_sat_detail_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/sat/detail
+)
+
+
+SET( zypp_target_SRCS
+  target/RequestedLocalesFile.cc
+  target/SoftLocksFile.cc
+  target/HardLocksFile.cc
+  target/CommitLog.cc
+  target/CommitPackageCache.cc
+  target/CommitPackageCacheImpl.cc
+  target/CommitPackageCacheReadAhead.cc
+  target/TargetCallbackReceiver.cc
+  target/TargetException.cc
+  target/TargetImpl.cc
+)
+
+SET( zypp_target_HEADERS
+  target/RequestedLocalesFile.h
+  target/SoftLocksFile.h
+  target/HardLocksFile.h
+  target/CommitLog.h
+  target/CommitPackageCache.h
+  target/CommitPackageCacheImpl.h
+  target/CommitPackageCacheReadAhead.h
+  target/TargetCallbackReceiver.h
+  target/TargetException.h
+  target/TargetImpl.h
+)
+
+INSTALL(  FILES
+  ${zypp_target_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target
+)
+
+SET( zypp_target_hal_SRCS
+  target/hal/Hal.cc
+  target/hal/HalContext.cc
+)
+
+SET( zypp_target_hal_HEADERS
+  target/hal/Hal.h
+  target/hal/HalContext.h
+  target/hal/HalException.h
+)
+
+INSTALL(  FILES
+  ${zypp_target_hal_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/hal
+)
+
+SET( zypp_target_modalias_SRCS
+  target/modalias/Modalias.cc
+)
+
+SET( zypp_target_modalias_HEADERS
+  target/modalias/Modalias.h
+)
+
+INSTALL(  FILES
+  ${zypp_target_modalias_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/modalias
+)
+
+SET( zypp_target_rpm_SRCS
+  target/rpm/BinHeader.cc
+  target/rpm/RpmCallbacks.cc
+  target/rpm/RpmDb.cc
+  target/rpm/RpmException.cc
+  target/rpm/RpmHeader.cc
+  target/rpm/librpmDb.cc
+  target/rpm/librpmDb.cv3.cc
+)
+
+SET( zypp_target_rpm_HEADERS
+  target/rpm/BinHeader.h
+  target/rpm/RpmCallbacks.h
+  target/rpm/RpmDb.h
+  target/rpm/RpmException.h
+  target/rpm/RpmHeader.h
+  target/rpm/librpm.h
+  target/rpm/librpmDb.h
+)
+
+INSTALL(  FILES
+  ${zypp_target_rpm_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/target/rpm
+)
+
+SET( zypp_thread_SRCS
+  thread/Mutex.cc
+)
+
+SET( zypp_thread_HEADERS
+  thread/Mutex.h
+  thread/MutexException.h
+  thread/MutexLock.h
+  thread/Once.h
+)
+
+INSTALL(  FILES
+  ${zypp_thread_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/thread
+)
+
+SET( zypp_ui_SRCS
+  ui/PatchContents.cc
+  ui/PatchContentsImpl.cc
+  ui/PatternContents.cc
+  ui/PatternContentsImpl.cc
+  ui/PatternExpander.cc
+  ui/Selectable.cc
+  ui/SelectableImpl.cc
+  ui/Status.cc
+  ui/UserWantedPackages.cc
+)
+
+SET( zypp_ui_HEADERS
+  ui/PatchContents.h
+  ui/PatchContentsImpl.h
+  ui/PatternContents.h
+  ui/PatternContentsImpl.h
+  ui/PatternExpander.h
+  ui/SelFilters.h
+  ui/Selectable.h
+  ui/SelectableImpl.h
+  ui/SelectableTraits.h
+  ui/Status.h
+  ui/UserWantedPackages.h
+)
+
+INSTALL(  FILES
+  ${zypp_ui_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/ui
+)
+
+SET( zypp_url_SRCS
+  url/UrlUtils.cc
+  url/UrlBase.cc
+)
+
+SET( zypp_url_HEADERS
+  url/UrlBase.h
+  url/UrlException.h
+  url/UrlUtils.h
+)
+
+INSTALL(  FILES
+  ${zypp_url_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/url
+)
+
+SET( zypp_zypp_detail_SRCS
+  zypp_detail/ZYppImpl.cc
+)
+
+SET( zypp_zypp_detail_HEADERS
+  zypp_detail/ZYppImpl.h
+  zypp_detail/ZYppReadOnlyHack.h
+)
+
+INSTALL(  FILES
+  ${zypp_zypp_detail_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/zypp_detail
+)
+
+SET( zypp_repo_SRCS
+  repo/dummy.cc
+  repo/RepoException.cc
+  repo/RepoType.cc
+  repo/PackageProvider.cc
+  repo/SrcPackageProvider.cc
+  repo/ScriptProvider.cc
+  repo/RepoProvideFile.cc
+  repo/DeltaCandidates.cc
+  repo/Applydeltarpm.cc
+  repo/PackageDelta.cc
+  repo/SUSEMediaVerifier.cc
+  repo/MediaInfoDownloader.cc
+  repo/Downloader.cc
+  repo/RepoVariables.cc
+)
+
+SET( zypp_repo_HEADERS
+  repo/RepoException.h
+  repo/RepoType.h
+  repo/PackageProvider.h
+  repo/SrcPackageProvider.h
+  repo/ScriptProvider.h
+  repo/RepoProvideFile.h
+  repo/DeltaCandidates.h
+  repo/Applydeltarpm.h
+  repo/PackageDelta.h
+  repo/SUSEMediaVerifier.h
+  repo/MediaInfoDownloader.h
+  repo/Downloader.h
+  repo/RepoVariables.h
+)
+
+INSTALL( FILES
+  ${zypp_repo_HEADERS}
+  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/repo
+)
+
+SET( zypp_repo_yum_SRCS
+  repo/yum/Downloader.cc
+  repo/yum/ResourceType.cc
+)
+
+SET( zypp_repo_yum_HEADERS
+  repo/yum/Downloader.h
+  repo/yum/ResourceType.h
+)
+
+SET( zypp_repo_susetags_SRCS
+  repo/susetags/Downloader.cc
+)
+
+SET( zypp_repo_susetags_HEADERS
+  repo/susetags/Downloader.h
+)
+
+SET( zypp_lib_SRCS
+${zypp_pool_SRCS}
+${zypp_parser_susetags_SRCS}
+${zypp_parser_xml_SRCS}
+${zypp_parser_yum_SRCS}
+${zypp_parser_plaindir_SRCS}
+${zypp_parser_SRCS}
+${zypp_data_SRCS}
+${zypp_media_proxyinfo_SRCS}
+${zypp_media_SRCS}
+${zypp_url_SRCS}
+${zypp_repo_SRCS}
+${zypp_repo_yum_SRCS}
+${zypp_repo_susetags_SRCS}
+${zypp_repo_data_SRCS}
+${zypp_target_rpm_SRCS}
+${zypp_target_hal_SRCS}
+${zypp_target_modalias_SRCS}
+${zypp_target_SRCS}
+${zypp_solver_detail_SRCS}
+${zypp_ui_SRCS}
+${zypp_thread_SRCS}
+${zypp_SRCS}
+${zypp_zypp_detail_SRCS}
+${zypp_sat_SRCS}
+${zypp_sat_detail_SRCS}
+${zypp_EARLY_SRCS}
+${zypp_base_SRCS}
+)
+
+SET( zypp_lib_HEADERS
+${zypp_target_rpm_HEADERS}
+${zypp_parser_tagfile_HEADERS}
+${zypp_parser_susetags_HEADERS}
+${zypp_parser_yum_HEADERS}
+${zypp_parser_plaindir_HEADERS}
+${zypp_parser_xml_HEADERS}
+${zypp_parser_HEADERS}
+${zypp_data_HEADERS}
+${zypp_ui_HEADERS}
+${zypp_media_HEADERS}
+${zypp_target_hal_HEADERS}
+${zypp_media_proxyinfo_HEADERS}
+${zypp_base_HEADERS}
+${zypp_solver_detail_HEADERS}
+${zypp_sat_HEADERS}
+${zypp_sat_detail_HEADERS}
+${zypp_url_HEADERS}
+${zypp_HEADERS}
+${zypp_zypp_detail_HEADERS}
+${zypp_thread_HEADERS}
+${zypp_repo_HEADERS}
+${zypp_source_susetags_HEADERS}
+${zypp_target_modalias_HEADERS}
+${zypp_target_HEADERS}
+${zypp_pool_HEADERS}
+)
+
+#
+# Macro to set the log group for a list of files
+#
+MACRO( SET_LOGGROUP _group _files  )
+  SET_SOURCE_FILES_PROPERTIES( ${_files} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  FOREACH (_currentFile ${ARGN})
+#MESSAGE( STATUS "setting loggroup to \"${_group}\" for ${_currentFile}" )
+    SET_SOURCE_FILES_PROPERTIES( ${_currentFile} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  ENDFOREACH (_currentFile ${ARGN})
+ENDMACRO( SET_LOGGROUP )
+
+# Default loggroup for all files
+SET_LOGGROUP( "zypp" ${zypp_lib_SRCS} )
+
+# override some defaults
+SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_rpm_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_ui_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_data_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_media_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_hal_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_xml_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_media_proxyinfo_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_yum_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_base_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_solver_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_sat_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_url_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_zypp_detail_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_thread_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_source_susetags_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_modalias_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_target_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_parser_yum_SRCS} )
+#SET_LOGGROUP( "group" ${zypp_pool_SRCS} )
+
+
+ADD_LIBRARY(zypp SHARED ${zypp_lib_SRCS})
+SET_TARGET_PROPERTIES( zypp PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
+SET_TARGET_PROPERTIES( zypp PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
+ADD_DEPENDENCIES(zypp schema_header)
+# System libraries
+TARGET_LINK_LIBRARIES(zypp util )
+TARGET_LINK_LIBRARIES(zypp ${DBUS_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${RPM_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${GETTEXT_LIBRARIES} )
+TARGET_LINK_LIBRARIES(zypp ${HAL_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${HAL_STORAGE_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${CURL_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${LIBXML_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${ZLIB_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${SATSOLVER_LIBRARY} )
+TARGET_LINK_LIBRARIES(zypp ${OPENSSL_LIBRARIES})
+TARGET_LINK_LIBRARIES(zypp ${METALINK_LIBRARY})
+TARGET_LINK_LIBRARIES(zypp crypto)
+
+INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
+
+# install XML schemas
+FILE( GLOB YUM_SCHEMA_FILES ${CMAKE_SOURCE_DIR}/zypp/parser/yum/schema/*.rng )
+INSTALL(FILES ${YUM_SCHEMA_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/zypp/schema/yum" )
