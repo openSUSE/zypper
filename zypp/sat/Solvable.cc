@@ -343,7 +343,6 @@ namespace zypp
         case Dep::OBSOLETES_e:   return obsoletes();   break;
         case Dep::RECOMMENDS_e:  return recommends();  break;
         case Dep::SUGGESTS_e:    return suggests();    break;
-        case Dep::FRESHENS_e:    return freshens();    break;
         case Dep::ENHANCES_e:    return enhances();    break;
         case Dep::SUPPLEMENTS_e: return supplements(); break;
         case Dep::PREREQUIRES_e: return prerequires(); break;
@@ -384,11 +383,6 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( Capabilities() );
       return _getCapabilities( _solvable->repo->idarraydata, _solvable->suggests );
-    }
-    Capabilities Solvable::freshens() const
-    {
-      NO_SOLVABLE_RETURN( Capabilities() );
-      return _getCapabilities( _solvable->repo->idarraydata, _solvable->freshens );
     }
     Capabilities Solvable::enhances() const
     {
@@ -549,7 +543,6 @@ namespace zypp
         OUTS(OBSOLETES);
         OUTS(RECOMMENDS);
         OUTS(SUGGESTS);
-        OUTS(FRESHENS);
         OUTS(ENHANCES);
         OUTS(SUPPLEMENTS);
 #undef OUTS

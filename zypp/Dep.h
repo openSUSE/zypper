@@ -46,7 +46,6 @@ namespace zypp
     static const Dep OBSOLETES;
     static const Dep RECOMMENDS;
     static const Dep SUGGESTS;
-    static const Dep FRESHENS;
     static const Dep ENHANCES;
     static const Dep SUPPLEMENTS;
     //@}
@@ -62,7 +61,6 @@ namespace zypp
       OBSOLETES_e,
       RECOMMENDS_e,
       SUGGESTS_e,
-      FRESHENS_e,
       ENHANCES_e,
       SUPPLEMENTS_e,
     };

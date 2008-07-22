@@ -1314,27 +1314,26 @@ attremptycheckend:
       _pimpl->compile();
     if (!a._pimpl->_compiled)
       a._pimpl->compile();
-    if( matchType()!=a.matchType() )
+    if( matchType() != a.matchType() )
       return false;
-    if( a.matchWord()!=matchWord())
+    if( a.matchWord() != matchWord())
       return false;
-    if( a.requireAll()!=requireAll() )
+    if( a.requireAll() != requireAll() )
       return false;
     if(!equalContainers(a.kinds(), kinds()))
       return false;
     if(!equalContainers(a.repos(), repos()))
       return false;
-    if(a._pimpl->_rcstrings!=_pimpl->_rcstrings)
+    if(a._pimpl->_rcstrings != _pimpl->_rcstrings)
       return false;
     if(!equalContainers(a._pimpl->_rcattrs, _pimpl->_rcattrs))
       return false;
-    if(a._pimpl->_cflags!= _pimpl->_cflags)
+    if(a._pimpl->_cflags != _pimpl->_cflags)
       return false;
-    if(a.edition()!=edition())
+    if(a.edition() != edition())
       return false;
-    if(a.editionRel()!= editionRel())
+    if(a.editionRel() != editionRel())
       return false;
-    
 
     return true;
   }

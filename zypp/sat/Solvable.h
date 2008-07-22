@@ -175,7 +175,6 @@ namespace zypp
         Capabilities obsoletes()   const;
         Capabilities recommends()  const;
         Capabilities suggests()    const;
-        Capabilities freshens()    const;
         Capabilities enhances()    const;
         Capabilities supplements() const;
         Capabilities prerequires() const;

@@ -38,7 +38,6 @@ namespace zypp
           _table["obsoletes"]   = Dep::OBSOLETES_e;
           _table["recommends"]  = Dep::RECOMMENDS_e;
           _table["suggests"]    = Dep::SUGGESTS_e;
-          _table["freshens"]    = Dep::FRESHENS_e;
           _table["enhances"]    = Dep::ENHANCES_e;
           _table["supplements"]	= Dep::SUPPLEMENTS_e;
         }
@@ -62,7 +61,6 @@ namespace zypp
   const Dep Dep::OBSOLETES  ( Dep::OBSOLETES_e );
   const Dep Dep::RECOMMENDS ( Dep::RECOMMENDS_e );
   const Dep Dep::SUGGESTS   ( Dep::SUGGESTS_e );
-  const Dep Dep::FRESHENS   ( Dep::FRESHENS_e );
   const Dep Dep::ENHANCES   ( Dep::ENHANCES_e );
   const Dep Dep::SUPPLEMENTS( Dep::SUPPLEMENTS_e );
 
@@ -93,7 +91,6 @@ namespace zypp
         _table[OBSOLETES_e]   = "obsoletes";
         _table[RECOMMENDS_e]  = "recommends";
         _table[SUGGESTS_e]    = "suggests";
-        _table[FRESHENS_e]    = "freshens";
         _table[ENHANCES_e]    = "enhances";
         _table[SUPPLEMENTS_e] = "supplements";
       }

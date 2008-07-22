@@ -83,7 +83,6 @@ namespace zypp
     using sat::Solvable::obsoletes;
     using sat::Solvable::recommends;
     using sat::Solvable::suggests;
-    using sat::Solvable::freshens;
     using sat::Solvable::enhances;
     using sat::Solvable::supplements;
     using sat::Solvable::prerequires;

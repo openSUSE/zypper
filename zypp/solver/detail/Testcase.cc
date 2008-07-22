@@ -201,7 +201,6 @@ std::string helixXML( const PoolItem &item )
   str << helixXML( resolvable, Dep::PREREQUIRES);
   str << helixXML( resolvable, Dep::CONFLICTS);
   str << helixXML( resolvable, Dep::OBSOLETES);
-  str << helixXML( resolvable, Dep::FRESHENS);
   str << helixXML( resolvable, Dep::REQUIRES);
   str << helixXML( resolvable, Dep::RECOMMENDS);
   str << helixXML( resolvable, Dep::ENHANCES);

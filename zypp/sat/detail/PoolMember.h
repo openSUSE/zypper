@@ -86,8 +86,8 @@ namespace zypp
       /** Internal ids satlib includes in dependencies.
        * MPL check in PoolImpl.cc
       */
-      static const IdType solvablePrereqMarker( 16 );
-      static const IdType solvableFileMarker  ( 17 );
+      static const IdType solvablePrereqMarker( 15 );
+      static const IdType solvableFileMarker  ( 16 );
       /** Test for internal ids satlib includes in dependencies. */
       inline bool isDepMarkerId( IdType id_r )
       { return( id_r == solvablePrereqMarker || id_r == solvableFileMarker ); }
