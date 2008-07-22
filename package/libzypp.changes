@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 22 17:18:28 CEST 2008 - jkupec@suse.cz
+
+- Removed FRESHENS dependency type
+- revision 10643
+- version 5.2.0
+
+-------------------------------------------------------------------
 Thu Jul 17 09:49:40 CEST 2008 - schubi@suse.de
 
 - Allow parallel installation of packages which have been defined
@@ -11,14 +18,12 @@ Thu Jul 17 09:49:40 CEST 2008 - schubi@suse.de
 Wed Jul 16 14:39:50 CEST 2008 - ma@suse.de
 
 - Add ui::Selectable::isNeeded to indicate patch relevance (bnc #409150)
-- version 5.2.1
 - revision 10596
 
 -------------------------------------------------------------------
 Wed Jul 16 01:10:37 CEST 2008 - ma@suse.de
 
 - Remove Atom, Script, Message and other obsolete classes.
-- version 5.2.0
 - revision 10592
 
 -------------------------------------------------------------------
