@@ -130,11 +130,6 @@ public:
    **/
   CapabilitySet tag_supplements( std::set<std::string> * freq_r = 0 ) const
   { return CapabilitySet(); }
-  /** Unsupported by rpm.
-   * @see #tag_provides
-   **/
-  CapabilitySet tag_freshens( std::set<std::string> * freq_r = 0 ) const
-  { return CapabilitySet(); }
 
   ByteCount tag_size()        const;
   ByteCount tag_archivesize() const;

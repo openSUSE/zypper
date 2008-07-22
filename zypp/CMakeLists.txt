@@ -218,7 +218,6 @@ SET( zypp_base_HEADERS
   base/IOStream.h
   base/InputStream.h
   base/Iterator.h
-  base/KindOf.h
   base/LogControl.h
   base/LogTools.h
   base/Logger.h

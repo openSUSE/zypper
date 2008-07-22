@@ -72,7 +72,7 @@ namespace zypp
 	bool initialInstallation; //This item has triggered the installation
 	                          //Not already fullfilled requierement only.
 
-    ItemCapKind() : capKind("FRESHENS") {}
+    ItemCapKind() : capKind(Dep::PROVIDES) {}
 	    ItemCapKind( PoolItem i, Capability c, Dep k, bool initial)
 		: cap( c )
 		, capKind( k )

@@ -52,7 +52,7 @@
 #define USR _USR( ZYPP_BASE_LOGGER_LOGGROUP )
 
 #define _XXX(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_XXX )
-#define _DBG(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_DBG )
+#define _DBG(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP"++", zypp::base::logger::E_MIL )
 #define _MIL(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_MIL )
 #define _WAR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_WAR )
 #define _ERR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_ERR )

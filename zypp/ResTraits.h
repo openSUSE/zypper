@@ -13,7 +13,6 @@
 #define ZYPP_RESTRAITS_H
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/KindOf.h"
 #include "zypp/ResKind.h"
 
 ///////////////////////////////////////////////////////////////////

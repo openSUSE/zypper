@@ -108,9 +108,10 @@ namespace zypp
       IdString::IdType id()       const { return idStr().id(); }
 
     public:
+#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( ! empty() )</tt>. */
       using base::SafeBool<Derived>::operator bool_type;
-
+#endif
     public:
       static int compare( const Derived & lhs,    const Derived & rhs )      { return compare( lhs.idStr(), rhs.idStr() ); }
       static int compare( const Derived & lhs,    const IdString & rhs )     { return compare( lhs.idStr(), rhs ); }
@@ -149,8 +150,9 @@ namespace zypp
       }
 
     private:
-
+#ifndef SWIG // Swig treats it as syntax error
       friend base::SafeBool<Derived>::operator bool_type() const;
+#endif
       bool boolTest() const { return ! empty(); }
   };
   ///////////////////////////////////////////////////////////////////

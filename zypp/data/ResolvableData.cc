@@ -37,7 +37,6 @@ std::ostream & ResObject::dumpOn( std::ostream & str ) const
 //       << "  provides: " << provides << endl
 //       << "  conflicts: " << conflicts << endl
 //       << "  obsoletes: " << obsoletes << endl
-//       << "  freshens: " << freshens << endl
 //       << "  requires: " << requires << endl
 //       << "  recommends:" << endl << recommends << endl
 //       << "  suggests:" << endl << suggests << endl
