@@ -149,7 +149,11 @@ namespace zypp
         }
         // initialialize logging
         bool verbose = ( getenv("ZYPP_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") );
-        ::pool_setdebuglevel( _pool, verbose ? 5 : 1 );
+	if (verbose)
+	    ::pool_setdebuglevel( _pool, 2 );
+	else
+	    ::pool_setdebugmask(_pool, SAT_DEBUG_STATS);
+	
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
         // set namespace callback
