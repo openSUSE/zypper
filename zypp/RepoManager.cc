@@ -84,7 +84,7 @@ namespace zypp
     ret.repoSolvCachePath     = root_r/"solv";
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
-    ret.knownServicesPath        = root_r/"services.d";
+    ret.knownServicesPath     = root_r/"services.d";
     return ret;
   }
 
@@ -240,7 +240,6 @@ namespace zypp
     {
       knownServices();
       knownRepositories();
-
     }
 
     Impl()
@@ -813,6 +812,7 @@ namespace zypp
         std::string toFile( str::gsub(solvfile.asString(),"\"","\\\"") );
         if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
+          // FIXME this does only work form dir: URLs
           cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"",
                             str::gsub( info.baseUrlsBegin()->getPathName(),"\"","\\\"" ).c_str(),
                             toFile.c_str() );
@@ -1422,7 +1422,7 @@ namespace zypp
     for (std::set<Service>::iterator it = _pimpl->services.begin();
       it != _pimpl->services.end(); ++it)
     {
-      MIL << "refresh: "<<it->name() << " with url: "<< it->url().asString() << endl;
+      MIL << "refresh: " << it->name() << " with url: "<< it->url().asString() << endl;
       refreshService(*it);
     }
   }
@@ -1551,7 +1551,7 @@ namespace zypp
       if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
           ZYPP_THROW(Exception("failed to read directory"));
 
-      str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
+      //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
       for_(it, entries.begin(), entries.end() )
       {
         parser::ServiceFileReader reader(*it,

@@ -461,7 +461,7 @@ namespace zypp
      *
      * \throws FIXME RepoAlreadyExistException and as reponame is service name
      */
-    void addService( const Service& name );
+    void addService( const Service & service );
 
     /**
      * Removes service specified by its name
