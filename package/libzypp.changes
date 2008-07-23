@@ -1,9 +1,14 @@
 -------------------------------------------------------------------
+Wed Jul 23 17:17:47 CEST 2008 - jkupec@suse.cz
+
+- Service::enabled() added
+- revision 10657
+
+-------------------------------------------------------------------
 Tue Jul 22 17:18:28 CEST 2008 - jkupec@suse.cz
 
 - Removed FRESHENS dependency type
 - revision 10643
-- version 5.2.0
 
 -------------------------------------------------------------------
 Thu Jul 17 09:49:40 CEST 2008 - schubi@suse.de
