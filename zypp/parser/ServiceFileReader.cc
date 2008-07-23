@@ -59,8 +59,10 @@ namespace zypp
               ++it )
         {
           //MIL << (*it).first << endl;
-          if (it->first == "url" )
+          if ( it->first == "url" )
             service.setUrl( Url (it->second) );
+          else if ( it->first == "enabled" )
+            service.setEnabled( str::strToTrue( it->second ) );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }

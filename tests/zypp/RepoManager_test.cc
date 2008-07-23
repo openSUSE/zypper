@@ -84,6 +84,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   urlS.setPathName(DATADIR.asString());
   urlS.setScheme("dir");
   Service service("test",urlS);
+  service.setEnabled(true);
 
   manager.addService(service);
   manager.refreshServices();
@@ -93,6 +94,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   urlS.setPathName((DATADIR+"second").asString());
   urlS.setScheme("dir");
   service.setUrl(urlS);
+  service.setEnabled(true);
 
   manager.modifyService(service.name(),service);
   manager.refreshServices();
@@ -177,3 +179,8 @@ BOOST_AUTO_TEST_CASE(repo_seting_test)
   repo.setBaseUrl(string("http://test.org"));
   BOOST_CHECK_MESSAGE( repo.keepPackages(), "cache is depend on second url.");
 }
+
+//! \todo test this
+//BOOST_AUTO_TEST_CASE(repo_dont_overwrite_external_settings_test)
+//{
+//}

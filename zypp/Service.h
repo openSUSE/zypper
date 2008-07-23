@@ -67,6 +67,16 @@ namespace zypp
         Url url() const;
 
         /**
+         * Returns 'enabled' flag of the services.
+         * 
+         * Disabled services imply disabled repositories of these services
+         * and they won't be refreshed by \ref RepoManager::refreshServices().
+         * 
+         * Enabled services will be refreshed by \ref RepoManager::refreshServices().
+         */
+        bool enabled() const;
+
+        /**
          * Gets from which file is this service loaded or saved.
          *
          * \note this is empty for newly created file until it is saved
@@ -98,6 +108,12 @@ namespace zypp
          * \param name new name of this service
          */
         void setName( const std::string& name );
+
+        /**
+         * Sets enabled status of the services.
+         * \param enabled The desired status.
+         */
+        void setEnabled( const bool enabled );
 
    public:
         /**

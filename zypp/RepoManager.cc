@@ -1422,6 +1422,9 @@ namespace zypp
     for (std::set<Service>::iterator it = _pimpl->services.begin();
       it != _pimpl->services.end(); ++it)
     {
+      if ( !it->enabled() )
+        continue;
+
       MIL << "refresh: " << it->name() << " with url: "<< it->url().asString() << endl;
       refreshService(*it);
     }
