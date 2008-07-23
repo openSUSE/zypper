@@ -40,6 +40,10 @@ namespace zypp
 
   public:
 
+    CapMatch()
+    : _result( IRRELEVANT )
+    {}
+
     CapMatch( bool val_r )
     : _result( val_r ? MATCH : NOMATCH )
     {}
@@ -84,10 +88,6 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const CapMatch & obj );
 
   private:
-    CapMatch()
-    : _result( IRRELEVANT )
-    {}
-
     Result _result;
   };
   ///////////////////////////////////////////////////////////////////

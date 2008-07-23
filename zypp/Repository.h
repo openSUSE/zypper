@@ -19,14 +19,15 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Date.h"
-extern "C"
-{
-#include "satsolver/repo.h"
-}
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+    namespace detail
+    {
+      struct ByRepository;
+    }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -54,14 +55,15 @@ namespace zypp
         /** Represents no \ref Repository. */
         static const Repository noRepository;
 
+#ifndef SWIG // Swig treats it as syntax error
         /** Evaluate \ref Repository in a boolean context (\c != \c noRepository). */
         using base::SafeBool<Repository>::operator bool_type;
-
+#endif
         /** Return whether this is the system repository. */
         bool isSystemRepo() const;
 
     public:
-         /** 
+         /**
           * Short unique, convenience string to refer to a repo.
           * ie: openSUSE-10.3
           *
@@ -72,7 +74,7 @@ namespace zypp
           */
         std::string alias() const;
 
-         /** 
+         /**
           * Short unique, convenience string to refer to a repo.
           * ie: openSUSE-10.3
           *
@@ -87,7 +89,7 @@ namespace zypp
           */
         ZYPP_DEPRECATED std::string name() const
         { return alias(); }
-        
+
         /**
          * Timestamp when this repository was generated
          *
@@ -99,7 +101,7 @@ namespace zypp
          * the resource specified in the xml file whith
          * the newest timestamp attribute (which is the
          * timestamp of the file in the server ).
-         * 
+         *
          * The timestamp is 0 if the repository does not
          * specify when it was generated.
          *
@@ -195,7 +197,9 @@ namespace zypp
         /** Expert backdoor. */
         IdType id() const { return _id; }
     private:
+#ifndef SWIG // Swig treats it as syntax error
         friend base::SafeBool<Repository>::operator bool_type() const;
+#endif
         bool boolTest() const { return get(); }
     private:
         IdType _id;
