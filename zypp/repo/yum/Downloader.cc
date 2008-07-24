@@ -43,11 +43,25 @@ RepoStatus Downloader::status( MediaSetAccess &media )
   return RepoStatus(repomd);
 }
 
+static OnMediaLocation
+loc_with_path_prefix(const OnMediaLocation & loc,
+                     const Pathname & prefix)
+{
+  if (prefix.empty() || prefix == "/")
+    return loc;
+
+  OnMediaLocation loc_with_path(loc);
+  loc_with_path.setFilename(prefix / loc.filename());
+  return loc_with_path;
+}
+
+
 bool Downloader::patches_Callback( const OnMediaLocation &loc,
                                    const string &id )
 {
-  MIL << id << " : " << loc << endl;
-  this->enqueueDigested(loc);
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _path)); 
+  MIL << id << " : " << loc_with_path << endl;
+  this->enqueueDigested(loc_with_path);
   return true;
 }
 
@@ -55,7 +69,8 @@ bool Downloader::patches_Callback( const OnMediaLocation &loc,
 bool Downloader::repomd_Callback( const OnMediaLocation &loc,
                                   const ResourceType &dtype )
 {
-  MIL << dtype << " : " << loc << endl;
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _path)); 
+  MIL << dtype << " : " << loc_with_path << endl;
 
   //! \todo do this through a ZConfig call so that it is always in sync with parser
   // skip other
@@ -71,7 +86,7 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc,
     return true;
   }
 
-  this->enqueueDigested(loc);
+  this->enqueueDigested(loc_with_path);
 
   // We got a patches file we need to read, to add patches listed
   // there, so we transfer what we have in the queue, and
