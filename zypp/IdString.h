@@ -62,9 +62,10 @@ namespace zypp
       static const IdString Empty;
 
     public:
+#ifndef SWIG // Swig treats it as syntax error
       /** Evaluate in a boolean context <tt>( != \c Null )</tt>. */
       using base::SafeBool<IdString>::operator bool_type;
-
+#endif
       /** Whether the string is empty.
        * This is true for \ref Null and \ref Empty.
        */
@@ -102,7 +103,9 @@ namespace zypp
       IdType id() const
       { return _id; }
     private:
+#ifndef SWIG // Swig treats it as syntax error
       friend base::SafeBool<IdString>::operator bool_type() const;
+#endif
       bool boolTest() const { return _id; }
     private:
       IdType _id;
