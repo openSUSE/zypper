@@ -13,8 +13,9 @@
 #define ZYPP_SERVICE_H
 
 #include <string>
+
 #include "zypp/Url.h"
-#include "zypp/RepoManager.h"
+#include "zypp/Pathname.h"
 
 
 ///////////////////////////////////////////////////////////////////

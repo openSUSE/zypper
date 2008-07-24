@@ -239,8 +239,8 @@ namespace zypp
     bool keepPackages() const;
 
     /**
-     * Gets service name which add it or empty string if this repository
-     * is added manually.
+     * Gets name of the service to which this repository belongs or empty string
+     * if it has been added manually.
      */
     std::string service() const;
 

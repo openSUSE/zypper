@@ -1,3 +1,14 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/** \file       zypp/Service.cc
+ *
+ */
 #include "zypp/Service.h"
 
 #include <ostream>
@@ -9,12 +20,15 @@
 #include "zypp/parser/RepoindexFileReader.h"
 
 using namespace std;
+
 ///////////////////////////////////////////////////////////////////////////////
 namespace zypp 
 {//////////////////////////////////////////////////////////////////////////////
 
-  struct RepoInfoCollector {
-    std::vector<RepoInfo> repos;
+
+  struct RepoInfoCollector
+  {
+    vector<RepoInfo> repos;
     bool collect(const RepoInfo& info)
     {
       repos.push_back(info);
@@ -22,30 +36,35 @@ namespace zypp
     }
   };
 
-  class Service::Impl{
-    public:
-      string name;
-      Url url;
-      DefaultIntegral<bool,false> enabled;
-      Pathname loc;
 
-      Impl() : name("") {};
-      Impl(const string& name_) : name(name_) {};
-      Impl(const string& name_, const Url& url_) : name(name_), url(url_) {};
-    private:
-      friend Impl * rwcowClone<Impl>( const Impl * rhs );
-      /** clone for RWCOW_pointer */
-      Impl * clone() const
-      { return new Impl( *this ); }
+  class Service::Impl
+  {
+  public:
+    string name;
+    Url url;
+    DefaultIntegral<bool,false> enabled;
+    Pathname loc;
+
+    Impl() : name("") {};
+    Impl(const string& name_) : name(name_) {};
+    Impl(const string& name_, const Url& url_) : name(name_), url(url_) {};
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
   };
+
+
+  const Service Service::noService;
 
   Service::Service() : _pimpl( new Impl() ) {};
 
   Service::Service(const string& name) : _pimpl( new Impl(name) ) {};
   Service::Service(const string& name, const Url& url)
     : _pimpl( new Impl(name,url) ) {};
-
-  const Service Service::noService;
 
   string Service::name() const { return _pimpl->name; }
   void Service::setName( const std::string& name ) { _pimpl->name = name; }
