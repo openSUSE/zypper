@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jul 25 20:12:55 CEST 2008 - ma@suse.de
+
+- Several changes to make libzypp-bindings compile using the original 
+  header files and no private copies. (bnc #391831)
+- revision 10668
+- version 5.3.0
+
+-------------------------------------------------------------------
 Wed Jul 23 17:17:47 CEST 2008 - jkupec@suse.cz
 
 - Service::enabled() added
