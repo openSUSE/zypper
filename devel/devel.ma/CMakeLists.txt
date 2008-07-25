@@ -17,14 +17,9 @@ ENDIF( NOT QT_FOUND )
 
 ## ############################################################
 
-ADD_CUSTOM_COMMAND (
-   OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/ma_test
-   COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/ma_test ${CMAKE_CURRENT_BINARY_DIR}/ma_test
-   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/ma_test
-)
-
 ADD_CUSTOM_TARGET( ma_test
-   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/ma_test
+   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/ma_test
+   COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/ma_test ${CMAKE_CURRENT_BINARY_DIR}/ma_test
 )
 
 ## ############################################################
@@ -44,8 +39,8 @@ FOREACH( loop_var MaTest )
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
-      zypp boost_signals
-      ${QT_LIBRARIES}
+      zypp
+#${QT_LIBRARIES}
    )
 ENDFOREACH( loop_var )
 
