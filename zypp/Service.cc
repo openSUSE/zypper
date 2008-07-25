@@ -71,7 +71,8 @@ namespace zypp
   string Service::alias() const { return _pimpl->alias; }
   void Service::setAlias( const std::string & alias ) { _pimpl->alias = alias; }
 
-  string Service::name() const { return _pimpl->name; }
+  string Service::name() const
+  { if (_pimpl->name.empty()) return _pimpl->alias; return _pimpl->name; }
   void Service::setName( const std::string& name ) { _pimpl->name = name; }
 
   Url Service::url() const { return _pimpl->url; }
