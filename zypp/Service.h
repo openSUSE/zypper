@@ -53,6 +53,13 @@ namespace zypp
         static const Service noService;
 
     public:
+      /**
+       * Gets unique alias.
+       *
+       * \return alias as string
+       */
+      std::string alias() const;
+
         /**
          * Gets unique name
          *
@@ -86,7 +93,14 @@ namespace zypp
         Pathname location() const;
 
     public:
-        
+
+      /**
+       * Sets alias for this service
+       *
+       * \param alias new alias of this service
+       */
+      void setAlias( const std::string & alias );
+
         /**
          * Sets file where this service is stored.
          *

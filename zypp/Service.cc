@@ -40,14 +40,15 @@ namespace zypp
   class Service::Impl
   {
   public:
+    string alias;
     string name;
     Url url;
     DefaultIntegral<bool,false> enabled;
     Pathname loc;
 
-    Impl() : name("") {};
-    Impl(const string& name_) : name(name_) {};
-    Impl(const string& name_, const Url& url_) : name(name_), url(url_) {};
+    Impl() {}
+    Impl(const string & alias_) : alias(alias_) {}
+    Impl(const string & alias_, const Url& url_) : alias(alias_), url(url_) {}
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -60,11 +61,15 @@ namespace zypp
 
   const Service Service::noService;
 
-  Service::Service() : _pimpl( new Impl() ) {};
+  Service::Service() : _pimpl( new Impl() ) {}
 
-  Service::Service(const string& name) : _pimpl( new Impl(name) ) {};
-  Service::Service(const string& name, const Url& url)
-    : _pimpl( new Impl(name,url) ) {};
+  Service::Service(const string & alias) : _pimpl( new Impl(alias) ) {}
+  Service::Service(const string & alias, const Url & url)
+    : _pimpl( new Impl(alias, url) ) {}
+
+
+  string Service::alias() const { return _pimpl->alias; }
+  void Service::setAlias( const std::string & alias ) { _pimpl->alias = alias; }
 
   string Service::name() const { return _pimpl->name; }
   void Service::setName( const std::string& name ) { _pimpl->name = name; }

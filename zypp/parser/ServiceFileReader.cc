@@ -29,10 +29,11 @@ namespace zypp
   namespace parser
   { /////////////////////////////////////////////////////////////////
 
-    class ServiceFileReader::Impl {
-      public:
-      static void parseServices( const Pathname &file,
-          const ServiceFileReader::ProcessService& callback );
+    class ServiceFileReader::Impl
+    {
+    public:
+      static void parseServices( const Pathname & file,
+          const ServiceFileReader::ProcessService & callback );
     };
 
     void ServiceFileReader::Impl::parseServices( const Pathname &file,
@@ -58,16 +59,20 @@ namespace zypp
               it != dict.entriesEnd(*its);
               ++it )
         {
-          //MIL << (*it).first << endl;
-          if ( it->first == "url" )
+          // MIL << (*it).first << endl;
+          if ( it->first == "name" )
+            service.setName( it->second );
+          else if ( it->first == "url" )
             service.setUrl( Url (it->second) );
           else if ( it->first == "enabled" )
             service.setEnabled( str::strToTrue( it->second ) );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }
-        MIL << "Linking repo info with file " << file << endl;
+
+        MIL << "Linking Service with file " << file << endl;
         service.setLocation(file);
+
         // add it to the list.
         if ( !callback(service) )
           ZYPP_THROW(AbortRequestException());

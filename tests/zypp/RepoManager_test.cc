@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   service.setUrl(urlS);
   service.setEnabled(true);
 
-  manager.modifyService(service.name(),service);
+  manager.modifyService(service.alias(), service);
   manager.refreshServices();
   BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 6); //-1 from new repoindex
 

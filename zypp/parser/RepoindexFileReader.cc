@@ -95,6 +95,7 @@ namespace zypp
       if ( reader_r->name() == "repo" )
       {
         RepoInfo info;
+        //! \todo FIXME this hardcodes the "/repo/" fragment - should not be if we want it to be usable by others!
         info.setPath(Pathname(string("/repo/")+reader_r->getAttribute("path").asString()));
         info.setAlias(reader_r->getAttribute("alias").asString());
         info.setType(repo::RepoType::RPMMD_e); //TODO hardwired rpmmd???

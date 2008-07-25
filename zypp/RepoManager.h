@@ -361,8 +361,11 @@ namespace zypp
     *
     * \throws repo::RepoAlreadyExistsException If the repo clash some
     *         unique attribute like alias
-    * \throws RepoUnknownType If repository type can't be determined
-    * \throws RepoException If the access to the url fails (while probing).
+    * \throws RepoUnknownType
+    *         If RepoManagerOptions::probe is true
+    *         and repository type can't be determined.
+    * \throws RepoException
+    *         If RepoManagerOptions::probe is true and access to the url fails.
     * \throws Exception On other errors.
     */
    void addRepository( const RepoInfo &info,
@@ -373,9 +376,7 @@ namespace zypp
     * \param url Url of the repo file
     *
     * \throws repo::RepoAlreadyExistsException If the repo clash some
-    * unique attribute like alias
-    *
-    * \throws RepoAlreadyExistsException
+    *         unique attribute like alias
     * \throws MediaException If the access to the url fails
     * \throws ParseException If the file parsing fails
     * \throws RepoUnknownType If repository type can't be determined
@@ -445,19 +446,19 @@ namespace zypp
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
     /**
-     * Adds new service by it's name and url
+     * Adds new service by it's alias and url
      *
-     * \param name unique name of service
+     * \param alias unique identifier of the service
      * \param url url to service
      *
      * \throws FIXME RepoAlreadyExistException and as reponame is service name
      */
-    void addService( const std::string& name, const Url& url );
+    void addService( const std::string & alias, const Url& url );
 
     /**
      * Adds new service
      *
-     * \param name service info
+     * \param service service info
      *
      * \throws FIXME RepoAlreadyExistException and as reponame is service name
      */
@@ -466,12 +467,12 @@ namespace zypp
     /**
      * Removes service specified by its name
      *
-     * \param name name of service to remove
+     * \param alias unique indientifier of the service to remove
      *
      * \throws RepoException if service is not found or file with Service cannot be deleted
      * \throws Exception if file contain more services and rewrite file failed
      */
-    void removeService( const std::string& name );
+    void removeService( const std::string & alias );
 
     /**
      * Gets true if no service is in RepoManager (so no one in specified location)
@@ -501,51 +502,60 @@ namespace zypp
     ServiceConstIterator serviceEnd() const;
 
     /**
-     * Finds Service by name or return noService
+     * Finds Service by alias or return noService
      *
-     * \param name unique name of service
+     * \param alias unique identifier of service
      * \return information about Service
      */
-    Service getService( const std::string& name ) const;
+    Service getService( const std::string & alias ) const;
 
     /**
-     * Refreshs all services
-     * \see refreshService
+     * Refreshes all enabled services.
+     * 
+     * \see refreshService(Service)
      */
     void refreshServices();
 
     /**
      * Refresh specific service.
-     * \throws Exception if cannot download file
+     * 
      * \param name service structure
+     * \throws MediaException If there's a problem downloading the repo index file.
      */
-    void refreshService( const Service& name );
+    void refreshService( const Service & service );
 
     /**
-     * modify service, rewrite Service to filesystem.
-     * If change Service name, then can escalate to rewrite all repositories which it contain.
+     * Modifies service file (rewrites it with new values) and underlying
+     * repositories if needed.
+     * 
+     * Modifications of a service can lead to rewrite of all .repo files of
+     * contained repositories. Particularily, disabling a service (changing
+     * Service::enabled() from true to false) will disable all contained
+     * repositories. Renaming of a service will modify the "service" key
+     * of all contained repositories.
      *
-     * \param oldName oldName of service
-     * \param service Structure containing new datas
+     * \param oldAlias Old alias of the service
+     * \param service Service object containing new data
      *
-     * \throws RepoException if sservice with oldName is not known
+     * \throws RepoException if sservice with oldAlias is not known
      * \throws Exception if have problems with files
      */
-    void modifyService(const std::string& oldName, const Service& service);
+    void modifyService(const std::string & oldAlias, const Service & service);
 
-    private:
+  private:
     /**
      * Functor thats filter RepoInfo by service which belongs to.
      */
-    struct MatchServiceName {
+    struct MatchServiceAlias
+    {
       private:
-        std::string name;
+        std::string alias;
       public:
-        MatchServiceName( const std::string& name_ ) : name(name_) {}
-        bool match( const RepoInfo& info ) { return info.service()==name; }
+        MatchServiceAlias( const std::string & alias_ ) : alias(alias_) {}
+        bool match( const RepoInfo & info ) { return info.service() == alias; }
     };
 
-    public:
+  public:
     /**
      * fill to output iterator repositories in service name. This output iterator can perform
      * any action on with Repo or service Container, because it is sets and it isn't dynamic recreate.
@@ -570,13 +580,14 @@ namespace zypp
      */
 
     template<typename OutputIterator>
-    void getRepositoriesInService( const std::string& name, OutputIterator out ) const
+    void getRepositoriesInService( const std::string & alias,
+                                   OutputIterator out ) const
     {
-      MatchServiceName filter(name);
+      MatchServiceAlias filter(alias);
 
-      std::copy(boost::make_filter_iterator(bind(&MatchServiceName::match,
+      std::copy(boost::make_filter_iterator(bind(&MatchServiceAlias::match,
           filter, _1),repoBegin(),repoEnd()), boost::make_filter_iterator(
-          bind(&MatchServiceName::match, filter, _1),repoEnd(),repoEnd()),
+          bind(&MatchServiceAlias::match, filter, _1), repoEnd(), repoEnd()),
           out );
     }
 
