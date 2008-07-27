@@ -24,5 +24,7 @@ void report_dummy_option(Out & out, const std::string & longoption_str);
 /** Say you miss a required argument and print command help */
 void report_required_arg_missing(Out & out, const std::string & cmd_help);
 
+void print_usage(Out & out, const std::string & command_help);
+
 
 #endif /*MESSAGES_H_*/

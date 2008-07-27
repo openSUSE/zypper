@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #include <map>
 
 #include "zypp/base/Exception.h"
@@ -14,6 +21,11 @@
 
 
 static std::map<std::string,ZypperCommand::Command> _table;
+
+const ZypperCommand ZypperCommand::ADD_SERVICE(ZypperCommand::ADD_SERVICE_e);
+const ZypperCommand ZypperCommand::REMOVE_SERVICE(ZypperCommand::REMOVE_SERVICE_e);
+const ZypperCommand ZypperCommand::LIST_SERVICES(ZypperCommand::LIST_SERVICES_e);
+const ZypperCommand ZypperCommand::REFRESH_SERVICES(ZypperCommand::REFRESH_SERVICES_e);
 
 const ZypperCommand ZypperCommand::ADD_REPO(ZypperCommand::ADD_REPO_e);
 const ZypperCommand ZypperCommand::REMOVE_REPO(ZypperCommand::REMOVE_REPO_e);
@@ -77,11 +89,16 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
   if (_table.empty())
   {
     // initialize it
-    _table["addrepo"] = _table["ar"] = _table["service-add"] = _table["sa"] = ZypperCommand::ADD_REPO_e;
-    _table["removerepo"] = _table["rr"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_REPO_e;
-    _table["renamerepo"]= _table["nr"] = _table["service-rename"] = _table["sr"] = ZypperCommand::RENAME_REPO_e;    
-    _table["modifyrepo"]= _table["mr"] = _table["service-modify"] = _table["sm"] = ZypperCommand::MODIFY_REPO_e;    
-    _table["repos"] = _table["lr"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_REPOS_e;
+    _table["addservice"] = _table["as"] = _table["service-add"] = _table["sa"] = ZypperCommand::ADD_SERVICE_e;
+    _table["removeservice"] = _table["rs"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_SERVICE_e;
+    _table["services"] = _table["ls"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_SERVICES_e;
+    _table["refresh-services"] = _table["refs"] = ZypperCommand::REFRESH_SERVICES_e;
+
+    _table["addrepo"] = _table["ar"] = ZypperCommand::ADD_REPO_e;
+    _table["removerepo"] = _table["rr"] = ZypperCommand::REMOVE_REPO_e;
+    _table["renamerepo"]= _table["nr"] = ZypperCommand::RENAME_REPO_e;
+    _table["modifyrepo"]= _table["mr"] = ZypperCommand::MODIFY_REPO_e;
+    _table["repos"] = _table["lr"] = _table["catalogs"] = _table["ca"] = ZypperCommand::LIST_REPOS_e;
     _table["refresh"] = _table["ref"] = ZypperCommand::REFRESH_e;
     _table["clean"] = _table["clean-cache"] = _table["cc"] = _table["you-clean-cache"] = _table["yc"] = ZypperCommand::CLEAN_e;
 

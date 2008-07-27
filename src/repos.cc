@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #include <iostream>
 #include <fstream>
 #include <boost/format.hpp>
@@ -12,13 +19,11 @@
 #include "zypp/base/String.h"
 
 #include "zypp/RepoManager.h"
-#include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/parser/ParseException.h"
 #include "zypp/media/MediaException.h"
 #include "zypp/media/MediaAccess.h"
 
-#include "Zypper.h"
 #include "output/Out.h"
 #include "main.h"
 #include "getopt.h"
@@ -260,11 +265,14 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   return false; // no error
 }
 
+// ---------------------------------------------------------------------------
+
 bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
-  list<RepoInfo> known = manager.knownRepositories();
-  bool founded = false;
+  list<RepoInfo> known;
+  known.insert(known.end(), manager.repoBegin(), manager.repoEnd());
+  bool found = false;
 
   unsigned int number = 1; // repo number
   for (list<RepoInfo>::const_iterator known_it = known.begin();
@@ -281,7 +289,7 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
             != known_it->baseUrlsEnd())
       {
         *repo = *known_it;
-	founded = true;
+	found = true;
         break;
       }
     }
@@ -289,7 +297,7 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 
   } // END for all known repos
 
-  return founded;
+  return found;
 }
 
 // ---------------------------------------------------------------------------
@@ -409,7 +417,7 @@ static void do_init_repos(Zypper & zypper, const Container & container)
 
   // if no repository was specified on the command line, use all known repos
   if (gData.repos.empty())
-    gData.repos = manager.knownRepositories();
+    gData.repos.insert(gData.repos.end(), manager.repoBegin(), manager.repoEnd());
 
   // additional repositories (--plus-repo)
   if (!gData.additional_repos.empty())
@@ -614,6 +622,7 @@ static void print_repo_list(Zypper & zypper,
   bool all = zypper.cOpts().count("details");
   bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url") || zypper.cOpts().count("sort-by-uri");
   bool showprio = zypper.cOpts().count("priority") || zypper.cOpts().count("sort-by-priority");
+  bool showservice = zypper.cOpts().count("service");
 
   // header
   TableHeader th;
@@ -632,6 +641,8 @@ static void print_repo_list(Zypper & zypper,
     th << _("Type");
   if (all || showuri)
     th << _("URI");
+  if (all || showservice)
+    th << _("Service");
   tbl << th;
 
   int i = 1;
@@ -666,6 +677,9 @@ static void print_repo_list(Zypper & zypper,
      */
     if (all || showuri)
       tr << (*repo.baseUrlsBegin()).asString();
+
+    if (all || showservice)
+      tr << repo.service();
 
     tbl << tr;
     i++;
@@ -762,7 +776,7 @@ void list_repos(Zypper & zypper)
 
   try
   {
-    repos = manager.knownRepositories();
+    repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   }
   catch ( const Exception &e )
   {
@@ -825,6 +839,7 @@ void list_repos(Zypper & zypper)
 
 void refresh_repos(Zypper & zypper)
 {
+  MIL << "going to refresh repositories" << endl;
   // need gpg keys when downloading (#304672)
   init_target(zypper);
   RepoManager manager(zypper.globalOpts().rm_options);
@@ -832,7 +847,7 @@ void refresh_repos(Zypper & zypper)
   list<RepoInfo> repos;
   try
   {
-    repos = manager.knownRepositories();
+    repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   }
   catch ( const Exception &e )
   {
@@ -952,6 +967,7 @@ void refresh_repos(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
+/** \return false on success, true on error */
 bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
 {
   // raw metadata refresh
@@ -999,7 +1015,7 @@ void clean_repos(Zypper & zypper)
   list<RepoInfo> repos;
   try
   {
-    repos = manager.knownRepositories();
+    repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   }
   catch ( const Exception &e )
   {
@@ -1467,8 +1483,9 @@ void rename_repo(Zypper & zypper,
 void modify_repos_by_option( Zypper & zypper )
 {
   RepoManager manager(zypper.globalOpts().rm_options);
-  const std::list<RepoInfo>& repos = manager.knownRepositories();
-  std::set<std::string> toModify;
+  list<RepoInfo> repos;
+  repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
+  set<string> toModify;
 
   if ( copts.count("all") )
   {
@@ -1563,9 +1580,9 @@ void modify_repo(Zypper & zypper, const string & alias)
 
   // autorefresh
   tribool autoref = indeterminate;
-  if (copts.count("refresh") || copts.count("enable-autorefresh"))
+  if (copts.count("refresh"))
     autoref = true;
-  if (copts.count("no-refresh") || copts.count("disable-autorefresh"))
+  if (copts.count("no-refresh"))
   {
     if (autoref)
     {
@@ -1728,6 +1745,326 @@ void modify_repo(Zypper & zypper, const string & alias)
 }
 
 // ---------------------------------------------------------------------------
+// Service Handling
+// ---------------------------------------------------------------------------
+
+static void print_service_list(Zypper & zypper,
+                               const list<Service> & services)
+{
+  Table tbl;
+  bool all = zypper.cOpts().count("details");
+  bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url") || zypper.cOpts().count("sort-by-uri");
+  bool showprio = zypper.cOpts().count("priority") || zypper.cOpts().count("sort-by-priority");
+
+  // header
+  TableHeader th;
+  // fixed 'zypper repos' columns
+  th << "#"
+     << _("Alias")
+     << _("Name")
+     << _("Enabled")
+     // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
+     << _("Refresh");
+  // optional columns
+  if (all || showprio)
+    // translators: repository priority (in zypper repos -p or -d)
+    th << _("Priority");
+  if (all)
+    th << _("Type");
+  if (all || showuri)
+    th << _("URI");
+  tbl << th;
+
+  int i = 1;
+
+  for (list<Service>::const_iterator it = services.begin();
+       it != services.end(); ++it)
+  {
+    Service service = *it;
+    TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
+
+    // number
+    tr << str::numstring (i);
+    // alias
+    tr << service.alias();
+    // name
+    tr << service.name();
+    // enabled?
+    tr << (service.enabled() ? _("Yes") : _("No"));
+    // autorefresh?
+    tr << "";
+    // priority
+    if (all || showprio)
+      tr << "";
+    // type
+    if (all)
+      tr << "NU"; // ???
+    // url
+    if (all || showuri)
+      tr << service.url().asString();
+
+    tbl << tr;
+    i++;
+  }
+
+  if (tbl.empty())
+    zypper.out().info(str::form(_(
+        "No services defined. Use the '%s' command to add one or more services."),
+        "zypper addservice"));
+  else
+  {
+    // sort
+    if (zypper.cOpts().count("sort-by-uri"))
+    {
+      cout << "will sort by uri: ";
+      if (all)
+      {
+        tbl.sort(7);
+        cout << 7;
+      }
+      else if (showprio)
+      {
+        tbl.sort(6);
+        cout << 6;
+      }
+      else
+      {
+        tbl.sort(5);
+        cout << 5;
+      }
+      cout << endl;
+    }
+    else if (zypper.cOpts().count("sort-by-alias"))
+      tbl.sort(1);
+    else if (zypper.cOpts().count("sort-by-name"))
+      tbl.sort(2);
+    else if (zypper.cOpts().count("sort-by-priority"))
+      tbl.sort(5);
+
+    // print
+    cout << tbl;
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+void list_services(Zypper & zypper)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  list<Service> services;
+
+  try
+  {
+    services.insert(services.end(),
+        manager.serviceBegin(),
+        manager.serviceEnd());
+  }
+  catch ( const Exception &e )
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e, _("Error reading services:"));
+    exit(ZYPPER_EXIT_ERR_ZYPP);
+  }
+
+  // export to file or stdout in repo file format
+  if (copts.count("export"))
+  {
+    string filename_str = copts["export"].front();
+    if (filename_str == "-")
+    {
+      //print_repos_to(repos, cout);
+    }
+    else
+    {
+      if (filename_str.rfind(".repo") == string::npos)
+        filename_str += ".repo";
+
+      Pathname file(filename_str);
+      std::ofstream stream(file.c_str());
+      if (!stream)
+      {
+        zypper.out().error(boost::str(format(
+            _("Can't open %s for writing."))
+            % file.asString()),
+          _("Maybe you do not have write permissions?"));
+        exit(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      }
+      else
+      {
+        //print_repos_to(repos, stream);
+        zypper.out().info(boost::str(format(
+            _("Repositories have been successfully exported to %s."))
+            % (file.absolute() ? file.asString() : file.asString().substr(2))),
+          Out::QUIET);
+      }
+    }
+  }
+  // print repo list as xml
+  //else if (zypper.out().type() == Out::TYPE_XML)
+    //print_xml_repo_list(zypper, repos);
+  // print repo list the rug's way
+  //else if (zypper.globalOpts().is_rug_compatible)
+    //print_rug_service_list(repos);
+  // print repo list as table
+  else
+    print_service_list(zypper, services);
+}
+
+// ---------------------------------------------------------------------------
+
+void add_service(Zypper & zypper, const Service & service)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+
+  try
+  {
+    manager.addService(service);
+  }
+  catch (const RepoAlreadyExistsException & e)
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(boost::str(format(
+        _("Service aliased '%s' already exists. Please use another alias."))
+        % service.alias()));
+    ERR << "Service aliased '" << service.alias() << "' already exists." << endl;
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+  catch (const Exception & e)
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(boost::str(format(
+        _("Error occured while adding service '%s'.")) % service.alias()));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+
+  zypper.out().info(boost::str(
+    format(_("Service '%s' has been successfully added.")) % service.name()));
+  MIL << format("Service '%s' has been added.") % service.name() << endl;
+}
+
+// ---------------------------------------------------------------------------
+
+void add_service_by_url( Zypper & zypper,
+                         const zypp::Url & url, const string & alias,
+                         const string & type, tribool enabled)
+{
+  MIL << "going to add service by url (alias=" << alias << ", url=" << url
+      << ")" << endl;
+
+  Service service;
+
+  //! \todo what about service type? compare to rug. idea: do addrepo if type is specified and is not NU.
+  //if ( ! type.empty() )
+  //  repo.setType(RepoType(type));
+
+  service.setAlias(alias.empty() ? timestamp() : alias);
+  parsed_opts::const_iterator it = zypper.cOpts().find("name");
+  if (it != zypper.cOpts().end())
+    service.setName(it->second.front());
+  service.setUrl(url);
+
+  if ( !indeterminate(enabled) )
+    service.setEnabled((enabled == true));
+
+  add_service(zypper, service);
+}
+
+
+// ---------------------------------------------------------------------------
+
+void remove_service(Zypper & zypper, const Service & service)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+
+  manager.removeService(service);
+  zypper.out().info(boost::str(
+    format(_("Service '%s' has been removed.")) % service.name()));
+  MIL << format("Service '%s' has been removed.") % service.name() << endl;
+}
+
+// ---------------------------------------------------------------------------
+
+void refresh_services(Zypper & zypper)
+{
+  MIL << "going to refresh services" << endl;
+
+  RepoManager manager(zypper.globalOpts().rm_options);
+
+  list<Service> services;
+  try
+  {
+    services.insert(services.end(), manager.serviceBegin(), manager.serviceEnd());
+  }
+  catch (const Exception & e)
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e, _("Error reading services:"));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+
+  for_(sit, services.begin(), services.end())
+  {
+    Service s = *sit;
+
+    try
+    {
+      zypper.out().info(str::form(_("Refreshing service '%s'."), s.name().c_str()));
+      manager.refreshService(s);
+    }
+    catch (const MediaException & e)
+    {
+      ZYPP_CAUGHT(e);
+      zypper.out().error(e,
+        str::form(
+          _("Problem downloading the repository index file for service '%s':"),
+          s.name().c_str()),
+        _("Check if the URI is valid and accessible."));
+      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      return; //! \todo continue with the next service 
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+bool match_service(Zypper & zypper, string str, Service * service)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  list<Service> known;
+  known.insert(known.end(), manager.serviceBegin(), manager.serviceEnd());
+  bool found = false;
+
+  unsigned int number = 1; // repo number
+  for (list<Service>::const_iterator known_it = known.begin();
+      known_it != known.end(); ++known_it, ++number)
+  {
+    unsigned int tmp = 0;
+    safe_lexical_cast (str, tmp); // try to make an int out of the string
+
+    try
+    {
+      if (known_it->alias() == str ||
+          tmp == number ||
+          known_it->url() == Url(str))
+      {
+        *service = *known_it;
+        found = true;
+        break;
+      }
+    }
+    catch(const url::UrlException &){}
+
+  } // END for all known repos
+
+  return found;
+}
+
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
 
 void load_resolvables(Zypper & zypper)
 {
@@ -1830,74 +2167,6 @@ void load_target_resolvables(Zypper & zypper)
 
 // ---------------------------------------------------------------------------
 
-/*
-//! rename a source, identified in any way: alias, url, id
-void rename_source( const std::string& anystring, const std::string& newalias )
-{
-  cerr_vv << "Constructing SourceManager" << endl;
-  SourceManager_Ptr manager = SourceManager::sourceManager();
-  cerr_vv << "Restoring SourceManager" << endl;
-  manager->restore (gSettings.root_dir, true use_cache*//*);
-
-  Source_Ref src;
-
-  SourceManager::SourceId sid = 0;
-  safe_lexical_cast (anystring, sid);
-  if (sid > 0) {
-    try {
-      src = manager->findSource (sid);
-    }
-    catch (const Exception & ex) {
-      ZYPP_CAUGHT (ex);
-      // boost::format: %s is fine regardless of the actual type :-)
-      cerr << format (_("Source %s not found.")) % sid << endl;
-    }
-  }
-  else {
-    bool is_url = false;
-    if (looks_like_url (anystring)) {
-	is_url = true;
-	cerr_vv << "Looks like a URI" << endl;
-
-	Url url;
-	try {
-	  url = Url (anystring);
-	}
-	catch ( const Exception & excpt_r ) {
-	  ZYPP_CAUGHT( excpt_r );
-	  cerr << _("URI is invalid: ") << excpt_r.asUserString() << endl;
-	}
-	if (url.isValid ()) {
-	  try {
-	    src = manager->findSourceByUrl (url);
-	  }
-	  catch (const Exception & ex) {
-	    ZYPP_CAUGHT (ex);
-	    cerr << format (_("Source %s not found.")) % url.asString() << endl;
-	  }
-	}
-    }
-
-    if (!is_url) {
-      try {
-	src = manager->findSource (anystring);
-      }
-      catch (const Exception & ex) {
-	ZYPP_CAUGHT (ex);
-	cerr << format (_("Source %s not found.")) % anystring << endl;
-      }
-    }
-  }
-
-  if (src) {
-    // getting Source_Ref is useless if we only can use an id
-    manager->renameSource (src.numericId (), newalias);
-  }
-
-  cerr_vv << "Storing source data" << endl;
-  manager->store( gSettings.root_dir, true metadata_cache*//* );
-}
-*/
 // ----------------------------------------------------------------------------
 
 // #217028

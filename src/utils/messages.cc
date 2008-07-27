@@ -59,3 +59,13 @@ void report_dummy_option(Out & out, const string & longoption_str)
   out.warning(zypp::str::form(
     _("The '--%s' option has currently no effect."), longoption_str.c_str()));
 }
+
+// ----------------------------------------------------------------------------
+
+void print_usage(Out & out, const string & command_help)
+{
+  ostringstream s;
+  s << _("Usage") << ':' << endl;
+  s << command_help;
+  out.info(s.str());
+}

@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef ZYPPERCOMMAND_H_
 #define ZYPPERCOMMAND_H_
 
@@ -10,6 +17,11 @@
  */
 struct ZypperCommand
 {
+  static const ZypperCommand ADD_SERVICE;
+  static const ZypperCommand REMOVE_SERVICE;
+  static const ZypperCommand LIST_SERVICES;
+  static const ZypperCommand REFRESH_SERVICES;
+
   static const ZypperCommand ADD_REPO;
   static const ZypperCommand REMOVE_REPO;
   static const ZypperCommand RENAME_REPO;
@@ -68,6 +80,11 @@ struct ZypperCommand
 
   enum Command
   {
+    ADD_SERVICE_e,
+    REMOVE_SERVICE_e,
+    LIST_SERVICES_e,
+    REFRESH_SERVICES_e,
+
     ADD_REPO_e,
     REMOVE_REPO_e,
     RENAME_REPO_e,

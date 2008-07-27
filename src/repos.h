@@ -1,19 +1,22 @@
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
+
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
-#include <boost/logic/tribool.hpp>
+//#include <boost/logic/tribool.hpp>
 
 #include "zypp/Url.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/Service.h"
 
 #include "Zypper.h"
 
 #define  TMP_RPM_REPO_ALIAS  "_tmpRPMcache_"
-
-/**
- * Initialize rpm database on target, if not already initialized. 
- */
-void init_target(Zypper & zypper);
 
 /**
  * The same as \ref init_repos(), but allows to specify repos to initialize.
@@ -133,6 +136,27 @@ void modify_all_repos(Zypper & zypper);
  * like all, local, remote or medium-type
  */
 void modify_repos_by_option( Zypper & zypper );
+
+
+void list_services(Zypper & zypper);
+
+void add_service(Zypper & zypper, const zypp::Service & service);
+
+void add_service_by_url( Zypper & zypper,
+                         const zypp::Url & url, const std::string & alias,
+                         const std::string & type,
+                         boost::tribool enabled = boost::indeterminate);
+
+void remove_service(Zypper & zypper, const zypp::Service & service);
+
+void refresh_services(Zypper & zypper);
+
+bool match_service(Zypper & zypper, std::string str, zypp::Service * service);
+
+/**
+ * Initialize rpm database on target, if not already initialized. 
+ */
+void init_target(Zypper & zypper);
 
 /**
  * Load both repository and target resolvables.

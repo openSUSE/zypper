@@ -15,6 +15,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/Pathname.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/Service.h"
 
 #include "Zypper.h"
 
@@ -69,14 +70,24 @@ zypp::Capability safe_parse_cap (Zypper & zypper,
                                  const zypp::ResKind & kind = zypp::ResKind::nokind);
 
 
-//comparator for RepoInfo set
+// comparator for RepoInfo set
 class RepoInfoAliasComparator
 {
-  public: bool operator()(const zypp::RepoInfo &a, const zypp::RepoInfo& b)
+  public: bool operator()(const zypp::RepoInfo & a, const zypp::RepoInfo & b)
   {
-    return a.alias()<b.alias();
+    return a.alias() < b.alias();
   }
 };
+
+// comparator for Service set
+class ServiceAliasComparator
+{
+  public: bool operator()(const zypp::Service & a, const zypp::Service & b)
+  {
+    return a.alias() < b.alias();
+  }
+};
+
 
 /**
  * checks name for .repo string
