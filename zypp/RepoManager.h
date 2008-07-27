@@ -474,6 +474,8 @@ namespace zypp
      */
     void removeService( const std::string & alias );
 
+    void removeService( const Service & service );
+
     /**
      * Gets true if no service is in RepoManager (so no one in specified location)
      *
@@ -556,39 +558,51 @@ namespace zypp
     };
 
   public:
+
     /**
      * fill to output iterator repositories in service name. This output iterator can perform
      * any action on with Repo or service Container, because it is sets and it isn't dynamic recreate.
-     * \param name service name
-     * \param out output iterator which get all repositories in Service
+     *
+     * \note Don't use this function with RepoManager::removeRepository(), it will lead to segfaults
+     *       due to invalidated internal iterators. FIXME can this be solved (using STL) so that this
+     *       warning would not be needed?
+     *
+     * \param alias service alias
+     * \param out output iterator which get all the repositories belonging to
+     *   specified service
      *
      * example how set priority for each RepoInfo in this service:
      * \code
      * //functor
-     * class ChangePriority{
-     *   private:
-     *     int priority;
-     *   public:
-     *     ChangePriority(int prio) : priority(prio) {}
-     *     void doIt( RepoInfo info ) { info.setPriority(priority); } //missing rewrite priority back via RepoManager::modifyRepo
+     * class ChangePriority
+     * {
+     * private:
+     *   int priority;
+     * public:
+     *   ChangePriority(int prio) : priority(prio) {}
+     *   // missing rewrite priority back via RepoManager::modifyRepo
+     *   void doIt( RepoInfo info ) { info.setPriority(priority); } 
      * }
      *
      * //somewhere in code
      * ChangePriority changer(10);
-     * getRepositoriesInService(name,getRepositoriesInService( name, boost::make_function_output_iterator(bind(&ChangePriority::doIt, &changer, _1))));
+     * getRepositoriesInService(name,
+     *   boost::make_function_output_iterator(
+     *     bind(&ChangePriority::doIt, &changer, _1)));
      * \endcode
      */
-
     template<typename OutputIterator>
     void getRepositoriesInService( const std::string & alias,
                                    OutputIterator out ) const
     {
       MatchServiceAlias filter(alias);
 
-      std::copy(boost::make_filter_iterator(bind(&MatchServiceAlias::match,
-          filter, _1),repoBegin(),repoEnd()), boost::make_filter_iterator(
+      std::copy(
+        boost::make_filter_iterator(
+          bind(&MatchServiceAlias::match, filter, _1), repoBegin(), repoEnd()),
+        boost::make_filter_iterator(
           bind(&MatchServiceAlias::match, filter, _1), repoEnd(), repoEnd()),
-          out );
+        out);
     }
 
   protected:

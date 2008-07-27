@@ -83,12 +83,10 @@ namespace zypp
 
   void Service::dumpServiceOn( std::ostream& str ) const
   {
-    str << endl;
     str << "[" << alias() << "]" << endl;
     str << "name = " << name() << endl;
     str << "url = " << url() << endl;
     str << "enabled = " << ( enabled() ? "1" : "0") << endl;
-    str << endl;
   }
 
   Pathname Service::location() const

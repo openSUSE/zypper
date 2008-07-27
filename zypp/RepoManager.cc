@@ -1328,7 +1328,7 @@ namespace zypp
   {
     MIL << "Going to delete repo " << alias << endl;
 
-    const Service& service = getService( alias );
+    const Service & service = getService( alias );
 
     Pathname location = service.location();
     if( location.empty() )
@@ -1342,7 +1342,8 @@ namespace zypp
     parser::ServiceFileReader reader( location,
         bind(&Impl::ServiceCollector::collect,collector,_1) );
 
-    if ( tmpSet.size() == 1 ) //only one record
+    // only one service definition in the file
+    if ( tmpSet.size() == 1 ) 
     {
       if ( filesystem::unlink(location) != 0 )
       {
@@ -1367,11 +1368,19 @@ namespace zypp
       MIL << alias << " sucessfully deleted from file " << location <<  endl;
     }
 
-    //now remove all repositories added by this service
+    // now remove all repositories added by this service
+    RepoCollector rcollector;
     getRepositoriesInService( alias,
       boost::make_function_output_iterator(
-        bind(&RepoManager::removeRepository, this, _1, ProgressData::ReceiverFnc()) ) );
+          bind( &RepoCollector::collect, &rcollector, _1 ) ) );
+    // cannot do this directly in getRepositoriesInService - would invalidate iterators
+    for_(rit, rcollector.repos.begin(), rcollector.repos.end())
+      removeRepository(*rit);
   }
+
+
+  void RepoManager::removeService( const Service & service )
+  { removeService(service.alias()); }
 
 
   void RepoManager::Impl::saveService( const Service & service ) const
@@ -1396,11 +1405,10 @@ namespace zypp
 
   Service RepoManager::getService( const std::string & alias ) const
   {
-    ServiceConstIterator it = _pimpl->services.find(alias);
-    if ( it == serviceEnd() )
-      return Service::noService;
-    else
-      return *it;
+    for_ (it, serviceBegin(), serviceEnd())
+      if ( it->alias() == alias )
+        return *it;
+    return Service::noService;
   }
 
   bool RepoManager::serviceEmpty() const { return _pimpl->services.empty(); }
