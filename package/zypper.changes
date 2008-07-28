@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 28 18:58:27 CEST 2008 - jkupec@suse.cz
+
+- fixed some stupid and some clever bugs in seach (bnc #411339, bnc
+  #410008, bnc #406163, bnc #407588)
+- r10682
+
+-------------------------------------------------------------------
 Mon Jul 28 15:22:31 CEST 2008 - jkupec@suse.cz
 
 - installation by name (-n or -f) made case-insensitive
