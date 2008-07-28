@@ -1,11 +1,9 @@
-/*-----------------------------------------------------------*- c++ -*-\
-|                          ____ _   __ __ ___                          |
-|                         |__  / \ / / . \ . \                         |
-|                           / / \ V /|  _/  _/                         |
-|                          / /__ | | | | | |                           |
-|                         /_____||_| |_| |_|                           |
-|                                                                      |
-\---------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
 
 #ifndef ZYPPERSEARCH_H_
 #define ZYPPERSEARCH_H_
@@ -14,6 +12,7 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Patch.h"
+#include "zypp/TriBool.h"
 
 #include "Zypper.h"
 #include "utils/misc.h" // for kind_to_string_localized
@@ -30,12 +29,12 @@ struct FillSearchTableSolvable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
-  bool _only_not_installed;
+  zypp::TriBool _inst_notinst;
 
-  FillSearchTableSolvable( Table & table, bool only_not_installed = false )
+  FillSearchTableSolvable( Table & table, zypp::TriBool inst_notinst = zypp::indeterminate )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
-  , _only_not_installed(only_not_installed)
+  , _inst_notinst(inst_notinst)
   {
     TableHeader header;
 
@@ -102,21 +101,34 @@ struct FillSearchTableSolvable
 
         if (installed)
         {
-          if (_only_not_installed)
+          // show only not installed
+          if (_inst_notinst == false)
             continue;
           row << "i";
         }
-        else 
+        else
+        {
+          // show only installed
+          if (_inst_notinst == true)
+            continue;
           row << "v";
+        }
       }
-      else if (pi.isSatisfied()) // patches/patterns/products are installed if satisfied
+      // patches/patterns/products are installed if satisfied
+      else if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied()) 
       {
-        if (_only_not_installed)
+        // show only not installed
+        if (_inst_notinst == false)
           continue;
         row << "i";
       }
       else
+      {
+        // show only installed
+        if (_inst_notinst == true)
+          continue;
         row << "";
+      }
 
       if (_gopts.is_rug_compatible)
       {
@@ -140,7 +152,7 @@ struct FillSearchTableSolvable
       *_table << row;
     }
 
-    if (_only_not_installed)
+    if (_inst_notinst == false)
       return true;
 
     // show installed objects only if there is no counterpart in repos
@@ -187,12 +199,12 @@ struct FillSearchTableSelectable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
-  bool _only_not_installed;
+  zypp::TriBool inst_notinst;
 
-  FillSearchTableSelectable( Table & table, bool only_not_installed = false )
+  FillSearchTableSelectable( Table & table, zypp::TriBool installed_only = zypp::indeterminate )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
-  , _only_not_installed(only_not_installed)
+  , inst_notinst(installed_only)
   {
     TableHeader header;
     // translators: S for installed Status
@@ -208,14 +220,21 @@ struct FillSearchTableSelectable
   {
     TableRow row;
 
-    if (!s->installedEmpty() | s->theObj().isSatisfied())
+    if (s->kind() != zypp::ResKind::srcpackage &&
+        (!s->installedEmpty() || s->theObj().isSatisfied()))
     {
-      if (_only_not_installed)
+      // not-installed only
+      if (inst_notinst == false)
         return true;
       row << "i";
     }
     else
+    {
+      // installed only
+      if (inst_notinst == true)
+        return true;
       row << "";
+    }
     row << s->name();
     row << s->theObj()->summary();
     row << kind_to_string_localized(s->kind(), 1);
@@ -233,12 +252,12 @@ struct FillPatchesTable
   // the table used for output
   Table * _table;
   const GlobalOptions & _gopts;
-  bool _only_not_installed;
+  zypp::TriBool _inst_notinst;
   
-  FillPatchesTable( Table & table, bool only_not_installed = false )
+  FillPatchesTable( Table & table, zypp::TriBool inst_notinst = zypp::indeterminate )
   : _table( &table )
   , _gopts(Zypper::instance()->globalOpts())
-  , _only_not_installed(only_not_installed)
+  , _inst_notinst(inst_notinst)
   {
     TableHeader header;
 
@@ -257,7 +276,11 @@ struct FillPatchesTable
 
   bool operator()(const zypp::PoolItem & pi) const
   {
-    if (pi.isSatisfied() && _only_not_installed)
+    // only not installed
+    if (pi.isSatisfied() && _inst_notinst == false)
+      return true;
+    // only installed
+    else if (!pi.isSatisfied() && _inst_notinst == true)
       return true;
 
     TableRow row;
