@@ -15,6 +15,7 @@
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/ResPoolProxy.h"
+#include "zypp/pool/PoolTraits.h"
 
 using std::endl;
 
@@ -29,7 +30,8 @@ namespace zypp
     {
       bool UnifyByIdent::operator()( const Solvable & solv_r ) const
       {
-        return( solv_r && _uset->insert( solv_r.ident().id() ).second );
+        // Need to use pool::ByIdent because packages and srcpackages have the same id.
+        return( solv_r && _uset->insert( pool::ByIdent( solv_r ).get() ).second );
       }
     }
 

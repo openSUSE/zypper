@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Mon Jul 28 18:13:24 CEST 2008- ma@suse.de
+
+- Fixed SolvIterMixin::Selectable_iterator eating some solvables.
+- revision 10680
+
+-------------------------------------------------------------------
 Fri Jul 25 20:12:55 CEST 2008 - ma@suse.de
 
-- Several changes to make libzypp-bindings compile using the original 
+- Several changes to make libzypp-bindings compile using the original
   header files and no private copies. (bnc #391831)
 - revision 10668
 - version 5.3.0
@@ -22,10 +28,10 @@ Tue Jul 22 17:18:28 CEST 2008 - jkupec@suse.cz
 Thu Jul 17 09:49:40 CEST 2008 - schubi@suse.de
 
 - Allow parallel installation of packages which have been defined
-  in zypp.conf (parameter "multiversion") Fate #302050 
+  in zypp.conf (parameter "multiversion") Fate #302050
 - Additional check for broken system.
   (defined in zypp.conv: solver.checkSystemFile)
-- revision 10600 
+- revision 10600
 
 -------------------------------------------------------------------
 Wed Jul 16 14:39:50 CEST 2008 - ma@suse.de
