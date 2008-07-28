@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jul 28 14:17:37 CEST 2008 - jkupec@suse.cz
+
+- zypp-refresh: refresh only repositories with autorefresh enabled
+  (bnc #410791) r10673
+- initial implementation of repository service handling
+  (fate #304915) r10670
+
+-------------------------------------------------------------------
 Mon Jul 21 19:16:09 CEST 2008 - jkupec@suse.cz
 
 - don't mark mutliple patch solvables with the same name for
