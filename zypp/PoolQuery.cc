@@ -774,6 +774,11 @@ attremptycheckend:
 
   void PoolQuery::addRepo(const std::string &repoalias)
   {
+    if (repoalias.empty())
+    {
+      WAR << "ignoring an empty repository alias" << endl;
+      return;
+    }
     _pimpl->_repos.insert(repoalias);
     _pimpl->_flags &= ~SEARCH_ALL_REPOS;
   }
