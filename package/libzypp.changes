@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Mon Jul 28 18:13:24 CEST 2008- ma@suse.de
 
-- Fixed SolvIterMixin::Selectable_iterator eating some solvables.
+- Fixed SolvIterMixin::Selectable_iterator eating some solvables
+  (bnc #411339)
 - revision 10680
 
 -------------------------------------------------------------------
