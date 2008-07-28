@@ -122,7 +122,8 @@ int main(int argc, char **argv)
   KeyRingCallbacks keyring_callbacks;
   DigestCallbacks digest_callbacks;
 
-  list<RepoInfo> repos = manager.knownRepositories();
+  list<RepoInfo> repos;
+  repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   MIL << "Found " << repos.size() << " repos." << endl;
 
   unsigned repocount = 0, errcount = 0;
@@ -135,21 +136,22 @@ int main(int argc, char **argv)
     {
       MIL << "Skipping CD/DVD repository: "
         "alias:[" << it->alias() << "] "
-        "url:[" << url << "] ";
+        "url:[" << url << "] " << endl;
       continue;
     }
 
-    if (!it->enabled())
+    // refresh only enabled repos with enabled autorefresh (bnc #410791)
+    if (!(it->enabled() && it->autorefresh()))
     {
-      MIL << "Skipping disabled repository: "
+      MIL << "Skipping disabled/no-autorefresh repository: "
         "alias:[" << it->alias() << "] "
-        "url:[" << url << "] ";
+        "url:[" << url << "] " << endl;
       continue;
     }
 
     MIL << "Going to refresh repository: "
       "alias:[" << it->alias() << "] "
-      "url:[" << url << "] ";
+      "url:[" << url << "] " << endl;
 
     try
     {
