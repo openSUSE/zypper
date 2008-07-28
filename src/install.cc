@@ -15,84 +15,25 @@ using namespace boost;
 
 extern ZYpp::Ptr God;
 
-// copied from yast2-pkg-bindings:PkgModuleFunctions::DoProvideNameKind
-bool ProvideProcess::operator()( const PoolItem& provider )
-{
-  DBG << "Considering " << provider << endl;
-  // 1. compatible arch
-  // 2. best arch
-  // 3. best edition
-
-  // check the repository alias if it's specified
-  if (!_repo.empty() && _repo != provider->repository().info().alias())
-  {
-    DBG << format ("Skipping repository %s (requested: %s)")
-      % provider->repository().info().alias() % _repo << endl;
-    return true;
-  }
-
-  bool is_installed;
-  if (provider->isKind(ResKind::package))
-    is_installed = provider.status().isInstalled();
-  else
-    is_installed = provider.isSatisfied();
-
-  if (!is_installed)
-  {
-    // deselect the item if it's already selected,
-    // only one item should be selected
-    if (provider.status().isToBeInstalled()) {
-      DBG << "  Deselecting" << endl;
-      provider.status().resetTransact(whoWantsIt);
-    }
-
-    // regarding items which are installable only
-    if (!provider->arch().compatibleWith( _architecture )) {
-      DBG << format ("provider %s has incompatible arch '%s'")
-        % provider->name() % provider->arch().asString() << endl;
-    }
-    else if (!item) {
-      DBG << "  First match" << endl;
-      item = provider;
-    }
-    else if (item->arch().compare( provider->arch() ) < 0) {
-      DBG << "  Better arch" << endl;
-      item = provider;
-    }
-    else if (item->edition().compare( provider->edition() ) < 0) {
-      DBG << "  Better edition" << endl;
-      item = provider;
-    }
-  }
-  else {
-    // store encountered target item (installed)
-    installed_item = provider;
-    if (!item) item = provider;
-  }
-
-  return true;
-}
-
-// ----------------------------------------------------------------------------
-
-// this does only resolvables with this _name_.
-// we could also act on _provides_
-// TODO edition, arch
+// TODO edition, arch ?
 static void mark_for_install(Zypper & zypper,
                       const ResObject::Kind &kind,
                       const std::string &name,
                       const std::string & repo = "")
 {
   // name and kind match:
-  ProvideProcess installer (ZConfig::instance().systemArchitecture(), repo);
   DBG << "Iterating over [" << kind << "]" << name << endl;
-  invokeOnEach(
-      God->pool().byIdentBegin(kind, name),
-      God->pool().byIdentEnd(kind, name),
-      zypp::functor::functorRef<bool,const zypp::PoolItem&> (installer));
+
+  PoolQuery q;
+  q.addAttribute(sat::SolvAttr::name, name);
+  if (!repo.empty())
+    q.addRepo(repo);
+  q.setCaseSensitive(false);
+  q.setMatchExact();
 
   DBG << "... done" << endl;
-  if (!installer.item)
+
+  if (q.empty())
   {
     zypper.out().error(
       // translators: meaning a package %s or provider of capability %s
@@ -102,30 +43,34 @@ static void mark_for_install(Zypper & zypper,
     return;
   }
 
-  if (installer.installed_item &&
-      installer.installed_item.resolvable()->edition() == installer.item.resolvable()->edition() &&
-      installer.installed_item.resolvable()->arch() == installer.item.resolvable()->arch() &&
+  ui::Selectable::Ptr s = *q.selectableBegin();
+
+  if (s->installedObj() &&
+      s->installedObj().resolvable()->edition() == s->candidateObj().resolvable()->edition() &&
+      s->installedObj().resolvable()->arch() == s->candidateObj().resolvable()->arch() &&
       ( ! copts.count("force") ) )
   {
     // if it is broken install anyway, even if it is installed
-    if ( installer.item.isBroken() )
+    if ( s->candidateObj().isBroken() )
     {
-      installer.item.status().setTransact( true, zypp::ResStatus::USER );
+      s->candidateObj().status().setTransact( true, zypp::ResStatus::USER );
     }
-
-    zypper.out().info(boost::str(format(
-      // translators: e.g. skipping package 'zypper' (the newest version already installed)  
-      _("skipping %s '%s' (the newest version already installed)"))
-      % kind_to_string_localized(kind,1) % name));
+    else
+    {
+      zypper.out().info(boost::str(format(
+        // translators: e.g. skipping package 'zypper' (the newest version already installed)  
+        _("skipping %s '%s' (the newest version already installed)"))
+        % kind_to_string_localized(kind,1) % name));
+    }
   }
   else {
 
     //! \todo don't use setToBeInstalled for this purpose but higher level solver API
-    bool result = installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
+    bool result = s->candidateObj().status().setToBeInstalled( zypp::ResStatus::USER );
     if (!result)
     {
       // this is because the resolvable is installed and we are forcing.
-      installer.item.status().setTransact( true, zypp::ResStatus::USER );
+      s->candidateObj().status().setTransact( true, zypp::ResStatus::USER );
       if (!copts.count("force"))
       {
         zypper.out().error(boost::str(
@@ -623,3 +568,4 @@ void install_remove(Zypper & zypper,
     mark_by_capability (zypper, install_not_remove, kind, cap);
   }
 }
+
