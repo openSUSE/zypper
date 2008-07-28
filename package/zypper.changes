@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jul 28 15:22:31 CEST 2008 - jkupec@suse.cz
+
+- installation by name (-n or -f) made case-insensitive
+  (bnc #412496)
+- r10675
+
+-------------------------------------------------------------------
 Mon Jul 28 14:17:37 CEST 2008 - jkupec@suse.cz
 
 - zypp-refresh: refresh only repositories with autorefresh enabled
