@@ -1,6 +1,6 @@
 ADD_DEFINITIONS(
-  -DSRC_DIR=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\"
-  -DTESTS_SRC_DIR=\\\"${CMAKE_SOURCE_DIR}/tests\\\"
+  -DSRC_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+  -DTESTS_SRC_DIR="${CMAKE_SOURCE_DIR}/tests"
 )
 
 SET( bridge_SRCS
@@ -32,3 +32,6 @@ TARGET_LINK_LIBRARIES( repos zypp )
 
 #ADD_EXECUTABLE( yumparsertest YUMParser_test.cc )
 #TARGET_LINK_LIBRARIES( yumparsertest zypp )
+
+ADD_EXECUTABLE( play play.cc )
+TARGET_LINK_LIBRARIES( play zypp boost_signals )

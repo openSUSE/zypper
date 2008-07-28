@@ -40,6 +40,8 @@ static void init_pool()
   sat::Pool::instance().addRepoSolv(dir / "factory-nonoss.solv", i2);
   RepoInfo i3; i3.setAlias("zypp_svn");
   sat::Pool::instance().addRepoSolv(dir / "zypp_svn.solv", i3);
+  RepoInfo i5; i5.setAlias("pyton");
+  sat::Pool::instance().addRepoSolv(dir / "python.solv", i5);
   RepoInfo i4; i4.setAlias("@System");
   sat::Pool::instance().addRepoSolv(dir / "@System.solv", i4);
 }
@@ -57,8 +59,7 @@ int main (int argc, const char ** argv)
   init_pool();
 
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "zypper");
-  q.setEdition(Edition("0.10.5-5"), Rel::LE);
+  q.addAttribute(sat::SolvAttr::name, "cjson");
 
   /*
   PoolQuery q;
@@ -70,5 +71,8 @@ int main (int argc, const char ** argv)
 */
   std::for_each(q.begin(), q.end(), &result_cb);
 //  cout << q.size() << endl;
-  cout << q << endl;
+//  cout << q << endl;
+  cout << "=====" << endl;
+  for_(it, q.selectableBegin(), q.selectableEnd())
+    cout << *it << endl;
 }

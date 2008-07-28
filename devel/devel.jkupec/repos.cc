@@ -7,7 +7,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/Arch.h"
 #include "zypp/Pathname.h"
-#include "zypp/RepoManager.h";
+#include "zypp/RepoManager.h"
 
 using std::cout;
 using std::endl;
@@ -52,9 +52,8 @@ int main (int argc, const char ** argv)
 
   RepoManager rm(repo_options);
 
-  std::list<RepoInfo> repos = rm.knownRepositories();
-  for ( std::list<RepoInfo>::const_iterator it = repos.begin();
-        it != repos.end(); ++it )
+  for ( RepoManager::RepoConstIterator it = rm.repoBegin();
+        it != rm.repoEnd(); ++it )
   {
     cout << it->packagesPath() << endl;
   }
