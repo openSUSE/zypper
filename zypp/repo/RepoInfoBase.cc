@@ -11,6 +11,8 @@
  */
 #include <iostream>
 
+#include "zypp/repo/RepoVariables.h"
+
 #include "zypp/repo/RepoInfoBase.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
 
@@ -115,8 +117,8 @@ namespace zypp
       return alias();
     }
 
-    //! \todo repo::RepoVariablesStringReplacer replacer;
-    return _pimpl->name; //replacer(_pimpl->name);
+    repo::RepoVariablesStringReplacer replacer;
+    return replacer(_pimpl->name);
   }
 
   Pathname RepoInfoBase::filepath() const
