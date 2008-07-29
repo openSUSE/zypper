@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 29 10:58:06 CEST 2008 - jkupec@suse.cz
+
+- addrepo --refresh/-f added to enable autorefresh upon adding the
+  repo (bnc #406006)
+- r10686
+
+-------------------------------------------------------------------
 Mon Jul 28 18:58:27 CEST 2008 - jkupec@suse.cz
 
 - fixed some stupid and some clever bugs in seach (bnc #411339, bnc

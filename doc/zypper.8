@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.12.0" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.1" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -544,7 +544,7 @@ defined for these types:
 \fBplaindir\fR - Plaindir.
 .TP
 \fI\-d, \-\-disable\fR
-Add the repository as disabled.
+Add the repository as disabled. Repositories are added as enabled by default.
 .TP
 \fI\-c, \-\-check\fR
 Probe given URI.
@@ -560,6 +560,10 @@ Enable RPM files caching for the repository.
 .TP
 \fI\-K, \-\-no-keep-packages\fR
 Disable RPM files caching.
+.TP
+.I \-f, \-\-refresh
+Enable autorefresh of the repository. The autorefresh is disabled by default when adding
+new repositories.
 
 .TP
 .B removerepo (rr) [options] <alias|#|URI> ...
