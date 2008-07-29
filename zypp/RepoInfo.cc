@@ -16,6 +16,7 @@
 #include "zypp/media/MediaAccess.h"
 
 #include "zypp/RepoInfo.h"
+#include "zypp/repo/RepoInfoBaseImpl.h"
 
 using namespace std;
 
@@ -28,29 +29,18 @@ namespace zypp
   //	CLASS NAME : RepoInfo::Impl
   //
   /** RepoInfo implementation. */
-  struct RepoInfo::Impl
+  struct RepoInfo::Impl : public repo::RepoInfoBase::Impl
   {
-    enum FlagsDeterminedState
-    {
-      FLAG_ENABLED      = 1,
-      FLAG_AUTOREFRESH  = 2,
-      FLAG_GPGCHECK     = 4,
-      FLAG_KEEPPACKAGES = 8
-    };
-
     Impl()
-      : enabled (false),
-        autorefresh(false),
-        gpgcheck(true),
-	keeppackages(false),
-        type(repo::RepoType::NONE_e),
-        flags_determined(0)
+      : repo::RepoInfoBase::Impl()
+      , gpgcheck(indeterminate)
+      ,	keeppackages(indeterminate)
+      , type(repo::RepoType::NONE_e)
     {}
 
     ~Impl()
-    {
-      //MIL << std::endl;
-    }
+    {}
+
   public:
     static const unsigned defaultPriority = 99;
 
@@ -65,24 +55,17 @@ namespace zypp
     }
 
   public:
-    bool enabled;
-    bool autorefresh;
-    bool gpgcheck;
-    bool keeppackages;
+    TriBool gpgcheck;
+    TriBool keeppackages;
     Url gpgkey_url;
     repo::RepoType type;
     Url mirrorlist_url;
     std::set<Url> baseUrls;
     Pathname path;
-    std::string alias;
-    std::string escaped_alias;
-    std::string name;
     std::string service;
-    Pathname filepath;
     Pathname metadatapath;
     Pathname packagespath;
     DefaultIntegral<unsigned,defaultPriority> priority;
-    int flags_determined;
   public:
 
   private:
@@ -134,25 +117,9 @@ namespace zypp
     return *this;
   }
 
-
-  RepoInfo & RepoInfo::setEnabled( bool enabled )
-  {
-    _pimpl->enabled = enabled;
-    _pimpl->flags_determined |= Impl::FLAG_ENABLED;
-    return *this;
-  }
-
-  RepoInfo & RepoInfo::setAutorefresh( bool autorefresh )
-  {
-    _pimpl->autorefresh = autorefresh;
-    _pimpl->flags_determined |= Impl::FLAG_AUTOREFRESH;
-    return *this;
-  }
-
   RepoInfo & RepoInfo::setGpgCheck( bool check )
   {
     _pimpl->gpgcheck = check;
-    _pimpl->flags_determined |= Impl::FLAG_GPGCHECK;
     return *this;
   }
 
@@ -170,18 +137,6 @@ namespace zypp
 
   RepoInfo & RepoInfo::addBaseUrl( const Url &url )
   {
-    // set only if not already set externally (bnc #394728)
-    if (!(_pimpl->flags_determined & Impl::FLAG_KEEPPACKAGES) &&
-        _pimpl->baseUrls.empty())
-    {
-      if ( media::MediaAccess::downloads( url ) )
-        // don't do this via setKeepPackages, it would set the flags_determined
-        // for FLAG_KEEPPACKAGES  
-        _pimpl->keeppackages = true;
-      else
-        _pimpl->keeppackages = false;
-    }
-
     _pimpl->baseUrls.insert(url);
     return *this;
   }
@@ -199,23 +154,6 @@ namespace zypp
     return *this;
   }
 
-  RepoInfo & RepoInfo::setAlias( const std::string &alias )
-  {
-    _pimpl->alias = alias;
-    // replace slashes with underscores
-    std::string fnd="/";
-    std::string rep="_";
-    std::string escaped_alias = alias;
-    size_t pos = escaped_alias.find(fnd);
-    while(pos!=string::npos)
-    {
-      escaped_alias.replace(pos,fnd.length(),rep);
-      pos = escaped_alias.find(fnd,pos+rep.length());
-    }
-    _pimpl->escaped_alias = escaped_alias;
-    return *this;
-  }
-
   RepoInfo & RepoInfo::setType( const repo::RepoType &t )
   {
     _pimpl->type = t;
@@ -225,17 +163,6 @@ namespace zypp
   void RepoInfo::setProbedType( const repo::RepoType &t ) const
   { _pimpl->setProbedType( t ); }
 
-  RepoInfo & RepoInfo::setName( const std::string &name )
-  {
-    _pimpl->name = name;
-    return *this;
-  }
-
-  RepoInfo & RepoInfo::setFilepath( const Pathname &filepath )
-  {
-    _pimpl->filepath = filepath;
-    return *this;
-  }
 
   RepoInfo & RepoInfo::setMetadataPath( const Pathname &path )
   {
@@ -252,7 +179,6 @@ namespace zypp
   RepoInfo & RepoInfo::setKeepPackages( bool keep )
   {
     _pimpl->keeppackages = keep;
-    _pimpl->flags_determined |= Impl::FLAG_KEEPPACKAGES;
     return *this;
   }
 
@@ -262,34 +188,8 @@ namespace zypp
     return *this;
   }
 
-  bool RepoInfo::enabled() const
-  { return _pimpl->enabled; }
-
-  bool RepoInfo::autorefresh() const
-  { return _pimpl->autorefresh; }
-
   bool RepoInfo::gpgCheck() const
-  { return _pimpl->gpgcheck; }
-
-  std::string RepoInfo::alias() const
-  { return _pimpl->alias; }
-
-  std::string RepoInfo::escaped_alias() const
-  { return _pimpl->escaped_alias; }
-
-  std::string RepoInfo::name() const
-  {
-    if ( _pimpl->name.empty() )
-    {
-      return alias();
-    }
-
-    repo::RepoVariablesStringReplacer replacer;
-    return replacer(_pimpl->name);
-  }
-
-  Pathname RepoInfo::filepath() const
-  { return _pimpl->filepath; }
+  { return indeterminate(_pimpl->gpgcheck) ? true : (bool) _pimpl->gpgcheck; }
 
   Pathname RepoInfo::metadataPath() const
   { return _pimpl->metadatapath; }
@@ -347,13 +247,26 @@ namespace zypp
   bool RepoInfo::baseUrlsEmpty() const
   { return _pimpl->baseUrls.empty(); }
 
+  // false by default (if not set by setKeepPackages)
   bool RepoInfo::keepPackages() const
-  { return _pimpl->keeppackages; }
+  {
+    if (indeterminate(_pimpl->keeppackages))
+    {
+      if (_pimpl->baseUrls.empty())
+        return false;
+      else if ( media::MediaAccess::downloads( *baseUrlsBegin() ) )
+        return true;
+      else
+        return false;
+    }
+
+    return (bool) _pimpl->keeppackages;
+  }
+
 
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
-    str << "--------------------------------------" << std::endl;
-    str << "- alias       : " << alias() << std::endl;
+    RepoInfoBase::dumpOn(str);
     for ( urls_const_iterator it = baseUrlsBegin();
           it != baseUrlsEnd();
           ++it )
@@ -362,10 +275,8 @@ namespace zypp
     }
     str << "- path        : " << path() << std::endl;
     str << "- type        : " << type() << std::endl;
-    str << "- enabled     : " << enabled() << std::endl;
     str << "- priority    : " << priority() << std::endl;
 
-    str << "- autorefresh : " << autorefresh() << std::endl;
     str << "- gpgcheck    : " << gpgCheck() << std::endl;
     str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
     str << "- keeppackages: " << keepPackages() << std::endl;
@@ -376,9 +287,7 @@ namespace zypp
 
   std::ostream & RepoInfo::dumpRepoOn( std::ostream & str ) const
   {
-    // we save the original data without variable replacement
-    str << "[" << alias() << "]" << endl;
-    str << "name=" << _pimpl->name << endl;
+    RepoInfoBase::dumpAsIniOn(str);
 
     if ( ! _pimpl->baseUrls.empty() )
       str << "baseurl=";
@@ -396,17 +305,17 @@ namespace zypp
       str << "mirrorlist=" << _pimpl->mirrorlist_url << endl;
 
     str << "type=" << type().asString() << endl;
-    str << "enabled=" << (enabled() ? "1" : "0") << endl;
 
     if ( priority() != defaultPriority() )
       str << "priority=" << priority() << endl;
 
-    str << "autorefresh=" << (autorefresh() ? "1" : "0") << endl;
-    str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
+    if (!indeterminate(_pimpl->gpgcheck))
+      str << "gpgcheck=" << (gpgCheck() ? "1" : "0") << endl;
     if ( ! (gpgKeyUrl().asString().empty()) )
       str << "gpgkey=" <<gpgKeyUrl() << endl;
 
-    str << "keeppackages=" << keepPackages() << endl;
+    if (!indeterminate(_pimpl->keeppackages))
+      str << "keeppackages=" << keepPackages() << endl;
 
     if( ! service().empty() )
       str << "service=" << service() << endl;

@@ -12,17 +12,17 @@
 #ifndef ZYPP2_REPOSITORYINFO_H
 #define ZYPP2_REPOSITORYINFO_H
 
-#include <iosfwd>
 #include <list>
 #include <set>
-#include "zypp/base/PtrTypes.h"
+
 #include "zypp/base/Iterator.h"
 #include "zypp/base/Deprecated.h"
 
-#include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/repo/RepoType.h"
 #include "zypp/repo/RepoVariables.h"
+
+#include "zypp/repo/RepoInfoBase.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -62,7 +62,7 @@ namespace zypp
    * \note A RepoInfo is a hint about how
    * to create a Repository.
    */
-  class RepoInfo
+  class RepoInfo : public repo::RepoInfoBase
   {
     friend std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
 
@@ -72,20 +72,6 @@ namespace zypp
     public:
     RepoInfo();
     ~RepoInfo();
-
-    /**
-     * unique identifier for this source. If not specified
-     * It should be generated from the base url.
-     *
-     * Normally, in a .repo file the section name is used
-     * ( [somerepo] )
-     */
-    std::string alias() const;
-
-    /**
-     * Same as alias(), just escaped in a way to be a valid file name.
-     */
-    std::string escaped_alias() const;
 
     /**
      * Repository priority for solver.
@@ -165,18 +151,6 @@ namespace zypp
       */
     bool baseUrlsEmpty() const;
 
-   /**
-     * If enabled is false, then this repository must be ignored as if does
-     * not exists, except when checking for duplicate alias.
-     */
-    bool enabled() const;
-
-    /**
-     * If true, the repostory must be refreshed before creating resolvables
-     * from it
-     */
-    bool autorefresh() const;
-
     /**
      * Type of repository,
      *
@@ -184,23 +158,6 @@ namespace zypp
     repo::RepoType type() const;
 
     /**
-     * \short Repository short label
-     *
-     * Short label or description of the repository, to be used on
-     * the user interface.
-     * ie: "SUSE Linux 10.2 updates"
-     */
-    std::string name() const;
-
-    /**
-     * \short File where this repo was read from
-     *
-     * \note could be an empty pathname for repo
-     * infos created in memory.
-     */
-     Pathname filepath() const;
-
-     /**
      * \short Path where this repo metadata was read from
      *
      * \note could be an empty pathname for repo
@@ -208,12 +165,12 @@ namespace zypp
      */
      Pathname metadataPath() const;
 
-     /**
+    /**
      * \short Path where this repo packages are cached
      */
      Pathname packagesPath() const;
 
-     /**
+    /**
      * \short Whether to check or not this repository with gpg
      *
      * \note This is a just a hint to the application and can
@@ -274,24 +231,6 @@ namespace zypp
     RepoInfo & setMirrorListUrl( const Url &url );
 
     /**
-     * enable or disable the repository \see enabled
-     * \param enabled
-     */
-    RepoInfo & setEnabled( bool enabled );
-
-    /**
-     * enable or disable autorefresh \see autorefresh
-     * \param enabled
-     */
-    RepoInfo & setAutorefresh( bool autorefresh );
-
-    /**
-     * set the repository alias \see alias
-     * \param alias
-     */
-    RepoInfo & setAlias( const std::string &alias );
-
-    /**
      * set the repository type \see type
      * \param t
      */
@@ -304,22 +243,6 @@ namespace zypp
      * This is a NOOP if the current type is not \c NONE.
      */
     void setProbedType( const repo::RepoType &t ) const;
-
-    /**
-     * set the repository name \see name
-     * \param name
-     */
-    RepoInfo & setName( const std::string &name );
-
-    /**
-     * \short set the path to the .repo file
-     *
-     * The path to the .repo file where this repository
-     * was defined, or empty if nowhere.
-     *
-     * \param path File path
-     */
-    RepoInfo & setFilepath( const Pathname &filename );
 
     /**
      * \short set the path where the local metadata is stored
@@ -380,12 +303,12 @@ namespace zypp
      * Write a human-readable representation of this RepoInfo object
      * into the \a str stream. Useful for logging.
      */
-    std::ostream & dumpOn( std::ostream & str ) const;
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
 
     /**
      * Write this RepoInfo object into \a str in a <tr>.repo</tt> file format.
      */
-    std::ostream & dumpRepoOn( std::ostream & str ) const;
+    virtual std::ostream & dumpRepoOn( std::ostream & str ) const;
 
     class Impl;
   private:

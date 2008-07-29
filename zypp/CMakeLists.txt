@@ -705,6 +705,7 @@ SET( zypp_repo_SRCS
   repo/MediaInfoDownloader.cc
   repo/Downloader.cc
   repo/RepoVariables.cc
+  repo/RepoInfoBase.cc
 )
 
 SET( zypp_repo_HEADERS
@@ -720,6 +721,8 @@ SET( zypp_repo_HEADERS
   repo/MediaInfoDownloader.h
   repo/Downloader.h
   repo/RepoVariables.h
+  repo/RepoInfoBase.h
+  repo/RepoInfoBaseImpl.h
 )
 
 INSTALL( FILES

@@ -107,11 +107,13 @@ namespace zypp
       if ( alias_r == systemRepoAlias() )
       {
         // autoprovide (dummy) RepoInfo
-        ret.setInfo( RepoInfo()
-                     .setAlias( alias_r )
-                     .setName( alias_r )
-                     .setAutorefresh( true )
-                     .setEnabled( true ) );
+        RepoInfo info;
+        info
+          .setAlias( alias_r )
+          .setName( alias_r )
+          .setAutorefresh( true )
+          .setEnabled( true );
+        ret.setInfo( info );
       }
       return ret;
     }
