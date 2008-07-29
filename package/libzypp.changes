@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 29 12:59:46 CEST 2008 - jkupec@suse.cz
+
+- fixed yum repos to work with non '/' base url post fix
+  (bnc #341617)
+- revision 10662
+
+-------------------------------------------------------------------
 Mon Jul 28 18:13:24 CEST 2008- ma@suse.de
 
 - Fixed SolvIterMixin::Selectable_iterator eating some solvables
