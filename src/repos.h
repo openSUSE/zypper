@@ -8,8 +8,7 @@
 #ifndef ZMART_SOURCES_H
 #define ZMART_SOURCES_H
 
-//#include <boost/logic/tribool.hpp>
-
+#include "zypp/TriBool.h"
 #include "zypp/Url.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/Service.h"
@@ -82,9 +81,9 @@ void add_repo_by_url(Zypper & zypper,
                      const zypp::Url & url,
                      const std::string & alias,
                      const std::string & type = "",
-                     boost::tribool enabled = boost::indeterminate,
-                     boost::tribool autorefresh = boost::indeterminate,
-                     boost::tribool keepPackages = boost::indeterminate);
+                     zypp::TriBool enabled = boost::indeterminate,
+                     zypp::TriBool autorefresh = boost::indeterminate,
+                     zypp::TriBool keepPackages = boost::indeterminate);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -97,9 +96,9 @@ void add_repo_by_url(Zypper & zypper,
  */
 void add_repo_from_file(Zypper & zypper,
                         const std::string & repo_file_url,
-                        boost::tribool enabled = boost::indeterminate,
-                        boost::tribool autorefresh = boost::indeterminate,
-                        boost::tribool keepPackages = boost::indeterminate);
+                        zypp::TriBool enabled = boost::indeterminate,
+                        zypp::TriBool autorefresh = boost::indeterminate,
+                        zypp::TriBool keepPackages = boost::indeterminate);
 
 
 /**

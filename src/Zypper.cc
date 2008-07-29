@@ -1080,6 +1080,7 @@ void Zypper::processCommandOptions()
       {"name", required_argument, 0, 'n'},
       {"keep-packages", no_argument, 0, 'k'},
       {"no-keep-packages", no_argument, 0, 'K'},
+      {"refresh", no_argument, 0, 'f'},
       {0, 0, 0, 0}
     };
     specific_options = service_add_options;
@@ -1092,7 +1093,7 @@ void Zypper::processCommandOptions()
       " or can be read from specified .repo file (even remote).\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <FILE.repo>  Read the URI and alias from a file (even remote).\n"
+      "-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
       "-t, --type <TYPE>       Type of repository (%s).\n"
       "-d, --disable           Add the repository as disabled.\n"
       "-c, --check             Probe URI.\n"
@@ -1100,6 +1101,7 @@ void Zypper::processCommandOptions()
       "-n, --name              Specify descriptive name for the repository.\n"
       "-k, --keep-packages     Enable RPM files caching.\n"
       "-K, --no-keep-packages  Disable RPM files caching.\n"
+      "-f, --refresh           Enable autorefresh of the repository.\n"
     ), "yast2, rpm-md, plaindir");
     break;
   }
@@ -2233,12 +2235,16 @@ void Zypper::doCommand()
     }
 
     // indeterminate indicates the user has not specified the values
-    tribool enabled(indeterminate);
 
+    TriBool enabled = indeterminate;
     if (copts.count("disable") || copts.count("disabled"))
       enabled = false;
 
-    tribool keep_pkgs;
+    TriBool autorefresh = indeterminate;
+    if (copts.count("refresh"))
+      autorefresh = true;
+
+    TriBool keep_pkgs;
     if (copts.count("keep-packages"))
       keep_pkgs = true;
     else if (copts.count("no-keep-packages"))
@@ -2249,7 +2255,7 @@ void Zypper::doCommand()
       // add repository specified in .repo file
       if (copts.count("repo"))
       {
-        add_repo_from_file(*this,copts["repo"].front(), enabled, false, keep_pkgs);
+        add_repo_from_file(*this,copts["repo"].front(), enabled, autorefresh, keep_pkgs);
         return;
       }
 
@@ -2296,7 +2302,7 @@ void Zypper::doCommand()
         }
         else
         {
-          add_repo_from_file(*this,_arguments[0], enabled, false, keep_pkgs);
+          add_repo_from_file(*this,_arguments[0], enabled, autorefresh, keep_pkgs);
           break;
         }
       case 2:
@@ -2307,8 +2313,6 @@ void Zypper::doCommand()
           return;
         }
 
-        // by default, enable the repo and set autorefresh to false
-        if (indeterminate(enabled)) enabled = true;
         if (copts.count("check"))
         {
           if (!copts.count("no-check"))
@@ -2328,7 +2332,7 @@ void Zypper::doCommand()
         init_target(*this);
 
         add_repo_by_url(
-	    *this, url, _arguments[1]/*alias*/, type, enabled, false, keep_pkgs);
+	    *this, url, _arguments[1]/*alias*/, type, enabled, autorefresh, keep_pkgs);
         return;
       }
     }

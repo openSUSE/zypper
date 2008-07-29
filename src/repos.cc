@@ -1314,7 +1314,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
 void add_repo_by_url( Zypper & zypper,
                      const zypp::Url & url, const string & alias,
                      const string & type,
-                     tribool enabled, tribool autorefresh, tribool keepPackages)
+                     TriBool enabled, TriBool autorefresh, TriBool keepPackages)
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url
       << ")" << endl;
@@ -1330,12 +1330,16 @@ void add_repo_by_url( Zypper & zypper,
     repo.setName(it->second.front());
   repo.addBaseUrl(url);
 
-  if ( !indeterminate(enabled) )
-    repo.setEnabled((enabled == true));
+  // enable the repo by default
+  if ( indeterminate(enabled) )
+    enabled = true;
+  repo.setEnabled((enabled == true));
+
+  // disable autorefresh by default
   if ( indeterminate(autorefresh) )
-    repo.setAutorefresh(false);
-  else
-    repo.setAutorefresh((autorefresh == true));
+    autorefresh = false;
+  repo.setAutorefresh((autorefresh == true));
+
   if ( !indeterminate(keepPackages) )
     repo.setKeepPackages(keepPackages);
 
@@ -1344,12 +1348,10 @@ void add_repo_by_url( Zypper & zypper,
 
 // ----------------------------------------------------------------------------
 
-//! \todo handle zypp exceptions
 void add_repo_from_file( Zypper & zypper,
-                         const std::string & repo_file_url, tribool enabled,
-                         tribool autorefresh, tribool keepPackages)
+                         const std::string & repo_file_url, TriBool enabled,
+                         TriBool autorefresh, TriBool keepPackages)
 {
-  //! \todo handle local .repo files, validate the URI
   Url url = make_url(repo_file_url);
   if (!url.isValid())
   {
@@ -1411,14 +1413,20 @@ void add_repo_from_file( Zypper & zypper,
       continue;
     }
 
-    MIL << "enabled: " << enabled << " autorefresh: " << autorefresh << endl;
-    if ( !indeterminate(enabled) )
-      repo.setEnabled((enabled == true));
-    if ( !indeterminate(autorefresh) )
-      repo.setAutorefresh((autorefresh == false));
+    MIL << "requested: enabled: " << enabled << " autorefresh: " << autorefresh << endl;
+    // enable by default
+    if ( indeterminate(enabled) )
+      enabled = true;
+    repo.setEnabled((enabled == true));
+    // disable autorefresh by default
+    if ( indeterminate(autorefresh) )
+      autorefresh = false;
+    repo.setAutorefresh((autorefresh == true));
+
     if ( !indeterminate(keepPackages) )
       repo.setKeepPackages(keepPackages);
-    MIL << "enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
+
+    MIL << "to-be-added: enabled: " << repo.enabled() << " autorefresh: " << repo.autorefresh() << endl;
 
     add_repo(zypper, repo);
   }
