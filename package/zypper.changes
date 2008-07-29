@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 29 15:10:22 CEST 2008 - jkupec@suse.cz
+
+- say Retrieving instead of Downloading when getting files
+  (bnc #412851)
+- r10689
+
+-------------------------------------------------------------------
 Tue Jul 29 10:58:06 CEST 2008 - jkupec@suse.cz
 
 - addrepo --refresh/-f added to enable autorefresh upon adding the
