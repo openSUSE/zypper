@@ -162,9 +162,9 @@ void OutNormal::dwnldProgressStart(const zypp::Url & uri)
 
   static AliveCursor cursor;
   if (isatty(STDOUT_FILENO))
-    cout << CLEARLN << ++cursor << " " << _("Downloading:") << " ";
+    cout << CLEARLN << ++cursor << " " << _("Retrieving:") << " ";
   else
-    cout << _("Downloading:") << " ";
+    cout << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
@@ -188,7 +188,7 @@ void OutNormal::dwnldProgress(const zypp::Url & uri,
     return;
   }
 
-  cout << CLEARLN << _("Downloading:") << " ";
+  cout << CLEARLN << _("Retrieving:") << " ";
   if (verbosity() == DEBUG)
     cout << uri; //! \todo shorten to fit the width of the terminal
   else
@@ -214,7 +214,7 @@ void OutNormal::dwnldProgressEnd(const zypp::Url & uri, long rate, bool error)
 
   if (isatty(STDOUT_FILENO))
   {
-    cout << CLEARLN << _("Downloading:") << " ";
+    cout << CLEARLN << _("Retrieving:") << " ";
     if (verbosity() == DEBUG)
       cout << uri; //! \todo shorten to fit the width of the terminal
     else

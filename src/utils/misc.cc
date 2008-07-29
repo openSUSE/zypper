@@ -236,7 +236,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
   catch (const Exception & e)
   {
     Zypper::instance()->out().error(e,
-        _("Problem downloading the specified RPM file") + string(":"),
+        _("Problem retrieving the specified RPM file") + string(":"),
         _("Please check whether the file is accessible."));
   }
 

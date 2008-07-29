@@ -122,7 +122,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
     if (do_refresh)
     {
       plabel = str::form(
-          _("Downloading repository '%s' metadata"), repo.name().c_str());
+          _("Retrieving repository '%s' metadata"), repo.name().c_str());
       zypper.out().progressStart("raw-refresh", plabel, true);
 
       manager.refreshMetadata(repo,
@@ -145,7 +145,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
       plabel.clear();
     }
     zypper.out().error(e,
-        boost::str(format(_("Problem downloading files from '%s'.")) % repo.name()),
+        boost::str(format(_("Problem retrieving files from '%s'.")) % repo.name()),
         _("Please see the above error message for a hint."));
 
     return true; // error
@@ -203,7 +203,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
       plabel.clear();
     }
     zypper.out().error(e,
-        boost::str(format(_("Error downloading metadata for '%s':")) % repo.name()));
+        boost::str(format(_("Error retrieving metadata for '%s':")) % repo.name()));
     // log untranslated message
     ERR << format("Error reading repository '%s':") % repo.name() << endl;
 
@@ -2027,7 +2027,7 @@ void refresh_services(Zypper & zypper)
       ZYPP_CAUGHT(e);
       zypper.out().error(e,
         str::form(
-          _("Problem downloading the repository index file for service '%s':"),
+          _("Problem retrieving the repository index file for service '%s':"),
           s.name().c_str()),
         _("Check if the URI is valid and accessible."));
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);

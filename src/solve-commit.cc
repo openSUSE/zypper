@@ -1061,7 +1061,7 @@ void solve_and_commit (Zypper & zypper)
           catch ( const media::MediaException & e ) {
             ZYPP_CAUGHT(e);
             zypper.out().error(e,
-                _("Problem downloading the package file from the repository:"),
+                _("Problem retrieving the package file from the repository:"),
                 _("Please see the above error message for a hint."));
             zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
             return;
@@ -1095,7 +1095,7 @@ void solve_and_commit (Zypper & zypper)
                   e.info().alias() % "zypper refresh" );
             }
             zypper.out().error(e,
-                _("Problem downloading the package file from the repository:"),
+                _("Problem retrieving the package file from the repository:"),
                 hint);
             zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
             return;

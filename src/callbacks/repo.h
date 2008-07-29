@@ -46,7 +46,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     _delta = filename;
     _delta_size = downloadsize;
     std::ostringstream s;
-    s << _("Downloading delta") << ": "
+    s << _("Retrieving delta") << ": "
         << _delta << ", " << _delta_size;
     Zypper::instance()->out().info(s.str());
   }
@@ -55,8 +55,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     // seems this is never called, the progress is reported by the media backend anyway
     INT << "not impelmented" << std::endl;
-    // TranslatorExplanation This text is a progress display label e.g. "Downloading delta [42%]"
-    //display_step( "apply-delta", ~("Downloading delta") /*+ _delta.asString()*/, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Retrieving delta [42%]"
+    //display_step( "apply-delta", ~("Retrieving delta") /*+ _delta.asString()*/, value );
     return true;
   }
 
@@ -112,7 +112,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     _patch = filename.basename();
     _patch_size = downloadsize;
     std::ostringstream s;
-    s << _("Downloading patch rpm") << ": " << _patch << ", " << _patch_size;
+    s << _("Retrieving patch rpm") << ": " << _patch << ", " << _patch_size;
     Zypper::instance()->out().info(s.str());
   }
 
@@ -149,7 +149,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Zypper & zypper = *Zypper::instance();
 
     std::ostringstream s;
-    s << boost::format(_("Downloading %s %s-%s.%s"))
+    s << boost::format(_("Retrieving %s %s-%s.%s"))
         % kind_to_string_localized(_resolvable_ptr->kind(), 1)
         % _resolvable_ptr->name()
         % _resolvable_ptr->edition() % _resolvable_ptr->arch();
@@ -174,8 +174,8 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
   {
     // seems this is never called, the progress is reported by the media backend anyway
     INT << "not impelmented" << std::endl;
-    // TranslatorExplanation This text is a progress display label e.g. "Downloading [42%]"
-//    display_step( "download-resolvable", ~("Downloading") /* + resolvable_ptr->name() */, value );
+    // TranslatorExplanation This text is a progress display label e.g. "Retrieving [42%]"
+//    display_step( "download-resolvable", ~("Retrieving") /* + resolvable_ptr->name() */, value );
     return true;
   }
 
