@@ -22,7 +22,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Service;
+  class ServiceInfo;
   ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
@@ -30,7 +30,7 @@ namespace zypp
     /**
      * \short Read service data from a .service file
      *
-     * After each service is read, a \ref Service is prepared and \ref _callback
+     * After each service is read, a \ref ServiceInfo is prepared and \ref _callback
      * is called with the object passed in.
      *
      * The \ref _callback is provided on construction.
@@ -47,12 +47,12 @@ namespace zypp
       
      /**
       * Callback definition.
-      * First parameter is a \ref Service object with the resource.
+      * First parameter is a \ref ServiceInfo object with the resource.
       *
       * Return false from the callback to get a \ref AbortRequestException
       * to be thrown and the processing to be cancelled.
       */
-      typedef function< bool( const Service & )> ProcessService;
+      typedef function< bool( const ServiceInfo & )> ProcessService;
       
       /** Implementation  */
       class Impl;

@@ -40,6 +40,7 @@ namespace zypp
 
     public:
       RepoInfoBase();
+      RepoInfoBase(const std::string & alias);
       ~RepoInfoBase();
 
       /**

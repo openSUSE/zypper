@@ -25,11 +25,32 @@ namespace zypp
   namespace repo
   { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //    CLASS NAME : RepoInfoBase::Impl
+  //
+  ///////////////////////////////////////////////////////////////////
 
   /** \relates RepoInfo::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const RepoInfoBase::Impl & obj )
   {
     return str << "RepoInfo::Impl";
+  }
+
+  void RepoInfoBase::Impl::setAlias(const string & alias_)
+  {
+    this->alias = alias_;
+    // replace slashes with underscores
+    std::string fnd="/";
+    std::string rep="_";
+    std::string escaped_alias = alias_;
+    size_t pos = escaped_alias.find(fnd);
+    while (pos != string::npos)
+    {
+      escaped_alias.replace(pos, fnd.length(), rep);
+      pos = escaped_alias.find(fnd, pos+rep.length());
+    }
+    this->escaped_alias = escaped_alias;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -40,11 +61,20 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //    METHOD NAME : RepoInfo::RepoInfo
+  //    METHOD NAME : RepoInfoBase::RepoInfoBase
   //    METHOD TYPE : Ctor
   //
   RepoInfoBase::RepoInfoBase()
-  : _pimpl( new Impl() )
+    : _pimpl( new Impl() )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //    METHOD NAME : RepoInfoBase::RepoInfoBase
+  //    METHOD TYPE : Ctor
+  //
+  RepoInfoBase::RepoInfoBase(const string & alias)
+    : _pimpl( new Impl(alias) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -69,18 +99,7 @@ namespace zypp
 
   RepoInfoBase & RepoInfoBase::setAlias( const std::string &alias )
   {
-    _pimpl->alias = alias;
-    // replace slashes with underscores
-    std::string fnd="/";
-    std::string rep="_";
-    std::string escaped_alias = alias;
-    size_t pos = escaped_alias.find(fnd);
-    while(pos!=string::npos)
-    {
-      escaped_alias.replace(pos,fnd.length(),rep);
-      pos = escaped_alias.find(fnd,pos+rep.length());
-    }
-    _pimpl->escaped_alias = escaped_alias;
+    _pimpl->setAlias(alias);
     return *this;
   }
 
@@ -151,6 +170,7 @@ namespace zypp
   {
     return obj.dumpOn(str);
   }
+  ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
   } // namespace repo

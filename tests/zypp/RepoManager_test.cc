@@ -10,7 +10,7 @@
 #include "zypp/PublicKey.h"
 #include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
-#include "zypp/Service.h"
+#include "zypp/ServiceInfo.h"
 
 #include "zypp/RepoManager.h"
 
@@ -40,7 +40,8 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   RepoManager manager(opts);
 
-  list<RepoInfo> repos = manager.knownRepositories();
+  list<RepoInfo> repos;
+  repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
 
   // now add a .repo file with 2 repositories in it
@@ -54,7 +55,8 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK( PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
 
   // now there should be 6 repos
-  repos = manager.knownRepositories();
+  repos.clear();
+  repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 6);
 
   RepoInfo office_dup;
@@ -66,7 +68,8 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   office.setAlias("office");
   manager.removeRepository(office);
   // now there should be 5 repos
-  repos = manager.knownRepositories();
+  repos.clear();
+  repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 5);
   // the file still contained one repo, so it should still exists
   BOOST_CHECK( PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
@@ -80,15 +83,17 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
   BOOST_CHECK( ! PathInfo(opts.knownReposPath + "/proprietary.repo_1").isExist() );
 
   //test service
+
   Url urlS;
   urlS.setPathName(DATADIR.asString());
   urlS.setScheme("dir");
-  Service service("test",urlS);
+
+  ServiceInfo service("test", urlS);
   service.setEnabled(true);
 
   manager.addService(service);
   manager.refreshServices();
-  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 7); //+3 from repoindex
+  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 7); // +3 from repoindex
 
   //simulate change of repoindex.xml
   urlS.setPathName((DATADIR+"second").asString());
@@ -98,12 +103,12 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   manager.modifyService(service.alias(), service);
   manager.refreshServices();
-  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 6); //-1 from new repoindex
+  BOOST_CHECK_EQUAL(manager.repoSize(), (unsigned) 6); // -1 from new repoindex
 
   std::list<RepoInfo> infos;
   manager.getRepositoriesInService("test",
     insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
-  BOOST_CHECK_EQUAL(infos.size(), 2); //2 from new repoindex
+  BOOST_CHECK_EQUAL(infos.size(), 2); // 2 from new repoindex
 
 
   // let test cache creation

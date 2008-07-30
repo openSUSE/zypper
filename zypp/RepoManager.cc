@@ -24,7 +24,7 @@
 #include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
-#include "zypp/Service.h"
+#include "zypp/ServiceInfo.h"
 
 #include "zypp/repo/RepoException.h"
 #include "zypp/RepoManager.h"
@@ -261,19 +261,19 @@ namespace zypp
       return _nullimpl;
     }
 
-    void saveService( const Service& service ) const;
+    void saveService( const ServiceInfo & service ) const;
 
     Pathname generateNonExistingName( const Pathname &dir,
                                       const std::string &basefilename ) const;
 
-    std::string generateFilename( const RepoInfo &info ) const;
-    std::string generateFilename( const Service &info ) const;
+    std::string generateFilename( const RepoInfo & info ) const;
+    std::string generateFilename( const ServiceInfo & info ) const;
 
     struct ServiceCollector
     {
       ServiceCollector(ServiceSet & services_) : services(services_) {}
 
-      bool collect(Service service) { services.insert(service); return true; }
+      bool collect(ServiceInfo service) { services.insert(service); return true; }
 
     private:
       ServiceSet & services;
@@ -1017,7 +1017,7 @@ namespace zypp
     return filename;
   }
 
-  std::string RepoManager::Impl::generateFilename( const Service &info ) const
+  std::string RepoManager::Impl::generateFilename( const ServiceInfo & info ) const
   {
     std::string filename = info.alias();
     // replace slashes with underscores
@@ -1309,17 +1309,19 @@ namespace zypp
 
   void RepoManager::addService( const std::string & alias, const Url & url )
   {
-    addService( Service(alias, url) );
+    addService( ServiceInfo(alias, url) );
   }
 
-  void RepoManager::addService( const Service & service )
+  void RepoManager::addService( const ServiceInfo & service )
   {
-    //check if service isn't already exist
-    if( _pimpl->services.find(service)!= _pimpl->services.end() )
+    // check if service already exists
+    if( _pimpl->services.find(service) != _pimpl->services.end() )
       return; //FIXME ZYPP_THROW(RepoAlreadyExistsException(service.name()));
 
     //this is need to save location to correct service
-    const Service& savedService = *(_pimpl->services.insert( service )).first;
+    const ServiceInfo & savedService = *(_pimpl->services.insert( service )).first;
+
+    cout << "adde service " << savedService.alias() << endl;
 
     _pimpl->saveService( savedService );
   }
@@ -1328,9 +1330,9 @@ namespace zypp
   {
     MIL << "Going to delete repo " << alias << endl;
 
-    const Service & service = getService( alias );
+    const ServiceInfo & service = getService( alias );
 
-    Pathname location = service.location();
+    Pathname location = service.filepath();
     if( location.empty() )
     {
       ZYPP_THROW(RepoException("Can't figure where the service is stored"));
@@ -1362,7 +1364,7 @@ namespace zypp
       for_(it, tmpSet.begin(), tmpSet.end())
       {
         if( it->alias() != alias )
-          it->dumpServiceOn(file);
+          it->dumpAsIniOn(file);
       }
 
       MIL << alias << " sucessfully deleted from file " << location <<  endl;
@@ -1379,11 +1381,11 @@ namespace zypp
   }
 
 
-  void RepoManager::removeService( const Service & service )
+  void RepoManager::removeService( const ServiceInfo & service )
   { removeService(service.alias()); }
 
 
-  void RepoManager::Impl::saveService( const Service & service ) const
+  void RepoManager::Impl::saveService( const ServiceInfo & service ) const
   {
     filesystem::assert_dir( options.knownServicesPath );
 
@@ -1397,18 +1399,18 @@ namespace zypp
       ZYPP_THROW (Exception( "Can't open " + servfile.asString() ) );
     }
 
-    service.dumpServiceOn( file );
+    service.dumpAsIniOn( file );
 
-    const_cast<Service&>(service).setLocation( servfile );
+    const_cast<ServiceInfo&>(service).setFilepath( servfile );
     MIL << "done" << endl;
   }
 
-  Service RepoManager::getService( const std::string & alias ) const
+  ServiceInfo RepoManager::getService( const std::string & alias ) const
   {
     for_ (it, serviceBegin(), serviceEnd())
       if ( it->alias() == alias )
         return *it;
-    return Service::noService;
+    return ServiceInfo::noService;
   }
 
   bool RepoManager::serviceEmpty() const { return _pimpl->services.empty(); }
@@ -1431,7 +1433,7 @@ namespace zypp
   void RepoManager::refreshServices()
   {
     //cannot user for_, because it uses const version
-    for (std::set<Service>::iterator it = _pimpl->services.begin();
+    for (std::set<ServiceInfo>::iterator it = _pimpl->services.begin();
       it != _pimpl->services.end(); ++it)
     {
       if ( !it->enabled() )
@@ -1442,7 +1444,7 @@ namespace zypp
     }
   }
 
-  void RepoManager::refreshService( const Service & service )
+  void RepoManager::refreshService( const ServiceInfo & service )
   {
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
     
@@ -1470,13 +1472,11 @@ namespace zypp
       it->setService( service.alias() );
     }
 
-    // compare old and new repositories (hope not to much, if it change
+    // compare old and new repositories (hope not too much, if it change
     // then construct set and use set operation on it)
-
     std::list<RepoInfo> oldRepos;
     getRepositoriesInService(service.alias(),
-        insert_iterator<std::list<RepoInfo> >
-        (oldRepos,oldRepos.begin()));
+        insert_iterator<std::list<RepoInfo> > (oldRepos, oldRepos.begin()));
 
     // find old to remove
     for_( it, oldRepos.begin(), oldRepos.end() )
@@ -1511,13 +1511,13 @@ namespace zypp
     }
   }
 
-  void RepoManager::modifyService(const std::string & oldAlias, const Service & service)
+  void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & service)
   {
     MIL << "Going to modify service " << oldAlias << endl;
 
-    const Service& oldService = getService(oldAlias);
+    const ServiceInfo & oldService = getService(oldAlias);
 
-    Pathname location = oldService.location();
+    Pathname location = oldService.filepath();
     if( location.empty() )
     {
       ZYPP_THROW(RepoException(
@@ -1537,10 +1537,10 @@ namespace zypp
     for_(it, tmpSet.begin(), tmpSet.end())
     {
       if( *it != oldAlias )
-        it->dumpServiceOn(file);
+        it->dumpAsIniOn(file);
     }
 
-    service.dumpServiceOn(file);
+    service.dumpAsIniOn(file);
 
     file.close();
 

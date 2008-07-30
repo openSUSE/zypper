@@ -17,7 +17,7 @@
 
 #include "zypp/parser/IniDict.h"
 #include "zypp/parser/ServiceFileReader.h"
-#include "zypp/Service.h"
+#include "zypp/ServiceInfo.h"
 
 using std::endl;
 using zypp::parser::IniDict;
@@ -36,8 +36,8 @@ namespace zypp
           const ServiceFileReader::ProcessService & callback );
     };
 
-    void ServiceFileReader::Impl::parseServices( const Pathname &file,
-                                  const ServiceFileReader::ProcessService &callback/*,
+    void ServiceFileReader::Impl::parseServices( const Pathname & file,
+                                  const ServiceFileReader::ProcessService & callback/*,
                                   const ProgressData::ReceiverFnc &progress*/ )
     {
       InputStream is(file);
@@ -53,7 +53,7 @@ namespace zypp
       {
         MIL << (*its) << endl;
 
-        Service service(*its);
+        ServiceInfo service(*its);
 
         for ( IniDict::entry_const_iterator it = dict.entriesBegin(*its);
               it != dict.entriesEnd(*its);
@@ -66,12 +66,14 @@ namespace zypp
             service.setUrl( Url (it->second) );
           else if ( it->first == "enabled" )
             service.setEnabled( str::strToTrue( it->second ) );
+          else if ( it->first == "autorefresh" )
+            service.setAutorefresh( str::strToTrue( it->second ) );
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }
 
-        MIL << "Linking Service with file " << file << endl;
-        service.setLocation(file);
+        MIL << "Linking ServiceInfo with file " << file << endl;
+        service.setFilepath(file);
 
         // add it to the list.
         if ( !callback(service) )

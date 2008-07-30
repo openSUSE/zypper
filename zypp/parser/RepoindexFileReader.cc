@@ -100,9 +100,9 @@ namespace zypp
         info.setAlias(reader_r->getAttribute("alias").asString());
         info.setType(repo::RepoType::RPMMD_e); //TODO hardwired rpmmd???
         XmlString s = reader_r->getAttribute("name");
-        if (s.get()) //name setted so also set it
+        if (s.get()) // name available so store it
           info.setName(s.asString());
-        //ignore rest
+        // ignore the rest
         _callback(info);
         return true;
       }

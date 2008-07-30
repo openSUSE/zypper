@@ -29,7 +29,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  class Service; //predef
+  class ServiceInfo; //predef
 
    /**
     * Parses \a repo_file and returns a list of \ref RepoInfo objects
@@ -98,7 +98,7 @@ namespace zypp
     class Impl;
 
     /** service typedefs */
-    typedef std::set<Service> ServiceSet;
+    typedef std::set<ServiceInfo> ServiceSet;
     typedef ServiceSet::const_iterator ServiceConstIterator;
     typedef ServiceSet::size_type ServiceSizeType;
 
@@ -462,24 +462,24 @@ namespace zypp
      *
      * \throws FIXME RepoAlreadyExistException and as reponame is service name
      */
-    void addService( const Service & service );
+    void addService( const ServiceInfo & service );
 
     /**
      * Removes service specified by its name
      *
      * \param alias unique indientifier of the service to remove
      *
-     * \throws RepoException if service is not found or file with Service cannot be deleted
+     * \throws RepoException if service is not found or file with ServiceInfo cannot be deleted
      * \throws Exception if file contain more services and rewrite file failed
      */
     void removeService( const std::string & alias );
 
-    void removeService( const Service & service );
+    void removeService( const ServiceInfo & service );
 
     /**
      * Gets true if no service is in RepoManager (so no one in specified location)
      *
-     * \return true if any Service is in RepoManager
+     * \return true if any ServiceInfo is in RepoManager
      */
     bool serviceEmpty() const;
 
@@ -492,7 +492,7 @@ namespace zypp
 
     /**
      * Iterator to first service in internal storage.
-     * \note Iterator is immutable, so you cannot change pointed Service
+     * \note Iterator is immutable, so you cannot change pointed ServiceInfo
      * \return Iterator to first service
      */
     ServiceConstIterator serviceBegin() const;
@@ -504,17 +504,17 @@ namespace zypp
     ServiceConstIterator serviceEnd() const;
 
     /**
-     * Finds Service by alias or return noService
+     * Finds ServiceInfo by alias or return noService
      *
      * \param alias unique identifier of service
-     * \return information about Service
+     * \return information about service
      */
-    Service getService( const std::string & alias ) const;
+    ServiceInfo getService( const std::string & alias ) const;
 
     /**
      * Refreshes all enabled services.
      * 
-     * \see refreshService(Service)
+     * \see refreshService(ServiceInfo)
      */
     void refreshServices();
 
@@ -524,7 +524,7 @@ namespace zypp
      * \param name service structure
      * \throws MediaException If there's a problem downloading the repo index file.
      */
-    void refreshService( const Service & service );
+    void refreshService( const ServiceInfo & service );
 
     /**
      * Modifies service file (rewrites it with new values) and underlying
@@ -532,17 +532,17 @@ namespace zypp
      * 
      * Modifications of a service can lead to rewrite of all .repo files of
      * contained repositories. Particularily, disabling a service (changing
-     * Service::enabled() from true to false) will disable all contained
+     * ServiceInfo::enabled() from true to false) will disable all contained
      * repositories. Renaming of a service will modify the "service" key
      * of all contained repositories.
      *
      * \param oldAlias Old alias of the service
-     * \param service Service object containing new data
+     * \param service ServiceInfo object containing new data
      *
      * \throws RepoException if sservice with oldAlias is not known
      * \throws Exception if have problems with files
      */
-    void modifyService(const std::string & oldAlias, const Service & service);
+    void modifyService(const std::string & oldAlias, const ServiceInfo & service);
 
   private:
     /**

@@ -58,7 +58,7 @@ SET( zypp_SRCS
   ResPool.cc
   ResPoolProxy.cc
   ResStatus.cc
-  Service.cc
+  ServiceInfo.cc
   Signature.cc
   SrcPackage.cc
   SysContent.cc
@@ -150,7 +150,7 @@ SET( zypp_HEADERS
   ResPoolProxy.h
   ResStatus.h
   ResTraits.h
-  Service.h
+  ServiceInfo.h
   Signature.h
   SrcPackage.h
   SysContent.h

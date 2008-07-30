@@ -35,6 +35,11 @@ namespace zypp
       , autorefresh (indeterminate)
     {}
 
+    Impl(const std::string & alias_)
+      : enabled(indeterminate)
+      , autorefresh(indeterminate)
+    { setAlias(alias_); }
+
     ~Impl()
     {}
 
@@ -46,6 +51,8 @@ namespace zypp
     std::string name;
     Pathname filepath;
   public:
+
+    void setAlias(const std::string & alias_);
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
