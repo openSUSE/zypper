@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul 30 19:12:00 CEST 2008 ma@suse.de
+
+- /var/lib/zypp and /var/cache/zypp should be owned by libzypp 
+  (bnc #412094)
+- revision 10702
+
+-------------------------------------------------------------------
 Wed Jul 30 12:47:48 CEST 2008 - jkupec@suse.cz
 
 - Service renamed to ServiceInfo

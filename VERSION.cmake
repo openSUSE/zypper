@@ -42,9 +42,27 @@
 #
 # 6) If any interfaces have been removed since the last public release, then
 #    set COMPATMINOR to MINOR. (binary incompatible change)
-#
+# ==================================================
 
+#=======
+# - Update version according to your changes,
+#   but based on 'LAST RELEASED:' below. I.e
+#   there's no need to increase LIBZYPP_MINOR
+#   if it already differs from 'LAST RELEASED:'.
+#
+# - MOST IMPORTANT:
+#   Before you submitt to autobuild, rmember the
+#   new version in 'LAST RELEASED:', and add a
+#   note in the changes file.
+#
+# - Consider calling ./mkChangelog to edit the
+#   changes file. See './mkChangelog -h' for help.
+#
 SET(LIBZYPP_MAJOR "5")
-SET(LIBZYPP_MINOR "4")
 SET(LIBZYPP_COMPATMINOR "4")
+SET(LIBZYPP_MINOR "4")
 SET(LIBZYPP_PATCH "0")
+#
+# LAST RELEASED: 5.3.0 (2)
+# (The number in parenthesis is LIBZYPP_COMPATMINOR)
+#=======

@@ -73,7 +73,7 @@ struct X : public trackable
   X() {_s=++s;}
   X( const X & ) {_s=++s;}
   X& operator=( const X & ) { return *this; }
-  ~X() {_s=-_s;}
+  virtual ~X() {_s=-_s;}
   static int s;
   int _s;
 
@@ -102,7 +102,7 @@ int main( int argc, const char * argv[] )
 
   {
     X x;
-    m.siga().connect( boost::bind( &X::pong, &x, _1 ) );
+    m.siga().connect( boost::bind( &X::pong, boost::ref(x), _1 ) );
     m.ping();
 
     X y;

@@ -204,6 +204,8 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               /etc/zypp/products.d
 %config(noreplace) /etc/zypp/zypp.conf
 %config(noreplace) /etc/zypp/systemCheck
+%dir               /var/lib/zypp
+%dir               /var/cache/zypp
 %{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
