@@ -11,7 +11,7 @@
 #include "zypp/TriBool.h"
 #include "zypp/Url.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/Service.h"
+#include "zypp/ServiceInfo.h"
 
 #include "Zypper.h"
 
@@ -139,18 +139,18 @@ void modify_repos_by_option( Zypper & zypper );
 
 void list_services(Zypper & zypper);
 
-void add_service(Zypper & zypper, const zypp::Service & service);
+void add_service(Zypper & zypper, const zypp::ServiceInfo & service);
 
 void add_service_by_url( Zypper & zypper,
                          const zypp::Url & url, const std::string & alias,
                          const std::string & type,
                          boost::tribool enabled = boost::indeterminate);
 
-void remove_service(Zypper & zypper, const zypp::Service & service);
+void remove_service(Zypper & zypper, const zypp::ServiceInfo & service);
 
 void refresh_services(Zypper & zypper);
 
-bool match_service(Zypper & zypper, std::string str, zypp::Service * service);
+bool match_service(Zypper & zypper, std::string str, zypp::ServiceInfo * service);
 
 /**
  * Initialize rpm database on target, if not already initialized. 

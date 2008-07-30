@@ -2168,11 +2168,11 @@ void Zypper::doCommand()
 
     warn_if_zmd();
 
-    set<Service, ServiceAliasComparator> to_remove;
+    set<ServiceInfo, ServiceAliasComparator> to_remove;
     for (vector<string>::const_iterator it = _arguments.begin();
         it != _arguments.end(); ++it)
     {
-      Service s;
+      ServiceInfo s;
       if (match_service(*this, *it, &s))
       {
         to_remove.insert(s);

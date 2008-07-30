@@ -15,7 +15,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/Pathname.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/Service.h"
+#include "zypp/ServiceInfo.h"
 
 #include "Zypper.h"
 
@@ -82,7 +82,7 @@ class RepoInfoAliasComparator
 // comparator for Service set
 class ServiceAliasComparator
 {
-  public: bool operator()(const zypp::Service & a, const zypp::Service & b)
+  public: bool operator()(const zypp::ServiceInfo & a, const zypp::ServiceInfo & b)
   {
     return a.alias() < b.alias();
   }

@@ -1757,7 +1757,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 // ---------------------------------------------------------------------------
 
 static void print_service_list(Zypper & zypper,
-                               const list<Service> & services)
+                               const list<ServiceInfo> & services)
 {
   Table tbl;
   bool all = zypper.cOpts().count("details");
@@ -1785,10 +1785,10 @@ static void print_service_list(Zypper & zypper,
 
   int i = 1;
 
-  for (list<Service>::const_iterator it = services.begin();
+  for (list<ServiceInfo>::const_iterator it = services.begin();
        it != services.end(); ++it)
   {
-    Service service = *it;
+    ServiceInfo service = *it;
     TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
 
     // number
@@ -1859,7 +1859,7 @@ static void print_service_list(Zypper & zypper,
 void list_services(Zypper & zypper)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
-  list<Service> services;
+  list<ServiceInfo> services;
 
   try
   {
@@ -1920,7 +1920,7 @@ void list_services(Zypper & zypper)
 
 // ---------------------------------------------------------------------------
 
-void add_service(Zypper & zypper, const Service & service)
+void add_service(Zypper & zypper, const ServiceInfo & service)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
 
@@ -1961,7 +1961,7 @@ void add_service_by_url( Zypper & zypper,
   MIL << "going to add service by url (alias=" << alias << ", url=" << url
       << ")" << endl;
 
-  Service service;
+  ServiceInfo service;
 
   //! \todo what about service type? compare to rug. idea: do addrepo if type is specified and is not NU.
   //if ( ! type.empty() )
@@ -1982,7 +1982,7 @@ void add_service_by_url( Zypper & zypper,
 
 // ---------------------------------------------------------------------------
 
-void remove_service(Zypper & zypper, const Service & service)
+void remove_service(Zypper & zypper, const ServiceInfo & service)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
 
@@ -2000,7 +2000,7 @@ void refresh_services(Zypper & zypper)
 
   RepoManager manager(zypper.globalOpts().rm_options);
 
-  list<Service> services;
+  list<ServiceInfo> services;
   try
   {
     services.insert(services.end(), manager.serviceBegin(), manager.serviceEnd());
@@ -2015,7 +2015,7 @@ void refresh_services(Zypper & zypper)
 
   for_(sit, services.begin(), services.end())
   {
-    Service s = *sit;
+    ServiceInfo s = *sit;
 
     try
     {
@@ -2038,15 +2038,15 @@ void refresh_services(Zypper & zypper)
 
 // ---------------------------------------------------------------------------
 
-bool match_service(Zypper & zypper, string str, Service * service)
+bool match_service(Zypper & zypper, string str, ServiceInfo * service)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
-  list<Service> known;
+  list<ServiceInfo> known;
   known.insert(known.end(), manager.serviceBegin(), manager.serviceEnd());
   bool found = false;
 
   unsigned int number = 1; // repo number
-  for (list<Service>::const_iterator known_it = known.begin();
+  for (list<ServiceInfo>::const_iterator known_it = known.begin();
       known_it != known.end(); ++known_it, ++number)
   {
     unsigned int tmp = 0;
