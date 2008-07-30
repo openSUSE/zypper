@@ -358,7 +358,7 @@ namespace zypp
       /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
-	std::string t = str::form(N_("System management is locked by the application with pid %d (%s). "
+	std::string t = str::form(N_("System management is locked by the application with pid %d (%s).\n"
                                   "Please close this application before trying again."),
                                   globalLock.locker_pid(),
                                   globalLock.locker_name().c_str()
