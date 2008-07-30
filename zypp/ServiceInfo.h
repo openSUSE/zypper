@@ -23,83 +23,84 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ServiceInfo
-    //
-    /** */
-    class ServiceInfo : public repo::RepoInfoBase
-    {
-    public:
-        /** Default ctor creates \ref noService.*/
-        ServiceInfo();
 
-        /**
-         *  Creates ServiceInfo with specified alias.
-         *
-         * \param alias unique short name of service
-         */
-        ServiceInfo( const std::string & alias );
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ServiceInfo
+  //
+  /** */
+  class ServiceInfo : public repo::RepoInfoBase
+  {
+  public:
+    /** Default ctor creates \ref noService.*/
+    ServiceInfo();
 
-        /**
-         * ServiceInfo with alias and its URL
-         *
-         * \param alias unique shortname of service
-         * \param url url to service
-         */
-        ServiceInfo( const std::string & alias, const Url& url );
+    /**
+     *  Creates ServiceInfo with specified alias.
+     *
+     * \param alias unique short name of service
+     */
+    ServiceInfo( const std::string & alias );
 
-    public:
-        /** Represents an empty service. */
-        static const ServiceInfo noService;
+    /**
+     * ServiceInfo with alias and its URL
+     *
+     * \param alias unique shortname of service
+     * \param url url to service
+     */
+    ServiceInfo( const std::string & alias, const Url& url );
 
-    public:
+  public:
+    /** Represents an empty service. */
+    static const ServiceInfo noService;
 
-        /**
-         * Gets url to service
-         *
-         * \return url to service
-         */
-        Url url() const;
+  public:
 
-    public:
+    /**
+     * Gets url to service
+     *
+     * \return url to service
+     */
+    Url url() const;
 
-        /**
-         * Sets url for this service
-         *
-         * \param url url to this service
-         */
-        void setUrl( const Url& url );
+  public:
 
-   public:
-        /**
-         * Writes ServiceInfo to stream in ".service" format
-         *
-         * \param str stream where serialized version service is written
-         */
-        virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
+    /**
+     * Sets url for this service
+     *
+     * \param url url to this service
+     */
+    void setUrl( const Url& url );
 
-        class Impl;
+  public:
+    /**
+     * Writes ServiceInfo to stream in ".service" format
+     *
+     * \param str stream where serialized version service is written
+     */
+    virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
-    private:
-        RWCOW_pointer<Impl> _pimpl;
-    };
-    ///////////////////////////////////////////////////////////////////
+    class Impl;
 
-    /** \relates ServiceInfo Stream output */
-    std::ostream & operator<<( std::ostream & str, const ServiceInfo & obj );
+  private:
+      RWCOW_pointer<Impl> _pimpl;
+  };
+  ///////////////////////////////////////////////////////////////////
 
-    /** \relates ServiceInfo */
-    inline bool operator==( const ServiceInfo & lhs, const ServiceInfo & rhs )
-    { return lhs.alias() == rhs.alias(); }
+  /** \relates ServiceInfo Stream output */
+  std::ostream & operator<<( std::ostream & str, const ServiceInfo & obj );
 
-    /** \relates ServiceInfo */
-    inline bool operator!=( const ServiceInfo & lhs, const ServiceInfo & rhs )
-    { return lhs.alias() != rhs.alias(); }
+  /** \relates ServiceInfo */
+  inline bool operator==( const ServiceInfo & lhs, const ServiceInfo & rhs )
+  { return lhs.alias() == rhs.alias(); }
 
-    /** \relates ServiceInfo */
-    inline bool operator<( const ServiceInfo & lhs, const ServiceInfo & rhs )
-    { return lhs.alias() < rhs.alias(); }
+  /** \relates ServiceInfo */
+  inline bool operator!=( const ServiceInfo & lhs, const ServiceInfo & rhs )
+  { return lhs.alias() != rhs.alias(); }
+
+  /** \relates ServiceInfo */
+  inline bool operator<( const ServiceInfo & lhs, const ServiceInfo & rhs )
+  { return lhs.alias() < rhs.alias(); }
 
     /////////////////////////////////////////////////////////////////
 } // namespace zypp
