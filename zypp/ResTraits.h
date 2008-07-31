@@ -56,6 +56,9 @@ namespace zypp
   DEFINE_PTR_TYPE( Patch );
   //@}
 
+  /** Frequently associated. */
+  class PoolItem;
+
   /** ResTraits. Defines common types and the ResKind value. */
   template<typename _Res>
     struct ResTraits
