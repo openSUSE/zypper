@@ -27,6 +27,30 @@ namespace zypp {
      * an external program. It starts the program using fork
      * and some exec.. call, gives you access to the program's
      * stdio and closes the program after use.
+     *
+     * \code
+     *
+     * const char* argv[] =
+     * {
+     *     "/usr/bin/foo,
+     *     "--option1",
+     *     "--option2",
+     *     NULL
+     * };
+     *
+     * ExternalProgram prog( argv,
+     *                        ExternalProgram::Discard_Stderr,
+     *                        false, -1, true);
+     * string line;
+     * for(line = prog.receiveLine();
+     *     ! line.empty();
+     *     line = prog.receiveLine() )
+     * {
+     *     stream << line;
+     * }
+     * prog.close();
+     *
+     * \endcode
      */
     class ExternalProgram : public zypp::externalprogram::ExternalDataSource
     {
