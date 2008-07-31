@@ -33,6 +33,7 @@ namespace zypp
     struct SelectableTraits
     {
       /** Oder on AvalableItemSet.
+       * \li repository priority
        * \li best Arch
        * \li best Edition
        * \li ResObject::constPtr as fallback.
@@ -46,6 +47,10 @@ namespace zypp
         //
         bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
         {
+          unsigned lprio = lhs->satSolvable().repository().info().priority();
+          unsigned rprio = rhs->satSolvable().repository().info().priority();
+          if ( lprio != rprio )
+            return( lprio < rprio ); // lower value meands higher priority :(
           int res = lhs->arch().compare( rhs->arch() );
           if ( res )
             return res > 0;
