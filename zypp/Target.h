@@ -110,6 +110,16 @@ namespace zypp
     */
     std::string release() const;
 
+    /**
+     * anonymous unique id
+     *
+     * This id is generated once and stays in the
+     * saved in the target.
+     * It is unique and is used only for statistics.
+     *
+     */
+    std::string anonymousUniqueId() const;
+    
   public:
     /** Ctor. If \c doRebuild_r is \c true, an already existing
      * database is rebuilt (rpm --rebuilddb ).

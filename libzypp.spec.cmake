@@ -29,6 +29,7 @@ BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel gra
 
 %if 0%{?suse_version}
 BuildRequires:  hicolor-icon-theme update-desktop-files rpm-devel
+Requires: uuid-runtime
 %endif
 
 %if 0%{?fedora_version}
@@ -38,6 +39,8 @@ BuildRequires: glib2-devel popt-devel dbus-glib-devel rpm-devel
 %if 0%{?mandriva_version}
 BuildRequires:  glib2-devel
 BuildRequires:  librpm-devel
+# uuidgen
+Requires: e2fsprogs
 %endif
 
 

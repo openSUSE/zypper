@@ -287,6 +287,52 @@ namespace zypp
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
+
+      // create the anonymous unique id
+      // this value is used for statistics
+      Pathname idpath( home() / "AnonymousUniqueId");
+      
+      if ( ! PathInfo( idpath ).isExist() )
+      {
+          MIL << "creating anonymous unique id" << endl;
+          
+          // if the file does not exist we need to generate the uuid file
+          const char* argv[] =
+          {
+              "/usr/bin/uuidgen",
+              "-r",
+              "-t",
+              NULL
+          };
+
+          ExternalProgram prog( argv,
+                                ExternalProgram::Normal_Stderr,
+                                false, -1, true);
+          std::string line;
+          std::ofstream idfile;
+          // make sure the path exists
+          filesystem::assert_dir( home() );
+          idfile.open( idpath.c_str() );
+
+          if ( idfile.good() )
+          {
+              for(line = prog.receiveLine();
+                  ! line.empty();
+                  line = prog.receiveLine() )
+              {
+                  MIL << line << endl;
+                  
+                  idfile << line;
+              }
+              prog.close();
+          }
+          else
+          {
+              // FIXME, should we ignore the error?
+              ZYPP_THROW(Exception("Can't open anonymous id file '" + idpath.asString() + "' for writing"));
+          }
+      }
+
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -820,6 +866,18 @@ namespace zypp
       }
 
       return _("Unknown Distribution");
+    }
+
+    std::string TargetImpl::anonymousUniqueId() const
+    {
+        std::ifstream idfile( ( home() / "AnonymousUniqueId" ).c_str() );
+        for( iostr::EachLine in( idfile ); in; in.next() )
+        {
+            std::string line( str::trim( *in ) );
+            if ( ! line.empty() )
+                return line;
+        }
+        return std::string();
     }
 
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )

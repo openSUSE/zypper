@@ -78,6 +78,8 @@ namespace zypp
 
       void buildCache();
 
+      std::string anonymousUniqueId() const;
+
     public:
 
       /** The root set for this target */

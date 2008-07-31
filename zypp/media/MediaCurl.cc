@@ -26,6 +26,9 @@
 #include "zypp/media/MediaUserAuth.h"
 #include "zypp/media/CurlConfig.h"
 #include "zypp/thread/Once.h"
+#include "zypp/Target.h"
+#include "zypp/ZYppFactory.h"
+
 #include <cstdlib>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -183,9 +186,29 @@ Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
 const char *const MediaCurl::agentString()
 {
-  static const std::string _value( str::form( "ZYpp %s (curl %s)",
+  // we need to add the release and identifier to the
+  // agent string.
+  // The target could be not initialized, and then this information
+  // is not available.
+  Target_Ptr target;
+  // FIXME this has to go away as soon as the target
+  // does not throw when not initialized.
+  try {
+      target = zypp::getZYpp()->target();
+  }
+  catch ( const Exception &e )
+  {
+      // nothing to do
+  }
+
+  static const std::string _value( str::form( "ZYpp %s (curl %s) %s",
                                               VERSION,
-                                              curl_version_info(CURLVERSION_NOW)->version ) );
+                                              curl_version_info(CURLVERSION_NOW)->version,
+                                              target ? str::form( " - %s on '%s'",
+                                                                  target->anonymousUniqueId().c_str(),
+                                                                  target->release().c_str() ).c_str()
+                                              : "" )
+                                       );
   return _value.c_str();
 }
 

@@ -28,6 +28,7 @@ ADD_TESTS(
   RepoManager
   RepoStatus
   ResKind
+  Target
   TranslatedText
   Url
   Vendor

@@ -6,6 +6,12 @@ Thu Jul 31 19:01:14 CEST 2008 ma@suse.de
 - revision 10710
 
 -------------------------------------------------------------------
+Thu Jul 31 19:01:54 CEST 2008 - dmacvicar@suse.de
+
+- generate a unique anonymous unique string per target
+  and add it to the agent string for better statistics
+
+-------------------------------------------------------------------
 Wed Jul 30 19:12:00 CEST 2008 ma@suse.de
 
 - /var/lib/zypp and /var/cache/zypp should be owned by libzypp 
