@@ -652,7 +652,7 @@ static int summary(Zypper & zypper)
               tochangevendor[res->kind()].insert(res);
           }
 
-          new_installed_size += res->installsize() - (*rmit)->installsize();
+          new_installed_size += res->installSize() - (*rmit)->installSize();
 
           to_be_removed[res->kind()].erase(*rmit);
           upgrade_downgrade = true;
@@ -663,7 +663,7 @@ static int summary(Zypper & zypper)
       if (!upgrade_downgrade)
       {
         toinstall[res->kind()].insert(res);
-        new_installed_size += res->installsize();
+        new_installed_size += res->installSize();
       }
 
       download_size += res->downloadSize();
@@ -684,7 +684,7 @@ static int summary(Zypper & zypper)
           toremove_by_solver = true;
       }*/
       toremove[it->first].insert(*resit);
-      new_installed_size -= (*resit)->installsize();
+      new_installed_size -= (*resit)->installSize();
     }
 
   for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();

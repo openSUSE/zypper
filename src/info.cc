@@ -166,7 +166,7 @@ void printPkgInfo(const Zypper & zypper, const ui::Selectable & s)
   else
     cout << _("not installed") << endl;
 
-  cout << _("Installed Size: ") << theone.resolvable()->installsize() << endl;
+  cout << _("Installed Size: ") << theone.resolvable()->installSize() << endl;
 
   printSummaryDesc(theone.resolvable());
 }
