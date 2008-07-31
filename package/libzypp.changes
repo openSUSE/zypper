@@ -1,15 +1,15 @@
 -------------------------------------------------------------------
+Thu Jul 31 19:01:54 CEST 2008 - dmacvicar@suse.de
+
+- generate a unique anonymous unique string per target
+  and add it to the agent string for better statistics
+
+-------------------------------------------------------------------
 Thu Jul 31 19:01:14 CEST 2008 ma@suse.de
 
 - Follow solver policy and make repository priority the highest
   key, when ordering packages. Then architecture, and edition last.
 - revision 10710
-
--------------------------------------------------------------------
-Thu Jul 31 19:01:54 CEST 2008 - dmacvicar@suse.de
-
-- generate a unique anonymous unique string per target
-  and add it to the agent string for better statistics
 
 -------------------------------------------------------------------
 Wed Jul 30 19:12:00 CEST 2008 ma@suse.de
