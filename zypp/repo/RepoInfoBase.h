@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/ReferenceCounted.h"
 
 #include "zypp/Pathname.h"
 
@@ -25,7 +26,8 @@ namespace zypp
   namespace repo
   { /////////////////////////////////////////////////////////////////
     
-    
+    DEFINE_PTR_TYPE(RepoInfoBase);
+
     ///////////////////////////////////////////////////////////////////
     //
     //    CLASS NAME : RepoInfoBase
@@ -34,7 +36,7 @@ namespace zypp
      * \short Base class implementing common features of \ref RepoInfo and
      *        \ref ServiceInfo.
      */
-    class RepoInfoBase
+    class RepoInfoBase : public base::ReferenceCounted
     {
       friend std::ostream & operator<<( std::ostream & str, const RepoInfoBase & obj );
 

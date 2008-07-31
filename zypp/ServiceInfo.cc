@@ -65,6 +65,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  IMPL_PTR_TYPE(ServiceInfo);
+
   const ServiceInfo ServiceInfo::noService;
   
   ServiceInfo::ServiceInfo() : _pimpl( new Impl() ) {}
