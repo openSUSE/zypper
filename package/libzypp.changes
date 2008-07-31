@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul 31 21:52:11 CEST 2008 ma@suse.de
+
+- New class ProductInfo to provide product related metadata that
+  might be associated with a package. This will replace the Product
+  resolvable.
+- revision 10715
+
+-------------------------------------------------------------------
 Thu Jul 31 19:01:54 CEST 2008 - dmacvicar@suse.de
 
 - generate a unique anonymous unique string per target

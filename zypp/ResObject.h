@@ -30,6 +30,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class ProductInfo;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResObject
@@ -62,6 +64,18 @@ namespace zypp
     using sat::Solvable::supportsRequestedLocales;
     /** \see \ref sat::Solvable::getSupportedLocales */
     using sat::Solvable::getSupportedLocales;
+    //@}
+
+  public:
+    /** \name Associated product metadata.
+     * Some \ref Packages may provide additional product metadata.
+     * \see \ref ProductInfo.
+     */
+    //@{
+    /** Whether there is associated \ref ProductInfo available. */
+    bool hasProductInfo() const;
+    /** Return associated \ref ProductInfo or \ref ProductInfo::noProductInfo. */
+    ProductInfo productInfo() const;
     //@}
 
   public:

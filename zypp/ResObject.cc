@@ -16,6 +16,7 @@
 #include "zypp/sat/Solvable.h"
 #include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/ProductInfo.h"
 #include "zypp/IdString.h"
 
 using namespace zypp;
@@ -55,9 +56,13 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	ResObject interface forwarded to implementation
-  //
+
+  bool ResObject::hasProductInfo() const
+  { return ProductInfo( *this ); } // this is basically one lookupIdAttribute call
+
+  ProductInfo ResObject::productInfo() const
+  { return ProductInfo( *this ); }
+
   ///////////////////////////////////////////////////////////////////
 
   std::string ResObject::summary( const Locale & lang_r ) const
