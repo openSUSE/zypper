@@ -13,12 +13,13 @@ EDITOR=${EDITOR:-vi}
 TDIR=$(dirname $0)
 test -n "$TDIR" && cd $TDIR
 
-CHANGESFILE="package/libzypp.changes"
+CHANGESFILE=$(ls package/*.changes)
 test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
 
 VERSIONFILE="VERSION.cmake"
 test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
 
+## Version.cmake tags in getversion() are still zypp specific.
 
 function usage() {
   exec >&2
@@ -44,7 +45,7 @@ SVN shortly after editing (current server revision + 1).
 The line '#---delete-or-release---#...' shows the last version submitted
 to autobuild ('# LAST RELEASED:; tag in $VERSIONFILE). And also the current
 version, asuming you already updated the $VERSIONFILE according to your changes.
-(The number in parenthesis is LIBZYPP_COMPATMINOR)
+(The number in parenthesis is _COMPATMINOR)
 
 
 - Delete the line if you don't want to submit the package to autobuild.
@@ -111,11 +112,11 @@ function nextrevision() {
   | awk '/^Status against revision:/{print $4+1}'
 }
 
-VERSIONNUMBER="$(getversion)"
 
 test -r /etc/sysconfig/mail && source /etc/sysconfig/mail
 EMAIL="${USER}@${FROM_HEADER:-$(hostname -f)}"
 
+GOTVERSION="$(getversion)"
 
 TMPFILE=$(mktemp)
 exec 3>&1-
@@ -125,7 +126,7 @@ echo "$(date) $EMAIL"
 echo ""
 echo "- "
 echo "- revision $(nextrevision)"
-echo "$(getversion)"
+echo "$GOTVERSION"
 echo ""
 cat $CHANGESFILE
 exec >&3
@@ -137,6 +138,7 @@ while [ "$RES" == "e" ]; do
   NEWREL=$(grep '#---delete-or-release---#' $TMPFILE)
   test -n "$NEWREL" && echo "$NEWREL"
   read -n 1 -p "(a)bort, (c)ontinue, (e)dit : " RES
+  echo
   echo
   case "$RES" in
     [eE]*)
@@ -153,8 +155,9 @@ while [ "$RES" == "e" ]; do
       echo "Store new $CHANGESFILE"
       cp $TMPFILE $CHANGESFILE
 
-      cat $CHANGESFILE \
-      | awk '{print}/----------/{n=n+1; if ( n == 2 ) exit 0; }'
+      echo "$(sed 's/^.*#---delete-or-release---#.*RELEASE:/# CURRENT RELEASE:/' <<<"$GOTVERSION")"
+      awk '{print}/^----------/{n=n+1; if ( n == 2 ) exit 0; }' $CHANGESFILE
+
       ;;
     *)
       echo "Leave $CHANGESFILE untouched"
