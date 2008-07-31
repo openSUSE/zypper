@@ -69,9 +69,6 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
 
     public:
-    static unsigned defaultPrioity();
-
-    public:
     RepoInfo();
     ~RepoInfo();
 
