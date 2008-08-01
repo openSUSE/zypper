@@ -165,7 +165,7 @@ InterProcessMutex::InterProcessMutex( const Options &poptions )
                     
                     // actually there are no readers
                     // lets delete it and break, so the next loop will
-                    // probably suceed in creating it. The worst thing that can
+                    // probably succeed in creating it. The worst thing that can
                     // happen is that another process will take it first, but
                     // we are not aiming at such level of correctness. Otherwise
                     // the code path will complicate too much.
@@ -211,7 +211,7 @@ InterProcessMutex::InterProcessMutex( const Options &poptions )
                 // Nobody conflicts with a writer lock so nobody is actually
                 // locking.
                 // lets delete it and break, so the next loop will
-                // probably suceed in creating it. The worst thing that can
+                // probably succeed in creating it. The worst thing that can
                 // happen is that another process will take it first, but
                 // we are not aiming at such level of correctness. Otherwise
                 // the code path will complicate too much.

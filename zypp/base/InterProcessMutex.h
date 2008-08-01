@@ -66,7 +66,7 @@ public:
         * (wait till resource is free)
         *
         * The mutex type, Writer or Reader must be
-        * given explitly.
+        * given explictly.
         *
         * The mutex will be handled using a lock file
         * located on default library path if the
