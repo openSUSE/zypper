@@ -83,7 +83,7 @@ InterProcessMutex::InterProcessMutex( const Options &poptions )
             lock.l_whence = SEEK_SET;
 
             // GETLK tells you the conflicting lock as if the lock you pass
-            // would have been set. So set the lock type depending on wether
+            // would have been set. So set the lock type depending on whether
             // we are a writer or a reader.
             lock.l_type = ( ( _options.type == Writer ) ? F_WRLCK : F_RDLCK );
             
