@@ -52,7 +52,7 @@ int main(int argc, char **argv)
         if ( isKind<Package>(res) )
         {
           Package::constPtr p = asKind<Package>(res);
-          //cout << p->group() << std::endl;
+          cout << p->checksum() << std::endl;
         }
       }
       m.elapsed();

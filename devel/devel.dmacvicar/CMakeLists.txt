@@ -3,8 +3,8 @@ ADD_DEFINITIONS(-DSRC_DIR=\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\")
 ADD_EXECUTABLE(mediaaccess mediaaccess.cc)
 TARGET_LINK_LIBRARIES(mediaaccess  zypp )
 
-ADD_EXECUTABLE(multiple-download multiple-download.cc)
-TARGET_LINK_LIBRARIES(multiple-download zypp boost_thread)
+#ADD_EXECUTABLE(multiple-download multiple-download.cc)
+#TARGET_LINK_LIBRARIES(multiple-download zypp boost_thread)
 
 #ADD_EXECUTABLE(scansource ScanSource.cc)
 #TARGET_LINK_LIBRARIES(scansource  zypp )
