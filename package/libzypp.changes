@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Aug  2 19:26:52 CEST 2008 - jkupec@suse.cz
+
+- support an optional url attribute in repoindex.xml's <repo>
+- revision 10729
+
+-------------------------------------------------------------------
 Thu Jul 31 21:52:11 CEST 2008 ma@suse.de
 
 - New class ProductInfo to provide product related metadata that
