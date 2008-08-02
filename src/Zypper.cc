@@ -199,7 +199,7 @@ void print_main_help(Zypper & zypper)
     "\tservices, ls\t\tList all defined services.\n"
     "\taddservice, as\t\tAdd a new service.\n"
     "\tremoveservice, rs\tRemove specified service.\n"
-    "\trefreshservice, refs\tRefresh all services.\n"
+    "\trefresh-services, refs\tRefresh all services.\n"
   );
 
   static string help_package_commands = _("\tSoftware Management:\n"

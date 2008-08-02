@@ -57,6 +57,13 @@ config file (/etc/zypp/zypp.conf). This means, zypper will not even try
 to download and check the index files, and you will be able to use zypper for
 operations like search or info without internet access or root privileges.
 
+.SS Services
+.LP
+Repository Index Service (RIS) is a special type of repository which contains
+a list of other repositories. This list can be generated dynamically by the
+server according to some URI parameters or user name, or can be static.
+See Service Management section for more details.
+
 .SS Package Types
 .LP
 zypper works with several types of resource objects, called
@@ -702,6 +709,29 @@ Clean repository raw metadata cache instead of package cache.
 .TP
 .I \-a, \-\-all
 Clean both repository metadata and package caches.
+
+
+.SS Serivce Management
+
+(This group of commands is currently under development)
+
+.TP
+.B addservice (as) [options] <url> <alias>
+TODO
+
+.TP
+.B removeservice (rs) [options] <alias|#|URI> ...
+TODO
+
+.TP
+.B services (ls) [options]
+TODO
+
+.TP
+.B refresh-services (refs) [options] <alias|#|URI> ...
+TODO
+
+
 
 .SS Package Locks Management
 Package locks server the purpose of preventing changes to the set of installed

@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Sat Aug  2 19:40:37 CEST 2008 - jkupec@suse.cz
+
+- service handling improved, ls, rs, refs now allow to specify
+  services by #, alias, or URI as in repos
+- 'ls' and 'refs' corrected to work with proper service list
+  (repo index services + non-index repos not belonging to any
+  service)
+- r10731
+- 0.12.1
+
+-------------------------------------------------------------------
 Tue Jul 29 15:10:22 CEST 2008 - jkupec@suse.cz
 
 - say Retrieving instead of Downloading when getting files
