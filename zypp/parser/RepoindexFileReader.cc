@@ -18,8 +18,10 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/parser/ParseException.h"
 
 #include "zypp/parser/RepoindexFileReader.h"
+
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser"
@@ -94,14 +96,44 @@ namespace zypp
       // xpath: /repoindex/data (+)
       if ( reader_r->name() == "repo" )
       {
+        XmlString s;
         RepoInfo info;
+
+        // url and/or path
+        string url_s;
+        s = reader_r->getAttribute("url");
+        if (s.get())
+          url_s = s.asString();
+        string path_s;
+        s = reader_r->getAttribute("path");
+        if (s.get())
+          path_s = s.asString();
+
+        if (url_s.empty() && path_s.empty())
+          throw ParseException(_("One or both of 'url' or 'path' attributes is required."));
         //! \todo FIXME this hardcodes the "/repo/" fragment - should not be if we want it to be usable by others!
-        info.setPath(Pathname(string("/repo/")+reader_r->getAttribute("path").asString()));
+        else if (url_s.empty())
+          info.setPath(Pathname(string("/repo/") + path_s));
+        else if (path_s.empty())
+          info.setBaseUrl(Url(url_s));
+        else
+          info.setBaseUrl(Url(url_s + "/repo/" + path_s));
+
+        // required alias
         info.setAlias(reader_r->getAttribute("alias").asString());
-        info.setType(repo::RepoType::RPMMD_e); //TODO hardwired rpmmd???
-        XmlString s = reader_r->getAttribute("name");
-        if (s.get()) // name available so store it
+
+        // optional type
+        s = reader_r->getAttribute("type");
+        if (s.get())
+          info.setType(repo::RepoType(s.asString()));
+
+        // optional name
+        s = reader_r->getAttribute("name");
+        if (s.get())
           info.setName(s.asString());
+
+        DBG << info << endl;
+
         // ignore the rest
         _callback(info);
         return true;

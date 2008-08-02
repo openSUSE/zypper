@@ -1464,11 +1464,12 @@ namespace zypp
     mediamanager.release( mid );
     mediamanager.close( mid );
 
-    // set base url for all collected repositories
-    for_( it, collector.repos.begin(), collector.repos.end())
+    // set service alias and base url for all collected repositories
+    for_( it, collector.repos.begin(), collector.repos.end() )
     {
-      //repoUrl = it->baseUrlsBegin();
-      it->setBaseUrl( service.url() );
+      // if the repo url was not set by the repoindex parser, set service's url
+      if ( it->baseUrlsEmpty() )
+        it->setBaseUrl( service.url() );
       it->setService( service.alias() );
     }
 
