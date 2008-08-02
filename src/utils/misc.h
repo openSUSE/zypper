@@ -82,9 +82,10 @@ class RepoInfoAliasComparator
 // comparator for Service set
 class ServiceAliasComparator
 {
-  public: bool operator()(const zypp::ServiceInfo & a, const zypp::ServiceInfo & b)
+  public: bool operator()(const zypp::repo::RepoInfoBase_Ptr & a,
+                          const zypp::repo::RepoInfoBase_Ptr & b)
   {
-    return a.alias() < b.alias();
+    return a->alias() < b->alias();
   }
 };
 

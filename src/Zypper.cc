@@ -1052,7 +1052,7 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"help", no_argument, 0, 'h'},
-      {"repos", no_argument, 0, 'r'},
+      {"no-repos", no_argument, 0, 'R'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1062,7 +1062,7 @@ void Zypper::processCommandOptions()
       "Refresh defined repository index services.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repos               Refresh also repositories of the services.\n"
+      "-R, --no-repos      Do not refresh non-index services (plain repositories).\n"
     );
     break;
   }
@@ -1255,6 +1255,7 @@ void Zypper::processCommandOptions()
       {"build-only", no_argument, 0, 'B'},
       {"download-only", no_argument, 0, 'D'},
       {"repo", required_argument, 0, 'r'},
+      {"services", no_argument, 0, 's'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1272,6 +1273,7 @@ void Zypper::processCommandOptions()
       "-B, --build-only         Only build the database, don't download metadata.\n"
       "-D, --download-only      Only download raw metadata, don't build the database.\n"
       "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
+      "-s, --services           Refresh also services before refreshing repos.\n"
     );
     break;
   }
@@ -2081,10 +2083,6 @@ void Zypper::doCommand()
 
     refresh_services(*this);
 
-    // refresh also repos
-    if (copts.count("repos"))
-      refresh_repos(*this);
-
     break;
   }
 
@@ -2138,59 +2136,6 @@ void Zypper::doCommand()
     warn_if_zmd();
 
     add_service_by_url(*this, url, _arguments[1], "" /** \todo type */, enabled);
-
-    break;
-  }
-
-  // --------------------------( remove service )------------------------------
-
-  case ZypperCommand::REMOVE_SERVICE_e:
-  {
-    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
-
-    // check root user
-    if (geteuid() != 0 && !globalOpts().changedRoot)
-    {
-      out().error(
-        _("Root privileges are required for modifying system services."));
-      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
-      return;
-    }
-
-    if (_arguments.size() < 1)
-    {
-      out().error(_("Required argument missing."));
-      ERR << "Required argument missing." << endl;
-      print_usage(out(), _command_help);
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
-
-    warn_if_zmd();
-
-    set<ServiceInfo, ServiceAliasComparator> to_remove;
-    for (vector<string>::const_iterator it = _arguments.begin();
-        it != _arguments.end(); ++it)
-    {
-      ServiceInfo s;
-      if (match_service(*this, *it, &s))
-      {
-        to_remove.insert(s);
-      }
-      else
-      {
-        MIL << "Service not found by given alias, number or URI." << endl;
-        out().error(boost::str(format(
-          // translators: %s is the supplied command line argument which
-          // for which no service counterpart was found
-          _("Service '%s' not found by alias, number or URI.")) % *it));
-      }
-    }
-    
-    for_ (it, to_remove.begin(), to_remove.end())
-    {
-      remove_service(*this, *it);
-    }
 
     break;
   }
@@ -2350,6 +2295,7 @@ void Zypper::doCommand()
 
   // --------------------------( delete repo )--------------------------------
 
+  case ZypperCommand::REMOVE_SERVICE_e:
   case ZypperCommand::REMOVE_REPO_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
@@ -2358,7 +2304,9 @@ void Zypper::doCommand()
     if (geteuid() != 0 && !globalOpts().changedRoot)
     {
       out().error(
-        _("Root privileges are required for modifying system repositories."));
+        command() == ZypperCommand::REMOVE_REPO ?
+          _("Root privileges are required for modifying system repositories.") :
+          _("Root privileges are required for modifying system services."));
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
       return;
     }
@@ -2374,28 +2322,59 @@ void Zypper::doCommand()
 
     warn_if_zmd ();
 
-    // must store repository before remove to ensure correct match number
-    set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
-    for (vector<string>::const_iterator it = _arguments.begin();
-	it != _arguments.end(); ++it)
+    if (command() == ZypperCommand::REMOVE_REPO)
     {
-      RepoInfo repo;
-      if (match_repo(*this,*it,&repo))
+      // must store repository before remove to ensure correct match number
+      set<RepoInfo,RepoInfoAliasComparator> repo_to_remove;
+      for_(it, _arguments.begin(), _arguments.end())
       {
-	repo_to_remove.insert(repo);
+        RepoInfo repo;
+        if (match_repo(*this,*it,&repo))
+        {
+          repo_to_remove.insert(repo);
+        }
+        else
+        {
+          MIL << "Repository not found by given alias, number or URI." << endl;
+          out().error(boost::str(format(
+            // translators: %s is the supplied command line argument which
+            // for which no repository counterpart was found
+            _("Repository '%s' not found by alias, number or URI.")) % *it));
+        }
       }
-      else
+
+      for_(it, repo_to_remove.begin(), repo_to_remove.end())
+        remove_repo(*this,*it);
+    }
+    else
+    {
+      set<repo::RepoInfoBase_Ptr, ServiceAliasComparator> to_remove;
+      for_(it, _arguments.begin(), _arguments.end())
       {
-	MIL << "Repository not found by given alias, number or URI." << endl;
-	out().error(boost::str(format(
-	  // translators: %s is the supplied command line argument which
-	  // for which no repository counterpart was found
-	  _("Repository '%s' not found by alias, number or URI.")) % *it));
+        repo::RepoInfoBase_Ptr s;
+        if (match_service(*this, *it, s))
+        {
+          to_remove.insert(s);
+        }
+        else
+        {
+          MIL << "Service not found by given alias, number or URI." << endl;
+          out().error(boost::str(format(
+            // translators: %s is the supplied command line argument which
+            // for which no service counterpart was found
+            _("Service '%s' not found by alias, number or URI.")) % *it));
+        }
+      }
+
+      for_(it, to_remove.begin(), to_remove.end())
+      {
+        RepoInfo_Ptr repo_ptr = dynamic_pointer_cast<RepoInfo>(*it);
+        if (repo_ptr)
+          remove_repo(*this, *repo_ptr);
+        else
+          remove_service(*this, *dynamic_pointer_cast<ServiceInfo>(*it));
       }
     }
-
-    for_ (it,repo_to_remove.begin(),repo_to_remove.end())
-      remove_repo(*this,*it);
 
     break;
   }
@@ -2532,10 +2511,20 @@ void Zypper::doCommand()
 
     if (globalOpts().no_refresh)
       out().warning(boost::str(format(
-        _("The '%s' global option has no effect here."))
-        % "--no-refresh"));
+        _("The '%s' global option has no effect here.")) % "--no-refresh"));
 
-    refresh_services(*this);
+    // by default refresh only repositories
+    if (copts.count("services"))
+    {
+      if (!_arguments.empty())
+      {
+        out().error(str::form(
+            _("Arguments are not allowed if '%s' is used."), "--services"));
+        setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+        return;
+      }
+      refresh_services(*this);
+    }
     refresh_repos(*this);
     break;
   }

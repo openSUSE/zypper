@@ -150,7 +150,9 @@ void remove_service(Zypper & zypper, const zypp::ServiceInfo & service);
 
 void refresh_services(Zypper & zypper);
 
-bool match_service(Zypper & zypper, std::string str, zypp::ServiceInfo * service);
+bool match_service(Zypper & zypper,
+                   std::string str,
+                   zypp::repo::RepoInfoBase_Ptr & service_ptr);
 
 /**
  * Initialize rpm database on target, if not already initialized. 

@@ -41,6 +41,8 @@ using namespace zypp::media;
 extern ZYpp::Ptr God;
 extern RuntimeData gData;
 
+typedef list<RepoInfoBase_Ptr> ServiceList;
+
 // ----------------------------------------------------------------------------
 
 template <typename Target, typename Source>
@@ -83,11 +85,14 @@ static bool refresh_raw_metadata(Zypper & zypper,
         {
           RepoManager::RefreshCheckStatus stat = manager.
               checkIfToRefreshMetadata(repo, *it,
-                zypper.command() == ZypperCommand::REFRESH ?
+                zypper.command() == ZypperCommand::REFRESH ||
+                zypper.command() == ZypperCommand::REFRESH_SERVICES ?
                   RepoManager::RefreshIfNeededIgnoreDelay :
                   RepoManager::RefreshIfNeeded);
           do_refresh = (stat == RepoManager::REFRESH_NEEDED);
-          if (!do_refresh && zypper.command() == ZypperCommand::REFRESH)
+          if (!do_refresh &&
+              (zypper.command() == ZypperCommand::REFRESH ||
+               zypper.command() == ZypperCommand::REFRESH_SERVICES))
           {
             switch (stat)
             {
@@ -128,7 +133,8 @@ static bool refresh_raw_metadata(Zypper & zypper,
       manager.refreshMetadata(repo,
         force_download ?
           RepoManager::RefreshForced :
-            zypper.command() == ZypperCommand::REFRESH ?
+            zypper.command() == ZypperCommand::REFRESH ||
+            zypper.command() == ZypperCommand::REFRESH_SERVICES ?
               RepoManager::RefreshIfNeededIgnoreDelay :
               RepoManager::RefreshIfNeeded);
 
@@ -302,6 +308,39 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 
 // ---------------------------------------------------------------------------
 
+/** \return true if aliases are equal, and all lhs urls can be found in rhs */
+static bool repo_cmp_alias_urls(const RepoInfo & lhs, const RepoInfo & rhs)
+{
+  bool equals = true;
+
+  // alias
+  if (lhs.alias() != rhs.alias())
+  {
+    equals = false;
+  }
+  else
+  {
+    // URIs (all of them must be in the other RepoInfo)
+    bool urlfound = false;
+    for (RepoInfo::urls_const_iterator urlit = lhs.baseUrlsBegin();
+        urlit != lhs.baseUrlsEnd(); ++urlit)
+    {
+      if (find(rhs.baseUrlsBegin(), rhs.baseUrlsEnd(), Url(*urlit))
+          != rhs.baseUrlsEnd())
+        urlfound = true;
+      if (!urlfound)
+      {
+        equals = false;
+        break;
+      }
+    }
+  }
+
+  return equals;
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * Try to find RepoInfo counterparts among known repositories by alias, number,
  * or URI, based on the list of strings given as the iterator range \a being and
@@ -313,12 +352,11 @@ void get_repos(Zypper & zypper,
                const T & begin, const T & end,
                list<RepoInfo> & repos, list<string> & not_found)
 {
-
   for (T it = begin; it != end; ++it)
   {
     RepoInfo repo;
 
-    if (!match_repo(zypper,*it,&repo))
+    if (!match_repo(zypper, *it, &repo))
     {
       not_found.push_back(*it);
       continue;
@@ -331,27 +369,7 @@ void get_repos(Zypper & zypper,
     for (list<RepoInfo>::const_iterator repo_it = repos.begin();
         repo_it != repos.end(); ++repo_it)
     {
-      bool equals = true;
-
-      // alias
-      if (repo_it->alias() != repo.alias())
-      {
-        equals = false;
-      }
-      else
-      {
-        // URIs (all of them)
-        for (RepoInfo::urls_const_iterator urlit = repo_it->baseUrlsBegin();
-            urlit != repo_it->baseUrlsEnd(); ++urlit)
-          try {
-            if (find(repo.baseUrlsBegin(),repo.baseUrlsEnd(),Url(*it))
-                != repo.baseUrlsEnd())
-              equals = false;
-          }
-          catch(const url::UrlException &){}
-      }
-
-      if (equals)
+      if (repo_cmp_alias_urls(repo, *repo_it))
       {
         duplicate = true;
         break;
@@ -370,13 +388,14 @@ void get_repos(Zypper & zypper,
  */
 static void report_unknown_repos(Out & out, list<string> not_found)
 {
-  for (list<string>::iterator it = not_found.begin();
-      it != not_found.end(); ++it)
+  for_(it, not_found.begin(), not_found.end())
     out.error(boost::str(format(
       _("Repository '%s' not found by its alias, number, or URI.")) % *it));
 
   if (!not_found.empty())
-    out.info(_("Use 'zypper repos' to get the list of defined repositories."));
+    out.info(str::form(
+        _("Use '%s' to get the list of defined repositories."),
+        "zypper repos"));
 }
 
 // ---------------------------------------------------------------------------
@@ -872,8 +891,7 @@ void refresh_repos(Zypper & zypper)
 
   ostringstream s;
   s << _("Specified repositories: ");
-  for (list<RepoInfo>::const_iterator it = specified.begin();
-      it != specified.end(); ++it)
+  for_(it, specified.begin(), specified.end())
     s << it->alias() << " ";
   zypper.out().info(s.str(), Out::HIGH);
 
@@ -940,8 +958,9 @@ void refresh_repos(Zypper & zypper)
   // print the result message
   if (enabled_repo_count == 0)
   {
-    string hint =
-      _("Use 'zypper addrepo' or 'zypper modifyrepo' commands to add or enable repositories.");
+    string hint = str::form(
+        _("Use '%s' or '%s' commands to add or enable repositories."),
+        "zypper addrepo", "zypper modifyrepo");
     if (!specified.empty() || !not_found.empty())
       zypper.out().error(_("Specified repositories are not enabled or defined."), hint);
     else
@@ -970,6 +989,8 @@ void refresh_repos(Zypper & zypper)
 /** \return false on success, true on error */
 bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
 {
+  MIL << "going to refresh repo '" << repo.alias() << "'" << endl;
+
   // raw metadata refresh
   bool error = false;
   if (!zypper.cOpts().count("build-only"))
@@ -1756,8 +1777,156 @@ void modify_repo(Zypper & zypper, const string & alias)
 // Service Handling
 // ---------------------------------------------------------------------------
 
+static ServiceList get_all_services(Zypper & zypper)
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  ServiceList services;
+
+  try
+  {
+    // RIS type services
+    for_(it, manager.serviceBegin(), manager.serviceEnd())
+    {
+      ServiceInfo_Ptr s = new ServiceInfo(*it); 
+      services.insert(services.end(), s);
+    }
+
+    // non-services repos
+    for_(it, manager.repoBegin(), manager.repoEnd())
+    {
+      if (!it->service().empty())
+        continue;
+      RepoInfo_Ptr r = new RepoInfo(*it);
+      services.insert(services.end(), r);
+    }
+  }
+  catch ( const Exception &e )
+  {
+    ZYPP_CAUGHT(e);
+    zypper.out().error(e, _("Error reading services:"));
+    exit(ZYPPER_EXIT_ERR_ZYPP);
+  }
+
+  return services;
+}
+
+bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
+{
+  ServiceList known = get_all_services(zypper);
+  bool found = false;
+
+  unsigned int number = 1; // service number
+  for (ServiceList::const_iterator known_it = known.begin();
+      known_it != known.end(); ++known_it, ++number)
+  {
+    unsigned int tmp = 0;
+    safe_lexical_cast (str, tmp); // try to make an int out of the string
+
+    try
+    {
+      found = (*known_it)->alias() == str || tmp == number;
+      if (!found)
+      {
+        ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it); 
+        if (s_ptr)
+          found = Url(str) == s_ptr->url();
+        else
+        {
+          RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
+          found =
+            find(r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str))
+            != r_ptr->baseUrlsEnd();
+        }
+      }
+      if (found)
+      {
+        service_ptr = *known_it;
+        break;
+      }
+    }
+    catch(const url::UrlException &){}
+
+  } // END for all known services
+
+  return found;
+}
+
+/**
+ * Say "Service %s not found" for all strings in \a not_found list.
+ */
+static void report_unknown_services(Out & out, list<string> not_found)
+{
+  for_(it, not_found.begin(), not_found.end())
+    out.error(boost::str(format(
+      _("Service '%s' not found by its alias, number, or URI.")) % *it));
+
+  if (!not_found.empty())
+    out.info(str::form(
+        _("Use '%s' to get the list of defined services."), "zypper repos"));
+}
+
+/**
+ * Try to find ServiceInfo or RepoInfo counterparts among known services by alias, number,
+ * or URI, based on the list of strings given as the iterator range \a begin and
+ * \a end. Matching objects will be added to \a services (as RepoInfoBase_Ptr) and those
+ * with no match will be added to \a not_found.
+ */
+template<typename T>
+void get_services( Zypper & zypper,
+                   const T & begin, const T & end,
+                   ServiceList & services, list<string> & not_found)
+{
+  for (T it = begin; it != end; ++it)
+  {
+    RepoInfoBase_Ptr service;
+
+    if (!match_service(zypper, *it, service))
+    {
+      not_found.push_back(*it);
+      continue;
+    }
+
+    // service found
+    // is it a duplicate? compare by alias and URIs
+    //! \todo operator== in RepoInfo?
+    bool duplicate = false;
+    for (ServiceList::const_iterator serv_it = services.begin();
+        serv_it != services.end(); ++serv_it)
+    {
+      ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*serv_it);
+      ServiceInfo_Ptr current_service_ptr = dynamic_pointer_cast<ServiceInfo>(service);
+
+      // one is a service, the other is a repo 
+      if (s_ptr && !current_service_ptr)
+        continue;
+
+      // service
+      if (s_ptr)
+      {
+        if (s_ptr->alias() == current_service_ptr->alias() &&
+            s_ptr->url() == current_service_ptr->url())
+        {
+          duplicate = true;
+          break;
+        }
+      }
+      // repo
+      else if (repo_cmp_alias_urls(
+          *dynamic_pointer_cast<RepoInfo>(service),
+          *dynamic_pointer_cast<RepoInfo>(*serv_it)))
+      {
+        duplicate = true;
+        break;
+      }
+    } // END for all found so far
+
+    if (!duplicate)
+      services.push_back(service);
+  }
+}
+
 static void print_service_list(Zypper & zypper,
-                               const list<ServiceInfo> & services)
+                               const list<RepoInfoBase_Ptr> & services)
 {
   Table tbl;
   bool all = zypper.cOpts().count("details");
@@ -1785,31 +1954,54 @@ static void print_service_list(Zypper & zypper,
 
   int i = 1;
 
-  for (list<ServiceInfo>::const_iterator it = services.begin();
+  ServiceInfo_Ptr service;
+  RepoInfo_Ptr repo;
+  for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
        it != services.end(); ++it)
   {
-    ServiceInfo service = *it;
+    RepoInfoBase_Ptr base = *it;
+
     TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
 
     // number
     tr << str::numstring (i);
     // alias
-    tr << service.alias();
+    tr << base->alias();
     // name
-    tr << service.name();
+    tr << base->name();
     // enabled?
-    tr << (service.enabled() ? _("Yes") : _("No"));
+    tr << (base->enabled() ? _("Yes") : _("No"));
     // autorefresh?
-    tr << "";
+    tr << (base->autorefresh() ? _("Yes") : _("No"));
+
+    service = dynamic_pointer_cast<ServiceInfo>(base);
+    if (!service)
+      repo = dynamic_pointer_cast<RepoInfo>(base);
+
     // priority
     if (all || showprio)
-      tr << "";
+    {
+      if (service)
+        tr << "";
+      else
+        tr << str::numstring (repo->priority());
+    }
     // type
     if (all)
-      tr << "NU"; // ???
+    {
+      if (service)
+        tr << "NU"; //! \todo check
+      else
+        tr << repo->type().asString();
+    }
     // url
     if (all || showuri)
-      tr << service.url().asString();
+    {
+      if (service)
+        tr << service->url().asString();
+      else
+        tr << repo->baseUrlsBegin()->asString();
+    }
 
     tbl << tr;
     i++;
@@ -1858,21 +2050,7 @@ static void print_service_list(Zypper & zypper,
 
 void list_services(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
-  list<ServiceInfo> services;
-
-  try
-  {
-    services.insert(services.end(),
-        manager.serviceBegin(),
-        manager.serviceEnd());
-  }
-  catch ( const Exception &e )
-  {
-    ZYPP_CAUGHT(e);
-    zypper.out().error(e, _("Error reading services:"));
-    exit(ZYPPER_EXIT_ERR_ZYPP);
-  }
+  ServiceList services = get_all_services(zypper);
 
   // export to file or stdout in repo file format
   if (copts.count("export"))
@@ -1986,6 +2164,8 @@ void remove_service(Zypper & zypper, const ServiceInfo & service)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
 
+  zypper.out().info(boost::str(
+    format(_("Removing service '%s':")) % service.name()));
   manager.removeService(service);
   zypper.out().info(boost::str(
     format(_("Service '%s' has been removed.")) % service.name()));
@@ -1994,80 +2174,157 @@ void remove_service(Zypper & zypper, const ServiceInfo & service)
 
 // ---------------------------------------------------------------------------
 
-void refresh_services(Zypper & zypper)
+static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
 {
-  MIL << "going to refresh services" << endl;
+  MIL << "going to refresh service '" << service.alias() << "'" << endl;
 
   RepoManager manager(zypper.globalOpts().rm_options);
 
-  list<ServiceInfo> services;
+  bool error = true;
   try
   {
-    services.insert(services.end(), manager.serviceBegin(), manager.serviceEnd());
+    zypper.out().info(
+        str::form(_("Refreshing service '%s'."), service.name().c_str()));
+    manager.refreshService(service);
+    error = false;
   }
-  catch (const Exception & e)
+  catch (const MediaException & e)
   {
     ZYPP_CAUGHT(e);
-    zypper.out().error(e, _("Error reading services:"));
+    zypper.out().error(e,
+      str::form(
+        _("Problem retrieving the repository index file for service '%s':"),
+        service.name().c_str()),
+      _("Check if the URI is valid and accessible."));
     zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    return;
   }
 
-  for_(sit, services.begin(), services.end())
-  {
-    ServiceInfo s = *sit;
-
-    try
-    {
-      zypper.out().info(str::form(_("Refreshing service '%s'."), s.name().c_str()));
-      manager.refreshService(s);
-    }
-    catch (const MediaException & e)
-    {
-      ZYPP_CAUGHT(e);
-      zypper.out().error(e,
-        str::form(
-          _("Problem retrieving the repository index file for service '%s':"),
-          s.name().c_str()),
-        _("Check if the URI is valid and accessible."));
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      return; //! \todo continue with the next service 
-    }
-  }
+  return error;
 }
 
 // ---------------------------------------------------------------------------
 
-bool match_service(Zypper & zypper, string str, ServiceInfo * service)
+void refresh_services(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
-  list<ServiceInfo> known;
-  known.insert(known.end(), manager.serviceBegin(), manager.serviceEnd());
-  bool found = false;
+  MIL << "going to refresh services" << endl;
 
-  unsigned int number = 1; // repo number
-  for (list<ServiceInfo>::const_iterator known_it = known.begin();
-      known_it != known.end(); ++known_it, ++number)
+  ServiceList services = get_all_services(zypper);
+  
+  // get the list of repos specified on the command line ...
+  ServiceList specified;
+  list<string> not_found;
+  // ...as command arguments
+  get_services(zypper, zypper.arguments().begin(), zypper.arguments().end(),
+      specified, not_found);
+  // ...as --repo options
+  report_unknown_services(zypper.out(), not_found);
+
+  unsigned error_count = 0;
+  unsigned enabled_service_count = services.size();
+
+  if (!specified.empty() || not_found.empty())
   {
-    unsigned int tmp = 0;
-    safe_lexical_cast (str, tmp); // try to make an int out of the string
-
-    try
+    unsigned number = 0;
+    for_(sit, services.begin(), services.end())
     {
-      if (known_it->alias() == str ||
-          tmp == number ||
-          known_it->url() == Url(str))
+      ++number;
+      RepoInfoBase_Ptr service_ptr(*sit);
+
+      if (!specified.empty())
       {
-        *service = *known_it;
-        found = true;
-        break;
+        bool found = false;
+        for_(it, specified.begin(), specified.end())
+          if ((*it)->alias() == service_ptr->alias())
+          {
+            found = true;
+            break;
+          }
+
+        if (!found)
+        {
+          DBG << service_ptr->alias() << "(#" << number << ") not specified,"
+              << " skipping." << endl;
+          --enabled_service_count;
+          continue;
+        }
+      }
+
+      // skip disabled services
+      if (!service_ptr->enabled())
+      {
+        string msg = boost::str(
+          format(_("Skipping disabled service '%s'")) % service_ptr->name());
+        DBG << "skipping disabled service '" << service_ptr->alias() << "'" << endl; 
+
+        if (specified.empty())
+          zypper.out().info(msg, Out::HIGH);
+        else
+          zypper.out().error(msg);
+
+        --enabled_service_count;
+        continue;
+      }
+
+      // do the refresh
+      bool error = false;
+      ServiceInfo_Ptr s = dynamic_pointer_cast<ServiceInfo>(service_ptr);
+      if (s)
+        error = refresh_service(zypper, *s);
+      else
+      {
+        if (zypper.cOpts().count("no-repos"))
+        {
+          zypper.out().info(str::form(
+              "Skipping non-index service '%s' because '%s' is used.",
+              service_ptr->name().c_str(), "--no-repos"));
+          continue;
+        }
+        error = refresh_repo(zypper, *dynamic_pointer_cast<RepoInfo>(service_ptr));
+      }
+
+      if (error)
+      {
+        zypper.out().error(boost::str(format(
+          _("Skipping service '%s' because of the above error."))
+            % service_ptr->name()));
+        ERR << format("Skipping service '%s' because of the above error.")
+            % service_ptr->name() << endl;
+        ++error_count;
       }
     }
-    catch(const url::UrlException &){}
+  }
+  else
+    enabled_service_count = 0;
+  
+  // print the result message
+  if (enabled_service_count == 0)
+  {
+    string hint = str::form(
+        _("Use '%s' or '%s' commands to add or enable services."),
+        "zypper addservice", "zypper modifyservice");
+    if (!specified.empty() || !not_found.empty())
+      zypper.out().error(_("Specified services are not enabled or defined."), hint);
+    else
+      zypper.out().error(_("There are no enabled services defined."), hint);
+  }
+  else if (error_count == enabled_service_count)
+  {
+    zypper.out().error(_("Could not refresh the services because of errors."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+  else if (error_count)
+  {
+    zypper.out().error(_("Some of the services have not been refreshed because of an error."));
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    return;
+  }
+  else if (!specified.empty())
+    zypper.out().info(_("Specified services have been refreshed."));
+  else
+    zypper.out().info(_("All services have been refreshed."));
 
-  } // END for all known repos
-
-  return found;
+  MIL << "DONE";
 }
 
 // ---------------------------------------------------------------------------
