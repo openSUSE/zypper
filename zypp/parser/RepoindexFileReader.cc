@@ -13,6 +13,7 @@
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/RepoInfo.h"
 
@@ -110,7 +111,7 @@ namespace zypp
           path_s = s.asString();
 
         if (url_s.empty() && path_s.empty())
-          throw ParseException(_("One or both of 'url' or 'path' attributes is required."));
+          throw ParseException(str::form(_("One or both of '%s' or '%s' attributes is required."), "url", "path"));
         //! \todo FIXME this hardcodes the "/repo/" fragment - should not be if we want it to be usable by others!
         else if (url_s.empty())
           info.setPath(Pathname(string("/repo/") + path_s));
