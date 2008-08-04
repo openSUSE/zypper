@@ -16,7 +16,6 @@
 #include "zypp/ResPoolProxy.h"
 
 #include "zypp/ZYppCallbacks.h"
-#include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/ResObjects.h"
@@ -33,7 +32,6 @@
 
 #include "zypp/repo/PackageProvider.h"
 
-#include "zypp/ui/PatchContents.h"
 #include "zypp/ResPoolProxy.h"
 
 #include "zypp/sat/Pool.h"
@@ -262,44 +260,10 @@ bool solve()
 
 bool install()
 {
-  SEC << getZYpp()->commit( ZYppCommitPolicy().dryRun() ) << endl;
+  SEC << getZYpp()->commit( ZYppCommitPolicy().dryRun(true) ) << endl;
   return true;
 }
 
-///////////////////////////////////////////////////////////////////
-
-struct ConvertDbReceive : public callback::ReceiveReport<target::ScriptResolvableReport>
-{
-  virtual void start( const Resolvable::constPtr & script_r,
-                      const Pathname & path_r,
-                      Task task_r )
-  {
-    SEC << __FUNCTION__ << endl
-    << "  " << script_r << endl
-    << "  " << path_r   << endl
-    << "  " << task_r   << endl;
-  }
-
-  virtual bool progress( Notify notify_r, const std::string & text_r )
-  {
-    SEC << __FUNCTION__ << endl
-    << "  " << notify_r << endl
-    << "  " << text_r   << endl;
-    return true;
-  }
-
-  virtual void problem( const std::string & description_r )
-  {
-    SEC << __FUNCTION__ << endl
-    << "  " << description_r << endl;
-  }
-
-  virtual void finish()
-  {
-    SEC << __FUNCTION__ << endl;
-  }
-
-};
 ///////////////////////////////////////////////////////////////////
 
 struct DigestReceive : public callback::ReceiveReport<DigestReport>
@@ -576,7 +540,24 @@ try {
   //SEC << zypp::getZYpp()->diskUsage() << endl;
 
   //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
-  //waitForInput();
+
+  sat::WhatProvides prodcap( Capability("product()") );
+  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
+  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
+
+  prodcap.poolItemBegin()->status().setTransact( true, ResStatus::APPL_LOW );
+  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
+  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
+
+  pool.byKindBegin<Product>()->status().setTransact( true, ResStatus::USER );
+  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
+  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
+
+  prodcap.poolItemBegin()->status().setLock( true, ResStatus::USER );
+  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
+  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
+
+
 
   //std::for_each( pool.begin(), pool.end(), Xprint() );
 

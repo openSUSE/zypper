@@ -24,6 +24,7 @@
 #include "zypp/PoolQueryResult.h"
 
 #include "zypp/sat/Pool.h"
+#include "zypp/Product.h"
 
 using std::endl;
 
@@ -364,6 +365,7 @@ namespace zypp
           {
             sat::Pool pool( satpool() );
             bool addedItems = false;
+            std::list<PoolItem> addedProducts;
 
             if ( pool.capacity() != _store.capacity() )
             {
@@ -385,7 +387,10 @@ namespace zypp
                 {
                   // new PoolItem to add
                   pi = PoolItem::makePoolItem( s ); // the only way to create a new one!
-                  // and on the fly check for wek locks...
+                  // remember products for buddy processing (requires clean store)
+                  if ( s.isKind( ResKind::product ) )
+                    addedProducts.push_back( pi );
+                  // and on the fly check for weak locks...
                   if ( autoSoftLockAppliesTo( s ) )
                   {
                     pi.status().setSoftLock( ResStatus::USER );
@@ -397,8 +402,18 @@ namespace zypp
             }
             _storeDirty = false;
 
-            // Now, as the pool is adjusted, we must reapply those query
-            // based hard locks...
+            // Now, as the pool is adjusted, ....
+
+            // .... we check for product buddies.
+            if ( ! addedProducts.empty() )
+            {
+              for_( it, addedProducts.begin(), addedProducts.end() )
+              {
+                it->setBuddy( asKind<Product>(*it)->referencePackage() );
+              }
+            }
+
+            // .... we must reapply those query based hard locks.
             if ( addedItems )
             {
               reapplyHardLocks();

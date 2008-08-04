@@ -106,6 +106,11 @@ namespace zypp
       sat::Solvable satSolvable() const
       { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
 
+      /** Return the buddy we share our status object with.
+       * A \ref Product e.g. may share it's status with an associated reference \ref Package.
+      */
+      sat::Solvable buddy() const;
+
     public:
       /** Returns the ResObject::constPtr.
        * \see \ref operator->
@@ -128,9 +133,12 @@ namespace zypp
       { return resolvable(); }
 
     private:
+      friend class Impl;
       friend class pool::PoolImpl;
       /** \ref PoolItem generator for \ref pool::PoolImpl. */
       static PoolItem makePoolItem( const sat::Solvable & solvable_r );
+      /** Buddies are set by \ref pool::PoolImpl.*/
+      void setBuddy( sat::Solvable solv_r );
       /** internal ctor */
       explicit PoolItem( Impl * implptr_r );
       /** Pointer to implementation */

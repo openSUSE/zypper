@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/DefaultIntegral.h"
 
 #include "zypp/PoolItem.h"
 #include "zypp/ResPool.h"
@@ -27,7 +28,12 @@ namespace zypp
   //
   //	CLASS NAME : PoolItem::Impl
   //
-  /** PoolItem implementation. */
+  /** PoolItem implementation.
+   * \c _buddy handling:
+   * \li \c ==0 no buddy
+   * \li \c >0 this uses \c _buddy status
+   * \li \c <0 this status used by \c -_buddy
+   */
   struct PoolItem::Impl
   {
     public:
@@ -40,7 +46,18 @@ namespace zypp
       {}
 
       ResStatus & status() const
-      { return _status; }
+      { return _buddy > 0 ? PoolItem(buddy()).status() : _status; }
+
+      sat::Solvable buddy() const
+      {
+        if ( !_buddy )
+          return sat::Solvable::noSolvable;
+        if ( _buddy < 0 )
+          return sat::Solvable( -_buddy );
+        return sat::Solvable( _buddy );
+      }
+
+      void setBuddy( sat::Solvable solv_r );
 
       ResObject::constPtr resolvable() const
       { return _resolvable; }
@@ -76,6 +93,7 @@ namespace zypp
     private:
       mutable ResStatus     _status;
       ResObject::constPtr   _resolvable;
+      DefaultIntegral<sat::detail::IdType,sat::detail::noId> _buddy;
 
     /** \name Poor man's save/restore state.
        * \todo There may be better save/restore state strategies.
@@ -83,15 +101,15 @@ namespace zypp
     //@{
     public:
       void saveState() const
-      { _savedStatus = _status; }
+      { _savedStatus = status(); }
       void restoreState() const
-      { _status = _savedStatus; }
+      { status() = _savedStatus; }
       bool sameState() const
       {
-        if (    _status.getTransactValue() != _savedStatus.getTransactValue()
-                && !_status.isBySolver() )
+        if (    status().getTransactValue() != _savedStatus.getTransactValue()
+                && !status().isBySolver() )
           return false;
-        if ( _status.isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
+        if ( status().isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
           return false;
         return true;
       }
@@ -118,6 +136,17 @@ namespace zypp
     else
 	str << "(NULL)";
     return str;
+  }
+
+  inline void PoolItem::Impl::setBuddy( sat::Solvable solv_r )
+  {
+    PoolItem myBuddy( solv_r );
+    if ( myBuddy )
+    {
+      myBuddy._pimpl->_buddy = -resolvable()->satSolvable().id();
+      _buddy = myBuddy.satSolvable().id();
+      DBG << *this << " has buddy " << myBuddy << endl;
+    }
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -168,7 +197,9 @@ namespace zypp
   //	METHOD TYPE : PoolItem
   //
   PoolItem PoolItem::makePoolItem( const sat::Solvable & solvable_r )
-  { return PoolItem( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) ); }
+  {
+    return PoolItem( new Impl( makeResObject( solvable_r ), solvable_r.isSystem() ) );
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -197,6 +228,12 @@ namespace zypp
 
   ResStatus & PoolItem::statusReset() const
   { return _pimpl->statusReset(); }
+
+  sat::Solvable PoolItem::buddy() const
+  { return _pimpl->buddy(); }
+
+  void PoolItem::setBuddy( sat::Solvable solv_r )
+  { _pimpl->setBuddy( solv_r ); }
 
   bool PoolItem::isUndetermined() const
   { return _pimpl->isUndetermined(); }

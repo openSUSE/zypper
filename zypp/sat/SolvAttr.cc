@@ -54,10 +54,10 @@ namespace sat
   const SolvAttr SolvAttr::mediafile	( SOLVABLE_MEDIAFILE );
   const SolvAttr SolvAttr::mediadir	( SOLVABLE_MEDIADIR );
   const SolvAttr SolvAttr::changelog    ( "changelog" );
-  const SolvAttr SolvAttr::buildhost    ( "buildhost" );
-  const SolvAttr SolvAttr::distribution ( "distribution" );
+  const SolvAttr SolvAttr::buildhost    ( SOLVABLE_BUILDHOST );
+  const SolvAttr SolvAttr::distribution ( SOLVABLE_DISTRIBUTION );
   const SolvAttr SolvAttr::license      ( SOLVABLE_LICENSE );
-  const SolvAttr SolvAttr::packager     ( "packager" );
+  const SolvAttr SolvAttr::packager     ( SOLVABLE_PACKAGER );
   const SolvAttr SolvAttr::group        ( SOLVABLE_GROUP );
   const SolvAttr SolvAttr::keywords     ( SOLVABLE_KEYWORDS );
   const SolvAttr SolvAttr::sourcesize   ( "sourcesize" );
@@ -96,6 +96,7 @@ namespace sat
   const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
 
   // product
+  const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
   const SolvAttr SolvAttr::productShortlabel   ( PRODUCT_SHORTLABEL );
   const SolvAttr SolvAttr::productDistproduct  ( PRODUCT_DISTPRODUCT );
   const SolvAttr SolvAttr::productDistversion  ( PRODUCT_DISTVERSION );
@@ -105,6 +106,7 @@ namespace sat
   const SolvAttr SolvAttr::productExtraurls    ( PRODUCT_EXTRAURLS );
   const SolvAttr SolvAttr::productOptionalurls ( PRODUCT_OPTIONALURLS );
   const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
+  const SolvAttr SolvAttr::productFlavor       ( PRODUCT_FLAVOR );
 
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );

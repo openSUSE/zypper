@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Aug  4 19:34:27 CEST 2008 ma@suse.de
+
+- Add new product attributes (flavor,referencePackage).
+- Add PoolItem buddies, i.e. two PoolItems sharing the same status
+  object. This is used to keep the product resolvable and the
+  package providing the product metadata in sync.
+- revision 10742
+
+-------------------------------------------------------------------
 Sat Aug  2 19:26:52 CEST 2008 - jkupec@suse.cz
 
 - support an optional url attribute in repoindex.xml's <repo>

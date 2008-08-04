@@ -25,7 +25,7 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResObject
+  //	CLASS NAME : Product
   //
   /** Product interface.
   */
@@ -38,6 +38,15 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /** The reference package providing the product metadata,
+     *  if such a package exists.
+     */
+    sat::Solvable referencePackage() const;
+
+  public:
+    /** The product flavor (LiveCD Demo, FTP edition,...).*/
+    std::string flavor() const;
+
     /** Get the product type (base, add-on) */
     std::string type() const;
 

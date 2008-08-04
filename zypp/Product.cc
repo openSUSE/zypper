@@ -16,6 +16,7 @@
 #include "zypp/Url.h"
 
 #include "zypp/sat/LookupAttr.h"
+#include "zypp/sat/WhatProvides.h"
 
 using std::endl;
 
@@ -73,6 +74,28 @@ namespace zypp
   //	Package interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
+
+  sat::Solvable Product::referencePackage() const
+  {
+    Capability identCap( lookupStrAttribute( sat::SolvAttr::productReferences ) );
+    if ( ! identCap )
+      return sat::Solvable::noSolvable;
+
+    // if there is productReferences defined, we expect
+    // a matching package within the same repo.
+    sat::WhatProvides providers( identCap );
+    for_( it, providers.begin(), providers.end() )
+    {
+      if ( it->repository() == repository() )
+        return *it;
+    }
+
+    WAR << *this << ": no reference package found: " << identCap << endl;
+    return sat::Solvable::noSolvable;
+  }
+
+  std::string Product::flavor() const
+  { return lookupStrAttribute( sat::SolvAttr::productFlavor ); }
 
   std::string Product::type() const
   { return lookupStrAttribute( sat::SolvAttr::productType ); }

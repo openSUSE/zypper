@@ -49,12 +49,11 @@ void waitForInput()
 void mksrc( const std::string & url, const std::string & alias, RepoManager & repoManager )
 {
   RepoInfo nrepo;
-  nrepo
-      .setAlias( alias )
-      .setName( alias )
-      .setEnabled( true )
-      .setAutorefresh( false )
-      .addBaseUrl( Url(url) );
+  nrepo.setAlias( alias );
+  nrepo.setName( alias );
+  nrepo.setEnabled( true );
+  nrepo.setAutorefresh( false );
+  nrepo.addBaseUrl( Url(url) );
 
   if ( ! repoManager.isCached( nrepo ) )
   {
