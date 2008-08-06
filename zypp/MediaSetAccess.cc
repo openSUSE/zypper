@@ -44,7 +44,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   MediaSetAccess::~MediaSetAccess()
   {
-    release();
+    try
+    {
+      release();
+    }
+    catch(...) {} // don't let exception escape a dtor.
   }
 
 
@@ -88,14 +92,14 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     media::MediaManager media_mgr;
     media::MediaAccessId media;
-  
+
     media = getMediaAccessId( media_nr);
     DBG << "Going to release file " << file
         << " from media number " << media_nr << endl;
-      
+
     if ( ! media_mgr.isAttached(media) )
       return; //disattached media is free
-      
+
     media_mgr.releaseFile (media, file);
   }
 

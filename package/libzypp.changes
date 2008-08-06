@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug  6 16:23:27 CEST 2008 ma@suse.de
+
+- Don't let exception escape MediaSetAccess dtor (bnc #415017)
+- revision 10763
+
+-------------------------------------------------------------------
 Mon Aug  4 19:34:27 CEST 2008 ma@suse.de
 
 - Add new product attributes (flavor,referencePackage).
