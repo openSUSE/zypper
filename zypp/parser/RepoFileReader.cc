@@ -42,8 +42,6 @@ namespace zypp
             its != dict.sectionsEnd();
             ++its )
       {
-        MIL << (*its) << endl;
-
         RepoInfo info;
         info.setAlias(*its);
 
@@ -77,10 +75,10 @@ namespace zypp
 	  else if ( it->first == "service" )
 	    info.setService( it->second );
           else
-            ERR << "Unknown attribute " << it->second << " ignored" << endl;
+            ERR << "Unknown attribute in [" << *its << "]: " << it->second << " ignored" << endl;
         }
-        MIL << "Linking repo info with file " << file << endl;
         info.setFilepath(file);
+        MIL << info << endl;
         // add it to the list.
         callback(info);
         //if (!progress.tick())
