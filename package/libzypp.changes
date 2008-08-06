@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Aug  6 18:21:30 CEST 2008 ma@suse.de
+
+- Detect correct download path even if repository type 
+  is not set. (bnc #386386)
+- revision 10768
+
+-------------------------------------------------------------------
 Wed Aug  6 17:15:48 CEST 2008 ma@suse.de
 
 - Cleanup, mostly by removing, unused parser code and related classes.

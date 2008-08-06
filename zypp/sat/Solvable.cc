@@ -20,6 +20,8 @@
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/sat/Pool.h"
+#include "zypp/sat/LookupAttr.h"
+
 #include "zypp/Repository.h"
 #include "zypp/OnMediaLocation.h"
 #include "zypp/ZConfig.h"
@@ -209,12 +211,24 @@ namespace zypp
       OnMediaLocation ret;
 
       Pathname path;
-      if ( repository().info().type().toEnum() == repo::RepoType::YAST2_e )
-      {
 #warning STILL HARDCODED /suse PREFIX in location
-        // (ma@) loading a susetags repo search for a solvable with attribute
-        // susetags:datadir. this is the prefix. store it in RepoInfo(?).
-        path = "suse";
+      // (ma@) loading a susetags repo search for a solvable with attribute
+      // susetags:datadir. this is the prefix. store it in RepoInfo(?).
+      // (ma@) Just a quick'n'dirty solution as we wan't
+      // to get rid of susetags.
+      static const sat::SolvAttr susetagsDatadir( "susetags:datadir" );
+      switch ( repository().info().type().toEnum() )
+      {
+        case repo::RepoType::NONE_e:
+          if ( sat::LookupAttr( susetagsDatadir, repository() ).empty() )
+            break;
+          // else set type and fall through
+          repository().info().setProbedType( repo::RepoType::YAST2_e );
+        case repo::RepoType::YAST2_e:
+          path = "suse";
+          break;
+        default:
+          break;
       }
       ret.setLocation    ( path/file, medianr );
       ret.setDownloadSize( ByteCount( lookupNumAttribute( SolvAttr::downloadsize ), ByteCount::K ) );
