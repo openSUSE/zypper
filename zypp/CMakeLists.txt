@@ -65,7 +65,6 @@ SET( zypp_SRCS
   SysContent.cc
   Target.cc
   TmpPath.cc
-  TranslatedText.cc
   UpgradeStatistics.cc
   Url.cc
   VendorAttr.cc
@@ -158,7 +157,6 @@ SET( zypp_HEADERS
   SysContent.h
   Target.h
   TmpPath.h
-  TranslatedText.h
   TriBool.h
   UpgradeStatistics.h
   Url.h
@@ -243,23 +241,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/base
 )
 
-SET( zypp_data_SRCS
-  data/ResolvableData.cc
-  data/RecordId.cc
-  data/ResolvableDataConsumer.cc
-)
-
-SET( zypp_data_HEADERS
-  data/ResolvableData.h
-  data/RecordId.h
-  data/ResolvableDataConsumer.h
-)
-
-INSTALL(  FILES
-  ${zypp_data_HEADERS}
-  DESTINATION ${CMAKE_INSTALL_PREFIX}/include/zypp/data
-)
-
 SET( zypp_media_SRCS
   media/MediaException.cc
   media/MediaAccess.cc
@@ -321,27 +302,19 @@ INSTALL(  FILES
 
 SET( zypp_parser_SRCS
   parser/ParseException.cc
-  parser/TagParser.cc
   parser/IniParser.cc
   parser/IniDict.cc
-  parser/LibXMLHelper.cc
-  parser/XMLNodeIterator.cc
   parser/RepoFileReader.cc
   parser/RepoindexFileReader.cc
   parser/ProductConfReader.cc
   parser/ServiceFileReader.cc
-  parser/xml_escape_parser.cpp
 )
 
 SET( zypp_parser_HEADERS
   parser/ParseException.h
-  parser/TagParser.h
   parser/IniParser.h
   parser/IniDict.h
-  parser/LibXMLHelper.h
   parser/ParserProgress.h
-  parser/XMLNodeIterator.h
-  parser/xml_parser_assert.h
   parser/RepoFileReader.h
   parser/ProductConfReader.h
   parser/xml_escape_parser.hpp
@@ -390,6 +363,7 @@ SET( zypp_parser_xml_SRCS
   parser/xml/Reader.cc
   parser/xml/XmlString.cc
   parser/xml/libxmlfwd.cc
+  parser/xml/xml_escape_parser.cpp
 )
 
 SET( zypp_parser_xml_HEADERS
@@ -399,8 +373,10 @@ SET( zypp_parser_xml_HEADERS
   parser/xml/ParseDefException.h
   parser/xml/ParseDefTraits.h
   parser/xml/Reader.h
+  parser/xml/XmlEscape.h
   parser/xml/XmlString.h
   parser/xml/libxmlfwd.h
+  parser/xml/xml_escape_parser.hpp
 )
 
 INSTALL(  FILES
@@ -767,7 +743,6 @@ ${zypp_parser_yum_SRCS}
 ${zypp_parser_plaindir_SRCS}
 ${zypp_parser_ws_SRCS}
 ${zypp_parser_SRCS}
-${zypp_data_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
 ${zypp_url_SRCS}
@@ -800,7 +775,6 @@ ${zypp_parser_plaindir_HEADERS}
 ${zypp_parser_xml_HEADERS}
 ${zypp_parser_ws_HEADERS}
 ${zypp_parser_HEADERS}
-${zypp_data_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_media_HEADERS}
 ${zypp_target_hal_HEADERS}
@@ -841,7 +815,6 @@ SET_LOGGROUP( "satsolver" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_yum2_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_capability_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_ui_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_data_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_media_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_hal_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_xml_SRCS} )

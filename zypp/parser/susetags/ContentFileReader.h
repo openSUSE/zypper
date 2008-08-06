@@ -26,15 +26,6 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace data
-  { /////////////////////////////////////////////////////////////////
-    class Product;
-    DEFINE_PTR_TYPE(Product);
-    /////////////////////////////////////////////////////////////////
-  } // namespace data
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
   namespace parser
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
@@ -48,11 +39,12 @@ namespace zypp
       //
       //	CLASS NAME : ContentFileReader
       //
-      /** */
+      /** Parse repoindex part from a \c content file.
+       * This is all the downloader needs.
+      */
       class ContentFileReader : private base::NonCopyable
       {
 	public:
-	  typedef function<void(const data::Product_Ptr &)> ProductConsumer;
 	  typedef function<void(const RepoIndex_Ptr &)> RepoIndexConsumer;
 
 	public:
@@ -70,10 +62,6 @@ namespace zypp
 			      const ProgressData::ReceiverFnc & fnc_r = ProgressData::ReceiverFnc() );
 
 	public:
-	  /** Consumer to call when product data were parsed. */
-	  void setProductConsumer( const ProductConsumer & fnc_r )
-	  { _productConsumer = fnc_r; }
-
 	  /** Consumer to call when repo index was parsed. */
 	  void setRepoIndexConsumer( const RepoIndexConsumer & fnc_r )
 	  { _repoIndexConsumer = fnc_r; }
@@ -99,7 +87,6 @@ namespace zypp
 	private:
 	  class Impl;
 	  RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
-	  ProductConsumer _productConsumer;
 	  RepoIndexConsumer _repoIndexConsumer;
       };
       ///////////////////////////////////////////////////////////////////

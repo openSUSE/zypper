@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug  6 17:15:48 CEST 2008 ma@suse.de
+
+- Cleanup, mostly by removing, unused parser code and related classes.
+- revision 10765
+
+-------------------------------------------------------------------
 Wed Aug  6 16:23:27 CEST 2008 ma@suse.de
 
 - Don't let exception escape MediaSetAccess dtor (bnc #415017)

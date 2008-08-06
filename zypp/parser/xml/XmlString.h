@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/parser/xml/libxmlfwd.h"
+#include "zypp/parser/xml/XmlEscape.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

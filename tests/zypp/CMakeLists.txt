@@ -29,7 +29,6 @@ ADD_TESTS(
   RepoStatus
   ResKind
   Target
-  TranslatedText
   Url
   Vendor
   Vendor2

@@ -20,7 +20,6 @@
 
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
-#include "zypp/data/ResolvableData.h"
 
 #include "zypp/ZConfig.h"
 
@@ -50,13 +49,6 @@ namespace zypp
 	  : _parent( parent_r )
 	  {}
 
-	  data::Product & product()
-	  {
-	    if ( !_product )
-	      _product = new data::Product;
-	    return *_product;
-	  }
-
 	  RepoIndex & repoindex()
 	  {
 	    if ( !_repoindex )
@@ -64,19 +56,8 @@ namespace zypp
 	    return *_repoindex;
 	  }
 
-	  bool hasProduct() const
-	  { return _product; }
-
 	  bool hasRepoIndex() const
 	  { return _repoindex; }
-
-	  data::Product_Ptr handoutProduct()
-	  {
-	    data::Product_Ptr ret;
-	    ret.swap( _product );
-	    _product = 0;
-	    return ret;
-	  }
 
 	  RepoIndex_Ptr handoutRepoIndex()
 	  {
@@ -87,71 +68,6 @@ namespace zypp
 	  }
 
 	public:
-	  bool isRel( const std::string & rel_r ) const
-	  {
-	    try
-	    {
-	      Rel( rel_r );
-	      return true;
-	    }
-	    catch (...)
-	    {}
-	    return false;
-	  }
-
-	  bool setUrlList( std::list<Url> & list_r, const std::string & value ) const
-	  {
-	    bool errors = false;
-	    std::list<std::string> urls;
-	    if ( str::split( value, std::back_inserter(urls) ) )
-	    {
-	      for ( std::list<std::string>::const_iterator it = urls.begin();
-	            it != urls.end(); ++it )
-	      {
-		try
-		{
-		  list_r.push_back( *it );
-		}
-		catch( const Exception & excpt_r )
-		{
-		  WAR << *it << ": " << excpt_r << endl;
-		  errors = true;
-		}
-	      }
-	    }
-	    return errors;
-	  }
-
-	  void setDependencies( data::DependencyList & deplist_r, const std::string & value ) const
-	  {
-	    std::list<std::string> words;
-	    str::split( value, std::back_inserter( words ) );
-
-	    for ( std::list<std::string>::const_iterator it = words.begin();
-		  it != words.end(); ++it )
-	    {
-              std::string name( *it );
-
-              // check for '[op edition]':
-              std::list<std::string>::const_iterator next = it;
-              if ( ++next != words.end()
-                   && (*next).find_first_of( "<>=" ) != std::string::npos )
-              {
-                std::string op = *next;
-                if ( ++next != words.end() )
-                {
-                  // Add the 'name op edition' dependency
-                  deplist_r.insert( Capability( name, op, *next ) );
-                  it = next;
-                  continue;
-                }
-              }
-
-	      // Add the 'name' dependency
-	      deplist_r.insert( Capability( name, Capability::PARSED ) );
-	    }
-	  }
-
 	  bool setFileCheckSum( std::map<std::string, CheckSum> & map_r, const std::string & value ) const
 	  {
 	    bool error = false;
@@ -172,7 +88,6 @@ namespace zypp
 
 	private:
 	  const ContentFileReader & _parent;
-	  data::Product_Ptr  _product;
 	  RepoIndex_Ptr      _repoindex;
       };
       ///////////////////////////////////////////////////////////////////
@@ -217,11 +132,6 @@ namespace zypp
       void ContentFileReader::endParse()
       {
 	// consume oldData
-	if ( _pimpl->hasProduct() )
-	{
-	  if ( _productConsumer )
-	    _productConsumer( _pimpl->handoutProduct() );
-	}
 	if ( _pimpl->hasRepoIndex() )
 	{
 	  if ( _repoIndexConsumer )
@@ -305,128 +215,6 @@ namespace zypp
 	  }
 
 	  //
-	  // Product related data:
-	  //
-	  if ( key == "PRODUCT" )
-	  {
-	    std::replace( value.begin(), value.end(), ' ', '_' );
-	    _pimpl->product().name = value;
-	  }
-	  else if ( key == "VERSION" )
-	  {
-	    _pimpl->product().edition = Edition( value );
-	  }
-	  else if ( key == "ARCH" )
-	  {
-	    // Default product arch is noarch. We update, if the
-	    // ARCH.xxx tag is better than the current product arch
-	    // and still compatible with the sysarch.
-	    Arch carch( modifier );
-	    if ( Arch::compare( Arch(_pimpl->product().arch), carch ) < 0
-		 &&  carch.compatibleWith( sysarch ) )
-	    {
-	      _pimpl->product().arch = Arch( modifier );
-	    }
-	  }
-	  else if ( key == "DISTPRODUCT" )
-	  {
-	    _pimpl->product().distributionName = value;
-	  }
-	  else if ( key == "DISTVERSION" )
-	  {
-	    _pimpl->product().distributionEdition = Edition( value );
-	  }
-	  else if ( key == "VENDOR" )
-	  {
-	    _pimpl->product().vendor = value;
-	  }
-	  else if ( key == "LABEL" )
-	  {
-	    _pimpl->product().summary.setText( value, Locale(modifier) );
-	  }
-	  else if ( key == "SHORTLABEL" )
-	  {
-	    _pimpl->product().shortName.setText( value, Locale(modifier) );
-	  }
-	  else if ( key == "TYPE" )
-	  {
-	    _pimpl->product().type = value;
-	  }
-	  else if ( key == "RELNOTESURL" )
-	  {
-	    for( std::string::size_type pos = value.find("%a");
-		 pos != std::string::npos;
-		 pos = value.find("%a") )
-	    {
-	      value.replace( pos, 2, sysarch.asString() );
-	    }
-	    try
-	    {
-	      _pimpl->product().releasenotesUrl = value;
-	    }
-	    catch( const Exception & excpt_r )
-	    {
-	      WAR << errPrefix( line.lineNo(), excpt_r.asString(), *line ) << endl;
-	    }
-	  }
-	  else if ( key == "UPDATEURLS" )
-	  {
-	    if ( _pimpl->setUrlList( _pimpl->product().updateUrls, value ) )
-	    {
-	      WAR << errPrefix( line.lineNo(), "Ignored malformed URL(s)", *line ) << endl;
-	    }
-	  }
-	  else if ( key == "EXTRAURLS" )
-	  {
-	    if ( _pimpl->setUrlList( _pimpl->product().extraUrls, value ) )
-	    {
-	      WAR << errPrefix( line.lineNo(), "Ignored malformed URL(s)", *line ) << endl;
-	    }
-	  }
-	  else if ( key == "OPTIONALURLS" )
-	  {
-	    if ( _pimpl->setUrlList( _pimpl->product().optionalUrls, value ) )
-	    {
-	      WAR << errPrefix( line.lineNo(), "Ignored malformed URL(s)", *line ) << endl;
-	    }
-	  }
-	  else if ( key == "PREREQUIRES" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::PREREQUIRES], value );
-	  }
-	  else if ( key == "REQUIRES" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::REQUIRES], value );
-	  }
-	  else if ( key == "PROVIDES" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::PROVIDES], value );
-	  }
-	  else if ( key == "CONFLICTS" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::CONFLICTS], value );
-	  }
-	  else if ( key == "OBSOLETES" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::OBSOLETES], value );
-	  }
-	  else if ( key == "RECOMMENDS" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::RECOMMENDS], value );
-	  }
-	  else if ( key == "SUGGESTS" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::SUGGESTS], value );
-	  }
-	  else if ( key == "SUPPLEMENTS" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::SUPPLEMENTS], value );
-	  }
-	  else if ( key == "ENHANCES" )
-	  {
-	    _pimpl->setDependencies( _pimpl->product().deps[Dep::ENHANCES], value );
-	  }
-	  //
 	  // ReppoIndex related data:
 	  //
 	  else if ( key == "DEFAULTBASE" )
@@ -494,18 +282,6 @@ namespace zypp
 	//
 	// post processing
 	//
-	if ( _pimpl->hasProduct() )
-	{
-	  // Insert a "Provides" _dist_name" == _dist_version"
-	  if ( ! _pimpl->product().distributionName.empty() )
-	  {
-	    _pimpl->product().deps[Dep::PROVIDES].insert(
-		Capability( _pimpl->product().distributionName,
-                            Rel::EQ,
-                            _pimpl->product().distributionEdition,
-                            ResKind::product ) );
-	  }
-	}
 	if ( ! ticks.toMax() )
 	  userRequestedAbort( line.lineNo() );
 

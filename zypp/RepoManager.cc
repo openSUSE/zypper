@@ -1345,7 +1345,7 @@ namespace zypp
         bind(&Impl::ServiceCollector::collect,collector,_1) );
 
     // only one service definition in the file
-    if ( tmpSet.size() == 1 ) 
+    if ( tmpSet.size() == 1 )
     {
       if ( filesystem::unlink(location) != 0 )
       {
@@ -1447,7 +1447,7 @@ namespace zypp
   void RepoManager::refreshService( const ServiceInfo & service )
   {
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
-    
+
     // download the repo index file
     media::MediaManager mediamanager;
     //if (service.url().empty())
@@ -1549,7 +1549,7 @@ namespace zypp
     _pimpl->services.insert(service);
 
     // changed name, must change also repositories
-    if( oldAlias != service.alias() ) 
+    if( oldAlias != service.alias() )
     {
       std::vector<RepoInfo> toModify;
       getRepositoriesInService(oldAlias,
@@ -1564,7 +1564,7 @@ namespace zypp
     //! \todo changed enabled status
     if ( oldService.enabled() != service.enabled())
     {
-      
+
     }
 
     //! \todo refresh the service automatically if url is changed?

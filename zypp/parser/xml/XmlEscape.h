@@ -6,34 +6,34 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+/** \file zypp/parser/xml/XmlEscape.h
+ *
+*/
+#ifndef ZYPP_PARSER_XML_XMLESCAPE_H
+#define ZYPP_PARSER_XML_XMLESCAPE_H
 
-#ifndef ZYPP_PARSER_PLAINDIR_REPOPARSER_H
-#define ZYPP_PARSER_PLAINDIR_REPOPARSER_H
-
-#include "zypp/RepoStatus.h"
+// from IoBind Library:
+#include <zypp/parser/xml/xml_escape_parser.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace parser
+  namespace xml
   { /////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////
-    namespace plaindir
-    { /////////////////////////////////////////////////////////////////
 
-      /**
-       * \short Gives a cookie for a dir
-       */
-      RepoStatus dirStatus( const Pathname &dir );
+    /** Escape xml special charaters (<tt>& -> &amp;</tt>; from IoBind library). */
+    inline std::string escape( const std::string & in_r )
+    { return iobind::parser::xml_escape_parser().escape( in_r ); }
 
-      /////////////////////////////////////////////////////////////////
-    } // namespace plaindir
-    ///////////////////////////////////////////////////////////////////
+    /** Unescape xml special charaters (<tt>&amp; -> &</tt>; from IoBind library) */
+    inline std::string unescape( const std::string & in_r )
+    { return iobind::parser::xml_escape_parser().unescape( in_r ); }
+
     /////////////////////////////////////////////////////////////////
-  } // namespace parser
+  } // namespace xml
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_PARSER_PLAINDIR_REPOPARSER_H
+#endif // ZYPP_PARSER_XML_XMLESCAPE_H
