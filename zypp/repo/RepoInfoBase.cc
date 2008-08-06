@@ -150,7 +150,7 @@ namespace zypp
   {
     str << "--------------------------------------" << std::endl;
     str << "- alias       : " << alias() << std::endl;
-    str << "- alias       : " << name() << std::endl;
+    str << "- name        : " << name() << std::endl;
     str << "- enabled     : " << enabled() << std::endl;
     str << "- autorefresh : " << autorefresh() << std::endl;
 
