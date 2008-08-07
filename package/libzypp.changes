@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug  7 22:00:55 CEST 2008 - dmacvicar@suse.de
+
+- implement relogin suggested support (fate#304889)
+
+-------------------------------------------------------------------
 Wed Aug  6 18:21:30 CEST 2008 - ma@suse.de
 
 - Detect correct download path even if repository type 
