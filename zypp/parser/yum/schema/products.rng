@@ -33,10 +33,13 @@
               <ref name="localized-string"/>
             </element>
           </zeroOrMore>
-          <element name="ns1:distribution-name">
+          <element name="ns1:distribution">
             <text/>
           </element>
-          <element name="ns1:distribution-edition">
+          <element name="ns1:flavor">
+            <text/>
+          </element>
+          <element name="ns1:references">
             <text/>
           </element>
           <oneOrMore>

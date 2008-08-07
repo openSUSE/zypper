@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns:ns1="http://linux.duke.edu/metadata/common" ns="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar ns="http://novell.com/package/metadata/suse/common" xmlns:ns1="http://linux.duke.edu/metadata/common" xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0">
   <include href="primary.rng">
     <define name="element-format">
       <element name="ns1:format">

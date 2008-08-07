@@ -19,6 +19,7 @@ products = element ns1:products {
     element ns1:shortname { localized-string }*,
     element ns1:distribution { text },
     element ns1:flavor { text },
+    element ns1:references { text },
     element ns1:description { localized-string }+,
     element ns1:release-notes-url { text }?,
     element ns1:update-url { text }*,
