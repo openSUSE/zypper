@@ -1,24 +1,24 @@
 -------------------------------------------------------------------
-Wed Aug  6 18:21:30 CEST 2008 ma@suse.de
+Wed Aug  6 18:21:30 CEST 2008 - ma@suse.de
 
 - Detect correct download path even if repository type 
   is not set. (bnc #386386)
 - revision 10768
 
 -------------------------------------------------------------------
-Wed Aug  6 17:15:48 CEST 2008 ma@suse.de
+Wed Aug  6 17:15:48 CEST 2008 - ma@suse.de
 
 - Cleanup, mostly by removing, unused parser code and related classes.
 - revision 10765
 
 -------------------------------------------------------------------
-Wed Aug  6 16:23:27 CEST 2008 ma@suse.de
+Wed Aug  6 16:23:27 CEST 2008 - ma@suse.de
 
 - Don't let exception escape MediaSetAccess dtor (bnc #415017)
 - revision 10763
 
 -------------------------------------------------------------------
-Mon Aug  4 19:34:27 CEST 2008 ma@suse.de
+Mon Aug  4 19:34:27 CEST 2008 - ma@suse.de
 
 - Add new product attributes (flavor,referencePackage).
 - Add PoolItem buddies, i.e. two PoolItems sharing the same status
@@ -33,7 +33,7 @@ Sat Aug  2 19:26:52 CEST 2008 - jkupec@suse.cz
 - revision 10729
 
 -------------------------------------------------------------------
-Thu Jul 31 21:52:11 CEST 2008 ma@suse.de
+Thu Jul 31 21:52:11 CEST 2008 - ma@suse.de
 
 - New class ProductInfo to provide product related metadata that
   might be associated with a package. This will replace the Product
@@ -47,14 +47,14 @@ Thu Jul 31 19:01:54 CEST 2008 - dmacvicar@suse.de
   and add it to the agent string for better statistics
 
 -------------------------------------------------------------------
-Thu Jul 31 19:01:14 CEST 2008 ma@suse.de
+Thu Jul 31 19:01:14 CEST 2008 - ma@suse.de
 
 - Follow solver policy and make repository priority the highest
   key, when ordering packages. Then architecture, and edition last.
 - revision 10710
 
 -------------------------------------------------------------------
-Wed Jul 30 19:12:00 CEST 2008 ma@suse.de
+Wed Jul 30 19:12:00 CEST 2008 - ma@suse.de
 
 - /var/lib/zypp and /var/cache/zypp should be owned by libzypp 
   (bnc #412094)
@@ -75,7 +75,7 @@ Tue Jul 29 12:59:46 CEST 2008 - jkupec@suse.cz
 - revision 10662
 
 -------------------------------------------------------------------
-Mon Jul 28 18:13:24 CEST 2008- ma@suse.de
+Mon Jul 28 18:13:24 CEST 2008 - ma@suse.de
 
 - Fixed SolvIterMixin::Selectable_iterator eating some solvables
   (bnc #411339)

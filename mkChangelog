@@ -33,7 +33,7 @@ into your editor (\$EDITOR=$EDITOR), providing a new changes
 entry template:
 
     -------------------------------------------------------------------
-    Wed Jul 30 18:20:06 CEST 2008 ma@suse.de
+    Wed Jul 30 18:20:06 CEST 2008 - ma@suse.de
 
     -
     - revision 10702
@@ -122,7 +122,7 @@ TMPFILE=$(mktemp)
 exec 3>&1-
 exec >$TMPFILE
 echo "-------------------------------------------------------------------"
-echo "$(date) $EMAIL"
+echo "$(date) - $EMAIL"
 echo ""
 echo "- "
 echo "- revision $(nextrevision)"
