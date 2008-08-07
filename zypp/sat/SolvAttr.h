@@ -95,6 +95,7 @@ namespace sat
       static const SolvAttr patchcategory;
       static const SolvAttr rebootSuggested;
       static const SolvAttr restartSuggested;
+      static const SolvAttr reloginSuggested;
       static const SolvAttr message;
       static const SolvAttr updateCollectionName;
       static const SolvAttr updateCollectionEvr;

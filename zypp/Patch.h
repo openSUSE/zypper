@@ -82,6 +82,12 @@ namespace zypp
       bool restartSuggested() const;
 
       /**
+       * Does the patch needs the user to relogin to take effect?
+       * relogin is suggested then
+       */
+      bool reloginSuggested() const;
+
+      /**
        * \short Information or warning to be displayed to the user
        */
       std::string message( const Locale & lang_r = Locale() ) const;

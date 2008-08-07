@@ -80,6 +80,10 @@ namespace zypp
   bool Patch::restartSuggested() const
   { return lookupBoolAttribute( sat::SolvAttr::restartSuggested ); }
 
+  bool Patch::reloginSuggested() const
+  { return lookupBoolAttribute( sat::SolvAttr::reloginSuggested ); }
+
+
   bool Patch::interactive() const
   {
     if ( rebootSuggested()
