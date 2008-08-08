@@ -111,7 +111,7 @@ namespace zypp
         {
           if (it->status().isToBeInstalled())
             {
-              if ((*it)->kind() == ResTraits<SrcPackage>::kind) {
+              if ((*it)->kind() == ResKind::srcpackage) {
 		srclist_r.push_back( *it );
               }
               else

@@ -68,7 +68,7 @@ unsigned int getResolvables(ResStore *store){
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 	std::cout << "get packages from db...\n";
 
-	Resolvable::Kind kind = ResTraits<Package>::kind;
+	Resolvable::Kind kind = ResKind::package;
 	CapFactory factory;
 
 	for(unsigned int i = 2000; i < packIDs.size(); i++){

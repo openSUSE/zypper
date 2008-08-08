@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     {
       ZYpp::Ptr z = getZYpp();
 
-//       CapabilityImpl::Ptr freak = capability::parse( ResTraits<Package>::kind, "libc.so.6");
+//       CapabilityImpl::Ptr freak = capability::parse( ResKind::package, "libc.so.6");
 //       MIL << freak << endl;
 //       MIL << "isVer: " << isKind<VersionedCap>(freak) << endl;
 //       MIL << "isNam: " << isKind<NamedCap>(freak) << endl;
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
       while (file && !file.eof())
       {
         getline(file, buffer);
-        CapabilityImpl::Ptr cap = capability::parse( ResTraits<Package>::kind, buffer );
+        CapabilityImpl::Ptr cap = capability::parse( ResKind::package, buffer );
         if ( cap == 0L )
         {
           //ZYPP_THROW(Exception("Invalid capability: [" + buffer + "]"));
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
       for ( list<CapabilityImpl::Ptr>::const_iterator it = caps.begin(); it != caps.end(); ++it )
       {
         CapabilityImpl::Ptr cap = *it;
-        if ( ( ! cap ) || ( cap->refers() != ResTraits<Package>::kind ) )
+        if ( ( ! cap ) || ( cap->refers() != ResKind::package ) )
         {
           ERR << "Invalid capability : [" << buffer << "]" << endl;
           continue;

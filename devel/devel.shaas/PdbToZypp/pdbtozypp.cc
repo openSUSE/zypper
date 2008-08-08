@@ -33,7 +33,7 @@ int PdbToZypp::readOut(){
 
 	std::vector< std::vector<string> > packIDs = dbPackages->getResult();
 
-	Resolvable::Kind kind = ResTraits<Package>::kind;
+	Resolvable::Kind kind = ResKind::package;
 	CapFactory factory;
 
 	for(unsigned int i = 0; i < packIDs.size(); i++){

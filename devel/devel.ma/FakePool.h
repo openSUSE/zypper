@@ -60,7 +60,7 @@ namespace zypp
     public:
       DataCollect( bool verbose_r = true )
       : _definst( false )
-      , _defkind( ResTraits<Package>::kind )
+      , _defkind( ResKind::package )
       , _defdep( Dep::PROVIDES )
       , _defdepref( _defkind )
       , _verbose( verbose_r )
@@ -160,17 +160,17 @@ namespace zypp
         if ( _d )
           {
             ResObject::Ptr p;
-            if ( _d->_kind == ResTraits<Package>::kind )
+            if ( _d->_kind == ResKind::package )
               p = make<Package>();
-            else if ( _d->_kind == ResTraits<SrcPackage>::kind )
+            else if ( _d->_kind == ResKind::srcpackage )
               p = make<SrcPackage>();
             else if ( _d->_kind == ResTraits<Selection>::kind )
               p = make<Selection>();
-            else if ( _d->_kind == ResTraits<Pattern>::kind )
+            else if ( _d->_kind == ResKind::pattern )
               p = make<Pattern>();
-            else if ( _d->_kind == ResTraits<Product>::kind )
+            else if ( _d->_kind == ResKind::product )
               p = make<Product>();
-            else if ( _d->_kind == ResTraits<Patch>::kind )
+            else if ( _d->_kind == ResKind::patch )
               p = make<Patch>();
             else if ( _d->_kind == ResTraits<Script>::kind )
               p = make<Script>();

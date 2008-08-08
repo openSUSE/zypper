@@ -94,7 +94,7 @@ namespace zypp
 
   /** Convenient access to well known ResKinds.
    * \code
-   * ResKind packagekind = ResTraits<Package>::kind;
+   * ResKind packagekind = ResKind::package;
    * ResKind packagekind = resKind<Package>();
    * \endcode
   */
@@ -104,7 +104,7 @@ namespace zypp
   /** Convenient test for ResKinds.
    * \code
    * ResKind value;
-   * if ( ResTraits<Package>::kind == value )
+   * if ( ResKind::package == value )
    * if ( resKind<Package>() == value )
    * if ( isKind<Package>( value ) )
    * \endcode

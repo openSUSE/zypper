@@ -75,19 +75,19 @@ namespace zypp
      *
      * // print and count all Packages named "kernel"
      * counter = 0;
-     * store.forEach( chain( ByKind(ResTraits<Package>::kind),
+     * store.forEach( chain( ByKind(ResKind::package),
      *                       ByName("kernel") ),
      *                PrintAndCount(counter) );
      *
      * // print and count all Packages not named "kernel"
      * counter = 0;
-     * store.forEach( chain( ByKind(ResTraits<Package>::kind),
+     * store.forEach( chain( ByKind(ResKind::package),
      *                       not_c(ByName("kernel")) ),
      *                PrintAndCount(counter) );
      *
      * // same as above ;)
      * counter = 0;
-     * store.forEach( chain( ByKind(ResTraits<Package>::kind),
+     * store.forEach( chain( ByKind(ResKind::package),
      *                       chain( not_c(ByName("kernel")),
      *                              PrintAndCount(counter) ) ),
      *                true_c() );

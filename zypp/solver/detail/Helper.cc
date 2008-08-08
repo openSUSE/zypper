@@ -265,7 +265,7 @@ Helper::itemToString (PoolItem item, bool shortVersion)
     ostringstream os;
     if (!item) return "";
 
-    if (item->kind() != ResTraits<zypp::Package>::kind)
+    if (item->kind() != ResKind::package)
 	os << item->kind() << ':';
     os  << item->name();
     if (!shortVersion) {

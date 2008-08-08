@@ -100,10 +100,10 @@ query_pool( ZYpp::Ptr Z,
 #define FILTER_ALL "all"
   if ( filter.empty() ) filter = FILTER_ALL;
 
-  if (filter == "packages") kind = ResTraits<zypp::Package>::kind;
-  else if (filter == "patches") kind = ResTraits<zypp::Patch>::kind;
-  else if (filter == "patterns") kind = ResTraits<zypp::Pattern>::kind;
-  else if (filter == "products") kind = ResTraits<zypp::Product>::kind;
+  if (filter == "packages") kind = ResKind::package;
+  else if (filter == "patches") kind = ResKind::patch;
+  else if (filter == "patterns") kind = ResKind::pattern;
+  else if (filter == "products") kind = ResKind::product;
   else if (filter != FILTER_ALL)
   {
     std::cerr << "usage: zypp-query-pool [--registrable|-r] [packages|patches|patterns|products] [<alias>]" << endl;

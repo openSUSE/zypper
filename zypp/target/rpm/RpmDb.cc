@@ -1333,7 +1333,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header,
     {
       try
       {
-        dataCollect[Dep::PROVIDES].insert(capfactory.fromImpl(capability::buildFile(ResTraits<Package>::kind, *filename) ));
+        dataCollect[Dep::PROVIDES].insert(capfactory.fromImpl(capability::buildFile(ResKind::package, *filename) ));
       }
       catch (Exception & excpt_r)
       {
@@ -1426,7 +1426,7 @@ const list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBRepor
           WAR << "rpmdb.findByFile returned unknown package " << *iter << endl;
           continue;
         }
-        pptr->injectProvides(_f.parse(ResTraits<Package>::kind, *it));
+        pptr->injectProvides(_f.parse(ResKind::package, *it));
       }
     }
 #endif

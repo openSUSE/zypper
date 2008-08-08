@@ -137,7 +137,7 @@ struct EnhacedCollector : public Collector
     try
       {
         // bulid Package deps.
-        _caps.insert( _factory.parse( ResTraits<Package>::kind, line_r ) );
+        _caps.insert( _factory.parse( ResKind::package, line_r ) );
       }
     catch( Exception & excpt_r )
       {
