@@ -27,6 +27,10 @@ namespace zypp
       str << " dryRun";
     if ( obj.rpmNoSignature() )
       str << " rpmNoSignature";
+    if ( obj.rpmExcludeDocs() )
+      str << " rpmExcludeDocs";
+    if ( obj.syncPoolAfterCommit() )
+      str << " syncPoolAfterCommit";
     return str << " )";
   }
 

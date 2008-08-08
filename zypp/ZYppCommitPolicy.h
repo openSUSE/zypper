@@ -30,6 +30,7 @@ namespace zypp
     : _restrictToMedia    ( 0 )
     , _dryRun             ( false )
     , _rpmNoSignature     ( false )
+    , _rpmExcludeDocs     ( false )
     , _syncPoolAfterCommit( true )
     {}
 
@@ -42,6 +43,9 @@ namespace zypp
 
     bool rpmNoSignature() const
     { return _rpmNoSignature; }
+
+    bool rpmExcludeDocs() const
+    { return _rpmExcludeDocs; }
 
     bool syncPoolAfterCommit() const
     { return _syncPoolAfterCommit; }
@@ -67,6 +71,10 @@ namespace zypp
     ZYppCommitPolicy & rpmNoSignature( bool yesNo_r )
     { _rpmNoSignature = yesNo_r; return *this; }
 
+    /** Use rpm option --excludedocs (default: false) */
+    ZYppCommitPolicy & rpmExcludeDocs( bool yesNo_r )
+    { _rpmExcludeDocs = yesNo_r; return *this; }
+
     /** Kepp pool in sync with the Target databases after commit (default: true) */
     ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r )
     { _syncPoolAfterCommit = yesNo_r; return *this; }
@@ -75,6 +83,7 @@ namespace zypp
     unsigned _restrictToMedia;
     bool     _dryRun;
     bool     _rpmNoSignature;
+    bool     _rpmExcludeDocs;
     bool     _syncPoolAfterCommit;
   };
   ///////////////////////////////////////////////////////////////////
