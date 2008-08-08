@@ -89,13 +89,13 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
 
       cout << endl << endl;
 
-      if (kind == ResTraits<Package>::kind)
+      if (kind == ResKind::package)
         printPkgInfo(zypper, *s);
-      else if (kind == ResTraits<Patch>::kind)
+      else if (kind == ResKind::patch)
         printPatchInfo(zypper, *s);
-      else if (kind == ResTraits<Pattern>::kind)
+      else if (kind == ResKind::pattern)
         printPatternInfo(zypper, *s);
-      else if (kind == ResTraits<Product>::kind)
+      else if (kind == ResKind::product)
         printProductInfo(zypper, *s);
       else
         // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).

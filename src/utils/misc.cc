@@ -15,7 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaManager.h"
-#include "zypp/parser/xml_escape_parser.hpp"
+#include "zypp/parser/xml/XmlEscape.h"
 #include "zypp/Capability.h"
 
 #include "main.h"
@@ -80,15 +80,15 @@ bool is_changeable_media(const zypp::Url & url)
 
 string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long count)
 {
-  if (kind == ResTraits<Package>::kind)
+  if (kind == ResKind::package)
     return _PL("package", "packages", count);
-  if (kind == ResTraits<Pattern>::kind)
+  if (kind == ResKind::pattern)
     return _PL("pattern", "patterns", count);
-  if (kind == ResTraits<Product>::kind)
+  if (kind == ResKind::product)
     return _PL("product", "product", count);
-  if (kind == ResTraits<Patch>::kind)
+  if (kind == ResKind::patch)
     return _PL("patch", "patches", count);
-  if (kind == ResTraits<SrcPackage>::kind)
+  if (kind == ResKind::srcpackage)
     return _PL("srcpackage", "srcpackages", count);
   // default
   return _PL("resolvable", "resolvables", count);
@@ -245,8 +245,7 @@ Pathname cache_rpm(const string & rpm_uri_str, const string & cache_dir)
 
 string xml_encode(const string & text)
 {
-  iobind::parser::xml_escape_parser parser;
-  return parser.escape(text);
+  return zypp::xml::escape(text);
 }
 
 std::string & indent(std::string & text, int columns)

@@ -38,15 +38,15 @@ ResKind string_to_kind (const string &skind)
   ResObject::Kind empty;
   string lskind = str::toLower (skind);
   if (lskind == "package")
-    return ResTraits<Package>::kind;
+    return ResKind::package;
   if (lskind == "pattern")
-    return ResTraits<Pattern>::kind;
+    return ResKind::pattern;
   if (lskind == "product")
-    return ResTraits<Product>::kind;
+    return ResKind::product;
   if (lskind == "patch")
-    return ResTraits<Patch>::kind;
+    return ResKind::patch;
   if (lskind == "srcpackage")
-    return ResTraits<SrcPackage>::kind;
+    return ResKind::srcpackage;
   // not recognized
   return empty;
 }
@@ -278,7 +278,7 @@ void build_deps_install(Zypper & zypper)
         God->resolver()->addRequire(*itc);
         DBG << "added req: " << *itc << endl;
       }*/
-      God->resolver()->addRequire(Capability(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResTraits<SrcPackage>::kind));
+      God->resolver()->addRequire(Capability(srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage));
       //installer.item.status().setToBeInstalled( zypp::ResStatus::USER );
     }
     else

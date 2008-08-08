@@ -3087,9 +3087,9 @@ void Zypper::doCommand()
       }
     }
     else if (globalOpts().is_rug_compatible)
-      kinds.insert(ResTraits<Package>::kind);
+      kinds.insert(ResKind::package);
     else
-      kinds.insert(ResTraits<Patch>::kind);
+      kinds.insert(ResKind::patch);
 
     bool best_effort = copts.count( "best-effort" );
 
@@ -3257,13 +3257,13 @@ void Zypper::doCommand()
     switch (command().toEnum())
     {
     case ZypperCommand::RUG_PATCH_INFO_e:
-      kind =  ResTraits<Patch>::kind;
+      kind =  ResKind::patch;
       break;
     case ZypperCommand::RUG_PATTERN_INFO_e:
-      kind =  ResTraits<Pattern>::kind;
+      kind =  ResKind::pattern;
       break;
     case ZypperCommand::RUG_PRODUCT_INFO_e:
-      kind =  ResTraits<Product>::kind;
+      kind =  ResKind::product;
       break;
     default:
     case ZypperCommand::INFO_e:

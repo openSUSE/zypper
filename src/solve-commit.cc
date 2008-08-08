@@ -548,7 +548,7 @@ static int summary(Zypper & zypper)
     ResObject::constPtr res = it->resolvable();
     if ( it->status().isToBeInstalled() || it->status().isToBeUninstalled() )
     {
-      if (it->resolvable()->kind() == ResTraits<Patch>::kind)
+      if (it->resolvable()->kind() == ResKind::patch)
       {
         Patch::constPtr patch = asKind<Patch>(it->resolvable());
 
@@ -689,7 +689,7 @@ static int summary(Zypper & zypper)
 
   for (list<SrcPackage::constPtr>::const_iterator it = zypper.runtimeData().srcpkgs_to_install.begin();
       it != zypper.runtimeData().srcpkgs_to_install.end(); ++it)
-    toinstall[ResTraits<SrcPackage>::kind].insert(*it);
+    toinstall[ResKind::srcpackage].insert(*it);
 
   if (!toremove.empty() && (
       zypper.command() == ZypperCommand::INSTALL ||

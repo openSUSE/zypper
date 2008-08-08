@@ -299,13 +299,13 @@ find_updates( const ResKindSet & kinds, Candidates & candidates )
 
 string i18n_kind_updates(const ResKind & kind)
 {
-  if (kind == ResTraits<Package>::kind)
+  if (kind == ResKind::package)
     return _("Package updates");
-  else if (kind == ResTraits<Patch>::kind)
+  else if (kind == ResKind::patch)
     return _("Patches");
-  else if (kind == ResTraits<Pattern>::kind)
+  else if (kind == ResKind::pattern)
     return _("Pattern updates");
-  else if (kind == ResTraits<Product>::kind)
+  else if (kind == ResKind::product)
     return _("Product updates");
 
   return boost::str(format("%s updates") % kind);
