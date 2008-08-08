@@ -1014,7 +1014,7 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
         Date date = Date(str::strtonum<Date::ValueType>("0x" + (*it).release()));
         if (  date == pubkey_r.created() )
         {
-                
+
             MIL << endl << "Key " << pubkey_r << " is already in the rpm trusted keyring." << endl;
             return;
         }
@@ -1023,12 +1023,12 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
             MIL << endl << "Key " << pubkey_r << " has another version in keyring. ( " << date << " & " << pubkey_r.created() << ")" << endl;
 
         }
-            
+
     }
   }
   // key does not exists, lets import it
   MIL <<  endl;
-    
+
   RpmArgVec opts;
   opts.push_back ( "--import" );
   opts.push_back ( "--" );
@@ -2093,8 +2093,10 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
 //
 void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 {
+  // 'rpm -e' does not like epochs
   return removePackage( package->name()
-                        + "-" + package->edition().asString()
+                        + "-" + package->edition().version()
+                        + "-" + package->edition().release()
                         + "." + package->arch().asString(), flags );
 }
 

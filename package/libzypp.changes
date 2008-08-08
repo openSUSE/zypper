@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  8 14:11:03 CEST 2008 - ma@suse.de
+
+- Don't pass epoch to 'rpm -e', it does not support it.
+- revision 10800
+
+-------------------------------------------------------------------
 Fri Aug  8 13:27:42 CEST 2008 - ma@suse.de
 
 - Adapt to new product handling. Products are no longer pseudo
