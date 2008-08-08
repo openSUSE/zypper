@@ -186,12 +186,10 @@ namespace zypp
 	  return S_Taboo;
 
       // KEEP state:
-      // Report not installable items as installed, if they are satisfied.
       if ( installedObj() )
         return S_KeepInstalled;
-
-      if ( (  kind() == ResKind::patch
-           || kind() == ResKind::pattern )
+      // Report pseudo installed items as installed, if they are satisfied.
+      if ( traits::isPseudoInstalled( kind() )
            && cand.status().isSatisfied() ) // no installed, so we must have candidate
         return S_KeepInstalled;
 

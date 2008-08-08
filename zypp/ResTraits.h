@@ -19,7 +19,20 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  /** \defgroup ZYPP_RESOLVABLE_SMART_POINTER_TYPES
+  ///////////////////////////////////////////////////////////////////
+  namespace traits
+  { /////////////////////////////////////////////////////////////////
+
+    /** Those are denoted to be installed, if the
+     *  solver verifies them as being satisfied. */
+    inline bool isPseudoInstalled( ResKind kind_r )
+    { return( kind_r == ResKind::patch || kind_r == ResKind::pattern ); }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace traits
+  ///////////////////////////////////////////////////////////////////
+
+   /** \defgroup ZYPP_RESOLVABLE_SMART_POINTER_TYPES
    * Resolvable smart pointer types.
    *
    * Forward declaration of all Resolvable smart pointer
@@ -68,6 +81,10 @@ namespace zypp
       typedef intrusive_ptr<const _Res> constPtrType;
 
       static const ResKind              kind;
+
+      /** Those are denoted to be installed, if the
+       *  solver verifies them as being satisfied. */
+      static bool isPseudoInstalled()   { return traits::isPseudoInstalled( kind ); }
     };
 
   /** ResTraits specialisation for Resolvable.

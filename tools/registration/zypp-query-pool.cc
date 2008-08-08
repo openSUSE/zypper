@@ -27,10 +27,10 @@ struct ByPresent : public PoolItemFilterFunctor
 {
     bool operator()( const PoolItem & p ) const
     {
-	if ( isKind<Package>(p.resolvable()) )
-	    return p.status().isInstalled();
-	else
+	if ( traits::isPseudoInstalled( p->kind() ) )
 	    return p.status().isSatisfied();
+	else
+	    return p.status().isInstalled();
     }
 };
 
@@ -52,10 +52,10 @@ public:
         || _repository == item->repository().info().alias())
     {
 
-	if ( isKind<Package>(item.resolvable()) )
-	    cout << (item.status().isInstalled() ? "i" : " ");
-	else
+	if ( traits::isPseudoInstalled( item->kind() ) )
 	    cout << (item.status().isSatisfied() ? "i" : " ");
+	else
+	    cout << (item.status().isInstalled() ? "i" : " ");
 
       cout << "|" << item->kind();
       cout << "|" << item->name();

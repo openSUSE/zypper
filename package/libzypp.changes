@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  8 15:41:17 CEST 2008 - ma@suse.de
+
+- Adapt zypp-query-pool to new product handling.
+- revision 10803
+
+-------------------------------------------------------------------
 Fri Aug  8 14:11:03 CEST 2008 - ma@suse.de
 
 - Don't pass epoch to 'rpm -e', it does not support it.

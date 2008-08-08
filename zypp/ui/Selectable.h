@@ -154,8 +154,10 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
-      /** \name Classification of available patches (patterns).
+      /** \name Classification of available patches (pseudo installed items).
        * A patch is either \c not \c relevant, \c satisfied or \c broken.
+       * The same applies to other pseudo installed kinds.
+       * \see \ref traits::isPseudoInstalled
        */
       //@{
       /** Returns true for packages, because packages are not
