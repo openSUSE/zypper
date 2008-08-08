@@ -41,7 +41,6 @@ SET( zypp_SRCS
   PoolQueryResult.cc
   ProblemSolution.cc
   Product.cc
-  ProductInfo.cc
   ProgressData.cc
   ProvideFilePolicy.cc
   PublicKey.cc
@@ -128,7 +127,6 @@ SET( zypp_HEADERS
   ProblemSolution.h
   ProblemTypes.h
   Product.h
-  ProductInfo.h
   ProgressData.h
   ProvideFilePolicy.h
   PublicKey.h

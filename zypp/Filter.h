@@ -130,26 +130,6 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : SatisfiedProducts
-    //
-    /** Filter returning the satisfied products.
-    */
-    class SatisfiedProducts
-    {
-      public:
-        /** Filter on \ref PoolItem. */
-        bool operator()( const PoolItem & pi_r ) const
-        { return pi_r.satSolvable().isKind( ResKind::product ) && pi_r.isSatisfied(); }
-
-        /** Filter on satSolvabe/ResObject. */
-        template<class _Solv>
-        bool operator()( const _Solv & solv_r ) const
-        { return operator()( PoolItem( solv_r ) ); }
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace filter

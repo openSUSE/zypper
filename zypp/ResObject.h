@@ -30,8 +30,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class ProductInfo;
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResObject
@@ -67,19 +65,6 @@ namespace zypp
     //@}
 
   public:
-    /** \name Associated product metadata.
-     * Some \ref Packages may provide additional product metadata.
-     * \see \ref ProductInfo.
-     */
-    //@{
-    /** Whether there is associated \ref ProductInfo available. */
-    bool hasProductInfo() const;
-    /** Return associated \ref ProductInfo or \ref ProductInfo::noProductInfo. */
-    ProductInfo productInfo() const;
-    //@}
-
-  public:
-
     /**
      * \short Short text describing the resolvable.
      * This attribute is usually displayed in columns.

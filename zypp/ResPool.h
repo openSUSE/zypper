@@ -214,20 +214,6 @@ namespace zypp
       /** \name Special iterators. */
       //@{
 
-      /** \name Iterate over all satisfied products.
-       * \note Is satisfied status is computed and updated on each solver
-       * run. So it does not reflect any changes made since the last solver run.
-       */
-      //@{
-      typedef filter_iterator<filter::SatisfiedProducts,const_iterator> satisfiedProducts_iterator;
-
-      satisfiedProducts_iterator satisfiedProductsBegin() const
-      { return filterBegin( filter::SatisfiedProducts() ); }
-
-      satisfiedProducts_iterator satisfiedProductsEnd() const
-      { return filterEnd( filter::SatisfiedProducts() ); }
-      //@}
-
       //@}
    public:
       /** \name Iterate over all Repositories that contribute ResObjects.

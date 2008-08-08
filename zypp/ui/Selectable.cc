@@ -167,9 +167,10 @@ namespace zypp
     **	FUNCTION TYPE : std::ostream &
     */
     std::ostream & operator<<( std::ostream & str, const Selectable & obj )
-    {
-      return str << *obj._pimpl;
-    }
+    { return str << *(obj._pimpl); }
+
+    std::ostream & dumpOn( std::ostream & str, const Selectable & obj )
+    { return dumpOn( str, *(obj._pimpl) ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace ui

@@ -12,12 +12,15 @@
 #ifndef ZYPP_UI_SELECTABLEIMPL_H
 #define ZYPP_UI_SELECTABLEIMPL_H
 
-#include <iosfwd>
+#include <iostream>
+#include "zypp/base/LogTools.h"
 
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ui/Selectable.h"
 #include "zypp/ui/SelectableTraits.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -36,8 +39,6 @@ namespace zypp
     */
     struct Selectable::Impl
     {
-      friend std::ostream & operator<<( std::ostream & str, const Selectable::Impl & obj );
-
     public:
 
       typedef SelectableTraits::AvailableItemSet         AvailableItemSet;
@@ -258,11 +259,21 @@ namespace zypp
     inline std::ostream & operator<<( std::ostream & str, const Selectable::Impl & obj )
     {
       return str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status()
-                 << " (I " << obj._installedItems.size() << ")"
-                 << " (A " << obj._availableItems.size() << ")"
+                 << " (I " << obj.installedSize() << ")"
+                 << " (A " << obj.availableSize() << ")"
                  << obj.candidateObj();
     }
 
+    /** \relates Selectable::Impl Stream output */
+    inline std::ostream & dumpOn( std::ostream & str, const Selectable::Impl & obj )
+    {
+      str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status() << endl;
+      dumpRange( str << "  (I " << obj.installedSize() << ") ", obj.installedBegin(), obj.installedEnd() );
+      if ( obj.installedEmpty() )
+        str << endl << " ";
+      dumpRange( str << " (A " << obj.availableSize() << ") ", obj.availableBegin(), obj.availableEnd() ) << endl;
+      return str;
+    }
     /////////////////////////////////////////////////////////////////
   } // namespace ui
   ///////////////////////////////////////////////////////////////////

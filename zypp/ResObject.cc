@@ -10,13 +10,11 @@
  *
 */
 
-#include <zypp/base/Logger.h>
 #include "zypp/ResObject.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/sat/Solvable.h"
 #include "zypp/Repository.h"
 #include "zypp/RepoInfo.h"
-#include "zypp/ProductInfo.h"
 #include "zypp/IdString.h"
 
 using namespace zypp;
@@ -54,14 +52,6 @@ namespace zypp
   {
     return Resolvable::dumpOn( str );
   }
-
-  ///////////////////////////////////////////////////////////////////
-
-  bool ResObject::hasProductInfo() const
-  { return ProductInfo( *this ); } // this is basically one lookupIdAttribute call
-
-  ProductInfo ResObject::productInfo() const
-  { return ProductInfo( *this ); }
 
   ///////////////////////////////////////////////////////////////////
 

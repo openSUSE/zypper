@@ -22,7 +22,7 @@
 #include "zypp/Product.h"
 #include "zypp/Package.h"
 #include "zypp/Edition.h"
-#include "zypp/parser/xml_escape_parser.hpp"
+#include "zypp/parser/xml/XmlEscape.h"
 #include "zypp/base/String.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Capabilities.h"
@@ -49,13 +49,12 @@ using namespace zypp::str;
 
 IMPL_PTR_TYPE(HelixResolvable);
 
-static std::string xml_escape( const std::string &text )
+inline std::string xml_escape( const std::string &text )
 {
-  iobind::parser::xml_escape_parser parser;
-  return parser.escape(text);
+  return zypp::xml::escape(text);
 }
 
-static std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
+inline std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
 {
   string result;
   result += "<" + tag + ">";
@@ -106,8 +105,8 @@ std::string helixXML( const Capability &cap )
 	    if (!detail.ed().release().empty())
 		str << " release='" << xml_escape(detail.ed().release()) << "'";
 	    if (detail.ed().epoch() != Edition::noepoch)
-		str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";    
-	    str << " />" << endl;	
+		str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";
+	    str << " />" << endl;
 	} else {
 	    str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;
 	}
@@ -117,7 +116,7 @@ std::string helixXML( const Capability &cap )
 	    && detail.rhs().detail().isNamed()) {
 	    // packageand dependency
 	    str << "<dep name='packageand("
-		<< IdString(detail.lhs().id()) << ","		
+		<< IdString(detail.lhs().id()) << ","
 		<< IdString(detail.rhs().id()) << ")' />" << endl;
 	} else {
 	    // modalias ?
@@ -133,11 +132,11 @@ std::string helixXML( const Capability &cap )
 		    str << packageName << ":";
 		str << IdString(detail.rhs().id()) << ")' />" << endl;
 	    } else {
-		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
+		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
 	    }
 	}
     } else {
-	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;	
+	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
     }
 
     return str.str();
@@ -187,7 +186,7 @@ std::string helixXML( const PoolItem &item )
   str << "<" << toLower (resolvable->kind().asString()) << ">" << endl;
   str << TAB << xml_tag_enclose (resolvable->name(), "name", true) << endl;
   str << TAB << xml_tag_enclose (item->vendor(), "vendor", true) << endl;
-  str << TAB << xml_tag_enclose (item->buildtime().asSeconds(), "buildtime", true) << endl;  
+  str << TAB << xml_tag_enclose (item->buildtime().asSeconds(), "buildtime", true) << endl;
   if ( isKind<Package>(resolvable) ) {
       str << TAB << "<history>" << endl << TAB << "<update>" << endl;
       str << TAB2 << helixXML (resolvable->arch()) << endl;
@@ -246,9 +245,9 @@ bool Testcase::createTestcasePool(const ResPool &pool)
 	// remove old stuff
 	zypp::filesystem::clean_dir (dumpPath);
     }
-    
+
     RepositoryTable		repoTable;
-    HelixResolvable 	system (dumpPath + "/solver-system.xml.gz");    
+    HelixResolvable 	system (dumpPath + "/solver-system.xml.gz");
 
     for ( ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it )
     {
@@ -265,7 +264,7 @@ bool Testcase::createTestcasePool(const ResPool &pool)
 	    }
 	    repoTable[repo]->addResolvable (*it);
 	}
-    }	
+    }
     return true;
 }
 
@@ -374,7 +373,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
-			     SystemCheck::instance().conflictSystemCap());    
+			     SystemCheck::instance().conflictSystemCap());
 
     return true;
 }
@@ -448,12 +447,12 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << "<locale name=\"" <<  iter->code()
 	      << "\" />" << endl;
     }
-    
+
     if (forceResolve)
 	*file << TAB << "<forceResolve/>" << endl;
     if (onlyRequires)
 	*file << TAB << "<onlyRequires/>" << endl;
-    
+
     *file << "</setup>" << endl
 	  << "<trial>" << endl
 	  << "<showpool all=\"yes\"/>" << endl;
@@ -469,7 +468,7 @@ HelixControl::~HelixControl()
 {
     *file << "</trial>" << endl
 	  << "</test>" << endl;
-    delete(file);    
+    delete(file);
 }
 
 void HelixControl::installResolvable(const ResObject::constPtr &resObject,

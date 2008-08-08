@@ -48,6 +48,7 @@ namespace zypp
     class Selectable : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const Selectable & obj );
+      friend std::ostream & dumpOn( std::ostream & str, const Selectable & obj );
 
     public:
       typedef intrusive_ptr<Selectable>        Ptr;
@@ -74,27 +75,13 @@ namespace zypp
       /** The ResObjects name.  */
       const std::string & name() const;
 
-      /**
-       * return the first Installed object
-       * of available
-       */
+      /** The last Installed object. */
       PoolItem installedObj() const;
 
-      /**
-       * \deprecated use installedObj
-       * PoolItem corresponding to the installed object.
-       */
-      ZYPP_DEPRECATED PoolItem installedPoolItem() const
-      { return installedObj(); }
-
       /** Best among available objects.
-       + The user selected candiate, or a default.
-      */
+       * The user selected candiate, or a default.
+       */
       PoolItem candidateObj() const;
-
-      /** PoolItem corresponding to the candidate object. */
-      ZYPP_DEPRECATED PoolItem candidatePoolItem() const
-      { return candidateObj(); }
 
       /** Set a candidate (out of available objects).
        * \return The new candidate, or NULL if choice was invalid
@@ -108,50 +95,27 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////
 
-      /**
-       * Are there available objects?
-       */
+      /** \name Available objects iterators.
+       * Oredered according to solver policy. 'Best' first.
+      */
+      //@{
       bool availableEmpty() const;
-
-      /**
-       * Number of available objects.
-       */
       available_size_type availableSize() const;
-
-      /**
-       * Number of available objects.
-       * \deprecated Use availableSize
-       */
-      ZYPP_DEPRECATED available_size_type availableObjs() const
-      { return availableSize(); }
-
-      /** */
       available_iterator availableBegin() const;
-
-      /** */
       available_iterator availableEnd() const;
+      //@}
 
       ////////////////////////////////////////////////////////////////////////
 
-      /**
-       * Installed object iterators
-       */
-
-      /**
-       * Are there installed objects?
-       */
+      /** \name Insatlled objects iterators.
+       * Ordered by install time. Latest first.
+      */
+      //@{
       bool installedEmpty() const;
-
-      /**
-       * Number of available objects.
-       */
       installed_size_type installedSize() const;
-
-      /** */
       installed_iterator installedBegin() const;
-
-      /** */
       installed_iterator installedEnd() const;
+      //}
 
       ////////////////////////////////////////////////////////////////////////
 
@@ -190,11 +154,11 @@ namespace zypp
        */
       bool isUnmaintained() const;
 
-      /** \name Classification of available patches (patterns, products).
+      /** \name Classification of available patches (patterns).
        * A patch is either \c not \c relevant, \c satisfied or \c broken.
-      */
+       */
       //@{
-      /** Returns true for packages, because  packages are not
+      /** Returns true for packages, because packages are not
        * classified by the solver.
       */
       bool isUndetermined() const;
@@ -265,12 +229,6 @@ namespace zypp
        */
       bool setStatus( const Status state_r );
 
-      /** Try to set a new Status.
-       * Returns \c false if the transitions is not allowed.
-      */
-      ZYPP_DEPRECATED bool set_status( const Status state_r )
-      { return setStatus( state_r ); }
-
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;
 
@@ -298,6 +256,9 @@ namespace zypp
 
     /** \relates Selectable Stream output */
     std::ostream & operator<<( std::ostream & str, const Selectable & obj );
+
+    /** \relates Selectable More verbose stream output */
+    std::ostream & dumpOn( std::ostream & str, const Selectable & obj );
 
     /** Solvable to Selectable transform functor.
      * \relates Selectable

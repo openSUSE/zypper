@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug  8 13:27:42 CEST 2008 - ma@suse.de
+
+- Adapt to new product handling. Products are no longer pseudo
+  installed objects verified by the solver, but actually installed. 
+  Thus removed satisfiedProduct iterator, fixed Selctables. 
+- Removed class ProductInfo as we keep Product.
+- revision 10797
+
+-------------------------------------------------------------------
 Thu Aug  7 22:00:55 CEST 2008 - dmacvicar@suse.de
 
 - implement relogin suggested support (fate#304889)

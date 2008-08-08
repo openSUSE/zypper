@@ -185,13 +185,15 @@ namespace zypp
       if ( !installedObj() && allCandidatesLocked() )
 	  return S_Taboo;
 
-      // KEEP state: non packages count as installed if they are satisfied.
+      // KEEP state:
+      // Report not installable items as installed, if they are satisfied.
       if ( installedObj() )
-          return S_KeepInstalled;
+        return S_KeepInstalled;
 
-      if ( kind() != ResKind::package
+      if ( (  kind() == ResKind::patch
+           || kind() == ResKind::pattern )
            && cand.status().isSatisfied() ) // no installed, so we must have candidate
-          return S_KeepInstalled;
+        return S_KeepInstalled;
 
       return S_NoInst;
     }

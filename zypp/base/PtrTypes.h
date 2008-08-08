@@ -122,6 +122,14 @@ namespace std
       return str << *obj;
     return str << std::string("NULL");
   }
+  /** \relates zypp::shared_ptr Stream output. */
+  template<class _D>
+  inline std::ostream & dumpOn( std::ostream & str, const zypp::shared_ptr<_D> & obj )
+  {
+    if ( obj )
+      return dumpOn( str, *obj );
+    return str << std::string("NULL");
+  }
 
   /** \relates zypp::intrusive_ptr Stream output. */
   template<class _D>
@@ -129,6 +137,14 @@ namespace std
   {
     if ( obj )
       return str << *obj;
+    return str << std::string("NULL");
+  }
+  /** \relates zypp::intrusive_ptr Stream output. */
+  template<class _D>
+  inline std::ostream & dumpOn( std::ostream & str, const zypp::intrusive_ptr<_D> & obj )
+  {
+    if ( obj )
+      return dumpOn( str, *obj );
     return str << std::string("NULL");
   }
   /////////////////////////////////////////////////////////////////

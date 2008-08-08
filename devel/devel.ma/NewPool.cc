@@ -441,6 +441,28 @@ try {
 
   if ( 1 )
   {
+    Measure x( "INIT TARGET" );
+    {
+      {
+        zypp::base::LogControl::TmpLineWriter shutUp;
+        getZYpp()->initializeTarget( sysRoot );
+      }
+      getZYpp()->target()->load();
+    }
+  }
+
+  dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() );
+  USR << "pool: " << pool << endl;
+  ui::Selectable::Ptr t( getSel<Package>( "test" ) );
+  MIL << dump(t) << endl;
+
+   ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
+  if ( 0 )
+  {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
 
@@ -494,18 +516,6 @@ try {
 
         USR << "pool: " << pool << endl;
       }
-    }
-  }
-
-  if ( 0 )
-  {
-    Measure x( "INIT TARGET" );
-    {
-      {
-        zypp::base::LogControl::TmpLineWriter shutUp;
-        getZYpp()->initializeTarget( sysRoot );
-      }
-      getZYpp()->target()->load();
     }
   }
 

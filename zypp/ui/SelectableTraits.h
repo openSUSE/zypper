@@ -32,7 +32,7 @@ namespace zypp
     /** */
     struct SelectableTraits
     {
-      /** Oder on AvalableItemSet.
+      /** Oder on AvailableItemSet.
        * \li repository priority
        * \li best Arch
        * \li best Edition
@@ -65,12 +65,38 @@ namespace zypp
         }
       };
 
+      /** Oder on InstalledItemSet.
+       * \li repository priority
+       * \li best Arch
+       * \li best Edition
+       * \li ResObject::constPtr as fallback.
+      */
+      struct IOrder : public std::binary_function<PoolItem,PoolItem,bool>
+      {
+        // NOTE: operator() provides LESS semantics to order the set.
+        // So LESS means 'prior in set'. We want 'newer' install time
+        // at the beginning of the set.
+        //
+        bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
+        {
+          Date ldate = lhs->installtime();
+          Date rdate = rhs->installtime();
+          if ( ldate != rdate )
+            return( ldate > rdate );
+
+          // no more criteria, still equal:
+          // use the ResObject::constPtr (the poiner value)
+          // (here it's arbitrary whether < or > )
+          return lhs.resolvable() < rhs.resolvable();
+        }
+      };
+
       typedef std::set<PoolItem,AVOrder>       AvailableItemSet;
       typedef AvailableItemSet::iterator       available_iterator;
       typedef AvailableItemSet::const_iterator available_const_iterator;
       typedef AvailableItemSet::size_type      available_size_type;
 
-      typedef std::set<PoolItem,AVOrder>       InstalledItemSet;
+      typedef std::set<PoolItem,IOrder>        InstalledItemSet;
       typedef AvailableItemSet::iterator       installed_iterator;
       typedef AvailableItemSet::const_iterator installed_const_iterator;
       typedef AvailableItemSet::size_type      installed_size_type;
