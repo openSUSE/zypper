@@ -451,17 +451,7 @@ try {
     }
   }
 
-  dumpRange( USR, satpool.reposBegin(), satpool.reposEnd() );
-  USR << "pool: " << pool << endl;
-  ui::Selectable::Ptr t( getSel<Package>( "test" ) );
-  MIL << dump(t) << endl;
-
-   ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-  if ( 0 )
+  if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -532,6 +522,14 @@ try {
   }
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
+
+  ui::Selectable::Ptr item( ui::Selectable::get( "amarok" ) );
+  MIL << dump(item) << endl;
+
+   ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
 
   if ( 0 )
   {

@@ -422,6 +422,7 @@ SET( zypp_pool_HEADERS
   pool/PoolImpl.h
   pool/PoolStats.h
   pool/PoolTraits.h
+  pool/ByIdent.h
 )
 
 INSTALL(  FILES

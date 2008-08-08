@@ -14,6 +14,7 @@
 
 #include "zypp/ui/Selectable.h"
 #include "zypp/ui/SelectableImpl.h"
+#include "zypp/ResPool.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,6 +24,9 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     IMPL_PTR_TYPE(Selectable);
+
+    Selectable::Ptr Selectable::get( const pool::ByIdent & ident_r )
+    { return ResPool::instance().proxy().lookup( ident_r ); }
 
     ///////////////////////////////////////////////////////////////////
     //

@@ -16,7 +16,8 @@
 
 #include "zypp/base/Iterator.h"
 #include "zypp/PoolItem.h"
-#include "zypp/ResObject.h"
+#include "zypp/pool/ByIdent.h"
+//#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

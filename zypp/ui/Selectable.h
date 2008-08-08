@@ -25,6 +25,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace ui
   { /////////////////////////////////////////////////////////////////
@@ -60,6 +61,44 @@ namespace zypp
 
       typedef SelectableTraits::installed_iterator      installed_iterator;
       typedef SelectableTraits::installed_size_type     installed_size_type;
+
+    public:
+      /** \name Static ctor substitues picking the item from the pool.
+       * \code
+       * Selectable::Ptr item;
+       * item = Selectable::get( "amarok );                  // package amamrok
+       * item = Selectable::get( ResKind::patch, "amarok );  // patch amamrok
+       * item = Selectable::get( IdString( "patch:amarok" ); // patch amamrok
+       * \endcode
+      */
+      //@{
+      /** Get the \ref Selctable */
+      static Ptr get( const pool::ByIdent & ident_r );
+
+      /** Get the \ref Selctable by it's \c sat-identifyer. */
+      static Ptr get( IdString ident_r )
+      { return get( pool::ByIdent( ident_r ) ); }
+
+      /** Get the \ref Selctable by \c kind and \c name. */
+      static Ptr get( ResKind kind_r, const std::string & name_r )
+      { return get( pool::ByIdent( kind_r, name_r ) ); }
+
+      /** Get the \c Package \ref Selctable by \c name. */
+      static Ptr get( const std::string & name_r )
+      { return get( pool::ByIdent( ResKind::package, name_r ) ); }
+
+      /** Get the \ref Selctable containing a specific \ref sat::Solvable. */
+      static Ptr get( const sat::Solvable & solv_r )
+      { return get( pool::ByIdent( solv_r ) ); }
+
+      /** Get the \ref Selctable containing a specific \ref ResObject. */
+      static Ptr get( const ResObject::constPtr & resolvable_r )
+      { return resolvable_r ? get( resolvable_r->satSolvable() ) : Ptr(); }
+
+      /** Get the \ref Selctable containing a specific \ref PoolItem. */
+      static Ptr get( const PoolItem & pi_r )
+      { return get( pi_r.satSolvable() ); }
+      //@}
 
     public:
       /** The identifier.
