@@ -38,7 +38,7 @@ namespace zypp
   template<>
     const ResKind ResTraits<Product>   ::kind( ResKind::product );
   template<>
-    const ResKind ResKind::srcpackage( ResKind::srcpackage );
+    const ResKind ResTraits<SrcPackage>::kind( ResKind::srcpackage );
 
   std::string ResKind::satIdent( const ResKind & refers_r, const std::string & name_r )
   {
