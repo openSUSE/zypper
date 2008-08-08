@@ -291,11 +291,11 @@ namespace zypp
       // create the anonymous unique id
       // this value is used for statistics
       Pathname idpath( home() / "AnonymousUniqueId");
-      
+
       if ( ! PathInfo( idpath ).isExist() )
       {
           MIL << "creating anonymous unique id" << endl;
-          
+
           // if the file does not exist we need to generate the uuid file
           const char* argv[] =
           {
@@ -321,7 +321,7 @@ namespace zypp
                   line = prog.receiveLine() )
               {
                   MIL << line << endl;
-                  
+
                   idfile << line;
               }
               prog.close();
@@ -730,6 +730,7 @@ namespace zypp
             //
             if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
             if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
+            if (policy_r.rpmExcludeDocs()) flags |= rpm::RpmDb::RPMINST_NODOCS;
             if (policy_r.rpmNoSignature()) flags |= rpm::RpmDb::RPMINST_NOSIGNATURE;
 
             try

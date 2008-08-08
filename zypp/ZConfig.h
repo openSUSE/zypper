@@ -186,10 +186,10 @@ namespace zypp
       /**
        * Packages which can be installed parallel with different versions
        * Returning a set of package names (IdString)
-       */      
+       */
       std::set<IdString> multiversion() const;
       void addMultiversion(std::string &name);
-      bool removeMultiversion(std::string &name);      
+      bool removeMultiversion(std::string &name);
 
       /**
        * Path where zypp can find or create lock file (configPath()/locks)
@@ -198,7 +198,7 @@ namespace zypp
       Pathname locksFile() const;
 
       /**
-       * Whether locks file should be read and applied after start
+       * Whether locks file should be read and applied after start (true)
        */
       bool apply_locks_file() const;
 
@@ -218,6 +218,13 @@ namespace zypp
         * \ingroup g_ZC_REPOCACHE
       */
       Pathname update_messagesPath() const;
+
+    public:
+      /** \name Options for package installation */
+      //@{
+      /** Don't install any files which are marked as documentation (false). */
+      bool rpmInstallExcludedocs() const;
+      //@}
 
     public:
       class Impl;

@@ -251,13 +251,13 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-		  std::list<std::string> multi;  
+		  std::list<std::string> multi;
                   str::split( value, back_inserter(multi), ", \t" );
 		  for ( std::list<string>::const_iterator it = multi.begin();
 			it != multi.end(); it++) {
-		      multiversion.insert (IdString(*it));  
+		      multiversion.insert (IdString(*it));
 		  }
-                }		
+                }
                 else if ( entry == "locksfile.path" )
                 {
                   locks_file = Pathname(value);
@@ -278,7 +278,10 @@ namespace zypp
                 {
                   update_messages_path = Pathname(value);
                 }
-
+                else if ( entry == "rpm.install.excludedocs" )
+                {
+                  rpmInstallExcludedocs = true;
+                }
               }
             }
           }
@@ -334,10 +337,12 @@ namespace zypp
 
     bool solver_onlyRequires;
     Pathname solver_checkSystemFile;
-      
-    std::set<IdString> multiversion;  
+
+    std::set<IdString> multiversion;
 
     bool apply_locks_file;
+
+    DefaultIntegral<bool,false> rpmInstallExcludedocs;
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -524,9 +529,9 @@ namespace zypp
 
   void ZConfig::addMultiversion(std::string &name)
   { _pimpl->multiversion.insert(IdString(name)); }
-    
+
   bool ZConfig::removeMultiversion(std::string &name)
-  { return _pimpl->multiversion.erase(IdString(name)); }      
+  { return _pimpl->multiversion.erase(IdString(name)); }
 
   bool ZConfig::apply_locks_file() const
   {
@@ -551,6 +556,11 @@ namespace zypp
     return ( _pimpl->update_scripts_path.empty()
              ? Pathname(update_dataPath()/"update-scripts") : _pimpl->update_scripts_path );
   }
+
+  ///////////////////////////////////////////////////////////////////
+
+  bool ZConfig::rpmInstallExcludedocs() const
+  { return _pimpl->rpmInstallExcludedocs; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
