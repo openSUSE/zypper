@@ -280,7 +280,7 @@ namespace zypp
                 }
                 else if ( entry == "rpm.install.excludedocs" )
                 {
-                  rpmInstallExcludedocs = true;
+                  rpmInstallFlags.setFlag( target::rpm::RPMINST_EXCLUDEDOCS );
                 }
               }
             }
@@ -342,7 +342,7 @@ namespace zypp
 
     bool apply_locks_file;
 
-    DefaultIntegral<bool,false> rpmInstallExcludedocs;
+    target::rpm::RpmInstFlags rpmInstallFlags;
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -559,8 +559,8 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  bool ZConfig::rpmInstallExcludedocs() const
-  { return _pimpl->rpmInstallExcludedocs; }
+  target::rpm::RpmInstFlags ZConfig::rpmInstallFlags() const
+  { return _pimpl->rpmInstallFlags; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

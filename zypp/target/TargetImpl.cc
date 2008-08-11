@@ -717,7 +717,7 @@ namespace zypp
             RpmInstallPackageReceiver progress( it->resolvable() );
             progress.connect();
             bool success = true;
-            unsigned flags = 0;
+            rpm::RpmInstFlags flags;
             // Why force and nodeps?
             //
             // Because zypp builds the transaction and the resolver asserts that
@@ -725,13 +725,13 @@ namespace zypp
             // We use rpm just to unpack and register the package in the database.
             // We do this step by step, so rpm is not aware of the bigger context.
             // So we turn off rpms internal checks, because we do it inside zypp.
-            flags |= rpm::RpmDb::RPMINST_NODEPS;
-            flags |= rpm::RpmDb::RPMINST_FORCE;
+            flags |= rpm::RPMINST_NODEPS;
+            flags |= rpm::RPMINST_FORCE;
             //
-            if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
-            if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
-            if (policy_r.rpmExcludeDocs()) flags |= rpm::RpmDb::RPMINST_NODOCS;
-            if (policy_r.rpmNoSignature()) flags |= rpm::RpmDb::RPMINST_NOSIGNATURE;
+            if (p->installOnly())          flags |= rpm::RPMINST_NOUPGRADE;
+            if (policy_r.dryRun())         flags |= rpm::RPMINST_TEST;
+            if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
+            if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
 
             try
             {
@@ -778,8 +778,8 @@ namespace zypp
 
             RpmRemovePackageReceiver progress( it->resolvable() );
             progress.connect();
-            unsigned flags = rpm::RpmDb::RPMINST_NODEPS;
-            if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
+            rpm::RpmInstFlags flags( rpm::RPMINST_NODEPS );
+            if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
             try
             {
               rpm().removePackage( p, flags );

@@ -1936,7 +1936,7 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
 //	METHOD NAME : RpmDb::installPackage
 //	METHOD TYPE : PMError
 //
-void RpmDb::installPackage( const Pathname & filename, unsigned flags )
+void RpmDb::installPackage( const Pathname & filename, RpmInstFlags flags )
 {
   callback::SendReport<RpmInstallReport> report;
 
@@ -1966,7 +1966,7 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
   while (true);
 }
 
-void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report )
+void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, callback::SendReport<RpmInstallReport> & report )
 {
   FAILIFNOTINITIALIZED;
   CommitLog progresslog;
@@ -2002,7 +2002,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
     opts.push_back("--nodigest");
   if (flags & RPMINST_NOSIGNATURE)
     opts.push_back("--nosignature");
-  if (flags & RPMINST_NODOCS)
+  if (flags & RPMINST_EXCLUDEDOCS)
     opts.push_back ("--excludedocs");
   if (flags & RPMINST_NOSCRIPTS)
     opts.push_back ("--noscripts");
@@ -2091,7 +2091,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
 //	METHOD NAME : RpmDb::removePackage
 //	METHOD TYPE : PMError
 //
-void RpmDb::removePackage( Package::constPtr package, unsigned flags )
+void RpmDb::removePackage( Package::constPtr package, RpmInstFlags flags )
 {
   // 'rpm -e' does not like epochs
   return removePackage( package->name()
@@ -2106,7 +2106,7 @@ void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 //	METHOD NAME : RpmDb::removePackage
 //	METHOD TYPE : PMError
 //
-void RpmDb::removePackage( const string & name_r, unsigned flags )
+void RpmDb::removePackage( const string & name_r, RpmInstFlags flags )
 {
   callback::SendReport<RpmRemoveReport> report;
 
@@ -2137,7 +2137,7 @@ void RpmDb::removePackage( const string & name_r, unsigned flags )
 }
 
 
-void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report )
+void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report )
 {
   FAILIFNOTINITIALIZED;
   CommitLog progresslog;

@@ -59,8 +59,8 @@ namespace zypp
 
       public:
         Flags()                               : _val( 0 ) {}
-        Flags( Enum rhs )                     : _val( rhs ) {}
-        explicit Flags( unsigned rhs )        : _val( rhs ) {}
+        Flags( Enum flag_r )                  : _val( flag_r ) {}
+        explicit Flags( unsigned flag_r )     : _val( flag_r ) {}
 
         Flags & operator&=( unsigned rhs )    { _val &= rhs;      return *this; }
         Flags & operator&=( Flags rhs )       { _val &= rhs._val; return *this; }
@@ -88,7 +88,13 @@ namespace zypp
         Flags operator~() const               { return ~_val; }
 
       public:
-        bool testFlag( Enum val_r ) const     { return _val & val_r; }
+        void setFlag( Enum flag_r, bool newval_r )
+        { newval_r ? setFlag(flag_r) : unsetFlag(flag_r); }
+
+        void setFlag( Enum flag_r )           { _val |= flag_r; }
+        void unsetFlag( Enum flag_r )         { _val &= ~flag_r; }
+
+        bool testFlag( Enum flag_r ) const    { return _val & flag_r; }
 
       private:
         unsigned _val;

@@ -26,6 +26,7 @@
 #include "zypp/Package.h"
 #include "zypp/KeyRing.h"
 
+#include "zypp/target/rpm/RpmFlags.h"
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
 #include "zypp/ZYppCallbacks.h"
@@ -447,27 +448,6 @@ public:
   typedef std::set<std::string> FileList;
 
   /**
-   * Bits representing rpm installation options, useable as or
-   * combination
-   *
-   * @see installPackage(), removePackage()
-   * */
-  enum RpmInstFlag
-  {
-    RPMINST_NONE       = 0x0000,
-    RPMINST_NODOCS     = 0x0001,
-    RPMINST_NOSCRIPTS  = 0x0002,
-    RPMINST_FORCE      = 0x0004,
-    RPMINST_NODEPS     = 0x0008,
-    RPMINST_IGNORESIZE = 0x0010,
-    RPMINST_JUSTDB     = 0x0020,
-    RPMINST_NODIGEST   = 0x0040,
-    RPMINST_NOSIGNATURE= 0x0080,
-    RPMINST_NOUPGRADE  = 0x0100,
-    RPMINST_TEST	 = 0x0200
-  };
-
-  /**
    * checkPackage result
    * @see checkPackage
    * */
@@ -500,7 +480,7 @@ public:
    * \throws RpmException
    *
    * */
-  void installPackage (const Pathname& filename, unsigned flags = 0 );
+  void installPackage ( const Pathname & filename, RpmInstFlags flags = RPMINST_NONE );
 
   /** remove rpm package
    *
@@ -512,8 +492,8 @@ public:
    * \throws RpmException
    *
    * */
-  void removePackage(const std::string & name_r, unsigned flags = 0);
-  void removePackage(Package::constPtr package, unsigned flags = 0);
+  void removePackage( const std::string & name_r, RpmInstFlags flags = RPMINST_NONE );
+  void removePackage( Package::constPtr package, RpmInstFlags flags = RPMINST_NONE );
 
   /**
    * get backup dir for rpm config files
@@ -579,8 +559,8 @@ public:
   virtual std::ostream & dumpOn( std::ostream & str ) const;
 
 protected:
-  void doRemovePackage( const std::string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report );
-  void doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report );
+  void doRemovePackage( const std::string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report );
+  void doInstallPackage( const Pathname & filename, RpmInstFlags flags, callback::SendReport<RpmInstallReport> & report );
   const std::list<Package::Ptr> & doGetPackages(callback::SendReport<ScanDBReport> & report);
   void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
 

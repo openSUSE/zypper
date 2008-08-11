@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 
+#include "zypp/target/rpm/RpmFlags.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -26,13 +28,7 @@ namespace zypp
   class ZYppCommitPolicy
   {
   public:
-    ZYppCommitPolicy()
-    : _restrictToMedia    ( 0 )
-    , _dryRun             ( false )
-    , _rpmNoSignature     ( false )
-    , _rpmExcludeDocs     ( false )
-    , _syncPoolAfterCommit( true )
-    {}
+    ZYppCommitPolicy();
 
   public:
     unsigned restrictToMedia() const
@@ -41,11 +37,15 @@ namespace zypp
     bool dryRun() const
     { return _dryRun; }
 
+    target::rpm::RpmInstFlags rpmInstFlags() const
+    { return _rpmInstFlags; }
+
     bool rpmNoSignature() const
-    { return _rpmNoSignature; }
+    { return _rpmInstFlags.testFlag( target::rpm::RPMINST_NOSIGNATURE ); }
 
     bool rpmExcludeDocs() const
-    { return _rpmExcludeDocs; }
+    { return _rpmInstFlags.testFlag( target::rpm::RPMINST_EXCLUDEDOCS ); }
+
 
     bool syncPoolAfterCommit() const
     { return _syncPoolAfterCommit; }
@@ -67,24 +67,27 @@ namespace zypp
     ZYppCommitPolicy & dryRun( bool yesNo_r )
     { _dryRun = yesNo_r; return *this; }
 
+    /** The default \ref target::rpm::RpmInstFlags. (default: none)*/
+    ZYppCommitPolicy &  rpmInstFlags( target::rpm::RpmInstFlags newFlags_r )
+    { _rpmInstFlags = newFlags_r; return *this; }
+
     /** Use rpm option --nosignature (default: false) */
     ZYppCommitPolicy & rpmNoSignature( bool yesNo_r )
-    { _rpmNoSignature = yesNo_r; return *this; }
+    { _rpmInstFlags.setFlag( target::rpm::RPMINST_NOSIGNATURE, yesNo_r ); return *this; }
 
     /** Use rpm option --excludedocs (default: false) */
     ZYppCommitPolicy & rpmExcludeDocs( bool yesNo_r )
-    { _rpmExcludeDocs = yesNo_r; return *this; }
+    { _rpmInstFlags.setFlag( target::rpm::RPMINST_EXCLUDEDOCS, yesNo_r ); return *this; }
 
     /** Kepp pool in sync with the Target databases after commit (default: true) */
     ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r )
     { _syncPoolAfterCommit = yesNo_r; return *this; }
 
   private:
-    unsigned _restrictToMedia;
-    bool     _dryRun;
-    bool     _rpmNoSignature;
-    bool     _rpmExcludeDocs;
-    bool     _syncPoolAfterCommit;
+    unsigned                  _restrictToMedia;
+    bool                      _dryRun;
+    target::rpm::RpmInstFlags _rpmInstFlags;
+    bool                      _syncPoolAfterCommit;
   };
   ///////////////////////////////////////////////////////////////////
 

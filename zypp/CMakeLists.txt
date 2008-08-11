@@ -590,6 +590,7 @@ SET( zypp_target_rpm_SRCS
 SET( zypp_target_rpm_HEADERS
   target/rpm/BinHeader.h
   target/rpm/RpmCallbacks.h
+  target/rpm/RpmFlags.h
   target/rpm/RpmDb.h
   target/rpm/RpmException.h
   target/rpm/RpmHeader.h

@@ -17,7 +17,6 @@
 #include <string>
 
 #include "zypp/base/Deprecated.h"
-
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
@@ -25,6 +24,8 @@
 #include "zypp/Locale.h"
 #include "zypp/Pathname.h"
 #include "zypp/IdString.h"
+
+#include "zypp/target/rpm/RpmFlags.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -208,22 +209,27 @@ namespace zypp
       Pathname update_dataPath() const;
 
      /**
-       * Path where the repo metadata is downloaded and kept (update_dataPath()/).
-        * \ingroup g_ZC_REPOCACHE
+      * Path where the repo metadata is downloaded and kept (update_dataPath()/).
+      * \ingroup g_ZC_REPOCACHE
       */
       Pathname update_scriptsPath() const;
 
      /**
-       * Path where the repo solv files are created and kept (update_dataPath()/solv).
-        * \ingroup g_ZC_REPOCACHE
+      * Path where the repo solv files are created and kept (update_dataPath()/solv).
+      * \ingroup g_ZC_REPOCACHE
       */
       Pathname update_messagesPath() const;
 
     public:
       /** \name Options for package installation */
       //@{
-      /** Don't install any files which are marked as documentation (false). */
-      bool rpmInstallExcludedocs() const;
+      /** The default \ref target::rpm::RpmInstFlags for \ref ZYppCommitPolicy.
+       * Or-combination of \ref target::rpm::RpmInstFlag.
+       * \code
+       * ZConfig.instance().rpmInstallFlags().testFlag( target::rpm::RPMINST_EXCLUDEDOCS );
+       * \endcode
+       */
+      target::rpm::RpmInstFlags rpmInstallFlags() const;
       //@}
 
     public:

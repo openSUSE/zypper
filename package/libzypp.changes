@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 11 18:00:40 CEST 2008 - ma@suse.de
+
+- Propagate default rpm install flags from zypp.conf via ZConfig and
+  ZYppCommitPolicy down to the installer. (FATE #302952) 
+- revision 10813
+
+-------------------------------------------------------------------
 Mon Aug 11 16:28:07 CEST 2008 - ma@suse.de
 
 - Add base::Flags (like qt's QFlags) a type-safe way of storing 
