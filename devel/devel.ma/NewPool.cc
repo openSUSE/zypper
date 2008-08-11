@@ -11,6 +11,7 @@
 #include <zypp/base/IOStream.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/base/ProvideNumericId.h>
+#include <zypp/base/Flags.h>
 #include <zypp/AutoDispose.h>
 
 #include "zypp/ResPoolProxy.h"
@@ -421,6 +422,24 @@ void testCMP( const L & lhs, const R & rhs )
 
 namespace zypp
 {
+
+  class XRpmDb
+  {
+    public:
+      enum DbStateInfoBits {
+        DbSI_NO_INIT	= 0x0000,
+        DbSI_HAVE_V4	= 0x0001,
+        DbSI_MADE_V4	= 0x0002,
+        DbSI_MODIFIED_V4	= 0x0004,
+        DbSI_HAVE_V3	= 0x0008,
+        DbSI_HAVE_V3TOV4	= 0x0010,
+        DbSI_MADE_V3TOV4	= 0x0020
+      };
+
+      ZYPP_DECLARE_FLAGS(DbStateInfo,DbStateInfoBits);
+  };
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(XRpmDb::DbStateInfo);
+
 }
 
 /******************************************************************
@@ -434,6 +453,20 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
+
+  enum Other { OTHERVAL = 13 };
+
+  XRpmDb::DbStateInfo s;
+  s = XRpmDb::DbSI_MODIFIED_V4|XRpmDb::DbSI_HAVE_V4;
+  DBG << s << endl;
+  DBG << s.testFlag( XRpmDb::DbSI_MODIFIED_V4 ) << endl;
+  DBG << s.testFlag( XRpmDb::DbSI_MADE_V3TOV4 ) << endl;
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
   ZConfig::instance();
 
   ResPool   pool( ResPool::instance() );

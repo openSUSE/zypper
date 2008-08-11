@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 11 16:28:07 CEST 2008 - ma@suse.de
+
+- Add base::Flags (like qt's QFlags) a type-safe way of storing 
+  OR-combinations of enum values.
+- revision 10811
+
+-------------------------------------------------------------------
 Fri Aug  8 17:01:00 CEST 2008 - ma@suse.de
 
 - Add static ui::Selectable::get methods as convenient ctor

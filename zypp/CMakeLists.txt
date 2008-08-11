@@ -209,6 +209,7 @@ SET( zypp_base_HEADERS
   base/UserRequestException.h
   base/ExternalDataSource.h
   base/Fd.h
+  base/Flags.h
   base/Function.h
   base/Functional.h
   base/Gettext.h
