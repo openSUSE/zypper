@@ -94,6 +94,11 @@ namespace zypp
       deleteList_r.swap( undelayed );
     }
 
+#warning GetResolvablesToInsDel needs rewrite
+    // - isToBeUninstalledDueToObsolete is valid after DUP only ;(
+    // - isToBeUninstalledDueToUpgrade is valid after solverrun only (acceptable)
+    // probably things can be speeded up a bit.
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : GetResolvablesToInsDel::GetResolvablesToInsDel
