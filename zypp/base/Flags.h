@@ -88,11 +88,11 @@ namespace zypp
         Flags operator~() const               { return ~_val; }
 
       public:
-        void setFlag( Enum flag_r, bool newval_r )
-        { newval_r ? setFlag(flag_r) : unsetFlag(flag_r); }
+        Flags & setFlag( Enum flag_r, bool newval_r )
+        { return( newval_r ? setFlag(flag_r) : unsetFlag(flag_r) ); }
 
-        void setFlag( Enum flag_r )           { _val |= flag_r; }
-        void unsetFlag( Enum flag_r )         { _val &= ~flag_r; }
+        Flags & setFlag( Enum flag_r )           { _val |= flag_r; return *this; }
+        Flags & unsetFlag( Enum flag_r )         { _val &= ~flag_r; return *this; }
 
         bool testFlag( Enum flag_r ) const    { return _val & flag_r; }
 

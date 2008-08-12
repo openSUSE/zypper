@@ -164,6 +164,46 @@ namespace zypp
       return UNMODIFIED;
     };
 
+    bool Selectable::setFate( Fate fate_r )
+    {
+      switch ( fate_r )
+      {
+        case TO_INSTALL:
+          return setStatus( hasInstalledObj() ? S_Update : S_Install );
+          break;
+
+        case TO_DELETE:
+          return setStatus( S_Del );
+          break;
+
+        case UNMODIFIED:
+          return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst );
+          break;
+      }
+    }
+
+    bool Selectable::setInstalled()
+    {
+      return( hasInstalledObj() || setStatus( S_Install ) );
+    }
+
+    bool Selectable::setUpToDate()
+    {
+      if ( ! hasInstalledObj() )
+        return setStatus( S_Install );
+
+      PoolItem cand( candidateObj() );
+      if ( ! cand )
+        return true;
+
+      return( installedObj()->edition() >= cand->edition()
+              || setStatus( S_Update ) );
+    }
+
+    bool Selectable::setDeleted()
+    {
+      return( ! hasInstalledObj() || setStatus( S_Del ) );
+    }
 
     /******************************************************************
     **

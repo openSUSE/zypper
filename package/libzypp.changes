@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Aug 12 12:05:49 CEST 2008 - ma@suse.de
+
+- Offer a simpler, fate based status manipulation in ui::Selectable.
+  This is easier to handle, as the ui::Status always distinguishes
+  wheter an object is installed or not.
+- revision 10814
+
+-------------------------------------------------------------------
 Mon Aug 11 18:00:40 CEST 2008 - ma@suse.de
 
 - Propagate default rpm install flags from zypp.conf via ZConfig and

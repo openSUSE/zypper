@@ -224,7 +224,7 @@ namespace zypp
       //@}
 
      public:
-      /** \name Query objects fate in case of commit.
+      /** \name Query and maip objects fate in case of commit.
       */
       //@{
       enum Fate {
@@ -250,6 +250,30 @@ namespace zypp
       /** True if to install */
       bool toInstall() const
       { return fate() == TO_INSTALL; }
+
+      /** */
+      bool setFate( Fate fate_r );
+
+      /** Set the item to be installed (new- or re-install). */
+      bool setToInstall()
+      { return setFate( TO_INSTALL ); }
+
+      /** Take care the item gets installed if it is not. */
+      bool setInstalled();
+
+      /** Take care the item gets installed if it is not, or is older. */
+      bool setUpToDate();
+
+      /** Set the item to be deleted (must be installed). */
+      bool setToDelete()
+      { return setFate( TO_DELETE ); }
+
+      /** Take care the item gets deleted if it is installed. */
+      bool setDeleted();
+
+      /** Set the item to stay unmodified. */
+      bool unset()
+      { return setFate( UNMODIFIED ); }
       //@}
 
     public:
@@ -257,8 +281,7 @@ namespace zypp
        * \name Special inteface for Y2UI.
        * \note This interface acts on \ref ResStatus::USER level.
        * The \ref Status enum, and allowed state transitions are
-       * tightly related to the Y2UI. It might be not verry usefull
-       * outside the Y2UI.
+       * tightly related to the Y2UI.
       */
       //@{
       /** Return the current Status */

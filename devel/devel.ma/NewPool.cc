@@ -261,7 +261,10 @@ bool solve()
 
 bool install()
 {
-  SEC << getZYpp()->commit( ZYppCommitPolicy().dryRun(true) ) << endl;
+  ZYppCommitPolicy pol;
+  pol.dryRun(true);
+  pol.rpmInstFlags( pol.rpmInstFlags().setFlag( target::rpm::RPMINST_JUSTDB ) );
+  SEC << getZYpp()->commit( pol ) << endl;
   return true;
 }
 
@@ -420,28 +423,6 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-namespace zypp
-{
-
-  class XRpmDb
-  {
-    public:
-      enum DbStateInfoBits {
-        DbSI_NO_INIT	= 0x0000,
-        DbSI_HAVE_V4	= 0x0001,
-        DbSI_MADE_V4	= 0x0002,
-        DbSI_MODIFIED_V4	= 0x0004,
-        DbSI_HAVE_V3	= 0x0008,
-        DbSI_HAVE_V3TOV4	= 0x0010,
-        DbSI_MADE_V3TOV4	= 0x0020
-      };
-
-      ZYPP_DECLARE_FLAGS(DbStateInfo,DbStateInfoBits);
-  };
-  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(XRpmDb::DbStateInfo);
-
-}
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -453,20 +434,6 @@ try {
   ++argv;
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
-
-  enum Other { OTHERVAL = 13 };
-
-  XRpmDb::DbStateInfo s;
-  s = XRpmDb::DbSI_MODIFIED_V4|XRpmDb::DbSI_HAVE_V4;
-  DBG << s << endl;
-  DBG << s.testFlag( XRpmDb::DbSI_MODIFIED_V4 ) << endl;
-  DBG << s.testFlag( XRpmDb::DbSI_MADE_V3TOV4 ) << endl;
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
   ZConfig::instance();
 
   ResPool   pool( ResPool::instance() );
@@ -557,7 +524,9 @@ try {
   ///////////////////////////////////////////////////////////////////
 
   ui::Selectable::Ptr item( ui::Selectable::get( "amarok" ) );
-  MIL << dump(item) << endl;
+  item->setUpToDate();
+  SEC << dump(item) << endl;
+  install();
 
    ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
