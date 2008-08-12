@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 12 19:37:36 CEST 2008 - ma@suse.de
+
+- Advise rpmdb2solv to parse the product database.
+- revision 10824
+
+-------------------------------------------------------------------
 Tue Aug 12 12:05:49 CEST 2008 - ma@suse.de
 
 - Offer a simpler, fate based status manipulation in ui::Selectable.

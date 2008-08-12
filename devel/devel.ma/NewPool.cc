@@ -444,7 +444,7 @@ try {
     Measure x( "INIT TARGET" );
     {
       {
-        zypp::base::LogControl::TmpLineWriter shutUp;
+        //zypp::base::LogControl::TmpLineWriter shutUp;
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();

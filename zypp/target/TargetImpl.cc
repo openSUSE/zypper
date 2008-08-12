@@ -404,6 +404,8 @@ namespace zypp
         if ( ! _root.empty() )
           cmd << " -r '" << _root << "'";
 
+        cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
+
         if ( solvexisted )
           cmd << " '" << rpmsolv << "'";
 
