@@ -12,6 +12,7 @@
 #ifndef ZYPP_VendorSupportOptions_H
 #define ZYPP_VendorSupportOptions_H
 
+#include <string>
 #include "zypp/base/Flags.h"
 
 namespace zypp
@@ -52,12 +53,35 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */              
-      VendorSupportLevel3      = 0x0004
+      VendorSupportLevel3      = 0x0004,
+      /**
+       * Additional Customer Contract necessary
+       */
+      VendorSupportACC         = 0x0008
     };
 
     // Make a flag set for this
     ZYPP_DECLARE_FLAGS(VendorSupportOptions,VendorSupportOption);
     ZYPP_DECLARE_OPERATORS_FOR_FLAGS(VendorSupportOptions)
+
+    /**
+     * converts the support option to a name intended to be printed
+     * to the user.
+     *
+     * Note the description is based in the way Novell defines the support
+     * levels, and the semantics may be different for other vendors.
+     */
+    std::string asUserString( VendorSupportOption );
+
+    /**
+     * converts the support option to a description intended to be printed
+     * to the user.
+     *
+     * Note the description is based in the way Novell defines the support
+     * levels, and the semantics may be different for other vendors.
+     */
+    std::string asUserStringDescription( VendorSupportOption );
+
 }
 
 #endif 
