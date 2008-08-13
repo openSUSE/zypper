@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Aug 13 16:48:49 CEST 2008 - dmacvicar@suse.de
+
+- support sat solver API for searching files
+- 5.5.0 (4) 
+
+-------------------------------------------------------------------
 Wed Aug 13 15:12:45 CEST 2008 - ma@suse.de
 
 - Add ResPool::reposFind to get repositories by alias.
