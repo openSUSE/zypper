@@ -811,6 +811,10 @@ attremptycheckend:
       _pimpl->_flags |= SEARCH_NOCASE;
   }
 
+  void PoolQuery::setMatchFiles()
+  {
+    _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_FILES;
+  }
 
   void PoolQuery::setMatchSubstring()
   { _pimpl->_flags = (_pimpl->_flags & ~SEARCH_STRINGMASK) | SEARCH_SUBSTRING; }
@@ -829,6 +833,8 @@ attremptycheckend:
   void PoolQuery::setFlags(int flags)
   { _pimpl->_flags = flags; }
 
+  int PoolQuery::flags() const
+  { return _pimpl->_flags; }
 
   void PoolQuery::setInstalledOnly()
   { _pimpl->_status_flags = INSTALLED_ONLY; }
@@ -885,7 +891,9 @@ attremptycheckend:
   { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_REGEX; }
   int PoolQuery::matchType() const
   { return _pimpl->_flags & SEARCH_STRINGMASK; }
-
+  bool PoolQuery::matchFiles() const
+  { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_FILES; }
+  
   bool PoolQuery::matchWord() const
   { return _pimpl->_match_word; }
 

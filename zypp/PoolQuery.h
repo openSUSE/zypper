@@ -259,7 +259,8 @@ namespace zypp
     void setMatchWord();
     //void setLocale(const Locale & locale);
     //@}
-
+    /* set to match file type attributes (like file lists ) */
+    void setMatchFiles();
 
     /**
      * Require that all of the values set by addString or addAttribute
@@ -299,6 +300,16 @@ namespace zypp
     bool matchGlob() const;
     bool matchRegex() const;
     bool matchWord() const;
+
+    /**
+     * match file list types
+     *
+     * For attributes like \ref sat::SolvAttr::filelist
+     * you need to activate this one if you want to
+     * match them.
+     *
+     */
+    bool matchFiles() const;
 
     /**
      * Returns currently used string matching type.
@@ -357,8 +368,17 @@ namespace zypp
      * \see SEARCH_REGEX
      * \see SEARCH_NOCASE
      * \see SEARCH_NO_STORAGE_SOLVABLE
+     * \see SEARCH_FILES
      */
     void setFlags(int flags);
+
+    /**
+     * Free function to get the satsolver repo search
+     * flags.
+     *
+     * \see setFlags
+     */
+    int flags() const;
 
     class Impl;
   private:
