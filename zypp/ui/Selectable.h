@@ -38,13 +38,15 @@ namespace zypp
     //
     /** Collects PoolItems of same kind and name.
      *
-     * Selectable is a status wrapper. That's why it offers the
-     * PoolItems ResObjects but hides their individual ResStatus.
-     * The ui::Status is calculated from (and transated to)
-     * PoolItems individual ResStatus values.
+     * Selectable is a status wrapper. The ui::Status is calculated
+     * from (and transated to) \ref PoolItems individual \ref ResStatus
+     * values.
      *
-     * \note There's one Selectable per installed item, in case more
-     * than one item is intalled.
+     * Available objects are sorted according the solver policies, 'best'
+     * packages first (e.g. by repository priority, then Arch, then Edition).
+     *
+     * Installed objects are sorted according the installation date, newer install
+     * time first.
     */
     class Selectable : public base::ReferenceCounted, private base::NonCopyable
     {
@@ -252,28 +254,28 @@ namespace zypp
       { return fate() == TO_INSTALL; }
 
       /** */
-      bool setFate( Fate fate_r );
+      bool setFate( Fate fate_r, ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
 
       /** Set the item to be installed (new- or re-install). */
-      bool setToInstall()
-      { return setFate( TO_INSTALL ); }
+      bool setToInstall( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      { return setFate( TO_INSTALL, causer_r ); }
 
       /** Take care the item gets installed if it is not. */
-      bool setInstalled();
+      bool setInstalled( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
 
       /** Take care the item gets installed if it is not, or is older. */
-      bool setUpToDate();
+      bool setUpToDate( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
 
       /** Set the item to be deleted (must be installed). */
-      bool setToDelete()
-      { return setFate( TO_DELETE ); }
+      bool setToDelete( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      { return setFate( TO_DELETE, causer_r ); }
 
       /** Take care the item gets deleted if it is installed. */
-      bool setDeleted();
+      bool setDeleted( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
 
       /** Set the item to stay unmodified. */
-      bool unset()
-      { return setFate( UNMODIFIED ); }
+      bool unset( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      { return setFate( UNMODIFIED, causer_r ); }
       //@}
 
     public:
@@ -291,7 +293,7 @@ namespace zypp
        * Try to set a new Status.
        * Returns \c false if the transitions is not allowed.
        */
-      bool setStatus( const Status state_r );
+      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
 
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;

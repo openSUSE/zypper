@@ -88,7 +88,7 @@ namespace zypp
       Status status() const;
 
       /**  */
-      bool setStatus( const Status state_r );
+      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r );
 
       /** Installed object. */
       PoolItem installedObj() const

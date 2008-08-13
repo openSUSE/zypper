@@ -196,7 +196,7 @@ namespace zypp
       return S_NoInst;
     }
 
-    bool Selectable::Impl::setStatus( const Status state_r )
+    bool Selectable::Impl::setStatus( const Status state_r, ResStatus::TransactByValue causer_r )
     {
       StatusHelper self( *this );
 

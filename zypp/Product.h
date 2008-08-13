@@ -48,7 +48,7 @@ namespace zypp
     std::string flavor() const;
 
     /** Get the product type (base, add-on) */
-    std::string type() const;
+    std::string type() const ZYPP_DEPRECATED;
 
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
@@ -79,13 +79,13 @@ namespace zypp
     std::string shortName() const;
 
     /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>*/
-    std::string longName( const Locale & lang_r = Locale() ) const;
+    std::string longName( const Locale & lang_r = Locale() ) const ZYPP_DEPRECATED;
 
     /** Vendor specific distribution id. */
-    std::string distributionName() const;
+    std::string distributionName() const ZYPP_DEPRECATED;
 
     /** Vendor specific distribution version. */
-    Edition distributionEdition() const;
+    Edition distributionEdition() const ZYPP_DEPRECATED;
 
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );

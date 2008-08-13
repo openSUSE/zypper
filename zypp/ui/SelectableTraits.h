@@ -67,10 +67,7 @@ namespace zypp
       };
 
       /** Oder on InstalledItemSet.
-       * \li repository priority
-       * \li best Arch
-       * \li best Edition
-       * \li ResObject::constPtr as fallback.
+       * Newer install time at the beginning of the set.
       */
       struct IOrder : public std::binary_function<PoolItem,PoolItem,bool>
       {

@@ -64,8 +64,8 @@ namespace zypp
     Status Selectable::status() const
     { return _pimpl->status(); }
 
-    bool Selectable::setStatus( const Status state_r )
-    { return _pimpl->setStatus( state_r ); }
+    bool Selectable::setStatus( const Status state_r, ResStatus::TransactByValue causer_r )
+    { return _pimpl->setStatus( state_r, causer_r ); }
 
     PoolItem Selectable::installedObj() const
     { return _pimpl->installedObj(); }
@@ -164,46 +164,46 @@ namespace zypp
       return UNMODIFIED;
     };
 
-    bool Selectable::setFate( Fate fate_r )
+    bool Selectable::setFate( Fate fate_r, ResStatus::TransactByValue causer_r )
     {
       switch ( fate_r )
       {
         case TO_INSTALL:
-          return setStatus( hasInstalledObj() ? S_Update : S_Install );
+          return setStatus( hasInstalledObj() ? S_Update : S_Install, causer_r );
           break;
 
         case TO_DELETE:
-          return setStatus( S_Del );
+          return setStatus( S_Del, causer_r );
           break;
 
         case UNMODIFIED:
-          return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst );
+          return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst, causer_r );
           break;
       }
       return false;
     }
 
-    bool Selectable::setInstalled()
+    bool Selectable::setInstalled( ResStatus::TransactByValue causer_r )
     {
-      return( hasInstalledObj() || setStatus( S_Install ) );
+      return( hasInstalledObj() || setStatus( S_Install, causer_r ) );
     }
 
-    bool Selectable::setUpToDate()
+    bool Selectable::setUpToDate( ResStatus::TransactByValue causer_r )
     {
       if ( ! hasInstalledObj() )
-        return setStatus( S_Install );
+        return setStatus( S_Install, causer_r );
 
       PoolItem cand( candidateObj() );
       if ( ! cand )
         return true;
 
       return( installedObj()->edition() >= cand->edition()
-              || setStatus( S_Update ) );
+              || setStatus( S_Update, causer_r ) );
     }
 
-    bool Selectable::setDeleted()
+    bool Selectable::setDeleted( ResStatus::TransactByValue causer_r )
     {
-      return( ! hasInstalledObj() || setStatus( S_Del ) );
+      return( ! hasInstalledObj() || setStatus( S_Del, causer_r ) );
     }
 
     /******************************************************************
