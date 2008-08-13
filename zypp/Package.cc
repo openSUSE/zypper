@@ -42,11 +42,10 @@ namespace zypp
   Package::~Package()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Package interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
+  VendorSupportOption Package::vendorSupport() const
+  {
+      return VendorSupportUnknown;
+  }  
 
   Changelog Package::changelog() const
   {

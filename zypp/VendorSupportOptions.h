@@ -1,0 +1,63 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/** \file	zypp/VendorSupportOptions.h
+ *
+*/
+#ifndef ZYPP_VendorSupportOptions_H
+#define ZYPP_VendorSupportOptions_H
+
+#include "zypp/base/Flags.h"
+
+namespace zypp
+{
+
+    enum VendorSupportOption
+    {
+      /**
+       * The support for this package is unknown
+       */
+      VendorSupportUnknown     = 0x0000,
+      /**
+       * The package is known to be unsupported by the vendor
+       */
+      VendorSupportUnsupported = 0x0001,
+      /**
+       * Problem determination, which means technical support 
+       * designed to provide compatibility information, 
+       * installation assistance, usage support, on-going maintenance
+       * and basic troubleshooting. Level 1 Support is not intended to 
+       * correct product defect errors.
+       *
+       * May have different semantics for different organizations.
+       */
+      VendorSupportLevel1      = 0x0002,
+      /**
+       * Problem isolation, which means technical support designed 
+       * to duplicate customer problems, isolate problem area and provide 
+       * resolution for problems not resolved by Level 1 Support.
+       *
+       * May have different semantics for different organizations.
+       */       
+      VendorSupportLevel2      = 0x0003,
+      /**
+       * Problem resolution, which means technical support designed
+       * to resolve complex problems by engaging engineering in resolution
+       * of product defects which have been identified by Level 2 Support.
+       *
+       * May have different semantics for different organizations.
+       */              
+      VendorSupportLevel3      = 0x0004
+    };
+
+    // Make a flag set for this
+    ZYPP_DECLARE_FLAGS(VendorSupportOptions,VendorSupportOption);
+    ZYPP_DECLARE_OPERATORS_FOR_FLAGS(VendorSupportOptions)
+}
+
+#endif 

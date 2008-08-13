@@ -15,6 +15,7 @@
 #include "zypp/ResObject.h"
 #include "zypp/PackageKeyword.h"
 #include "zypp/Changelog.h"
+#include "zypp/VendorSupportOptions.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,6 +41,14 @@ namespace zypp
     typedef sat::ArrayAttr<PackageKeyword,IdString> Keywords;
 
   public:
+
+    /**
+     * Returns the level of supportability the vendor
+     * gives to this package.
+     * 
+     * This is one value from \ref VendorSupportOption
+     */
+    VendorSupportOption vendorSupport() const;
 
     /** Get the package change log */
     Changelog changelog() const;
@@ -92,6 +101,7 @@ namespace zypp
     /** Dtor */
     virtual ~Package();
   };
+
   ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////

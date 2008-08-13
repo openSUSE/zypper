@@ -67,6 +67,7 @@ SET( zypp_SRCS
   UpgradeStatistics.cc
   Url.cc
   VendorAttr.cc
+  VendorSupportOptions.cc
   ZYpp.cc
   ZYppCommitPolicy.cc
   ZYppCommitResult.cc
@@ -159,6 +160,7 @@ SET( zypp_HEADERS
   UpgradeStatistics.h
   Url.h
   VendorAttr.h
+  VendorSupportOptions.h
   ZConfig.h
   ZYppCallbacks.h
   ZYppCommit.h
