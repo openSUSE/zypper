@@ -180,6 +180,7 @@ namespace zypp
           return setStatus( hasInstalledObj() ? S_KeepInstalled : S_NoInst );
           break;
       }
+      return false;
     }
 
     bool Selectable::setInstalled()
