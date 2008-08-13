@@ -76,6 +76,8 @@ namespace zypp
   ResPool::repository_iterator ResPool::knownRepositoriesEnd() const
   { return _pimpl->knownRepositoriesEnd(); }
 
+  Repository ResPool::reposFind( const std::string & alias_r ) const
+  { return _pimpl->reposFind( alias_r ); }
 
   bool ResPool::autoSoftLocksEmpty() const
   { return _pimpl->autoSoftLocks().empty(); }

@@ -523,6 +523,38 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+  // ResPool   pool( ResPool::instance() );
+
+  // Iterate all repositories loaded to the pool
+  for_( it,  pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd() )
+  {
+    MIL << *it << endl;
+  }
+
+  // some specific repo
+  Repository myRepo( *pool.knownRepositoriesBegin() );
+
+  // Iterate all packages named "amarok" (from all repos)
+  for_( it, pool.byIdentBegin( ResKind::package, "amarok" ), pool.byIdentEnd( ResKind::package, "amarok" ) )
+  {
+    MIL << "Check: " << *it << endl;
+    if ( (*it)->repository() == myRepo )
+    {
+      MIL << "  Found:      " << (*it)->name() << endl;
+      MIL << "  Version:    " << (*it)->edition() << endl;
+      MIL << "  Repository: " << (*it)->repository() << endl;
+    }
+
+  }
+
+
+
+   ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
+
   ui::Selectable::Ptr item( ui::Selectable::get( "amarok" ) );
   item->setUpToDate();
   SEC << dump(item) << endl;

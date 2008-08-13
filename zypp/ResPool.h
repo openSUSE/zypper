@@ -224,6 +224,11 @@ namespace zypp
       repository_iterator knownRepositoriesBegin() const;
 
       repository_iterator knownRepositoriesEnd() const;
+
+      /** Find a \ref Repository named \c alias_r.
+       * Returns \ref Repository::norepository if there is no such \ref Repository.
+       */
+      Repository reposFind( const std::string & alias_r ) const;
       //@}
 
     public:

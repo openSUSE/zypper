@@ -208,6 +208,9 @@ namespace zypp
         repository_iterator knownRepositoriesEnd() const
         { checkSerial(); return satpool().reposEnd(); }
 
+        Repository reposFind( const std::string & alias_r ) const
+        { checkSerial(); return satpool().reposFind( alias_r ); }
+
         ///////////////////////////////////////////////////////////////////
         //
         ///////////////////////////////////////////////////////////////////
