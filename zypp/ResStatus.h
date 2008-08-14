@@ -22,6 +22,7 @@ namespace zypp
   namespace resstatus
   {
     class UserLockQueryManip;
+    class StatusBackup;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -669,6 +670,7 @@ namespace zypp
 	  { return _bitfield.value<_Field>() < val_r; }
 
   private:
+    friend class resstatus::StatusBackup;
     BitFieldType _bitfield;
   };
   ///////////////////////////////////////////////////////////////////
@@ -684,7 +686,32 @@ namespace zypp
   inline bool operator!=( const ResStatus & lhs, const ResStatus & rhs )
   { return ! (lhs == rhs); }
 
-  /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+
+  namespace resstatus
+  {
+    class StatusBackup
+    {
+      public:
+        StatusBackup()
+        : _status( 0 )
+        {}
+
+        StatusBackup( ResStatus & status_r )
+        : _status( &status_r )
+        , _bitfield( _status->_bitfield )
+        {}
+
+        void replay()
+        { if ( _status ) _status->_bitfield = _bitfield; }
+
+      private:
+        ResStatus *             _status;
+        ResStatus::BitFieldType _bitfield;
+    };
+  }
+
+ /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_RESSTATUS_H

@@ -35,6 +35,7 @@ namespace zypp
       : _impl( impl )
       , inst( impl.installedObj() )
       , cand( impl.candidateObj() )
+      , causer( causer_r )
       {}
 
       typedef Selectable::Impl::available_const_iterator available_const_iterator;
@@ -57,103 +58,148 @@ namespace zypp
       bool hasBoth() const
       { return inst && cand; }
 
-      //
-      // ResStatus manip
-      //
-      void resetTransactingCandidates() const
-      {
-        for ( available_const_iterator it = _impl.availableBegin();
-              it != _impl.availableEnd(); ++it )
-          {
-            (*it).status().setTransact( false, ResStatus::USER );
-          }
-      }
-      void unlockCandidates() const
-      {
-        for ( available_const_iterator it = _impl.availableBegin();
-              it != _impl.availableEnd(); ++it )
-          {
-            (*it).status().setTransact( false, ResStatus::USER );
-            (*it).status().setLock( false, ResStatus::USER );
-          }
-      }
-      void lockCandidates() const
-      {
-        for ( available_const_iterator it = _impl.availableBegin();
-              it != _impl.availableEnd(); ++it )
-          {
-            (*it).status().setTransact( false, ResStatus::USER );
-            (*it).status().setLock( true, ResStatus::USER );
-          }
-      }
-
-      bool setInstall() const
+      /** \name Topevel methods must restore status on failure. */
+      //@{
+      bool setInstall()
       {
         if ( cand )
-          {
-	      if ( inst ) {
-		  inst.status().setTransact( false, ResStatus::USER );
-		  inst.status().setLock    ( false, ResStatus::USER );
-                  if ( ! cand->installOnly() )
-                  {
-                    // This is what the solver most probabely will do.
-                    // If we are wrong the solver will correct it. But
-                    // this way we will get a better disk usage result,
-                    // even if no autosolving is on.
-                    inst.status().setTransact( true,  ResStatus::SOLVER );
-                  }
-	      }
-              unlockCandidates();
-	      return cand.status().setTransact( true, ResStatus::USER );
+        {
+          if ( inst ) {
+            ResStatus & inststatus( backup( inst.status() ) );
+            if ( ! inststatus.setTransact( false, causer ) ) return restore();
+            if ( ! inststatus.setLock    ( false, causer ) ) return restore();
+            if ( ! cand->installOnly() )
+            {
+              // This is what the solver most probabely will do.
+              // If we are wrong the solver will correct it. But
+              // this way we will get a better disk usage result,
+              // even if no autosolving is on.
+              inststatus.setTransact( true, ResStatus::SOLVER );
+            }
           }
+          if ( ! unlockCandidates() ) return restore();
+          ResStatus & candstatus( backup( cand.status() ) );
+          if ( ! candstatus.setTransact( true, causer ) ) return restore();
+          return true;
+        }
         return false;
       }
 
-      bool setDelete() const
+      bool setDelete()
       {
         if ( inst )
-          {
-            resetTransactingCandidates();
-	    inst.status().setLock( false, ResStatus::USER );
-            return inst.status().setTransact( true, ResStatus::USER );
-          }
+        {
+          if ( ! resetTransactingCandidates() ) return restore();
+          ResStatus & inststatus( backup( inst.status() ) );
+          if ( ! inststatus.setLock( false, causer ) ) return restore();
+          if ( ! inststatus.setTransact( true, causer ) ) return restore();
+          return true;
+        }
         return false;
       }
 
-      bool unset() const
+      bool unset()
       {
-	  if ( inst ) {
-	      inst.status().setTransact( false, ResStatus::USER );
-	      inst.status().setLock( false, ResStatus::USER );
-	  }
-          unlockCandidates();
-	  return true;
+        if ( inst )
+        {
+          ResStatus & inststatus( backup( inst.status() ) );
+          if ( ! inststatus.setTransact( false, causer ) ) return restore();
+          if ( ! inststatus.setLock( false, causer ) ) return restore();
+        }
+        if ( ! unlockCandidates() ) return restore();
+        return true;
       }
 
-      bool setProtected() const
+      bool setProtected()
       {
-	  if ( inst ) {
-              resetTransactingCandidates();
-	      inst.status().setTransact( false, ResStatus::USER );
-	      return inst.status().setLock( true, ResStatus::USER );
-	  } else
-	      return false;
+        if ( causer != ResStatus::USER ) // by user only
+          return false;
+
+        if ( inst ) {
+          resetTransactingCandidates();
+          inst.status().setTransact( false, causer );
+          return inst.status().setLock( true, causer );
+        } else
+          return false;
       }
 
-      bool setTaboo() const
+      bool setTaboo()
       {
-	  if ( cand ) {
-              lockCandidates();
-	      return true;
-	  } else
-	      return false;
+        if ( causer != ResStatus::USER ) // by user only
+          return false;
+
+        if ( cand ) {
+          lockCandidates();
+          return true;
+        } else
+          return false;
       }
+      //@}
 
+    private:
+      /** \name Helper methods backup status but do not replay. */
+      //@{
+      bool resetTransactingCandidates()
+      {
+        for_( it, _impl.availableBegin(), _impl.availableEnd() )
+        {
+          ResStatus & status( backup( (*it).status() ) );
+          if ( ! status.setTransact( false, causer ) ) return false;
+        }
+        return true;
+      }
+      bool unlockCandidates()
+      {
+        for_( it, _impl.availableBegin(), _impl.availableEnd() )
+        {
+          ResStatus & status( backup( (*it).status() ) );
+          if ( ! status.setTransact( false, causer ) ) return false;
+          if ( ! status.setLock( false, causer ) ) return false;
+        }
+        return true;
+      }
+      bool lockCandidates()
+      {
+        for_( it, _impl.availableBegin(), _impl.availableEnd() )
+        {
+          ResStatus & status( backup( (*it).status() ) );
+          if ( ! status.setTransact( false, causer ) ) return false;
+          if ( ! status.setLock( true, causer ) ) return false;
+        }
+        return true;
+      }
+      //@}
 
-    public:
+    private:
       const Selectable::Impl & _impl;
-      PoolItem inst;
-      PoolItem cand;
+      PoolItem                   inst;
+      PoolItem                   cand;
+      ResStatus::TransactByValue causer;
+
+    private:
+      // No backup replay needed if causer is user,
+      // because actions should always succeed.
+
+      ResStatus & backup( ResStatus & status_r )
+      {
+        if ( causer != ResStatus::USER )
+          _backup.push_back( status_r );
+        return status_r;
+      }
+
+      bool restore()
+      {
+        if ( causer != ResStatus::USER )
+        {
+          for_( rit, _backup.rbegin(), _backup.rend() )
+          {
+            rit->replay();
+          }
+        }
+        return false; // restore is done on error - return restore();
+      }
+
+      std::vector<resstatus::StatusBackup> _backup;
     };
     ///////////////////////////////////////////////////////////////////
 
