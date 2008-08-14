@@ -103,10 +103,15 @@ namespace zypp
     /**
      * \short Vendor
      *
-     * For Example "Novell Inc."
+     * For example "Novell Inc."
      */
     Vendor vendor() const
     { return Resolvable::vendor().asString(); }
+
+    /** The distribution string.
+     * E.g. \c code-11.
+    */
+    std::string distribution() const;
 
     /** Installed size. */
     ByteCount installSize() const;
