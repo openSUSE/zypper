@@ -44,11 +44,18 @@ namespace zypp
     sat::Solvable referencePackage() const;
 
   public:
-    /** The product flavor (LiveCD Demo, FTP edition,...).*/
+    /** Untranslated short name like <tt>SLES 10</tt>*/
+    std::string shortName() const;
+
+    /** The product flavor (LiveCD Demo, FTP edition,...). */
     std::string flavor() const;
 
-    /** Get the product type (base, add-on) */
-    std::string type() const ZYPP_DEPRECATED;
+    /** Get the product type (base, add-on)
+     * Well, in an ideal world there is only one base product.
+     * It's the installed product denoted by a symlink in
+     * \c /etc/products.d.
+    */
+    std::string type() const;
 
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
@@ -75,16 +82,20 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
-    /** Untranslated short name like <tt>SLES 10</tt>*/
-    std::string shortName() const;
+    /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>
+     * \deprecated use summary.
+     */
+    std::string longName( const Locale & lang_r = Locale() ) const ZYPP_DEPRECATED
+    { return summary( lang_r ); }
 
-    /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>*/
-    std::string longName( const Locale & lang_r = Locale() ) const ZYPP_DEPRECATED;
-
-    /** Vendor specific distribution id. */
+    /** Vendor specific distribution id.
+     * \deprecated replaced by ResObject::distribution
+     */
     std::string distributionName() const ZYPP_DEPRECATED;
 
-    /** Vendor specific distribution version. */
+    /** Vendor specific distribution version.
+     * \deprecated replaced by ResObject::distribution
+     */
     Edition distributionEdition() const ZYPP_DEPRECATED;
 
   protected:

@@ -79,7 +79,17 @@ namespace zypp
   {
     Capability identCap( lookupStrAttribute( sat::SolvAttr::productReferences ) );
     if ( ! identCap )
+    {
+      // No 'references': fallback to provider of 'product(name) = version'
+      // Without this solver testcase won't work, as it does not remember
+      // 'references'.
+      identCap = Capability( str::form( "product(%s) = %s", name().c_str(), edition().c_str() )  );
+    }
+    if ( ! identCap )
+    {
       return sat::Solvable::noSolvable;
+    }
+
 
     // if there is productReferences defined, we expect
     // a matching package within the same repo.
@@ -93,6 +103,9 @@ namespace zypp
     WAR << *this << ": no reference package found: " << identCap << endl;
     return sat::Solvable::noSolvable;
   }
+
+  std::string Product::shortName() const
+  { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }
 
   std::string Product::flavor() const
   { return lookupStrAttribute( sat::SolvAttr::productFlavor ); }
@@ -136,12 +149,6 @@ namespace zypp
     fillList( ret, satSolvable(), sat::SolvAttr::productFlags );
     return ret;
   }
-
-  std::string Product::shortName() const
-  { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }
-
-  std::string Product::longName( const Locale & lang_r ) const
-  { return summary( lang_r ); }
 
   std::string Product::distributionName() const
   { return lookupStrAttribute( sat::SolvAttr::productDistproduct ); }
