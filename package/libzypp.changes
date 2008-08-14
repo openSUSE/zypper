@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 14 18:44:45 CEST 2008 - schubi@suse.de
+
+- Regarding error messages for Products correctly (FATE #304502)
+- rev 10863 
+
+-------------------------------------------------------------------
 Thu Aug 14 14:03:27 CEST 2008 - ma@suse.de
 
 - Let Selectable default to USER level.
