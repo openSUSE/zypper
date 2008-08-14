@@ -845,6 +845,33 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 };
 
 
+//----------------------------------------------------------------------------
+// Checking if this solvable/item has a buddy which reflect the real
+// user visible description of an item
+// e.g. The release package has a buddy to the concerning product item.
+// This user want's the message "Product foo conflicts with product bar" and
+// NOT "package release-foo conflicts with package release-bar"
+//----------------------------------------------------------------------------
+
+
+PoolItem SATResolver::mapItem (const PoolItem &item)
+{
+    sat::Solvable buddy = item.buddy();
+    if (buddy != sat::Solvable())
+    {
+	return _pool.find (buddy);
+    }
+    else
+    {
+	return item;
+    }
+}
+
+sat::Solvable SATResolver::mapSolvable (const Id &id)
+{
+    PoolItem item = _pool.find (sat::Solvable(id));
+    return mapItem(item).satSolvable();    
+}
 
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
 {
@@ -852,15 +879,15 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
   Pool *pool = _solv->pool;
   Id probr;
   Id dep, source, target;
-  Solvable *s, *s2;
+  sat::Solvable s, s2;
 
   ignoreId = 0;
   probr = solver_findproblemrule(_solv, problem);
   switch (solver_problemruleinfo(_solv, &(_jobQueue), probr, &dep, &source, &target))
   {
       case SOLVER_PROBLEM_UPDATE_RULE:
-	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s));
+	  s = mapSolvable (source);
+	  ret = str::form (_("problem with installed package %s"), solvable2str(pool, s.get()));
 	  break;
       case SOLVER_PROBLEM_JOB_RULE:
 	  ret = str::form (_("conflicting requests"));
@@ -873,35 +900,35 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  detail += _("Have you enabled all requested repositories ?");	  
 	  break;
       case SOLVER_PROBLEM_NOT_INSTALLABLE:
-	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("%s is not installable"), solvable2str(pool, s));
+	  s = mapSolvable (source);
+	  ret = str::form (_("%s is not installable"), solvable2str(pool, s.get()));
 	  break;
       case SOLVER_PROBLEM_NOTHING_PROVIDES_DEP:
-	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), solvable2str(pool, s));
+	  s = mapSolvable (source);
+	  ret = str::form (_("nothing provides %s needed by %s"), dep2str(pool, dep), solvable2str(pool, s.get()));
 	  break;
       case SOLVER_PROBLEM_SAME_NAME:
-	  s = pool_id2solvable(pool, source);
-	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form (_("cannot install both %s and %s"), solvable2str(pool, s), solvable2str(pool, s2));
+	  s = mapSolvable (source);
+	  s2 = mapSolvable (target);
+	  ret = str::form (_("cannot install both %s and %s"), solvable2str(pool, s.get()), solvable2str(pool, s2.get()));
 	  break;
       case SOLVER_PROBLEM_PACKAGE_CONFLICT:
-	  s = pool_id2solvable(pool, source);
-	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form (_("%s conflicts with %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  s = mapSolvable (source);
+	  s2 = mapSolvable (target);
+	  ret = str::form (_("%s conflicts with %s provided by %s"), solvable2str(pool, s.get()), dep2str(pool, dep), solvable2str(pool, s2.get()));
 	  break;
       case SOLVER_PROBLEM_PACKAGE_OBSOLETES:
-	  s = pool_id2solvable(pool, source);
-	  s2 = pool_id2solvable(pool, target);
-	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s), dep2str(pool, dep), solvable2str(pool, s2));
+	  s = mapSolvable (source);
+	  s2 = mapSolvable (target);
+	  ret = str::form (_("%s obsoletes %s provided by %s"), solvable2str(pool, s.get()), dep2str(pool, dep), solvable2str(pool, s2.get()));
 	  break;
       case SOLVER_PROBLEM_SELF_CONFLICT:
-	  s = pool_id2solvable(pool, source);
-	  ret = str::form (_("Solvable %s conflicts with %s provided by itself"), solvable2str(pool, s), dep2str(pool, dep));
+	  s = mapSolvable (source);
+	  ret = str::form (_("Solvable %s conflicts with %s provided by itself"), solvable2str(pool, s.get()), dep2str(pool, dep));
           break;	  
       case SOLVER_PROBLEM_DEP_PROVIDERS_NOT_INSTALLABLE:
 	  ignoreId = source; // for setting weak dependencies
-	  s = pool_id2solvable(pool, source);
+	  s = mapSolvable (source);
 	  Capability cap(dep);
 	  sat::WhatProvides possibleProviders(cap);
 
@@ -929,14 +956,14 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	      }
 	  }
 
-	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), solvable2str(pool, s), dep2str(pool, dep));
+	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), solvable2str(pool, s.get()), dep2str(pool, dep));
 	  if (providerlistInstalled.size() > 0) {
 	      detail += _("deleted providers: ");
 	      for (ProviderList::const_iterator iter = providerlistInstalled.begin(); iter != providerlistInstalled.end(); iter++) {
 		  if (iter == providerlistInstalled.begin())
 		      detail += itemToString (*iter, false);
 		  else
-		      detail += "\n                   " + itemToString (*iter, false);
+		      detail += "\n                   " + itemToString (mapItem(*iter), false);
 	      }
 	  }
 	  if (providerlistUninstalled.size() > 0) {
@@ -948,7 +975,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 		  if (iter == providerlistUninstalled.begin())
 		      detail += itemToString (*iter, false);		      
 		  else
-		      detail += "\n                   " + itemToString (*iter, false);		      
+		      detail += "\n                   " + itemToString (mapItem(*iter), false);		      
 	      }
 	  }	  
 	  break;
@@ -966,7 +993,7 @@ SATResolver::problems ()
 	int pcnt;
 	Id p, rp, what;
 	Id problem, solution, element;
-	Solvable *s, *sd;
+	sat::Solvable s, sd;
 
 	CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
 	CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
@@ -995,44 +1022,44 @@ SATResolver::problems ()
 			switch (_jobQueue.elements[rp-1])
 			{
 			    case SOLVER_INSTALL_SOLVABLE: {
-				s = pool->solvables + what;
-				PoolItem poolItem = _pool.find (sat::Solvable(what));
+				s = mapSolvable (what);
+				PoolItem poolItem = _pool.find (s);
 				if (poolItem) {
-				    if (_solv->installed && s->repo == _solv->installed) {
+				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s) );
+					string description = str::form (_("do not keep %s installed"),  solvable2str(pool, s.get()) );
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					string description = str::form (_("do not install %s"), solvable2str(pool, s));
+					string description = str::form (_("do not install %s"), solvable2str(pool, s.get()));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
 				} else {
-				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s->name) << "-"
-					<<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch) << endl;
+				    ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-"
+					<<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch) << endl;
 				}
 			    }
 				break;
 			    case SOLVER_ERASE_SOLVABLE: {
-				s = pool->solvables + what;
-				PoolItem poolItem = _pool.find (sat::Solvable(what));
+				s = mapSolvable (what);
+				PoolItem poolItem = _pool.find (s);
 				if (poolItem) {
-				    if (_solv->installed && s->repo == _solv->installed) {
+				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("keep %s"), solvable2str(pool, s));
+					string description = str::form (_("keep %s"), solvable2str(pool, s.get()));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, INSTALL);
-					string description = str::form (_("do not forbid installation of %s"), solvable2str(pool, s));
+					string description = str::form (_("do not forbid installation of %s"), solvable2str(pool, s.get()));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
 				} else {
-				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
-					id2str(pool, s->arch) << endl;
+				    ERR << "SOLVER_ERASE_SOLVABLE: No item found for " << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<
+					id2str(pool, s.get()->arch) << endl;
 				}
 			    }
 				break;
@@ -1107,20 +1134,20 @@ SATResolver::problems ()
 				break;
 			    case SOLVER_INSTALL_SOLVABLE_UPDATE:
 				{
-				PoolItem poolItem = _pool.find (sat::Solvable(what));
-				s = pool->solvables + what;
+				s = mapSolvable (what);
+				PoolItem poolItem = _pool.find (s);
 				if (poolItem) {
-				    if (_solv->installed && s->repo == _solv->installed) {
+				    if (_solv->installed && s.get()->repo == _solv->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s));
+					string description = str::form (_("do not install most recent version of %s"), solvable2str(pool, s.get()));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE " << poolItem << " is not selected for installation" << endl;
 				    }
 				} else {
-				    ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE: No item found for " << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<
-					id2str(pool, s->arch) << endl;
+				    ERR << "SOLVER_INSTALL_SOLVABLE_UPDATE: No item found for " << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<
+					id2str(pool, s.get()->arch) << endl;
 				}
 				}
 				break;
@@ -1131,55 +1158,58 @@ SATResolver::problems ()
 			}
 		    } else {
 			/* policy, replace p with rp */
-			s = pool->solvables + p;
-			sd = rp ? pool->solvables + rp : 0;
+			s = mapSolvable (p);
+			if (rp)
+			    sd = mapSolvable (rp);
 
-			PoolItem itemFrom = _pool.find (sat::Solvable(p));
+			PoolItem itemFrom = _pool.find (s);
 			if (rp)
 			{
 			    int gotone = 0;
 
-			    PoolItem itemTo = _pool.find (sat::Solvable(rp));
+			    PoolItem itemTo = _pool.find (sd);
 			    if (itemFrom && itemTo) {
 				problemSolution->addSingleAction (itemTo, INSTALL);
 
-				if (evrcmp(pool, s->evr, sd->evr, EVRCMP_COMPARE ) > 0)
+				if (evrcmp(pool, s.get()->evr, sd.get()->evr, EVRCMP_COMPARE ) > 0)
 				{
-				    string description = str::form (_("downgrade of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("downgrade of %s to %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!_solv->allowarchchange && s->name == sd->name && s->arch != sd->arch && policy_illegal_archchange(_solv, s, sd))
+				if (!_solv->allowarchchange && s.get()->name == sd.get()->name && s.get()->arch != sd.get()->arch
+				    && policy_illegal_archchange(_solv, s.get(), sd.get()))
 				{
-				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("architecture change of %s to %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
-				if (!_solv->allowvendorchange && s->name == sd->name && s->vendor != sd->vendor && policy_illegal_vendorchange(_solv, s, sd))
+				if (!_solv->allowvendorchange && s.get()->name == sd.get()->name && s.get()->vendor != sd.get()->vendor
+				    && policy_illegal_vendorchange(_solv, s.get(), sd.get()))
 				{
 				    string description = str::form (_("install %s (with vendor change)\n  %s\n-->\n  %s") ,
-								    solvable2str(pool, sd) , id2str(pool, s->vendor),
-								    string(sd->vendor ?  id2str(pool, sd->vendor) : " (no vendor) ").c_str() );
+								    solvable2str(pool, sd.get()) , id2str(pool, s.get()->vendor),
+								    string(sd.get()->vendor ?  id2str(pool, sd.get()->vendor) : " (no vendor) ").c_str() );
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    string description = str::form (_("replacement of %s with %s"), solvable2str(pool, s), solvable2str(pool, sd));
+				    string description = str::form (_("replacement of %s with %s"), solvable2str(pool, s.get()), solvable2str(pool, sd.get()));
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				}
 			    } else {
-				ERR << id2str(pool, s->name) << "-" <<  id2str(pool, s->evr) << "." <<  id2str(pool, s->arch)
-				    << " or "  << id2str(pool, sd->name) << "-" <<  id2str(pool, sd->evr) << "." <<  id2str(pool, sd->arch) << " not found" << endl;
+				ERR << id2str(pool, s.get()->name) << "-" <<  id2str(pool, s.get()->evr) << "." <<  id2str(pool, s.get()->arch)
+				    << " or "  << id2str(pool, sd.get()->name) << "-" <<  id2str(pool, sd.get()->evr) << "." <<  id2str(pool, sd.get()->arch) << " not found" << endl;
 			    }
 			}
 			else
 			{
 			    if (itemFrom) {
-				string description = str::form (_("deinstallation of %s"), solvable2str(pool, s));
+				string description = str::form (_("deinstallation of %s"), solvable2str(pool, s.get()));
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				problemSolution->addSingleAction (itemFrom, REMOVE);

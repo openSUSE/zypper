@@ -101,6 +101,15 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     void setLocks();
     // set requirements for a running system
     void setSystemRequirements();
+
+   // Checking if this solvable/item has a buddy which reflect the real
+   // user visible description of an item
+   // e.g. The release package has a buddy to the concerning product item.
+   // This user want's the message "Product foo conflicts with product bar" and
+   // NOT "package release-foo conflicts with package release-bar"
+   // So these functions return the concerning buddy (e.g. product item) 
+    sat::Solvable mapSolvable (const Id &id);
+    PoolItem mapItem (const PoolItem &item);
     
   public:
 
