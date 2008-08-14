@@ -254,27 +254,27 @@ namespace zypp
       { return fate() == TO_INSTALL; }
 
       /** */
-      bool setFate( Fate fate_r, ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
+      bool setFate( Fate fate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Set the item to be installed (new- or re-install). */
-      bool setToInstall( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      bool setToInstall( ResStatus::TransactByValue causer_r = ResStatus::USER )
       { return setFate( TO_INSTALL, causer_r ); }
 
       /** Take care the item gets installed if it is not. */
-      bool setInstalled( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
+      bool setInstalled( ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Take care the item gets installed if it is not, or is older. */
-      bool setUpToDate( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
+      bool setUpToDate( ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Set the item to be deleted (must be installed). */
-      bool setToDelete( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      bool setToDelete( ResStatus::TransactByValue causer_r = ResStatus::USER )
       { return setFate( TO_DELETE, causer_r ); }
 
       /** Take care the item gets deleted if it is installed. */
-      bool setDeleted( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
+      bool setDeleted( ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Set the item to stay unmodified. */
-      bool unset( ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ )
+      bool unset( ResStatus::TransactByValue causer_r = ResStatus::USER )
       { return setFate( UNMODIFIED, causer_r ); }
       //@}
 
@@ -293,7 +293,7 @@ namespace zypp
        * Try to set a new Status.
        * Returns \c false if the transitions is not allowed.
        */
-      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r /*= ResStatus::USER*/ );
+      bool setStatus( const Status state_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Return who caused the modification. */
       ResStatus::TransactByValue modifiedBy() const;

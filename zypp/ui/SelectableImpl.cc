@@ -31,7 +31,7 @@ namespace zypp
     */
     struct StatusHelper
     {
-      StatusHelper( const Selectable::Impl & impl )
+      StatusHelper( const Selectable::Impl & impl, ResStatus::TransactByValue causer_r )
       : _impl( impl )
       , inst( impl.installedObj() )
       , cand( impl.candidateObj() )
@@ -198,7 +198,7 @@ namespace zypp
 
     bool Selectable::Impl::setStatus( const Status state_r, ResStatus::TransactByValue causer_r )
     {
-      StatusHelper self( *this );
+      StatusHelper self( *this, causer_r );
 
       switch ( state_r )
         {

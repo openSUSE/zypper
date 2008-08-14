@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 14 14:03:27 CEST 2008 - ma@suse.de
+
+- Let Selectable default to USER level.
+- revision 10850
+- version 5.5.1 (5)
+
+-------------------------------------------------------------------
 Wed Aug 13 21:01:25 CEST 2008 - ma@suse.de
 
 - Change Selectable API to support doing staus manipulation on

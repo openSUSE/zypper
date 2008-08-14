@@ -268,6 +268,11 @@ bool install()
   return true;
 }
 
+void testcase()
+{
+  getZYpp()->resolver()->createSolverTestcase( "./solverTestcase" );
+}
+
 ///////////////////////////////////////////////////////////////////
 
 struct DigestReceive : public callback::ReceiveReport<DigestReport>
@@ -523,11 +528,8 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-
-  ui::Selectable::Ptr item( ui::Selectable::get( "amarok" ) );
-  item->setUpToDate();
-  SEC << dump(item) << endl;
-  install();
+  testcase();
+  MIL << "FOOO" << endl;
 
    ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
