@@ -70,7 +70,7 @@ namespace zypp
                                     const std::string & /*message_r*/ );
         virtual ~LineFormater() {}
       };
-            
+
     public:
       /** Assign a LineFormater.
        * If you want to format loglines by yourself. NULL installs the
@@ -78,6 +78,7 @@ namespace zypp
       */
       void setLineFormater( const shared_ptr<LineFormater> & formater_r );
 
+    public:
       /** Set path for the logfile.
        * Permission for logfiles is set to 0640 unless an explicit mode_t
        * value is given. An empty pathname turns off logging. <tt>"-"</tt>
