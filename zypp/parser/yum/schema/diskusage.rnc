@@ -5,8 +5,8 @@ element diskusage {
   element duinfo {
     attribute name { text },
     attribute epoch { text }?,
-    attribute ver { text },
-    attribute rel { text },
+    attribute version { text },
+    attribute release { text },
     attribute arch {
       "noarch"
       | "athlon"
