@@ -41,6 +41,7 @@
 #include "zypp/sat/SolvableSet.h"
 #include "zypp/sat/SolvIterMixin.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/sat/WhatObsoletes.h"
 #include "zypp/PoolQuery.h"
 
 #include "zypp/parser/ProductConfReader.h"
@@ -528,10 +529,42 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  testcase();
-  MIL << "FOOO" << endl;
+  // Pool of Selectables
+  ResPoolProxy selectablePool( ResPool::instance().proxy() );
 
-   ///////////////////////////////////////////////////////////////////
+  // Iterate it's Products...
+  for_( it, selectablePool.byKindBegin<Product>(), selectablePool.byKindEnd<Product>() )
+  {
+    // current Product Selectable
+    ui::Selectable::Ptr prodSel( *it );
+    MIL << dump( prodSel ) << endl;
+
+    // It's candiate as Product pointer
+    Product::constPtr prod( prodSel->candidateAsKind<Product>() );
+    if ( prod )
+    {
+      // Not NULL, so there is an available Product.
+      // Get the installed Products it would replace.
+      Product::ReplacedProducts prodReplaces( prod->replacedProducts() );
+
+      // Iterate the replaced Products...
+      for_( it, prodReplaces.begin(), prodReplaces.end() )
+      {
+        // current replaced Product
+        Product::constPtr replacedProduct( *it );
+        DBG << replacedProduct << endl;
+
+        // and this is how you would get the Selectable that contains
+        // this replacedProduct, in case you need it ..
+        ui::Selectable::Ptr replacedProductsSelectable( ui::Selectable::get( replacedProduct ) );
+        DBG << replacedProductsSelectable << endl;
+      }
+    }
+
+  }
+
+
+  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;

@@ -483,6 +483,7 @@ SET( zypp_sat_SRCS
   sat/SolvableSet.cc
   sat/SolvIterMixin.cc
   sat/WhatProvides.cc
+  sat/WhatObsoletes.cc
   sat/LocaleSupport.cc
   sat/LookupAttr.cc
   sat/SolvAttr.cc
@@ -494,6 +495,7 @@ SET( zypp_sat_HEADERS
   sat/SolvableSet.h
   sat/SolvIterMixin.h
   sat/WhatProvides.h
+  sat/WhatObsoletes.h
   sat/LocaleSupport.h
   sat/LookupAttr.h
   sat/SolvAttr.h

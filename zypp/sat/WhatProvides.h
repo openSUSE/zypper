@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/.h
+/** \file	zypp/sat/WhatProvides.h
  *
 */
 #ifndef ZYPP_SAT_WHATPROVIDES_H
@@ -142,6 +142,7 @@ namespace zypp
     //	CLASS NAME : WhatProvides::const_iterator
     //
     /** \ref WhatProvides iterator.
+     * Iterate a NULL terminated sat::detail::IdType array.
      */
     class WhatProvidesIterator : public boost::iterator_adaptor<
           WhatProvidesIterator         // Derived

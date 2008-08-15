@@ -44,6 +44,15 @@ namespace zypp
     sat::Solvable referencePackage() const;
 
   public:
+    /***/
+    typedef std::vector<constPtr> ReplacedProducts;
+
+    /** Array of \b installed Products that would be replaced by
+     *  installing this one.
+     */
+    ReplacedProducts replacedProducts() const;
+
+  public:
     /** Untranslated short name like <tt>SLES 10</tt>*/
     std::string shortName() const;
 

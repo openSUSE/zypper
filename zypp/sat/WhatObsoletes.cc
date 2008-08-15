@@ -6,14 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/sat/WhatProvides.cc
+/** \file	zypp/sat/WhatObsoletes.cc
  *
 */
 #include <iostream>
 
 #include "zypp/base/LogTools.h"
-#include "zypp/sat/WhatProvides.h"
+#include "zypp/sat/WhatObsoletes.h"
 #include "zypp/sat/detail/PoolImpl.h"
+#include "zypp/PoolItem.h"
 
 using std::endl;
 
@@ -28,52 +29,61 @@ namespace zypp
     namespace
     { /////////////////////////////////////////////////////////////////
 
-      /** WhatProvides ctor helper collecting providers from Capabilies. */
-      template <class Iterator>
-      shared_ptr<void> allocatedProviders( Iterator begin_r, Iterator end_r, const sat::detail::IdType *& first_r )
+      /** WhatObsoletes ctor helper collecting obsoleted installed items. */
+      shared_ptr<void> allocatedProviders( sat::Solvable item_r, const sat::detail::IdType *& first_r )
       {
-        // use a set to unify the collected results
-        std::tr1::unordered_set<sat::detail::IdType> ids;
-        for_( it, begin_r, end_r )
-        {
-          WhatProvides providers( *it );
-          for_( prv, providers.begin(), providers.end() )
-          {
-            ids.insert( prv->id() );
-          }
-        }
-
-        if ( ids.empty() )
+        WhatProvides obsoleted( item_r.obsoletes() );
+        if ( obsoleted.empty() )
         {
           return shared_ptr<void>();
         }
 
         // use allocated private data to store the result (incl. trailing NULL)
-        std::vector<sat::detail::IdType> * pdata = new std::vector<sat::detail::IdType>( ids.size()+1, sat::detail::noId );
-        pdata->insert( pdata->begin(), ids.begin(), ids.end() );
-        first_r = &pdata->front();
-        return shared_ptr<void>( pdata );
+        std::vector<sat::detail::IdType> * pdata = 0;
+        shared_ptr<void> ret;
+
+        for_( it, obsoleted.begin(), obsoleted.end() )
+        {
+          if ( it->isSystem() )
+          {
+            if ( ! pdata )
+            {
+              ret.reset( (pdata = new std::vector<sat::detail::IdType>) );
+            }
+            pdata->push_back( it->id() );
+          }
+        }
+
+        if ( pdata )
+        {
+          pdata->push_back( sat::detail::noId );
+          first_r = &pdata->front();
+        }
+        return ret;
       }
 
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
-    WhatProvides::WhatProvides( Capability cap_r )
-    : _begin( myPool().whatProvides( cap_r ) )
-    {}
-
-    WhatProvides::WhatProvides( Capabilities caps_r )
+    WhatObsoletes::WhatObsoletes( Solvable item_r )
     : _begin( 0 )
-    , _private( allocatedProviders( caps_r.begin(), caps_r.end(), _begin ) )
+    , _private( allocatedProviders( item_r, _begin ) )
     {}
 
-    WhatProvides::WhatProvides( const CapabilitySet & caps_r )
+    WhatObsoletes::WhatObsoletes( const PoolItem & item_r )
     : _begin( 0 )
-    , _private( allocatedProviders( caps_r.begin(), caps_r.end(), _begin ) )
+    , _private( allocatedProviders( item_r.satSolvable(), _begin ) )
     {}
 
-    WhatProvides::size_type WhatProvides::size() const
+    WhatObsoletes::WhatObsoletes( const ResObject::constPtr item_r )
+    : _begin( 0 )
+    {
+      if ( item_r )
+        _private = allocatedProviders( item_r->satSolvable(), _begin );
+    }
+
+    WhatObsoletes::size_type WhatObsoletes::size() const
     {
       if ( ! _begin )
         return 0;
@@ -91,7 +101,7 @@ namespace zypp
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
-    std::ostream & operator<<( std::ostream & str, const WhatProvides & obj )
+    std::ostream & operator<<( std::ostream & str, const WhatObsoletes & obj )
     {
       return dumpRange( str << "(" << obj.size() << ")", obj.begin(), obj.end() );
     }

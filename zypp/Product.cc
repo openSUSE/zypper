@@ -17,6 +17,8 @@
 
 #include "zypp/sat/LookupAttr.h"
 #include "zypp/sat/WhatProvides.h"
+#include "zypp/sat/WhatObsoletes.h"
+#include "zypp/PoolItem.h"
 
 using std::endl;
 
@@ -70,10 +72,6 @@ namespace zypp
   {}
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	Package interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
 
   sat::Solvable Product::referencePackage() const
   {
@@ -103,6 +101,35 @@ namespace zypp
     WAR << *this << ": no reference package found: " << identCap << endl;
     return sat::Solvable::noSolvable;
   }
+
+  Product::ReplacedProducts Product::replacedProducts() const
+  {
+    std::vector<constPtr> ret;
+    // By now we simply collect what is obsoleted by the Product,
+    // or by the products buddy (release-package).
+
+    // Check our own dependencies. We should not have any,
+    // but just to be shure.
+    sat::WhatObsoletes obsoleting( satSolvable() );
+    for_( it, obsoleting.begin(), obsoleting.end() )
+    {
+      if ( it->isKind( ResKind::product ) )
+        ret.push_back( make<Product>( *it ) );
+    }
+
+    // If we have a buddy, we check what product buddies the
+    // buddy replaces.
+    obsoleting = sat::WhatObsoletes( poolItem().buddy() );
+    for_( it, obsoleting.poolItemBegin(), obsoleting.poolItemEnd() )
+    {
+      if ( (*it).buddy().isKind( ResKind::product ) )
+        ret.push_back( make<Product>( (*it).buddy() ) );
+    }
+
+    return ret;
+  }
+
+  ///////////////////////////////////////////////////////////////////
 
   std::string Product::shortName() const
   { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }

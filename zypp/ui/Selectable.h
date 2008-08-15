@@ -124,6 +124,26 @@ namespace zypp
        */
       PoolItem candidateObj() const;
 
+      /** Return the \ref installedObj resolvable casted to a specific kind.
+       * \code
+       *   Selectable mySelectable;
+       *   Package::constPtr p( mySelectable.installedAsKind<Package>() );
+       * \endcode
+      */
+      template<class _Res>
+      typename ResTraits<_Res>::constPtrType installedAsKind() const
+      { return asKind<_Res>( candidateObj() ); }
+
+      /** Return the \ref candidateObj resolvable casted to a specific kind.
+       * \code
+       *   Selectable mySelectable;
+       *   Package::constPtr p( mySelectable.candidateAsKind<Package>() );
+       * \endcode
+      */
+      template<class _Res>
+      typename ResTraits<_Res>::constPtrType candidateAsKind() const
+      { return asKind<_Res>( candidateObj() ); }
+
       /** Set a candidate (out of available objects).
        * \return The new candidate, or NULL if choice was invalid
        * (NULL or not among availableObjs). An invalid choice
