@@ -45,7 +45,7 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */       
-      VendorSupportLevel2      = 0x0003,
+      VendorSupportLevel2      = 0x0004,
       /**
        * Problem resolution, which means technical support designed
        * to resolve complex problems by engaging engineering in resolution
@@ -53,11 +53,11 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */              
-      VendorSupportLevel3      = 0x0004,
+      VendorSupportLevel3      = 0x0008,
       /**
        * Additional Customer Contract necessary
        */
-      VendorSupportACC         = 0x0008
+      VendorSupportACC         = 0x0016
     };
 
     // Make a flag set for this
