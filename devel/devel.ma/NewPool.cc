@@ -529,13 +529,13 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  // Pool of Selectables
+  // access to the Pool of Selectables
   ResPoolProxy selectablePool( ResPool::instance().proxy() );
 
   // Iterate it's Products...
   for_( it, selectablePool.byKindBegin<Product>(), selectablePool.byKindEnd<Product>() )
   {
-    // current Product Selectable
+    // The current Product Selectable
     ui::Selectable::Ptr prodSel( *it );
     MIL << dump( prodSel ) << endl;
 
@@ -550,7 +550,7 @@ try {
       // Iterate the replaced Products...
       for_( it, prodReplaces.begin(), prodReplaces.end() )
       {
-        // current replaced Product
+        // The current replaced Product
         Product::constPtr replacedProduct( *it );
         DBG << replacedProduct << endl;
 

@@ -871,6 +871,30 @@ namespace zypp
       return _("Unknown Distribution");
     }
 
+    std::string TargetImpl::targetDistribution() const
+    {
+      std::ifstream baseProduct( (_root / "/etc/products.d/baseproduct").c_str() );
+      for( iostr::EachLine in( baseProduct ); in; in.next() )
+      {
+        std::string line( str::trim( *in ) );
+        if ( str::hasPrefix( line, "distribution" ) )
+        {
+          std::string::size_type pos( line.find( '=', 12 ) );
+          if ( pos == std::string::npos )
+            continue; // no '=' on line
+          pos = line.find_first_not_of( " \t", pos+1 );
+          if ( pos == std::string::npos )
+            continue; // empty value
+          line.erase( 0, pos );
+          line += "-";
+          line += ZConfig::instance().systemArchitecture().asString();
+          return line;
+        }
+      }
+      WAR << "No distribution in " << PathInfo(_root / "/etc/products.d/baseproduct") << endl;
+      return std::string();
+    }
+
     std::string TargetImpl::anonymousUniqueId() const
     {
         std::ifstream idfile( ( home() / "AnonymousUniqueId" ).c_str() );

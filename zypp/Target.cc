@@ -100,9 +100,12 @@ namespace zypp
   std::string Target::release() const
   { return _pimpl->release(); }
 
+  std::string Target::targetDistribution() const
+  { return _pimpl->targetDistribution(); }
+
   std::string Target::anonymousUniqueId() const
   { return _pimpl->anonymousUniqueId(); }
-    
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

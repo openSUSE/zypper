@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Aug 15 20:20:07 CEST 2008 - ma@suse.de
+
+- Add Target::targetDistribution. Returns "distribution-arch" of 
+  the installed base product. Used for registration and Service
+  refresh. (for Fate #304915)
+- revision 10877
+- version 5.6.0 (5)
+
+-------------------------------------------------------------------
 Fri Aug 15 17:42:58 CEST 2008 - ma@suse.de
 
 - Add method Product::replacedProducts to identify installed 

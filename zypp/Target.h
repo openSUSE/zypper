@@ -107,12 +107,17 @@ namespace zypp
     /** return the last modification date of the target */
     Date timestamp() const;
 
-    /** The targets distribution release string.
+    /** The targets distribution release string (/etc/SuSE-release)
      * \code
      *   openSUSE 10.3 (i586)
      * \endcode
     */
     std::string release() const;
+
+    /** This is "distribution-arch" of the installed base product.
+     * Used for registration and \ref Service refresh.
+     */
+    std::string targetDistribution() const;
 
     /**
      * anonymous unique id

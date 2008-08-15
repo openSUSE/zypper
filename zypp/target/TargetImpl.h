@@ -148,6 +148,11 @@ namespace zypp
        */
       std::string release() const;
 
+    /** This is "distribution-arch" of the installed base product.
+     * Used for registration and \ref Service refresh.
+     */
+    std::string targetDistribution() const;
+
     protected:
       /** Path to the target */
       Pathname _root;
