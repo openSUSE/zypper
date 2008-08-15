@@ -897,7 +897,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	  break;
       case SOLVER_PROBLEM_JOB_NOTHING_PROVIDES_DEP:
 	  ret = str::form (_("nothing provides requested %s"), dep2str(pool, dep));
-	  detail += _("Have you enabled all requested repositories ?");	  
+	  detail += _("Have you enabled all requested repositories?");	  
 	  break;
       case SOLVER_PROBLEM_NOT_INSTALLABLE:
 	  s = mapSolvable (source);
