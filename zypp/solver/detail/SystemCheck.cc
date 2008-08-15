@@ -40,8 +40,8 @@ namespace zypp
 	static SystemCheck _val;
 	return _val;
     }
-    
-      
+
+
     SystemCheck::SystemCheck() {
 	if (_file.empty()) {
 	    _file = ZConfig::instance().solver_checkSystemFile();
@@ -69,26 +69,19 @@ namespace zypp
     }
 
     bool SystemCheck::loadFile() const{
-	try
-	{
-	    Target_Ptr trg( getZYpp()->target() );
-	    if ( trg )
-		_file = trg->root() / _file;
-	}
-	catch ( ... )
-	{
-	    // noop: Someone decided to let target() throw if the ptr is NULL ;(
-	}
+        Target_Ptr trg( getZYpp()->getTarget() );
+        if ( trg )
+          _file = trg->assertRootPrefix( _file );
 
 	PathInfo pi( _file );
 	if ( ! pi.isFile() ) {
 	    WAR << "Can't read " << _file << " " << pi << endl;
 	    return false;
 	}
-	
+
 	_require.clear();
 	_conflict.clear();
-	
+
 	std::ifstream infile( _file.c_str() );
 	for( iostr::EachLine in( infile ); in; in.next() ) {
 	    std::string l( str::trim(*in) );
@@ -113,7 +106,7 @@ namespace zypp
 	MIL << "Read " << pi << endl;
 	return true;
     }
-      
+
 
     /******************************************************************
     **

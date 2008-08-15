@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Aug 15 14:23:02 CEST 2008 - ma@suse.de
+
+- Add method ZYpp::getTarget that returns the Target or a NULL pointer,
+  if it is not yet initialized. This is to avoid try/catch blocks just 
+  to test whether the Target is initialized. (bnc #417556)
+- Add method Target::assertRootPrefix. Pass a pathname and get back the
+  path prefixed with the tragets root, unless it already had that prefix.
+- revision 10870
+
+-------------------------------------------------------------------
 Thu Aug 14 18:44:45 CEST 2008 - schubi@suse.de
 
 - Regarding error messages for Products correctly (FATE #304502)

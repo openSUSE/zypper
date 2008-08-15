@@ -84,6 +84,11 @@ namespace zypp
      */
     Target_Ptr target() const;
 
+    /** Same as \ref target but returns NULL if target is not
+     *  initialized, instead of throwing.
+     */
+    Target_Ptr getTarget() const;
+
     /**
      * \throws Exception
      * Just init the target, dont populate store or pool.

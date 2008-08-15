@@ -100,6 +100,10 @@ namespace zypp
     /** Return the root set for this target */
     Pathname root() const;
 
+    /** Return the path prefixed by the target root, unless it already is prefixed. */
+    Pathname assertRootPrefix( const Pathname & path_r ) const
+    { return Pathname::assertprefix( root(), path_r ); }
+
     /** return the last modification date of the target */
     Date timestamp() const;
 
@@ -119,7 +123,7 @@ namespace zypp
      *
      */
     std::string anonymousUniqueId() const;
-    
+
   public:
     /** Ctor. If \c doRebuild_r is \c true, an already existing
      * database is rebuilt (rpm --rebuilddb ).
