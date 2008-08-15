@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 15 15:30:32 CEST 2008 - ma@suse.de
+
+- Fixes to Selectable doing staus manipulation on non-USER level.
+- revision 10873
+
+-------------------------------------------------------------------
 Fri Aug 15 14:23:02 CEST 2008 - ma@suse.de
 
 - Add method ZYpp::getTarget that returns the Target or a NULL pointer,

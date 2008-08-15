@@ -128,8 +128,13 @@ namespace zypp
        * \return The new candidate, or NULL if choice was invalid
        * (NULL or not among availableObjs). An invalid choice
        * selects the default candidate.
+       * In case the causer is not \c ResStatus::USER the operation
+       * may also fail if there are insufficient permissions to change
+       * a transacting candidate.
        */
-      PoolItem setCandidate( ResObject::constPtr byUser_r );
+      PoolItem setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
+      /** \overload */
+      PoolItem setCandidate( ResObject::constPtr newCandidate_r, ResStatus::TransactByValue causer_r = ResStatus::USER );
 
       /** Best among all objects. */
       PoolItem theObj() const;

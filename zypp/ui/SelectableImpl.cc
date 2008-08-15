@@ -283,35 +283,44 @@ namespace zypp
       return false;
     }
 
-    PoolItem Selectable::Impl::setCandidate( ResObject::constPtr byUser_r )
+    PoolItem Selectable::Impl::setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r )
     {
-      _candidate = PoolItem();
+      PoolItem newCandidate;
 
-      if ( byUser_r ) // must be in available list
+      if ( newCandidate_r ) // must be in available list
+      {
+        for_( it, availableBegin(), availableEnd() )
         {
-          for ( available_const_iterator it = availableBegin();
-                it != availableEnd(); ++it )
-            {
-              if ( it->resolvable() == byUser_r )
-                {
-                  _candidate = *it;
-                  break;
-                }
-            }
+          if ( *it == newCandidate_r )
+          {
+            newCandidate = *it;
+            break;
+          }
         }
+      }
 
-      if ( _candidate )
+      if ( newCandidate )
+      {
+        PoolItem trans( transactingCandidate() );
+        if ( trans && trans != newCandidate )
         {
-          PoolItem trans( transactingCandidate() );
-          if ( trans && trans != _candidate )
-            {
-              // adjust transact to the new cancidate
-              trans.status().setTransact( false, ResStatus::USER );
-              _candidate.status().setTransact( true, ResStatus::USER );
-            }
+          // adjust transact to the new cancidate
+          if (    trans.status().maySetTransact( false, causer_r )
+               && newCandidate.status().maySetTransact( true, causer_r ) )
+          {
+            trans.status().setTransact( false, causer_r );
+            newCandidate.status().setTransact( true, causer_r );
+          }
+          else
+          {
+            // No permission to change a transacting candidate.
+            // Leave _candidate untouched and return NULL.
+            return PoolItem();
+          }
         }
+      }
 
-      return _candidate;
+      return _candidate = newCandidate;
     }
 
     ResStatus::TransactByValue Selectable::Impl::modifiedBy() const

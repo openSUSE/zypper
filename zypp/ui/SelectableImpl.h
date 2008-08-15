@@ -68,7 +68,6 @@ namespace zypp
           else
             _availableItems.insert( *it );
         }
-        setCandidate( NULL );
       }
 
     public:
@@ -117,7 +116,7 @@ namespace zypp
        * \return The new userCandidate or NULL if choice was invalid
        * (not among availableObjs).
       */
-      PoolItem setCandidate( ResObject::constPtr byUser_r );
+      PoolItem setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r );
 
       /** Best among all objects. */
       PoolItem theObj() const

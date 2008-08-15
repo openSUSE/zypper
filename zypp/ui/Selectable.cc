@@ -73,8 +73,11 @@ namespace zypp
     PoolItem Selectable::candidateObj() const
     { return _pimpl->candidateObj(); }
 
-    PoolItem Selectable::setCandidate( ResObject::constPtr byUser_r )
-    { return _pimpl->setCandidate( byUser_r ); }
+    PoolItem Selectable::setCandidate( const PoolItem & newCandidate_r, ResStatus::TransactByValue causer_r )
+    { return _pimpl->setCandidate( newCandidate_r, causer_r ); }
+
+    PoolItem Selectable::setCandidate( ResObject::constPtr newCandidate_r, ResStatus::TransactByValue causer_r )
+    { return _pimpl->setCandidate( PoolItem( newCandidate_r ), causer_r ); }
 
     PoolItem Selectable::theObj() const
     { return _pimpl->theObj(); }
