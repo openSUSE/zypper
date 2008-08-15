@@ -44,6 +44,22 @@ namespace zypp
 
   VendorSupportOption Package::vendorSupport() const
   {
+      Keywords kw(keywords());
+      
+      for_( it, kw.begin(), kw.end() )
+      {
+          if ( *it == "support_unsupported")
+              return VendorSupportUnsupported;
+          if ( *it == "support_acc")
+              return VendorSupportACC;
+          
+          if ( *it == "support_l1")
+              return VendorSupportLevel1;
+          if ( *it == "support_l2")
+              return VendorSupportLevel2;
+          if ( *it == "support_l3")
+              return VendorSupportLevel3;
+      }
       return VendorSupportUnknown;
   }  
 

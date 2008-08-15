@@ -29,6 +29,10 @@ namespace zypp
        */
       VendorSupportUnsupported = 0x0001,
       /**
+       * Additional Customer Contract necessary
+       */
+      VendorSupportACC         = 0x0002,
+      /**
        * Problem determination, which means technical support 
        * designed to provide compatibility information, 
        * installation assistance, usage support, on-going maintenance
@@ -37,7 +41,7 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */
-      VendorSupportLevel1      = 0x0002,
+      VendorSupportLevel1      = 0x0004,
       /**
        * Problem isolation, which means technical support designed 
        * to duplicate customer problems, isolate problem area and provide 
@@ -45,7 +49,7 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */       
-      VendorSupportLevel2      = 0x0004,
+      VendorSupportLevel2      = 0x0008,
       /**
        * Problem resolution, which means technical support designed
        * to resolve complex problems by engaging engineering in resolution
@@ -53,11 +57,7 @@ namespace zypp
        *
        * May have different semantics for different organizations.
        */              
-      VendorSupportLevel3      = 0x0008,
-      /**
-       * Additional Customer Contract necessary
-       */
-      VendorSupportACC         = 0x0016
+      VendorSupportLevel3      = 0x0016
     };
 
     // Make a flag set for this
