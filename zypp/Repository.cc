@@ -78,9 +78,13 @@ namespace zypp
             while (::dataiterator_step(&di));
       }
       else
-        ERR << "the extra does not exist in the repo" << endl;
-
-        return Date();        
+      {    
+          if ( isSystemRepo() )
+            return 0;
+          ERR << "the attribute generated timestamp does not exist in the repo" << endl;
+      }
+        
+      return Date();        
     }
     
 
@@ -104,14 +108,22 @@ namespace zypp
             while (::dataiterator_step(&di));
       }
       else
-        ERR << "the extra does not exist in the repo" << endl;
-
-        return Date();
+      {     
+        if ( isSystemRepo() )
+            return 0;
+        ERR << "the attribute suggested expiration timestamp does not exist in the repo" << endl;
+      }
+        
+      return Date();
     }
 
     
     bool Repository::maybeOutdated() const
     {
+        // system repo is not mirrored
+        if ( isSystemRepo() )
+            return false;
+        
         return suggestedExpirationTimestamp() < Date::now();
     }
     
