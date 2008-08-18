@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 18 17:50:02 CEST 2008 - dmacvicar@suse.de
+
+- warn if repostory seems to be outdated
+  (fate#301904)
+- 0.12.2
+
+-------------------------------------------------------------------
 Sat Aug  2 19:40:37 CEST 2008 - jkupec@suse.cz
 
 - service handling improved, ls, rs, refs now allow to specify

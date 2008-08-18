@@ -2393,6 +2393,23 @@ void load_repo_resolvables(Zypper & zypper)
       }
 
       manager.loadFromCache(repo);
+
+      
+
+      // check that the metadata is not outdated
+      // feature #301904
+      Repository robj = God->pool().reposFind(repo.alias());
+      if ( robj != Repository::noRepository &&
+           robj.maybeOutdated() )
+      {
+        
+       zypper.out().warning(boost::str(format(
+              _("Repository '%s' appears to outdated. Consider using a different mirror or server."))
+              % repo.name()), Out::QUIET);
+          WAR << format("Repository '%s' seems to be outdated")
+              % repo.name() << endl;
+
+      }
     }
     catch (const Exception & e)
     {
