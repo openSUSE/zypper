@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Aug 18 17:31:02 CEST 2008 - dmacvicar@suse.de
+
+- don't report "may be outdated" for @System repo.
+
+-------------------------------------------------------------------
 Fri Aug 15 20:20:07 CEST 2008 - ma@suse.de
 
 - Add Target::targetDistribution. Returns "distribution-arch" of 
@@ -30,11 +35,6 @@ Fri Aug 15 14:23:02 CEST 2008 - ma@suse.de
 - Add method Target::assertRootPrefix. Pass a pathname and get back the
   path prefixed with the tragets root, unless it already had that prefix.
 - revision 10870
-
--------------------------------------------------------------------
-Mon Aug 18 17:31:02 CEST 2008 - dmacvicar@suse.de
-
-- don't report "may be outdated" for @System repo.
 
 -------------------------------------------------------------------
 Thu Aug 14 18:44:45 CEST 2008 - schubi@suse.de
