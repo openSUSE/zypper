@@ -63,6 +63,12 @@ namespace zypp
       return VendorSupportUnknown;
   }  
 
+  bool Package::maybeUnsupported() const
+  {
+      return ( vendorSupport() & ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown )  == ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown ) );
+  }
+
+
   Changelog Package::changelog() const
   {
       Target_Ptr target;

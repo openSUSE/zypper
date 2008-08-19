@@ -50,6 +50,12 @@ namespace zypp
      */
     VendorSupportOption vendorSupport() const;
 
+    /**
+     * True if the vendor support for this package
+     * is unknown or explictly unsupported.
+     */
+    bool maybeUnsupported() const;
+
     /** Get the package change log */
     Changelog changelog() const;
     /** */

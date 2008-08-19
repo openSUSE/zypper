@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 19 16:36:47 CEST 2008 - dmacvicar@suse.de
+
+- add Package::maybeUnsupported to remove duplicated
+  code in clients dealing with Package::vendorSupport
+
+-------------------------------------------------------------------
 Di 19. Aug 10:34:39 CEST 2008 - schubi@waerden.suse.de
 
 - Reset transaction only if this solvable has no buddy (bnc #417799)
