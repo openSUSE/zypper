@@ -92,6 +92,12 @@ namespace zypp
     {
         ::Dataiterator di;
         ::dataiterator_init(&di, get(), -1, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+        Date generated = generatedTimestamp();
+        // do not calculate over a missing generated
+        // timestamp
+        if ( generated == Date() )
+            return Date();
+        
         if (::dataiterator_step(&di))
         {
             do
@@ -100,7 +106,7 @@ namespace zypp
                 {
                     case REPOSITORY_EXPIRE:
                     {
-                        return generatedTimestamp() + di.kv.num;
+                        return generated + di.kv.num;
                         break;
                     }
                 }
@@ -124,6 +130,12 @@ namespace zypp
         if ( isSystemRepo() )
             return false;
         
+        Date suggested = suggestedExpirationTimestamp();
+        
+        // if no data, don't suggest
+        if ( suggested == Date() ) 
+            return false;
+
         return suggestedExpirationTimestamp() < Date::now();
     }
     
