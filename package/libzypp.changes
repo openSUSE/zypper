@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Di 19. Aug 10:34:39 CEST 2008 - schubi@waerden.suse.de
+
+- Reset transaction only if this solvable has not buddy (bnc #417799)
+  e.g. do not reset Products cause the concerning release package
+  could not already be installed.
+- revision 10883
+- version 5.6.1 (5)
+
+-------------------------------------------------------------------
 Mon Aug 18 17:31:02 CEST 2008 - dmacvicar@suse.de
 
 - don't report "may be outdated" for @System repo.
