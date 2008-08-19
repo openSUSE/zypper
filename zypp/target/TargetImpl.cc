@@ -813,7 +813,7 @@ namespace zypp
         {
 	    if (it->buddy() == sat::Solvable())
 	    {
-		// Reset transaction only if this solvable has not buddy (Bug #417799)
+		// Reset transaction only if this solvable has no buddy (Bug #417799)
 		// e.g. do not reset Products cause the concerning release package
 		// could not already be installed.
 		it->status().resetTransact( ResStatus::USER );

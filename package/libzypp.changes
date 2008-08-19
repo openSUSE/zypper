@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Di 19. Aug 10:34:39 CEST 2008 - schubi@waerden.suse.de
 
-- Reset transaction only if this solvable has not buddy (bnc #417799)
+- Reset transaction only if this solvable has no buddy (bnc #417799)
   e.g. do not reset Products cause the concerning release package
   could not already be installed.
 - revision 10883
