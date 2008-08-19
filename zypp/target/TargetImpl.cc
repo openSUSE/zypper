@@ -811,7 +811,13 @@ namespace zypp
         }
         else if (!policy_r.dryRun()) // other resolvables (non-Package)
         {
-          it->status().resetTransact( ResStatus::USER );
+	    if (it->buddy() == sat::Solvable())
+	    {
+		// Reset transaction only if this solvable has not buddy (Bug #417799)
+		// e.g. do not reset Products cause the concerning release package
+		// could not already be installed.
+		it->status().resetTransact( ResStatus::USER );
+	    }
         }  // other resolvables
 
       } // for
