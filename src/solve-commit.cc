@@ -271,7 +271,8 @@ typedef enum
   TO_REINSTALL,
   TO_REMOVE,
   TO_CHANGE_ARCH,
-  TO_CHANGE_VENDOR
+  TO_CHANGE_VENDOR,
+  UNSUPPORTED
 } SummaryType;
 
 static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
@@ -298,6 +299,9 @@ static void xml_print_to_transact_tag(SummaryType stype, bool end = false)
     break;
   case TO_CHANGE_VENDOR:
     cout << "<" << (end ? "/" : "") << "to-change-vendor>" << endl;
+    break;
+  case UNSUPPORTED:
+    cout << "<" << (end ? "/" : "") << "unsupported>" << endl;
     break;
   }
 }
@@ -510,6 +514,14 @@ static void show_summary_of_type(Zypper & zypper,
           "The following products are going to change vendor:",
           it->second.size());
       break;
+    case UNSUPPORTED:
+      // we only look vendor support in packages
+      if (it->first == ResKind::package)
+        title = _PL(
+          "The following package is not supported by its vendor:",
+          "The following packages are not supported by their vendor:",
+          it->second.size());
+      break;
     }
 
     show_summary_resolvable_list(title, it, zypper.out());
@@ -605,7 +617,10 @@ static int summary(Zypper & zypper)
   KindToResObjectSet toremove;
   KindToResObjectSet tochangearch;
   KindToResObjectSet tochangevendor;
-
+  // objects from previous lists that
+  // are not supported
+  KindToResObjectSet tounsupported;
+  
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   ByteCount download_size, new_installed_size;
 
@@ -616,6 +631,16 @@ static int summary(Zypper & zypper)
         resit != it->second.end(); ++resit)
     {
       ResObject::constPtr res(*resit);
+
+      // FIXME asKind not working?
+      Package::constPtr pkg = asKind<Package>(res);
+      if ( pkg )
+      {
+          // FIXME refactor with libzypp Package::vendorSupportAvailable()
+          
+          if ( pkg->maybeUnsupported() ) 
+              tounsupported[res->kind()].insert(res);
+      }
 
       // find in to_be_removed:
       bool upgrade_downgrade = false;
@@ -716,7 +741,9 @@ static int summary(Zypper & zypper)
   show_summary_of_type(zypper, TO_REMOVE, toremove);
   show_summary_of_type(zypper, TO_CHANGE_ARCH, tochangearch);
   show_summary_of_type(zypper, TO_CHANGE_VENDOR, tochangevendor);
-
+#ifdef ZYPPER_CONFIRM_UNSUPPORTED_PACKAGES
+  show_summary_of_type(zypper, UNSUPPORTED, tounsupported);
+#endif
   // "</install-summary>"
   if (zypper.out().type() == Out::TYPE_XML)
     cout << "</install-summary>" << endl;

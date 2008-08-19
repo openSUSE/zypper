@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 19 16:39:32 CEST 2008 - dmacvicar@suse.de
+
+- confirm unsupported packages in SLE 
+  (fate#305057) 
+
+-------------------------------------------------------------------
 Mon Aug 18 17:50:02 CEST 2008 - dmacvicar@suse.de
 
 - warn if repostory seems to be outdated
