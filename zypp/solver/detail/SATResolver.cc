@@ -441,9 +441,6 @@ SATResolver::solving()
     
     sat::Pool::instance().prepare();
 
-    // Add ignoring request
-    
-
     // Solve !
     MIL << "Starting solving...." << endl;
     MIL << *this;
@@ -651,10 +648,14 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-        sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
-	MIL << "Delete " << *iter << endl;
-	queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE_NAME );
-	queue_push( &(_jobQueue), ident);
+	Id id = (*iter)->satSolvable().id();
+	if (id == ID_NULL) {
+	    ERR << "Delete: " << *iter << " not found" << endl;
+	} else {
+	    MIL << "Delete " << *iter << endl;
+	    queue_push( &(_jobQueue), SOLVER_ERASE_SOLVABLE );
+	    queue_push( &(_jobQueue), id);
+	}
     }
 
     for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
