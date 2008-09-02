@@ -15,7 +15,7 @@ Tue Aug 19 16:36:47 CEST 2008 - dmacvicar@suse.de
   code in clients dealing with Package::vendorSupport
 
 -------------------------------------------------------------------
-Di 19. Aug 10:34:39 CEST 2008 - schubi@waerden.suse.de
+Tue Aug 19 11:04:52 CEST 2008 - schubi@suse.de
 
 - Reset transaction only if this solvable has no buddy (bnc #417799)
   e.g. do not reset Products cause the concerning release package
