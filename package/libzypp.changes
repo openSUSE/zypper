@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Sep  2 11:04:52 CEST 2008 - schubi@suse.de
+
+- Enabled distupgrade of the SAT solver. In order to use the old
+  distupgrade you can set the environment variable ZYPP_NO_SAT_UPDATE.
+  This variable will can be used until the old distupgrade mechanism will 
+  be removed from libzypp. Have a look to above changelogs.
+- Revision 10908 
+
+-------------------------------------------------------------------
 Tue Aug 19 16:36:47 CEST 2008 - dmacvicar@suse.de
 
 - add Package::maybeUnsupported to remove duplicated
