@@ -253,56 +253,65 @@ void
 Resolver::solverInit()
 {
     // Solving with the satsolver
-        static bool poolDumped = false;
-	MIL << "-------------- Calling SAT Solver -------------------" << endl;
-	if ( getenv("ZYPP_FULLLOG") ) {
-	    Testcase testcase("/var/log/YaST2/autoTestcase");
-	    if (!poolDumped) {
-		testcase.createTestcase (*this, true, false); // dump pool
-		poolDumped = true;
-	    } else {
-		testcase.createTestcase (*this, false, false); // write control file only
-	    }
+    static bool poolDumped = false;
+    MIL << "-------------- Calling SAT Solver -------------------" << endl;
+    if ( getenv("ZYPP_FULLLOG") ) {
+	Testcase testcase("/var/log/YaST2/autoTestcase");
+	if (!poolDumped) {
+	    testcase.createTestcase (*this, true, false); // dump pool
+	    poolDumped = true;
+	} else {
+	    testcase.createTestcase (*this, false, false); // write control file only
 	}
+    }
 
-	_satResolver->setFixsystem(false);
-	_satResolver->setIgnorealreadyrecommended(false);	
-	_satResolver->setAllowdowngrade(false);
-	_satResolver->setAllowarchchange(false);
-	_satResolver->setAllowvendorchange(false);
-	_satResolver->setAllowuninstall(false);
-	_satResolver->setUpdatesystem(false);
-	_satResolver->setAllowvirtualconflicts(false);
-	_satResolver->setNoupdateprovide(true);
-	_satResolver->setDosplitprovides(false);
+    _satResolver->setFixsystem(false);
+    _satResolver->setIgnorealreadyrecommended(false);	
+    _satResolver->setAllowdowngrade(false);
+    _satResolver->setAllowarchchange(false);
+    _satResolver->setAllowvendorchange(false);
+    _satResolver->setAllowuninstall(false);
+    _satResolver->setUpdatesystem(false);
+    _satResolver->setAllowvirtualconflicts(false);
+    _satResolver->setNoupdateprovide(false);
+    _satResolver->setDosplitprovides(false);
 	
-	if (_upgradeMode) {
-	    _satResolver->setAllowdowngrade(true);
-	    _satResolver->setUpdatesystem(false); // not needed cause packages has already been evaluteted by distupgrade
-	    _satResolver->setDosplitprovides(true);   
+    if (_upgradeMode) {
+	_satResolver->setAllowdowngrade(true);
+	_satResolver->setUpdatesystem(false); // not needed cause packages has already been evaluteted by distupgrade
+	_satResolver->setDosplitprovides(true);
+	if ( !getenv("ZYPP_NO_SAT_UPDATE") ) {
+	    MIL << "-------------- Calling SAT Solver in distupgrade mode -------------------" << endl;
+	    // SAT solver will do the dist update
+	    _satResolver->setAllowarchchange(true);
+	    _satResolver->setAllowvendorchange(true);
+	    _satResolver->setUpdatesystem(true);
+	    _satResolver->setDistupgrade(true);
+	    _satResolver->setDistupgrade_removeunsupported(false);
 	}
+    }
 
-	if (_forceResolve)
-	    _satResolver->setAllowuninstall(true);
+    if (_forceResolve)
+	_satResolver->setAllowuninstall(true);
 	
- 	if (_onlyRequires == indeterminate)
-	    _satResolver->setOnlyRequires(ZConfig::instance().solver_onlyRequires());
-	else if (_onlyRequires)
-	    _satResolver->setOnlyRequires(true);
-	else
-	    _satResolver->setOnlyRequires(false);
+    if (_onlyRequires == indeterminate)
+	_satResolver->setOnlyRequires(ZConfig::instance().solver_onlyRequires());
+    else if (_onlyRequires)
+	_satResolver->setOnlyRequires(true);
+    else
+	_satResolver->setOnlyRequires(false);
 
-	if (_verifying)
-	    _satResolver->setFixsystem(true);
+    if (_verifying)
+	_satResolver->setFixsystem(true);
 
-	if (_ignorealreadyrecommended)
-	    _satResolver->setIgnorealreadyrecommended(true);	
+    if (_ignorealreadyrecommended)
+	_satResolver->setIgnorealreadyrecommended(true);	
 
-	// Resetting additional solver information
-	_isInstalledBy.clear();
-	_installs.clear();
-	_satifiedByInstalled.clear();
-	_installedSatisfied.clear();
+    // Resetting additional solver information
+    _isInstalledBy.clear();
+    _installs.clear();
+    _satifiedByInstalled.clear();
+    _installedSatisfied.clear();
 }
 
 bool

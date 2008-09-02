@@ -253,6 +253,14 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     (UpgradeOptions&)opt_stats_r = opts;
   }
 
+  if ( !getenv("ZYPP_NO_SAT_UPDATE") ) {
+      // Setting Resolver to upgrade mode. SAT solver will do the update
+      _upgradeMode = true;
+      resolvePool();
+      return true;
+  }
+  
+
   /* Find upgrade candidates for each package.  */
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
@@ -669,7 +677,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
 		      // checking if there is another item with the same obsoletes. If there is one
 		      // it would be randomly which package will be taken for update. So it is
-		      // safier not to update at all.
+		      // more save not to update at all.
 		      bool found = false;
 		      for ( ResPool::const_iterator itOther = _pool.begin(); itOther != _pool.end() && !found; ++itOther ) {
 			  PoolItem itemOther = *itOther;

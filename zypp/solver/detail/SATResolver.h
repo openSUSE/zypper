@@ -80,12 +80,14 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _allowarchchange;		// allow to change architecture of installed solvables 
     bool _allowvendorchange;		// allow to change vendor of installed solvables 
     bool _allowuninstall;		// allow removal of installed solvables
-    bool _updatesystem;			// distupgrade 
+    bool _updatesystem;			// update
     bool _allowvirtualconflicts;	// false: conflicts on package name, true: conflicts on package provides 
     bool _noupdateprovide;		// true: update packages needs not to provide old package 
     bool _dosplitprovides;		// true: consider legacy split provides 
     bool _onlyRequires;	                // true: consider required packages only
     bool _ignorealreadyrecommended;	// true: ignore recommended packages that were already recommended by the installed packages
+    bool _distupgrade;			
+    bool _distupgrade_removeunsupported;
     
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
@@ -154,6 +156,12 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool ignorealreadyrecommended () const {return _ignorealreadyrecommended;}
     void setIgnorealreadyrecommended ( const bool ignorealreadyrecommended) { _ignorealreadyrecommended = ignorealreadyrecommended;}
+
+    bool distupgrade () const {return _distupgrade;}
+    void setDistupgrade ( const bool distupgrade) { _distupgrade = distupgrade;}
+
+    bool distupgrade_removeunsupported () const {return _distupgrade_removeunsupported;}
+    void setDistupgrade_removeunsupported ( const bool distupgrade_removeunsupported) { _distupgrade_removeunsupported = distupgrade_removeunsupported;}
 
     bool allowdowngrade () const {return _allowdowngrade;}
     void setAllowdowngrade ( const bool allowdowngrade) { _allowdowngrade = allowdowngrade;}

@@ -120,6 +120,9 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  dosplitprovides = " << _solv->dosplitprovides << endl;
 	os << "  onlyRequires = " << _solv->dontinstallrecommended << endl;
 	os << "  ignorealreadyrecommended = " << _solv->ignorealreadyrecommended << endl;
+	os << "  distupgrade = " << _distupgrade << endl;
+        os << "  distupgrade_removeunsupported = " << _distupgrade_removeunsupported << endl;
+
     } else {
 	os << "<NULL>";
     }
@@ -143,6 +146,8 @@ SATResolver::SATResolver (const ResPool & pool, Pool *SATPool)
     , _dosplitprovides(false)
     , _onlyRequires(ZConfig::instance().solver_onlyRequires())
     , _ignorealreadyrecommended(false)
+    , _distupgrade(false)
+    , _distupgrade_removeunsupported(false)
 
 {
 }
@@ -435,9 +440,13 @@ SATResolver::solving()
     _solv->allowdowngrade = _allowdowngrade;
     _solv->allowuninstall = _allowuninstall;
     _solv->allowarchchange = _allowarchchange;
+    _solv->allowvendorchange = _allowvendorchange;
+    _solv->allowvirtualconflicts = _allowvirtualconflicts;
     _solv->dosplitprovides = _dosplitprovides;
     _solv->noupdateprovide = _noupdateprovide;
     _solv->dontinstallrecommended = _onlyRequires;
+    _solv->distupgrade = _distupgrade;			
+    _solv->distupgrade_removeunsupported = _distupgrade_removeunsupported;
     
     sat::Pool::instance().prepare();
 
