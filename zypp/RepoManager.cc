@@ -41,6 +41,9 @@
 #include "zypp/repo/susetags/Downloader.h"
 #include "zypp/parser/plaindir/RepoParser.h"
 
+#include "zypp/Target.h" // for Target::targetDistribution() for repo index services
+#include "zypp/ZYppFactory.h" // to get the Target from ZYpp instance
+
 #include "zypp/ZYppCallbacks.h"
 
 #include "sat/Pool.h"
@@ -74,6 +77,14 @@ namespace zypp
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
+    try
+    {
+      servicesTargetDistro = getZYpp()->target()->targetDistribution();
+    }
+    catch (const Exception & e)
+    {
+      DBG << "Target not initialized, using an empty servicesTargetDistro." << endl;
+    }
   }
 
   RepoManagerOptions RepoManagerOptions::makeTestSetup( const Pathname & root_r )
@@ -97,12 +108,20 @@ namespace zypp
     * once per each repo in a file.
     *
     * Passing this functor as callback, you can collect
-    * all resuls at the end, without dealing with async
+    * all results at the end, without dealing with async
     * code.
+    * 
+    * If targetDistro is set, all repos with non-empty RepoInfo::targetDistribution()
+    * will be skipped.
+    * \todo do this through a separate filter
     */
     struct RepoCollector
     {
       RepoCollector()
+      {}
+      
+      RepoCollector(const string & targetDistro_)
+        : targetDistro(targetDistro_)
       {}
 
       ~RepoCollector()
@@ -110,11 +129,25 @@ namespace zypp
 
       bool collect( const RepoInfo &repo )
       {
+        // skip repositories meant for other distros than specified
+        if (!targetDistro.empty()
+            && !repo.targetDistribution().empty()
+            && repo.targetDistribution() != targetDistro)
+        {
+          MIL
+            << "Skipping repository meant for '" << targetDistro
+            << "' distribution (current distro is '"
+            << repo.targetDistribution() << "')." << endl;
+
+          return true;
+        }
+
         repos.push_back(repo);
         return true;
       }
 
       RepoInfoList repos;
+      string targetDistro;
     };
 
   ////////////////////////////////////////////////////////////////////////////
@@ -1457,8 +1490,8 @@ namespace zypp
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
     Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 
-    //parse it
-    RepoCollector collector;
+    // parse it
+    RepoCollector collector(_pimpl->options.servicesTargetDistro);
     parser::RepoindexFileReader reader( path,
       bind( &RepoCollector::collect, &collector, _1 ) );
     mediamanager.release( mid );

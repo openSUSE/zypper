@@ -81,6 +81,17 @@ namespace zypp
     Pathname knownReposPath;
     Pathname knownServicesPath;
     bool probe;
+    /**
+     * Target distro ID to be used when refreshing repo index services.
+     * Repositories not maching this ID will be skipped/removed.
+     *
+     * The value is initialized upon construction to
+     * \ref Target::targetDistribution() if the Target is already initialized,
+     * otherwise the value is initially empty.
+     *
+     * If empty, no repositories contained in the index will be skipped.
+     */
+    std::string servicesTargetDistro;
   };
 
 

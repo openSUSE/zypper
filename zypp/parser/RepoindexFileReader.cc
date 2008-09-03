@@ -68,11 +68,9 @@ namespace zypp
   RepoindexFileReader::Impl::Impl(
       const Pathname &repoindex_file, const ProcessResource & callback)
     : _callback(callback)
-    , _target_distro(getZYpp()->target()->targetDistribution())
   {
     Reader reader( repoindex_file );
     MIL << "Reading " << repoindex_file << endl;
-    MIL << "Target distro: '" << _target_distro << "'" << endl;
     reader.foreachNode( bind( &RepoindexFileReader::Impl::consumeNode, this, _1 ) );
   }
 
@@ -103,18 +101,6 @@ namespace zypp
       if ( reader_r->name() == "repo" )
       {
         XmlString s;
-
-        // skip repositories with unknown or not matching target distribution
-        s = reader_r->getAttribute("distro_target");
-        if (!s.get() || _target_distro != s.asString())
-        {
-          MIL
-            << "Skipping repository meant for '"
-            << (s.get() ? s.asString() : "(not specified)")
-            << "' distribution (current distro is '" << _target_distro << "')."
-            << endl;
-          return true;
-        }
 
         RepoInfo info;
 
@@ -150,6 +136,11 @@ namespace zypp
         s = reader_r->getAttribute("name");
         if (s.get())
           info.setName(s.asString());
+
+        // optional targetDistro
+        s = reader_r->getAttribute("distro_target");
+        if (s.get())
+          info.setTargetDistribution(s.asString());
 
         DBG << info << endl;
 
