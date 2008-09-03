@@ -77,7 +77,7 @@ namespace zypp
       {
 	if ( _d->_state != END )
 	{
-	  DBG << str::form( "{#%u|%s}(%lld%s)",
+	  XXX << str::form( "{#%u|%s}(%lld%s)",
 			    numericId(), name().c_str(),
 			    _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
 	}
