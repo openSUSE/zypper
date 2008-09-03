@@ -2081,6 +2081,9 @@ void Zypper::doCommand()
       return;
     }
 
+    // needed to be able to retrieve target distribution
+    init_target(*this);
+
     refresh_services(*this);
 
     break;
@@ -2890,7 +2893,7 @@ void Zypper::doCommand()
       }
 
       if (t.empty())
-        out().info(_("No resolvables found."), Out::QUIET);
+        out().info(_("No packages found."), Out::QUIET);
       else
       {
         cout << endl; //! \todo  out().separator()?
