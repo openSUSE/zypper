@@ -63,6 +63,7 @@ namespace zypp
     std::set<Url> baseUrls;
     Pathname path;
     std::string service;
+    std::string targetDistro;
     Pathname metadatapath;
     Pathname packagespath;
     DefaultIntegral<unsigned,defaultPriority> priority;
@@ -189,6 +190,12 @@ namespace zypp
     _pimpl->service = name;
     return *this;
   }
+  
+  RepoInfo & RepoInfo::setTargetDistribution(
+      const std::string & targetDistribution)
+  {
+    _pimpl->targetDistro = targetDistribution;
+  }
 
   bool RepoInfo::gpgCheck() const
   { return indeterminate(_pimpl->gpgcheck) ? true : (bool) _pimpl->gpgcheck; }
@@ -228,6 +235,9 @@ namespace zypp
 
   std::string RepoInfo::service() const
   { return _pimpl->service; }
+  
+  std::string RepoInfo::targetDistribution() const
+  { return _pimpl->targetDistro; }
 
   RepoInfo::urls_const_iterator RepoInfo::baseUrlsBegin() const
   {
@@ -283,6 +293,9 @@ namespace zypp
     str << "- gpgkey      : " << gpgKeyUrl() << std::endl;
     str << "- keeppackages: " << keepPackages() << std::endl;
     str << "- service     : " << service() << std::endl;
+
+    if (!targetDistribution().empty())
+      str << "- targetdistro: " << targetDistribution() << std::endl;
 
     return str;
   }

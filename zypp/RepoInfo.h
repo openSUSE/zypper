@@ -200,6 +200,11 @@ namespace zypp
      */
     std::string service() const;
 
+    /**
+     * Distribution for which is this repository meant.
+     */
+    std::string targetDistribution() const;
+
     public:
     /**
      * Add a base url. \see baseUrls
@@ -297,6 +302,13 @@ namespace zypp
      * sets service which added this repository
      */
     RepoInfo & setService( const std::string& name );
+
+    /**
+     * Sets the distribution for which is this repository meant. This is
+     * an in-memory value only, does not get written to the .repo file upon
+     * saving.
+     */
+    RepoInfo & setTargetDistribution(const std::string & targetDistribution);
 
     /**
      * Write a human-readable representation of this RepoInfo object
