@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep  3 14:53:06 CEST 2008 - jkupec@suse.cz
+
+- skip repositories with non-matching target distro when reading
+  repoindex
+- revision 10919
+
+-------------------------------------------------------------------
 Tue Sep  2 11:04:52 CEST 2008 - schubi@suse.de
 
 - Enabled distupgrade of the SAT solver. In order to use the old
