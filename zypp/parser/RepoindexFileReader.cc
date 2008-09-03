@@ -20,8 +20,6 @@
 #include "zypp/parser/ParseException.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/Target.h"
-#include "zypp/ZYppFactory.h"
 
 #include "zypp/parser/RepoindexFileReader.h"
 
