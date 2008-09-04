@@ -319,7 +319,9 @@ namespace zypp
     /**
      * Write this RepoInfo object into \a str in a <tr>.repo</tt> file format.
      */
-    virtual std::ostream & dumpRepoOn( std::ostream & str ) const;
+    virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
+    /** \deprecated use dumpAsIniOn(ostream) instead */
+    ZYPP_DEPRECATED virtual std::ostream & dumpRepoOn( std::ostream & str ) const;
 
     /**
      * Write an XML representation of this RepoInfo object.

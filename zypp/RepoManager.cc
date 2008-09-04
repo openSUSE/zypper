@@ -1110,7 +1110,7 @@ namespace zypp
       ZYPP_THROW (Exception( "Can't open " + repofile.asString() ) );
     }
 
-    tosave.dumpRepoOn(file);
+    tosave.dumpAsIniOn(file);
     tosave.setFilepath(repofile);
     _pimpl->repos.insert(tosave);
     progress.toMax();
@@ -1159,7 +1159,7 @@ namespace zypp
     {
       MIL << "Saving " << (*it).alias() << endl;
       it->setFilepath(repofile.asString());
-      it->dumpRepoOn(file);
+      it->dumpAsIniOn(file);
       _pimpl->repos.insert(*it);
     }
     MIL << "done" << endl;
@@ -1227,7 +1227,7 @@ namespace zypp
                 ++fit )
           {
             if ( (*fit).alias() != todelete.alias() )
-              (*fit).dumpRepoOn(file);
+              (*fit).dumpAsIniOn(file);
           }
         }
 
@@ -1295,9 +1295,9 @@ namespace zypp
           // if the alias is different, dump the original
           // if it is the same, dump the provided one
           if ( (*fit).alias() != toedit.alias() )
-            (*fit).dumpRepoOn(file);
+            (*fit).dumpAsIniOn(file);
           else
-            newinfo.dumpRepoOn(file);
+            newinfo.dumpAsIniOn(file);
       }
 
       _pimpl->repos.erase(toedit);

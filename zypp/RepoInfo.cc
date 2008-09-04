@@ -291,6 +291,9 @@ namespace zypp
   }
 
   std::ostream & RepoInfo::dumpRepoOn( std::ostream & str ) const
+  { return dumpAsIniOn(str); }
+
+  std::ostream & RepoInfo::dumpAsIniOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpAsIniOn(str);
 
