@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep  4 23:29:10 CEST 2008 - jkupec@suse.cz
+
+- {Repo,Service}Info::dumpAsXMLOn(ostream) added
+- RepoInfo::dumpRepoOn() deprecated in favor of dumpAsIniOn()
+- revision 10937
+
+-------------------------------------------------------------------
 Thu Sep  4 16:47:07 CEST 2008 - jkupec@suse.cz
 
 - RepoInfo{,Base} setters made void
