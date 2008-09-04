@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep  4 16:47:07 CEST 2008 - jkupec@suse.cz
+
+- RepoInfo{,Base} setters made void
+- revision 10931
+
+-------------------------------------------------------------------
 Wed Sep  3 14:53:06 CEST 2008 - jkupec@suse.cz
 
 - skip repositories with non-matching target distro when reading
