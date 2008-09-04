@@ -108,11 +108,10 @@ namespace zypp
       {
         // autoprovide (dummy) RepoInfo
         RepoInfo info;
-        info
-          .setAlias( alias_r )
-          .setName( alias_r )
-          .setAutorefresh( true )
-          .setEnabled( true );
+        info.setAlias( alias_r );
+        info.setName( alias_r );
+        info.setAutorefresh( true );
+        info.setEnabled( true );
         ret.setInfo( info );
       }
       return ret;

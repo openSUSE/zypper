@@ -114,84 +114,72 @@ namespace zypp
   { return _pimpl->priority; }
   unsigned RepoInfo::defaultPriority()
   { return Impl::defaultPriority; }
-  RepoInfo & RepoInfo::setPriority( unsigned newval_r )
+  void RepoInfo::setPriority( unsigned newval_r )
   {
     _pimpl->priority = newval_r ? newval_r : Impl::defaultPriority;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setGpgCheck( bool check )
+  void RepoInfo::setGpgCheck( bool check )
   {
     _pimpl->gpgcheck = check;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setMirrorListUrl( const Url &url )
+  void RepoInfo::setMirrorListUrl( const Url &url )
   {
     _pimpl->mirrorlist_url = url;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setGpgKeyUrl( const Url &url )
+  void RepoInfo::setGpgKeyUrl( const Url &url )
   {
     _pimpl->gpgkey_url = url;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::addBaseUrl( const Url &url )
+  void RepoInfo::addBaseUrl( const Url &url )
   {
     _pimpl->baseUrls.insert(url);
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setBaseUrl( const Url &url )
+  void RepoInfo::setBaseUrl( const Url &url )
   {
     _pimpl->baseUrls.clear();
     addBaseUrl(url);
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setPath( const Pathname &path )
+  void RepoInfo::setPath( const Pathname &path )
   {
     _pimpl->path = path;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setType( const repo::RepoType &t )
+  void RepoInfo::setType( const repo::RepoType &t )
   {
     _pimpl->type = t;
-    return *this;
   }
 
   void RepoInfo::setProbedType( const repo::RepoType &t ) const
   { _pimpl->setProbedType( t ); }
 
 
-  RepoInfo & RepoInfo::setMetadataPath( const Pathname &path )
+  void RepoInfo::setMetadataPath( const Pathname &path )
   {
     _pimpl->metadatapath = path;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setPackagesPath( const Pathname &path )
+  void RepoInfo::setPackagesPath( const Pathname &path )
   {
     _pimpl->packagespath = path;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setKeepPackages( bool keep )
+  void RepoInfo::setKeepPackages( bool keep )
   {
     _pimpl->keeppackages = keep;
-    return *this;
   }
 
-  RepoInfo & RepoInfo::setService( const std::string& name )
+  void RepoInfo::setService( const std::string& name )
   {
     _pimpl->service = name;
-    return *this;
   }
   
-  RepoInfo & RepoInfo::setTargetDistribution(
+  void RepoInfo::setTargetDistribution(
       const std::string & targetDistribution)
   {
     _pimpl->targetDistro = targetDistribution;

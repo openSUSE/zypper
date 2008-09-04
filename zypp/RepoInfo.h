@@ -86,7 +86,7 @@ namespace zypp
      * A \c newval_r of \c 0 sets the default priority.
      * \see \ref priority.
      */
-    RepoInfo & setPriority( unsigned newval_r );
+    void setPriority( unsigned newval_r );
 
     /**
      * A Url under which the metadata are located, or a set of mirrors.
@@ -214,31 +214,31 @@ namespace zypp
      * To recreate the base URLs list, use \ref setBaseUrl(const Url &) followed
      * by addBaseUrl().
      */
-    RepoInfo & addBaseUrl( const Url &url );
+    void addBaseUrl( const Url &url );
 
     /**
      * Clears current base URL list and adds \a url.
      * \note can change keepPackages,so change it after this call
      */
-    RepoInfo & setBaseUrl( const Url &url );
+    void setBaseUrl( const Url &url );
 
     /**
      * set the product path. \see path()
      * \param path the path to the product
      */
-    RepoInfo & setPath( const Pathname &path );
+    void setPath( const Pathname &path );
 
     /**
      * Set mirror list url. \see mirrorListUrl
      * \param url The base url for the list
      */
-    RepoInfo & setMirrorListUrl( const Url &url );
+    void setMirrorListUrl( const Url &url );
 
     /**
      * set the repository type \see type
      * \param t
      */
-    RepoInfo & setType( const repo::RepoType &t );
+    void setType( const repo::RepoType &t );
 
     /**
      * This allows to adjust the \ref  RepoType lazy, from \c NONE to
@@ -256,14 +256,14 @@ namespace zypp
      *
      * \param path directory path
      */
-    RepoInfo & setMetadataPath( const Pathname &path );
+    void setMetadataPath( const Pathname &path );
 
     /**
      * \short set the path where the local packages are stored
      *
      * \param path directory path
      */
-    RepoInfo & setPackagesPath( const Pathname &path );
+    void setPackagesPath( const Pathname &path );
 
     /**
      * \short Whether to check or not this repository with gpg
@@ -274,7 +274,7 @@ namespace zypp
      * be ignored.
      *
      */
-    RepoInfo & setGpgCheck( bool check );
+    void setGpgCheck( bool check );
 
     /**
      * \short Key to use for gpg checking of this repository
@@ -285,7 +285,7 @@ namespace zypp
      * be ignored.
      *
      */
-    RepoInfo & setGpgKeyUrl( const Url &gpgkey );
+    void setGpgKeyUrl( const Url &gpgkey );
 
     /**
      * \short Set if the packaqes downloaded from this repository will be kept in local cache
@@ -296,19 +296,19 @@ namespace zypp
      * \param keep true (keep the downloaded packages) or false (delete them after installation)
      *
      */
-    RepoInfo & setKeepPackages( bool keep );
+    void setKeepPackages( bool keep );
 
     /**
      * sets service which added this repository
      */
-    RepoInfo & setService( const std::string& name );
+    void setService( const std::string& name );
 
     /**
      * Sets the distribution for which is this repository meant. This is
      * an in-memory value only, does not get written to the .repo file upon
      * saving.
      */
-    RepoInfo & setTargetDistribution(const std::string & targetDistribution);
+    void setTargetDistribution(const std::string & targetDistribution);
 
     /**
      * Write a human-readable representation of this RepoInfo object

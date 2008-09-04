@@ -95,25 +95,25 @@ namespace zypp
        * set the repository alias \see alias
        * \param alias
        */
-      RepoInfoBase & setAlias( const std::string &alias );
+      void setAlias( const std::string &alias );
 
       /**
        * set the repository name \see name
        * \param name
        */
-      RepoInfoBase & setName( const std::string &name );
+      void setName( const std::string &name );
 
       /**
        * enable or disable the repository \see enabled
        * \param enabled
        */
-      RepoInfoBase & setEnabled( bool enabled );
+      void setEnabled( bool enabled );
 
       /**
        * enable or disable autorefresh \see autorefresh
        * \param enabled
        */
-      RepoInfoBase & setAutorefresh( bool autorefresh );
+      void setAutorefresh( bool autorefresh );
 
       /**
        * \short set the path to the .repo file
@@ -123,7 +123,7 @@ namespace zypp
        *
        * \param path File path
        */
-      RepoInfoBase & setFilepath( const Pathname &filename );
+      void setFilepath( const Pathname &filename );
 
       /**
        * Write a human-readable representation of this RepoInfoBase object

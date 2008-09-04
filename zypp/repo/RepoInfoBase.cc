@@ -87,34 +87,29 @@ namespace zypp
   RepoInfoBase::~RepoInfoBase()
   {}
 
-  RepoInfoBase & RepoInfoBase::setEnabled( bool enabled )
+  void RepoInfoBase::setEnabled( bool enabled )
   {
     _pimpl->enabled = enabled;
-    return *this;
   }
 
-  RepoInfoBase & RepoInfoBase::setAutorefresh( bool autorefresh )
+  void RepoInfoBase::setAutorefresh( bool autorefresh )
   {
     _pimpl->autorefresh = autorefresh;
-    return *this;
   }
 
-  RepoInfoBase & RepoInfoBase::setAlias( const std::string &alias )
+  void RepoInfoBase::setAlias( const std::string &alias )
   {
     _pimpl->setAlias(alias);
-    return *this;
   }
 
-  RepoInfoBase & RepoInfoBase::setName( const std::string &name )
+  void RepoInfoBase::setName( const std::string &name )
   {
     _pimpl->name = name;
-    return *this;
   }
 
-  RepoInfoBase & RepoInfoBase::setFilepath( const Pathname &filepath )
+  void RepoInfoBase::setFilepath( const Pathname &filepath )
   {
     _pimpl->filepath = filepath;
-    return *this;
   }
 
   // true by default (if not set by setEnabled())
