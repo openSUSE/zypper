@@ -12,6 +12,8 @@
 #include <ostream>
 #include <iostream>
 
+#include "zypp/parser/xml/XmlEscape.h"
+
 #include "zypp/RepoInfo.h"
 #include "zypp/parser/RepoindexFileReader.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
@@ -19,6 +21,7 @@
 #include "zypp/ServiceInfo.h"
 
 using namespace std;
+using zypp::xml::escape;
 
 ///////////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -88,6 +91,18 @@ namespace zypp
     return RepoInfoBase::dumpAsIniOn(str) << "url = " << url() << endl;
   }
 
+  std::ostream & ServiceInfo::dumpAsXMLOn( std::ostream & str) const
+  {
+    return str
+      << "<service"
+      << " alias=\"" << escape(alias()) << "\""
+      << " name=\"" << escape(name()) << "\""
+      << " enabled=\"" << enabled() << "\""
+      << " autorefresh=\"" << autorefresh() << "\""
+      << " url=\"" << escape(url().asString()) << "\""
+      << "/>" << endl;
+  }
+  
   std::ostream & operator<<( std::ostream& str, const ServiceInfo &obj )
   {
     return obj.dumpAsIniOn(str);

@@ -137,6 +137,11 @@ namespace zypp
        */
       virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
+      /**
+       * Write an XML representation of this object.
+       */
+      virtual std::ostream & dumpAsXMLOn( std::ostream & str) const = 0;
+
       class Impl;
     private:
       /** Pointer to implementation */

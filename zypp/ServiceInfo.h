@@ -81,6 +81,11 @@ namespace zypp
      */
     virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
+    /**
+     * Write an XML representation of this ServiceInfo object.
+     */
+    virtual std::ostream & dumpAsXMLOn( std::ostream & str) const;
+
     class Impl;
 
   private:

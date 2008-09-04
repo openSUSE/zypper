@@ -321,6 +321,11 @@ namespace zypp
      */
     virtual std::ostream & dumpRepoOn( std::ostream & str ) const;
 
+    /**
+     * Write an XML representation of this RepoInfo object.
+     */
+    virtual std::ostream & dumpAsXMLOn( std::ostream & str) const;
+
     class Impl;
   private:
     /** Pointer to implementation */

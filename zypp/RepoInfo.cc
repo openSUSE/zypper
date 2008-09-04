@@ -14,11 +14,13 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
 #include "zypp/media/MediaAccess.h"
+#include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
 
 using namespace std;
+using zypp::xml::escape;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -323,6 +325,31 @@ namespace zypp
     if( ! service().empty() )
       str << "service=" << service() << endl;
 
+    return str;
+  }
+
+  std::ostream & RepoInfo::dumpAsXMLOn( std::ostream & str) const
+  {
+    string tmpstr;
+    str
+      << "<repo"
+      << " alias=\"" << escape(alias()) << "\""
+      << " name=\"" << escape(name()) << "\""
+      << " type=\"" << type().asString() << "\""
+      << " enabled=\"" << enabled() << "\""
+      << " autorefresh=\"" << autorefresh() << "\""
+      << " gpgcheck=\"" << gpgCheck() << "\"";
+    if (!(tmpstr = gpgKeyUrl().asString()).empty())
+      str << " gpgkey=\"" << escape(tmpstr) << "\"";
+    if (!(tmpstr = mirrorListUrl().asString()).empty())
+      str << " mirrorlist=\"" << escape(tmpstr) << "\"";
+    str << ">" << endl;
+
+    for (RepoInfo::urls_const_iterator urlit = baseUrlsBegin();
+         urlit != baseUrlsEnd(); ++urlit)
+      str << "<url>" << escape(urlit->asString()) << "</url>" << endl;
+
+    str << "</repo>" << endl;
     return str;
   }
 
