@@ -2083,6 +2083,8 @@ void Zypper::doCommand()
 
     // needed to be able to retrieve target distribution
     init_target(*this);
+    this->_gopts.rm_options.servicesTargetDistro =
+      God->target()->targetDistribution();
 
     refresh_services(*this);
 
@@ -2526,6 +2528,10 @@ void Zypper::doCommand()
         setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
         return;
       }
+      // needed to be able to retrieve target distribution
+      init_target(*this);
+      this->_gopts.rm_options.servicesTargetDistro =
+            God->target()->targetDistribution();
       refresh_services(*this);
     }
     refresh_repos(*this);
