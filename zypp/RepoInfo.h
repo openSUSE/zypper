@@ -28,8 +28,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(RepoInfo);
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoInfo
@@ -340,6 +338,8 @@ namespace zypp
 
   inline bool operator<( const RepoInfo& lhs, const RepoInfo & rhs )
   { return lhs.alias() < rhs.alias(); }
+
+  typedef shared_ptr<RepoInfo> RepoInfo_Ptr;
 
   typedef std::list<RepoInfo> RepoInfoList;
 

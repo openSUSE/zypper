@@ -23,8 +23,6 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(ServiceInfo);
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ServiceInfo
@@ -92,6 +90,8 @@ namespace zypp
       RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
+
+  typedef shared_ptr<ServiceInfo> ServiceInfo_Ptr;
 
   /** \relates ServiceInfo Stream output */
   std::ostream & operator<<( std::ostream & str, const ServiceInfo & obj );
