@@ -24,7 +24,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace repo
   { /////////////////////////////////////////////////////////////////
-    
+
     ///////////////////////////////////////////////////////////////////
     //
     //    CLASS NAME : RepoInfoBase
@@ -40,7 +40,7 @@ namespace zypp
     public:
       RepoInfoBase();
       RepoInfoBase(const std::string & alias);
-      ~RepoInfoBase();
+      virtual ~RepoInfoBase();
 
       /**
        * unique identifier for this source. If not specified
