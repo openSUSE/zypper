@@ -335,8 +335,10 @@ namespace zypp
     str
       << "<repo"
       << " alias=\"" << escape(alias()) << "\""
-      << " name=\"" << escape(name()) << "\""
-      << " type=\"" << type().asString() << "\""
+      << " name=\"" << escape(name()) << "\"";
+    if (type() != repo::RepoType::NONE)
+      str << " type=\"" << type().asString() << "\"";
+    str
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
       << " gpgcheck=\"" << gpgCheck() << "\"";

@@ -135,9 +135,10 @@ namespace zypp
       virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
       /**
-       * Write an XML representation of this object.
+       * Write an XML representation of this object. Implement in
+       * derived classes.
        */
-      virtual std::ostream & dumpAsXMLOn( std::ostream & str) const = 0;
+      virtual std::ostream & dumpAsXMLOn( std::ostream & str) const;
 
       class Impl;
     private:
@@ -146,11 +147,19 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates RepoInfoBase Stream output */
-    std::ostream & operator<<( std::ostream & str, const RepoInfoBase & obj );
+    /** \relates RepoInfoBase */
+    inline bool operator==( const RepoInfoBase & lhs, const RepoInfoBase & rhs )
+    { return lhs.alias() == rhs.alias(); }
+
+    /** \relates RepoInfoBase */
+    inline bool operator!=( const RepoInfoBase & lhs, const RepoInfoBase & rhs )
+    { return lhs.alias() != rhs.alias(); }
 
     inline bool operator<( const RepoInfoBase & lhs, const RepoInfoBase & rhs )
     { return lhs.alias() < rhs.alias(); }
+
+    /** \relates RepoInfoBase Stream output */
+    std::ostream & operator<<( std::ostream & str, const RepoInfoBase & obj );
 
     typedef shared_ptr<RepoInfoBase> RepoInfoBase_Ptr;
 

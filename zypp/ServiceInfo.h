@@ -96,17 +96,6 @@ namespace zypp
   /** \relates ServiceInfo Stream output */
   std::ostream & operator<<( std::ostream & str, const ServiceInfo & obj );
 
-  /** \relates ServiceInfo */
-  inline bool operator==( const ServiceInfo & lhs, const ServiceInfo & rhs )
-  { return lhs.alias() == rhs.alias(); }
-
-  /** \relates ServiceInfo */
-  inline bool operator!=( const ServiceInfo & lhs, const ServiceInfo & rhs )
-  { return lhs.alias() != rhs.alias(); }
-
-  /** \relates ServiceInfo */
-  inline bool operator<( const ServiceInfo & lhs, const ServiceInfo & rhs )
-  { return lhs.alias() < rhs.alias(); }
 
     /////////////////////////////////////////////////////////////////
 } // namespace zypp

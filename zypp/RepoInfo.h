@@ -333,15 +333,13 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates RepoInfo Stream output */
-  std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
-
-  inline bool operator<( const RepoInfo& lhs, const RepoInfo & rhs )
-  { return lhs.alias() < rhs.alias(); }
-
   typedef shared_ptr<RepoInfo> RepoInfo_Ptr;
 
   typedef std::list<RepoInfo> RepoInfoList;
+
+  /** \relates RepoInfo Stream output */
+  std::ostream & operator<<( std::ostream & str, const RepoInfo & obj );
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
