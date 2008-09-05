@@ -54,38 +54,69 @@ namespace zypp
     using sat::Solvable::operator bool_type;
 #endif
     /** Whether this represents an installed solvable. */
-    using sat::Solvable::isSystem;
+    bool isSystem() const
+    { return sat::Solvable::isSystem(); }
 
-    using sat::Solvable::ident;
+    IdString ident() const
+    { return sat::Solvable::ident(); }
 
-    using sat::Solvable::kind;
-    using sat::Solvable::isKind;
-    using sat::Solvable::name;
-    using sat::Solvable::edition;
-    using sat::Solvable::arch;
+    ResKind kind() const
+    { return sat::Solvable::kind(); }
 
+    bool isKind( const ResKind & kind_r ) const
+    { return sat::Solvable::isKind( kind_r ); }
+
+    std::string name() const
+    { return sat::Solvable::name(); }
+
+    Edition edition() const
+    { return sat::Solvable::edition(); }
+
+    Arch arch() const
+    { return sat::Solvable::arch(); }
 
     /**
      * Flag in the metadata indicating this should be
      * installed unsing '-i' (not -U).
      */
-    using sat::Solvable::installOnly;
+    bool installOnly() const
+    { return sat::Solvable::installOnly(); }
 
     /** \name Dependencies. */
     //@{
     /** Select by Dep. */
     Capabilities dep( Dep which_r ) const
     { return operator[]( which_r ); }
-    using sat::Solvable::operator[];
-    using sat::Solvable::provides;
-    using sat::Solvable::requires;
-    using sat::Solvable::conflicts;
-    using sat::Solvable::obsoletes;
-    using sat::Solvable::recommends;
-    using sat::Solvable::suggests;
-    using sat::Solvable::enhances;
-    using sat::Solvable::supplements;
-    using sat::Solvable::prerequires;
+
+    Capabilities operator[]( Dep which_r ) const
+    { return sat::Solvable::operator[]( which_r ); }
+
+    Capabilities provides()    const
+    { return sat::Solvable::provides(); }
+
+    Capabilities requires()    const
+    { return sat::Solvable::requires(); }
+
+    Capabilities conflicts()   const
+    { return sat::Solvable::conflicts(); }
+
+    Capabilities obsoletes()   const
+    { return sat::Solvable::obsoletes(); }
+
+    Capabilities recommends()  const
+    { return sat::Solvable::recommends(); }
+
+    Capabilities suggests()    const
+    { return sat::Solvable::suggests(); }
+
+    Capabilities enhances()    const
+    { return sat::Solvable::enhances(); }
+
+    Capabilities supplements() const
+    { return sat::Solvable::supplements(); }
+
+    Capabilities prerequires() const
+    { return sat::Solvable::prerequires(); }
     //@}
 
   public:

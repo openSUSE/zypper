@@ -55,13 +55,23 @@ namespace zypp
     */
     //@{
     /** \see \ref sat::Solvable::supportsLocales */
-    using sat::Solvable::supportsLocales;
+    bool supportsLocales() const
+    { return sat::Solvable::supportsLocales(); }
+
     /** \see \ref sat::Solvable::supportsLocale */
-    using sat::Solvable::supportsLocale;
+    bool supportsLocale( const Locale & locale_r ) const
+    { return sat::Solvable::supportsLocale( locale_r ); }
+
+    bool supportsLocale( const LocaleSet & locales_r ) const
+    { return sat::Solvable::supportsLocale( locales_r ); }
+
     /** \see \ref sat::Solvable::supportsRequestedLocales */
-    using sat::Solvable::supportsRequestedLocales;
+    bool supportsRequestedLocales() const
+    { return sat::Solvable::supportsRequestedLocales(); }
+
     /** \see \ref sat::Solvable::getSupportedLocales */
-    using sat::Solvable::getSupportedLocales;
+    LocaleSet getSupportedLocales() const
+    { return sat::Solvable::getSupportedLocales(); }
     //@}
 
   public:
@@ -124,7 +134,8 @@ namespace zypp
     ByteCount downloadSize() const;
 
     /** \see \ref sat::Solvable::repository */
-    using sat::Solvable::repository;
+    Repository repository() const
+    { return sat::Solvable::repository(); }
 
      /** \ref RepoInfo associated with the repository
       *  providing this resolvable.
