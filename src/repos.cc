@@ -750,27 +750,7 @@ static void print_xml_repo_list(Zypper & zypper, list<RepoInfo> repos)
   cout << "<repo-list>" << endl;
   for (std::list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
-  {
-    string tmpstr;
-    cout << "<repo";
-    cout << " alias=\"" << xml_encode(it->alias()) << "\"";
-    cout << " name=\"" << xml_encode(it->name()) << "\"";
-    cout << " type=\"" << it->type().asString() << "\"";
-    cout << " enabled=\"" << it->enabled() << "\"";
-    cout << " autorefresh=\"" << it->autorefresh() << "\"";
-    cout << " gpgcheck=\"" << it->gpgCheck() << "\"";
-    if (!(tmpstr = it->gpgKeyUrl().asString()).empty())
-      cout << " gpgkey=\"" << xml_encode(tmpstr) << "\"";
-    if (!(tmpstr = it->mirrorListUrl().asString()).empty())
-      cout << " mirrorlist=\"" << xml_encode(tmpstr) << "\"";
-    cout << ">" << endl;
-
-    for (RepoInfo::urls_const_iterator urlit = it->baseUrlsBegin();
-         urlit != it->baseUrlsEnd(); ++urlit)
-      cout << "<url>" << xml_encode(urlit->asString()) << "</url>" << endl;
-
-    cout << "</repo>" << endl;
-  }
+    it->dumpAsXMLOn(cout);
   cout << "</repo-list>" << endl;
 }
 
@@ -781,7 +761,7 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
   for (std::list<RepoInfo>::const_iterator it = repos.begin();
        it !=  repos.end(); ++it)
   {
-    it->dumpRepoOn(out);
+    it->dumpAsIniOn(out);
     out << endl;
   }
 }
@@ -1787,7 +1767,8 @@ static ServiceList get_all_services(Zypper & zypper)
     // RIS type services
     for_(it, manager.serviceBegin(), manager.serviceEnd())
     {
-      ServiceInfo_Ptr s = new ServiceInfo(*it); 
+      ServiceInfo_Ptr s;
+      s.reset(new ServiceInfo(*it));
       services.insert(services.end(), s);
     }
 
@@ -1796,7 +1777,8 @@ static ServiceList get_all_services(Zypper & zypper)
     {
       if (!it->service().empty())
         continue;
-      RepoInfo_Ptr r = new RepoInfo(*it);
+      RepoInfo_Ptr r;
+      r.reset(new RepoInfo(*it));
       services.insert(services.end(), r);
     }
   }
@@ -2046,6 +2028,20 @@ static void print_service_list(Zypper & zypper,
   }
 }
 
+// ----------------------------------------------------------------------------
+
+static void print_xml_service_list(Zypper & zypper,
+                                   const list<RepoInfoBase_Ptr> & services)
+{
+  cout << "<serice-list>" << endl;
+
+  for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
+       it != services.end(); ++it)
+    (*it)->dumpAsXMLOn(cout);
+
+  cout << "</service-list>" << endl;
+}
+
 // ---------------------------------------------------------------------------
 
 void list_services(Zypper & zypper)
@@ -2086,8 +2082,8 @@ void list_services(Zypper & zypper)
     }
   }
   // print repo list as xml
-  //else if (zypper.out().type() == Out::TYPE_XML)
-    //print_xml_repo_list(zypper, repos);
+  else if (zypper.out().type() == Out::TYPE_XML)
+    print_xml_service_list(zypper, services);
   // print repo list the rug's way
   //else if (zypper.globalOpts().is_rug_compatible)
     //print_rug_service_list(repos);
