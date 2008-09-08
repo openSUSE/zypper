@@ -18,6 +18,20 @@
 #   then increment VERSION_PATCH.
 #
 
+#=======
+# - Update version according to your changes,
+#   but based on 'LAST RELEASED:' below. I.e
+#   there's no need to increase VERSION_PATCH
+#   if it already differs from 'LAST RELEASED:'.
+#
+# - MOST IMPORTANT:
+#   Before you submitt to autobuild, remember the
+#   new version in 'LAST RELEASED:', and add a
+#   note in the changes file.
+#
 SET(VERSION_MAJOR "0")
 SET(VERSION_MINOR "12")
-SET(VERSION_PATCH "2")
+SET(VERSION_PATCH "3")
+
+# LAST RELEASED: 0.12.2
+#=======

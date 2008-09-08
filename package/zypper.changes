@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Sep  8 19:40:07 CEST 2008 - jkupec@suse.cz
+
+- Product Flavor added to product-info output
+- r10961
+
+-------------------------------------------------------------------
+Mon Sep  8 19:36:42 CEST 2008 - jkupec@suse.cz
+
+- XML output added for 'ls'
+- fixed to add only repositories matching the target distribution
+  when refreshing services
+- r10920, r10935, r10941
+
+-------------------------------------------------------------------
 Tue Aug 19 16:39:32 CEST 2008 - dmacvicar@suse.de
 
 - confirm unsupported packages in SLE 
