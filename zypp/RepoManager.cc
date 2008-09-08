@@ -1345,6 +1345,7 @@ namespace zypp
     addService( ServiceInfo(alias, url) );
   }
 
+
   void RepoManager::addService( const ServiceInfo & service )
   {
     // check if service already exists
@@ -1352,12 +1353,14 @@ namespace zypp
       return; //FIXME ZYPP_THROW(RepoAlreadyExistsException(service.name()));
 
     //this is need to save location to correct service
-    const ServiceInfo & savedService = *(_pimpl->services.insert( service )).first;
+    const ServiceInfo & savedService =
+      *(_pimpl->services.insert( service )).first;
 
-    cout << "adde service " << savedService.alias() << endl;
+    MIL << "added service " << savedService.alias() << endl;
 
     _pimpl->saveService( savedService );
   }
+
 
   void RepoManager::removeService( const string & alias)
   {
