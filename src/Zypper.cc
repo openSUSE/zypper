@@ -390,7 +390,7 @@ void Zypper::processGlobalOptions()
   {
     _gopts.machine_readable = true;
     _gopts.no_abbrev = true;
-    out().error("--terse is not implemented, does nothing");
+    //out().error("--terse is not implemented, does nothing");
   }
 
   // ======== other global options ========
@@ -1837,6 +1837,42 @@ void Zypper::processCommandOptions()
       "  Command options:\n"
       "-d, --only-duplicates     Clean only duplicate locks.\n"
       "-e, --only-empty          Clean only locks which doesn't lock anything.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::TARGET_OS_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "targetos (tos)\n"
+      "\n"
+      "Show the ID string of the target Operating System.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+  
+  case ZypperCommand::VERSION_CMP_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "versioncmp (vcmp) <version1> <version2>\n"
+      "\n"
+      "Compare the versions supplied as arguments.\n"
+      "\n"
+      "This command has no additional options.\n"
     );
     break;
   }
@@ -3423,6 +3459,76 @@ void Zypper::doCommand()
     Locks::instance().save();
 
     out().info(str::form("removed locks: %lu", (long unsigned)(start - Locks::instance().size())));
+
+    break;
+  }
+  
+  // ----------------------------(utils/others)--------------------------------
+  
+  case ZypperCommand::TARGET_OS_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    // needed to be able to retrieve the target distribution
+    init_target(*this);
+
+    out().info(God->target()->targetDistribution());
+    
+    break;
+  }
+
+  case ZypperCommand::VERSION_CMP_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (_arguments.size() < 2)
+    {
+      report_required_arg_missing(out(), _command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    else if (_arguments.size() > 2)
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    
+    Edition lhs(_arguments[0]);
+    Edition rhs(_arguments[1]);
+    
+    if (lhs.empty())
+    {
+      out().info(str::form(
+          _("'%s' is not a valid version number."), _arguments[0].c_str()));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    if (rhs.empty())
+    {
+      out().info(str::form(
+          _("'%s' is not a valid version number."), _arguments[1].c_str()));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    int result = lhs.match(rhs);
+
+    // be terse when talking to machines
+    if (_gopts.machine_readable)
+    {
+      out().info(str::numstring(result));
+      break;
+    }
+
+    // tell a human
+    if (result == 0)
+      out().info(str::form(_("%s matches %s"), lhs.asString().c_str(), rhs.asString().c_str()));
+    else if (result > 0)
+      out().info(str::form(_("%s is newer than %s"), lhs.asString().c_str(), rhs.asString().c_str()));
+    else
+      out().info(str::form(_("%s is older than %s"), lhs.asString().c_str(), rhs.asString().c_str()));
 
     break;
   }

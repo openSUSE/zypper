@@ -60,6 +60,9 @@ const ZypperCommand ZypperCommand::REMOVE_LOCK(ZypperCommand::REMOVE_LOCK_e);
 const ZypperCommand ZypperCommand::LIST_LOCKS(ZypperCommand::LIST_LOCKS_e);
 const ZypperCommand ZypperCommand::CLEAN_LOCKS(ZypperCommand::CLEAN_LOCKS_e);
 
+const ZypperCommand ZypperCommand::TARGET_OS(ZypperCommand::TARGET_OS_e);
+const ZypperCommand ZypperCommand::VERSION_CMP(ZypperCommand::VERSION_CMP_e);
+
 const ZypperCommand ZypperCommand::HELP(ZypperCommand::HELP_e);
 const ZypperCommand ZypperCommand::SHELL(ZypperCommand::SHELL_e);
 const ZypperCommand ZypperCommand::SHELL_QUIT(ZypperCommand::SHELL_QUIT_e);
@@ -126,6 +129,9 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     _table["removelock"] = _table["rl"] = _table["lock-delete"] = _table["ld"] = ZypperCommand::REMOVE_LOCK_e;
     _table["locks"] = _table["ll"] = _table["lock-list"] = ZypperCommand::LIST_LOCKS_e;
     _table["cleanlocks"] = _table["cl"] = _table["lock-clean"] = ZypperCommand::CLEAN_LOCKS_e;
+
+    _table["targetos"] = _table["tos"] = ZypperCommand::TARGET_OS_e;
+    _table["versioncmp"] = _table["vcmp"] = ZypperCommand::VERSION_CMP_e;
 
     _table["help"] = _table["?"] = ZypperCommand::HELP_e;
     _table["shell"] = _table["sh"] = ZypperCommand::SHELL_e;

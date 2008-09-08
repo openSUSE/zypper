@@ -54,6 +54,10 @@ struct ZypperCommand
   static const ZypperCommand REMOVE_LOCK;
   static const ZypperCommand LIST_LOCKS;
   static const ZypperCommand CLEAN_LOCKS;
+  
+  // utils/others
+  static const ZypperCommand TARGET_OS;
+  static const ZypperCommand VERSION_CMP;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -117,6 +121,9 @@ struct ZypperCommand
     REMOVE_LOCK_e,
     LIST_LOCKS_e,
     CLEAN_LOCKS_e,
+
+    TARGET_OS_e,
+    VERSION_CMP_e,
 
     HELP_e,
     SHELL_e,
