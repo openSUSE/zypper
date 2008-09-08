@@ -333,11 +333,10 @@ void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
   printNVA(pool_item.resolvable());
 
   Product::constPtr product = asKind<Product>(pool_item.resolvable());
-  cout << _("Category: ") << product->type() << endl;
-  cout << _("Installed: ") << (pool_item.status().isSatisfied() ? "Yes" : "No") << endl;
-  cout << _("Short Name: ") << product->shortName() << endl;
-  cout << _("Long Name: ") << product->longName() << endl;
-
+  cout << _("Category")   << ": " << product->type() << endl;
+  cout << _("Flavor")     << ": " << product->flavor() << endl;
+  cout << _("Installed")  << ": " << (pool_item.status().isSatisfied() ? "Yes" : "No") << endl;
+  cout << _("Short Name")       << ": " << product->shortName() << endl;
   printSummaryDesc(pool_item.resolvable());
 }
 
