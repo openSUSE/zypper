@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep  8 17:11:02 CEST 2008 - jkupec@suse.cz
+
+- CredentialManager added to manage stored credentials
+- MediaCurl adapted to use CredentialManager to read credentials
+- revision 10958
+
+-------------------------------------------------------------------
 Fri Sep  5 11:40:05 CEST 2008 - jkupec@suse.cz
 
 - operator ==, !=, < definition moved to RepoInfoBase from
