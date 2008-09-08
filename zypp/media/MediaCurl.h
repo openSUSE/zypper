@@ -105,6 +105,8 @@ class MediaCurl : public MediaHandler {
      */
     std::string getAuthHint() const;
 
+    bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
+
   private:
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];

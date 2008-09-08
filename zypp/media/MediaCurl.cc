@@ -24,6 +24,7 @@
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/MediaUserAuth.h"
+#include "zypp/media/CredentialManager.h"
 #include "zypp/media/CurlConfig.h"
 #include "zypp/thread/Once.h"
 #include "zypp/Target.h"
@@ -770,7 +771,6 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
   Url fileurl(getFileUrl(_url, filename));
 
   bool retry = false;
-  CurlAuthData auth_data;
 
   do
   {
@@ -782,43 +782,10 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     // retry with proper authentication data
     catch (MediaUnauthorizedException & ex_r)
     {
-      callback::SendReport<AuthenticationReport> auth_report;
-
-      if (!_url.getUsername().empty() && !retry)
-        auth_data.setUserName(_url.getUsername());
-
-      string prompt_msg;
-      if (retry || !_url.getUsername().empty())
-        prompt_msg = _("Invalid user name or password.");
-      else // first prompt
-        prompt_msg = boost::str(boost::format(
-          _("Authentication required for '%s'")) % _url.asString());
-
-      // set available authentication types from the exception
-      auth_data.setAuthType(ex_r.hint());
-
-      if (auth_report->prompt(_url, prompt_msg, auth_data))
-      {
-        DBG << "callback answer: retry" << endl
-            << "CurlAuthData: " << auth_data << endl;
-
-        if (auth_data.valid()) {
-          _userpwd = auth_data.getUserPwd();
-
-          // set username and password
-          CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
-          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-
-          // set auth type
-          ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
-          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-        }
-
+      if(authenticate(ex_r.hint(), !retry))
         retry = true;
-      }
       else
       {
-        DBG << "callback answer: cancel" << endl;
         report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserString());
         ZYPP_RETHROW(ex_r);
       }
@@ -836,10 +803,10 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
   report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
+
 bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
 {
   bool retry = false;
-  CurlAuthData auth_data;
 
   do
   {
@@ -850,45 +817,10 @@ bool MediaCurl::getDoesFileExist( const Pathname & filename ) const
     // authentication problem, retry with proper authentication data
     catch (MediaUnauthorizedException & ex_r)
     {
-      callback::SendReport<AuthenticationReport> auth_report;
-
-      if (!_url.getUsername().empty() && !retry)
-        auth_data.setUserName(_url.getUsername());
-
-      string prompt_msg;
-      if (retry || !_url.getUsername().empty())
-        prompt_msg = _("Invalid user name or password.");
-      else // first prompt
-        prompt_msg = boost::str(boost::format(
-          _("Authentication required for '%s'")) % _url.asString());
-
-      // set available authentication types from the exception
-      auth_data.setAuthType(ex_r.hint());
-
-      if (auth_report->prompt(_url, prompt_msg, auth_data))
-      {
-        DBG << "callback answer: retry" << endl
-            << "CurlAuthData: " << auth_data << endl;
-
-        if (auth_data.valid()) {
-          _userpwd = auth_data.getUserPwd();
-
-          // set username and password
-          CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
-          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-
-          // set auth type
-          ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth_data.authType());
-          if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
-        }
-
+      if(authenticate(ex_r.hint(), !retry))
         retry = true;
-      }
       else
-      {
-        DBG << "callback answer: cancel" << endl;
         ZYPP_RETHROW(ex_r);
-      }
     }
     // unexpected exception
     catch (MediaException & excpt_r)
@@ -1628,6 +1560,7 @@ int MediaCurl::progressCallback( void *clientp,
   return 0;
 }
 
+
 string MediaCurl::getAuthHint() const
 {
   long auth_info = CURLAUTH_NONE;
@@ -1642,6 +1575,85 @@ string MediaCurl::getAuthHint() const
 
   return "";
 }
+
+
+bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
+{
+  //! \todo need a way to pass different CredManagerOptions here
+  CredentialManager cm;
+  CurlAuthData_Ptr credentials;
+
+  // get stored credentials
+  AuthData_Ptr cmcred = cm.getCred(_url);
+
+  if (cmcred)
+  {
+    credentials.reset(new CurlAuthData(*cmcred));
+    DBG << "got stored credentials:" << endl << *credentials << endl;
+  }
+  // if not found, ask user
+  else
+  {
+    CurlAuthData_Ptr curlcred;
+    curlcred.reset(new CurlAuthData());
+    callback::SendReport<AuthenticationReport> auth_report;
+
+    // preset the username if present in current url
+    if (!_url.getUsername().empty() && firstTry)
+      curlcred->setUserName(_url.getUsername());
+
+    string prompt_msg;
+    if (!firstTry || !_url.getUsername().empty())
+      prompt_msg = _("Invalid user name or password.");
+    else // first prompt
+      prompt_msg = boost::str(boost::format(
+        _("Authentication required for '%s'")) % _url.asString());
+
+    // set available authentication types from the exception
+    // might be needed in prompt
+    curlcred->setAuthType(availAuthTypes);
+
+    // ask user
+    if (auth_report->prompt(_url, prompt_msg, *curlcred))
+    {
+      DBG << "callback answer: retry" << endl
+          << "CurlAuthData: " << *curlcred << endl;
+
+      if (curlcred->valid())
+        credentials = curlcred;
+    }
+    else
+    {
+      DBG << "callback answer: cancel" << endl;
+    }
+  }
+
+  // set username and password
+  if (credentials)
+  {
+    _userpwd = credentials->getUserPwd();
+
+    // set username and password
+    CURLcode ret = curl_easy_setopt(_curl, CURLOPT_USERPWD, _userpwd.c_str());
+    if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+
+    // set available authentication types from the exception
+    if (credentials->authType() == CURLAUTH_NONE)
+      credentials->setAuthType(availAuthTypes);
+
+    // set auth type (seems this must be set _after_ setting the userpwd
+    if (credentials->authType() != CURLAUTH_NONE)
+    {
+      ret = curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, credentials->authType());
+      if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
 
   } // namespace media
 } // namespace zypp

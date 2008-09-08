@@ -24,6 +24,14 @@ namespace zypp {
   namespace media {
 
 
+AuthData::AuthData(const Url & url)
+  : _url(url)
+{
+  _username = url.getUsername();
+  _password = url.getPassword();
+}
+
+
 bool AuthData::valid() const
 {
   return username().size() && password().size();

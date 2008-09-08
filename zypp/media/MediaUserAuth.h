@@ -14,6 +14,8 @@
 
 #include <curl/curl.h>
 
+#include "zypp/base/PtrTypes.h"
+
 namespace zypp {
   namespace media {
 
@@ -27,8 +29,10 @@ namespace zypp {
 class AuthData
 {
 public:
-  AuthData() : _username(), _password()
+  AuthData()
   {}
+
+  AuthData(const Url & url);
 
   AuthData(std::string & username, std::string & password)
     : _username(username), _password(password)
@@ -43,9 +47,11 @@ public:
    */
   virtual bool valid() const;
 
-  void setUserName(std::string username) { _username = username; }
-  void setPassword(std::string password) { _password = password; }  
+  void setUrl(const Url & url) { _url = url; }
+  void setUserName(const std::string & username) { _username = username; }
+  void setPassword(const std::string & password) { _password = password; }  
 
+  Url url() const { return _url; }
   std::string username() const { return _username; }
   std::string password() const { return _password; } 
 
@@ -53,9 +59,12 @@ public:
 
 
 private:
+  Url _url;
   std::string _username;
   std::string _password;
 };
+
+typedef shared_ptr<AuthData> AuthData_Ptr;
 
 /**
  * Curl HTTP authentication data.
@@ -67,6 +76,12 @@ public:
    * and authetication type to CURLAUTH_NONE.
    */
   CurlAuthData() : AuthData(), _auth_type_str(), _auth_type(CURLAUTH_NONE)
+  {}
+
+  CurlAuthData(const AuthData & authData)
+    : AuthData(authData)
+    , _auth_type_str()
+    , _auth_type(CURLAUTH_NONE)
   {}
 
   CurlAuthData(std::string & username, std::string & password, std::string & auth_type)
@@ -138,6 +153,7 @@ private:
   long _auth_type;
 };
 
+typedef shared_ptr<CurlAuthData> CurlAuthData_Ptr;
 
 std::ostream & operator << (std::ostream & str, AuthData & auth_data);
 std::ostream & operator << (std::ostream & str, CurlAuthData & auth_data);

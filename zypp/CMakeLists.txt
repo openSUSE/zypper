@@ -258,6 +258,8 @@ SET( zypp_media_SRCS
   media/MediaISO.cc
   media/MediaManager.cc
   media/MediaUserAuth.cc
+  media/CredentialFileReader.cc
+  media/CredentialManager.cc
   media/CurlConfig.cc
 )
 
@@ -278,6 +280,8 @@ SET( zypp_media_HEADERS
   media/MediaUserAuth.h
   media/Mount.h
   media/ProxyInfo.h
+  media/CredentialFileReader.h
+  media/CredentialManager.h
   media/CurlConfig.h
 )
 
