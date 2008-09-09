@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.12.1" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.3" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -732,7 +732,6 @@ TODO
 TODO
 
 
-
 .SS Package Locks Management
 Package locks server the purpose of preventing changes to the set of installed
 packages on the system. The locks are stored in form of a \fIquery\fR in
@@ -766,6 +765,26 @@ or by the package name.
 .TP
 .I \-r, \-\-repo <alias|#|URI>
 Restrict the lock to the specified repository.
+
+
+.SS Other Commands
+
+.TP
+.B versioncmp (vcmp) <version1> <version2>
+Compare the versions supplied as arguments and tell whether version1 is older
+or newer than version2 or the two version strings match.
+
+The default output is in human-friendly form. If \fB--terse\fR global option
+is used, the result is an integer number, negative/positive if version1 is
+older/newer than version2, zero if they match.
+
+.TP
+.B targetos (tos)
+Shows the ID string of the target operating system. The string has a form of
+\fBdistroname-arch\fR. The string is determined by libzypp, the \fBdistroname\fR
+is read from <current-rootdir>/etc/products.d/baseproduct and the architecture
+is determined from uname and CPU flags.
+
 
 .SH "GLOBAL OPTIONS"
 

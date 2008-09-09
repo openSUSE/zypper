@@ -234,6 +234,12 @@ void print_main_help(Zypper & zypper)
     "\tremovelock, rl\t\tRemove a package lock.\n"
     "\tlocks, ll\t\tList current package locks.\n"
   );
+
+  static string help_other_commands = _("\tOther Commands:\n"
+    "\tversioncmp, vcmp\tCompare two version strings.\n"
+    "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
+  );
+
   static string help_usage = _(
     "  Usage:\n"
     "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
@@ -249,6 +255,7 @@ void print_main_help(Zypper & zypper)
   zypper.out().info(help_package_commands, Out::QUIET);
   zypper.out().info(help_query_commands, Out::QUIET);
   zypper.out().info(help_lock_commands, Out::QUIET);
+  zypper.out().info(help_other_commands, Out::QUIET);
 
   print_command_help_hint(zypper);
 }
