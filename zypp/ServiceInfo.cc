@@ -87,26 +87,26 @@ namespace zypp
   void ServiceInfo::setUrl( const Url& url ) { _pimpl->url = url; }
 
 
-  bool catalogsToEnableEmpty() const
+  bool ServiceInfo::catalogsToEnableEmpty() const
   { return _pimpl->catalogsToEnable.empty(); }
 
-  CatalogsToEnable::size_type catalogsToEnableSize() const
+  ServiceInfo::CatalogsToEnable::size_type ServiceInfo::catalogsToEnableSize() const
   { return _pimpl->catalogsToEnable.size(); }
 
-  CatalogsToEnable::const_iterator catalogsToEnableBegin() const
+  ServiceInfo::CatalogsToEnable::const_iterator ServiceInfo::catalogsToEnableBegin() const
   { return _pimpl->catalogsToEnable.begin(); }
 
-  CatalogsToEnable::const_iterator catalogsToEnableEnd() const
+  ServiceInfo::CatalogsToEnable::const_iterator ServiceInfo::catalogsToEnableEnd() const
   { return _pimpl->catalogsToEnable.end(); }
 
-  bool catalogToEnableFind( const std::string & alias_r ) const
+  bool ServiceInfo::catalogToEnableFind( const std::string & alias_r ) const
   { return( _pimpl->catalogsToEnable.find( alias_r ) != _pimpl->catalogsToEnable.end() ); }
 
-  void addCatalogToEnable( const std::string & alias_r )
-  { return _pimpl->catalogsToEnable.insert( alias_r ); }
+  void ServiceInfo::addCatalogToEnable( const std::string & alias_r )
+  { _pimpl->catalogsToEnable.insert( alias_r ); }
 
-  void delCatalogToEnable( const std::string & alias_r )
-  { return _pimpl->catalogsToEnable.erase( alias_r ); }
+  void ServiceInfo::delCatalogToEnable( const std::string & alias_r )
+  { _pimpl->catalogsToEnable.erase( alias_r ); }
 
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const

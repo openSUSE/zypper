@@ -12,6 +12,7 @@
 #ifndef ZYPP_SERVICE_H
 #define ZYPP_SERVICE_H
 
+#include <set>
 #include <string>
 
 #include "zypp/Url.h"
@@ -78,7 +79,7 @@ namespace zypp
      */
     //@{
     /** Container of catalogs. */
-    typedef std:set<std::string>     CatalogsToEnable;
+    typedef std::set<std::string>    CatalogsToEnable;
     bool                             catalogsToEnableEmpty() const;
     CatalogsToEnable::size_type      catalogsToEnableSize() const;
     CatalogsToEnable::const_iterator catalogsToEnableBegin() const;
