@@ -220,8 +220,13 @@ struct FillSearchTableSelectable
   {
     TableRow row;
 
-    if (s->kind() != zypp::ResKind::srcpackage &&
-        (!s->installedEmpty() || s->theObj().isSatisfied()))
+    bool installed;
+    if (zypp::traits::isPseudoInstalled(s->kind()))
+      installed = s->theObj().isSatisfied();
+    else
+      installed = !s->installedEmpty();
+
+    if (s->kind() != zypp::ResKind::srcpackage && installed)
     {
       // not-installed only
       if (inst_notinst == false)
