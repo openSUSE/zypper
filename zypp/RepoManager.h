@@ -147,10 +147,9 @@ namespace zypp
     * The known repositories are read from
     * \ref RepoManagerOptions::knownReposPath passed on the Ctor.
     * Which defaults to ZYpp global settings.
-    * \deprecated use iterator instead which read only one time directory
     * \return found list<RepoInfo>
     */
-   ZYPP_DEPRECATED std::list<RepoInfo> knownRepositories() const;
+   std::list<RepoInfo> knownRepositories() const;
 
    bool repoEmpty() const;
    RepoSizeType repoSize() const;
@@ -524,14 +523,14 @@ namespace zypp
 
     /**
      * Refreshes all enabled services.
-     * 
+     *
      * \see refreshService(ServiceInfo)
      */
     void refreshServices();
 
     /**
      * Refresh specific service.
-     * 
+     *
      * \param name service structure
      * \throws MediaException If there's a problem downloading the repo index file.
      */
@@ -540,7 +539,7 @@ namespace zypp
     /**
      * Modifies service file (rewrites it with new values) and underlying
      * repositories if needed.
-     * 
+     *
      * Modifications of a service can lead to rewrite of all .repo files of
      * contained repositories. Particularily, disabling a service (changing
      * ServiceInfo::enabled() from true to false) will disable all contained
@@ -592,7 +591,7 @@ namespace zypp
      * public:
      *   ChangePriority(int prio) : priority(prio) {}
      *   // missing rewrite priority back via RepoManager::modifyRepo
-     *   void doIt( RepoInfo info ) { info.setPriority(priority); } 
+     *   void doIt( RepoInfo info ) { info.setPriority(priority); }
      * }
      *
      * //somewhere in code
