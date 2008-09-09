@@ -879,25 +879,24 @@ namespace zypp
 
     std::string TargetImpl::targetDistribution() const
     {
-      std::ifstream baseProduct( (_root / "/etc/products.d/baseproduct").c_str() );
-      for( iostr::EachLine in( baseProduct ); in; in.next() )
+      std::ostringstream cmd;
+      cmd << "rpmdb2solv";
+      cmd << " -n";
+      if ( ! _root.empty() )
+        cmd << " -r '" << _root << "'";
+      cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
+      cmd << " -a distribution.target";
+
+      MIL << "Executing: " << cmd << endl;
+      ExternalProgram prog( cmd.str(), ExternalProgram::Discard_Stderr );
+      for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
       {
-        std::string line( str::trim( *in ) );
-        if ( str::hasPrefix( line, "distribution" ) )
-        {
-          std::string::size_type pos( line.find( '=', 12 ) );
-          if ( pos == std::string::npos )
-            continue; // no '=' on line
-          pos = line.find_first_not_of( " \t", pos+1 );
-          if ( pos == std::string::npos )
-            continue; // empty value
-          line.erase( 0, pos );
-          line += "-";
-          line += ZConfig::instance().systemArchitecture().asString();
-          return line;
-        }
+        return str::trim(output);
       }
-      WAR << "No distribution in " << PathInfo(_root / "/etc/products.d/baseproduct") << endl;
+
+      int ret = prog.close();
+      WAR << "Got no output from rpmdb2solv (returned " << ret << ")." << endl;
+
       return std::string();
     }
 

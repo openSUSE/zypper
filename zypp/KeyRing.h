@@ -19,6 +19,7 @@
 #include <string>
 
 #include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/Flags.h"
 #include "zypp/Callback.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Locale.h"
@@ -30,6 +31,10 @@ namespace zypp
 
   DEFINE_PTR_TYPE(KeyRing);
 
+  /** Callbacks from signature verification workflow.
+   *
+   * Per default all methods answer \c false.
+  */
   struct KeyRingReport : public callback::ReportBase
   {
 
@@ -59,7 +64,30 @@ namespace zypp
      */
     virtual bool askUserToImportKey( const PublicKey &key);
     virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key );
+
+    public:
+      /** \name Query/change the default values.
+       * Per default all methods answer \c false.
+       */
+      //@{
+      enum DefaultAcceptBits
+      {
+        ACCEPT_NOTHING             = 0x0000,
+        ACCEPT_UNSIGNED_FILE       = 0x0001,
+        ACCEPT_UNKNOWNKEY          = 0x0002,
+        TRUST_KEY                  = 0x0004,
+        IMPORT_KEY                 = 0x0008,
+        ACCEPT_VERIFICATION_FAILED = 0x0010,
+      };
+      ZYPP_DECLARE_FLAGS(DefaultAccept,DefaultAcceptBits);
+
+      /** Get the active accept bits. */
+      static DefaultAccept defaultAccept();
+      /** Set the active accept bits. */
+      static void setDefaultAccept( DefaultAccept value_r );
+     //@}
   };
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(KeyRingReport::DefaultAccept);
 
   struct KeyRingSignals : public callback::ReportBase
   {
@@ -167,19 +195,28 @@ namespace zypp
     /**
      * Follows a signature verification interacting with the user.
      * The bool returned depends on user decision to trust or not.
+     *
+     * To propagate user decisions, either connect to the \ref KeyRingReport
+     * or use its static methods to set the desired defaults.
+     *
+     * \code
+     * struct KeyRingReportReceive : public callback::ReceiveReport<KeyRingReport>
+     * {
+     *   KeyRingReportReceive() { connect(); }
+     *
+     *   // Overload the virtual methods to return the appropriate values.
+     *   virtual bool askUserToAcceptUnsignedFile( const std::string &file );
+     *   ...
+     * };
+     * \endcode
+     * \see \ref KeyRingReport
      */
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
 
-/** Dtor */
+    /** Dtor */
     ~KeyRing();
-
-  public:
-
-    /** Synonym for \ref text */
-    //std::string asString() const
-    //{}
 
   private:
     /** Pointer to implementation */

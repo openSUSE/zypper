@@ -445,15 +445,21 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
+  Edition e("1.a");
+  DBG << e.copmpare( Edition("1a") ) << endl;
+  DBG << e.copmpare( Edition("1=a") ) << endl;
+  DBG << e.copmpare( Edition("1#$%^&*()_a") ) << endl;
+return 0;
   if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
       {
-        //zypp::base::LogControl::TmpLineWriter shutUp;
+        zypp::base::LogControl::TmpLineWriter shutUp;
         getZYpp()->initializeTarget( sysRoot );
       }
       getZYpp()->target()->load();
+      USR << getZYpp()->target()->targetDistribution() << endl;
     }
   }
 
@@ -479,7 +485,7 @@ try {
           repoManager.cleanCache( nrepo );
         }
         SEC << "refreshMetadata" << endl;
-        repoManager.refreshMetadata( nrepo );
+        //repoManager.refreshMetadata( nrepo );
         SEC << "buildCache" << endl;
         repoManager.buildCache( nrepo );
       }
@@ -529,39 +535,6 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  // access to the Pool of Selectables
-  ResPoolProxy selectablePool( ResPool::instance().proxy() );
-
-  // Iterate it's Products...
-  for_( it, selectablePool.byKindBegin<Product>(), selectablePool.byKindEnd<Product>() )
-  {
-    // The current Product Selectable
-    ui::Selectable::Ptr prodSel( *it );
-    MIL << dump( prodSel ) << endl;
-
-    // It's candiate as Product pointer
-    Product::constPtr prod( prodSel->candidateAsKind<Product>() );
-    if ( prod )
-    {
-      // Not NULL, so there is an available Product.
-      // Get the installed Products it would replace.
-      Product::ReplacedProducts prodReplaces( prod->replacedProducts() );
-
-      // Iterate the replaced Products...
-      for_( it, prodReplaces.begin(), prodReplaces.end() )
-      {
-        // The current replaced Product
-        Product::constPtr replacedProduct( *it );
-        DBG << replacedProduct << endl;
-
-        // and this is how you would get the Selectable that contains
-        // this replacedProduct, in case you need it ..
-        ui::Selectable::Ptr replacedProductsSelectable( ui::Selectable::get( replacedProduct ) );
-        DBG << replacedProductsSelectable << endl;
-      }
-    }
-
-  }
 
 
   ///////////////////////////////////////////////////////////////////

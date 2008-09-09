@@ -51,25 +51,38 @@ namespace zypp
     return true;
   }
 
+  ///////////////////////////////////////////////////////////////////
+
   namespace
   {
-    bool _keyRingDefaultAccept( getenv("ZYPP_KEYRING_DEFAULT_ACCEPT_ALL") );
+    KeyRingReport::DefaultAccept _keyRingDefaultAccept( KeyRingReport::ACCEPT_NOTHING );
   }
 
-  bool KeyRingReport::askUserToAcceptUnsignedFile( const string &file )
+  KeyRingReport::DefaultAccept KeyRingReport::defaultAccept()
   { return _keyRingDefaultAccept; }
+
+  void KeyRingReport::setDefaultAccept( DefaultAccept value_r )
+  {
+    MIL << "Set new default accept: " << value_r << endl;
+    _keyRingDefaultAccept = value_r;
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  bool KeyRingReport::askUserToAcceptUnsignedFile( const string &file )
+  { return _keyRingDefaultAccept.testFlag( ACCEPT_UNSIGNED_FILE ); }
 
   bool KeyRingReport::askUserToAcceptUnknownKey( const string &file, const string &id )
-  { return _keyRingDefaultAccept; }
+  { return _keyRingDefaultAccept.testFlag( ACCEPT_UNKNOWNKEY ); }
 
   bool KeyRingReport::askUserToTrustKey( const PublicKey &key )
-  { return _keyRingDefaultAccept; }
+  { return _keyRingDefaultAccept.testFlag( TRUST_KEY ); }
 
   bool KeyRingReport::askUserToImportKey( const PublicKey &key)
-  { return _keyRingDefaultAccept; }
+  { return _keyRingDefaultAccept.testFlag( IMPORT_KEY ); }
 
   bool KeyRingReport::askUserToAcceptVerificationFailed( const string &file, const PublicKey &key )
-  { return _keyRingDefaultAccept; }
+  { return _keyRingDefaultAccept.testFlag( ACCEPT_VERIFICATION_FAILED ); }
 
   ///////////////////////////////////////////////////////////////////
   //
