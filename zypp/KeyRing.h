@@ -38,14 +38,20 @@ namespace zypp
   struct KeyRingReport : public callback::ReportBase
   {
 
-    virtual bool askUserToAcceptUnsignedFile( const std::string &file );
+    /**
+     * The file \ref filedesc is unsigned
+     * \param filedesc Name of the file (repo alias) or filename if not available
+     */
+    virtual bool askUserToAcceptUnsignedFile( const std::string &filedesc );
 
     /**
      * we DONT know the key, only its id, but we have never seen it, the difference
      * with trust key is that if you dont have it, you can't import it later.
      * The answer means continue yes or no?
+     *
+     * \param filedes Name of the file (repo alias) or filename if not available
      */
-    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id );
+    virtual bool askUserToAcceptUnknownKey( const std::string &filedesc, const std::string &id );
 
     /**
      * This basically means, we know the key, but it is not trusted, Continue
@@ -61,9 +67,16 @@ namespace zypp
      * basically you will be asked every time again.
      * There are programs who prefer to manage the trust keyring on their own and use trustKey
      * without importing it into rpm.
+     *
      */
     virtual bool askUserToImportKey( const PublicKey &key);
-    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key );
+
+    /**
+     * The file \ref filedesc is signed but the verification failed
+     *
+     * \param filedesc Name of the file (repo alias) or filename if not available
+     */
+    virtual bool askUserToAcceptVerificationFailed( const std::string &filedesc, const PublicKey &key );
 
     public:
       /** \name Query/change the default values.
