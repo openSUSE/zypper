@@ -40,7 +40,7 @@ string selectable_search_repo_str(const ui::Selectable & s)
   return repostr;
 }
 
-string string_ppp_status(const PoolItem & pi)
+string string_patch_status(const PoolItem & pi)
 {
   // make sure this will not happen
   if (pi.isUndetermined())
@@ -69,6 +69,7 @@ static string string_weak_status(const ResStatus & rs)
   return ""; 
 }
 
+
 void list_patches(Zypper & zypper)
 {
   MIL
@@ -91,6 +92,7 @@ void list_patches(Zypper & zypper)
     // display the result, even if --quiet specified
     cout << tbl;
 }
+
 
 void list_patterns(Zypper & zypper)
 {
@@ -232,7 +234,7 @@ void list_products(Zypper & zypper)
     Product::constPtr product = asKind<Product>(it->resolvable());
 
     TableRow tr;
-    if (it->isSatisfied())
+    if (it->status().isInstalled())
     {
       if (notinst_only)
         continue;

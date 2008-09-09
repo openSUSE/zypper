@@ -246,7 +246,7 @@ mark_selectable(Zypper & zypper,
   PoolItem theone = s.theObj();
   //! \todo handle multiple installed case
   bool theoneinstalled; // is the One installed ?
-  if (s.kind() == ResKind::package)
+  if (!traits::isPseudoInstalled(s.kind()))
     theoneinstalled = !s.installedEmpty() && theone &&
       equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
   else if (s.kind() == ResKind::patch)
@@ -260,7 +260,7 @@ mark_selectable(Zypper & zypper,
     installed = theone;
   else
   {
-    if (s.kind() == ResKind::package)
+    if (!traits::isPseudoInstalled(s.kind()))
     {
       anyinstalled = s.hasInstalledObj();
       installed = s.installedObj();
@@ -531,10 +531,10 @@ void install_remove(Zypper & zypper,
     string provider; 
     for_(solvit, q.poolItemBegin(), q.poolItemEnd())
     {
-      if (solvit->resolvable()->isKind(ResKind::package))
-        installed = solvit->status().isInstalled();
-      else
+      if (traits::isPseudoInstalled(solvit->resolvable()->kind()))
         installed = solvit->isSatisfied();
+      else
+        installed = solvit->status().isInstalled();
       if (installed)
       {
         provider = solvit->resolvable()->name(); 

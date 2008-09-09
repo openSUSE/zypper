@@ -200,7 +200,7 @@ void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
   const PoolItem & pool_item = s.theObj();
   printNVA(pool_item.resolvable());
 
-  cout << _("Status: ") << string_ppp_status(pool_item) << endl;
+  cout << _("Status: ") << string_patch_status(pool_item) << endl;
 
   Patch::constPtr patch = asKind<Patch>(pool_item.resolvable());
   cout << _("Category: ") << patch->category() << endl;
@@ -335,7 +335,7 @@ void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
   Product::constPtr product = asKind<Product>(pool_item.resolvable());
   cout << _("Category")   << ": " << product->type() << endl;
   cout << _("Flavor")     << ": " << product->flavor() << endl;
-  cout << _("Installed")  << ": " << (pool_item.status().isSatisfied() ? "Yes" : "No") << endl;
+  cout << _("Installed")  << ": " << (pool_item.status().isInstalled() ? "Yes" : "No") << endl;
   cout << _("Short Name")       << ": " << product->shortName() << endl;
   printSummaryDesc(pool_item.resolvable());
 }

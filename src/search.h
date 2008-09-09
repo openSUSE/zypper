@@ -19,7 +19,7 @@
 #include "Table.h"
 
 std::string selectable_search_repo_str(const zypp::ui::Selectable & s);
-std::string string_ppp_status(const zypp::PoolItem & pi);
+std::string string_patch_status(const zypp::PoolItem & pi);
 
 /**
  * Functor for filling search output table in rug style.
@@ -114,7 +114,7 @@ struct FillSearchTableSolvable
           row << "v";
         }
       }
-      // patches/patterns/products are installed if satisfied
+      // patches/patterns are installed if satisfied
       else if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied()) 
       {
         // show only not installed
@@ -292,7 +292,7 @@ struct FillPatchesTable
       << pi->name()
       << pi->edition().asString()
       << patch->category()
-      << string_ppp_status(pi);
+      << string_patch_status(pi);
 
     *_table << row;
 
