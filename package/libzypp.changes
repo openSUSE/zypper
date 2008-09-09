@@ -6,6 +6,12 @@ Tue Sep  9 13:04:11 CEST 2008 - ma@suse.de
 - revision 10970
 
 -------------------------------------------------------------------
+Tue Sep  9 17:33:03 CEST 2008 - dmacvicar@suse.de
+
+- provide context about the repository (name/alias) if available when
+  checking signatures (bnc#370223)
+
+-------------------------------------------------------------------
 Tue Sep  9 11:40:42 CEST 2008 - ma@suse.de
 
 - Fix reading of Traget::targetDistribution.
