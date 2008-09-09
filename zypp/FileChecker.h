@@ -86,7 +86,14 @@ namespace zypp
       * Constructor.
       * \param signature Signature that validates the file
       */
-      SignatureFileChecker( const Pathname &signature );
+      SignatureFileChecker( const Pathname &signature,
+                            const std::string &description = std::string() );
+
+     /**
+      * Constructor for files not containing a signature
+      * \param description Description of the checker
+      */
+      SignatureFileChecker( const std::string &description );
       
       /**
       * Default Constructor.
@@ -109,10 +116,11 @@ namespace zypp
       */
       void operator()( const Pathname &file ) const;
      
-     private:
+     protected:
       Pathname _signature;
+      std::string _description;
    };
-   
+
    /**
    * \short Checks for nothing
    * Used as the default checker

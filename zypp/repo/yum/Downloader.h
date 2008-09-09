@@ -16,6 +16,7 @@
 #include "zypp/OnMediaLocation.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ProgressData.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/repo/Downloader.h"
 #include "zypp/repo/yum/ResourceType.h"
@@ -41,9 +42,20 @@ namespace zypp
       {
        public:
          
-       /**
-         * \short Constructor
+        /**
+         * \short Constructor from the repository information
          *
+         * The repository information allows more context to be given
+         * to the user when something fails.
+         *
+         * \param info Repository information
+         */
+        Downloader( const RepoInfo &info );
+
+        /**
+         * \short Constructor from the pathname relative to the
+         * repository url
+         * 
          * \param path Path to the repostory from the media
          */
         Downloader( const Pathname &path );
@@ -68,7 +80,7 @@ namespace zypp
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
-        Pathname _path;
+        RepoInfo _info;
         Pathname _dest_dir;
         std::list<OnMediaLocation> _patches_files;
         

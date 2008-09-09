@@ -335,7 +335,7 @@ namespace zypp
   {
     callback::SendReport<KeyRingReport> report;
     //callback::SendReport<KeyRingSignals> emitSignal;
-    MIL << "Going to verify signature for " << file << " with " << signature << endl;
+    MIL << "Going to verify signature for " << filedesc << " ( " << file << " ) with " << signature << endl;
 
     // if signature does not exists, ask user if he wants to accept unsigned file.
     if( signature.empty() || (!PathInfo(signature).isExist()) )

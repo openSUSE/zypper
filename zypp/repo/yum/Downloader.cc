@@ -32,14 +32,21 @@ namespace repo
 namespace yum
 {
 
-Downloader::Downloader( const Pathname &path )
-  : _path(path), _media_ptr(0L)
+Downloader::Downloader( const RepoInfo &info )
+  : _info(info), _media_ptr(0L)
 {
+}
+
+Downloader::Downloader(const Pathname &path )
+{
+    RepoInfo info;
+    info.setPath(path);
+    _info = info;
 }
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname repomd = media.provideFile( _path + "/repodata/repomd.xml");
+  Pathname repomd = media.provideFile( _info.path() + "/repodata/repomd.xml");
   return RepoStatus(repomd);
 }
 
@@ -59,7 +66,7 @@ loc_with_path_prefix(const OnMediaLocation & loc,
 bool Downloader::patches_Callback( const OnMediaLocation &loc,
                                    const string &id )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _path)); 
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path())); 
   MIL << id << " : " << loc_with_path << endl;
   this->enqueueDigested(loc_with_path);
   return true;
@@ -69,7 +76,7 @@ bool Downloader::patches_Callback( const OnMediaLocation &loc,
 bool Downloader::repomd_Callback( const OnMediaLocation &loc,
                                   const ResourceType &dtype )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _path)); 
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path())); 
   MIL << dtype << " : " << loc_with_path << endl;
 
   //! \todo do this through a ZConfig call so that it is always in sync with parser
@@ -95,7 +102,7 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc,
   {
     this->start( _dest_dir, *_media_ptr );
     // now the patches.xml file must exists
-    PatchesFileReader( _dest_dir + _path + loc.filename(),
+    PatchesFileReader( _dest_dir + _info.path() + loc.filename(),
                        bind( &Downloader::patches_Callback, this, _1, _2));
   }
 
@@ -106,9 +113,9 @@ void Downloader::download( MediaSetAccess &media,
                            const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progressrcv )
 {
-  Pathname repomdpath =  _path + "/repodata/repomd.xml";
-  Pathname keypath =  _path + "/repodata/repomd.xml.key";
-  Pathname sigpath =  _path + "/repodata/repomd.xml.asc";
+  Pathname repomdpath =  _info.path() + "/repodata/repomd.xml";
+  Pathname keypath =  _info.path() + "/repodata/repomd.xml.key";
+  Pathname sigpath =  _info.path() + "/repodata/repomd.xml.asc";
 
   _media_ptr = (&media);
   
@@ -120,14 +127,14 @@ void Downloader::download( MediaSetAccess &media,
   
   _dest_dir = dest_dir;
   
-  SignatureFileChecker sigchecker;
+  SignatureFileChecker sigchecker(_info.name());
 
   if ( _media_ptr->doesFileExist(sigpath) )
   {
       this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
      this->start( dest_dir, *_media_ptr);
      this->reset();
-     sigchecker = SignatureFileChecker(dest_dir + sigpath);
+     sigchecker = SignatureFileChecker(dest_dir + sigpath, _info.name());
   }
  
 
@@ -153,8 +160,8 @@ void Downloader::download( MediaSetAccess &media,
 
   this->reset();
 
-  Reader reader( dest_dir + _path + "/repodata/repomd.xml" );
-  RepomdFileReader( dest_dir + _path + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
+  Reader reader( dest_dir + _info.path() + "/repodata/repomd.xml" );
+  RepomdFileReader( dest_dir + _info.path() + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
 
   // ready, go!
   this->start( dest_dir, *_media_ptr);

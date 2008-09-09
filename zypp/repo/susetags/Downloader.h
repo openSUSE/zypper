@@ -13,6 +13,7 @@
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
 #include "zypp/ProgressData.h"
+#include "zypp/RepoInfo.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/repo/Downloader.h"
@@ -34,12 +35,23 @@ namespace zypp
       {
        public:
         /**
-         * \short Constructor
+         * \short Constructor from the repository information
          *
+         * The repository information allows more context to be given
+         * to the user when something fails.
+         *
+         * \param info Repository information
+         */
+        Downloader( const RepoInfo &info );
+
+        /**
+         * \short Constructor from the pathname relative to the
+         * repository url
+         * 
          * \param path Path to the repostory from the media
          */
         Downloader( const Pathname &path );
-        
+
         /**
          * \short Download metadata to a local directory
          *
@@ -61,7 +73,7 @@ namespace zypp
         void consumeIndex( const parser::susetags::RepoIndex_Ptr & data_r );
 
        private:
-        Pathname _path;
+        RepoInfo _info;
         parser::susetags::RepoIndex_Ptr _repoindex;
       };
 

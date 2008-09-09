@@ -94,11 +94,20 @@ namespace zypp
     
   }
 
-  SignatureFileChecker::SignatureFileChecker( const Pathname &signature )
-    : _signature(signature)
+   SignatureFileChecker::SignatureFileChecker( const Pathname &signature,
+                                               const std::string &description )
+       : _signature(signature)
+       , _description(description)
+  {
+
+  }
+  
+  SignatureFileChecker::SignatureFileChecker( const std::string &description )
+      : _description(description)
   {
   }
   
+
   SignatureFileChecker::SignatureFileChecker()
   {
   }
@@ -119,7 +128,8 @@ namespace zypp
     }
 
     MIL << "checking " << file << " file validity using digital signature.." << endl;
-    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, file.basename(), _signature);
+    bool valid = z->keyRing()->verifyFileSignatureWorkflow( file, _description.empty() ? file.basename() : _description, _signature);
+
     if (!valid)
       ZYPP_THROW( FileCheckException( "Signature verification failed for "  + file.basename() ) );
   }

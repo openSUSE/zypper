@@ -547,9 +547,9 @@ namespace zypp
         shared_ptr<repo::Downloader> downloader_ptr;
 
         if ( repokind.toEnum() == RepoType::RPMMD_e )
-          downloader_ptr.reset(new yum::Downloader(info.path()));
+          downloader_ptr.reset(new yum::Downloader(info));
         else
-          downloader_ptr.reset( new susetags::Downloader(info.path()));
+          downloader_ptr.reset( new susetags::Downloader(info));
 
         RepoStatus newstatus = downloader_ptr->status(media);
         bool refresh = false;
@@ -677,10 +677,12 @@ namespace zypp
           MediaSetAccess media(url);
           shared_ptr<repo::Downloader> downloader_ptr;
 
+          MIL << "Creating downloader for [ " << info.name() << " ]" << endl;
+
           if ( repokind.toEnum() == RepoType::RPMMD_e )
-            downloader_ptr.reset(new yum::Downloader(info.path()));
+            downloader_ptr.reset(new yum::Downloader(info));
           else
-            downloader_ptr.reset( new susetags::Downloader(info.path()));
+            downloader_ptr.reset( new susetags::Downloader(info) );
 
           /**
            * Given a downloader, sets the other repos raw metadata

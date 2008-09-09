@@ -26,16 +26,23 @@ namespace repo
 namespace susetags
 {
 
-Downloader::Downloader(const Pathname &path )
-    : _path(path)
+Downloader::Downloader(const RepoInfo &info )
+    : _info(info)
 {
 
 }
 
+Downloader::Downloader(const Pathname &path )
+{
+    RepoInfo info;
+    info.setPath(path);
+    _info = info;
+}
+
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname content = media.provideFile( _path + "/content");
-  Pathname mediafile = media.provideFile( _path + "/media.1/media" );
+    Pathname content = media.provideFile( _info.path() + "/content");
+    Pathname mediafile = media.provideFile( _info.path() + "/media.1/media" );
 
   return RepoStatus(content) && RepoStatus(mediafile);
 }
@@ -46,19 +53,19 @@ void Downloader::download( MediaSetAccess &media,
 {
   downloadMediaInfo( dest_dir, media );
 
-  SignatureFileChecker sigchecker;
+  SignatureFileChecker sigchecker(_info.name());
 
-  Pathname sig = _path + "/content.asc";
+  Pathname sig = _info.path() + "/content.asc";
   if ( media.doesFileExist(sig) )
   {
     this->enqueue( OnMediaLocation( sig, 1 ) );
     this->start( dest_dir, media );
     this->reset();
 
-    sigchecker = SignatureFileChecker( dest_dir + sig );
+    sigchecker = SignatureFileChecker( dest_dir + sig, _info.name() );
   }
 
-  Pathname key = _path + "/content.key";
+  Pathname key = _info.path() + "/content.key";
   if ( media.doesFileExist(key) )
   {
     this->enqueue( OnMediaLocation( key, 1 ) );
@@ -68,7 +75,7 @@ void Downloader::download( MediaSetAccess &media,
   }
 
 
-  this->enqueue( OnMediaLocation( _path + "/content", 1 ), sigchecker );
+  this->enqueue( OnMediaLocation( _info.path() + "/content", 1 ), sigchecker );
   this->start( dest_dir, media );
   this->reset();
 
@@ -76,19 +83,19 @@ void Downloader::download( MediaSetAccess &media,
 
   // Content file first to get the repoindex
   {
-    Pathname inputfile( dest_dir +  _path + "/content" );
+      Pathname inputfile( dest_dir +  _info.path() + "/content" );
     ContentFileReader content;
     content.setRepoIndexConsumer( bind( &Downloader::consumeIndex, this, _1 ) );
     content.parse( inputfile );
   }
   if ( ! _repoindex )
   {
-    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No repository index in content file." ) );
+    ZYPP_THROW( ParseException( (dest_dir+_info.path()).asString() + ": " + "No repository index in content file." ) );
   }
   MIL << "RepoIndex: " << _repoindex << endl;
   if ( _repoindex->metaFileChecksums.empty() )
   {
-    ZYPP_THROW( ParseException( (dest_dir+_path).asString() + ": " + "No metadata checksums in content file." ) );
+    ZYPP_THROW( ParseException( (dest_dir+_info.path()).asString() + ": " + "No metadata checksums in content file." ) );
   }
   if ( _repoindex->signingKeys.empty() )
   {
@@ -172,7 +179,7 @@ void Downloader::download( MediaSetAccess &media,
       }
     }
     MIL << "adding job " << it->first << endl;
-    OnMediaLocation location( _path + descr_dir + it->first, 1 );
+    OnMediaLocation location( _info.path() + descr_dir + it->first, 1 );
     location.setChecksum( it->second );
     this->enqueueDigested(location);
   }
@@ -181,7 +188,7 @@ void Downloader::download( MediaSetAccess &media,
         it != _repoindex->signingKeys.end();
         ++it )
   {
-    OnMediaLocation location( _path + it->first, 1 );
+    OnMediaLocation location( _info.path() + it->first, 1 );
     location.setChecksum( it->second );
     this->enqueueDigested(location);
   }

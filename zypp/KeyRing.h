@@ -209,10 +209,23 @@ namespace zypp
      *   ...
      * };
      * \endcode
+     *
+     * \param file Path of the file to be verified
+     * \param filedesc Description of the file (to give the user some context)
+     * \param signature Signature to verify the file against
+     *
      * \see \ref KeyRingReport
      */
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
+
+    /**
+     * Verifies a file against a signature, with no user interaction
+     *
+     * \param file Path of the file to be verified
+     * \param signature Signature to verify the file against
+     */
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
+
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
 
     /** Dtor */
