@@ -62,14 +62,36 @@ namespace zypp
      */
     Url url() const;
 
-  public:
-
     /**
      * Sets url for this service
      *
      * \param url url to this service
      */
     void setUrl( const Url& url );
+
+
+    /** \name Set of catalogs (repository aliases) to enable on next refresh.
+     *
+     * Per default new repositories are created in disabled state. But repositories
+     * mentioned here will be created in enabled state on the next refresh.
+     * Afterwards they get removed from the list.
+     */
+    //@{
+    /** Container of catalogs. */
+    typedef std:set<std::string>     CatalogsToEnable;
+    bool                             catalogsToEnableEmpty() const;
+    CatalogsToEnable::size_type      catalogsToEnableSize() const;
+    CatalogsToEnable::const_iterator catalogsToEnableBegin() const;
+    CatalogsToEnable::const_iterator catalogsToEnableEnd() const;
+
+    /** Wheter \c alias_r is mentioned in CatalogsToEnable. */
+    bool catalogToEnableFind( const std::string & alias_r ) const;
+
+    /** Add \c alias_r to the set of CatalogsToEnable. */
+    void addCatalogToEnable( const std::string & alias_r );
+    /** Remove \c alias_r to the set of CatalogsToEnable. */
+    void delCatalogToEnable( const std::string & alias_r );
+    //@}
 
   public:
     /**

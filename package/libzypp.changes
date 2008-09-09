@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep  9 13:04:11 CEST 2008 - ma@suse.de
+
+- Add ServiceInfo interface to define a set of catalogs (repository 
+  aliases) to be enabled on next refresh.
+- revision 10970
+
+-------------------------------------------------------------------
 Tue Sep  9 11:40:42 CEST 2008 - ma@suse.de
 
 - Fix reading of Traget::targetDistribution.

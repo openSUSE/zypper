@@ -445,11 +445,6 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  Edition e("1.a");
-  DBG << e.copmpare( Edition("1a") ) << endl;
-  DBG << e.copmpare( Edition("1=a") ) << endl;
-  DBG << e.copmpare( Edition("1#$%^&*()_a") ) << endl;
-return 0;
   if ( 1 )
   {
     Measure x( "INIT TARGET" );

@@ -24,7 +24,7 @@ using namespace std;
 using zypp::xml::escape;
 
 ///////////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 {//////////////////////////////////////////////////////////////////////////////
 
 
@@ -44,8 +44,11 @@ namespace zypp
   //
   struct ServiceInfo::Impl : public repo::RepoInfoBase::Impl
   {
+    typedef ServiceInfo::CatalogsToEnable CatalogsToEnable;
+
   public:
     Url url;
+    CatalogsToEnable catalogsToEnable;
 
   public:
     Impl() : repo::RepoInfoBase::Impl() {}
@@ -69,7 +72,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const ServiceInfo ServiceInfo::noService;
-  
+
   ServiceInfo::ServiceInfo() : _pimpl( new Impl() ) {}
 
   ServiceInfo::ServiceInfo(const string & alias)
@@ -84,9 +87,32 @@ namespace zypp
   void ServiceInfo::setUrl( const Url& url ) { _pimpl->url = url; }
 
 
+  bool catalogsToEnableEmpty() const
+  { return _pimpl->catalogsToEnable.empty(); }
+
+  CatalogsToEnable::size_type catalogsToEnableSize() const
+  { return _pimpl->catalogsToEnable.size(); }
+
+  CatalogsToEnable::const_iterator catalogsToEnableBegin() const
+  { return _pimpl->catalogsToEnable.begin(); }
+
+  CatalogsToEnable::const_iterator catalogsToEnableEnd() const
+  { return _pimpl->catalogsToEnable.end(); }
+
+  bool catalogToEnableFind( const std::string & alias_r ) const
+  { return( _pimpl->catalogsToEnable.find( alias_r ) != _pimpl->catalogsToEnable.end() ); }
+
+  void addCatalogToEnable( const std::string & alias_r )
+  { return _pimpl->catalogsToEnable.insert( alias_r ); }
+
+  void delCatalogToEnable( const std::string & alias_r )
+  { return _pimpl->catalogsToEnable.erase( alias_r ); }
+
+
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
-    return RepoInfoBase::dumpAsIniOn(str) << "url = " << url() << endl;
+    return RepoInfoBase::dumpAsIniOn(str)
+        << "url = " << url() << endl;
   }
 
   std::ostream & ServiceInfo::dumpAsXMLOn( std::ostream & str) const
@@ -100,7 +126,7 @@ namespace zypp
       << " url=\"" << escape(url().asString()) << "\""
       << "/>" << endl;
   }
-  
+
   std::ostream & operator<<( std::ostream& str, const ServiceInfo &obj )
   {
     return obj.dumpAsIniOn(str);
