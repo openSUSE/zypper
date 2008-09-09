@@ -2033,7 +2033,7 @@ static void print_service_list(Zypper & zypper,
 static void print_xml_service_list(Zypper & zypper,
                                    const list<RepoInfoBase_Ptr> & services)
 {
-  cout << "<serice-list>" << endl;
+  cout << "<service-list>" << endl;
 
   for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
        it != services.end(); ++it)
