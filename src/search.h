@@ -83,23 +83,15 @@ struct FillSearchTableSolvable
     for_(it, s->availableBegin(), s->availableEnd())
     {
       TableRow row;
-
       zypp::PoolItem pi = *it;
-      if (!s->installedEmpty())
-      {
-        static bool installed;
-        installed = false;
-        for_(instit, s->installedBegin(), s->installedEnd())
-        {
-          if (equalNVRA(*instit->resolvable(), *pi.resolvable()))
-          {
-            installed = true;
-            show_installed = false;
-            break;
-          }
-        }
 
-        if (installed)
+      // installed status
+
+      // patters
+      if (zypp::traits::isPseudoInstalled(s->kind()))
+      {
+        // patches/patterns are installed if satisfied
+        if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied()) 
         {
           // show only not installed
           if (_inst_notinst == false)
@@ -111,23 +103,47 @@ struct FillSearchTableSolvable
           // show only installed
           if (_inst_notinst == true)
             continue;
-          row << "v";
+          row << "";
         }
       }
-      // patches/patterns are installed if satisfied
-      else if (pi->kind() != zypp::ResKind::srcpackage && pi.isSatisfied()) 
+      else // packages/products
       {
-        // show only not installed
-        if (_inst_notinst == false)
-          continue;
-        row << "i";
-      }
-      else
-      {
-        // show only installed
-        if (_inst_notinst == true)
-          continue;
-        row << "";
+        if (s->installedEmpty())
+        {
+          // show only installed
+          if (_inst_notinst == true)
+            continue;
+          row << "";
+        }
+        else
+        {
+          static bool installed;
+          installed = false;
+          for_(instit, s->installedBegin(), s->installedEnd())
+          {
+            if (equalNVRA(*instit->resolvable(), *pi.resolvable()))
+            {
+              installed = true;
+              show_installed = false;
+              break;
+            }
+          }
+  
+          if (installed)
+          {
+            // show only not installed
+            if (_inst_notinst == false)
+              continue;
+            row << "i";
+          }
+          else
+          {
+            // show only installed
+            if (_inst_notinst == true)
+              continue;
+            row << "v";
+          }
+        }
       }
 
       if (_gopts.is_rug_compatible)
