@@ -12,6 +12,7 @@
 #include <ostream>
 #include <iostream>
 
+#include "zypp/base/String.h"
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
@@ -111,8 +112,10 @@ namespace zypp
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
-    return RepoInfoBase::dumpAsIniOn(str)
-        << "url = " << url() << endl;
+    RepoInfoBase::dumpAsIniOn(str) << "url = " << url() << endl;
+    if ( ! catalogsToEnableEmpty() )
+      str << "catalogstoenable = " << str::joinEscaped( catalogsToEnableBegin(), catalogsToEnableEnd() ) << endl;
+    return str;
   }
 
   std::ostream & ServiceInfo::dumpAsXMLOn( std::ostream & str) const

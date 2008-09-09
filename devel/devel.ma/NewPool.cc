@@ -43,6 +43,7 @@
 #include "zypp/sat/detail/PoolImpl.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/PoolQuery.h"
+#include "zypp/ServiceInfo.h"
 
 #include "zypp/parser/ProductConfReader.h"
 
@@ -441,6 +442,21 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
+
+  ServiceInfo s( "STest", Url("dir:///somewhere") );
+  DBG << s << endl;
+  s.addCatalogToEnable( "foo" );
+  s.addCatalogToEnable( "ba a" );
+  s.addCatalogToEnable( "kaa" );
+  DBG << s << endl;
+  s.delCatalogToEnable( "kaa" );
+  DBG << s << endl;
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );

@@ -68,6 +68,15 @@ namespace zypp
             service.setEnabled( str::strToTrue( it->second ) );
           else if ( it->first == "autorefresh" )
             service.setAutorefresh( str::strToTrue( it->second ) );
+          else if ( it->first == "catalogstoenable" )
+          {
+            std::vector<std::string> aliases;
+            str::splitEscaped( it->second, std::back_inserter(aliases) );
+            for_( ait, aliases.begin(), aliases.end() )
+            {
+              service.addCatalogToEnable( *ait );
+            }
+          }
           else
             ERR << "Unknown attribute " << it->second << " ignored" << endl;
         }

@@ -12,10 +12,13 @@
 #ifndef ZYPP_BASE_STRING_H
 #define ZYPP_BASE_STRING_H
 
-#include <iosfwd>
-#include <string>
-#include <string.h>
+#include <cstring>
 
+#include <iosfwd>
+#include <vector>
+#include <string>
+
+#include "zypp/base/Easy.h"
 #include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -342,6 +345,9 @@ namespace zypp
      * Any sequence of characters in \a sepchars_r is treated as
      * delimiter if not inside "" or "" or escaped by \, but not \\.
      * The words are passed to OutputIterator \a result_r.
+     *
+     * \see \ref splitEscaped
+     *
      * \code
      * std::vector<std::string> words;
      * str::splitEscaped( "some line", std::back_inserter(words) )
@@ -515,10 +521,54 @@ namespace zypp
       std::string join( const _Container & cont_r,
                         const C_Str & sep_r = " " )
       { return join( cont_r.begin(), cont_r.end(), sep_r ); }
+
+    /** Join strings using separator \a sep_r, quoting or escaping the values.
+     * Separator defaults to BLANK. Use \ref splitEscaped to restore the
+     * values.
+     */
+    template <class _Iterator>
+      std::string joinEscaped( _Iterator begin, _Iterator end,
+                               const char sep_r = ' ' )
+      {
+        std::vector<char> buf;
+        for ( _Iterator iter = begin; iter != end; ++ iter )
+        {
+          if ( iter != begin )
+            buf.push_back( sep_r );
+
+          if ( iter->empty() )
+          {
+            // empty string goes ""
+            buf.push_back( '"' );
+            buf.push_back( '"' );
+          }
+          else
+          {
+            std::string toadd( asString(*iter) );
+            for_( ch, toadd.begin(), toadd.end() )
+            {
+              switch ( *ch )
+              {
+                case '"':
+                case '\'':
+                case '\\':
+                  buf.push_back( '\\' );
+                  buf.push_back( *ch );
+                  break;
+                default:
+                  if ( *ch == sep_r )
+                    buf.push_back( '\\' );
+                  buf.push_back( *ch );
+              }
+            }
+          }
+        }
+        return std::string( buf.begin(), buf.end() );
+      }
+
     //@}
-
-
     ///////////////////////////////////////////////////////////////////
+
     /** \name Case conversion. */
     //@{
     /** Return lowercase version of \a s
