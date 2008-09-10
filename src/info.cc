@@ -21,6 +21,7 @@
 #include "misc.h"
 #include "Table.h"
 #include "utils/richtext.h"
+#include "utils/misc.h" // for kind_to_string_localized and string_patch_status
 #include "search.h"
 
 #include "info.h"

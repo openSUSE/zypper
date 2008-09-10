@@ -11,14 +11,15 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-#include "zypp/Pathname.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/parser/xml/XmlEscape.h"
-#include "zypp/Capability.h"
+
+#include "zypp/PoolItem.h"
 
 #include "main.h"
+#include "Zypper.h"
 
 #include "utils/misc.h"
 
@@ -78,7 +79,7 @@ bool is_changeable_media(const zypp::Url & url)
 
 // ----------------------------------------------------------------------------
 
-string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long count)
+string kind_to_string_localized(const zypp::ResKind & kind, unsigned long count)
 {
   if (kind == ResKind::package)
     return _PL("package", "packages", count);
@@ -92,6 +93,27 @@ string kind_to_string_localized(const Resolvable::Kind & kind, unsigned long cou
     return _PL("srcpackage", "srcpackages", count);
   // default
   return _PL("resolvable", "resolvables", count);
+}
+
+// ----------------------------------------------------------------------------
+
+string string_patch_status(const PoolItem & pi)
+{
+  // make sure this will not happen
+  if (pi.isUndetermined())
+    return _("Unknown");
+
+  if (pi.isRelevant())
+  {
+    if (pi.isSatisfied())
+      return _("Installed"); //! \todo make this "Applied" instead?
+    if (pi.isBroken())
+      return _("Needed");
+    // can this ever happen?
+    return "";
+  }
+
+  return _("Not Applicable"); //! \todo make this "Not Needed" after 11.0
 }
 
 // ----------------------------------------------------------------------------

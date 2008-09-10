@@ -10,14 +10,23 @@
 
 #include <ostream>
 #include <string>
+#include <set>
 
 #include "zypp/Url.h"
-#include "zypp/Resolvable.h"
 #include "zypp/Pathname.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/ServiceInfo.h"
 
-#include "Zypper.h"
+#include "zypp/Capability.h"
+#include "zypp/ResKind.h"
+#include "zypp/RepoInfo.h"
+
+class Zypper;
+
+namespace zypp
+{
+  class PoolItem;
+  class Resolvable;
+}
+
 
 typedef std::set<zypp::ResKind> ResKindSet;
 
@@ -26,7 +35,9 @@ std::string readline_getline();
 bool is_changeable_media(const zypp::Url & url);
 
 std::string kind_to_string_localized(
-    const zypp::Resolvable::Kind & kind, unsigned long count);
+    const zypp::ResKind & kind, unsigned long count);
+
+std::string string_patch_status(const zypp::PoolItem & pi);
 
 bool equalNVRA(const zypp::Resolvable & lhs, const zypp::Resolvable & rhs);
 
@@ -74,19 +85,16 @@ zypp::Capability safe_parse_cap (Zypper & zypper,
 class RepoInfoAliasComparator
 {
   public: bool operator()(const zypp::RepoInfo & a, const zypp::RepoInfo & b)
-  {
-    return a.alias() < b.alias();
-  }
+  { return a.alias() < b.alias(); }
 };
+
 
 // comparator for Service set
 class ServiceAliasComparator
 {
   public: bool operator()(const zypp::repo::RepoInfoBase_Ptr & a,
                           const zypp::repo::RepoInfoBase_Ptr & b)
-  {
-    return a->alias() < b->alias();
-  }
+  { return a->alias() < b->alias(); }
 };
 
 
@@ -95,7 +103,7 @@ class ServiceAliasComparator
  */
 inline bool isRepoFile(const std::string& name)
 {
-  return name.find(".repo") != name.npos ;
+  return name.find(".repo") != name.npos;
 }
 
 #endif /*ZYPPER_UTILS_H*/
