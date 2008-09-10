@@ -1,4 +1,4 @@
-# !! still WORK IN PROGRESS (untill 11.0 freeze) !!
+# !! still WORK IN PROGRESS (untill 11.1 freeze) !!
 # namespace zypper
 
 start = stream-element
@@ -13,6 +13,7 @@ stream-element =
       update-status-element* |   # for zypper list-updates
       install-summary-element* | # for zypper install/remove/update
       repo-list-element? |       # for zypper repos
+      service-list-element? |
       selectable-list-element? | # for zypper search
       selectable-info-element? | # for zypper info
 
@@ -136,19 +137,37 @@ install-summary-element =
     )*
   }
 
+
+repo-element =
+  element repo {
+    attribute alias { xsd:string },
+    attribute name { xsd:string }?,
+    attribute type { xsd:string }?,
+    attribute enabled { xsd:boolean }?,
+    attribute autorefresh { xsd:boolean }?,
+    attribute gpgcheck { xsd:boolean }?,
+    attribute gpgkey { xsd:anyURI }?,
+    attribute mirrorlist { xsd:anyURI }?,
+    element url { xsd:anyURI }+
+  }
+
 repo-list-element =
   element repo-list {
-    element repo {
+    repo-element*
+  }
+
+service-list-element =
+  element service-list {
+    element service {
       attribute alias { xsd:string },
       attribute name { xsd:string }?,
-      attribute type { xsd:string }?,
       attribute enabled { xsd:boolean }?,
       attribute autorefresh { xsd:boolean }?,
-      attribute gpgcheck { xsd:boolean }?,
-      attribute gpgkey { xsd:anyURI }?,
-      attribute mirrorlist { xsd:anyURI }?,
-      element url { xsd:anyURI }+
-    }*
+      attribute url { xsd:anyURI },
+      attribute type { xsd:string }?,
+      repo-element*
+    }*,
+    repo-element*
   }
 
 selectable-list-element =
