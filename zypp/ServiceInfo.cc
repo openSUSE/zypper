@@ -118,17 +118,27 @@ namespace zypp
     return str;
   }
 
-  std::ostream & ServiceInfo::dumpAsXMLOn( std::ostream & str) const
+  std::ostream & ServiceInfo::dumpAsXMLOn(std::ostream & str) const
+  { return dumpAsXMLOn(str, ""); }
+
+  ostream & ServiceInfo::dumpAsXMLOn( ostream & str, const string & content) const
   {
-    return str
+    str
       << "<service"
       << " alias=\"" << escape(alias()) << "\""
       << " name=\"" << escape(name()) << "\""
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
-      << " url=\"" << escape(url().asString()) << "\""
-      << "/>" << endl;
+      << " url=\"" << escape(url().asString()) << "\"";
+    
+    if (content.empty())
+      str << "/>" << endl;
+    else
+      str << ">" << endl << content << "</service>" << endl;
+
+    return str;
   }
+
 
   std::ostream & operator<<( std::ostream& str, const ServiceInfo &obj )
   {

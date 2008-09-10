@@ -323,8 +323,18 @@ namespace zypp
 
     /**
      * Write an XML representation of this RepoInfo object.
+     */ 
+    virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
+
+    /**
+     * Write an XML representation of this RepoInfo object.
+     * 
+     * \param str
+     * \param content this argument is ignored (used in other classed derived
+     *                from RepoInfoBase.
      */
-    virtual std::ostream & dumpAsXMLOn( std::ostream & str) const;
+    virtual std::ostream & dumpAsXMLOn(
+        std::ostream & str, const std::string & content) const;
 
     class Impl;
   private:

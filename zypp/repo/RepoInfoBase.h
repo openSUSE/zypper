@@ -138,7 +138,13 @@ namespace zypp
        * Write an XML representation of this object. Implement in
        * derived classes.
        */
-      virtual std::ostream & dumpAsXMLOn( std::ostream & str) const;
+      virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
+      
+      /**
+       * Write an XML representation of this object with content (if available).
+       */
+      virtual std::ostream & dumpAsXMLOn(
+          std::ostream & str, const std::string & content) const;
 
       class Impl;
     private:
