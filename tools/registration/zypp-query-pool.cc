@@ -63,13 +63,6 @@ public:
       if (!item->edition().release().empty())
         cout << "-" << item->edition().release();
       cout << "|" << item->arch();
-
-      if ( isKind<Product>( item.resolvable() ) )
-        {
-          Product::constPtr p( asKind<Product>( item ) );
-          cout << "|" << p->distributionName();
-          cout << "|" << p->distributionEdition();
-        }
       cout << endl;
     }
     return true;

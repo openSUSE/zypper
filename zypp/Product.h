@@ -98,23 +98,6 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
-
-    /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>
-     * \deprecated use summary.
-     */
-    std::string longName( const Locale & lang_r = Locale() ) const ZYPP_DEPRECATED
-    { return summary( lang_r ); }
-
-    /** Vendor specific distribution id.
-     * \deprecated replaced by ResObject::distribution
-     */
-    std::string distributionName() const ZYPP_DEPRECATED;
-
-    /** Vendor specific distribution version.
-     * \deprecated replaced by ResObject::distribution
-     */
-    Edition distributionEdition() const ZYPP_DEPRECATED;
-
   protected:
     friend Ptr make<Self>( const sat::Solvable & solvable_r );
     /** Ctor */

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 10 17:31:41 CEST 2008 - ma@suse.de
+
+- Remove obsolete product attributes.
+- Store less packages in /var/lib/zypp/SoftLocks (bnc #418050)
+- revision 11001
+
+-------------------------------------------------------------------
 Wed Sep 10 16:40:00 CEST 2008 - ma@suse.de
 
 - Provide product::updaterepoKey: Update repository indicator string.

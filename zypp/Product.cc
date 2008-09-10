@@ -181,13 +181,6 @@ namespace zypp
     return ret;
   }
 
-  std::string Product::distributionName() const
-  { return lookupStrAttribute( sat::SolvAttr::productDistproduct ); }
-
-  Edition Product::distributionEdition() const
-  { return Edition( lookupStrAttribute( sat::SolvAttr::productDistversion ) ); }
-
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
