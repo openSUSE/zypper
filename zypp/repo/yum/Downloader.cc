@@ -66,7 +66,7 @@ loc_with_path_prefix(const OnMediaLocation & loc,
 bool Downloader::patches_Callback( const OnMediaLocation &loc,
                                    const string &id )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path())); 
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path()));
   MIL << id << " : " << loc_with_path << endl;
   this->enqueueDigested(loc_with_path);
   return true;
@@ -76,7 +76,7 @@ bool Downloader::patches_Callback( const OnMediaLocation &loc,
 bool Downloader::repomd_Callback( const OnMediaLocation &loc,
                                   const ResourceType &dtype )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path())); 
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path()));
   MIL << dtype << " : " << loc_with_path << endl;
 
   //! \todo do this through a ZConfig call so that it is always in sync with parser
@@ -118,15 +118,15 @@ void Downloader::download( MediaSetAccess &media,
   Pathname sigpath =  _info.path() + "/repodata/repomd.xml.asc";
 
   _media_ptr = (&media);
-  
+
   ProgressData progress;
   progress.sendTo(progressrcv);
   progress.toMin();
 
   //downloadMediaInfo( dest_dir, _media );
-  
+
   _dest_dir = dest_dir;
-  
+
   SignatureFileChecker sigchecker(_info.name());
 
   if ( _media_ptr->doesFileExist(sigpath) )
@@ -136,7 +136,7 @@ void Downloader::download( MediaSetAccess &media,
      this->reset();
      sigchecker = SignatureFileChecker(dest_dir + sigpath, _info.name());
   }
- 
+
 
   if ( _media_ptr->doesFileExist(keypath) )
   {
@@ -146,13 +146,18 @@ void Downloader::download( MediaSetAccess &media,
     sigchecker.addPublicKey(dest_dir + keypath);
   }
 
- 
+
   this->start( dest_dir, *_media_ptr );
 
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());
 
-  this->enqueue( OnMediaLocation(repomdpath,1), sigchecker );
+  if ( ! _info.gpgCheck() )
+  {
+    WAR << "Signature checking disabled in config of repository " << _info.alias() << endl;
+  }
+  this->enqueue( OnMediaLocation(repomdpath,1),
+                 _info.gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
   this->start( dest_dir, *_media_ptr);
 
   if ( ! progress.tick() )

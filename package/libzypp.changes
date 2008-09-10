@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 10 18:23:52 CEST 2008 - ma@suse.de
+
+- Follow gpgcheck tag in .repo file and do no check if disabled.
+- revision 11010
+- version 5.9.0 (8)
+
+-------------------------------------------------------------------
 Wed Sep 10 17:54:20 CEST 2008 - jkupec@suse.cz
 
 - added dumpAsXMLOn(stream,string) to ServiceInfo to print services

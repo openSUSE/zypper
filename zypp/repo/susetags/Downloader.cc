@@ -74,8 +74,12 @@ void Downloader::download( MediaSetAccess &media,
     sigchecker.addPublicKey(dest_dir + key);
   }
 
-
-  this->enqueue( OnMediaLocation( _info.path() + "/content", 1 ), sigchecker );
+  if ( ! _info.gpgCheck() )
+  {
+    WAR << "Signature checking disabled in config of repository " << _info.alias() << endl;
+  }
+  this->enqueue( OnMediaLocation( _info.path() + "/content", 1 ),
+                 _info.gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
   this->start( dest_dir, media );
   this->reset();
 
