@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 10 16:40:00 CEST 2008 - ma@suse.de
+
+- Provide product::updaterepoKey: Update repository indicator string.
+- revision 11000
+
+-------------------------------------------------------------------
 Tue Sep  9 17:33:03 CEST 2008 - dmacvicar@suse.de
 
 - provide context about the repository (name/alias) if available when

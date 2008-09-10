@@ -97,7 +97,6 @@ namespace sat
   const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
 
   // product
-  const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
   const SolvAttr SolvAttr::productShortlabel   ( PRODUCT_SHORTLABEL );
   const SolvAttr SolvAttr::productDistproduct  ( PRODUCT_DISTPRODUCT );
   const SolvAttr SolvAttr::productDistversion  ( PRODUCT_DISTVERSION );
@@ -108,6 +107,8 @@ namespace sat
   const SolvAttr SolvAttr::productOptionalurls ( PRODUCT_OPTIONALURLS );
   const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
   const SolvAttr SolvAttr::productFlavor       ( PRODUCT_FLAVOR );
+  const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
+  const SolvAttr SolvAttr::productUpdaterepoKey( PRODUCT_UPDATEREPOKEY );
 
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );

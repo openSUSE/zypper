@@ -66,6 +66,13 @@ namespace zypp
     */
     std::string type() const;
 
+    /** Update repository indicator string.
+     * Repositories providing updates/patches for this product
+     * should (somehow) provide this string. So we are able to
+     * detect them.
+     */
+    std::string updaterepoKey() const;
+
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 
@@ -90,6 +97,7 @@ namespace zypp
 
     /** The product flags */
     std::list<std::string> flags() const;
+
 
     /** Translated long name like <tt>SUSE Linux Enterprise Server 10</tt>
      * \deprecated use summary.

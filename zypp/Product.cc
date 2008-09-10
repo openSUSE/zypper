@@ -88,13 +88,14 @@ namespace zypp
       return sat::Solvable::noSolvable;
     }
 
-
     // if there is productReferences defined, we expect
-    // a matching package within the same repo.
+    // a matching package within the same repo. And of
+    // same arch.
     sat::WhatProvides providers( identCap );
     for_( it, providers.begin(), providers.end() )
     {
-      if ( it->repository() == repository() )
+      if ( it->repository() == repository()
+           && it->arch() == arch() )
         return *it;
     }
 
@@ -139,6 +140,9 @@ namespace zypp
 
   std::string Product::type() const
   { return lookupStrAttribute( sat::SolvAttr::productType ); }
+
+  std::string Product::updaterepoKey() const
+  { return lookupStrAttribute( sat::SolvAttr::productUpdaterepoKey ); }
 
   Url Product::releaseNotesUrl() const
   {

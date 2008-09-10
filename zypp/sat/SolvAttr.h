@@ -122,7 +122,6 @@ namespace sat
 
       /** \name product */
       //@{
-      static const SolvAttr productReferences; // the package providing the metadata
       static const SolvAttr productShortlabel;
       static const SolvAttr productDistproduct;
       static const SolvAttr productDistversion;
@@ -133,6 +132,8 @@ namespace sat
       static const SolvAttr productOptionalurls;
       static const SolvAttr productFlags;
       static const SolvAttr productFlavor;
+      static const SolvAttr productReferences; // the package providing the metadata
+      static const SolvAttr productUpdaterepoKey;
       //@}
 
       /** \name repository */

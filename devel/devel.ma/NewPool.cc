@@ -443,20 +443,19 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
+#if 0
   ServiceInfo s( "STest", Url("dir:///somewhere") );
   DBG << s << endl;
   s.addCatalogToEnable( "foo" );
   s.addCatalogToEnable( "ba a" );
   s.addCatalogToEnable( "kaa" );
   DBG << s << endl;
-  s.delCatalogToEnable( "kaa" );
-  DBG << s << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
-
+#endif
 
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
@@ -474,7 +473,7 @@ try {
     }
   }
 
-  if ( 1 )
+  if ( 0 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
