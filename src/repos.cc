@@ -17,6 +17,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Flags.h"
 
 #include "zypp/RepoManager.h"
 #include "zypp/repo/RepoException.h"
@@ -1907,17 +1908,121 @@ void get_services( Zypper & zypper,
   }
 }
 
+// ---------------------------------------------------------------------------
+
+struct RepoCollector
+{
+  bool collect( const RepoInfo &repo )
+  {
+    repos.push_back(repo);
+    return true;
+  }
+
+  RepoInfoList repos;
+};
+
+// ---------------------------------------------------------------------------
+
+enum ServiceListFlagsBits
+{
+  SF_SHOW_ALL        = 7,
+  SF_SHOW_URI        = 1,
+  SF_SHOW_PRIO       = 1 << 1,
+  SF_SHOW_WITH_REPOS = 1 << 2,
+  SF_SERVICE_REPO    = 1 << 15  
+};
+
+ZYPP_DECLARE_FLAGS(ServiceListFlags,ServiceListFlagsBits);
+ZYPP_DECLARE_OPERATORS_FOR_FLAGS(ServiceListFlags);
+
+static void service_list_tr(
+    Zypper & zypper,
+    Table & tbl,
+    const RepoInfoBase_Ptr & srv,
+    unsigned int reponumber,
+    const ServiceListFlags & flags)
+{
+  ServiceInfo_Ptr service;
+  RepoInfo_Ptr repo;
+
+  TableRow tr(8);
+
+  // number
+  if (flags & SF_SERVICE_REPO)
+    tr << "";
+  else
+    tr << str::numstring (reponumber);
+
+  // alias
+  tr << srv->alias();
+  // name
+  tr << srv->name();
+  // enabled?
+  tr << (srv->enabled() ? _("Yes") : _("No"));
+  // autorefresh?
+  tr << (srv->autorefresh() ? _("Yes") : _("No"));
+
+  service = dynamic_pointer_cast<ServiceInfo>(srv);
+  if (!service)
+    repo = dynamic_pointer_cast<RepoInfo>(srv);
+
+  // priority
+  if (flags & SF_SHOW_PRIO)
+  {
+    if (service)
+      tr << "";
+    else
+      tr << str::numstring (repo->priority());
+  }
+
+  // type
+  if (service)
+    tr << "ris";
+  else
+    tr << repo->type().asString();
+
+  // url
+  if (flags & SF_SHOW_URI)
+  {
+    if (service)
+      tr << service->url().asString();
+    else
+      tr << repo->baseUrlsBegin()->asString();
+  }
+
+  tbl << tr;
+}
+
+// ---------------------------------------------------------------------------
+
 static void print_service_list(Zypper & zypper,
                                const list<RepoInfoBase_Ptr> & services)
 {
   Table tbl;
-  bool all = zypper.cOpts().count("details");
-  bool showuri = zypper.cOpts().count("uri") || zypper.cOpts().count("url") || zypper.cOpts().count("sort-by-uri");
-  bool showprio = zypper.cOpts().count("priority") || zypper.cOpts().count("sort-by-priority");
+
+  // flags
+
+  ServiceListFlags flags(0);
+  if (zypper.cOpts().count("details"))
+    flags |= SF_SHOW_ALL;
+  else
+  {
+    if (zypper.cOpts().count("uri")
+        || zypper.cOpts().count("url")
+        || zypper.cOpts().count("sort-by-uri"))
+      flags |= SF_SHOW_URI;
+    if (zypper.cOpts().count("priority")
+        || zypper.cOpts().count("sort-by-priority"))
+      flags |= SF_SHOW_PRIO;
+  }
+
+  bool with_repos = zypper.cOpts().count("with-repos");
+  //! \todo string type = zypper.cOpts().count("type");
 
   // header
   TableHeader th;
-  // fixed 'zypper repos' columns
+
+  // fixed 'zypper services' columns
   th << "#"
      << _("Alias")
      << _("Name")
@@ -1925,68 +2030,43 @@ static void print_service_list(Zypper & zypper,
      // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
      << _("Refresh");
   // optional columns
-  if (all || showprio)
+  if (flags & SF_SHOW_PRIO)
     // translators: repository priority (in zypper repos -p or -d)
     th << _("Priority");
-  if (all)
-    th << _("Type");
-  if (all || showuri)
+  th << _("Type");
+  if (flags & SF_SHOW_URI)
     th << _("URI");
   tbl << th;
 
   int i = 1;
 
-  ServiceInfo_Ptr service;
-  RepoInfo_Ptr repo;
   for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
        it != services.end(); ++it)
   {
-    RepoInfoBase_Ptr base = *it;
+    service_list_tr(zypper, tbl, *it, i, flags);
 
-    TableRow tr(all ? 8 : showprio || showuri ? 7 : 6);
-
-    // number
-    tr << str::numstring (i);
-    // alias
-    tr << base->alias();
-    // name
-    tr << base->name();
-    // enabled?
-    tr << (base->enabled() ? _("Yes") : _("No"));
-    // autorefresh?
-    tr << (base->autorefresh() ? _("Yes") : _("No"));
-
-    service = dynamic_pointer_cast<ServiceInfo>(base);
-    if (!service)
-      repo = dynamic_pointer_cast<RepoInfo>(base);
-
-    // priority
-    if (all || showprio)
+    // print also repos belonging to the service
+    if (with_repos && dynamic_pointer_cast<ServiceInfo>(*it))
     {
-      if (service)
-        tr << "";
-      else
-        tr << str::numstring (repo->priority());
-    }
-    // type
-    if (all)
-    {
-      if (service)
-        tr << "NU"; //! \todo check
-      else
-        tr << repo->type().asString();
-    }
-    // url
-    if (all || showuri)
-    {
-      if (service)
-        tr << service->url().asString();
-      else
-        tr << repo->baseUrlsBegin()->asString();
+      // indicate we repos of the current service
+      flags |= SF_SERVICE_REPO;
+
+      RepoCollector collector;
+      RepoManager rm(zypper.globalOpts().rm_options);
+
+      rm.getRepositoriesInService((*it)->alias(),
+          boost::make_function_output_iterator(
+              bind(&RepoCollector::collect, &collector, _1)));
+
+      for_(repoit, collector.repos.begin(), collector.repos.end())
+      {
+        RepoInfoBase_Ptr ptr(new RepoInfo(*repoit));
+        service_list_tr(zypper, tbl, ptr, i, flags);
+      }
+      flags &= ~SF_SERVICE_REPO;
     }
 
-    tbl << tr;
-    i++;
+    ++i;
   }
 
   if (tbl.empty())
@@ -1998,23 +2078,12 @@ static void print_service_list(Zypper & zypper,
     // sort
     if (zypper.cOpts().count("sort-by-uri"))
     {
-      cout << "will sort by uri: ";
-      if (all)
-      {
+      if ((flags & SF_SHOW_ALL) == SF_SHOW_ALL)
         tbl.sort(7);
-        cout << 7;
-      }
-      else if (showprio)
-      {
-        tbl.sort(6);
-        cout << 6;
-      }
+      else if (flags & SF_SHOW_PRIO)
+        tbl.sort(7);
       else
-      {
-        tbl.sort(5);
-        cout << 5;
-      }
-      cout << endl;
+        tbl.sort(6);
     }
     else if (zypper.cOpts().count("sort-by-alias"))
       tbl.sort(1);
@@ -2033,11 +2102,33 @@ static void print_service_list(Zypper & zypper,
 static void print_xml_service_list(Zypper & zypper,
                                    const list<RepoInfoBase_Ptr> & services)
 {
+  //string type = 
+  
   cout << "<service-list>" << endl;
+  
 
+  ServiceInfo_Ptr s_ptr;
   for (list<RepoInfoBase_Ptr>::const_iterator it = services.begin();
        it != services.end(); ++it)
+  {
+    s_ptr = dynamic_pointer_cast<ServiceInfo>(*it);
+    // print also service's repos
+    if (s_ptr)
+    {
+      RepoCollector collector;
+      RepoManager rm(zypper.globalOpts().rm_options);
+      rm.getRepositoriesInService((*it)->alias(),
+          boost::make_function_output_iterator(
+              bind(&RepoCollector::collect, &collector, _1)));
+      ostringstream sout;
+      for_(repoit, collector.repos.begin(), collector.repos.end())
+        repoit->dumpAsXMLOn(sout);
+      (*it)->dumpAsXMLOn(cout, sout.str());
+      continue;
+    }
+
     (*it)->dumpAsXMLOn(cout);
+  }
 
   cout << "</service-list>" << endl;
 }

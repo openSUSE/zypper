@@ -1031,13 +1031,18 @@ void Zypper::processCommandOptions()
 
   case ZypperCommand::LIST_SERVICES_e:
   {
-    static struct option options[] = {
+    static struct option options[] =
+    {
       {"help", no_argument, 0, 'h'},
       {"uri", no_argument, 0, 'u'},
       {"url", no_argument, 0, 'u'},
+      {"priority", no_argument, 0, 'p'},
       {"details", no_argument, 0, 'd'},
+//      {"type", required_argument, 0, 't'},
+      {"with-repos", no_argument, 0, 'r'},
       {"sort-by-uri", no_argument, 0, 'U'},
       {"sort-by-name", no_argument, 0, 'N'},
+      {"sort-by-priority", no_argument, 0, 'P'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1048,7 +1053,11 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-u, --uri                 Show also base URI of repositories.\n"
+      "-p, --priority            Show also repository priority.\n"
       "-d, --details             Show more information like URI, priority, type.\n"
+//      "-t, --type                List only services of specified type.\n"
+      "-r, --with-repos          Show also repositories belonging to the services.\n"
+      "-P, --sort-by-priority    Sort the list by repository priority.\n"
       "-U, --sort-by-uri         Sort the list by URI.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
     );

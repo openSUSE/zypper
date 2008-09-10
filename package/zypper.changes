@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 10 17:57:09 CEST 2008 - jkupec@suse.cz
+
+- services --with-repos added (also XML)
+- r11006
+
+-------------------------------------------------------------------
 Tue Sep  9 16:29:03 CEST 2008 - jkupec@suse.cz
 
 - adapted to new installed status handling of products
