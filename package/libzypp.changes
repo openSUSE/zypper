@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 10 17:54:20 CEST 2008 - jkupec@suse.cz
+
+- added dumpAsXMLOn(stream,string) to ServiceInfo to print services
+  with content (repos)
+- revision 11004
+
+-------------------------------------------------------------------
 Wed Sep 10 17:31:41 CEST 2008 - ma@suse.de
 
 - Remove obsolete product attributes.
