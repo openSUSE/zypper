@@ -70,13 +70,22 @@ namespace zypp
             service.setAutorefresh( str::strToTrue( it->second ) );
           else if ( it->first == "type" )
             service.setType( repo::ServiceType(it->second) );
-          else if ( it->first == "catalogstoenable" )
+          else if ( it->first == "repostoenable" )
           {
             std::vector<std::string> aliases;
             str::splitEscaped( it->second, std::back_inserter(aliases) );
             for_( ait, aliases.begin(), aliases.end() )
             {
-              service.addCatalogToEnable( *ait );
+              service.addRepoToEnable( *ait );
+            }
+          }
+          else if ( it->first == "repostodisable" )
+          {
+            std::vector<std::string> aliases;
+            str::splitEscaped( it->second, std::back_inserter(aliases) );
+            for_( ait, aliases.begin(), aliases.end() )
+            {
+              service.addRepoToDisable( *ait );
             }
           }
           else

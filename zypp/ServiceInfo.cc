@@ -45,14 +45,14 @@ namespace zypp
   //
   struct ServiceInfo::Impl : public repo::RepoInfoBase::Impl
   {
-    typedef ServiceInfo::CatalogsToEnable CatalogsToEnable;
-    typedef ServiceInfo::CatalogsToDisable CatalogsToDisable;
+    typedef ServiceInfo::ReposToEnable  ReposToEnable;
+    typedef ServiceInfo::ReposToDisable ReposToDisable;
 
   public:
     Url url;
     repo::ServiceType type;
-    CatalogsToEnable  catalogsToEnable;
-    CatalogsToDisable catalogsToDisable;
+    ReposToEnable  reposToEnable;
+    ReposToDisable reposToDisable;
 
   public:
     Impl()
@@ -121,48 +121,48 @@ namespace zypp
   void ServiceInfo::setProbedType( const repo::ServiceType &t ) const
   { _pimpl->setProbedType( t ); }
 
-  bool ServiceInfo::catalogsToEnableEmpty() const
-  { return _pimpl->catalogsToEnable.empty(); }
+  bool ServiceInfo::reposToEnableEmpty() const
+  { return _pimpl->reposToEnable.empty(); }
 
-  ServiceInfo::CatalogsToEnable::size_type ServiceInfo::catalogsToEnableSize() const
-  { return _pimpl->catalogsToEnable.size(); }
+  ServiceInfo::ReposToEnable::size_type ServiceInfo::reposToEnableSize() const
+  { return _pimpl->reposToEnable.size(); }
 
-  ServiceInfo::CatalogsToEnable::const_iterator ServiceInfo::catalogsToEnableBegin() const
-  { return _pimpl->catalogsToEnable.begin(); }
+  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableBegin() const
+  { return _pimpl->reposToEnable.begin(); }
 
-  ServiceInfo::CatalogsToEnable::const_iterator ServiceInfo::catalogsToEnableEnd() const
-  { return _pimpl->catalogsToEnable.end(); }
+  ServiceInfo::ReposToEnable::const_iterator ServiceInfo::reposToEnableEnd() const
+  { return _pimpl->reposToEnable.end(); }
 
-  bool ServiceInfo::catalogToEnableFind( const std::string & alias_r ) const
-  { return( _pimpl->catalogsToEnable.find( alias_r ) != _pimpl->catalogsToEnable.end() ); }
+  bool ServiceInfo::repoToEnableFind( const std::string & alias_r ) const
+  { return( _pimpl->reposToEnable.find( alias_r ) != _pimpl->reposToEnable.end() ); }
 
-  void ServiceInfo::addCatalogToEnable( const std::string & alias_r )
-  { _pimpl->catalogsToEnable.insert( alias_r ); }
+  void ServiceInfo::addRepoToEnable( const std::string & alias_r )
+  { _pimpl->reposToEnable.insert( alias_r ); }
 
-  void ServiceInfo::delCatalogToEnable( const std::string & alias_r )
-  { _pimpl->catalogsToEnable.erase( alias_r ); }
+  void ServiceInfo::delRepoToEnable( const std::string & alias_r )
+  { _pimpl->reposToEnable.erase( alias_r ); }
 
 
-  bool ServiceInfo::catalogsToDisableEmpty() const
-  { return _pimpl->catalogsToDisable.empty(); }
+  bool ServiceInfo::reposToDisableEmpty() const
+  { return _pimpl->reposToDisable.empty(); }
 
-  ServiceInfo::CatalogsToDisable::size_type ServiceInfo::catalogsToDisableSize() const
-  { return _pimpl->catalogsToDisable.size(); }
+  ServiceInfo::ReposToDisable::size_type ServiceInfo::reposToDisableSize() const
+  { return _pimpl->reposToDisable.size(); }
 
-  ServiceInfo::CatalogsToDisable::const_iterator ServiceInfo::catalogsToDisableBegin() const
-  { return _pimpl->catalogsToDisable.begin(); }
+  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableBegin() const
+  { return _pimpl->reposToDisable.begin(); }
 
-  ServiceInfo::CatalogsToDisable::const_iterator ServiceInfo::catalogsToDisableEnd() const
-  { return _pimpl->catalogsToDisable.end(); }
+  ServiceInfo::ReposToDisable::const_iterator ServiceInfo::reposToDisableEnd() const
+  { return _pimpl->reposToDisable.end(); }
 
-  bool ServiceInfo::catalogToDisableFind( const std::string & alias_r ) const
-  { return( _pimpl->catalogsToDisable.find( alias_r ) != _pimpl->catalogsToDisable.end() ); }
+  bool ServiceInfo::repoToDisableFind( const std::string & alias_r ) const
+  { return( _pimpl->reposToDisable.find( alias_r ) != _pimpl->reposToDisable.end() ); }
 
-  void ServiceInfo::addCatalogToDisable( const std::string & alias_r )
-  { _pimpl->catalogsToDisable.insert( alias_r ); }
+  void ServiceInfo::addRepoToDisable( const std::string & alias_r )
+  { _pimpl->reposToDisable.insert( alias_r ); }
 
-  void ServiceInfo::delCatalogToDisable( const std::string & alias_r )
-  { _pimpl->catalogsToDisable.erase( alias_r ); }
+  void ServiceInfo::delRepoToDisable( const std::string & alias_r )
+  { _pimpl->reposToDisable.erase( alias_r ); }
 
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
@@ -171,10 +171,10 @@ namespace zypp
       << "url = " << url() << endl
       << "type = " << type() << endl;
 
-    if ( ! catalogsToEnableEmpty() )
-      str << "catalogstoenable = " << str::joinEscaped( catalogsToEnableBegin(), catalogsToEnableEnd() ) << endl;
-    if ( ! catalogsToDisableEmpty() )
-      str << "catalogstodisable = " << str::joinEscaped( catalogsToDisableBegin(), catalogsToDisableEnd() ) << endl;
+    if ( ! reposToEnableEmpty() )
+      str << "repostoenable = " << str::joinEscaped( reposToEnableBegin(), reposToEnableEnd() ) << endl;
+    if ( ! reposToDisableEmpty() )
+      str << "repostodisable = " << str::joinEscaped( reposToDisableBegin(), reposToDisableEnd() ) << endl;
     return str;
   }
 

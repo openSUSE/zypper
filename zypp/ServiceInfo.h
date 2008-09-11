@@ -88,49 +88,49 @@ namespace zypp
     void setProbedType( const repo::ServiceType & t ) const;
 
 
-    /** \name Set of catalogs (repository aliases) to enable on next refresh.
+    /** \name Set of repos (repository aliases) to enable on next refresh.
      *
      * Per default new repositories are created in disabled state. But repositories
      * mentioned here will be created in enabled state on the next refresh.
      * Afterwards they get removed from the list.
      */
     //@{
-    /** Container of catalogs. */
-    typedef std::set<std::string>    CatalogsToEnable;
-    bool                             catalogsToEnableEmpty() const;
-    CatalogsToEnable::size_type      catalogsToEnableSize() const;
-    CatalogsToEnable::const_iterator catalogsToEnableBegin() const;
-    CatalogsToEnable::const_iterator catalogsToEnableEnd() const;
+    /** Container of repos. */
+    typedef std::set<std::string> ReposToEnable;
+    bool                          reposToEnableEmpty() const;
+    ReposToEnable::size_type      reposToEnableSize() const;
+    ReposToEnable::const_iterator reposToEnableBegin() const;
+    ReposToEnable::const_iterator reposToEnableEnd() const;
 
-    /** Wheter \c alias_r is mentioned in CatalogsToEnable. */
-    bool catalogToEnableFind( const std::string & alias_r ) const;
+    /** Wheter \c alias_r is mentioned in ReposToEnable. */
+    bool repoToEnableFind( const std::string & alias_r ) const;
 
-    /** Add \c alias_r to the set of CatalogsToEnable. */
-    void addCatalogToEnable( const std::string & alias_r );
-    /** Remove \c alias_r to the set of CatalogsToEnable. */
-    void delCatalogToEnable( const std::string & alias_r );
+    /** Add \c alias_r to the set of ReposToEnable. */
+    void addRepoToEnable( const std::string & alias_r );
+    /** Remove \c alias_r to the set of ReposToEnable. */
+    void delRepoToEnable( const std::string & alias_r );
     //@}
 
-    /** \name Set of catalogs (repository aliases) to disable on next refresh.
+    /** \name Set of repos (repository aliases) to disable on next refresh.
      *
      * Repositories mentioned here will be disabled on the next refresh, in case they
      * still exist. Afterwards they get removed from the list.
      */
     //@{
-    /** Container of catalogs. */
-    typedef std::set<std::string>     CatalogsToDisable;
-    bool                              catalogsToDisableEmpty() const;
-    CatalogsToDisable::size_type      catalogsToDisableSize() const;
-    CatalogsToDisable::const_iterator catalogsToDisableBegin() const;
-    CatalogsToDisable::const_iterator catalogsToDisableEnd() const;
+    /** Container of repos. */
+    typedef std::set<std::string>  ReposToDisable;
+    bool                           reposToDisableEmpty() const;
+    ReposToDisable::size_type      reposToDisableSize() const;
+    ReposToDisable::const_iterator reposToDisableBegin() const;
+    ReposToDisable::const_iterator reposToDisableEnd() const;
 
-    /** Wheter \c alias_r is mentioned in CatalogsToDisable. */
-    bool catalogToDisableFind( const std::string & alias_r ) const;
+    /** Wheter \c alias_r is mentioned in ReposToDisable. */
+    bool repoToDisableFind( const std::string & alias_r ) const;
 
-    /** Add \c alias_r to the set of CatalogsToDisable. */
-    void addCatalogToDisable( const std::string & alias_r );
-    /** Remove \c alias_r to the set of CatalogsToDisable. */
-    void delCatalogToDisable( const std::string & alias_r );
+    /** Add \c alias_r to the set of ReposToDisable. */
+    void addRepoToDisable( const std::string & alias_r );
+    /** Remove \c alias_r to the set of ReposToDisable. */
+    void delRepoToDisable( const std::string & alias_r );
     //@}
 
   public:
