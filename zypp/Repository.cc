@@ -123,7 +123,6 @@ namespace zypp
       return Date();
     }
 
-    
     bool Repository::maybeOutdated() const
     {
         // system repo is not mirrored
@@ -138,7 +137,21 @@ namespace zypp
 
         return suggestedExpirationTimestamp() < Date::now();
     }
+
+    Repository::UpdateKeys Repository::updateKeys() const
+    { return UpdateKeys( sat::SolvAttr::repositoryUpdates, *this ); }
     
+    bool Repository::providesUpdatesForKey( const std::string &key ) const
+    {
+        UpdateKeys keys(updateKeys());
+        return ( keys.find(key) != keys.end() );
+    }
+    
+    bool Repository::isUpdateRepo() const
+    {
+        return ( ! updateKeys().empty() );
+    }
+
     bool Repository::solvablesEmpty() const
     {
 	NO_REPOSITORY_RETURN( true );

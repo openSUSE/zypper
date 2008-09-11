@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 11 16:01:57 CEST 2008 - dmacvicar@suse.de
+
+- add Repostiroy::updateKeys and 
+  Repository::providesUpdatesForKey(string) for repo and
+  product matching
+- Provide Repository::isUpdateRepo
+
+-------------------------------------------------------------------
 Thu Sep 11 14:41:28 CEST 2008 - ma@suse.de
 
 - Fix evaluation of vendor support flags.

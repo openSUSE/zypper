@@ -24,6 +24,12 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+    namespace sat
+    {
+      template<class _ResultT, class _AttrT>
+      class ArrayAttr;
+    }
+
     namespace detail
     {
       struct ByRepository;
@@ -41,6 +47,7 @@ namespace zypp
         typedef filter_iterator<detail::ByRepository, sat::detail::SolvableIterator> SolvableIterator;
         typedef sat::detail::size_type size_type;
         typedef sat::detail::RepoIdType IdType;
+        typedef sat::ArrayAttr<std::string,std::string> UpdateKeys;
 
     public:
         /** Default ctor creates \ref noRepository.*/
@@ -132,6 +139,23 @@ namespace zypp
          *
          */
         bool maybeOutdated() const;
+
+        /**
+         * if the repository claims to update something then
+         * it is an update repository
+         */
+        bool isUpdateRepo() const;
+
+        /**
+         * Wether the reposity claims to provide updates to \ref prod
+         */
+        UpdateKeys updateKeys() const;
+
+        /**
+         * wether the repository claims to update something \ref prod
+         * with key &\key
+         */
+        bool providesUpdatesForKey( const std::string &key ) const;
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;
@@ -315,4 +339,7 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+
+#include "zypp/sat/LookupAttr.h"
+
 #endif // ZYPP_SAT_REPOSITORY_H

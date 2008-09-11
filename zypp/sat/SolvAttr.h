@@ -140,6 +140,7 @@ namespace sat
       //@{
       static const SolvAttr repositoryTimestamp;
       static const SolvAttr repositoryExpire;
+      static const SolvAttr repositoryUpdates;
       //@}
 
       //@}

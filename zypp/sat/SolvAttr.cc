@@ -113,7 +113,7 @@ namespace sat
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );
   const SolvAttr SolvAttr::repositoryExpire ( REPOSITORY_EXPIRE );
-
+  const SolvAttr SolvAttr::repositoryUpdates ( REPOSITORY_UPDATES );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////
