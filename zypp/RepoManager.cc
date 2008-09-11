@@ -1530,9 +1530,28 @@ namespace zypp
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
+      Url url;
+
       // if the repo url was not set by the repoindex parser, set service's url
       if ( it->baseUrlsEmpty() )
-        it->setBaseUrl( service.url() );
+        url = service.url();
+      else
+        // service repo can contain only one URL now, so no need to iterate
+        url = *it->baseUrlsBegin();
+
+      // libzypp currently has problem with separate url + path handling
+      // so just append the path to the baseurl
+      if (!it->path().empty())
+      {
+        Pathname path(url.getPathName());
+        path /= it->path();
+        url.setPathName( path.asString() );
+        it->setPath("");
+      }
+
+      // save the url
+      it->setBaseUrl( url );
+      // set refrence to the parent service
       it->setService( service.alias() );
     }
 
