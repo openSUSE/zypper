@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Sep 12 01:38:25 CEST 2008 - jkupec@suse.cz
+
+- ServiceType and ServiceInfo::type() added (contains only RIS for
+  now), service type probing added.
+- Avoiding the use of 'path' for services (appending
+  the repoindex.xml's 'path' to the baseurl of created repos)
+- renamed ServiceInfo::*catalog*() methods to *repo*() methods
+- revision 11022
+
+-------------------------------------------------------------------
 Thu Sep 11 16:01:57 CEST 2008 - dmacvicar@suse.de
 
 - add Repostiroy::updateKeys and 
