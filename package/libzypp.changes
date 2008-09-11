@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 11 14:41:28 CEST 2008 - ma@suse.de
+
+- Fix evaluation of vendor support flags.
+- Adapt retrieval of registration data (targetDistribution, 
+  targetDistributionRelease and targetDistributionFlavor).
+- revision 11013
+
+-------------------------------------------------------------------
 Wed Sep 10 18:23:52 CEST 2008 - ma@suse.de
 
 - Follow gpgcheck tag in .repo file and do no check if disabled.

@@ -864,6 +864,8 @@ namespace zypp
       return _rpm.timestamp();
     }
 
+    ///////////////////////////////////////////////////////////////////
+
     std::string TargetImpl::release() const
     {
       std::ifstream suseRelease( (_root / "/etc/SuSE-release").c_str() );
@@ -877,28 +879,44 @@ namespace zypp
       return _("Unknown Distribution");
     }
 
-    std::string TargetImpl::targetDistribution() const
+    ///////////////////////////////////////////////////////////////////
+
+    namespace
     {
-      std::ostringstream cmd;
-      cmd << "rpmdb2solv";
-      cmd << " -n";
-      if ( ! _root.empty() )
-        cmd << " -r '" << _root << "'";
-      cmd << " -p '" << Pathname::assertprefix( _root, "/etc/products.d" ) << "'";
-      cmd << " -a distribution.target";
-
-      MIL << "Executing: " << cmd << endl;
-      ExternalProgram prog( cmd.str(), ExternalProgram::Discard_Stderr );
-      for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
+      std::string rpmdb2solvAttr( const std::string & attr_r, const Pathname & root_r )
       {
-        return str::trim(output);
+        std::ostringstream cmd;
+        cmd << "rpmdb2solv";
+        cmd << " -n";
+        if ( ! root_r.empty() )
+          cmd << " -r '" << root_r << "'";
+        cmd << " -p '" << Pathname::assertprefix( root_r, "/etc/products.d" ) << "'";
+        cmd << " -a distribution.target";
+
+        MIL << "Executing: " << cmd << endl;
+        ExternalProgram prog( cmd.str(), ExternalProgram::Discard_Stderr );
+        for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
+        {
+          return str::trim(output);
+        }
+
+        int ret = prog.close();
+        WAR << "Got no output from rpmdb2solv (returned " << ret << ")." << endl;
+
+        return std::string();
       }
-
-      int ret = prog.close();
-      WAR << "Got no output from rpmdb2solv (returned " << ret << ")." << endl;
-
-      return std::string();
     }
+
+    std::string TargetImpl::targetDistribution() const
+    { return rpmdb2solvAttr( "register.target", _root ); }
+
+    std::string TargetImpl::targetDistributionRelease() const
+    { return rpmdb2solvAttr( "register.release", _root ); }
+
+    std::string TargetImpl::targetDistributionFlavor() const
+    { return rpmdb2solvAttr( "register.flavor", _root ); }
+
+    ///////////////////////////////////////////////////////////////////
 
     std::string TargetImpl::anonymousUniqueId() const
     {
@@ -911,6 +929,8 @@ namespace zypp
         }
         return std::string();
     }
+
+    ///////////////////////////////////////////////////////////////////
 
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )
     {

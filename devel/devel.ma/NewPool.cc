@@ -430,6 +430,17 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
+namespace zypp
+{
+  enum TestE {
+    TE1, TE2, TE3
+  };
+
+  inline void fromString( const std::string & str_r, TestE & cl_r )
+  { cl_r = TE1; }
+
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -443,13 +454,11 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-#if 0
-  ServiceInfo s( "STest", Url("dir:///somewhere") );
-  DBG << s << endl;
-  s.addCatalogToEnable( "foo" );
-  s.addCatalogToEnable( "ba a" );
-  s.addCatalogToEnable( "kaa" );
-  DBG << s << endl;
+
+#if 1
+  DBG << str::fromString<TestE>("te1") << endl;
+
+
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
@@ -470,6 +479,8 @@ try {
       }
       getZYpp()->target()->load();
       USR << getZYpp()->target()->targetDistribution() << endl;
+      USR << getZYpp()->target()->targetDistributionRelease() << endl;
+      USR << getZYpp()->target()->targetDistributionFlavor() << endl;
     }
   }
 

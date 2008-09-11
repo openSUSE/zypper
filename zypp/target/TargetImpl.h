@@ -141,17 +141,17 @@ namespace zypp
       /** return the last modification date of the target */
       Date timestamp() const;
 
-      /** The targets distribution release string.
-       * \code
-       *   openSUSE 10.3 (i586)
-       * \endcode
-       */
+      /** \copydoc Target::release() */
       std::string release() const;
 
-    /** This is "distribution-arch" of the installed base product.
-     * Used for registration and \ref Service refresh.
-     */
-    std::string targetDistribution() const;
+      /** \copydoc Target::targetDistribution() */
+      std::string targetDistribution() const;
+
+      /** \copydoc Target::targetDistributionRelease()*/
+      std::string targetDistributionRelease() const;
+
+      /** \copydoc Target::targetDistributionFlavor() */
+      std::string targetDistributionFlavor() const;
 
     protected:
       /** Path to the target */

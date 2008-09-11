@@ -45,14 +45,14 @@ namespace zypp
   VendorSupportOption Package::vendorSupport() const
   {
       Keywords kw(keywords());
-      
+
       for_( it, kw.begin(), kw.end() )
       {
           if ( *it == "support_unsupported")
               return VendorSupportUnsupported;
           if ( *it == "support_acc")
               return VendorSupportACC;
-          
+
           if ( *it == "support_l1")
               return VendorSupportLevel1;
           if ( *it == "support_l2")
@@ -61,27 +61,21 @@ namespace zypp
               return VendorSupportLevel3;
       }
       return VendorSupportUnknown;
-  }  
+  }
 
   bool Package::maybeUnsupported() const
   {
-      return ( vendorSupport() & ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown )  == ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown ) );
+      return ( vendorSupport() & ( VendorSupportACC | VendorSupportUnsupported | VendorSupportUnknown ) );
   }
-
 
   Changelog Package::changelog() const
   {
-      Target_Ptr target;
-      try
+      Target_Ptr target( getZYpp()->getTarget() );
+      if ( ! target )
       {
-          target = getZYpp()->target();
+        ERR << "Target not initialized. Changelog is not available." << std::endl;
+        return Changelog();
       }
-      catch ( const Exception &e )
-      {
-           ERR << "Target not initialized. Changelog is not available." << std::endl;
-           return Changelog();
-      }
-
 
       if ( repository().isSystemRepo() )
       {

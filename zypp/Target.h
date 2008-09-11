@@ -107,17 +107,31 @@ namespace zypp
     /** return the last modification date of the target */
     Date timestamp() const;
 
+    /** \name Base product and registration. */
+    //@{
     /** The targets distribution release string (/etc/SuSE-release)
      * \code
      *   openSUSE 10.3 (i586)
      * \endcode
+     * \deprecated \ref targetDistribution might be a better choice as it does not depend on /etc/SuSE-release.
     */
-    std::string release() const;
+    std::string release() const ZYPP_DEPRECATED;
 
-    /** This is "distribution-arch" of the installed base product.
+    /** This is \c register.target attribute of the installed base product.
      * Used for registration and \ref Service refresh.
      */
     std::string targetDistribution() const;
+
+    /** This is \c register.release attribute of the installed base product.
+     * Used for registration.
+     */
+    std::string targetDistributionRelease() const;
+
+    /** This is \c register.flavor attribute of the installed base product.
+     * Used for registration.
+     */
+    std::string targetDistributionFlavor() const;
+    //@}
 
     /**
      * anonymous unique id
