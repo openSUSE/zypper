@@ -94,6 +94,28 @@ namespace zypp
     void delCatalogToEnable( const std::string & alias_r );
     //@}
 
+    /** \name Set of catalogs (repository aliases) to disable on next refresh.
+     *
+     * Repositories mentioned here will be disabled on the next refresh, in case they
+     * still exist. Afterwards they get removed from the list.
+     */
+    //@{
+    /** Container of catalogs. */
+    typedef std::set<std::string>     CatalogsToDisable;
+    bool                              catalogsToDisableEmpty() const;
+    CatalogsToDisable::size_type      catalogsToDisableSize() const;
+    CatalogsToDisable::const_iterator catalogsToDisableBegin() const;
+    CatalogsToDisable::const_iterator catalogsToDisableEnd() const;
+
+    /** Wheter \c alias_r is mentioned in CatalogsToDisable. */
+    bool catalogToDisableFind( const std::string & alias_r ) const;
+
+    /** Add \c alias_r to the set of CatalogsToDisable. */
+    void addCatalogToDisable( const std::string & alias_r );
+    /** Remove \c alias_r to the set of CatalogsToDisable. */
+    void delCatalogToDisable( const std::string & alias_r );
+    //@}
+
   public:
     /**
      * Writes ServiceInfo to stream in ".service" format
@@ -109,7 +131,7 @@ namespace zypp
 
     /**
      * Write an XML representation of this ServiceInfo object.
-     * 
+     *
      * \param str
      * \param content if not empty, produces <service ...>content</service>
      *                otherwise <service .../>

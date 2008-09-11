@@ -46,10 +46,12 @@ namespace zypp
   struct ServiceInfo::Impl : public repo::RepoInfoBase::Impl
   {
     typedef ServiceInfo::CatalogsToEnable CatalogsToEnable;
+    typedef ServiceInfo::CatalogsToDisable CatalogsToDisable;
 
   public:
     Url url;
-    CatalogsToEnable catalogsToEnable;
+    CatalogsToEnable  catalogsToEnable;
+    CatalogsToDisable catalogsToDisable;
 
   public:
     Impl() : repo::RepoInfoBase::Impl() {}
@@ -110,11 +112,35 @@ namespace zypp
   { _pimpl->catalogsToEnable.erase( alias_r ); }
 
 
+  bool ServiceInfo::catalogsToDisableEmpty() const
+  { return _pimpl->catalogsToDisable.empty(); }
+
+  ServiceInfo::CatalogsToDisable::size_type ServiceInfo::catalogsToDisableSize() const
+  { return _pimpl->catalogsToDisable.size(); }
+
+  ServiceInfo::CatalogsToDisable::const_iterator ServiceInfo::catalogsToDisableBegin() const
+  { return _pimpl->catalogsToDisable.begin(); }
+
+  ServiceInfo::CatalogsToDisable::const_iterator ServiceInfo::catalogsToDisableEnd() const
+  { return _pimpl->catalogsToDisable.end(); }
+
+  bool ServiceInfo::catalogToDisableFind( const std::string & alias_r ) const
+  { return( _pimpl->catalogsToDisable.find( alias_r ) != _pimpl->catalogsToDisable.end() ); }
+
+  void ServiceInfo::addCatalogToDisable( const std::string & alias_r )
+  { _pimpl->catalogsToDisable.insert( alias_r ); }
+
+  void ServiceInfo::delCatalogToDisable( const std::string & alias_r )
+  { _pimpl->catalogsToDisable.erase( alias_r ); }
+
+
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpAsIniOn(str) << "url = " << url() << endl;
     if ( ! catalogsToEnableEmpty() )
       str << "catalogstoenable = " << str::joinEscaped( catalogsToEnableBegin(), catalogsToEnableEnd() ) << endl;
+    if ( ! catalogsToDisableEmpty() )
+      str << "catalogstodisable = " << str::joinEscaped( catalogsToDisableBegin(), catalogsToDisableEnd() ) << endl;
     return str;
   }
 
@@ -130,7 +156,7 @@ namespace zypp
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
       << " url=\"" << escape(url().asString()) << "\"";
-    
+
     if (content.empty())
       str << "/>" << endl;
     else

@@ -430,16 +430,6 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-namespace zypp
-{
-  enum TestE {
-    TE1, TE2, TE3
-  };
-
-  inline void fromString( const std::string & str_r, TestE & cl_r )
-  { cl_r = TE1; }
-
-}
 
 /******************************************************************
 **
@@ -454,11 +444,20 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
+#if 0
+  ServiceInfo s( "STest", Url("dir:///somewhere") );
+  DBG << s << endl;
+  s.addCatalogToEnable( "foo" );
+  s.addCatalogToEnable( "ba a" );
+  s.addCatalogToEnable( "kaa" );
 
-#if 1
-  DBG << str::fromString<TestE>("te1") << endl;
+  RepoManager repoManager( makeRepoManager( sysRoot ) );
+  RepoInfoList repos = repoManager.knownRepositories();
+  RepoInfoList services = repoManager.knownServices();
 
 
+
+  DBG << s << endl;
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
