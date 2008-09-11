@@ -68,6 +68,8 @@ namespace zypp
             service.setEnabled( str::strToTrue( it->second ) );
           else if ( it->first == "autorefresh" )
             service.setAutorefresh( str::strToTrue( it->second ) );
+          else if ( it->first == "type" )
+            service.setType( repo::ServiceType(it->second) );
           else if ( it->first == "catalogstoenable" )
           {
             std::vector<std::string> aliases;
@@ -78,7 +80,7 @@ namespace zypp
             }
           }
           else
-            ERR << "Unknown attribute " << it->second << " ignored" << endl;
+            ERR << "Unknown attribute " << it->first << " ignored" << endl;
         }
 
         MIL << "Linking ServiceInfo with file " << file << endl;

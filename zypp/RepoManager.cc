@@ -1354,7 +1354,7 @@ namespace zypp
     if( _pimpl->services.find(service) != _pimpl->services.end() )
       return; //FIXME ZYPP_THROW(RepoAlreadyExistsException(service.name()));
 
-    //this is need to save location to correct service
+    // this is need to save location to correct service
     const ServiceInfo & savedService =
       *(_pimpl->services.insert( service )).first;
 
@@ -1470,8 +1470,8 @@ namespace zypp
 
   void RepoManager::refreshServices()
   {
-    //cannot user for_, because it uses const version
-    for (std::set<ServiceInfo>::iterator it = _pimpl->services.begin();
+    // cannot user for_, because it uses const version
+    for (ServiceConstIterator it = _pimpl->services.begin();
       it != _pimpl->services.end(); ++it)
     {
       if ( !it->enabled() )
@@ -1485,7 +1485,32 @@ namespace zypp
   void RepoManager::refreshService( const ServiceInfo & service )
   {
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
+/*
+    repo::ServiceType type = service.type();
+    // if the type is unknown, try probing.
+    if ( type == repo::ServiceType::NONE )
+    {
+      // unknown, probe it
+      type = probeService(service.url());
 
+      if (type != ServiceType::NONE)
+      {
+        // Adjust the probed type in ServiceInfo
+        service.setProbedType( type ); // lazy init!
+        // save probed type only for repos in system
+        for_( sit, serviceBegin(), serviceEnd() )
+        {
+          if ( service.alias() == sit->alias() )
+          {
+            ServiceInfo modifiedservice = service;
+            modifiedservice.setType(type);
+            modifyService(service.alias(), modifiedservice); // FIXME this causes a segfault, whe the same code from repos doesn't?
+            break;
+          }
+        }
+      }
+    }
+*/
     // download the repo index file
     media::MediaManager mediamanager;
     //if (service.url().empty())
@@ -1625,6 +1650,32 @@ namespace zypp
             bind(&ServiceCollector::collect, collector, _1) );
       }
     }
+  }
+  
+  repo::ServiceType RepoManager::probeService( const Url &url ) const
+  {
+    try
+    {
+      MediaSetAccess access(url);
+      if ( access.doesFileExist("/repo/repoindex.xml") )
+        return repo::ServiceType::RIS;
+    }
+    catch ( const media::MediaException &e )
+    {
+      ZYPP_CAUGHT(e);
+      RepoException enew("Error trying to read from " + url.asString());
+      enew.remember(e);
+      ZYPP_THROW(enew);
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_CAUGHT(e);
+      Exception enew("Unknown error reading from " + url.asString());
+      enew.remember(e);
+      ZYPP_THROW(enew);
+    }
+
+    return repo::ServiceType::NONE;
   }
 
   ////////////////////////////////////////////////////////////////////////////

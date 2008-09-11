@@ -682,6 +682,7 @@ SET( zypp_repo_SRCS
   repo/dummy.cc
   repo/RepoException.cc
   repo/RepoType.cc
+  repo/ServiceType.cc
   repo/PackageProvider.cc
   repo/SrcPackageProvider.cc
   repo/RepoProvideFile.cc
@@ -698,6 +699,7 @@ SET( zypp_repo_SRCS
 SET( zypp_repo_HEADERS
   repo/RepoException.h
   repo/RepoType.h
+  repo/ServiceType.h
   repo/PackageProvider.h
   repo/SrcPackageProvider.h
   repo/RepoProvideFile.h

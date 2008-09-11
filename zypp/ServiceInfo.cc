@@ -50,6 +50,7 @@ namespace zypp
 
   public:
     Url url;
+    repo::ServiceType type;
     CatalogsToEnable  catalogsToEnable;
     CatalogsToDisable catalogsToDisable;
 
@@ -57,6 +58,16 @@ namespace zypp
     Impl() : repo::RepoInfoBase::Impl() {}
 
     Impl(const Url & url_) : url(url_) {}
+    
+    void setProbedType( const repo::ServiceType & t ) const
+    {
+      if ( type == repo::ServiceType::NONE
+           && t != repo::ServiceType::NONE )
+      {
+        // lazy init!
+        const_cast<Impl*>(this)->type = t;
+      }
+    }
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -89,6 +100,13 @@ namespace zypp
   Url ServiceInfo::url() const { return _pimpl->url; }
   void ServiceInfo::setUrl( const Url& url ) { _pimpl->url = url; }
 
+  repo::ServiceType ServiceInfo::type() const
+  { return _pimpl->type; }
+  void ServiceInfo::setType( const repo::ServiceType & type )
+  { _pimpl->type = type; }
+
+  void ServiceInfo::setProbedType( const repo::ServiceType &t ) const
+  { _pimpl->setProbedType( t ); }
 
   bool ServiceInfo::catalogsToEnableEmpty() const
   { return _pimpl->catalogsToEnable.empty(); }
@@ -136,7 +154,10 @@ namespace zypp
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
-    RepoInfoBase::dumpAsIniOn(str) << "url = " << url() << endl;
+    RepoInfoBase::dumpAsIniOn(str)
+      << "url = " << url() << endl
+      << "type = " << type() << endl;
+
     if ( ! catalogsToEnableEmpty() )
       str << "catalogstoenable = " << str::joinEscaped( catalogsToEnableBegin(), catalogsToEnableEnd() ) << endl;
     if ( ! catalogsToDisableEmpty() )
@@ -155,7 +176,8 @@ namespace zypp
       << " name=\"" << escape(name()) << "\""
       << " enabled=\"" << enabled() << "\""
       << " autorefresh=\"" << autorefresh() << "\""
-      << " url=\"" << escape(url().asString()) << "\"";
+      << " url=\"" << escape(url().asString()) << "\""
+      << " type=\"" << type().asString() << "\"";
 
     if (content.empty())
       str << "/>" << endl;

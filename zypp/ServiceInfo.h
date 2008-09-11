@@ -17,6 +17,7 @@
 
 #include "zypp/Url.h"
 
+#include "zypp/repo/ServiceType.h"
 #include "zypp/repo/RepoInfoBase.h"
 
 
@@ -69,6 +70,20 @@ namespace zypp
      * \param url url to this service
      */
     void setUrl( const Url& url );
+
+    /**
+     * 
+     */
+    repo::ServiceType type() const;
+    
+    /**
+     * Set service type.
+     * 
+     * \param type the new type
+     */
+    void setType( const repo::ServiceType & type );
+
+    void setProbedType( const repo::ServiceType & t ) const;
 
 
     /** \name Set of catalogs (repository aliases) to enable on next refresh.

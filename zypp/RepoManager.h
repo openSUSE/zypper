@@ -23,6 +23,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/repo/RepoType.h"
+#include "zypp/repo/ServiceType.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ProgressData.h"
 
@@ -108,7 +109,7 @@ namespace zypp
     /** Implementation  */
     class Impl;
 
-    /** service typedefs */
+    /** ServiceInfo typedefs */
     typedef std::set<ServiceInfo> ServiceSet;
     typedef ServiceSet::const_iterator ServiceConstIterator;
     typedef ServiceSet::size_type ServiceSizeType;
@@ -356,10 +357,9 @@ namespace zypp
     */
    void loadFromCache( const RepoInfo &info,
                        const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
    /**
     * \short Probe repo metadata type.
-    *
-    * \todo FIXME Should this be private?
     */
    repo::RepoType probe( const Url &url ) const;
 
@@ -454,6 +454,11 @@ namespace zypp
     RepoInfo getRepositoryInfo( const Url & url,
                                 const url::ViewOption & urlview = url::ViewOption::DEFAULTS,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
+
+    /**
+     * \short Probe the type or the service.
+     */
+    repo::ServiceType probeService( const Url &url ) const;
 
     /**
      * Adds new service by it's alias and url
