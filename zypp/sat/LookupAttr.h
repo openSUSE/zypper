@@ -495,6 +495,18 @@ namespace zypp
         bool empty() const
         { return _q.empty(); }
 
+      public:
+
+        iterator find( const _ResultT & key_r ) const
+        {
+          for_( it, begin(), end() )
+          {
+            if ( *it == key_r )
+              return it;
+          }
+          return end();
+        }
+
       private:
         sat::LookupAttr _q;
     };
