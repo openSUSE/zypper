@@ -891,7 +891,7 @@ namespace zypp
         if ( ! root_r.empty() )
           cmd << " -r '" << root_r << "'";
         cmd << " -p '" << Pathname::assertprefix( root_r, "/etc/products.d" ) << "'";
-        cmd << " -a distribution.target";
+        cmd << " -a " << attr_r;
 
         MIL << "Executing: " << cmd << endl;
         ExternalProgram prog( cmd.str(), ExternalProgram::Discard_Stderr );
