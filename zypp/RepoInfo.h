@@ -68,7 +68,7 @@ namespace zypp
 
     public:
     RepoInfo();
-    ~RepoInfo();
+    virtual ~RepoInfo();
 
     /**
      * Repository priority for solver.

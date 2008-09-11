@@ -55,9 +55,19 @@ namespace zypp
     CatalogsToDisable catalogsToDisable;
 
   public:
-    Impl() : repo::RepoInfoBase::Impl() {}
+    Impl()
+      : repo::RepoInfoBase::Impl()
+      , type(repo::ServiceType::NONE_e)
+    {}
 
-    Impl(const Url & url_) : url(url_) {}
+    Impl(const Url & url_)
+      : repo::RepoInfoBase::Impl()
+      , url(url_)
+      , type(repo::ServiceType::NONE_e)
+    {}
+
+    ~Impl()
+    {}
     
     void setProbedType( const repo::ServiceType & t ) const
     {
@@ -95,6 +105,9 @@ namespace zypp
 
   ServiceInfo::ServiceInfo(const string & alias, const Url & url)
     : repo::RepoInfoBase(alias), _pimpl( new Impl(url) )
+  {}
+
+  ServiceInfo::~ServiceInfo()
   {}
 
   Url ServiceInfo::url() const { return _pimpl->url; }

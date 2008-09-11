@@ -1470,22 +1470,26 @@ namespace zypp
 
   void RepoManager::refreshServices()
   {
-    // cannot user for_, because it uses const version
-    for (ServiceConstIterator it = _pimpl->services.begin();
-      it != _pimpl->services.end(); ++it)
+    // copy the set of services since refreshService
+    // can eventually invalidate the iterator
+    ServiceSet services;
+    services.insert(serviceBegin(), serviceEnd());
+    for_(it, services.begin(), services.end())
     {
       if ( !it->enabled() )
         continue;
 
-      MIL << "refresh: " << it->alias() << " with url: "<< it->url().asString() << endl;
       refreshService(*it);
     }
   }
 
   void RepoManager::refreshService( const ServiceInfo & service )
   {
+    MIL << "going to refresh service '" << service.alias()
+        << "', url: "<< service.url().asString() << endl;
+
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
-/*
+
     repo::ServiceType type = service.type();
     // if the type is unknown, try probing.
     if ( type == repo::ServiceType::NONE )
@@ -1504,13 +1508,13 @@ namespace zypp
           {
             ServiceInfo modifiedservice = service;
             modifiedservice.setType(type);
-            modifyService(service.alias(), modifiedservice); // FIXME this causes a segfault, whe the same code from repos doesn't?
+            modifyService(service.alias(), modifiedservice);
             break;
           }
         }
       }
     }
-*/
+
     // download the repo index file
     media::MediaManager mediamanager;
     //if (service.url().empty())

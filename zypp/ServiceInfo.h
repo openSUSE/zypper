@@ -51,6 +51,8 @@ namespace zypp
      */
     ServiceInfo( const std::string & alias, const Url& url );
 
+    virtual ~ServiceInfo();
+
   public:
     /** Represents an empty service. */
     static const ServiceInfo noService;
