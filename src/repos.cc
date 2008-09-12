@@ -1977,7 +1977,7 @@ static void service_list_tr(
 
   // type
   if (service)
-    tr << "ris";
+    tr << service->type().asString();
   else
     tr << repo->type().asString();
 
@@ -2228,9 +2228,9 @@ void add_service_by_url( Zypper & zypper,
 
   ServiceInfo service;
 
-  //! \todo what about service type? compare to rug. idea: do addrepo if type is specified and is not NU.
-  //if ( ! type.empty() )
-  //  repo.setType(RepoType(type));
+  //! \todo addrepo if type is specified and is not 'ris'.
+  if ( ! type.empty() )
+    service.setType(ServiceType(type));
 
   service.setAlias(alias.empty() ? timestamp() : alias);
   parsed_opts::const_iterator it = zypper.cOpts().find("name");

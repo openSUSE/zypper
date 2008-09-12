@@ -1001,10 +1001,10 @@ void Zypper::processCommandOptions()
       "Add a repository index service to the system.\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <TYPE>       Type of repository (%s).\n"
+      "-t, --type <TYPE>       Type of the service (%s).\n"
       "-d, --disable           Add the service as disabled.\n"
       "-n, --name              Specify descriptive name for the service.\n"
-    ), "yast2, rpm-md, plaindir");
+    ), "ris");
     break;
   }
 
@@ -2187,12 +2187,28 @@ void Zypper::doCommand()
       return;
     }
 
+    // force specific repository type. Validation is done in add_service_by_url()
+    string type = copts.count("type") ? copts["type"].front() : "";
+
     // by default, enable the service
     if (indeterminate(enabled)) enabled = true;
 
     warn_if_zmd();
 
-    add_service_by_url(*this, url, _arguments[1], "" /** \todo type */, enabled);
+    try
+    {
+      add_service_by_url(*this, url, _arguments[1], type, enabled);
+    }
+    catch (const repo::RepoUnknownTypeException & e)
+    {
+      ZYPP_CAUGHT(e);
+      out().error(e,
+          _("Specified type is not a valid service type:"),
+          str::form(
+              _("See '%s' or '%s' to get a list of known repository types."),
+              "zypper help addservice", "man zypper"));
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    }
 
     break;
   }
@@ -2343,7 +2359,9 @@ void Zypper::doCommand()
       ZYPP_CAUGHT(e);
       out().error(e,
           _("Specified type is not a valid repository type:"),
-          _("See 'zypper -h addrepo' or man zypper to get a list of known repository types."));
+          str::form(
+              _("See '%s' or '%s' to get a list of known repository types."),
+              "zypper help addrepo", "man zypper"));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
     }
 
