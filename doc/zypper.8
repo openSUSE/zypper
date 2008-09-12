@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.12.3" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.4" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -58,6 +58,10 @@ to download and check the index files, and you will be able to use zypper for
 operations like search or info without internet access or root privileges.
 
 .SS Services
+.LP
+Services are one level above repositories and serve to manage repositories
+or to do some special tasks. Libypp currently supports only one type of
+services, the Repository Index Service (RIS).
 .LP
 Repository Index Service (RIS) is a special type of repository which contains
 a list of other repositories. This list can be generated dynamically by the
@@ -711,25 +715,62 @@ Clean repository raw metadata cache instead of package cache.
 Clean both repository metadata and package caches.
 
 
-.SS Serivce Management
-
-(This group of commands is currently under development)
+.SS Service Management
 
 .TP
-.B addservice (as) [options] <url> <alias>
-TODO
+.B addservice (as) [options] <URI> <alias>
+Adds a service specified by \fBURI\fR to the system. The \fBalias\fR must be
+unique and serves to identify the services.
+
+Newly added services are not refereshed automatically. Use the
+\fBrefresh-services\fR command to refresh them.
+
+.I \-t, \-\-type <TYPE>
+Type of the service (possible values: ris).
+.I \-d, \-\-disable
+Add the service as disabled.
+.I \-n, \-\-name
+Specify descriptive name for the service.
 
 .TP
 .B removeservice (rs) [options] <alias|#|URI> ...
-TODO
+
+Remove specified repository index service from the sytem.
+
+Removing an RIS service will result in removing of all of its repositories.
+
+.I \-\-loose\-auth
+Ignore user authentication data in the URI.
+.I \-\-loose-query
+Ignore query string in the URI.
 
 .TP
 .B services (ls) [options]
-TODO
+List services defined on the system.
+
+.I \-u, \-\-uri
+Show also base URI of repositories.
+.I \-p, \-\-priority
+Show also repository priority.
+.I \-d, \-\-details
+Show more information like URI, priority, type.
+.I \-r, \-\-with\-repos
+Show also repositories belonging to the services.
+.I \-P, \-\-sort\-by\-priority
+Sort the list by repository priority.
+.I \-U, \-\-sort-by-uri
+Sort the list by URI.
+.I \-N, \-\-sort\-by\-name
+Sort the list by name.
 
 .TP
 .B refresh-services (refs) [options] <alias|#|URI> ...
-TODO
+Refreshing a service mean executing the service's special task.
+
+RIS services add, remove, or modify repositories on your system based on
+current content of the repository index.
+
+TODO more info
 
 
 .SS Package Locks Management
@@ -968,7 +1009,7 @@ To enable rug-compatible behavior, use the \-r or \-\-rug\-compatible global opt
 ZENworks distinguishes services and catalogs. A service is
 added by URI and contains one or more catalogs. Libzypp does not have
 this distinction (yet) but for compatibility it is able to use the same command
-and option names (service-add, \-\-catalog) as rug.
+and option names (service-add, \-\-catalog) as rug. TODO this info is out-of-date now
 .LP
 Currently, a Repository in zypper is a synonym for both Service and Catalog in ZLM.
 .TP
