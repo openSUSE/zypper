@@ -62,6 +62,23 @@ using namespace zypp::repo;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace
+  {
+    /** Check if alias_r is present in repo/service container. */
+    template <class Iterator>
+    inline bool findAliasIn( const std::string & alias_r, Iterator begin_r, Iterator end_r )
+    {
+      for_( it, begin_r, end_r )
+        if ( it->alias() == alias_r )
+          return true;
+      return false;
+    }
+    /** \overload */
+    template <class Container>
+    inline bool findAliasIn( const std::string & alias_r, const Container & cont_r )
+    { return findAliasIn( alias_r, cont_r.begin(), cont_r.end() ); }
+ }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManagerOptions
@@ -110,7 +127,7 @@ namespace zypp
     * Passing this functor as callback, you can collect
     * all results at the end, without dealing with async
     * code.
-    * 
+    *
     * If targetDistro is set, all repos with non-empty RepoInfo::targetDistribution()
     * will be skipped.
     * \todo do this through a separate filter
@@ -119,7 +136,7 @@ namespace zypp
     {
       RepoCollector()
       {}
-      
+
       RepoCollector(const string & targetDistro_)
         : targetDistro(targetDistro_)
       {}
@@ -1565,36 +1582,34 @@ namespace zypp
     getRepositoriesInService(service.alias(),
         insert_iterator<std::list<RepoInfo> > (oldRepos, oldRepos.begin()));
 
+    //! \todo fix enabled/disable with respect to ServiceInfo reposTo...
+
     // find old to remove
     for_( it, oldRepos.begin(), oldRepos.end() )
     {
-      bool found = false;
-
-      for_( it2, collector.repos.begin(), collector.repos.end() )
-        if ( it->alias() == it2->alias() )
-        {
-          found = true;
-          break;
-        }
-
-      if( !found )
+      if ( ! findAliasIn( it->alias(), collector.repos ) )
+      {
         removeRepository( *it );
+      }
     }
 
     //find new to add
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
-      bool found = false;
+      if ( ! findAliasIn( it->alias(), oldRepos ) )
+      {
+#warning check whether a repo with the same alias exists
+        // At that point check whether a repo with the same alias
+        // exists outside this service. Maybe forcefully re-alias
+        // the existing repo?
 
-      for_( it2, oldRepos.begin(), oldRepos.end() )
-        if( it->alias() == it2->alias() )
-        {
-          found = true;
-          break;
-        }
+        // make sure the service is created in disabled
+        // autorefresh true.
+        it->setEnabled( false );
+        it->setAutorefresh( true );
 
-      if (!found)
         addRepository( *it );
+      }
     }
   }
 
@@ -1648,7 +1663,7 @@ namespace zypp
     }
 
     //! \todo changed enabled status
-    if ( oldService.enabled() != service.enabled())
+    if ( oldService.enabled() != service.enabled() )
     {
 
     }
@@ -1674,7 +1689,7 @@ namespace zypp
       }
     }
   }
-  
+
   repo::ServiceType RepoManager::probeService( const Url &url ) const
   {
     try

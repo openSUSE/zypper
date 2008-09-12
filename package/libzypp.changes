@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 12 18:24:28 CEST 2008 - ma@suse.de
+
+- Create new Service repos in disbaled sate.
+- revision 11056
+- version 5.10.0 (10)
+
+-------------------------------------------------------------------
 Fri Sep 12 16:04:54 CEST 2008 - ma@suse.de
 
 - Make registerTarget and registerRelease abvailable for installed 
@@ -10,7 +17,7 @@ Fri Sep 12 12:59:50 CEST 2008 - ma@suse.de
 
 - Add url lists query to Product interface. A generic query and 
   convenience methods to query urls for "releasenotes", "register", 
-  "updateurls", "extraurls",  "optionalurls" and "smolt"
+  "updateurls", "extraurls",  "optionalurls" and "smolt" (bnc #413444)
 - revision 11029
 
 -------------------------------------------------------------------
