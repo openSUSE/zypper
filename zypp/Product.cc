@@ -144,42 +144,31 @@ namespace zypp
   std::string Product::updaterepoKey() const
   { return lookupStrAttribute( sat::SolvAttr::productUpdaterepoKey ); }
 
-  Url Product::releaseNotesUrl() const
-  {
-    std::list<Url> ret;
-    fillList( ret, satSolvable(), sat::SolvAttr::productRelnotesurl );
-    if ( ! ret.empty() )
-      return  ret.front();
-    return Url();
-  }
-
-  std::list<Url> Product::updateUrls() const
-  {
-    std::list<Url> ret;
-    fillList( ret, satSolvable(), sat::SolvAttr::productUpdateurls );
-    return ret;
-  }
-
-  std::list<Url> Product::extraUrls() const
-  {
-    std::list<Url> ret;
-    fillList( ret, satSolvable(), sat::SolvAttr::productExtraurls );
-    return ret;
-  }
-
-  std::list<Url> Product::optionalUrls() const
-  {
-    std::list<Url> ret;
-    fillList( ret, satSolvable(), sat::SolvAttr::productOptionalurls );
-    return ret;
-  }
-
   std::list<std::string> Product::flags() const
   {
     std::list<std::string> ret;
     fillList( ret, satSolvable(), sat::SolvAttr::productFlags );
     return ret;
   }
+
+  /////////////////////////////////////////////////////////////////
+
+  Product::UrlList Product::urls( const std::string & key_r ) const
+  {
+    UrlList ret;
+#warning IMPLEMENT PRODUCT URLS
+    return ret;
+  }
+
+  Product::UrlList Product::releaseNotesUrls() const { return urls( "releasenotes" ); }
+  Product::UrlList Product::registerUrls()     const { return urls( "register" ); }
+  Product::UrlList Product::smoltUrls()        const { return urls( "smolt" ); }
+  Product::UrlList Product::updateUrls()       const { return urls( "updateurls" ); }
+  Product::UrlList Product::extraUrls()        const { return urls( "extraurls" ); }
+  Product::UrlList Product::optionalUrls()     const { return urls( "optionalurls" ); }
+
+  std::ostream & operator<<( std::ostream & str, const Product::UrlList & obj )
+  { return dumpRange( str << obj.key() << ' ', obj.begin(), obj.end() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

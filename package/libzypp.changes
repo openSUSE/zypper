@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 12 12:59:50 CEST 2008 - ma@suse.de
+
+- Add url lists query to Product interface. A generic query and 
+  convenience methods to query urls for "releasenotes", "register", 
+  "updateurls", "extraurls",  "optionalurls" and "smolt"
+- revision 11029
+
+-------------------------------------------------------------------
 Fri Sep 12 01:38:25 CEST 2008 - jkupec@suse.cz
 
 - ServiceType and ServiceInfo::type() added (contains only RIS for
