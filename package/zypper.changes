@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 12 13:52:45 CEST 2008 - jkupec@suse.cz
+
+- --xmlout for products, patterns, and product-info
+- fixed patterns to respect --{un,}installed-only options
+- r11032
+
+-------------------------------------------------------------------
 Fri Sep 12 11:29:44 CEST 2008 - jkupec@suse.cz
 
 - --type handling for addservice added
