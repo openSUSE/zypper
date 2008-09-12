@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 12 10:59:31 CEST 2008 - jkupec@suse.cz
+
+- print a hint to run 'zypper verify' (after install) on ignored
+  failed package download (fate #303527)
+- r11025
+
+-------------------------------------------------------------------
 Wed Sep 10 17:57:09 CEST 2008 - jkupec@suse.cz
 
 - services --with-repos added (also XML)
