@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 12 11:29:44 CEST 2008 - jkupec@suse.cz
+
+- --type handling for addservice added
+- r11027
+
+-------------------------------------------------------------------
 Fri Sep 12 10:59:31 CEST 2008 - jkupec@suse.cz
 
 - print a hint to run 'zypper verify' (after install) on ignored
