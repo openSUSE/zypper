@@ -167,6 +167,7 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
           << boost::format(_("(%s unpacked)")) % ro->installSize();
     }
     zypper.out().info(s.str());
+    zypper.runtimeData().action_rpm_download = true;
   }
 
   // return false if the download should be aborted right now
@@ -187,17 +188,20 @@ struct DownloadResolvableReportReceiver : public zypp::callback::ReceiveReport<z
     Action action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
     if (action == DownloadResolvableReport::RETRY)
       --Zypper::instance()->runtimeData().commit_pkg_current;
+    else
+      Zypper::instance()->runtimeData().action_rpm_download = false;
     return action;
   }
 
   // implementation not needed prehaps - the media backend reports the download progress
-  /*
-  virtual void finish( zypp::Resolvable::constPtr **resolvable_ptr**, Error error, const std::string & reason )
+  virtual void finish( zypp::Resolvable::constPtr /*resolvable_ptr**/, Error error, const std::string & reason )
   {
+    Zypper::instance()->runtimeData().action_rpm_download = false;
+/*
     display_done ("download-resolvable", cout_v);
     display_error (error, reason);
+*/
   }
-  */
 };
 
 struct ProgressReportReceiver  : public zypp::callback::ReceiveReport<zypp::ProgressReport>

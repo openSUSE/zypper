@@ -14,12 +14,15 @@
 #include <boost/format.hpp>
 
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/base/String.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/media/MediaUserAuth.h"
 
 #include "Zypper.h"
 #include "utils/prompt.h"
+#include "utils/messages.h"
+
 
 #define REPEAT_LIMIT 3
 
@@ -66,6 +69,8 @@ namespace ZmartRecipients
            it != devices.end(); ++it)
         std::cout << *it << " ";
       cout << std::endl;*/
+      DBG << "media problem, url: " << url.asString() << std::endl;
+
       Zypper::instance()->out().error(description);
       if (is_changeable_media(url) && error == MediaChangeReport::WRONG)
       {
@@ -93,8 +98,17 @@ namespace ZmartRecipients
           30,action);
       }
 
-      return (Action) read_action_ari(PROMPT_ARI_MEDIA_PROBLEM
-          ,MediaChangeReport::ABORT);
+      Action action = (Action) read_action_ari(
+          PROMPT_ARI_MEDIA_PROBLEM, MediaChangeReport::ABORT);
+
+      // if an rpm download failed and user chose to ignore that, advice to
+      // run zypper verify afterwards
+      if (action == MediaChangeReport::IGNORE
+          && Zypper::instance()->runtimeData().action_rpm_download
+          && !Zypper::instance()->runtimeData().seen_verify_hint)
+        print_verify_hint(Zypper::instance()->out());
+
+      return action;
     }
     private:
       repeat_counter_ repeat_counter;
@@ -156,10 +170,11 @@ namespace ZmartRecipients
       return true;
     }
 
-    // not used anywhere in libzypp 3.20.0
+    // not used anywhere in libzypp 3.20.0 (really)
     virtual DownloadProgressReport::Action
     problem( const zypp::Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
+      DBG << "media problem" << std::endl;
       if (_be_quiet)
         Zypper::instance()->out().dwnldProgressEnd(uri, _last_drate_avg, true);
       Zypper::instance()->out().error(zcb_error2str(error, description));

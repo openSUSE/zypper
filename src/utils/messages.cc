@@ -69,3 +69,14 @@ void print_usage(Out & out, const string & command_help)
   s << command_help;
   out.info(s.str());
 }
+
+// ----------------------------------------------------------------------------
+
+void print_verify_hint(Out & out)
+{
+  out.warning(zypp::str::form(
+    _("You have chosen to ignore a problem with download or installation of a package"
+    " which might lead to broken dependencies of other packages."
+    " It is recommended to run '%s' after the operation has finished."),
+    "zypper verify"));
+}

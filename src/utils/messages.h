@@ -26,5 +26,7 @@ void report_required_arg_missing(Out & out, const std::string & cmd_help);
 
 void print_usage(Out & out, const std::string & command_help);
 
+void print_verify_hint(Out & out);
+
 
 #endif /*MESSAGES_H_*/
