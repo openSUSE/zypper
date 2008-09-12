@@ -152,7 +152,7 @@ namespace zypp
   }
 
   std::string Product::registerTarget() const
-  { return lookupStrAttribute( sat::SolvAttr::productRegisterTarget );}
+  { return lookupStrAttribute( sat::SolvAttr::productRegisterTarget ); }
 
   std::string Product::registerRelease() const
   { return lookupStrAttribute( sat::SolvAttr::productRegisterRelease ); }
