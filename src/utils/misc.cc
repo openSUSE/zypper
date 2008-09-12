@@ -17,6 +17,8 @@
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/PoolItem.h"
+#include "zypp/Product.h"
+#include "zypp/Pattern.h"
 
 #include "main.h"
 #include "Zypper.h"
@@ -319,4 +321,33 @@ Capability safe_parse_cap (Zypper & zypper,
     zypper.out().error(str::form(_("Cannot parse capability '%s'."), capstr.c_str()));
   }
   return Capability();
+}
+
+string asXML(const Product & p, bool is_installed)
+{
+  ostringstream str;
+  str
+    << "<product"
+       " name=\"" << xml_encode(p.name()) << "\""
+       " version=\"" << p.edition() << "\""
+       " arch=\"" << p.arch() << "\""
+       " vendor=\"" << xml_encode(p.vendor()) << "\""
+       " summary=\"" << xml_encode(p.summary()) << "\""
+       " shortname=\"" << xml_encode(p.shortName()) << "\""
+       " flavor=\"" << xml_encode(p.flavor()) << "\""
+       " type=\"" << xml_encode(p.type()) << "\""
+       " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
+       " installed=\"" << (is_installed ? 1 : 0) << "\"";
+  if (p.description().empty())
+    str << "/>";
+  else
+    str
+      << ">" << endl << "<description>" << p.description() << "</description>"
+      << endl << "</product>";
+  return str.str();
+}
+
+string asXML(const Pattern & p, bool is_installed)
+{
+  return "";
 }

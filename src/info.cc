@@ -58,7 +58,7 @@ void printSummaryDesc(const ResObject::constPtr & res)
 /**
  * 
  */
-void printInfo(const Zypper & zypper, const ResKind & kind)
+void printInfo(Zypper & zypper, const ResKind & kind)
 {
   ResPool pool = God->pool();
 
@@ -85,10 +85,14 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
       ui::Selectable::constPtr s = *q.selectableBegin();
       // print info
       // TranslatorExplanation E.g. "Information for package zypper:"
-      cout << endl << format(_("Information for %s %s:"))
-          % kind_to_string_localized(kind, 1) % *nameit;
-
-      cout << endl << endl;
+      
+      if (zypper.out().type() != Out::TYPE_XML)
+      {
+        cout << endl << format(_("Information for %s %s:"))
+            % kind_to_string_localized(kind, 1) % *nameit;
+  
+        cout << endl << endl;
+      }
 
       if (kind == ResKind::package)
         printPkgInfo(zypper, *s);
@@ -100,7 +104,8 @@ void printInfo(const Zypper & zypper, const ResKind & kind)
         printProductInfo(zypper, *s);
       else
         // TranslatorExplanation %s = resolvable type (package, patch, pattern, etc - untranslated).
-        cout << format(_("Info for type '%s' not implemented.")) % kind << endl;
+        zypper.out().info(
+          boost::str(format(_("Info for type '%s' not implemented.")) % kind));
     }
   }
 
@@ -140,7 +145,7 @@ Copy and modify /usr/share/vim/current/gvimrc to ~/.gvimrc if needed.
 </pre>
  *
  */
-void printPkgInfo(const Zypper & zypper, const ui::Selectable & s)
+void printPkgInfo(Zypper & zypper, const ui::Selectable & s)
 {
   PoolItem theone = s.theObj();
   PoolItem installed = s.installedObj();
@@ -196,7 +201,7 @@ atom: xv = 3.10a-1091.2
 </pre>
  * 
  */
-void printPatchInfo(const Zypper & zypper, const ui::Selectable & s )
+void printPatchInfo(Zypper & zypper, const ui::Selectable & s )
 {
   const PoolItem & pool_item = s.theObj();
   printNVA(pool_item.resolvable());
@@ -262,7 +267,7 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
-void printPatternInfo(const Zypper & zypper, const ui::Selectable & s)
+void printPatternInfo(Zypper & zypper, const ui::Selectable & s)
 {
   const PoolItem & pool_item = s.theObj();
 
@@ -324,21 +329,32 @@ Description:
 </pre>
  *
  */
-void printProductInfo(const Zypper & zypper, const ui::Selectable & s)
+void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 {
   const PoolItem & pool_item = s.theObj(); // should be the only one
 
-  cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
-       << pool_item.resolvable()->repository().info().name() << endl;
-
-  printNVA(pool_item.resolvable());
-
-  Product::constPtr product = asKind<Product>(pool_item.resolvable());
-  cout << _("Category")   << ": " << product->type() << endl;
-  cout << _("Flavor")     << ": " << product->flavor() << endl;
-  cout << _("Installed")  << ": " << (pool_item.status().isInstalled() ? "Yes" : "No") << endl;
-  cout << _("Short Name")       << ": " << product->shortName() << endl;
-  printSummaryDesc(pool_item.resolvable());
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    Product::constPtr pp
+      = dynamic_pointer_cast<const Product>(pool_item.resolvable()); 
+    cout
+      << asXML(*pp, pool_item.status().isInstalled())
+      << endl;
+  }
+  else
+  {
+    cout << (zypper.globalOpts().is_rug_compatible ? _("Catalog: ") : _("Repository: "))
+         << pool_item.resolvable()->repository().info().name() << endl;
+  
+    printNVA(pool_item.resolvable());
+  
+    Product::constPtr product = asKind<Product>(pool_item.resolvable());
+    cout << _("Category")   << ": " << product->type() << endl;
+    cout << _("Flavor")     << ": " << product->flavor() << endl;
+    cout << _("Installed")  << ": " << (pool_item.status().isInstalled() ? "Yes" : "No") << endl;
+    cout << _("Short Name")       << ": " << product->shortName() << endl;
+    printSummaryDesc(pool_item.resolvable());
+  }
 }
 
 // Local Variables:

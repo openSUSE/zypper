@@ -25,6 +25,8 @@ namespace zypp
 {
   class PoolItem;
   class Resolvable;
+  class Product;
+  class Pattern;
 }
 
 
@@ -105,5 +107,9 @@ inline bool isRepoFile(const std::string& name)
 {
   return name.find(".repo") != name.npos;
 }
+
+std::string asXML(const zypp::Product & p, bool is_installed);
+
+std::string asXML(const zypp::Pattern & p, bool is_installed);
 
 #endif /*ZYPPER_UTILS_H*/

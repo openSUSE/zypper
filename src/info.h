@@ -14,14 +14,14 @@
 
 #include "Zypper.h"
 
-void printInfo(const Zypper & zypper, const zypp::ResKind & kind);
+void printInfo(Zypper & zypper, const zypp::ResKind & kind);
 
-void printPkgInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
+void printPkgInfo(Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printPatchInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
+void printPatchInfo(Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printPatternInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
+void printPatternInfo(Zypper & zypper, const zypp::ui::Selectable & s);
 
-void printProductInfo(const Zypper & zypper, const zypp::ui::Selectable & s);
+void printProductInfo(Zypper & zypper, const zypp::ui::Selectable & s);
 
 #endif /*ZYPPERINFO_H_*/
