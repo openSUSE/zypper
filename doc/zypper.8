@@ -60,13 +60,15 @@ operations like search or info without internet access or root privileges.
 .SS Services
 .LP
 Services are one level above repositories and serve to manage repositories
-or to do some special tasks. Libypp currently supports only one type of
+or to do some special tasks. Libzypp currently supports only one type of
 services, the Repository Index Service (RIS).
 .LP
 Repository Index Service (RIS) is a special type of repository which contains
 a list of other repositories. This list can be generated dynamically by the
-server according to some URI parameters or user name, or can be static.
-See Service Management section for more details.
+server according to some URI parameters or user name, or can be static. Once
+such service is added to your system, zypper takes care of adding, modifying,
+or removing these repositories on your system to reflect the current list.
+See section Service Management for more details.
 
 .SS Package Types
 .LP
@@ -717,6 +719,17 @@ Clean both repository metadata and package caches.
 
 .SS Service Management
 
+The \fBservices\fR, \fBaddservice\fR, \fBremoveservice\fR, \fBmodifyservice\fR,
+and \fBrefresh-services\fR commands serve for manipulating services. A service
+is specified by its URI and needs to have a unique alias defined (among
+both services and repositories).
+
+Standalone repositories (not belonging to any service) are treated like
+services, too. The \fBls\fR command will list them, \fBms\fR command will modify
+them, etc. Repository specific options, like --keep-packages
+are not available here, though. You can use repository handling commands
+to manipulate them.
+
 .TP
 .B addservice (as) [options] <URI> <alias>
 Adds a service specified by \fBURI\fR to the system. The \fBalias\fR must be
@@ -727,7 +740,9 @@ Newly added services are not refereshed automatically. Use the
 
 .TP
 .I \-t, \-\-type <TYPE>
-Type of the service (possible values: ris).
+Type of the service (possible values: ris). There are several aliases
+defined for this type:
+\fBris\fR - RIS, nu, NU
 .TP
 .I \-d, \-\-disable
 Add the service as disabled.
@@ -748,6 +763,38 @@ Ignore user authentication data in the URI.
 .TP
 .I \-\-loose-query
 Ignore query string in the URI.
+
+.TP
+.B modifyservice (ms) [options]
+Modify properties of services.
+
+.TP
+.I \-d, \-\-disable
+Disable the service (but don't remove it).
+.TP
+.I \-e, \-\-enable
+Enable a disabled service.
+.TP
+.I \-r, \-\-refresh
+Enable auto-refresh of the service.
+.TP
+.I \-R, \-\-no\-refresh
+Disable auto-refresh of the service.
+.TP
+.I \-n, \-\-name
+Set a descriptive name for the service.
+.TP
+.I \-a, \-\-all
+Apply changes to all services.
+.TP
+.I \-l, \-\-local
+Apply changes to all local services.
+.TP
+.I \-t, \-\-remote
+Apply changes to all remote services.
+.TP
+.I \-m, \-\-medium\-type <type>
+Apply changes to services of specified type.
 
 .TP
 .B services (ls) [options]
