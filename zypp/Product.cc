@@ -162,7 +162,29 @@ namespace zypp
   Product::UrlList Product::urls( const std::string & key_r ) const
   {
     UrlList ret;
-#warning IMPLEMENT PRODUCT URLS
+
+    sat::LookupAttr url( sat::SolvAttr::productUrl, *this );
+    sat::LookupAttr url_type( sat::SolvAttr::productUrlType, *this );
+
+    sat::LookupAttr::iterator url_it(url.begin());
+    sat::LookupAttr::iterator url_type_it(url_type.begin());
+
+    for (;url_it != url.end(); ++url_it, ++url_type_it)
+    {
+        /* safety checks, shouldn't happen (tm) */
+        if (url_type_it == url_type.end())
+        {
+            /* FIXME: Raise exception ?! */
+            ERR << *this << " : The thing that should not happen, happened." << endl;
+            break;
+        }
+
+        if ( url_type_it.asString() == key_r )
+        {
+            ret._list.push_back(url_it.asString());           
+        }
+    } /* while (attribute array) */
+
     return ret;
   }
 

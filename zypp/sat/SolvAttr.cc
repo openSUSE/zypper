@@ -107,7 +107,6 @@ namespace sat
   const SolvAttr SolvAttr::productUpdaterepoKey  ( PRODUCT_UPDATEREPOKEY );
   const SolvAttr SolvAttr::productRegisterTarget ( PRODUCT_REGISTER_TARGET );
   const SolvAttr SolvAttr::productRegisterRelease( PRODUCT_REGISTER_RELEASE );
-
   const SolvAttr SolvAttr::productUrl( PRODUCT_URL );
   const SolvAttr SolvAttr::productUrlType( PRODUCT_URL_TYPE );
 
