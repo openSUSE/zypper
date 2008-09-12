@@ -16,7 +16,6 @@
 ../src/output/OutNormal.cc
 ../src/repos.cc
 ../src/search.cc
-../src/search.h
 ../src/solve-commit.cc
 ../src/update.cc
 ../src/utils/getopt.cc

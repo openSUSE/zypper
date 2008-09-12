@@ -3,6 +3,7 @@ Fri Sep 12 18:24:09 CEST 2008 - jkupec@suse.cz
 
 - modifyservice command added (fate #304915)
 - r11055
+- 0.12.5
 
 -------------------------------------------------------------------
 Fri Sep 12 13:52:45 CEST 2008 - jkupec@suse.cz
