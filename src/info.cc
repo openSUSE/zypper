@@ -335,8 +335,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s)
 
   if (zypper.out().type() == Out::TYPE_XML)
   {
-    Product::constPtr pp
-      = dynamic_pointer_cast<const Product>(pool_item.resolvable()); 
+    Product::constPtr pp = asKind<Product>(pool_item.resolvable()); 
     cout
       << asXML(*pp, pool_item.status().isInstalled())
       << endl;

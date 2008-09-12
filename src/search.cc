@@ -461,7 +461,29 @@ void list_packages(Zypper & zypper)
     cout << tbl;
 }
 
-void list_products(Zypper & zypper)
+static void list_products_xml(Zypper & zypper)
+{
+  bool installed_only = zypper.cOpts().count("installed-only");
+  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+
+  cout << "<product-list>" << endl;
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin(ResKind::product),
+    e  = God->pool().byKindEnd(ResKind::product);
+  for (; it != e; ++it )
+  {
+    if (it->status().isInstalled() && notinst_only)
+      continue;
+    else if (!it->status().isInstalled() && installed_only)
+      continue;
+
+    Product::constPtr product = asKind<Product>(it->resolvable());
+    cout << asXML(*product, it->status().isInstalled()) << endl;
+  }
+  cout << "</product-list>" << endl;
+}
+
+static void list_product_table(Zypper & zypper)
 {
   MIL << "Going to list packages." << std::endl;
 
@@ -514,6 +536,14 @@ void list_products(Zypper & zypper)
   else
     // display the result, even if --quiet specified
     cout << tbl;
+}
+
+void list_products(Zypper & zypper)
+{
+  if (zypper.out().type() == Out::TYPE_XML)
+    list_products_xml(zypper);
+  else
+    list_product_table(zypper);
 }
 
 
