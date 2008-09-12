@@ -24,6 +24,7 @@ static std::map<std::string,ZypperCommand::Command> _table;
 
 const ZypperCommand ZypperCommand::ADD_SERVICE(ZypperCommand::ADD_SERVICE_e);
 const ZypperCommand ZypperCommand::REMOVE_SERVICE(ZypperCommand::REMOVE_SERVICE_e);
+const ZypperCommand ZypperCommand::MODIFY_SERVICE(ZypperCommand::MODIFY_SERVICE_e);
 const ZypperCommand ZypperCommand::LIST_SERVICES(ZypperCommand::LIST_SERVICES_e);
 const ZypperCommand ZypperCommand::REFRESH_SERVICES(ZypperCommand::REFRESH_SERVICES_e);
 
@@ -94,6 +95,7 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
     // initialize it
     _table["addservice"] = _table["as"] = _table["service-add"] = _table["sa"] = ZypperCommand::ADD_SERVICE_e;
     _table["removeservice"] = _table["rs"] = _table["service-delete"] = _table["sd"] = ZypperCommand::REMOVE_SERVICE_e;
+    _table["modifyservice"] = _table["ms"] = ZypperCommand::MODIFY_SERVICE_e;
     _table["services"] = _table["ls"] = _table["service-list"] = _table["sl"] = ZypperCommand::LIST_SERVICES_e;
     _table["refresh-services"] = _table["refs"] = ZypperCommand::REFRESH_SERVICES_e;
 

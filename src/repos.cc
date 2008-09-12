@@ -1490,6 +1490,7 @@ void rename_repo(Zypper & zypper,
 }
 
 // ----------------------------------------------------------------------------
+
 void modify_repos_by_option( Zypper & zypper )
 {
   RepoManager manager(zypper.globalOpts().rm_options);
@@ -1561,68 +1562,22 @@ void modify_repos_by_option( Zypper & zypper )
   }
 
 }
+
+// ----------------------------------------------------------------------------
+
 void modify_repo(Zypper & zypper, const string & alias)
 {
-  // tell whether currenlty processed options are contradicting each other
-  // bool contradiction = false;
-  string msg_contradition =
-    // translators: speaking of two mutually contradicting command line options
-    _("%s used together with %s, which contradict each other."
-      " This property will be left unchanged.");
-
   // enable/disable repo
-  tribool enable = indeterminate;
-  if (copts.count("enable"))
-    enable = true;
-  if (copts.count("disable"))
-  {
-    if (enable)
-    {
-      zypper.out().warning(boost::str(format(msg_contradition)
-          % "--enable" % "--disable"), Out::QUIET);
-
-      enable = indeterminate;
-    }
-    else
-      enable = false;
-  }
+  tribool enable = get_boolean_option(zypper, "enable", "disable");
   DBG << "enable = " << enable << endl;
 
   // autorefresh
-  tribool autoref = indeterminate;
-  if (copts.count("refresh"))
-    autoref = true;
-  if (copts.count("no-refresh"))
-  {
-    if (autoref)
-    {
-      zypper.out().warning(boost::str(format(msg_contradition)
-          % "--refresh" % "--no-refresh"));
-
-      autoref = indeterminate;
-    }
-    else
-      autoref = false;
-  }
+  tribool autoref = get_boolean_option(zypper, "refresh", "no-refresh");
   DBG << "autoref = " << autoref << endl;
 
-  tribool keepPackages = indeterminate;
-  if (copts.count("keep-packages"))
-    keepPackages = true;
-  if (copts.count("no-keep-packages"))
-  {
-    if (keepPackages)
-    {
-      zypper.out().warning(boost::str(format(msg_contradition)
-          % "--keep-packages" % "--no-keep-package"));
-
-      keepPackages = indeterminate;
-    }
-    else
-      keepPackages = false;
-  }
+  tribool keepPackages = get_boolean_option(
+      zypper, "keep-packages", "no-keep-packages");
   DBG << "keepPackages = " << keepPackages << endl;
-
 
   try
   {
@@ -2412,6 +2367,168 @@ void refresh_services(Zypper & zypper)
     zypper.out().info(_("All services have been refreshed."));
 
   MIL << "DONE";
+}
+
+// ---------------------------------------------------------------------------
+
+void modify_service(Zypper & zypper, const string & alias)
+{
+  // enable/disable repo
+  tribool enable = get_boolean_option(zypper,"enable", "disable");
+  DBG << "enable = " << enable << endl;
+
+  // autorefresh
+  tribool autoref = get_boolean_option(zypper,"refresh", "no-refresh");
+  DBG << "autoref = " << autoref << endl;
+
+  try
+  {
+    RepoManager manager(zypper.globalOpts().rm_options);
+    ServiceInfo srv(manager.getService(alias));
+    bool chnaged_enabled = false;
+    bool changed_autoref = false;
+
+    if (!indeterminate(enable))
+    {
+      if (enable != srv.enabled())
+        chnaged_enabled = true;
+      srv.setEnabled(enable);
+    }
+
+    if (!indeterminate(autoref))
+    {
+      if (autoref != srv.autorefresh())
+        changed_autoref = true;
+      srv.setAutorefresh(autoref);
+    }
+
+    string name;
+    parsed_opts::const_iterator tmp1;
+    if ((tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end())
+    {
+      name = *tmp1->second.begin();
+      if (!name.empty())
+        srv.setName(name);
+    }
+
+    if (chnaged_enabled || changed_autoref | !name.empty())
+    {
+      manager.modifyService(alias, srv);
+
+      if (chnaged_enabled)
+      {
+        if (srv.enabled())
+          zypper.out().info(boost::str(format(
+            _("Service '%s' has been sucessfully enabled.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("Service '%s' has been sucessfully disabled.")) % alias));
+      }
+
+      if (changed_autoref)
+      {
+        if (srv.autorefresh())
+          zypper.out().info(boost::str(format(
+            _("Autorefresh has been enabled for service '%s'.")) % alias));
+        else
+          zypper.out().info(boost::str(format(
+            _("Autorefresh has been disabled for service '%s'.")) % alias));
+      }
+
+      if (!name.empty())
+      {
+        zypper.out().info(boost::str(format(
+          _("Name of service '%s' has been set to '%s'.")) % alias % name));
+      }
+    }
+    else
+    {
+      zypper.out().info(boost::str(format(
+        _("Nothing to change for service '%s'.")) % alias));
+      MIL << format("Nothing to modify in '%s':") % alias << srv << endl;
+    }
+  }
+  catch (const Exception & ex)
+  {
+    zypper.out().error(ex,
+      _("Error while modifying the service:"),
+      boost::str(format(_("Leaving service %s unchanged.")) % alias));
+
+    ERR << "Error while modifying the service:" << ex.asUserString() << endl;
+  }
+}
+
+// ---------------------------------------------------------------------------
+
+void modify_services_by_option( Zypper & zypper )
+{
+  RepoManager manager(zypper.globalOpts().rm_options);
+  ServiceList known = get_all_services(zypper);
+  set<string> repos_to_modify;
+  set<string> services_to_modify;
+
+  ServiceInfo_Ptr sptr;
+  RepoInfo_Ptr    rptr;
+  
+  if ( copts.count("all") )
+  {
+    for_(it, known.begin(), known.end())
+    {
+      if (sptr = dynamic_pointer_cast<ServiceInfo>(*it))
+        modify_service( zypper, sptr->alias() );
+      else
+        modify_repo( zypper, (*it)->alias() );
+    }
+    return;
+  }
+
+  bool local = copts.count("local");
+  bool remote = copts.count("remote");
+  list<string> pars = copts["medium-type"];
+  set<string> schemes(pars.begin(), pars.end());
+
+  for_(it, known.begin(), known.end())
+  {
+    Url url;
+    if (sptr = dynamic_pointer_cast<ServiceInfo>(*it))
+      url = sptr->url();
+    else
+    {
+      rptr = dynamic_pointer_cast<RepoInfo>(*it);
+      if (!rptr->baseUrlsEmpty())
+        url = *rptr->baseUrlsBegin();
+    }
+
+    if (url.isValid())
+    {
+      bool modify = false;
+      if (local  && !MediaAccess::downloads( url ) )
+        modify = true;
+
+      if (!modify && remote && MediaAccess::downloads( url ) )
+        modify = true;
+
+      if (!modify && schemes.find(url.getScheme()) != schemes.end())
+        modify = true;
+
+      if (modify)
+      {
+        string alias = (*it)->alias();
+        if (sptr)
+          services_to_modify.insert( alias );
+        else
+          repos_to_modify.insert( alias );
+      }
+    }
+    else
+      WAR << "got invalid url: " << url.asString() << endl;
+  }
+
+  for_(it, services_to_modify.begin(), services_to_modify.end())
+    modify_service( zypper, *it );
+
+  for_(it, repos_to_modify.begin(), repos_to_modify.end())
+    modify_repo( zypper, *it );
 }
 
 // ---------------------------------------------------------------------------

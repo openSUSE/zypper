@@ -148,11 +148,15 @@ void add_service_by_url( Zypper & zypper,
 
 void remove_service(Zypper & zypper, const zypp::ServiceInfo & service);
 
+void modify_service(Zypper & zypper, const std::string & alias);
+
 void refresh_services(Zypper & zypper);
 
 bool match_service(Zypper & zypper,
                    std::string str,
                    zypp::repo::RepoInfoBase_Ptr & service_ptr);
+
+void modify_services_by_option( Zypper & zypper );
 
 /**
  * Initialize rpm database on target, if not already initialized. 

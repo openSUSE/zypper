@@ -198,6 +198,7 @@ void print_main_help(Zypper & zypper)
   static string help_service_commands = _("\tService Handling:\n"
     "\tservices, ls\t\tList all defined services.\n"
     "\taddservice, as\t\tAdd a new service.\n"
+    "\tmodifyservice, ms\tModify specified service.\n"
     "\tremoveservice, rs\tRemove specified service.\n"
     "\trefresh-services, refs\tRefresh all services.\n"
   );
@@ -1028,6 +1029,45 @@ void Zypper::processCommandOptions()
     );
     break;
   }
+  
+  case ZypperCommand::MODIFY_SERVICE_e:
+  {
+    static struct option service_modify_options[] = {
+      {"help", no_argument, 0, 'h'},
+      {"disable", no_argument, 0, 'd'},
+      {"enable", no_argument, 0, 'e'},
+      {"refresh", no_argument, 0, 'r'},
+      {"no-refresh", no_argument, 0, 'R'},
+      {"name", required_argument, 0, 'n'},
+      {"all", no_argument, 0, 'a' },
+      {"local", no_argument, 0, 'l' },
+      {"remote", no_argument, 0, 't' },
+      {"medium-type", required_argument, 0, 'm' },
+      {0, 0, 0, 0}
+    };
+    specific_options = service_modify_options;
+    _command_help = str::form(_(
+      // translators: %s is "--all" and "--all"
+      "modifyservice (ms) <options> <alias|#|URI>\n"
+      "modifyservice (ms) <options> <%s>\n"
+      "\n"
+      "Modify properties of repositories specified by alias, number or URI or"
+      " all.\n"
+      "\n"
+      "  Command options:\n"
+      "-d, --disable             Disable the service (but don't remove it).\n"
+      "-e, --enable              Enable a disabled service.\n"
+      "-r, --refresh             Enable auto-refresh of the service.\n"
+      "-R, --no-refresh          Disable auto-refresh of the service.\n"
+      "-n, --name                Set a descriptive name for the service.\n"
+      "-a, --all                 Apply changes to all services.\n"
+      "-l, --local               Apply changes to all local services.\n"
+      "-t, --remote              Apply changes to all remote services.\n"
+      "-m, --medium-type <type>  Apply changes to services of specified type.\n"
+    ), "--all|--remote|--local|--medium-type"
+     , "--all, --remote, --local, --medium-type");
+    break;
+  }
 
   case ZypperCommand::LIST_SERVICES_e:
   {
@@ -1221,9 +1261,7 @@ void Zypper::processCommandOptions()
       {"disable", no_argument, 0, 'd'},
       {"enable", no_argument, 0, 'e'},
       {"refresh", no_argument, 0, 'r'},
-      {"enable-autorefresh", no_argument, 0, 0 }, // backward compatibility
       {"no-refresh", no_argument, 0, 'R'},
-      {"disable-autorefresh", no_argument, 0, 0 }, // backward compatibility
       {"name", required_argument, 0, 'n'},
       {"priority", required_argument, 0, 'p'},
       {"keep-packages", no_argument, 0, 'k'},
@@ -2208,6 +2246,63 @@ void Zypper::doCommand()
               _("See '%s' or '%s' to get a list of known repository types."),
               "zypper help addservice", "man zypper"));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+    }
+
+    break;
+  }
+
+  case ZypperCommand::MODIFY_SERVICE_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    // check root user
+    if (geteuid() != 0 && !globalOpts().changedRoot)
+    {
+      out().error(
+        _("Root privileges are required for modifying services."));
+      setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+
+    bool non_alias = copts.count("all") || copts.count("local") ||
+        copts.count("remote") || copts.count("medium-type");
+
+    if (_arguments.size() < 1 && !non_alias)
+    {
+      // translators: aggregate option is e.g. "--all". This message will be
+      // followed by ms command help text which will explain it
+      out().error(_("Alias or an aggregate option is required."));
+      ERR << "No alias argument given." << endl;
+      out().info(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+    // too many arguments
+    if (_arguments.size() > 1
+       || (_arguments.size() > 0 && non_alias))
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    if (non_alias)
+    {
+      modify_services_by_option(*this);
+    }
+    else
+    {
+      repo::RepoInfoBase_Ptr srv;
+      if (match_service(*this, _arguments[0], srv))
+      {
+        modify_service(*this, srv->alias());
+      }
+      else
+      {
+        out().error(
+          boost::str(format(_("Service '%s' not found.")) % _arguments[0]));
+        ERR << "Service " << _arguments[0] << " not found" << endl;
+      }
     }
 
     break;

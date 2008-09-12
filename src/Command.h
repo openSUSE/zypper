@@ -19,6 +19,7 @@ struct ZypperCommand
 {
   static const ZypperCommand ADD_SERVICE;
   static const ZypperCommand REMOVE_SERVICE;
+  static const ZypperCommand MODIFY_SERVICE;
   static const ZypperCommand LIST_SERVICES;
   static const ZypperCommand REFRESH_SERVICES;
 
@@ -86,6 +87,7 @@ struct ZypperCommand
   {
     ADD_SERVICE_e,
     REMOVE_SERVICE_e,
+    MODIFY_SERVICE_e,
     LIST_SERVICES_e,
     REFRESH_SERVICES_e,
 

@@ -2,6 +2,7 @@
 #include "main.h"
 #include <iostream>
 #include "zypp/base/String.h"
+#include "Zypper.h"
 
 using namespace std;
 
@@ -73,6 +74,39 @@ parsed_opts parse_options (int argc, char **argv,
   return result;
 }
 
+using boost::tribool;
+using boost::indeterminate;
+
+tribool get_boolean_option(
+    Zypper & zypper,
+    const string & pname,
+    const string & nname )
+{
+  static string msg_contradition =
+    // translators: speaking of two mutually contradicting command line options
+    _("%s used together with %s, which contradict each other."
+      " This property will be left unchanged.");
+
+  tribool result = indeterminate;
+  if (copts.count(pname))
+    result = true;
+  if (copts.count(nname))
+  {
+    if (result)
+    {
+      string po = "--" + pname;
+      string no = "--" + nname;
+      // report contradition
+      zypper.out().warning(zypp::str::form(
+          msg_contradition.c_str(), po.c_str(), no.c_str()), Out::QUIET);
+
+      result = indeterminate;
+    }
+    else
+      result = false;
+  }
+  return result;
+}
 
 Args::Args (const std::string& s)
   : _argv(NULL) {

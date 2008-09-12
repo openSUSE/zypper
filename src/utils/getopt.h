@@ -8,11 +8,23 @@
 
 #include <getopt.h>
 
+#include <boost/logic/tribool.hpp> //! \todo replace with zypp's tribool
+
 typedef std::map<std::string, std::list<std::string> > parsed_opts;
 
 // longopts.flag must be NULL
 parsed_opts parse_options (int argc, char **argv,
 			   const struct option *longopts);
+
+class Zypper;
+
+/**
+ * 
+ */
+boost::tribool get_boolean_option(
+    Zypper & zypper,
+    const std::string & pname,
+    const std::string & nname );
 
 
 //! Parse a single string to an array of char* usable for getopt_long.
