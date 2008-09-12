@@ -15,9 +15,9 @@
 #include <iosfwd>
 #include <list>
 
-#include <boost/iterator.hpp>
-
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Iterator.h"
+
 #include "zypp/Pathname.h"
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
@@ -565,11 +565,11 @@ namespace zypp
      */
     struct MatchServiceAlias
     {
-      private:
-        std::string alias;
       public:
         MatchServiceAlias( const std::string & alias_ ) : alias(alias_) {}
-        bool match( const RepoInfo & info ) { return info.service() == alias; }
+        bool operator()( const RepoInfo & info ) const { return info.service() == alias; }
+      private:
+        std::string alias;
     };
 
   public:
@@ -612,12 +612,9 @@ namespace zypp
     {
       MatchServiceAlias filter(alias);
 
-      std::copy(
-        boost::make_filter_iterator(
-          bind(&MatchServiceAlias::match, filter, _1), repoBegin(), repoEnd()),
-        boost::make_filter_iterator(
-          bind(&MatchServiceAlias::match, filter, _1), repoEnd(), repoEnd()),
-        out);
+      std::copy( boost::make_filter_iterator( filter, repoBegin(), repoEnd() ),
+                 boost::make_filter_iterator( filter, repoEnd(), repoEnd() ),
+                 out);
     }
 
   protected:
