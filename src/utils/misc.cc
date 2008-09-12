@@ -333,8 +333,11 @@ string asXML(const Product & p, bool is_installed)
   str
     << "<product"
        " name=\"" << xml_encode(p.name()) << "\""
-       " version=\"" << p.edition() << "\""
+       " version=\"" << p.edition().version() << "\""
+       " release=\"" << p.edition().release() << "\""
+       " epoch=\"" << p.edition().epoch() << "\""
        " arch=\"" << p.arch() << "\""
+       " registerrelease=\"" << xml_encode(p.registerRelease()) << "\""
        " vendor=\"" << xml_encode(p.vendor()) << "\""
        " summary=\"" << xml_encode(p.summary()) << "\""
        " shortname=\"" << xml_encode(p.shortName()) << "\""
@@ -357,7 +360,9 @@ string asXML(const Pattern & p, bool is_installed)
   str
     << "<pattern"
        " name=\"" << xml_encode(p.name()) << "\""
-       " version=\"" << p.edition() << "\""
+       " version=\"" << p.edition().version() << "\""
+       " release=\"" << p.edition().release() << "\""
+       " epoch=\"" << p.edition().epoch() << "\""
        " arch=\"" << p.arch() << "\""
        " vendor=\"" << xml_encode(p.vendor()) << "\""
        " summary=\"" << xml_encode(p.summary()) << "\""
