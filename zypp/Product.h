@@ -76,6 +76,17 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
+    /** This is \c register.target attribute of an installed product.
+     * Used for registration.
+    */
+    std::string registerTarget() const;
+
+    /** This is \c register.release attribute of an installed product.
+     * Used for registration.
+     */
+    std::string registerRelease() const;
+
+
   public:
     /***/
     class UrlList;

@@ -130,10 +130,10 @@ namespace sat
       static const SolvAttr productFlavor;
       static const SolvAttr productReferences; // the package providing the metadata
       static const SolvAttr productUpdaterepoKey;
-
+      static const SolvAttr productRegisterTarget;
+      static const SolvAttr productRegisterRelease;
       static const SolvAttr productUrl;
       static const SolvAttr productUrlType;
-
       //@}
 
       /** \name repository */

@@ -97,14 +97,16 @@ namespace sat
   const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
 
   // product
-  const SolvAttr SolvAttr::productShortlabel   ( PRODUCT_SHORTLABEL );
-  const SolvAttr SolvAttr::productDistproduct  ( PRODUCT_DISTPRODUCT );
-  const SolvAttr SolvAttr::productDistversion  ( PRODUCT_DISTVERSION );
-  const SolvAttr SolvAttr::productType         ( PRODUCT_TYPE );
-  const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
-  const SolvAttr SolvAttr::productFlavor       ( PRODUCT_FLAVOR );
-  const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
-  const SolvAttr SolvAttr::productUpdaterepoKey( PRODUCT_UPDATEREPOKEY );
+  const SolvAttr SolvAttr::productShortlabel     ( PRODUCT_SHORTLABEL );
+  const SolvAttr SolvAttr::productDistproduct    ( PRODUCT_DISTPRODUCT );
+  const SolvAttr SolvAttr::productDistversion    ( PRODUCT_DISTVERSION );
+  const SolvAttr SolvAttr::productType           ( PRODUCT_TYPE );
+  const SolvAttr SolvAttr::productFlags          ( PRODUCT_FLAGS );
+  const SolvAttr SolvAttr::productFlavor         ( PRODUCT_FLAVOR );
+  const SolvAttr SolvAttr::productReferences     ( PRODUCT_REFERENCES );
+  const SolvAttr SolvAttr::productUpdaterepoKey  ( PRODUCT_UPDATEREPOKEY );
+  const SolvAttr SolvAttr::productRegisterTarget ( "" )
+  const SolvAttr SolvAttr::productRegisterRelease( "" )
 
   const SolvAttr SolvAttr::productUrl( PRODUCT_URL );
   const SolvAttr SolvAttr::productUrlType( PRODUCT_URL_TYPE );
