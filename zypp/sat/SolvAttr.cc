@@ -106,6 +106,9 @@ namespace sat
   const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
   const SolvAttr SolvAttr::productUpdaterepoKey( PRODUCT_UPDATEREPOKEY );
 
+  const SolvAttr SolvAttr::productUrl( PRODUCT_URL );
+  const SolvAttr SolvAttr::productUrlType( PRODUCT_URL_TYPE );
+
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );
   const SolvAttr SolvAttr::repositoryExpire ( REPOSITORY_EXPIRE );

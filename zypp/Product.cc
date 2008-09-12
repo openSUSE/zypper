@@ -163,9 +163,9 @@ namespace zypp
   Product::UrlList Product::releaseNotesUrls() const { return urls( "releasenotes" ); }
   Product::UrlList Product::registerUrls()     const { return urls( "register" ); }
   Product::UrlList Product::smoltUrls()        const { return urls( "smolt" ); }
-  Product::UrlList Product::updateUrls()       const { return urls( "updateurls" ); }
-  Product::UrlList Product::extraUrls()        const { return urls( "extraurls" ); }
-  Product::UrlList Product::optionalUrls()     const { return urls( "optionalurls" ); }
+  Product::UrlList Product::updateUrls()       const { return urls( "update" ); }
+  Product::UrlList Product::extraUrls()        const { return urls( "extra" ); }
+  Product::UrlList Product::optionalUrls()     const { return urls( "optional" ); }
 
   std::ostream & operator<<( std::ostream & str, const Product::UrlList & obj )
   { return dumpRange( str << obj.key() << ' ', obj.begin(), obj.end() ); }
