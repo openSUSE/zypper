@@ -354,11 +354,19 @@ static void list_patterns_xml(Zypper & zypper)
 {
   cout << "<pattern-list>" << endl;
 
+  bool installed_only = zypper.cOpts().count("installed-only");
+  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+
   ResPool::byKind_iterator
     it = God->pool().byKindBegin(ResKind::pattern),
     e  = God->pool().byKindEnd(ResKind::pattern);
   for (; it != e; ++it )
   {
+    if (it->isSatisfied() && notinst_only)
+      continue;
+    else if (!it->isSatisfied() && installed_only)
+      continue;
+
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
     cout << asXML(*pattern, it->isSatisfied()) << endl;
   }
@@ -380,11 +388,19 @@ static void list_pattern_table(Zypper & zypper)
     th << _("Repository") << _("Dependency"); 
   tbl << th;
 
+  bool installed_only = zypper.cOpts().count("installed-only");
+  bool notinst_only = zypper.cOpts().count("uninstalled-only");
+
   ResPool::byKind_iterator
     it = God->pool().byKindBegin(ResKind::pattern),
     e  = God->pool().byKindEnd(ResKind::pattern);
   for (; it != e; ++it )
   {
+    if (it->isSatisfied() && notinst_only)
+      continue;
+    else if (!it->isSatisfied() && installed_only)
+      continue;
+
     Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
 
     TableRow tr;
