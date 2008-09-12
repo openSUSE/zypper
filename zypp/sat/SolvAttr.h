@@ -126,10 +126,6 @@ namespace sat
       static const SolvAttr productDistproduct;
       static const SolvAttr productDistversion;
       static const SolvAttr productType;
-      static const SolvAttr productRelnotesurl;
-      static const SolvAttr productUpdateurls;
-      static const SolvAttr productExtraurls;
-      static const SolvAttr productOptionalurls;
       static const SolvAttr productFlags;
       static const SolvAttr productFlavor;
       static const SolvAttr productReferences; // the package providing the metadata

@@ -101,10 +101,6 @@ namespace sat
   const SolvAttr SolvAttr::productDistproduct  ( PRODUCT_DISTPRODUCT );
   const SolvAttr SolvAttr::productDistversion  ( PRODUCT_DISTVERSION );
   const SolvAttr SolvAttr::productType         ( PRODUCT_TYPE );
-  const SolvAttr SolvAttr::productRelnotesurl  ( PRODUCT_RELNOTESURL );
-  const SolvAttr SolvAttr::productUpdateurls   ( PRODUCT_UPDATEURLS );
-  const SolvAttr SolvAttr::productExtraurls    ( PRODUCT_EXTRAURLS );
-  const SolvAttr SolvAttr::productOptionalurls ( PRODUCT_OPTIONALURLS );
   const SolvAttr SolvAttr::productFlags        ( PRODUCT_FLAGS );
   const SolvAttr SolvAttr::productFlavor       ( PRODUCT_FLAVOR );
   const SolvAttr SolvAttr::productReferences   ( PRODUCT_REFERENCES );
