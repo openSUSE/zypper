@@ -725,10 +725,13 @@ unique and serves to identify the services.
 Newly added services are not refereshed automatically. Use the
 \fBrefresh-services\fR command to refresh them.
 
+.TP
 .I \-t, \-\-type <TYPE>
 Type of the service (possible values: ris).
+.TP
 .I \-d, \-\-disable
 Add the service as disabled.
+.TP
 .I \-n, \-\-name
 Specify descriptive name for the service.
 
@@ -739,8 +742,10 @@ Remove specified repository index service from the sytem.
 
 Removing an RIS service will result in removing of all of its repositories.
 
+.TP
 .I \-\-loose\-auth
 Ignore user authentication data in the URI.
+.TP
 .I \-\-loose-query
 Ignore query string in the URI.
 
@@ -748,18 +753,25 @@ Ignore query string in the URI.
 .B services (ls) [options]
 List services defined on the system.
 
+.TP
 .I \-u, \-\-uri
 Show also base URI of repositories.
+.TP
 .I \-p, \-\-priority
 Show also repository priority.
+.TP
 .I \-d, \-\-details
 Show more information like URI, priority, type.
+.TP
 .I \-r, \-\-with\-repos
 Show also repositories belonging to the services.
+.TP
 .I \-P, \-\-sort\-by\-priority
 Sort the list by repository priority.
+.TP
 .I \-U, \-\-sort-by-uri
 Sort the list by URI.
+.TP
 .I \-N, \-\-sort\-by\-name
 Sort the list by name.
 
