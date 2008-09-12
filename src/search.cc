@@ -350,8 +350,23 @@ void list_patches(Zypper & zypper)
     cout << tbl;
 }
 
+static void list_patterns_xml(Zypper & zypper)
+{
+  cout << "<pattern-list>" << endl;
 
-void list_patterns(Zypper & zypper)
+  ResPool::byKind_iterator
+    it = God->pool().byKindBegin(ResKind::pattern),
+    e  = God->pool().byKindEnd(ResKind::pattern);
+  for (; it != e; ++it )
+  {
+    Pattern::constPtr pattern = asKind<Pattern>(it->resolvable());
+    cout << asXML(*pattern, it->isSatisfied()) << endl;
+  }
+
+  cout << "</pattern-list>" << endl;
+}
+
+static void list_pattern_table(Zypper & zypper)
 {
   MIL << "Going to list patterns." << std::endl;
 
@@ -389,6 +404,14 @@ void list_patterns(Zypper & zypper)
   else
     // display the result, even if --quiet specified
     cout << tbl;
+}
+
+void list_patterns(Zypper & zypper)
+{
+  if (zypper.out().type() == Out::TYPE_XML)
+    list_patterns_xml(zypper);
+  else
+    list_pattern_table(zypper);
 }
 
 void list_packages(Zypper & zypper)

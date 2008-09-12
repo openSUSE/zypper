@@ -323,6 +323,10 @@ Capability safe_parse_cap (Zypper & zypper,
   return Capability();
 }
 
+/**
+ * \todo this is an ugly quick-hack code, let's do something reusable and maintainable in libzypp later
+ */
+// ----------------------------------------------------------------------------
 string asXML(const Product & p, bool is_installed)
 {
   ostringstream str;
@@ -349,5 +353,23 @@ string asXML(const Product & p, bool is_installed)
 
 string asXML(const Pattern & p, bool is_installed)
 {
-  return "";
+  ostringstream str;
+  str
+    << "<pattern"
+       " name=\"" << xml_encode(p.name()) << "\""
+       " version=\"" << p.edition() << "\""
+       " arch=\"" << p.arch() << "\""
+       " vendor=\"" << xml_encode(p.vendor()) << "\""
+       " summary=\"" << xml_encode(p.summary()) << "\""
+       " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
+       " installed=\"" << (is_installed ? 1 : 0) << "\"";
+  if (p.description().empty())
+    str << "/>";
+  else
+    str
+      << ">" << endl << "<description>" << p.description() << "</description>"
+      << endl << "</pattern>";
+  return str.str();
 }
+
+// ----------------------------------------------------------------------------
