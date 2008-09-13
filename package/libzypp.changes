@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Sep 14 00:10:21 CEST 2008 - jkupec@suse.cz
+
+- ServiceInfo.clearReposTo{Enable,Disable}() methods added
+- revision 11060
+
+-------------------------------------------------------------------
 Fri Sep 12 18:24:28 CEST 2008 - ma@suse.de
 
 - Create new Service repos in disbaled sate.
