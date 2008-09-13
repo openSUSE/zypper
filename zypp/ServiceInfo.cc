@@ -142,6 +142,9 @@ namespace zypp
   void ServiceInfo::delRepoToEnable( const std::string & alias_r )
   { _pimpl->reposToEnable.erase( alias_r ); }
 
+  void ServiceInfo::clearReposToEnable()
+  { _pimpl->reposToEnable.clear(); }
+
 
   bool ServiceInfo::reposToDisableEmpty() const
   { return _pimpl->reposToDisable.empty(); }
@@ -163,6 +166,9 @@ namespace zypp
 
   void ServiceInfo::delRepoToDisable( const std::string & alias_r )
   { _pimpl->reposToDisable.erase( alias_r ); }
+
+  void ServiceInfo::clearReposToDisable()
+  { _pimpl->reposToDisable.clear(); }
 
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const

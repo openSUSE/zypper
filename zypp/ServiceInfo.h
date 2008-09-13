@@ -107,8 +107,10 @@ namespace zypp
 
     /** Add \c alias_r to the set of ReposToEnable. */
     void addRepoToEnable( const std::string & alias_r );
-    /** Remove \c alias_r to the set of ReposToEnable. */
+    /** Remove \c alias_r from the set of ReposToEnable. */
     void delRepoToEnable( const std::string & alias_r );
+    /** Clear the set of ReposToEnable. */
+    void clearReposToEnable();
     //@}
 
     /** \name Set of repos (repository aliases) to disable on next refresh.
@@ -129,8 +131,10 @@ namespace zypp
 
     /** Add \c alias_r to the set of ReposToDisable. */
     void addRepoToDisable( const std::string & alias_r );
-    /** Remove \c alias_r to the set of ReposToDisable. */
+    /** Remove \c alias_r from the set of ReposToDisable. */
     void delRepoToDisable( const std::string & alias_r );
+    /** Clear the set of ReposToDisable. */
+    void clearReposToDisable();
     //@}
 
   public:
