@@ -1128,7 +1128,6 @@ void Zypper::processCommandOptions()
     static struct option service_add_options[] = {
       {"type", required_argument, 0, 't'},
       {"disable", no_argument, 0, 'd'},
-      {"disabled", no_argument, 0, 'd'}, // backward compatibility
       {"repo", required_argument, 0, 'r'},
       {"help", no_argument, 0, 'h'},
       {"check", no_argument, 0, 'c'},
@@ -2215,8 +2214,11 @@ void Zypper::doCommand()
     // indeterminate indicates the user has not specified the values
     tribool enabled(indeterminate);
 
-    if (copts.count("disable") || copts.count("disabled"))
+    if (copts.count("disable"))
       enabled = false;
+
+    // enable by default
+    if (indeterminate(enabled)) enabled = true;
 
     Url url = make_url (_arguments[0]);
     if (!url.isValid())
@@ -2225,27 +2227,34 @@ void Zypper::doCommand()
       return;
     }
 
-    // force specific repository type. Validation is done in add_service_by_url()
+    // force specific repository type.
     string type = copts.count("type") ? copts["type"].front() : "";
 
-    // by default, enable the service
-    if (indeterminate(enabled)) enabled = true;
+    // check for valid service type
+    bool isservice = false;
+    try { repo::ServiceType stype(type); isservice = true; }
+    catch (const repo::RepoUnknownTypeException & e) {}
 
     warn_if_zmd();
 
-    try
-    {
+    if (isservice)
       add_service_by_url(*this, url, _arguments[1], type, enabled);
-    }
-    catch (const repo::RepoUnknownTypeException & e)
+    else
     {
-      ZYPP_CAUGHT(e);
-      out().error(e,
-          _("Specified type is not a valid service type:"),
-          str::form(
-              _("See '%s' or '%s' to get a list of known repository types."),
-              "zypper help addservice", "man zypper"));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      try
+      {
+        add_repo_by_url(*this, url, _arguments[1], type, enabled);
+      }
+      catch (const repo::RepoUnknownTypeException & e)
+      {
+        ZYPP_CAUGHT(e);
+        out().error(
+            str::form(_("'%s' is not a valid service type."), type.c_str()),
+            str::form(
+                _("See '%s' or '%s' to get a list of known service types."),
+                "zypper help addservice", "man zypper"));
+        setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      }
     }
 
     break;
@@ -2350,7 +2359,7 @@ void Zypper::doCommand()
     // indeterminate indicates the user has not specified the values
 
     TriBool enabled = indeterminate;
-    if (copts.count("disable") || copts.count("disabled"))
+    if (copts.count("disable"))
       enabled = false;
 
     TriBool autorefresh = indeterminate;
