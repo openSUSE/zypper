@@ -2385,6 +2385,7 @@ void modify_service(Zypper & zypper, const string & alias)
   {
     RepoManager manager(zypper.globalOpts().rm_options);
     ServiceInfo srv(manager.getService(alias));
+    
     bool chnaged_enabled = false;
     bool changed_autoref = false;
 
@@ -2407,11 +2408,77 @@ void modify_service(Zypper & zypper, const string & alias)
     if ((tmp1 = zypper.cOpts().find("name")) != zypper.cOpts().end())
     {
       name = *tmp1->second.begin();
-      if (!name.empty())
-        srv.setName(name);
+      srv.setName(name);
     }
 
-    if (chnaged_enabled || changed_autoref | !name.empty())
+    set<string> artoenable;
+    set<string> artodisable;
+    set<string> rrtoenable;
+    set<string> rrtodisable;
+    
+    // RIS repos to enable
+    if (zypper.cOpts().count("cl-to-enable"))
+    {
+      rrtoenable.insert(srv.reposToEnableBegin(), srv.reposToEnableEnd());
+      srv.clearReposToEnable();
+    }
+    else
+    {
+      if ((tmp1 = zypper.cOpts().find("ar-to-enable")) != zypper.cOpts().end())
+        for_(rit, tmp1->second.begin(), tmp1->second.end())
+        {
+          if (!srv.repoToEnableFind(*rit))
+          {
+            srv.addRepoToEnable(*rit);
+            artoenable.insert(*rit);
+          }
+        }
+      if ((tmp1 = zypper.cOpts().find("rr-to-enable")) != zypper.cOpts().end())
+        for_(rit, tmp1->second.begin(), tmp1->second.end())
+        {
+          if (srv.repoToEnableFind(*rit))
+          {
+            srv.delRepoToEnable(*rit);
+            rrtoenable.insert(*rit);
+          }
+        }
+    }
+
+    // RIS repos to disable
+    if (zypper.cOpts().count("cl-to-disable"))
+    {
+      rrtodisable.insert(srv.reposToDisableBegin(), srv.reposToDisableEnd());
+      srv.clearReposToDisable();
+    }
+    else
+    {
+      if ((tmp1 = zypper.cOpts().find("ar-to-disable")) != zypper.cOpts().end())
+        for_(rit, tmp1->second.begin(), tmp1->second.end())
+        {
+          if (!srv.repoToDisableFind(*rit))
+          {
+            srv.addRepoToDisable(*rit);
+            artodisable.insert(*rit);
+          }
+        }
+      if ((tmp1 = zypper.cOpts().find("rr-to-disable")) != zypper.cOpts().end())
+        for_(rit, tmp1->second.begin(), tmp1->second.end())
+        {
+          if (srv.repoToDisableFind(*rit))
+          {
+            srv.delRepoToDisable(*rit);
+            rrtodisable.insert(*rit);
+          }
+        }
+    }
+
+    if (chnaged_enabled
+        || changed_autoref
+        || !name.empty()
+        || !artoenable.empty()
+        || !artodisable.empty()
+        || !rrtoenable.empty()
+        || !rrtodisable.empty())
     {
       manager.modifyService(alias, srv);
 
@@ -2439,6 +2506,39 @@ void modify_service(Zypper & zypper, const string & alias)
       {
         zypper.out().info(boost::str(format(
           _("Name of service '%s' has been set to '%s'.")) % alias % name));
+      }
+
+      if (!artoenable.empty())
+      {
+        zypper.out().info(boost::str(format(
+            _PL("Repository '%s' has been added to enabled repositories of service '%s'",
+                "Repositories '%s' have been added to enabled repositories of service '%s'",
+                artoenable.size()))
+            % str::join(artoenable.begin(), artoenable.end(), ", ") % alias));
+      }
+      if (!artodisable.empty())
+      {
+        zypper.out().info(boost::str(format(
+            _PL("Repository '%s' has been added to disabled repositories of service '%s'",
+                "Repositories '%s' have been added to disabled repositories of service '%s'",
+                artodisable.size()))
+            % str::join(artodisable.begin(), artodisable.end(), ", ") % alias));
+      }
+      if (!rrtoenable.empty())
+      {
+        zypper.out().info(boost::str(format(
+            _PL("Repository '%s' has been removed from enabled repositories of service '%s'",
+                "Repositories '%s' have been removed from enabled repositories of service '%s'",
+                rrtoenable.size()))
+            % str::join(rrtoenable.begin(), rrtoenable.end(), ", ") % alias));
+      }
+      if (!rrtodisable.empty())
+      {
+        zypper.out().info(boost::str(format(
+            _PL("Repository '%s' has been removed from disabled repositories of service '%s'",
+                "Repositories '%s' have been removed from disabled repositories of service '%s'",
+                rrtodisable.size()))
+            % str::join(rrtodisable.begin(), rrtodisable.end(), ", ") % alias));
       }
     }
     else

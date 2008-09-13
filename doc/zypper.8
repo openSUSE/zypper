@@ -1,4 +1,4 @@
-.TH "zypper" "8" "0.12.5" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.6" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
 zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
@@ -638,7 +638,10 @@ Assign new alias to the repository specified by alias, number or URI.
 
 .TP
 .B modifyrepo (mr) <options> <alias|#|URI>
-Modify properties of the repository specified by alias, number or URI.
+.TP
+.B modifyrepo (mr) <options> <--all|--remote|--local|--medium-type>
+Modify properties of the repository specified by alias, number or URI or
+one of the aggregate options.
 .TP
 \fI\-e, \-\-enable\fR
 Enable the repository.
@@ -733,10 +736,14 @@ to manipulate them.
 .TP
 .B addservice (as) [options] <URI> <alias>
 Adds a service specified by \fBURI\fR to the system. The \fBalias\fR must be
-unique and serves to identify the services.
+unique and serves to identify the service.
 
 Newly added services are not refereshed automatically. Use the
 \fBrefresh-services\fR command to refresh them.
+
+This command also allows to add also ordinary repositories when used with
+--type option, where you specify the type of the repository. See the addrepo
+command for the list of supported repository types.
 
 .TP
 .I \-t, \-\-type <TYPE>
@@ -765,9 +772,13 @@ Ignore user authentication data in the URI.
 Ignore query string in the URI.
 
 .TP
-.B modifyservice (ms) [options]
-Modify properties of services.
+.B modifyservice (ms) <options> <alias|#|URI>
+.B modifyservice (ms) <options> <--all|--remote|--local|--medium-type>
+Modify properties of specified services.
 
+.TP
+Common Options
+These options are common to all types of services and repositories. 
 .TP
 .I \-d, \-\-disable
 Disable the service (but don't remove it).
@@ -795,6 +806,29 @@ Apply changes to all remote services.
 .TP
 .I \-m, \-\-medium\-type <type>
 Apply changes to services of specified type.
+
+.TP
+RIS Service Specific Options
+These options are ignored by services other than Repository Index Services.
+.TP
+.I \-i, --ar-to-enable <alias>
+Add a RIS service repository to enable.
+.TP
+.I \-I, --ar-to-disable <alias>
+Add a RIS service repository to disable.
+.TP
+.I \-j, --rr-to-enable <alias>
+Remove a RIS service repository to enable.
+.TP
+.I \-J, --rr-to-disable <alias>
+Remove a RIS service repository to disable.
+.TP
+.I \-k, --cl-to-enable
+Clear the list of RIS repositories to enable.
+.TP
+.I \-K, --cl-to-disable
+Clear the list of RIS repositories to disable.
+ 
 
 .TP
 .B services (ls) [options]

@@ -1039,6 +1039,13 @@ void Zypper::processCommandOptions()
       {"refresh", no_argument, 0, 'r'},
       {"no-refresh", no_argument, 0, 'R'},
       {"name", required_argument, 0, 'n'},
+      {"ar-to-enable",  required_argument, 0, 'i'},
+      {"ar-to-disable", required_argument, 0, 'I'},
+      {"rr-to-enable",  required_argument, 0, 'j'},
+      {"rr-to-disable", required_argument, 0, 'J'},
+      {"cl-to-enable",  no_argument, 0, 'k'},
+      {"cl-to-disable", no_argument, 0, 'K'},
+      // aggregates
       {"all", no_argument, 0, 'a' },
       {"local", no_argument, 0, 'l' },
       {"remote", no_argument, 0, 't' },
@@ -1051,21 +1058,30 @@ void Zypper::processCommandOptions()
       "modifyservice (ms) <options> <alias|#|URI>\n"
       "modifyservice (ms) <options> <%s>\n"
       "\n"
-      "Modify properties of services specified by alias, number, or URI, or by"
-      " the '%s' aggregate options.\n"
+      "Modify properties of services specified by alias, number, or URI, or by the\n"
+      "'%s' aggregate options.\n"
       "\n"
       "  Command options:\n"
-      "-d, --disable             Disable the service (but don't remove it).\n"
-      "-e, --enable              Enable a disabled service.\n"
-      "-r, --refresh             Enable auto-refresh of the service.\n"
-      "-R, --no-refresh          Disable auto-refresh of the service.\n"
-      "-n, --name                Set a descriptive name for the service.\n"
-      "-a, --all                 Apply changes to all services.\n"
-      "-l, --local               Apply changes to all local services.\n"
-      "-t, --remote              Apply changes to all remote services.\n"
-      "-m, --medium-type <type>  Apply changes to services of specified type.\n"
+      "-d, --disable                  Disable the service (but don't remove it).\n"
+      "-e, --enable                   Enable a disabled service.\n"
+      "-r, --refresh                  Enable auto-refresh of the service.\n"
+      "-R, --no-refresh               Disable auto-refresh of the service.\n"
+      "-n, --name                     Set a descriptive name for the service.\n"
+      "\n"
+      "-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n"
+      "-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
+      "-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
+      "-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
+      "-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
+      "-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
+      "\n"
+      "-a, --all                      Apply changes to all services.\n"
+      "-l, --local                    Apply changes to all local services.\n"
+      "-t, --remote                   Apply changes to all remote services.\n"
+      "-m, --medium-type <type>       Apply changes to services of specified type.\n"
     ), "--all|--remote|--local|--medium-type"
      , "--all, --remote, --local, --medium-type");
+    // ---------|---------|---------|---------|---------|---------|---------|---------    
     break;
   }
 
@@ -1278,8 +1294,8 @@ void Zypper::processCommandOptions()
       "modifyrepo (mr) <options> <alias|#|URI>\n"
       "modifyrepo (mr) <options> <%s>\n"
       "\n"
-      "Modify properties of repositories specified by alias, number, or URI, or by"
-      " the '%s' aggregate options.\n"
+      "Modify properties of repositories specified by alias, number, or URI, or by the\n"
+      "'%s' aggregate options.\n"
       "\n"
       "  Command options:\n"
       "-d, --disable             Disable the repository (but don't remove it).\n"
@@ -1290,6 +1306,7 @@ void Zypper::processCommandOptions()
       "-p, --priority <1-99>     Set priority of the repository.\n"
       "-k, --keep-packages       Enable RPM files caching.\n"
       "-K, --no-keep-packages    Disable RPM files caching.\n"
+      "\n"
       "-a, --all                 Apply changes to all repositories.\n"
       "-l, --local               Apply changes to all local repositories.\n"
       "-t, --remote              Apply changes to all remote repositories.\n"
@@ -2304,7 +2321,10 @@ void Zypper::doCommand()
       repo::RepoInfoBase_Ptr srv;
       if (match_service(*this, _arguments[0], srv))
       {
-        modify_service(*this, srv->alias());
+        if (dynamic_pointer_cast<ServiceInfo>(srv))
+          modify_service(*this, srv->alias());
+        else
+          modify_repo(*this, srv->alias());
       }
       else
       {
