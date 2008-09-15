@@ -290,18 +290,17 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 
     try
     {
-      if (known_it->alias() == str || tmp == number)
-        found = true;
+      found = known_it->alias() == str || tmp == number;
       if (!found)
       {
         url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
-        if (copts.count("loose-auth"))
+        if (zypper.cOpts().count("loose-auth"))
         {
           urlview = urlview
             - url::ViewOptions::WITH_PASSWORD
             - url::ViewOptions::WITH_USERNAME;
         }
-        if (copts.count("loose-query"))
+        if (zypper.cOpts().count("loose-query"))
           urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
 
         if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
@@ -1787,18 +1786,52 @@ bool match_service(Zypper & zypper, string str, RepoInfoBase_Ptr & service_ptr)
 
     try
     {
+      // match by alias or number
       found = (*known_it)->alias() == str || tmp == number;
+      
+      // match by URL
       if (!found)
       {
+        url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
+        if (zypper.cOpts().count("loose-auth"))
+        {
+          urlview = urlview
+            - url::ViewOptions::WITH_PASSWORD
+            - url::ViewOptions::WITH_USERNAME;
+        }
+        if (zypper.cOpts().count("loose-query"))
+          urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
+
         ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*known_it); 
-        if (s_ptr)
-          found = Url(str) == s_ptr->url();
+
+        if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
+            && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
+        {
+          if (s_ptr)
+            found =
+              Url(str).asString(urlview) == s_ptr->url().asString(urlview);
+          else
+          {
+            RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
+            for_(urlit, r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd())
+              if (urlit->asString(urlview) == Url(str).asString(urlview))
+              {
+                found = true;
+                break;
+              }
+          }
+        }
         else
         {
-          RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
-          found =
-            find(r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str))
-            != r_ptr->baseUrlsEnd();
+          if (s_ptr)
+            found = Url(str) == s_ptr->url();
+          else
+          {
+            RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
+            found =
+              find(r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str))
+              != r_ptr->baseUrlsEnd();
+          }
         }
       }
       if (found)

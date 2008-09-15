@@ -1013,6 +1013,8 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"help", no_argument, 0, 'h'},
+      {"loose-auth", no_argument, 0, 0},
+      {"loose-query", no_argument, 0, 0},
       {0, 0, 0, 0}
     };
     specific_options = options;
