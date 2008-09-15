@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 15 11:40:04 CEST 2008 - ma@suse.de
+
+- Fix building of transaltions.
+- revision 11064
+
+-------------------------------------------------------------------
 Sun Sep 14 00:10:21 CEST 2008 - jkupec@suse.cz
 
 - ServiceInfo.clearReposTo{Enable,Disable}() methods added
