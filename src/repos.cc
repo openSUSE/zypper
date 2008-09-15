@@ -290,13 +290,38 @@ bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 
     try
     {
-      if (known_it->alias() == str ||
-          tmp == number ||
-          find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(str))
-            != known_it->baseUrlsEnd())
+      if (known_it->alias() == str || tmp == number)
+        found = true;
+      if (!found)
+      {
+        url::ViewOption urlview = url::ViewOption::DEFAULTS + url::ViewOption::WITH_PASSWORD;
+        if (copts.count("loose-auth"))
+        {
+          urlview = urlview
+            - url::ViewOptions::WITH_PASSWORD
+            - url::ViewOptions::WITH_USERNAME;
+        }
+        if (copts.count("loose-query"))
+          urlview = urlview - url::ViewOptions::WITH_QUERY_STR;
+
+        if (!(urlview.has(url::ViewOptions::WITH_PASSWORD)
+            && urlview.has(url::ViewOptions::WITH_QUERY_STR)))
+        {
+          for_(urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd())
+            if (urlit->asString(urlview) == Url(str).asString(urlview))
+            {
+              found = true;
+              break;
+            }
+        }
+        else
+          found =
+            find(known_it->baseUrlsBegin(),known_it->baseUrlsEnd(),Url(str))
+              != known_it->baseUrlsEnd();
+      }
+      if (found)
       {
         *repo = *known_it;
-	found = true;
         break;
       }
     }
