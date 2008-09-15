@@ -11,10 +11,12 @@ repoindex-element =
       (
         attribute path { xsd:string}
         |
-        attribute url { xsd:anyURL }
+        attribute url { xsd:anyURI }
       ),
       attribute distro_target { xsd:string },
-      attribute priority { xsd:integer }?
+      attribute type { xsd:string }?,
+      attribute priority { xsd:integer }?,
+      attribute pub { xsd:boolean }? # legacy attribute, currently not used
     }
   }
 
