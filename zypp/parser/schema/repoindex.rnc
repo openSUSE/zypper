@@ -17,13 +17,14 @@ repoindex-element =
         # Path relative to the base url of the service
         # WARNING 'repo/' is always prepended to this path
         #         (this is inherited from NU services)
-        attribute path { xsd:string}
+        attribute path { xsd:string }
         |
         # Full URI of the repository (can also be outside of the service base)
         attribute url { xsd:anyURI }
       ),
-      # unique identifier of the target distribution (distroname-arch)
-      attribute distro_target { xsd:string },
+      # unique identifier of the target distribution (distroname-version-arch)
+      # if not specified, all the repositories will be added by the client
+      attribute distro_target { xsd:string }?,
 
       # An optional repository type. Will be determined automatically if not
       # specified.
