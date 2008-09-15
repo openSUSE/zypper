@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 15 12:31:51 CEST 2008 - jkupec@suse.cz
+
+- fixed --loose-auth and --loose-query for removerepo and
+  removeservice
+- r11066
+
+-------------------------------------------------------------------
 Sun Sep 14 00:05:59 CEST 2008 - jkupec@suse.cz
 
 - modifyservice --{ar,rr,cl}-to-{enable,disable} options added
