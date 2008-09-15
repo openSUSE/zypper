@@ -1,0 +1,20 @@
+# repoindex.xml RNC schema
+
+start = repoindex-element
+
+repoindex-element =
+  element repoindex {
+    element repo {
+      attribute alias { xsd:string },
+      attribute name { xsd:string }?,
+      attribute description { xsd:string }?,
+      (
+        attribute path { xsd:string}
+        |
+        attribute url { xsd:anyURL }
+      ),
+      attribute distro_target { xsd:string },
+      attribute priority { xsd:integer }?
+    }
+  }
+
