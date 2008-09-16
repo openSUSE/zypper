@@ -91,6 +91,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  const RepoInfo RepoInfo::noRepo;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : RepoInfo::RepoInfo
@@ -178,7 +180,7 @@ namespace zypp
   {
     _pimpl->service = name;
   }
-  
+
   void RepoInfo::setTargetDistribution(
       const std::string & targetDistribution)
   {
@@ -223,7 +225,7 @@ namespace zypp
 
   std::string RepoInfo::service() const
   { return _pimpl->service; }
-  
+
   std::string RepoInfo::targetDistribution() const
   { return _pimpl->targetDistro; }
 

@@ -18,12 +18,18 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/RepoInfo.h"
+#include "zypp/ServiceInfo.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
   namespace repo
   { /////////////////////////////////////////////////////////////////
+
+    /** \name Repository related exceptions.
+    */
+    //@{
 
     /**
      * \short Exception for repository handling.
@@ -41,7 +47,7 @@ namespace zypp
       RepoException( const RepoInfo & info, const std::string & msg_r );
 
       virtual ~RepoException() throw() {}
-      
+
       RepoInfo info()
       { return _info; }
 
@@ -64,7 +70,7 @@ namespace zypp
       RepoNotCachedException( const RepoInfo& info );
       RepoNotCachedException( const RepoInfo& info, const std::string & msg_r );
     };
-    
+
     /**
      * thrown when it was impossible to
      * determine one url for this repo.
@@ -74,22 +80,22 @@ namespace zypp
       public:
       RepoNoUrlException()
       {}
-      
+
       RepoNoUrlException( const RepoInfo &info)
         : RepoException(info)
         {}
-      
+
     };
-    
+
     /**
      * thrown when it was impossible to
      * determine an alias for this repo.
      */
     class RepoNoAliasException : public RepoException
     {
-    
+
     };
-    
+
     /**
      * thrown when it was impossible to
      * match a repository
@@ -101,7 +107,7 @@ namespace zypp
         : RepoException(info)
       {}
     };
-    
+
     /**
      * Repository already exists and some unique
      * attribute can't be duplicated.
@@ -113,15 +119,15 @@ namespace zypp
                                   const std::string & msg_r )
         : RepoException(info,msg_r)
       {}
-        
+
       RepoAlreadyExistsException( const RepoInfo &info )
         : RepoException(info)
       {}
-      
+
       std::string alias()
       { return info().alias(); }
     };
-    
+
     /**
      * thrown when it was impossible to
      * determine this repo type.
@@ -154,7 +160,73 @@ namespace zypp
       RepoMetadataException()
       {}
     };
-    
+
+    //@}
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+
+    /** \name Service related exceptions.
+    */
+    //@{
+
+    /** Base Exception for service handling.
+     */
+    class ServiceException : public Exception
+    {
+      public:
+        ServiceException();
+        ServiceException( const std::string & msg_r );
+        ServiceException( const ServiceInfo & service_r );
+        ServiceException( const ServiceInfo & service_r, const std::string & msg_r );
+        virtual ~ServiceException() throw();
+
+        ServiceInfo service()
+        { return _service; }
+
+      protected:
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      private:
+        ServiceInfo _service;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    /** Service without alias was used in an operation.
+     */
+    class ServiceNoAliasException : public ServiceException
+    {
+      public:
+        ServiceNoAliasException();
+        ServiceNoAliasException( const std::string & msg_r );
+        ServiceNoAliasException( const ServiceInfo & service_r );
+        ServiceNoAliasException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
+
+    /** Service already exists and some unique attribute can't be duplicated.
+     */
+    class ServiceAlreadyExistsException : public ServiceException
+    {
+      public:
+        ServiceAlreadyExistsException();
+        ServiceAlreadyExistsException( const std::string & msg_r );
+        ServiceAlreadyExistsException( const ServiceInfo & service_r );
+        ServiceAlreadyExistsException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
+
+    /** Service has no or invalid url defined.
+     */
+    class ServiceNoUrlException : public ServiceException
+    {
+      public:
+        ServiceNoUrlException();
+        ServiceNoUrlException( const std::string & msg_r );
+        ServiceNoUrlException( const ServiceInfo & service_r );
+        ServiceNoUrlException( const ServiceInfo & service_r, const std::string & msg_r );
+    };
+
+    //@}
+
     /////////////////////////////////////////////////////////////////
   } // namespace parser
   ///////////////////////////////////////////////////////////////////

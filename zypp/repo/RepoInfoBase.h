@@ -139,7 +139,7 @@ namespace zypp
        * derived classes.
        */
       virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
-      
+
       /**
        * Write an XML representation of this object with content (if available).
        */
@@ -167,7 +167,10 @@ namespace zypp
     /** \relates RepoInfoBase Stream output */
     std::ostream & operator<<( std::ostream & str, const RepoInfoBase & obj );
 
+    /** \relates RepoInfoBase */
     typedef shared_ptr<RepoInfoBase> RepoInfoBase_Ptr;
+    /** \relates RepoInfoBase */
+    typedef shared_ptr<const RepoInfoBase> RepoInfoBase_constPtr;
 
 
     /////////////////////////////////////////////////////////////////

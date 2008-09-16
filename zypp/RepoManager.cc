@@ -66,7 +66,7 @@ namespace zypp
   {
     /** Check if alias_r is present in repo/service container. */
     template <class Iterator>
-    inline bool findAliasIn( const std::string & alias_r, Iterator begin_r, Iterator end_r )
+    inline bool foundAliasIn( const std::string & alias_r, Iterator begin_r, Iterator end_r )
     {
       for_( it, begin_r, end_r )
         if ( it->alias() == alias_r )
@@ -75,9 +75,27 @@ namespace zypp
     }
     /** \overload */
     template <class Container>
-    inline bool findAliasIn( const std::string & alias_r, const Container & cont_r )
-    { return findAliasIn( alias_r, cont_r.begin(), cont_r.end() ); }
- }
+    inline bool foundAliasIn( const std::string & alias_r, const Container & cont_r )
+    { return foundAliasIn( alias_r, cont_r.begin(), cont_r.end() ); }
+
+    /** Find alias_r in repo/service container. */
+    template <class Iterator>
+    inline Iterator findAlias( const std::string & alias_r, Iterator begin_r, Iterator end_r )
+    {
+      for_( it, begin_r, end_r )
+        if ( it->alias() == alias_r )
+          return it;
+      return end_r;
+    }
+    /** \overload */
+    template <class Container>
+    inline typename Container::iterator findAlias( const std::string & alias_r, Container & cont_r )
+    { return findAlias( alias_r, cont_r.begin(), cont_r.end() ); }
+    /** \overload */
+    template <class Container>
+    inline typename Container::const_iterator findAlias( const std::string & alias_r, const Container & cont_r )
+    { return findAlias( alias_r, cont_r.begin(), cont_r.end() ); }
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -130,18 +148,16 @@ namespace zypp
     *
     * If targetDistro is set, all repos with non-empty RepoInfo::targetDistribution()
     * will be skipped.
+    *
     * \todo do this through a separate filter
     */
-    struct RepoCollector
+    struct RepoCollector : private base::NonCopyable
     {
       RepoCollector()
       {}
 
       RepoCollector(const string & targetDistro_)
         : targetDistro(targetDistro_)
-      {}
-
-      ~RepoCollector()
       {}
 
       bool collect( const RepoInfo &repo )
@@ -184,23 +200,6 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  std::list<RepoInfo> readRepoFile(const Url & repo_file)
-   {
-     // no interface to download a specific file, using workaround:
-     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
-     Url url(repo_file);
-     Pathname path(url.getPathName());
-     url.setPathName ("/");
-     MediaSetAccess access(url);
-     Pathname local = access.provideFile(path);
-
-     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
-
-     return repositories_in_file(local);
-   }
-
-  ////////////////////////////////////////////////////////////////////////////
-
   /**
    * \short List of RepoInfo's from a directory
    *
@@ -234,18 +233,47 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  static void assert_alias( const RepoInfo &info )
+   std::list<RepoInfo> readRepoFile(const Url & repo_file)
+   {
+     // no interface to download a specific file, using workaround:
+     //! \todo add MediaManager::provideFile(Url file_url) to easily access any file URLs? (no need for media access id or media_nr)
+     Url url(repo_file);
+     Pathname path(url.getPathName());
+     url.setPathName ("/");
+     MediaSetAccess access(url);
+     Pathname local = access.provideFile(path);
+
+     DBG << "reading repo file " << repo_file << ", local path: " << local << endl;
+
+     return repositories_in_file(local);
+   }
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  inline void assert_alias( const RepoInfo & info )
   {
-    if (info.alias().empty())
-        ZYPP_THROW(RepoNoAliasException());
+    if ( info.alias().empty() )
+      ZYPP_THROW( RepoNoAliasException() );
+  }
+
+  inline void assert_alias( const ServiceInfo & info )
+  {
+    if ( info.alias().empty() )
+      ZYPP_THROW( ServiceNoAliasException() );
   }
 
   ////////////////////////////////////////////////////////////////////////////
 
-  static void assert_urls( const RepoInfo &info )
+  inline void assert_urls( const RepoInfo & info )
   {
-    if (info.baseUrlsEmpty())
-        ZYPP_THROW(RepoNoUrlException());
+    if ( info.baseUrlsEmpty() )
+      ZYPP_THROW( RepoNoUrlException( info ) );
+  }
+
+  inline void assert_url( const ServiceInfo & info )
+  {
+    if ( ! info.url().isValid() )
+      ZYPP_THROW( ServiceNoUrlException( info ) );
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -253,7 +281,7 @@ namespace zypp
   /**
    * \short Calculates the raw cache path for a repository
    */
-  static Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  inline Pathname rawcache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
     return opt.repoRawCachePath / info.escaped_alias();
@@ -262,17 +290,44 @@ namespace zypp
   /**
    * \short Calculates the packages cache path for a repository
    */
-  static Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
+  inline Pathname packagescache_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info )
   {
     assert_alias(info);
     return opt.repoPackagesCachePath / info.escaped_alias();
   }
 
-  static Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
+  /**
+   * \short Calculates the solv cache path for a repository
+   */
+  inline Pathname solv_path_for_repoinfo( const RepoManagerOptions &opt, const RepoInfo &info)
   {
     assert_alias(info);
     return opt.repoSolvCachePath / info.escaped_alias();
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** Functor collecting ServiceInfos into a ServiceSet. */
+  class ServiceCollector
+  {
+    public:
+      typedef std::set<ServiceInfo> ServiceSet;
+
+      ServiceCollector( ServiceSet & services_r )
+      : _services( services_r )
+      {}
+
+      bool operator()( const ServiceInfo & service_r ) const
+      {
+        _services.insert( service_r );
+        return true;
+      }
+
+    private:
+      ServiceSet & _services;
+  };
+
+  ////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -288,13 +343,8 @@ namespace zypp
     Impl( const RepoManagerOptions &opt )
       : options(opt)
     {
-      knownServices();
-      knownRepositories();
-    }
-
-    Impl()
-    {
-
+      init_knownServices();
+      init_knownRepositories();
     }
 
     RepoManagerOptions options;
@@ -304,14 +354,8 @@ namespace zypp
     ServiceSet services;
 
   public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
 
-    void saveService( const ServiceInfo & service ) const;
+    void saveService( ServiceInfo & service ) const;
 
     Pathname generateNonExistingName( const Pathname &dir,
                                       const std::string &basefilename ) const;
@@ -319,19 +363,10 @@ namespace zypp
     std::string generateFilename( const RepoInfo & info ) const;
     std::string generateFilename( const ServiceInfo & info ) const;
 
-    struct ServiceCollector
-    {
-      ServiceCollector(ServiceSet & services_) : services(services_) {}
 
-      bool collect(ServiceInfo service) { services.insert(service); return true; }
-
-    private:
-      ServiceSet & services;
-    };
-
-    void knownServices();
-
-    void knownRepositories();
+  private:
+    void init_knownServices();
+    void init_knownRepositories();
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -349,37 +384,103 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : RepoManager
-  //
-  ///////////////////////////////////////////////////////////////////
 
-  RepoManager::RepoManager( const RepoManagerOptions &opt )
-  : _pimpl( new Impl(opt) )
-  {}
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  RepoManager::~RepoManager()
-  {}
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  bool RepoManager::repoEmpty() const { return _pimpl->repos.empty(); }
-  RepoManager::RepoSizeType RepoManager::repoSize() const
-  { return _pimpl->repos.size(); }
-  RepoManager::RepoConstIterator RepoManager::repoBegin() const
-  { return _pimpl->repos.begin(); }
-  RepoManager::RepoConstIterator RepoManager::repoEnd() const
-  { return _pimpl->repos.end(); }
-
-
-  std::list<RepoInfo> RepoManager::knownRepositories() const
+  void RepoManager::Impl::saveService( ServiceInfo & service ) const
   {
-    return std::list<RepoInfo>(repoBegin(),repoEnd());
+    filesystem::assert_dir( options.knownServicesPath );
+    Pathname servfile = generateNonExistingName( options.knownServicesPath,
+                                                 generateFilename( service ) );
+    service.setFilepath( servfile );
+
+    MIL << "saving service in " << servfile << endl;
+
+    std::ofstream file( servfile.c_str() );
+    if ( !file )
+    {
+      ZYPP_THROW( Exception( "Can't open " + servfile.asString() ) );
+    }
+    service.dumpAsIniOn( file );
+    MIL << "done" << endl;
   }
 
-  void RepoManager::Impl::knownRepositories()
+  /**
+   * Generate a non existing filename in a directory, using a base
+   * name. For example if a directory contains 3 files
+   *
+   * |-- bar
+   * |-- foo
+   * `-- moo
+   *
+   * If you try to generate a unique filename for this directory,
+   * based on "ruu" you will get "ruu", but if you use the base
+   * "foo" you will get "foo_1"
+   *
+   * \param dir Directory where the file needs to be unique
+   * \param basefilename string to base the filename on.
+   */
+  Pathname RepoManager::Impl::generateNonExistingName( const Pathname & dir,
+                                                       const std::string & basefilename ) const
+  {
+    string final_filename = basefilename;
+    int counter = 1;
+    while ( PathInfo(dir + final_filename).isExist() )
+    {
+      final_filename = basefilename + "_" + str::numstring(counter);
+      counter++;
+    }
+    return dir + Pathname(final_filename);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * \short Generate a related filename from a repo info
+   *
+   * From a repo info, it will try to use the alias as a filename
+   * escaping it if necessary. Other fallbacks can be added to
+   * this function in case there is no way to use the alias
+   */
+  std::string RepoManager::Impl::generateFilename( const RepoInfo & info ) const
+  {
+    std::string filename = info.alias();
+    // replace slashes with underscores
+    str::replaceAll( filename, "/", "_" );
+
+    filename = Pathname(filename).extend(".repo").asString();
+    MIL << "generating filename for repo [" << info.alias() << "] : '" << filename << "'" << endl;
+    return filename;
+  }
+
+  std::string RepoManager::Impl::generateFilename( const ServiceInfo & info ) const
+  {
+    std::string filename = info.alias();
+    // replace slashes with underscores
+    str::replaceAll( filename, "/", "_" );
+
+    filename = Pathname(filename).extend(".service").asString();
+    MIL << "generating filename for service [" << info.alias() << "] : '" << filename << "'" << endl;
+    return filename;
+  }
+
+
+  void RepoManager::Impl::init_knownServices()
+  {
+    Pathname dir = options.knownServicesPath;
+    list<Pathname> entries;
+    if (PathInfo(dir).isExist())
+    {
+      if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
+          ZYPP_THROW(Exception("failed to read directory"));
+
+      //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
+      for_(it, entries.begin(), entries.end() )
+      {
+        parser::ServiceFileReader(*it, ServiceCollector(services));
+      }
+    }
+  }
+
+  void RepoManager::Impl::init_knownRepositories()
   {
     MIL << "start construct known repos" << endl;
 
@@ -403,6 +504,51 @@ namespace zypp
     }
 
     MIL << "end construct known repos" << endl;
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoManager
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  RepoManager::RepoManager( const RepoManagerOptions &opt )
+  : _pimpl( new Impl(opt) )
+  {}
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  RepoManager::~RepoManager()
+  {}
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  bool RepoManager::repoEmpty() const
+  { return _pimpl->repos.empty(); }
+
+  RepoManager::RepoSizeType RepoManager::repoSize() const
+  { return _pimpl->repos.size(); }
+
+  RepoManager::RepoConstIterator RepoManager::repoBegin() const
+  { return _pimpl->repos.begin(); }
+
+  RepoManager::RepoConstIterator RepoManager::repoEnd() const
+  { return _pimpl->repos.end(); }
+
+  RepoInfo RepoManager::getRepo( const std::string & alias ) const
+  {
+    for_( it, repoBegin(), repoEnd() )
+      if ( it->alias() == alias )
+        return *it;
+    return RepoInfo::noRepo;
+  }
+
+  bool RepoManager::hasRepo( const std::string & alias ) const
+  {
+    for_( it, repoBegin(), repoEnd() )
+      if ( it->alias() == alias )
+        return true;
+    return false;
   }
 
   ////////////////////////////////////////////////////////////////////////////
@@ -1021,67 +1167,6 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  /**
-   * Generate a non existing filename in a directory, using a base
-   * name. For example if a directory contains 3 files
-   *
-   * |-- bar
-   * |-- foo
-   * `-- moo
-   *
-   * If you try to generate a unique filename for this directory,
-   * based on "ruu" you will get "ruu", but if you use the base
-   * "foo" you will get "foo_1"
-   *
-   * \param dir Directory where the file needs to be unique
-   * \param basefilename string to base the filename on.
-   */
-  Pathname RepoManager::Impl::generateNonExistingName( const Pathname &dir,
-                                       const std::string &basefilename ) const
-  {
-    string final_filename = basefilename;
-    int counter = 1;
-    while ( PathInfo(dir + final_filename).isExist() )
-    {
-      final_filename = basefilename + "_" + str::numstring(counter);
-      counter++;
-    }
-    return dir + Pathname(final_filename);
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * \short Generate a related filename from a repo info
-   *
-   * From a repo info, it will try to use the alias as a filename
-   * escaping it if necessary. Other fallbacks can be added to
-   * this function in case there is no way to use the alias
-   */
-  std::string RepoManager::Impl::generateFilename( const RepoInfo &info ) const
-  {
-    std::string filename = info.alias();
-    // replace slashes with underscores
-    str::replaceAll( filename, "/", "_" );
-
-    filename = Pathname(filename).extend(".repo").asString();
-    MIL << "generating filename for repo [" << info.alias() << "] : '" << filename << "'" << endl;
-    return filename;
-  }
-
-  std::string RepoManager::Impl::generateFilename( const ServiceInfo & info ) const
-  {
-    std::string filename = info.alias();
-    // replace slashes with underscores
-    str::replaceAll( filename, "/", "_" );
-
-    filename = Pathname(filename).extend(".service").asString();
-    MIL << "generating filename for service [" << info.alias() << "] : '" << filename << "'" << endl;
-    return filename;
-  }
-
-  ////////////////////////////////////////////////////////////////////////////
-
   void RepoManager::addRepository( const RepoInfo &info,
                                    const ProgressData::ReceiverFnc & progressrcv )
   {
@@ -1359,29 +1444,67 @@ namespace zypp
     ZYPP_THROW(RepoNotFoundException(info));
   }
 
+  ////////////////////////////////////////////////////////////////////////////
+  //
+  // Services
+  //
+  ////////////////////////////////////////////////////////////////////////////
+
+  bool RepoManager::serviceEmpty() const
+  { return _pimpl->services.empty(); }
+
+  RepoManager::ServiceSizeType RepoManager::serviceSize() const
+  { return _pimpl->services.size(); }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceBegin() const
+  { return _pimpl->services.begin(); }
+
+  RepoManager::ServiceConstIterator RepoManager::serviceEnd() const
+  { return _pimpl->services.end(); }
+
+  ServiceInfo RepoManager::getService( const std::string & alias ) const
+  {
+    for_( it, serviceBegin(), serviceEnd() )
+      if ( it->alias() == alias )
+        return *it;
+    return ServiceInfo::noService;
+  }
+
+  bool RepoManager::hasService( const std::string & alias ) const
+  {
+    for_( it, serviceBegin(), serviceEnd() )
+      if ( it->alias() == alias )
+        return true;
+    return false;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+
   void RepoManager::addService( const std::string & alias, const Url & url )
   {
     addService( ServiceInfo(alias, url) );
   }
 
-
   void RepoManager::addService( const ServiceInfo & service )
   {
+    assert_alias( service );
+
     // check if service already exists
-    if( _pimpl->services.find(service) != _pimpl->services.end() )
-      return; //FIXME ZYPP_THROW(RepoAlreadyExistsException(service.name()));
+    if ( hasService( service.alias() ) )
+      ZYPP_THROW( ServiceAlreadyExistsException( service ) );
 
-    // this is need to save location to correct service
-    const ServiceInfo & savedService =
-      *(_pimpl->services.insert( service )).first;
+    // Writable ServiceInfo is needed to save the location
+    // of the .service file. Finaly insert into the service list.
+    ServiceInfo toSave( service );
+    _pimpl->saveService( toSave );
+    _pimpl->services.insert( toSave );
 
-    MIL << "added service " << savedService.alias() << endl;
-
-    _pimpl->saveService( savedService );
+    MIL << "added service " << toSave.alias() << endl;
   }
 
+  ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::removeService( const string & alias)
+  void RepoManager::removeService( const string & alias )
   {
     MIL << "Going to delete repo " << alias << endl;
 
@@ -1394,10 +1517,7 @@ namespace zypp
     }
 
     ServiceSet tmpSet;
-    Impl::ServiceCollector collector(tmpSet);
-
-    parser::ServiceFileReader reader( location,
-        bind(&Impl::ServiceCollector::collect,collector,_1) );
+    parser::ServiceFileReader( location, ServiceCollector(tmpSet) );
 
     // only one service definition in the file
     if ( tmpSet.size() == 1 )
@@ -1439,59 +1559,12 @@ namespace zypp
   void RepoManager::removeService( const ServiceInfo & service )
   { removeService(service.alias()); }
 
-
-  void RepoManager::Impl::saveService( const ServiceInfo & service ) const
-  {
-    filesystem::assert_dir( options.knownServicesPath );
-
-    Pathname servfile = generateNonExistingName( options.knownServicesPath,
-        generateFilename( service ) );
-
-    MIL << "saving service in " << servfile << endl;
-
-    std::ofstream file(servfile.c_str());
-    if (!file) {
-      ZYPP_THROW (Exception( "Can't open " + servfile.asString() ) );
-    }
-
-    service.dumpAsIniOn( file );
-
-    const_cast<ServiceInfo&>(service).setFilepath( servfile );
-    MIL << "done" << endl;
-  }
-
-  ServiceInfo RepoManager::getService( const std::string & alias ) const
-  {
-    for_ (it, serviceBegin(), serviceEnd())
-      if ( it->alias() == alias )
-        return *it;
-    return ServiceInfo::noService;
-  }
-
-  bool RepoManager::serviceEmpty() const { return _pimpl->services.empty(); }
-
-  RepoManager::ServiceSizeType RepoManager::serviceSize() const
-  {
-    return _pimpl->services.size();
-  }
-
-  RepoManager::ServiceConstIterator RepoManager::serviceBegin() const
-  {
-    return _pimpl->services.begin();
-  }
-
-  RepoManager::ServiceConstIterator RepoManager::serviceEnd() const
-  {
-    return _pimpl->services.end();
-  }
-
   void RepoManager::refreshServices()
   {
     // copy the set of services since refreshService
     // can eventually invalidate the iterator
-    ServiceSet services;
-    services.insert(serviceBegin(), serviceEnd());
-    for_(it, services.begin(), services.end())
+    ServiceSet services( serviceBegin(), serviceEnd() );
+    for_( it, services.begin(), services.end() )
     {
       if ( !it->enabled() )
         continue;
@@ -1500,42 +1573,33 @@ namespace zypp
     }
   }
 
-  void RepoManager::refreshService( const ServiceInfo & service )
+  void RepoManager::refreshService( const ServiceInfo & dont_use_service_r )
   {
-    MIL << "going to refresh service '" << service.alias()
-        << "', url: "<< service.url().asString() << endl;
+    assert_alias( dont_use_service_r );
+    assert_url( dont_use_service_r );
+
+    // NOTE: It might be necessary to modify and rewrite the service info.
+    // Either when probing the type, or when adjusting the repositories
+    // enable/disable state. Thus 'dont_use_service_r' but 'service':
+    ServiceInfo service( dont_use_service_r );
+    bool serviceModified = false;
+    MIL << "going to refresh service '" << service.alias() << "', url: "<< service.url() << endl;
 
     //! \todo add callbacks for apps (start, end, repo removed, repo added, repo changed)
 
-    repo::ServiceType type = service.type();
     // if the type is unknown, try probing.
-    if ( type == repo::ServiceType::NONE )
+    if ( service.type() == repo::ServiceType::NONE )
     {
-      // unknown, probe it
-      type = probeService(service.url());
-
-      if (type != ServiceType::NONE)
+      repo::ServiceType type = probeService( service.url() );
+      if ( type != ServiceType::NONE )
       {
-        // Adjust the probed type in ServiceInfo
         service.setProbedType( type ); // lazy init!
-        // save probed type only for repos in system
-        for_( sit, serviceBegin(), serviceEnd() )
-        {
-          if ( service.alias() == sit->alias() )
-          {
-            ServiceInfo modifiedservice = service;
-            modifiedservice.setType(type);
-            modifyService(service.alias(), modifiedservice);
-            break;
-          }
-        }
+        serviceModified = true;
       }
     }
 
     // download the repo index file
     media::MediaManager mediamanager;
-    //if (service.url().empty())
-    //  throw RepoNoUrlException();
     media::MediaAccessId mid = mediamanager.open( service.url() );
     mediamanager.attachDesiredMedia( mid );
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
@@ -1543,17 +1607,15 @@ namespace zypp
 
     // parse it
     RepoCollector collector(_pimpl->options.servicesTargetDistro);
-    parser::RepoindexFileReader reader( path,
-      bind( &RepoCollector::collect, &collector, _1 ) );
+    parser::RepoindexFileReader reader( path, bind( &RepoCollector::collect, &collector, _1 ) );
     mediamanager.release( mid );
     mediamanager.close( mid );
 
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
-      Url url;
-
       // if the repo url was not set by the repoindex parser, set service's url
+      Url url;
       if ( it->baseUrlsEmpty() )
         url = service.url();
       else
@@ -1562,7 +1624,7 @@ namespace zypp
 
       // libzypp currently has problem with separate url + path handling
       // so just append the path to the baseurl
-      if (!it->path().empty())
+      if ( !it->path().empty() )
       {
         Pathname path(url.getPathName());
         path /= it->path();
@@ -1576,40 +1638,74 @@ namespace zypp
       it->setService( service.alias() );
     }
 
-    // compare old and new repositories (hope not too much, if it change
-    // then construct set and use set operation on it)
-    std::list<RepoInfo> oldRepos;
-    getRepositoriesInService(service.alias(),
-        insert_iterator<std::list<RepoInfo> > (oldRepos, oldRepos.begin()));
+    //
+    // Now compare collected repos with the ones in the system...
+    //
+    RepoInfoList oldRepos;
+    getRepositoriesInService( service.alias(), std::back_inserter( oldRepos ) );
 
-    //! \todo fix enabled/disable with respect to ServiceInfo reposTo...
-
-    // find old to remove
+    // find old repositories to remove...
     for_( it, oldRepos.begin(), oldRepos.end() )
     {
-      if ( ! findAliasIn( it->alias(), collector.repos ) )
+      if ( ! foundAliasIn( it->alias(), collector.repos ) )
       {
         removeRepository( *it );
       }
     }
 
-    //find new to add
+    // create missing repositories and modify exising ones if needed...
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
-      if ( ! findAliasIn( it->alias(), oldRepos ) )
+      // Service explicitly requests the repo being enabled?
+      bool beEnabled = service.repoToEnableFind( it->alias() );
+      if ( beEnabled )
       {
+        service.delRepoToEnable( it->alias() );
+        serviceModified = true;
+      }
+#warning also handle toDelete list and afterwards clear it
+
+      RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
+      if ( oldRepo == oldRepos.end() )
+      {
+        // Not found in oldRepos ==> a new repo to add
+
+        // Make sure the service repo is created with the
+        // appropriate enable and autorefresh true.
+        it->setEnabled( beEnabled );
+        it->setAutorefresh( true );
+
 #warning check whether a repo with the same alias exists
         // At that point check whether a repo with the same alias
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
-
-        // make sure the service is created in disabled
-        // autorefresh true.
-        it->setEnabled( false );
-        it->setAutorefresh( true );
-
         addRepository( *it );
       }
+      else
+      {
+        // ==> an exising repo to check
+        bool oldRepoModified = false;
+
+        if ( beEnabled && ! oldRepo->enabled() )
+        {
+          oldRepo->setEnabled( true );
+          oldRepoModified = true;
+        }
+
+#warning also check changed URL due to PATH change in service
+        // save if modified:
+        if ( oldRepoModified )
+        {
+          modifyRepository( oldRepo->alias(), *oldRepo );
+        }
+      }
+    }
+
+   // Save service if modified:
+   if ( serviceModified )
+    {
+      // write out modified service file.
+      modifyService( service.alias(), service );
     }
   }
 
@@ -1626,24 +1722,18 @@ namespace zypp
           "Cannot figure out where the service file is stored."));
     }
 
+    // remember: there may multiple services being defined in one file:
     ServiceSet tmpSet;
-    Impl::ServiceCollector collector(tmpSet);
-
-    parser::ServiceFileReader reader( location,
-        bind(&Impl::ServiceCollector::collect,collector,_1) );
+    parser::ServiceFileReader( location, ServiceCollector(tmpSet) );
 
     filesystem::assert_dir(location.dirname());
-
     std::ofstream file(location.c_str());
-
     for_(it, tmpSet.begin(), tmpSet.end())
     {
       if( *it != oldAlias )
         it->dumpAsIniOn(file);
     }
-
     service.dumpAsIniOn(file);
-
     file.close();
 
     _pimpl->services.erase(oldAlias);
@@ -1669,25 +1759,6 @@ namespace zypp
     }
 
     //! \todo refresh the service automatically if url is changed?
-  }
-
-  void RepoManager::Impl::knownServices()
-  {
-    ServiceCollector collector(services);
-    Pathname dir = options.knownServicesPath;
-    list<Pathname> entries;
-    if (PathInfo(dir).isExist())
-    {
-      if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
-          ZYPP_THROW(Exception("failed to read directory"));
-
-      //str::regex allowedServiceExt("^\\.service(_[0-9]+)?$");
-      for_(it, entries.begin(), entries.end() )
-      {
-        parser::ServiceFileReader reader(*it,
-            bind(&ServiceCollector::collect, collector, _1) );
-      }
-    }
   }
 
   repo::ServiceType RepoManager::probeService( const Url &url ) const

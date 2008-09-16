@@ -28,17 +28,6 @@ using zypp::xml::escape;
 namespace zypp
 {//////////////////////////////////////////////////////////////////////////////
 
-
-  struct RepoInfoCollector
-  {
-    vector<RepoInfo> repos;
-    bool collect(const RepoInfo & info)
-    {
-      repos.push_back(info);
-      return true;
-    }
-  };
-
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : ServiceInfo::Impl
@@ -68,7 +57,7 @@ namespace zypp
 
     ~Impl()
     {}
-    
+
     void setProbedType( const repo::ServiceType & t ) const
     {
       if ( type == repo::ServiceType::NONE

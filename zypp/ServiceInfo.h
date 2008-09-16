@@ -74,13 +74,13 @@ namespace zypp
     void setUrl( const Url& url );
 
     /**
-     * 
+     *
      */
     repo::ServiceType type() const;
-    
+
     /**
      * Set service type.
-     * 
+     *
      * \param type the new type
      */
     void setType( const repo::ServiceType & type );
@@ -167,7 +167,12 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \relates ServiceInfo */
   typedef shared_ptr<ServiceInfo> ServiceInfo_Ptr;
+  /** \relates ServiceInfo */
+  typedef shared_ptr<const ServiceInfo> ServiceInfo_constPtr;
+  /** \relates ServiceInfo */
+  typedef std::list<ServiceInfo> ServiceInfoList;
 
   /** \relates ServiceInfo Stream output */
   std::ostream & operator<<( std::ostream & str, const ServiceInfo & obj );

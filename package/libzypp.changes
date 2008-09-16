@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 16 18:41:39 CEST 2008 - ma@suse.de
+
+- Service handling fixes. Added ServiceException. 
+- revision 11077
+
+-------------------------------------------------------------------
 Mon Sep 15 11:40:04 CEST 2008 - ma@suse.de
 
 - Fix building of transaltions.

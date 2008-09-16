@@ -444,20 +444,48 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-#if 0
-  ServiceInfo s( "STest", Url("dir:///somewhere") );
-  DBG << s << endl;
-  s.addCatalogToEnable( "foo" );
-  s.addCatalogToEnable( "ba a" );
-  s.addCatalogToEnable( "kaa" );
+#if 1
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
-  RepoInfoList repos = repoManager.knownRepositories();
-  RepoInfoList services = repoManager.knownServices();
+
+  ServiceInfoList services = repoManager.knownServices();
+  WAR << services << endl;
+
+  //RepoInfoList repos = repoManager.knownRepositories();
+  //DBG << repos << endl;
 
 
+  ServiceInfo s( repoManager.getService( "STest" ) );
+  if ( s == ServiceInfo::noService )
+  {
+    Measure x( "Add service STest" );
+    repoManager.addService( "STest", Url("dir:///Local/Service") );
+    s = repoManager.getService( "STest" );
+    USR << "Add service " << s << endl;
+  }
 
-  DBG << s << endl;
+  {
+    Measure x( "Refresh service STest" );
+    repoManager.refreshService( s );
+  }
+
+#if 0
+
+  RepoInfo nrepo;
+  nrepo.setAlias( alias );
+  nrepo.setName( alias );
+  nrepo.setEnabled( true );
+  nrepo.setAutorefresh( false );
+  nrepo.addBaseUrl( Url(url) );
+
+  if ( ! repoManager.isCached( nrepo ) )
+  {
+    repoManager.buildCache( nrepo );
+  }
+
+  repoManager.loadFromCache( nrepo );
+#endif
+
 
   ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

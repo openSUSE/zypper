@@ -24,13 +24,13 @@
 #include "zypp/repo/RepoException.h"
 #include "zypp/repo/RepoType.h"
 #include "zypp/repo/ServiceType.h"
+#include "zypp/ServiceInfo.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/ProgressData.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  class ServiceInfo; //predef
 
    /**
     * Parses \a repo_file and returns a list of \ref RepoInfo objects
@@ -142,21 +142,28 @@ namespace zypp
 
     };
 
-   /**
-    * \short List known repositories.
-    *
-    * The known repositories are read from
-    * \ref RepoManagerOptions::knownReposPath passed on the Ctor.
-    * Which defaults to ZYpp global settings.
-    * \return found list<RepoInfo>
-    */
-   std::list<RepoInfo> knownRepositories() const;
+    /** \name Known repositories.
+     *
+     * The known repositories are read from
+     * \ref RepoManagerOptions::knownReposPath passed on the Ctor.
+     * Which defaults to ZYpp global settings.
+     */
+   //@{
+    bool repoEmpty() const;
+    RepoSizeType repoSize() const;
+    RepoConstIterator repoBegin() const;
+    RepoConstIterator repoEnd() const;
 
-   bool repoEmpty() const;
-   RepoSizeType repoSize() const;
-   RepoConstIterator repoBegin() const;
-   RepoConstIterator repoEnd() const;
+    /** List of known repositories. */
+    std::list<RepoInfo> knownRepositories() const
+    { return std::list<RepoInfo>(repoBegin(),repoEnd()); }
 
+    /** Find RepoInfo by alias or return \ref RepoInfo::noRepo. */
+    RepoInfo getRepo( const std::string & alias ) const;
+
+    /** Return whether there is a known repository for \c alias. */
+    bool hasRepo( const std::string & alias ) const;
+   //@}
 
    /**
     * \short Status of local metadata
@@ -455,6 +462,57 @@ namespace zypp
                                 const url::ViewOption & urlview = url::ViewOption::DEFAULTS,
                                 const ProgressData::ReceiverFnc & progressrcv = ProgressData::ReceiverFnc() );
 
+
+    /** \name Known services.
+     *
+     * The known services are read from
+     * \ref RepoManagerOptions::knownServicesPath passed on the Ctor.
+     * Which defaults to ZYpp global settings.
+     */
+    //@{
+    /**
+     * Gets true if no service is in RepoManager (so no one in specified location)
+     *
+     * \return true if any ServiceInfo is in RepoManager
+     */
+    bool serviceEmpty() const;
+
+    /**
+     * Gets count of service in RepoManager (in specified location)
+     *
+     * \return count of service
+     */
+    ServiceSizeType serviceSize() const;
+
+    /**
+     * Iterator to first service in internal storage.
+     * \note Iterator is immutable, so you cannot change pointed ServiceInfo
+     * \return Iterator to first service
+     */
+    ServiceConstIterator serviceBegin() const;
+
+    /**
+     * Iterator to place behind last service in internal storage.
+     * \return iterator to end
+     */
+    ServiceConstIterator serviceEnd() const;
+
+    /** List of known services. */
+    std::list<ServiceInfo> knownServices() const
+    { return std::list<ServiceInfo>(serviceBegin(),serviceEnd()); }
+
+    /**
+     * \short Finds ServiceInfo by alias or return \ref ServiceInfo::noService
+     *
+     * \param alias unique identifier of service
+     * \return information about service
+     */
+    ServiceInfo getService( const std::string & alias ) const;
+
+    /** Return whether there is a known service for \c alias. */
+    bool hasService( const std::string & alias ) const;
+    //@}
+
     /**
      * \short Probe the type or the service.
      */
@@ -491,40 +549,6 @@ namespace zypp
 
     void removeService( const ServiceInfo & service );
 
-    /**
-     * Gets true if no service is in RepoManager (so no one in specified location)
-     *
-     * \return true if any ServiceInfo is in RepoManager
-     */
-    bool serviceEmpty() const;
-
-    /**
-     * Gets count of service in RepoManager (in specified location)
-     *
-     * \return count of service
-     */
-    ServiceSizeType serviceSize() const;
-
-    /**
-     * Iterator to first service in internal storage.
-     * \note Iterator is immutable, so you cannot change pointed ServiceInfo
-     * \return Iterator to first service
-     */
-    ServiceConstIterator serviceBegin() const;
-
-    /**
-     * Iterator to place behind last service in internal storage.
-     * \return iterator to end
-     */
-    ServiceConstIterator serviceEnd() const;
-
-    /**
-     * Finds ServiceInfo by alias or return noService
-     *
-     * \param alias unique identifier of service
-     * \return information about service
-     */
-    ServiceInfo getService( const std::string & alias ) const;
 
     /**
      * Refreshes all enabled services.

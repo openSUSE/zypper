@@ -70,6 +70,9 @@ namespace zypp
     RepoInfo();
     virtual ~RepoInfo();
 
+    /** Represents no Repository (one with an empty alias). */
+    static const RepoInfo noRepo;
+
     /**
      * Repository priority for solver.
      * Some number between \c 1 (highest priority) and \c 99 (\ref defaultPriority).
@@ -323,12 +326,12 @@ namespace zypp
 
     /**
      * Write an XML representation of this RepoInfo object.
-     */ 
+     */
     virtual std::ostream & dumpAsXMLOn(std::ostream & str) const;
 
     /**
      * Write an XML representation of this RepoInfo object.
-     * 
+     *
      * \param str
      * \param content this argument is ignored (used in other classed derived
      *                from RepoInfoBase.
@@ -343,8 +346,11 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \relates RepoInfo */
   typedef shared_ptr<RepoInfo> RepoInfo_Ptr;
-
+  /** \relates RepoInfo */
+  typedef shared_ptr<const RepoInfo> RepoInfo_constPtr;
+  /** \relates RepoInfo */
   typedef std::list<RepoInfo> RepoInfoList;
 
   /** \relates RepoInfo Stream output */
