@@ -123,7 +123,10 @@ namespace zypp
           info.setBaseUrl(Url(url_s + "/repo/" + path_s));
 
         // required alias
-        info.setAlias(reader_r->getAttribute("alias").asString());
+        s = reader_r->getAttribute("alias");
+        if (!s.get())
+          throw ParseException(str::form(_("Required attribute '%s' is missing."), "alias"));
+        info.setAlias(s.asString());
 
         // optional type
         s = reader_r->getAttribute("type");
