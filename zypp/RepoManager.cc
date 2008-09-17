@@ -1701,8 +1701,8 @@ namespace zypp
       }
     }
 
-   // Save service if modified:
-   if ( serviceModified )
+    // save service if modified:
+    if ( serviceModified )
     {
       // write out modified service file.
       modifyService( service.alias(), service );
@@ -1739,23 +1739,27 @@ namespace zypp
     _pimpl->services.erase(oldAlias);
     _pimpl->services.insert(service);
 
-    // changed name, must change also repositories
-    if( oldAlias != service.alias() )
+    // changed properties affecting also repositories
+    if( oldAlias != service.alias()                    // changed alias
+        || oldService.enabled() != service.enabled()   // changed enabled status
+      )
     {
       std::vector<RepoInfo> toModify;
       getRepositoriesInService(oldAlias,
         insert_iterator<std::vector<RepoInfo> >( toModify, toModify.begin() ));
       for_( it, toModify.begin(), toModify.end() )
       {
-        it->setService(service.alias());
+        if (oldService.enabled() && !service.enabled())
+          it->setEnabled(false);
+        else if (!oldService.enabled() && service.enabled())
+        {
+          //! \todo do nothing? the repos will be enabled on service refresh
+          //! \todo how to know the service needs a (auto) refresh????
+        }
+        else
+          it->setService(service.alias());
         modifyRepository(it->alias(), *it);
       }
-    }
-
-    //! \todo changed enabled status
-    if ( oldService.enabled() != service.enabled() )
-    {
-
     }
 
     //! \todo refresh the service automatically if url is changed?
