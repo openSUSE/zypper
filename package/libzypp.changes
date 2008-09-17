@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 17 15:08:54 CEST 2008 - ma@suse.de
+
+- Adapt to rpms new way of quoting whitespace in pathnames.(bnc #426924)
+- revision 11082
+
+-------------------------------------------------------------------
 Tue Sep 16 18:41:39 CEST 2008 - ma@suse.de
 
 - Service handling fixes. Added ServiceException. 

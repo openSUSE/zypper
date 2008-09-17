@@ -57,7 +57,11 @@ namespace rpm
 {
 namespace
 {
+#if 1 // No more need to escape whitespace since rpm-4.4.2.3
+const char* quoteInFilename_m = "\'\"";
+#else
 const char* quoteInFilename_m = " \t\'\"";
+#endif
 inline string rpmQuoteFilename( const Pathname & path_r )
 {
   string path( path_r.asString() );
