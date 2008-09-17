@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep 17 18:05:44 CEST 2008 - jkupec@suse.cz
+
+- save user credentials when adding repos/services with URLs containing
+  the credentials (bnc #425462)
+- revision 11085
+
+-------------------------------------------------------------------
 Wed Sep 17 15:08:54 CEST 2008 - ma@suse.de
 
 - Adapt to rpms new way of quoting whitespace in pathnames.(bnc #426924)
