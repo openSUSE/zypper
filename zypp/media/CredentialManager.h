@@ -30,6 +30,9 @@ namespace zypp
   //
   // CLASS NAME : CredManagerOptions 
   //
+  /**
+   * \todo configurable cred file locations  
+   */
   struct CredManagerOptions
   {
     CredManagerOptions(const Pathname & rootdir = "");
@@ -46,7 +49,9 @@ namespace zypp
   // CLASS NAME : CredentialManager
   //
   /**
-   * 
+   * \todo better method names
+   * \todo separate add() and save() methods
+   * \todo delete(AuthData) method
    */
   class CredentialManager
   {
@@ -99,7 +104,7 @@ namespace zypp
     /**
      * 
      */
-    void clear(bool global = false) {}
+    void clearAll(bool global = false);
 
     CredentialIterator credsGlobalBegin() const;
     CredentialIterator credsGlobalEnd()   const;

@@ -215,33 +215,38 @@ namespace zypp
     return result;
   }
 
-  static void save_creds_in_file(
+  static int save_creds_in_file(
       const CredentialManager::CredentialSet creds,
-      const Pathname & file/*,
-       desired permissions*/)
+      const Pathname & file,
+      const mode_t mode)
   {
+    int ret = 0;
     filesystem::assert_dir(file.dirname());
 
-    //! \todo set correct permissions
     std::ofstream fs(file.c_str());
     if (!fs)
-      ZYPP_THROW(Exception("Can't open " + file.asString()));
+      ret = 1;
 
     for_(it, creds.begin(), creds.end())
     {
       (*it)->dumpAsIniOn(fs);
       fs << endl;
     }
+    fs.close();
+
+    filesystem::chmod(file, mode);
+
+    return ret;
   }
 
   void  CredentialManager::Impl::saveGlobalCredentials()
   {
-    save_creds_in_file(_credsGlobal, _options.globalCredFilePath);
+    save_creds_in_file(_credsGlobal, _options.globalCredFilePath, 0640);
   }
-  
+
   void  CredentialManager::Impl::saveUserCredentials()
   {
-    save_creds_in_file(_credsUser, _options.userCredFilePath);
+    save_creds_in_file(_credsUser, _options.userCredFilePath, 0600);
   }
 
 
@@ -255,14 +260,18 @@ namespace zypp
     : _pimpl(new Impl(opts))
   {}
 
+
   AuthData_Ptr CredentialManager::getCred(const Url & url)
   { return _pimpl->getCred(url); }
+
 
   AuthData_Ptr CredentialManager::getCredFromFile(const Pathname & file)
   { return _pimpl->getCredFromFile(file); }
 
+
   void CredentialManager::save(const AuthData & cred, bool global)
   { global ? saveInGlobal(cred) : saveInUser(cred); }
+
 
   void CredentialManager::saveInGlobal(const AuthData & cred)
   {
@@ -272,6 +281,7 @@ namespace zypp
     _pimpl->saveGlobalCredentials();
   }
 
+
   void CredentialManager::saveInUser(const AuthData & cred)
   {
     AuthData_Ptr c_ptr;
@@ -280,10 +290,47 @@ namespace zypp
     _pimpl->saveUserCredentials();
   }
 
-  void saveIn(const AuthData &, const Pathname & credFile)
+
+  void CredentialManager::saveIn(const AuthData & cred, const Pathname & credFile)
   {
-    //! \todo save in the file or  /etc/zypp/credentials.d/credFile if not absolute 
+    AuthData_Ptr c_ptr;
+    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    CredentialManager::CredentialSet creds;
+    creds.insert(c_ptr);
+
+    int ret;
+    if (credFile.absolute())
+      ret = save_creds_in_file(creds, credFile, 0640);
+    else
+      ret = save_creds_in_file(
+          creds, _pimpl->_options.customCredFileDir / credFile, 0600);
+
+    if (!ret)
+    {
+      //! \todo figure out the reason(?), call back to user
+      ERR << "error saving the credentials" << endl;
+    }
   }
+
+
+  void CredentialManager::clearAll(bool global)
+  {
+    if (global)
+    {
+      if (!filesystem::unlink(_pimpl->_options.globalCredFilePath))
+        ERR << "could not delete user credentials file "
+            << _pimpl->_options.globalCredFilePath << endl;
+      _pimpl->_credsUser.clear();
+    }
+    else
+    {
+      if (!filesystem::unlink(_pimpl->_options.userCredFilePath))
+        ERR << "could not delete global credentials file"
+            << _pimpl->_options.userCredFilePath << endl;
+      _pimpl->_credsGlobal.clear();
+    }
+  }
+
 
   CredentialManager::CredentialIterator CredentialManager::credsGlobalBegin() const
   { return _pimpl->_credsGlobal.begin(); }
