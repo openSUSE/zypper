@@ -217,10 +217,12 @@ namespace zypp
 
   static void save_creds_in_file(
       const CredentialManager::CredentialSet creds,
-      const Pathname & file)
+      const Pathname & file/*,
+       desired permissions*/)
   {
     filesystem::assert_dir(file.dirname());
 
+    //! \todo set correct permissions
     std::ofstream fs(file.c_str());
     if (!fs)
       ZYPP_THROW(Exception("Can't open " + file.asString()));
@@ -280,7 +282,7 @@ namespace zypp
 
   void saveIn(const AuthData &, const Pathname & credFile)
   {
-    //! \todo
+    //! \todo save in the file or  /etc/zypp/credentials.d/credFile if not absolute 
   }
 
   CredentialManager::CredentialIterator CredentialManager::credsGlobalBegin() const

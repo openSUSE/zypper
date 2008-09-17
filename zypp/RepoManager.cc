@@ -30,6 +30,7 @@
 #include "zypp/RepoManager.h"
 
 #include "zypp/media/MediaManager.h"
+#include "zypp/media/CredentialManager.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/ManagedFile.h"
@@ -120,6 +121,8 @@ namespace zypp
     {
       DBG << "Target not initialized, using an empty servicesTargetDistro." << endl;
     }
+    
+    rootDir = root_r;
   }
 
   RepoManagerOptions RepoManagerOptions::makeTestSetup( const Pathname & root_r )
@@ -131,6 +134,7 @@ namespace zypp
     ret.repoPackagesCachePath = root_r/"packages";
     ret.knownReposPath        = root_r/"repos.d";
     ret.knownServicesPath     = root_r/"services.d";
+    ret.rootDir = root_r;
     return ret;
   }
 
@@ -1217,6 +1221,26 @@ namespace zypp
     tosave.dumpAsIniOn(file);
     tosave.setFilepath(repofile);
     _pimpl->repos.insert(tosave);
+
+    progress.set(90);
+
+    // check for credentials in Urls
+    bool havePasswords = false;
+    for_( urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd() )
+      if ( !urlit->getUsername().empty() && !urlit->getPassword().empty() )
+      { havePasswords = true; break; }
+    // save the credentials
+    if ( havePasswords )
+    {
+      media::CredentialManager cm(
+          media::CredManagerOptions(_pimpl->options.rootDir) );
+
+      for_(urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd())
+        if (!urlit->getPassword().empty() && !urlit->getUsername().empty())
+          //! \todo use a method calling UI callbacks to ask where to save creds?
+          cm.saveInUser(media::AuthData(*urlit)); 
+    }
+
     progress.toMax();
     MIL << "done" << endl;
   }
@@ -1498,6 +1522,16 @@ namespace zypp
     ServiceInfo toSave( service );
     _pimpl->saveService( toSave );
     _pimpl->services.insert( toSave );
+    
+    // check for credentials in Url
+    if ( !toSave.url().getUsername().empty() && !toSave.url().getPassword().empty() )
+    {
+      media::CredentialManager cm(
+          media::CredManagerOptions(_pimpl->options.rootDir) );
+
+      //! \todo use a method calling UI callbacks to ask where to save creds?
+      cm.saveInUser(media::AuthData(toSave.url()));
+    }
 
     MIL << "added service " << toSave.alias() << endl;
   }

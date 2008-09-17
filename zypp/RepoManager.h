@@ -93,6 +93,9 @@ namespace zypp
      * If empty, no repositories contained in the index will be skipped.
      */
     std::string servicesTargetDistro;
+
+    /** remembers root_r value for later use */
+    Pathname rootDir;
   };
 
 
