@@ -2251,8 +2251,13 @@ void Zypper::doCommand()
 
     // check for valid service type
     bool isservice = false;
-    try { repo::ServiceType stype(type); isservice = true; }
-    catch (const repo::RepoUnknownTypeException & e) {}
+    if (type.empty())
+      isservice = true;
+    else
+    {
+      try { repo::ServiceType stype(type); isservice = true; }
+      catch (const repo::RepoUnknownTypeException & e) {}
+    }
 
     warn_if_zmd();
 
