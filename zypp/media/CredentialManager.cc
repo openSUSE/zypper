@@ -10,13 +10,20 @@
  *
  */
 #include <iostream>
+#include <fstream>
 
 #include "zypp/base/Function.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/Easy.h"
+#include "zypp/PathInfo.h"
 
 #include "zypp/media/CredentialFileReader.h"
 
 #include "zypp/media/CredentialManager.h"
+
+#define CUSTOM_CREDENTIALS_FILE_DIR "/etc/zypp/credentials.d"
+#define GLOBAL_CREDENTIALS_FILE "/etc/zypp/credentials.cat" 
+#define USER_CREDENTIALS_FILE   ".zypp/credentials.cat"
 
 using namespace std;
 
@@ -35,11 +42,12 @@ namespace zypp
   //////////////////////////////////////////////////////////////////////
 
   CredManagerOptions::CredManagerOptions(const Pathname & rootdir)
-    : globalCredFilePath(rootdir / "/etc/zypp/credentials")
+    : globalCredFilePath(rootdir / GLOBAL_CREDENTIALS_FILE)
+    , customCredFileDir(rootdir / CUSTOM_CREDENTIALS_FILE_DIR)
   {
     char * homedir = getenv("HOME");
     if (homedir)
-      userCredFilePath = rootdir / homedir / ".zypp/credentials"; 
+      userCredFilePath = rootdir / homedir / USER_CREDENTIALS_FILE;
   }
 
 
@@ -53,11 +61,17 @@ namespace zypp
 
     ~Impl()
     {}
-
     
+    void init_globalCredentials();
+    void init_userCredentials();
+
     bool processCredentials(AuthData_Ptr & cred);
 
-    AuthData_Ptr getCred(const Url & url);
+    AuthData_Ptr getCred(const Url & url) const;
+    AuthData_Ptr getCredFromFile(const Pathname & file);
+    void saveGlobalCredentials();
+    void saveUserCredentials();
+
 
     CredManagerOptions _options;
 
@@ -77,20 +91,53 @@ namespace zypp
   CredentialManager::Impl::Impl(const CredManagerOptions & options)
     : _options(options)
   {
-    CredentialFileReader(
-        _options.globalCredFilePath,
-        bind(&Impl::processCredentials, this, _1));
+    init_globalCredentials();
+    init_userCredentials();
+  }
+
+
+  void CredentialManager::Impl::init_globalCredentials()
+  {
+    if (_options.globalCredFilePath.empty())
+      DBG << "global cred file not known";
+    else if (PathInfo(_options.globalCredFilePath).isExist())
+    {
+    /*  list<Pathname> entries;
+      if (filesystem::readdir(entries, _options.globalCredFilePath, false) != 0)
+        ZYPP_THROW(Exception("failed to read directory"));
+
+      for_(it, entries.begin(), entries.end())*/
+
+      CredentialFileReader(_options.globalCredFilePath,
+          bind(&Impl::processCredentials, this, _1));
+    }
+    else
+      DBG << "global cred file does not exist";
+
     _credsGlobal = _credsTmp; _credsTmp.clear();
     DBG << "Got " << _credsGlobal.size() << " global records." << endl;
+  }
 
-    if (!_options.userCredFilePath.empty())
+
+  void CredentialManager::Impl::init_userCredentials()
+  {
+    if (_options.userCredFilePath.empty())
+      DBG << "user cred file not known";
+    else if (PathInfo(_options.userCredFilePath).isExist())
     {
-      CredentialFileReader(
-          _options.userCredFilePath,
+    /*  list<Pathname> entries;
+      if (filesystem::readdir(entries, _options.userCredFilePath, false ) != 0)
+        ZYPP_THROW(Exception("failed to read directory"));
+
+      for_(it, entries.begin(), entries.end())*/
+      CredentialFileReader(_options.userCredFilePath,
           bind(&Impl::processCredentials, this, _1));
-      _credsUser = _credsTmp; _credsTmp.clear();
-      DBG << "Got " << _credsUser.size() << " user records." << endl;
     }
+    else
+      DBG << "user cred file does not exist";
+
+    _credsUser = _credsTmp; _credsTmp.clear();
+    DBG << "Got " << _credsUser.size() << " user records." << endl;
   }
 
 
@@ -99,6 +146,7 @@ namespace zypp
     _credsTmp.insert(cred);
     return true;
   }
+
 
   static AuthData_Ptr findIn(const CredentialManager::CredentialSet & set,
                              const Url & url,
@@ -114,7 +162,7 @@ namespace zypp
   }
 
 
-  AuthData_Ptr CredentialManager::Impl::getCred(const Url & url)
+  AuthData_Ptr CredentialManager::Impl::getCred(const Url & url) const
   {
     AuthData_Ptr result;
 
@@ -124,7 +172,7 @@ namespace zypp
 
     // if the wanted URL does not contain username, ignore that, too
     url::ViewOption vopt;
-    if (url.getUsername().empty())
+//    if (url.getUsername().empty())
       vopt = vopt - url::ViewOption::WITH_USERNAME;
 
     // search in global credentials
@@ -143,6 +191,58 @@ namespace zypp
   }
 
 
+  AuthData_Ptr CredentialManager::Impl::getCredFromFile(const Pathname & file)
+  {
+    AuthData_Ptr result;
+    
+    Pathname credfile;
+    if (file.absolute())
+      // get from that file
+      credfile = file;
+    else
+      // get from /etc/zypp/credentials.d
+      credfile = _options.customCredFileDir / file;
+
+    CredentialFileReader(credfile, bind(&Impl::processCredentials, this, _1));
+    if (_credsTmp.empty())
+      WAR << file << " does not contain valid credentials or is not readable." << endl;
+    else
+    {
+      result = *_credsTmp.begin();
+      _credsTmp.clear();
+    }
+
+    return result;
+  }
+
+  static void save_creds_in_file(
+      const CredentialManager::CredentialSet creds,
+      const Pathname & file)
+  {
+    filesystem::assert_dir(file.dirname());
+
+    std::ofstream fs(file.c_str());
+    if (!fs)
+      ZYPP_THROW(Exception("Can't open " + file.asString()));
+
+    for_(it, creds.begin(), creds.end())
+    {
+      (*it)->dumpAsIniOn(fs);
+      fs << endl;
+    }
+  }
+
+  void  CredentialManager::Impl::saveGlobalCredentials()
+  {
+    save_creds_in_file(_credsGlobal, _options.globalCredFilePath);
+  }
+  
+  void  CredentialManager::Impl::saveUserCredentials()
+  {
+    save_creds_in_file(_credsUser, _options.userCredFilePath);
+  }
+
+
   //////////////////////////////////////////////////////////////////////
   //
   // CLASS NAME : CredentialManager 
@@ -156,25 +256,32 @@ namespace zypp
   AuthData_Ptr CredentialManager::getCred(const Url & url)
   { return _pimpl->getCred(url); }
 
+  AuthData_Ptr CredentialManager::getCredFromFile(const Pathname & file)
+  { return _pimpl->getCredFromFile(file); }
 
   void CredentialManager::save(const AuthData & cred, bool global)
   { global ? saveInGlobal(cred) : saveInUser(cred); }
 
   void CredentialManager::saveInGlobal(const AuthData & cred)
   {
-    //! \todo
+    AuthData_Ptr c_ptr;
+    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    _pimpl->_credsGlobal.insert(c_ptr); //! \todo avoid adding duplicates
+    _pimpl->saveGlobalCredentials();
   }
 
   void CredentialManager::saveInUser(const AuthData & cred)
   {
-    //! \todo
+    AuthData_Ptr c_ptr;
+    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    _pimpl->_credsUser.insert(c_ptr); //! \todo avoid adding duplicates
+    _pimpl->saveUserCredentials();
   }
 
   void saveIn(const AuthData &, const Pathname & credFile)
   {
     //! \todo
   }
-
 
   CredentialManager::CredentialIterator CredentialManager::credsGlobalBegin() const
   { return _pimpl->_credsGlobal.begin(); }

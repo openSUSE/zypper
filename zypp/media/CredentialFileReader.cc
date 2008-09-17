@@ -13,7 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/InputStream.h"
-#include "zypp/base/IOStream.h"
+#include "zypp/parser/IniDict.h"
 
 #include "zypp/media/CredentialFileReader.h"
 
@@ -38,28 +38,50 @@ namespace zypp
       const ProcessCredentials & callback)
   {
     InputStream is(crfile);
-
-    for(iostr::EachLine in(is); in; in.next())
+    parser::IniDict dict(is);
+    for (parser::IniDict::section_const_iterator its = dict.sectionsBegin();
+         its != dict.sectionsEnd();
+         ++its)
     {
-      try
+      Url storedUrl;
+      if (!its->empty())
       {
-        Url storedUrl(*in);
-
-        AuthData_Ptr credentials;
-        credentials.reset(
-          new AuthData(storedUrl));
-
-        if (credentials->valid())
-          callback(credentials);
-        else
-          // report invalid record
-          DBG << "invalid record: " << *in << endl;
+        try { storedUrl = Url(*its); }
+        catch (const url::UrlException &)
+        {
+          ERR << "invalid URL '" << *its << "' in credentials in file: "
+              << crfile << endl;
+          continue;
+        }
       }
-      catch (const url::UrlException &)
-      {} // not a URL
-      //! \todo this will need to be a bit more sophisticated to be able to pinpoint bad records
-    }
+
+      AuthData_Ptr credentials;
+      credentials.reset(new AuthData());
+      
+      // set url
+      if (storedUrl.isValid())
+        credentials->setUrl(storedUrl);
+
+      for (parser::IniDict::entry_const_iterator it = dict.entriesBegin(*its);
+           it != dict.entriesEnd(*its);
+           ++it)
+      {
+        if (it->first == "username")
+          credentials->setUserName(it->second);
+        else if (it->first == "password")
+          credentials->setPassword(it->second);
+        else
+          ERR << "Unknown attribute in [" << crfile << "]: "
+              << it->second << " ignored" << endl;
+      }
+
+      if (credentials->valid())
+        callback(credentials);
+      else
+        ERR << "invalid credentials in file: " << crfile << endl;
+    } // sections
   }
+
 
   CredentialFileReader::~CredentialFileReader()
   {}

@@ -20,6 +20,8 @@
 #include "zypp/media/MediaUserAuth.h"
 
 
+using namespace std;
+
 namespace zypp {
   namespace media {
 
@@ -45,6 +47,22 @@ std::ostream & AuthData::dumpOn( std::ostream & str ) const
   return str;
 }
 
+std::ostream & AuthData::dumpAsIniOn( std::ostream & str ) const
+{
+  if (_url.isValid())
+    str
+      << "[" << _url.asString(
+        url::ViewOptions()
+        - url::ViewOptions::WITH_USERNAME
+        - url::ViewOptions::WITH_PASSWORD)
+      << "]" << endl;
+
+  str
+    << "username = " << _username << endl
+    << "password = " << _password << endl;
+
+  return str;
+}
 
 bool CurlAuthData::valid() const
 {

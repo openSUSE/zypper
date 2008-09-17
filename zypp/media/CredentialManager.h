@@ -36,6 +36,7 @@ namespace zypp
 
     Pathname globalCredFilePath;
     Pathname userCredFilePath;
+    Pathname customCredFileDir;
   };
   //////////////////////////////////////////////////////////////////////
 
@@ -71,6 +72,11 @@ namespace zypp
      *         AuthData_Ptr otherwise.
      */
     AuthData_Ptr getCred(const Url & url);
+    
+    /**
+     * 
+     */
+    AuthData_Ptr getCredFromFile(const Pathname & file);
 
 
     void save(const AuthData &, bool global = false);
@@ -89,6 +95,11 @@ namespace zypp
      * 
      */
     void saveIn(const AuthData &, const Pathname & credFile);
+    
+    /**
+     * 
+     */
+    void clear(bool global = false) {}
 
     CredentialIterator credsGlobalBegin() const;
     CredentialIterator credsGlobalEnd()   const;

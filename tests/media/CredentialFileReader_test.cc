@@ -3,12 +3,13 @@
 #include <set>
 
 #include "zypp/Url.h"
+#include "zypp/PathInfo.h"
+#include "zypp/base/Easy.h"
 #include "zypp/media/MediaUserAuth.h"
 
 #include "zypp/media/CredentialFileReader.h"
 
-using std::cout;
-using std::endl;
+using namespace std;
 using namespace zypp;
 using namespace zypp::media;
 
@@ -29,8 +30,9 @@ struct CredCollector
 BOOST_AUTO_TEST_CASE(read_cred)
 {
   CredCollector collector;
-  CredentialFileReader reader(TESTS_SRC_DIR "/media/data/credentials",
-    bind( &CredCollector::collect, &collector, _1 ));
+  Pathname credfile = TESTS_SRC_DIR "/media/data/credentials.cat";
+  CredentialFileReader reader(credfile,
+      bind( &CredCollector::collect, &collector, _1 ));
 
   BOOST_CHECK(collector.creds.size() == 2);
 }

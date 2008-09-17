@@ -14,6 +14,7 @@
 
 #include <curl/curl.h>
 
+#include "zypp/Url.h"
 #include "zypp/base/PtrTypes.h"
 
 namespace zypp {
@@ -34,7 +35,7 @@ public:
 
   AuthData(const Url & url);
 
-  AuthData(std::string & username, std::string & password)
+  AuthData(const std::string & username, const std::string & password)
     : _username(username), _password(password)
   {}
 
@@ -57,6 +58,7 @@ public:
 
   virtual std::ostream & dumpOn( std::ostream & str ) const;
 
+  virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
 
 private:
   Url _url;
