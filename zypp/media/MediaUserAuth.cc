@@ -149,13 +149,13 @@ std::string CurlAuthData::auth_type_long2str(long auth_type)
 }
 
 
-std::ostream & operator << (std::ostream & str, AuthData & auth_data)
+std::ostream & operator << (std::ostream & str, const AuthData & auth_data)
 {
   auth_data.dumpOn(str);
   return str;
 }
 
-std::ostream & operator << (std::ostream & str, CurlAuthData & auth_data)
+std::ostream & operator << (std::ostream & str, const CurlAuthData & auth_data)
 {
   auth_data.dumpOn(str);
   return str;

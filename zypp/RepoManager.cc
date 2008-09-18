@@ -1522,8 +1522,8 @@ namespace zypp
     ServiceInfo toSave( service );
     _pimpl->saveService( toSave );
     _pimpl->services.insert( toSave );
-    
-    // check for credentials in Url
+
+    // check for credentials in Url (username:password, not ?credentials param)
     if ( !toSave.url().getUsername().empty() && !toSave.url().getPassword().empty() )
     {
       media::CredentialManager cm(
@@ -1645,6 +1645,12 @@ namespace zypp
     mediamanager.release( mid );
     mediamanager.close( mid );
 
+    string serviceCredParam = service.url().getQueryParam("credentials");
+    INT << "service creds file " << serviceCredParam << endl;
+
+    // URL credentials to store
+    set<Url> urlsWithCredentials;
+
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
@@ -1664,6 +1670,18 @@ namespace zypp
         path /= it->path();
         url.setPathName( path.asString() );
         it->setPath("");
+      }
+
+      // use the same credentials as the service
+      if (!serviceCredParam.empty())
+        url.setQueryParam("credentials", serviceCredParam);
+      else if (!service.url().getUsername().empty()
+              && !service.url().getPassword().empty())
+      {
+        url.setUsername(service.url().getUsername());
+        url.setPassword(service.url().getPassword());
+        // need to save these, creds not shared with the service like above
+        urlsWithCredentials.insert(url);
       }
 
       // save the url
@@ -1714,6 +1732,8 @@ namespace zypp
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
         addRepository( *it );
+        
+        // save repo credentials
       }
       else
       {
@@ -1726,7 +1746,7 @@ namespace zypp
           oldRepoModified = true;
         }
 
-#warning also check changed URL due to PATH change in service
+#warning also check changed URL due to PATH/URL change in service, but ignore ?credentials param! 
         // save if modified:
         if ( oldRepoModified )
         {
@@ -1741,7 +1761,18 @@ namespace zypp
       // write out modified service file.
       modifyService( service.alias(), service );
     }
+
+    // save new/modified credentials
+    if (!urlsWithCredentials.empty())
+    {
+      media::CredentialManager cm(
+          media::CredManagerOptions(_pimpl->options.rootDir) );
+      for_(urlit, urlsWithCredentials.begin(), urlsWithCredentials.end())
+        cm.addUserCred(media::AuthData(*urlit));
+      cm.save();
+    }
   }
+
 
   void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & service)
   {

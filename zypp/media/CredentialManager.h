@@ -43,6 +43,21 @@ namespace zypp
   };
   //////////////////////////////////////////////////////////////////////
 
+  // comparator for CredentialSet
+  struct AuthDataComparator
+  {
+    public: bool operator()(const AuthData_Ptr & lhs,
+                            const AuthData_Ptr & rhs)
+    {
+      if (lhs->username() < rhs->username())
+        return true;
+      if (lhs->password() < rhs->password())
+        return true;
+      if (lhs->url() != rhs->url())
+        return true;
+      return false;
+    }
+  };
 
   //////////////////////////////////////////////////////////////////////
   //
@@ -50,18 +65,18 @@ namespace zypp
   //
   /**
    * \todo better method names
-   * \todo separate add() and save() methods
    * \todo delete(AuthData) method
    */
   class CredentialManager
   {
   public:
-    typedef std::set<AuthData_Ptr>        CredentialSet;
-    typedef CredentialSet::size_type      CredentialSize;
-    typedef CredentialSet::const_iterator CredentialIterator;
+    typedef std::set<AuthData_Ptr, AuthDataComparator> CredentialSet;
+    typedef CredentialSet::size_type                   CredentialSize;
+    typedef CredentialSet::const_iterator              CredentialIterator;
 
 
     CredentialManager(const CredManagerOptions & opts = CredManagerOptions());
+
     ~CredentialManager()
     {}
 
@@ -75,36 +90,71 @@ namespace zypp
      * \param url URL to find credentials for.
      * \return Pointer to retrieved authentication data on success or an empty
      *         AuthData_Ptr otherwise.
+     * \todo return a copy instead?
      */
     AuthData_Ptr getCred(const Url & url);
-    
+
     /**
-     * 
+     * Read credentials from a file.
      */
     AuthData_Ptr getCredFromFile(const Pathname & file);
 
-
-    void save(const AuthData &, bool global = false);
+    /**
+     * Add new global credentials.
+     */
+    void addGlobalCred(const AuthData & cred);
+    
+    /**
+     * Add new user credentials.
+     */
+    void addUserCred(const AuthData & cred);
 
     /**
+     * Add new credentials with user callbacks.
+     */
+    void addCred(const AuthData & cred);
+
+    /**
+     * Saves any unsaved credentials added via \ref addUserCred() or
+     * \a addGlobalCred() methods.
+     */
+    void save();
+
+    /**
+     * Saves given \a cred to global credentials file.
      * 
+     * \note Use this method to add just one piece of credentials. To add
+     *       multiple items at once, use addGlobalCred() followed
+     *       by save()
      */
     void saveInGlobal(const AuthData & cred);
 
     /**
+     * Saves given \a cred to user's credentials file.  
      * 
+     * \note Use this method to add just one piece of credentials. To add
+     *       multiple items at once, use addUserCred() followed
+     *       by save()
      */
     void saveInUser(const AuthData & cred);
 
     /**
+     * Saves given \a cred to user specified credentials file.
      * 
+     * If the credFile path is absolute, it will be saved at that precise
+     * location. If \a credFile is just a filename, it will be saved
+     * in \ref CredManagerOptions::customCredFileDir. Otherwise the current
+     * working directory will be prepended to the file path.
      */
-    void saveIn(const AuthData &, const Pathname & credFile);
-    
+    void saveInFile(const AuthData &, const Pathname & credFile);
+
     /**
+     * Remove all global or user credentials from memory and disk.
      * 
+     * \param global  Whether to remove global or user credentials.
      */
     void clearAll(bool global = false);
+
 
     CredentialIterator credsGlobalBegin() const;
     CredentialIterator credsGlobalEnd()   const;

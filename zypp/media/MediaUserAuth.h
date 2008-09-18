@@ -157,8 +157,8 @@ private:
 
 typedef shared_ptr<CurlAuthData> CurlAuthData_Ptr;
 
-std::ostream & operator << (std::ostream & str, AuthData & auth_data);
-std::ostream & operator << (std::ostream & str, CurlAuthData & auth_data);
+std::ostream & operator << (std::ostream & str, const AuthData & auth_data);
+std::ostream & operator << (std::ostream & str, const CurlAuthData & auth_data);
 
 ///////////////////////////////////////////////////////////////////
 

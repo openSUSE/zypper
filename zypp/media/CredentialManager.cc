@@ -78,6 +78,9 @@ namespace zypp
     CredentialSet _credsGlobal;
     CredentialSet _credsUser;
     CredentialSet _credsTmp;
+
+    bool _globalDirty;
+    bool _userDirty;
   };
   //////////////////////////////////////////////////////////////////////
 
@@ -90,6 +93,8 @@ namespace zypp
 
   CredentialManager::Impl::Impl(const CredManagerOptions & options)
     : _options(options)
+    , _globalDirty(false)
+    , _userDirty(false)
   {
     init_globalCredentials();
     init_userCredentials();
@@ -134,7 +139,7 @@ namespace zypp
           bind(&Impl::processCredentials, this, _1));
     }
     else
-      DBG << "user cred file does not exist";
+      DBG << "user cred file does not exist" << endl;
 
     _credsUser = _credsTmp; _credsTmp.clear();
     DBG << "Got " << _credsUser.size() << " user records." << endl;
@@ -262,36 +267,78 @@ namespace zypp
 
 
   AuthData_Ptr CredentialManager::getCred(const Url & url)
-  { return _pimpl->getCred(url); }
+  {
+    string credfile = url.getQueryParam("credentials");
+    if (credfile.empty())
+      return _pimpl->getCred(url);
+    return _pimpl->getCredFromFile(credfile);
+  }
 
 
   AuthData_Ptr CredentialManager::getCredFromFile(const Pathname & file)
   { return _pimpl->getCredFromFile(file); }
 
 
-  void CredentialManager::save(const AuthData & cred, bool global)
-  { global ? saveInGlobal(cred) : saveInUser(cred); }
+  void CredentialManager::addCred(const AuthData & cred)
+  {
+    // add with user callbacks
+  }
+
+
+  void CredentialManager::addGlobalCred(const AuthData & cred)
+  {
+    AuthData_Ptr c_ptr;
+    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    if (_pimpl->_credsGlobal.insert(c_ptr).second)
+    {
+      _pimpl->_globalDirty = true;
+      INT << "changed/new:" << cred << endl;
+    }
+    else
+      INT << "already there: " << cred << endl;
+  }
+
+
+  void CredentialManager::addUserCred(const AuthData & cred)
+  {
+    AuthData_Ptr c_ptr;
+    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    if (_pimpl->_credsUser.insert(c_ptr).second)
+    {
+      _pimpl->_userDirty = true;
+      INT << "changed/new:" << cred << endl;
+    }
+    else
+      INT << "already there: " << cred << endl;
+  }
+
+
+  void CredentialManager::save()
+  {
+    if (_pimpl->_globalDirty)
+      _pimpl->saveGlobalCredentials();
+    if (_pimpl->_userDirty)
+      _pimpl->saveUserCredentials();
+    _pimpl->_globalDirty = false;
+    _pimpl->_userDirty = false;
+  }
 
 
   void CredentialManager::saveInGlobal(const AuthData & cred)
   {
-    AuthData_Ptr c_ptr;
-    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    _pimpl->_credsGlobal.insert(c_ptr); //! \todo avoid adding duplicates
-    _pimpl->saveGlobalCredentials();
+    addGlobalCred(cred);
+    save();
   }
 
 
   void CredentialManager::saveInUser(const AuthData & cred)
   {
-    AuthData_Ptr c_ptr;
-    c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    _pimpl->_credsUser.insert(c_ptr); //! \todo avoid adding duplicates
-    _pimpl->saveUserCredentials();
+    addUserCred(cred);
+    save();
   }
 
 
-  void CredentialManager::saveIn(const AuthData & cred, const Pathname & credFile)
+  void CredentialManager::saveInFile(const AuthData & cred, const Pathname & credFile)
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
