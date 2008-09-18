@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 18 09:57:49 CEST 2008 - ma@suse.de
+
+- Add Product::isTargetDistribution to identify the systems installed
+  baseproduct.
+- revision 11089
+
+-------------------------------------------------------------------
 Wed Sep 17 18:05:44 CEST 2008 - jkupec@suse.cz
 
 - save user credentials when adding repos/services with URLs containing

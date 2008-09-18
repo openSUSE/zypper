@@ -151,6 +151,9 @@ namespace zypp
     return ret;
   }
 
+  bool Product::isTargetDistribution() const
+  { return isSystem() && type() == "base"; }
+
   std::string Product::registerTarget() const
   { return lookupStrAttribute( sat::SolvAttr::productRegisterTarget ); }
 
@@ -181,7 +184,7 @@ namespace zypp
 
         if ( url_type_it.asString() == key_r )
         {
-            ret._list.push_back(url_it.asString());           
+            ret._list.push_back(url_it.asString());
         }
     } /* while (attribute array) */
 
