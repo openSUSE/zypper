@@ -2,7 +2,7 @@
 Thu Sep 18 09:57:49 CEST 2008 - ma@suse.de
 
 - Add Product::isTargetDistribution to identify the systems installed
-  baseproduct.
+  baseproduct. This should replace tests for Product::type is "base".
 - revision 11089
 
 -------------------------------------------------------------------
