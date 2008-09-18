@@ -3,6 +3,7 @@ Thu Sep 18 16:11:23 CEST 2008 - ma@suse.de
 
 - Use service alias as namespace for it's repositories aliases.
 - revision 11097
+- version 5.11.0 (11)
 
 -------------------------------------------------------------------
 Thu Sep 18 12:45:25 CEST 2008 - jkupec@suse.cz
