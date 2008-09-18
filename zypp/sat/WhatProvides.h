@@ -93,9 +93,7 @@ namespace zypp
 
       public:
         /** Default ctor */
-        WhatProvides()
-        : _begin( 0 )
-        {}
+        WhatProvides();
 
         /** Ctor from \ref Capability. */
         explicit
@@ -111,8 +109,7 @@ namespace zypp
 
      public:
         /** Whether the container is empty. */
-        bool empty() const
-        { return ! ( _begin && *_begin ); }
+        bool empty() const;
 
         /** Number of solvables inside. */
         size_type size() const;
@@ -127,8 +124,8 @@ namespace zypp
         const_iterator end() const;
 
       private:
-        const sat::detail::IdType * _begin;
-        shared_ptr<void> _private;
+        struct Impl;
+        RW_pointer<Impl> _pimpl;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -142,7 +139,9 @@ namespace zypp
     //	CLASS NAME : WhatProvides::const_iterator
     //
     /** \ref WhatProvides iterator.
-     * Iterate a NULL terminated sat::detail::IdType array.
+     * Iterate a NULL terminated sat::detail::IdType array. Ctor gets
+     * the adress of a pointer to the array, and offset into the array.
+     * This is needed in case the array gets reallocated.
      */
     class WhatProvidesIterator : public boost::iterator_adaptor<
           WhatProvidesIterator         // Derived
@@ -154,38 +153,52 @@ namespace zypp
     {
       public:
         WhatProvidesIterator()
-        : iterator_adaptor_( 0 )
+        : iterator_adaptor_( 0 ), _baseRef( 0 ), _offset( 0 )
         {}
 
-        explicit WhatProvidesIterator( const sat::detail::IdType * _idx )
-        : iterator_adaptor_( _idx )
+        /** Ctor with pointer to 1st elemment of an array.
+         * Use otherwise unused base as pointer for _baseRef. */
+        explicit WhatProvidesIterator( const detail::IdType *const base_r, unsigned offset_r = 0 )
+        : iterator_adaptor_( base_r ), _baseRef( base_r ? &base_reference() : 0 ), _offset( offset_r )
+        {}
+
+        /** Ctor with pointer to pointer to 1st elemment of an array.
+         * Required for arrays that might be relocated whlite iterating (
+        */
+        explicit WhatProvidesIterator( const detail::IdType *const* baseRef_r, unsigned offset_r )
+        : iterator_adaptor_( 0 ), _baseRef( baseRef_r ), _offset( offset_r )
         {}
 
       private:
         friend class boost::iterator_core_access;
 
         reference dereference() const
-        { return ( base() ) ? Solvable( *base() ) : Solvable::noSolvable; }
-
+        { return Solvable( getId() ); }
+#if 0
         template <class OtherDerived, class OtherIterator, class V, class C, class R, class D>
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
-        { // NULL pointer is eqal pointer to Id 0
-          return ( base() == rhs.base() // includes both NULL...
-              || ( !rhs.base() && !*base()     )
-              || ( !base()     && !*rhs.base() ) );
+#endif
+        bool equal( const WhatProvidesIterator & rhs ) const
+        { // NULL pointer is eqal Id 0
+          return ( ! ( getId() || rhs.getId() ) // both @end
+                   || ( _baseRef == rhs._baseRef && _offset == rhs._offset ) );
         }
 
         void increment()
-        { ++base_reference(); }
+        { ++_offset; }
+
+        detail::IdType getId() const
+        { return _baseRef ? (*_baseRef)[_offset] : detail::noId; }
+
+      private:
+        const detail::IdType *const*const _baseRef;
+        unsigned                          _offset;
     };
     ///////////////////////////////////////////////////////////////////
     }
 
-    inline WhatProvides::const_iterator WhatProvides::begin() const
-    { return const_iterator( _begin ); }
-
     inline WhatProvides::const_iterator WhatProvides::end() const
-    { return const_iterator( 0 ); }
+    { return const_iterator(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace sat

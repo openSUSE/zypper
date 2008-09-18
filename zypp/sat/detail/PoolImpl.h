@@ -179,7 +179,16 @@ namespace zypp
           { _repoinfos.erase( id_r ); }
 
         public:
-          const sat::detail::IdType * whatProvides( Capability cap_r )
+          /** Returns the id stored at \c offset_r in the internal
+           * whatprovidesdata array.
+          */
+          const sat::detail::IdType whatProvidesData( unsigned offset_r )
+          { return _pool->whatprovidesdata[offset_r]; }
+
+          /** Returns offset into the internal whatprovidesdata array.
+           * Use \ref whatProvidesData to get the stored Id.
+          */
+          unsigned whatProvides( Capability cap_r )
           { prepare(); return ::pool_whatprovides( _pool, cap_r.id() ); }
 
         public:

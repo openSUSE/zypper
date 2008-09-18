@@ -76,7 +76,7 @@ namespace zypp
 
         /** Iterator pointing behind the last \ref Solvable. */
         const_iterator end() const
-        { return const_iterator( 0 ); }
+        { return const_iterator(); }
 
       private:
         const sat::detail::IdType * _begin;
