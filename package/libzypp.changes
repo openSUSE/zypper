@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 18 12:45:25 CEST 2008 - jkupec@suse.cz
+
+- pass service's credentials down to repos
+- support ?credentials=filepath in URL to specify credentials
+- revision 11092
+
+-------------------------------------------------------------------
 Thu Sep 18 09:57:49 CEST 2008 - ma@suse.de
 
 - Add Product::isTargetDistribution to identify the systems installed
