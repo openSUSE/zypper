@@ -444,7 +444,9 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-#if 1
+
+
+#if 0
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
 
@@ -469,7 +471,6 @@ try {
     repoManager.refreshService( s );
   }
 
-#if 0
 
   RepoInfo nrepo;
   nrepo.setAlias( alias );
@@ -511,7 +512,7 @@ try {
     }
   }
 
-  if ( 0 )
+  if ( 1 )
   {
     RepoManager repoManager( makeRepoManager( sysRoot ) );
     RepoInfoList repos = repoManager.knownRepositories();
@@ -582,13 +583,6 @@ try {
   }
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-
-
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
 
   if ( 0 )
   {

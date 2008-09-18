@@ -1673,7 +1673,7 @@ namespace zypp
       }
 
       // Prepend service alias:
-      it->setAlias( str::form( "%s: %s", service.alias().c_str(), it->alias().c_str() ) );
+      it->setAlias( str::form( "%s:%s", service.alias().c_str(), it->alias().c_str() ) );
 
       // use the same credentials as the service
       if (!serviceCredParam.empty())
