@@ -202,14 +202,18 @@ const char *const MediaCurl::agentString()
       // nothing to do
   }
 
-  static const std::string _value( str::form( "ZYpp %s (curl %s) %s",
-                                              VERSION,
-                                              curl_version_info(CURLVERSION_NOW)->version,
-                                              target ? str::form( " - %s on '%s'",
-                                                                  target->anonymousUniqueId().c_str(),
-                                                                  target->release().c_str() ).c_str()
-                                              : "" )
-                                       );
+  static const std::string _value(
+    str::form(
+       "ZYpp %s (curl %s) %s"
+       , VERSION
+       , curl_version_info(CURLVERSION_NOW)->version
+       , target ?
+           str::form( " - %s on '%s'"
+             , target->anonymousUniqueId().c_str()
+             , target->targetDistribution().c_str()
+           ).c_str() :  ""
+    )
+  );
   return _value.c_str();
 }
 
