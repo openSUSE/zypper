@@ -205,8 +205,8 @@ namespace zypp
       // get from that file
       credfile = file;
     else
-      // get from /etc/zypp/credentials.d
-      credfile = _options.customCredFileDir / file;
+      // get from /etc/zypp/credentials.d, delete the leading path
+      credfile = _options.customCredFileDir / file.basename();
 
     CredentialFileReader(credfile, bind(&Impl::processCredentials, this, _1));
     if (_credsTmp.empty())
