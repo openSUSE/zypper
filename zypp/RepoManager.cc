@@ -121,7 +121,7 @@ namespace zypp
     {
       DBG << "Target not initialized, using an empty servicesTargetDistro." << endl;
     }
-    
+
     rootDir = root_r;
   }
 
@@ -1238,7 +1238,7 @@ namespace zypp
       for_(urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd())
         if (!urlit->getPassword().empty() && !urlit->getUsername().empty())
           //! \todo use a method calling UI callbacks to ask where to save creds?
-          cm.saveInUser(media::AuthData(*urlit)); 
+          cm.saveInUser(media::AuthData(*urlit));
     }
 
     progress.toMax();
@@ -1672,6 +1672,9 @@ namespace zypp
         it->setPath("");
       }
 
+      // Prepend service alias:
+      it->setAlias( str::form( "%s: %s", service.alias().c_str(), it->alias().c_str() ) );
+
       // use the same credentials as the service
       if (!serviceCredParam.empty())
         url.setQueryParam("credentials", serviceCredParam);
@@ -1732,7 +1735,7 @@ namespace zypp
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
         addRepository( *it );
-        
+
         // save repo credentials
       }
       else
@@ -1746,7 +1749,7 @@ namespace zypp
           oldRepoModified = true;
         }
 
-#warning also check changed URL due to PATH/URL change in service, but ignore ?credentials param! 
+#warning also check changed URL due to PATH/URL change in service, but ignore ?credentials param!
         // save if modified:
         if ( oldRepoModified )
         {

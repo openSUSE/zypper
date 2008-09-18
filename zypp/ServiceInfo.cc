@@ -16,7 +16,6 @@
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
-#include "zypp/parser/RepoindexFileReader.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
 
 #include "zypp/ServiceInfo.h"
