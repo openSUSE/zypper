@@ -2061,14 +2061,14 @@ static void print_service_list(Zypper & zypper,
     // print also repos belonging to the service
     if (with_repos && dynamic_pointer_cast<ServiceInfo>(*it))
     {
-      // indicate we repos of the current service
+      // indicate that we print repos of the current service
       flags |= SF_SERVICE_REPO;
 
       RepoCollector collector;
       RepoManager rm(zypper.globalOpts().rm_options);
 
       rm.getRepositoriesInService((*it)->alias(),
-          boost::make_function_output_iterator(
+          make_function_output_iterator(
               bind(&RepoCollector::collect, &collector, _1)));
 
       for_(repoit, collector.repos.begin(), collector.repos.end())
@@ -2131,7 +2131,7 @@ static void print_xml_service_list(Zypper & zypper,
       RepoCollector collector;
       RepoManager rm(zypper.globalOpts().rm_options);
       rm.getRepositoriesInService((*it)->alias(),
-          boost::make_function_output_iterator(
+          make_function_output_iterator(
               bind(&RepoCollector::collect, &collector, _1)));
       ostringstream sout;
       for_(repoit, collector.repos.begin(), collector.repos.end())
@@ -2316,7 +2316,6 @@ void refresh_services(Zypper & zypper)
   // ...as command arguments
   get_services(zypper, zypper.arguments().begin(), zypper.arguments().end(),
       specified, not_found);
-  // ...as --repo options
   report_unknown_services(zypper.out(), not_found);
 
   unsigned error_count = 0;
@@ -2330,6 +2329,7 @@ void refresh_services(Zypper & zypper)
       ++number;
       RepoInfoBase_Ptr service_ptr(*sit);
 
+      // skip services not specified on the command line
       if (!specified.empty())
       {
         bool found = false;
@@ -2369,14 +2369,28 @@ void refresh_services(Zypper & zypper)
       bool error = false;
       ServiceInfo_Ptr s = dynamic_pointer_cast<ServiceInfo>(service_ptr);
       if (s)
+      {
         error = refresh_service(zypper, *s);
+        
+        // refresh also service's repos
+        if (zypper.cOpts().count("with-repos") || !zypper.globalOpts().is_rug_compatible)
+        {
+          RepoCollector collector;
+          RepoManager rm(zypper.globalOpts().rm_options);
+          rm.getRepositoriesInService(s->alias(),
+              make_function_output_iterator(
+                  bind(&RepoCollector::collect, &collector, _1)));
+          for_(repoit, collector.repos.begin(), collector.repos.end())
+            refresh_repo(zypper, *repoit);
+        }
+      }
       else
       {
-        if (zypper.cOpts().count("no-repos"))
+        if (!zypper.cOpts().count("with-repos") && !zypper.globalOpts().is_rug_compatible)
         {
-          zypper.out().info(str::form(
+          DBG << str::form(
               "Skipping non-index service '%s' because '%s' is used.",
-              service_ptr->name().c_str(), "--no-repos"));
+              service_ptr->name().c_str(), "--no-repos");
           continue;
         }
         error = refresh_repo(zypper, *dynamic_pointer_cast<RepoInfo>(service_ptr));

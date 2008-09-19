@@ -1126,7 +1126,7 @@ void Zypper::processCommandOptions()
   {
     static struct option options[] = {
       {"help", no_argument, 0, 'h'},
-      {"no-repos", no_argument, 0, 'R'},
+      {"with-repos", no_argument, 0, 'r'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1136,7 +1136,7 @@ void Zypper::processCommandOptions()
       "Refresh defined repository index services.\n"
       "\n"
       "  Command options:\n"
-      "-R, --no-repos      Do not refresh non-index services (plain repositories).\n"
+      "-r, --with-repos      Refresh also repositories.\n"
     );
     break;
   }
