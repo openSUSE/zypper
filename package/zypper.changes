@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 19 22:46:57 CEST 2008 - jkupec@suse.cz
+
+- 'licenses' command added (fate #303703)
+- r11108
+
+-------------------------------------------------------------------
 Fri Sep 19 13:39:19 CEST 2008 - jkupec@suse.cz
 
 - don't allow to change alias of a repo belonging to service
