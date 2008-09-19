@@ -861,7 +861,13 @@ Sort the list by name.
 Refreshing a service mean executing the service's special task.
 
 RIS services add, remove, or modify repositories on your system based on
-current content of the repository index.
+current content of the repository index. Services only manage defined
+repositories, they do not refresh them. To refresh also repositories,
+use \fI\-\-with\-repos\fR option or the \fBrefresh\fR command.
+
+.TP
+.I \-r, \-\-with\-repos
+Refresh also repositories.
 
 TODO more info
 
