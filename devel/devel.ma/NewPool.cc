@@ -444,6 +444,14 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
+  Edition a("4.21.3-2");
+  DBG << a << endl;
+  DBG << (a == a) << endl;
+  DBG << (a.match(a)) << endl;
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
 
 
 #if 0
@@ -485,7 +493,6 @@ try {
   }
 
   repoManager.loadFromCache( nrepo );
-#endif
 
 
   ///////////////////////////////////////////////////////////////////
@@ -509,6 +516,24 @@ try {
       USR << getZYpp()->target()->targetDistribution() << endl;
       USR << getZYpp()->target()->targetDistributionRelease() << endl;
       USR << getZYpp()->target()->targetDistributionFlavor() << endl;
+    }
+  }
+
+  if ( 1 )
+  {
+    RepoManager repoManager( makeRepoManager( sysRoot ) );
+    ServiceInfoList services = repoManager.knownServices();
+
+    for ( ServiceInfoList::iterator it = services.begin(); it != services.end(); ++it )
+    {
+      ServiceInfo & nservice( *it );
+      SEC << nservice << endl;
+
+      if ( ! nservice.enabled() )
+        continue;
+
+      repoManager.refreshService( nservice );
+
     }
   }
 
@@ -581,6 +606,7 @@ try {
     UpgradeStatistics u;
     getZYpp()->resolver()->doUpgrade( u );
   }
+
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
@@ -597,6 +623,45 @@ try {
                       make_filter_end<resfilter::ByTransact>(pool) ) << endl;
     }
   }
+
+
+  //////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+  for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+  {
+    MIL << *it << endl;
+    DBG << (*it)->provides() << endl;
+  }
+
+  sat::WhatProvides prv( Capability("product()") );
+  SEC << prv << endl;
+  for_( it, prv.begin(), prv.end() )
+  {
+
+    MIL << *it << endl;
+    MIL << it->provides() << endl;
+  }
+
+  Capability cap;
+
+  cap = Capability( "sles-release" );
+  prv = sat::WhatProvides( cap );
+  MIL << cap << ": " << prv << endl;
+
+  cap = Capability( "sles-release == 11" );
+  prv = sat::WhatProvides( cap );
+  MIL << cap << ": " << prv << endl;
+
+
+//   PoolItem pi ( getPi<Package>("sles-release", Edition("11.0") ) );
+
+  //////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 
   //SEC << zypp::getZYpp()->diskUsage() << endl;
 

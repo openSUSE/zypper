@@ -158,7 +158,7 @@ PoolItem getPi( const std::string & name_r, const Edition & ed_r, const Arch & a
   for_(it, pool.byNameBegin(name_r), pool.byNameEnd(name_r) )
   {
     if ( !ret && isKind<_Res>( (*it).resolvable() )
-         && ( ed_r == Edition() || ed_r == (*it)->edition() )
+         && ( ed_r == Edition() || ed_r.match((*it)->edition()) == 0 )
          && ( arch_r == Arch()  || arch_r == (*it)->arch()  ) )
     {
       ret = (*it);

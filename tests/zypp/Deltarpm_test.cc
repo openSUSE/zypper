@@ -8,6 +8,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/TmpPath.h"
 #include "zypp/PathInfo.h"
 #include "zypp/RepoManager.h"
 #include "zypp/sat/Pool.h"
@@ -26,21 +27,14 @@ using namespace zypp::filesystem;
 
 BOOST_AUTO_TEST_CASE(delta)
 {
-  KeyRingTestReceiver rec;
-  rec.answerAcceptUnknownKey(true);
-//  rec.answerImportKey(true);
-  Pathname rootdir(TEST_DIR );
-  RepoManagerOptions opts(rootdir);
-  opts.repoRawCachePath = rootdir;
-  opts.repoSolvCachePath = rootdir;
-  opts.knownReposPath = rootdir;
-  opts.knownServicesPath = rootdir;
+  KeyRing::setDefaultAccept( KeyRing::ACCEPT_UNKNOWNKEY | KeyRing::ACCEPT_UNSIGNED_FILE );
 
-  RepoManager rm(opts);
+  TmpDir rootdir;
+  RepoManager rm( RepoManagerOptions::makeTestSetup( rootdir ) );
 
   RepoInfo updates;
   updates.setAlias("updates");
-  updates.addBaseUrl(Url(string("dir:") + rootdir.absolutename().asString() ));
+  updates.addBaseUrl( Pathname(TEST_DIR).asUrl() );
 
   try
   {
@@ -61,7 +55,7 @@ BOOST_AUTO_TEST_CASE(delta)
     BOOST_CHECK(it->name() == "libzypp");
     BOOST_CHECK(it->edition() == Edition("4.21.3-2"));
     BOOST_CHECK(it->arch() == "i386");
-    BOOST_CHECK(it->baseversion().edition().match(Edition("4.21.3-1")) 
+    BOOST_CHECK(it->baseversion().edition().match(Edition("4.21.3-1"))
       ||it->baseversion().edition().match(Edition("4.21.2-3")));
 
     cout << it->name() << " - " << it->edition() << " - " <<  it->arch()
@@ -69,10 +63,9 @@ BOOST_AUTO_TEST_CASE(delta)
 
     cout << (it->edition() == "4.21.3-2") << endl;              // fine
     cout << (it->edition() == Edition("4.21.3-2")) << endl;     // fine
-    cout << (it->edition().match(Edition("4.21.3-2"))) << endl; //! \todo FIXME says no 
-    cout << (it->edition().match("4.21.3-2")) << endl;          //! \todo FIXME says no
+    cout << (it->edition().match(Edition("4.21.3-2")) == 0) << endl; // !match returns -1,0,1
+    cout << (it->edition().match("4.21.3-2") == 0) << endl;          // !match returns -1,0,1
   }
 
   //! \todo FIXME Edition("0:4.21.3-2") != Edition("4.21.3-2") (not even does Edition("0:4.21.3-2").match(Edition("4.21.3-2"))
-  rm.cleanCache(updates);
 }

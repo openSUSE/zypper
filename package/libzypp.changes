@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 19 13:17:38 CEST 2008 - ma@suse.de
+
+- Moved DefaultAcceptBits enum to class KeyRing (formerly KeyRingReort).
+- revision 11102
+
+-------------------------------------------------------------------
 Thu Sep 18 16:11:23 CEST 2008 - ma@suse.de
 
 - Use service alias as namespace for it's repositories aliases.

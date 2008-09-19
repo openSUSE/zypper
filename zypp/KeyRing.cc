@@ -55,34 +55,34 @@ namespace zypp
 
   namespace
   {
-    KeyRingReport::DefaultAccept _keyRingDefaultAccept( KeyRingReport::ACCEPT_NOTHING );
+    KeyRing::DefaultAccept _keyRingDefaultAccept( KeyRing::ACCEPT_NOTHING );
   }
 
-  KeyRingReport::DefaultAccept KeyRingReport::defaultAccept()
+  KeyRing::DefaultAccept KeyRing::defaultAccept()
   { return _keyRingDefaultAccept; }
 
-  void KeyRingReport::setDefaultAccept( DefaultAccept value_r )
+  void KeyRing::setDefaultAccept( DefaultAccept value_r )
   {
-    MIL << "Set new default accept: " << value_r << endl;
+    MIL << "Set new KeyRing::DefaultAccept: " << value_r << endl;
     _keyRingDefaultAccept = value_r;
   }
 
   ///////////////////////////////////////////////////////////////////
 
   bool KeyRingReport::askUserToAcceptUnsignedFile( const string &file )
-  { return _keyRingDefaultAccept.testFlag( ACCEPT_UNSIGNED_FILE ); }
+  { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_UNSIGNED_FILE ); }
 
   bool KeyRingReport::askUserToAcceptUnknownKey( const string &file, const string &id )
-  { return _keyRingDefaultAccept.testFlag( ACCEPT_UNKNOWNKEY ); }
+  { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_UNKNOWNKEY ); }
 
   bool KeyRingReport::askUserToTrustKey( const PublicKey &key )
-  { return _keyRingDefaultAccept.testFlag( TRUST_KEY ); }
+  { return _keyRingDefaultAccept.testFlag( KeyRing::TRUST_KEY ); }
 
   bool KeyRingReport::askUserToImportKey( const PublicKey &key)
-  { return _keyRingDefaultAccept.testFlag( IMPORT_KEY ); }
+  { return _keyRingDefaultAccept.testFlag( KeyRing::IMPORT_KEY ); }
 
   bool KeyRingReport::askUserToAcceptVerificationFailed( const string &file, const PublicKey &key )
-  { return _keyRingDefaultAccept.testFlag( ACCEPT_VERIFICATION_FAILED ); }
+  { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_VERIFICATION_FAILED ); }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -91,24 +91,13 @@ namespace zypp
   /** KeyRing implementation. */
   struct KeyRing::Impl
   {
-    Impl(const Pathname &baseTmpDir)
-    : _trusted_tmp_dir(baseTmpDir, "zypp-trusted-kr")
-   ,  _general_tmp_dir(baseTmpDir, "zypp-general-kr")
-   , _base_dir( baseTmpDir )
-
+    Impl( const Pathname & baseTmpDir )
+    : _trusted_tmp_dir( baseTmpDir, "zypp-trusted-kr" )
+    , _general_tmp_dir( baseTmpDir, "zypp-general-kr" )
+    , _base_dir( baseTmpDir )
     {
+      MIL << "Current KeyRing::DefaultAccept: " << _keyRingDefaultAccept << endl;
     }
-
-    /*
-    Impl( const Pathname &general_kr, const Pathname &trusted_kr )
-    {
-      filesystem::assert_dir(general_kr);
-      filesystem::assert_dir(trusted_kr);
-
-      generalKeyRing() = general_kr;
-      trustedKeyRing() = trusted_kr;
-    }
-    */
 
     void importKey( const PublicKey &key, bool trusted = false);
     void deleteKey( const string &id, bool trusted );

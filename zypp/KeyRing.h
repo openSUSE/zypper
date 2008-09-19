@@ -33,7 +33,12 @@ namespace zypp
 
   /** Callbacks from signature verification workflow.
    *
-   * Per default all methods answer \c false.
+   * Per default all methods answer \c false. This may be canged
+   * by calling \ref KeyRing::setDefaultAccept.
+   * \code
+   *  KeyRing::setDefaultAccept( KeyRing::ACCEPT_UNSIGNED_FILE | KeyRing::ACCEPT_VERIFICATION_FAILED );
+   * \endcode
+   * \see \ref KeyRing
   */
   struct KeyRingReport : public callback::ReportBase
   {
@@ -78,29 +83,7 @@ namespace zypp
      */
     virtual bool askUserToAcceptVerificationFailed( const std::string &filedesc, const PublicKey &key );
 
-    public:
-      /** \name Query/change the default values.
-       * Per default all methods answer \c false.
-       */
-      //@{
-      enum DefaultAcceptBits
-      {
-        ACCEPT_NOTHING             = 0x0000,
-        ACCEPT_UNSIGNED_FILE       = 0x0001,
-        ACCEPT_UNKNOWNKEY          = 0x0002,
-        TRUST_KEY                  = 0x0004,
-        IMPORT_KEY                 = 0x0008,
-        ACCEPT_VERIFICATION_FAILED = 0x0010,
-      };
-      ZYPP_DECLARE_FLAGS(DefaultAccept,DefaultAcceptBits);
-
-      /** Get the active accept bits. */
-      static DefaultAccept defaultAccept();
-      /** Set the active accept bits. */
-      static void setDefaultAccept( DefaultAccept value_r );
-     //@}
   };
-  ZYPP_DECLARE_OPERATORS_FOR_FLAGS(KeyRingReport::DefaultAccept);
 
   struct KeyRingSignals : public callback::ReportBase
   {
@@ -133,11 +116,42 @@ namespace zypp
   //
   //	CLASS NAME : KeyRing
   //
-  /** Class that represent a text and multiple translations.
+  /** Gpg key handling.
+   *
   */
-  class KeyRing  : public base::ReferenceCounted, private base::NonCopyable
+  class KeyRing : public base::ReferenceCounted, private base::NonCopyable
   {
     friend std::ostream & operator<<( std::ostream & str, const KeyRing & obj );
+
+    public:
+      /** \name Default answers in verification workflow.
+       * Per default all answers are \c false.
+       */
+      //@{
+      /** \ref DefaultAccept flags (\see \ref base::Flags) are used to
+       *  define the default callback answers during signature verification.
+       * \code
+       *  KeyRingReport::setDefaultAccept( KeyRing::ACCEPT_UNSIGNED_FILE | ACCEPT_VERIFICATION_FAILED );
+       * \endcode
+       * \see \ref KeyRingReport.
+       */
+      enum DefaultAcceptBits
+      {
+        ACCEPT_NOTHING             = 0x0000,
+        ACCEPT_UNSIGNED_FILE       = 0x0001,
+        ACCEPT_UNKNOWNKEY          = 0x0002,
+        TRUST_KEY                  = 0x0004,
+        IMPORT_KEY                 = 0x0008,
+        ACCEPT_VERIFICATION_FAILED = 0x0010,
+      };
+      ZYPP_DECLARE_FLAGS( DefaultAccept, DefaultAcceptBits );
+
+      /** Get the active accept bits. */
+      static DefaultAccept defaultAccept();
+
+      /** Set the active accept bits. */
+      static void setDefaultAccept( DefaultAccept value_r );
+     //@}
 
   public:
     /** Implementation  */
@@ -256,6 +270,9 @@ namespace zypp
     //return str << obj.asString();
     return str;
   }
+
+  /** \relates KeyRing::DefaultAccept  */
+  ZYPP_DECLARE_OPERATORS_FOR_FLAGS( KeyRing::DefaultAccept );
 
   ///////////////////////////////////////////////////////////////////
 
