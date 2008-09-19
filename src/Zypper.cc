@@ -1931,12 +1931,13 @@ void Zypper::processCommandOptions()
     );
     break;
   }
-  
+
   case ZypperCommand::VERSION_CMP_e:
   {
     static struct option options[] =
     {
       {"help", no_argument, 0, 'h'},
+      {"match", no_argument, 0, 'm'},
       {0, 0, 0, 0}
     };
     specific_options = options;
@@ -1945,7 +1946,8 @@ void Zypper::processCommandOptions()
       "\n"
       "Compare the versions supplied as arguments.\n"
       "\n"
-      "This command has no additional options.\n"
+      "  Command options:\n"
+      "-m, --match  Takes missing release number as any release.\n"
     );
     break;
   }
@@ -3680,24 +3682,13 @@ void Zypper::doCommand()
     
     Edition lhs(_arguments[0]);
     Edition rhs(_arguments[1]);
-    
-    if (lhs.empty())
-    {
-      out().info(str::form(
-          _("'%s' is not a valid version number."), _arguments[0].c_str()));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
 
-    if (rhs.empty())
-    {
-      out().info(str::form(
-          _("'%s' is not a valid version number."), _arguments[1].c_str()));
-      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-      return;
-    }
+    int result;
 
-    int result = lhs.match(rhs);
+    if (_copts.count("match"))
+      result = lhs.match(rhs);
+    else
+      result = lhs.compare(rhs);
 
     // be terse when talking to machines
     if (_gopts.machine_readable)

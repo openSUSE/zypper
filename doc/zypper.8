@@ -919,6 +919,18 @@ is used, the result is an integer number, negative/positive if version1 is
 older/newer than version2, zero if they match.
 
 .TP
+.I \-m, \-\-match
+Takes missing release number as any release. For example
+.br
+$ zypper vcmp -m 0.15.3 0.15.3-2
+.br
+0.15.3 matches 0.15.3-2
+.br
+$ zypper vcmp 0.15.3 0.15.3-2
+.br
+0.15.3 is older than 0.15.3-2
+
+.TP
 .B targetos (tos)
 Shows the ID string of the target operating system. The string has a form of
 \fBdistroname-arch\fR. The string is determined by libzypp, the \fBdistroname\fR
