@@ -59,6 +59,7 @@ struct ZypperCommand
   // utils/others
   static const ZypperCommand TARGET_OS;
   static const ZypperCommand VERSION_CMP;
+  static const ZypperCommand LICENSES;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -126,6 +127,7 @@ struct ZypperCommand
 
     TARGET_OS_e,
     VERSION_CMP_e,
+    LICENSES_e,
 
     HELP_e,
     SHELL_e,

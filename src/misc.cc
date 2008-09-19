@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
+#include <iostream>
 #include <sstream>
 #include <boost/format.hpp>
 
@@ -12,9 +13,13 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/SrcPackage.h"
+#include "zypp/Package.h"
 #include "zypp/Capabilities.h"
 
+
 #include "zypp/RepoInfo.h"
+
+#include "zypp/PoolQuery.h"
 
 #include "main.h"
 #include "utils/misc.h"
@@ -206,6 +211,86 @@ bool confirm_licenses(Zypper & zypper)
 
   return confirmed;
 }
+
+// ----------------------------------------------------------------------------
+
+void report_licenses(Zypper & zypper)
+{
+  PoolQuery q;
+
+  ui::Selectable::constPtr s;
+  PoolItem inst;
+  PoolItem inst_with_repo;
+
+  unsigned count_installed = 0, count_installed_repo = 0, count_installed_eula = 0;
+  set<string> unique_licenses;
+
+  for_(pit, q.selectableBegin(), q.selectableEnd())
+  {
+    s = *pit;
+    if (!s)  // FIXME this must not be necessary!
+      continue;
+
+    for_(iit, s->installedBegin(), s->installedEnd())
+    {
+      inst = *iit;
+      ++count_installed;
+
+      cout
+        << s->name() << "-" << inst.resolvable()->edition()
+        << " (" << kind_to_string_localized(s->kind(), 1) << ")"
+        << endl;
+
+      if (s->kind() == ResKind::package)
+      {
+        cout
+          << _("License") << ": "
+          << asKind<Package>(inst.resolvable())->license()
+          << endl;
+        unique_licenses.insert(asKind<Package>(inst.resolvable())->license());
+      }
+
+      for_(it, s->availableBegin(), s->availableEnd())
+      {
+        if (equalNVRA(*it->resolvable(), *inst.resolvable()))
+        {
+          inst_with_repo = *it;
+          ++count_installed_repo;
+          break;
+        }
+      }
+
+      if (inst_with_repo && !inst_with_repo.resolvable()->licenseToConfirm().empty())
+      {
+        cout << _("EULA") << ":" << endl;
+
+        const string & licenseText =
+          inst_with_repo.resolvable()->licenseToConfirm();
+        if (licenseText.find("DT:Rich")==licenseText.npos)
+          cout << licenseText;
+        else
+          cout << processRichText(licenseText);
+        cout << endl;
+
+        ++count_installed_eula;
+      }
+      else if (!inst.resolvable()->licenseToConfirm().empty())
+        cout << "look! got an installed-only item and it has EULA! he?" << inst << endl;
+      cout << "-" << endl;
+    }
+  }
+
+  cout << endl << _("SUMMARY") << endl << endl;
+  cout << _("Installed packages: ") << count_installed << endl;
+  cout << _("Installed packages with counterparts in repositories: ") << count_installed_repo << endl;
+  cout << _("Installed packages with EULAs: ") << count_installed_eula << endl;
+
+  cout << str::form("Package licenses (%u):", (unsigned int) unique_licenses.size()) << endl;
+  for_(it, unique_licenses.begin(), unique_licenses.end())
+    cout << "* " << *it << endl;
+}
+
+// ----------------------------------------------------------------------------
 
 static SrcPackage::constPtr source_find( const string & arg )
 {

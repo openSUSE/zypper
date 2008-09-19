@@ -925,6 +925,23 @@ Shows the ID string of the target operating system. The string has a form of
 is read from <current-rootdir>/etc/products.d/baseproduct and the architecture
 is determined from uname and CPU flags.
 
+.TP
+.B licenses
+Prints a report about \fBlicenses\fR and \fBEULA\fRs of installed packages
+to standard output.
+
+First, a list of all packages and their licenses and/or EULAs is shown.
+This is followed by a summary, including the total number of installed
+packages, the number of installed
+packages with EULAs that required a confirmation from the user. Since the
+EULAs are not stored on the system and can only be read from repository
+metadata, the summary includes also the number of installed packages
+that have their counterpart in repositories. The report ends with a list
+of all licenses uses by the installed packages.
+
+This command can be useful for companies redistributiong a custom
+distribution (like appliances) to figure out what licenses they are bound by.
+
 
 .SH "GLOBAL OPTIONS"
 

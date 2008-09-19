@@ -239,6 +239,7 @@ void print_main_help(Zypper & zypper)
   static string help_other_commands = _("\tOther Commands:\n"
     "\tversioncmp, vcmp\tCompare two version strings.\n"
     "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
+    "\tlicenses\t\tPrint report about licenses and EULAs of installed packages.\n"
   );
 
   static string help_usage = _(
@@ -1949,6 +1950,24 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::LICENSES_e:
+  {
+    static struct option options[] =
+    {
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "licenses\n"
+      "\n"
+      "Report Licenses and EULA of currently installed software packages.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
+    break;
+  }
+
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -3002,9 +3021,9 @@ void Zypper::doCommand()
     if (command() == ZypperCommand::RUG_PATCH_SEARCH)
       _gopts.is_rug_compatible = true;
 
-    zypp::PoolQuery query;
-
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    zypp::PoolQuery query;
 
     TriBool inst_notinst = indeterminate;
     if (globalOpts().disable_system_resolvables || copts.count("uninstalled-only"))
@@ -3694,6 +3713,31 @@ void Zypper::doCommand()
       out().info(str::form(_("%s is newer than %s"), lhs.asString().c_str(), rhs.asString().c_str()));
     else
       out().info(str::form(_("%s is older than %s"), lhs.asString().c_str(), rhs.asString().c_str()));
+
+    break;
+  }
+
+  case ZypperCommand::LICENSES_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    if (!_arguments.empty())
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+      return;
+    }
+
+    init_repos(*this);
+    if (exitCode() != ZYPPER_EXIT_OK)
+      return;
+    init_target(*this);
+    // now load resolvables:
+    load_resolvables(*this);
+    // needed to compute status of PPP
+    resolve(*this);
+
+    report_licenses(*this);
 
     break;
   }

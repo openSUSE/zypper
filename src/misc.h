@@ -22,6 +22,11 @@
  */
 bool confirm_licenses(Zypper & zypper);
 
+/**
+ * Prints a report about licenses and EULAs of installed packages to stdout.
+ */
+void report_licenses(Zypper & zypper);
+
 zypp::ResKind string_to_kind (const std::string & skind);
 
 /**
