@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep 19 13:39:19 CEST 2008 - jkupec@suse.cz
+
+- don't allow to change alias of a repo belonging to service
+- refresh-services: don't refresh non-service repositories by default
+- refresh-services: --no-repos/-R replaced by --with-repos/-r
+- r11103
+
+-------------------------------------------------------------------
 Mon Sep 15 12:31:51 CEST 2008 - jkupec@suse.cz
 
 - fixed --loose-auth and --loose-query for removerepo and
