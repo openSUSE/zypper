@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep 19 23:10:46 CEST 2008 - jkupec@suse.cz
+
+- 'versioncmp' now uses zypp::Edition::compare() by default and
+  match() if --match option is used.
+
+-------------------------------------------------------------------
 Fri Sep 19 22:46:57 CEST 2008 - jkupec@suse.cz
 
 - 'licenses' command added (fate #303703)
