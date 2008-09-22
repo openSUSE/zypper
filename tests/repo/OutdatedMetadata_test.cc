@@ -54,8 +54,8 @@ BOOST_AUTO_TEST_CASE(extensions)
 
   Repository repo = pool.reposFind("updates");
   
-  BOOST_CHECK_EQUAL( repo.generatedTimestamp(), Date(1215823454) );
-  BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1215823454 + 3600) );  
+  BOOST_CHECK_EQUAL( repo.generatedTimestamp(), Date(1222083131) );
+  BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1222083131 + 3600) );  
 
   rm.cleanCache(updates);
 }

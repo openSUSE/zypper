@@ -21,7 +21,7 @@
   <data type="suseinfo">
     <location href="repodata/suseinfo.xml.gz"/>
     <checksum type="sha">a9cf8892e8bb47ed09f05f40e42c390a943e61f5</checksum>
-    <timestamp>1222083131.0</timestamp>
+    <timestamp>1222083131</timestamp>
     <open-checksum type="sha">a3011438085ac55f06c68053201ea3ded17ee85c</open-checksum>
   </data>
 </repomd>
