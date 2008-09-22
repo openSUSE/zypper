@@ -344,7 +344,7 @@ namespace zypp
     /**
      * Returns \c true if username or password are encoded in the authority component.
      */
-    bool hasUserPass() const
+    bool hasCredentialsInAuthority() const
     { return ! ( getUsername().empty() && getPassword().empty() ); }
 
     /**

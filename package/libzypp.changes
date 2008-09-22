@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep 22 16:13:08 CEST 2008 - ma@suse.de
+
+- Add Url::hasCredentialsInAuthority test for username or password 
+  being encoded in the authority component. I.e. user:pass@host.
+- Handle repos to be disabled disable in service refresh.
+- revision 11126
+
+-------------------------------------------------------------------
 Mon Sep 22 12:10:34 CEST 2008 - jkupec@suse.cz
 
 - provided context to keyring callbacks (bnc #370223)

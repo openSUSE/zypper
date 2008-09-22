@@ -52,11 +52,7 @@
 #include "satsolver/repo.h"
 #include "satsolver/repo_solv.h"
 
-using namespace std;
-using namespace zypp;
-using namespace zypp::repo;
-using namespace zypp::filesystem;
-
+using std::endl;
 using namespace zypp::repo;
 
 ///////////////////////////////////////////////////////////////////
@@ -160,7 +156,7 @@ namespace zypp
       RepoCollector()
       {}
 
-      RepoCollector(const string & targetDistro_)
+      RepoCollector(const std::string & targetDistro_)
         : targetDistro(targetDistro_)
       {}
 
@@ -184,7 +180,7 @@ namespace zypp
       }
 
       RepoInfoList repos;
-      string targetDistro;
+      std::string targetDistro;
     };
 
   ////////////////////////////////////////////////////////////////////////////
@@ -215,17 +211,17 @@ namespace zypp
   static std::list<RepoInfo> repositories_in_dir( const Pathname &dir )
   {
     MIL << "directory " << dir << endl;
-    list<RepoInfo> repos;
-    list<Pathname> entries;
+    std::list<RepoInfo> repos;
+    std::list<Pathname> entries;
     if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
       ZYPP_THROW(Exception("failed to read directory"));
 
     str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
-    for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+    for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
     {
       if (str::regex_match(it->extension(), allowedRepoExt))
       {
-        list<RepoInfo> tmp = repositories_in_file( *it );
+        std::list<RepoInfo> tmp = repositories_in_file( *it );
         repos.insert( repos.end(), tmp.begin(), tmp.end() );
 
         //std::copy( collector.repos.begin(), collector.repos.end(), std::back_inserter(repos));
@@ -425,7 +421,7 @@ namespace zypp
   Pathname RepoManager::Impl::generateNonExistingName( const Pathname & dir,
                                                        const std::string & basefilename ) const
   {
-    string final_filename = basefilename;
+    std::string final_filename = basefilename;
     int counter = 1;
     while ( PathInfo(dir + final_filename).isExist() )
     {
@@ -470,7 +466,7 @@ namespace zypp
   void RepoManager::Impl::init_knownServices()
   {
     Pathname dir = options.knownServicesPath;
-    list<Pathname> entries;
+    std::list<Pathname> entries;
     if (PathInfo(dir).isExist())
     {
       if ( filesystem::readdir( entries, Pathname(dir), false ) != 0 )
@@ -887,7 +883,7 @@ namespace zypp
         // ok we have the metadata, now exchange
         // the contents
 
-        TmpDir oldmetadata( TmpDir::makeSibling( rawpath ) );
+        filesystem::TmpDir oldmetadata( filesystem::TmpDir::makeSibling( rawpath ) );
         filesystem::rename( rawpath, oldmetadata.path() );
         // move the just downloaded there
         filesystem::rename( tmpdir.path(), rawpath );
@@ -1013,7 +1009,7 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
-        ostringstream cmd;
+        std::ostringstream cmd;
         std::string toFile( str::gsub(solvfile.asString(),"\"","\\\"") );
         if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
@@ -1032,7 +1028,7 @@ namespace zypp
         ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
 
         cmd << endl;
-        for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+        for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
           cmd << "     " << output;
         }
@@ -1264,7 +1260,7 @@ namespace zypp
       }
     }
 
-    string filename = Pathname(url.getPathName()).basename();
+    std::string filename = Pathname(url.getPathName()).basename();
 
     if ( filename == Pathname() )
       ZYPP_THROW(RepoException("Invalid repo file name at " + url.asString() ));
@@ -1538,7 +1534,7 @@ namespace zypp
 
   ////////////////////////////////////////////////////////////////////////////
 
-  void RepoManager::removeService( const string & alias )
+  void RepoManager::removeService( const std::string & alias )
   {
     MIL << "Going to delete repo " << alias << endl;
 
@@ -1645,11 +1641,11 @@ namespace zypp
     mediamanager.release( mid );
     mediamanager.close( mid );
 
-    string serviceCredParam = service.url().getQueryParam("credentials");
+    std::string serviceCredParam = service.url().getQueryParam("credentials");
     INT << "service creds file " << serviceCredParam << endl;
 
     // URL credentials to store
-    set<Url> urlsWithCredentials;
+    std::set<Url> urlsWithCredentials;
 
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
@@ -1693,7 +1689,7 @@ namespace zypp
       it->setService( service.alias() );
     }
 
-    //
+    ////////////////////////////////////////////////////////////////////////////
     // Now compare collected repos with the ones in the system...
     //
     RepoInfoList oldRepos;
@@ -1708,17 +1704,24 @@ namespace zypp
       }
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     // create missing repositories and modify exising ones if needed...
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
       // Service explicitly requests the repo being enabled?
+      // Service explicitly requests the repo being disabled?
+      // And hopefully not both ;) If so, enable wins.
       bool beEnabled = service.repoToEnableFind( it->alias() );
+      bool beDisabled = service.repoToDisableFind( it->alias() );
+
       if ( beEnabled )
       {
+        // Remove from enable request list.
+        // NOTE: repoToDisable is handled differently.
+        //       It gets cleared on each refresh.
         service.delRepoToEnable( it->alias() );
         serviceModified = true;
       }
-#warning also handle toDelete list and afterwards clear it
 
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
       if ( oldRepo == oldRepos.end() )
@@ -1730,26 +1733,39 @@ namespace zypp
         it->setEnabled( beEnabled );
         it->setAutorefresh( true );
 
-#warning check whether a repo with the same alias exists
         // At that point check whether a repo with the same alias
         // exists outside this service. Maybe forcefully re-alias
         // the existing repo?
         addRepository( *it );
 
         // save repo credentials
+        // ma@: task for modifyRepository?
       }
       else
       {
         // ==> an exising repo to check
         bool oldRepoModified = false;
 
-        if ( beEnabled && ! oldRepo->enabled() )
+        if ( beEnabled )
         {
-          oldRepo->setEnabled( true );
-          oldRepoModified = true;
+          if ( ! oldRepo->enabled() )
+          {
+            oldRepo->setEnabled( true );
+            oldRepoModified = true;
+          }
+        }
+        else if ( beDisabled )
+        {
+          if ( oldRepo->enabled() )
+          {
+            oldRepo->setEnabled( false );
+            oldRepoModified = true;
+          }
         }
 
 #warning also check changed URL due to PATH/URL change in service, but ignore ?credentials param!
+// ma@: task for modifyRepository?
+
         // save if modified:
         if ( oldRepoModified )
         {
@@ -1758,6 +1774,14 @@ namespace zypp
       }
     }
 
+    // Unlike reposToEnable, reposToDisable is always cleared after refresh.
+    if ( ! service.reposToDisableEmpty() )
+    {
+      service.clearReposToDisable();
+      serviceModified = true;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     // save service if modified:
     if ( serviceModified )
     {
@@ -1813,8 +1837,7 @@ namespace zypp
       )
     {
       std::vector<RepoInfo> toModify;
-      getRepositoriesInService(oldAlias,
-        insert_iterator<std::vector<RepoInfo> >( toModify, toModify.begin() ));
+      getRepositoriesInService(oldAlias, std::back_inserter(toModify));
       for_( it, toModify.begin(), toModify.end() )
       {
         if (oldService.enabled() && !service.enabled())
