@@ -143,19 +143,15 @@ namespace zypp
 
         return suggestedExpirationTimestamp() < Date::now();
     }
-
-    Repository::UpdateKeys Repository::updateKeys() const
-    { return UpdateKeys( sat::SolvAttr::repositoryUpdates, *this ); }
     
-    bool Repository::providesUpdatesForKey( const std::string &key ) const
+    bool Repository::providesUpdatesFor( const std::string &key ) const
     {
-        UpdateKeys keys(updateKeys());
-        return ( keys.find(key) != keys.end() );
+        return false;
     }
     
     bool Repository::isUpdateRepo() const
     {
-        return ( ! updateKeys().empty() );
+        return false;
     }
 
     bool Repository::solvablesEmpty() const

@@ -42,6 +42,7 @@ namespace sat
   const SolvAttr SolvAttr::insnotify    ( SOLVABLE_MESSAGEINS );    // translated
   const SolvAttr SolvAttr::delnotify    ( SOLVABLE_MESSAGEDEL );    // translated
   const SolvAttr SolvAttr::eula		( SOLVABLE_EULA );          // translated
+  const SolvAttr SolvAttr::cpename      ( SOLVABLE_CPE_NAME );
   const SolvAttr SolvAttr::installtime  ( SOLVABLE_INSTALLTIME );
   const SolvAttr SolvAttr::buildtime    ( SOLVABLE_BUILDTIME );
   const SolvAttr SolvAttr::installsize  ( SOLVABLE_INSTALLSIZE );
@@ -108,7 +109,6 @@ namespace sat
   const SolvAttr SolvAttr::productRegisterRelease( PRODUCT_REGISTER_RELEASE );
   const SolvAttr SolvAttr::productUrl( PRODUCT_URL );
   const SolvAttr SolvAttr::productUrlType( PRODUCT_URL_TYPE );
-  const SolvAttr SolvAttr::productCpeName( PRODUCT_CPE_NAME );
 
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );

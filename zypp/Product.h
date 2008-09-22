@@ -68,21 +68,6 @@ namespace zypp
     */
     std::string type() const ZYPP_DEPRECATED;
 
-    /** Update repository indicator string.
-     * Repositories providing updates/patches for this product
-     * should (somehow) provide this string. So we are able to
-     * detect them.
-     */
-    std::string updaterepoKey() const;
-
-    /**
-     * The Common Platform Enumeration name
-     * for this product.
-     *
-     * See http://cpe.mitre.org
-     */
-    std::string cpeName() const;
-
     /** The product flags */
     std::list<std::string> flags() const;
 

@@ -143,6 +143,9 @@ namespace zypp
         /**
          * Products this repository claims it is
          * built for.
+         *
+         * Products are specified using the CPE form
+         * See http://cpe.mitre.org/ for more information on CPE
          */
         Products products() const;
 
@@ -156,19 +159,19 @@ namespace zypp
         /**
          * if the repository claims to update something then
          * it is an update repository
+         *
+         * This is implemented by looking at an "update" keyword
+         * on the repository tags
          */
         bool isUpdateRepo() const;
 
         /**
-         * Wether the reposity claims to provide updates to \ref prod
-         */
-        UpdateKeys updateKeys() const;
-
-        /**
          * wether the repository claims to update something \ref prod
-         * with key &\key
+         * with key \ref cpename
+         *
+         * See http://cpe.mitre.org/ for more information on CPE
          */
-        bool providesUpdatesForKey( const std::string &key ) const;
+        bool providesUpdatesFor( const std::string &cpename ) const;
 
         /** Whether \ref Repository contains solvables. */
         bool solvablesEmpty() const;

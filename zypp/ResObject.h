@@ -123,6 +123,14 @@ namespace zypp
     */
     std::string distribution() const;
 
+    /**
+     * The Common Platform Enumeration name
+     * for this product.
+     *
+     * See http://cpe.mitre.org
+     */
+    std::string cpeName() const;
+
     /** Installed size. */
     ByteCount installSize() const;
     /** \deprecated Use installSize which is more precise.*/
