@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<repomd xmlns="http://linux.duke.edu/metadata/repo" expire="3600">
+<?xml version="1.0" ?>
+<repomd xmlns="http://linux.duke.edu/metadata/repo">
   <data type="other">
     <location href="repodata/other.xml.gz"/>
     <checksum type="sha">73917678784071a9e1f66d333a3a265d01469098</checksum>
@@ -17,5 +17,11 @@
     <checksum type="sha">52969c92f9c595108376cd37df7d5ada41851f6a</checksum>
     <timestamp>1215823454</timestamp>
     <open-checksum type="sha">c6bd3c6099de74d97ed045163235be10ffa8a85f</open-checksum>
+  </data>
+  <data type="suseinfo">
+    <location href="repodata/suseinfo.xml.gz"/>
+    <checksum type="sha">a9cf8892e8bb47ed09f05f40e42c390a943e61f5</checksum>
+    <timestamp>1222083131.0</timestamp>
+    <open-checksum type="sha">a3011438085ac55f06c68053201ea3ded17ee85c</open-checksum>
   </data>
 </repomd>
