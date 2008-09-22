@@ -103,7 +103,6 @@ namespace sat
   const SolvAttr SolvAttr::productType           ( PRODUCT_TYPE );
   const SolvAttr SolvAttr::productFlags          ( PRODUCT_FLAGS );
   const SolvAttr SolvAttr::productFlavor         ( PRODUCT_FLAVOR );
-  const SolvAttr SolvAttr::productReferences     ( PRODUCT_REFERENCES );
   const SolvAttr SolvAttr::productUpdaterepoKey  ( PRODUCT_UPDATEREPOKEY );
   const SolvAttr SolvAttr::productRegisterTarget ( PRODUCT_REGISTER_TARGET );
   const SolvAttr SolvAttr::productRegisterRelease( PRODUCT_REGISTER_RELEASE );

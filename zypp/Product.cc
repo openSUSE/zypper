@@ -75,22 +75,10 @@ namespace zypp
 
   sat::Solvable Product::referencePackage() const
   {
-    Capability identCap( lookupStrAttribute( sat::SolvAttr::productReferences ) );
-    if ( ! identCap )
-    {
-      // No 'references': fallback to provider of 'product(name) = version'
-      // Without this solver testcase won't work, as it does not remember
-      // 'references'.
-      identCap = Capability( str::form( "product(%s) = %s", name().c_str(), edition().c_str() )  );
-    }
-    if ( ! identCap )
-    {
-      return sat::Solvable::noSolvable;
-    }
+    // Look for a  provider of 'product(name) = version' of same
+    // architecture and within the same repo.
+    Capability identCap( str::form( "product(%s) = %s", name().c_str(), edition().c_str() ) );
 
-    // if there is productReferences defined, we expect
-    // a matching package within the same repo. And of
-    // same arch.
     sat::WhatProvides providers( identCap );
     for_( it, providers.begin(), providers.end() )
     {
