@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep 22 12:10:34 CEST 2008 - jkupec@suse.cz
+
+- provided context to keyring callbacks (bnc #370223)
+- merged trust & import callbacks (bnc #366467)
+  (don't worry, still allows to trust && !import)
+- revision 11113
+
+-------------------------------------------------------------------
 Fri Sep 19 13:17:38 CEST 2008 - ma@suse.de
 
 - Moved DefaultAcceptBits enum to class KeyRing (formerly KeyRingReort).
