@@ -67,21 +67,23 @@ namespace zypp
     _keyRingDefaultAccept = value_r;
   }
 
-  ///////////////////////////////////////////////////////////////////
-
-  bool KeyRingReport::askUserToAcceptUnsignedFile( const string &file )
+  bool KeyRingReport::askUserToAcceptUnsignedFile( const string &file, const KeyContext &keycontext )
   { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_UNSIGNED_FILE ); }
 
-  bool KeyRingReport::askUserToAcceptUnknownKey( const string &file, const string &id )
+  KeyRingReport::KeyTrust
+  KeyRingReport::askUserToAcceptKey( const PublicKey &key, const KeyContext &keycontext )
+  {
+    if ( _keyRingDefaultAccept.testFlag( KeyRing::TRUST_KEY_TEMPORARILY ) )
+      return KEY_TRUST_TEMPORARILY;
+    if ( _keyRingDefaultAccept.testFlag( KeyRing::TRUST_AND_IMPORT_KEY ) )
+      return KEY_TRUST_AND_IMPORT;
+    return KEY_DONT_TRUST;
+  }
+
+  bool KeyRingReport::askUserToAcceptUnknownKey( const string &file, const string &id, const KeyContext &keycontext )
   { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_UNKNOWNKEY ); }
 
-  bool KeyRingReport::askUserToTrustKey( const PublicKey &key )
-  { return _keyRingDefaultAccept.testFlag( KeyRing::TRUST_KEY ); }
-
-  bool KeyRingReport::askUserToImportKey( const PublicKey &key)
-  { return _keyRingDefaultAccept.testFlag( KeyRing::IMPORT_KEY ); }
-
-  bool KeyRingReport::askUserToAcceptVerificationFailed( const string &file, const PublicKey &key )
+  bool KeyRingReport::askUserToAcceptVerificationFailed( const string &file, const PublicKey &key, const KeyContext &keycontext )
   { return _keyRingDefaultAccept.testFlag( KeyRing::ACCEPT_VERIFICATION_FAILED ); }
 
   ///////////////////////////////////////////////////////////////////
@@ -115,7 +117,11 @@ namespace zypp
 
     void dumpPublicKey( const string &id, bool trusted, ostream &stream );
 
-    bool verifyFileSignatureWorkflow( const Pathname &file, const string filedesc, const Pathname &signature);
+    bool verifyFileSignatureWorkflow(
+        const Pathname &file,
+        const string filedesc,
+        const Pathname &signature,
+        const KeyContext &keycontext = KeyContext());
 
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
@@ -320,7 +326,11 @@ namespace zypp
   }
 
 
-  bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const string filedesc, const Pathname &signature)
+  bool KeyRing::Impl::verifyFileSignatureWorkflow(
+      const Pathname &file,
+      const string filedesc,
+      const Pathname &signature,
+      const KeyContext &context)
   {
     callback::SendReport<KeyRingReport> report;
     //callback::SendReport<KeyRingSignals> emitSignal;
@@ -329,7 +339,7 @@ namespace zypp
     // if signature does not exists, ask user if he wants to accept unsigned file.
     if( signature.empty() || (!PathInfo(signature).isExist()) )
     {
-      bool res = report->askUserToAcceptUnsignedFile( filedesc );
+      bool res = report->askUserToAcceptUnsignedFile( filedesc, context );
       MIL << "User decision on unsigned file: " << res << endl;
       return res;
     }
@@ -363,7 +373,7 @@ namespace zypp
       if ( verifyFile( file, signature, trustedKeyRing() ) )
         return true;
       else
-        return report->askUserToAcceptVerificationFailed( filedesc, key );
+        return report->askUserToAcceptVerificationFailed( filedesc, key, context );
     }
     else
     {
@@ -372,24 +382,24 @@ namespace zypp
         PublicKey key =  exportKey( id, generalKeyRing());
         MIL << "Exported key " << id << " to " << key.path() << endl;
         MIL << "Key " << id << " " << key.name() << " is not trusted" << endl;
+
         // ok the key is not trusted, ask the user to trust it or not
-        #warning We need the key details passed to the callback
-        if ( report->askUserToTrustKey( key ) )
+        KeyRingReport::KeyTrust reply = report->askUserToAcceptKey(key, context);
+        if (reply == KeyRingReport::KEY_TRUST_TEMPORARILY ||
+            reply == KeyRingReport::KEY_TRUST_AND_IMPORT)
         {
           MIL << "User wants to trust key " << id << " " << key.name() << endl;
           //dumpFile(unKey.path());
 
           Pathname which_keyring;
-          if ( report->askUserToImportKey( key ) )
+          if (reply == KeyRingReport::KEY_TRUST_AND_IMPORT)
           {
             MIL << "User wants to import key " << id << " " << key.name() << endl;
             importKey( key, true );
             which_keyring = trustedKeyRing();
           }
           else
-          {
             which_keyring = generalKeyRing();
-          }
 
           // emit key added
           if ( verifyFile( file, signature, which_keyring ) )
@@ -400,7 +410,7 @@ namespace zypp
           else
           {
             MIL << "File signature check fails" << endl;
-            if ( report->askUserToAcceptVerificationFailed( filedesc, key ) )
+            if ( report->askUserToAcceptVerificationFailed( filedesc, key, context ) )
             {
               MIL << "User continues anyway." << endl;
               return true;
@@ -416,13 +426,13 @@ namespace zypp
         {
           MIL << "User does not want to trust key " << id << " " << key.name() << endl;
           return false;
-        }
+        } 
       }
       else
       {
         // unknown key...
         MIL << "File [" << file << "] ( " << filedesc << " ) signed with unknown key [" << id << "]" << endl;
-        if ( report->askUserToAcceptUnknownKey( filedesc, id ) )
+        if ( report->askUserToAcceptUnknownKey( filedesc, id, context ) )
         {
           MIL << "User wants to accept unknown key " << id << endl;
           return true;
@@ -750,9 +760,13 @@ namespace zypp
     return _pimpl->trustedPublicKeyIds();
   }
 
-  bool KeyRing::verifyFileSignatureWorkflow( const Pathname &file, const string filedesc, const Pathname &signature)
+  bool KeyRing::verifyFileSignatureWorkflow(
+      const Pathname &file,
+      const string filedesc,
+      const Pathname &signature,
+      const KeyContext &keycontext)
   {
-    return _pimpl->verifyFileSignatureWorkflow(file, filedesc, signature);
+    return _pimpl->verifyFileSignatureWorkflow(file, filedesc, signature, keycontext);
   }
 
   bool KeyRing::verifyFileSignature( const Pathname &file, const Pathname &signature)

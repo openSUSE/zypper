@@ -18,6 +18,7 @@
 #include "zypp/base/Function.h"
 #include "zypp/PathInfo.h"
 #include "zypp/CheckSum.h"
+#include "zypp/KeyContext.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -86,15 +87,8 @@ namespace zypp
       * Constructor.
       * \param signature Signature that validates the file
       */
-      SignatureFileChecker( const Pathname &signature,
-                            const std::string &description = std::string() );
+      SignatureFileChecker( const Pathname &signature );
 
-     /**
-      * Constructor for files not containing a signature
-      * \param description Description of the checker
-      */
-      SignatureFileChecker( const std::string &description );
-      
       /**
       * Default Constructor.
       * \short Signature for unsigned files
@@ -102,12 +96,12 @@ namespace zypp
       * to check the user to accept an unsigned file.
       */
       SignatureFileChecker();
-      
-      
+
+
       /**
        * add a public key to the list of known keys
        */
-      void addPublicKey( const Pathname &publickey );
+      void addPublicKey( const Pathname &publickey, const KeyContext & keycontext = KeyContext());
       /**
       * \short Try to validate the file
       * \param file File to validate.
@@ -115,10 +109,10 @@ namespace zypp
       * \throws SignatureCheckException if validation fails
       */
       void operator()( const Pathname &file ) const;
-     
+
      protected:
       Pathname _signature;
-      std::string _description;
+      KeyContext _context;
    };
 
    /**

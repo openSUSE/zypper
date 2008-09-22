@@ -33,7 +33,7 @@ namespace zypp
        */
       class Downloader : public repo::Downloader
       {
-       public:
+      public:
         /**
          * \short Constructor from the repository information
          *
@@ -43,14 +43,6 @@ namespace zypp
          * \param info Repository information
          */
         Downloader( const RepoInfo &info );
-
-        /**
-         * \short Constructor from the pathname relative to the
-         * repository url
-         * 
-         * \param path Path to the repostory from the media
-         */
-        Downloader( const Pathname &path );
 
         /**
          * \short Download metadata to a local directory
@@ -72,8 +64,7 @@ namespace zypp
          */
         void consumeIndex( const parser::susetags::RepoIndex_Ptr & data_r );
 
-       private:
-        RepoInfo _info;
+      private:
         parser::susetags::RepoIndex_Ptr _repoindex;
       };
 

@@ -25,12 +25,15 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(susetags_download)
 {
   KeyRingTestReceiver keyring_callbacks;
-  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/stable-x86-subset";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
-  susetags::Downloader downloader("/");
+  RepoInfo repoinfo;
+  repoinfo.setAlias("testrepo");
+  repoinfo.setPath("/");
+  susetags::Downloader downloader(repoinfo);
   filesystem::TmpDir tmp;
   
   Pathname localdir(tmp.path());
@@ -81,12 +84,15 @@ BOOST_AUTO_TEST_CASE(susetags_download)
 BOOST_AUTO_TEST_CASE(susetags_gz_download)
 {
   KeyRingTestReceiver keyring_callbacks;
-  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/stable-x86-subset-gz";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
-  susetags::Downloader downloader("/");
+  RepoInfo repoinfo;
+  repoinfo.setAlias("testrepo");
+  repoinfo.setPath("/");
+  susetags::Downloader downloader(repoinfo);
   filesystem::TmpDir tmp;
   
   Pathname localdir(tmp.path());

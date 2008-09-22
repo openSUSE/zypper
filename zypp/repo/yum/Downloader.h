@@ -40,7 +40,7 @@ namespace zypp
       */
       class Downloader : public repo::Downloader
       {
-       public:
+      public:
          
         /**
          * \short Constructor from the repository information
@@ -53,14 +53,6 @@ namespace zypp
         Downloader( const RepoInfo &info );
 
         /**
-         * \short Constructor from the pathname relative to the
-         * repository url
-         * 
-         * \param path Path to the repostory from the media
-         */
-        Downloader( const Pathname &path );
-        
-       /**
          * \short Download metadata to a local directory
          *
          * \param media Media access to the repository url
@@ -80,7 +72,6 @@ namespace zypp
         bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
         bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
        private:
-        RepoInfo _info;
         Pathname _dest_dir;
         std::list<OnMediaLocation> _patches_files;
         

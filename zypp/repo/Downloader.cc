@@ -28,7 +28,9 @@ namespace repo
 Downloader::Downloader()
 {
 }
-
+Downloader::Downloader(const RepoInfo & repoinfo) : _repoinfo(repoinfo)
+{  
+}
 Downloader::~Downloader()
 {
 }

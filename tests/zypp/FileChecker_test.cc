@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     KeyRingTestReceiver keyring_callbacks;
     KeyRingTestSignalReceiver receiver;
     
-    keyring_callbacks.answerTrustKey(true);
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     SignatureFileChecker sigchecker( signature );
     sigchecker.addPublicKey(pubkey);
     sigchecker(file); 
@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     KeyRingTestReceiver keyring_callbacks;
     KeyRingTestSignalReceiver receiver;
     
-    keyring_callbacks.answerTrustKey(true);
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     SignatureFileChecker sigchecker( signature );
     sigchecker.addPublicKey(pubkey);
     

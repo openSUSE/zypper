@@ -5,6 +5,7 @@
 #include "zypp/Callback.h"
 #include "zypp/KeyRing.h"
 #include "zypp/PublicKey.h"
+#include "zypp/KeyContext.h"
 
 /**
  * Keyring Callback Receiver with some features
@@ -22,13 +23,11 @@ struct KeyRingTestReceiver : public zypp::callback::ReceiveReport<zypp::KeyRingR
   void reset()
   {
     _answer_accept_unknown_key = false;
-    _answer_trust_key = false;
-    _answer_import_key = false;
+    _answer_accept_key = KeyRingReport::KEY_DONT_TRUST;
     _answer_ver_failed = false;
     _answer_accept_unsigned_file = false;
     _asked_user_to_accept_unknown_key = false;
-    _asked_user_to_trust_key = false;
-    _asked_user_to_import_key = false;
+    _asked_user_to_accept_key = false;
     _asked_user_to_accept_ver_failed = false;
     _asked_user_to_accept_unsigned_file = false;
   }
@@ -50,52 +49,40 @@ struct KeyRingTestReceiver : public zypp::callback::ReceiveReport<zypp::KeyRingR
   bool askedAcceptUnknownKey() const
   { return _asked_user_to_accept_unknown_key; }
   
-  void answerTrustKey( bool answer )
-  { _answer_trust_key = answer; }
+  void answerAcceptKey( KeyRingReport::KeyTrust answer )
+  { _answer_accept_key = answer; }
   
-  bool askedTrustKey() const
-  { return _asked_user_to_trust_key; }
-  
-  void answerImportKey( bool answer )
-  { _answer_import_key = answer; }
-  
-  bool askedImportKey() const
-  { return _asked_user_to_import_key; }
-  
+  bool askedAcceptKey() const
+  { return _asked_user_to_accept_key; }
+
   void answerAcceptUnsignedFile( bool answer )
   { _answer_accept_unsigned_file = answer; }
   
   bool askedAcceptUnsignedFile() const
   { return _asked_user_to_accept_unsigned_file; }
     
-  virtual bool askUserToAcceptUnsignedFile( const std::string &file )
+  virtual bool askUserToAcceptUnsignedFile( const std::string &file, const zypp::KeyContext &keycontext )
   {
     MIL << std::endl;
     _asked_user_to_accept_unsigned_file = true;
     return _answer_accept_unsigned_file;
   }
   
-  virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+  virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const zypp::KeyContext &keycontext )
   {
     MIL << std::endl;
     _asked_user_to_accept_unknown_key = true;
     return _answer_accept_unknown_key;
   }
 
-  virtual bool askUserToImportKey( const zypp::PublicKey &key )
+  virtual KeyRingReport::KeyTrust askUserToAcceptKey( const zypp::PublicKey &key, const zypp::KeyContext &keycontext )
   {
     MIL << std::endl;
-    _asked_user_to_import_key = true;
-    return _answer_import_key;
+    _asked_user_to_accept_key = true;
+    return _answer_accept_key;
   }
 
-  virtual bool askUserToTrustKey(  const zypp::PublicKey &key  )
-  {
-    MIL << std::endl;
-    _asked_user_to_trust_key = true;
-    return _answer_trust_key;
-  }
-  virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const zypp::PublicKey &key  )
+  virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const zypp::PublicKey &key, const zypp::KeyContext &keycontext  )
   {
     MIL << std::endl;
     _asked_user_to_accept_ver_failed = true;
@@ -104,16 +91,14 @@ struct KeyRingTestReceiver : public zypp::callback::ReceiveReport<zypp::KeyRingR
   
   // how to answer
   bool _answer_accept_unknown_key;
-  bool _answer_trust_key;
-  bool _answer_import_key;
+  KeyRingReport::KeyTrust _answer_accept_key;
   bool _answer_ver_failed;
   bool _answer_accept_unsigned_file;
   
   // we use this variables to check that the
   // callbacks were called
   bool _asked_user_to_accept_unknown_key;
-  bool _asked_user_to_trust_key;
-  bool _asked_user_to_import_key;
+  bool _asked_user_to_accept_key;
   bool _asked_user_to_accept_ver_failed;
   bool _asked_user_to_accept_unsigned_file;
 };

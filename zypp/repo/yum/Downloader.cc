@@ -20,6 +20,7 @@
 #include "zypp/repo/MediaInfoDownloader.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/KeyContext.h"
 
 using namespace std;
 using namespace zypp::xml;
@@ -32,21 +33,15 @@ namespace repo
 namespace yum
 {
 
-Downloader::Downloader( const RepoInfo &info )
-  : _info(info), _media_ptr(0L)
+Downloader::Downloader( const RepoInfo &repoinfo )
+  : repo::Downloader(repoinfo), _media_ptr(0L)
 {
 }
 
-Downloader::Downloader(const Pathname &path )
-{
-    RepoInfo info;
-    info.setPath(path);
-    _info = info;
-}
 
 RepoStatus Downloader::status( MediaSetAccess &media )
 {
-  Pathname repomd = media.provideFile( _info.path() + "/repodata/repomd.xml");
+  Pathname repomd = media.provideFile( repoInfo().path() + "/repodata/repomd.xml");
   return RepoStatus(repomd);
 }
 
@@ -66,7 +61,7 @@ loc_with_path_prefix(const OnMediaLocation & loc,
 bool Downloader::patches_Callback( const OnMediaLocation &loc,
                                    const string &id )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path()));
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, repoInfo().path()));
   MIL << id << " : " << loc_with_path << endl;
   this->enqueueDigested(loc_with_path);
   return true;
@@ -76,7 +71,7 @@ bool Downloader::patches_Callback( const OnMediaLocation &loc,
 bool Downloader::repomd_Callback( const OnMediaLocation &loc,
                                   const ResourceType &dtype )
 {
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, _info.path()));
+  OnMediaLocation loc_with_path(loc_with_path_prefix(loc, repoInfo().path()));
   MIL << dtype << " : " << loc_with_path << endl;
 
   //! \todo do this through a ZConfig call so that it is always in sync with parser
@@ -102,7 +97,7 @@ bool Downloader::repomd_Callback( const OnMediaLocation &loc,
   {
     this->start( _dest_dir, *_media_ptr );
     // now the patches.xml file must exists
-    PatchesFileReader( _dest_dir + _info.path() + loc.filename(),
+    PatchesFileReader( _dest_dir + repoInfo().path() + loc.filename(),
                        bind( &Downloader::patches_Callback, this, _1, _2));
   }
 
@@ -113,9 +108,9 @@ void Downloader::download( MediaSetAccess &media,
                            const Pathname &dest_dir,
                            const ProgressData::ReceiverFnc & progressrcv )
 {
-  Pathname repomdpath =  _info.path() + "/repodata/repomd.xml";
-  Pathname keypath =  _info.path() + "/repodata/repomd.xml.key";
-  Pathname sigpath =  _info.path() + "/repodata/repomd.xml.asc";
+  Pathname repomdpath =  repoInfo().path() + "/repodata/repomd.xml";
+  Pathname keypath =  repoInfo().path() + "/repodata/repomd.xml.key";
+  Pathname sigpath =  repoInfo().path() + "/repodata/repomd.xml.asc";
 
   _media_ptr = (&media);
 
@@ -127,23 +122,26 @@ void Downloader::download( MediaSetAccess &media,
 
   _dest_dir = dest_dir;
 
-  SignatureFileChecker sigchecker(_info.name());
+#warning Do we need SignatureFileChecker(string descr)?
+  SignatureFileChecker sigchecker/*(repoInfo().name())*/;
 
   if ( _media_ptr->doesFileExist(sigpath) )
   {
-      this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
+     this->enqueue( OnMediaLocation(sigpath,1).setOptional(true) );
      this->start( dest_dir, *_media_ptr);
      this->reset();
-     sigchecker = SignatureFileChecker(dest_dir + sigpath, _info.name());
+     sigchecker = SignatureFileChecker(dest_dir + sigpath);
   }
 
 
   if ( _media_ptr->doesFileExist(keypath) )
   {
-      this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
+    KeyContext context;
+    context.setRepoInfo(repoInfo());
+    this->enqueue( OnMediaLocation(keypath,1).setOptional(true) );
     this->start( dest_dir, *_media_ptr);
     this->reset();
-    sigchecker.addPublicKey(dest_dir + keypath);
+    sigchecker.addPublicKey(dest_dir + keypath, context);
   }
 
 
@@ -152,12 +150,11 @@ void Downloader::download( MediaSetAccess &media,
   if ( ! progress.tick() )
     ZYPP_THROW(AbortRequestException());
 
-  if ( ! _info.gpgCheck() )
-  {
-    WAR << "Signature checking disabled in config of repository " << _info.alias() << endl;
-  }
+  if ( ! repoInfo().gpgCheck() )
+    WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
+
   this->enqueue( OnMediaLocation(repomdpath,1),
-                 _info.gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
+                 repoInfo().gpgCheck() ? FileChecker(sigchecker) : FileChecker(NullFileChecker()) );
   this->start( dest_dir, *_media_ptr);
 
   if ( ! progress.tick() )
@@ -165,8 +162,8 @@ void Downloader::download( MediaSetAccess &media,
 
   this->reset();
 
-  Reader reader( dest_dir + _info.path() + "/repodata/repomd.xml" );
-  RepomdFileReader( dest_dir + _info.path() + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
+  Reader reader( dest_dir + repoInfo().path() + "/repodata/repomd.xml" );
+  RepomdFileReader( dest_dir + repoInfo().path() + "/repodata/repomd.xml", bind( &Downloader::repomd_Callback, this, _1, _2));
 
   // ready, go!
   this->start( dest_dir, *_media_ptr);

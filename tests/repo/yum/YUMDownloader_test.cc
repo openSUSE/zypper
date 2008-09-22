@@ -25,14 +25,17 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(yum_download)
 {
   KeyRingTestReceiver keyring_callbacks;
-  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
 
   Pathname p = DATADIR + "/10.2-updates-subset";
   Url url("dir:" + p.asString());
   MediaSetAccess media(url);
-  yum::Downloader yum("/");
+  RepoInfo repoinfo;
+  repoinfo.setAlias("testrepo");
+  repoinfo.setPath("/");
+  yum::Downloader yum(repoinfo);
   filesystem::TmpDir tmp;
-  
+
   Pathname localdir(tmp.path());
   
   yum.download(media, localdir);

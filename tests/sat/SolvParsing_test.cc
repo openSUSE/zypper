@@ -53,7 +53,7 @@ static void init_pool_yum()
   KeyRingTestSignalReceiver receiver;
 
   // disable sgnature checking
-  keyring_callbacks.answerTrustKey(true);
+  keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
   keyring_callbacks.answerAcceptVerFailed(true);
   keyring_callbacks.answerAcceptUnknownKey(true);
 

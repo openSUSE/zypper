@@ -34,26 +34,22 @@ struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport
   KeyRingReceive()
   {}
 
-  virtual bool askUserToAcceptUnsignedFile( const std::string &file )
+  virtual bool askUserToAcceptUnsignedFile( const std::string &file, const zypp::KeyContext &keycontext )
   {
     return true;
   }
-  virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+  virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const zypp::KeyContext &keycontext )
   {
     return true;
   }
 
-  virtual bool askUserToImportKey( const PublicKey &key )
+  virtual bool askUserAcceptKey( const PublicKey &key, const zypp::KeyContext &keycontext )
   {
     DBG << "By default zypp-query-pool does not import keys for now." << std::endl;
-    return false;
+    return zypp::KeyRingReport::KEY_TRUST_TEMPORARILY;
   }
 
-  virtual bool askUserToTrustKey(  const PublicKey &key  )
-  {
-    return true;
-  }
-  virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const PublicKey &key  )
+  virtual bool askUserToAcceptVerificationFailed( const std::string &file,  const PublicKey &key, const zypp::KeyContext &keycontext )
   {
     return true;
   }

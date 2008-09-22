@@ -16,6 +16,7 @@
 #include "zypp/RepoStatus.h"
 #include "zypp/MediaSetAccess.h"
 #include "zypp/Fetcher.h"
+#include "zypp/RepoInfo.h"
 
 namespace zypp
 {
@@ -35,8 +36,10 @@ namespace zypp
         * \short Constructor
         */
       Downloader();
+      /** C-tor associating the downloader with a RepoInfo */
+      Downloader(const RepoInfo & info);
       virtual ~Downloader();
-      
+
       /**
         * \short Download metadata to a local directory
         *
@@ -51,9 +54,12 @@ namespace zypp
         * \short Status of the remote repository
         */
       virtual RepoStatus status( MediaSetAccess &media );
-      
-    };
 
+      const RepoInfo & repoInfo() const { return _repoinfo; }
+
+      private:
+        RepoInfo _repoinfo;
+    };
   } // ns repo
 } // ns zypp
 

@@ -104,6 +104,7 @@ SET( zypp_HEADERS
   FileChecker.h
   IdString.h
   IdStringType.h
+  KeyContext.h
   KeyRing.h
   KVMap.h
   LanguageCode.h

@@ -24,6 +24,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Locale.h"
 #include "zypp/PublicKey.h"
+#include "zypp/KeyContext.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -42,46 +43,56 @@ namespace zypp
   */
   struct KeyRingReport : public callback::ReportBase
   {
+    /**
+     * User reply options for the askUserToTrustKey callback.
+     *
+     * \param filedes Name of the file (repo alias) or filename if not available
+     */
+    typedef enum
+    {
+      /**
+       * User has chosen not to trust the key.
+       */
+      KEY_DONT_TRUST = 0,
+      /**
+       * This basically means, we knew the key, but it was not trusted. User
+       * has chosen to continue, but not import the key.
+       */
+      KEY_TRUST_TEMPORARILY,
+      /**
+       * Import the key.
+       * This means saving the key in the trusted database so next run it will appear as trusted.
+       * Nothing to do with KEY_TRUST_TEMPORARILY, as you CAN trust a key without importing it,
+       * basically you will be asked every time again.
+       * There are programs who prefer to manage the trust keyring on their own and use trustKey
+       * without importing it into rpm.
+       */
+      KEY_TRUST_AND_IMPORT
+    }
+    KeyTrust;
 
     /**
-     * The file \ref filedesc is unsigned
-     * \param filedesc Name of the file (repo alias) or filename if not available
+     * Ask user to trust and/or import the key to trusted keyring.
+     * \see KeyTrust
      */
-    virtual bool askUserToAcceptUnsignedFile( const std::string &filedesc );
+    virtual KeyTrust askUserToAcceptKey( const PublicKey &key, const KeyContext &keycontext = KeyContext() );
+
+    virtual bool askUserToAcceptUnsignedFile( const std::string &file, const KeyContext &keycontext = KeyContext() );
 
     /**
      * we DONT know the key, only its id, but we have never seen it, the difference
      * with trust key is that if you dont have it, you can't import it later.
      * The answer means continue yes or no?
      *
-     * \param filedes Name of the file (repo alias) or filename if not available
      */
-    virtual bool askUserToAcceptUnknownKey( const std::string &filedesc, const std::string &id );
-
-    /**
-     * This basically means, we know the key, but it is not trusted, Continue
-     * yes or no?. Nothing else is performed (import, etc)
-     */
-    virtual bool askUserToTrustKey( const PublicKey &key);
-
-
-    /**
-     * Import the key.
-     * This means saving the key in the trusted database so next run it will appear as trusted.
-     * Nothing to do with trustKey, as you CAN trust a key without importing it,
-     * basically you will be asked every time again.
-     * There are programs who prefer to manage the trust keyring on their own and use trustKey
-     * without importing it into rpm.
-     *
-     */
-    virtual bool askUserToImportKey( const PublicKey &key);
+    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const KeyContext &keycontext = KeyContext() );
 
     /**
      * The file \ref filedesc is signed but the verification failed
      *
-     * \param filedesc Name of the file (repo alias) or filename if not available
+     * \param filedesc Filename or its description.
      */
-    virtual bool askUserToAcceptVerificationFailed( const std::string &filedesc, const PublicKey &key );
+    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key, const KeyContext &keycontext = KeyContext() );
 
   };
 
@@ -140,8 +151,8 @@ namespace zypp
         ACCEPT_NOTHING             = 0x0000,
         ACCEPT_UNSIGNED_FILE       = 0x0001,
         ACCEPT_UNKNOWNKEY          = 0x0002,
-        TRUST_KEY                  = 0x0004,
-        IMPORT_KEY                 = 0x0008,
+        TRUST_KEY_TEMPORARILY      = 0x0004,
+        TRUST_AND_IMPORT_KEY       = 0x0008,
         ACCEPT_VERIFICATION_FAILED = 0x0010,
       };
       ZYPP_DECLARE_FLAGS( DefaultAccept, DefaultAcceptBits );
@@ -243,7 +254,12 @@ namespace zypp
      *
      * \see \ref KeyRingReport
      */
-    bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
+    bool verifyFileSignatureWorkflow(
+        const Pathname &file,
+        const std::string filedesc,
+        const Pathname &signature,
+        const KeyContext &keycontext = KeyContext());
+
 
     /**
      * Verifies a file against a signature, with no user interaction

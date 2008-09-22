@@ -30,8 +30,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
  /** 
   * scenario #1
   * import a not trusted key
-  * ask for trust, answer yes
-  * ask for import, answer no
+  * ask for accept, answer yes 'temporarily'
   */
   {
     KeyRingTestReceiver keyring_callbacks;
@@ -51,23 +50,21 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     BOOST_CHECK_MESSAGE( keyring.isKeyKnown( key.id() ), "Imported untrusted key should be known");
     BOOST_CHECK_MESSAGE( ! keyring.isKeyTrusted( key.id() ), "Imported untrusted key should be untrusted");
     
-    keyring_callbacks.answerTrustKey(true);
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
   
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
-    BOOST_CHECK_MESSAGE( keyring_callbacks.askedTrustKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust");
-    BOOST_CHECK_MESSAGE( keyring_callbacks.askedImportKey(), "Trusting a key should ask for import");
+    BOOST_CHECK_MESSAGE( keyring_callbacks.askedAcceptKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust and/or import");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptVerFailed(), "The signature validates");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnsignedFile(), "It is a signed file, so dont ask the opposite");
     
     BOOST_CHECK_MESSAGE( to_continue, "We did not import, but we trusted and signature validates.");
   }
-  
+
   /** 
   * scenario #1.1
   * import a not trusted key
-  * ask for trust, answer yes
-  * ask for import, answer no
+  * ask to accept, answer yes 'temporarily'
   * vorrupt the file and check
   */
   {
@@ -82,18 +79,17 @@ BOOST_AUTO_TEST_CASE(keyring_test)
   
     keyring.importKey( key, false );
     
-    keyring_callbacks.answerTrustKey(true);
-    
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
+
     // now we will recheck with a corrupted file
     bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml.corrupted", "Blah Blah", DATADIR + "repomd.xml.asc");
     
     // check wether the user got the right questions
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
-    BOOST_CHECK_MESSAGE( keyring_callbacks.askedTrustKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust");
-    BOOST_CHECK_MESSAGE( keyring_callbacks.askedImportKey(), "Trusting a key should ask for import");
+    BOOST_CHECK_MESSAGE( keyring_callbacks.askedAcceptKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust and/or import");
     BOOST_CHECK_MESSAGE( keyring_callbacks.askedAcceptVerFailed(), "The signature does not validates");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnsignedFile(), "It is a signed file, so dont ask the opposite");
-    
+
     BOOST_CHECK_MESSAGE( ! to_continue, "We did not continue with a corrupted file");
   }
   
@@ -113,14 +109,13 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     
     keyring.importKey( key, false );
     
-    keyring_callbacks.answerTrustKey(true);
+    keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     // now we will recheck with a unsigned file
     bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", Pathname() );
     
     // check wether the user got the right questions
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedTrustKey(), "No signature, no key to trust");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedImportKey(), "No signature, no key to import");
+    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptKey(), "No signature, no key to trust");
     BOOST_CHECK_MESSAGE( keyring_callbacks.askedAcceptUnsignedFile(), "Ask the user wether to accept an unsigned file");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptVerFailed(), "There is no signature to verify");
     
@@ -138,18 +133,16 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     // base sandbox for playing
     TmpDir tmp_dir;
     KeyRing keyring( tmp_dir.path() );
-    
+
     BOOST_CHECK_MESSAGE( ! keyring.isKeyKnown( key.id() ), "empty keyring has not known keys");
-    
+
     //keyring_callbacks.answerAcceptUnknownKey(true);
     bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
     BOOST_CHECK_MESSAGE(keyring_callbacks.askedAcceptUnknownKey(), "Should ask to accept unknown key, empty keyring");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedTrustKey(), "Unknown key cant be trusted");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedImportKey(), "Unknown key cant be imported");
-    
+    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptKey(), "Unknown key cant be trusted");
     BOOST_CHECK_MESSAGE( ! to_continue, "We answered no to accept unknown key");
   }
-  
+
   /** scenario #3
   * import trusted key
   * should ask nothing
@@ -166,7 +159,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     BOOST_CHECK_EQUAL( keyring.trustedPublicKeys().size(), (unsigned) 0 );
   
     keyring.importKey( key, true );
-    
+
     BOOST_CHECK_EQUAL( receiver._trusted_key_added_called, true );
     
     BOOST_CHECK_EQUAL( keyring.publicKeys().size(), (unsigned) 0 );
@@ -178,8 +171,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
     bool to_continue = keyring.verifyFileSignatureWorkflow( DATADIR + "repomd.xml", "Blah Blah", DATADIR + "repomd.xml.asc");
   
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnknownKey(), "Should not ask for unknown key, it was known");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedTrustKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust");
-    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedImportKey(), "Trusting a key should ask for import");
+    BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptKey(), "Verify Signature Workflow with only 1 untrusted key should ask user wether to trust and/or import");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptVerFailed(), "The signature validates");
     BOOST_CHECK_MESSAGE( ! keyring_callbacks.askedAcceptUnsignedFile(), "It is a signed file, so dont ask the opposite");
     
