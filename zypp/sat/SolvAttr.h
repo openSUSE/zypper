@@ -134,6 +134,8 @@ namespace sat
       static const SolvAttr productRegisterRelease;
       static const SolvAttr productUrl;
       static const SolvAttr productUrlType;
+      static const SolvAttr productCpeName;
+
       //@}
 
       /** \name repository */
@@ -141,6 +143,9 @@ namespace sat
       static const SolvAttr repositoryTimestamp;
       static const SolvAttr repositoryExpire;
       static const SolvAttr repositoryUpdates;
+      static const SolvAttr repositoryKeywords;
+      static const SolvAttr repositoryProducts;
+
       //@}
 
       //@}

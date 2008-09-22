@@ -144,6 +144,9 @@ namespace zypp
   std::string Product::updaterepoKey() const
   { return lookupStrAttribute( sat::SolvAttr::productUpdaterepoKey ); }
 
+  std::string Product::cpeName() const
+  { return lookupStrAttribute( sat::SolvAttr::productCpeName ); }
+
   std::list<std::string> Product::flags() const
   {
     std::list<std::string> ret;

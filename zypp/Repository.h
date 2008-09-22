@@ -48,6 +48,8 @@ namespace zypp
         typedef sat::detail::size_type size_type;
         typedef sat::detail::RepoIdType IdType;
         typedef sat::ArrayAttr<std::string,std::string> UpdateKeys;
+        typedef sat::ArrayAttr<std::string,std::string> Keywords;
+        typedef sat::ArrayAttr<std::string,std::string> Products;
 
     public:
         /** Default ctor creates \ref noRepository.*/
@@ -132,6 +134,17 @@ namespace zypp
          *
          */
         zypp::Date suggestedExpirationTimestamp() const;
+
+        /**
+         * repository keywords (tags)
+         */
+        Keywords keywords() const;
+
+        /**
+         * Products this repository claims it is
+         * built for.
+         */
+        Products products() const;
 
         /**
          * The suggested expiration date of this repository

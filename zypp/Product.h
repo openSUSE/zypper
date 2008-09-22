@@ -75,6 +75,14 @@ namespace zypp
      */
     std::string updaterepoKey() const;
 
+    /**
+     * The Common Platform Enumeration name
+     * for this product.
+     *
+     * See http://cpe.mitre.org
+     */
+    std::string cpeName() const;
+
     /** The product flags */
     std::list<std::string> flags() const;
 

@@ -123,6 +123,12 @@ namespace zypp
       return Date();
     }
 
+    Repository::Keywords Repository::keywords() const
+    { return Keywords(sat::SolvAttr::repositoryKeywords); }
+    
+    Repository::Products Repository::products() const
+    { return Products(sat::SolvAttr::repositoryProducts); }
+
     bool Repository::maybeOutdated() const
     {
         // system repo is not mirrored
