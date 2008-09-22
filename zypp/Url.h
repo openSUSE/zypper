@@ -166,7 +166,7 @@ namespace zypp
      *
      * Parses \p encodedUrl string using the parseUrl() method
      * and assigns the result to the current object.
-     * 
+     *
      * \param encodedUrl A percent-encoded URL string.
      * \return A reference to this Url object.
      * \throws url::UrlParsingException if parsing of the url fails.
@@ -281,7 +281,7 @@ namespace zypp
      * \endcode
      *
      * \param opts  A combination of view options.
-     * \return A string representation of the Url object. 
+     * \return A string representation of the Url object.
      */
     std::string
     asString(const ViewOptions &opts) const;
@@ -340,6 +340,12 @@ namespace zypp
      */
     std::string
     getPassword(EEncoding eflag = zypp::url::E_DECODED) const;
+
+    /**
+     * Returns \c true if username or password are encoded in the authority component.
+     */
+    bool hasUserPass() const
+    { return ! ( getUsername().empty() && getPassword().empty() ); }
 
     /**
      * Returns the hostname or IP from the URL authority.
@@ -776,15 +782,15 @@ namespace zypp
    * needed for std::set
    */
   bool operator<( const Url &lhs, const Url &rhs );
-  
+
   /**
    * needed for find
    */
   bool operator==( const Url &lhs, const Url &rhs );
-  
-  
+
+
   bool operator!=( const Url &lhs, const Url &rhs );
-  
+
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
