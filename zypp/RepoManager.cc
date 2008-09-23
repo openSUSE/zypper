@@ -1641,22 +1641,32 @@ namespace zypp
     mediamanager.release( mid );
     mediamanager.close( mid );
 
-    std::string serviceCredParam = service.url().getQueryParam("credentials");
-    INT << "service creds file " << serviceCredParam << endl;
-
-    // URL credentials to store
-    std::set<Url> urlsWithCredentials;
 
     // set service alias and base url for all collected repositories
     for_( it, collector.repos.begin(), collector.repos.end() )
     {
       // if the repo url was not set by the repoindex parser, set service's url
       Url url;
+
       if ( it->baseUrlsEmpty() )
         url = service.url();
       else
+      {
         // service repo can contain only one URL now, so no need to iterate
         url = *it->baseUrlsBegin();
+
+        url::ViewOption vopt;
+        vopt = vopt
+          - url::ViewOption::WITH_USERNAME
+          - url::ViewOption::WITH_PASSWORD
+          - url::ViewOption::WITH_QUERY_STR;
+
+        // use the same username as the service in case the URL starts with
+        // the service url
+        if (url.asString(vopt).find(service.url().asString(vopt)) == 0
+            && !service.url().getUsername().empty())
+          url.setUsername(service.url().getUsername());
+      }
 
       // libzypp currently has problem with separate url + path handling
       // so just append the path to the baseurl
@@ -1670,18 +1680,6 @@ namespace zypp
 
       // Prepend service alias:
       it->setAlias( str::form( "%s:%s", service.alias().c_str(), it->alias().c_str() ) );
-
-      // use the same credentials as the service
-      if (!serviceCredParam.empty())
-        url.setQueryParam("credentials", serviceCredParam);
-      else if (!service.url().getUsername().empty()
-              && !service.url().getPassword().empty())
-      {
-        url.setUsername(service.url().getUsername());
-        url.setPassword(service.url().getPassword());
-        // need to save these, creds not shared with the service like above
-        urlsWithCredentials.insert(url);
-      }
 
       // save the url
       it->setBaseUrl( url );
@@ -1787,16 +1785,6 @@ namespace zypp
     {
       // write out modified service file.
       modifyService( service.alias(), service );
-    }
-
-    // save new/modified credentials
-    if (!urlsWithCredentials.empty())
-    {
-      media::CredentialManager cm(
-          media::CredManagerOptions(_pimpl->options.rootDir) );
-      for_(urlit, urlsWithCredentials.begin(), urlsWithCredentials.end())
-        cm.addUserCred(media::AuthData(*urlit));
-      cm.save();
     }
   }
 

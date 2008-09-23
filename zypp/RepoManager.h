@@ -588,13 +588,14 @@ namespace zypp
 
   private:
     /**
-     * Functor thats filter RepoInfo by service which belongs to.
+     * Functor thats filter RepoInfo by service which it belongs to.
      */
     struct MatchServiceAlias
     {
       public:
         MatchServiceAlias( const std::string & alias_ ) : alias(alias_) {}
-        bool operator()( const RepoInfo & info ) const { return info.service() == alias; }
+        bool operator()( const RepoInfo & info ) const
+        { return info.service() == alias; }
       private:
         std::string alias;
     };

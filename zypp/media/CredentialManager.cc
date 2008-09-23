@@ -180,12 +180,11 @@ namespace zypp
     // default url::ViewOption will take care of that.
     // operator==(Url,Url) compares the whole Url
 
-    // if the wanted URL does not contain username, ignore that, too
     url::ViewOption vopt;
-//    if (url.getUsername().empty())
-      vopt = vopt
-        - url::ViewOption::WITH_USERNAME
-        - url::ViewOption::WITH_QUERY_STR;
+    vopt = vopt
+      - url::ViewOption::WITH_USERNAME
+      - url::ViewOption::WITH_PASSWORD
+      - url::ViewOption::WITH_QUERY_STR;
 
     // search in global credentials
     result = findIn(_credsGlobal, url, vopt);
