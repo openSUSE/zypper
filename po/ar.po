@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-21 18:58+0200\n"
+"POT-Creation-Date: 2008-09-12 09:04+0200\n"
 "PO-Revision-Date: 2006-09-27 09:57+0200\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Language-Local: Arabic*\n"
 "X-Generator: poTranslator\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:981
 #, fuzzy
 msgid ""
 "\n"
@@ -30,49 +30,66 @@ msgstr "لا يوجد أي موفرين قابلين للتثبيت لـ %s"
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:880
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:85
+#, fuzzy
+msgid " executed"
+msgstr "تنفيذ"
+
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:106
+#, fuzzy
+msgid " execution failed"
+msgstr "فشل تنفيذ DBI: %s"
+
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:190
+msgid " execution skipped while aborting"
+msgstr ""
+
+#: ../zypp/solver/detail/SATResolver.cc:928
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s يتعارض مع %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2054
+#: ../zypp/target/rpm/RpmDb.cc:2071
 #, c-format
 msgid "%s install failed"
 msgstr "فشل تثبيت %s"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2080
 #, c-format
 msgid "%s installed ok"
 msgstr "تم تثبيت %s بنجاح"
 
-#: ../zypp/solver/detail/SATResolver.cc:866
+#: ../zypp/solver/detail/SATResolver.cc:914
 #, fuzzy, c-format
 msgid "%s is not installable"
 msgstr "غير مثبت"
 
-#: ../zypp/solver/detail/SATResolver.cc:885
+#: ../zypp/solver/detail/SATResolver.cc:933
 #, fuzzy, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s يجعل العنصر التالي قديمًا %s"
 
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2174
+#: ../zypp/target/rpm/RpmDb.cc:2205
 #, c-format
 msgid "%s remove failed"
 msgstr "فشلت إزالة %s"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2182
+#: ../zypp/target/rpm/RpmDb.cc:2213
 #, c-format
 msgid "%s remove ok"
 msgstr "تمت إزالة %s بنجاح"
 
-#: ../zypp/solver/detail/SATResolver.cc:921
+#: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
@@ -97,12 +114,16 @@ msgstr "الأكولية"
 msgid "Adangme"
 msgstr "الأدانجمية"
 
-#: ../zypp/RepoManager.cc:1007
+#: ../zypp/RepoManager.cc:1076
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "يتم الآن إضافة الموارد"
 
-#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
+#: ../zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr ""
+
+#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
 msgid "Additional rpm output:"
 msgstr "مخرجات rpm الإضافية:"
 
@@ -195,6 +216,10 @@ msgstr "ساموا الأمريكية"
 #: ../zypp/LanguageCode.cc:272
 msgid "Amharic"
 msgstr "الأمهرية"
+
+#: ../zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr ""
 
 #: ../zypp/CountryCode.cc:224
 msgid "Andorra"
@@ -315,7 +340,7 @@ msgstr "النمسا"
 msgid "Austronesian (Other)"
 msgstr "الأوسترونيسيان (أخرى)"
 
-#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
+#: ../zypp/media/MediaCurl.cc:1611
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr ""
@@ -579,7 +604,7 @@ msgstr "بروناي دار السلام"
 msgid "Buginese"
 msgstr "البجينيزية"
 
-#: ../zypp/RepoManager.cc:719
+#: ../zypp/RepoManager.cc:810
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -629,7 +654,7 @@ msgstr "كمبوديا"
 msgid "Cameroon"
 msgstr "الكاميرون"
 
-#: ../zypp/sat/detail/PoolImpl.cc:147
+#: ../zypp/sat/detail/PoolImpl.cc:148
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "تعذر إنشاء الملف."
@@ -700,7 +725,7 @@ msgstr "تعذر تعيين سمة mutex المتكررة"
 msgid "Canada"
 msgstr "كندا"
 
-#: ../zypp/KeyRing.cc:276
+#: ../zypp/KeyRing.cc:290
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -786,7 +811,7 @@ msgstr "التشامورو"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1877
+#: ../zypp/target/rpm/RpmDb.cc:1894
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "ملفات تكوين %s التي تم تغييرها:"
@@ -1245,12 +1270,12 @@ msgstr "إيوي"
 msgid "Ewondo"
 msgstr "الإيوندو"
 
-#: ../zypp/KeyRing.cc:558
+#: ../zypp/KeyRing.cc:588
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "فشل التحليل: %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1045
+#: ../zypp/target/rpm/RpmDb.cc:1062
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1260,7 +1285,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "تعذر فتح %s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1122
+#: ../zypp/target/rpm/RpmDb.cc:1139
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "تعذر الحصول على المفتاح العام."
@@ -1395,7 +1420,7 @@ msgstr "الفنلندية"
 msgid "Finno-Ugrian (Other)"
 msgstr "فينو أجرايان (أخرى)"
 
-#: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
+#: ../zypp/solver/detail/ProblemSolutionCombi.cc:85
 msgid "Following actions will be done:"
 msgstr ""
 
@@ -1681,6 +1706,10 @@ msgstr "لم تتم تهيئة HalVolume"
 msgid "Hausa"
 msgstr "الهوسا"
 
+#: ../zypp/solver/detail/SATResolver.cc:910
+msgid "Have you enabled all requested repositories?"
+msgstr ""
+
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
 msgid "Hawaiian"
@@ -1843,7 +1872,7 @@ msgstr "الإندونيسية"
 msgid "Ingush"
 msgstr "الإنجوشية"
 
-#: ../zypp/target/TargetImpl.cc:762
+#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
 msgid "Installation has been aborted as directed."
 msgstr "تم إيقاف التثبيت وفقًا للتعليمات."
 
@@ -1917,12 +1946,12 @@ msgstr "حرف فاصل تقسيم مخطط المعلمات غير صالح"
 msgid "Invalid port component '%s'"
 msgstr "مكون المنفذ '%s' غير صالح"
 
-#: ../zypp/PoolQuery.cc:419
+#: ../zypp/PoolQuery.cc:443
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
+#: ../zypp/media/MediaCurl.cc:1608
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "كلمة السر CA غير صالحة."
@@ -2271,6 +2300,18 @@ msgstr "لبنان"
 #: ../zypp/CountryCode.cc:352
 msgid "Lesotho"
 msgstr "ليسوتو"
+
+#: ../zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr ""
+
+#: ../zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr ""
+
+#: ../zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr ""
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -2921,6 +2962,11 @@ msgstr "الأوجيبوا"
 msgid "Oman"
 msgstr "عمان"
 
+#: ../zypp/parser/RepoindexFileReader.cc:116
+#, c-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr ""
+
 #: ../zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
 msgstr ""
@@ -2951,7 +2997,7 @@ msgid "Otomian Languages"
 msgstr "اللغات العثمانية"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:314
+#: ../zypp/repo/PackageProvider.cc:320
 #, fuzzy, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "فشل التحقق من سلامة الحزمة %s. هل تريد إعادة محاولة إنزالها؟"
@@ -3106,6 +3152,18 @@ msgstr "البرتغالية"
 msgid "Prakrit Languages"
 msgstr "اللغات البراقريطية"
 
+#: ../zypp/VendorSupportOptions.cc:45
+msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
+msgstr ""
+
+#: ../zypp/VendorSupportOptions.cc:48
+msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
+msgstr ""
+
+#: ../zypp/VendorSupportOptions.cc:51
+msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
+msgstr ""
+
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
 msgid "Provencal, Old (to 1500)"
@@ -3136,8 +3194,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "تحليل سلسلة الاستعلام غير مدعوم لعنوان URL هذا"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
-#: ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
+#: ../zypp/target/rpm/RpmDb.cc:2208
 #, fuzzy
 msgid "RPM failed: "
 msgstr "فشل"
@@ -3166,14 +3224,10 @@ msgstr "الراروتونجانى"
 msgid "Relative path not allowed if authority exists"
 msgstr "غير مسموح بالمسار النسبي في حالة وجود سلطة"
 
-#: ../zypp/RepoManager.cc:1114
+#: ../zypp/RepoManager.cc:1178
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "يتم الآن إضافة الموارد"
-
-#: ../zypp/parser/susetags/RepoParser.cc:232
-msgid "Required file is missing: "
-msgstr ""
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3390,7 +3444,7 @@ msgstr "سيراليون"
 msgid "Sign Languages"
 msgstr "لغات الإشارة"
 
-#: ../zypp/KeyRing.cc:568
+#: ../zypp/KeyRing.cc:598
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "لم يتم العثور على الإدخال."
@@ -3470,7 +3524,7 @@ msgstr "السوجديان"
 msgid "Solomon Islands"
 msgstr "جزر سليمان"
 
-#: ../zypp/solver/detail/SATResolver.cc:889
+#: ../zypp/solver/detail/SATResolver.cc:937
 #, fuzzy, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s يتعارض مع %s"
@@ -3630,9 +3684,11 @@ msgstr "السريانية"
 msgid "System exception '%s' on medium '%s'."
 msgstr ""
 
-#: ../zypp/ZYppFactory.cc:354
+#: ../zypp/ZYppFactory.cc:361
 #, c-format
-msgid "System management is locked by the application with pid %d. Please close this application before trying again."
+msgid ""
+"System management is locked by the application with pid %d (%s).\n"
+"Please close this application before trying again."
 msgstr ""
 
 #. language code: tgl tl
@@ -3710,9 +3766,23 @@ msgstr "التايلاندية"
 msgid "Thailand"
 msgstr "تايلاند"
 
+#: ../zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr ""
+
+#: ../zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr ""
+
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr ""
+
+#: ../zypp/solver/detail/SATResolver.cc:1118
+#: ../zypp/solver/detail/SATResolver.cc:1136
+#, fuzzy
+msgid "This request will break your system!"
+msgstr "الطلب موجود بالفعل."
 
 #. language code: tib bod bo
 #: ../zypp/LanguageCode.cc:1112 ../zypp/LanguageCode.cc:1114
@@ -3780,7 +3850,7 @@ msgstr "تونجا (نياسا)"
 msgid "Tonga (Tonga Islands)"
 msgstr "تونجا (جزر تونجا)"
 
-#: ../zypp/KeyRing.cc:507
+#: ../zypp/KeyRing.cc:537
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -3942,6 +4012,11 @@ msgstr "الولايات المتحدة"
 msgid "United States Minor Outlying Islands"
 msgstr "الجزر الفرعية النائية التابعة للولايات المتحدة الأميركية"
 
+#: ../zypp/target/TargetImpl.cc:879
+#, fuzzy
+msgid "Unknown Distribution"
+msgstr "خيار list غير معروف"
+
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
 msgstr "دولة غير معروفة:"
@@ -3950,7 +4025,11 @@ msgstr "دولة غير معروفة:"
 msgid "Unknown language: "
 msgstr "لغة غير معروفة:"
 
-#: ../zypp/media/MediaUserAuth.cc:97
+#: ../zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr ""
+
+#: ../zypp/media/MediaUserAuth.cc:105
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
@@ -4035,7 +4114,7 @@ msgid "Vai"
 msgstr "الفاي"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:526
+#: ../zypp/RepoManager.cc:623
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4204,82 +4283,87 @@ msgstr "الزولو"
 msgid "Zuni"
 msgstr "الزونية"
 
-#: ../zypp/repo/PackageProvider.cc:233
+#: ../zypp/repo/PackageProvider.cc:239
 msgid "applydeltarpm check failed."
 msgstr "فشل التحقق من applydeltarpm."
 
-#: ../zypp/repo/PackageProvider.cc:247
+#: ../zypp/repo/PackageProvider.cc:253
 msgid "applydeltarpm failed."
 msgstr "فشل applydeltarpm."
 
-#: ../zypp/solver/detail/SATResolver.cc:1129
+#: ../zypp/solver/detail/SATResolver.cc:1194
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:875
+#: ../zypp/solver/detail/SATResolver.cc:923
 #, fuzzy, c-format
 msgid "cannot install both %s and %s"
 msgstr "تعذر تثبيت %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:859
+#: ../zypp/solver/detail/SATResolver.cc:903
 #, fuzzy
 msgid "conflicting requests"
 msgstr "طلب الاتصال بـ:"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2327
+#: ../zypp/target/rpm/RpmDb.cc:2358
 #, c-format
 msgid "created backup %s"
 msgstr "تم إنشاء النسخة الاحتياطية %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1156
+#: ../zypp/solver/detail/SATResolver.cc:1222
 #, fuzzy, c-format
 msgid "deinstallation of %s"
 msgstr "التثبيت"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:971
 #, fuzzy
 msgid "deleted providers: "
 msgstr "لا يوجد أي شيء يوفر %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1077
+#: ../zypp/solver/detail/SATResolver.cc:1139
 #, fuzzy, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "عدم تثبيت التبعيات القابلة للتحليل المتعلقة أو حذفها"
 
-#: ../zypp/solver/detail/SATResolver.cc:1062
+#: ../zypp/solver/detail/SATResolver.cc:1121
 #, fuzzy, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "لا يوجد أي موفرين قابلين للتثبيت لـ %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1015
+#: ../zypp/solver/detail/SATResolver.cc:1066
 #, fuzzy, c-format
 msgid "do not forbid installation of %s"
 msgstr "عدم تثبيت %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
-#: ../zypp/solver/detail/SATResolver.cc:1033
+#: ../zypp/solver/detail/SATResolver.cc:1045
+#: ../zypp/solver/detail/SATResolver.cc:1083
 #, c-format
 msgid "do not install %s"
 msgstr "عدم تثبيت %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1089
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:989
+#: ../zypp/solver/detail/SATResolver.cc:1040
 #, fuzzy, c-format
 msgid "do not keep %s installed"
 msgstr "غير مثبت"
 
-#: ../zypp/solver/detail/SATResolver.cc:1122
+#: ../zypp/solver/detail/SATResolver.cc:1186
 #, fuzzy, c-format
 msgid "downgrade of %s to %s"
 msgstr "تم إنزال %s من %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1119
+#: ../zypp/solver/detail/SATResolver.cc:1137
+msgid "ignore the warning of a broken system"
+msgstr ""
+
+#: ../zypp/solver/detail/SATResolver.cc:1202
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4288,8 +4372,12 @@ msgid ""
 "  %s"
 msgstr ""
 
-#: ../zypp/solver/detail/SATResolver.cc:1010
-#: ../zypp/solver/detail/SATResolver.cc:1047
+#: ../zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr ""
+
+#: ../zypp/solver/detail/SATResolver.cc:1061
+#: ../zypp/solver/detail/SATResolver.cc:1104
 #, c-format
 msgid "keep %s"
 msgstr "الاحتفاظ بـ %s"
@@ -4302,34 +4390,34 @@ msgstr "libhal_ctx_new: تعذر إنشاء سياق libhal"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: تعذر تعيين اتصال dbus"
 
-#: ../zypp/solver/detail/SATResolver.cc:870
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, fuzzy, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s مطلوب بواسطة %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:862
+#: ../zypp/solver/detail/SATResolver.cc:909
 #, fuzzy, c-format
 msgid "nothing provides requested %s"
 msgstr "لا يوجد أي شيء يوفر %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:856
+#: ../zypp/solver/detail/SATResolver.cc:900
 #, fuzzy, c-format
 msgid "problem with installed package %s"
 msgstr "أمر لإلغاء تثبيت الحزم"
 
-#: ../zypp/solver/detail/SATResolver.cc:1144
+#: ../zypp/solver/detail/SATResolver.cc:1210
 #, c-format
 msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2046
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "تم إنشاء rpm %s باعتبارها %s ولكن تعذر تحديد الفرق"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4338,18 +4426,18 @@ msgstr ""
 "تم إنشاء rpm %s باعتبارها %s.\n"
 "فيما يلي أول 25 سطرًا من سطور الفرق:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
+#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
 msgid "rpm output:"
 msgstr "مخرجات rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2041
+#: ../zypp/target/rpm/RpmDb.cc:2058
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "تم حفظ rpm %s باعتبارها %s ولكن تعذر تحديد الفرق"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2060
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4358,10 +4446,23 @@ msgstr ""
 "تم حفظ rpm %s باعتبارها %s.\n"
 "فيما يلي أول 25 سطرًا من سطور الفرق:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:935
+#: ../zypp/solver/detail/SATResolver.cc:906
+#, fuzzy
+msgid "some dependency problem"
+msgstr "تعذر تثبيت %s بسبب وجود مشكلات في التبعية"
+
+#: ../zypp/solver/detail/SATResolver.cc:983
 #, fuzzy
 msgid "uninstallable providers: "
 msgstr "لا يوجد أي موفرين قابلين للتثبيت لـ %s"
+
+#: ../zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "غير معروف"
+
+#: ../zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr ""
 
 #, fuzzy
 #~ msgid "%s provides this dependency, but would change the architecture of the installed item"
@@ -4514,9 +4615,6 @@ msgstr "لا يوجد أي موفرين قابلين للتثبيت لـ %s"
 
 #~ msgid "%s is not installed and has been marked as uninstallable"
 #~ msgstr "لم يتم تثبيت %s وتم وضع علامة عليه كقابل لإلغاء التثبيت"
-
-#~ msgid "Cannot install %s due to dependency problems"
-#~ msgstr "تعذر تثبيت %s بسبب وجود مشكلات في التبعية"
 
 #~ msgid "%s has unfulfilled requirements"
 #~ msgstr "لم يتم استيفاء متطلبات %s"

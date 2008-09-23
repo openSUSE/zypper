@@ -1,4 +1,4 @@
-# translation of zypp.po to suomi
+# translation of zypp.fi.po to suomi
 # translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -12,21 +12,22 @@
 # Sami Vento <sami.vento@opensuse.fi>, 2007.
 # Jyri Palokangas <jyri.palokangas@opensuse.org>, 2008.
 # Mikko Piippo <mikko.piippo@opensuse.fi>, 2008.
+# Jyri Palokangas <jmp@opensuse.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp\n"
+"Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-04-21 18:58+0200\n"
-"PO-Revision-Date: 2008-05-07 17:55+0300\n"
-"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
-"Language-Team: suomi <fi@li.org>\n"
+"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"PO-Revision-Date: 2008-09-07 10:24+0300\n"
+"Last-Translator: Mikko Piippo <mikko.piippo@opensuse.fi>\n"
+"Language-Team: Finnish <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=n != 1;\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: LoKalize 0.2\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:933
+#: ../zypp/solver/detail/SATResolver.cc:981
 msgid ""
 "\n"
 "uninstallable providers: "
@@ -39,49 +40,64 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-ongelma: Tarkista että CA-varmenne kuuluu '%s'."
 
-#: ../zypp/solver/detail/SATResolver.cc:880
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:85
+msgid " executed"
+msgstr " suoritettu"
+
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:106
+msgid " execution failed"
+msgstr " suoritus epäonnistui"
+
+#. timestamp
+#: ../zypp/target/TargetImpl.cc:190
+msgid " execution skipped while aborting"
+msgstr " suoritus ohitettiin keskeytettäessä"
+
+#: ../zypp/solver/detail/SATResolver.cc:928
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s on ristiriidassa %s (%s) kanssa"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2054
+#: ../zypp/target/rpm/RpmDb.cc:2071
 #, c-format
 msgid "%s install failed"
 msgstr "%s asennus epäonnistui"
 
 #. %s = filename of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2080
 #, c-format
 msgid "%s installed ok"
 msgstr "%s asennettu"
 
-#: ../zypp/solver/detail/SATResolver.cc:866
+#: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
 msgid "%s is not installable"
 msgstr "%s ei ole asennettavissa"
 
-#: ../zypp/solver/detail/SATResolver.cc:885
+#: ../zypp/solver/detail/SATResolver.cc:933
 #, c-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s vanhentaa %s (%s)"
 
 #. %s = name of rpm package
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2174
+#: ../zypp/target/rpm/RpmDb.cc:2205
 #, c-format
 msgid "%s remove failed"
 msgstr "%s poistaminen epäonnistui"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2182
+#: ../zypp/target/rpm/RpmDb.cc:2213
 #, c-format
 msgid "%s remove ok"
 msgstr "%s poistaminen onnistui"
 
-#: ../zypp/solver/detail/SATResolver.cc:921
+#: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s tarvitsee %s, mutta sen asentaminen ei onnistu"
@@ -106,12 +122,16 @@ msgstr "acholi"
 msgid "Adangme"
 msgstr "adangme"
 
-#: ../zypp/RepoManager.cc:1007
+#: ../zypp/RepoManager.cc:1076
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Lisätään asennuslähdettä '%s'"
 
-#: ../zypp/target/rpm/RpmDb.cc:2066 ../zypp/target/rpm/RpmDb.cc:2185
+#: ../zypp/VendorSupportOptions.cc:29
+msgid "Additional Customer Contract Necessary"
+msgstr "Erillinen asiakassopimus tarpeen"
+
+#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
 msgid "Additional rpm output:"
 msgstr "rpm-lisätuloste:"
 
@@ -206,6 +226,10 @@ msgstr "Amerikan Samoa"
 #: ../zypp/LanguageCode.cc:272
 msgid "Amharic"
 msgstr "amhara"
+
+#: ../zypp/VendorSupportOptions.cc:54
+msgid "An additional customer contract is necessary for getting support."
+msgstr "Tuen saamiseksi edellytetään erillinen asiakassopimus."
 
 #: ../zypp/CountryCode.cc:224
 msgid "Andorra"
@@ -330,7 +354,7 @@ msgstr "Itävalta"
 msgid "Austronesian (Other)"
 msgstr "muut austronesialaiset kielet"
 
-#: ../zypp/media/MediaCurl.cc:761 ../zypp/media/MediaCurl.cc:829
+#: ../zypp/media/MediaCurl.cc:1611
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vaatii tunnistautumisen"
@@ -612,7 +636,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "bugi"
 
-#: ../zypp/RepoManager.cc:719
+#: ../zypp/RepoManager.cc:810
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Rakennetaan asennuslähteen '%s' välimuistia"
@@ -663,7 +687,7 @@ msgstr "Kambodža"
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: ../zypp/sat/detail/PoolImpl.cc:147
+#: ../zypp/sat/detail/PoolImpl.cc:148
 msgid "Can not create sat-pool."
 msgstr "Sat-varaston luonti ei onnistu."
 
@@ -733,7 +757,7 @@ msgstr "Rekursiivisten mutex-määritteiden asetus ei onnistu"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:276
+#: ../zypp/KeyRing.cc:290
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Julkisen avaimen %s luonti avainrenkaasta %s tiedostoon %s ei onnistu"
@@ -822,7 +846,7 @@ msgstr "chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1877
+#: ../zypp/target/rpm/RpmDb.cc:1894
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Muunnettiin paketin %s asetustiedostoja:"
@@ -1129,7 +1153,6 @@ msgstr ""
 "viesti: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#. param1 = url
 #: ../zypp/media/MediaException.cc:84
 #, c-format
 msgid "Download (curl) initialization failed for '%s'"
@@ -1255,7 +1278,6 @@ msgid "Eritrea"
 msgstr "Eritrea"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#. param1 = url
 #: ../zypp/media/MediaException.cc:161
 #, c-format
 msgid "Error occurred while setting download (curl) options for '%s':"
@@ -1299,11 +1321,11 @@ msgstr "ewe"
 msgid "Ewondo"
 msgstr "ewondo"
 
-#: ../zypp/KeyRing.cc:558
+#: ../zypp/KeyRing.cc:588
 msgid "Failed to delete key."
 msgstr "Avaimen poisto epäonnistui."
 
-#: ../zypp/target/rpm/RpmDb.cc:1045
+#: ../zypp/target/rpm/RpmDb.cc:1062
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Avaimen tuonti tiedostosta %s epäonnistui: %s"
@@ -1313,7 +1335,7 @@ msgstr "Avaimen tuonti tiedostosta %s epäonnistui: %s"
 msgid "Failed to mount %s on %s"
 msgstr "%s liittäminen liitospisteeseen %s epäonnistui"
 
-#: ../zypp/target/rpm/RpmDb.cc:1122
+#: ../zypp/target/rpm/RpmDb.cc:1139
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Julkisen avaimen %s poisto epäonnistui: %s"
@@ -1449,7 +1471,7 @@ msgstr "suomi"
 msgid "Finno-Ugrian (Other)"
 msgstr "muut suomalais-ugrilaiset kielet"
 
-#: ../zypp/solver/detail/ProblemSolutionCombi.cc:73
+#: ../zypp/solver/detail/ProblemSolutionCombi.cc:85
 msgid "Following actions will be done:"
 msgstr "Tehdään seuraavat toiminnot:"
 
@@ -1750,6 +1772,10 @@ msgstr "Hal-taltioa ei alustettu"
 msgid "Hausa"
 msgstr "hausa"
 
+#: ../zypp/solver/detail/SATResolver.cc:910
+msgid "Have you enabled all requested repositories?"
+msgstr "Oletko ottanut käyttöön kaikki pyydetyt asennuslähteet?"
+
 #. language code: haw
 #: ../zypp/LanguageCode.cc:594
 msgid "Hawaiian"
@@ -1918,7 +1944,7 @@ msgstr "indonesia"
 msgid "Ingush"
 msgstr "inguuši"
 
-#: ../zypp/target/TargetImpl.cc:762
+#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
 msgid "Installation has been aborted as directed."
 msgstr "Asennus keskeytettiin."
 
@@ -1993,12 +2019,12 @@ msgstr "Virheellinen parametrikartan jaon erotin"
 msgid "Invalid port component '%s'"
 msgstr "Virheellinen porttimääritys: '%s'"
 
-#: ../zypp/PoolQuery.cc:419
+#: ../zypp/PoolQuery.cc:443
 #, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Virhe säännöllisessä lausekkeessa '%s': regcomp palautti %d"
 
-#: ../zypp/media/MediaCurl.cc:758 ../zypp/media/MediaCurl.cc:826
+#: ../zypp/media/MediaCurl.cc:1608
 msgid "Invalid user name or password."
 msgstr "Virheellinen käyttäjätunnus tai salasana."
 
@@ -2360,6 +2386,18 @@ msgstr "Libanon"
 #: ../zypp/CountryCode.cc:352
 msgid "Lesotho"
 msgstr "Lesotho"
+
+#: ../zypp/VendorSupportOptions.cc:20
+msgid "Level 1"
+msgstr "Taso 1"
+
+#: ../zypp/VendorSupportOptions.cc:23
+msgid "Level 2"
+msgstr "Taso 2"
+
+#: ../zypp/VendorSupportOptions.cc:26
+msgid "Level 3"
+msgstr "Taso 3"
 
 #. language code: lez
 #: ../zypp/LanguageCode.cc:744
@@ -3052,6 +3090,11 @@ msgstr "ojibwa"
 msgid "Oman"
 msgstr "Oman"
 
+#: ../zypp/parser/RepoindexFileReader.cc:116
+#, c-format
+msgid "One or both of '%s' or '%s' attributes is required."
+msgstr "Tarvitaan joko %s tai %s -attribuutti."
+
 #: ../zypp/media/MediaException.cc:145
 msgid "Operation not supported by medium"
 msgstr "Tietoväline ei tue toimintoa"
@@ -3083,7 +3126,7 @@ msgid "Otomian Languages"
 msgstr "otomi-kielet"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:314
+#: ../zypp/repo/PackageProvider.cc:320
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Paketin %s yhtenäisyystarkistus epäonnistui. Yritetäänkö uudelleen?"
@@ -3249,10 +3292,22 @@ msgstr "portugali"
 msgid "Prakrit Languages"
 msgstr "prakrit-kielet"
 
+#: ../zypp/VendorSupportOptions.cc:45
+msgid "Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors."
+msgstr "Ongelman määrittäminen, mikä tarkoittaa teknistä tukea, joka tarjoaa yhteensopivuustietoja, asennustukea, käyttötukea, huoltoa ja perustason ongelmanratkaisua. Tason 1 tukea ei ole tarkoitettu korjaamaan tuotteen puutteista johtuvia virheitä."
+
+#: ../zypp/VendorSupportOptions.cc:48
+msgid "Problem isolation, which means technical support designed to duplicate customer problems, isolate problem area and provide resolution for problems not resolved by Level 1 Support."
+msgstr "Ongelman eristäminen, mikä tarkoittaa teksnistä tukea, joka tähtää asiakkaan ongelmien toistamiseen, ongelma-alueen eristämiseen ja tarjoaa ratkaisuja ongelmille, joita tason 1 tuki ei ratkaissut."
+
+#: ../zypp/VendorSupportOptions.cc:51
+msgid "Problem resolution, which means technical support designed to resolve complex problems by engaging engineering in resolution of product defects which have been identified by Level 2 Support."
+msgstr "Ongelman ratkaiseminen, mikä tarkoittaa monimutkaisten ongelmien ratkaisemiseen tarkoitettua teknistä tukea. Insinöörit korjaavat tuotteen vikoja, jotka tason 2 tuki on tunnistanut."
+
 #. language code: pro
 #: ../zypp/LanguageCode.cc:956
 msgid "Provencal, Old (to 1500)"
-msgstr "muinaisprovensaali"
+msgstr "muinaisprovensaali (ennen 1500)"
 
 #. :PCN:612:
 #: ../zypp/CountryCode.cc:400
@@ -3280,8 +3335,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Tämän URL:n jäsentäminen kyselyksi ei ole tuettu"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2057
-#: ../zypp/target/rpm/RpmDb.cc:2177
+#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
+#: ../zypp/target/rpm/RpmDb.cc:2208
 msgid "RPM failed: "
 msgstr "RPM-virhe: "
 
@@ -3309,18 +3364,12 @@ msgstr "rarotonga"
 
 #: ../zypp/url/UrlBase.cc:1117 ../zypp/url/UrlBase.cc:1131
 msgid "Relative path not allowed if authority exists"
-msgstr ""
-"Suhteellisen polun määrittäminen ei ole sallittua, jos valtuuttaja on "
-"määritetty"
+msgstr "Suhteellisen polun määrittäminen ei ole sallittua, jos valtuuttaja on määritetty"
 
-#: ../zypp/RepoManager.cc:1114
+#: ../zypp/RepoManager.cc:1178
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Poistetaan asennuslähdettä '%s'"
-
-#: ../zypp/parser/susetags/RepoParser.cc:232
-msgid "Required file is missing: "
-msgstr "Tarvittava tiedosto puuttuu: "
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3549,7 +3598,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "viittomakielet"
 
-#: ../zypp/KeyRing.cc:568
+#: ../zypp/KeyRing.cc:598
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Allekirjoitustiedostoa %s ei löydetty"
@@ -3632,7 +3681,7 @@ msgstr "sogdi"
 msgid "Solomon Islands"
 msgstr "Salomonsaaret"
 
-#: ../zypp/solver/detail/SATResolver.cc:889
+#: ../zypp/solver/detail/SATResolver.cc:937
 #, c-format
 msgid "Solvable %s conflicts with %s provided by itself"
 msgstr "%s on ristiriidassa itsensä kanssa (%s)"
@@ -3806,14 +3855,14 @@ msgstr "syyria"
 msgid "System exception '%s' on medium '%s'."
 msgstr "Järjestelmäpoikkeus '%s' tietovälineellä '%s'."
 
-#: ../zypp/ZYppFactory.cc:354
+#: ../zypp/ZYppFactory.cc:361
 #, c-format
 msgid ""
-"System management is locked by the application with pid %d. Please close "
-"this application before trying again."
+"System management is locked by the application with pid %d (%s).\n"
+"Please close this application before trying again."
 msgstr ""
-"Prosessi %d on lukinnut järjestelmänhallinnan. Sulje ohjelma ennen "
-"uudelleenyritystä."
+"Prosessi %d (%s)on lukinnut järjestelmänhallinnan. \n"
+"Sulje ohjelma ennen uutta yritystä."
 
 #. language code: tgl tl
 #: ../zypp/LanguageCode.cc:1108
@@ -3896,9 +3945,22 @@ msgstr "thai"
 msgid "Thailand"
 msgstr "Thaimaa"
 
+#: ../zypp/VendorSupportOptions.cc:39
+msgid "The level of support is unspecified"
+msgstr "Tuen tasoa ei ole määritetty."
+
+#: ../zypp/VendorSupportOptions.cc:42
+msgid "The vendor does not provide support."
+msgstr "Myyjä ei tarjoa tukea."
+
 #: ../zypp/base/InterProcessMutex.cc:139
 msgid "This action is being run by another program already."
 msgstr "Jokin toinen ohjelma suorittaa tätä toimintoa."
+
+#: ../zypp/solver/detail/SATResolver.cc:1118
+#: ../zypp/solver/detail/SATResolver.cc:1136
+msgid "This request will break your system!"
+msgstr "Tämä pyyntö rikkoo järjestelmän!"
 
 # TW
 #. language code: tib bod bo
@@ -3969,7 +4031,7 @@ msgstr "tonga (Malawi)"
 msgid "Tonga (Tonga Islands)"
 msgstr "tonga (Tonga)"
 
-#: ../zypp/KeyRing.cc:507
+#: ../zypp/KeyRing.cc:537
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Yritettiin lisätä avain %s avainrenkaaseen %s, mutta tiedostoa ei löydetty"
@@ -4145,6 +4207,10 @@ msgstr "Yhdysvallat"
 msgid "United States Minor Outlying Islands"
 msgstr "Yhdysvaltain pienet erillissaaret"
 
+#: ../zypp/target/TargetImpl.cc:879
+msgid "Unknown Distribution"
+msgstr "Tuntematon jakeluversio"
+
 #: ../zypp/CountryCode.cc:135
 msgid "Unknown country: "
 msgstr "Tuntematon maa: "
@@ -4153,7 +4219,11 @@ msgstr "Tuntematon maa: "
 msgid "Unknown language: "
 msgstr "Tuntematon kieli: "
 
-#: ../zypp/media/MediaUserAuth.cc:97
+#: ../zypp/VendorSupportOptions.cc:56
+msgid "Unknown support option. Description not available"
+msgstr "Tuntematon tukivaihtoehto. Kuvausta ei ole saatavilla."
+
+#: ../zypp/media/MediaUserAuth.cc:105
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "HTTP-tunnistautumistapa '%s' ei ole tuettu"
@@ -4239,7 +4309,7 @@ msgid "Vai"
 msgstr "vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:526
+#: ../zypp/RepoManager.cc:623
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Annetuista verkko-osoitteista ei löytynyt kelpaavia metatietoja"
 
@@ -4414,80 +4484,85 @@ msgstr "zulu"
 msgid "Zuni"
 msgstr "zuni"
 
-#: ../zypp/repo/PackageProvider.cc:233
+#: ../zypp/repo/PackageProvider.cc:239
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm-tarkistus epäonnistui."
 
-#: ../zypp/repo/PackageProvider.cc:247
+#: ../zypp/repo/PackageProvider.cc:253
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm epäonnistui."
 
-#: ../zypp/solver/detail/SATResolver.cc:1129
+#: ../zypp/solver/detail/SATResolver.cc:1194
 #, c-format
 msgid "architecture change of %s to %s"
 msgstr "arkkitehtuurin vaihto %s -> %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:875
+#: ../zypp/solver/detail/SATResolver.cc:923
 #, c-format
 msgid "cannot install both %s and %s"
 msgstr "Ei voida asentaa molempia %s ja %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:859
+#: ../zypp/solver/detail/SATResolver.cc:903
 msgid "conflicting requests"
 msgstr "ristiriitaiset kyselyt"
 
 #. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2327
+#: ../zypp/target/rpm/RpmDb.cc:2358
 #, c-format
 msgid "created backup %s"
 msgstr "luotiin varmuuskopio %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1156
+#: ../zypp/solver/detail/SATResolver.cc:1222
 #, c-format
 msgid "deinstallation of %s"
-msgstr "%s poisto epäonnistui"
+msgstr "poista %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:923
+#: ../zypp/solver/detail/SATResolver.cc:971
 msgid "deleted providers: "
 msgstr "poistetut tarjoajat: "
 
-#: ../zypp/solver/detail/SATResolver.cc:1077
+#: ../zypp/solver/detail/SATResolver.cc:1139
 #, c-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "älä kysy poistettaessa paketteja, jotka tuo %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1062
+#: ../zypp/solver/detail/SATResolver.cc:1121
 #, c-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "älä kysy asennettaessa paketteja, jotka tuo %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1015
+#: ../zypp/solver/detail/SATResolver.cc:1066
 #, c-format
 msgid "do not forbid installation of %s"
 msgstr "Älä estä %s asentamista"
 
-#: ../zypp/solver/detail/SATResolver.cc:994
-#: ../zypp/solver/detail/SATResolver.cc:1033
+#: ../zypp/solver/detail/SATResolver.cc:1045
+#: ../zypp/solver/detail/SATResolver.cc:1083
 #, c-format
 msgid "do not install %s"
 msgstr "älä asenna %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1089
+#: ../zypp/solver/detail/SATResolver.cc:1152
 #, c-format
 msgid "do not install most recent version of %s"
 msgstr "älä asenna uusinta %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:989
+#: ../zypp/solver/detail/SATResolver.cc:1040
 #, c-format
 msgid "do not keep %s installed"
 msgstr "älä pidä %s asennettuna"
 
-#: ../zypp/solver/detail/SATResolver.cc:1122
+#: ../zypp/solver/detail/SATResolver.cc:1186
 #, c-format
 msgid "downgrade of %s to %s"
 msgstr "päivitetään vanhempaan %s -> %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1136
+#: ../zypp/solver/detail/SATResolver.cc:1119
+#: ../zypp/solver/detail/SATResolver.cc:1137
+msgid "ignore the warning of a broken system"
+msgstr "ohita varoitus rikkinäisestä järjestelmästä"
+
+#: ../zypp/solver/detail/SATResolver.cc:1202
 #, c-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4500,8 +4575,12 @@ msgstr ""
 "-->\n"
 "  %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1010
-#: ../zypp/solver/detail/SATResolver.cc:1047
+#: ../zypp/VendorSupportOptions.cc:31
+msgid "invalid"
+msgstr "virheellinen"
+
+#: ../zypp/solver/detail/SATResolver.cc:1061
+#: ../zypp/solver/detail/SATResolver.cc:1104
 #, c-format
 msgid "keep %s"
 msgstr "pidä %s"
@@ -4514,34 +4593,34 @@ msgstr "libhal_ctx_new: libhal-yhteyttä ei voitu luoda"
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: dbus-yhteyden asettaminen ei onnistu"
 
-#: ../zypp/solver/detail/SATResolver.cc:870
+#: ../zypp/solver/detail/SATResolver.cc:918
 #, c-format
 msgid "nothing provides %s needed by %s"
 msgstr "mikään ei tarjoa %s, jota %s tarvitsee"
 
-#: ../zypp/solver/detail/SATResolver.cc:862
+#: ../zypp/solver/detail/SATResolver.cc:909
 #, c-format
 msgid "nothing provides requested %s"
 msgstr "Mikään ei tarjoa pyydettyä %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:856
+#: ../zypp/solver/detail/SATResolver.cc:900
 #, c-format
 msgid "problem with installed package %s"
 msgstr "virhe asennettaessa pakettia %s"
 
-#: ../zypp/solver/detail/SATResolver.cc:1144
+#: ../zypp/solver/detail/SATResolver.cc:1210
 #, c-format
 msgid "replacement of %s with %s"
 msgstr "Korvataan %s -> %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2046
+#: ../zypp/target/rpm/RpmDb.cc:2063
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm loi tiedoston %s nimellä %s. Erojen selvittäminen ei onnistunut."
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2048
+#: ../zypp/target/rpm/RpmDb.cc:2065
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4550,18 +4629,18 @@ msgstr ""
 "rpm loi tiedoston %s nimellä %s.\n"
 "Tässä on ensimmäiset 25 vaihtunutta riviä:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2055 ../zypp/target/rpm/RpmDb.cc:2175
+#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
 msgid "rpm output:"
 msgstr "rpm-tuloste:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2041
+#: ../zypp/target/rpm/RpmDb.cc:2058
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm tallensi tiedoston %s niemellä %s. Erojen selvittäminen ei onnistunut."
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2043
+#: ../zypp/target/rpm/RpmDb.cc:2060
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4570,419 +4649,36 @@ msgstr ""
 "rpm tallensi tiedoston %s nimellä %s.\n"
 "Tässä ensimmäiset 25 muuttunutta riviä:\n"
 
-#: ../zypp/solver/detail/SATResolver.cc:935
+#: ../zypp/solver/detail/SATResolver.cc:906
+msgid "some dependency problem"
+msgstr "jokin riippuvuusongelma"
+
+#: ../zypp/solver/detail/SATResolver.cc:983
 msgid "uninstallable providers: "
 msgstr "poistetut tarjoajat: "
 
-msgid ""
-"%s provides this dependency, but would change the architecture of the "
-"installed item"
-msgstr "%s tarjoaa tämän riippuvuuden, mutta vaihtaa asennetun kohteen arkkitehtuuria"
-
-msgid ""
-"%s provides this dependency, but would change the vendor of the installed "
-"item"
-msgstr "%s tarjoaa tämän riippuvuuden, mutta vaihtaa asennetun kohteen tarjoajaa"
-
-msgid "Do not install or delete the resolvables concerned"
-msgstr "Älä asenna tai poista tätä koskevia osia"
-
-msgid "Ignore that %s is already set to install"
-msgstr "Jätä huomiotta, että %s on jo asetettu asennettavaksi"
-
-msgid "Ignore the obsolete %s in %s"
-msgstr "Jätä %s vanheneminen tilanteessa %s"
-
-msgid "Ignore this conflict of %s"
-msgstr "Jätä %s ristiriitaa huomiotta"
-
-msgid "Ignore this requirement just here"
-msgstr "Jätä tämä vaatimus huomiotta vain tässä"
-
-msgid "Install %s although it would change the architecture"
-msgstr "Asenna %s vaikka se muuttaisi arkkitehtuuria"
-
-msgid "Install %s although it would change the vendor"
-msgstr "Asenna %s vaikka se muuttaisi toimittajaa"
-
-msgid "Install missing resolvables"
-msgstr "Asenna puuttuvat"
-
-msgid "Keep resolvables"
-msgstr "Pidä"
-
-msgid "Unlock these resolvables"
-msgstr "Poistetaan seuraavat lukitukset"
-
-msgid "delete %s"
-msgstr "poista %s"
-
-msgid "install %s"
-msgstr "asenna %s"
-
-msgid "unlock %s"
-msgstr "Poista %s lukitus"
-
-msgid "unlock all resolvables"
-msgstr "Poista kaikki lukitukset"
-
-msgid "Can't open solv-file: "
-msgstr "Ratkaisintiedoston avaaminen ei onnistu: "
-
-msgid "Error reading solv-file: "
-msgstr "Virhe luettaessa ratkaisintiedostoa: "
-
-msgid "Path Parameter parsing not supported for this URL"
-msgstr "URL ei tue polun jäsentämistä"
-
-msgid "Path parameter parsing not supported for this URL"
-msgstr "URL:n jäsentäminen parametreiksi ei ole tuettu"
-
-msgid "Reading '%s' repository cache"
-msgstr "Luetaan asennuslähteen '%s' välimuistia"
-
-msgid "Reading patch and delta rpms from '%s' repository cache"
-msgstr ""
-"Luetaan paikkaus- ja muutosrpm-tiedostoja '%s' -asennuslähteen "
-"välimuistista."
-
-msgid "Cleaning repository '%s' cache"
-msgstr "Puhdistetaan '%s'-asennuslähteen välimuisti"
-
-msgid "Reading repository '%s' cache"
-msgstr "Luetaan '%s' -asennuslähteen välimuistia"
-
-msgid "Software management is already running."
-msgstr "Ohjelmistonhallinta on jo käynnissä."
-
-msgid "%s is replaced by %s"
-msgstr "%s korvattiin %s"
-
-msgid "%s replaced by %s"
-msgstr "%s korvataan %s"
-
-msgid "%s will be deleted by the user.\n"
-msgstr "%s poistetaan käyttäjän mukana.\n"
-
-msgid "%s will be deleted by another application. (ApplLow/ApplHigh)\n"
-msgstr "%s poistetaan toisen ohjelman mukana. (ApplLow/ApplHigh)\n"
-
-msgid "%s will be installed by the user.\n"
-msgstr "%s asennetaan käyttäjän mukana.\n"
-
-msgid "%s will be installed by another application. (ApplLow/ApplHigh)\n"
-msgstr "%s asennetaan toisen ohjelman mukana. (ApplLow/ApplHigh)\n"
-
-msgid "No valid solution found within %d seconds"
-msgstr "Kelpaavaa ratkaisua ei löydetty %d sekunnin aikana"
-
-msgid "The solver has reached a defined timout"
-msgstr "Ratkaisin saavutti määritetyn aikakatkaisu ajan."
-
-msgid "No valid solution found with just resolvables of best architecture."
-msgstr ""
-"Parhaiten soveltuvasta arkkitehtuurin paketeista ei löytynyt sopivia "
-"ratkaisuja pakettiriivuuksien tyydyttämiseksi."
-
-msgid ""
-"With this run only resolvables with the best architecture have been "
-"regarded.\n"
-msgstr "Tällä ajolla harkitaan ainoastaan parhaiten soveltuvan arkkitehtuuria.\n"
-
-msgid ""
-"Regarding all possible resolvables takes time, but can come to a valid "
-"result."
-msgstr ""
-"Sopiva ratkaisu voidaan löytää käymällä läpi kaikki mahdolliset vaihtoehdot, "
-"mikä kuitenkin vie aikaa."
-
-msgid "Invalid information"
-msgstr "Virheelliset tiedot"
-
-msgid "%s is needed by other resolvables"
-msgstr "Muut osat tarvitsevat %s"
-
-msgid ""
-"%s is needed by:\n"
-"%s"
-msgstr ""
-"seuraavat osat tarvitsevat '%s':\n"
-"%s"
-
-msgid "%s conflicts with other resolvables"
-msgstr "%s on ristiriidassa muiden osien kanssa"
-
-msgid ""
-"%s conflicts with:\n"
-"%s"
-msgstr ""
-"%s on ristiriidassa:\n"
-"%s"
-
-msgid "%s obsoletes other resolvables"
-msgstr "%s vanhentaa muut osat"
-
-msgid "%s obsoletes:%s"
-msgstr "%s vanhentaa:%s"
-
-msgid ""
-"\n"
-"These resolvables will be deleted from the system."
-msgstr ""
-"\n"
-"Nämä osat poistetaan järjestelmästä."
-
-msgid "%s depends on other resolvables"
-msgstr "%s on riippuvainen muista osista"
-
-msgid "%s depends on %s"
-msgstr "%s on riippuvainen osasta %s"
-
-msgid "%s depends on:%s"
-msgstr "%s riippuu osasta:%s"
-
-msgid "Child of"
-msgstr "Lapsi"
-
-msgid ""
-"\n"
-"There is no resource available which supports this requirement."
-msgstr ""
-"\n"
-"Ei ole saatavilla osaa, joka täyttäisi tämän riippuvuuden."
-
-msgid ""
-"Due to the problems described above/below, this resolution will not solve "
-"all dependencies"
-msgstr ""
-"Yllä tai alla kuvattujen ongelmien takia tämä ehdotus ei ratkaise kaikkia "
-"riippuvuuksia"
-
-msgid "Cannot install %s, because it is conflicting with %s"
-msgstr "Ei voida asentaa osaa %s, koska se on ristiriidassa osan %s kanssa"
-
-msgid "%s is not installed and has been marked as uninstallable"
-msgstr "%s ei asennettu ja se on merkitty poistettavaksi"
-
-msgid "Cannot install %s due to dependency problems"
-msgstr "Ei voida asentaa %s riippuvuusongelmien vuoksi"
-
-msgid "%s has unfulfilled requirements"
-msgstr "Osalla %s on täyttämättömiä vaatimuksia"
-
-msgid "%s has missing dependencies"
-msgstr "osalla %s on puuttuvia riippuvuuksia"
-
-msgid "%s cannot be installed due to missing dependencies"
-msgstr "Osaa %s ei voida asentaa puuttuvien riippuvuuksien takia"
-
-msgid "%s fulfills dependencies of %s but will be uninstalled"
-msgstr "Osa %s täyttää osan %s riippuvuudet, mutta se poistetaan"
-
-msgid "%s fulfills dependencies of %s but will be kept on your system"
-msgstr "Osa %s täyttää osan %s riippuvuudet ja se säilytetään järjestelmässä"
-
-msgid "No need to install %s"
-msgstr "Ei tarvetta asentaa %s"
-
-msgid "Cannot install %s to fulfill the dependencies of %s"
-msgstr "Ei voida asentaa %s täyttämään osan %s riippuvuudet"
-
-msgid "Cannot install %s to fulfil the dependencies of %s"
-msgstr "Ei voida asentaa %s täyttämään osan %s riippuvuudet"
-
-msgid "%s will not be uninstalled, because it is still required"
-msgstr "%s ei poisteta, koska sitä tarvitaan edelleen"
-
-msgid "%s obsoletes %s. But %s cannot be deleted, because it is locked."
-msgstr "osa %s vanhentaa %s. Mutta %s ei voida poistaa koska se on lukittu."
-
-msgid "Cannot install %s, because it is conflicting"
-msgstr "osaa %s ei voida asentaa, koska se on ristiriidassa"
-
-msgid "%s is uninstallable due to conflicts with %s"
-msgstr "%s on poistettavissa, koska se on ristiriidassa osan %s kanssa"
-
-msgid "Requirememt %s cannot be fulfilled."
-msgstr "Tarvetta %s ei voida täyttää."
-
-msgid "for requiring %s for %s when upgrading %s"
-msgstr "tarvitaan %s osaa %s varten, kun päivitetään %s"
-
-msgid "%s is lacking the requirement %s"
-msgstr "%s puuttuu vaatimus %s"
-
-msgid ", Action: "
-msgstr ", Toimenpide: "
-
-msgid ", Trigger: "
-msgstr ", Laukaisin: "
-
-msgid "package"
-msgstr "paketti"
-
-msgid "selection"
-msgstr "esivalinta"
-
-msgid "pattern"
-msgstr "ohjelmistoryhmä"
-
-msgid "product"
-msgstr "tuote"
-
-msgid "patch"
-msgstr "korjaus"
-
-msgid "script"
-msgstr "komentojono"
-
-msgid "message"
-msgstr "sanoma"
-
-msgid "atom"
-msgstr "atomi"
-
-msgid "system"
-msgstr "järjestelmä"
-
-msgid "Resolvable"
-msgstr "osa"
-
-msgid "Marking this resolution attempt as invalid."
-msgstr "Tämä ratkaisuehdotus merkattiin virheelliseksi."
-
-msgid "Marking resolvable %s as uninstallable"
-msgstr "Merkitään osa %s poistettavaksi"
-
-msgid ""
-"%s is scheduled to be installed, but this is impossible due to dependency "
-"problems."
-msgstr ""
-"%s on asetettu asennettavaksi, mutta se ei ole mahdollista "
-"riippuvuusongelmien vuoksi."
-
-msgid "Can't install %s since it is already marked as needed to be uninstalled"
-msgstr "Ei voida asentaa osaa %s, koska se on jo merkitty poistettavaksi"
-
-msgid "Can't install %s, because it does not apply to this system."
-msgstr "Ei voida asentaa osaa %s, koska se ei toimi tässä järjestelmässä."
-
-msgid "Can't install %s, because %s is already marked as needed to for installation"
-msgstr "Ei voida asentaa osaa %s, koska %s on jo merkitty asennettavaksi"
-
-msgid "This would invalidate %s."
-msgstr "Tämä muuttaisi osan %s virheelliseksi."
-
-msgid "Establishing %s"
-msgstr "Valmistellaan %s"
-
-msgid "Installing %s"
-msgstr "Asennetaan %s"
-
-msgid "Skipping %s: already installed"
-msgstr "Ohitetaan %s: jo asennettu"
-
-msgid "There are no alternative providers of %s installed"
-msgstr "Osalle %s ei ole muita vaihtoehtoja"
-
-msgid "for %s"
-msgstr "%s:lle"
-
-msgid "Upgrading to %s to avoid removing %s is not possible."
-msgstr "osan %s päivittäminen poistamatta osaa %s ei ole mahdollista."
-
-msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr "Osa %s tarjoaa %s, mutta se on merkitty poistettavaksi."
-
-msgid "%s provides %s, but another version of that %s is already installed."
-msgstr "Osa %s tarjoaa %s, mutta toinen versio %s on jo asennettu."
-
-msgid ""
-"%s provides %s, but it is uninstallable.  Try installing it on its own for "
-"more details."
-msgstr ""
-"Osa %s tarjoaa %s, mutta se on merkitty poistettavaksi. Yritä asentaa se "
-"yksinään saadaksesi lisätietoja."
-
-msgid "%s provides %s, but it is locked."
-msgstr "Osa %s tarjoaa %s, mutta se on lukittu."
-
-msgid "%s provides %s,  but is scheduled to be kept."
-msgstr "Osa %s tarjoaa %s, mutta se on merkitty pidettäväksi."
-
-msgid "%s provides %s, but has another architecture."
-msgstr "Osa %s tarjoaa %s, mutta se on eri arkkitehtuuria."
-
-msgid "%s provides %s, but has another vendor (%s)."
-msgstr "Osa %s tarjoaa %s, mutta sillä on eri valmistaja (%s)."
-
-msgid "Can't satisfy requirement %s for %s"
-msgstr "Ei voida tyydyttää vaatimusta %s osalle %s"
-
-msgid ""
-"%s is required by another resolvable selected for installation, so it won't "
-"be unlinked."
-msgstr "Jokin asennettavaksi merkitty paketti vaatii osan %s, joten sitä ei poisteta."
-
-msgid "%s is required by another installed resolvable, so it won't be unlinked."
-msgstr "Muu asennettu osa vaatii %s, joten sitä ei poisteta."
-
-msgid "%s is locked and cannot be uninstalled."
-msgstr "%s on lukittu ja sitä ei voida poistaa."
-
-msgid ""
-"A conflict over %s (%s) requires the removal of %s which is scheduled for "
-"installation"
-msgstr "Ristiriita osasta %s (%s) vaatii asennettavaksi määritellyn %s poistamista"
-
-msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr "Merkitään %s poistettavaksi %s olevan ristiriidan vuoksi"
-
-msgid "from %s"
-msgstr "%s:sta"
-
-msgid " Error!"
-msgstr " Virhe!"
-
-msgid " Important!"
-msgstr " Tärkeä!"
-
-msgid "Make a solver run with ALL possibilities."
-msgstr "Etsitään KAIKKI mahdolliset vaihtoehdot."
-
-msgid "Regarding all resolvables with a compatible architecture."
-msgstr "Harkitaan kaikkia osia, jotka ovat yhteensopivaa arkkitehtuuria."
-
-msgid "Make a solver run with best architecture only."
-msgstr "Ratkaisin hakee vain sopivimmasta arkkitehtuurista."
-
-msgid "Regarding resolvables with best architecture only."
-msgstr "Harkitaan osia vain sopivimmasta arkkitehtuurista."
-
-msgid "%s depended on %s"
-msgstr "%s riippuuu osasta %s"
-
-msgid "%s is recommended by %s"
-msgstr "%2$s suosittelee osaa %1$s"
-
-msgid "%s is suggested by %s"
-msgstr "%2$s ehdottaa osaa %1$s"
-
-msgid "%s will be evaluated for installation (freshened) by %s"
-msgstr "%s on määritelty asennettavaksi (päivitettäväksi) %s takia"
-
-msgid "%s is enhanced by %s"
-msgstr "%s on paranneltu osalla %s"
-
-msgid "%s is supplemented by %s"
-msgstr "%2$s on täydennetty osalla %1$s"
-
-msgid "%s part of %s"
-msgstr "%s kuuluu osaan %s"
-
-msgid "Double timeout"
-msgstr "Kaksinkertainen aikakatkaisu"
-
-msgid "Start the next solver run with doubled timeout."
-msgstr "Käynnistä seuraava ratkaisin kaksinkertaisella aikakatkaisurajalla."
-
+#: ../zypp/VendorSupportOptions.cc:14
+msgid "unknown"
+msgstr "tuntematon"
+
+#: ../zypp/VendorSupportOptions.cc:17
+msgid "unsupported"
+msgstr "ei tuettu"
+
+#~ msgid "Download (Metalink curl) initialization failed for '%s'"
+#~ msgstr "Lataajan (Metalink curl) alustus osoitteelle '%s' epäonnistui"
+
+#~ msgid ""
+#~ "Download (metalink curl) error for '%s':\n"
+#~ "Error code: %s\n"
+#~ "Error message: %s\n"
+#~ msgstr ""
+#~ "Latausvirhe (curl) %s:\n"
+#~ "Virhekoodi: %s\n"
+#~ "Virheviesti: %s\n"
+
+#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
+#~ msgstr "Virhe asetettaessa lataimen (mcurl) asetuksia osoitteelle '%s':"
+
+#~ msgid "Required file is missing: "
+#~ msgstr "Tarvittava tiedosto puuttuu: "
