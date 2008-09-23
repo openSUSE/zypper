@@ -33,6 +33,8 @@ namespace zypp
   {
     FetcherJob( const OnMediaLocation &loc )
       : location(loc)
+      , directory(false)
+      , recursive(false)
     {
       //MIL << location << endl;
     }
@@ -45,6 +47,8 @@ namespace zypp
     OnMediaLocation location;
     //CompositeFileChecker checkers;
     list<FileChecker> checkers;
+    bool directory;
+    bool recursive;      
   };
 
   typedef shared_ptr<FetcherJob> FetcherJob_Ptr;
@@ -64,6 +68,7 @@ namespace zypp
      }
     
     void enqueue( const OnMediaLocation &resource, const FileChecker &checker  );
+    void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker );
     void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker );
     void addCachePath( const Pathname &cache_dir );
     void reset();
@@ -77,7 +82,19 @@ namespace zypp
       static shared_ptr<Impl> _nullimpl( new Impl );
       return _nullimpl;
     }
-
+  private:
+      /**
+       * tries to provide the file represented by job into dest_dir by
+       * looking at the cache. If success, returns true, and the desired
+       * file should be available on dest_dir
+       */
+      bool provideFromCache( FetcherJob_Ptr job, const Pathname &dest_dir );
+      /**
+       * Validates the job against is checkers, by using the file instance
+       * on dest_dir
+       * \throws Exception
+       */
+      void validate( FetcherJob_Ptr job, const Pathname &dest_dir );
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
     /** clone for RWCOW_pointer */
@@ -99,6 +116,19 @@ namespace zypp
       job->checkers.push_back(checker);
     _resources.push_back(job);
   }
+    
+  void Fetcher::Impl::enqueueDir( const OnMediaLocation &resource, 
+                                  bool recursive,
+                                  const FileChecker &checker )
+  {
+    FetcherJob_Ptr job;
+    job.reset(new FetcherJob(resource));
+    if ( checker )
+        job->checkers.push_back(checker);
+    job->directory = true;
+    job->recursive = recursive;
+    _resources.push_back(job);
+  }  
 
   void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
   {
@@ -137,6 +167,85 @@ namespace zypp
     
   }
 
+  bool Fetcher::Impl::provideFromCache( FetcherJob_Ptr job, const Pathname &dest_dir )
+  {
+    MIL << "start fetcher with " << _caches.size() << " cache directories." << endl;
+    for_ ( it_cache, _caches.begin(), _caches.end() )
+    {
+      // does the current file exists in the current cache?
+      Pathname cached_file = *it_cache + job->location.filename();
+      if ( PathInfo( cached_file ).isExist() )
+      {
+        DBG << "File '" << cached_file << "' exist, testing checksum " << job->location.checksum() << endl;
+         // check the checksum
+        if ( is_checksum( cached_file, job->location.checksum() ) && (! job->location.checksum().empty() ) )
+        {
+          // cached
+          MIL << "file " << job->location.filename() << " found in previous cache. Using cached copy." << endl;
+          // checksum is already checked.
+          // we could later implement double failover and try to download if file copy fails.
+           // replicate the complete path in the target directory
+          Pathname dest_full_path = dest_dir + job->location.filename();
+          if( dest_full_path != cached_file )
+          {
+            if ( assert_dir( dest_full_path.dirname() ) != 0 )
+              ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
+
+            if ( filesystem::hardlink(cached_file, dest_full_path ) != 0 )
+            {
+              WAR << "Can't hardlink '" << cached_file << "' to '" << dest_dir << "'. Trying copying." << endl;
+              if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
+              {
+                ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
+                // try next cache
+                continue;
+              }
+            }
+          }
+          // found in cache
+          return true;
+        }
+      }
+    } // iterate over caches
+    return false;
+  }
+    
+  void Fetcher::Impl::validate( FetcherJob_Ptr job, const Pathname &dest_dir )
+  {
+    // no matter where did we got the file, try to validate it:
+    Pathname localfile = dest_dir + job->location.filename();
+    // call the checker function
+    try {
+      MIL << "Checking job [" << localfile << "] (" << job->checkers.size() << " checkers )" << endl;
+      for ( list<FileChecker>::const_iterator it = job->checkers.begin();
+            it != job->checkers.end();
+            ++it )
+      {
+        if (*it)
+        {
+          (*it)(localfile);
+        }
+        else
+        {
+          ERR << "Invalid checker for '" << localfile << "'" << endl;
+        }
+      }
+       
+    }
+    catch ( const FileCheckException &e )
+    {
+      ZYPP_RETHROW(e);
+    }
+    catch ( const Exception &e )
+    {
+      ZYPP_RETHROW(e);
+    }
+    catch (...)
+    {
+      ZYPP_THROW(Exception("Unknown error while validating " + job->location.filename().asString()));
+    }
+  }
+
   void Fetcher::Impl::start( const Pathname &dest_dir,
                              MediaSetAccess &media,
                              const ProgressData::ReceiverFnc & progress_receiver )
@@ -145,53 +254,12 @@ namespace zypp
     progress.sendTo(progress_receiver);
 
     for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
-    {
+    { 
       bool got_from_cache = false;
       
-      MIL << "start fetcher with " << _caches.size() << " cache directories." << endl;
-      for_ ( it_cache, _caches.begin(), _caches.end() )
-      {
-        // does the current file exists in the current cache?
-        Pathname cached_file = *it_cache + (*it_res)->location.filename();
-
-        if ( PathInfo( cached_file ).isExist() )
-        {
-          DBG << "File '" << cached_file << "' exist, testing checksum " << (*it_res)->location.checksum() << endl;
-
-          // check the checksum
-          if ( is_checksum( cached_file, (*it_res)->location.checksum() ) && (! (*it_res)->location.checksum().empty() ) )
-          {
-            // cached
-            MIL << "file " << (*it_res)->location.filename() << " found in previous cache. Using cached copy." << endl;
-            // checksum is already checked.
-            // we could later implement double failover and try to download if file copy fails.
-
-            // replicate the complete path in the target directory
-            Pathname dest_full_path = dest_dir + (*it_res)->location.filename();
-
-            if( dest_full_path != cached_file )
-            {
-              if ( assert_dir( dest_full_path.dirname() ) != 0 )
-                ZYPP_THROW( Exception("Can't create " + dest_full_path.dirname().asString()));
-
-              if ( filesystem::hardlink(cached_file, dest_full_path ) != 0 )
-              {
-                WAR << "Can't hardlink '" << cached_file << "' to '" << dest_dir << "'. Trying copying." << endl;
-                if ( filesystem::copy(cached_file, dest_full_path ) != 0 )
-                {
-                  ERR << "Can't copy " << cached_file + " to " + dest_dir << endl;
-                  // try next cache
-                  continue;
-                }
-              }
-            }
-
-            got_from_cache = true;
-            break;
-          }
-        }
-      }
-
+      // start look in cache
+      got_from_cache = provideFromCache((*it_res), dest_dir);
+      
       if ( ! got_from_cache )
       {
         MIL << "Not found in cache, downloading" << endl;
@@ -224,39 +292,9 @@ namespace zypp
         continue;
       }
 
-      // no matter where did we got the file, try to validate it:
-      Pathname localfile = dest_dir + (*it_res)->location.filename();
-      // call the checker function
-      try {
-        MIL << "Checking job [" << localfile << "] (" << (*it_res)->checkers.size() << " checkers )" << endl;
-        for ( list<FileChecker>::const_iterator it = (*it_res)->checkers.begin();
-              it != (*it_res)->checkers.end();
-              ++it )
-        {
-          if (*it)
-          {
-            (*it)(localfile);
-          }
-          else
-          {
-            ERR << "Invalid checker for '" << localfile << "'" << endl;
-          }
-        }
-        
-      }
-      catch ( const FileCheckException &e )
-      {
-        ZYPP_RETHROW(e);
-      }
-      catch ( const Exception &e )
-      {
-        ZYPP_RETHROW(e);
-      }
-      catch (...)
-      {
-        ZYPP_THROW(Exception("Unknown error while validating " + (*it_res)->location.filename().asString()));
-      }
-
+      // validate job, this throws if not valid
+      validate(*it_res, dest_dir);
+      
       if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
     } // for each job
@@ -294,6 +332,13 @@ namespace zypp
   void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
   {
     _pimpl->enqueueDigested(resource, checker);
+  }
+
+  void Fetcher::enqueueDir( const OnMediaLocation &resource,
+                            bool recursive,
+                            const FileChecker &checker )
+  {
+      _pimpl->enqueueDir(resource, recursive, checker);
   }
 
   void Fetcher::enqueue( const OnMediaLocation &resource, const FileChecker &checker  )

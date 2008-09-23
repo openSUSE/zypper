@@ -97,6 +97,30 @@ namespace zypp
     */
     void enqueueDigested( const OnMediaLocation &resource,
                           const FileChecker &checker = FileChecker() );
+
+
+    /**
+     * Enqueue a digested directory
+     *
+     * Directories are digested by providing a
+     * SHA1SUMS file listing
+     * <checksum> filename
+     * and a respective SHA1SUMS.asc which has
+     * the signature for the checksums.
+     *
+     * \param recursive True if the complete tree should
+     * be enqueued.
+     *
+     * \note As \ref checksums are read from SHA1SUMS,
+     * a \ref ChecksumFileChecker is automatically added to every
+     * transfer job, so make sure you don't add another one or
+     * the user could be asked twice.
+     *
+
+     */
+    void enqueueDir( const OnMediaLocation &resource,
+                     bool recursive = false,
+                     const FileChecker &checker = FileChecker() );
     
     /**
     * adds a directory to the list of directories
