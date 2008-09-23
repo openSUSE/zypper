@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Sep 23 14:02:08 CEST 2008 - jkupec@suse.cz
+
+- CredentialManager: look for credentials with
+  wanted_url.startsWith(stored_url)
+- RepoManager: don't pass service credentials down to repos if
+  their urls are not based on service's url.
+- revision 11134
+
+-------------------------------------------------------------------
 Mon Sep 22 16:27:41 CEST 2008 - ma@suse.de
 
 - Remove superfluous PRODUCT_REFERENCES attribute.
