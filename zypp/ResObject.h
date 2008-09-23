@@ -57,17 +57,17 @@ namespace zypp
      * \return \c NULL if \c this is not of the specified kind.
      * \code
      *  PoolItem pi;
-     *  Package::constPtr pkg = pi->as<Package>();
+     *  Package::constPtr pkg = pi->asKind<Package>();
      *
      *  if ( pi->isKind<Package>() )
-     *     DBG << pi->as<Package>()->keywords() << endl;
+     *     DBG << pi->asKind<Package>()->keywords() << endl;
      * \endcode
      */
     template<class _Res>
-    inline typename ResTraits<_Res>::constPtrType as() const;
+    inline typename ResTraits<_Res>::constPtrType asKind() const;
 
     template<class _Res>
-    inline typename ResTraits<_Res>::PtrType as();
+    inline typename ResTraits<_Res>::PtrType asKind();
 
   public:
     /** \name Locale support.
@@ -261,11 +261,11 @@ namespace zypp
   { return dynamic_pointer_cast<const _Res>(p); }
 
   template<class _Res>
-  inline typename ResTraits<_Res>::constPtrType ResObject::as() const
+  inline typename ResTraits<_Res>::constPtrType ResObject::asKind() const
   { return make<_Res>( *this ); }
 
   template<class _Res>
-  inline typename ResTraits<_Res>::PtrType ResObject::as()
+  inline typename ResTraits<_Res>::PtrType ResObject::asKind()
   { return make<_Res>( *this ); }
 
   /////////////////////////////////////////////////////////////////
