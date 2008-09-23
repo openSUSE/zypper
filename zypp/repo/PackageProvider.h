@@ -59,7 +59,7 @@ namespace zypp
     //	CLASS NAME : PackageProvider
     //
     /** Provide a package from a Source.
-     * Use available delta/patch-rpm if apropriate.
+     * Use available deltarpm if apropriate.
     */
     class PackageProvider : private base::NonCopyable
     {
@@ -67,8 +67,6 @@ namespace zypp
       typedef callback::SendReport<repo::DownloadResolvableReport> Report;
 
       typedef packagedelta::DeltaRpm                         DeltaRpm;
-      typedef packagedelta::PatchRpm                         PatchRpm;
-
 
     public:
       /** Ctor taking the Package to provide. */
@@ -87,14 +85,12 @@ namespace zypp
     private:
       ManagedFile doProvidePackage() const;
       ManagedFile tryDelta( const DeltaRpm & delta_r ) const;
-      ManagedFile tryPatch( const PatchRpm & patch_r ) const;
 
     private:
       ScopedGuard newReport() const;
       Report & report() const;
       bool progressDeltaDownload( int value ) const;
       void progressDeltaApply( int value ) const;
-      bool progressPatchDownload( int value ) const;
       bool progressPackageDownload( int value ) const;
       bool failOnChecksumError() const;
       bool queryInstalled( const Edition & ed_r = Edition() ) const;

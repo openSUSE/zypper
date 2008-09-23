@@ -31,17 +31,6 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
 
-    std::ostream & operator<<( std::ostream & str, const PatchRpm & obj )
-    {
-      str
-      << "PatchRpm[" << obj.name() << "-" << obj.edition() << "." << obj.arch()
-      << "](" << obj.location()
-      << '|' << obj.buildtime()
-      << '|';
-      return dumpRangeLine( str, obj.baseversions().begin(), obj.baseversions().end() )
-      << ')';
-    }
-
     DeltaRpm::DeltaRpm(const Repository & repo, sat::detail::IdType extraid)
       : _repo(repo)
     {

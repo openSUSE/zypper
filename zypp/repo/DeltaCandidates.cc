@@ -63,34 +63,6 @@ namespace zypp
     DeltaCandidates::~DeltaCandidates()
     {}
 
-    std::list<PatchRpm> DeltaCandidates::patchRpms(const Package::constPtr & package ) const
-    {
-      std::list<PatchRpm> candidates;
-
-      // query all repos
-      for ( std::list<Repository>::const_iterator it = _pimpl->repos.begin();
-            it != _pimpl->repos.end();
-            ++it )
-      {
-        // all delta in repo
-       #warning patchRpms are not implemented
-	std::list<PatchRpm> candidates_in_repo; // = (*it).patchRpms();
-        for ( std::list<PatchRpm>::const_iterator dit = candidates_in_repo.begin();
-              dit != candidates_in_repo.end();
-              ++dit )
-        {
-          if ( ! package
-               || (    package->name()    == dit->name()
-                    && package->edition() == dit->edition()
-                    && package->arch()    == dit->arch() ) )
-          {
-            candidates.push_back( *dit );
-          }
-        }
-      }
-      return candidates;
-    }
-
     std::list<DeltaRpm> DeltaCandidates::deltaRpms(const Package::constPtr & package) const
     {
       std::list<DeltaRpm> candidates;

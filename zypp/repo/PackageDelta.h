@@ -30,52 +30,6 @@ namespace zypp
   namespace packagedelta
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-
-    /** \todo cheap copy! (switch to RWCOW) */
-    class PatchRpm
-    {
-    public:
-      typedef Edition                BaseVersion;
-      typedef std::list<BaseVersion> BaseVersions;
-
-    public:
-      PatchRpm()
-      {}
-
-    public:
-      /** \name Target package ident. */
-      //@{
-      const std::string &     name()         const { return _name; }
-      const Edition &         edition()      const { return _edition; }
-      const Arch &            arch()         const { return _arch; }
-      //@}
-      const OnMediaLocation & location()     const { return _location; }
-      const BaseVersions &    baseversions() const { return _baseversions; }
-      const Date &            buildtime()    const { return _buildtime;}
-
-    public:
-      PatchRpm & setName( const std::string & val_r )         { _name = val_r; return *this; }
-      PatchRpm & setEdition( const Edition & val_r )          { _edition = val_r; return *this; }
-      PatchRpm & setArch( const Arch & val_r )                { _arch = val_r; return *this; }
-      PatchRpm & setLocation( const OnMediaLocation & val_r ) { _location = val_r; return *this; }
-      PatchRpm & setBaseversions( const BaseVersions & val_r ){ _baseversions = val_r; return *this; }
-      PatchRpm & addBaseversion( const BaseVersion & val_r )  { _baseversions.push_back( val_r ); return *this; }
-      PatchRpm & setBuildtime( const Date & val_r )           { _buildtime = val_r; return *this; }
-
-    private:
-      std::string     _name;
-      Edition         _edition;
-      Arch            _arch;
-      OnMediaLocation _location;
-      BaseVersions    _baseversions;
-      Date            _buildtime;
-    };
-
-    /** \relates PatchRpm Stream output. */
-    std::ostream & operator<<( std::ostream & str, const PatchRpm & obj );
-
-    ///////////////////////////////////////////////////////////////////
 
     /** \todo cheap copy! (switch to RWCOW) */
     class DeltaRpm

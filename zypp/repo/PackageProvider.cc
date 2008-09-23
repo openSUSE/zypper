@@ -136,16 +136,7 @@ namespace zypp
             _deltas.deltaRpms( _package ).swap( deltaRpms );
           }
 
-          std::list<PatchRpm> patchRpms;
-#warning cleanup patchrpm
-#if 0
-          if ( ZConfig::instance().download_use_patchrpm() )
-          {
-            _deltas.patchRpms( _package ).swap( patchRpms );
-          }
-#endif
-
-          if ( ! ( deltaRpms.empty() && patchRpms.empty() )
+          if ( ! ( deltaRpms.empty() )
                && queryInstalled() )
             {
               if ( ! deltaRpms.empty() && applydeltarpm::haveApplydeltarpm() )
@@ -158,42 +149,6 @@ namespace zypp
                       if ( ! ret->empty() )
                         return ret;
                     }
-                }
-
-              if ( ! patchRpms.empty() )
-                {
-                  for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
-                       it != patchRpms.end(); ++it )
-                    {
-                      DBG << "tryPatch " << *it << endl;
-                      ManagedFile ret( tryPatch( *it ) );
-                      if ( ! ret->empty() )
-                        return ret;
-                    }
-                }
-            }
-        }
-      else
-        {
-          // allow patch rpm from local source
-          std::list<PatchRpm> patchRpms;
-#warning cleanup patchrpm
-#if 0
-          if ( ZConfig::instance().download_use_patchrpm() )
-          {
-            _deltas.patchRpms( _package ).swap( patchRpms );
-          }
-#endif
-
-          if ( ! patchRpms.empty() && queryInstalled() )
-            {
-              for( std::list<PatchRpm>::const_iterator it = patchRpms.begin();
-                   it != patchRpms.end(); ++it )
-                {
-                  DBG << "tryPatch " << *it << endl;
-                  ManagedFile ret( tryPatch( *it ) );
-                  if ( ! ret->empty() )
-                    return ret;
                 }
             }
         }
@@ -258,35 +213,6 @@ namespace zypp
       return ManagedFile( destination, filesystem::unlink );
     }
 
-    ManagedFile PackageProvider::tryPatch( const PatchRpm & patch_r ) const
-    {
-      // installed edition is in baseversions?
-      const PatchRpm::BaseVersions & baseversions( patch_r.baseversions() );
-
-      if ( std::find_if( baseversions.begin(), baseversions.end(),
-                         bind( &PackageProvider::queryInstalled, this, _1 ) )
-           == baseversions.end() )
-        return ManagedFile();
-
-      report()->startPatchDownload( patch_r.location().filename(),
-                                    patch_r.location().downloadSize() );
-      ManagedFile patch;
-      try
-        {
-          ProvideFilePolicy policy;
-          policy.progressCB( bind( &PackageProvider::progressPatchDownload, this, _1 ) );
-          patch = _access.provideFile( _package->repoInfo(), patch_r.location(), policy );
-        }
-      catch ( const Exception & excpt )
-        {
-          report()->problemPatchDownload( excpt.asUserString() );
-          return ManagedFile();
-        }
-      report()->finishPatchDownload();
-
-      return patch;
-    }
-
     PackageProvider::ScopedGuard PackageProvider::newReport() const
     {
       _report.reset( new Report );
@@ -305,9 +231,6 @@ namespace zypp
 
     void PackageProvider::progressDeltaApply( int value ) const
     { return report()->progressDeltaApply( value ); }
-
-    bool PackageProvider::progressPatchDownload( int value ) const
-    { return report()->progressPatchDownload( value ); }
 
     bool PackageProvider::progressPackageDownload( int value ) const
     { return report()->progress( value, _package ); }

@@ -51,8 +51,6 @@ namespace zypp
       /** Dtor */
       ~DeltaCandidates();
 
-
-      std::list<packagedelta::PatchRpm> patchRpms(const Package::constPtr & package) const;
       std::list<packagedelta::DeltaRpm> deltaRpms(const Package::constPtr & package) const;
 
     private:
