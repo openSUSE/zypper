@@ -103,6 +103,20 @@ IMPL_PTR_TYPE(MediaSetAccess);
     media_mgr.releaseFile (media, file);
   }
 
+  void MediaSetAccess::dirInfo( filesystem::DirContent &retlist, const Pathname &dirname,
+                                bool dots, unsigned media_nr )
+  {
+    media::MediaManager media_mgr;
+    media::MediaAccessId media;
+    media = getMediaAccessId(media_nr);
+
+    // try to attach the media
+    if ( ! media_mgr.isAttached(media) )
+        media_mgr.attachDesiredMedia(media);
+
+    media_mgr.dirInfo(media, retlist, dirname, dots);
+  }
+
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & on_media_file )
   {
     return provideFile( on_media_file.filename(), on_media_file.medianr() );

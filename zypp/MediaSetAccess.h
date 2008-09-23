@@ -171,6 +171,12 @@ namespace zypp
       bool doesFileExist(const Pathname & file, unsigned media_nr = 1 );
 
       /**
+       * Fills \ref retlist with directory information
+       */
+      void dirInfo( filesystem::DirContent &retlist, const Pathname &dirname,
+                    bool dots = true, unsigned media_nr = 1 );
+
+      /**
        * Release all attached media of this set.
        *
        * \throws MediaNotOpenException for invalid access IDs.
