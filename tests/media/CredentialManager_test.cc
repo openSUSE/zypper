@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(save_creds)
   AuthData cr2("pat","vymetheny");
   cr2.setUrl(Url("ftp://filesuck.org"));
 
-  // should creat a new file
+  // should create a new file
   cm1.saveInGlobal(cr1);
 
   CredCollector collector;
@@ -79,8 +79,6 @@ BOOST_AUTO_TEST_CASE(save_creds)
 
   cm1.saveInGlobal(cr2);
   
-  filesystem::copy(opts.globalCredFilePath, "/home/jkupec/tmp/foo");
-
   CredentialFileReader reader1(opts.globalCredFilePath,
       bind( &CredCollector::collect, &collector, _1 ));
   BOOST_CHECK(collector.creds.size() == 2);
@@ -95,4 +93,35 @@ BOOST_AUTO_TEST_CASE(save_creds)
   BOOST_CHECK(collector.creds.size() == 2);
 
   // todo check created file permissions
+}
+
+BOOST_AUTO_TEST_CASE(service_base_url)
+{
+  filesystem::TmpDir tmp;
+
+  CredManagerOptions opts;
+  opts.globalCredFilePath = tmp / "fooha";
+
+  CredentialManager cm1(opts);
+  AuthData cr1("benson","absolute");
+  cr1.setUrl(Url("http://joooha.com/service/path"));
+  cm1.addGlobalCred(cr1);
+
+  AuthData_Ptr creds;
+  creds = cm1.getCred(Url("http://joooha.com/service/path/repo/repofoo"));
+
+  BOOST_CHECK(creds.get() != NULL);
+  if (!creds)
+    return;
+  BOOST_CHECK(creds->username() == "benson");
+
+  creds = cm1.getCred(Url("http://benson@joooha.com/service/path/repo/repofoo"));
+
+  BOOST_CHECK(creds.get() != NULL);
+  if (!creds)
+    return;
+  BOOST_CHECK(creds->username() == "benson");
+
+  creds = cm1.getCred(Url("http://nobody@joooha.com/service/path/repo/repofoo"));
+  BOOST_CHECK(creds.get() == NULL);
 }

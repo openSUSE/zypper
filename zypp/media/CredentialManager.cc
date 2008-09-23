@@ -157,12 +157,17 @@ namespace zypp
                              const Url & url,
                              url::ViewOption vopt)
   {
+    const string & username = url.getUsername();
     for(CredentialManager::CredentialIterator it = set.begin(); it != set.end(); ++it)
     {
-      if (url.asString(vopt) == (*it)->url().asString(vopt))
-        return *it;
+      // this ignores url params - not sure if it is good or bad...
+      if (url.asString(vopt).find((*it)->url().asString(vopt)) == 0)
+      {
+        if (username.empty() || username == (*it)->username())
+          return *it;
+      }
     }
-    
+
     return AuthData_Ptr();
   }
 
@@ -178,7 +183,9 @@ namespace zypp
     // if the wanted URL does not contain username, ignore that, too
     url::ViewOption vopt;
 //    if (url.getUsername().empty())
-      vopt = vopt - url::ViewOption::WITH_USERNAME;
+      vopt = vopt
+        - url::ViewOption::WITH_USERNAME
+        - url::ViewOption::WITH_QUERY_STR;
 
     // search in global credentials
     result = findIn(_credsGlobal, url, vopt);
@@ -281,6 +288,7 @@ namespace zypp
 
   void CredentialManager::addCred(const AuthData & cred)
   {
+#warning addCred(const AuthData & cred) not implemented
     // add with user callbacks
   }
 
@@ -290,12 +298,7 @@ namespace zypp
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
     if (_pimpl->_credsGlobal.insert(c_ptr).second)
-    {
       _pimpl->_globalDirty = true;
-      INT << "changed/new:" << cred << endl;
-    }
-    else
-      INT << "already there: " << cred << endl;
   }
 
 
@@ -304,12 +307,7 @@ namespace zypp
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
     if (_pimpl->_credsUser.insert(c_ptr).second)
-    {
       _pimpl->_userDirty = true;
-      INT << "changed/new:" << cred << endl;
-    }
-    else
-      INT << "already there: " << cred << endl;
   }
 
 
