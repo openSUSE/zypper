@@ -151,6 +151,10 @@ namespace zypp
         ResKind      kind()     const;
         /** Test whether a Solvable is of a certain \ref ResKind. */
         bool         isKind( const ResKind & kind_r ) const;
+        /** \overload */
+        template<class _Res>
+        bool isKind() const
+        { return isKind( resKind<_Res>() ); }
 
         std::string  name()     const;
         Edition      edition()  const;

@@ -430,7 +430,6 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -443,16 +442,6 @@ try {
   zypp::base::LogControl::instance().logToStdErr();
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
-
-  Edition a("4.21.3-2");
-  DBG << a << endl;
-  DBG << (a == a) << endl;
-  DBG << (a.match(a)) << endl;
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
 
 #if 0
 
@@ -625,7 +614,14 @@ try {
   }
 
 
-  //////////////////////////////////////////////////////////////////
+  PoolItem pi ( getPi<Package>("amarok") );
+  MIL << pi << endl;
+  MIL << pi->as<Package>() << endl;
+  MIL << pi->as<Product>() << endl;
+  if ( pi->isKind<Package>() )
+    SEC << pi->as<Package>() << endl;
+
+ //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;

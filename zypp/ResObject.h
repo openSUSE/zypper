@@ -50,9 +50,29 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+
+    /** Convert \c this into a Ptr of a certain Kind.
+     * This is a convenience to access type specific
+     * attributes.
+     * \return \c NULL if \c this is not of the specified kind.
+     * \code
+     *  PoolItem pi;
+     *  Package::constPtr pkg = pi->as<Package>();
+     *
+     *  if ( pi->isKind<Package>() )
+     *     DBG << pi->as<Package>()->keywords() << endl;
+     * \endcode
+     */
+    template<class _Res>
+    inline typename ResTraits<_Res>::constPtrType as() const;
+
+    template<class _Res>
+    inline typename ResTraits<_Res>::PtrType as();
+
+  public:
     /** \name Locale support.
      * \see \ref sat::Solvable
-    */
+     */
     //@{
     /** \see \ref sat::Solvable::supportsLocales */
     bool supportsLocales() const
@@ -239,6 +259,14 @@ namespace zypp
   template<class _Res>
   inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
   { return dynamic_pointer_cast<const _Res>(p); }
+
+  template<class _Res>
+  inline typename ResTraits<_Res>::constPtrType ResObject::as() const
+  { return make<_Res>( *this ); }
+
+  template<class _Res>
+  inline typename ResTraits<_Res>::PtrType ResObject::as()
+  { return make<_Res>( *this ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -66,6 +66,10 @@ namespace zypp
     bool isKind( const ResKind & kind_r ) const
     { return sat::Solvable::isKind( kind_r ); }
 
+    template<class _Res>
+    bool isKind() const
+    { return sat::Solvable::isKind<_Res>(); }
+
     std::string name() const
     { return sat::Solvable::name(); }
 
