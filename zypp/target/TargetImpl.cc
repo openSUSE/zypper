@@ -37,7 +37,7 @@
 #include "zypp/Repository.h"
 
 #include "zypp/ResFilters.h"
-#include "zypp/target/CommitLog.h"
+#include "zypp/HistoryLog.h"
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
 #include "zypp/target/rpm/librpmDb.h"
@@ -81,13 +81,13 @@ namespace zypp
       {
         MIL << "Execute script " << PathInfo(script_r) << endl;
 
-        CommitLog progresslog;
-        progresslog(/*timestamp*/true) << script_r << _(" executed") << endl;
+        HistoryLog historylog;
+        historylog.comment(script_r.asString() + _(" executed"), /*timestamp*/true);
         ExternalProgram prog( script_r.asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true /*, root_r*/ );
 
         for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() )
         {
-          progresslog() << output;
+          historylog.comment(output);
           if ( ! report_r->progress( PatchScriptReport::OUTPUT, output ) )
           {
             WAR << "User request to abort script " << script_r << endl;
@@ -103,7 +103,9 @@ namespace zypp
         {
           ret.second = report_r->problem( prog.execError() );
           WAR << "ACTION" << ret.second << "(" << prog.execError() << ")" << endl;
-          progresslog(/*timestamp*/true)<< script_r << _(" execution failed") << " (" << prog.execError() << ")" << endl;
+          std::ostringstream sstr;
+          sstr << script_r << _(" execution failed") << " (" << prog.execError() << ")" << endl;
+          historylog.comment(sstr.str(), /*timestamp*/true);
           return ret;
         }
 
@@ -187,7 +189,9 @@ namespace zypp
             if ( abort || aborting_r )
             {
               WAR << "Aborting: Skip patch script " << *sit << endl;
-              CommitLog()(/*timestamp*/true) << script.path() << _(" execution skipped while aborting") << endl;
+              HistoryLog().comment(
+                  script.path().asString() + _(" execution skipped while aborting"),
+                  /*timestamp*/true);
             }
             else
             {
@@ -287,6 +291,8 @@ namespace zypp
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
       _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
+
+      HistoryLog::setRoot(_root);
 
       // create the anonymous unique id
       // this value is used for statistics
@@ -551,12 +557,8 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Process packages:
       ///////////////////////////////////////////////////////////////////
-      if ( root() == "/" && CommitLog::fname().empty() )
-      {
-        // Yes, we simply hijack /var/log/YaST2/y2logRPM
-        // until we maintain some zypp history database.
-        CommitLog::setFname( "/var/log/YaST2/y2logRPM" );
-      }
+
+      DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
 
       ZYppCommitResult result;
 
@@ -739,6 +741,7 @@ namespace zypp
             {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
               rpm().installPackage( localfile, flags );
+              HistoryLog().install(*it);
 
               if ( progress.aborted() )
               {
@@ -785,6 +788,7 @@ namespace zypp
             try
             {
               rpm().removePackage( p, flags );
+              HistoryLog().remove(*it);
 
               if ( progress.aborted() )
               {
@@ -852,12 +856,6 @@ namespace zypp
       return _rpm.hasFile(path_str, name_str);
     }
 
-    /** Set the log file for target */
-    bool TargetImpl::setInstallationLogfile(const Pathname & path_r)
-    {
-      CommitLog::setFname(path_r);
-      return true;
-    }
 
     Date TargetImpl::timestamp() const
     {

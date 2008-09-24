@@ -24,6 +24,7 @@ SET( zypp_SRCS
   ExternalProgram.cc
   Fetcher.cc
   FileChecker.cc
+  HistoryLog.cc
   IdString.cc
   KeyRing.cc
   Locks.cc
@@ -102,6 +103,7 @@ SET( zypp_HEADERS
   ExternalProgram.h
   Fetcher.h
   FileChecker.h
+  HistoryLog.h
   IdString.h
   IdStringType.h
   KeyContext.h
@@ -530,7 +532,6 @@ SET( zypp_target_SRCS
   target/RequestedLocalesFile.cc
   target/SoftLocksFile.cc
   target/HardLocksFile.cc
-  target/CommitLog.cc
   target/CommitPackageCache.cc
   target/CommitPackageCacheImpl.cc
   target/CommitPackageCacheReadAhead.cc
@@ -543,7 +544,6 @@ SET( zypp_target_HEADERS
   target/RequestedLocalesFile.h
   target/SoftLocksFile.h
   target/HardLocksFile.h
-  target/CommitLog.h
   target/CommitPackageCache.h
   target/CommitPackageCacheImpl.h
   target/CommitPackageCacheReadAhead.h

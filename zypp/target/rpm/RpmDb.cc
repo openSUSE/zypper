@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <list>
 #include <map>
 #include <set>
@@ -28,7 +29,6 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
 #include "zypp/base/Gettext.h"
 
 #include "zypp/Date.h"
@@ -39,7 +39,7 @@
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
 
-#include "zypp/target/CommitLog.h"
+#include "zypp/HistoryLog.h"
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmException.h"
 #include "zypp/TmpPath.h"
@@ -1973,7 +1973,7 @@ void RpmDb::installPackage( const Pathname & filename, RpmInstFlags flags )
 void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, callback::SendReport<RpmInstallReport> & report )
 {
   FAILIFNOTINITIALIZED;
-  CommitLog progresslog;
+  HistoryLog historylog;
 
   MIL << "RpmDb::installPackage(" << filename << "," << flags << ")" << endl;
 
@@ -2072,8 +2072,10 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   if ( rpm_status != 0 )
   {
     // %s = filename of rpm package
-    progresslog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
-    progresslog() << _("rpm output:") << endl << rpmmsg << endl;
+    // historylog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
+    ostringstream sstr;
+    sstr << _("rpm output:") << endl << rpmmsg << endl;
+    historylog.comment(sstr.str());
     //TranslatorExplanation after semicolon is error message
     ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message : rpmmsg)));
@@ -2081,10 +2083,14 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   else
   {
     // %s = filename of rpm package
-    progresslog(/*timestamp*/true) << str::form(_("%s installed ok"), Pathname::basename(filename).c_str()) << endl;
+    // historylog.comment(
+    //    str::form(_("%s installed ok"), Pathname::basename(filename).c_str()),
+    //    /*timestamp*/true);
     if ( ! rpmmsg.empty() )
     {
-      progresslog() << _("Additional rpm output:") << endl << rpmmsg << endl;
+      ostringstream sstr;
+      sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
+      historylog.comment(sstr.str());
     }
   }
 }
@@ -2144,7 +2150,7 @@ void RpmDb::removePackage( const string & name_r, RpmInstFlags flags )
 void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback::SendReport<RpmRemoveReport> & report )
 {
   FAILIFNOTINITIALIZED;
-  CommitLog progresslog;
+  HistoryLog historylog;
 
   MIL << "RpmDb::doRemovePackage(" << name_r << "," << flags << ")" << endl;
 
@@ -2206,18 +2212,23 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
   if ( rpm_status != 0 )
   {
     // %s = name of rpm package
-    progresslog(/*timestamp*/true) << str::form(_("%s remove failed"), name_r.c_str()) << endl;
-    progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-    //TranslatorExplanation after semicolon is error message
+    historylog.comment(
+        str::form(_("%s remove failed"), name_r.c_str()), /*timestamp*/true);
+    ostringstream sstr;
+    sstr << _("rpm output:") << endl << rpmmsg << endl;
+    historylog.comment(sstr.str());
+    // TranslatorExplanation after semicolon is error message
     ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message: rpmmsg)));
   }
   else
   {
-    progresslog(/*timestamp*/true) << str::form(_("%s remove ok"), name_r.c_str()) << endl;
+    // historylog.comment(str::form(_("%s remove ok"), name_r.c_str()), /*timestamp*/true);
     if ( ! rpmmsg.empty() )
     {
-      progresslog() << _("Additional rpm output:") << endl << rpmmsg << endl;
+      ostringstream sstr;
+      sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
+      historylog.comment(sstr.str());
     }
   }
 }
@@ -2245,7 +2256,7 @@ bool RpmDb::backupPackage( const Pathname & filename )
 //
 bool RpmDb::backupPackage(const string& packageName)
 {
-  CommitLog progresslog;
+  HistoryLog progresslog;
   bool ret = true;
   Pathname backupFilename;
   Pathname filestobackupfile = _root+_backuppath+FILEFORBACKUPFILES;
@@ -2359,7 +2370,9 @@ bool RpmDb::backupPackage(const string& packageName)
     else
     {
       MIL << "tar backup ok" << endl;
-      progresslog(/*timestamp*/true) << str::form(_("created backup %s"), backupFilename.asString().c_str()) << endl;
+      progresslog.comment(
+          str::form(_("created backup %s"), backupFilename.asString().c_str())
+          , /*timestamp*/true);
     }
 
     filesystem::unlink(filestobackupfile);

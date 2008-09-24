@@ -139,12 +139,6 @@ namespace zypp
       Pathname knownServicesPath() const;
 
       /**
-       * Separator string for storing/reading sets of strings to/from
-       * metadata cache DB.
-       */
-      const std::string & cacheDBSplitJoinSeparator() const;
-
-      /**
        * Whether repository urls should be probed.
        / config option
        * repo.add.probe
@@ -220,7 +214,6 @@ namespace zypp
       */
       Pathname update_messagesPath() const;
 
-    public:
       /** \name Options for package installation */
       //@{
       /** The default \ref target::rpm::RpmInstFlags for \ref ZYppCommitPolicy.
@@ -231,6 +224,8 @@ namespace zypp
        */
       target::rpm::RpmInstFlags rpmInstallFlags() const;
       //@}
+
+      Pathname historyLogFile() const;
 
     public:
       class Impl;

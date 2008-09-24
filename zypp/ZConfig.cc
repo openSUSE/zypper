@@ -282,6 +282,10 @@ namespace zypp
                 {
                   rpmInstallFlags.setFlag( target::rpm::RPMINST_EXCLUDEDOCS );
                 }
+                else if ( entry == "history.logfile" )
+                {
+                  history_log_path = Pathname(value);
+                }
               }
             }
           }
@@ -343,7 +347,8 @@ namespace zypp
     bool apply_locks_file;
 
     target::rpm::RpmInstFlags rpmInstallFlags;
-
+    
+    Pathname history_log_path;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -497,12 +502,6 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  const std::string & ZConfig::cacheDBSplitJoinSeparator() const
-  {
-    static std::string s("!@$");
-    return s;
-  }
-
   bool ZConfig::repo_add_probe() const
   {
     return _pimpl->repo_add_probe;
@@ -561,6 +560,14 @@ namespace zypp
 
   target::rpm::RpmInstFlags ZConfig::rpmInstallFlags() const
   { return _pimpl->rpmInstallFlags; }
+
+
+  Pathname ZConfig::historyLogFile() const
+  {
+    return ( _pimpl->history_log_path.empty() ?
+        Pathname("/var/log/zypp/history") : _pimpl->history_log_path );
+  }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

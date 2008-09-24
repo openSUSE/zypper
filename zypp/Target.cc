@@ -91,9 +91,6 @@ namespace zypp
   std::ostream & Target::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
-  bool Target::setInstallationLogfile(const Pathname & path_r)
-  { return _pimpl->setInstallationLogfile(path_r); }
-
   Date Target::timestamp() const
   { return _pimpl->timestamp(); }
 

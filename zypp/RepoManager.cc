@@ -17,6 +17,7 @@
 #include <list>
 #include <map>
 #include <algorithm>
+
 #include "zypp/base/InputStream.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
@@ -24,8 +25,8 @@
 #include "zypp/base/Regex.h"
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
-#include "zypp/ServiceInfo.h"
 
+#include "zypp/ServiceInfo.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/RepoManager.h"
 
@@ -44,6 +45,7 @@
 
 #include "zypp/Target.h" // for Target::targetDistribution() for repo index services
 #include "zypp/ZYppFactory.h" // to get the Target from ZYpp instance
+#include "zypp/HistoryLog.h" // to write history :O)
 
 #include "zypp/ZYppCallbacks.h"
 
@@ -1237,6 +1239,8 @@ namespace zypp
           //! \todo use a method calling UI callbacks to ask where to save creds?
           cm.saveInUser(media::AuthData(*urlit));
     }
+    
+    HistoryLog().addRepository(tosave);
 
     progress.toMax();
     MIL << "done" << endl;
@@ -1286,7 +1290,10 @@ namespace zypp
       it->setFilepath(repofile.asString());
       it->dumpAsIniOn(file);
       _pimpl->repos.insert(*it);
+
+      HistoryLog(_pimpl->options.rootDir).addRepository(*it);
     }
+
     MIL << "done" << endl;
   }
 
@@ -1365,6 +1372,7 @@ namespace zypp
         cleanMetadata( todelete, cleansubprogrcv);
         _pimpl->repos.erase(todelete);
         MIL << todelete.alias() << " sucessfully deleted." << endl;
+        HistoryLog(_pimpl->options.rootDir).removeRepository(todelete);
         return;
       } // else filepath is empty
 
@@ -1427,6 +1435,7 @@ namespace zypp
 
       _pimpl->repos.erase(toedit);
       _pimpl->repos.insert(newinfo);
+      HistoryLog(_pimpl->options.rootDir).modifyRepository(toedit, newinfo);
     }
   }
 
