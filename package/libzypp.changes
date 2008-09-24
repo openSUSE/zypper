@@ -6,6 +6,7 @@ Wed Sep 24 19:11:19 CEST 2008 - jkupec@suse.cz
   history.logfile (/var/log/zypp/history) (fate #110205)
 - str::escape(string, char) added
 - revision 11150
+- version 5.12.0 (12)
 
 -------------------------------------------------------------------
 Tue Sep 23 14:02:08 CEST 2008 - jkupec@suse.cz
