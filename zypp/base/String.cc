@@ -260,6 +260,30 @@ namespace zypp
       return str;
     }
 
+
+    std::string escape( const std::string & str_r, const char sep_r )
+    {
+      std::vector<char> buf;
+      for_( s, str_r.begin(), str_r.end() )
+      {
+        switch ( *s )
+        {
+        case '"':
+        case '\'':
+        case '\\':
+          buf.push_back( '\\' );
+          buf.push_back( *s );
+          break;
+        default:
+          if ( *s == sep_r )
+            buf.push_back( '\\' );
+          buf.push_back( *s );
+        }
+      }
+      return std::string( buf.begin(), buf.end() );
+    }
+
+
     /******************************************************************
     **
     **

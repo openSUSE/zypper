@@ -85,5 +85,12 @@ BOOST_AUTO_TEST_CASE(testsplitEscaped)
    v.clear();
    str::splitEscaped( s, std::back_inserter(v), "o" );
    BOOST_CHECK_EQUAL( s, str::joinEscaped( v.begin(), v.end(), 'o' ) );
+}
 
+BOOST_AUTO_TEST_CASE(test_escape)
+{
+  string badass = "bad|ass\\|worse";
+  string escaped = str::escape(badass, '|');
+
+  BOOST_CHECK_EQUAL( escaped, "bad\\|ass\\\\\\|worse" );
 }

@@ -566,6 +566,17 @@ namespace zypp
         return std::string( buf.begin(), buf.end() );
       }
 
+
+      /**
+       * Escape desired character \a c using a backslash.
+       * 
+       * For use when printing \a c separated values, and where
+       * \ref joinEscaped() is too heavy.
+       */
+      std::string escape(const std::string & str_r, const char c = ' ' );
+
+      //! \todo unsecape()
+
     //@}
     ///////////////////////////////////////////////////////////////////
 

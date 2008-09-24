@@ -303,7 +303,7 @@ namespace zypp
     _log
       << timestamp()                                   // 1 timestamp
       << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action 
-      << _sep << repo.alias()                          // 3 alias
+      << _sep << str::escape(repo.alias(), _sep)       // 3 alias
       << endl;
   }
 
@@ -316,8 +316,8 @@ namespace zypp
       _log
         << timestamp()                                    // 1 timestamp
         << _sep << HistoryActionID::REPO_CHANGE_ALIAS.asString(true) // 2 action
-        << _sep << oldrepo.alias()                        // 3 old alias
-        << _sep << newrepo.alias();                       // 4 new alias
+        << _sep << str::escape(oldrepo.alias(), _sep)     // 3 old alias
+        << _sep << str::escape(newrepo.alias(), _sep);    // 4 new alias
     }
     
     if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
@@ -325,8 +325,8 @@ namespace zypp
       _log
         << timestamp()                                    // 1 timestamp
         << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true) // 2 action
-        << _sep << oldrepo.alias()                        // 3 old url
-        << _sep << newrepo.alias();                       // 4 new url
+        << _sep << str::escape(oldrepo.alias(), _sep)              // 3 old url
+        << _sep << *newrepo.baseUrlsBegin();                       // 4 new url
     }
   }
 
