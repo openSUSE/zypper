@@ -146,6 +146,9 @@ INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp.conf DESTINATION ${SYSCONFDIR}/zypp )
 MESSAGE(STATUS "systemCheck will be installed in ${SYSCONFDIR}/zypp")
 INSTALL( FILES ${CMAKE_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp )
 
+# logrotate config file
+INSTALL( FILES ${CMAKE_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/logrotate.d )
+
 ####################################################################
 # SUBDIRECTORIES                                                   #
 ####################################################################

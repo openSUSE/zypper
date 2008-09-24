@@ -1,0 +1,11 @@
+/var/log/zypp/history {
+    compress
+    dateext
+    notifempty
+    missingok
+    nocreate
+
+    maxage 1827
+    rotate 99
+    size 10M
+}

@@ -72,6 +72,7 @@ Requires:       libzypp == @VERSION@
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake libsatsolver-devel
+Recommends:     logrotate
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel
@@ -234,5 +235,10 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/include/zypp/*
 %{prefix}/share/cmake/Modules/*
 %{_libdir}/pkgconfig/libzypp.pc
+%dir %{_var}/log/zypp
+# declare ownership of the log file but prevent
+# it from being erased by rpm -e
+%ghost %config(noreplace) %{_var}/log/zypp/history
+%{_sysconfdir}/logrotate.d/zypp-history.lr
 
 %changelog
