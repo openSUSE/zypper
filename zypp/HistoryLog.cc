@@ -291,7 +291,7 @@ namespace zypp
     _log
       << timestamp()                                   // 1 timestamp
       << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action 
-      << _sep << repo.alias()                          // 3 alias
+      << _sep << str::escape(repo.alias(), _sep)       // 3 alias
       // what about the rest of the URLs??
       << _sep << *repo.baseUrlsBegin()                 // 4 primary URL
       << endl;
