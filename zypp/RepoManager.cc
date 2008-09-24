@@ -109,11 +109,12 @@ namespace zypp
     knownReposPath        = Pathname::assertprefix( root_r, ZConfig::instance().knownReposPath() );
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
-    try
+
+    if ( getZYpp()->getTarget() )
     {
       servicesTargetDistro = getZYpp()->target()->targetDistribution();
     }
-    catch (const Exception & e)
+    else
     {
       DBG << "Target not initialized, using an empty servicesTargetDistro." << endl;
     }
