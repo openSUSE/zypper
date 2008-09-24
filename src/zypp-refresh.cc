@@ -46,13 +46,13 @@ namespace zypp {
   ///////////////////////////////////////////////////////////////////
   struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
   {
-    virtual bool askUserToAcceptUnsignedFile( const std::string &file )
+    virtual bool askUserToAcceptUnsignedFile( const std::string &file, const KeyContext & context )
     { cerr << ". Error:" << endl << "refusing unsigned file " << file << endl;  return readCallbackAnswer(); }
-    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const KeyContext & context )
     { cerr << ". Error:" << endl << "refusing unknown key, id: '" << id << "' from file '" << file << "'" << endl; return readCallbackAnswer(); }
-    virtual bool askUserToTrustKey( const PublicKey &key )
-    { cerr << ". Error:" << endl << "not trusting key '" << key << "'" << endl;return readCallbackAnswer(); }
-    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key )
+    virtual KeyRingReport::KeyTrust askUserToAcceptKey( const PublicKey &key, const KeyContext & context )
+    { cerr << ". Error:" << endl << "not trusting key '" << key << "'" << endl; return KeyRingReport::KEY_DONT_TRUST; }
+    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const PublicKey &key, const KeyContext & context )
     { cerr << ". Error:" << endl << "verification of '" << file << "' with key '" << key << "' failed" << endl; return readCallbackAnswer(); }
   };
 

@@ -31,7 +31,8 @@ namespace zypp {
     {
       KeyRingReceive() : _gopts(Zypper::instance()->globalOpts()) {}
 
-      virtual bool askUserToAcceptUnsignedFile( const std::string &file )
+      virtual bool askUserToAcceptUnsignedFile(
+          const std::string & file, const KeyContext & context)
       {
         if (_gopts.no_gpg_checks)
         {
@@ -48,7 +49,8 @@ namespace zypp {
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
 
-      virtual bool askUserToImportKey( const PublicKey &key )
+/*      virtual bool askUserToImportKey(
+          const PublicKey &key, const KeyContext & context)
       {
         //this is because only root have access to rpm db where is keys stored
         if ( geteuid() != 0 && !_gopts.changedRoot)
@@ -58,8 +60,11 @@ namespace zypp {
             _("Import key %s to trusted keyring?")) % key.id());
         return read_bool_answer(PROMPT_YN_GPG_KEY_IMPORT_TRUSTED, question, false);
       }
-
-      virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id )
+*/
+      virtual bool askUserToAcceptUnknownKey(
+          const std::string & file,
+          const std::string & id,
+          const zypp::KeyContext & context)
       {
         if (_gopts.no_gpg_checks)
         {
@@ -76,28 +81,53 @@ namespace zypp {
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
-      virtual bool askUserToTrustKey( const PublicKey &key )
+      virtual KeyRingReport::KeyTrust askUserToAcceptKey(
+          const PublicKey &key, const zypp::KeyContext & context)
       {
-	const std::string& keyid = key.id(), keyname = key.name(),
+        Zypper & zypper = *Zypper::instance();
+
+	const std::string & keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
         if (_gopts.no_gpg_checks)
         {
           MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
               % keyid % keyname % fingerprint << std::endl;
-          Zypper::instance()->out().info(boost::str(boost::format(
+          zypper.out().info(boost::str(boost::format(
               _("Automatically trusting key id %s, %s, fingerprint %s"))
               % keyid % keyname % fingerprint));
-          return true;
+          return KeyRingReport::KEY_TRUST_TEMPORARILY;
         }
 
         std::string question = boost::str(boost::format(
 	    _("Do you want to trust key id %s, %s, fingerprint %s"))
 	    % keyid % keyname % fingerprint);
-        return read_bool_answer(PROMPT_YN_GPG_KEY_TRUST, question, false);
+
+        PromptOptions popts;
+        popts.setOptions(_("t/i/n"), 2);
+        popts.setOptionHelp(0, _("Trust the key temporarily, do not import it."));
+        popts.setOptionHelp(1, _("Trust the key and import it into RPM keyring."));
+        popts.setOptionHelp(2, _("Don't trust the key."));
+
+        zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, question, popts);
+        unsigned prep =
+          get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
+        switch (prep)
+        {
+        case 0:
+          return KeyRingReport::KEY_TRUST_TEMPORARILY;
+        case 1:
+          return KeyRingReport::KEY_TRUST_AND_IMPORT;
+        default:
+          return KeyRingReport::KEY_DONT_TRUST;
+        }
+        return KeyRingReport::KEY_DONT_TRUST;
       }
 
-      virtual bool askUserToAcceptVerificationFailed( const std::string &file,const PublicKey &key )
+      virtual bool askUserToAcceptVerificationFailed(
+          const std::string & file,
+          const PublicKey & key,
+          const zypp::KeyContext & context )
       {
 	const std::string& keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
