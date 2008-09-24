@@ -108,6 +108,10 @@ namespace zypp
      * and a respective SHA1SUMS.asc which has
      * the signature for the checksums.
      *
+     * If you expect the user to not have the key of
+     * the signature either in the trusted or untrusted
+     * keyring, you can offer it as SHA1SUMS.key
+     *
      * \param recursive True if the complete tree should
      * be enqueued.
      *
@@ -116,7 +120,13 @@ namespace zypp
      * transfer job, so make sure you don't add another one or
      * the user could be asked twice.
      *
-
+     * \note The format of the file SHA1SUMS is the output of:
+     * ls | grep -v SHA1SUMS | xargs sha1sum > SHA1SUMS
+     * in each subdirectory.
+     *
+     * \note Every file appart of SHA1SUMS.(asc|key|(void)) will
+     * not be transfered and will be ignored.
+     *
      */
     void enqueueDir( const OnMediaLocation &resource,
                      bool recursive = false,

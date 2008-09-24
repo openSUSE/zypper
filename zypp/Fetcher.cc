@@ -10,13 +10,17 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include <list>
+#include <map>
 
 #include "zypp/base/Easy.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/DefaultIntegral.h"
+#include "zypp/base/String.h"
 #include "zypp/Fetcher.h"
+#include "zypp/CheckSum.h"
 #include "zypp/base/UserRequestException.h"
 
 using namespace std;
@@ -74,9 +78,9 @@ namespace zypp
       MIL << endl;
      }
     
-    void enqueue( const OnMediaLocation &resource, const FileChecker &checker  );
-    void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker );
-    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker );
+      void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
+      void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
+      void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker() );
     void addCachePath( const Pathname &cache_dir );
     void reset();
     void start( const Pathname &dest_dir,
@@ -277,55 +281,133 @@ namespace zypp
                                   const OnMediaLocation &resource, 
                                   const Pathname &dest_dir, bool recursive  )
   {
+      // first get the content of the directory so we can add
+      // individual transfer jobs
+      MIL << "Adding directory " << resource.filename() << endl;
       filesystem::DirContent content;
-      
       media.dirInfo( content, resource.filename(), false /* dots */, resource.medianr());
-
-      for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it )
-      {
-          MIL << (*it).name << endl;
-      }
       
-      filesystem::DirEntry shafile, shasig;
-      shafile.name = "SHA1SUMS";
-      shafile.name = "SHA1SUMS.asc";
-      shasig.type = filesystem::FT_FILE;
-      shasig.type = filesystem::FT_FILE;
+      filesystem::DirEntry shafile, shasig, shakey;
+      shafile.name = "SHA1SUMS"; shafile.type = filesystem::FT_FILE;
+      shasig.name = "SHA1SUMS.asc"; shasig.type = filesystem::FT_FILE;
+      shakey.name = "SHA1SUMS.key"; shakey.type = filesystem::FT_FILE;
+      
+      // create a new fetcher with a different state to transfer the
+      // file containing checksums and its signature
+      Fetcher fetcher;
+      // signature checker for SHA1SUMS. We havent got the signature from
+      // the nextwork yet.
+      SignatureFileChecker sigchecker;
 
+      // now try to find the SHA1SUMS signature
+      if ( find(content.begin(), content.end(), shasig) 
+           != content.end() )
+      {
+          MIL << "found checksums signature file: " << shasig.name << endl;
+          // TODO refactor with OnMediaLocation::extend or something
+          fetcher.enqueue( OnMediaLocation(resource.filename() + shasig.name, resource.medianr()).setOptional(true) );
+          assert_dir(dest_dir + resource.filename());
+          fetcher.start( dest_dir, media );
+
+          // if we get the signature, update the checker
+          sigchecker = SignatureFileChecker(dest_dir + resource.filename() + shasig.name);
+          fetcher.reset();
+      }
+      else
+          MIL << "no signature for " << shafile.name << endl;
+
+      // look for the SHA1SUMS.key file
+      if ( find(content.begin(), content.end(), shakey) 
+           != content.end() )
+      {
+          MIL << "found public key file: " << shakey.name << endl;
+          fetcher.enqueue( OnMediaLocation(resource.filename() + shakey.name, resource.medianr()).setOptional(true) );
+          assert_dir(dest_dir + resource.filename());
+          fetcher.start( dest_dir, media );
+          fetcher.reset();
+          KeyContext context;
+          sigchecker.addPublicKey(dest_dir + resource.filename() + shakey.name, context);
+      }
+
+      // look for the SHA1SUMS public key file
+      if ( find(content.begin(), content.end(), shafile) 
+           != content.end() )
+      {
+          MIL << "found checksums file: " << shafile.name << endl;
+          fetcher.enqueue( OnMediaLocation(resource.filename() + shafile.name, resource.medianr()).setOptional(true) );
+          assert_dir(dest_dir + resource.filename()); 
+          fetcher.start( dest_dir, media );
+          fetcher.reset();
+      }
+
+      // hash table to store checksums
+      map<string, CheckSum> checksums;
+      
       // look for the SHA1SUMS file
       if ( find(content.begin(), content.end(), shafile) != content.end() )
       {
           MIL << "found checksums file: " << shafile.name << endl;
-          
-          provideToDest(media, resource.filename() + shafile.name, dest_dir);
-          // look for the SHA1SUMS.asc signature
-          if ( find(content.begin(), content.end(), shasig) != content.end() )
-          {
-              provideToDest(media, resource.filename() + shasig.name, dest_dir);
-          }
-          
-      }
-      
-      for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it )
-      {
-          Pathname filename = resource.filename() + it->name;
+          fetcher.enqueue( OnMediaLocation(
+                               resource.filename() + shafile.name,
+                               resource.medianr()).setOptional(true),
+                           FileChecker(sigchecker) );
+          assert_dir(dest_dir + resource.filename());
+          fetcher.start( dest_dir + resource.filename(), media );
+          fetcher.reset();
 
+          // now read the SHA1SUMS file
+          Pathname pShafile = dest_dir + resource.filename() + shafile.name;
+          std::ifstream in( pShafile.c_str() );
+          string buffer;
+          if ( ! in.fail() )
+          {          
+              while ( getline(in, buffer) )
+              {
+                  vector<string> words;
+                  str::split( buffer, back_inserter(words) );
+                  if ( words.size() != 2 )
+                      ZYPP_THROW(Exception("Wrong format for SHA1SUMS file"));
+                  //MIL << "check: '" << words[0] << "' | '" << words[1] << "'" << endl;
+                  if ( ! words[1].empty() )
+                      checksums[words[1]] = CheckSum::sha1(words[0]);
+              }
+          }
+          else
+              ZYPP_THROW(Exception("Can't open SHA1SUMS file: " + pShafile.asString()));
+      }
+
+      for ( filesystem::DirContent::const_iterator it = content.begin();
+            it != content.end();
+            ++it )
+      {
+          // skip SHA1SUMS* as they were already retrieved
+          if ( str::hasPrefix(it->name, "SHA1SUMS") )
+              continue;
+          
+          Pathname filename = resource.filename() + it->name;
+          
           switch ( it->type )
           {
           case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
           case filesystem::FT_FILE:
-              enqueue(OnMediaLocation().setFilename(filename), FileChecker());
-              
-              MIL << filename << endl;
+          {
+              CheckSum checksum;
+              if ( checksums.find(it->name) != checksums.end() )
+                  checksum = checksums[it->name];
+                  
+              // create a resource from the file
+              // if checksum was not available we will have a empty
+              // checksum, which will end in a validation anyway
+              // warning the user that there is no checksum
+              enqueueDigested(OnMediaLocation()
+                              .setFilename(filename)
+                              .setChecksum(checksum));
+                  
               break;
+          }
           case filesystem::FT_DIR: // newer directory.yast contain at least directory info
               if ( recursive )
-              {
                   addDirJobs(media, filename, dest_dir, recursive);
-              } 
-              else 
-              {
-              }
               break;
           default:
               // don't provide devices, sockets, etc.
