@@ -113,7 +113,7 @@ namespace zypp
      * keyring, you can offer it as SHA1SUMS.key
      *
      * \param recursive True if the complete tree should
-     * be enqueued.
+     * be enqueued. One SHA1SUMS is required per subdirectory
      *
      * \note As \ref checksums are read from SHA1SUMS,
      * a \ref ChecksumFileChecker is automatically added to every
