@@ -1,7 +1,5 @@
 ADD_SUBDIRECTORY(base)
 
-MESSAGE(STATUS "foo: ${CMAKE_SOURCE_DIR} and ${CMAKE_BINARY_DIR}")
-
 # set the vendor.d paths correctly for the tests
 SET(VENDOR_D "${CMAKE_SOURCE_DIR}/tests/zypp/data/Vendor/vendors.d")
 FILE(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/tests/zypp/data/Vendor")
