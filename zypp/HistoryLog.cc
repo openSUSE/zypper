@@ -126,210 +126,210 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-    Pathname HistoryLog::_fname(ZConfig::instance().historyLogFile());
-    std::ofstream HistoryLog::_log;
-    unsigned HistoryLog::_refcnt = 0;
-    const char HistoryLog::_sep = '|';
+  Pathname HistoryLog::_fname(ZConfig::instance().historyLogFile());
+  std::ofstream HistoryLog::_log;
+  unsigned HistoryLog::_refcnt = 0;
+  const char HistoryLog::_sep = '|';
 
-    ///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
 
-    HistoryLog::HistoryLog( const Pathname & rootdir )
-    {
-      refUp();
-      if (!rootdir.empty() && rootdir.absolute())
-        _fname = rootdir / ZConfig::instance().historyLogFile();
-    }
+  HistoryLog::HistoryLog( const Pathname & rootdir )
+  {
+    refUp();
+    if (!rootdir.empty() && rootdir.absolute())
+      _fname = rootdir / ZConfig::instance().historyLogFile();
+  }
 
-    void HistoryLog::openLog()
-    {
-      if ( !_fname.empty() )
-      {
-        _log.clear();
-        _log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
-        if( !_log )
-          ERR << "Could not open logfile '" << _fname << "'" << endl;
-      }
-    }
-
-    void HistoryLog::closeLog()
+  void HistoryLog::openLog()
+  {
+    if ( !_fname.empty() )
     {
       _log.clear();
-      _log.close();
+      _log.open( _fname.asString().c_str(), std::ios::out|std::ios::app );
+      if( !_log )
+        ERR << "Could not open logfile '" << _fname << "'" << endl;
     }
+  }
 
-    void HistoryLog::refUp()
+  void HistoryLog::closeLog()
+  {
+    _log.clear();
+    _log.close();
+  }
+
+  void HistoryLog::refUp()
+  {
+    if ( !_refcnt )
+      openLog();
+    ++_refcnt;
+  }
+
+  void HistoryLog::refDown()
+  {
+    --_refcnt;
+    if ( !_refcnt )
+      closeLog();
+  }
+
+
+  void HistoryLog::setRoot( const Pathname & rootdir )
+  {
+    if (rootdir.empty() || !rootdir.absolute())
+      return;
+
+    if ( _refcnt )
+      closeLog();
+
+    _fname = rootdir / "/var/log/zypp/history";
+    filesystem::assert_dir( _fname.dirname() );
+    MIL << "installation log file " << _fname << endl;
+
+    if ( _refcnt )
+      openLog();
+  }
+
+
+  const Pathname & HistoryLog::fname()
+  { return _fname; }
+
+  /////////////////////////////////////////////////////////////////////////
+
+  void HistoryLog::comment( const string & comment, bool timestamp )
+  {
+    if (comment.empty())
+      return;
+
+    _log << "# ";
+    if ( timestamp )
+      _log << ::timestamp() << " ";
+
+    const char * s = comment.c_str();
+    const char * c = s;
+    unsigned size = comment.size();
+
+    // ignore the last newline
+    if (comment[size-1] == '\n')
+      --size;
+
+    for ( unsigned i = 0; i < size; ++i, ++c )
+      if ( *c == '\n' )
+      {
+        _log << string( s, c + 1 - s ) << "# ";
+        s = c + 1;
+      }
+
+    if ( s < c )
+      _log << std::string( s, c-s );
+
+    _log << endl;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+  
+  void HistoryLog::install( const PoolItem & pi )
+  {
+    const Package::constPtr p = asKind<Package>(pi.resolvable());
+    if (!p)
+      return;
+
+    _log
+      << timestamp()                                   // 1 timestamp
+      << _sep << HistoryActionID::INSTALL.asString(true) // 2 action
+      << _sep << p->name()                             // 3 name
+      << _sep << p->edition()                          // 4 evr
+      << _sep << p->arch();                            // 5 arch
+
+    if (pi.status().isByUser())
+      _log << _sep << userAtHostname();                // 6 reqested by
+    //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
+    //  _log << _sep << "appl";
+    else
+      _log << _sep;
+
+    _log
+      << _sep << p->repoInfo().alias()                 // 7 repo alias
+      << _sep << p->checksum().checksum();             // 8 checksum
+
+    _log << endl; 
+
+    //_log << pi << endl;
+  }
+
+
+  void HistoryLog::remove( const PoolItem & pi )
+  {
+    const Package::constPtr p = asKind<Package>(pi.resolvable());
+    if (!p)
+      return;
+
+    _log
+      << timestamp()                                   // 1 timestamp
+      << _sep << HistoryActionID::REMOVE.asString(true) // 2 action
+      << _sep << p->name()                             // 3 name
+      << _sep << p->edition()                          // 4 evr
+      << _sep << p->arch();                            // 5 arch
+
+    if (pi.status().isByUser())
+      _log << _sep << userAtHostname();                // 6 reqested by
+    //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
+    //  _log << _sep << "appl";
+    else
+      _log << _sep;
+
+    // we don't have checksum in rpm db
+    //  << _sep << p->checksum().checksum();           // x checksum
+
+    _log << endl; 
+
+    //_log << pi << endl;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+
+  void HistoryLog::addRepository(const RepoInfo & repo)
+  {
+    _log
+      << timestamp()                                   // 1 timestamp
+      << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action 
+      << _sep << repo.alias()                          // 3 alias
+      // what about the rest of the URLs??
+      << _sep << *repo.baseUrlsBegin()                 // 4 primary URL
+      << endl;
+  }
+
+
+  void HistoryLog::removeRepository(const RepoInfo & repo)
+  {
+    _log
+      << timestamp()                                   // 1 timestamp
+      << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action 
+      << _sep << repo.alias()                          // 3 alias
+      << endl;
+  }
+
+
+  void HistoryLog::modifyRepository(
+      const RepoInfo & oldrepo, const RepoInfo & newrepo)
+  {
+    if (oldrepo.alias() != newrepo.alias())
     {
-      if ( !_refcnt )
-        openLog();
-      ++_refcnt;
+      _log
+        << timestamp()                                    // 1 timestamp
+        << _sep << HistoryActionID::REPO_CHANGE_ALIAS.asString(true) // 2 action
+        << _sep << oldrepo.alias()                        // 3 old alias
+        << _sep << newrepo.alias();                       // 4 new alias
     }
-
-    void HistoryLog::refDown()
-    {
-      --_refcnt;
-      if ( !_refcnt )
-        closeLog();
-    }
-
-
-    void HistoryLog::setRoot( const Pathname & rootdir )
-    {
-      if (rootdir.empty() || !rootdir.absolute())
-        return;
-
-      if ( _refcnt )
-        closeLog();
-
-      _fname = rootdir / "/var/log/zypp/history";
-      filesystem::assert_dir( _fname.dirname() );
-      MIL << "installation log file " << _fname << endl;
-
-      if ( _refcnt )
-        openLog();
-    }
-
-
-    const Pathname & HistoryLog::fname()
-    { return _fname; }
-
-    /////////////////////////////////////////////////////////////////////////
-
-    void HistoryLog::comment( const string & comment, bool timestamp )
-    {
-      if (comment.empty())
-        return;
-
-      _log << "# ";
-      if ( timestamp )
-        _log << ::timestamp() << " ";
-
-      const char * s = comment.c_str();
-      const char * c = s;
-      unsigned size = comment.size();
-
-      // ignore the last newline
-      if (comment[size-1] == '\n')
-        --size;
-
-      for ( unsigned i = 0; i < size; ++i, ++c )
-        if ( *c == '\n' )
-        {
-          _log << string( s, c + 1 - s ) << "# ";
-          s = c + 1;
-        }
-
-      if ( s < c )
-        _log << std::string( s, c-s );
-
-      _log << endl;
-    }
-
-    /////////////////////////////////////////////////////////////////////////
     
-    void HistoryLog::install( const PoolItem & pi )
-    {
-      const Package::constPtr p = asKind<Package>(pi.resolvable());
-      if (!p)
-        return;
-
-      _log
-        << timestamp()                                   // 1 timestamp
-        << _sep << HistoryActionID::INSTALL.asString(true) // 2 action
-        << _sep << p->name()                             // 3 name
-        << _sep << p->edition()                          // 4 evr
-        << _sep << p->arch();                            // 5 arch
-
-      if (pi.status().isByUser())
-        _log << _sep << userAtHostname();                // 6 reqested by
-      //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
-      //  _log << _sep << "appl";
-      else
-        _log << _sep;
-
-      _log
-        << _sep << p->repoInfo().alias()                 // 7 repo alias
-        << _sep << p->checksum().checksum();             // 8 checksum
-
-      _log << endl; 
-
-      //_log << pi << endl;
-    }
-
-
-    void HistoryLog::remove( const PoolItem & pi )
-    {
-      const Package::constPtr p = asKind<Package>(pi.resolvable());
-      if (!p)
-        return;
-
-      _log
-        << timestamp()                                   // 1 timestamp
-        << _sep << HistoryActionID::REMOVE.asString(true) // 2 action
-        << _sep << p->name()                             // 3 name
-        << _sep << p->edition()                          // 4 evr
-        << _sep << p->arch();                            // 5 arch
-
-      if (pi.status().isByUser())
-        _log << _sep << userAtHostname();                // 6 reqested by
-      //else if (pi.status().isByApplHigh() || pi.status().isByApplLow())
-      //  _log << _sep << "appl";
-      else
-        _log << _sep;
-
-      // we don't have checksum in rpm db
-      //  << _sep << p->checksum().checksum();           // x checksum
-
-      _log << endl; 
-
-      //_log << pi << endl;
-    }
-
-    /////////////////////////////////////////////////////////////////////////
-
-    void HistoryLog::addRepository(const RepoInfo & repo)
+    if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
     {
       _log
-        << timestamp()                                   // 1 timestamp
-        << _sep << HistoryActionID::REPO_ADD.asString(true) // 2 action 
-        << _sep << repo.alias()                          // 3 alias
-        // what about the rest of the URLs??
-        << _sep << *repo.baseUrlsBegin()                 // 4 primary URL
-        << endl;
+        << timestamp()                                    // 1 timestamp
+        << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true) // 2 action
+        << _sep << oldrepo.alias()                        // 3 old url
+        << _sep << newrepo.alias();                       // 4 new url
     }
+  }
 
-
-    void HistoryLog::removeRepository(const RepoInfo & repo)
-    {
-      _log
-        << timestamp()                                   // 1 timestamp
-        << _sep << HistoryActionID::REPO_REMOVE.asString(true) // 2 action 
-        << _sep << repo.alias()                          // 3 alias
-        << endl;
-    }
-
-
-    void HistoryLog::modifyRepository(
-        const RepoInfo & oldrepo, const RepoInfo & newrepo)
-    {
-      if (oldrepo.alias() != newrepo.alias())
-      {
-        _log
-          << timestamp()                                    // 1 timestamp
-          << _sep << HistoryActionID::REPO_CHANGE_ALIAS.asString(true) // 2 action
-          << _sep << oldrepo.alias()                        // 3 old alias
-          << _sep << newrepo.alias();                       // 4 new alias
-      }
-      
-      if (*oldrepo.baseUrlsBegin() != *newrepo.baseUrlsBegin())
-      {
-        _log
-          << timestamp()                                    // 1 timestamp
-          << _sep << HistoryActionID::REPO_CHANGE_URL.asString(true) // 2 action
-          << _sep << oldrepo.alias()                        // 3 old url
-          << _sep << newrepo.alias();                       // 4 new url
-      }
-    }
-
-    ///////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
 
 } // namespace zypp

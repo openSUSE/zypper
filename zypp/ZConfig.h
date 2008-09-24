@@ -225,6 +225,12 @@ namespace zypp
       target::rpm::RpmInstFlags rpmInstallFlags() const;
       //@}
 
+      /**
+       * Path where ZYpp install history is logged. Defaults to
+       * /var/log/zypp/history.
+       * 
+       * \see http://en.opensuse.org/Libzypp/Package_History
+       */
       Pathname historyLogFile() const;
 
     public:
