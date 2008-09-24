@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Sep 24 19:11:19 CEST 2008 - jkupec@suse.cz
+
+- HistoryLog added and used to log package installs/removes and
+  repository adds, removes, url and alias changes into
+  history.logfile (/var/log/zypp/history) (fate #110205)
+- str::escape(string, char) added
+- revision 11148
+
+-------------------------------------------------------------------
 Tue Sep 23 14:02:08 CEST 2008 - jkupec@suse.cz
 
 - CredentialManager: look for credentials with
