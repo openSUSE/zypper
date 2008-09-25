@@ -87,11 +87,11 @@ namespace zypp
 
           if (context.empty())
             Zypper::instance()->out().warning(boost::str(boost::format(
-                _("Accepting file '%s' signed with an unknown key %s."))
+                _("Accepting file '%s' signed with an unknown key '%s'."))
                 % file % id));
           else
             Zypper::instance()->out().warning(boost::str(boost::format(
-                _("Accepting file '%s' from repository '%s' signed with an unknown key %s."))
+                _("Accepting file '%s' from repository '%s' signed with an unknown key '%s'."))
                 % file % context.repoInfo().name() % id));
 
           return true;
@@ -117,28 +117,34 @@ namespace zypp
           const PublicKey &key, const zypp::KeyContext & context)
       {
         Zypper & zypper = *Zypper::instance();
-
+        std::ostringstream s;
 	const std::string & keyid = key.id(), keyname = key.name(),
 	  fingerprint = key.fingerprint();
 
         if (_gopts.no_gpg_checks)
-        {
-          MIL << boost::format("Automatically trusting key id %s, %s, fingerprint %s")
-              % keyid % keyname % fingerprint << std::endl;
-          zypper.out().info(boost::str(boost::format(
-              _("Automatically trusting key id %s, %s, fingerprint %s"))
-              % keyid % keyname % fingerprint));
-          return KeyRingReport::KEY_TRUST_TEMPORARILY;
-        }
+          s << _("Automatically trusting the following key:") << std::endl;
+        else
+          s << _("New repository or package signing key receieved:") << std::endl;
 
-        std::ostringstream s;
-        s << _("New repository or package signing key receieved.") << std::endl
+        // gpg key info
+        s
           << str::form(_("Key ID: %s"), keyid.c_str()) << std::endl
           << str::form(_("Key Name: %s"), keyname.c_str()) << std::endl
           << str::form(_("Key Fingerprint: %s"), fingerprint.c_str()) << std::endl;
         if (!context.empty())
           s << str::form(_("Repository: %s"), context.repoInfo().name().c_str())
             << std::endl;
+
+        // print info and dont ask
+        if (_gopts.no_gpg_checks)
+        {
+          MIL << boost::format("Automatically trusting key id '%s', '%s', fingerprint '%s'")
+              % keyid % keyname % fingerprint << std::endl;
+          zypper.out().info(s.str());
+          return KeyRingReport::KEY_TRUST_TEMPORARILY;
+        }
+
+        // ask the user
         s << std::endl;
         s << _("Do you want to trust key?");
 
