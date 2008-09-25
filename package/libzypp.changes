@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 25 17:09:44 CEST 2008 - jkupec@suse.cz
+
+- Target::setInstallationLogfile() removed from zypp/Target.h
+- revision 11171
+
+-------------------------------------------------------------------
 Thu Sep 25 13:11:43 CEST 2008 - ma@suse.de
 
 - Remove obsolete zypp-query-pool binary. zypper provides all
