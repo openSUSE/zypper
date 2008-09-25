@@ -232,6 +232,16 @@ namespace zypp
        * \see http://en.opensuse.org/Libzypp/Package_History
        */
       Pathname historyLogFile() const;
+      
+      /**
+       * Defaults to /etc/zypp/credentials.d
+       */
+      Pathname credentialsGlobalDir() const;
+      
+      /**
+       * Defaults to /etc/zypp/credentials.cat
+       */
+      Pathname credentialsGlobalFile() const;
 
     public:
       class Impl;

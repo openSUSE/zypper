@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 
+#include "zypp/ZConfig.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Easy.h"
@@ -21,9 +22,7 @@
 
 #include "zypp/media/CredentialManager.h"
 
-#define CUSTOM_CREDENTIALS_FILE_DIR "/etc/zypp/credentials.d"
-#define GLOBAL_CREDENTIALS_FILE "/etc/zypp/credentials.cat" 
-#define USER_CREDENTIALS_FILE   ".zypp/credentials.cat"
+#define USER_CREDENTIALS_FILE ".zypp/credentials.cat"
 
 using namespace std;
 
@@ -42,8 +41,8 @@ namespace zypp
   //////////////////////////////////////////////////////////////////////
 
   CredManagerOptions::CredManagerOptions(const Pathname & rootdir)
-    : globalCredFilePath(rootdir / GLOBAL_CREDENTIALS_FILE)
-    , customCredFileDir(rootdir / CUSTOM_CREDENTIALS_FILE_DIR)
+    : globalCredFilePath(rootdir / ZConfig::instance().credentialsGlobalFile())
+    , customCredFileDir(rootdir / ZConfig::instance().credentialsGlobalDir())
   {
     char * homedir = getenv("HOME");
     if (homedir)

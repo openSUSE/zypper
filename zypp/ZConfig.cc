@@ -286,6 +286,14 @@ namespace zypp
                 {
                   history_log_path = Pathname(value);
                 }
+                else if ( entry == "credentials.global.dir" )
+                {
+                  credentials_global_dir_path = Pathname(value); 
+                }
+                else if ( entry == "credentials.global.file" )
+                {
+                  credentials_global_file_path = Pathname(value); 
+                }
               }
             }
           }
@@ -349,6 +357,8 @@ namespace zypp
     target::rpm::RpmInstFlags rpmInstallFlags;
     
     Pathname history_log_path;
+    Pathname credentials_global_dir_path;
+    Pathname credentials_global_file_path;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -568,6 +578,18 @@ namespace zypp
         Pathname("/var/log/zypp/history") : _pimpl->history_log_path );
   }
 
+
+  Pathname ZConfig::credentialsGlobalDir() const
+  {
+    return ( _pimpl->credentials_global_dir_path.empty() ?
+        Pathname("/etc/zypp/credentials.d") : _pimpl->credentials_global_dir_path );
+  }
+
+  Pathname ZConfig::credentialsGlobalFile() const
+  {
+    return ( _pimpl->credentials_global_file_path.empty() ?
+        Pathname("/etc/zypp/credentials.cat") : _pimpl->credentials_global_file_path );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
