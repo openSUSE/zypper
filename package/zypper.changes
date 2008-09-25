@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Sep 25 14:11:16 CEST 2008 - jkupec@suse.cz
+
+- minimized RepoManager initializaiton, reduced logging drastically
+- r11162
+
+-------------------------------------------------------------------
+Thu Sep 25 00:20:16 CEST 2008 - jkupec@suse.cz
+
+- adapt to libzypp's keyring changes, trust and import dialogs
+  merged to one (bnc #366467)
+- r11162
+
+-------------------------------------------------------------------
 Fri Sep 19 23:10:46 CEST 2008 - jkupec@suse.cz
 
 - 'versioncmp' now uses zypp::Edition::compare() by default and
