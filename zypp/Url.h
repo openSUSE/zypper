@@ -342,10 +342,10 @@ namespace zypp
     getPassword(EEncoding eflag = zypp::url::E_DECODED) const;
 
     /**
-     * Returns \c true if username or password are encoded in the authority component.
+     * Returns \c true if username \b and password are encoded in the authority component.
      */
     bool hasCredentialsInAuthority() const
-    { return ! ( getUsername().empty() && getPassword().empty() ); }
+    { return ! ( getUsername().empty() || getPassword().empty() ); }
 
     /**
      * Returns the hostname or IP from the URL authority.

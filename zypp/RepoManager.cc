@@ -1226,8 +1226,11 @@ namespace zypp
     // check for credentials in Urls
     bool havePasswords = false;
     for_( urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd() )
-      if ( !urlit->getUsername().empty() && !urlit->getPassword().empty() )
-      { havePasswords = true; break; }
+      if ( urlit->hasCredentialsInAuthority() )
+      {
+        havePasswords = true;
+        break;
+      }
     // save the credentials
     if ( havePasswords )
     {
@@ -1235,11 +1238,11 @@ namespace zypp
           media::CredManagerOptions(_pimpl->options.rootDir) );
 
       for_(urlit, tosave.baseUrlsBegin(), tosave.baseUrlsEnd())
-        if (!urlit->getPassword().empty() && !urlit->getUsername().empty())
+        if (urlit->hasCredentialsInAuthority())
           //! \todo use a method calling UI callbacks to ask where to save creds?
           cm.saveInUser(media::AuthData(*urlit));
     }
-    
+
     HistoryLog().addRepository(tosave);
 
     progress.toMax();
@@ -1530,7 +1533,7 @@ namespace zypp
     _pimpl->services.insert( toSave );
 
     // check for credentials in Url (username:password, not ?credentials param)
-    if ( !toSave.url().getUsername().empty() && !toSave.url().getPassword().empty() )
+    if ( toSave.url().hasCredentialsInAuthority() )
     {
       media::CredentialManager cm(
           media::CredManagerOptions(_pimpl->options.rootDir) );
@@ -1662,20 +1665,8 @@ namespace zypp
         url = service.url();
       else
       {
-        // service repo can contain only one URL now, so no need to iterate
+        // service repo can contain only one URL now, so no need to iterate.
         url = *it->baseUrlsBegin();
-
-        url::ViewOption vopt;
-        vopt = vopt
-          - url::ViewOption::WITH_USERNAME
-          - url::ViewOption::WITH_PASSWORD
-          - url::ViewOption::WITH_QUERY_STR;
-
-        // use the same username as the service in case the URL starts with
-        // the service url
-        if (url.asString(vopt).find(service.url().asString(vopt)) == 0
-            && !service.url().getUsername().empty())
-          url.setUsername(service.url().getUsername());
       }
 
       // libzypp currently has problem with separate url + path handling

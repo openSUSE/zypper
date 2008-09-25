@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 25 13:11:43 CEST 2008 - ma@suse.de
+
+- Remove obsolete zypp-query-pool binary. zypper provides all
+  the information one needs.
+- revision 11160
+
+-------------------------------------------------------------------
 Wed Sep 24 19:11:19 CEST 2008 - jkupec@suse.cz
 
 - HistoryLog added and used to log package installs/removes and
