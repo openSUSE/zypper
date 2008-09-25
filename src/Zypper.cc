@@ -73,6 +73,7 @@ Zypper::Zypper()
     _command(ZypperCommand::NONE),
     _exit_code(ZYPPER_EXIT_OK),
     _running_shell(false), _running_help(false), _exit_requested(false),
+    _rm_set(false),
     _sh_argc(0), _sh_argv(NULL)
 {
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -718,6 +719,9 @@ void Zypper::shellCleanup()
 
   // runtime data
   _rdata.current_repo = RepoInfo();
+  
+  // cause the RepoManager to be reinitialized
+  _rm_set = false;
 
   // TODO:
   // _rdata.repos re-read after repo operations or modify/remove these very repoinfos
@@ -2189,6 +2193,8 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
+    initRepoManager();
+
     list_services(*this);
 
     break;
@@ -2213,6 +2219,8 @@ void Zypper::doCommand()
     init_target(*this);
     this->_gopts.rm_options.servicesTargetDistro =
       God->target()->targetDistribution();
+
+    initRepoManager();
 
     refresh_services(*this);
 
@@ -2281,6 +2289,8 @@ void Zypper::doCommand()
 
     warn_if_zmd();
 
+    initRepoManager();
+
     if (isservice)
       add_service_by_url(*this, url, _arguments[1], type, enabled);
     else
@@ -2339,6 +2349,8 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
+
     if (non_alias)
     {
       modify_services_by_option(*this);
@@ -2369,6 +2381,8 @@ void Zypper::doCommand()
   case ZypperCommand::LIST_REPOS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    initRepoManager();
 
     //! \todo this conflicts with other 'lr' aliases
     //if (_gopts.is_rug_compatible)
@@ -2471,6 +2485,7 @@ void Zypper::doCommand()
         }
         else
         {
+          initRepoManager();
           add_repo_from_file(*this,_arguments[0], enabled, autorefresh, keep_pkgs);
           break;
         }
@@ -2496,6 +2511,8 @@ void Zypper::doCommand()
           this->_gopts.rm_options.probe = false;
 
         warn_if_zmd();
+
+        initRepoManager();
 
         // load gpg keys
         init_target(*this);
@@ -2547,6 +2564,8 @@ void Zypper::doCommand()
     }
 
     warn_if_zmd ();
+
+    initRepoManager();
 
     if (command() == ZypperCommand::REMOVE_REPO)
     {
@@ -2636,8 +2655,8 @@ void Zypper::doCommand()
       return;
     }
 
-//    init_target(*this);
     warn_if_zmd ();
+    initRepoManager();
     try {
       RepoInfo repo;
       if (match_repo(*this,_arguments[0], &repo))
@@ -2698,6 +2717,7 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
     if (non_alias)
     {
       modify_repos_by_option(*this);
@@ -2753,8 +2773,10 @@ void Zypper::doCommand()
       init_target(*this);
       this->_gopts.rm_options.servicesTargetDistro =
             God->target()->targetDistribution();
+      initRepoManager();
       refresh_services(*this);
     }
+    initRepoManager();
     refresh_repos(*this);
     break;
   }
@@ -2774,6 +2796,7 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
     clean_repos(*this);
     break;
   }
@@ -2823,6 +2846,8 @@ void Zypper::doCommand()
     }
 
     bool install_not_remove = command() == ZypperCommand::INSTALL;
+
+    initRepoManager();
 
     // check for rpm files among the arguments
     ArgList rpms_files_caps;
@@ -2959,6 +2984,8 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
+
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -2992,6 +3019,8 @@ void Zypper::doCommand()
     // switch on non-interactive mode if no-confirm specified
     if (copts.count("no-confirm"))
       _gopts.non_interactive = true;
+
+    initRepoManager();
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3063,6 +3092,8 @@ void Zypper::doCommand()
         query.addKind( kind );
       }
     }
+
+    initRepoManager();
 
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3184,13 +3215,13 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
+
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    // TODO additional_sources
-    // TODO warn_no_sources
     // TODO calc token?
 
     // now load resolvables:
@@ -3222,6 +3253,8 @@ void Zypper::doCommand()
   case ZypperCommand::PRODUCTS_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
+
+    initRepoManager();
 
     init_target(*this);
     init_repos(*this, _arguments);
@@ -3267,6 +3300,8 @@ void Zypper::doCommand()
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
+
+    initRepoManager();
 
     init_target(*this);
     init_repos(*this);
@@ -3330,6 +3365,7 @@ void Zypper::doCommand()
 	out().warning(
 	  _("Running as 'rug', can't do 'best-effort' approach to update."));
     }
+    initRepoManager();
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3404,6 +3440,7 @@ void Zypper::doCommand()
     }
 
     init_target(*this);
+    initRepoManager();
 
     // rug compatibility - treat arguments as repos
     if (_gopts.is_rug_compatible && !_arguments.empty())
@@ -3452,6 +3489,7 @@ void Zypper::doCommand()
     if (copts.count("auto-agree-with-licenses"))
       _cmdopts.license_auto_agree = true;
 
+    initRepoManager();
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3508,6 +3546,7 @@ void Zypper::doCommand()
       }
     }
 
+    initRepoManager();
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3604,6 +3643,7 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3628,6 +3668,7 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
+    initRepoManager();
     init_target(*this);
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
@@ -3718,6 +3759,7 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
     init_repos(*this);
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
@@ -3777,6 +3819,7 @@ void Zypper::doCommand()
     { TableRow tr; tr << "zypp" << "ZYPP" << "ZYpp installation repository"; t << tr; }
     { TableRow tr; tr << "mount" << "Mount" << "Mount a directory of RPMs"; t << tr; }
     { TableRow tr; tr << "plaindir" << "Plaindir" << "Mount a directory of RPMs"; t << tr; }
+    { TableRow tr; tr << "nu" << "NU" << "Novell Updates service"; t << tr; } // ris
 
     cout << t;
 

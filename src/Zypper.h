@@ -161,6 +161,8 @@ public:
   const std::string & commandHelp() const { return _command_help; }
   const ArgList & arguments() const { return _arguments; }
   RuntimeData & runtimeData() { return _rdata; }
+  zypp::RepoManager & repoManager()
+  { if (!_rm_set) _rm = zypp::RepoManager(_gopts.rm_options); return _rm; }
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
@@ -189,6 +191,9 @@ private:
   void setRunningShell(bool value = true) { _running_shell = value; }
   void setRunningHelp(bool value = true) { _running_help = value; }
 
+  void initRepoManager()
+  { _rm = zypp::RepoManager(_gopts.rm_options); _rm_set = true; }
+
 private:
 
   int     _argc;
@@ -208,6 +213,9 @@ private:
   bool  _exit_requested;
 
   RuntimeData _rdata;
+
+  zypp::RepoManager _rm;
+  bool              _rm_set;
 
   int _sh_argc;
   char **_sh_argv;

@@ -70,7 +70,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
 
   try
   {
-    RepoManager manager(zypper.globalOpts().rm_options);
+    RepoManager & manager = zypper.repoManager();
 
     if (!force_download)
     {
@@ -229,7 +229,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 
   try
   {
-    RepoManager manager(zypper.globalOpts().rm_options);
+    RepoManager & manager = zypper.repoManager();
     manager.buildCache(repo, force_build ?
       RepoManager::BuildForced : RepoManager::BuildIfNeeded);
   }
@@ -276,7 +276,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
 
 bool match_repo(Zypper & zypper, string str, RepoInfo *repo)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   list<RepoInfo> known;
   known.insert(known.end(), manager.repoBegin(), manager.repoEnd());
   bool found = false;
@@ -438,7 +438,7 @@ static void do_init_repos(Zypper & zypper, const Container & container)
 
   // load gpg keys
   init_target(zypper);
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   // get repositories specified with --repo or --catalog or in the container
 
@@ -796,7 +796,7 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 
 void list_repos(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData(); 
   list<RepoInfo> repos;
 
@@ -868,7 +868,7 @@ void refresh_repos(Zypper & zypper)
   MIL << "going to refresh repositories" << endl;
   // need gpg keys when downloading (#304672)
   init_target(zypper);
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   list<RepoInfo> repos;
   try
@@ -1038,7 +1038,7 @@ bool refresh_repo(Zypper & zypper, const zypp::RepoInfo & repo)
 
 void clean_repos(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   list<RepoInfo> repos;
   try
@@ -1217,7 +1217,7 @@ std::string timestamp ()
 
 void add_repo(Zypper & zypper, RepoInfo & repo)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData(); 
 
   bool is_cd = true;
@@ -1388,7 +1388,6 @@ void add_repo_from_file( Zypper & zypper,
     return;
   }
 
-  RepoManager manager(zypper.globalOpts().rm_options);
   list<RepoInfo> repos;
 
   // read the repo file
@@ -1475,7 +1474,7 @@ ostream& operator << (ostream& s, const vector<T>& v) {
 
 void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   manager.removeRepository(repoinfo);
   zypper.out().info(boost::str(
     format(_("Repository '%s' has been removed.")) % repoinfo.name()));
@@ -1488,7 +1487,7 @@ void remove_repo(Zypper & zypper, const RepoInfo & repoinfo)
 void rename_repo(Zypper & zypper,
                  const std::string & alias, const std::string & newalias)
 { 
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   try
   {
@@ -1531,7 +1530,7 @@ void rename_repo(Zypper & zypper,
 
 void modify_repos_by_option( Zypper & zypper )
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   list<RepoInfo> repos;
   repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   set<string> toModify;
@@ -1619,7 +1618,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 
   try
   {
-    RepoManager manager(zypper.globalOpts().rm_options);
+    RepoManager & manager = zypper.repoManager();
     RepoInfo repo(manager.getRepositoryInfo(alias));
     bool chnaged_enabled = false;
     bool changed_autoref = false;
@@ -1753,7 +1752,7 @@ void modify_repo(Zypper & zypper, const string & alias)
 
 static ServiceList get_all_services(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   ServiceList services;
 
   try
@@ -2079,7 +2078,7 @@ static void print_service_list(Zypper & zypper,
       flags |= SF_SERVICE_REPO;
 
       RepoCollector collector;
-      RepoManager rm(zypper.globalOpts().rm_options);
+      RepoManager & rm = zypper.repoManager();
 
       rm.getRepositoriesInService((*it)->alias(),
           make_function_output_iterator(
@@ -2143,7 +2142,7 @@ static void print_xml_service_list(Zypper & zypper,
     if (s_ptr)
     {
       RepoCollector collector;
-      RepoManager rm(zypper.globalOpts().rm_options);
+      RepoManager & rm = zypper.repoManager();
       rm.getRepositoriesInService((*it)->alias(),
           make_function_output_iterator(
               bind(&RepoCollector::collect, &collector, _1)));
@@ -2276,7 +2275,7 @@ void add_service_by_url( Zypper & zypper,
 
 void remove_service(Zypper & zypper, const ServiceInfo & service)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   zypper.out().info(boost::str(
     format(_("Removing service '%s':")) % service.name()));
@@ -2292,7 +2291,7 @@ static bool refresh_service(Zypper & zypper, const ServiceInfo & service)
 {
   MIL << "going to refresh service '" << service.alias() << "'" << endl;
 
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
 
   bool error = true;
   try
@@ -2390,7 +2389,7 @@ void refresh_services(Zypper & zypper)
         if (zypper.cOpts().count("with-repos") || !zypper.globalOpts().is_rug_compatible)
         {
           RepoCollector collector;
-          RepoManager rm(zypper.globalOpts().rm_options);
+          RepoManager & rm = zypper.repoManager();
           rm.getRepositoriesInService(s->alias(),
               make_function_output_iterator(
                   bind(&RepoCollector::collect, &collector, _1)));
@@ -2469,7 +2468,7 @@ void modify_service(Zypper & zypper, const string & alias)
 
   try
   {
-    RepoManager manager(zypper.globalOpts().rm_options);
+    RepoManager & manager = zypper.repoManager();
     ServiceInfo srv(manager.getService(alias));
     
     bool chnaged_enabled = false;
@@ -2648,7 +2647,6 @@ void modify_service(Zypper & zypper, const string & alias)
 
 void modify_services_by_option( Zypper & zypper )
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
   ServiceList known = get_all_services(zypper);
   set<string> repos_to_modify;
   set<string> services_to_modify;
@@ -2743,9 +2741,11 @@ void load_resolvables(Zypper & zypper)
 
 void load_repo_resolvables(Zypper & zypper)
 {
-  RepoManager manager(zypper.globalOpts().rm_options);
+  RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData(); 
 
+  zypper.out().info(_("Loading repository data..."));
+  
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
   {

@@ -891,7 +891,6 @@ bool resolve(Zypper & zypper)
 {
   dump_pool(); // debug
   set_solver_flags(zypper);
-  zypper.out().info(_("Resolving dependencies..."), Out::HIGH);
   DBG << "Calling the solver..." << endl;
   return God->resolver()->resolvePool();
 }
@@ -966,11 +965,15 @@ void solve_and_commit (Zypper & zypper)
         else if (zypper.command() == ZypperCommand::DIST_UPGRADE)
         {
           zypp::UpgradeStatistics dup_stats;
+          zypper.out().info(_("Computing distribution upgrade..."));
           success = dist_upgrade(zypper, dup_stats);
           //! \todo make use of the upgrade stats
         }
         else
+        {
+          zypper.out().info(_("Resolving package dependencies..."));
           success = resolve(zypper);
+        }
         if (success)
           break;
 
