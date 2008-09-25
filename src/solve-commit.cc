@@ -1051,6 +1051,7 @@ void solve_and_commit (Zypper & zypper)
         {
           try
           {
+            RuntimeData & gData = Zypper::instance()->runtimeData();
             gData.show_media_progress_hack = true;
 
             ostringstream s;

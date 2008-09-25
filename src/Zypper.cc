@@ -64,7 +64,6 @@ using namespace zypp;
 using namespace boost;
 
 ZYpp::Ptr God = NULL;
-RuntimeData gData;
 parsed_opts copts; // command options
 
 static void rug_list_resolvables(Zypper & zypper);
@@ -609,7 +608,7 @@ void Zypper::processGlobalOptions()
         repo.setAlias(boost::str(format("tmp%d") % count));
         repo.setName(url.asString());
 
-        gData.additional_repos.push_back(repo);
+        _rdata.additional_repos.push_back(repo);
         DBG << "got additional repo: " << url << endl;
         count++;
       }
@@ -717,13 +716,13 @@ void Zypper::shellCleanup()
   // ... and the exit code
   setExitCode(ZYPPER_EXIT_OK);
 
-  // gData
-  gData.current_repo = RepoInfo();
+  // runtime data
+  _rdata.current_repo = RepoInfo();
 
   // TODO:
-  // gData.repos re-read after repo operations or modify/remove these very repoinfos
-  // gData.repo_resolvables re-read only after certain repo operations (all?)
-  // gData.target_resolvables re-read only after installation/removal/update
+  // _rdata.repos re-read after repo operations or modify/remove these very repoinfos
+  // _rdata.repo_resolvables re-read only after certain repo operations (all?)
+  // _rdata.target_resolvables re-read only after installation/removal/update
   // call target commit refresh pool after installation/removal/update (#328855)
 }
 
@@ -2924,7 +2923,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    if ( gData.repos.empty() )
+    if ( _rdata.repos.empty() )
     {
       out().error(_("Warning: No repositories defined."
           " Operating only with the installed resolvables."
@@ -2998,7 +2997,7 @@ void Zypper::doCommand()
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
 
-    if ( gData.repos.empty() )
+    if ( _rdata.repos.empty() )
     {
       out().error(_("Warning: No repositories defined."
           " Operating only with the installed resolvables."
@@ -3073,7 +3072,7 @@ void Zypper::doCommand()
     if (cOpts().count("repo"))
     {
       std::list<zypp::RepoInfo>::const_iterator repo_it;
-      for (repo_it = gData.repos.begin();repo_it != gData.repos.end();++repo_it){
+      for (repo_it = _rdata.repos.begin();repo_it != _rdata.repos.end();++repo_it){
         query.addRepo( repo_it->alias());
       }
     }
@@ -3201,12 +3200,12 @@ void Zypper::doCommand()
 
     patch_check();
 
-    if (gData.security_patches_count > 0)
+    if (_rdata.security_patches_count > 0)
     {
       setExitCode(ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED);
       return;
     }
-    if (gData.patches_count > 0)
+    if (_rdata.patches_count > 0)
     {
       setExitCode(ZYPPER_EXIT_INF_UPDATE_NEEDED);
       return;
@@ -3802,12 +3801,12 @@ void Zypper::cleanup()
   MIL << "START" << endl;
 
   // remove the additional repositories specified by --plus-repo
-  for (list<RepoInfo>::const_iterator it = gData.additional_repos.begin();
-         it != gData.additional_repos.end(); ++it)
+  for (list<RepoInfo>::const_iterator it = _rdata.additional_repos.begin();
+         it != _rdata.additional_repos.end(); ++it)
     remove_repo(*this, *it);
 
   // remove tmprpm cache repo
-  for_(it, gData.repos.begin(), gData.repos.end())
+  for_(it, _rdata.repos.begin(), _rdata.repos.end())
     if (it->alias() == TMP_RPM_REPO_ALIAS)
     {
       // shut up zypper

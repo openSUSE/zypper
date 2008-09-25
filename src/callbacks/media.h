@@ -132,7 +132,7 @@ namespace ZmartRecipients
       if (out.verbosity() < Out::HIGH &&
            (
              // don't show download info unless show_media_progress_hack is used 
-             !gData.show_media_progress_hack ||
+             !Zypper::instance()->runtimeData().show_media_progress_hack ||
              // don't report download of the media file (bnc #330614)
              zypp::Pathname(uri.getPathName()).basename() == "media"
            )

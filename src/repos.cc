@@ -40,7 +40,6 @@ using namespace zypp::repo;
 using namespace zypp::media;
 
 extern ZYpp::Ptr God;
-extern RuntimeData gData;
 
 typedef list<RepoInfoBase_Ptr> ServiceList;
 
@@ -61,12 +60,13 @@ static bool refresh_raw_metadata(Zypper & zypper,
                                  const RepoInfo & repo,
                                  bool force_download)
 {
+  RuntimeData & gData = zypper.runtimeData(); 
   gData.current_repo = repo;
   bool do_refresh = false;
   string & plabel = zypper.runtimeData().raw_refresh_progress_label;
 
   // reset the gData.current_repo when going out of scope
-  struct Bye { ~Bye() { gData.current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
+  struct Bye { ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
   try
   {
@@ -434,6 +434,7 @@ template <class Container>
 static void do_init_repos(Zypper & zypper, const Container & container)
 {
   MIL << "Going to initialize repositories." << endl;
+  RuntimeData & gData = zypper.runtimeData();
 
   // load gpg keys
   init_target(zypper);
@@ -796,6 +797,7 @@ void print_repos_to(const std::list<zypp::RepoInfo> &repos, ostream & out)
 void list_repos(Zypper & zypper)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
+  RuntimeData & gData = zypper.runtimeData(); 
   list<RepoInfo> repos;
 
   try
@@ -1216,6 +1218,7 @@ std::string timestamp ()
 void add_repo(Zypper & zypper, RepoInfo & repo)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
+  RuntimeData & gData = zypper.runtimeData(); 
 
   bool is_cd = true;
   for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
@@ -1241,7 +1244,7 @@ void add_repo(Zypper & zypper, RepoInfo & repo)
     gData.current_repo = repo;
 
     // reset the gData.current_repo when going out of scope
-    struct Bye { ~Bye() { gData.current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
+    struct Bye { ~Bye() { Zypper::instance()->runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
     manager.addRepository(repo);
   }
@@ -2741,6 +2744,7 @@ void load_resolvables(Zypper & zypper)
 void load_repo_resolvables(Zypper & zypper)
 {
   RepoManager manager(zypper.globalOpts().rm_options);
+  RuntimeData & gData = zypper.runtimeData(); 
 
   for (std::list<RepoInfo>::iterator it = gData.repos.begin();
        it !=  gData.repos.end(); ++it)
@@ -2779,13 +2783,16 @@ void load_repo_resolvables(Zypper & zypper)
         continue;
       }
 
+      INT << "before loadFromCache" << endl;
       manager.loadFromCache(repo);
+      INT << "after loadFromCache" << endl;
 
       
 
       // check that the metadata is not outdated
       // feature #301904
       Repository robj = God->pool().reposFind(repo.alias());
+      INT << "before up-to-date check" << endl;
       if ( robj != Repository::noRepository &&
            robj.maybeOutdated() )
       {
@@ -2797,6 +2804,7 @@ void load_repo_resolvables(Zypper & zypper)
               % repo.name() << endl;
 
       }
+      INT << "after up-to-date check" << endl;
     }
     catch (const Exception & e)
     {

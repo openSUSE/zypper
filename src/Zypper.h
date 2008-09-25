@@ -217,7 +217,6 @@ void print_main_help(const Zypper & zypper);
 void print_unknown_command_hint(Zypper & zypper);
 void print_command_help_hint(Zypper & zypper);
 
-extern RuntimeData gData;
 
 class ExitRequestException : public zypp::Exception
 {

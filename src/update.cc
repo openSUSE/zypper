@@ -40,7 +40,7 @@ extern ZYpp::Ptr God;
 void patch_check ()
 {
   Out & out = Zypper::instance()->out();
-
+  RuntimeData & gData = Zypper::instance()->runtimeData();
   DBG << "patch check" << endl;
   gData.patches_count = gData.security_patches_count = 0;
 
