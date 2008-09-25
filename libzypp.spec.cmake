@@ -120,8 +120,9 @@ make -C doc/autodoc install DESTDIR=$RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/repos.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/products.d
 mkdir -p $RPM_BUILD_ROOT/etc/zypp/services.d
-mkdir -p $RPM_BUILD_ROOT/var/lib/zypp
-mkdir -p $RPM_BUILD_ROOT/var/cache/zypp
+mkdir -p $RPM_BUILD_ROOT/%{_var}/lib/zypp
+mkdir -p $RPM_BUILD_ROOT/%{_var}/log/zypp
+mkdir -p $RPM_BUILD_ROOT/%{_var}/cache/zypp
 
 %if 0%{?suse_version}
 %suse_update_desktop_file -G "" -C "" package-manager
@@ -207,11 +208,11 @@ rm -rf "$RPM_BUILD_ROOT"
 %defattr(-,root,root)
 %dir               /etc/zypp
 %dir               /etc/zypp/repos.d
-%dir               /etc/zypp/products.d
 %config(noreplace) /etc/zypp/zypp.conf
 %config(noreplace) /etc/zypp/systemCheck
-%dir               /var/lib/zypp
-%dir               /var/cache/zypp
+%dir               %{_var}/lib/zypp
+%dir               %{_var}/log/zypp
+%dir               %{_var}/cache/zypp
 %{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
@@ -225,20 +226,14 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/bin/package-manager-su
 %{_libdir}/libzypp*so.*
 %doc %_mandir/man5/locks.5.*
+%{_sysconfdir}/logrotate.d/zypp-history.lr
 
 %files devel
 %defattr(-,root,root)
 %{_libdir}/libzypp.so
-#%dir %{_libdir}/libzypp.la
 %{_docdir}/%{name}
-%dir %{prefix}/include/zypp
-%{prefix}/include/zypp/*
+%{prefix}/include/zypp
 %{prefix}/share/cmake/Modules/*
 %{_libdir}/pkgconfig/libzypp.pc
-%dir %{_var}/log/zypp
-# declare ownership of the log file but prevent
-# it from being erased by rpm -e
-%ghost %config(noreplace) %{_var}/log/zypp/history
-%{_sysconfdir}/logrotate.d/zypp-history.lr
 
 %changelog
