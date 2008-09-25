@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 25 23:19:55 CEST 2008 - jkupec@suse.cz
+
+- ZConfig::credentialsGlobal{File,Dir}() added
+  (/etc/zypp/credentials.{cat,d})
+- revision 11176
+
+-------------------------------------------------------------------
 Thu Sep 25 17:09:44 CEST 2008 - jkupec@suse.cz
 
 - Target::setInstallationLogfile() removed from zypp/Target.h
