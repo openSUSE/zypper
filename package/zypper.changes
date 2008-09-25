@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 25 16:17:15 CEST 2008 - jkupec@suse.cz
+
+- sort packages by name in the install summary (bnc #389128)
+- r11167
+- 0.12.6
+
+-------------------------------------------------------------------
 Thu Sep 25 15:56:46 CEST 2008 - jkupec@suse.cz
 
 - repository information added to GPG key dialogs (bnc #370223)
