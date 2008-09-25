@@ -94,9 +94,6 @@ namespace zypp
      **/
     std::string whoOwnsFile (const std::string & path_str) const;
 
-    /** Set the log file for target */
-    bool setInstallationLogfile(const Pathname & path_r);
-
     /** Return the root set for this target */
     Pathname root() const;
 
