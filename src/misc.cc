@@ -281,9 +281,9 @@ void report_licenses(Zypper & zypper)
   }
 
   cout << endl << _("SUMMARY") << endl << endl;
-  cout << _("Installed packages: ") << count_installed << endl;
-  cout << _("Installed packages with counterparts in repositories: ") << count_installed_repo << endl;
-  cout << _("Installed packages with EULAs: ") << count_installed_eula << endl;
+  cout << str::form(_("Installed packages: %d"), count_installed) << endl;
+  cout << str::form(_("Installed packages with counterparts in repositories: %d"), count_installed_repo) << endl;
+  cout << str::form(_("Installed packages with EULAs: %d"), count_installed_eula) << endl;
 
   cout << str::form("Package licenses (%u):", (unsigned int) unique_licenses.size()) << endl;
   for_(it, unique_licenses.begin(), unique_licenses.end())

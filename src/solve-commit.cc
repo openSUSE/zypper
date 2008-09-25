@@ -1019,6 +1019,10 @@ void solve_and_commit (Zypper & zypper)
         // translators: Yes / No / show Problems. This prompt will appear
         // after install/update command summary if there will be any package
         // to-be-removed automatically to show why, if asked.
+        // Translate to whathever is suitable for your language
+        // The anserws must be separated by slash characters '/' and must
+        // correspond to yes/no/showproblems in that order.
+        // The answers should be lower case letters.
         popts.setOptions(_("y/n/p"), 0);
         // translators: help text for 'y' option in the y/n/p prompt
         popts.setOptionHelp(0, _("Accept the summary and proceed with installation/removal of packages."));

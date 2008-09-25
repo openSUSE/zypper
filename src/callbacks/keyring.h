@@ -124,7 +124,7 @@ namespace zypp
         if (_gopts.no_gpg_checks)
           s << _("Automatically trusting the following key:") << std::endl;
         else
-          s << _("New repository or package signing key receieved:") << std::endl;
+          s << _("New repository or package signing key received:") << std::endl;
 
         // gpg key info
         s
@@ -146,19 +146,28 @@ namespace zypp
 
         // ask the user
         s << std::endl;
-        s << _("Do you want to trust key?");
+        s << _("Do you want to trust the key?");
 
         // only root has access to rpm db where keys are stored
         bool canimport = geteuid() == 0 || _gopts.changedRoot;
 
         PromptOptions popts;
         if (canimport)
+          // translators: n/t/i stands for doNttrust/TrustTemporarily/Import
+          // translate to whatever is appropriate for your language
+          // The anserws must be separated by slash characters '/' and must
+          // correspond to donttrust/trusttemporarily/import in that order.
+          // The answers should be lower case letters.
           popts.setOptions(_("n/t/i"), 0);
         else
+          // translators: the same as n/t/i, but without 'i'
           popts.setOptions(_("n/t"), 0);
+        // translators: help text for the 'n' option in the 'n/t/i' prompt
         popts.setOptionHelp(0, _("Don't trust the key."));
+        // translators: help text for the 't' option in the 'n/t/i' prompt
         popts.setOptionHelp(1, _("Trust the key temporarily."));
         if (canimport)
+          // translators: help text for the 'i' option in the 'n/t/i' prompt
           popts.setOptionHelp(2, _("Trust the key and import it into trusted keyring."));
 
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
@@ -197,7 +206,7 @@ namespace zypp
           else
             msg << boost::format(
                 _("Ignoring failed signature verification for file '%s'"
-                  " from repository '%s')!")) % file % context.repoInfo().name();
+                  " from repository '%s'!")) % file % context.repoInfo().name();
 
           msg
             << std::endl
