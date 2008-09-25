@@ -191,7 +191,15 @@ static bool show_problems(Zypper & zypper)
   return retry;
 }
 
-typedef map<Resolvable::Kind,set<ResObject::constPtr> > KindToResObjectSet;
+struct ResNameCompare
+{
+  bool operator()(ResObject::constPtr r1, ResObject::constPtr r2) const
+  {
+    return strcoll(r1->name().c_str(), r2->name().c_str()) < 0;
+  }
+};
+
+typedef map<Resolvable::Kind,set<ResObject::constPtr, ResNameCompare> > KindToResObjectSet;
 
 static void show_summary_resolvable_list(const string & label,
                                          KindToResObjectSet::const_iterator it,
@@ -550,7 +558,6 @@ static int summary(Zypper & zypper)
   MIL << "Pool contains " << God->pool().size() << " items." << std::endl;
   DBG << "Install summary:" << endl;
 
-
   KindToResObjectSet to_be_installed;
   KindToResObjectSet to_be_removed;
 
@@ -773,6 +780,8 @@ static int summary(Zypper & zypper)
         % abs.asString(0,1,1);
   }
   zypper.out().info(s.str());
+
+  MIL << "DONE" << endl;
 
   return retv;
 }
