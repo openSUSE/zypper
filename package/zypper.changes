@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 25 15:56:46 CEST 2008 - jkupec@suse.cz
+
+- repository information added to GPG key dialogs (bnc #370223)
+- r11165
+
+-------------------------------------------------------------------
 Thu Sep 25 14:11:16 CEST 2008 - jkupec@suse.cz
 
 - minimized RepoManager initializaiton, reduced logging drastically
