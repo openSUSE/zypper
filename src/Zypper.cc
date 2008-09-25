@@ -1523,7 +1523,6 @@ void Zypper::processCommandOptions()
     };
     specific_options = search_options;
     _command_help = _(
-      //! \todo add '-s' to --details after 11.0 is out
       "search (se) [options] [querystring] ...\n"
       "\n"
       "Search for packages matching given search strings.\n"

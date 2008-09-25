@@ -21,34 +21,56 @@
 #include "utils/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
-namespace zypp {
-/////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     // KeyRingReceive
     ///////////////////////////////////////////////////////////////////
+
     struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
     {
       KeyRingReceive() : _gopts(Zypper::instance()->globalOpts()) {}
+
+      ////////////////////////////////////////////////////////////////////
 
       virtual bool askUserToAcceptUnsignedFile(
           const std::string & file, const KeyContext & context)
       {
         if (_gopts.no_gpg_checks)
         {
-          MIL << "Accepting unsigned file (" << file << ")" << std::endl;
-          Zypper::instance()->out().warning(boost::str(
-            boost::format(_("Accepting an unsigned file %s.")) % file),
-            Out::HIGH);
+          MIL << "Accepting unsigned file (" << file << ", repo: "
+              << (context.empty() ? "(unknown)" : context.repoInfo().alias())
+              << ")" << std::endl;
+
+          if (context.empty())
+            Zypper::instance()->out().warning(boost::str(
+              boost::format(_("Accepting an unsigned file '%s'.")) % file),
+              Out::HIGH);
+          else
+            Zypper::instance()->out().warning(boost::str(
+              boost::format(_("Accepting an unsigned file '%s' from repository '%s'."))
+                % file % context.repoInfo().name()),
+              Out::HIGH);
+
           return true;
         }
 
-        std::string question = boost::str(boost::format(
+        std::string question;
+        if (context.empty())
+          question = boost::str(boost::format(
             // TranslatorExplanation: speaking of a file
-            _("%s is unsigned, continue?")) % file);
+            _("File '%s' is unsigned, continue?")) % file);
+        else
+          question = boost::str(boost::format(
+            // TranslatorExplanation: speaking of a file
+            _("File '%s' from repository '%s' is unsigned, continue?"))
+            % file % context.repoInfo().name());
+
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
 
+      ////////////////////////////////////////////////////////////////////
 
       virtual bool askUserToAcceptUnknownKey(
           const std::string & file,
@@ -57,19 +79,39 @@ namespace zypp {
       {
         if (_gopts.no_gpg_checks)
         {
-          MIL << "Accepting file signed with an unknown key (" << file << "," << id << ")" << std::endl;
-          Zypper::instance()->out().warning(boost::str(boost::format(
-              _("Accepting file %s signed with an unknown key %s."))
-              % file % id));
+          MIL
+            << "Accepting file signed with an unknown key ("
+            << file << "," << id << ", repo: "
+            << (context.empty() ? "(unknown)" : context.repoInfo().alias())
+            << ")" << std::endl;
+
+          if (context.empty())
+            Zypper::instance()->out().warning(boost::str(boost::format(
+                _("Accepting file '%s' signed with an unknown key %s."))
+                % file % id));
+          else
+            Zypper::instance()->out().warning(boost::str(boost::format(
+                _("Accepting file '%s' from repository '%s' signed with an unknown key %s."))
+                % file % context.repoInfo().name() % id));
+
           return true;
         }
 
-        std::string question = boost::str(boost::format(
-            // TranslatorExplanation: speaking of a file
-            _("%s is signed with an unknown key %s. Continue?")) % file % id);
+        std::string question;
+        if (context.empty())
+          question = boost::str(boost::format(
+            // translators: the last %s is gpg key ID
+            _("File '%s' is signed with an unknown key '%s'. Continue?")) % file % id);
+        else
+          question = boost::str(boost::format(
+            // translators: the last %s is gpg key ID
+            _("File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"))
+             % file % context.repoInfo().name() % id);
+
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
+      ////////////////////////////////////////////////////////////////////
 
       virtual KeyRingReport::KeyTrust askUserToAcceptKey(
           const PublicKey &key, const zypp::KeyContext & context)
@@ -94,7 +136,7 @@ namespace zypp {
           << str::form(_("Key ID: %s"), keyid.c_str()) << std::endl
           << str::form(_("Key Name: %s"), keyname.c_str()) << std::endl
           << str::form(_("Key Fingerprint: %s"), fingerprint.c_str()) << std::endl;
-        if (!context.repoInfo().alias().empty())
+        if (!context.empty())
           s << str::form(_("Repository: %s"), context.repoInfo().name().c_str())
             << std::endl;
         s << std::endl;
@@ -130,46 +172,67 @@ namespace zypp {
         return KeyRingReport::KEY_DONT_TRUST;
       }
 
+      ////////////////////////////////////////////////////////////////////
+
       virtual bool askUserToAcceptVerificationFailed(
           const std::string & file,
           const PublicKey & key,
           const zypp::KeyContext & context )
       {
-	const std::string& keyid = key.id(), keyname = key.name(),
-	  fingerprint = key.fingerprint();
-
         if (_gopts.no_gpg_checks)
         {
-          MIL << boost::format(
-              "Ignoring failed signature verification for %s"
-              " with public key id %s, %s, fingerprint %s")
-              % file % keyid % keyname % fingerprint << std::endl;
-          Zypper::instance()->out().warning(boost::str(boost::format(
-              _("Ignoring failed signature verification for %s"
-                " with public key id %s, %s, fingerprint %s!\n"
-                "Double-check this is not caused by some malicious"
-                " changes in the file!"))
-              %file % keyid % keyname % fingerprint),
-              Out::QUIET);
+          MIL << boost::format("Ignoring failed signature verification for %s")
+              % file << std::endl;
+
+          std::ostringstream msg;
+          if (context.empty())
+            msg << boost::format(
+                _("Ignoring failed signature verification for file '%s'!")) % file;
+          else
+            msg << boost::format(
+                _("Ignoring failed signature verification for file '%s'"
+                  " from repository '%s')!")) % file % context.repoInfo().name();
+
+          msg
+            << std::endl
+            << _("Double-check this is not caused by some malicious"
+                 " changes in the file!");
+
+          Zypper::instance()->out().warning(msg.str(), Out::QUIET);
           return true;
         }
 
-        std::string question = boost::str(boost::format(
-            _("Signature verification failed for %s"
-              " with public key id %s, %s, fingerprint %s.\n"
-              "Warning: This might be caused by a malicious change in the file!\n"
-              "Continuing is risky! Continue anyway?"))
-            % file % keyid % keyname % fingerprint);
-        return read_bool_answer(PROMPT_YN_GPG_CHECK_FAILED_IGNORE, question, false);
+        std::ostringstream question;
+        if (context.empty())
+          question << boost::format(
+            _("Signature verification failed for file '%s'.")) % file;
+        else
+          question << boost::format(
+            _("Signature verification failed for file '%s' from repository '%s'."))
+              % file % context.repoInfo().name();
+
+        question
+          << std::endl
+          << _("Warning: This might be caused by a malicious change in the file!\n"
+               "Continuing might be risky. Continue anyway?");
+
+        return read_bool_answer(
+            PROMPT_YN_GPG_CHECK_FAILED_IGNORE, question.str(), false);
       }
 
     private:
       const GlobalOptions & _gopts;
     };
 
+    ///////////////////////////////////////////////////////////////////
+    // DigestReceive
+    ///////////////////////////////////////////////////////////////////
+
     struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
     {
       DigestReceive() : _gopts(Zypper::instance()->globalOpts()) {}
+
+      ////////////////////////////////////////////////////////////////////
 
       virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
       {
@@ -178,6 +241,8 @@ namespace zypp {
         return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
+      ////////////////////////////////////////////////////////////////////
+
       virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
       {
         std::string question = boost::str(boost::format(
@@ -185,6 +250,8 @@ namespace zypp {
             _("Continue?");
         return read_bool_answer(PROMPT_GPG_UNKNOWN_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
+
+      ////////////////////////////////////////////////////////////////////
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
@@ -210,7 +277,7 @@ namespace zypp {
       const GlobalOptions & _gopts;
     };
 
-    ///////////////////////////////////////////////////////////////////
+   ///////////////////////////////////////////////////////////////////
 }; // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
