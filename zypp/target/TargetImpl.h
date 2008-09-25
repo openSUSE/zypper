@@ -147,9 +147,6 @@ namespace zypp
       /** \copydoc Target::targetDistributionRelease()*/
       std::string targetDistributionRelease() const;
 
-      /** \copydoc Target::targetDistributionFlavor() */
-      std::string targetDistributionFlavor() const;
-
     protected:
       /** Path to the target */
       Pathname _root;

@@ -103,9 +103,6 @@ namespace zypp
   std::string Target::targetDistributionRelease() const
   { return _pimpl->targetDistributionRelease(); }
 
-  std::string Target::targetDistributionFlavor() const
-  { return _pimpl->targetDistributionFlavor(); }
-
   std::string Target::anonymousUniqueId() const
   { return _pimpl->anonymousUniqueId(); }
 

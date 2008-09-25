@@ -911,9 +911,6 @@ namespace zypp
     std::string TargetImpl::targetDistributionRelease() const
     { return rpmdb2solvAttr( "register.release", _root ); }
 
-    std::string TargetImpl::targetDistributionFlavor() const
-    { return rpmdb2solvAttr( "register.flavor", _root ); }
-
     ///////////////////////////////////////////////////////////////////
 
     std::string TargetImpl::anonymousUniqueId() const

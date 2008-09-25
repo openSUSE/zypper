@@ -126,11 +126,6 @@ namespace zypp
      * Used for registration.
      */
     std::string targetDistributionRelease() const;
-
-    /** This is \c register.flavor attribute of the installed base product.
-     * Used for registration.
-     */
-    std::string targetDistributionFlavor() const;
     //@}
 
     /**
