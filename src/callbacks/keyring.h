@@ -49,18 +49,7 @@ namespace zypp {
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
 
-/*      virtual bool askUserToImportKey(
-          const PublicKey &key, const KeyContext & context)
-      {
-        //this is because only root have access to rpm db where is keys stored
-        if ( geteuid() != 0 && !_gopts.changedRoot)
-          return false;
 
-        std::string question = boost::str(boost::format(
-            _("Import key %s to trusted keyring?")) % key.id());
-        return read_bool_answer(PROMPT_YN_GPG_KEY_IMPORT_TRUSTED, question, false);
-      }
-*/
       virtual bool askUserToAcceptUnknownKey(
           const std::string & file,
           const std::string & id,
@@ -81,6 +70,7 @@ namespace zypp {
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
+
       virtual KeyRingReport::KeyTrust askUserToAcceptKey(
           const PublicKey &key, const zypp::KeyContext & context)
       {
@@ -99,24 +89,40 @@ namespace zypp {
           return KeyRingReport::KEY_TRUST_TEMPORARILY;
         }
 
-        std::string question = boost::str(boost::format(
-	    _("Do you want to trust key id %s, %s, fingerprint %s"))
-	    % keyid % keyname % fingerprint);
+        std::ostringstream s;
+        s << _("New repository or package signing key receieved.") << std::endl
+          << str::form(_("Key ID: %s"), keyid.c_str()) << std::endl
+          << str::form(_("Key Name: %s"), keyname.c_str()) << std::endl
+          << str::form(_("Key Fingerprint: %s"), fingerprint.c_str()) << std::endl;
+        if (!context.repoInfo().alias().empty())
+          s << str::form(_("Repository: %s"), context.repoInfo().name().c_str())
+            << std::endl;
+        s << std::endl;
+        s << _("Do you want to trust key?");
+
+        // only root has access to rpm db where keys are stored
+        bool canimport = geteuid() == 0 || _gopts.changedRoot;
 
         PromptOptions popts;
-        popts.setOptions(_("t/i/n"), 2);
-        popts.setOptionHelp(0, _("Trust the key temporarily, do not import it."));
-        popts.setOptionHelp(1, _("Trust the key and import it into RPM keyring."));
-        popts.setOptionHelp(2, _("Don't trust the key."));
+        if (canimport)
+          popts.setOptions(_("n/t/i"), 0);
+        else
+          popts.setOptions(_("n/t"), 0);
+        popts.setOptionHelp(0, _("Don't trust the key."));
+        popts.setOptionHelp(1, _("Trust the key temporarily."));
+        if (canimport)
+          popts.setOptionHelp(2, _("Trust the key and import it into trusted keyring."));
 
-        zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, question, popts);
+        zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
         unsigned prep =
           get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
         switch (prep)
         {
         case 0:
-          return KeyRingReport::KEY_TRUST_TEMPORARILY;
+          return KeyRingReport::KEY_DONT_TRUST;
         case 1:
+          return KeyRingReport::KEY_TRUST_TEMPORARILY;
+        case 2:
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
         default:
           return KeyRingReport::KEY_DONT_TRUST;
