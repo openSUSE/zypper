@@ -144,7 +144,7 @@ namespace zypp
         Capabilities provides( it->provides() );
         for_( cap, provides.begin(), provides.end() )
         {
-          std::string capstr( cap.asString() );
+          std::string capstr( cap->asString() );
           if ( str::hasPrefix( capstr, "flavor(" ) )
           {
             capstr = str::stripPrefix( capstr, "flavor(" );
