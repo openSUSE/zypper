@@ -128,7 +128,6 @@ namespace sat
       static const SolvAttr productDistversion;
       static const SolvAttr productType;
       static const SolvAttr productFlags;
-      static const SolvAttr productFlavor;
       static const SolvAttr productUpdaterepoKey;
       static const SolvAttr productRegisterTarget;
       static const SolvAttr productRegisterRelease;

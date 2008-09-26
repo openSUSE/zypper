@@ -103,19 +103,18 @@ namespace sat
   const SolvAttr SolvAttr::productDistversion    ( PRODUCT_DISTVERSION );
   const SolvAttr SolvAttr::productType           ( PRODUCT_TYPE );
   const SolvAttr SolvAttr::productFlags          ( PRODUCT_FLAGS );
-  const SolvAttr SolvAttr::productFlavor         ( PRODUCT_FLAVOR );
   const SolvAttr SolvAttr::productUpdaterepoKey  ( PRODUCT_UPDATEREPOKEY );
   const SolvAttr SolvAttr::productRegisterTarget ( PRODUCT_REGISTER_TARGET );
   const SolvAttr SolvAttr::productRegisterRelease( PRODUCT_REGISTER_RELEASE );
-  const SolvAttr SolvAttr::productUrl( PRODUCT_URL );
-  const SolvAttr SolvAttr::productUrlType( PRODUCT_URL_TYPE );
+  const SolvAttr SolvAttr::productUrl            ( PRODUCT_URL );
+  const SolvAttr SolvAttr::productUrlType        ( PRODUCT_URL_TYPE );
 
   // repository
   const SolvAttr SolvAttr::repositoryTimestamp ( REPOSITORY_TIMESTAMP );
-  const SolvAttr SolvAttr::repositoryExpire ( REPOSITORY_EXPIRE );
-  const SolvAttr SolvAttr::repositoryUpdates ( REPOSITORY_UPDATES );
-  const SolvAttr SolvAttr::repositoryProducts ( REPOSITORY_PRODUCTS );
-  const SolvAttr SolvAttr::repositoryKeywords ( REPOSITORY_KEYWORDS );
+  const SolvAttr SolvAttr::repositoryExpire    ( REPOSITORY_EXPIRE );
+  const SolvAttr SolvAttr::repositoryUpdates   ( REPOSITORY_UPDATES );
+  const SolvAttr SolvAttr::repositoryProducts  ( REPOSITORY_PRODUCTS );
+  const SolvAttr SolvAttr::repositoryKeywords  ( REPOSITORY_KEYWORDS );
 
 } // namespace sat
   /////////////////////////////////////////////////////////////////

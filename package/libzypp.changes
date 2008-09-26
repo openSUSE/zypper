@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep 26 15:37:50 CEST 2008 - ma@suse.de
+
+- Fix computation of Product::flavor.
+- Add Product::productLine. A vendor specific string denoting the 
+  product line.
+- revision 11182
+- version 5.13.0 (13)
+
+-------------------------------------------------------------------
 Thu Sep 25 23:19:55 CEST 2008 - jkupec@suse.cz
 
 - ZConfig::credentialsGlobal{File,Dir}() added

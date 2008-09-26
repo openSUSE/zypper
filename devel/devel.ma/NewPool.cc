@@ -443,6 +443,23 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
+  {
+  Capability cap("flavor(dvd9)");
+  DBG << cap.detail().isSimple() << endl;
+  DBG << cap.detail().isNamed() << endl;
+  DBG << cap.detail().name() << endl;
+  std::string capstr = str::stripPrefix( cap.asString(), "flavor(" );
+  DBG << capstr << endl;
+  capstr.erase(capstr.size()-1);
+  DBG << capstr << endl;
+  }
+
+
+  ///////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
 #if 0
 
   RepoManager repoManager( makeRepoManager( sysRoot ) );
@@ -504,7 +521,6 @@ try {
       getZYpp()->target()->load();
       USR << getZYpp()->target()->targetDistribution() << endl;
       USR << getZYpp()->target()->targetDistributionRelease() << endl;
-      USR << getZYpp()->target()->targetDistributionFlavor() << endl;
     }
   }
 
@@ -616,10 +632,10 @@ try {
 
   PoolItem pi ( getPi<Package>("amarok") );
   MIL << pi << endl;
-  MIL << pi->as<Package>() << endl;
-  MIL << pi->as<Product>() << endl;
+  MIL << pi->asKind<Package>() << endl;
+  MIL << pi->asKind<Product>() << endl;
   if ( pi->isKind<Package>() )
-    SEC << pi->as<Package>() << endl;
+    SEC << pi->asKind<Package>() << endl;
 
  //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

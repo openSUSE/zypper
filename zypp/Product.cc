@@ -114,8 +114,13 @@ namespace zypp
       if ( (*it).buddy().isKind( ResKind::product ) )
         ret.push_back( make<Product>( (*it).buddy() ) );
     }
-
     return ret;
+  }
+
+  std::string Product::productLine() const
+  {
+#warning productLine needs to be implemented.
+    return std::string();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -124,7 +129,33 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::productShortlabel ); }
 
   std::string Product::flavor() const
-  { return lookupStrAttribute( sat::SolvAttr::productFlavor ); }
+  {
+    // Look for a  provider of 'product_flavor(name) = version'
+    // within the same repo. Unlike the reference package, we
+    // can be relaxed and ignore the architecture.
+    Capability identCap( str::form( "product_flavor(%s) = %s", name().c_str(), edition().c_str() ) );
+
+    sat::WhatProvides providers( identCap );
+    for_( it, providers.begin(), providers.end() )
+    {
+      if ( it->repository() == repository() )
+      {
+        // Got the package now try to get the provided 'flavor(...)'
+        Capabilities provides( it->provides() );
+        for_( cap, provides.begin(), provides.end() )
+        {
+          std::string capstr( cap.asString() );
+          if ( str::hasPrefix( capstr, "flavor(" ) )
+          {
+            capstr = str::stripPrefix( capstr, "flavor(" );
+            capstr.erase( capstr.size()-1 ); // trailing ')'
+            return capstr;
+          }
+        }
+      }
+    }
+    return std::string();
+  }
 
   std::string Product::type() const
   { return lookupStrAttribute( sat::SolvAttr::productType ); }
@@ -162,7 +193,6 @@ namespace zypp
         /* safety checks, shouldn't happen (tm) */
         if (url_type_it == url_type.end())
         {
-            /* FIXME: Raise exception ?! */
             ERR << *this << " : The thing that should not happen, happened." << endl;
             break;
         }

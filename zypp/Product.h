@@ -52,6 +52,9 @@ namespace zypp
      */
     ReplacedProducts replacedProducts() const;
 
+    /** Vendor specific string denoting the product line. */
+    std::string productLine() const;
+
   public:
     /** Untranslated short name like <tt>SLES 10</tt>*/
     std::string shortName() const;
