@@ -213,7 +213,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
-%{prefix}/lib/zypp
 %{prefix}/share/zypp
 %{prefix}/share/applications/package-manager.desktop
 %{prefix}/share/icons/hicolor/scalable/apps/package-manager-icon.svg
