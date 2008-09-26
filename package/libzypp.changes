@@ -8,6 +8,12 @@ Fri Sep 26 15:37:50 CEST 2008 - ma@suse.de
 - version 5.13.0 (13)
 
 -------------------------------------------------------------------
+Fri Sep 26 15:25:33 CEST 2008 - jkupec@suse.cz
+
+- save user credentials after asking for them
+- revision 11181
+
+-------------------------------------------------------------------
 Thu Sep 25 23:19:55 CEST 2008 - jkupec@suse.cz
 
 - ZConfig::credentialsGlobal{File,Dir}() added

@@ -1605,10 +1605,10 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
 
     // preset the username if present in current url
     if (!_url.getUsername().empty() && firstTry)
-      curlcred->setUserName(_url.getUsername());
+      curlcred->setUsername(_url.getUsername());
 
     string prompt_msg;
-    if (!firstTry || !_url.getUsername().empty())
+    if (!firstTry)
       prompt_msg = _("Invalid user name or password.");
     else // first prompt
       prompt_msg = boost::str(boost::format(
@@ -1625,7 +1625,18 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
           << "CurlAuthData: " << *curlcred << endl;
 
       if (curlcred->valid())
+      {
         credentials = curlcred;
+          // if (credentials->username() != _url.getUsername())
+          //   _url.setUsername(credentials->username());
+          /**
+           *  \todo find a way to save the url with changed username
+           *  back to repoinfo or dont store urls with username
+           *  (and either forbid more repos with the same url and different
+           *  user, or return a set of credentials from CM and try them one
+           *  by one) 
+           */
+      }
     }
     else
     {

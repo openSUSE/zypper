@@ -111,6 +111,17 @@ namespace zypp
 
     /**
      * Add new credentials with user callbacks.
+     * 
+     * If the cred->url() contains 'credentials' query parameter, the
+     * credentials will be automatically saved to the specified file using the
+     * \ref saveInFile() method.
+     *
+     * Otherwise a callback will be called asking whether to save to custom
+     * file, or to global or user's credentials catalog. 
+     *
+     * \todo Currently no callback is called, credentials are automatically
+     *       saved to user's credentials.cat if no 'credentials' parameter
+     *       has been specified
      */
     void addCred(const AuthData & cred);
 

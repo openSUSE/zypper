@@ -14,6 +14,8 @@
 
 #include <curl/curl.h>
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/Url.h"
 #include "zypp/base/PtrTypes.h"
 
@@ -49,7 +51,9 @@ public:
   virtual bool valid() const;
 
   void setUrl(const Url & url) { _url = url; }
-  void setUserName(const std::string & username) { _username = username; }
+  void setUsername(const std::string & username) { _username = username; }
+  /** \deprecated use setUsername() instead */
+  ZYPP_DEPRECATED void setUserName(const std::string & username) { _username = username; }
   void setPassword(const std::string & password) { _password = password; }  
 
   Url url() const { return _url; }
