@@ -1653,6 +1653,13 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
       if ( ret != 0 ) ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
+    if (!cmcred)
+    {
+      credentials->setUrl(_url);
+      cm.addCred(*credentials);
+      cm.save();
+    }
+
     return true;
   }
 

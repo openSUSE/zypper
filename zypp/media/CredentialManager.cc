@@ -286,8 +286,12 @@ namespace zypp
 
   void CredentialManager::addCred(const AuthData & cred)
   {
-#warning addCred(const AuthData & cred) not implemented
-    // add with user callbacks
+    Pathname credfile = cred.url().getQueryParam("credentials");
+    if (credfile.empty())
+      //! \todo ask user where to store these creds. saving to user creds for now
+      addUserCred(cred);
+    else
+      saveInFile(cred, credfile);
   }
 
 
@@ -338,6 +342,7 @@ namespace zypp
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
+    c_ptr->setUrl(Url()); // don't save url in custom creds file
     CredentialManager::CredentialSet creds;
     creds.insert(c_ptr);
 
