@@ -299,8 +299,15 @@ namespace zypp
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    if (_pimpl->_credsGlobal.insert(c_ptr).second)
+    pair<CredentialIterator, bool> ret = _pimpl->_credsGlobal.insert(c_ptr);
+    if (ret.second)
       _pimpl->_globalDirty = true;
+    else if ((*ret.first)->password() != cred.password())
+    {
+      _pimpl->_credsGlobal.erase(ret.first);
+      _pimpl->_credsGlobal.insert(c_ptr);
+      _pimpl->_globalDirty = true;
+    }
   }
 
 
@@ -308,8 +315,15 @@ namespace zypp
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    if (_pimpl->_credsUser.insert(c_ptr).second)
+    pair<CredentialIterator, bool> ret = _pimpl->_credsUser.insert(c_ptr);
+    if (ret.second)
       _pimpl->_userDirty = true;
+    else if ((*ret.first)->password() != cred.password())
+    {
+      _pimpl->_credsUser.erase(ret.first);
+      _pimpl->_credsUser.insert(c_ptr);
+      _pimpl->_userDirty = true;
+    }
   }
 
 

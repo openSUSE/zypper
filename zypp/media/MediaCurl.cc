@@ -1591,7 +1591,7 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
   // get stored credentials
   AuthData_Ptr cmcred = cm.getCred(_url);
 
-  if (cmcred)
+  if (cmcred && firstTry)
   {
     credentials.reset(new CurlAuthData(*cmcred));
     DBG << "got stored credentials:" << endl << *credentials << endl;
@@ -1599,6 +1599,9 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
   // if not found, ask user
   else
   {
+    // reset credentials from CM (they're wrong, obviously)
+    cmcred.reset();
+
     CurlAuthData_Ptr curlcred;
     curlcred.reset(new CurlAuthData());
     callback::SendReport<AuthenticationReport> auth_report;
@@ -1607,12 +1610,9 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
     if (!_url.getUsername().empty() && firstTry)
       curlcred->setUsername(_url.getUsername());
 
-    string prompt_msg;
-    if (!firstTry)
-      prompt_msg = _("Invalid user name or password.");
-    else // first prompt
-      prompt_msg = boost::str(boost::format(
-        _("Authentication required for '%s'")) % _url.asString());
+    string prompt_msg = boost::str(boost::format(
+      //!\todo add comma to the message for the next release
+      _("Authentication required for '%s'")) % _url.asString()); 
 
     // set available authentication types from the exception
     // might be needed in prompt

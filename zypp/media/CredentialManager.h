@@ -51,8 +51,6 @@ namespace zypp
     {
       if (lhs->username() < rhs->username())
         return true;
-      if (lhs->password() < rhs->password())
-        return true;
       if (lhs->url() != rhs->url())
         return true;
       return false;
