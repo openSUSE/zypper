@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sat Sep 27 23:36:19 CEST 2008 - jkupec@suse.cz
+
+- fixed endless loop when CredentialManager returns bad password
+- CredentialManager now correctly updates password of existing
+  credentials
+- revision 11187
+
+-------------------------------------------------------------------
 Fri Sep 26 15:37:50 CEST 2008 - ma@suse.de
 
 - Fix computation of Product::flavor.
