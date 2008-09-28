@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sun Sep 28 22:07:18 CEST 2008 - jkupec@suse.cz
+
+- 'update' and 'list-updates' now defaults to '-t package'
+  patch/list-patches commands added to install/list patches
+  (bnc #395480)
+- r11191
+
+-------------------------------------------------------------------
 Thu Sep 25 16:17:15 CEST 2008 - jkupec@suse.cz
 
 - sort packages by name in the install summary (bnc #389128)

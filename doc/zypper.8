@@ -1,7 +1,7 @@
-.TH "zypper" "8" "0.12.6" "zypper" "System Tools"
+.TH "zypper" "8" "0.12.7" "zypper" "System Tools"
 .SH "SYNTAX"
 .LP
-zypper [\fI\-\-global\-options\fR] <\fBcommand\fR> [\fI\-\-command\-options\fR] [\fBcommand-arguments\fR]
+zypper [\fI\-\-global\-opts\fR] <\fBcommand\fR> [\fI\-\-command\-opts\fR] [\fBcommand-arguments\fR]
 
 zypper \fBhelp\fR [\fBcommand\fR]
 .SH "DESCRIPTION"
@@ -285,21 +285,6 @@ Test the installation, do not actually install anything.
 Create solver test case for debugging. See the install command for details.
 
 .TP
-.B list-updates (lu) [options]
-List available updates.
-.TP
-\fI\-t, --type\fR <type>
-Type of package (default: patch). See the beginning of this subsection for the list
-of available package types.
-.TP
-\fI\-r, \-\-repo\fR <alias|#|URI>
-List only updates from the repository specified by the alias, number or URI.
-This option can be used multiple times.
-
-See also the NOTE at
-.BR update .
-
-.TP
 .B remove (rm) [options] <name> ...
 .TP
 .B remove (rm) [options] --capability <capability> ...
@@ -341,6 +326,22 @@ non-interactive mode. If this option is specified, it takes the preference.
 Test the removal of packages, do not actually remove anything. This option will
 add the \-\-test option to the rpm commands run by the remove command.
 
+
+.SS Update Management Commands
+
+
+.TP
+.B list-updates (lu) [options]
+List available updates.
+.TP
+\fI\-t, --type\fR <type>
+Type of package (default: package). See Package Managemet Commands subsection
+for the list of available package types.
+.TP
+\fI\-r, \-\-repo\fR <alias|#|URI>
+List only updates from the repository specified by the alias, number or URI.
+This option can be used multiple times.
+
 .TP
 .B update (up) [options] [packagename] ...
 Update installed packages with patches or newer version, where applicable.
@@ -349,16 +350,10 @@ To update individual packages, specify one or more package names. You can
 use the '*' and '?' wildcard characters in the package names to specify
 multiple packages matching the pattern.
 
-.B NOTE:
-Zypper prefers to update only those packages for which a patch
-description exists, like on the SUSE update servers. To operate on all
-packages for which there is a better version instead, select \fI--type
-package\fR which is also the default in rug compatibility mode.
-
 .TP
 \fI\-t, -\-type\fR <type>
-Type of package (default: patch). See the beginning of this subsection for the list
-of available package types.
+Type of package (default: package). See Package Management Commands subsection
+for the list of available package types.
 .TP
 \fI\-r, \-\-repo\fR <alias|#|URI>
 Limit updates to repository specified by alias, number or URI.
@@ -390,6 +385,36 @@ Test the update, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the update command.
 
 .TP
+.B list-patches (lp) [options]
+List all available needed patches.
+
+.TP
+.I \-r, --repo <alias|#|URI>
+List only patches from the specified repository.
+
+
+.TP
+.B patch [options]
+Install all available needed patches.
+
+.TP
+.I \-r, \-\-repo <alias|#|URI>
+Work only with specified repository.
+.TP
+.I \-\-skip\-interactive
+Skip interactive patches.
+.TP
+.I \-l, \-\-auto\-agree\-with\-licenses
+See the \fBupdate\fR command for description of this option.
+.TP
+.I \-\-debug\-solver
+Create test case for debugging of dependency resolver.
+.TP
+.I \-D, \-\-dry\-run
+Test the update, do not actually update.
+
+
+.TP
 .B dist-upgrade (dup) [options]
 Perform a distribution upgrade. This command performs an update of all packages
 with a special resolver algorithm which takes care of package splits, pattern
@@ -409,6 +434,10 @@ Create solver test case for debugging. See the install command for details.
 .I \-D, \-\-dry\-run
 Test the upgrade, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the dist-upgrade command.
+
+
+.SS Query Commands
+
 
 .TP
 \fBsearch\fR (\fBse\fR) [\fIoptions\fR] [\fBquerystring\fR] ...
