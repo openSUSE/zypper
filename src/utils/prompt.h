@@ -31,6 +31,7 @@ public:
   void setOptions(const std::string & option_str, unsigned int default_opt);
   unsigned int defaultOpt() const { return _default; }
   const std::string optionString() const;
+  bool empty() const { return _options.empty(); }
 
   const std::string optionHelp(unsigned int opt) const
   { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; } 
@@ -76,6 +77,19 @@ class Zypper;
 unsigned int get_prompt_reply(Zypper & zypper,
                               PromptId pid,
                               const PromptOptions & poptions);
+
+/**
+ * Get text from user using readline without history.
+ * \param prompt prompt text or empty string
+ * \param prefilled prefilled text
+ */
+std::string get_text(const std::string & prompt, const std::string & prefilled = "");
+
+/**
+ * Get text from user without showing the typed text on the terminal.
+ * Uses getchar(), not suitable for machines.
+ */
+std::string get_password();
 
 /*
 enum Error {

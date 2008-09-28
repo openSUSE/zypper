@@ -237,7 +237,10 @@ void OutNormal::prompt(PromptId id,
     cout << CLEARLN;
   else
     cout << startdesc << endl;
-  cout << prompt << " [" << poptions.optionString() << "]: " << std::flush;
+  cout << prompt;
+  if (!poptions.empty())
+    cout << " [" << poptions.optionString() << "]";
+  cout << ": " << std::flush;
 }
 
 void OutNormal::promptHelp(const PromptOptions & poptions)

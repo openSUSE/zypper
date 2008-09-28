@@ -2,6 +2,10 @@
 #include <iostream>
 #include <sstream>
 #include <poll.h>
+#include <readline/readline.h>
+//#include <unistd.h>
+#include <termios.h>
+
 
 #include <boost/format.hpp>
 
@@ -264,4 +268,92 @@ unsigned int get_prompt_reply(Zypper & zypper,
     MIL << "reply: " << reply << " (" << reply_int << ")" << endl;
 
   return reply_int;
+}
+
+// ---------------------------------------------------------------------------
+
+static const char * prefill = NULL;
+
+static int init_line(void)
+{
+  if (prefill)
+  {
+    rl_replace_line(prefill, 1);
+    rl_end_of_line(1,0);
+    rl_redisplay();
+  }
+  return 1;
+}
+
+string get_text(const string & prompt, const string & prefilled)
+{
+  // A static variable for holding the line.
+  static char * line_read = NULL;
+  
+  prefill = prefilled.c_str();
+
+  /* If the buffer has already been allocated,
+     return the memory to the free pool. */
+  if (line_read)
+  {
+    free (line_read);
+    line_read = NULL;
+  }
+
+  rl_pre_input_hook = init_line;
+
+  /* Get a line from the user. */
+  line_read = ::readline (prompt.c_str());
+
+  if (line_read)
+    return line_read;
+  return string();
+}
+
+static int silent_getch ( void ) 
+{
+  int ch;
+  struct termios oldt, newt;
+
+  tcgetattr ( STDIN_FILENO, &oldt );
+  newt = oldt;
+  newt.c_lflag &= ~( ICANON | ECHO );
+  tcsetattr ( STDIN_FILENO, TCSANOW, &newt );
+  ch = getchar();
+  tcsetattr ( STDIN_FILENO, TCSANOW, &oldt );
+
+  return ch;
+}
+
+/** FIXME is there really not some nice standard library call for this???
+ * is it possible to get this from readline? */
+/** \todo restore old terminal settings on interrupt */
+string get_password()
+{
+  int ch;
+  char pw[20];
+  unsigned i = 0;
+
+  while ((ch = silent_getch()) != EOF 
+          && ch != '\n'
+          && ch != '\r'
+          && i < sizeof(pw) - 1)
+  {
+    if (i && (ch == '\b'  || ch == 127 /* DEL */))
+    {
+//      printf("\b \b"); // does not work for me :O(
+//      fflush(stdout);
+      pw[--i] = '\0';
+    }
+    else if (isalnum(ch))
+    {
+//      putchar('*');
+      pw[i++] = (char)ch;
+    }
+  }
+
+  pw[i] = '\0';
+  cout << endl;
+
+  return pw;
 }

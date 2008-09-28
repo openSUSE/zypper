@@ -217,20 +217,36 @@ namespace ZmartRecipients
         dynamic_cast<zypp::media::CurlAuthData*> (&auth_data);
       if (auth_data_ptr)
       {
-//! \todo move this to prompt help once it's done
-//        cout_vv << "available auth types: "
-//          << auth_data_ptr->authTypeAsString() << std::endl;
-
-        Zypper::instance()->out().prompt(
-            PROMPT_AUTH_USERNAME, description, PromptOptions(_("User Name"), 0));
+        
+        // user name
+        
         std::string username;
-        std::cin >> username;
-        auth_data_ptr->setUserName(username);
+        // expect the input from machine on stdin
+        if (Zypper::instance()->globalOpts().machine_readable)
+        {
+          Zypper::instance()->out().prompt(
+              PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description);
+          std::cin >> username;
+        }
+        // input from human using readline
+        else
+        {
+          std::cout << description << std::endl;
+          username = get_text(_("User Name") + std::string(": "), auth_data.username());
+        }
+        auth_data_ptr->setUsername(username);
 
+        // password
+        
         Zypper::instance()->out().prompt(
-            PROMPT_AUTH_PASSWORD, description, PromptOptions(_("Password"), 0));
+            PROMPT_AUTH_PASSWORD, _("Password"), PromptOptions());
+
         std::string password;
-        std::cin >> password;
+        // expect the input from machine on stdin
+        if (Zypper::instance()->globalOpts().machine_readable)
+          std::cin >> password;
+        else
+          password = get_password();
         if (password.empty()) return false;
         auth_data_ptr->setPassword(password);
 
