@@ -1599,8 +1599,6 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
   // if not found, ask user
   else
   {
-    // reset credentials from CM (they're wrong, obviously)
-    cmcred.reset();
 
     CurlAuthData_Ptr curlcred;
     curlcred.reset(new CurlAuthData());
@@ -1609,6 +1607,12 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
     // preset the username if present in current url
     if (!_url.getUsername().empty() && firstTry)
       curlcred->setUsername(_url.getUsername());
+    // if CM has found some credentials, preset the username from there
+    else if (cmcred)
+      curlcred->setUsername(cmcred->username());
+
+    // indicate we have no good credentials from CM
+    cmcred.reset();
 
     string prompt_msg = boost::str(boost::format(
       //!\todo add comma to the message for the next release
