@@ -852,16 +852,16 @@ void Zypper::processCommandOptions()
       //  and the second %s = "package"
       "install (in) [options] <capability|rpm_file_uri> ...\n"
       "\n"
-      "Install resolvables with specified capabilities or RPM files with"
+      "Install packages with specified capabilities or RPM files with"
       " specified location. A capability is"
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Install resolvables only from the specified repository.\n"
-      "-t, --type <type>               Type of resolvable (%s).\n"
+      "-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
+      "-t, --type <type>               Type of package (%s).\n"
       "                                Default: %s.\n"
-      "-n, --name                      Select resolvables by plain name, not by capability.\n"
-      "-C, --capability                Select resolvables by capability.\n"
+      "-n, --name                      Select packages by plain name, not by capability.\n"
+      "-C, --capability                Select packages by capability.\n"
       "-f, --force                     Install even if the item is already installed (reinstall).\n"
       "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
       "                                See 'man zypper' for more details.\n"
@@ -901,15 +901,15 @@ void Zypper::processCommandOptions()
       //  and the second %s = "package"
       "remove (rm) [options] <capability> ...\n"
       "\n"
-      "Remove resolvables with specified capabilities. A capability is"
+      "Remove packages with specified capabilities. A capability is"
       " NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
       "\n"
       "  Command options:\n"
-      "-r, --repo <alias|#|URI>        Operate only with resolvables from the specified repository.\n"
+      "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
       "-t, --type <type>               Type of resolvable (%s).\n"
       "                                Default: %s.\n"
-      "-n, --name                      Select resolvables by plain name, not by capability.\n"
-      "-C, --capability                Select resolvables by capability.\n"
+      "-n, --name                      Select packages by plain name, not by capability.\n"
+      "-C, --capability                Select packages by capability.\n"
       "    --debug-solver              Create solver test case for debugging.\n"
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
@@ -1406,7 +1406,7 @@ void Zypper::processCommandOptions()
       "List all available updates.\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>               Type of resolvable (%s).\n"
+      "-t, --type <type>               Type of package (%s).\n"
       "                                Default: %s.\n"
       "-r, --repo <alias|#|URI>        List only updates from the specified repository.\n"
       "    --best-effort               Do a 'best effort' approach to update. Updates\n"
@@ -1455,7 +1455,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "\n"
-      "-t, --type <type>               Type of resolvable (%s).\n"
+      "-t, --type <type>               Type of package (%s).\n"
       "                                Default: %s.\n"
       "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
       "    --skip-interactive          Skip interactive updates.\n"
@@ -1752,7 +1752,7 @@ void Zypper::processCommandOptions()
         "\n"
         "  Command options:\n"
         "-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
-        "-t, --type <type>         Type of resolvable (%s).\n"
+        "-t, --type <type>         Type of package (%s).\n"
         "                          Default: %s."
       ), "package, patch, pattern, product", "package");
 
@@ -1904,7 +1904,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
-      "-t, --type <type>         Type of resolvable (%s).\n"
+      "-t, --type <type>         Type of package (%s).\n"
       "                          Default: %s.\n"
     ), "package, patch, pattern, product", "package");
 
@@ -2897,7 +2897,7 @@ void Zypper::doCommand()
     string skind = copts.count("type")?  copts["type"].front() : "package";
     kind = string_to_kind (skind);
     if (kind == ResObject::Kind ()) {
-      out().error(boost::str(format(_("Unknown resolvable type: %s")) % skind));
+      out().error(boost::str(format(_("Unknown package type: %s")) % skind));
       setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
@@ -3142,7 +3142,7 @@ void Zypper::doCommand()
         if (kind == ResObject::Kind())
         {
           out().error(boost::str(format(
-            _("Unknown resolvable type '%s'.")) % *it));
+            _("Unknown package type '%s'.")) % *it));
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -3402,7 +3402,7 @@ void Zypper::doCommand()
         if (kind == ResObject::Kind())
         {
           out().error(boost::str(format(
-            _("Unknown resolvable type '%s'.")) % *it));
+            _("Unknown package type '%s'.")) % *it));
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -3486,7 +3486,7 @@ void Zypper::doCommand()
         if (kind == ResObject::Kind())
         {
           out().error(boost::str(format(
-            _("Unknown resolvable type '%s'.")) % *it));
+            _("Unknown package type '%s'.")) % *it));
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
@@ -3609,7 +3609,7 @@ void Zypper::doCommand()
       kind = string_to_kind (skind);
       if (kind == ResObject::Kind ()) {
         out().error(boost::str(format(
-          _("Unknown resolvable type '%s'.")) % skind));
+          _("Unknown package type '%s'.")) % skind));
         setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
         return;
       }
@@ -3677,7 +3677,7 @@ void Zypper::doCommand()
         if (kind == ResObject::Kind())
         {
           out().error(boost::str(format(
-            _("Unknown resolvable type '%s'.")) % *it));
+            _("Unknown package type '%s'.")) % *it));
           setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
           return;
         }
