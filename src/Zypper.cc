@@ -154,29 +154,32 @@ void print_main_help(Zypper & zypper)
   static string help_global_options = _("  Global Options:\n"
     "\t--help, -h\t\tHelp.\n"
     "\t--version, -V\t\tOutput the version number.\n"
-    "\t--quiet, -q\t\tSuppress normal output, print only error messages.\n"
+    "\t--quiet, -q\t\tSuppress normal output, print only error\n"
+    "\t\t\t\tmessages.\n"
     "\t--verbose, -v\t\tIncrease verbosity.\n"
     "\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
     "\t--table-style, -s\tTable style (integer).\n"
     "\t--rug-compatible, -r\tTurn on rug compatibility.\n"
-    "\t--non-interactive, -n\tDo not ask anything, use default answers automatically.\n"
+    "\t--non-interactive, -n\tDo not ask anything, use default answers\n"
+    "\t\t\t\tautomatically.\n"
     "\t--xmlout, -x\t\tSwitch to XML output.\n"
-    "\t--reposd-dir, -D <dir>\tUse alternative repository definition files directory.\n"
-    "\t--cache-dir, -C <dir>\tUse alternative meta-data cache database directory.\n"
+    "\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
+    "\t\t\t\tdirectory.\n"
+    "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
     "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
   );
 
-  static string help_global_source_options = _(
-    "\tRepository Options:\n"
+  static string help_global_source_options = _("     Repository Options:\n"
     "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
     "\t--plus-repo, -p <URI>\tUse an additional repository.\n"
     "\t--disable-repositories\tDo not read meta-data from repositories.\n"
     "\t--no-refresh\t\tDo not refresh the repositories.\n"
   );
 
-  static string help_global_target_options = _("\tTarget Options:\n"
+  static string help_global_target_options = _("     Target Options:\n"
     "\t--root, -R <dir>\tOperate on a different root directory.\n"
-    "\t--disable-system-resolvables  Do not read installed resolvables.\n"
+    "\t--disable-system-resolvables\n"
+    "\t\t\t\tDo not read installed packages.\n"
   );
 
   static string help_commands = _(
@@ -185,7 +188,7 @@ void print_main_help(Zypper & zypper)
     "\tshell, sh\t\tAccept multiple commands at once.\n"
   );
 
-  static string help_repo_commands = _("\tRepository Handling:\n"
+  static string help_repo_commands = _("     Repository Management:\n"
     "\trepos, lr\t\tList all defined repositories.\n"
     "\taddrepo, ar\t\tAdd a new repository.\n"
     "\tremoverepo, rr\t\tRemove specified repository.\n"
@@ -195,7 +198,7 @@ void print_main_help(Zypper & zypper)
     "\tclean\t\t\tClean local caches.\n"
   );
 
-  static string help_service_commands = _("\tService Handling:\n"
+  static string help_service_commands = _("     Service Management:\n"
     "\tservices, ls\t\tList all defined services.\n"
     "\taddservice, as\t\tAdd a new service.\n"
     "\tmodifyservice, ms\tModify specified service.\n"
@@ -203,24 +206,27 @@ void print_main_help(Zypper & zypper)
     "\trefresh-services, refs\tRefresh all services.\n"
   );
 
-  static string help_package_commands = _("\tSoftware Management:\n"
+  static string help_package_commands = _("     Software Management:\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
     "\tverify, ve\t\tVerify integrity of package dependencies.\n"
-    "\tsource-install, si\tInstall source packages and their build dependencies.\n"
-    "\tinstall-new-recommends, inr  Install newly added packages recommended by installed packages.\n"
+    "\tsource-install, si\tInstall source packages and their build\n"
+    "\t\t\t\tdependencies.\n"
+    "\tinstall-new-recommends, inr\n"
+    "\t\t\t\tInstall newly added packages recommended\n"
+    "\t\t\t\tby installed packages.\n"
   );
 
-  static string help_update_commands = _("\tUpdate Management:\n"
+  static string help_update_commands = _("     Update Management:\n"
     "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
     "\tlist-updates, lu\tList available updates.\n"
     "\tpatch\t\t\tInstall needed patches.\n"
-    "\tlist-updates, lu\tList needed patches.\n"
+    "\tlist-patches, lp\tList needed patches.\n"
     "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
     "\tpatch-check, pchk\tCheck for patches.\n"
   );
 
-  static string help_query_commands = _("\tQuerying:\n"
+  static string help_query_commands = _("     Querying:\n"
     "\tsearch, se\t\tSearch for packages matching a pattern.\n"
     "\tinfo, if\t\tShow full information for specified packages.\n"
     "\tpatch-info\t\tShow full information for specified patches.\n"
@@ -235,16 +241,17 @@ void print_main_help(Zypper & zypper)
     //"\twhat-conflicts, wc\tList packages conflicting with specified capability.\n"
   );
 
-  static string help_lock_commands = _("\tPackage Locks:\n"
+  static string help_lock_commands = _("     Package Locks:\n"
     "\taddlock, al\t\tAdd a package lock.\n"
     "\tremovelock, rl\t\tRemove a package lock.\n"
     "\tlocks, ll\t\tList current package locks.\n"
   );
 
-  static string help_other_commands = _("\tOther Commands:\n"
+  static string help_other_commands = _("     Other Commands:\n"
     "\tversioncmp, vcmp\tCompare two version strings.\n"
     "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
-    "\tlicenses\t\tPrint report about licenses and EULAs of installed packages.\n"
+    "\tlicenses\t\tPrint report about licenses and EULAs of\n"
+    "\t\t\t\tinstalled packages.\n"
   );
 
   static string help_usage = _(
