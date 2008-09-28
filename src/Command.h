@@ -33,16 +33,19 @@ struct ZypperCommand
 
   static const ZypperCommand INSTALL;
   static const ZypperCommand REMOVE;
-  static const ZypperCommand UPDATE;
-  static const ZypperCommand DIST_UPGRADE;
   static const ZypperCommand SRC_INSTALL;
   static const ZypperCommand VERIFY;
   static const ZypperCommand INSTALL_NEW_RECOMMENDS;
+  
+  static const ZypperCommand UPDATE;
+  static const ZypperCommand LIST_UPDATES;
+  static const ZypperCommand PATCH;
+  static const ZypperCommand LIST_PATCHES;
+  static const ZypperCommand PATCH_CHECK;
+  static const ZypperCommand DIST_UPGRADE;
 
   static const ZypperCommand SEARCH;
   static const ZypperCommand INFO;
-  static const ZypperCommand LIST_UPDATES;
-  static const ZypperCommand PATCH_CHECK;
   static const ZypperCommand PACKAGES;
   static const ZypperCommand PATCHES;
   static const ZypperCommand PATTERNS;
@@ -102,16 +105,19 @@ struct ZypperCommand
 
     INSTALL_e,
     REMOVE_e,
-    UPDATE_e,
-    DIST_UPGRADE_e,
     SRC_INSTALL_e,
     VERIFY_e,
     INSTALL_NEW_RECOMMENDS_e,
 
+    UPDATE_e,
+    LIST_UPDATES_e,
+    PATCH_e,
+    LIST_PATCHES_e,
+    PATCH_CHECK_e,
+    DIST_UPGRADE_e,
+
     SEARCH_e,
     INFO_e,
-    LIST_UPDATES_e,
-    PATCH_CHECK_e,
     PACKAGES_e,
     PATCHES_e,
     PATTERNS_e,

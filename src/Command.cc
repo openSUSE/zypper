@@ -38,16 +38,19 @@ const ZypperCommand ZypperCommand::CLEAN(ZypperCommand::CLEAN_e);
 
 const ZypperCommand ZypperCommand::INSTALL(ZypperCommand::INSTALL_e);
 const ZypperCommand ZypperCommand::REMOVE(ZypperCommand::REMOVE_e);
-const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
-const ZypperCommand ZypperCommand::DIST_UPGRADE(ZypperCommand::DIST_UPGRADE_e);
 const ZypperCommand ZypperCommand::SRC_INSTALL(ZypperCommand::SRC_INSTALL_e);
 const ZypperCommand ZypperCommand::VERIFY(ZypperCommand::VERIFY_e);
 const ZypperCommand ZypperCommand::INSTALL_NEW_RECOMMENDS(ZypperCommand::INSTALL_NEW_RECOMMENDS_e);
 
+const ZypperCommand ZypperCommand::UPDATE(ZypperCommand::UPDATE_e);
+const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
+const ZypperCommand ZypperCommand::PATCH(ZypperCommand::PATCH_e);
+const ZypperCommand ZypperCommand::LIST_PATCHES(ZypperCommand::LIST_PATCHES_e);
+const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
+const ZypperCommand ZypperCommand::DIST_UPGRADE(ZypperCommand::DIST_UPGRADE_e);
+
 const ZypperCommand ZypperCommand::SEARCH(ZypperCommand::SEARCH_e);
 const ZypperCommand ZypperCommand::INFO(ZypperCommand::INFO_e);
-const ZypperCommand ZypperCommand::LIST_UPDATES(ZypperCommand::LIST_UPDATES_e);
-const ZypperCommand ZypperCommand::PATCH_CHECK(ZypperCommand::PATCH_CHECK_e);
 const ZypperCommand ZypperCommand::PACKAGES(ZypperCommand::PACKAGES_e);
 const ZypperCommand ZypperCommand::PATCHES(ZypperCommand::PATCHES_e);
 const ZypperCommand ZypperCommand::PATTERNS(ZypperCommand::PATTERNS_e);
@@ -110,16 +113,19 @@ ZypperCommand::Command ZypperCommand::parse(const std::string & strval_r)
 
     _table["install"] = _table["in"] = ZypperCommand::INSTALL_e;
     _table["remove"] = _table["rm"] = ZypperCommand::REMOVE_e;
-    _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
-    _table["dist-upgrade"] = _table["dup"] = ZypperCommand::DIST_UPGRADE_e;
     _table["source-install"] = _table["si"] = ZypperCommand::SRC_INSTALL_e;
     _table["verify"] = _table["ve"] = ZypperCommand::VERIFY_e;
     _table["install-new-recommends"] = _table["inr"] = ZypperCommand::INSTALL_NEW_RECOMMENDS_e;
 
+    _table["update"] = _table["up"] = ZypperCommand::UPDATE_e;
+    _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
+    _table["patch"] = ZypperCommand::PATCH_e;
+    _table["list-patches"] = _table["lp"] = ZypperCommand::LIST_PATCHES_e;
+    _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
+    _table["dist-upgrade"] = _table["dup"] = ZypperCommand::DIST_UPGRADE_e;
+
     _table["search"] = _table["se"] = ZypperCommand::SEARCH_e;
     _table["info"] = _table["if"] = ZypperCommand::INFO_e;
-    _table["list-updates"] = _table["lu"] = ZypperCommand::LIST_UPDATES_e;
-    _table["patch-check"] = _table["pchk"] = ZypperCommand::PATCH_CHECK_e;
     _table["packages"] = _table["pa"] = _table["pkg"] = ZypperCommand::PACKAGES_e;
     _table["patches"] = _table["pch"] = ZypperCommand::PATCHES_e;
     _table["patterns"] = _table["pt"] = ZypperCommand::PATTERNS_e;

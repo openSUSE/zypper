@@ -611,6 +611,8 @@ mark_patch_updates( Zypper & zypper, bool skip_interactive )
 
 void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interactive, bool best_effort )
 {
+  MIL << endl;
+
   ResKindSet localkinds = kinds;
 
   if (zypper.arguments().empty() || zypper.globalOpts().is_rug_compatible)
@@ -619,6 +621,7 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
     {
       if (*kindit == ResKind::package)
       {
+        MIL << "Computing package update..." << endl;
         // this will do a complete pacakge update as far as possible
         God->resolver()->doUpdate();
         // no need to call Resolver::resolvePool() afterwards

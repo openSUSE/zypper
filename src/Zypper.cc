@@ -207,10 +207,17 @@ void print_main_help(Zypper & zypper)
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
     "\tverify, ve\t\tVerify integrity of package dependencies.\n"
-    "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
-    "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
     "\tsource-install, si\tInstall source packages and their build dependencies.\n"
     "\tinstall-new-recommends, inr  Install newly added packages recommended by installed packages.\n"
+  );
+
+  static string help_update_commands = _("\tUpdate Management:\n"
+    "\tupdate, up\t\tUpdate installed packages with newer versions.\n"
+    "\tlist-updates, lu\tList available updates.\n"
+    "\tpatch\t\t\tInstall needed patches.\n"
+    "\tlist-updates, lu\tList needed patches.\n"
+    "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
+    "\tpatch-check, pchk\tCheck for patches.\n"
   );
 
   static string help_query_commands = _("\tQuerying:\n"
@@ -219,8 +226,6 @@ void print_main_help(Zypper & zypper)
     "\tpatch-info\t\tShow full information for specified patches.\n"
     "\tpattern-info\t\tShow full information for specified patterns.\n"
     "\tproduct-info\t\tShow full information for specified products.\n"
-    "\tpatch-check, pchk\tCheck for patches.\n"
-    "\tlist-updates, lu\tList available updates.\n"
     "\tpatches, pch\t\tList all available patches.\n"
     "\tpackages, pa\t\tList all available packages.\n"
     "\tpatterns, pt\t\tList all available patterns.\n"
@@ -255,6 +260,7 @@ void print_main_help(Zypper & zypper)
   zypper.out().info(help_repo_commands, Out::QUIET);
   zypper.out().info(help_service_commands, Out::QUIET);
   zypper.out().info(help_package_commands, Out::QUIET);
+  zypper.out().info(help_update_commands, Out::QUIET);
   zypper.out().info(help_query_commands, Out::QUIET);
   zypper.out().info(help_lock_commands, Out::QUIET);
   zypper.out().info(help_other_commands, Out::QUIET);
@@ -693,6 +699,7 @@ void Zypper::shellCleanup()
   case ZypperCommand::INSTALL_e:
   case ZypperCommand::REMOVE_e:
   case ZypperCommand::UPDATE_e:
+  case ZypperCommand::PATCH_e:
   {
     remove_selections(*this);
     break;
@@ -1442,9 +1449,9 @@ void Zypper::processCommandOptions()
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
       //  and the second %s = "patch"
-      "update (up) [options]\n"
+      "update (up) [options] ...\n"
       "\n"
-      "Update all installed resolvables with newer versions, where applicable.\n"
+      "Update all or specified installed packages with newer versions, if possible.\n"
       "\n"
       "  Command options:\n"
       "\n"
@@ -1452,7 +1459,8 @@ void Zypper::processCommandOptions()
       "                                Default: %s.\n"
       "-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
       "    --skip-interactive          Skip interactive updates.\n"
-      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+      "                                confirmation prompt.\n"
       "                                See man zypper for more details.\n"
       "    --best-effort               Do a 'best effort' approach to update. Updates\n"
       "                                to a lower than the latest version are\n"
@@ -1462,7 +1470,57 @@ void Zypper::processCommandOptions()
       "-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
       "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
       "-D, --dry-run                   Test the update, do not actually update.\n"
-    ), "package, patch, pattern, product", "patch");
+    ), "package, patch, pattern, product", "package");
+    break;
+  }
+
+  case ZypperCommand::PATCH_e:
+  {
+    static struct option update_options[] = {
+      {"repo",                      required_argument, 0, 'r'},
+      {"skip-interactive",          no_argument,       0, 0},
+      {"auto-agree-with-licenses",  no_argument,       0, 'l'},
+      {"debug-solver",              no_argument,       0, 0},
+      {"no-recommends",             no_argument,       0,  0 },
+      {"dry-run",                   no_argument,       0, 'D'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = update_options;
+    _command_help = _(
+      "patch [options]\n"
+      "\n"
+      "Install all available needed patches.\n"
+      "\n"
+      "  Command options:\n"
+      "\n"
+      "-r, --repo <alias|#|URI>        Work only with specified repository.\n"
+      "    --skip-interactive          Skip interactive patches.\n"
+      "-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+      "                                confirmation prompt.\n"
+      "                                See man zypper for more details.\n"
+      "    --debug-solver              Create solver test case for debugging.\n"
+      "-D, --dry-run                   Test the update, do not actually update.\n"
+    );
+    break;
+  }
+
+  case ZypperCommand::LIST_PATCHES_e:
+  {
+    static struct option list_updates_options[] = {
+      {"repo",        required_argument, 0, 'r'},
+      {"help", no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = list_updates_options;
+    _command_help = _(
+      "list-patches (lp) [options]\n"
+      "\n"
+      "List all available needed patches.\n"
+      "\n"
+      "  Command options:\n"
+      "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+    );
     break;
   }
 
@@ -3322,6 +3380,7 @@ void Zypper::doCommand()
   // --------------------------( list updates )-------------------------------
 
   case ZypperCommand::LIST_UPDATES_e:
+  case ZypperCommand::LIST_PATCHES_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -3350,20 +3409,22 @@ void Zypper::doCommand()
         kinds.insert(kind);
       }
     }
-    else if (globalOpts().is_rug_compatible)
-      kinds.insert(ResKind::package);
-    else
+    else if (command() == ZypperCommand::LIST_PATCHES)
       kinds.insert(ResKind::patch);
+    else      
+      kinds.insert(ResKind::package);
 
     bool best_effort = copts.count( "best-effort" );
 
-    if (globalOpts().is_rug_compatible && best_effort) {
-	best_effort = false;
-	// 'rug' is the name of a program and must not be translated
-	// 'best-effort' is a program parameter and can not be translated
-	out().warning(
-	  _("Running as 'rug', can't do 'best-effort' approach to update."));
+    if (globalOpts().is_rug_compatible && best_effort)
+    {
+      best_effort = false;
+      // translators: Running as 'rug', cannot use 'best-effort' option.
+      out().info(str::form(
+        _("Running as '%s', cannot use '%s' option."), "rug", "best-effort"),
+        Out::HIGH);
     }
+
     initRepoManager();
     init_target(*this);
     init_repos(*this);
@@ -3380,6 +3441,7 @@ void Zypper::doCommand()
   // -----------------------------( update )----------------------------------
 
   case ZypperCommand::UPDATE_e:
+  case ZypperCommand::PATCH_e:
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
 
@@ -3389,6 +3451,14 @@ void Zypper::doCommand()
       out().error(
         _("Root privileges are required for updating packages."));
       setExitCode(ZYPPER_EXIT_ERR_PRIVILEGES);
+      return;
+    }
+
+    // too many arguments
+    if (!_arguments.empty() && command() == ZypperCommand::PATCH)
+    {
+      report_too_many_arguments(_command_help);
+      setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
       return;
     }
 
@@ -3423,19 +3493,19 @@ void Zypper::doCommand()
         kinds.insert(kind);
       }
     }
-    else if (globalOpts().is_rug_compatible || !_arguments.empty() /* bnc #385990*/)
-      kinds.insert(ResKind::package);
-    else
+    else if (command() == ZypperCommand::PATCH)
       kinds.insert(ResKind::patch);
+    else
+      kinds.insert(ResKind::package);
 
     bool best_effort = copts.count( "best-effort" );
     if (globalOpts().is_rug_compatible && best_effort)
     {
       best_effort = false;
-      out().warning(str::form(
-        // translators: Running as 'rug', can't do 'best-effort' approach to update.
-        _("Running as '%s', cannot do '%s' approach to update."),
-        "rug", "best-effort"));
+      out().info(str::form(
+        // translators: Running as 'rug', cannot use 'best-effort' option.
+        _("Running as '%s', cannot use '%s' option."), "rug", "best-effort"),
+        Out::HIGH);
     }
 
     init_target(*this);
@@ -3446,9 +3516,9 @@ void Zypper::doCommand()
       init_repos(*this, _arguments);
     else
       init_repos(*this);
-
     if (exitCode() != ZYPPER_EXIT_OK)
       return;
+
     load_resolvables(*this);
     resolve(*this); // needed to compute status of PPP
 
