@@ -168,7 +168,7 @@ namespace zypp
   }
 
   bool Product::isTargetDistribution() const
-  { return isSystem() && type() == "base"; }
+  { return isSystem() && lookupStrAttribute( sat::SolvAttr::productType ) == "base"; }
 
   std::string Product::registerTarget() const
   { return lookupStrAttribute( sat::SolvAttr::productRegisterTarget ); }
