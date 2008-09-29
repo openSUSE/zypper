@@ -1185,8 +1185,8 @@ void solve_and_commit (Zypper & zypper)
     else if (zypper.exitCode() == ZYPPER_EXIT_INF_RESTART_NEEDED)
       zypper.out().warning(
         _("One of installed patches affects the package"
-          " manager itself, thus it requires its restart before executing"
-          " any further operations."),
+          " manager itself. Run this command once more to install any other"
+          " needed patches."),
         Out::QUIET, Out::TYPE_NORMAL); // don't show this to machines
   }
 }

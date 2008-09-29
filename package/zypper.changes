@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Sep 29 12:08:12 CEST 2008 - jkupec@suse.cz
+
+- show in 'lu' what will 'up' actually propose to install
+- new --all/-a option for 'lu' to show the original raw list of
+  packages for which newer versions exist.
+  (bnc #395480)
+
+-------------------------------------------------------------------
 Mon Sep 29 10:47:08 CEST 2008 - jkupec@suse.cz
 
 - proper error message if the repository type can't be determined
@@ -9,7 +17,7 @@ Mon Sep 29 10:47:08 CEST 2008 - jkupec@suse.cz
 Sun Sep 28 22:07:18 CEST 2008 - jkupec@suse.cz
 
 - 'update' and 'list-updates' now defaults to '-t package'
-  patch/list-patches commands added to install/list patches
+- patch/list-patches commands added to install/list patches
   (bnc #395480)
 - r11191
 

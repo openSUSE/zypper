@@ -333,6 +333,12 @@ add the \-\-test option to the rpm commands run by the remove command.
 .TP
 .B list-updates (lu) [options]
 List available updates.
+
+This command will list only installable updates, i.e. updates which have
+no dependency problems, or which do not change package vendor. This list
+is what the \fBupdate\fR command will propose to install. To list
+all packages for which newer version are available, use \fI\-\-all\fR option.
+
 .TP
 \fI\-t, --type\fR <type>
 Type of package (default: package). See Package Managemet Commands subsection
@@ -341,10 +347,22 @@ for the list of available package types.
 \fI\-r, \-\-repo\fR <alias|#|URI>
 List only updates from the repository specified by the alias, number or URI.
 This option can be used multiple times.
+.TP
+.I \-a, \-\-all
+List all packages for which newer versions are available, regardles whether
+they are installable or not.
+.TP
+.I \-\-best\-effort
+See the \fBupdate\fR command for description.
+
 
 .TP
 .B update (up) [options] [packagename] ...
-Update installed packages with patches or newer version, where applicable.
+Update installed packages with newer versions, where possible.
+
+This command will not update packages which would require change of package
+vendor unless the vendor is specified in /etc/zypp/vendors.d, or which would
+require manual resolution of problems with dependencies.
 
 To update individual packages, specify one or more package names. You can
 use the '*' and '?' wildcard characters in the package names to specify
@@ -383,10 +401,25 @@ The default behavior is 'no-force'. If this option is specified, it takes the pr
 .I \-D, \-\-dry\-run
 Test the update, do not actually install or update any package. This option will
 add the \-\-test option to the rpm commands run by the update command.
+.TP
+.I \-\-best\-effort
+Do a 'best effort' approach to update. This method does not explicitly select
+packages with best version and architecture, but instead requests installation
+of a package with higher version than the installed one and leaves the rest
+on the dependency solver. This method is always used for packages, and is
+optional for products and patterns. It is not applicable to patches.
+
 
 .TP
 .B list-patches (lp) [options]
 List all available needed patches.
+
+If there are patches that affect the package management itself, only those will
+be listed, and you will be informed if also other patches are available. After
+installing the package management patches, the other needed patches will
+be listed.
+
+This command is similar to 'zypper list-updates -t patch'.
 
 .TP
 .I \-r, --repo <alias|#|URI>
@@ -396,6 +429,11 @@ List only patches from the specified repository.
 .TP
 .B patch [options]
 Install all available needed patches.
+
+If there are patches that affect the package management itself, those will
+be installed first and you will be asked to run the \fBpatch\fR command again.
+
+This command is similar to 'zypper update -t patch'.
 
 .TP
 .I \-r, \-\-repo <alias|#|URI>
