@@ -2,10 +2,6 @@
 - bugfixing for 11.1
 
 0.12.x
-- implement all rug commands (where it makes sense)
-- zypper [help] rug
-- add help texts for prompts
-
 
 NOT SCHEDULED
 -------------
@@ -16,6 +12,7 @@ NOT SCHEDULED
 General
 
 + testsuite
++ add help texts for prompts
 ? xml input (feed an xml with operation specification to zypper)
 ? move -vv output to zypper.log, leave only normal and verbose output levels?
   -vv e.g. displays full urls of downloaded files
