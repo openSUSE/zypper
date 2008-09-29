@@ -2388,9 +2388,9 @@ void refresh_services(Zypper & zypper)
       if (s)
       {
         error = refresh_service(zypper, *s);
-        
+
         // refresh also service's repos
-        if (zypper.cOpts().count("with-repos") || !zypper.globalOpts().is_rug_compatible)
+        if (zypper.cOpts().count("with-repos") || zypper.globalOpts().is_rug_compatible)
         {
           RepoCollector collector;
           RepoManager & rm = zypper.repoManager();
