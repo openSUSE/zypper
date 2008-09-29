@@ -2071,27 +2071,26 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
 
   if ( rpm_status != 0 )
   {
-    // %s = filename of rpm package
-    // historylog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
+    historylog.comment(
+        // %s = filename of rpm package
+        str::form(_("%s install failed"), Pathname::basename(filename).c_str()),
+        true /*timestamp*/);
     ostringstream sstr;
     sstr << _("rpm output:") << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
-    //TranslatorExplanation after semicolon is error message
+    // TranslatorExplanation the colon is followed by an error message
     ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message : rpmmsg)));
   }
-  else
+  else if ( ! rpmmsg.empty() )
   {
-    // %s = filename of rpm package
-    // historylog.comment(
-    //    str::form(_("%s installed ok"), Pathname::basename(filename).c_str()),
-    //    /*timestamp*/true);
-    if ( ! rpmmsg.empty() )
-    {
-      ostringstream sstr;
-      sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
-      historylog.comment(sstr.str());
-    }
+    historylog.comment(
+        // %s = filename of rpm package
+        str::form(_("%s installed ok"), Pathname::basename(filename).c_str()),
+        true /*timestamp*/);
+    ostringstream sstr;
+    sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
+    historylog.comment(sstr.str());
   }
 }
 
@@ -2211,25 +2210,25 @@ void RpmDb::doRemovePackage( const string & name_r, RpmInstFlags flags, callback
 
   if ( rpm_status != 0 )
   {
-    // %s = name of rpm package
     historylog.comment(
-        str::form(_("%s remove failed"), name_r.c_str()), /*timestamp*/true);
+        // %s = name of rpm package
+        str::form(_("%s remove failed"), name_r.c_str()), true /*timestamp*/);
     ostringstream sstr;
     sstr << _("rpm output:") << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
-    // TranslatorExplanation after semicolon is error message
+    // TranslatorExplanation the colon is followed by an error message
     ZYPP_THROW(RpmSubprocessException(string(_("RPM failed: ")) +
                (rpmmsg.empty() ? error_message: rpmmsg)));
   }
-  else
+  else if ( ! rpmmsg.empty() )
   {
-    // historylog.comment(str::form(_("%s remove ok"), name_r.c_str()), /*timestamp*/true);
-    if ( ! rpmmsg.empty() )
-    {
-      ostringstream sstr;
-      sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
-      historylog.comment(sstr.str());
-    }
+    historylog.comment(
+        // %s = name of rpm package
+        str::form(_("%s removed ok"), name_r.c_str()), true /*timestamp*/);
+
+    ostringstream sstr;
+    sstr << _("Additional rpm output:") << endl << rpmmsg << endl;
+    historylog.comment(sstr.str());
   }
 }
 
