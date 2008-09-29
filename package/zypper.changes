@@ -5,6 +5,8 @@ Mon Sep 29 12:08:12 CEST 2008 - jkupec@suse.cz
 - new --all/-a option for 'lu' to show the original raw list of
   packages for which newer versions exist.
   (bnc #395480)
+- r11197
+- 0.12.7
 
 -------------------------------------------------------------------
 Mon Sep 29 10:47:08 CEST 2008 - jkupec@suse.cz
