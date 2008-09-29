@@ -3,6 +3,7 @@ Mon Sep 29 15:56:17 CEST 2008 - jkupec@suse.cz
 
 - history: tell which package failed before logging rpm output or
   error message (bnc #430585)
+- no localization for history log comments
 - revision 11202
 
 -------------------------------------------------------------------
