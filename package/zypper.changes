@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 29 10:47:08 CEST 2008 - jkupec@suse.cz
+
+- proper error message if the repository type can't be determined
+  on refresh (bnc #389690)
+- r11195
+
+-------------------------------------------------------------------
 Sun Sep 28 22:07:18 CEST 2008 - jkupec@suse.cz
 
 - 'update' and 'list-updates' now defaults to '-t package'
