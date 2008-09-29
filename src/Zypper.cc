@@ -1400,7 +1400,8 @@ void Zypper::processCommandOptions()
       // rug compatibility option, we have --repo
       {"catalog",     required_argument, 0, 'c'},
       {"type",        required_argument, 0, 't'},
-      {"best-effort", no_argument, 0, 0 },
+      {"all",         no_argument,       0, 'a'},
+      {"best-effort", no_argument,       0,  0 },
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1413,13 +1414,16 @@ void Zypper::processCommandOptions()
       "List all available updates.\n"
       "\n"
       "  Command options:\n"
-      "-t, --type <type>               Type of package (%s).\n"
-      "                                Default: %s.\n"
-      "-r, --repo <alias|#|URI>        List only updates from the specified repository.\n"
-      "    --best-effort               Do a 'best effort' approach to update. Updates\n"
-      "                                to a lower than the latest version are\n"
-      "                                also acceptable.\n"
-    ), "package, patch, pattern, product", "patch");
+      "-t, --type <type>             Type of package (%s).\n"
+      "                              Default: %s.\n"
+      "-r, --repo <alias|#|URI>      List only updates from the specified repository.\n"
+      "    --best-effort             Do a 'best effort' approach to update. Updates\n"
+      "                              to a lower than the latest version are\n"
+      "                              also acceptable.\n"
+      "-a, --all                     List all packages for which newer versions are\n"
+      "                              available, regardless whether they are\n"
+      "                              installable or not.\n"
+    ), "package, patch, pattern, product", "package");
     break;
   }
 

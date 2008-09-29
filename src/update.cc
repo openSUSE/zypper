@@ -261,10 +261,24 @@ static void
 find_updates( const ResKind & kind, Candidates & candidates )
 {
   const zypp::ResPool& pool = God->pool();
+  DBG << "Looking for update candidates of kind " << kind << endl;
+
+  // package updates
+  if (kind == ResKind::package && !Zypper::instance()->cOpts().count("all"))
+  {
+    God->resolver()->doUpdate();
+    ResPool::const_iterator
+      it = God->pool().begin(),
+      e  = God->pool().end();
+    for (; it != e; ++it)
+      if (it->status().isToBeInstalled())
+        candidates.insert(*it);
+    return;
+  }
+
   ResPool::byKind_iterator
     it = pool.byKindBegin (kind),
     e  = pool.byKindEnd (kind);
-  DBG << "Looking for update candidates of kind " << kind << endl;
   for (; it != e; ++it)
   {
     if (it->status().isUninstalled())
