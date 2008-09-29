@@ -4,8 +4,8 @@ Mon Sep 29 12:08:12 CEST 2008 - jkupec@suse.cz
 - show in 'lu' what will 'up' actually propose to install
 - new --all/-a option for 'lu' to show the original raw list of
   packages for which newer versions exist.
-  (bnc #395480)
-- r11197
+  (bnc #395480) r11197
+- translations update
 - 0.12.7
 
 -------------------------------------------------------------------
