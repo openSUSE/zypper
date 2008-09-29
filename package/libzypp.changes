@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Sep 29 13:43:08 CEST 2008 - ma@suse.de
+
+- Fix zypp::WhatProvides::empty returning inverse result.
+- revision 11200
+- version 5.13.1 (13)
+
+-------------------------------------------------------------------
 Sat Sep 27 23:36:19 CEST 2008 - jkupec@suse.cz
 
 - fixed endless loop when CredentialManager returns bad password

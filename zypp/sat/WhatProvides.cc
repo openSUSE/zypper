@@ -128,7 +128,7 @@ namespace zypp
 
     bool WhatProvides::empty() const
     {
-      return _pimpl; // Ctor asserts no Impl for empty result.
+      return !_pimpl; // Ctor asserts no Impl for empty result.
     }
 
     WhatProvides::size_type WhatProvides::size() const
