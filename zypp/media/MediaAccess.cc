@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/ExternalProgram.h"
 
 #include "zypp/media/MediaException.h"
 #include "zypp/media/MediaAccess.h"
@@ -27,6 +28,7 @@
 #include "zypp/media/MediaSMB.h"
 #include "zypp/media/MediaCIFS.h"
 #include "zypp/media/MediaCurl.h"
+#include "zypp/media/MediaAria2c.h"
 #include "zypp/media/MediaISO.h"
 
 using namespace std;
@@ -126,7 +128,14 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     else if (scheme == "cifs")
         _handler = new MediaCIFS (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "http" || scheme == "https")
-        _handler = new MediaCurl (url,preferred_attach_point);
+    {
+	// Another good idea would be activate MediaAria2c handler via external var
+        if ( getenv( "ZYPP_ARIA2C" ) &&
+             MediaAria2c::existsAria2cmd() )
+            _handler = new MediaAria2c (url,preferred_attach_point);
+	else 	
+            _handler = new MediaCurl (url,preferred_attach_point);
+    } 
     else
     {
 	ZYPP_THROW(MediaUnsupportedUrlSchemeException(url));

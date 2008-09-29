@@ -72,9 +72,9 @@ namespace zypp {
 
 	void                 resetParentId();
 	bool                 dependsOnParent() const;
+
 	bool                 dependsOnParent(MediaAccessId parentId,
 	                                     bool exactIdMatch) const;
-
     public:
 
        /**

@@ -258,6 +258,7 @@ SET( zypp_media_SRCS
   media/MediaCIFS.cc
   media/ProxyInfo.cc
   media/MediaCurl.cc
+  media/MediaAria2c.cc
   media/MediaISO.cc
   media/MediaManager.cc
   media/MediaUserAuth.cc
@@ -271,6 +272,7 @@ SET( zypp_media_HEADERS
   media/MediaCD.h
   media/MediaCIFS.h
   media/MediaCurl.h
+  media/MediaAria2c.h
   media/MediaDIR.h
   media/MediaDISK.h
   media/MediaException.h
