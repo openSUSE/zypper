@@ -5,8 +5,6 @@
 - implement all rug commands (where it makes sense)
 - zypper [help] rug
 - add help texts for prompts
-- show recommended and suggested in the summary
-- report licenses of installed software
 
 
 NOT SCHEDULED
@@ -37,3 +35,4 @@ Packages
   User can upgrade such packages with 'zypper in foo' then.
 ? list packages newly added to repos since last update (might be easy once we
   have package history)
+- show recommended and suggested in the summary

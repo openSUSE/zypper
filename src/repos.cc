@@ -80,7 +80,7 @@ static bool refresh_raw_metadata(Zypper & zypper,
           _("Checking whether to refresh metadata for %s")) % repo.name()),
           Out::HIGH);
       for(RepoInfo::urls_const_iterator it = repo.baseUrlsBegin();
-          it != repo.baseUrlsEnd(); ++it)
+          it != repo.baseUrlsEnd();)
       {
         try
         {
@@ -115,7 +115,11 @@ static bool refresh_raw_metadata(Zypper & zypper,
         catch (const Exception & e)
         {
           ZYPP_CAUGHT(e);
-          ERR << *it << " doesn't look good. Trying another url." << endl;
+          Url badurl(*it);
+          if (++it == repo.baseUrlsEnd())
+            ZYPP_RETHROW(e);
+          ERR << badurl << " doesn't look good. Trying another url ("
+              << *it << ")." << endl;
         }
       }
     }
@@ -262,7 +266,7 @@ static bool build_cache(Zypper & zypper, const RepoInfo &repo, bool force_build)
   {
     ZYPP_CAUGHT(e);
     zypper.out().error(e,
-        _("Error building the cache database:"));
+        _("Error building the cache:"));
     // log untranslated message
     ERR << "Error writing to cache db" << endl;
 
