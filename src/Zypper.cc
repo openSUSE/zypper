@@ -913,7 +913,7 @@ void Zypper::processCommandOptions()
       "\n"
       "  Command options:\n"
       "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-      "-t, --type <type>               Type of resolvable (%s).\n"
+      "-t, --type <type>               Type of package (%s).\n"
       "                                Default: %s.\n"
       "-n, --name                      Select packages by plain name, not by capability.\n"
       "-C, --capability                Select packages by capability.\n"
