@@ -443,22 +443,6 @@ try {
   INT << "===[START]==========================================" << endl;
   ZConfig::instance();
 
-  {
-  Capability cap("flavor(dvd9)");
-  DBG << cap.detail().isSimple() << endl;
-  DBG << cap.detail().isNamed() << endl;
-  DBG << cap.detail().name() << endl;
-  std::string capstr = str::stripPrefix( cap.asString(), "flavor(" );
-  DBG << capstr << endl;
-  capstr.erase(capstr.size()-1);
-  DBG << capstr << endl;
-  }
-
-
-  ///////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
 
 #if 0
 
@@ -510,7 +494,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( 1 )
+  if ( 0 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -629,13 +613,11 @@ try {
     }
   }
 
-
-  PoolItem pi ( getPi<Package>("amarok") );
-  MIL << pi << endl;
-  MIL << pi->asKind<Package>() << endl;
-  MIL << pi->asKind<Product>() << endl;
-  if ( pi->isKind<Package>() )
-    SEC << pi->asKind<Package>() << endl;
+  getZYpp()->resolver()->addRequire( Capability("amarok") );
+  solve();
+  vdumpPoolStats( USR << "Transacting:"<< endl,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
  //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

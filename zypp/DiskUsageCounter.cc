@@ -31,71 +31,110 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
-  {
-    DiskUsageCounter::MountPointSet result = mps;
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
 
-    if ( result.empty() )
+    struct SatMap : private base::NonCopyable
     {
-      // partitioning is not set
+      SatMap( unsigned capacity_r = 1 )
+      {
+        ::map_init( &_installedmap, sat::Pool::instance().capacity() );
+      }
+
+      void add( sat::Solvable solv_r )
+      {
+        MAPSET( &_installedmap, solv_r.id() );
+      }
+
+      void add( const PoolItem & pi_r )
+      { add( pi_r->satSolvable() ); }
+
+      void add( const ResObject::constPtr & obj_r )
+      { add( obj_r->satSolvable() ); }
+
+      mutable ::Map _installedmap;
+    };
+
+    DiskUsageCounter::MountPointSet calcDiskUsage( const DiskUsageCounter::MountPointSet & mps_r, const SatMap & installedmap_r )
+    {
+      DiskUsageCounter::MountPointSet result = mps_r;
+
+      if ( result.empty() )
+      {
+        // partitioning is not set
+        return result;
+      }
+
+      sat::Pool satpool( sat::Pool::instance() );
+      if ( ! satpool.findSystemRepo() )
+      {
+        // take care we have at least an empty stystem repo.
+        // ::pool_calc_duchanges requires it.
+        satpool.systemRepo();
+        satpool.prepare();
+      }
+
+      // init satsolver result vector with mountpoints
+      static const ::DUChanges _initdu = { 0, 0, 0 };
+      std::vector< ::DUChanges> duchanges( result.size(), _initdu );
+      {
+        unsigned idx = 0;
+        for_( it, result.begin(), result.end() )
+        {
+          duchanges[idx].path = it->dir.c_str();
+          ++idx;
+        }
+      }
+
+      // now calc...
+      ::pool_calc_duchanges( satpool.get(),
+                             satpool.systemRepo().get(),
+                             &installedmap_r._installedmap,
+                             &duchanges[0],
+                             duchanges.size() );
+
+      // and process the result
+      {
+        unsigned idx = 0;
+        for_( it, result.begin(), result.end() )
+        {
+          static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / (2 * 1K)
+
+          it->pkg_size = it->used_size          // current usage
+                       + duchanges[idx].kbytes  // package data size
+                       + ( duchanges[idx].files * it->block_size / blockAdjust ); // half block per file
+          ++idx;
+        }
+      }
+
       return result;
     }
 
-    sat::Pool satpool( sat::Pool::instance() );
-    if ( ! satpool.findSystemRepo() )
-    {
-      // take care we have at least an empty stystem repo.
-      // ::pool_calc_duchanges requires it.
-      satpool.systemRepo();
-      satpool.prepare();
-    }
+    /////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
-    // init satsolver result vector with mountpoints
-    static const ::DUChanges _initdu = { 0, 0, 0 };
-    std::vector< ::DUChanges> duchanges( result.size(), _initdu );
-    {
-      unsigned idx = 0;
-      for_( it, result.begin(), result.end() )
-      {
-        duchanges[idx].path = it->dir.c_str();
-        ++idx;
-      }
-    }
-
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( const ResPool & pool_r )
+  {
+    SatMap installedmap( sat::Pool::instance().capacity() );
     // build installedmap (installed != transact)
     // stays installed or gets installed
-    ::Map installedmap;
-    ::map_init( &installedmap, satpool.capacity() );
     for_( it, pool_r.begin(), pool_r.end() )
     {
       if ( it->status().isInstalled() != it->status().transacts() )
       {
-        MAPSET( &installedmap, it->satSolvable().id() );
+        installedmap.add( *it );
       }
     }
+    return calcDiskUsage( mps, installedmap );
+  }
 
-    // now calc...
-    ::pool_calc_duchanges( satpool.get(),
-                           satpool.systemRepo().get(),
-                           &installedmap,
-                           &duchanges[0],
-                           duchanges.size() );
-
-    // and process the result
-    {
-      unsigned idx = 0;
-      for_( it, result.begin(), result.end() )
-      {
-        static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / (2 * 1K)
-
-        it->pkg_size = it->used_size          // current usage
-                     + duchanges[idx].kbytes  // package data size
-                     + ( duchanges[idx].files * it->block_size / blockAdjust ); // half block per file
-        ++idx;
-      }
-    }
-
-    return result;
+  DiskUsageCounter::MountPointSet DiskUsageCounter::disk_usage( sat::Solvable solv_r )
+  {
+    SatMap installedmap;
+    installedmap.add( solv_r );
+    return calcDiskUsage( mps, installedmap );
   }
 
   DiskUsageCounter::MountPointSet DiskUsageCounter::detectMountPoints(const std::string &rootdir)
@@ -237,15 +276,23 @@ namespace zypp
     return ret;
   }
 
+  DiskUsageCounter::MountPointSet DiskUsageCounter::justRootPartition()
+  {
+    DiskUsageCounter::MountPointSet ret;
+    ret.insert( DiskUsageCounter::MountPoint() );
+    return ret;
+  }
+
   std::ostream & operator<<( std::ostream & str, const DiskUsageCounter::MountPoint & obj )
   {
-    str << "dir:[" << obj.dir << "] [ bs: " << obj.block_size
-        << " ts: " << obj.total_size
-        << " us: " << obj.used_size
-        << " (+-: " << (obj.pkg_size-obj.used_size)
+     str << "dir:[" << obj.dir << "] [ bs: " << obj.blockSize()
+        << " ts: " << obj.totalSize()
+        << " us: " << obj.usedSize()
+        << " (+-: " << obj.commitDiff()
         << ")]";
     return str;
   }
 
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
