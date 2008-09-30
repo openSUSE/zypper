@@ -2342,13 +2342,50 @@ void Zypper::doCommand()
       return;
     }
 
+    initRepoManager();
+    RepoManager & rm = repoManager();
+
     // force specific repository type.
     string type = copts.count("type") ? copts["type"].front() : "";
 
     // check for valid service type
     bool isservice = false;
     if (type.empty())
-      isservice = true;
+    {
+      // rug does not make difference between services and repos, so service-add
+      // must be able to handle them both (bnc #429620)
+      if (globalOpts().is_rug_compatible)
+      {
+        repo::ServiceType stype = rm.probeService(url);
+        // is it a service?
+        if (stype != repo::ServiceType::NONE)
+        {
+          isservice = true;
+          type = stype.asString();
+        }
+        // is it a repo?
+        else
+        {
+          repo::RepoType rtype = rm.probe(url);
+          if (rtype != repo::RepoType::NONE)
+            type = rtype.asString();
+          // complain & exit
+          else
+          {
+            out().error(
+              _("Can't find a valid repository at given location:"),
+              _("Could not determine the type of the repository."
+                " Check if the specified URI points to a valid repository."));
+            setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+            return;
+          }
+        }
+      }
+      // zypper does not access net when adding repos/services, thus for zypper
+      // the URI is always service unless --type is explicitely specified.
+      else
+       isservice = true;
+    }
     else
     {
       try { repo::ServiceType stype(type); isservice = true; }
@@ -2356,8 +2393,6 @@ void Zypper::doCommand()
     }
 
     warn_if_zmd();
-
-    initRepoManager();
 
     if (isservice)
       add_service_by_url(*this, url, _arguments[1], type, enabled);
