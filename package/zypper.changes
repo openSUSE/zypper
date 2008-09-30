@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 30 17:03:18 CEST 2008 - jkupec@suse.cz
+
+- addservice: probe for repository/service type if in rug-compatible
+  mode (bnc #429620)
+- r11216
+
+-------------------------------------------------------------------
 Mon Sep 29 12:08:12 CEST 2008 - jkupec@suse.cz
 
 - show in 'lu' what will 'up' actually propose to install

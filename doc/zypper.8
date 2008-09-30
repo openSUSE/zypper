@@ -800,13 +800,16 @@ them, etc. Repository specific options, like --keep-packages
 are not available here, though. You can use repository handling commands
 to manipulate them.
 
+
 .TP
 .B addservice (as) [options] <URI> <alias>
 Adds a service specified by \fBURI\fR to the system. The \fBalias\fR must be
 unique and serves to identify the service.
 
 Newly added services are not refereshed automatically. Use the
-\fBrefresh-services\fR command to refresh them.
+\fBrefresh-services\fR command to refresh them. Zypper does not access the
+service URI when adding the service, so the type of the services is unknown
+until it is refreshed.
 
 This command also allows to add also ordinary repositories when used with
 --type option, where you specify the type of the repository. See the addrepo
@@ -1113,16 +1116,25 @@ can damage your system using this option.
 .TP
 .B /etc/zypp/repos.d
 Directory containing repository definition (*.repo) files.
-You can use the \fBrepo\fR commands to manipulate these files, or you can edit
-them yourself. In either case, after doing the modifications, executing
-\fBzypper refresh\fR is strongly recommended.
+You can use the Repository Management Commands to manipulate these files,
+or you can edit them yourself. In either case, after doing the modifications,
+executing \fBzypper refresh\fR is strongly recommended.
 
 You can use the \-\-reposd\-dir global option to use an alternative directory
 for this purpose or the \-\-root option to make this directory relative to the
 specified root directory.
 .TP
+.B /etc/zypp/services.d
+Directory containing service definition (*.service) files.
+You can use the Service Management Commands to manipulate theese files, or
+you can edit them youself. Running \fBzypper refs\fR is recommended after
+modifications have been done.
+.TP
 .B /etc/zypp/zypp.conf
-ZYpp configuration file.
+ZYpp configuration file affecting all ZYpp-based applications.
+See the comments in the file for desciption of configurable properties.
+Many of locations of files and directories listed in this section are
+also configurable via zypp.conf.
 .TP
 .B /etc/zypp/locks
 File with package lock definitions, see locks(5) manual page for details.
@@ -1141,6 +1153,9 @@ If \fBkeeppackages\fR property is set for a repository (see the
 \fBmodifyrepo\fR command), all the RPM file downloaded during installation
 will be kept here. See also the \fBclean\fR command for cleaning these
 cache directories.
+.TP
+.B /var/log/zypp/history
+Installation history log.
 .TP
 .B ~/.zypper_history
 Command history for the shell.
@@ -1197,28 +1212,37 @@ Returned upon exiting after receiving a SIGINT or SIGTERM.
 .LP
 zypper is designed to be compatible with rug, which is a command\-line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands. 
 .LP
-To enable rug-compatible behavior, use the \-r or \-\-rug\-compatible global option with each command.
+To enable rug-compatible behavior, use the \fI\-r or \-\-rug\-compatible\fR global option with each command.
 
 .SS Service Management Commands
 .LP
-ZENworks distinguishes services and catalogs. A service is
-added by URI and contains one or more catalogs. Libzypp does not have
-this distinction (yet) but for compatibility it is able to use the same command
-and option names (service-add, \-\-catalog) as rug. TODO this info is out-of-date now
-.LP
-Currently, a Repository in zypper is a synonym for both Service and Catalog in ZLM.
+ZENworks uses different terminology than ZYpp. ZLM \fBservices\fR are ZYpp's
+repositories and services. Additionally some ZLM services can contain
+\fBcatalogs\fR (rpmmd-type repositories in ZYpp speak).
+
+Zypper tries to mimick rug's behavior in its service handling commands when
+used with the -r global option. It also supports the \fI\-\-catalog\fR option
+for specifying catalogs to work with in current operation (this is an alias
+for zypper's \-\-repo option).
+
 .TP
 .I rug service-add (sa)
-zypper addrepo (ar)
+zypper addservice (as)
+When used with -r global option, this command probes the type of service
+or repository at the specified URI, if not explicitly specified. Without
+-r option the URI is not accessed at all and the URI is added as ZYpp service.
 
 .TP
 .I rug service-delete (sd)
-zypper removerepo (rr)
+zypper removeservice (rs)
 
 .TP
 .I rug service-list (sl)
-zypper repos (lr)
+zypper services (ls)
 
+.TP
+.I rug catalogs (ca)
+zypper repos (lr)
 .IP
  zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.
 
