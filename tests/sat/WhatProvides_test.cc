@@ -1,35 +1,25 @@
-#include <stdio.h>
-#include <iostream>
-#include <boost/test/auto_unit_test.hpp>
+#include "TestSetup.h"
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Easy.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/sat/WhatProvides.h"
-
-#define BOOST_TEST_MODULE WhatProvides
-
-using std::cout;
-using std::endl;
-using std::string;
-using namespace zypp;
-using namespace boost::unit_test;
-
-BOOST_AUTO_TEST_CASE(pool_query)
+BOOST_AUTO_TEST_CASE(WhatProvides)
 {
-  Pathname dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/PoolQuery";
+  TestSetup test( Arch_x86_64 );
+  test.loadRepo( TESTS_SRC_DIR"/data/openSUSE-11.1" );
 
-  ZYpp::Ptr z = getZYpp();
-
-  sat::Pool::instance().addRepoSolv(dir + "foo.solv");
-
-  Capability cap("amarok < 1.13");
-  sat::WhatProvides q( cap );
-  if ( ! q.empty() )
   {
-    MIL << "Found " << q.size() << " matches for " << cap << ":" << endl;
-    for_( it, q.begin(), q.end() )
-    MIL << *it << endl;
+    sat::WhatProvides q( Capability("zypper") );
+    BOOST_CHECK( ! q.empty() );
+    BOOST_CHECK( q.size() == 1 );
+  }
+
+  {
+    sat::WhatProvides q( Capability("zypper.x86_64 == 0.12.5-1.1") );
+    BOOST_CHECK( ! q.empty() );
+    BOOST_CHECK( q.size() == 1 );
+  }
+
+  {
+    sat::WhatProvides q( Capability("zypper.i586 == 0.12.5-1.1") );
+    BOOST_CHECK( q.empty() );
+    BOOST_CHECK( q.size() == 0 );
   }
 }
