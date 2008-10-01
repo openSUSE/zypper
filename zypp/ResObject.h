@@ -149,7 +149,7 @@ namespace zypp
      *
      * See http://cpe.mitre.org
      */
-    std::string cpeName() const;
+    std::string cpeId() const;
 
     /** Installed size. */
     ByteCount installSize() const;

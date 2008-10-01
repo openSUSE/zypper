@@ -64,7 +64,7 @@ namespace sat
       static const SolvAttr installsize;
       static const SolvAttr downloadsize;
       static const SolvAttr diskusage;
-      static const SolvAttr cpename;
+      static const SolvAttr cpeid;
       //@}
 
       /** \name package */
