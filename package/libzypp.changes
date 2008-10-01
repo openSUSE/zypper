@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct  1 16:07:36 CEST 2008 - ma@suse.de
+
+- Rephrase missleading error message. (bnc #431229)
+- revision 11222
+
+-------------------------------------------------------------------
 Tue Sep 30 17:23:48 CEST 2008 - ma@suse.de
 
 - Allow computation of disk usage per solvable.

@@ -240,7 +240,7 @@ namespace zypp
       std::string package_str = _package->name() + "-" + _package->edition().asString();
 
       // TranslatorExplanation %s = package being checked for integrity
-      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s fails integrity check. Do you want to retry?"), package_str.c_str() ) ) )
+      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
         {
         case repo::DownloadResolvableReport::RETRY:
           _retry = true;
