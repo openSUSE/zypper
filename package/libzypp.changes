@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct  2 17:18:19 CEST 2008 - ma@suse.de
+
+- Do not consider self provided requirements whan computing the 
+  installation order.
+- revision 11231
+
+-------------------------------------------------------------------
 Wed Oct  1 16:07:36 CEST 2008 - ma@suse.de
 
 - Rephrase missleading error message. (bnc #431229)

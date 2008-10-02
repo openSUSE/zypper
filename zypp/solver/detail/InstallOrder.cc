@@ -222,30 +222,38 @@ InstallOrder::rdfsvisit (const PoolItem item)
 
     for (CapList::const_iterator iter = requires.begin(); iter != requires.end(); ++iter)
     {
+        bool goBack = false;
 	const Capability requirement = *iter;
         PoolItemList providers;
-        
+
 	XXX << "check requirement " << requirement << " of " << ITEMNAME(item) << endl;
         SATResolver satResolver(_pool, sat::Pool::instance().get());
 	PoolItemList tovisit;
-        sat::WhatProvides possibleProviders(requirement);        
+        sat::WhatProvides possibleProviders(requirement);
 
 	// first, look in _installed
         for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
-            PoolItem provider = ResPool::instance().find( *iter );        
-            if (provider != item	                                // resolvable could provide its own requirement
-                && (_installed.find( provider ) != _installed.end()))	// and is not installed
+            PoolItem provider = ResPool::instance().find( *iter );
+            if ( provider == item )
+            {
+              goBack = true;
+              break;
+            }
+            if (_installed.find( provider ) != _installed.end())	// and is not installed
             {
                 XXX << "tovisit " << ITEMNAME(provider) << endl;
                 providers.push_back (provider);
             }
         }
 
+        if ( goBack )
+          continue;
+
 	// if not found in _installed, look in _toinstall
 
 	if (providers.empty()) {
             for_( iter, possibleProviders.begin(), possibleProviders.end() ) {
-                PoolItem provider = ResPool::instance().find( *iter );        
+                PoolItem provider = ResPool::instance().find( *iter );
                 if ((provider.resolvable() != item.resolvable())	        // resolvable could provide its own requirement
                     && (_toinstall.find( provider ) != _toinstall.end()))	// and is not to be installed
                 {
