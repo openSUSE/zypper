@@ -1,9 +1,16 @@
 -------------------------------------------------------------------
+Thu Oct  2 14:45:02 CEST 2008 - jkupec@suse.cz
+
+- exit if package not found and in non-interactive mode
+  (bnc #403216)
+- r11226
+
+-------------------------------------------------------------------
 Tue Sep 30 17:03:18 CEST 2008 - jkupec@suse.cz
 
 - addservice: probe for repository/service type if in rug-compatible
-  mode (bnc #429620)
-- r11216
+  mode (bnc #429620) r11216
+- typo in the help text (bnc #430814) r11215
 
 -------------------------------------------------------------------
 Mon Sep 29 12:08:12 CEST 2008 - jkupec@suse.cz
