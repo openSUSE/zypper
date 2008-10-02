@@ -1209,7 +1209,7 @@ void Zypper::processCommandOptions()
       {"sort-by-uri", no_argument, 0, 'U'},
       {"sort-by-alias", no_argument, 0, 'A'},
       {"sort-by-name", no_argument, 0, 'N'},
-      {"service", no_argument, 0, 's'}, //! \todo document
+      {"service", no_argument, 0, 's'},
       {"help", no_argument, 0, 'h'},
       {0, 0, 0, 0}
     };
@@ -1247,7 +1247,10 @@ void Zypper::processCommandOptions()
       "-P, --sort-by-priority    Sort the list by repository priority.\n"
       "-A, --sort-by-alias       Sort the list by alias.\n"
       "-N, --sort-by-name        Sort the list by name.\n"
-    );
+    ) + string(_(
+      // translators: this option belongs to 'lr' command help
+      "-s, --service             Show also alias of parent service.\n"
+    ));
     break;
   }
 
