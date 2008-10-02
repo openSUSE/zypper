@@ -1,0 +1,122 @@
+/** \page CodeSnippets Code Snippets
+
+\section for_
+  If you prefer using iterator in a \c for loop, but dislike to figure out
+  the exact type of the iterator, you may find the  \c for_ macro convenient:
+  \code
+    #include "zypp/base/Easy.h"
+
+    for_( it, pool.byIdentBegin( kind, name ),
+              pool.byIdentEnd( kind, name ) )
+    {
+      PoolItem copy = *it;
+    }
+  \endcode
+  instead of:
+  \code
+    for ( ResPool::byIdent_iterator it = pool.byIdentBegin( kind, name ),
+          end = pool.byIdentEnd( kind, name );
+          it != end, ++it )
+    {
+      PoolItem copy = *it;
+    }
+  \endcode
+
+\section erase erase elements from containers
+  \verbatim
+  // //////////////////////////////////////////////////////////////////////
+  // Avoid buggy code, that tries to erase elements, matching a
+  // certain property from containers. Example:
+  //
+  //  for (ResStore::iterator it = store.begin(); it != store.end(); ++it)
+  //  {
+  //    _pool.erase(*it);
+  //  }
+  //
+  // Problem: Removing an element from a container invalidates (at least)
+  //          all iterators pointing to it. Thus after erasing *it, it is
+  //          no longer valid. ++it has UNDEFINED BEHAVIOUR.
+
+  // //////////////////////////////////////////////////////////////////////
+  // Loop based algorithms (differs depending on the kind of container)
+  // =====================
+  // //////////////////////////////////////////////////////////////////////
+
+  // //////////////////////////////////////////////////////////////////////
+  // Sequential container (vector string deque list): erase returns
+  // a valid iterator to the next element.
+  // //////////////////////////////////////////////////////////////////////
+
+    SeqContainer c;
+    for ( SeqContainer::iterator it = c.begin(); it != c.end(); /**/ )
+      {
+        if ( toBeRemoved( *it ) )
+          {
+            it = c.erase( it ); // valid next-iterator returned
+          }
+        else
+          ++it;
+      }
+
+
+  // //////////////////////////////////////////////////////////////////////
+  // Associative container (maps sets): erase returns void, but we can use
+  // postfix increment, as ONLY iterators to the eased object get invalid:
+  // //////////////////////////////////////////////////////////////////////
+
+    AssocContainer c;
+    for ( AssocContainer::iterator it = c.begin(); it != c.end(); /**/ )
+      {
+        if ( toBeRemoved( *it ) )
+          {
+            c.erase( it++ ); // postfix! Incrementing before erase
+          }
+        else
+          ++it;
+      }
+
+
+  // //////////////////////////////////////////////////////////////////////
+  // stl algorithms
+  // ==============
+  //
+  // In case toBeRemoved above is actually a function/functor.
+  // //////////////////////////////////////////////////////////////////////
+
+
+  // //////////////////////////////////////////////////////////////////////
+  // Sequential container (vector string deque): stl::remove_if,
+  // does not erase elements, they are just moved to the containers
+  // end, and an iterator to the 1st item to be 'removed' is returned.
+  // //////////////////////////////////////////////////////////////////////
+
+    SeqContainer c;
+    c.erase( stl::remove_if( c.begin(), c.end(), toBeRemoved ),
+            c.end() );
+
+
+  // //////////////////////////////////////////////////////////////////////
+  // Sequential container (list): The above works too, but list has a
+  // builtin remove/remove_if which is more efficient.
+  // //////////////////////////////////////////////////////////////////////
+
+    list c;
+    c.remove_if( toBeRemoved );
+
+
+  // //////////////////////////////////////////////////////////////////////
+  // Associative container (maps sets): Actually the loop above is the most
+  // efficient solution. There is an algorithm based solution, but it requires
+  // copying all elements not to be removed ;(
+  // //////////////////////////////////////////////////////////////////////
+
+    AssocContainer c;
+
+    AssocContainer keepItems;
+    stl::remove_copy_if( c.begin(), c.end(),
+                        stl::inserter( keepItems, keepItems.end() ),
+                        toBeRemoved );
+    c.swap( keepItems );
+  \endverbatim
+
+*/

@@ -1,0 +1,54 @@
+All .doc files here will be parsed and included in the autodocs generated
+by doxygen (see http://www.doxygen.org/). All the other files here (mostly
+below notes) are available to be vervatim included in some documentation
+block using:
+
+    /** \include somefile
+    */
+  or
+    /** \example
+    */
+
+
+The .doc files here will mostly provide:
+
+- The content of the main index page (defined in Mainpage.doc).
+
+- Other related documentation pages:
+
+  /*! \page page1 A documentation page
+    Leading text.
+    \section sec An example section
+    This page contains the subsections \ref subsection1 and \ref subsection2.
+    For more info see page \ref page2.
+    \subsection subsection1 The first subsection
+    Text.
+    \subsection subsection2 The second subsection
+    More text.
+  */
+
+  /*! \page page2 Another page
+    Even more info.
+  */
+
+Those pages will per default appear in the documentations 'Related Pages'
+section, unless you refer to them from within soome other page by using
+'\subpage':
+
+  /** \mainpage A simple manual
+
+  Some general info.
+
+  This manual is divided in the following sections:
+  - \subpage intro
+  - \subpage advanced "Advanced usage"
+  */
+
+
+- Documentation for a group of classes defined by \ingroup:
+
+  /*! \defgroup g_Resolvable Resolvable Objects
+    Some explanation.
+  */
+
+- And whatever else we don't want to keep in the header files.

@@ -8,7 +8,6 @@ PROJECT_NUMBER         = @VERSION@
 OUTPUT_DIRECTORY       =
 CREATE_SUBDIRS         = NO
 OUTPUT_LANGUAGE        = English
-USE_WINDOWS_ENCODING   = NO
 BRIEF_MEMBER_DESC      = YES
 REPEAT_BRIEF           = YES
 ABBREVIATE_BRIEF       =
@@ -71,13 +70,13 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_SOURCE_DIR@
-FILE_PATTERNS          =
+INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@
+FILE_PATTERNS          = *.h *.hh *.hxx *.hpp *.h++ *.c *.cc *.cxx *.cpp *.c++ *.tcc *.hcc *.doc
 RECURSIVE              = YES
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
-EXAMPLE_PATH           = @ZYPP_EXAMPLE_DIR@
+EXAMPLE_PATH           = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_EXAMPLE_DIR@
 EXAMPLE_PATTERNS       =
 EXAMPLE_RECURSIVE      = NO
 IMAGE_PATH             =
@@ -209,8 +208,6 @@ DIRECTORY_GRAPH        = NO
 DOT_IMAGE_FORMAT       = png
 DOT_PATH               =
 DOTFILE_DIRS           =
-MAX_DOT_GRAPH_WIDTH    = 1024
-MAX_DOT_GRAPH_HEIGHT   = 1024
 MAX_DOT_GRAPH_DEPTH    = 0
 DOT_TRANSPARENT        = NO
 DOT_MULTI_TARGETS      = NO

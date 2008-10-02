@@ -1,0 +1,39 @@
+/** \page Testcases Writing Testcases
+
+\verbatim
+  - added tests/data/openSUSE-11.1 containing raw susetags metadata.
+  Keeping .solv files in svn is somewhat inconvenient, as you must rebuild them
+  if something in satsolver changes.
+\endverbatim
+
+\verbatim
+  - added  tests/include as location for includes that might be used in multiple
+  testcases.
+\endverbatim
+
+\verbatim
+  - added tests/include/TestSetup.h to ease building a test environment below
+  some tempdir. Currently supports easy setup of Target, RepoManager and
+  loading data (raw metadata and .solv files) into the pool.
+
+  That's how it currently looks like:
+
+          #include "TestSetup.h"
+
+          BOOST_AUTO_TEST_CASE(WhatProvides)
+          {
+            TestSetup test( Arch_x86_64 );  // use x86_64 as system arch
+            test.loadTarget(); // initialize and load target
+            test.loadRepo( TESTS_SRC_DIR"/data/openSUSE-11.1" );
+
+  This is all you need to setup Target, RepoManager below some temp directory
+  and load the raw metadata into the pool.
+
+  In case you want to setup the system below some fix directory, use:
+
+          TestSetup test( "/tmp/mydir", Arch_x86_64 );
+
+  You directory is used as it is and not removed at the end.
+\endverbatim
+
+*/
