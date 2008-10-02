@@ -1,7 +1,11 @@
 #ifndef INCLUDE_TESTSETUP
 #define INCLUDE_TESTSETUP
 #include <iostream>
+
+#ifndef INCLUDE_TESTSETUP_WITHOUT_BOOST
 #include <boost/test/auto_unit_test.hpp>
+using boost::unit_test::test_case;
+#endif
 
 #include "zypp/base/LogTools.h"
 #include "zypp/ZYppFactory.h"
@@ -14,7 +18,6 @@
 
 using std::cout;
 using std::endl;
-using boost::unit_test::test_case;
 using namespace zypp;
 
 /** Build a test environment below a temp. root directory.
@@ -51,6 +54,7 @@ class TestSetup
     ResPool      pool()        { return ResPool::instance(); }
     ResPoolProxy poolProxy()   { return pool().proxy(); }
     sat::Pool    satpool()     { return sat::Pool::instance(); }
+    Resolver &   resolver()    { return *getZYpp()->resolver(); }
 
   public:
     /** Load target repo. */
