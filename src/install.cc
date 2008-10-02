@@ -40,6 +40,8 @@ static void mark_for_install(Zypper & zypper,
       str::form(_("'%s' not found"), name.c_str()));
     WAR << str::form("'%s' not found", name.c_str()) << endl;
     zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+    if (zypper.globalOpts().non_interactive)
+      ZYPP_THROW(ExitRequestException());
     return;
   }
 
@@ -523,6 +525,8 @@ void install_remove(Zypper & zypper,
       zypper.out().error(str::form(_("'%s' not found."), str.c_str()));
       WAR << str::form("'%s' not found", str.c_str()) << endl;
       zypper.setExitCode(ZYPPER_EXIT_INF_CAP_NOT_FOUND);
+      if (zypper.globalOpts().non_interactive)
+        ZYPP_THROW(ExitRequestException());
       continue;
     }
 
