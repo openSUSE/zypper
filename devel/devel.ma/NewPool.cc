@@ -494,7 +494,7 @@ try {
   ResPool   pool( ResPool::instance() );
   sat::Pool satpool( sat::Pool::instance() );
 
-  if ( 0 )
+  if ( 1 )
   {
     Measure x( "INIT TARGET" );
     {
@@ -505,6 +505,7 @@ try {
       getZYpp()->target()->load();
       USR << getZYpp()->target()->targetDistribution() << endl;
       USR << getZYpp()->target()->targetDistributionRelease() << endl;
+      dumpRange( USR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
     }
   }
 

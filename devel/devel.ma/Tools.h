@@ -11,6 +11,10 @@
 #include "Printing.h"
 #include "FakePool.h"
 
+#define INCLUDE_TESTSETUP_WITHOUT_BOOST
+#include "zypp/../tests/include/TestSetup.h"
+#undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
+
 #include <zypp/base/Easy.h>
 #include <zypp/base/Counter.h>
 #include <zypp/base/Measure.h>
@@ -26,6 +30,7 @@
 #include "zypp/ui/Selectable.h"
 #include <zypp/Repository.h>
 #include <zypp/RepoManager.h>
+
 
 using namespace zypp;
 using zypp::debug::Measure;
