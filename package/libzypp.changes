@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct  2 18:50:11 CEST 2008 - ma@suse.de
+
+- Add product attribute: PRODUCTLINE.
+- revision 11234
+- version 5.14.0 (13)
+
+-------------------------------------------------------------------
 Thu Oct  2 17:18:19 CEST 2008 - ma@suse.de
 
 - Do not consider self provided requirements whan computing the 

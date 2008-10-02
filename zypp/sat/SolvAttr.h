@@ -123,6 +123,7 @@ namespace sat
 
       /** \name product */
       //@{
+      static const SolvAttr productProductLine;
       static const SolvAttr productShortlabel;
       static const SolvAttr productDistproduct;
       static const SolvAttr productDistversion;

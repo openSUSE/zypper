@@ -24,7 +24,7 @@ Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
 BuildRequires:  cmake
-BuildRequires:  libsatsolver-devel >= 0.10.13 openssl-devel
+BuildRequires:  libsatsolver-devel >= 0.11.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
 
 %if 0%{?suse_version}

@@ -118,10 +118,7 @@ namespace zypp
   }
 
   std::string Product::productLine() const
-  {
-#warning productLine needs to be implemented.
-    return std::string();
-  }
+  { return lookupStrAttribute( sat::SolvAttr::productProductLine ); }
 
   ///////////////////////////////////////////////////////////////////
 
