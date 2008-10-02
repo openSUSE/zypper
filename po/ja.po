@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 18:07+0200\n"
-"PO-Revision-Date: 2008-09-26 20:05+0900\n"
+"POT-Creation-Date: 2008-09-30 13:54+0200\n"
+"PO-Revision-Date: 2008-10-01 21:20+0900\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -833,9 +833,8 @@ msgid "Repository metadata for '%s' not found in local cache."
 msgstr "ローカルキャッシュ内には '%s' のリポジトリメタデータは見つかりませんでした。"
 
 #: ../src/repos.cc:269
-#, fuzzy
 msgid "Error building the cache:"
-msgstr "キャッシュデータベースの作成に失敗:"
+msgstr "キャッシュの構築の際にエラー:"
 
 #: ../src/repos.cc:422
 #, c-format
@@ -1736,16 +1735,16 @@ msgstr "アップグレードを準備しています..."
 
 #: ../src/solve-commit.cc:931
 msgid "Generating solver test case..."
-msgstr "解決方法のテスト出力を作成しています..."
+msgstr "解決処理のテスト出力を作成しています..."
 
 #: ../src/solve-commit.cc:934
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "解決方法のテストは %s に出力しました。"
+msgstr "解決処理のテスト結果は %s に出力されました。"
 
 #: ../src/solve-commit.cc:938
 msgid "Error creating the solver test case."
-msgstr "解決方法のテスト出力中にエラーが発生しました。"
+msgstr "解決処理のテスト出力中にエラーが発生しました。"
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
@@ -1829,9 +1828,8 @@ msgid "One of installed patches requires reboot of your machine. Reboot as soon 
 msgstr "インストールされた修正の中にはコンピュータの再起動を必要とするものがあります。できるだけ早めに再起動してください。"
 
 #: ../src/solve-commit.cc:1187
-#, fuzzy
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "警告: インストールされた修正の中にはパッケージ管理システム自身の修正が含まれています。次の操作を実行する前に YaST またはその他のパッケージ管理システムを起動し直してください。"
+msgstr "インストールされた修正の中にはパッケージ管理システム自身の修正が含まれています。再度このコマンドを実行してその他の必要な更新をインストールしてください。"
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:65
@@ -2122,7 +2120,6 @@ msgid "Error"
 msgstr "エラー"
 
 #: ../src/Zypper.cc:154
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2156,7 +2153,6 @@ msgstr ""
 "\t--raw-cache-dir <dir>\t指定したディレクトリにある未加工のメタデータキャッシュを使用する\n"
 
 #: ../src/Zypper.cc:172
-#, fuzzy
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2171,7 +2167,6 @@ msgstr ""
 "\t--no-refresh\tリポジトリの更新を行なわない\n"
 
 #: ../src/Zypper.cc:179
-#, fuzzy
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
@@ -2180,7 +2175,8 @@ msgid ""
 msgstr ""
 "  ターゲットオプション:\n"
 "\t--root, -R <dir>\t指定したディレクトリをルートディレクトリとして処理する\n"
-"\t--disable-system-resolvables  インストールされた解決方法を読み込まない\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tインストールされたパッケージを読み込まない\n"
 
 #: ../src/Zypper.cc:186
 msgid ""
@@ -2193,7 +2189,6 @@ msgstr ""
 "\tshell, sh\t\t一度で複数のコマンドを入力する\n"
 
 #: ../src/Zypper.cc:191
-#, fuzzy
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2214,7 +2209,6 @@ msgstr ""
 "\tclean\t\t\tローカルのキャッシュを削除する\n"
 
 #: ../src/Zypper.cc:201
-#, fuzzy
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2231,7 +2225,6 @@ msgstr ""
 "\trefresh-services, refs\t全てのサービスを更新する\n"
 
 #: ../src/Zypper.cc:209
-#, fuzzy
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2247,8 +2240,6 @@ msgstr ""
 "\tinstall, in\t\tパッケージをインストールする\n"
 "\tremove, rm\t\tパッケージを削除する\n"
 "\tverify, ve\t\tパッケージの依存関係を検証する\n"
-"\tupdate, up\t\tインストール済みのパッケージを新しいバージョンに更新する\n"
-"\tdist-upgrade, dup\tディストリビューションのアップグレードを行なう\n"
 "\tsource-install, si\t構築の際に依存するものを含めてソースパッケージをインストールする\n"
 "\tinstall-new-recommends, inr  インストール済みのパッケージから判断される新規推奨パッケージをインストールする\n"
 
@@ -2262,9 +2253,15 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
+"     更新管理:\n"
+"\tupdate, up\t\tインストール済みのパッケージを新しいバージョンに更新する\n"
+"\tlist-updates, lu\t利用可能な更新を一覧表示する\n"
+"\tpatch\t\t\t必要な修正をインストールする\n"
+"\tlist-patches, lp\t必要な修正を一覧表示する\n"
+"\tdist-upgrade, dup\tディストリビューションのアップグレードを行なう\n"
+"\tpatch-check, pchk\t修正を確認する\n"
 
 #: ../src/Zypper.cc:229
-#, fuzzy
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2284,8 +2281,6 @@ msgstr ""
 "\tpatch-info\t\t指定した修正の完全な情報を表示する\n"
 "\tpattern-info\t\t指定したパターンの完全な情報を表示する\n"
 "\tproduct-info\t\t指定した製品の完全な情報を表示する\n"
-"\tpatch-check, pchk\t修正を確認する\n"
-"\tlist-updates, lu\t利用可能な更新を表示する\n"
 "\tpatches, pch\t\t利用可能な修正を表示する\n"
 "\tpackages, pa\t\t利用可能なパッケージを表示する\n"
 "\tpatterns, pt\t\t利用可能なパターンを表示する\n"
@@ -2293,20 +2288,18 @@ msgstr ""
 "\twhat-provides, wp\t指定した能力設定が提供するパッケージを表示する\n"
 
 #: ../src/Zypper.cc:244
-#, fuzzy
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"\tパッケージロック:\n"
+"\tパッケージロック (施錠):\n"
 "\taddlock, al\t\tパッケージロックを追加する\n"
 "\tremovelock, rl\t\tパッケージロックを削除する\n"
 "\tlocks, ll\t\t現在のパッケージロックを表示する\n"
 
 #: ../src/Zypper.cc:250
-#, fuzzy
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2393,7 +2386,7 @@ msgstr "予期しない例外が発生しました。"
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:860
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2416,14 +2409,14 @@ msgid ""
 msgstr ""
 "install (in) [オプション] <能力設定|RPM ファイルの URI> ...\n"
 "\n"
-"指定した能力設定を解決してインストールを行なうか、もしくは指定した場所から RPM ファイルをインストールします。能力設定は NAME[OP<VERSION>] の形式で記述します。 \"OP\" は  <, <=, =, >=, > のうちのいずれかを指定します。\n"
+"指定した能力設定を解決してパッケージのインストールを行なうか、もしくは指定した場所から RPM パッケージファイルをインストールします。能力設定は NAME[OP<VERSION>] の形式で記述します。 \"OP\" は  <, <=, =, >=, > のうちのいずれかを指定します。\n"
 "\n"
 "  コマンドオプション:\n"
-"-r, --repo <alias|#|URI>        指定したリポジトリからのみ解決方法をインストールする\n"
-"-t, --type <type>               解決方法の種類を指定する (%s) \n"
+"-r, --repo <alias|#|URI>        指定したリポジトリからのパッケージのみをインストールする\n"
+"-t, --type <type>               パッケージの種類を指定する (%s) \n"
 "                                既定: %s\n"
-"-n, --name                      能力設定ではなく名前で解決方法を指定する\n"
-"-C, --capability                解決方法を能力設定で選択する\n"
+"-n, --name                      能力設定ではなく名前でパッケージを指定する\n"
+"-C, --capability                パッケージを能力設定で選択する\n"
 "-f, --force                     既にインストールされていてもインストールを行なう (再インストール)\n"
 "-l, --auto-agree-with-licenses  サードパーティのライセンス確認を行なう際、自動的に 'yes' と回答する\n"
 "                                (詳細は 'man zypper' をお読みください)\n"
@@ -2437,7 +2430,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:909
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2445,7 +2438,7 @@ msgid ""
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-"-t, --type <type>               Type of resolvable (%s).\n"
+"-t, --type <type>               Type of package (%s).\n"
 "                                Default: %s.\n"
 "-n, --name                      Select packages by plain name, not by capability.\n"
 "-C, --capability                Select packages by capability.\n"
@@ -2459,11 +2452,11 @@ msgstr ""
 "指定した能力設定を削除します。能力設定は NAME[OP<VERSION>] の形式で記述します。 \"OP\" は  <, <=, =, >=, > のうちのいずれかを指定します。\n"
 "\n"
 "  コマンドオプション:\n"
-"-r, --repo <alias|#|URI>        指定したリポジトリからの解決方法のみに対して作業を行なう\n"
-"-t, --type <type>               解決方法の種類を指定する (%s)\n"
+"-r, --repo <alias|#|URI>        指定したリポジトリからのパッケージのみに対して作業を行なう\n"
+"-t, --type <type>               パッケージの種類を指定する (%s)\n"
 "                                既定: %s\n"
-"-n, --name                      能力設定ではなく名前で解決方法を指定する\n"
-"-C, --capability                解決方法を能力設定で選択する\n"
+"-n, --name                      能力設定ではなく名前でパッケージを指定する\n"
+"-C, --capability                パッケージを能力設定で選択する\n"
 "    --debug-solver              解決処理についてデバッグを行なう\n"
 "-R, --no-force-resolution       解決器に対して解決方法を見つけるよう強制せず、尋ねるようにする\n"
 "    --force-resolution          解決器に対して解決方法を見つけるよう強制する (より積極的な動作)\n"
@@ -2878,7 +2871,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1412
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "list-updates (lu) [options]\n"
 "\n"
@@ -2897,19 +2890,22 @@ msgid ""
 msgstr ""
 "list-updates (lu) [options]\n"
 "\n"
-"更新の一覧を表示します。\n"
+"利用可能な更新の一覧を表示します。\n"
 "\n"
 "  コマンドオプション:\n"
-"-t, --type <type>               解決方法の種類を指定する (%s)\n"
-"                                既定: %s\n"
-"-r, --repo <alias|#|URI>        指定した別名のリポジトリからの更新のみを表示する\n"
-"    --best-effort               「ベストエフォート」方式での更新を指定する。最新・最良\n"
-"                                ではない古いバージョンへの更新も受け入れる\n"
+"-t, --type <type>             パッケージの種類を指定する (%s)\n"
+"                              既定: %s\n"
+"-r, --repo <alias|#|URI>      指定した別名のリポジトリからの更新のみを表示する\n"
+"    --best-effort             「ベストエフォート」方式での更新を指定する。最新・最良\n"
+"                              ではない古いバージョンへの更新も受け入れる\n"
+"-a, --all                     インストール可能であるかどうかを問わず、\n"
+"                              新しいバージョンが利用可能な\n"
+"                              全てのパッケージを一覧表示する。\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1463
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -2935,11 +2931,11 @@ msgid ""
 msgstr ""
 "update (up) [options]\n"
 "\n"
-"インストール済みの解決方法を適切で新しいバージョンに更新します。\n"
+"インストール済みのパッケージを適切で新しいバージョンに更新します。\n"
 "\n"
 "  コマンドオプション:\n"
 "\n"
-"-t, --type <type>               解決方法の種類を指定する (%s)\n"
+"-t, --type <type>               パッケージの種類を指定する (%s)\n"
 "                                既定: %s\n"
 "-r, --repo <alias|#|URI>        指定した別名のリポジトリからの更新に限定する\n"
 "    --skip-interactive          対話処理が必要な更新をスキップする\n"
@@ -2955,7 +2951,6 @@ msgstr ""
 "-D, --dry-run                   更新をテストするだけで実際には何もしない\n"
 
 #: ../src/Zypper.cc:1502
-#, fuzzy
 msgid ""
 "patch [options]\n"
 "\n"
@@ -2971,22 +2966,21 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging.\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"dist-upgrade (dup) [options]\n"
+"patch [options]\n"
 "\n"
-"ディストリビューションのアップグレード処理を行ないます。\n"
+"利用可能な全ての修正をインストールします。\n"
 "\n"
 "  コマンドオプション:\n"
 "\n"
-"-r, --repo <alias|#|URI>        指定した別名のリポジトリからのアップグレードに限定する\n"
-"    --no-recommends             推奨されるパッケージについてはインストールを行なわず、必要なもののみを\n"
-"                                インストールする\n"
+"-r, --repo <alias|#|URI>        指定したリポジトリからの修正のみをインストールする\n"
+"    --skip-interactive          対話処理が必要な修正をスキップする\n"
 "-l, --auto-agree-with-licenses  サードパーティのライセンス確認を行なう際、自動的に 'yes' と回答する\n"
+"                                \n"
 "                                (詳細は man zypper コマンドで出力される情報をご覧ください)\n"
 "    --debug-solver              解決処理についてデバッグを行なう\n"
-"-D, --dry-run                   アップグレードをテストするだけで実際には何もしない\n"
+"-D, --dry-run                   更新をテストするだけで実際には何もしない\n"
 
 #: ../src/Zypper.cc:1528
-#, fuzzy
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -2995,13 +2989,12 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
 msgstr ""
-"patch-check (pchk) [options]\n"
+"list-patches (lp) [options]\n"
 "\n"
-"修正がないかどうか確認を行ないます。\n"
+"利用可能な全ての修正を一覧表示します。\n"
 "\n"
 "  コマンドオプション:\n"
-"\n"
-"-r, --repo <alias|#|URI>  指定した別名のリポジトリからの修正のみを確認する\n"
+"-r, --repo <alias|#|URI>        指定したリポジトリからの修正のみを表示する\n"
 
 #: ../src/Zypper.cc:1553
 msgid ""
@@ -3187,7 +3180,7 @@ msgstr ""
 "-u, --uninstalled-only    インストールされていないパターンのみを表示する\n"
 
 #: ../src/Zypper.cc:1760
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3200,11 +3193,11 @@ msgid ""
 msgstr ""
 "info (if) [options] <name> ...\n"
 "\n"
-"パッケージに関する詳細情報を表示します\n"
+"指定したパッケージに関する詳細情報を表示します\n"
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみに対して作業を行なう\n"
-"-t, --type <type>         解決方法の種類を指定する (%s) \n"
+"-t, --type <type>         パッケージの種類を指定する (%s) \n"
 "                          既定: %s"
 
 #: ../src/Zypper.cc:1783
@@ -3281,7 +3274,7 @@ msgstr ""
 "このコマンドにはオプションはありません。\n"
 
 #: ../src/Zypper.cc:1911
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
@@ -3298,7 +3291,7 @@ msgstr ""
 "\n"
 "  コマンドオプション:\n"
 "-r, --repo <alias|#|URI>  指定したリポジトリからのもののみをロックする\n"
-"-t, --type <type>         解決方法の種類を指定する (%s) \n"
+"-t, --type <type>         パッケージの種類を指定する (%s) \n"
 "                          既定: %s\n"
 
 #: ../src/Zypper.cc:1937
@@ -3586,9 +3579,9 @@ msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "パッケージのインストール／削除には root 権限が必要です。"
 
 #: ../src/Zypper.cc:2911
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type: %s"
-msgstr "不明な解決方法種別: %s"
+msgstr "不明なパッケージ種類です: %s"
 
 #: ../src/Zypper.cc:2931
 #, c-format
@@ -3619,9 +3612,9 @@ msgstr "ソースパッケージ名の指定が必要です。"
 
 #: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
 #: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type '%s'."
-msgstr "不明な解決方法種別 '%s' です。"
+msgstr "不明なパッケージ種類 '%s' です。"
 
 #: ../src/Zypper.cc:3262
 msgid "Problem occurred initializing or executing the search query"
@@ -3633,9 +3626,9 @@ msgstr "解決へのヒントとして上記のメッセージをお読みくだ
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
 #: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
-#, fuzzy, c-format
+#, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "'%s' として実行します。 '%s' 機能は実行できません。"
+msgstr "'%s' として実行します。 '%s' オプションは使用できません。"
 
 #: ../src/Zypper.cc:3463
 msgid "Root privileges are required for updating packages."
@@ -3680,5 +3673,3 @@ msgstr "説明"
 msgid "Resolvable Type"
 msgstr "解決方法の種類"
 
-#~ msgid "Running as 'rug', can't do 'best-effort' approach to update."
-#~ msgstr "'rug' コマンドとして実行します。 'best-effort' 機能は実行できません。"

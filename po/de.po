@@ -1,5 +1,4 @@
 # translation of zypper.de.po to German
-# translation of zypper.de.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
@@ -13,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 18:07+0200\n"
-"PO-Revision-Date: Sep 26 09:10:07 UTC 2008\n"
+"POT-Creation-Date: 2008-09-30 13:54+0200\n"
+"PO-Revision-Date: Tue Sep 30 17:42:58 UTC 2008\n"
 "Last-Translator: Marko Schugardt <mail.sapex@gmx.de>\n"
 "Language-Team: German <opensuse-translation-de@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -837,9 +836,8 @@ msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Repository-Metadaten für '%s' wurden nicht im lokalen Zwischenspeicher gefunden."
 
 #: ../src/repos.cc:269
-#, fuzzy
 msgid "Error building the cache:"
-msgstr "Fehler beim Bau der Zwischenspeicherdatenbank:"
+msgstr "Fehler beim Bau des Zwischenspeichers:"
 
 #: ../src/repos.cc:422
 #, c-format
@@ -1870,9 +1868,8 @@ msgid "One of installed patches requires reboot of your machine. Reboot as soon 
 msgstr "Einer der installierten Patches benötigt einen Neustart der Maschine. Starten Sie so schnell wie möglich neu."
 
 #: ../src/solve-commit.cc:1187
-#, fuzzy
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "Einer der installierten Patches betrifft den Paketverwalter selbst, dadurch benötigt letzterer einen Neustart, bevor weitere Operationen durchgeführt werden können."
+msgstr "Einer der installierten Patches betrifft den Paketverwalter selbst. Führen Sie den Befehl nochmal aus, um jeden anderen benötigten Patch zu installieren."
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:65
@@ -2173,7 +2170,6 @@ msgid "Error"
 msgstr "Fehler"
 
 #: ../src/Zypper.cc:154
-#, fuzzy
 msgid ""
 "  Global Options:\n"
 "\t--help, -h\t\tHelp.\n"
@@ -2195,19 +2191,21 @@ msgstr ""
 "  Globale Optionen:\n"
 "\t--help, -h\t\tHilfe.\n"
 "\t--version, -V\t\tAusgabe der Versionsnummer.\n"
-"\t--quiet, -q\t\tNormale Ausgabe unterdrücken, nur Fehlermeldungen ausgeben.\n"
+"\t--quiet, -q\t\tNormale Ausgabe unterdrücken, nur\n"
+"\t\t\t\tFehlermeldungen ausgeben.\n"
 "\t--verbose, -v\t\tGesprächigkeit erhöhen.\n"
 "\t--no-abbrev, -A\t\tText in Tabellen nicht abkürzen.\n"
 "\t--table-style, -s\tTabellenstil (Ganzzahl).\n"
 "\t--rug-compatible, -r\trug-Kompatibilität einschalten.\n"
-"\t--non-interactive, -n\tNicht fragen, automatisch die Standardantworten annehmen.\n"
+"\t--non-interactive, -n\tNicht fragen, automatisch die\n"
+"\t\t\t\tStandardantworten annehmen.\n"
 "\t--xmlout, -x\t\tZur XML-Ausgabe umschalten.\n"
-"\t--reposd-dir, -D <dir>\tAlternatives Repository-Definitionsdateien-Verzeichnis verwenden.\n"
-"\t--cache-dir, -C <dir>\tAlternatives Metadaten-Zwischenspeicher-Datenbank-Verzeichnis verwenden.\n"
-"\t--raw-cache-dir <dir>\tAlternatives Rohmetadaten-Zwischenspeicher-Verzeichnis verwenden.\n"
+"\t--reposd-dir, -D <dir>\tAlternatives Repository-Definition-Files-Directory\n"
+"\t\t\t\tverwenden.\n"
+"\t--cache-dir, -C <dir>\tAlternatives Meta-Data-Cache-Directory verwenden.\n"
+"\t--raw-cache-dir <dir>\tAlternatives Raw-Meta-Data-Cache-Directory verwenden.\n"
 
 #: ../src/Zypper.cc:172
-#, fuzzy
 msgid ""
 "     Repository Options:\n"
 "\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
@@ -2215,23 +2213,23 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"\tRepository-Optionen:\n"
+"     Repository-Optionen:\n"
 "\t--no-gpg-checks\t\tGPG-Prüffehler ignorieren und fortfahren.\n"
 "\t--plus-repo, -p <URI>\tEin zusätzliches Repository verwenden.\n"
 "\t--disable-repositories\tKeine Metadaten aus den Repositories lesen.\n"
 "\t--no-refresh\t\tDie Repositories nicht auffrischen.\n"
 
 #: ../src/Zypper.cc:179
-#, fuzzy
 msgid ""
 "     Target Options:\n"
 "\t--root, -R <dir>\tOperate on a different root directory.\n"
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"\tZieloptionen:\n"
+"     Zieloptionen:\n"
 "\t--root, -R <dir>\tIn einem anderen Root-Verzeichnis operieren.\n"
-"\t--disable-system-resolvables  Keine installierten auflösbaren Abhängigkeiten lesen.\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tKeine installierten Pakete lesen.\n"
 
 #: ../src/Zypper.cc:186
 msgid ""
@@ -2244,7 +2242,6 @@ msgstr ""
 "\tshell, sh\t\tMehrere Kommandos auf einmal akzeptieren.\n"
 
 #: ../src/Zypper.cc:191
-#, fuzzy
 msgid ""
 "     Repository Management:\n"
 "\trepos, lr\t\tList all defined repositories.\n"
@@ -2255,7 +2252,7 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"\tRepository-Handhabung:\n"
+"     Repository-Verwaltung:\n"
 "\trepos, lr\t\tAlle bestimmten Repositories auflisten.\n"
 "\taddrepo, ar\t\tEin neues Repository hinzufügen.\n"
 "\tremoverepo, rr\t\tEin festgelegtes Repository entfernen.\n"
@@ -2265,7 +2262,6 @@ msgstr ""
 "\tclean\t\t\tLokale Zwischenspeicher bereinigen.\n"
 
 #: ../src/Zypper.cc:201
-#, fuzzy
 msgid ""
 "     Service Management:\n"
 "\tservices, ls\t\tList all defined services.\n"
@@ -2274,7 +2270,7 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"\tDiensthandhabung:\n"
+"     Dienstverwaltung:\n"
 "\tservices, ls\t\tAlle bestimmten Dienste auflisten.\n"
 "\taddservice, as\t\tEinen neuen Dienst hinzufügen.\n"
 "\tmodifyservice, ms\tEinen festgelegten Dienst modifizieren.\n"
@@ -2282,7 +2278,6 @@ msgstr ""
 "\trefresh-services, refs\tAlle Dienste auffrischen.\n"
 
 #: ../src/Zypper.cc:209
-#, fuzzy
 msgid ""
 "     Software Management:\n"
 "\tinstall, in\t\tInstall packages.\n"
@@ -2294,14 +2289,15 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"\tSoftwareverwaltung:\n"
+"     Softwareverwaltung:\n"
 "\tinstall, in\t\tPakete installieren.\n"
 "\tremove, rm\t\tPakete entfernen.\n"
 "\tverify, ve\t\tIntegrität der Paketabhängigkeiten überprüfen.\n"
-"\tupdate, up\t\tInstallierte Pakete mit neueren Versionen aktualisieren.\n"
-"\tdist-upgrade, dup\tEine Distributionsaktualisierung durchführen.\n"
-"\tsource-install, si\tQuellpakete und ihre Build-Abhängigkeiten installieren.\n"
-"\tinstall-new-recommends, inr  Neu hinzugefügte Pakete, die durch installierte Pakete vorgeschlagen wurdeninstallieren.\n"
+"\tsource-install, si\tQuellpakete und ihre Build-Abhängigkeiten\n"
+"\t\t\t\tinstallieren.\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tNeu hinzugefügte Pakete, die durch installierte\n"
+"\t\t\t\tPakete vorgeschlagen wurden installieren.\n"
 
 #: ../src/Zypper.cc:220
 msgid ""
@@ -2313,9 +2309,15 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
+"     Aktualisierungsverwaltung:\n"
+"\tupdate, up\t\tAlle installierten Pakete mit neueren Versionen aktualisieren.\n"
+"\tlist-updates, lu\tVerfügbare Aktualisierungen auflisten.\n"
+"\tpatch\t\t\tBenötigte Patches installieren.\n"
+"\tlist-patches, lp\tBenötigte Patches auflisten.\n"
+"\tdist-upgrade, dup\tEine Distributionsaktualisierung durchführen.\n"
+"\tpatch-check, pchk\tAuf Patches prüfen.\n"
 
 #: ../src/Zypper.cc:229
-#, fuzzy
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2329,14 +2331,12 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"\tAnfragen:\n"
+"     Anfragen:\n"
 "\tsearch, se\t\tNach Paketen suchen, die zu einem Schema passen.\n"
 "\tinfo, if\t\tVollständige Informationen für festgelegte Pakete anzeigen.\n"
 "\tpatch-info\t\tVollständige Informationen für festgelegte Patches anzeigen.\n"
 "\tpattern-info\t\tVollständige Informationen für festgelegte Schemata anzeigen.\n"
 "\tproduct-info\t\tVollständige Informationen für festgelegte Produkte anzeigen.\n"
-"\tpatch-check, pchk\tAuf Patches prüfen.\n"
-"\tlist-updates, lu\tVerfügbare Aktualisierungen auflisten.\n"
 "\tpatches, pch\t\tAlle verfügbaren Patches auflisten.\n"
 "\tpackages, pa\t\tAlle verfügbaren Pakete auflisten.\n"
 "\tpatterns, pt\t\tAlle verfügbaren Schemata auflisten.\n"
@@ -2344,20 +2344,18 @@ msgstr ""
 "\twhat-provides, wp\tPakete auflisten, die die festgelegte Fähigkeit anbieten.\n"
 
 #: ../src/Zypper.cc:244
-#, fuzzy
 msgid ""
 "     Package Locks:\n"
 "\taddlock, al\t\tAdd a package lock.\n"
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"\tPaketsperren:\n"
+"     Paketsperren:\n"
 "\taddlock, al\t\tEine Paketsperre hinzufügen.\n"
 "\tremovelock, rl\t\tEine Paketsperre entfernen.\n"
 "\tlocks, ll\t\tMomentane Paketsperren auflisten.\n"
 
 #: ../src/Zypper.cc:250
-#, fuzzy
 msgid ""
 "     Other Commands:\n"
 "\tversioncmp, vcmp\tCompare two version strings.\n"
@@ -2365,10 +2363,11 @@ msgid ""
 "\tlicenses\t\tPrint report about licenses and EULAs of\n"
 "\t\t\t\tinstalled packages.\n"
 msgstr ""
-"\tAndere Kommandos:\n"
+"     Weitere Kommandos:\n"
 "\tversioncmp, vcmp\tZwei Versionszeichenketten vergleichen.\n"
 "\ttargetos, tos\t\tDie ID-Zeichenkette des Zielbetriebssystems ausgeben.\n"
-"\tlicenses\t\tBericht über Lizenzen und EULAs der installierten Pakete ausgeben.\n"
+"\tlicenses\t\tBericht über Lizenzen und EULAs der installierten\n"
+"\t\t\t\tPakete ausgeben.\n"
 
 #: ../src/Zypper.cc:258
 msgid ""
@@ -2444,7 +2443,7 @@ msgstr "Unerwartete Ausnahme."
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:860
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "install (in) [options] <capability|rpm_file_uri> ...\n"
 "\n"
@@ -2467,16 +2466,14 @@ msgid ""
 msgstr ""
 "install (in) [Optionen] <Fähigkeit|RPM-Datei-URI> ...\n"
 "\n"
-"Auflösbare Abhängigkeiten mit festgelegten Fähigkeiten oder RPM-Dateien mit festgelegtem Ort installieren. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
+"Pakete mit festgelegten Fähigkeiten oder RPM-Dateien mit festgelegtem Ort installieren. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>        Nur auflösbare Abhängigkeiten der festgelegten\n"
-"                                Repositories installieren.\n"
-"-t, --type <Typ>                Typ der auflösbaren Abhängigkeit (%s).\n"
+"-r, --repo <Alias|#|URI>        Nur Pakete aus den festgelegten Repositories installieren.\n"
+"-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name                      Auflösbare Abhängigkeiten durch einfachen Namen,\n"
-"                                nicht durch Fähigkeit, wählen.\n"
-"-C, --capability                Auflösbare Abhängigkeiten durch Fähigkeit wählen.\n"
+"-n, --name                      Paket durch einfachen Namen, nicht durch Fähigkeit, wählen.\n"
+"-C, --capability                Paket durch Fähigkeit wählen.\n"
 "-f, --force                     Selbst wenn das Element bereits installiert ist,\n"
 "                                installieren (Reinstallation).\n"
 "-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Dittparteilizenz-Bestätigungsaufforderungen.\n"
@@ -2490,7 +2487,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
 #: ../src/Zypper.cc:909
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "remove (rm) [options] <capability> ...\n"
 "\n"
@@ -2498,7 +2495,7 @@ msgid ""
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-"-t, --type <type>               Type of resolvable (%s).\n"
+"-t, --type <type>               Type of package (%s).\n"
 "                                Default: %s.\n"
 "-n, --name                      Select packages by plain name, not by capability.\n"
 "-C, --capability                Select packages by capability.\n"
@@ -2509,16 +2506,14 @@ msgid ""
 msgstr ""
 "remove (rm) [Optionen] <Fähigkeit> ...\n"
 "\n"
-"Auflösbare Abhängigkeiten mit festgelegten Fähigkeiten entfernen. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
+"Pakete mit festgelegten Fähigkeiten entfernen. Eine Fähigkeit ist NAME[OP<VERSION>], wobei OP eines von <, <=, =, >=, > ist.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-r, --repo <Alias|#|URI>        Nur mit auflösbaren Abhängigkeiten des festgelegten\n"
-"                                Repositorys operieren.\n"
-"-t, --type <Typ>                Typ der auflösbaren Abhängigkeit (%s).\n"
+"-r, --repo <Alias|#|URI>        Nur mit Paketen des festgelegten Repositorys operieren.\n"
+"-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name                      Auflösbare Abhängigkeiten durch einfachen Namen\n"
-"                                wählen, nicht durch Fähigkeit.\n"
-"-C, --capability                Auflösbare Abhängigkeiten durch Fähigkeit wählen.\n"
+"-n, --name                      Paket durch einfachen Namen wählen, nicht durch Fähigkeit.\n"
+"-C, --capability                Paket durch Fähigkeit wählen.\n"
 "    --debug-solver              Auflöser-Testfall für das Debugging erstellen.\n"
 "-R, --no-force-resolution       Den Auflöser nicht zur Suche einer Lösung zwingen, lasse ihn fragen.\n"
 "    --force-resolution          Den Auflöser zur Suche einer Lösung zwingen (selbst eine aggressive).\n"
@@ -2934,7 +2929,7 @@ msgstr ""
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1412
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "list-updates (lu) [options]\n"
 "\n"
@@ -2956,17 +2951,20 @@ msgstr ""
 "Alle verfügbaren Aktualisierungen auflisten.\n"
 "\n"
 "  Kommandooptionen:\n"
-"-t, --type <Typ>                Typ der auflösbaren Abhängigkeit (%s).\n"
-"                                Standard: %s.\n"
-"-r, --repo <Alias|#|URI>        Nur Aktualisierungen des festgelegten Repositorys auflisten.\n"
-"    --best-effort               Einen 'bestmöglichen' Ansatz zur Aktualisierung\n"
-"                                durchführen. Aktualisierungen zu einer älteren\n"
-"                                als der neuesten Version sind auch akzeptabel.\n"
+"-t, --type <Typ>          Pakettyp (%s).\n"
+"                          Standard: %s.\n"
+"-r, --repo <Alias|#|URI>  Nur Aktualisierungen des festgelegten Repositorys auflisten.\n"
+"    --best-effort         Einen 'bestmöglichen' Ansatz zur Aktualisierung\n"
+"                          durchführen. Aktualisierungen zu einer älteren\n"
+"                          als der neuesten Version sind auch akzeptabel.\n"
+"-a, --all                 Alle Pakete für die neuere Versionen verfügbar\n"
+"                          sind auflisten, gleichgültig ob installierbar\n"
+"                          oder nicht.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
 #: ../src/Zypper.cc:1463
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "update (up) [options] ...\n"
 "\n"
@@ -2990,17 +2988,18 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"update (up) [Optionen]\n"
+"update (up) [Optionen] ...\n"
 "\n"
-"Alle installierten auflösbaren Abhängigkeiten mit neueren Versionen aktualisieren, wo anwendbar.\n"
+"Alle oder festgelegte installierte Pakete mit neueren Versionen aktualisieren, wenn möglich.\n"
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-t, --type <Typ>                Typ der auflösbaren Abhängigkeit (%s).\n"
+"-t, --type <Typ>                Pakettyp (%s).\n"
 "                                Standard: %s.\n"
 "-r, --repo <Alias|#|URI>        Aktualisierungen auf das festgelegte Repository limitieren.\n"
 "    --skip-interactive          Interaktive Aktualisierungen überspringen.\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-Bestätigungsaufforderungen.\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-\n"
+"                                Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
 "    --best-effort               Einen 'bestmöglichen' Ansatz zur Aktualisierung durchführen.\n"
 "                                Aktualisierungen zu einer älteren als der neuesten Version\n"
@@ -3014,7 +3013,6 @@ msgstr ""
 "-D, --dry-run                   Die Aktualisierung proben, nicht wirklich aktualisieren.\n"
 
 #: ../src/Zypper.cc:1502
-#, fuzzy
 msgid ""
 "patch [options]\n"
 "\n"
@@ -3030,21 +3028,21 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging.\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"dist-upgrade (dup) [Optionen]\n"
+"patch [Optionen]\n"
 "\n"
-"Eine Distributionsaktualisierung durchführen.\n"
+"Alle verfügbaren benötigten Patches installieren.\n"
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-r, --repo <Alias|#|URI>        Die Aktualisierung auf das festgelegte Repository limitieren.\n"
-"    --no-recommends             Keine empfohlenen Pakete installieren, nur die benötigten.\n"
-"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-Bestätigungsaufforderungen.\n"
+"-r, --repo <Alias|#|URI>        Nur mit dem festgelegten Repository arbeiten.\n"
+"    --skip-interactive          Interaktive Patches überspringen.\n"
+"-l, --auto-agree-with-licenses  Automatisch 'ja' sagen zu Drittparteilizenz-\n"
+"                                Bestätigungsaufforderungen.\n"
 "                                Siehe 'man zypper' für mehr Details.\n"
 "    --debug-solver              Auflöser-Testfall für das Debugging erstellen\n"
 "-D, --dry-run                   Die Aktualisierung proben, nicht wirklich aktualisieren\n"
 
 #: ../src/Zypper.cc:1528
-#, fuzzy
 msgid ""
 "list-patches (lp) [options]\n"
 "\n"
@@ -3053,13 +3051,13 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
 msgstr ""
-"patch-check (pchk) [Optionen]\n"
+"list-patches (lp) [Optionen]\n"
 "\n"
-"Auf verfügbare Patches prüfen.\n"
+"Alle verfügbaren benötigten Patches auflisten.\n"
 "\n"
 "  Kommandooptionen:\n"
 "\n"
-"-r, --repo <Alias|#|URI>  Nur auf Patches aus dem festgelegten Repository prüfen.\n"
+"-r, --repo <Alias|#|URI>        Nur Patches aus dem festgelegten Repository auflisten.\n"
 
 #: ../src/Zypper.cc:1553
 msgid ""
@@ -3244,7 +3242,7 @@ msgstr ""
 "-u, --uninstalled-only    Nur nicht-installierte Produkte anzeigen.\n"
 
 #: ../src/Zypper.cc:1760
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "info (if) [options] <name> ...\n"
 "\n"
@@ -3261,7 +3259,7 @@ msgstr ""
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Alias|#|URI>  Nur mit dem festgelegten Repository arbeiten.\n"
-"-t, --type <Typ>          Typ der auflösbaren Abhängigkeit (%s).\n"
+"-t, --type <Typ>          Pakettyp (%s).\n"
 "                          Standard: %s."
 
 #: ../src/Zypper.cc:1783
@@ -3338,7 +3336,7 @@ msgstr ""
 "Dieses Kommando hat keine zusätzlichen Optionen.\n"
 
 #: ../src/Zypper.cc:1911
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "addlock (al) [options] <packagename> ...\n"
 "\n"
@@ -3351,11 +3349,11 @@ msgid ""
 msgstr ""
 "addlock (al) [Optionen] <Paketname> ...\n"
 "\n"
-"Eine Paketsperre hinzufügen. Das zu sperrende Paket, durch exakten Namen oder globales Muster, Verwendung der Wildcard-Zeichen '*' und '?' möglich, festlegen.\n"
+"Eine Paketsperre hinzufügen. Zu sperrende Pakete durch exakten Namen oder globales Muster, Verwendung der Wildcard-Zeichen '*' und '?' möglich, festlegen.\n"
 "\n"
 "  Kommandooptionen:\n"
 "-r, --repo <Alias|#|URI>  Die Sperre auf das festgelegte Repository beschränken.\n"
-"-t, --type <Typ>          Typ der auflösbaren Abhängigkeit (%s).\n"
+"-t, --type <Typ>          Pakettyp (%s).\n"
 "                          Standard: %s.\n"
 
 #: ../src/Zypper.cc:1937
@@ -3644,9 +3642,9 @@ msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Zum Installieren oder Deinstallieren von Paketen werden Root-Rechte benötigt."
 
 #: ../src/Zypper.cc:2911
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type: %s"
-msgstr "Unbekannter Typ einer auflösbaren Abhängigkeit: %s"
+msgstr "Unbekannter Pakettyp: %s"
 
 #: ../src/Zypper.cc:2931
 #, c-format
@@ -3677,9 +3675,9 @@ msgstr "Die Angabe eines Quellpaketnamens ist zwingend erforderlich."
 
 #: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
 #: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type '%s'."
-msgstr "Unbekannter Typ '%s' einer auflösbaren Abhängigkeit."
+msgstr "Unbekannter Pakettyp '%s'."
 
 #: ../src/Zypper.cc:3262
 msgid "Problem occurred initializing or executing the search query"
@@ -3691,9 +3689,9 @@ msgstr "Siehe die obige Nachricht für einen Hinweis."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
 #: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
-#, fuzzy, c-format
+#, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Laufe als '%s', kann keinen '%s' Ansatz durchführen, um zu aktualisieren."
+msgstr "Laufe als '%s', kann Option '%s' nicht verwenden."
 
 #: ../src/Zypper.cc:3463
 msgid "Root privileges are required for updating packages."

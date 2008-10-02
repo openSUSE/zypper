@@ -1,0 +1,3677 @@
+# translation of zypper.km.po to Khmer
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Auk Piseth <piseth_dv@khmeros.info>, 2007, 2008.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2007, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: zypper.km\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-30 13:54+0200\n"
+"PO-Revision-Date: 2008-10-02 14:27+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../src/callbacks/keyring.h:48
+#, c-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "ព្រម​ទទួល​ឯកសារ​មិនបាន​ចុះហត្ថលេខា '%s' ។"
+
+#: ../src/callbacks/keyring.h:52
+#, c-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "ព្រម​ទទួល​ឯកសារ​មិនបាន​ចុះហត្ថលេខា '%s' ពី '%s' ។"
+
+#. TranslatorExplanation: speaking of a file
+#: ../src/callbacks/keyring.h:63
+#, c-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "ឯកសារ %s មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
+
+#. TranslatorExplanation: speaking of a file
+#: ../src/callbacks/keyring.h:67
+#, c-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "ឯកសារ '%s' ពី​ឃ្លាំង '%s' មិន​ត្រូវ​បាន​ចុះហត្ថលេខាទេ តើ​បន្ត​ឬ ?"
+
+#: ../src/callbacks/keyring.h:90
+#, c-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "ព្រម​ទទួល​ឯកសារ '%s' ដែល​បាន​ចុះហត្ថលេខា​ជាមួយ​សោ​មិនស្គាល់ '%s' ។"
+
+#: ../src/callbacks/keyring.h:94
+#, c-format
+msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr "ព្រម​ទទួល​ឯកសារ '%s' ពី​ឃ្លាំង '%s' ដែល​​បាន​ចុះហត្ថលេខា​ជាមួយ​សោ​មិនស្គាល់ '%s' ។"
+
+#. translators: the last %s is gpg key ID
+#: ../src/callbacks/keyring.h:104
+#, c-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "ឯកសារ %s ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្តដែរឬទេ ?"
+
+#. translators: the last %s is gpg key ID
+#: ../src/callbacks/keyring.h:108
+#, c-format
+msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "ឯកសារ '%s' ពី​​ឃ្លាំង '%s' ត្រូវ​បាន​ចុះ​ហត្ថលេខា​​ដោយសោ​ដែល​មិន​ស្គាល់ '%s' ។ បន្ត​ដែរឬទេ ?"
+
+#: ../src/callbacks/keyring.h:125
+msgid "Automatically trusting the following key:"
+msgstr "ជឿជាក់​លើ​សោ​ដូច​ខាងក្រោម​ដោយ​ស្វ័យ​ប្រវត្តិ ៖"
+
+#: ../src/callbacks/keyring.h:127
+msgid "New repository or package signing key received:"
+msgstr "បាន​ទទួល​សោ​ចុះ​ហត្ថលេខា​ឃ្លាំង ឬ​កញ្ចប់ ៖"
+
+#: ../src/callbacks/keyring.h:131
+#, c-format
+msgid "Key ID: %s"
+msgstr "លេខ​សម្គាល់​សោ ៖ %s"
+
+#: ../src/callbacks/keyring.h:132
+#, c-format
+msgid "Key Name: %s"
+msgstr "ឈ្មោះ​សោ ៖ %s"
+
+#: ../src/callbacks/keyring.h:133
+#, c-format
+msgid "Key Fingerprint: %s"
+msgstr "ស្នាម​ម្រាមដៃ​សោ ៖ %s"
+
+#: ../src/callbacks/keyring.h:135
+#, c-format
+msgid "Repository: %s"
+msgstr "ឃ្លាំង ៖ %s"
+
+# power-off message
+#: ../src/callbacks/keyring.h:149
+msgid "Do you want to trust the key?"
+msgstr "តើ​អ្នក​ចង់​ជឿជាក់​លើ​សោ​ដែរឬទេ ?"
+
+#. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to donttrust/trusttemporarily/import in that order.
+#. The answers should be lower case letters.
+#: ../src/callbacks/keyring.h:161
+msgid "n/t/i"
+msgstr "n/t/i"
+
+#. translators: the same as n/t/i, but without 'i'
+#: ../src/callbacks/keyring.h:164
+msgid "n/t"
+msgstr "n/t"
+
+#. translators: help text for the 'n' option in the 'n/t/i' prompt
+#: ../src/callbacks/keyring.h:166
+msgid "Don't trust the key."
+msgstr "កុំ​ទុកចិត្ត​សោ ។"
+
+#. translators: help text for the 't' option in the 'n/t/i' prompt
+#: ../src/callbacks/keyring.h:168
+msgid "Trust the key temporarily."
+msgstr "ទុក​ចិត្ត​សោ​បណ្ដោះ​អាសន្ន ។"
+
+#. translators: help text for the 'i' option in the 'n/t/i' prompt
+#: ../src/callbacks/keyring.h:171
+msgid "Trust the key and import it into trusted keyring."
+msgstr "ជឿជាក់​លើ​សោ និង​នាំចូល​វា​ទៅ​ក្នុង​ keyring ដែល​ជឿជាក់ ។"
+
+#: ../src/callbacks/keyring.h:205
+#, c-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "មិនអើពើ​នឹង​កា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​ដែល​បរាជ័យ​សម្រាប់​ឯកសារ '%s' !"
+
+#: ../src/callbacks/keyring.h:208
+#, c-format
+msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr "មិន​អើពើ​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​​សម្រាប់ឯកសារ '%s' ពី​ឃ្លាំង '%s' !"
+
+#: ../src/callbacks/keyring.h:213
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "ពិនិត្យ​ទ្វេដង វា​មិនបណ្ដាល​មក​ពី​ការ​ផ្លាស់ប្ដូរ​ដែល​ព្យាបាទ​មួយ​ចំនួន​នៅ​ក្នុង​ឯកសារ​ទេ !"
+
+#: ../src/callbacks/keyring.h:223
+#, c-format
+msgid "Signature verification failed for file '%s'."
+msgstr "បាន​បរាជ័យ​ក្នុង​ការ​ផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ។"
+
+#: ../src/callbacks/keyring.h:226
+#, c-format
+msgid "Signature verification failed for file '%s' from repository '%s'."
+msgstr "បាន​បរាជ័យ​ក្នុងកា​រផ្ទៀងផ្ទាត់​ហត្ថលេខា​សម្រាប់​ឯកសារ '%s' ពី​ឃ្លាំង '%s' ។"
+
+#: ../src/callbacks/keyring.h:231
+msgid ""
+"Warning: This might be caused by a malicious change in the file!\n"
+"Continuing might be risky. Continue anyway?"
+msgstr ""
+"ព្រមាន ៖ វា​អាច​បណ្ដាល​មក​ពី​ការ​ផ្លាស់ប្ដូរ​ព្យាបាទ​នៅ​ក្នុង​ឯកសារ !\n"
+"ការ​បន្ត​អាច​មាន​គ្រោះថ្នាក់ ។ អញ្ចឹង​បន្ត​ដែរ​ឬទេ ?"
+
+#: ../src/callbacks/keyring.h:255
+#, c-format
+msgid "No digest for file %s."
+msgstr "គ្មាន​អត្ថបទ​សង្ខេប​សម្រាប់​ឯកសារ %s ។"
+
+#: ../src/callbacks/keyring.h:255 ../src/callbacks/keyring.h:265
+#: ../src/callbacks/keyring.h:287 ../src/callbacks/rpm.h:61
+#: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
+msgid "Continue?"
+msgstr "បន្ត ?"
+
+#: ../src/callbacks/keyring.h:264
+#, c-format
+msgid "Unknown digest %s for file %s."
+msgstr "មិន​ស្គាល់​អត្ថបទ​សង្ខេប​ %s សម្រាប់​ឯកសារ %s ។"
+
+#: ../src/callbacks/keyring.h:279
+#, c-format
+msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
+msgstr "មិន​អើពើ​ការ​ផ្ទៀងផ្ទាត់​អត្ថបទ​សង្ខេប​សម្រាប់ %s (រំពឹង​ទុក %s  រក​ឃើញ %s) ។"
+
+#: ../src/callbacks/keyring.h:286
+#, c-format
+msgid "Digest verification failed for %s. Expected %s, found %s."
+msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​​អត្ថបទ​សង្ខេប​បាន​បរាជ័យ​សម្រាប់ %s ។ %s ដែល​រំពឹង​ទុក រក​ឃើញ %s ។"
+
+#: ../src/callbacks/locks.h:29
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "ជួរ​ខាងក្រោម ចាក់​សោ​វត្ថុ​មួយ​ចំនួន​ដែល​អ្នក​ចង់​ដោះ​សោ ៖"
+
+#: ../src/callbacks/locks.h:42
+msgid "The following query does not lock anything:"
+msgstr "ជួរ​ខាងក្រោម មិន​ចាក់​សោ​អ្វី​ទាំងអស់ ៖"
+
+#. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
+#. Try to check what answers does zypper accept (it always accepts y/n at least)
+#. You can also have a look at the regular expressions used to check the answer here:
+#. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
+#: ../src/callbacks/media.h:84
+#, c-format
+msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
+msgstr "សូម​បញ្ចូលឧបករណ៍​ផ្ទុក [%s] #%d ហើយ​វាយ​អក្សរ 'y' ដើម្បី​បន្ត ឬ​វាយ​អក្សរ 'n' ដើម្បី​បោះបង់​ប្រតិបត្តិការ ។"
+
+#: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
+msgid "User Name"
+msgstr "ឈ្មោះអ្នក​ប្រើ"
+
+# password dialog title
+#: ../src/callbacks/media.h:242
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: ../src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "ទទួល​យក​ដែលតា"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: ../src/callbacks/repo.h:85
+msgid "Applying delta"
+msgstr "កំពុង​អនុវត្ត​ដែលតា"
+
+#: ../src/callbacks/repo.h:115
+msgid "Retrieving patch rpm"
+msgstr "ទទួល​យក​បំណះ rpm"
+
+#: ../src/callbacks/repo.h:152
+#, c-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "ទទួល​យក %s %s-%s.%s"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: ../src/callbacks/repo.h:167
+#, c-format
+msgid "(%s unpacked)"
+msgstr "(%s បាន​ពន្លា)"
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: ../src/callbacks/rpm.h:75
+#, c-format
+msgid "Running: %s  (%s, %s)"
+msgstr "កំពុង​រត់ ៖ %s  (%s, %s)"
+
+#: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
+#: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
+msgid "Reading installed packages"
+msgstr "កំពុង​អាន​កញ្ចប់​ដែល​បាន​ដំឡើង"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: ../src/callbacks/rpm.h:183
+#, c-format
+msgid "Removing %s-%s"
+msgstr "យក %s-%s ចេញ"
+
+#: ../src/callbacks/rpm.h:202
+#, c-format
+msgid "Removal of %s failed:"
+msgstr "ការ​យក %s ចេញ​បាន​បរាជ័យ ៖"
+
+#. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
+#. ! \todo use format
+#: ../src/callbacks/rpm.h:224
+msgid "(with --nodeps)"
+msgstr "(with --nodeps)"
+
+#: ../src/callbacks/rpm.h:224
+msgid "(with --nodeps --force)"
+msgstr "(with --nodeps --force)"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
+#: ../src/callbacks/rpm.h:246
+#, c-format
+msgid "Installing: %s-%s"
+msgstr "ដំឡើង ៖ %s-%s"
+
+#: ../src/callbacks/rpm.h:272
+#, c-format
+msgid "Installation of %s-%s failed:"
+msgstr "ការ​ដំឡើង %s-%s បាន​បរាជ័យ ៖"
+
+#: ../src/Command.cc:172
+#, c-format
+msgid "Unknown command '%s'"
+msgstr "មិន​ស្គាល់​ពាក្យ​បញ្ជា '%s'"
+
+#: ../src/info.cc:37
+msgid "Name: "
+msgstr "ឈ្មោះ ៖ "
+
+#: ../src/info.cc:38
+msgid "Version: "
+msgstr "កំណែ ៖ "
+
+#: ../src/info.cc:39
+msgid "Arch: "
+msgstr "ស្ថាបត្យកម្ម ៖ "
+
+#: ../src/info.cc:40
+msgid "Vendor: "
+msgstr "ក្រុមហ៊ុន​លក់ ៖ "
+
+#: ../src/info.cc:45
+msgid "Summary: "
+msgstr "សេចក្ដី​សង្ខេប ៖ "
+
+#: ../src/info.cc:46
+msgid "Description: "
+msgstr "សេចក្ដី​ពណ៌នា ៖ "
+
+#. TranslatorExplanation E.g. "package 'zypper' not found."
+#. ! \todo use a separate string for each kind so that it is translatable.
+#: ../src/info.cc:79
+#, c-format
+msgid "%s '%s' not found."
+msgstr "រក​មិនឃើញ %s '%s' ទេ ។"
+
+#: ../src/info.cc:91
+#, c-format
+msgid "Information for %s %s:"
+msgstr "ព័ត៌មាន​សម្រាប់ %s %s ៖"
+
+#: ../src/info.cc:108
+#, c-format
+msgid "Info for type '%s' not implemented."
+msgstr "ព័ត៌មាន​សម្រាប់ '%s' មិនត្រូវបាន​ប្រតិបត្តិ​ឡើយ ។"
+
+#: ../src/info.cc:114
+msgid "None"
+msgstr "គ្មាន"
+
+#: ../src/info.cc:115
+msgid "Requires"
+msgstr "ទាមទារ"
+
+#: ../src/info.cc:116
+msgid "Provides"
+msgstr "ផ្ដល់"
+
+#: ../src/info.cc:117
+msgid "Conflicts"
+msgstr "ប៉ះទង្គិច"
+
+#: ../src/info.cc:118
+msgid "Obsoletes"
+msgstr "លែង​ប្រើ"
+
+#. translators: package requirements table header
+#: ../src/info.cc:120
+msgid "Requirement"
+msgstr "តម្រូវការ"
+
+#. translators: package requirements table header
+#: ../src/info.cc:122
+msgid "Provided By"
+msgstr "ផ្ដល់​ដោយ"
+
+#. translators: package conflicts table header
+#: ../src/info.cc:124
+msgid "Conflict"
+msgstr "ប៉ះទង្គិច"
+
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
+msgid "Catalog: "
+msgstr "កាតាឡុក ៖ "
+
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
+msgid "Repository: "
+msgstr "ឃ្លាំង ៖ "
+
+#: ../src/info.cc:157 ../src/info.cc:279
+msgid "Installed: "
+msgstr "បាន​ដំឡើង ៖ "
+
+#. enabled?
+#. autorefresh?
+#. enabled?
+#. autorefresh?
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+msgid "Yes"
+msgstr "បាទ/ចាស"
+
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
+msgid "No"
+msgstr "ទេ"
+
+#. ! \todo fix this - arch?
+#: ../src/info.cc:160 ../src/info.cc:209
+msgid "Status: "
+msgstr "ស្ថាន​ភាព ៖ "
+
+#: ../src/info.cc:164
+msgid "up-to-date"
+msgstr "ទាន់សម័យ"
+
+#: ../src/info.cc:168
+#, c-format
+msgid "out-of-date (version %s installed)"
+msgstr "ហួស​សម័យ (បាន​ដំឡើង​កំណែ %s)"
+
+#: ../src/info.cc:173
+msgid "not installed"
+msgstr "មិន​បាន​ដំឡើង"
+
+#: ../src/info.cc:175
+msgid "Installed Size: "
+msgstr "ទំហំ​ដំឡើង ៖ "
+
+#: ../src/info.cc:212
+msgid "Category: "
+msgstr "ប្រភេទ ៖ "
+
+#: ../src/info.cc:213
+msgid "Created On: "
+msgstr "បាន​បង្កើត​នៅ ៖"
+
+#: ../src/info.cc:214
+msgid "Reboot Required: "
+msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ឡើង​វិញ ៖ "
+
+#: ../src/info.cc:217
+msgid "Package Manager Restart Required"
+msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​កម្មវិធី​គ្រប់គ្រង​កញ្ចប់​ឡើង​វិញ"
+
+#: ../src/info.cc:219
+msgid "Restart Required: "
+msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ឡើង​វិញ ៖ "
+
+#: ../src/info.cc:222
+msgid "Interactive: "
+msgstr "អន្តរ​សកម្ម ៖ "
+
+#: ../src/info.cc:226
+msgid "Provides:"
+msgstr "ផ្ដល់ ៖"
+
+#: ../src/info.cc:235
+msgid "Requires:"
+msgstr "តម្រូវការ ៖"
+
+#: ../src/info.cc:246 ../src/search.cc:323
+msgid "Recommended"
+msgstr "បាន​ផ្ដល់​ជា​អនុសាសន៍"
+
+#: ../src/info.cc:248 ../src/search.cc:325
+msgid "Suggested"
+msgstr "បាន​ស្នើ"
+
+#. translators: S for 'installed Status'
+#. translators: S for installed Status
+#. TranslatorExplanation S stands for Status
+#: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
+#: ../src/search.cc:533 ../src/update.cc:381
+msgid "S"
+msgstr "ស"
+
+#. translators: name (general header)
+#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:632
+#: ../src/repos.cc:681 ../src/repos.cc:2058 ../src/search.cc:44
+#: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
+#: ../src/update.cc:152 ../src/update.cc:389 ../src/Zypper.cc:3894
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#. translators: type (general header)
+#. translators: product type (addon/base) (rug calls it Category)
+#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:632
+#: ../src/repos.cc:690 ../src/repos.cc:2066 ../src/search.cc:58
+#: ../src/search.cc:218 ../src/search.cc:541
+msgid "Type"
+msgstr "ប្រភេទ"
+
+#: ../src/info.cc:289 ../src/search.cc:388
+msgid "Dependency"
+msgstr "ភាព​អាស្រ័យ"
+
+#: ../src/info.cc:307
+msgid "Contents"
+msgstr "មាតិកា"
+
+#: ../src/info.cc:309
+msgid "(empty)"
+msgstr "(ទទេ)"
+
+#. translators: patch category (recommended, security)
+#. translators: product category (the rug term)
+#: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
+#: ../src/update.cc:152
+msgid "Category"
+msgstr "ប្រភេទ"
+
+#: ../src/info.cc:352
+msgid "Flavor"
+msgstr "លក្ខណៈ"
+
+#: ../src/info.cc:353 ../src/utils/misc.cc:111
+msgid "Installed"
+msgstr "បាន​ដំឡើង"
+
+#: ../src/info.cc:354
+msgid "Short Name"
+msgstr "ឈ្មោះ​កាត់"
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:40 ../src/install.cc:131
+#, c-format
+msgid "'%s' not found"
+msgstr "រក​មិនឃើញ '%s'"
+
+#. translators: e.g. skipping package 'zypper' (the newest version already installed)
+#: ../src/install.cc:62
+#, c-format
+msgid "skipping %s '%s' (the newest version already installed)"
+msgstr "រំលង %s '%s' (កំណែ​ដែល​ចុងក្រោយ​បំផុត​គឺ​ត្រូវបាន​ដំឡើង​រួចហើយ)"
+
+#: ../src/install.cc:77
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be installed."
+msgstr "បរាជ័យ​ក្នុងការ​បន្ថែម '%s' ទៅកាន់​បញ្ជី​កញ្ចប់ ដែល​ត្រូវ​ដំឡើង ។"
+
+#: ../src/install.cc:101
+#, c-format
+msgid "Failed to add '%s' to the list of packages to be removed."
+msgstr "បាន​បរាជ័យ​ក្នុង​កា​របន្ថែម '%s' ទៅ​កាន់​បញ្ជី​របស់​កញ្ចប់​ដែល​ត្រូវ​យក​ចេញ ។"
+
+#: ../src/install.cc:314 ../src/install.cc:549
+#, c-format
+msgid "'%s' is already installed."
+msgstr "'%s' បាន​ដំឡើង​រួចហើយ ។"
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:354 ../src/install.cc:563
+#, c-format
+msgid "'%s' is not installed."
+msgstr "'%s' មិនទាន់​បាន​ដំឡើង​ទេ ។"
+
+#: ../src/install.cc:384
+#, c-format
+msgid "%s contradicts %s"
+msgstr "%s ប្រជែង​នឹង %s"
+
+#. translators: meaning --force with --capability
+#: ../src/install.cc:393
+#, c-format
+msgid "%s cannot currently be used with %s"
+msgstr "បច្ចុប្បន្ន %s មិនអាច​ប្រើ​ជាមួយ %s"
+
+#. FIXME show a message here, after string freeze
+#. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
+#: ../src/install.cc:448 ../src/Zypper.cc:3007
+msgid "No valid arguments specified."
+msgstr "គ្មាន​អាគុយម៉ង់​ត្រឹមត្រូវ​ដែល​បាន​បញ្ជាក់​ទេ ។"
+
+#. translators: meaning a package %s or provider of capability %s
+#: ../src/install.cc:523
+#, c-format
+msgid "'%s' not found."
+msgstr "រក​មិនឃើញ '%s' ។"
+
+#. translators: %s are package names
+#: ../src/install.cc:553
+#, c-format
+msgid "'%s' providing '%s' is already installed."
+msgstr "'%s' ផ្ដល់ '%s' ត្រូវ​បាន​ដំឡើង​រួច​ហើយ ។"
+
+#. translators: locks table value
+#. importance
+#: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
+msgid "(any)"
+msgstr "(ណាមួយ)"
+
+#. translators: locks table value
+#: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:311
+msgid "(multiple)"
+msgstr "(ច្រើន)"
+
+#. translators: catalog (rug's word for repository) (header)
+#: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
+#: ../src/update.cc:151 ../src/update.cc:383
+msgid "Catalog"
+msgstr "កាតាឡុក"
+
+#: ../src/locks.cc:41
+msgid "Importance"
+msgstr "សំខាន់"
+
+#. translators: package's repository (header)
+#: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
+#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:383
+msgid "Repository"
+msgstr "ឃ្លាំង"
+
+#: ../src/locks.cc:95
+msgid "There are no package locks defined."
+msgstr "មិនមាន​សោ​កញ្ចប់​ដែល​បាន​កំណត់​ទេ ។"
+
+#: ../src/locks.cc:102
+msgid "Error reading the locks file:"
+msgstr "កំហុស​ក្នុង​ការ​អាន​ឯកសារ​សោ ៖"
+
+#: ../src/locks.cc:153
+msgid "Problem adding the package lock:"
+msgstr "មាន​បញ្ហា​ក្នុង​ការ​បន្ថែម​សោ​កញ្ចប់ ៖"
+
+#: ../src/locks.cc:158
+msgid "Specified lock has been successfully added."
+msgid_plural "Specified locks have been successfully added."
+msgstr[0] "សោ​ដែល​បាន​បញ្ជាក់​ត្រូវបាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+
+#: ../src/locks.cc:181
+msgid "Specified lock has been successfully removed."
+msgstr "សោ​ដែលបាន​បញ្ជាក់ ត្រូវបាន​យកចេញ​ដោយ​ជោគជ័យ ។"
+
+#: ../src/locks.cc:228
+msgid "No lock has been removed."
+msgstr "គ្មាន​​សោ​ត្រូវ​បាន​យក​ចេញ​ទេ ។"
+
+#: ../src/locks.cc:232
+#, c-format
+msgid "%lu lock has been successfully removed."
+msgid_plural "%lu locks have been succesfully removed."
+msgstr[0] "សោ %lu ត្រូវ​បានយកចេញ​ដោយ​ស្វ័យ​ប្រវត្តិ ។"
+
+#: ../src/locks.cc:239
+msgid "Problem removing the package lock:"
+msgstr "បញ្ហា​ក្នុងការ​យក​សោ​កញ្ចប់​ចេញ ៖"
+
+#. translators: this will show up if you press ctrl+c twice outside of zypper shell
+#: ../src/main.cc:44
+msgid "OK OK! Exiting immediately..."
+msgstr "គ្មានបញ្ហា គ្មានបញ្ហា ! ចាកចេញ​ភ្លាមៗ..."
+
+#. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
+#: ../src/misc.cc:136
+#, c-format
+msgid "Automatically agreeing with %s %s license."
+msgstr "យល់​ព្រម​ជា​អាជ្ញាបណ្ណ​ %s %s ដោយ​ស្វ័យ​ប្រវត្តិ ។"
+
+#. translators: the first %s is the name of the package, the second
+#. is " (package-type)" if other than "package" (patch/product/pattern)
+#: ../src/misc.cc:157
+#, c-format
+msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
+msgstr "ដើម្បី​ដំឡើង '%s'%s អ្នក​ត្រូវ​តែ​យល់ព្រម​នឹង​លក្ខខណ្ឌ​របស់​កិច្ចព្រមព្រៀង​អាជ្ញាប័ណ្ណ​ដូច​ខាង​ក្រោម ៖"
+
+#. lincense prompt
+#: ../src/misc.cc:174
+msgid "Do you agree with the terms of the license?"
+msgstr "តើ​អ្នក​យល់ព្រម​នឹង​​លក្ខខណ្ឌ​របស់​អាជ្ញាប័ណ្ណ​ទេ ?"
+
+#: ../src/misc.cc:183
+msgid "Aborting installation due to the need for license confirmation."
+msgstr "បោះបង់​ការដំឡើង ដោយសារ​តម្រូវការ​សម្រាប់​ការ​អះអាង​អាជ្ញាប័ណ្ណ ។"
+
+#. translators: %sanslate the '--auto-agree-with-licenses',
+#. it is a command line option
+#: ../src/misc.cc:188
+#, c-format
+msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
+msgstr "សូម​ចាប់ផ្ដើម​ប្រតិបត្តិការ​ឡើងវិញ​ជា​របៀប​អន្តរកម្ម និង​អះអាង​ការ​យល់ព្រម​របស់​អ្នក​នឹង​អាជ្ញាប័ណ្ណ​ដែល​ត្រូវការ ឬ​ប្រើ​ជម្រើស %s ។"
+
+#. translators: e.g. "... with flash package license."
+#. ! \todo fix this to allow proper translation
+#: ../src/misc.cc:200
+#, c-format
+msgid "Aborting installation due to user disagreement with %s %s license."
+msgstr "បោះបង់​ការ​ដំឡើង ដោយ​សារ​តែ​ការ​មិន​ព្រមព្រៀង​របស់​អ្នក​ប្រើ​ជា​មួយ​អាជ្ញាបណ្ណ %s %s ។"
+
+#: ../src/misc.cc:247
+msgid "License"
+msgstr "អាជ្ញាប័ណ្ណ"
+
+#: ../src/misc.cc:265
+msgid "EULA"
+msgstr "EULA"
+
+#: ../src/misc.cc:283
+msgid "SUMMARY"
+msgstr "សេចក្ដី​សង្ខេប"
+
+#: ../src/misc.cc:284
+#, c-format
+msgid "Installed packages: %d"
+msgstr "កញ្ចប់​ដែល​បាន​ដំឡើង ៖ %d"
+
+#: ../src/misc.cc:285
+#, c-format
+msgid "Installed packages with counterparts in repositories: %d"
+msgstr "កញ្ចប់​ដំឡើង​ដោយ​មាន​វត្ថុ​នៅ​ក្នុង​ឃ្លាំង ៖ %d"
+
+#: ../src/misc.cc:286
+#, c-format
+msgid "Installed packages with EULAs: %d"
+msgstr "កញ្ចប់​ដែល​បាន​ដំឡើង​ជា​មួយ EULA ៖ %d"
+
+#: ../src/misc.cc:372 ../src/misc.cc:397
+#, c-format
+msgid "Source package '%s' not found."
+msgstr "រក​មិន​​ឃើញ​កញ្ចប់​ប្រភព '%s' ។"
+
+#: ../src/misc.cc:407
+#, c-format
+msgid "Installing source package %s-%s"
+msgstr "ដំឡើង​កញ្ចប់​ប្រភព %s-%s"
+
+#: ../src/misc.cc:416
+#, c-format
+msgid "Source package %s-%s successfully installed."
+msgstr "បាន​ដំឡើង​កញ្ចប់​ប្រភព %s-%s ដោយ​ជោគជ័យ ។"
+
+#: ../src/misc.cc:423
+#, c-format
+msgid "Problem installing source package %s-%s:"
+msgstr "បញ្ហា​ក្នុង​ការ​ដំឡើង​កញ្ចប់​ប្រភព %s-%s ៖"
+
+#: ../src/output/OutNormal.cc:54
+msgid "Warning: "
+msgstr "ព្រមាន ៖"
+
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
+msgid "error"
+msgstr "កំហុស"
+
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
+msgid "done"
+msgstr "ធ្វើរួច"
+
+#: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:167
+#: ../src/output/OutNormal.cc:191 ../src/output/OutNormal.cc:217
+msgid "Retrieving:"
+msgstr "ទៅ​ប្រមូល​យក ៖"
+
+# window title for kernel loading (see txt_load_kernel)
+#: ../src/output/OutNormal.cc:173
+msgid "starting"
+msgstr "ចាប់ផ្តើម"
+
+#: ../src/output/OutNormal.cc:250
+msgid "No help available for this prompt."
+msgstr "គ្មាន​ជំនួយ​សម្រាប់​ប្រអប់​សំណួរ​នេះ​ទេ ។"
+
+#: ../src/output/OutNormal.cc:260
+msgid "no help available for this option"
+msgstr "គ្មាន​ជំនួយ​សម្រាប់​ជម្រើស​នេះ​ទេ"
+
+#: ../src/repos.cc:80
+#, c-format
+msgid "Checking whether to refresh metadata for %s"
+msgstr "ពិនិត្យ​មើល​ថាតើ​ត្រូវ​ធ្វើ​ឲ្យ​ទិន្នន័យ​មេតាស្រស់​សម្រាប់ %s"
+
+#: ../src/repos.cc:102
+#, c-format
+msgid "Repository '%s' is up to date."
+msgstr "ឃ្លាំង '%s' ទាន់សម័យ ។"
+
+#: ../src/repos.cc:106
+#, c-format
+msgid "The up-to-date check of '%s' has been delayed."
+msgstr "ការ​ពិនិត្យ​ភាព​ហួសសម័យ​របស់ '%s' ត្រូវបាន​ពន្យារពេល ។"
+
+#: ../src/repos.cc:128
+msgid "Forcing raw metadata refresh"
+msgstr "បង្ខំ​ធ្វើ​ឲ្យ​ទិន្នន័យ​មេតា​ដើម​ស្រស់"
+
+#: ../src/repos.cc:135
+#, c-format
+msgid "Retrieving repository '%s' metadata"
+msgstr "ទៅ​យក​ឃ្លាំង​ទិន្នន័យ​មេតា​របស់ '%s'"
+
+#: ../src/repos.cc:159
+#, c-format
+msgid "Problem retrieving files from '%s'."
+msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​ពី '%s' ។"
+
+#: ../src/repos.cc:160 ../src/repos.cc:2844 ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1132 ../src/solve-commit.cc:1164
+msgid "Please see the above error message for a hint."
+msgstr "សូម​មើល​សារ​កំហុស​ខាងលើ សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
+
+#: ../src/repos.cc:173
+#, c-format
+msgid "No URIs defined for '%s'."
+msgstr "គ្មាន URI ដែល​បាន​កំណត់​សម្រាប់ '%s' ទេ ។"
+
+#. TranslatorExplanation the first %s is a .repo file path
+#: ../src/repos.cc:177
+#, c-format
+msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
+msgstr "សូម​បន្ថែម​ធាតុ URI មូលដ្ឋាន (url មូលដ្ឋាន=URI) ​មួយ ឬ​ច្រើន​ទៅ %s សម្រាប់​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:190
+msgid "No alias defined for this repository."
+msgstr "គ្មាន​ឈ្មោះ​ក្លែងក្លាយ​ដែល​បាន​កំណត់​សម្រាប់​ឃ្លាំង​នេះ​ទេ ។"
+
+#: ../src/repos.cc:203
+#, c-format
+msgid "Repository '%s' is invalid."
+msgstr "ឃ្លាំង '%s' មិន​ត្រឹមត្រូវ ។"
+
+#: ../src/repos.cc:204
+msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
+msgstr "សូម​ពិនិត្យ​មើល ប្រសិន​បើ URI ដែល​បាន​កំណត់​សម្រាប់​ឃ្លាំង​គឺ​ចង្អុល​ទៅ​ឃ្លាំង​ដែល​ត្រឹមត្រូវ ។"
+
+#: ../src/repos.cc:217
+#, c-format
+msgid "Error retrieving metadata for '%s':"
+msgstr "កំហុស​ក្នុង​ការ​ទៅ​យក​ទិន្នន័យ​មេតា​សម្រាប់ '%s' ៖"
+
+#: ../src/repos.cc:232
+msgid "Forcing building of repository cache"
+msgstr "បង្ខំ​ស្ថាបនា​ឃ្លាំង​សម្ងាត់​ឃ្លាំង"
+
+#: ../src/repos.cc:245
+#, c-format
+msgid "Error parsing metadata for '%s':"
+msgstr "កំហុស​ក្នុង​ការ​ញែក​ទិន្នន័យ​មេតា​សម្រាប់ '%s' ៖"
+
+#. TranslatorExplanation Don't translate the URL unless it is translated, too
+#: ../src/repos.cc:247
+msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
+msgstr "វា​អាច​បណ្ដាល​មក​ពី​ទិន្នន័យ​មេតា​មិន​ត្រឹមត្រូវ​នៅ​ក្នុង​ឃ្លាំង ឬ​ដោយ​កំហុស​នៅ​ក្នុង​ឧបករណ៍​ញែក​ទិន្នន័យ​មេតា ។ ពេលក្រោយ បើ​មាន​ចម្ងល់ សូម​ផ្ញើ​របាយការណ៍​កំហុស​តាម​សេចក្ដី​ណែនាំ​ដូច​ខាង​ក្រោម​នៅ http://en.opensuse.org/Zypper#Troubleshooting"
+
+#: ../src/repos.cc:261
+#, c-format
+msgid "Repository metadata for '%s' not found in local cache."
+msgstr "រក​មិន​ឃើញ​ទិន្នន័យ​មេតា​ឃ្លាំង​សម្រាប់ '%s' នៅ​ក្នុង​ឃ្លាំង​សម្ងាត់​មូលដ្ឋាន ។"
+
+#: ../src/repos.cc:269
+msgid "Error building the cache:"
+msgstr "កំហុស​ក្នុងការ​ស្ថាបនា​ឃ្លាំង​សម្ងាត់ ៖"
+
+#: ../src/repos.cc:422
+#, c-format
+msgid "Repository '%s' not found by its alias, number, or URI."
+msgstr "រក​មិនឃើញ​ឃ្លាំង '%s' តាម​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ URI របស់​វា​ទេ ។"
+
+#: ../src/repos.cc:426
+#, c-format
+msgid "Use '%s' to get the list of defined repositories."
+msgstr "ប្រើ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​ឃ្លាំង​ដែល​បានកំណត់ ។"
+
+#: ../src/repos.cc:504 ../src/repos.cc:540
+#, c-format
+msgid "Disabling repository '%s' because of the above error."
+msgstr "បិទ​ឃ្លាំង '%s' ដោយសារ​តែ​កំហុស​ខាង​លើ ។"
+
+#: ../src/repos.cc:522
+#, c-format
+msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
+msgstr "ឃ្លាំង '%s' ផុត​កំណត់ ។ អ្នក​អាច​រត់ 'zypper refresh' ជា​ root ដើម្បី​ធ្វើ​ឲ្យ​វា​ទាន់សម័យ ។"
+
+#: ../src/repos.cc:557
+#, c-format
+msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
+msgstr "ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា តម្រូវ​ឲ្យ​ស្ថាបនា​សម្រាប់​ឃ្លាំង '%s' ។ អ្នក​អាច​រត់ 'zypper refresh' ជា root ដើម្បី​ធ្វើវា ។"
+
+#: ../src/repos.cc:564
+#, c-format
+msgid "Disabling repository '%s'."
+msgstr "បិទ​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:601
+msgid "Initializing Target"
+msgstr "ចាប់ផ្ដើម​គោលដៅ"
+
+#: ../src/repos.cc:610
+msgid "Target initialization failed:"
+msgstr "ការ​ចាប់ផ្ដើម​គោលដៅ​បាន​បរាជ័យ ៖"
+
+#: ../src/repos.cc:612 ../src/Zypper.cc:3264
+msgid "Running 'zypper refresh' as root might resolve the problem."
+msgstr "ការ​រត់ 'zypper refresh' ជា root គឺ​អាច​ដោះស្រាយ​បញ្ហា​បាន ។"
+
+#. translators: patch status (installed, uninstalled, needed)
+#: ../src/repos.cc:632 ../src/search.cc:269 ../src/update.cc:152
+msgid "Status"
+msgstr "ស្ថានភាព"
+
+#. status
+#. rug's status (active, pending => active, disabled <= enabled, disabled)
+#. this is probably the closest possible compatibility arrangement
+#: ../src/repos.cc:649
+msgid "Active"
+msgstr "សកម្ម"
+
+#: ../src/repos.cc:649
+msgid "Disabled"
+msgstr "បិទ"
+
+#: ../src/repos.cc:680 ../src/repos.cc:2057 ../src/Zypper.cc:3894
+msgid "Alias"
+msgstr "ឈ្មោះ​ក្លែងក្លាយ"
+
+#. TranslatorExplanation used as e.g. "Enabled: Yes"
+#: ../src/repos.cc:682 ../src/repos.cc:1313 ../src/repos.cc:2059
+msgid "Enabled"
+msgstr "អនុញ្ញាត"
+
+#. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
+#: ../src/repos.cc:684 ../src/repos.cc:2061
+msgid "Refresh"
+msgstr "ធ្វើ​ឲ្យ​ស្រស់"
+
+#. translators: repository priority (in zypper repos -p or -d)
+#: ../src/repos.cc:688 ../src/repos.cc:2065
+msgid "Priority"
+msgstr "អទិភាព"
+
+#: ../src/repos.cc:692 ../src/repos.cc:2068
+msgid "URI"
+msgstr "URI"
+
+#: ../src/repos.cc:694
+msgid "Service"
+msgstr "សេវា"
+
+#: ../src/repos.cc:738
+msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
+msgstr "គ្មាន​ឃ្លាំង​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា 'zypper addrepo' ដើម្បី​បន្ថែម​ឃ្លាំង​មួយ ឬ​ច្រើន ។"
+
+#: ../src/repos.cc:814 ../src/repos.cc:886 ../src/repos.cc:1056
+msgid "Error reading repositories:"
+msgstr "កំហុស​ខណៈពេល​អាន​ឃ្លាំង ៖"
+
+#: ../src/repos.cc:842 ../src/repos.cc:2190
+#, c-format
+msgid "Can't open %s for writing."
+msgstr "មិនអាច​បើក​សរសេរ %s បានទេ ។"
+
+#: ../src/repos.cc:844 ../src/repos.cc:2192
+msgid "Maybe you do not have write permissions?"
+msgstr "ប្រហែល​ជា​អ្នក​មិនមាន​សិទ្ធិ​សរសេរ ?"
+
+#: ../src/repos.cc:851 ../src/repos.cc:2199
+#, c-format
+msgid "Repositories have been successfully exported to %s."
+msgstr "ឃ្លាំង​ត្រូវ​បាន​នាំចេញ​ដោយ​ជោគជ័យទៅ %s ។"
+
+#: ../src/repos.cc:904 ../src/repos.cc:1074
+msgid "Specified repositories: "
+msgstr "ឃ្លាំង​ដែលបាន​បញ្ជាក់ ៖ "
+
+#: ../src/repos.cc:943
+#, c-format
+msgid "Skipping disabled repository '%s'"
+msgstr "កំពុង​រំលង​ឃ្លាំង '%s' ដែល​បាន​បិទ"
+
+#: ../src/repos.cc:958
+#, c-format
+msgid "Skipping repository '%s' because of the above error."
+msgstr "រំលង​ឃ្លាំង '%s' ដោយ​សាង​តែ​កំហុស​ខាង​លើ ។"
+
+#: ../src/repos.cc:973
+#, c-format
+msgid "Use '%s' or '%s' commands to add or enable repositories."
+msgstr "ប្រើ​ពាក្យ​បញ្ជា '%s' ឬ '%s' ដើម្បី​បន្ថែម ឬ​បើក​ឃ្លាំង ។"
+
+#: ../src/repos.cc:976
+msgid "Specified repositories are not enabled or defined."
+msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​មិន​អាច​ត្រូវ​បាន​បើក កំណត់ ។"
+
+#: ../src/repos.cc:978
+msgid "There are no enabled repositories defined."
+msgstr "មិន​បាន​កំណត់​ឃ្លាំង​ដែល​បាន​បើក​ ។"
+
+#: ../src/repos.cc:982
+msgid "Could not refresh the repositories because of errors."
+msgstr "មិន​អាច​ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់​ដោយ​សារ​តែ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:988
+msgid "Some of the repositories have not been refreshed because of an error."
+msgstr "ឃ្លាំង​មួយ​ចំនួន​មិន​ត្រូវ​បាន​​ធ្វើ​ឲ្យ​ស្រស់​ទេ ដោយ​សារ​តែ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:993
+msgid "Specified repositories have been refreshed."
+msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
+
+#: ../src/repos.cc:995
+msgid "All repositories have been refreshed."
+msgstr "ឃ្លាំង​ទាំង​អស់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
+
+#: ../src/repos.cc:1131
+#, c-format
+msgid "Cleaning metadata cache for '%s'."
+msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​សម្រាប់ '%s' ។"
+
+#: ../src/repos.cc:1138
+#, c-format
+msgid "Cleaning raw metadata cache for '%s'."
+msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​ដើម​សម្រាប់ '%s' ។"
+
+#. translators: meaning the cached rpm files
+#: ../src/repos.cc:1146
+#, c-format
+msgid "Cleaning packages for '%s'."
+msgstr "ជម្រះ​កញ្ចប់​សម្រាប់ '%s' ។"
+
+#: ../src/repos.cc:1154
+#, c-format
+msgid "Cannot clean repository '%s' because of an error."
+msgstr "មិនអាច​ជម្រះ​ឃ្លាំង '%s' បានទេ ព្រោះ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:1168
+msgid "Cleaning installed packages cache."
+msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង ។"
+
+#: ../src/repos.cc:1176
+msgid "Cannot clean installed packages cache because of an error."
+msgstr "មិនអាច​ជម្រះ​ឃ្លាំង​សម្ងាត់​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​បាន​ទេ ព្រោះ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:1184
+msgid "Could not clean the repositories because of errors."
+msgstr "មិនអាច​ជម្រះ​ឃ្លាំង​បានទេ ព្រោះ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:1191
+msgid "Some of the repositories have not been cleaned up because of an error."
+msgstr "ឃ្លាំង​មួយ​ចំនួន​មិនត្រូវបាន​ជម្រះ​ទេ ព្រោះ​មាន​កំហុស ។"
+
+#: ../src/repos.cc:1196
+msgid "Specified repositories have been cleaned up."
+msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ត្រូវបាន​ជម្រះ ។"
+
+#: ../src/repos.cc:1198
+msgid "All repositories have been cleaned up."
+msgstr "ឃ្លាំង​ទាំងអស់​ត្រូវបាន​ជម្រះ ។"
+
+#: ../src/repos.cc:1238
+msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
+msgstr "នេះ​ជា​មេឌៀ​ដែល​បានតែ​អាន​ដែល​អាច​ផ្លាស់ប្ដូរ​បាន (ស៊ីឌី/ឌីវីឌី) កា​របិទ​ធ្វើ​ឲ្យ​ស្រស់​ស្វ័យ​ប្រវត្តិ ។"
+
+#: ../src/repos.cc:1259 ../src/repos.cc:1520
+#, c-format
+msgid "Repository named '%s' already exists. Please use another alias."
+msgstr "មាន​ឃ្លាំង​ដែល​មាន​ឈ្មោះ '%s' រួចហើយ ។ សូម​ប្រើ​ឈ្មោះ​ផ្សេងទៀត ។"
+
+#: ../src/repos.cc:1270
+msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
+msgstr "មិនអាច​កំណត់​ប្រភេទ​ឃ្លាំង​បានទេ ។ សូម​ពិនិត្យ​មើល ប្រសិន​បើ​បាន​កំណត់ URI (សូម​មើល​ខាងក្រោម) ដែល​ចង្អុល​ទៅ​ឃ្លាំង​ត្រឹមត្រូវ ៖"
+
+#: ../src/repos.cc:1277
+msgid "Can't find a valid repository at given location:"
+msgstr "មិន​អាច​រក​ឃ្លាំង​ដែល​ត្រឹមត្រូវ​នៅ​ទីតាំង​ដែល​បានផ្ដល់ ៖"
+
+#: ../src/repos.cc:1286
+msgid "Problem transferring repository data from specified URI:"
+msgstr "មាន​បញ្ហា​ក្នុងការ​ផ្ទេរ​ទិន្នន័យ​ឃ្លាំង​ពី URI ដែល​បាន​បញ្ជាក់ ៖"
+
+#: ../src/repos.cc:1287
+msgid "Please check whether the specified URI is accessible."
+msgstr "សូម​ពិនិត្យ​មើល ថាតើ URI ដែលបាន​បញ្ជាក់​គឺ​អាច​ចូលដំណើរការ​បាន ។"
+
+#: ../src/repos.cc:1295
+msgid "Unknown problem when adding repository:"
+msgstr "មាន​បញ្ហា​ដែល​មិន​ស្គាល់ នៅ​ពេល​បន្ថែម​ឃ្លាំង ៖"
+
+#: ../src/repos.cc:1301
+#, c-format
+msgid "Repository '%s' successfully added"
+msgstr "បាន​បន្ថែម​ឃ្លាំង '%s' ដោយ​ជោគជ័យ"
+
+#. TranslatorExplanation used as e.g. "Autorefresh: Yes"
+#: ../src/repos.cc:1315
+msgid "Autorefresh"
+msgstr "ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ"
+
+#: ../src/repos.cc:1330
+#, c-format
+msgid "Reading data from '%s' media"
+msgstr "អាន​ទិន្នន័យ​ពី​មេឌៀ '%s'"
+
+#: ../src/repos.cc:1337
+#, c-format
+msgid "Problem reading data from '%s' media"
+msgstr "បញ្ហា​ក្នុង​ការ​អាន​ទិន្នន័យ​ពី​មេឌៀ '%s'"
+
+#: ../src/repos.cc:1338
+msgid "Please check if your installation media is valid and readable."
+msgstr "សូម​ពិនិត្យ​មើល ថាតើ​ឧបករណ៍​ផ្ទុក​ការ​ដំឡើង​របស់​អ្នក​គឺ​ត្រឹមត្រូវ ហើយ​អាច​អានបាន ។"
+
+#: ../src/repos.cc:1403
+msgid "Problem accessing the file at the specified URI"
+msgstr "មាន​បញ្ហា​ក្នុងការ​ចូលដំណើរការ​ឯកសារ​នៅ URI ដែល​បាន​បញ្ជាក់"
+
+#: ../src/repos.cc:1404
+msgid "Please check if the URI is valid and accessible."
+msgstr "សូម​ពិនិត្យ​មើល ថាតើ URI ត្រឹមត្រូវ ហើយ​អាច​ចូលដំណើរការ​បាន ។"
+
+#: ../src/repos.cc:1412
+msgid "Problem parsing the file at the specified URI"
+msgstr "មាន​បញ្ហា​ក្នុងការ​ញែក​​ឯកសារ​នៅ URI ដែលបាន​បញ្ជាក់"
+
+#. TranslatorExplanation don't translate the URI if the URI itself is not translated.
+#. Also don't translate the '.repo' string.
+#: ../src/repos.cc:1415
+msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
+msgstr "តើ​វា​ជា​ឯកសារ .repo ? ចំពោះ​សេចក្ដី​លម្អិត សូម​មើល http://en.opensuse.org/Standards/RepoInfo ។"
+
+#: ../src/repos.cc:1423
+msgid "Problem encountered while trying to read the file at the specified URI"
+msgstr "ជួប​បញ្ហា​នៅពេល​អាន​ឯកសារ​នៅ URI ដែល​បាន​បញ្ជាក់"
+
+#: ../src/repos.cc:1437
+msgid "Repository with no alias defined found in the file, skipping."
+msgstr "បាន​រកឃើញ​ឃ្លាំង​ដែល​មិន​មាន​ឈ្មោះ​ក្លែងក្លាយ​ត្រូវបាន​កំណត់​នៅ​ក្នុង​ឯកសារ ដូច្នេះ​រំលង ។"
+
+#: ../src/repos.cc:1444
+#, c-format
+msgid "Repository '%s' has no URI defined, skipping."
+msgstr "ឃ្លាំង '%s' មិនមាន URI ដែល​បាន​កំណត់​ទេ ដូច្នេះ​រំលង​។"
+
+#: ../src/repos.cc:1484
+#, c-format
+msgid "Repository '%s' has been removed."
+msgstr "ឃ្លាំង '%s' ត្រូវបាន​យកចេញ ។"
+
+#: ../src/repos.cc:1503
+#, c-format
+msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
+msgstr "មិនអាច​ផ្លាស់ប្ដូរ​ឈ្មោះ​ក្លែងក្លាយ​របស់​ឃ្លាំង '%s' បាន​ទេ ។ ឃ្លាំង​ជា​កម្មសិទ្ធិ​របស់​សេវា '%s' ដែល​ទទួល​ខុសត្រូវ​ចំពោះ​ការ​កំណត់​ឈ្មោះ​ក្លែងក្លាយ​​របស់​វា ។"
+
+#: ../src/repos.cc:1514
+#, c-format
+msgid "Repository '%s' renamed to '%s'."
+msgstr "ឃ្លាំង '%s' បាន​ប្ដូរ​ឈ្មោះ​ទៅ '%s' ។"
+
+#: ../src/repos.cc:1526 ../src/repos.cc:1746
+msgid "Error while modifying the repository:"
+msgstr "កំហុស​ខណៈពេល​កែប្រែ​ឃ្លាំង ៖"
+
+#: ../src/repos.cc:1527
+#, c-format
+msgid "Leaving repository '%s' unchanged."
+msgstr "ទុក​ឲ្យ​ឃ្លាំង '%s' នៅ​ដដែល ។"
+
+#: ../src/repos.cc:1664
+#, c-format
+msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
+msgstr "អាទិភាព​មិន​ត្រឹមត្រូវ '%s' ។ ប្រើ​លេខ​វិជ្ជមាន ។ លេខ​កាន់តែ​ធំ​ អាទិភាព​កាន់​តែ​ទាប ។"
+
+#: ../src/repos.cc:1672
+#, c-format
+msgid "Repository '%s' priority has been left unchanged (%d)"
+msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវ​បាន​ទុក​ឲ្យ​នៅ​ដដែល (%d)"
+
+#: ../src/repos.cc:1698
+#, c-format
+msgid "Repository '%s' has been sucessfully enabled."
+msgstr "ឃ្លាំង '%s' ត្រូវ​បាន​បើក​ដោយ​ជោគជ័យ ។"
+
+#: ../src/repos.cc:1701
+#, c-format
+msgid "Repository '%s' has been sucessfully disabled."
+msgstr "ឃ្លាំង '%s' ត្រូវបាន​បិទ​ដោយ​ជោគជ័យ ។"
+
+#: ../src/repos.cc:1708
+#, c-format
+msgid "Autorefresh has been enabled for repository '%s'."
+msgstr "បាន​បើក​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ សម្រាប់​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:1711
+#, c-format
+msgid "Autorefresh has been disabled for repository '%s'."
+msgstr "បាន​បិទ​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ​សម្រាប់​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:1718
+#, c-format
+msgid "RPM files caching has been enabled for repository '%s'."
+msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ត្រូវ​បាន​បើក​សម្រាប់​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:1721
+#, c-format
+msgid "RPM files caching has been disabled for repository '%s'."
+msgstr "ឃ្លាំង​ឯកសារ RPM ត្រូវ​បានបិទ​សម្រាប់​ឃ្លាំង '%s' ។"
+
+#: ../src/repos.cc:1727
+#, c-format
+msgid "Repository '%s' priority has been set to %d."
+msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវបាន​កំណត់​ទៅ %d ។"
+
+#: ../src/repos.cc:1733
+#, c-format
+msgid "Name of repository '%s' has been set to '%s'."
+msgstr "ឈ្មោះ​របស់​ឃ្លាំង '%s' ត្រូវ​បានកំណត់​ទៅ '%s' ។"
+
+#: ../src/repos.cc:1739
+#, c-format
+msgid "Nothing to change for repository '%s'."
+msgstr "គ្មាន​អ្វី​ត្រូវប្ដូរ​សម្រាប់​ឃ្លាំង '%s' ទេ ។"
+
+#: ../src/repos.cc:1747
+#, c-format
+msgid "Leaving repository %s unchanged."
+msgstr "មិន​ប៉ះពាល់​ឃ្លាំង %s ។"
+
+#: ../src/repos.cc:1785
+msgid "Error reading services:"
+msgstr "កំហុស​ក្នុងការ​អាន​សេវា ៖"
+
+#: ../src/repos.cc:1874
+#, c-format
+msgid "Service '%s' not found by its alias, number, or URI."
+msgstr "រក​មិនឃើញ​​​សេវា '%s' ដោយ​ឈ្មោះ​ក្លែងក្លាយ​ លេខ ឬ URI របស់​វា ។"
+
+#: ../src/repos.cc:1878
+#, c-format
+msgid "Use '%s' to get the list of defined services."
+msgstr "ប្រើ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​សេវា​ដែល​បានកំណត់ ។"
+
+#: ../src/repos.cc:2104
+#, c-format
+msgid "No services defined. Use the '%s' command to add one or more services."
+msgstr "គ្មាន​សេវា​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា '%s' ដើម្បី​បន្ថែម​សេវា​មួយ ឬ​ច្រើន ។"
+
+#: ../src/repos.cc:2230
+#, c-format
+msgid "Service aliased '%s' already exists. Please use another alias."
+msgstr "មាន​សេវា​ដែល​​មាន​ឈ្មោះ​ក្លែងក្លាយ '%s' រួច​ហើយ ។ សូម​ប្រើ​ឈ្មោះ​ក្លែង​ក្លាយ​ផ្សេង ។"
+
+#: ../src/repos.cc:2240
+#, c-format
+msgid "Error occured while adding service '%s'."
+msgstr "កំហុស​បានកើត​ឡើង​ខណៈពេល​បន្ថែម​សេវា '%s' ។"
+
+#: ../src/repos.cc:2246
+#, c-format
+msgid "Service '%s' has been successfully added."
+msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+
+#: ../src/repos.cc:2285
+#, c-format
+msgid "Removing service '%s':"
+msgstr "យក​សេវា '%s' ចេញ ៖"
+
+#: ../src/repos.cc:2288
+#, c-format
+msgid "Service '%s' has been removed."
+msgstr "សេវា '%s' ត្រូវ​បាន​យក​ចេញ ។"
+
+#: ../src/repos.cc:2304
+#, c-format
+msgid "Refreshing service '%s'."
+msgstr "ធ្វើ​ឲ្យសេវា '%s' ស្រស់ ​។"
+
+#: ../src/repos.cc:2313
+#, c-format
+msgid "Problem retrieving the repository index file for service '%s':"
+msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​លិបិក្រម​ឃ្លាំង​សម្រាប់​សេវា '%s' ៖"
+
+#: ../src/repos.cc:2315
+msgid "Check if the URI is valid and accessible."
+msgstr "ពិនិត្យមើលថាតើ​ URI ត្រឹមត្រូវ​ និង​​អាច​ចូល​ដំណើរការ ។"
+
+#: ../src/repos.cc:2373
+#, c-format
+msgid "Skipping disabled service '%s'"
+msgstr "រំលង​សេវា​ដែល​បាន​បិទ '%s'"
+
+#: ../src/repos.cc:2419
+#, c-format
+msgid "Skipping service '%s' because of the above error."
+msgstr "រំលង​សេវា '%s' ដោយ​សារ​តែ​កំហុស​ខាង​លើ ។"
+
+#: ../src/repos.cc:2434
+#, c-format
+msgid "Use '%s' or '%s' commands to add or enable services."
+msgstr "ប្រើ​ពាក្យ​បញ្ជា '%s' ឬ '%s' ដើម្បី​បន្ថែម ឬ​បើក​សេវា ។"
+
+#: ../src/repos.cc:2437
+msgid "Specified services are not enabled or defined."
+msgstr "សេវា​ដែល​បាន​បញ្ជាក់​មិន​ត្រូវ​បាន​បើក ឬ​កំណត់​ទេ ។"
+
+#: ../src/repos.cc:2439
+msgid "There are no enabled services defined."
+msgstr "មិនមាន​សេវា​​ដែល​បានបើក​ត្រូវ​បាន​កំណត់​ទេ ។"
+
+#: ../src/repos.cc:2443
+msgid "Could not refresh the services because of errors."
+msgstr "មិន​អាច​ធ្វើ​ឲ្យ​សេវា​ស្រស់​បាន​ទេ ដោយ​សារ​តែ​មានកំហុស ។"
+
+#: ../src/repos.cc:2449
+msgid "Some of the services have not been refreshed because of an error."
+msgstr "សេវា​មួយ​ចំនួន​មិន​ត្រូវ​បាន​ធ្វើ​ឲ្យស្រស់​​ទេ ដោយ​សារ​តែ​មានកំហុស ។"
+
+#: ../src/repos.cc:2454
+msgid "Specified services have been refreshed."
+msgstr "សេវា​ដែល​បាន​បញ្ជាក់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
+
+#: ../src/repos.cc:2456
+msgid "All services have been refreshed."
+msgstr "សេវា​ទាំងអស់​ត្រូវ​បាន​ធ្វើ​ឲ្យ​ស្រស់ ។"
+
+#: ../src/repos.cc:2578
+#, c-format
+msgid "Service '%s' has been sucessfully enabled."
+msgstr "សេវា '%s' ត្រូវ​បាន​​បើក​ដោយ​ជោគជ័យ ។"
+
+#: ../src/repos.cc:2581
+#, c-format
+msgid "Service '%s' has been sucessfully disabled."
+msgstr "សេវា '%s' ត្រូវ​បានបិទ​ដោយជោគជ័យ ។"
+
+#: ../src/repos.cc:2588
+#, c-format
+msgid "Autorefresh has been enabled for service '%s'."
+msgstr "ការ​ធ្វើ​​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​ត្រូវ​បាន​បើក​សម្រាប់សេវា '%s' ។"
+
+#: ../src/repos.cc:2591
+#, c-format
+msgid "Autorefresh has been disabled for service '%s'."
+msgstr "ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​ត្រូវ​បានបិទ​សម្រាប់​សេវា '%s' ។"
+
+#: ../src/repos.cc:2597
+#, c-format
+msgid "Name of service '%s' has been set to '%s'."
+msgstr "ឈ្មោះ​សេវា '%s' ត្រូវ​បាន​កំណត់​ទៅ '%s' ។"
+
+#: ../src/repos.cc:2603
+#, c-format
+msgid "Repository '%s' has been added to enabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
+msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​បន្ថែម​ដើម្បី​​ទៅឃ្លាំង​ដែល​បានបើក​​របស់​សេវា '%s'"
+
+#: ../src/repos.cc:2611
+#, c-format
+msgid "Repository '%s' has been added to disabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
+msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​បន្ថែម​ទៅ​ឃ្លាំង​ដែល​បានបិទ​របស់សេវា '%s'"
+
+#: ../src/repos.cc:2619
+#, c-format
+msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
+msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បាន​យក​ចេញ​ពី​ឃ្លាំង​ដែល​បាន​បើក​របស់​សេវា '%s'"
+
+#: ../src/repos.cc:2627
+#, c-format
+msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
+msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
+msgstr[0] "ឃ្លាំង '%s' ត្រូវ​បានយកចេញ​ពី​ឃ្លាំង​ដែល​បានបិទ​របស់​សេវា '%s'"
+
+#: ../src/repos.cc:2636
+#, c-format
+msgid "Nothing to change for service '%s'."
+msgstr "គ្មាន​អ្វី​ត្រូវ​ផ្លាស់ប្ដូរ​សម្រាប់សេវា '%s' ទេ ។"
+
+#: ../src/repos.cc:2643
+msgid "Error while modifying the service:"
+msgstr "កំហុស​ខណៈពេល​កែប្រែ​សេវា ៖"
+
+#: ../src/repos.cc:2644
+#, c-format
+msgid "Leaving service %s unchanged."
+msgstr "មិន​ផ្លាស់ប្ដូរ​​សេវា %s ។"
+
+#: ../src/repos.cc:2751
+msgid "Loading repository data..."
+msgstr "កំពុង​ទុក​ទិន្នន័យ​ឃ្លាំង..."
+
+#: ../src/repos.cc:2769
+#, c-format
+msgid "Retrieving repository '%s' data..."
+msgstr "កំពុង​ទៅ​យក​ទិន្នន័យ​ឃ្លាំង '%s'..."
+
+#: ../src/repos.cc:2776
+#, c-format
+msgid "Repository '%s' not cached. Caching..."
+msgstr "ឃ្លាំង '%s' មិនបាន​ដាក់​ជា​ឃ្លាំង​សម្ងាត់ ។ កំពុង​ដាក់​ជា​ឃ្លាំង​សម្ងាត់..."
+
+#: ../src/repos.cc:2783 ../src/repos.cc:2817
+#, c-format
+msgid "Problem loading data from '%s'"
+msgstr "បញ្ហា​ក្នុង​កា​រផ្ទុក​ទិន្នន័យ​ពី '%s'"
+
+#: ../src/repos.cc:2784 ../src/repos.cc:2823
+#, c-format
+msgid "Resolvables from '%s' not loaded because of error."
+msgstr "អ្វី​ដែលអាច​ដោះស្រាយ​ពី '%s' មិន​ត្រូវ​បាន​ផ្ទុក​ ដោយ​សារ​តែ​កំហុស ។"
+
+#: ../src/repos.cc:2805
+#, c-format
+msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
+msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ គិត​ប្រើ​ម៉ាស៊ីន​បម្រើ​ផ្សេង​ទៅ ។"
+
+#. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
+#: ../src/repos.cc:2819
+#, c-format
+msgid "Try '%s', or even '%s' before doing so."
+msgstr "សាកល្បង '%s' ឬ '%s' មុនពេល​ធ្វើ​ដូច្នេះ ។"
+
+#: ../src/repos.cc:2832
+msgid "Reading installed packages..."
+msgstr "កំពុង​អាច​កញ្ចប់​ដែល​បាន​ដំឡើង..."
+
+#: ../src/repos.cc:2843
+msgid "Problem occured while reading the installed packages:"
+msgstr "មាន​បញ្ហា​នៅពេល​អាន​កញ្ចប់​ដែល​បាន​ដំឡើង ៖"
+
+#. list name, exact match
+#: ../src/repos.cc:2858
+msgid ""
+"ZENworks Management Daemon is running.\n"
+"WARNING: this command will not synchronize changes.\n"
+"Use rug or yast2 for that."
+msgstr ""
+"ដេមិន​គ្រប់គ្រង ZENworks កំពុង​រត់ ។\n"
+"ព្រមាន ៖ ពាក្យ​បញ្ជា​នេះ នឹង​មិនផ្លាស់ប្ដូរ​សមកាលកម្ម​ទេ ។\n"
+"ប្រើ rug ឬ yast2 សម្រាប់​ធ្វើ​ដូចនោះ ។"
+
+#. translators: Bundle is a term used in rug. See rug for how to translate it.
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:386
+msgid "Bundle"
+msgstr "បាច់"
+
+#. translators: package version (header)
+#. best_effort does not know version or arch yet
+#: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
+#: ../src/update.cc:152 ../src/update.cc:391
+msgid "Version"
+msgstr "កំណែ"
+
+#. translators: package architecture (header)
+#: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
+#: ../src/update.cc:391
+msgid "Arch"
+msgstr "ស្ថាបត្យកម្ម"
+
+#: ../src/search.cc:178 ../src/search.cc:192
+msgid "System Packages"
+msgstr "កញ្ចប់​ប្រព័ន្ធ"
+
+#. translators: package summary (header)
+#: ../src/search.cc:217
+msgid "Summary"
+msgstr "សង្ខេប"
+
+#: ../src/search.cc:347
+msgid "No needed patches found."
+msgstr "រក​មិន​ឃើញ​បំណះ​ដែល​ត្រូវការ ។"
+
+#: ../src/search.cc:419
+msgid "No patterns found."
+msgstr "រក​មិនឃើញ​លំនាំ​ទេ ។"
+
+#: ../src/search.cc:497 ../src/Zypper.cc:3222
+msgid "No packages found."
+msgstr "រកមិនឃើញ​កញ្ចប់​ទេ ។"
+
+#: ../src/search.cc:574
+msgid "No products found."
+msgstr "រកមិនឃើញ​ផលិតផល​ទេ ។"
+
+#: ../src/search.cc:597
+#, c-format
+msgid "No providers of '%s' found."
+msgstr "រកមិនឃើញ​ក្រុមហ៊ុន​ផ្ដល់ '%s' ទេ ។"
+
+#. translators: meaning 'dependency problem' found during solving
+#: ../src/solve-commit.cc:44
+msgid "Problem: "
+msgstr "បញ្ហា ៖ "
+
+#. TranslatorExplanation %d is the solution number
+#: ../src/solve-commit.cc:57
+#, c-format
+msgid " Solution %d: "
+msgstr " ដំណោះស្រាយ %d ៖ "
+
+#: ../src/solve-commit.cc:76
+msgid "Choose the above solution using '1' or skip, retry or cancel"
+msgid_plural "Choose from above solutions by number or skip, retry or cancel"
+msgstr[0] "លេខ ព្យាយា(ម)​ម្ដងទៀត ឬ​បោះ(ប)ង់> "
+
+#. translators: translate 'c' to whatever you translated the 'c' in
+#. "c" and "s/r/c" strings
+#: ../src/solve-commit.cc:83
+msgid "Choose the above solution using '1' or cancel using 'c'"
+msgid_plural "Choose from above solutions by number or cancel"
+msgstr[0] "លេខ ព្យាយា(ម)​ម្ដងទៀត ឬ​បោះ(ប)ង់> "
+
+#. translators: answers for dependency problem solution input prompt:
+#. "Choose from above solutions by number or skip, retry or cancel"
+#. Translate the letters to whatever is suitable for your language.
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to skip/retry/cancel in that order.
+#. The answers should be lower case letters.
+#: ../src/solve-commit.cc:102
+msgid "s/r/c"
+msgstr "s/r/c"
+
+#. translators: answers for dependency problem solution input prompt:
+#. "Choose from above solutions by number or cancel"
+#. Translate the letter 'c' to whatever is suitable for your language
+#. and to the same as you translated it in the "s/r/c" string
+#. See the "s/r/c" comment for other details.
+#. One letter string  for translation can be tricky, so in case of problems,
+#. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+#: ../src/solve-commit.cc:114
+msgid "c"
+msgstr "c"
+
+#. continue with next problem
+#: ../src/solve-commit.cc:134
+#, c-format
+msgid "Applying solution %s"
+msgstr "កំពុង​អនុវត្ត​ដំណោះស្រាយ %s"
+
+#: ../src/solve-commit.cc:158
+#, c-format
+msgid "%d Problem:"
+msgid_plural "%d Problems:"
+msgstr[0] "%d បញ្ហា ៖"
+
+#. should not happen! If solve() failed at least one problem must be set!
+#: ../src/solve-commit.cc:162
+msgid "Specified capability not found"
+msgstr "រក​មិនឃញ​ភាព​ឆបគ្នា​ដែល​បាន​បញ្ជាក់"
+
+#: ../src/solve-commit.cc:173
+#, c-format
+msgid "Problem: %s"
+msgstr "បញ្ហា ៖ %s"
+
+#: ../src/solve-commit.cc:188
+msgid "Resolving dependencies..."
+msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ..."
+
+#: ../src/solve-commit.cc:369
+msgid "The following package is going to be upgraded:"
+msgid_plural "The following packages are going to be upgraded:"
+msgstr[0] "កញ្ចប់​ខាងក្រោម នឹង​ត្រូវបាន​ធ្វើ​ឲ្យ​ប្រសើរ ៖"
+
+#: ../src/solve-commit.cc:374
+msgid "The following patch is going to be upgraded:"
+msgid_plural "The following patches are going to be upgraded:"
+msgstr[0] "បំណះ​ខាងក្រោម នឹង​ត្រូវបាន​ធ្វើ​ឲ្យប្រសើរ ៖"
+
+#: ../src/solve-commit.cc:379
+msgid "The following pattern is going to be upgraded:"
+msgid_plural "The following patterns are going to be upgraded:"
+msgstr[0] "លំនាំ​ខាងក្រោម នឹង​ត្រូវបានធ្វើឲ្យ​ប្រសើរ ៖"
+
+#: ../src/solve-commit.cc:384
+msgid "The following product is going to be upgraded:"
+msgid_plural "The following products are going to be upgraded:"
+msgstr[0] "ផលិតផល​ខាងក្រោម នឹង​ត្រូវបាន​ធ្វើ​ឲ្យ​ប្រសើរ ៖"
+
+#: ../src/solve-commit.cc:391
+msgid "The following package is going to be downgraded:"
+msgid_plural "The following packages are going to be downgraded:"
+msgstr[0] "កញ្ចប់​ខាងក្រោម នឹង​ត្រូវបាន​បន្ទាប ៖"
+
+#: ../src/solve-commit.cc:396
+msgid "The following patch is going to be downgraded:"
+msgid_plural "The following patches are going to be downgraded:"
+msgstr[0] "បំណះ​ខាងក្រោម នឹង​ត្រូវបាន​បន្ទាប ៖"
+
+#: ../src/solve-commit.cc:401
+msgid "The following pattern is going to be downgraded:"
+msgid_plural "The following patterns are going to be downgraded:"
+msgstr[0] "លំនាំ​ខាងក្រោម នឹង​ត្រូវបាន​បន្ទាប ៖"
+
+#: ../src/solve-commit.cc:406
+msgid "The following product is going to be downgraded:"
+msgid_plural "The following products are going to be downgraded:"
+msgstr[0] "ផលិតផល​ខាងក្រោម​នឹង​ត្រូវបាន​បន្ទាប ៖"
+
+#: ../src/solve-commit.cc:413
+msgid "The following NEW package is going to be installed:"
+msgid_plural "The following NEW packages are going to be installed:"
+msgstr[0] "កញ្ចប់​ថ្មី​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង ៖"
+
+#: ../src/solve-commit.cc:418
+msgid "The following NEW patch is going to be installed:"
+msgid_plural "The following NEW patches are going to be installed:"
+msgstr[0] "បំណះ​ថ្មី​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង ៖"
+
+#: ../src/solve-commit.cc:423
+msgid "The following NEW pattern is going to be installed:"
+msgid_plural "The following NEW patterns are going to be installed:"
+msgstr[0] "លំនាំ​ថ្មី​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង ៖"
+
+#: ../src/solve-commit.cc:428
+msgid "The following NEW product is going to be installed:"
+msgid_plural "The following NEW products are going to be installed:"
+msgstr[0] "ផលិតផល​ថ្មី​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង ៖"
+
+#: ../src/solve-commit.cc:433
+msgid "The following source package is going to be installed:"
+msgid_plural "The following source packages are going to be installed:"
+msgstr[0] "កញ្ចប់​ប្រភព​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង ៖"
+
+#: ../src/solve-commit.cc:440
+msgid "The following package is going to be reinstalled:"
+msgid_plural "The following packages are going to be reinstalled:"
+msgstr[0] "កញ្ចប់​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង​ឡើងវិញ ៖"
+
+#: ../src/solve-commit.cc:445
+msgid "The following patch is going to be reinstalled:"
+msgid_plural "The following patches are going to be reinstalled:"
+msgstr[0] "បំណះ​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង​ឡើងវិញ ៖"
+
+#: ../src/solve-commit.cc:450
+msgid "The following pattern is going to be reinstalled:"
+msgid_plural "The following patterns are going to be reinstalled:"
+msgstr[0] "លំនាំ​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង​ឡើងវិញ ៖"
+
+#: ../src/solve-commit.cc:455
+msgid "The following product is going to be reinstalled:"
+msgid_plural "The following products are going to be reinstalled:"
+msgstr[0] "ផលិតផល​ខាងក្រោម នឹង​ត្រូវបាន​ដំឡើង​ឡើងវិញ ៖"
+
+#: ../src/solve-commit.cc:462
+msgid "The following package is going to be REMOVED:"
+msgid_plural "The following packages are going to be REMOVED:"
+msgstr[0] "កញ្ចប់​ខាងក្រោម នឹង​ត្រូវបាន​យក​ចេញ ៖"
+
+#: ../src/solve-commit.cc:467
+msgid "The following patch is going to be REMOVED:"
+msgid_plural "The following patches are going to be REMOVED:"
+msgstr[0] "បំណះ​ខាងក្រោម នឹង​ត្រូវបាន​យកចេញ ៖"
+
+#: ../src/solve-commit.cc:472
+msgid "The following pattern is going to be REMOVED:"
+msgid_plural "The following patterns are going to be REMOVED:"
+msgstr[0] "លំនាំ​ខាងក្រោម នឹង​ត្រូវបាន​យកចេញ ៖"
+
+#: ../src/solve-commit.cc:477
+msgid "The following product is going to be REMOVED:"
+msgid_plural "The following products are going to be REMOVED:"
+msgstr[0] "ផលិតផល​ខាងក្រោម នឹង​ត្រូវបាន​យកចេញ ៖"
+
+#: ../src/solve-commit.cc:484
+msgid "The following package is going to change architecture:"
+msgid_plural "The following packages are going to change architecture:"
+msgstr[0] "កញ្ចប់​ខាងក្រោម នឹង​ត្រូវបាន​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម ៖"
+
+#: ../src/solve-commit.cc:489
+msgid "The following patch is going to change architecture:"
+msgid_plural "The following patches are going to change architecture:"
+msgstr[0] "បំណះ​ខាងក្រោម នឹង​ត្រូវបាន​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម ៖"
+
+#: ../src/solve-commit.cc:494
+msgid "The following pattern is going to change architecture:"
+msgid_plural "The following patterns are going to change architecture:"
+msgstr[0] "លំនាំ​ខាងក្រោម នឹង​ត្រូវបាន​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម ៖"
+
+#: ../src/solve-commit.cc:499
+msgid "The following product is going to change architecture:"
+msgid_plural "The following products are going to change architecture:"
+msgstr[0] "ផលិតផល​ខាងក្រោម នឹង​ត្រូវបាន​ផ្លាស់ប្ដូរ​ស្ថាបត្យកម្ម ៖"
+
+#: ../src/solve-commit.cc:506
+msgid "The following package is going to change vendor:"
+msgid_plural "The following packages are going to change vendor:"
+msgstr[0] "កញ្ចប់​ដូច​ខាង​ក្រោម​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុនលក់ ៖"
+
+#: ../src/solve-commit.cc:511
+msgid "The following patch is going to change vendor:"
+msgid_plural "The following patches are going to change vendor:"
+msgstr[0] "បំណះ​ដូច​ខាង​ក្រោម​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់ ៖"
+
+#: ../src/solve-commit.cc:516
+msgid "The following pattern is going to change vendor:"
+msgid_plural "The following patterns are going to change vendor:"
+msgstr[0] "លំនាំ​ដូច​ខាង​ក្រោម​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់ ៖"
+
+#: ../src/solve-commit.cc:521
+msgid "The following product is going to change vendor:"
+msgid_plural "The following products are going to change vendor:"
+msgstr[0] "ផលិតផល​ដូច​ខាង​ក្រោម​នឹង​ផ្លាស់ប្ដូរ​ក្រុមហ៊ុន​លក់ ៖"
+
+#: ../src/solve-commit.cc:529
+msgid "The following package is not supported by its vendor:"
+msgid_plural "The following packages are not supported by their vendor:"
+msgstr[0] "កញ្ចប់​ដូច​ខាងក្រោម​មិន​ត្រូវ​បាន​គាំទ្រ​ដោយ​ក្រុមហ៊ុន​លក់​របស់​វា ៖"
+
+#: ../src/solve-commit.cc:603
+msgid "Dependencies of all installed packages are satisfied."
+msgstr "ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​គឺ​ត្រឹមត្រូវ ។"
+
+#: ../src/solve-commit.cc:605
+msgid "Nothing to do."
+msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
+
+#: ../src/solve-commit.cc:610
+msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
+msgstr "ភាព​អាស្រ័យ​មួយ​ចំនួន​នៃ​កញ្ចប់​ដែលបាន​ដំឡើង គឺ​ខូច ។ ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​ទាំងនេះ ដែល​អំពើ​ខាងក្រោម​ត្រូវ​ជ្រើស ៖"
+
+#: ../src/solve-commit.cc:764
+#, c-format
+msgid "Overall download size: %s."
+msgstr "ទំហំ​ទាញយក​សរុប ៖ %s ។"
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/solve-commit.cc:769
+#, c-format
+msgid "After the operation, additional %s will be used."
+msgstr "បន្ទាប់​ពី​ប្រតិបត្តិការ %s បន្ថែម​នឹង​ត្រូវ​បាន​ប្រើ ។"
+
+#: ../src/solve-commit.cc:772
+msgid "No additional space will be used or freed after the operation."
+msgstr "មិនមាន​ទំហំ​បន្ថែម​ដែលត្រូវ​ប្រើ ឬ​នៅ​ទំនេរ​បន្ទាប់​ពី​ប្រតិបត្តិការ​ចប់​នោះ​ទេ ។"
+
+#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+#: ../src/solve-commit.cc:779
+#, c-format
+msgid "After the operation, %s will be freed."
+msgstr "បន្ទាប់​ពី​ប្រតិបត្តិការ %s នឹង​ទំនេរ ។"
+
+#. translators: meaning --force-resolution and --no-force-resolution
+#: ../src/solve-commit.cc:829
+#, c-format
+msgid "%s conflicts with %s, will use the less aggressive %s"
+msgstr "%s ប៉ះទង្គិច​ជាមួយ %s ហើយ​វា​នឹង​ប្រើ​ផល​ប៉ះពាល់​តិច %s"
+
+#: ../src/solve-commit.cc:855
+msgid "Force resolution:"
+msgstr "តម្រូវ​ឲ្យប្រើ​គុណភាព​បង្ហាញ ៖"
+
+#: ../src/solve-commit.cc:911
+msgid "Verifying dependencies..."
+msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​អាស្រ័យ..."
+
+#: ../src/solve-commit.cc:920
+msgid "Computing upgrade..."
+msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យ​ប្រសើរឡើង..."
+
+#: ../src/solve-commit.cc:931
+msgid "Generating solver test case..."
+msgstr "កំពុង​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ..."
+
+#: ../src/solve-commit.cc:934
+#, c-format
+msgid "Solver test case generated successfully at %s."
+msgstr "ករណី​សាកល្បង​កញ្ចប់​ដោះស្រាយ បាន​បង្កើត​ដោយ​ជោគជ័យ​នៅ %s ។"
+
+#: ../src/solve-commit.cc:938
+msgid "Error creating the solver test case."
+msgstr "កំហុស​ក្នុង​ការ​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ ។"
+
+#: ../src/solve-commit.cc:977
+msgid "Computing distribution upgrade..."
+msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យការ​ចែកចាយ​ប្រសើរឡើង..."
+
+#: ../src/solve-commit.cc:983
+msgid "Resolving package dependencies..."
+msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ​របស់​កញ្ចប់..."
+
+#: ../src/solve-commit.cc:1009
+msgid "Root privileges are required to fix broken package dependencies."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​ខូច ។"
+
+#. translators: Yes / No / show Problems. This prompt will appear
+#. after install/update command summary if there will be any package
+#. to-be-removed automatically to show why, if asked.
+#. Translate to whathever is suitable for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to yes/no/showproblems in that order.
+#. The answers should be lower case letters.
+#: ../src/solve-commit.cc:1026
+msgid "y/n/p"
+msgstr "y/n/p"
+
+#. translators: help text for 'y' option in the y/n/p prompt
+#: ../src/solve-commit.cc:1028
+msgid "Accept the summary and proceed with installation/removal of packages."
+msgstr "ព្រម​ទទួល​សេចក្ដី​សង្ខេប និង​បន្ត​​ដំឡើង/យក​កញ្ចប់​ចេញ ។"
+
+#. translators: help text for 'n' option in the y/n/p prompt
+#: ../src/solve-commit.cc:1030
+msgid "Cancel the operation."
+msgstr "បោះបង់​ប្រតិបត្តិការ ។"
+
+#. translators: help text for 'p' option in the y/n/p prompt
+#: ../src/solve-commit.cc:1032
+msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
+msgstr "ចាប់ផ្ដើម​កម្មវិធី​ដោះស្រាយ​នៅ​ក្នុង​របៀប​គ្មាន​កា​របង្ខំ ដើម្បី​បង្ហាញ​បញ្ហា​ភាព​អាស្រ័យ ។"
+
+#: ../src/solve-commit.cc:1074
+msgid "committing"
+msgstr "ដាក់​ស្នើ"
+
+#: ../src/solve-commit.cc:1079
+msgid "(dry run)"
+msgstr "(អនុវត្ត)"
+
+#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
+msgid "Problem retrieving the package file from the repository:"
+msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​កញ្ចប់​ពី​ឃ្លាំង ៖"
+
+#. translators: the first %s is 'zypper refresh' and the second
+#. is repo allias
+#: ../src/solve-commit.cc:1138
+#, c-format
+msgid "Repository '%s' is out of date. Running '%s' might help."
+msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ បើ​រត់ '%s' គឺ​អាច​ជួយ​បាន ។"
+
+#: ../src/solve-commit.cc:1150
+msgid ""
+"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
+"\n"
+"- just retry previous command\n"
+"- refresh the repositories using 'zypper refresh'\n"
+"- use another installation medium (if e.g. damaged)\n"
+"- use another repository"
+msgstr ""
+"ការ​ពិនិត្យ​ភាព​ត្រឹមត្រូវ​របស់​កញ្ចប់​បាន​បរាជ័យ ។ វា​អាច​ជា​បញ្ហា​ជា​មួយ​ឃ្លាំង​ ឬ​មេឌៀ ។ ព្យាយាម​ធ្វើ​វា​មួយ​ដូច​ខាង​ក្រោម ៖\n"
+"\n"
+"- ព្យាយាម​ពាក្យ​បញ្ជា​ពីមុន\n"
+"- ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់​ដោយ​ប្រើ 'zypper refresh'\n"
+"- ប្រើ​ឧបករណ៍​ផ្ទុក​ដំឡើង​ផ្សេង (ឧ. ប្រសិន​បើ​វា​ខូច)\n"
+"- ប្រើ​ឃ្លាំង​ផ្សេង"
+
+#: ../src/solve-commit.cc:1163
+msgid "Problem occured during or after installation or removal of packages:"
+msgstr "មាន​បញ្ហា​កើតឡើង​នៅពេល ឬ​បន្ទាប់​ដំឡើង ឬ​ការ​យក​កញ្ចប់​ចេញ ៖"
+
+#: ../src/solve-commit.cc:1183
+msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
+msgstr "បំណះ​ដែល​បាន​ដំឡើង​មួយ តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ម៉ាស៊ីន​របស់​អ្នក​ឡើងវិញ ។ ចាប់ផ្ដើម​ឡើងវិញ​ឲ្យ​លឿន​តាម​ដែល​អាច​ធ្វើ​ទៅបាន ។"
+
+#: ../src/solve-commit.cc:1187
+msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
+msgstr "បំណះ​មួយ​ក្នុង​ចំណោម​បំណះ​ដូច​ខាងក្រោម​ប៉ះពាល់​ដល់​កម្មវិធី​គ្រប់គ្រង​​កញ្ចប់​ខ្លួន​ឯង ។ រត់​ពាក្យ​បញ្ជា​ម្ដង​ទៀត​ដើម្បី​ដំឡើង​បំណះ​ដែល​ត្រូវការ​ផ្សេងៗ​ទៀត ។"
+
+#. translators: %d is the number of needed patches
+#: ../src/update.cc:65
+#, c-format
+msgid "%d patch needed"
+msgid_plural "%d patches needed"
+msgstr[0] "ត្រូវការ​បំណះ %d"
+
+#. translators: %d is the number of security patches
+#: ../src/update.cc:69
+#, c-format
+msgid "%d security patch"
+msgid_plural "%d security patches"
+msgstr[0] "បំណះ​សុវត្ថិភាព %d"
+
+#: ../src/update.cc:174 ../src/utils/misc.cc:113
+msgid "Needed"
+msgstr "ត្រូវការ"
+
+#: ../src/update.cc:190
+msgid ""
+"These are only the updates affecting the updater itself.\n"
+"Other updates are available too.\n"
+msgstr ""
+"ទាំងនេះ​ជា​ភាព​ទាន់សម័យ​ដែល​បះពាល់​ដល់កម្មវិធី​ធ្វើ​ឲ្យ​ទាន់សម័យ​របស់​វា​ផ្ទាល់ ។\n"
+"ភាព​ទាន់សម័យ​ផ្សេងទៀត​នៅ​មាន​ដែរ ។\n"
+
+#: ../src/update.cc:198 ../src/update.cc:432
+msgid "No updates found."
+msgstr "រក​មិន​ឃើញ​ភាព​ទាន់​សម័យ ។"
+
+#: ../src/update.cc:317
+msgid "Package updates"
+msgstr "ភាព​ទាន់សម័យ​របស់​កញ្ចប់​"
+
+#: ../src/update.cc:319
+msgid "Patches"
+msgstr "បំណះ"
+
+#: ../src/update.cc:321
+msgid "Pattern updates"
+msgstr "ភាព​ទាន់សម័យ​របស់​លំនាំ"
+
+#: ../src/update.cc:323
+msgid "Product updates"
+msgstr "ភាព​ទាន់សម័យ​របស់​ផលិតផល"
+
+#: ../src/update.cc:495
+#, c-format
+msgid "Cannot parse '%s < %s'"
+msgstr "មិន​អាច​ញែក '%s < %s'"
+
+#. translators: %s is the name of a patch
+#: ../src/update.cc:551
+#, c-format
+msgid "'%s' is interactive, skipping."
+msgstr "'%s' គឺ​អន្តរសកម្ម រំលង ។"
+
+#: ../src/update.cc:606
+#, c-format
+msgid "No patches matching '%s' found."
+msgstr "រក​មិន​ឃើញ​កា​រផ្គូផ្គង '%s' ។"
+
+#: ../src/update.cc:609
+#, c-format
+msgid "Patch '%s' not found."
+msgstr "រក​មិន​ឃើញ​បំណះ '%s' ។"
+
+#: ../src/update.cc:677
+#, c-format
+msgid "No packages matching '%s' are installed."
+msgstr "គ្មាន​កញ្ចប់​ដែល​ផ្គូផ្គង​នឹង '%s' ត្រូវបាន​ដំឡើង​ទេ ។"
+
+#: ../src/update.cc:680
+#, c-format
+msgid "Package '%s' is not installed."
+msgstr "កញ្ចប់ '%s' មិនទាន់​បាន​ដំឡើង​ទេ ។"
+
+#: ../src/update.cc:692
+#, c-format
+msgid "No update candidate for '%s'."
+msgstr "មិនមាន​ភាព​ទាន់សម័យ​សម្រាប់ '%s' ទេ ។"
+
+#: ../src/utils/getopt.cc:57
+msgid "Unknown option "
+msgstr "មិន​ស្គាល់​ជម្រើស "
+
+#: ../src/utils/getopt.cc:60
+msgid "Missing argument for "
+msgstr "បាត់​អាគុយម៉ង់​សម្រាប់ "
+
+#. translators: speaking of two mutually contradicting command line options
+#: ../src/utils/getopt.cc:87
+#, c-format
+msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
+msgstr "%s បាន​ប្រើ​រួម​គ្នា​ជា​មួយ %s ដែលប្រឆាំង​គ្នា ។ លក្ខណៈសម្បត្តិ​នេះ​នឹង​មិន​ត្រូវ​បាន​ផ្លាស់ប្ដូរ​ទេ ។"
+
+#: ../src/utils/messages.cc:22
+msgid "Please file a bug report about this."
+msgstr "សូម​រៀបចំ​របាយការណ៍​កំហុស​អំពី​វា ។"
+
+#. TranslatorExplanation remember not to translate the URL
+#. unless you translate the actual page :)
+#: ../src/utils/messages.cc:25
+msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
+msgstr "ចំពោះ​សេចក្ដី​ណែនាំ សូម​មើល http://en.opensuse.org/Zypper#Troubleshooting ។"
+
+#: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3598
+msgid "Usage"
+msgstr "កា​រប្រើ"
+
+#: ../src/utils/messages.cc:41
+msgid "Too many arguments."
+msgstr "អាគុយម៉ង់​ច្រើន​ពេក ។"
+
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2627 ../src/Zypper.cc:3595
+msgid "Required argument missing."
+msgstr "បាត់​អាគុយម៉ង់​ដែល​ត្រូវ​ការ ។"
+
+#: ../src/utils/messages.cc:60
+#, c-format
+msgid "The '--%s' option has currently no effect."
+msgstr "បច្ចុប្បន្ន​ជម្រើស '--%s' មិនមាន​បែបផែន​ទេ ។"
+
+#: ../src/utils/messages.cc:78
+#, c-format
+msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
+msgstr "អ្នក​បាន​​មិន​អើពើ​នឹង​បញ្ហា​ដែល​ទាក់ទង​នឹង​ការ​ទាញយក ឬ​ការ​ដំឡើង​កញ្ចប់ ដែល​អាច​បង្ក​ឲ្យ​ខូចខាត​ដល់​ភាព​អាស្រ័យ​របស់​កញ្ចប់​ផ្សេង ។ វា​ត្រូវ​បាន​ផ្ដល់​អានុសាសន៍​ឲ្យ​ដំណើរការ '%s' បន្ទាប់​ពី​បាន​បញ្ចប់​ប្រតិបត្តិការ ។"
+
+#: ../src/utils/misc.cc:87
+msgid "package"
+msgid_plural "packages"
+msgstr[0] "កញ្ចប់"
+
+#: ../src/utils/misc.cc:89
+msgid "pattern"
+msgid_plural "patterns"
+msgstr[0] "លំនាំ"
+
+#: ../src/utils/misc.cc:91
+msgid "product"
+msgid_plural "product"
+msgstr[0] "ផលិតផល"
+
+#: ../src/utils/misc.cc:93
+msgid "patch"
+msgid_plural "patches"
+msgstr[0] "បំណះ"
+
+#: ../src/utils/misc.cc:95
+msgid "srcpackage"
+msgid_plural "srcpackages"
+msgstr[0] "កញ្ចប់​ប្រភព"
+
+#. default
+#: ../src/utils/misc.cc:97
+msgid "resolvable"
+msgid_plural "resolvables"
+msgstr[0] "កញ្ចប់​ដោះស្រាយ"
+
+#: ../src/utils/misc.cc:106
+msgid "Unknown"
+msgstr "មិន​ស្គាល់"
+
+#: ../src/utils/misc.cc:118
+msgid "Not Applicable"
+msgstr "មិន​អនុវត្ត​បាន"
+
+#: ../src/utils/misc.cc:191
+msgid "Specified local path does not exist or is not accessible."
+msgstr "មិនមាន​ផ្លូវ​មូលដ្ឋាន​ពិសេស​ទេ ឬ​មិនអាច​ចូល​ដំណើរការបាន ។"
+
+#: ../src/utils/misc.cc:203
+msgid "Given URI is invalid"
+msgstr "URI ដែល​បាន​ផ្ដល់​មិនត្រឹមត្រូវ"
+
+#: ../src/utils/misc.cc:254
+msgid "Problem copying the specified RPM file to the cache directory."
+msgstr "មាន​បញ្ហា​ក្នុង​ការ​ចម្លង​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ទៅ​ថត​ឃ្លាំង​សម្ងាត់ ។"
+
+#: ../src/utils/misc.cc:255
+msgid "Perhaps you are running out of disk space."
+msgstr "ប្រហែល​ជា​អ្នក​អស់​ទំហំ​ថាស​ហើយ ។"
+
+#: ../src/utils/misc.cc:263
+msgid "Problem retrieving the specified RPM file"
+msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ RPM ដែល​បាន​បញ្ជាក់"
+
+#: ../src/utils/misc.cc:264
+msgid "Please check whether the file is accessible."
+msgstr "សូ​ម​ពិនិត្យ​មើល ថាតើ​អាច​ចូលដំណើរការ​ឯកសារ​បាន ឬ​អត់ ។"
+
+#: ../src/utils/misc.cc:321
+#, c-format
+msgid "Cannot parse capability '%s'."
+msgstr "មិន​អាច​ញែក​ភាព​ឆបគ្នា '%s' ។"
+
+#: ../src/utils/pager.cc:30
+#, c-format
+msgid "Press '%c' to exit the pager."
+msgstr "ចុច '%c' ដើម្បី​ចេញ​ពី​ភេយ័រ ។"
+
+#: ../src/utils/pager.cc:40
+msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
+msgstr "ប្រើ​គ្រាប់ចុច​ព្រួញ ឬ​ទំព័រលើ/ទំព័រ​ក្រោម​ដើម្បី​រមូរ​អត្ថបទ​តាម​បន្ទាត់ ឬ​ទំព័រ ។"
+
+#: ../src/utils/pager.cc:44
+msgid "Use the Enter or Space key to scroll the text by lines or pages."
+msgstr "ប្រើ​​គ្រាប់ចុច​បញ្ចូល ឬ​ចន្លោះ​មិនឃើញ​ដើម្បី​រមូរ​អត្ថបទ​ដោយ​បន្ទាត់ ឬ​ទំព័រ ។"
+
+#. ----------------------------------------------------------------------------
+#: ../src/utils/prompt.cc:87
+msgid "abort"
+msgstr "បោះបង់"
+
+#: ../src/utils/prompt.cc:87
+msgid "retry"
+msgstr "ព្យាយាម​ម្ដងទៀត"
+
+#: ../src/utils/prompt.cc:87
+msgid "ignore"
+msgstr "មិន​អើពើ"
+
+#: ../src/utils/prompt.cc:99
+msgid "Abort, retry, ignore?\n"
+msgstr "តើ​បោះបង់ ព្យាយាម​ម្ដង​ទៀត ឬ​មិន​អើពើ ?\n"
+
+#: ../src/utils/prompt.cc:134
+#, c-format
+msgid "autoselect %s after %u "
+msgstr "ជ្រើស %s ដោយ​ស្វ័យប្រវត្តិ បន្ទាប់ពី %u "
+
+#. translators: "a/r/i" are the answers to the
+#. "Abort, retry, ignore?" prompt
+#. Translate the letters to whatever is suitable for your language.
+#. the answers must be separated by slash characters '/' and must
+#. correspond to abort/retry/ignore in that order.
+#. The answers should be lower case letters.
+#: ../src/utils/prompt.cc:158
+msgid "a/r/i"
+msgstr "a/r/i"
+
+#: ../src/utils/prompt.cc:159
+msgid "Abort, retry, ignore?"
+msgstr "តើ​បោះបង់ ព្យាយាម​ម្ដងទៀត ឬ​មិនអើពើ ?"
+
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:193
+#: ../src/utils/prompt.cc:249
+msgid "yes"
+msgstr "បាទ/ចាស"
+
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:194
+#: ../src/utils/prompt.cc:249
+msgid "no"
+msgstr "ទេ"
+
+#: ../src/utils/prompt.cc:241
+#, c-format
+msgid "Invalid answer '%s'."
+msgstr "ចម្លើយ​មិនត្រឹមត្រូវ '%s' ។"
+
+#. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
+#. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
+#: ../src/utils/prompt.cc:248
+#, c-format
+msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
+msgstr "បញ្ចូល 'y' សម្រាប់ '%s' ឬ 'n' សម្រាប់ '%s' បើ​គ្មាន​អ្វី​ធ្វើការ​ឲ្យ​អ្នក​ទេ​នោះ ។"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: ../src/utils/prompt.h:112
+msgid "Not found"
+msgstr "រក​មិនឃើញ"
+
+# error box title
+#: ../src/utils/prompt.h:112
+msgid "I/O error"
+msgstr "កំហុស I/O"
+
+#: ../src/utils/prompt.h:112
+msgid "Invalid object"
+msgstr "វត្ថុ​មិន​ត្រឹមត្រូវ"
+
+#: ../src/utils/prompt.h:119
+msgid "Error"
+msgstr "កំហុស"
+
+#: ../src/Zypper.cc:154
+msgid ""
+"  Global Options:\n"
+"\t--help, -h\t\tHelp.\n"
+"\t--version, -V\t\tOutput the version number.\n"
+"\t--quiet, -q\t\tSuppress normal output, print only error\n"
+"\t\t\t\tmessages.\n"
+"\t--verbose, -v\t\tIncrease verbosity.\n"
+"\t--no-abbrev, -A\t\tDo not abbreviate text in tables.\n"
+"\t--table-style, -s\tTable style (integer).\n"
+"\t--rug-compatible, -r\tTurn on rug compatibility.\n"
+"\t--non-interactive, -n\tDo not ask anything, use default answers\n"
+"\t\t\t\tautomatically.\n"
+"\t--xmlout, -x\t\tSwitch to XML output.\n"
+"\t--reposd-dir, -D <dir>\tUse alternative repository definition files\n"
+"\t\t\t\tdirectory.\n"
+"\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
+"\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
+msgstr ""
+"  ជម្រើស​សកល ៖\n"
+"\t--help, -h\t\tជំនួយ ។\n"
+"\t--version, -V\t\tលទ្ធផល​លេខ​សេវា ។\n"
+"\t--quiet, -q\t\tបង្ហាប់​​លទ្ធផល​ធម្មតា បោះពុម្ព​តែ​សារ​​កំហុស​មួយ\n"
+"\t\t\t\t ។\n"
+"\t--verbose, -v\t\tបង្កើន​ការ​បរិយាយ ។\n"
+"\t--no-abbrev, -A\t\tកុំ​សង្ខេប​អត្ថបទ​នៅ​ក្នុង​តារាង ។\n"
+"\t--table-style, -s\tរចនាប័ទ្ម​តារាង (ចំនួន​គត់) ។\n"
+"\t--rug-compatible, -r\tបើក​ការ​ឆបគ្នា​សើរៗ ។\n"
+"\t--non-interactive, -n\tកុំ​សួរ​អ្វី​ទាំងអស់ ប្រើ​ចម្លើយ​លំនាំដើម\n"
+"\t\t\t\tដោយ​ស្វ័យ​ប្រវត្តិ ។\n"
+"\t--xmlout, -x\t\tប្ដូរ​ទៅ​លទ្ធផល​របស់ XML ។\n"
+"\t--reposd-dir, -D <dir>\tប្រើ​ការ​កំណត់​ឯកសារ​​ឃ្លាំង​ជាជម្រើសរើស​\n"
+"\t\t\t\tថត ។\n"
+"\t--cache-dir, -C <dir>\tប្រើ​ថត​ឃ្លាំង​​សម្ងាត់​ទិន្នន័យ​មេតា​ជា​ជម្រើស ។\n"
+"\t--raw-cache-dir <dir>\tប្រើ​ថត​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​ឆៅ​ជា​ជម្រើស ។\n"
+
+#: ../src/Zypper.cc:172
+msgid ""
+"     Repository Options:\n"
+"\t--no-gpg-checks\t\tIgnore GPG check failures and continue.\n"
+"\t--plus-repo, -p <URI>\tUse an additional repository.\n"
+"\t--disable-repositories\tDo not read meta-data from repositories.\n"
+"\t--no-refresh\t\tDo not refresh the repositories.\n"
+msgstr ""
+"     ជម្រើស​ឃ្លាំង ៖\n"
+"\t--no-gpg-checks\t\tមិន​អើពើ​ការ​បរាជ័យ​ក្នុងការ​ពិនិត្យ GPG និង​បន្ត ។\n"
+"\t--plus-repo, -p <URI>\tប្រើ​ឃ្លាំង​បន្ថែម ។\n"
+"\t--disable-repositories\tកុំ​អាន​​ទិន្នន័យ​មេតា​ពី​ឃ្លាំង ។\n"
+"\t--no-refresh\t\tកុំ​ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់ ។\n"
+
+#: ../src/Zypper.cc:179
+msgid ""
+"     Target Options:\n"
+"\t--root, -R <dir>\tOperate on a different root directory.\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tDo not read installed packages.\n"
+msgstr ""
+"     ជម្រើស​គោលដៅ ៖\n"
+"\t--root, -R <dir>\tប្រតិបត្តិ​លើ​ថត root ផ្សេងៗ​គ្នា ។\n"
+"\t--disable-system-resolvables\n"
+"\t\t\t\tកុំ​អាន​កញ្ចប់​ដែល​បានដំឡើង ។\n"
+
+#: ../src/Zypper.cc:186
+msgid ""
+"  Commands:\n"
+"\thelp, ?\t\t\tPrint help.\n"
+"\tshell, sh\t\tAccept multiple commands at once.\n"
+msgstr ""
+"  ពាក្យ​បញ្ជា ៖\n"
+"\thelp, ?\t\t\tបង្ហាញ​ជំនួយ ។\n"
+"\tshell, sh\t\tព្រម​ទទួល​យក​ពាក្យ​បញ្ជា​ច្រើន​នៅពេល​តែ​មួយ ។\n"
+
+#: ../src/Zypper.cc:191
+msgid ""
+"     Repository Management:\n"
+"\trepos, lr\t\tList all defined repositories.\n"
+"\taddrepo, ar\t\tAdd a new repository.\n"
+"\tremoverepo, rr\t\tRemove specified repository.\n"
+"\trenamerepo, nr\t\tRename specified repository.\n"
+"\tmodifyrepo, mr\t\tModify specified repository.\n"
+"\trefresh, ref\t\tRefresh all repositories.\n"
+"\tclean\t\t\tClean local caches.\n"
+msgstr ""
+"     ការ​គ្រប់គ្រង​ឃ្លាំង ៖\n"
+"\trepos, lr\t\tរាយ​ឃ្លាំង​ដែល​បានកំណត់​ទាំងអស់ ។\n"
+"\taddrepo, ar\t\tបន្ថែម​ឃ្លាំង​ថ្មី ។\n"
+"\tremoverepo, rr\t\tយក​ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ចេញ ។\n"
+"\trenamerepo, nr\t\tប្ដូរ​ឃ្លាំង​ដែល​បានកំណត់ ។\n"
+"\tmodifyrepo, mr\t\tកែប្រែ​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"\trefresh, ref\t\tធ្វើ​ឲ្យ​ឃ្លាំង​ទាំងអស់​ស្រស់ ។\n"
+"\tclean\t\t\tជម្រះ​ឃ្លាំង​សម្ងាត់​មូលដ្ឋាន ។\n"
+
+#: ../src/Zypper.cc:201
+msgid ""
+"     Service Management:\n"
+"\tservices, ls\t\tList all defined services.\n"
+"\taddservice, as\t\tAdd a new service.\n"
+"\tmodifyservice, ms\tModify specified service.\n"
+"\tremoveservice, rs\tRemove specified service.\n"
+"\trefresh-services, refs\tRefresh all services.\n"
+msgstr ""
+"     កា​រគ្រប់គ្រង​សេវា ៖\n"
+"\tservices, ls\t\tរាយ​សេវា​ដែល​បានកំណត់​ទាំងអស់ ។\n"
+"\taddservice, as\t\tបន្ថែម​សេវា​ថ្មី ។\n"
+"\tmodifyservice, ms\tកែប្រែ​សេវា​ដែល​បានបញ្ជាក់ ។\n"
+"\tremoveservice, rs\tយក​ចេញ​សេវា​ដែល​បាន​បញ្ជាក់​ចេញ ។\n"
+"\trefresh-services, refs\tធ្វើ​ឲ្យ​សេវា​ទាំងអស់​ស្រស់ ។\n"
+
+#: ../src/Zypper.cc:209
+msgid ""
+"     Software Management:\n"
+"\tinstall, in\t\tInstall packages.\n"
+"\tremove, rm\t\tRemove packages.\n"
+"\tverify, ve\t\tVerify integrity of package dependencies.\n"
+"\tsource-install, si\tInstall source packages and their build\n"
+"\t\t\t\tdependencies.\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tInstall newly added packages recommended\n"
+"\t\t\t\tby installed packages.\n"
+msgstr ""
+"     ការ​គ្រប់គ្រង​កម្មវិធី ៖\n"
+"\tinstall, in\t\tដំឡើង​កញ្ចប់ ។\n"
+"\tremove, rm\t\tយក​កញ្ចប់​ចេញ ។\n"
+"\tverify, ve\t\tផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​របស់​ភាព​អាស្រ័យ​កញ្ចប់ ។\n"
+"\tsource-install, si\tដំឡើង​កញ្ចប់​ប្រភព និង​ការ​ស្ថាបនា​​ភាព​អាស្រ័យ​របស់​​ពួកគេ\n"
+"\t\t\t\t ។\n"
+"\tinstall-new-recommends, inr\n"
+"\t\t\t\tដំឡើង​កញ្ចប់​ដែល​បាន​បន្ថែម​ថ្មីៗ​ដែល​បានផ្ដល់​អនុសាសន៍\n"
+"\t\t\t\tដោយ​កញ្ចប់​ដែល​បាន​ដំឡើង ។\n"
+
+#: ../src/Zypper.cc:220
+msgid ""
+"     Update Management:\n"
+"\tupdate, up\t\tUpdate installed packages with newer versions.\n"
+"\tlist-updates, lu\tList available updates.\n"
+"\tpatch\t\t\tInstall needed patches.\n"
+"\tlist-patches, lp\tList needed patches.\n"
+"\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
+"\tpatch-check, pchk\tCheck for patches.\n"
+msgstr ""
+"     ការ​គ្រប់គ្រង\n"
+"\tupdate, up\t\tUpdate installed packages with newer versions.\n"
+"\tlist-updates, lu\tList available updates.\n"
+"\tpatch\t\t\tInstall needed patches.\n"
+"\tlist-patches, lp\tList needed patches.\n"
+"\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
+"\tpatch-check, pchk\tCheck for patches.\n"
+
+#: ../src/Zypper.cc:229
+msgid ""
+"     Querying:\n"
+"\tsearch, se\t\tSearch for packages matching a pattern.\n"
+"\tinfo, if\t\tShow full information for specified packages.\n"
+"\tpatch-info\t\tShow full information for specified patches.\n"
+"\tpattern-info\t\tShow full information for specified patterns.\n"
+"\tproduct-info\t\tShow full information for specified products.\n"
+"\tpatches, pch\t\tList all available patches.\n"
+"\tpackages, pa\t\tList all available packages.\n"
+"\tpatterns, pt\t\tList all available patterns.\n"
+"\tproducts, pd\t\tList all available products.\n"
+"\twhat-provides, wp\tList packages providing specified capability.\n"
+msgstr ""
+"     សំណួរ ៖\n"
+"\tsearch, se\t\tស្វែងរក​កញ្ចប់​ដែល​ផ្គូផ្គង​លំនាំ ។\n"
+"\tinfo, if\t\tបង្ហាញ​ព័ត៌មាន​ពេញលេញ​សម្រាប់​កញ្ចប់​ដែល​បាន​បញ្ជាក់ ។\n"
+"\tpatch-info\t\tបង្ហាញ​ព័ត៌មាន​ពេញលេញ​សម្រាប់​បំណះ​ដែល​បាន​បញ្ជាក់ ។\n"
+"\tpattern-info\t\tបង្ហាញ​ព័ត៌មាន​ពេញលេញ​សម្រាប់​លំនាំ​ដែល​បានបញ្ជាក់ ។\n"
+"\tproduct-info\t\tបង្ហាញ​ព័ត៌មាន​ពេញលេញ​សម្រាប់​ផលិតផល​ដែល​បាន​បញ្ជាក់ ។\n"
+"\tpatches, pch\t\tរាយ​បំណះ​ដែល​អាច​ប្រើបាន​ទាំងអស់ ។\n"
+"\tpackages, pa\t\tរាយ​កញ្ចប់​ដែល​អាច​ប្រើ​បានទាំងអស់ ។\n"
+"\tpatterns, pt\t\tរាយ​លំនាំ​ដែល​អាច​ប្រើ​បានទាំងអស់ ។\n"
+"\tproducts, pd\t\tរាយ​ផលិតផល​ដែល​អាច​ប្រើបានទាំងអស់ ។\n"
+"\twhat-provides, wp\tរាយ​កញ្ចប់​ដោយ​ផ្ដល់​មត្ថភាព​ដែល​បាន​បញ្ជាក់ ។\n"
+
+#: ../src/Zypper.cc:244
+msgid ""
+"     Package Locks:\n"
+"\taddlock, al\t\tAdd a package lock.\n"
+"\tremovelock, rl\t\tRemove a package lock.\n"
+"\tlocks, ll\t\tList current package locks.\n"
+msgstr ""
+"     សោ​កញ្ចប់ ៖\n"
+"\taddlock, al\t\tបន្ថែម​សោ​កញ្ចប់ ។\n"
+"\tremovelock, rl\t\tយក​សោ​កញ្ចប់​ចេញ ។\n"
+"\tlocks, ll\t\tរាយ​សោ​កញ្ចប់​បច្ចុប្បន្ន ។\n"
+
+#: ../src/Zypper.cc:250
+msgid ""
+"     Other Commands:\n"
+"\tversioncmp, vcmp\tCompare two version strings.\n"
+"\ttargetos, tos\t\tPrint the target operating system ID string.\n"
+"\tlicenses\t\tPrint report about licenses and EULAs of\n"
+"\t\t\t\tinstalled packages.\n"
+msgstr ""
+"     ជម្រើស​ផ្សេង ៖\n"
+"\tversioncmp, vcmp\tប្រៀបធៀប​ខ្សែអក្សរ​កំណែ​ពីរ ។\n"
+"\ttargetos, tos\t\tបោះពុម្ព​ប្រព័ន្ធ​ប្រតិបត្តិការ​គោលដៅ​ខ្សែអក្សរ ID ។\n"
+"\tlicenses\t\tបោះពុម្ព​របាយការណ៍​អំពី​អាជ្ញាប័ណ្ណ និង EULAs របស់\n"
+"\t\t\t\tកញ្ចប់​ដែល​បាន​ដំឡើង​ ។\n"
+
+#: ../src/Zypper.cc:258
+msgid ""
+"  Usage:\n"
+"\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+msgstr ""
+"  ការ​ប្រើប្រាស់ ៖\n"
+"\tzypper [--global-options] <command> [--command-options] [arguments]\n"
+
+#. translators: %s is "help" or "zypper help" depending on whether
+#. zypper shell is running or not
+#: ../src/Zypper.cc:283
+#, c-format
+msgid "Type '%s' to get a list of global options and commands."
+msgstr "វាយ '%s' ដើម្បី​បង្ហាញ​បញ្ជី​ជម្រើស និង​ពាក្យ​បញ្ជា​សកល ។"
+
+#. translators: %s is "help" or "zypper help" depending on whether
+#. zypper shell is running or not
+#: ../src/Zypper.cc:292
+#, c-format
+msgid "Type '%s' to get command-specific help."
+msgstr "វាយ '%s' ដើម្បី​បង្ហាញ​ជំនួយ​ជំនួយ​​របស់​ពាក្យ​បញ្ជា​ជាក់លាក់ ។"
+
+#: ../src/Zypper.cc:393
+#, c-format
+msgid "Verbosity: %d"
+msgstr "ការ​បរិយាយ ៖ %d"
+
+#: ../src/Zypper.cc:407
+#, c-format
+msgid "Invalid table style %d."
+msgstr "រចនាប័ទ្ម​តារាង %d មិន​ត្រឹមត្រូវ ។"
+
+#: ../src/Zypper.cc:408
+#, c-format
+msgid "Use an integer number from %d to %d"
+msgstr "ប្រើ​លេខ​ចំនួន​គត់​ពី %d ដល់ %d"
+
+#: ../src/Zypper.cc:439
+msgid "Entering non-interactive mode."
+msgstr "បញ្ចូល​របៀប​​មិន​អន្តរសកម្ម ។"
+
+#: ../src/Zypper.cc:445
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "បញ្ចូល​របៀប 'no-gpg-checks' ។"
+
+#: ../src/Zypper.cc:456
+msgid "The path specified in the --root option must be absolute."
+msgstr "ផ្លូវ​ដែល​បាន​បញ្ជាក់​ក្នុង​ជម្រើស --root ត្រូវ​តែ​ជា​ផ្លូវ​ពេញលេញ ។"
+
+#: ../src/Zypper.cc:485
+msgid "Repositories disabled, using the database of installed packages only."
+msgstr "បានបិទឃ្លាំង ប្រើ​មូលដ្ឋាន​ទិន្នន័យ​របស់​តែ​កញ្ចប់​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។"
+
+#: ../src/Zypper.cc:497
+msgid "Autorefresh disabled."
+msgstr "បាន​បិទ​​ការ​ធ្វើ​ឲ្យស្រស់​ស្វ័យ​ប្រវត្តិ ។"
+
+#: ../src/Zypper.cc:504
+msgid "Ignoring installed resolvables."
+msgstr "មិនអើពើ​នឹង​កញ្ចប់​ដោះស្រាយ​ដែល​បាន​ដំឡើង ។"
+
+#. TranslatorExplanation The %s is "--plus-repo"
+#: ../src/Zypper.cc:599
+#, c-format
+msgid "The %s option has no effect here, ignoring."
+msgstr "ជម្រើស %s មិនមានបែបផែន​នៅ​ទីនេះ​ទេ មិនអើពើ ។"
+
+#: ../src/Zypper.cc:776
+msgid "Unexpected exception."
+msgstr "ករណី​លើកលែង​ដែល​មិនបាន​រំពឹង​ទុក ។"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "package"
+#: ../src/Zypper.cc:860
+#, c-format
+msgid ""
+"install (in) [options] <capability|rpm_file_uri> ...\n"
+"\n"
+"Install packages with specified capabilities or RPM files with specified location. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>        Install packages only from the specified repository.\n"
+"-t, --type <type>               Type of package (%s).\n"
+"                                Default: %s.\n"
+"-n, --name                      Select packages by plain name, not by capability.\n"
+"-C, --capability                Select packages by capability.\n"
+"-f, --force                     Install even if the item is already installed (reinstall).\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+"                                See 'man zypper' for more details.\n"
+"    --debug-solver              Create solver test case for debugging.\n"
+"    --no-recommends             Do not install recommended packages, only required.\n"
+"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+"-D, --dry-run                   Test the installation, do not actually install.\n"
+msgstr ""
+"ដំឡើង (in) [ជម្រើស] <capability|rpm_file_uri> ...\n"
+"\n"
+"ដំឡើង​កញ្ចប់​ដែល​មាន​សមត្ថភាព​ដែល​បានបញ្ជាក់ ឬ​ឯកសារ RPM ដែល​មាន​ទីតាំង​ដែល​បានបញ្ជាក់ ។ សមត្ថភាព​គឺ​ជា NAME[OP<VERSION>], ដែល OP ជា​សញ្ញា​មួយ​ក្នុង​ចំណោម​សញ្ញា <, <=, =, >=, >.\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>        ដំឡើង​កញ្ចប់​តែ​ពី​ឃ្លាំង​ដែល​បានបញ្ជាក់ប៉ុណ្ណោះ ។\n"
+"-t, --type <type>               ប្រភេទ​កញ្ចប់ (%s) ។\n"
+"                                លំនាំដើម ៖ %s ។\n"
+"-n, --name                      ជ្រើស​កញ្ចប់​ដោយ​ជ្រើស​ឈ្មោះ​ធម្មតា មិន​មែន​តាម​សមត្ថភាព​ទេ ។\n"
+"-C, --capability                ជ្រើស​​កញ្ចប់​តាម​សមត្ថភាព ។\n"
+"-f, --force                     ដំឡើង​សូម្បីតែ​ធាតុ​មាន​ដំឡើង​រួចហើយ​ (ដំឡើង​ឡើងវិញ) ។\n"
+"-l, --auto-agree-with-licenses  និយាយ​ថា 'បាទ/ចាស' ដោយ​ស្វ័យ​ប្រវត្តិ​​ទៅ​ការ​អះអាង​អាជ្ញាប័ណ្ណ​ភាគី​ទី ៣ ។\n"
+"                                សូម​មើល 'man zypper' សម្រាប់​សេចក្ដី​លម្អិត​បន្ថែម ។\n"
+"    --debug-solver              បង្កើត​​​ករណី​សាកល្បង​របស់​កម្មវិធី​ដោះស្រាយ​សម្រាប់​បំបាត់​កំហុស ។\n"
+"    --no-recommends             កុំដំឡើង​កញ្ចប់​ដែល​បាន​ផ្ដល់​អនុសាសន៍ តែ​អ្វី​ដែល​ត្រូវការ​ប៉ុណ្ណោះ ។\n"
+"-R, --no-force-resolution       កុំ​បង្ខំ​ឲ្យ​កម្មវិធី​ដោះស្រាយ​រក​ដំឡើង​ស្រាយ ឲ្យ​វា​សួរ ។\n"
+"    --force-resolution          បង្ខំ​កម្មវិធី​ដោះស្រាយ​ឲ្យ​រក​ដំណោះស្រាយ (សូម្បី​តែ agressive) ។\n"
+"-D, --dry-run                   សាកល្បង​ការ​ដំឡើង កុំ​ដំឡើង​ពិតប្រាកដ ។\n"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "package"
+#: ../src/Zypper.cc:909
+#, c-format
+msgid ""
+"remove (rm) [options] <capability> ...\n"
+"\n"
+"Remove packages with specified capabilities. A capability is NAME[OP<VERSION>], where OP is one of <, <=, =, >=, >.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
+"-t, --type <type>               Type of package (%s).\n"
+"                                Default: %s.\n"
+"-n, --name                      Select packages by plain name, not by capability.\n"
+"-C, --capability                Select packages by capability.\n"
+"    --debug-solver              Create solver test case for debugging.\n"
+"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+"-D, --dry-run                   Test the removal, do not actually remove.\n"
+msgstr ""
+"remove (rm) [options] <capability> ...\n"
+"\n"
+"យក​កញ្ចប់​ដែល​មាន​សមត្ថភាព​ដែល​បាន​បញ្ជាក់ ។ សមត្ថភាព​គឺ​ជា NAME[OP<VERSION>], ដែល OP ជា​សញ្ញា​មួយ​ក្នុង​ចំណោម​សញ្ញា <, <=, =, >=, >.\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>        ប្រតិបត្តិ​តែ​ជា​មួយ​កញ្ចប់​ពី​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ប៉ុណ្ណោះ ។\n"
+"-t, --type <type>               ប្រភេទ​កញ្ចប់ (%s) ។\n"
+"                                លំនាំដើម ៖ %s.\n"
+"-n, --name                      ជ្រើស​កញ្ចប់​តាម​ឈ្មោះ​ធម្មតា មិន​តាម​សមត្ថភាព​ទេ ។\n"
+"-C, --capability                ជ្រើស​កញ្ចប់​តាម​សមត្ថភាព ។\n"
+"    --debug-solver              បង្កើត​ករណី​សាកល្បង​កម្មវិធី​ដោះស្រាយ​សម្រាប់​បំបាត់​កំហុស ។\n"
+"-R, --no-force-resolution       កុំ​បង្ខំ​ឲ្យ​កម្មវិធី​ដោះស្រាយ​រក​ដំណោះស្រាយ ឲ្យ​វា​សួរ ។\n"
+"    --force-resolution          បង្ខំ​កម្មវិធី​ដោះស្រាយ​ឲ្យ​រក​ដំណោះស្រាយ (សូម្បីតែ agressive) ។\n"
+"-D, --dry-run                   សាកល្បង​ការ​យក​ចេញ កុំ​យក​ចេញ​ជាក់ស្ដែង ។\n"
+
+#: ../src/Zypper.cc:939
+msgid ""
+"source-install (si) [options] <name> ...\n"
+"\n"
+"Install specified source packages and their build dependencies.\n"
+"\n"
+"  Command options:\n"
+"-d, --build-deps-only    Install only build dependencies of specified packages.\n"
+"-D, --no-build-deps      Don't install build dependencies.\n"
+"-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
+msgstr ""
+"source-install (si) [options] <name> ...\n"
+"\n"
+"ដំឡើង​កញ្ចប់​ប្រភព​ជាក់លាក់ និង​ភាពអាស្រ័យ​ដែល​មាន​របស់​ពួកគេ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-d, --build-deps-only    ដំឡើង​តែ​ភាពអាស្រ័យ​ដែល​មាន​របស់​កញ្ចប់​ជាក់លាក់ ។\n"
+"-D, --no-build-deps      កុំ​ដំឡើង​ភាព​អាស្រ័យ​ដែល​មាន ។\n"
+"-r, --repo <alias|#|URI> ដំឡើង​កញ្ចប់​តែ​ពី​ឃ្លាំង​ជាក់លាក់​ប៉ុណ្ណោះ ។\n"
+
+#: ../src/Zypper.cc:967
+msgid ""
+"verify (ve) [options]\n"
+"\n"
+"Check whether dependencies of installed packages are satisfied and repair eventual dependency problems.\n"
+"\n"
+"  Command options:\n"
+"    --no-recommends      Do not install recommended packages, only required.\n"
+"-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
+"-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
+msgstr ""
+"verify (ve) [options]\n"
+"\n"
+"ពិនិត្យ​មើល​ថាតើ ភាពអាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​ត្រឹមត្រូវ​ឬ​អត់ ហើយ​ជួសជុល​បញ្ហា​ភាព​អាស្រ័យ​តាម​​យថាហេតុ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"    --no-recommends      មិន​ដំឡើង​កញ្ចប់​ដែល​បាន​ផ្ដល់​អានុសាសន៍​ទេ គឺ​ដំឡើង​តែ​កញ្ចប់​ដែល​ត្រូវការ​ប៉ុណ្ណោះ ។\n"
+"-D, --dry-run            សាកល្បង​ជួសជុល គឺ​មិន​ធ្វើអ្វី​ចំពោះ​ប្រព័ន្ធ​មែនទែនទេ ។\n"
+"-r, --repo <alias|#|URI> ប្រើ​តែ​ឃ្លាំង​ដែលបាន​បញ្ជាក់ ដើម្បី​ដំឡើង​កញ្ចប់​ដែល​បាត់ ។\n"
+
+#: ../src/Zypper.cc:991
+msgid ""
+"install-new-recommends (inr) [options]\n"
+"\n"
+"Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI> Use only specified repositories to install packages.\n"
+"-D, --dry-run            Test the installation, do not actually install anything.\n"
+"    --debug-solver       Create solver test case for debugging.\n"
+msgstr ""
+"install-new-recommends (inr) [options]\n"
+"\n"
+"ដំឡើង​កញ្ចប់​ដែល​បាន​បន្ថែម​ថ្មីៗ​ដែល​បានផ្ដល់​អនុសាសន៍​ដោយ​កញ្ចប់​ដែល​បានដំឡើង​រួច​ហើយ ។ ជា​ទូទៅ​វា​អាច​ត្រូវ​បាន​ប្រើ​ដំឡើង​កញ្ចប់​ភាសា​ថ្មី ឬ​កម្មវិធី​បញ្ជា​សម្រាប់​ផ្នែក​រឹង​ដែល​បាន​បន្ថែម​ថ្មី ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI> ប្រើ​ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ប៉ុណ្ណោះ​ដើម្បី​ដំឡើង​កញ្ចប់ ។\n"
+"-D, --dry-run            សាកល្បង​ការ​ដំឡើង កុំ​ដំឡើង​អ្វី​មែនទែន​ ។\n"
+"    --debug-solver       ករណី​សាកល្បង​ឲ្យ​ដោះស្រាយ​ដើម្បីបំបាត់​កំហុស ។\n"
+
+#. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+#: ../src/Zypper.cc:1018
+#, c-format
+msgid ""
+"addservice (as) [options] <URI> <alias>\n"
+"\n"
+"Add a repository index service to the system.\n"
+"\n"
+"  Command options:\n"
+"-t, --type <TYPE>       Type of the service (%s).\n"
+"-d, --disable           Add the service as disabled.\n"
+"-n, --name              Specify descriptive name for the service.\n"
+msgstr ""
+"addservice (as) [options] <URI> <alias>\n"
+"\n"
+"បន្ថែម​សេវា​លិបិក្រម​ឃ្លាំង​ទៅ​ប្រព័ន្ធ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជាក់ ៖\n"
+"-t, --type <TYPE>       ប្រភេទ​សេវា (%s) ។\n"
+"-d, --disable           បន្ថែម​សេវា​ដូច​ដែល​បា​ន​បិទ ។\n"
+"-n, --name              បញ្ជាក់​ឈ្មោះ​ពិពណ៌នា​សម្រាប់​សេវា ។\n"
+
+#. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+#. TODO
+#: ../src/Zypper.cc:1042
+msgid ""
+"removeservice (rs) [options] <alias|#|URI>\n"
+"\n"
+"Remove specified repository index service from the sytem..\n"
+"\n"
+"  Command options:\n"
+"    --loose-auth   Ignore user authentication data in the URI.\n"
+"    --loose-query  Ignore query string in the URI.\n"
+msgstr ""
+"removeservice (rs) [options] <alias|#|URI>\n"
+"\n"
+"យក​សេវា​លិបិក្រម​ឃ្លាំង​ដែលបានបញ្ជាក់​ចេញ​ពី​ប្រព័ន្ធ..\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"    --loose-auth   មិនអើពើ​ទិន្នន័យ​ផ្ទៀងផ្ទាត់ភាព​ត្រឹមត្រូវ​របស់​អ្នក​ប្រើ​នៅ​ក្នុង URI ។\n"
+"    --loose-query  មិនអើពើ​ខ្សែអក្សរ​សំណួរ​នៅ​ក្នុង URI ។\n"
+
+#. translators: %s is "--all" and "--all"
+#: ../src/Zypper.cc:1078
+#, c-format
+msgid ""
+"modifyservice (ms) <options> <alias|#|URI>\n"
+"modifyservice (ms) <options> <%s>\n"
+"\n"
+"Modify properties of services specified by alias, number, or URI, or by the\n"
+"'%s' aggregate options.\n"
+"\n"
+"  Command options:\n"
+"-d, --disable                  Disable the service (but don't remove it).\n"
+"-e, --enable                   Enable a disabled service.\n"
+"-r, --refresh                  Enable auto-refresh of the service.\n"
+"-R, --no-refresh               Disable auto-refresh of the service.\n"
+"-n, --name                     Set a descriptive name for the service.\n"
+"\n"
+"-i, --ar-to-enable <alias>     Add a RIS service repository to enable.\n"
+"-I, --ar-to-disable <alias>    Add a RIS service repository to disable.\n"
+"-j, --rr-to-enable <alias>     Remove a RIS service repository to enable.\n"
+"-J, --rr-to-disable <alias>    Remove a RIS service repository to disable.\n"
+"-k, --cl-to-enable             Clear the list of RIS repositories to enable.\n"
+"-K, --cl-to-disable            Clear the list of RIS repositories to disable.\n"
+"\n"
+"-a, --all                      Apply changes to all services.\n"
+"-l, --local                    Apply changes to all local services.\n"
+"-t, --remote                   Apply changes to all remote services.\n"
+"-m, --medium-type <type>       Apply changes to services of specified type.\n"
+msgstr ""
+"modifyservice (ms) <options> <alias|#|URI>\n"
+"modifyservice (ms) <options> <%s>\n"
+"\n"
+"កែប្រែ​ឃ្លាំង​របស់​សេវា​ដែលបាន​បញ្ជាក់​ដោយ​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ​ URI ឬ​ដោយជម្រើស​ផ្គុំ\n"
+"'%s' ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-d, --disable                  បិទ​សេវា (ប៉ុន្តែ​កុំ​យក​ចេញ) ។\n"
+"-e, --enable                   បើក​សេវា​ដែល​បានបិទ ។\n"
+"-r, --refresh                  បើក​ការ​ធ្វើ​ឲ្យ​សេវា​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ ។\n"
+"-R, --no-refresh               បិទ​ការ​ធ្វើ​ឲ្យ​សេវា​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ ។\n"
+"-n, --name                     កំណត់​ឈ្មោះ​ពិពណ៌នា​សម្រាប់សេវា ។\n"
+"\n"
+"-i, --ar-to-enable <alias>     បន្ថែម​ឃ្លាំង​សេវា RIS ដើម្បី​បើក ។\n"
+"-I, --ar-to-disable <alias>    បន្ថែម​ឃ្លាំង​​​សេវា​ RIS ដើម្បីបិទ ។\n"
+"-j, --rr-to-enable <alias>     យក​ឃ្លាំង​សេវា​ RIS ចេញ​ដើម្បី​បើក ។\n"
+"-J, --rr-to-disable <alias>    យក​ឃ្លាំង​សេវា RIS ចេញ​ដើម្បី​បិទ ។\n"
+"-k, --cl-to-enable             ជម្រះ​បញ្ជី​របស់​ឃ្លាំង RIS ដើម្បីបើក ។\n"
+"-K, --cl-to-disable            ជម្រះ​បញ្ជី​ឃ្លាំង RIS ដើម្បី​បិទ ។\n"
+"\n"
+"-a, --all                      អនុវត្ត​កា​រផ្លាស់ប្ដូរ​ទៅ​សេវា​ទាំងអស់ ។\n"
+"-l, --local                    អនុវត្ត​ការ​ផ្លាស់ប្ដូរ​​ទៅ​សេវា​មូលដ្ឋាន​ទាំងអស់ ។\n"
+"-t, --remote                   អនុវត្ត​ការ​ផ្លាស់ប្ដូរ​ទៅ​សេវា​ពី​ចម្ងាយ​ទាំងអស់ ។\n"
+"-m, --medium-type <type>       អនុវត្ត​ការ​ផ្លាស់ប្ដូរ​ទៅសេវា​របស់​ប្រភេទ​ដែល​បាន​បញ្ជាក់ ។\n"
+
+#: ../src/Zypper.cc:1126
+msgid ""
+"services (ls) [options]\n"
+"\n"
+"List defined services.\n"
+"\n"
+"  Command options:\n"
+"-u, --uri                 Show also base URI of repositories.\n"
+"-p, --priority            Show also repository priority.\n"
+"-d, --details             Show more information like URI, priority, type.\n"
+"-r, --with-repos          Show also repositories belonging to the services.\n"
+"-P, --sort-by-priority    Sort the list by repository priority.\n"
+"-U, --sort-by-uri         Sort the list by URI.\n"
+"-N, --sort-by-name        Sort the list by name.\n"
+msgstr ""
+"services (ls) [options]\n"
+"\n"
+"រាយ​សេវា​ដែល​បាន​កំណត់​ទាំងអស់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-u, --uri                 បង្ហាញ​ឃ្លាំង URI មូលដ្ឋាន ។\n"
+"-p, --priority            បង្ហាញ​អាទិភាព​ឃ្លាំង ។\n"
+"-d, --details             បង្ហាញ​ព័ត៌មាន​បន្ថែម​ដូច​ជា URI អាទិភាព ប្រភេទ ។\n"
+"-r, --with-repos          បង្ហាញ​ឃ្លាំង​ជា​របស់​សេវា ។\n"
+"-P, --sort-by-priority    តម្រៀប​បញ្ជី​តាម​អាទិភាព​ឃ្លាំង ។\n"
+"-U, --sort-by-uri         តម្រៀប​​បញ្ជី​តាម URI ។\n"
+"-N, --sort-by-name        តម្រៀប​បញ្ជី​តាម​ឈ្មោះ ។\n"
+
+#: ../src/Zypper.cc:1152
+msgid ""
+"refresh-services (refs) [options]\n"
+"\n"
+"Refresh defined repository index services.\n"
+"\n"
+"  Command options:\n"
+"-r, --with-repos      Refresh also repositories.\n"
+msgstr ""
+"refresh-services (refs) [options]\n"
+"\n"
+"ធ្វើ​ឲ្យ​សេវា​លិបិក្រម​ឃ្លាំង​ដែល​បានកំណត់​ទាន់សម័យ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --with-repos      ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់ ។\n"
+
+#. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
+#: ../src/Zypper.cc:1180
+#, c-format
+msgid ""
+"addrepo (ar) [options] <URI> <alias>\n"
+"addrepo (ar) [options] <FILE.repo>\n"
+"\n"
+"Add a repository to the sytem. The repository can be specified by its URI or can be read from specified .repo file (even remote).\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <FILE.repo>  Just another means to specify a .repo file to read.\n"
+"-t, --type <TYPE>       Type of repository (%s).\n"
+"-d, --disable           Add the repository as disabled.\n"
+"-c, --check             Probe URI.\n"
+"-C, --no-check          Don't probe URI, probe later during refresh.\n"
+"-n, --name              Specify descriptive name for the repository.\n"
+"-k, --keep-packages     Enable RPM files caching.\n"
+"-K, --no-keep-packages  Disable RPM files caching.\n"
+"-f, --refresh           Enable autorefresh of the repository.\n"
+msgstr ""
+"addrepo (ar) [options] <URI> <alias>\n"
+"addrepo (ar) [options] <FILE.repo>\n"
+"\n"
+"បន្ថែម​ឃ្លាំង​ទៅ​ប្រព័ន្ធ ។ ឃ្លាំង​អាច​ត្រូវ​បាន​បញ្ជាក់​ដោយ​ URI របស់​វា ឬ​អាច​អាន​ពី​ឯកសារ .repo ដែល​បាន​បញ្ជាក់ (សូម្បី​តែ​ពីចម្ងាយ) ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <FILE.repo>  គ្រាន់​តែ​មធ្យោបាយ​ផ្សេង​ដើម្បីបញ្ជាក់​ឯកសារ .repo ត្រូវ​អាន ។\n"
+"-t, --type <TYPE>       ប្រភេទ​ឃ្លាំង (%s) ។\n"
+"-d, --disable           បន្ថែម​ឃ្លាំង​ដូច​បានបិទ ។\n"
+"-c, --check             ស្ទង់ URI ។\n"
+"-C, --no-check          កុំ​ស្ទង់ URI ស្ទង់​ពេលក្រោយ​កំឡុង​ពេល​ធ្វើ​ឲ្យស្រស់ ។\n"
+"-n, --name              បញ្ជាក់​ឈ្មោះ​ពិពណ៌នា​សម្រាប់​ឃ្លាំង ។\n"
+"-k, --keep-packages     បើក​​ឃ្លាំង​សម្ងាត់ RPM ។\n"
+"-K, --no-keep-packages  បិទ​​ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ។\n"
+"-f, --refresh           បើក​ការ​ធ្វើ​ឲ្យស្រស់​របស់​ឃ្លាំង ។\n"
+
+#. translators: this is just a rug compatiblity command
+#. translators: this is just a rug-compatiblity command
+#: ../src/Zypper.cc:1229 ../src/Zypper.cc:2103
+msgid ""
+"list-resolvables (lr)\n"
+"\n"
+"List available resolvable types.\n"
+msgstr ""
+"list-resolvables (lr)\n"
+"\n"
+"រាយ​ប្រភេទ​កញ្ចប់​ដោះស្រាយ​ដែល​មាន ។\n"
+
+#: ../src/Zypper.cc:1237
+msgid ""
+"repos (lr) [options]\n"
+"\n"
+"List all defined repositories.\n"
+"\n"
+"  Command options:\n"
+"-e, --export <FILE.repo>  Export all defined repositories as a single local .repo file.\n"
+"-u, --uri                 Show also base URI of repositories.\n"
+"-p, --priority            Show also repository priority.\n"
+"-d, --details             Show more information like URI, priority, type.\n"
+"-U, --sort-by-uri         Sort the list by URI.\n"
+"-P, --sort-by-priority    Sort the list by repository priority.\n"
+"-A, --sort-by-alias       Sort the list by alias.\n"
+"-N, --sort-by-name        Sort the list by name.\n"
+msgstr ""
+"repos (lr) [options]\n"
+"\n"
+"រាយ​ឃ្លាំង​ដែល​បាន​កំណត់​ទាំងអស់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-e, --export <FILE.repo>  នាំចេញ​ឃ្លាំង​ដែល​បាន​កំណត់​ទាំងអស់​ជា​ឯកសារ .repo មូលដ្ឋាន ។\n"
+"-u, --uri                 បង្ហាញ​ URI មូលដ្ឋាន​របស់​ឃ្លាំង​ផងដែរ ។\n"
+"-p, --priority            បង្ហាញ​អទិភាព​របស់​ឃ្លាំង​ផងដែរ ។\n"
+"-d, --details             បង្ហាញ​ព័ត៌មាន​ដូចជា URI អទិភាព ប្រភេទ ។\n"
+"-U, --sort-by-uri         តម្រៀប​បញ្ជី​តាម URI ។\n"
+"-P, --sort-by-priority    តម្រៀប​បញ្ជី​តាម​អទិភាព​របស់​ឃ្លាំង ។\n"
+"-A, --sort-by-alias       តម្រៀប​បញ្ជី​តាម​ឈ្មោះ​ក្លែងក្លាយ ។\n"
+"-N, --sort-by-name        តម្រៀប​បញ្ជី​តាម​ឈ្មោះ ។\n"
+
+#: ../src/Zypper.cc:1264
+msgid ""
+"removerepo (rr) [options] <alias|#|URI>\n"
+"\n"
+"Remove repository specified by alias, number or URI.\n"
+"\n"
+"  Command options:\n"
+"    --loose-auth   Ignore user authentication data in the URI.\n"
+"    --loose-query  Ignore query string in the URI.\n"
+msgstr ""
+"removerepo (rr) [options] <alias|#|URI>\n"
+"\n"
+"យក​ឃ្លាំង​ដែល​បាន​បញ្ជាក់​តាម​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ URI ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"    --loose-auth   មិន​អើពើ​ទិន្នន័យ​ផ្ទៀងផ្ទាត់​ភាពត្រឹមត្រូវ​អ្នកប្រើ​នៅ​ក្នុង URI ។\n"
+"    --loose-query  មិន​អើពើ​នឹង​ខ្សែអក្សរ​សំណួរ​នៅ​ក្នុង URI ។\n"
+
+#: ../src/Zypper.cc:1283
+msgid ""
+"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"\n"
+"Assign new alias to the repository specified by alias, number or URI.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"renamerepo (nr) [options] <alias|#|URI> <new-alias>\n"
+"\n"
+"ផ្ដល់ឈ្មោះ​ក្លែងក្លាយ​ថ្មី​ទៅ​ឃ្លាំង​ដែល​បានបញ្ជាក់​ដោយ​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ URI ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#. translators: %s is "--all|--remote|--local|--medium-type"
+#. and "--all, --remote, --local, --medium-type"
+#: ../src/Zypper.cc:1314
+#, c-format
+msgid ""
+"modifyrepo (mr) <options> <alias|#|URI>\n"
+"modifyrepo (mr) <options> <%s>\n"
+"\n"
+"Modify properties of repositories specified by alias, number, or URI, or by the\n"
+"'%s' aggregate options.\n"
+"\n"
+"  Command options:\n"
+"-d, --disable             Disable the repository (but don't remove it).\n"
+"-e, --enable              Enable a disabled repository.\n"
+"-r, --refresh             Enable auto-refresh of the repository.\n"
+"-R, --no-refresh          Disable auto-refresh of the repository.\n"
+"-n, --name                Set a descriptive name for the repository.\n"
+"-p, --priority <1-99>     Set priority of the repository.\n"
+"-k, --keep-packages       Enable RPM files caching.\n"
+"-K, --no-keep-packages    Disable RPM files caching.\n"
+"\n"
+"-a, --all                 Apply changes to all repositories.\n"
+"-l, --local               Apply changes to all local repositories.\n"
+"-t, --remote              Apply changes to all remote repositories.\n"
+"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+msgstr ""
+"modifyrepo (mr) <options> <alias|#|URI>\n"
+"modifyrepo (mr) <options> <%s>\n"
+"\n"
+"Modify properties of repositories specified by alias, number, or URI, or by the\n"
+"'%s' aggregate options.\n"
+"\n"
+"  Command options:\n"
+"-d, --disable             Disable the repository (but don't remove it).\n"
+"-e, --enable              Enable a disabled repository.\n"
+"-r, --refresh             Enable auto-refresh of the repository.\n"
+"-R, --no-refresh          Disable auto-refresh of the repository.\n"
+"-n, --name                Set a descriptive name for the repository.\n"
+"-p, --priority <1-99>     Set priority of the repository.\n"
+"-k, --keep-packages       Enable RPM files caching.\n"
+"-K, --no-keep-packages    Disable RPM files caching.\n"
+"\n"
+"-a, --all                 Apply changes to all repositories.\n"
+"-l, --local               Apply changes to all local repositories.\n"
+"-t, --remote              Apply changes to all remote repositories.\n"
+"-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
+
+#: ../src/Zypper.cc:1354
+msgid ""
+"refresh (ref) [alias|#|URI] ...\n"
+"\n"
+"Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed.\n"
+"\n"
+"  Command options:\n"
+"-f, --force              Force a complete refresh.\n"
+"-b, --force-build        Force rebuild of the database.\n"
+"-d, --force-download     Force download of raw metadata.\n"
+"-B, --build-only         Only build the database, don't download metadata.\n"
+"-D, --download-only      Only download raw metadata, don't build the database.\n"
+"-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
+"-s, --services           Refresh also services before refreshing repos.\n"
+msgstr ""
+"refresh (ref) [alias|#|URI] ...\n"
+"\n"
+"ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់​ដែល​បាន​បញ្ជាក់​ដោយ​ឈ្មោះ​ក្លែងក្លាយ​ លេខ ឬ URI របស់​វា ។ ប្រសិនបើ​គ្មាន​អ្វី​ត្រូវ​បាន​បញ្ជាក់ ឃ្លាំង​ដែល​បា​ន​បើក​ទាំងអស់​នឹង​ត្រូវបាន​ធ្វើ​ឲ្យ​ស្រស់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-f, --force              បង្ខំ​ធ្វើ​ឲ្យ​ស្រស់​ពេញលេញ ។\n"
+"-b, --force-build        បង្ខំ​ឲ្យ​ស្ថាបនា​មូលដ្ឋាន​​ទិន្នន័យ​ឡើង​វិញ ។\n"
+"-d, --force-download     បង្ខំ​ឲ្យ​ទាញ​យក​ទិន្នន័យ​មេតា​ដើម ។\n"
+"-B, --build-only         ស្ថាបនា​តែ​មូលដ្ឋាន​ទិន្នន័យ​ប៉ុណ្ណោះ កុំ​ទាញ​យក​ទិន្នន័យ​មេតា ។\n"
+"-D, --download-only      ទាញ​យក​តែ​ទិន្នន័យ​មេតា​ដើម​ប៉ុណ្ណោះ កុំ​ស្ថាបនា​មូលដ្ឋាន​ទិន្នន័យ ។\n"
+"-r, --repo <alias|#|URI> ធ្វើ​ឲ្យ​ឃ្លាំង​ដែល​បានបញ្ជាក់​ស្រស់​តែ​ប៉ុណ្ណោះ ។\n"
+"-s, --services           ធ្វើ​ឲ្យ​សេវា​ស្រស់​ដែរ​មុន​នឹង​ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់ ។\n"
+
+#: ../src/Zypper.cc:1383
+msgid ""
+"clean [alias|#|URI] ...\n"
+"\n"
+"Clean local caches.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI> Clean only specified repositories.\n"
+"-m, --metadata           Clean metadata cache.\n"
+"-M, --raw-metadata       Clean raw metadata cache.\n"
+"-a, --all                Clean both metadata and package caches.\n"
+msgstr ""
+"clean [alias|#|URI] ...\n"
+"\n"
+"ជម្រះ​ឃ្លាំង​សម្ងាត់​មូលដ្ឋាន ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI> ជម្រះ​តែ​ឃ្លាំង​ដែលបាន​បញ្ជាក់​ប៉ុណ្ណោះ ។\n"
+"-m, --metadata           ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា ។\n"
+"-M, --raw-metadata       ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​ដើម ។\n"
+"-a, --all                ជម្រះ​ទាំង​ឃ្លាំង​សម្ងាត់​កញ្ចប់ និង​ទិន្នន័យ​មេតា ។\n"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "patch"
+#: ../src/Zypper.cc:1412
+#, c-format
+msgid ""
+"list-updates (lu) [options]\n"
+"\n"
+"List all available updates.\n"
+"\n"
+"  Command options:\n"
+"-t, --type <type>             Type of package (%s).\n"
+"                              Default: %s.\n"
+"-r, --repo <alias|#|URI>      List only updates from the specified repository.\n"
+"    --best-effort             Do a 'best effort' approach to update. Updates\n"
+"                              to a lower than the latest version are\n"
+"                              also acceptable.\n"
+"-a, --all                     List all packages for which newer versions are\n"
+"                              available, regardless whether they are\n"
+"                              installable or not.\n"
+msgstr ""
+"list-updates (lu) [options]\n"
+"\n"
+"រាយ​ភាព​ទាន់សម័យ​ដែល​មាន ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-t, --type <type>             ប្រភេទ​កញ្ចប់ (%s) ។\n"
+"                              លំនាំដើម ៖ %s ។\n"
+"-r, --repo <alias|#|URI>      រាយ​តែ​ភាព​ទាន់សម័យ​ពី​ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ប៉ុណ្ណោះ ។\n"
+"    --best-effort             ធ្វើ​ 'ឲ្យ​អស់​ពី​សមត្ថភាព' ដើម្បី​ឈាន​ដល់​ភាព​ទាន់សម័យ ។ កា​រធ្វើ​ឲ្យទាន់សម័យ​\n"
+"                              ទៅ​កំណែ​ទាបជាង​កំណែ​ចុងក្រោយ​បំផុត\n"
+"                              ក៏​ទទួល​យក​ដែរ ​​​។\n"
+"-a, --all                     រាយ​កញ្ចប់​ទាំងអស់​សម្រាប់កំណែ​ថ្មីៗ​គឺ\n"
+"                              អាច​ប្រើ​ ដោយ​ទាក់ទង​​ថាតើ​ពួកវា\n"
+"                              អាច​ដំឡើង​បាន ឬ​ក៏​អត់ ។\n"
+
+#. TranslatorExplanation the first %s = "package, patch, pattern, product"
+#. and the second %s = "patch"
+#: ../src/Zypper.cc:1463
+#, c-format
+msgid ""
+"update (up) [options] ...\n"
+"\n"
+"Update all or specified installed packages with newer versions, if possible.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-t, --type <type>               Type of package (%s).\n"
+"                                Default: %s.\n"
+"-r, --repo <alias|#|URI>        Limit updates to the specified repository.\n"
+"    --skip-interactive          Skip interactive updates.\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+"                                confirmation prompt.\n"
+"                                See man zypper for more details.\n"
+"    --best-effort               Do a 'best effort' approach to update. Updates\n"
+"                                to a lower than the latest version are\n"
+"                                also acceptable.\n"
+"    --debug-solver              Create solver test case for debugging.\n"
+"    --no-recommends             Do not install recommended packages, only required.\n"
+"-R, --no-force-resolution       Do not force the solver to find solution, let it ask.\n"
+"    --force-resolution          Force the solver to find a solution (even an agressive).\n"
+"-D, --dry-run                   Test the update, do not actually update.\n"
+msgstr ""
+"update (up) [options] ...\n"
+"\n"
+"ធ្វើ​ឲ្យ​ទាន់សម័យ​ទាំងអស់ ឬ​កញ្ចប់​ដែល​បានដំឡើង​ដែល​បាន​បញ្ជាក់​ជា​មួយ​នឹង​កំណែ​ថ្មី ប្រសិន​បើ​អាច ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-t, --type <type>               ប្រភេទ​កញ្ចប់ (%s) ។\n"
+"                                លំនាំដើម ៖ %s ។\n"
+"-r, --repo <alias|#|URI>        ដែន​កំណត់​ធ្វើ​ឲ្យ​ទាន់សម័យ​ទៅ​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"    --skip-interactive          រំលង​ភាព​ទាន់សម័យ​ជា​ជម្រើស ។\n"
+"-l, --auto-agree-with-licenses  យក​ 'បាទ/ចាស' ដោយ​ស្វ័យ​ប្រវត្តិ​ចំពោះការ​សួរ​បញ្ជាក់\n"
+"                                ​របស់​ភាគីទី ៣ ។\n"
+"                                មើល man zypper ចំពោះ​សេចក្ដី​លម្អិត​បន្ថែម ។\n"
+"    --best-effort               ធ្វើ​ 'ឲ្យ​អស់​ពី​សមត្ថភាព' ដើម្បីឈានដល់​ភាព​ទាន់សម័យ ។ ការ​ធ្វើ​ឲ្យ​ទាន់សម័យ\n"
+"                                ទៅ​កំណែ​ទាបជាង​កំណែ​​ចុងក្រោយ​បំផុត​គឺ​\n"
+"                                អាច​ទទួល​យក​បាន​ដែរ ។\n"
+"    --debug-solver              ករណី​សាកល្បង​កម្មវិធី​ដោះស្រាយ​​ដើម្បីបំបាត់​កំហុស ។\n"
+"    --no-recommends             កុំដំឡើង​កញ្ចប់​ដែល​បាន​ផ្ដល់​អនុសាសន៍ ដំឡើង​តែ​កញ្ចប់​ដែល​ត្រូវការ​ប៉ុណ្ណោះ ។\n"
+"-R, --no-force-resolution       កុំ​បង្ខំ​ឲ្យ​កម្មវិធី​ដោះស្រាយ​រក​ដំណោះស្រាយ ទុកល​ឲ្យ​វាសួរ ។\n"
+"    --force-resolution          បង្ខំ​ឲ្យ​កម្មវិធី​ដោះស្រាយ​រកដំណោះស្រាយ (សូម្បី​តែ agressive) ។\n"
+"-D, --dry-run                   សាកល្បង​​ភាព​ទាន់សម័យ កុំ​ធ្វើ​ឲ្យ​ទាន់សម័យ​មែនទែន ។\n"
+
+#: ../src/Zypper.cc:1502
+msgid ""
+"patch [options]\n"
+"\n"
+"Install all available needed patches.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>        Work only with specified repository.\n"
+"    --skip-interactive          Skip interactive patches.\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license\n"
+"                                confirmation prompt.\n"
+"                                See man zypper for more details.\n"
+"    --debug-solver              Create solver test case for debugging.\n"
+"-D, --dry-run                   Test the update, do not actually update.\n"
+msgstr ""
+"patch [options]\n"
+"\n"
+"ដំឡើង​បំណះ​ដែល​ចាំបាច់​ដែល​មាន ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>        ធ្វើការ​តែ​ជា​មួយ​ឃ្លាំង​ដែល​បានបញ្ជាក់ប៉ុណ្ណោះ ។\n"
+"    --skip-interactive          រំលង​បំណះ​ជា​ជម្រើស ។\n"
+"-l, --auto-agree-with-licenses  យក 'បាទ/ចាស' ចំពោះការ​សួរ​បញ្ជាក់​\n"
+"                                ​អាជ្ញាប័ណ្ណ​ភាគីទី ៣ ។\n"
+"                                មើល man zypper ចំពោះ​សេចក្ដី​លម្អិត ។\n"
+"    --debug-solver              ករណី​សាកល្បង​​ឲ្យ​ដោះស្រាយ​ដើម្បីបំបាត់​កំហុស ។\n"
+"-D, --dry-run                   សាកល្បង​ការ​ធ្វើ​ឲ្យ​ទាន់សម័យ កុំ​​ធ្វើ​ឲ្យទាន់សម័យ​មែនទែន ។\n"
+
+#: ../src/Zypper.cc:1528
+msgid ""
+"list-patches (lp) [options]\n"
+"\n"
+"List all available needed patches.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
+msgstr ""
+"list-patches (lp) [options]\n"
+"រាយ​បំណះ​ដែល​ចាំបាច់​ដែលមាន​ទាំងអស់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>        រាយ​តែ​បំណះ​ពី​ឃ្លាំង​ដែល​បានបញ្ជាក់ ។\n"
+
+#: ../src/Zypper.cc:1553
+msgid ""
+"dist-upgrade (dup) [options]\n"
+"\n"
+"Perform a distribution upgrade.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>        Limit the upgrade to the specified repository.\n"
+"    --no-recommends             Do not install recommended packages, only required.\n"
+"-l, --auto-agree-with-licenses  Automatically say 'yes' to third party license confirmation prompt.\n"
+"                                See man zypper for more details.\n"
+"    --debug-solver              Create solver test case for debugging\n"
+"-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
+msgstr ""
+"dist-upgrade (dup) [options]\n"
+"\n"
+"ធ្វើ​ការ​ធ្វើ​ឲ្យ​ការ​ចែកចាយ​ប្រសើរ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>        កំណត់​ការ​ធ្វើ​ឲ្យ​ប្រសើរ​ទៅ​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"    --no-recommends             កុំ​ដំឡើង​កញ្ចប់​ដែល​បាន​ផ្ដល់​អានុសាសន៍ ដំឡើង​តែ​កញ្ចប់​ដែលត្រូវការ​បាន​ហើយ ។\n"
+"-l, --auto-agree-with-licenses  យក 'បាទ/​ចាស' ដោយ​ស្វ័យ​ប្រវត្តិ ចំពោះ​ប្រអប់​អះអាង​អាជ្ញាបណ្ណ​ភាគី​ទី​បី ។\n"
+"                                សូម​មើល man zypper សម្រាប់​សេចក្ដី​លម្អិត​បន្ថែម ។\n"
+"    --debug-solver              បង្កើត​ករណី​សាកល្បង​កញ្ចប់​ដោះស្រាយ​សម្រាប់​ការ​បំបាត់​កំហុស ។\n"
+"-D, --dry-run                   សាកល្បង​ការ​ធ្វើ​ឲ្យ​ប្រសើរ កុំ​ធ្វើ​ឲ្យ​ប្រសើរ​មែនទែន\n"
+
+#: ../src/Zypper.cc:1595
+msgid ""
+"search (se) [options] [querystring] ...\n"
+"\n"
+"Search for packages matching given search strings.\n"
+"\n"
+"  Command options:\n"
+"    --match-all            Search for a match with all search strings (default).\n"
+"    --match-any            Search for a match with any of the search strings.\n"
+"    --match-substrings     Search for a match to partial words (default).\n"
+"    --match-words          Search for a match to whole words only.\n"
+"    --match-exact          Searches for an exact package name.\n"
+"-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+"-C, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only packages that are already installed.\n"
+"-u, --uninstalled-only     Show only packages that are not currently installed.\n"
+"-t, --type <type>          Search only for packages of the specified type.\n"
+"-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-repo         Sort packages by repository.\n"
+"-s, --details              Show each available version in each repository\n"
+"                           on a separate line.\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+msgstr ""
+"search (se) [options] [querystring] ...\n"
+"\n"
+"ស្វែងរក​កា​រផ្គូផ្គង​កញ្ចប់​ដែល​បានផ្ដល់​ពាក្យ​ស្វែងរក ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"    --match-all            ស្វែងរក​កា​រផ្គូផ្គង​ជា​មួយ​នឹង​ពាក្យ​ស្វែងរក​ទាំងអស់ (លំនាំដើម) ។\n"
+"    --match-any            ស្វែងរក​ការ​ផ្គូផ្គង​ជា​មួយ​ពាក្យស្វែងរក ។\n"
+"    --match-substrings     ស្វែងរក​កា​រផ្គូផ្គង​ទៅ​ផ្នែក​នៃ​ពាក្យ (លំនាំដើម) ។\n"
+"    --match-words          ស្វែងរក​​តែ​ពាក្យ​ទាំងមូលប៉ុណ្ណោះ ។\n"
+"    --match-exact          ស្វែងរក​ឈ្មោះ​កញ្ចប់​ស្រង់ចេញ ។\n"
+"-d, --search-descriptions  ស្វែងរក​នៅ​ក្នុង​សេចក្ដី​សង្ខេប​កញ្ចប់​ និង​សេចក្ដីពិពណ៌នា​ដែរ ។\n"
+"-C, --case-sensitive       អនុវត្ត​កា​រស្វែងរក​ប្រកាន់​អក្សរ​តូចធំ ។\n"
+"-i, --installed-only       ស្វែងរក​តែ​កញ្ចប់​ដែល​ដំឡើង​រួច ។\n"
+"-u, --uninstalled-only     បង្ហាញ​តែ​កញ្ចប់​ដែលបច្ចុប្បន្ន​មិន​ត្រូវ​បាន​ដំឡើង ។\n"
+"-t, --type <type>          ស្វែងរក​តែ​កញ្ចប់​របស់​ប្រភេទ​ដែល​បាន​បញ្ជាក់ ។\n"
+"-r, --repo <alias|#|URI>   ស្វែងរក​តែ​នៅ​ក្នុង​ថត​ដែល​បាន​​ឃ្លាំង ។\n"
+"    --sort-by-name         តម្រៀប​កញ្ចប់​តាម​ឈ្មោះ (លំនាំដើម) ។\n"
+"    --sort-by-repo         តម្រៀប​កញ្ចប់​តាមឃ្លាំង ។\n"
+"-s, --details              បង្ហាញ​កំណែ​ដែលមាន​នីមួយៗ​នៅ​ក្នុង​ឃ្លាំង​នីមួយៗ\n"
+"                           នៅ​លើ​បន្ទាត់​ដោយ​ឡែក​មួយ ។\n"
+"\n"
+"តួអក្សរ​ជំនួស * និង ? ក៏​អាច​ត្រូវ​បាន​ប្រើ​នៅ​ក្នុងពាក្យ​ស្វែងរក ។\n"
+
+#: ../src/Zypper.cc:1632
+msgid ""
+"patch-check (pchk) [options]\n"
+"\n"
+"Check for available patches.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
+msgstr ""
+"patch-check (pchk) [options]\n"
+"\n"
+"ពិនិត្យ​មើលបំណះ​​ដែលអាច​ប្រើ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>  ពិនិត្យ​មើល​បំណះ​តែ​នៅ​ក្នុងឃ្លាំង​ដែល​បានបញ្ជាក់ ។\n"
+
+#: ../src/Zypper.cc:1654
+msgid ""
+"patches (pch) [repository] ...\n"
+"\n"
+"List all patches available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+msgstr ""
+"patches (pch) [repository] ...\n"
+"\n"
+"រាយ​បំណះ​ដែលមាន​ទាំងអស់​នៅ​ក្នុង​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>  ជា​អត្ថន័យ​មួយ​ទៀត​ដើម្បីបញ្ជាក់​ឃ្លាំង ។\n"
+
+#: ../src/Zypper.cc:1681
+msgid ""
+"packages (pa) [options] [repository] ...\n"
+"\n"
+"List all packages available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed packages.\n"
+"-u, --uninstalled-only    Show only packages which are not installed.\n"
+"-N, --sort-by-name        Sort the list by package name.\n"
+"-R, --sort-by-repo        Sort the list by repository.\n"
+msgstr ""
+"packages (pa) [options] [repository] ...\n"
+"\n"
+"រាយ​កញ្ចប់​ទាំងអស់​ដែល​មាន​នៅ​ក្នុង​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>  មធ្យោបាយ​ផ្សេង​ទៀត​ដើម្បីបញ្ជាក់​ឃ្លាំង ។\n"
+"-i, --installed-only      បង្ហាញ​តែ​កញ្ចប់​ដែលបាន​ដំឡើង​ប៉ុណ្ណោះ ។\n"
+"-u, --uninstalled-only    បង្ហាញ​តែ​កញ្ចប់​ដែល​មិន​ត្រូវ​បាន​ដំឡើង ។\n"
+"-N, --sort-by-name        តម្រៀប​បញ្ជី​តាម​ឈ្មោះ​កញ្ចប់ ។\n"
+"-R, --sort-by-repo        តម្រៀប​បញ្ជី​តាម​ឃ្លាំង ។\n"
+
+#: ../src/Zypper.cc:1709
+msgid ""
+"patterns (pt) [options] [repository] ...\n"
+"\n"
+"List all patterns available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed patterns.\n"
+"-u, --uninstalled-only    Show only patterns which are not installed.\n"
+msgstr ""
+"patterns (pt) [options] [repository] ...\n"
+"\n"
+"រាយ​លំនាំ​ទាំងអស់​ដែល​មាន​នៅ​ក្នុងឃ្លាំង​ដែល​បានបញ្ជាក់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>  មធ្យោបាយ​ផ្សេង​ទៀត​ដើម្បី​បញ្ជាក់​ឃ្លាំង ។\n"
+"-i, --installed-only      បង្ហាញ​តែ​លំនាំ​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។\n"
+"-u, --uninstalled-only    បង្ហាញ​តែ​លំនាំ​ដែល​មិន​ត្រូវ​បាន​ដំឡើង​ប៉ុណ្ណោះ ។\n"
+
+#: ../src/Zypper.cc:1735
+msgid ""
+"products (pd) [options] [repository] ...\n"
+"\n"
+"List all products available in specified repositories.\n"
+"\n"
+"  Command options:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
+"-i, --installed-only      Show only installed products.\n"
+"-u, --uninstalled-only    Show only products which are not installed.\n"
+msgstr ""
+"products (pd) [options] [repository] ...\n"
+"\n"
+"រាយ​ផលិត​ទាំងអស់​ដែល​មាននៅ​ក្នុងឃ្លាំង​ដែល​បានបញ្ជាក់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"\n"
+"-r, --repo <alias|#|URI>  មធ្យោបាយ​ផ្សេង​ដើម្បី​បញ្ជាក់​ឃ្លាំង ៖\n"
+"-i, --installed-only      បង្ហាញ​តែ​ផលិតផល​ដែល​ដំឡើង​ប៉ុណ្ណោះ ។\n"
+"-u, --uninstalled-only    បង្ហាញ​តែ​ផលិតផល​ដែល​មិន​ត្រូវ​បានដំឡើង ។\n"
+
+#: ../src/Zypper.cc:1760
+#, c-format
+msgid ""
+"info (if) [options] <name> ...\n"
+"\n"
+"Show detailed information for specified packages.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Work only with the specified repository.\n"
+"-t, --type <type>         Type of package (%s).\n"
+"                          Default: %s."
+msgstr ""
+"info (if) [options] <name> ...\n"
+"\n"
+"បង្ហាញ​ព័ត៌មាន​លម្អិត​សម្រាប់​កញ្ចប់​ដែល​បាន​ប​ញ្ជាក់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>  ធ្វើការ​តែ​ជា​មួយ​ឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+"-t, --type <type>         ប្រភេទ​កញ្ចប់ (%s)។\n"
+"                          លំនាំដើម ៖ %s ។"
+
+#: ../src/Zypper.cc:1783
+#, c-format
+msgid ""
+"patch-info <patchname> ...\n"
+"\n"
+"Show detailed information for patches.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"patch-info <patchname> ...\n"
+"\n"
+"បង្ហាញ​ព័ត៌មាន​លម្អិត​សម្រាប់​បំណះ ។\n"
+"\n"
+"នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ឆបគ្នាសម្រាប់ '%s' ។\n"
+
+#: ../src/Zypper.cc:1802
+#, c-format
+msgid ""
+"pattern-info <pattern_name> ...\n"
+"\n"
+"Show detailed information for patterns.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"pattern-info <pattern_name> ...\n"
+"\n"
+"បង្ហាញ​ព័ត៌មាន​លម្អិត​សម្រាប់​លំនាំ ។\n"
+"\n"
+"នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ដែល​ឆបគ្នា​សម្រាប់ '%s' ។\n"
+
+#: ../src/Zypper.cc:1821
+#, c-format
+msgid ""
+"product-info <product_name> ...\n"
+"\n"
+"Show detailed information for products.\n"
+"\n"
+"This is a rug compatibility alias for '%s'.\n"
+msgstr ""
+"product-info <product_name> ...\n"
+"\n"
+"បង្ហាញ​ព័ត៌មាន​លម្អិត​សម្រាប់​ផលិតផល ។\n"
+"\n"
+"នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​ដែល​ឆបគ្នា​សម្រាប់ '%s' ។\n"
+
+#: ../src/Zypper.cc:1838
+msgid ""
+"what-provides (wp) <capability>\n"
+"\n"
+"List all packages providing the specified capability.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"what-provides (wp) <capability>\n"
+"\n"
+"រាយ​កញ្ចប់​ទាំងអស់​ដែល​ផ្ដល់​សមត្ថភាព​ដែល​បាន​បញ្ជាក់ ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​មិនមាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:1889
+msgid ""
+"moo\n"
+"\n"
+"Show an animal.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"moo\n"
+"\n"
+"បង្ហាញ​សត្វ ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:1911
+#, c-format
+msgid ""
+"addlock (al) [options] <packagename> ...\n"
+"\n"
+"Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Restrict the lock to the specified repository.\n"
+"-t, --type <type>         Type of package (%s).\n"
+"                          Default: %s.\n"
+msgstr ""
+"addlock (al) [options] <packagename> ...\n"
+"\n"
+"បន្ថែម​សោ​កញ្ចប់ ។ បញ្ជាក់កញ្ចប់​ដើម្បីចាក់សោ​តាម​ឈ្មោះ​ជាក់លាក់ ឬ​តាម​លំនាំ​សកល ដោយ​ប្រើ​តួអក្សរ​ជំនួស '*' និង '?' ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>  ដាក់កម្រិត​សោ​​ទៅ​ឃ្លាំង​ដែល​បានបញ្ជាក់ ។\n"
+"-t, --type <type>         ប្រភេទ​កញ្ចប់ (%s) ។\n"
+"                          លំនាំដើម ៖ %s ។\n"
+
+#: ../src/Zypper.cc:1937
+#, c-format
+msgid ""
+"removelock (rl) [options] <lock-number|packagename> ...\n"
+"\n"
+"Remove a package lock. Specify the lock to remove by its number obtained with '%s' or by package name.\n"
+"\n"
+"  Command options:\n"
+"-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
+msgstr ""
+"removelock (rl) [options] <lock-number|packagename> ...\n"
+"\n"
+"យក​សោ​កញ្ចប់​ចេញ ។ បញ្ជាក់សោ​ដើម្បី​យក​ចេញ​ដោយ​លេខ​របស់​វា​ដែល​បានទទួល​​ជា​មួយ '%s' ឬ​ដោយឈ្មោះ​កញ្ចប់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-r, --repo <alias|#|URI>  យក​តែសោ​ដែល​មានឃ្លាំង​ដែល​បាន​បញ្ជាក់ ។\n"
+
+#: ../src/Zypper.cc:1957
+msgid ""
+"locks (ll)\n"
+"\n"
+"List current package locks.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"locks (ll)\n"
+"\n"
+"រាយ​សោ​កញ្ចប់​បច្ចុប្បន្ន ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​មិនមាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:1997
+msgid ""
+"targetos (tos)\n"
+"\n"
+"Show the ID string of the target Operating System.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"targetos (tos)\n"
+"\n"
+"បង្ហាញ​ខ្សែអក្សរ​លេខ​សម្គាល់​របស់ប្រព័ន្ធ​ប្រតិបត្តិការ​គៅលដៅ ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:2016
+msgid ""
+"versioncmp (vcmp) <version1> <version2>\n"
+"\n"
+"Compare the versions supplied as arguments.\n"
+"\n"
+"  Command options:\n"
+"-m, --match  Takes missing release number as any release.\n"
+msgstr ""
+"versioncmp (vcmp) <version1> <version2>\n"
+"\n"
+"ប្រៀបទៀប​កំណែ​ដែល​បានផ្ដល់​ជា​អាគុយម៉ង់ ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-m, --match  យក​លេខចេញ​ផ្សាយ​ដែល​បាត់​ជា​ការ​ចេញ​ផ្សាយ​ណា​មួយ ។\n"
+
+#: ../src/Zypper.cc:2035
+msgid ""
+"licenses\n"
+"\n"
+"Report Licenses and EULA of currently installed software packages.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"licenses\n"
+"\n"
+"រាយការណ៍​អាជ្ញាប័ណ្ណ និង​ EULA របស់​កញ្ចប់​កម្មវិធី​ដែល​បានដំឡើង​ថ្មីៗ ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:2052
+msgid ""
+"quit (exit, ^D)\n"
+"\n"
+"Quit the current zypper shell.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"quit (exit, ^D)\n"
+"\n"
+"ចេញ​ពី​សែល zypper បច្ចុប្បន្ន ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​មិនមាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#: ../src/Zypper.cc:2069
+msgid ""
+"shell (sh)\n"
+"\n"
+"Enter the zypper command shell.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"shell (sh)\n"
+"\n"
+"បញ្ចូល​ពាក្យ​បញ្ជា zypper ក្នុង​សែល ។\n"
+"\n"
+"ពាក្យ​បញ្ជា​នេះ​គ្មាន​ជម្រើស​បន្ថែម​ទេ ។\n"
+
+#. translators: this is just a rug-compatiblity command
+#: ../src/Zypper.cc:2087
+msgid ""
+"service-types (st)\n"
+"\n"
+"List available service types.\n"
+msgstr ""
+"service-types (st)\n"
+"\n"
+"បញ្ជី​មាន​ប្រភេទ​សេវា ។\n"
+
+#. trunslators: this is a rug-compatibility command (equivalent of
+#. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
+#. for how to translate specific terms like channel or service if in doubt.
+#: ../src/Zypper.cc:2125
+msgid ""
+"mount\n"
+"\n"
+"Mount directory with RPMs as a channel.\n"
+"\n"
+"  Command options:\n"
+"-a, --alias <alias>  Use given string as service alias.\n"
+"-n, --name <name>    Use given string as service name.\n"
+"-r, --recurse        Dive into subdirectories.\n"
+msgstr ""
+"mount\n"
+"\n"
+"ម៉ោន​ថត​ជាមួយ RPM ជា​ឆានែល ។\n"
+"\n"
+"  ជម្រើស​ពាក្យ​បញ្ជា ៖\n"
+"-a, --alias <alias>  ប្រើ​ខ្សែអក្សរ​ដែល​បាន​ផ្ដល់​ជា​ឈ្មោះ​ក្លែងក្លាយ​របស់​សេវា ។\n"
+"-n, --name <name>    ប្រើ​ខ្សែអក្សរ​ដែល​បាន​ផ្ដល់​ជា​ឈ្មោះ​សេវា ។\n"
+"-r, --recurse        ចូល​ទៅ​ថត​រង ។\n"
+
+#: ../src/Zypper.cc:2156
+#, c-format
+msgid ""
+"patch-search [options] [querystring...]\n"
+"\n"
+"Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
+msgstr ""
+"patch-search [options] [querystring...]\n"
+"\n"
+"ស្វែងរក​បំណះ​ដែល​ផ្គូផ្គង​នឹង​ខ្សែអក្សរ​ស្វែងរក​ដែល​បាន​ផ្ដល់ ។ នេះ​ជា​ឈ្មោះ​ក្លែងក្លាយ​សមត្ថភាព​សម្រាប់ '%s' ។ ចំពោះ​សេចក្ដី​លម្អិត សូម​មើល​សៀវភៅ​ដៃ​របស់ zypper ។\n"
+
+#: ../src/Zypper.cc:2170 ../src/Zypper.cc:3880
+msgid "Unexpected program flow."
+msgstr "លំហូរ​កម្មវិធី​មិនរំពឹង​ទុក ។"
+
+#: ../src/Zypper.cc:2194
+msgid "Non-option program arguments: "
+msgstr "អាគុយម៉ង់​កម្មវិធី​មិនមែន​ជម្រើស ៖ "
+
+#. TranslatorExplanation this is a hedgehog, paint another animal, if you want
+#: ../src/Zypper.cc:2254
+msgid ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+
+#: ../src/Zypper.cc:2281
+msgid "Root privileges are required for refreshing services."
+msgstr "សិទ្ធិជា Root ត្រូវ​បានទាមទារ​សម្រាប់​ធ្វើ​ឲ្យសេវា​ស្រស់ ។"
+
+#: ../src/Zypper.cc:2308 ../src/Zypper.cc:2620
+msgid "Root privileges are required for modifying system services."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​កែប្រែ​សេវា​ប្រព័ន្ធ ។"
+
+#: ../src/Zypper.cc:2374
+#, c-format
+msgid "'%s' is not a valid service type."
+msgstr "'%s' មិន​មែន​ជា​ប្រភេទ​សេវា​ដែល​ត្រឹមត្រូវ​ទេ ។"
+
+#: ../src/Zypper.cc:2376
+#, c-format
+msgid "See '%s' or '%s' to get a list of known service types."
+msgstr "សូម​មើល '%s' ឬ '%s' ដើម្បីយក​បញ្ជី​របស់​ប្រភេទ​សេវា​ដែល​ស្គាល់ ។"
+
+#: ../src/Zypper.cc:2393
+msgid "Root privileges are required for modifying services."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​កែប្រែ​សេវា ។"
+
+#. translators: aggregate option is e.g. "--all". This message will be
+#. followed by ms command help text which will explain it
+#. translators: aggregate option is e.g. "--all". This message will be
+#. followed by mr command help text which will explain it
+#: ../src/Zypper.cc:2405 ../src/Zypper.cc:2773
+msgid "Alias or an aggregate option is required."
+msgstr "ឈ្មោះ​ក្លែងក្លាយ ឬ​ជម្រើស​ផ្ដុំ​ត្រូវ​បាន​ទាមទារ ។"
+
+#: ../src/Zypper.cc:2439
+#, c-format
+msgid "Service '%s' not found."
+msgstr "រក​មិនឃើញ​សេវា '%s' ។"
+
+#: ../src/Zypper.cc:2475 ../src/Zypper.cc:2619 ../src/Zypper.cc:2705
+#: ../src/Zypper.cc:2761
+msgid "Root privileges are required for modifying system repositories."
+msgstr "ត្រូវ​ការ​សិទ្ធិជា Root ដើម្បី​កែប្រែ​ឃ្លាំង​ប្រព័ន្ធ ។"
+
+#: ../src/Zypper.cc:2524 ../src/Zypper.cc:2881
+msgid "Too few arguments."
+msgstr "អាគុយម៉ង់​តិច​ពេក ។"
+
+#: ../src/Zypper.cc:2548
+msgid "If only one argument is used, it must be a URI pointing to a .repo file."
+msgstr "ប្រសិន​បើ​ប្រើ​តែ​អាគុយម៉ង់​តែ​មួយ គឺ​វា​ត្រូវតែ​ជា URI ដែល​ចង្អុល​ទៅកាន់​ឯកសារ .repo ។"
+
+#: ../src/Zypper.cc:2574
+#, c-format
+msgid "Cannot use %s together with %s. Using the %s setting."
+msgstr "មិនអាច​ប្រើ %s ជាមួយ​នឹង %s បានទេ ។ ប្រើ​ការ​កំណត់ %s ។"
+
+#: ../src/Zypper.cc:2597
+msgid "Specified type is not a valid repository type:"
+msgstr "ប្រភេទ​ដែល​បាន​បញ្ជាក់​មិន​មែន​ជា​ប្រភេទ​ឃ្លាំង​ត្រឹមត្រូវ​ទេ ៖"
+
+#: ../src/Zypper.cc:2599
+#, c-format
+msgid "See '%s' or '%s' to get a list of known repository types."
+msgstr "សូមមើល '%s' ឬ '%s' ដើម្បី​ទទួល​បញ្ជី​របស់​ប្រភេទ​​ឃ្លាំង​ដែល​ស្គាល់ ។"
+
+#. translators: %s is the supplied command line argument which
+#. for which no repository counterpart was found
+#: ../src/Zypper.cc:2655
+#, c-format
+msgid "Repository '%s' not found by alias, number or URI."
+msgstr "រក​មិនឃើញ​​ឃ្លាំង '%s' តាម​ឈ្មោះ​ក្លែងក្លាយ លេខ ឬ URI ។"
+
+#. translators: %s is the supplied command line argument which
+#. for which no service counterpart was found
+#: ../src/Zypper.cc:2678
+#, c-format
+msgid "Service '%s' not found by alias, number or URI."
+msgstr "រក​មិនឃើញសេវា '%s'  តាម​ឈ្មោះ​ក្លែងក្លាយ​ លេខ ឬ URI ទេ ។"
+
+#: ../src/Zypper.cc:2712
+msgid "Too few arguments. At least URI and alias are required."
+msgstr "អាគុយម៉ង់​តិចពេក ។ ត្រូវការ​យ៉ាងហោចណាស់ URI ឬ​ឈ្មោះ​ក្លែងក្លាយ​មួយ ។"
+
+#: ../src/Zypper.cc:2737
+#, c-format
+msgid "Repository '%s' not found."
+msgstr "រក​មិន​ឃើញ​ឃ្លាំង '%s' ទេ ។"
+
+#: ../src/Zypper.cc:2803
+#, c-format
+msgid "Repository %s not found."
+msgstr "រក​មិន​ឃើញ​ឃ្លាំង %s ។"
+
+#: ../src/Zypper.cc:2821
+msgid "Root privileges are required for refreshing system repositories."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​ឲ្យ​ឃ្លាំង​ប្រព័ន្ធ​ស្រស់ ។"
+
+#: ../src/Zypper.cc:2828
+#, c-format
+msgid "The '%s' global option has no effect here."
+msgstr "ជម្រើស​សកល '%s' មិនមាន​បែបផែន​នៅ​ទីនេះ​ទេ ។"
+
+#: ../src/Zypper.cc:2836
+#, c-format
+msgid "Arguments are not allowed if '%s' is used."
+msgstr "អាគុយម៉ង់​មិន​ត្រូវ​បាន​អនុញ្ញាត​ប្រសិន​បើ '%s' ត្រូវ​បានប្រើ ។"
+
+#: ../src/Zypper.cc:2862
+msgid "Root privileges are required for cleaning local caches."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជម្រះ​ឃ្លាំង​សម្ងាត់​មូលដ្ឋាន ។"
+
+#: ../src/Zypper.cc:2882
+msgid "At least one package name is required."
+msgstr "ត្រូវការ​យ៉ាងហោចណាស់​ឈ្មោះ​កញ្ចប់​មួយ ។"
+
+#: ../src/Zypper.cc:2896
+msgid "Root privileges are required for installing or uninstalling packages."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ដំឡើង ឬ​លុប​កញ្ចប់ ។"
+
+#: ../src/Zypper.cc:2911
+#, c-format
+msgid "Unknown package type: %s"
+msgstr "មិន​ស្គាល់​ប្រភេទកញ្ចប់ ៖ %s"
+
+#: ../src/Zypper.cc:2931
+#, c-format
+msgid "'%s' looks like an RPM file. Will try to download it."
+msgstr "'%s' ដូចជា​ឯកសារ RPM ។ ព្យាយាម​ទាញយក​វា ។"
+
+#: ../src/Zypper.cc:2944
+#, c-format
+msgid "Problem with the RPM file specified as '%s', skipping."
+msgstr "មាន​បញ្ហា​ជាមួយ​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ជា '%s' ដូច្នេះ​រំលង ។"
+
+#: ../src/Zypper.cc:2967
+#, c-format
+msgid "Problem reading the RPM header of %s. Is it an RPM file?"
+msgstr "មាន​បញ្ហា​ក្នុងការ​អាន​បឋមកថា RPM របស់ %s ។ តើ​វា​ជា​ឯកសារ RPM ឬ ?"
+
+#: ../src/Zypper.cc:2992
+msgid "Plain RPM files cache"
+msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ធម្មតា"
+
+#: ../src/Zypper.cc:3021 ../src/Zypper.cc:3099
+msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
+msgstr "ការ​ព្រមាន ៖ មិន​បាន​កំណត់​ឃ្លាំង ។ ប្រតិបត្តិការ​តែ​ជា​មួយ​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។ គ្មាន​អ្វី​ត្រូវ​បាន​ដំឡើង​ទេ ។"
+
+#: ../src/Zypper.cc:3050
+msgid "Source package name is a required argument."
+msgstr "ឈ្មោះ​កញ្ចប់​ប្រភព​ត្រូវការ​អាគុយម៉ង់ ។"
+
+#: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
+#: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
+#, c-format
+msgid "Unknown package type '%s'."
+msgstr "មិនស្គាល់​ប្រភេទ​កញ្ចប់ '%s' ។"
+
+#: ../src/Zypper.cc:3262
+msgid "Problem occurred initializing or executing the search query"
+msgstr "មាន​បញ្ហា​កើតឡើង​​នៅពេល​ចាប់ផ្ដើម ឬ​ប្រតិបត្តិ​សំណួរ​ស្វែងរក"
+
+#: ../src/Zypper.cc:3263
+msgid "See the above message for a hint."
+msgstr "មើល​សារ​ខាងលើ​សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
+
+#. translators: Running as 'rug', cannot use 'best-effort' option.
+#: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
+#, c-format
+msgid "Running as '%s', cannot use '%s' option."
+msgstr "រត់​ជា '%s' មិនអាច​ប្រើ​ជម្រើស '%s' ។"
+
+#: ../src/Zypper.cc:3463
+msgid "Root privileges are required for updating packages."
+msgstr "ត្រូវ​ការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​ឲ្យ​កញ្ចប់​ទាន់សម័យ ។"
+
+#: ../src/Zypper.cc:3556
+msgid "Root privileges are required for performing a distribution upgrade."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ធ្វើ​ឲ្យ​ការ​ចែកចាយ​ប្រសើរ ។"
+
+#: ../src/Zypper.cc:3653 ../src/Zypper.cc:3714
+msgid "Root privileges are required for adding of package locks."
+msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​បន្ថែម​សោ​កញ្ចប់ ។"
+
+#: ../src/Zypper.cc:3822
+#, c-format
+msgid "%s matches %s"
+msgstr "%s ផ្គូផ្គង %s"
+
+#: ../src/Zypper.cc:3824
+#, c-format
+msgid "%s is newer than %s"
+msgstr "%s គឺ​ថ្មីជាង %s"
+
+#: ../src/Zypper.cc:3826
+#, c-format
+msgid "%s is older than %s"
+msgstr "%s គឺ​ចាស់​ជាង %s"
+
+#: ../src/Zypper.cc:3865
+msgid "This command only makes sense in the zypper shell."
+msgstr "ពាក្យ​បញ្ជា​នេះ​គឺ​អាច​ដឹងបាន​តែ​នៅ​ក្នុង​សែល zypper ប៉ុណ្ណោះ ។"
+
+#: ../src/Zypper.cc:3877
+msgid "You already are running zypper's shell."
+msgstr "អ្នក​កំពុង​រត់​សែល​របស់ zypper រួច​ហើយ ។"
+
+#: ../src/Zypper.cc:3894
+msgid "Description"
+msgstr "សេចក្តី​ពិពណ៌នា"
+
+#: ../src/Zypper.cc:3951
+msgid "Resolvable Type"
+msgstr "ប្រភេទ​កញ្ចប់​ដោះស្រាយ"
+
