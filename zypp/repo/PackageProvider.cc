@@ -20,6 +20,7 @@
 #include "zypp/repo/Applydeltarpm.h"
 #include "zypp/repo/PackageDelta.h"
 
+#include "zypp/TmpPath.h"
 #include "zypp/ZConfig.h"
 #include "zypp/RepoInfo.h"
 #include "zypp/media/MediaManager.h"
@@ -128,7 +129,7 @@ namespace zypp
         url = * info.baseUrlsBegin();
 
       // check whether to process patch/delta rpms
-      if ( MediaManager::downloads(url) )
+      if ( MediaManager::downloads(url) || ZConfig::instance().download_use_deltarpm_always() )
         {
           std::list<DeltaRpm> deltaRpms;
           if ( ZConfig::instance().download_use_deltarpm() )
@@ -196,11 +197,14 @@ namespace zypp
         }
 
       Pathname destination( Pathname::dirname( delta ) / defRpmFileName( _package ) );
-      /* just to ease testing with non remote sources */
-      // FIXME removed API
-      //if ( ! _package->source().remote() )
-      //  destination = Pathname("/tmp") / defRpmFileName( _package );
-      /**/
+
+      if ( ! delta.getDispose() )
+      {
+        // There is no cleanup method associated with the deta. Thus the
+        // delta is not a temporary file, and we don't want to write in
+        // the package into this directory.
+        destination = filesystem::TmpPath::defaultLocation() / defRpmFileName( _package );
+      }
 
       if ( ! applydeltarpm::provide( delta, destination,
                                      bind( &PackageProvider::progressDeltaApply, this, _1 ) ) )

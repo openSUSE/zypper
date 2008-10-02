@@ -147,6 +147,7 @@ namespace zypp
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
         , download_use_deltarpm   	( true )
+        , download_use_deltarpm_always  ( false )
 	, solver_onlyRequires   	( false )
         , apply_locks_file              ( true )
 
@@ -233,6 +234,10 @@ namespace zypp
                 {
                   download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
                 }
+                else if ( entry == "download.use_deltarpm_always" )
+                {
+                  download_use_deltarpm_always = str::strToBool( value, download_use_deltarpm_always );
+                }
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
@@ -288,11 +293,11 @@ namespace zypp
                 }
                 else if ( entry == "credentials.global.dir" )
                 {
-                  credentials_global_dir_path = Pathname(value); 
+                  credentials_global_dir_path = Pathname(value);
                 }
                 else if ( entry == "credentials.global.file" )
                 {
-                  credentials_global_file_path = Pathname(value); 
+                  credentials_global_file_path = Pathname(value);
                 }
               }
             }
@@ -346,6 +351,7 @@ namespace zypp
     unsigned repo_refresh_delay;
 
     bool download_use_deltarpm;
+    bool download_use_deltarpm_always;
 
     bool solver_onlyRequires;
     Pathname solver_checkSystemFile;
@@ -355,7 +361,7 @@ namespace zypp
     bool apply_locks_file;
 
     target::rpm::RpmInstFlags rpmInstallFlags;
-    
+
     Pathname history_log_path;
     Pathname credentials_global_dir_path;
     Pathname credentials_global_file_path;
@@ -525,6 +531,8 @@ namespace zypp
   bool ZConfig::download_use_deltarpm() const
   { return _pimpl->download_use_deltarpm; }
 
+  bool ZConfig::download_use_deltarpm_always() const
+  { return download_use_deltarpm() && _pimpl->download_use_deltarpm_always; }
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }

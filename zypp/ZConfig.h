@@ -155,6 +155,12 @@ namespace zypp
        */
       bool download_use_deltarpm() const;
 
+      /** Whether to consider using a deltarpm even when rpm is local.
+       * This requires \ref download_use_deltarpm being \c true.
+       * Config option <tt>download.use_deltarpm_always (false)</tt>
+       */
+      bool download_use_deltarpm_always() const;
+
       /**
        * Directory for equivalent vendor definitions  (configPath()/vendors.d)
        * \ingroup g_ZC_CONFIGFILES
@@ -228,16 +234,16 @@ namespace zypp
       /**
        * Path where ZYpp install history is logged. Defaults to
        * /var/log/zypp/history.
-       * 
+       *
        * \see http://en.opensuse.org/Libzypp/Package_History
        */
       Pathname historyLogFile() const;
-      
+
       /**
        * Defaults to /etc/zypp/credentials.d
        */
       Pathname credentialsGlobalDir() const;
-      
+
       /**
        * Defaults to /etc/zypp/credentials.cat
        */
