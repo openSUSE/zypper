@@ -1348,6 +1348,17 @@ zypper info -t pattern
 .I rug product-info
 zypper info -t product
 
+.SS System Commands
+.TP
+.I rug ping
+zypper ping
+.IP
+This command just returns 0 without producing any output or doing anything
+to the system. Rug's ping command is used to wake up the ZLM daemon
+or to check whether it is up and running. Since zypper does no require
+ZLM or any other daemon to run, it is safe to always return 0 here to
+indicate it is ready for operation.
+
 .SS Other Compatibility Notes
 
 .TP

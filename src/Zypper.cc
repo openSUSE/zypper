@@ -2164,6 +2164,24 @@ void Zypper::processCommandOptions()
     break;
   }
 
+  case ZypperCommand::RUG_PING_e:
+  {
+    static struct option options[] = {
+      {"help", no_argument, 0, 'h'},
+      {"if-active", no_argument, 0, 'a'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      // translators: this is just a rug-compatiblity command
+      "ping [options]\n"
+      "\n"
+      "This command has dummy implementation which always returns 0.\n"
+      "It is provided for compatibility with rug.\n"
+    );
+    break;
+  }
+
   default:
   {
     if (runningHelp())
@@ -3948,6 +3966,13 @@ void Zypper::doCommand()
   {
     if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     rug_list_resolvables(*this);
+    break;
+  }
+
+  // dummy commands
+  case ZypperCommand::RUG_PING_e:
+  {
+    if (runningHelp()) { out().info(_command_help, Out::QUIET); return; }
     break;
   }
 
