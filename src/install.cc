@@ -235,6 +235,58 @@ install_remove_preprocess_args(const Zypper::ArgList & args,
   DBG << endl;
 }
 
+#define USE_THE_ONE 0
+
+#if not USE_THE_ONE
+
+// ----------------------------------------------------------------------------
+
+class LookForUpdate : public zypp::resfilter::PoolItemFilterFunctor
+{
+public:
+  PoolItem best;
+
+  bool operator()( PoolItem provider )
+  {
+    if (!provider.status().isLocked() // is not locked (taboo)
+        && (!best                     // first match
+            // or a better edition than so-far-found
+            || best->edition().compare( provider->edition() ) < 0))
+    {
+      best = provider;
+    }
+    return true;
+  }
+};
+
+// ----------------------------------------------------------------------------
+
+// Find best (according to edition) uninstalled item
+// with same kind/name/arch as item.
+// Similar to zypp::solver::detail::Helper::findUpdateItem
+// but allows changing the vendor
+static
+PoolItem
+findUpdateItem( const ResPool & pool, PoolItem item )
+{
+  LookForUpdate info;
+
+  invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
+                pool.byIdentEnd(item->kind(), item->name()),
+                // get uninstalled, equal kind and arch, better edition
+                functor::chain (
+                  functor::chain (
+                    resfilter::ByUninstalled (),
+                    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
+                  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
+                functor::functorRef<bool,PoolItem>(info));
+
+  XXX << "findArchUpdateItem(" << item << ") => " << info.best;
+  return info.best;
+}
+
+#endif
+
 // ----------------------------------------------------------------------------
 
 static void
@@ -245,11 +297,27 @@ mark_selectable(Zypper & zypper,
                 const string & repo = "",
                 const string & arch = "")
 {
+#if USE_THE_ONE
   PoolItem theone = s.theObj();
+#else
+  PoolItem theone;
+  if (s.installedEmpty())
+    theone = *s.availableBegin();
+  else
+    theone = findUpdateItem(God->pool(), *s.installedBegin());
+#endif
+  if (!theone)
+  {
+    ERR << "the One is missing in " << s << endl;
+    return;
+  }
+  else
+    DBG << "the One: " << theone << endl;
+
   //! \todo handle multiple installed case
   bool theoneinstalled; // is the One installed ?
   if (!traits::isPseudoInstalled(s.kind()))
-    theoneinstalled = !s.installedEmpty() && theone &&
+    theoneinstalled = !s.installedEmpty() &&
       equalNVRA(*s.installedObj().resolvable(), *theone.resolvable());
   else if (s.kind() == ResKind::patch)
     theoneinstalled = theone.isRelevant() && theone.isSatisfied();
@@ -545,6 +613,7 @@ void install_remove(Zypper & zypper,
         break;
       }
     }
+
     // already installed, nothing to do
     if (installed && install_not_remove)
     {
