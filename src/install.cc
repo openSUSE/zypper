@@ -305,14 +305,12 @@ mark_selectable(Zypper & zypper,
     theone = *s.availableBegin();
   else
     theone = findUpdateItem(God->pool(), *s.installedBegin());
-#endif
+
   if (!theone)
-  {
-    ERR << "the One is missing in " << s << endl;
-    return;
-  }
-  else
-    DBG << "the One: " << theone << endl;
+    theone = *s.installedBegin();
+#endif
+
+  DBG << "the One: " << theone << endl;
 
   //! \todo handle multiple installed case
   bool theoneinstalled; // is the One installed ?
