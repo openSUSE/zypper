@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  3 18:43:59 CEST 2008 - jkupec@suse.cz
+
+- install: correctly check if an update is available (bnc #427105)
+- r11240
+
+-------------------------------------------------------------------
 Fri Oct  3 10:18:09 CEST 2008 - jkupec@suse.cz
 
 - 'ping' command added to simulate rug ping (bnc #430756)
