@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Oct  5 12:35:18 CEST 2008 - jkupec@suse.cz
+
+- update: correctly check if an update is available (bnc #422141)
+- r11242
+
+-------------------------------------------------------------------
 Fri Oct  3 18:43:59 CEST 2008 - jkupec@suse.cz
 
 - install: correctly check if an update is available (bnc #427105)
