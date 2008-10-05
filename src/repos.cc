@@ -2787,16 +2787,11 @@ void load_repo_resolvables(Zypper & zypper)
         continue;
       }
 
-      INT << "before loadFromCache" << endl;
       manager.loadFromCache(repo);
-      INT << "after loadFromCache" << endl;
-
-      
 
       // check that the metadata is not outdated
       // feature #301904
       Repository robj = God->pool().reposFind(repo.alias());
-      INT << "before up-to-date check" << endl;
       if ( robj != Repository::noRepository &&
            robj.maybeOutdated() )
       {
@@ -2808,7 +2803,6 @@ void load_repo_resolvables(Zypper & zypper)
               % repo.name() << endl;
 
       }
-      INT << "after up-to-date check" << endl;
     }
     catch (const Exception & e)
     {
