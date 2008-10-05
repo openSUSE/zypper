@@ -9,7 +9,7 @@
 
 #include "install.h"
 #include "update.h"
-#include <iostream>
+
 using namespace std;
 using namespace zypp;
 using namespace boost;
@@ -18,6 +18,31 @@ extern ZYpp::Ptr God;
 
 /** Use ui::Selectable::theObj() or candidateObj() */
 #define USE_THE_ONE 0
+
+/** Simple functor remembering the first passed pool item and stopping the loop. */
+struct PoolItemGetter
+{
+  PoolItem item;
+  bool operator()(const PoolItem & pi)
+  { item = pi; return false; }
+};
+
+static PoolItem findInstalledItemInRepos(const PoolItem & installed)
+{
+  const zypp::ResPool& pool = God->pool();
+  PoolItemGetter getter;
+  invokeOnEach(
+    pool.byIdentBegin(installed->kind(), installed->name()),
+    pool.byIdentEnd(installed->kind(), installed->name()),
+    functor::chain(
+      functor::chain(
+        resfilter::ByUninstalled(),
+        resfilter::byEdition<CompareByEQ<Edition> >(installed->edition())),
+      resfilter::byArch<CompareByEQ<Arch> >(installed->arch())),
+      functor::functorRef<bool,PoolItem>(getter));
+  XXX << "findInstalledItemInRepos(" << installed << ") => " << getter.item << endl;
+  return getter.item;
+}
 
 // TODO edition, arch ?
 static void mark_for_install(Zypper & zypper,
@@ -50,45 +75,54 @@ static void mark_for_install(Zypper & zypper,
   }
 
   ui::Selectable::Ptr s = *q.selectableBegin();
+  bool force = copts.count("force");
 
 #if USE_THE_ONE
   PoolItem candidate = s->candidateObj();
 #else
   PoolItem candidate = findUpdateItem(God->pool(), s->installedObj());
   if (!candidate)
-    candidate = s->installedObj();
+  {
+    if (force)
+    {
+      candidate = findInstalledItemInRepos(s->installedObj());
+      if (!candidate)
+      {
+        zypper.out().info(str::form(
+            // translators: %s-%s.%s is name-version.arch
+            _("Package %s-%s.%s not found in repositories, cannot reinstall."),
+            s->name().c_str(), s->installedObj().resolvable()->edition().c_str(),
+            s->installedObj().resolvable()->arch().c_str()));
+        zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+        return;
+      }
+    }
+    else
+      candidate = s->installedObj();
+  }
 #endif
 
   if (s->installedObj() &&
       s->installedObj().resolvable()->edition() == candidate.resolvable()->edition() &&
       s->installedObj().resolvable()->arch() == candidate.resolvable()->arch() &&
-      ( ! copts.count("force") ) )
+      !force)
   {
     // if it is broken install anyway, even if it is installed
     if (candidate.isBroken())
-      candidate.status().setTransact(true, zypp::ResStatus::USER);
+      candidate.status().setToBeInstalled(zypp::ResStatus::USER);
     else
       zypper.out().info(boost::str(format(
-        // translators: e.g. skipping package 'zypper' (the newest version already installed)  
+        // translators: e.g. skipping package 'zypper' (the newest version already installed)
+        //! \todo capitalize the first letter
         _("skipping %s '%s' (the newest version already installed)"))
         % kind_to_string_localized(kind,1) % name));
   }
-  else
+  else if (!candidate.status().setToBeInstalled(zypp::ResStatus::USER) && !force)
   {
-    //! \todo don't use setToBeInstalled for this purpose but higher level solver API
-    if (!candidate.status().setToBeInstalled(zypp::ResStatus::USER))
-    {
-      cout << "no" << endl;
-      // this is because the resolvable is installed and we are forcing.
-      candidate.status().setTransact(true, zypp::ResStatus::USER);
-      if (!copts.count("force"))
-      {
-        zypper.out().error(boost::str(
-          format(_("Failed to add '%s' to the list of packages to be installed."))
-          % name));
-        ERR << "Could not set " << name << " as to-be-installed" << endl;
-      }
-    }
+      zypper.out().error(boost::str(
+        format(_("Failed to add '%s' to the list of packages to be installed."))
+        % name));
+      ERR << "Could not set " << name << " as to-be-installed" << endl;
   }
 }
 
