@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Oct  5 20:13:17 CEST 2008 - jkupec@suse.cz
+
+- fixed reinstall (zypper in -f foo) (bnc #421588)
+- r11245
+
+-------------------------------------------------------------------
 Sun Oct  5 12:35:18 CEST 2008 - jkupec@suse.cz
 
 - update: correctly check if an update is available (bnc #422141)
