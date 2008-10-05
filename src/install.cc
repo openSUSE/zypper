@@ -8,12 +8,16 @@
 #include "utils/misc.h"
 
 #include "install.h"
-
+#include "update.h"
+#include <iostream>
 using namespace std;
 using namespace zypp;
 using namespace boost;
 
 extern ZYpp::Ptr God;
+
+/** Use ui::Selectable::theObj() or candidateObj() */
+#define USE_THE_ONE 0
 
 // TODO edition, arch ?
 static void mark_for_install(Zypper & zypper,
@@ -47,32 +51,36 @@ static void mark_for_install(Zypper & zypper,
 
   ui::Selectable::Ptr s = *q.selectableBegin();
 
+#if USE_THE_ONE
+  PoolItem candidate = s->candidateObj();
+#else
+  PoolItem candidate = findUpdateItem(God->pool(), s->installedObj());
+  if (!candidate)
+    candidate = s->installedObj();
+#endif
+
   if (s->installedObj() &&
-      s->installedObj().resolvable()->edition() == s->candidateObj().resolvable()->edition() &&
-      s->installedObj().resolvable()->arch() == s->candidateObj().resolvable()->arch() &&
+      s->installedObj().resolvable()->edition() == candidate.resolvable()->edition() &&
+      s->installedObj().resolvable()->arch() == candidate.resolvable()->arch() &&
       ( ! copts.count("force") ) )
   {
     // if it is broken install anyway, even if it is installed
-    if ( s->candidateObj().isBroken() )
-    {
-      s->candidateObj().status().setTransact( true, zypp::ResStatus::USER );
-    }
+    if (candidate.isBroken())
+      candidate.status().setTransact(true, zypp::ResStatus::USER);
     else
-    {
       zypper.out().info(boost::str(format(
         // translators: e.g. skipping package 'zypper' (the newest version already installed)  
         _("skipping %s '%s' (the newest version already installed)"))
         % kind_to_string_localized(kind,1) % name));
-    }
   }
-  else {
-
+  else
+  {
     //! \todo don't use setToBeInstalled for this purpose but higher level solver API
-    bool result = s->candidateObj().status().setToBeInstalled( zypp::ResStatus::USER );
-    if (!result)
+    if (!candidate.status().setToBeInstalled(zypp::ResStatus::USER))
     {
+      cout << "no" << endl;
       // this is because the resolvable is installed and we are forcing.
-      s->candidateObj().status().setTransact( true, zypp::ResStatus::USER );
+      candidate.status().setTransact(true, zypp::ResStatus::USER);
       if (!copts.count("force"))
       {
         zypper.out().error(boost::str(
@@ -234,58 +242,6 @@ install_remove_preprocess_args(const Zypper::ArgList & args,
   copy(argsnew.begin(), argsnew.end(), ostream_iterator<string>(DBG, " "));
   DBG << endl;
 }
-
-#define USE_THE_ONE 0
-
-#if not USE_THE_ONE
-
-// ----------------------------------------------------------------------------
-
-class LookForUpdate : public zypp::resfilter::PoolItemFilterFunctor
-{
-public:
-  PoolItem best;
-
-  bool operator()( PoolItem provider )
-  {
-    if (!provider.status().isLocked() // is not locked (taboo)
-        && (!best                     // first match
-            // or a better edition than so-far-found
-            || best->edition().compare( provider->edition() ) < 0))
-    {
-      best = provider;
-    }
-    return true;
-  }
-};
-
-// ----------------------------------------------------------------------------
-
-// Find best (according to edition) uninstalled item
-// with same kind/name/arch as item.
-// Similar to zypp::solver::detail::Helper::findUpdateItem
-// but allows changing the vendor
-static
-PoolItem
-findUpdateItem( const ResPool & pool, PoolItem item )
-{
-  LookForUpdate info;
-
-  invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
-                pool.byIdentEnd(item->kind(), item->name()),
-                // get uninstalled, equal kind and arch, better edition
-                functor::chain (
-                  functor::chain (
-                    resfilter::ByUninstalled (),
-                    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
-                  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
-                functor::functorRef<bool,PoolItem>(info));
-
-  XXX << "findArchUpdateItem(" << item << ") => " << info.best;
-  return info.best;
-}
-
-#endif
 
 // ----------------------------------------------------------------------------
 

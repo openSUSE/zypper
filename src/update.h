@@ -1,3 +1,5 @@
+#include "zypp/PoolItem.h"
+
 #include "Zypper.h"
 
 #include "utils/misc.h"
@@ -34,3 +36,12 @@ void mark_updates(Zypper & zypper,
                   const ResKindSet & kinds,
                   bool skip_interactive,
                   bool best_effort);
+
+/**
+ * Find best (according to edition) uninstalled item
+ * with same kind/name/arch as \a item.
+ * 
+ * Similar to zypp::solver::detail::Helper::findUpdateItem()
+ * but allows changing the vendor and does not allow chaning arch.
+ */
+zypp::PoolItem findUpdateItem(const zypp::ResPool & pool, zypp::PoolItem item);

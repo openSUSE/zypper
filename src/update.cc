@@ -202,51 +202,47 @@ static void list_patch_updates(Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-// collect items, select best edition
-//   this is used to find best available or installed.
-// The name of the class is a bit misleading though ...
-
-class LookForArchUpdate : public zypp::resfilter::PoolItemFilterFunctor
+/*
+ * Collect items, select the best edition.
+ * This is used to find the best available or installed pool item from a set. 
+ */
+class SaveBetterEdition : public zypp::resfilter::PoolItemFilterFunctor
 {
 public:
   PoolItem best;
 
-  bool operator()( PoolItem provider )
+  bool operator()(PoolItem provider)
+  {
+    if (!provider.status().isLocked() // is not locked (taboo)
+        && (!best                     // first match
+            // or a better edition than so-far-found
+            || best->edition().compare(provider->edition()) < 0))
     {
-      if (!provider.status().isLocked() // is not locked (taboo)
-          && (!best                     // first match
-              // or a better edition than candidate
-              || best->edition().compare( provider->edition() ) < 0))
-      {
-        best = provider;        // store
-      }
-      return true;              // keep going
+      best = provider;
     }
+    return true;
+  }
 };
 
 // ----------------------------------------------------------------------------
 
-// Find best (according to edition) uninstalled item
-// with same kind/name/arch as item.
-// Similar to zypp::solver::detail::Helper::findUpdateItem
-// but that allows changing the arch (#222140).
-static
+// does not allow changing the arch (#222140).
 PoolItem
-findArchUpdateItem( const ResPool & pool, PoolItem item )
+findUpdateItem( const ResPool & pool, PoolItem item )
 {
-  LookForArchUpdate info;
+  SaveBetterEdition info;
 
-  invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
-                pool.byIdentEnd( item->kind(), item->name() ),
+  invokeOnEach( pool.byIdentBegin(item->kind(), item->name()),
+                pool.byIdentEnd(item->kind(), item->name()),
                 // get uninstalled, equal kind and arch, better edition
-                functor::chain (
-                  functor::chain (
-                    resfilter::ByUninstalled (),
-                    resfilter::byArch<CompareByEQ<Arch> >( item->arch() ) ),
-                  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
-                functor::functorRef<bool,PoolItem> (info) );
+                functor::chain(
+                  functor::chain(
+                    resfilter::ByUninstalled(),
+                    resfilter::byArch<CompareByEQ<Arch> >(item->arch())),
+                  resfilter::byEdition<CompareByGT<Edition> >(item->edition())),
+                functor::functorRef<bool,PoolItem>(info));
 
-  _XDEBUG("findArchUpdateItem(" << item << ") => " << info.best);
+  XXX << "findUpdateItem(" << item << ") => " << info.best;
   return info.best;
 }
 
@@ -283,8 +279,8 @@ find_updates( const ResKind & kind, Candidates & candidates )
   {
     if (it->status().isUninstalled())
       continue;
-    // (actually similar to ProvideProcess?)
-    PoolItem candidate = findArchUpdateItem( pool, *it );
+
+    PoolItem candidate = findUpdateItem( pool, *it );
     if (!candidate.resolvable())
       continue;
 
@@ -451,23 +447,24 @@ mark_item_install (const PoolItem & pi)
 // best-effort update
 // ----------------------------------------------------------------------------
 
-// find installed item matching passed one
-//   use LookForArchUpdate as callback handler in order to cope with
-//   multiple installed resolvables of the same name.
-//   LookForArchUpdate will return the one with the highest edition.
-
+/*
+ * Find installed item matching passed one.
+ * Use SaveBetterEdition as callback handler in order to cope with
+ * multiple installed resolvables of the same name.
+ * SaveBetterEdition will return the one with the highest edition.
+ */
 static PoolItem
 findInstalledItem( PoolItem item )
 {
   const zypp::ResPool& pool = God->pool();
-  LookForArchUpdate info;
+  SaveBetterEdition info;
 
   invokeOnEach( pool.byIdentBegin( item->kind(), item->name() ),
                 pool.byIdentEnd( item->kind(), item->name() ),
                 resfilter::ByInstalled (),
                 functor::functorRef<bool,PoolItem> (info) );
 
-  _XDEBUG("findInstalledItem(" << item << ") => " << info.best);
+  XXX << "findInstalledItem(" << item << ") => " << info.best;
   return info.best;
 }
 
@@ -684,7 +681,19 @@ void mark_updates(Zypper & zypper, const ResKindSet & kinds, bool skip_interacti
           for_(solvit, q.selectableBegin(), q.selectableEnd())
           {
             ui::Selectable::Ptr s = *solvit;
-            PoolItem theone = s->theObj();
+#if USE_THE_ONE
+            PoolItem theone = s.theObj();
+#else
+            PoolItem theone;
+            
+            if (s->installedEmpty())
+              theone = *s->availableBegin();
+            else
+              theone = findUpdateItem(God->pool(), *s->installedBegin());
+            if (!theone)
+              theone = *s->installedBegin();
+#endif
+
             if (equalNVRA(*s->installedObj().resolvable(), *theone.resolvable()))
             {
               DBG << "the One (" << theone << ") is installed, skipping." << endl;
