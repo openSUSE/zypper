@@ -130,8 +130,47 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : SameItemAs
+    //
+    /** Filter items with at least same NVRA, vendor.
+     * This is usually used to find available packages
+     * that matche an insytalled one.
+    */
+    class SameItemAs
+    {
+      public:
+        SameItemAs( const sat::Solvable & solv_r )
+        : _item( solv_r )
+        {}
+
+        /** Fitting PoolItem/ResObject. */
+        template<class _Solv>
+        SameItemAs( const _Solv & solv_r )
+        : _item( solv_r.satSolvable() )
+        {}
+
+      public:
+        /** Filter on \ref Solvable. */
+        bool operator()( const sat::Solvable & solv_r ) const
+        {
+          return solv_r.name()    == _item.name()
+              && solv_r.edition() == _item.edition()
+              && solv_r.vendor()  == _item.vendor();
+        }
+
+        /** Filter fitting PoolItem/ResObject. */
+        template<class _Solv>
+        bool operator()( const _Solv & solv_r ) const
+        { return operator()( solv_r.satSolvable() ); }
+
+      private:
+        sat::Solvable _item;
+    };
+    ///////////////////////////////////////////////////////////////////
     //@}
-    /////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////
   } // namespace filter
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////

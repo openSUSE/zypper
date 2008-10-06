@@ -330,7 +330,63 @@ namespace zypp
     //@}
     ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////
+    /** \defgroup ACTIONFUNCTOR
+     * \ingroup g_Functor
+     */
+    //@{
+
+    /** Strore the 1st result found in the variable passed to the ctor.
+     * \code
+     *   PoolItem result;
+     *   invokeOnEach( pool.byIdentBegin(installed), pool.byIdentEnd(installed),
+     *                 filter::SameItem( installed ),
+     *                 getFirst( result ) );
+     * \endcode
+     */
+    template<class _Tp>
+    struct GetFirst
+    {
+      GetFirst( _Tp & result_r )
+        : _result( &result_r )
+      {}
+      bool operator()( const _Tp & val_r )
+      { *_result = val_r; return false; }
+
+      private:
+        _Tp * _result;
+    };
+
+    /** Convenience function for creating \ref GetFirst. */
+    template<class _Tp>
+    GetFirst<_Tp> getFirst( _Tp & result_r )
+    { return GetFirst<_Tp>( result_r ); }
+
+
+    /** Strore the last result found in the variable passed to the ctor.
+     */
+    template<class _Tp>
+    struct GetLast
+    {
+      GetLast( _Tp & result_r )
+        : _result( &result_r )
+      {}
+      bool operator()( const _Tp & val_r )
+      { *_result = val_r; return true; }
+
+      private:
+        _Tp * _result;
+    };
+
+    /** Convenience function for creating \ref GetLast. */
+    template<class _Tp>
+    GetLast<_Tp> getLast( _Tp & result_r )
+    { return GetLast<_Tp>( result_r ); }
+
+
+    //@}
+    ///////////////////////////////////////////////////////////////////
+
+   /////////////////////////////////////////////////////////////////
   } // namespace functor
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
