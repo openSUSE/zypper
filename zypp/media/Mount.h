@@ -14,9 +14,11 @@
 
 #ifndef ZYPP_MEDIA_MOUNT_H
 #define ZYPP_MEDIA_MOUNT_H
+
 #include <set>
 #include <map>
 #include <string>
+#include <iosfwd>
 
 #include "zypp/ExternalProgram.h"
 #include "zypp/KVMap.h"
@@ -53,11 +55,13 @@ namespace zypp {
         int         pass; //!< pass number on parallel fsck
     };
 
-    /**
+    /** \relates MountEntry
      * A vector of mount entries.
      */
     typedef std::vector<MountEntry> MountEntries;
 
+    /** \relates MountEntry Stream output */
+    std::ostream & operator<<( std::ostream & str, const MountEntry & obj );
 
     /**
      * @short Interface to the mount program

@@ -10,12 +10,12 @@
  *
 */
 
-#include <sys/stat.h>
-#include <stdio.h>
 #include <mntent.h>
-#include <limits.h>
-#include <unistd.h>
-#include <errno.h>
+
+#include <cstdio>
+#include <climits>
+#include <cerrno>
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -33,6 +33,15 @@ using namespace std;
 
 namespace zypp {
   namespace media {
+
+    std::ostream & operator<<( std::ostream & str, const MountEntry & obj )
+    {
+      str << obj.src << " on " << obj.dir << " type " << obj.type;
+      if ( ! obj.opts.empty() )
+        str << " (" << obj.opts << ")";
+      return str;
+    }
+
 
 Mount::Mount()
 {

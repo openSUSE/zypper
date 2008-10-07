@@ -12,6 +12,8 @@
 #ifndef ZYPP_MEDIA_MEDIASOURCE_H
 #define ZYPP_MEDIA_MEDIASOURCE_H
 
+#include <iosfwd>
+
 #include "zypp/Pathname.h"
 #include "zypp/base/String.h"
 #include "zypp/base/PtrTypes.h"
@@ -92,6 +94,9 @@ namespace zypp {
       bool         iown;    //!< True, if mounted by media manager.
     };
 
+    /** \relates MediaSource Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const MediaSource & obj )
+    { return str << obj.asString(); }
 
     ///////////////////////////////////////////////////////////////////
     /**
@@ -112,6 +117,8 @@ namespace zypp {
       bool     temp;    //!< If it was created temporary.
     };
 
+    /** \relates AttachPoint Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const AttachPoint & obj );
 
     ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaSource> MediaSourceRef;
@@ -138,6 +145,8 @@ namespace zypp {
       AttachPointRef attachPoint;
     };
 
+    /** \relates AttachedMedia Stream output */
+    std::ostream & operator<<( std::ostream & str, const AttachedMedia & obj );
 
   } // namespace media
 } // namespace zypp
