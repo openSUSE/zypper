@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Tue Oct  7 13:24:10 CEST 2008 - ma@suse.de
+
+- Fixed detection of loopback mounted iso-files. The mtab entry does
+  not necessarily mention the iso-file. (bnc #432504) 
+- revision 11252
+- version 5.15.0 (13)
+
+-------------------------------------------------------------------
 Thu Oct  2 19:46:13 CEST 2008 - ma@suse.de
 
-- Add zypp.conf option 'download.use_deltarpm_always' to enable using 
+- Add zypp.conf option 'download.use_deltarpmr.always' to enable using 
   delta rpms even if the package is available on a local source.
   (Axel C. Frinke)
 - revision 11235

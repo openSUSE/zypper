@@ -15,7 +15,7 @@
 #include <sstream>
 
 #include "zypp/TmpPath.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
 #include "zypp/media/MediaManager.h"
@@ -503,11 +503,11 @@ MediaHandler::checkAttached(bool matchMountFs) const
   bool _isAttached = false;
 
   AttachedMedia ref( attachedMedia());
-  if( ref.mediaSource)
+  if( ref.mediaSource )
   {
     time_t old_mtime = _attach_mtime;
     _attach_mtime = MediaManager::getMountTableMTime();
-    if( !(old_mtime <= 0 || _attach_mtime != old_mtime))
+    if( !(old_mtime <= 0 || _attach_mtime != old_mtime) )
     {
       // OK, skip the check (we've seen it at least once)
       _isAttached = true;
@@ -519,15 +519,13 @@ MediaHandler::checkAttached(bool matchMountFs) const
       else
         DBG << "Forced check of the mount table" << std::endl;
 
-      MountEntries  entries( MediaManager::getMountEntries());
-      MountEntries::const_iterator e;
-      for( e = entries.begin(); e != entries.end(); ++e)
+      MountEntries entries( MediaManager::getMountEntries());
+      for_( e, entries.begin(), entries.end() )
       {
         bool        is_device = false;
-        std::string dev_path(Pathname(e->src).asString());
         PathInfo    dev_info;
 
-        if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+        if( str::hasPrefix( Pathname(e->src).asString(), "/dev/" ) &&
             dev_info(e->src) && dev_info.isBlk())
         {
           is_device = true;
@@ -583,24 +581,35 @@ MediaHandler::checkAttached(bool matchMountFs) const
 	  }
           // differs
         }
+        else // mixed cases:
+        {
+          // Type ISO: Since 11.1 mtab might contain the name of
+          // the loop device instead of the iso file:
+          if ( ref.mediaSource->type == "iso"
+               && str::hasPrefix( Pathname(e->src).asString(), "/dev/loop" )
+               && ref.attachPoint->path == Pathname(e->dir) )
+          {
+            DBG << "Found bound media "
+                << ref.mediaSource->asString()
+                << " in the mount table as " << e->src << std::endl;
+            _isAttached = true;
+            break;
+          }
+        }
       }
 
       if( !_isAttached)
       {
-	if(  entries.empty())
+        MIL << "Looking for " << ref << endl;
+	if( entries.empty() )
 	{
 	  ERR << "Unable to find any entry in the /etc/mtab file" << std::endl;
 	}
 	else
 	{
-	  MountEntries::const_iterator e;
-	  for( e = entries.begin(); e != entries.end(); ++e)
-	  {
-	    XXX << "mount entry: " << e->src << " on " << e->dir
-	        << " type " << e->type << "(" << e->opts << ")" << endl;
-	  }
+          dumpRange( DBG << "MountEntries: ", entries.begin(), entries.end() ) << endl;
 	}
-	if( old_mtime > 0)
+	if( old_mtime > 0 )
 	{
           ERR << "Attached media not in mount table any more - forcing reset!"
               << std::endl;
@@ -797,10 +806,9 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
   for( e = entries.begin(); e != entries.end(); ++e)
   {
     bool        is_device = false;
-    std::string dev_path(Pathname(e->src).asString());
     PathInfo    dev_info;
 
-    if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+    if( str::hasPrefix( Pathname(e->src).asString(), "/dev/" ) &&
         dev_info(e->src) && dev_info.isBlk())
     {
       is_device = true;

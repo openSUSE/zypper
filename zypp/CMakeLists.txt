@@ -260,6 +260,7 @@ SET( zypp_media_SRCS
   media/MediaCurl.cc
   media/MediaAria2c.cc
   media/MediaISO.cc
+  media/MediaSource.cc
   media/MediaManager.cc
   media/MediaUserAuth.cc
   media/CredentialFileReader.cc
