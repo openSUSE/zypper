@@ -9,23 +9,23 @@
 /** \file zypp/media/MediaManager.cc
  *
 */
-#include <zypp/media/MediaException.h>
-#include <zypp/media/MediaManager.h>
-#include <zypp/media/MediaHandler.h>
-#include <zypp/media/Mount.h>
-#include <zypp/thread/Mutex.h>
-#include <zypp/thread/MutexLock.h>
-#include <zypp/target/hal/HalContext.h>
-
-#include <zypp/base/String.h>
-#include <zypp/base/Logger.h>
-#include <zypp/Pathname.h>
-#include <zypp/PathInfo.h>
-
 #include <map>
 #include <list>
 #include <iostream>
 #include <typeinfo>
+
+#include "zypp/media/MediaException.h"
+#include "zypp/media/MediaManager.h"
+#include "zypp/media/MediaHandler.h"
+#include "zypp/media/Mount.h"
+#include "zypp/thread/Mutex.h"
+#include "zypp/thread/MutexLock.h"
+#include "zypp/target/hal/HalContext.h"
+
+#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
+#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
 
 #define  DISABLE_AUTOMOUNTER      0
 
@@ -569,7 +569,7 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       DBG << "attach(id=" << accessId << ")" << std::endl;
-      
+
       return ref.handler->attach(next);
     }
 
@@ -579,7 +579,7 @@ namespace zypp
       MutexLock glock(g_Mutex);
 
       ManagedMedia &ref( m_impl->findMM(accessId));
-      
+
       DBG << "attach(id=" << accessId << ")" << std::endl;
 
       // try first mountable/mounted device
@@ -635,7 +635,7 @@ namespace zypp
             ZYPP_RETHROW(ex);
 
           AttachedMedia media(ref.handler->attachedMedia());
-          DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl; 
+          DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl;
 
           if (ref.handler->isAttached()) ref.handler->release();
         }
