@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct  7 17:04:26 CEST 2008 - jkupec@suse.cz
+
+- new translations added
+- 0.12.8
+
+-------------------------------------------------------------------
 Sun Oct  5 20:13:17 CEST 2008 - jkupec@suse.cz
 
 - fixed reinstall (zypper in -f foo) (bnc #421588)
