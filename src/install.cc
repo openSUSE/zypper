@@ -1,8 +1,10 @@
 #include <boost/format.hpp>
 
-#include "zypp/base/Logger.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/base/Logger.h"
 #include "zypp/base/Algorithm.h"
+#include "zypp/base/Functional.h"
+#include "zypp/Filter.h"
 #include "zypp/PoolQuery.h"
 
 #include "utils/misc.h"
@@ -19,29 +21,18 @@ extern ZYpp::Ptr God;
 /** Use ui::Selectable::theObj() or candidateObj() */
 #define USE_THE_ONE 0
 
-/** Simple functor remembering the first passed pool item and stopping the loop. */
-struct PoolItemGetter
-{
-  PoolItem item;
-  bool operator()(const PoolItem & pi)
-  { item = pi; return false; }
-};
-
 static PoolItem findInstalledItemInRepos(const PoolItem & installed)
 {
-  const zypp::ResPool& pool = God->pool();
-  PoolItemGetter getter;
+  const zypp::ResPool & pool(zypp::ResPool::instance());
+  PoolItem result;
   invokeOnEach(
-    pool.byIdentBegin(installed->kind(), installed->name()),
-    pool.byIdentEnd(installed->kind(), installed->name()),
+    pool.byIdentBegin(installed), pool.byIdentEnd(installed),
     functor::chain(
-      functor::chain(
-        resfilter::ByUninstalled(),
-        resfilter::byEdition<CompareByEQ<Edition> >(installed->edition())),
-      resfilter::byArch<CompareByEQ<Arch> >(installed->arch())),
-      functor::functorRef<bool,PoolItem>(getter));
-  XXX << "findInstalledItemInRepos(" << installed << ") => " << getter.item << endl;
-  return getter.item;
+      filter::SameItemAs(installed),
+      resfilter::ByUninstalled()),
+    functor::getFirst(result));
+  INT << "findInstalledItemInRepos(" << installed << ") => " << result << endl;
+  return result;
 }
 
 // TODO edition, arch ?
