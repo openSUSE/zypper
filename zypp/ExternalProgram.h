@@ -15,6 +15,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include "zypp/base/ExternalDataSource.h"
 #include "zypp/Pathname.h"
@@ -56,6 +57,9 @@ namespace zypp {
     {
 
     public:
+
+      typedef std::vector<std::string> Arguments;
+
       /**
        * Define symbols for different policies on the handling
        * of stderr
@@ -94,6 +98,16 @@ namespace zypp {
        */
 
       ExternalProgram();
+
+      ExternalProgram (const Arguments &argv,
+    		     Stderr_Disposition stderr_disp = Normal_Stderr,
+    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+    		     const Pathname& root = "");
+
+      ExternalProgram (const Arguments &argv, const Environment & environment,
+    		     Stderr_Disposition stderr_disp = Normal_Stderr,
+    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+    		     const Pathname& root = "");
 
       ExternalProgram (const char *const *argv,
     		     Stderr_Disposition stderr_disp = Normal_Stderr,

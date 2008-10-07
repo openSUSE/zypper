@@ -18,12 +18,12 @@
 namespace zypp {
   namespace media {
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : MediaAria2c
 /**
  * @short Implementation class for FTP, HTTP and HTTPS MediaHandler using an external program (aria2c) to retrive files
+ *
  * @author gfarrasb (gfarrasb@gmail.com)
+ * @author Duncan Mac-Vicar <dmacvicar@suse.de>
+ *
  * @see MediaHandler
  **/
 class MediaAria2c : public MediaHandler {
@@ -53,7 +53,7 @@ class MediaAria2c : public MediaHandler {
     /**
      * \see MediaHandler::getDoesFileExist
      */
-    //virtual bool doGetDoesFileExist( const Pathname & filename ) const;
+    virtual bool doGetDoesFileExist( const Pathname & filename ) const;
 
     /**
      *
@@ -67,14 +67,6 @@ class MediaAria2c : public MediaHandler {
      *
      */
     virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename) const;
-
-    /**
-     *
-     * \throws MediaException
-     *
-     */
-    //virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report) const;
-
 
     virtual bool checkAttachPoint(const Pathname &apoint) const;
 
@@ -96,27 +88,13 @@ class MediaAria2c : public MediaHandler {
 
   protected:
 
-    //static int progressCallback( void *clientp, double dltotal, double dlnow,
-      //                           double ultotal, double ulnow );
-
     /** The user agent string */
     static const char *const agentString();   
     
 
   private:
-    /**
-     * Return a comma separated list of available authentication methods
-     * supported by server.
-     */
-    //std::string getAuthHint() const;    
-    
 
-  private:
-
-    //We don't use curl here
-    //CURL *_curl;
-    //char _curlError[ CURL_ERROR_SIZE ];
-    //long _curlDebug;
+    bool authenticate(const std::string & availAuthTypes, bool firstTry) const;
 
     mutable std::string _userpwd;
     std::string _proxy;
@@ -134,6 +112,8 @@ class MediaAria2c : public MediaHandler {
     /** External process to get aria2c version */
     std::string getAria2cVersion();    
     static std::string _aria2cVersion;
+    
+    ExternalProgram::Arguments _args;
 };
 
 ///////////////////////////////////////////////////////////////////

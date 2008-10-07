@@ -37,6 +37,7 @@ namespace zypp {
     {
     }
 
+
     ExternalProgram::ExternalProgram( std::string commandline,
                                       Stderr_Disposition stderr_disp,
                                       bool use_pty,
@@ -59,6 +60,61 @@ namespace zypp {
       Environment environment;
       start_program (argv, environment, stderr_disp, stderr_fd, default_locale, rootdir);
     }
+
+
+    ExternalProgram::ExternalProgram (const Arguments &argv,
+                                      Stderr_Disposition stderr_disp,
+                                      bool use_pty, int stderr_fd,
+                                      bool default_locale,
+                                      const Pathname& root)
+        : use_pty (use_pty)
+    {
+        const char * argvp[argv.size() + 1];
+        unsigned c = 0;
+        for_( i, argv.begin(), argv.end() )
+        {
+            argvp[c] = i->c_str();
+            ++c;
+        }
+        argvp[c] = 0;
+
+        Environment environment;
+        const char* rootdir = NULL;
+        if(!root.empty() && root != "/")
+        {
+            rootdir = root.asString().c_str();
+        }
+        start_program (argvp, environment, stderr_disp, stderr_fd, default_locale, rootdir);
+    }
+    
+
+    ExternalProgram::ExternalProgram (const Arguments &argv,
+                                      const Environment & environment,
+                                      Stderr_Disposition stderr_disp,
+                                      bool use_pty, int stderr_fd,
+                                      bool default_locale,
+                                      const Pathname& root)
+        : use_pty (use_pty)
+    {
+        const char * argvp[argv.size() + 1];
+        unsigned c = 0;
+        for_( i, argv.begin(), argv.end() )
+        {
+            argvp[c] = i->c_str();
+            ++c;
+        }
+        argvp[c] = 0;
+
+        const char* rootdir = NULL;
+        if(!root.empty() && root != "/")
+        {
+            rootdir = root.asString().c_str();
+        }
+        start_program (argvp, environment, stderr_disp, stderr_fd, default_locale, rootdir);
+
+    }
+    
+
 
 
     ExternalProgram::ExternalProgram( const char *const *argv,
