@@ -157,7 +157,7 @@ namespace zypp
 
       /** Whether to consider using a deltarpm even when rpm is local.
        * This requires \ref download_use_deltarpm being \c true.
-       * Config option <tt>download.use_deltarpm_always (false)</tt>
+       * Config option <tt>download.use_deltarpm.always (false)</tt>
        */
       bool download_use_deltarpm_always() const;
 

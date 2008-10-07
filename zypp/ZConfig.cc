@@ -234,7 +234,7 @@ namespace zypp
                 {
                   download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
                 }
-                else if ( entry == "download.use_deltarpm_always" )
+                else if ( entry == "download.use_deltarpm.always" )
                 {
                   download_use_deltarpm_always = str::strToBool( value, download_use_deltarpm_always );
                 }
