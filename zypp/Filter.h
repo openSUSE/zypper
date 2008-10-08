@@ -156,6 +156,7 @@ namespace zypp
         {
           return solv_r.name()    == _item.name()
               && solv_r.edition() == _item.edition()
+              && solv_r.arch()    == _item.arch()
               && solv_r.vendor()  == _item.vendor();
         }
 
