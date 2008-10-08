@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Wed Oct  8 16:24:25 CEST 2008 - jkupec@suse.cz
+
+- detect and use unused loop device for mounting ISO images
+  (bnc #428009)
+- revision 11262
+- version 5.15.1 (13)
+
+-------------------------------------------------------------------
+Wed Oct  8 15:39:08 CEST 2008 - jkupec@suse.cz
+
+- fixed segfault when saving the probed repo type in
+  RepoManager::refreshMetadata() (bnc #431963)
+- revision 11261
+
+-------------------------------------------------------------------
 Wed Oct  8 11:33:00 CEST 2008 - dmacvicar@suse.de
 
 - improve log message (bnc#429114) 
