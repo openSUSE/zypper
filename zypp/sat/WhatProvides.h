@@ -157,17 +157,37 @@ namespace zypp
         {}
 
         /** Ctor with pointer to 1st elemment of an array.
-         * Use otherwise unused base as pointer for _baseRef. */
+         * Use otherwise unused base as pointer for _baseRef.
+         */
         explicit WhatProvidesIterator( const detail::IdType *const base_r, unsigned offset_r = 0 )
         : iterator_adaptor_( base_r ), _baseRef( base_r ? &base_reference() : 0 ), _offset( offset_r )
         {}
 
         /** Ctor with pointer to pointer to 1st elemment of an array.
-         * Required for arrays that might be relocated whlite iterating (
-        */
+         * Required for arrays that might be relocated while iterating.
+         */
         explicit WhatProvidesIterator( const detail::IdType *const* baseRef_r, unsigned offset_r )
         : iterator_adaptor_( 0 ), _baseRef( baseRef_r ), _offset( offset_r )
         {}
+
+        /** Copy-ctor required to keep _baseRef adjusted. */
+        WhatProvidesIterator( const WhatProvidesIterator & rhs )
+        : iterator_adaptor_( rhs.base_reference() )
+        , _baseRef( base_reference() ? &base_reference() : 0 )
+        , _offset( rhs._offset )
+        {}
+
+        /** Assignment operator required to keep _baseRef adjusted. */
+        WhatProvidesIterator & operator=( const WhatProvidesIterator & rhs )
+        {
+          if ( this != &rhs ) // no self assign
+          {
+            base_reference() = rhs.base_reference();
+            _baseRef = ( base_reference() ? &base_reference() : 0 );
+            _offset = rhs._offset;
+          }
+          return *this;
+        }
 
       private:
         friend class boost::iterator_core_access;
@@ -179,9 +199,14 @@ namespace zypp
         bool equal( const boost::iterator_adaptor<OtherDerived, OtherIterator, V, C, R, D> & rhs ) const
 #endif
         bool equal( const WhatProvidesIterator & rhs ) const
-        { // NULL pointer is eqal Id 0
-          return ( ! ( getId() || rhs.getId() ) // both @end
-                   || ( _baseRef == rhs._baseRef && _offset == rhs._offset ) );
+        {
+          if ( ! ( getId() || rhs.getId() ) )
+            return true; // both @end
+          if ( _offset != rhs._offset )
+            return false;
+          if ( base_reference() )
+            return( base_reference() == rhs.base_reference() );
+          return( _baseRef == rhs._baseRef );
         }
 
         void increment()
@@ -191,8 +216,8 @@ namespace zypp
         { return _baseRef ? (*_baseRef)[_offset] : detail::noId; }
 
       private:
-        const detail::IdType *const*const _baseRef;
-        unsigned                          _offset;
+        const detail::IdType *const* _baseRef;
+        unsigned                     _offset;
     };
     ///////////////////////////////////////////////////////////////////
     }

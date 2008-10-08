@@ -602,6 +602,70 @@ try {
 
   if ( 0 )
   {
+    CapabilitySet caps;
+    caps.insert( Capability("pattern:multimedia") );
+    caps.insert( Capability("pattern:gnome_basis") );
+    caps.insert( Capability("pattern:imaging") );
+    caps.insert( Capability("pattern:office") );
+    caps.insert( Capability("pattern:non_oss") );
+    caps.insert( Capability("pattern:non_oss_java") );
+    caps.insert( Capability("pattern:gnome_admin") );
+    caps.insert( Capability("pattern:gnome_internet") );
+    caps.insert( Capability("xsane") );
+    caps.insert( Capability("pattern:gnome_utilities") );
+    caps.insert( Capability("pattern:games") );
+    caps.insert( Capability("pattern:xgl") );
+    INT << caps << endl;
+
+    sat::WhatProvides prv1( Capability("pattern:multimedia") );
+    DBG << (prv1.begin()==prv1.begin()) << endl;
+
+    sat::WhatProvides prv( caps );
+    DBG << (prv.begin()==prv.begin()) << endl;
+//     MIL << prv.empty() << endl;
+//     MIL << prv.size() << endl;
+//     for_( it, prv.begin(), prv.end() )
+//     {
+//       INT << *it << endl;
+//     }
+//     MIL << ( prv.begin() == prv.end() ) << endl;
+// //     MIL << ( prv.begin() == prv.begin() ) << endl;
+//     MIL << ( prv.end() == prv.end() ) << endl;
+
+    sat::WhatProvides::const_iterator i1( prv.begin() );
+    sat::WhatProvides::const_iterator i2( prv.begin() );
+    sat::WhatProvides::const_iterator i3( i2 );
+    DBG << (i1==i1) << endl;
+    DBG << (i1==i2) << endl;
+    DBG << (i1==i3) << endl;
+    DBG << (i2==i2) << endl;
+    DBG << (i1==i3) << endl;
+    DBG << (i3==i3) << endl;
+
+     dumpRange( SEC, make_filter_begin( filter::byKind<Package>(), prv ),
+                     make_filter_end( filter::byKind<Package>(), prv ) ) << endl;
+
+  }
+
+  if ( 1 )
+  {
+    PoolItem pi ( getPi<Pattern>("gnome") );
+    MIL << pi << endl;
+    Pattern::constPtr p( pi->asKind<Pattern>() );
+    if ( p )
+    {
+      p->depends();
+      MIL << p->depends() << endl;
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////
+  INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
+  return 0;
+
+  if ( 0 )
+  {
     PoolItem pi ( getPi<Package>("amarok") );
     MIL << pi << endl;
     if ( pi )
@@ -620,69 +684,7 @@ try {
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
- //////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-  for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
-  {
-    MIL << *it << endl;
-    DBG << (*it)->provides() << endl;
-  }
-
-  sat::WhatProvides prv( Capability("product()") );
-  SEC << prv << endl;
-  for_( it, prv.begin(), prv.end() )
-  {
-
-    MIL << *it << endl;
-    MIL << it->provides() << endl;
-  }
-
-  Capability cap;
-
-  cap = Capability( "sles-release" );
-  prv = sat::WhatProvides( cap );
-  MIL << cap << ": " << prv << endl;
-
-  cap = Capability( "sles-release == 11" );
-  prv = sat::WhatProvides( cap );
-  MIL << cap << ": " << prv << endl;
-
-
-//   PoolItem pi ( getPi<Package>("sles-release", Edition("11.0") ) );
-
   //////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-
-  //SEC << zypp::getZYpp()->diskUsage() << endl;
-
-  //vdumpPoolStats( USR << "Pool:"<< endl, pool.begin(), pool.end() ) << endl;
-
-  sat::WhatProvides prodcap( Capability("product()") );
-  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
-  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
-
-  prodcap.poolItemBegin()->status().setTransact( true, ResStatus::APPL_LOW );
-  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
-  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
-
-  pool.byKindBegin<Product>()->status().setTransact( true, ResStatus::USER );
-  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
-  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
-
-  prodcap.poolItemBegin()->status().setLock( true, ResStatus::USER );
-  dumpRange( WAR << "Product ", pool.byKindBegin<Product>(), pool.byKindEnd<Product>() ) << endl;
-  dumpRange( WAR << "ProdPac " , prodcap.poolItemBegin(), prodcap.poolItemEnd() ) << endl;
-
-
-
-  //std::for_each( pool.begin(), pool.end(), Xprint() );
-
-  ///////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;
   zypp::base::LogControl::instance().logNothing();
   return 0;
