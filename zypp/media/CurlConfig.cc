@@ -46,7 +46,7 @@ namespace zypp
     else
     {
       WAR << "Not allowed to parse '" << curlrcFile
-          << "': bad file owner" << std::endl;
+          << "': owner is not root" << std::endl;
       return 1;
     }
 

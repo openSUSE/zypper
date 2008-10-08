@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct  8 11:33:00 CEST 2008 - dmacvicar@suse.de
+
+- improve log message (bnc#429114) 
+
+-------------------------------------------------------------------
 Wed Oct  8 11:15:20 CEST 2008 - lslezak@suse.cz
 
 - disk usage - ignore /proc filesystem (bnc#418783)
