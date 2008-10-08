@@ -39,6 +39,9 @@ namespace zypp
         MediaAccessId _isosource;
         std::string   _filesystem;
 
+      private:
+        std::string findUnusedLoopDevice();
+
       protected:
 
 	virtual void attachTo (bool next = false);

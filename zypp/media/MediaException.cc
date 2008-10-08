@@ -266,6 +266,14 @@ namespace zypp
         return str << form(_(" SSL certificate problem, verify that the CA cert is OK for '%s'."), _url.c_str()) << endl;
       return str << _msg << endl;
     }
+
+    std::ostream & MediaNoLoopDeviceException::dumpOn( std::ostream & str ) const
+    {
+      if (msg().empty())
+        return str << form(_("Cannot find available loop device to mount the image file from '%s'"), _url.c_str()) << endl;
+      return str << msg() << endl;
+    }
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
