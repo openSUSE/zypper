@@ -180,6 +180,13 @@ namespace zypp
 	      continue;
 	    }
 
+	    // remove /proc entry
+	    if (words[0] == "/proc")
+	    {
+	      DBG << "Discard /proc filesystem: " << l << std::endl;
+	      continue;
+	    }
+
 	    //
 	    // Filter mountpoints not at or below _rootdir
 	    //
