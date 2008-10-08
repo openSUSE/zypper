@@ -821,8 +821,9 @@ namespace zypp
                 if ( info.alias() == (*it).alias() )
                 {
                   RepoInfo modifiedrepo = info;
-                  modifiedrepo.setType(repokind);
-                  modifyRepository(info.alias(),modifiedrepo);
+                  modifiedrepo.setType( repokind );
+                  modifyRepository( info.alias(), modifiedrepo );
+                  break;
                 }
               }
             }
@@ -1062,6 +1063,8 @@ namespace zypp
 
   repo::RepoType RepoManager::probe( const Url &url ) const
   {
+    MIL << "going to probe the type of the repo " << endl;
+
     if ( url.getScheme() == "dir" && ! PathInfo( url.getPathName() ).isDir() )
     {
       // Handle non existing local directory in advance, as
@@ -1439,6 +1442,7 @@ namespace zypp
       _pimpl->repos.erase(toedit);
       _pimpl->repos.insert(newinfo);
       HistoryLog(_pimpl->options.rootDir).modifyRepository(toedit, newinfo);
+      MIL << "repo " << alias << " modified" << endl;
     }
   }
 
