@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2007-08-23 19:28+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Panjabi <punjabi-l10n@lists.sf.net>\n"
@@ -31,21 +31,18 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 #, fuzzy
 msgid " executed"
 msgstr "ਚਲਾਓ"
 
 # %s is either BOOTP or DHCP
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI ਚਲਾਉਣਾ ਫੇਲ੍ਹ: %s"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -53,20 +50,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s ਦਾ %s ਨਾਲ ਅਪਵਾਦ ਹੈ"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "%s ਇੰਸਟਾਲ ਫੇਲ੍ਹ ਹੈ"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s ਇੰਸਟਾਲ ਹੋਇਆ"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, fuzzy, c-format
@@ -78,18 +61,10 @@ msgstr "ਇੰਸਟਾਲ ਨਹੀਂ ਹਨ"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s %s ਰਾਹੀਂ ਚਾਹੀਦਾ ਹੈ"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "%s ਹਟਾਉਣਾ ਫੇਲ੍ਹ"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s ਹਟਾਇਆ"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -116,7 +91,7 @@ msgstr "ਅਕੋਲੀ"
 msgid "Adangme"
 msgstr "ਅਡਾਨਗਮੀ"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
@@ -125,7 +100,7 @@ msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਸ਼ਾਮਲ ਕੀਤੀ ਜਾ ਰ
 msgid "Additional Customer Contract Necessary"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "ਹੋਰ rpm ਆਉਟਪੁੱਟ:"
 
@@ -342,7 +317,7 @@ msgstr "ਆਸਟਰੀਆ"
 msgid "Austronesian (Other)"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' ਲਈ ਪਰਮਾਣਿਕਤ ਲੋੜੀਦੀ ਹੈ"
@@ -606,7 +581,7 @@ msgstr "ਬਰੂਨਈ ਡੇਰੂਸਲਾਮ"
 msgid "Buginese"
 msgstr "ਬੁਗੀਨੀਆ"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਕੈਚੇ ਬਿਲਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
@@ -727,7 +702,7 @@ msgstr ""
 msgid "Canada"
 msgstr "ਕੇਨੈਡਾ"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -814,7 +789,7 @@ msgstr "ਚਾਮੋਰੋ"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s ਲਈ ਸੰਰਚਨਾ ਫਾਇਲਾਂ ਬਦਲੀਆਂ:"
@@ -1273,12 +1248,12 @@ msgstr "ਈਵੀ"
 msgid "Ewondo"
 msgstr "ਈਵੋਨਡੋ"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "VM ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ।"
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1288,7 +1263,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "ਪਾਰਸ ਕਰਨ ਦੌਰਾਨ ਫੇਲ੍ਹ: %s।"
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "ਪਬਲਿਕ ਕੁੰਜੀ ਲੈਣ ਲਈ ਅਸਮਰੱਥ ਹੈ।"
@@ -1875,7 +1850,7 @@ msgstr "ਇੰਡੋਨੇਸ਼ੀਅਨ"
 msgid "Ingush"
 msgstr "ਈਂਗੁਸ਼"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਹਦਾਇਤਾਂ ਮੁਤਾਬਕ ਅਧੂਰੀ ਛੱਡੀ ਗਈ ਹੈ।"
 
@@ -1954,7 +1929,7 @@ msgstr "ਗਲਤ ਪੋਰਟ ਭਾਗ '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "ਗਲਤ ਯੂਜ਼ਰ ਨਾਂ ਜਾਂ ਪਾਸਵਰਡ ਹੈ।"
 
@@ -2999,7 +2974,7 @@ msgid "Otomian Languages"
 msgstr "ਓਟਾਮੀਆਈ ਭਾਸ਼ਾਵਾਂ"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "ਪੈਕੇਜ %s ਐਂਟੀਗਰੇਟੀ ਚੈਕ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ। ਕੀ ਤੁਸੀਂ ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰਨੀ ਚਾਹੁੰਦੇ ਹੋ?"
@@ -3196,8 +3171,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ਫੇਲ੍ਹ"
@@ -3226,10 +3201,15 @@ msgstr "ਰਾਰੋਤੋਨਗੀ"
 msgid "Relative path not allowed if authority exists"
 msgstr ""
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਹਟਾਈ ਜਾ ਰਹੀ ਹੈ।"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, fuzzy, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "ਲੋੜੀ ਫਾਇਲ ਗੁੰਮ ਹੈ: "
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3446,7 +3426,7 @@ msgstr "ਲਿੱਰ ਲੀਓਨ"
 msgid "Sign Languages"
 msgstr "ਸਾਇਨ ਭਾਸ਼ਾਵਾਂ"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "ਸੋਰਸ ਪੈਕੇਜ '%s' ਨਹੀਂ ਲੱਭਿਆ।"
@@ -3853,7 +3833,7 @@ msgstr "ਤਾਂਗਾ (ਨਆਸਾ)"
 msgid "Tonga (Tonga Islands)"
 msgstr "ਤਾਂਗਾ (ਤਾਂਗਾ ਟਾਪੂ)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4015,7 +3995,7 @@ msgstr "ਸੰਯੁਕਤ ਰਾਜ"
 msgid "United States Minor Outlying Islands"
 msgstr "ਸੰਯੁਕਤ ਰਾਜ ਮੀਨੋਰ ਆਉਟਲੇ ਟਾਪੂ"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "ਅਣਜਾਣ ਲਿਸਟ ਚੋਣ"
@@ -4032,7 +4012,7 @@ msgstr "ਅਣਜਾਣ ਭਾਸ਼ਾ: "
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
@@ -4117,7 +4097,7 @@ msgid "Vai"
 msgstr "ਵਾਈ"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4286,11 +4266,11 @@ msgstr "ਜ਼ੂਲੂ"
 msgid "Zuni"
 msgstr "ਜੁਨੀ"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm ਚੈੱਕ ਫੇਲ੍ਹ ਹੈ।"
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm ਫੇਲ੍ਹ ਹੋਇਆ।"
 
@@ -4309,8 +4289,7 @@ msgstr "%s ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
 msgid "conflicting requests"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਮੰਗ:"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "%s ਦਾ ਬੈਕਅੱਪ ਬਣਿਆ"
@@ -4415,31 +4394,31 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "rpm ਆਉਟਪੁੱਟ:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4465,8 +4444,14 @@ msgstr "ਅਣਜਾਣ"
 msgid "unsupported"
 msgstr " - ਸਹਾਇਕ ਨਹੀਂ"
 
-#~ msgid "Required file is missing: "
-#~ msgstr "ਲੋੜੀ ਫਾਇਲ ਗੁੰਮ ਹੈ: "
+#~ msgid "%s install failed"
+#~ msgstr "%s ਇੰਸਟਾਲ ਫੇਲ੍ਹ ਹੈ"
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s ਇੰਸਟਾਲ ਹੋਇਆ"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s ਹਟਾਇਆ"
 
 #~ msgid "Ignore that %s is already set to install"
 #~ msgstr "ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਸੈੱਟ ਕੀਤੇ ਉਸ %s ਨੂੰ ਅਣਡਿੱਠਾ ਕਰੋ"

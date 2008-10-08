@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2008-04-23 17:20+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team:  <opensuse-translation@opensuse.org>\n"
@@ -36,20 +36,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-certifikatproblem. Tjek at CA-certifikatet er OK for '%s'."
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 #, fuzzy
 msgid " executed"
 msgstr "Udfør"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "Afvikling af DBI fejlede: %s"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -57,20 +54,6 @@ msgstr ""
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s konflikter med %s, der tilbydes af %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "Installation af %s mislykkedes"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s blev installeret"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -82,18 +65,10 @@ msgstr "%s er ikke installérbar"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s forælder %s, der tilbydes af %s"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "Fjernelse af %s mislykkedes"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s fjernelse ok"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -120,7 +95,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Tilføjer softwarekilden '%s'"
@@ -129,7 +104,7 @@ msgstr "Tilføjer softwarekilden '%s'"
 msgid "Additional Customer Contract Necessary"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "Yderligere rpm output:"
 
@@ -357,7 +332,7 @@ msgstr "Østrig"
 msgid "Austronesian (Other)"
 msgstr "Austronesisk (Malayo-Polynesisk)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Autentificering påkrævet for '%s'"
@@ -638,7 +613,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginesisk"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Opbygger cache for softwarekilden '%s'"
@@ -762,7 +737,7 @@ msgstr "Rekursive mutex-attributter kan ikke angives"
 msgid "Canada"
 msgstr "Canada"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Kan ikke oprette den offentlige nøgle %s fra %s til filen %s"
@@ -854,7 +829,7 @@ msgstr "Chamorro"
 #
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Konfigurationsfiler er ændret for %s:"
@@ -1333,11 +1308,11 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 msgid "Failed to delete key."
 msgstr "Sletning af nøgle fejlede."
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
@@ -1347,7 +1322,7 @@ msgstr "Import af offentlig nøgle fra filen %s fejlede: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Montering af %s fejlede på %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Fjernelse af den offentlige nøgle %s fejlede: %s"
@@ -1954,7 +1929,7 @@ msgstr "Indonesisk"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "Installation er blevet afbrudt som ønsket."
 
@@ -2033,7 +2008,7 @@ msgstr "Ugyldig portkomponent '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Ugyldigt regulært udtryk '%s': Regcomp returnerede %d"
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "Ugyldigt brugernavn eller adgangskode."
 
@@ -3142,7 +3117,7 @@ msgid "Otomian Languages"
 msgstr "Otomianske sprog"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Pakken %s bestod ikke integritetstjek. Vil du forsøge igen?"
@@ -3343,8 +3318,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Fortolkning af forespørgselsstreng er ikke understøttet af denne URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 msgid "RPM failed: "
 msgstr "RPM fejlede: "
 
@@ -3375,10 +3350,15 @@ msgstr "Rarotongansk"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relativ sti er ikke tilladt hvis autoritet eksisterer"
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Fjerner softwarekilden '%s'"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, fuzzy, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "Påkrævet fil mangler: "
 
 # RE
 #. :QAT:634:
@@ -3615,7 +3595,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Tegnsprog"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Signaturfilen %s blev ikke fundet."
@@ -4047,7 +4027,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tongaøerne)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Prøvede at importere ikke-eksisterende nøgle %s ind i nøgleringen %s"
@@ -4219,7 +4199,7 @@ msgstr "USA"
 msgid "United States Minor Outlying Islands"
 msgstr "Fjerne, mindre øer, USA"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Ukendt 'list'-valgmulighed"
@@ -4236,7 +4216,7 @@ msgstr "Ukendt sprog: "
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Ikke understøttet HTTP autentificeringsmetode '%s'"
@@ -4321,7 +4301,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Ingen gyldig metadata fundet på specificerede URL(s)"
 
@@ -4503,11 +4483,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm-kontrol mislykkedes."
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm mislykkedes."
 
@@ -4525,8 +4505,7 @@ msgstr "kan ikke installere både %s og %s"
 msgid "conflicting requests"
 msgstr "modstridende forespørgsler"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "backup %s blev oprettet"
@@ -4633,13 +4612,13 @@ msgid "replacement of %s with %s"
 msgstr "udskiftning af %s med %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4648,18 +4627,18 @@ msgstr ""
 "rpm oprettet %s som %s.\n"
 "Her er de første 25 linjer af forskelle:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "rpm output:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4686,6 +4665,15 @@ msgstr "ukendt"
 msgid "unsupported"
 msgstr " - ikke understøttet"
 
+#~ msgid "%s install failed"
+#~ msgstr "Installation af %s mislykkedes"
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s blev installeret"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s fjernelse ok"
+
 #, fuzzy
 #~ msgid "Download (Metalink curl) initialization failed for '%s'"
 #~ msgstr "Download (curl) initialisering fejlede for '%s'"
@@ -4703,6 +4691,3 @@ msgstr " - ikke understøttet"
 #, fuzzy
 #~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
 #~ msgstr "Fejl opstod under indstilling af download (curl)-valgmuligheder for '%s':"
-
-#~ msgid "Required file is missing: "
-#~ msgstr "Påkrævet fil mangler: "

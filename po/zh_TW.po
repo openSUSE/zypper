@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2008-05-04 03:42+0800\n"
 "Last-Translator: swyear <swyear@gmail.com>\n"
 "Language-Team: Chinese Traditional <zh@li.org>\n"
@@ -32,20 +32,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 驗證問題，確認 '%s' 的 CA 憑證是正確的。"
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 #, fuzzy
 msgid " executed"
 msgstr "執行"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI 執行失敗： %s"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -53,20 +50,6 @@ msgstr ""
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s 與 %s 衝突(由 %s 提供)"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "%s 安裝失敗"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s 安裝成功"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -78,18 +61,10 @@ msgstr "%s 無法安裝"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s 汰換 %s (由 %s 提供)"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "%s 移除失敗"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s 移除成功"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -116,7 +91,7 @@ msgstr "阿科利語"
 msgid "Adangme"
 msgstr "阿當梅語"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "正在新增套件庫 '%s'"
@@ -125,7 +100,7 @@ msgstr "正在新增套件庫 '%s'"
 msgid "Additional Customer Contract Necessary"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "其他 rpm 輸出："
 
@@ -342,7 +317,7 @@ msgstr "奧地利"
 msgid "Austronesian (Other)"
 msgstr "南島語系 (其他)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "要求 '%s' 的驗證"
@@ -606,7 +581,7 @@ msgstr "汶萊"
 msgid "Buginese"
 msgstr "布吉斯語"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "正在建立套件庫 '%s' 的快取"
@@ -726,7 +701,7 @@ msgstr "無法設定遞迴 mutex 屬性"
 msgid "Canada"
 msgstr "加拿大"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "無法建立公開金鑰 %s 從 %s 鑰匙圈到檔案 %s"
@@ -812,7 +787,7 @@ msgstr "查摩洛語"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 的已變更組態檔："
@@ -1272,11 +1247,11 @@ msgstr "埃維語"
 msgid "Ewondo"
 msgstr "埃翁多語"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 msgid "Failed to delete key."
 msgstr "刪除金鑰失敗。"
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "從檔案 %s 匯入公開金鑰失敗： %s"
@@ -1286,7 +1261,7 @@ msgstr "從檔案 %s 匯入公開金鑰失敗： %s"
 msgid "Failed to mount %s on %s"
 msgstr "載掛 %s 在 %s 失敗"
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "移除公開金鑰 %s 失敗： %s"
@@ -1871,7 +1846,7 @@ msgstr "印尼語"
 msgid "Ingush"
 msgstr "印古什語"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "安裝已如指示中止。"
 
@@ -1950,7 +1925,7 @@ msgstr "無效的連接埠元件「%s」"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "無效的使用者名稱和密碼。"
 
@@ -2994,7 +2969,7 @@ msgid "Otomian Languages"
 msgstr "鄂圖曼語"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "套件 %s 完整性檢查失敗。 您要重試下載嗎？"
@@ -3191,8 +3166,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "此 URL 不支援查詢字串分析"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 msgid "RPM failed: "
 msgstr "RPM 失敗： "
 
@@ -3220,10 +3195,15 @@ msgstr "拉羅通加語"
 msgid "Relative path not allowed if authority exists"
 msgstr "如果授權存在，則不允許相對路徑"
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "正在移除套件庫 '%s'"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, fuzzy, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "缺少需要的檔案："
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3440,7 +3420,7 @@ msgstr "獅子山"
 msgid "Sign Languages"
 msgstr "符號語言"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
 msgstr "找不到簽名檔 '%s'"
@@ -3846,7 +3826,7 @@ msgstr "東加語 (尼亞沙)"
 msgid "Tonga (Tonga Islands)"
 msgstr "東加語 (東加群島)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "嘗試匯入不存在的金鑰 %s 到鑰匙圈 %s"
@@ -4008,7 +3988,7 @@ msgstr "美國"
 msgid "United States Minor Outlying Islands"
 msgstr "美國外島"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "未知的清單選項"
@@ -4025,7 +4005,7 @@ msgstr "未知的語言："
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "不支援的 HTTP 驗證方式 '%s'"
@@ -4110,7 +4090,7 @@ msgid "Vai"
 msgstr "埃語"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "在指定的 URL 中找不到有效的中繼資訊"
 
@@ -4279,11 +4259,11 @@ msgstr "祖魯語"
 msgid "Zuni"
 msgstr "祖尼語"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm 檢查失敗。"
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm 失敗。"
 
@@ -4301,8 +4281,7 @@ msgstr "無法同時安裝 %s 和 %s"
 msgid "conflicting requests"
 msgstr "衝突的要求"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "已建立備份 %s"
@@ -4409,13 +4388,13 @@ msgid "replacement of %s with %s"
 msgstr "取代 %s 以 %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 建立為 %s，但看不出差異"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4424,18 +4403,18 @@ msgstr ""
 "rpm 已將 %s 建立為 %s。\n"
 "這是前 25 行差異：\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "rpm 輸出："
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 儲存為 %s，但看不出差異"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4462,6 +4441,15 @@ msgstr "不明的"
 msgid "unsupported"
 msgstr " - 不支援"
 
+#~ msgid "%s install failed"
+#~ msgstr "%s 安裝失敗"
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s 安裝成功"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s 移除成功"
+
 #, fuzzy
 #~ msgid "Download (Metalink curl) initialization failed for '%s'"
 #~ msgstr "'%s' 下載 (curl) 初始化失敗"
@@ -4479,6 +4467,3 @@ msgstr " - 不支援"
 #, fuzzy
 #~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
 #~ msgstr "為 '%s' 設定下載(curl)參數時發生錯誤："
-
-#~ msgid "Required file is missing: "
-#~ msgstr "缺少需要的檔案："

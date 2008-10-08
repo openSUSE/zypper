@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2008-04-27 00:54+0400\n"
 "Last-Translator: Nikolay Derkach <nderkach@gmail.com>\n"
 "Language-Team: Russian <opensuse-ru@opensuse.org>\n"
@@ -36,19 +36,16 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr "Проблема со сертификатов SSL, проверьте, всё ли в порядке с удостоверяющим центрои сертификата '%s'."
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 msgid " executed"
 msgstr ""
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "не удалась операция над файлами"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -56,20 +53,6 @@ msgstr ""
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s конфликтует с %s, который предоставляется %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "сбой при установке %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s установлен успешно"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -81,18 +64,10 @@ msgstr "%s недоступен для установки"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s делает устаревшим %s, предоставляемый %s"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "сбой при удалении %s "
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s удален успешно"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -121,7 +96,7 @@ msgstr "Ачоли"
 msgid "Adangme"
 msgstr "Адангме"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Добавляется репозитарий '%s'"
@@ -131,7 +106,7 @@ msgid "Additional Customer Contract Necessary"
 msgstr ""
 
 #  dialog caption
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "Дополнительный вывод rpm:"
 
@@ -358,7 +333,7 @@ msgstr "Австрия"
 msgid "Austronesian (Other)"
 msgstr "Австронезийские (другие)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "Необходима аутентификация для '%s'"
@@ -635,7 +610,7 @@ msgstr "Бруней-Даруссалам"
 msgid "Buginese"
 msgstr "Бугийский"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Собирается кэш репозитария '%s'"
@@ -757,7 +732,7 @@ msgstr "Не удаётся установить атрибут рекурсив
 msgid "Canada"
 msgstr "Канада"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Невозможно записать публичный ключ %s из хранилища %s в файл %s"
@@ -848,7 +823,7 @@ msgstr "Чаморро"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Измененные файлы настройки для %s:"
@@ -1314,11 +1289,11 @@ msgstr "Эве"
 msgid "Ewondo"
 msgstr "Эвондо"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 msgid "Failed to delete key."
 msgstr "Не удалось удалить ключ."
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Не удалось смонтировать публичный ключ из файла %s: %s"
@@ -1328,7 +1303,7 @@ msgstr "Не удалось смонтировать публичный ключ
 msgid "Failed to mount %s on %s"
 msgstr "Не удалось смонтировать %s в %s"
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Не удалось удалить публичный ключ %s: %s"
@@ -1927,7 +1902,7 @@ msgstr "Индонезийский"
 msgid "Ingush"
 msgstr "Ингушский"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "Установка прервана согласно инструкции."
 
@@ -2010,7 +1985,7 @@ msgstr "Неверный компонент порта '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Неверное регулярное выражение '%s': regcomp вернул %d"
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "Неверное имя пользователя или пароль."
 
@@ -3105,7 +3080,7 @@ msgid "Otomian Languages"
 msgstr "Отомангские языки"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Сбой при проверке целостности пакета %s. Попробовать заново?"
@@ -3306,8 +3281,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Для данного URL-адреса анализ строки запроса не поддерживается"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 msgid "RPM failed: "
 msgstr "Сбой RPM: "
 
@@ -3337,10 +3312,15 @@ msgstr "Раротонга"
 msgid "Relative path not allowed if authority exists"
 msgstr "При наличии компонентов авторизации относительные пути указывать нельзя"
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Удаляется репозитарий '%s'"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, fuzzy, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "Необходимый файл отсутствует: "
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3568,7 +3548,7 @@ msgstr "Сьерра-Леоне"
 msgid "Sign Languages"
 msgstr "Языки жестов"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Не найден файл подписи %s"
@@ -3988,7 +3968,7 @@ msgstr "Тонга (Ньяса)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Тонга (Тонга Исландский)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Была произведена попытка импортировать существующий ключ %s в хранилище ключей %s"
@@ -4157,7 +4137,7 @@ msgstr "США"
 msgid "United States Minor Outlying Islands"
 msgstr "Внешние малые острова США"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Неизвестный параметр команды list"
@@ -4174,7 +4154,7 @@ msgstr "Неизвестный язык: "
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Неподдерживаемый метод HTTP-аутенфикации '%s'"
@@ -4259,7 +4239,7 @@ msgid "Vai"
 msgstr "Ваи"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "По указанным URL-адресам не найдено действительных метаданных"
 
@@ -4436,11 +4416,11 @@ msgstr "Зулусский"
 msgid "Zuni"
 msgstr "Зунийский"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "сбой при проверке applydeltarpm."
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "сбой в applydeltarpm."
 
@@ -4459,8 +4439,7 @@ msgid "conflicting requests"
 msgstr "конфликтующие запросы"
 
 #  Proposal for backup during update
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "созданная резервная копия %s"
@@ -4567,13 +4546,13 @@ msgid "replacement of %s with %s"
 msgstr "замена %s на %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm создал %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4582,18 +4561,18 @@ msgstr ""
 "rpm создал %s как %s.\n"
 "Первые 25 строк различий:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "вывод rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm сохранил %s как %s, но было невозможно определить различия"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4620,6 +4599,15 @@ msgstr "неизвестно"
 msgid "unsupported"
 msgstr " - не поддерживается"
 
+#~ msgid "%s install failed"
+#~ msgstr "сбой при установке %s"
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s установлен успешно"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s удален успешно"
+
 #, fuzzy
 #~ msgid "Download (Metalink curl) initialization failed for '%s'"
 #~ msgstr "Сбой инициализации загрузки '%s'"
@@ -4637,6 +4625,3 @@ msgstr " - не поддерживается"
 #, fuzzy
 #~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
 #~ msgstr "Произошла ошибка при установлении параметров загрузки (curl) для '%s':"
-
-#~ msgid "Required file is missing: "
-#~ msgstr "Необходимый файл отсутствует: "

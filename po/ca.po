@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2007-02-26 19:15+0100\n"
 "Last-Translator: Olga López\n"
 "Language-Team: Catalan\n"
@@ -29,20 +29,17 @@ msgstr "No hi ha proveïdors instal·lables de %s"
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 #, fuzzy
 msgid " executed"
 msgstr "Executa"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI Execution failed: %s"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -50,20 +47,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s entra en conflicte amb %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "S'ha produït un error en instal·lar %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s s'ha instal·lat correctament"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, fuzzy, c-format
@@ -75,18 +58,10 @@ msgstr "no instal·lat"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s desactualitza %s"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "S'ha produït un error en suprimir %s"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s s'ha suprimit correctament"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -113,7 +88,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, fuzzy, c-format
 msgid "Adding repository '%s'"
 msgstr "S'estan afegint recursos"
@@ -122,7 +97,7 @@ msgstr "S'estan afegint recursos"
 msgid "Additional Customer Contract Necessary"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "Sortida addicional de l'rpm:"
 
@@ -357,7 +332,7 @@ msgstr "Àustria"
 msgid "Austronesian (Other)"
 msgstr "Llengües autronèsies (altres)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, fuzzy, c-format
 msgid "Authentication required for '%s'"
 msgstr "Cal autenticació"
@@ -651,7 +626,7 @@ msgstr "Brunei"
 msgid "Buginese"
 msgstr "Bugui"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr ""
@@ -780,7 +755,7 @@ msgstr "No es pot definir l'atribut de mutex recursiu"
 msgid "Canada"
 msgstr "Canadà"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr ""
@@ -872,7 +847,7 @@ msgstr "Chamorro"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Fitxers de configuració modificats per a %s:"
@@ -1362,12 +1337,12 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "No s'ha pogut iniciar la màquina virtual."
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr ""
@@ -1377,7 +1352,7 @@ msgstr ""
 msgid "Failed to mount %s on %s"
 msgstr "No es pot obrir %s - %s\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, fuzzy, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "No s'ha pogut obtenir la clau pública."
@@ -2019,7 +1994,7 @@ msgstr "Indonesi"
 msgid "Ingush"
 msgstr "Ingúix"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "La instal·lació s'ha avortat tal com heu indicat."
 
@@ -2099,7 +2074,7 @@ msgstr "El component de port '%s' no és vàlid"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr ""
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 #, fuzzy
 msgid "Invalid user name or password."
 msgstr "La contrasenya de la CA no és vàlida."
@@ -3259,7 +3234,7 @@ msgid "Otomian Languages"
 msgstr "Llengües otomang"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, fuzzy, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "El paquet %s no ha superat la comprovació d'integritat. Voleu intentar baixar-lo de nou?"
@@ -3475,8 +3450,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "No s'admet l'anàlisi de cadenes de consulta per a aquesta URL"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ha fallat"
@@ -3507,10 +3482,15 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "No es permet un camí relatiu si existeix una autoritat"
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, fuzzy, c-format
 msgid "Removing repository '%s'"
 msgstr "S'estan afegint recursos"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, c-format
+msgid "Required attribute '%s' is missing."
+msgstr ""
 
 # RE
 #. :QAT:634:
@@ -3757,7 +3737,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Llengües de signes"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, fuzzy, c-format
 msgid "Signature file %s not found"
 msgstr "No s'ha trobat l'entrada."
@@ -4210,7 +4190,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tongà (Illes Tonga)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr ""
@@ -4390,7 +4370,7 @@ msgstr "Estats Units"
 msgid "United States Minor Outlying Islands"
 msgstr "Illes Perifèriques Menors dels EUA"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "L'opció list és desconeguda"
@@ -4407,7 +4387,7 @@ msgstr "L'idioma és desconegut: "
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
@@ -4495,7 +4475,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr ""
 
@@ -4681,11 +4661,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "La comprovació de l'applydeltarpm ha fallat."
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "L'applydeltarpm ha fallat."
 
@@ -4704,8 +4684,7 @@ msgstr "No es pot instal·lar %s"
 msgid "conflicting requests"
 msgstr "La sol·licitud de connexió a:"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "còpia de seguretat creada %s"
@@ -4809,13 +4788,13 @@ msgid "replacement of %s with %s"
 msgstr ""
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, fuzzy, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "L'rpm ha creat %s com a %s però no ha estat possible determinar la diferència"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4824,18 +4803,18 @@ msgstr ""
 "L'rpm ha creat %s com a %s.\n"
 "Aquestes són les primeres 25 línies de diferència:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "Sortida de l'rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, fuzzy, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "L'rpm ha desat %s com a %s però no ha estat possible determinar la diferència"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4861,6 +4840,15 @@ msgstr "desconegut"
 #: ../zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
 msgstr ""
+
+#~ msgid "%s install failed"
+#~ msgstr "S'ha produït un error en instal·lar %s"
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s s'ha instal·lat correctament"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s s'ha suprimit correctament"
 
 #, fuzzy
 #~ msgid "%s provides this dependency, but would change the architecture of the installed item"

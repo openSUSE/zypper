@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
 "PO-Revision-Date: 2008-05-23 17:05+0100\n"
 "Last-Translator: Ladislav Michnovič <lmichnovic@suse.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -35,20 +35,17 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre '%s'."
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 msgid " executed"
 msgstr ""
 
 # %s is either BOOTP or DHCP
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 #, fuzzy
 msgid " execution failed"
 msgstr "Konfigurácia pomocou %s zlyhala."
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr ""
 
@@ -56,20 +53,6 @@ msgstr ""
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s je v konflikte s %s poskytovaným %s"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "Inštalácia %s zlyhala."
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s bol úspešne nainštalovaný"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -81,18 +64,10 @@ msgstr "%s nie je inštalovateľný"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s nahradzuje %s poskytovaný %s"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "Odstránenie %s zlyhalo"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s bol úspešne odstránený"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -121,7 +96,7 @@ msgstr "Acoli"
 msgid "Adangme"
 msgstr "Adangme"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
@@ -130,7 +105,7 @@ msgstr "Pridávam repozitár '%s'"
 msgid "Additional Customer Contract Necessary"
 msgstr ""
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "Ďalší výstup príkazu rpm:"
 
@@ -360,7 +335,7 @@ msgstr "Rakúsko"
 msgid "Austronesian (Other)"
 msgstr "Austronézsky (ostatné)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
@@ -640,7 +615,7 @@ msgstr "Brunei Darussalam"
 msgid "Buginese"
 msgstr "Buginese"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváram medzipamäť repozitára '%s'"
@@ -765,7 +740,7 @@ msgstr "Nemôžem nastaviť rekurzívny mutex"
 msgid "Canada"
 msgstr "Kanada"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "Nemôžem vytvoriť verejný kľúč %s zo zväzku %s do súboru %s"
@@ -857,7 +832,7 @@ msgstr "Chamorro"
 #  progress stage
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Zmenené konfiguračné súbory pre '%s':"
@@ -1341,11 +1316,11 @@ msgstr "Ewe"
 msgid "Ewondo"
 msgstr "Ewondo"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 msgid "Failed to delete key."
 msgstr "Nepodarilo zmazať kľúč."
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "Nepodarilo sa importovať verejný kľúč zo súboru %s: %s"
@@ -1355,7 +1330,7 @@ msgstr "Nepodarilo sa importovať verejný kľúč zo súboru %s: %s"
 msgid "Failed to mount %s on %s"
 msgstr "Nepodarilo sa pripojiť %s na %s."
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "Nepodarilo zmazať verejný kľúč %s: %s"
@@ -1966,7 +1941,7 @@ msgstr "Indonézsky"
 msgid "Ingush"
 msgstr "Ingush"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "Inštalácia bola podľa príkazu zrušená."
 
@@ -2045,7 +2020,7 @@ msgstr "Neplatný port '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "Neplatný regulárny výraz '%s': regcomp vrátil %d"
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "Neplatné meno používateľa alebo heslo."
 
@@ -3159,7 +3134,7 @@ msgid "Otomian Languages"
 msgstr "Otomian Languages"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "Kontrola integrity balíka %s zlyhala. Chcete sa znova pokúsiť o jeho stiahnutie?"
@@ -3358,8 +3333,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "Query string nie je pre túto URL povolený"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 msgid "RPM failed: "
 msgstr "RPM zlyhalo:"
 
@@ -3389,10 +3364,15 @@ msgstr "Rarotongan"
 msgid "Relative path not allowed if authority exists"
 msgstr "Relatívna cesta nie je povolená v prípade, že je zadaná autorita"
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, fuzzy, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "Chýba vyžadovaný súbor: "
 
 # RE
 #. :QAT:634:
@@ -3628,7 +3608,7 @@ msgstr "Sierra Leone"
 msgid "Sign Languages"
 msgstr "Sign Languages"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
 msgstr "Podpis súboru %s nebol nájdený."
@@ -4058,7 +4038,7 @@ msgstr "Tonga (Nyasa)"
 msgid "Tonga (Tonga Islands)"
 msgstr "Tonga (Tongské ostrovy)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "Pokus o importovanie  neexistujúceho kľúča %s do zväzku %s"
@@ -4230,7 +4210,7 @@ msgstr "Spojené Štáty"
 msgid "United States Minor Outlying Islands"
 msgstr "Spojené Štáty Minor Outlying ostrovy"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 #, fuzzy
 msgid "Unknown Distribution"
 msgstr "Neznáma voľba "
@@ -4247,7 +4227,7 @@ msgstr "Neznámy jazyk:"
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "'%s' nie je podporovaná metóda autentifikácie"
@@ -4332,7 +4312,7 @@ msgid "Vai"
 msgstr "Vai"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "Na zadanej URL adrese neboli nájdené platné metadáta"
 
@@ -4512,11 +4492,11 @@ msgstr "Zulu"
 msgid "Zuni"
 msgstr "Zuni"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "Kontrola aplikovania delta rpm zlyhala."
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "Aplikovanie delta rpm zlyhalo."
 
@@ -4534,8 +4514,7 @@ msgstr "Nie je možné nainštalovať oboje %s a %s"
 msgid "conflicting requests"
 msgstr "konfliktiace si požiadavky"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "Bola vytvorená záloha %s"
@@ -4643,13 +4622,13 @@ msgid "replacement of %s with %s"
 msgstr "%s nahradiť %s"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm vytvoril %s as %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4658,18 +4637,18 @@ msgstr ""
 "Balík rpm vytvoril %s as %s.\n"
 "Tu je prvých 25 riadkov rozdielov:\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "Výstup príkazu rpm:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm uložil %s ako %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4695,6 +4674,15 @@ msgstr "neznámy"
 msgid "unsupported"
 msgstr ""
 
+#~ msgid "%s install failed"
+#~ msgstr "Inštalácia %s zlyhala."
+
+#~ msgid "%s installed ok"
+#~ msgstr "%s bol úspešne nainštalovaný"
+
+#~ msgid "%s remove ok"
+#~ msgstr "%s bol úspešne odstránený"
+
 #, fuzzy
 #~ msgid "Download (Metalink curl) initialization failed for '%s'"
 #~ msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
@@ -4712,9 +4700,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
 #~ msgstr "Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre '%s':"
-
-#~ msgid "Required file is missing: "
-#~ msgstr "Chýba vyžadovaný súbor: "
 
 #~ msgid "%s provides this dependency, but would change the architecture of the installed item"
 #~ msgstr "%s poskytuje túto závislosť, ale zmenil by architektúru nainštalovaného systému"

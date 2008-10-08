@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-12 09:04+0200\n"
-"PO-Revision-Date: 2008-09-02 21:12+0900\n"
+"POT-Creation-Date: 2008-09-25 15:48+0200\n"
+"PO-Revision-Date: 2008-09-23 17:53+0900\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,18 +33,15 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 証明書に問題があります。 '%s' について証明機関に問題がないかどうか確認してください。"
 
-#. timestamp
 #: ../zypp/target/TargetImpl.cc:85
 msgid " executed"
 msgstr " 実行"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:106
+#: ../zypp/target/TargetImpl.cc:107
 msgid " execution failed"
 msgstr " 実行失敗"
 
-#. timestamp
-#: ../zypp/target/TargetImpl.cc:190
+#: ../zypp/target/TargetImpl.cc:193
 msgid " execution skipped while aborting"
 msgstr " 中止しているため実行をスキップ"
 
@@ -52,20 +49,6 @@ msgstr " 中止しているため実行をスキップ"
 #, c-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%1$s は %2$s から提供されている %3$s と競合します"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2071
-#, c-format
-msgid "%s install failed"
-msgstr "%s のインストールが失敗しました"
-
-#. %s = filename of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2080
-#, c-format
-msgid "%s installed ok"
-msgstr "%s は問題なくインストールされました"
 
 #: ../zypp/solver/detail/SATResolver.cc:914
 #, c-format
@@ -77,18 +60,10 @@ msgstr "%s はインストールできません"
 msgid "%s obsoletes %s provided by %s"
 msgstr "%1$s は %3$s から提供されている %2$s を古いものとして廃棄します"
 
-#. %s = name of rpm package
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2205
+#: ../zypp/target/rpm/RpmDb.cc:2216
 #, c-format
 msgid "%s remove failed"
 msgstr "%s の削除に失敗しました"
-
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2213
-#, c-format
-msgid "%s remove ok"
-msgstr "%s は問題なく削除されました"
 
 #: ../zypp/solver/detail/SATResolver.cc:969
 #, c-format
@@ -115,7 +90,7 @@ msgstr "アチョリ語"
 msgid "Adangme"
 msgstr "アダングメ語"
 
-#: ../zypp/RepoManager.cc:1076
+#: ../zypp/RepoManager.cc:1181
 #, c-format
 msgid "Adding repository '%s'"
 msgstr "リポジトリ '%s' を追加しています"
@@ -124,7 +99,7 @@ msgstr "リポジトリ '%s' を追加しています"
 msgid "Additional Customer Contract Necessary"
 msgstr "追加の顧客契約が必要"
 
-#: ../zypp/target/rpm/RpmDb.cc:2083 ../zypp/target/rpm/RpmDb.cc:2216
+#: ../zypp/target/rpm/RpmDb.cc:2092 ../zypp/target/rpm/RpmDb.cc:2230
 msgid "Additional rpm output:"
 msgstr "追加の rpm 出力:"
 
@@ -341,7 +316,7 @@ msgstr "オーストリア"
 msgid "Austronesian (Other)"
 msgstr "アウストロネシア語 (その他)"
 
-#: ../zypp/media/MediaCurl.cc:1611
+#: ../zypp/media/MediaCurl.cc:1615
 #, c-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' にアクセスするにはユーザ認証が必要です"
@@ -605,7 +580,7 @@ msgstr "ブルネイダルサラーム国"
 msgid "Buginese"
 msgstr "ブギス語"
 
-#: ../zypp/RepoManager.cc:810
+#: ../zypp/RepoManager.cc:976
 #, c-format
 msgid "Building repository '%s' cache"
 msgstr "リポジトリ '%s' のキャッシュを構築中"
@@ -725,7 +700,7 @@ msgstr "再帰相互排他機能の属性を設定できません"
 msgid "Canada"
 msgstr "カナダ"
 
-#: ../zypp/KeyRing.cc:290
+#: ../zypp/KeyRing.cc:285
 #, c-format
 msgid "Cannot create public key %s from %s keyring to file %s"
 msgstr "鍵リング %2$s から公開鍵 %1$s をファイル %3$s に作成することができません"
@@ -811,7 +786,7 @@ msgstr "チャモロ語"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: ../zypp/target/rpm/RpmDb.cc:1894
+#: ../zypp/target/rpm/RpmDb.cc:1898
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 向けに変更された設定ファイル:"
@@ -1271,11 +1246,11 @@ msgstr "エウェ語"
 msgid "Ewondo"
 msgstr "エウォンド語"
 
-#: ../zypp/KeyRing.cc:588
+#: ../zypp/KeyRing.cc:587
 msgid "Failed to delete key."
 msgstr "キーの削除に失敗しました。"
 
-#: ../zypp/target/rpm/RpmDb.cc:1062
+#: ../zypp/target/rpm/RpmDb.cc:1066
 #, c-format
 msgid "Failed to import public key from file %s: %s"
 msgstr "公開鍵をファイル %s からインポートすることができませんでした: %s"
@@ -1285,7 +1260,7 @@ msgstr "公開鍵をファイル %s からインポートすることができ�
 msgid "Failed to mount %s on %s"
 msgstr "%s を %s にマウントすることができませんでした"
 
-#: ../zypp/target/rpm/RpmDb.cc:1139
+#: ../zypp/target/rpm/RpmDb.cc:1143
 #, c-format
 msgid "Failed to remove public key %s: %s"
 msgstr "公開鍵 %s を削除することができませんでした: %s"
@@ -1870,7 +1845,7 @@ msgstr "インドネシア語"
 msgid "Ingush"
 msgstr "イングーシ語"
 
-#: ../zypp/target/TargetImpl.cc:601 ../zypp/target/TargetImpl.cc:839
+#: ../zypp/target/TargetImpl.cc:603 ../zypp/target/TargetImpl.cc:843
 msgid "Installation has been aborted as directed."
 msgstr "指示通りにインストールが中止されました。"
 
@@ -1949,7 +1924,7 @@ msgstr "無効なポート部分 '%s'"
 msgid "Invalid regular expression '%s': regcomp returned %d"
 msgstr "正規表現 '%s' が正しくありません。 regcomp は %d を返しました"
 
-#: ../zypp/media/MediaCurl.cc:1608
+#: ../zypp/media/MediaCurl.cc:1612
 msgid "Invalid user name or password."
 msgstr "ユーザ名かパスワードが誤っています。"
 
@@ -2993,7 +2968,7 @@ msgid "Otomian Languages"
 msgstr "オトミ語"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: ../zypp/repo/PackageProvider.cc:320
+#: ../zypp/repo/PackageProvider.cc:243
 #, c-format
 msgid "Package %s fails integrity check. Do you want to retry?"
 msgstr "パッケージ %s の整合性チェックに失敗しました。もう一度ダウンロードしますか?"
@@ -3190,8 +3165,8 @@ msgid "Query string parsing not supported for this URL"
 msgstr "この URL に対するクエリ文字列解釈はサポートされていません"
 
 #. TranslatorExplanation after semicolon is error message
-#: ../zypp/target/rpm/RpmDb.cc:888 ../zypp/target/rpm/RpmDb.cc:2074
-#: ../zypp/target/rpm/RpmDb.cc:2208
+#: ../zypp/target/rpm/RpmDb.cc:892 ../zypp/target/rpm/RpmDb.cc:2080
+#: ../zypp/target/rpm/RpmDb.cc:2221
 msgid "RPM failed: "
 msgstr "RPM の失敗: "
 
@@ -3219,10 +3194,15 @@ msgstr "ラロトンガ語"
 msgid "Relative path not allowed if authority exists"
 msgstr "権限部分が存在する場合相対パスは許可されません。 "
 
-#: ../zypp/RepoManager.cc:1178
+#: ../zypp/RepoManager.cc:1311
 #, c-format
 msgid "Removing repository '%s'"
 msgstr "リポジトリ '%s' を削除しています"
+
+#: ../zypp/parser/RepoindexFileReader.cc:128
+#, c-format
+msgid "Required attribute '%s' is missing."
+msgstr "必要な属性 '%s' がありません。"
 
 #. :QAT:634:
 #: ../zypp/CountryCode.cc:406
@@ -3439,7 +3419,7 @@ msgstr "シエラレオーネ"
 msgid "Sign Languages"
 msgstr "手話言語"
 
-#: ../zypp/KeyRing.cc:598
+#: ../zypp/KeyRing.cc:597
 #, c-format
 msgid "Signature file %s not found"
 msgstr "署名ファイル %s が見つかりません。"
@@ -3846,7 +3826,7 @@ msgstr "トンガ語 (ニアサ)"
 msgid "Tonga (Tonga Islands)"
 msgstr "トンガ語 (トンガ諸島)"
 
-#: ../zypp/KeyRing.cc:537
+#: ../zypp/KeyRing.cc:536
 #, c-format
 msgid "Tried to import not existant key %s into keyring %s"
 msgstr "新しい鍵 %s を鍵リング %s にインポートしようとしました"
@@ -4008,7 +3988,7 @@ msgstr "アメリカ合衆国"
 msgid "United States Minor Outlying Islands"
 msgstr "合衆国小離島"
 
-#: ../zypp/target/TargetImpl.cc:879
+#: ../zypp/target/TargetImpl.cc:877
 msgid "Unknown Distribution"
 msgstr "不明なディストリビューション"
 
@@ -4024,7 +4004,7 @@ msgstr "不明な言語: "
 msgid "Unknown support option. Description not available"
 msgstr "不明なサポートオプションです。説明は利用できません"
 
-#: ../zypp/media/MediaUserAuth.cc:105
+#: ../zypp/media/MediaUserAuth.cc:123
 #, c-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "未対応の HTTP 認証方式です '%s'"
@@ -4109,7 +4089,7 @@ msgid "Vai"
 msgstr "ヴァイ語"
 
 #. we will throw this later if no URL checks out fine
-#: ../zypp/RepoManager.cc:623
+#: ../zypp/RepoManager.cc:789
 msgid "Valid metadata not found at specified URL(s)"
 msgstr "指定した URL には有効なメタデータがありません"
 
@@ -4278,11 +4258,11 @@ msgstr "ズールー語"
 msgid "Zuni"
 msgstr "ズーニー語"
 
-#: ../zypp/repo/PackageProvider.cc:239
+#: ../zypp/repo/PackageProvider.cc:194
 msgid "applydeltarpm check failed."
 msgstr "applydeltarpm のチェックに失敗しました。"
 
-#: ../zypp/repo/PackageProvider.cc:253
+#: ../zypp/repo/PackageProvider.cc:208
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm が失敗しました。"
 
@@ -4300,8 +4280,7 @@ msgstr "%s と %s の両方ともインストールすることができませ�
 msgid "conflicting requests"
 msgstr "要求が矛盾しています"
 
-#. timestamp
-#: ../zypp/target/rpm/RpmDb.cc:2358
+#: ../zypp/target/rpm/RpmDb.cc:2374
 #, c-format
 msgid "created backup %s"
 msgstr "バックアップ %s が作成されました"
@@ -4408,13 +4387,13 @@ msgid "replacement of %s with %s"
 msgstr "%s を %s で置き換える"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2063
+#: ../zypp/target/rpm/RpmDb.cc:2067
 #, c-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm は %s を %s として作成しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2065
+#: ../zypp/target/rpm/RpmDb.cc:2069
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4423,18 +4402,18 @@ msgstr ""
 "rpmは %s を %s として作成しました。\n"
 "以下は差異のある最初の25行です。\n"
 
-#: ../zypp/target/rpm/RpmDb.cc:2072 ../zypp/target/rpm/RpmDb.cc:2206
+#: ../zypp/target/rpm/RpmDb.cc:2077 ../zypp/target/rpm/RpmDb.cc:2218
 msgid "rpm output:"
 msgstr "rpm 出力:"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2058
+#: ../zypp/target/rpm/RpmDb.cc:2062
 #, c-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm は %s を %s として保存しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: ../zypp/target/rpm/RpmDb.cc:2060
+#: ../zypp/target/rpm/RpmDb.cc:2064
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4459,17 +4438,11 @@ msgstr "不明"
 msgid "unsupported"
 msgstr "未対応"
 
-#~ msgid "Download (Metalink curl) initialization failed for '%s'"
-#~ msgstr "'%s' のダウンロード (メタリンク curl) の初期化に失敗しました"
+#~ msgid "%s install failed"
+#~ msgstr "%s のインストールが失敗しました"
 
-#~ msgid ""
-#~ "Download (metalink curl) error for '%s':\n"
-#~ "Error code: %s\n"
-#~ "Error message: %s\n"
-#~ msgstr ""
-#~ "'%s' のダウンロード (メタリンク curl) がエラー終了しました:\n"
-#~ "エラーコード: %s\n"
-#~ "エラーメッセージ: %s\n"
+#~ msgid "%s installed ok"
+#~ msgstr "%s は問題なくインストールされました"
 
-#~ msgid "Error occurred while setting download (metalink curl) options for '%s':"
-#~ msgstr "'%s' のダウンロード (メタリンク curl) オプションを設定する際にエラーが発生しました:"
+#~ msgid "%s remove ok"
+#~ msgstr "%s は問題なく削除されました"
