@@ -39,6 +39,8 @@ using namespace zypp::sat;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+#warning CHECK FOR MEMLEAK DUE TO MISSING dataiterator_free
+
   ///////////////////////////////////////////////////////////////////
   //
   //  CLASS NAME : PoolQuery::Impl
@@ -254,7 +256,7 @@ attremptycheckend:
           invokeOnEach(ai->second.begin(), ai->second.end(), EmptyFilter(), MyInserter(joined));
           string s = createRegex(joined);
           _rcattrs.insert(pair<sat::SolvAttr, string>(ai->first, s));
-          
+
           // switch to regex for multiple strings
           if (joined.size() > 1)
             _cflags = (_cflags & ~SEARCH_STRINGMASK) | SEARCH_REGEX;
@@ -438,10 +440,10 @@ attremptycheckend:
         _cflags);
     }
 
-    if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit->regex_err != 0)
+    if ((_cflags & SEARCH_STRINGMASK) == SEARCH_REGEX && _rdit->matcher.error != 0)
       ZYPP_THROW(Exception(str::form(
           _("Invalid regular expression '%s': regcomp returned %d"),
-          _rcstrings.c_str(), _rdit->regex_err)));
+          _rcstrings.c_str(), _rdit->matcher.error)));
 
     PoolQuery::const_iterator it(_rdit, this);
     it.increment();
@@ -613,7 +615,7 @@ attremptycheckend:
 
   bool PoolQueryIterator::matchSolvable()
   {
-    _sid = base().get()->solvid;
+    _sid = base().get()->entry;
 
     bool new_solvable = true;
     bool matches = !_do_matching;
@@ -701,7 +703,7 @@ attremptycheckend:
               }
               else
                 regex_p = _regex.get();
-
+#warning wrap matcher an use it
               matches = ::dataiterator_match(base().get(), _flags, regex_p);
             }
             else
@@ -742,7 +744,7 @@ attremptycheckend:
         // trying to reach a matching attribute or the next solvable
         // thus resulting to a problem in the equal() method
         ++base_reference();
-        new_solvable = base().get()->solvid != _sid;
+        new_solvable = base().get()->entry != _sid;
       }
       // no more attributes in this repo, return
       else
@@ -797,7 +799,7 @@ attremptycheckend:
 
 
   void PoolQuery::setEdition(const Edition & edition, const Rel & op)
-  { 
+  {
     _pimpl->_edition = edition;
     _pimpl->_op = op;
   }
@@ -893,7 +895,7 @@ attremptycheckend:
   { return _pimpl->_flags & SEARCH_STRINGMASK; }
   bool PoolQuery::matchFiles() const
   { return (_pimpl->_flags & SEARCH_STRINGMASK) == SEARCH_FILES; }
-  
+
   bool PoolQuery::matchWord() const
   { return _pimpl->_match_word; }
 
@@ -1197,7 +1199,7 @@ attremptycheckend:
 
     for_( it, kinds().begin(), kinds().end() )
     {
-      str << PoolQueryAttr::kindAttr.asString() << ": " 
+      str << PoolQueryAttr::kindAttr.asString() << ": "
           << it->idStr() << delim ;
     }
 
@@ -1212,7 +1214,7 @@ attremptycheckend:
         str << PoolQueryAttr::stringTypeAttr.asString() << ": exact" << delim;
         break;
       case SEARCH_SUBSTRING:
-        str << PoolQueryAttr::stringTypeAttr.asString() 
+        str << PoolQueryAttr::stringTypeAttr.asString()
             << ": substring" << delim;
         break;
       case SEARCH_GLOB:

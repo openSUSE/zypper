@@ -430,16 +430,6 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-void wsoft()
-{
-  ResPool pool( ResPool::instance() );
-  for_( it, pool.begin(), pool.end() )
-  {
-    if ( it->status().isSoftLocked() )
-      INT << "SL: " << *it << endl;
-  }
-}
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -610,79 +600,15 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-   if ( 1 )
+  sat::SolvAttr mattr( "repository:timestamp" );
+
+  sat::LookupAttr query( mattr );
+  MIL << "---" << mattr << "---" << query.size() << endl;
+  for_( it, query.begin(), query.end() )
   {
-    PoolItem pi ( getPi<Pattern>("apparmor") );
-    MIL << pi << endl;
-    if ( pi )
-    {
-      Pattern::constPtr p( pi->asKind<Pattern>() );
-      MIL << p << endl;
-      if ( p )
-      {
-        p->contents();
-      }
-    }
+    MIL << *it << endl;
   }
 
-  if ( 0 )
-  {
-    CapabilitySet caps;
-    caps.insert( Capability("pattern:multimedia") );
-    caps.insert( Capability("pattern:gnome_basis") );
-    caps.insert( Capability("pattern:imaging") );
-    caps.insert( Capability("pattern:office") );
-    caps.insert( Capability("pattern:non_oss") );
-    caps.insert( Capability("pattern:non_oss_java") );
-    caps.insert( Capability("pattern:gnome_admin") );
-    caps.insert( Capability("pattern:gnome_internet") );
-    caps.insert( Capability("xsane") );
-    caps.insert( Capability("pattern:gnome_utilities") );
-    caps.insert( Capability("pattern:games") );
-    caps.insert( Capability("pattern:xgl") );
-    INT << caps << endl;
-
-    sat::WhatProvides prv1( Capability("pattern:multimedia") );
-    DBG << (prv1.begin()==prv1.begin()) << endl;
-
-    sat::WhatProvides prv( caps );
-    DBG << (prv.begin()==prv.begin()) << endl;
-//     MIL << prv.empty() << endl;
-//     MIL << prv.size() << endl;
-//     for_( it, prv.begin(), prv.end() )
-//     {
-//       INT << *it << endl;
-//     }
-//     MIL << ( prv.begin() == prv.end() ) << endl;
-// //     MIL << ( prv.begin() == prv.begin() ) << endl;
-//     MIL << ( prv.end() == prv.end() ) << endl;
-
-    sat::WhatProvides::const_iterator i1( prv.begin() );
-    sat::WhatProvides::const_iterator i2( prv.begin() );
-    sat::WhatProvides::const_iterator i3( i2 );
-    DBG << (i1==i1) << endl;
-    DBG << (i1==i2) << endl;
-    DBG << (i1==i3) << endl;
-    DBG << (i2==i2) << endl;
-    DBG << (i1==i3) << endl;
-    DBG << (i3==i3) << endl;
-
-     dumpRange( SEC, make_filter_begin( filter::byKind<Package>(), prv ),
-                     make_filter_end( filter::byKind<Package>(), prv ) ) << endl;
-
-  }
-
-  if ( 1 )
-  {
-    PoolItem pi ( getPi<Pattern>("gnome") );
-    MIL << pi << endl;
-    Pattern::constPtr p( pi->asKind<Pattern>() );
-    if ( p )
-    {
-      p->depends();
-      MIL << p->depends() << endl;
-    }
-  }
 
   //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

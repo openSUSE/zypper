@@ -36,7 +36,7 @@ namespace zypp
     {
       MIL << "creating deltarpm from repo " << repo.alias() << ", id " << extraid << endl;
       ::Dataiterator di;
-      ::dataiterator_init(&di, repo.get(), extraid, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+      ::dataiterator_init(&di, repo.get(), extraid, 0, 0, 0);
 
       string locdir;
       string locname;
@@ -91,7 +91,7 @@ namespace zypp
           }
           case DELTA_DOWNLOADSIZE:
           {
-            loc.setDownloadSize(di.kv.num);
+            loc.setDownloadSize(ByteCount(di.kv.num, ByteCount::K));
             break;
           }
           case DELTA_CHECKSUM:
@@ -128,7 +128,7 @@ namespace zypp
         ERR << "the extra does not exist in the repo" << endl;
 
       //! \todo FIXME here + in sat tools
-      loc.setLocation(locdir + "/" + locname + "-" + locevr + "." + locsuffix); 
+      loc.setLocation(locdir + "/" + locname + "-" + locevr + "." + locsuffix);
       setLocation(loc);
       base.setSequenceinfo(seqname + "-" + seqevr + "-" + seqnum);
       setBaseversion(base);

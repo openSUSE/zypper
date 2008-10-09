@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  9 17:37:18 CEST 2008 - ma@suse.de
+
+- Adapt to satsolvers 'big solv data change'.
+- revision 11294
+
+-------------------------------------------------------------------
 Thu Oct  9 17:18:18 CEST 2008 - schubi@suse.de
 
 - Taking the right solution actions for locked resolvables (bnc #400840)

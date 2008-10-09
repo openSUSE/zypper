@@ -58,10 +58,11 @@ namespace zypp
 	return _repo->name;
     }
 
+#warning FIX to iterator
     zypp::Date Repository::generatedTimestamp() const
     {
         ::Dataiterator di;
-        ::dataiterator_init(&di, get(), 0, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+        ::dataiterator_init(&di, get(), REPOENTRY_META, REPOSITORY_TIMESTAMP, 0, 0);
         if (::dataiterator_step(&di))
         {
             do
@@ -78,26 +79,26 @@ namespace zypp
             while (::dataiterator_step(&di));
       }
       else
-      {    
+      {
           if ( isSystemRepo() )
             return 0;
           ERR << "the attribute generated timestamp does not exist in the repo" << endl;
       }
-        
-      return Date();        
+
+      return Date();
     }
-    
+
 
     zypp::Date Repository::suggestedExpirationTimestamp() const
     {
         ::Dataiterator di;
-        ::dataiterator_init(&di, get(), 0, 0, 0, SEARCH_EXTRA | SEARCH_NO_STORAGE_SOLVABLE);
+        ::dataiterator_init(&di, get(), REPOENTRY_META, REPOSITORY_EXPIRE, 0, 0);
         Date generated = generatedTimestamp();
         // do not calculate over a missing generated
         // timestamp
         if ( generated == Date() )
             return Date();
-        
+
         if (::dataiterator_step(&di))
         {
             do
@@ -114,18 +115,18 @@ namespace zypp
             while (::dataiterator_step(&di));
       }
       else
-      {     
+      {
         if ( isSystemRepo() )
             return 0;
         ERR << "the attribute suggested expiration timestamp does not exist in the repo" << endl;
       }
-        
+
       return Date();
     }
 
     Repository::Keywords Repository::keywords() const
     { return Keywords(sat::SolvAttr::repositoryKeywords); }
-    
+
     Repository::Products Repository::products() const
     { return Products(sat::SolvAttr::repositoryProducts); }
 
@@ -134,21 +135,21 @@ namespace zypp
         // system repo is not mirrored
         if ( isSystemRepo() )
             return false;
-        
+
         Date suggested = suggestedExpirationTimestamp();
-        
+
         // if no data, don't suggest
-        if ( suggested == Date() ) 
+        if ( suggested == Date() )
             return false;
 
         return suggestedExpirationTimestamp() < Date::now();
     }
-    
+
     bool Repository::providesUpdatesFor( const std::string &key ) const
     {
         return false;
     }
-    
+
     bool Repository::isUpdateRepo() const
     {
         return false;
