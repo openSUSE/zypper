@@ -404,9 +404,9 @@ namespace zypp
       closedir( dp );
 
       if ( ::rmdir( dir.c_str() ) < 0 )
-        return _Log_Result( errno );
+        return errno;
 
-      return _Log_Result( 0 );
+      return 0;
     }
     ///////////////////////////////////////////////////////////////////
     int recursive_rmdir( const Pathname & path )
@@ -422,7 +422,7 @@ namespace zypp
         return _Log_Result( ENOTDIR );
       }
 
-      return recursive_rmdir_1( path );
+      return _Log_Result( recursive_rmdir_1( path ) );
     }
 
     ///////////////////////////////////////////////////////////////////
