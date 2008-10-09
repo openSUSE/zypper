@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  9 17:18:18 CEST 2008 - schubi@suse.de
+
+- Taking the right solution actions for locked resolvables (bnc #400840)
+- revision 11289 
+
+-------------------------------------------------------------------
 Thu Oct  9 13:52:03 CEST 2008 - ma@suse.de
 
 - Add required copy-ctor and assignment operator to WhatProvides.
