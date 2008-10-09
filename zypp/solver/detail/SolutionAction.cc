@@ -132,7 +132,8 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
-	    /*FALLTHRU*/
+    	    ret = _item.status().setTransact (false, ResStatus::USER);
+	    break;
 	case INSTALL:
 	    if (_item.status().isToBeUninstalled())
 		ret = _item.status().setTransact (false, ResStatus::USER);

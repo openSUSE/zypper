@@ -1041,7 +1041,7 @@ SATResolver::problems ()
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
-					problemSolution->addSingleAction (poolItem, REMOVE);
+					problemSolution->addSingleAction (poolItem, KEEP);
 					string description = str::form (_("do not install %s"), solvable2str(pool, s.get()));
 					MIL << description << endl;
 					problemSolution->addDescription (description);
@@ -1062,8 +1062,8 @@ SATResolver::problems ()
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
-					problemSolution->addSingleAction (poolItem, INSTALL);
-					string description = str::form (_("do not forbid installation of %s"), solvable2str(pool, s.get()));
+					problemSolution->addSingleAction (poolItem, KEEP);
+					string description = str::form (_("do not forbid installation of %s"), itemToString(poolItem, false).c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
