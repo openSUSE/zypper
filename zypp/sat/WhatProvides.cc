@@ -164,6 +164,22 @@ namespace zypp
       return dumpRange( str << "(" << obj.size() << ")", obj.begin(), obj.end() );
     }
 
+    ///////////////////////////////////////////////////////////////////
+    namespace detail
+    { /////////////////////////////////////////////////////////////////
+
+      std::ostream & operator<<( std::ostream & str, const WhatProvidesIterator & obj )
+      {
+        str << str::form( "[%5u]", obj._offset );
+        str << str::form( "<%p(%p)>", obj.base_reference(), &obj.base_reference() );
+        str << str::form( "<%p(%p)>", obj._baseRef, (obj._baseRef ? *obj._baseRef : 0) );
+        return str;
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } //namespace detail
+    ///////////////////////////////////////////////////////////////////
+
     /////////////////////////////////////////////////////////////////
   } // namespace sat
   ///////////////////////////////////////////////////////////////////

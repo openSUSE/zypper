@@ -151,6 +151,7 @@ namespace zypp
         , const Solvable               // Reference
         >
     {
+      friend std::ostream & operator<<( std::ostream & str, const WhatProvidesIterator & obj );
       public:
         WhatProvidesIterator()
         : iterator_adaptor_( 0 ), _baseRef( 0 ), _offset( 0 )
@@ -173,7 +174,7 @@ namespace zypp
         /** Copy-ctor required to keep _baseRef adjusted. */
         WhatProvidesIterator( const WhatProvidesIterator & rhs )
         : iterator_adaptor_( rhs.base_reference() )
-        , _baseRef( base_reference() ? &base_reference() : 0 )
+        , _baseRef( base_reference() ? &base_reference() : rhs._baseRef )
         , _offset( rhs._offset )
         {}
 
@@ -183,7 +184,7 @@ namespace zypp
           if ( this != &rhs ) // no self assign
           {
             base_reference() = rhs.base_reference();
-            _baseRef = ( base_reference() ? &base_reference() : 0 );
+            _baseRef = ( base_reference() ? &base_reference() : rhs._baseRef );
             _offset = rhs._offset;
           }
           return *this;

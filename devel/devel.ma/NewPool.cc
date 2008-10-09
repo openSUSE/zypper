@@ -430,6 +430,16 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
+void wsoft()
+{
+  ResPool pool( ResPool::instance() );
+  for_( it, pool.begin(), pool.end() )
+  {
+    if ( it->status().isSoftLocked() )
+      INT << "SL: " << *it << endl;
+  }
+}
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -600,6 +610,21 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
+   if ( 1 )
+  {
+    PoolItem pi ( getPi<Pattern>("apparmor") );
+    MIL << pi << endl;
+    if ( pi )
+    {
+      Pattern::constPtr p( pi->asKind<Pattern>() );
+      MIL << p << endl;
+      if ( p )
+      {
+        p->contents();
+      }
+    }
+  }
+
   if ( 0 )
   {
     CapabilitySet caps;
@@ -678,11 +703,13 @@ try {
     }
   }
 
+#if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );
   solve();
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+#endif
 
   //////////////////////////////////////////////////////////////////
   INT << "===[END]============================================" << endl << endl;

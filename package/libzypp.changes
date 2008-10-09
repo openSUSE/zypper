@@ -1,9 +1,9 @@
 -------------------------------------------------------------------
-Thu Oct  9 00:58:37 CEST 2008 - ma@suse.de
+Thu Oct  9 13:52:03 CEST 2008 - ma@suse.de
 
 - Add required copy-ctor and assignment operator to WhatProvides.
   (bnc #433087)
-- revision 11270
+- revision 11276
 
 -------------------------------------------------------------------
 Wed Oct  8 16:24:25 CEST 2008 - jkupec@suse.cz
