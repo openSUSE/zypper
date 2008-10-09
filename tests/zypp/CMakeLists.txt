@@ -26,7 +26,6 @@ ADD_TESTS(
   RepoManager
   RepoStatus
   ResKind
-  Resolvable
   Target
   Url
   Vendor
