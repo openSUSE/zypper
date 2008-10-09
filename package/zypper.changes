@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct  9 17:24:34 CEST 2008 - jkupec@suse.cz
+
+- added 'productline' attribute to product info XML (bnc #433415)
+- deprecated 'type' replaced by 'isbase' boolean attribute in
+  product info XML
+- r11291
+
+-------------------------------------------------------------------
 Tue Oct  7 17:04:26 CEST 2008 - jkupec@suse.cz
 
 - new translations added
