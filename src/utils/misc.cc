@@ -337,12 +337,13 @@ string asXML(const Product & p, bool is_installed)
        " release=\"" << p.edition().release() << "\""
        " epoch=\"" << p.edition().epoch() << "\""
        " arch=\"" << p.arch() << "\""
+       " productline=\"" << p.productLine() << "\""
        " registerrelease=\"" << xml_encode(p.registerRelease()) << "\""
        " vendor=\"" << xml_encode(p.vendor()) << "\""
        " summary=\"" << xml_encode(p.summary()) << "\""
        " shortname=\"" << xml_encode(p.shortName()) << "\""
        " flavor=\"" << xml_encode(p.flavor()) << "\""
-       " type=\"" << xml_encode(p.type()) << "\""
+       " isbase=\"" << (p.isTargetDistribution() ? 1 : 0) << "\""
        " repo=\"" << xml_encode(p.repoInfo().alias()) << "\""
        " installed=\"" << (is_installed ? 1 : 0) << "\"";
   if (p.description().empty())
