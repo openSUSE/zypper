@@ -30,7 +30,8 @@ BOOST_AUTO_TEST_CASE(resolvable_test)
     {
         if ( isKind<Pattern>(pitem->resolvable()) )
         {
-            BOOST_CHECK( asKind<Pattern>(pitem->resolvable())->contents().size() > 0 );
+            BOOST_CHECK( ! asKind<Pattern>(pitem->resolvable())->contents().empty() > 0 );
+            MIL << asKind<Pattern>(pitem->resolvable()) << endl;
             pattern_count++;
         }        
     }
