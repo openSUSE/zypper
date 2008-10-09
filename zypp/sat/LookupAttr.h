@@ -70,8 +70,8 @@ namespace zypp
      */
     class LookupAttr
     {
-     public:
-       typedef unsigned size_type;
+      public:
+        typedef unsigned size_type;
 
       public:
         /** Default ctor finds nothing. */
@@ -225,7 +225,7 @@ namespace zypp
         /** The current \ref Repository. */
         Repository inRepo() const;
 
-        /** The current \ref Solvabele. */
+        /** The current \ref Solvable. */
         Solvable inSolvable() const;
 
         /** The current \ref SolvAttr. */

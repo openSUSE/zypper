@@ -24,12 +24,16 @@ namespace zypp
 namespace sat
 { /////////////////////////////////////////////////////////////////
 
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : SolvAttr
   //
   /** Solvable attribute keys.
+   *
+   * Attributes associated with individual solvables,
+   * or with the repository as a whole.
+   *
+   * \see \ref LookupAttr
    */
   class SolvAttr : public IdStringType<SolvAttr>
   {
@@ -144,7 +148,6 @@ namespace sat
       static const SolvAttr repositoryUpdates;
       static const SolvAttr repositoryKeywords;
       static const SolvAttr repositoryProducts;
-
       //@}
 
       //@}
