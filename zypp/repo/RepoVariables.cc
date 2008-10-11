@@ -55,12 +55,12 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
                         "$basearch",
                         basearch.asString() );
 
-  // only replace $distver if the target is
+  // only replace $releasever if the target is
   // initialized
   if ( getZYpp()->getTarget() )
   {
       newvalue = str::gsub( newvalue,
-                            "$distver",
+                            "$releasever",
                             getZYpp()->target()->distributionVersion() );
   }
   
