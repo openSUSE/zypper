@@ -912,7 +912,7 @@ namespace zypp
     { return rpmdb2solvAttr( "register.release", _root ); }
 
     std::string TargetImpl::distributionVersion() const
-    { return rpmdb2solvAttr( "distver", _root ); }
+    { return rpmdb2solvAttr( "releasever", _root ); }
 
     ///////////////////////////////////////////////////////////////////
 
