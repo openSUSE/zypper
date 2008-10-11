@@ -94,3 +94,51 @@ BOOST_AUTO_TEST_CASE(test_escape)
 
   BOOST_CHECK_EQUAL( escaped, "bad\\|ass\\\\\\|worse" );
 }
+
+BOOST_AUTO_TEST_CASE(convertions)
+{
+    BOOST_CHECK_EQUAL(str::numstring(42), "42");
+    BOOST_CHECK_EQUAL(str::numstring(42, 4), "  42");
+    BOOST_CHECK_EQUAL(str::numstring(42, -4), "42  ");
+
+    BOOST_CHECK_EQUAL(str::hexstring(42), "0x0000002a");
+    BOOST_CHECK_EQUAL(str::hexstring(42, 4), "0x2a");
+    BOOST_CHECK_EQUAL(str::hexstring(42, -4), "0x2a");
+
+    BOOST_CHECK_EQUAL(str::octstring(42), "00052");
+    //BOOST_CHECK_EQUAL(str::octstring(42, 4), "0052");
+    //BOOST_CHECK_EQUAL(str::octstring(42, -4), "052");
+
+    BOOST_CHECK_EQUAL(str::strtonum<int>("42"), 42);
+
+    BOOST_CHECK_EQUAL(str::toLower("This IS A TeST"), "this is a test");
+    BOOST_CHECK_EQUAL(str::toUpper("This IS A TeST"), "THIS IS A TEST");
+    BOOST_CHECK_EQUAL(str::compareCI("TeST", "test"), 0);
+}
+
+BOOST_AUTO_TEST_CASE(operations)
+{
+    //BOOST_CHECK_EQUAL(str::ltrim("  foo "), "foo");
+    //BOOST_CHECK_EQUAL(str::rtrim(" f ffo  "), "f ffo");
+    BOOST_CHECK_EQUAL(str::trim(" f ffo  "), "f ffo");
+    BOOST_CHECK_EQUAL(str::trim("  f ffo  "), "f ffo");
+
+    // strip
+    {
+        string tostrip("Oh! la la");
+        str::stripFirstWord(tostrip, false);        
+        BOOST_CHECK_EQUAL(tostrip, "la la");
+    }
+    // strip
+    {
+        string tostrip("Oh! la la");
+        str::stripLastWord(tostrip, false);        
+        BOOST_CHECK_EQUAL(tostrip, "Oh! la");
+    }
+
+    BOOST_CHECK( ! str::hasPrefix("foolala", "oo"));
+    BOOST_CHECK( str::hasPrefix("foolala", "foo"));
+
+
+}
+
