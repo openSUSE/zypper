@@ -46,6 +46,30 @@ BOOST_AUTO_TEST_CASE(replace_text)
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/?arch=$arch")).asCompleteString(),
 		    "http://site.org/update/?arch=i686");
+
+  // no target activated yet, there should be no replacement of
+  // $distver
+  BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$distver/?arch=$arch")).asCompleteString(),
+		    "http://site.org/update/$distver/?arch=i686");
+    
+  // now we initialize the target
+  filesystem::TmpDir tmp;
+    
+  ZYpp::Ptr z = getZYpp();
+
+  // create the products.d directory
+  assert_dir(tmp.path() / "/etc/products.d" );
+  BOOST_CHECK( copy( Pathname(TESTS_SRC_DIR) / "/zypp/data/Target/product.prod",  tmp.path() / "/etc/products.d/product.prod") == 0 );
+  // make it the base product
+  BOOST_CHECK( symlink(tmp.path() / "/etc/products.d/product.prod", tmp.path() / "/etc/products.d/baseproduct" ) == 0 );
+
+
+  z->initializeTarget( tmp.path() );
+  // target activated, there should be replacement of
+  // $distver
+  BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$distver/?arch=$arch")).asCompleteString(),
+		    "http://site.org/update/10/?arch=i686");
+
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

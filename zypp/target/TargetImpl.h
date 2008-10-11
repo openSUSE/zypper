@@ -146,6 +146,9 @@ namespace zypp
 
       /** \copydoc Target::targetDistributionRelease()*/
       std::string targetDistributionRelease() const;
+      
+      /** \copydoc Target::distributionVersion()*/
+      std::string distributionVersion() const;
 
     protected:
       /** Path to the target */

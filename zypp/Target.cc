@@ -106,6 +106,9 @@ namespace zypp
   std::string Target::anonymousUniqueId() const
   { return _pimpl->anonymousUniqueId(); }
 
+  std::string Target::distributionVersion() const
+  { return _pimpl->distributionVersion(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

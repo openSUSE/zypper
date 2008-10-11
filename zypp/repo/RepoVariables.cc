@@ -13,6 +13,7 @@
 #include "zypp/base/String.h"
 #include "zypp/repo/RepoException.h"
 #include "zypp/ZConfig.h"
+#include "zypp/ZYppFactory.h"
 #include "RepoVariables.h"
 
 using namespace std;
@@ -53,6 +54,16 @@ std::string RepoVariablesStringReplacer::operator()( const std::string &value ) 
   newvalue = str::gsub( newvalue,
                         "$basearch",
                         basearch.asString() );
+
+  // only replace $distver if the target is
+  // initialized
+  if ( getZYpp()->getTarget() )
+  {
+      newvalue = str::gsub( newvalue,
+                            "$distver",
+                            getZYpp()->target()->distributionVersion() );
+  }
+  
   return newvalue;
 }
 

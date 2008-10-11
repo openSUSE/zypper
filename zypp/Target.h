@@ -125,6 +125,14 @@ namespace zypp
     std::string targetDistributionRelease() const;
     //@}
 
+    /** This is \c version attribute of the installed base product.
+     * For example http://download.opensue.org/update/11.0
+     * The 11.0 corresponds to the base product version.
+     */
+    std::string distributionVersion() const;
+    //@}
+    
+
     /**
      * anonymous unique id
      *
