@@ -1,9 +1,9 @@
-solvable_name: ma
-repo: factory-nonoss
-repo: zypp_svn
+solvable_name: tool
+repo: vbox
+repo: zyppsvn
 
 query_string: ma*
-repo: factory
+repo: opensuse
 type: patch
 match_type: regex
 require_all: on

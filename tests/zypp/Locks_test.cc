@@ -4,11 +4,11 @@
 #include <boost/test/auto_unit_test.hpp>
 #include <list>
 
-#include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/PoolQueryUtil.tcc"
 #include "zypp/TmpPath.h"
 #include "zypp/Locks.h"
+#include "TestSetup.h"
 
 #define BOOST_TEST_MODULE Locks
 
@@ -26,24 +26,14 @@ bool isLocked( const sat::Solvable & solvable )
   return false;
 }
 
-static void init_pool()
-{
-  Pathname dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/PoolQuery";
-
-  ZYpp::Ptr z = getZYpp();
-  ZConfig::instance().setSystemArchitecture(Arch("i586"));
-
-  RepoInfo i1; i1.setAlias("factory");
-  sat::Pool::instance().addRepoSolv(dir / "factory.solv", i1);
-  RepoInfo i2; i2.setAlias("@System");
-  sat::Pool::instance().addRepoSolv(dir / "@System.solv", i2);
-}
-
 BOOST_AUTO_TEST_CASE(pool_query_init)
 {
-  init_pool();
+  TestSetup test( Arch_x86_64 );
+  //test.loadTarget(); // initialize and load target
+  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS:zypp:svn-11.1", "@System" );
 }
+
 
 /////////////////////////////////////////////////////////////////////////////
 //  0xx basic queries

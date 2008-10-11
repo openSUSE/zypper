@@ -5,9 +5,10 @@
 #include <satsolver/solvable.h>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Easy.h"
-#include "zypp/ZYppFactory.h"
 #include "zypp/Pattern.h"
 #include "zypp/sat/Solvable.h"
+#include "TestSetup.h"
+
 
 #define BOOST_TEST_MODULE Solvable
 
@@ -18,23 +19,17 @@ using namespace zypp;
 using namespace boost::unit_test;
 
 
-static void init_pool()
+BOOST_AUTO_TEST_CASE(test_init)
 {
-  Pathname dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/PoolQuery";
-
-  ZYpp::Ptr z = getZYpp();
-  ZConfig::instance().setSystemArchitecture(Arch("i586"));
-
-  RepoInfo i1; i1.setAlias("factory");
-  sat::Pool::instance().addRepoSolv(dir / "factory.solv", i1);
+  TestSetup test( Arch_x86_64 );
+  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
 }
+
 
 BOOST_AUTO_TEST_CASE(attributes)
 {
-    init_pool();
     MIL << sat::Pool::instance();
-    Repository r = sat::Pool::instance().reposFind("factory");
+    Repository r = sat::Pool::instance().reposFind("opensuse");
     
     int c = 0;
     
@@ -74,7 +69,7 @@ BOOST_AUTO_TEST_CASE(attributes)
             BOOST_CHECK_EQUAL(p->vendor(), "SUSE LINUX Products GmbH, Nuernberg, Germany");
             BOOST_CHECK_EQUAL(p->category(), "Base Technologies");
             BOOST_CHECK_EQUAL(p->summary(), "Novell AppArmor");
-            BOOST_CHECK_EQUAL(p->icon(), "yast-software");
+            BOOST_CHECK_EQUAL(p->icon(), "pattern-apparmor");
             BOOST_CHECK_EQUAL(p->userVisible(), true);
             BOOST_CHECK_EQUAL(p->isDefault(), false);
         }

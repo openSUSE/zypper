@@ -4,10 +4,10 @@
 #include <boost/test/auto_unit_test.hpp>
 #include <list>
 
-#include "zypp/ZYppFactory.h"
+//#include "zypp/ZYppFactory.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/PoolQueryUtil.tcc"
-#include "zypp/TmpPath.h"
+#include "TestSetup.h"
 
 #define BOOST_TEST_MODULE PoolQuery
 
@@ -33,6 +33,7 @@ struct PrintAndCount
   unsigned _count;
 };
 
+/*
 static void init_pool()
 {
   Pathname dir(TESTS_SRC_DIR);
@@ -50,16 +51,21 @@ static void init_pool()
   RepoInfo i4; i4.setAlias("@System");
   sat::Pool::instance().addRepoSolv(dir / "@System.solv", i4);
 }
+*/
 
 BOOST_AUTO_TEST_CASE(pool_query_init)
 {
-  init_pool();
+  TestSetup test( Arch_x86_64 );
+  //test.loadTarget(); // initialize and load target
+  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS:zypp:svn-11.1", "zyppsvn" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1", "vbox" );
 }
 
 #if 0
-BOOST_AUTO_TEST_CASE(pool_query_exp)
+BOOST_AUTO_TEST_CASE(pool_query_experiment)
 {
-  cout << "****exp****"  << endl;
+  cout << "****experiment****"  << endl;
 
   PoolQuery q;
   q.addString("zypper");
@@ -90,12 +96,11 @@ BOOST_AUTO_TEST_CASE(pool_query_000)
 {
   cout << "****000****"  << endl;
   PoolQuery q;
-  //cout << q.size() << endl;
-  BOOST_CHECK(q.size() == 11451);
-  /**!\todo should be 11453 probably according to:
-   * dumpsolv factory.solv factory-nonoss.solv zypp_svn.solv \@System.solv | \
-   * grep '^name:.*\(noarch\|i386\|i586\|i686\|src\)$' | wc -l
-   */
+  cout << q.size() << endl;
+  BOOST_CHECK(q.size() == 3811);
+
+  /* dumpsolv repo1.solv repo2.solv repo3.solv | \
+     grep '^name:.*\(noarch\|x86_64\|i386\|i586\|i686\|src\)$' | wc -l */
 }
 
 // default query + one search string
@@ -107,7 +112,7 @@ BOOST_AUTO_TEST_CASE(pool_query_001)
   PoolQuery q;
   q.addString("zypper");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 16);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 10);
 }
 
 // default query + one attribute + one string
@@ -122,14 +127,14 @@ BOOST_AUTO_TEST_CASE(pool_query_002)
   q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 5);
 
   cout << endl;
 
   PoolQuery q1;
   q1.addAttribute(sat::SolvAttr::name, "zypper");
 
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 6);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 5);
 }
 
 // kind filter
@@ -153,7 +158,7 @@ BOOST_AUTO_TEST_CASE(pool_query_004)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchExact();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 3);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
 
   PoolQuery q1;
   q1.addString("zypp");
@@ -173,7 +178,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchGlob();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 
   cout << "****005.2****"  << endl;
 
@@ -182,7 +187,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchGlob();
 
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 28);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 26);
 
   cout << "****005.3****"  << endl;
 
@@ -191,7 +196,7 @@ BOOST_AUTO_TEST_CASE(pool_query_005)
   q2.addString("zypp");
   q2.addAttribute(sat::SolvAttr::name);
 
-  BOOST_CHECK(q2.size() == 28);
+  BOOST_CHECK(q2.size() == 26);
 }
 
 // use regex
@@ -205,7 +210,7 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchRegex();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 
   cout << "****006.2***"  << endl;
 
@@ -214,7 +219,7 @@ BOOST_AUTO_TEST_CASE(pool_query_006)
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchRegex();
 
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 21);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 8);
 
   cout << "****006.3***"  << endl;
 
@@ -236,10 +241,10 @@ BOOST_AUTO_TEST_CASE(pool_query_007)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchWord();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 }
 
-
+/*
 // match by installed status (basically by system vs. repo)
 BOOST_AUTO_TEST_CASE(pool_query_050)
 {
@@ -262,7 +267,7 @@ BOOST_AUTO_TEST_CASE(pool_query_050)
 
   BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 5);
 }
-
+*/
 
 /////////////////////////////////////////////////////////////////////////////
 //  1xx multiple attribute queries
@@ -273,25 +278,25 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
 {
   cout << "****100****"  << endl;
   PoolQuery q;
-  /* This string is found sometimes only in solvable names (e.g. novell-lum),
-     sometimes only in summary (e.g. yast2-casa-ats) and sometimes only
-     in descriptions (e.g. beagle-quickfinder).  novell-lum doesn't exist
-     in our test solv file, but let's ignore this.  I didn't find a string
-     with the same characteristics giving fewer matches :-/  */
-  q.addString("novell");
+  /* This string is found sometimes only in only in summary (e.g. pgcalc)
+     and sometimes only in description (e.g. bc, lftp). We don't have
+     any package with 'revers' only in package name, but let's ignore this.
+     I didn't find a string with the same characteristics giving fewer matches
+     :-/ */  
+  q.addString("revers");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 74);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 5);
 
   cout << endl;
 
   PoolQuery q1;
-  q1.addString("mp3");
+  q1.addString("sat");
   q1.addAttribute(sat::SolvAttr::name);
 
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 7);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 15);
 }
 
 
@@ -301,23 +306,23 @@ BOOST_AUTO_TEST_CASE(pool_query_101)
   cout << "****101****"  << endl;
 
   PoolQuery q;
-  q.addString("ZYpp");
+  q.addString("RELAX");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
   q.addAttribute(sat::SolvAttr::description);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 30);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 7);
 
   cout << endl;
 
   PoolQuery q2;
-  q2.addString("ZYpp");
+  q2.addString("RELAX");
   q2.addAttribute(sat::SolvAttr::name);
   q2.addAttribute(sat::SolvAttr::summary);
   q2.addAttribute(sat::SolvAttr::description);
   q2.setCaseSensitive();
 
-  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 2);
+  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 4);
 }
 
 
@@ -331,7 +336,7 @@ BOOST_AUTO_TEST_CASE(pool_query_102)
   q.addAttribute(sat::SolvAttr::summary);
   q.setMatchGlob();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 35);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 23);
 }
 
 
@@ -340,21 +345,20 @@ BOOST_AUTO_TEST_CASE(pool_query_103)
 {
   cout << "****103.1****"  << endl;
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "novell");
-  q.addAttribute(sat::SolvAttr::summary, "novell");
+  q.addAttribute(sat::SolvAttr::name, "rest");
+  q.addAttribute(sat::SolvAttr::summary, "rest");
 
-  //std::for_each(q.begin(), q.end(), cb);
-  BOOST_CHECK(q.size() == 42);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
 
   cout << "****103.2****"  << endl;
 
   PoolQuery q1;
-  q1.addString("novell");
+  q1.addString("rest");
   q1.addAttribute(sat::SolvAttr::name);
   q1.addAttribute(sat::SolvAttr::summary);
 
-//  std::for_each(q1.begin(), q1.end(), cb);
-  BOOST_CHECK(q1.size() == 42);
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 14);
+//  BOOST_CHECK(q1.size() == 42);
 
   cout << endl;
 }
@@ -364,10 +368,10 @@ BOOST_AUTO_TEST_CASE(pool_query_104)
 {
   cout << "****104****"  << endl;
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "novell");
+  q.addAttribute(sat::SolvAttr::name, "zypper");
   q.addAttribute(sat::SolvAttr::summary, "package management");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 22);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
 }
 
 // multiple attributes, different search strings (one string per attrbute), regex matching
@@ -375,11 +379,11 @@ BOOST_AUTO_TEST_CASE(pool_query_105)
 {
   cout << "****105****"  << endl;
   PoolQuery q;
-  q.addAttribute(sat::SolvAttr::name, "no.ell");
+  q.addAttribute(sat::SolvAttr::name, "zy..er");
   q.addAttribute(sat::SolvAttr::summary, "package management");
   q.setMatchRegex();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 22);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -392,9 +396,9 @@ BOOST_AUTO_TEST_CASE(pool_query_300)
   cout << "****300****"  << endl;
   PoolQuery q;
   q.addAttribute(sat::SolvAttr::name, "zypper");
-  q.addRepo("zypp_svn");
+  q.addRepo("zyppsvn");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 3);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 4);
 }
 
 // default query + one repo
@@ -402,9 +406,9 @@ BOOST_AUTO_TEST_CASE(pool_query_301)
 {
   cout << "****301****"  << endl;
   PoolQuery q;
-  q.addRepo("zypp_svn");
+  q.addRepo("zyppsvn");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 21);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 42);
 }
 
 // multiple repos + one attribute
@@ -412,12 +416,12 @@ BOOST_AUTO_TEST_CASE(pool_query_302)
 {
   cout << "****302****"  << endl;
   PoolQuery q;
-  q.addString("ma");
+  q.addString("zypper");
   q.addAttribute(sat::SolvAttr::name);
-  q.addRepo("factory-nonoss");
-  q.addRepo("zypp_svn");
+  q.addRepo("opensuse");
+  q.addRepo("zyppsvn");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 5);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -445,7 +449,7 @@ BOOST_AUTO_TEST_CASE(pool_query_401)
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchGlob();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 4);
 }
 
 
@@ -459,46 +463,46 @@ BOOST_AUTO_TEST_CASE(pool_query_500)
   cout << "****500.1****"  << endl;
   PoolQuery q;
   q.addString("zypper");
-  q.addString("apt");
+  q.addString("yast2-packager");
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchExact();
   // creates: ^(apt|zypper)$
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 8);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 
   cout << "****500.2****"  << endl;
-  q.addString("*zy?p");
+  q.addString("*bzypp");
   q.setMatchGlob();
-  // creates: ^(.*zy.p|apt|zypper)$
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 16);
+  // creates: ^(.*zy.p|yast.*package.*|.*bzypp)$
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
   
   cout << "****500.3****"  << endl;
   PoolQuery q1;
   q1.addString("^libsm[a-z]*[0-9]$");
-  q1.addAttribute(sat::SolvAttr::name, "os.libs$");
+  q1.addAttribute(sat::SolvAttr::name, "bzypp$");
   q1.addKind(ResKind::package);
   q1.setMatchRegex();
-  // creates: (^libsm[a-z]*[0-9]$|os.libs$)
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 3);
+  // creates: (^libsm[a-z]*[0-9]$|bzypp$)
+  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 5);
 
   cout << "****500.4****"  << endl;
   PoolQuery q2;
-  q2.addString("thunder");
+  q2.addString("Thunder");
   q2.addAttribute(sat::SolvAttr::name, "sun");
   q2.addKind(ResKind::package);
-  q2.addRepo("factory");
+  q2.addRepo("opensuse");
   q2.setCaseSensitive();
-  // creates: (sun|thunder)
-  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 2);
+  // creates: (sun|Thunder)
+  BOOST_CHECK(std::for_each(q2.begin(), q2.end(), PrintAndCount())._count == 3);
 
   cout << "****500.5****"  << endl;
   PoolQuery q3;
-  q3.addString("zypp");
+  q3.addString("audio");
   q3.addAttribute(sat::SolvAttr::name, "zip");
   q3.addKind(ResKind::package);
-  q3.addRepo("factory");
+  q3.addRepo("opensuse");
   q3.setMatchWord();
-  // creates: \b(zip|zypp)\b
-  BOOST_CHECK(std::for_each(q3.begin(), q3.end(), PrintAndCount())._count == 4);
+  // creates: \b(zip|audio)\b
+  BOOST_CHECK(std::for_each(q3.begin(), q3.end(), PrintAndCount())._count == 3);
 }
 
 // multiple strings, multiple attributes, same strings
@@ -506,12 +510,12 @@ BOOST_AUTO_TEST_CASE(pool_query_501)
 {
   cout << "****501****"  << endl;
   PoolQuery q;
-  q.addString("thunder");
+  q.addString("Thunder");
   q.addString("storm");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::description);
   q.addKind(ResKind::package);
-  q.addRepo("factory");
+  q.addRepo("opensuse");
 
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
 }
@@ -525,9 +529,9 @@ BOOST_AUTO_TEST_CASE(pool_query_502)
   q.addAttribute(sat::SolvAttr::name, "thunder");
   q.addAttribute(sat::SolvAttr::description, "storm");
   q.addKind(ResKind::package);
-  q.addRepo("factory");
+  q.addRepo("opensuse");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 14);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 13);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -540,24 +544,24 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
   PoolQuery q;
   q.addAttribute(sat::SolvAttr::name, "zypper");
   q.setMatchExact();
-  q.setEdition(Edition("0.10.5"), Rel::GT);
+  q.setEdition(Edition("0.12.5"), Rel::GT);
 
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 4);
   
   cout << "****600.2****"  << endl;
-  q.setEdition(Edition("0.10.5"), Rel::LT);
+  q.setEdition(Edition("0.12.5"), Rel::LT);
 
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 0);
 
   cout << "****600.3****"  << endl;
-  q.setEdition(Edition("0.10.5"), Rel::LE);
+  q.setEdition(Edition("0.12.5"), Rel::LE);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
 
   cout << "****600.4****"  << endl;
-  q.setEdition(Edition("0.10.5-5"), Rel::LT);
+  q.setEdition(Edition("0.12.5-5"), Rel::LT);
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 2);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
 }
 
 //! \todo FIXME this segfaults currently - one addString() + (version or kind or installed status condition)
@@ -592,21 +596,23 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   Pathname testfile(TESTS_SRC_DIR);
     testfile += "/zypp/data/PoolQuery/savedqueries";
   cout << "****recovery****"  << endl;
+
   std::vector<PoolQuery> queries;
   std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.begin());
   readPoolQueriesFromFile(testfile,ii);
-  BOOST_REQUIRE_MESSAGE(queries.size()==2,"Bad count of read queries.");
-  BOOST_CHECK(queries[0].size() == 8);
+  BOOST_REQUIRE_MESSAGE(queries.size() == 2, "Bad count of read queries.");
+  BOOST_CHECK(queries[0].size() == 10);
+
   PoolQuery q;
   q.addString("ma*");
-  q.addRepo("factory");
+  q.addRepo("opensuse");
   q.addKind(ResKind::patch);
   q.setMatchRegex();
   q.setRequireAll();
   q.setCaseSensitive();
   q.setUninstalledOnly();
   q.setEdition(Edition("0.8.3"),Rel::NE);
-  BOOST_CHECK(q==queries[1]);
+  BOOST_CHECK(q == queries[1]);
 }
 
 #endif
@@ -618,13 +624,14 @@ BOOST_AUTO_TEST_CASE(pool_query_serialize)
   q.addAttribute(sat::SolvAttr::name);
   q.addRepo("factory-nonoss");
   q.addRepo("zypp_svn");
+
   PoolQuery q2;
   q2.addAttribute(sat::SolvAttr::name,"ma");
   q2.addRepo("factory-nonoss");
   q2.addRepo("zypp_svn");
 
 
-//  Pathname testfile(TESTS_SRC_DIR);
+  //  Pathname testfile(TESTS_SRC_DIR);
   //  testfile += "/zypp/data/PoolQuery/testqueries";
   filesystem::TmpFile testfile;
   cout << "****serialize****"  << endl;
@@ -636,11 +643,10 @@ BOOST_AUTO_TEST_CASE(pool_query_serialize)
 
   std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.end());
   readPoolQueriesFromFile(testfile,ii);
-  BOOST_REQUIRE_MESSAGE(queries.size()==4,"Bad count of writed/readed queries.");
+  BOOST_REQUIRE_MESSAGE(queries.size()==4,"Bad count of written/readed queries.");
   BOOST_CHECK(queries[2] == queries[0]);
   BOOST_CHECK(queries[3] == queries[1]);
 }
-
 
 // test matching
 BOOST_AUTO_TEST_CASE(pool_query_equal)
