@@ -14,6 +14,8 @@
 #include "zypp/sat/Pool.h"
 #include "KeyRingTestReceiver.h"
 
+#include "TestSetup.h"
+
 using boost::unit_test::test_case;
 
 using namespace std;
@@ -33,29 +35,13 @@ BOOST_AUTO_TEST_CASE(extensions)
 //  rec.answerImportKey(true);
   Pathname repodir(TEST_DIR );
 
-  TmpDir tmpCachePath;
-  RepoManagerOptions opts( RepoManagerOptions::makeTestSetup( tmpCachePath ) ) ;
-  RepoManager rm(opts);
-
-  RepoInfo updates;
-  updates.setAlias("updates");
-  updates.addBaseUrl(Url(string("dir:") + repodir.absolutename().asString() ));
-
-  try
-  {
-    rm.buildCache(updates);
-    rm.loadFromCache(updates);
-  }
-  catch (const Exception & e)
-  {
-    BOOST_FAIL( string("Problem getting the data: ")+ e.msg()) ;
-  }
   sat::Pool pool(sat::Pool::instance());
+
+  TestSetup test( Arch_x86_64 );
+  test.loadRepo(Url(string("dir:") + repodir.absolutename().asString()), "updates");
 
   Repository repo = pool.reposFind("updates");
   
   BOOST_CHECK_EQUAL( repo.generatedTimestamp(), Date(1222083131) );
   BOOST_CHECK_EQUAL( repo.suggestedExpirationTimestamp(), Date(1222083131 + 3600) );  
-
-  rm.cleanCache(updates);
 }
