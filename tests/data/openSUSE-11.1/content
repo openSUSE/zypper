@@ -1,6 +1,7 @@
 CONTENTSTYLE 11
 NAME openSUSE
 LABEL The openSUSE Distribution
+VENDOR SUSE LINUX Products GmbH, Nuernberg, Germany
 RELNOTESURL http://www.suse.com/relnotes/i386/openSUSE/11.0.42/release-notes-openSUSE.rpm
 DESCRDIR suse/setup/descr
 REFERENCES openSUSE-release EQ 11.1
