@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Sun Oct 12 13:55:51 CEST 2008 - jkupec@suse.cz
+
+- handle ftp response 530 (login failed) like http 403
+  (bnc #433537)
+- revision 11305
+
+-------------------------------------------------------------------
 Thu Oct  9 17:37:18 CEST 2008 - ma@suse.de
 
 - Adapt to satsolvers 'big solv data change'.
