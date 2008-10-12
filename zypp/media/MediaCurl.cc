@@ -994,6 +994,10 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       case CURLE_FTP_ACCESS_DENIED:
         err_file_not_found = true;
         break;
+      case CURLE_LOGIN_DENIED:
+        ZYPP_THROW(
+            MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
+        break;
       case CURLE_HTTP_RETURNED_ERROR:
         {
           long httpReturnCode = 0;
@@ -1004,7 +1008,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
           {
             string msg = "HTTP response: " +
                           str::numstring( httpReturnCode );
-            if ( httpReturnCode == 401 )
+            if ( httpReturnCode == 401 ) // authorization required
             {
               std::string auth_hint = getAuthHint();
 
@@ -1016,12 +1020,12 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
               ));
             }
             else
-            if ( httpReturnCode == 403)
+            if ( httpReturnCode == 403) // access denied
             {
                ZYPP_THROW(MediaForbiddenException(url));
             }
             else
-            if ( httpReturnCode == 404)
+            if ( httpReturnCode == 404) // not found
             {
                err_file_not_found = true;
                break;
@@ -1215,6 +1219,10 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
         case CURLE_URL_MALFORMAT:
         case CURLE_URL_MALFORMAT_USER:
           err = " Bad URL";
+        case CURLE_LOGIN_DENIED:
+          ZYPP_THROW(
+              MediaUnauthorizedException(url, "Login failed.", _curlError, ""));
+          break;
         case CURLE_HTTP_RETURNED_ERROR:
           {
             long httpReturnCode = 0;
