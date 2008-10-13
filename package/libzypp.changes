@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 13 19:12:40 CEST 2008 - jkupec@suse.cz
+
+- repository probing: check for other types of repo even on
+  MediaException, throw only if all fail (bnc #335906)
+- revision 11332
+
+-------------------------------------------------------------------
 Mon Oct 13 14:16:25 CEST 2008 - ma@suse.de
 
 - Adapt to satsolver changes.
