@@ -96,8 +96,18 @@ namespace zypp
           }
           case DELTA_CHECKSUM:
           {
-            loc.setChecksum(CheckSum::sha1(di.kv.str));
-            break;
+            const char * s = ::repodata_chk2str( di.data, di.key->type, (const unsigned char*)di.kv.str );
+            if ( s )
+            {
+              CheckSum val;
+              switch ( di.key->type )
+              {
+                case REPOKEY_TYPE_MD5:    val = CheckSum::md5( s ); break;
+                case REPOKEY_TYPE_SHA1:   val = CheckSum::sha1( s ); break;
+                case REPOKEY_TYPE_SHA256: val = CheckSum::sha256( s ); break;
+              }
+              loc.setChecksum( val );
+            }
           }
           case DELTA_BASE_EVR:
           {

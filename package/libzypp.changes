@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 13 13:28:48 CEST 2008 - ma@suse.de
+
+- Fix reading delta rpm checksum from solv file.
+- revision 11313
+
+-------------------------------------------------------------------
 Mon Oct 13 12:12:39 CEST 2008 - ma@suse.de
 
 - Fix package-manager script to properly quote arguments. (bnc #30903)
