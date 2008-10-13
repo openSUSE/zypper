@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 13 11:03:04 CEST 2008 - schubi@suse.de
+
+- regarding orphaned resolvables
+- removed old distupgrade algorithm
+- revision 11307 
+
+-------------------------------------------------------------------
 Sun Oct 12 13:55:51 CEST 2008 - jkupec@suse.cz
 
 - handle ftp response 530 (login failed) like http 403
