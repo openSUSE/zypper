@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(pool_query_init)
   TestSetup test( Arch_x86_64 );
   //test.loadTarget(); // initialize and load target
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS:zypp:svn-11.1", "zyppsvn" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
   test.loadRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1", "vbox" );
 }
 
