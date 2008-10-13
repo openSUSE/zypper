@@ -45,7 +45,7 @@ namespace zypp
     }
     else
     {
-      char buf[256] = {NULL};
+      char buf[32] = {NULL};
       WAR << "Not allowed to parse '" << curlrcFile
           << "': dir/file owner: " << h_info.owner() << "/" << c_info.owner()
           << ", process uid: " << getuid()
