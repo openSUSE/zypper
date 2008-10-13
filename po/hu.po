@@ -1,104 +1,105 @@
-# translation of zypper.po to Brazilian Portuguese
+# translation of zypper.po to Hungarian
+# translation of zypper.po to
+# translation of zypper.hu.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-# Gilberto Medeiros Nakamura <gilberto.nakamura@gmail.com>, 2007.
-# Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2007.
+# Kalman Kemenczy <kkemenczy@novell.com>, 2007, 2008.
+# Ervin Novak <enovak@novell.com>, 2008.
+# Novák Ervin <enovak@novell.com>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-30 13:54+0200\n"
-"PO-Revision-Date: 2008-10-10 23:22-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2008-10-12 21:21+0200\n"
+"Last-Translator:  <enovak@novell.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: BRAZIL\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Aceitando um arquivo não assinado '%s'."
+msgstr "A(z) %s aláírás nélküli fájl elfogadása."
 
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Aceitando um arquivo não assinado '%s' do repositório '%s'."
+msgstr "A(z) %s aláírás nélküli fájl elfogadása a(z) '%s' telepítési forrásból."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
 #, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "O arquivo '%s' não está assinado, continuar?"
+msgstr "A(z) %s fájl nincs aláírva, folytatja?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "O arquivo '%s' do repositório '%s' não está assinado, continuar?"
+msgstr "A(z) %s fájl a(z) '%s' telepítési forrásból nincs aláírva, folytatja?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Aceitando o arquivo '%s' assinado com uma chave desconhecida '%s'."
+msgstr "Az ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Aceitando o arquivo '%s' do repositório '%s' assinado com uma chave desconhecida '%s'."
+msgstr "Az ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása a(z) %s telepítési forrásból."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
 #, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "O arquivo '%s' é assinado com uma chave desconhecida '%s'. Continuar?"
+msgstr "A(z) %s fájl ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "O arquivo '%s' do repositório '%s' é assinado com uma chave desconhecida '%s'. Continuar?"
+msgstr "A(z) %s fájl a(z) %s telepítési forrásból ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
-msgstr "Confiar automaticamente na seguinte chave:"
+msgstr "A következő kulcs automatikus elfogadása:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr "Chave de assinatura de novo repositório ou pacote recebida:"
+msgstr "Új telepítési forrás- vagy csomagaláíró kulcs érkezett:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
 msgid "Key ID: %s"
-msgstr "ID da chave: %s"
+msgstr "Kulcs azonosító: %s"
 
 #: ../src/callbacks/keyring.h:132
 #, c-format
 msgid "Key Name: %s"
-msgstr "Nome da chave: %s"
+msgstr "Kulcs neve: %s"
 
 #: ../src/callbacks/keyring.h:133
 #, c-format
 msgid "Key Fingerprint: %s"
-msgstr "Impressão digital da chave: %s"
+msgstr "Kulcs ujjlenyomata: %s"
 
 #: ../src/callbacks/keyring.h:135
 #, c-format
 msgid "Repository: %s"
-msgstr "Repositório: %s"
+msgstr "Telepítési forrás: %s"
 
 # power-off message
 #: ../src/callbacks/keyring.h:149
 msgid "Do you want to trust the key?"
-msgstr "Deseja confiar na chave?"
+msgstr "Megbízik a kulcsban?"
 
 #. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
 #. translate to whatever is appropriate for your language
@@ -107,97 +108,93 @@ msgstr "Deseja confiar na chave?"
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:161
 msgid "n/t/i"
-msgstr "n/c/i"
+msgstr "n/d/i"
 
 #. translators: the same as n/t/i, but without 'i'
 #: ../src/callbacks/keyring.h:164
 msgid "n/t"
-msgstr "n/c"
+msgstr "n/d"
 
 #. translators: help text for the 'n' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:166
 msgid "Don't trust the key."
-msgstr "Não confiar na chave."
+msgstr "Nem megbízható"
 
 #. translators: help text for the 't' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:168
 msgid "Trust the key temporarily."
-msgstr "Confiar na chave temporariamente."
+msgstr "Bízzon meg ideiglenesen a kulcsban."
 
 #. translators: help text for the 'i' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:171
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Confiar na chave e importá-la para o chaveiro de confiança?"
+msgstr "Bízzon meg a kulcsban és importálja a megbízható kulcstartóba."
 
 #: ../src/callbacks/keyring.h:205
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorando a falha na verificação da assinatura do arquivo '%s'."
+msgstr "%s fájl sikertelen aláírás-ellenőrzésének figyelmen kívül hagyása!"
 
 #: ../src/callbacks/keyring.h:208
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorando a falha na verificação da assinatura do arquivo '%s' do repositório '%s'!"
+msgstr "%s fájl (telepítési forrás: %s) sikertelen aláírás-ellenőrzésének figyelmen kívül hagyása!"
 
 #: ../src/callbacks/keyring.h:213
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Verifique novamente se isto não é causado por alterações maliciosas no arquivos!"
+msgstr "Ellenőrizze kétszer is, hogy ezt nem a fájl ártó szándékú módosítása okozza!"
 
 #: ../src/callbacks/keyring.h:223
 #, c-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Falha na verificação da assinatura do arquivo '%s'."
+msgstr "Az aláírás ellenőrzése meghiúsult a fájlhoz: %s."
 
 #: ../src/callbacks/keyring.h:226
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Falha na verificação da assinatura do arquivo '%s' do repositório '%s'."
+msgstr "Az aláírás ellenőrzése meghiúsult a fájlhoz: %s a telepítési forrásból: %s."
 
 #: ../src/callbacks/keyring.h:231
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Aviso: Isto pode ter sido causado por uma alteração maliciosa no arquivo!\n"
-"Continuar é arriscado! Continuar mesmo assim?"
+"Figyelem: ezt a fájl ártó szándékú módosítása is okozhatta!\n"
+"A folytatás kockázatos. Mindenképp folytatja?"
 
 #: ../src/callbacks/keyring.h:255
 #, c-format
 msgid "No digest for file %s."
-msgstr "Nenhum digest para o arquivo %s."
+msgstr "Nincs kivonat a(z) %s fájlhoz."
 
-# internal key used: Ok
-#: ../src/callbacks/keyring.h:255
-#: ../src/callbacks/keyring.h:265
-#: ../src/callbacks/keyring.h:287
-#: ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:1033
-#: ../src/solve-commit.cc:1057
+#: ../src/callbacks/keyring.h:255 ../src/callbacks/keyring.h:265
+#: ../src/callbacks/keyring.h:287 ../src/callbacks/rpm.h:61
+#: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
 msgid "Continue?"
-msgstr "Continuar?"
+msgstr "Folytatja?"
 
 #: ../src/callbacks/keyring.h:264
 #, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Digest desconhecido %s para o arquivo %s."
+msgstr "Ismeretlen %s kivonat a(z) %s fájlhoz."
 
 #: ../src/callbacks/keyring.h:279
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Ignorando a falha na verificação do digest para %s (esperava-se %s, obteve %s)."
+msgstr "%s meghiúsult kivonat-ellenőrzésének figyelmen kívül hagyása (várt: %s, megtalálható: %s)."
 
 #: ../src/callbacks/keyring.h:286
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Falha na verificação digest para %s. Esperava-se %s, obteve %s."
+msgstr "A kivonat-ellenőrzés meghiúsult ehhez: %s. A várt %s helyett a kapott érték: %s."
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "A seguinte consulta trava alguns dos objetos que você quer destravar:"
+msgstr "A következő lekérdezés zárolja a feloldani kívánt objektumok némelyikét:"
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
-msgstr "A seguinte consulta não trava nada:"
+msgstr "A következő lekérdezés nem zárol semmit:"
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -206,550 +203,488 @@ msgstr "A seguinte consulta não trava nada:"
 #: ../src/callbacks/media.h:84
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Por favor insira a mídia [%s] #%d e digite 's' para continuar ou 'n' para cancelar a operação."
+msgstr "Tegye be a(z) [%s] # %d adathordozót és nyomja meg a folytatáshoz az 'i', a megszakításhoz az 'n' billentyűt."
 
-#: ../src/callbacks/media.h:228
-#: ../src/callbacks/media.h:235
+#: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
 msgid "User Name"
-msgstr "Nome do Usuário"
+msgstr "Felhasználói név"
 
 # password dialog title
 #: ../src/callbacks/media.h:242
 msgid "Password"
-msgstr "Senha"
+msgstr "Jelszó"
 
 #: ../src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Obtendo o delta"
+msgstr "Különbség lekérdezése"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: ../src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Aplicando o delta"
+msgstr "Különbség hozzáadása"
 
 #: ../src/callbacks/repo.h:115
 msgid "Retrieving patch rpm"
-msgstr "Obtendo o rpm de correção"
+msgstr "RPM javítás letöltése"
 
 #: ../src/callbacks/repo.h:152
 #, c-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "Obtendo %s %s-%s.%s"
+msgstr "%s %s-%s.%s letöltése"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/callbacks/repo.h:167
 #, c-format
 msgid "(%s unpacked)"
-msgstr "(%s descomprimido)"
+msgstr "(%s kicsomagolva)"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: ../src/callbacks/rpm.h:75
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Executando: %s (%s, %s)"
+msgstr "Futtatás: %s  (%s, %s)"
 
-#: ../src/callbacks/rpm.h:139
-#: ../src/callbacks/rpm.h:148
-#: ../src/callbacks/rpm.h:156
-#: ../src/callbacks/rpm.h:163
+#: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
+#: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
 msgid "Reading installed packages"
-msgstr "Lendo os pacotes instalados"
+msgstr "Telepített csomagok beolvasása"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: ../src/callbacks/rpm.h:183
 #, c-format
 msgid "Removing %s-%s"
-msgstr "Removendo %s-%s"
+msgstr "Eltávolítás: %s-%s"
 
 #: ../src/callbacks/rpm.h:202
 #, c-format
 msgid "Removal of %s failed:"
-msgstr "Falha na remoção de %s:"
+msgstr "%s eltávolítása meghiúsult:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
 #. ! \todo use format
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps)"
-msgstr "(com --nodeps)"
+msgstr "(--nodeps használatával)"
 
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps --force)"
-msgstr "(com --nodeps --force)"
+msgstr "(--nodeps --force használatával)"
 
+# modules/inst_target_part.ycp:676
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
 #: ../src/callbacks/rpm.h:246
 #, c-format
 msgid "Installing: %s-%s"
-msgstr "Instalando: %s-%s"
+msgstr "%s-%s telepítése"
 
 #: ../src/callbacks/rpm.h:272
 #, c-format
 msgid "Installation of %s-%s failed:"
-msgstr "Falha na instalação de %s-%s:"
+msgstr "A(z) %s-%s telepítése meghiúsult:"
 
 #: ../src/Command.cc:172
 #, c-format
 msgid "Unknown command '%s'"
-msgstr "Comando desconhecido '%s'"
+msgstr "Ismeretlen parancs: '%s'"
 
 #: ../src/info.cc:37
 msgid "Name: "
-msgstr "Nome: "
+msgstr "Név: "
 
 #: ../src/info.cc:38
 msgid "Version: "
-msgstr "Versão: "
+msgstr "Verzió: "
 
 #: ../src/info.cc:39
 msgid "Arch: "
-msgstr "Arquitetura: "
+msgstr "Architektúra: "
 
 #: ../src/info.cc:40
 msgid "Vendor: "
-msgstr "Fornecedor:"
+msgstr "Gyártó: "
 
 #: ../src/info.cc:45
 msgid "Summary: "
-msgstr "Resumo: "
+msgstr "Összegzés: "
 
 #: ../src/info.cc:46
 msgid "Description: "
-msgstr "Descrição: "
+msgstr "Leírás: "
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #. ! \todo use a separate string for each kind so that it is translatable.
 #: ../src/info.cc:79
 #, c-format
 msgid "%s '%s' not found."
-msgstr "%s '%s' não foi encontrado."
+msgstr "A(z) %s '%s' nem található."
 
 #: ../src/info.cc:91
 #, c-format
 msgid "Information for %s %s:"
-msgstr "Informação para %s %s:"
+msgstr "%s %s információ:"
 
 #: ../src/info.cc:108
 #, c-format
 msgid "Info for type '%s' not implemented."
-msgstr "A informação para o tipo '%s' ainda não foi implementada."
+msgstr "A '%s' típushoz nincs információ."
 
 #: ../src/info.cc:114
 msgid "None"
-msgstr "Nenhum"
+msgstr "Nincs"
 
 #: ../src/info.cc:115
 msgid "Requires"
-msgstr "Requer"
+msgstr "Igényli"
 
 #: ../src/info.cc:116
 msgid "Provides"
-msgstr "Fornece"
+msgstr "Biztosítja"
 
 #: ../src/info.cc:117
 msgid "Conflicts"
-msgstr "Conflita"
+msgstr "Ütközik"
 
 #: ../src/info.cc:118
 msgid "Obsoletes"
-msgstr "Torna Obsoleto"
+msgstr "Elavulttá teszi"
 
 #. translators: package requirements table header
 #: ../src/info.cc:120
 msgid "Requirement"
-msgstr "Requisito"
+msgstr "Követelmény"
 
 #. translators: package requirements table header
 #: ../src/info.cc:122
 msgid "Provided By"
-msgstr "Fornecido Por"
+msgstr "Biztosítja"
 
 #. translators: package conflicts table header
 #: ../src/info.cc:124
 msgid "Conflict"
-msgstr "Conflita"
+msgstr "Ütközés"
 
-#: ../src/info.cc:152
-#: ../src/info.cc:274
-#: ../src/info.cc:345
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Catalog: "
-msgstr "Catálogo: "
+msgstr "Katalógus: "
 
-#: ../src/info.cc:152
-#: ../src/info.cc:274
-#: ../src/info.cc:345
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Repository: "
-msgstr "Repositório: "
+msgstr "Telepítési forrás: "
 
-#: ../src/info.cc:157
-#: ../src/info.cc:279
+#: ../src/info.cc:157 ../src/info.cc:279
 msgid "Installed: "
-msgstr "Instalados: "
+msgstr "Telepítés ideje: "
 
 #. enabled?
 #. autorefresh?
 #. enabled?
 #. autorefresh?
-#: ../src/info.cc:157
-#: ../src/info.cc:214
-#: ../src/info.cc:220
-#: ../src/info.cc:222
-#: ../src/info.cc:279
-#: ../src/repos.cc:712
-#: ../src/repos.cc:714
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:1315
-#: ../src/repos.cc:1991
-#: ../src/repos.cc:1993
-#: ../src/solve-commit.cc:855
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
 msgid "Yes"
-msgstr "Sim"
+msgstr "Igen"
 
-#: ../src/info.cc:157
-#: ../src/info.cc:214
-#: ../src/info.cc:220
-#: ../src/info.cc:222
-#: ../src/info.cc:279
-#: ../src/repos.cc:712
-#: ../src/repos.cc:714
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:1315
-#: ../src/repos.cc:1991
-#: ../src/repos.cc:1993
-#: ../src/solve-commit.cc:855
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
 msgid "No"
-msgstr "Não"
+msgstr "Nem"
 
 #. ! \todo fix this - arch?
-#: ../src/info.cc:160
-#: ../src/info.cc:209
+#: ../src/info.cc:160 ../src/info.cc:209
 msgid "Status: "
-msgstr "Status: "
+msgstr "Állapot: "
 
 #: ../src/info.cc:164
 msgid "up-to-date"
-msgstr "atualizado"
+msgstr "naprakész"
 
 #: ../src/info.cc:168
 #, c-format
 msgid "out-of-date (version %s installed)"
-msgstr "desatualizado (versão %s instalada)"
+msgstr "elavult (%s verziószám telepítve)"
 
+# modules/inst_target_part.ycp:676
 #: ../src/info.cc:173
 msgid "not installed"
-msgstr "não instalado"
+msgstr "nincs telepítve"
 
 #: ../src/info.cc:175
 msgid "Installed Size: "
-msgstr "Tamanho Após a Instalação: "
+msgstr "Telepített méret: "
 
 #: ../src/info.cc:212
 msgid "Category: "
-msgstr "Categoria: "
+msgstr "Kategória: "
 
 #: ../src/info.cc:213
 msgid "Created On: "
-msgstr "Criado Em: "
+msgstr "Létrehozás dátuma: "
 
 #: ../src/info.cc:214
 msgid "Reboot Required: "
-msgstr "Reinicialização Necessária: "
+msgstr "Hideg újraindítás szükséges: "
 
 #: ../src/info.cc:217
 msgid "Package Manager Restart Required"
-msgstr "Reinício do Gerenciador de Pacotes Necessário"
+msgstr "A csomagkezelő újraindítása szükséges"
 
 #: ../src/info.cc:219
 msgid "Restart Required: "
-msgstr "Reinicialização Necessária:"
+msgstr "Újraindítás szükséges: "
 
 #: ../src/info.cc:222
 msgid "Interactive: "
-msgstr "Interativo: "
+msgstr "Interaktív: "
 
 #: ../src/info.cc:226
 msgid "Provides:"
-msgstr "Fornece:"
+msgstr "Biztosítja:"
 
 #: ../src/info.cc:235
 msgid "Requires:"
-msgstr "Requer:"
+msgstr "Igényli:"
 
-#: ../src/info.cc:246
-#: ../src/search.cc:323
+#: ../src/info.cc:246 ../src/search.cc:323
 msgid "Recommended"
-msgstr "Recomendado"
+msgstr "Ajánlott"
 
-#: ../src/info.cc:248
-#: ../src/search.cc:325
+#: ../src/info.cc:248 ../src/search.cc:325
 msgid "Suggested"
-msgstr "Sugerido"
+msgstr "Javasolt"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: ../src/info.cc:289
-#: ../src/search.cc:38
-#: ../src/search.cc:54
-#: ../src/search.cc:214
-#: ../src/search.cc:385
-#: ../src/search.cc:441
-#: ../src/search.cc:533
-#: ../src/update.cc:381
+#: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
+#: ../src/search.cc:533 ../src/update.cc:381
 msgid "S"
 msgstr "S"
 
 #. translators: name (general header)
-#: ../src/info.cc:289
-#: ../src/locks.cc:39
-#: ../src/repos.cc:632
-#: ../src/repos.cc:681
-#: ../src/repos.cc:2058
-#: ../src/search.cc:44
-#: ../src/search.cc:56
-#: ../src/search.cc:215
-#: ../src/search.cc:264
-#: ../src/search.cc:386
-#: ../src/search.cc:447
-#: ../src/search.cc:534
-#: ../src/update.cc:152
-#: ../src/update.cc:389
-#: ../src/Zypper.cc:3894
+#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:632
+#: ../src/repos.cc:681 ../src/repos.cc:2058 ../src/search.cc:44
+#: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
+#: ../src/update.cc:152 ../src/update.cc:389 ../src/Zypper.cc:3894
 msgid "Name"
-msgstr "Nome"
+msgstr "Név"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:289
-#: ../src/locks.cc:43
-#: ../src/repos.cc:632
-#: ../src/repos.cc:690
-#: ../src/repos.cc:2066
-#: ../src/search.cc:58
-#: ../src/search.cc:218
-#: ../src/search.cc:541
+#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:632
+#: ../src/repos.cc:690 ../src/repos.cc:2066 ../src/search.cc:58
+#: ../src/search.cc:218 ../src/search.cc:541
 msgid "Type"
-msgstr "Tipo"
+msgstr "Típus"
 
-#: ../src/info.cc:289
-#: ../src/search.cc:388
+# clients/inst_sw_single.ycp:705
+#: ../src/info.cc:289 ../src/search.cc:388
 msgid "Dependency"
-msgstr "Dependência"
+msgstr "Függőség"
 
 #: ../src/info.cc:307
 msgid "Contents"
-msgstr "Conteúdo"
+msgstr "Tartalom"
 
 #: ../src/info.cc:309
 msgid "(empty)"
-msgstr "(vazio)"
+msgstr "(üres)"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (the rug term)
-#: ../src/info.cc:351
-#: ../src/search.cc:267
-#: ../src/search.cc:538
+#: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
 #: ../src/update.cc:152
 msgid "Category"
-msgstr "Categoria"
+msgstr "Kategória"
 
 #: ../src/info.cc:352
 msgid "Flavor"
-msgstr "Tipo"
+msgstr "Ízesítés"
 
-#: ../src/info.cc:353
-#: ../src/utils/misc.cc:111
+#: ../src/info.cc:353 ../src/utils/misc.cc:111
 msgid "Installed"
-msgstr "Instalado"
+msgstr "Telepítve"
 
 #: ../src/info.cc:354
 msgid "Short Name"
-msgstr "Nome curto"
+msgstr "Rövid név"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:40
-#: ../src/install.cc:131
+#: ../src/install.cc:40 ../src/install.cc:131
 #, c-format
 msgid "'%s' not found"
-msgstr "'%s' não encontrado"
+msgstr "'%s' nem található"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #: ../src/install.cc:62
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "ignorando %s '%s' (a versão mais recente já está instalada)"
+msgstr "a(z) %s '%s' kihagyása (már telepítve van frissebb verzió)"
 
 #: ../src/install.cc:77
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Falha ao adicionar '%s' à lista de pacotes a serem instalados."
+msgstr "\"%s\" hozzáadása a telepítendő alkalmazások listájához meghiúsult."
 
 #: ../src/install.cc:101
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Falha ao adicionar '%s' à lista de pacotes a serem removidos."
+msgstr "\"%s\" hozzáadása az eltávolítandó alkalmazások listájához meghiúsult."
 
-#: ../src/install.cc:314
-#: ../src/install.cc:549
+#: ../src/install.cc:314 ../src/install.cc:549
 #, c-format
 msgid "'%s' is already installed."
-msgstr "'%s' já está instalado."
+msgstr "'%s' már telepítve van."
 
+# modules/inst_target_part.ycp:676
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:354
-#: ../src/install.cc:563
+#: ../src/install.cc:354 ../src/install.cc:563
 #, c-format
 msgid "'%s' is not installed."
-msgstr "'%s' não está instalado."
+msgstr "'%s' nincs telepítve."
 
 #: ../src/install.cc:384
 #, c-format
 msgid "%s contradicts %s"
-msgstr "%s conflita com %s"
+msgstr "%s és %s ütközik"
 
 #. translators: meaning --force with --capability
 #: ../src/install.cc:393
 #, c-format
 msgid "%s cannot currently be used with %s"
-msgstr "%s não pode ser atualmente usado com %s"
+msgstr "%s jelenleg nem használható együtt ezzel: %s"
 
 #. FIXME show a message here, after string freeze
 #. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
-#: ../src/install.cc:448
-#: ../src/Zypper.cc:3007
+#: ../src/install.cc:448 ../src/Zypper.cc:3007
 msgid "No valid arguments specified."
-msgstr "Nenhum argumento válido especificado."
+msgstr "Nincs megadva érvényes paraméter."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:523
 #, c-format
 msgid "'%s' not found."
-msgstr "'%s' não encontrado."
+msgstr "'%s' nem található."
 
 #. translators: %s are package names
 #: ../src/install.cc:553
 #, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' que fornece '%s' já está instalado."
+msgstr "'%s'-t biztosító '%s' már telepítve van."
 
 #. translators: locks table value
 #. importance
-#: ../src/locks.cc:22
-#: ../src/locks.cc:63
-#: ../src/locks.cc:76
+#: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
 msgid "(any)"
-msgstr "(qualquer)"
+msgstr "(bármely)"
 
 #. translators: locks table value
-#: ../src/locks.cc:24
-#: ../src/locks.cc:60
-#: ../src/search.cc:311
+#: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:311
 msgid "(multiple)"
-msgstr "(múltiplos)"
+msgstr "(több)"
 
 #. translators: catalog (rug's word for repository) (header)
-#: ../src/locks.cc:41
-#: ../src/search.cc:40
-#: ../src/search.cc:263
-#: ../src/update.cc:151
-#: ../src/update.cc:383
+#: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
+#: ../src/update.cc:151 ../src/update.cc:383
 msgid "Catalog"
-msgstr "Catálogo"
+msgstr "Katalógus"
 
 #: ../src/locks.cc:41
 msgid "Importance"
-msgstr "Importância"
+msgstr "Fontosság"
 
 #. translators: package's repository (header)
-#: ../src/locks.cc:43
-#: ../src/search.cc:64
-#: ../src/search.cc:388
-#: ../src/search.cc:446
-#: ../src/update.cc:151
-#: ../src/update.cc:383
+#: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
+#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:383
 msgid "Repository"
-msgstr "Repositório"
+msgstr "Telepítési forrás"
 
 #: ../src/locks.cc:95
 msgid "There are no package locks defined."
-msgstr "Não há travas de pacote definidas."
+msgstr "Nincs csomagzárolás megadva."
 
 #: ../src/locks.cc:102
 msgid "Error reading the locks file:"
-msgstr "Ocorreu um erro ao ler o arquivo de travas:"
+msgstr "Hiba a zárolási fájl megnyitása közben:"
 
 #: ../src/locks.cc:153
 msgid "Problem adding the package lock:"
-msgstr "Problema ao adicionar a trava de pacote:"
+msgstr "Hiba történt a csomag zárolása közben:"
 
 #: ../src/locks.cc:158
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "A trava especificada foi adicionada com sucesso."
-msgstr[1] "As travas especificadas foram adicionadas com sucesso."
+msgstr[0] "A megadott zárolás hozzáadása sikeres."
+msgstr[1] "A megadott zárolások hozzáadása sikeres."
 
 #: ../src/locks.cc:181
 msgid "Specified lock has been successfully removed."
-msgstr "A trava especificada foi removida com sucesso."
+msgstr "A megadott zárolás feloldása sikeres."
 
 #: ../src/locks.cc:228
 msgid "No lock has been removed."
-msgstr "Nenhuma trava foi removida."
+msgstr "Nem lett zárolás feloldva."
 
 #: ../src/locks.cc:232
 #, c-format
 msgid "%lu lock has been successfully removed."
 msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu trava foi removida com sucesso."
-msgstr[1] "%lu travas foram removidas com sucesso."
+msgstr[0] "A %lu zárolás feloldása sikeres."
+msgstr[1] "A %lu zárolások feloldása sikeres."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
-msgstr "Problema ao remover a trava de pacote:"
+msgstr "Hiba történt a csomag zárolásának feloldása közben:"
 
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/main.cc:44
 msgid "OK OK! Exiting immediately..."
-msgstr "OK OK! Saindo imediatamente..."
+msgstr "Renden! Kilépés folyamatban..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/misc.cc:136
 #, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Aceitando automaticamente as licenças de %s (%s)."
+msgstr "A(z) %s %s licencének automatikus elfogadása."
 
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
 #: ../src/misc.cc:157
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "Para instalar '%s'%s, é necessário que você concorde com os termos do seguinte contrato de licença:"
+msgstr "A '%s'%s csomag telepítése érdekében el kell fogadnia a következő licencmegállapodást:"
 
 #. lincense prompt
 #: ../src/misc.cc:174
 msgid "Do you agree with the terms of the license?"
-msgstr "Você concorda com os termos da licença?"
+msgstr "Elfogadja a licencmegállapodás feltételeit?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Cancelando a instalação devido à necessidade da confirmação da licença."
+msgstr "A telepítés megszakítva a licencek elfogadásának szükségessége miatt."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:188
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Por favor reinicie a operação em modo interativo e confirme sua concordância com a licença requerida ou use a opção %s."
+msgstr "Indítsa újra a folyamatot interaktív módban és fogadja el a szükséges licenceket, vagy használja a %s kapcsolót."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
 #: ../src/misc.cc:200
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Cancelando a instalação devido ao usuário não estar de acordo com a licença %s (%s)."
+msgstr "Telepítés megszakítva a felhasználó a %s %s licencekkel való egyet nem értése miatt."
 
 #: ../src/misc.cc:247
 msgid "License"
-msgstr "Licença"
+msgstr "Licenc"
 
 #: ../src/misc.cc:265
 msgid "EULA"
@@ -757,757 +692,728 @@ msgstr "EULA"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
-msgstr "RESUMO"
+msgstr "ÖSSZEGZÉS"
 
 #: ../src/misc.cc:284
 #, c-format
 msgid "Installed packages: %d"
-msgstr "Pacotes instalados: %d"
+msgstr "Telepített csomagok: %d"
 
 #: ../src/misc.cc:285
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Pacotes instalados com contrapartes nos repositórios %d"
+msgstr "A telepítési forrásokban másolatokkal rendelkező telepített csomagok: %d"
 
 #: ../src/misc.cc:286
 #, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Pacote instalados com EULAs: %d"
+msgstr "EULA-val rendelkező telepített csomagok: %d"
 
-#: ../src/misc.cc:372
-#: ../src/misc.cc:397
+#: ../src/misc.cc:372 ../src/misc.cc:397
 #, c-format
 msgid "Source package '%s' not found."
-msgstr "O pacote fonte '%s' não foi encontrado."
+msgstr "A(z) '%s' forráscsomag nem található."
 
 #: ../src/misc.cc:407
 #, c-format
 msgid "Installing source package %s-%s"
-msgstr "Instalando o pacote fonte %s-%s"
+msgstr "A(z) %s-%s forráscsomag telepítése"
 
 #: ../src/misc.cc:416
 #, c-format
 msgid "Source package %s-%s successfully installed."
-msgstr "O pacote fonte %s-%s foi instalado com sucesso."
+msgstr "A(z) %s-%s forráscsomag telepítése sikeresen befejeződött."
 
 #: ../src/misc.cc:423
 #, c-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problema ao instalar o pacote fonte %s-%s:"
+msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
 
 #: ../src/output/OutNormal.cc:54
 msgid "Warning: "
-msgstr "Aviso:"
+msgstr "Figyelmeztetés: "
 
-#: ../src/output/OutNormal.cc:151
-#: ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "error"
-msgstr "erro"
+msgstr "hiba"
 
-#: ../src/output/OutNormal.cc:151
-#: ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "done"
-msgstr "concluído"
+msgstr "kész"
 
-#: ../src/output/OutNormal.cc:165
-#: ../src/output/OutNormal.cc:167
-#: ../src/output/OutNormal.cc:191
-#: ../src/output/OutNormal.cc:217
+#: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:167
+#: ../src/output/OutNormal.cc:191 ../src/output/OutNormal.cc:217
 msgid "Retrieving:"
-msgstr "Obtendo:"
+msgstr "Letöltés:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: ../src/output/OutNormal.cc:173
 msgid "starting"
-msgstr "iniciando"
+msgstr "indítás"
 
 #: ../src/output/OutNormal.cc:250
 msgid "No help available for this prompt."
-msgstr "Nenhuma ajuda disponível para este prompt."
+msgstr "Ennél a parancssornál nem érhető el a súgó."
 
 #: ../src/output/OutNormal.cc:260
 msgid "no help available for this option"
-msgstr "nenhuma ajuda disponível para esta opção"
+msgstr "ehhez a paraméterhez nem tartozik súgó"
 
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Verificando se é necessário atualizar os metadados para %s"
+msgstr "A(z) %s frissített metaadatainak keresése"
 
 #: ../src/repos.cc:102
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "O repositório '%s' está atualizado."
+msgstr "A(z) %s telepítési forrás naprakész."
 
 #: ../src/repos.cc:106
 #, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "A verificação atual de '%s' foi atrasada."
+msgstr "A(z) '%s' telepítési forrás állapotellenőrzése késleltetve."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Forçando a atualização de metadados brutos."
+msgstr "Nyers metaadatok frissítésének kikényszerítése"
 
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Obtendo os metadados do repositório '%s'"
+msgstr "A(z) %s telepítési forrás adatainak beolvasása"
 
 #: ../src/repos.cc:159
 #, c-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Problema ao obter os arquivos de '%s'."
+msgstr "Hiba történt a fájlok letöltésekor a következő helyről: '%s'."
 
-#: ../src/repos.cc:160
-#: ../src/repos.cc:2844
-#: ../src/solve-commit.cc:1109
-#: ../src/solve-commit.cc:1132
-#: ../src/solve-commit.cc:1164
+#: ../src/repos.cc:160 ../src/repos.cc:2844 ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1132 ../src/solve-commit.cc:1164
 msgid "Please see the above error message for a hint."
-msgstr "Por favor veja a mensagem de erro acima para uma dica."
+msgstr "Tekintse meg a fent található hibaüzenetet javaslatért."
 
 #: ../src/repos.cc:173
 #, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Nenhuma URL definida para '%s'."
+msgstr "Nincs megadva URI a következőhöz: '%s'."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/repos.cc:177
 #, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Por favor adicione uma ou mais URLs base (baseurl=URL) ao %s para o repositório '%s'."
+msgstr "Adjon meg egy vagy több URI-t (baseurl=URI) a(z) %s útvonalhoz a következő telepítési forráshoz: '%s'."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
-msgstr "Nenhum apelido definido para esse repositório."
+msgstr "Ehhez a telepítési forráshoz nincs álnév megadva."
 
 #: ../src/repos.cc:203
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "O repositório '%s' é inválido."
+msgstr "A(z) %s telepítési forrás nem érvényes."
 
 #: ../src/repos.cc:204
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Por favor verifique se as URLs definidas para este repositórios apontam para um repositório válido."
+msgstr "Ellenőrizze, hogy a telepítési forráshoz megadott URI megfelelő helyre mutat."
 
 #: ../src/repos.cc:217
 #, c-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Ocorreu um erro ao obter os metadados de '%s':"
+msgstr "Hiba történt a(z) '%s' metaadatainak feldolgozása közben:"
 
 #: ../src/repos.cc:232
 msgid "Forcing building of repository cache"
-msgstr "Forçando a construção do cache do repositório."
+msgstr "Telepítési forrás gyorsítótárának felépítésének kikényszerítése"
 
 #: ../src/repos.cc:245
 #, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Ocorreu um erro ao analisar os metadados de '%s':"
+msgstr "Hiba történt a(z) '%s' metaadatainak feldolgozása közben:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr "Isto pode ter sido causado por metadados inválidos no repositório ou por um bug no interpretador de metadados. No último caso, ou em caso de dúvida, por favor, preencha um relatório de bug seguindo as instruções em http://en.opensuse.org/Zypper#Troubleshooting"
+msgstr "Ennek oka lehet telepítési forrásban lévő hibás metaadat vagy más hiba a metaadat-feldolgozó kódban. Amennyiben úgy gondolja jelentse be a hibát a http://hu.opensuse.org/Zypper oldalon leírtaknak megfelelően"
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Os metadados de repositório para '%s' não foram encontrados no cache local."
+msgstr "A(z) %s telepítési forrás metaadata nem található a helyi gyorsítótárban."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
-msgstr "Ocorreu um erro ao construir o cache:"
+msgstr "Hiba történt a gyorsítótár adatbázisának felépítése közben:"
 
 #: ../src/repos.cc:422
 #, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "O repositório '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "A(z) '%s' telepítési forrás nem található az álneve száma vagy az URI alapján."
 
 #: ../src/repos.cc:426
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Use '%s' para obter a lista dos repositórios definidos."
+msgstr "A beállított telepítési források listájához használja a '%s' parancsot."
 
-#: ../src/repos.cc:504
-#: ../src/repos.cc:540
+#: ../src/repos.cc:504 ../src/repos.cc:540
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Desabilitando o repositório '%s' devido ao erro acima."
+msgstr "A jelzett hiba miatt a(z) %s telepítési forrás letiltásra kerül."
 
 #: ../src/repos.cc:522
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "O repositório '%s' está desatualizado. Execute 'zypper refresh' como root para atualizá-lo. "
+msgstr "A(z) '%s' telepítési forrás nem naprakész, frissítéséhez rendszergazdaként futtathatja a  'zypper refresh' parancsot."
 
 #: ../src/repos.cc:557
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "O cache de metadados necessita ser construído para o repositório '%s'. Você pode executar 'zypper refresh' como root para fazer isto. "
+msgstr "A gyorsítótár adatbázisát a(z) '%s' telepítési forráshoz újra kell építeni. Ennek érdekében rendszergazdaként futtathatja a 'zypper refresh' parancsot."
 
 #: ../src/repos.cc:564
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Desabilitando o repositório '%s'."
+msgstr "A(z) '%s' telepítési forrás letiltása."
 
 #: ../src/repos.cc:601
 msgid "Initializing Target"
-msgstr "Inicializando Destino"
+msgstr "Cél inicializálása"
 
 #: ../src/repos.cc:610
 msgid "Target initialization failed:"
-msgstr "Falha na inicialização do destino:"
+msgstr "A cél inicializálása meghiúsult:"
 
-#: ../src/repos.cc:612
-#: ../src/Zypper.cc:3264
+#: ../src/repos.cc:612 ../src/Zypper.cc:3264
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Executar 'zypper refresh' como root deve resolver este problema."
+msgstr "A 'zypper refresh' root felhasználóként való futtatása megoldhatja a problémát."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:632
-#: ../src/search.cc:269
-#: ../src/update.cc:152
+#: ../src/repos.cc:632 ../src/search.cc:269 ../src/update.cc:152
 msgid "Status"
-msgstr "Status"
+msgstr "Állapot"
 
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
 #: ../src/repos.cc:649
 msgid "Active"
-msgstr "Ativo"
+msgstr "Aktív"
 
 #: ../src/repos.cc:649
 msgid "Disabled"
-msgstr "Desabilitado"
+msgstr "Tiltva"
 
-#: ../src/repos.cc:680
-#: ../src/repos.cc:2057
-#: ../src/Zypper.cc:3894
+#: ../src/repos.cc:680 ../src/repos.cc:2057 ../src/Zypper.cc:3894
 msgid "Alias"
-msgstr "Apelido"
+msgstr "Álnév"
 
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:682
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:2059
+#: ../src/repos.cc:682 ../src/repos.cc:1313 ../src/repos.cc:2059
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Bekapcsolva"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:684
-#: ../src/repos.cc:2061
+#: ../src/repos.cc:684 ../src/repos.cc:2061
 msgid "Refresh"
-msgstr "Atualizar"
+msgstr "Frissítés"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:688
-#: ../src/repos.cc:2065
+#: ../src/repos.cc:688 ../src/repos.cc:2065
 msgid "Priority"
-msgstr "Prioridade"
+msgstr "Prioritás"
 
-#: ../src/repos.cc:692
-#: ../src/repos.cc:2068
+#: ../src/repos.cc:692 ../src/repos.cc:2068
 msgid "URI"
-msgstr "URL"
+msgstr "URI"
 
 #: ../src/repos.cc:694
 msgid "Service"
-msgstr "Serviço"
+msgstr "Szolgáltatás"
 
 #: ../src/repos.cc:738
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Nenhum repositório definido. Use o comando 'zypper addrepo' para adicionar um ou mais repositórios."
+msgstr "Nincs megadva telepítési forrás. Használja a 'zypper addrepo' parancsot egy vagy több telepítési forrás hozzáadásához."
 
-#: ../src/repos.cc:814
-#: ../src/repos.cc:886
-#: ../src/repos.cc:1056
+#: ../src/repos.cc:814 ../src/repos.cc:886 ../src/repos.cc:1056
 msgid "Error reading repositories:"
-msgstr "Ocorreu um erro ao ler os repositórios:"
+msgstr "Hiba a telepítési forrás olvasásakor:"
 
-#: ../src/repos.cc:842
-#: ../src/repos.cc:2190
+#: ../src/repos.cc:842 ../src/repos.cc:2190
 #, c-format
 msgid "Can't open %s for writing."
-msgstr "Não foi possível abrir %s para salvar."
+msgstr "A %s fájl nem nyitható meg írásra."
 
-#: ../src/repos.cc:844
-#: ../src/repos.cc:2192
+#: ../src/repos.cc:844 ../src/repos.cc:2192
 msgid "Maybe you do not have write permissions?"
-msgstr "Talvez você não tenha permissão de escrita?"
+msgstr "Ellenőrizze, hogy van-e írásjoga."
 
-#: ../src/repos.cc:851
-#: ../src/repos.cc:2199
+#: ../src/repos.cc:851 ../src/repos.cc:2199
 #, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Os repositórios foram exportados para %s com sucesso."
+msgstr "A(z) %s telepítési forrás exportálása sikeres."
 
-#: ../src/repos.cc:904
-#: ../src/repos.cc:1074
+#: ../src/repos.cc:904 ../src/repos.cc:1074
 msgid "Specified repositories: "
-msgstr "Repositórios especificados:"
+msgstr "Megadott telepítési forrás: "
 
 #: ../src/repos.cc:943
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Ignorando o repositório desabilitado '%s'"
+msgstr "A letiltott '%s' telepítési forrás kihagyása"
 
 #: ../src/repos.cc:958
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Ignorando o repositório '%s' devido ao erro acima."
+msgstr "A jelzett hiba miatt a(z) %s telepítési forrás kihagyása."
 
 #: ../src/repos.cc:973
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Use os comandos '%s' ou '%s' para adicionar ou habilitar os repositórios."
+msgstr "Telepítési forrás hozzáadásához vagy engedélyezéséhez használja a '%s' vagy '%s' parancsot."
 
 #: ../src/repos.cc:976
 msgid "Specified repositories are not enabled or defined."
-msgstr "Os repositórios especificados não estão habilitados ou definidos."
+msgstr "A megadott telepítési forrás nincs engedélyezve vagy beállítva."
 
 #: ../src/repos.cc:978
 msgid "There are no enabled repositories defined."
-msgstr "Não há repositórios habilitados definidos."
+msgstr "Nincs engedélyezett telepítési forrás beállítva."
 
 #: ../src/repos.cc:982
 msgid "Could not refresh the repositories because of errors."
-msgstr "Não foi possível atualizar os repositórios devido a erros."
+msgstr "A jelzett hiba miatt a telepítési forrás frissítése sikertelen."
 
 #: ../src/repos.cc:988
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Alguns dos repositórios não foram atualizados devido a um erro."
+msgstr "Hiba miatt néhány telepítési forrás nem került frissítésre."
 
 #: ../src/repos.cc:993
 msgid "Specified repositories have been refreshed."
-msgstr "Os repositórios especificados foram atualizados."
+msgstr "A megadott telepítési források frissítése megtörtént."
 
 #: ../src/repos.cc:995
 msgid "All repositories have been refreshed."
-msgstr "Todos os repositórios foram atualizados."
+msgstr "Az összes telepítési forrás frissítése megtörtént."
 
 #: ../src/repos.cc:1131
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Limpando o cache de metadados de '%s'."
+msgstr "A '%s' telepítési forrás metaadatainak kiürítése."
 
 #: ../src/repos.cc:1138
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Limpando o cache de metadados brutos de '%s'."
+msgstr "A '%s' telepítési forrás nyers metaadatainak kiürítése."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1146
 #, c-format
 msgid "Cleaning packages for '%s'."
-msgstr "Limpando os pacotes para '%s'."
+msgstr "A '%s' telepítési forrás csomagjainak kiürítése."
 
 #: ../src/repos.cc:1154
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Não foi possível limpar o repositório '%s' devido a um erro."
+msgstr "A(z) %s telepítési forrás frissítése során hiba történt."
 
 #: ../src/repos.cc:1168
 msgid "Cleaning installed packages cache."
-msgstr "Limpando o cache de pacotes instalados."
+msgstr "Telepített csomagok törlése a gyorsítótárból."
 
 #: ../src/repos.cc:1176
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Não foi possível limpar o cache de pacotes instalados devido a um erro."
+msgstr "Hiba miatt nem sikerült a telepített csomagok gyorsítótárának törlése."
 
 #: ../src/repos.cc:1184
 msgid "Could not clean the repositories because of errors."
-msgstr "Não foi possível limpar os repositórios devido a erros."
+msgstr "A jelzett hibák miatt a telepítési források frissítése sikertelen."
 
 #: ../src/repos.cc:1191
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Alguns dos repositórios não foram limpos devido a um erro."
+msgstr "Hiba miatt néhány telepítési forrás nem került frissítésre."
 
 #: ../src/repos.cc:1196
 msgid "Specified repositories have been cleaned up."
-msgstr "Os repositórios especificados foram limpos."
+msgstr "A megadott telepítési források frissítése megtörtént."
 
 #: ../src/repos.cc:1198
 msgid "All repositories have been cleaned up."
-msgstr "Todos os repositórios foram limpos."
+msgstr "Az összes telepítési forrás frissítése megtörtént."
 
 #: ../src/repos.cc:1238
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Isto é uma mídia removível de leitura apenas (CD/DVD), desabilitando a atualização automática."
+msgstr "Ez egy csak olvasható, cserélhető adathordozó (CD/DVD), ezért az automatikus frissítés letiltásra kerül."
 
-#: ../src/repos.cc:1259
-#: ../src/repos.cc:1520
+#: ../src/repos.cc:1259 ../src/repos.cc:1520
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Um repositório chamado '%s' já existe. Por favor escolha outro apelido."
+msgstr "Ilyen nevű ('%s') telepítési forrás már létezik. Adjon egy másik álnevet."
 
 #: ../src/repos.cc:1270
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Não foi possível determinar o tipo do repositório. Por favor verifique se as URLs definidas (veja abaixo) apontam para um repositório válido:"
+msgstr "A telepítési forrás típusa nem deríthető ki. Ellenőrizze, hogy az URI valóban egy érvényes telepítési forrásra mutat:"
 
 #: ../src/repos.cc:1277
 msgid "Can't find a valid repository at given location:"
-msgstr "Não foi possível encontrar um repositório válido no local indicado:"
+msgstr "A megadott helyen nem található érvényes telepítési forrás:"
 
 #: ../src/repos.cc:1286
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problema ao transferir os dados do repositório da URL especificada:"
+msgstr "A telepítési forrás adatainak lekérdezése a megadott URI-ról sikertelen:"
 
 #: ../src/repos.cc:1287
 msgid "Please check whether the specified URI is accessible."
-msgstr "Por favor verifique se a URL especificada é acessível."
+msgstr "Ellenőrizze, hogy a megadott URI valóban elérhető."
 
 #: ../src/repos.cc:1295
 msgid "Unknown problem when adding repository:"
-msgstr "Problema desconhecido ao adicionar o repositório:"
+msgstr "Ismeretlen hiba történt a telepítés forrás hozzáadásakor:"
 
 #: ../src/repos.cc:1301
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr "O repositório '%s' foi adicionado com sucesso"
+msgstr "A(z) '%s' telepítési forrás hozzáadása sikeres"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/repos.cc:1315
 msgid "Autorefresh"
-msgstr "Atualização automática"
+msgstr "Automatikus frissítés"
 
 #: ../src/repos.cc:1330
 #, c-format
 msgid "Reading data from '%s' media"
-msgstr "Lendo dados da mídia '%s'"
+msgstr "Az adatok betöltése a következő a(z) '%s' adathordozóról"
 
 #: ../src/repos.cc:1337
 #, c-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problema ao ler dados da mídia '%s' "
+msgstr "Az adatok betöltése  a(z) '%s' adathordozóról sikertelen"
 
 #: ../src/repos.cc:1338
 msgid "Please check if your installation media is valid and readable."
-msgstr "Por favor verifique se sua mídia de instalação é válida e legível."
+msgstr "Ellenőrizze, hogy a telepítési adathordozó valóban érvényes és olvasható."
 
 #: ../src/repos.cc:1403
 msgid "Problem accessing the file at the specified URI"
-msgstr "Problema ao acessar o arquivo na URL especificada"
+msgstr "A fájl adatainak lekérdezése a megadott URI-ról sikertelen"
 
 #: ../src/repos.cc:1404
 msgid "Please check if the URI is valid and accessible."
-msgstr "Por favor verifique se a URL é válida e acessível."
+msgstr "Ellenőrizze, hogy a megadott URI érvényes és valóban elérhető."
 
 #: ../src/repos.cc:1412
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problema ao analisar o arquivo na URL especificada"
+msgstr "A fájl feldolgozása a megadott URI-ról sikertelen"
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/repos.cc:1415
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr "Isto é um arquivo .repo? Veja em http://en.opensuse.org/Standards/RepoInfo para detalhes."
+msgstr "Ez egy .repo fájl? A szabványos .repo fájl leírása a http://en.opensuse.org/Standards/RepoInfo oldalon található."
 
 #: ../src/repos.cc:1423
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Problema encontrado durante a tentativa de leitura do arquivo na URL especificada"
+msgstr "Hiba történt a megadott URI-n található fájl beolvasása közben"
 
 #: ../src/repos.cc:1437
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Um repositório sem apelido definido foi encontrado no arquivo, ignorando."
+msgstr "A fájlban egy álnévvel nem rendelkező telepítési forrás lett megadva, amely így kihagyásra kerül."
 
 #: ../src/repos.cc:1444
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "O repositório '%s' não tem uma URL definida, ignorando."
+msgstr "A(z) %s telepítési forráshoz nincs megadva URI, ezért kihagyásra kerül."
 
 #: ../src/repos.cc:1484
 #, c-format
 msgid "Repository '%s' has been removed."
-msgstr "O repositório '%s' foi removido."
+msgstr "A(z) '%s' telepítési forrás eltávolítása megtörtént."
 
 #: ../src/repos.cc:1503
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Não foi possível alterar o apelido do repositório '%s'. O repositório pertence ao serviço '%s\" que é responsável por definir o apelido."
+msgstr "A(z) '%s' telepítési forrás álnevének módosítása sikertelen. A telepítési forrás a '%s' szolgáltatáshoz tartozik, amely felelős az álnevének beállításáért."
 
 #: ../src/repos.cc:1514
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "O repositório '%s' foi renomeado para '%s'."
+msgstr "A(z) '%s' telepítési forrás átnevezése megtörtént. Az új neve '%s'."
 
-#: ../src/repos.cc:1526
-#: ../src/repos.cc:1746
+#: ../src/repos.cc:1526 ../src/repos.cc:1746
 msgid "Error while modifying the repository:"
-msgstr "Ocorreu um erro enquanto alterava o repositório:"
+msgstr "Hiba a telepítési forrás módosítása közben:"
 
 #: ../src/repos.cc:1527
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Mantendo o repositório '%s' inalterado."
+msgstr "A(z) '%s' telepítési forrás változatlan maradt."
 
 #: ../src/repos.cc:1664
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
-msgstr "Prioridade inválida '%s'. Use um número inteiro positivo. Quanto maior o número, menor a proridade."
+msgstr "Érvénytelen prioritás: '%s'. Használjon pozitív egész számokat. Minél nagyobb a szám, annál alacsonyabb a prioritás."
 
 #: ../src/repos.cc:1672
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "A prioridade do repositório '%s' não foi alterada (%d)"
+msgstr "A(z) '%s' telepítési forrás prioritása változatlan maradt (%d)"
 
 #: ../src/repos.cc:1698
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
-msgstr "O repositório %s foi habilitado com sucesso."
+msgstr "A(z) %s telepítési forrás engedélyezése sikeres."
 
 #: ../src/repos.cc:1701
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
-msgstr "O repositório %s foi desabilitado com sucesso."
+msgstr "A(z) %s telepítési forrás letiltása sikeres."
 
 #: ../src/repos.cc:1708
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "A atualização automática para o repositório '%s' foi habilitada."
+msgstr "A(z) '%s' telepítési forrás automatikus frissítése engedélyezve."
 
 #: ../src/repos.cc:1711
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "A atualização automática para o repositório '%s' foi desabilitada."
+msgstr "A(z) '%s' telepítési forrás automatikus frissítése letiltva."
 
 #: ../src/repos.cc:1718
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "O cache dos arquivos RPM foi habilitado para o repositório '%s'."
+msgstr "Az RPM fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz engedélyezve lett."
 
 #: ../src/repos.cc:1721
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "O cache dos arquivos RPM foi desabilitado para o repositório '%s'."
+msgstr "Az RPM fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz kikapcsolva."
 
 #: ../src/repos.cc:1727
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "A prioridade do repositório '%s' foi alterada para %d."
+msgstr "A(z) '%s' telepítési forrás %d prioritásának beállítása megtörtént."
 
 #: ../src/repos.cc:1733
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "O nome do repositório '%s' foi definido para '%s'."
+msgstr "A(z) '%s' telepítési forrás neve átállítva erre:'%s'."
 
 #: ../src/repos.cc:1739
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nada a alterar para o repositório '%s'."
+msgstr "A(z) '%s' telepítési forrásban nincs módosítás."
 
 #: ../src/repos.cc:1747
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Mantendo o repositório %s inalterado."
+msgstr "A(z) %s telepítési forrás változatlan maradt."
 
 #: ../src/repos.cc:1785
 msgid "Error reading services:"
-msgstr "Ocorreu um erro ao ler os serviços:"
+msgstr "Hiba a szolgáltatás olvasásakor:"
 
 #: ../src/repos.cc:1874
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "O serviço '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "A(z) '%s' szolgáltatás nem található az álneve, száma vagy az URI alapján."
 
 #: ../src/repos.cc:1878
 #, c-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "Use '%s' para obter a lista dos serviços definidos."
+msgstr "A beállított szolgáltatások listájához használja a '%s' parancsot."
 
 #: ../src/repos.cc:2104
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Nenhum serviço definido. Use o comando '%s' para adicionar um ou mais serviços."
+msgstr "Nincs megadva szolgáltatás. Használja a '%s' parancsot egy vagy több szolgáltatás hozzáadásához."
 
 #: ../src/repos.cc:2230
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Um serviço chamado '%s' já existe. Por favor escolha outro apelido."
+msgstr "Ilyen nevű ('%s') szolgáltatás már létezik. Adjon egy másik álnevet."
 
 #: ../src/repos.cc:2240
 #, c-format
 msgid "Error occured while adding service '%s'."
-msgstr "Ocorreu um erro ao adicionar o serviço '%s'."
+msgstr "Hiba a(z) '%s' szolgáltatás hozzáadása közben."
 
 #: ../src/repos.cc:2246
 #, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "O serviço '%s' foi adicionado com sucesso."
+msgstr "A '%s' szolgáltatás hozzáadása sikeres."
 
 #: ../src/repos.cc:2285
 #, c-format
 msgid "Removing service '%s':"
-msgstr "Removendo o serviço '%s':"
+msgstr "A(z) '%s' szolgáltatás eltávolítása:"
 
 #: ../src/repos.cc:2288
 #, c-format
 msgid "Service '%s' has been removed."
-msgstr "O serviço '%s' foi removido."
+msgstr "A(z) '%s' szolgáltatás eltávolítása megtörtént."
 
 #: ../src/repos.cc:2304
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Atualizando o serviço '%s'."
+msgstr "'%s' szolgáltatás frissítése."
 
 #: ../src/repos.cc:2313
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Problema ao obter o arquivo de índice do repositório para o serviço '%s':"
+msgstr "A(z) '%s' szolgáltatás jegyzékének lekérdezése sikertelen."
 
 #: ../src/repos.cc:2315
 msgid "Check if the URI is valid and accessible."
-msgstr "Verifique se a URL é válida e acessível."
+msgstr "Ellenőrizze, hogy a megadott URI érvényes és valóban elérhető."
 
 #: ../src/repos.cc:2373
 #, c-format
 msgid "Skipping disabled service '%s'"
-msgstr "Ignorando o serviço desabilitado '%s'"
+msgstr "A letiltott '%s' szolgáltatás kihagyása"
 
 #: ../src/repos.cc:2419
 #, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Ignorando o serviço '%s' devido ao erro acima."
+msgstr "A jelzett hiba miatt a(z) %s szolgáltatás kihagyása."
 
 #: ../src/repos.cc:2434
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "Use os comandos '%s' ou '%s' para adicionar ou habilitar os serviços."
+msgstr "Szolgáltatás hozzáadásához vagy engedélyezéséhez használja a '%s' vagy '%s' parancsot."
 
 #: ../src/repos.cc:2437
 msgid "Specified services are not enabled or defined."
-msgstr "Os serviços especificados não estão habilitados ou definidos."
+msgstr "A megadott szolgáltatás nincs engedélyezve vagy beállítva."
 
 #: ../src/repos.cc:2439
 msgid "There are no enabled services defined."
-msgstr "Não há serviços habilitados definidos."
+msgstr "Nincs engedélyezett szolgáltatás beállítva."
 
 #: ../src/repos.cc:2443
 msgid "Could not refresh the services because of errors."
-msgstr "Não foi possível atualizar os serviços devido a erros."
+msgstr "A jelzett hiba miatt a szolgáltatások frissítése sikertelen."
 
 #: ../src/repos.cc:2449
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Alguns dos serviços não foram atualizados devido a um erro."
+msgstr "Hiba miatt néhány szolgáltatás nem került frissítésre."
 
 #: ../src/repos.cc:2454
 msgid "Specified services have been refreshed."
-msgstr "Os serviços especificados foram atualizados."
+msgstr "A megadott szolgáltatások frissítése megtörtént."
 
 #: ../src/repos.cc:2456
 msgid "All services have been refreshed."
-msgstr "Todos os serviços foram atualizados."
+msgstr "Az összes szolgáltatás frissítése megtörtént."
 
 #: ../src/repos.cc:2578
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
-msgstr "O serviço '%s' foi habilitado com sucesso."
+msgstr "A(z) %s szolgáltatás engedélyezése sikeres."
 
 #: ../src/repos.cc:2581
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
-msgstr "O serviço %s foi desabilitado com sucesso."
+msgstr "A(z) %s szolgáltatás letiltása sikeres."
 
 #: ../src/repos.cc:2588
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "A atualização automática para o serviço '%s' foi habilitada."
+msgstr "A(z) '%s' szolgáltatás automatikus frissítése engedélyezve."
 
 #: ../src/repos.cc:2591
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "A atualização automática para o serviço '%s' foi desabilitada."
+msgstr "A(z) '%s' szolgáltatás automatikus frissítése letiltva."
 
 #: ../src/repos.cc:2597
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "O nome do serviço '%s' foi definido para '%s'."
+msgstr "A(z) '%s' szolgáltatás neve átállítva erre:'%s'."
 
 #: ../src/repos.cc:2603
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi adicionado aos repositórios habilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram adicionado aos repositórios habilitados do serviço '%s'"
+msgstr[0] "A(z) '%s' telepítési forrás hozzáadása a(z) '%s' szolgáltatás engedélyezett telepítési forrásaihoz megtörtént."
+msgstr[1] "A(z) '%s' telepítési források hozzáadása a(z) '%s' szolgáltatás engedélyezett telepítési forrásaihoz megtörtént."
 
 #: ../src/repos.cc:2611
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi adicionado aos repositórios desabilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram adicionado aos repositórios desabilitados do serviço '%s'"
+msgstr[0] "A(z) '%s' telepítési forrás hozzáadása a(z) '%s' szolgáltatás letiltott telepítési forrásaihoz megtörtént."
+msgstr[1] "A(z) '%s' telepítési források hozzáadása a(z) '%s' szolgáltatás engedélyezett telepítési forrásaihoz megtörtént."
 
 #: ../src/repos.cc:2619
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi removido dos repositórios habilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram removido dos repositórios habilitados do serviço '%s'"
+msgstr[0] "A(z) '%s' telepítési forrás eltávolítása a(z) '%s' szolgáltatás engedélyezett telepítési forrásai közül megtörtént."
+msgstr[1] "A(z) '%s' telepítési források eltávolítása a(z) '%s' szolgáltatás engedélyezett telepítési forrásai közül megtörtént."
 
 #: ../src/repos.cc:2627
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi removido dos repositórios desabilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram removidos dos repositórios desabilitados do serviço '%s'"
+msgstr[0] "A(z) '%s' telepítési forrás eltávolítása a(z) '%s' szolgáltatás letiltott telepítési forrásai közül megtörtént."
+msgstr[1] "A(z) '%s' telepítési források eltávolítása a(z) '%s' szolgáltatás letiltott telepítési forrásai közül megtörtént."
 
 #: ../src/repos.cc:2636
 #, c-format
 msgid "Nothing to change for service '%s'."
-msgstr "Nada a alterar para o serviço '%s'."
+msgstr "A(z) '%s' szolgáltatásban nincs módosítás."
 
 #: ../src/repos.cc:2643
 msgid "Error while modifying the service:"
-msgstr "Ocorreu um erro enquanto alterava o serviço:"
+msgstr "Hiba a szolgáltatás módosítása közben:"
 
 #: ../src/repos.cc:2644
 #, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Mantendo o serviço %s inalterado."
+msgstr "A(z) %s szolgáltatás változatlan maradt."
 
 #: ../src/repos.cc:2751
 msgid "Loading repository data..."
-msgstr "Carregando os dados do repositório..."
+msgstr "Telepítési forrás adatainak beolvasása..."
 
 #: ../src/repos.cc:2769
 #, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Obtendo os dados do repositório '%s'..."
+msgstr "A(z) %s telepítési forrás adatainak beolvasása..."
 
 #: ../src/repos.cc:2776
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "O repositório '%s' não está no cache. Criando o cache..."
+msgstr "A(z) '%s' telepítési forrás nincs a gyorsítótárban. Beolvasás folyamatban..."
 
-#: ../src/repos.cc:2783
-#: ../src/repos.cc:2817
+#: ../src/repos.cc:2783 ../src/repos.cc:2817
 #, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Problema ao carregar os dados de '%s'."
+msgstr "Az adatok betöltése sikertelen a következő helyről: '%s'"
 
-#: ../src/repos.cc:2784
-#: ../src/repos.cc:2823
+#: ../src/repos.cc:2784 ../src/repos.cc:2823
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Os resolvíveis de '%s' não foram carregados devido a um erro."
+msgstr "Hiba történt, így \"%s\" feloldhatói nem tölthetők be."
 
 #: ../src/repos.cc:2805
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "O repositório '%s' para estar desatualizado. Considere utilizar um servidor ou mirror diferente."
+msgstr "A(z) '%s' telepítési forrás elavultnak tűnik.  Ajánlott egy másik tükör vagy kiszolgáló használata."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2819
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Tente '%s' ou mesmo '%s' antes disso."
+msgstr "Próbálja ki ezt: '%s', vagy ezt: '%s', mielőtt tovább lép."
 
 #: ../src/repos.cc:2832
 msgid "Reading installed packages..."
-msgstr "Lendo os pacotes instalados..."
+msgstr "Telepített csomagok beolvasása..."
 
 #: ../src/repos.cc:2843
 msgid "Problem occured while reading the installed packages:"
-msgstr "Ocorreu um erro durante a leitura dos pacotes instalados:"
+msgstr "A telepített csomagok beolvasása során hiba történt:"
 
 #. list name, exact match
 #: ../src/repos.cc:2858
@@ -1516,94 +1422,84 @@ msgid ""
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that."
 msgstr ""
-"O daemon do Gerenciador ZENworks está em execução.\n"
-"AVISO: este comando não sincronizará as alterações.\n"
-"Use o 'rug' ou o 'yast2' para isso."
+"A ZENworks Management démon fut.\n"
+"Figyelem! Ez a parancs nem szinkronizálja a változtatásokat.\n"
+"A szinkronizáláshoz használja a rug vagy a yast2 programokat."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42
-#: ../src/search.cc:444
-#: ../src/update.cc:386
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:386
 msgid "Bundle"
-msgstr "Bundle"
+msgstr "Köteg"
 
 #. translators: package version (header)
 #. best_effort does not know version or arch yet
-#: ../src/search.cc:46
-#: ../src/search.cc:60
-#: ../src/search.cc:265
-#: ../src/search.cc:386
-#: ../src/search.cc:447
-#: ../src/search.cc:535
-#: ../src/update.cc:152
-#: ../src/update.cc:391
+#: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
+#: ../src/update.cc:152 ../src/update.cc:391
 msgid "Version"
-msgstr "Versão"
+msgstr "Verzió"
 
 #. translators: package architecture (header)
-#: ../src/search.cc:48
-#: ../src/search.cc:62
-#: ../src/search.cc:447
+#: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
 #: ../src/update.cc:391
 msgid "Arch"
-msgstr "Arquitetura"
+msgstr "Architektúra"
 
-#: ../src/search.cc:178
-#: ../src/search.cc:192
+#: ../src/search.cc:178 ../src/search.cc:192
 msgid "System Packages"
-msgstr "Pacotes do Sistema"
+msgstr "Rendszercsomagok"
 
 #. translators: package summary (header)
 #: ../src/search.cc:217
 msgid "Summary"
-msgstr "Resumo"
+msgstr "Összegzés"
 
 #: ../src/search.cc:347
 msgid "No needed patches found."
-msgstr "Nenhuma correção necessária foi encontrada."
+msgstr "Nem találhatók frissítések."
 
 #: ../src/search.cc:419
 msgid "No patterns found."
-msgstr "Nenhum padrão foi encontrado."
+msgstr "Nem találhatók minták."
 
-#: ../src/search.cc:497
-#: ../src/Zypper.cc:3222
+#: ../src/search.cc:497 ../src/Zypper.cc:3222
 msgid "No packages found."
-msgstr "Nenhum pacote foi encontrado."
+msgstr "Nem találhatók csomagok."
 
 #: ../src/search.cc:574
 msgid "No products found."
-msgstr "Nenhum produto foi encontrado."
+msgstr "Nem találhatók termékek."
 
 #: ../src/search.cc:597
 #, c-format
 msgid "No providers of '%s' found."
-msgstr "Nenhum fornecedor para '%s' foi encontrado."
+msgstr "Semmi sem szolgáltatja '%s'-t."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/solve-commit.cc:44
 msgid "Problem: "
-msgstr "Problema:"
+msgstr "Probléma: "
 
+# /tmp/intro:68 /tmp/xapi:465
 #. TranslatorExplanation %d is the solution number
 #: ../src/solve-commit.cc:57
 #, c-format
 msgid " Solution %d: "
-msgstr "Solução %d:"
+msgstr " %d. megoldás: "
 
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Escolha a solução acima usando '1' ou ignorar, repetir ou cancelar"
-msgstr[1] "Escolha uma das opções acima pelo número ou ignorar, repetir ou cancelar"
+msgstr[0] "A fenti '1' megoldás választása, (k)ihagy, új(r)a vagy (m)égsem"
+msgstr[1] "darab, új(r)a (k)ihagy vagy (m)égsem> "
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: ../src/solve-commit.cc:83
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Escolha a solução acima usando '1' ou ou cancelar usando 'c'"
-msgstr[1] "Escolha uma das opções acima pelo número ou cancelar"
+msgstr[0] "A fenti '1' megoldás választása, vagy (m)égsem"
+msgstr[1] "Választás a fenti megoldások közül a számmal, vagy (m)égsem"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1613,7 +1509,7 @@ msgstr[1] "Escolha uma das opções acima pelo número ou cancelar"
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:102
 msgid "s/r/c"
-msgstr "i/r/c"
+msgstr "k/r/m"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -1624,290 +1520,290 @@ msgstr "i/r/c"
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: ../src/solve-commit.cc:114
 msgid "c"
-msgstr "c"
+msgstr "m"
 
 #. continue with next problem
 #: ../src/solve-commit.cc:134
 #, c-format
 msgid "Applying solution %s"
-msgstr "Aplicando a solução %s"
+msgstr "%s megoldás végrehajtása"
 
 #: ../src/solve-commit.cc:158
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "%d Problema:"
-msgstr[1] "%d Problemas:"
+msgstr[0] "%d probléma:"
+msgstr[1] "%d problémák:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: ../src/solve-commit.cc:162
 msgid "Specified capability not found"
-msgstr "O recurso especificado não foi encontrado"
+msgstr "A megadott képesség nem található"
 
 #: ../src/solve-commit.cc:173
 #, c-format
 msgid "Problem: %s"
-msgstr "Problema: %s"
+msgstr "Probléma: %s"
 
 #: ../src/solve-commit.cc:188
 msgid "Resolving dependencies..."
-msgstr "Resolvendo as dependências..."
+msgstr "Függőségek feloldása..."
 
 #: ../src/solve-commit.cc:369
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "O seguinte pacote será atualizado:"
-msgstr[1] "Os seguintes pacotes serão atualizados:"
+msgstr[0] "Az alábbi csomag kerül frissítésre:"
+msgstr[1] "Az alábbi csomagok kerülnek frissítésre:"
 
 #: ../src/solve-commit.cc:374
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "A seguinte correção será atualizada:"
-msgstr[1] "As seguintes correções serão atualizadas:"
+msgstr[0] "Az alábbi javítás kerül frissítésre:"
+msgstr[1] "Az alábbi javítások kerülnek frissítésre:"
 
 #: ../src/solve-commit.cc:379
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "O seguinte padrão será atualizado:"
-msgstr[1] "Os seguintes padrões serão atualizados:"
+msgstr[0] "Az alábbi minta kerül frissítésre:"
+msgstr[1] "Az alábbi minták kerülnek frissítésre:"
 
 #: ../src/solve-commit.cc:384
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "O seguinte produto será atualizado:"
-msgstr[1] "Os seguintes produtos serão atualizados:"
+msgstr[0] "Az alábbi termék kerül frissítésre:"
+msgstr[1] "Az alábbi termékek kerülnek frissítésre:"
 
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "O seguinte pacote será desatualizado:"
-msgstr[1] "Os seguintes pacotes serão desatualizados:"
+msgstr[0] "Az alábbi csomag régebbi verziója kerül telepítésre:"
+msgstr[1] "Az alábbi csomagok régebbi verziói kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:396
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "A seguinte correção será desatualizada:"
-msgstr[1] "As seguintes correções serão desatualizadas:"
+msgstr[0] "Az alábbi javítás régebbi verziója kerül telepítésre:"
+msgstr[1] "Az alábbi javítások régebbi verziói kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:401
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "O seguinte padrão será desatualizado:"
-msgstr[1] "Os seguintes padrões serão desatualizados:"
+msgstr[0] "Az alábbi mint régebbi verziója kerül telepítésre:"
+msgstr[1] "Az alábbi minták régebbi verziói kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:406
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "O seguinte produto será desatualizado:"
-msgstr[1] "Os seguintes produtos serão desatualizados:"
+msgstr[0] "Az alábbi termék régebbi verziója kerül telepítésre:"
+msgstr[1] "Az alábbi termékek régebbi verziói kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:413
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "O seguinte pacote NOVO será instalado:"
-msgstr[1] "Os seguintes pacotes NOVOS serão instalados:"
+msgstr[0] "A következő ÚJ csomag kerül telepítésre:"
+msgstr[1] "A következő ÚJ csomagok kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:418
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "A seguinte correção NOVA será instalada:"
-msgstr[1] "As seguintes correções NOVAS serão instaladas:"
+msgstr[0] "A következő ÚJ javítás kerül telepítésre:"
+msgstr[1] "A következő ÚJ javítások kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:423
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "O seguinte padrão NOVO será instalado:"
-msgstr[1] "Os seguintes padrões NOVOS serão instalados:"
+msgstr[0] "A következő ÚJ minta kerül telepítésre:"
+msgstr[1] "A következő ÚJ minták kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:428
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "O seguinte produto NOVO será instalado:"
-msgstr[1] "Os seguintes produtos NOVOS serão instalados:"
+msgstr[0] "A következő ÚJ termék kerül telepítésre:"
+msgstr[1] "A következő ÚJ termékek kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:433
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "O seguinte pacote fonte será instalado:"
-msgstr[1] "Os seguintes pacotes fonte serão instalados:"
+msgstr[0] "A következő forráscsomag kerül újratelepítésre:"
+msgstr[1] "A következő forráscsomagok kerülnek telepítésre:"
 
 #: ../src/solve-commit.cc:440
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "O seguinte pacote será reinstalado:"
-msgstr[1] "Os seguintes pacotes serão reinstalados:"
+msgstr[0] "A következő csomag kerül újratelepítésre:"
+msgstr[1] "A következő csomagok kerülnek újratelepítésre:"
 
 #: ../src/solve-commit.cc:445
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "A seguinte correção será reinstalada:"
-msgstr[1] "As seguintes correções serão reinstaladas:"
+msgstr[0] "A következő javítás kerül újratelepítésre:"
+msgstr[1] "A következő javítások kerülnek újratelepítésre:"
 
 #: ../src/solve-commit.cc:450
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "O seguinte padrão será reinstalado:"
-msgstr[1] "Os seguintes padrões serão reinstalados:"
+msgstr[0] "A következő minta kerül újratelepítésre:"
+msgstr[1] "A következő minták kerülnek újratelepítésre:"
 
 #: ../src/solve-commit.cc:455
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "O seguinte produto será reinstalado:"
-msgstr[1] "Os seguintes produtos serão reinstalados:"
+msgstr[0] "A következő termék kerül újratelepítésre:"
+msgstr[1] "A következő termékek kerülnek újratelepítésre:"
 
 #: ../src/solve-commit.cc:462
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "O seguinte pacote será REMOVIDO:"
-msgstr[1] "Os seguintes pacotes serão REMOVIDOS:"
+msgstr[0] "A következő csomag kerül eltávolításra:"
+msgstr[1] "A következő csomagok kerülnek ELTÁVOLÍTÁSRA:"
 
 #: ../src/solve-commit.cc:467
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "A seguinte correção será REMOVIDA:"
-msgstr[1] "As seguintes correções serão REMOVIDAS:"
+msgstr[0] "A következő javítások kerül eltávolításra:"
+msgstr[1] "A következő javítások kerülnek ELTÁVOLÍTÁSRA:"
 
 #: ../src/solve-commit.cc:472
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "O seguinte padrão será REMOVIDO:"
-msgstr[1] "Os seguintes padrões serão REMOVIDOS:"
+msgstr[0] "A következő minta kerül eltávolításra:"
+msgstr[1] "A következő minták kerülnek ELTÁVOLÍTÁSRA:"
 
 #: ../src/solve-commit.cc:477
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "O seguinte produto será REMOVIDO:"
-msgstr[1] "Os seguintes produtos serão REMOVIDOS:"
+msgstr[0] "A következő termék kerül eltávolításra:"
+msgstr[1] "A következő termékek kerülnek ELTÁVOLÍTÁSRA:"
 
 #: ../src/solve-commit.cc:484
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "O seguinte pacote irá mudar de arquitetura:"
-msgstr[1] "Os seguintes pacotes irão mudar de arquitetura:"
+msgstr[0] "Az alábbi csomag változtatja meg az architektúrát:"
+msgstr[1] "Az alábbi csomagok változtatják meg az architektúrát:"
 
 #: ../src/solve-commit.cc:489
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "A seguinte correção irá mudar de arquitetura:"
-msgstr[1] "As seguintes correções irão mudar de arquitetura:"
+msgstr[0] "Az alábbi javítás változtatja meg az architektúrát:"
+msgstr[1] "Az alábbi javítások változtatják meg az architektúrát:"
 
 #: ../src/solve-commit.cc:494
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "O seguinte padrão irá mudar de arquitetura:"
-msgstr[1] "Os seguintes padrões irão mudar de arquitetura:"
+msgstr[0] "Az alábbi minta változtatja meg az architektúrát:"
+msgstr[1] "Az alábbi minták változtatják meg az architektúrát:"
 
 #: ../src/solve-commit.cc:499
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "O seguinte produto irá mudar de arquitetura:"
-msgstr[1] "Os seguintes produtos irão mudar de arquitetura:"
+msgstr[0] "Az alábbi termék változtatja meg az architektúrát:"
+msgstr[1] "Az alábbi termékek változtatják meg az architektúrát:"
 
 #: ../src/solve-commit.cc:506
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "O seguinte pacote irá mudar de fornecedor:"
-msgstr[1] "Os seguintes pacotes irão mudar de fornecedor:"
+msgstr[0] "Az alábbi csomag változtatja meg a gyártót:"
+msgstr[1] "Az alábbi csomagok változtatják meg a gyártót:"
 
 #: ../src/solve-commit.cc:511
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "A seguinte correção irá mudar de fornecedor:"
-msgstr[1] "As seguintes correções irão mudar de fornecedor:"
+msgstr[0] "Az alábbi javítás változtatja meg a gyártót:"
+msgstr[1] "Az alábbi javítások változtatják meg a gyártót:"
 
 #: ../src/solve-commit.cc:516
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "O seguinte padrão irá mudar de fornecedor:"
-msgstr[1] "Os seguintes padrões irão mudar de fornecedor:"
+msgstr[0] "Az alábbi minta változtatja meg a gyártót:"
+msgstr[1] "Az alábbi minták változtatják meg a gyártót:"
 
 #: ../src/solve-commit.cc:521
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "O seguinte produto irá mudar de fornecedor:"
-msgstr[1] "Os seguintes produtos irão mudar de fornecedor:"
+msgstr[0] "Az alábbi termék változtatja meg a gyártót:"
+msgstr[1] "Az alábbi termékek változtatják meg a gyártót:"
 
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following packages are not supported by their vendor:"
-msgstr[0] "O seguinte pacote não é suportado pelo fornecedor:"
-msgstr[1] "Os seguintes pacotes não são suportados pelo fornecedor:"
+msgstr[0] "Az alábbi csomag nem támogatott a gyártója által:"
+msgstr[1] "Az alábbi csomagok nem támogatott a gyártóik által:"
 
 #: ../src/solve-commit.cc:603
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "As dependências de todos os pacotes instalados estão satisfeitas."
+msgstr "Minden telepített csomag függősége rendben."
 
 #: ../src/solve-commit.cc:605
 msgid "Nothing to do."
-msgstr "Nada a fazer."
+msgstr "Nincs teendő."
 
 #: ../src/solve-commit.cc:610
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Algumas das dependências dos pacotes instalados estão quebradas. Para resolver estas dependências, as seguintes ações precisam ser tomadas:"
+msgstr "A telepített csomagok bizonyos függőségeivel problémák adódtak. A problémák kijavításának érdekében a következő műveleteket kell végrehajtani:"
 
 #: ../src/solve-commit.cc:764
 #, c-format
 msgid "Overall download size: %s."
-msgstr "Tamanho total do download: %s."
+msgstr "Letöltés mérete: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:769
 #, c-format
 msgid "After the operation, additional %s will be used."
-msgstr "Após a operação, %s adicionais serão utilizados."
+msgstr "A művelet után további %s kerül felhasználásra."
 
 #: ../src/solve-commit.cc:772
 msgid "No additional space will be used or freed after the operation."
-msgstr "Nenhum espaço adicional será usado ou liberado após a operação."
+msgstr "A művelet elvégzése nem igényel, vagy szabadít fel további tárhelyet."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
-msgstr "Após a operação, %s será liberado."
+msgstr "A művelet után további %s szabadul fel."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: ../src/solve-commit.cc:829
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s está em conflito com %s, será utilizado o %s menos agressivo"
+msgstr "%s ütközik ezzel: %s, a kevésbé agresszív %s alkalmazása"
 
 #: ../src/solve-commit.cc:855
 msgid "Force resolution:"
-msgstr "Forçar resolução:"
+msgstr "Kikényszerített megoldás:"
 
 #: ../src/solve-commit.cc:911
 msgid "Verifying dependencies..."
-msgstr "Verificando as dependências..."
+msgstr "Függőségek ellenőrzése..."
 
 #: ../src/solve-commit.cc:920
 msgid "Computing upgrade..."
-msgstr "Computando a atualização..."
+msgstr "A frissítés számítása..."
 
 #: ../src/solve-commit.cc:931
 msgid "Generating solver test case..."
-msgstr "Gerando o caso teste para o solucionador..."
+msgstr "Feloldási tesztesét létrehozása..."
 
 #: ../src/solve-commit.cc:934
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "O caso teste para o solucionador foi gerado com sucesso em %s."
+msgstr "A feloldási teszteset sikeresen létrejött itt: %s."
 
 #: ../src/solve-commit.cc:938
 msgid "Error creating the solver test case."
-msgstr "Ocorreu um erro ao criar o caso teste para o solucionador."
+msgstr "A feloldási teszteset létrehozása sikertelen."
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
-msgstr "Computando a atualização da distribuição..."
+msgstr "A disztribúció frissítésének számítása..."
 
 #: ../src/solve-commit.cc:983
 msgid "Resolving package dependencies..."
-msgstr "Resolvendo as dependências de pacote..."
+msgstr "Függőségek feloldása..."
 
 #: ../src/solve-commit.cc:1009
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "São necessários privilégios de root para resolver problemas de dependências."
+msgstr "A csomagok függőségi problémáinak javításához root jogosultság szükséges."
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
@@ -1918,42 +1814,41 @@ msgstr "São necessários privilégios de root para resolver problemas de depend
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:1026
 msgid "y/n/p"
-msgstr "s/n/p"
+msgstr "i/n/p"
 
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1028
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr "Aceitar o resumo e proceder com a instalação/remoção dos pacotes."
+msgstr "Fogadja el az összegzést és folytassa a csomagok telepítésével/eltávolításával."
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1030
 msgid "Cancel the operation."
-msgstr "Cancelar a operação"
+msgstr "A művelet megszakítása."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1032
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr "Reiniciar o solucionador em modo 'no-force-resolution' (sem forçar a resolução) para exibir os problemas de dependências."
+msgstr "A no-force-resolution módban indítsa újra a solvert a függőségi problémák megjelenítéséhez."
 
 #: ../src/solve-commit.cc:1074
 msgid "committing"
-msgstr "submetendo"
+msgstr "véglegesítés"
 
 #: ../src/solve-commit.cc:1079
 msgid "(dry run)"
-msgstr "(corrida a seco)"
+msgstr "(üresjárat)"
 
-#: ../src/solve-commit.cc:1108
-#: ../src/solve-commit.cc:1142
+#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problema ao obter o pacote do repositório:"
+msgstr "Hiba történt a csomagfájl letöltésekor a telepítési forrásról:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
 #: ../src/solve-commit.cc:1138
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "O repositório '%s' está desatualizado. Executar '%s' deve ajudar."
+msgstr "A(z) %s telepítési forrás nem naprakész. Frissítheti a '%s' parancs futtatásával."
 
 #: ../src/solve-commit.cc:1150
 msgid ""
@@ -1964,272 +1859,268 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Falha ao verificar a integridade do pacote. Este pode ser um problema com o repositório ou a mídia.\n"
-"Tente um dos seguintes procedimentos:\n"
-" \n"
-" - apenas repita o comando anterior\n"
-" - atualize os repositórios usando 'zypper refresh'\n"
-" - use outra mídia de instalação (se, por exemplo, estiver danificada)\n"
-" - use outro repositório"
+"A csomag integritás-ellenőrzése meghiúsult. Ez a telepítési forrással vagy adathordozóval kapcsolatos problémát jelez. Próbálkozzon a következőkkel:\n"
+"\n"
+" - próbálja újra az előző parancsot\n"
+" - frissítse a telepítési forrásokat a 'zypper refresh' paranccsal\n"
+" - használjon másik telepítő adathordozót (ha az sérült)\n"
+" - használjon másik telepítési forrást"
 
 #: ../src/solve-commit.cc:1163
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "Ocorreu um erro durante ou após a instalação ou remoção de pacotes:"
+msgstr "A telepítés során hiba történt:"
 
 #: ../src/solve-commit.cc:1183
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "Uma das correções instaladas requer a reinicialização da sua máquina. Por favor faça isto assim que possível."
+msgstr "A telepített frissítések egyike a számítógép újraindítását igényli. Ezt amint lehet, tegye meg."
 
 #: ../src/solve-commit.cc:1187
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "Uma das correções instaladas afeta o gerenciador de pacotes propriamente dito. Execute este comando uma vez mais para instalar qualquer outra correção necessária."
+msgstr "A telepített frissítések egyike magát a csomagkezelőt érinti, ezért futtassa még egyszer a parancsot a további frissítések telepítése érdekében."
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:65
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "%d correção necessária"
-msgstr[1] "%d correções necessárias"
+msgstr[0] "%d javítás szükséges"
+msgstr[1] "%d javítás szükséges"
 
+# modules/inst_config_x11.ycp:216
+# /usr/lib/YaST2/clients/inst_config_x11.ycp:865
 #. translators: %d is the number of security patches
 #: ../src/update.cc:69
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "%d correção de segurança"
-msgstr[1] "%d correções de segurança"
+msgstr[0] "%d biztonsági frissítés"
+msgstr[1] "%d biztonsági frissítések"
 
-#: ../src/update.cc:174
-#: ../src/utils/misc.cc:113
+#: ../src/update.cc:174 ../src/utils/misc.cc:113
 msgid "Needed"
-msgstr "Necessário"
+msgstr "Szükséges"
 
 #: ../src/update.cc:190
 msgid ""
 "These are only the updates affecting the updater itself.\n"
 "Other updates are available too.\n"
 msgstr ""
-"Estas são somente as atualizações que afetam o atualizador propriamente dito.\n"
-"Outras atualizações estão disponíveis também.\n"
+"Ezek a frissítések csak magát a frissítőt érintik.\n"
+"Ezen kívül más frissítések is elérhetők.\n"
 
-#: ../src/update.cc:198
-#: ../src/update.cc:432
+#: ../src/update.cc:198 ../src/update.cc:432
 msgid "No updates found."
-msgstr "Nenhuma atualização encontrada."
+msgstr "Nem találhatók frissítések."
 
 #: ../src/update.cc:317
 msgid "Package updates"
-msgstr "Atualizações de pacotes"
+msgstr "Csomagfrissítések"
 
 #: ../src/update.cc:319
 msgid "Patches"
-msgstr "Correções"
+msgstr "Javítások"
 
+# modules/inst_config_x11.ycp:216
+# /usr/lib/YaST2/clients/inst_config_x11.ycp:865
 #: ../src/update.cc:321
 msgid "Pattern updates"
-msgstr "Atualizações de padrões"
+msgstr "Minták frissítései"
 
 #: ../src/update.cc:323
 msgid "Product updates"
-msgstr "Atualizações de produtos"
+msgstr "Termék frissítések"
 
 #: ../src/update.cc:495
 #, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Não foi possível analisar '%s < %s'"
+msgstr "Nem dolgozható fel: '%s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/update.cc:551
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "'%s' é interativo, ignorado."
+msgstr "'%s' interacktív, kihagyásra kerül."
 
 #: ../src/update.cc:606
 #, c-format
 msgid "No patches matching '%s' found."
-msgstr "Nenhuma correção que corresponda a '%s' foi encontrada."
+msgstr "Nem található illeszkedő csomag erre: '%s'."
 
 #: ../src/update.cc:609
 #, c-format
 msgid "Patch '%s' not found."
-msgstr "Correção '%s' não encontrada."
+msgstr "'%s' nem található."
 
 #: ../src/update.cc:677
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr "Nenhum pacote que corresponda a '%s' está instalado."
+msgstr "Nincs telepítve illeszkedő csomag ehhez: '%s'."
 
 #: ../src/update.cc:680
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "O pacote '%s' não está instalado."
+msgstr "'%s' csomag nincs telepítve."
 
 #: ../src/update.cc:692
 #, c-format
 msgid "No update candidate for '%s'."
-msgstr "Nenhuma atualização se candidata para '%s'."
+msgstr "Nincs jelölt a következő frissítésére: '%s'."
 
 #: ../src/utils/getopt.cc:57
 msgid "Unknown option "
-msgstr "Opção desconhecida"
+msgstr "Ismeretlen kapcsoló: "
 
 #: ../src/utils/getopt.cc:60
 msgid "Missing argument for "
-msgstr "Argumento faltante para"
+msgstr "A következő argumentuma hiányzik: "
 
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:87
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr "%s utilizado conjuntamente com %s, que conflita um com o outro. Esta propriedade será mantida inalterada."
+msgstr "%s és %s ellentmondanak egymásnak. Ez a tulajdonság változatlan marad."
 
 #: ../src/utils/messages.cc:22
 msgid "Please file a bug report about this."
-msgstr "Por favor registre um relatório de bug sobre isto."
+msgstr "Küldjön erről egy hibajelentést."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/utils/messages.cc:25
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Veja em http://en.opensuse.org/Zypper#Troubleshooting para obter instruções."
+msgstr "Utasításokért tekintse meg a http://en.opensuse.org/Zypper#Troubleshooting oldalt."
 
-#: ../src/utils/messages.cc:40
-#: ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68
-#: ../src/Zypper.cc:3598
+#: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3598
 msgid "Usage"
-msgstr "Uso"
+msgstr "Használat"
 
 #: ../src/utils/messages.cc:41
 msgid "Too many arguments."
-msgstr "Excesso de argumentos."
+msgstr "Túl sok paraméter."
 
-#: ../src/utils/messages.cc:48
-#: ../src/Zypper.cc:2627
-#: ../src/Zypper.cc:3595
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2627 ../src/Zypper.cc:3595
 msgid "Required argument missing."
-msgstr "O argumento necessário está faltando."
+msgstr "Szükséges paraméter hiányzik."
 
 #: ../src/utils/messages.cc:60
 #, c-format
 msgid "The '--%s' option has currently no effect."
-msgstr "A opção '--%s' atualmente não tem efeito."
+msgstr "A '--%s' kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Você escolheu ignorar um problema com o download ou a instalação de um pacote que pode levar a quebra de dependências de outros pacotes. É recomendado executar '%s' após a operação ser finalizada."
+msgstr "Úgy döntött, figyelmen kívül hagy egy olyan csomag letöltésével vagy telepítésével kapcsolatos hibát, amely a többi csomag függőségeinek hibájához vezethet. Ajánlott a '%s' parancs futtatása a művelet végeztével."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "pacote"
-msgstr[1] "pacotes"
+msgstr[0] "csomag"
+msgstr[1] "csomagok"
 
 #: ../src/utils/misc.cc:89
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "padrão"
-msgstr[1] "padrões"
+msgstr[0] "minta"
+msgstr[1] "minták"
 
 #: ../src/utils/misc.cc:91
 msgid "product"
 msgid_plural "product"
-msgstr[0] "produto"
-msgstr[1] "produtos"
+msgstr[0] "termék"
+msgstr[1] "termék"
 
 #: ../src/utils/misc.cc:93
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "correção"
-msgstr[1] "correções"
+msgstr[0] "javítás"
+msgstr[1] "javítások"
 
 #: ../src/utils/misc.cc:95
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "pacote fonte"
-msgstr[1] "pacotes fonte"
+msgstr[0] "forráscsomag"
+msgstr[1] "forráscsomagok"
 
 #. default
 #: ../src/utils/misc.cc:97
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "resolvível"
-msgstr[1] "resolvíveis"
+msgstr[0] "feloldható"
+msgstr[1] "feloldhatók"
 
 #: ../src/utils/misc.cc:106
 msgid "Unknown"
-msgstr "Desconhecido"
+msgstr "Ismeretlen"
 
 #: ../src/utils/misc.cc:118
 msgid "Not Applicable"
-msgstr "Não Aplicável"
+msgstr "Nem alkalmazható"
 
 #: ../src/utils/misc.cc:191
 msgid "Specified local path does not exist or is not accessible."
-msgstr "O caminho local especificado não existe ou não é acessível."
+msgstr "A megadott útvonal nem létezik vagy nem elérhető."
 
 #: ../src/utils/misc.cc:203
 msgid "Given URI is invalid"
-msgstr "A URL informada não é válida"
+msgstr "A megadott URI érvénytelen"
 
 #: ../src/utils/misc.cc:254
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Problema ao copiar o arquivo RPM especificado para o diretório de cache."
+msgstr "Hiba történt a megadott RPM-fájl gyorsítótár könyvtárába történő másolásakor."
 
 #: ../src/utils/misc.cc:255
 msgid "Perhaps you are running out of disk space."
-msgstr "Talvez você esteja ficando sem espaço no disco."
+msgstr "Lehetséges, hogy elfogyott a szabad lemezterület."
 
 #: ../src/utils/misc.cc:263
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problema ao obter o arquivo RPM especificado"
+msgstr "Hiba történt a megadott RPM fájl letöltésekor"
 
 #: ../src/utils/misc.cc:264
 msgid "Please check whether the file is accessible."
-msgstr "Por favor verifique se o arquivo é acessível."
+msgstr "Ellenőrizze, hogy a megadott fájl valóban elérhető."
 
 #: ../src/utils/misc.cc:321
 #, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "Não foi possível interpretar o recurso '%s'."
+msgstr "A képesség feldolgozása sikertelen: %s."
 
 #: ../src/utils/pager.cc:30
 #, c-format
 msgid "Press '%c' to exit the pager."
-msgstr "Pressione '%c' para sair do paginador..."
+msgstr "Nyomja meg a '%c' gombot a kilépéshez."
 
 #: ../src/utils/pager.cc:40
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "Use as setas ou as teclas Pg Up/Pg Dn para rolar o texto por linhas ou páginas."
+msgstr "Használja a kurzorbillentyűket és a pgUp/pgDown gombokat a szöveg soronként vagy oldalanként történő léptetéséhez."
 
 #: ../src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Use a tecla enter ou espaço para rolar o texto por linhas ou páginas."
+msgstr "Használja az Enter vagy Szóköz billentyűket a szöveg soronként vagy oldalanként történő léptetéséhez."
 
-# internal key used: Cancel
 #. ----------------------------------------------------------------------------
 #: ../src/utils/prompt.cc:87
 msgid "abort"
-msgstr "cancelar"
+msgstr "megszakítás"
 
 #: ../src/utils/prompt.cc:87
 msgid "retry"
-msgstr "repetir"
+msgstr "újra"
 
 #: ../src/utils/prompt.cc:87
 msgid "ignore"
-msgstr "ignorar"
+msgstr "figyelmen kívül hagy"
 
 #: ../src/utils/prompt.cc:99
 msgid "Abort, retry, ignore?\n"
-msgstr "Cancelar, repetir ou ignorar?\n"
+msgstr "Megszakítás, újra, mellőz?\n"
 
 #: ../src/utils/prompt.cc:134
 #, c-format
 msgid "autoselect %s after %u "
-msgstr "selecionar automaticamente %s após %u "
+msgstr "automatikusan kiválasztja %s -t %u után"
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2239,53 +2130,51 @@ msgstr "selecionar automaticamente %s após %u "
 #. The answers should be lower case letters.
 #: ../src/utils/prompt.cc:158
 msgid "a/r/i"
-msgstr "c/r/i"
+msgstr "m/r/l"
 
 #: ../src/utils/prompt.cc:159
 msgid "Abort, retry, ignore?"
-msgstr "Cancelar, repetir ou ignorar?"
+msgstr "Megszakítás, újra, mellőz?"
 
-#: ../src/utils/prompt.cc:168
-#: ../src/utils/prompt.cc:193
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:193
 #: ../src/utils/prompt.cc:249
 msgid "yes"
-msgstr "sim"
+msgstr "igen"
 
-#: ../src/utils/prompt.cc:168
-#: ../src/utils/prompt.cc:194
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:194
 #: ../src/utils/prompt.cc:249
 msgid "no"
-msgstr "não"
+msgstr "nem"
 
 #: ../src/utils/prompt.cc:241
 #, c-format
 msgid "Invalid answer '%s'."
-msgstr "Resposta inválida '%s'."
+msgstr "Érvénytelen válasz: '%s'."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
 #: ../src/utils/prompt.cc:248
 #, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
-msgstr "Digite 'y' para '%s' ou 'n' para '%s' caso nada mais funcione para você."
+msgstr "Válassza az 'y'-t az '%s'-hez vagy az 'n'-t a '%s'-hez, amennyiben más nem működik."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:112
 msgid "Not found"
-msgstr "Não encontrado"
+msgstr "Nem található"
 
 # error box title
 #: ../src/utils/prompt.h:112
 msgid "I/O error"
-msgstr "Erro de E/S"
+msgstr "I/O hiba"
 
 #: ../src/utils/prompt.h:112
 msgid "Invalid object"
-msgstr "Objeto inválido."
+msgstr "Érvénytelen objektum"
 
 #: ../src/utils/prompt.h:119
 msgid "Error"
-msgstr "Erro"
+msgstr "Hiba"
 
 #: ../src/Zypper.cc:154
 msgid ""
@@ -2306,24 +2195,19 @@ msgid ""
 "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
 "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgstr ""
-"  Opções globais:\n"
-"\t--help, -h\t\tAjuda.\n"
-"\t--version, -V\t\tExibir o número da versão.\n"
-"\t--quiet, -q\t\tSuprimir a saída comum, exibir apenas as\n"
-"\t\t\t\tmensagens de erro.\n"
-"\t--verbose, -v\t\tAumentar o detalhamento.\n"
-"\t--no-abbrev, -A\t\tNão abreviar o texto nas tabelas.\n"
-"\t--table-style, -s\tEstilo da tabela (inteiro).\n"
-"\t--rug-compatible, -r\tAtivar a compatibilidade com o rug.\n"
-"\t--non-interactive, -n\tNão perguntar nada, utilizar as respostas\n"
-"\t\t\t\tpadrão automaticamente.\n"
-"\t--xmlout, -x\t\tAlterar para a saída XML.\n"
-"\t--reposd-dir, -D <dir>\tUsar o diretório alternativo para arquivos\n"
-"\t\t\t\tde definição de repositórios.\n"
-"\t--cache-dir, -C <dir>\tUsar o diretório alternativo para o cache de\n"
-"\t\t\t\tmetadados do banco de dados.\n"
-"\t--raw-cache-dir <dir>\tUsar o diretório alternativo para o cache de\n"
-"\t\t\t\tmetadados brutos.\n"
+"  Globális kapcsolók:\n"
+"\t--help, -h\t\tSúgó\n"
+"\t--version, -V\t\tVerziószám kiírása.\n"
+"\t--quiet, -q\t\tNormál kimenet elnyomása, csak a hibaüzenetek kiírása.\n"
+"\t--verbose, -v\t\tKimenet részletezettségének növelése.\n"
+"\t--no-abbrev, -A\t\tNe rövidítse a szöveget a táblázatokban.\n"
+"\t--table-style, -s\tTáblastílus (integer).\n"
+"\t--rug-compatible, -r\tRug-kompatibilitás engedélyezése.\n"
+"\t--non-interactive\tNe kérdezzen semmit, az alapértelmezett válaszokat használja automatikusan.\n"
+"\t--xmlout, -x\t\tVáltás XML kimenetre.\n"
+"\t--reposd-dir, -D <dir>\tTelepítési forrás definíciós fájl alternatív\n \t\t\t\tkönyvtárának használata.\n"
+"\t--cache-dir, -C <dir>\tMetaadat gyorsítótár-adatbázis alternatív könyvtárának használata.\n"
+"\t--raw-cache-dir <dir>\tNyers metaadat gyorsítótár-adatbázis alternatív könyvtárának használata.\n"
 
 #: ../src/Zypper.cc:172
 msgid ""
@@ -2333,11 +2217,11 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"     Opções do repositório:\n"
-"\t--no-gpg-checks\t\tIgnorar as falhas na verificação GPG e continuar.\n"
-"\t--plus-repo, -p <URL>\tUsar um repositório adicional\n"
-"\t--disable-repositories\tNão ler os metadados do repositório.\n"
-"\t--no-refresh\t\tNão atualizar os repositórios.\n"
+"     Telepítési forrásokhoz használható kapcsolók:\n"
+"\t--no-gpg-checks\t\tA GPG ellenőrzési hibák figyelmen kívül hagyása és folytatás.\n"
+"\t--plus-repo, -p<URI>\tTovábbi telepítési forrás használata.\n"
+"\t--disable-repositories\tNem olvassa ki a metaadatokat a telepítési forrásból.\n"
+"\t--no-refresh\tA telepítési források frissítésének mellőzése.\n"
 
 #: ../src/Zypper.cc:179
 msgid ""
@@ -2346,10 +2230,10 @@ msgid ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"     Opções de destino:\n"
-"\t--root, -R <dir>\t\tOperar em um diretório raiz diferente.\n"
+"     Cél kapcsolói:\n"
+"\t--root, -R <dir>\tMűködés másik root könyvtárban.\n"
 "\t--disable-system-resolvables\n"
-"\t\t\t\tNão ler os pacotes instalados.\n"
+"\t\t\t\tNe olvassa be a telepített csomagokat.\n"
 
 #: ../src/Zypper.cc:186
 msgid ""
@@ -2357,9 +2241,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
-"  Comandos:\n"
-"\thelp, ?\t\t\tExibir a ajuda.\n"
-"\tshell, sh\t\tAceitar múltiplos comandos por vez.\n"
+"  Parancsok:\n"
+"\thelp, ?\t\t\tSegítség megjelenítése.\n"
+"\tshell, sh\t\tTöbb parancs elfogadása egyszerre.\n"
 
 #: ../src/Zypper.cc:191
 msgid ""
@@ -2372,14 +2256,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Manipulação de repositórios:\n"
-"\trepos, lr\t\tListar todos os repositórios definidos.\n"
-"\taddrepo, ar\t\tAdicionar um novo repositório.\n"
-"\tremoverepo, rr\t\tRemover o repositório especificado.\n"
-"\trenamerepo, nr\t\tRenomear o repositório especificado.\n"
-"\tmodifyrepo, mr\t\tAlterar o repositório especificado.\n"
-"\trefresh, ref\t\tAtualizar todos os repositórios.\n"
-"\tclean\t\t\tLimpar os caches locais.\n"
+"     Telepítési források kezelése:\n"
+"\trepos, lr\t\tAz összes forrás listázása.\n"
+"\taddrepo, ar\t\tÚj forrás hozzáadása.\n"
+"\tremoverepo, rr\t\tMegadott forrás eltávolítása.\n"
+"\trenamerepo, nr\t\tMegadott forrás átnevezése.\n"
+"\tmodifyrepo, mr\t\tMegadott forrás módosítása.\n"
+"\trefresh, ref\t\tTelepítési forrás frissítése.\n"
+"\tclean\t\t\tHelyi gyorsítótárak kiürítése.\n"
 
 #: ../src/Zypper.cc:201
 msgid ""
@@ -2390,12 +2274,12 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"     Gerenciamento de serviços:\n"
-"\tservices, ls\t\tListar todos os serviços definidos.\n"
-"\taddservice, as\t\tAdicionar um novo serviço.\n"
-"\tmodifyservice, ms\tAlterar o serviço especificado.\n"
-"\tremoveservice, rs\tRemover o serviço especificado.\n"
-"\trefresh-services, refs\tAtualizar todos os serviços.\n"
+"     Szolgáltatások kezelése:\n"
+"\tservices, lr\t\tAz összes szolgáltatás listázása.\n"
+"\taddservice, ar\t\tÚj szolgáltatások hozzáadása.\n"
+"\tmodifyservice, rr\t\tMegadott szolgáltatások eltávolítása.\n"
+"\trenameservice, nr\t\tMegadott szolgáltatások átnevezése.\n"
+"\trefresh-services, ref\t\tSzolgáltatások frissítése.\n"
 
 #: ../src/Zypper.cc:209
 msgid ""
@@ -2409,15 +2293,15 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"     Gerenciamento de software:\n"
-"\tinstall, in\t\tInstalar pacotes.\n"
-"\tremove, rm\t\tRemover pacotes.\n"
-"\tverify, ve\t\tVerificar a integridade das dependências dos pacotes.\n"
-"\tsource-install, si\tInstalar pacotes fonte e suas dependências\n"
-"\t\t\t\tde compilação.\n"
+"     Szoftverkezelés:\n"
+"\tinstall, in\t\tCsomagok telepítése.\n"
+"\tremove, rm\t\tCsomagok vagy feloldhatók eltávolítása.\n"
+"\tverify, ve\t\tA csomagfüggőségek ellenőrzése.\n"
+"\tsource-install, si\tForráscsomagok és fordítási függőségeik\n"
+"\t\t\t\ttelepítése.\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\tInstalar novos pacotes adicionados\n"
-"\t\t\t\trecomendados pelos pacotes instalados.\n"
+"\t\t\t\tA telepített csomagok által ajánlott\n"
+"\t\t\t\túj csomagok telepítése.\n"
 
 #: ../src/Zypper.cc:220
 msgid ""
@@ -2429,13 +2313,13 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
-"     Gerenciamento de atualização:\n"
-"\tupdate, up\t\tAtualizar os pacotes instalados com novas versões.\n"
-"\tlist-updates, lu\tListar as atualizações disponíveis.\n"
-"\tpatch\t\t\tInstalar as correções necessárias.\n"
-"\tlist-patches, lp\tListar as correções necesárias.\n"
-"\tdist-upgrade, dup\tFazer uma atualização na distribuição.\n"
-"\tpatch-check, pchk\tVerificar por correções.\n"
+"     Frissítések kezelése:\n"
+"\tupdate, up\t\tA telepített csomagok frissítése újabb verziókkal.\n"
+"\tlist-updates, lu\tAz elérhető frissítések listázása.\n"
+"\tpatch\t\t\tA szükséges javítások telepítése.\n"
+"\tlist-patches, lp\tA szükséges javítások listázása.\n"
+"\tdist-upgrade, dup\tDisztribúció-frissítés elvégzése.\n"
+"\tpatch-check, pchk\tJavítások keresése.\n"
 
 #: ../src/Zypper.cc:229
 msgid ""
@@ -2451,17 +2335,17 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"     Pesquisa:\n"
-"\tsearch, se\t\tPesquisar por pacotes que coincidam com um padrão.\n"
-"\tinfo, if\t\tExibir todas as informações dos pacotes especificados.\n"
-"\tpatch-info\t\tExibir todas as informações das correções especificadas.\n"
-"\tpattern-info\t\tExibir todas as informações dos padrões especificados.\n"
-"\tproduct-info\t\tExibir todas as informações dos produtos especificados.\n"
-"\tpatches, pch\t\tListar todas as correções disponíveis.\n"
-"\tpackages, pa\t\tListar todos os pacotes disponíveis.\n"
-"\tpatterns, pt\t\tListar todos os padrões disponíveis.\n"
-"\tproducts, pd\t\tListar todos os produtos disponíveis.\n"
-"\twhat-provides, wp\tListar pacotes que forneçam o recurso especificado.\n"
+"     Lekérdezés:\n"
+"\tsearch, se\t\tMintának megfelelő csomagok keresése.\n"
+"\tinfo, if\t\tA megadott csomagok információinak megjelenítése.\n"
+"\tpatch-info\t\tA megadott javítások információinak megjelenítése.\n"
+"\tpattern-info\t\tA megadott minták információinak megjelenítése.\n"
+"\tproduct-info\t\tA megadott termékek információinak megjelenítése.\n"
+"\tpatches, pch\t\tElérhető javítások listázása.\n"
+"\tpackages, pa\t\tElérhető csomagok listázása.\n"
+"\tpatterns, pt\t\tElérhető minták listázása.\n"
+"\tproducts, pd\t\tElérhető termékek listázása.\n"
+"\twhat-provides, wp\tA megadott képességet biztosító csomagok listázása.\n"
 
 #: ../src/Zypper.cc:244
 msgid ""
@@ -2470,10 +2354,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"     Travas de Pacotes:\n"
-"\taddlock, al\t\tAdicionar uma trava de pacote.\n"
-"\tremovelock, rl\t\tRemover uma trava de pacote.\n"
-"\tlocks, ll\t\tListar as travas atuais.\n"
+"     Csomagzárolások:\n"
+"\taddlock, al\t\tCsomagzárolás hozzáadása.\n"
+"\tremovelock, rl\t\tCsomagzárolás eltávolítása.\n"
+"\tlocks, ll\t\tCsomagzárolások listázása.\n"
 
 #: ../src/Zypper.cc:250
 msgid ""
@@ -2483,83 +2367,82 @@ msgid ""
 "\tlicenses\t\tPrint report about licenses and EULAs of\n"
 "\t\t\t\tinstalled packages.\n"
 msgstr ""
-"     Outros comandos:\n"
-"\tversioncmp, vcmp\tComparar duas strings de versão.\n"
-"\ttargetos, tos\t\tExibir a string de identificação do sistema\n"
-"\t\t\t\toperacional de destino.\n"
-"\tlicenses\t\tExibir um relatório sobre as licenças e EULAs dos\n"
-"\t\t\t\tpacotes instalados.\n"
+"     Egyéb parancsok:\n"
+"\tversioncmp, vcmp\tKét verzió karakterlánc összehasonlítása.\n"
+"\ttargetos, tos\t\tA cél operációs rendszer azonosítójának kiírása.\n"
+"\tlicenses\t\tRiport megjelenítése a telepített csomagok\n"
+"\t\t\t\tlincenszerződéseiről és EULA-iról.\n"
 
 #: ../src/Zypper.cc:258
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 msgstr ""
-"  Uso:\n"
-"\tzypper [--opções-globais] <comando> [--opções-do-comando] [argumentos]\n"
+"  Használat:\n"
+"\tzypper [--globális-kapcsolók] <parancs> [--parancskapcsolók] [paraméterek]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:283
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Digite '%s' para exibir uma lista com as opções e comandos globais."
+msgstr "A globális kapcsolók és parancsok listájához írja be a következőt: '%s'."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:292
 #, c-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Digite '%s' para ter uma ajuda específica sobre o comando."
+msgstr "A parancsspecifikus súgó használatához írja be a következőt: '%s'."
 
 #: ../src/Zypper.cc:393
 #, c-format
 msgid "Verbosity: %d"
-msgstr "Detalhamento: %d"
+msgstr "Részletesség: %d"
 
 #: ../src/Zypper.cc:407
 #, c-format
 msgid "Invalid table style %d."
-msgstr "Estilo de tabela inválido %d."
+msgstr "Érvénytelen táblázatstílus %d."
 
 #: ../src/Zypper.cc:408
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr "Use um número inteiro de %d a %d"
+msgstr "Használjon egy %d és %d közötti egész számot"
 
 #: ../src/Zypper.cc:439
 msgid "Entering non-interactive mode."
-msgstr "Entrando no modo não-interativo."
+msgstr "Belépés a nem interaktív módba."
 
 #: ../src/Zypper.cc:445
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Entrando no modo sem verificação gpg ('no-gpg-checks')."
+msgstr "Belépés a 'gpg ellenőrzések kihagyása' módba."
 
 #: ../src/Zypper.cc:456
 msgid "The path specified in the --root option must be absolute."
-msgstr "O caminho especificado na opção --root deve ser absoluto."
+msgstr "A --root kapcsoló használatánál abszolút elérési útvonalat kell megadni."
 
 #: ../src/Zypper.cc:485
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Repositórios desabilitados, utilizando o banco de dados apenas dos pacotes instalados."
+msgstr "Telepítési forrás letiltva, csak a telepített csomagok adatbázisát használja."
 
 #: ../src/Zypper.cc:497
 msgid "Autorefresh disabled."
-msgstr "Atualização automática desabilitada."
+msgstr "Automatikus frissítés kikapcsolva."
 
 #: ../src/Zypper.cc:504
 msgid "Ignoring installed resolvables."
-msgstr "Ignorando resolvíveis instalados."
+msgstr "Telepített feloldhatók figyelmen kívül hagyása."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #: ../src/Zypper.cc:599
 #, c-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "A opção %s não tem efeito aqui, ignorando."
+msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
 #: ../src/Zypper.cc:776
 msgid "Unexpected exception."
-msgstr "Exceção não esperada."
+msgstr "Váratlan kivétel."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2585,24 +2468,24 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgstr ""
-"install (in) [opções] <recurso|url_arquivo_rpm> ...\n"
+"install (in) [kapcsolók] <képesség|rpm_fájl_uri> ...\n"
 "\n"
-"Instalar pacotes com os recursos especificados ou arquivos RPM de uma localização especificada. O recurso é NOME[OP<VERSÃO>], onde OP é um dos <, <=, =, >=, >.\n"
+"A megadott képességekkel rendelkező feloldandók vagy a megadott helyen található RPM-fájlok telepítése. Egy képesség a NAME[OP<VERZIÓ>], ahol az OP egy a következőkből: <, <=, =, >=, >.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>        Instalar pacotes somente do repositório especificado.\n"
-"-t, --type <tipo>               Tipo de pacotel (%s).\n"
-"                                Padrão: %s.\n"
-"-n, --name                      Selecionar pacotes pelo nome, não pelo recurso.\n"
-"-C, --capability                Selecionar pacotes pelo recurso.\n"
-"-f, --force                     Instalar mesmo que o item já esteja instalado (reinstalar).\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution          Forçar o solver a encontrar a solução (mesmo que agressiva).\n"
-"-D, --dry-run                   Testar a instalação, não instalar realmente.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <álnév|#|URI>        Csak a megadott álnevű telepítési forrásból telepíti a feloldandókat.\n"
+"-t, --type <típus>              Feloldandók típusa (%s)\n"
+"                                Alapértelmezés: %s\n"
+"-n, --name                      Feloldandó kiválasztása név és nem képesség szerint\n"
+"-C, --capability                Feloldandó kiválasztása képesség szerint\n"
+"-f, --force                     Telepítés akkor is, ha már telepítve van (újratelepítés)\n"
+"-l, --auto-agree-with-licenses  Automatikusan elfogadja a külső fél licencfeltételeit.\n"
+"                                További információért nézze meg a 'man zypper' parancs kimenetét.\n"
+"    --debug-solver              Hibakereséshez feloldási teszteset létrehozása.\n"
+"    --no-recommends             Ne telepítse az ajánlott, csak a szükséges csomagokat.\n"
+"-R, --no-force-resolution       Ne kényszerítse a solvert a megoldás megtalálására, inkább kérdezzen.\n"
+"    --force-resolution          A solver kényszerítése a megoldás megtalálására (akár agresszív módon is).\n"
+"-D, --dry-run               A telepítés tesztelése, valójában ne telepítsen semmit.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2624,20 +2507,20 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgstr ""
-"remove (rm) [opções] <recurso> ...\n"
+"remove (rm) [kapcsolók] <képesség> ...\n"
 "\n"
-"Remover pacotes com os recursos especificados. Um recurso é NOME[OP<VERSÃO>], onde OP é um de <, <=, =, >=, >.\n"
+"A megadott képességekkel rendelkező feloldandók eltávolítása. Egy képesség a NAME[OP<VERZIÓ>], ahol az OP egy a következőkből: <, <=, =, >=, >.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>        Operar apenas com os pacotes do repositório especificado pelo apelido.\n"
-"-t, --type <tipo>               Tipo de pacote (%s).\n"
-"                                Padrão: %s.\n"
-"-n, --name                      Selecionar pacotes pelo nome, não pelo recurso.\n"
-"-C, --capability                Selecionar pacotes pelo recurso.\n"
-"    --debug-solver              Criar um caso teste do solver para depuração.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution          Forçar o solver a encontrar a solução (mesmo que agressiva).\n"
-"-D, --dry-run                   Testar a remoção, não remover realmente.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <álnév|#|URI>        Csak a megadott álnevű telepítési forrásban szereplő feloldandókkal dolgozzon.\n"
+"-t, --type <típus>              Feloldandók típusa (%s)\n"
+"                                Alapértelmezett: %s\n"
+"-n, --name                      Feloldandó kiválasztása név és nem képesség szerint.\n"
+"-C, --capability                Feloldandó kiválasztása képesség szerint\n"
+"    --debug-solver              Hibakereséshez feloldási teszteset létrehozása.\n"
+"-R, --no-force-resolution       Ne kényszerítse a solvert a megoldás megtalálására, inkább kérdezzen.\n"
+"    --force-resolution          A solver kényszerítése a megoldás megtalálására (akár agresszív módon is).\n"
+"-D, --dry-run               Az eltávolítás tesztelése, valójában ne töröljön semmit.\n"
 
 #: ../src/Zypper.cc:939
 msgid ""
@@ -2650,14 +2533,14 @@ msgid ""
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
-"source-install (si) [opções] <nome> ...\n"
+"source-install (si) [kapcsolók] <név> ...\n"
 "\n"
-"Instalar os pacotes fonte especificados e suas dependências de compilação.\n"
+"A megadott forráscsomagok és a fordítási függőségeik telepítése.\n"
 "\n"
-"  Opções do comando:\n"
-"-d, --build-deps-only    Instalar apenas as dependências de compilação dos pacotes especificados.\n"
-"-D, --no-build-deps      Não instalar dependências de compilação.\n"
-"-r, --repo <apelido|#|URL> Instalar os pacotes somente dos repositórios especificados.\n"
+"  Parancs kapcsolói:\n"
+"-d, --build-deps-only     Csak a megadott csomagok fordítási függőségeinek telepítése.\n"
+"-D, --no-build-deps       Ne telepítse a fordítási függőségeket.\n"
+"-r, --repo <álnév|#|URI> Csak a megadott telepítési forrásból telepítsen.\n"
 
 #: ../src/Zypper.cc:967
 msgid ""
@@ -2670,14 +2553,14 @@ msgid ""
 "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
 "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgstr ""
-"verify (ve) [opções]\n"
+"verify (ve) [kapcsolók]\n"
 "\n"
-"Verificar se as dependências dos pacotes instalados estão satisfeitas e reparar eventuais problemas com dependências.\n"
+"A telepített csomagok függőségeinek ellenőrzése, és a függőségi problémák javítása.\n"
 "\n"
-"  Opções do comando:\n"
-"    --no-recommends      Não instalar os pacotes recomendados, somente os requeridos.\n"
-"-D, --dry-run            Testar a reparação, não reparar realmente.\n"
-"-r, --repo <apelido|#|URL> Usar somente repositórios especificados para instalar os pacotes faltantes.\n"
+"  Parancs kapcsolói:\n"
+"    --no-recommends             Ne telepítse az ajánlott, csak a szükséges csomagokat.\n"
+"-D, --dry-run             A javítás tesztelése, valójában ne végezzen semmilyen műveletet.\n"
+"-r, --repo <álnév|#|URI> Csak a megadott álnevű telepítési forrásból telepíti a hiányzó csomagokat.\n"
 
 #: ../src/Zypper.cc:991
 msgid ""
@@ -2690,14 +2573,14 @@ msgid ""
 "-D, --dry-run            Test the installation, do not actually install anything.\n"
 "    --debug-solver       Create solver test case for debugging.\n"
 msgstr ""
-"install-new-recommends (inr) [opções]\n"
+"install-new-recommends (inr) [kapcsolók]\n"
 "\n"
-"Instalar novos pacotes adicionados recomendados pelos pacotes já instalados. Isto pode tipicamente ser usado para instalar novos pacotes de idiomas ou drivers para um novo hardware adicionado.\n"
+"A már telepített csomagok által ajánlott új csomagok telepítése. Tipikusan ilyen lehet az új nyelvi csomagok vagy illesztőprogramok egy új hardverhez.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL> Usar somente o repositório especificado para instalar osl pacotes.\n"
-"-D, --dry-run            Testar a instalação, não instalar realmente.\n"
-"    --debug-solver       Criar um caso teste do solucionador para depuração.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <alnév|#|URI> Csak a megadott telepítési forrásból telepítsen.\n"
+"-D, --dry-run            A telepítés tesztelése, valójában ne telepítsen semmit.\n"
+"    --debug-solver       Hibakereséshez feloldási teszteset létrehozása.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1018
@@ -2712,14 +2595,14 @@ msgid ""
 "-d, --disable           Add the service as disabled.\n"
 "-n, --name              Specify descriptive name for the service.\n"
 msgstr ""
-"addservice (as) [opções] <URL> [apelido]\n"
+"addservice (as) [paraméterek] <URI> <álnév>\n"
 "\n"
-"Adicionar um serviço de índice do repositório no sistema.\n"
+"Telepítési forrás index szolgáltatás hozzáadása a rendszerhez.\n"
 "\n"
-"  Opções de comando:\n"
-"-t,--type <TIPO>    Tipo deserviço  (%s)\n"
-"-d,--disabled       Adicionar o serviço como desabilitado\n"
-"-n, --name              Especificar um nome descritivo para o serviço.\n"
+"  Parancs kapcsolói:\n"
+"-t, --type <TÍPUS>       A szolgáltatás típusa (%s).\n"
+"-d, --disable           Szolgáltatás hozzáadása letiltott állapotban.\n"
+"-n, --name              Leíró név megadása a szolgáltatáshoz.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
@@ -2733,13 +2616,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removeservice (rs) [opções] <apelido|#|URL>\n"
+"removerepo (rr) [kapcsolók] <álnév|#|URI>\n"
 "\n"
-"Remover o serviço de índice do repositório especificado do sistema.\n"
+"A megadott telepítési forrás index szolgáltatás eltávolítása a rendszerből.\n"
 "\n"
-"  Opções do comando:\n"
-"    --loose-auth   Ignorar dados de autenticação do usuário na URL.\n"
-"    --loose-query  Ignorar string de pesquisa na URL.\n"
+"  Parancs kapcsolói:\n"
+"    --loose-auth\tAz URI címen található felhasználóhitelesítési adatok figyelmen kívül hagyása\n"
+"    --loose-query\tAz URI címen található lekérdezés figyelmen kívül hagyása\n"
 
 #. translators: %s is "--all" and "--all"
 #: ../src/Zypper.cc:1078
@@ -2770,30 +2653,28 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (ms) <opções> <apelido|#|URL>\n"
-"modifyservice (ms) <opções> <%s>\n"
+"modifyservice (ms) <kapcsolók> <álnév|#|URI>\n"
+"modifyservice (ms) <kapcsolók> <%s>\n"
 "\n"
-"Alterar as propriedades do serviço especificado pelo apelido, número ou URL ou\n"
-"pelas opções agregadas '%s'.\n"
+"Az álnév, szám vagy URI által, vagy a '%s' összesített kapcsolók által megadott szolgáltatások tulajdonságainak módosítása.\n"
 "\n"
-"  Opções do commando:\n"
-"-d, --disable             Desabilitar o serviço (mas não removê-lo).\n"
-"-e, --enable              Habilitar um serviço desabilitado.\n"
-"-r, --refresh             Habilitar a auto-atualização do serviço.\n"
-"-R, --no-refresh          Desabilitar a auto-atualização do serviço.\n"
-"-n, --name                Definir um nome descritivo para o serviço.\n"
+"  Parancs kapcsolói:\n"
+"-d, --disable              A szolgáltatás letiltása(eltávolítás nélkül).\n"
+"-e, --enable               Egy letiltott szolgáltatás engedélyezése.\n"
+"-r, --refresh                A szolgáltatás automatikus frissítésének engedélyezése.\n"
+"-R, --no-refresh         A szolgáltatás automatikus frissítésének letiltása.\n"
+"-n, --name                 Beszédes leírás beállítása a szolgáltatáshoz.\n"
+"-i, --ar-to-enable <álnév>     Engedélyezendő RIS szolgáltatás tároló hozzáadása.\n"
+"-I, --ar-to-disable <álnév>    Letiltandó RIS szolgáltatás tároló hozzáadása.\n"
+"-j, --rr-to-enable <álnév>     Engedélyezendő RIS szolgáltatás tároló eltávolítása.\n"
+"-J, --rr-to-disable <álnév>    Letiltandó RIS szolgáltatás tároló eltávolítása.\n"
+"-k, --cl-to-enable             Az engedélyezendő RIS tárolók listájának kiürítése.\n"
+"-K, --cl-to-disable            Az letiltandó RIS tárolók listájának kiürítése.\n"
 "\n"
-"-i, --ar-to-enable <apelido>     Adicionar um repositório de serviço RIS para habilitar.\n"
-"-I, --ar-to-disable <apelido>    Adicionar um repositório de serviço RIS para desabilitar.\n"
-"-j, --rr-to-enable <apelido>     Remover um repositório de serviço RIS para habilitar.\n"
-"-J, --rr-to-disable <apelido>    Remover um repositório de serviço RIS para desabilitar.\n"
-"-k, --cl-to-enable             Limpar a lista de repositórios RIS para habilitar.\n"
-"-K, --cl-to-disable            Limpar a lista de repositórios RIS para desabilitar.\n"
-"\n"
-"-a, --all                 Aplicar as alterações a todos os serviços.\n"
-"-l, --local               Aplicar as alterações a todos os serviços locais.\n"
-"-t, --remote              Aplicar as alterações a todos os serviços remotos.\n"
-"-m, --medium-type <tipo>  Aplicar as alterações aos serviços do tipo especificado.\n"
+"-a, --all            A változtatások életbe léptetése minden szolgáltatásra.\n"
+"-l, --local           A változtatások életbe léptetése minden helyi szolgáltatásra.\n"
+"-t, --remote            A változtatások életbe léptetése minden távoli szolgáltatásra.\n"
+"-m, --medium-type <típus>      A változtatások életbe léptetése a megadott típusú szolgáltatásokra.\n"
 
 #: ../src/Zypper.cc:1126
 msgid ""
@@ -2810,18 +2691,18 @@ msgid ""
 "-U, --sort-by-uri         Sort the list by URI.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"services (ls) [opções]\n"
+"szolgáltatások (ls) [kapcsolók]\n"
 "\n"
-"Listar todos os serviços definidos.\n"
+"Összes szolgáltatás felsorolása.\n"
 "\n"
-"  Opções do comando:\n"
-"-u, --uri                 Exibir também a URL base dos serviços.\n"
-"-p, --priority            Exibir também a prioridade do serviço.\n"
-"-d, --details             Exibir mais informações como a URL, prioridade e tipo.\n"
-"-r, --with-repos          Exibir também os repositórios pertencentes aos serviços.\n"
-"-P, --sort-by-priority    Listar pela prioridade do repositório.\n"
-"-U, --sort-by-uri         Listar pela URL.\n"
-"-N, --sort-by-name        Listar pelo nome.\n"
+"  Parancs kapcsolói:\n"
+"-u, --uri                   Mutassa a telepítési források alap URI-ját is.\n"
+"-p, --priority             Mutassa a telepítési források prioritását.\n"
+"-d, --details               Mutasson további információkat, mint az URI, a prioritás, és típus.\n"
+"-r, --with-repos          Mutassa a szolgáltatásokhoz tartozó telepítési forrásokat is.\n"
+"-P, --sort-by-priority    A lista rendezése a források prioritása alapján.\n"
+"-U, --sort-by-uri          A lista rendezése az URI alapján.\n"
+"-N, --sort-by-name       A lista rendezése név alapján.\n"
 
 #: ../src/Zypper.cc:1152
 msgid ""
@@ -2832,12 +2713,12 @@ msgid ""
 "  Command options:\n"
 "-r, --with-repos      Refresh also repositories.\n"
 msgstr ""
-"refresh-services (refs) [opções]\n"
+"refresh-services (refs) [kapcsolók]\n"
 "\n"
-"Atualiza o serviço de índice dos repositórios definidos.\n"
+"A megadott tároló index szolgáltatások frissítése .\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --with-repos      Atualizar também os repositórios.\n"
+"  Parancs kapcsolói:\n"
+"-r, --with-repos      Frissítse a telepítési forrásokat is.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1180
@@ -2859,26 +2740,25 @@ msgid ""
 "-K, --no-keep-packages  Disable RPM files caching.\n"
 "-f, --refresh           Enable autorefresh of the repository.\n"
 msgstr ""
-"addrepo (ar) [opções] <URL> <apelido>\n"
-"addrepo (ar) [opções] <ARQUIVO.repo>\n"
+"addrepo (ar) [kapcsolók] <URI> <álnév>\n"
+"addrepo (ar) [kapcsolók] <FÁJL.repo>\n"
 "\n"
-"Adicionar um repositório ao sistema. O repositório pode ser especificado pela sua URL ou pode ser lido de um arquivo .repo especificado (mesmo que remoto).\n"
+"Telepítési forrás hozzáadása a rendszerhez. A telepítési forrást az URI-val vagy egy adott (akár távoli) .repo fájllal adhatjuk meg.\n"
 "\n"
-"  Opções do comando:\n"
-"-r,--repo <ARQUIVO.repo>  Uma outra forma de especificar um arquivo .repo para ler.\n"
-"-t,--type <TIPO>    Tipo de repositório  (%s).\n"
-"-d,--disabled       Adicionar o repositório como desabilitado.\n"
-"-c, --check             Testar a URL.\n"
-"-C, --nocheck           Não testar a URL, testar mais tarde durante a atualização.\n"
-"-n, --name              Especificar um nome descritivo para o repositório.\n"
-"-k, --keep-packages     Habilitar o cache dos arquivos RPM.\n"
-"-K, --no-keep-packages  Desabilitar o cache dos arquivos RPM.\n"
-"-f, --refresh           Habilitar a auto-atualização do repositório.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <FÁJL.repo>  Az URL és álnév beolvasása fájlból (távoli is).\n"
+"-t, --type <TÍPUS>      A telepítési forrás típusa (%s).\n"
+"-d, --disable          A telepítési forrás felvétele letiltottként.\n"
+"-c, --check             URI ellenőrzése.\n"
+"-x, --nocheck          Ne ellenőrizze az URI-t, csak később, a frissítés során.\n"
+"-n, --name             Név megadása a telepítési forráshoz.\n"
+"-k --keep-packages     Az RPM fájlok gyorsítótárazásának engedélyezése.\n"
+"-K --no-keep-packages     Az RPM fájlok gyorsítótárazásának kikapcsolása.\n"
+"-f, --refresh          A telepítési forrás automatikus frissítésének engedélyezése.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1229
-#: ../src/Zypper.cc:2103
+#: ../src/Zypper.cc:1229 ../src/Zypper.cc:2103
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -2886,7 +2766,7 @@ msgid ""
 msgstr ""
 "list-resolvables (lr)\n"
 "\n"
-"Listar os tipos de resolvíveis disponíveis.\n"
+"Az elérhető feloldható típusok listázása.\n"
 
 #: ../src/Zypper.cc:1237
 msgid ""
@@ -2904,19 +2784,19 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr) [opções]\n"
+"repos (lr)\n"
 "\n"
-"Listar todos os repositórios definidos.\n"
+"Összes megadott forrás felsorolása.\n"
 "\n"
-"  Opções do comando:\n"
-"-e, --export <ARQUIVO.repo>  Exportar todos os repositórios definidos como um único arquivo local .repo.\n"
-"-u, --uri                 Exibir também a URL base dos repositórios.\n"
-"-p, --priority            Exibir também a prioridade do repositório.\n"
-"-d, --details             Exibir mais informações como a URL, prioridade e tipo.\n"
-"-U, --sort-by-uri         Listar pela URL.\n"
-"-P, --sort-by-priority    Listar pela prioridade do repositório.\n"
-"-A, --sort-by-alias       Listar pelo apelido.\n"
-"-N, --sort-by-name        Listar pelo nome.\n"
+"  Parancs kapcsolói:\n"
+"-e, --export <FÁJL.repo>  Az összes telepítési forrás exportálása egyetlen helyi .repo fájlként. \n"
+"-u, --uri                   Mutassa a telepítési források alap URI-ját is.\n"
+"-p, --priority             Mutassa a telepítési források prioritását.\n"
+"-d, --details               Mutasson további információkat, mint az URI, a prioritás, és típus.\n"
+"-U, --sort-by-uri          A lista rendezése az URI alapján.\n"
+"-P, --sort-by-priority    A lista rendezése a források prioritása alapján.\n"
+"-A, --sort-by-alias        A lista rendezése az álnév alapján.\n"
+"-N, --sort-by-name       A lista rendezése név alapján.\n"
 
 #: ../src/Zypper.cc:1264
 msgid ""
@@ -2928,13 +2808,13 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removerepo (rr) [opções] <apelido|#|URL>\n"
+"removerepo (rr) [kapcsolók] <álnév|#|URI>\n"
 "\n"
-"Remover o repositório especificado pelo apelido ou URL.\n"
+"Az álnév, sorszám vagy URL által megadott telepítési forrás eltávolítása.\n"
 "\n"
-"  Opções do comando:\n"
-"    --loose-auth   Ignorar dados de autenticação do usuário na URL.\n"
-"    --loose-query  Ignorar string de pesquisa na URL.\n"
+"  Parancs kapcsolói:\n"
+"    --loose-auth\tAz URI címen található felhasználóhitelesítési adatok figyelmen kívül hagyása\n"
+"    --loose-query\tAz URI címen található lekérdezés figyelmen kívül hagyása\n"
 
 #: ../src/Zypper.cc:1283
 msgid ""
@@ -2944,11 +2824,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo (nr) [opções] <apelido|#|URL> <novo-apelido>\n"
+"renamerepo (nr) [kapcsolók] <álnév|#|URI>\n"
 "\n"
-"Atribuir um novo apelido ao repositório especificado pelo apelido, número ou URL.\n"
+"Új álnév társítása az álnév, sorszám vagy URI által megadott forráshoz.\n"
 "\n"
-"Este comando não possui opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
@@ -2976,26 +2856,23 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <opções> <apelido|#|URL>\n"
-"modifyrepo (mr) <opções> <%s>\n"
+"modifyrepo (mr) <kapcsolók> <álnév|#|URI>\n"
+"modifyrepo (mr) <kapcsolók> <%s>\n"
 "\n"
-"Alterar as propriedades do repositório especificado pelo apelido, número ou URL ou\n"
-"pelas opções agregadas '%s'.\n"
+"Az álnév, szám vagy URI által, vagy a '%s' összesített kapcsolók által megadott telepítési forrás tulajdonságainak módosítása.\n"
 "\n"
-"  Opções do commando:\n"
-"-d, --disable             Desabilitar o repositório (mas não removê-lo).\n"
-"-e, --enable              Habilitar um repositório desabilitado.\n"
-"-r, --refresh             Habilitar a auto-atualização do repositório.\n"
-"-R, --no-refresh          Desabilitar a auto-atualização do repositório.\n"
-"-n, --name                Definir um nome descritivo para o repositório.\n"
-"-p, --priority <1-99>     Definir a prioridade do repositório.\n"
-"-k, --keep-packages       Habilitar o cache dos arquivos RPM.\n"
-"-K, --no-keep-packages    Desabilitar o cache dos arquivos RPM.\n"
-"\n"
-"-a, --all                 Aplicar as alterações a todos os repositórios.\n"
-"-l, --local               Aplicar as alterações a todos os repositórios locais.\n"
-"-t, --remote              Aplicar as alterações a todos os repositórios remotos.\n"
-"-m, --medium-type <tipo>  Aplicar as alterações aos repositórios do tipo especificado.\n"
+"  Parancs kapcsolói:\n"
+"-d, --disable              A telepítési forrás letiltása(eltávolítás nélkül).\n"
+"-e, --enable               Egy letiltott telepítési forrás engedélyezése.\n"
+"-r, --refresh                A telepítési forrás automatikus frissítésének engedélyezése.\n"
+"-R, --no-refresh         A telepítési forrás automatikus frissítésének letiltása.\n"
+"-p, --priority <1-99>     A telepítési forrás prioritásnak beállítása. További információ a man oldalakon található.\n"
+"-k --keep-packages     Az RPM fájlok gyorsítótárazásának engedélyezése.\n"
+"-K --no-keep-packages     Az RPM fájlok gyorsítótárazásának kikapcsolása.\n"
+"-a, --all            A változtatások életbe léptetése minden telepítési forrásra.\n"
+"-l, --local           A változtatások életbe léptetése minden helyi telepítési forrásra.\n"
+"-t, --remote            A változtatások életbe léptetése minden távoli telepítési forrásra.\n"
+"-m, --medium-type <típus>  A változtatások életbe léptetése a megadott típusú telepítési forrásokra.\n"
 
 #: ../src/Zypper.cc:1354
 msgid ""
@@ -3012,18 +2889,18 @@ msgid ""
 "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
 "-s, --services           Refresh also services before refreshing repos.\n"
 msgstr ""
-"refresh (ref) [apelido|#|URL] ...\n"
+"refresh (ref) [álnév|#|URI] ...\n"
 "\n"
-"Atualizar os repositórios especificados pelos seus apelidos, números ou URLs. Se nada for especificado, todos os repositórios habilitados serão atualizados.\n"
+"Az álnév, szám vagy URI által megadott telepítési forrás frissítése. Amennyiben nincs megadva semmi, minden beállított telepítési forrás frissítésre kerül.\n"
 "\n"
-"  Opções do comando:\n"
-"-f, --force             Forçar uma atualização completa.\n"
-"-b, --force-build       Forçar a reconstrução do banco de dados.\n"
-"-d, --force-download    Forçar o download dos metadados brutos.\n"
-"-B, --build-only        Apenas construir o banco de dados, não baixar os metadados.\n"
-"-D, --download-only     Apenas baixar os metadados brutos, não construir o banco de dados.\n"
-"-r, --repo <apelido|#|URL> Atualizar apenas os repositórios especificados.\n"
-"-s, --services           Atualizar também os serviços antes de atualizar os repositórios.\n"
+"  Parancs kapcsolói:\n"
+"-f, --force             Teljes frissítés kikényszerítése.\n"
+"-b, --force-build       Adatbázis újraépítésének kikényszerítése.\n"
+"-d, --force-download    A metaadat letöltésének kikényszerítése.\n"
+"-B, --build-only        Az adatbázis újraépítése a metaadat újbóli letöltése nélkül.\n"
+"-D, --download-only     A metaadat letöltése az adatbázis újraépítése nélkül.\n"
+"-r, --repo <álnév|#|URI> Csak a megadott telepítési forrás frissítése.\n"
+"-s, --services         Frissítse a szolgáltatásokat is a telepítési források előtt.\n"
 
 #: ../src/Zypper.cc:1383
 msgid ""
@@ -3037,15 +2914,14 @@ msgid ""
 "-M, --raw-metadata       Clean raw metadata cache.\n"
 "-a, --all                Clean both metadata and package caches.\n"
 msgstr ""
-"clean [apelido|#|URL] ...\n"
+"clean [alias|#|URI] ...\n"
 "\n"
-"Limpar o cache local.\n"
+"A helyi gyorsítótárak törlése.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL> Limpar apenas os repositórios especificados.\n"
-"-m, --metadata           Limpar o cache de metadados.\n"
-"-M, --raw-metadata       Limpar o cache de metadados brutos.\n"
-"-a, --all                Limpar ambos os caches de metadados e pacotes.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo<álnév|#|URI> Csak a megadott telepítési források gyorsítótárának törlése.\n"
+"-m, --metaadat\t\tA metaadat gyorsítótár törlése a csomag-adatbázis helyett.\n"
+"-a, --all\t\tA metaadat és a csomag-gyorsítótár törlése.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3067,19 +2943,20 @@ msgid ""
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
-"list-updates (lu) [opções]\n"
+"list-updates (lu) [kapcsolók]\n"
 "\n"
-"Listar todas as atualizações disponíveis.\n"
+"Az összes elérhető frissítés megjelenítése\n"
 "\n"
-"  Opções do comando:\n"
-"-t, --type <tipo>         Tipo de pacote (%s).\n"
-"                          Padrão: %s.\n"
-"-r, --repo <apelido|#|URL>  Listar somente as atualizações do repositório especificado.\n"
-"    --best-effort         Fazer uma aproximação do tipo 'melhor esforço' para atualizar.\n"
-"                                Atualizações para uma versão menor que a última também\n"
-"                                são aceitáveis.\n"
-"-a, --all                     Listar todos os pacotes para os quais novas versões estão\n"
-"                              disponíveis, independentemente se eles são instaláveis ou não.\n"
+"  Parancs kapcsolói:\n"
+"-t, --type <típus>  Feloldandó típusa (%s).\n"
+"                          Alapértelmezett: %s.\n"
+"-r, --repo <álnév|#|URI>         Csak az álnévvel megadott telepítési forrás frissítéseinek listázása.\n"
+"    --best-effort         A 'best effort' felhasználása a frissítéshez,\n"
+"                          amely elfogadja a legfrissebb verziónál\n"
+"                          régebbiek telepítését is.\n"
+"-a, --all                     Az összes csomag listázása, amelyhez\n"
+"                                elérhető újabb verzió, függetlenül attól, hogy\n"
+"                                 telepíthetőek-e vagy sem.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3108,27 +2985,26 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"update (up) [opções]\n"
+"update (up) [kapcsolók] ...\n"
 "\n"
-"Atualizar todos os pacotes instalados com novas versões, se possível.\n"
+"Lehetőség szerint az összes feloldandó frissítése a legújabb verzióra.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-t, --type <tipo>               Tipo de pacotel (%s).\n"
-"                                Padrão: %s.\n"
-"-r, --repo <apelido|#|URL>        Limitar as atualizações ao repositório especificado.\n"
-"    --skip-interactive          Ignorar atualizações interativas.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de\n"
-"                                licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --best-effort               Fazer uma aproximação dio tipo 'melhor esforço' para a atualização.\n"
-"                                Atualizações menores que a versão mais atual também\n"
-"                                são aceitáveis.\n"
-"    --debug-solver              Criar um caso teste do solver para depuração.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution           Forçar o solucionador a encontrar a solução (mesmo que seja agressiva).\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-t, --type <típus>              Feloldandók típusa (%s).\n"
+"                                Alapértelmezett: %s.\n"
+"-r, --repo <álnév|#|URI>        Csak a megadott álnevű telepítési forrásból történő frissítés.\n"
+"    --skip-interactive          Interaktív frissítések kihagyása.\n"
+"-l, --auto-agree-with-licenses  Automatikusan elfogadja a külső fél licencfeltételeit.\n"
+"                                További információért nézze meg a 'man zypper' parancs kimenetét.\n"
+"    --best-effort         A 'best effort' felhasználása a frissítéshez,\n"
+"                          amely elfogadja a legfrissebb verziónál\n"
+"                          régebbiek telepítését is.\n"
+"    --debug-solver              Hibakereséshez feloldási teszteset létrehozása.\n"
+"    --no-recommends             Ne telepítse az ajánlott, csak a szükséges csomagokat.\n"
+"-R, --no-force-resolution       Ne kényszerítse a solvert a megoldás megtalálására, inkább kérdezzen.\n"
+"    --force-resolution          A solver kényszerítése a megoldás megtalálására (akár agresszív módon is).\n"
+"-D, --dry-run               Az eltávolítás tesztelése, valójában ne töröljön semmit.\n"
 
 #: ../src/Zypper.cc:1502
 msgid ""
@@ -3146,19 +3022,18 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging.\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"patch [opções]\n"
+"patch [kapcsolók]\n"
 "\n"
-"Instalar todas as correções necessárias disponíveis.\n"
+"Minden elérhető szükséges javítás telepítése.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>        Trabalhar apenas com o repositório especificado.\n"
-"    --skip-interactive          Ignorar as correções interativas.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de\n"
-"                                licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-r, --repo <álnév|#|URI>        A frissítés korlátozása a megadott álnevű telepítési forrásra.\n"
+"    --skip-interactive          Interaktív frissítések kihagyása.\n"
+"-l, --auto-agree-with-licenses  Automatikusan elfogadja a külső fél licencfeltételeit.\n"
+"                                További információért nézze meg a 'man zypper' parancs kimenetét.\n"
+"    --debug-solver              Hibakereséshez feloldási teszteset létrehozása\n"
+"-D, --dry-run               A disztribúció-frissítés tesztelése, valójában ne végezze el a frissítést\n"
 
 #: ../src/Zypper.cc:1528
 msgid ""
@@ -3169,13 +3044,13 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
 msgstr ""
-"list-patches (lp) [opções]\n"
+"list-patches (lp) [kapcsolók]\n"
 "\n"
-"Listar todas as correções necessárias disponíveis.\n"
+"Elérhető szükséges frissítések listázása\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>        Verificar por correções apenas no repositório especificado.\n"
+"-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásainak frissítéseit listázza.\n"
 
 #: ../src/Zypper.cc:1553
 msgid ""
@@ -3192,18 +3067,18 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging\n"
 "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgstr ""
-"dist-upgrade (dup) [opções]\n"
+"dist-upgrade (dup) [kapcsolók]\n"
 "\n"
-"Fazer uma atualização na distribuição.\n"
+"Disztribúció-frissítés indítása.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>        Limitar a atualização ao repositório especificado.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-r, --repo <álnév|#|URI>        A frissítés korlátozása a megadott álnevű telepítési forrásra.\n"
+"    --no-recommends             Ne telepítse az ajánlott, csak a szükséges csomagokat.\n"
+"-l, --auto-agree-with-licenses  Automatikusan elfogadja a külső fél licencfeltételeit.\n"
+"                                További információért nézze meg a 'man zypper' parancs kimenetét.\n"
+"    --debug-solver              Hibakereséshez feloldási teszteset létrehozása\n"
+"-D, --dry-run               A disztribúció-frissítés tesztelése, valójában ne végezze el a frissítést\n"
 
 #: ../src/Zypper.cc:1595
 msgid ""
@@ -3230,28 +3105,27 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search (se) [opções] [string de pesquisa] ...\n"
+"search (se) [kapcsolók] [lekérdezés] ...\n"
 "\n"
-"Pesquisar pacotes coincidentes com as string de pesquisa fornecidas.\n"
+"A megadott keresési kifejezéseknek megfelelő csomagok keresése\n"
 "\n"
-"  Opções do comando:\n"
-"    --match-all            Pesquisar por uma coincidência com todas as strings (padrão).\n"
-"    --match-any            Pesquisar por uma coincidência para qualquer das strings de pesquisa.\n"
-"    --match-substrings     Pesquisar por uma coincidência parcial das palavras (padrão).\n"
-"    --match-words          Pesquisar por uma coincidência em todas as palavras somente.\n"
-"    --match-exact          Pesquisar por um nome exato de pacote.\n"
-"-d, --search-descriptions  Pesquisar também nos resumos e descrições dos pacotes.\n"
-"-C, --case-sensitive       Pesquisar diferenciando minúsculas e maiúsculas.\n"
-"-i, --installed-only       Exibir apenas pacotes já instalados.\n"
-"-u, --uninstalled-only     Exibir apenas pacotes ainda não instalados.\n"
-"-t, --type <tipo>          Pesquisar pacotes apenas do tipo especificado.\n"
-"-r,  --repo <apelido|#|URL>   Pesquisar apenas no repositório especificado.\n"
-"    --sort-by-name         Listar os pacotes pelo nome (padrão).\n"
-"    --sort-by-repo         Listar os pacotes pelo repositório.\n"
-"-s, --details              Exibir cada versão disponível em cada repositório\n"
-"                           em uma linha separada.\n"
+"  Parancs kapcsolói:\n"
+"    --match-all            Keresés minden keresőkifejezésre (alapértelmezett)\n"
+"    --match-any            Keresés bármely keresőkifejezésre\n"
+"    --match-substrings     A keresőkifejezésekre részleges szavak is illeszkedhetnek (alapértelmezett)\n"
+"    --match-words          A keresőkifejezésekre csak teljes szavak illeszkedhetnek\n"
+"    --match-exact          Keresés pontos csomagnévre\n"
+"-d, --search-descriptions  Keresés csomagösszegzésekre és -leírásokra.\n"
+"-C, --case-sensitive       Kis- és nagybetűérzékeny keresés.\n"
+"-i, --installed-only       Csak a telepített csomagok megjelenítése.\n"
+"-u, --uninstalled-only     Csak a nem telepített csomagok megjelenítése.\n"
+"-t, --type <típus>         Csak adott típusú csomagok keresése.\n"
+"-r, --repo <álnév|#|URI>        Csak a megadott álnevű telepítési forrásban keressen.\n"
+"    --sort-by-name         Csomagok rendezése név szerint (alapértelmezett).\n"
+"    --sort-by-repo         Csomagok rendezése telepítési forrás szerint.\n"
+"-s, --details              Minden telepítési forrásban mindegyik elérhető verziót külön sorban mutassa.\n"
 "\n"
-"Os caracteres curinga * e ? também podem ser utilizados dentro das strings de pesquisa.\n"
+"A * és ? helyettesítő karakterek is használhatók a keresőkifejezésekben.\n"
 
 #: ../src/Zypper.cc:1632
 msgid ""
@@ -3263,13 +3137,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
 msgstr ""
-"patch-check (pchk) [opções]\n"
+"patch-check (pchk) [kapcsolók]\n"
 "\n"
-"Verificar por correções disponíveis.\n"
+"Elérhető frissítések keresése\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Verificar por correções apenas no repositório especificado.\n"
+"-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásainak frissítéseit adja vissza.\n"
 
 #: ../src/Zypper.cc:1654
 msgid ""
@@ -3281,12 +3155,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [repositório] ...\n"
+"patches (pch) [telepítési forrás] ...\n"
 "\n"
-"Listar todas as correções disponíveis no repositório especificado.\n"
+"Elérhető frissítések listázása a megadott telepítési forrásból.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
+"  Parancs kapcsolói:\n"
+"\n"
+"-r, --repo <álnév|#|URI>  Csak egy másik módszer a telepítési forrás megadására.\n"
 
 #: ../src/Zypper.cc:1681
 msgid ""
@@ -3302,17 +3177,17 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"packages (pa) [opções] [repositórios] ...\n"
+"packages (pa) [kapcsolók] [telepítési forrás] ...\n"
 "\n"
-"Listar todos os pacotes disponíveis nos repositórios especificados.\n"
+"Az adott telepítési forrásokban elérhető összes csomag listázása.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os pacotes instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os pacotes que não estão instalados.\n"
-"-N, --sort-by-name        Listar pelo nome do pacote.\n"
-"-R, --sort-by-repo        Listar pelo repositório.\n"
+"-r, --repo <álnév|#|URI>  Csak egy másik módszer a telepítési forrás megadására.\n"
+"-i, --installed-only Csak a telepített csomagok listázása.\n"
+"-u, --uninstalled-only Csak a nem telepített csomagok listázása.\n"
+"-N, --sort-by-name    Csomagok rendezése név szerint.\n"
+"-R, --sort-by-repo       Csomagok rendezése telepítési forrás szerint.\n"
 
 #: ../src/Zypper.cc:1709
 msgid ""
@@ -3326,15 +3201,15 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns which are not installed.\n"
 msgstr ""
-"patterns (pt) [opções] [repositórios] ...\n"
+"patterns (pt) [kapcsolók] [telepítési forrás] ...\n"
 "\n"
-"Lista todos os padrões disponíveis nos repositórios especificados.\n"
+"Az adott telepítési forrásokban elérhető összes minta listázása.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os padrões instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os padrões que não estão instalados.\n"
+"-r, --repo <álnév|#|URI>  Csak egy másik módszer a telepítési forrás megadására.\n"
+"-i, --installed-only Csak a telepített minták listázása.\n"
+"-u, --uninstalled-only Csak a nem telepített minták listázása.\n"
 
 #: ../src/Zypper.cc:1735
 msgid ""
@@ -3348,15 +3223,15 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --uninstalled-only    Show only products which are not installed.\n"
 msgstr ""
-"products (pd) [opções] [repositório] ...\n"
+"products (pd) [kapcsolók] [telepítési forrás] ...\n"
 "\n"
-"Listar todos os produtos disponíveis nos repositórios especificados.\n"
+"Az adott telepítési forrásokban elérhető összes termék listázása.\n"
 "\n"
-"  Opções do comando:\n"
+"  Parancs kapcsolói:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os produtos instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os produtos que não estão instalados.\n"
+"-r, --repo <álnév|#|URI>  Csak egy másik módszer a telepítési forrás megadására.\n"
+"-i, --installed-only Csak a telepített termékek listázása.\n"
+"-u, --uninstalled-only Csak a nem telepített termékek listázása.\n"
 
 #: ../src/Zypper.cc:1760
 #, c-format
@@ -3370,14 +3245,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s."
 msgstr ""
-"info (if) [opções] <nome> ...\n"
+"info (if) [kapcsolók] <név> ...\n"
 "\n"
-"Exibir as informações detalhadas dos pacotes especificados.\n"
+"A csomagok részletes információinak megjelenítése.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Trabalhar somente com o repositório especificado.\n"
-"-t, --type <tipo>         Tipo de pacotel (%s).\n"
-"                          Padrão: %s."
+"  Parancs kapcsolói:\n"
+"-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásban dolgozzon.\n"
+"-t, --type <típus>           A feloldható típusa (%s).\n"
+"                            Alapértelmezett: %s."
 
 #: ../src/Zypper.cc:1783
 #, c-format
@@ -3388,11 +3263,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"patch-info <nome_da_correção> ...\n"
+"patch-info <javításnév> ...\n"
 "\n"
-"Exibir informações detalhadas para as correções.\n"
+"Javítások részletes információinak megjelenítése.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
 #: ../src/Zypper.cc:1802
 #, c-format
@@ -3403,11 +3278,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"pattern-info <nome_do_padrão> ...\n"
+"pattern-info <minta_neve> ...\n"
 "\n"
-"Exibir informações detalhadas dos padrões.\n"
+"Minták részletes információinak megjelenítése.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
 #: ../src/Zypper.cc:1821
 #, c-format
@@ -3418,11 +3293,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"product-info <nome_do_produto> ...\n"
+"product-info <terméknév>...\n"
 "\n"
-"Exibir informações detalhadas para os produtos.\n"
+"Termékek részletes információinak megjelenítése.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Ez egy rug kompatibilitási álnév a '%s' parancshoz.\n"
 
 #: ../src/Zypper.cc:1838
 msgid ""
@@ -3432,11 +3307,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <recurso>\n"
+"what-provides (wp) <képesség>\n"
 "\n"
-"Listar todos os pacotes que forneçam o recurso especificado.\n"
+"A megadott képességet biztosító csomagok listázása.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #: ../src/Zypper.cc:1889
 msgid ""
@@ -3448,9 +3323,9 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"Exibir um animal.\n"
+"Egy állat megjelenítése.\n"
 "\n"
-"Este comando não possui opções adicionais.\n"
+"Ehhez a parancshoz nincs más kapcsoló.\n"
 
 #: ../src/Zypper.cc:1911
 #, c-format
@@ -3464,14 +3339,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
-"addlock (al) [opções] <nome do pacote> ...\n"
+"addlock (al) [kapcsolók] <csomagnév>\n"
 "\n"
-"Adicionar uma trava de pacote. Especifique os pacotes a travar pelo seu nome exato ou por um padrão global usando os caracteres curingas '*' e '?'.\n"
+"Csomag zárolása. A zárolandó csomagokat pontos név, vagy a '*' és '?' helyettesítő karakterekkel megadott mintával adhatja meg.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Restringir a trava ao repositório específico.\n"
-"-t, --type <tipo>         Tipo de pacote (%s).\n"
-"                          Padrão: %s.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásra korlátozza a zárolást.\n"
+"-t, --type <típus>         A feloldható típusa (%s).\n"
+"                            Alapértelmezett: %s.\n"
 
 #: ../src/Zypper.cc:1937
 #, c-format
@@ -3483,12 +3358,12 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
 msgstr ""
-"removelock (rl) <número-da-trava|nome_do_pacote> ...\n"
+"removelock (rl) <zárolás-száma|csomagnév>\n"
 "\n"
-"Remover uma trava de pacote. Especifique a trava a remover pelo seu número obtido com '%s' ou pelo nome do pacote.\n"
+"  Csomag zárolásának feloldása. A feloldandó zárolás számát a '%s' parancstól kapott számmal adhatja meg.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Remover somente as travas do repositório especificado.\n"
+"  Parancs kapcsolói:\n"
+"-r, --repo <álnév|#|URI>  Csak a megadott telepítési forrásból távolítsa el a zárolásokat.\n"
 
 #: ../src/Zypper.cc:1957
 msgid ""
@@ -3500,9 +3375,9 @@ msgid ""
 msgstr ""
 "locks (ll)\n"
 "\n"
-"Listar as travas de pacote atuais.\n"
+"A jelenlegi csomagzárolások listázása.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #: ../src/Zypper.cc:1997
 msgid ""
@@ -3514,9 +3389,9 @@ msgid ""
 msgstr ""
 "targetos (tos)\n"
 "\n"
-"Exibir a string de identificação do sistema operacional de destino.\n"
+"A cél operációs rendszer azonosítójának megjelenítése.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #: ../src/Zypper.cc:2016
 msgid ""
@@ -3527,12 +3402,12 @@ msgid ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
-"versioncmp (vcmp) <versão1> <versão2>\n"
+"versioncmp (vcmp) <verzió1> <verzió2>\n"
 "\n"
-"Compara as versões fornecidas como argumentos.\n"
+"A paraméterként megadott verziószámok összehasonlítása.\n"
 "\n"
-"  Opções do comando:\n"
-"-m, --match  Usar o número do lançamento faltante como qualquer lançamento.\n"
+"  Parancs kapcsolói:\n"
+"-m, --match  A hiányzó verziószámot bármely verzióként kezel.\n"
 
 #: ../src/Zypper.cc:2035
 msgid ""
@@ -3544,9 +3419,9 @@ msgid ""
 msgstr ""
 "licenses\n"
 "\n"
-"Exibe um relatório das licenças e EULAs dos pacotes de softwares atualmente instalados.\n"
+"A telepített csomagok licenc és EULA szerződéseinek megjelenítése.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #: ../src/Zypper.cc:2052
 msgid ""
@@ -3558,9 +3433,9 @@ msgid ""
 msgstr ""
 "quit (exit, ^D)\n"
 "\n"
-"Sair do atual shell do zypper.\n"
+"Kilépés a zypper héjprogramból.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #: ../src/Zypper.cc:2069
 msgid ""
@@ -3572,9 +3447,9 @@ msgid ""
 msgstr ""
 "shell (sh)\n"
 "\n"
-"Entrar no shell de comando do zypper.\n"
+"Belépés a zypper héjprogramba.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Ennek a parancsnak nincsenek további kapcsolói.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2087
@@ -3585,7 +3460,7 @@ msgid ""
 msgstr ""
 "service-types (st)\n"
 "\n"
-"Listar os tipos de serviço disponíveis.\n"
+"Az elérhető szolgáltatások listázása.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -3603,12 +3478,12 @@ msgid ""
 msgstr ""
 "mount\n"
 "\n"
-"Montar um diretório com RPMs como um canal.\n"
+"RPM-eket tartalmazó könyvtár felcsatolása telepítési forrásként.\n"
 "\n"
-"  Opções do comando:\n"
-"-a, --alias <apelido>  Usar a string dada como apelido do serviço.\n"
-"-n, --name <nome>    Usar a string dada como nome do serviço.\n"
-"-r, --recurse        Entrar nos subdiretórios.\n"
+"  Parancs kapcsolói:\n"
+"-a, --alias <álnév>  A megadott kifejezés használata álnévként.\n"
+"-n, --name <név>    A megadott kifejezés használata a szolgáltatás neveként.\n"
+"-r, --recurse        Nézze végig az alkönyvtárakat is.\n"
 
 #: ../src/Zypper.cc:2156
 #, c-format
@@ -3617,18 +3492,17 @@ msgid ""
 "\n"
 "Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
-"patch-search [opções] [string de pesquisa...]\n"
+"patch-search [kapcsolók] [lekérdezés...]\n"
 "\n"
-"Pesquisar por correções que coincidam com as strings de pesquisa dadas. Este é um apelido de compatibilidade do rug para '%s'. Veja 'man zypper' para detalhes.\n"
+"Az adott keresési feltételnek megfelelő javítások keresése. Ez egy rug-kompatibilitási álnév ehhez: '%s'. További információ a zypper man oldalán található.\n"
 
-#: ../src/Zypper.cc:2170
-#: ../src/Zypper.cc:3880
+#: ../src/Zypper.cc:2170 ../src/Zypper.cc:3880
 msgid "Unexpected program flow."
-msgstr "Erro inesperado no programa."
+msgstr "Váratlan programmenet."
 
 #: ../src/Zypper.cc:2194
 msgid "Non-option program arguments: "
-msgstr "Argumentos sem opção do programa:"
+msgstr "Nem kapcsoló jellegű paraméterek: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2254
@@ -3637,253 +3511,220 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"                      `,;:::,`\n"
-"                 :#@@@@@@@@@@@@@@#;`   @@+,\n"
-"              .@@@@@@@@@@@@@@@@@@@@@@#:@@@@@@#:\n"
-"            :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#`\n"
-"          ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+  `@+\n"
-"          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@# @@# @`\n"
-"       :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`#@ .:@@\n"
-"      #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@#@;+@\n"
-"     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+@@@:.@@@ @@,\n"
-"    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ;@@` . +@@@\n"
-"   +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:  +@@@@@@#\n"
-"  ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;  .'+;  ,\n"
-"  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:` :+@,\n"
-" '@@@@@`     '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;\n"
-" @@@@;         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:\n"
-"`@@@+  ,@@@@+   @@@@@@@@@@@@@@@@@@@@@.  `,::,`\n"
-" ;@@@  ,@@@@@@@   @@@@@@'     #@@@@@@,\n"
-"     #@@@  @@@:,@@@@  ,@@@@'       ,@@@@@\n"
-"@@@@  @@    '@@'  @@@@         `@@@@`\n"
-"'@@@  @@:    @@@  ;@@@          .@@@;\n"
-",@@@  @@@@@, +@@   @@@           :@@@\n"
-" @@@+  @@@@. @@@    ,@             #@,`:\n"
-" '@@@:   `   @@@                     + `\n"
-"  @@@@#    `@@@,\n"
-"   @@@@@@@@@@@@\n"
-"    #@@@@@@@@#\n"
-"      +@@@@#`"
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: ../src/Zypper.cc:2281
 msgid "Root privileges are required for refreshing services."
-msgstr "São necessários privilégios de root para atualizar os serviços."
+msgstr "A szolgáltatások frissítéséhez root jogosultság szükséges."
 
-#: ../src/Zypper.cc:2308
-#: ../src/Zypper.cc:2620
+#: ../src/Zypper.cc:2308 ../src/Zypper.cc:2620
 msgid "Root privileges are required for modifying system services."
-msgstr "São necessários privilégios de root para alterar os serviços do sistema."
+msgstr "A rendszer szolgáltatásainak módosításához root jogosultság szükséges."
 
 #: ../src/Zypper.cc:2374
 #, c-format
 msgid "'%s' is not a valid service type."
-msgstr "'%s' não é um tipo de serviço válido."
+msgstr "`%s' nem érvényes szolgáltatás típus."
 
 #: ../src/Zypper.cc:2376
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Veja '%s' ou '%s' para obter uma lista de tipos de serviço conhecidos."
+msgstr "Az ismert szolgáltatások típusainak listázásához használja a '%s' vagy a '%s' parancsot."
 
 #: ../src/Zypper.cc:2393
 msgid "Root privileges are required for modifying services."
-msgstr "São necessários privilégios de root para alterar os serviços."
+msgstr "A szolgáltatások módosításához root jogosultság szükséges."
 
+# 50168 AttribValues/delnotify
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2405
-#: ../src/Zypper.cc:2773
+#: ../src/Zypper.cc:2405 ../src/Zypper.cc:2773
 msgid "Alias or an aggregate option is required."
-msgstr "O apelido ou uma opção agregada é obrigatória."
+msgstr "Álnév vagy összesített kapcsoló szükséges."
 
 #: ../src/Zypper.cc:2439
 #, c-format
 msgid "Service '%s' not found."
-msgstr "O serviço '%s' não encontrado."
+msgstr "'%s' szolgáltatás nem található."
 
-#: ../src/Zypper.cc:2475
-#: ../src/Zypper.cc:2619
-#: ../src/Zypper.cc:2705
+#: ../src/Zypper.cc:2475 ../src/Zypper.cc:2619 ../src/Zypper.cc:2705
 #: ../src/Zypper.cc:2761
 msgid "Root privileges are required for modifying system repositories."
-msgstr "São necessários privilégios de root para alterar os repositórios do sistema."
+msgstr "A rendszer forrásainak módosításához root jogosultság szükséges."
 
-#: ../src/Zypper.cc:2524
-#: ../src/Zypper.cc:2881
+#: ../src/Zypper.cc:2524 ../src/Zypper.cc:2881
 msgid "Too few arguments."
-msgstr "Poucos argumentos."
+msgstr "Túl kevés paraméter."
 
 #: ../src/Zypper.cc:2548
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "Se somente um argumento for usado ele deve ser uma URL apontando para um arquivo .repo."
+msgstr "Amennyiben egyetlen paramétert ad meg, az a .repo fájlra mutató URI kell, hogy legyen."
 
 #: ../src/Zypper.cc:2574
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Não é possível utilizar %s junto com %s. Usando a configuração de %s."
+msgstr "A %s nem használható együtt a %s -el. A %s beállításainak használata."
 
 #: ../src/Zypper.cc:2597
 msgid "Specified type is not a valid repository type:"
-msgstr "O tipo especificado não é um tipo de repositório válido:"
+msgstr "A megadott típus nem érvényes telepítési forrástípus:"
 
 #: ../src/Zypper.cc:2599
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Veja '%s' ou '%s' para obter uma lista de tipos de repositórios conhecidos."
+msgstr "Az ismert telepítési forrás típusainak listázásához használja a '%s' vagy a '%s' parancsot."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: ../src/Zypper.cc:2655
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "O repositório '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "A(z) '%s' telepítési forrás nem található az álneve, száma vagy az URi alapján."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: ../src/Zypper.cc:2678
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "O serviço '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "A(z) '%s' szolgáltatás nem található az álneve, száma vagy az URi alapján."
 
 #: ../src/Zypper.cc:2712
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Poucos argumentos. Pelo menos a URL e o apelido são necessários."
+msgstr "Kevés paraméter. Legalább az URI és álnév megadása szükséges."
 
 #: ../src/Zypper.cc:2737
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "O repositório '%s' não foi encontrado."
+msgstr "A(z) '%s' telepítési forrás nem található."
 
 #: ../src/Zypper.cc:2803
 #, c-format
 msgid "Repository %s not found."
-msgstr "O repositório %s não foi encontrado."
+msgstr "A(z) %s telepítési forrás nem található."
 
 #: ../src/Zypper.cc:2821
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "São necessários privilégios de root para atualizar os repositórios do sistema."
+msgstr "A rendszer telepítő forrásainak frissítéséhez root jogosultság szükséges."
 
 #: ../src/Zypper.cc:2828
 #, c-format
 msgid "The '%s' global option has no effect here."
-msgstr "A opção global %s não tem efeito aqui."
+msgstr "Az '%s' kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
 #: ../src/Zypper.cc:2836
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Os argumentos não são permitidos se '%s' for utilizado."
+msgstr "A(z) '%s' használata esetén a kapcsolók használata nem megengedett."
 
 #: ../src/Zypper.cc:2862
 msgid "Root privileges are required for cleaning local caches."
-msgstr "São necessários privilégios de root para limpar os caches locais."
+msgstr "A helyi gyorsítótárak frissítéséhez root jogosultság szükséges."
 
+# 50168 AttribValues/delnotify
 #: ../src/Zypper.cc:2882
 msgid "At least one package name is required."
-msgstr "Pelo menos um nome de pacote é necessário."
+msgstr "Legalább egy csomagnévre szükség van."
 
 #: ../src/Zypper.cc:2896
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "São necessários privilégios de root para instalar ou desinstalar pacotes."
+msgstr "A csomagok telepítéséhez és eltávolításához root jogosultság szükséges."
 
 #: ../src/Zypper.cc:2911
 #, c-format
 msgid "Unknown package type: %s"
-msgstr "Tipo de pacote desconhecido: %s "
+msgstr "Ismeretlen csomagtípus: %s"
 
 #: ../src/Zypper.cc:2931
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' se parece com um arquivo RPM. Ele tentará ser baixado."
+msgstr "A '%s' egy RPM fájlnak tűnik. Letöltés megkísérlése."
 
 #: ../src/Zypper.cc:2944
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problema com o arquivo RPM especificado como %s, ignorando."
+msgstr "Probléma van az RPM fájl '%s' típusként történő megadásával, ezért figyelmen kívül marad."
 
 #: ../src/Zypper.cc:2967
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "Problema ao ler o cabeçalho RPM do %s. É um arquivo RPM?"
+msgstr "Hiba történt a(z) %s RPM-fejléc beolvasása közben. Ez valóban RPM fájl?"
 
 #: ../src/Zypper.cc:2992
 msgid "Plain RPM files cache"
-msgstr "Cache de arquivos RPM planos"
+msgstr "RPM-fájlok gyorsítótára"
 
-#: ../src/Zypper.cc:3021
-#: ../src/Zypper.cc:3099
+#: ../src/Zypper.cc:3021 ../src/Zypper.cc:3099
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Aviso: Nenhum repositório foi definido. Operando somente com os resolvíveis instalados. Nada pode ser instalado."
+msgstr "Figyelem: Nincsenek források. Csak a telepített feloldhatókkal lehet dolgozni. Semmi sem telepíthető."
 
 #: ../src/Zypper.cc:3050
 msgid "Source package name is a required argument."
-msgstr "O nome do pacote fonte é um argumento necessário."
+msgstr "A forráscsomag nevének megadása szükséges."
 
-#: ../src/Zypper.cc:3156
-#: ../src/Zypper.cc:3416
-#: ../src/Zypper.cc:3500
-#: ../src/Zypper.cc:3623
-#: ../src/Zypper.cc:3691
+#: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
+#: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
 #, c-format
 msgid "Unknown package type '%s'."
-msgstr "Tipo de pacote desconhecido '%s'."
+msgstr "Ismeretlen csomag: '%s'."
 
 #: ../src/Zypper.cc:3262
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Ocorreu um problema ao inicializar ou executar a pesquisa"
+msgstr "Probléma történt a keresés előkészítése vagy végrehajtásakor"
 
 #: ../src/Zypper.cc:3263
 msgid "See the above message for a hint."
-msgstr "Veja a mensagem acima para uma dica."
+msgstr "Tekintse meg a fent található hibaüzenetet."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3435
-#: ../src/Zypper.cc:3518
+#: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Executando como '%s', não é possível usar a opção '%s'."
+msgstr "'%s'-ként futtatva nem lehet '%s' kapcsolót megadni."
 
 #: ../src/Zypper.cc:3463
 msgid "Root privileges are required for updating packages."
-msgstr "São necessários privilégios de root para atualizar os pacotes."
+msgstr "A csomagok frissítéséhez root jogosultság szükséges."
 
 #: ../src/Zypper.cc:3556
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "São necessários privilégios de root para atualizar a distribuição."
+msgstr "A disztribúciófrissítéshez root jogosultság szükséges."
 
-#: ../src/Zypper.cc:3653
-#: ../src/Zypper.cc:3714
+#: ../src/Zypper.cc:3653 ../src/Zypper.cc:3714
 msgid "Root privileges are required for adding of package locks."
-msgstr "São necessários privilégios de root para adicionar as travas de pacote."
+msgstr "A csomagok zárolásához root jogosultság szükséges."
 
 #: ../src/Zypper.cc:3822
 #, c-format
 msgid "%s matches %s"
-msgstr "%s combina com %s"
+msgstr "%s egyezik ezzel: %s"
 
 #: ../src/Zypper.cc:3824
 #, c-format
 msgid "%s is newer than %s"
-msgstr "%s é mais novo que %s"
+msgstr "%s újabb, mint %s"
 
 #: ../src/Zypper.cc:3826
 #, c-format
 msgid "%s is older than %s"
-msgstr "%s é mais antigo que %s"
+msgstr "%s régebbi, mint %s"
 
 #: ../src/Zypper.cc:3865
 msgid "This command only makes sense in the zypper shell."
-msgstr "Este comando só faz sentido no shell do zypper."
+msgstr "Ez a parancs csak a zypper héjprogramban értelmezhető."
 
 #: ../src/Zypper.cc:3877
 msgid "You already are running zypper's shell."
-msgstr "Você já está executando o shell do zypper."
+msgstr "A zypper shell már fut."
 
 #: ../src/Zypper.cc:3894
 msgid "Description"
-msgstr "Descrição"
+msgstr "Leírás"
 
 #: ../src/Zypper.cc:3951
 msgid "Resolvable Type"
-msgstr "Tipo de Resolvível"
+msgstr "feloldható típusa"
 

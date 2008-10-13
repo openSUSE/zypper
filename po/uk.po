@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-29 18:07+0200\n"
-"PO-Revision-Date: 2008-09-22 20:11-0700\n"
+"POT-Creation-Date: 2008-09-30 13:54+0200\n"
+"PO-Revision-Date: 2008-10-07 22:11-0700\n"
 "Last-Translator: Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
@@ -23,83 +23,81 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/callbacks/keyring.h:48
-#, fuzzy, c-format
+#, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Приймається непідписаний файл %s."
+msgstr "Приймається непідписаний файл «%s»."
 
 #: ../src/callbacks/keyring.h:52
-#, fuzzy, c-format
+#, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Приймається непідписаний файл %s."
+msgstr "Приймається непідписаний файл «%s» зі сховища «%s»."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "%s не підписано, продовжити?"
+msgstr "Файл «%s» не підписано, продовжити?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "%s не підписано, продовжити?"
+msgstr "Файл «%s» зі сховища «%s» не підписано, продовжити?"
 
 #: ../src/callbacks/keyring.h:90
-#, fuzzy, c-format
+#, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Приймається файл %s, який підписано невідомим ключем %s."
+msgstr "Приймається файл «%s», який підписано невідомим ключем «%s»."
 
 #: ../src/callbacks/keyring.h:94
-#, fuzzy, c-format
+#, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Приймається файл %s, який підписано невідомим ключем %s."
+msgstr "Приймається файл «%s» зі сховища «%s», який підписано невідомим ключем «%s»."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "%s підписано невідомим ключем %s. Продовжити?"
+msgstr "Файл «%s» підписано невідомим ключем «%s». Продовжити?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "%s підписано невідомим ключем %s. Продовжити?"
+msgstr "Файл «%s» зі сховища «%s» підписано невідомим ключем «%s». Продовжити?"
 
 #: ../src/callbacks/keyring.h:125
-#, fuzzy
 msgid "Automatically trusting the following key:"
-msgstr "Автоматично запускати аплет при вході в систему"
+msgstr "Автоматично довіряти наступному ключу:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr ""
+msgstr "Отримано новий ключ для сховища або підписування:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
 msgid "Key ID: %s"
-msgstr ""
+msgstr "ІД ключа: %s"
 
 #: ../src/callbacks/keyring.h:132
-#, fuzzy, c-format
+#, c-format
 msgid "Key Name: %s"
-msgstr "Назва: "
+msgstr "Назва ключа: %s"
 
 #: ../src/callbacks/keyring.h:133
 #, c-format
 msgid "Key Fingerprint: %s"
-msgstr ""
+msgstr "Дайджест ключа: %s"
 
 #: ../src/callbacks/keyring.h:135
-#, fuzzy, c-format
+#, c-format
 msgid "Repository: %s"
-msgstr "Сховище: "
+msgstr "Сховище: %s"
 
 # power-off message
 #: ../src/callbacks/keyring.h:149
-#, fuzzy
 msgid "Do you want to trust the key?"
-msgstr "Хочете зараз вимкнути систему?"
+msgstr "Довіряти цьому ключу?"
 
 #. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
 #. translate to whatever is appropriate for your language
@@ -107,30 +105,28 @@ msgstr "Хочете зараз вимкнути систему?"
 #. correspond to donttrust/trusttemporarily/import in that order.
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:161
-#, fuzzy
 msgid "n/t/i"
-msgstr "п/с/і"
+msgstr "n/t/i"
 
 #. translators: the same as n/t/i, but without 'i'
 #: ../src/callbacks/keyring.h:164
 msgid "n/t"
-msgstr ""
+msgstr "n/t"
 
 #. translators: help text for the 'n' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:166
 msgid "Don't trust the key."
-msgstr ""
+msgstr "Не довіряти ключу."
 
 #. translators: help text for the 't' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:168
 msgid "Trust the key temporarily."
-msgstr ""
+msgstr "Довіряти ключу тимчасово."
 
 #. translators: help text for the 'i' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:171
-#, fuzzy
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Імпортувати %s до в`язки ключів з довірою?"
+msgstr "Довіряти ключу й імпортувати до в’язки ключів з довірою."
 
 #: ../src/callbacks/keyring.h:205
 #, fuzzy, c-format
@@ -689,22 +685,21 @@ msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Встановлення переривається, бо користувач не погодився з ліцензією %s %s."
 
 #: ../src/misc.cc:247
-#, fuzzy
 msgid "License"
-msgstr "Ліцензія: %1\n"
+msgstr "Ліцензія"
 
 #: ../src/misc.cc:265
 msgid "EULA"
-msgstr ""
+msgstr "Ліцензійна угода"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
 msgstr ""
 
 #: ../src/misc.cc:284
-#, fuzzy, c-format
+#, c-format
 msgid "Installed packages: %d"
-msgstr "Читання встановлених пакунків"
+msgstr "Встановлені пакунки: %d"
 
 #: ../src/misc.cc:285
 #, c-format
@@ -712,9 +707,9 @@ msgid "Installed packages with counterparts in repositories: %d"
 msgstr ""
 
 #: ../src/misc.cc:286
-#, fuzzy, c-format
+#, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Встановити пакунок через YaST"
+msgstr "Встановлені пакунки з ліцензійними угодами: %d"
 
 #: ../src/misc.cc:372 ../src/misc.cc:397
 #, c-format
@@ -849,9 +844,8 @@ msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Метадані сховища «%s» не знайдено в локальному кешу."
 
 #: ../src/repos.cc:269
-#, fuzzy
 msgid "Error building the cache:"
-msgstr "Помилка створення кешу бази даних:"
+msgstr "Помилка створення кешу:"
 
 #: ../src/repos.cc:422
 #, c-format
@@ -1221,9 +1215,9 @@ msgid "Error reading services:"
 msgstr "Помилка читання служб:"
 
 #: ../src/repos.cc:1874
-#, fuzzy, c-format
+#, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "Сховище «%s» не знайдено за його псевдонімом або URI."
+msgstr "Службу «%s» не знайдено за її псевдонімом, номером або URI."
 
 #: ../src/repos.cc:1878
 #, fuzzy, c-format
@@ -1261,9 +1255,9 @@ msgid "Service '%s' has been removed."
 msgstr "Службу «%s» було вилучено."
 
 #: ../src/repos.cc:2304
-#, fuzzy, c-format
+#, c-format
 msgid "Refreshing service '%s'."
-msgstr "Освіження «%s»"
+msgstr "Освіження служби «%s»."
 
 #: ../src/repos.cc:2313
 #, fuzzy, c-format
@@ -1316,14 +1310,13 @@ msgid "Specified services have been refreshed."
 msgstr "Вказані сховища було освіжено."
 
 #: ../src/repos.cc:2456
-#, fuzzy
 msgid "All services have been refreshed."
-msgstr "Всі сховища було освіжено."
+msgstr "Всі служби було освіжено."
 
 #: ../src/repos.cc:2578
-#, fuzzy, c-format
+#, c-format
 msgid "Service '%s' has been sucessfully enabled."
-msgstr "Сховище «%s» було успішно увімкнено."
+msgstr "Службу «%s» було успішно увімкнено."
 
 #: ../src/repos.cc:2581
 #, fuzzy, c-format
@@ -1331,19 +1324,19 @@ msgid "Service '%s' has been sucessfully disabled."
 msgstr "Сховище «%s» було успішно вимкнено."
 
 #: ../src/repos.cc:2588
-#, fuzzy, c-format
+#, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Для сховища \"%s\" було увімкнено автоматичне освіження."
+msgstr "Для служби «%s» було увімкнено автоматичне освіження."
 
 #: ../src/repos.cc:2591
-#, fuzzy, c-format
+#, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Для сховища «%s» було вимкнено автоматичне освіження."
+msgstr "Для служби «%s» було вимкнено автоматичне освіження."
 
 #: ../src/repos.cc:2597
-#, fuzzy, c-format
+#, c-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "Назву сховища «%s» було встановлено у значення «%s»."
+msgstr "Назву служби «%s» було встановлено до «%s»."
 
 #: ../src/repos.cc:2603
 #, fuzzy, c-format
@@ -1378,24 +1371,22 @@ msgstr[1] "Для сховища «%s» було вимкнено автомат
 msgstr[2] "Для сховища «%s» було вимкнено автоматичне освіження."
 
 #: ../src/repos.cc:2636
-#, fuzzy, c-format
+#, c-format
 msgid "Nothing to change for service '%s'."
-msgstr "Нічого не змінено для сховища «%s»."
+msgstr "Нічого не змінено для служби «%s»."
 
 #: ../src/repos.cc:2643
-#, fuzzy
 msgid "Error while modifying the service:"
-msgstr "Помилка зміни сховища:"
+msgstr "Помилка зміни служби:"
 
 #: ../src/repos.cc:2644
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Сховище %s буде залишене без змін."
+msgstr "Службу %s буде залишене без змін."
 
 #: ../src/repos.cc:2751
-#, fuzzy
 msgid "Loading repository data..."
-msgstr "Отримання даних сховища «%s»..."
+msgstr "Завантаження даних сховища..."
 
 #: ../src/repos.cc:2769
 #, c-format
@@ -1848,14 +1839,12 @@ msgid "Error creating the solver test case."
 msgstr "Помилка створення тесту."
 
 #: ../src/solve-commit.cc:977
-#, fuzzy
 msgid "Computing distribution upgrade..."
-msgstr "Підрахування оновлення..."
+msgstr "Підрахування оновлення дистрибутиву..."
 
 #: ../src/solve-commit.cc:983
-#, fuzzy
 msgid "Resolving package dependencies..."
-msgstr "Розв’язання залежностей..."
+msgstr "Розв’язання залежностей пакунків..."
 
 #: ../src/solve-commit.cc:1009
 msgid "Root privileges are required to fix broken package dependencies."
@@ -1896,7 +1885,6 @@ msgid "(dry run)"
 msgstr "(пробний прогін)"
 
 #: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
-#, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Проблема зі звантаженням файла пакунка зі сховища:"
 
@@ -2137,7 +2125,6 @@ msgid "Perhaps you are running out of disk space."
 msgstr "Можливо, ви вичерпали вільне місце на диску."
 
 #: ../src/utils/misc.cc:263
-#, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема із звантаженням зазначеного файла RPM"
 
@@ -2556,7 +2543,7 @@ msgid ""
 "\n"
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        Operate only with packages from the specified repository.\n"
-"-t, --type <type>               Type of resolvable (%s).\n"
+"-t, --type <type>               Type of package (%s).\n"
 "                                Default: %s.\n"
 "-n, --name                      Select packages by plain name, not by capability.\n"
 "-C, --capability                Select packages by capability.\n"
@@ -3426,7 +3413,6 @@ msgstr ""
 "Ця команда не має додаткових параметрів.\n"
 
 #: ../src/Zypper.cc:2016
-#, fuzzy
 msgid ""
 "versioncmp (vcmp) <version1> <version2>\n"
 "\n"
@@ -3435,14 +3421,14 @@ msgid ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
-"renamerepo [параметри] <псевдонім> <новий-псевдонім>\n"
+"renamerepo (vcmp) <version1> <version2>\n"
 "\n"
-"Надати новий псевдонім сховищу вказаному псевдонімом.\n"
+"Порівняти версії, які вказано як аргументи.\n"
 "\n"
-"Ця команда не має додаткових параметрів.\n"
+"  Параметри команди:\n"
+"-m, --match  Приймає відсутній номер версії як будь-який випуск.\n"
 
 #: ../src/Zypper.cc:2035
-#, fuzzy
 msgid ""
 "licenses\n"
 "\n"
@@ -3450,9 +3436,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"locks (ll)\n"
+"licenses\n"
 "\n"
-"Показати всі блоки поточного пакунка.\n"
+"Показати ліцензії і угоди для встановлених пакунків ПЗ.\n"
 "\n"
 "Ця команда не має додаткових параметрів.\n"
 
@@ -3549,29 +3535,26 @@ msgstr ""
 "__\\\\\\\\\\\\\\'/_"
 
 #: ../src/Zypper.cc:2281
-#, fuzzy
 msgid "Root privileges are required for refreshing services."
-msgstr "Для освіження системних сховищ потрібні привілеї адміністратора."
+msgstr "Для освіження служб потрібні привілеї адміністратора."
 
 #: ../src/Zypper.cc:2308 ../src/Zypper.cc:2620
-#, fuzzy
 msgid "Root privileges are required for modifying system services."
-msgstr "Для зміни системних сховищ потрібні привілеї адміністратора."
+msgstr "Для зміни системних служб потрібні привілеї адміністратора."
 
 #: ../src/Zypper.cc:2374
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid service type."
-msgstr "\"%s\" не є чинною маскою мережі."
+msgstr "«%s» не є чинним типом служби."
 
 #: ../src/Zypper.cc:2376
-#, fuzzy, c-format
+#, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Щоб отримати список відомих типів сховищ, скористайтесь «zypper -h addrepo» або «man zypper»."
+msgstr "Щоб отримати список відомих типів служб, скористайтесь «%s» або «%s»."
 
 #: ../src/Zypper.cc:2393
-#, fuzzy
 msgid "Root privileges are required for modifying services."
-msgstr "Для зміни системних сховищ потрібні привілеї адміністратора."
+msgstr "Для зміни служб потрібні привілеї адміністратора."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -3582,9 +3565,9 @@ msgid "Alias or an aggregate option is required."
 msgstr "Потрібен псевдонім або сукупність параметрів сховища."
 
 #: ../src/Zypper.cc:2439
-#, fuzzy, c-format
+#, c-format
 msgid "Service '%s' not found."
-msgstr "«%s» не знайдено."
+msgstr "Службу «%s» не знайдено."
 
 #: ../src/Zypper.cc:2475 ../src/Zypper.cc:2619 ../src/Zypper.cc:2705
 #: ../src/Zypper.cc:2761
@@ -3609,21 +3592,21 @@ msgid "Specified type is not a valid repository type:"
 msgstr "Вказаний тип не є чинним типом сховища:"
 
 #: ../src/Zypper.cc:2599
-#, fuzzy, c-format
+#, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Щоб отримати список відомих типів сховищ, скористайтесь «zypper -h addrepo» або «man zypper»."
+msgstr "Щоб отримати список відомих типів сховищ, скористайтесь «%s» або «%s»."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: ../src/Zypper.cc:2655
-#, fuzzy, c-format
+#, c-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: ../src/Zypper.cc:2678
-#, fuzzy, c-format
+#, c-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URL."
 
@@ -3653,7 +3636,7 @@ msgstr "Глобальний параметр \"%s\" тут не працюва�
 #: ../src/Zypper.cc:2836
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr ""
+msgstr "Аргументи не дозволені, якщо використовується «%s»."
 
 #: ../src/Zypper.cc:2862
 msgid "Root privileges are required for cleaning local caches."
@@ -3668,9 +3651,9 @@ msgid "Root privileges are required for installing or uninstalling packages."
 msgstr "Для встановлення і вилучення пакунків потрібні привілеї адміністратора."
 
 #: ../src/Zypper.cc:2911
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type: %s"
-msgstr "Невідомий тип потрібного пакунка: %s"
+msgstr "Невідомий тип пакунка: %s"
 
 #: ../src/Zypper.cc:2931
 #, c-format
@@ -3701,9 +3684,9 @@ msgstr "Назва пакунка джерела - це потрібний ар�
 
 #: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
 #: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown package type '%s'."
-msgstr "Невідомий тип залежності: \"%s\""
+msgstr "Невідомий тип пакунка «%s»."
 
 #: ../src/Zypper.cc:3262
 msgid "Problem occurred initializing or executing the search query"
@@ -3715,9 +3698,9 @@ msgstr "Прочитайте повідомлення розміщене вищ�
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
 #: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
-#, fuzzy, c-format
+#, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Виконується як «%s», до оновлення неможливий підхід «%s»."
+msgstr "Виконується як «%s», неможливо вживати параметр «%s»."
 
 #: ../src/Zypper.cc:3463
 msgid "Root privileges are required for updating packages."
@@ -3732,23 +3715,23 @@ msgid "Root privileges are required for adding of package locks."
 msgstr "Для блокування пакунків потрібні привілеї адміністратора."
 
 #: ../src/Zypper.cc:3822
-#, fuzzy, c-format
+#, c-format
 msgid "%s matches %s"
-msgstr "%s робить застарілим %s"
+msgstr "%s збігається з %s"
 
 #: ../src/Zypper.cc:3824
-#, fuzzy, c-format
+#, c-format
 msgid "%s is newer than %s"
-msgstr "%s потрібний для %s"
+msgstr "%s новіший за %s"
 
 #: ../src/Zypper.cc:3826
 #, c-format
 msgid "%s is older than %s"
-msgstr ""
+msgstr "%s старіший за %s"
 
 #: ../src/Zypper.cc:3865
 msgid "This command only makes sense in the zypper shell."
-msgstr "Ця команда має сенс тільки у оболонці zypper."
+msgstr "Ця команда має сенс тільки в оболонці zypper."
 
 #: ../src/Zypper.cc:3877
 msgid "You already are running zypper's shell."
@@ -3762,15 +3745,3 @@ msgstr "Опис"
 msgid "Resolvable Type"
 msgstr "Тип розв’язувача"
 
-#~ msgid "Running as 'rug', can't do 'best-effort' approach to update."
-#~ msgstr "Виконується як «rug», до оновлення неможливий підхід як «best-effort»."
-
-#~ msgid "Automatically trusting key id %s, %s, fingerprint %s"
-#~ msgstr "Автоматично довіряється ідентифікатору ключа %s, %s, дайджест %s"
-
-#~ msgid "Do you want to trust key id %s, %s, fingerprint %s"
-#~ msgstr "Хочете довіряти ідентифікатору ключа %s, %s, дайджест %s"
-
-#, fuzzy
-#~ msgid "Specified type is not a valid service type:"
-#~ msgstr "Вказаний тип не є чинним типом сховища:"

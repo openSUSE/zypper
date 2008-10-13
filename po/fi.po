@@ -1,104 +1,109 @@
-# translation of zypper.po to Brazilian Portuguese
+# translation of zypper.fi.po to suomi
+# translation of zypper.po to
+# translation of zypper.fi.po to
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-# Gilberto Medeiros Nakamura <gilberto.nakamura@gmail.com>, 2007.
-# Luiz Fernando Ranghetti <elchevive68@gmail.com>, 2008.
+# Jyri Palokangas <jmp@netti.fi>, 2007.
+# Jyri Palokangas <jmp@opensuse.fi>, 2007, 2008.
+# Sami Vento <sami.vento@opensuse.fi>, 2007.
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2008.
+# Mikko Piippo <mikko.piippo@opensuse.fi>, 2008.
+# Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
+# Jyri Palokangas <jmp@opensuse.org>, 2008.
+# Jyri palokangas <jyri.palokangas@opensuse.org>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypper\n"
+"Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-30 13:54+0200\n"
-"PO-Revision-Date: 2008-10-10 23:22-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2008-10-05 11:31+0300\n"
+"Last-Translator: Jyri palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: suomi <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: BRAZIL\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms:  nplurals=2; plural=n != 1;\n"
 
 #: ../src/callbacks/keyring.h:48
 #, c-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Aceitando um arquivo não assinado '%s'."
+msgstr "Hyväksyttiin allekirjoittamaton tiedosto '%s'."
 
 #: ../src/callbacks/keyring.h:52
 #, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Aceitando um arquivo não assinado '%s' do repositório '%s'."
+msgstr "Hyväksyttiin allekirjoittamaton tiedosto '%s' asennuslähteestä '%s'."
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:63
 #, c-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "O arquivo '%s' não está assinado, continuar?"
+msgstr "Tiedostoa '%s' ei ole allekirjoitettu, jatketaanko?"
 
 #. TranslatorExplanation: speaking of a file
 #: ../src/callbacks/keyring.h:67
 #, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "O arquivo '%s' do repositório '%s' não está assinado, continuar?"
+msgstr "Tiedostoa '%s' asennuslähteestä '%s' ei ole allekirjoitettu, jatketaanko?"
 
 #: ../src/callbacks/keyring.h:90
 #, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Aceitando o arquivo '%s' assinado com uma chave desconhecida '%s'."
+msgstr "Hyväksyttiin tiedosto '%s', joka on allekirjoitettu tuntemattomalla avaimella '%s'."
 
 #: ../src/callbacks/keyring.h:94
 #, c-format
 msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Aceitando o arquivo '%s' do repositório '%s' assinado com uma chave desconhecida '%s'."
+msgstr "Hyväksyttiin tiedosto '%s' asennuslähteestä '%s', joka on allekirjoitettu tuntemattomalla avaimella '%s'."
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:104
 #, c-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "O arquivo '%s' é assinado com uma chave desconhecida '%s'. Continuar?"
+msgstr "'%s' on allekirjoitettu tuntemattomalla avaimella '%s'. Jatketaanko?"
 
 #. translators: the last %s is gpg key ID
 #: ../src/callbacks/keyring.h:108
 #, c-format
 msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "O arquivo '%s' do repositório '%s' é assinado com uma chave desconhecida '%s'. Continuar?"
+msgstr "Tiedosto '%s' asennuslähteestä '%s' on allekirjoitettu tuntemattomalla avaimella '%s'. Jatketaanko?"
 
 #: ../src/callbacks/keyring.h:125
 msgid "Automatically trusting the following key:"
-msgstr "Confiar automaticamente na seguinte chave:"
+msgstr "Luotettiin avaimeen:"
 
 #: ../src/callbacks/keyring.h:127
 msgid "New repository or package signing key received:"
-msgstr "Chave de assinatura de novo repositório ou pacote recebida:"
+msgstr "Vastaanotettiin uusi asennuslähteen tai paketin avain:"
 
 #: ../src/callbacks/keyring.h:131
 #, c-format
 msgid "Key ID: %s"
-msgstr "ID da chave: %s"
+msgstr "Avaimen ID: %s"
 
 #: ../src/callbacks/keyring.h:132
 #, c-format
 msgid "Key Name: %s"
-msgstr "Nome da chave: %s"
+msgstr "Avaimen nimi: %s"
 
 #: ../src/callbacks/keyring.h:133
 #, c-format
 msgid "Key Fingerprint: %s"
-msgstr "Impressão digital da chave: %s"
+msgstr "Avaimen tunnus: %s"
 
 #: ../src/callbacks/keyring.h:135
 #, c-format
 msgid "Repository: %s"
-msgstr "Repositório: %s"
+msgstr "Asennuslähde: %s"
 
 # power-off message
 #: ../src/callbacks/keyring.h:149
 msgid "Do you want to trust the key?"
-msgstr "Deseja confiar na chave?"
+msgstr "Haluatko luottaa avaimeen?"
 
 #. translators: n/t/i stands for doNttrust/TrustTemporarily/Import
 #. translate to whatever is appropriate for your language
@@ -107,97 +112,93 @@ msgstr "Deseja confiar na chave?"
 #. The answers should be lower case letters.
 #: ../src/callbacks/keyring.h:161
 msgid "n/t/i"
-msgstr "n/c/i"
+msgstr "k/e/t"
 
 #. translators: the same as n/t/i, but without 'i'
 #: ../src/callbacks/keyring.h:164
 msgid "n/t"
-msgstr "n/c"
+msgstr "k/e"
 
 #. translators: help text for the 'n' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:166
 msgid "Don't trust the key."
-msgstr "Não confiar na chave."
+msgstr "Ei luoteta avaimeen."
 
 #. translators: help text for the 't' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:168
 msgid "Trust the key temporarily."
-msgstr "Confiar na chave temporariamente."
+msgstr "Luota avaimeen väliaikaisesti."
 
 #. translators: help text for the 'i' option in the 'n/t/i' prompt
 #: ../src/callbacks/keyring.h:171
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Confiar na chave e importá-la para o chaveiro de confiança?"
+msgstr "Luota avaimeen ja lisää se avainrenkaaseen."
 
 #: ../src/callbacks/keyring.h:205
 #, c-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorando a falha na verificação da assinatura do arquivo '%s'."
+msgstr "Jätettiin huomioimatta epäonnistunut koostetarkistus tiedostossa '%s'!"
 
 #: ../src/callbacks/keyring.h:208
 #, c-format
 msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ignorando a falha na verificação da assinatura do arquivo '%s' do repositório '%s'!"
+msgstr "Jätettiin huomioimatta epäonnistunut aitoustarkistus tiedostossa '%s' asennuslähteestä '%s'!"
 
 #: ../src/callbacks/keyring.h:213
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Verifique novamente se isto não é causado por alterações maliciosas no arquivos!"
+msgstr "Tarkista, ettei tiedostossa ole pahatahtoisia muutoksia!"
 
 #: ../src/callbacks/keyring.h:223
 #, c-format
 msgid "Signature verification failed for file '%s'."
-msgstr "Falha na verificação da assinatura do arquivo '%s'."
+msgstr "Aitoustarkistus epäonnistui tiedostossa '%s'."
 
 #: ../src/callbacks/keyring.h:226
 #, c-format
 msgid "Signature verification failed for file '%s' from repository '%s'."
-msgstr "Falha na verificação da assinatura do arquivo '%s' do repositório '%s'."
+msgstr "Allekirjoituksen varmistaminen epäonnistui tiedostossa '%s' asennslähteestä '%s'."
 
 #: ../src/callbacks/keyring.h:231
 msgid ""
 "Warning: This might be caused by a malicious change in the file!\n"
 "Continuing might be risky. Continue anyway?"
 msgstr ""
-"Aviso: Isto pode ter sido causado por uma alteração maliciosa no arquivo!\n"
-"Continuar é arriscado! Continuar mesmo assim?"
+"Varoitus: Tämä saattaa johtua pahantahtoisista muutoksista tiedostossa!\n"
+"Jatkaminen saattaa vaurioittaa järjestelmää! Jatketaanko silti?"
 
 #: ../src/callbacks/keyring.h:255
 #, c-format
 msgid "No digest for file %s."
-msgstr "Nenhum digest para o arquivo %s."
+msgstr "Ei koostetta tiedostolle %s."
 
-# internal key used: Ok
-#: ../src/callbacks/keyring.h:255
-#: ../src/callbacks/keyring.h:265
-#: ../src/callbacks/keyring.h:287
-#: ../src/callbacks/rpm.h:61
-#: ../src/solve-commit.cc:1033
-#: ../src/solve-commit.cc:1057
+#: ../src/callbacks/keyring.h:255 ../src/callbacks/keyring.h:265
+#: ../src/callbacks/keyring.h:287 ../src/callbacks/rpm.h:61
+#: ../src/solve-commit.cc:1033 ../src/solve-commit.cc:1057
 msgid "Continue?"
-msgstr "Continuar?"
+msgstr "Jatketaanko?"
 
 #: ../src/callbacks/keyring.h:264
 #, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Digest desconhecido %s para o arquivo %s."
+msgstr "Tuntematon kooste %s tiedostolle %s."
 
 #: ../src/callbacks/keyring.h:279
 #, c-format
 msgid "Ignoring failed digest verification for %s (expected %s, found %s)."
-msgstr "Ignorando a falha na verificação do digest para %s (esperava-se %s, obteve %s)."
+msgstr "Jätettiin huomioimatta epäonnistunut %s koostetarkistus (odotettiin %s, saatiin %s)."
 
 #: ../src/callbacks/keyring.h:286
 #, c-format
 msgid "Digest verification failed for %s. Expected %s, found %s."
-msgstr "Falha na verificação digest para %s. Esperava-se %s, obteve %s."
+msgstr "%s koostetarkistus epäonnistui. Odotettiin %s, saatiin %s."
 
 #: ../src/callbacks/locks.h:29
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "A seguinte consulta trava alguns dos objetos que você quer destravar:"
+msgstr "Seuraava haku lukitsee joitakin kohteita, jotka haluat avattavaksi:"
 
 #: ../src/callbacks/locks.h:42
 msgid "The following query does not lock anything:"
-msgstr "A seguinte consulta não trava nada:"
+msgstr "Seuraava haku ei lukitse mitään:"
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -206,550 +207,484 @@ msgstr "A seguinte consulta não trava nada:"
 #: ../src/callbacks/media.h:84
 #, c-format
 msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
-msgstr "Por favor insira a mídia [%s] #%d e digite 's' para continuar ou 'n' para cancelar a operação."
+msgstr "Aseta tietoväline [%s] #%d ja kirjoita 'k' jatkaaksesi tai 'e' peruuttaaksesi toiminnon."
 
-#: ../src/callbacks/media.h:228
-#: ../src/callbacks/media.h:235
+#: ../src/callbacks/media.h:228 ../src/callbacks/media.h:235
 msgid "User Name"
-msgstr "Nome do Usuário"
+msgstr "Käyttäjätunnus"
 
 # password dialog title
 #: ../src/callbacks/media.h:242
 msgid "Password"
-msgstr "Senha"
+msgstr "Salasana"
 
 #: ../src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Obtendo o delta"
+msgstr "Ladataan muunnostiedostoa"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: ../src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Aplicando o delta"
+msgstr "Muunnetaan"
 
 #: ../src/callbacks/repo.h:115
 msgid "Retrieving patch rpm"
-msgstr "Obtendo o rpm de correção"
+msgstr "Ladataan korjauspäivitystä"
 
 #: ../src/callbacks/repo.h:152
 #, c-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "Obtendo %s %s-%s.%s"
+msgstr "Ladataan %s %s-%s.%s"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: ../src/callbacks/repo.h:167
 #, c-format
 msgid "(%s unpacked)"
-msgstr "(%s descomprimido)"
+msgstr "(%s purettuna)"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: ../src/callbacks/rpm.h:75
 #, c-format
 msgid "Running: %s  (%s, %s)"
-msgstr "Executando: %s (%s, %s)"
+msgstr "Suoritetaan: %s  (%s, %s)"
 
-#: ../src/callbacks/rpm.h:139
-#: ../src/callbacks/rpm.h:148
-#: ../src/callbacks/rpm.h:156
-#: ../src/callbacks/rpm.h:163
+#: ../src/callbacks/rpm.h:139 ../src/callbacks/rpm.h:148
+#: ../src/callbacks/rpm.h:156 ../src/callbacks/rpm.h:163
 msgid "Reading installed packages"
-msgstr "Lendo os pacotes instalados"
+msgstr "Luetaan asennettuja paketteja"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: ../src/callbacks/rpm.h:183
 #, c-format
 msgid "Removing %s-%s"
-msgstr "Removendo %s-%s"
+msgstr "Poistetaan %s-%s"
 
 #: ../src/callbacks/rpm.h:202
 #, c-format
 msgid "Removal of %s failed:"
-msgstr "Falha na remoção de %s:"
+msgstr "%s poisto epäonnistui:"
 
 #. TranslatorExplanation --nodeps and --force are options of the rpm command, don't translate
 #. ! \todo use format
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps)"
-msgstr "(com --nodeps)"
+msgstr "(--nodeps)"
 
 #: ../src/callbacks/rpm.h:224
 msgid "(with --nodeps --force)"
-msgstr "(com --nodeps --force)"
+msgstr "(--nodeps --force)"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing foo-1.1.2 [42%]"
 #: ../src/callbacks/rpm.h:246
 #, c-format
 msgid "Installing: %s-%s"
-msgstr "Instalando: %s-%s"
+msgstr "Asennetaan: %s-%s"
 
 #: ../src/callbacks/rpm.h:272
 #, c-format
 msgid "Installation of %s-%s failed:"
-msgstr "Falha na instalação de %s-%s:"
+msgstr "%s-%s asennus epäonnistui:"
 
 #: ../src/Command.cc:172
 #, c-format
 msgid "Unknown command '%s'"
-msgstr "Comando desconhecido '%s'"
+msgstr "Tuntematon komento '%s'"
 
 #: ../src/info.cc:37
 msgid "Name: "
-msgstr "Nome: "
+msgstr "Nimi: "
 
 #: ../src/info.cc:38
 msgid "Version: "
-msgstr "Versão: "
+msgstr "Versio: "
 
 #: ../src/info.cc:39
 msgid "Arch: "
-msgstr "Arquitetura: "
+msgstr "Arkkitehtuuri: "
 
 #: ../src/info.cc:40
 msgid "Vendor: "
-msgstr "Fornecedor:"
+msgstr "Toimittaja: "
 
 #: ../src/info.cc:45
 msgid "Summary: "
-msgstr "Resumo: "
+msgstr "Yhteenveto: "
 
 #: ../src/info.cc:46
 msgid "Description: "
-msgstr "Descrição: "
+msgstr "Kuvaus: "
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #. ! \todo use a separate string for each kind so that it is translatable.
 #: ../src/info.cc:79
 #, c-format
 msgid "%s '%s' not found."
-msgstr "%s '%s' não foi encontrado."
+msgstr "%s '%s' ei löytynyt."
 
 #: ../src/info.cc:91
 #, c-format
 msgid "Information for %s %s:"
-msgstr "Informação para %s %s:"
+msgstr "Tiedot %s %s:"
 
 #: ../src/info.cc:108
 #, c-format
 msgid "Info for type '%s' not implemented."
-msgstr "A informação para o tipo '%s' ainda não foi implementada."
+msgstr "Tyypin '%s' tietoja ei ole määritetty."
 
 #: ../src/info.cc:114
 msgid "None"
-msgstr "Nenhum"
+msgstr "-"
 
 #: ../src/info.cc:115
 msgid "Requires"
-msgstr "Requer"
+msgstr "Vaatii"
 
 #: ../src/info.cc:116
 msgid "Provides"
-msgstr "Fornece"
+msgstr "Tarjoaa"
 
 #: ../src/info.cc:117
 msgid "Conflicts"
-msgstr "Conflita"
+msgstr "Ristiriita"
 
 #: ../src/info.cc:118
 msgid "Obsoletes"
-msgstr "Torna Obsoleto"
+msgstr "Vanhentaa"
 
 #. translators: package requirements table header
 #: ../src/info.cc:120
 msgid "Requirement"
-msgstr "Requisito"
+msgstr "Vaatimukset"
 
 #. translators: package requirements table header
 #: ../src/info.cc:122
 msgid "Provided By"
-msgstr "Fornecido Por"
+msgstr "Tarjoaa"
 
 #. translators: package conflicts table header
 #: ../src/info.cc:124
 msgid "Conflict"
-msgstr "Conflita"
+msgstr "Ristiriidat"
 
-#: ../src/info.cc:152
-#: ../src/info.cc:274
-#: ../src/info.cc:345
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Catalog: "
-msgstr "Catálogo: "
+msgstr "Luettelo: "
 
-#: ../src/info.cc:152
-#: ../src/info.cc:274
-#: ../src/info.cc:345
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
 msgid "Repository: "
-msgstr "Repositório: "
+msgstr "Asennuslähde: "
 
-#: ../src/info.cc:157
-#: ../src/info.cc:279
+#: ../src/info.cc:157 ../src/info.cc:279
 msgid "Installed: "
-msgstr "Instalados: "
+msgstr "Asennettu: "
 
 #. enabled?
 #. autorefresh?
 #. enabled?
 #. autorefresh?
-#: ../src/info.cc:157
-#: ../src/info.cc:214
-#: ../src/info.cc:220
-#: ../src/info.cc:222
-#: ../src/info.cc:279
-#: ../src/repos.cc:712
-#: ../src/repos.cc:714
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:1315
-#: ../src/repos.cc:1991
-#: ../src/repos.cc:1993
-#: ../src/solve-commit.cc:855
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
 msgid "Yes"
-msgstr "Sim"
+msgstr "Kyllä"
 
-#: ../src/info.cc:157
-#: ../src/info.cc:214
-#: ../src/info.cc:220
-#: ../src/info.cc:222
-#: ../src/info.cc:279
-#: ../src/repos.cc:712
-#: ../src/repos.cc:714
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:1315
-#: ../src/repos.cc:1991
-#: ../src/repos.cc:1993
-#: ../src/solve-commit.cc:855
+#: ../src/info.cc:157 ../src/info.cc:214 ../src/info.cc:220 ../src/info.cc:222
+#: ../src/info.cc:279 ../src/repos.cc:712 ../src/repos.cc:714
+#: ../src/repos.cc:1313 ../src/repos.cc:1315 ../src/repos.cc:1991
+#: ../src/repos.cc:1993 ../src/solve-commit.cc:855
 msgid "No"
-msgstr "Não"
+msgstr "Ei"
 
 #. ! \todo fix this - arch?
-#: ../src/info.cc:160
-#: ../src/info.cc:209
+#: ../src/info.cc:160 ../src/info.cc:209
 msgid "Status: "
-msgstr "Status: "
+msgstr "Tila: "
 
 #: ../src/info.cc:164
 msgid "up-to-date"
-msgstr "atualizado"
+msgstr "ajan tasalla"
 
 #: ../src/info.cc:168
 #, c-format
 msgid "out-of-date (version %s installed)"
-msgstr "desatualizado (versão %s instalada)"
+msgstr "vanhentunut (%s asennettuna)"
 
 #: ../src/info.cc:173
 msgid "not installed"
-msgstr "não instalado"
+msgstr "ei asennettu"
 
 #: ../src/info.cc:175
 msgid "Installed Size: "
-msgstr "Tamanho Após a Instalação: "
+msgstr "Koko asennettuna: "
 
 #: ../src/info.cc:212
 msgid "Category: "
-msgstr "Categoria: "
+msgstr "Luokka: "
 
 #: ../src/info.cc:213
 msgid "Created On: "
-msgstr "Criado Em: "
+msgstr "Luotu: "
 
 #: ../src/info.cc:214
 msgid "Reboot Required: "
-msgstr "Reinicialização Necessária: "
+msgstr "Vaatii järjestelmän uudelleenkäynnistyksen: "
 
 #: ../src/info.cc:217
 msgid "Package Manager Restart Required"
-msgstr "Reinício do Gerenciador de Pacotes Necessário"
+msgstr "Vaatii pakettienhallinnan uudelleenkäynnistyksen"
 
 #: ../src/info.cc:219
 msgid "Restart Required: "
-msgstr "Reinicialização Necessária:"
+msgstr "Vaatii uudelleenkäynnistyksen: "
 
 #: ../src/info.cc:222
 msgid "Interactive: "
-msgstr "Interativo: "
+msgstr "Vuorovaikutteinen: "
 
 #: ../src/info.cc:226
 msgid "Provides:"
-msgstr "Fornece:"
+msgstr "Tarjoaa:"
 
 #: ../src/info.cc:235
 msgid "Requires:"
-msgstr "Requer:"
+msgstr "Vaatii:"
 
-#: ../src/info.cc:246
-#: ../src/search.cc:323
+#: ../src/info.cc:246 ../src/search.cc:323
 msgid "Recommended"
-msgstr "Recomendado"
+msgstr "Ehdottaa"
 
-#: ../src/info.cc:248
-#: ../src/search.cc:325
+#: ../src/info.cc:248 ../src/search.cc:325
 msgid "Suggested"
-msgstr "Sugerido"
+msgstr "Suosittelee"
 
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: ../src/info.cc:289
-#: ../src/search.cc:38
-#: ../src/search.cc:54
-#: ../src/search.cc:214
-#: ../src/search.cc:385
-#: ../src/search.cc:441
-#: ../src/search.cc:533
-#: ../src/update.cc:381
+#: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
+#: ../src/search.cc:533 ../src/update.cc:381
 msgid "S"
-msgstr "S"
+msgstr "T"
 
 #. translators: name (general header)
-#: ../src/info.cc:289
-#: ../src/locks.cc:39
-#: ../src/repos.cc:632
-#: ../src/repos.cc:681
-#: ../src/repos.cc:2058
-#: ../src/search.cc:44
-#: ../src/search.cc:56
-#: ../src/search.cc:215
-#: ../src/search.cc:264
-#: ../src/search.cc:386
-#: ../src/search.cc:447
-#: ../src/search.cc:534
-#: ../src/update.cc:152
-#: ../src/update.cc:389
-#: ../src/Zypper.cc:3894
+#: ../src/info.cc:289 ../src/locks.cc:39 ../src/repos.cc:632
+#: ../src/repos.cc:681 ../src/repos.cc:2058 ../src/search.cc:44
+#: ../src/search.cc:56 ../src/search.cc:215 ../src/search.cc:264
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:534
+#: ../src/update.cc:152 ../src/update.cc:389 ../src/Zypper.cc:3894
 msgid "Name"
-msgstr "Nome"
+msgstr "Nimi"
 
 #. translators: type (general header)
 #. translators: product type (addon/base) (rug calls it Category)
-#: ../src/info.cc:289
-#: ../src/locks.cc:43
-#: ../src/repos.cc:632
-#: ../src/repos.cc:690
-#: ../src/repos.cc:2066
-#: ../src/search.cc:58
-#: ../src/search.cc:218
-#: ../src/search.cc:541
+#: ../src/info.cc:289 ../src/locks.cc:43 ../src/repos.cc:632
+#: ../src/repos.cc:690 ../src/repos.cc:2066 ../src/search.cc:58
+#: ../src/search.cc:218 ../src/search.cc:541
 msgid "Type"
-msgstr "Tipo"
+msgstr "Tyyppi"
 
-#: ../src/info.cc:289
-#: ../src/search.cc:388
+#: ../src/info.cc:289 ../src/search.cc:388
 msgid "Dependency"
-msgstr "Dependência"
+msgstr "Riippuvuudet"
 
 #: ../src/info.cc:307
 msgid "Contents"
-msgstr "Conteúdo"
+msgstr "Sisältö"
 
 #: ../src/info.cc:309
 msgid "(empty)"
-msgstr "(vazio)"
+msgstr "(tyhjä)"
 
 #. translators: patch category (recommended, security)
 #. translators: product category (the rug term)
-#: ../src/info.cc:351
-#: ../src/search.cc:267
-#: ../src/search.cc:538
+#: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
 #: ../src/update.cc:152
 msgid "Category"
-msgstr "Categoria"
+msgstr "Luokka"
 
 #: ../src/info.cc:352
 msgid "Flavor"
-msgstr "Tipo"
+msgstr "tyyppi"
 
-#: ../src/info.cc:353
-#: ../src/utils/misc.cc:111
+#: ../src/info.cc:353 ../src/utils/misc.cc:111
 msgid "Installed"
-msgstr "Instalado"
+msgstr "Asennettu"
 
 #: ../src/info.cc:354
 msgid "Short Name"
-msgstr "Nome curto"
+msgstr "Lyhytnimi"
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:40
-#: ../src/install.cc:131
+#: ../src/install.cc:40 ../src/install.cc:131
 #, c-format
 msgid "'%s' not found"
-msgstr "'%s' não encontrado"
+msgstr "'%s' ei löytynyt"
 
 #. translators: e.g. skipping package 'zypper' (the newest version already installed)
 #: ../src/install.cc:62
 #, c-format
 msgid "skipping %s '%s' (the newest version already installed)"
-msgstr "ignorando %s '%s' (a versão mais recente já está instalada)"
+msgstr "ohitettiin %s '%s' (uusin versio on jo asennettu)"
 
 #: ../src/install.cc:77
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be installed."
-msgstr "Falha ao adicionar '%s' à lista de pacotes a serem instalados."
+msgstr "'%s' merkitseminen asennettavaksi epäonnistui."
 
 #: ../src/install.cc:101
 #, c-format
 msgid "Failed to add '%s' to the list of packages to be removed."
-msgstr "Falha ao adicionar '%s' à lista de pacotes a serem removidos."
+msgstr "'%s' merkitseminen poistettavaksi epäonnistui."
 
-#: ../src/install.cc:314
-#: ../src/install.cc:549
+#: ../src/install.cc:314 ../src/install.cc:549
 #, c-format
 msgid "'%s' is already installed."
-msgstr "'%s' já está instalado."
+msgstr "'%s' on jo asennettuna."
 
 #. translators: meaning a package %s or provider of capability %s
-#: ../src/install.cc:354
-#: ../src/install.cc:563
+#: ../src/install.cc:354 ../src/install.cc:563
 #, c-format
 msgid "'%s' is not installed."
-msgstr "'%s' não está instalado."
+msgstr "'%s' ei ole asennettuna."
 
 #: ../src/install.cc:384
 #, c-format
 msgid "%s contradicts %s"
-msgstr "%s conflita com %s"
+msgstr "%s on ristiriidassa %s kanssa"
 
 #. translators: meaning --force with --capability
 #: ../src/install.cc:393
 #, c-format
 msgid "%s cannot currently be used with %s"
-msgstr "%s não pode ser atualmente usado com %s"
+msgstr "%s ei voida käyttää %s kanssa"
 
 #. FIXME show a message here, after string freeze
 #. zypper.out().error(boost::str(format(_("%s is not a valid package or capability name.") % str));
-#: ../src/install.cc:448
-#: ../src/Zypper.cc:3007
+#: ../src/install.cc:448 ../src/Zypper.cc:3007
 msgid "No valid arguments specified."
-msgstr "Nenhum argumento válido especificado."
+msgstr "Yhtään virheetöntä valintaa ei määritetty."
 
 #. translators: meaning a package %s or provider of capability %s
 #: ../src/install.cc:523
 #, c-format
 msgid "'%s' not found."
-msgstr "'%s' não encontrado."
+msgstr "'%s' ei löytynyt."
 
 #. translators: %s are package names
 #: ../src/install.cc:553
 #, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' que fornece '%s' já está instalado."
+msgstr "'%s' (%s) on jo asennettuna."
 
 #. translators: locks table value
 #. importance
-#: ../src/locks.cc:22
-#: ../src/locks.cc:63
-#: ../src/locks.cc:76
+#: ../src/locks.cc:22 ../src/locks.cc:63 ../src/locks.cc:76
 msgid "(any)"
-msgstr "(qualquer)"
+msgstr "(mikä tahansa)"
 
 #. translators: locks table value
-#: ../src/locks.cc:24
-#: ../src/locks.cc:60
-#: ../src/search.cc:311
+#: ../src/locks.cc:24 ../src/locks.cc:60 ../src/search.cc:311
 msgid "(multiple)"
-msgstr "(múltiplos)"
+msgstr "(useita)"
 
 #. translators: catalog (rug's word for repository) (header)
-#: ../src/locks.cc:41
-#: ../src/search.cc:40
-#: ../src/search.cc:263
-#: ../src/update.cc:151
-#: ../src/update.cc:383
+#: ../src/locks.cc:41 ../src/search.cc:40 ../src/search.cc:263
+#: ../src/update.cc:151 ../src/update.cc:383
 msgid "Catalog"
-msgstr "Catálogo"
+msgstr "Luettelo"
 
 #: ../src/locks.cc:41
 msgid "Importance"
-msgstr "Importância"
+msgstr "Tärkeä"
 
 #. translators: package's repository (header)
-#: ../src/locks.cc:43
-#: ../src/search.cc:64
-#: ../src/search.cc:388
-#: ../src/search.cc:446
-#: ../src/update.cc:151
-#: ../src/update.cc:383
+#: ../src/locks.cc:43 ../src/search.cc:64 ../src/search.cc:388
+#: ../src/search.cc:446 ../src/update.cc:151 ../src/update.cc:383
 msgid "Repository"
-msgstr "Repositório"
+msgstr "Asennuslähde"
 
 #: ../src/locks.cc:95
 msgid "There are no package locks defined."
-msgstr "Não há travas de pacote definidas."
+msgstr "Yhtään pakettilukkoa ei ole määritetty."
 
 #: ../src/locks.cc:102
 msgid "Error reading the locks file:"
-msgstr "Ocorreu um erro ao ler o arquivo de travas:"
+msgstr "Virhe luettaessa lukkotiedostoa:"
 
 #: ../src/locks.cc:153
 msgid "Problem adding the package lock:"
-msgstr "Problema ao adicionar a trava de pacote:"
+msgstr "Virhe lukittaessa pakettia:"
 
 #: ../src/locks.cc:158
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "A trava especificada foi adicionada com sucesso."
-msgstr[1] "As travas especificadas foram adicionadas com sucesso."
+msgstr[0] "Pakettilukon määritys onnistui."
+msgstr[1] "Pakettilukon määritys onnistui."
 
 #: ../src/locks.cc:181
 msgid "Specified lock has been successfully removed."
-msgstr "A trava especificada foi removida com sucesso."
+msgstr "Pakettilukon poistaminen onnistui."
 
 #: ../src/locks.cc:228
 msgid "No lock has been removed."
-msgstr "Nenhuma trava foi removida."
+msgstr "Lukkoja ei poistettu."
 
 #: ../src/locks.cc:232
 #, c-format
 msgid "%lu lock has been successfully removed."
 msgid_plural "%lu locks have been succesfully removed."
-msgstr[0] "%lu trava foi removida com sucesso."
-msgstr[1] "%lu travas foram removidas com sucesso."
+msgstr[0] "Lukon %lu poistaminen onnistui."
+msgstr[1] "%lu lukkoa poistettiin onnistuneesti."
 
 #: ../src/locks.cc:239
 msgid "Problem removing the package lock:"
-msgstr "Problema ao remover a trava de pacote:"
+msgstr "Virhe pakettilukon poistamisessa:"
 
 #. translators: this will show up if you press ctrl+c twice outside of zypper shell
 #: ../src/main.cc:44
 msgid "OK OK! Exiting immediately..."
-msgstr "OK OK! Saindo imediatamente..."
+msgstr " OK! Poistutaan välittömästi..."
 
 #. TranslatorExplanation The first %s is name of the resolvable, the second is its kind (e.g. 'zypper package')
 #: ../src/misc.cc:136
 #, c-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Aceitando automaticamente as licenças de %s (%s)."
+msgstr "%s %s lisenssi hyväksyttiin automaattisesti."
 
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
 #: ../src/misc.cc:157
 #, c-format
 msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
-msgstr "Para instalar '%s'%s, é necessário que você concorde com os termos do seguinte contrato de licença:"
+msgstr "Tämän paketin '%s'%s asentaminen edellyttää, että hyväksyt yllä olevan käyttöoikeussopimuksen ehdot. Haluatko jatkaa?"
 
 #. lincense prompt
 #: ../src/misc.cc:174
 msgid "Do you agree with the terms of the license?"
-msgstr "Você concorda com os termos da licença?"
+msgstr "Hyväksytkö käyttöoikeussopimuksen ehdot?"
 
 #: ../src/misc.cc:183
 msgid "Aborting installation due to the need for license confirmation."
-msgstr "Cancelando a instalação devido à necessidade da confirmação da licença."
+msgstr "Keskeytetään asennus, koska jokin paketti vaatii käyttöoikeussopimuksen vahvistamista."
 
 #. translators: %sanslate the '--auto-agree-with-licenses',
 #. it is a command line option
 #: ../src/misc.cc:188
 #, c-format
 msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
-msgstr "Por favor reinicie a operação em modo interativo e confirme sua concordância com a licença requerida ou use a opção %s."
+msgstr "Käynnistä toiminto vuorovaikutteisessa tilassa ja vahvista tarvittavien käyttöoikeussopimusten hyväksyminen, tai käytä valintaa %s."
 
 #. translators: e.g. "... with flash package license."
 #. ! \todo fix this to allow proper translation
 #: ../src/misc.cc:200
 #, c-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr "Cancelando a instalação devido ao usuário não estar de acordo com a licença %s (%s)."
+msgstr "Keskeytetään asennus, koska käyttäjä ei hyväksynyt %s %s käyttöoikeussopimusta."
 
 #: ../src/misc.cc:247
 msgid "License"
-msgstr "Licença"
+msgstr "Käyttöoikeussopimus"
 
 #: ../src/misc.cc:265
 msgid "EULA"
@@ -757,757 +692,729 @@ msgstr "EULA"
 
 #: ../src/misc.cc:283
 msgid "SUMMARY"
-msgstr "RESUMO"
+msgstr "KUVAUS"
 
 #: ../src/misc.cc:284
 #, c-format
 msgid "Installed packages: %d"
-msgstr "Pacotes instalados: %d"
+msgstr "Asennettuja paketteja: %d"
 
 #: ../src/misc.cc:285
 #, c-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Pacotes instalados com contrapartes nos repositórios %d"
+msgstr "Asennettujen pakettien vastikkeet asennuslähteissä: %d"
 
 #: ../src/misc.cc:286
 #, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Pacote instalados com EULAs: %d"
+msgstr "Asennettuja Käyttäehtosopimuksellisia paketteja: %d"
 
-#: ../src/misc.cc:372
-#: ../src/misc.cc:397
+#: ../src/misc.cc:372 ../src/misc.cc:397
 #, c-format
 msgid "Source package '%s' not found."
-msgstr "O pacote fonte '%s' não foi encontrado."
+msgstr "Lähdekoodipakettia '%s' ei löydetty."
 
 #: ../src/misc.cc:407
 #, c-format
 msgid "Installing source package %s-%s"
-msgstr "Instalando o pacote fonte %s-%s"
+msgstr "Asennetaan lähdekoodipakettia %s-%s"
 
 #: ../src/misc.cc:416
 #, c-format
 msgid "Source package %s-%s successfully installed."
-msgstr "O pacote fonte %s-%s foi instalado com sucesso."
+msgstr "Lähdekoodipaketti %s-%s asennettiin onnistuneesti."
 
 #: ../src/misc.cc:423
 #, c-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problema ao instalar o pacote fonte %s-%s:"
+msgstr "Virhe asennettaessa lähdekoodipakettia %s-%s:"
 
 #: ../src/output/OutNormal.cc:54
 msgid "Warning: "
-msgstr "Aviso:"
+msgstr "Varoitus: "
 
-#: ../src/output/OutNormal.cc:151
-#: ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "error"
-msgstr "erro"
+msgstr "virhe"
 
-#: ../src/output/OutNormal.cc:151
-#: ../src/output/OutNormal.cc:224
+#: ../src/output/OutNormal.cc:151 ../src/output/OutNormal.cc:224
 msgid "done"
-msgstr "concluído"
+msgstr "valmis"
 
-#: ../src/output/OutNormal.cc:165
-#: ../src/output/OutNormal.cc:167
-#: ../src/output/OutNormal.cc:191
-#: ../src/output/OutNormal.cc:217
+#: ../src/output/OutNormal.cc:165 ../src/output/OutNormal.cc:167
+#: ../src/output/OutNormal.cc:191 ../src/output/OutNormal.cc:217
 msgid "Retrieving:"
-msgstr "Obtendo:"
+msgstr "Ladataan:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: ../src/output/OutNormal.cc:173
 msgid "starting"
-msgstr "iniciando"
+msgstr "Käynnistetään"
 
 #: ../src/output/OutNormal.cc:250
 msgid "No help available for this prompt."
-msgstr "Nenhuma ajuda disponível para este prompt."
+msgstr "Tälle toiminnolle ei ole ohjetta."
 
 #: ../src/output/OutNormal.cc:260
 msgid "no help available for this option"
-msgstr "nenhuma ajuda disponível para esta opção"
+msgstr "Tälle valinnalle ei ole ohjetta"
 
 #: ../src/repos.cc:80
 #, c-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Verificando se é necessário atualizar os metadados para %s"
+msgstr "Tarkistetaan tarvitseeko %s metatietoja päivittää"
 
 #: ../src/repos.cc:102
 #, c-format
 msgid "Repository '%s' is up to date."
-msgstr "O repositório '%s' está atualizado."
+msgstr "Asennuslähde '%s' on ajantasalla."
 
 #: ../src/repos.cc:106
 #, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "A verificação atual de '%s' foi atrasada."
+msgstr "'%s' päivitys on viivästetty."
 
 #: ../src/repos.cc:128
 msgid "Forcing raw metadata refresh"
-msgstr "Forçando a atualização de metadados brutos."
+msgstr "Pakotetaan raakametatietojen päivitys"
 
 #: ../src/repos.cc:135
 #, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Obtendo os metadados do repositório '%s'"
+msgstr "Ladataan asennuslähteen '%s' tietoja"
 
 #: ../src/repos.cc:159
 #, c-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Problema ao obter os arquivos de '%s'."
+msgstr "Virhe ladattaessa tiedostoja kohteesta '%s'."
 
-#: ../src/repos.cc:160
-#: ../src/repos.cc:2844
-#: ../src/solve-commit.cc:1109
-#: ../src/solve-commit.cc:1132
-#: ../src/solve-commit.cc:1164
+#: ../src/repos.cc:160 ../src/repos.cc:2844 ../src/solve-commit.cc:1109
+#: ../src/solve-commit.cc:1132 ../src/solve-commit.cc:1164
 msgid "Please see the above error message for a hint."
-msgstr "Por favor veja a mensagem de erro acima para uma dica."
+msgstr "Tarkista ylläoleva viesti."
 
 #: ../src/repos.cc:173
 #, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Nenhuma URL definida para '%s'."
+msgstr "asennuslähteelle '%s' ei ole määritetty URI-osoitteita."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: ../src/repos.cc:177
 #, c-format
 msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
-msgstr "Por favor adicione uma ou mais URLs base (baseurl=URL) ao %s para o repositório '%s'."
+msgstr "Aseta vähintään yksi osoite (baseurl=URI) tiedostoon %s asennuslähteelle '%s'."
 
 #: ../src/repos.cc:190
 msgid "No alias defined for this repository."
-msgstr "Nenhum apelido definido para esse repositório."
+msgstr "Tälle asennuslähteelle ei ole määritetty alias-nimeä."
 
 #: ../src/repos.cc:203
 #, c-format
 msgid "Repository '%s' is invalid."
-msgstr "O repositório '%s' é inválido."
+msgstr "Asennuslähde '%s' on virheellinen."
 
 #: ../src/repos.cc:204
 msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
-msgstr "Por favor verifique se as URLs definidas para este repositórios apontam para um repositório válido."
+msgstr "Tarkista että asennuslähteen URI-osoitteet osoittavat kelvolliseen asennuslähteeseen."
 
 #: ../src/repos.cc:217
 #, c-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Ocorreu um erro ao obter os metadados de '%s':"
+msgstr "Virhe ladattaessa metatietoja asennuslähteestä '%s':"
 
 #: ../src/repos.cc:232
 msgid "Forcing building of repository cache"
-msgstr "Forçando a construção do cache do repositório."
+msgstr "Pakotetaan asennuslähteen välimuistin rakentaminen"
 
 #: ../src/repos.cc:245
 #, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Ocorreu um erro ao analisar os metadados de '%s':"
+msgstr "Virhe jäsennettäessä asennuslähteen '%s' metatietoja:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: ../src/repos.cc:247
 msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper#Troubleshooting"
-msgstr "Isto pode ter sido causado por metadados inválidos no repositório ou por um bug no interpretador de metadados. No último caso, ou em caso de dúvida, por favor, preencha um relatório de bug seguindo as instruções em http://en.opensuse.org/Zypper#Troubleshooting"
+msgstr "Tämä voi johtua virheellisistä asennuslähteen metatiedoista tai metatietojen jäsentäjän ohjelmointivirheestä. Jos epäilet jälkimmäistä,  tee virheraportti näiden ohjeiden mukaisesti: http://en.opensuse.org/Zypper#Troubleshooting"
 
 #: ../src/repos.cc:261
 #, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Os metadados de repositório para '%s' não foram encontrados no cache local."
+msgstr "Asennuslähteen '%s' metatietoja ei löytynyt paikallisesta välimuistista."
 
 #: ../src/repos.cc:269
 msgid "Error building the cache:"
-msgstr "Ocorreu um erro ao construir o cache:"
+msgstr "Virhe rakennettaessa välimuistia:"
 
 #: ../src/repos.cc:422
 #, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "O repositório '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "Asennuslähdettä '%s' ei löydetty aliaksen, numeron tai URL-osoitteen perusteella."
 
 #: ../src/repos.cc:426
 #, c-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "Use '%s' para obter a lista dos repositórios definidos."
+msgstr "Kirjoita '%s' saadaksesi listan määritellyistä asennuslähteistä."
 
-#: ../src/repos.cc:504
-#: ../src/repos.cc:540
+#: ../src/repos.cc:504 ../src/repos.cc:540
 #, c-format
 msgid "Disabling repository '%s' because of the above error."
-msgstr "Desabilitando o repositório '%s' devido ao erro acima."
+msgstr "Poistettiin asennuslähde '%s' käytöstä ylläolevien virheiden vuoksi."
 
 #: ../src/repos.cc:522
 #, c-format
 msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
-msgstr "O repositório '%s' está desatualizado. Execute 'zypper refresh' como root para atualizá-lo. "
+msgstr "Asennuslähde '%s' ei ole ajantasalla. Suorita 'zypper refresh' pääkäyttäjänä päivittääksesi sen."
 
 #: ../src/repos.cc:557
 #, c-format
 msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
-msgstr "O cache de metadados necessita ser construído para o repositório '%s'. Você pode executar 'zypper refresh' como root para fazer isto. "
+msgstr "Asennuslähteen '%s' välimuistitietokanta täytyy rakentaa uudelleen. Tämä onnistuu ajamalla 'zypper refresh' -komento pääkäyttäjänä."
 
 #: ../src/repos.cc:564
 #, c-format
 msgid "Disabling repository '%s'."
-msgstr "Desabilitando o repositório '%s'."
+msgstr "Poistetaan asennuslähde '%s' käytöstä."
 
 #: ../src/repos.cc:601
 msgid "Initializing Target"
-msgstr "Inicializando Destino"
+msgstr "Alustetaan kohdetta"
 
 #: ../src/repos.cc:610
 msgid "Target initialization failed:"
-msgstr "Falha na inicialização do destino:"
+msgstr "Kohteen valmistelu epäonnistui:"
 
-#: ../src/repos.cc:612
-#: ../src/Zypper.cc:3264
+#: ../src/repos.cc:612 ../src/Zypper.cc:3264
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr "Executar 'zypper refresh' como root deve resolver este problema."
+msgstr "'zypper refresh' -komennon ajaminen pääkäyttäjänä saattaa korjata ongelman."
 
 #. translators: patch status (installed, uninstalled, needed)
-#: ../src/repos.cc:632
-#: ../src/search.cc:269
-#: ../src/update.cc:152
+#: ../src/repos.cc:632 ../src/search.cc:269 ../src/update.cc:152
 msgid "Status"
-msgstr "Status"
+msgstr "Tila"
 
 #. status
 #. rug's status (active, pending => active, disabled <= enabled, disabled)
 #. this is probably the closest possible compatibility arrangement
 #: ../src/repos.cc:649
 msgid "Active"
-msgstr "Ativo"
+msgstr "Käytössä"
 
 #: ../src/repos.cc:649
 msgid "Disabled"
-msgstr "Desabilitado"
+msgstr "Poistettu käytöstä"
 
-#: ../src/repos.cc:680
-#: ../src/repos.cc:2057
-#: ../src/Zypper.cc:3894
+#: ../src/repos.cc:680 ../src/repos.cc:2057 ../src/Zypper.cc:3894
 msgid "Alias"
-msgstr "Apelido"
+msgstr "Alias"
 
+# kpowersave.cpp: tooltip
 #. TranslatorExplanation used as e.g. "Enabled: Yes"
-#: ../src/repos.cc:682
-#: ../src/repos.cc:1313
-#: ../src/repos.cc:2059
+#: ../src/repos.cc:682 ../src/repos.cc:1313 ../src/repos.cc:2059
 msgid "Enabled"
-msgstr "Habilitado"
+msgstr "Käytössä"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: ../src/repos.cc:684
-#: ../src/repos.cc:2061
+#: ../src/repos.cc:684 ../src/repos.cc:2061
 msgid "Refresh"
-msgstr "Atualizar"
+msgstr "Päivitä"
 
 #. translators: repository priority (in zypper repos -p or -d)
-#: ../src/repos.cc:688
-#: ../src/repos.cc:2065
+#: ../src/repos.cc:688 ../src/repos.cc:2065
 msgid "Priority"
-msgstr "Prioridade"
+msgstr "Tärkeysjärjestys"
 
-#: ../src/repos.cc:692
-#: ../src/repos.cc:2068
+#: ../src/repos.cc:692 ../src/repos.cc:2068
 msgid "URI"
-msgstr "URL"
+msgstr "URI"
 
 #: ../src/repos.cc:694
 msgid "Service"
-msgstr "Serviço"
+msgstr "Palvelu"
 
 #: ../src/repos.cc:738
 msgid "No repositories defined. Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Nenhum repositório definido. Use o comando 'zypper addrepo' para adicionar um ou mais repositórios."
+msgstr "Asennuslähteitä ei ole määritetty. Käytä 'zypper addrepo' -komentoa lisätäksesi yhden tai useamman asennuslähteen."
 
-#: ../src/repos.cc:814
-#: ../src/repos.cc:886
-#: ../src/repos.cc:1056
+#: ../src/repos.cc:814 ../src/repos.cc:886 ../src/repos.cc:1056
 msgid "Error reading repositories:"
-msgstr "Ocorreu um erro ao ler os repositórios:"
+msgstr "Virhe luettaessa asennuslähteitä:"
 
-#: ../src/repos.cc:842
-#: ../src/repos.cc:2190
+#: ../src/repos.cc:842 ../src/repos.cc:2190
 #, c-format
 msgid "Can't open %s for writing."
-msgstr "Não foi possível abrir %s para salvar."
+msgstr "Tiedostoa %s ei voida avata kirjoitusta varten."
 
-#: ../src/repos.cc:844
-#: ../src/repos.cc:2192
+#: ../src/repos.cc:844 ../src/repos.cc:2192
 msgid "Maybe you do not have write permissions?"
-msgstr "Talvez você não tenha permissão de escrita?"
+msgstr "Tarkista, että sinulla on kirjoitusoikeudet."
 
-#: ../src/repos.cc:851
-#: ../src/repos.cc:2199
+#: ../src/repos.cc:851 ../src/repos.cc:2199
 #, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "Os repositórios foram exportados para %s com sucesso."
+msgstr "Asennuslähteet on onnistuneesti viety tiedostoon %s."
 
-#: ../src/repos.cc:904
-#: ../src/repos.cc:1074
+#: ../src/repos.cc:904 ../src/repos.cc:1074
 msgid "Specified repositories: "
-msgstr "Repositórios especificados:"
+msgstr "Määritellyt asennuslähteet: "
 
 #: ../src/repos.cc:943
 #, c-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Ignorando o repositório desabilitado '%s'"
+msgstr "Ohitettiin käytöstäpoistettu asennuslähde '%s'"
 
 #: ../src/repos.cc:958
 #, c-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Ignorando o repositório '%s' devido ao erro acima."
+msgstr "Ohitettiin asennuslähde '%s' ylläolevien virheiden vuoksi."
 
 #: ../src/repos.cc:973
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "Use os comandos '%s' ou '%s' para adicionar ou habilitar os repositórios."
+msgstr "Käytä '%s' tai '%s' -komentoja lisätäksesi uuden asennuslähteen tai ottaaksesi jonkin käytöstä poistetun käyttöön."
 
 #: ../src/repos.cc:976
 msgid "Specified repositories are not enabled or defined."
-msgstr "Os repositórios especificados não estão habilitados ou definidos."
+msgstr "Annetut asennuslähteet eivät ole käytössä tai niitä ei ole määritetty."
 
 #: ../src/repos.cc:978
 msgid "There are no enabled repositories defined."
-msgstr "Não há repositórios habilitados definidos."
+msgstr "Yhtään käytössäolevaa asennuslähdettä ei ole määritetty."
 
 #: ../src/repos.cc:982
 msgid "Could not refresh the repositories because of errors."
-msgstr "Não foi possível atualizar os repositórios devido a erros."
+msgstr "Asennuslähdettä ei voitu päivittää virheiden vuoksi."
 
 #: ../src/repos.cc:988
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Alguns dos repositórios não foram atualizados devido a um erro."
+msgstr "Jotain asennuslähteistä ei päivitetty virheiden vuoksi."
 
 #: ../src/repos.cc:993
 msgid "Specified repositories have been refreshed."
-msgstr "Os repositórios especificados foram atualizados."
+msgstr "Määritetyt asennuslähteet on päivitetty."
 
 #: ../src/repos.cc:995
 msgid "All repositories have been refreshed."
-msgstr "Todos os repositórios foram atualizados."
+msgstr "Päivitettiin järjestelmän kaikki asennuslähteet."
 
 #: ../src/repos.cc:1131
 #, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Limpando o cache de metadados de '%s'."
+msgstr "Puhdistetaan asennuslähteen '%s' välimuistia."
 
 #: ../src/repos.cc:1138
 #, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Limpando o cache de metadados brutos de '%s'."
+msgstr "Puhdistetaan asennuslähteen '%s' raakametatietojen välimuistia."
 
 #. translators: meaning the cached rpm files
 #: ../src/repos.cc:1146
 #, c-format
 msgid "Cleaning packages for '%s'."
-msgstr "Limpando os pacotes para '%s'."
+msgstr "Puhdistettiin paketit '%s'."
 
 #: ../src/repos.cc:1154
 #, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Não foi possível limpar o repositório '%s' devido a um erro."
+msgstr "Asennuslähdettä '%s' ei voitu puhdistaa virheen vuoksi."
 
 #: ../src/repos.cc:1168
 msgid "Cleaning installed packages cache."
-msgstr "Limpando o cache de pacotes instalados."
+msgstr "Puhdistetaan asennettujen pakettien välimuistia."
 
 #: ../src/repos.cc:1176
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Não foi possível limpar o cache de pacotes instalados devido a um erro."
+msgstr "Asennettujen pakettien välimuistia ei voi puhdistaa virheiden vuoksi."
 
 #: ../src/repos.cc:1184
 msgid "Could not clean the repositories because of errors."
-msgstr "Não foi possível limpar os repositórios devido a erros."
+msgstr "Asennuslähteitä ei voitu puhdistaa virheiden vuoksi."
 
 #: ../src/repos.cc:1191
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Alguns dos repositórios não foram limpos devido a um erro."
+msgstr "Jotain asennuslähteistä ei ole puhdistettu virheiden vuoksi."
 
 #: ../src/repos.cc:1196
 msgid "Specified repositories have been cleaned up."
-msgstr "Os repositórios especificados foram limpos."
+msgstr "Määritetyt asennuslähteet on puhdustettu."
 
 #: ../src/repos.cc:1198
 msgid "All repositories have been cleaned up."
-msgstr "Todos os repositórios foram limpos."
+msgstr "Kaikki asennuslähteet puhdistettiin."
 
 #: ../src/repos.cc:1238
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "Isto é uma mídia removível de leitura apenas (CD/DVD), desabilitando a atualização automática."
+msgstr "Tämä on vaihdettava, ei kirjoitettavissa oleva asennusmedia (CD/DVD). Poistetaan automaattinen päivitys."
 
-#: ../src/repos.cc:1259
-#: ../src/repos.cc:1520
+#: ../src/repos.cc:1259 ../src/repos.cc:1520
 #, c-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Um repositório chamado '%s' já existe. Por favor escolha outro apelido."
+msgstr "Asennuslähde '%s' on jo määritetty. Valitse toinen alias-nimi."
 
 #: ../src/repos.cc:1270
 msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
-msgstr "Não foi possível determinar o tipo do repositório. Por favor verifique se as URLs definidas (veja abaixo) apontam para um repositório válido:"
+msgstr "Asennuslähteen tyyppiä ei voitu tunnistaa automaattisesti. Tarkista seuraavat olevat URL-osoitteet: "
 
 #: ../src/repos.cc:1277
 msgid "Can't find a valid repository at given location:"
-msgstr "Não foi possível encontrar um repositório válido no local indicado:"
+msgstr "Annetusta sijainnista ei löydy asennuslähteitä:"
 
 #: ../src/repos.cc:1286
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Problema ao transferir os dados do repositório da URL especificada:"
+msgstr "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URI-osoitteesta:"
 
 #: ../src/repos.cc:1287
 msgid "Please check whether the specified URI is accessible."
-msgstr "Por favor verifique se a URL especificada é acessível."
+msgstr "Tarkista, että URI-osoite on saatavissa."
 
 #: ../src/repos.cc:1295
 msgid "Unknown problem when adding repository:"
-msgstr "Problema desconhecido ao adicionar o repositório:"
+msgstr "Tunnistamaton ongelma lisättäessä asennuslähdettä:"
 
 #: ../src/repos.cc:1301
 #, c-format
 msgid "Repository '%s' successfully added"
-msgstr "O repositório '%s' foi adicionado com sucesso"
+msgstr "Asennuslähde '%s' lisättiin onnistuneesti"
 
 #. TranslatorExplanation used as e.g. "Autorefresh: Yes"
 #: ../src/repos.cc:1315
 msgid "Autorefresh"
-msgstr "Atualização automática"
+msgstr "Automaattinen päivitys"
 
 #: ../src/repos.cc:1330
 #, c-format
 msgid "Reading data from '%s' media"
-msgstr "Lendo dados da mídia '%s'"
+msgstr "Luetaan tietoja tietovälineeltä '%s'"
 
 #: ../src/repos.cc:1337
 #, c-format
 msgid "Problem reading data from '%s' media"
-msgstr "Problema ao ler dados da mídia '%s' "
+msgstr "Ongelma luettaessa tietovälinettä '%s'"
 
 #: ../src/repos.cc:1338
 msgid "Please check if your installation media is valid and readable."
-msgstr "Por favor verifique se sua mídia de instalação é válida e legível."
+msgstr "Tarkista, että asennusmedia on oikeellinen ja luettavissa."
 
 #: ../src/repos.cc:1403
 msgid "Problem accessing the file at the specified URI"
-msgstr "Problema ao acessar o arquivo na URL especificada"
+msgstr "Ongelma luettaessa tiedostoa määritellystä URI-osoitteesta."
 
 #: ../src/repos.cc:1404
 msgid "Please check if the URI is valid and accessible."
-msgstr "Por favor verifique se a URL é válida e acessível."
+msgstr "Tarkista, että määritetty URI-osoite on oikein ja saatavilla."
 
 #: ../src/repos.cc:1412
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problema ao analisar o arquivo na URL especificada"
+msgstr "Ongelma jäsennettäessä tiedostoa määritellystä URI-osoitteesta."
 
 #. TranslatorExplanation don't translate the URI if the URI itself is not translated.
 #. Also don't translate the '.repo' string.
 #: ../src/repos.cc:1415
 msgid "Is it a .repo file? See http://en.opensuse.org/Standards/RepoInfo for details."
-msgstr "Isto é um arquivo .repo? Veja em http://en.opensuse.org/Standards/RepoInfo para detalhes."
+msgstr "Onko se .repo tiedosto? katso lisätietoja osoitteesta http://en.opensuse.org/Standards/RepoInfo ."
 
 #: ../src/repos.cc:1423
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr "Problema encontrado durante a tentativa de leitura do arquivo na URL especificada"
+msgstr "Tapahtui virhe yritettäessä lukea tiedostoa määritetystä URI-osoitteesta"
 
 #: ../src/repos.cc:1437
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Um repositório sem apelido definido foi encontrado no arquivo, ignorando."
+msgstr "Löydettiin asennuslähde ilman aliasta. Ohitetaan."
 
 #: ../src/repos.cc:1444
 #, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "O repositório '%s' não tem uma URL definida, ignorando."
+msgstr "Asennuslähteellä '%s' ei ole URI-osoitetta. Ohitetaan."
 
 #: ../src/repos.cc:1484
 #, c-format
 msgid "Repository '%s' has been removed."
-msgstr "O repositório '%s' foi removido."
+msgstr "Asennuslähde '%s' poistettiin."
 
 #: ../src/repos.cc:1503
 #, c-format
 msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
-msgstr "Não foi possível alterar o apelido do repositório '%s'. O repositório pertence ao serviço '%s\" que é responsável por definir o apelido."
+msgstr "Asennuslähteen '%s' aliasta ei voida vaihtaa. Asennuslähde kuuluu palveluun '%s', joka vastaa myös palveluiden aliasnimistä."
 
 #: ../src/repos.cc:1514
 #, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "O repositório '%s' foi renomeado para '%s'."
+msgstr "Asennuslähde '%s' nimettiin '%s'."
 
-#: ../src/repos.cc:1526
-#: ../src/repos.cc:1746
+#: ../src/repos.cc:1526 ../src/repos.cc:1746
 msgid "Error while modifying the repository:"
-msgstr "Ocorreu um erro enquanto alterava o repositório:"
+msgstr "Virhe muokattaessa asennuslähdettä:"
 
 #: ../src/repos.cc:1527
 #, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Mantendo o repositório '%s' inalterado."
+msgstr "Asennuslähdettä '%s' ei muokattu."
 
 #: ../src/repos.cc:1664
 #, c-format
 msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
-msgstr "Prioridade inválida '%s'. Use um número inteiro positivo. Quanto maior o número, menor a proridade."
+msgstr "Virheellinen tärkeysjärjestyksen määritys '%s'. Käytä positiivista kokonaislukua. Mitä suurempi numero, sitä matalampi tärkeys."
 
 #: ../src/repos.cc:1672
 #, c-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "A prioridade do repositório '%s' não foi alterada (%d)"
+msgstr "Asennuslähteen '%s' tärkeysjärjestys jätettiin muuttamatta (%d)"
 
 #: ../src/repos.cc:1698
 #, c-format
 msgid "Repository '%s' has been sucessfully enabled."
-msgstr "O repositório %s foi habilitado com sucesso."
+msgstr "Asennuslähde '%s' otettiin käyttöön."
 
 #: ../src/repos.cc:1701
 #, c-format
 msgid "Repository '%s' has been sucessfully disabled."
-msgstr "O repositório %s foi desabilitado com sucesso."
+msgstr "Asennuslähde '%s' poistettiin käytöstä."
 
 #: ../src/repos.cc:1708
 #, c-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "A atualização automática para o repositório '%s' foi habilitada."
+msgstr "Asennuslähteen '%s' automaattinen päivitys otettiin käyttöön."
 
 #: ../src/repos.cc:1711
 #, c-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "A atualização automática para o repositório '%s' foi desabilitada."
+msgstr "Asennuslähteen '%s' automaattinen päivitys poistettiin käytöstä."
 
 #: ../src/repos.cc:1718
 #, c-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "O cache dos arquivos RPM foi habilitado para o repositório '%s'."
+msgstr "Asennuslähteen '%s' RPM-välimuisti otettiin käyttöön."
 
 #: ../src/repos.cc:1721
 #, c-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "O cache dos arquivos RPM foi desabilitado para o repositório '%s'."
+msgstr "Asennuslähteen '%s' RPM-välimuisti poistettiin käytöstä."
 
 #: ../src/repos.cc:1727
 #, c-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "A prioridade do repositório '%s' foi alterada para %d."
+msgstr "Asennuslähteen '%s' tärkeysjärjestys asetettiin %d."
 
 #: ../src/repos.cc:1733
 #, c-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "O nome do repositório '%s' foi definido para '%s'."
+msgstr "Asennuslähteelle '%s' nimettiin: '%s'."
 
 #: ../src/repos.cc:1739
 #, c-format
 msgid "Nothing to change for repository '%s'."
-msgstr "Nada a alterar para o repositório '%s'."
+msgstr "Ei muutoksia asennuslähteeseen '%s'."
 
 #: ../src/repos.cc:1747
 #, c-format
 msgid "Leaving repository %s unchanged."
-msgstr "Mantendo o repositório %s inalterado."
+msgstr "Asennuslähteeseen %s ei tehty muutoksia."
 
 #: ../src/repos.cc:1785
 msgid "Error reading services:"
-msgstr "Ocorreu um erro ao ler os serviços:"
+msgstr "Virhe luettaessa asennuslähdepalvelua:"
 
 #: ../src/repos.cc:1874
 #, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "O serviço '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "Asennuslähdepalvelua '%s' ei löydetty aliaksen, numeron tai URL-osoitteen perusteella."
 
 #: ../src/repos.cc:1878
 #, c-format
 msgid "Use '%s' to get the list of defined services."
-msgstr "Use '%s' para obter a lista dos serviços definidos."
+msgstr "Kirjoita '%s' saadaksesi listan määritellyistä asennuslähdepalveluista."
 
 #: ../src/repos.cc:2104
 #, c-format
 msgid "No services defined. Use the '%s' command to add one or more services."
-msgstr "Nenhum serviço definido. Use o comando '%s' para adicionar um ou mais serviços."
+msgstr "Asennuslähdepalveluita ei ole määritetty. Käytä '%s' -komentoa lisätäksesi yhden tai useamman asennuslähdepalvelun."
 
 #: ../src/repos.cc:2230
 #, c-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Um serviço chamado '%s' já existe. Por favor escolha outro apelido."
+msgstr "Asennuslähdepalvelu '%s' on jo määritetty. Valitse toinen alias-nimi."
 
 #: ../src/repos.cc:2240
 #, c-format
 msgid "Error occured while adding service '%s'."
-msgstr "Ocorreu um erro ao adicionar o serviço '%s'."
+msgstr "Virhe lisättäessä asennuslähdepalvelua '%s'."
 
 #: ../src/repos.cc:2246
 #, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "O serviço '%s' foi adicionado com sucesso."
+msgstr "Asennuslähdepalvelun '%s' lisääminen onnistui."
 
 #: ../src/repos.cc:2285
 #, c-format
 msgid "Removing service '%s':"
-msgstr "Removendo o serviço '%s':"
+msgstr "Poistetaan asennuslähdepalvelua '%s':"
 
 #: ../src/repos.cc:2288
 #, c-format
 msgid "Service '%s' has been removed."
-msgstr "O serviço '%s' foi removido."
+msgstr "Asennuslähdepalvelu '%s' poistettiin."
 
 #: ../src/repos.cc:2304
 #, c-format
 msgid "Refreshing service '%s'."
-msgstr "Atualizando o serviço '%s'."
+msgstr "Päivitetään asennuslähdepalvelu '%s'."
 
 #: ../src/repos.cc:2313
 #, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Problema ao obter o arquivo de índice do repositório para o serviço '%s':"
+msgstr "Virhe siirrettäessä asennuslähdepalvelun '%s' tietoja:"
 
 #: ../src/repos.cc:2315
 msgid "Check if the URI is valid and accessible."
-msgstr "Verifique se a URL é válida e acessível."
+msgstr "Tarkista, että määritetty URI-osoite on oikein ja saatavilla."
 
 #: ../src/repos.cc:2373
 #, c-format
 msgid "Skipping disabled service '%s'"
-msgstr "Ignorando o serviço desabilitado '%s'"
+msgstr "Ohitettiin käytöstäpoistettu asennuslähdepalvelu '%s'"
 
 #: ../src/repos.cc:2419
 #, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Ignorando o serviço '%s' devido ao erro acima."
+msgstr "Ohitettiin asennuslähdepalvelu '%s' ylläolevien virheiden vuoksi."
 
 #: ../src/repos.cc:2434
 #, c-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr "Use os comandos '%s' ou '%s' para adicionar ou habilitar os serviços."
+msgstr "Käytä '%s' tai '%s' -komentoja lisätäksesi uuden asennuslähdepalvelun tai ottaaksesi jonkin käytöstä poistetun käyttöön."
 
 #: ../src/repos.cc:2437
 msgid "Specified services are not enabled or defined."
-msgstr "Os serviços especificados não estão habilitados ou definidos."
+msgstr "Annetut asennuslähdepalvelut eivät ole käytössä tai niitä ei ole määritetty."
 
 #: ../src/repos.cc:2439
 msgid "There are no enabled services defined."
-msgstr "Não há serviços habilitados definidos."
+msgstr "Yhtään käytössäolevaa asennuslähdepalvelua ei ole määritetty."
 
 #: ../src/repos.cc:2443
 msgid "Could not refresh the services because of errors."
-msgstr "Não foi possível atualizar os serviços devido a erros."
+msgstr "Asennuslähdepalvelua ei voitu päivittää virheiden vuoksi."
 
 #: ../src/repos.cc:2449
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Alguns dos serviços não foram atualizados devido a um erro."
+msgstr "Jotain asennuslähdepalveluita ei päivitetty virheiden vuoksi."
 
 #: ../src/repos.cc:2454
 msgid "Specified services have been refreshed."
-msgstr "Os serviços especificados foram atualizados."
+msgstr "Annetut asennuslähdepalvelut on päivitetty."
 
 #: ../src/repos.cc:2456
 msgid "All services have been refreshed."
-msgstr "Todos os serviços foram atualizados."
+msgstr "Päivitettiin kaikki asennuslähdepalvelut."
 
 #: ../src/repos.cc:2578
 #, c-format
 msgid "Service '%s' has been sucessfully enabled."
-msgstr "O serviço '%s' foi habilitado com sucesso."
+msgstr "Asennuslähdepalvelu '%s' otettiin käyttöön."
 
 #: ../src/repos.cc:2581
 #, c-format
 msgid "Service '%s' has been sucessfully disabled."
-msgstr "O serviço %s foi desabilitado com sucesso."
+msgstr "Asennuslähdepalvelu '%s' poistettiin käytöstä."
 
 #: ../src/repos.cc:2588
 #, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "A atualização automática para o serviço '%s' foi habilitada."
+msgstr "Asennuslähdepalvelun '%s' automaattinen päivitys otettiin käyttöön."
 
 #: ../src/repos.cc:2591
 #, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "A atualização automática para o serviço '%s' foi desabilitada."
+msgstr "Asennuslähdepalvelun '%s' automaattinen päivitys poistettiin käytöstä."
 
 #: ../src/repos.cc:2597
 #, c-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "O nome do serviço '%s' foi definido para '%s'."
+msgstr "Asennuslähdepalvelu '%s' nimettiin: '%s'."
 
 #: ../src/repos.cc:2603
 #, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi adicionado aos repositórios habilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram adicionado aos repositórios habilitados do serviço '%s'"
+msgstr[0] "Lisättiin asennuslähteet '%s' käytössä olevina (asennuslähdepalvelu '%s')"
+msgstr[1] "Lisättiin asennuslähde '%s' käytössä olevana (asennuslähdepalvelu '%s')"
 
 #: ../src/repos.cc:2611
 #, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi adicionado aos repositórios desabilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram adicionado aos repositórios desabilitados do serviço '%s'"
+msgstr[0] "Lisättiin asennuslähde '%s' käytöstäpoistettuna (asennuslähdepalvelu '%s')"
+msgstr[1] "Lisättiin asennuslähteet '%s' käytöstäpoistettuna (asennuslähdepalvelu '%s')"
 
 #: ../src/repos.cc:2619
 #, c-format
 msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi removido dos repositórios habilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram removido dos repositórios habilitados do serviço '%s'"
+msgstr[0] "Poistettiin asennuslähde '%s' käytössä olevista asennuslähteistä (asennuslähdepalvelu '%s')"
+msgstr[1] "Poistettiin asennuslähteet '%s' käytössä olevista asennuslähteistä (asennuslähdepalvelu '%s')"
 
 #: ../src/repos.cc:2627
 #, c-format
 msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
-msgstr[0] "O repositório '%s' foi removido dos repositórios desabilitados do serviço '%s'"
-msgstr[1] "Os repositórios '%s' foram removidos dos repositórios desabilitados do serviço '%s'"
+msgstr[0] "Poistettiin asennuslähde '%s' käytöstä poistetuista asennuslähteistä (asennuslähdepalvelu '%s')"
+msgstr[1] "Poistettiin asennuslähteet '%s' käytöstä poistetuista asennuslähteistä (asennuslähdepalvelu '%s')"
 
 #: ../src/repos.cc:2636
 #, c-format
 msgid "Nothing to change for service '%s'."
-msgstr "Nada a alterar para o serviço '%s'."
+msgstr "Ei muutoksia asennuslähdepalveuun '%s'."
 
 #: ../src/repos.cc:2643
 msgid "Error while modifying the service:"
-msgstr "Ocorreu um erro enquanto alterava o serviço:"
+msgstr "Virhe muokattaessa asennuslähdepalvelua:"
 
 #: ../src/repos.cc:2644
 #, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Mantendo o serviço %s inalterado."
+msgstr "Asennuslähdepalveluun %s ei tehty muutoksia."
 
 #: ../src/repos.cc:2751
 msgid "Loading repository data..."
-msgstr "Carregando os dados do repositório..."
+msgstr "Luetaan asennuslähteiden tietoja..."
 
 #: ../src/repos.cc:2769
 #, c-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Obtendo os dados do repositório '%s'..."
+msgstr "Luetaan asennuslähteen '%s' tietoja..."
 
 #: ../src/repos.cc:2776
 #, c-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "O repositório '%s' não está no cache. Criando o cache..."
+msgstr "Asennuslähdettä '%s' ei löydy välimuistista. Haetaan..."
 
-#: ../src/repos.cc:2783
-#: ../src/repos.cc:2817
+#: ../src/repos.cc:2783 ../src/repos.cc:2817
 #, c-format
 msgid "Problem loading data from '%s'"
-msgstr "Problema ao carregar os dados de '%s'."
+msgstr "Ongelma ladattaessa tietoja '%s'"
 
-#: ../src/repos.cc:2784
-#: ../src/repos.cc:2823
+#: ../src/repos.cc:2784 ../src/repos.cc:2823
 #, c-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr "Os resolvíveis de '%s' não foram carregados devido a um erro."
+msgstr "'%s' ei voida käyttää virheiden vuoksi."
 
 #: ../src/repos.cc:2805
 #, c-format
 msgid "Repository '%s' appears to outdated. Consider using a different mirror or server."
-msgstr "O repositório '%s' para estar desatualizado. Considere utilizar um servidor ou mirror diferente."
+msgstr "Asennuslähde '%s' on vanhentunut. Harkitse toisen peilipalvelimen käyttöä."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: ../src/repos.cc:2819
 #, c-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Tente '%s' ou mesmo '%s' antes disso."
+msgstr "Kokeile '%s' tai jopa '%s'."
 
 #: ../src/repos.cc:2832
 msgid "Reading installed packages..."
-msgstr "Lendo os pacotes instalados..."
+msgstr "Luetaan asennettuja paketteja..."
 
 #: ../src/repos.cc:2843
 msgid "Problem occured while reading the installed packages:"
-msgstr "Ocorreu um erro durante a leitura dos pacotes instalados:"
+msgstr "Tapahtui virhe luettaessa asennuttuja paketteja:"
 
 #. list name, exact match
 #: ../src/repos.cc:2858
@@ -1516,94 +1423,83 @@ msgid ""
 "WARNING: this command will not synchronize changes.\n"
 "Use rug or yast2 for that."
 msgstr ""
-"O daemon do Gerenciador ZENworks está em execução.\n"
-"AVISO: este comando não sincronizará as alterações.\n"
-"Use o 'rug' ou o 'yast2' para isso."
+"ZENworks hallinta palvelu on käynnissä.\n"
+"VAROITUS: Tämä komento ei tahdista muutoksia.\n"
+"Käytä rug tai yast -työkaluja siihen."
 
 #. translators: Bundle is a term used in rug. See rug for how to translate it.
-#: ../src/search.cc:42
-#: ../src/search.cc:444
-#: ../src/update.cc:386
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:386
 msgid "Bundle"
-msgstr "Bundle"
+msgstr "Nippu"
 
 #. translators: package version (header)
 #. best_effort does not know version or arch yet
-#: ../src/search.cc:46
-#: ../src/search.cc:60
-#: ../src/search.cc:265
-#: ../src/search.cc:386
-#: ../src/search.cc:447
-#: ../src/search.cc:535
-#: ../src/update.cc:152
-#: ../src/update.cc:391
+#: ../src/search.cc:46 ../src/search.cc:60 ../src/search.cc:265
+#: ../src/search.cc:386 ../src/search.cc:447 ../src/search.cc:535
+#: ../src/update.cc:152 ../src/update.cc:391
 msgid "Version"
-msgstr "Versão"
+msgstr "Versio"
 
 #. translators: package architecture (header)
-#: ../src/search.cc:48
-#: ../src/search.cc:62
-#: ../src/search.cc:447
+#: ../src/search.cc:48 ../src/search.cc:62 ../src/search.cc:447
 #: ../src/update.cc:391
 msgid "Arch"
-msgstr "Arquitetura"
+msgstr "Arkkitehtuuri"
 
-#: ../src/search.cc:178
-#: ../src/search.cc:192
+#: ../src/search.cc:178 ../src/search.cc:192
 msgid "System Packages"
-msgstr "Pacotes do Sistema"
+msgstr "Järjestelmän paketit"
 
 #. translators: package summary (header)
 #: ../src/search.cc:217
 msgid "Summary"
-msgstr "Resumo"
+msgstr "Yhteenveto"
 
 #: ../src/search.cc:347
 msgid "No needed patches found."
-msgstr "Nenhuma correção necessária foi encontrada."
+msgstr "Korjauspäivityksiä ei löytynyt."
 
 #: ../src/search.cc:419
 msgid "No patterns found."
-msgstr "Nenhum padrão foi encontrado."
+msgstr "Ohjelmistoryhmiä ei löytynyt."
 
-#: ../src/search.cc:497
-#: ../src/Zypper.cc:3222
+#: ../src/search.cc:497 ../src/Zypper.cc:3222
 msgid "No packages found."
-msgstr "Nenhum pacote foi encontrado."
+msgstr "Paketteja ei löytynyt."
 
 #: ../src/search.cc:574
 msgid "No products found."
-msgstr "Nenhum produto foi encontrado."
+msgstr "Tuotteita ei löytynyt."
 
 #: ../src/search.cc:597
 #, c-format
 msgid "No providers of '%s' found."
-msgstr "Nenhum fornecedor para '%s' foi encontrado."
+msgstr "'%s' tarjoajia ei löytynyt."
 
 #. translators: meaning 'dependency problem' found during solving
 #: ../src/solve-commit.cc:44
 msgid "Problem: "
-msgstr "Problema:"
+msgstr "Ongelma: "
 
 #. TranslatorExplanation %d is the solution number
 #: ../src/solve-commit.cc:57
 #, c-format
 msgid " Solution %d: "
-msgstr "Solução %d:"
+msgstr " Ratkaisu %d: "
 
 #: ../src/solve-commit.cc:76
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Escolha a solução acima usando '1' ou ignorar, repetir ou cancelar"
-msgstr[1] "Escolha uma das opções acima pelo número ou ignorar, repetir ou cancelar"
+msgstr[0] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
+msgstr[1] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: ../src/solve-commit.cc:83
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Escolha a solução acima usando '1' ou ou cancelar usando 'c'"
-msgstr[1] "Escolha uma das opções acima pelo número ou cancelar"
+msgstr[0] "Valitse numero tai k(e)skeytä> "
+msgstr[1] "Valitse numero tai k(e)skeytä> "
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -1613,7 +1509,7 @@ msgstr[1] "Escolha uma das opções acima pelo número ou cancelar"
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:102
 msgid "s/r/c"
-msgstr "i/r/c"
+msgstr "o/r/e"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -1624,290 +1520,290 @@ msgstr "i/r/c"
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: ../src/solve-commit.cc:114
 msgid "c"
-msgstr "c"
+msgstr "e"
 
 #. continue with next problem
 #: ../src/solve-commit.cc:134
 #, c-format
 msgid "Applying solution %s"
-msgstr "Aplicando a solução %s"
+msgstr "Ratkaistaan %s"
 
 #: ../src/solve-commit.cc:158
 #, c-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
-msgstr[0] "%d Problema:"
-msgstr[1] "%d Problemas:"
+msgstr[0] "%d ongelma:"
+msgstr[1] "%d ongelmaa:"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: ../src/solve-commit.cc:162
 msgid "Specified capability not found"
-msgstr "O recurso especificado não foi encontrado"
+msgstr "Määritettyä ominaisuutta ei löydy"
 
 #: ../src/solve-commit.cc:173
 #, c-format
 msgid "Problem: %s"
-msgstr "Problema: %s"
+msgstr "Ongelma: %s"
 
 #: ../src/solve-commit.cc:188
 msgid "Resolving dependencies..."
-msgstr "Resolvendo as dependências..."
+msgstr "Ratkaistaan riippuvuuksia..."
 
 #: ../src/solve-commit.cc:369
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following packages are going to be upgraded:"
-msgstr[0] "O seguinte pacote será atualizado:"
-msgstr[1] "Os seguintes pacotes serão atualizados:"
+msgstr[0] "Päivitetään seuraava paketti:"
+msgstr[1] "Päivitetään seuraavat paketit:"
 
 #: ../src/solve-commit.cc:374
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following patches are going to be upgraded:"
-msgstr[0] "A seguinte correção será atualizada:"
-msgstr[1] "As seguintes correções serão atualizadas:"
+msgstr[0] "Asennetaan seuraava korjauspäivitys:"
+msgstr[1] "Asennetaan seuraavat korjauspäivitykset:"
 
 #: ../src/solve-commit.cc:379
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following patterns are going to be upgraded:"
-msgstr[0] "O seguinte padrão será atualizado:"
-msgstr[1] "Os seguintes padrões serão atualizados:"
+msgstr[0] "Päivitetään seuraava ohjelmistoryhmä:"
+msgstr[1] "Päivitetään seuraavat ohjelmistoryhmät:"
 
 #: ../src/solve-commit.cc:384
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following products are going to be upgraded:"
-msgstr[0] "O seguinte produto será atualizado:"
-msgstr[1] "Os seguintes produtos serão atualizados:"
+msgstr[0] "Päivitetään seuraava tuote:"
+msgstr[1] "Päivitetään seuraavat tuotteet:"
 
 #: ../src/solve-commit.cc:391
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following packages are going to be downgraded:"
-msgstr[0] "O seguinte pacote será desatualizado:"
-msgstr[1] "Os seguintes pacotes serão desatualizados:"
+msgstr[0] "Vaihdetaan seuraava pakettin vanhempaan versioon:"
+msgstr[1] "Vaihdetaan seuraavat paketit vanhempiin versioihin:"
 
 #: ../src/solve-commit.cc:396
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following patches are going to be downgraded:"
-msgstr[0] "A seguinte correção será desatualizada:"
-msgstr[1] "As seguintes correções serão desatualizadas:"
+msgstr[0] "Vaihdetaan seuraava korjauspäivitys vanhempaan versioon:"
+msgstr[1] "Vaihdetaan seuraavat korjauspäivitykset vanhempiin versioihin:"
 
 #: ../src/solve-commit.cc:401
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following patterns are going to be downgraded:"
-msgstr[0] "O seguinte padrão será desatualizado:"
-msgstr[1] "Os seguintes padrões serão desatualizados:"
+msgstr[0] "Vaihdetaan seuraava ohjelmistoryhmä vanhempaan versioon:"
+msgstr[1] "Vaihdetaan seuraavat ohjelmistoryhmä vanhempiin versioihin:"
 
 #: ../src/solve-commit.cc:406
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following products are going to be downgraded:"
-msgstr[0] "O seguinte produto será desatualizado:"
-msgstr[1] "Os seguintes produtos serão desatualizados:"
+msgstr[0] "Vaihdetaan seuraava tuote vanhempaan versioon:"
+msgstr[1] "Vaihdetaan seuraavat tuotteet vanhempiin versioihin:"
 
 #: ../src/solve-commit.cc:413
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following NEW packages are going to be installed:"
-msgstr[0] "O seguinte pacote NOVO será instalado:"
-msgstr[1] "Os seguintes pacotes NOVOS serão instalados:"
+msgstr[0] "Asennetaan seuraava UUSI paketti:"
+msgstr[1] "Asennetaan seuraavat UUDET paketit:"
 
 #: ../src/solve-commit.cc:418
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following NEW patches are going to be installed:"
-msgstr[0] "A seguinte correção NOVA será instalada:"
-msgstr[1] "As seguintes correções NOVAS serão instaladas:"
+msgstr[0] "Asennetaan seuraava UUSI korjauspäivitys:"
+msgstr[1] "Asennetaan seuraavat UUDET korjauspäivitykset:"
 
 #: ../src/solve-commit.cc:423
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following NEW patterns are going to be installed:"
-msgstr[0] "O seguinte padrão NOVO será instalado:"
-msgstr[1] "Os seguintes padrões NOVOS serão instalados:"
+msgstr[0] "Asennetaan seuraava UUSI ohjelmistoryhmä:"
+msgstr[1] "Asennetaan seuraavat UUDET ohjelmistoryhmät:"
 
 #: ../src/solve-commit.cc:428
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following NEW products are going to be installed:"
-msgstr[0] "O seguinte produto NOVO será instalado:"
-msgstr[1] "Os seguintes produtos NOVOS serão instalados:"
+msgstr[0] "Asennetaan seuraava UUSI tuote:"
+msgstr[1] "Asennetaan seuraavat UUDET tuotteet:"
 
 #: ../src/solve-commit.cc:433
 msgid "The following source package is going to be installed:"
 msgid_plural "The following source packages are going to be installed:"
-msgstr[0] "O seguinte pacote fonte será instalado:"
-msgstr[1] "Os seguintes pacotes fonte serão instalados:"
+msgstr[0] "Asennetaan seuraava lähdekoodipaketti:"
+msgstr[1] "Asennetaan seuraavat lähdekoodipaketit:"
 
 #: ../src/solve-commit.cc:440
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following packages are going to be reinstalled:"
-msgstr[0] "O seguinte pacote será reinstalado:"
-msgstr[1] "Os seguintes pacotes serão reinstalados:"
+msgstr[0] "Asennetaan seuraava paketti uudelleen:"
+msgstr[1] "Asennetaan seuraavat paketit uudelleen:"
 
 #: ../src/solve-commit.cc:445
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following patches are going to be reinstalled:"
-msgstr[0] "A seguinte correção será reinstalada:"
-msgstr[1] "As seguintes correções serão reinstaladas:"
+msgstr[0] "Asennetaan seuraava korjauspäivitys uudelleen:"
+msgstr[1] "Asennetaan seuraavat korjauspäivitys uudelleen:"
 
 #: ../src/solve-commit.cc:450
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following patterns are going to be reinstalled:"
-msgstr[0] "O seguinte padrão será reinstalado:"
-msgstr[1] "Os seguintes padrões serão reinstalados:"
+msgstr[0] "Asennetaan seuraava ohjelmistoryhmä uudelleen:"
+msgstr[1] "Asennetaan seuraavat ohjelmistoryhmät uudelleen:"
 
 #: ../src/solve-commit.cc:455
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following products are going to be reinstalled:"
-msgstr[0] "O seguinte produto será reinstalado:"
-msgstr[1] "Os seguintes produtos serão reinstalados:"
+msgstr[0] "Asennetaan seuraava tuote uudelleen:"
+msgstr[1] "Asennetaan seuraavat tuotteet uudelleen:"
 
 #: ../src/solve-commit.cc:462
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following packages are going to be REMOVED:"
-msgstr[0] "O seguinte pacote será REMOVIDO:"
-msgstr[1] "Os seguintes pacotes serão REMOVIDOS:"
+msgstr[0] "POISTETAAN seuraava paketti:"
+msgstr[1] "POISTETAAN seuraavat paketit:"
 
 #: ../src/solve-commit.cc:467
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following patches are going to be REMOVED:"
-msgstr[0] "A seguinte correção será REMOVIDA:"
-msgstr[1] "As seguintes correções serão REMOVIDAS:"
+msgstr[0] "POISTETAAN seuraava korjauspäivitys:"
+msgstr[1] "POISTETAAN seuraavat korjauspäivitykset:"
 
 #: ../src/solve-commit.cc:472
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following patterns are going to be REMOVED:"
-msgstr[0] "O seguinte padrão será REMOVIDO:"
-msgstr[1] "Os seguintes padrões serão REMOVIDOS:"
+msgstr[0] "POISTETAAN seuraava ohjelmistoryhmä:"
+msgstr[1] "POISTETAAN seuraavat ohjelmistoryhmät:"
 
 #: ../src/solve-commit.cc:477
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following products are going to be REMOVED:"
-msgstr[0] "O seguinte produto será REMOVIDO:"
-msgstr[1] "Os seguintes produtos serão REMOVIDOS:"
+msgstr[0] "POISTETAAN seuraava tuote:"
+msgstr[1] "POISTETAAN Seuraavat tuotteet:"
 
 #: ../src/solve-commit.cc:484
 msgid "The following package is going to change architecture:"
 msgid_plural "The following packages are going to change architecture:"
-msgstr[0] "O seguinte pacote irá mudar de arquitetura:"
-msgstr[1] "Os seguintes pacotes irão mudar de arquitetura:"
+msgstr[0] "Seuraava paketti vaihtaa arkkitehtuuria:"
+msgstr[1] "Seuraavat paketit vaihtavat arkkitehtuuria:"
 
 #: ../src/solve-commit.cc:489
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following patches are going to change architecture:"
-msgstr[0] "A seguinte correção irá mudar de arquitetura:"
-msgstr[1] "As seguintes correções irão mudar de arquitetura:"
+msgstr[0] "Seuraava korjauspäivitys vaihtaa arkkitehtuuria:"
+msgstr[1] "Seuraavat korjauspäivitykset vaihtavat arkkitehtuuria:"
 
 #: ../src/solve-commit.cc:494
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following patterns are going to change architecture:"
-msgstr[0] "O seguinte padrão irá mudar de arquitetura:"
-msgstr[1] "Os seguintes padrões irão mudar de arquitetura:"
+msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa arkkitehtuuria:"
+msgstr[1] "Seuraavat ohjelmistoryhmät vaihtavat arkkitehtuuria:"
 
 #: ../src/solve-commit.cc:499
 msgid "The following product is going to change architecture:"
 msgid_plural "The following products are going to change architecture:"
-msgstr[0] "O seguinte produto irá mudar de arquitetura:"
-msgstr[1] "Os seguintes produtos irão mudar de arquitetura:"
+msgstr[0] "Seuraava tuote vaihtaa arkkitehtuuria:"
+msgstr[1] "Seuraavat tuotteet vaihtavat arkkitehtuuria:"
 
 #: ../src/solve-commit.cc:506
 msgid "The following package is going to change vendor:"
 msgid_plural "The following packages are going to change vendor:"
-msgstr[0] "O seguinte pacote irá mudar de fornecedor:"
-msgstr[1] "Os seguintes pacotes irão mudar de fornecedor:"
+msgstr[0] "Seuraava paketti vaihtaa toimittajaa:"
+msgstr[1] "Seuraavat paketit vaihtavat toimittajaa:"
 
 #: ../src/solve-commit.cc:511
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following patches are going to change vendor:"
-msgstr[0] "A seguinte correção irá mudar de fornecedor:"
-msgstr[1] "As seguintes correções irão mudar de fornecedor:"
+msgstr[0] "Seuraava korjauspäivitys vaihtaa toimittajaa:"
+msgstr[1] "Seuraavat korjauspäivitykset vaihtavat toimittajaa:"
 
 #: ../src/solve-commit.cc:516
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following patterns are going to change vendor:"
-msgstr[0] "O seguinte padrão irá mudar de fornecedor:"
-msgstr[1] "Os seguintes padrões irão mudar de fornecedor:"
+msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa toimittajaa:"
+msgstr[1] "Seuraavat ohjelmistoryhmät vaihtavat toimittajaa:"
 
 #: ../src/solve-commit.cc:521
 msgid "The following product is going to change vendor:"
 msgid_plural "The following products are going to change vendor:"
-msgstr[0] "O seguinte produto irá mudar de fornecedor:"
-msgstr[1] "Os seguintes produtos irão mudar de fornecedor:"
+msgstr[0] "Seuraava tuote vaihtaa toimittajaa:"
+msgstr[1] "Seuraavat tuotteet vaihtavat toimittajaa:"
 
 #: ../src/solve-commit.cc:529
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following packages are not supported by their vendor:"
-msgstr[0] "O seguinte pacote não é suportado pelo fornecedor:"
-msgstr[1] "Os seguintes pacotes não são suportados pelo fornecedor:"
+msgstr[0] "Seuraava paketti ei ole toimittajan tukema"
+msgstr[1] "Seuraavat paketit eivät ole toimittajan tukemia:"
 
 #: ../src/solve-commit.cc:603
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "As dependências de todos os pacotes instalados estão satisfeitas."
+msgstr "Kaikkien asennettujen pakettien riippuvuudet on kunnossa."
 
 #: ../src/solve-commit.cc:605
 msgid "Nothing to do."
-msgstr "Nada a fazer."
+msgstr "Ei mitään tehtävää."
 
 #: ../src/solve-commit.cc:610
 msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
-msgstr "Algumas das dependências dos pacotes instalados estão quebradas. Para resolver estas dependências, as seguintes ações precisam ser tomadas:"
+msgstr "Jonkin asennetun paketin riippuvuudet ei täyty. Tilanteen korjaamiseksi täytyy tehdä seuraavat toimenpiteet:"
 
 #: ../src/solve-commit.cc:764
 #, c-format
 msgid "Overall download size: %s."
-msgstr "Tamanho total do download: %s."
+msgstr "Ladattavien kohteiden yhteiskoko: %s."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:769
 #, c-format
 msgid "After the operation, additional %s will be used."
-msgstr "Após a operação, %s adicionais serão utilizados."
+msgstr "Operaation jälkeen tilaa on %s vähemmän."
 
 #: ../src/solve-commit.cc:772
 msgid "No additional space will be used or freed after the operation."
-msgstr "Nenhum espaço adicional será usado ou liberado após a operação."
+msgstr "Operaation suorittamisen jälkeen järjestelmä vie tilaa saman verran, kuin nyt."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: ../src/solve-commit.cc:779
 #, c-format
 msgid "After the operation, %s will be freed."
-msgstr "Após a operação, %s será liberado."
+msgstr "Operaation jälkeen tilaa on %s enemmän."
 
 #. translators: meaning --force-resolution and --no-force-resolution
 #: ../src/solve-commit.cc:829
 #, c-format
 msgid "%s conflicts with %s, will use the less aggressive %s"
-msgstr "%s está em conflito com %s, será utilizado o %s menos agressivo"
+msgstr "%s on ristiriidassa %s kanssa. Käytetään vähämmän agressiivista %s"
 
 #: ../src/solve-commit.cc:855
 msgid "Force resolution:"
-msgstr "Forçar resolução:"
+msgstr "Pakotettu lopputulos:"
 
 #: ../src/solve-commit.cc:911
 msgid "Verifying dependencies..."
-msgstr "Verificando as dependências..."
+msgstr "Ratkaistaan riippuvuuksia..."
 
 #: ../src/solve-commit.cc:920
 msgid "Computing upgrade..."
-msgstr "Computando a atualização..."
+msgstr "Lasketaan päivitystä..."
 
 #: ../src/solve-commit.cc:931
 msgid "Generating solver test case..."
-msgstr "Gerando o caso teste para o solucionador..."
+msgstr "Luodaan asennuslähteen ratkaisintestiä..."
 
 #: ../src/solve-commit.cc:934
 #, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "O caso teste para o solucionador foi gerado com sucesso em %s."
+msgstr "Ratkaisintesti luotiin onnistuneesti tiedostoon %s."
 
 #: ../src/solve-commit.cc:938
 msgid "Error creating the solver test case."
-msgstr "Ocorreu um erro ao criar o caso teste para o solucionador."
+msgstr "Virhe ratkaisintestin luonnissa."
 
 #: ../src/solve-commit.cc:977
 msgid "Computing distribution upgrade..."
-msgstr "Computando a atualização da distribuição..."
+msgstr "Lasketaan jakeluversion päivitystä..."
 
 #: ../src/solve-commit.cc:983
 msgid "Resolving package dependencies..."
-msgstr "Resolvendo as dependências de pacote..."
+msgstr "Ratkaistaan pakettien riippuvuuksia..."
 
 #: ../src/solve-commit.cc:1009
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "São necessários privilégios de root para resolver problemas de dependências."
+msgstr "Pakettiriippuvuuksien korjaamiseen vaaditaan pääkäyttäjän oikeudet."
 
 #. translators: Yes / No / show Problems. This prompt will appear
 #. after install/update command summary if there will be any package
@@ -1918,42 +1814,41 @@ msgstr "São necessários privilégios de root para resolver problemas de depend
 #. The answers should be lower case letters.
 #: ../src/solve-commit.cc:1026
 msgid "y/n/p"
-msgstr "s/n/p"
+msgstr "k/e/o"
 
 #. translators: help text for 'y' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1028
 msgid "Accept the summary and proceed with installation/removal of packages."
-msgstr "Aceitar o resumo e proceder com a instalação/remoção dos pacotes."
+msgstr "Hyväksy yhteenveto ja siirry pakettien asennukseen/poistoon."
 
 #. translators: help text for 'n' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1030
 msgid "Cancel the operation."
-msgstr "Cancelar a operação"
+msgstr "Peruuta toiminto."
 
 #. translators: help text for 'p' option in the y/n/p prompt
 #: ../src/solve-commit.cc:1032
 msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
-msgstr "Reiniciar o solucionador em modo 'no-force-resolution' (sem forçar a resolução) para exibir os problemas de dependências."
+msgstr "Käynnistä ratkaisin uudelleen no-force-resolution -tilassa nähdäksesi riippuvuusongelmat."
 
 #: ../src/solve-commit.cc:1074
 msgid "committing"
-msgstr "submetendo"
+msgstr "Suoritetaan"
 
 #: ../src/solve-commit.cc:1079
 msgid "(dry run)"
-msgstr "(corrida a seco)"
+msgstr "(testiajo)"
 
-#: ../src/solve-commit.cc:1108
-#: ../src/solve-commit.cc:1142
+#: ../src/solve-commit.cc:1108 ../src/solve-commit.cc:1142
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problema ao obter o pacote do repositório:"
+msgstr "Virhe ladattaessa pakettitiedostoa asennuslähteestä:"
 
 #. translators: the first %s is 'zypper refresh' and the second
 #. is repo allias
 #: ../src/solve-commit.cc:1138
 #, c-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "O repositório '%s' está desatualizado. Executar '%s' deve ajudar."
+msgstr "Asennuslähde '%s' ei ole ajantasalla. '%s' saattaa auttaa."
 
 #: ../src/solve-commit.cc:1150
 msgid ""
@@ -1964,272 +1859,264 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"Falha ao verificar a integridade do pacote. Este pode ser um problema com o repositório ou a mídia.\n"
-"Tente um dos seguintes procedimentos:\n"
-" \n"
-" - apenas repita o comando anterior\n"
-" - atualize os repositórios usando 'zypper refresh'\n"
-" - use outra mídia de instalação (se, por exemplo, estiver danificada)\n"
-" - use outro repositório"
+"Paketin aitoustarkistus epäonnistui. Tämä voi olla merkki asennuslähteen tai tietovälineen ongelmasta. Voit yrittä seuraavia keinoja:\n"
+"\n"
+"- Kokeile uudelleen edellistä komentoa\n"
+"- Päivitä asennuslähteet komennolla 'zypper refresh'\n"
+"- käytä jotakin toista tietovälinettä (nykyinen voi olla esim. vaurioitunut)\n"
+"- käytä jotakin toista asennuslähdettä"
 
 #: ../src/solve-commit.cc:1163
 msgid "Problem occured during or after installation or removal of packages:"
-msgstr "Ocorreu um erro durante ou após a instalação ou remoção de pacotes:"
+msgstr "Tapahtui virhe paketin asennuksen tai poiston yhteydessä:"
 
 #: ../src/solve-commit.cc:1183
 msgid "One of installed patches requires reboot of your machine. Reboot as soon as possible."
-msgstr "Uma das correções instaladas requer a reinicialização da sua máquina. Por favor faça isto assim que possível."
+msgstr "Jokin asennetuista päivityksistä edellyttää tietokoneen uudelleenkäynnistämistä. Käynnistä tietokone uudelleen mahdollisimman pian."
 
 #: ../src/solve-commit.cc:1187
 msgid "One of installed patches affects the package manager itself. Run this command once more to install any other needed patches."
-msgstr "Uma das correções instaladas afeta o gerenciador de pacotes propriamente dito. Execute este comando uma vez mais para instalar qualquer outra correção necessária."
+msgstr "Jokin asennetuista korjauspäivityksistä vaikuttaa itse paketinhallintasovellukseen. Aja tämä komento uudelleen asentaaksesi muut korjauspäivitykset."
 
 #. translators: %d is the number of needed patches
 #: ../src/update.cc:65
 #, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "%d correção necessária"
-msgstr[1] "%d correções necessárias"
+msgstr[0] "%d korjauspäivitys"
+msgstr[1] "%d korjauspäivitystä"
 
 #. translators: %d is the number of security patches
 #: ../src/update.cc:69
 #, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "%d correção de segurança"
-msgstr[1] "%d correções de segurança"
+msgstr[0] "%d tietoturvapäivitys"
+msgstr[1] "%d tietoturvapäivitystä"
 
-#: ../src/update.cc:174
-#: ../src/utils/misc.cc:113
+#: ../src/update.cc:174 ../src/utils/misc.cc:113
 msgid "Needed"
-msgstr "Necessário"
+msgstr "Tarvitaan"
 
 #: ../src/update.cc:190
 msgid ""
 "These are only the updates affecting the updater itself.\n"
 "Other updates are available too.\n"
 msgstr ""
-"Estas são somente as atualizações que afetam o atualizador propriamente dito.\n"
-"Outras atualizações estão disponíveis também.\n"
+"Nämä ovat ainoastaan itse päivitystoimintoon vaikuttavia päivityksiä.\n"
+"Muita päivityksiä on myös saatavilla.\n"
 
-#: ../src/update.cc:198
-#: ../src/update.cc:432
+#: ../src/update.cc:198 ../src/update.cc:432
 msgid "No updates found."
-msgstr "Nenhuma atualização encontrada."
+msgstr "Ei päivitettävää."
 
 #: ../src/update.cc:317
 msgid "Package updates"
-msgstr "Atualizações de pacotes"
+msgstr "Pakettipäivitykset"
 
 #: ../src/update.cc:319
 msgid "Patches"
-msgstr "Correções"
+msgstr "Korjauspäivitykset"
 
 #: ../src/update.cc:321
 msgid "Pattern updates"
-msgstr "Atualizações de padrões"
+msgstr "Ohjelmistoryhmien päivitykset"
 
 #: ../src/update.cc:323
 msgid "Product updates"
-msgstr "Atualizações de produtos"
+msgstr "Tuotteen päivitykset"
 
 #: ../src/update.cc:495
 #, c-format
 msgid "Cannot parse '%s < %s'"
-msgstr "Não foi possível analisar '%s < %s'"
+msgstr "Ei voi tulkita ' %s < %s'"
 
 #. translators: %s is the name of a patch
 #: ../src/update.cc:551
 #, c-format
 msgid "'%s' is interactive, skipping."
-msgstr "'%s' é interativo, ignorado."
+msgstr "'%s' on vuorovaikutteinen, ohitetaan."
 
 #: ../src/update.cc:606
 #, c-format
 msgid "No patches matching '%s' found."
-msgstr "Nenhuma correção que corresponda a '%s' foi encontrada."
+msgstr "Yhtään hakua '%s' vastaavaa pakettia ei ole asennettu."
 
 #: ../src/update.cc:609
 #, c-format
 msgid "Patch '%s' not found."
-msgstr "Correção '%s' não encontrada."
+msgstr "Korjausta '%s' ei löytynyt."
 
 #: ../src/update.cc:677
 #, c-format
 msgid "No packages matching '%s' are installed."
-msgstr "Nenhum pacote que corresponda a '%s' está instalado."
+msgstr "Yhtään '%s' vastaavaa pakettia ei ole asennettuna."
 
 #: ../src/update.cc:680
 #, c-format
 msgid "Package '%s' is not installed."
-msgstr "O pacote '%s' não está instalado."
+msgstr "Pakettia '%s' ei ole asennettu."
 
 #: ../src/update.cc:692
 #, c-format
 msgid "No update candidate for '%s'."
-msgstr "Nenhuma atualização se candidata para '%s'."
+msgstr "'%s' ei löydy päivitysehdotuksia."
 
 #: ../src/utils/getopt.cc:57
 msgid "Unknown option "
-msgstr "Opção desconhecida"
+msgstr "Tuntematon valinta "
 
 #: ../src/utils/getopt.cc:60
 msgid "Missing argument for "
-msgstr "Argumento faltante para"
+msgstr "Valinta puuttuu: "
 
 #. translators: speaking of two mutually contradicting command line options
 #: ../src/utils/getopt.cc:87
 #, c-format
 msgid "%s used together with %s, which contradict each other. This property will be left unchanged."
-msgstr "%s utilizado conjuntamente com %s, que conflita um com o outro. Esta propriedade será mantida inalterada."
+msgstr "Käytettäessä %s yhdessä %s kanssa, ne kumoavat toisensa. Tämä ominaisuus jätetään jätetään muuttamatta."
 
 #: ../src/utils/messages.cc:22
 msgid "Please file a bug report about this."
-msgstr "Por favor registre um relatório de bug sobre isto."
+msgstr "Tee tästä viasta virheilmoitus."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: ../src/utils/messages.cc:25
 msgid "See http://en.opensuse.org/Zypper#Troubleshooting for instructions."
-msgstr "Veja em http://en.opensuse.org/Zypper#Troubleshooting para obter instruções."
+msgstr "Ohjeita sivulla http://en.opensuse.org/Zypper#Troubleshooting."
 
-#: ../src/utils/messages.cc:40
-#: ../src/utils/messages.cc:50
-#: ../src/utils/messages.cc:68
-#: ../src/Zypper.cc:3598
+#: ../src/utils/messages.cc:40 ../src/utils/messages.cc:50
+#: ../src/utils/messages.cc:68 ../src/Zypper.cc:3598
 msgid "Usage"
-msgstr "Uso"
+msgstr "Käyttö"
 
 #: ../src/utils/messages.cc:41
 msgid "Too many arguments."
-msgstr "Excesso de argumentos."
+msgstr "Liian monta valintaa."
 
-#: ../src/utils/messages.cc:48
-#: ../src/Zypper.cc:2627
-#: ../src/Zypper.cc:3595
+#: ../src/utils/messages.cc:48 ../src/Zypper.cc:2627 ../src/Zypper.cc:3595
 msgid "Required argument missing."
-msgstr "O argumento necessário está faltando."
+msgstr "Tarvittava valinta puuttuu."
 
 #: ../src/utils/messages.cc:60
 #, c-format
 msgid "The '--%s' option has currently no effect."
-msgstr "A opção '--%s' atualmente não tem efeito."
+msgstr "Valinnalla '--%s' ei ole tällähetkellä vaikutusta."
 
 #: ../src/utils/messages.cc:78
 #, c-format
 msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
-msgstr "Você escolheu ignorar um problema com o download ou a instalação de um pacote que pode levar a quebra de dependências de outros pacotes. É recomendado executar '%s' após a operação ser finalizada."
+msgstr "Jätit huomioimatta paketin latauksessa ilmenneen virheen. Tämä saattaa johtaa virheellisiin pakettien riippuvuussuhteisiin. On suositeltavaa ajaa '%s' tämän toiminnon jälkeen."
 
 #: ../src/utils/misc.cc:87
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "pacote"
-msgstr[1] "pacotes"
+msgstr[0] "paketti"
+msgstr[1] "pakettia"
 
 #: ../src/utils/misc.cc:89
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "padrão"
-msgstr[1] "padrões"
+msgstr[0] "ohjelmistoryhmä"
+msgstr[1] "ohjelmistoryhmää"
 
 #: ../src/utils/misc.cc:91
 msgid "product"
 msgid_plural "product"
-msgstr[0] "produto"
-msgstr[1] "produtos"
+msgstr[0] "tuote"
+msgstr[1] "tuotetta"
 
 #: ../src/utils/misc.cc:93
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "correção"
-msgstr[1] "correções"
+msgstr[0] "korjauspäivitys"
+msgstr[1] "korjauspäivitystä"
 
 #: ../src/utils/misc.cc:95
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "pacote fonte"
-msgstr[1] "pacotes fonte"
+msgstr[0] "lähdekoodipaketti"
+msgstr[1] "lähdekoodipakettia"
 
 #. default
 #: ../src/utils/misc.cc:97
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "resolvível"
-msgstr[1] "resolvíveis"
+msgstr[0] "osa"
+msgstr[1] "osaa"
 
 #: ../src/utils/misc.cc:106
 msgid "Unknown"
-msgstr "Desconhecido"
+msgstr "Tuntematon"
 
 #: ../src/utils/misc.cc:118
 msgid "Not Applicable"
-msgstr "Não Aplicável"
+msgstr "Ei käyttökelpoinen"
 
 #: ../src/utils/misc.cc:191
 msgid "Specified local path does not exist or is not accessible."
-msgstr "O caminho local especificado não existe ou não é acessível."
+msgstr "Määritettyä paikallista polkua ei ole tai ei ole saatavissa."
 
 #: ../src/utils/misc.cc:203
 msgid "Given URI is invalid"
-msgstr "A URL informada não é válida"
+msgstr "Annettu URI-osoite on virheellinen"
 
 #: ../src/utils/misc.cc:254
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Problema ao copiar o arquivo RPM especificado para o diretório de cache."
+msgstr "Virhe kopioitaessa RPM-tiedostoa välimuistihakemistoon."
 
 #: ../src/utils/misc.cc:255
 msgid "Perhaps you are running out of disk space."
-msgstr "Talvez você esteja ficando sem espaço no disco."
+msgstr "Ekä levytila on loppumaisillaan."
 
 #: ../src/utils/misc.cc:263
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problema ao obter o arquivo RPM especificado"
+msgstr "Virhe ladattaessa RPM-tiedostoa"
 
 #: ../src/utils/misc.cc:264
 msgid "Please check whether the file is accessible."
-msgstr "Por favor verifique se o arquivo é acessível."
+msgstr "Tarkista, että tiedosto on saatavissa."
 
 #: ../src/utils/misc.cc:321
 #, c-format
 msgid "Cannot parse capability '%s'."
-msgstr "Não foi possível interpretar o recurso '%s'."
+msgstr "Ominaisuuden '%s' jäsentäminen ei onnistu."
 
 #: ../src/utils/pager.cc:30
 #, c-format
 msgid "Press '%c' to exit the pager."
-msgstr "Pressione '%c' para sair do paginador..."
+msgstr "Paina '%c' poistuaksesi sivuttimesta."
 
 #: ../src/utils/pager.cc:40
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr "Use as setas ou as teclas Pg Up/Pg Dn para rolar o texto por linhas ou páginas."
+msgstr "Käytä nuolinäppäimiä tai PageUp/PageDown-näppäimiä vierittääksesi tekstiä riveittäin tai sivuittain."
 
 #: ../src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Use a tecla enter ou espaço para rolar o texto por linhas ou páginas."
+msgstr "Käytä Enter-näppäintä tai välilyöntiä vierittääksesi tekstiä riveittäin tai sivuittain."
 
-# internal key used: Cancel
 #. ----------------------------------------------------------------------------
 #: ../src/utils/prompt.cc:87
 msgid "abort"
-msgstr "cancelar"
+msgstr "keskeytä"
 
 #: ../src/utils/prompt.cc:87
 msgid "retry"
-msgstr "repetir"
+msgstr "yritä uudelleen"
 
 #: ../src/utils/prompt.cc:87
 msgid "ignore"
-msgstr "ignorar"
+msgstr "ohita"
 
 #: ../src/utils/prompt.cc:99
 msgid "Abort, retry, ignore?\n"
-msgstr "Cancelar, repetir ou ignorar?\n"
+msgstr "Keskeytä, yritä uudelleen, ohita?\n"
 
 #: ../src/utils/prompt.cc:134
 #, c-format
 msgid "autoselect %s after %u "
-msgstr "selecionar automaticamente %s após %u "
+msgstr "valitaan %s automaattisesti %u jälkeen"
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -2239,53 +2126,51 @@ msgstr "selecionar automaticamente %s após %u "
 #. The answers should be lower case letters.
 #: ../src/utils/prompt.cc:158
 msgid "a/r/i"
-msgstr "c/r/i"
+msgstr "k/y/o"
 
 #: ../src/utils/prompt.cc:159
 msgid "Abort, retry, ignore?"
-msgstr "Cancelar, repetir ou ignorar?"
+msgstr "(K)eskeytä, (Y)ritä uudelleen, (O)hita?"
 
-#: ../src/utils/prompt.cc:168
-#: ../src/utils/prompt.cc:193
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:193
 #: ../src/utils/prompt.cc:249
 msgid "yes"
-msgstr "sim"
+msgstr "kyllä"
 
-#: ../src/utils/prompt.cc:168
-#: ../src/utils/prompt.cc:194
+#: ../src/utils/prompt.cc:168 ../src/utils/prompt.cc:194
 #: ../src/utils/prompt.cc:249
 msgid "no"
-msgstr "não"
+msgstr "ei"
 
 #: ../src/utils/prompt.cc:241
 #, c-format
 msgid "Invalid answer '%s'."
-msgstr "Resposta inválida '%s'."
+msgstr "Virheellinen vastaus '%s'."
 
 #. TranslatorExplanation don't translate the 'y' and 'n', they can always be used as answers.
 #. The second and the third %s is the translated 'yes' and 'no' string (lowercase).
 #: ../src/utils/prompt.cc:248
 #, c-format
 msgid "Enter 'y' for '%s' or 'n' for '%s' if nothing else works for you."
-msgstr "Digite 'y' para '%s' ou 'n' para '%s' caso nada mais funcione para você."
+msgstr "Vastaa 'y' -> '%s' tai 'n' -> '%s' sijasta, ellei muu toimi."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: ../src/utils/prompt.h:112
 msgid "Not found"
-msgstr "Não encontrado"
+msgstr "Ei löytynyt"
 
 # error box title
 #: ../src/utils/prompt.h:112
 msgid "I/O error"
-msgstr "Erro de E/S"
+msgstr "I/O-virhe"
 
 #: ../src/utils/prompt.h:112
 msgid "Invalid object"
-msgstr "Objeto inválido."
+msgstr "Virheellinen objekti"
 
 #: ../src/utils/prompt.h:119
 msgid "Error"
-msgstr "Erro"
+msgstr "Virhe"
 
 #: ../src/Zypper.cc:154
 msgid ""
@@ -2306,24 +2191,19 @@ msgid ""
 "\t--cache-dir, -C <dir>\tUse alternative meta-data cache directory.\n"
 "\t--raw-cache-dir <dir>\tUse alternative raw meta-data cache directory.\n"
 msgstr ""
-"  Opções globais:\n"
-"\t--help, -h\t\tAjuda.\n"
-"\t--version, -V\t\tExibir o número da versão.\n"
-"\t--quiet, -q\t\tSuprimir a saída comum, exibir apenas as\n"
-"\t\t\t\tmensagens de erro.\n"
-"\t--verbose, -v\t\tAumentar o detalhamento.\n"
-"\t--no-abbrev, -A\t\tNão abreviar o texto nas tabelas.\n"
-"\t--table-style, -s\tEstilo da tabela (inteiro).\n"
-"\t--rug-compatible, -r\tAtivar a compatibilidade com o rug.\n"
-"\t--non-interactive, -n\tNão perguntar nada, utilizar as respostas\n"
-"\t\t\t\tpadrão automaticamente.\n"
-"\t--xmlout, -x\t\tAlterar para a saída XML.\n"
-"\t--reposd-dir, -D <dir>\tUsar o diretório alternativo para arquivos\n"
-"\t\t\t\tde definição de repositórios.\n"
-"\t--cache-dir, -C <dir>\tUsar o diretório alternativo para o cache de\n"
-"\t\t\t\tmetadados do banco de dados.\n"
-"\t--raw-cache-dir <dir>\tUsar o diretório alternativo para o cache de\n"
-"\t\t\t\tmetadados brutos.\n"
+"  Valinnat:\n"
+"\t--help, -h\t\tOhje\n"
+"\t--version, -V\t\tNäyttää version\n"
+"\t--quiet, -q\t\tTulostaa ainoastaan virheet.\n"
+"\t--verbose, -v\t\tKasvattaa näytettävän tiedon määrää.\n"
+"\t--no-abbrev, -A\t\tÄlä katkaise taulukon rivejä.\n"
+"\t--table-style, -s\tTaulukon tyyppi (kokonaisluku).\n"
+"\t--rug-compatible, -r\tOttaa rug-yhteensopivuustilan käyttöön.\n"
+"\t--non-interactive\tÄlä kysy mitään, käytä oletusvastausta automaattisesti.\n"
+"\t--xmlout, -x\t\tTulostus XML-muodossa.\n"
+"\t--reposd-dir, -D <dir>\tKäytä vaihtoehtoista asennuslähdehakemistoa.\n"
+"\t--cache-dir, -C <dir>\tKäytä vaihtoehtoista välimuistihakemistoa.\n"
+"\t--raw-cache-dir <dir>\tKäytä vaihtoehtoista raakametatietojen välimuistihakemistoa.\n"
 
 #: ../src/Zypper.cc:172
 msgid ""
@@ -2333,11 +2213,11 @@ msgid ""
 "\t--disable-repositories\tDo not read meta-data from repositories.\n"
 "\t--no-refresh\t\tDo not refresh the repositories.\n"
 msgstr ""
-"     Opções do repositório:\n"
-"\t--no-gpg-checks\t\tIgnorar as falhas na verificação GPG e continuar.\n"
-"\t--plus-repo, -p <URL>\tUsar um repositório adicional\n"
-"\t--disable-repositories\tNão ler os metadados do repositório.\n"
-"\t--no-refresh\t\tNão atualizar os repositórios.\n"
+"     Asennuslähteen valinnat:\n"
+"\t--no-gpg-checks\t\tJätetään GPG-tarkistusvirheet huomioimatta.\n"
+"\t--plus-repo, -p <URI>\tKäytä ylimääräistä asennuslähdettä.\n"
+"\t--disable-repositories\tÄlä lue asennuslähteiden metatietoja.\n"
+"\t--no-refresh\t\tÄlä päivitä asennuslähteitä.\n"
 
 #: ../src/Zypper.cc:179
 msgid ""
@@ -2346,10 +2226,10 @@ msgid ""
 "\t--disable-system-resolvables\n"
 "\t\t\t\tDo not read installed packages.\n"
 msgstr ""
-"     Opções de destino:\n"
-"\t--root, -R <dir>\t\tOperar em um diretório raiz diferente.\n"
-"\t--disable-system-resolvables\n"
-"\t\t\t\tNão ler os pacotes instalados.\n"
+"     Kohdevalinnat:\n"
+"\t--root, -R <dir>\t\tKäytä Vaihtoehtoista juurihakemistoa.\n"
+"\t--disable-system-resolvables, -T"
+"\t\t\t\tÄlä lue järjestelmään asennettuja paketteja.\n"
 
 #: ../src/Zypper.cc:186
 msgid ""
@@ -2357,9 +2237,9 @@ msgid ""
 "\thelp, ?\t\t\tPrint help.\n"
 "\tshell, sh\t\tAccept multiple commands at once.\n"
 msgstr ""
-"  Comandos:\n"
-"\thelp, ?\t\t\tExibir a ajuda.\n"
-"\tshell, sh\t\tAceitar múltiplos comandos por vez.\n"
+"  Valinnat:\n"
+"\thelp, ?\t\t\tTulostaa ohjeen.\n"
+"\tshell, sh\t\tHyväksy useita komentoja kerralla.\n"
 
 #: ../src/Zypper.cc:191
 msgid ""
@@ -2372,14 +2252,14 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Manipulação de repositórios:\n"
-"\trepos, lr\t\tListar todos os repositórios definidos.\n"
-"\taddrepo, ar\t\tAdicionar um novo repositório.\n"
-"\tremoverepo, rr\t\tRemover o repositório especificado.\n"
-"\trenamerepo, nr\t\tRenomear o repositório especificado.\n"
-"\tmodifyrepo, mr\t\tAlterar o repositório especificado.\n"
-"\trefresh, ref\t\tAtualizar todos os repositórios.\n"
-"\tclean\t\t\tLimpar os caches locais.\n"
+"     Asennuslähteiden hallinta:\n"
+"\trepos, lr\t\tNäytä luettelo määritetyistä asennuslähteistä.\n"
+"\taddrepo, ar\t\tLisää uusi asennuslähde.\n"
+"\tremoverepo, rr\t\tPoista asennuslähde.\n"
+"\trenamerepo, nr\t\tNimeä asennuslähde uudelleen.\n"
+"\tmodifyrepo, mr\t\tMuokkaa asennuslähdettä.\n"
+"\trefresh, ref\t\tPäivitä kaikki asennuslähteet.\n"
+"\tclean\t\t\tPuhdista paikallinen välimuisti.\n"
 
 #: ../src/Zypper.cc:201
 msgid ""
@@ -2390,12 +2270,12 @@ msgid ""
 "\tremoveservice, rs\tRemove specified service.\n"
 "\trefresh-services, refs\tRefresh all services.\n"
 msgstr ""
-"     Gerenciamento de serviços:\n"
-"\tservices, ls\t\tListar todos os serviços definidos.\n"
-"\taddservice, as\t\tAdicionar um novo serviço.\n"
-"\tmodifyservice, ms\tAlterar o serviço especificado.\n"
-"\tremoveservice, rs\tRemover o serviço especificado.\n"
-"\trefresh-services, refs\tAtualizar todos os serviços.\n"
+"\tAsennuslähdepalveluiden hallinta:\n"
+"\tservices, ls\t\tListaa asennuslähdepalvelut.\n"
+"\taddservice, as\t\tLisää uusi asennuslähdepalvelu.\n"
+"\tmodifyservice, ms\tMuokkaa asennuslähdepalvelua.\n"
+"\tremoveservice, rs\tPoista asennuslähdepalvelu.\n"
+"\trefresh-services, refs\tPäivitä kaikki asennuslähdepalvelut.\n"
 
 #: ../src/Zypper.cc:209
 msgid ""
@@ -2409,15 +2289,13 @@ msgid ""
 "\t\t\t\tInstall newly added packages recommended\n"
 "\t\t\t\tby installed packages.\n"
 msgstr ""
-"     Gerenciamento de software:\n"
-"\tinstall, in\t\tInstalar pacotes.\n"
-"\tremove, rm\t\tRemover pacotes.\n"
-"\tverify, ve\t\tVerificar a integridade das dependências dos pacotes.\n"
-"\tsource-install, si\tInstalar pacotes fonte e suas dependências\n"
-"\t\t\t\tde compilação.\n"
+"     Ohjelmistojen hallinta:\n"
+"\tinstall, in\t\tAsenna paketteja.\n"
+"\tremove, rm\t\tPoista paketteja.\n"
+"\tverify, ve\t\tTarkista pakettiriippuvuuksien eheys.\n"
+"\tsource-install, si\tAsenna lähdekoodipaketteja riippuvuuksineen.\n"
 "\tinstall-new-recommends, inr\n"
-"\t\t\t\tInstalar novos pacotes adicionados\n"
-"\t\t\t\trecomendados pelos pacotes instalados.\n"
+"\t\t\t\tAsenna jo asennettujen pakettien suosittamat uudet paketit.\n"
 
 #: ../src/Zypper.cc:220
 msgid ""
@@ -2429,13 +2307,15 @@ msgid ""
 "\tdist-upgrade, dup\tPerform a distribution upgrade.\n"
 "\tpatch-check, pchk\tCheck for patches.\n"
 msgstr ""
-"     Gerenciamento de atualização:\n"
-"\tupdate, up\t\tAtualizar os pacotes instalados com novas versões.\n"
-"\tlist-updates, lu\tListar as atualizações disponíveis.\n"
-"\tpatch\t\t\tInstalar as correções necessárias.\n"
-"\tlist-patches, lp\tListar as correções necesárias.\n"
-"\tdist-upgrade, dup\tFazer uma atualização na distribuição.\n"
-"\tpatch-check, pchk\tVerificar por correções.\n"
+"     Päivitysten hallinta:\n"
+"\tupdate, up\t\tPäivitä asennetut paketit uudempiin versioihin.\n"
+"\tlist-updates, lu\tListaa saatavilla olevat päivitykset.\n"
+"\tpatch\t\t\tAsenna tarvittavat paikkaukset.\n"
+"\tlist-patches, lp\tListaa tarvittavat päivitykset.\n"
+"\tdist-upgrade, dup\tSuorita jakeluversion päivitys.\n"
+"\tpatch-check, pchk\tTarkista paikkaukset.\n"
+
+
 
 #: ../src/Zypper.cc:229
 msgid ""
@@ -2451,17 +2331,17 @@ msgid ""
 "\tproducts, pd\t\tList all available products.\n"
 "\twhat-provides, wp\tList packages providing specified capability.\n"
 msgstr ""
-"     Pesquisa:\n"
-"\tsearch, se\t\tPesquisar por pacotes que coincidam com um padrão.\n"
-"\tinfo, if\t\tExibir todas as informações dos pacotes especificados.\n"
-"\tpatch-info\t\tExibir todas as informações das correções especificadas.\n"
-"\tpattern-info\t\tExibir todas as informações dos padrões especificados.\n"
-"\tproduct-info\t\tExibir todas as informações dos produtos especificados.\n"
-"\tpatches, pch\t\tListar todas as correções disponíveis.\n"
-"\tpackages, pa\t\tListar todos os pacotes disponíveis.\n"
-"\tpatterns, pt\t\tListar todos os padrões disponíveis.\n"
-"\tproducts, pd\t\tListar todos os produtos disponíveis.\n"
-"\twhat-provides, wp\tListar pacotes que forneçam o recurso especificado.\n"
+"     Haku:\n"
+"\tsearch, se\t\tHae paketteja hakulauseella.\n"
+"\tinfo, if\t\tNäytä paketin tiedot.\n"
+"\tpatch-info\t\tNäytä korjauspäivityksen tiedot.\n"
+"\tpattern-info\t\tNäytä ohjelmistoryhmän tiedot.\n"
+"\tproduct-info\t\tNäytä tuotteen tiedot.\n"
+"\tpatches, pch\t\tNäytä luettelo korjauspäivityksistä.\n"
+"\tpackages, pa\t\tNäytä luettelo paketeista.\n"
+"\tpatterns, pt\t\tNäytä luettelo ohjelmistoryhmistä.\n"
+"\tproducts, pd\t\tNäytä luettelo tuotteista.\n"
+"\twhat-provides, wp\tNäytä luettelo paketeista, jotka täyttävät riippuvuuden.\n"
 
 #: ../src/Zypper.cc:244
 msgid ""
@@ -2470,10 +2350,10 @@ msgid ""
 "\tremovelock, rl\t\tRemove a package lock.\n"
 "\tlocks, ll\t\tList current package locks.\n"
 msgstr ""
-"     Travas de Pacotes:\n"
-"\taddlock, al\t\tAdicionar uma trava de pacote.\n"
-"\tremovelock, rl\t\tRemover uma trava de pacote.\n"
-"\tlocks, ll\t\tListar as travas atuais.\n"
+"     Lukitukset:\n"
+"\taddlock, al\t\tLukitsee paketin.\n"
+"\tremovelock, rl\t\tPoistaa paketin lukituksen.\n"
+"\tlocks, ll\t\tNäyttää listan lukituksista.\n"
 
 #: ../src/Zypper.cc:250
 msgid ""
@@ -2483,83 +2363,82 @@ msgid ""
 "\tlicenses\t\tPrint report about licenses and EULAs of\n"
 "\t\t\t\tinstalled packages.\n"
 msgstr ""
-"     Outros comandos:\n"
-"\tversioncmp, vcmp\tComparar duas strings de versão.\n"
-"\ttargetos, tos\t\tExibir a string de identificação do sistema\n"
-"\t\t\t\toperacional de destino.\n"
-"\tlicenses\t\tExibir um relatório sobre as licenças e EULAs dos\n"
-"\t\t\t\tpacotes instalados.\n"
+"     Muita valintoja:\n"
+"\tversioncmp, vcmp\tVertaile versioita.\n"
+"\ttargetos, tos\t\tTulosta kohdejärjestelmän tunnus.\n"
+"\tlicenses\t\tTulosta raportti asennettujen pakettien lisensseistä ja\n"
+"\t\t\t\tkäyttöehtosopimuksista.\n"
 
 #: ../src/Zypper.cc:258
 msgid ""
 "  Usage:\n"
 "\tzypper [--global-options] <command> [--command-options] [arguments]\n"
 msgstr ""
-"  Uso:\n"
-"\tzypper [--opções-globais] <comando> [--opções-do-comando] [argumentos]\n"
+"  Toiminta:\n"
+"\tzypper [--yleiset-valinnat] <komento> [--komennon-valinnat] [valinnat]\n"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:283
 #, c-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Digite '%s' para exibir uma lista com as opções e comandos globais."
+msgstr "Kirjoita '%s' saadaksesi ohjeita komennoista ja valinnoista."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: ../src/Zypper.cc:292
 #, c-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Digite '%s' para ter uma ajuda específica sobre o comando."
+msgstr "Kirjoita '%s' saadaksesi ohjeita komennosta."
 
 #: ../src/Zypper.cc:393
 #, c-format
 msgid "Verbosity: %d"
-msgstr "Detalhamento: %d"
+msgstr "Näytettävän tiedon määrä: %d"
 
 #: ../src/Zypper.cc:407
 #, c-format
 msgid "Invalid table style %d."
-msgstr "Estilo de tabela inválido %d."
+msgstr "Virheellinen taulukon tyyli %d."
 
 #: ../src/Zypper.cc:408
 #, c-format
 msgid "Use an integer number from %d to %d"
-msgstr "Use um número inteiro de %d a %d"
+msgstr "Kokonaisluvun tulee olla väliltä %d ja %d"
 
 #: ../src/Zypper.cc:439
 msgid "Entering non-interactive mode."
-msgstr "Entrando no modo não-interativo."
+msgstr "Siirrytään ei-vuorovaikutteiseen -tilaan."
 
 #: ../src/Zypper.cc:445
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Entrando no modo sem verificação gpg ('no-gpg-checks')."
+msgstr "Siirrytään 'ei tarkisteta GPG-avaimia' -tilaan."
 
 #: ../src/Zypper.cc:456
 msgid "The path specified in the --root option must be absolute."
-msgstr "O caminho especificado na opção --root deve ser absoluto."
+msgstr "--root -valinnan polku täytyy olla absoluuttinen."
 
 #: ../src/Zypper.cc:485
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Repositórios desabilitados, utilizando o banco de dados apenas dos pacotes instalados."
+msgstr "Asennuslähteet poistettu käytöstä. Käytetään tietokantaa asennetuista paketeista."
 
 #: ../src/Zypper.cc:497
 msgid "Autorefresh disabled."
-msgstr "Atualização automática desabilitada."
+msgstr "Automaattinen päivitys poistettu käytöstä."
 
 #: ../src/Zypper.cc:504
 msgid "Ignoring installed resolvables."
-msgstr "Ignorando resolvíveis instalados."
+msgstr "Jätetään asennetut huomioimatta."
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #: ../src/Zypper.cc:599
 #, c-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "A opção %s não tem efeito aqui, ignorando."
+msgstr "Valinta %s ei ei vaikuta täällä. Jätetään huomioimatta."
 
 #: ../src/Zypper.cc:776
 msgid "Unexpected exception."
-msgstr "Exceção não esperada."
+msgstr "Odottamaton poikkeus."
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2585,24 +2464,26 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the installation, do not actually install.\n"
 msgstr ""
-"install (in) [opções] <recurso|url_arquivo_rpm> ...\n"
+"install (in) [valinnat] <määritys|rpm-tiedoston-URL> ...\n"
 "\n"
-"Instalar pacotes com os recursos especificados ou arquivos RPM de uma localização especificada. O recurso é NOME[OP<VERSÃO>], onde OP é um dos <, <=, =, >=, >.\n"
+"Asentaa järjestelmään paketteja tai muita osia annettujen määritysten perusteella. Määritys on muotoa NIMI[OP<VERSIO>], jossa OP on jokin seuraavista <, <=, =, >=, >.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>        Instalar pacotes somente do repositório especificado.\n"
-"-t, --type <tipo>               Tipo de pacotel (%s).\n"
-"                                Padrão: %s.\n"
-"-n, --name                      Selecionar pacotes pelo nome, não pelo recurso.\n"
-"-C, --capability                Selecionar pacotes pelo recurso.\n"
-"-f, --force                     Instalar mesmo que o item já esteja instalado (reinstalar).\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution          Forçar o solver a encontrar a solução (mesmo que agressiva).\n"
-"-D, --dry-run                   Testar a instalação, não instalar realmente.\n"
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI>        Asenna paketit määritetystä asennuslähteestä.\n"
+"-t, --type <type>               Määrittelyn tyyppi (%s)\n"
+"                                Oletus: %s\n"
+"-n, --name                      Valitse paketit ainoastaan nimen perusteella.\n"
+"-C, --capability                Valitsee paketin sen ominaisuuksien perusteella.\n"
+"-f, --force                     Asenna paketti, vaikka se olisi jo asennettuna.\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen osapuolen \n"
+"                                käyttöehtosopimuksiin. Katso lisätietoja \n"
+"                                zypper-komennon manuaalista (man zypper).\n"
+"    --debug-solver              Luo ratkaisintesti (debug).\n"
+"    --no-recommends             Älä asenna suositeltuja paketteja. Asenna ainoastaan \n"
+"                                tarvittavat.\n"
+"-R, --no-force-resolution       Ei pakota ratkaisinta mihinkään ratkasuun. Vahvistaa käyttäjältä.\n"
+"-R, --force-resolution <on|off> Pakottaa ratkaisimen johonkin ratkaisuun.\n"
+"-D, --dry-run                   Testaa asennusta (itse pakettien asennusta ei suoriteta).\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "package"
@@ -2624,20 +2505,21 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the removal, do not actually remove.\n"
 msgstr ""
-"remove (rm) [opções] <recurso> ...\n"
+"remove (rm) [valinnat] <määritys> ...\n"
 "\n"
-"Remover pacotes com os recursos especificados. Um recurso é NOME[OP<VERSÃO>], onde OP é um de <, <=, =, >=, >.\n"
+"Poistaa järjestelmästä paketteja tai muita osia annettujen määritysten perusteella. Määritys on muotoa NIMI[OP<VERSIO>], jossa OP on jokin seuraavista <, <=, =, >=, >.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>        Operar apenas com os pacotes do repositório especificado pelo apelido.\n"
-"-t, --type <tipo>               Tipo de pacote (%s).\n"
-"                                Padrão: %s.\n"
-"-n, --name                      Selecionar pacotes pelo nome, não pelo recurso.\n"
-"-C, --capability                Selecionar pacotes pelo recurso.\n"
-"    --debug-solver              Criar um caso teste do solver para depuração.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution          Forçar o solver a encontrar a solução (mesmo que agressiva).\n"
-"-D, --dry-run                   Testar a remoção, não remover realmente.\n"
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI>        Poista ainoastaan paketit, jotka ovat määritellystä \n"
+"                                asennuslähteestä.\n"
+"-t, --type <type>               Määrittelyn tyyppi (%s)\n"
+"                                Oletus: %s\n"
+"-n, --name                      Poista paketit ainoastaan nimen perusteella.\n"
+"-C, --capability                Poistaa paketin sen ominaisuuksien perusteella.\n"
+"    --debug-solver              Luo ratkaisintesti (debug).\n"
+"-R, --no-force-resolution       Ei pakota ratkaisinta mihinkään ratkasuun. Vahvistaa käyttäjältä.\n"
+"-R, --force-resolution <on|off> Pakottaa ratkaisimen johonkin ratkaisuun.\n"
+"-D, --dry-run                   Testaa poistoa (itse pakettien poistoa ei suoriteta).\n"
 
 #: ../src/Zypper.cc:939
 msgid ""
@@ -2650,14 +2532,14 @@ msgid ""
 "-D, --no-build-deps      Don't install build dependencies.\n"
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 msgstr ""
-"source-install (si) [opções] <nome> ...\n"
+"source-install (si) [valinnat] <nimi> ...\n"
 "\n"
-"Instalar os pacotes fonte especificados e suas dependências de compilação.\n"
+"Asentaa lähdekoodipaketteja ja niiden riippuvuuksia.\n"
 "\n"
-"  Opções do comando:\n"
-"-d, --build-deps-only    Instalar apenas as dependências de compilação dos pacotes especificados.\n"
-"-D, --no-build-deps      Não instalar dependências de compilação.\n"
-"-r, --repo <apelido|#|URL> Instalar os pacotes somente dos repositórios especificados.\n"
+"  Valinnat:\n"
+"-d, --build-deps-only    Asenna ainoastaan riippuvuudet.\n"
+"-D, --no-build-deps      Älä asenna riippuvuuksia.\n"
+"-r, --repo <alias|#|URI> Asenna paketit ainoastaan määritetystä asennuslähteestä.\n"
 
 #: ../src/Zypper.cc:967
 msgid ""
@@ -2670,14 +2552,16 @@ msgid ""
 "-D, --dry-run            Test the repair, do not actually do anything to the system.\n"
 "-r, --repo <alias|#|URI> Use only specified repositories to install missing packages.\n"
 msgstr ""
-"verify (ve) [opções]\n"
+"verify (ve) [valinnat]\n"
 "\n"
-"Verificar se as dependências dos pacotes instalados estão satisfeitas e reparar eventuais problemas com dependências.\n"
+"Varmistaa, että asennetun paketin riippuvuudet on asennettuna.\n"
 "\n"
-"  Opções do comando:\n"
-"    --no-recommends      Não instalar os pacotes recomendados, somente os requeridos.\n"
-"-D, --dry-run            Testar a reparação, não reparar realmente.\n"
-"-r, --repo <apelido|#|URL> Usar somente repositórios especificados para instalar os pacotes faltantes.\n"
+"  Valinnat:\n"
+"    --no-recommends      Älä asenna suositeltuja paketteja. Asenna ainoastaan \n"
+"                         tarvittavat.\n"
+"-D, --dry-run            Testaa korjausta (itse korjausta ei suoriteta).\n"
+"-r, --repo <alias|#|URI> Käytä ainoastaan määritettyä asennuslähdettä asennettaessa \n"
+"                         puuttuvia paketteja.\n"
 
 #: ../src/Zypper.cc:991
 msgid ""
@@ -2690,14 +2574,14 @@ msgid ""
 "-D, --dry-run            Test the installation, do not actually install anything.\n"
 "    --debug-solver       Create solver test case for debugging.\n"
 msgstr ""
-"install-new-recommends (inr) [opções]\n"
+"install-new-recommends (inr) [valinnat]\n"
 "\n"
-"Instalar novos pacotes adicionados recomendados pelos pacotes já instalados. Isto pode tipicamente ser usado para instalar novos pacotes de idiomas ou drivers para um novo hardware adicionado.\n"
+"Asentaa uusia jo asennettujen pakettien suosittelemia paketteja. Tätä voidaan käyttää asentamaan uusia kielipaketteja tai ohjaimia uusille laitteille.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL> Usar somente o repositório especificado para instalar osl pacotes.\n"
-"-D, --dry-run            Testar a instalação, não instalar realmente.\n"
-"    --debug-solver       Criar um caso teste do solucionador para depuração.\n"
+"  Komennon valinnat:\n"
+"-r, --repo <alias|#|URI> Käytä vain määritettyja asennuslähteitä pakettien asentamiseen.\n"
+"-D, --dry-run            Kokeile asennusta, ei asenna todellisuudessa mitään.\n"
+"    --debug-solver       Luo ratkaisimen testiajo virheenkorjausta varten.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1018
@@ -2712,14 +2596,14 @@ msgid ""
 "-d, --disable           Add the service as disabled.\n"
 "-n, --name              Specify descriptive name for the service.\n"
 msgstr ""
-"addservice (as) [opções] <URL> [apelido]\n"
+"addservice (as) [valinnat] <URI> <alias>\n"
 "\n"
-"Adicionar um serviço de índice do repositório no sistema.\n"
+"Lisää asennuslähdepalvelun järjestelmään."
 "\n"
-"  Opções de comando:\n"
-"-t,--type <TIPO>    Tipo deserviço  (%s)\n"
-"-d,--disabled       Adicionar o serviço como desabilitado\n"
-"-n, --name              Especificar um nome descritivo para o serviço.\n"
+"  Valinnat:\n"
+"-t, --type <TYPE>       Palvelun tyyppi (%s).\n"
+"-d, --disable           Lisää käytöstäpoistettuna.\n"
+"-n, --name              Määrittelee palvelulle nimen.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #. TODO
@@ -2733,13 +2617,12 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removeservice (rs) [opções] <apelido|#|URL>\n"
+"removerepo (rr) [valinnat] <alias|#|URI>\n"
 "\n"
-"Remover o serviço de índice do repositório especificado do sistema.\n"
-"\n"
-"  Opções do comando:\n"
-"    --loose-auth   Ignorar dados de autenticação do usuário na URL.\n"
-"    --loose-query  Ignorar string de pesquisa na URL.\n"
+"Poistaa asennuslähteen järjestelmästä.\n"
+"  Valinnat:\n"
+"    --loose-auth   Jätä huomioimatta URI-osoitteen käyttäjän tunnistautumistiedot.\n"
+"    --loose-query  Jätä huomioimatta URI-osoitteen kyselyjono.\n"
 
 #. translators: %s is "--all" and "--all"
 #: ../src/Zypper.cc:1078
@@ -2770,30 +2653,28 @@ msgid ""
 "-t, --remote                   Apply changes to all remote services.\n"
 "-m, --medium-type <type>       Apply changes to services of specified type.\n"
 msgstr ""
-"modifyservice (ms) <opções> <apelido|#|URL>\n"
-"modifyservice (ms) <opções> <%s>\n"
+"modifyrepo (mr) <valinnat> <alias|#|URL>\n"
+"modifyrepo (mr) <valinnat> <%s>\n"
 "\n"
-"Alterar as propriedades do serviço especificado pelo apelido, número ou URL ou\n"
-"pelas opções agregadas '%s'.\n"
+"Muokkaa URL-osoitteella, aliaksella, numerolla tai '%s' valinnoilla määritellyn asennuslähdepalvelun tietoja.\n"
 "\n"
-"  Opções do commando:\n"
-"-d, --disable             Desabilitar o serviço (mas não removê-lo).\n"
-"-e, --enable              Habilitar um serviço desabilitado.\n"
-"-r, --refresh             Habilitar a auto-atualização do serviço.\n"
-"-R, --no-refresh          Desabilitar a auto-atualização do serviço.\n"
-"-n, --name                Definir um nome descritivo para o serviço.\n"
+"-d, --disable                  Poistaa käytöstä (ei poista asennuslähdepalvelua).\n"
+"-e, --enable                   Ottaa käytöstä poistetun asennuslähdepalvelun käyttöön.\n"
+"-r, --refresh                  Asettaa automaattisen päivityksen päälle.\n"
+"-R, --no-refresh               Poistaa automaattisen päivityksen käytöstä.\n"
+"-n, --name                     Asettaa asennuslähdepalvelulle nimen.\n"
 "\n"
-"-i, --ar-to-enable <apelido>     Adicionar um repositório de serviço RIS para habilitar.\n"
-"-I, --ar-to-disable <apelido>    Adicionar um repositório de serviço RIS para desabilitar.\n"
-"-j, --rr-to-enable <apelido>     Remover um repositório de serviço RIS para habilitar.\n"
-"-J, --rr-to-disable <apelido>    Remover um repositório de serviço RIS para desabilitar.\n"
-"-k, --cl-to-enable             Limpar a lista de repositórios RIS para habilitar.\n"
-"-K, --cl-to-disable            Limpar a lista de repositórios RIS para desabilitar.\n"
+"-i, --ar-to-enable <alias>     Lisää RIS-palvelu käyttöönotettuna.\n"
+"-I, --ar-to-disable <alias>    Lisää RIS-palvelu käytöstäpoistettuna.\n"
+"-j, --rr-to-enable <alias>     Poista RIS-palvelu käyttöönotettuna.\n"
+"-J, --rr-to-disable <alias>    Poista RIS-palvelu käytöstäpoistettuna.\n"
+"-k, --cl-to-enable             Puhdista käyttöönotetettujen RIS-palveluiden lista.\n"
+"-k, --cl-to-disable            Puhdista käyttöstäpoistettujen RIS-palveluiden lista.\n"
 "\n"
-"-a, --all                 Aplicar as alterações a todos os serviços.\n"
-"-l, --local               Aplicar as alterações a todos os serviços locais.\n"
-"-t, --remote              Aplicar as alterações a todos os serviços remotos.\n"
-"-m, --medium-type <tipo>  Aplicar as alterações aos serviços do tipo especificado.\n"
+"-a, --all                      Ota muutokset käyttöön kaikissa asennuslähdepalveluissa.\n"
+"-l, --local                    Ota muutokset käyttöön ainoastaan paikallisissa asennuslähdepalveluissa.\n"
+"-t, --remote                   Ota muutokset käyttöön ainoastaan verkkoasennuslähdepalveluissa.\n"
+"-m, --medium-type <type>       Ota muutokset käyttöön ainoastaan tietyn tyyppisissä asennuslähdepalveluissa.\n"
 
 #: ../src/Zypper.cc:1126
 msgid ""
@@ -2810,18 +2691,18 @@ msgid ""
 "-U, --sort-by-uri         Sort the list by URI.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"services (ls) [opções]\n"
+"services (ls) [valinnat]\n"
 "\n"
-"Listar todos os serviços definidos.\n"
+"Listaa järjestelmän asennuslähdepalvelut.\n"
 "\n"
-"  Opções do comando:\n"
-"-u, --uri                 Exibir também a URL base dos serviços.\n"
-"-p, --priority            Exibir também a prioridade do serviço.\n"
-"-d, --details             Exibir mais informações como a URL, prioridade e tipo.\n"
-"-r, --with-repos          Exibir também os repositórios pertencentes aos serviços.\n"
-"-P, --sort-by-priority    Listar pela prioridade do repositório.\n"
-"-U, --sort-by-uri         Listar pela URL.\n"
-"-N, --sort-by-name        Listar pelo nome.\n"
+"  Valinnat:\n"
+"-u, --uri                 Näytää lisäksi URI-osoitteen.\n"
+"-p, --priority            Näytää lisäksi tärkeysjärjestyksen.\n"
+"-d, --details             Näytää yksityiskohtaisemmat tiedot, kuten URI-osoitteen,\n"
+"                          tärkeysjärjestyksen ja tyypin.\n"
+"-P, --sort-by-priority    Järjestää Tärkeysjärjestyksen mukaan.\n"
+"-U, --sort-by-uri         Järjestää URI-tietueen mukaan.\n"
+"-N, --sort-by-name        Järjestää nimen mukaan.\n"
 
 #: ../src/Zypper.cc:1152
 msgid ""
@@ -2832,12 +2713,12 @@ msgid ""
 "  Command options:\n"
 "-r, --with-repos      Refresh also repositories.\n"
 msgstr ""
-"refresh-services (refs) [opções]\n"
+"refresh-services (refs) [valinnat]\n"
 "\n"
-"Atualiza o serviço de índice dos repositórios definidos.\n"
+"Päivittää asennuslähdepalvelut.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --with-repos      Atualizar também os repositórios.\n"
+"  Valinnat:\n"
+"-r, --with-repos      Päivittää myös asennuslähteet.\n"
 
 #. TranslatorExplanation the %s = "yast2, rpm-md, plaindir"
 #: ../src/Zypper.cc:1180
@@ -2859,26 +2740,25 @@ msgid ""
 "-K, --no-keep-packages  Disable RPM files caching.\n"
 "-f, --refresh           Enable autorefresh of the repository.\n"
 msgstr ""
-"addrepo (ar) [opções] <URL> <apelido>\n"
-"addrepo (ar) [opções] <ARQUIVO.repo>\n"
+"addrepo (ar) [valinnat] <URI> <alias>\n"
+"addrepo (ar) [valinnat] <TIEDOSTO.repo>\n"
 "\n"
-"Adicionar um repositório ao sistema. O repositório pode ser especificado pela sua URL ou pode ser lido de um arquivo .repo especificado (mesmo que remoto).\n"
-"\n"
-"  Opções do comando:\n"
-"-r,--repo <ARQUIVO.repo>  Uma outra forma de especificar um arquivo .repo para ler.\n"
-"-t,--type <TIPO>    Tipo de repositório  (%s).\n"
-"-d,--disabled       Adicionar o repositório como desabilitado.\n"
-"-c, --check             Testar a URL.\n"
-"-C, --nocheck           Não testar a URL, testar mais tarde durante a atualização.\n"
-"-n, --name              Especificar um nome descritivo para o repositório.\n"
-"-k, --keep-packages     Habilitar o cache dos arquivos RPM.\n"
-"-K, --no-keep-packages  Desabilitar o cache dos arquivos RPM.\n"
-"-f, --refresh           Habilitar a auto-atualização do repositório.\n"
+"Lisää URL-osoitteella ja alias-nimellä määritellyn asennuslähteen järjestelmään.\n"
+"  Valinnat:\n"
+"-t, --repo <TIEDOSTO.repo>  Lue verkko-osoite ja alias tiedostosta(myös etä).\n"
+"-t, --type <TYYPPI>         Asennuslähteen tyyppi (%s).\n"
+"-d, --disabled              Lisää asennuslähde poistettuna käytöstä.\n"
+"-c, --check                 Tunnista asennuslähde.\n"
+"-x, --nocheck               Älä tunnista asennuslähdettä. Tee tunnistus \n"
+"                            seuraavan päivityksen yhteydessä.\n"
+"-n, --name                  Asennuslähdettä kuvaava nimi.\n"
+"-k, --keep-packages         Ottaa RPM-tiedostojen välimuistin käyttöön.\n"
+"-K, --no-keep-packages      Poistaa RPM-tiedostojen välimuistin käytöstä.\n"
+"-f, --refresh               Ottaa asennuslähteen päivityksen käyttöön.\n"
 
 #. translators: this is just a rug compatiblity command
 #. translators: this is just a rug-compatiblity command
-#: ../src/Zypper.cc:1229
-#: ../src/Zypper.cc:2103
+#: ../src/Zypper.cc:1229 ../src/Zypper.cc:2103
 msgid ""
 "list-resolvables (lr)\n"
 "\n"
@@ -2886,7 +2766,7 @@ msgid ""
 msgstr ""
 "list-resolvables (lr)\n"
 "\n"
-"Listar os tipos de resolvíveis disponíveis.\n"
+"Tulostaa listan osien tyypeistä.\n"
 
 #: ../src/Zypper.cc:1237
 msgid ""
@@ -2904,19 +2784,20 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr) [opções]\n"
+"repos (lr)\n"
 "\n"
-"Listar todos os repositórios definidos.\n"
+"Listaa järjestelmän asennuslähteet.\n"
 "\n"
-"  Opções do comando:\n"
-"-e, --export <ARQUIVO.repo>  Exportar todos os repositórios definidos como um único arquivo local .repo.\n"
-"-u, --uri                 Exibir também a URL base dos repositórios.\n"
-"-p, --priority            Exibir também a prioridade do repositório.\n"
-"-d, --details             Exibir mais informações como a URL, prioridade e tipo.\n"
-"-U, --sort-by-uri         Listar pela URL.\n"
-"-P, --sort-by-priority    Listar pela prioridade do repositório.\n"
-"-A, --sort-by-alias       Listar pelo apelido.\n"
-"-N, --sort-by-name        Listar pelo nome.\n"
+"  Valinnat:\n"
+"-e, --export <FILE.repo>  Tallenna järjestelmän asennuslähteet yksittäiseen .repo-tiedostoon.\n"
+"-u, --uri                 Näytää lisäksi URI-osoitteen.\n"
+"-p, --priority            Näytää lisäksi asennuslähteen tärkeysjärjestyksen.\n"
+"-d, --details             Näytää yksityiskohtaisemmat tiedot, kuten URI-osoitteen,\n"
+"                          tärkeysjärjestyksen ja tyypin.\n"
+"-U, --sort-by-uri         Järjestää URI-tietueen mukaan.\n"
+"-P, --sort-by-priority    Järjestää Tärkeysjärjestyksen mukaan.\n"
+"-A, --sort-by-alias       Järjestää aliaksen mukaan.\n"
+"-N, --sort-by-name        Järjestää nimen mukaan.\n"
 
 #: ../src/Zypper.cc:1264
 msgid ""
@@ -2928,13 +2809,12 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removerepo (rr) [opções] <apelido|#|URL>\n"
+"removerepo (rr) [valinnat] <alias|#|URL>\n"
 "\n"
-"Remover o repositório especificado pelo apelido ou URL.\n"
-"\n"
-"  Opções do comando:\n"
-"    --loose-auth   Ignorar dados de autenticação do usuário na URL.\n"
-"    --loose-query  Ignorar string de pesquisa na URL.\n"
+"Poistaa URL-osoitteella, aliaksella tai numerolla määritetyn asennuslähteen.\n"
+"  Valinnat:\n"
+"--loose-auth       Jätä URL-osoitteen käyttäjän tunnistautumistiedot huomioimatta.\n"
+"--loose-query      Jätä URL-osoitteen kyselyjono huomioimatta.\n"
 
 #: ../src/Zypper.cc:1283
 msgid ""
@@ -2944,11 +2824,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo (nr) [opções] <apelido|#|URL> <novo-apelido>\n"
+"renamerepo (nr) [valinnat] <URI|#|alias> <uusi alias>\n"
 "\n"
-"Atribuir um novo apelido ao repositório especificado pelo apelido, número ou URL.\n"
+"Määrittelee URL-osoitteella, aliaksella tai numerolla määritetylle asennuslähteelle uuden aliaksen.\n"
 "\n"
-"Este comando não possui opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: %s is "--all|--remote|--local|--medium-type"
 #. and "--all, --remote, --local, --medium-type"
@@ -2976,26 +2856,24 @@ msgid ""
 "-t, --remote              Apply changes to all remote repositories.\n"
 "-m, --medium-type <type>  Apply changes to repositories of specified type.\n"
 msgstr ""
-"modifyrepo (mr) <opções> <apelido|#|URL>\n"
-"modifyrepo (mr) <opções> <%s>\n"
+"modifyrepo (mr) <valinnat> <alias|#|URI>\n"
+"modifyrepo (mr) <valinnat> <%s>\n"
 "\n"
-"Alterar as propriedades do repositório especificado pelo apelido, número ou URL ou\n"
-"pelas opções agregadas '%s'.\n"
+"Muokkaa URL-osoitteella, aliaksella, numerolla tai '%s' valinnoilla määritellyn asennuslähteen tietoja.\n"
 "\n"
-"  Opções do commando:\n"
-"-d, --disable             Desabilitar o repositório (mas não removê-lo).\n"
-"-e, --enable              Habilitar um repositório desabilitado.\n"
-"-r, --refresh             Habilitar a auto-atualização do repositório.\n"
-"-R, --no-refresh          Desabilitar a auto-atualização do repositório.\n"
-"-n, --name                Definir um nome descritivo para o repositório.\n"
-"-p, --priority <1-99>     Definir a prioridade do repositório.\n"
-"-k, --keep-packages       Habilitar o cache dos arquivos RPM.\n"
-"-K, --no-keep-packages    Desabilitar o cache dos arquivos RPM.\n"
+"-d, --disable             Poistaa käytöstä (ei poista asennuslähdettä).\n"
+"-e, --enable              Ottaa käytöstä poistetun asennuslähteen käyttöön.\n"
+"-r, --refresh             Asettaa automaattisen päivityksen päälle.\n"
+"-R, --no-refresh          Poistaa automaattisen päivityksen käytöstä.\n"
+"-n, --name                Asettaa asennuslähteelle nimen.\n"
+"-p, --priority <1-99>     Määrittelee asennuslähteen tärkeysjärjestyksen.\n"
+"-k, --keep-packages       Ottaa RPM-tiedostojen välimuistin käyttöön.\n"
+"-K, --no-keep-packages    Poistaa RPM-tiedostojen välimuistin käytöstä.\n"
 "\n"
-"-a, --all                 Aplicar as alterações a todos os repositórios.\n"
-"-l, --local               Aplicar as alterações a todos os repositórios locais.\n"
-"-t, --remote              Aplicar as alterações a todos os repositórios remotos.\n"
-"-m, --medium-type <tipo>  Aplicar as alterações aos repositórios do tipo especificado.\n"
+"-a, --all                 Ota muutokset käyttöön kaikissa asennuslähteissä.\n"
+"-l, --local               Ota muutokset käyttöön ainoastaan paikallisissa asennuslähteissä.\n"
+"-t, --remote              Ota muutokset käyttöön ainoastaan verkkoasennuslähteissä.\n"
+"-m, --medium-type <type>  Ota muutokset käyttöön ainoastaan tietyn tyyppisissä asennuslähteissä.\n"
 
 #: ../src/Zypper.cc:1354
 msgid ""
@@ -3012,18 +2890,20 @@ msgid ""
 "-r, --repo <alias|#|URI> Refresh only specified repositories.\n"
 "-s, --services           Refresh also services before refreshing repos.\n"
 msgstr ""
-"refresh (ref) [apelido|#|URL] ...\n"
+"refresh (ref) [valinnat] [alias|#|URI] ...\n"
 "\n"
-"Atualizar os repositórios especificados pelos seus apelidos, números ou URLs. Se nada for especificado, todos os repositórios habilitados serão atualizados.\n"
+"Päivittää alias-nimellä tai numerolla määritellyn asennuslähteen. Jos asennuslähteitä ei määritetty, kaikki päivitetään.\n"
 "\n"
-"  Opções do comando:\n"
-"-f, --force             Forçar uma atualização completa.\n"
-"-b, --force-build       Forçar a reconstrução do banco de dados.\n"
-"-d, --force-download    Forçar o download dos metadados brutos.\n"
-"-B, --build-only        Apenas construir o banco de dados, não baixar os metadados.\n"
-"-D, --download-only     Apenas baixar os metadados brutos, não construir o banco de dados.\n"
-"-r, --repo <apelido|#|URL> Atualizar apenas os repositórios especificados.\n"
-"-s, --services           Atualizar também os serviços antes de atualizar os repositórios.\n"
+"  Valinnat:\n"
+"-f, --force              Pakottaa täydellinen päivityksen.\n"
+"-b, --force-build        Pakottaa tietokannan uudelleenrakennuksen.\n"
+"-d, --force-download     Pakottaa hakemaan metatiedot uudelleen.\n"
+"-B, --build-only         Rakentaa ainoastaan tietokannan uudelleen. Ei nouda \n"
+"                         metatietoja uudelleen.\n"
+"-D, --download-only      Noutaa ainoastaan metatiedot uudelleen, ei \n"
+"                         rakenna tietokantaa uudelleen.\n"
+"-r, --repo <alias|#|URI> Päivittää ainoastaan määritetyt asennuslähteet.\n"
+"-s, --services           Päivittää myös asennuslähdepalvelut ennen asennuslähteiden päivitystä.\n"
 
 #: ../src/Zypper.cc:1383
 msgid ""
@@ -3037,15 +2917,15 @@ msgid ""
 "-M, --raw-metadata       Clean raw metadata cache.\n"
 "-a, --all                Clean both metadata and package caches.\n"
 msgstr ""
-"clean [apelido|#|URL] ...\n"
+"clean [alias|#|URI] ...\n"
 "\n"
-"Limpar o cache local.\n"
+"Puhdistaa paikallisen välimuistin.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL> Limpar apenas os repositórios especificados.\n"
-"-m, --metadata           Limpar o cache de metadados.\n"
-"-M, --raw-metadata       Limpar o cache de metadados brutos.\n"
-"-a, --all                Limpar ambos os caches de metadados e pacotes.\n"
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI> Puhdistaa ainoastaan määritetyt asennuslähteet.\n"
+"-m, --metadata           Puhdistaa metatietojen välimuistin.\n"
+"-M, --raw-metadata       Puhdistaa raakametatietojen välimuistin.\n"
+"-a, --all                Puhdistaa sekä metatieto- että pakettivälimuistit.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3067,19 +2947,17 @@ msgid ""
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
-"list-updates (lu) [opções]\n"
+"list-updates (lu) [valinnat]\n"
 "\n"
-"Listar todas as atualizações disponíveis.\n"
+"Näyttää saatavilla olevat päivitykset.\n"
 "\n"
-"  Opções do comando:\n"
-"-t, --type <tipo>         Tipo de pacote (%s).\n"
-"                          Padrão: %s.\n"
-"-r, --repo <apelido|#|URL>  Listar somente as atualizações do repositório especificado.\n"
-"    --best-effort         Fazer uma aproximação do tipo 'melhor esforço' para atualizar.\n"
-"                                Atualizações para uma versão menor que a última também\n"
-"                                são aceitáveis.\n"
-"-a, --all                     Listar todos os pacotes para os quais novas versões estão\n"
-"                              disponíveis, independentemente se eles são instaláveis ou não.\n"
+"  Valinnat:\n"
+"-t, --type <tyyppi>       Määrittelyn tyyppi (%s)\n"
+"                          Oletus: %s\n"
+"-r, --repo <alias|#|URI>  Näyttää ainoastaan määritetyn asennuslähteen päivitykset.\n"
+"    --best-effort         Mahdollistaa pakettien päivittämisen myös vanhempaan versioon.\n"
+"-a, --all                 Tulostaa listan kaikista uudemmista paketeista, vaikka ne\n"
+"                          ei olisi asennettuna.\n"
 
 #. TranslatorExplanation the first %s = "package, patch, pattern, product"
 #. and the second %s = "patch"
@@ -3108,27 +2986,25 @@ msgid ""
 "    --force-resolution          Force the solver to find a solution (even an agressive).\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"update (up) [opções]\n"
+"update (up) [valinnat]\n"
 "\n"
-"Atualizar todos os pacotes instalados com novas versões, se possível.\n"
+"Päivittää paketit uudempiin versioihin, jos mahdollista.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-t, --type <tipo>               Tipo de pacotel (%s).\n"
-"                                Padrão: %s.\n"
-"-r, --repo <apelido|#|URL>        Limitar as atualizações ao repositório especificado.\n"
-"    --skip-interactive          Ignorar atualizações interativas.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de\n"
-"                                licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --best-effort               Fazer uma aproximação dio tipo 'melhor esforço' para a atualização.\n"
-"                                Atualizações menores que a versão mais atual também\n"
-"                                são aceitáveis.\n"
-"    --debug-solver              Criar um caso teste do solver para depuração.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-R, --no-force-resolution       Não forçar o solucionador a encontrar a solução, deixar ele perguntar.\n"
-"    --force-resolution           Forçar o solucionador a encontrar a solução (mesmo que seja agressiva).\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-t, --type <tyyppi>             Määrittelyn tyyppi (%s)\n"
+"                                Oletus: %s\n"
+"-r, --repo <alias|#|URI>        Päivittää ainoastaan tietyn asennuslähteen paketit.\n"
+"    --skip-interactive          Ohita vuorovaikutteiset päivitykset.\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen osapuolen\n"
+"                                käyttöehtosopimuksiin. Katso lisätietoja zypper-komennon\n"
+"                                manuaalista (man zypper).\n"
+"    --best-effort               Mahdollistaa myös pakettien päivittämisen vanhempaan versioon.\n"
+"    --debug-solver              Luo ratkaisintesti (debug).\n"
+"    --no-recommends             Älä asenna suositeltuja paketteja. Asenna ainoastaan \n"
+"                                tarvittavat.\n"
+"-R, --force-resolution <on|off> Pakottaa ratkaisimen johonkin ratkaisuun.\n"
+"-D, --dry-run                   Testaa päivitystä (itse päivitystä ei suoriteta).\n"
 
 #: ../src/Zypper.cc:1502
 msgid ""
@@ -3146,19 +3022,19 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging.\n"
 "-D, --dry-run                   Test the update, do not actually update.\n"
 msgstr ""
-"patch [opções]\n"
+"update (dup) [valinnat]\n"
 "\n"
-"Instalar todas as correções necessárias disponíveis.\n"
+"Suorittaa järjestelmän päivityksen.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>        Trabalhar apenas com o repositório especificado.\n"
-"    --skip-interactive          Ignorar as correções interativas.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de\n"
-"                                licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-r, --repo <alias|#|URI>        Päivittää ainoastaan tietyn asennuslähteen paketit.\n"
+"    --skip-interactive          Ohita vuorovaikutteiset päivitykset.\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen \n"
+"                                osapuolen käyttöehtosopimuksiin. Katso lisätietoja \n"
+"                                zypper-komennon manuaalista (man zypper).\n"
+"    --debug-solver              Luo ratkaisintesti (debug).\n"
+"-D, --dry-run                   Testaa järjestelmän päivitystä (itse päivitystä ei suoriteta).\n"
 
 #: ../src/Zypper.cc:1528
 msgid ""
@@ -3169,13 +3045,12 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>        List only patches from the specified repository.\n"
 msgstr ""
-"list-patches (lp) [opções]\n"
+"list-patches (lp) [valinnat]\n"
 "\n"
-"Listar todas as correções necessárias disponíveis.\n"
+"Listaa tarvittavat paikkaukset\n"
 "\n"
-"  Opções do comando:\n"
-"\n"
-"-r, --repo <apelido|#|URL>        Verificar por correções apenas no repositório especificado.\n"
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI>        Tarkista ainoastaan tietyn asennuslähteen korjauspäivitykset.\n"
 
 #: ../src/Zypper.cc:1553
 msgid ""
@@ -3192,18 +3067,20 @@ msgid ""
 "    --debug-solver              Create solver test case for debugging\n"
 "-D, --dry-run                   Test the upgrade, do not actually upgrade\n"
 msgstr ""
-"dist-upgrade (dup) [opções]\n"
+"update (dup) [valinnat]\n"
 "\n"
-"Fazer uma atualização na distribuição.\n"
+"Suorittaa järjestelmän päivityksen.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>        Limitar a atualização ao repositório especificado.\n"
-"    --no-recommends             Não instalar pacotes recomendados, somente os requeridos.\n"
-"-l, --auto-agree-with-licenses  Dizer automaticamente 'sim' no prompt de confirmação de licenças de terceiros.\n"
-"                                Veja 'man zypper' para mais detalhes.\n"
-"    --debug-solver              Criar um caso teste do solucionador para depuração.\n"
-"-D, --dry-run                   Testar a atualização, não atualizar realmente.\n"
+"-r, --repo <alias|#|URI>        Päivittää ainoastaan tietyn asennuslähteen paketit.\n"
+"    --no-recommends             Älä asenna suositeltuja paketteja. Asenna ainoastaan \n"
+"                                tarvittavat.\n"
+"-l, --auto-agree-with-licenses  Vastaa automaattisesti 'kyllä' kolmannen \n"
+"                                osapuolen käyttöehtosopimuksiin. Katso lisätietoja \n"
+"                                zypper-komennon manuaalista (man zypper).\n"
+"    --debug-solver              Luo ratkaisintesti (debug).\n"
+"-D, --dry-run                   Testaa järjestelmän päivitystä (itse päivitystä ei suoriteta).\n"
 
 #: ../src/Zypper.cc:1595
 msgid ""
@@ -3230,28 +3107,28 @@ msgid ""
 "\n"
 "* and ? wildcards can also be used within search strings.\n"
 msgstr ""
-"search (se) [opções] [string de pesquisa] ...\n"
+"search (se) [valinnat] [hakulause] ...\n"
 "\n"
-"Pesquisar pacotes coincidentes com as string de pesquisa fornecidas.\n"
+"Hakee paketteja hakulauseen perusteella.\n"
 "\n"
-"  Opções do comando:\n"
-"    --match-all            Pesquisar por uma coincidência com todas as strings (padrão).\n"
-"    --match-any            Pesquisar por uma coincidência para qualquer das strings de pesquisa.\n"
-"    --match-substrings     Pesquisar por uma coincidência parcial das palavras (padrão).\n"
-"    --match-words          Pesquisar por uma coincidência em todas as palavras somente.\n"
-"    --match-exact          Pesquisar por um nome exato de pacote.\n"
-"-d, --search-descriptions  Pesquisar também nos resumos e descrições dos pacotes.\n"
-"-C, --case-sensitive       Pesquisar diferenciando minúsculas e maiúsculas.\n"
-"-i, --installed-only       Exibir apenas pacotes já instalados.\n"
-"-u, --uninstalled-only     Exibir apenas pacotes ainda não instalados.\n"
-"-t, --type <tipo>          Pesquisar pacotes apenas do tipo especificado.\n"
-"-r,  --repo <apelido|#|URL>   Pesquisar apenas no repositório especificado.\n"
-"    --sort-by-name         Listar os pacotes pelo nome (padrão).\n"
-"    --sort-by-repo         Listar os pacotes pelo repositório.\n"
-"-s, --details              Exibir cada versão disponível em cada repositório\n"
-"                           em uma linha separada.\n"
+"  Valinnat:\n"
+"    --match-all            Hakee kaikkien hakumerkkijonojen vastaavuuksia (oletusarvo).\n"
+"    --match-any            Hakee vastaavuutta mille tahansa hakumerkkijonolle.\n"
+"    --match-substrings     Hakumerkkijonojen vastaavuudet voivat olla osittaisia sanoja                            (oletusarvo).\n"
+"    --match-words          Hakumerkkijonojen vastaavuudet voivat olla kokonaisia sanoja\n"
+"    --match-exact          Hakee tiettyä tarkkaa paketin nimeä\n"
+"-d, --search-descriptions  Hakee myös pakettien yhteenvedoista ja kuvauksista.\n"
+"-c, --case-sensitive       Suorittaa haun, jossa kirjainkoko on merkitsevä.\n"
+"-i, --installed-only       Näyttää vain jo asennetut paketit.\n"
+"-u, --uninstalled-only     Näyttää vain paketit, joita ei ole tällä hetkellä asennettu.\n"
+"-t, --type <tyyppi>        Näyttää vain tietyn tyyppiset paketit.\n"
+"-r, --repo <alias|#|URI>   Näyttää ainoastaan tietyn asennuslähteen paketit.\n"
+"    --sort-by-name         Lajittelee paketit nimen mukaan (oletusarvo).\n"
+"    --sort-by-repo         Lajittelee paketit asennuslähteen mukaan.\n"
+"-s, --details              Näyttää jokaisen saatavilla olevan version asennuslähteistä\n"
+"                           erillisillä riveillä.\n"
 "\n"
-"Os caracteres curinga * e ? também podem ser utilizados dentro das strings de pesquisa.\n"
+"Voit käyttää jokerimerkkejä (* ja ?) hakulauseessa.\n"
 
 #: ../src/Zypper.cc:1632
 msgid ""
@@ -3263,13 +3140,13 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Check for patches only in the specified repository.\n"
 msgstr ""
-"patch-check (pchk) [opções]\n"
+"patch-check (pchk) [valinnat]\n"
 "\n"
-"Verificar por correções disponíveis.\n"
+"Tarkistaa saatavilla olevat korjauspäivitykset.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Verificar por correções apenas no repositório especificado.\n"
+"-r, --repo <alias|#|URI>  Tarkista ainoastaan tietyn asennuslähteen korjauspäivitykset.\n"
 
 #: ../src/Zypper.cc:1654
 msgid ""
@@ -3281,12 +3158,14 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [repositório] ...\n"
+"patches (pch) [asennuslähde] ...\n"
 "\n"
-"Listar todas as correções disponíveis no repositório especificado.\n"
+"Listaa saatavilla olevat korjauspäivitykset.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
+"  Valinnat:\n"
+"\n"
+"-r, --repo <alias|#|URI>  Listaa ainoastaan tietyn asennuslähteen \n"
+"                          korjauspäivitykset.\n"
 
 #: ../src/Zypper.cc:1681
 msgid ""
@@ -3302,17 +3181,17 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"packages (pa) [opções] [repositórios] ...\n"
+"packages (pa) [valinnat] [asennuslähde] ...\n"
 "\n"
-"Listar todos os pacotes disponíveis nos repositórios especificados.\n"
+"Tulostaa luettelon haluttujen asennuslähteiden paketeista.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os pacotes instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os pacotes que não estão instalados.\n"
-"-N, --sort-by-name        Listar pelo nome do pacote.\n"
-"-R, --sort-by-repo        Listar pelo repositório.\n"
+"-r, --repo <alias|#|URI>  Asennuslähteen määritys.\n"
+"-i, --installed-only      Näyttää vain asennetut paketit.\n"
+"-u, --uninstalled-only    Näyttää vain asentamattomat paketit.\n"
+"-N, --sort-by-name        Järjestä luettelo paketin nimen mukaan.\n"
+"-R, --sort-by-repo        Järjestä luettelo asennuslähteen mukaan.\n"
 
 #: ../src/Zypper.cc:1709
 msgid ""
@@ -3326,15 +3205,15 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --uninstalled-only    Show only patterns which are not installed.\n"
 msgstr ""
-"patterns (pt) [opções] [repositórios] ...\n"
+"patterns (pt) [valinnat] [asennuslähde] ...\n"
 "\n"
-"Lista todos os padrões disponíveis nos repositórios especificados.\n"
+"Listaa asennuslähteen tarjoamat ohjelmistoryhmät.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os padrões instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os padrões que não estão instalados.\n"
+"-r, --repo <alias|#|URI>  Määrittele asennuslähde.\n"
+"-i, --installed-only      Näytä vain asennetut ohjelmistoryhmät.\n"
+"-u, --uninstalled-only    Näytä asentamattomat ohjelmistoryhmät.\n"
 
 #: ../src/Zypper.cc:1735
 msgid ""
@@ -3348,15 +3227,15 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --uninstalled-only    Show only products which are not installed.\n"
 msgstr ""
-"products (pd) [opções] [repositório] ...\n"
+"products (pd) [valinnat] [asennuslähde] ...\n"
 "\n"
-"Listar todos os produtos disponíveis nos repositórios especificados.\n"
+"Listaa tuotteet asennuslähteestä.\n"
 "\n"
-"  Opções do comando:\n"
+"  Valinnat:\n"
 "\n"
-"-r, --repo <apelido|#|URL>  Uma outra forma de especificar o repositório.\n"
-"-i, --installed-only      Exibir apenas os produtos instalados.\n"
-"-u, --uninstalled-only    Exibir apenas os produtos que não estão instalados.\n"
+"-r, --repo <alias|#|URI>  Määrittelee asennuslähteen.\n"
+"-i, --installed-only      Näyttää asennetut tuotteet.\n"
+"-u, --uninstalled-only    Näyttää asentamattomat tuotteet.\n"
 
 #: ../src/Zypper.cc:1760
 #, c-format
@@ -3370,14 +3249,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s."
 msgstr ""
-"info (if) [opções] <nome> ...\n"
+"info (if) [valinnat] <nimi> ...\n"
 "\n"
-"Exibir as informações detalhadas dos pacotes especificados.\n"
+"Näyttää paketin yksityiskohtaiset tiedot.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Trabalhar somente com o repositório especificado.\n"
-"-t, --type <tipo>         Tipo de pacotel (%s).\n"
-"                          Padrão: %s."
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI>  Asennuslähteen määritys.\n"
+"-t, --type <type>         Tyyppi (%s).\n"
+"                          Oletus: %s."
 
 #: ../src/Zypper.cc:1783
 #, c-format
@@ -3388,11 +3267,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"patch-info <nome_da_correção> ...\n"
+"patch-info <korjauspäivitys> ...\n"
 "\n"
-"Exibir informações detalhadas para as correções.\n"
+"Näyttää korjauspäivityksen yksityiskohtaiset tiedot.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Tämä on ainoastaan rug-yhteensopivuuden takia ja sama kuin: '%s'.\n"
 
 #: ../src/Zypper.cc:1802
 #, c-format
@@ -3403,11 +3282,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"pattern-info <nome_do_padrão> ...\n"
+"pattern-info <ohjelmistoryhmän nimi> ...\n"
 "\n"
-"Exibir informações detalhadas dos padrões.\n"
+"Näyttää ohjelmistoryhmän yksityiskohtaiset tiedot.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Tämä on ainoastaan rug-yhteensopivuuden takia ja sama kuin: '%s'.\n"
 
 #: ../src/Zypper.cc:1821
 #, c-format
@@ -3418,11 +3297,11 @@ msgid ""
 "\n"
 "This is a rug compatibility alias for '%s'.\n"
 msgstr ""
-"product-info <nome_do_produto> ...\n"
+"product-info <tuotteen nimi> ...\n"
 "\n"
-"Exibir informações detalhadas para os produtos.\n"
+"Näyttää tuotteen yksityiskohtaiset tiedot.\n"
 "\n"
-"Este é um apelido de compatibilidade do rug para '%s'.\n"
+"Tämä on ainoastaan rug-yhteensopivuuden takia ja sama kuin: '%s'.\n"
 
 #: ../src/Zypper.cc:1838
 msgid ""
@@ -3432,11 +3311,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <recurso>\n"
+"what-provides (wp) <ominaisuus> ...\n"
 "\n"
-"Listar todos os pacotes que forneçam o recurso especificado.\n"
+"Listaa paketit, jotka tuovat halutut ominaisuudet.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:1889
 msgid ""
@@ -3448,9 +3327,9 @@ msgid ""
 msgstr ""
 "moo\n"
 "\n"
-"Exibir um animal.\n"
+"Näyttää eläimen\n"
 "\n"
-"Este comando não possui opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:1911
 #, c-format
@@ -3464,14 +3343,14 @@ msgid ""
 "-t, --type <type>         Type of package (%s).\n"
 "                          Default: %s.\n"
 msgstr ""
-"addlock (al) [opções] <nome do pacote> ...\n"
+"addlock (al) [valinnat] <paketin nimi>\n"
 "\n"
-"Adicionar uma trava de pacote. Especifique os pacotes a travar pelo seu nome exato ou por um padrão global usando os caracteres curingas '*' e '?'.\n"
+"Lukitsee paketin. Voit joko määrittää paketin tarkan nimen tai käytää jokerimerkkejä: '*' ja '?'.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Restringir a trava ao repositório específico.\n"
-"-t, --type <tipo>         Tipo de pacote (%s).\n"
-"                          Padrão: %s.\n"
+"  Valinnat:\n"
+"-r, --repo <alias|#|URI>  Rajoita lukitus vain tiettyyn asennuslähteeseen.\n"
+"-t, --type <type>         Tyyppi (%s).\n"
+"                          oletus: %s.\n"
 
 #: ../src/Zypper.cc:1937
 #, c-format
@@ -3483,12 +3362,13 @@ msgid ""
 "  Command options:\n"
 "-r, --repo <alias|#|URI>  Remove only locks with specified repository.\n"
 msgstr ""
-"removelock (rl) <número-da-trava|nome_do_pacote> ...\n"
+"removelock (rl) <lukon numero|paketin nimi>\n"
 "\n"
-"Remover uma trava de pacote. Especifique a trava a remover pelo seu número obtido com '%s' ou pelo nome do pacote.\n"
+"Poistaa paketin lukituksen lukon numeron tai paketin nimen mukaan. Saat listan lukkojen numeroista kirjottamalla:\n"
+"'%s'.\n"
 "\n"
-"  Opções do comando:\n"
-"-r, --repo <apelido|#|URL>  Remover somente as travas do repositório especificado.\n"
+"  Valinnat\n"
+"-r, --repo <alias|#|URI>  Rajoita lukituksen poisto vain tiettyyn asennuslähteeseen.\n"
 
 #: ../src/Zypper.cc:1957
 msgid ""
@@ -3500,9 +3380,9 @@ msgid ""
 msgstr ""
 "locks (ll)\n"
 "\n"
-"Listar as travas de pacote atuais.\n"
+"Näyttää listan pakettilukoista.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:1997
 msgid ""
@@ -3514,9 +3394,9 @@ msgid ""
 msgstr ""
 "targetos (tos)\n"
 "\n"
-"Exibir a string de identificação do sistema operacional de destino.\n"
+"Näyttää käyttöjärjestelmän tunnuksen.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:2016
 msgid ""
@@ -3527,12 +3407,12 @@ msgid ""
 "  Command options:\n"
 "-m, --match  Takes missing release number as any release.\n"
 msgstr ""
-"versioncmp (vcmp) <versão1> <versão2>\n"
+"versioncmp (vcmp) <versio1> <versio2>\n"
 "\n"
-"Compara as versões fornecidas como argumentos.\n"
+"Vertailee kahta versioa.\n"
 "\n"
-"  Opções do comando:\n"
-"-m, --match  Usar o número do lançamento faltante como qualquer lançamento.\n"
+"  Valinnat:"
+"-m, --match  Valitsee puuttuvan julkaisuversion mistä tahansa julkaisusta.\n"
 
 #: ../src/Zypper.cc:2035
 msgid ""
@@ -3544,9 +3424,9 @@ msgid ""
 msgstr ""
 "licenses\n"
 "\n"
-"Exibe um relatório das licenças e EULAs dos pacotes de softwares atualmente instalados.\n"
+"Näyttää raportin lisensseistä ja muista käyttöehtosopimuksista.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:2052
 msgid ""
@@ -3556,11 +3436,11 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"quit (exit, ^D)\n"
+"Poistu (exit, ^D)\n"
 "\n"
-"Sair do atual shell do zypper.\n"
+"Lopettaa tämän zypper-kehoitteen.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #: ../src/Zypper.cc:2069
 msgid ""
@@ -3572,9 +3452,9 @@ msgid ""
 msgstr ""
 "shell (sh)\n"
 "\n"
-"Entrar no shell de comando do zypper.\n"
+"Käynnistää zypper-kehoitteen.\n"
 "\n"
-"Este comando não tem opções adicionais.\n"
+"Tällä komennolla ei ole valitsimia.\n"
 
 #. translators: this is just a rug-compatiblity command
 #: ../src/Zypper.cc:2087
@@ -3585,7 +3465,7 @@ msgid ""
 msgstr ""
 "service-types (st)\n"
 "\n"
-"Listar os tipos de serviço disponíveis.\n"
+"Tulostaa listan mahdollisista palvelutyypeistä.\n"
 
 #. trunslators: this is a rug-compatibility command (equivalent of
 #. 'zypper addrepo -t plaindir URI'). You can refer to rug's translations
@@ -3603,12 +3483,12 @@ msgid ""
 msgstr ""
 "mount\n"
 "\n"
-"Montar um diretório com RPMs como um canal.\n"
+"Liittää rpm-hakemiston asennuslähteeksi.\n"
 "\n"
-"  Opções do comando:\n"
-"-a, --alias <apelido>  Usar a string dada como apelido do serviço.\n"
-"-n, --name <nome>    Usar a string dada como nome do serviço.\n"
-"-r, --recurse        Entrar nos subdiretórios.\n"
+"  Valinnat:\n"
+"-a, --alias <alias>  Asennuslähteen alias.\n"
+"-n, --name <name>    Asennuslähteen nimi.\n"
+"-r, --recurse        Huomioi myös alihakemistot.\n"
 
 #: ../src/Zypper.cc:2156
 #, c-format
@@ -3617,18 +3497,17 @@ msgid ""
 "\n"
 "Search for patches matching given search strings. This is a rug-compatibility alias for '%s'. See zypper's manual page for details.\n"
 msgstr ""
-"patch-search [opções] [string de pesquisa...]\n"
+"patch-search [valinnat] [hakulause...]\n"
 "\n"
-"Pesquisar por correções que coincidam com as strings de pesquisa dadas. Este é um apelido de compatibilidade do rug para '%s'. Veja 'man zypper' para detalhes.\n"
+"Hakee korjauspäivityksiä hakulauseen perusteella. Tämä on yhteensopivuusvalinta rug-komennolle '%s'. Katso lisätietoja komennolla man zypper.\n"
 
-#: ../src/Zypper.cc:2170
-#: ../src/Zypper.cc:3880
+#: ../src/Zypper.cc:2170 ../src/Zypper.cc:3880
 msgid "Unexpected program flow."
-msgstr "Erro inesperado no programa."
+msgstr "Odottamaton ohjelman kulku."
 
 #: ../src/Zypper.cc:2194
 msgid "Non-option program arguments: "
-msgstr "Argumentos sem opção do programa:"
+msgstr "Pakolliset ohjelman valinnat: "
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: ../src/Zypper.cc:2254
@@ -3637,253 +3516,218 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"                      `,;:::,`\n"
-"                 :#@@@@@@@@@@@@@@#;`   @@+,\n"
-"              .@@@@@@@@@@@@@@@@@@@@@@#:@@@@@@#:\n"
-"            :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#`\n"
-"          ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+  `@+\n"
-"          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@# @@# @`\n"
-"       :@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@`#@ .:@@\n"
-"      #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @@#@;+@\n"
-"     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+@@@:.@@@ @@,\n"
-"    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ;@@` . +@@@\n"
-"   +@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:  +@@@@@@#\n"
-"  ,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;  .'+;  ,\n"
-"  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:` :+@,\n"
-" '@@@@@`     '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@;\n"
-" @@@@;         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:\n"
-"`@@@+  ,@@@@+   @@@@@@@@@@@@@@@@@@@@@.  `,::,`\n"
-" ;@@@  ,@@@@@@@   @@@@@@'     #@@@@@@,\n"
-"     #@@@  @@@:,@@@@  ,@@@@'       ,@@@@@\n"
-"@@@@  @@    '@@'  @@@@         `@@@@`\n"
-"'@@@  @@:    @@@  ;@@@          .@@@;\n"
-",@@@  @@@@@, +@@   @@@           :@@@\n"
-" @@@+  @@@@. @@@    ,@             #@,`:\n"
-" '@@@:   `   @@@                     + `\n"
-"  @@@@#    `@@@,\n"
-"   @@@@@@@@@@@@\n"
-"    #@@@@@@@@#\n"
-"      +@@@@#`"
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #: ../src/Zypper.cc:2281
 msgid "Root privileges are required for refreshing services."
-msgstr "São necessários privilégios de root para atualizar os serviços."
+msgstr "Asennuslähdepalvelun päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: ../src/Zypper.cc:2308
-#: ../src/Zypper.cc:2620
+#: ../src/Zypper.cc:2308 ../src/Zypper.cc:2620
 msgid "Root privileges are required for modifying system services."
-msgstr "São necessários privilégios de root para alterar os serviços do sistema."
+msgstr "Asennuslähdepalveluiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:2374
 #, c-format
 msgid "'%s' is not a valid service type."
-msgstr "'%s' não é um tipo de serviço válido."
+msgstr "'%s' ei ole kelvollinen asennuslähdepalvelun tyyppi."
 
 #: ../src/Zypper.cc:2376
 #, c-format
 msgid "See '%s' or '%s' to get a list of known service types."
-msgstr "Veja '%s' ou '%s' para obter uma lista de tipos de serviço conhecidos."
+msgstr "Tarkista '%s' tai '%s' saadaksesi listan tunnetuista asennuslähdepalveluiden tyypeistä."
 
 #: ../src/Zypper.cc:2393
 msgid "Root privileges are required for modifying services."
-msgstr "São necessários privilégios de root para alterar os serviços."
+msgstr "Asennuslähdepalveluiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
-#: ../src/Zypper.cc:2405
-#: ../src/Zypper.cc:2773
+#: ../src/Zypper.cc:2405 ../src/Zypper.cc:2773
 msgid "Alias or an aggregate option is required."
-msgstr "O apelido ou uma opção agregada é obrigatória."
+msgstr "Määrittele joko alias tai käytä jotain ryhmävalintaa."
 
 #: ../src/Zypper.cc:2439
 #, c-format
 msgid "Service '%s' not found."
-msgstr "O serviço '%s' não encontrado."
+msgstr "Asennuslähdepalvelua '%s' ei löytynyt."
 
-#: ../src/Zypper.cc:2475
-#: ../src/Zypper.cc:2619
-#: ../src/Zypper.cc:2705
+#: ../src/Zypper.cc:2475 ../src/Zypper.cc:2619 ../src/Zypper.cc:2705
 #: ../src/Zypper.cc:2761
 msgid "Root privileges are required for modifying system repositories."
-msgstr "São necessários privilégios de root para alterar os repositórios do sistema."
+msgstr "Asennuslähteiden muokkaaminen vaatii pääkäyttäjän oikeudet."
 
-#: ../src/Zypper.cc:2524
-#: ../src/Zypper.cc:2881
+#: ../src/Zypper.cc:2524 ../src/Zypper.cc:2881
 msgid "Too few arguments."
-msgstr "Poucos argumentos."
+msgstr "Valitsimia puuttuu."
 
 #: ../src/Zypper.cc:2548
 msgid "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "Se somente um argumento for usado ele deve ser uma URL apontando para um arquivo .repo."
+msgstr "Käytettäessä ainoastaan yhtä valintaa, täytyy sen osoittaa .repo-tiedostoon."
 
 #: ../src/Zypper.cc:2574
 #, c-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "Não é possível utilizar %s junto com %s. Usando a configuração de %s."
+msgstr "Valintaa %s ei voida käyttää samanaikaisesti %s kanssa. Käytetään %s."
 
 #: ../src/Zypper.cc:2597
 msgid "Specified type is not a valid repository type:"
-msgstr "O tipo especificado não é um tipo de repositório válido:"
+msgstr "Virheellinen asennuslähteen tyyppi:"
 
 #: ../src/Zypper.cc:2599
 #, c-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Veja '%s' ou '%s' para obter uma lista de tipos de repositórios conhecidos."
+msgstr "Tarkista '%s' tai '%s' saadaksesi listan tunnetuista asennuslähteiden tyypeistä."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: ../src/Zypper.cc:2655
 #, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "O repositório '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "Asennuslähdettä '%s' ei löydy aliaksen, numeron tai URL-osoitteen perusteella."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: ../src/Zypper.cc:2678
 #, c-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "O serviço '%s' não foi encontrado pelo apelido, número ou URL."
+msgstr "Asennuslähdepalvelua '%s' ei löydy aliaksen, numeron tai URL-osoitteen perusteella."
 
 #: ../src/Zypper.cc:2712
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "Poucos argumentos. Pelo menos a URL e o apelido são necessários."
+msgstr "Valintoja puuttuu. Määrittele vähintään URL-osoite ja alias."
 
 #: ../src/Zypper.cc:2737
 #, c-format
 msgid "Repository '%s' not found."
-msgstr "O repositório '%s' não foi encontrado."
+msgstr "Asennuslähdettä '%s' ei löydy."
 
 #: ../src/Zypper.cc:2803
 #, c-format
 msgid "Repository %s not found."
-msgstr "O repositório %s não foi encontrado."
+msgstr "Asennuslähdettä %s ei löydy."
 
 #: ../src/Zypper.cc:2821
 msgid "Root privileges are required for refreshing system repositories."
-msgstr "São necessários privilégios de root para atualizar os repositórios do sistema."
+msgstr "Asennuslähteiden päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:2828
 #, c-format
 msgid "The '%s' global option has no effect here."
-msgstr "A opção global %s não tem efeito aqui."
+msgstr "Valinta '%s' ei vaikuta täällä."
 
 #: ../src/Zypper.cc:2836
 #, c-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Os argumentos não são permitidos se '%s' for utilizado."
+msgstr "Käytettäessä '%s' ei ole valintoja."
 
 #: ../src/Zypper.cc:2862
 msgid "Root privileges are required for cleaning local caches."
-msgstr "São necessários privilégios de root para limpar os caches locais."
+msgstr "Välimuistien puhdistamiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:2882
 msgid "At least one package name is required."
-msgstr "Pelo menos um nome de pacote é necessário."
+msgstr "Määrittele vähintään yhden paketin nimi."
 
 #: ../src/Zypper.cc:2896
 msgid "Root privileges are required for installing or uninstalling packages."
-msgstr "São necessários privilégios de root para instalar ou desinstalar pacotes."
+msgstr "Pakettien asentamiseen tai poistamiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:2911
 #, c-format
 msgid "Unknown package type: %s"
-msgstr "Tipo de pacote desconhecido: %s "
+msgstr "Tuntematon paketin tyyppi: %s"
 
 #: ../src/Zypper.cc:2931
 #, c-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' se parece com um arquivo RPM. Ele tentará ser baixado."
+msgstr "'%s' vaikuttaa RPM-tiedostolta. Yritetään ladata."
 
 #: ../src/Zypper.cc:2944
 #, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problema com o arquivo RPM especificado como %s, ignorando."
+msgstr "Virhe RPM-tiedostossa %s. Ohitetaan."
 
 #: ../src/Zypper.cc:2967
 #, c-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr "Problema ao ler o cabeçalho RPM do %s. É um arquivo RPM?"
+msgstr "Virhe luettaessa RPM-paketin tunnistetietoa %s. Onko tämä varmasti RPM-tiedosto?"
 
 #: ../src/Zypper.cc:2992
 msgid "Plain RPM files cache"
-msgstr "Cache de arquivos RPM planos"
+msgstr "RPM-tiedostojen välimuisti"
 
-#: ../src/Zypper.cc:3021
-#: ../src/Zypper.cc:3099
+#: ../src/Zypper.cc:3021 ../src/Zypper.cc:3099
 msgid "Warning: No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
-msgstr "Aviso: Nenhum repositório foi definido. Operando somente com os resolvíveis instalados. Nada pode ser instalado."
+msgstr "Varoitus: Asennuslähteitä ei ole määritetty. Käytetään ainoastaan asennettuja paketteja. Mitään ei voida asentaa."
 
 #: ../src/Zypper.cc:3050
 msgid "Source package name is a required argument."
-msgstr "O nome do pacote fonte é um argumento necessário."
+msgstr "Lähdekoodipaketin nimi puuttuu."
 
-#: ../src/Zypper.cc:3156
-#: ../src/Zypper.cc:3416
-#: ../src/Zypper.cc:3500
-#: ../src/Zypper.cc:3623
-#: ../src/Zypper.cc:3691
+#: ../src/Zypper.cc:3156 ../src/Zypper.cc:3416 ../src/Zypper.cc:3500
+#: ../src/Zypper.cc:3623 ../src/Zypper.cc:3691
 #, c-format
 msgid "Unknown package type '%s'."
-msgstr "Tipo de pacote desconhecido '%s'."
+msgstr "Tuntematon paketin tyyppi '%s'."
 
 #: ../src/Zypper.cc:3262
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Ocorreu um problema ao inicializar ou executar a pesquisa"
+msgstr "Virhe alustettaessa tai suoritettaessa hakua"
 
 #: ../src/Zypper.cc:3263
 msgid "See the above message for a hint."
-msgstr "Veja a mensagem acima para uma dica."
+msgstr "Tarkista ylläoleva virheviesti."
 
 #. translators: Running as 'rug', cannot use 'best-effort' option.
-#: ../src/Zypper.cc:3435
-#: ../src/Zypper.cc:3518
+#: ../src/Zypper.cc:3435 ../src/Zypper.cc:3518
 #, c-format
 msgid "Running as '%s', cannot use '%s' option."
-msgstr "Executando como '%s', não é possível usar a opção '%s'."
+msgstr "Suoritetaan '%s'. '%s' ei ole käytettävissä."
 
 #: ../src/Zypper.cc:3463
 msgid "Root privileges are required for updating packages."
-msgstr "São necessários privilégios de root para atualizar os pacotes."
+msgstr "Pakettien päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:3556
 msgid "Root privileges are required for performing a distribution upgrade."
-msgstr "São necessários privilégios de root para atualizar a distribuição."
+msgstr "Järjestelmän päivittämiseen vaaditaan pääkäyttäjän oikeudet."
 
-#: ../src/Zypper.cc:3653
-#: ../src/Zypper.cc:3714
+#: ../src/Zypper.cc:3653 ../src/Zypper.cc:3714
 msgid "Root privileges are required for adding of package locks."
-msgstr "São necessários privilégios de root para adicionar as travas de pacote."
+msgstr "Pakettien lukitsemiseen vaaditaan pääkäyttäjän oikeudet."
 
 #: ../src/Zypper.cc:3822
 #, c-format
 msgid "%s matches %s"
-msgstr "%s combina com %s"
+msgstr "%s täsmää %s"
 
 #: ../src/Zypper.cc:3824
 #, c-format
 msgid "%s is newer than %s"
-msgstr "%s é mais novo que %s"
+msgstr "%s on uudempi kuin %s"
 
 #: ../src/Zypper.cc:3826
 #, c-format
 msgid "%s is older than %s"
-msgstr "%s é mais antigo que %s"
+msgstr "%s on vanhempi kuin %s"
 
 #: ../src/Zypper.cc:3865
 msgid "This command only makes sense in the zypper shell."
-msgstr "Este comando só faz sentido no shell do zypper."
+msgstr "Komento on tarkoitettu käytettäväksi zypper-kehoitteessa."
 
 #: ../src/Zypper.cc:3877
 msgid "You already are running zypper's shell."
-msgstr "Você já está executando o shell do zypper."
+msgstr "Olet jo zypperin komentokehoitteessa."
 
 #: ../src/Zypper.cc:3894
 msgid "Description"
-msgstr "Descrição"
+msgstr "Kuvaus"
 
 #: ../src/Zypper.cc:3951
 msgid "Resolvable Type"
-msgstr "Tipo de Resolvível"
+msgstr "Tyyppi"
 
