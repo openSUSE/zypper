@@ -65,6 +65,9 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
     Solver *_solv;
     Queue _jobQueue;
 
+    // list of problematic items (orphaned)
+    PoolItemList _problem_items;
+
     // list populated by calls to addPoolItemTo*()
     PoolItemList _items_to_install;
     PoolItemList _items_to_remove;
@@ -192,8 +195,11 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool doesObsoleteItem (PoolItem candidate, PoolItem installed);
 
+    PoolItemList problematicUpdateItems( void ) const { return _problem_items; }    
+
     PoolItemList resultItemsToInstall () { return _result_items_to_install; }
     PoolItemList resultItemsToRemove () { return _result_items_to_remove; }
+    PoolItemList problematicUpdateItems() { return _problem_items; }
     
 };
 

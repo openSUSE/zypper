@@ -116,6 +116,9 @@ Resolver::doUpdate()
     return _satResolver->doUpdate();
 }
 
+PoolItemList Resolver::problematicUpdateItems() const
+{ return _satResolver->problematicUpdateItems(); }
+
 void
 Resolver::addExtraRequire (const Capability & capability)
 {
@@ -359,88 +362,6 @@ Resolver::resolveQueue(solver::detail::SolverQueueItemList & queue)
     _added_queue_items.clear();
     
     return _satResolver->resolveQueue(queue, _addWeak);
-}
-
-
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : Resolver::checkUnmaintainedItems
-//	METHOD TYPE : 
-//
-//	DESCRIPTION : Unmaintained packages which does not fit to 
-//                    the updated system (broken dependencies) will be
-//                    deleted.
-//                    returns true if solving was successful
-//
-bool Resolver::checkUnmaintainedItems () {
-    int solverRuns = 1;
-    bool solverRet = resolvePool();
-    MIL << "Checking unmaintained items....." << endl;
-
-    while (!solverRet && solverRuns++ < MAXSOLVERRUNS) {
-	ResolverProblemList problemList = problems();
-	ProblemSolutionList solutionList;
-	PoolItemList problemItemList;	
-
-	for (ResolverProblemList::iterator iter = problemList.begin(); iter != problemList.end(); ++iter) {
-	    ResolverProblem problem = **iter;
-	    DBG << "Problem:" << endl;
-	    DBG << problem.description() << endl;
-	    DBG << problem.details() << endl;
-
-	    ProblemSolutionList solutions = problem.solutions();
-	    for (ProblemSolutionList::const_iterator iterSolution = solutions.begin();
-		 iterSolution != solutions.end(); ++iterSolution) {
-		ProblemSolution_Ptr solution = *iterSolution;
-		DBG << "   Solution:" << endl;
-		DBG << "      " << solution->description() << endl;
-		DBG << "      " << solution->details() << endl;		
-		solver::detail::CSolutionActionList actionList = solution->actions();
-		bool fitUnmaintained = false;
-		PoolItemList deletedItems;
-		for (CSolutionActionList::const_iterator iterActions = actionList.begin();
-		     iterActions != actionList.end(); ++iterActions) {
-		    TransactionSolutionAction_constPtr transactionAction = dynamic_pointer_cast<const TransactionSolutionAction>(*iterActions);
-		    if (transactionAction &&
-			transactionAction->action() == REMOVE
-			&& _unmaintained_items.find(transactionAction->item()) != _unmaintained_items.end()) {
-			// The solution contains unmaintained items ONLY which will be deleted. So take this solution
-			fitUnmaintained = true;
-			deletedItems.push_back (transactionAction->item());
-		    } else {
-			fitUnmaintained = false;
-		    }
-		}
-		if (fitUnmaintained) {
-		    MIL << "Problem:" << endl;
-		    MIL << problem.description() << endl;
-		    MIL << problem.details() << endl;
-		    MIL << "Will be solved by removing unmaintained package(s)............" << endl;
-		    MIL << "   Solution:" << endl;
-		    MIL << "      " << solution->description() << endl;
-		    MIL << "      " << solution->details() << endl;				    
-		    solutionList.push_back (solution);
-		    problemItemList.insert (problemItemList.end(), deletedItems.begin(), deletedItems.end() );
-		    break; // not regarding the other solutions
-		}
-	    }
-	}
-
-	if (!solutionList.empty()) {
-	    applySolutions (solutionList);
-	    // list of problematic items after doUpgrade() which is show to the user
-	    _problem_items.insert (_problem_items.end(), problemItemList.begin(), problemItemList.end());
-	    _problem_items.unique();
-	} else {
-	    // break cause there is no other solution available by the next run
-	    solverRuns = MAXSOLVERRUNS;
-	}
-	// next try
-	solverRet = resolvePool();	
-    }
-    return solverRet;
 }
 
 

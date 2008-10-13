@@ -540,6 +540,24 @@ SATResolver::solving()
       }
     }
 
+    _problem_items.clear();
+    /*  solvables which are no longer supported */
+    for (int i = 0; i < _solv->orphaned.count; i++)
+    {
+	Id p;
+	p = _solv->orphaned.elements[i];
+	if (p < 0 || !sat::Solvable(p))
+	    continue;
+
+	PoolItem poolItem = _pool.find (sat::Solvable(p));
+	if (poolItem) {
+	    _problem_items.push_back(poolItem);
+	    _XDEBUG( poolItem << " orphaned !");
+	} else {
+	    ERR << "id " << p << " not found in ZYPP pool." << endl;
+	}
+    }
+
     /* Write validation state back to pool */
     Map installedmap;
     Queue flags, solvableQueue;

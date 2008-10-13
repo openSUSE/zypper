@@ -96,12 +96,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     SerialNumberWatcher _poolchanged;
     bool _testing;
 
-    // list of problematic items after doUpgrade()
-    PoolItemList _problem_items;
-
-    // list of not supported packages
-    PoolItemSet _unmaintained_items;    
-
     CapabilitySet _extra_requires;
     CapabilitySet _extra_conflicts;
     
@@ -187,7 +181,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void doUpdate();
 
     bool doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
-    PoolItemList problematicUpdateItems( void ) const { return _problem_items; }
+    PoolItemList problematicUpdateItems( void ) const;
 
     ResolverProblemList problems () const;
     void applySolutions (const ProblemSolutionList &solutions);
