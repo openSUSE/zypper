@@ -97,7 +97,7 @@ namespace zypp
                   , SEARCH_STRING);
               while (::dataiterator_step(&di2))
               {
-                ::dataiterator_setpos( &di2 );
+                ::dataiterator_setpos( &di );
                 DeltaRpm delta(*it, SOLVID_POS);
                 DBG << "checking delta: " << delta << endl;
                 if ( ! package
