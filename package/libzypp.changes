@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 13 12:12:39 CEST 2008 - ma@suse.de
+
+- Fix package-manager script to properly quote arguments. (bnc #30903)
+- revision 11311
+
+-------------------------------------------------------------------
 Mon Oct 13 11:03:04 CEST 2008 - schubi@suse.de
 
 - regarding orphaned resolvables

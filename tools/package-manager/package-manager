@@ -12,6 +12,15 @@ EOF
     exit $1
 }
 
+# quoted concatenation of arguments
+function mkCmd() {
+  printf "%q" "$1"
+  shift
+  for ARG in "$@"; do
+    printf " %q" "$ARG"
+  done
+}
+
 HAVE_ZLM=false
 if rpm -q zen-updater >/dev/null; then
     HAVE_ZLM=true
@@ -22,7 +31,7 @@ if rpm -q yast2-packager >/dev/null; then
 fi
 
 if $HAVE_ZLM; then
-    if $HAVE_OPENSUSE; then	
+    if $HAVE_OPENSUSE; then
 	if [ -f /etc/sysconfig/sw_management ]; then
 	    . /etc/sysconfig/sw_management
 	    PSMS="$PREFERRED_SW_MANAGER_STACK"
@@ -51,7 +60,7 @@ fi
 
 xsu() {
     # a copy of xdg-su.
-    package-manager-su -c "$*"
+    package-manager-su -c "$(mkCmd "$@")"
 }
 
 # do_* fall back to yast for STACK=ugh
