@@ -1072,13 +1072,41 @@ namespace zypp
       return repo::RepoType::NONE;
     }
 
+    // prepare exception to be thrown if the type could not be determined
+    // due to a media exception. We can't throw right away, because of some
+    // problems with proxy servers returning an incorrect error
+    // on ftp file-not-found(bnc #335906). Instead we'll check another types
+    // before throwing.
+    RepoException enew("Error trying to read from " + url.asString());
+    bool gotMediaException = false;
     try
     {
       MediaSetAccess access(url);
-      if ( access.doesFileExist("/repodata/repomd.xml") )
-        return repo::RepoType::RPMMD;
-      if ( access.doesFileExist("/content") )
-        return repo::RepoType::YAST2;
+      try
+      {
+        if ( access.doesFileExist("/repodata/repomd.xml") )
+          return repo::RepoType::RPMMD;
+      }
+      catch ( const media::MediaException &e )
+      {
+        ZYPP_CAUGHT(e);
+        DBG << "problem checking for repodata/repomd.xml file" << endl;
+        enew.remember(e);
+        gotMediaException = true;
+      }
+
+      try
+      {
+        if ( access.doesFileExist("/content") )
+          return repo::RepoType::YAST2;
+      }
+      catch ( const media::MediaException &e )
+      {
+        ZYPP_CAUGHT(e);
+        DBG << "problem checking for content file" << endl;
+        enew.remember(e);
+        gotMediaException = true;
+      }
 
       // if it is a local url of type dir
       if ( (! media::MediaManager::downloads(url)) && ( url.getScheme() == "dir" ) )
@@ -1091,13 +1119,6 @@ namespace zypp
         }
       }
     }
-    catch ( const media::MediaException &e )
-    {
-      ZYPP_CAUGHT(e);
-      RepoException enew("Error trying to read from " + url.asString());
-      enew.remember(e);
-      ZYPP_THROW(enew);
-    }
     catch ( const Exception &e )
     {
       ZYPP_CAUGHT(e);
@@ -1105,6 +1126,9 @@ namespace zypp
       enew.remember(e);
       ZYPP_THROW(enew);
     }
+
+    if (gotMediaException)
+      ZYPP_THROW(enew);
 
     return repo::RepoType::NONE;
   }
