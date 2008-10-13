@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product schemeversion="0.0">
+    <vendor>Novell</vendor>
+    <name>SUSE_SLES</name>
+    <version>10</version>
+    <release>0</release>
+    <arch>i586</arch>
+    <productline>sles</productline>
+    <register>
+        <target>sle-10-i586</target>
+        <!-- release is optional and normally empty -->
+        <release>special_edition</release>
+    </register>
+    <updaterepokey>A43242OOO</updaterepokey>
+    <summary>A cool distribution</summary>
+    <summary lang="de">Einfach genial</summary>
+    <description>This is the coolest distribution on the world.
+        Try it out and find it useful.</description>
+    <description lang="de">Was soll man da sagen?
+        Einfach toll!</description>
+    <linguas>
+      <lang>da</lang>
+      <lang>de</lang>
+    </linguas>
+    <urls>
+      <url name="releasenotes">http://www.suse.com/relnotes/i386/SLE/SERVER/11/release-notes-sles.rpm</url>
+      <url name="extraurls">http://foo</url>
+    </urls>
+    <buildconfig producttheme="SuSE" betaversion="-Alpha1plus">
+      <linguas>
+        <lang>af</lang>
+      </linguas>
+    </buildconfig>
+    <installconfig defaultlang="en_US" />
+</product>
+
