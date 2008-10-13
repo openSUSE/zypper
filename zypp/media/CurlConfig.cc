@@ -45,8 +45,12 @@ namespace zypp
     }
     else
     {
+      char buf[256] = {NULL};
       WAR << "Not allowed to parse '" << curlrcFile
-          << "': owner is not root" << std::endl;
+          << "': dir/file owner: " << h_info.owner() << "/" << c_info.owner()
+          << ", process uid: " << getuid()
+          << " (" << (!getlogin_r(buf, 31) ? buf : "") << ")" << std::endl;
+
       return 1;
     }
 
