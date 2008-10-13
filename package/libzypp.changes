@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 13 14:16:25 CEST 2008 - ma@suse.de
+
+- Adapt to satsolver changes.
+- revision 11316
+
+-------------------------------------------------------------------
 Mon Oct 13 13:28:48 CEST 2008 - ma@suse.de
 
 - Fix reading delta rpm checksum from solv file.

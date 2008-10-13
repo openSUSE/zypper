@@ -108,7 +108,7 @@ namespace zypp
     { return _dip ? Repository( _dip->repo ) : Repository::noRepository; }
 
     Solvable LookupAttr::iterator::inSolvable() const
-    { return _dip ? Solvable( _dip->entry ) : Solvable::noSolvable; }
+    { return _dip ? Solvable( _dip->solvid ) : Solvable::noSolvable; }
 
     SolvAttr LookupAttr::iterator::inSolvAttr() const
     { return _dip ? SolvAttr( _dip->key->name ) : SolvAttr::noAttr; }

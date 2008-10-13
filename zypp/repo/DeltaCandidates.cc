@@ -82,7 +82,7 @@ namespace zypp
           ::Dataiterator di;
           ::dataiterator_init(&di
             , it->get()                                              // in this repo
-            , REPOENTRY_META                                         // in metadata
+            , SOLVID_META                                         // in metadata
             , REPOSITORY_DELTAINFO, 0, 0 );
 
           while (::dataiterator_step(&di))
@@ -91,14 +91,14 @@ namespace zypp
               ::Dataiterator di2;
               ::dataiterator_init(&di2
                   , it->get()                                       // in this repo
-                  , REPOENTRY_POS                                   // in metadata
+                  , SOLVID_POS                                   // in metadata
                   , DELTA_PACKAGE_NAME
                   , _pimpl->pkgname.empty() ? 0 : _pimpl->pkgname.c_str()  // of this value
                   , SEARCH_STRING);
               while (::dataiterator_step(&di2))
               {
                 ::dataiterator_setpos( &di2 );
-                DeltaRpm delta(*it, REPOENTRY_POS);
+                DeltaRpm delta(*it, SOLVID_POS);
                 DBG << "checking delta: " << delta << endl;
                 if ( ! package
                        || (    package->name()    == delta.name()

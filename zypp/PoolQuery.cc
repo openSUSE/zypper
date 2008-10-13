@@ -615,7 +615,7 @@ attremptycheckend:
 
   bool PoolQueryIterator::matchSolvable()
   {
-    _sid = base().get()->entry;
+    _sid = base().get()->solvid;
 
     bool new_solvable = true;
     bool matches = !_do_matching;
@@ -744,7 +744,7 @@ attremptycheckend:
         // trying to reach a matching attribute or the next solvable
         // thus resulting to a problem in the equal() method
         ++base_reference();
-        new_solvable = base().get()->entry != _sid;
+        new_solvable = base().get()->solvid != _sid;
       }
       // no more attributes in this repo, return
       else
