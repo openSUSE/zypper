@@ -9,9 +9,14 @@
 /** \file zypp/Patch.cc
  *
 */
+extern "C"
+{
+#include <satsolver/repo.h>
+}
 
 #include "zypp/base/Logger.h"
 #include "zypp/Patch.h"
+#include "zypp/sat/WhatProvides.h"
 
 using std::endl;
 
@@ -108,85 +113,102 @@ namespace zypp
 
   Patch::Contents Patch::contents() const
   {
-    Contents result;
-    sat::LookupAttr col_name( sat::SolvAttr::updateCollectionName, *this );
-    sat::LookupAttr col_evr( sat::SolvAttr::updateCollectionEvr, *this );
-    sat::LookupAttr col_arch( sat::SolvAttr::updateCollectionArch, *this );
+      Contents result;
 
-    sat::LookupAttr::iterator col_name_it(col_name.begin());
-    sat::LookupAttr::iterator col_evr_it(col_evr.begin());
-    sat::LookupAttr::iterator col_arch_it(col_arch.begin());
+      ::Dataiterator di;
+      ::dataiterator_init(&di
+          , repository().get()                           // in this repo
+          , sat::Solvable::id()                          // in metadata
+              , UPDATE_COLLECTION, 0, 0 );
 
-    for (;col_name_it != col_name.end(); ++col_name_it, ++col_evr_it, ++col_arch_it)
-    {
-      /* safety checks, shouldn't happen (tm) */
-      if (col_evr_it == col_evr.end()
-          || col_arch_it == col_arch.end())
+      while (::dataiterator_step(&di))
       {
-          /* FIXME: Raise exception ?! */
-          ERR << *this << " : The thing that should not happen, happened." << endl;
-          break;
-      }
+          ::dataiterator_setpos( &di );
+          ::Dataiterator di2;
+          ::dataiterator_init(&di2
+              , repository().get()                           // in this repo
+              , SOLVID_POS                                   // in metadata
+                  ,0,0,0 );
 
-      IdString nameid( col_name_it.asString() ); /* IdString for fast compare */
-      Arch arch( col_arch_it.asString() );
+          IdString nameid;
+          Edition  evr;
+          Arch     arch;
 
-      /* search providers of name */
-      sat::WhatProvides providers( Capability( col_name_it.asString() ) );
-      MIL << *this << " providers: " << endl;
-      MIL << providers << endl;
+          while (::dataiterator_step(&di2))
+          {
+            switch ( di2.key->name )
+            {
+              case UPDATE_COLLECTION_NAME:
+                nameid = IdString(di2.kv.id);
+                break;
+              case UPDATE_COLLECTION_EVR:
+                evr = Edition(di2.kv.id);
+                break;
+              case UPDATE_COLLECTION_ARCH:
+                arch = Arch(di2.kv.id);
+                break;
+            }
+          }
 
-      if (providers.empty())
-      {
-          WAR << *this << " misses provider for '" << col_name_it.asString() << "'" << endl;
-          continue;
-      }
+          if ( nameid.empty() )
+            continue;
 
-      bool is_relevant = false;
-      for_( it, providers.begin(), providers.end() )
-      {
-          if (it->ident() != nameid) /* package _name_ must match */
+          /* search providers of name */
+          sat::WhatProvides providers( Capability( nameid.c_str() ) );
+          MIL << *this << " providers: " << endl;
+          MIL << providers << endl;
+
+          if (providers.empty())
+          {
+            WAR << *this << " misses provider for '" << nameid << "'" << endl;
+            continue;
+          }
+
+          bool is_relevant = false;
+          for_( it, providers.begin(), providers.end() )
+          {
+            if (it->ident() != nameid) /* package _name_ must match */
               continue;
 
-          if (it->isSystem()  /* only look at installed providers with same arch */
-              && it->arch() == arch)
-          {
+            if (it->isSystem()  /* only look at installed providers with same arch */
+                && it->arch() == arch)
+            {
               is_relevant = true;
+            }
           }
-      }
-      if (!is_relevant)
-      {
-          MIL << *this << " is not relevant to the system" << endl;
-
-          continue;        /* skip if name.arch is not installed */
-      }
-
-
-      /* find exact providers first (this matches the _real_ 'collection content' of the patch */
-      sat::WhatProvides exact_providers( Capability( col_name_it.asString(), Rel::EQ, col_evr_it.asString(), ResKind::package ) );
-      if (exact_providers.empty())
-      {
-          /* no exact providers: find 'best' providers: those with a larger evr */
-          sat::WhatProvides best_providers( Capability( col_name_it.asString(), Rel::GT, col_evr_it.asString(), ResKind::package ) );
-          if (best_providers.empty())
+          if (!is_relevant)
           {
+            MIL << *this << " is not relevant to the system" << endl;
+
+            continue;        /* skip if name.arch is not installed */
+          }
+
+
+          /* find exact providers first (this matches the _real_ 'collection content' of the patch */
+          sat::WhatProvides exact_providers( Capability( nameid.c_str(), Rel::EQ, evr, ResKind::package ) );
+          if (exact_providers.empty())
+          {
+            /* no exact providers: find 'best' providers: those with a larger evr */
+            sat::WhatProvides best_providers( Capability( nameid.c_str(), Rel::GT, evr, ResKind::package ) );
+            if (best_providers.empty())
+            {
               // Hmm, this patch is not installable, noone is providing the package in the collection
               // FIXME: raise execption ? fake a solvable ?
+            }
+            else
+            {
+              // FIXME ?! loop over providers and try to find installed ones ?
+              result.get().insert( *(best_providers.begin()) );
+            }
           }
           else
           {
-              // FIXME ?! loop over providers and try to find installed ones ?
-              result.get().insert( *(best_providers.begin()) );
-          }
-      }
-      else
-      {
           // FIXME ?! loop over providers and try to find installed ones ?
-          result.get().insert( *(exact_providers.begin()) );
-      }
-    } /* while (attribute array) */
+            result.get().insert( *(exact_providers.begin()) );
+          }
+      } /* while (attribute array) */
 
-    return result;
+      return result;
   }
 
 

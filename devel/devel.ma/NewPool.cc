@@ -600,32 +600,14 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  sat::SolvAttr mattr( "repository:timestamp" );
-
-  sat::LookupAttr query( mattr );
-  MIL << "---" << mattr << "---" << query.size() << endl;
-  for_( it, query.begin(), query.end() )
+  if ( 1 )
   {
-    MIL << *it << endl;
-  }
-
-
-  //////////////////////////////////////////////////////////////////
-  INT << "===[END]============================================" << endl << endl;
-  zypp::base::LogControl::instance().logNothing();
-  return 0;
-
-  if ( 0 )
-  {
-    PoolItem pi ( getPi<Package>("amarok") );
+    PoolItem pi ( getPi<Patch>("xorg-x11-Xvnc") );
     MIL << pi << endl;
     if ( pi )
     {
-      pi.status().setTransact( true, ResStatus::USER );
-      solve();
-      vdumpPoolStats( USR << "Transacting:"<< endl,
-                      make_filter_begin<resfilter::ByTransact>(pool),
-                      make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+      Patch::constPtr p( pi->asKind<Patch>() );
+      INT << p->contents() << endl;
     }
   }
 

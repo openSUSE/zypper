@@ -6,16 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
+extern "C"
+{
+#include <satsolver/repo.h>
+}
 
 #include <iostream>
 #include "zypp/base/Logger.h"
 #include "zypp/Repository.h"
 #include "zypp/repo/DeltaCandidates.h"
 
-extern "C"
-{
-#include <satsolver/repo.h>
-}
 
 using std::endl;
 using namespace zypp::packagedelta;
