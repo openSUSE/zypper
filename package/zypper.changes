@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Oct 14 16:13:13 CEST 2008 - jkupec@suse.cz
+
+- lazy-initialize the RepoManager
+- services and targetos commands now use the readonly hack
+  (bnc #435184)
+- r11343
+- 0.12.10
+
+-------------------------------------------------------------------
 Tue Oct 14 12:56:52 CEST 2008 - jkupec@suse.cz
 
 - translations updated
