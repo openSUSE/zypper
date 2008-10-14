@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 14 12:56:52 CEST 2008 - jkupec@suse.cz
+
+- translations updated
+- 0.12.9
+
+-------------------------------------------------------------------
 Thu Oct  9 17:24:34 CEST 2008 - jkupec@suse.cz
 
 - added 'productline' attribute to product info XML (bnc #433415)
