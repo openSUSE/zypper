@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(replace_text)
   z->initializeTarget( tmp.path() );
   // target activated, there should be replacement of
   // $distver
-  BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$distver/?arch=$arch")).asCompleteString(),
+  BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$releasever/?arch=$arch")).asCompleteString(),
 		    "http://site.org/update/10/?arch=i686");
 
 }
