@@ -142,6 +142,8 @@ struct RuntimeData
   bool action_rpm_download;
 };
 
+typedef zypp::shared_ptr<zypp::RepoManager> RepoManager_Ptr;
+
 class Zypper : private zypp::base::NonCopyable
 {
 public:
@@ -162,7 +164,7 @@ public:
   const ArgList & arguments() const { return _arguments; }
   RuntimeData & runtimeData() { return _rdata; }
   zypp::RepoManager & repoManager()
-  { if (!_rm_set) _rm = zypp::RepoManager(_gopts.rm_options); return _rm; }
+  { if (!_rm) _rm.reset(new zypp::RepoManager(_gopts.rm_options)); return *_rm; }
   int exitCode() const { return _exit_code; }
   void setExitCode(int exit) { _exit_code = exit; } 
   bool runningShell() const { return _running_shell; }
@@ -192,7 +194,7 @@ private:
   void setRunningHelp(bool value = true) { _running_help = value; }
 
   void initRepoManager()
-  { _rm = zypp::RepoManager(_gopts.rm_options); _rm_set = true; }
+  { _rm.reset(new zypp::RepoManager(_gopts.rm_options)); }
 
 private:
 
@@ -214,8 +216,7 @@ private:
 
   RuntimeData _rdata;
 
-  zypp::RepoManager _rm;
-  bool              _rm_set;
+  RepoManager_Ptr   _rm;
 
   int _sh_argc;
   char **_sh_argv;

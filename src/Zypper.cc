@@ -73,7 +73,6 @@ Zypper::Zypper()
     _command(ZypperCommand::NONE),
     _exit_code(ZYPPER_EXIT_OK),
     _running_shell(false), _running_help(false), _exit_requested(false),
-    _rm_set(false),
     _sh_argc(0), _sh_argv(NULL)
 {
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
@@ -735,7 +734,7 @@ void Zypper::shellCleanup()
   _rdata.current_repo = RepoInfo();
   
   // cause the RepoManager to be reinitialized
-  _rm_set = false;
+  _rm.reset();
 
   // TODO:
   // _rdata.repos re-read after repo operations or modify/remove these very repoinfos
@@ -2227,7 +2226,9 @@ void Zypper::processCommandOptions()
       const char *roh = getenv("ZYPP_READONLY_HACK");
       if (roh != NULL && roh[0] == '1')
         zypp_readonly_hack::IWantIt ();
-      else if (command() == ZypperCommand::LIST_REPOS)
+      else if (   command() == ZypperCommand::LIST_REPOS
+               || command() == ZypperCommand::LIST_SERVICES
+               || command() == ZypperCommand::TARGET_OS )
         zypp_readonly_hack::IWantIt (); // #247001, #302152
 
       God = zypp::getZYpp();
