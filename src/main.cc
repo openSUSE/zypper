@@ -13,16 +13,10 @@
 #include "callbacks/repo.h"
 #include "callbacks/media.h"
 #include "callbacks/locks.h"
+#include "output/OutNormal.h"
+#include "utils/messages.h"
 
 using namespace std;
-
-RpmCallbacks rpm_callbacks;
-SourceCallbacks source_callbacks;
-MediaCallbacks media_callbacks;
-KeyRingCallbacks keyring_callbacks;
-DigestCallbacks digest_callbacks;
-LocksCallbacks locks_callbacks;
-
 
 void signal_handler(int sig)
 {
@@ -72,10 +66,36 @@ int main(int argc, char **argv)
 
   MIL << "Hi, me zypper " VERSION " built " << __DATE__ << " " <<  __TIME__ << endl;
 
+  OutNormal out(Out::QUIET);
+
   if (::signal(SIGINT, signal_handler) == SIG_ERR)
-    cerr << "Failed to set SIGINT handler." << endl; 
+    out.error("Failed to set SIGINT handler.");
   if (::signal(SIGTERM, signal_handler) == SIG_ERR)
-    cerr << "Failed to set SIGTERM handler." << endl; 
+    out.error("Failed to set SIGTERM handler."); 
+
+  try
+  {
+    static RpmCallbacks rpm_callbacks;
+    static SourceCallbacks source_callbacks;
+    static MediaCallbacks media_callbacks;
+    static KeyRingCallbacks keyring_callbacks;
+    static DigestCallbacks digest_callbacks;
+    static LocksCallbacks locks_callbacks;
+  }
+  catch (const zypp::Exception & e)
+  {
+    ZYPP_CAUGHT(e);
+    out.error(e, "Failed to initialize zypper callbacks.");
+    report_a_bug(out);
+    return ZYPPER_EXIT_ERR_BUG;
+  }
+  catch (...)
+  {
+    out.error("Failed to initialize zypper callbacks.");
+    ERR << "Failed to initialize zypper callbacks." << endl;
+    report_a_bug(out);
+    return ZYPPER_EXIT_ERR_BUG;
+  }
 
   return Zypper::instance()->main(argc, argv);
 }
