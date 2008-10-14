@@ -112,15 +112,6 @@ namespace zypp
     knownServicesPath     = Pathname::assertprefix( root_r, ZConfig::instance().knownServicesPath() );
     probe                 = ZConfig::instance().repo_add_probe();
 
-    if ( getZYpp()->getTarget() )
-    {
-      servicesTargetDistro = getZYpp()->target()->targetDistribution();
-    }
-    else
-    {
-      DBG << "Target not initialized, using an empty servicesTargetDistro." << endl;
-    }
-
     rootDir = root_r;
   }
 
@@ -1676,8 +1667,14 @@ namespace zypp
     mediamanager.provideFile( mid, "repo/repoindex.xml" );
     Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 
+    // get target distro identifier
+    std::string servicesTargetDistro = _pimpl->options.servicesTargetDistro;
+    if ( servicesTargetDistro.empty() && getZYpp()->getTarget() )
+      servicesTargetDistro = getZYpp()->target()->targetDistribution();
+    DBG << "servicesTargetDistro: " << servicesTargetDistro << endl;
+
     // parse it
-    RepoCollector collector(_pimpl->options.servicesTargetDistro);
+    RepoCollector collector(servicesTargetDistro);
     parser::RepoindexFileReader reader( path, bind( &RepoCollector::collect, &collector, _1 ) );
     mediamanager.release( mid );
     mediamanager.close( mid );
