@@ -439,7 +439,8 @@ HelixControl::HelixControl(const std::string & controlPath,
 	*file << TAB << " -->" << endl;
 
 	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
-	      << "-package.xml.gz\" name=\"" << repo.alias()
+	      << "-package.xml.gz\" name=\"" << repo.alias() << "\""
+	      << " priority=\"" << repo.priority() 
 	      << "\" />" << endl << endl;
     }
     for (LocaleSet::const_iterator iter = languages.begin(); iter != languages.end(); iter++) {
