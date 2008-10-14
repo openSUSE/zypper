@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 14 16:15:09 CEST 2008 - jkupec@suse.cz
+
+- don't initialize servicesTargetDistro via global ZYpp instance in
+  RepoManagerOptions() constructor (bnc #435184)
+- revision 11342
+
+-------------------------------------------------------------------
 Mon Oct 13 19:12:40 CEST 2008 - jkupec@suse.cz
 
 - repository probing: check for other types of repo even on
