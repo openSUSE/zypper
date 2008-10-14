@@ -45,14 +45,6 @@ namespace zypp
 
   IMPL_PTR_TYPE(KeyRing);
 
-  static bool printLine( const string &line )
-  {
-    MIL <<  line << endl;
-    return true;
-  }
-
-  ///////////////////////////////////////////////////////////////////
-
   namespace
   {
     KeyRing::DefaultAccept _keyRingDefaultAccept( KeyRing::ACCEPT_NOTHING );
