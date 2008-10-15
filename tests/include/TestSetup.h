@@ -23,6 +23,9 @@ using namespace zypp;
 /** Build a test environment below a temp. root directory.
  * If a \c rootdir_r was provided to the ctor, this directory
  * will be used and it will \b not be removed.
+ *
+ * \note The lifetime of this objects is the lifetime of the temp. root directory.
+ *
  * \code
  * #include "TestSetup.h"
  *
@@ -45,6 +48,9 @@ class TestSetup
 
     TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch() )
     { _ctor( rootdir_r, sysarch_r ); }
+
+    ~TestSetup()
+    { USR << "DELETE TESTSETUP below " << _rootdir << endl; }
 
   public:
     const Pathname & root() const { return _rootdir; }
@@ -105,6 +111,7 @@ class TestSetup
 
       if ( ! sysarch_r.empty() )
         ZConfig::instance().setSystemArchitecture( sysarch_r );
+      USR << "CREATED TESTSETUP below " << _rootdir << endl;
     }
   private:
     filesystem::TmpDir _tmprootdir;
