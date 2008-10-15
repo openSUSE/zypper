@@ -128,6 +128,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return provideFileInternal( file, media_nr, false, false);
   }
 
+  Pathname MediaSetAccess::provideOptionalFile(const Pathname & file, unsigned media_nr )
+  {
+    return provideFileInternal( file, media_nr, false, true);
+  }
+
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
   {
     callback::SendReport<media::MediaChangeReport> report;
@@ -310,9 +315,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
             reason = media::MediaChangeReport::WRONG;
           }
 
-
-          if (checkonly)
-            user  = media::MediaChangeReport::ABORT;
+          // checkonly: only bother the user if wrong medium is in the drive
+          if (checkonly && reason != media::MediaChangeReport::WRONG)
+            return Pathname();
           else
           {
             // release all media before requesting another (#336881)
@@ -334,11 +339,15 @@ IMPL_PTR_TYPE(MediaSetAccess);
           if( user == media::MediaChangeReport::ABORT )
           {
             DBG << "Aborting" << endl;
+            if (checkonly)
+              return Pathname();
             ZYPP_RETHROW ( excp );
           }
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
+            if (checkonly)
+              return Pathname();
 	    SkipRequestException nexcp("User-requested skipping of a file");
 	    nexcp.remember(excp);
 	    ZYPP_THROW(nexcp);
@@ -367,6 +376,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else
           {
             DBG << "Don't know, let's ABORT" << endl;
+            if (checkonly)
+              return Pathname();
             ZYPP_RETHROW ( excp );
           }
         } while( user == media::MediaChangeReport::EJECT );

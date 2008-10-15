@@ -67,9 +67,9 @@ namespace zypp
      * access.setVerifier(2, media2VerifierRef);
      *
      * Pathname file1 = "/some/file/on/media1";
-     * access.provideFile(1, file1);
+     * Pathname providedfile1 = access.provideFile(file1, 1);
      * Pathname file2 = "/some/file/on/media2";
-     * access.provideFile(2, file1);
+     * Pathname providedfile2 = access.provideFile(file1, 2);
      *
      * \endcode
      */
@@ -129,6 +129,16 @@ namespace zypp
        *        see \ref media::MediaManager::provideFile()
        */
       Pathname provideFile(const Pathname & file, unsigned media_nr = 1 );
+
+      /**
+       * The same as provideFile(Pathname,unsigned) but does not throw.
+       * 
+       * This method does not call the user callbacks, except of the case of
+       * not wrong media in the drive, but won't throw an exception in any case.
+       *
+       * \return Path to the provided file on success, an empty Pathname() otherwise.
+       */
+      Pathname provideOptionalFile( const Pathname & file, unsigned media_nr = 1 );
 
       /**
        * Release file from media.

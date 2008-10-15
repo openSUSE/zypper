@@ -231,5 +231,20 @@ BOOST_AUTO_TEST_CASE(msa_provide_dirtree)
   BOOST_CHECK(check_file_exists(file3) == true);
 }
 
+/*
+ * Provide optional file
+ */
+BOOST_AUTO_TEST_CASE(msa_provide_optional_file)
+{
+  MediaSetAccess setaccess(Url(DATADIR + "/src1/cd1"));
+
+  // must not throw
+  BOOST_CHECK(setaccess.provideOptionalFile("/foo", 1).empty() == true);
+
+  Pathname file = setaccess.provideOptionalFile("/test.txt", 1);
+  BOOST_CHECK(check_file_exists(file) == true);
+  
+  //! \todo test provideOptionalFile with not desired media
+}
 
 // vim: set ts=2 sts=2 sw=2 ai et:
