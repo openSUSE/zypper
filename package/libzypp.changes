@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Oct 15 18:01:48 CEST 2008 - jkupec@suse.cz
+
+- MediaSetAccess::provideOptionalFile() added
+- revision 11369
+
+-------------------------------------------------------------------
+Wed Oct 15 18:01:48 CEST 2008 - jkupec@suse.cz
+- version 5.16.1 (16)
+
+-------------------------------------------------------------------
 Tue Oct 14 16:15:09 CEST 2008 - jkupec@suse.cz
 
 - don't initialize servicesTargetDistro via global ZYpp instance in
