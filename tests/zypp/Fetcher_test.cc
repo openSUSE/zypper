@@ -11,6 +11,9 @@
 #include "zypp/Url.h"
 #include "zypp/TmpPath.h"
 
+#include "WebServer.h"
+#include <boost/thread.hpp>
+
 using std::cout;
 using std::endl;
 using std::string;
