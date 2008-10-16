@@ -645,6 +645,49 @@ namespace zypp
                  out);
     }
 
+    /**
+     * Checks for existing repository license files of \a repo and extract them
+     * in \a target directory.
+     * 
+     * \param repo   Repository to check.
+     * \param target Path to directory where the license files should be copied.
+     * \return true if license files were found and successfully extracted,
+     *         false otherwise.
+     */
+    bool getLicenseFiles(const RepoInfo & repo, const Pathname & target);
+
+    /**
+     * Returns path to a license file suitable for current system locale, given
+     * a directory with all available license files. License files' names must
+     * match the following regex: <tt>^license\.?(.*)\.txt$</tt> where the
+     * substring enclosed in parentheses is the locale code.
+     * 
+     * Examples: license.en_US.txt, license.en.txt, license.txt 
+     * 
+     * \param ldir Path to a directory containing all license files.
+     * \return path to the license file, or an empty path on failure.
+     * 
+     * \see getLicenseFiles(RepoInfo const&, Pathanme const&)
+     */
+    Pathname getLicenseFile( const Pathname & ldir );
+
+    /**
+     * Returns path to a license file suitable for given \a locale, given
+     * a directory with all available license files.
+     * 
+     * \param ldir Path to a directory containing all license files.
+     * \return path to the license file, or an empty path on failure.
+     * 
+     * \see getLicenseFiles(RepoInfo const&, Pathanme const&)
+     * \see getLicenseFile(Pathanme const&)
+     */
+    Pathname getLicenseFile( const Pathname & ldir, const Locale & locale );
+
+    /**
+     * \todo implement
+     */
+    std::set<Locale> getAvailableLicenseLocales( const Pathname & ldir );
+
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
     void setCacheStatus( const RepoInfo &info, const RepoStatus &status );
