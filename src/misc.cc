@@ -167,7 +167,7 @@ bool confirm_licenses(Zypper & zypper)
         s << processRichText(licenseText);
 
       // show in pager unless we are read by a machine or the pager fails
-      if (zypper.globalOpts().machine_readable || !show_in_pager(s.str()))
+      if (zypper.globalOpts().machine_readable || !show_text_in_pager(s.str()))
         zypper.out().info(s.str(), Out::QUIET);
 
       // lincense prompt

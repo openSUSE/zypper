@@ -10,10 +10,13 @@
 #include <fstream>
 #include <errno.h>
 #include <sys/wait.h> //for wait()
+#include <iterator>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/TmpPath.h"
+#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
 
 #include "../main.h"
 
@@ -22,7 +25,9 @@
 using namespace std;
 using namespace zypp;
 
-string pager_help_exit(const string & pager)
+// ---------------------------------------------------------------------------
+
+static string pager_help_exit(const string & pager)
 {
   string endfour = pager.substr(pager.size()-4,4);
   if (endfour == "less")
@@ -32,7 +37,9 @@ string pager_help_exit(const string & pager)
   return string();
 }
 
-string pager_help_navigation(const string & pager)
+// ---------------------------------------------------------------------------
+
+static string pager_help_navigation(const string & pager)
 {
   string endfour = pager.substr(pager.size()-4,4);
   if (endfour == "less")
@@ -46,29 +53,12 @@ string pager_help_navigation(const string & pager)
   return string();
 }
 
-//gets true if successfully display in pager
-bool show_in_pager(const string & text)
+// ---------------------------------------------------------------------------
+
+static bool show_in_pager(const string & pager, const Pathname & file)
 {
-  const char* envpager = getenv("PAGER");
-  if (!envpager)
-    envpager="more"; //basic posix default, must be in PATH
-  string pager(envpager);
-  filesystem::TmpFile tfile;
-  string tpath = tfile.path().absolutename().c_str();
-  ofstream os(tpath.c_str());
-
-  string help = pager_help_navigation(pager);
-  if (!help.empty())
-    os << "(" << help << ")" << endl << endl;
-  os << text;
-
-  help = pager_help_exit(pager);
-  if (!help.empty())
-    os << endl << endl << "(" << help << ")";
-  os.close();
-
   ostringstream cmdline;
-  cmdline << pager <<" "<<tpath;
+  cmdline << "'" << pager << "' '" << file << "'";
 
   switch(fork())
   {
@@ -89,3 +79,82 @@ bool show_in_pager(const string & text)
 
   return true;
 }
+
+// ---------------------------------------------------------------------------
+
+bool show_text_in_pager(const string & text, const string & intro)
+{
+  const char* envpager = getenv("PAGER");
+  if (!envpager)
+    envpager = "more"; // basic posix default, must be in PATH
+  string pager(envpager);
+
+  filesystem::TmpFile tfile;
+  string tpath = tfile.path().absolutename().asString();
+  ofstream os(tpath.c_str());
+
+  // intro
+  if (!intro.empty())
+    os << intro << endl;
+
+  // navigaion hint
+  string help = pager_help_navigation(pager);
+  if (!help.empty())
+    os << "(" << help << ")" << endl << endl;
+
+  // the text
+  os << text;
+
+  // exit hint
+  help = pager_help_exit(pager);
+  if (!help.empty())
+    os << endl << endl << "(" << help << ")";
+  os.close();
+
+  return show_in_pager(pager, tfile);
+}
+
+// ---------------------------------------------------------------------------
+
+bool show_file_in_pager(const Pathname & file, const string & intro)
+{
+  const char* envpager = getenv("PAGER");
+  if (!envpager)
+    envpager = "more"; // basic posix default, must be in PATH
+  string pager(envpager);
+
+  filesystem::TmpFile tfile;
+  string tpath = tfile.path().absolutename().asString();
+  ofstream os(tpath.c_str());
+
+  // intro
+  if (!intro.empty())
+    os << intro << endl;
+
+  // navigaion hint
+  string help = pager_help_navigation(pager);
+  if (!help.empty())
+    os << "(" << help << ")" << endl << endl;
+
+  // the text
+  ifstream is(file.asString().c_str());
+  if (is.good())
+    os << is.rdbuf();
+  else
+  {
+    cerr << "ERR reading the file" << endl;
+    is.close();
+    return false;
+  }
+  is.close();
+
+  // exit hint
+  help = pager_help_exit(pager);
+  if (!help.empty())
+    os << endl << endl << "(" << help << ")";
+  os.close();
+
+  return show_in_pager(pager, tfile);
+}
+
+// vim: set ts=2 sts=2 sw=2 et ai:
