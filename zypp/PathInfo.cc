@@ -598,6 +598,15 @@ namespace zypp
     //	METHOD NAME : readdir
     //	METHOD TYPE : int
     //
+    
+    bool DirEntry::operator==( const DirEntry &rhs ) const
+    {
+      // if one of the types is not known, use the name only
+      if ( type == FT_NOT_AVAIL || rhs.type == FT_NOT_AVAIL )
+        return ( name == rhs.name );
+      return ((name == rhs.name ) && (type == rhs.type)); 
+    }
+
     int readdir( DirContent & retlist, const Pathname & path,
                  bool dots, PathInfo::Mode statmode )
     {

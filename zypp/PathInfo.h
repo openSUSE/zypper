@@ -490,8 +490,7 @@ namespace zypp
       , type( type_r )
       {}
 
-      bool operator==( const DirEntry &rhs ) const
-      { return ((name == rhs.name ) && (type == rhs.type)); }
+      bool operator==( const DirEntry &rhs ) const;
     };
 
     /** Returned by readdir. */

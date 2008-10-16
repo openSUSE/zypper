@@ -5,6 +5,12 @@ Thu Oct 16 17:57:15 CEST 2008 - jkupec@suse.cz
 - revision 11377
 
 -------------------------------------------------------------------
+Thu Oct 16 16:26:01 CEST 2008 - dmacvicar@suse.de
+
+- don't take into account stat information when looking
+  for remote SHA1SUMS (part of bnc#409927)
+
+-------------------------------------------------------------------
 Wed Oct 15 18:01:48 CEST 2008 - jkupec@suse.cz
 
 - MediaSetAccess::provideOptionalFile() added
