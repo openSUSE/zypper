@@ -47,14 +47,9 @@ namespace zypp
       */
       class RepoIndex : public base::ReferenceCounted, private base::NonCopyable
       {
+        friend class ContentFileReader;
 	public:
 	  typedef std::map<std::string, CheckSum> FileChecksumMap;
-
-	  Locale                 language;
-	  std::string            timezone;
-	  Arch                   defaultBase;
-	  std::list<Locale>      languages;
-	  std::list<std::string> flags;
 
 	  Pathname descrdir;
 	  Pathname datadir;

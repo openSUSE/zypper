@@ -106,9 +106,7 @@ void Downloader::download( MediaSetAccess &media,
   //_datadir  = _repoIndex->datadir;  // path below reporoot
 
 
-  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->metaFileChecksums.begin();
-        it != _repoindex->metaFileChecksums.end();
-        ++it )
+  for_( it, _repoindex->metaFileChecksums.begin(), _repoindex->metaFileChecksums.end() )
   {
     // omit unwanted translations
     if ( str::hasPrefix( it->first, "packages" ) )
@@ -183,10 +181,21 @@ void Downloader::download( MediaSetAccess &media,
     this->enqueueDigested(location);
   }
 
-  for ( RepoIndex::FileChecksumMap::const_iterator it = _repoindex->signingKeys.begin();
-        it != _repoindex->signingKeys.end();
-        ++it )
+  for_( it, _repoindex->mediaFileChecksums.begin(), _repoindex->mediaFileChecksums.end() )
   {
+    // Repo adopts license files listed in HASH
+    if ( it->first != "license.tar.gz" )
+      continue;
+
+    MIL << "adding job " << it->first << endl;
+    OnMediaLocation location( repoInfo().path() + it->first, 1 );
+    location.setChecksum( it->second );
+    this->enqueueDigested(location);
+  }
+
+  for_( it, _repoindex->signingKeys.begin(),_repoindex->signingKeys.end() )
+  {
+    MIL << "adding job " << it->first << endl;
     OnMediaLocation location( repoInfo().path() + it->first, 1 );
     location.setChecksum( it->second );
     this->enqueueDigested(location);

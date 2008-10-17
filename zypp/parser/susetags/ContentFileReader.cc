@@ -21,8 +21,6 @@
 #include "zypp/parser/susetags/ContentFileReader.h"
 #include "zypp/parser/susetags/RepoIndex.h"
 
-#include "zypp/ZConfig.h"
-
 using std::endl;
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "parser::susetags"
@@ -176,7 +174,7 @@ namespace zypp
       void ContentFileReader::parse( const InputStream & input_r,
 				     const ProgressData::ReceiverFnc & fnc_r )
       {
-	MIL << "Start parsing " << input_r << endl;
+	MIL << "Start parsing content repoindex" << input_r << endl;
 	if ( ! input_r.stream() )
 	{
 	  std::ostringstream s;
@@ -190,8 +188,6 @@ namespace zypp
 	ticks.sendTo( fnc_r );
 	if ( ! ticks.toMin() )
 	  userRequestedAbort( 0 );
-
-	Arch sysarch( ZConfig::instance().systemArchitecture() );
 
 	iostr::EachLine line( input_r );
 	for( ; line; line.next() )
@@ -217,10 +213,6 @@ namespace zypp
 	  //
 	  // ReppoIndex related data:
 	  //
-	  else if ( key == "DEFAULTBASE" )
-	  {
-	    _pimpl->repoindex().defaultBase = Arch(value);
-	  }
 	  else if ( key == "DESCRDIR" )
 	  {
 	    _pimpl->repoindex().descrdir = value;
@@ -229,28 +221,11 @@ namespace zypp
 	  {
 	    _pimpl->repoindex().datadir = value;
 	  }
-	  else if ( key == "FLAGS" )
-	  {
-	    str::split( value, std::back_inserter( _pimpl->repoindex().flags ) );
-	  }
 	  else if ( key == "KEY" )
 	  {
 	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().signingKeys, value ) )
 	    {
 	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [KEY algorithm checksum filename]", *line ) ) );
-	    }
-	  }
-	  else if ( key == "LANGUAGE" )
-	  {
-	    _pimpl->repoindex().language;
-	  }
-	  else if ( key == "LINGUAS" )
-	  {
-	    std::set<std::string> strval;
-	    str::split( value, std::inserter( strval, strval.end() ) );
-	    for ( std::set<std::string>::const_iterator it = strval.begin(); it != strval.end(); ++it )
-	    {
-	      _pimpl->repoindex().languages.push_back( Locale(*it) );
 	    }
 	  }
 	  else if ( key == "META" )
@@ -267,12 +242,10 @@ namespace zypp
 	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
 	    }
 	  }
-	  else if ( key == "TIMEZONE" )
+          else
 	  {
-	    _pimpl->repoindex().timezone = value;
-	  }
-	  else
-	  { WAR << errPrefix( line.lineNo(), "Unknown tag", *line ) << endl; }
+            DBG << errPrefix( line.lineNo(), "ignored", *line ) << endl;
+          }
 
 
 	  if ( ! ticks.set( input_r.stream().tellg() ) )
