@@ -19,7 +19,7 @@
 #include <algorithm>
 
 #include "zypp/base/InputStream.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Function.h"
 #include "zypp/base/Regex.h"
@@ -1005,35 +1005,32 @@ namespace zypp
         // Take care we unlink the solvfile on exception
         ManagedFile guard( solvfile, filesystem::unlink );
 
-        std::ostringstream cmd;
-        std::string toFile( str::gsub(solvfile.asString(),"\"","\\\"") );
-        if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
-        {
-          // FIXME this does only work form dir: URLs
-          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"",
-                            str::gsub( info.baseUrlsBegin()->getPathName(),"\"","\\\"" ).c_str(),
-                            toFile.c_str() );
-        }
-        else
-        {
-          cmd << str::form( "repo2solv.sh \"%s\" > \"%s\"",
-                            str::gsub( rawpath.asString(),"\"","\\\"" ).c_str(),
-                            toFile.c_str() );
-        }
-        MIL << "Executing: " << cmd.str() << endl;
-        ExternalProgram prog( cmd.str(), ExternalProgram::Stderr_To_Stdout );
+        ExternalProgram::Arguments cmd;
+        cmd.push_back( "repo2solv.sh" );
 
-        cmd << endl;
+        // repo2solv expects -o as 1st arg!
+        cmd.push_back( "-o" );
+        cmd.push_back( solvfile.asString() );
+
+        if ( repokind == RepoType::RPMPLAINDIR )
+          // FIXME this does only work form dir: URLs
+          cmd.push_back( info.baseUrlsBegin()->getPathName() );
+        else
+          cmd.push_back( rawpath.asString() );
+
+        dumpRangeLine( MIL << "Executing: ", cmd.begin(), cmd.end() ) << endl;
+        ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+
         for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
-          cmd << "     " << output;
+          //cmd << "     " << output;
         }
 
         int ret = prog.close();
         if ( ret != 0 )
         {
           RepoException ex(str::form("Failed to cache repo (%d).", ret));
-          ex.remember( cmd.str() );
+          //ex.remember( cmd.str() );
           ZYPP_THROW(ex);
         }
 
@@ -2037,7 +2034,7 @@ namespace zypp
     if ( locale.country().hasCode() )
     {
       Locale l(locale.language());
-      std::set<Locale>::const_iterator it = available.find(l); 
+      std::set<Locale>::const_iterator it = available.find(l);
       if ( it != available.end() )
       {
         Pathname ret = ldir / ("license."+l.code()+".txt");
@@ -2069,13 +2066,14 @@ namespace zypp
 
   std::set<Locale> getAvailableLicenseLocales( const Pathname & ldir )
   {
+    return std::set<Locale>();
 #warning getAvailableLicenseLocales not yet implemented
   }
 
   // Pathname getInfoFile( const RepoInfo & repo ) media.1/info.txt
 
   ////////////////////////////////////////////////////////////////////////////
-  
+
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )
   {
     return str << *obj._pimpl;
