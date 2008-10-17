@@ -16,7 +16,9 @@ using boost::unit_test::test_case;
 #include "zypp/Target.h"
 #include "zypp/ResPool.h"
 
+using std::cin;
 using std::cout;
+using std::cerr;
 using std::endl;
 using namespace zypp;
 
