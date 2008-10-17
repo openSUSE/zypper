@@ -12,7 +12,7 @@
 #include "FakePool.h"
 
 #define INCLUDE_TESTSETUP_WITHOUT_BOOST
-#include "zypp/../tests/include/TestSetup.h"
+#include "zypp/../tests/lib/TestSetup.h"
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
 #include <zypp/base/Easy.h>

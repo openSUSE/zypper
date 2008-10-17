@@ -24,7 +24,7 @@ ADD_CUSTOM_TARGET( ma_test
 
 ## ############################################################
 
-FOREACH( loop_var NewPool DumpSolv ScanSource Iorder Xml Ex Main FakePool AOUT Parse Test Basic Sat)
+FOREACH( loop_var MaTest NewPool DumpSolv Iorder Xml Ex Main FakePool AOUT Parse Test Basic Sat)
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
@@ -34,13 +34,12 @@ FOREACH( loop_var NewPool DumpSolv ScanSource Iorder Xml Ex Main FakePool AOUT P
 ENDFOREACH( loop_var )
 
 
-FOREACH( loop_var MaTest )
+FOREACH( loop_var ToolScanRepos )
    ADD_EXECUTABLE( ${loop_var}
       ${loop_var}.cc
    )
    TARGET_LINK_LIBRARIES( ${loop_var}
       zypp
-#${QT_LIBRARIES}
    )
 ENDFOREACH( loop_var )
 
