@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 17 17:26:25 CEST 2008 - ma@suse.de
+
+- Call 'repo2solv.sh -o' instead of using output redirection. (bnc #420046)
+- revision 11397
+
+-------------------------------------------------------------------
 Thu Oct 16 17:57:15 CEST 2008 - jkupec@suse.cz
 
 - repository license methods added to RepoManager (bnc #372386)
