@@ -78,6 +78,33 @@ BOOST_AUTO_TEST_CASE(fetcher)
   //MIL << fetcher;
 }
 
+BOOST_AUTO_TEST_CASE(fetcher_remove)
+{
+  // at this point the key is already trusted
+  {
+      // add the key as trusted
+      //getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
+
+      WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str() );
+      web.start();
+
+      MediaSetAccess media( Url("http://localhost:9099"), "/" );
+      Fetcher fetcher;
+      filesystem::TmpDir dest;
+
+      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir"), true);
+      fetcher.start( dest.path(), media );
+
+      fetcher.reset();
+
+      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir-broken"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);  
+
+      fetcher.reset();
+
+      web.stop();
+  }
+}
 
 
 // vim: set ts=2 sts=2 sw=2 ai et:

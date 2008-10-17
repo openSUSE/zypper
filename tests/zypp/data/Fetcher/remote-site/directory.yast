@@ -1,0 +1,10 @@
+complexdir/
+complexdir-broken/
+diffs/
+file-1.txt
+file-2.txt
+file-3.txt
+file-4.txt
+file-current.txt
+file-current.txt.asc
+file-current.txt.key

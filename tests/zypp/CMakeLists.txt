@@ -32,4 +32,3 @@ ADD_TESTS(
   Vendor2
 )
 
-#TARGET_LINK_LIBRARIES(Fetcher_test boost_thread-mt)

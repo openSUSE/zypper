@@ -7,4 +7,4 @@ ADD_LIBRARY(zypp_test_utils
  WebServer.cc
 )
 
-TARGET_LINK_LIBRARIES(zypp_test_utils shttp zypp)
+TARGET_LINK_LIBRARIES(zypp_test_utils shttp zypp boost_thread-mt)
