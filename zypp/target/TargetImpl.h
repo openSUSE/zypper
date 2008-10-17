@@ -146,7 +146,7 @@ namespace zypp
 
       /** \copydoc Target::targetDistributionRelease()*/
       std::string targetDistributionRelease() const;
-      
+
       /** \copydoc Target::distributionVersion()*/
       std::string distributionVersion() const;
 
@@ -161,6 +161,8 @@ namespace zypp
       SoftLocksFile _softLocksFile;
       /** Hard-Locks database */
       HardLocksFile _hardLocksFile;
+      /** Cache distributionVersion */
+      mutable std::string _distributionVersion;
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;
