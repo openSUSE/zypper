@@ -1900,6 +1900,7 @@ namespace zypp
     return repo::ServiceType::NONE;
   }
 
+#if 0
   ////////////////////////////////////////////////////////////////////////////
   //
   // Misc. utils
@@ -2075,7 +2076,7 @@ namespace zypp
   }
 
   // Pathname getInfoFile( const RepoInfo & repo ) media.1/info.txt
-
+#endif
   ////////////////////////////////////////////////////////////////////////////
 
   std::ostream & operator<<( std::ostream & str, const RepoManager & obj )

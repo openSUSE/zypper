@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 20 16:44:58 CEST 2008 - ma@suse.de
+
+- RepoInfo: Add methods to handle repository licenses. (bnc #372386)
+- revision 11419
+
+-------------------------------------------------------------------
 Mon Oct 20 16:39:41 CEST 2008 - ma@suse.de
 
 - Adapt to changed satsolver dataiterator API.
