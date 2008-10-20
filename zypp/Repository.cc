@@ -62,7 +62,7 @@ namespace zypp
     zypp::Date Repository::generatedTimestamp() const
     {
         ::Dataiterator di;
-        ::dataiterator_init(&di, get(), SOLVID_META, REPOSITORY_TIMESTAMP, 0, 0);
+        ::dataiterator_init(&di, sat::Pool::instance().get(), get(), SOLVID_META, REPOSITORY_TIMESTAMP, 0, 0);
         if (::dataiterator_step(&di))
         {
             do
@@ -92,7 +92,7 @@ namespace zypp
     zypp::Date Repository::suggestedExpirationTimestamp() const
     {
         ::Dataiterator di;
-        ::dataiterator_init(&di, get(), SOLVID_META, REPOSITORY_EXPIRE, 0, 0);
+        ::dataiterator_init(&di, sat::Pool::instance().get(), get(), SOLVID_META, REPOSITORY_EXPIRE, 0, 0);
         Date generated = generatedTimestamp();
         // do not calculate over a missing generated
         // timestamp

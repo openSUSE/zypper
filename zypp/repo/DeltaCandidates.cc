@@ -80,7 +80,8 @@ namespace zypp
         DBG << "package: " << package << endl;
         {
           ::Dataiterator di;
-          ::dataiterator_init(&di, NULL
+          ::dataiterator_init(&di
+            , sat::Pool::instance().get()
             , it->get()                                              // in this repo
             , SOLVID_META                                         // in metadata
             , REPOSITORY_DELTAINFO, 0, 0 );
@@ -90,6 +91,7 @@ namespace zypp
               ::dataiterator_setpos( &di );
               ::Dataiterator di2;
               ::dataiterator_init(&di2
+                  , sat::Pool::instance().get()
                   , it->get()                                       // in this repo
                   , SOLVID_POS                                   // in metadata
                   , DELTA_PACKAGE_NAME

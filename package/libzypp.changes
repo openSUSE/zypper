@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 20 16:39:41 CEST 2008 - ma@suse.de
+
+- Adapt to changed satsolver dataiterator API.
+- revision 11418
+
+-------------------------------------------------------------------
 Fri Oct 17 18:31:47 CEST 2008 - ma@suse.de
 
 - Secure download of license file on repo refresh (bnc #372386)

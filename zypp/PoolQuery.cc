@@ -49,7 +49,7 @@ namespace zypp
   {
   public:
     Impl()
-      : _flags( SEARCH_ALL_REPOS | SEARCH_NOCASE | SEARCH_SUBSTRING | SEARCH_SKIP_KIND )
+      : _flags( SEARCH_NOCASE | SEARCH_SUBSTRING | SEARCH_SKIP_KIND )
       , _status_flags(ALL)
       , _match_word(false)
       , _require_all(false)
@@ -269,12 +269,7 @@ attremptycheckend:
       }
     }
 
-    // tell the Dataiterator to search only in one repo if only one specified
-    if (_repos.size() == 1)
-      _cflags &= ~SEARCH_ALL_REPOS;
-
     _compiled = true;
-
     DBG << asString() << endl;
   }
 
@@ -391,7 +386,7 @@ attremptycheckend:
 
     // if only one repository has been specified, find it in the pool
     Repository repo;
-    if (!(_cflags & SEARCH_ALL_REPOS) && _repos.size() == 1)
+    if ( _repos.size() == 1 )
     {
       string theone = *_repos.begin();
       repo = pool.reposFind(theone);
@@ -401,9 +396,6 @@ attremptycheckend:
         return end();
       }
     }
-
-    if ((_cflags & SEARCH_ALL_REPOS) || repo == Repository::noRepository)
-      repo = *pool.reposBegin();
 
     DBG << "_cflags:" << _cflags << endl;
 
@@ -415,7 +407,8 @@ attremptycheckend:
     if (_rcattrs.empty())
     {
       ::dataiterator_init(_rdit.get(),
-        repo.get(),                                  // either the first repo or the repo to search
+        pool.get(),
+        repo.get(),                                  // either NULL or the repo to search
         0,                                           // search all solvables
         0,                                           // attribute id - only if 1 attr key specified
         _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
@@ -424,7 +417,8 @@ attremptycheckend:
     else if (_rcattrs.size() == 1)
     {
       ::dataiterator_init(_rdit.get(),
-        repo.get(),                                  // either the first repo or the repo to search
+        pool.get(),
+        repo.get(),                                  // either NULL or the repo to search
         0,                                           // search all solvables
         _rcattrs.begin()->first.id(),                // keyname - attribute id - only if 1 attr key specified
         _rcstrings.empty() ? 0 : _rcstrings.c_str(), // compiled search string
@@ -433,7 +427,8 @@ attremptycheckend:
     else
     {
       ::dataiterator_init(_rdit.get(),
-        repo.get(),                                  // either the first repo or the repo to search
+        pool.get(),
+        repo.get(),                                  // either NULL or the repo to search
         0, /*search all resolvables */
         0, /*keyname - if only 1 attr key specified, pass it here, otherwise do more magic */
         0, //qs.empty() ? 0 : qs.c_str(), /* create regex, pass it here */
@@ -478,7 +473,7 @@ attremptycheckend:
     o << "string match flags:" << endl;
     o << "* string/substring/glob/regex: " << (_cflags & SEARCH_STRINGMASK) << endl;
     o << "* SEARCH_NOCASE: " << ((_cflags & SEARCH_NOCASE) ? "yes" : "no") << endl;
-    o << "* SEARCH_ALL_REPOS: " << ((_cflags & SEARCH_ALL_REPOS) ? "yes" : "no") << endl;
+    o << "* SEARCH_ALL_REPOS: " << (_repos.empty() ? "yes" : "no") << endl;
     o << "status filter flags:" << _status_flags << endl;
     o << "version: "<< _op << " " << _edition.asString() << endl;
 
@@ -704,13 +699,13 @@ attremptycheckend:
               else
                 regex_p = _regex.get();
 #warning wrap matcher an use it
-              matches = ::dataiterator_match(base().get(), _flags, regex_p);
+              matches = ::dataiterator_match_obsolete(base().get(), _flags, regex_p);
             }
             else
             {
               const string & sstr =
                 _str.empty() ? ai->second : _str;
-              matches = ::dataiterator_match(base().get(), _flags, sstr.c_str());
+              matches = ::dataiterator_match_obsolete(base().get(), _flags, sstr.c_str());
             }
 
               // if (matches)
@@ -782,7 +777,6 @@ attremptycheckend:
       return;
     }
     _pimpl->_repos.insert(repoalias);
-    _pimpl->_flags &= ~SEARCH_ALL_REPOS;
   }
 
 

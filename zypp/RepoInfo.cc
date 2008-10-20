@@ -266,6 +266,16 @@ namespace zypp
   }
 
 
+  bool RepoInfo::hasLicense() const
+  { return false; }
+
+  ManagedFile RepoInfo::getLicense( const Locale & lang_r )
+  { return ManagedFile(); }
+
+  LocaleSet RepoInfo::getLicenseLocales() const
+  { return LocaleSet(); }
+
+
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpOn(str);
@@ -289,9 +299,6 @@ namespace zypp
 
     return str;
   }
-
-  std::ostream & RepoInfo::dumpRepoOn( std::ostream & str ) const
-  { return dumpAsIniOn(str); }
 
   std::ostream & RepoInfo::dumpAsIniOn( std::ostream & str ) const
   {

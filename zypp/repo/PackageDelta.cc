@@ -36,7 +36,7 @@ namespace zypp
     {
       MIL << "creating deltarpm from repo " << repo.alias() << ", id " << extraid << endl;
       ::Dataiterator di;
-      ::dataiterator_init(&di, NULL, repo.get(), extraid, 0, 0, 0);
+      ::dataiterator_init(&di, sat::Pool::instance().get(), repo.get(), extraid, 0, 0, 0);
 
       string locdir;
       string locname;

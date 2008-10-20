@@ -1615,9 +1615,10 @@ namespace zypp
       removeRepository(*rit);
   }
 
-
   void RepoManager::removeService( const ServiceInfo & service )
   { removeService(service.alias()); }
+
+  ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::refreshServices()
   {
@@ -1633,15 +1634,17 @@ namespace zypp
     }
   }
 
-  void RepoManager::refreshService( const ServiceInfo & dont_use_service_r )
-  {
-    assert_alias( dont_use_service_r );
-    assert_url( dont_use_service_r );
+  void RepoManager::refreshService( const ServiceInfo & service )
+  { refreshService( service.alias() ); }
 
+  void RepoManager::refreshService( const std::string & alias )
+  {
+    ServiceInfo service( getService( alias ) );
+    assert_alias( service );
+    assert_url( service );
     // NOTE: It might be necessary to modify and rewrite the service info.
     // Either when probing the type, or when adjusting the repositories
-    // enable/disable state. Thus 'dont_use_service_r' but 'service':
-    ServiceInfo service( dont_use_service_r );
+    // enable/disable state.:
     bool serviceModified = false;
     MIL << "going to refresh service '" << service.alias() << "', url: "<< service.url() << endl;
 
@@ -1812,6 +1815,7 @@ namespace zypp
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////////
 
   void RepoManager::modifyService(const std::string & oldAlias, const ServiceInfo & service)
   {

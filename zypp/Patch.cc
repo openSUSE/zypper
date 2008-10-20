@@ -117,6 +117,7 @@ namespace zypp
 
       ::Dataiterator di;
       ::dataiterator_init(&di
+          , sat::Pool::instance().get()
           , repository().get()                           // in this repo
           , sat::Solvable::id()                          // in metadata
               , UPDATE_COLLECTION, 0, 0 );
@@ -126,6 +127,7 @@ namespace zypp
           ::dataiterator_setpos( &di );
           ::Dataiterator di2;
           ::dataiterator_init(&di2
+              , sat::Pool::instance().get()
               , repository().get()                           // in this repo
               , SOLVID_POS                                   // in metadata
                   ,0,0,0 );

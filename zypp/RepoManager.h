@@ -549,7 +549,7 @@ namespace zypp
      * \throws Exception if file contain more services and rewrite file failed
      */
     void removeService( const std::string & alias );
-
+    /** \overload Take alias from ServiceInfo */
     void removeService( const ServiceInfo & service );
 
 
@@ -563,9 +563,13 @@ namespace zypp
     /**
      * Refresh specific service.
      *
-     * \param name service structure
+     * \param alias unique indientifier of the service to refresh
+     *
+     * \throws RepoException if service is not found.
      * \throws MediaException If there's a problem downloading the repo index file.
      */
+    void refreshService( const std::string & alias );
+    /** \overload Take alias from ServiceInfo */
     void refreshService( const ServiceInfo & service );
 
     /**
@@ -584,7 +588,7 @@ namespace zypp
      * \throws RepoException if sservice with oldAlias is not known
      * \throws Exception if have problems with files
      */
-    void modifyService(const std::string & oldAlias, const ServiceInfo & service);
+    void modifyService( const std::string & oldAlias, const ServiceInfo & service );
 
   private:
     /**
@@ -648,45 +652,45 @@ namespace zypp
     /**
      * Checks for existing repository license files of \a repo and extract them
      * in \a target directory.
-     * 
+     *
      * \param repo   Repository to check.
      * \param target Path to directory where the license files should be copied.
      * \return true if license files were found and successfully extracted,
      *         false otherwise.
      */
-    bool getLicenseFiles(const RepoInfo & repo, const Pathname & target);
+    bool getLicenseFiles(const RepoInfo & repo, const Pathname & target) ZYPP_DEPRECATED;
 
     /**
      * Returns path to a license file suitable for current system locale, given
      * a directory with all available license files. License files' names must
      * match the following regex: <tt>^license\.?(.*)\.txt$</tt> where the
      * substring enclosed in parentheses is the locale code.
-     * 
-     * Examples: license.en_US.txt, license.en.txt, license.txt 
-     * 
+     *
+     * Examples: license.en_US.txt, license.en.txt, license.txt
+     *
      * \param ldir Path to a directory containing all license files.
      * \return path to the license file, or an empty path on failure.
-     * 
+     *
      * \see getLicenseFiles(RepoInfo const&, Pathanme const&)
      */
-    Pathname getLicenseFile( const Pathname & ldir );
+    Pathname getLicenseFile( const Pathname & ldir ) ZYPP_DEPRECATED;
 
     /**
      * Returns path to a license file suitable for given \a locale, given
      * a directory with all available license files.
-     * 
+     *
      * \param ldir Path to a directory containing all license files.
      * \return path to the license file, or an empty path on failure.
-     * 
+     *
      * \see getLicenseFiles(RepoInfo const&, Pathanme const&)
      * \see getLicenseFile(Pathanme const&)
      */
-    Pathname getLicenseFile( const Pathname & ldir, const Locale & locale );
+    Pathname getLicenseFile( const Pathname & ldir, const Locale & locale ) ZYPP_DEPRECATED;
 
     /**
      * \todo implement
      */
-    std::set<Locale> getAvailableLicenseLocales( const Pathname & ldir );
+    std::set<Locale> getAvailableLicenseLocales( const Pathname & ldir ) ZYPP_DEPRECATED;
 
   protected:
     RepoStatus rawMetadataStatus( const RepoInfo &info );
