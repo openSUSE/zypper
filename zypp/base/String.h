@@ -569,7 +569,7 @@ namespace zypp
 
       /**
        * Escape desired character \a c using a backslash.
-       * 
+       *
        * For use when printing \a c separated values, and where
        * \ref joinEscaped() is too heavy.
        */
@@ -646,16 +646,28 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    /** \name String prefix handling.
+    /** \name String prefix/suffix handling.
      */
     //@{
-   /** Return whether \a str_r has prefix \a prefix_r. */
+    /** Return whether \a str_r has prefix \a prefix_r. */
     inline bool hasPrefix( const C_Str & str_r, const C_Str & prefix_r )
     { return( ::strncmp( str_r, prefix_r, prefix_r.size() ) == 0 ); }
 
     /** Strip a \a prefix_r from \a str_r and return the resulting string. */
     inline std::string stripPrefix( const C_Str & str_r, const C_Str & prefix_r )
     { return( hasPrefix( str_r, prefix_r ) ? str_r + prefix_r.size() : str_r.c_str() ); }
+
+    /** Return whether \a str_r has suffix \a suffix_r. */
+    inline bool hasSuffix( const C_Str & str_r, const C_Str & suffix_r )
+    { return( str_r.size() >= suffix_r.size() && ::strncmp( str_r + str_r.size() - suffix_r.size() , suffix_r, suffix_r.size() ) == 0 ); }
+
+    /** Strip a \a suffix_r from \a str_r and return the resulting string. */
+    inline std::string stripSuffix( const C_Str & str_r, const C_Str & suffix_r )
+    {
+      if ( hasSuffix( str_r, suffix_r ) )
+        return std::string( str_r, str_r.size() - suffix_r.size() );
+      return str_r.c_str();
+    }
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace str
