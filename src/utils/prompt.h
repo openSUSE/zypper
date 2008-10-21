@@ -4,6 +4,19 @@
 #include "output/prompt.h"
 #include "main.h" // for gettext macros
 
+/**
+ * Example:
+ * <code>
+ * PromptOptions popts;
+ * popts.setOptions(_("y/n/p"), 0 / * default reply * /);
+ * popts.setOptionHelp(0, _("Help for option 'y'"));
+ * popts.setOptionHelp(1, _("Help for option 'n'"));
+ * ...
+ * zypper.out().prompt(PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts);
+ * unsigned int reply =
+ *   get_prompt_reply(zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts);
+ * </code>
+ */
 class PromptOptions
 {
 public:
@@ -16,7 +29,7 @@ public:
 
   /**
    * Constructor.
-   * 
+   *
    * \param option_str translated option string containing one or more
    *                   options separated by slash '/' character
    *                   e.g. "yes/no/?" or "1/s/r/c"
@@ -34,7 +47,7 @@ public:
   bool empty() const { return _options.empty(); }
 
   const std::string optionHelp(unsigned int opt) const
-  { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; } 
+  { static std::string empty; return opt < _opt_help.size() ? _opt_help[opt] : empty; }
   //const std::string getOptionHelp(const std::string & opt_str);
   void setOptionHelp(unsigned int opt, const std::string & help_str);
   bool helpEmpty() const { return _opt_help.empty(); }
@@ -121,7 +134,7 @@ std::string zcb_error2str (Error error, const std::string & reason)
     if (!reason.empty())
       errstr += ": " + reason;
   }
-  
+
   return errstr;
 }
 
