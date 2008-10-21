@@ -1018,19 +1018,23 @@ namespace zypp
         else
           cmd.push_back( rawpath.asString() );
 
-        dumpRangeLine( MIL << "Executing: ", cmd.begin(), cmd.end() ) << endl;
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+        std::string errdetail;
 
         for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
-          //cmd << "     " << output;
+          if ( errdetail.empty() ) {
+            errdetail = prog.command();
+            errdetail += '\n';
+          }
+          errdetail += output;
         }
 
         int ret = prog.close();
         if ( ret != 0 )
         {
           RepoException ex(str::form("Failed to cache repo (%d).", ret));
-          //ex.remember( cmd.str() );
+          ex.remember( errdetail );
           ZYPP_THROW(ex);
         }
 
