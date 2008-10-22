@@ -13,11 +13,12 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/DefaultIntegral.h"
-#include "zypp/media/MediaAccess.h"
 #include "zypp/parser/xml/XmlEscape.h"
 
 #include "zypp/RepoInfo.h"
 #include "zypp/repo/RepoInfoBaseImpl.h"
+#include "zypp/ExternalProgram.h"
+#include "zypp/media/MediaAccess.h"
 
 using namespace std;
 using zypp::xml::escape;
@@ -55,6 +56,11 @@ namespace zypp
         const_cast<Impl*>(this)->type = t;
       }
     }
+
+  public:
+    Pathname licenseTgz() const
+    { return metadatapath.empty() ? Pathname() : metadatapath / "license.tar.gz"; }
+
 
   public:
     TriBool gpgcheck;
@@ -265,16 +271,93 @@ namespace zypp
     return (bool) _pimpl->keeppackages;
   }
 
+  ///////////////////////////////////////////////////////////////////
 
   bool RepoInfo::hasLicense() const
-  { return false; }
+  {
+    Pathname licenseTgz( _pimpl->licenseTgz() );
+    INT << alias() << ": " << PathInfo( licenseTgz ) << endl;
+    return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
+  }
 
-  ManagedFile RepoInfo::getLicense( const Locale & lang_r )
-  { return ManagedFile(); }
+  std::string RepoInfo::getLicense( const Locale & lang_r )
+  {
+    LocaleSet avlocales( getLicenseLocales() );
+    if ( avlocales.empty() )
+      return std::string();
+
+    Locale getLang( Locale::bestMatch( avlocales, lang_r ) );
+    if ( getLang == Locale::noCode
+         && avlocales.find( Locale::noCode ) == avlocales.end() )
+    {
+      WAR << "License.tar.gz contains no fallback text! " << *this << endl;
+      // Using the fist locale instead of returning no text at all.
+      // So the user might recognize that there is a license, even if he
+      // can't read it.
+      getLang = *avlocales.begin();
+    }
+
+    // now extract the license file.
+    static const std::string licenseFileFallback( "license.txt" );
+    std::string licenseFile( getLang == Locale::noCode
+                             ? licenseFileFallback
+                             : str::form( "license.%s.txt", getLang.code().c_str() ) );
+
+    ExternalProgram::Arguments cmd;
+    cmd.push_back( "tar" );
+    cmd.push_back( "-x" );
+    cmd.push_back( "-z" );
+    cmd.push_back( "-O" );
+    cmd.push_back( "-f" );
+    cmd.push_back( _pimpl->licenseTgz().asString() ); // if it not exists, avlocales was empty.
+    cmd.push_back( licenseFile );
+
+    std::string ret;
+    ExternalProgram prog( cmd, ExternalProgram::Discard_Stderr );
+    for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
+    {
+      ret += output;
+    }
+    prog.close();
+    return ret;
+  }
 
   LocaleSet RepoInfo::getLicenseLocales() const
-  { return LocaleSet(); }
+  {
+    Pathname licenseTgz( _pimpl->licenseTgz() );
+    if ( licenseTgz.empty() || ! PathInfo( licenseTgz ).isFile() )
+      return LocaleSet();
 
+    ExternalProgram::Arguments cmd;
+    cmd.push_back( "tar" );
+    cmd.push_back( "-t" );
+    cmd.push_back( "-z" );
+    cmd.push_back( "-f" );
+    cmd.push_back( licenseTgz.asString() );
+
+    LocaleSet ret;
+    ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+    for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() )
+    {
+      static const C_Str license( "license." );
+      static const C_Str dotTxt( ".txt\n" );
+      if ( str::hasPrefix( output, license ) && str::hasSuffix( output, dotTxt ) )
+      {
+        if ( output.size() <= license.size() +  dotTxt.size() ) // license.txt
+          ret.insert( Locale() );
+        else
+          ret.insert( Locale( std::string( output.c_str()+license.size(), output.size()- license.size() - dotTxt.size() ) ) );
+      }
+      else
+      {
+        WAR << "  " << output;
+      }
+    }
+    prog.close();
+    return ret;
+  }
+
+  ///////////////////////////////////////////////////////////////////
 
   std::ostream & RepoInfo::dumpOn( std::ostream & str ) const
   {
@@ -296,6 +379,9 @@ namespace zypp
 
     if (!targetDistribution().empty())
       str << "- targetdistro: " << targetDistribution() << std::endl;
+
+    if (!metadataPath().empty())
+      str << "- metadataPath: " << metadataPath() << std::endl;
 
     return str;
   }

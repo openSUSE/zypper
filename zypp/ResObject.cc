@@ -68,7 +68,12 @@ namespace zypp
   { return lookupStrAttribute( sat::SolvAttr::delnotify, lang_r ); }
 
   std::string ResObject::licenseToConfirm( const Locale & lang_r ) const
-  { return lookupStrAttribute( sat::SolvAttr::eula, lang_r ); }
+  {
+    std::string ret = lookupStrAttribute( sat::SolvAttr::eula, lang_r );
+    if ( ret.empty() && isKind<Product>() )
+      return repoInfo().getLicense( lang_r );
+    return ret;
+  }
 
   std::string ResObject::distribution() const
   { return lookupStrAttribute( sat::SolvAttr::distribution ); }

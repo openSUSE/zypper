@@ -20,7 +20,6 @@
 
 #include "zypp/Url.h"
 #include "zypp/Locale.h"
-#include "zypp/ManagedFile.h"
 #include "zypp/repo/RepoType.h"
 #include "zypp/repo/RepoVariables.h"
 
@@ -301,8 +300,8 @@ namespace zypp
       /** Whether there is a license associated with the repo. */
       bool hasLicense() const;
 
-      /** Return the best license file for the current (or a specified) locale. */
-      ManagedFile getLicense( const Locale & lang_r = Locale() );
+      /** Return the best license for the current (or a specified) locale. */
+      std::string getLicense( const Locale & lang_r = Locale() );
 
       /** Return the locales the license is available for.
        * \ref Locale::noCode is included in case of \c license.txt which does
