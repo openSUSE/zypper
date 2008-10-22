@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 22 14:33:10 CEST 2008 - ma@suse.de
+
+- For retrieving a product license fall back to license.tar.gz. (bnc #372386)
+- revision 11447
+
+-------------------------------------------------------------------
 Wed Oct 22 14:16:33 CEST 2008 - dmacvicar@suse.de
 
 - move anonymous unique id to a private http header
