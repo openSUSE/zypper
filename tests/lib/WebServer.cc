@@ -19,11 +19,11 @@ using namespace zypp;
 
 static shttpd_ctx * do_init_ctx()
 {
-    static char *argv[] = {"a", "-ports", LISTENING_PORT, NULL};
+    static const char *argv[] = {"a", "-ports", LISTENING_PORT, NULL};
     static int argc = sizeof(argv) / sizeof(argv[0]) - 1;
     shttpd_ctx *ctx;
     
-    ctx = shttpd_init(argc, argv);
+    ctx = shttpd_init(argc, const_cast<char**>(argv));
     return ctx;
 }
 
