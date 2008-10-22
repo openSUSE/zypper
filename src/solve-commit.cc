@@ -627,7 +627,7 @@ static int summary(Zypper & zypper)
   // objects from previous lists that
   // are not supported
   KindToResObjectSet tounsupported;
-  
+
   // iterate the to_be_installed to find installs/upgrades/downgrades + size info
   ByteCount download_size, new_installed_size;
 
@@ -644,8 +644,8 @@ static int summary(Zypper & zypper)
       if ( pkg )
       {
           // FIXME refactor with libzypp Package::vendorSupportAvailable()
-          
-          if ( pkg->maybeUnsupported() ) 
+
+          if ( pkg->maybeUnsupported() )
               tounsupported[res->kind()].insert(res);
       }
 
@@ -1116,18 +1116,23 @@ void solve_and_commit (Zypper & zypper)
             RepoManager manager(zypper.globalOpts().rm_options );
 
             bool refresh_needed = false;
-            for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
-                      it != e.info().baseUrlsEnd(); ++it)
-              {
-                RepoManager::RefreshCheckStatus stat = manager.
-                              checkIfToRefreshMetadata(e.info(), *it,
-                              RepoManager::RefreshForced );
-                if ( stat == RepoManager::REFRESH_NEEDED )
+            try
+            {
+              for(RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin();
+                        it != e.info().baseUrlsEnd(); ++it)
                 {
-                  refresh_needed = true;
-                  break;
+                  RepoManager::RefreshCheckStatus stat = manager.
+                                checkIfToRefreshMetadata(e.info(), *it,
+                                RepoManager::RefreshForced );
+                  if ( stat == RepoManager::REFRESH_NEEDED )
+                  {
+                    refresh_needed = true;
+                    break;
+                  }
                 }
-              }
+            }
+            catch (const Exception &)
+            { DBG << "check if to refresh exception caught, ignoring" << endl; }
 
             std::string hint = _("Please see the above error message for a hint.");
             if (refresh_needed)
