@@ -90,10 +90,13 @@ namespace zypp
 
     /** Return the best match for \ref Locale \c requested_r within the available \c avLocales_r.
      *
-     * If neither \c requested_r nor any of it's \ref fallback locales are available,
-     * \ref Locale::noCode is returned.
+     * If \c requested_r is nor specified or equals \ref Locale::noCode,
+     * \ref ZConfig::defaultTextLocale is assumed.
+     *
+     * If neither \c requested_r nor any of it's \ref fallback locales
+     * are available, \ref Locale::noCode is returned.
     */
-    static Locale bestMatch( const LocaleSet & avLocales_r, const Locale & requested_r );
+    static Locale bestMatch( const LocaleSet & avLocales_r, const Locale & requested_r = Locale() );
 
   private:
     /** Pointer to implementation */
