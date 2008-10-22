@@ -113,6 +113,8 @@ namespace zypp
         info.setAutorefresh( true );
         info.setEnabled( true );
         ret.setInfo( info );
+        // indicate
+        ::pool_set_installed( ret.get() );
       }
       return ret;
     }
