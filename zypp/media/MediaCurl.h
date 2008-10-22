@@ -98,6 +98,9 @@ class MediaCurl : public MediaHandler {
     /** The user agent string */
     static const char *const agentString();
 
+    /** anonymous id header used to count unique users */
+    static const char *const anonymousIdHeader();
+
   private:
     /**
      * Return a comma separated list of available authentication methods

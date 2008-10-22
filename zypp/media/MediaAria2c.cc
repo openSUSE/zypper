@@ -22,6 +22,9 @@
 #include "zypp/base/Gettext.h"
 #include "zypp/ZYppCallbacks.h"
 
+#include "zypp/Target.h"
+#include "zypp/ZYppFactory.h"
+
 #include "zypp/media/MediaAria2c.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
@@ -76,12 +79,59 @@ MediaAria2c::existsAria2cmd()
         return false;
 }
 
+const char *const MediaAria2c::anonymousIdHeader()
+{
+  // we need to add the release and identifier to the
+  // agent string.
+  // The target could be not initialized, and then this information
+  // is not available.
+  Target_Ptr target;
+  // FIXME this has to go away as soon as the target
+  // does not throw when not initialized.
+  try {
+      target = zypp::getZYpp()->target();
+  }
+  catch ( const Exception &e )
+  {
+      // nothing to do
+  }
+
+  static const std::string _value(
+      str::form(
+          "X-ZYpp-AnonymousUniqueId: %s",
+          target ? target->anonymousUniqueId().c_str() : "" )
+  );
+  return _value.c_str();
+}
+      
 const char *const MediaAria2c::agentString()
 {
-	static const std::string _value( str::form( "ZYpp %s (with %s)", VERSION, MediaAria2c::_aria2cVersion.c_str() ));
-	return _value.c_str();
+  // we need to add the release and identifier to the
+  // agent string.
+  // The target could be not initialized, and then this information
+  // is not available.
+  Target_Ptr target;
+  // FIXME this has to go away as soon as the target
+  // does not throw when not initialized.
+  try {
+      target = zypp::getZYpp()->target();
+  }
+  catch ( const Exception &e )
+  {
+      // nothing to do
+  }
 
+  static const std::string _value(
+    str::form(
+       "ZYpp %s (aria2c %s) %s"
+       , VERSION
+       , MediaAria2c::_aria2cVersion.c_str()
+       , target ? target->targetDistribution().c_str() : ""
+    )
+  );
+  return _value.c_str();
 }
+
 
 MediaAria2c::MediaAria2c( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
@@ -127,6 +177,10 @@ void MediaAria2c::attachTo (bool next)
    _args.push_back("--summary-interval=1");
    _args.push_back("--follow-metalink=mem");
    _args.push_back("--check-integrity=true");
+
+   // add the anonymous id.
+   _args.push_back(str::form("--header=\"%s\"", anonymousIdHeader() ));
+   
 
   if ( next )
     ZYPP_THROW(MediaNotSupportedException(_url));

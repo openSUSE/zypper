@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 22 14:16:33 CEST 2008 - dmacvicar@suse.de
+
+- move anonymous unique id to a private http header
+  X-ZYpp-AnonymousUniqueId (bnc#431571 )
+
+-------------------------------------------------------------------
 Wed Oct 22 12:58:35 CEST 2008 - ma@suse.de
 
 - Adapt to satsolver-0.12 API.

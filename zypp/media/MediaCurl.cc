@@ -185,6 +185,31 @@ namespace zypp {
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
+const char *const MediaCurl::anonymousIdHeader()
+{
+  // we need to add the release and identifier to the
+  // agent string.
+  // The target could be not initialized, and then this information
+  // is not available.
+  Target_Ptr target;
+  // FIXME this has to go away as soon as the target
+  // does not throw when not initialized.
+  try {
+      target = zypp::getZYpp()->target();
+  }
+  catch ( const Exception &e )
+  {
+      // nothing to do
+  }
+
+  static const std::string _value(
+      str::form(
+          "X-ZYpp-AnonymousUniqueId: %s",
+          target ? target->anonymousUniqueId().c_str() : "" )
+  );
+  return _value.c_str();
+}
+      
 const char *const MediaCurl::agentString()
 {
   // we need to add the release and identifier to the
@@ -207,11 +232,7 @@ const char *const MediaCurl::agentString()
        "ZYpp %s (curl %s) %s"
        , VERSION
        , curl_version_info(CURLVERSION_NOW)->version
-       , target ?
-           str::form( " - %s on '%s'"
-             , target->anonymousUniqueId().c_str()
-             , target->targetDistribution().c_str()
-           ).c_str() :  ""
+       , target ? target->targetDistribution().c_str() : ""
     )
   );
   return _value.c_str();
@@ -470,6 +491,18 @@ void MediaCurl::attachTo (bool next)
       disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
+
+    // now add the anonymous id header
+    curl_slist *chunk = NULL;
+    chunk = curl_slist_append(chunk, anonymousIdHeader());
+    ret = curl_easy_setopt ( _curl, CURLOPT_HTTPHEADER, chunk );
+    curl_slist_free_all(chunk);
+    
+    if ( ret != 0) {
+      disconnectFrom();
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    }
+
   }
 
 

@@ -90,7 +90,8 @@ class MediaAria2c : public MediaHandler {
 
     /** The user agent string */
     static const char *const agentString();   
-    
+    /** anonymous id header used to count unique users */
+    static const char *const anonymousIdHeader();    
 
   private:
 
