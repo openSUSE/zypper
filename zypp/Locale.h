@@ -25,6 +25,9 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class Locale;
+  typedef std::tr1::unordered_set<Locale> LocaleSet;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Locale
@@ -83,6 +86,15 @@ namespace zypp
     /** Return a fallback locale for this locale, when giving up, returns empty Locale() */
     Locale fallback() const;
 
+  public:
+
+    /** Return the best match for \ref Locale \c requested_r within the available \c avLocales_r.
+     *
+     * If neither \c requested_r nor any of it's \ref fallback locales are available,
+     * \ref Locale::noCode is returned.
+    */
+    static Locale bestMatch( const LocaleSet & avLocales_r, const Locale & requested_r );
+
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
@@ -121,10 +133,6 @@ namespace zypp
     return( ! operator==( lhs, rhs ) );
   }
   //@}
-
-  ///////////////////////////////////////////////////////////////////
-
-  typedef std::tr1::unordered_set<Locale> LocaleSet;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -221,6 +221,21 @@ namespace zypp
   //
   Locale Locale::fallback() const
   { return _pimpl->fallback(); }
+
+  Locale Locale::bestMatch( const LocaleSet & avLocales_r, const Locale & requested_r )
+  {
+    if ( ! avLocales_r.empty() )
+    {
+      for ( Locale check( requested_r ); check != noCode; check = check.fallback() )
+      {
+        if ( avLocales_r.find( check ) != avLocales_r.end() )
+          return check;
+      }
+    }
+    return noCode;
+  }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
