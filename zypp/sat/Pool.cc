@@ -114,7 +114,7 @@ namespace zypp
         info.setEnabled( true );
         ret.setInfo( info );
         // indicate
-        ::pool_set_installed( ret.get() );
+        ::pool_set_installed( get(), ret.get() );
       }
       return ret;
     }
