@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct 22 15:47:06 CEST 2008 - jkupec@suse.cz
+
+- fixed unexpected exception when checking if refresh is needed
+  after a failed rpm download (bnc #436299)
+- r11449
+
+-------------------------------------------------------------------
 Tue Oct 14 16:51:26 CEST 2008 - jkupec@suse.cz
 
 - catch exceptions from initialization of callbacks, show an error
