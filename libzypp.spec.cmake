@@ -23,6 +23,7 @@ Source1:        @PACKAGE@-rpmlintrc
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
+Recommends:     logrotate
 BuildRequires:  cmake
 BuildRequires:  libsatsolver-devel >= 0.12.0 openssl-devel
 BuildRequires:  boost-devel curl-devel dejagnu doxygen gcc-c++ gettext-devel graphviz hal-devel libxml2-devel
@@ -50,8 +51,7 @@ Requires:       gpg2
 %else
 Requires:       gnupg
 %endif
-
-Requires:       satsolver-tools == %( echo `rpm -q --queryformat '%{VERSION}' satsolver-tools`)
+%requires_eq    satsolver-tools
 
 %description
 Package, Patch, Pattern, and Product Management
@@ -72,7 +72,6 @@ Requires:       libzypp == @VERSION@
 Requires:       libxml2-devel curl-devel openssl-devel rpm-devel glibc-devel zlib-devel
 Requires:       bzip2 popt-devel dbus-1-devel glib2-devel hal-devel boost-devel libstdc++-devel
 Requires:       cmake libsatsolver-devel >= 0.10.14
-Recommends:     logrotate
 Summary:        Package, Patch, Pattern, and Product Management - developers files
 Group:          System/Packages
 Provides:       yast2-packagemanager-devel
@@ -210,6 +209,7 @@ rm -rf "$RPM_BUILD_ROOT"
 %dir               /etc/zypp/repos.d
 %config(noreplace) /etc/zypp/zypp.conf
 %config(noreplace) /etc/zypp/systemCheck
+%config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
 %dir               %{_var}/lib/zypp
 %dir               %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
@@ -225,7 +225,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{prefix}/bin/package-manager-su
 %{_libdir}/libzypp*so.*
 %doc %_mandir/man5/locks.5.*
-%{_sysconfdir}/logrotate.d/zypp-history.lr
 
 %files devel
 %defattr(-,root,root)

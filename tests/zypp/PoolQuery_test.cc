@@ -1,21 +1,25 @@
-#include <stdio.h>
-#include <iostream>
-#include <iterator>
-#include <boost/test/auto_unit_test.hpp>
-#include <list>
-
-//#include "zypp/ZYppFactory.h"
+#include "TestSetup.h"
 #include "zypp/PoolQuery.h"
 #include "zypp/PoolQueryUtil.tcc"
-#include "TestSetup.h"
 
 #define BOOST_TEST_MODULE PoolQuery
 
-using std::cout;
-using std::endl;
-using std::string;
-using namespace zypp;
-using namespace boost::unit_test;
+/////////////////////////////////////////////////////////////////////////////
+static TestSetup test( "/tmp/x", Arch_x86_64 );
+
+BOOST_AUTO_TEST_CASE(pool_query_init)
+{
+  //test.loadTarget(); // initialize and load target
+  //test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "@System" );
+  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
+  test.loadRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1", "@system" );
+
+  dumpRange( USR, test.pool().knownRepositoriesBegin(),
+                  test.pool().knownRepositoriesEnd() );
+  USR << "pool: " << test.pool() << endl;
+}
+/////////////////////////////////////////////////////////////////////////////
 
 struct PrintAndCount
 {
@@ -25,42 +29,12 @@ struct PrintAndCount
   {
     zypp::PoolItem pi( zypp::ResPool::instance().find( solvable ) );
     cout << pi.resolvable() << endl;
-    // name: yast2-sound 2.16.2-9 i586
     ++_count;
     return true;
   }
 
   unsigned _count;
 };
-
-/*
-static void init_pool()
-{
-  Pathname dir(TESTS_SRC_DIR);
-  dir += "/zypp/data/PoolQuery";
-
-  ZYpp::Ptr z = getZYpp();
-  ZConfig::instance().setSystemArchitecture(Arch("i586"));
-
-  RepoInfo i1; i1.setAlias("factory");
-  sat::Pool::instance().addRepoSolv(dir / "factory.solv", i1);
-  RepoInfo i2; i2.setAlias("factory-nonoss");
-  sat::Pool::instance().addRepoSolv(dir / "factory-nonoss.solv", i2);
-  RepoInfo i3; i3.setAlias("zypp_svn");
-  sat::Pool::instance().addRepoSolv(dir / "zypp_svn.solv", i3);
-  RepoInfo i4; i4.setAlias("@System");
-  sat::Pool::instance().addRepoSolv(dir / "@System.solv", i4);
-}
-*/
-
-BOOST_AUTO_TEST_CASE(pool_query_init)
-{
-  TestSetup test( Arch_x86_64 );
-  //test.loadTarget(); // initialize and load target
-  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1", "vbox" );
-}
 
 #if 0
 BOOST_AUTO_TEST_CASE(pool_query_experiment)
@@ -112,7 +86,7 @@ BOOST_AUTO_TEST_CASE(pool_query_001)
   PoolQuery q;
   q.addString("zypper");
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 10);
+  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
 }
 
 // default query + one attribute + one string
@@ -282,7 +256,7 @@ BOOST_AUTO_TEST_CASE(pool_query_100)
      and sometimes only in description (e.g. bc, lftp). We don't have
      any package with 'revers' only in package name, but let's ignore this.
      I didn't find a string with the same characteristics giving fewer matches
-     :-/ */  
+     :-/ */
   q.addString("revers");
   q.addAttribute(sat::SolvAttr::name);
   q.addAttribute(sat::SolvAttr::summary);
@@ -474,7 +448,7 @@ BOOST_AUTO_TEST_CASE(pool_query_500)
   q.setMatchGlob();
   // creates: ^(.*zy.p|yast.*package.*|.*bzypp)$
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 11);
-  
+
   cout << "****500.3****"  << endl;
   PoolQuery q1;
   q1.addString("^libsm[a-z]*[0-9]$");
@@ -547,7 +521,7 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
   q.setEdition(Edition("0.12.5"), Rel::GT);
 
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 4);
-  
+
   cout << "****600.2****"  << endl;
   q.setEdition(Edition("0.12.5"), Rel::LT);
 

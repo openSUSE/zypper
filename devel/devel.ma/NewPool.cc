@@ -157,7 +157,7 @@ std::ostream & testDump( std::ostream & str, const PoolItem & pi )
     l = Locale( "dsdf" );
     str << str::form("%-25s: ",l.code().c_str()) << p->summary(l) << endl;
     OUTS( summary );
-    OUTS( installsize );
+    OUTS( installSize );
     OUTS( downloadSize );
     OUTS( sourcePkgName );
     OUTS( sourcePkgEdition );
@@ -600,7 +600,7 @@ try {
   ///////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
 
-  if ( 1 )
+  if ( 0 )
   {
     PoolItem pi ( getPi<Patch>("xorg-x11-Xvnc") );
     MIL << pi << endl;
@@ -609,6 +609,23 @@ try {
       Patch::constPtr p( pi->asKind<Patch>() );
       INT << p->contents() << endl;
     }
+  }
+
+  SEC << endl;
+  for_( it, pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd() )
+  {
+    USR << *it << endl;
+    it->info().hasLicense();
+  }
+
+  SEC << endl;
+  RepoManager repoManager( makeRepoManager( sysRoot ) );
+  RepoInfoList repos = repoManager.knownRepositories();
+  for_( it, repos.begin(), repos.end() )
+  {
+    USR << *it << endl;
+    it->hasLicense();
+    WAR << it->getLicense( Locale("de_De") ) << endl;
   }
 
 #if 0
