@@ -230,7 +230,7 @@ namespace zypp
   {
     if ( ! avLocales_r.empty() )
     {
-      for ( Locale check( requested_r == noCode ? ZConfig::instance().defaultTextLocale() : requested_r );
+      for ( Locale check( requested_r == noCode ? ZConfig::instance().textLocale() : requested_r );
             check != noCode; check = check.fallback() )
       {
         if ( avLocales_r.find( check ) != avLocales_r.end() )

@@ -103,7 +103,7 @@ namespace zypp
          * Returns the translation for \c lang_r (\b no fallback locales).
          *
          * Passing an empty \ref Locale will return the string for the
-         * current default locale (\see \ref ZConfig::defaultTextLocale),
+         * current default locale (\see \ref ZConfig::TextLocale),
          * \b considering all fallback locales.
          *
          * Returns an empty string if no translation is available.
