@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct 22 12:58:35 CEST 2008 - ma@suse.de
+
+- Adapt to satsolver-0.12 API.
+- Add Locale:: bestMatch to find the best match within a set of 
+  available Locales.
+- revision 11441
+
+-------------------------------------------------------------------
 Mon Oct 20 16:44:58 CEST 2008 - ma@suse.de
 
 - RepoInfo: Add methods to handle repository licenses. (bnc #372386)
