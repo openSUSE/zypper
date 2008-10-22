@@ -148,6 +148,7 @@ namespace sat
       static const SolvAttr repositoryUpdates;
       static const SolvAttr repositoryKeywords;
       static const SolvAttr repositoryProducts;
+      static const SolvAttr repositoryRevision;
       //@}
 
       //@}
