@@ -9,11 +9,10 @@ static TestSetup test( "/tmp/x", Arch_x86_64 );
 
 BOOST_AUTO_TEST_CASE(pool_query_init)
 {
-  //test.loadTarget(); // initialize and load target
-  //test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "@System" );
+  // Abuse;) vbox as System repo:
+  test.loadTargetRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1" );
   test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
   test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS:VirtualBox-11.1", "@system" );
 
   dumpRange( USR, test.pool().knownRepositoriesBegin(),
                   test.pool().knownRepositoriesEnd() );
@@ -218,18 +217,17 @@ BOOST_AUTO_TEST_CASE(pool_query_007)
   BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 6);
 }
 
-/*
 // match by installed status (basically by system vs. repo)
 BOOST_AUTO_TEST_CASE(pool_query_050)
 {
   cout << "****050****"  << endl;
   PoolQuery q;
-  q.addString("zypper");
+  q.addString("yasm");
   q.addAttribute(sat::SolvAttr::name);
   q.setMatchExact();
   q.setInstalledOnly();
 
-  BOOST_CHECK(std::for_each(q.begin(), q.end(), PrintAndCount())._count == 1);
+  BOOST_CHECK_EQUAL(std::for_each(q.begin(), q.end(), PrintAndCount())._count, 4);
 
   cout << endl;
 
@@ -238,10 +236,8 @@ BOOST_AUTO_TEST_CASE(pool_query_050)
   q1.addAttribute(sat::SolvAttr::name);
   q1.setMatchExact();
   q1.setUninstalledOnly();
-
-  BOOST_CHECK(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count == 5);
+  BOOST_CHECK_EQUAL(std::for_each(q1.begin(), q1.end(), PrintAndCount())._count, 5);
 }
-*/
 
 /////////////////////////////////////////////////////////////////////////////
 //  1xx multiple attribute queries
@@ -564,7 +560,6 @@ BOOST_AUTO_TEST_CASE(pool_query_X)
 */
 
 
-#if 1
 BOOST_AUTO_TEST_CASE(pool_query_recovery)
 {
   Pathname testfile(TESTS_SRC_DIR);
@@ -575,7 +570,8 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   std::insert_iterator<std::vector<PoolQuery> > ii( queries,queries.begin());
   readPoolQueriesFromFile(testfile,ii);
   BOOST_REQUIRE_MESSAGE(queries.size() == 2, "Bad count of read queries.");
-  BOOST_CHECK(queries[0].size() == 10);
+
+  BOOST_CHECK_EQUAL(queries[0].size(), 8);
 
   PoolQuery q;
   q.addString("ma*");
@@ -588,8 +584,6 @@ BOOST_AUTO_TEST_CASE(pool_query_recovery)
   q.setEdition(Edition("0.8.3"),Rel::NE);
   BOOST_CHECK(q == queries[1]);
 }
-
-#endif
 
 BOOST_AUTO_TEST_CASE(pool_query_serialize)
 {

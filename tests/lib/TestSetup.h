@@ -22,6 +22,10 @@ using std::cerr;
 using std::endl;
 using namespace zypp;
 
+#ifndef BOOST_CHECK_NE
+#define BOOST_CHECK_NE( L, R ) BOOST_CHECK( (L) != (R) )
+#endif
+
 /** Build a test environment below a temp. root directory.
  * If a \c rootdir_r was provided to the ctor, this directory
  * will be used and it will \b not be removed.
@@ -67,9 +71,13 @@ class TestSetup
   public:
     /** Load target repo. */
     void loadTarget()
-    {
-      target().load();
-    }
+    { target().load(); }
+    /** Fake @System repo from url. */
+    void loadTargetRepo( const Url & url_r )
+    { loadRepo( url_r, sat::Pool::systemRepoAlias() ); }
+    /** Fake @System repo from Path. */
+    void loadTargetRepo( const Pathname & path_r )
+    { loadRepo( path_r, sat::Pool::systemRepoAlias() ); }
 
     /** Directly load repoinfo to pool. */
     void loadRepo( RepoInfo nrepo )

@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(LookupAttr_existingattr)
   sat::LookupAttr q( sat::SolvAttr::name );
   BOOST_CHECK( ! q.empty() );
   BOOST_CHECK( q.size() != 0 );
-  BOOST_CHECK( q.begin() != q.end() );
+  BOOST_CHECK_NE( q.begin(), q.end() );
   for_( it, q.begin(), q.end() )
     ;
 }
