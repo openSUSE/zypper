@@ -1,9 +1,6 @@
-#include <string>
-#include <vector>
-#include <iterator>
-
 #include <boost/test/auto_unit_test.hpp>
 
+#include "zypp/base/LogTools.h"
 #include "zypp/base/String.h"
 
 using boost::unit_test::test_suite;
@@ -97,17 +94,17 @@ BOOST_AUTO_TEST_CASE(test_escape)
 
 BOOST_AUTO_TEST_CASE(convertions)
 {
-    BOOST_CHECK_EQUAL(str::numstring(42), "42");
-    BOOST_CHECK_EQUAL(str::numstring(42, 4), "  42");
-    BOOST_CHECK_EQUAL(str::numstring(42, -4), "42  ");
+    BOOST_CHECK_EQUAL(str::numstring(42),     "42");
+    BOOST_CHECK_EQUAL(str::numstring(42, 6),  "    42");
+    BOOST_CHECK_EQUAL(str::numstring(42, -6), "42    ");
 
-    BOOST_CHECK_EQUAL(str::hexstring(42), "0x0000002a");
-    BOOST_CHECK_EQUAL(str::hexstring(42, 4), "0x2a");
-    BOOST_CHECK_EQUAL(str::hexstring(42, -4), "0x2a");
+    BOOST_CHECK_EQUAL(str::hexstring(42),     "0x0000002a");
+    BOOST_CHECK_EQUAL(str::hexstring(42, 6),  "0x002a");
+    BOOST_CHECK_EQUAL(str::hexstring(42, -6), "0x2a  ");
 
-    BOOST_CHECK_EQUAL(str::octstring(42), "00052");
-    //BOOST_CHECK_EQUAL(str::octstring(42, 4), "0052");
-    //BOOST_CHECK_EQUAL(str::octstring(42, -4), "052");
+    BOOST_CHECK_EQUAL(str::octstring(42),     "00052");
+    BOOST_CHECK_EQUAL(str::octstring(42, 6),  "000052");
+    BOOST_CHECK_EQUAL(str::octstring(42, -6), "052   ");
 
     BOOST_CHECK_EQUAL(str::strtonum<int>("42"), 42);
 
@@ -118,27 +115,57 @@ BOOST_AUTO_TEST_CASE(convertions)
 
 BOOST_AUTO_TEST_CASE(operations)
 {
-    //BOOST_CHECK_EQUAL(str::ltrim("  foo "), "foo");
-    //BOOST_CHECK_EQUAL(str::rtrim(" f ffo  "), "f ffo");
-    BOOST_CHECK_EQUAL(str::trim(" f ffo  "), "f ffo");
-    BOOST_CHECK_EQUAL(str::trim("  f ffo  "), "f ffo");
+    BOOST_CHECK_EQUAL(str::ltrim(" \t f \t ffo \t "), "f \t ffo \t ");
+    BOOST_CHECK_EQUAL(str::rtrim(" \t f \t ffo \t "), " \t f \t ffo");
+    BOOST_CHECK_EQUAL(str::trim(" \t f \t ffo \t "),  "f \t ffo");
 
-    // strip
+    // strip first
     {
-        string tostrip("Oh! la la");
-        str::stripFirstWord(tostrip, false);        
-        BOOST_CHECK_EQUAL(tostrip, "la la");
+        string tostrip(" Oh! la la ");
+        string word( str::stripFirstWord(tostrip, true) ); // ltrim first
+        BOOST_CHECK_EQUAL(word, "Oh!");
+        BOOST_CHECK_EQUAL(tostrip, "la la ");
     }
-    // strip
     {
-        string tostrip("Oh! la la");
-        str::stripLastWord(tostrip, false);        
-        BOOST_CHECK_EQUAL(tostrip, "Oh! la");
+        string tostrip(" Oh! la la ");
+        string word( str::stripFirstWord(tostrip, false) ); // no ltrim first
+        BOOST_CHECK_EQUAL(word, "");
+        BOOST_CHECK_EQUAL(tostrip, "Oh! la la ");
     }
 
-    BOOST_CHECK( ! str::hasPrefix("foolala", "oo"));
-    BOOST_CHECK( str::hasPrefix("foolala", "foo"));
-
-
+    // strip last
+    {
+        string tostrip(" Oh! la la ");
+        string word( str::stripLastWord(tostrip, true) ); // rtrim first
+        BOOST_CHECK_EQUAL(word, "la");
+        BOOST_CHECK_EQUAL(tostrip, " Oh! la");
+    }
+    {
+        string tostrip(" Oh! la la ");
+        string word( str::stripLastWord(tostrip, false) ); // no rtrim first
+        BOOST_CHECK_EQUAL(word, "");
+        BOOST_CHECK_EQUAL(tostrip, " Oh! la la");
+    }
 }
 
+BOOST_AUTO_TEST_CASE(prefix_suffix)
+{
+  BOOST_CHECK( str::hasPrefix("abcXabcYabc", "abcX") );
+  BOOST_CHECK( str::hasSuffix("abcXabcYabc", "Yabc") );
+
+  BOOST_CHECK_EQUAL( str::stripPrefix("abcXabcYabc", "abcX"),  "abcYabc" );
+  BOOST_CHECK_EQUAL( str::stripSuffix("abcXabcYabc", "Yabc"),  "abcXabc" );
+
+  BOOST_CHECK( ! str::hasPrefix("abcXabcYabc", "ac") );
+  BOOST_CHECK( ! str::hasSuffix("abcXabcYabc", "ac") );
+
+  BOOST_CHECK_EQUAL( str::stripPrefix("abcXabcYabc", "ac"),  "abcXabcYabc" );
+  BOOST_CHECK_EQUAL( str::stripSuffix("abcXabcYabc", "ac"),  "abcXabcYabc" );
+
+  BOOST_CHECK( str::startsWith("abcXabcYabc", "abc") );
+  BOOST_CHECK( str::endsWith("abcXabcYabc", "abc") );
+
+  BOOST_CHECK( str::contains("abcXabcYabc", "XabcY") );
+  BOOST_CHECK( ! str::contains("abcXabcYabc", "xabcy") );
+  BOOST_CHECK( str::containsCI("abcXabcYabc", "xabcy") );
+}

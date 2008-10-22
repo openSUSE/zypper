@@ -132,7 +132,7 @@ namespace zypp
 
       std::string ret( s );
 
-      if ( trim_r && L_TRIM )
+      if ( trim_r & L_TRIM )
         {
           std::string::size_type p = ret.find_first_not_of( " \t\n" );
           if ( p == std::string::npos )
@@ -141,7 +141,7 @@ namespace zypp
           ret = ret.substr( p );
         }
 
-      if ( trim_r && R_TRIM )
+      if ( trim_r & R_TRIM )
         {
           std::string::size_type p = ret.find_last_not_of( " \t\n" );
           if ( p == std::string::npos )

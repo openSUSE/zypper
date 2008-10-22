@@ -610,6 +610,16 @@ namespace zypp
     }
     //@}
 
+    /** \name Locate substring. */
+    //@{
+    /** Locate substring case sensitive. */
+    inline bool contains( const C_Str & str_r, const C_Str & val_r )
+    { return ::strstr( str_r, val_r ); }
+    /** Locate substring case insensitive. */
+    inline bool containsCI( const C_Str & str_r, const C_Str & val_r )
+    { return ::strcasestr( str_r, val_r ); }
+    //@}
+
     ///////////////////////////////////////////////////////////////////
     /** \name Trimming whitepace.
      * \todo optimize l/r trim.
@@ -640,10 +650,6 @@ namespace zypp
 
     std::string getline( std::istream & str, const Trim trim_r );
 
-    inline bool startsWith(const std::string& s, const char* str) { return s.find(str) == 0; }
-    inline bool endsWith(const std::string& s, const char* str) { return s.find(str) == s.size() - strlen(str); }
-    inline bool contains(const std::string& s, const char* str) { return s.find(str) != std::string::npos; }
-
     ///////////////////////////////////////////////////////////////////
 
     /** \name String prefix/suffix handling.
@@ -668,6 +674,13 @@ namespace zypp
         return std::string( str_r, str_r.size() - suffix_r.size() );
       return str_r.c_str();
     }
+
+    /** alias for \ref hasPrefix */
+    inline bool startsWith( const C_Str & str_r, const C_Str & prefix_r )
+    { return hasPrefix( str_r, prefix_r ); }
+    /** alias for \ref hasSuffix */
+    inline bool endsWith( const C_Str & str_r, const C_Str & prefix_r )
+    { return hasSuffix( str_r, prefix_r ); }
     //@}
     /////////////////////////////////////////////////////////////////
   } // namespace str
