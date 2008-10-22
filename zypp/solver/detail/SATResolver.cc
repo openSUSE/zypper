@@ -432,7 +432,7 @@ class CollectNonePackages : public resfilter::PoolItemFilterFunctor
 bool
 SATResolver::solving()
 {
-    _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    _solv = solver_create( _SATPool );
     _solv->vendorCheckCb = &vendorCheck;
     _solv->fixsystem = _fixsystem;
     _solv->ignorealreadyrecommended = _ignorealreadyrecommended;
@@ -571,7 +571,7 @@ SATResolver::solving()
 		  functor::not_c(resfilter::byKind<Package>()), // every solvable BUT packages
 		  functor::functorRef<bool,PoolItem> (collectNonePackages) );
     solver_create_state_maps(_solv, &installedmap, 0);
-    pool_trivial_installable(_solv->pool, _solv->installed, &installedmap, &solvableQueue, &flags);
+    pool_trivial_installable(_solv->pool, &installedmap, &solvableQueue, &flags);
     for (int i = 0; i < solvableQueue.count; i++) {
 	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
 	item.status().setUndetermined();
@@ -777,7 +777,7 @@ void SATResolver::doUpdate()
     // set locks for the solver
     void setLocks();
 
-    _solv = solver_create( _SATPool, sat::Pool::instance().systemRepo().get() );
+    _solv = solver_create( _SATPool );
     _solv->vendorCheckCb = &vendorCheck;
 
     _solv->updatesystem = true;

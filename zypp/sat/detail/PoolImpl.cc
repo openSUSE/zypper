@@ -153,7 +153,7 @@ namespace zypp
 	    ::pool_setdebuglevel( _pool, 2 );
 	else
 	    ::pool_setdebugmask(_pool, SAT_DEBUG_STATS | SAT_DEBUG_JOB);
-	
+
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
         // set namespace callback
@@ -210,13 +210,7 @@ namespace zypp
         if ( ! _pool->whatprovides )
         {
           MIL << "pool_createwhatprovides..." << endl;
-
-          // NOTE: Thake care not to ctreate a nonexisting systemRepo
-          Repository sysrepo( sat::Pool::instance().reposFind( sat::Pool::instance().systemRepoAlias() ) );
-          if ( sysrepo )
-          {
-            ::pool_addfileprovides( _pool, sysrepo.get() );
-          }
+          ::pool_addfileprovides( _pool );
           ::pool_createwhatprovides( _pool );
         }
         if ( ! _pool->languages )
