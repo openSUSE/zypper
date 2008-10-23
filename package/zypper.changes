@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 23 14:29:38 CEST 2008 - jkupec@suse.cz
+
+- more appropriate 'accept key' dialog (bnc #436794)
+- r11460
+
+-------------------------------------------------------------------
 Wed Oct 22 15:47:06 CEST 2008 - jkupec@suse.cz
 
 - fixed unexpected exception when checking if refresh is needed
