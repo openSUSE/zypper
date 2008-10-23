@@ -64,6 +64,14 @@ namespace zypp
 
      /////////////////////////////////////////////////////////////////
 
+      const std::string & PoolImpl::systemRepoAlias()
+      {
+        static const std::string _val( "@System" );
+        return _val;
+      }
+
+      /////////////////////////////////////////////////////////////////
+
       static void logSat( struct _Pool *, void *data, int type, const char *logString )
       {
 	  if ((type & (SAT_FATAL|SAT_ERROR))) {
@@ -233,11 +241,27 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
 
-      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r, bool isSystemRepo_r )
+      ::_Repo * PoolImpl::_createRepo( const std::string & name_r )
+      {
+        setDirty(__FUNCTION__, name_r.c_str() );
+        ::_Repo * ret = ::repo_create( _pool, name_r.c_str() );
+        if ( ret && name_r == systemRepoAlias() )
+          ::pool_set_installed( _pool, ret );
+        return ret;
+      }
+
+      void PoolImpl::_deleteRepo( ::_Repo * repo_r )
+      {
+        setDirty(__FUNCTION__, repo_r->name );
+        ::repo_free( repo_r, /*reuseids*/false );
+        eraseRepoInfo( repo_r );
+      }
+
+      int PoolImpl::_addSolv( ::_Repo * repo_r, FILE * file_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_solv( repo_r , file_r  );
-        if ( ret == 0 && ! isSystemRepo_r )
+        if ( ret == 0 && ! isSystemRepo( repo_r ) )
         {
           // Filter out unwanted archs
           std::set<detail::IdType> sysids;
@@ -278,6 +302,12 @@ namespace zypp
           }
         }
         return ret;
+      }
+
+      detail::SolvableIdType PoolImpl::_addSolvables( ::_Repo * repo_r, unsigned count_r )
+      {
+        setDirty(__FUNCTION__, repo_r->name );
+        return ::repo_add_solvable_block( repo_r, count_r );
       }
 
       ///////////////////////////////////////////////////////////////////

@@ -27,9 +27,11 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
 
     const Repository Repository::noRepository;
+
+    const std::string & Repository::systemRepoAlias()
+    { return sat::detail::PoolImpl::systemRepoAlias(); }
 
     /////////////////////////////////////////////////////////////////
 
@@ -47,7 +49,7 @@ namespace zypp
     bool Repository::isSystemRepo() const
     {
 	NO_REPOSITORY_RETURN( false );
-	return( sat::Pool::systemRepoAlias() == _repo->name );
+	return myPool().isSystemRepo( _repo );
     }
 
     std::string Repository::alias() const
@@ -217,6 +219,7 @@ namespace zypp
     void Repository::eraseFromPool()
     {
 	NO_REPOSITORY_RETURN();
+        MIL << *this << " removed from pool" << endl;
 	myPool()._deleteRepo( _repo );
 	_id = sat::detail::noRepoId;
     }
@@ -236,22 +239,23 @@ namespace zypp
       return noRepository;
     }
 
-#warning NEED POOL MANIP EXEPTIONS
     void Repository::addSolv( const Pathname & file_r )
     {
-	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo." ) );
+      NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo." ) );
 
-	AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
-	if ( file == NULL )
-	{
-	    file.resetDispose();
-	    ZYPP_THROW( Exception( "Can't open solv-file: "+file_r.asString() ));
-	}
+      AutoDispose<FILE*> file( ::fopen( file_r.c_str(), "r" ), ::fclose );
+      if ( file == NULL )
+      {
+        file.resetDispose();
+        ZYPP_THROW( Exception( "Can't open solv-file: "+file_r.asString() ) );
+      }
 
-	if ( myPool()._addSolv( _repo, file, isSystemRepo() ) != 0 )
-	{
-	    ZYPP_THROW( Exception( "Error reading solv-file: "+file_r.asString() ));
-	}
+      if ( myPool()._addSolv( _repo, file ) != 0 )
+      {
+        ZYPP_THROW( Exception( "Error reading solv-file: "+file_r.asString() ) );
+      }
+
+      MIL << *this << " after adding " << file_r << endl;
     }
 
     sat::detail::SolvableIdType Repository::addSolvables( unsigned count_r )

@@ -36,10 +36,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     const std::string & Pool::systemRepoAlias()
-    {
-      static const std::string _val( "@System" );
-      return _val;
-    }
+    { return detail::PoolImpl::systemRepoAlias(); }
 
     ::_Pool * Pool::get() const
     { return myPool().getPool(); }
@@ -104,7 +101,7 @@ namespace zypp
         return ret;
 
       ret = Repository( myPool()._createRepo( alias_r ) );
-      if ( alias_r == systemRepoAlias() )
+      if ( ret.isSystemRepo() )
       {
         // autoprovide (dummy) RepoInfo
         RepoInfo info;
@@ -113,8 +110,6 @@ namespace zypp
         info.setAutorefresh( true );
         info.setEnabled( true );
         ret.setInfo( info );
-        // indicate
-        ::pool_set_installed( get(), ret.get() );
       }
       return ret;
     }

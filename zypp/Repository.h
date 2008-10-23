@@ -68,6 +68,9 @@ namespace zypp
         /** Evaluate \ref Repository in a boolean context (\c != \c noRepository). */
         using base::SafeBool<Repository>::operator bool_type;
 #endif
+        /** Reserved system repository alias \c @System. */
+        static const std::string & systemRepoAlias();
+
         /** Return whether this is the system repository. */
         bool isSystemRepo() const;
 
@@ -82,22 +85,6 @@ namespace zypp
           *
           */
         std::string alias() const;
-
-         /**
-          * Short unique, convenience string to refer to a repo.
-          * ie: openSUSE-10.3
-          *
-          * The sat solver uses name for what we know as alias
-          * In rpm repositories, name is a label string
-          * ie: "openSUSE 10.3 Main repository"
-          *
-          * We know follow rpm conventions and ignore satsolver
-          * wording for name.
-          *
-          * Use \ref alias() instead
-          */
-        ZYPP_DEPRECATED std::string name() const
-        { return alias(); }
 
         /**
          * Timestamp when this repository was generated

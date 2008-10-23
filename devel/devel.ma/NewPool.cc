@@ -523,7 +523,6 @@ try {
         continue;
 
       repoManager.refreshService( nservice );
-
     }
   }
 
@@ -611,22 +610,6 @@ try {
     }
   }
 
-  SEC << endl;
-  for_( it, pool.knownRepositoriesBegin(), pool.knownRepositoriesEnd() )
-  {
-    USR << *it << endl;
-    it->info().hasLicense();
-  }
-
-  SEC << endl;
-  RepoManager repoManager( makeRepoManager( sysRoot ) );
-  RepoInfoList repos = repoManager.knownRepositories();
-  for_( it, repos.begin(), repos.end() )
-  {
-    USR << *it << endl;
-    it->hasLicense();
-    WAR << it->getLicense( Locale("de_De") ) << endl;
-  }
 
 #if 0
   getZYpp()->resolver()->addRequire( Capability("amarok") );

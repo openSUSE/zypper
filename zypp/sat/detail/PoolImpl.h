@@ -82,38 +82,32 @@ namespace zypp
           static detail::IdType nsCallback( ::_Pool *, void * data, detail::IdType lhs, detail::IdType rhs );
 
         public:
+          /** Reserved system repository alias \c @System. */
+          static const std::string & systemRepoAlias();
+
+          bool isSystemRepo( ::_Repo * repo_r ) const
+          { return repo_r && _pool->installed == repo_r; }
+
+        public:
           /** \name Actions invalidating housekeeping data.
            *
            * All methods expect valid arguments being passed.
            */
           //@{
           /** Creating a new repo named \a name_r. */
-          RepoIdType _createRepo( const std::string & name_r )
-          {
-            setDirty(__FUNCTION__, name_r.c_str() );
-            return ::repo_create( _pool, name_r.c_str() );
-          }
+          ::_Repo * _createRepo( const std::string & name_r );
 
           /** Creating a new repo named \a name_r. */
-          void _deleteRepo( ::_Repo * repo_r )
-          {
-            setDirty(__FUNCTION__, repo_r->name );
-            ::repo_free( repo_r, /*reuseids*/false );
-            eraseRepoInfo( repo_r );
-          }
+          void _deleteRepo( ::_Repo * repo_r );
 
           /** Adding solv file to a repo.
            * Except for \c isSystemRepo_r, solvables of incompatible architecture
            * are filtered out.
           */
-          int _addSolv( ::_Repo * repo_r, FILE * file_r, bool isSystemRepo_r = false );
+          int _addSolv( ::_Repo * repo_r, FILE * file_r );
 
           /** Adding Solvables to a repo. */
-          detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r )
-          {
-            setDirty(__FUNCTION__, repo_r->name );
-            return ::repo_add_solvable_block( repo_r, count_r );
-          }
+          detail::SolvableIdType _addSolvables( ::_Repo * repo_r, unsigned count_r );
           //@}
 
         public:

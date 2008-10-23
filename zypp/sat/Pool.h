@@ -99,11 +99,6 @@ namespace zypp
         /** Reserved system repository alias \c @System. */
         static const std::string & systemRepoAlias();
 
-        /** Deprecated, use \ref systemRepoAlias() */
-        ZYPP_DEPRECATED static const std::string & systemRepoName()
-        { return systemRepoAlias(); } 
-
-
         /** Return the system repository if it is on the pool. */
         Repository findSystemRepo() const
         { return reposFind( systemRepoAlias() ); }

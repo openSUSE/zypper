@@ -133,7 +133,7 @@ namespace zypp
     bool Solvable::isSystem() const
     {
       NO_SOLVABLE_RETURN( _id == detail::systemSolvableId );
-      return Repository( _solvable->repo ).isSystemRepo();
+      return myPool().isSystemRepo( _solvable->repo );
     }
 
     IdString Solvable::ident() const
