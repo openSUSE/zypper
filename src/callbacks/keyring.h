@@ -146,28 +146,29 @@ namespace zypp
 
         // ask the user
         s << std::endl;
-        s << _("Do you want to trust the key?");
+        // translators: this message is shown after showing description of the key
+        s << _("Do you want to reject the key, trust temporarily, or trust always?");
 
         // only root has access to rpm db where keys are stored
         bool canimport = geteuid() == 0 || _gopts.changedRoot;
 
         PromptOptions popts;
         if (canimport)
-          // translators: n/t/i stands for doNttrust/TrustTemporarily/Import
+          // translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
           // translate to whatever is appropriate for your language
           // The anserws must be separated by slash characters '/' and must
-          // correspond to donttrust/trusttemporarily/import in that order.
+          // correspond to reject/trusttemporarily/trustalways in that order.
           // The answers should be lower case letters.
-          popts.setOptions(_("n/t/i"), 0);
+          popts.setOptions(_("r/t/a/"), 0);
         else
-          // translators: the same as n/t/i, but without 'i'
-          popts.setOptions(_("n/t"), 0);
-        // translators: help text for the 'n' option in the 'n/t/i' prompt
+          // translators: the same as r/t/a, but without 'a'
+          popts.setOptions(_("r/t"), 0);
+        // translators: help text for the 'r' option in the 'r/t/a' prompt
         popts.setOptionHelp(0, _("Don't trust the key."));
-        // translators: help text for the 't' option in the 'n/t/i' prompt
+        // translators: help text for the 't' option in the 'r/t/a' prompt
         popts.setOptionHelp(1, _("Trust the key temporarily."));
         if (canimport)
-          // translators: help text for the 'i' option in the 'n/t/i' prompt
+          // translators: help text for the 'a' option in the 'r/t/a' prompt
           popts.setOptionHelp(2, _("Trust the key and import it into trusted keyring."));
 
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
