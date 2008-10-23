@@ -276,7 +276,6 @@ namespace zypp
   bool RepoInfo::hasLicense() const
   {
     Pathname licenseTgz( _pimpl->licenseTgz() );
-    INT << alias() << ": " << PathInfo( licenseTgz ) << endl;
     return ! licenseTgz.empty() &&  PathInfo(licenseTgz).isFile();
   }
 
