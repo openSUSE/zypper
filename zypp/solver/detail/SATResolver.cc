@@ -481,6 +481,7 @@ SATResolver::solving()
     }
 
     /* solvables to be erased */
+    if (_solv->installed)
     for (int i = _solv->installed->start; i < _solv->installed->start + _solv->installed->nsolvables; i++)
     {
       if (_solv->decisionmap[i] > 0)
