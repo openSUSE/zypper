@@ -88,6 +88,9 @@ namespace zypp
           bool isSystemRepo( ::_Repo * repo_r ) const
           { return repo_r && _pool->installed == repo_r; }
 
+          ::_Repo * systemRepo() const
+          { return _pool->installed; }
+
         public:
           /** \name Actions invalidating housekeeping data.
            *

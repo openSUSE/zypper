@@ -466,12 +466,10 @@ SATResolver::solving()
     {
       Id p;
       p = _solv->decisionq.elements[i];
-      if (p < 0 || !sat::Solvable(p))
-	continue;
-      if (sat::Solvable(p).repository().get() == _solv->installed)
+      if (p < 0 || !sat::Solvable(p) || sat::Solvable(p).isSystem())
 	continue;
 
-      PoolItem poolItem = _pool.find (sat::Solvable(p));
+      PoolItem poolItem((sat::Solvable(p)));
       if (poolItem) {
 	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
 	  _result_items_to_install.push_back (poolItem);
@@ -481,30 +479,26 @@ SATResolver::solving()
     }
 
     /* solvables to be erased */
-    if (_solv->installed)
-    for (int i = _solv->installed->start; i < _solv->installed->start + _solv->installed->nsolvables; i++)
+    Repository systemRepo( sat::Pool::instance().findSystemRepo() ); // don't create if it does not exist
+    for_( it, systemRepo.solvablesBegin(), systemRepo.solvablesEnd() )
     {
-      if (_solv->decisionmap[i] > 0)
-	continue;
+      if (_solv->decisionmap[it->id()] > 0)
+        continue;
 
-      PoolItem poolItem = _pool.find (sat::Solvable(i));
-      if (poolItem) {
-	  // Check if this is an update
-	  CheckIfUpdate info;
-	  invokeOnEach( _pool.byIdentBegin( poolItem ),
-			_pool.byIdentEnd( poolItem ),
-			resfilter::ByUninstalled(),			// ByUninstalled
-			functor::functorRef<bool,PoolItem> (info) );
+      PoolItem poolItem( *it );
+      // Check if this is an update
+      CheckIfUpdate info;
+      invokeOnEach( _pool.byIdentBegin( poolItem ),
+                    _pool.byIdentEnd( poolItem ),
+                    resfilter::ByUninstalled(),			// ByUninstalled
+                    functor::functorRef<bool,PoolItem> (info) );
 
-	  if (info.is_updated) {
-	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
-	  } else {
-	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
-	  }
-	  _result_items_to_remove.push_back (poolItem);
+      if (info.is_updated) {
+          SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
       } else {
-	  ERR << "id " << i << " not found in ZYPP pool." << endl;
+          SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
       }
+      _result_items_to_remove.push_back (poolItem);
     }
 
     /*  solvables which are recommended */

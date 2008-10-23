@@ -100,12 +100,10 @@ namespace zypp
         static const std::string & systemRepoAlias();
 
         /** Return the system repository if it is on the pool. */
-        Repository findSystemRepo() const
-        { return reposFind( systemRepoAlias() ); }
+        Repository findSystemRepo() const;
 
         /** Return the system repository, create it if missing. */
-        Repository systemRepo()
-        { return reposInsert( systemRepoAlias() ); }
+        Repository systemRepo();
 
       public:
         /** Load \ref Solvables from a solv-file into a \ref Repository named \c name_r.

@@ -124,6 +124,18 @@ namespace zypp
       return Repository();
     }
 
+    Repository Pool::findSystemRepo() const
+    {
+      return Repository( myPool().systemRepo() );
+    }
+
+    Repository Pool::systemRepo()
+    {
+      if ( myPool().systemRepo() )
+        return Repository( myPool().systemRepo() );
+      return reposInsert( systemRepoAlias() );
+    }
+
     Repository Pool::addRepoSolv( const Pathname & file_r, const std::string & alias_r )
     {
       // Using a temporay repo! (The additional parenthesis are required.)
