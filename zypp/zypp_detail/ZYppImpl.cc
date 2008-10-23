@@ -43,9 +43,7 @@ namespace zypp
     : _target(0)
     , _resolver( new Resolver( ResPool::instance()) )
     {
-      MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
-      MIL << "defaultTextLocale: '" << ZConfig::instance().textLocale() << "'" << endl;
-      MIL << "System architecture is '" << ZConfig::instance().systemArchitecture() << "'" << endl;
+      ZConfig::instance().about( MIL );
       MIL << "Initializing keyring..." << std::endl;
       _keyring = new KeyRing(tmpPath());
     }

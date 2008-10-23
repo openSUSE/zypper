@@ -59,6 +59,9 @@ namespace zypp
       /** Singleton ctor */
       static ZConfig & instance();
 
+      /** Print some detail about the current libzypp version.*/
+      std::ostream & about( std::ostream & str ) const;
+
     public:
 
       /** The autodetected system architecture. */

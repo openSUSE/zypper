@@ -30,6 +30,9 @@ using namespace std;
 using namespace zypp::filesystem;
 using namespace zypp::parser;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zconfig"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -142,7 +145,8 @@ namespace zypp
   {
     public:
       Impl( const Pathname & override_r = Pathname() )
-        : cfg_arch                	( defaultSystemArchitecture() )
+        : _parsedZyppConf         	( override_r )
+        , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
@@ -153,27 +157,23 @@ namespace zypp
 
       {
         MIL << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
-
-	// override_r has higest prio
+        // override_r has higest prio
         // ZYPP_CONF might override /etc/zypp/zypp.conf
-        Pathname confpath( override_r );
-        if ( confpath.empty() )
+        if ( _parsedZyppConf.empty() )
         {
           const char *env_confpath = getenv( "ZYPP_CONF" );
-          confpath = env_confpath ? env_confpath : "/etc/zypp/zypp.conf";
+          _parsedZyppConf = env_confpath ? env_confpath : "/etc/zypp/zypp.conf";
         }
         else
         {
           // Inject this into ZConfig. Be shure this is
           // allocated via new. See: reconfigureZConfig
-          INT << "Reconfigure to " << confpath << endl;
+          INT << "Reconfigure to " << _parsedZyppConf << endl;
           ZConfig::instance()._pimpl.reset( this );
         }
-        if ( PathInfo(confpath).isExist() )
+        if ( PathInfo(_parsedZyppConf).isExist() )
         {
-          parser::IniDict dict( confpath );
-          //InputStream is(confpath);
-
+          parser::IniDict dict( _parsedZyppConf );
           for ( IniDict::section_const_iterator sit = dict.sectionsBegin();
                 sit != dict.sectionsEnd();
                 ++sit )
@@ -305,7 +305,8 @@ namespace zypp
         }
         else
         {
-          MIL << confpath << " not found, using defaults instead." << endl;
+          MIL << _parsedZyppConf << " not found, using defaults instead." << endl;
+          _parsedZyppConf.extend( " (NOT FOUND)" );
         }
 
         // legacy:
@@ -318,16 +319,16 @@ namespace zypp
             cfg_arch = carch;
           }
         }
-
         MIL << "ZConfig singleton created." << endl;
-        MIL << "defaultTextLocale: '" << cfg_textLocale << "'" << endl;
-        MIL << "System architecture is '" << cfg_arch << "'" << endl;
       }
 
       ~Impl()
       {}
 
     public:
+    /** Remember any parsed zypp.conf. */
+    Pathname _parsedZyppConf;
+
     Arch     cfg_arch;
     Locale   cfg_textLocale;
 
@@ -394,7 +395,9 @@ namespace zypp
   //
   ZConfig::ZConfig()
   : _pimpl( new Impl )
-  {}
+  {
+    about( MIL);
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -597,6 +600,17 @@ namespace zypp
   {
     return ( _pimpl->credentials_global_file_path.empty() ?
         Pathname("/etc/zypp/credentials.cat") : _pimpl->credentials_global_file_path );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+
+  std::ostream & ZConfig::about( std::ostream & str ) const
+  {
+    str << "libzypp: " << VERSION << " built " << __DATE__ << " " <<  __TIME__ << endl;
+    str << "zypp.conf: '" << _pimpl->_parsedZyppConf << "'" << endl;
+    str << "TextLocale: '" << textLocale() << "' (" << defaultTextLocale() << ")" << endl;
+    str << "SystemArchitecture: '" << systemArchitecture() << "' (" << defaultSystemArchitecture() << ")" << endl;
+    return str;
   }
 
   /////////////////////////////////////////////////////////////////
