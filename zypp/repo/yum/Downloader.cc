@@ -53,7 +53,7 @@ loc_with_path_prefix(const OnMediaLocation & loc,
     return loc;
 
   OnMediaLocation loc_with_path(loc);
-  loc_with_path.setFilename(prefix / loc.filename());
+  loc_with_path.changeFilename(prefix / loc.filename());
   return loc_with_path;
 }
 

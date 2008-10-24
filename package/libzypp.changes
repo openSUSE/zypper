@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Oct 24 18:12:34 CEST 2008 - ma@suse.de
+
+- Remove error prone methods from OnMediaLocation API to prevent 
+  accidental missuse. (bnc #437328)
+- revision 11487
+- version 5.19.0 (19)
+
+-------------------------------------------------------------------
 Fri Oct 24 16:07:45 CEST 2008 - ma@suse.de
 
 - Provide the /etc/products.d enties filename as Product::referenceFilename.

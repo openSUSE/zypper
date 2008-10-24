@@ -35,7 +35,7 @@ namespace zypp
    */
   struct FetcherJob
   {
-      
+
     FetcherJob( const OnMediaLocation &loc )
       : location(loc)
       , directory(false)
@@ -53,7 +53,7 @@ namespace zypp
     //CompositeFileChecker checkers;
     list<FileChecker> checkers;
     bool directory;
-    bool recursive;      
+    bool recursive;
   };
 
   typedef shared_ptr<FetcherJob> FetcherJob_Ptr;
@@ -77,7 +77,7 @@ namespace zypp
     ~Impl() {
       MIL << endl;
      }
-    
+
       void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
       void enqueueDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
       void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker() );
@@ -106,7 +106,7 @@ namespace zypp
        * \throws Exception
        */
       void validate( const OnMediaLocation &resource, const Pathname &dest_dir, const list<FileChecker> &checkers );
-      
+
       /**
        * scan the directory and adds the individual jobs
        */
@@ -138,8 +138,8 @@ namespace zypp
       job->checkers.push_back(checker);
     _resources.push_back(job);
   }
-    
-  void Fetcher::Impl::enqueueDir( const OnMediaLocation &resource, 
+
+  void Fetcher::Impl::enqueueDir( const OnMediaLocation &resource,
                                   bool recursive,
                                   const FileChecker &checker )
   {
@@ -150,7 +150,7 @@ namespace zypp
     job->directory = true;
     job->recursive = recursive;
     _resources.push_back(job);
-  }  
+  }
 
   void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
   {
@@ -186,13 +186,13 @@ namespace zypp
     {
         ERR << "Not adding cache '" << cache_dir << "'. Path does not exists." << endl;
     }
-    
+
   }
 
   bool Fetcher::Impl::provideFromCache( const OnMediaLocation &resource, const Pathname &dest_dir )
   {
     Pathname dest_full_path = dest_dir + resource.filename();
-          
+
     // first check in the destination directory
     if ( PathInfo(dest_full_path).isExist() )
     {
@@ -200,7 +200,7 @@ namespace zypp
            && (! resource.checksum().empty() ) )
           return true;
     }
-    
+
     MIL << "start fetcher with " << _caches.size() << " cache directories." << endl;
     for_ ( it_cache, _caches.begin(), _caches.end() )
     {
@@ -240,7 +240,7 @@ namespace zypp
     } // iterate over caches
     return false;
   }
-    
+
     void Fetcher::Impl::validate( const OnMediaLocation &resource, const Pathname &dest_dir, const list<FileChecker> &checkers )
   {
     // no matter where did we got the file, try to validate it:
@@ -261,7 +261,7 @@ namespace zypp
           ERR << "Invalid checker for '" << localfile << "'" << endl;
         }
       }
-       
+
     }
     catch ( const FileCheckException &e )
     {
@@ -278,7 +278,7 @@ namespace zypp
   }
 
   void Fetcher::Impl::addDirJobs( MediaSetAccess &media,
-                                  const OnMediaLocation &resource, 
+                                  const OnMediaLocation &resource,
                                   const Pathname &dest_dir, bool recursive  )
   {
       // first get the content of the directory so we can add
@@ -286,12 +286,12 @@ namespace zypp
       MIL << "Adding directory " << resource.filename() << endl;
       filesystem::DirContent content;
       media.dirInfo( content, resource.filename(), false /* dots */, resource.medianr());
-      
+
       filesystem::DirEntry shafile, shasig, shakey;
       shafile.name = "SHA1SUMS"; shafile.type = filesystem::FT_FILE;
       shasig.name = "SHA1SUMS.asc"; shasig.type = filesystem::FT_FILE;
       shakey.name = "SHA1SUMS.key"; shakey.type = filesystem::FT_FILE;
-      
+
       // create a new fetcher with a different state to transfer the
       // file containing checksums and its signature
       Fetcher fetcher;
@@ -300,7 +300,7 @@ namespace zypp
       SignatureFileChecker sigchecker;
 
       // now try to find the SHA1SUMS signature
-      if ( find(content.begin(), content.end(), shasig) 
+      if ( find(content.begin(), content.end(), shasig)
            != content.end() )
       {
           MIL << "found checksums signature file: " << shasig.name << endl;
@@ -317,7 +317,7 @@ namespace zypp
           MIL << "no signature for " << shafile.name << endl;
 
       // look for the SHA1SUMS.key file
-      if ( find(content.begin(), content.end(), shakey) 
+      if ( find(content.begin(), content.end(), shakey)
            != content.end() )
       {
           MIL << "found public key file: " << shakey.name << endl;
@@ -330,19 +330,19 @@ namespace zypp
       }
 
       // look for the SHA1SUMS public key file
-      if ( find(content.begin(), content.end(), shafile) 
+      if ( find(content.begin(), content.end(), shafile)
            != content.end() )
       {
           MIL << "found checksums file: " << shafile.name << endl;
           fetcher.enqueue( OnMediaLocation(resource.filename() + shafile.name, resource.medianr()).setOptional(true) );
-          assert_dir(dest_dir + resource.filename()); 
+          assert_dir(dest_dir + resource.filename());
           fetcher.start( dest_dir, media );
           fetcher.reset();
       }
 
       // hash table to store checksums
       map<string, CheckSum> checksums;
-      
+
       // look for the SHA1SUMS file
       if ( find(content.begin(), content.end(), shafile) != content.end() )
       {
@@ -360,7 +360,7 @@ namespace zypp
           std::ifstream in( pShafile.c_str() );
           string buffer;
           if ( ! in.fail() )
-          {          
+          {
               while ( getline(in, buffer) )
               {
                   vector<string> words;
@@ -383,9 +383,9 @@ namespace zypp
           // skip SHA1SUMS* as they were already retrieved
           if ( str::hasPrefix(it->name, "SHA1SUMS") )
               continue;
-          
+
           Pathname filename = resource.filename() + it->name;
-          
+
           switch ( it->type )
           {
           case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
@@ -394,15 +394,14 @@ namespace zypp
               CheckSum checksum;
               if ( checksums.find(it->name) != checksums.end() )
                   checksum = checksums[it->name];
-                  
+
               // create a resource from the file
               // if checksum was not available we will have a empty
               // checksum, which will end in a validation anyway
               // warning the user that there is no checksum
-              enqueueDigested(OnMediaLocation()
-                              .setFilename(filename)
+              enqueueDigested(OnMediaLocation(filename, resource.medianr())
                               .setChecksum(checksum));
-                  
+
               break;
           }
           case filesystem::FT_DIR: // newer directory.yast contain at least directory info
@@ -419,14 +418,14 @@ namespace zypp
   void Fetcher::Impl::provideToDest( MediaSetAccess &media, const OnMediaLocation &resource, const Pathname &dest_dir )
   {
     bool got_from_cache = false;
-      
+
     // start look in cache
     got_from_cache = provideFromCache(resource, dest_dir);
-      
+
     if ( ! got_from_cache )
     {
       MIL << "Not found in cache, downloading" << endl;
-	
+
       // try to get the file from the net
       try
       {
@@ -454,7 +453,7 @@ namespace zypp
       // continue with next file
         return;
     }
-  }  
+  }
 
   void Fetcher::Impl::start( const Pathname &dest_dir,
                              MediaSetAccess &media,
@@ -464,7 +463,7 @@ namespace zypp
     progress.sendTo(progress_receiver);
 
     for ( list<FetcherJob_Ptr>::const_iterator it_res = _resources.begin(); it_res != _resources.end(); ++it_res )
-    { 
+    {
 
       if ( (*it_res)->directory )
       {
@@ -477,7 +476,7 @@ namespace zypp
 
       // validate job, this throws if not valid
       validate((*it_res)->location, dest_dir, (*it_res)->checkers);
-      
+
       if ( ! progress.incr() )
         ZYPP_THROW(AbortRequestException());
     } // for each job
@@ -487,7 +486,7 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const Fetcher::Impl & obj )
   {
       for ( list<FetcherJob_Ptr>::const_iterator it_res = obj._resources.begin(); it_res != obj._resources.end(); ++it_res )
-      { 
+      {
           str << *it_res;
       }
       return str;

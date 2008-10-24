@@ -57,7 +57,7 @@ namespace zypp
     /**
      * media number where the resource is located.
      * for a url cd:// this could be 1..N.
-     * for a url of type http://host/path/CD1, a media number 2 
+     * for a url of type http://host/path/CD1, a media number 2
      * means looking on http://host/path/CD1/../CD2
      */
     unsigned          medianr()        const { return _medianr; }
@@ -124,7 +124,7 @@ namespace zypp
     OnMediaLocation & setOpenChecksum( const CheckSum & val_r )
     { _openchecksum = val_r; return *this; }
 
-    /** 
+    /**
      * Set the wether the resource is optional or not
      * \see optional
      */
@@ -132,33 +132,21 @@ namespace zypp
     { _optional = val; return *this; }
 
   public:
-   /** 
-    * Individual manipulation of \c medianr.
-    * Using \ref setLocation is prefered.
+   /**
+    * Individual manipulation of \c medianr (prefer \ref setLocation).
+    * Using \ref setLocation is prefered as us usually have to adjust
+    * \c filename and \c medianr in sync.
     */
-    OnMediaLocation & setMedianr( unsigned val_r )
+    OnMediaLocation & changeMedianr( unsigned val_r )
     { _medianr = val_r; return *this; }
 
     /**
-     * Individual manipulation of \c medianr.
-     * Use \ref setMediaNr instead
+     * Individual manipulation of \c filename (prefer \ref setLocation).
+     * Using \ref setLocation is preferedas us usually have to adjust
+     * \c filename and \c medianr in sync.
      */
-    ZYPP_DEPRECATED OnMediaLocation & changeMedianr( unsigned val_r )
-    { return setMedianr(val_r); }
-
-    /** 
-     * Individual manipulation of \c filename.
-     * Using \ref setLocation is prefered.
-     */
-    OnMediaLocation &setFilename( const Pathname & val_r )
+    OnMediaLocation & changeFilename( const Pathname & val_r )
     { _filename = val_r; return *this; }
-
-    /** 
-     * Individual manipulation of \c filename.
-     * Use \ref setFilename instead.
-    */
-    ZYPP_DEPRECATED OnMediaLocation & changeFilename( const Pathname & val_r )
-    { return setFilename(val_r); }
 
   private:
     unsigned  _medianr;

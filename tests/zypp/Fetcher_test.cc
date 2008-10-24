@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(fetcher)
   {
       filesystem::TmpDir dest;
 
-      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir"), true);
+      fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
       fetcher.reset();
   }
@@ -44,14 +44,14 @@ BOOST_AUTO_TEST_CASE(fetcher)
 
       // add the key as trusted
       getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir/subdir1/SHA1SUMS.key"), true);
-      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir"), true);
+      fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       fetcher.start( dest.path(), media );
 
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir2/subdir2-file1.txt").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file1.txt").isExist() );
       BOOST_CHECK( PathInfo(dest.path() + "/complexdir/subdir1/subdir1-file2.txt").isExist() );
-  
+
       fetcher.reset();
   }
 
@@ -61,20 +61,20 @@ BOOST_AUTO_TEST_CASE(fetcher)
 
       // add the key as trusted
       getZYpp()->keyRing()->importKey(PublicKey(DATADIR + "/complexdir-broken/subdir1/SHA1SUMS.key"), true);
-      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir-broken"), true);
-      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);  
+      fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
       fetcher.reset();
   }
 
 
-  {  
+  {
       filesystem::TmpDir dest;
 
-      fetcher.enqueue(OnMediaLocation().setFilename("/file-1.txt"));
-      fetcher.start( dest.path(), media );  
+      fetcher.enqueue(OnMediaLocation("/file-1.txt"));
+      fetcher.start( dest.path(), media );
       BOOST_CHECK( PathInfo(dest.path() + "/file-1.txt").isExist() );
   }
-  
+
   //MIL << fetcher;
 }
 
@@ -92,13 +92,13 @@ BOOST_AUTO_TEST_CASE(fetcher_remove)
       Fetcher fetcher;
       filesystem::TmpDir dest;
 
-      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir"), true);
+      fetcher.enqueueDir(OnMediaLocation("/complexdir"), true);
       fetcher.start( dest.path(), media );
 
       fetcher.reset();
 
-      fetcher.enqueueDir(OnMediaLocation().setFilename("/complexdir-broken"), true);
-      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);  
+      fetcher.enqueueDir(OnMediaLocation("/complexdir-broken"), true);
+      BOOST_CHECK_THROW( fetcher.start( dest.path(), media ), Exception);
 
       fetcher.reset();
 
