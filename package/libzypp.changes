@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Oct 24 16:07:45 CEST 2008 - ma@suse.de
+
+- Provide the /etc/products.d enties filename as Product::referenceFilename.
+  Use it to remove orphan products. (bnc #432932)
+- Fix media exception handling in commit (bnc #395704)
+- revision 11485
+- version 5.18.0 (17)
+
+-------------------------------------------------------------------
 Fri Oct 24 10:29:19 CEST 2008 - schubi@suse.de
 
 - Taking "unlock" instead of setTransact(false) in the solutions (bnc #436923)

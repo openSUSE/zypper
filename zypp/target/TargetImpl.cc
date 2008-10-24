@@ -683,16 +683,16 @@ namespace zypp
       bool abort = false;
       std::vector<sat::Solvable> successfullyInstalledPackages;
 
-      RepoProvidePackage repoProvidePackage( access, pool_r);
       // prepare the package cache.
+      RepoProvidePackage repoProvidePackage( access, pool_r );
       CommitPackageCache packageCache( items_r.begin(), items_r.end(),
                                        root() / "tmp", repoProvidePackage );
 
-      for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
+      for ( TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++ )
       {
-        if (isKind<Package>(it->resolvable()))
+        if ( (*it)->isKind<Package>() )
         {
-          Package::constPtr p = asKind<Package>(it->resolvable());
+          Package::constPtr p = (*it)->asKind<Package>();
           if (it->status().isToBeInstalled())
           {
             ManagedFile localfile;
@@ -706,15 +706,14 @@ namespace zypp
               WAR << "Skipping package " << p << " in commit" << endl;
               continue;
             }
-#if 0
-            // bnc #395704: missing catch causes abort. see if packageCache fails to handle
-            // errors correctly.
             catch ( const Exception &e )
             {
+              // bnc #395704: missing catch causes abort.
+              // TODO see if packageCache fails to handle errors correctly.
               ZYPP_CAUGHT( e );
-              SEC << e << endl;
+              INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
+              continue;
             }
-#endif
 
 #warning Exception handling
             // create a installation progress report proxy
@@ -813,15 +812,47 @@ namespace zypp
             progress.disconnect();
           }
         }
-        else if (!policy_r.dryRun()) // other resolvables (non-Package)
+        else if ( ! policy_r.dryRun() ) // other resolvables (non-Package)
         {
-	    if (it->buddy() == sat::Solvable())
-	    {
-		// Reset transaction only if this solvable has no buddy (Bug #417799)
-		// e.g. do not reset Products cause the concerning release package
-		// could not already be installed.
-		it->status().resetTransact( ResStatus::USER );
-	    }
+          // Status is changed as the buddy package buddy
+          // gets installed/deleted. Handle non-buddies only.
+          if ( ! it->buddy() )
+          {
+            if ( (*it)->isKind<Product>() )
+            {
+              Product::constPtr p = (*it)->asKind<Product>();
+              if ( it->status().isToBeInstalled() )
+              {
+                ERR << "Can't install orphan product without release-package! " << (*it) << endl;
+              }
+              else
+              {
+                // Deleting the corresponding product entry is all we con do.
+                // So the product will no longer be visible as installed.
+                std::string referenceFilename( p->referenceFilename() );
+                if ( referenceFilename.empty() )
+                {
+                  ERR << "Can't remove orphan product without 'referenceFilename'! " << (*it) << endl;
+                }
+                else
+                {
+                  PathInfo referenceFile( Pathname::assertprefix( _root, Pathname( "/etc/products.d" ) ) / referenceFilename );
+                  if ( ! referenceFile.isFile() || filesystem::unlink( referenceFile.path() ) != 0 )
+                  {
+                    ERR << "Delete orphan product failed: " << referenceFile << endl;
+                  }
+                }
+              }
+            }
+            else if ( (*it)->isKind<SrcPackage>() && it->status().isToBeInstalled() )
+            {
+              // SrcPackage is install-only
+              SrcPackage::constPtr p = (*it)->asKind<SrcPackage>();
+              installSrcPackage( p );
+            }
+
+            it->status().resetTransact( ResStatus::USER );
+          }
         }  // other resolvables
 
       } // for

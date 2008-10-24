@@ -43,6 +43,11 @@ namespace zypp
      */
     sat::Solvable referencePackage() const;
 
+    /** For installed products the name of the coddesponding
+     * \c /etc/products.d entry.
+    .*/
+    std::string referenceFilename() const;
+
   public:
     /***/
     typedef std::vector<constPtr> ReplacedProducts;

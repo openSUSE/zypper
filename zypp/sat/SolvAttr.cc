@@ -98,6 +98,7 @@ namespace sat
   const SolvAttr SolvAttr::extends      ( SOLVABLE_EXTENDS );
 
   // product
+  const SolvAttr SolvAttr::productReferenceFile  ( PRODUCT_REFERENCEFILE );
   const SolvAttr SolvAttr::productProductLine    ( PRODUCT_PRODUCTLINE );
   const SolvAttr SolvAttr::productShortlabel     ( PRODUCT_SHORTLABEL );
   const SolvAttr SolvAttr::productDistproduct    ( PRODUCT_DISTPRODUCT );

@@ -91,6 +91,9 @@ namespace zypp
     return sat::Solvable::noSolvable;
   }
 
+  std::string Product::referenceFilename() const
+  { return lookupStrAttribute( sat::SolvAttr::productReferenceFile ); }
+
   Product::ReplacedProducts Product::replacedProducts() const
   {
     std::vector<constPtr> ret;
