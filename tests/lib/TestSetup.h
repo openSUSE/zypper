@@ -7,6 +7,7 @@
 using boost::unit_test::test_case;
 #endif
 
+#include "zypp/base/LogControl.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
