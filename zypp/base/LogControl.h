@@ -21,6 +21,65 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace log
+  { /////////////////////////////////////////////////////////////////
+
+    /** If you want to log the (formated) loglines by yourself,
+     *  derive from this, and overload \c writeOut.
+     * Expect \a formated_r to be a formated log line without trailing \c NL.
+     * Ready to be written to the log.
+     */
+    struct LineWriter
+    {
+      virtual void writeOut( const std::string & /*formated_r*/ )
+      {}
+      virtual ~LineWriter()
+      {}
+    };
+
+    /** Base class for ostream based \ref LineWriter */
+    struct StreamLineWriter : public LineWriter
+    {
+      StreamLineWriter( std::ostream & str_r ) : _str( &str_r ) {}
+
+      virtual void writeOut( const std::string & formated_r )
+      { (*_str) << formated_r << std::endl; }
+
+      protected:
+        StreamLineWriter() : _str( 0 ) {}
+        std::ostream *_str;
+    };
+
+    /** \ref LineWriter to stdout. */
+    struct StdoutLineWriter : public StreamLineWriter
+    {
+      StdoutLineWriter() : StreamLineWriter( std::cout ) {}
+    };
+
+    /** \ref LineWriter to stderr. */
+    struct StderrLineWriter : public StreamLineWriter
+    {
+      StderrLineWriter() : StreamLineWriter( std::cerr ) {}
+    };
+
+    /** \ref LineWriter to file.
+     * If \c mode_r is not \c 0, \c file_r persissions are changed
+     * accordingly. \c "-" logs to \c cerr.
+    */
+    struct FileLineWriter : public StreamLineWriter
+    {
+      FileLineWriter( const Pathname & file_r, mode_t mode_r = 0 );
+      protected:
+        shared_ptr<void> _outs;
+    };
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace log
+  ///////////////////////////////////////////////////////////////////
+
+
   ///////////////////////////////////////////////////////////////////
   namespace base
   { /////////////////////////////////////////////////////////////////
@@ -43,17 +102,8 @@ namespace zypp
       { return LogControl(); }
 
 
-      /** If you want to log the (formated) loglines by yourself,
-       *  derive from this, and overload \c writeOut.
-       * Expect \a formated_r to be a formated log line without trailing \c NL.
-       * Ready to be written to the log.
-      */
-      struct LineWriter
-      {
-        virtual void writeOut( const std::string & /*formated_r*/ )
-        {}
-        virtual ~LineWriter() {}
-      };
+      /** \see \ref log::LineWriter */
+      typedef log::LineWriter LineWriter;
 
       /** If you want to format loglines by yourself,
        *  derive from this, and overload \c format.
@@ -94,10 +144,15 @@ namespace zypp
       /** Log to std::err. */
       void logToStdErr();
 
+    public:
+      /** Get the current LineWriter */
+      shared_ptr<LineWriter> getLineWriter() const;
+
       /** Assign a LineWriter.
        * If you want to log the (formated) loglines by yourself.
        * NULL turns off logging (same as logNothing)
-      */
+       * \see \ref log::LineWriter
+       */
       void setLineWriter( const shared_ptr<LineWriter> & writer_r );
 
     public:
@@ -108,11 +163,28 @@ namespace zypp
         ~TmpExcessive();
       };
 
-      /** Exchange LineWriter for the lifetime of this object. */
+      /** Exchange LineWriter for the lifetime of this object.
+       * \see \ref log::LineWriter
+      */
       struct TmpLineWriter
       {
-        TmpLineWriter( const shared_ptr<LineWriter> & writer_r = shared_ptr<LineWriter>() );
-        ~TmpLineWriter();
+        TmpLineWriter( const shared_ptr<LineWriter> & writer_r = shared_ptr<LineWriter>() )
+          : _writer( LogControl::instance().getLineWriter() )
+        { LogControl::instance().setLineWriter( writer_r ); }
+
+        /** Convenience ctor taking over ownership of an allocated LineWriter.
+         *\code
+         * TmpLineWriter mylw( new log::StderrLineWriter );
+         * \endcode
+        */
+        template<class _LineWriter>
+        TmpLineWriter( _LineWriter * _allocated_r )
+          : _writer( LogControl::instance().getLineWriter() )
+        { LogControl::instance().setLineWriter( shared_ptr<LineWriter>( _allocated_r ) ); }
+
+        ~TmpLineWriter()
+        { LogControl::instance().setLineWriter( _writer ); }
+
       private:
         shared_ptr<LineWriter> _writer;
       };

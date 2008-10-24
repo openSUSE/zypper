@@ -25,6 +25,37 @@ using std::endl;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  namespace log
+  { /////////////////////////////////////////////////////////////////
+
+    FileLineWriter::FileLineWriter( const Pathname & file_r, mode_t mode_r )
+    {
+      if ( file_r == Pathname("-") )
+      {
+        _str = &std::cerr;
+      }
+      else
+      {
+        // set unbuffered write
+        std::ofstream * fstr = 0;
+        _outs.reset( (fstr = new std::ofstream( file_r.asString().c_str(), std::ios_base::app )) );
+        fstr->rdbuf()->pubsetbuf(0,0);
+        _str = &(*fstr);
+        if ( mode_r )
+        {
+          // not filesystem::chmod, as filesystem:: functions log,
+          // and this FileWriter is not yet in place.
+          ::chmod( file_r.asString().c_str(), mode_r );
+        }
+      }
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace log
+  ///////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace base
   { /////////////////////////////////////////////////////////////////
@@ -54,37 +85,6 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace logger
     { /////////////////////////////////////////////////////////////////
-
-      ///////////////////////////////////////////////////////////////////
-      // LineWriter
-      ///////////////////////////////////////////////////////////////////
-      struct StdErrWriter : public LogControl::LineWriter
-      {
-        virtual void writeOut( const std::string & formated_r )
-        {
-          std::cerr << formated_r << endl;
-        }
-      };
-      ///////////////////////////////////////////////////////////////////
-      struct FileWriter : public LogControl::LineWriter
-      {
-        FileWriter( const Pathname & logfile_r, mode_t mode_r )
-        {
-          // set unbuffered write
-          _outs.rdbuf()->pubsetbuf(0,0);
-          _outs.open( logfile_r.asString().c_str(), std::ios_base::app );
-          // not filesystem::chmod, as filesystem:: functions log,
-          // and this FileWriter is not yet in place.
-          ::chmod( logfile_r.asString().c_str(), mode_r );
-        }
-        std::ofstream _outs;
-
-        virtual void writeOut( const std::string & formated_r )
-        {
-          _outs << formated_r << endl;
-        }
-      };
-      ///////////////////////////////////////////////////////////////////
 
       inline void putStream( const std::string & group_r, LogLevel level_r,
                              const char * file_r, const char * func_r, int line_r,
@@ -241,9 +241,9 @@ namespace zypp
           if ( logfile_r.empty() )
             setLineWriter( shared_ptr<LogControl::LineWriter>() );
           else if ( logfile_r == Pathname( "-" ) )
-            setLineWriter( shared_ptr<LogControl::LineWriter>(new StdErrWriter) );
+            setLineWriter( shared_ptr<LogControl::LineWriter>(new log::StderrLineWriter) );
           else
-            setLineWriter( shared_ptr<LogControl::LineWriter>(new FileWriter(logfile_r, mode_r)) );
+            setLineWriter( shared_ptr<LogControl::LineWriter>(new log::FileLineWriter(logfile_r, mode_r)) );
         }
 
       private:
@@ -386,6 +386,9 @@ namespace zypp
     void LogControl::logfile( const Pathname & logfile_r, mode_t mode_r )
     { LogControlImpl::instance.logfile( logfile_r, mode_r ); }
 
+    shared_ptr<LogControl::LineWriter> LogControl::getLineWriter() const
+    { return LogControlImpl::instance.getLineWriter(); }
+
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
     { LogControlImpl::instance.setLineWriter( writer_r ); }
 
@@ -396,7 +399,7 @@ namespace zypp
     { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>() ); }
 
     void LogControl::logToStdErr()
-    { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new logger::StdErrWriter ) ); }
+    { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new log::StderrLineWriter ) ); }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -408,16 +411,6 @@ namespace zypp
     LogControl::TmpExcessive::~TmpExcessive()
     { LogControlImpl::instance.excessive( false );  }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    // LogControl::TmpLineWriter
-    //
-    ///////////////////////////////////////////////////////////////////
-    LogControl::TmpLineWriter::TmpLineWriter( const shared_ptr<LineWriter> & writer_r )
-    : _writer( LogControlImpl::instance.getLineWriter() )
-    { LogControlImpl::instance.setLineWriter( writer_r ); }
-    LogControl::TmpLineWriter::~TmpLineWriter()
-    { LogControlImpl::instance.setLineWriter( _writer ); }
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<
