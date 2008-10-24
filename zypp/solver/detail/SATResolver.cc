@@ -1075,7 +1075,7 @@ SATResolver::problems ()
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
-					problemSolution->addSingleAction (poolItem, KEEP);
+					problemSolution->addSingleAction (poolItem, UNLOCK);
 					string description = str::form (_("do not forbid installation of %s"), itemToString(poolItem, false).c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
